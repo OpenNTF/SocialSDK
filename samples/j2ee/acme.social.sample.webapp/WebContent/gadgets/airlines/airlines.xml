@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module specificationVersion='2'>
+    <ModulePrefs title="Acme Airlines">
+        <!-- Allows us to adjust the height of the gadget -->
+        <Require feature="dynamic-height" />
+        
+        <!-- Needed to support embedded experiences in the gadget -->
+        <Require feature="embedded-experiences" />
+        
+        <!-- Disable content rewriting for all URLs in the gadget.  Dojo works better this way. -->
+        <Optional feature="content-rewrite">
+            <Param name="exclude-url">*</Param>
+        </Optional>
+    </ModulePrefs>
+    
+    <!-- Reference HTML that is pulled in from separate HTML files. -->
+    <Content type="html" view="default, home" href="home.html"></Content>
+    <Content type="html" view="embedded" href="ee.html"></Content>
+</Module>

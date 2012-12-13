@@ -1,0 +1,29 @@
+<table
+	style="border-width: 1px; border-color: black; border-style: solid">
+	<tr>
+		<td valign='top'
+			style="border-right-width: 1px; border-right-color: black; border-right-style: solid">
+			<button dojotype="dijit.form.Button" type="button">
+				Show First Profile
+				<script type="dojo/method" event="onClick">showProfileOne()</script>
+			</button>
+		</td>
+		<td valign='top'
+			style="border-right-width: 1px; border-right-color: black; border-right-style: solid">
+			<button dojotype="dijit.form.Button" type="button">
+				Show Second Profile
+				<script type="dojo/method" event="onClick">showProfileTwo()</script>
+			</button>			
+		</td>
+	</tr>
+	<tr>
+		<td valign='top'
+			style="border-right-width: 1px; border-right-color: black; border-right-style: solid">
+			<div dojotype="sbt.dojo.connections.DisplayProfile" id="profile1"></div>
+		</td>
+		<td valign='top'
+			style="border-right-width: 1px; border-right-color: black; border-right-style: solid">
+			<div dojotype="sbt.dojo.connections.DisplayProfile" id="profile2"></div>
+		</td>
+	</tr>
+</table>

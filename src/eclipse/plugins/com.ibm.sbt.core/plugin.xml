@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   	<extension point="com.ibm.commons.Extension">
+         <service type="com.ibm.sbt.jslibrary" class="com.ibm.sbt.jslibrary.servlet.DojoLibrary" />
+   	</extension>
+
+<!--
+   	<extension point="com.ibm.commons.Extension">
+         <service type="com.ibm.sbt.jslibrary" class="com.ibm.sbt.jslibrary.servlet.JQueryLibrary" />
+   	</extension>
+-->
+</plugin>

@@ -1,0 +1,4 @@
+com.ibm.commons.runtime.beans.WebResourceBeanFactory
+com.ibm.commons.runtime.beans.ContextResourceBeanFactory
+com.ibm.commons.runtime.beans.FileResourceBeanFactory
+com.ibm.commons.runtime.beans.MetaResourceBeanFactory

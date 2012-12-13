@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Common Runtime Classes
+Bundle-SymbolicName: com.ibm.commons.runtime
+Bundle-Version: 1.0.0
+Bundle-Vendor: IBM
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: com.ibm.commons.runtime,
+ com.ibm.commons.runtime.beans,
+ com.ibm.commons.runtime.impl,
+ com.ibm.commons.runtime.impl.servlet,
+ com.ibm.commons.runtime.mime,
+ com.ibm.commons.runtime.naming,
+ com.ibm.commons.runtime.properties,
+ com.ibm.commons.runtime.util
+Require-Bundle: com.ibm.commons,
+ com.ibm.commons.xml
+Import-Package: javax.servlet,
+ javax.servlet.http

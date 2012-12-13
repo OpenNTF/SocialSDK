@@ -1,0 +1,66 @@
+<div id="error" style="display:none;" class="alert alert-error"></div>
+<div id="success" style="display:none;" class="alert alert-success">Email sent successfully!</div>
+<div class="form-horizontal">
+    <div class="control-group">
+        <label class="control-label">To</label>
+        <div class="controls">
+            <div class="input-append">
+                <input id="toInput" size="16" type="text" placeholder="Email">
+                <button id="addTo" class="btn" type="button">Add</button>
+            </div>
+            <div id="addedToAddresses"></div>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">CC</label>
+        <div class="controls">
+            <div class="input-append">
+                <input id="ccInput" size="16" type="text" placeholder="Email">
+                <button id="addCC" class="btn" type="button">Add</button>
+            </div>
+            <div id="addedCCAddresses"></div>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">BCC</label>
+        <div class="controls">
+            <div class="input-append">
+                <input id="bccInput" size="16" type="text" placeholder="Email">
+                <button id="addBCC" class="btn" type="button">Add</button>
+            </div>
+            <div id="addedBCCAddresses"></div>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">Subject</label>
+        <div class="controls">
+            <input type="text"
+                placeholder="Subject" id="subjectInput">
+        </div>
+    </div>
+    
+    <legend>MIME Part</legend>
+    <div class="control-group">
+        <label class="control-label">MIME Type</label>
+        <div class="controls">
+            <input id="mimeTypeInput" type="text"
+                placeholder="ex. text/plain">
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">Content</label>
+        <div class="controls">
+            <textarea rows="3" id="mimeContentInput">Content of the MIME part goes here...</textarea>
+            <div id="addedMimeParts"></div>
+        </div>
+        
+    </div>
+    
+    <div class="control-group">
+        <div class="controls">
+            <button id="addMimePart" class="btn">Add</button>
+        </div>
+    </div>
+    
+    <button class="btn btn-primary" id="sendBtn">Send Email</button>
+</div>

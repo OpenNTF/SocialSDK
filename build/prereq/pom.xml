@@ -1,0 +1,24 @@
+<!-- TODO Eliminate the need for this and use Maven to manage dependancies -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.ibm.sbt.prereq</groupId>
+  <artifactId>prereq.parent</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
+
+  <parent>
+    <groupId>com.ibm.sbt</groupId>
+    <artifactId>sbt.build</artifactId>
+    <version>1.0.0</version>
+    <relativePath>../</relativePath>
+  </parent>
+
+  <modules>
+    <!-- prerequisite projects -->
+    <module>../../prereqs/eclipse/plugins/com.ibm.sbt.libs.j2ee</module>
+    <!-- <module>../../prereqs/eclipse/plugins/com.ibm.sbt.libs.j2ee.tomcat</module> -->
+    <module>../../prereqs/eclipse/plugins/com.ibm.sbt.libs.domino</module>
+    <module>../../prereqs/eclipse/plugins/com.ibm.sbt.libs.derby</module>
+  </modules>
+</project>

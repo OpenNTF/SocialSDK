@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Playground related classes
+Bundle-SymbolicName: com.ibm.sbt.playground
+Bundle-Version: 1.0.0
+Bundle-Vendor: IBM
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: com.ibm.commons;bundle-version="1.0.0",
+ com.ibm.commons.runtime;bundle-version="1.0.0"
+Export-Package: com.ibm.sbt.playground.snippets,
+ com.ibm.sbt.playground.snippets.dojo
+Import-Package: javax.servlet,
+ javax.servlet.http

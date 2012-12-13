@@ -1,0 +1,46 @@
+OpenNTF Javascript AMD Aggregator
+(C)Copyright 2012, IBM Corporation
+
+This product includes software contributed to
+OpenNTF Alliance (http://www.OpenNTF.org/)
+
+This product is licensed under the terms of the Apache 2.0 license.
+
+The product includes the following third party packages:
+
+A Dojo patch file (for Dojo 1.7.2)
+Licensed under the Dojo License - http://dojotoolkit.org/license
+Available from http://dojotoolkit.org/
+
+Rhino 1.7R2 - L2 
+Licensed under the MPL/GPL dual license.  We have used the code under the MPL license - http://www.mozilla.org/MPL/
+Availavle from https://developer.mozilla.org/en-US/docs/Rhino/Downloads_archive?redirectlocale=en-US&redirectslug=Rhino_downloads_archive
+
+Google Closure Compiler r1918
+Licensed under Apache 2.0
+Available from http://code.google.com/p/closure-compiler/
+
+Guava r9
+Licensed under Apache 2.0
+Available from http://guava-libraries.googlecode.com
+
+Apache Commons-lang 2.3
+Licensed under Apache 2.0
+Available under http://jakarta.apache.org/site/downloads/downloads_commons-lang.cgi
+  Copyright 2001-2007 The Apache Software Foundation
+  This product includes software developed by
+  The Apache Software Foundation (http://www.apache.org/).
+
+Apache Commons-IO 2.0.1
+Licensed under Apache 2.0
+Available from http://archive.apache.org/dist/commons/io/source/
+  Copyright 2002-2010 The Apache Software Foundation
+  This product includes software developed by
+  The Apache Software Foundation (http://www.apache.org/).
+
+Wink 1.1.3
+Licensed under Apache 2.0
+Available from http://cwiki.apache.org/WINK
+  Copyright (c) 2009-2012 The Apache Software Foundation
+  This product includes software developed at
+  The Apache Software Foundation (http://www.apache.org/).

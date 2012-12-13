@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="com.ibm.sbt.jasmine.web">
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/.apt_generated"/>
+        <dependent-module archiveName="httpcore-4.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/com.ibm.sbt.libs.j2ee/lib/httpcore-4.0.1.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="com.ibm.sbt.core.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/com.ibm.sbt.core/com.ibm.sbt.core">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="com.ibm.commons.xml.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/com.ibm.commons.xml/com.ibm.commons.xml">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="com.ibm.commons.runtime.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/com.ibm.commons.runtime/com.ibm.commons.runtime">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="com.ibm.commons.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/com.ibm.commons/com.ibm.commons">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="httpclient-4.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/com.ibm.sbt.libs.j2ee/lib/httpclient-4.0.1.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="apache-mime4j-0.6.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/com.ibm.sbt.libs.j2ee/lib/apache-mime4j-0.6.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="commons-logging-1.1.1.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/com.ibm.sbt.libs.j2ee/lib/commons-logging-1.1.1.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="httpmime-4.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/com.ibm.sbt.libs.j2ee/lib/httpmime-4.0.1.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="commons-codec-1.3.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/com.ibm.sbt.libs.j2ee/lib/commons-codec-1.3.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="com.ibm.sbt.playground.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/com.ibm.sbt.playground/com.ibm.sbt.playground">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="context-root" value="sbt.jasmine.web"/>
+        <property name="java-output-path" value="/com.ibm.sbt.jasmine.web/WebContent/WEB-INF/classes"/>
+    </wb-module>
+</project-modules>

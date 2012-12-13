@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path=".apt_generated">
+		<attributes>
+			<attribute name="optional" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/com.ibm.commons"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/com.ibm.commons.xml"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/com.ibm.sbt.core"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/com.ibm.commons.runtime"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="WebContent/WEB-INF/classes"/>
+</classpath>

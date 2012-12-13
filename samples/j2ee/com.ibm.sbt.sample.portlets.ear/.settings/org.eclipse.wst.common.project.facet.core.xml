@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faceted-project>
+  <runtime name="wps.base.v70"/>
+  <fixed facet="jst.ear"/>
+  <installed facet="jst.ear" version="5.0"/>
+  <installed facet="com.ibm.websphere.coexistence.ear" version="7.0"/>
+  <installed facet="com.ibm.websphere.extended.ear" version="7.0"/>
+</faceted-project>

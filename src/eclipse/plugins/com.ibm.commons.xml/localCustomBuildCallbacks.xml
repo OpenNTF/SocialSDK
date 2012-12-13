@@ -1,0 +1,47 @@
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- © Copyright IBM Corp. 2012                                          -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     --> 
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   --> 
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        --> 
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+
+<!-- ========================================================================= -->
+<!-- These targets are called from ${env.WPLC_IMPORT}/PDE_pluginCallbacks.xml  -->
+<!-- ===================================================================== -->
+
+<project name="com.ibm.commons.xml.local">
+
+	<property name="pre.lwpd.commons.xml.jar.local" value="prepareForJavadoc" />
+
+	<property name="post.compile.lwpd.commons.xml.jar.local" value="removeDummyClasses" />
+	<property name="commons.xml.plugin" value="${target.folder}" />
+	
+	<target name="removeDummyClasses">
+		<!-- Those com.sun.* classes are empty placeholders, 
+		just used to compile against. They shouldn't be included in the output,
+		because we want to use the classes provided by the Sun JRE instead.
+		The code that uses those classes is only executed on the Mac,
+		where the Sun JRE is used instead of the IBM JRE.
+		-->
+		<echo message="Removing output of com.ibm.commons.xml/src/com/sun/" />
+		<delete dir="${commons.xml.plugin}/com/sun/"></delete>
+	</target>
+
+	<target name="prepareForJavadoc" unless="skip.javadoc">
+		<echo message="Saving ${basedir}/classpath.nam"/>
+		<property name="pathRef" refid="lwpd.commons.xml.jar.classpath"/>
+		<concat destfile="${basedir}/classpath.nam">${pathRef};</concat>
+	</target>
+
+</project>

@@ -1,0 +1,99 @@
+{
+	"airports" : [{
+		"city": "Atlanta",
+		"state": "Georgia",
+		"code" : "ATL"
+		
+	},
+	{
+		"city": "Baltimore",
+		"state": "Maryland",
+		"code" : "BWI"
+	},
+	{
+		"city": "Bangalore",
+		"state": "India",
+		"code" : "BLR"
+	},
+	{
+		"city": "Boston",
+		"state": "Massachusetts",
+		"code" : "BOS"
+	},
+	{
+		"city": "Chicago",
+		"state": "Illinois",
+		"code" : "ORD"
+	},
+	{
+		"city": "Hong Kong",
+		"state": "Hong Kong",
+		"code" : "HKG"
+	},
+	{
+		"city": "Mexico city",
+		"state": "Mexico",
+		"code" : "MEX"
+	},
+	{
+		"city": "New York",
+		"state": "New York",
+		"code" : "LGA"
+	},
+	{
+		"city": "Paris",
+		"state": "France",
+		"code" : "CDG"
+	},
+	{
+		"city": "Pittsburgh",
+		"state": "Pennsylvania",
+		"code" : "PIT"
+	},
+	{
+		"city": "San Francisco",
+		"state": "California",
+		"code" : "SFO"
+	},
+	{
+		"city": "Stuttgart",
+		"state": "Germany",
+		"code" : "STU"
+	},
+	{
+		"city": "Toronto",
+		"state": "Canada",
+		"code" : "TOR"
+	},
+	{
+		"city": "Washington",
+		"state": "DC",
+		"code" : "IAD"
+	},
+	{
+		"city": "West Hartford",
+		"state": "Connecticut",
+		"code" : "BDL"
+	},
+	{
+		"city": "Littleton",
+		"state": "Massachusetts",
+		"code" : "LTN"
+	},
+	{
+		"city": "Westford",
+		"state": "Massachusetts",
+		"code" : "WTF"
+	},
+	{
+		"city": "Cambridge",
+		"state": "Massachusetts",
+		"code" : "CAM"
+	}
+	,
+	{
+		"city": "Orlando",
+		"state": "Florida",
+		"code" : "MCO"
+	}]
+}

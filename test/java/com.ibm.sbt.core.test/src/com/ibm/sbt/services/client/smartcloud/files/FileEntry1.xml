@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<atom:entry xmlns:app="http://www.w3.org/2007/app"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  xmlns:cmis="http://docs.oasis-open.org/ns/cmis/core/200908/"
+  xmlns:cmism="http://docs.oasis-open.org/ns/cmis/messaging/200908/"
+  xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200908/"
+  xmlns:lcmis="http://www.ibm.com/xmlns/prod/sn/cmis" xmlns:snx="http://www.ibm.com/xmlns/prod/sn">
+  <atom:author>
+    <atom:name>Shankar Vakil</atom:name>
+    <atom:email>shankar.vakil@notes.llrenovations.com</atom:email>
+    <lcmis:email>shankar.vakil@notes.llrenovations.com</lcmis:email>
+    <snx:userid>20527378</snx:userid>
+    <snx:userState>active</snx:userState>
+    <lcmis:displayName>Shankar Vakil</lcmis:displayName>
+    <lcmis:principalId>20527378</lcmis:principalId>
+    <snx:orgId>20051314</snx:orgId>
+    <snx:orgName>Renovations Inc.</snx:orgName>
+  </atom:author>
+  <atom:link
+    href="https://apps.lotuslive.com/files/app/file/a041af41-d2c0-4bec-a106-4e16a4f15195"
+    rel="alternate" type="text/html"/>
+  <atom:content
+    src="https://apps.lotuslive.com/files/basic/cmis/repository/p%2120527378/object/snx%3Afile%21a041af41-d2c0-4bec-a106-4e16a4f15195/stream/a041af41-d2c0-4bec-a106-4e16a4f15195/smcl4645780839489271795tmp" type="application/octet-stream"/>
+  <atom:link
+    href="https://apps.lotuslive.com/files/basic/cmis/repository/p%2120527378/object/snx%3Afile%21a041af41-d2c0-4bec-a106-4e16a4f15195/stream/a041af41-d2c0-4bec-a106-4e16a4f15195/smcl4645780839489271795tmp"
+    rel="edit-media" type="application/octet-stream"/>
+  <atom:link
+    href="https://apps.lotuslive.com/files/basic/cmis/repository/p%2120527378/object/snx%3Afile%21a041af41-d2c0-4bec-a106-4e16a4f15195/stream/a041af41-d2c0-4bec-a106-4e16a4f15195/smcl4645780839489271795tmp"
+    hreflang="" length="96" rel="enclosure"
+    title="smcl4645780839489271795tmp" type="application/octet-stream"/>
+  <atom:link
+    href="https://apps.lotuslive.com/files/basic/cmis/repository/p%2120527378/servicedoc"
+    rel="service" type="application/atomsvc+xml"/>
+  <atom:id>http://www.ibm.com/xmlns/prod/sn/cmis/snx:file!a041af41-d2c0-4bec-a106-4e16a4f15195</atom:id>
+  <atom:link cmisra:id="snx:file!a041af41-d2c0-4bec-a106-4e16a4f15195"
+    href="https://apps.lotuslive.com/files/basic/cmis/repository/p%2120527378/object/snx%3Afile%21a041af41-d2c0-4bec-a106-4e16a4f15195"
+    rel="self" type="application/atom+xml;type=entry" xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200908/"/>
+  <atom:link cmisra:id="snx:file!a041af41-d2c0-4bec-a106-4e16a4f15195"
+    href="https://apps.lotuslive.com/files/basic/cmis/repository/p%2120527378/object/snx%3Afile%21a041af41-d2c0-4bec-a106-4e16a4f15195"
+    rel="edit" type="application/atom+xml;type=entry" xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200908/"/>
+  <atom:link
+    href="https://apps.lotuslive.com/files/basic/cmis/repository/p%2120527378/allowable/snx%3Afile%21a041af41-d2c0-4bec-a106-4e16a4f15195"
+    rel="http://docs.oasis-open.org/ns/cmis/link/200908/allowableactions" type="application/cmisallowableactions+xml"/>
+  <atom:link
+    href="https://apps.lotuslive.com/files/basic/cmis/repository/p%2120527378/type/snx%3Afile"
+    rel="describedby" type="application/atom+xml;type=entry"/>
+  <atom:published>2012-11-14T13:16:07.281Z</atom:published>
+  <app:edited>2012-11-14T13:16:07.279Z</app:edited>
+  <atom:summary type="text"/>
+  <atom:title type="text">smcl4645780839489271795tmp</atom:title>
+  <atom:updated>2012-11-14T13:16:07.279Z</atom:updated>
+  <atom:link
+    href="https://apps.lotuslive.com/files/basic/cmis/repository/p%2120527378/relationships/snx%3Afile%21a041af41-d2c0-4bec-a106-4e16a4f15195"
+    rel="http://docs.oasis-open.org/ns/cmis/link/200908/relationships" type="application/atom+xml;type=feed"/>
+  <atom:link
+    href="https://apps.lotuslive.com/files/basic/cmis/repository/p%2120527378/acl/snx%3Afile%21a041af41-d2c0-4bec-a106-4e16a4f15195"
+    rel="http://docs.oasis-open.org/ns/cmis/link/200908/acl" type="application/cmisacl+xml"/>
+  <atom:link
+    href="https://apps.lotuslive.com/files/basic/cmis/repository/p%2120527378/acl-history/snx%3Afile%21a041af41-d2c0-4bec-a106-4e16a4f15195"
+    rel="http://www.ibm.com/xmlns/prod/sn/cmis/acl-history" type="application/cmisacl+xml"/>
+  <atom:link
+    href="https://apps.lotuslive.com/files/basic/cmis/repository/p%2120527378/acl-remover/snx%3Afile%21a041af41-d2c0-4bec-a106-4e16a4f15195"
+    rel="http://www.ibm.com/xmlns/prod/sn/cmis/acl-remover" type="application/cmisacl+xml"/>
+  <atom:link
+    href="https://apps.lotuslive.com/files/basic/cmis/repository/p%2120527378/policy/snx%3Afile%21a041af41-d2c0-4bec-a106-4e16a4f15195"
+    rel="http://docs.oasis-open.org/ns/cmis/link/200908/policies" type="application/atom+xml;type=feed"/>
+  <atom:link
+    href="https://apps.lotuslive.com/files/basic/cmis/repository/p%2120527378/mobject/snx%3Afile%21a041af41-d2c0-4bec-a106-4e16a4f15195"
+    rel="http://www.ibm.com/xmlns/prod/sn/cmis/multipart-form/object" type="text/html"/>
+  <atom:link
+    href="https://apps.lotuslive.com/files/basic/cmis/repository/p%2120527378/versions/snx%3Afile%21a041af41-d2c0-4bec-a106-4e16a4f15195"
+    rel="version-history" type="application/atom+xml;type=feed"/>
+  <atom:link
+    href="https://apps.lotuslive.com/files/basic/cmis/repository/p%2120527378/versions-social/snx%3Afile%21a041af41-d2c0-4bec-a106-4e16a4f15195"
+    rel="http://www.ibm.com/xmlns/prod/sn/cmis/version-history" type="application/atom+xml;type=feed"/>
+  <atom:link
+    href="https://apps.lotuslive.com/files/basic/cmis/repository/p%2120527378/downloads/snx%3Afile%21a041af41-d2c0-4bec-a106-4e16a4f15195"
+    rel="http://www.ibm.com/xmlns/prod/sn/cmis/download-history" type="application/lotuscmisdownloadhistory+xml"/>
+  <atom:link
+    href="https://apps.lotuslive.com/files/basic/cmis/repository/p%2120527378/recommendations/snx%3Afile%21a041af41-d2c0-4bec-a106-4e16a4f15195"
+    rel="http://www.ibm.com/xmlns/prod/sn/cmis/recommendations" type="application/lotuscmisrecommendations+xml"/>
+  <atom:link
+    href="https://apps.lotuslive.com/files/basic/cmis/repository/p%2120527378/recommendation/snx%3Afile%21a041af41-d2c0-4bec-a106-4e16a4f15195"
+    rel="http://www.ibm.com/xmlns/prod/sn/cmis/recommendation" type="application/lotuscmisrecommendations+xml"/>
+  <atom:link
+    href="https://apps.lotuslive.com/files/basic/api/myshares/feed?sharedWhat=a041af41-d2c0-4bec-a106-4e16a4f15195"
+    rel="shared" type="application/atom+xml;type=feed"/>
+  <cmisra:pathSegment>smcl4645780839489271795tmp</cmisra:pathSegment>
+  <cmisra:object>
+    <cmis:properties>
+      <cmis:propertyString displayName="Name" localName="cmis_name"
+        propertyDefinitionId="cmis:name" queryName="cmis:name">
+        <cmis:value>smcl4645780839489271795tmp</cmis:value>
+      </cmis:propertyString>
+      <cmis:propertyId displayName="Id" localName="cmis_objectId"
+        propertyDefinitionId="cmis:objectId" queryName="cmis:objectId">
+        <cmis:value>snx:file!a041af41-d2c0-4bec-a106-4e16a4f15195</cmis:value>
+      </cmis:propertyId>
+      <cmis:propertyId displayName="Base Type Id"
+        localName="cmis_baseTypeId"
+        propertyDefinitionId="cmis:baseTypeId" queryName="cmis:baseTypeId">
+        <cmis:value>cmis:document</cmis:value>
+      </cmis:propertyId>
+      <cmis:propertyId displayName="Object Type Id"
+        localName="cmis_objectTypeId"
+        propertyDefinitionId="cmis:objectTypeId" queryName="cmis:objectTypeId">
+        <cmis:value>snx:file</cmis:value>
+      </cmis:propertyId>
+      <cmis:propertyString displayName="Created By"
+        localName="cmis_createdBy" propertyDefinitionId="cmis:createdBy" queryName="cmis:createdBy">
+        <cmis:value>Shankar Vakil</cmis:value>
+        <atom:name>Shankar Vakil</atom:name>
+        <atom:email>shankar.vakil@notes.llrenovations.com</atom:email>
+        <lcmis:email>shankar.vakil@notes.llrenovations.com</lcmis:email>
+        <snx:userid>20527378</snx:userid>
+        <snx:userState>active</snx:userState>
+        <lcmis:displayName>Shankar Vakil</lcmis:displayName>
+        <lcmis:principalId>20527378</lcmis:principalId>
+        <snx:orgId>20051314</snx:orgId>
+        <snx:orgName>Renovations Inc.</snx:orgName>
+      </cmis:propertyString>
+      <cmis:propertyDateTime displayName="Creation Date"
+        localName="cmis_creationDate"
+        propertyDefinitionId="cmis:creationDate" queryName="cmis:creationDate">
+        <cmis:value>2012-11-14T13:16:07.281Z</cmis:value>
+      </cmis:propertyDateTime>
+      <cmis:propertyString displayName="Last Modified By"
+        localName="cmis_lastModifiedBy"
+        propertyDefinitionId="cmis:lastModifiedBy" queryName="cmis:lastModifiedBy">
+        <cmis:value>Shankar Vakil</cmis:value>
+        <atom:name>Shankar Vakil</atom:name>
+        <atom:email>shankar.vakil@notes.llrenovations.com</atom:email>
+        <lcmis:email>shankar.vakil@notes.llrenovations.com</lcmis:email>
+        <snx:userid>20527378</snx:userid>
+        <snx:userState>active</snx:userState>
+        <lcmis:displayName>Shankar Vakil</lcmis:displayName>
+        <lcmis:principalId>20527378</lcmis:principalId>
+        <snx:orgId>20051314</snx:orgId>
+        <snx:orgName>Renovations Inc.</snx:orgName>
+      </cmis:propertyString>
+      <cmis:propertyDateTime displayName="Any Update"
+        localName="cmis_lastModificationDate"
+        propertyDefinitionId="cmis:lastModificationDate" queryName="cmis:lastModificationDate">
+        <cmis:value>2012-11-14T13:16:07.279Z</cmis:value>
+      </cmis:propertyDateTime>
+      <cmis:propertyString displayName="Change Token"
+        localName="cmis_changeToken"
+        propertyDefinitionId="cmis:changeToken" queryName="cmis:changeToken">
+        <cmis:value>2012-11-14T13:16:07.281Z</cmis:value>
+      </cmis:propertyString>
+      <cmis:propertyBoolean displayName="Immutable"
+        localName="cmis_isImmutable"
+        propertyDefinitionId="cmis:isImmutable" queryName="cmis:isImmutable">
+        <cmis:value>false</cmis:value>
+      </cmis:propertyBoolean>
+      <cmis:propertyBoolean displayName="Latest Version"
+        localName="cmis_isLatestVersion"
+        propertyDefinitionId="cmis:isLatestVersion" queryName="cmis:isLatestVersion">
+        <cmis:value>true</cmis:value>
+      </cmis:propertyBoolean>
+      <cmis:propertyBoolean displayName="Major Version"
+        localName="cmis_isMajorVersion"
+        propertyDefinitionId="cmis:isMajorVersion" queryName="cmis:isMajorVersion">
+        <cmis:value>true</cmis:value>
+      </cmis:propertyBoolean>
+      <cmis:propertyBoolean displayName="Latest Major Version"
+        localName="cmis_isLatestMajorVersion"
+        propertyDefinitionId="cmis:isLatestMajorVersion" queryName="cmis:isLatestMajorVersion">
+        <cmis:value>true</cmis:value>
+      </cmis:propertyBoolean>
+      <cmis:propertyString displayName="Version Label"
+        localName="cmis_versionLabel"
+        propertyDefinitionId="cmis:versionLabel" queryName="cmis:versionLabel">
+        <cmis:value>1</cmis:value>
+      </cmis:propertyString>
+      <cmis:propertyId displayName="Version Series Id"
+        localName="cmis_versionSeriesId"
+        propertyDefinitionId="cmis:versionSeriesId" queryName="cmis:versionSeriesId">
+        <cmis:value>a041af41-d2c0-4bec-a106-4e16a4f15195</cmis:value>
+      </cmis:propertyId>
+      <cmis:propertyBoolean displayName="Checked Out"
+        localName="cmis_isVersionSeriesCheckedOut"
+        propertyDefinitionId="cmis:isVersionSeriesCheckedOut" queryName="cmis:isVersionSeriesCheckedOut">
+        <cmis:value>false</cmis:value>
+      </cmis:propertyBoolean>
+      <cmis:propertyString displayName="Checked Out By"
+        localName="cmis_versionSeriesCheckedOutBy"
+        propertyDefinitionId="cmis:versionSeriesCheckedOutBy" queryName="cmis:versionSeriesCheckedOutBy">
+        <cmis:value/>
+      </cmis:propertyString>
+      <cmis:propertyId displayName="Checked Out Id"
+        localName="cmis_versionSeriesCheckedOutId"
+        propertyDefinitionId="cmis:versionSeriesCheckedOutId" queryName="cmis:versionSeriesCheckedOutId">
+        <cmis:value/>
+      </cmis:propertyId>
+      <cmis:propertyString displayName="Change Summary"
+        localName="cmis_checkinComment"
+        propertyDefinitionId="cmis:checkinComment" queryName="cmis:checkinComment">
+        <cmis:value/>
+      </cmis:propertyString>
+      <cmis:propertyInteger displayName="File Size"
+        localName="cmis_contentStreamLength"
+        propertyDefinitionId="cmis:contentStreamLength" queryName="cmis:contentStreamLength">
+        <cmis:value>96</cmis:value>
+      </cmis:propertyInteger>
+      <cmis:propertyString displayName="MIME Type"
+        localName="cmis_contentStreamMimeType"
+        propertyDefinitionId="cmis:contentStreamMimeType" queryName="cmis:contentStreamMimeType">
+        <cmis:value>application/octet-stream</cmis:value>
+      </cmis:propertyString>
+      <cmis:propertyString displayName="File name"
+        localName="cmis_contentStreamFileName"
+        propertyDefinitionId="cmis:contentStreamFileName" queryName="cmis:contentStreamFileName">
+        <cmis:value>smcl4645780839489271795tmp</cmis:value>
+      </cmis:propertyString>
+      <cmis:propertyId displayName="Stream Id "
+        localName="cmis_contentStreamId"
+        propertyDefinitionId="cmis:contentStreamId" queryName="cmis:contentStreamId">
+        <cmis:value>a041af41-d2c0-4bec-a106-4e16a4f15195</cmis:value>
+      </cmis:propertyId>
+      <cmis:propertyId displayName="Repository Id"
+        localName="snx_repositoryId"
+        propertyDefinitionId="snx:repositoryId" queryName="snx:repositoryId">
+        <cmis:value>p!20527378</cmis:value>
+      </cmis:propertyId>
+      <cmis:propertyInteger displayName="Comments"
+        localName="snx_commentCount"
+        propertyDefinitionId="snx:commentCount" queryName="snx:commentCount">
+        <cmis:value>0</cmis:value>
+      </cmis:propertyInteger>
+      <cmis:propertyInteger displayName="Download Count"
+        localName="snx_downloadCount"
+        propertyDefinitionId="snx:downloadCount" queryName="snx:downloadCount">
+        <cmis:value>0</cmis:value>
+      </cmis:propertyInteger>
+      <cmis:propertyInteger displayName="Downloaded Unknown"
+        localName="snx_downloadCountAnon"
+        propertyDefinitionId="snx:downloadCountAnon" queryName="snx:downloadCountAnon">
+        <cmis:value>0</cmis:value>
+      </cmis:propertyInteger>
+      <cmis:propertyInteger displayName="Total Size"
+        localName="snx_sizeAppliedToQuota"
+        propertyDefinitionId="snx:sizeAppliedToQuota" queryName="snx:sizeAppliedToQuota">
+        <cmis:value>96</cmis:value>
+      </cmis:propertyInteger>
+      <cmis:propertyString displayName="File Language"
+        localName="snx_language" propertyDefinitionId="snx:language" queryName="snx:language">
+        <cmis:value/>
+      </cmis:propertyString>
+      <cmis:propertyString displayName="Description"
+        localName="snx_summary" propertyDefinitionId="snx:summary" queryName="snx:summary">
+        <cmis:value/>
+      </cmis:propertyString>
+      <cmis:propertyString displayName="File Extension"
+        localName="snx_contentStreamFileExt"
+        propertyDefinitionId="snx:contentStreamFileExt" queryName="snx:contentStreamFileExt">
+        <cmis:value/>
+      </cmis:propertyString>
+      <cmis:propertyBoolean displayName="Public"
+        localName="snx_isPublic" propertyDefinitionId="snx:isPublic" queryName="snx:isPublic">
+        <cmis:value>false</cmis:value>
+      </cmis:propertyBoolean>
+      <cmis:propertyString displayName="Visibility"
+        localName="snx_visibilityComputed"
+        propertyDefinitionId="snx:visibilityComputed" queryName="snx:visibilityComputed">
+        <cmis:value>private</cmis:value>
+      </cmis:propertyString>
+      <cmis:propertyBoolean displayName="Shared Viral            "
+        localName="snx_isSharedViral"
+        propertyDefinitionId="snx:isSharedViral" queryName="snx:isSharedViral">
+        <cmis:value>false</cmis:value>
+      </cmis:propertyBoolean>
+      <cmis:propertyString displayName="Repository Type"
+        localName="snx_repositoryType"
+        propertyDefinitionId="snx:repositoryType" queryName="snx:repositoryType">
+        <cmis:value>personalFiles</cmis:value>
+      </cmis:propertyString>
+      <cmis:propertyInteger displayName="Recommendations"
+        localName="snx_recommendationCount"
+        propertyDefinitionId="snx:recommendationCount" queryName="snx:recommendationCount">
+        <cmis:value>0</cmis:value>
+      </cmis:propertyInteger>
+      <cmis:propertyBoolean displayName="Recommended By Caller"
+        localName="snx_isRecommendedByCaller"
+        propertyDefinitionId="snx:isRecommendedByCaller" queryName="snx:isRecommendedByCaller">
+        <cmis:value>false</cmis:value>
+      </cmis:propertyBoolean>
+      <cmis:propertyDateTime displayName="Update"
+        localName="snx_contentStreamLastModified"
+        propertyDefinitionId="snx:contentStreamLastModified" queryName="snx:contentStreamLastModified">
+        <cmis:value>2012-11-14T13:16:07.281Z</cmis:value>
+      </cmis:propertyDateTime>
+      <cmis:propertyBoolean displayName="Is External"
+        localName="snx_isExternal" propertyDefinitionId="snx:isExternal" queryName="snx:isExternal">
+        <cmis:value>true</cmis:value>
+      </cmis:propertyBoolean>
+      <cmis:propertyString displayName="Lock Type"
+        localName="snx_lockType" propertyDefinitionId="snx:lockType" queryName="snx:lockType">
+        <cmis:value>NONE</cmis:value>
+      </cmis:propertyString>
+      <cmis:propertyString displayName="Lock By"
+        localName="snx_lockedBy" propertyDefinitionId="snx:lockedBy" queryName="snx:lockedBy"/>
+      <cmis:propertyDateTime displayName="Lock Date"
+        localName="snx_lockedWhen" propertyDefinitionId="snx:lockedWhen" queryName="snx:lockedWhen"/>
+      <cmis:propertyBoolean displayName="Encryption Status"
+        localName="encrypt" propertyDefinitionId="snx:encrypt" queryName="snx:encrypt">
+        <cmis:value>false</cmis:value>
+      </cmis:propertyBoolean>
+      <cmis:propertyString displayName="The Shared Permission "
+        localName="snx_sharePermission"
+        propertyDefinitionId="snx:sharePermission" queryName="snx:sharePermission"/>
+      <cmis:propertyId displayName="Organization ID"
+        localName="snx_orgId" propertyDefinitionId="snx:orgId" queryName="snx:orgId">
+        <cmis:value>20051314</cmis:value>
+      </cmis:propertyId>
+      <cmis:propertyString displayName="Organization Name"
+        localName="snx_orgName" propertyDefinitionId="snx:orgName" queryName="snx:orgName">
+        <cmis:value>Renovations Inc.</cmis:value>
+      </cmis:propertyString>
+    </cmis:properties>
+  </cmisra:object>
+</atom:entry>

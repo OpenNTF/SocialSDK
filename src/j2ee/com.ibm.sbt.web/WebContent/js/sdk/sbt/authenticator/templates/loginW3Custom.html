@@ -1,0 +1,36 @@
+<html>
+<head>
+<title>Authentication for W3</title>
+<script type="text/javascript" src="login.js"></script>
+</head>
+<body onLoad="self.focus()">
+	<form method="post" onSubmit='submitOnClick(this);'>
+		<table>
+			<tr>
+				<td colspan=2>Enter credentials to access IBM W3 Connections</td>
+			</tr>
+			<tr>
+				<td colspan=2><label name='wrongCredsMessage'
+					id='wrongCredsMessage' style='color: red; display: none;'>
+						Wrong Credentials </label></td>
+			</tr>
+			<tr>
+				<td><label for='name'>Username: </label></td>
+				<td><input type='text' id='username' name='username' /></td>
+			</tr>
+			<tr>
+				<td><label for='name'>Password: </label></td>
+				<td><input type='password' id='password' name='password' /></td>
+			</tr>
+			<tr>
+				<td colspan=2><input type='submit' value='OK' /> <!-- <input type='button' onClick='window.opener.location.reload(false);' value='OK'/> -->
+					<input type='button' onClick='cancelOnClick()' value='Cancel' /></td>
+			</tr>
+		</table>
+	</form>
+	<script>
+        onLoginPageLoad();
+    </script>
+</body>
+</html>
+

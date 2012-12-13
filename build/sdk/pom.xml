@@ -1,0 +1,28 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.ibm.sbt.sdk</groupId>
+  <artifactId>sdk.parent</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
+
+  <parent>
+    <groupId>com.ibm.sbt</groupId>
+    <artifactId>sbt.build</artifactId>
+    <version>1.0.0</version>
+    <relativePath>..</relativePath>
+  </parent>
+
+  <modules>
+    <!-- eclipse plugin projects -->
+    <module>../../src/eclipse/plugins/com.ibm.sbt.libs</module>
+    <module>../../src/eclipse/plugins/com.ibm.commons</module>
+    <module>../../src/eclipse/plugins/com.ibm.commons.xml</module>
+    <module>../../src/eclipse/plugins/com.ibm.commons.runtime</module>
+    <module>../../src/eclipse/plugins/com.ibm.sbt.core</module>
+    <module>../../src/eclipse/plugins/com.ibm.sbt.playground</module>
+    <!-- web module projects -->
+    <module>../../src/j2ee/com.ibm.sbt.web</module>
+    <module>../../src/j2ee/com.ibm.sbt.dojo180</module>
+  </modules>
+</project>

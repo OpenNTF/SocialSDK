@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+	<display-name>Social Hello World</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+	
+	<servlet>
+		<description>The service servlet handles requests from the toolkit to access external resources.</description>
+		<display-name>Social Business Toolkit Service Servlet</display-name>
+		<servlet-name>ServiceServlet</servlet-name>
+		<servlet-class>com.ibm.sbt.service.core.servlet.ServiceServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ServiceServlet</servlet-name>
+		<url-pattern>/service/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<description>This servlet initializes the specified JavaScript library for use by the Social Business Toolkit.</description>
+		<display-name>Social Business Toolkit Library Servlet</display-name>
+		<servlet-name>LibraryServlet</servlet-name>
+		<servlet-class>com.ibm.sbt.jslibrary.servlet.LibraryServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LibraryServlet</servlet-name>
+		<url-pattern>/library/*</url-pattern>
+	</servlet-mapping>
+			
+	<filter>
+		<description>This filter is responsible for creating the toolkit application and context objects for every servlet within this web application.</description>
+		<display-name>Social Business Toolkit Filter</display-name>
+		<filter-name>SBTFilter</filter-name>
+		<filter-class>com.ibm.sbt.util.SBTFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>SBTFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+			
+   	<resource-ref>
+        <description>Reference to a URL resource which points to the managed bean configuration for the Social Business Toolkit.</description>
+        <res-ref-name>url/FacesConfigXml</res-ref-name>
+        <res-type>java.net.URL</res-type>
+        <res-auth>Container</res-auth>
+        <res-sharing-scope>Shareable</res-sharing-scope>
+   	</resource-ref>		
+			
+   	<resource-ref>
+        <description>Reference to a URL resource which points to the configuration properties for the Social Business Toolkit.</description>
+        <res-ref-name>url/SbtProperties</res-ref-name>
+        <res-type>java.net.URL</res-type>
+        <res-auth>Container</res-auth>
+        <res-sharing-scope>Shareable</res-sharing-scope>
+   	</resource-ref>		
+</web-app>

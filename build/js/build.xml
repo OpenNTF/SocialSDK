@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<project name="YUIDoc JS Docs" default="jsdoc" basedir=".">
+  <property environment="env"/>
+  <property name="dir.origin" value="..\..\java\sdk\eclipse\plugins\com.ibm.sbt.web\WebContent\js\sdk\sbt"/>
+  <property name="dir.output" value="..\..\target\doc\jsdoc"/>
+  <property name="dir.nodejs" value="${toolsDir}\node-v0.8.6-x86"/>
+  <property name="dir.npm" value="${env.APPDATA}\npm"/>  
+  <property name="yuidoc.exec" value="${dir.npm}\yuidoc.cmd"/>
+  <property name="node.exec" value="${dir.nodejs}\node.exe"/>
+  <property name="path.config" value="..\..\java\sdk\eclipse\plugins\com.ibm.sbt.web\WebContent\js\yuidoc.json"/>
+  
+  <echo>YUIDoc executable: ${yuidoc.exec}</echo>
+  <echo>NodeJS executable: ${node.exec}</echo>
+  <echo>Arguments:         ${dir.npm}\node_modules\yuidocjs\lib\cli.js ${dir.origin} -o ${dir.output} -c ${path.config}</echo>
+  
+  <target name="jsdoc">
+  	<exec executable="${node.exec}" dir=".">
+  		<arg value="${dir.npm}\node_modules\yuidocjs\lib\cli.js"/>
+  		<arg value="${dir.origin}"/>
+  		<arg value="-o"/>
+  		<arg value="${dir.output}"/>
+  		<arg value="-c"/>
+  		<arg value="${path.config}"/>
+  	</exec>
+  </target>
+</project>

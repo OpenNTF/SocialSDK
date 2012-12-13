@@ -1,0 +1,240 @@
+define(
+"dojo/cldr/nls/ta/gregorian", //begin v1.x content
+{
+	"months-format-narrow": [
+		"ஜ",
+		"பி",
+		"மா",
+		"ஏ",
+		"மே",
+		"ஜூ",
+		"ஜூ",
+		"ஆ",
+		"செ",
+		"அ",
+		"ந",
+		"டி"
+	],
+	"field-weekday": "வார நாள்",
+	"dateFormatItem-yMEd": "E, d/M/y",
+	"dateFormatItem-MMMEd": "E, d MMM",
+	"eraNarrow": [
+		"கி.மு.",
+		"கி.பி."
+	],
+	"dateFormat-long": "d MMMM, y",
+	"months-format-wide": [
+		"ஜனவரி",
+		"பிப்ரவரி",
+		"மார்ச்",
+		"ஏப்ரல்",
+		"மே",
+		"ஜூன்",
+		"ஜூலை",
+		"ஆகஸ்ட்",
+		"செப்டம்பர்",
+		"அக்டோபர்",
+		"நவம்பர்",
+		"டிசம்பர்"
+	],
+	"dayPeriods-format-wide-pm": "பிற்பகல்",
+	"dateFormat-full": "EEEE, d MMMM, y",
+	"dateFormatItem-Md": "d/M",
+	"dayPeriods-format-abbr-am": "முற்பகல்",
+	"dateFormatItem-yMd": "d/M/y",
+	"field-era": "காலம்",
+	"dateFormatItem-yM": "M/y",
+	"months-standAlone-wide": [
+		"ஜனவரி",
+		"பிப்ரவரி",
+		"மார்ச்",
+		"ஏப்ரல்",
+		"மே",
+		"ஜூன்",
+		"ஜூலை",
+		"ஆகஸ்டு",
+		"செப்டம்பர்",
+		"அக்டோபர்",
+		"நவம்பர்",
+		"டிசம்பர்"
+	],
+	"timeFormat-short": "h:mm a",
+	"quarters-format-wide": [
+		"முதல் காலாண்டு",
+		"இரண்டாம் காலாண்டு",
+		"மூன்றாம் காலாண்டு",
+		"நான்காம் காலாண்டு"
+	],
+	"timeFormat-long": "h:mm:ss a z",
+	"field-year": "வருடம்",
+	"dateFormatItem-yMMM": "MMM y",
+	"dateFormatItem-yyyyMMMM": "MMMM y",
+	"field-hour": "மணி",
+	"dateFormatItem-MMdd": "dd-MM",
+	"months-format-abbr": [
+		"ஜன.",
+		"பிப்.",
+		"மார்.",
+		"ஏப்.",
+		"மே",
+		"ஜூன்",
+		"ஜூலை",
+		"ஆக.",
+		"செப்.",
+		"அக்.",
+		"நவ.",
+		"டிச."
+	],
+	"dateFormatItem-yyQ": "Q yy",
+	"timeFormat-full": "h:mm:ss a zzzz",
+	"field-day-relative+0": "இன்று",
+	"field-day-relative+1": "நாளை",
+	"field-day-relative+2": "நாளை மறுநாள்",
+	"months-standAlone-abbr": [
+		"ஜன.",
+		"பிப்.",
+		"மார்.",
+		"ஏப்.",
+		"மே",
+		"ஜூன்",
+		"ஜூலை",
+		"ஆக.",
+		"செப்.",
+		"அக்.",
+		"நவ.",
+		"டிச."
+	],
+	"quarters-format-abbr": [
+		"காலாண்டு1",
+		"காலாண்டு2",
+		"காலாண்டு3",
+		"காலாண்டு4"
+	],
+	"quarters-standAlone-wide": [
+		"முதல் காலாண்டு",
+		"இரண்டாம் காலாண்டு",
+		"மூன்றாம் காலாண்டு",
+		"நான்காம் காலாண்டு"
+	],
+	"days-standAlone-wide": [
+		"ஞாயிறு",
+		"திங்கள்",
+		"செவ்வாய்",
+		"புதன்",
+		"வியாழன்",
+		"வெள்ளி",
+		"சனி"
+	],
+	"dateFormatItem-MMMMd": "d MMMM",
+	"timeFormat-medium": "h:mm:ss a",
+	"quarters-standAlone-abbr": [
+		"காலாண்டு1",
+		"காலாண்டு2",
+		"காலாண்டு3",
+		"காலாண்டு4"
+	],
+	"eraAbbr": [
+		"கி.மு.",
+		"கி.பி."
+	],
+	"field-minute": "நிமிடம்",
+	"field-dayperiod": "முற்பகல்/பிற்பகல்",
+	"days-standAlone-abbr": [
+		"ஞா",
+		"தி",
+		"செ",
+		"பு",
+		"வி",
+		"வெ",
+		"ச"
+	],
+	"quarters-format-narrow": [
+		"1",
+		"2",
+		"3",
+		"4"
+	],
+	"field-day-relative+-1": "நேற்று",
+	"dayPeriods-format-narrow-am": "முற்பகல்",
+	"field-day-relative+-2": "முந்தா நாள்",
+	"dateFormatItem-MMMd": "d MMM",
+	"dateFormatItem-MEd": "E, d/M",
+	"field-day": "நாள்",
+	"days-format-wide": [
+		"ஞாயிறு",
+		"திங்கள்",
+		"செவ்வாய்",
+		"புதன்",
+		"வியாழன்",
+		"வெள்ளி",
+		"சனி"
+	],
+	"field-zone": "மண்டலம்",
+	"dateFormatItem-yyyyMM": "MM-yyyy",
+	"months-standAlone-narrow": [
+		"ஜ",
+		"பி",
+		"மா",
+		"ஏ",
+		"மே",
+		"ஜூ",
+		"ஜூ",
+		"ஆ",
+		"செ",
+		"அ",
+		"ந",
+		"டி"
+	],
+	"field-year-relative+-1": "கடந்த வருடம்",
+	"field-month-relative+-1": "சென்ற மாதம்",
+	"dayPeriods-format-abbr-pm": "பிற்பகல்",
+	"days-format-abbr": [
+		"ஞா",
+		"தி",
+		"செ",
+		"பு",
+		"வி",
+		"வெ",
+		"ச"
+	],
+	"dateFormatItem-yMMMd": "d MMM, y",
+	"eraNames": [
+		"கிறிஸ்துவுக்கு முன்",
+		"அனோ டோமினி"
+	],
+	"days-format-narrow": [
+		"ஞா",
+		"தி",
+		"செ",
+		"பு",
+		"வி",
+		"வெ",
+		"ச"
+	],
+	"field-month": "மாதம்",
+	"days-standAlone-narrow": [
+		"ஞா",
+		"தி",
+		"செ",
+		"பு",
+		"வி",
+		"வெ",
+		"ச"
+	],
+	"dayPeriods-format-wide-am": "முற்பகல்",
+	"dateFormat-short": "d-M-yy",
+	"field-second": "வினாடி",
+	"dateFormatItem-yMMMEd": "E, d MMM, y",
+	"field-month-relative+0": "இந்த மாதம்",
+	"field-month-relative+1": "அடுத்த மாதம்",
+	"field-week": "வாரம்",
+	"dateFormat-medium": "d MMM, y",
+	"field-year-relative+0": "இந்த ஆண்டு",
+	"field-week-relative+-1": "கடந்த வாரம்",
+	"field-year-relative+1": "அடுத்த வருடம்",
+	"dayPeriods-format-narrow-pm": "பிற்பகல்",
+	"field-week-relative+0": "இந்த வாரம்",
+	"field-week-relative+1": "அடுத்த வாரம்"
+}
+//end v1.x content
+);

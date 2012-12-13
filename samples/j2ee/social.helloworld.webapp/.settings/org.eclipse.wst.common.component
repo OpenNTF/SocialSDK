@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="social.helloworld.webapp">
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <dependent-module archiveName="com.ibm.sbt.core.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/com.ibm.sbt.core/com.ibm.sbt.core">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="com.ibm.commons.xml.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/com.ibm.commons.xml/com.ibm.commons.xml">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="com.ibm.commons.runtime.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/com.ibm.commons.runtime/com.ibm.commons.runtime">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="com.ibm.commons.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/com.ibm.commons/com.ibm.commons">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="context-root" value="social.helloworld.webapp"/>
+        <property name="java-output-path" value="/social.helloworld.webapp/build/classes"/>
+    </wb-module>
+</project-modules>

@@ -1,0 +1,9 @@
+#Localization file used by Workplace Designer
+#Fri Jun 16 14:07:28 EDT 2006
+loggingPropertiesFileName=logging.properties
+resourceHandlerPackage=com.ibm.commons.xml
+srcFolderName=com.ibm.commons.xml/src
+translationLevel=G11N GA UI -- General Audience resources follow
+propertiesFileName=messages.properties
+resourceHandlerClass=ResourceHandler
+loggingId=CLFAD

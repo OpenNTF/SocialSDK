@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="acme.social.sample.ear">
+        <wb-resource deploy-path="/" source-path="/" tag="defaultRootSource"/>
+        <dependent-module archiveName="com.ibm.sbt.dojo180.war" deploy-path="/" handle="module:/resource/com.ibm.sbt.dojo180/com.ibm.sbt.dojo180">
+            <dependent-object>Module_1350933923707</dependent-object>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="com.ibm.sbt.web.war" deploy-path="/" handle="module:/resource/com.ibm.sbt.web/com.ibm.sbt.web">
+            <dependent-object>Module_1350933923708</dependent-object>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="acme.social.sample.webapp.war" deploy-path="/" handle="module:/resource/acme.social.sample.webapp/acme.social.sample.webapp">
+            <dependent-object>Module_1350933923709</dependent-object>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="acme.social.sample.dataapp.war" deploy-path="/" handle="module:/resource/acme.social.sample.dataapp/acme.social.sample.dataapp">
+            <dependent-object>Module_1350933923710</dependent-object>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+    </wb-module>
+</project-modules>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+<!--
+   <extension
+		id="servlet"
+		name="servlet"
+		point="org.eclipse.equinox.http.registry.servlets">
+		<servlet alias="/sbt/toolkit" class="com.ibm.xsp.sbtsdk.servlets.ToolkitServlet">
+		</servlet>
+	</extension>
+   	<extension
+		id="servlet"
+		name="servlet"
+		point="org.eclipse.equinox.http.registry.servlets">
+		<servlet alias="/sbt/proxy" class="com.ibm.sbt.proxy.core.servlet.ProxyServlet">
+		</servlet>
+	</extension>
+-->
+   	<extension point="com.ibm.commons.Extension">
+         <service type="com.ibm.xsp.Library" class="com.ibm.xsp.sbtsdk.library.SbtSdkLibrary" />
+   	</extension>
+   	
+   	<extension point="com.ibm.commons.Extension">
+         <service type="com.ibm.xsp.adapter.servletFactory" class="com.ibm.xsp.sbtsdk.servlets.ProxyServletFactory" />
+   	</extension>
+   	<extension point="com.ibm.commons.Extension">
+         <service type="com.ibm.xsp.adapter.servletFactory" class="com.ibm.xsp.sbtsdk.servlets.ToolkitServletFactory" />
+   	</extension>
+
+</plugin>

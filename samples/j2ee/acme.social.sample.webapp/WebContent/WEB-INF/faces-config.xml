@@ -1,0 +1,151 @@
+<?xml version="1.0"?>
+<faces-config>
+	<!--
+        Password store physical implementation.
+    -->
+	<managed-bean>
+		<managed-bean-name>PwdStore</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.security.authentication.password.consumer.store.MemoryPasswordStore</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+
+	<!--  
+		Password store for oauth / smartcloud 
+	-->
+	<managed-bean>
+		<managed-bean-name>SmartcloudStore</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.security.authentication.oauth.consumer.store.MemoryTokenStore</managed-bean-class>
+
+		<managed-bean-scope>application</managed-bean-scope>
+		<!-- Fixed OAuth Application parameters -->
+	</managed-bean>
+	
+	<!--  Default Environment -->
+	<managed-bean>
+		<managed-bean-name>defaultEnvironment</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.jslibrary.SBTEnvironment</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+		<managed-property>
+			<property-name>endpoints</property-name>
+			<value>connections,acmeAir,conAcmeApp</value>
+		</managed-property>
+		<managed-property>
+			<property-name>properties</property-name>
+			<value>sample.email1</value>
+		</managed-property>
+	</managed-bean>
+    
+    <!--  OpenSocial Environment -->
+    <managed-bean>
+        <managed-bean-name>openSocial</managed-bean-name>
+        <managed-bean-class>com.ibm.sbt.jslibrary.SBTEnvironment</managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+        <managed-property>
+            <property-name>endpoints</property-name>
+            <value>acmeAirOS:acmeAir</value>
+        </managed-property>
+    </managed-bean>
+	
+	<!-- Connections -->   
+    <managed-bean>
+        <managed-bean-name>connections</managed-bean-name>
+        <managed-bean-class>com.ibm.sbt.services.endpoints.OAuth2Endpoint</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>url</property-name>
+            <value>%{connections.url}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>serviceName</property-name>
+            <value>%{acme.social.connections.oauth2.serviceName}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>appId</property-name>
+            <value>%{acme.social.connections.oauth2.appId}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>consumerKey</property-name>
+            <value>%{acme.social.connections.oauth2.consumerKey}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>consumerSecret</property-name>
+            <value>%{acme.social.connections.oauth2.consumerSecret}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>authorizationURL</property-name>
+            <value>%{connectionsOA2.authorizationURL}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>accessTokenURL</property-name>
+            <value>%{connectionsOA2.accessTokenURL}</value>
+        </managed-property> 
+    </managed-bean>
+    
+    <!-- Acme Airlines -->
+    <managed-bean>
+        <managed-bean-name>acmeAir</managed-bean-name>
+        <managed-bean-class>
+            com.ibm.sbt.services.endpoints.AnonymousEndpoint
+        </managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>url</property-name>
+            <value>%{acme.url}</value>
+        </managed-property>
+    </managed-bean>
+    
+    <!-- OpenSocial Acme Airlines App -->
+    <managed-bean>
+        <managed-bean-name>acmeAirOS</managed-bean-name>
+        <managed-bean-class>com.ibm.sbt.services.endpoints.GadgetEndpoint</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>url</property-name>
+            <value>%{acme.url}</value>
+        </managed-property>
+    </managed-bean>
+        
+    <!-- 
+    Connections Basic Auth Endpoint
+    This endpoint is only used for the purpose of posting an activity stream entry
+    to streams other than the current user or if the app needs to post to the activity
+    stream from a class on the server where using 3-legged OAuth is not possible.  If
+    you can use 3-legged OAuth and you are using Connections 4.x please use OAuth it
+    is far more secure than basic auth.
+     -->
+    <managed-bean>
+        <managed-bean-name>conAcmeApp</managed-bean-name>
+        <managed-bean-class>
+            com.ibm.sbt.services.endpoints.BasicEndpoint
+        </managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>url</property-name>
+            <value>%{connections.url}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>passwordStore</property-name>
+            <value>PwdStore</value>
+        </managed-property>
+        <managed-property>
+            <!-- The user specified here must has the necessary privileges to post to any users activity stream -->
+            <!-- See  http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Distributing_events&content=pdcontent -->
+            <property-name>user</property-name>
+            <value>%{connections.app.as.user}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>password</property-name>
+            <value>%{connections.app.as.password}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>authenticationService</property-name>
+            <value>communities/service/atom/communities/my</value>
+        </managed-property>
+        <!-- Trust the connection -->
+        <managed-property>
+            <property-name>forceTrustSSLCertificate</property-name>
+            <value>true</value>
+        </managed-property>
+    </managed-bean>
+        	
+</faces-config>

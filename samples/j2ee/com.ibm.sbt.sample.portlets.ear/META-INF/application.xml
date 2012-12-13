@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application id="Application_ID" version="5"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/application_5.xsd">
+	<display-name>Social Business Toolkit Sample Portlets Enterprise Application</display-name>
+	<module id="Module_1343236756181">
+		<web>
+			<web-uri>com.ibm.sbt.sample.web.war</web-uri>
+			<context-root>sbt.sample.web</context-root>
+		</web>
+	</module>
+	<module id="Module_1343263962404">
+		<web>
+			<web-uri>com.ibm.sbt.sample.portlets.war</web-uri>
+			<context-root>sbt.sample.portlets</context-root>
+		</web>
+	</module>
+	<module id="Module_1343767779916">
+		<web>
+			<web-uri>com.ibm.sbt.web.war</web-uri>
+			<context-root>sbt</context-root>
+		</web>
+	</module>
+
+</application> 

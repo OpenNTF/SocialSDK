@@ -1,0 +1,208 @@
+#
+#   Audio formats
+#
+.snd,      audio/basic                          # Sun/NeXT audio format
+.au,       audio/basic                          # Sun/NeXT audio format
+.aiff,     audio/x-aiff                         # Apple audio format
+.aifc,     audio/x-aiff                         # Apple audio format
+.aif,      audio/x-aiff                         # Apple audio format
+.wav,      audio/x-wav                          # Windows WAV format
+.mid,      audio/mid                            # Windows MIDI format
+.rmi,      audio/mid                            # Windows MIDI format
+
+#
+#   Image formats
+#
+.bmp,      image/bmp                            # Windows bitmap format
+.gif,      image/gif                            # GIF
+.ief,      image/ief                            # Image Exchange format
+.jpg,      image/jpeg                           # JPEG
+.jpe,      image/jpeg                           # JPEG
+.jpeg,     image/jpeg                           # JPEG
+.tif,      image/tiff                           # TIFF
+.tiff,     image/tiff                           # TIFF
+.ras,      image/cmu-raster                     # CMU raster format
+.png,      image/x-png                          # PNG
+.pnm,      image/x-portable-anymap              # PBM Anymap format
+.pbm,      image/x-portable-bitmap              # PBM Bitmap format
+.pgm,      image/x-portable-graymap             # PBM Graymap format
+.ppm,      image/x-portable-pixmap              # PBM Pixmap format
+.rgb,      image/x-rgb                          # RGB format
+.xbm,      image/x-xbitmap                      # X bitmap
+.xpm,      image/x-xpixmap                      # X pixmap format
+.xwd,      image/x-xwindowdump                  # X window dump (xwd)
+.cmx,      image/x-cmx                          # Corel CMX format
+
+#
+#   Video formats
+#
+.mpg,      video/mpeg                           # MPEG
+.mpe,      video/mpeg                           # MPEG
+.mpeg,     video/mpeg                           # MPEG
+.qt,       video/quicktime                      # QuickTime
+.mov,      video/quicktime                      # QuickTime
+.avi,      video/avi                            # MS Video for Windows
+.movie,    video/x-sgi-movie                    # SGI  movieplayer
+.asf,      video/x-ms-asf                       # MS Active streaming format
+.asx,      video/x-ms-asf                       # MS Active streaming format
+.vdo,      video/x-vdolive                      # VDOLive script
+
+#
+#   Message formats
+#
+.eml,      message/rfc822                       # Outlook Mail Message
+.mht,      message/rfc822                       # Mail Message
+.mhtml,    message/rfc822                       # Mail Message
+
+#
+#   Text formats
+#
+.html,     text/html                            # HTML
+.htm,      text/html                            # HTML variant
+.htmls,    text/x-ssi-html                      # HTML w/ Server-side includes
+.shtml,    text/x-ssi-html                      # HTML w/ Server-side includes
+.css,      text/css                             # Cascading Style Sheet
+.xml,      text/xml                             # XML
+.c,        text/plain                           # C source
+.h,        text/plain                           # C headers
+.cc,       text/plain                           # C++ source
+.cpp,      text/plain                           # C++ source
+.cxx,      text/plain                           # C++ source
+.hh,       text/plain                           # C++ headers
+.hxx,      text/plain                           # C++ headers
+.java,     text/plain                           # Java source
+.m,        text/plain                           # Objective-C source
+.f90,      text/plain                           # Fortran 90 source
+.txt,      text/plain                           # Plain text
+.rtx,      text/richtext                        # MIME Richtext format
+.tsv,      text/tab-separated-values            # Tab-separated values
+.etx,      text/x-setext                        # Structure Enhanced Text
+.for,      text/plain                           # Fortran
+.mar,      text/plain                           # MACRO
+.log,      text/plain                           # logfiles9
+.com,      text/plain                           # scripts
+.sdml,     text/plain                           # SDML
+.list,     text/plain                           # listfiles
+.lst,      text/plain                           # listfiles
+.def,      text/plain                           # definition files
+.conf,     text/plain                           # definition files
+.cnf,      text/plain                           # definition files
+.vcf,      text/x-vcard                         # VCard
+
+#
+#   Compressed file formats
+#
+.gz,       application/x-gzip                   # GNU Zip
+.zip,      application/x-zip                    # PKZIP
+.tar,      application/x-tar                    # 4.3BSD tar
+.ustar,    application/x-ustar                  # POSIX tar
+
+#
+#   Lotus application formats
+#
+.123,      application/vnd.lotus-1-2-3          # Lotus 1-2-3 97
+.wk4,      application/vnd.lotus-1-2-3          # Lotus 1-2-3 97
+.wk3,      application/vnd.lotus-1-2-3          # Lotus 1-2-3 97
+.wk1,      application/vnd.lotus-1-2-3          # Lotus 1-2-3 97
+.wks,      application/vnd.lotus-1-2-3          # Lotus 1-2-3 97
+.scm,      application/vnd.lotus-screencam      # Lotus ScreenCam Movie
+.lwp,      application/vnd.lotus-wordpro        # Lotus WordPro 97
+.sam,      application/vnd.lotus-wordpro        # Lotus WordPro 97
+.prz,      application/vnd.lotus-freelance      # Lotus Freelance 97
+.pre,      application/vnd.lotus-freelance      # Lotus Freelance 97
+.imp,      application/vnd.lotus-improv         # Lotus Improv
+
+#
+#   Microsoft application formats
+#
+.doc,      application/msword                   # Microsoft Word
+.dot,      application/msword                   # Microsoft Word
+.dll,      application/octet-stream				# Microsoft Windows
+.exe,      application/octet-stream				# Microsoft Windows
+.pub,      application/x-mspublisher            # Microsoft Publisher
+.mpp,      application/vnd.ms-project           # Microsoft Project
+.pot,      application/vnd.ms-powerpoint        # Microsoft Powerpoint
+.ppt,      application/vnd.ms-powerpoint        # Microsoft Powerpoint
+.pps,      application/vnd.ms-powerpoint        # Microsoft Powerpoint
+.scd,      application/vnd.ms-schedule          # Microsoft Schedule
+.wcm,      application/vnd.ms-works             # Microsoft Works
+.wdb,      application/vnd.ms-works             # Microsoft Works
+.wps,      application/vnd.ms-works             # Microsoft Works
+.wri,      application/x-mswrite                # Microsoft Write
+.xla,      application/vnd.ms-excel             # Microsoft Excel
+.xlc,      application/vnd.ms-excel             # Microsoft Excel
+.xlm,      application/vnd.ms-excel             # Microsoft Excel
+.xls,      application/vnd.ms-excel             # Microsoft Excel
+.xlt,      application/vnd.ms-excel             # Microsoft Excel
+.xlw,      application/vnd.ms-excel             # Microsoft Excel
+
+#
+#   Macromedia formats
+#
+.dcr,      application/x-director               # Shockwave for Director
+.dir,      application/x-director               # Shockwave for Director
+.dxr,      application/x-director               # Shockwave for Director
+.swf,      application/x-shockwave-flash        # Shockwave Flash
+.spl,      application/futuresplash             # Future Splash Animator
+
+#
+#   RealAudio formats
+#
+.rm,       application/vnd.rn-realmedia         # RealPlayer
+.rpm,      audio/x-pn-realaudio-plugin          # RealAudio plug-in
+.ra,       audio/x-pn-realaudio                 # RealPlayer
+.ram,      audio/x-pn-realaudio                 # RealPlayer
+.rv,       video/vnd.rn-realvideo               # RealPlayer
+
+#
+#   VRML formats
+#
+.wrl,      x-world/x-vrml                       # VRML
+.wrz,      x-world/x-vrml                       # VRML
+.xaf,      x-world/x-vrml                       # VRML
+.xof,      x-world/x-vrml                       # VRML
+
+#
+#   Other application formats
+#
+.ods,      application/oleobject                # OLE storage
+.cdf,      application/x-cdf                    # Channel file
+.323,      application/h323                     # H.323 Internet Telephony
+.js,       application/x-javascript             # JavaScript
+.class,    application/octet-stream             # Java class file
+
+.bin,      application/octet-stream             # Uninterpreted binary
+
+.wp5,      application/wordperfect5.1           # WordPerfect
+.oda,      application/oda                      # Open Document Architecture
+.pdf,      application/pdf                      # Adobe Acrobat
+.ai,       application/postscript               # Adobe Illustrator
+.eps,      application/postscript               # Encapulated PostScript
+.ps,       application/postscript               # PostScript
+.rtf,      application/x-rtf                    # RTF
+.csh,      application/x-csh                    # C-shell script
+.dvi,      application/x-dvi                    # TeX DVI
+.hdf,      application/x-hdf                    # NCSA HDF data file
+.latex,    application/x-latex                  # LaTeX source
+.nc,       application/x-netcdf                 # Unidata netCDF data
+.sh,       application/x-sh                     # Shell-script
+.tcl,      application/x-tcl                    # TCL-script
+.tex,      application/x-tex                    # TeX source
+.texi,     application/x-texinfo                # Texinfo
+.texinfo,  application/x-texinfo                # Texinfo
+.t,        application/x-troff                  # Troff
+.roff,     application/x-troff                  # Troff
+.tr,       application/x-troff                  # Troff
+.man,      application/x-troff-man              # Troff with man macros
+.me,       application/x-troff-me               # Troff with me macros
+.ms,       application/x-troff-ms               # Troff with ms macros
+.src,      application/x-wais-source            # WAIS source
+.bcpio,    application/x-bcpio                  # Old binary CPIO
+.cpio,     application/x-cpio                   # POSIX CPIO
+.gtar,     application/x-gtar                   # Gnu tar
+.shar,     application/x-shar                   # Shell archive
+.sv4cpio,  application/x-sv4cpio                # SVR4 CPIO
+.sv4crc,   application/x-sv4crc                 # SVR4 CPIO with CRC
+.ice,      x-conference/x-cooltalk              # Cooltalk
+.rrf,      application/x-InstallFromWeb         # InstallFromTheWeb
+.wis,      application/x-InstallFromWeb         # InstallFromTheWeb plug-in

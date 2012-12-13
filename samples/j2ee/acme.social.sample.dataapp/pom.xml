@@ -1,0 +1,26 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>acme.social.sample.dataapp</artifactId>
+  <packaging>war</packaging>
+
+  <parent>
+    <groupId>com.ibm.sbt.sample</groupId>
+    <artifactId>sample.parent</artifactId>
+    <version>1.0.0</version>
+    <relativePath>../../../build/sample</relativePath>
+  </parent>
+  
+  <dependencies>
+    <dependency>
+      <groupId>javax</groupId>
+      <artifactId>javaee-api</artifactId>
+      <version>6.0</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+	  <groupId>org.apache.wink</groupId>
+	  <artifactId>wink-json4j</artifactId>
+	  <version>1.2.1-incubating</version>
+    </dependency>
+  </dependencies>  
+</project>

@@ -1,0 +1,62 @@
+<!-- 
+/*
+ * © Copyright IBM Corp. 2012
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at:
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+ * implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */ -->
+ 
+ <script>
+// Note: this should be generated based on the current servlet context instead of being manually written
+dojo.registerModulePath("sbt","/sbt/js/sdk/sbt");
+dojo.registerModulePath("sbt/dojo","/sbt/js/sdk/dojo");
+dojo.registerModulePath("sbt/_bridge","/sbt/js/sdk/_bridges/dojo");
+
+define('sbt/config',['sbt/Proxy','sbt/authenticator/Basic','sbt/_bridge/Transport','sbt/Endpoint'],function(Proxy, _0, Transport, Endpoint){
+	// Only this type is currently supported
+	var type = 0;
+
+	// Current server
+	var loc = window.location;
+	var server = loc.protocol+"//"+loc.host;
+	
+	// Connections server
+	var conUrl = "http://sbtdev.swg.usma.ibm.com:81";
+	
+	if(type==0) {	
+		// Using a proxy server
+		var proxy = new sbt.Proxy({proxyUrl: server+"/sbt/proxy/basic/connections"});
+		var transport = new Transport();
+		sbt.Endpoints = {
+				connections : new Endpoint({proxy: proxy, transport: transport, baseUrl:conUrl})
+		};
+	} else if(type==1) { 
+		// Using a simple iFrame communication mechanism
+		// We still go through a proxy as the iframe HTML file is not yet installed 
+		// on the Connections server
+		var proxy = new sbt.Proxy({proxyUrl: server+"/sbt/proxy/basic/connections"});
+		var transport = new IFrameTransport(server+"/sbt/xhr/IFrameContent.html");
+		sbt.Endpoints = {
+			connections : new Endpoint({proxy: proxy, transport: transport, baseUrl:conUrl})
+		};
+	} else if(type==2) { 
+		// We go here without a proxy server
+		var transport = new IFrameTransport(server+"/sbt/xhr/IFrameContent.html");
+		sbt.Endpoints = {
+			connections : new Endpoint({transport: transport, baseUrl:conUrl})
+		};
+	} else {
+		alert("Invalid endpoint definition");
+	}
+});
+
+</script>

@@ -1,0 +1,34 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.ibm.sbt.sample</groupId>
+  <artifactId>sample.parent</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
+
+  <parent>
+    <groupId>com.ibm.sbt</groupId>
+    <artifactId>sbt.build</artifactId>
+    <version>1.0.0</version>
+    <relativePath>../</relativePath>
+  </parent>
+
+  <build>
+    <directory>../../../../target/${project.groupId}/${project.artifactId}</directory>
+  </build>
+  
+  <modules>
+    <!-- sample j2ee projects -->
+    <module>../../samples/j2ee/com.ibm.sbt.sample.portlets</module>
+    <module>../../samples/j2ee/com.ibm.sbt.sample.web</module>
+    <module>../../samples/j2ee/com.ibm.sbt.sample.ear</module>
+    <module>../../samples/j2ee/com.ibm.sbt.sample.portlets.ear</module>
+    <module>../../samples/j2ee/acme.social.sample.dataapp</module>
+    <module>../../samples/j2ee/acme.social.sample.webapp</module>
+    <module>../../samples/j2ee/acme.sample.webapp</module>
+    <module>../../samples/j2ee/acme.social.sample.ear</module>
+    <!-- sample java projects -->
+	<!--
+    <module>../../samples/java/sbt.sample.app</module>
+	-->
+  </modules>
+</project>

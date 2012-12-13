@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="PhilPortletsEAR">
+        <wb-resource deploy-path="/" source-path="/"/>
+        <dependent-module archiveName="com.ibm.sbt.sample.web.war" deploy-path="/" handle="module:/resource/com.ibm.sbt.sample.web/com.ibm.sbt.sample.web">
+            <dependent-object>Module_1343236756181</dependent-object>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="com.ibm.sbt.sample.portlets.war" deploy-path="/" handle="module:/resource/com.ibm.sbt.sample.portlets/com.ibm.sbt.sample.portlets">
+            <dependent-object>Module_1343263962404</dependent-object>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="com.ibm.sbt.web.war" deploy-path="/" handle="module:/resource/com.ibm.sbt.web/com.ibm.sbt.web">
+            <dependent-object>Module_1343767779916</dependent-object>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+    </wb-module>
+</project-modules>

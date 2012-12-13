@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><portlet-properties>
+    <portlet name="PhilPortlets">
+        <property>
+            <name>DEFAULT_PAGE</name>
+            <value>/_PhilPortlets/jsp/html/PhilPortletsPortletView.jsp</value>
+        </property>
+        <property>
+            <name>WSRP_PRODUCER</name>
+            <value>false</value>
+        </property>
+    </portlet>
+</portlet-properties>

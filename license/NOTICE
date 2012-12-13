@@ -1,0 +1,138 @@
+Social Business Toolkit SDK
+(c) Copyright IBM Corp. 2010, 2012
+
+This product includes software developed at
+OpenNTF (http://www.OpenNTF.Org/).
+
+The project contains XPages Social Features which uses network services such as Dropbox and Facebook.  It is your responsibility to ensure that your use of such services is in compliance with their associated Terms of Use or Terms of Service.  Further, use of the Twitter API is subject to the Twitter API Terms - https://dev.twitter.com/terms/api-terms and Twitters Terms of Service - http://twitter.com/tos, under your own contract with Twitter.  It is your responsibility to ensure compliance with these Terms."
+
+The project includes the following third party packages whose Notice files, which list third party components, are included in this package separately from this Notice file.
+
+XPages Extension LIbrary
+Licensed under Apache 2.0
+Available from http://www.openntf.org/internal/home.nsf/project.xsp?action=openDocument&name=XPages%20Extension%20Library
+
+XPages Bazaar
+Licensed under Apache 2.0
+Available from http://www.openntf.org/internal/home.nsf/project.xsp?action=openDocument&name=XPages%20Bazaar
+
+Javascript Aggregator
+Licensed under Apache 2.0
+Available from http://www.openntf.org/internal/home.nsf/project.xsp?action=openDocument&name=Javascript%20Aggregator
+
+The project also includes the following third party packages:
+
+Apache Wink 1.2.1 
+Licensed under Apache 2.0
+Available from http://incubator.apache.org/wink/downloads.html
+  Copyright 2009-2010 The Apache Software Foundation
+  This product includes software developed at
+  The Apache Software Foundation (http://www.apache.org/).
+
+Dojo 1.8 
+Licensed under either the terms of the modified BSD license or the Academic Free License version 2.1
+Available from http://dojotoolkit.org/
+
+Dojo 1.6 (Subset - the "dojo/_base/_loader/loader.js" is included to support older AMD function)
+Licensed under either the terms of the modified BSD license or the Academic Free License version 2.1
+Available from http://dojotoolkit.org/
+
+Apache Xerces Java 2.10.0
+Licensed under Apache 2.0
+Available from http://xerces.apache.org/#xerces2-j
+Note that there is a zip file in this package containing additional license and notice information for Xerces. 
+   =========================================================================
+   ==  NOTICE file corresponding to section 4(d) of the Apache License,   ==
+   ==  Version 2.0, in this case for the Apache Xerces Java distribution. ==
+   =========================================================================
+   Apache Xerces Java
+   Copyright 1999-2010 The Apache Software Foundation
+   This product includes software developed at
+   The Apache Software Foundation (http://www.apache.org/).
+   Portions of this software were originally based on the following:
+     - software copyright (c) 1999, IBM Corporation., http://www.ibm.com.
+     - software copyright (c) 1999, Sun Microsystems., http://www.sun.com.
+     - voluntary contributions made by Paul Eng on behalf of the 
+       Apache Software Foundation that were originally developed at iClick, Inc.,
+       software copyright (c) 1999.
+
+Apache Tomcat 7.0.30
+Licensed under Apache 2.0
+Available from http://tomcat.apache.org/
+  Copyright 1999-2012 The Apache Software Foundation
+  This product includes software developed by
+  The Apache Software Foundation (http://www.apache.org/).
+
+  The Windows Installer is built with the Nullsoft
+  Scriptable Install System (NSIS), which is
+  open source software.  The original software and
+  related information is available at
+  http://nsis.sourceforge.net.
+
+  Java compilation software for JSP pages is provided by Eclipse,
+  which is open source software.  The original software and
+  related information is available at
+  http://www.eclipse.org.
+
+  For the bayeux implementation
+  The org.apache.cometd.bayeux API is derivative work originating at the Dojo Foundation
+  * Copyright 2007-2008 Guy Molinari
+  * Copyright 2007-2008 Filip Hanik
+  * Copyright 2007 Dojo Foundation
+  * Copyright 2007 Mort Bay Consulting Pty. Ltd.
+
+  The original XML Schemas for Java EE Deployment Descriptors:
+   - javaee_5.xsd
+   - javaee_web_services_1_2.xsd
+   - javaee_web_services_client_1_2.xsd
+   - javaee_6.xsd
+   - javaee_web_services_1_3.xsd
+   - javaee_web_services_client_1_3.xsd
+   - jsp_2_2.xsd
+   - web-app_3_0.xsd
+   - web-common_3_0.xsd
+   - web-fragment_3_0.xsd
+  may be obtained from http://java.sun.com/xml/ns/javaee/
+
+Require.js v2.0.6 
+Licensed under MIT or the new BSD license
+Available from http://requirejs.org/ 
+
+has.js, 3d0c6e3
+Tri-Licensed under Academic Free or New BSD or MIT Licenses. 
+Available under https://github.com/phiggins42/has.js 
+
+Bootstrap.css (Subset) v2.1.1 
+Licensed under Apache v2.0
+Available from http://twitter.github.com/bootstrap/
+
+TwitterWidgetCreation 2010-12-23
+Licensed under the following license:
+  This code can be used without any restrictions, but please don't expect support either!
+Available from blogs.sitepointstatic.com/examples/tech/twitter/twitterwidget.zip
+
+JSONPath 0.8.0.js.txt
+Licensed under the MIT license
+Copyright (c) 2007 Stefan Goessner (goessner.net)
+Available from http://code.google.com/p/jsonpath/ 
+
+jQuery 1.8.2
+Licensed under the MIT license
+Available from http://jquery.com/
+
+
+The following two sources are not shipped with this package - but are loaded and executed dynamically.
+
+SHA-1 (javascript) 2.1a 
+Licensed under the BSD license
+Available from http://oauth.googlecode.com/svn/code/javascript/sha1.js 
+
+OAuth(javascript), 2012-09-26, 
+Licensed under Apache 2.0
+
+
+
+
+
+
+

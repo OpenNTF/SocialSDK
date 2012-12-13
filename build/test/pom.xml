@@ -1,0 +1,19 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.ibm.sbt.test</groupId>
+  <artifactId>test.parent</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
+
+  <parent>
+    <groupId>com.ibm.sbt</groupId>
+    <artifactId>sbt.build</artifactId>
+    <version>1.0.0</version>
+    <relativePath>../</relativePath>
+  </parent>
+
+  <modules>
+    <!-- sample projects -->
+    <module>../../java/test/eclipse/plugins/com.ibm.sbt.jasmine.web</module>
+  </modules>
+</project>

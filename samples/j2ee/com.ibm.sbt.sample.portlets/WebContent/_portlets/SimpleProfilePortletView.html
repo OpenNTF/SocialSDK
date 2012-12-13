@@ -1,0 +1,71 @@
+<!-- /*
+ * © Copyright IBM Corp. 2012
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); 
+ * you may not use this file except in compliance with the License. 
+ * You may obtain a copy of the License at:
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0 
+ * 
+ * Unless required by applicable law or agreed to in writing, software 
+ * distributed under the License is distributed on an "AS IS" BASIS, 
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 
+ * implied. See the License for the specific language governing 
+ * permissions and limitations under the License.
+ */ -->
+
+<script type="text/javascript" src="/sbt/toolkit?ver=1.4.3"></script>
+
+<div id="widgetContainer_<portlet:namespace/>">
+	<div style="margin: 6px">
+
+	<h3 style="margin-bottom: 3px">Welcome!</h3>
+		Hello, can you see my profile bellow? It is using a dijit coming from the SBT toolkit.
+	<br>
+	<br>
+	<table style="border-width: 1px; border-color: black; border-style: solid">
+		<tr>
+			<td valign='top'>
+				Initial profile: <span id="<portlet:namespace/>_profileId">[No profile]</span>
+			</td>
+		</tr>
+		<tr>
+			<td valign='top'>
+				<button dojotype="dijit.form.Button" type="button">
+					See Frank Adams' profile
+					<script type="dojo/method" event="onClick">dijit.byId('<portlet:namespace/>_profile1').setValue("***REMOVED***@renovations.com");</script>
+				</button>
+				<button dojotype="dijit.form.Button" type="button">
+					See Lucile Suarez' profile
+					<script type="dojo/method" event="onClick">dijit.byId('<portlet:namespace/>_profile1').setValue("lsuarez@renovations.com");</script>
+				</button>
+				<button dojotype="dijit.form.Button" type="button">
+					See Ted Amado's profile
+					<script type="dojo/method" event="onClick">dijit.byId('<portlet:namespace/>_profile1').setValue("tamado@renovations.com");</script>
+				</button>
+			</td>
+		</tr>
+		<tr>
+			<td valign='top'>
+				<div dojoType="sbt.connections.profiles.DisplayProfile" id="<portlet:namespace/>_profile1"></div>
+			</td>
+		</tr>
+	</table>	
+	</div>
+</div>
+
+<script>
+	require(['dijit/form/Button','sbt/connections/profiles/DisplayProfile'],function(){});
+</script>	
+
+<script>
+require(['dojo/ready','dojo','dijit'],function(ready,dojo,dijit) {
+	ready(function() {
+		var id = sbtGetProperty('<portlet:namespace/>','UserID');
+		if(id) {
+			dijit.byId('<portlet:namespace/>_profile1').setValue(id);
+			dojo.byId('<portlet:namespace/>_profileId').innerHTML=id;
+		}
+	});
+});
+</script>

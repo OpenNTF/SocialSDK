@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- © Copyright IBM Corp. 2012                                          -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     --> 
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   --> 
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        --> 
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<faces-config>
+	<!--
+        Password store physical implementation.
+    -->
+	<managed-bean>
+		<managed-bean-name>PwdStore</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.security.authentication.password.consumer.store.MemoryPasswordStore</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+<!--  passwword store for oauth / smartcloud -->
+		<managed-bean>
+		<managed-bean-name>SmartcloudStore</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.security.authentication.oauth.consumer.store.MemoryTokenStore</managed-bean-class>
+
+		<managed-bean-scope>application</managed-bean-scope>
+		<!-- Fixed OAuth Application parameters -->
+	</managed-bean>
+	
+	
+	<!--  Smartcloud Connection -->
+	
+	<managed-bean>
+		<managed-bean-name>smartcloud</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.services.endpoints.SmartcloudOAuthEndpoint</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+		<!-- Endpoint URL -->
+		<managed-property>
+			<property-name>url</property-name>
+			<value>https://apps.lotuslive.com</value>
+		</managed-property>
+
+		<!-- Trust the connection -->
+		<managed-property>
+			<property-name>forceTrustSSLCertificate</property-name>
+			<value>true</value>
+		</managed-property>
+		
+		<!-- Fixed values for the registered application -->
+		<managed-property>
+			<property-name>consumerKey</property-name>
+			<value>2c40452c92300d8b8c84160aea4b7608</value>
+		</managed-property>
+		<managed-property>
+			<property-name>consumerSecret</property-name>
+			<value>13929c0cad4114735ace427ec46ae5c4</value>
+		</managed-property>
+		<managed-property>
+			<property-name>requestTokenURL</property-name>
+			<value>https://apps.lotuslive.com/manage/oauth/getRequestToken</value>
+		</managed-property>
+		<managed-property>
+			<property-name>authorizationURL</property-name>
+			<value>https://apps.lotuslive.com/manage/oauth/authorizeToken</value>
+		</managed-property>
+		<managed-property>
+			<property-name>accessTokenURL</property-name>
+			<value>https://apps.lotuslive.com/manage/oauth/getAccessToken</value>
+		</managed-property>		
+		<managed-property>
+			<property-name>signatureMethod</property-name>
+			<!-- <value>HMAC-SHA1</value> -->
+			<value>PLAINTEXT</value>
+		</managed-property>
+
+		<!-- Access to the token store -->
+		<managed-property>
+			<property-name>forceTrustSSLCertificate</property-name>
+			<value>true</value>
+		</managed-property>
+
+		<!-- Access to the token store -->
+		<managed-property>
+			<property-name>tokenStore</property-name>
+			<value>SmartcloudStore</value>
+		</managed-property>
+		<managed-property>
+			<property-name>serviceName</property-name>
+			<value>smartcloud</value>
+		</managed-property>
+		<managed-property>
+			<property-name>appId</property-name>
+			<value>XPagesSBT</value>
+		</managed-property>
+	</managed-bean>
+	
+
+	
+	<managed-bean>
+		<managed-bean-name>connections</managed-bean-name>
+		<managed-bean-class>
+			com.ibm.sbt.services.endpoints.ConnectionsBasicEndpoint
+		</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>url</property-name>
+			<value>https://icsqs.ibm.com:444</value>
+		</managed-property>
+		<managed-property>
+			<property-name>proxyEnabled</property-name>
+			<value>true</value>
+		</managed-property>
+		<managed-property>
+			<property-name>forceTrustSSLCertificate</property-name>
+			<value>true</value>
+		</managed-property>
+		<managed-property>
+			<property-name>passwordStore</property-name>
+			<value>PwdStore</value>
+		</managed-property>
+		<managed-property>
+			<property-name>authenticationPage</property-name>
+			<value>loginForm.jsp?endpoint=localqsimage</value>
+		</managed-property>
+		<managed-property>
+			<property-name>authenticationService</property-name>
+			<value>communities/service/atom/communities/my</value>
+		</managed-property>
+	</managed-bean>
+
+
+		<!-- Store for the Outh2 on Smart Cloud -->
+	<managed-bean>
+		<managed-bean-name>SmartCloudO2DataStore</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.security.authentication.oauth.consumer.store.MemoryTokenStore</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+		<!-- Fixed OAuth Application parameters -->
+	</managed-bean>
+	
+
+	<!-- SmartCloud -->
+	<managed-bean>
+		<managed-bean-name>smartcloudOA2</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.services.endpoints.SmartcloudOAuthEndpoint</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+		<!-- Endpoint URL -->
+		<managed-property>
+			<property-name>url</property-name>
+			<value>https://apps.lotuslive.com</value>
+		</managed-property>
+		<!-- Fixed values for the registered application -->
+		<managed-property>
+			<property-name>appId</property-name>
+			<value>app_20051314_1348117435454</value>
+		</managed-property>
+		<managed-property>
+			<property-name>consumerSecret</property-name>
+			<value>94c11d89b93b15b193a0674cbb6eb1be35b3c4ac28d350f089f1140a0ca0d82636592f063bd5abf11f02b4da59539052b8254acc4c55ec24c0babf7401e70fddbe461eb25aa989817a6246c441c68edad2ab6a4b184fc34ca5b35420d1764aee5f7539f1fd4b537ab1386c51dbc4d541b29fe1443701c7d2a66e60bde58f5f</value>
+		</managed-property>
+		<managed-property>
+			<property-name>authorizationURL</property-name>
+			<value>https://apps.lotuslive.com/manage/oauth2/authorize</value>
+		</managed-property>
+		<managed-property>
+			<property-name>accessTokenURL</property-name>
+			<value>https://apps.lotuslive.com/manage/oauth2/token</value>
+		</managed-property>		
+
+		<!-- Access to the token store -->
+		<managed-property>
+			<property-name>tokenStore</property-name>
+			<value>SmartCloudO2DataStore</value>
+		</managed-property>
+		<managed-property>
+			<property-name>serviceName</property-name>
+			<value>SmartCloudO2</value>
+		</managed-property>
+	</managed-bean>
+	
+			<!-- Store for the Outh2 on Smart Cloud -->
+	<managed-bean>
+		<managed-bean-name>ConnectionsStore</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.security.authentication.oauth.consumer.store.MemoryTokenStore</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+		<!-- Fixed OAuth Application parameters -->
+	</managed-bean>
+	
+	<!-- Store for the Outh2 on Smart Cloud -->
+	<!-- SmartCloud JAVASCRIPT -->
+	<managed-bean>
+		<managed-bean-name>smartcloudjs</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.services.endpoints.SmartcloudOAuth2Endpoint</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+		<!-- Endpoint URL -->
+		<managed-property>
+			<property-name>url</property-name>
+			<value>https://apps.lotuslive.com</value>
+		</managed-property>
+		<!-- Fixed values for the registered application -->
+		<managed-property>
+			<property-name>appId</property-name>
+			<value>app_20051314_1349091338643</value>
+		</managed-property>
+		<managed-property>
+			<property-name>consumerSecret</property-name>
+			<value>97bec69640d287c42d808053c3d121f49ceb4b036950cb8bc8af1f6084586bb73394ea60c1fa066783297cf44e6cb88b2c0dd5418a9a99203ba90414426730a9a1a5ad1e650da4877ba3d2b72c8ce84368de6024d94d5f9182981726fab95745963702b9e4e15b6cf3ca49b7e94298ec1ebde47816ba209d7dbb88cdf315ca1</value>
+		</managed-property>
+		<managed-property>
+			<property-name>authorizationURL</property-name>
+			<value>https://apps.lotuslive.com/manage/oauth2/authorize</value>
+		</managed-property>
+		<managed-property>
+			<property-name>accessTokenURL</property-name>
+			<value>https://apps.lotuslive.com/manage/oauth2/token</value>
+		</managed-property>		
+
+		<!-- Access to the token store -->
+		<managed-property>
+			<property-name>tokenStore</property-name>
+			<value>SmartCloudO2DataStore</value>
+		</managed-property>
+		<managed-property>
+			<property-name>serviceName</property-name>
+			<value>SmartCloudJS</value>
+		</managed-property>
+	</managed-bean>
+	
+	
+	
+		<!-- Connections4.0 OAuth2.0-->
+	<managed-bean>
+		<managed-bean-name>ConnectionsOAuth</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.services.endpoints.ConnectionsOAuth2Endpoint</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+		<!-- Endpoint URL -->
+		<managed-property>
+			<property-name>url</property-name>
+			<value>https://icsqs.ibm.com:444</value>
+		</managed-property>
+		<!-- Fixed values for the registered application -->
+		<managed-property>
+			<property-name>appId</property-name>
+			<value>ConnectionsOAuth2</value>
+		</managed-property>
+		<managed-property>
+			<property-name>consumerSecret</property-name>
+			<value>yTFr4Gt5GkAWtxRT5XVNiQUpKlwp8sKA3WfvxXqjCYPORb8OPpsR0X9iSUXH</value>
+		</managed-property>
+		<managed-property>
+			<property-name>authorizationURL</property-name>
+			<value>https://icsqs.ibm.com:444/oauth2/endpoint/connectionsProvider/authorize</value>
+		</managed-property>
+		<managed-property>
+			<property-name>accessTokenURL</property-name>
+			<value>https://icsqs.ibm.com:444/oauth2/endpoint/connectionsProvider/token</value>
+		</managed-property>		
+		
+		<managed-property>
+			<property-name>forceTrustSSLCertificate</property-name>
+			<value>true</value>
+		</managed-property>
+
+		<!-- Access to the token store -->
+		<managed-property>
+			<property-name>tokenStore</property-name>
+			<value>ConnectionsStore</value>
+		</managed-property>
+		<managed-property>
+			<property-name>serviceName</property-name>
+			<value>ConnectionsOAuth</value>
+		</managed-property>
+	</managed-bean>
+	
+	
+</faces-config>

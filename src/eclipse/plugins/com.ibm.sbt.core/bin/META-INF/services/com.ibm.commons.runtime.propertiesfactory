@@ -1,5 +1,0 @@
-com.ibm.commons.runtime.properties.WebResourcePropertiesFactory
-com.ibm.commons.runtime.properties.WebContextPropertiesFactory
-com.ibm.commons.runtime.properties.ContextPropertiesFactory
-com.ibm.commons.runtime.properties.FileResourcePropertiesFactory
-com.ibm.commons.runtime.properties.MetaResourcePropertiesFactory

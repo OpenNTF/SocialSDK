@@ -13,7 +13,7 @@
   </parent>
 
   <build>
-    <directory>../../../target/${project.groupId}/${project.artifactId}</directory>
+    <directory>../../../../target/${project.groupId}/${project.artifactId}</directory>
   </build>
   
   <modules>

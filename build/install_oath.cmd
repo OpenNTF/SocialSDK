@@ -1,4 +1,0 @@
-call mvn install:install-file  -Dfile=../java/prereq/eclipse/plugins/net.oauth.core/lib/oauth-20100527.jar -DgroupId=net.oauth.core -DartifactId=oauth -Dversion=20100527 -Dpackaging=jar  
-call mvn install:install-file  -Dfile=../java/prereq/eclipse/plugins/net.oauth.consumer/lib/oauth-consumer-20100527.jar -DgroupId=net.oauth.core -DartifactId=oauth-consumer -Dversion=20100527 -Dpackaging=jar 			  
-call mvn install:install-file  -Dfile=../java/prereq/eclipse/plugins/net.oauth.provider/lib/oauth-provider-20100527.jar -DgroupId=net.oauth.core -DartifactId=oauth-provider -Dversion=20100527 -Dpackaging=jar   
-call mvn install:install-file  -Dfile=../java/prereq/eclipse/plugins/net.oauth.httpclient/lib/oauth-httpclient4-20090913.jar -DgroupId=net.oauth.core -DartifactId=oauth-httpclient -Dversion=20090913 -Dpackaging=jar 				  

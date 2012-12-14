@@ -7,6 +7,6 @@
     <groupId>com.ibm.sbt.domino</groupId>
     <artifactId>domino.parent</artifactId>
     <version>1.0.0</version>
-    <relativePath>../../../../../build/domino</relativePath>
+    <relativePath>../../../../build/domino</relativePath>
   </parent>  
 </project>

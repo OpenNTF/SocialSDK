@@ -7,7 +7,7 @@
     <groupId>com.ibm.sbt.sample</groupId>
     <artifactId>sample.parent</artifactId>
     <version>1.0.0</version>
-    <relativePath>../../../../../build/sample</relativePath>
+    <relativePath>../../../build/sample</relativePath>
   </parent>
 
   <build>

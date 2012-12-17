@@ -1,11 +1,11 @@
-#Fri Sep 14 15:30:49 IST 2012
+#Mon Dec 17 15:49:36 GMT 2012
 dojo-attach-event-attribute-name=dojoAttachEvent
 dojo-dijit-css=dijit/themes/dijit.css
 dojo-id-attribute-name=jsId
 js-namespace=portlet.namespace_7bea1ae563
 generate-helper-classes=true
 dojo-version-attribute-name=1.4.3_IBM (21629)
-dojo-root=C\:\\Portal7\\WebSphere\\PortalServer\\theme\\wp.theme.dojo\\installedApps\\dojo.ear\\dojo.war\\v1.4.3
+dojo-root=C\:\\IBM\\WebSphere\\PortalServer\\theme\\wp.theme.dojo\\installedApps\\dojo.ear\\dojo.war\\v1.4.3
 dojo-attach-point-attribute-name=dojoAttachPoint
 eclipse.preferences.version=1
 dojo-bootstrap-js=dojo/dojo.js

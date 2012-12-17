@@ -2,10 +2,8 @@ require(["sbt/connections/ActivityStreamService", "sbt/connections/ActivityStrea
 	dom.byId("loading").style.visibility = "visible"; 
 	var activityStreamService = new ActivityStreamService();
 	var communityID = "%{sample.communityId}";
-	activityStreamService.getStream({
-		userType : ASConstants.ASUser.COMMUNITY+communityID,
-		groupType : ASConstants.ASGroup.ALL,
-		applicationType : ASConstants.ASApplication.ALL,
+	activityStreamService.getUpdatesFromACommunity({
+		communityID : communityID,
 		load : function(as) {
 			var aEntries = as.getEntries();//get array of all activityEntry Objects
 			if(aEntries.length == 0){

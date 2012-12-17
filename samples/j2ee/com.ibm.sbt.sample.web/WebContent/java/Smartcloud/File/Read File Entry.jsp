@@ -36,7 +36,7 @@
 			String entryId = Context.get().getProperty("sample.smartcloud.fileEntryId");
 			FileEntry entry = svc.getEntry(entryId);
 			out.println("<br>loaded " + entry.getDisplayName() + " as found at the <a href='"
-					+ entry.getPageURL() + "'>Smartcloud File Page</a>");
+					+ entry.getPageURL() + "'>SmartCloud File Page</a>");
 		} catch (Throwable e) {
 			out.println("<pre>");
 			e.printStackTrace(new PrintWriter(out));

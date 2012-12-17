@@ -14,20 +14,25 @@
  * permissions and limitations under the License.
  */
 package com.ibm.sbt.services.client.connections.files;
+
 /**
- * Files Categories
+ * Files Categories <br>
+ * Enumeration which determines the Categories to be used for Executing FileService API<br>
+ * These are for Pinned , Libraries etc. Different tags in APIs are used if we want to access user libraries
+ * or my libraries ..
+ * 
  * @author Vimal Dhupar
  */
 public enum Categories {
 
-	// These are for Pinned , Libraries etc. Different tags in APIs are used if we want to access 
-	// user libraries or my libraries .. 
-	
-	PINNED("/myfavorites"),
-	MYLIBRARY("/myuserlibrary");
-	String category;
+	PINNED("/myfavorites"), MYLIBRARY("/myuserlibrary");
+	String	category;
+
 	private Categories(String category) {
 		this.category = category;
 	}
-	public String getCategory(){return category;}
+
+	public String getCategory() {
+		return category;
+	}
 }

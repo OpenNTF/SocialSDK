@@ -17,6 +17,7 @@
 package com.ibm.sbt.services.client.connections.profiles;
 
 import java.io.UnsupportedEncodingException;
+
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -34,6 +35,14 @@ import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.SBTServiceException;
 import com.ibm.sbt.services.client.smartcloud.base.BaseEntity;
 import com.ibm.sbt.services.util.AuthUtil;
+
+/**
+ * ProfileService can be used to perform Profile Related operations. This is a dedicated Service for
+ * Connections Profiles.
+ * 
+ * @Represents Connections ProfileService
+ * @author Swati Singh
+ */
 
 public class ProfileService extends BaseService {
 
@@ -98,12 +107,10 @@ public class ProfileService extends BaseService {
 	}
 
 	/**
-	 * getProfiles() - to get multiple profiles
+	 * This method is used to get the profile's of multiple user's. 
 	 * 
 	 * @param userIds
-	 * @return This method is used to get the profile's of multiple user's. Private method, as this
-	 *         functionality is currently not available in smartcloud. Smartcloud does not allow the user to
-	 *         fetch the Profile of some other user - a limitation.
+	 * @return Profile[]
 	 */
 	public Profile[] getProfiles(String[] userIds) {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -138,19 +145,27 @@ public class ProfileService extends BaseService {
 		}
 		return profiles;
 	}
-
+	
 	/**
-	 * getProfile - to get one profile
-	 * 
-	 * @param userId
-	 * @return This method is used by getProfiles method to fetch the Profile's of users, one at a time. this
-	 *         Single argument method, calls the getProfile method with 2 arguments, passing true to load the
-	 *         profile of the person.
+	 * This method is used by getProfiles method to fetch the Profile's of users, one at a time. this
+	 * Single argument method, calls the getProfile method with 2 arguments, passing true to load the
+	 * profile of the person..
+	 *
+	 * @return Profile
 	 */
 	public Profile getProfile(String userId) {
 		return getProfile(userId, true);
 	}
 
+	/**
+	 * Wrapper method , it makes the network call to fetch the Profile's of a user based on load parameter being true
+	 * / false. This method can be called directly by passing the userId / Subscriber id of the user and a
+	 * loaded argument as true / false
+	 *
+	 * @param userId
+	 * @param loaded
+	 * @return Profile
+	 */
 	public Profile getProfile(String userId, boolean loaded) {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getProfile", new Object[] { userId, loaded });
@@ -178,10 +193,10 @@ public class ProfileService extends BaseService {
 	}
 
 	/**
-	 * updatePhoto - to update a User's photo
+	 * Wrapper method to update a User's profile photo
 	 * 
-	 * @param userId
-	 * @return This method is used to update a user's photo.
+	 * @param Profile
+	 * @return boolean
 	 */
 	public boolean updateProfilePhoto(Profile profile) {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -240,10 +255,10 @@ public class ProfileService extends BaseService {
 	}
 
 	/**
-	 * update - to update a User's profile
+	 * Wrapper method to update a User's profile
 	 * 
-	 * @param userId
-	 * @return This method is used to create a user's profile.
+	 * @param Profile
+	 * @return boolean
 	 */
 	public boolean updateProfile(Profile profile) {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -285,6 +300,11 @@ public class ProfileService extends BaseService {
 		return returnVal;
 	}
 
+	/*
+	 * Method to remove the user profile from cache.
+	 * 
+	 * @param userId
+	 */
 	protected void removeProfileDataFromCache(String userId) {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "removeProfileDataFromCache", userId);
@@ -320,6 +340,11 @@ public class ProfileService extends BaseService {
 
 	}
 
+	/*
+	 * Method responsible for loading the profile.
+	 * 
+	 * @param profile
+	 */
 	protected void load(Profile profile) {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "load", profile);
@@ -360,6 +385,12 @@ public class ProfileService extends BaseService {
 		}
 	}
 
+	/*
+	 * Method to check if the Profile is cached. Calls findInCache to find for the profile in Cache.
+	 * 
+	 * @param userId
+	 * @return Document
+	 */
 	private Document getProfileDataFromCache(String userId) {
 		// this should return just the content ..xmldoc
 		// should a have a common caching framework for all services
@@ -372,6 +403,12 @@ public class ProfileService extends BaseService {
 		return data;
 	}
 
+	/*
+	 * addProfileDataToCache() Method to cache the Profile of the User.
+	 * 
+	 * @param userId
+	 * @param content
+	 */
 	private void addProfileDataToCache(String userId, Document content) {
 		// If caching is disabled , no action
 		if (this.cacheSize == 0) {
@@ -390,7 +427,12 @@ public class ProfileService extends BaseService {
 		cache.put(userId, content);
 	}
 
-	// look at java script implementation
+	/*
+	 * Method to search the cache
+	 * 
+	 * @param userId
+	 * @return Document
+	 */
 	private Document findInCache(String userId) {
 		String key;
 		Set<String> keys = cache.keySet();
@@ -415,17 +457,23 @@ public class ProfileService extends BaseService {
 	}
 
 	/*
+	 * Method responsible for generating appropriate REST URLs
+	 * 
 	 * @param ProfileEntity ( Ref Class : ProfileEntity )
 	 * @param ProfileType ( Ref Class : ProfileType )
+	 *
+	 *  @return String
 	 */
 	public String resolveProfileUrl(String profileEntity, String profileType) {
 		return resolveProfileUrl(profileEntity, profileType, null);
 	}
-
 	/*
+	 * Method responsible for generating appropriate REST URLs
+	 * 
 	 * @param ProfileEntity ( Ref Class : ProfileEntity )
 	 * @param ProfileType ( Ref Class : ProfileType )
 	 * @param params : ( Ref Class : ProfileParams )
+	 * @return String
 	 */
 	public String resolveProfileUrl(String profileEntity, String profileType, Map<String, String> params) {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -482,6 +530,12 @@ public class ProfileService extends BaseService {
 		return proBaseUrl.toString();
 	}
 
+	/*
+	 * Method to check if the userid is email. Current check is based on finding @ in the userid.
+	 * 
+	 * @param userId
+	 * @return boolean
+	 */
 	protected boolean isEmail(String userId) {
 		if (StringUtil.isEmpty(userId)) {
 			return false;

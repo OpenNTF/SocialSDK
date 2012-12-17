@@ -32,13 +32,11 @@ import com.ibm.commons.util.io.json.JsonObject;
 import com.ibm.sbt.services.client.BaseService;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
-import com.ibm.sbt.services.client.InvalidInputException;
 import com.ibm.sbt.services.client.SBTServiceException;
 import com.ibm.sbt.services.client.activitystreams.model.ActivityStreamEntry;
 import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
 import com.ibm.sbt.services.util.AuthUtil;
-import com.ibm.sbt.services.util.CommonUtils;
 import com.ibm.sbt.util.DataNavigator;
 
 /**
@@ -47,6 +45,14 @@ import com.ibm.sbt.util.DataNavigator;
  * Relies on values of User, Group and Application to construct URLs and perform Network operations. Constructs {@link ActivityStreamEntry} objects after parsing the JSON response from Connections server
  * 
  * @author Manish Kataria
+ * 
+ *         <pre>
+ * Sample Usage
+ *  {@code
+ * 	ActivityStreamService _service = new ActivityStreamService();
+ * 	List<ActivityStreamEntry> _entries = (List) _service.getUpdatesFromMyNetwork();
+ * }
+ * </pre>
  * @see http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=IBM_Connections_Activity_Stream_API&content=pdcontent
  */
 
@@ -324,14 +330,10 @@ public class ActivityStreamService extends BaseService {
 	 * @param id
 	 *            Userid of the user whom updates are required
 	 * @return List<ActivityStreamEntry>
-	 * @throws InvalidInputException
-	 *             ,SBTServiceException
+	 * @throws SBTServiceException
+	 *             ,IllegalArgumentException
 	 */
-	public List<ActivityStreamEntry> getUpdatesFromUser(String userId) throws InvalidInputException,
-			SBTServiceException {
-		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("userId", userId);
-		CommonUtils.checkForNull("ActivityStreamService", "getUpdatesFromUser", param);
+	public List<ActivityStreamEntry> getUpdatesFromUser(String userId) throws SBTServiceException {
 		return getUpdatesFromUser(userId, null);
 
 	}
@@ -346,18 +348,19 @@ public class ActivityStreamService extends BaseService {
 	 * @param params
 	 *            Additional parameters used for constructing URL's
 	 * @return List<ActivityStreamEntry>
-	 * @throws InvalidInputException
-	 *             ,SBTServiceException
+	 * @throws SBTServiceException
+	 *             ,IllegalArgumentException
 	 */
 	public List<ActivityStreamEntry> getUpdatesFromUser(String userId, Map<String, String> params)
-			throws InvalidInputException, SBTServiceException {
+			throws SBTServiceException {
+
+		if (StringUtil.isEmpty(userId)) {
+			throw new IllegalArgumentException("userid passed was null");
+		}
+
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getUpdatesFromUser" + userId);
 		}
-
-		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("userId", userId);
-		CommonUtils.checkForNull("ActivityStreamService", "getUpdatesFromUser", param);
 
 		if (null == params) {
 			params = new HashMap<String, String>();
@@ -377,15 +380,11 @@ public class ActivityStreamService extends BaseService {
 	 * @param id
 	 *            Community of the community for which updates are required
 	 * @return List<ActivityStreamEntry>
-	 * @throws InvalidInputException
-	 *             ,SBTServiceException
+	 * @throws SBTServiceException
+	 *             ,IllegalArgumentException
 	 */
 	// Retuns updates from a particular Community
-	public List<ActivityStreamEntry> getUpdatesFromCommunity(String communityId)
-			throws InvalidInputException, SBTServiceException {
-		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("communityId", communityId);
-		CommonUtils.checkForNull("ActivityStreamService", "getUpdatesFromCommunity", param);
+	public List<ActivityStreamEntry> getUpdatesFromCommunity(String communityId) throws SBTServiceException {
 		return getUpdatesFromCommunity(communityId, null);
 
 	}
@@ -400,18 +399,19 @@ public class ActivityStreamService extends BaseService {
 	 * @param params
 	 *            Additional parameters used for constructing URL's
 	 * @return List<ActivityStreamEntry>
-	 * @throws InvalidInputException
-	 *             ,SBTServiceException
+	 * @throws SBTServiceException
+	 *             ,IllegalArgumentException
 	 */
 	public List<ActivityStreamEntry> getUpdatesFromCommunity(String communityId, Map<String, String> params)
-			throws InvalidInputException, SBTServiceException {
+			throws SBTServiceException {
+
+		if (StringUtil.isEmpty(communityId)) {
+			throw new IllegalArgumentException("communityid passed was null");
+		}
+
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getUpdatesFromUser" + communityId);
 		}
-
-		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("communityId", communityId);
-		CommonUtils.checkForNull("ActivityStreamService", "getUpdatesFromCommunity", param);
 
 		if (null == params) {
 			params = new HashMap<String, String>();
@@ -430,11 +430,10 @@ public class ActivityStreamService extends BaseService {
 	 * @param query
 	 *            String to be searched for
 	 * @return List<ActivityStreamEntry>
-	 * @throws InvalidInputException
-	 *             ,SBTServiceException
+	 * @throws SBTServiceException
+	 *             ,IllegalArgumentException
 	 */
-	public List<ActivityStreamEntry> searchForQuery(String query) throws InvalidInputException,
-			SBTServiceException {
+	public List<ActivityStreamEntry> searchForQuery(String query) throws SBTServiceException {
 		return searchForQuery(query, null);
 	}
 
@@ -448,18 +447,19 @@ public class ActivityStreamService extends BaseService {
 	 * @param params
 	 *            Additional parameters used for constructing URL's
 	 * @return List<ActivityStreamEntry>
-	 * @throws InvalidInputException
-	 *             ,SBTServiceException
+	 * @throws SBTServiceException
+	 *             ,IllegalArgumentException
 	 */
 	public List<ActivityStreamEntry> searchForQuery(String query, Map<String, String> params)
-			throws InvalidInputException, SBTServiceException {
+			throws SBTServiceException {
+
+		if (StringUtil.isEmpty(query)) {
+			throw new IllegalArgumentException("query passed was null");
+		}
+
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "searchFor" + query);
 		}
-
-		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("query", query);
-		CommonUtils.checkForNull("ActivityStreamService", "searchForQuery", param);
 
 		// /@public/@all/@all?rollup=true&query=manish
 		if (null == params) {
@@ -479,12 +479,11 @@ public class ActivityStreamService extends BaseService {
 	 * @param query
 	 *            Tag to be searched for ( in case of multiple tags, provide comma separated String )
 	 * @return List<ActivityStreamEntry>
-	 * @throws InvalidInputException
-	 *             ,SBTServiceException
+	 * @throws SBTServiceException
+	 *             ,IllegalArgumentException
 	 */
-	public List<ActivityStreamEntry> searchForTags(String query) throws InvalidInputException,
-			SBTServiceException {
-		return searchForTags(query, null);
+	public List<ActivityStreamEntry> searchForTags(String tags) throws SBTServiceException {
+		return searchForTags(tags, null);
 	}
 
 	/**
@@ -497,19 +496,20 @@ public class ActivityStreamService extends BaseService {
 	 * @param params
 	 *            Additional parameters used for constructing URL's
 	 * @return List<ActivityStreamEntry>
-	 * @throws InvalidInputException
-	 *             ,SBTServiceException
+	 * @throws SBTServiceException
+	 *             ,IllegalArgumentException
 	 */
-	public List<ActivityStreamEntry> searchForTags(String query, Map<String, String> params)
-			throws InvalidInputException, SBTServiceException {
+	public List<ActivityStreamEntry> searchForTags(String tags, Map<String, String> params)
+			throws SBTServiceException {
+
+		if (StringUtil.isEmpty(tags)) {
+			throw new IllegalArgumentException("tags passed was null");
+		}
+
 		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "searchForTags" + query);
+			logger.entering(sourceClass, "searchForTags" + tags);
 		}
 		// /@me/@all/@all?rollup=true&filters=[{'type':'tag','values':['iphone','android']}]&facetRequests=[{'people':5}]
-
-		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("query", query);
-		CommonUtils.checkForNull("ActivityStreamService", "searchForTags", param);
 
 		if (null == params) {
 			params = new HashMap<String, String>();
@@ -517,11 +517,11 @@ public class ActivityStreamService extends BaseService {
 		}
 
 		params.put(ActivityStreamRequestParams.rollUp, "true");
-		if (!(query.contains(","))) {
-			params.put(ActivityStreamRequestParams.filters, "[{'type':'tag','values':['" + query + "']}]");
+		if (!(tags.contains(","))) {
+			params.put(ActivityStreamRequestParams.filters, "[{'type':'tag','values':['" + tags + "']}]");
 		} else {
 			StringBuffer modifiedQuery = new StringBuffer();
-			StringTokenizer tokenizer = new StringTokenizer(query, ",");
+			StringTokenizer tokenizer = new StringTokenizer(tags, ",");
 			boolean addseperator = false;
 			while (tokenizer.hasMoreElements()) {
 				if (addseperator) {
@@ -545,11 +545,11 @@ public class ActivityStreamService extends BaseService {
 	 * @param query
 	 *            FilterType to be searched for
 	 * @return List<ActivityStreamEntry>
-	 * @throws InvalidInputException
-	 *             ,SBTServiceException
+	 * @throws SBTServiceException
+	 *             ,IllegalArgumentException
 	 */
 	public List<ActivityStreamEntry> searchbyFilters(String filterType, String query)
-			throws InvalidInputException, SBTServiceException {
+			throws SBTServiceException {
 		return searchbyFilters(filterType, query, null);
 	}
 
@@ -563,11 +563,20 @@ public class ActivityStreamService extends BaseService {
 	 * @param params
 	 *            Additional parameters used for constructing URL's
 	 * @return List<ActivityStreamEntry>
-	 * @throws InvalidInputException
-	 *             ,SBTServiceException
+	 * @throws SBTServiceException
+	 *             ,IllegalArgumentException
 	 */
 	public List<ActivityStreamEntry> searchbyFilters(String filterType, String query,
-			Map<String, String> params) throws InvalidInputException, SBTServiceException {
+			Map<String, String> params) throws SBTServiceException {
+
+		if (StringUtil.isEmpty(filterType)) {
+			throw new IllegalArgumentException("filterType passed was null");
+		}
+
+		if (StringUtil.isEmpty(query)) {
+			throw new IllegalArgumentException("query passed was null");
+		}
+
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "searchbyFilters" + query);
 		}
@@ -577,11 +586,6 @@ public class ActivityStreamService extends BaseService {
 			params = new HashMap<String, String>();
 			params.put(ActivityStreamRequestParams.lang, getUserLanguage());
 		}
-
-		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("filterType", filterType);
-		param.put("query", query);
-		CommonUtils.checkForNull("ActivityStreamService", "searchbyFilters", param);
 
 		params.put(ActivityStreamRequestParams.rollUp, "true");
 		if (!(query.contains(","))) {
@@ -613,12 +617,11 @@ public class ActivityStreamService extends BaseService {
 	 * @param Complete
 	 *            search pattern, check Connections documentation for generating Search patterns
 	 * @return List<ActivityStreamEntry>
-	 * @throws InvalidInputException
-	 *             ,SBTServiceException
+	 * @throws SBTServiceException
+	 *             ,IllegalArgumentException
 	 */
 	// Generic Search
-	public List<ActivityStreamEntry> search(String searchpattern) throws InvalidInputException,
-			SBTServiceException {
+	public List<ActivityStreamEntry> search(String searchpattern) throws SBTServiceException {
 		return search(searchpattern, null);
 	}
 
@@ -632,11 +635,16 @@ public class ActivityStreamService extends BaseService {
 	 * @param params
 	 *            Additional parameters used for constructing URL's
 	 * @return List<ActivityStreamEntry>
-	 * @throws InvalidInputException
-	 *             ,SBTServiceException
+	 * @throws SBTServiceException
+	 *             ,IllegalArgumentException
 	 */
 	public List<ActivityStreamEntry> search(String searchpattern, Map<String, String> params)
-			throws InvalidInputException, SBTServiceException {
+			throws SBTServiceException {
+
+		if (StringUtil.isEmpty(searchpattern)) {
+			throw new IllegalArgumentException("searchpattern passed was null");
+		}
+
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "search" + searchpattern);
 		}
@@ -646,10 +654,6 @@ public class ActivityStreamService extends BaseService {
 			params = new HashMap<String, String>();
 			params.put(ActivityStreamRequestParams.lang, getUserLanguage());
 		}
-
-		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("searchpattern", searchpattern);
-		CommonUtils.checkForNull("ActivityStreamService", "search", param);
 
 		params.put(ActivityStreamRequestParams.rollUp, "true");
 		params.put(ActivityStreamRequestParams.custom, searchpattern);
@@ -815,17 +819,17 @@ public class ActivityStreamService extends BaseService {
 	 * @param jsondata
 	 * @param header
 	 * @return List<ActivityStreamEntry>
-	 * @throws InvalidInputException
 	 * @throws SBTServiceException
-	 *             ,SBTServiceException
+	 *             ,IllegalArgumentException
 	 */
 	public void postEntry(String user, String group, String application, JsonJavaObject postPayload,
-			Map<String, String> header) throws InvalidInputException, SBTServiceException {
-		try {
+			Map<String, String> header) throws SBTServiceException {
 
-			Map<String, Object> param = new HashMap<String, Object>();
-			param.put("postPayload", postPayload);
-			CommonUtils.checkForNull("ActivityStreamService", "postEntry", param);
+		if (null == postPayload) {
+			throw new IllegalArgumentException("postPayload passed was null");
+		}
+
+		try {
 
 			ClientService svc = endpoint.getClientService();
 			svc.post(resolveUrlForPostingAS(user, group, ""), null, header, postPayload,
@@ -843,22 +847,20 @@ public class ActivityStreamService extends BaseService {
 	 * @param jsondata
 	 * @param header
 	 * @return List<ActivityStreamEntry>
-	 * @throws InvalidInputException
 	 * @throws SBTServiceException
-	 *             ,SBTServiceException
+	 *             ,IllegalArgumentException
 	 */
 
 	/*
 	 * This method allows user to set json payload and headers Rest of the parameters like user,group and app are assumed to be default
 	 */
-	public void postEntry(JsonJavaObject postPayload, Map<String, String> header)
-			throws InvalidInputException, SBTServiceException {
+	public void postEntry(JsonJavaObject postPayload, Map<String, String> header) throws SBTServiceException {
+
+		if (null == postPayload) {
+			throw new IllegalArgumentException("postPayload passed was null");
+		}
+
 		try {
-
-			Map<String, Object> param = new HashMap<String, Object>();
-			param.put("postPayload", postPayload);
-			CommonUtils.checkForNull("ActivityStreamService", "postEntry", param);
-
 			ClientService svc = endpoint.getClientService();
 			svc.post(resolveUrlForPostingAS(ASUser.ME.getUserType(), ASGroup.ALL.getGroupType(), ""), null,
 					header, postPayload, ClientService.FORMAT_JSON);

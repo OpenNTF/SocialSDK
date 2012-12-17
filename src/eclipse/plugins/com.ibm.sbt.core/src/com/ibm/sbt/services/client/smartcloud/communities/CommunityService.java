@@ -1,16 +1,16 @@
 /*
  * © Copyright IBM Corp. 2012
  * 
- * Licensed under the Apache License, Version 2.0 (the "License"); 
- * you may not use this file except in compliance with the License. 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at:
  * 
- * http://www.apache.org/licenses/LICENSE-2.0 
+ * http://www.apache.org/licenses/LICENSE-2.0
  * 
- * Unless required by applicable law or agreed to in writing, software 
- * distributed under the License is distributed on an "AS IS" BASIS, 
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 
- * implied. See the License for the specific language governing 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+ * implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
 
@@ -27,7 +27,7 @@ import com.ibm.sbt.services.client.smartcloud.base.BaseEntity;
 import com.ibm.sbt.services.client.smartcloud.communities.util.XMLCommunityPayloadBuilder;
 
 /**
- * @Represents Smartcloud CommunitiesService
+ * @Represents SmartCloud CommunitiesService
  * @author Carlos Manias
  */
 public class CommunityService extends BaseService {
@@ -35,30 +35,30 @@ public class CommunityService extends BaseService {
 	private static final String	sourceClass				= CommunityService.class.getName();
 	private static final Logger	logger					= Logger.getLogger(sourceClass);
 	private static String		DEFAULT_HANDLER_NAME	= "XML";							/*
-																							 * Setting default
-																							 * format to XML.
-																							 * Need to discuss
-																							 * what this
-																							 * should be.
-																							 */
+	 * Setting default
+	 * format to XML.
+	 * Need to discuss
+	 * what this
+	 * should be.
+	 */
 
 	private static int			DEFAULT_CACHE_SIZE		= 0;								/*
-																							 * Setting default
-																							 * size to 0. Need
-																							 * to discuss what
-																							 * this should be.
-																							 */
+	 * Setting default
+	 * size to 0. Need
+	 * to discuss what
+	 * this should be.
+	 */
 
 	private static enum CommunitiesAPI {
 		GETALLCOMMUNITIES("/communities/service/atom/communities/all"), GETCOMMUNITYENTRY(
-				"/communities/service/atom/community/instance"), GETMYCOMMUNITIES(
-				"/communities/service/atom/communities/my"), GETCOMMUNITYMEMBERS(
-				"/communities/service/atom/community/members"), CREATECOMMUNITY(
-				"/communities/service/atom/communities/my"), DELETECOMMUNITY(
-				"/communities/service/atom/community/instance"), UPDATECOMMUNITY(
-				"/communities/service/atom/community/instance"), ADDCOMMUNITYMEMBER(
-				"/communities/service/atom/community/members"), DELETECOMMUNITYMEMBER(
-				"/communities/service/atom/community/members");
+		"/communities/service/atom/community/instance"), GETMYCOMMUNITIES(
+		"/communities/service/atom/communities/my"), GETCOMMUNITYMEMBERS(
+		"/communities/service/atom/community/members"), CREATECOMMUNITY(
+		"/communities/service/atom/communities/my"), DELETECOMMUNITY(
+		"/communities/service/atom/community/instance"), UPDATECOMMUNITY(
+		"/communities/service/atom/community/instance"), ADDCOMMUNITYMEMBER(
+		"/communities/service/atom/community/members"), DELETECOMMUNITYMEMBER(
+		"/communities/service/atom/community/members");
 
 		private final String	url;
 
@@ -243,7 +243,7 @@ public class CommunityService extends BaseService {
 		boolean success = false;
 		try {
 			success = super.createData(CommunitiesAPI.CREATECOMMUNITY.getUrl(), parameters, content,
-					"communityUuid");
+			"communityUuid");
 		} catch (Exception e) {
 			// TODO add service specific checked exception and relative handling in examples.
 			e.printStackTrace();
@@ -270,7 +270,7 @@ public class CommunityService extends BaseService {
 		boolean success = false;
 		try {
 			success = super.updateData(CommunitiesAPI.UPDATECOMMUNITY.getUrl(), parameters, content,
-					"communityUuid");
+			"communityUuid");
 		} catch (Exception e) {
 			// TODO add service specific checked exception and relative handling in examples.
 			e.printStackTrace();
@@ -328,7 +328,7 @@ public class CommunityService extends BaseService {
 		boolean success = false;
 		try {
 			success = super.createData(CommunitiesAPI.ADDCOMMUNITYMEMBER.getUrl(), parameters, content,
-					"communityUuid");
+			"communityUuid");
 		} catch (ClientServicesException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -356,7 +356,7 @@ public class CommunityService extends BaseService {
 		boolean success = false;
 		try {
 			success = super.deleteData(CommunitiesAPI.DELETECOMMUNITYMEMBER.getUrl(), parameters,
-					"communityUuid");
+			"communityUuid");
 		} catch (Exception e) {
 			// TODO add service specific checked exception and relative handling in examples.
 			e.printStackTrace();

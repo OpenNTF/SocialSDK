@@ -14,19 +14,24 @@
  * permissions and limitations under the License.
  */
 package com.ibm.sbt.services.client.connections.files;
+
 /**
- * Files Views
+ * Files Views<br>
+ * Enumeration which determines the Views to be used for Executing FileService API
+ * 
  * @author Vimal Dhupar
  */
 public enum Views {
 
-	FILES("/documents"),
-	FOLDERS("/collections"),
-	RECYCLEBIN("/view/recyclebin");
-	
-	String views;
+	FILES("/documents"), FOLDERS("/collections"), RECYCLEBIN("/view/recyclebin");
+
+	String	views;
+
 	private Views(String views) {
 		this.views = views;
 	}
-	public String getViews(){return views;}
+
+	public String getViews() {
+		return views;
+	}
 }

@@ -9,11 +9,27 @@ import org.w3c.dom.NodeList;
 
 import com.ibm.commons.xml.DOMUtil;
 import com.ibm.commons.xml.XMLException;
+import com.ibm.sbt.services.client.SBTServiceException;
+
+/**
+ * This file contains the converter functions, these functions are used by Community Service wrapper methods
+ * and return the data in required type
+ * 
+ * @author Swati Singh
+ */
 
 public class Converter {
 	static final String sourceClass = Converter.class.getName();
     static final Logger logger = Logger.getLogger(sourceClass);
-	
+    
+    /**
+	 * This method returns a array of members of a community. This is called by getMembers method of CommunityService 
+	 * 
+	 * @param cs
+	 * @param Data
+	 * @return Member[] 
+	 * @throws XMLException
+	 */
 	static public Member[] returnMembers(CommunityService cs, Document data) throws XMLException
 	{
 		if (logger.isLoggable(Level.FINEST)) {
@@ -37,6 +53,14 @@ public class Converter {
 		return members;
 	}
 	
+	 /**
+	 * This method returns a array of communities. This is called by GetMyCommunities/GetPublicCommunities/GetSubCommunities methods of CommunityService 
+	 * 
+	 * @param cs
+	 * @param Data
+	 * @return Community[] 
+	 * @throws XMLException
+	 */
 	static public Community[] returnCommunities(CommunityService cs, Document data) throws XMLException
 	{
 		if (logger.isLoggable(Level.FINEST)) {
@@ -64,7 +88,14 @@ public class Converter {
 		return community;
 	}
 	
-	
+	 /**
+	 * This method returns a array of bookmarks. This is called by GetBookmarks methods of CommunityService 
+	 * 
+	 * @param cs
+	 * @param Data
+	 * @return Bookmark[] 
+	 * @throws XMLException
+	 */
 	static public Bookmark[] returnBookmarks(CommunityService cs, Document data) throws XMLException
     {	
 		if (logger.isLoggable(Level.FINEST)) {
@@ -88,6 +119,14 @@ public class Converter {
     	return bookmarks;
     }
 
+	 /**
+	 * This method returns a array of forum Topics. This is called by GetForumTopics methods of CommunityService 
+	 * 
+	 * @param cs
+	 * @param Data
+	 * @return ForumTopic[] 
+	 * @throws XMLException
+	 */
 	static public ForumTopic[] returnForumTopics(CommunityService cs, Document data) throws XMLException
 	{	
 		if (logger.isLoggable(Level.FINEST)) {

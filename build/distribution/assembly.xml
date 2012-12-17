@@ -17,27 +17,18 @@
         <include>com.ibm.sbt.sdk:com.ibm.commons.xml</include>
         <include>com.ibm.sbt.sdk:com.ibm.sbt.core</include>
         <include>com.ibm.sbt.sdk:com.ibm.sbt.playground</include>
-        <include>com.ibm.sbt.sdk:com.ibm.sbt.was</include>
-        <include>com.ibm.sbt.sdk:com.ibm.sbt.web</include>
       </includes>
       <binaries>
         <outputDirectory>sbtsdk/redist/jar</outputDirectory>
+        <outputFileNameMapping>${module.artifactId}.${module.extension}</outputFileNameMapping>
         <unpack>false</unpack>
       </binaries>
-	  <!-- TODO find out why this doesn't work
-	  <sources>
-		<outputDirectory>redist/source</outputDirectory>
-	  </sources>
-	  -->
     </moduleSet>
     <moduleSet>  
       <useAllReactorProjects>true</useAllReactorProjects>
       <includes>
+        <include>com.ibm.sbt.sdk:sbt</include>
         <include>com.ibm.sbt.sdk:sbt.dojo180</include>
-		<!--
-        <include>com.ibm.sbt.sdk:sbt.jquery182</include>
-        <include>com.ibm.sbt.sdk:sbt.oneui303</include>
-		-->
 	  </includes>
       <binaries>
         <outputDirectory>sbtsdk/redist/war</outputDirectory>
@@ -60,27 +51,6 @@
       <useAllReactorProjects>true</useAllReactorProjects>
       <includes>
         <include>com.ibm.sbt.sample:sbt.sample.portlets</include>
-	  </includes>
-      <binaries>
-        <outputDirectory>sbtsdk/samples/ear</outputDirectory>
-        <outputFileNameMapping>${module.artifactId}.${module.extension}</outputFileNameMapping>
-        <unpack>false</unpack>
-      </binaries>
-    </moduleSet>
-    <moduleSet>  
-      <useAllReactorProjects>true</useAllReactorProjects>
-      <includes>
-        <include>com.ibm.sbt.sample:sbt.sample.web</include>
-	  </includes>
-      <binaries>
-        <outputDirectory>sbtsdk/samples/war</outputDirectory>
-        <outputFileNameMapping>${module.artifactId}.${module.extension}</outputFileNameMapping>
-        <unpack>false</unpack>
-      </binaries>
-    </moduleSet>
-    <moduleSet>  
-      <useAllReactorProjects>true</useAllReactorProjects>
-      <includes>
         <include>com.ibm.sbt.sample:acme.social.sample</include>
 	  </includes>
       <binaries>
@@ -92,28 +62,9 @@
     <moduleSet>  
       <useAllReactorProjects>true</useAllReactorProjects>
       <includes>
+        <include>com.ibm.sbt.sample:sbt.sample.web</include>
         <include>com.ibm.sbt.sample:acme.social.sample.dataapp</include>
-	  </includes>
-      <binaries>
-        <outputDirectory>sbtsdk/samples/war</outputDirectory>
-        <outputFileNameMapping>${module.artifactId}.${module.extension}</outputFileNameMapping>
-        <unpack>false</unpack>
-      </binaries>
-    </moduleSet>
-    <moduleSet>  
-      <useAllReactorProjects>true</useAllReactorProjects>
-      <includes>
         <include>com.ibm.sbt.sample:acme.social.sample.webapp</include>
-	  </includes>
-      <binaries>
-        <outputDirectory>sbtsdk/samples/war</outputDirectory>
-        <outputFileNameMapping>${module.artifactId}.${module.extension}</outputFileNameMapping>
-        <unpack>false</unpack>
-      </binaries>
-    </moduleSet>
-    <moduleSet>  
-      <useAllReactorProjects>true</useAllReactorProjects>
-      <includes>
         <include>com.ibm.sbt.sample:acme.sample.webapp</include>
     </includes>
       <binaries>
@@ -124,37 +75,29 @@
     </moduleSet>
   </moduleSets>
   <fileSets>
-    <!-- workaround for the sbt module issue were the packaged war contains provided jars -->
     <fileSet>
-      <directory>../../target/com.ibm.sbt.sdk/sbt</directory>
-      <outputDirectory>sbtsdk/redist/war</outputDirectory>
-      <includes>
-        <include>sbt.war</include>
-      </includes>
-    </fileSet>
-    <fileSet>
-      <directory>../../target/doc/javadoc</directory>
+      <directory>../../../target/doc/javadoc</directory>
       <outputDirectory>sbtsdk/doc/javadoc</outputDirectory>
       <includes>
         <include>**/*.*</include>
       </includes>
     </fileSet>
     <fileSet>
-      <directory>../../target/doc/jsdoc</directory>
+      <directory>../../../target/doc/jsdoc</directory>
       <outputDirectory>sbtsdk/doc/jsdoc</outputDirectory>
       <includes>
         <include>**/*.*</include>
       </includes>
     </fileSet>
     <fileSet>
-      <directory>../../target/doc</directory>
+      <directory>../../../target/doc</directory>
       <outputDirectory>sbtsdk</outputDirectory>
       <includes>
         <include>version.txt</include>
       </includes>
     </fileSet>
     <fileSet>
-      <directory>../../target/tomcat</directory>
+      <directory>../../../target/tomcat</directory>
       <outputDirectory>sbtsdk/tomcat</outputDirectory>
       <includes>
         <include>**/apache-tomcat-7.0.30-sbt.zip</include>
@@ -162,7 +105,7 @@
       </includes>
     </fileSet>
     <fileSet>
-      <directory>../../java/config</directory>
+      <directory>../../src/config</directory>
       <outputDirectory>sbtsdk/config</outputDirectory>
       <includes>
         <include>*.xml</include>
@@ -192,24 +135,7 @@
       </includes>
     </fileSet>
     <fileSet>
-      <directory>../../java/sdk/eclipse/plugins</directory>
-      <outputDirectory>sbtsdk/source</outputDirectory>
-	  <excludes>
-	    <exclude>com.ibm.sbt.jquery182/</exclude>
-	    <exclude>com.ibm.sbt.oneui303/</exclude>
-	    <exclude>com.ibm.sbt.was/</exclude>
-		<exclude>**/bin/</exclude>
-		<exclude>**/pom.xml</exclude>
-		<exclude>**/.jazzignore</exclude>
-		<exclude>**/.apt_generated</exclude>
-		<exclude>**/.factorypath</exclude>
-	  </excludes>
-      <includes>
-        <include>**/*.*</include>
-      </includes>
-    </fileSet>
-    <fileSet>
-      <directory>../../java/sample/eclipse/plugins</directory>
+      <directory>../../src/eclipse/plugins</directory>
       <outputDirectory>sbtsdk/source</outputDirectory>
 	  <excludes>
 		<exclude>**/bin/</exclude>
@@ -223,7 +149,49 @@
       </includes>
     </fileSet>
     <fileSet>
-      <directory>../../java/prereq/eclipse/plugins</directory>
+      <directory>../../src/j2ee</directory>
+      <outputDirectory>sbtsdk/source</outputDirectory>
+	  <excludes>
+		<exclude>**/bin/</exclude>
+		<exclude>**/pom.xml</exclude>
+		<exclude>**/.jazzignore</exclude>
+		<exclude>**/.apt_generated</exclude>
+		<exclude>**/.factorypath</exclude>
+	  </excludes>
+      <includes>
+        <include>**/*.*</include>
+      </includes>
+    </fileSet>
+    <fileSet>
+      <directory>../../samples/j2ee</directory>
+      <outputDirectory>sbtsdk/source</outputDirectory>
+	  <excludes>
+		<exclude>**/bin/</exclude>
+		<exclude>**/pom.xml</exclude>
+		<exclude>**/.jazzignore</exclude>
+		<exclude>**/.apt_generated</exclude>
+		<exclude>**/.factorypath</exclude>
+	  </excludes>
+      <includes>
+        <include>**/*.*</include>
+      </includes>
+    </fileSet>
+    <fileSet>
+      <directory>../../samples/java</directory>
+      <outputDirectory>sbtsdk/source</outputDirectory>
+	  <excludes>
+		<exclude>**/bin/</exclude>
+		<exclude>**/pom.xml</exclude>
+		<exclude>**/.jazzignore</exclude>
+		<exclude>**/.apt_generated</exclude>
+		<exclude>**/.factorypath</exclude>
+	  </excludes>
+      <includes>
+        <include>**/*.*</include>
+      </includes>
+    </fileSet>
+    <fileSet>
+      <directory>../../prereqs/eclipse/plugins</directory>
       <outputDirectory>sbtsdk/source</outputDirectory>
 	  <excludes>
 		<exclude>com.ibm.sbt.libs.was/</exclude>
@@ -239,14 +207,14 @@
       </includes>
     </fileSet>
     <fileSet>
-      <directory>../../java/playground</directory>
+      <directory>../../domino/nsf/playground</directory>
       <outputDirectory>sbtsdk/redist/domino</outputDirectory>
       <includes>
         <include>*.*</include>
       </includes>
     </fileSet>
     <fileSet>
-	  <directory>../../target/com.ibm.sbt.domino/com.ibm.sbt.domino.updatesite</directory>
+	  <directory>../../../target/com.ibm.sbt.domino/com.ibm.sbt.domino.updatesite</directory>
       <outputDirectory>sbtsdk/redist/domino</outputDirectory>
       <includes>
         <include>com.ibm.sbt.domino.updatesite.zip</include>
@@ -254,7 +222,7 @@
     </fileSet>
 	<!--
     <fileSet>
-      <directory>../../java/test/eclipse/plugins</directory>
+      <directory>../../test/j2ee</directory>
       <outputDirectory>sbtsdk/source</outputDirectory>
 	  <excludes>
 	    <exclude>com.ibm.sbt.jasmine.web/</exclude>

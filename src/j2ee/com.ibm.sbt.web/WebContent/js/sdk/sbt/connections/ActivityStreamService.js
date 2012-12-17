@@ -20,8 +20,8 @@
  *  
  * Helpers for accessing the Connections Profiles services
  */
-define(['sbt/_bridge/declare','sbt/connections/core','sbt/connections/ActivityStreamConstants','sbt/Jsonpath','sbt/Endpoint','sbt/lang','sbt/json'],
-		function(declare,core,ASConstants,jsonPath, Endpoint, lang, json) {
+define(['sbt/_bridge/declare','sbt/connections/core','sbt/connections/ActivityStreamConstants','sbt/Jsonpath','sbt/Endpoint','sbt/lang','sbt/json','sbt/log'],
+		function(declare,core,ASConstants,jsonPath, Endpoint, lang, json, log) {
 	/**
 	Javascript APIs for IBM Connections Activity Stream Service.
 	@module sbt.connections.ActivityStreamService
@@ -116,13 +116,11 @@ define(['sbt/_bridge/declare','sbt/connections/core','sbt/connections/ActivitySt
 		_applicationType	:null,
 		
 		constructor: function(options) {
-			if(!options){
-				options = {};
-			}
+			options = options || {};
 			this._endpoint = Endpoint.find(options.endpoint || "connections");
 		},
 		/**
-		Get activity stream for user .
+		Get activity stream based on userType, groupType and applicationType.
 		
 		@method getStream
 		@param {Object} args  Argument object
@@ -146,7 +144,11 @@ define(['sbt/_bridge/declare','sbt/connections/core','sbt/connections/ActivitySt
 			javascript library error object, the status code and the error message.
 		**/
 		getStream: function(args) {
-			this._userType = args.userType || ASConstants.ASUser.PUBLIC; //Default is my updates
+			if(typeof args != "object"){
+				log.error(ASConstants.errorMessages.args_object);
+				return;
+			}
+			this._userType = args.userType || ASConstants.ASUser.PUBLIC; //Default is public updates
 			this._groupType = args.groupType || ASConstants.ASGroup.ALL; // Default is all groups
 			this._applicationType = args.applicationType || ASConstants.ASApplication.ALL; // Default is all Apps
 			var as = new ActivityStream();
@@ -156,7 +158,7 @@ define(['sbt/_bridge/declare','sbt/connections/core','sbt/connections/ActivitySt
 			return as;
 		},
 		/**
-		Get activity stream for user .
+		Post an entry .
 		
 		@method postEntry
 		@param {Object} args  Argument object
@@ -179,7 +181,7 @@ define(['sbt/_bridge/declare','sbt/connections/core','sbt/connections/ActivitySt
 			javascript library error object, the status code and the error message.
 		**/
 		postEntry: function(args) {
-			this._userType = args.userType || ASConstants.ASUser.PUBLIC; //Default is my updates
+			this._userType = args.userType || ASConstants.ASUser.PUBLIC; //Default is public updates
 			this._groupType = args.groupType || ASConstants.ASGroup.ALL; // Default is all groups
 			this._applicationType = args.applicationType || ASConstants.ASApplication.ALL; // Default is all Apps
 			var as = new ActivityStream();
@@ -187,7 +189,7 @@ define(['sbt/_bridge/declare','sbt/connections/core','sbt/connections/ActivitySt
 			return as;
 		},
 		/**
-		Get activity stream for user .
+		Get Updates from user's network.
 		
 		@method getUpdatesFromMyNetwork
 		@param {Object} args  Argument object
@@ -208,9 +210,9 @@ define(['sbt/_bridge/declare','sbt/connections/core','sbt/connections/ActivitySt
 			javascript library error object, the status code and the error message.
 		**/
 		getUpdatesFromMyNetwork: function(args) {
-			this._userType = ASConstants.ASUser.ME; //Default is my updates
-			this._groupType = ASConstants.ASGroup.FRIENDS; // Default is all groups
-			this._applicationType = ASConstants.ASApplication.ALL; // Default is all groups
+			this._userType = ASConstants.ASUser.ME;
+			this._groupType = ASConstants.ASGroup.FRIENDS;
+			this._applicationType = ASConstants.ASApplication.ALL;
 			var as = new ActivityStream();
 			if(args.load || args.handle) {
 				this._load(as,args);
@@ -218,7 +220,7 @@ define(['sbt/_bridge/declare','sbt/connections/core','sbt/connections/ActivitySt
 			return as;
 		},
 		/**
-		Get activity stream for user .
+		Get Status Updates for user.
 		
 		@method getMyStatusUpdates
 		@param {Object} args  Argument object
@@ -239,9 +241,9 @@ define(['sbt/_bridge/declare','sbt/connections/core','sbt/connections/ActivitySt
 			javascript library error object, the status code and the error message.
 		**/
 		getMyStatusUpdates: function(args) {
-			this._userType = ASConstants.ASUser.ME; //Default is my updates
-			this._groupType = ASConstants.ASGroup.ALL; // Default is all groups
-			this._applicationType = ASConstants.ASApplication.STATUS; // Default is all groups
+			this._userType = ASConstants.ASUser.ME;
+			this._groupType = ASConstants.ASGroup.ALL;
+			this._applicationType = ASConstants.ASApplication.STATUS;
 			var as = new ActivityStream();
 			if(args.load || args.handle) {
 				this._load(as,args);
@@ -249,7 +251,7 @@ define(['sbt/_bridge/declare','sbt/connections/core','sbt/connections/ActivitySt
 			return as;
 		},
 		/**
-		Get activity stream for user .
+		Get Updates from people followed by user .
 		
 		@method getUpdatesFromPeopleIFollow
 		@param {Object} args  Argument object
@@ -270,9 +272,9 @@ define(['sbt/_bridge/declare','sbt/connections/core','sbt/connections/ActivitySt
 			javascript library error object, the status code and the error message.
 		**/
 		getUpdatesFromPeopleIFollow: function(args) {
-			this._userType = ASConstants.ASUser.ME; //Default is my updates
-			this._groupType = ASConstants.ASGroup.FOLLOWING; // Default is all groups
-			this._applicationType = ASConstants.ASApplication.PEOPLE; // Default is all groups
+			this._userType = ASConstants.ASUser.ME;
+			this._groupType = ASConstants.ASGroup.FOLLOWING;
+			this._applicationType = ASConstants.ASApplication.PEOPLE;
 			var as = new ActivityStream();
 			if(args.load || args.handle) {
 				this._load(as,args);
@@ -280,7 +282,7 @@ define(['sbt/_bridge/declare','sbt/connections/core','sbt/connections/ActivitySt
 			return as;
 		},
 		/**
-		Get activity stream for user .
+		Get Updates from communities followed by user .
 		
 		@method getUpdatesFromCommunitiesIFollow
 		@param {Object} args  Argument object
@@ -301,9 +303,41 @@ define(['sbt/_bridge/declare','sbt/connections/core','sbt/connections/ActivitySt
 			javascript library error object, the status code and the error message.
 		**/
 		getUpdatesFromCommunitiesIFollow: function(args) {
-			this._userType = ASConstants.ASUser.ME; //Default is my updates
-			this._groupType = ASConstants.ASGroup.ALL; // Default is all groups
-			this._applicationType = ASConstants.ASApplication.COMMUNITIES; // Default is all groups
+			this._userType = ASConstants.ASUser.ME;
+			this._groupType = ASConstants.ASGroup.ALL;
+			this._applicationType = ASConstants.ASApplication.COMMUNITIES;
+			var as = new ActivityStream();
+			if(args.load || args.handle) {
+				this._load(as,args);
+			}
+			return as;
+		},
+		/**
+		Get Updates from a single community .
+		
+		@method getUpdatesFromACommunity
+		@param {Object} args  Argument object
+			@param {String} [communityID] Community ID for which activity stream is to be obtained..
+			@param {Object} [args.parameters] Object containing all query parameters as properties to be passed with get call.
+			@param {Function} [args.load] The function getUpdatesFromCommunitiesIFollow invokes when the activity stream is 
+			loaded from the server. The function expects to receive one parameter, 
+			the loaded ActivityStream object.
+			@param {Function} [args.error] Sometimes the getUpdatesFromCommunitiesIFollow call fail with bad request such as 400  
+			or server errors such as 500. The error parameter is another callback function
+			that is only invoked when an error occurs. This allows to control what happens
+		    when an error occurs without having to put a lot of logic into your load function
+		    to check for error conditions. The parameter passed to the error function is a 
+		    JavaScript Error object indicating what the failure was. From the error object. one can get access to the 
+			javascript library error object, the status code and the error message.
+			@param {Function} [args.handle] This callback is called regardless of whether 
+			the call to get the activity stream completes or fails. The  parameter passed to this callback
+			is the ActivityStream object (or error object). From the error object. one can get access to the 
+			javascript library error object, the status code and the error message.
+		**/
+		getUpdatesFromACommunity: function(args) {
+			this._userType = ASConstants.ASUser.COMMUNITY+args.communityID;
+			this._groupType = ASConstants.ASGroup.ALL;
+			this._applicationType = ASConstants.ASApplication.ALL;
 			var as = new ActivityStream();
 			if(args.load || args.handle) {
 				this._load(as,args);
@@ -320,7 +354,7 @@ define(['sbt/_bridge/declare','sbt/connections/core','sbt/connections/ActivitySt
 				if(errorCallBack)errorCallBack(error);
 				if(handleCallBack)handleCallBack(error);
 			}else{
-				console.log("Error received. Error code = " + error.code + " ,Error message = " + error.message);
+				log.error("Errror received. Error Code = {0}. Error Message = {1}.", error.code, error.message);
 			}
 		},
 		_load: function (as,args) {

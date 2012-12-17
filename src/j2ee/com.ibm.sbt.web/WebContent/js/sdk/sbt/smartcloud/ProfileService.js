@@ -16,7 +16,7 @@
 /**
  * Social Business Toolkit SDK.
  * @author Vimal Dhupar
- * Helpers for accessing the Smartcloud Profiles services
+ * Helpers for accessing the SmartCloud Profiles services
  */
 define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt/Cache','sbt/smartcloud/Subscriber','sbt/Jsonpath','sbt/Endpoint'],
 		function(declare,cfg,lang,con,Cache,Subscriber,jsonPath, Endpoint) {
@@ -247,7 +247,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 	});
 	
 	/**
-	Profile service class associated with a profile service of IBM Smartcloud.
+	Profile service class associated with a profile service of IBM SmartCloud.
 
 	@class ProfileService
 	@constructor

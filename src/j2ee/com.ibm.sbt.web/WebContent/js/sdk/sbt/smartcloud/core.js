@@ -16,12 +16,12 @@
 
 /**
  * Social Business Toolkit SDK. 
- * Helpers for the core Smartcloud capabilities
+ * Helpers for the core SmartCloud capabilities
  */
 define(['sbt/config'],function(sbt) {
 
 	return sbt.smartcloud = {
-		// Namespaces used when parsing the Smartcloud Atom feeds
+		// Namespaces used when parsing the SmartCloud Atom feeds
 		namespaces: {
 			o:			"http://ns.opensocial.org/2008/opensocial",
 			app:		"http://www.w3.org/2007/app",

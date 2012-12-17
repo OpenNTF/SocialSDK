@@ -31,7 +31,7 @@ define([], function() {
 
 	return {
 		/**
-		 * Substitutes the String with pattern {<<number>>} with argument array provided.
+		 * Substitutes the String with pattern {<<number>>} with argument array provided. {-1} is for printing '{' and {-2} is for printing '}' in the text
 		 * 
 		 * @param {String}
 		 *            [str] String to be formatted
@@ -40,13 +40,13 @@ define([], function() {
 		 * @static
 		 * @method substitute
 		 */
-		substitute : function(str, args) {
-			if (str && args && args.length > 0) {
+		substitute : function(str, args, useBlankForUndefined) {
+			if (str && args) {
 				return str.replace(_regex, function(item) {
 					var intVal = parseInt(item.substring(1, item.length - 1));
 					var replace;
 					if (intVal >= 0) {
-						replace = args[intVal];
+						replace = args[intVal] ? args[intVal] : useBlankForUndefined ? "" : "undefined";
 					} else if (intVal == -1) {
 						replace = "{";
 					} else if (intVal == -2) {

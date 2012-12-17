@@ -48,4 +48,4 @@ function sbtGetProperty(ns,name) {
     dojo.require("dijit.Declaration");
 </script>
 
-<%@ include file="ProfileSmartcloud.html"%>
+<%@ include file="ProfileSmartCloud.html"%>

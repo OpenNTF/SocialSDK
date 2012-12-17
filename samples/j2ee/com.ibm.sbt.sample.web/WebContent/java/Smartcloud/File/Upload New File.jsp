@@ -46,7 +46,7 @@
 				FileEntry entry = svc.uploadFile(stream, name, content.length());
 						
 				out.println("<br>Entry " + entry.getDisplayName() + " uploaded, available in <a href='"
-						+ entry.getPageURL() + "'>Smartcloud File Page</a>");
+						+ entry.getPageURL() + "'>SmartCloud File Page</a>");
 			}
 		} catch (Throwable e) {
 			out.println("<pre>");

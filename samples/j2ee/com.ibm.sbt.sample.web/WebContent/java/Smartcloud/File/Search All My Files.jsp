@@ -36,7 +36,7 @@
 			List<FileEntry> entries = svc.getMyFilesAlt();
 			for (FileEntry entry : entries) {
 				out.println("<br>loaded " + entry.getDisplayName() + " as found at the <a href='"
-						+ entry.getPageURL() + "'>Smartcloud File Page</a>");
+						+ entry.getPageURL() + "'>SmartCloud File Page</a>");
 			}
 		} catch (Throwable e) {
 			out.println("<pre>");

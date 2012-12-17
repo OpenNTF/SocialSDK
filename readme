@@ -1,6 +1,6 @@
 Welcome to the IBM Social Business Toolkit SDK!
 
-The Social Business Toolkit SDK is a set of libraries and code samples that you use for connecting to the IBM Social Platform. It covers many product like IBM Connections, IBM Notes/Domino, IBM Sametime. It includes support for many authentication mechanisms, as well as comprehensive wrappers for the REST APIs.
+The Social Business Toolkit SDK is a set of libraries and code samples that you use for connecting to the IBM Social Platform. It covers many products like IBM Connections, IBM Notes/Domino, IBM Sametime. It includes support for many authentication mechanisms, as well as comprehensive wrappers for the REST APIs.
 The SDK can be run on Java-based application servers such WebSphere Application Server, WebSphere Portal, IBM Domino, and Apache Tomcat.
 The entire SDK is delivered using the Apache 2.0 license, and a built version is distributed on OpenNTF at http://ibmsbt.openntf.org.
 

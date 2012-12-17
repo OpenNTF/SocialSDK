@@ -8,16 +8,14 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.Properties;
 
-import javax.servlet.ServletException;
+import org.junit.After;
+import org.junit.Before;
 
-import org.junit.BeforeClass;
-
+import com.ibm.commons.runtime.Application;
 import com.ibm.commons.runtime.Context;
-import com.ibm.sbt.jslibrary.servlet.LibraryServlet;
+import com.ibm.commons.runtime.RuntimeFactory;
+import com.ibm.commons.runtime.impl.app.RuntimeFactoryStandalone;
 import com.ibm.sbt.services.endpoints.Endpoint;
-import com.ibm.sbt.servlet.MockHttpServletRequest;
-import com.ibm.sbt.servlet.MockHttpServletResponse;
-import com.ibm.sbt.servlet.MockServletConfig;
 
 /**
  * BaseUnitTest class to initialize context and Endpoint. All junits should
@@ -28,34 +26,35 @@ import com.ibm.sbt.servlet.MockServletConfig;
  * 
  */
 public abstract class BaseUnitTest {
-	
+
+	private Application application;
+	private Context context;
 	protected Properties properties = new Properties();
-	
+
 	public BaseUnitTest() {
 		try {
 			properties.load(new FileInputStream("config\\test.properties"));
-		} catch (FileNotFoundException e) {			
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-		} catch (IOException e) {			
-			e.printStackTrace();
-		}
-	}
-
-	@BeforeClass
-	public static void setUp() {
-		try {
-			LibraryServlet servlet = new LibraryServlet();
-			servlet.init(new MockServletConfig());
-			MockHttpServletRequest httpRequest = new MockHttpServletRequest();
-			MockHttpServletResponse httpResponse = new MockHttpServletResponse();
-			Context.init(servlet.getApplication(), httpRequest, httpResponse);			
-		} catch (ServletException e) {
-			fail(e.getMessage());
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public static void authenticateEndpoint(Endpoint endpoint, String user, String password) {		
+	@Before
+	public final void setUp() {
+		RuntimeFactory runtimeFactory = new RuntimeFactoryStandalone();
+		application = runtimeFactory.initApplication(null);
+		context = Context.init(application, null, null);
+	}
+
+	@After
+	public final void tearDown() {
+		Context.destroy(context);
+		Application.destroy(application);
+	}
+
+	public static void authenticateEndpoint(Endpoint endpoint, String user, String password) {
 		try {
 			Field userField = endpoint.getClass().getSuperclass().getDeclaredField("user");
 			userField.setAccessible(true);

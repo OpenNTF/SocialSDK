@@ -1,1 +1,1 @@
-com.ibm.sbt.config.TestManagedBeansFactory
+com.ibm.sbt.config.MockManagedBeansFactory

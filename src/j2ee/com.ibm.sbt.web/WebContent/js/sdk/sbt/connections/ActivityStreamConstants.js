@@ -150,7 +150,10 @@ define([],function() {
 		 
 		 WATCH 			: "watch",
 		 WIN 			: "win"
-	}
+	},
+	errorMessages:{
+		args_object	   : "argument passed to get stream should be an Object",
+	},
 
 };
 });

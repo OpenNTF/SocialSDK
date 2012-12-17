@@ -7,6 +7,10 @@ import com.ibm.xsp.extlib.minifier.ExtLibLoaderExtension;
 import com.ibm.xsp.sbtsdk.minifier.SbtWebLoader;
 import com.ibm.xsp.sbtsdk.runtime.XspRuntimeFactory;
 
+/**
+ * Plugin activator
+ * @author priand
+ */
 public class Activator extends Plugin {
 
 	public static Activator instance;

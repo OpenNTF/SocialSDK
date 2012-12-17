@@ -2,19 +2,14 @@ package com.ibm.sbt.services.client.connections.communities;
 
 import static org.junit.Assert.*;
 
-import java.io.File;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.junit.Ignore;
 import org.junit.Test;
-
 import com.ibm.commons.xml.XMLException;
 import com.ibm.sbt.services.BaseUnitTest;
-import com.ibm.sbt.services.client.connections.profiles.Profile;
-import com.ibm.sbt.services.client.connections.profiles.ProfileService;
 
 /**
  * Tests for the java connections Communities API a test class provides its own tests extending the test
@@ -173,82 +168,42 @@ public class CommunityServiceTest extends BaseUnitTest{
 	@Test
 	public final void testCreateCommuniy() throws Exception{
 		CommunityService communityService = new CommunityService();
-		boolean result;
-		try {
-			Community community = communityService.getCommunity("", false);
-			community.setTitle("testCommunity");
-			community.setContent("test Community Content");
-			result = communityService.createCommunity(community);
-		
-		} catch (XMLException e) {
-			fail(e.getMessage());
-			return;
-		}
-		assertEquals(true, result);	
+		Community community = communityService.getCommunity("", false);
+		community.setTitle("testCommunity");
+		community.setContent("test Community Content");
+		assertTrue(communityService.createCommunity(community));
 	}
 	
 	@Test
 	public final void testUpdateCommuniy() throws Exception{
 		CommunityService communityService = new CommunityService();
-		boolean result;
-		try {			
-			Community community = communityService.getCommunity(properties.getProperty("communityUuid"));
-			community.setTitle("test Title");
-			community.setContent("test Content");
-			result = communityService.updateCommunity(community);
-		
-		} catch (XMLException e) {
-			fail(e.getMessage());
-			return;
-		}
-		assertEquals(true, result);	
+		Community community = communityService.getCommunity(properties.getProperty("communityUuid"));
+		community.setTitle("test Title");
+		community.setContent("test Content");
+		assertTrue(communityService.updateCommunity(community));
+	
 	}
 
 	@Test
 	public final void testAddMember() throws Exception{
 		CommunityService communityService = new CommunityService();
-		boolean result;
-		try {			
-			Member member = new Member(communityService, properties.getProperty("email1"));
-			Community community = communityService.getCommunity(properties.getProperty("communityUuid"), false);
-			
-			result = communityService.addMember(community,member);
-		
-		} catch (XMLException e) {
-			fail(e.getMessage());
-			return;
-		}
-		assertEquals(true, result);	
+		Member member = new Member(communityService, properties.getProperty("email1"));
+		Community community = communityService.getCommunity(properties.getProperty("communityUuid"), false);
+		assertTrue(communityService.addMember(community,member));
 	}
 
 	@Test
 	public final void testRemoveMember() throws Exception{
 		CommunityService communityService = new CommunityService();
-		boolean result;
-		try {			
-			Member member = new Member(communityService, properties.getProperty("email1"));
-			Community community = communityService.getCommunity(properties.getProperty("communityUuid"), false);
-			result = communityService.removeMember(community, member);
-		
-		} catch (XMLException e) {
-			fail(e.getMessage());
-			return;
-		}
-		assertEquals(true, result);	
+		Member member = new Member(communityService, properties.getProperty("email1"));
+		Community community = communityService.getCommunity(properties.getProperty("communityUuid"), false);
+		assertTrue(communityService.removeMember(community, member));
 	}
 	
 	@Test
 	public final void testDeleteCommunity() throws Exception{
 		CommunityService communityService = new CommunityService();
-		boolean result;
-		try {			
-			Community community = communityService.getCommunity(properties.getProperty("communityUuid"), false);
-			result = communityService.deleteCommunity(community);
-		
-		} catch (XMLException e) {
-			fail(e.getMessage());
-			return;
-		}
-		assertEquals(true, result);	
+		Community community = communityService.getCommunity(properties.getProperty("communityUuid"), false);
+		assertTrue(communityService.deleteCommunity(community));	
 	}
 }

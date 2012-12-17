@@ -29,10 +29,10 @@
 		</supported-processing-event>
 	</portlet>
 	<portlet>
-		<portlet-name>Smartcloud Profile</portlet-name>
-		<display-name xml:lang="en">Smartcloud Profile</display-name>
-		<display-name>Smartcloud Profile</display-name>
-		<portlet-class>com.ibm.sbt.smartcloud.portlet.sample.SmartcloudProfilePortlet</portlet-class>
+		<portlet-name>SmartCloud Profile</portlet-name>
+		<display-name xml:lang="en">SmartCloud Profile</display-name>
+		<display-name>SmartCloud Profile</display-name>
+		<portlet-class>com.ibm.sbt.smartcloud.portlet.sample.SmartCloudProfilePortlet</portlet-class>
 		<init-param>
 			<name>wps.markup</name>
 			<value>html</value>
@@ -43,11 +43,11 @@
 			<portlet-mode>view</portlet-mode>
 		</supports>
 		<supported-locale>en</supported-locale>
-		<resource-bundle>com.ibm.sbt.smartcloud.portlet.sample.nl.SmartcloudProfilePortletResource</resource-bundle>
+		<resource-bundle>com.ibm.sbt.smartcloud.portlet.sample.nl.SmartCloudProfilePortletResource</resource-bundle>
 		<portlet-info>
-			<title>Smartcloud Profile</title>
-			<short-title>Smartcloud Profile</short-title>
-			<keywords>Smartcloud Profile</keywords>
+			<title>SmartCloud Profile</title>
+			<short-title>SmartCloud Profile</short-title>
+			<keywords>SmartCloud Profile</keywords>
 		</portlet-info>
 		<supported-processing-event>
 			<qname xmlns:pbns="http://www.ibm.com/sbt/sample/portlets">pbns:UserID</qname>

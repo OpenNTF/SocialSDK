@@ -10,10 +10,10 @@
 	</managed-bean>
 
 	<!--  
-		Password store for oauth / smartcloud 
+		Password store for OAuth / SmartCloud 
 	-->
 	<managed-bean>
-		<managed-bean-name>SmartcloudStore</managed-bean-name>
+		<managed-bean-name>SmartCloudStore</managed-bean-name>
 		<managed-bean-class>com.ibm.sbt.security.authentication.oauth.consumer.store.MemoryTokenStore</managed-bean-class>
 
 		<managed-bean-scope>application</managed-bean-scope>

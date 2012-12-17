@@ -1,16 +1,16 @@
 /*
  * © Copyright IBM Corp. 2012
  * 
- * Licensed under the Apache License, Version 2.0 (the "License"); 
- * you may not use this file except in compliance with the License. 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at:
  * 
- * http://www.apache.org/licenses/LICENSE-2.0 
+ * http://www.apache.org/licenses/LICENSE-2.0
  * 
- * Unless required by applicable law or agreed to in writing, software 
- * distributed under the License is distributed on an "AS IS" BASIS, 
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 
- * implied. See the License for the specific language governing 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+ * implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
 
@@ -26,9 +26,12 @@ import com.ibm.sbt.services.client.connections.files.utils.Messages;
 import com.ibm.sbt.util.DataNavigator;
 
 /**
- * @Represents Smartcloud Profile
- * @author Vimal Dhupar This File does not have set/update/create/remove methods, as these are not supported
- *         by Smartcloud
+ * This File does not have set/update/create/remove methods, as there are no Public APIs to perform these
+ * functions.
+ * <p>
+ * 
+ * @Represents SmartCloud Profile
+ * @author Vimal Dhupar
  */
 public class Profile implements Serializable {
 
@@ -209,6 +212,7 @@ public class Profile implements Serializable {
 	}
 
 	/**
+	 * @param fieldName
 	 * @return value for specified field. Field names follow IBM Connections naming convention
 	 */
 
@@ -241,7 +245,10 @@ public class Profile implements Serializable {
 		} else {
 			result = entry.stringValue(fieldName);
 		}
-
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.exiting(sourceClass, "get");
+		}
+		logger.log(Level.FINEST, Messages.ProfileInfo_6 + result);
 		return result;
 	}
 

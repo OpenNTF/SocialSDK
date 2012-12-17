@@ -14,22 +14,24 @@
  * permissions and limitations under the License.
  */
 package com.ibm.sbt.services.client.connections.files;
+
 /**
- * Files Result Type
+ * Files Result Type<br>
+ * Enumeration which determines the Result Type to be used for Executing FileService API
+ * 
  * @author Vimal Dhupar
  */
 public enum ResultType {
-	FEED("/feed"),
-	MEDIA("/media"),
-	ENTRY("/entry"),
-	REPORTS("/reports"),
-	NONCE("/nonce"),
-	LOCK("/lock"),
-	NULL("");
-	
-	String resultType;
+	FEED("/feed"), MEDIA("/media"), ENTRY("/entry"), REPORTS("/reports"), NONCE("/nonce"), LOCK("/lock"), NULL(
+			"");
+
+	String	resultType;
+
 	private ResultType(String resultType) {
 		this.resultType = resultType;
 	}
-	public String getResultType(){return resultType;}
+
+	public String getResultType() {
+		return resultType;
+	}
 }

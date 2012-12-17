@@ -1,16 +1,16 @@
 /*
  * © Copyright IBM Corp. 2012
  * 
- * Licensed under the Apache License, Version 2.0 (the "License"); 
- * you may not use this file except in compliance with the License. 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at:
  * 
- * http://www.apache.org/licenses/LICENSE-2.0 
+ * http://www.apache.org/licenses/LICENSE-2.0
  * 
- * Unless required by applicable law or agreed to in writing, software 
- * distributed under the License is distributed on an "AS IS" BASIS, 
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 
- * implied. See the License for the specific language governing 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+ * implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
 package com.ibm.sbt.services.client.smartcloud.profiles;
@@ -28,15 +28,22 @@ import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.SBTServiceException;
 import com.ibm.sbt.services.client.connections.files.utils.Messages;
-import com.ibm.sbt.services.client.smartcloud.SmartcloudService;
+import com.ibm.sbt.services.client.smartcloud.SmartCloudService;
 import com.ibm.sbt.services.client.smartcloud.base.BaseEntity;
+import com.ibm.sbt.services.endpoints.Endpoint;
+import com.ibm.sbt.services.endpoints.EndpointFactory;
 import com.ibm.sbt.util.DataNavigator;
 
 /**
- * @Represents Smartcloud ProfileService
+ * ProfileService can be used to perform Profile Related operations. This is a dedicated Service for
+ * SmartCloud Profiles.
+ * 
+ * @Represents SmartCloud ProfileService
  * @author Vimal Dhupar
  */
 public class ProfileService extends BaseService {
+	Endpoint									endpoint;
+
 	private static HashMap<String, JsonObject>	cache		= new HashMap<String, JsonObject>();
 	private static final String					sourceClass	= ProfileService.class.getName();
 	private static final Logger					logger		= Logger.getLogger(sourceClass);
@@ -45,7 +52,8 @@ public class ProfileService extends BaseService {
 	 * Default Constructor - 0 argument constructor Calls the Constructor of BaseService Class.
 	 */
 	public ProfileService() {
-		this(DEFAULT_ENDPOINT_NAME, DEFAULT_CACHE_SIZE);
+		super();
+		this.endpoint = EndpointFactory.getEndpoint(DEFAULT_ENDPOINT_NAME);
 	}
 
 	/**
@@ -55,7 +63,8 @@ public class ProfileService extends BaseService {
 	 *            Creates ProfileService with specified endpoint and a default CacheSize
 	 */
 	public ProfileService(String endpoint) {
-		this(endpoint, DEFAULT_CACHE_SIZE);
+		super(endpoint);
+		this.endpoint = EndpointFactory.getEndpoint(endpoint);
 	}
 
 	/**
@@ -67,15 +76,16 @@ public class ProfileService extends BaseService {
 	 */
 	public ProfileService(String endpoint, int cacheSize) {
 		super(endpoint, cacheSize);
+		this.endpoint = EndpointFactory.getEndpoint(endpoint);
 	}
 
 	/**
-	 * getProfile - to get one profile
+	 * getProfile
+	 * <p>
+	 * This method is used to fetch the Profile of users. This method fetches the Subscriber ID of the logged
+	 * in user, and then calls the getProfile Method to load the user's profile.
 	 * 
-	 * @param userId
-	 * @return This method is used by getProfiles method to fetch the Profile's of users. this Single argument
-	 *         method, calls the getProfile method with 2 arguments, passing true to load the profile of the
-	 *         person.
+	 * @return Profile
 	 * @throws SBTServiceException
 	 */
 	public Profile getProfile() throws SBTServiceException {
@@ -89,16 +99,20 @@ public class ProfileService extends BaseService {
 			logger.log(Level.SEVERE, Messages.InvalidValue_1);
 			return null;
 		}
+		logger.log(Level.FINEST, Messages.ProfileInfo_3 + userId);
 		return getProfile(userId, true);
 	}
 
 	/**
-	 * getProfile - to get one profile
+	 * getProfile
+	 * <p>
+	 * This method makes the network call to fetch the Profile's of a user based on load parameter being true
+	 * / false. This method can be called directly by passing the userId / Subscriber id of the user and a
+	 * load argument as true / false
 	 * 
 	 * @param userId
 	 * @param load
-	 * @return This method makes the network call to fetch the Profile's of a user based on load parameter
-	 *         being true / false.
+	 * @return Profile
 	 * @throws SBTServiceException
 	 */
 	public Profile getProfile(String userId, boolean load) throws SBTServiceException {
@@ -118,9 +132,10 @@ public class ProfileService extends BaseService {
 
 	/**
 	 * load()
+	 * <p>
+	 * Method responsible for loading the profile.
 	 * 
 	 * @param profile
-	 *            Method responsible for loading the profile.
 	 * @throws SBTServiceException
 	 */
 	public void load(Profile profile) throws SBTServiceException {
@@ -131,9 +146,7 @@ public class ProfileService extends BaseService {
 		if (data != null) {
 			profile.setData(data);
 		} else {
-			// In case we have a workaround to get other user's Profile, then we can add the subscriber id
-			// logic here.
-			SmartcloudService svc = new SmartcloudService(this.endpoint);
+			SmartCloudService svc = new SmartCloudService(this.endpoint);
 			Map<String, String> parameters = new HashMap<String, String>();
 			Object result = null;
 			try {
@@ -141,8 +154,11 @@ public class ProfileService extends BaseService {
 			} catch (ClientServicesException e) {
 				throw new ProfileServiceException(e);
 			}
+
+			logger.log(Level.FINEST, Messages.ProfileInfo_5);
 			profile.setData((JsonObject) result);
 			if (cacheSize > 0) {
+				logger.log(Level.FINEST, Messages.ProfileInfo_4);
 				addProfileDataToCache(profile.getUniqueId(), (JsonObject) result);
 			}
 		}
@@ -150,9 +166,11 @@ public class ProfileService extends BaseService {
 
 	/**
 	 * getProfileDataFromCache()
+	 * <p>
+	 * Method to check if the Profile is cached. Calls findInCache to find for the profile in Cache.
 	 * 
 	 * @param userId
-	 * @return Method to check if the Profile is cached. Calls findInCache to find for the profile in Cache.
+	 * @return JsonObject
 	 */
 	private JsonObject getProfileDataFromCache(String userId) {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -172,7 +190,7 @@ public class ProfileService extends BaseService {
 	}
 
 	/**
-	 * addProfileDataToCache()
+	 * addProfileDataToCache() Method to cache the Profile of the User.
 	 * 
 	 * @param userId
 	 * @param content
@@ -186,9 +204,11 @@ public class ProfileService extends BaseService {
 
 	/**
 	 * findInCache()
+	 * <p>
+	 * Method to search the cache
 	 * 
 	 * @param userId
-	 * @return Method to search the cache
+	 * @return JsonObject
 	 */
 	private JsonObject findInCache(String userId) {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -210,20 +230,22 @@ public class ProfileService extends BaseService {
 
 			// cache hit
 			if (StringUtil.equalsIgnoreCase(email, userId)) {
-				logger.finest("Cache Hit - Object " + email + " found in Cache");
+				logger.finest(Messages.ProfileInfo_1 + email);
 				return data;
 			}
 		}
 		// Cache miss
-		logger.finest("Cache Miss - Object " + email + " not found in Cache");
+		logger.finest(Messages.ProfileInfo_2 + email);
 		return null;
 	}
 
 	/**
 	 * isEmail()
+	 * <p>
+	 * Checking if the userid is email. Current check is based on finding @ in the userid.
 	 * 
 	 * @param userId
-	 * @return Checking is the userid is email. Current check is based on finding @ in the userid.
+	 * @return boolean
 	 */
 	private boolean isEmail(String userId) {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -234,14 +256,14 @@ public class ProfileService extends BaseService {
 
 	@Override
 	public <DataFormat> BaseEntity<DataFormat> getEntityFromData(String entityName, DataFormat data)
-			throws SBTServiceException {
+	throws SBTServiceException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public <DataFormat> BaseEntity<DataFormat> getEntityFromId(String entityName, String uuid)
-			throws SBTServiceException {
+	throws SBTServiceException {
 		// TODO Auto-generated method stub
 		return null;
 	}

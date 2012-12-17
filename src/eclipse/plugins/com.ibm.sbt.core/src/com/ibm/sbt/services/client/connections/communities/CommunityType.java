@@ -17,7 +17,7 @@
 package com.ibm.sbt.services.client.connections.communities;
 
 /**
- * Files Scope
+ * Community Scope
  * @author Manish Kataria
  */
 

@@ -17,6 +17,14 @@ import com.ibm.sbt.services.client.SBTServiceException;
 import com.ibm.sbt.services.client.smartcloud.base.BaseEntity;
 import com.ibm.sbt.services.util.AuthUtil;
 
+/**
+ * CommunityService can be used to perform Community Related operations. This is a dedicated Service for
+ * Connections Communities.
+ * 
+ * @Represents Connections Community Service
+ * @author Swati Singh
+ */
+
 public class CommunityService extends BaseService {
 	static final String			sourceClass			= CommunityService.class.getName();
 	static final Logger			logger				= Logger.getLogger(sourceClass);
@@ -60,14 +68,15 @@ public class CommunityService extends BaseService {
 	}
 
 	/**
+	 * This method is the intermediate between the JSP methods and the Java implementation. This will
+	 * make a call to the server to get the feed for the specific api provided by the calling method.
+	 * This method calls the load method at a lower level to actually fetch the content over network,
+	 * if load is true
+	 * 
 	 * @param userId
 	 * @param load
-	 * @return This method is the intermediate between the JSP methods and the Java implementation. This will
-	 *         make a call to the server to get the feed for the specific api provided by the calling method.
-	 *         This method calls the load method at a lower level to actually fetch the content over network,
-	 *         if load is true
+	 * @return community
 	 * @throws XMLException
-	 *             // remove xmlexception using for testing
 	 * @throws SBTServiceException
 	 */
 
@@ -94,10 +103,10 @@ public class CommunityService extends BaseService {
 	}
 
 	/**
-	 * getPublicCommunities - get Public Communities
+	 * Wrapper method to get Public Communities
 	 * 
-	 * @param
 	 * @return Community[] - array of community This method is used to get All Communities
+	 * @throws XMLException
 	 * @throws SBTServiceException
 	 */
 	public Community[] getPublicCommunities() throws XMLException // getPublicCommunities
@@ -106,12 +115,11 @@ public class CommunityService extends BaseService {
 	}
 
 	/**
-	 * getPublicCommunities - to get Public Communities with given parameters
+	 *  Wrapper method to get All Communities with different parameters for eg. Tag, sortBy. argument should be the parameter map
 	 * 
-	 * @param parameters
-	 *            - parameter Map
-	 * @return Community[] - array of community This method is used to get All Communities with different
-	 *         parameters for eg. Tag, sortBy. argument should be the parameter map
+	 * @param parameters - parameter Map
+	 * @return Community[] - array of community This method is used 
+	 * @throws XMLException
 	 * @throws SBTServiceException
 	 */
 	public Community[] getPublicCommunities(Map<String, String> parameters) throws XMLException,
@@ -139,11 +147,9 @@ public class CommunityService extends BaseService {
 	}
 
 	/**
-	 * getMyCommunities - to get My Communities
+	 * This method is used to get Communities of which the user is a member or owner.
 	 * 
-	 * @return Community[] - array of community This method is used to get Communities of which the user is a
-	 *         member or owner. argument should be the email or userid of the user for which communities are
-	 *         to be fetched
+	 * @return Community[] - array of community
 	 * @throws SBTServiceException
 	 */
 	public Community[] getMyCommunities() throws XMLException, SBTServiceException {
@@ -168,11 +174,11 @@ public class CommunityService extends BaseService {
 	}
 
 	/**
-	 * getSubCommunities - to get SubCommunities of a community
+	 * This method is used to get SubCommunities of a community
 	 * 
-	 * @param community
-	 * @return Community[] - array of community This method is used get SubCommunities for a community.
-	 *         arguments should be the community for which SubCommunities are to be fetched
+	 * @param community - community for which SubCommunities are to be fetched
+	 * @return Community[] - array of community
+	 * @throws XMLException
 	 * @throws SBTServiceException
 	 */
 	public Community[] getSubCommunities(Community community) throws XMLException, SBTServiceException {
@@ -199,11 +205,11 @@ public class CommunityService extends BaseService {
 	}
 
 	/**
-	 * getMembers - to get community members
+	 * This method is used get members for a community.
 	 * 
-	 * @param community
-	 * @return Member[] - array of member This method is used get members for a community. arguments should be
-	 *         the community for which members are to be fetched
+	 * @param community - community for which members are to be fetched
+	 * @return Member[] - array of member
+	 * @throws XMLException
 	 * @throws SBTServiceException
 	 */
 	public Member[] getMembers(Community community) throws XMLException, SBTServiceException {
@@ -229,11 +235,11 @@ public class CommunityService extends BaseService {
 	}
 
 	/**
-	 * getBookmarks - to get community bookmarks
+	 * This method is used get bookmarks for a community.
 	 * 
 	 * @param community
-	 * @return Bookmark[] - array of bookmark This method is used get bookmarks for a community. arguments
-	 *         should be the community for which bookmarks are to be fetched
+	 * @return Bookmark[]
+	 * @throws XMLException
 	 * @throws SBTServiceException
 	 */
 
@@ -262,11 +268,11 @@ public class CommunityService extends BaseService {
 	}
 
 	/**
-	 * getForumTopics - to get community forum topics
+	 * This method is used get a community forum topics.
 	 * 
 	 * @param community
-	 * @return ForumTopic[] - array of forum topics This method is used get a community forum topics.
-	 *         arguments should be the community for which forum topics are to be fetched
+	 * @return ForumTopic[] 
+	 * @throws XMLException
 	 * @throws SBTServiceException
 	 */
 	public ForumTopic[] getForumTopics(Community community) throws XMLException, SBTServiceException {
@@ -291,7 +297,17 @@ public class CommunityService extends BaseService {
 		return forumTopics;
 	}
 
-	public Document getCommunityEntities(String uri, Map<String, String> params) throws XMLException,
+	/**
+	 * This method is used by other wrapper methods to get community realtes data for eg. 
+	 * getBookmarks() calls it internall to get the community bookmarks data
+	 * 
+	 * @param uri
+	 * @param params
+	 * @return Document 
+	 * @throws XMLException
+	 * @throws SBTServiceException
+	 */
+	protected Document getCommunityEntities(String uri, Map<String, String> params) throws XMLException,
 			SBTServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.exiting(sourceClass, "getCommunityEntities", new Object[] { uri, params });
@@ -301,7 +317,7 @@ public class CommunityService extends BaseService {
 			data = (Document) getClientService().get(uri, params);
 		} catch (ClientServicesException e) {
 			if (logger.isLoggable(Level.SEVERE)) {
-				logger.log(Level.SEVERE, "Error encountered in getting community bookmarks", e);
+				logger.log(Level.SEVERE, "Error encountered in getting community data", e);
 			}
 			throw new CommunityServiceException(e);
 		}
@@ -310,7 +326,7 @@ public class CommunityService extends BaseService {
 			if (data != null) {
 				log = "returning data for getCommunityEntities";
 			} else {
-				log = "empty response from server for forum Topics";
+				log = "empty response from server for community data";
 			}
 			logger.exiting(sourceClass, "getCommunityEntities", log);
 		}
@@ -318,11 +334,11 @@ public class CommunityService extends BaseService {
 	}
 
 	/**
-	 * createCommunity - to create a community
+	 * This method is used create a community. User should be authenticated to call this method
 	 * 
 	 * @param community
-	 * @return true/false This method is used create a community. arguments should be the community which is
-	 *         to be created User should be authenticated to call this method
+	 * @return boolean
+	 * @throws XMLException
 	 * @throws SBTServiceException
 	 */
 	public boolean createCommunity(Community community) throws XMLException, SBTServiceException {
@@ -354,11 +370,11 @@ public class CommunityService extends BaseService {
 	}
 
 	/**
-	 * updateCommunity - to update a community
+	 * This method is used update a community.User should be logged in as a owner of the community to call this method.
 	 * 
 	 * @param community
-	 * @return true/false This method is used update a community. arguments should be the community which is
-	 *         to be updated User should be logged in as a owner of the community to call this method
+	 * @return boolean - true/false 
+	 * @throws XMLException
 	 * @throws SBTServiceException
 	 */
 	public boolean updateCommunity(Community community) throws XMLException, SBTServiceException {
@@ -391,19 +407,15 @@ public class CommunityService extends BaseService {
 	}
 
 	/**
-	 * AddCommunityMember - to add a member to a community
+	 * This method is used to add a member to a community. User should be logged in as a owner of the community to call this method
 	 * 
-	 * @param community
-	 * @param member
-	 * @return true/false This method is used to add a member to a community. arguments should be the
-	 *         community to which the member needs to be added and member which is to be added User should be
-	 *         logged in as a owner of the community to call this method
+	 * @param community - community to which the member needs to be added
+	 * @param member - member which is to be added
+	 * @return boolean - true/false 
+	 * @throws XMLException
 	 * @throws SBTServiceException
 	 */
-	public boolean addMember(Community community, Member member) throws XMLException, SBTServiceException { // change
-																											// it
-																											// to
-		// addMember
+	public boolean addMember(Community community, Member member) throws XMLException, SBTServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "AddCommunityMember", new Object[] { community, member });
 		}
@@ -432,19 +444,15 @@ public class CommunityService extends BaseService {
 	}
 
 	/**
-	 * removeMember - to remove a member from a community
+	 * This method is used to remove a member from a community
 	 * 
 	 * @param community
 	 * @param member
-	 * @return true/false This method is used to remove a member from a community. arguments should be the
-	 *         community to which the member needs to be removed and member which is to be removed User should
-	 *         be logged in as a owner of the community to call this method
+	 * @return true/false 
+	 * @throws XMLException
 	 * @throws SBTServiceException
 	 */
-	public boolean removeMember(Community community, Member member) throws XMLException, SBTServiceException { // change
-																												// it
-																												// to
-		// addMember
+	public boolean removeMember(Community community, Member member) throws XMLException, SBTServiceException { 
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "removeMember", new Object[] { community, member });
 		}
@@ -479,11 +487,11 @@ public class CommunityService extends BaseService {
 	}
 
 	/**
-	 * deleteCommunity - to delete community
+	 * This method is used to delete a community.User should be logged in as a owner of the community to call this method.
 	 * 
-	 * @param userId
-	 * @return true/false This method is used to delete a community. argument should be the community needs to
-	 *         be deleted User should be logged in as a owner of the community to call this method
+	 * @param community
+	 * @return true/false 
+	 * @throws XMLException
 	 * @throws SBTServiceException
 	 */
 	public boolean deleteCommunity(Community community) throws XMLException, SBTServiceException {
@@ -510,6 +518,12 @@ public class CommunityService extends BaseService {
 		}
 		return returnVal;
 	}
+	
+	/*
+	 * Method responsible for loading the community.
+	 * 
+	 * @param community
+	 */
 
 	public void load(Community community) throws XMLException, SBTServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -535,6 +549,8 @@ public class CommunityService extends BaseService {
 	}
 
 	/*
+	 * Method responsible for generating appropriate REST URLs
+	 * 
 	 * @param communityEntity ( Ref Class : CommunityEntity )
 	 * @param communityType ( Ref Class : CommunityType )
 	 */
@@ -543,6 +559,8 @@ public class CommunityService extends BaseService {
 	}
 
 	/*
+	 * Method responsible for generating appropriate REST URLs
+	 * 
 	 * @param communityEntity ( Ref Class : CommunityEntity )
 	 * @param communityType ( Ref Class : CommunityType )
 	 * @param params : ( Ref Class : CommunityParams )
@@ -592,6 +610,12 @@ public class CommunityService extends BaseService {
 		return comBaseUrl.toString();
 	}
 
+	/*
+	 * Method to check if the userid is email. Current check is based on finding @ in the userid.
+	 * 
+	 * @param userId
+	 * @return boolean
+	 */
 	private boolean isEmail(String userId) {
 		return userId.contains("@");
 	}

@@ -18,52 +18,65 @@ package com.ibm.sbt.services.client.connections.files;
 import com.ibm.commons.util.StringUtil;
 
 /**
- * Files Sub Filters
+ * Files Sub Filters<br>
+ * Class which determines the SubFilters to be used for Executing FileService API <br>
+ * This class takes care of the Value { document : "documentId" } <br>
+ * and the Key { "document" : documentId }
+ * 
  * @author Vimal Dhupar
  */
 public class SubFilters {
-	// This class takes care of the Value { document : "documentId" }
-	// The enum SubFilterKey takes care of the Key { "document" : documentId }
-	
-	public static String DOCUMENT = "/document";
-	public static String COMMENT = "/comment";
-	public static String COLLECTION = "/collection";
-	public static String LIBRARY = "/userlibrary";
-	
-	private String userId;
-	private String documentId;
-	private String commentId;
-	private String collectionId;
-	
+
+	public static String	DOCUMENT	= "/document";
+	public static String	COMMENT		= "/comment";
+	public static String	COLLECTION	= "/collection";
+	public static String	LIBRARY		= "/userlibrary";
+
+	private String			userId;
+	private String			documentId;
+	private String			commentId;
+	private String			collectionId;
+
 	public SubFilters() {
 	}
+
 	public String getUserId() {
 		return userId;
 	}
+
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+
 	public String getDocumentId() {
 		return documentId;
 	}
+
 	public void setDocumentId(String documentId) {
 		this.documentId = documentId;
 	}
+
 	public String getCommentId() {
 		return commentId;
 	}
+
 	public void setCommentId(String commentId) {
 		this.commentId = commentId;
 	}
+
 	public String getCollectionId() {
 		return collectionId;
 	}
+
 	public void setCollectionId(String collection_id) {
 		this.collectionId = collection_id;
 	}
+
 	public boolean isEmpty() {
-		if(StringUtil.isEmpty(userId) && StringUtil.isEmpty(documentId) && StringUtil.isEmpty(commentId) && StringUtil.isEmpty(collectionId))
+		if (StringUtil.isEmpty(userId) && StringUtil.isEmpty(documentId) && StringUtil.isEmpty(commentId)
+				&& StringUtil.isEmpty(collectionId)) {
 			return true;
+		}
 		return false;
 	}
 }

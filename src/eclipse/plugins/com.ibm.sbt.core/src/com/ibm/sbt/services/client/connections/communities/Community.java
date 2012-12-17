@@ -11,6 +11,14 @@ import com.ibm.commons.xml.DOMUtil;
 import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.XMLException;
 
+/**
+ * This File represents Community
+ * <p>
+ * 
+ * @Represents Connections Community
+ * @author Swati Singh
+ */
+
 public class Community {
 
 	static final String					sourceClass		= Community.class.getName();
@@ -73,7 +81,6 @@ public class Community {
 
 	// check
 	public Community() {
-
 	}
 
 	public Community(CommunityService communityService, String communityUuid) {
@@ -85,10 +92,20 @@ public class Community {
 		this.communityUuid = communityUuid;
 	}
 
+	/**
+	 * getData
+	 * 
+	 * @return Data
+	 */
 	public Object getData() {
 		return data;
 	}
-
+	
+	/**
+	 * Method sets the response from the API call to data method for locally referring the data in future.
+	 * 
+	 * @param data
+	 */
 	public void setData(Document data) {
 		this.data = data;
 	}
@@ -104,15 +121,30 @@ public class Community {
 	public Map<String, String> getFieldsMap() {
 		return fieldsMap;
 	}
-
+	
+	/**
+	 * getCommunityUuid
+	 * 
+	 * @return communityUuid
+	 */
 	public String getCommunityUuid() {
 		return communityUuid;
 	}
 
+	/**
+	 * @sets the communityUuid
+	 * 
+	 * @param communityUuid
+	 */
 	public void setCommunityUuid(String communityUuid) {
 		this.communityUuid = communityUuid;
 	}
 
+	/**
+	 * getTitle
+	 * 
+	 * @return title
+	 */
 	public String getTitle() {
 
 		if (StringUtil.isEmpty(fieldsMap.get("title"))) {
@@ -120,15 +152,21 @@ public class Community {
 		} else {
 			return fieldsMap.get("title");
 		}
-
 	}
-
+	
+	/**
+	 * @sets the title
+	 * 
+	 * @param title
+	 */
 	public void setTitle(String title) {
 		fieldsMap.put("title", title);
 	}
 
 	/**
-	 * @return the content
+	 * getContent
+	 * 
+	 * @return content
 	 */
 	public String getContent() {
 
@@ -141,21 +179,27 @@ public class Community {
 	}
 
 	/**
-	 * @return the communityUrl
+	 * getCommunityUrl
+	 * 
+	 * @return communityUrl
 	 */
 	public String getCommunityUrl() {
 		return get("communityUrl");
 	}
 
 	/**
-	 * @return the logoUrl
+	 * getLogoUrl
+	 * 
+	 * @return logoUrl
 	 */
 	public String getLogoUrl() {
 		return get("logoUrl");
 	}
 
 	/**
-	 * @return the summary
+	 * getSummary
+	 * 
+	 * @return summary
 	 */
 	public String getSummary() {
 		return get("summary");
@@ -163,6 +207,8 @@ public class Community {
 
 	/**
 	 * @sets the content
+	 * 
+	 * @param content
 	 */
 	public void setContent(String content) {
 		fieldsMap.put("content", content);
@@ -170,6 +216,7 @@ public class Community {
 
 	/**
 	 * @sets the tag
+	 * @param addedTags
 	 */
 	public void setAddedTags(String addedTags) {
 		fieldsMap.put("addedTags", addedTags);
@@ -234,7 +281,11 @@ public class Community {
 	public void clearFieldsMap() {
 		fieldsMap.clear();
 	}
-
+	
+	/**
+	 * This method is used by communityService wrapper methods to construct request body for Add/Update operations
+	 * @return Object
+	 */
 	public Object constructCreateRequestBody() {
 
 		String body = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:app=\"http://www.w3.org/2007/app\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\">";

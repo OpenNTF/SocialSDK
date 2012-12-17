@@ -40,64 +40,75 @@ import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.SBTServiceException;
 import com.ibm.sbt.services.client.connections.files.model.FileEntry;
 import com.ibm.sbt.services.client.connections.files.model.FileRequestParams;
+import com.ibm.sbt.services.client.connections.files.model.FileRequestPayload;
 import com.ibm.sbt.services.client.connections.files.model.Headers;
 import com.ibm.sbt.services.client.connections.files.utils.Messages;
 import com.ibm.sbt.services.client.connections.files.utils.NamespacesConnections;
 import com.ibm.sbt.services.client.smartcloud.base.BaseEntity;
+import com.ibm.sbt.services.endpoints.Endpoint;
+import com.ibm.sbt.services.endpoints.EndpointFactory;
 import com.ibm.sbt.services.util.AuthUtil;
 
 /**
+ * FileService can be used to perform File related operations.
+ * <p>
+ * Relies on the ID's provided by the user to perform the task.
+ * 
  * @Represents Connections FileService
  * @author Vimal Dhupar
+ * @see http 
+ *      ://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation
+ *      #action=openDocument&res_title=Files_API_ic40a&content=pdcontent
  */
 public class FileService extends BaseService {
+
+	Endpoint			endpoint;
 
 	static final String	sourceClass	= FileService.class.getName();
 	static final Logger	logger		= Logger.getLogger(sourceClass);
 
 	private static char	SEPARATOR	= '/';
+	/**
+	 * Used to display the status of execution of the API methods.
+	 */
 	public String		FileStatus	= "Success";
 
 	/**
 	 * Default Constructor - 0 argument constructor Calls the Constructor of BaseService Class.
+	 * <p>
+	 * Creates FileService with Default Endpoint.
 	 */
 	public FileService() {
-		this(DEFAULT_ENDPOINT_NAME, DEFAULT_CACHE_SIZE);
+		super();
+		this.endpoint = EndpointFactory.getEndpoint(DEFAULT_ENDPOINT_NAME);
 	}
 
 	/**
 	 * Constructor
 	 * 
 	 * @param endpoint
-	 *            Creates fileservice with specified endpoint and a default CacheSize
+	 *            Creates fileservice with specified endpoint.
 	 */
 	public FileService(String endpoint) {
-		this(endpoint, DEFAULT_CACHE_SIZE);
-	}
-
-	/**
-	 * Constructor
-	 * 
-	 * @param endpoint
-	 * @param cacheSize
-	 *            Creates FileService Object with specified values of endpoint and CacheSize
-	 */
-	public FileService(String endpoint, int cacheSize) {
-		super(endpoint, cacheSize);
+		super(endpoint);
+		this.endpoint = EndpointFactory.getEndpoint(endpoint);
 	}
 
 	/**
 	 * update
+	 * <p>
+	 * This method is used to update the metadata/content of File in Connections. <br>
+	 * Rest API used : /files/basic/api/myuserlibrary/document/{document-id}/entry. <br>
+	 * User should get the specific file before calling this API, by using getFile method.
 	 * 
 	 * @param FileEntry
-	 *            - pass the file to be updated
+	 *            - pass the fileEntry object to be updated
 	 * @param params
-	 *            - Map of Parameters
+	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
 	 * @param payloadMap
-	 *            - Map of entries for which we will construct a Request Body
-	 * @return FileEntry This method is used to update the metadata/content of File in Connections. Rest API
-	 *         used : /files/basic/api/myuserlibrary/document/{document-id}/entry User should get the specific
-	 *         file before calling this API, by using getFile
+	 *            - Map of entries for which we will construct a Request Body. See {@link FileRequestPayload}
+	 *            for possible values.
+	 * @return FileEntry
 	 */
 	public FileEntry update(FileEntry fileEntry, Map<String, String> params, Map<String, String> payloadMap) {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -127,16 +138,18 @@ public class FileService extends BaseService {
 
 	/**
 	 * update
+	 * <p>
+	 * This method is used to update the metadata/content of File in Connections. <br>
+	 * Rest API used : /files/basic/api/myuserlibrary/document/{document-id}/entry. <br>
+	 * User should get the specific file before calling this API, by using getFile method.
 	 * 
-	 * @param fileEntry
-	 *            - pass the file to be updated
+	 * @param FileEntry
+	 *            - pass the fileEntry object to be updated
 	 * @param params
-	 *            - Map of Parameters
+	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.possible values.
 	 * @param requestBody
-	 *            - Document which is passed directly as requestBody to the execute request This method is
-	 *            used to update the metadata/content of File in Connections. Rest API used :
-	 *            /files/basic/api/myuserlibrary/document/{document-id}/entry User should get the specific
-	 *            file before calling this API, by using getFile
+	 *            - Document which is passed directly as requestBody to the execute request. This method is
+	 *            used to update the metadata/content of File in Connections.
 	 * @return FileEntry
 	 */
 	public FileEntry update(FileEntry fileEntry, Map<String, String> params, Document requestBody) {
@@ -166,12 +179,12 @@ public class FileService extends BaseService {
 
 	/**
 	 * upload
+	 * <p>
+	 * Rest API Used : /files/basic/api/myuserlibrary/feed <br>
 	 * 
 	 * @param filePath
-	 *            Rest API Used : /files/basic/api/myuserlibrary/feed User should give the path of the file to
-	 *            be uploaded.
+	 *            - the path of the file on server, to be uploaded.
 	 * @return FileEntry
-	 * @throws ClientServicesException
 	 */
 	public FileEntry upload(String filePath) {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -192,22 +205,28 @@ public class FileService extends BaseService {
 
 	/**
 	 * uploadFileWithMetadata
+	 * <p>
+	 * Rest API Used : /files/basic/api/myuserlibrary/feed <br>
 	 * 
-	 * @param filePath
-	 * @param params
-	 * @param headers
-	 * @param requestBody
-	 * @return FileEntry
-	 * @description Rest API Used : /files/basic/api/myuserlibrary/feed
 	 * @description A file consists of both the information about the file, which is also known as metadata,
 	 *              and the binary data that the file contains. You can provide either of the following
 	 *              inputs: - Binary data and no Atom entry document to define the metadata. Metadata is
 	 *              created automatically and sets all values to the default values, except for the value of
 	 *              the title element, which it takes from the SLUG header. - Atom entry document that defines
 	 *              the metadata of the file and no binary data.
+	 * @param filePath
+	 *            - the path of the file on server, to be uploaded.
+	 * @param params
+	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
+	 * @param requestBody
+	 *            - Document which is passed directly as requestBody to the execute request. This method is
+	 *            used to update the metadata/content of File in Connections.
+	 * @param headers
+	 *            - Map of Headers. See {@link Headers} for possible values.
+	 * @return FileEntry
 	 */
 	public FileEntry uploadFileWithMetadata(String filePath, Map<String, String> params,
-			Map<String, String> headers, Document requestBody) throws ClientServicesException {
+			Map<String, String> headers, Document requestBody) {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "uploadFileWithMetadata");
 		}
@@ -237,13 +256,13 @@ public class FileService extends BaseService {
 
 	/**
 	 * lock
+	 * <p>
+	 * This method can be used to set a lock on File. <br>
+	 * Rest API used : /files/basic/api/document/{document-id}/lock <br>
 	 * 
 	 * @param fileId
-	 *            We use update API to lock the file by modifying the lock tag in the entry Rest API used :
-	 *            /files/basic/api/document/{document-id}/lock User should pass the fileId of the file to be
-	 *            locked
+	 *            - fileId of the file to be locked.
 	 * @return FileEntry
-	 * @throws ClientServicesException
 	 */
 	public FileEntry lock(String fileId) {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -270,13 +289,13 @@ public class FileService extends BaseService {
 
 	/**
 	 * unlock
+	 * <p>
+	 * This method can be used to unlock a File. <br>
+	 * Rest API used : /files/basic/api/document/{document-id}/lock <br>
 	 * 
 	 * @param fileId
-	 *            We use update API to lock the file by modifying the lock tag in the entry Rest API used :
-	 *            /files/basic/api/document/{document-id}/lock User should pass the fileId of the file to be
-	 *            unlocked
+	 *            - fileId of the file to be unlocked.
 	 * @return FileEntry
-	 * @throws ClientServicesException
 	 */
 	public FileEntry unlock(String fileId) {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -302,11 +321,12 @@ public class FileService extends BaseService {
 	}
 
 	/**
-	 * delete a file
+	 * delete
+	 * <p>
+	 * Rest API used : /files/basic/api/myuserlibrary/document/{document-id}/entry <br>
 	 * 
 	 * @param fileId
-	 *            - id of the file to be deleted Rest API used :
-	 *            /files/basic/api/myuserlibrary/document/{document-id}/entry
+	 *            - id of the file to be deleted
 	 */
 	public void delete(String fileId) {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -328,11 +348,16 @@ public class FileService extends BaseService {
 
 	/**
 	 * addCommentToFile
+	 * <p>
+	 * Rest API used : /files/basic/api/userlibrary/{userid}/document/{document-id}/feed <br>
 	 * 
-	 * @param fileEntry
+	 * @param FileEntry
+	 *            - pass the fileEntry object to be updated
 	 * @param params
+	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
 	 * @param comment
-	 * @return FileEntry Rest API used : /files/basic/api/userlibrary/{userid}/document/{document-id}/feed
+	 *            - Comment to be added to the File
+	 * @return FileEntry
 	 */
 	public FileEntry addCommentToFile(FileEntry fileEntry, Map<String, String> params, String comment) {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -340,6 +365,18 @@ public class FileService extends BaseService {
 		}
 		String accessType = AccessType.AUTHENTICATED.getAccessType();
 		SubFilters subFilters = new SubFilters();
+		if (fileEntry == null) {
+			logger.log(Level.SEVERE, Messages.InvalidArgument_1);
+			return new FileEntry();
+		}
+		if (StringUtil.isEmpty(fileEntry.getFileId())) {
+			logger.log(Level.SEVERE, Messages.InvalidArgument_2);
+			return new FileEntry();
+		}
+		if (StringUtil.isEmpty(fileEntry.getAuthorEntry().getUserUuid())) {
+			logger.log(Level.SEVERE, Messages.InvalidArgument_3);
+			return new FileEntry();
+		}
 		subFilters.setUserId(fileEntry.getAuthorEntry().getUserUuid());
 		subFilters.setDocumentId(fileEntry.getFileId());
 		String resultType = ResultType.FEED.getResultType();
@@ -356,12 +393,17 @@ public class FileService extends BaseService {
 	}
 
 	/**
-	 * addCommentToFile
+	 * addCommentToMyFile
+	 * <p>
+	 * Rest API used : /files/basic/api/myuserlibrary/document/{document-id}/feed <br>
 	 * 
-	 * @param fileEntry
+	 * @param FileEntry
+	 *            - pass the fileEntry object to be updated
 	 * @param params
+	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
 	 * @param comment
-	 * @return FileEntry Rest API used : /files/basic/api/myuserlibrary/document/{document-id}/feed
+	 *            - Comment to be added to the File
+	 * @return FileEntry
 	 */
 	public FileEntry addCommentToMyFile(FileEntry fileEntry, Map<String, String> params, String comment) {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -370,6 +412,14 @@ public class FileService extends BaseService {
 		String accessType = AccessType.AUTHENTICATED.getAccessType();
 		String category = Categories.MYLIBRARY.getCategory();
 		SubFilters subFilters = new SubFilters();
+		if (fileEntry == null) {
+			logger.log(Level.SEVERE, Messages.InvalidArgument_1);
+			return new FileEntry();
+		}
+		if (StringUtil.isEmpty(fileEntry.getFileId())) {
+			logger.log(Level.SEVERE, Messages.InvalidArgument_2);
+			return new FileEntry();
+		}
 		subFilters.setDocumentId(fileEntry.getFileId());
 		String resultType = ResultType.FEED.getResultType();
 		String requestUri = constructUrl(BaseUrl.FILES.getBaseUrl(), accessType, category, null, null,
@@ -377,9 +427,7 @@ public class FileService extends BaseService {
 		Map<String, String> headers = new HashMap<String, String>();
 		headers.put(Headers.ContentType, Headers.ATOM);
 		Object payload = constructPayloadForComments(comment);
-		Document result = executePost(requestUri, params, headers, payload); // passing the comment here, as
-																				// we are using the Plain Text
-																				// method of adding comments.
+		Document result = executePost(requestUri, params, headers, payload);
 		if (result == null) {
 			return (FileEntry) result;
 		}
@@ -388,15 +436,19 @@ public class FileService extends BaseService {
 
 	/**
 	 * addFilesToFolder
+	 * <p>
+	 * Rest API used : /files/basic/api/collection/{collection-id}/feed <br>
 	 * 
 	 * @param collectionId
-	 * @param file
+	 *            - uuid of the file to be added. For adding more than one files, enter coma separated list of
+	 *            file ids.
+	 * @param FileEntry
+	 *            - pass the fileEntry object to be updated
 	 * @param params
-	 * @return List<FileEntry> Rest API used : /files/basic/api/collection/{collection-id}/feed Parameters :
-	 *         uuid of the file to be added. For adding more than one files, enter coma separated list of file
-	 *         ids.
+	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
+	 * @return List<FileEntry>
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "unused" })
 	private List<FileEntry> addFilesToFolder(String collectionId, FileEntry fileEntry,
 			Map<String, String> params) {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -421,13 +473,16 @@ public class FileService extends BaseService {
 
 	/**
 	 * retrieveFileComment
+	 * <p>
+	 * Rest API used : /files/basic/api/userlibrary/{userid}/document/{document-id}/comment/{comment-id}/entry
 	 * 
-	 * @param fileEntry
+	 * @param FileEntry
+	 *            - pass the fileEntry object to be updated
 	 * @param commentId
 	 * @param params
-	 * @return List<FileEntry> Rest API used :
-	 *         /files/basic/api/userlibrary/{userid}/document/{document-id}/comment/{comment-id}/entry
+	 * @return List<FileEntry>
 	 */
+	@SuppressWarnings("unused")
 	private List<FileEntry> retrieveFileComment(FileEntry fileEntry, String commentId,
 			Map<String, String> params) {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -446,13 +501,16 @@ public class FileService extends BaseService {
 
 	/**
 	 * retrieveFileComment
+	 * <p>
+	 * Rest API used : /files/basic/api/myuserlibrary/document/{document-id}/comment/{comment-id}/entry
 	 * 
-	 * @param fileEntry
+	 * @param FileEntry
+	 *            - pass the fileEntry object to be updated
 	 * @param commentId
 	 * @param params
-	 * @return List<FileEntry> Rest API used :
-	 *         /files/basic/api/myuserlibrary/document/{document-id}/comment/{comment-id}/entry
+	 * @return List<FileEntry>
 	 */
+	@SuppressWarnings("unused")
 	private List<FileEntry> retrieveMyFileComment(FileEntry fileEntry, String commentId,
 			Map<String, String> params) {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -471,14 +529,14 @@ public class FileService extends BaseService {
 
 	/**
 	 * deleteComment
+	 * <p>
+	 * Rest API used : /files/basic/api/userlibrary/{userid}/document/{document-id}/comment/{comment-id}/entry
 	 * 
 	 * @param fileId
 	 * @param commentId
-	 *            Rest API used :
-	 *            /files/basic/api/userlibrary/{userid}/document/{document-id}/comment/{comment-id}/entry
 	 */
-	private void deleteComment(FileEntry fileEntry, String commentId) // TODO test this..
-	{
+	@SuppressWarnings("unused")
+	private void deleteComment(FileEntry fileEntry, String commentId) {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "deleteComment");
 		}
@@ -495,12 +553,13 @@ public class FileService extends BaseService {
 
 	/**
 	 * deleteComment
+	 * <p>
+	 * Rest API used : /files/basic/api/myuserlibrary/document/{document-id}/comment/{comment-id}/entry
 	 * 
 	 * @param fileId
 	 * @param commentId
-	 *            Rest API used :
-	 *            /files/basic/api/myuserlibrary/document/{document-id}/comment/{comment-id}/entry
 	 */
+	@SuppressWarnings("unused")
 	private void deleteMyComment(String fileId, String commentId) {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "deleteMyComment");
@@ -518,16 +577,18 @@ public class FileService extends BaseService {
 
 	/**
 	 * updateComment
+	 * <p>
+	 * Rest API used : /files/basic/api/userlibrary/{userid}/document/{document-id}/comment/{comment-id}/entry
+	 * <br>
+	 * Updates comment from someone else's file whose userid is specified
 	 * 
 	 * @param fileId
 	 * @param commentId
 	 * @param params
 	 * @param comment
-	 *            Rest API used :
-	 *            /files/basic/api/userlibrary/{userid}/document/{document-id}/comment/{comment-id}/entry
-	 *            Updates comment from someone else's file whose userid is specified
 	 * @return FileEntry
 	 */
+	@SuppressWarnings("unused")
 	private FileEntry updateComment(FileEntry fileEntry, String commentId, Map<String, String> params,
 			String comment) {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -553,16 +614,17 @@ public class FileService extends BaseService {
 
 	/**
 	 * updateComment
+	 * <p>
+	 * Rest API used : /files/basic/api/myuserlibrary/document/{document-id}/comment/{comment-id}/entry <br>
+	 * Updates comment in one of "my" library file
 	 * 
 	 * @param fileId
 	 * @param commentId
 	 * @param params
 	 * @param comment
-	 *            Rest API used :
-	 *            /files/basic/api/myuserlibrary/document/{document-id}/comment/{comment-id}/entry Updates
-	 *            comment in one of "my" library file
 	 * @return FileEntry
 	 */
+	@SuppressWarnings("unused")
 	private FileEntry updateMyComment(String fileId, String commentId, Map<String, String> params,
 			String comment) {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -588,8 +650,11 @@ public class FileService extends BaseService {
 
 	/**
 	 * getNonce
+	 * <p>
+	 * Returns the Cryptographic Key - Nonce value obtained from Connections Server <br>
+	 * Rest API used : /files/basic/api/nonce
 	 * 
-	 * @return Rest API used : /files/basic/api/nonce
+	 * @return String - nonce value
 	 */
 	public String getNonce() {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -615,9 +680,11 @@ public class FileService extends BaseService {
 
 	/**
 	 * getMyFiles
+	 * <p>
+	 * calls getMyFiles(Map<String, String> params) internally with null parameters, if user has not specific
+	 * any params
 	 * 
-	 * @return calls getMyFiles(Map<String, String> params) internally with null parameters, if user has not
-	 *         specific any params
+	 * @return List<FileEntry>
 	 */
 	public List<FileEntry> getMyFiles() {
 		return getMyFiles(null);
@@ -625,12 +692,13 @@ public class FileService extends BaseService {
 
 	/**
 	 * getMyFiles
+	 * <p>
+	 * Rest API used : /files/basic/api/myuserlibrary/feed <br>
+	 * This method is used to get Files of the person.
 	 * 
-	 * @return List<FileEntry>
 	 * @param params
-	 *            Rest API used : /files/basic/api/myuserlibrary/feed This method is used to get Files of the
-	 *            person. this Single argument method, calls the get method with 3 arguments, passing true to
-	 *            load the profile of the person and the API to make the call.
+	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
+	 * @return List<FileEntry>
 	 */
 	public List<FileEntry> getMyFiles(Map<String, String> params) {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -646,8 +714,10 @@ public class FileService extends BaseService {
 
 	/**
 	 * getFilesSharedWithMe
+	 * <p>
+	 * calls getFilesSharedWithMe(Map<String, String> params) with null params
 	 * 
-	 * @return List<FileEntry> getFilesSharedWithMe(Map<String, String> params) with null params
+	 * @return List<FileEntry>
 	 */
 	public List<FileEntry> getFilesSharedWithMe() {
 		return getFilesSharedWithMe(null);
@@ -655,11 +725,13 @@ public class FileService extends BaseService {
 
 	/**
 	 * getFilesSharedWithMe
+	 * <p>
+	 * Rest API used : /files/basic/api/documents/shared/feed <br>
+	 * This method is used to get Files Shared With the person.
 	 * 
 	 * @param params
-	 * @return List<FileEntry> Rest API used : /files/basic/api/documents/shared/feed This method is used to
-	 *         get Files Shared With the person. this Single argument method, calls the get method with 3
-	 *         arguments, passing true to load the profile of the person and the API to make the call.
+	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
+	 * @return List<FileEntry>
 	 */
 	public List<FileEntry> getFilesSharedWithMe(Map<String, String> params) {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -680,9 +752,10 @@ public class FileService extends BaseService {
 
 	/**
 	 * getFilesSharedByMe
+	 * <p>
+	 * This method calls getFilesSharedByMe(Map<String, String> params) with null params
 	 * 
-	 * @return List<FileEntry> This method calls getFilesSharedByMe(Map<String, String> params) with null
-	 *         params
+	 * @return List<FileEntry>
 	 */
 	public List<FileEntry> getFilesSharedByMe() {
 		return getFilesSharedByMe(null);
@@ -690,11 +763,13 @@ public class FileService extends BaseService {
 
 	/**
 	 * getFilesSharedByMe
+	 * <p>
+	 * Rest API used : /files/basic/api/documents/shared/feed <br>
+	 * This method is used to get Files Shared By the person.
 	 * 
 	 * @param params
-	 * @return List<FileEntry> Rest API used : /files/basic/api/documents/shared/feed This method is used to
-	 *         get Files Shared By the person. this Single argument method, calls the get method with 3
-	 *         arguments, passing true to load the profile of the person and the API to make the call.
+	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
+	 * @return List<FileEntry>
 	 */
 	public List<FileEntry> getFilesSharedByMe(Map<String, String> params) {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -715,10 +790,13 @@ public class FileService extends BaseService {
 
 	/**
 	 * getPublicFiles
+	 * <p>
+	 * Rest API used : /files/basic/anonymous/api/documents/feed <br>
+	 * This method returns a list of Public Files.
 	 * 
 	 * @param params
-	 * @return List<FileEntry> Rest API used : /files/basic/anonymous/api/documents/feed This method returns a
-	 *         list of Public Files.
+	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
+	 * @return List<FileEntry>
 	 */
 	public List<FileEntry> getPublicFiles(Map<String, String> params) {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -738,9 +816,12 @@ public class FileService extends BaseService {
 
 	/**
 	 * getPinnedFiles
+	 * <p>
+	 * Rest API used : /files/basic/api/myfavorites/documents/feed
 	 * 
 	 * @param params
-	 * @return List<FileEntry> Rest API used : /files/basic/api/myfavorites/documents/feed
+	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
+	 * @return List<FileEntry>
 	 */
 	public List<FileEntry> getPinnedFiles(Map<String, String> params) {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -757,10 +838,12 @@ public class FileService extends BaseService {
 
 	/**
 	 * getMyFolders
+	 * <p>
+	 * Rest API used : /files/basic/api/collections/feed Required Parameters : creator={snx:userid}
 	 * 
 	 * @param params
-	 * @return List<FileEntry> Rest API used : /files/basic/api/collections/feed Required Parameters :
-	 *         creator={snx:userid}
+	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
+	 * @return List<FileEntry>
 	 */
 	public List<FileEntry> getMyFolders(Map<String, String> params) {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -776,9 +859,12 @@ public class FileService extends BaseService {
 
 	/**
 	 * getMyPinnedFolders
+	 * <p>
+	 * Rest API used : /files/basic/api/myfavorites/collections/feed
 	 * 
 	 * @param params
-	 * @return List<FileEntry> Rest API used : /files/basic/api/myfavorites/collections/feed
+	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
+	 * @return List<FileEntry>
 	 */
 	public List<FileEntry> getMyPinnedFolders(Map<String, String> params) {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -795,9 +881,12 @@ public class FileService extends BaseService {
 
 	/**
 	 * getFoldersWithRecentlyAddedFiles
+	 * <p>
+	 * Rest API used : /files/basic/api/collections/addedto/feed
 	 * 
 	 * @param params
-	 * @return List<FileEntry> Rest API used : /files/basic/api/collections/addedto/feed
+	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
+	 * @return List<FileEntry>
 	 */
 	public List<FileEntry> getFoldersWithRecentlyAddedFiles(Map<String, String> params) {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -814,11 +903,14 @@ public class FileService extends BaseService {
 
 	/**
 	 * getFilesInFolder
+	 * <p>
+	 * Rest API used : /files/basic/api/collection/{collection-id}/feed
 	 * 
-	 * @param collection
-	 *            id
+	 * @param collectionId
+	 *            - uuid of the folder/collection.
 	 * @param params
-	 * @return List<FileEntry> Rest API used : /files/basic/api/collection/{collection-id}/feed
+	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
+	 * @return List<FileEntry>
 	 */
 	public List<FileEntry> getFilesInFolder(String collectionId, Map<String, String> params) {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -839,10 +931,13 @@ public class FileService extends BaseService {
 
 	/**
 	 * getPublicFileFolders
+	 * <p>
+	 * Rest API used : /files/basic/anonymous/api/collections/feed <br>
+	 * Public method. No Auth required.
 	 * 
 	 * @param params
-	 * @return List<FileEntry> Rest API used : /files/basic/anonymous/api/collections/feed Public method. No
-	 *         Auth required.
+	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
+	 * @return List<FileEntry>
 	 */
 	public List<FileEntry> getPublicFileFolders(Map<String, String> params) {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -858,11 +953,14 @@ public class FileService extends BaseService {
 
 	/**
 	 * getPersonLibrary
+	 * <p>
+	 * Rest API used : /files/basic/anonymous/api/userlibrary/{userid}/feed <br>
+	 * Public method. No Auth required.
 	 * 
 	 * @param userId
 	 * @param params
-	 * @return List<FileEntry> Rest API used : /files/basic/anonymous/api/userlibrary/{userid}/feed Public
-	 *         method. No Auth required.
+	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
+	 * @return List<FileEntry>
 	 */
 	public List<FileEntry> getPersonLibrary(String userId, Map<String, String> params) {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -883,12 +981,15 @@ public class FileService extends BaseService {
 
 	/**
 	 * getPublicFilesComments
+	 * <p>
+	 * Rest API used : /files/basic/anonymous/api/userlibrary/{userid}/document/{document-id}/feed <br>
+	 * Public method. No Auth required.
 	 * 
-	 * @param fileEntry
+	 * @param FileEntry
+	 *            - pass the fileEntry object to be updated
 	 * @param params
-	 * @return List<FileEntry> Rest API used :
-	 *         /files/basic/anonymous/api/userlibrary/{userid}/document/{document-id}/feed Public method. No
-	 *         Auth required.
+	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
+	 * @return List<FileEntry>
 	 */
 	public List<FileEntry> getPublicFilesComments(FileEntry fileEntry, Map<String, String> params) {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -918,15 +1019,16 @@ public class FileService extends BaseService {
 
 	/**
 	 * getFilesComments
+	 * <p>
+	 * Rest API used : /files/basic/api/userlibrary/{userid}/document/{document-id}/feed
 	 * 
-	 * @param fileEntry
+	 * @param FileEntry
+	 *            - pass the fileEntry object to be updated
 	 * @param params
-	 * @return List<FileEntry> Rest API used :
-	 *         /files/basic/api/userlibrary/{userid}/document/{document-id}/feed
+	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
+	 * @return List<FileEntry>
 	 */
-	public List<FileEntry> getFilesComments(FileEntry fileEntry, Map<String, String> params) // TODO test
-																								// this..
-	{
+	public List<FileEntry> getFilesComments(FileEntry fileEntry, Map<String, String> params) {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getFilesComments");
 		}
@@ -958,10 +1060,14 @@ public class FileService extends BaseService {
 
 	/**
 	 * getMyFilesComments
+	 * <p>
+	 * Rest API used : /files/basic/api/myuserlibrary/document/{document-id}/feed
 	 * 
-	 * @param fileId
+	 * @param FileEntry
+	 *            - pass the fileEntry object to be updated
 	 * @param params
-	 * @return List<FileEntry> Rest API used : /files/basic/api/myuserlibrary/document/{document-id}/feed
+	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
+	 * @return List<FileEntry>
 	 */
 	public List<FileEntry> getMyFilesComments(FileEntry fileEntry, Map<String, String> params) {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -991,9 +1097,12 @@ public class FileService extends BaseService {
 
 	/**
 	 * getFilesInMyRecycleBin
+	 * <p>
+	 * Rest API used : /files/basic/api/myuserlibrary/view/recyclebin/feed
 	 * 
 	 * @param params
-	 * @return List<FileEntry> Rest API used : /files/basic/api/myuserlibrary/view/recyclebin/feed
+	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
+	 * @return List<FileEntry>
 	 */
 	public List<FileEntry> getFilesInMyRecycleBin(Map<String, String> params) {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -1010,10 +1119,20 @@ public class FileService extends BaseService {
 
 	/**
 	 * constructUrl
+	 * <p>
+	 * This method is used to construct the URL for the API execution. The General Pattern of the URL is :: <br>
+	 * baseUrl {@link BaseUrl} + authType(basic or oauth) + AccessType {@link AccessType} + Category
+	 * {@link Categories} + View {@link Views}+ Filter {@link Filters}+ {SubFilterKey + SubFilters}*
+	 * {@link SubFilters}+ resultType {@link ResultType}
 	 * 
-	 * @param parameters
-	 *            This method should be used if we are setting parameters in our Sample. If we wish to use the
-	 *            default Parameters, then use constructUrl method with no arguments.
+	 * @param baseUrl
+	 * @param accessType
+	 * @param category
+	 * @param view
+	 * @param filter
+	 * @param subFilters
+	 * @param resultType
+	 * @return String
 	 */
 	@SuppressWarnings("static-access")
 	public String constructUrl(String baseUrl, String accessType, String category, String view,
@@ -1022,13 +1141,10 @@ public class FileService extends BaseService {
 			logger.entering(sourceClass, "constructUrl");
 		}
 		// here we will set the value in API after constructing the url
-		// the General Pattern of the URL is baseUrl + authType(basic or oauth) + AccessType + Category + View
-		// + Filter + {SubFilterKey + SubFilters}* + resultType
 		// if the user has set these values then ok. otherwise, we set the default to GetMyFiles :
 		// /files/basic/api/myuserlibrary/feed
 		StringBuilder url = new StringBuilder(baseUrl);
 		url.append(SEPARATOR).append(AuthUtil.INSTANCE.getAuthValue(endpoint));
-		// Parameters parameters = new Parameters();
 		// if none of the values have been set, then we set default values here.
 		// by default here we are giving the feed of My Files
 		if (StringUtil.isEmpty(accessType) && StringUtil.isEmpty(category) && StringUtil.isEmpty(view)
@@ -1077,8 +1193,11 @@ public class FileService extends BaseService {
 	/**
 	 * constructPayloadForComments
 	 * 
-	 * @return
+	 * @param comment
+	 *            - comment for which a payload Document needs to be constructed.
+	 * @return Document - payload Document which is sent as part of the request body.
 	 */
+
 	public Document constructPayloadForComments(String comment) {
 		return constructPayloadForComments(null, comment);
 	}
@@ -1086,9 +1205,13 @@ public class FileService extends BaseService {
 	/**
 	 * constructPayloadForComments
 	 * 
-	 * @param id
-	 * @return
+	 * @param operation
+	 *            - used to determine whether we need the payload for adding / deleting / updating a comment.
+	 * @param commentToBeAdded
+	 *            - plaintext comment which needs to be added to the File.
+	 * @return Document - payload Document which is sent as part of the request body.
 	 */
+
 	public Document constructPayloadForComments(String operation, String commentToBeAdded) {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "constructPayloadForComments");
@@ -1109,9 +1232,18 @@ public class FileService extends BaseService {
 
 	/**
 	 * constructPayload
+	 * <p>
+	 * This method constructs the Atom entry document for the APIs requiring payload input. Currently this
+	 * method constructs payload for updating Label, Summary, Visibility, Title of the file.
 	 * 
-	 * @return This method constructs the Atom entry document for the APIs requiring input.
+	 * @param FileEntry
+	 *            - pass the fileEntry object to be updated
+	 * @param payloadMap
+	 *            - Map of entries for which we will construct a Request Body. See {@link FileRequestPayload}
+	 *            for possible values.
+	 * @return Document
 	 */
+
 	public Document constructPayload(FileEntry fileEntry, Map<String, String> payloadMap) {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "constructPayload");
@@ -1151,7 +1283,15 @@ public class FileService extends BaseService {
 		return convertToXML(requestBody.toString());
 	}
 
-	public Document convertToXML(String requestBody) {
+	/**
+	 * convertToXML
+	 * <p>
+	 * Utility method to construct XML payload
+	 * 
+	 * @param requestBody
+	 * @return Document
+	 */
+	private Document convertToXML(String requestBody) {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder;
 		Document document = null;
@@ -1167,8 +1307,9 @@ public class FileService extends BaseService {
 	/**
 	 * executeDelete
 	 * 
-	 * @param api
+	 * @param requestUri
 	 */
+
 	public void executeDelete(String requestUri) {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "executeDelete");
@@ -1186,9 +1327,18 @@ public class FileService extends BaseService {
 	/**
 	 * executePut
 	 * 
+	 * @param requestUri
+	 *            - api to be executed.
+	 * @param params
+	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
+	 * @param headers
+	 *            - Map of Headers. See {@link Headers} for possible values.
 	 * @param payload
-	 * @return
+	 *            - Document which is passed directly as requestBody to the execute request. This method is
+	 *            used to update the metadata/content of File in Connections.
+	 * @return Document
 	 */
+
 	public Document executePut(String requestUri, Map<String, String> parameters,
 			Map<String, String> headers, Object payload) {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -1209,9 +1359,18 @@ public class FileService extends BaseService {
 	/**
 	 * executePost
 	 * 
+	 * @param requestUri
+	 *            - api to be executed.
+	 * @param params
+	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
+	 * @param headers
+	 *            - Map of Headers. See {@link Headers} for possible values.
 	 * @param payload
-	 * @return
+	 *            - Document which is passed directly as requestBody to the execute request. This method is
+	 *            used to update the metadata/content of File in Connections.
+	 * @return Document
 	 */
+
 	public Document executePost(String requestUri, Map<String, String> parameters,
 			Map<String, String> headers, Object payload) {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -1233,7 +1392,7 @@ public class FileService extends BaseService {
 	 * parseResult
 	 * 
 	 * @param result
-	 * @return
+	 * @return Object
 	 */
 	private Object parseResult(Object result) {
 		if (result == null) {
@@ -1250,6 +1409,9 @@ public class FileService extends BaseService {
 		setStatus("Failure");
 	}
 
+	/**
+	 * @param status
+	 */
 	private void setStatus(String status) {
 		FileStatus = status;
 	}
@@ -1258,8 +1420,13 @@ public class FileService extends BaseService {
 	 * getFile
 	 * 
 	 * @param fileId
+	 *            - ID of the file to be fetched from the Connections Server
 	 * @param load
-	 * @return
+	 *            - a flag to determine whether the network call should be made or an empty placeholder of the
+	 *            fileEntry object should be returned. load - true : network call is made to fetch the file
+	 *            load - false : an empty fileEntry object is returned, and then updations can be made on this
+	 *            object.
+	 * @return FileEntry
 	 */
 	public FileEntry getFile(String fileId, boolean load) {
 		return getFile(fileId, null, load);
@@ -1267,11 +1434,21 @@ public class FileService extends BaseService {
 
 	/**
 	 * getFile
+	 * <p>
+	 * Rest API for getting files :- /files/basic/api/myuserlibrary/document/{document-id}/entry
 	 * 
 	 * @param fileId
+	 *            - ID of the file to be fetched from the Connections Server
+	 * @param parameters
+	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
 	 * @param load
-	 * @return Rest API for getting files :- /files/basic/api/myuserlibrary/document/{document-id}/entry
+	 *            - a flag to determine whether the network call should be made or an empty placeholder of the
+	 *            fileEntry object should be returned. load - true : network call is made to fetch the file
+	 *            load - false : an empty fileEntry object is returned, and then updations can be made on this
+	 *            object.
+	 * @return FileEntry
 	 */
+
 	public FileEntry getFile(String fileId, Map<String, String> parameters, boolean load) {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getFile");
@@ -1299,9 +1476,14 @@ public class FileService extends BaseService {
 	/**
 	 * executeGet
 	 * 
-	 * @param userId
-	 * @return
+	 * @param requestUri
+	 *            - api to be executed.
+	 * @param parameters
+	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
+	 * @param format
+	 * @return List<FileEntry>
 	 */
+
 	public List<FileEntry> executeGet(String requestUri, Map<String, String> parameters, Handler format) {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "executeGet");
@@ -1321,9 +1503,12 @@ public class FileService extends BaseService {
 
 	/**
 	 * createFileEntriesFromResultFeed
+	 * <p>
+	 * Called from all getters to parse the result and return FileEntery objects.
 	 * 
 	 * @param result
-	 * @return Called from all getters to parse the result and return FileEntery objects.
+	 *            - response from the network call.
+	 * @return List<FileEntry>
 	 */
 	public List<FileEntry> createFileEntriesFromResultFeed(Document result) {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -1353,10 +1538,16 @@ public class FileService extends BaseService {
 
 	/**
 	 * updateFileEntryWithResponseFeed
+	 * <p>
+	 * Called by API for which updations need to be made in the already existing fileEntry objects.
 	 * 
+	 * @param FileEntry
+	 *            - pass the fileEntry object to be updated
 	 * @param result
-	 * @return
+	 *            - response from the network call.
+	 * @return FileEntry - returns the updated fileEntry object
 	 */
+
 	private FileEntry updateFileEntryWithResponseFeed(FileEntry fileEntry, Document result) {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "updateFileEntryWithResponseFeed");

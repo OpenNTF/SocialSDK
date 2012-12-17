@@ -14,26 +14,28 @@
  * permissions and limitations under the License.
  */
 package com.ibm.sbt.services.client.smartcloud.profiles;
+
 /**
+ * This File represents the API map for the ProfileService.
+ * 
  * @author Vimal Dhupar
  */
 public enum ProfilesAPIMap {
-        GETPROFILE("/lotuslive-shindig-server/social/rest/people/@me/@self"),
-        GETUSERIDENTITY("/manage/oauth/getUserIdentity");
+	GETPROFILE("/lotuslive-shindig-server/social/rest/people/@me/@self"), GETUSERIDENTITY(
+			"/manage/oauth/getUserIdentity");
 
-        private final String url;
-        
-        ProfilesAPIMap(String url)
-        {
-            this.url = url;
-        }
-        public String getUrl()
-        {
-            return url;
-        }
-        @Override
-        public String toString()
-        {
-            return this.url;
-        }
+	private final String	url;
+
+	ProfilesAPIMap(String url) {
+		this.url = url;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	@Override
+	public String toString() {
+		return this.url;
+	}
 }

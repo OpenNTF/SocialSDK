@@ -178,7 +178,9 @@ public class EmailHandler extends AbstractServiceHandler {
                     }
                 }
             }
-            emailFactory = DefaultMimeEmailFactory.getInstance();
+            if(emailFactory==null) {
+            	emailFactory = DefaultMimeEmailFactory.getInstance();
+            }
         }
         return emailFactory;
     }

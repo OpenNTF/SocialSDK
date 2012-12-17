@@ -17,40 +17,64 @@ package com.ibm.sbt.services.client.smartcloud.profiles;
 
 import java.util.HashMap;
 import java.util.Map;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import com.ibm.commons.util.io.json.JsonObject;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
-import com.ibm.sbt.services.client.smartcloud.SmartcloudService;
+import com.ibm.sbt.services.client.smartcloud.SmartCloudService;
 import com.ibm.sbt.services.endpoints.Endpoint;
+
 /**
+ * This File represents the Subscriber Class. This is used to fetch the Subscriber Id of the logged in user.
+ * This ID is then used to fetch the Profile of the User.
+ * <p>
+ * 
  * @author Vimal Dhupar
  */
 public class Subscriber {
-	private JsonObject data;
-	
+	private JsonObject			data;
+
+	private static final String	sourceClass	= ProfileService.class.getName();
+	private static final Logger	logger		= Logger.getLogger(sourceClass);
+
 	public Subscriber() {
-		//TODO
+		// TODO
 	}
-	private void load(Endpoint endpoint)
-	{
-		SmartcloudService svc  = new SmartcloudService(endpoint);
-		Map<String, String> parameters = new HashMap<String,String>();
-		Object result = null;
-		try 
-		{
-			result = svc.get(ProfilesAPIMap.GETUSERIDENTITY.getUrl(), parameters, ClientService.FORMAT_JSON);
-		} 
-		catch (ClientServicesException e) 
-		{
+
+	private void load(Endpoint endpoint) {
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.entering(sourceClass, "load");
 		}
+		SmartCloudService svc = new SmartCloudService(endpoint);
+		Map<String, String> parameters = new HashMap<String, String>();
+		Object result = null;
+		try {
+			result = svc.get(ProfilesAPIMap.GETUSERIDENTITY.getUrl(), parameters, ClientService.FORMAT_JSON);
+		} catch (ClientServicesException e) {}
 		this.data = (JsonObject) result;
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.exiting(sourceClass, "load");
+		}
 	}
-	public String getSubscriberId(Endpoint endpoint)
-	{
-		load(endpoint); 
-		if(null != data)
+
+	/**
+	 * getSubscriberId - returns the subscriber id
+	 * 
+	 * @param endpoint
+	 * @return String
+	 */
+	public String getSubscriberId(Endpoint endpoint) {
+		load(endpoint);
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.entering(sourceClass, "getSubscriberId");
+		}
+		if (null != data) {
 			return data.getJsonProperty("subscriberid").toString();
+		}
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.exiting(sourceClass, "getSubscriberId");
+		}
 		return null;
 	}
 }

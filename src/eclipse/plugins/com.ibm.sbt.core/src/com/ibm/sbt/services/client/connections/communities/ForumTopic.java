@@ -9,6 +9,12 @@ import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.XMLException;
 import com.ibm.sbt.util.XmlNavigator;
 
+/**
+ * This File epresents Community Forum Topic
+
+ * @author Swati Singh
+ */
+
 public class ForumTopic {
 	
 	static final Map<String, String> xpathMap;
@@ -70,11 +76,21 @@ public class ForumTopic {
 		this.id = id;
 	}
 
-
+	/**
+	 * getData
+	 * 
+	 * @return Data
+	 */
 	public Object getData() {
 		return data;
 	}
 
+	/**
+	 * Method sets the response from the API call to data method for locally referring the data in
+	 * future.
+	 * 
+	 * @param data
+	 */
 	public void setData(Document data) {
 		this.data = data;
 	}
@@ -91,14 +107,27 @@ public class ForumTopic {
 		return fieldsMap;
 	}
 
+	/**
+	 * getId
+	 * 
+	 * @return id
+	 */	
 	public String getid() {
 		return id;
 	}
 
+	/**
+	 * getTitle
+	 * 
+	 * @return title
+	 */	
 	public String getTitle() {
 		return get("title");
 	}
 
+	/**
+	 * Method sets the bookmark title
+	 */
 	public void setTitle(String title) {
 		fieldsMap.put("title",title);
 	}

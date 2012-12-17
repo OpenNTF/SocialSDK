@@ -14,22 +14,25 @@
  * permissions and limitations under the License.
  */
 package com.ibm.sbt.services.client.connections.files;
+
 /**
- * Files Filters
+ * Files Filters<br>
+ * Enumeration which determines the Filters to be used for Executing FileService API
+ * 
  * @author Vimal Dhupar
  */
 public enum Filters {
-	
-	ADDEDTO("/addedto"),
-	SHARE("/share"),
-	SHARED("/shared"),
-	MYSHARES("/myshares"),
-	COMMENT("comment"),
-	NULL("");
-	
-	String filters;
+
+	ADDEDTO("/addedto"), SHARE("/share"), SHARED("/shared"), MYSHARES("/myshares"), COMMENT("comment"), NULL(
+			"");
+
+	String	filters;
+
 	private Filters(String filters) {
 		this.filters = filters;
 	}
-	public String getFilters(){return filters;}
+
+	public String getFilters() {
+		return filters;
+	}
 }

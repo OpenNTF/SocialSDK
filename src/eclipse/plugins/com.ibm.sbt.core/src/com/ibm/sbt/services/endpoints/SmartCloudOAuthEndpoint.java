@@ -17,7 +17,7 @@ package com.ibm.sbt.services.endpoints;
 
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
-import com.ibm.sbt.services.client.smartcloud.SmartcloudService;
+import com.ibm.sbt.services.client.smartcloud.SmartCloudService;
 
 /**
  * @author priand
@@ -30,6 +30,6 @@ public class SmartCloudOAuthEndpoint extends OAuthEndpoint {
 
     @Override
 	public ClientService getClientService() throws ClientServicesException {
-    	return new SmartcloudService(this);
+    	return new SmartCloudService(this);
     }
 }

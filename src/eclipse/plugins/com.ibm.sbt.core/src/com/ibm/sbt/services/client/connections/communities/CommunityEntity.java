@@ -17,7 +17,8 @@
 package com.ibm.sbt.services.client.connections.communities;
 
 /**
- * Files Categories
+ * Community Entity 
+ * 
  * @author Manish Kataria
  */
 public enum CommunityEntity {
@@ -36,7 +37,11 @@ public enum CommunityEntity {
 	private CommunityEntity(String communityEntity) {
 		this.communityEntity = communityEntity;
 	}
-	
+	/**
+	 * getCommunityEntityType
+	 * 
+	 * @return String
+	 */
 	public String getCommunityEntityType(){
 		return communityEntity;
 	}

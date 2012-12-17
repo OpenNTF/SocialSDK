@@ -14,18 +14,24 @@
  * permissions and limitations under the License.
  */
 package com.ibm.sbt.services.client.connections.files;
+
 /**
- * Files Base URL
+ * Files Base URL <br>
+ * Enumeration which determines the BaseUrl to be used for Executing FileService API
+ * 
  * @author Vimal Dhupar
  */
 public enum BaseUrl {
-	
+
 	FILES("/files");
-	
-	String baseUrl;
-	
+
+	String	baseUrl;
+
 	private BaseUrl(String baseUrl) {
 		this.baseUrl = baseUrl;
 	}
-	public String getBaseUrl(){return baseUrl;}
+
+	public String getBaseUrl() {
+		return baseUrl;
+	}
 }

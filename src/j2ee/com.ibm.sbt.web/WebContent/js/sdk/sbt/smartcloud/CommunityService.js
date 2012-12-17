@@ -128,7 +128,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 		}
 	});
 	/**
-	Community service class associated with the community service of IBM Smartcloud.
+	Community service class associated with the community service of IBM SmartCloud.
 
 	@class CommunityService
 	@constructor

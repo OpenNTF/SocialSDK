@@ -37,11 +37,6 @@ public class SampleApp {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		if (args.length != 2) {
-			System.out.println("Usage: java com.ibm.sbt.sample.app.SampleApp faces-config.xml sbt.properties");
-			return;
-		}
-
 		RuntimeFactory runtimeFactory = new RuntimeFactoryStandalone();
 		Application application = runtimeFactory.initApplication(null);
 		Context context = Context.init(application, null, null);

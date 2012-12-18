@@ -34,7 +34,8 @@
   	<module>test</module>
 	-->
     <module>js</module>
- 	<module>distribution</module>	
+    <module>reporting</module>
+ 	  <module>distribution</module>	
   </modules>
 
   <build>

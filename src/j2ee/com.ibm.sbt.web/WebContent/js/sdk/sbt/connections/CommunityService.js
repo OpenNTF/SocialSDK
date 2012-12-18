@@ -28,6 +28,7 @@ define(
 			 * Community class associated with a community.
 			 * 
 			 * @class Community
+			 * @namespace connections
 			 */
 			var Community = declare("sbt.connections.Community", null, {
 				_service : null,
@@ -44,23 +45,18 @@ define(
 				 * document in the community object.
 				 * 
 				 * @method load
-				 * @param {Object}
-				 *            [args] Argument object
-				 * @param {Boolean}
-				 *            [args.loadIt=true] Loads the community object with atom entry document of the community. To instantiate an empty community object
+				 * @param {Object} [args] Argument object
+				 * @param {Boolean} [args.loadIt=true] Loads the community object with atom entry document of the community. To instantiate an empty community object
 				 *            associated with a community (with no atom entry document), the load method must be called with this parameter set to false. By
 				 *            default, this parameter is true.
-				 * @param {Function}
-				 *            [args.load] The function community.load invokes when the community is loaded from the server. The function expects to receive one
+				 * @param {Function} [args.load] The function community.load invokes when the community is loaded from the server. The function expects to receive one
 				 *            parameter, the loaded community object.
-				 * @param {Function}
-				 *            [args.error] Sometimes the load calls fail. Often these are 404 errors or server errors such as 500. The error parameter is
+				 * @param {Function} [args.error] Sometimes the load calls fail. Often these are 404 errors or server errors such as 500. The error parameter is
 				 *            another callback function that is only invoked when an error occurs. This allows to control what happens when an error occurs
 				 *            without having to put a lot of logic into your load function to check for error conditions. The parameter passed to the error
 				 *            function is a JavaScript Error object indicating what the failure was. From the error object. one can get access to the javascript
 				 *            library error object, the status code and the error message.
-				 * @param {Function}
-				 *            [args.handle] This callback is called regardless of whether the call to load the community completes or fails. The parameter
+				 * @param {Function} [args.handle] This callback is called regardless of whether the call to load the community completes or fails. The parameter
 				 *            passed to this callback is the community object (or error object). From the error object. one can get access to the javascript
 				 *            library error object, the status code and the error message.
 				 */
@@ -71,19 +67,15 @@ define(
 				 * Updates the community object.
 				 * 
 				 * @method update
-				 * @param {Object}
-				 *            [args] Argument object
-				 * @param {Function}
-				 *            [args.load] The function community.load invokes when the community is loaded from the server. The function expects to receive one
+				 * @param {Object} [args] Argument object
+				 * @param {Function} [args.load] The function community.load invokes when the community is loaded from the server. The function expects to receive one
 				 *            parameter, the loaded community object.
-				 * @param {Function}
-				 *            [args.error] Sometimes the load calls fail. Often these are due to bad request like http error code 400 or server errors like http
+				 * @param {Function} [args.error] Sometimes the load calls fail. Often these are due to bad request like http error code 400 or server errors like http
 				 *            error code 500. The error parameter is another callback function that is only invoked when an error occurs. This allows to control
 				 *            what happens when an error occurs without having to put a lot of logic into your load function to check for error conditions. The
 				 *            parameter passed to the error function is a JavaScript Error object indicating what the failure was. From the error object. one
 				 *            can get access to the javascript library error object, the status code and the error message.
-				 * @param {Function}
-				 *            [args.handle] This callback is called regardless of whether the call to load the community completes or fails. The parameter
+				 * @param {Function} [args.handle] This callback is called regardless of whether the call to load the community completes or fails. The parameter
 				 *            passed to this callback is the community object (or error object). From the error object. one can get access to the javascript
 				 *            library error object, the status code and the error message.
 				 */
@@ -95,8 +87,7 @@ define(
 				 * Return the xpath expression for a field in the atom entry document of the community.
 				 * 
 				 * @method fieldXPathForEntry
-				 * @param {String}
-				 *            fieldName Xml element name in atom entry document of the community.
+				 * @param {String} fieldName Xml element name in atom entry document of the community.
 				 * @return {String} xpath for the element in atom entry document of the community.
 				 */
 				fieldXPathForEntry : function(fieldName) {
@@ -106,8 +97,7 @@ define(
 				 * Return the xpath expression for a field in the atom entry of the community within a feed of communities.
 				 * 
 				 * @method fieldXPathForFeed
-				 * @param {String}
-				 *            fieldName Xml element name in entry of the community.
+				 * @param {String} fieldName Xml element name in entry of the community.
 				 * @return {String} xpath for the element in entry of the community.
 				 */
 				fieldXPathForFeed : function(fieldName) {
@@ -117,8 +107,7 @@ define(
 				 * Return the value of a field in the community entry using xpath expression
 				 * 
 				 * @method xpath
-				 * @param {String}
-				 *            path xpath expression
+				 * @param {String} path xpath expression
 				 * @return {String} value of a field in community entry using the xpath expression
 				 */
 				xpath : function(path) {
@@ -128,20 +117,35 @@ define(
 				 * Return an array of nodes from a community entry using xpath expression
 				 * 
 				 * @method xpathArray
-				 * @param {String}
-				 *            path xpath expression
+				 * @param {String} path xpath expression
 				 * @return {Object} an array of nodes from a community entry using xpath expression
 				 */
 				xpathArray : function(path) {
 					return this.data && path ? xpath.selectNodes(this.data, path, con.namespaces) : null;
 				},
+				
+				/**
+				 * Return the value of IBM Connections community attribute from community ATOM entry document.
+				 * 
+				 * @method get
+				 * @param {String} fieldName Name of the field representing community attribute in IBM Connections.
+				 * @return {String/Object} The value of the field from the community ATOM entry document.
+				 */
 				get : function(fieldName) {
 					if (fieldName == "tags") {
 						return this._getTags(fieldName);
 					}
 					return this.fields[fieldName] || this.xpath(this.fieldXPathForEntry(fieldName)) || this.xpath(this.fieldXPathForFeed(fieldName));
 				},
-
+				
+				/**
+				 * Sets the value of IBM Connections community attribute.
+				 * 
+				 * @method set
+				 * @param {String} fieldName Name of the field representing community attribute in IBM Connections.
+				 * @param {String} value Value of the field representing community attribute in IBM Connections.				 
+				 */
+				
 				set : function(fieldName, value) {
 					this.fields[fieldName] = value;
 				},
@@ -159,36 +163,119 @@ define(
 					}
 					return tags;
 				},
+				
+				/**
+				 * Return the value of IBM Connections community ID from community ATOM entry document.
+				 * 
+				 * @method getCommunityUuid
+				 * @return {String} Community ID of the community
+				 */
+				
 				getCommunityUuid : function() {
 					return this.get("communityUuid");
 				},
+				
+				/**
+				 * Return the value of IBM Connections community title from community ATOM entry document.
+				 * 
+				 * @method getTitle
+				 * @return {String} Community title of the community
+				 */
+				
 				getTitle : function() {
 					return this.get("title");
 				},
+				
+				/**
+				 * Return the value of IBM Connections community description summary from community ATOM entry document.
+				 * 
+				 * @method getSummary
+				 * @return {String} Community description summary of the community
+				 */
+				
 				getSummary : function() {
 					return this.get("summary");
 				},
+				
+				/**
+				 * Return the value of IBM Connections community description from community ATOM entry document.
+				 * 
+				 * @method getContent
+				 * @return {String} Community description of the community
+				 */
+				
 				getContent : function() {
 					return this.get("content");
 				},
+				/**
+				 * Return the value of IBM Connections community URL  from community ATOM entry document.
+				 * 
+				 * @method getCommunityUrl
+				 * @return {String} Community URL of the community
+				 */
 				getCommunityUrl : function() {
 					return this.get("communityUrl");
 				},
+				
+				/**
+				 * Return the value of IBM Connections community Logo URL  from community ATOM entry document.
+				 * 
+				 * @method getLogoUrl
+				 * @return {String} Community Logo URL of the community
+				 */
 				getLogoUrl : function() {
 					return this.get("logoUrl");
 				},
+				
+				/**
+				 * Return tags of IBM Connections community from community ATOM entry document.
+				 * 
+				 * @method getTags
+				 * @return {Object} Array of tags of the community
+				 */
+				
 				getTags : function() {
 					return this.get("tags");
 				},
+				
+				/**
+				 * Sets title of IBM Connections community.
+				 * 
+				 * @method setTitle
+				 * @param {String} title Title of the community
+				 */
+				
 				setTitle : function(title) {
 					this.set("title", title);
 				},
+				
+				/**
+				 * Sets description of IBM Connections community.
+				 * 
+				 * @method setContent
+				 * @param {String} content Description of the community
+				 */
 				setContent : function(content) {
 					this.set("content", content);
 				},
+				
+				/**
+				 * Set new tags to be added to IBM Connections community.
+				 * 
+				 * @method setAddedTags
+				 * @param {Object} Array of tags to be added to the community
+				 */
+				
 				setAddedTags : function(addedTags) {
 					this.set("addedTags", addedTags);
 				},
+				
+				/**
+				 * Set tags to be deleted from IBM Connections community.
+				 * 
+				 * @method setDeletedTags
+				 * @param {Object} Array of tags to be deleted from the community
+				 */
 				setDeletedTags : function(deletedTags) {
 					this.set("deletedTags", deletedTags);
 				}
@@ -196,9 +283,10 @@ define(
 			});
 
 			/**
-			 * Member class associated with a community.
+			 * Member class associated with a member of a community.
 			 * 
 			 * @class Member
+			 * @namespace connections
 			 */
 			var Member = declare("sbt.connections.Member", null, {
 				_service : null,
@@ -210,38 +298,115 @@ define(
 					this._service = svc;
 					this._id = id;
 				},
-				load : function(args) {
-					if (!this.data) {
-						this.data = this._service._loadMember(this, args);
-					}
+				/**
+				 * Loads the member object with the atom entry associated with the member of the community. By default, a network call is made to load the atom entry
+				 * document in the member object.
+				 * 
+				 * @method load
+				 * @param {Object} [args] Argument object
+				 * @param {Boolean} [args.loadIt=true] Loads the member object with atom entry document of the member of the community. To instantiate an empty member object
+				 *            associated with a community (with no atom entry document), the load method must be called with this parameter set to false. By
+				 *            default, this parameter is true.
+				 * @param {Function} [args.load] The function member.load invokes when the member is loaded from the server. The function expects to receive one
+				 *            parameter, the loaded member object.
+				 * @param {Function} [args.error] Sometimes the load calls fail. Often these are 404 errors due to bad request or server errors such as 500. The error parameter is
+				 *            another callback function that is only invoked when an error occurs. This allows to control what happens when an error occurs
+				 *            without having to put a lot of logic into your load function to check for error conditions. The parameter passed to the error
+				 *            function is a JavaScript Error object indicating what the failure was. From the error object. one can get access to the javascript
+				 *            library error object, the status code and the error message.
+				 * @param {Function} [args.handle] This callback is called regardless of whether the call to load the community completes or fails. The parameter
+				 *            passed to this callback is the member object in case of successful network call (or error object in case of error from the network call). From the error object. one can get access to the javascript
+				 *            library error object, the status code and the error message.
+				 */
+				load : function(args) {					
+					this.data = this._service._loadMember(this, args);					
 				},
+				/**
+				 * Return the xpath expression for a field in the atom entry of the community member within a feed of community members.
+				 * 
+				 * @method fieldXPathForFeed
+				 * @param {String} fieldName Field name in entry of the community member.
+				 * @return {String} xpath for the element in entry of the community member.
+				 */
 				fieldXPathForFeed : function(fieldName) {
 					return Constants._xpath_member[fieldName];
 				},
+				
+				/**
+				 * Return the xpath expression for a field in the atom entry of a community member.
+				 * 
+				 * @method fieldXPathForEntry
+				 * @param {String} fieldName Field name in entry of the community member.
+				 * @return {String} xpath for the element in entry of the community member.
+				 */
+				
 				fieldXPathForEntry : function(fieldName) {
 					return Constants._xpath_community_Members_Feed[fieldName];
 				},
+				
+				/**
+				 * Return the value of a field in the community member entry using xpath expression
+				 * 
+				 * @method xpath
+				 * @param {String} path xpath expression for the field
+				 * @return {String} Value of a field in community entry using the xpath expression
+				 */
 				xpath : function(path) {
 					return this.data && path ? xpath.selectText(this.data, path, con.namespaces) : null;
 				},
+				
+				/**
+				 * Return the value of IBM Connections member attribute from community member ATOM entry document.
+				 * 
+				 * @method get
+				 * @param {String} fieldName Name of the field representing community member attribute in IBM Connections.
+				 * @return {String/Object} The value of the field from the community member ATOM entry document.
+				 */
 				get : function(fieldName) {
 					return this.memberFields[fieldName] || this.xpath(this.fieldXPathForEntry(fieldName)) || this.xpath(this.fieldXPathForFeed(fieldName));
 				},
+				
+				/**
+				 * Sets the value of IBM Connections community member attribute.
+				 * 
+				 * @method set
+				 * @param {String} fieldName Name of the field representing community member attribute in IBM Connections.
+				 * @param {String} value Value of the field representing community member attribute in IBM Connections.				 
+				 */
 				set : function(fieldName, value) {
 					this.memberFields[fieldName] = value;
 				},
 				remove : function(fieldName) {
 					delete this.memberFields[fieldName];
 				},
+				
+				/**
+				 * Return the value of community member name from community member ATOM entry document.
+				 * 
+				 * @method getName
+				 * @return {String} Community member name
+				 */
+				
 				getName : function() {
 					return this.get("name");
-				},
-				setName : function(name) {
-					this.set("name", name);
-				},
+				},			
+				
+				/**
+				 * Return the value of community member role from community member ATOM entry document.
+				 * 
+				 * @method getRole
+				 * @return {String} Community member role
+				 */
 				getRole : function() {
 					return this.get("role");
 				},
+				
+				/**
+				 * Sets role of a community member
+				 * 
+				 * @method setRole
+				 * @param {String} role Role of the community member.
+				 */
 				setRole : function(role) {
 					this.set("role", role);
 				}
@@ -250,11 +415,10 @@ define(
 			 * Community service class associated with the community service of IBM Connections.
 			 * 
 			 * @class CommunityService
+			 * @namespace connections
 			 * @constructor
-			 * @param {Object}
-			 *            options Options object
-			 * @param {String}
-			 *            [options.endpoint=connections] Endpoint to be used by CommunityService.
+			 * @param {Object} options Options object
+			 * @param {String} [options.endpoint=connections] Endpoint to be used by CommunityService.
 			 */
 			var CommunityService = declare(
 					"sbt.connections.CommunityService",
@@ -279,27 +443,20 @@ define(
 						 * Get member entry document of a member of a community
 						 * 
 						 * @method getMember
-						 * @param {Object}
-						 *            args Argument object
-						 * @param {String}
-						 *            args.id Id of the member. This can be userId or email of the member.
-						 * @param {String/Object}
-						 *            args.community This can be either a string representing community id or a community object with its id initialized.
-						 * @param {Boolean}
-						 *            [args.loadIt=true] Loads the members object with member entry document. If an empty member object associated with a
+						 * @param {Object} args Argument object
+						 * @param {String} args.id Id of the member. This can be userId or email of the member.
+						 * @param {String/Object} args.community This can be either a string representing community id or a community object with its id initialized.
+						 * @param {Boolean} [args.loadIt=true] Loads the members object with member entry document. If an empty member object associated with a
 						 *            community (with no member entry document) is needed, then the load method must be called with this parameter set to false.
 						 *            By default, this parameter is true.
-						 * @param {Function}
-						 *            [args.load] This function is invoked when the member is loaded from the server. The function expects to receive one
+						 * @param {Function} [args.load] This function is invoked when the member is loaded from the server. The function expects to receive one
 						 *            parameter, the loaded member object.
-						 * @param {Function}
-						 *            [args.error] Sometimes the getMember call fails with bad request such as 400 or server errors such as 500. The error
+						 * @param {Function} [args.error] Sometimes the getMember call fails with bad request such as 400 or server errors such as 500. The error
 						 *            parameter is another callback function that is only invoked when an error occurs. This allows to control what happens when
 						 *            an error occurs without having to put a lot of logic into your load function to check for error conditions. The parameter
 						 *            passed to the error function is a JavaScript Error object indicating what the failure was. From the error object. one can
 						 *            get access to the javascript library error object, the status code and the error message.
-						 * @param {Function}
-						 *            [args.handle] This callback is called regardless of whether the call to get the member completes or fails. The parameter
+						 * @param {Function} [args.handle] This callback is called regardless of whether the call to get the member completes or fails. The parameter
 						 *            passed to this callback is the member object (or error object). From the error object. one can get access to the
 						 *            javascript library error object, the status code and the error message.
 						 */
@@ -313,18 +470,21 @@ define(
 						 * Get community object associated with a community
 						 * 
 						 * @method getCommunity
-						 * @param {Object}
-						 *            args Argument object
-						 * @param {String}
-						 *            args.id id of the community
-						 * @param {Boolean}
-						 *            [args.loadIt=true]
-						 * @param {Function}
-						 *            [args.load]
-						 * @param {Function}
-						 *            [args.error]
-						 * @param {Function}
-						 *            [args.handle]
+						 * @param {Object} args Argument object
+						 * @param {String} args.id id of the community
+						 * @param {Boolean} [args.loadIt=true] Loads the community object with community entry document. If an empty community object 
+						 * 		(with no community entry document) is needed, then the load method must be called with this parameter set to false.
+						 *      By default, this parameter is true.
+						 * @param {Function} [args.load] This function is invoked when the community is loaded from the server. The function expects to receive one
+						 *            parameter, the loaded community object.
+						 * @param {Function} [args.error] Sometimes the getCommunity call fails with bad request such as 400 or server errors such as 500. The error
+						 *            parameter is another callback function that is only invoked when an error occurs. This allows to control what happens when
+						 *            an error occurs without having to put a lot of logic into your load function to check for error conditions. The parameter
+						 *            passed to the error function is a JavaScript Error object indicating what the failure was. From the error object. one can
+						 *            get access to the javascript library error object, the status code and the error message.
+						 * @param {Function} [args.handle] This callback is called regardless of whether the call to get the community completes or fails. The parameter
+						 *            passed to this callback is the community object (or error object). From the error object. one can get access to the
+						 *            javascript library error object, the status code and the error message.
 						 */
 						getCommunity : function(args) {
 							// return lang.isArray(id) ? this._getMultiple(id,
@@ -562,18 +722,21 @@ define(
 						 * Create a new community
 						 * 
 						 * @method createCommunity
-						 * @param {Object}
-						 *            community Community object
-						 * @param {Object}
-						 *            [args] Argument object
-						 * @param {Boolean}
-						 *            [args.loadIt=true]
-						 * @param {Function}
-						 *            [args.load]
-						 * @param {Function}
-						 *            [args.error]
-						 * @param {Function}
-						 *            [args.handle]
+						 * @param {Object} community Community object which denotes the community to be created.
+						 * @param {Object} [args] Argument object
+						 * @param {Boolean} [args.loadIt=true] Loads the community object with community entry document. If an empty community object 
+						 * 		(with no community entry document) is needed, then the load method must be called with this parameter set to false.
+						 *      By default, this parameter is true.
+						 * @param {Function} [args.load] This function is invoked when the community is created. The function expects to receive one
+						 *            parameter, the loaded community object.
+						 * @param {Function} [args.error] Sometimes the createCommunity call fails with bad request such as 400 or server errors such as 500. The error
+						 *            parameter is another callback function that is only invoked when an error occurs. This allows to control what happens when
+						 *            an error occurs without having to put a lot of logic into your load function to check for error conditions. The parameter
+						 *            passed to the error function is a JavaScript Error object indicating what the failure was. From the error object. one can
+						 *            get access to the javascript library error object, the status code and the error message.
+						 * @param {Function} [args.handle] This callback is called regardless of whether the call to create the community completes or fails. The parameter
+						 *            passed to this callback is the community object (or error object). From the error object. one can get access to the
+						 *            javascript library error object, the status code and the error message.
 						 */
 						createCommunity : function(community, args) {
 							if (!(this._checkCommunityObject(community, args))) {
@@ -610,16 +773,18 @@ define(
 						 * Update an existing community
 						 * 
 						 * @method updateCommunity
-						 * @param {Object}
-						 *            community Community object
-						 * @param {Object}
-						 *            [args] Argument object
-						 * @param {Function}
-						 *            [args.load]
-						 * @param {Function}
-						 *            [args.error]
-						 * @param {Function}
-						 *            [args.handle]
+						 * @param {Object} community Community object
+						 * @param {Object} [args] Argument object
+						 * @param {Function} [args.load] This function is invoked when the community is updated. The function expects to receive one
+						 *            parameter, the loaded community object.
+						 * @param {Function} [args.error] Sometimes the updateCommunity call fails with bad request such as 400 or server errors such as 500. The error
+						 *            parameter is another callback function that is only invoked when an error occurs. This allows to control what happens when
+						 *            an error occurs without having to put a lot of logic into your load function to check for error conditions. The parameter
+						 *            passed to the error function is a JavaScript Error object indicating what the failure was. From the error object. one can
+						 *            get access to the javascript library error object, the status code and the error message.
+						 * @param {Function} [args.handle] This callback is called regardless of whether the call to update the community completes or fails. The parameter
+						 *            passed to this callback is the community object (or error object). From the error object. one can get access to the
+						 *            javascript library error object, the status code and the error message.
 						 */
 						updateCommunity : function(community, args) {
 							if (!(this._checkCommunityObject(community, args)) || !(this._checkCommunityId(community, args))) {
@@ -651,16 +816,17 @@ define(
 						 * Delete an existing community
 						 * 
 						 * @method deleteCommunity
-						 * @param {String/Object}
-						 *            community id of the community or the community object.
-						 * @param {Object}
-						 *            [args] Argument object
-						 * @param {Function}
-						 *            [args.load]
-						 * @param {Function}
-						 *            [args.error]
-						 * @param {Function}
-						 *            [args.handle]
+						 * @param {String/Object} community id of the community or the community object (of the community to be deleted)
+						 * @param {Object} [args] Argument object
+						 * @param {Function} [args.load] This function is invoked when the community is deleted from the server.
+						 * @param {Function} [args.error] Sometimes the deleteCommunity call fails with bad request such as 400 or server errors such as 500. The error
+						 *            parameter is another callback function that is only invoked when an error occurs. This allows to control what happens when
+						 *            an error occurs without having to put a lot of logic into your load function to check for error conditions. The parameter
+						 *            passed to the error function is a JavaScript Error object indicating what the failure was. From the error object. one can
+						 *            get access to the javascript library error object, the status code and the error message.
+						 * @param {Function} [args.handle] This callback is called regardless of whether the call to delete the community completes or fails. The parameter
+						 *            passed to this callback is the error object (in case of an error). From the error object. one can get access to the
+						 *            javascript library error object, the status code and the error message.
 						 */
 						deleteCommunity : function(inputCommunity, args) {
 							if (!(typeof inputCommunity == "object")) {
@@ -697,18 +863,19 @@ define(
 						 * Add member to a community
 						 * 
 						 * @method addMember
-						 * @param {String/Object}
-						 *            community id of the community or the community object.
-						 * @param {Object}
-						 *            member member object representing the member of the community
-						 * @param {Object}
-						 *            [args] Argument object
-						 * @param {Function}
-						 *            [args.load]
-						 * @param {Function}
-						 *            [args.error]
-						 * @param {Function}
-						 *            [args.handle]
+						 * @param {String/Object} community id of the community or the community object.
+						 * @param {Object} member member object representing the member of the community to be added
+						 * @param {Object} [args] Argument object
+						 * @param {Function} [args.load] This function is invoked when the member is added to the community. The function expects to receive one
+						 *            parameter, the loaded member object.
+						 * @param {Function} [args.error] Sometimes the addMember call fails with bad request such as 400 or server errors such as 500. The error
+						 *            parameter is another callback function that is only invoked when an error occurs. This allows to control what happens when
+						 *            an error occurs without having to put a lot of logic into your load function to check for error conditions. The parameter
+						 *            passed to the error function is a JavaScript Error object indicating what the failure was. From the error object. one can
+						 *            get access to the javascript library error object, the status code and the error message.
+						 * @param {Function} [args.handle] This callback is called regardless of whether the call to add member to the community completes or fails. The parameter
+						 *            passed to this callback is the member object (or error object). From the error object. one can get access to the
+						 *            javascript library error object, the status code and the error message.
 						 */
 						addMember : function(inputCommunity, inputMember, args) {
 							var community = null;
@@ -750,18 +917,18 @@ define(
 						 * Remove member of a community
 						 * 
 						 * @method removeMember
-						 * @param {String/Object}
-						 *            community id of the community or the community object.
-						 * @param {String/Object}
-						 *            member id of the member or member object
-						 * @param {Object}
-						 *            [args] Argument object
-						 * @param {Function}
-						 *            [args.load]
-						 * @param {Function}
-						 *            [args.error]
-						 * @param {Function}
-						 *            [args.handle]
+						 * @param {String/Object} community id of the community or the community object.
+						 * @param {String/Object} member id of the member or member object (of the member to be removed)
+						 * @param {Object} [args] Argument object
+						 * @param {Function} [args.load] This function is invoked when the member is removed from the community. 
+						 * @param {Function} [args.error] Sometimes the removeMember call fails with bad request such as 400 or server errors such as 500. The error
+						 *            parameter is another callback function that is only invoked when an error occurs. This allows to control what happens when
+						 *            an error occurs without having to put a lot of logic into your load function to check for error conditions. The parameter
+						 *            passed to the error function is a JavaScript Error object indicating what the failure was. From the error object. one can
+						 *            get access to the javascript library error object, the status code and the error message.
+						 * @param {Function} [args.handle] This callback is called regardless of whether the call to remove a member from the community completes or fails. The parameter
+						 *            passed to this callback is the error object (in case of error). From the error object. one can get access to the
+						 *            javascript library error object, the status code and the error message.
 						 */
 						removeMember : function(inputCommunity, inputMember, args) {
 							var community = null;
@@ -806,16 +973,18 @@ define(
 						 * Get public communities from IBM Connections
 						 * 
 						 * @method getPublicCommunities
-						 * @param {Object}
-						 *            [args] Argument object
-						 * @param {Function}
-						 *            [args.load]
-						 * @param {Function}
-						 *            [args.error]
-						 * @param {Function}
-						 *            [args.handle]
-						 * @param {Object}
-						 *            [args.parameters] Object representing various parameters that can be passed to get a feed of public communities. The
+						 * @param {Object} [args] Argument object
+						 * @param {Function} [args.load] This function is invoked when the call to get public communities completes. The function expects to receive one
+						 *            parameter, the communities object - an array of public communities.
+						 * @param {Function} [args.error] Sometimes the getPublicCommunities call fails with bad request such as 400 or server errors such as 500. The error
+						 *            parameter is another callback function that is only invoked when an error occurs. This allows to control what happens when
+						 *            an error occurs without having to put a lot of logic into your load function to check for error conditions. The parameter
+						 *            passed to the error function is a JavaScript Error object indicating what the failure was. From the error object. one can
+						 *            get access to the javascript library error object, the status code and the error message.
+						 * @param {Function} [args.handle] This callback is called regardless of whether the call to get public communities completes or fails. The parameter
+						 *            passed to this callback is the communities object (or error object). From the error object. one can get access to the
+						 *            javascript library error object, the status code and the error message.
+						 * @param {Object} [args.parameters] Object representing various parameters that can be passed to get a feed of public communities. The
 						 *            parameters must be exactly as they are supported by IBM Connections like ps, sortBy etc.
 						 */
 						getPublicCommunities : function(args) {
@@ -830,16 +999,18 @@ define(
 						 * Get my communities from IBM Connections
 						 * 
 						 * @method getMyCommunities
-						 * @param {Object}
-						 *            [args] Argument object
-						 * @param {Function}
-						 *            [args.load]
-						 * @param {Function}
-						 *            [args.error]
-						 * @param {Function}
-						 *            [args.handle]
-						 * @param {Object}
-						 *            [args.parameters] Object representing various parameters that can be passed to get a feed of my communities. The
+						 * @param {Object} [args] Argument object
+						 * @param {Function} [args.load] This function is invoked when the call to get my communities completes. The function expects to receive one
+						 *            parameter, the communities object - an array of my communities.
+						 * @param {Function} [args.error] Sometimes the getMyCommunities call fails with bad request such as 400 or server errors such as 500. The error
+						 *            parameter is another callback function that is only invoked when an error occurs. This allows to control what happens when
+						 *            an error occurs without having to put a lot of logic into your load function to check for error conditions. The parameter
+						 *            passed to the error function is a JavaScript Error object indicating what the failure was. From the error object. one can
+						 *            get access to the javascript library error object, the status code and the error message.
+						 * @param {Function} [args.handle] This callback is called regardless of whether the call to get my communities completes or fails. The parameter
+						 *            passed to this callback is the communities object (or error object). From the error object. one can get access to the
+						 *            javascript library error object, the status code and the error message.
+						 * @param {Object} [args.parameters] Object representing various parameters that can be passed to get a feed of my communities. The
 						 *            parameters must be exactly as they are supported by IBM Connections like ps, sortBy etc.
 						 */
 
@@ -854,16 +1025,18 @@ define(
 						 * Get members of a community.
 						 * 
 						 * @method getMembers
-						 * @param {Object}
-						 *            [args] Argument object
-						 * @param {Function}
-						 *            [args.load]
-						 * @param {Function}
-						 *            [args.error]
-						 * @param {Function}
-						 *            [args.handle]
-						 * @param {Object}
-						 *            [args.parameters] Object representing various parameters that can be passed to get a feed of members of a community. The
+						 * @param {Object} [args] Argument object
+						 * @param {Function} [args.load] This function is invoked when the call to get the members of a community completes. The function expects to receive one
+						 *            parameter, the members object - an array of members of the community.
+						 * @param {Function} [args.error] Sometimes the getMembers call fails with bad request such as 400 or server errors such as 500. The error
+						 *            parameter is another callback function that is only invoked when an error occurs. This allows to control what happens when
+						 *            an error occurs without having to put a lot of logic into your load function to check for error conditions. The parameter
+						 *            passed to the error function is a JavaScript Error object indicating what the failure was. From the error object. one can
+						 *            get access to the javascript library error object, the status code and the error message.
+						 * @param {Function} [args.handle] This callback is called regardless of whether the call to get the members of the community completes or fails. The parameter
+						 *            passed to this callback is the members object (or error object). From the error object. one can get access to the
+						 *            javascript library error object, the status code and the error message.
+						 * @param {Object}  [args.parameters] Object representing various parameters that can be passed to get a feed of members of a community. The
 						 *            parameters must be exactly as they are supported by IBM Connections like ps, sortBy etc.
 						 */
 						getMembers : function(communityArg, args) {

@@ -1,5 +1,7 @@
 @echo off
 
+echo buils started with %0 %1 %2 %3 %4
+
 if "%1"=="-label" set LABEL=%2
 
 if "%1"=="-tools" set toolsDir=%2
@@ -7,6 +9,8 @@ if "%1"=="-tools" set toolsDir=%2
 if "%3"=="-label" set LABEL=%4
 
 if "%3"=="-tools" set toolsDir=%4
+
+echo building %LABEL% with tools from %toolsDir%
 
 if "%toolsDir%" == "" echo Set toolsDir environment variable to the tools directory in your machine and REM this line
 if "%toolsDir%" == "" set toolsDir=..\tools

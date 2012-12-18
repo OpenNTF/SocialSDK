@@ -17,4 +17,4 @@ if "%3"=="-tools"  set toolsDir=%4
 if "%toolsDir%" == "" echo Set toolsDir environment variable to the tools directory in your machine and REM this line
 if "%toolsDir%" == "" set toolsDir=..\tools
 
-echo mvn clean javadoc:javadoc install -DtoolsDir=%toolsDir% -DbuildLabel=%LABEL%
+mvn clean javadoc:javadoc install -DtoolsDir=%toolsDir% -DbuildLabel=%LABEL%

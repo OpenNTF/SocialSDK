@@ -1,26 +1,156 @@
 <?xml version="1.0"?>
-<project name="YUIDoc JS Docs" default="jsdoc" basedir=".">
+<project name="JS" default="build" basedir=".">
   <property environment="env"/>
-  <property name="dir.origin" value="..\..\java\sdk\eclipse\plugins\com.ibm.sbt.web\WebContent\js\sdk\sbt"/>
-  <property name="dir.output" value="..\..\target\doc\jsdoc"/>
-  <property name="dir.nodejs" value="${toolsDir}\node-v0.8.6-x86"/>
-  <property name="dir.npm" value="${env.APPDATA}\npm"/>  
-  <property name="yuidoc.exec" value="${dir.npm}\yuidoc.cmd"/>
-  <property name="node.exec" value="${dir.nodejs}\node.exe"/>
-  <property name="path.config" value="..\..\java\sdk\eclipse\plugins\com.ibm.sbt.web\WebContent\js\yuidoc.json"/>
-  
-  <echo>YUIDoc executable: ${yuidoc.exec}</echo>
-  <echo>NodeJS executable: ${node.exec}</echo>
-  <echo>Arguments:         ${dir.npm}\node_modules\yuidocjs\lib\cli.js ${dir.origin} -o ${dir.output} -c ${path.config}</echo>
-  
-  <target name="jsdoc">
-  	<exec executable="${node.exec}" dir=".">
-  		<arg value="${dir.npm}\node_modules\yuidocjs\lib\cli.js"/>
-  		<arg value="${dir.origin}"/>
-  		<arg value="-o"/>
-  		<arg value="${dir.output}"/>
-  		<arg value="-c"/>
-  		<arg value="${path.config}"/>
-  	</exec>
+
+  <!-- PROPERTIES -->
+  <target name="properties">
+      <property file="build.properties"/>
   </target>
+
+  <!--If the ant script is executed from ant ant not from maven antrun plugin we still have to define antcontrib taskdef -->
+  <taskdef resource="net/sf/antcontrib/antlib.xml" />
+
+  <target name="prepare" depends="properties">
+    <echo>--Deleting output directories</echo>
+    <delete dir="${dir.jsdoc.output}" />
+    <delete dir="${dir.jshint.report}" />
+    <delete dir="${dir.min.output}" />
+    <echo>Done!</echo>
+    <echo>--Creating output directories</echo>
+    <mkdir dir="${dir.jsdoc.output}" />
+    <mkdir dir="${dir.jshint.report}" />
+    <mkdir dir="${dir.min.output}" />
+    <echo>Done!</echo>
+  </target>
+
+  <target name="checkJSHint" depends="properties">
+    <echo>Checking jshint</echo>
+    <exec executable="${node.exec}" failonerror="false" outputproperty="jshintv.output" resultproperty="jshintv.result">
+      <arg value="${jshint.exec}"/>
+      <arg value="-v"/>
+    </exec>
+    <if>
+      <equals arg1="${jshintv.result}" arg2="0" />
+      <then>
+        <echo>JSHint ${jshintv.output} found</echo>
+      </then>
+      <else>
+        <echo>Installing JSHint</echo>
+        <exec executable="${node.exec}" failonerror="false" outputproperty="jshinti.output" resultproperty="jshinti.result">
+          <arg value="${npm.exec}"/>
+          <arg line="install -g jshint "/>
+        </exec>
+        <echo>${jshinti.output}</echo>
+      </else>
+    </if>
+  </target>
+
+  <!--
+  <target name="checkYUIDoc" depends="properties">
+    <echo>Checking yuidoc</echo>
+    <exec executable="${node.exec}" failonerror="false" outputproperty="yuidocv.output" resultproperty="yuidocv.result">
+      <arg line="${yuidoc.exec} -v"/>
+    </exec>
+    <echo>YUIDoc ${yuidocv.output} version</echo>
+    <if>
+      <equals arg1="${yuidocv.result}" arg2="1" />
+      <then>
+        <echo>Installing YUIDoc</echo>
+        <exec executable="${node.exec}" failonerror="false" outputproperty="yuidoci.output" resultproperty="yuidoci.result">
+          <arg value="${npm.exec}"/>
+          <arg line="install yuidocjs -g"/>
+        </exec>
+        <echo>${yuidoci.output}</echo>
+      </then>
+      <else>
+        <echo>YUIDoc ${yuidocv.output} found</echo>
+      </else>
+    </if>
+  </target>
+  -->
+  
+  <target name="jshint" depends="properties, prepare, checkJSHint">
+    <echo>--Linting javascript code</echo>
+    <echo>NodeJS executable: ${node.exec}</echo>
+    <echo>Arguments:         ${jshint.exec} --config=${dir.jshint.config} --reporter=${dir.jshint.reporter} ${dir.src}</echo>
+    <exec executable="${node.exec}" failonerror="false" resultproperty="jshint.results">
+      <arg value="${jshint.exec}"/>
+      <arg value="${dir.src}"/>
+      <arg value="--config=${dir.jshint.config}"/>
+      <arg value="--reporter=${dir.jshint.reporter}"/>
+    </exec>
+    <if>
+      <equals arg1="${jshint.results}" arg2="0" />
+      <then>
+        <echo message="Congratulations: JSHint found no errors!"/>
+      </then>
+      <elseif>
+        <equals arg1="${jshint.results}" arg2="1" />
+        <then>
+          <echo message="--> [JSHint found warnings in the javascript sources!]" />
+        </then>
+      </elseif>
+      <else>
+        <echo message="--> [JSHint found errors in the javascript sources!]" />
+        <!-- Comment this line to avoid javascript errors to break the build -->
+        <!--<fail message="JSHint found errors in the javascript sources!"/>-->
+      </else>
+    </if>
+  </target>
+
+  <target name="jsdoc" depends="properties, prepare">
+    <echo>--Generating javascript documentation</echo>
+    <echo>NodeJS executable: ${node.exec}</echo>
+    <echo>Arguments:         ${yuidoc.exec} ${dir.src} -o ${dir.jsdoc.output} -c ${dir.jsdoc.config}</echo>
+    <exec executable="${node.exec}" dir=".">
+      <arg value="${yuidoc.exec}"/>
+      <arg value="${dir.src}"/>
+      <arg value="-o"/>
+      <arg value="${dir.jsdoc.output}"/>
+      <arg value="-c"/>
+      <arg value="${dir.jsdoc.config}"/>
+    </exec>
+    <echo>Done!</echo>
+  </target>
+
+  <taskdef resource="net/sf/antcontrib/antlib.xml"/>
+
+  <target name="jsmin" depends="properties, prepare">
+    <echo>--Minifying javascript code</echo>
+    <echo>Shrinksafe: java -jar ${jar.shrinksafe} -cp=${jar.rhino} ${dir.src} ${dir.min.output}/min.js</echo>
+    <!-- Run on every file and keep directory structure -->
+    <foreach target="processJS" param="file">
+      <fileset dir="${dir.src}" includes="**/*.js"/>
+    </foreach>
+
+    <!-- Append all files together
+    <apply executable="java" parallel="false" output="${dir.min.output}/min.js">
+      <fileset dir="${dir.src}" includes="**/*.js"/>
+      <arg line="-jar"/>
+      <arg path="${jar.shrinksafe}"/>
+      <arg line="-cp=${jar.rhino}"/>
+    </apply>
+    -->
+    <echo>Done!</echo>
+  </target>
+
+  <target name="processJS" depends="properties">
+    <dirname file="${file}" property="dirname"/>
+    <basename file="${file}" property="filename"/>
+    <propertyregex property="relDir" input="${dirname}" regexp="WebContent\\js\\sdk\\(.*)" select="\1" />
+    <if>
+      <available file="${dir.min.output}\${relDir}" type="dir" />
+      <then>
+      </then>
+      <else>
+        <mkdir dir="${dir.min.output}\${relDir}"></mkdir>
+      </else>
+    </if>
+    <java jar="${jar.shrinksafe}" fork="true" output="${dir.min.output}\${relDir}\${filename}">
+      <arg line="-cp=${jar.rhino} ${file}"/>
+    </java>
+    <echo>Minifying file ${file}</echo>
+  </target>
+
+  <target name="build" depends="properties, prepare, jshint, jsdoc, jsmin" />
 </project>

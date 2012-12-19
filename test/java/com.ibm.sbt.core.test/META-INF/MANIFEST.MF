@@ -6,5 +6,5 @@ Bundle-Version: 1.0.0
 Bundle-Vendor: IBM
 Fragment-Host: com.ibm.sbt.core
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Require-Bundle: org.junit4;bundle-version="4.8.1",
- com.ibm.pvc.servlet;bundle-version="2.5.0"
+Require-Bundle: org.junit4;bundle-version="4.8.1"
+

@@ -12,9 +12,9 @@
 
 <%
 String baseUrl = UrlUtil.getBaseUrl(request);
-request.setAttribute("jsLibPath","/sbt.dojo143/dojo/dojo.js");  
+request.setAttribute("jsLibPath","/portal_dojo/v1.4.3/dojo/dojo.js");  
 request.setAttribute("jsLibTheme","tundra");  
-request.setAttribute("jsLibCSSPath","/sbt.dojo143/dijit/themes/tundra/tundra.css");
+request.setAttribute("jsLibCSSPath","/portal_dojo/v1.4.3/dijit/themes/tundra/tundra.css");
 request.setAttribute("toolkit",PathUtil.concat(baseUrl,"/library?ver=1.4.3",'/'));
 
 %>

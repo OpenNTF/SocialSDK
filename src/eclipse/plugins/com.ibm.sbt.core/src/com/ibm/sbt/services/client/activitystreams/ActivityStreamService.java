@@ -89,7 +89,7 @@ public class ActivityStreamService extends BaseService {
 	 *            Creates ActivityStreamService Object with specified values of endpoint
 	 */
 	public ActivityStreamService(String endpoint) {
-		super();
+		super(endpoint);
 		this.endpoint = EndpointFactory.getEndpoint(endpoint);;
 	}
 
@@ -776,6 +776,7 @@ public class ActivityStreamService extends BaseService {
 			logger.log(Level.FINEST, "resolved URL :" + streamUrl.toString());
 		}
 
+		System.err.println("resolved url :: " + streamUrl.toString());
 		return streamUrl.toString();
 
 	}
@@ -862,8 +863,10 @@ public class ActivityStreamService extends BaseService {
 
 		try {
 			ClientService svc = endpoint.getClientService();
-			svc.post(resolveUrlForPostingAS(ASUser.ME.getUserType(), ASGroup.ALL.getGroupType(), ""), null,
-					header, postPayload, ClientService.FORMAT_JSON);
+			svc.post(
+					resolveUrlForPostingAS(ASUser.PUBLIC.getUserType(), ASGroup.ALL.getGroupType(),
+							ASApplication.ALL.getApplicationType()), null, header, postPayload,
+					ClientService.FORMAT_JSON);
 
 		} catch (ClientServicesException e) {
 			logger.log(Level.SEVERE, "postEvent caused exception", e);

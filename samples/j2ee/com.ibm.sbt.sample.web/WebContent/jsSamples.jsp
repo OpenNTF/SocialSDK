@@ -46,6 +46,7 @@ body {
 <script type="text/javascript"
 	src="<%=request.getAttribute("toolkit")%>"></script>
 
+
 <script type="text/javascript">
 function hideJsSnippetCode() {
 	var jsCodePre =  document.getElementById("jsCodePre");

@@ -20,6 +20,4 @@ set JAVA_HOME=%toolsDir:"=%\ibm-java-sdk-60-win-i386
 set M2_HOME=%toolsDir:"=%\apache-maven-3.0.4
 set PATH=%JAVA_HOME%\bin;%M2_HOME%\bin;%PATH%
 
-echo Using tools from %toolsDir%
-
-mvn clean javadoc:javadoc install -DtoolsDir=%toolsDir% -DbuildLabel=%LABEL%
+mvn clean javadoc:javadoc install -DtoolsDir=%toolsDir%

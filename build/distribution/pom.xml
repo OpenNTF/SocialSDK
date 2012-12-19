@@ -42,7 +42,7 @@
     <plugins>
 	  <plugin>
         <artifactId>maven-antrun-plugin</artifactId>
-        <version>1.1</version>
+        <version>1.7</version>
         <executions>
           <execution>
             <phase>package</phase>
@@ -71,7 +71,13 @@
 				<zip basedir="./../../../target/com.ibm.sbt.domino/com.ibm.sbt.domino.updatesite/site" destfile="./../../../target/com.ibm.sbt.domino/com.ibm.sbt.domino.updatesite/com.ibm.sbt.domino.updatesite.zip" compress="true"/>
 				<delete dir="./../../../target/com.ibm.sbt.domino/com.ibm.sbt.domino.updatesite/site.zip"/>
 				<!-- Create a version file -->
-				<echo file="./../../../target/doc/version.txt">version: ${project.version}.${buildLabel}</echo> 
+				<echo file="./../../../target/doc/version.txt">version: ${project.version}.${buildLabel}</echo>
+				<!-- Create a changelog file -->
+				<exec executable="${toolsDir}\git\bin\git.exe"  failonerror="false" output="./../../../target/doc/changelog.txt">
+				<arg value="log"/>
+				<arg value="--no-merges"/>
+				<arg value="--pretty=%s"/>
+				</exec>					
               </tasks>
             </configuration>
             <goals>

@@ -18,14 +18,15 @@
  * @author Vimal Dhupar
  * Helpers for accessing the SmartCloud Profiles services
  */
-define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt/Cache','sbt/smartcloud/Subscriber','sbt/Jsonpath','sbt/Endpoint'],
-		function(declare,cfg,lang,con,Cache,Subscriber,jsonPath, Endpoint) {
+define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt/Cache','sbt/smartcloud/Subscriber','sbt/Jsonpath','sbt/Endpoint', 'sbt/log'],
+		function(declare,cfg,lang,con,Cache,Subscriber,jsonPath, Endpoint, log) {
 	/**
 	Javascript APIs for IBM SmartCloud Profiles Service.
 	@module sbt.smartcloud.ProfileService
 	**/
 	var requests = {};
 	function notifyCb(id, param) {
+		log.debug("notifyCb() : called with id : {0}, and param : {1}", id, param);
   		var r = requests[id];
   		if(r) {
 	  		delete requests[id];
@@ -145,7 +146,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 				result = this.evalJson("$.."+fieldName);
 				break;
 			}
-				
+			log.debug("Profile's Get method returning result : {0}", result);
 			return result;
 		},
 		/**
@@ -262,6 +263,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 		constructor: function(options) {
 			options = options || {};
 			_endpoint = Endpoint.find(options.endpoint||'smartcloud');
+			log.debug("ProfileService : Endpoint created : {0}", _endpoint);
 			var cs = options.cacheSize;
 			if(cs && cs>0) {
 				this._profiles = new Cache(cs);
@@ -310,7 +312,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 					subscriberId = subscriber.getSubscriberId(response);
 				}
 				var profile = new Profile(this, subscriberId);
-				
+				log.debug("ProfileService._getOne() : Profile Created : {0}, with Subscriber Id : {1}", profile, subscriberId);
 				// only load if there is a valid subscriber id
 				if (subscriberId) {
 				    _self._load(profile,args);
@@ -320,6 +322,9 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 				        args.error(error);
 				    } else if (args.handle) {
 				        args.handle(error);
+				    }
+				    else {
+				    	log.debug("ProfileService._getOne() : Unable to retrieve Subscriber Id");
 				    }
 				}
 				
@@ -336,12 +341,15 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 			var _self = this;
 			var x = this._find(profile._id);
 			if(x) {// the cached item is found. the call back function is called.
+				log.debug("_load() : Cache Hit.");
 				profile.data = x;
 				if(loadCb) loadCb(profile);
 				if(handleCb)handleCb(profile);
 			} else {// a network call is made to fetch the profile object and the cache is populated.
+				log.debug("_load() : Cache Miss.");
 				if(requests[profile._id]) {
 					// If there is a pending request for this id, then we simply add this callback to it
+					log.debug("_load() : Adding callback to an existing pending request.");
 					if(loadCb){
 						requests[profile._id].push(loadCb);
 					}
@@ -364,12 +372,14 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 						content:	content,
 						load: function(response) {
 				      		profile.data = response; 
+				      		log.debug("_load() : response obtained from smartcloud : {0}", response);
 				      		if(_self._profiles) {
 				      			_self._profiles.put(profile._id,profile.data);
 				      		}
 							notifyCb(profile._id,profile);
 						},
 						error: function(error){
+							log.debug("_load() : error occurred in load. Error code : {0}, Error status : {1} ", error.code, error.status);
 							_self._notifyError(error,args);
 						}
 					});
@@ -377,6 +387,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 		}
 	},
 		_find: function(id) {
+			log.debug("_find() : called with id {0}", id);
 			if(null == id)
 				return null;
 			if(this._profiles) {

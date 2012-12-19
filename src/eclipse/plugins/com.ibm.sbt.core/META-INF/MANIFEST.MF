@@ -55,6 +55,6 @@ Export-Package: com.ibm.sbt.core.configuration,
  com.ibm.sbt.servlet,
  com.ibm.sbt.util
 Import-Package: javax.servlet,
+ javax.servlet.http,
  javax.mail,
- javax.mail.internet,
- javax.servlet.http
+ javax.mail.internet

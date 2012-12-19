@@ -15,17 +15,48 @@
   <build>
     <plugins>
       <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-antrun-plugin</artifactId>
-          <version>1.1</version>
+          <version>1.7</version>
+          <dependencies>
+              <dependency>
+                  <groupId>ant-contrib</groupId>
+                  <artifactId>ant-contrib</artifactId>
+                  <version>1.0b3</version>
+                  <exclusions>
+                    <exclusion>
+                      <groupId>ant</groupId>
+                      <artifactId>ant</artifactId>
+                    </exclusion>
+                  </exclusions>
+              </dependency>
+              <dependency>
+                  <groupId>org.apache.ant</groupId> 
+                  <artifactId>ant-apache-regexp</artifactId> 
+                  <version>1.8.4</version> 
+                  <scope>runtime</scope> 
+              </dependency> 
+              <dependency> 
+                  <groupId>jakarta-regexp</groupId> 
+                  <artifactId>jakarta-regexp</artifactId> 
+                  <version>1.4</version> 
+              </dependency>
+              <dependency> 
+                  <groupId>org.dojotoolkit</groupId> 
+                  <artifactId>dojo-shrinksafe</artifactId> 
+                  <version>1.8.1</version> 
+              </dependency>
+          </dependencies>
           <executions>
             <execution>
               <phase>compile</phase>
               <configuration>
                 <tasks>
-                  <echo message="TOOLSDIR in MAVEN: ${toolsDir}"/>
-                  <property name="toolsDir" 
-                          value="${toolsDir}"/>
-                  <ant antfile="build.xml" target="jsdoc"/>
+                  <taskdef resource="net/sf/antcontrib/antlib.xml" classpathref="maven.plugin.classpath"/>
+                  <property name="toolsDir" value="${toolsDir}"/>
+                  <property name="jar.shrinksafe" value="${settings.localRepository}/org/dojotoolkit/dojo-shrinksafe/1.8.1/dojo-shrinksafe-1.8.1.jar"/>
+                  <property name="jar.rhino" value="${settings.localRepository}/rhino/js/1.7R1/js-1.7R1.jar"/>
+                  <ant antfile="build.xml" target="build"/>
                 </tasks>
               </configuration>
               <goals>

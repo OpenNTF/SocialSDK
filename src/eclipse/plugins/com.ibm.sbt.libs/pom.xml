@@ -8,6 +8,6 @@
     <groupId>com.ibm.sbt.sdk</groupId>
     <artifactId>sdk.parent</artifactId>
     <version>1.0.0</version>
-    <relativePath>../../../../../build/sdk</relativePath>
+    <relativePath>../../../../build/sdk</relativePath>
   </parent>
 </project>

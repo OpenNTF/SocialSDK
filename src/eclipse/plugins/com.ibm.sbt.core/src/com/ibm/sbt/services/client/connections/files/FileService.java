@@ -118,12 +118,10 @@ public class FileService extends BaseService {
 		String category = Categories.MYLIBRARY.getCategory();
 		SubFilters subFilters = new SubFilters();
 		if (fileEntry == null) {
-			logger.log(Level.SEVERE, Messages.InvalidArgument_1);
-			return new FileEntry();
+			throw new IllegalArgumentException(Messages.InvalidArgument_1);
 		}
 		if (StringUtil.isEmpty(fileEntry.getFileId())) {
-			logger.log(Level.SEVERE, Messages.InvalidArgument_2);
-			return new FileEntry();
+			throw new IllegalArgumentException(Messages.InvalidArgument_2);
 		}
 		subFilters.setDocumentId(fileEntry.getFileId());
 		String resultType = ResultType.ENTRY.getResultType();
@@ -239,8 +237,7 @@ public class FileService extends BaseService {
 		if (StringUtil.isEmpty(filePath)) {
 			logger.log(Level.SEVERE, Messages.UploadINFO_1);
 			if (requestBody == null) {
-				logger.log(Level.SEVERE, Messages.UploadINFO_2);
-				return new FileEntry();
+				throw new IllegalArgumentException(Messages.UploadINFO_2);
 			}
 			content = requestBody;
 		}
@@ -271,8 +268,7 @@ public class FileService extends BaseService {
 		String accessType = AccessType.AUTHENTICATED.getAccessType();
 		SubFilters subFilters = new SubFilters();
 		if (StringUtil.isEmpty(fileId)) {
-			logger.log(Level.SEVERE, Messages.InvalidArgument_2);
-			return null;
+			throw new IllegalArgumentException(Messages.InvalidArgument_2);
 		}
 		subFilters.setDocumentId(fileId);
 		String resultType = ResultType.LOCK.getResultType();
@@ -304,8 +300,7 @@ public class FileService extends BaseService {
 		String accessType = AccessType.AUTHENTICATED.getAccessType();
 		SubFilters subFilters = new SubFilters();
 		if (StringUtil.isEmpty(fileId)) {
-			logger.log(Level.SEVERE, Messages.InvalidArgument_2);
-			return null;
+			throw new IllegalArgumentException(Messages.InvalidArgument_2);
 		}
 		subFilters.setDocumentId(fileId);
 		String resultType = ResultType.LOCK.getResultType();
@@ -336,8 +331,7 @@ public class FileService extends BaseService {
 		String category = Categories.MYLIBRARY.getCategory();
 		SubFilters subFilters = new SubFilters();
 		if (StringUtil.isEmpty(fileId)) {
-			logger.log(Level.SEVERE, Messages.InvalidArgument_2);
-			return;
+			throw new IllegalArgumentException(Messages.InvalidArgument_2);
 		}
 		subFilters.setDocumentId(fileId);
 		String resultType = ResultType.ENTRY.getResultType();
@@ -366,16 +360,13 @@ public class FileService extends BaseService {
 		String accessType = AccessType.AUTHENTICATED.getAccessType();
 		SubFilters subFilters = new SubFilters();
 		if (fileEntry == null) {
-			logger.log(Level.SEVERE, Messages.InvalidArgument_1);
-			return new FileEntry();
+			throw new IllegalArgumentException(Messages.InvalidArgument_1);
 		}
 		if (StringUtil.isEmpty(fileEntry.getFileId())) {
-			logger.log(Level.SEVERE, Messages.InvalidArgument_2);
-			return new FileEntry();
+			throw new IllegalArgumentException(Messages.InvalidArgument_2);
 		}
 		if (StringUtil.isEmpty(fileEntry.getAuthorEntry().getUserUuid())) {
-			logger.log(Level.SEVERE, Messages.InvalidArgument_3);
-			return new FileEntry();
+			throw new IllegalArgumentException(Messages.InvalidArgument_3);
 		}
 		subFilters.setUserId(fileEntry.getAuthorEntry().getUserUuid());
 		subFilters.setDocumentId(fileEntry.getFileId());
@@ -413,12 +404,10 @@ public class FileService extends BaseService {
 		String category = Categories.MYLIBRARY.getCategory();
 		SubFilters subFilters = new SubFilters();
 		if (fileEntry == null) {
-			logger.log(Level.SEVERE, Messages.InvalidArgument_1);
-			return new FileEntry();
+			throw new IllegalArgumentException(Messages.InvalidArgument_1);
 		}
 		if (StringUtil.isEmpty(fileEntry.getFileId())) {
-			logger.log(Level.SEVERE, Messages.InvalidArgument_2);
-			return new FileEntry();
+			throw new IllegalArgumentException(Messages.InvalidArgument_2);
 		}
 		subFilters.setDocumentId(fileEntry.getFileId());
 		String resultType = ResultType.FEED.getResultType();
@@ -455,6 +444,9 @@ public class FileService extends BaseService {
 			logger.entering(sourceClass, "addFilesToFolder");
 		}
 		String accessType = AccessType.AUTHENTICATED.getAccessType();
+		if (StringUtil.isEmpty(collectionId)) {
+			throw new IllegalArgumentException(Messages.InvalidArgument_4);
+		}
 		SubFilters subFilters = new SubFilters();
 		subFilters.setCollectionId(collectionId);
 		String resultType = ResultType.FEED.getResultType();
@@ -919,8 +911,7 @@ public class FileService extends BaseService {
 		String accessType = AccessType.AUTHENTICATED.getAccessType();
 		SubFilters subFilters = new SubFilters();
 		if (StringUtil.isEmpty(collectionId)) {
-			logger.log(Level.SEVERE, Messages.InvalidArgument_4);
-			return null;
+			throw new IllegalArgumentException(Messages.InvalidArgument_4);
 		}
 		subFilters.setCollectionId(collectionId);
 		String resultType = ResultType.FEED.getResultType();
@@ -969,8 +960,7 @@ public class FileService extends BaseService {
 		String accessType = AccessType.PUBLIC.getAccessType();
 		SubFilters subFilters = new SubFilters();
 		if (StringUtil.isEmpty(userId)) {
-			logger.log(Level.SEVERE, Messages.InvalidArgument_3);
-			return null;
+			throw new IllegalArgumentException(Messages.InvalidArgument_3);
 		}
 		subFilters.setUserId(userId);
 		String resultType = ResultType.FEED.getResultType();
@@ -998,13 +988,11 @@ public class FileService extends BaseService {
 		String accessType = AccessType.PUBLIC.getAccessType();
 		SubFilters subFilters = new SubFilters();
 		if (StringUtil.isEmpty(fileEntry.getAuthorEntry().getUserUuid())) {
-			logger.log(Level.SEVERE, Messages.InvalidArgument_3);
-			return null;
+			throw new IllegalArgumentException(Messages.InvalidArgument_3);
 		}
 		subFilters.setUserId(fileEntry.getAuthorEntry().getUserUuid());
 		if (StringUtil.isEmpty(fileEntry.getFileId())) {
-			logger.log(Level.SEVERE, Messages.InvalidArgument_2);
-			return null;
+			throw new IllegalArgumentException(Messages.InvalidArgument_2);
 		}
 		subFilters.setDocumentId(fileEntry.getFileId());
 		String resultType = ResultType.FEED.getResultType();
@@ -1035,17 +1023,14 @@ public class FileService extends BaseService {
 		String accessType = AccessType.AUTHENTICATED.getAccessType();
 		SubFilters subFilters = new SubFilters();
 		if (fileEntry == null) {
-			logger.log(Level.SEVERE, Messages.InvalidArgument_1);
-			return null;
+			throw new IllegalArgumentException(Messages.InvalidArgument_1);
 		}
 		if (StringUtil.isEmpty(fileEntry.getAuthorEntry().getUserUuid())) {
-			logger.log(Level.SEVERE, Messages.InvalidArgument_3);
-			return null;
+			throw new IllegalArgumentException(Messages.InvalidArgument_3);
 		}
 		subFilters.setUserId(fileEntry.getAuthorEntry().getUserUuid());
 		if (StringUtil.isEmpty(fileEntry.getFileId())) {
-			logger.log(Level.SEVERE, Messages.InvalidArgument_2);
-			return null;
+			throw new IllegalArgumentException(Messages.InvalidArgument_2);
 		}
 		subFilters.setDocumentId(fileEntry.getFileId());
 		String resultType = ResultType.FEED.getResultType();
@@ -1077,12 +1062,10 @@ public class FileService extends BaseService {
 		String category = Categories.MYLIBRARY.getCategory();
 		SubFilters subFilters = new SubFilters();
 		if (fileEntry == null) {
-			logger.log(Level.SEVERE, Messages.InvalidArgument_1);
-			return null;
+			throw new IllegalArgumentException(Messages.InvalidArgument_1);
 		}
 		if (StringUtil.isEmpty(fileEntry.getFileId())) {
-			logger.log(Level.SEVERE, Messages.InvalidArgument_2);
-			return null;
+			throw new IllegalArgumentException(Messages.InvalidArgument_2);
 		}
 		subFilters.setDocumentId(fileEntry.getFileId());
 		String resultType = ResultType.FEED.getResultType();
@@ -1249,8 +1232,7 @@ public class FileService extends BaseService {
 			logger.entering(sourceClass, "constructPayload");
 		}
 		if (payloadMap == null || payloadMap.isEmpty()) {
-			logger.log(Level.SEVERE, Messages.PayloadInfo_1);
-			return null;
+			throw new IllegalArgumentException(Messages.PayloadInfo_1);
 		}
 		StringBuilder requestBody = new StringBuilder("<entry xmlns=\"http://www.w3.org/2005/Atom\">");
 		requestBody
@@ -1454,8 +1436,7 @@ public class FileService extends BaseService {
 			logger.entering(sourceClass, "getFile");
 		}
 		if (StringUtil.isEmpty(fileId)) {
-			logger.log(Level.SEVERE, Messages.InvalidArgument_2);
-			return null;
+			throw new IllegalArgumentException(Messages.InvalidArgument_2);
 		}
 		String requestUri = null;
 		FileEntry file = new FileEntry(fileId);

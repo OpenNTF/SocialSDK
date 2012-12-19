@@ -94,6 +94,7 @@
       <outputDirectory>sbtsdk</outputDirectory>
       <includes>
         <include>version.txt</include>
+		<include>changelog.txt</include>
       </includes>
     </fileSet>
     <fileSet>

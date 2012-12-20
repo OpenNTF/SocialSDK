@@ -20,30 +20,30 @@ import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.impl.AbstractRuntimeFactory;
 
 /**
- * @author Mark
+ * @author Mark Wallace
  * 
  * @date 6 Dec 2012
  */
 public class RuntimeFactoryStandalone extends AbstractRuntimeFactory {
 
-	public RuntimeFactoryStandalone() {
-		set(this);
-	}
+    public RuntimeFactoryStandalone() {
+	set(this);
+    }
 
-	/* (non-Javadoc)
-	 * @see com.ibm.commons.runtime.RuntimeFactory#createApplication(java.lang.Object)
-	 */
-	@Override
-	public Application createApplication(Object applicationContext) {
-		return new ApplicationStandalone(applicationContext);
-	}
+    /* (non-Javadoc)
+     * @see com.ibm.commons.runtime.RuntimeFactory#createApplication(java.lang.Object)
+     */
+    @Override
+    public Application createApplication(Object applicationContext) {
+	return new ApplicationStandalone(applicationContext);
+    }
 
-	/* (non-Javadoc)
-	 * @see com.ibm.commons.runtime.RuntimeFactory#createContext(com.ibm.commons.runtime.Application, java.lang.Object, java.lang.Object)
-	 */
-	@Override
-	public Context createContext(Application application, Object request, Object response) {
-		return new ContextStandalone(application, request, response);
-	}
+    /* (non-Javadoc)
+     * @see com.ibm.commons.runtime.RuntimeFactory#createContext(com.ibm.commons.runtime.Application, java.lang.Object, java.lang.Object)
+     */
+    @Override
+    public Context createContext(Application application, Object request, Object response) {
+	return new ContextStandalone(application, request, response);
+    }
 
 }

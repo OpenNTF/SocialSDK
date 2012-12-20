@@ -8,6 +8,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: com.ibm.commons.runtime,
  com.ibm.commons.runtime.beans,
  com.ibm.commons.runtime.impl,
+ com.ibm.commons.runtime.impl.app,
  com.ibm.commons.runtime.impl.servlet,
  com.ibm.commons.runtime.mime,
  com.ibm.commons.runtime.naming,

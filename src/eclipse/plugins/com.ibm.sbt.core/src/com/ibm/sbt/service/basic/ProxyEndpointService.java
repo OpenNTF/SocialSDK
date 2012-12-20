@@ -65,6 +65,9 @@ public class ProxyEndpointService extends ProxyService {
     		return false;
     	}
     	
+    	if(!(this.getEndpoint().isHeaderAllowed(headerName, requestURI))){
+    		return false;
+    	}
     	// And pass all the other headers
         return super.isHeaderAllowed(headerName);
     }

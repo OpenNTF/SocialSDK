@@ -116,6 +116,13 @@ public interface Endpoint {
     public String getAuthType();
     
     /**
+     * Verifies whether the given header is supported by the endpoint
+     * @param headerName name of the header
+     * @return boolean
+     */
+    public boolean isHeaderAllowed(String headerName, String serviceUrl);
+    
+    /**
      * Return true if endpoint requires authentication.
      * 
      * @return

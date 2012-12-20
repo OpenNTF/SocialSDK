@@ -1,7 +1,7 @@
 # Auto detect text files and perform LF normalization
 * text=auto
 
-.gitignore
+.gitignore text
 
 # Java
 *.java        text

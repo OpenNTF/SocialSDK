@@ -22,7 +22,6 @@ import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import com.ibm.commons.util.StringUtil;
-import com.ibm.sbt.services.client.SBTServiceException;
 import com.ibm.sbt.services.client.smartcloud.base.BaseEntity;
 
 /**
@@ -55,9 +54,9 @@ public class FileEntry<DataFormat> extends BaseEntity<DataFormat> implements Ser
 	 *            the entry identifier
 	 * @param svc
 	 *            Service used for operations over the entry
-	 * @throws SBTServiceException
+	 * @throws FileServiceException
 	 */
-	public FileEntry(String uuid, FileService svc) throws SBTServiceException {
+	public FileEntry(String uuid, FileService svc) throws FileServiceException {
 		super(uuid, svc);
 		this.svc = svc;
 		initParams();
@@ -70,14 +69,14 @@ public class FileEntry<DataFormat> extends BaseEntity<DataFormat> implements Ser
 	 *            Data from one of the suported formats, @see DataNavigatorFactory
 	 * @param svc
 	 *            Service used for operations over the entry
-	 * @throws SBTServiceException
+	 * @throws FileServiceException
 	 */
-	public FileEntry(DataFormat data, FileService svc) throws SBTServiceException {
+	public FileEntry(DataFormat data, FileService svc) throws FileServiceException {
 		super(data, svc);
 		initParams();
 	}
 
-	private void initParams() throws SBTServiceException {
+	private void initParams() throws FileServiceException {
 		if (svc != null) {
 			this.selfLoadUrl = svc.getEntryLoadURL();
 		}

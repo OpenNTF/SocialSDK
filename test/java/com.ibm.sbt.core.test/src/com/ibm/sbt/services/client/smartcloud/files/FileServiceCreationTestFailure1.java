@@ -35,7 +35,7 @@ public class FileServiceCreationTestFailure1 extends FileServiceCreationTest {
 
 	@Override
 	@Test(expected = FileServiceException.class)
-	public void testFile() throws IOException, SBTServiceException {
+	public void testFile() throws IOException, FileServiceException {
 		// TODO Auto-generated method stub
 		super.testFile();
 		fail();
@@ -43,7 +43,7 @@ public class FileServiceCreationTestFailure1 extends FileServiceCreationTest {
 
 	@Override
 	@Test(expected = FileServiceException.class)
-	public void testStream() throws SBTServiceException {
+	public void testStream() throws FileServiceException {
 		// TODO Auto-generated method stub
 		super.testStream();
 		fail();

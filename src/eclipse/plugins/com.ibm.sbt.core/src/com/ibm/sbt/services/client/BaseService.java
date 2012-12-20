@@ -331,7 +331,7 @@ public abstract class BaseService {
 	 * @return
 	 */
 	public <DataFormat> BaseEntity<DataFormat> getEntityFromData(String entityName, DataFormat data)
-			throws SBTServiceException {
+			throws ClientServicesException {
 		return null;
 	}
 
@@ -341,7 +341,7 @@ public abstract class BaseService {
 	 * @return
 	 */
 	public <DataFormat> BaseEntity<DataFormat> getEntityFromId(String entityName, String uuid)
-			throws SBTServiceException {
+			throws ClientServicesException {
 		return null;
 	}
 
@@ -456,7 +456,7 @@ public abstract class BaseService {
 	 */
 	protected <Entity extends BaseEntity<DataFormat>, DataFormat> List<Entity> getMultipleEntities(
 			String url, Map<String, String> parameters, Class<Entity> entityClass)
-			throws ClientServicesException, SBTServiceException {
+			throws ClientServicesException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getMultipleEntries");
 		}
@@ -489,7 +489,7 @@ public abstract class BaseService {
 	 * @throws ClientServicesException
 	 */
 	protected <Entity extends BaseEntity<DataFormat>, DataFormat> Entity getSingleEntry(String id,
-			boolean load, Class<Entity> entityClass) throws SBTServiceException, ClientServicesException {
+			boolean load, Class<Entity> entityClass) throws ClientServicesException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getSingleEntry");
 		}

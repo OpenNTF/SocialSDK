@@ -20,7 +20,6 @@ import static org.junit.Assert.fail;
 import org.junit.Test;
 import com.ibm.sbt.services.client.ClientService.Args;
 import com.ibm.sbt.services.client.ClientServicesException;
-import com.ibm.sbt.services.client.SBTServiceException;
 
 /**
  * this test case fails every client calls, as in the case of no connection or no authentication to the
@@ -36,7 +35,7 @@ public class FileServiceReadEntryTestFailure1 extends FileServiceReadEntryTest {
 
 	@Override
 	@Test(expected = FileServiceException.class)
-	public void testRead() throws SBTServiceException {
+	public void testRead() throws FileServiceException {
 		super.testRead();
 		fail();
 

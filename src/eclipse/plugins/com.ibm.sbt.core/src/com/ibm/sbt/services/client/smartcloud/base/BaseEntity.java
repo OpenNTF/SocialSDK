@@ -172,7 +172,7 @@ public abstract class BaseEntity<DataFormat> {
 	 * @throws SBTServiceException
 	 * @throws ClientServicesException
 	 */
-	public void load() throws SBTServiceException, ClientServicesException {
+	public void load() throws  ClientServicesException {
 		load(getSelfLoadURL(), this.uuid, this.nameParameterId);
 	}
 
@@ -189,7 +189,7 @@ public abstract class BaseEntity<DataFormat> {
 	 * @param nameParameterId
 	 * @throws ClientServicesException
 	 */
-	public void load(String selfLoadUrl, String uuid, String nameParameterId) throws SBTServiceException,
+	public void load(String selfLoadUrl, String uuid, String nameParameterId) throws
 			ClientServicesException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "load");

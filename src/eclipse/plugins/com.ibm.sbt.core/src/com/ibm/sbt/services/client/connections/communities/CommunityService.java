@@ -660,19 +660,4 @@ public class CommunityService extends BaseService {
 	private boolean isEmail(String userId) {
 		return userId.contains("@");
 	}
-
-	@Override
-	public <DataFormat> BaseEntity<DataFormat> getEntityFromData(String entityName, DataFormat data)
-			throws SBTServiceException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public <DataFormat> BaseEntity<DataFormat> getEntityFromId(String entityName, String uuid)
-			throws SBTServiceException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

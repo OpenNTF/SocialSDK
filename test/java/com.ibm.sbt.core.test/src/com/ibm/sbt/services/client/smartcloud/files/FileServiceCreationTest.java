@@ -30,7 +30,6 @@ import com.ibm.commons.xml.DOMUtil;
 import com.ibm.commons.xml.XMLException;
 import com.ibm.sbt.services.client.ClientService.Args;
 import com.ibm.sbt.services.client.ClientServicesException;
-import com.ibm.sbt.services.client.SBTServiceException;
 
 public class FileServiceCreationTest extends TestEndpoint {
 
@@ -38,7 +37,7 @@ public class FileServiceCreationTest extends TestEndpoint {
 	public final static String	TEST_NAME		= "new.txt";
 
 	@Test
-	public void testStream() throws SBTServiceException {
+	public void testStream() throws FileServiceException {
 		InputStream s = new ByteArrayInputStream(TEST_CONTENT.getBytes());
 		FileService service = new FileService();
 		FileEntry entry = service.uploadFile(s, TEST_NAME, TEST_CONTENT.length());
@@ -46,7 +45,7 @@ public class FileServiceCreationTest extends TestEndpoint {
 	}
 
 	@Test
-	public void testFile() throws IOException, SBTServiceException {
+	public void testFile() throws IOException, FileServiceException {
 
 		File t = File.createTempFile("junit", "test");
 		FileOutputStream s = new FileOutputStream(t);
@@ -62,45 +61,45 @@ public class FileServiceCreationTest extends TestEndpoint {
 
 	}
 
-	@Test(expected = NullPointerException.class)
-	public void testError1() throws IOException, SBTServiceException {
+	@Test(expected = IllegalArgumentException.class)
+	public void testError1() throws IOException, FileServiceException {
 		FileService service = new FileService();
 		service.uploadFile((File) null, TEST_NAME);
 		fail();
 	}
 
-	@Test(expected = NullPointerException.class)
-	public void testError2() throws SBTServiceException, IOException {
+	@Test(expected = IllegalArgumentException.class)
+	public void testError2() throws FileServiceException, IOException {
 		FileService service = new FileService();
 		service.uploadFile(File.createTempFile("junit", "tst"), null);
 		fail();
 	}
 
 	@Test(expected = FileServiceException.class)
-	public void testError3() throws IOException, SBTServiceException {
+	public void testError3() throws IOException, FileServiceException {
 		File t = new File(new File("."), "not existing file");
 		FileService service = new FileService();
 		service.uploadFile(t, TEST_NAME);
 		fail();
 	}
 
-	@Test(expected = UnsupportedOperationException.class)
-	public void testError4() throws IOException, SBTServiceException {
+	@Test(expected = IllegalArgumentException.class)
+	public void testError4() throws IOException, FileServiceException {
 		FileService service = new FileService();
 		service.uploadFile(null, TEST_NAME, -1);
 		fail();
 	}
 
-	@Test(expected = UnsupportedOperationException.class)
-	public void testError5() throws IOException, SBTServiceException {
+	@Test(expected = IllegalArgumentException.class)
+	public void testError5() throws IOException, FileServiceException {
 		FileService service = new FileService();
 		InputStream s = new ByteArrayInputStream(TEST_CONTENT.getBytes());
 		service.uploadFile(s, null, -1);
 		fail();
 	}
 
-	@Test(expected = NullPointerException.class)
-	public void testError6() throws IOException, SBTServiceException {
+	@Test(expected = IllegalArgumentException.class)
+	public void testError6() throws IOException, FileServiceException {
 		FileService service = new FileService();
 		service.uploadFile(null, TEST_NAME, 10);
 		fail();

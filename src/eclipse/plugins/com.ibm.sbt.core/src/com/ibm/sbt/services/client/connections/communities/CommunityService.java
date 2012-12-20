@@ -80,13 +80,13 @@ public class CommunityService extends BaseService {
 	 * @throws SBTServiceException
 	 */
 
-	public Community getCommunity(String communityUuid, boolean load) throws XMLException,
+	public Community getCommunity(String communityUuid, boolean loadIt) throws XMLException,
 			SBTServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "getCommunity", new Object[] { communityUuid, load });
+			logger.entering(sourceClass, "getCommunity", new Object[] { communityUuid, loadIt });
 		}
 		Community community = new Community(communityUuid);
-		if (load) {
+		if (loadIt) {
 			load(community);
 		}
 
@@ -333,40 +333,54 @@ public class CommunityService extends BaseService {
 		return data;
 	}
 
+	public Community createCommunity(Community community) throws XMLException, SBTServiceException {
+		return createCommunity(community, true);
+	}
 	/**
 	 * This method is used create a community. User should be authenticated to call this method
 	 * 
 	 * @param community
-	 * @return boolean
+	 * @param loadIt
+	 * @return Community
 	 * @throws XMLException
 	 * @throws SBTServiceException
 	 */
-	public boolean createCommunity(Community community) throws XMLException, SBTServiceException {
+	public Community createCommunity(Community community, boolean loadIt) throws XMLException, SBTServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "createCommunity", community);
 		}
-		boolean returnVal = true;
 
 		try {
 			Object createPayload = community.constructCreateRequestBody();
-			getClientService().post(
+			
+			String newCommunityUrl  = (String)getClientService().post(
 					resolveCommunityUrl(CommunityEntity.COMMUNITIES.getCommunityEntityType(),
-							CommunityType.MY.getCommunityType()), createPayload);
+							CommunityType.MY.getCommunityType()),null, createPayload, ClientService.FORMAT_CONNECTIONS_OUTPUT);
+		
+			String communityId = newCommunityUrl.substring(newCommunityUrl.indexOf("communityUuid=") + "communityUuid=".length());
+			System.out.println("communityId "+communityId);
+			
+			if (loadIt) {
+				community = new Community(communityId);
+				load(community);
+			}
+			else{
+				community.setCommunityUuid(communityId);
+			}
 		} catch (ClientServicesException e) {
 			if (e.getResponseStatusCode() == ClientServicesException.CONFLICT) {
 				throw new DuplicateCommunityException(e, StringUtil.format(
 						"A community already exists with this title {0} ", community.getTitle()));
 			}
-			returnVal = false;
 			if (logger.isLoggable(Level.SEVERE)) {
 				logger.log(Level.SEVERE, "Error encountered in creating community", e);
 			}
 			throw new CommunityServiceException(e);
 		}
 		if (logger.isLoggable(Level.FINEST)) {
-			logger.exiting(sourceClass, "createCommunity", returnVal);
+			logger.exiting(sourceClass, "createCommunity", community.toString());
 		}
-		return returnVal;
+		return community;
 	}
 
 	/**

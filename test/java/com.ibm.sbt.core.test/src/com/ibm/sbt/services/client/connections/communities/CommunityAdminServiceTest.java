@@ -13,7 +13,10 @@ public class CommunityAdminServiceTest extends BaseUnitTest{
 		Community community = communityService.getCommunity("", false);
 		community.setTitle("testCommunity");
 		community.setContent("test Community Content");
-		assertTrue(communityService.createCommunity(community));
+		community = communityService.createCommunity(community,true);
+		assertEquals("testCommunity", community.getTitle());
+		assertEquals("test Community Content", community.getContent());
+		
 	}
 	
 	@Test

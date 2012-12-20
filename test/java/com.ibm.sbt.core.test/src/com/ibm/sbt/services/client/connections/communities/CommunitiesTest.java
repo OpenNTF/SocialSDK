@@ -64,7 +64,10 @@ public class CommunitiesTest extends TestEndpoint {
 		comm.setTitle(NEW_COMMUNITY);
 		comm.setContent(TEST_COMMUNITY_DESCRIPTION);
 
-		assertTrue(svc.createCommunity(comm));
+		
+		comm = svc.createCommunity(comm,true);
+		assertEquals("NEW_COMMUNITY", comm.getTitle());
+		assertEquals("TEST_COMMUNITY_DESCRIPTION", comm.getContent());
 	}
 
 	@Test

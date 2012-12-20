@@ -13,7 +13,9 @@
   </parent>
 
   <modules>
-    <!-- sample projects -->
-    <module>../../java/test/eclipse/plugins/com.ibm.sbt.jasmine.web</module>
+    <!-- sample projects
+    <module>../../java/test/eclipse/plugins/com.ibm.sbt.jasmine.web</module> -->
+    
+	<module>../../test/java/com.ibm.sbt.core.test</module>
   </modules>
 </project>

@@ -85,9 +85,9 @@ public class CommunityService extends BaseService {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getCommunity", new Object[] { communityUuid, loadIt });
 		}
-		if (StringUtil.isEmpty(communityUuid)) {
-			throw new IllegalArgumentException("communityUuid passed was null");
-		}
+//		if (StringUtil.isEmpty(communityUuid)) {
+//			throw new IllegalArgumentException("communityUuid passed was null");
+//		}
 		Community community = new Community(communityUuid);
 		if (loadIt) {
 			load(community);

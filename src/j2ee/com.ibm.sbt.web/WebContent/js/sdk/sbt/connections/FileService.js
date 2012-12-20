@@ -959,13 +959,13 @@ define(
 						 */
 						getFileComments : function(file, args) {
 							if (!validate._validateInputTypeAndNotify("FileService", "getFileComments", "File", file, "sbt.connections.FileEntry", args)) {
-								return false;
+								return;
 							}
 							if (!file.validate("FileService", "getFileComments", args, {
 								isValidateId : true,
 								isValidateUser : true
 							})) {
-								return false;
+								return;
 							}
 
 							var accessType = constants.accessType.AUTHENTICATED;
@@ -1050,12 +1050,12 @@ define(
 						updateFile : function(file, args) {
 
 							if (!validate._validateInputTypeAndNotify("FileService", "updatefile", "File", file, "sbt.connections.FileEntry", args)) {
-								return false;
+								return;
 							}
 							if (!file.validate("FileService", "updateFile", args, {
 								isValidateId : true
 							})) {
-								return false;
+								return;
 							}
 
 							var accessType = constants.accessType.AUTHENTICATED;
@@ -1092,14 +1092,14 @@ define(
 
 							if (!validate._validateInputTypesAndNotify("FileService", "addCommentToFile", [ "File", "comment" ], [ file, args.comment ], [
 									"sbt.connections.FileEntry", 'string' ], args)) {
-								return false;
+								return;
 							}
 							if (!file.validate("FileService", "addCommentToFile", args, {
 								isValidateId : true,
 								isValidateUser : true
 							})) {
 
-								return false;
+								return;
 							}
 
 							var accessType = constants.accessType.AUTHENTICATED;
@@ -1137,13 +1137,13 @@ define(
 
 							if (!validate._validateInputTypesAndNotify("FileService", "addCommentToMyFile", [ "File", "comment" ], [ file, args.comment ], [
 									"sbt.connections.FileEntry", 'string' ], args)) {
-								return false;
+								return;
 							}
 							if (!file.validate("FileService", "addCommentToMyFile", args, {
 								isValidateId : true
 							})) {
 
-								return false;
+								return;
 							}
 
 							var accessType = constants.accessType.AUTHENTICATED;
@@ -1180,13 +1180,13 @@ define(
 						lockFile : function(file, args) {
 
 							if (!validate._validateInputTypeAndNotify("FileService", "lockFile", "File", file, "sbt.connections.FileEntry", args)) {
-								return false;
+								return;
 							}
 							if (!file.validate("FileService", "lockFile", args, {
 								isValidateId : true
 							})) {
 
-								return false;
+								return;
 							}
 
 							var _self = this;
@@ -1228,13 +1228,13 @@ define(
 						unlockFile : function(file, args) {
 
 							if (!validate._validateInputTypeAndNotify("FileService", "unlockFile", "File", file, "sbt.connections.FileEntry", args)) {
-								return false;
+								return;
 							}
 							if (!file.validate("FileService", "unlockFile", args, {
 								isValidateId : true
 							})) {
 
-								return false;
+								return;
 							}
 							var _self = this;
 							this._getNonce({
@@ -1275,13 +1275,13 @@ define(
 						deleteFile : function(file, args) {
 
 							if (!validate._validateInputTypeAndNotify("FileService", "deleteFile", "File", file, "sbt.connections.FileEntry", args)) {
-								return false;
+								return;
 							}
 							if (!file.validate("FileService", "deleteFile", args, {
 								isValidateId : true
 							})) {
 
-								return false;
+								return;
 							}
 							var _self = this;
 							this._getNonce({
@@ -1314,13 +1314,13 @@ define(
 						},
 						_loadFile : function(file, args) {
 							if (!validate._validateInputTypeAndNotify("FileService", "_loadFile", "File", file, "sbt.connections.FileEntry", args)) {
-								return false;
+								return;
 							}
 							if (!file.validate("FileService", "_loadFile", args, {
 								isValidateId : true
 							})) {
 
-								return false;
+								return;
 							}
 							var subFilters = new _SubFilters();
 							subFilters.setDocumentId(file.getId());

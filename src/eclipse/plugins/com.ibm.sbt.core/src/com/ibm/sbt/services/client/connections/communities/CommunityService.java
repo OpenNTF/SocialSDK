@@ -85,6 +85,9 @@ public class CommunityService extends BaseService {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getCommunity", new Object[] { communityUuid, loadIt });
 		}
+		if (StringUtil.isEmpty(communityUuid)) {
+			throw new IllegalArgumentException("communityUuid passed was null");
+		}
 		Community community = new Community(communityUuid);
 		if (loadIt) {
 			load(community);
@@ -185,7 +188,9 @@ public class CommunityService extends BaseService {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getSubCommunities", community);
 		}
-
+		if (null == community){
+			throw new IllegalArgumentException("community passed was null");
+		}
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("communityUuid", community.getCommunityUuid());
 		Document data = getCommunityEntities(
@@ -215,6 +220,9 @@ public class CommunityService extends BaseService {
 	public Member[] getMembers(Community community) throws XMLException, SBTServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getMembers", community);
+		}
+		if (null == community){
+			throw new IllegalArgumentException("community passed was null");
 		}
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("communityUuid", community.getCommunityUuid());
@@ -247,7 +255,9 @@ public class CommunityService extends BaseService {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getBookmarks", community);
 		}
-
+		if (null == community){
+			throw new IllegalArgumentException("community passed was null");
+		}
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("communityUuid", community.getCommunityUuid());
 		Document data = getCommunityEntities(
@@ -279,6 +289,9 @@ public class CommunityService extends BaseService {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getCommunityForumTopics", community);
 		}
+		if (null == community){
+			throw new IllegalArgumentException("community passed was null");
+		}
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("communityUuid", community.getCommunityUuid());
 		Document data = getCommunityEntities(
@@ -298,8 +311,8 @@ public class CommunityService extends BaseService {
 	}
 
 	/**
-	 * This method is used by other wrapper methods to get community realtes data for eg. 
-	 * getBookmarks() calls it internall to get the community bookmarks data
+	 * This method is used by other wrapper methods to get community related data for eg. 
+	 * getBookmarks() calls it internally to get the community bookmarks data
 	 * 
 	 * @param uri
 	 * @param params
@@ -349,6 +362,9 @@ public class CommunityService extends BaseService {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "createCommunity", community);
 		}
+		if (null == community){
+			throw new IllegalArgumentException("community passed was null");
+		}
 
 		try {
 			Object createPayload = community.constructCreateRequestBody();
@@ -396,6 +412,9 @@ public class CommunityService extends BaseService {
 			logger.entering(sourceClass, "updateCommunity", community);
 		}
 		boolean returnVal = true;
+		if (null == community){
+			throw new IllegalArgumentException("community passed was null");
+		}
 
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("communityUuid", community.getCommunityUuid());
@@ -434,6 +453,9 @@ public class CommunityService extends BaseService {
 			logger.entering(sourceClass, "AddCommunityMember", new Object[] { community, member });
 		}
 		boolean returnVal = true;
+		if (null == community){
+			throw new IllegalArgumentException("community passed was null");
+		}
 
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("communityUuid", community.getCommunityUuid());
@@ -471,6 +493,9 @@ public class CommunityService extends BaseService {
 			logger.entering(sourceClass, "removeMember", new Object[] { community, member });
 		}
 		boolean returnVal = true;
+		if (null == community){
+			throw new IllegalArgumentException("community passed was null");
+		}
 
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("communityUuid", community.getCommunityUuid());
@@ -513,6 +538,9 @@ public class CommunityService extends BaseService {
 			logger.entering(sourceClass, "deleteCommunity", community);
 		}
 		boolean returnVal = true;
+		if (null == community){
+			throw new IllegalArgumentException("community passed was null");
+		}
 
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("communityUuid", community.getCommunityUuid());

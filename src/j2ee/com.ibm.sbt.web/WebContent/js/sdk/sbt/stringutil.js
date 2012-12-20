@@ -34,10 +34,9 @@ define([], function() {
 		/**
 		 * Substitutes the String with pattern {<<number>>} with argument array provided. {-1} is for printing '{' and {-2} is for printing '}' in the text
 		 * 
-		 * @param {String}
-		 *            [str] String to be formatted
-		 * @param {Array}
-		 *            [args] arguments Array
+		 * @param {String} [str] String to be formatted
+		 * @param {Array} [args] arguments Array
+		 * @param {Boolean} [useBlankForUndefined = false] optional flag to indicate to user blank String in case index is not found in args. 
 		 * @static
 		 * @method substitute
 		 */

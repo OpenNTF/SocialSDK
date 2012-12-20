@@ -374,7 +374,6 @@ public class CommunityService extends BaseService {
 							CommunityType.MY.getCommunityType()),null, createPayload, ClientService.FORMAT_CONNECTIONS_OUTPUT);
 		
 			String communityId = newCommunityUrl.substring(newCommunityUrl.indexOf("communityUuid=") + "communityUuid=".length());
-			System.out.println("communityId "+communityId);
 			
 			if (loadIt) {
 				community = new Community(communityId);

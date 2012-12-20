@@ -34,11 +34,13 @@
 	try {
 			CommunityService communityService = new CommunityService();
 			Community community = communityService.getCommunity("", false);
-			community.setTitle("testCommunity");
+			community.setTitle("test1Community");
 			community.setContent("test Community Content");
 			out.println("<b> Community Created :</b>");	
 			out.println("<br>");
-			out.println(communityService.createCommunity(community));
+			community = communityService.createCommunity(community,true);
+			out.println(community.getCommunityUuid());
+			out.println(community.getTitle());
 	} catch (Throwable e) {
 		out.println("<pre>");
 		e.printStackTrace(new PrintWriter(out));

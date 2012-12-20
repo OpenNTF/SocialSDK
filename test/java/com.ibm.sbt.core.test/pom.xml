@@ -6,9 +6,9 @@
     <maven.test.failure.ignore>true</maven.test.failure.ignore>
   </properties>
   <parent>
-    <groupId>com.ibm.sbt.sdk</groupId>
-    <artifactId>sdk.parent</artifactId>
+    <groupId>com.ibm.sbt.test</groupId>
+    <artifactId>test.parent</artifactId>
     <version>1.0.0</version>
-    <relativePath>../../../../../build/sdk</relativePath>
+    <relativePath>../../../build/test</relativePath>
   </parent>
 </project>

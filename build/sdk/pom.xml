@@ -20,7 +20,6 @@
     <module>../../src/eclipse/plugins/com.ibm.commons.xml</module>
     <module>../../src/eclipse/plugins/com.ibm.commons.runtime</module>
     <module>../../src/eclipse/plugins/com.ibm.sbt.core</module>
-	<module>../../test/java/com.ibm.sbt.core.test</module>
     <module>../../src/eclipse/plugins/com.ibm.sbt.playground</module>
     <!-- web module projects -->
     <module>../../src/j2ee/com.ibm.sbt.web</module>

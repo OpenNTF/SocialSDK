@@ -25,6 +25,7 @@ import java.util.logging.Logger;
 import org.w3c.dom.Document;
 import java.lang.Object;
 import com.ibm.commons.util.StringUtil;
+import com.ibm.commons.util.XmlTextUtil;
 import com.ibm.commons.xml.DOMUtil;
 import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.XMLException;
@@ -388,7 +389,7 @@ public class Profile implements Serializable{
     		Map.Entry<String,String> fieldMapPairs = (Map.Entry<String,String>)entries.next();
     		mappedKey = getKeyIdentifier(fieldMapPairs.getKey(), "create");
     		if(mappedKey!=null){
-    			body += "<entry><key>" + mappedKey + "</key><value><type>text</type><data>"+ fieldMapPairs.getValue() + "</data></value></entry>";
+    			body += "<entry><key>" + mappedKey + "</key><value><type>text</type><data>"+ XmlTextUtil.escapeXMLChars(fieldMapPairs.getValue()) + "</data></value></entry>";
     		}
     		entries.remove();
 
@@ -410,7 +411,7 @@ public class Profile implements Serializable{
 			mappedKey = getKeyIdentifier(fieldMapPairs.getKey(), "update");
 		
 			if(mappedKey!=null){
-				body += mappedKey + ":"+ fieldMapPairs.getValue()+ "\n";
+				body += mappedKey + ":"+ XmlTextUtil.escapeXMLChars(fieldMapPairs.getValue())+ "\n";
 			}
 			entries.remove();
 

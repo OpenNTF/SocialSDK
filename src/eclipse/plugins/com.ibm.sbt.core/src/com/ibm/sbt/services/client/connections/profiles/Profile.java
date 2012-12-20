@@ -24,11 +24,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.w3c.dom.Document;
 import java.lang.Object;
-import com.ibm.commons.util.StringUtil;
-import com.ibm.commons.util.XmlTextUtil;
 import com.ibm.commons.xml.DOMUtil;
 import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.XMLException;
+import com.ibm.sbt.services.util.XmlTextUtil;
 
 /**
  * @Represents Connections Profile

@@ -33,6 +33,7 @@ import com.ibm.sbt.services.client.SBTServiceException;
 import com.ibm.sbt.services.client.connections.files.model.FileEntry;
 import com.ibm.sbt.services.client.connections.files.model.FileRequestParams;
 import com.ibm.sbt.services.client.connections.files.model.FileRequestPayload;
+import com.ibm.sbt.services.client.smartcloud.files.FileServiceException;
 
 public class FileServiceTest extends BaseUnitTest {
 
@@ -47,7 +48,7 @@ public class FileServiceTest extends BaseUnitTest {
 	public final static String	TEST_NAME				= "FS_TestUpload.txt";
 
 	@Test
-	public void testReadFile() throws SBTServiceException {
+	public void testReadFile() throws Exception {
 		FileService svc = new FileService();
 		authenticateEndpoint(svc.getEndpoint(), "***REMOVED***", "***REMOVED***");
 		FileEntry entry = svc.getFile(TEST_FILEID, true);
@@ -56,21 +57,21 @@ public class FileServiceTest extends BaseUnitTest {
 	}
 
 	@Test
-	public void testReadFileWithLoadFalse() throws SBTServiceException {
+	public void testReadFileWithLoadFalse() throws Exception {
 		FileService svc = new FileService();
 		FileEntry entry = svc.getFile(TEST_FILEID, false);
 		Assert.assertNull(entry.getCategory());
 	}
 
 	@Test
-	public void testReadFileWithNullFileId() throws IOException, SBTServiceException {
+	public void testReadFileWithNullFileId() throws IOException, Exception {
 		FileService svc = new FileService();
 		FileEntry entry = svc.getFile(null, true);
 		Assert.assertNull(entry);
 	}
 
 	@Test
-	public void testGetMyFiles() {
+	public void testGetMyFiles() throws Exception  {
 		FileService fileService = new FileService();
 		authenticateEndpoint(fileService.getEndpoint(), "***REMOVED***", "***REMOVED***");
 		List<FileEntry> fileEntries = fileService.getMyFiles();
@@ -83,7 +84,7 @@ public class FileServiceTest extends BaseUnitTest {
 	}
 
 	@Test
-	public void testGetFilesSharedWithMe() {
+	public void testGetFilesSharedWithMe() throws Exception{
 		FileService fileService = new FileService();
 		authenticateEndpoint(fileService.getEndpoint(), "***REMOVED***", "***REMOVED***");
 		List<FileEntry> fileEntries = fileService.getFilesSharedWithMe();
@@ -96,7 +97,7 @@ public class FileServiceTest extends BaseUnitTest {
 	}
 
 	@Test
-	public void testGetFilesSharedByMe() {
+	public void testGetFilesSharedByMe() throws Exception{
 		FileService fileService = new FileService();
 		authenticateEndpoint(fileService.getEndpoint(), "***REMOVED***", "***REMOVED***");
 		List<FileEntry> fileEntries = fileService.getFilesSharedByMe();
@@ -109,7 +110,7 @@ public class FileServiceTest extends BaseUnitTest {
 	}
 
 	@Test
-	public void testGetPublicFiles() {
+	public void testGetPublicFiles() throws Exception{
 		FileService fileService = new FileService();
 		authenticateEndpoint(fileService.getEndpoint(), "***REMOVED***", "***REMOVED***");
 		List<FileEntry> fileEntries = fileService.getPublicFiles(null);
@@ -121,7 +122,7 @@ public class FileServiceTest extends BaseUnitTest {
 	}
 
 	@Test
-	public void testGetPinnedFiles() {
+	public void testGetPinnedFiles() throws Exception{
 		FileService fileService = new FileService();
 		authenticateEndpoint(fileService.getEndpoint(), "***REMOVED***", "***REMOVED***");
 		List<FileEntry> fileEntries = fileService.getPinnedFiles(null);
@@ -133,7 +134,7 @@ public class FileServiceTest extends BaseUnitTest {
 	}
 
 	@Test
-	public void testGetMyFolders() {
+	public void testGetMyFolders() throws Exception{
 		FileService fileService = new FileService();
 		authenticateEndpoint(fileService.getEndpoint(), "***REMOVED***", "***REMOVED***");
 		List<FileEntry> fileEntries = fileService.getMyFolders(null);
@@ -145,7 +146,7 @@ public class FileServiceTest extends BaseUnitTest {
 	}
 
 	@Test
-	public void testGetMyPinnedFolders() {
+	public void testGetMyPinnedFolders() throws Exception{
 		FileService fileService = new FileService();
 		authenticateEndpoint(fileService.getEndpoint(), "***REMOVED***", "***REMOVED***");
 		List<FileEntry> fileEntries = fileService.getMyPinnedFolders(null);
@@ -157,7 +158,7 @@ public class FileServiceTest extends BaseUnitTest {
 	}
 
 	@Test
-	public void testGetFoldersWithRecentlyAddedFiles() {
+	public void testGetFoldersWithRecentlyAddedFiles() throws Exception{
 		FileService fileService = new FileService();
 		authenticateEndpoint(fileService.getEndpoint(), "***REMOVED***", "***REMOVED***");
 		List<FileEntry> fileEntries = fileService.getFoldersWithRecentlyAddedFiles(null);
@@ -169,7 +170,7 @@ public class FileServiceTest extends BaseUnitTest {
 	}
 
 	@Test
-	public void testGetFilesInFolder() {
+	public void testGetFilesInFolder()throws Exception {
 		FileService fileService = new FileService();
 		authenticateEndpoint(fileService.getEndpoint(), "***REMOVED***", "***REMOVED***");
 		List<FileEntry> fileEntries = fileService.getFilesInFolder(TEST_COLLECTIONID, null);
@@ -181,7 +182,7 @@ public class FileServiceTest extends BaseUnitTest {
 	}
 
 	@Test
-	public void testGetPersonLibrary() {
+	public void testGetPersonLibrary()throws Exception {
 		FileService fileService = new FileService();
 		authenticateEndpoint(fileService.getEndpoint(), "***REMOVED***", "***REMOVED***");
 		List<FileEntry> fileEntries = fileService.getPersonLibrary(TEST_USERID, null);
@@ -193,7 +194,7 @@ public class FileServiceTest extends BaseUnitTest {
 	}
 
 	@Test
-	public void testGetPublicFilesComments() {
+	public void testGetPublicFilesComments()throws Exception {
 		FileService fileService = new FileService();
 		authenticateEndpoint(fileService.getEndpoint(), "***REMOVED***", "***REMOVED***");
 		FileEntry fileEntry = fileService.getFile(TEST_FILEID, true);
@@ -206,7 +207,7 @@ public class FileServiceTest extends BaseUnitTest {
 	}
 
 	@Test
-	public void testGetFilesComments() {
+	public void testGetFilesComments() throws Exception{
 		FileService fileService = new FileService();
 		authenticateEndpoint(fileService.getEndpoint(), "***REMOVED***", "***REMOVED***");
 		FileEntry fileEntry = fileService.getFile(TEST_FILEID, true);
@@ -219,7 +220,7 @@ public class FileServiceTest extends BaseUnitTest {
 	}
 
 	@Test
-	public void testGetMyFilesComments() {
+	public void testGetMyFilesComments() throws Exception{
 		FileService fileService = new FileService();
 		authenticateEndpoint(fileService.getEndpoint(), "***REMOVED***", "***REMOVED***");
 		FileEntry fileEntry = fileService.getFile(TEST_FILEID, true);
@@ -232,7 +233,7 @@ public class FileServiceTest extends BaseUnitTest {
 	}
 
 	@Test
-	public void testGetFilesInMyRecycleBin() {
+	public void testGetFilesInMyRecycleBin()throws Exception {
 		FileService fileService = new FileService();
 		authenticateEndpoint(fileService.getEndpoint(), "***REMOVED***", "***REMOVED***");
 		List<FileEntry> fileEntries = fileService.getFilesInMyRecycleBin(null);
@@ -244,7 +245,7 @@ public class FileServiceTest extends BaseUnitTest {
 	}
 
 	@Test
-	public void testUpdate() {
+	public void testUpdate() throws Exception{
 		FileService fileService = new FileService();
 		authenticateEndpoint(fileService.getEndpoint(), "***REMOVED***", "***REMOVED***");
 		FileEntry fileEntry = fileService.getFile(TEST_FILEID, false);
@@ -258,7 +259,7 @@ public class FileServiceTest extends BaseUnitTest {
 	}
 
 	@Test
-	public void testLock() {
+	public void testLock()throws Exception {
 		FileService fileService = new FileService();
 		authenticateEndpoint(fileService.getEndpoint(), "***REMOVED***", "***REMOVED***");
 		fileService.lock(TEST_FILEID);
@@ -267,7 +268,7 @@ public class FileServiceTest extends BaseUnitTest {
 	}
 
 	@Test
-	public void testUnlock() {
+	public void testUnlock()throws Exception {
 		FileService fileService = new FileService();
 		authenticateEndpoint(fileService.getEndpoint(), "***REMOVED***", "***REMOVED***");
 		fileService.unlock(TEST_FILEID);
@@ -276,7 +277,7 @@ public class FileServiceTest extends BaseUnitTest {
 	}
 
 	@Test
-	public void testDelete() {
+	public void testDelete()throws Exception {
 		FileService fileService = new FileService();
 		authenticateEndpoint(fileService.getEndpoint(), "***REMOVED***", "***REMOVED***");
 		fileService.delete(TEST_DELETEFILEID);
@@ -285,7 +286,7 @@ public class FileServiceTest extends BaseUnitTest {
 	}
 
 	@Test
-	public void testAddCommentToFile() {
+	public void testAddCommentToFile()throws Exception {
 		FileService fileService = new FileService();
 		authenticateEndpoint(fileService.getEndpoint(), "***REMOVED***", "***REMOVED***");
 		FileEntry fileEntry = fileService.getFile(TEST_FILEID, true);
@@ -296,7 +297,7 @@ public class FileServiceTest extends BaseUnitTest {
 	}
 
 	@Test
-	public void testAddCommentToMyFile() {
+	public void testAddCommentToMyFile()throws Exception {
 		FileService fileService = new FileService();
 		authenticateEndpoint(fileService.getEndpoint(), "***REMOVED***", "***REMOVED***");
 		FileEntry fileEntry = fileService.getFile(TEST_FILEID, true);
@@ -307,7 +308,7 @@ public class FileServiceTest extends BaseUnitTest {
 	}
 
 	@Test
-	public void testFileUpload() throws IOException, ClientServicesException {
+	public void testFileUpload() throws IOException, ClientServicesException, Exception {
 		File t = new File(TEST_NAME);
 		FileOutputStream s = new FileOutputStream(t);
 		s.write(TEST_CONTENT.getBytes());

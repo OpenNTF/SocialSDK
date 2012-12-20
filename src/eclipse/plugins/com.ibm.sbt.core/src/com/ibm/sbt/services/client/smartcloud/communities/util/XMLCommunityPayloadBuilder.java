@@ -148,7 +148,7 @@ public class XMLCommunityPayloadBuilder extends XMLPayloadBuilder {
 		Transformer transformer;
 		try {
 			transformer = transformerFactory.newTransformer();
-			transformer.transform(new DOMSource(doc), new StreamResult(System.out));
+			//transformer.transform(new DOMSource(doc), new StreamResult(System.out));
 		} catch (TransformerConfigurationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

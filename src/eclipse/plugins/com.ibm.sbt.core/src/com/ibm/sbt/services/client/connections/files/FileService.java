@@ -45,6 +45,7 @@ import com.ibm.sbt.services.client.connections.files.model.Headers;
 import com.ibm.sbt.services.client.connections.files.utils.Messages;
 import com.ibm.sbt.services.client.connections.files.utils.NamespacesConnections;
 import com.ibm.sbt.services.client.smartcloud.base.BaseEntity;
+import com.ibm.sbt.services.client.smartcloud.files.FileServiceException;
 import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
 import com.ibm.sbt.services.util.AuthUtil;
@@ -109,8 +110,10 @@ public class FileService extends BaseService {
 	 *            - Map of entries for which we will construct a Request Body. See {@link FileRequestPayload}
 	 *            for possible values.
 	 * @return FileEntry
+	 * @throws FileServiceException
 	 */
-	public FileEntry update(FileEntry fileEntry, Map<String, String> params, Map<String, String> payloadMap) {
+	public FileEntry update(FileEntry fileEntry, Map<String, String> params, Map<String, String> payloadMap)
+			throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "update");
 		}
@@ -149,8 +152,10 @@ public class FileService extends BaseService {
 	 *            - Document which is passed directly as requestBody to the execute request. This method is
 	 *            used to update the metadata/content of File in Connections.
 	 * @return FileEntry
+	 * @throws FileServiceException
 	 */
-	public FileEntry update(FileEntry fileEntry, Map<String, String> params, Document requestBody) {
+	public FileEntry update(FileEntry fileEntry, Map<String, String> params, Document requestBody)
+			throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "update");
 		}
@@ -183,8 +188,9 @@ public class FileService extends BaseService {
 	 * @param filePath
 	 *            - the path of the file on server, to be uploaded.
 	 * @return FileEntry
+	 * @throws FileServiceException
 	 */
-	public FileEntry upload(String filePath) {
+	public FileEntry upload(String filePath) throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "upload");
 		}
@@ -222,9 +228,10 @@ public class FileService extends BaseService {
 	 * @param headers
 	 *            - Map of Headers. See {@link Headers} for possible values.
 	 * @return FileEntry
+	 * @throws FileServiceException
 	 */
 	public FileEntry uploadFileWithMetadata(String filePath, Map<String, String> params,
-			Map<String, String> headers, Document requestBody) {
+			Map<String, String> headers, Document requestBody) throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "uploadFileWithMetadata");
 		}
@@ -260,8 +267,9 @@ public class FileService extends BaseService {
 	 * @param fileId
 	 *            - fileId of the file to be locked.
 	 * @return FileEntry
+	 * @throws FileServiceException
 	 */
-	public FileEntry lock(String fileId) {
+	public FileEntry lock(String fileId) throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "lock");
 		}
@@ -292,8 +300,9 @@ public class FileService extends BaseService {
 	 * @param fileId
 	 *            - fileId of the file to be unlocked.
 	 * @return FileEntry
+	 * @throws FileServiceException
 	 */
-	public FileEntry unlock(String fileId) {
+	public FileEntry unlock(String fileId) throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "unlock");
 		}
@@ -322,8 +331,9 @@ public class FileService extends BaseService {
 	 * 
 	 * @param fileId
 	 *            - id of the file to be deleted
+	 * @throws FileServiceException
 	 */
-	public void delete(String fileId) {
+	public void delete(String fileId) throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "delete");
 		}
@@ -352,8 +362,10 @@ public class FileService extends BaseService {
 	 * @param comment
 	 *            - Comment to be added to the File
 	 * @return FileEntry
+	 * @throws FileServiceException
 	 */
-	public FileEntry addCommentToFile(FileEntry fileEntry, Map<String, String> params, String comment) {
+	public FileEntry addCommentToFile(FileEntry fileEntry, Map<String, String> params, String comment)
+			throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "addCommentToFile");
 		}
@@ -395,8 +407,10 @@ public class FileService extends BaseService {
 	 * @param comment
 	 *            - Comment to be added to the File
 	 * @return FileEntry
+	 * @throws FileServiceException
 	 */
-	public FileEntry addCommentToMyFile(FileEntry fileEntry, Map<String, String> params, String comment) {
+	public FileEntry addCommentToMyFile(FileEntry fileEntry, Map<String, String> params, String comment)
+			throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "addCommentToMyFile");
 		}
@@ -436,10 +450,11 @@ public class FileService extends BaseService {
 	 * @param params
 	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
 	 * @return List<FileEntry>
+	 * @throws FileServiceException
 	 */
 	@SuppressWarnings({ "unchecked", "unused" })
 	private List<FileEntry> addFilesToFolder(String collectionId, FileEntry fileEntry,
-			Map<String, String> params) {
+			Map<String, String> params) throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "addFilesToFolder");
 		}
@@ -473,10 +488,11 @@ public class FileService extends BaseService {
 	 * @param commentId
 	 * @param params
 	 * @return List<FileEntry>
+	 * @throws FileServiceException
 	 */
 	@SuppressWarnings("unused")
 	private List<FileEntry> retrieveFileComment(FileEntry fileEntry, String commentId,
-			Map<String, String> params) {
+			Map<String, String> params) throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "retrieveFileComment");
 		}
@@ -501,10 +517,11 @@ public class FileService extends BaseService {
 	 * @param commentId
 	 * @param params
 	 * @return List<FileEntry>
+	 * @throws FileServiceException
 	 */
 	@SuppressWarnings("unused")
 	private List<FileEntry> retrieveMyFileComment(FileEntry fileEntry, String commentId,
-			Map<String, String> params) {
+			Map<String, String> params) throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "retrieveMyFileComment");
 		}
@@ -526,9 +543,10 @@ public class FileService extends BaseService {
 	 * 
 	 * @param fileId
 	 * @param commentId
+	 * @throws FileServiceException
 	 */
 	@SuppressWarnings("unused")
-	private void deleteComment(FileEntry fileEntry, String commentId) {
+	private void deleteComment(FileEntry fileEntry, String commentId) throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "deleteComment");
 		}
@@ -550,9 +568,10 @@ public class FileService extends BaseService {
 	 * 
 	 * @param fileId
 	 * @param commentId
+	 * @throws FileServiceException
 	 */
 	@SuppressWarnings("unused")
-	private void deleteMyComment(String fileId, String commentId) {
+	private void deleteMyComment(String fileId, String commentId) throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "deleteMyComment");
 		}
@@ -579,10 +598,11 @@ public class FileService extends BaseService {
 	 * @param params
 	 * @param comment
 	 * @return FileEntry
+	 * @throws FileServiceException
 	 */
 	@SuppressWarnings("unused")
 	private FileEntry updateComment(FileEntry fileEntry, String commentId, Map<String, String> params,
-			String comment) {
+			String comment) throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "updateComment");
 		}
@@ -615,10 +635,11 @@ public class FileService extends BaseService {
 	 * @param params
 	 * @param comment
 	 * @return FileEntry
+	 * @throws FileServiceException
 	 */
 	@SuppressWarnings("unused")
 	private FileEntry updateMyComment(String fileId, String commentId, Map<String, String> params,
-			String comment) {
+			String comment) throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "updateMyComment");
 		}
@@ -677,8 +698,9 @@ public class FileService extends BaseService {
 	 * any params
 	 * 
 	 * @return List<FileEntry>
+	 * @throws FileServiceException
 	 */
-	public List<FileEntry> getMyFiles() {
+	public List<FileEntry> getMyFiles() throws FileServiceException {
 		return getMyFiles(null);
 	}
 
@@ -691,8 +713,9 @@ public class FileService extends BaseService {
 	 * @param params
 	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
 	 * @return List<FileEntry>
+	 * @throws FileServiceException
 	 */
-	public List<FileEntry> getMyFiles(Map<String, String> params) {
+	public List<FileEntry> getMyFiles(Map<String, String> params) throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getMyFiles");
 		}
@@ -710,8 +733,9 @@ public class FileService extends BaseService {
 	 * calls getFilesSharedWithMe(Map<String, String> params) with null params
 	 * 
 	 * @return List<FileEntry>
+	 * @throws FileServiceException
 	 */
-	public List<FileEntry> getFilesSharedWithMe() {
+	public List<FileEntry> getFilesSharedWithMe() throws FileServiceException {
 		return getFilesSharedWithMe(null);
 	}
 
@@ -724,8 +748,9 @@ public class FileService extends BaseService {
 	 * @param params
 	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
 	 * @return List<FileEntry>
+	 * @throws FileServiceException
 	 */
-	public List<FileEntry> getFilesSharedWithMe(Map<String, String> params) {
+	public List<FileEntry> getFilesSharedWithMe(Map<String, String> params) throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getFilesSharedWithMe");
 		}
@@ -748,8 +773,9 @@ public class FileService extends BaseService {
 	 * This method calls getFilesSharedByMe(Map<String, String> params) with null params
 	 * 
 	 * @return List<FileEntry>
+	 * @throws FileServiceException
 	 */
-	public List<FileEntry> getFilesSharedByMe() {
+	public List<FileEntry> getFilesSharedByMe() throws FileServiceException {
 		return getFilesSharedByMe(null);
 	}
 
@@ -762,8 +788,9 @@ public class FileService extends BaseService {
 	 * @param params
 	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
 	 * @return List<FileEntry>
+	 * @throws FileServiceException
 	 */
-	public List<FileEntry> getFilesSharedByMe(Map<String, String> params) {
+	public List<FileEntry> getFilesSharedByMe(Map<String, String> params) throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getFilesSharedWithMe");
 		}
@@ -789,8 +816,9 @@ public class FileService extends BaseService {
 	 * @param params
 	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
 	 * @return List<FileEntry>
+	 * @throws FileServiceException
 	 */
-	public List<FileEntry> getPublicFiles(Map<String, String> params) {
+	public List<FileEntry> getPublicFiles(Map<String, String> params) throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getPublicFiles");
 		}
@@ -814,8 +842,9 @@ public class FileService extends BaseService {
 	 * @param params
 	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
 	 * @return List<FileEntry>
+	 * @throws FileServiceException
 	 */
-	public List<FileEntry> getPinnedFiles(Map<String, String> params) {
+	public List<FileEntry> getPinnedFiles(Map<String, String> params) throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getPinnedFiles");
 		}
@@ -836,8 +865,9 @@ public class FileService extends BaseService {
 	 * @param params
 	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
 	 * @return List<FileEntry>
+	 * @throws FileServiceException
 	 */
-	public List<FileEntry> getMyFolders(Map<String, String> params) {
+	public List<FileEntry> getMyFolders(Map<String, String> params) throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getMyFolders");
 		}
@@ -857,8 +887,9 @@ public class FileService extends BaseService {
 	 * @param params
 	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
 	 * @return List<FileEntry>
+	 * @throws FileServiceException
 	 */
-	public List<FileEntry> getMyPinnedFolders(Map<String, String> params) {
+	public List<FileEntry> getMyPinnedFolders(Map<String, String> params) throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getMyPinnedFolders");
 		}
@@ -879,8 +910,10 @@ public class FileService extends BaseService {
 	 * @param params
 	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
 	 * @return List<FileEntry>
+	 * @throws FileServiceException
 	 */
-	public List<FileEntry> getFoldersWithRecentlyAddedFiles(Map<String, String> params) {
+	public List<FileEntry> getFoldersWithRecentlyAddedFiles(Map<String, String> params)
+			throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getFoldersWithRecentlyAddedFiles");
 		}
@@ -903,8 +936,10 @@ public class FileService extends BaseService {
 	 * @param params
 	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
 	 * @return List<FileEntry>
+	 * @throws FileServiceException
 	 */
-	public List<FileEntry> getFilesInFolder(String collectionId, Map<String, String> params) {
+	public List<FileEntry> getFilesInFolder(String collectionId, Map<String, String> params)
+			throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getFilesInFolder");
 		}
@@ -929,8 +964,9 @@ public class FileService extends BaseService {
 	 * @param params
 	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
 	 * @return List<FileEntry>
+	 * @throws FileServiceException
 	 */
-	public List<FileEntry> getPublicFileFolders(Map<String, String> params) {
+	public List<FileEntry> getPublicFileFolders(Map<String, String> params) throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getPublicFileFolders");
 		}
@@ -952,8 +988,10 @@ public class FileService extends BaseService {
 	 * @param params
 	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
 	 * @return List<FileEntry>
+	 * @throws FileServiceException
 	 */
-	public List<FileEntry> getPersonLibrary(String userId, Map<String, String> params) {
+	public List<FileEntry> getPersonLibrary(String userId, Map<String, String> params)
+			throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getPersonLibrary");
 		}
@@ -980,8 +1018,10 @@ public class FileService extends BaseService {
 	 * @param params
 	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
 	 * @return List<FileEntry>
+	 * @throws FileServiceException
 	 */
-	public List<FileEntry> getPublicFilesComments(FileEntry fileEntry, Map<String, String> params) {
+	public List<FileEntry> getPublicFilesComments(FileEntry fileEntry, Map<String, String> params)
+			throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getPublicFilesComments");
 		}
@@ -1015,8 +1055,10 @@ public class FileService extends BaseService {
 	 * @param params
 	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
 	 * @return List<FileEntry>
+	 * @throws FileServiceException
 	 */
-	public List<FileEntry> getFilesComments(FileEntry fileEntry, Map<String, String> params) {
+	public List<FileEntry> getFilesComments(FileEntry fileEntry, Map<String, String> params)
+			throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getFilesComments");
 		}
@@ -1053,8 +1095,10 @@ public class FileService extends BaseService {
 	 * @param params
 	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
 	 * @return List<FileEntry>
+	 * @throws FileServiceException
 	 */
-	public List<FileEntry> getMyFilesComments(FileEntry fileEntry, Map<String, String> params) {
+	public List<FileEntry> getMyFilesComments(FileEntry fileEntry, Map<String, String> params)
+			throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getMyFilesComments");
 		}
@@ -1086,8 +1130,9 @@ public class FileService extends BaseService {
 	 * @param params
 	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
 	 * @return List<FileEntry>
+	 * @throws FileServiceException
 	 */
-	public List<FileEntry> getFilesInMyRecycleBin(Map<String, String> params) {
+	public List<FileEntry> getFilesInMyRecycleBin(Map<String, String> params) throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getFilesInMyRecycleBin");
 		}
@@ -1290,9 +1335,10 @@ public class FileService extends BaseService {
 	 * executeDelete
 	 * 
 	 * @param requestUri
+	 * @throws FileServiceException
 	 */
 
-	public void executeDelete(String requestUri) {
+	public void executeDelete(String requestUri) throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "executeDelete");
 		}
@@ -1302,6 +1348,7 @@ public class FileService extends BaseService {
 		} catch (ClientServicesException e) {
 			logger.log(Level.SEVERE, Messages.FileServiceException_1 + "executeDelete()", e);
 			setStatus();
+			throw new FileServiceException(e);
 		}
 		parseResult(result);
 	}
@@ -1319,10 +1366,11 @@ public class FileService extends BaseService {
 	 *            - Document which is passed directly as requestBody to the execute request. This method is
 	 *            used to update the metadata/content of File in Connections.
 	 * @return Document
+	 * @throws FileServiceException
 	 */
 
 	public Document executePut(String requestUri, Map<String, String> parameters,
-			Map<String, String> headers, Object payload) {
+			Map<String, String> headers, Object payload) throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "executePut");
 		}
@@ -1333,6 +1381,7 @@ public class FileService extends BaseService {
 		} catch (ClientServicesException e) {
 			logger.log(Level.SEVERE, Messages.FileServiceException_1 + "executePut()", e);
 			setStatus();
+			throw new FileServiceException(e, e.getMessage());
 		}
 		parseResult(result);
 		return (Document) result;
@@ -1351,10 +1400,11 @@ public class FileService extends BaseService {
 	 *            - Document which is passed directly as requestBody to the execute request. This method is
 	 *            used to update the metadata/content of File in Connections.
 	 * @return Document
+	 * @throws FileServiceException
 	 */
 
 	public Document executePost(String requestUri, Map<String, String> parameters,
-			Map<String, String> headers, Object payload) {
+			Map<String, String> headers, Object payload) throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "executePost");
 		}
@@ -1365,6 +1415,9 @@ public class FileService extends BaseService {
 		} catch (ClientServicesException exception) {
 			logger.log(Level.SEVERE, Messages.FileServiceException_1 + "executePost()", exception);
 			setStatus();
+			if (exception.getResponseStatusCode() == ClientServicesException.CONFLICT) {
+				throw new FileServiceException(exception, exception.getMessage());
+			}
 		}
 		parseResult(result);
 		return (Document) result;
@@ -1409,8 +1462,9 @@ public class FileService extends BaseService {
 	 *            load - false : an empty fileEntry object is returned, and then updations can be made on this
 	 *            object.
 	 * @return FileEntry
+	 * @throws FileServiceException
 	 */
-	public FileEntry getFile(String fileId, boolean load) {
+	public FileEntry getFile(String fileId, boolean load) throws FileServiceException {
 		return getFile(fileId, null, load);
 	}
 
@@ -1429,9 +1483,11 @@ public class FileService extends BaseService {
 	 *            load - false : an empty fileEntry object is returned, and then updations can be made on this
 	 *            object.
 	 * @return FileEntry
+	 * @throws FileServiceException
 	 */
 
-	public FileEntry getFile(String fileId, Map<String, String> parameters, boolean load) {
+	public FileEntry getFile(String fileId, Map<String, String> parameters, boolean load)
+			throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getFile");
 		}
@@ -1463,9 +1519,11 @@ public class FileService extends BaseService {
 	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
 	 * @param format
 	 * @return List<FileEntry>
+	 * @throws FileServiceException
 	 */
 
-	public List<FileEntry> executeGet(String requestUri, Map<String, String> parameters, Handler format) {
+	public List<FileEntry> executeGet(String requestUri, Map<String, String> parameters, Handler format)
+			throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "executeGet");
 		}
@@ -1475,6 +1533,7 @@ public class FileService extends BaseService {
 		} catch (ClientServicesException e) {
 			logger.log(Level.SEVERE, Messages.FileServiceException_1 + "executeGet()", e);
 			setStatus();
+			throw new FileServiceException(e, e.getMessage());
 		}
 		if (result == null) {
 			return null;
@@ -1490,8 +1549,9 @@ public class FileService extends BaseService {
 	 * @param result
 	 *            - response from the network call.
 	 * @return List<FileEntry>
+	 * @throws FileServiceException
 	 */
-	public List<FileEntry> createFileEntriesFromResultFeed(Document result) {
+	public List<FileEntry> createFileEntriesFromResultFeed(Document result) throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "createFileEntriesFromResultFeed");
 		}
@@ -1513,6 +1573,8 @@ public class FileService extends BaseService {
 			}
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, Messages.FileServiceException_1 + "createFileEntriesFromResultFeed()", e);
+			throw new FileServiceException(e,
+					"Exception occurred while parsing response feed to create FileEntries");
 		}
 		return fileObjects;
 	}

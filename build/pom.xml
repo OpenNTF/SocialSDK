@@ -30,12 +30,12 @@
   	<module>sdk</module>
   	<module>domino</module>
   	<module>sample</module>
-	<!--
-  	<module>test</module>
-	-->
+
     <module>js</module>
     <module>reporting</module>
-    <module>distribution</module>	
+    <module>distribution</module>
+    
+  	<module>test</module>
   </modules>
 
   <build>

@@ -30,6 +30,11 @@
  // Suppose the cache has 4 entries and its max size limit is 4 (the cache is full right now). The structure of the cache would be as described by figure above.
  // The entries are listed as per their order of recent access. 
  // So when a new entry E is added to the cache, the new order of the cache entries would be EABC. D would be deleted from the cache.
+
+/**
+ * Defination of the Cache module
+ * @module sbt.Cache
+ */
   
 define(['sbt/_bridge/declare'],function(declare) {
 	var c = declare("sbt.Cache", null, {	

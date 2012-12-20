@@ -68,16 +68,14 @@ public class RepositoryInfo<DataFormat> extends BaseEntity<DataFormat> implement
 	}
 
 	@Override
-	public void load() throws FileServiceException {
+	public void load() throws ClientServicesException {
 		// TODO fix loading so that it doesn't force the uuid retrieval
 		Map<String, String> parameters = new HashMap<String, String>();
 
 		DataFormat data = null;
-		try {
+
 			data = (DataFormat) svc.retrieveData(selfLoadUrl, parameters, null);
-		} catch (ClientServicesException e) {
-			throw new FileServiceException(e);
-		}
+	
 		setData(data);
 
 	}

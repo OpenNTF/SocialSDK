@@ -10,7 +10,7 @@ public class FileServiceReadMyEntriesAltFailure1 extends FileServiceReadMyEntrie
 
 	@Override
 	@Test(expected = FileServiceException.class)
-	public void testReadEntries() throws SBTServiceException {
+	public void testReadEntries() throws FileServiceException  {
 		super.testReadEntries();
 		fail();
 	}

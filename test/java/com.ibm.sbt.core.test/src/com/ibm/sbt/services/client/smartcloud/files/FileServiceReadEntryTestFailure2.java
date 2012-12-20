@@ -38,7 +38,7 @@ public class FileServiceReadEntryTestFailure2 extends FileServiceReadEntryTest {
 
 	@Override
 	@Test(expected = FileServiceException.class)
-	public void testRead() throws SBTServiceException {
+	public void testRead() throws FileServiceException {
 		super.testRead();
 		fail();
 

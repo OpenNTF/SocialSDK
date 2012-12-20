@@ -1597,17 +1597,4 @@ public class FileService extends BaseService {
 		return fileEntry;
 	}
 
-	@Override
-	public <DataFormat> BaseEntity<DataFormat> getEntityFromData(String entityName, DataFormat data)
-			throws SBTServiceException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public <DataFormat> BaseEntity<DataFormat> getEntityFromId(String entityName, String uuid)
-			throws SBTServiceException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

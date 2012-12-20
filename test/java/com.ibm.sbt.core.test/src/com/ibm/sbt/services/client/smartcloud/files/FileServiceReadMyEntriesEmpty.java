@@ -13,7 +13,7 @@ import com.ibm.sbt.services.client.SBTServiceException;
 public class FileServiceReadMyEntriesEmpty extends TestEndpoint {
 
 	@Test
-	public void testReadEntries() throws SBTServiceException {
+	public void testReadEntries() throws FileServiceException {
 		FileService svc = new FileService();
 		List<FileEntry> entries = svc.getMyFiles();
 		assertEquals(entries.size(), 0);

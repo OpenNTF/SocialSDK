@@ -15,13 +15,12 @@
  */
 
 /**
- * Social Business Toolkit SDK.
- * 
- * Helpers for accessing the Connections files service
+ * Javascript APIs for IBM Connections File Service.
+ * @module sbt.connections.FileService
  */
 define(
 		[ "sbt/_bridge/declare", "sbt/config", "sbt/lang", "sbt/connections/core", "sbt/xml", "sbt/xpath", "sbt/Endpoint", "sbt/connections/FileConstants",
-				"sbt/validate","sbt/log" ],
+				"sbt/validate", "sbt/log" ],
 		function(declare, cfg, lang, con, xml, xpath, endpoint, constants, validate, log) {
 
 			// TODO revisit this
@@ -31,13 +30,10 @@ define(
 
 			/**
 			 * FileEntry class associated with a file document returned in xml feed and also used to represent a file.
-			 * 
 			 * @class FileEntry
 			 * @constructor
-			 * @param {Object}
-			 *            FileService fileService object
-			 * @param {String}
-			 *            id id associated with the file.
+			 * @param {Object} FileService fileService object
+			 * @param {String} id id associated with the file.
 			 */
 			var FileEntry = declare("sbt.connections.FileEntry", null, {
 
@@ -54,16 +50,14 @@ define(
 					this.personEntry = new PersonEntry(svc);
 					this.personEntry._data = this._data;
 				},
-				_setData : function(newData){
+				_setData : function(newData) {
 					this._data = newData;
 					this.personEntry._data = newData;
 				},
 				/**
 				 * get method for getting any field in FileEntry
-				 * 
 				 * @method get
-				 * @param {String}
-				 *            fieldName
+				 * @param {String} fieldName
 				 * @returns {Object} value of the field
 				 */
 				get : function(fieldName) {
@@ -71,19 +65,15 @@ define(
 				},
 				/**
 				 * set method for setting any field in FileEntry
-				 * 
 				 * @method set
-				 * @param {String}
-				 *            fieldName
-				 * @param {Object}
-				 *            value of the field
+				 * @param {String} fieldName
+				 * @param {Object} value of the field
 				 */
 				set : function(fieldName, value) {
 					this.fields[fieldName] = value;
 				},
 				/**
 				 * gets the fieldId
-				 * 
 				 * @method getId
 				 * @returns {String} Id of the file
 				 */
@@ -92,7 +82,6 @@ define(
 				},
 				/**
 				 * gets the download link for file
-				 * 
 				 * @method getDownloadLink
 				 * @returns {String} DownloadLink of the file
 				 */
@@ -101,7 +90,6 @@ define(
 				},
 				/**
 				 * gets the size file
-				 * 
 				 * @method getSize
 				 * @returns {String} size of the file
 				 */
@@ -110,7 +98,6 @@ define(
 				},
 				/**
 				 * gets the created Date of file
-				 * 
 				 * @method getCreatedDate
 				 * @returns {String} CreatedDate of the file
 				 */
@@ -119,7 +106,6 @@ define(
 				},
 				/**
 				 * gets the Category of file
-				 * 
 				 * @method getCategory
 				 * @returns {String} Category of the file
 				 */
@@ -128,7 +114,6 @@ define(
 				},
 				/**
 				 * gets the Lock state of file
-				 * 
 				 * @method getLock
 				 * @returns {String} lock state of the file
 				 */
@@ -137,7 +122,6 @@ define(
 				},
 				/**
 				 * gets the Name of file
-				 * 
 				 * @method getLock
 				 * @returns {String} lock state of the file
 				 */
@@ -146,7 +130,6 @@ define(
 				},
 				/**
 				 * gets the modifed date of the file
-				 * 
 				 * @method getModified
 				 * @returns {String} modifed date of the file
 				 */
@@ -155,7 +138,6 @@ define(
 				},
 				/**
 				 * gets the visibility of the file
-				 * 
 				 * @method getVisibility
 				 * @returns {String} visibility of the file
 				 */
@@ -164,7 +146,6 @@ define(
 				},
 				/**
 				 * gets the LibraryType of the file
-				 * 
 				 * @method getLibraryType
 				 * @returns {String} libraryType of the file
 				 */
@@ -173,7 +154,6 @@ define(
 				},
 				/**
 				 * gets the version Id of the file
-				 * 
 				 * @method getVersionUuid
 				 * @returns {String} version Id of the file
 				 */
@@ -182,7 +162,6 @@ define(
 				},
 				/**
 				 * gets the summary of the file
-				 * 
 				 * @method getSummary
 				 * @returns {String} summary of the file
 				 */
@@ -191,7 +170,6 @@ define(
 				},
 				/**
 				 * gets the restrictedVisibility of the file
-				 * 
 				 * @method getRestrictedVisibility
 				 * @returns {String} restrictedVisibility of the file
 				 */
@@ -200,7 +178,6 @@ define(
 				},
 				/**
 				 * gets the title of the file
-				 * 
 				 * @method getTitle
 				 * @returns {String} title of the file
 				 */
@@ -209,53 +186,41 @@ define(
 				},
 				/**
 				 * sets the label to be updated for the file
-				 * 
 				 * @method setLabel
-				 * @param {String}
-				 *            label to be updated
+				 * @param {String} label to be updated
 				 */
 				setLabel : function(label) {
 					this.set("label", label);
 				},
 				/**
 				 * sets the summary to be updated for the file
-				 * 
 				 * @method setSummary
-				 * @param {String}
-				 *            summary to be updated
+				 * @param {String} summary to be updated
 				 */
 				setSummary : function(summary) {
 					this.set("summary", summary);
 				},
 				/**
 				 * sets the visibility to be updated for the file
-				 * 
 				 * @method setVisibility
-				 * @param {String}
-				 *            visibility to be updated
+				 * @param {String} visibility to be updated
 				 */
 				setVisibility : function(visibility) {
 					this.set("visibility", visibility);
 				},
 				/**
 				 * updates metadata about a file like title, visibility, etc.
-				 * 
 				 * @method update
-				 * 
-				 * @param {Object}
-				 *            [args] Argument object
-				 * @param {Function}
-				 *            [args.load] The callback function will invoke when the file is updated. The function expects one parameter, the updated FileEntry
-				 *            object.
-				 * @param {Function}
-				 *            [args.error] Sometimes the update calls fails due to bad request (400 error). The error parameter is a callback function that is
-				 *            only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the error function is
-				 *            a JavaScript Error object indicating what the failure was. From the error object. one can access the javascript library error
-				 *            object, the status code and the error message.
-				 * @param {Function}
-				 *            [args.handle] This callback function is called regardless of whether the call to update the file completes or fails. The parameter
-				 *            passed to this callback is the FileEntry object (or error object). From the error object. one can get access to the javascript
-				 *            library error object, the status code and the error message.
+				 * @param {Object} [args] Argument object
+				 * @param {Function} [args.load] The callback function will invoke when the file is updated. The function expects one parameter, the updated
+				 * FileEntry object.
+				 * @param {Function} [args.error] Sometimes the update calls fails due to bad request (400 error). The error parameter is a callback function
+				 * that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the error function is a
+				 * JavaScript Error object indicating what the failure was. From the error object. one can access the javascript library error object, the
+				 * status code and the error message.
+				 * @param {Function} [args.handle] This callback function is called regardless of whether the call to update the file completes or fails. The
+				 * parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to the javascript
+				 * library error object, the status code and the error message.
 				 */
 				update : function(args) {
 					if (!this._service) {
@@ -265,22 +230,17 @@ define(
 				},
 				/**
 				 * Gets the comments for a file.
-				 * 
 				 * @method getFileComments
-				 * @param {Object}
-				 *            [args] Argument object
-				 * @param {Function}
-				 *            [args.load] The callback function will invoke when the comments are retrieved successfully. The function expects one parameter,
-				 *            the list of CommentEntry objects.
-				 * @param {Function}
-				 *            [args.error] Sometimes the call to get comments of a file fails due to bad request (400 error). The error parameter is a callback
-				 *            function that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the
-				 *            error function is a JavaScript Error object indicating what the failure was. From the error object. one can access the javascript
-				 *            library error object, the status code and the error message.
-				 * @param {Function}
-				 *            [args.handle] This callback function is called regardless of whether the call to get the comments completes or fails. The
-				 *            parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to the
-				 *            javascript library error object, the status code and the error message.
+				 * @param {Object} [args] Argument object
+				 * @param {Function} [args.load] The callback function will invoke when the comments are retrieved successfully. The function expects one
+				 * parameter, the list of CommentEntry objects.
+				 * @param {Function} [args.error] Sometimes the call to get comments of a file fails due to bad request (400 error). The error parameter is a
+				 * callback function that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the
+				 * error function is a JavaScript Error object indicating what the failure was. From the error object. one can access the javascript library
+				 * error object, the status code and the error message.
+				 * @param {Function} [args.handle] This callback function is called regardless of whether the call to get the comments completes or fails. The
+				 * parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to the javascript
+				 * library error object, the status code and the error message.
 				 */
 				getComments : function(args) {
 					if (!this._service) {
@@ -290,22 +250,17 @@ define(
 				},
 				/**
 				 * Uploads a new file for logged in user.
-				 * 
 				 * @method upload
-				 * @param {Object}
-				 *            [args] Argument object
-				 * @param {Function}
-				 *            [args.load] The callback function will invoke when the file is uploaded successfully. The function expects one parameter, the
-				 *            status of upload.
-				 * @param {Function}
-				 *            [args.error] Sometimes the upload calls fails due to bad request (400 error). The error parameter is a callback function that is
-				 *            only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the error function is
-				 *            a JavaScript Error object indicating what the failure was. From the error object. one can access the javascript library error
-				 *            object, the status code and the error message.
-				 * @param {Function}
-				 *            [args.handle] This callback function is called regardless of whether the call to upload the file completes or fails. The parameter
-				 *            passed to this callback is the FileEntry object (or error object). From the error object. one can get access to the javascript
-				 *            library error object, the status code and the error message.
+				 * @param {Object} [args] Argument object
+				 * @param {Function} [args.load] The callback function will invoke when the file is uploaded successfully. The function expects one parameter,
+				 * the status of upload.
+				 * @param {Function} [args.error] Sometimes the upload calls fails due to bad request (400 error). The error parameter is a callback function
+				 * that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the error function is a
+				 * JavaScript Error object indicating what the failure was. From the error object. one can access the javascript library error object, the
+				 * status code and the error message.
+				 * @param {Function} [args.handle] This callback function is called regardless of whether the call to upload the file completes or fails. The
+				 * parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to the javascript
+				 * library error object, the status code and the error message.
 				 */
 				upload : function(args) {
 					if (!this._service) {
@@ -315,22 +270,17 @@ define(
 				},
 				/**
 				 * Adds comment to a file of any user.
-				 * 
 				 * @method addComment
-				 * @param {Object}
-				 *            [args] Argument object
-				 * @param {Function}
-				 *            [args.load] The callback function will invoke when the comment is added successfully to the file. The function expects one
-				 *            parameter, the newly created comment object.
-				 * @param {Function}
-				 *            [args.error] Sometimes the update calls fails due to bad request (400 error). The error parameter is a callback function that is
-				 *            only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the error function is
-				 *            a JavaScript Error object indicating what the failure was. From the error object. one can access the javascript library error
-				 *            object, the status code and the error message.
-				 * @param {Function}
-				 *            [args.handle] This callback function is called regardless of whether the call to update the profile completes or fails. The
-				 *            parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to the
-				 *            javascript library error object, the status code and the error message.
+				 * @param {Object} [args] Argument object
+				 * @param {Function} [args.load] The callback function will invoke when the comment is added successfully to the file. The function expects one
+				 * parameter, the newly created comment object.
+				 * @param {Function} [args.error] Sometimes the update calls fails due to bad request (400 error). The error parameter is a callback function
+				 * that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the error function is a
+				 * JavaScript Error object indicating what the failure was. From the error object. one can access the javascript library error object, the
+				 * status code and the error message.
+				 * @param {Function} [args.handle] This callback function is called regardless of whether the call to update the profile completes or fails. The
+				 * parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to the javascript
+				 * library error object, the status code and the error message.
 				 */
 				addComment : function(args) {
 					if (!this._service) {
@@ -340,22 +290,17 @@ define(
 				},
 				/**
 				 * Adds comment to a file of logged in user.
-				 * 
 				 * @method addCommentToMyFile
-				 * @param {Object}
-				 *            [args] Argument object
-				 * @param {Function}
-				 *            [args.load] The callback function will invoke when the comment is added successfully to the file. The function expects one
-				 *            parameter, the newly created comment object.
-				 * @param {Function}
-				 *            [args.error] Sometimes the update calls fails due to bad request (400 error). The error parameter is a callback function that is
-				 *            only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the error function is
-				 *            a JavaScript Error object indicating what the failure was. From the error object. one can access the javascript library error
-				 *            object, the status code and the error message.
-				 * @param {Function}
-				 *            [args.handle] This callback function is called regardless of whether the call to update the profile completes or fails. The
-				 *            parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to the
-				 *            javascript library error object, the status code and the error message.
+				 * @param {Object} [args] Argument object
+				 * @param {Function} [args.load] The callback function will invoke when the comment is added successfully to the file. The function expects one
+				 * parameter, the newly created comment object.
+				 * @param {Function} [args.error] Sometimes the update calls fails due to bad request (400 error). The error parameter is a callback function
+				 * that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the error function is a
+				 * JavaScript Error object indicating what the failure was. From the error object. one can access the javascript library error object, the
+				 * status code and the error message.
+				 * @param {Function} [args.handle] This callback function is called regardless of whether the call to update the profile completes or fails. The
+				 * parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to the javascript
+				 * library error object, the status code and the error message.
 				 */
 				addCommentToMyFile : function(args) {
 					if (!this._service) {
@@ -365,22 +310,17 @@ define(
 				},
 				/**
 				 * Lock a file.
-				 * 
 				 * @method lockFile
-				 * @param {Object}
-				 *            [args] Argument object
-				 * @param {Function}
-				 *            [args.load] The callback function will invoke when the file is locked successfully. The function expects one parameter, the status
-				 *            of uncock operation.
-				 * @param {Function}
-				 *            [args.error] Sometimes the lock file calls fails due to bad request (400 error). The error parameter is a callback function that
-				 *            is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the error function
-				 *            is a JavaScript Error object indicating what the failure was. From the error object. one can access the javascript library error
-				 *            object, the status code and the error message.
-				 * @param {Function}
-				 *            [args.handle] This callback function is called regardless of whether the call to lock the file completes or fails. The parameter
-				 *            passed to this callback is the FileEntry object (or error object). From the error object. one can get access to the javascript
-				 *            library error object, the status code and the error message.
+				 * @param {Object} [args] Argument object
+				 * @param {Function} [args.load] The callback function will invoke when the file is locked successfully. The function expects one parameter, the
+				 * status of uncock operation.
+				 * @param {Function} [args.error] Sometimes the lock file calls fails due to bad request (400 error). The error parameter is a callback function
+				 * that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the error function is a
+				 * JavaScript Error object indicating what the failure was. From the error object. one can access the javascript library error object, the
+				 * status code and the error message.
+				 * @param {Function} [args.handle] This callback function is called regardless of whether the call to lock the file completes or fails. The
+				 * parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to the javascript
+				 * library error object, the status code and the error message.
 				 */
 				lock : function(args) {
 					if (!this._service) {
@@ -390,22 +330,17 @@ define(
 				},
 				/**
 				 * UnLock a file.
-				 * 
 				 * @method unlockFile
-				 * @param {Object}
-				 *            [args] Argument object
-				 * @param {Function}
-				 *            [args.load] The callback function will invoke when the file is unlocked successfully. The function expects one parameter, the
-				 *            status of uncock operation.
-				 * @param {Function}
-				 *            [args.error] Sometimes the lock file calls fails due to bad request (400 error). The error parameter is a callback function that
-				 *            is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the error function
-				 *            is a JavaScript Error object indicating what the failure was. From the error object. one can access the javascript library error
-				 *            object, the status code and the error message.
-				 * @param {Function}
-				 *            [args.handle] This callback function is called regardless of whether the call to unlock the file completes or fails. The parameter
-				 *            passed to this callback is the FileEntry object (or error object). From the error object. one can get access to the javascript
-				 *            library error object, the status code and the error message.
+				 * @param {Object} [args] Argument object
+				 * @param {Function} [args.load] The callback function will invoke when the file is unlocked successfully. The function expects one parameter,
+				 * the status of uncock operation.
+				 * @param {Function} [args.error] Sometimes the lock file calls fails due to bad request (400 error). The error parameter is a callback function
+				 * that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the error function is a
+				 * JavaScript Error object indicating what the failure was. From the error object. one can access the javascript library error object, the
+				 * status code and the error message.
+				 * @param {Function} [args.handle] This callback function is called regardless of whether the call to unlock the file completes or fails. The
+				 * parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to the javascript
+				 * library error object, the status code and the error message.
 				 */
 				unLock : function(args) {
 					if (!this._service) {
@@ -415,22 +350,17 @@ define(
 				},
 				/**
 				 * Delete a file.
-				 * 
 				 * @method deleteFile
-				 * @param {Object}
-				 *            [args] Argument object
-				 * @param {Function}
-				 *            [args.load] The callback function will invoke when the file is deleted successfully. The function expects one parameter, the
-				 *            status of the delete openration.
-				 * @param {Function}
-				 *            [args.error] Sometimes the delete calls fails due to bad request (400 error). The error parameter is a callback function that is
-				 *            only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the error function is
-				 *            a JavaScript Error object indicating what the failure was. From the error object. one can access the javascript library error
-				 *            object, the status code and the error message.
-				 * @param {Function}
-				 *            [args.handle] This callback function is called regardless of whether the call to delete the File completes or fails. The parameter
-				 *            passed to this callback is the FileEntry object (or error object). From the error object. one can get access to the javascript
-				 *            library error object, the status code and the error message.
+				 * @param {Object} [args] Argument object
+				 * @param {Function} [args.load] The callback function will invoke when the file is deleted successfully. The function expects one parameter,
+				 * the status of the delete openration.
+				 * @param {Function} [args.error] Sometimes the delete calls fails due to bad request (400 error). The error parameter is a callback function
+				 * that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the error function is a
+				 * JavaScript Error object indicating what the failure was. From the error object. one can access the javascript library error object, the
+				 * status code and the error message.
+				 * @param {Function} [args.handle] This callback function is called regardless of whether the call to delete the File completes or fails. The
+				 * parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to the javascript
+				 * library error object, the status code and the error message.
 				 */
 				deleteFile : function(args) {
 					if (!this._service) {
@@ -440,7 +370,6 @@ define(
 				},
 				/**
 				 * Get the loaded comments for the File
-				 * 
 				 * @returns {Object} commentEntries
 				 */
 				getComments : function() {
@@ -448,23 +377,31 @@ define(
 				},
 				/**
 				 * Get the person entry for author and modifier for the File
-				 * 
 				 * @returns {Object} PersonEntry
 				 */
 				getPersonEntry : function() {
 					return this.personEntry;
+				},
+				validate : function(className, methodName, args, validateMap) {
+					if (validateMap.isValidateId && !(validate._validateInputTypeAndNotify(className, methodName, "File Id", this._id, "string", args))) {
+						return false;
+					}
+					if (validateMap.isValidateUser
+							&& (!(validate._validateInputTypeAndNotify(className, methodName, "File.personEntry", this.personEntry,
+									"sbt.connections.PersonEntry", args)) || !(validate._validateInputTypeAndNotify(className, methodName, "File.UserId",
+									this.personEntry ? this.personEntry.getAuthorId() : null, "string", args)))) {
+						return false;
+					}
+					return true;
 				}
 			});
 
 			/**
 			 * CommentEntry class associated with a Coment document returned in xml feed and also used to represent a Comment.
-			 * 
 			 * @class CommentEntry
 			 * @constructor
-			 * @param {Object}
-			 *            FileService fileService object
-			 * @param {String}
-			 *            id id associated with the comment.
+			 * @param {Object} FileService fileService object
+			 * @param {String} id id associated with the comment.
 			 */
 			var CommentEntry = declare("sbt.connections.CommentEntry", null, {
 
@@ -477,7 +414,7 @@ define(
 					this._id = id;
 					this._service = svc;
 				},
-				_setData : function(newData){
+				_setData : function(newData) {
 					this._data = newData;
 				},
 				get : function(fieldName) {
@@ -488,7 +425,6 @@ define(
 				},
 				/**
 				 * gets the comment Id
-				 * 
 				 * @method getId
 				 * @returns {String} Id of the Comment
 				 */
@@ -497,7 +433,6 @@ define(
 				},
 				/**
 				 * gets the comment text
-				 * 
 				 * @method getComment
 				 * @returns {String} text of the Comment
 				 */
@@ -508,13 +443,10 @@ define(
 
 			/**
 			 * PersonEntry class associated with a Person document returned in xml feed and also used to represent a file.
-			 * 
 			 * @class PersonEntry
 			 * @constructor
-			 * @param {Object}
-			 *            FileService fileService object
-			 * @param {String}
-			 *            id userId of the person.
+			 * @param {Object} FileService fileService object
+			 * @param {String} id userId of the person.
 			 */
 			var PersonEntry = declare("sbt.connections.PersonEntry", null, {
 
@@ -535,7 +467,6 @@ define(
 				},
 				/**
 				 * gets the author's userId
-				 * 
 				 * @method getAuthorId
 				 * @returns {String} author Id of the file
 				 */
@@ -544,7 +475,6 @@ define(
 				},
 				/**
 				 * gets the author's name
-				 * 
 				 * @method getAuthorName
 				 * @returns {String} author name of the file
 				 */
@@ -553,7 +483,6 @@ define(
 				},
 				/**
 				 * gets the author's email
-				 * 
 				 * @method getAuthorEmail
 				 * @returns {String} author email of the file
 				 */
@@ -562,7 +491,6 @@ define(
 				},
 				/**
 				 * gets the author's user state
-				 * 
 				 * @method getAuthorUserState
 				 * @returns {String} author's user state of the file
 				 */
@@ -571,16 +499,14 @@ define(
 				},
 				/**
 				 * gets the modifier's user Id
-				 * 
 				 * @method getModifierId
 				 * @returns {String} modifier's user Id of the file
 				 */
 				getModifierId : function() {
-					return this._id || this.get("userUuidModifier");
+					return this.get("userUuidModifier");
 				},
 				/**
 				 * gets the modifier's Name
-				 * 
 				 * @method getModifierName
 				 * @returns {String} modifier's name of the file
 				 */
@@ -589,7 +515,6 @@ define(
 				},
 				/**
 				 * gets the modifier's Email
-				 * 
 				 * @method getModifierEmail
 				 * @returns {String} modifier's email of the file
 				 */
@@ -598,7 +523,6 @@ define(
 				},
 				/**
 				 * gets the modifier's user state
-				 * 
 				 * @method getModifierUserState
 				 * @returns {String} modifier's user state of the file
 				 */
@@ -645,14 +569,10 @@ define(
 
 			/**
 			 * File service class associated with files API of IBM Connections.
-			 * 
 			 * @class FileService
 			 * @constructor
-			 * @param {Object}
-			 *            parameters Parameter object
-			 * @param {String}
-			 *            [parameters.endpoint=connections] Endpoint to be used by FileService.
-			 * 
+			 * @param {Object} parameters Parameter object
+			 * @param {String} [parameters.endpoint=connections] Endpoint to be used by FileService.
 			 */
 			var FileService = declare(
 					"sbt.connections.FileService",
@@ -668,7 +588,6 @@ define(
 							this._endpointName = parameters.endpoint || "connections";
 							this._endpoint = endpoint.find(this._endpointName);
 						},
-
 						_notifyCb : function(args, param) {
 
 							if (args) {
@@ -676,35 +595,29 @@ define(
 									args.load(param);
 								else if (args.handle)
 									args.handle(param);
+							} else {
+								log.error("Callbacks not defined. Return Value={0}", param);
 							}
 						},
 
 						/**
 						 * Getter for FileEntry Object representing File Entry Document or used to do File API operations.
-						 * 
 						 * @method getFile
-						 * @param {Object}
-						 *            [args=null] Argument object
-						 * @param {String}
-						 *            [args.id=null] FileId of the file, default null in case of new File created.
-						 * @param {Boolean}
-						 *            [args.loadIt=true] Loads the FileEntry object with file entry document. If an empty FileEntry object associated with a
-						 *            FileEntry (with no file entry document), then the load method must be called with this parameter set to false. By default,
-						 *            this parameter is true.
-						 * @param {Function}
-						 *            [args.load] The function invokes when the file is loaded successfully from the server. The function expects to receive one
-						 *            parameter, the loaded FileEntry object.
-						 * @param {Function}
-						 *            [args.error] Sometimes the getFile call fails with bad request such as 400 or server errors such as 500. The error
-						 *            parameter is another callback function that is only invoked when an error occurs. This allows to control what happens when
-						 *            an error occurs without having to put a lot of logic into your load function to check for error conditions. The parameter
-						 *            passed to the error function is a JavaScript Error object indicating what the failure was. From the error object. one can
-						 *            get access to the javascript library error object, the status code and the error message.
-						 * @param {Function}
-						 *            [args.handle] This callback is called regardless of whether the call to get the file completes or fails. The parameter
-						 *            passed to this callback is the FileEntry object (or error object). From the error object. one can get access to the
-						 *            javascript library error object, the status code and the error message.
-						 * 
+						 * @param {Object} [args=null] Argument object
+						 * @param {String} [args.id=null] FileId of the file, default null in case of new File created.
+						 * @param {Boolean} [args.loadIt=true] Loads the FileEntry object with file entry document. If an empty FileEntry object associated with
+						 * a FileEntry (with no file entry document), then the load method must be called with this parameter set to false. By default, this
+						 * parameter is true.
+						 * @param {Function} [args.load] The function invokes when the file is loaded successfully from the server. The function expects to
+						 * receive one parameter, the loaded FileEntry object.
+						 * @param {Function} [args.error] Sometimes the getFile call fails with bad request such as 400 or server errors such as 500. The error
+						 * parameter is another callback function that is only invoked when an error occurs. This allows to control what happens when an error
+						 * occurs without having to put a lot of logic into your load function to check for error conditions. The parameter passed to the error
+						 * function is a JavaScript Error object indicating what the failure was. From the error object. one can get access to the javascript
+						 * library error object, the status code and the error message.
+						 * @param {Function} [args.handle] This callback is called regardless of whether the call to get the file completes or fails. The
+						 * parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to the
+						 * javascript library error object, the status code and the error message.
 						 */
 						getFile : function(args) {
 							if (!args) {
@@ -719,10 +632,8 @@ define(
 
 						/**
 						 * Getter for CommentEntry Object.
-						 * 
 						 * @method getComment
-						 * @param {String}
-						 *            [args.Id=null] CommentId of the Comment, default null in case of a new comment created.
+						 * @param {String} [args.Id=null] CommentId of the Comment, default null in case of a new comment created.
 						 */
 						getComment : function(id) {
 							return new CommentEntry(this, id);
@@ -809,12 +720,12 @@ define(
 
 						_parseXmlData : function(data, file) {
 							var entries = [];
-							if(!data || data == ""){
+							if (!data || data == "") {
 								return entries;
 							}
 							var xmlData = xml.parse(data);
 
-							var entryNodes = xpath.selectNodes(xmlData, constants.xPathEntry, sbt.connections.namespaces);							
+							var entryNodes = xpath.selectNodes(xmlData, constants.xPathEntry, sbt.connections.namespaces);
 							if (entryNodes.length == 0) {
 								entryNodes = xpath.selectNodes(xmlData, constants.xpathMapFile["entry"], sbt.connections.namespaces);
 							}
@@ -956,24 +867,18 @@ define(
 
 						/**
 						 * Gets the files of the logged in user.
-						 * 
 						 * @method getFilesSharedByMe
-						 * @param {Object}
-						 *            [args] Argument object
-						 * @param {Function}
-						 *            [args.load] The callback function will invoke when the files of the user are retrieved successfully. The function expects
-						 *            one parameter, a list of FileEntry objects.
-						 * @param {Function}
-						 *            [args.error] Sometimes the call to get files of the user fails due to bad request (400 error). The error parameter is a
-						 *            callback function that is only invoked when an error occurs. This allows to write logic when an error occurs. The
-						 *            parameter passed to the error function is a JavaScript Error object indicating what the failure was. From the error
-						 *            object. one can access the javascript library error object, the status code and the error message.
-						 * @param {Function}
-						 *            [args.handle] This callback function is called regardless of whether the call to get files of the user completes or fails.
-						 *            The parameter passed to this callback is the list of FileEntry objects (or error object). From the error object. one can
-						 *            get access to the javascript library error object, the status code and the error message.
-						 * @param {Object}
-						 *            [args.parameters] The additional parameters like pageSize etc.
+						 * @param {Object} [args] Argument object
+						 * @param {Function} [args.load] The callback function will invoke when the files of the user are retrieved successfully. The function
+						 * expects one parameter, a list of FileEntry objects.
+						 * @param {Function} [args.error] Sometimes the call to get files of the user fails due to bad request (400 error). The error parameter
+						 * is a callback function that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter
+						 * passed to the error function is a JavaScript Error object indicating what the failure was. From the error object. one can access the
+						 * javascript library error object, the status code and the error message.
+						 * @param {Function} [args.handle] This callback function is called regardless of whether the call to get files of the user completes or
+						 * fails. The parameter passed to this callback is the list of FileEntry objects (or error object). From the error object. one can get
+						 * access to the javascript library error object, the status code and the error message.
+						 * @param {Object} [args.parameters] The additional parameters like pageSize etc.
 						 */
 						getMyFiles : function(args) {
 							var accessType = constants.accessType.AUTHENTICATED;
@@ -985,24 +890,18 @@ define(
 
 						/**
 						 * Gets the files shared with the logged in user.
-						 * 
 						 * @method getFilesSharedWithMe
-						 * @param {Object}
-						 *            [args] Argument object
-						 * @param {Function}
-						 *            [args.load] The callback function will invoke when the files shared with the user are retrieved successfully. The function
-						 *            expects one parameter, a list of FileEntry objects.
-						 * @param {Function}
-						 *            [args.error] Sometimes the call to get files shared with the user fails due to bad request (400 error). The error
-						 *            parameter is a callback function that is only invoked when an error occurs. This allows to write logic when an error
-						 *            occurs. The parameter passed to the error function is a JavaScript Error object indicating what the failure was. From the
-						 *            error object. one can access the javascript library error object, the status code and the error message.
-						 * @param {Function}
-						 *            [args.handle] This callback function is called regardless of whether the call to get files shared with the user completes
-						 *            or fails. The parameter passed to this callback is the list of FileEntry objects (or error object). From the error object.
-						 *            one can get access to the javascript library error object, the status code and the error message.
-						 * @param {Object}
-						 *            [args.parameters] The additional parameters like pageSize etc.
+						 * @param {Object} [args] Argument object
+						 * @param {Function} [args.load] The callback function will invoke when the files shared with the user are retrieved successfully. The
+						 * function expects one parameter, a list of FileEntry objects.
+						 * @param {Function} [args.error] Sometimes the call to get files shared with the user fails due to bad request (400 error). The error
+						 * parameter is a callback function that is only invoked when an error occurs. This allows to write logic when an error occurs. The
+						 * parameter passed to the error function is a JavaScript Error object indicating what the failure was. From the error object. one can
+						 * access the javascript library error object, the status code and the error message.
+						 * @param {Function} [args.handle] This callback function is called regardless of whether the call to get files shared with the user
+						 * completes or fails. The parameter passed to this callback is the list of FileEntry objects (or error object). From the error object.
+						 * one can get access to the javascript library error object, the status code and the error message.
+						 * @param {Object} [args.parameters] The additional parameters like pageSize etc.
 						 */
 						getFilesSharedWithMe : function(args) {
 							var accessType = constants.accessType.AUTHENTICATED;
@@ -1017,24 +916,18 @@ define(
 
 						/**
 						 * Gets the files shared by the logged in user.
-						 * 
 						 * @method getFilesSharedByMe
-						 * @param {Object}
-						 *            [args] Argument object
-						 * @param {Function}
-						 *            [args.load] The callback function will invoke when the files shared by the user are retrieved successfully. The function
-						 *            expects one parameter, a list of FileEntry objects.
-						 * @param {Function}
-						 *            [args.error] Sometimes the call to get files shared by the user fails due to bad request (400 error). The error parameter
-						 *            is a callback function that is only invoked when an error occurs. This allows to write logic when an error occurs. The
-						 *            parameter passed to the error function is a JavaScript Error object indicating what the failure was. From the error
-						 *            object. one can access the javascript library error object, the status code and the error message.
-						 * @param {Function}
-						 *            [args.handle] This callback function is called regardless of whether the call to get files shared by the user completes or
-						 *            fails. The parameter passed to this callback is the list of FileEntry objects (or error object). From the error object.
-						 *            one can get access to the javascript library error object, the status code and the error message.
-						 * @param {Object}
-						 *            [args.parameters] The additional parameters like pageSize etc.
+						 * @param {Object} [args] Argument object
+						 * @param {Function} [args.load] The callback function will invoke when the files shared by the user are retrieved successfully. The
+						 * function expects one parameter, a list of FileEntry objects.
+						 * @param {Function} [args.error] Sometimes the call to get files shared by the user fails due to bad request (400 error). The error
+						 * parameter is a callback function that is only invoked when an error occurs. This allows to write logic when an error occurs. The
+						 * parameter passed to the error function is a JavaScript Error object indicating what the failure was. From the error object. one can
+						 * access the javascript library error object, the status code and the error message.
+						 * @param {Function} [args.handle] This callback function is called regardless of whether the call to get files shared by the user
+						 * completes or fails. The parameter passed to this callback is the list of FileEntry objects (or error object). From the error object.
+						 * one can get access to the javascript library error object, the status code and the error message.
+						 * @param {Object} [args.parameters] The additional parameters like pageSize etc.
 						 */
 						getFilesSharedByMe : function(args) {
 							var accessType = constants.accessType.AUTHENTICATED;
@@ -1049,35 +942,32 @@ define(
 
 						/**
 						 * Gets the comments for a file.
-						 * 
 						 * @method getFileComments
-						 * @param {Object}
-						 *            file FileEntry object whose comments you want to get. Use FileService.getFile() with loadIt true to create this object.
-						 * @param {Object}
-						 *            [args] Argument object
-						 * @param {Function}
-						 *            [args.load] The callback function will invoke when the comments are retrieved successfully. The function expects one
-						 *            parameter, the list of CommentEntry objects.
-						 * @param {Function}
-						 *            [args.error] Sometimes the call to get comments of a file fails due to bad request (400 error). The error parameter is a
-						 *            callback function that is only invoked when an error occurs. This allows to write logic when an error occurs. The
-						 *            parameter passed to the error function is a JavaScript Error object indicating what the failure was. From the error
-						 *            object. one can access the javascript library error object, the status code and the error message.
-						 * @param {Function}
-						 *            [args.handle] This callback function is called regardless of whether the call to get the comments completes or fails. The
-						 *            parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to
-						 *            the javascript library error object, the status code and the error message.
-						 * @param {Object}
-						 *            [args.parameters] The additional parameters like pageSize etc.
+						 * @param {Object} file FileEntry object whose comments you want to get. Use FileService.getFile() with loadIt true to create this
+						 * object.
+						 * @param {Object} [args] Argument object
+						 * @param {Function} [args.load] The callback function will invoke when the comments are retrieved successfully. The function expects
+						 * one parameter, the list of CommentEntry objects.
+						 * @param {Function} [args.error] Sometimes the call to get comments of a file fails due to bad request (400 error). The error parameter
+						 * is a callback function that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter
+						 * passed to the error function is a JavaScript Error object indicating what the failure was. From the error object. one can access the
+						 * javascript library error object, the status code and the error message.
+						 * @param {Function} [args.handle] This callback function is called regardless of whether the call to get the comments completes or
+						 * fails. The parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to
+						 * the javascript library error object, the status code and the error message.
+						 * @param {Object} [args.parameters] The additional parameters like pageSize etc.
 						 */
 						getFileComments : function(file, args) {
-							if (!(validate._validateInputTypeAndNotify([ file ], [ "sbt.connections.FileEntry" ], args))
-									|| !(validate._validateEmptyInputAndNotify("FileService", "getFileComments", {
-										"File Id" : file.getId(),
-										"User Id" : file.personEntry.getAuthorId()
-									}, args))) {
-								return;
+							if (!validate._validateInputTypeAndNotify("FileService", "getFileComments", "File", file, "sbt.connections.FileEntry", args)) {
+								return false;
 							}
+							if (!file.validate("FileService", "getFileComments", args, {
+								isValidateId : true,
+								isValidateUser : true
+							})) {
+								return false;
+							}
+
 							var accessType = constants.accessType.AUTHENTICATED;
 							var subFilters = new _SubFilters();
 							subFilters.setUserId(file.getPersonEntry().getAuthorId());
@@ -1092,33 +982,24 @@ define(
 
 						/**
 						 * Uploads a new file for logged in user.
-						 * 
 						 * @method uploadFile
-						 * @param {Object}
-						 *            fileControl FileEntry object with file path of file which needs to be uploaded, Use FileService.getFile() with loadIt
-						 *            false to create this object.
-						 * @param {Object}
-						 *            [args] Argument object
-						 * @param {Function}
-						 *            [args.load] The callback function will invoke when the file is uploaded successfully. The function expects one parameter,
-						 *            the status of upload.
-						 * @param {Function}
-						 *            [args.error] Sometimes the upload calls fails due to bad request (400 error). The error parameter is a callback function
-						 *            that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the
-						 *            error function is a JavaScript Error object indicating what the failure was. From the error object. one can access the
-						 *            javascript library error object, the status code and the error message.
-						 * @param {Function}
-						 *            [args.handle] This callback function is called regardless of whether the call to upload the file completes or fails. The
-						 *            parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to
-						 *            the javascript library error object, the status code and the error message.
+						 * @param {Object} fileControl FileEntry object with file path of file which needs to be uploaded, Use FileService.getFile() with loadIt
+						 * false to create this object.
+						 * @param {Object} [args] Argument object
+						 * @param {Function} [args.load] The callback function will invoke when the file is uploaded successfully. The function expects one
+						 * parameter, the status of upload.
+						 * @param {Function} [args.error] Sometimes the upload calls fails due to bad request (400 error). The error parameter is a callback
+						 * function that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the
+						 * error function is a JavaScript Error object indicating what the failure was. From the error object. one can access the javascript
+						 * library error object, the status code and the error message.
+						 * @param {Function} [args.handle] This callback function is called regardless of whether the call to upload the file completes or
+						 * fails. The parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to
+						 * the javascript library error object, the status code and the error message.
 						 */
 						uploadFile : function(args) {
 
-							if (!(validate._validateEmptyInputAndNotify("FileService", "uploadFile", {
-								"Arguments" : args,
-								"FilePath" : args.fileLocation
-							}, args))) {
-								return;
+							if (!validate._validateInputTypeAndNotify("FileService", "uploadFile", "fileLocation", args.fileLocation, "string", args)) {
+								return false;
 							}
 
 							var fileControl = document.getElementById(args.fileLocation);
@@ -1152,34 +1033,31 @@ define(
 
 						/**
 						 * updates metadata about a file like title, visibility, etc.
-						 * 
 						 * @method updateFile
-						 * @param {Object}
-						 *            file FileEntry object which needs to be updated with containing updated values. Use FileService.getFile() with loadIt
-						 *            false to create this object.
-						 * @param {Object}
-						 *            [args] Argument object
-						 * @param {Function}
-						 *            [args.load] The callback function will invoke when the file is updated. The function expects one parameter, the updated
-						 *            FileEntry object.
-						 * @param {Function}
-						 *            [args.error] Sometimes the update calls fails due to bad request (400 error). The error parameter is a callback function
-						 *            that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the
-						 *            error function is a JavaScript Error object indicating what the failure was. From the error object. one can access the
-						 *            javascript library error object, the status code and the error message.
-						 * @param {Function}
-						 *            [args.handle] This callback function is called regardless of whether the call to update the file completes or fails. The
-						 *            parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to
-						 *            the javascript library error object, the status code and the error message.
+						 * @param {Object} file FileEntry object which needs to be updated with containing updated values. Use FileService.getFile() with loadIt
+						 * false to create this object.
+						 * @param {Object} [args] Argument object
+						 * @param {Function} [args.load] The callback function will invoke when the file is updated. The function expects one parameter, the
+						 * updated FileEntry object.
+						 * @param {Function} [args.error] Sometimes the update calls fails due to bad request (400 error). The error parameter is a callback
+						 * function that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the
+						 * error function is a JavaScript Error object indicating what the failure was. From the error object. one can access the javascript
+						 * library error object, the status code and the error message.
+						 * @param {Function} [args.handle] This callback function is called regardless of whether the call to update the file completes or
+						 * fails. The parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to
+						 * the javascript library error object, the status code and the error message.
 						 */
 						updateFile : function(file, args) {
 
-							if (!(validate._validateInputTypeAndNotify([ file ], [ "sbt.connections.FileEntry" ], args))
-									|| !(validate._validateEmptyInputAndNotify("FileService", "updateFile", {
-										"FileId" : file.getId()
-									}, args))) {
-								return;
+							if (!validate._validateInputTypeAndNotify("FileService", "updatefile", "File", file, "sbt.connections.FileEntry", args)) {
+								return false;
 							}
+							if (!file.validate("FileService", "updateFile", args, {
+								isValidateId : true
+							})) {
+								return false;
+							}
+
 							var accessType = constants.accessType.AUTHENTICATED;
 							var category = constants.categories.MYLIBRARY;
 							var subFilters = new _SubFilters();
@@ -1196,37 +1074,34 @@ define(
 
 						/**
 						 * Adds comment to a file of any user.
-						 * 
 						 * @method addCommentToFile
-						 * @param {Object}
-						 *            file FileEntry object to which comment needs to be added. Id and Comment needs to be set on this object. Use
-						 *            FileService.getFile() with loadIt true to create this object.
-						 * @param {Object}
-						 *            [args] Argument object
-						 * @param {Function}
-						 *            [args.load] The callback function will invoke when the comment is added successfully to the file. The function expects one
-						 *            parameter, the newly created comment object.
-						 * @param {Function}
-						 *            [args.error] Sometimes the update calls fails due to bad request (400 error). The error parameter is a callback function
-						 *            that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the
-						 *            error function is a JavaScript Error object indicating what the failure was. From the error object. one can access the
-						 *            javascript library error object, the status code and the error message.
-						 * @param {Function}
-						 *            [args.handle] This callback function is called regardless of whether the call to update the profile completes or fails.
-						 *            The parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access
-						 *            to the javascript library error object, the status code and the error message.
+						 * @param {Object} file FileEntry object to which comment needs to be added. Id and Comment needs to be set on this object. Use
+						 * FileService.getFile() with loadIt true to create this object.
+						 * @param {Object} [args] Argument object
+						 * @param {Function} [args.load] The callback function will invoke when the comment is added successfully to the file. The function
+						 * expects one parameter, the newly created comment object.
+						 * @param {Function} [args.error] Sometimes the update calls fails due to bad request (400 error). The error parameter is a callback
+						 * function that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the
+						 * error function is a JavaScript Error object indicating what the failure was. From the error object. one can access the javascript
+						 * library error object, the status code and the error message.
+						 * @param {Function} [args.handle] This callback function is called regardless of whether the call to update the profile completes or
+						 * fails. The parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to
+						 * the javascript library error object, the status code and the error message.
 						 */
 						addCommentToFile : function(file, args) {
 
-							if (!(validate._validateInputTypeAndNotify([ file ], [ "sbt.connections.FileEntry" ], args))
-									|| !(validate._validateEmptyInputAndNotify("FileService", "addCommnetToFile", {
-										"FileId" : file.getId(),
-										"UserId" : file.personEntry.getAuthorId(),
-										"args" : args,
-										"args.comment" : args.comment
-									}, args))) {
-								return;
+							if (!validate._validateInputTypesAndNotify("FileService", "addCommentToFile", [ "File", "comment" ], [ file, args.comment ], [
+									"sbt.connections.FileEntry", 'string' ], args)) {
+								return false;
 							}
+							if (!file.validate("FileService", "addCommentToFile", args, {
+								isValidateId : true,
+								isValidateUser : true
+							})) {
+
+								return false;
+							}
+
 							var accessType = constants.accessType.AUTHENTICATED;
 							var subFilters = new _SubFilters();
 							subFilters.setUserId(file.getPersonEntry().getAuthorId());
@@ -1244,38 +1119,33 @@ define(
 
 						/**
 						 * Adds comment to a file of logged in user.
-						 * 
 						 * @method addCommentToMyFile
-						 * @param {Object}
-						 *            file FileEntry object to which comment needs to be added. Id and Comment needs to be set on this object. Use
-						 *            FileService.getFile() with loadIt false to create this object.
-						 * @param {Object}
-						 *            [args] Argument object
-						 * @param {Function}
-						 *            [args.load] The callback function will invoke when the comment is added successfully to the file. The function expects one
-						 *            parameter, the newly created comment object.
-						 * @param {Function}
-						 *            [args.error] Sometimes the update calls fails due to bad request (400 error). The error parameter is a callback function
-						 *            that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the
-						 *            error function is a JavaScript Error object indicating what the failure was. From the error object. one can access the
-						 *            javascript library error object, the status code and the error message.
-						 * @param {Function}
-						 *            [args.handle] This callback function is called regardless of whether the call to update the profile completes or fails.
-						 *            The parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access
-						 *            to the javascript library error object, the status code and the error message.
+						 * @param {Object} file FileEntry object to which comment needs to be added. Id and Comment needs to be set on this object. Use
+						 * FileService.getFile() with loadIt false to create this object.
+						 * @param {Object} [args] Argument object
+						 * @param {Function} [args.load] The callback function will invoke when the comment is added successfully to the file. The function
+						 * expects one parameter, the newly created comment object.
+						 * @param {Function} [args.error] Sometimes the update calls fails due to bad request (400 error). The error parameter is a callback
+						 * function that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the
+						 * error function is a JavaScript Error object indicating what the failure was. From the error object. one can access the javascript
+						 * library error object, the status code and the error message.
+						 * @param {Function} [args.handle] This callback function is called regardless of whether the call to update the profile completes or
+						 * fails. The parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to
+						 * the javascript library error object, the status code and the error message.
 						 */
 						addCommentToMyFile : function(file, args) {
 
-							if (!(validate._validateInputTypeAndNotify([ file ], [ "sbt.connections.FileEntry" ], args))
-									|| !(validate._validateEmptyInputAndNotify("FileService", "addCommentToMyFile", {
-										"FileId" : file.getId(),
-										"args" : args,
-										"args.comment" : args.comment
-									}, args))
-
-							) {
-								return;
+							if (!validate._validateInputTypesAndNotify("FileService", "addCommentToMyFile", [ "File", "comment" ], [ file, args.comment ], [
+									"sbt.connections.FileEntry", 'string' ], args)) {
+								return false;
 							}
+							if (!file.validate("FileService", "addCommentToMyFile", args, {
+								isValidateId : true
+							})) {
+
+								return false;
+							}
+
 							var accessType = constants.accessType.AUTHENTICATED;
 							var category = constants.categories.MYLIBRARY;
 							var subFilters = new _SubFilters();
@@ -1293,35 +1163,32 @@ define(
 
 						/**
 						 * Lock a file.
-						 * 
 						 * @method lockFile
-						 * @param {Object}
-						 *            file FileEntry object which needs to be unlocked
-						 * @param {Object}
-						 *            [args] Argument object
-						 * @param {Function}
-						 *            [args.load] The callback function will invoke when the file is locked successfully. The function expects one parameter,
-						 *            the status of uncock operation.
-						 * @param {Function}
-						 *            [args.error] Sometimes the lock file calls fails due to bad request (400 error). The error parameter is a callback
-						 *            function that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed
-						 *            to the error function is a JavaScript Error object indicating what the failure was. From the error object. one can access
-						 *            the javascript library error object, the status code and the error message.
-						 * @param {Function}
-						 *            [args.handle] This callback function is called regardless of whether the call to lock the file completes or fails. The
-						 *            parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to
-						 *            the javascript library error object, the status code and the error message.
-						 * @param {Object}
-						 *            [args.parameters] The additional parameters like pageSize etc.
+						 * @param {Object} file FileEntry object which needs to be unlocked
+						 * @param {Object} [args] Argument object
+						 * @param {Function} [args.load] The callback function will invoke when the file is locked successfully. The function expects one
+						 * parameter, the status of uncock operation.
+						 * @param {Function} [args.error] Sometimes the lock file calls fails due to bad request (400 error). The error parameter is a callback
+						 * function that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the
+						 * error function is a JavaScript Error object indicating what the failure was. From the error object. one can access the javascript
+						 * library error object, the status code and the error message.
+						 * @param {Function} [args.handle] This callback function is called regardless of whether the call to lock the file completes or fails.
+						 * The parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to the
+						 * javascript library error object, the status code and the error message.
+						 * @param {Object} [args.parameters] The additional parameters like pageSize etc.
 						 */
 						lockFile : function(file, args) {
 
-							if (!(validate._validateInputTypeAndNotify([ file ], [ "sbt.connections.FileEntry" ], args))
-									|| !(validate._validateEmptyInputAndNotify("FileService", "lockFile", {
-										"FileId" : file.getId()										
-									}, args))) {
-								return;
+							if (!validate._validateInputTypeAndNotify("FileService", "lockFile", "File", file, "sbt.connections.FileEntry", args)) {
+								return false;
 							}
+							if (!file.validate("FileService", "lockFile", args, {
+								isValidateId : true
+							})) {
+
+								return false;
+							}
+
 							var _self = this;
 							this._getNonce({
 								load : function(nonceValue) {
@@ -1345,32 +1212,29 @@ define(
 
 						/**
 						 * UnLock a file.
-						 * 
 						 * @method unlockFile
-						 * @param {Object}
-						 *            file FileEntry object which needs to be unlocked
-						 * @param {Object}
-						 *            [args] Argument object
-						 * @param {Function}
-						 *            [args.load] The callback function will invoke when the file is unlocked successfully. The function expects one parameter,
-						 *            the status of uncock operation.
-						 * @param {Function}
-						 *            [args.error] Sometimes the unlock file calls fails due to bad request (400 error). The error parameter is a callback
-						 *            function that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed
-						 *            to the error function is a JavaScript Error object indicating what the failure was. From the error object. one can access
-						 *            the javascript library error object, the status code and the error message.
-						 * @param {Function}
-						 *            [args.handle] This callback function is called regardless of whether the call to unlock the file completes or fails. The
-						 *            parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to
-						 *            the javascript library error object, the status code and the error message.
+						 * @param {Object} file FileEntry object which needs to be unlocked
+						 * @param {Object} [args] Argument object
+						 * @param {Function} [args.load] The callback function will invoke when the file is unlocked successfully. The function expects one
+						 * parameter, the status of uncock operation.
+						 * @param {Function} [args.error] Sometimes the unlock file calls fails due to bad request (400 error). The error parameter is a
+						 * callback function that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to
+						 * the error function is a JavaScript Error object indicating what the failure was. From the error object. one can access the javascript
+						 * library error object, the status code and the error message.
+						 * @param {Function} [args.handle] This callback function is called regardless of whether the call to unlock the file completes or
+						 * fails. The parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to
+						 * the javascript library error object, the status code and the error message.
 						 */
 						unlockFile : function(file, args) {
 
-							if (!(validate._validateInputTypeAndNotify([ file ], [ "sbt.connections.FileEntry" ], args))
-									|| !(validate._validateEmptyInputAndNotify("FileService", "lockFile", {
-										"FileId" : file.getId()										
-									}, args))) {
-								return;
+							if (!validate._validateInputTypeAndNotify("FileService", "unlockFile", "File", file, "sbt.connections.FileEntry", args)) {
+								return false;
+							}
+							if (!file.validate("FileService", "unlockFile", args, {
+								isValidateId : true
+							})) {
+
+								return false;
 							}
 							var _self = this;
 							this._getNonce({
@@ -1395,32 +1259,29 @@ define(
 
 						/**
 						 * Delete a file.
-						 * 
 						 * @method deleteFile
-						 * @param {Object}
-						 *            file FileEntry object which needs to be deleted
-						 * @param {Object}
-						 *            [args] Argument object
-						 * @param {Function}
-						 *            [args.load] The callback function will invoke when the file is deleted successfully. The function expects one parameter,
-						 *            the status of the delete openration.
-						 * @param {Function}
-						 *            [args.error] Sometimes the delete calls fails due to bad request (400 error). The error parameter is a callback function
-						 *            that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the
-						 *            error function is a JavaScript Error object indicating what the failure was. From the error object. one can access the
-						 *            javascript library error object, the status code and the error message.
-						 * @param {Function}
-						 *            [args.handle] This callback function is called regardless of whether the call to delete the File completes or fails. The
-						 *            parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to
-						 *            the javascript library error object, the status code and the error message.
+						 * @param {Object} file FileEntry object which needs to be deleted
+						 * @param {Object} [args] Argument object
+						 * @param {Function} [args.load] The callback function will invoke when the file is deleted successfully. The function expects one
+						 * parameter, the status of the delete openration.
+						 * @param {Function} [args.error] Sometimes the delete calls fails due to bad request (400 error). The error parameter is a callback
+						 * function that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the
+						 * error function is a JavaScript Error object indicating what the failure was. From the error object. one can access the javascript
+						 * library error object, the status code and the error message.
+						 * @param {Function} [args.handle] This callback function is called regardless of whether the call to delete the File completes or
+						 * fails. The parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to
+						 * the javascript library error object, the status code and the error message.
 						 */
 						deleteFile : function(file, args) {
 
-							if (!(validate._validateInputTypeAndNotify([ file ], [ "sbt.connections.FileEntry" ], args))
-									|| !(validate._validateEmptyInputAndNotify("FileService", "deleteFile", {
-										"FileId" : file.getId()										
-									}, args))) {
-								return;
+							if (!validate._validateInputTypeAndNotify("FileService", "deleteFile", "File", file, "sbt.connections.FileEntry", args)) {
+								return false;
+							}
+							if (!file.validate("FileService", "deleteFile", args, {
+								isValidateId : true
+							})) {
+
+								return false;
 							}
 							var _self = this;
 							this._getNonce({
@@ -1452,6 +1313,15 @@ define(
 							this._executeGet(_args, url);
 						},
 						_loadFile : function(file, args) {
+							if (!validate._validateInputTypeAndNotify("FileService", "_loadFile", "File", file, "sbt.connections.FileEntry", args)) {
+								return false;
+							}
+							if (!file.validate("FileService", "_loadFile", args, {
+								isValidateId : true
+							})) {
+
+								return false;
+							}
 							var subFilters = new _SubFilters();
 							subFilters.setDocumentId(file.getId());
 							var url = this._constructUrl(constants.baseUrl.FILES, constants.accessType.AUTHENTICATED, constants.categories.MYLIBRARY, null,

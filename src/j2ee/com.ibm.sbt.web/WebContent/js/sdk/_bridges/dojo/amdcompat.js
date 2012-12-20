@@ -54,6 +54,19 @@ window._sbt_bridge_compat = true;
 		}
 	};
 	
+	// ["myPackage/nls/myBundle", "myPackage/nls/fr/myBundle", "myPackage/nls/fr-ca/myBundle"]
+	var findBundles = function(root,locale,bundle) {
+		var result = [];
+		var parts = locale.split("-");
+		for(var current = "", i = 0; i<parts.length; i++){
+			current += (current ? "-" : "") + parts[i];
+			if(!root || root[current]){
+				result.push(bundle.substring(0,bundle.lastIndexOf('.')+1) + current + "." + bundle.substring(bundle.lastIndexOf('.')+1));
+			}
+		}
+		return result;
+	};
+
 	function _define(name, deps, def) {
 		if(name) {
 			var dottedName = name.replace(/\//g, ".");
@@ -76,17 +89,20 @@ window._sbt_bridge_compat = true;
 		
 		for ( var args = [], depName, i = 0; i < deps.length; i++) {
 			depName = resolvePath(deps[i]);
-			// look for i18n! followed by anything followed by "/nls/"
-			// followed
-			// by anything without "/" followed by eos.
+			// look for dojo/i18n! followed by anything for a resource module
 			var exclamationIndex = depName.indexOf("!");
 			if (exclamationIndex > -1) {
-				// fool the build system
-				if (depName.substring(0, exclamationIndex) == "i18n") {
-					var match = depName.match(/^i18n\!(.+)\.nls\.([^\.]+)$/);
-					dojo["requireLocalization"](match[1], match[2]);
+				if (depName.substring(0, exclamationIndex) == "dojo.i18n") {
+					var bundleName = depName.substring(exclamationIndex+1);
+					var mod = dojo.require(bundleName);
+					arg = mod.root||mod;
+					var bundles = findBundles(mod.root?mod:null,dojo.locale,bundleName);
+					for(var mi=0; mi<bundles.length; mi++) {
+						dojo.mixin(arg,dojo.require(bundles[mi]));
+					}
+				} else {
+					arg = null;
 				}
-				arg = null;
 			} else {
 				var arg;
 				switch (depName) {

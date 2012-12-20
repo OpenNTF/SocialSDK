@@ -29,6 +29,27 @@ public class ConnectionsBasicEndpoint extends BasicEndpoint {
     public ConnectionsBasicEndpoint() {
     }
 
+    /**
+	 * The method blocks the header x-requested-with only for calls to IBM Connections Activities Service.
+	 * The Activities Service does not return the correct feed when this header is present in the request.
+	 * @param headerName Header name
+	 * @param serviceUrl HTTP Request
+	 * @return boolean true depicting header is passed
+	 * 
+	 */
+
+    @Override
+	public boolean isHeaderAllowed(String headerName, String serviceUrl){
+    	if (headerName.equalsIgnoreCase("x-requested-with"))
+		{
+			if(serviceUrl.indexOf("activities/service") != -1){
+				return false;
+			}
+		}
+		return true;
+
+    }
+
     @Override
 	public ClientService getClientService() throws ClientServicesException {
     	return new ConnectionsService(this);

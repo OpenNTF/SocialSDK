@@ -99,7 +99,7 @@ public class BaseLibraryTest extends TestCase {
 			
 			JsonObject endpoint = endpoints.get("connections");
 			assertEquals("Invalid authenticator", "new Basic({})", ((JsonReference)endpoint.getJsonProperty("authenticator")).getRef());
-			assertEquals("Invalid baseUrl", "http://sbtdev.swg.usma.ibm.com:81", endpoint.getJsonProperty("baseUrl"));
+			assertEquals("Invalid baseUrl", "http://icsqs.ibm.com:444", endpoint.getJsonProperty("baseUrl"));
 			assertEquals("Invalid transport", "new Transport()", ((JsonReference)endpoint.getJsonProperty("transport")).getRef());
 			assertNull("Invalid proxyPath", endpoint.getJsonProperty("proxyPath"));
 			assertNull("Invalid proxy", endpoint.getJsonProperty("proxy"));

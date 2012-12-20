@@ -7,4 +7,5 @@ Bundle-Vendor: IBM
 Fragment-Host: com.ibm.sbt.core
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.junit4;bundle-version="4.8.1"
+Import-Package: javax.servlet.descriptor
 

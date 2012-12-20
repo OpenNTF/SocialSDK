@@ -7,6 +7,6 @@
     <groupId>com.ibm.sbt.prereq</groupId>
     <artifactId>prereq.parent</artifactId>
     <version>1.0.0</version>
-    <relativePath>../../../../../build/prereq</relativePath>
+    <relativePath>../../../../build/prereq</relativePath>
   </parent>
 </project>

@@ -96,8 +96,7 @@ public class ProfileService extends BaseService {
 		Subscriber subscriber = new Subscriber();
 		userId = subscriber.getSubscriberId(endpoint);
 		if (StringUtil.isEmpty(userId)) {
-			logger.log(Level.SEVERE, Messages.InvalidValue_1);
-			return null;
+			throw new IllegalArgumentException(Messages.InvalidValue_1);
 		}
 		logger.log(Level.FINEST, Messages.ProfileInfo_3 + userId);
 		return getProfile(userId, true);
@@ -120,8 +119,7 @@ public class ProfileService extends BaseService {
 			logger.entering(sourceClass, "getProfile", new Object[] { userId, load });
 		}
 		if (StringUtil.isEmpty(userId)) {
-			logger.log(Level.SEVERE, Messages.InvalidArgument_6);
-			return null;
+			throw new IllegalArgumentException(Messages.InvalidArgument_6);
 		}
 		Profile profile = new Profile(userId, this);
 		if (load) {
@@ -177,8 +175,7 @@ public class ProfileService extends BaseService {
 			logger.entering(sourceClass, "getProfileDataFromCache", new Object[] { userId });
 		}
 		if (StringUtil.isEmpty(userId)) {
-			logger.log(Level.SEVERE, Messages.InvalidArgument_6);
-			return null;
+			throw new IllegalArgumentException(Messages.InvalidArgument_6);
 		}
 		JsonObject data = null;
 		if (isEmail(userId)) {
@@ -256,14 +253,14 @@ public class ProfileService extends BaseService {
 
 	@Override
 	public <DataFormat> BaseEntity<DataFormat> getEntityFromData(String entityName, DataFormat data)
-	throws SBTServiceException {
+			throws SBTServiceException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public <DataFormat> BaseEntity<DataFormat> getEntityFromId(String entityName, String uuid)
-	throws SBTServiceException {
+			throws SBTServiceException {
 		// TODO Auto-generated method stub
 		return null;
 	}

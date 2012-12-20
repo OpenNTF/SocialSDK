@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.w3c.dom.Document;
+
+import com.ibm.commons.util.HtmlTextUtil;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.DOMUtil;
 import com.ibm.commons.xml.NamespaceContext;
@@ -297,11 +299,11 @@ public class Community {
 			// values will be used
 
 			if (fieldMapPairs.getKey().equalsIgnoreCase("title")) {
-				body += "<title type=\"text\">" + getTitle() + "</title>";
+				body += "<title type=\"text\">" + escapeHtmlSpecialChars(getTitle()) + "</title>";
 			}
 
 			if (fieldMapPairs.getKey().equalsIgnoreCase("content")) {
-				body += "<content type=\"html\">" + getContent() + "</content>";
+				body += "<content type=\"html\">" + escapeHtmlSpecialChars(getContent()) + "</content>";
 			}
 
 			if (fieldMapPairs.getKey().equalsIgnoreCase("addedTags")) {
@@ -347,6 +349,11 @@ public class Community {
 			logger.log(Level.SEVERE, "Error converting xml to String", e);
 			return "";
 		}
+	}
+	
+	private String escapeHtmlSpecialChars(String content){
+		String contentStr = HtmlTextUtil.toHTMLContentString(content, false);
+		return contentStr;
 	}
 
 }

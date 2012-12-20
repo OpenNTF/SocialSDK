@@ -21,7 +21,6 @@
 
 /**
  * Implements logging helpers.
- * 
  * @class log
  * @static
  */
@@ -38,9 +37,7 @@ define([ 'sbt/stringutil' ], function(stringutil) {
 	return {
 		/**
 		 * Sets the logging level.
-		 * 
-		 * @param {String}
-		 *            [l ]logging level. Possible values are DEBUG, INFO, WARN, ERROR
+		 * @param {String} [l ]logging level. Possible values are DEBUG, INFO, WARN, ERROR
 		 * @static
 		 * @method setLevel
 		 */
@@ -49,9 +46,7 @@ define([ 'sbt/stringutil' ], function(stringutil) {
 		},
 		/**
 		 * Enables/disables logging.
-		 * 
-		 * @param {Boolean}
-		 *            [enabled] logging enabled true or false
+		 * @param {Boolean} [enabled] logging enabled true or false
 		 * @static
 		 * @method setEnabled
 		 */
@@ -60,7 +55,6 @@ define([ 'sbt/stringutil' ], function(stringutil) {
 		},
 		/**
 		 * log a debug statement.
-		 * 
 		 * @static
 		 * @method debug
 		 */
@@ -85,7 +79,6 @@ define([ 'sbt/stringutil' ], function(stringutil) {
 		},
 		/**
 		 * log an info statement.
-		 * 
 		 * @static
 		 * @method info
 		 */
@@ -110,7 +103,6 @@ define([ 'sbt/stringutil' ], function(stringutil) {
 		},
 		/**
 		 * log a warning statement.
-		 * 
 		 * @static
 		 * @method warn
 		 */
@@ -135,7 +127,6 @@ define([ 'sbt/stringutil' ], function(stringutil) {
 		},
 		/**
 		 * log an error statement.
-		 * 
 		 * @static
 		 * @method error
 		 */

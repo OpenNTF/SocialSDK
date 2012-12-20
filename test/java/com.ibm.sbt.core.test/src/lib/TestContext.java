@@ -56,7 +56,7 @@ public class TestContext extends Context {
 
 	@Override
 	public String getProperty(String propertyName) {
-		System.out.println("getting " + propertyName);
+		Logger.getAnonymousLogger().info("getting " + propertyName);
 		
 		return propertyMap.get(propertyName);
 	}
@@ -65,7 +65,7 @@ public class TestContext extends Context {
 	
 	@Override
 	public String getProperty(String propertyName, String defaultValue) {
-		System.out.println("getting " + propertyName);
+		Logger.getAnonymousLogger().info("getting " + propertyName);
 		
 		return propertyMap.containsKey(propertyName) ? defaultValue : propertyMap.get(propertyName);
 	}
@@ -82,7 +82,7 @@ public class TestContext extends Context {
 	
 	@Override
 	public Object getBean(String beanName) {
-		System.out.println("getting bean " + beanName);
+		Logger.getAnonymousLogger().info("getting bean " + beanName);
 		if (beanName == null) return null;
 		
 		if (!beanMap.containsKey(beanName))

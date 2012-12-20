@@ -24,6 +24,8 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import java.util.Collection;
 import java.util.List;
+import java.util.logging.Logger;
+
 import org.junit.Test;
 import org.w3c.dom.Node;
 import com.ibm.commons.xml.DOMUtil;
@@ -53,7 +55,7 @@ public class FileEntryDecodingTest {
 
 		entry = new FileEntry<Node>(data, null);
 
-		System.out.println(entry);
+		Logger.getAnonymousLogger().info(""+entry);
 		assertEquals(entry.getVisibility(), "private");
 		assertTrue(entry.isExternal());
 		assertEquals(entry.getFileId(),
@@ -220,10 +222,10 @@ public class FileEntryDecodingTest {
 				.getEntitiesFromServiceResult(atomEntryList);
 
 		for (Node entryNode : entryNodesList) {
-			DOMUtil.serialize(System.out, entryNode, Format.defaultFormat);
+			//DOMUtil.serialize(System.out, entryNode, Format.defaultFormat);
 
 			fileEntry = new FileEntry<Node>(entryNode, null);
-			System.out.println(fileEntry.getObjectId());
+			Logger.getAnonymousLogger().info(fileEntry.getObjectId());
 			assertNotNull(fileEntry.getObjectId());
 			assertFalse(fileEntry.getObjectId().length() == 0);
 

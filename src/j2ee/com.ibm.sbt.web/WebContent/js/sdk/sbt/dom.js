@@ -15,8 +15,12 @@
  */
 
 /**
- * Social Business Toolkit SDK - Some DOM utilities.
+ * Defination of some DOM utilities.
+ * 
+ * @module sbt.dom
  */
+
+  
 define(['sbt/_bridge/dom'],function(dom) {
 	// The actual implementation is library dependent
 	return dom;

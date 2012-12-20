@@ -21,8 +21,10 @@
 define(['sbt/_bridge/declare','sbt/lang'],function(declare,lang) {
 
 /**
- * sbt.Proxy
- * This class encapsulate a proxy.
+ * Defination of the proxy module
+ * 
+ * @module sbt.Proxy
+ * 
  */
 declare("sbt.Proxy", null, {
 	

@@ -10,7 +10,6 @@ import com.ibm.commons.xml.DOMUtil;
 import com.ibm.commons.xml.XMLException;
 import com.ibm.sbt.services.client.ClientService.Args;
 import com.ibm.sbt.services.client.ClientServicesException;
-import com.ibm.sbt.services.client.SBTServiceException;
 
 /**
  * Tests for the filtered search API; note that there are no error checks on the input as they will be sent as
@@ -23,7 +22,7 @@ import com.ibm.sbt.services.client.SBTServiceException;
 public class FileServiceReadMyFilesWithFilters extends TestEndpoint {
 
 	@Test
-	public void testReadEntries() throws SBTServiceException {
+	public void testReadEntries() throws FileServiceException {
 		FileService svc = new FileService();
 
 		// prepare a filter. object id and type id are added by default.
@@ -44,7 +43,7 @@ public class FileServiceReadMyFilesWithFilters extends TestEndpoint {
 	}
 
 	@Test
-	public void testReadConsistency() throws SBTServiceException {
+	public void testReadConsistency() throws FileServiceException {
 		FileService svc = new FileService();
 
 		// prepare a filter. object id and type id are added by default.
@@ -62,7 +61,7 @@ public class FileServiceReadMyFilesWithFilters extends TestEndpoint {
 	}
 
 	@Test
-	public void testHighSkip() throws SBTServiceException {
+	public void testHighSkip() throws FileServiceException {
 		FileService svc = new FileService();
 
 		// prepare a filter. object id and type id are added by default.
@@ -82,7 +81,7 @@ public class FileServiceReadMyFilesWithFilters extends TestEndpoint {
 	 * @throws FileServiceException
 	 */
 	@Test
-	public void testNoFilters() throws SBTServiceException {
+	public void testNoFilters() throws FileServiceException {
 		FileService svc = new FileService();
 
 		// prepare a filter. object id and type id are added by default.

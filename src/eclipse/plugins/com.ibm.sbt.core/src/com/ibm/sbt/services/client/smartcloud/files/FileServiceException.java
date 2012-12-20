@@ -15,15 +15,28 @@
  */
 package com.ibm.sbt.services.client.smartcloud.files;
 
-import com.ibm.sbt.services.client.SBTServiceException;
+import com.ibm.commons.util.AbstractException;
 
-public class FileServiceException extends SBTServiceException {
+/**
+ * Exception class for the smartcloud file service API
+ * @author Lorenzo Boccaccia
+ */
+public class FileServiceException extends AbstractException{
 
-	public FileServiceException(Throwable nextException) {
-		super(nextException);
+	public enum Reason  {
+		CLIENT_ERROR,
+		SERVER_ERROR,
+		DUPLICATE_FILE, INVALID_INPUT
 	}
-
-	public FileServiceException(Throwable nextException, String message) {
+	
+	/**
+	 * Creeate a new exception for the smartcloud file service
+	 * @param nextException
+	 * @param message
+	 * @param code
+	 */
+	public FileServiceException(Throwable nextException, String message, Reason code) {
+		//this forces developers to always provide a message
 		super(nextException, message);
 	}
 

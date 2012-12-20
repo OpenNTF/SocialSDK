@@ -30,8 +30,8 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.BaseService;
 import com.ibm.sbt.services.client.ClientService.ContentStream;
 import com.ibm.sbt.services.client.ClientServicesException;
-import com.ibm.sbt.services.client.SBTServiceException;
 import com.ibm.sbt.services.client.smartcloud.base.BaseEntity;
+import com.ibm.sbt.services.client.smartcloud.files.FileServiceException.Reason;
 
 /**
  * Service class for all SmartCloud file operations
@@ -141,9 +141,9 @@ public class FileService extends BaseService {
 	 * Executes a service call to return all the user files
 	 * 
 	 * @return all the files for the current SmartCloud account
-	 * @throws SBTServiceException
+	 * @throws FileServiceException
 	 */
-	public List<FileEntry> getMyFiles() throws SBTServiceException {
+	public List<FileEntry> getMyFiles() throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getMyFiles");
 		}
@@ -157,7 +157,15 @@ public class FileService extends BaseService {
 			entries = super.getMultipleEntities(
 					FilesAPI.GET_MY_FILES.getUrl(getReposInfo().getRepositoryID()), null, FileEntry.class);
 		} catch (ClientServicesException e) {
-			throw new FileServiceException(e);
+			Reason reason = Reason.SERVER_ERROR;
+			if (e.isClientError()) {
+				reason = reason.CLIENT_ERROR;
+			}
+			//TODO: agree on level of client exception. Any exception should be severe, but client exception aren't really exceptional behaviour and sometime expected as part of the API
+			if (logger.isLoggable(Level.WARNING)) {
+				logger.log(Level.WARNING,e.getMessage(), e);
+			}
+			throw new FileServiceException(e, StringUtil.format("Error reading files"), reason);
 		}
 
 		return entries;
@@ -167,9 +175,9 @@ public class FileService extends BaseService {
 	 * Executes a service query to list all the user files
 	 * 
 	 * @return all the files for the current SmartCloud account
-	 * @throws SBTServiceException
+	 * @throws FileServiceException
 	 */
-	public List<FileEntry> getMyFilesAlt() throws SBTServiceException {
+	public List<FileEntry> getMyFilesAlt() throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getMyFiles");
 		}
@@ -183,7 +191,15 @@ public class FileService extends BaseService {
 					.getMultipleEntities(FilesAPI.GET_MY_FILES_ALT.getUrl(getReposInfo().getRepositoryID()),
 							null, FileEntry.class);
 		} catch (ClientServicesException e) {
-			throw new FileServiceException(e);
+			Reason reason = Reason.SERVER_ERROR;
+			if (e.isClientError()) {
+				reason = reason.CLIENT_ERROR;
+			}
+			//TODO: agree on level of client exception. Any exception should be severe, but client exception aren't really exceptional behaviour and sometime expected as part of the API
+			if (logger.isLoggable(Level.WARNING)) {
+				logger.log(Level.WARNING,e.getMessage(), e);
+			}
+			throw new FileServiceException(e, StringUtil.format("Error reading files"), reason);
 		}
 		return entries;
 	}
@@ -202,10 +218,10 @@ public class FileService extends BaseService {
 	 *            leave null for no filtering
 	 * @return A list of entries optionally limited in size, in fields and with the first skipCount entries
 	 *         optionally skipped
-	 * @throws SBTServiceException
+	 * @throws FileServiceException
 	 */
 	public List<FileEntry> getMyFiles(Integer maxItems, Integer skipCount, FieldFilter filter)
-			throws SBTServiceException {
+			throws FileServiceException {
 
 		Map parameters = new HashMap();
 		if (maxItems != null) {
@@ -224,7 +240,15 @@ public class FileService extends BaseService {
 					FilesAPI.GET_MY_FILES_WITH_FILTER.getUrl(getReposInfo().getRepositoryID()), parameters,
 					FileEntry.class);
 		} catch (ClientServicesException e) {
-			throw new FileServiceException(e);
+			Reason reason = Reason.SERVER_ERROR;
+			if (e.isClientError()) {
+				reason = Reason.CLIENT_ERROR;
+			}
+			//TODO: agree on level of client exception. Any exception should be severe, but client exception aren't really exceptional behaviour and sometime expected as part of the API
+			if (logger.isLoggable(Level.WARNING)) {
+				logger.log(Level.WARNING,e.getMessage(), e);
+			}
+			throw new FileServiceException(e, StringUtil.format("Error reading files, using filters: {0}, limited at {1} entries starting from {2} ", filter, maxItems, skipCount), reason);
 		}
 		return entries;
 
@@ -236,10 +260,10 @@ public class FileService extends BaseService {
 	 * @param f
 	 *            the file to upload
 	 * @return the FileEntry created on SmartCloud for the file
-	 * @throws SBTServiceException
+	 * @throws FileServiceException
 	 */
 
-	public FileEntry uploadFile(File f) throws SBTServiceException {
+	public FileEntry uploadFile(File f) throws FileServiceException {
 		return this.uploadFile(f, f.getName());
 	}
 
@@ -252,14 +276,23 @@ public class FileService extends BaseService {
 	 * @param name
 	 *            The name to use for the newly uploaded file
 	 * @return the FileEntry created on SmartCloud for the file
-	 * @throws SBTServiceException
+	 * @throws FileServiceException
 	 */
-	public FileEntry uploadFile(File file, final String name) throws SBTServiceException {
-
+	public FileEntry uploadFile(File file, final String name) throws FileServiceException {
+		if (file == null) {
+			throw new IllegalArgumentException(StringUtil.format("A null file was passed"));
+		}
+		if (name == null) {
+			throw new IllegalArgumentException(StringUtil.format("A null file name was passed"));
+		}	
 		try {
 			return this.uploadFile(new FileInputStream(file), name, file.length());
-		} catch (FileNotFoundException e) {
-			throw new FileServiceException(e);
+		} catch (FileNotFoundException e) {				
+			if (logger.isLoggable(Level.SEVERE)) {
+				logger.log(Level.SEVERE,e.getMessage(), e);
+			}
+			//check null for safety as the previous check may get removed/moved to other classes
+			throw new FileServiceException(e, StringUtil.format("File {0} not found", file == null? "null": file.getAbsolutePath()), Reason.INVALID_INPUT);
 		}
 	}
 
@@ -273,16 +306,19 @@ public class FileService extends BaseService {
 	 * @param length
 	 *            The number of characters to be read from the stream
 	 * @return the FileEntry created on SmartCloud for the file
-	 * @throws SBTServiceException
+	 * @throws FileServiceException
 	 */
 	public <DataFormat> FileEntry<DataFormat> uploadFile(java.io.InputStream stream, final String name,
-			long length) throws SBTServiceException {
+			long length) throws FileServiceException {
 		// TODO: pass data to the content handler
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "uploading File");
 		}
-		if (length < 0) {
-			throw new UnsupportedOperationException("Chunked Transfer Encoding Not Supported");
+		if (stream == null) {
+			throw new IllegalArgumentException(StringUtil.format("A null stream was passed"));
+		}
+		if (name == null) {
+			throw new IllegalArgumentException(StringUtil.format("A null name was passed"));
 		}
 		ContentStream contentFile = new ContentStream(stream, length, name);
 
@@ -296,20 +332,34 @@ public class FileService extends BaseService {
 			return (FileEntry<DataFormat>) getEntityFromData(FileEntry.class.getSimpleName(), payload);
 
 		} catch (ClientServicesException e) {
-			if (e.getResponseStatusCode() == ClientServicesException.CONFLICT) {
-				throw new DuplicateFileException(e, StringUtil.format(
-						"A file with the name {0} already exists on the server for this user", name));
+			 	//TODO: agree on level of client exception. Any exception should be severe, but client exception aren't really exceptional behaviour and sometime expected as part of the API
+				if (logger.isLoggable(Level.WARNING)) {
+					logger.log(Level.WARNING,e.getMessage(), e);
+				}
+				Reason reason = Reason.SERVER_ERROR;
+				if (e.getResponseStatusCode()  == ClientServicesException.CONFLICT) {
+					reason = Reason.DUPLICATE_FILE;
+					throw new FileServiceException(e, StringUtil.format("A file with the name {0} already exists on the server for this user", name), reason);
+				}
+				if (e.getResponseStatusCode()  == ClientServicesException.LENGTH_REQUIRED) {
+					reason = Reason.INVALID_INPUT;
+					throw new FileServiceException(e, StringUtil.format("Server doesn't support chunked transfer encoding; please pass a valid length; input length was {0} ", length), reason);
+				}
+				
+				if (e.isClientError()) {
+					reason = Reason.CLIENT_ERROR;
+				}
+				
+				throw new FileServiceException(e, StringUtil.format("Error uploading the file"), reason);
 			}
-			throw new FileServiceException(e);
-		}
 	}
 
 	/**
 	 * @return the repositoryInfo object containing the parameter required as entry point to every other
 	 *         service call, the subscriber ID
-	 * @throws SBTServiceException
+	 * @throws FileServiceException
 	 */
-	private RepositoryInfo getReposInfo() throws SBTServiceException {
+	private RepositoryInfo getReposInfo() throws FileServiceException {
 		if (reposInfo != null) {
 			return reposInfo;
 		}
@@ -321,7 +371,16 @@ public class FileService extends BaseService {
 				this.reposInfo = super.getSingleEntry(FilesAPI.GET_REPOSITORY_INFO.getUrl(), true,
 						RepositoryInfo.class);
 			} catch (ClientServicesException e) {
-				throw new FileServiceException(e);
+			 	//TODO: agree on level of client exception. Any exception should be severe, but client exception aren't really exceptional behaviour and sometime expected as part of the API
+				if (logger.isLoggable(Level.WARNING)) {
+					logger.log(Level.WARNING,e.getMessage(), e);
+				}
+				Reason reason = Reason.SERVER_ERROR;	
+				if (e.isClientError()) {
+					reason = Reason.CLIENT_ERROR;
+				}
+				
+				throw new FileServiceException(e, StringUtil.format("Error reading the file service API index"), reason);
 			}
 		}
 		return reposInfo;
@@ -331,9 +390,9 @@ public class FileService extends BaseService {
 	 * required as protected from FileEntry loading
 	 * 
 	 * @return the URL configured with the correct repository ID
-	 * @throws SBTServiceException
+	 * @throws FileServiceException
 	 */
-	protected String getEntryLoadURL() throws SBTServiceException {
+	protected String getEntryLoadURL() throws FileServiceException {
 
 		return FilesAPI.GET_FILE_ENTRY.getUrl(getReposInfo().getRepositoryID());
 	}
@@ -345,7 +404,7 @@ public class FileService extends BaseService {
 	 *            The file entry object identifier
 	 * @return
 	 */
-	public FileEntry getEntry(String id) throws SBTServiceException {
+	public FileEntry getEntry(String id) throws FileServiceException {
 		return getEntry(id, true);
 	}
 
@@ -355,9 +414,9 @@ public class FileService extends BaseService {
 	 * @param id
 	 *            The file entry object identifier
 	 * @return
-	 * @throws SBTServiceException
+	 * @throws FileServiceException
 	 */
-	public FileEntry getEntry(String id, boolean loadIt) throws SBTServiceException {
+	public FileEntry getEntry(String id, boolean loadIt) throws FileServiceException {
 		id = id.trim();
 		FileEntry entry = new FileEntry(id, this);
 		if (loadIt) {
@@ -365,7 +424,16 @@ public class FileService extends BaseService {
 			try {
 				entry.load();
 			} catch (ClientServicesException e) {
-				throw new FileServiceException(e);
+			 	//TODO: agree on level of client exception. Any exception should be severe, but client exception aren't really exceptional behaviour and sometime expected as part of the API
+				if (logger.isLoggable(Level.WARNING)) {
+					logger.log(Level.WARNING,e.getMessage(), e);
+				}
+				Reason reason = Reason.SERVER_ERROR;				
+				if (e.isClientError()) {
+					reason = Reason.CLIENT_ERROR;
+				}
+				
+				throw new FileServiceException(e, StringUtil.format("Error reading the file entry with id {0}",id), reason);
 			}
 
 		}
@@ -374,10 +442,15 @@ public class FileService extends BaseService {
 
 	@Override
 	public <DataFormat> BaseEntity<DataFormat> getEntityFromId(String entityName, String uuid)
-			throws SBTServiceException {
+			throws ClientServicesException {
 		if (FileEntry.class.getSimpleName().equalsIgnoreCase(entityName)) {
 
-			return new FileEntry<DataFormat>(uuid, this);
+			try {
+				return new FileEntry<DataFormat>(uuid, this);
+			} catch (FileServiceException e) {
+				//This exception handling applies only to the file service API where creating an entity ref requires to fetch the server file API to build the retrieval URL
+				throw new ClientServicesException(e);
+			}
 
 		} else if (RepositoryInfo.class.getSimpleName().equalsIgnoreCase(entityName)) {
 			return new RepositoryInfo<DataFormat>(uuid, this);
@@ -387,10 +460,15 @@ public class FileService extends BaseService {
 
 	@Override
 	public <DataFormat> BaseEntity<DataFormat> getEntityFromData(String entityName, DataFormat data)
-			throws SBTServiceException {
+			throws ClientServicesException {
 		if (FileEntry.class.getSimpleName().equalsIgnoreCase(entityName)) {
 
-			return new FileEntry<DataFormat>(data, this);
+			try {
+				return new FileEntry<DataFormat>(data, this);
+			} catch (FileServiceException e) {
+				//not to be taken as example, only applies to smartcloud file service API, other entities shouldn't fail construction
+				throw new ClientServicesException(e);
+			}
 
 		} else if (RepositoryInfo.class.getSimpleName().equalsIgnoreCase(entityName)) {
 			return new RepositoryInfo<DataFormat>(data, this);

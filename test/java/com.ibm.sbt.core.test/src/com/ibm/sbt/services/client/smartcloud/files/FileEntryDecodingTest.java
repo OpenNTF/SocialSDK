@@ -31,7 +31,6 @@ import org.w3c.dom.Node;
 import com.ibm.commons.xml.DOMUtil;
 import com.ibm.commons.xml.Format;
 import com.ibm.commons.xml.XMLException;
-import com.ibm.sbt.services.client.SBTServiceException;
 import com.ibm.sbt.services.client.smartcloud.files.FileEntry.UserProfile;
 
 public class FileEntryDecodingTest {
@@ -39,7 +38,7 @@ public class FileEntryDecodingTest {
 	// TestContext c = TestContext.initDefaultTestingContext();
 
 	@Test
-	public void testSingleDecoding() throws SBTServiceException {
+	public void testSingleDecoding() throws FileServiceException {
 		Node data = null;
 		try {
 			data = DOMUtil.createDocument(this.getClass().getResourceAsStream("FileEntry1.xml"));
@@ -208,7 +207,7 @@ public class FileEntryDecodingTest {
 	}
 
 	@Test
-	public void testListdecoding() throws SBTServiceException, XMLException {
+	public void testListdecoding() throws FileServiceException, XMLException {
 		Node atomEntryList = null;
 		try {
 			atomEntryList = DOMUtil.createDocument(this.getClass().getResourceAsStream("MyFiles.xml"));

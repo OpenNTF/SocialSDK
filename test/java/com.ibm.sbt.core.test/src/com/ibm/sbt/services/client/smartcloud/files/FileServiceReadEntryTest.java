@@ -25,14 +25,13 @@ import com.ibm.commons.xml.DOMUtil;
 import com.ibm.commons.xml.XMLException;
 import com.ibm.sbt.services.client.ClientService.Args;
 import com.ibm.sbt.services.client.ClientServicesException;
-import com.ibm.sbt.services.client.SBTServiceException;
 
 public class FileServiceReadEntryTest extends TestEndpoint {
 
 	public final static String	TEST_ID	= "bead66f9-2b8d-4609-ac43-07f1541e5566";
 
 	@Test
-	public void testRead() throws SBTServiceException {
+	public void testRead() throws FileServiceException {
 		FileService svc = new FileService();
 		FileEntry entry = svc.getEntry(TEST_ID);
 		assertNotNull(entry.getPageURL());
@@ -40,7 +39,7 @@ public class FileServiceReadEntryTest extends TestEndpoint {
 	}
 
 	@Test(expected = NullPointerException.class)
-	public void testError1() throws IOException, SBTServiceException {
+	public void testError1() throws IOException, FileServiceException {
 		FileService svc = new FileService();
 		FileEntry entry = svc.getEntry(null);
 		assertNotNull(entry.getPageURL());

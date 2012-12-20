@@ -15,7 +15,8 @@
  */
 
 /**
- * Social Business Toolkit SDK - String Utilities
+ * Defination of some string Utilities
+ * 
  * @module sbt.stringutil
  */
 

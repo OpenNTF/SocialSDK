@@ -75,6 +75,11 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
 	public boolean isRequiresAuthentication() throws ClientServicesException {
         return requiresAuthentication;
     }
+    
+    @Override
+	public boolean isHeaderAllowed(String headerName, String serviceUrl){
+    	return true;
+    }
 
     public void setRequiresAuthentication(boolean requiresAuthentication) throws ClientServicesException {
         this.requiresAuthentication = requiresAuthentication;

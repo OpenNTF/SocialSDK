@@ -167,7 +167,7 @@ var Endpoint = declare("sbt.Endpoint", null, {
 			if(data instanceof Error) {
 				var error = data;
 				// check for if authentication is required
-				if (error.code == 401 || error.code == 403) {
+				if (error.code == 401) {
 					if(self.authenticator) {
 						options = {
 							dialogLoginPage:self.loginDialogPage,

@@ -864,7 +864,7 @@ public class ActivityStreamService extends BaseService {
 		try {
 			ClientService svc = endpoint.getClientService();
 			svc.post(
-					resolveUrlForPostingAS(ASUser.PUBLIC.getUserType(), ASGroup.ALL.getGroupType(),
+					resolveUrlForPostingAS(ASUser.ME.getUserType(), ASGroup.ALL.getGroupType(),
 							ASApplication.ALL.getApplicationType()), null, header, postPayload,
 					ClientService.FORMAT_JSON);
 

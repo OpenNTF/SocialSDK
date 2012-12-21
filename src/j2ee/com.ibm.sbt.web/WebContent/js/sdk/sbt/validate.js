@@ -24,9 +24,31 @@
  * @class validate
  * @static
  */
-define([ "sbt/log", "sbt/stringutil" ],
-		function(log, stringUtil) {
+define([ "sbt/log", "sbt/stringutil", "sbt/_bridge/nls" ],
+		function(log, stringUtil, nls) {
 			var errorCode = 400;
+			var _notifyError = function notifyError(error, args) {
+
+				if (args && (args.error || args.handle)) {
+					if (args.error) {
+						try {
+							args.error(error);
+						} catch (error) {
+							log.error(nls.notifyError_catchError, error);
+						}
+					}
+					if (args.handle) {
+						try {
+							args.handle(error);
+						} catch (error) {
+							log.error(nls.notifyError_catchError, error);
+						}
+					}
+				} else {
+					log.error(nls.notifyError_console, error.code, error.message);
+				}
+
+			};
 			return {
 				/**
 				 * Notifies the error using error callbacks.
@@ -41,28 +63,7 @@ define([ "sbt/log", "sbt/stringutil" ],
 				 * @static
 				 * @method notifyError
 				 */
-				notifyError : function notifyError(error, args) {
-
-					if (args && (args.error || args.handle)) {
-						if (args.error) {
-							try {
-								args.error(error);
-							} catch (error) {
-								log.error("Error running error callback : {0}", error);
-							}
-						}
-						if (args.handle) {
-							try {
-								args.handle(error);
-							} catch (error) {
-								log.error("Error running handle callback: {0}", error);
-							}
-						}
-					} else {
-						log.error("Error received. Error Code = {0}. Error Message = {2}", error.code, error.message);
-					}
-
-				},
+				notifyError : _notifyError,
 				/**
 				 * Validates Input to be not null and of expected Type
 				 * @param {String} [className] class which called this utility
@@ -85,7 +86,7 @@ define([ "sbt/log", "sbt/stringutil" ],
 							|| (typeof object != "object" && typeof object != expectedType)) {
 						var message;
 						if (!object) {
-							message = stringUtil.substitute("{0}.{1} : Null argument provided for {2}. Expected type is {3}", [ className, methodName,
+							message = stringUtil.substitute(nls._validateInputTypeAndNotify_nullObject, [ className, methodName,
 									fieldName, expectedType ]);
 						} else {
 							var actualType;
@@ -94,7 +95,7 @@ define([ "sbt/log", "sbt/stringutil" ],
 							} else {
 								actualType = typeof object;
 							}
-							message = stringUtil.substitute("{0}.{1} : {2} argument type does not match expected type {3} for {4}", [ className, methodName,
+							message = stringUtil.substitute(nls._validateInputTypeAndNotify_expectedType, [ className, methodName,
 									actualType, expectedType, fieldName ]);
 						}
 						_notifyError({

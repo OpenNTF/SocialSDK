@@ -18,26 +18,35 @@
  * Social Business Toolkit SDK.
  *  
  * Helpers for accessing the SmartCloud Community services
+ * @module sbt.CommunityService
  */
 define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt/xml','sbt/xpath','sbt/Cache',
         'sbt/Endpoint','sbt/smartcloud/CommunityConstants',
-        'sbt/base/BaseService'],
+        'sbt/base/BaseService', 'sbt/log'],
 		function(declare,cfg,lang,con,xml,xpath,Cache,
 				Endpoint, CommunityConstants,
-				BaseService) {
+				BaseService, log) {
 	
 	/**
-	Community class associated with a community. 
-	@class Community
-	@constructor
-	@param {Object} CommunityService  communityService object
-	@param {String} id community id associated with the community.
-	**/		
+	 * Community class associated with a community. 
+	 * @namespace smartcloud
+	 * @class Community
+	 * @constructor
+	 * @param {Object} CommunityService  communityService object
+	 * @param {String} id community id associated with the community.
+	 */		
 	var Community = declare("sbt.smartcloud.Community", sbt.base.BaseEntity, {
 		
 		constructor: function(svc,id) {
 			var args = { entityName : "community", Constants: CommunityConstants, con: con};
 			this.inherited(arguments, [svc, id, args]);
+		},
+		
+		validate: function(className, methodName, args, validateMap) {
+			if (validateMap.isValidateId && !(validate._validateInputTypeAndNotify(className, methodName, "Community Id", this._id, "string", args))) {
+				return false;
+			}
+			return true;
 		},
 		
 		/**
@@ -101,17 +110,25 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 	});
 	
 	/**
-	Member class associated with a community. 
-	@class Member
-	@constructor
-	@param {Object} CommunityService  communityService object
-	@param {String} id id of the member. This can be userid or email of the member.
-	**/
+	 * Member class associated with a community.
+	 * @namespace smartcloud 
+	 * @class Member
+	 * @constructor
+	 * @param {Object} CommunityService  communityService object
+	 * @param {String} id id of the member. This can be userid or email of the member.
+	 */
 	var Member = declare("sbt.smartcloud.Member", sbt.base.BaseEntity, {
 		
 		constructor: function(svc,id) {
 			var args = { entityName : "member", Constants: CommunityConstants};
 			this.inherited(arguments, [svc, id, args]);
+		},
+		
+		validate: function(className, methodName, args, validateMap) {
+			if (validateMap.isValidateId && !(validate._validateInputTypeAndNotify(className, methodName, "Community Member Id", this._id, "string", args))) {
+				return false;
+			}
+			return true;
 		},
 		
 		getName: function () {
@@ -128,14 +145,15 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 		}
 	});
 	/**
-	Community service class associated with the community service of IBM SmartCloud.
-
-	@class CommunityService
-	@constructor
-	@param {Object} options  Options object
-		@param {String} [options.endpoint=smartcloud]  Endpoint to be used by CommunityService.
-		
-	**/
+	 * 	Community service class associated with the community service of IBM SmartCloud.
+	 *
+	 * @namespace smartcloud
+	 * @class CommunityService
+	 * @constructor
+	 * @param {Object} options  Options object
+	 * @param {String} [options.endpoint=smartcloud]  Endpoint to be used by CommunityService.
+	 * 		
+	 */
 	var CommunityService = declare("sbt.smartcloud.CommunityService", sbt.base.BaseService, {
 		
 		constructor: function(_options) {
@@ -177,6 +195,9 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 		
 		**/
 		getMember: function(args) {
+			if (!args || !args.community || !args.community._id || !args.id) {
+				log.error("Need to pass communityId and userid of the member.");
+			}
 			var content = {communityUuid : args.community._id};
 			if(this._isEmail(args.id)){
 				content.email = args.id; 
@@ -203,6 +224,9 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 		
 		**/
 		getCommunity: function(args) {
+			if (!args || !args.id) {
+				log.error("Need to pass communityId.");
+			}
 			return this._getOne(args,
 				{entityName: "community", serviceEntity: "community", entityType: "instance",
 					entity: Community,
@@ -223,6 +247,9 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 		
 		**/
 		createCommunity: function (community, args) {
+			if (!args || !community) {
+				log.error("Need to pass community and arguments.");
+			}
 			var xmlPayloadTemplate = 
 				["<?xml version=\"1.0\" encoding=\"UTF-8\"?>",
 				"<entry xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\" xmlns:app=\"http://www.w3.org/2007/app\" xmlns=\"http://www.w3.org/2005/Atom\">",
@@ -253,6 +280,9 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 		
 		**/
 		updateCommunity: function (community, args) {
+			if (!args || !community) {
+				log.error("Need to pass community and arguments.");
+			}
 			community.updateData();
 			//this.updateXmlField(community._data, "title", community.getTitle());
 			//this.updateXmlField(community._data, "content", community.getContent());
@@ -279,6 +309,9 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 		
 		**/
 		deleteCommunity: function (inputCommunity, args) {
+			if (!args || !inputCommunity) {
+				log.error("Need to pass community and arguments.");
+			}
 			var communityId = this.getIdFromIdOrObject(inputCommunity);
 			this.deleteEntity(args,{entityName: "community", serviceEntity: "community", entityType: "instance",
 				urlParams : { communityUuid: communityId }
@@ -298,6 +331,9 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 		
 		**/	
 		addMember: function (inputCommunity, inputMember, args) {
+			if (!args || !inputCommunity || !inputMember) {
+				log.error("Need to pass community, member and arguments.");
+			}
 			var xmlPayloadTemplate = 
 				["<?xml version=\"1.0\" encoding=\"UTF-8\"?>",
 				 "<entry xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\" xmlns:app=\"http://www.w3.org/2007/app\" xmlns=\"http://www.w3.org/2005/Atom\">",
@@ -330,6 +366,9 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 		
 		**/	
 		removeMember: function (inputCommunity, inputMember, args) {
+			if (!args || !inputCommunity || !inputMember) {
+				log.error("Need to pass community, member and arguments.");
+			}
 			var communityId = this.getIdFromIdOrObject(inputCommunity);
 			var memberId = this.getIdFromIdOrObject(inputMember);
 			var params = { communityUuid: communityId };
@@ -356,6 +395,9 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 		
 		**/	
 		getPublicCommunities: function (args){
+			if (!args) {
+				log.error("Need to pass arguments.");
+			}
 			this._getEntities(args,
 					{entityName: "community", serviceEntity: "communities", entityType: "public",
 						parseId: this._parseCommunityId,
@@ -377,6 +419,9 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 		**/	
 		
 		getMyCommunities: function (args){
+			if (!args) {
+				log.error("Need to pass arguments.");
+			}
 			this._getEntities(args,
 					{entityName: "community", serviceEntity: "communities", entityType: "my",
 						parseId: this._parseCommunityId,
@@ -397,6 +442,9 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 		
 		**/	
 		getMembers: function (communityArg, args){
+			if (!args || !communityArg) {
+				log.error("Need to pass community/communityId and arguments.");
+			}
 			var community = (typeof communityArg == "object")? communityArg : new Community(this, communityArg);
 			this._getEntities(args,
 					{community: community,

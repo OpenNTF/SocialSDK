@@ -27,38 +27,42 @@ import com.ibm.sbt.services.client.smartcloud.base.BaseEntity;
 import com.ibm.sbt.services.client.smartcloud.communities.util.XMLCommunityPayloadBuilder;
 
 /**
- * @Represents SmartCloud CommunitiesService
+ * CommunityService can be used to perform operations related to Community.
+ * <p>
+ * Constructs {@link Community} and {@link Member} objects after parsing the JSON response from Smartcloud server
+ * </p>
+ * 
+ * <pre>
+ * Sample Usage
+ * {@code
+ * 	CommunityService service = new CommunityService();
+ * 	List<Community<Node>> communities = (List) service.getUpdatesFromMyNetwork();
+ * }
+ * </pre>
+ * 
  * @author Carlos Manias
  */
 public class CommunityService extends BaseService {
 
 	private static final String	sourceClass				= CommunityService.class.getName();
 	private static final Logger	logger					= Logger.getLogger(sourceClass);
-	private static String		DEFAULT_HANDLER_NAME	= "XML";							/*
-	 * Setting default
-	 * format to XML.
-	 * Need to discuss
-	 * what this
-	 * should be.
-	 */
 
-	private static int			DEFAULT_CACHE_SIZE		= 0;								/*
-	 * Setting default
-	 * size to 0. Need
-	 * to discuss what
-	 * this should be.
-	 */
+	// Setting default format to XML. Need to discuss what this should be.
+	private static String		DEFAULT_HANDLER_NAME	= "XML";
+
+	// Setting default size to 0. Need to discuss what this should be.
+	private static int			DEFAULT_CACHE_SIZE		= 0;
 
 	private static enum CommunitiesAPI {
-		GETALLCOMMUNITIES("/communities/service/atom/communities/all"), GETCOMMUNITYENTRY(
-		"/communities/service/atom/community/instance"), GETMYCOMMUNITIES(
-		"/communities/service/atom/communities/my"), GETCOMMUNITYMEMBERS(
-		"/communities/service/atom/community/members"), CREATECOMMUNITY(
-		"/communities/service/atom/communities/my"), DELETECOMMUNITY(
-		"/communities/service/atom/community/instance"), UPDATECOMMUNITY(
-		"/communities/service/atom/community/instance"), ADDCOMMUNITYMEMBER(
-		"/communities/service/atom/community/members"), DELETECOMMUNITYMEMBER(
-		"/communities/service/atom/community/members");
+		GETALLCOMMUNITIES("/communities/service/atom/communities/all"),
+		GETCOMMUNITYENTRY("/communities/service/atom/community/instance"),
+		GETMYCOMMUNITIES("/communities/service/atom/communities/my"),
+		GETCOMMUNITYMEMBERS("/communities/service/atom/community/members"),
+		CREATECOMMUNITY("/communities/service/atom/communities/my"),
+		DELETECOMMUNITY("/communities/service/atom/community/instance"),
+		UPDATECOMMUNITY("/communities/service/atom/community/instance"),
+		ADDCOMMUNITYMEMBER("/communities/service/atom/community/members"),
+		DELETECOMMUNITYMEMBER("/communities/service/atom/community/members");
 
 		private final String	url;
 
@@ -77,14 +81,14 @@ public class CommunityService extends BaseService {
 	}
 
 	/**
-	 * Default Constructor - 0 argument constructor Calls the Constructor of BaseService Class.
+	 * Default Constructor - Creates CommunityService Object with default endpoint
 	 */
 	public CommunityService() {
 		this("smartcloud", DEFAULT_CACHE_SIZE, DEFAULT_HANDLER_NAME);
 	}
 
 	/**
-	 * Constructor - 1 argument constructor
+	 * Constructor - Creates CommunityService Object with a specified endpoint
 	 * 
 	 * @param endpoint
 	 *            Creates ProfileService with specified endpoint and a default CacheSize
@@ -94,7 +98,7 @@ public class CommunityService extends BaseService {
 	}
 
 	/**
-	 * Constructor - 2 argument constructor
+	 * Constructor - Creates CommunityService Object with specified endpoint and cache size
 	 * 
 	 * @param endpoint
 	 * @param cacheSize
@@ -105,20 +109,38 @@ public class CommunityService extends BaseService {
 
 	}
 
+	/**
+	 * Constructor - Creates CommunityService Object with specified endpoint and data format
+	 * 
+	 * @param endpoint
+	 * @param format
+	 */
 	public CommunityService(String endpoint, String format) {
 		this(endpoint, DEFAULT_CACHE_SIZE, format);
 	}
 
+	/**
+	 * Constructor - Creates CommunityService Object with specified endpoint, data format and cache size
+	 * 
+	 * @param endpoint
+	 * @param cacheSize
+	 * @param format
+	 */
 	public CommunityService(String endpoint, int cacheSize, String format) {
 		super(endpoint, cacheSize, format);
 
 	}
 
 	/**
-	 * getCommunityEntry()
+	 * <p>
+	 * Returns a {link @Community} object. If the boolean load parameter is true, the object will contain the data of the community. Otherwise it will only contain the communityUuid.
+	 * </p>
 	 * 
 	 * @param communityUuid
-	 * @return This method is used to get a community by its UUID
+	 *            The community Id
+	 * @param load
+	 *            Boolean value to define if the returned object must load all the community data
+	 * @return A community
 	 */
 	public <DataFormat> Community<DataFormat> getCommunityEntry(String communityUuid, boolean load) {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -140,9 +162,11 @@ public class CommunityService extends BaseService {
 	}
 
 	/**
-	 * getAllCommunities()
+	 * <p>
+	 * Returns a List of all the public {link @Community} objects.
+	 * </p>
 	 * 
-	 * @return This method is used to get all the Communities from SmartCloud.
+	 * @return A list of public communities
 	 */
 	public <DataFormat> Collection<Community<DataFormat>> getAllCommunities() {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -168,9 +192,11 @@ public class CommunityService extends BaseService {
 	}
 
 	/**
-	 * getMyCommunities()
+	 * <p>
+	 * Returns a List of all the {link @Community} objects of the current user.
+	 * </p>
 	 * 
-	 * @return This method is used to get user's Communities from SmartCloud.
+	 * @return A list of the user's communities
 	 */
 	public <DataFormat> Collection<Community<DataFormat>> getMyCommunities() {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -196,9 +222,13 @@ public class CommunityService extends BaseService {
 	}
 
 	/**
-	 * getCommunityMembers()
+	 * <p>
+	 * Returns a List of all the {link @Member} of the {link @Community} specified by the communityUuid.
+	 * </p>
 	 * 
-	 * @return This method is used to get members of a Community from SmartCloud.
+	 * @param communityUuid
+	 *            The community Id
+	 * @return A list of members of the given
 	 */
 	public <DataFormat> Collection<Member<DataFormat>> getCommunityMembers(String communityUuid) {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -224,7 +254,10 @@ public class CommunityService extends BaseService {
 	/**
 	 * Creates a new Community
 	 * 
-	 * @param content
+	 * @param communityName
+	 *            The name of the community
+	 * @param communityDescription
+	 *            The description of the community
 	 * @return success
 	 */
 	public boolean createCommunity(String communityName, String communityDescription) {
@@ -243,7 +276,7 @@ public class CommunityService extends BaseService {
 		boolean success = false;
 		try {
 			success = super.createData(CommunitiesAPI.CREATECOMMUNITY.getUrl(), parameters, content,
-			"communityUuid");
+					"communityUuid");
 		} catch (Exception e) {
 			// TODO add service specific checked exception and relative handling in examples.
 			e.printStackTrace();
@@ -258,7 +291,9 @@ public class CommunityService extends BaseService {
 	 * Updates an existing community
 	 * 
 	 * @param communityUuid
+	 *            The name of the community
 	 * @param content
+	 *            The content to be updated
 	 * @return success
 	 */
 	public boolean updateCommunity(String communityUuid, Object content) {
@@ -270,7 +305,7 @@ public class CommunityService extends BaseService {
 		boolean success = false;
 		try {
 			success = super.updateData(CommunitiesAPI.UPDATECOMMUNITY.getUrl(), parameters, content,
-			"communityUuid");
+					"communityUuid");
 		} catch (Exception e) {
 			// TODO add service specific checked exception and relative handling in examples.
 			e.printStackTrace();
@@ -285,6 +320,7 @@ public class CommunityService extends BaseService {
 	 * Deletes an existing community
 	 * 
 	 * @param communityUuid
+	 *            The community id
 	 * @return success
 	 */
 	public boolean deleteCommunity(String communityUuid) {
@@ -310,8 +346,11 @@ public class CommunityService extends BaseService {
 	 * Adds a community member
 	 * 
 	 * @param communityUuid
+	 *            The community id
 	 * @param userId
+	 *            THe user id
 	 * @param role
+	 *            The role of the user
 	 * @return success
 	 */
 	public boolean addCommunityMember(String communityUuid, String userId, String role) {
@@ -328,7 +367,7 @@ public class CommunityService extends BaseService {
 		boolean success = false;
 		try {
 			success = super.createData(CommunitiesAPI.ADDCOMMUNITYMEMBER.getUrl(), parameters, content,
-			"communityUuid");
+					"communityUuid");
 		} catch (ClientServicesException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -343,7 +382,9 @@ public class CommunityService extends BaseService {
 	 * Deletes a community member
 	 * 
 	 * @param communityUuid
+	 *            The community id
 	 * @param userId
+	 *            The user id
 	 * @return success
 	 */
 	public boolean deleteCommunityMember(String communityUuid, String userId) {
@@ -356,7 +397,7 @@ public class CommunityService extends BaseService {
 		boolean success = false;
 		try {
 			success = super.deleteData(CommunitiesAPI.DELETECOMMUNITYMEMBER.getUrl(), parameters,
-			"communityUuid");
+					"communityUuid");
 		} catch (Exception e) {
 			// TODO add service specific checked exception and relative handling in examples.
 			e.printStackTrace();
@@ -374,8 +415,6 @@ public class CommunityService extends BaseService {
 	 *            The Entity class name
 	 * @param uuid
 	 *            The id of the entity
-	 * @param clientService
-	 *            The service
 	 * @return entity the new entity
 	 */
 	@Override
@@ -395,8 +434,6 @@ public class CommunityService extends BaseService {
 	 *            The Entity class name
 	 * @param data
 	 *            The data of the entity
-	 * @param clientService
-	 *            The service
 	 * @return entity the new entity
 	 */
 	@Override

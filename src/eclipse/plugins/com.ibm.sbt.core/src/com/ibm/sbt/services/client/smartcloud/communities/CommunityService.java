@@ -21,9 +21,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.BaseService;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.smartcloud.base.BaseEntity;
+import com.ibm.sbt.services.client.smartcloud.communities.CommunityServiceException.Reason;
 import com.ibm.sbt.services.client.smartcloud.communities.util.XMLCommunityPayloadBuilder;
 
 /**
@@ -35,8 +37,8 @@ import com.ibm.sbt.services.client.smartcloud.communities.util.XMLCommunityPaylo
  * <pre>
  * Sample Usage
  * {@code
- * 	CommunityService service = new CommunityService();
- * 	List<Community<Node>> communities = (List) service.getUpdatesFromMyNetwork();
+ * 	CommunityService	service	= new CommunityService();
+ * 	List&lt;Community&lt;Node&gt;&gt; communities = (List)service.getMyCommunities();
  * }
  * </pre>
  * 
@@ -141,22 +143,24 @@ public class CommunityService extends BaseService {
 	 * @param load
 	 *            Boolean value to define if the returned object must load all the community data
 	 * @return A community
+	 * @throws CommunityServiceException
 	 */
-	public <DataFormat> Community<DataFormat> getCommunityEntry(String communityUuid, boolean load) {
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "getCommunityEntry");
-		}
+	@SuppressWarnings("unchecked")
+	public <DataFormat> Community<DataFormat> getCommunityEntry(String communityUuid, boolean load)
+			throws CommunityServiceException {
 
-		@SuppressWarnings("unchecked")
 		Community<DataFormat> community = null;
 		try {
 			community = super.getSingleEntry(communityUuid, load, Community.class);
-		} catch (Exception e) {
-			// TODO add service specific checked exception and relative handling in examples.
-			e.printStackTrace();
-		}
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.exiting(sourceClass, "getCommunityEntry", community);
+		} catch (ClientServicesException e) {
+			Reason reason = Reason.SERVER_ERROR;
+			if (e.isClientError()) {
+				reason = Reason.CLIENT_ERROR;
+			}
+			if (logger.isLoggable(Level.WARNING)) {
+				logger.log(Level.WARNING, e.getMessage(), e);
+			}
+			throw new CommunityServiceException(e, StringUtil.format("Error retrieving communities"), reason);
 		}
 		return community;
 	}
@@ -167,27 +171,29 @@ public class CommunityService extends BaseService {
 	 * </p>
 	 * 
 	 * @return A list of public communities
+	 * @throws CommunityServiceException
 	 */
-	public <DataFormat> Collection<Community<DataFormat>> getAllCommunities() {
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "getAllCommunities");
-		}
+	@SuppressWarnings("unchecked")
+	public <DataFormat> Collection<Community<DataFormat>> getAllCommunities()
+			throws CommunityServiceException {
 
 		Map<String, String> parameters = new HashMap<String, String>();
 
-		@SuppressWarnings("unchecked")
 		Collection<Community<DataFormat>> communities = null;
 		try {
 			communities = super.getMultipleEntities(CommunitiesAPI.GETALLCOMMUNITIES.getUrl(), parameters,
 					Community.class);
-		} catch (Exception e) {
-			// TODO add service specific checked exception and relative handling in examples.
-			e.printStackTrace();
+		} catch (ClientServicesException e) {
+			Reason reason = Reason.SERVER_ERROR;
+			if (e.isClientError()) {
+				reason = Reason.CLIENT_ERROR;
+			}
+			if (logger.isLoggable(Level.WARNING)) {
+				logger.log(Level.WARNING, e.getMessage(), e);
+			}
+			throw new CommunityServiceException(e, StringUtil.format("Error retrieving communities"), reason);
 		}
 
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.exiting(sourceClass, "getAllCommunities", communities);
-		}
 		return communities;
 	}
 
@@ -197,27 +203,28 @@ public class CommunityService extends BaseService {
 	 * </p>
 	 * 
 	 * @return A list of the user's communities
+	 * @throws CommunityServiceException
 	 */
-	public <DataFormat> Collection<Community<DataFormat>> getMyCommunities() {
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "getMyCommunities");
-		}
+	@SuppressWarnings("unchecked")
+	public <DataFormat> Collection<Community<DataFormat>> getMyCommunities() throws CommunityServiceException {
 
 		Map<String, String> parameters = new HashMap<String, String>();
 
-		@SuppressWarnings("unchecked")
 		Collection<Community<DataFormat>> communities = null;
 		try {
 			communities = super.getMultipleEntities(CommunitiesAPI.GETMYCOMMUNITIES.getUrl(), parameters,
 					Community.class);
-		} catch (Exception e) {
-			// TODO add service specific checked exception and relative handling in examples.
-			e.printStackTrace();
+		} catch (ClientServicesException e) {
+			Reason reason = Reason.SERVER_ERROR;
+			if (e.isClientError()) {
+				reason = Reason.CLIENT_ERROR;
+			}
+			if (logger.isLoggable(Level.WARNING)) {
+				logger.log(Level.WARNING, e.getMessage(), e);
+			}
+			throw new CommunityServiceException(e, StringUtil.format("Error retrieving communities"), reason);
 		}
 
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.exiting(sourceClass, "getMyCommunities", communities);
-		}
 		return communities;
 	}
 
@@ -229,24 +236,28 @@ public class CommunityService extends BaseService {
 	 * @param communityUuid
 	 *            The community Id
 	 * @return A list of members of the given
+	 * @throws CommunityServiceException
 	 */
-	public <DataFormat> Collection<Member<DataFormat>> getCommunityMembers(String communityUuid) {
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "getCommunityMembers");
-		}
+	@SuppressWarnings("unchecked")
+	public <DataFormat> Collection<Member<DataFormat>> getCommunityMembers(String communityUuid)
+			throws CommunityServiceException {
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("communityUuid", communityUuid);
-		@SuppressWarnings("unchecked")
+
 		Collection<Member<DataFormat>> members = null;
 		try {
 			members = super.getMultipleEntities(CommunitiesAPI.GETCOMMUNITYMEMBERS.getUrl(), parameters,
 					Member.class);
-		} catch (Exception e) {
-			// TODO add service specific checked exception and relative handling in examples.
-			e.printStackTrace();
-		}
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.exiting(sourceClass, "getCommunityMembers", members);
+		} catch (ClientServicesException e) {
+			Reason reason = Reason.SERVER_ERROR;
+			if (e.isClientError()) {
+				reason = Reason.CLIENT_ERROR;
+			}
+			if (logger.isLoggable(Level.WARNING)) {
+				logger.log(Level.WARNING, e.getMessage(), e);
+			}
+			throw new CommunityServiceException(e, StringUtil.format("Error retrieving community members"),
+					reason);
 		}
 		return members;
 	}
@@ -258,13 +269,10 @@ public class CommunityService extends BaseService {
 	 *            The name of the community
 	 * @param communityDescription
 	 *            The description of the community
-	 * @return success
+	 * @throws CommunityServiceException
 	 */
-	public boolean createCommunity(String communityName, String communityDescription) {
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "createCommunity", new Object[] { communityName,
-					communityDescription });
-		}
+	public void createCommunity(String communityName, String communityDescription)
+			throws CommunityServiceException {
 		XMLCommunityPayloadBuilder builder = XMLCommunityPayloadBuilder.INSTANCE;
 		Map<String, String> info = new HashMap<String, String>();
 		info.put("title", communityName);
@@ -273,18 +281,19 @@ public class CommunityService extends BaseService {
 		// Object content = builder.generateCreateCommunityPayload(info);
 		Object content = builder.dummyTestPayload();
 		Map<String, String> parameters = new HashMap<String, String>();
-		boolean success = false;
 		try {
-			success = super.createData(CommunitiesAPI.CREATECOMMUNITY.getUrl(), parameters, content,
-					"communityUuid");
-		} catch (Exception e) {
-			// TODO add service specific checked exception and relative handling in examples.
-			e.printStackTrace();
+			super.createData(CommunitiesAPI.CREATECOMMUNITY.getUrl(), parameters, content, "communityUuid");
+		} catch (ClientServicesException e) {
+			Reason reason = Reason.SERVER_ERROR;
+			if (e.isClientError()) {
+				reason = Reason.CLIENT_ERROR;
+			}
+			if (logger.isLoggable(Level.WARNING)) {
+				logger.log(Level.WARNING, e.getMessage(), e);
+			}
+			throw new CommunityServiceException(e, StringUtil.format("Error creating community"), reason);
 		}
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.exiting(sourceClass, "createCommunity", success);
-		}
-		return success;
+
 	}
 
 	/**
@@ -294,26 +303,23 @@ public class CommunityService extends BaseService {
 	 *            The name of the community
 	 * @param content
 	 *            The content to be updated
-	 * @return success
+	 * @throws CommunityServiceException
 	 */
-	public boolean updateCommunity(String communityUuid, Object content) {
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "updateCommunity", new Object[] { communityUuid, content });
-		}
+	public void updateCommunity(String communityUuid, Object content) throws CommunityServiceException {
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("communityUuid", communityUuid);
-		boolean success = false;
 		try {
-			success = super.updateData(CommunitiesAPI.UPDATECOMMUNITY.getUrl(), parameters, content,
-					"communityUuid");
-		} catch (Exception e) {
-			// TODO add service specific checked exception and relative handling in examples.
-			e.printStackTrace();
+			super.updateData(CommunitiesAPI.UPDATECOMMUNITY.getUrl(), parameters, content, "communityUuid");
+		} catch (ClientServicesException e) {
+			Reason reason = Reason.SERVER_ERROR;
+			if (e.isClientError()) {
+				reason = Reason.CLIENT_ERROR;
+			}
+			if (logger.isLoggable(Level.WARNING)) {
+				logger.log(Level.WARNING, e.getMessage(), e);
+			}
+			throw new CommunityServiceException(e, StringUtil.format("Error updating community"), reason);
 		}
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.exiting(sourceClass, "updateCommunity", success);
-		}
-		return success;
 	}
 
 	/**
@@ -321,25 +327,23 @@ public class CommunityService extends BaseService {
 	 * 
 	 * @param communityUuid
 	 *            The community id
-	 * @return success
+	 * @throws CommunityServiceException
 	 */
-	public boolean deleteCommunity(String communityUuid) {
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "deleteCommunity", new Object[] { communityUuid });
-		}
+	public void deleteCommunity(String communityUuid) throws CommunityServiceException {
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("communityUuid", communityUuid);
-		boolean success = false;
 		try {
-			success = super.deleteData(CommunitiesAPI.DELETECOMMUNITY.getUrl(), parameters, "communityUuid");
-		} catch (Exception e) {
-			// TODO add service specific checked exception and relative handling in examples.
-			e.printStackTrace();
+			super.deleteData(CommunitiesAPI.DELETECOMMUNITY.getUrl(), parameters, "communityUuid");
+		} catch (ClientServicesException e) {
+			Reason reason = Reason.SERVER_ERROR;
+			if (e.isClientError()) {
+				reason = Reason.CLIENT_ERROR;
+			}
+			if (logger.isLoggable(Level.WARNING)) {
+				logger.log(Level.WARNING, e.getMessage(), e);
+			}
+			throw new CommunityServiceException(e, StringUtil.format("Error deleting community"), reason);
 		}
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.exiting(sourceClass, "deleteCommunity", success);
-		}
-		return success;
 	}
 
 	/**
@@ -351,12 +355,10 @@ public class CommunityService extends BaseService {
 	 *            THe user id
 	 * @param role
 	 *            The role of the user
-	 * @return success
+	 * @throws CommunityServiceException
 	 */
-	public boolean addCommunityMember(String communityUuid, String userId, String role) {
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "addCommunityMember", new Object[] { communityUuid, userId, role });
-		}
+	public void addCommunityMember(String communityUuid, String userId, String role)
+			throws CommunityServiceException {
 		XMLCommunityPayloadBuilder builder = XMLCommunityPayloadBuilder.INSTANCE;
 		Map<String, String> info = new HashMap<String, String>();
 		info.put("snx:userid", userId);
@@ -364,18 +366,19 @@ public class CommunityService extends BaseService {
 		Object content = builder.generateAddMemberPayload(info);
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("communityUuid", communityUuid);
-		boolean success = false;
 		try {
-			success = super.createData(CommunitiesAPI.ADDCOMMUNITYMEMBER.getUrl(), parameters, content,
-					"communityUuid");
+			super.createData(CommunitiesAPI.ADDCOMMUNITYMEMBER.getUrl(), parameters, content, "communityUuid");
 		} catch (ClientServicesException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Reason reason = Reason.SERVER_ERROR;
+			if (e.isClientError()) {
+				reason = Reason.CLIENT_ERROR;
+			}
+			if (logger.isLoggable(Level.WARNING)) {
+				logger.log(Level.WARNING, e.getMessage(), e);
+			}
+			throw new CommunityServiceException(e,
+					StringUtil.format("Error adding community community member"), reason);
 		}
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.exiting(sourceClass, "addCommunityMember", success);
-		}
-		return success;
 	}
 
 	/**
@@ -385,27 +388,25 @@ public class CommunityService extends BaseService {
 	 *            The community id
 	 * @param userId
 	 *            The user id
-	 * @return success
+	 * @throws CommunityServiceException
 	 */
-	public boolean deleteCommunityMember(String communityUuid, String userId) {
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "deleteCommunityMember", new Object[] { communityUuid });
-		}
+	public void deleteCommunityMember(String communityUuid, String userId) throws CommunityServiceException {
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("communityUuid", communityUuid);
 		parameters.put("userId", userId);
-		boolean success = false;
 		try {
-			success = super.deleteData(CommunitiesAPI.DELETECOMMUNITYMEMBER.getUrl(), parameters,
-					"communityUuid");
-		} catch (Exception e) {
-			// TODO add service specific checked exception and relative handling in examples.
-			e.printStackTrace();
+			super.deleteData(CommunitiesAPI.DELETECOMMUNITYMEMBER.getUrl(), parameters, "communityUuid");
+		} catch (ClientServicesException e) {
+			Reason reason = Reason.SERVER_ERROR;
+			if (e.isClientError()) {
+				reason = Reason.CLIENT_ERROR;
+			}
+			if (logger.isLoggable(Level.WARNING)) {
+				logger.log(Level.WARNING, e.getMessage(), e);
+			}
+			throw new CommunityServiceException(e,
+					StringUtil.format("Error adding community community member"), reason);
 		}
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.exiting(sourceClass, "deleteCommunityMember", success);
-		}
-		return success;
 	}
 
 	/**
@@ -416,15 +417,18 @@ public class CommunityService extends BaseService {
 	 * @param uuid
 	 *            The id of the entity
 	 * @return entity the new entity
+	 * @throws CommunityServiceException
 	 */
 	@Override
-	public <DataFormat> BaseEntity<DataFormat> getEntityFromId(String entityName, String uuid) {
+	public <DataFormat> BaseEntity<DataFormat> getEntityFromId(String entityName, String uuid)
+			throws ClientServicesException {
 		if (Community.class.getSimpleName().equalsIgnoreCase(entityName)) {
 			return new Community<DataFormat>(uuid, this);
 		} else if (Member.class.getSimpleName().equalsIgnoreCase(entityName)) {
 			return new Member<DataFormat>(uuid, this);
 		}
-		return null;
+		throw new ClientServicesException(new IllegalArgumentException(), "Entity decoding not supported"
+				+ entityName, Reason.INVALID_INPUT);
 	}
 
 	/**
@@ -437,12 +441,14 @@ public class CommunityService extends BaseService {
 	 * @return entity the new entity
 	 */
 	@Override
-	public <DataFormat> BaseEntity<DataFormat> getEntityFromData(String entityName, DataFormat data) {
+	public <DataFormat> BaseEntity<DataFormat> getEntityFromData(String entityName, DataFormat data)
+			throws ClientServicesException {
 		if (Community.class.getSimpleName().equalsIgnoreCase(entityName)) {
 			return new Community<DataFormat>(data, this);
 		} else if (Member.class.getSimpleName().equalsIgnoreCase(entityName)) {
 			return new Member<DataFormat>(data, this);
 		}
-		return null;
+		throw new ClientServicesException(new IllegalArgumentException(), "Entity decoding not supported"
+				+ entityName, Reason.INVALID_INPUT);
 	}
 }

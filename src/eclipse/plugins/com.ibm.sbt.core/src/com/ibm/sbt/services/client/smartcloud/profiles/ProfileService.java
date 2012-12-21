@@ -29,7 +29,6 @@ import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.SBTServiceException;
 import com.ibm.sbt.services.client.connections.files.utils.Messages;
 import com.ibm.sbt.services.client.smartcloud.SmartCloudService;
-import com.ibm.sbt.services.client.smartcloud.base.BaseEntity;
 import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
 import com.ibm.sbt.util.DataNavigator;
@@ -250,6 +249,5 @@ public class ProfileService extends BaseService {
 		}
 		return userId.contains("@");
 	}
-
 
 }

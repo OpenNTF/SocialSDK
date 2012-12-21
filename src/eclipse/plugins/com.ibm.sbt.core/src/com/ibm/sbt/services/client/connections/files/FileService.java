@@ -1381,7 +1381,7 @@ public class FileService extends BaseService {
 		} catch (ClientServicesException e) {
 			logger.log(Level.SEVERE, Messages.FileServiceException_1 + "executePut()", e);
 			setStatus();
-			throw new FileServiceException(e, e.getMessage());
+			throw new FileServiceException(e);
 		}
 		parseResult(result);
 		return (Document) result;
@@ -1531,7 +1531,7 @@ public class FileService extends BaseService {
 		} catch (ClientServicesException e) {
 			logger.log(Level.SEVERE, Messages.FileServiceException_1 + "executeGet()", e);
 			setStatus();
-			throw new FileServiceException(e, e.getMessage());
+			throw new FileServiceException(e);
 		}
 		if (result == null) {
 			return null;

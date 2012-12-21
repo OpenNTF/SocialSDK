@@ -42,7 +42,7 @@ public class Subscriber {
 		// TODO
 	}
 
-	private void load(Endpoint endpoint) {
+	private void load(Endpoint endpoint) throws ProfileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "load");
 		}
@@ -51,7 +51,9 @@ public class Subscriber {
 		Object result = null;
 		try {
 			result = svc.get(ProfilesAPIMap.GETUSERIDENTITY.getUrl(), parameters, ClientService.FORMAT_JSON);
-		} catch (ClientServicesException e) {}
+		} catch (ClientServicesException e) {
+			throw new ProfileServiceException(e);
+		}
 		this.data = (JsonObject) result;
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.exiting(sourceClass, "load");
@@ -63,8 +65,9 @@ public class Subscriber {
 	 * 
 	 * @param endpoint
 	 * @return String
+	 * @throws ProfileServiceException 
 	 */
-	public String getSubscriberId(Endpoint endpoint) {
+	public String getSubscriberId(Endpoint endpoint) throws ProfileServiceException {
 		load(endpoint);
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getSubscriberId");

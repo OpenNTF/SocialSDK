@@ -21,12 +21,14 @@
  * @author Carlos Manias
  * 
  */
-define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml','sbt/xpath','sbt/Cache','sbt/Endpoint', 'sbt/base/BaseConstants'],
-		function(declare,cfg,lang,con,xml,xpath,Cache,Endpoint, BaseConstants) {
+define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml','sbt/xpath','sbt/Cache','sbt/Endpoint', 'sbt/base/BaseConstants', 
+        "sbt/validate", 'sbt/log'],
+		function(declare,cfg,lang,con,xml,xpath,Cache,Endpoint, BaseConstants, validate, log) {
 	
 	var requests = {};
 	
 	function notifyCb(id,param) {
+		log.debug("notifyCb() : called with id : {0}, and param : {1}", id, param);
 		var r = requests[id];
   		if(r) {
 	  		delete requests[id];
@@ -220,39 +222,24 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 			this._con = options.con || con; //NameSpaces
 		},
 		
-		_notifyError: function(args, error){
-			if (args.handle) {
-				try {
-					args.handle(error);
-				} catch (ex) {
-					//TODO log an error
-				}
-			}
-			if (args.error) {
-				try {
-					args.error(error);
-				} catch (ex) {
-					//TODO log an error
-				}
-			}
-		},
-		
 		_notifyResponse: function(args, response){
 			if (args.load || args.handle) {
 				if (args.handle) {
 					try {
 						args.handle(response);
 					} catch (ex) {
-						//TODO log an error
+						log.error("Error running handle callback : {0}", error);
 					}
 				}
 				if (args.load) {
 					try {
 						args.load(response);
 					} catch (ex) {
-						//TODO log an error
+						log.error("Error running load callback : {0}", error);
 					}
 				}
+			} else {
+				log.error("Error received. Couldn't find load or handle callbacks");
 			}
 		},
 		
@@ -268,7 +255,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 		
 		_load: function (entity,args,getArgs) {
 			if(!(entity._id)){
-				this._notifyError(args,{code:this.Constants.sbtErrorCodes.badRequest,message:this.Constants.sbtErrorMessages["null_"+entity._entityName+"Id"]});
+				validate.notifyError({code:this.Constants.sbtErrorCodes.badRequest,message:this.Constants.sbtErrorMessages["null_"+entity._entityName+"Id"]}, args);
 				return;
 			}
 			var loadCb = args.load;
@@ -300,7 +287,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 						notifyCb(entity._id,entity);
 					},
 					error: function(error){
-						_self._notifyError(args, error);
+						validate.notifyError(error, args);
 						
 					}
 				});
@@ -326,7 +313,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 					serviceUrl:_self._constructServiceUrl(requestArgs),	
 					headers:headers,
 					error: function(error){
-						_self._notifyError(args, error);
+						validate.notifyError(error, args);
 					}
 				};
 		},
@@ -374,7 +361,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 		**/
 		updateEntity: function (args, putArgs) {
 			if(!(putArgs.entity._id)){
-				this._notifyError(args,{code:this.Constants.sbtErrorCodes.badRequest,message:this.Constants.sbtErrorMessages["null_"+putArgs.entityName+"Id"]});
+				validate.notifyError({code:this.Constants.sbtErrorCodes.badRequest,message:this.Constants.sbtErrorMessages["null_"+putArgs.entityName+"Id"]}, args);
 				return;
 			}
 			var _self = this;

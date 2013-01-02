@@ -83,7 +83,13 @@ public class SbtWebLoader extends ExtLibLoaderExtension {
     
     @Override
     public URL getResourceURL(HttpServletRequest request, String name) {
-        String path = "WebContent/js/sdk/"+name;
-        return ExtLibUtil.getResourceURL(SbtWebActivator.instance.getBundle(), path);
+    	// Access to bootstrap css
+    	if(name.startsWith("bootstrap/")) {
+    		String path = "WebContent/"+name;
+    		return ExtLibUtil.getResourceURL(SbtWebActivator.instance.getBundle(), path);
+    	}
+    	// Access to the SDK
+		String path = "WebContent/js/sdk/"+name;
+		return ExtLibUtil.getResourceURL(SbtWebActivator.instance.getBundle(), path);
     }
 }

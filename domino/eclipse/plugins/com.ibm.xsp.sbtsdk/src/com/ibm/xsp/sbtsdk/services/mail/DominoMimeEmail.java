@@ -92,14 +92,11 @@ public class DominoMimeEmail extends AbstractMimeEmail implements MimeEmail {
         super(json);
     }
     
-    /* (non-Javadoc)
+    /* 
      * @see com.ibm.sbt.services.client.email.MimeEmail#send()
      */
     @Override
     public void send() throws MimeEmailException {
-    	throw new MimeEmailException("Not yet implemented");
-    }
-    public void send2() throws MimeEmailException {
         if(getTo().isEmpty() && getCC().isEmpty() && getBCC().isEmpty()) {
             throw new MimeEmailException("The email's to, cc, and bcc fields are empty.");
         }
@@ -131,8 +128,7 @@ public class DominoMimeEmail extends AbstractMimeEmail implements MimeEmail {
 				MIMEHeader header = topRelated.createHeader("Content-Type"); //$NON-NLS-1$
 	
 				// EE needs to use multipart/alternative or the email clients will
-				// turn the
-				// content into an attachment.
+				// turn the content into an attachment.
 				header.setHeaderVal("multipart/related");
 	
 				MIMEEntity topAlternative = topRelated.createChildEntity();
@@ -141,8 +137,7 @@ public class DominoMimeEmail extends AbstractMimeEmail implements MimeEmail {
 				header = topAlternative.createHeader("Content-Type");
 	
 				// EE needs to use multipart/alternative or the email clients will
-				// turn the
-				// content into an attachment.
+				// turn the content into an attachment.
 				header.setHeaderVal("multipart/alternative");
 	
 				try {
@@ -155,11 +150,10 @@ public class DominoMimeEmail extends AbstractMimeEmail implements MimeEmail {
 								String content = part.getContent();
 								stream.writeText(content);
 								mime.setContentFromText(stream, mimeType, 0);
-								// What is that for?
-								if(false /*payload*/) {
-					            	mime.encodeContent(MIMEEntity.ENC_BASE64);
-								} else {
+								if(StringUtil.equals(mimeType, "text/plain")) {
 									mime.encodeContent(MIMEEntity.ENC_QUOTED_PRINTABLE);
+								} else {
+					            	mime.encodeContent(MIMEEntity.ENC_BASE64);
 								}
 							} finally {
 								stream.close();

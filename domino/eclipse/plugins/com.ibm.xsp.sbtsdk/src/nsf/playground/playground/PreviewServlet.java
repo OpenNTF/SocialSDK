@@ -106,6 +106,7 @@ public class PreviewServlet extends FacesContextServlet {
 		pw.println("  <style type=\"text/css\">");
 		pw.println("    @import \""+dojoPath+"dijit/themes/claro/claro.css\";");
 		pw.println("    @import \""+dojoPath+"dojo/resources/dojo.css\";");
+		pw.println("    @import \"/xsp/.ibmxspres/.extlib/bootstrap/css/bootstrap.min.css\";");
 		pw.println("  </style>");
 
 		pw.println("  <script>");
@@ -151,6 +152,11 @@ public class PreviewServlet extends FacesContextServlet {
 			String s = "  <style>"+css+"</style>";
 			pw.println(s);
 		}
+		
+		// Script for the dojo parser
+		pw.println("  <script>");
+		pw.println("    require(['dojo/parser']);"); // avoid dojo warning
+		pw.println("  </script>");		
 		
 		// Add the firebug lite debugging tools
 		if(debug) {

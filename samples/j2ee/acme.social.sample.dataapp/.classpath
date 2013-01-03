@@ -14,5 +14,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/wink-json4j-1.2.1-incubating.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

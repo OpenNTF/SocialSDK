@@ -20,8 +20,8 @@
  *  
  * Helpers for accessing the Connections Profiles services
  */
-define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sbt/xml','sbt/util','sbt/xpath','sbt/Cache','sbt/connections/ProfileConstants','sbt/Endpoint'],
-		function(declare,cfg,lang,con,xml,util,xpath,Cache,constants,Endpoint) {
+define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sbt/xml','sbt/util','sbt/xpath','sbt/Cache','sbt/connections/ProfileConstants','sbt/Endpoint','sbt/validate'],
+		function(declare,cfg,lang,con,xml,util,xpath,Cache,constants,Endpoint,validate) {
 	
 	/**
 	Javascript APIs for IBM Connections Profiles Service.
@@ -342,7 +342,17 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 			if(floor) {
 				this.set("floor",floor);
 			}
-		}		
+		},
+		_validate : function(className, methodName, args, validateMap) {
+			
+			if (validateMap.isValidateType && !(validate._validateInputTypeAndNotify(className, methodName, "Profile", this, "sbt.connections.Profile", args))) {
+				return false;
+			}
+			if (validateMap.isValidateId && !(validate._validateInputTypeAndNotify(className, methodName, "Profile Id", this._id, "string", args))) {
+				return false;
+			}			
+			return true;
+		}
 	});
 	
 	/**
@@ -367,14 +377,6 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 			if(cs && cs>0) {
 				this._profiles = new Cache(cs);
 			}
-		},
-		
-		_notifyError: function(error, args){			
-				if(args.error)args.error(error);
-				if(args.handle)args.handle(error);	
-				else{
-					util.log("Error received. Error Code = %d. Error Message = %s" , error.code, error.message);
-				}
 		},
 		/**
 		Get the profile of a user.
@@ -414,15 +416,12 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 			return this._getOne(args);
 		},
 		
-		_getOne: function(args) {
-			
-			if(typeof args != "object"){
-				util.log(constants.sbtErrorMessages.args_object);
-				return;
+		_getOne: function(args) {			
+			if (!(validate._validateInputTypeAndNotify("ProfileService", "getProfile", "args", args, "object", args))) {
+				return ;
 			}
-			if(!(args.userId || args.email || args.id)){
-				util.notifyError({code:constants.sbtErrorCodes.badRequest,message:constants.sbtErrorMessages.null_id},args);
-				return;
+			if (!(validate._validateInputTypeAndNotify("ProfileService", "getProfile", "args.userId/args.email/args.id", args.userId || args.email || args.id, "string", args))) {
+				return ;
 			}
 			var profile = null;
 			if(args.userId){
@@ -458,8 +457,12 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 			return a;
 		},*/
 		
-		_load: function (profile,args) {			
-			if(!(util.checkNullValue(profile._id, constants.sbtErrorMessages.null_profileId, args))){
+		_load: function (profile,args) {
+			
+			if (!profile._validate("Profile", "load", args, {
+				isValidateType : true,
+				isValidateId : true
+			})) {
 				return;
 			}
 			var loadCb = null;
@@ -511,7 +514,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 							_notifyCb(profile._id,profile);
 						},
 						error: function(error){
-							_self._notifyError(error,args);
+							validate.notifyError(error,args);
 							
 						}
 					});
@@ -611,10 +614,17 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 			javascript library error object, the status code and the error message.
 		
 		**/
-		updateProfile: function (inputProfile, args) {
-			if(!(util.checkObjectClass(inputProfile, "sbt.connections.Profile",constants.sbtErrorMessages.args_profile, args)) ||!(util.checkNullValue(inputProfile._id, constants.sbtErrorMessages.null_profileId, args))){
+		updateProfile: function (inputProfile, args) {			
+			if (!(validate._validateInputTypeAndNotify("ProfileService", "updateProfile", "Profile", inputProfile, "sbt.connections.Profile", args))) {
+				return ;
+			}
+			if (!inputProfile._validate("ProfileService", "updateProfile", args, {
+				isValidateType : true,
+				isValidateId : true
+			})) {
 				return;
 			}
+			
 			var _id = inputProfile._id;
 			var _self = this;
 			var headers = {"Content-Type" : "application/atom+xml"};
@@ -631,7 +641,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 					}
 				},
 				error: function(error){
-					_self._notifyError(error,args);
+					validate.notifyError(error,args);
 				}
 			});
 		},
@@ -658,10 +668,17 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 			javascript library error object, the status code and the error message.
 		
 		**/	
-		updateProfilePhoto: function (inputProfile,args) {
-			if(!(util.checkObjectClass(inputProfile, "sbt.connections.Profile",constants.sbtErrorMessages.args_profile, args)) ||!(util.checkNullValue(inputProfile._id, constants.sbtErrorMessages.null_profileId, args))){
+		updateProfilePhoto: function (inputProfile,args) {			
+			if (!(validate._validateInputTypeAndNotify("ProfileService", "updateProfilePhoto", "Profile", inputProfile, "sbt.connections.Profile", args))) {
+				return ;
+			}
+			if (!inputProfile._validate("ProfileService", "updateProfilePhoto", args, {
+				isValidateType : true,
+				isValidateId : true
+			})) {
 				return;
-			}			
+			}
+			
 			var _id = inputProfile._id;
 			var control = document.getElementById(inputProfile.fields.imageLocation);
 		    var files = control.files;
@@ -682,7 +699,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 							}
 						},
 						error: function(error){
-							_self._notifyError(error,args);
+							validate.notifyError(error,args);
 						}
 					});
 		    };

@@ -82,7 +82,8 @@ define([ "sbt/log", "sbt/stringutil", "sbt/_bridge/nls" ],
 				 * @method _validateInputTypeAndNotify
 				 */
 				_validateInputTypeAndNotify : function(className, methodName, fieldName, object, expectedType, args) {
-					if (!object || (typeof object == "object" && object.declaredClass != expectedType)
+					if (!object || (typeof object == "object" && object.declaredClass && object.declaredClass != expectedType)
+							|| (typeof object == "object" && !object.declaredClass && typeof object != expectedType)
 							|| (typeof object != "object" && typeof object != expectedType)) {
 						var message;
 						if (!object) {
@@ -90,7 +91,7 @@ define([ "sbt/log", "sbt/stringutil", "sbt/_bridge/nls" ],
 									fieldName, expectedType ]);
 						} else {
 							var actualType;
-							if (typeof object == "object") {
+							if (typeof object == "object" && object.declaredClass) {
 								actualType = object.declaredClass;
 							} else {
 								actualType = typeof object;

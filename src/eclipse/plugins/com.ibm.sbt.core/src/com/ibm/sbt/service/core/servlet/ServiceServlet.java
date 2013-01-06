@@ -23,16 +23,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ibm.commons.runtime.RuntimeConstants;
+import com.ibm.commons.runtime.servlet.BaseToolkitServlet;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.service.core.IServiceHandler;
 import com.ibm.sbt.service.core.ServiceHandlerFactory;
-import com.ibm.sbt.util.SBTHttpServlet;
 
 /**
  * Proxy servlet.
  * @author priand
  */
-public class ServiceServlet extends SBTHttpServlet {
+public class ServiceServlet extends BaseToolkitServlet {
 
 	public static String getServletPath() {
 		return RuntimeConstants.get().getConstant(RuntimeConstants.SERVICE_BASEURL);

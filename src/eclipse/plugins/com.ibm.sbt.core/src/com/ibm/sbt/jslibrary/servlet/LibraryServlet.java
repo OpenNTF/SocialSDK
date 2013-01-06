@@ -27,9 +27,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.ibm.commons.runtime.Application;
 import com.ibm.commons.runtime.Context;
+import com.ibm.commons.runtime.servlet.BaseToolkitServlet;
 import com.ibm.commons.util.PathUtil;
 import com.ibm.sbt.jslibrary.SBTEnvironment;
-import com.ibm.sbt.servlet.BaseToolkitServlet;
 
 /**
  * Servlet used to initialize the toolkit JavaScript library.

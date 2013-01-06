@@ -21,8 +21,8 @@
  */
 define(
 		[ 'sbt/_bridge/declare', 'sbt/config', 'sbt/lang', 'sbt/connections/core', 'sbt/xml', 'sbt/util', 'sbt/xpath', 'sbt/Cache', 'sbt/Endpoint',
-				'sbt/connections/CommunityConstants' ],
-		function(declare, cfg, lang, con, xml, util, xpath, Cache, Endpoint, Constants) {
+				'sbt/connections/CommunityConstants','sbt/validate' ],
+		function(declare, cfg, lang, con, xml, util, xpath, Cache, Endpoint, Constants, validate) {
 
 			/**
 			 * Community class associated with a community.
@@ -278,6 +278,17 @@ define(
 				 */
 				setDeletedTags : function(deletedTags) {
 					this.set("deletedTags", deletedTags);
+				},
+				
+				_validate : function(className, methodName, args, validateMap) {
+					
+					if (validateMap.isValidateType && !(validate._validateInputTypeAndNotify(className, methodName, "Community", this, "sbt.connections.Community", args))) {
+						return false;
+					}
+					if (validateMap.isValidateId && !(validate._validateInputTypeAndNotify(className, methodName, "Community Id", this._id, "string", args))) {
+						return false;
+					}			
+					return true;
 				}
 
 			});
@@ -409,6 +420,17 @@ define(
 				 */
 				setRole : function(role) {
 					this.set("role", role);
+				},
+				
+				_validate : function(className, methodName, args, validateMap) {
+					
+					if (validateMap.isValidateType && !(validate._validateInputTypeAndNotify(className, methodName, "Member", this, "sbt.connections.Member", args))) {
+						return false;
+					}
+					if (validateMap.isValidateId && !(validate._validateInputTypeAndNotify(className, methodName, "Member Id", this._id, "string", args))) {
+						return false;
+					}			
+					return true;
 				}
 			});
 			/**
@@ -429,16 +451,7 @@ define(
 						constructor : function(options) {
 							options = options || {};
 							this._endpoint = Endpoint.find(options.endpoint || 'connections');
-						},
-
-						_notifyError : function(error, args) {
-							if (args){
-								if (args.error)
-									args.error(error);
-								if (args.handle)
-									args.handle(error);
-							}
-						},
+						},						
 						/**
 						 * Get member entry document of a member of a community
 						 * 
@@ -494,9 +507,8 @@ define(
 
 						_getOne : function(args) {
 							if(args){
-								if (typeof args != "object") {
-									util.log(Constants.sbtErrorMessages.args_object);
-									return;
+								if (!(validate._validateInputTypeAndNotify("CommunityService", "getCommunity", "args", args, "object", args))) {
+									return ;
 								}
 							}
 							var community = null;
@@ -519,9 +531,8 @@ define(
 						},
 
 						_getOneMember : function(args) {
-							if (typeof args != "object") {
-								util.log(Constants.sbtErrorMessages.args_object);
-								return;
+							if (!(validate._validateInputTypeAndNotify("CommunityService", "getMember", "args", args, "object", args))) {
+								return ;
 							}
 							var member = new Member(this, args.id);
 							if (args.loadIt == false) {
@@ -543,7 +554,10 @@ define(
 						 */
 
 						_load : function(community, args) {
-							if (!(this._checkCommunityId(community, args))) {
+							if (!community._validate("Community", "load", args, {
+								isValidateType : true,
+								isValidateId : true
+							})) {
 								return;
 							}
 							var _self = this;
@@ -563,7 +577,7 @@ define(
 									}
 								},
 								error : function(error) {
-									_self._notifyError(error, args);
+									validate.notifyError(error, args);
 
 								}
 							});
@@ -571,7 +585,10 @@ define(
 						},
 
 						_loadMember : function(member, args) {
-							if (!(this._checkMemberId(member, args))) {
+							if (!member._validate("Member", "load", args, {
+								isValidateType : true,
+								isValidateId : true
+							})) {
 								return;
 							}
 							var communityId;
@@ -581,8 +598,11 @@ define(
 							if (!(typeof args.community == "object")) {
 								communityId = args.community ;								
 							} else {
-								if(!(this._checkCommunityObject(args.community, args)) || !(this._checkCommunityId(args.community, args))){
-									return;
+								if (!(validate._validateInputTypeAndNotify("CommunityService", "getMember", "args.community", args.community, "sbt.connections.Community", args))) {
+									return ;
+								}
+								if (!(validate._validateInputTypeAndNotify("CommunityService", "getMember", "args.community.id", args.community._id, "string", args))) {
+									return ;
 								}
 								communityId = args.community._id;
 							}
@@ -609,7 +629,7 @@ define(
 									}
 								},
 								error : function(error) {
-									_self._notifyError(error, args);
+									validate.notifyError(error, args);
 
 								}
 							});
@@ -739,8 +759,8 @@ define(
 						 *            javascript library error object, the status code and the error message.
 						 */
 						createCommunity : function(community, args) {
-							if (!(this._checkCommunityObject(community, args))) {
-								return;
+							if (!(validate._validateInputTypeAndNotify("CommunityService", "createCommunity", "Community", community, "sbt.connections.Community", args))) {
+								return ;
 							}
 							var headers = {
 								"Content-Type" : "application/atom+xml"
@@ -765,7 +785,7 @@ define(
 									}
 								},
 								error : function(error) {
-									_self._notifyError(error, args);
+									validate.notifyError(error, args);
 								}
 							});
 						},
@@ -787,7 +807,12 @@ define(
 						 *            javascript library error object, the status code and the error message.
 						 */
 						updateCommunity : function(community, args) {
-							if (!(this._checkCommunityObject(community, args)) || !(this._checkCommunityId(community, args))) {
+							if (!(validate._validateInputTypeAndNotify("CommunityService", "updateCommunity", "Community", community, "sbt.connections.Community", args))) {
+								return ;
+							}
+							if (!community._validate("CommunityService", "updateCommunity", args, {
+								isValidateId : true
+							})) {
 								return;
 							}
 							var _id = community._id;
@@ -807,7 +832,7 @@ define(
 										args.handle(community);
 								},
 								error : function(error, ioargs) {
-									_self._notifyError(error, args);
+									validate.notifyError(error, args);
 								}
 							});
 						},
@@ -837,7 +862,12 @@ define(
 							}
 						},
 						_deleteCommunity : function(community, args) {
-							if (!(this._checkCommunityObject(community, args)) || !(this._checkCommunityId(community, args))) {
+							if (!(validate._validateInputTypeAndNotify("CommunityService", "deleteCommunity", "Community", community, "sbt.connections.Community", args))) {
+								return ;
+							}
+							if (!community._validate("CommunityService", "deleteCommunity", args, {
+								isValidateId : true
+							})) {
 								return;
 							}
 							var headers = {
@@ -855,7 +885,7 @@ define(
 										args.handle();
 								},
 								error : function(error, ioargs) {
-									_self._notifyError(error, args);
+									validate.notifyError(error, args);
 								}
 							});
 						},
@@ -885,10 +915,20 @@ define(
 							} else {
 								community = inputCommunity;
 							}
-							if (!(this._checkCommunityObject(community, args)) || !(this._checkCommunityId(community, args))) {
+							if (!(validate._validateInputTypeAndNotify("CommunityService", "addMember", "Community", community, "sbt.connections.Community", args))) {
+								return ;
+							}
+							if (!community._validate("CommunityService", "addMember", args, {
+								isValidateId : true
+							})) {
 								return;
 							}
-							if (!(this._checkMemberObject(member, args)) || !(this._checkMemberId(member, args))) {
+							if (!(validate._validateInputTypeAndNotify("CommunityService", "addMember", "Member", inputMember, "sbt.connections.Member", args))) {
+								return ;
+							}
+							if (!inputMember._validate("CommunityService", "addMember", args, {
+								isValidateId : true
+							})) {
 								return;
 							}
 							var _self = this;
@@ -909,7 +949,7 @@ define(
 											_self._loadMember(inputMember, _args);
 										},
 										error : function(error) {
-											_self._notifyError(error, args);
+											validate.notifyError(error, args);
 										}
 									});
 						},
@@ -943,10 +983,20 @@ define(
 							} else {
 								member = inputMember;
 							}
-							if (!(this._checkCommunityObject(community, args)) || !(this._checkCommunityId(community, args))) {
+							if (!(validate._validateInputTypeAndNotify("CommunityService", "removeMember", "Community", community, "sbt.connections.Community", args))) {
+								return ;
+							}
+							if (!community._validate("CommunityService", "removeMember", args, {
+								isValidateId : true
+							})) {
 								return;
 							}
-							if (!(this._checkMemberObject(member, args)) || !(this._checkMemberId(member, args))) {
+							if (!(validate._validateInputTypeAndNotify("CommunityService", "removeMember", "Member", member, "sbt.connections.Member", args))) {
+								return ;
+							}
+							if (!member._validate("CommunityService", "removeMember", args, {
+								isValidateId : true
+							})) {
 								return;
 							}
 							var _self = this;
@@ -965,7 +1015,7 @@ define(
 										args.handle();
 								},
 								error : function(error) {
-									_self._notifyError(error, args);
+									validate.notifyError(error, args);
 								}
 							});
 						},
@@ -1109,7 +1159,7 @@ define(
 										args.handle(entities);
 								},
 								error : function(error) {
-									_self._notifyError(error, args);
+									validate.notifyError(error, args);
 								}
 							});
 						},
@@ -1125,39 +1175,10 @@ define(
 							}
 							return _arr;
 						},
-						_checkCommunityObject : function(community, args) {
-							if (community.declaredClass != "sbt.connections.Community") {
-								if (args) {
-									this._notifyError({
-										code : Constants.sbtErrorCodes.badRequest,
-										message : Constants.sbtErrorMessages.args_community
-									}, args);
-								} else {
-									util.log(Constants.sbtErrorMessages.args_community);
-								}
-								return false;
-							} else {
-								return true;
-							}
-						},
-						_checkMemberObject : function(community, args) {
-							if (community.declaredClass != "sbt.connections.Member") {
-								if (args) {
-									this._notifyError({
-										code : Constants.sbtErrorCodes.badRequest,
-										message : Constants.sbtErrorMessages.args_member
-									}, args);
-								} else {
-									util.log(Constants.sbtErrorMessages.args_member);
-								}
-								return false;
-							} else {
-								return true;
-							}
-						},
+						
 						_checkCommunityPresence : function(obj, args){
 							if (!(obj.community)) {
-								this._notifyError({
+								validate.notifyError({
 									code : Constants.sbtErrorCodes.badRequest,
 									message : Constants.sbtErrorMessages.null_community
 								}, args);
@@ -1166,29 +1187,6 @@ define(
 								return true;
 							}
 						},
-						_checkCommunityId : function(community, args) {
-							if (!(community._id)) {
-								this._notifyError({
-									code : Constants.sbtErrorCodes.badRequest,
-									message : Constants.sbtErrorMessages.null_communityId
-								}, args);
-								return false;
-							} else {
-								return true;
-							}
-						},
-						_checkMemberId : function(member, args) {
-							if (!(member._id)) {
-								this._notifyError({
-									code : Constants.sbtErrorCodes.badRequest,
-									message : Constants.sbtErrorMessages.null_memberId
-								}, args);
-								return false;
-							} else {
-								return true;
-							}
-						}
-
 					});
 			return CommunityService;
 		});

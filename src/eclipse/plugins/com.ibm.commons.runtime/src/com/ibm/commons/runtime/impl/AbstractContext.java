@@ -57,12 +57,12 @@ public abstract class AbstractContext extends Context {
 	}
 	
 	@Override
-	public Object getHttpRequest() {
+	public Object getRequest() {
 		return request;
 	}
 
 	@Override
-	public Object getHttpResponse() {
+	public Object getResponse() {
 		return response;
 	}
 

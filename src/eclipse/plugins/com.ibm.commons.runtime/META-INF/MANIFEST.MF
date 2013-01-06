@@ -13,6 +13,7 @@ Export-Package: com.ibm.commons.runtime,
  com.ibm.commons.runtime.mime,
  com.ibm.commons.runtime.naming,
  com.ibm.commons.runtime.properties,
+ com.ibm.commons.runtime.servlet,
  com.ibm.commons.runtime.util
 Require-Bundle: com.ibm.commons,
  com.ibm.commons.xml

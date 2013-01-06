@@ -23,6 +23,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 
 /**
  * SBT Context.
@@ -38,8 +41,11 @@ public abstract class Context {
 	public static Context init(Application application, Object request, Object response) {
 		return RuntimeFactory.get().initContext(application, request, response);
 	}
-	public static void destroy(Context ctx) {
-		RuntimeFactory.get().destroyContext(ctx);
+	public static Context init(Context context) {
+		return RuntimeFactory.get().initContext(context);
+	}
+	public static void destroy(Context context) {
+		RuntimeFactory.get().destroyContext(context);
 	}
 	public static Context get() {
 		Context ctx = RuntimeFactory.get().getContextUnchecked();
@@ -71,9 +77,17 @@ public abstract class Context {
 		return getCurrentUserId().equals(ANONYMOUS);
 	}
 	
-	public abstract Object getHttpRequest();
+	public abstract Object getRequest();
 
-	public abstract Object getHttpResponse();
+	public abstract Object getResponse();
+
+	public final HttpServletRequest getHttpRequest() {
+		return (HttpServletRequest)getRequest();
+	}
+
+	public final HttpServletResponse getHttpResponse() {
+		return (HttpServletResponse)getResponse();
+	}
 	
 	public Application getApplication() {
 		return application;
@@ -108,6 +122,9 @@ public abstract class Context {
 	public static final int SCOPE_APPLICATION 	= 2;
 	public static final int SCOPE_SESSION 		= 3;
 	public static final int SCOPE_REQUEST 		= 4;
+	// Extensions
+	public static final int SCOPE_GLOBALUSER		= 5;
+	public static final int SCOPE_APPLICATIONUSER 	= 6;
 
 	public Map<String,Object> getScope(int scope) {
 		switch(scope) {
@@ -115,6 +132,8 @@ public abstract class Context {
 			case SCOPE_APPLICATION:		return getApplicationMap();
 			case SCOPE_SESSION:			return getSessionMap();
 			case SCOPE_REQUEST:			return getRequestMap();
+			case SCOPE_GLOBALUSER:		return getGlobalUserMap();
+			case SCOPE_APPLICATIONUSER:	return getApplicationUserMap();
 		}
 		return null;
 	}
@@ -122,6 +141,20 @@ public abstract class Context {
 	private static HashMap<String,Object> globalScope = new HashMap<String, Object>(); 
 	public Map<String,Object> getGlobalMap() {
 		return globalScope;
+	}
+
+	private static Map<String, Map<String, Object>> globalUserScope = new HashMap<String, Map<String, Object>>(); 
+	public Map<String,Object> getGlobalUserMap() {
+		String id = getCurrentUserId();
+		Map<String,Object> map = globalUserScope.get(id);
+		if(map==null) {
+			map = new HashMap<String,Object>();
+			globalUserScope.put(id, map);
+		}
+		return map;
+	}
+	protected Map<String,Object> createGlobalUserMap() {
+		return new ApplicationMap(this);
 	}
 
 	private Map<String,Object> applicationMap;
@@ -132,6 +165,20 @@ public abstract class Context {
 		return applicationMap; 
 	}
 	protected Map<String,Object> createApplicationMap() {
+		return new ApplicationMap(this);
+	}
+	
+	public Map<String,Object> getApplicationUserMap() {
+		Map<String,Object> appMap = getApplicationMap();
+		String id = "_appscope_"+getCurrentUserId();
+		Map<String,Object> map = (Map<String,Object>)appMap.get(id);
+		if(map==null) {
+			map = new HashMap<String,Object>();
+			appMap.put(id, map);
+		}
+		return map;
+	}
+	protected Map<String,Object> createApplicationUserMap() {
 		return new ApplicationMap(this);
 	}
 	

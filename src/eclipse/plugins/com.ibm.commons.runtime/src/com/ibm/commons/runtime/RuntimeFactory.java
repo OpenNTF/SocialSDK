@@ -50,6 +50,8 @@ public abstract class RuntimeFactory {
 
 	public abstract Context initContext(Application application, Object request, Object response);
 
+	public abstract Context initContext(Context context);
+
 	public abstract void destroyContext(Context context);
 
 	public abstract Context createContext(Application application, Object request, Object response);

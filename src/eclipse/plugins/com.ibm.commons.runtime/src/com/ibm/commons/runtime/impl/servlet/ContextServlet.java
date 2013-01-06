@@ -62,13 +62,13 @@ public class ContextServlet extends AbstractContext {
 	}
 	
 	@Override
-	public HttpServletRequest getHttpRequest() {
-		return (HttpServletRequest)super.getHttpRequest();
+	public HttpServletRequest getRequest() {
+		return (HttpServletRequest)super.getRequest();
 	}
 
 	@Override
-	public HttpServletResponse getHttpResponse() {
-		return (HttpServletResponse)super.getHttpResponse();
+	public HttpServletResponse getResponse() {
+		return (HttpServletResponse)super.getResponse();
 	}
 
 	@Override

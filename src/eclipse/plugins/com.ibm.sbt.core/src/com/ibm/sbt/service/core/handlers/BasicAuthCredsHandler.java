@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+R * © Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -114,9 +114,11 @@ public class BasicAuthCredsHandler extends AbstractServiceHandler {
 		Context context = Context.get();
 		String url = (String)req.getParameter(REDIRECT_URL);
 		if(authentication.equals(AUTH_DECLINED)){
-			if(url.indexOf("showWrongCredsMessage=true") == -1) // don't add again if wrongCreds parameter is already added for declined Authentication
-				url = PathUtil.concat(url,"showWrongCredsMessage=true", '?');
+			if(url != null){
+				if(url.indexOf("showWrongCredsMessage=true") == -1) // don't add again if wrongCreds parameter is already added for declined Authentication
+					url = PathUtil.concat(url,"showWrongCredsMessage=true", '?');
 			}
+		}
 		context.sendRedirect(url);
 	}
 	

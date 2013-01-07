@@ -20,15 +20,21 @@
  *  
  * Helpers for accessing the Connections Profiles services
  */
-define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sbt/xml','sbt/util','sbt/xpath','sbt/Cache','sbt/connections/ProfileService','sbt/connections/ProfileConstants'],
-		function(declare,cfg,lang,con,xml,util,xpath,Cache,profileService,constants) {
+define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sbt/xml','sbt/util','sbt/xpath','sbt/Cache','sbt/connections/ProfileService','sbt/connections/ProfileConstants','sbt/validate'],
+		function(declare,cfg,lang,con,xml,util,xpath,Cache,profileService,constants,validate) {
 	
 	var ProfileAdminService = declare("sbt.connections.ProfileAdminService", sbt.connections.ProfileService, {
 
 		createProfile: function (inputProfile, args) {
-			if(!(util.checkObjectClass(inputProfile, "sbt.connections.Profile",constants.sbtErrorMessages.args_profile, args)) ||!(util.checkNullValue(inputProfile._id, constants.sbtErrorMessages.null_profileId, args))){
+			if (!(validate._validateInputTypeAndNotify("ProfileAdminService", "createProfile", "Profile", inputProfile, "sbt.connections.Profile", args))) {
+				return ;
+			}
+			if (!inputProfile._validate("ProfileAdminService", "createProfile", args, {
+				isValidateId : true
+			})) {
 				return;
 			}
+			
 			var headers = {"Content-Type" : "application/atom+xml"};
 			var _self = this;
 			var _id= inputProfile._id;
@@ -42,7 +48,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 					_self._load(inputProfile, args);					
 				},
 				error: function(error){
-					_self._notifyError(error,args);
+					validate.notifyError(error,args);
 				}
 			});
 		},		
@@ -56,7 +62,12 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 			}			
 		},
 		_deleteProfile: function (inputProfile, args) {
-			if(!(util.checkObjectClass(inputProfile, "sbt.connections.Profile",constants.sbtErrorMessages.args_profile, args)) ||!(util.checkNullValue(inputProfile._id, constants.sbtErrorMessages.null_profileId, args))){
+			if (!(validate._validateInputTypeAndNotify("ProfileAdminService", "deleteProfile", "Profile", inputProfile, "sbt.connections.Profile", args))) {
+				return ;
+			}
+			if (!inputProfile._validate("ProfileAdminService", "deleteProfile", args, {
+				isValidateId : true
+			})) {
 				return;
 			}
 			var headers = {};
@@ -75,7 +86,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 					if(args.handle)args.handle();
 				},
 				error: function(error){
-					_self._notifyError(error,args);
+					validate.notifyError(error,args);
 				}
 			});
 		},

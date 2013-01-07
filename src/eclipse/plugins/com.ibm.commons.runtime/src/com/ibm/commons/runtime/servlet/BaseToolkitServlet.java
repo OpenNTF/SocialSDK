@@ -13,7 +13,7 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-package com.ibm.sbt.servlet;
+package com.ibm.commons.runtime.servlet;
 
 import java.io.IOException;
 
@@ -24,6 +24,7 @@ import javax.servlet.ServletResponse;
 
 import com.ibm.commons.runtime.Application;
 import com.ibm.commons.runtime.Context;
+import com.ibm.commons.runtime.servlet.BaseHttpServlet;
 
 /**
  * Provides a base class for toolkit HTTP servlets. <code>BaseToolkitServlet</code> manages the global
@@ -39,6 +40,16 @@ abstract public class BaseToolkitServlet extends BaseHttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	
+	public BaseToolkitServlet() {
+	}
+	
+	public boolean useApplication() {
+		return true;
+	}
+	
+	public boolean useContext() {
+		return true;
+	}
 
 	/**
 	 * Return the <code>Application</code> instance associated with this servlet.
@@ -57,7 +68,9 @@ abstract public class BaseToolkitServlet extends BaseHttpServlet {
 		super.init(config);
 
 		// create the application instance
-        this.application = Application.init(config.getServletContext());		
+		if(useApplication()) {
+			this.application = Application.init(config.getServletContext());
+		}
 	}
 	
 	/* (non-Javadoc)
@@ -66,7 +79,10 @@ abstract public class BaseToolkitServlet extends BaseHttpServlet {
 	@Override
 	public void destroy() {
 		// destroy the application instance
-        Application.destroy(application);
+		if(application!=null) {
+			Application.destroy(application);
+			application = null;
+		}
 
 		super.destroy();
 	}
@@ -78,13 +94,15 @@ abstract public class BaseToolkitServlet extends BaseHttpServlet {
 	public void service(ServletRequest request, ServletResponse response)
 			throws ServletException, IOException {
 		// create the context instance
-    	Context context = Context.init(application,request, response);
-    	try {
+		if(useContext()) {
+	    	Context context = Context.init(application,request, response);
+	    	try {
+	    		super.service(request,response);
+	    	} finally {
+	    		Context.destroy(context);
+	    	}
+		} else {
     		super.service(request,response);
-    	} finally {
-    		Context.destroy(context);
-    	}
+		}
 	}
-    
-	
 }

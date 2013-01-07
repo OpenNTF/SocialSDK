@@ -24,8 +24,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import com.ibm.commons.Platform;
 import com.ibm.commons.util.StringUtil;
-import com.ibm.commons.util.TDiag;
 
 /**
  * Definition of the MIME types.
@@ -83,7 +83,7 @@ public class MIME {
                 r.close();
             }
         } catch( Exception e ) {
-            TDiag.exception(e);
+            Platform.getInstance().log(e);
         }
     }
     private static void loadMime(Reader r) throws IOException {

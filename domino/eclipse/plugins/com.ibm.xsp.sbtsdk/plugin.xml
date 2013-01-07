@@ -29,4 +29,8 @@
          <service type="com.ibm.xsp.adapter.servletFactory" class="com.ibm.xsp.sbtsdk.servlets.ToolkitServletFactory" />
    	</extension>
 
+   	<extension point="com.ibm.commons.Extension">
+         <service type="com.ibm.sbt.core.mimeemailfactory" class="com.ibm.xsp.sbtsdk.services.mail.DominoMimeEmailFactory" />
+   	</extension>
+
 </plugin>

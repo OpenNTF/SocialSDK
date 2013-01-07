@@ -21,6 +21,7 @@
 <%@page import="com.ibm.sbt.services.endpoints.Endpoint"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.HashMap"%>
+<%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.sbt.services.client.ClientService"%>
 <%@page import="com.ibm.sbt.services.endpoints.EndpointFactory"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
@@ -37,6 +38,7 @@
 
 <body>	
 	<%
+	try {
 			FileService service = new FileService();
 			String fileId =  Context.get().getProperty("sample.fileId");
 			String shareWithUserId = Context.get().getProperty("sample.userId2");
@@ -55,6 +57,11 @@
 			fileEntry = service.update(fileEntry, paramsMap, payloadMap);
 			
 			out.println("File Updated : " + fileEntry.getFileId());
+		}catch (Throwable e) {
+			out.println("<pre>");
+			e.printStackTrace(new PrintWriter(out));
+			out.println("</pre>");	
+		}				
 		%>
 	 <br>
 </body>

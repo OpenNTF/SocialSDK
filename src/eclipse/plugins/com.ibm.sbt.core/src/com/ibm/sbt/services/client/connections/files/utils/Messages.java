@@ -43,6 +43,7 @@ public class Messages {
 	public static String	ProfileInfo_4			= "Adding fetched Profile to Cache";
 	public static String	ProfileInfo_5			= "Setting the fetched Json Data to the Profile's data Object";
 	public static String	ProfileInfo_6			= "get method, returning the result : ";
+	public static String	ProfileInfo_7			= "UserId Empty. IsEmail retuning false";
 
 	private Messages() {
 	}

@@ -19,6 +19,7 @@
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
 <%@page import="java.util.Map"%>
+<%@page import="java.io.PrintWriter"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.model.FileEntry"%>
 <%@page 
@@ -32,11 +33,17 @@
           
 <body>	
 	<%
+	try {
 			FileService service = new FileService();
 			String fileId = Context.get().getProperty("sample.fileId");
 				out.println("<b> Locking File</b>" + fileId);	
 				service.lock(fileId);
-				out.println("<br> File Lock Status : " + service.FileStatus ); 
+				out.println("<br> File Lock Status : " + service.FileStatus );
+		}catch (Throwable e) {
+			out.println("<pre>");
+			e.printStackTrace(new PrintWriter(out));
+			out.println("</pre>");	
+		}					 
 		%>
 	 <br>
 </body>

@@ -21,6 +21,7 @@
 <%@page import="com.ibm.sbt.services.endpoints.Endpoint"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.HashMap"%>
+<%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.sbt.services.client.ClientService"%>
 <%@page import="com.ibm.sbt.services.endpoints.EndpointFactory"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
@@ -37,7 +38,7 @@
           
 <body>	
 	<%
-	
+	try {
 				FileService service = new FileService();
 				//Upload File
 				out.println("<b> Upload File </b>");	
@@ -66,6 +67,12 @@
 					out.println("<br> TotalMediaSize : " + fileE.getTotalMediaSize());
 				
 				out.println(service.FileStatus);
+		}catch (Throwable e) {
+			out.println("<pre>");
+			e.printStackTrace(new PrintWriter(out));
+			out.println("</pre>");
+		}
+		
 	%>
 	 <br>
 </body>

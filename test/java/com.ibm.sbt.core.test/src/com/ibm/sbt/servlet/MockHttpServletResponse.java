@@ -317,7 +317,7 @@ public class MockHttpServletResponse implements HttpServletResponse {
 		// TODO Auto-generated method stub
 
 	}
-
+/*
 	@Override
 	public String getHeader(String arg0) {
 		// TODO Auto-generated method stub
@@ -341,5 +341,5 @@ public class MockHttpServletResponse implements HttpServletResponse {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+*/
 }

@@ -24,8 +24,7 @@ import java.util.Enumeration;
 import java.util.Locale;
 import java.util.Map;
 
-import javax.servlet.AsyncContext;
-import javax.servlet.DispatcherType;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -37,7 +36,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionContext;
-import javax.servlet.http.Part;
 
 /**
  * @author mwallace
@@ -641,7 +639,7 @@ public class MockHttpServletRequest implements HttpServletRequest {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+/*
 	@Override
 	public AsyncContext getAsyncContext() {
 		// TODO Auto-generated method stub
@@ -715,5 +713,5 @@ public class MockHttpServletRequest implements HttpServletRequest {
 		// TODO Auto-generated method stub
 		
 	}
-
+*/
 }

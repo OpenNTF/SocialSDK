@@ -21,6 +21,7 @@
 <%@page import="com.ibm.sbt.services.endpoints.EndpointFactory"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
+<%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.sbt.services.client.smartcloud.profiles.ProfileService"%>
 <%@page import="com.ibm.sbt.services.client.smartcloud.profiles.Profile"%>
 <%@page
@@ -35,6 +36,7 @@
 	
 	
 	<%
+		try {		
 				ProfileService service = new ProfileService("smartcloud"); //If no endpoint is specified, it uses default end point i.e connections
 				Profile profile = service.getProfile();
 				if(profile != null)
@@ -69,6 +71,11 @@
 				{
 					out.println("No Results");
 				}
+		} catch (Throwable e) {
+			out.println("<pre>");
+			e.printStackTrace(new PrintWriter(out));
+			out.println("</pre>");	
+		}	
 			%>
 	 <br>
 </body>

@@ -20,6 +20,7 @@
 <%@page import="com.ibm.sbt.services.client.connections.files.model.FileEntry"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Map"%>
+<%@page import="java.io.PrintWriter"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>  
@@ -35,6 +36,7 @@
 
 <body>	
 	<%
+	try {
 			FileService fileService = new FileService();
 				out.println("<b> My Files: " + "</b>");	
 				out.println("<br>"); 
@@ -58,6 +60,11 @@
 				{
 					out.println("No Results");
 				}
+		}catch (Throwable e) {
+			out.println("<pre>");
+			e.printStackTrace(new PrintWriter(out));
+			out.println("</pre>");	
+		}					
 		%>
 	 <br>
 </body>

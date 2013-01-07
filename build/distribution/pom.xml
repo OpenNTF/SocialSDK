@@ -77,7 +77,14 @@
 				<arg value="log"/>
 				<arg value="--no-merges"/>
 				<arg value="--pretty=%s"/>
-				</exec>					
+				</exec>		
+				<exec executable="${toolsDir}\git\bin\git.exe"  failonerror="false" output="./../../../target/doc/weekly.txt">
+				<arg value="log" />
+				<arg value="--no-merges" />
+				<arg value="--pretty=%s" />
+				<arg value="--since" />
+				<arg value="1 week ago" />
+				</exec>				
               </tasks>
             </configuration>
             <goals>

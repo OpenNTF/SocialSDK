@@ -16,7 +16,8 @@ public class DominoMimeEmailFactory implements MimeEmailFactory {
     
     private static MimeEmailFactory instance;
     
-    private DominoMimeEmailFactory() {};
+    public DominoMimeEmailFactory() {
+    }
 
     public MimeEmail createMimeEmail(JsonObject json) throws MimeEmailException {
         return new DominoMimeEmail(json);

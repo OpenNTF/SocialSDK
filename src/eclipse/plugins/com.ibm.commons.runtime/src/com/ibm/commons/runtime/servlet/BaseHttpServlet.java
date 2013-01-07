@@ -13,7 +13,7 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-package com.ibm.sbt.servlet;
+package com.ibm.commons.runtime.servlet;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -26,6 +26,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ibm.commons.Platform;
 import com.ibm.commons.runtime.Application;
 import com.ibm.commons.runtime.util.UrlUtil;
 import com.ibm.commons.util.HtmlTextUtil;
@@ -66,6 +67,81 @@ abstract public class BaseHttpServlet extends HttpServlet {
 		String value = application.getProperty(name);
 		return StringUtil.isEmpty(value) ? defaultValue : value;
 	}
+
+	
+	protected void infoServletContext(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
+			response.setStatus(HttpServletResponse.SC_OK);
+			boolean rtl = isErrorPageRTL(request, response);
+			String title = getErrorPageTitle(request, response);
+			String lang = getErrorPageLang(request, response);
+			PrintWriter w = new PrintWriter(new OutputStreamWriter(response.getOutputStream(), "utf-8"));
+			try {
+				writeServletContext(request, w, title, lang, rtl);
+			} finally {
+				w.flush();
+			}
+		} catch (Throwable t) {
+			Platform.getInstance().log(t);
+		}
+	}
+	private void writeServletContext(HttpServletRequest request, PrintWriter w, String title, String lang, boolean isRTL) throws IOException {
+		String dir = isRTL ? "rtl" : "ltr";
+
+		if (lang != null) {
+			w.println("<html lang=\"" + lang + "\" dir=\"" + dir + "\">");
+		} else {
+			w.println("<html dir=\"" + dir + "\">");
+		}
+
+		w.println("<head>");
+		w.println("<title>" + title + "</title>");
+		w.println("</head>");
+		w.println("<body>");
+		w.println("<table>");
+		w.println("  <tr>");
+		w.println("    <td>ServletPath</td>");
+		w.print("    <td>");
+		w.print(HtmlTextUtil.toHTMLContentString(request.getServletPath(), true));
+		w.println("    </td>");
+		w.println("  </tr>");
+		w.println("  <tr>");
+		w.println("    <td>ContextPath</td>");
+		w.print("    <td>");
+		w.print(HtmlTextUtil.toHTMLContentString(request.getContextPath(), true));
+		w.println("    </td>");
+		w.println("  </tr>");
+		w.println("  <tr>");
+		w.println("    <td>PathInfo</td>");
+		w.print("    <td>");
+		w.print(HtmlTextUtil.toHTMLContentString(request.getPathInfo(), true));
+		w.println("    </td>");
+		w.println("  </tr>");
+		w.println("  <tr>");
+		w.println("    <td>QueryString</td>");
+		w.print("    <td>");
+		w.print(HtmlTextUtil.toHTMLContentString(request.getQueryString(), true));
+		w.println("    </td>");
+		w.println("  </tr>");
+		w.println("</table>");
+		w.println("</body>");
+		w.println("</html>");
+	}
+	
+
+	public static boolean isErrorPageRTL(HttpServletRequest request, HttpServletResponse response) {
+		return false;
+	}
+
+	public static String getErrorPageLang(HttpServletRequest request, HttpServletResponse response) {
+		return null;
+	}
+
+	public static String getErrorPageTitle(HttpServletRequest request, HttpServletResponse response) {
+		return "Error Page";
+	}
+
+	
 	
 	/**
 	 * Send a 404 error response with the specified formatted message.
@@ -80,6 +156,11 @@ abstract public class BaseHttpServlet extends HttpServlet {
 	 */
 	public static void service400(HttpServletRequest request, HttpServletResponse response, String fmt, Object...parameters) throws ServletException, IOException {
         String s = StringUtil.format(fmt, parameters);
+        
+		boolean rtl = isErrorPageRTL(request, response);
+		String title = getErrorPageTitle(request, response);
+		String lang = getErrorPageLang(request, response);
+        
         response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         response.setContentType( "text/html" ); 
         PrintWriter w = new PrintWriter(new OutputStreamWriter(response.getOutputStream(),"utf-8")); 
@@ -172,8 +253,13 @@ abstract public class BaseHttpServlet extends HttpServlet {
 	 * @throws IOException
 	 * @throws ServletException
 	 */
+    public static void serviceException(HttpServletRequest request, HttpServletResponse response, Throwable t) throws IOException, ServletException {
+		boolean rtl = isErrorPageRTL(request, response);
+		String lang = getErrorPageLang(request, response);
+    	serviceException(request, response, t, lang, rtl);
+    }
     public static void serviceException(HttpServletRequest request, HttpServletResponse response, Throwable t, String lang, boolean isRTL) throws IOException, ServletException {
-        response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+		response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         response.setContentType( "text/html" ); //$NON-NLS-1$
 
         PrintWriter writer = new PrintWriter(new OutputStreamWriter(response.getOutputStream(),"utf-8")); 

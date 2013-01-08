@@ -96,9 +96,7 @@ public class ProfileService extends BaseService {
 		userId = subscriber.getSubscriberId(endpoint);
 		if (StringUtil.isEmpty(userId)) {
 			logger.log(Level.ALL, Messages.InvalidValue_1);
-			// TODO Add check here to see if it has already authenticated or not. If not, then dont throw the
-			// exception.
-			// throw new IllegalArgumentException(Messages.InvalidValue_1);
+			return null;
 		}
 		logger.log(Level.FINEST, Messages.ProfileInfo_3 + userId);
 		return getProfile(userId, true);
@@ -122,7 +120,7 @@ public class ProfileService extends BaseService {
 		}
 		if (StringUtil.isEmpty(userId)) {
 			logger.log(Level.ALL, Messages.InvalidValue_1);
-			// throw new IllegalArgumentException(Messages.InvalidArgument_6);
+			return null;
 		}
 		Profile profile = new Profile(userId, this);
 		if (load) {
@@ -176,10 +174,6 @@ public class ProfileService extends BaseService {
 	private JsonObject getProfileDataFromCache(String userId) {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getProfileDataFromCache", new Object[] { userId });
-		}
-		if (StringUtil.isEmpty(userId)) {
-			// throw new IllegalArgumentException(Messages.InvalidArgument_6);
-			logger.log(Level.ALL, Messages.InvalidValue_1);
 		}
 		JsonObject data = null;
 		if (isEmail(userId)) {

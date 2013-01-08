@@ -17,6 +17,7 @@
 <%@page import="com.ibm.sbt.services.client.connections.files.FileService"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
+<%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.model.FileEntry"%>
 <%@page 
 	language="java" contentType="text/html; charset=ISO-8859-1"
@@ -29,11 +30,17 @@
           
 <body>	
 	<%
+	try {
 				FileService service = new FileService();
 				String fileId =  Context.get().getProperty("sample.fileId");
 				out.println("<b> UnLocking File</b>" + fileId); 	
 				service.unlock(fileId);
 				out.println("<br> File UnLock Status : " + service.FileStatus ); 
+		}catch (Throwable e) {
+			out.println("<pre>");
+			e.printStackTrace(new PrintWriter(out));
+			out.println("</pre>");	
+		}					
 	%>
 	 <br>
 </body>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xc:ccLayout navigationPath="/Manage/SnippetsMine">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftManage id="ccLeftMenu"></xc:LeftManage>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:div style="margin: -20px 0px 0px -25px; padding: 20px 0px 0px 25px; background: white">
+			<xe:dynamicContent id="dynp" defaultFacet="view"
+				useHash="true" partialEvents="true">
+				<xp:this.facets>
+					<xp:panel xp:key="view" id="mainPanel">
+						<xc:ccManageActionBar
+							viewName="AllSnippetsByAuthor">
+						</xc:ccManageActionBar>
+						<br />
+						<xe:dataView id="dataView1" var="viewEntry"
+							collapsibleCategory="true" collapsibleRows="true" rows="15"
+							showCheckbox="true" style="margin-left: 25px"
+							showHeaderCheckbox="true" columnTitles="true">
+							<xe:this.data>
+								<xp:dominoView var="view1"
+									viewName="AllSnippetsByAuthor"
+									categoryFilter="#{javascript:userBean.commonName}">
+								</xp:dominoView>
+							</xe:this.data>
+							<xp:this.facets>
+								<xp:pager layout="Previous Group Next" id="pager2"
+									xp:key="pagerTopRight" partialRefresh="true" partialExecute="true">
+								</xp:pager>
+							</xp:this.facets>
+							<xe:this.summaryColumn>
+								<xe:viewSummaryColumn columnName="Name"
+									columnTitle="Name">
+									<xe:this.href><![CDATA[javascript:XSP.showContent("#{id:dynp}","form",{action:'editDocument',documentId:'#{javascript:viewEntry.getNoteID()}'})]]></xe:this.href>
+								</xe:viewSummaryColumn>
+							</xe:this.summaryColumn>
+						</xe:dataView>
+					</xp:panel>
+					<xp:panel xp:key="form" id="panel2">
+						<xc:ccManageForm></xc:ccManageForm>
+					</xp:panel>
+				</xp:this.facets>
+			</xe:dynamicContent>
+		</xp:div>
+	</xc:ccLayout>
+</xp:view>

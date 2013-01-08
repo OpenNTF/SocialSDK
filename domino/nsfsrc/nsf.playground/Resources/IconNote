@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<note default='true' class='icon' xmlns='http://www.lotus.com/dxl' version='9.0'
+ replicaid='85257AA80077A28B'>
+<noteinfo noteid='122' unid='AE15BD165446EE0B852579F0005C6590' sequence='107'>
+<created><datetime dst='true'>20120430T124913,12-04</datetime></created>
+<modified><datetime>20121104T143444,82-05</datetime></modified>
+<revised><datetime dst='true'>20121031T182850,86-04</datetime></revised>
+<lastaccessed><datetime>20121104T143444,82-05</datetime></lastaccessed>
+<addedtofile><datetime>20121104T143444,82-05</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name><name>CN=sbaadmin/O=renovations</name><name
+>CN=Philippe Riand/OU=Westford/O=IBM</name><name>CN=sbaadmin/O=renovations</name></updatedby>
+<item name='IconBitmap' summary='true'>
+<rawitemdata type='6'>
+AiAgAQAA///////wD///gAH//gAAf/wAAD/4AAAf8AAAD+AAAAfgAAAHwAAAA8AAAAPAAAADgAAA
+AYAAAAGAAAABgAAAAYAAAAGAAAABgAAAAYAAAAHAAAADwAAAA8AAAAPgAAAH4AAAB/AAAA/4AAAf
+/AAAP/4AAH//gAH///AP//////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAiIiIiAAAAAAAAAAAAAAI
+jPZmZm/IgAAAAAAAAAAIjGZmZmZmZsiAAAAAAAAAjGZmZmZmZmZmyAAAAAAACMZmZmZmZmZmZmyA
+AAAAAIxmZmZmZmZmZmZmyAAAAAjGZmZmZmZmZmZmZmyAAAAIZmbyL2byL2byL2ZmgAAAjGZmIiJm
+IiJmIiJmZsgAAIZmZiIiZiIiZiIiZmZoAADGZmYiImYiImYiImZmbAAI9mZmIiJmIiJmIiJmZm+A
+CGZmZiIiZiIiZiIiZmZmgAhmZmYiImYiImYiImZmZoAIZmZmIiJmIiJmIiJmZmaACGZvIiIiZiIi
+ZiIiIvZmgAhmYiIiImYiImYiIiImZoAIZm8iIi9m8i9m8iIi9maACPZmZmZmZmZmZmZmZmZvgADG
+ZmbyL2byL2byL2ZmbAAAj2ZmIiJmIiJmIiJmZvgAAIxmZiIiZiIiZiIiZmbIAAAI9mbyL2byL2by
+L2ZvgAAACMZmZmZmZmZmZmZmbIAAAACMZmZmZmZmZmZmZsgAAAAACMZmZmZmZmZmZmyAAAAAAACM
+9mZmZmZmZm/IAAAAAAAACIz2ZmZmZm/IgAAAAAAAAAAIiMZmZmyIgAAAAAAAAAAAAACIiIiIAAAA
+AAAAUEECICABAAD/////+A4DgA==
+</rawitemdata></item>
+<item name='$CSSExpires'><text>1</text></item>
+<item name='$FileExpires'><text>1</text></item>
+<item name='$ImageExpires'><text>1</text></item>
+<item name='$JSExpires'><text>1</text></item>
+<item name='$Flags'><text>J?!</text></item>
+<item name='$FlagsNoRefresh'><text/></item>
+<item name='$DBTheme'><text>oneuiv2.1</text></item>
+<item name='$TITLE'><text>Social Business Toolkit - Playground</text></item>
+<item name='$DefaultXPage'><text>Home.xsp</text></item>
+<item name='$DefaultClientXPage'><text>Home.xsp</text></item>
+<item name='$Daos'><text>0</text></item></note>
+

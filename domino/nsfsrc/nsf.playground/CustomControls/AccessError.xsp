@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	<xp:table>
+		<xp:tr>
+			<xp:td>
+				<xp:span style="font-size:22pt;color:rgb(255,0,0)">Access Error</xp:span>
+				<xp:br />
+				<xp:br />
+				<xp:span style="font-size:12pt;font-weight:bold">You must be a manager to access this page.</xp:span>
+				<xp:br />
+				<xp:span style="font-size:12pt;font-weight:bold">Please log in as an authorized user.</xp:span>
+			</xp:td>
+		</xp:tr>
+	</xp:table>
+</xp:view>

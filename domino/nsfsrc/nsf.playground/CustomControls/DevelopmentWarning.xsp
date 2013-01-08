@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	<xp:div style="font-weight:bold;font-style:italic">
+		<xp:image url="/warning.png" id="image1"></xp:image>
+		There is currently some development work being done that can
+		result to application instability or strange behaviors in this instance!
+		<xp:image url="/warning.png" id="image2"></xp:image>
+	</xp:div>
+</xp:view>

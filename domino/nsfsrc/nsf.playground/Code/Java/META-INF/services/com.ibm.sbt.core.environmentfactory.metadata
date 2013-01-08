@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="85257AA80077A28B" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="15a" sequence="10" unid="E9F057D54B74B0E185257A9500751086">
+<created><datetime dst="true">20121012T171839,42-04</datetime></created>
+<modified><datetime>20121127T104454,30-05</datetime></modified>
+<revised><datetime>20121127T104454,29-05</datetime></revised>
+<lastaccessed><datetime>20121127T104454,30-05</datetime></lastaccessed>
+<addedtofile><datetime>20121104T143451,38-05</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name><name>CN=sbaadmin/O=renovations</name><name>CN=Philippe Riand/OU=Westford/O=IBM</name><name>CN=sbaadmin/O=renovations</name><name>CN=Philippe Riand/OU=Westford/O=IBM</name><name>CN=sbaadmin/O=renovations</name><name>CN=Philippe Riand/OU=Westford/O=IBM</name></updatedby>
+<wassignedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></wassignedby>
+<item name="$Flags"><text>34567Cg~[</text></item>
+<item name="$TITLE"><text>META-INF/services/com.ibm.sbt.core.environmentfactory</text></item>
+<item name="$DesignerVersion"><text>8.5.4</text></item>
+
+
+<item name="$FileNames" sign="true"><text>META-INF/services/com.ibm.sbt.core.environmentfactory</text></item></note>

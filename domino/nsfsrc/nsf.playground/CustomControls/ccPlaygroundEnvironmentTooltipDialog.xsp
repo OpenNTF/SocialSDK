@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xe:tooltipDialog id="envTooltipDialog" title="Environment">
+		<xp:panel style="max-width: 450px; margin-left:10px; margin-right: 5px;">
+			<xp:this.data>
+				<xp:dominoDocument var="document1"
+					formName="Environment" action="openDocument">
+					<xp:this.documentId><![CDATA[#{javascript:var e = dataAccess.getEnvironment(sessionScope.environment)
+return e!=null ? e.getNoteID() : null}]]></xp:this.documentId>
+					<xp:this.postOpenDocument><![CDATA[#{javascript:if(sessionScope.environment==dataAccess.CUSTOM) {
+	var env = dataAccess.getCustomEnvironment();
+	document1.replaceItemValue("Name",env.getName());
+	document1.replaceItemValue("Description",env.getDescription());
+}
+}]]></xp:this.postOpenDocument>
+				</xp:dominoDocument>
+			</xp:this.data>
+			<xp:text escape="true" id="computedField1" value="#{document1.Name}"
+				style="font-weight:bold;font-style:italic">
+			</xp:text>
+			<br />
+			<xp:inputRichText id="inputRichText1" value="#{document1.Description}"
+				readonly="true">
+			</xp:inputRichText>
+		</xp:panel>
+	</xe:tooltipDialog>
+</xp:view>

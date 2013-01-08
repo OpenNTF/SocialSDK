@@ -1,0 +1,315 @@
+/* Copyright IBM Corp. 2012  All Rights Reserved.*/
+
+/*Getting Started page left-to-right styles*/
+
+/*NOTE: .dijit_a11y styles are for high contrast mode style adjustments*/
+
+/*****RESET*****/
+article, aside, footer, header, hgroup,  nav, section{display:block;}/*html5 elements*/
+
+img {border: none;}
+
+/***BODY**/
+.gsMain{margin-top:20px;}/*this is a wrapper around the content area of each tab. The wrapper for each content area of the accordion is gsContent, defined in the SECTIONS section.*/
+
+/*general elements.*/
+
+a{
+	color: #1970B0;
+	text-decoration:none;
+}
+
+a:hover, a:focus, a:active{
+	text-decoration:underline;
+}
+  
+.gsMeta{/*for meta text*/
+	color:#777;	
+}
+
+.gsIcons{
+	font-size:12px;
+	font-weight:bold;
+}
+
+.gsIcons a{
+	display:inline-block; /*this and margin-bottom are to keep icons looking good when they wrap*/
+	margin-right:10px;
+	margin-bottom:10px;
+	white-space: nowrap;
+}
+
+.gsIcons img{
+	margin-right:5px;
+	margin-top:-3px;/*images in html5 have an invisible 4px descender.  This helps to fix alignment, because none of the standard vertical-align properties will work on their own*/
+	vertical-align:middle;
+}
+
+.gsButton{/*these styles are pulled from Lotus One UI*/
+	margin: 0 4px 3px 1px;
+    padding: 5px 15px;
+    text-shadow: 0 1px 1px #FFFFFF;
+    background-color: #E7E7E7;
+    background-image: -moz-linear-gradient(center top , #EDEDED 0%, #E1E1E1 100%);
+    border: 0 none;
+    -moz-border-collapse: separate;
+    -moz-border-radius: 3px;
+    -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+    color: #333;
+    font-family: Arial,Helvetica,sans-serif;
+    font-weight: bold;
+    font-size: 0.9em;
+    text-align: center;
+    cursor: pointer;
+}
+
+.gsButton:hover, .gsButton:focus, .gsButton:active{
+	-moz-box-shadow: 0 2px 1px rgba(0, 0, 0, 0.5);
+	color:#000;
+}
+
+.gsList{/*we add a class to lists that show in the UI as actual lists, in case we ever use the ul tag elsewhere as a semantic container of elements*/
+	list-style-type:none; /*hide bullets, we will be using a custom bullet*/
+	margin:-5px 0 0 0;padding:0;/*the negative margin aligns the list with the headings in the other columns*/
+}
+
+.gsList li{
+	margin:0;
+	padding:5px 0 5px 22px;
+	background:left 7px url(home_arrow.png) no-repeat; /*custom bullet*/
+}
+
+.gsList li.home{
+	background-image:url(home_settings.png);
+}
+
+
+/*turn the bullets back on in high contrast mode*/
+.dijit_a11y .gsList{
+	list-style-type:disc;
+	margin-left:15px;
+}
+
+.dijit_a11y .gsList li{
+	padding-left:0;
+}
+
+
+/*SECTIONS*/
+/*sections are in each accordion panel or the whole Quick Links content area*/
+.gsSections{/*this is only used for the What's New tab, which has a main area (section) and a side bar*/
+	display:table-cell;
+	padding-right:20px;
+}
+
+.gsSidebar{
+	display:table-cell;
+	width:25%;
+	padding:0 20px;
+    border-left:1px dotted #ccc;
+}    
+
+.gsContent{
+    display:table;
+    width:100%;
+    color:#444;
+}
+
+.gsRule{
+	margin: 15px 0 15px 0;
+	border-top:1px dotted #ccc;
+}
+
+.gsTwoColumn{/*an additional class added along with gsColumn whenever we want the column to span the width of 2 columns*/
+	width:66%;
+}
+
+.gsColumn {
+	margin: 20px 20px 20px 20px;
+}		
+
+.gsColumn h2, .gsColumn h3{/*Quick Links uses h2 tags, the other tabs use h3 (because the accordion headers are level 2)*/
+	margin:0;padding:0;
+	font-size:14px;
+	color:#000;
+}
+
+/*tundra THEME OVERRIDES FOR DOJO CONTROLS*/
+/*the tundra class goes on the body tag of the page*/
+/*tabs*/
+
+.tundra .dijitTabContainerTop-tabs{/*starts 4 levels in, wraps all the tabs*/
+	border-top:1px solid #add6e2;
+	border-bottom:1px solid transparent;
+	background-color: rgba(255, 255, 255, 0.2);
+}
+
+.tundra .dijitTabContainerTop-tabs .dijitTab{/*top level of a tab*/
+	padding-top:0;
+	top:0;
+}
+
+.tundra .dijitTab:first-child{/*proper alignment of the first tab*/
+	padding-left:35px;
+}
+
+.tundra .dijitTabContainerTop-tabs .dijitTabInnerDiv,
+.tundra .dijitTabContainerTop-tabs .dijitTabContent{
+	background-color:transparent;
+	background-image:none;
+	border-width:0;
+	font-weight:bold;
+	-moz-border-radius:0;
+}
+
+.tundra .dijitTabInnerDiv  {/*where tundra defines the text color*/
+	color:#fff !important; /*keeps the text color on hover*/
+	-moz-box-shadow:none !important;
+}
+
+.tundra .dijitTabContainerTop-tabs .dijitTabContent{
+	padding: 15px;
+	min-width:0;
+}
+
+/*selected tab*/
+.tundra .dijitTabChecked .dijitTabContent{/*where tundra defines the checked text color*/
+	color:#fff;
+}
+
+.dijit_a11y .dijitTabChecked .dijitTabContent{
+	border:1px solid;
+}
+
+.tundra .dijitTabContainerTop-tabs .dijitTabChecked .dijitTabContent,
+.tundra .dijitTabContainerTop-tabs .dijitTabContent:hover{
+	background-color:#012d41;
+	padding: 15px;
+	-moz-box-shadow: inset 3px 3px 10px rgba(0, 0, 0, .3);
+}
+
+
+/*Best Practices sub tabs*/
+
+.tundra .gsSubTabs{/*this is assigned to the content pane of the sub tabs*/
+	margin:0 -35px; /*this pulls tabs wide outside of outer tab content pane padding*/
+}
+
+.tundra .gsSubTabs .dijitTabContainer{/*top level of tabs + container*/
+	height:auto !important /*overrides calculated, inline style height*/
+}
+
+/*tab overlay*/
+/*the styles in the next two declarations are for getting the tab overlaying (on top of the content panel) to work so the selected tab bleeds into the content area.  Key is overriding the inline top style so we can use bottom instead and setting overflow to visible*/
+.tundra .gsSubTabs .dijitTabListContainer-top{/*2nd level*/
+	background: #fff;
+	background: -moz-linear-gradient(top, #ffffff 0%, #ececec 100%);
+	border-bottom:1px solid #ccc;
+	overflow:visible;
+} 
+
+.tundra .gsSubTabs .dijitTabListWrapper{/*this is the absolutely positioned 3rd-level div*/
+	top:auto !important;/*cancel out inline styles*/
+	bottom:-1px;	
+}
+/*end tab overlay*/
+
+.tundra .gsSubTabs .dijitTabContainerTop-tabs{/*4 levels in, need to override styles set for top-level tabs*/
+	border-top-width:0;
+	border-bottom-width:0;
+	background-color:none;
+}
+
+.tundra .gsSubTabs .dijitTabInnerDiv, 
+.tundra .gsSubTabs .dijitTabContainerTop-tabs .dijitTabChecked .dijitTabContent  { /*tab text*/
+	color:#5e5d5c !important;
+	text-transform:uppercase;
+	font-size:11px;
+	font-weight:bold;
+}
+
+.tundra .gsSubTabs .dijitTabContainerTop-tabs .dijitTabContent,
+.tundra .gsSubTabs .dijitTabContainerTop-tabs .dijitTabContent:hover{
+	padding: 10px 17px;
+}
+
+.tundra .gsSubTabs .dijitTabContainerTop-tabs .dijitTabContent:hover{/*change color on hover and cancel out hover effect of top level tabs*/
+	color:#000;
+	background-color:transparent;
+	border-width:0;
+	-moz-box-shadow:none;
+}
+
+/*selected tab*/
+.tundra .gsSubTabs .dijitTabContainerTop-tabs .dijitTabChecked .dijitTabContent{
+	color:#000 !important;
+	background-color:#fff !important;/*so it doesn't get canceled out on hover*/
+	border-width:1px !important;
+	border-color:#ccc #ccc #fff #ccc;
+	-moz-box-shadow:none;
+}
+
+/*tab content pane*/
+.tundra .dijitTabPaneWrapper{
+	border-width:0;
+}
+
+.tundra .dijitTabPaneWrapper .dijitContentPane{
+	border-width:0 !important;
+	padding:0 35px 10px 0;
+}
+
+.tundra .dijitTabPaneWrapper .gsSubTabs.dijitContentPane{
+	padding-top:5px; /*this is to collapse the padding for the content pane that has the sub tabs*/
+}
+
+/* accordion */
+.tundra .dijitAccordionContainer{
+	border-width:0;
+	margin-top:-20px;
+}
+.tundra .dijitAccordionContainer .dijitAccordionChildWrapper,
+.tundra .dijitAccordionInnerContainer{
+	border-width:0 !important; /*important keeps borders from showing up on hover*/
+	-moz-box-shadow:none; /*this was showing up on hover, too*/
+	margin:-1px;padding:1px 0; /*getting rid of margins on non-relevant divs, and prevent margin collapsing*/
+}
+.tundra .dijitAccordionTitleSelected {
+	border-bottom:0;
+}
+.tundra .dijitContentPane{
+	height:auto !important; /*overrides calculated width inline style which was throwing up a scrollbar once borders were removed*/
+}
+
+.tundra .dijitAccordionInnerContainer{
+	background-color:transparent !important;
+}
+
+.tundra .dijitAccordionInnerContainer .dijitAccordionTitle{
+	padding:15px 7px 15px 20px;
+	background:url(home_section_closed.png) left 50% no-repeat; /*the closed section twisty*/
+	font-size:22px;
+	border-top:1px dotted #ccc;
+	color:#000 !important; /*important keeps the color from changing on hover*/
+}
+
+.tundra .dijitAccordionInnerContainer .gsColumn:first-child{
+	border-left-width:0;
+}
+
+.tundra .dijitAccordionInnerContainer:first-child .dijitAccordionTitle{
+	border-top-width:0;
+}
+
+.tundra .dijitAccordionInnerContainerHover .dijitAccordionTitle{
+	background-image:url(home_section_closed_hover.png);/*the hover twisty for closed sections*/
+}
+
+.tundra .dijitAccordionInnerContainerSelected .dijitAccordionTitle,
+.tundra .dijitAccordionInnerContainerSelectedHover .dijitAccordionTitle{
+	background-image:url(home_section_open.png); /*the open section twisty*/
+}
+
+.tundra .dijitAccordionInnerContainer .dijitContentPane{
+	padding:0 0 20px 0;
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	<style>
+		.tundra .dijitBorderContainer-dijitContentPane { padding: 0px; }
+		.tundra .dijitBorderContainer-child { padding: 0px; border-style: none; top: 0px; left: 0px }
+		.tundra .dijitTabContainerTop-container { border-style: none; top: 0px; left: 0px }
+		.tundra .dijitTabContainerTopStrip { border-style: none; top: 0px; left: 0px }
+		.tundra .dijitTabContainerTop-dijitContentPane { padding: 5px 0px 5px 0px; }
+		.lotusui .lotusContent { padding-top: 0px; padding-right: 0px; padding-left: 0px; border: none; }
+		.lotusui .lotusMain { margin: 5px 0px 0px 0px; }
+		.CodeMirror { font-size: 10pt; width: 100%; height: 100%; }
+		.CodeMirror-scroll { width: 100%;height: 100%; }
+	</style>	
+</xp:view>

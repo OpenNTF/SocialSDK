@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom" dojoTheme="true">
+
+	<xp:this.afterPageLoad><![CDATA[#{javascript:view.setPageTitle("Social Business Toolkit - Playground")}]]></xp:this.afterPageLoad>
+
+	<xe:keepSessionAlive id="keepSessionAlive1"></xe:keepSessionAlive>
+	<xc:DevelopmentWarning loaded="false"></xc:DevelopmentWarning>
+	<xc:SSLWarning loaded="${javascript:facesContext.getExternalContext().getRequest().getScheme()!='https'}"></xc:SSLWarning>
+	<xe:applicationLayout id="appLayout">
+		<xe:this.facets>
+			<xp:callback xp:key="LeftColumn" facetName="LeftColumn"
+				id="callback1">
+			</xp:callback>
+			<xp:span xp:key="PlaceBarName" id="callback2"
+				style="display:inline-block; vertical-align:middle;font-style:italic;font-weight:bold;padding-left:2.0em;padding-top:12.0px">
+				<span id="CurrentLabel"></span>
+			</xp:span>
+			<xp:callback xp:key="PlaceBarActions"
+				facetName="PlaceBarActions" id="callback3">
+			</xp:callback>
+		</xe:this.facets>
+		<xe:this.configuration>
+			<xe:applicationConfiguration legalLogoAlt="IBM Corp."
+				navigationPath="${javascript:compositeData.navigationPath}"
+				defaultNavigationPath="${javascript:compositeData.defaultNavigationPath}"
+				productLogoHeight="29px" productLogoWidth="77px"
+				legalText="(c) 2012 IBM Corp."
+				placeBarName="#{javascript:compositeData.title}"
+				productLogoStyle="margin-left:-15px">
+				<xe:this.bannerApplicationLinks>
+					<xe:basicLeafNode label="Home" selected="true"
+						href="/">
+					</xe:basicLeafNode>
+					<xe:basicLeafNode label="developerWorks"
+						href="https://www.ibm.com/developerworks/mydeveloperworks/groups/service/html/communityview?communityUuid=0f357879-ccee-4927-98c1-7bb88d5dc81f&amp;lang=en">
+					</xe:basicLeafNode>
+					<xe:basicLeafNode label="Greenhouse"
+						href="https://greenhouse.lotus.com/wpsgh/wcm/connect/lotus+greenhouse/lotus+greenhouse+next+site/home/labs/ibm+social+business+toolkit">
+					</xe:basicLeafNode>
+					<xe:basicLeafNode label="OpenNTF"
+						href="http://www.openntf.org/">
+					</xe:basicLeafNode>
+					<xe:basicLeafNode label="Application Development Wiki"
+						href="http://www-10.lotus.com/ldd/appdevwiki.nsf">
+					</xe:basicLeafNode>
+					<xe:basicLeafNode label="IBM Connections Wiki"
+						href="http://www-10.lotus.com/ldd/lcwiki.nsf">
+					</xe:basicLeafNode>
+					<xe:basicLeafNode label="IBM SmartCloud Wiki"
+						href="http://www-10.lotus.com/ldd/bhwiki.nsf">
+					</xe:basicLeafNode>
+				</xe:this.bannerApplicationLinks>
+				<xe:this.bannerUtilityLinks>
+					<xe:userTreeNode></xe:userTreeNode>
+					<xe:loginTreeNode></xe:loginTreeNode>
+				</xe:this.bannerUtilityLinks>
+				<xe:this.placeBarActions>
+					<xe:pageTreeNode
+						loaded="${javascript:userBean.accessLevel>=4}"
+						page="/ManageSnippetsByCategory.xsp" label="Manage">
+					</xe:pageTreeNode>
+				</xe:this.placeBarActions>
+				<xe:this.titleBarTabs>
+					<xe:pageTreeNode selection="/Home" label="Home"
+						page="/Home.xsp">
+					</xe:pageTreeNode>
+					<xe:pageTreeNode label="Playground"
+						page="/Playground.xsp" selection="/Playground">
+					</xe:pageTreeNode>
+					<xe:pageTreeNode label="API Explorer" loaded="false"
+						page="/ApiExplorer.xsp" selection="/ApiExplorer">
+					</xe:pageTreeNode>
+				</xe:this.titleBarTabs>
+			</xe:applicationConfiguration>
+		</xe:this.configuration>
+		<xp:callback></xp:callback>
+	</xe:applicationLayout>
+</xp:view>

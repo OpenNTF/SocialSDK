@@ -18,6 +18,7 @@
 <%@page import="com.ibm.sbt.services.client.connections.files.model.FileEntry"%> 
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%> 
+<%@page import="java.io.PrintWriter"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Iterator"%> 
 
@@ -32,6 +33,7 @@
 
 <body>	 
 	<%
+	try {		
 			FileService fileService = new FileService();
 				
 				out.println("<b> Files Shared By Me : " + "</b>");	
@@ -54,6 +56,11 @@
 				{
 					out.println("No Results");
 				}
+		}catch (Throwable e) {
+			out.println("<pre>");
+			e.printStackTrace(new PrintWriter(out));
+			out.println("</pre>");	
+		}					
 		%>
 	 <br>
 </body>

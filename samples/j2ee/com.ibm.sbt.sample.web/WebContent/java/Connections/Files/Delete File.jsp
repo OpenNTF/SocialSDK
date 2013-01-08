@@ -17,6 +17,7 @@
 <%@page import="com.ibm.sbt.services.client.connections.files.FileService"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
+<%@page import="java.io.PrintWriter"%>
 <%@page 
 	language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -28,14 +29,18 @@
           
 <body>	
 	<%
-	
+	try {
 				FileService service = new FileService(); 
 				String fileId = Context.get().getProperty("sample.deleteFileId");
 				out.println("<b> Deleting File </b>" + fileId);	
 			 	service.delete(fileId);
 								
 				out.println("<br> File Delete Status : " + service.FileStatus ); 
-								
+		}catch (Throwable e) {
+			out.println("<pre>");
+			e.printStackTrace(new PrintWriter(out));
+			out.println("</pre>");		
+		}						
 	%>
 	 <br>
 </body>

@@ -9,9 +9,9 @@ import com.ibm.commons.runtime.RuntimeFactory;
 
 public class TestRuntimeFactory extends RuntimeFactory {
 
-	private TestContext		testingContext;
-	private TestApplication	app;
-	RuntimeFactory			prev;
+	private TestContext testingContext;
+	private TestApplication app;
+	RuntimeFactory prev;
 
 	public TestRuntimeFactory() {
 		super();
@@ -51,7 +51,8 @@ public class TestRuntimeFactory extends RuntimeFactory {
 	}
 
 	@Override
-	public synchronized Context initContext(Application application, Object request, Object response) {
+	public synchronized Context initContext(Application application,
+			Object request, Object response) {
 		if (testingContext == null) {
 			testingContext = new TestContext(app);
 		}
@@ -63,18 +64,26 @@ public class TestRuntimeFactory extends RuntimeFactory {
 	@Override
 	public void destroyContext(Context ctx) {
 		// TODO Auto-generated method stub
-		Logger.getAnonymousLogger().info("Implement this" + Thread.currentThread().getStackTrace()[2]);
+		Logger.getAnonymousLogger().info(
+				"Implement this" + Thread.currentThread().getStackTrace()[2]);
 	}
 
 	@Override
-	public Context createContext(Application application, Object request, Object response) {
+	public Context createContext(Application application, Object request,
+			Object response) {
 		// TODO Auto-generated method stub
-		Logger.getAnonymousLogger().info("Implement this" + Thread.currentThread().getStackTrace()[2]);
+		Logger.getAnonymousLogger().info(
+				"Implement this" + Thread.currentThread().getStackTrace()[2]);
 		return null;
 	}
 
 	public void restore() {
 		set(prev);
+	}
+
+	@Override
+	public Context initContext(Context context) {
+		return context;
 	}
 
 }

@@ -42,14 +42,14 @@ public class TestContext extends Context {
 	}
 
 	@Override
-	public Object getHttpRequest() {
+	public Object getRequest() {
 		
 		if (req == null)  Logger.getAnonymousLogger().severe("Call Context.init(...) for this test or set request manually");
 		return req;
 	}
 
 	@Override
-	public Object getHttpResponse() {
+	public Object getResponse() {
 		if (resp == null)  Logger.getAnonymousLogger().severe("Call Context.init(...) for this test or set response manually");	
 		return resp;
 	}

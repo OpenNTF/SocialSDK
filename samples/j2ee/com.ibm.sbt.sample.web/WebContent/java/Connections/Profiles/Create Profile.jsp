@@ -29,19 +29,27 @@
 	<body>
 	<%					
 		ProfileAdminService service = new ProfileAdminService(); //If no endpoint is specified, it uses default end point i.e connections
-		Profile profile = service.getProfile("testUser39@renovations.com", false);
+		Profile profile = service.getProfile("testUser61@renovations.com", false);
+		String email = "testUser61@renovations.com";
 
 		profile.set("guid", "testUserD9A04-F2E1-1222-4825-7A700026E92C");
-		profile.set("email", "testUser39@renovations.com");
+		profile.set("email", email );
 		profile.set("uid", "testUser");
-		profile.set("distinguishedName", "CN=testUser39 def,o=renovations");
-		profile.set("displayName", "testUser39");
+		profile.set("distinguishedName", "CN=testUser61 def,o=renovations");
+		profile.set("displayName", "testUser61");
 		profile.set("givenNames", "testUser");
 		profile.set("surname", "testUser");
 		profile.set("userState", "active");
 
-		service.createProfile(profile);
-	
+		boolean success = service.createProfile(profile);
+		if(success){
+			profile = service.getProfile(email);
+			out.println("User Profile created with Name : "+ profile.getDisplayName());
+		}
+		else{
+			out.println("error while trying to create Profile");
+		}
+		
 	%>
 	</body>
 </html>

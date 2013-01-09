@@ -2,9 +2,6 @@
   <modelVersion>4.0.0</modelVersion>
   <artifactId>com.ibm.sbt.core.test</artifactId>
   <packaging>eclipse-test-plugin</packaging>
-  <properties>
-    <maven.test.failure.ignore>true</maven.test.failure.ignore>
-  </properties>
   <parent>
     <groupId>com.ibm.sbt.test</groupId>
     <artifactId>test.parent</artifactId>

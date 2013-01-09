@@ -124,42 +124,44 @@ public class BasicAuthCredsHandler extends AbstractServiceHandler {
 	
 	protected void generateCloseScript(HttpServletRequest req, HttpServletResponse resp, String authentication) throws ServletException, IOException {
     	String mode = req.getParameter(LOGIN_UI);
-		String redirectToLogin = req.getParameter(REDIRECT_URL_TO_LOGIN);    	
-    	PrintWriter pw = resp.getWriter();
-    	try {
-    		pw.println("<html>");
-    		pw.println("<head>");
-    		pw.println("</head>");
-    		pw.println("<body>");
-    		pw.println("<script>");
-			if(StringUtil.isEmpty(mode) || mode.equalsIgnoreCase(MODE_MAINWINDOW)) {//MainWindow mode
-				String redirectURL = URLDecoder.decode(req.getParameter(REDIRECT_URL),"utf-8");
-				if(authentication.equals(AUTH_DECLINED)){
-    				pw.println("window.location.href = '"+redirectToLogin+"&redirectURL="+redirectURL+"&loginUi="+mode+"&showWrongCredsMessage=true'");
-    			}else if(authentication.equals(AUTH_ACCEPTED)){
-    				pw.println("  window.location.href = '"+redirectURL+"';");
-    			}
-			} else if(mode.equalsIgnoreCase(MODE_POPUP)) {//Popup Mode
-    			pw.println("  if (window.opener && !window.opener.closed) {");
-    			if(authentication.equals(AUTH_DECLINED)){
-    				pw.println("window.location.href = '"+redirectToLogin+"&redirectURL=empty&loginUi="+mode+"&showWrongCredsMessage=true'");
-    			}else if(authentication.equals(AUTH_ACCEPTED)){
-    				//pw.println("window.opener.sbt.Endpoints['"+req.getParameter(ENDPOINT_NAME)+"'].callback();");
-    				pw.println("window.opener.sbt.callback();");
-    				pw.println("delete window.opener.sbt.callback;");
-    				pw.println("window.close();");
-    			}
-    			pw.println("}");
-			}
-    		
-    		else {
-    			throw new ServletException(StringUtil.format("Invalid mode {0}", mode));
-    		}
-    		pw.println("</script>");
-    		pw.println("</body>");
-    		pw.println("</html>");
-    	} finally {
-    		pw.flush();
+    	if(mode != null){ //mode is null for dojo dialog LOGIN_UI. No action required in that case. 
+			String redirectToLogin = req.getParameter(REDIRECT_URL_TO_LOGIN);    	
+	    	PrintWriter pw = resp.getWriter();
+	    	try {
+	    		pw.println("<html>");
+	    		pw.println("<head>");
+	    		pw.println("</head>");
+	    		pw.println("<body>");
+	    		pw.println("<script>");
+				if(StringUtil.isEmpty(mode) || mode.equalsIgnoreCase(MODE_MAINWINDOW)) {//MainWindow mode
+					String redirectURL = URLDecoder.decode(req.getParameter(REDIRECT_URL),"utf-8");
+					if(authentication.equals(AUTH_DECLINED)){
+	    				pw.println("window.location.href = '"+redirectToLogin+"&redirectURL="+redirectURL+"&loginUi="+mode+"&showWrongCredsMessage=true'");
+	    			}else if(authentication.equals(AUTH_ACCEPTED)){
+	    				pw.println("  window.location.href = '"+redirectURL+"';");
+	    			}
+				} else if(mode.equalsIgnoreCase(MODE_POPUP)) {//Popup Mode
+	    			pw.println("  if (window.opener && !window.opener.closed) {");
+	    			if(authentication.equals(AUTH_DECLINED)){
+	    				pw.println("window.location.href = '"+redirectToLogin+"&redirectURL=empty&loginUi="+mode+"&showWrongCredsMessage=true'");
+	    			}else if(authentication.equals(AUTH_ACCEPTED)){
+	    				//pw.println("window.opener.sbt.Endpoints['"+req.getParameter(ENDPOINT_NAME)+"'].callback();");
+	    				pw.println("window.opener.sbt.callback();");
+	    				pw.println("delete window.opener.sbt.callback;");
+	    				pw.println("window.close();");
+	    			}
+	    			pw.println("}");
+				}
+	    		
+	    		else {
+	    			throw new ServletException(StringUtil.format("Invalid mode {0}", mode));
+	    		}
+	    		pw.println("</script>");
+	    		pw.println("</body>");
+	    		pw.println("</html>");
+	    	} finally {
+	    		pw.flush();
+	    	}
     	}
     }
     

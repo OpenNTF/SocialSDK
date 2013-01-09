@@ -27,6 +27,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.Ignore;
 import org.junit.Test;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.services.BaseUnitTest;
@@ -37,6 +38,7 @@ import com.ibm.sbt.services.client.activitystreams.model.ActivityStreamEntry;
 
 public class ActivityStreamServiceTest extends BaseUnitTest {
 
+	@Ignore
 	@Test
 	public final void testGetUpdatesFromUser() {
 		try {
@@ -54,6 +56,7 @@ public class ActivityStreamServiceTest extends BaseUnitTest {
 		}
 	}
 
+	@Ignore
 	@Test
 	public final void testGetUpdatesFromCommunity() {
 		try {
@@ -65,7 +68,8 @@ public class ActivityStreamServiceTest extends BaseUnitTest {
 			System.err.println("number of updates from community : " + updates.size());
 
 			for (ActivityStreamEntry asentry : updates) {
-				if (null != asentry.getCommunity()) { // Updates can also come in from news service, ignore those
+				if (null != asentry.getCommunity()) { // Updates can also come in from news service, ignore
+														// those
 					System.err.println("communityid " + asentry.getCommunity().getCommunityName());
 					assertEquals(asentry.getCommunity().getCommunityId(),
 							"b4f12458-3cc2-49d2-9cf3-08d3fcbd81d5");
@@ -77,6 +81,7 @@ public class ActivityStreamServiceTest extends BaseUnitTest {
 		}
 	}
 
+	@Ignore
 	@Test
 	public final void testPostEntry() {
 		try {
@@ -121,6 +126,7 @@ public class ActivityStreamServiceTest extends BaseUnitTest {
 		}
 	}
 
+	@Ignore
 	@Test
 	public final void testSearchForTags() {
 		try {

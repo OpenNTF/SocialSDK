@@ -2,12 +2,12 @@ package com.ibm.sbt.services.client.connections.communities;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import lib.TestEndpoint;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.w3c.dom.Node;
 import com.ibm.commons.xml.DOMUtil;
@@ -30,6 +30,7 @@ public class CommunitiesTest extends TestEndpoint {
 	protected static final String	TEST_COMMUNITY_DESCRIPTION	= "Test Community Description";
 	protected static final String	NEW_COMMUNITY				= "New Community";
 
+	@Ignore
 	@Test
 	public void testLoad() throws Exception {
 
@@ -54,6 +55,7 @@ public class CommunitiesTest extends TestEndpoint {
 		assertEquals(communities.size(), 2);
 	}
 
+	@Ignore
 	@Test
 	public void testCreate() throws Exception {
 
@@ -64,12 +66,12 @@ public class CommunitiesTest extends TestEndpoint {
 		comm.setTitle(NEW_COMMUNITY);
 		comm.setContent(TEST_COMMUNITY_DESCRIPTION);
 
-		
-		comm = svc.createCommunity(comm,true);
+		comm = svc.createCommunity(comm, true);
 		assertEquals("NEW_COMMUNITY", comm.getTitle());
 		assertEquals("TEST_COMMUNITY_DESCRIPTION", comm.getContent());
 	}
 
+	@Ignore
 	@Test
 	public void testCommunity() {
 		// we can also add other tests within the same class; this was added after

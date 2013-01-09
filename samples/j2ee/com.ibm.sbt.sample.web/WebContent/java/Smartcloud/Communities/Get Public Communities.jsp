@@ -14,6 +14,7 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"> 
+<%@page import="java.io.PrintWriter"%>
 <%@page import="java.util.Collection"%>
 <%@page import="com.ibm.sbt.services.client.smartcloud.communities.Community"%> 
 <%@page import="com.ibm.sbt.services.client.smartcloud.communities.CommunityService"%>
@@ -30,6 +31,7 @@
 
 <body>	
 	<%
+		try {
 				CommunityService svc = new CommunityService();
 				out.println("<b> Public Communities</b>");	
 				out.println("<br>");
@@ -43,6 +45,11 @@
 				}else{
 					out.println("No result");
 				}
+		} catch (Throwable e) {
+			out.println("<pre>");
+			e.printStackTrace(new PrintWriter(out));
+			out.println("</pre>");	
+		}
 	%>
 	 <br>
 </body>

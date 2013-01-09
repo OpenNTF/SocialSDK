@@ -14,6 +14,7 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"> 
+<%@page import="java.io.PrintWriter"%>
 <%@page import="java.util.Collection"%>
 <%@page import="com.ibm.sbt.services.client.smartcloud.communities.Member"%> 
 <%@page import="com.ibm.sbt.services.client.smartcloud.communities.CommunityService"%>
@@ -28,20 +29,28 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
-<body>	
+<body>
 	<%
-				CommunityService svc = new CommunityService();
-				String communityUuid = "af20ded8-0daa-45aa-bdd3-0b5829b53581";
-				out.println("<b>Communities Members</b>");	
-				out.println("<br>");
-				Collection<Member<Node>> members = svc.getCommunityMembers(communityUuid);
-				for (Member<Node> member : members) {
-					out.println("<br> - Member name: "+member.get("title")+", ");
-					out.println(member.get("role")+"<br>");
-				}
-				out.println("<br>");
-				out.println("<br> Found "+members.size()+" members");
+		try {
+			CommunityService svc = new CommunityService();
+			String communityUuid = "af20ded8-0daa-45aa-bdd3-0b5829b53581";
+			out.println("<b>Communities Members</b>");
+			out.println("<br>");
+			Collection<Member<Node>> members = svc
+					.getCommunityMembers(communityUuid);
+			for (Member<Node> member : members) {
+				out.println("<br> - Member name: " + member.get("title")
+						+ ", ");
+				out.println(member.get("role") + "<br>");
+			}
+			out.println("<br>");
+			out.println("<br> Found " + members.size() + " members");
+		} catch (Throwable e) {
+			out.println("<pre>");
+			e.printStackTrace(new PrintWriter(out));
+			out.println("</pre>");
+		}
 	%>
-	 <br>
+	<br>
 </body>
 </html>

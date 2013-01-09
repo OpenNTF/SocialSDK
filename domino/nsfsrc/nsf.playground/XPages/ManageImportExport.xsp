@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xc:ccLayout navigationPath="/Manage/ImportExport">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftManage id="ccLeftMenu"></xc:LeftManage>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:div
+			style="margin: -20px 0px 0px -25px; padding: 20px 0px 0px 25px; background: white">
+			<xp:button id="button4" value="New Import Source...">
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script><![CDATA[XSP.openDialog("#{id:importSource}") ]]>
+					</xp:this.script>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:button value="Delete Selected Import Sources" id="button1">
+				<xp:eventHandler event="onclick" submit="true"
+					id="eventHandler2" refreshMode="partial">
+					<xp:this.action>
+						<xp:deleteSelectedDocuments view="dataView1"
+							message="This operation cannot be undone. Do you want to continue?">
+						</xp:deleteSelectedDocuments>
+					</xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+			<br />
+			<xp:messages id="messages1"></xp:messages>
+			<br />
+			<xe:dataView id="dataView1" var="viewEntry"
+				collapsibleCategory="true" collapsibleRows="false" rows="25"
+				showCheckbox="${javascript:userBean.canCreateDocs}" style="margin-left: 25px"
+				collapsibleDetail="false" expandedDetail="true">
+				<xe:this.data>
+					<xp:dominoView var="view1" viewName="AllImportSourcesByType">
+					</xp:dominoView>
+				</xe:this.data>
+				<xp:this.facets>
+					<xp:pager layout="Previous Group Next" id="pager2" xp:key="pagerTopRight"
+						partialRefresh="true" partialExecute="true">
+					</xp:pager>
+					<xp:panel xp:key="detail" id="pager1">
+						<xe:listInline id="listInline2">
+							<xp:link escape="true" text="Import from Source" id="link1"
+								style="margin-left:10.0px">
+								<xp:eventHandler event="onclick" submit="true"
+									refreshMode="complete">
+									<xp:this.action><![CDATA[#{javascript:importSources.importSnippets(viewEntry.getColumnValue('name'));}]]></xp:this.action>
+								</xp:eventHandler>
+							</xp:link>
+							<xp:link escape="true" text="Export" id="link2"
+								style="margin-left:10.0px" loaded="false">
+							</xp:link>
+							<xp:link escape="true" text="Delete Related Entries" id="link3"
+								style="margin-left:10.0px">
+								<xp:eventHandler event="onclick" submit="true"
+									refreshMode="complete">
+									<xp:this.action><![CDATA[#{javascript:importSources.deleteSnippets(viewEntry.getColumnValue('name'));}]]></xp:this.action>
+								</xp:eventHandler>
+							</xp:link>
+						</xe:listInline>
+					</xp:panel>
+				</xp:this.facets>
+				<xe:this.categoryColumn>
+					<xe:viewCategoryColumn columnName="Type">
+						<xe:this.value><![CDATA[#{javascript:var v = viewEntry.getColumnValue("Type")
+if(v=='html') {
+	return "HTML/JavaScript Code Snippets"
+}
+if(v=='api') {
+	return "API Explorer Definition Files"
+}
+return "<unknown>"}]]></xe:this.value>
+					</xe:viewCategoryColumn>
+				</xe:this.categoryColumn>
+				<xe:this.summaryColumn>
+					<xe:viewSummaryColumn columnName="Name">
+						<xe:this.href><![CDATA[javascript:XSP.openDialog("#{id:importSource}",null,{action:'editDocument',documentId:'#{javascript:viewEntry.getNoteID()}'})]]></xe:this.href>
+					</xe:viewSummaryColumn>
+				</xe:this.summaryColumn>
+			</xe:dataView>
+		</xp:div>
+	</xc:ccLayout>
+	<xe:dialog id="importSource" title="Import Source">
+		<xp:panel id="panel1" style="padding: 5px">
+			<xp:this.data>
+				<xp:dominoDocument var="document1" formName="ImportSource">
+					<xp:this.postNewDocument><![CDATA[#{javascript:document1.replaceItemValue("Type","html")
+document1.replaceItemValue("Source","file")}]]></xp:this.postNewDocument>
+				</xp:dominoDocument>
+			</xp:this.data>
+			<xe:formTable id="formTable2" formTitle="Code Snippet"
+				formDescription="Import Source">
+				<xp:this.facets>
+					<xp:panel xp:key="footer" id="panel2">
+						<xp:button value="Save" id="button5">
+							<xp:eventHandler event="onclick" submit="true"
+								refreshMode="complete">
+								<xp:this.action>
+									<xp:actionGroup>
+										<xp:saveDocument var="document1">
+										</xp:saveDocument>
+										<xp:executeScript>
+											<xp:this.script><![CDATA[#{javascript:getComponent("importSource").hide('dataView1')}]]></xp:this.script>
+										</xp:executeScript>
+									</xp:actionGroup>
+								</xp:this.action>
+							</xp:eventHandler>
+						</xp:button>
+						<xp:button value="Cancel" id="button7">
+							<xp:eventHandler event="onclick" submit="false">
+								<xp:this.script><![CDATA[XSP.closeDialog('#{id:importSource}')]]></xp:this.script>
+							</xp:eventHandler>
+						</xp:button>
+					</xp:panel>
+				</xp:this.facets>
+				<xe:formRow id="formRow2" label="Source Type:">
+					<xp:comboBox id="comboBox1" required="true"
+						disableClientSideValidation="true" value="#{document1.Type}">
+						<xp:selectItem itemLabel="HTML/JavaScript Code Snippets"
+							itemValue="html">
+						</xp:selectItem>
+					</xp:comboBox>
+				</xe:formRow>
+				<xe:formRow id="formRow4" label="Source Name:">
+					<xp:inputText id="inputText2" required="true"
+						disableClientSideValidation="true" size="40" value="#{document1.Name}">
+					</xp:inputText>
+				</xe:formRow>
+				<xe:formRow id="formRow5" label="Source:" loaded="false">
+					<xp:inputText id="inputText3" required="true"
+						disableClientSideValidation="true" size="80" value="#{document1.Source}">
+					</xp:inputText>
+				</xe:formRow>
+				<xe:formRow id="formRow1" label="Import Path:">
+					<xp:inputText id="inputText1" required="true"
+						disableClientSideValidation="true" size="80" value="#{document1.Location}">
+					</xp:inputText>
+				</xe:formRow>
+			</xe:formTable>
+			<xe:dumpObject loaded="false" id="dumpObject1" title="document"
+				value="#{document1}" />
+		</xp:panel>
+	</xe:dialog>
+
+</xp:view>

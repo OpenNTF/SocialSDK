@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	<xp:inputTextarea id="htmlEditor" style="width:100%; height:100%">
+	</xp:inputTextarea>
+	<xp:scriptBlock>
+		<xp:this.value><![CDATA[playground.htmlEditor = CodeMirror.fromTextArea(dojo.byId('#{id:htmlEditor}'),
+{
+	mode:"xml",
+	htmlMode: true,
+	lineNumbers: true
+});
+]]></xp:this.value>
+	</xp:scriptBlock>
+</xp:view>

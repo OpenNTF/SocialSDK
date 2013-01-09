@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	<xp:scriptBlock id="scriptBlock1">
+		<xp:this.value><![CDATA[playground._previewFrame = "#{javascript:@AbsoluteUrl(@FullUrl('preview.html'))}";
+playground._loadingFrame = "#{javascript:@AbsoluteUrl(@FullUrl('/loading.html'))}";]]></xp:this.value>
+	</xp:scriptBlock>
+	<iframe name="preview" id="preview" src="#{javascript:@AbsoluteUrl(@FullUrl('preview.html'))}"
+		width="100%" height="350" frameborder="0" scrolling="auto">
+	</iframe>
+</xp:view>

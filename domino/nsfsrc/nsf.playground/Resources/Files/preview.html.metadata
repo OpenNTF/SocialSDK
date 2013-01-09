@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="85257AA80077A28B" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="176" sequence="14" unid="D1389CD42A0385B6852579F300761CAF">
+<created><datetime dst="true">20120503T173005,91-04</datetime></created>
+<modified><datetime>20121105T124543,01-05</datetime></modified>
+<revised><datetime>20121105T124543,00-05</datetime></revised>
+<lastaccessed><datetime>20121105T124543,01-05</datetime></lastaccessed>
+<addedtofile><datetime>20121104T143451,70-05</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name><name>CN=sbaadmin/O=renovations</name><name>CN=Philippe Riand/OU=Westford/O=IBM</name><name>CN=sbaadmin/O=renovations</name><name>CN=Philippe Riand/OU=Westford/O=IBM</name><name>CN=sbaadmin/O=renovations</name><name>CN=Philippe Riand/OU=Westford/O=IBM</name><name>CN=sbaadmin/O=renovations</name><name>CN=Philippe Riand/OU=Westford/O=IBM</name></updatedby>
+<wassignedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></wassignedby>
+<item name="$MimeType" sign="true"><text>text/html</text></item>
+<item name="$Flags"><text>345Cg&gt;Q</text></item>
+<item name="$MimeCharSet" sign="true"><text>UTF-8</text></item>
+<item name="$TITLE" sign="true"><text>preview.html</text></item>
+<item name="$DesignerVersion"><text>8.5.4</text></item>
+
+
+<item name="$FileNames" sign="true"><text>preview.html</text></item></note>

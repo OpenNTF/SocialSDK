@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xe:widgetContainer id="widgetContainer1"
+		titleBarText="Code Snippets" scrollable="true">
+		<xe:this.facets>
+			<xp:panel xp:key="header" id="panel6">
+				<xe:sortLinks id="sortLinks1" style="margin-bottom:5.0px">
+					<xe:this.treeNodes>
+						<xe:basicLeafNode label="By Category"
+							submitValue="bycat">
+						</xe:basicLeafNode>
+						<xe:basicLeafNode label="By Author" submitValue="byauth">
+						</xe:basicLeafNode>
+						<xe:basicLeafNode label="My Snippets"
+							submitValue="mine" rendered="#{javascript:!context.getUser().isAnonymous()}">
+						</xe:basicLeafNode>
+					</xe:this.treeNodes>
+					<xp:eventHandler event="onItemClick" submit="true"
+						refreshMode="partial" refreshId="widgetContainer1">
+						<xe:this.action><![CDATA[#{javascript:var facet = context.getSubmittedValue()
+var dyn = getComponent('dynp')
+dyn.show(facet)}]]></xe:this.action>
+					</xp:eventHandler>
+				</xe:sortLinks>
+			</xp:panel>
+		</xe:this.facets>
+		<xe:this.disableScrollUp><![CDATA[#{javascript:var c = getComponent("dataView1")||getComponent("dataView2")||getComponent("dataView3")
+return c.getFirst()<=0}]]></xe:this.disableScrollUp>
+		<xe:this.disableScrollDown><![CDATA[#{javascript:var c = getComponent("dataView1")||getComponent("dataView2")||getComponent("dataView3")
+var f = c.getFirst()
+var r = c.getRows()
+return f+r>c.getRowCount(f+r+1)}]]></xe:this.disableScrollDown>
+		<xe:dynamicContent id="dynp" defaultFacet="bycat">
+			<xp:this.facets>
+				<xp:panel xp:key="bycat" id="bycat">
+					<xp:div loaded="${javascript:database.isFTIndexed()}" style="margin-top:5.0px">
+						<xp:inputText id="search1">
+							<xp:this.onkeypress><![CDATA[var kc=event.keyCode?event.keyCode:event.which;
+if(kc==13){dojo.byId('#{id:linkSearch1}').click(); return false;}
+return true;]]></xp:this.onkeypress>
+						</xp:inputText>
+						<xp:link escape="true" text="Search" id="linkSearch1">
+							<xp:eventHandler event="onclick" submit="true"
+								refreshMode="partial" refreshId="widgetContainer1">
+							</xp:eventHandler>
+						</xp:link>
+					</xp:div>
+					<xe:dataView id="dataView1" var="viewEntry"
+						collapsibleCategory="true" collapsibleRows="true" rows="25">
+						<xe:this.categoryColumn>
+							<xe:viewCategoryColumn columnName="Category"
+								style="font-size:9pt; font-weight: 600"></xe:viewCategoryColumn>
+						</xe:this.categoryColumn>
+						<xe:this.summaryColumn>
+							<xe:viewSummaryColumn columnName="Name"
+								style="font-size:9pt; font-weight: 400" href="#{javascript:'#snippet='+viewEntry.getUniversalID()}">
+
+							</xe:viewSummaryColumn>
+						</xe:this.summaryColumn>
+						<xe:this.data>
+							<xp:dominoView var="view1" viewName="AllSnippets">
+								<xp:this.search><![CDATA[#{javascript:var c = getComponent("search1")
+return c ? c.getValue() : null}]]></xp:this.search>
+							</xp:dominoView>
+						</xe:this.data>
+					</xe:dataView>
+				</xp:panel>
+				<xp:panel xp:key="byauth" id="panel3">
+					<xp:div loaded="${javascript:database.isFTIndexed()}" style="margin-top:5.0px">
+						<xp:inputText id="search2">
+							<xp:this.onkeypress><![CDATA[var kc=event.keyCode?event.keyCode:event.which;
+if(kc==13){dojo.byId('#{id:linkSearch2}').click(); return false;}
+return true;]]></xp:this.onkeypress>
+						</xp:inputText>
+						<xp:link escape="true" text="Search" id="linkSearch2">
+							<xp:eventHandler event="onclick" submit="true"
+								refreshMode="partial" refreshId="widgetContainer1">
+							</xp:eventHandler>
+						</xp:link>
+					</xp:div>
+					<xe:dataView id="dataView2" var="viewEntry"
+						collapsibleCategory="true" collapsibleRows="true" rows="25">
+						<xe:this.categoryColumn>
+							<xe:viewCategoryColumn columnName="Author"
+								style="font-size:9pt; font-weight: 600"></xe:viewCategoryColumn>
+						</xe:this.categoryColumn>
+						<xe:this.summaryColumn>
+							<xe:viewSummaryColumn columnName="Name"
+								style="font-size:9pt; font-weight: 400" href="#{javascript:'#snippet='+viewEntry.getUniversalID()}" />
+						</xe:this.summaryColumn>
+						<xe:this.data>
+							<xp:dominoView var="view1" viewName="AllSnippetsByAuthor">
+								<xp:this.search><![CDATA[#{javascript:var c = getComponent("search2")
+return c ? c.getValue() : null}]]></xp:this.search>
+							</xp:dominoView>
+						</xe:this.data>
+					</xe:dataView>
+				</xp:panel>
+				<xp:panel xp:key="mine" id="panel5">
+					<xe:dataView id="dataView3" var="viewEntry"
+						collapsibleCategory="true" collapsibleRows="true" rows="25">
+						<xe:this.summaryColumn>
+							<xe:viewSummaryColumn columnName="Name"
+								style="font-size:9pt; font-weight: 400" href="#{javascript:'#snippet='+viewEntry.getUniversalID()}" />
+						</xe:this.summaryColumn>
+						<xe:this.data>
+							<xp:dominoView var="view1" viewName="AllSnippetsByAuthor"
+								categoryFilter="#{javascript:userBean.commonName}">
+
+							</xp:dominoView>
+						</xe:this.data>
+					</xe:dataView>
+				</xp:panel>
+			</xp:this.facets>
+		</xe:dynamicContent>
+		<xp:eventHandler event="onScrollUp" submit="true"
+			refreshMode="partial" refreshId="widgetContainer1">
+			<xp:this.action><![CDATA[#{javascript:var r = getComponent("dataView1")||getComponent("dataView2")||getComponent("dataView3")
+r.setFirst(Math.max(r.getFirst()-r.getRows(),0))}]]></xp:this.action>
+		</xp:eventHandler>
+		<xp:eventHandler event="onScrollDown" submit="true"
+			refreshMode="partial" refreshId="widgetContainer1">
+			<xp:this.action><![CDATA[#{javascript:var r = getComponent("dataView1")||getComponent("dataView2")||getComponent("dataView3")
+r.setFirst(Math.min(r.getFirst()+r.getRows(),r.getRowCount()))}]]></xp:this.action>
+		</xp:eventHandler>
+	</xe:widgetContainer>
+
+</xp:view>

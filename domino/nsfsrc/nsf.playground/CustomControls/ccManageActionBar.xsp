@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xc:ccNoAccessUser></xc:ccNoAccessUser>
+	<xp:panel style="padding: 0px 5px 0px 5px;" loaded="${javascript:userBean.canCreateDocs}">
+		<xp:button value="New Snippet" id="button3">
+			<xp:eventHandler event="onclick" submit="false"
+				id="eventHandler1">
+				<xp:this.script><![CDATA[XSP.showContent("#{id:dynp}","form")]]></xp:this.script>
+			</xp:eventHandler>
+		</xp:button>
+		<xp:button value="Delete Selected Snippets" id="button4">
+			<xp:eventHandler event="onclick" submit="true"
+				id="eventHandler2" refreshMode="partial" refreshId="mainPanel">
+				<xp:this.action>
+					<xp:deleteSelectedDocuments view="dataView1"
+						message="This operation cannot be undone.\nDo you want to continue?">
+					</xp:deleteSelectedDocuments>
+				</xp:this.action>
+			</xp:eventHandler>
+		</xp:button>
+		<xp:button value="Delete All Snippets" id="button1">
+			<xp:eventHandler event="onclick" submit="true"
+				id="eventHandler3" refreshMode="partial" refreshId="mainPanel">
+				<xp:this.action>
+					<xp:actionGroup>
+						<xp:actionGroup>
+							<xp:confirm
+								message="You are deleting all the snippets in this view. This operation cannot be undone.\nDo you want to continue?">
+							</xp:confirm>
+						</xp:actionGroup>
+						<xp:executeScript>
+							<xp:this.script><![CDATA[#{javascript:var v:NotesView = database.getView(compositeData.viewName);
+v.getAllEntries().removeAll(true);
+context.reloadPage(); // Why is this needed?
+}]]></xp:this.script>
+						</xp:executeScript>
+					</xp:actionGroup>
+				</xp:this.action>
+			</xp:eventHandler>
+		</xp:button>
+	</xp:panel>
+</xp:view>

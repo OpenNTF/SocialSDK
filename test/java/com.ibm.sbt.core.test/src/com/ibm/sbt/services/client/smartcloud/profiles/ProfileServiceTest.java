@@ -2,6 +2,7 @@ package com.ibm.sbt.services.client.smartcloud.profiles;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import org.junit.Ignore;
 import org.junit.Test;
 import com.ibm.sbt.services.BaseUnitTest;
 import com.ibm.sbt.services.client.SBTServiceException;
@@ -13,9 +14,10 @@ import com.ibm.sbt.services.client.SBTServiceException;
  */
 public class ProfileServiceTest extends BaseUnitTest {
 
+	@Ignore
 	@Test
 	public final void testGetProfile() throws SBTServiceException {
-		
+
 		ProfileService profileService = new ProfileService("smartcloud");
 		authenticateEndpoint(profileService.getEndpoint(), "FrankAdams@try.lotuslive.com", "passw0rd");
 		Profile profile = profileService.getProfile();

@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<note default='true' class='view' xmlns='http://www.lotus.com/dxl' version='9.0'
+ replicaid='85257AA80077A28B'>
+<noteinfo noteid='14a' unid='51CBEDDDA1916EC4852579F0005C658D' sequence='11'>
+<created><datetime dst='true'>20120430T124913,09-04</datetime></created>
+<modified><datetime>20121105T124543,51-05</datetime></modified>
+<revised><datetime>20121105T124543,50-05</datetime></revised>
+<lastaccessed><datetime>20121105T124543,51-05</datetime></lastaccessed>
+<addedtofile><datetime>20121104T143451,16-05</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name><name>CN=sbaadmin/O=renovations</name><name
+>CN=Philippe Riand/OU=Westford/O=IBM</name><name>CN=sbaadmin/O=renovations</name><name
+>CN=Philippe Riand/OU=Westford/O=IBM</name><name>CN=sbaadmin/O=renovations</name><name
+>CN=Philippe Riand/OU=Westford/O=IBM</name><name>CN=sbaadmin/O=renovations</name><name
+>CN=Philippe Riand/OU=Westford/O=IBM</name></updatedby>
+<wassignedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></wassignedby>
+<item name='$TITLE'><text/></item>
+<item name='$Formula' summary='true'><formula compiled='true'>
+HAAFAA4ACgABAAQAJCQkJAQABAAAAAgAZgADAA==
+</formula></item>
+<item name='$FormulaClass'><text>1</text></item></note>
+

@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex" dojoParseOnLoad="true">
+	<xp:this.resources>
+		<xp:script src="/home.js" clientSide="true"></xp:script>
+		<xp:styleSheet href="/home.css"></xp:styleSheet>
+		<xp:dojoModule name="dijit.layout.TabContainer"></xp:dojoModule>
+		<xp:dojoModule name="dijit.layout.ContentPane"></xp:dojoModule>
+		<xp:dojoModule name="dijit.layout.AccordionContainer"></xp:dojoModule>
+	</xp:this.resources>
+	<xc:ccLayout navigationPath="/Home">
+		<div class="gsBody" role="region" aria-label="content">
+			<div id="tab2" dojoType="dijit.layout.ContentPane" title="Home">
+				<!--MAIN CONTENT-->
+				<div class="gsMain" role="main" aria-label="Home">
+					<!--divS-->
+					<div dojoType="dijit.layout.AccordionContainer">
+
+						<xp:div dojoType="dijit.layout.ContentPane" title="About the Social Business Toolkit SDK">
+							<xp:this.dojoAttributes>
+								<xp:dojoAttribute name="selected" value="true">
+								</xp:dojoAttribute>
+							</xp:this.dojoAttributes>
+							<table class="gsContent">
+								<tr>
+									<td class="gsColumn" width='33%' valign='top'>
+										<div>
+											<h3>The Social Business Toolkit SDK</h3>
+										</div>
+										<p>
+											The Social Business Toolkit SDK is a set of libraries and
+											code
+											samples that you use for connecting to the IBM Social
+											Platform.</p>
+										<p>
+											Use the SDK and your web development skills to add
+											social
+											capabilities to your applications.</p>
+										<p class="gsIcons">
+											<a href="http://bit.ly/ibmsbtcommunity">
+												<img src="home_arrow.png" alt=""></img>
+												Connect to the IBM Social Business Toolkit Community
+											</a>
+										</p>
+									</td>
+									<td class="gsColumn" width='33%' valign='top'>
+										<div>
+											<h3>The SBT Playground</h3>
+										</div>
+										<p>
+											The SBT Playground is a web-based live demonstration of the
+											JavaScript APIs that are exposed by the SDK. The Playground
+											contains a large set of code snippets and examples that you
+											can customize and use in your own applications.</p>
+										<p class="gsIcons">
+											<a
+												href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Social+Business+Toolkit+SDK+documentation#action=openDocument&amp;res_title=Installing_the_SDK_Playground_SDK1.0&amp;content=pdcontent">
+												<img src="home_arrow.png" alt=""></img>
+												Playground Documentation
+											</a>
+										</p>
+									</td>
+									<td class="gsColumn" width='33%' valign='top'>
+										<div>
+											<h3></h3>
+										</div>
+										<p>
+										</p>
+									</td>
+								</tr>
+
+							</table><!--end gsContent-->
+						</xp:div><!--end content pane-->
+						<xp:div dojoType="dijit.layout.ContentPane" title="Using The Playground">
+							<table class="gsContent">
+								<tr>
+									<td class="gsColumn" width='66%' valign='top'>
+										<p>
+											To get started, go to the Playground tab and select an
+											environment from the drop-down menu. If you select the
+											Greenhouse environment, the Playground is connected to the
+											Connections 4 instance in Greenhouse.</p>
+
+										<p>
+											If you select Custom, you can enter a URL and the OAuth
+											information to connect to your own Connections instance.</p>
+
+										<p>
+											After you select an environment, click
+											Connections->Profiles->Get Display Name. If you are in the
+											Greenhouse environment, enter your Greenhouse login
+											credentials when prompted. When JavaScript code appears in
+											the code pane, modify Line 2 of the code to replace the
+											substitution variable %{sample.email} with an email address
+											of a user in the environment that you have selected. Click
+											Run, and after a few seconds the name associated with the
+											email address appears in the result pane.</p>
+
+										<p>
+											You can use the HTML and CSS tabs to customize the display
+											of
+											the result. To see the HTML, CSS, and JavaScript combined,
+											click Show Generated HTML.</p>
+									</td>
+									<td class="gsColumn" width='33%' valign='top'>
+										<div>
+											<h3></h3>
+										</div>
+										<p>
+										</p>
+									</td>
+								</tr>
+
+							</table><!--end gsContent-->
+						</xp:div><!--end content pane-->
+
+						<xp:div dojoType="dijit.layout.ContentPane" title="IBM Social Business">
+							<table class="gsContent">
+								<tr>
+									<td class="gsColumn" width='33%' valign='top'>
+										<div>
+											<h3>Why social business?</h3>
+											<p>
+												A social business focuses on the energy, creativity, and
+												decision-making skills of people.
+
+												People in a social business
+												find what they need more quickly,
+												solve problems faster, and
+												discover valuable expertise and
+												information in ways that they
+												never expected.</p>
+											<p class="gsIcons">
+												<a href="http://bit.ly/ibmsbtcommunity">
+													<img src="home_arrow.png" alt=""></img>
+													Connect to the IBM Social Business Toolkit Community
+												</a>
+											</p>
+										</div>
+									</td>
+									<td class="gsColumn" width='33%' valign='top'>
+										<div>
+											<h3>IBM's strategy for social business</h3>
+											<p>
+												IBM's strategy for social business includes two main
+												components:
+												<ul>
+													<li>A Social Business Framework with a modular set of
+														capabilities
+														for a unified work experience across products
+														on
+														the user
+														interface, on mobile devices, and in the cloud.</li>
+													<li>
+														A Social Business Toolkit with a comprehensive set of
+														APIs,
+														open standards, documentation, samples, best
+														practices, and
+														an active community. Designed to support the
+														framework for
+														social business, the toolkit provides the
+														services that
+														developers can use to integrate social
+														capabilities into their
+														business applications.</li>
+												</ul>
+											</p>
+										</div>
+									</td>
+									<td class="gsColumn" valign='top'>
+										<div>
+											<h3>IBM Social Business Toolkit</h3>
+											<p>
+												The Social Business Toolkit is a set of extensible tools
+												and
+												resources for developers who want to incorporate social
+												capabilities into their applications and business
+												processes.</p>
+											<p>
+												Social capabilities include features and functionality
+												that
+												tap into the power of social interactions, business
+												networks,
+												community-based problem solving, and more.</p>
+											<p>
+												The Social Business Toolkit is evolving in parallel with
+												the
+												IBM
+												Social Business Framework, a strategic model for a
+												unified
+												work experience across the IBM Collaboration
+												Solutions
+												product portfolio.</p>
+										</div>
+									</td>
+								</tr>
+							</table><!--end gsContent-->
+						</xp:div><!--end content pane-->
+						<xp:div dojoType="dijit.layout.ContentPane" title="For More Information">
+							<table class="gsContent">
+								<tr>
+									<td class="gsColumn" width='33%' valign='top'>
+										<div>
+											<h3>IBM developerWorks</h3>
+										</div>
+										<p>
+											developerWorks is a top destination for IT professionals.
+											IBM
+											developerWorks is the industry-leading and award-winning
+											technical resource and professional network for the developer
+											community.</p>
+										<p>
+											developerWorks hosts a community dedicated to social
+											business and to the
+											SDK in particular. It is an entry point
+											for web developers
+											who want to take advantage of the IBM
+											Social Business Toolkit
+											SDK.</p>
+										<p class="gsIcons">
+											<a href="http://bit.ly/ibmsbtcommunity">
+												<img src="home_arrow.png" alt=""></img>
+													Connect to the IBM Social Business Toolkit Community
+											</a>
+										</p>
+									</td>
+									<td class="gsColumn" width='33%' valign='top'>
+										<div>
+											<h3>OpenNTF</h3>
+										</div>
+										<p>
+											The Mission of OpenNTF is to support the open source
+											projects
+											hosted at OpenNTF.Org. OpenNTF provides the framework
+											to
+											develop open source applications which may be freely
+											distributed.</p>
+										<p>
+											The IBM Social Business Toolkit SDK is provided as a
+											project on OpenNTF, under the Apache 2.0 license. It can be
+											freely downloaded and used.</p>
+										<p class="gsIcons">
+											<a href="http://ibmsbt.openntf.org/">
+												<img src="home_arrow.png" alt=""></img>
+												Social Business Toolkit SDK on OpenNTF
+											</a>
+										</p>
+									</td>
+									<td class="gsColumn" width='33%' valign='top'>
+										<div>
+											<h3>IBM Greenhouse</h3>
+										</div>
+										<p>
+											IBM Greenhouse is a live community where you can use IBM
+											Collaboration Solutions products for free.</p>
+										<p>
+											Greenhouse hosts a live version of the Playground,
+											connecting to the
+											latest instances of IBM Connections, IBM
+											SmartCloud for
+											Social Business, IBM Domino, and IBM Sametime.
+											Although you
+											don't need a Greenhouse account to use the
+											Playground, an
+											account is required to access services that are
+											hosted on
+											Greenhouse. Greenhouse accounts are free.</p>
+										<p class="gsIcons">
+											<a href="https://greenhouse.lotus.com/wpsgh/wcm/myconnect/ghcontent/lotus+greenhouse+next+site/home/labs/ibm+social+business+toolkit">
+												<img src="home_arrow.png" alt=""></img>
+												IBM Greenhouse - Social Business Toolkit
+											</a>
+										</p>
+									</td>
+								</tr>
+
+							</table><!--end gsContent-->
+						</xp:div><!--end content pane-->
+					</div><!--end accordion-->
+				</div><!--end main-->
+			</div><!--end what's new-->
+		</div><!--end wrapper frame-->
+	</xc:ccLayout>
+</xp:view>

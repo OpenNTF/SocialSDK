@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xe:formTable id="formTable1" formTitle="Environment"
+		formDescription="Enter here the data for your environment" labelWidth="12em">
+		<xp:this.facets>
+			<xp:panel xp:key="footer" id="panel3">
+				<xp:panel id="panel2" loaded="${javascript:!compositeData.editbean}">
+					<xp:button value="Save" id="button1"
+						loaded="${javascript:userBean.canCreateDocs}">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete">
+							<xp:this.action>
+								<xp:actionGroup>
+									<xp:saveDocument var="document1"></xp:saveDocument>
+									<xp:executeScript script="#{javascript:dataAccess.clearCache()}">
+									</xp:executeScript>
+									<xe:changeDynamicContentAction
+										facetName="view">
+									</xe:changeDynamicContentAction>
+								</xp:actionGroup>
+							</xp:this.action>
+						</xp:eventHandler>
+					</xp:button>
+					<xp:button value="Cancel" id="button2">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete" immediate="true" save="false">
+							<xp:this.action>
+								<xe:changeDynamicContentAction
+									facetName="view">
+								</xe:changeDynamicContentAction>
+							</xp:this.action>
+						</xp:eventHandler>
+					</xp:button>
+				</xp:panel>
+				<xp:panel id="panel1" loaded="${javascript:compositeData.editbean}">
+					<xp:button value="Save" id="button4">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete">
+							<xp:this.action><![CDATA[#{javascript:var env = dataAccess.getCustomEnvironment();
+dataAccess.readEnvironment(env,document1.getDocument(true));
+var dlg = getComponent('customEnvDialog')
+dlg.hide();}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:button>
+					<xp:button value="Cancel" id="button6">
+						<xp:eventHandler event="onclick" submit="false">
+							<xp:this.script><![CDATA[XSP.closeDialog('#{id:customEnvDialog}')]]></xp:this.script>
+						</xp:eventHandler>
+					</xp:button>
+				</xp:panel>
+			</xp:panel>
+			<xp:panel xp:key="header" id="panel4">
+				<xp:inputText id="inputText20" style="display:none">
+					<xp:eventHandler event="onchange" submit="true"
+						refreshMode="complete">
+						<xp:this.action><![CDATA[#{javascript:var v = getComponent("inputText20").getValue();
+dataAccess.copyEnvironment(document1,v);
+}]]></xp:this.action>
+					</xp:eventHandler>
+				</xp:inputText>
+				<xp:div style="float: right;margin-right: 30px;">
+					<xe:valuePicker id="namePicker10" for="inputText20"
+						pickerText="Copy Content From...">
+						<xe:this.dataProvider>
+							<xe:dominoViewValuePicker viewName="AllEnvironments">
+							</xe:dominoViewValuePicker>
+						</xe:this.dataProvider>
+					</xe:valuePicker>
+				</xp:div>
+			</xp:panel>
+		</xp:this.facets>
+		<xe:formRow id="formRow8" label="Name:"
+			loaded="${javascript:!compositeData.editbean}">
+			<xp:inputText id="inputText5" required="true"
+				disableClientSideValidation="true" value="#{document1.Name}" size="80">
+			</xp:inputText>
+		</xe:formRow>
+		<xe:formRow id="formRow1" label="Description:"
+			loaded="${javascript:!compositeData.editbean}">
+			<xp:inputRichText id="inputRichText1" value="#{document1.Description}"></xp:inputRichText>
+		</xe:formRow>
+		<xe:formRow loaded="${javascript:!compositeData.editbean}"
+			id="formRow5">
+			<xp:checkBox text="Preferred Environment" id="checkBox1"
+				value="#{document1.Preferred}" checkedValue="1" uncheckedValue="0">
+			</xp:checkBox>
+		</xe:formRow>
+		<xe:formRow id="formRow2" label="Properties">
+			<xp:inputTextarea id="inputTextarea1" value="#{document1.Properties}"
+				cols="80" rows="5">
+			</xp:inputTextarea>
+		</xe:formRow>
+		<xe:formRow id="formRow13" labelPosition="none">
+			<xp:div></xp:div>
+		</xe:formRow>
+		<xe:formRow id="formRow4" labelPosition="none">
+			<xp:section id="section1" header="Connections" initClosed="true">
+				<xe:formTable labelWidth="12em">
+					<xe:formRow id="formRow3" label="URL:">
+						<xp:inputText id="inputText2"
+							disableClientSideValidation="true" value="#{document1.Con_URL}"
+							size="80">
+						</xp:inputText>
+					</xe:formRow>
+					<xe:formRow id="formRow17">
+						<xp:label value="OAuth 2.0" id="label1"></xp:label>
+					</xe:formRow>
+					<xe:formRow id="formRow10" label="Consumer Key:">
+						<xp:inputText id="inputText7"
+							disableClientSideValidation="true" value="#{document1.Con_OA2_ConsumerKey}"
+							size="80">
+						</xp:inputText>
+					</xe:formRow>
+					<xe:formRow id="formRow26" label="Consumer Secret:">
+						<xp:inputText id="inputText19"
+							disableClientSideValidation="true" value="#{document1.Con_OA2_ConsumerSecret}"
+							size="80">
+						</xp:inputText>
+					</xe:formRow>
+					<xe:formRow id="formRow11" label="Authorization URL:">
+						<xp:inputText id="inputText8"
+							disableClientSideValidation="true"
+							value="#{document1.Con_OA2_AuthorizationURL}" size="80">
+						</xp:inputText>
+					</xe:formRow>
+					<xe:formRow id="formRow12" label="Access Token URL:">
+						<xp:inputText id="inputText9"
+							disableClientSideValidation="true" value="#{document1.Con_OA2_AccessTokenURL}"
+							size="80">
+						</xp:inputText>
+					</xe:formRow>
+				</xe:formTable>
+			</xp:section>
+			<xp:section id="section2" header="Smartcloud" initClosed="true">
+				<xe:formTable labelWidth="12em">
+					<xe:formRow id="formRow6" label="URL:">
+						<xp:inputText id="inputText3"
+							disableClientSideValidation="true" value="#{document1.Sma_URL}"
+							size="80">
+						</xp:inputText>
+					</xe:formRow>
+					<xe:formRow id="formRow18">
+						<xp:label value="OAuth 1.0a" id="label2"></xp:label>
+					</xe:formRow>
+					<xe:formRow id="formRow21" label="Consumer Key">
+						<xp:inputText id="inputText14"
+							disableClientSideValidation="true" value="#{document1.Sma_OA_ConsumerKey}"
+							size="80">
+						</xp:inputText>
+					</xe:formRow>
+					<xe:formRow id="formRow20" label="Consumer Secret:">
+						<xp:inputText id="inputText13"
+							disableClientSideValidation="true" value="#{document1.Sma_OA_ConsumerSecret}"
+							size="80">
+						</xp:inputText>
+					</xe:formRow>
+					<xe:formRow id="formRow22" label="Request Token URL:">
+						<xp:inputText id="inputText15"
+							disableClientSideValidation="true" value="#{document1.Sma_OA_RequestTokenURL}"
+							size="80">
+						</xp:inputText>
+					</xe:formRow>
+					<xe:formRow id="formRow24" label="Authorization URL:">
+						<xp:inputText id="inputText17"
+							disableClientSideValidation="true"
+							value="#{document1.Sma_OA_AuthorizationURL}" size="80">
+						</xp:inputText>
+					</xe:formRow>
+					<xe:formRow id="formRow23" label="Access Token URL:">
+						<xp:inputText id="inputText16"
+							disableClientSideValidation="true" value="#{document1.Sma_OA_AccessTokenURL}"
+							size="80">
+						</xp:inputText>
+					</xe:formRow>
+					<xe:formRow id="formRow19">
+						<xp:label value="OAuth 2.0" id="label3"></xp:label>
+					</xe:formRow>
+					<xe:formRow id="formRow25" label="Client ID:">
+						<xp:inputText id="inputText18"
+							disableClientSideValidation="true" value="#{document1.Sma_OA2_ConsumerKey}"
+							size="80">
+						</xp:inputText>
+					</xe:formRow>
+					<xe:formRow id="formRow14" label="Client Secret:">
+						<xp:inputText id="inputText10"
+							disableClientSideValidation="true" value="#{document1.Sma_OA2_ConsumerSecret}"
+							size="80">
+						</xp:inputText>
+					</xe:formRow>
+					<xe:formRow id="formRow15" label="Authorization URL:">
+						<xp:inputText id="inputText11"
+							disableClientSideValidation="true"
+							value="#{document1.Sma_OA2_AuthorizationURL}" size="80">
+						</xp:inputText>
+					</xe:formRow>
+					<xe:formRow id="formRow16" label="Access Token URL:">
+						<xp:inputText id="inputText12"
+							disableClientSideValidation="true" value="#{document1.Sma_OA2_AccessTokenURL}"
+							size="80">
+						</xp:inputText>
+					</xe:formRow>
+				</xe:formTable>
+			</xp:section>
+			<xp:section loaded="false" id="section3" header="Domino"
+				initClosed="true">
+				<xe:formTable>
+					<xe:formRow id="formRow7" label="URL:">
+						<xp:inputText id="inputText4"
+							disableClientSideValidation="true" value="#{document1.Dom_URL}"
+							size="80">
+						</xp:inputText>
+					</xe:formRow>
+				</xe:formTable>
+			</xp:section>
+			<xp:section loaded="false" id="section4" header="Sametime"
+				initClosed="true">
+				<xe:formTable>
+					<xe:formRow id="formRow9" label="URL:">
+						<xp:inputText id="inputText6"
+							disableClientSideValidation="true" value="#{document1.St_URL}"
+							size="80">
+						</xp:inputText>
+					</xe:formRow>
+				</xe:formTable>
+			</xp:section>
+		</xe:formRow>
+	</xe:formTable>
+
+	<xe:dumpObject loaded="false" id="dumpObject1" title="document"
+		value="#{document1}" />
+</xp:view>

@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='85257AA80077A28B'>
+<noteinfo noteid='1ca' unid='25ACE6DA567BA256852579F5007DCE76' sequence='23'>
+<created><datetime dst='true'>20120505T185408,54-04</datetime></created>
+<modified><datetime>20121127T152953,60-05</datetime></modified>
+<revised><datetime>20121127T152953,59-05</datetime></revised>
+<lastaccessed><datetime>20121127T152953,60-05</datetime></lastaccessed>
+<addedtofile><datetime>20121104T143452,19-05</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></updatedby>
+<wassignedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></wassignedby>
+<item name='$FormulaClass' sign='true'><text>1</text></item>
+<item name='$TITLE' sign='true'><text>AllEnvironments</text></item>
+<item name='$Index' sign='true'><text/></item>
+<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
+YAAFACoAJgAEAAQACQAJAAQATmFtZVByZWZlcnJlZCRDb25mbGljdCRSRUYEAAQAAAAkAAUABABG
+b3JtAQALAEVudmlyb25tZW50AAoCBAAEAAMABwAMAAUACTNTNFMA
+</formula></item>
+<item name='$Collation' summary='true'>
+<rawitemdata type='2'>
+EQABAABEgGYAAAAEAE5hbWU=
+</rawitemdata></item>
+<item name='$ViewFormat' summary='true' sign='true'>
+<rawitemdata type='5'>
+AQACAAgACAAAAFZDAQAEAAQAAAAAAKAAAQAACgAAAAAAAAAAAAICAAAAVkMAAAkACQAAAAAALwAB
+AAAKAAAAAAAAAAAAAgIAAABOYW1lTmFtZVByZWZlcnJlZFByZWZlcnJlZCYAAQAAAAEBAAkBAAAK
+AQEOCgAAAQCtKwEAAQABAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAA//8A
+AAAAAAAAAAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAP//AAAAAAAAAAAAAAAA
+AABCAAAAAAABAP///wAFAP///wABAAAAAAAAAAAAAAAAAAEA////AAEA////AAAAAQAAAAAAAQAA
+AAAAAQAAAAAAAAAIAAAAAAABAA==
+</rawitemdata></item>
+<item name='$Comment' sign='true'><text/></item>
+<item name='$Flags'><text>PY</text></item>
+<item name='$DesignerVersion'><text>8.5.4</text></item>
+<item name='$SelQuery' sign='true'>
+<rawitemdata type='f'>
+gQYAAAAAif8XAAAAAAABAAsARW52aXJvbm1lbnQA
+</rawitemdata></item></note>
+

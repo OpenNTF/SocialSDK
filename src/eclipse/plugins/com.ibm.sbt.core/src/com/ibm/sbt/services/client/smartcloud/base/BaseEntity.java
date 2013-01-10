@@ -172,29 +172,22 @@ public abstract class BaseEntity<DataFormat> {
 	 * @throws SBTServiceException
 	 * @throws ClientServicesException
 	 */
-	public void load() throws  ClientServicesException {
+	public void load() throws ClientServicesException {
 		load(getSelfLoadURL(), this.uuid, this.nameParameterId);
 	}
 
-	protected String getSelfLoadURL() {
-		// TODO Auto-generated method stub
-		return selfLoadUrl;
+	public void load(Map<String, String> parameters) throws ClientServicesException {
+		load(getSelfLoadURL(), this.uuid, this.nameParameterId, parameters);
 	}
 
-	/**
-	 * This method makes the entity retrieve and load its own data
-	 * 
-	 * @param selfLoadUrl
-	 * @param uuid
-	 * @param nameParameterId
-	 * @throws ClientServicesException
-	 */
-	public void load(String selfLoadUrl, String uuid, String nameParameterId) throws
-			ClientServicesException {
+	private void load(String selfLoadUrl, String uuid, String nameParameterId, Map<String, String> parameters)
+			throws ClientServicesException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "load");
 		}
-		Map<String, String> parameters = new HashMap<String, String>();
+		if (parameters == null) {
+			parameters = new HashMap<String, String>();
+		}
 		if (nameParameterId != null) {
 			parameters.put(nameParameterId, uuid);
 		}
@@ -213,6 +206,23 @@ public abstract class BaseEntity<DataFormat> {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.exiting(sourceClass, "load");
 		}
+	}
+
+	protected String getSelfLoadURL() {
+		// TODO Auto-generated method stub
+		return selfLoadUrl;
+	}
+
+	/**
+	 * This method makes the entity retrieve and load its own data
+	 * 
+	 * @param selfLoadUrl
+	 * @param uuid
+	 * @param nameParameterId
+	 * @throws ClientServicesException
+	 */
+	public void load(String loadUrl, String uuid, String nameParameterId) throws ClientServicesException {
+		this.load(loadUrl, uuid, nameParameterId, null);
 	}
 
 	@Override

@@ -40,6 +40,8 @@ public class LibraryServlet extends BaseToolkitServlet {
 
     private String toolkitUrl;
     private String toolkitJsUrl;
+    private String toolkitExtUrl;
+    private String toolkitExtJsUrl;
     private String serviceUrl;
     private String iframeUrl;
     private SBTEnvironment environment;
@@ -49,125 +51,143 @@ public class LibraryServlet extends BaseToolkitServlet {
     private List<Object> libraries;
 
     /**
-     * Servlet parameter which allows the location of the toolkit to be overridden,
-     * the default value is %local_server%/sbt.
-     * %local_server% is dynamically replaced by http://<server>:<port>
+     * Servlet parameter which allows the location of the toolkit to be
+     * overridden, the default value is %local_server%/sbt. %local_server% is
+     * dynamically replaced by http://<server>:<port>
      */
-    static public final String PARAM_TOOLKIT_URL 		= "toolkitUrl"; //$NON-NLS-1$
+    static public final String PARAM_TOOLKIT_URL = "toolkitUrl"; //$NON-NLS-1$
 
     /**
-     * Servlet parameter which allows the path to the JavaScript library to be overridden,
-     * the default value is /js/sdk
+     * Servlet parameter which allows the location of the toolkit extensions to
+     * be overridden, the default value is %local_server%/sbtx. %local_server%
+     * is dynamically replaced by http://<server>:<port>
      */
-    static public final String PARAM_JAVASCRIPT_PATH 		= "javaScriptPath"; //$NON-NLS-1$
+    static public final String PARAM_TOOLKIT_EXT_URL = "toolkitExtUrl"; //$NON-NLS-1$
 
     /**
-     * Servlet parameter which allows the location of the service servlet to be overridden,
-     * the default value is %local_application%/service
+     * Servlet parameter which allows the path to the JavaScript library to be
+     * overridden, the default value is /js/sdk
      */
-    static public final String PARAM_SERVICE_URL 		= "serviceUrl"; //$NON-NLS-1$
+    static public final String PARAM_JAVASCRIPT_PATH = "javaScriptPath"; //$NON-NLS-1$
 
     /**
-     * Servlet parameter which allows the location of the IFrame content template to be overridden,
-     * the default value is /xhr/IFrameContent.html
+     * Servlet parameter which allows the location of the service servlet to be
+     * overridden, the default value is %local_application%/service
      */
-    static public final String PARAM_IFRAME_PATH 		= "iframePath"; //$NON-NLS-1$
+    static public final String PARAM_SERVICE_URL = "serviceUrl"; //$NON-NLS-1$
 
     /**
-     * Servlet parameter which allows the list of default endpoints to be overridden,
-     * the default value is connections,smartcloud,domino,sametime
+     * Servlet parameter which allows the location of the IFrame content
+     * template to be overridden, the default value is /xhr/IFrameContent.html
      */
-    static public final String PARAM_ENDPOINTS 			= "endpoints"; //$NON-NLS-1$
+    static public final String PARAM_IFRAME_PATH = "iframePath"; //$NON-NLS-1$
 
     /**
-     * Servlet parameter which allows the list of default client properties to be overridden,
-     * the default value is a null string
+     * Servlet parameter which allows the list of default endpoints to be
+     * overridden, the default value is connections,smartcloud,domino,sametime
      */
-    static public final String PARAM_CLIENT_PROPERTIES 		= "clientProperties"; //$NON-NLS-1$
+    static public final String PARAM_ENDPOINTS = "endpoints"; //$NON-NLS-1$
 
     /**
-     * Servlet parameter which allows the name of the default environment to be overridden,
-     * the default value is defaultEnvironment
+     * Servlet parameter which allows the list of default client properties to
+     * be overridden, the default value is a null string
      */
-    static public final String PARAM_ENVIRONMENT 		= "environment"; //$NON-NLS-1$
+    static public final String PARAM_CLIENT_PROPERTIES = "clientProperties"; //$NON-NLS-1$
+
+    /**
+     * Servlet parameter which allows the name of the default environment to be
+     * overridden, the default value is defaultEnvironment
+     */
+    static public final String PARAM_ENVIRONMENT = "environment"; //$NON-NLS-1$
 
     //
     // Default values for library servlet parameters
     //
-    static final String DEFAULT_TOOLKIT_URL 			= "%local_server%/sbt"; //$NON-NLS-1$
-    static final String DEFAULT_JAVASCRIPT_PATH 		= "/js/sdk"; //$NON-NLS-1$
-    static final String DEFAULT_SERVICE_URL 			= "%local_application%/service"; //$NON-NLS-1$
-    static final String DEFAULT_IFRAME_PATH 			= "/xhr/IFrameContent.html"; //$NON-NLS-1$
-    static final String DEFAULT_ENDPOINTS 			= "connections,smartcloud,domino,sametime"; //$NON-NLS-1$
-    static final String DEFAULT_CLIENT_PROPERTIES 		= null; //$NON-NLS-1$
-    static final String DEFAULT_ENVIRONMENT 			= "defaultEnvironment"; //$NON-NLS-1$
+    static final String DEFAULT_TOOLKIT_URL = "%local_server%/sbt"; //$NON-NLS-1$
+    static final String DEFAULT_TOOLKIT_EXT_URL = null;
+    static final String DEFAULT_JAVASCRIPT_PATH = "/js/sdk"; //$NON-NLS-1$
+    static final String DEFAULT_SERVICE_URL = "%local_application%/service"; //$NON-NLS-1$
+    static final String DEFAULT_IFRAME_PATH = "/xhr/IFrameContent.html"; //$NON-NLS-1$
+    static final String DEFAULT_ENDPOINTS = "connections,smartcloud,domino,sametime"; //$NON-NLS-1$
+    static final String DEFAULT_CLIENT_PROPERTIES = null; //$NON-NLS-1$
+    static final String DEFAULT_ENVIRONMENT = "defaultEnvironment"; //$NON-NLS-1$
 
-    static final String LIBRARY_SERVICE_TYPE			= "com.ibm.sbt.jslibrary"; //$NON-NLS-1$
+    static final String LIBRARY_SERVICE_TYPE = "com.ibm.sbt.jslibrary"; //$NON-NLS-1$
 
     static final String sourceClass = LibraryServlet.class.getName();
     static final Logger logger = Logger.getLogger(sourceClass);
 
     private static final long serialVersionUID = 1L;
 
-    /* (non-Javadoc)
-     * @see com.ibm.sbt.servlet.BaseToolkitServlet#init(javax.servlet.ServletConfig)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * com.ibm.sbt.servlet.BaseToolkitServlet#init(javax.servlet.ServletConfig)
      */
     @Override
     public void init(ServletConfig config) throws ServletException {
-	super.init(config);
+        super.init(config);
 
-	// default parameters
-	Application application = Application.get();
-	String defaultToolkitUrl = getAppParameter(application, PARAM_TOOLKIT_URL, DEFAULT_TOOLKIT_URL);
-	String defaultJavaScriptPath =  getAppParameter(application, PARAM_JAVASCRIPT_PATH, DEFAULT_JAVASCRIPT_PATH);
-	String defaultServiceUrl = getAppParameter(application, PARAM_SERVICE_URL, DEFAULT_SERVICE_URL);
-	String defaultIFramePath = getAppParameter(application, PARAM_IFRAME_PATH, DEFAULT_IFRAME_PATH);
+        // default parameters
+        Application application = Application.get();
+        String defaultToolkitUrl = getAppParameter(application, PARAM_TOOLKIT_URL, DEFAULT_TOOLKIT_URL);
+        String defaultToolkitExtUrl = getAppParameter(application, PARAM_TOOLKIT_EXT_URL, DEFAULT_TOOLKIT_EXT_URL);
+        String defaultJavaScriptPath = getAppParameter(application, PARAM_JAVASCRIPT_PATH, DEFAULT_JAVASCRIPT_PATH);
+        String defaultServiceUrl = getAppParameter(application, PARAM_SERVICE_URL, DEFAULT_SERVICE_URL);
+        String defaultIFramePath = getAppParameter(application, PARAM_IFRAME_PATH, DEFAULT_IFRAME_PATH);
 
-	// load initialisation parameters
-	toolkitUrl = getInitParameter(config, PARAM_TOOLKIT_URL, defaultToolkitUrl);
-	toolkitJsUrl =  PathUtil.concat(toolkitUrl, getInitParameter(config, PARAM_JAVASCRIPT_PATH, defaultJavaScriptPath), '/');
-	serviceUrl = getInitParameter(config, PARAM_SERVICE_URL, defaultServiceUrl);
-	iframeUrl = PathUtil.concat(toolkitUrl, getInitParameter(config, PARAM_IFRAME_PATH, defaultIFramePath), '/');
+        // load initialisation parameters
+        toolkitUrl = getInitParameter(config, PARAM_TOOLKIT_URL, defaultToolkitUrl);
+        toolkitJsUrl = PathUtil.concat(toolkitUrl, getInitParameter(config, PARAM_JAVASCRIPT_PATH, defaultJavaScriptPath), '/');
+        toolkitExtUrl = getInitParameter(config, PARAM_TOOLKIT_EXT_URL, defaultToolkitExtUrl);
+        toolkitExtJsUrl = PathUtil.concat(toolkitExtUrl, getInitParameter(config, PARAM_JAVASCRIPT_PATH, defaultJavaScriptPath), '/');
+        serviceUrl = getInitParameter(config, PARAM_SERVICE_URL, defaultServiceUrl);
+        iframeUrl = PathUtil.concat(toolkitUrl, getInitParameter(config, PARAM_IFRAME_PATH, defaultIFramePath), '/');
 
-	// create the libraries
-	libraries = application.findServices(LIBRARY_SERVICE_TYPE);
+        // create the libraries
+        libraries = application.findServices(LIBRARY_SERVICE_TYPE);
     }
 
-    /* (non-Javadoc)
-     * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest
+     * , javax.servlet.http.HttpServletResponse)
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	if (logger.isLoggable(Level.FINEST)) {
-	    logger.entering(sourceClass, "doGet", new Object[] {req, resp});
-	}
+        if (logger.isLoggable(Level.FINEST)) {
+            logger.entering(sourceClass, "doGet", new Object[] { req, resp });
+        }
 
-	try {
-	    Context context = Context.get();
-	    SBTEnvironment environment = getDefaultEnvironment(context);
-	    LibraryRequest request = createLibraryRequest(req, resp);
-	    request.init(environment, toolkitUrl, toolkitJsUrl, serviceUrl, iframeUrl);
+        try {
+            Context context = Context.get();
+            SBTEnvironment environment = getDefaultEnvironment(context);
+            LibraryRequest request = createLibraryRequest(req, resp);
+            request.init(environment, toolkitUrl, toolkitJsUrl, serviceUrl, iframeUrl, toolkitExtUrl, toolkitExtJsUrl);
 
-	    AbstractLibrary library = createLibrary(request);
-	    if (library == null) {
-		service400(req, resp, "Unable to handle request for {0} version:{1}", request.getJsLib(), request.getJsVersion());
-	    }
-	    else {
-		// handle the request
-		library.doGet(request);
-	    }
-	} catch(Throwable thrown) {
-	    // send 500 response and display causing exception
-	    serviceException(req, resp, thrown, null, false); // (no lang, no RTL for now)
+            AbstractLibrary library = createLibrary(request);
+            if (library == null) {
+                service400(req, resp, "Unable to handle request for {0} version:{1}", request.getJsLib(), request.getJsVersion());
+            } else {
+                // handle the request
+                library.doGet(request);
+            }
+        } catch (Throwable thrown) {
+            // send 500 response and display causing exception
+            serviceException(req, resp, thrown, null, false); // (no lang, no
+                                                              // RTL for now)
 
-	    if (logger.isLoggable(Level.WARNING)) {
-		logger.log(Level.WARNING, "Error servicing library GET request", thrown);
-	    }
-	}
+            if (logger.isLoggable(Level.WARNING)) {
+                logger.log(Level.WARNING, "Error servicing library GET request", thrown);
+            }
+        }
 
-	if (logger.isLoggable(Level.FINEST)) {
-	    logger.exiting(sourceClass, "doGet");
-	}
+        if (logger.isLoggable(Level.FINEST)) {
+            logger.exiting(sourceClass, "doGet");
+        }
     }
 
     /**
@@ -180,7 +200,7 @@ public class LibraryServlet extends BaseToolkitServlet {
      * @throws ServletException
      */
     protected LibraryRequest createLibraryRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	return new LibraryRequest(req, resp);
+        return new LibraryRequest(req, resp);
     }
 
     /**
@@ -191,52 +211,52 @@ public class LibraryServlet extends BaseToolkitServlet {
      * @return
      */
     protected SBTEnvironment getDefaultEnvironment(Context context) {
-	if (environment != null) {
-	    return environment;
-	}
+        if (environment != null) {
+            return environment;
+        }
 
-	synchronized(createEnvironmentLock) {
-	    // create a default environment if needed
-	    if (environment == null) {
-		environment = (SBTEnvironment)context.getBean(DEFAULT_ENVIRONMENT);
-		if (environment == null) {
-		    ServletConfig config = getServletConfig();
-		    Application application = context.getApplication();
-		    String defaultEndpoints = getAppParameter(application, PARAM_ENDPOINTS, DEFAULT_ENDPOINTS);
-		    String endpoints = getInitParameter(config, PARAM_ENDPOINTS, defaultEndpoints);
-		    String defaultClientProps = getAppParameter(application, PARAM_CLIENT_PROPERTIES, DEFAULT_CLIENT_PROPERTIES);
-		    String clientProps = getInitParameter(config, PARAM_CLIENT_PROPERTIES, defaultClientProps);
+        synchronized (createEnvironmentLock) {
+            // create a default environment if needed
+            if (environment == null) {
+                environment = (SBTEnvironment) context.getBean(DEFAULT_ENVIRONMENT);
+                if (environment == null) {
+                    ServletConfig config = getServletConfig();
+                    Application application = context.getApplication();
+                    String defaultEndpoints = getAppParameter(application, PARAM_ENDPOINTS, DEFAULT_ENDPOINTS);
+                    String endpoints = getInitParameter(config, PARAM_ENDPOINTS, defaultEndpoints);
+                    String defaultClientProps = getAppParameter(application, PARAM_CLIENT_PROPERTIES, DEFAULT_CLIENT_PROPERTIES);
+                    String clientProps = getInitParameter(config, PARAM_CLIENT_PROPERTIES, defaultClientProps);
 
-		    String environmentName = getInitParameter(config, PARAM_ENVIRONMENT, DEFAULT_ENVIRONMENT);
-		    environment = new SBTEnvironment();
-		    environment.setName(environmentName);
-		    environment.setEndpoints(endpoints);
-		    environment.setProperties(clientProps);
-		}
-	    }
-	}
+                    String environmentName = getInitParameter(config, PARAM_ENVIRONMENT, DEFAULT_ENVIRONMENT);
+                    environment = new SBTEnvironment();
+                    environment.setName(environmentName);
+                    environment.setEndpoints(endpoints);
+                    environment.setProperties(clientProps);
+                }
+            }
+        }
 
-	return environment;
+        return environment;
     }
 
     /**
-     * Create a library instance  which can handle this request.
+     * Create a library instance which can handle this request.
      * 
      * @param request
      * @return
      */
     protected AbstractLibrary createLibrary(LibraryRequest request) {
-	if (!request.isInited()) {
-	    throw new IllegalStateException("Access to LibraryRequest before it has been initialised");
-	}
+        if (!request.isInited()) {
+            throw new IllegalStateException("Access to LibraryRequest before it has been initialised");
+        }
 
-	for (Object next : libraries) {
-	    AbstractLibrary library = (AbstractLibrary)next;
-	    if (library.isMatch(request)) {
-		return library;
-	    }
-	}
-	return null;
+        for (Object next : libraries) {
+            AbstractLibrary library = (AbstractLibrary) next;
+            if (library.isMatch(request)) {
+                return library;
+            }
+        }
+        return null;
     }
 
 }

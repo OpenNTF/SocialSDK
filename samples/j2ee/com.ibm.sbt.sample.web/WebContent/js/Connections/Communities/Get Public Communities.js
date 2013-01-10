@@ -19,6 +19,7 @@ require(["sbt/connections/CommunityService","sbt/dom"], function(CommunityServic
                     community.getCommunityType() + " ; " +
                     community.getPublished() + " ; " +
                     community.getUpdated() + " ; " +
+                    community.getTags().join() +
 				"]  ";
 			}
 			dom.setText("content",displayStr);	

@@ -8,7 +8,18 @@ require(["sbt/connections/CommunityService","sbt/dom"], function(CommunityServic
 		load: function(communities){
 			for(var count = 0; count < communities.length; count ++){
 				var community = communities[count];
-				displayStr += community.getTitle() + ((count == communities.length -1) ?"  ":" , ");
+				displayStr += "[" + 
+                    community.getCommunityUuid() + " ; " +
+                    community.getTitle() + " ; " +
+                    community.getSummary() + " ; " +
+                    community.getLogoUrl() + " ; " +
+                    community.getCommunityUrl() + " ; " +
+                    community.getContent() + " ; " +
+                    community.getMemberCount() + " ; " +
+                    community.getCommunityType() + " ; " +
+                    community.getPublished() + " ; " +
+                    community.getUpdated() + " ; " +
+				"]  ";
 			}
 			dom.setText("content",displayStr);	
 		},

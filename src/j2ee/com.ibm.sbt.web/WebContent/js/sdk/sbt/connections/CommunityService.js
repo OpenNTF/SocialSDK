@@ -1192,7 +1192,11 @@ define(
 								content : this._constructQueryObj(args, getArgs),
 								load : function(data) {
 									var entities = [];
-									var entry = xpath.selectNodes(xml.parse(data), getArgs.xpath.entry, con.namespaces);									
+									var xmlData = xml.parse(data);
+									var entry = xpath.selectNodes(xmlData, getArgs.xpath.entry, con.namespaces);
+                                    var totalResults = xpath.selectText(xmlData, getArgs.xpath.totalResults, con.namespaces);
+                                    var startIndex = xpath.selectText(xmlData, getArgs.xpath.startIndex, con.namespaces);
+                                    var itemsPerPage = xpath.selectText(xmlData, getArgs.xpath.itemsPerPage, con.namespaces);
 									for(var count = 0; count < entry.length; count ++){	
 										var node = entry[count];
 										if (getArgs.communityServiceEntity == "communities") {
@@ -1206,9 +1210,9 @@ define(
 										}
 									}
 									if (args.load)
-										args.load(entities);
+										args.load(entities, totalResults, startIndex, itemsPerPage);
 									if (args.handle)
-										args.handle(entities);
+										args.handle(entities, totalResults, startIndex, itemsPerPage);
 								},
 								error : function(error) {
 									validate.notifyError(error, args);

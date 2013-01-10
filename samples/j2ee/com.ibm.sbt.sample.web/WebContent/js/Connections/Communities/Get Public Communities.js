@@ -1,14 +1,14 @@
 require(["sbt/connections/CommunityService","sbt/dom"], function(CommunityService,dom) {
 	var communityService = new CommunityService();
-	var displayStr = "";
 	communityService.getPublicCommunities({
 		parameters:{
 			ps:5
 		},
-		load: function(communities){
+		load: function(communities, totalResults, startIndex, itemsPerPage){
+		    var displayStr = "totalResults:" + totalResults + ", startIndex:" + startIndex + ", itemsPerPage:" + itemsPerPage;
 			for(var count = 0; count < communities.length; count ++){
 				var community = communities[count];
-				displayStr += "[" + 
+				displayStr += " [" + 
                     community.getCommunityUuid() + " ; " +
                     community.getTitle() + " ; " +
                     community.getSummary() + " ; " +

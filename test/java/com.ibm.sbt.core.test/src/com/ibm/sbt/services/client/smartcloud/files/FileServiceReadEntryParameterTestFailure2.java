@@ -16,33 +16,45 @@
 
 package com.ibm.sbt.services.client.smartcloud.files;
 
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
-import java.io.IOException;
-import lib.TestEndpoint;
 import org.junit.Test;
 import com.ibm.commons.xml.DOMUtil;
 import com.ibm.commons.xml.XMLException;
 import com.ibm.sbt.services.client.ClientService.Args;
 import com.ibm.sbt.services.client.ClientServicesException;
 
-public class FileServiceReadEntryTest extends TestEndpoint {
+/**
+ * this test case returns the service index (getServiceDoc API) but fails subsequent class, as in the case of
+ * entry not found errors
+ * 
+ * @see FileServiceReadEntryTestFailure1
+ * @author Lorenzo Boccaccia
+ * @date Dec 10, 2012
+ */
+public class FileServiceReadEntryParameterTestFailure2 extends FileServiceReadEntryParameterTest {
 
 	public final static String	TEST_ID	= "bead66f9-2b8d-4609-ac43-07f1541e5566";
 
-	@Test
+	@Override
+	@Test(expected = FileServiceException.class)
 	public void testRead() throws FileServiceException {
-		FileService svc = new FileService();
-		FileEntry entry = svc.getEntry(TEST_ID);
-		assertNotNull(entry.getPageURL());
+		super.testRead();
+		fail();
 
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void testError1() throws IOException, FileServiceException {
-		FileService svc = new FileService();
-		FileEntry entry = svc.getEntry(null);
-		assertNotNull(entry.getPageURL());
+	@Override
+	@Test(expected = FileServiceException.class)
+	public void testRead2() throws FileServiceException {
+
+		super.testRead2();
+		fail();
+	}
+
+	@Override
+	@Test(expected = FileServiceException.class)
+	public void testRead3() throws FileServiceException {
+		super.testRead3();
 		fail();
 	}
 
@@ -55,16 +67,6 @@ public class FileServiceReadEntryTest extends TestEndpoint {
 				throw new ClientServicesException(e);
 			}
 		}
-		if (method.equals("get")
-				&& args.getServiceUrl()
-						.equals("/files/basic/cmis/repository/p!20527378/object/snx:file!bead66f9-2b8d-4609-ac43-07f1541e5566")) {
-			try {
-				return DOMUtil.createDocument(this.getClass().getResourceAsStream("ReadEntry.xml"));
-			} catch (XMLException e) {
-				throw new ClientServicesException(e);
-			}
-		}
-
-		return null;
+		throw new ClientServicesException(new Exception("Testing endpoint errors"));
 	}
 }

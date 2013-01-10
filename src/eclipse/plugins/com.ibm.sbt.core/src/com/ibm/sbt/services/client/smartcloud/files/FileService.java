@@ -431,8 +431,11 @@ public class FileService extends BaseService {
 	 * @throws FileServiceException
 	 */
 	public FileEntry getEntry(String id, boolean loadIt) throws FileServiceException {
-		id = id.trim();
+		if (id == null) {
+			throw new IllegalArgumentException(StringUtil.format("A null entry identifier  was passed"));
+		}
 		FileEntry entry = new FileEntry(id, this);
+
 		if (loadIt) {
 
 			try {
@@ -470,7 +473,9 @@ public class FileService extends BaseService {
 	 * @throws FileServiceException
 	 */
 	public FileEntry getEntry(String id, Boolean includeACL, FieldFilter filter) throws FileServiceException {
-		id = id.trim();
+		if (id == null) {
+			throw new IllegalArgumentException(StringUtil.format("A null entry identifier  was passed"));
+		}
 		FileEntry entry = new FileEntry(id, this);
 
 		Map<String, String> parameters = new HashMap<String, String>();

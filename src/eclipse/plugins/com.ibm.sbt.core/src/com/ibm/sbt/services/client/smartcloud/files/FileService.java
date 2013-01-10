@@ -74,12 +74,12 @@ public class FileService extends BaseService {
 	private RepositoryInfo		reposInfo;
 
 	protected static enum FilesAPI {
-		GET_REPOSITORY_INFO("/files/basic/cmis/my/servicedoc"), GET_FILE_ENTRY(
-				"/files/basic/cmis/repository/p!{subscriberId}/object/snx:file!{fileId}"), POST_FILE_UPLOAD(
-				"/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:files"), GET_MY_FILES(
-				"/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:files"), GET_MY_FILES_ALT(
-				"/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:virtual!.!filesownedby"), GET_MY_FILES_WITH_FILTER(
-				"/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:files");
+		GET_REPOSITORY_INFO("/files/basic/cmis/my/servicedoc"),
+		GET_FILE_ENTRY("/files/basic/cmis/repository/p!{subscriberId}/object/snx:file!{fileId}"),
+		POST_FILE_UPLOAD("/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:files"),
+		GET_MY_FILES("/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:files"),
+		GET_MY_FILES_ALT("/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:virtual!.!filesownedby"),
+		GET_MY_FILES_WITH_FILTER("/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:files");
 
 		private String	url;
 
@@ -161,9 +161,10 @@ public class FileService extends BaseService {
 			if (e.isClientError()) {
 				reason = reason.CLIENT_ERROR;
 			}
-			//TODO: agree on level of client exception. Any exception should be severe, but client exception aren't really exceptional behaviour and sometime expected as part of the API
+			// TODO: agree on level of client exception. Any exception should be severe, but client exception
+			// aren't really exceptional behaviour and sometime expected as part of the API
 			if (logger.isLoggable(Level.WARNING)) {
-				logger.log(Level.WARNING,e.getMessage(), e);
+				logger.log(Level.WARNING, e.getMessage(), e);
 			}
 			throw new FileServiceException(e, StringUtil.format("Error reading files"), reason);
 		}
@@ -195,9 +196,10 @@ public class FileService extends BaseService {
 			if (e.isClientError()) {
 				reason = reason.CLIENT_ERROR;
 			}
-			//TODO: agree on level of client exception. Any exception should be severe, but client exception aren't really exceptional behaviour and sometime expected as part of the API
+			// TODO: agree on level of client exception. Any exception should be severe, but client exception
+			// aren't really exceptional behaviour and sometime expected as part of the API
 			if (logger.isLoggable(Level.WARNING)) {
-				logger.log(Level.WARNING,e.getMessage(), e);
+				logger.log(Level.WARNING, e.getMessage(), e);
 			}
 			throw new FileServiceException(e, StringUtil.format("Error reading files"), reason);
 		}
@@ -244,11 +246,14 @@ public class FileService extends BaseService {
 			if (e.isClientError()) {
 				reason = Reason.CLIENT_ERROR;
 			}
-			//TODO: agree on level of client exception. Any exception should be severe, but client exception aren't really exceptional behaviour and sometime expected as part of the API
+			// TODO: agree on level of client exception. Any exception should be severe, but client exception
+			// aren't really exceptional behaviour and sometime expected as part of the API
 			if (logger.isLoggable(Level.WARNING)) {
-				logger.log(Level.WARNING,e.getMessage(), e);
+				logger.log(Level.WARNING, e.getMessage(), e);
 			}
-			throw new FileServiceException(e, StringUtil.format("Error reading files, using filters: {0}, limited at {1} entries starting from {2} ", filter, maxItems, skipCount), reason);
+			throw new FileServiceException(e, StringUtil.format(
+					"Error reading files, using filters: {0}, limited at {1} entries starting from {2} ",
+					filter, maxItems, skipCount), reason);
 		}
 		return entries;
 
@@ -284,15 +289,16 @@ public class FileService extends BaseService {
 		}
 		if (name == null) {
 			throw new IllegalArgumentException(StringUtil.format("A null file name was passed"));
-		}	
+		}
 		try {
 			return this.uploadFile(new FileInputStream(file), name, file.length());
-		} catch (FileNotFoundException e) {				
+		} catch (FileNotFoundException e) {
 			if (logger.isLoggable(Level.SEVERE)) {
-				logger.log(Level.SEVERE,e.getMessage(), e);
+				logger.log(Level.SEVERE, e.getMessage(), e);
 			}
-			//check null for safety as the previous check may get removed/moved to other classes
-			throw new FileServiceException(e, StringUtil.format("File {0} not found", file == null? "null": file.getAbsolutePath()), Reason.INVALID_INPUT);
+			// check null for safety as the previous check may get removed/moved to other classes
+			throw new FileServiceException(e, StringUtil.format("File {0} not found", file == null ? "null"
+					: file.getAbsolutePath()), Reason.INVALID_INPUT);
 		}
 	}
 
@@ -332,26 +338,32 @@ public class FileService extends BaseService {
 			return (FileEntry<DataFormat>) getEntityFromData(FileEntry.class.getSimpleName(), payload);
 
 		} catch (ClientServicesException e) {
-			 	//TODO: agree on level of client exception. Any exception should be severe, but client exception aren't really exceptional behaviour and sometime expected as part of the API
-				if (logger.isLoggable(Level.WARNING)) {
-					logger.log(Level.WARNING,e.getMessage(), e);
-				}
-				Reason reason = Reason.SERVER_ERROR;
-				if (e.getResponseStatusCode()  == ClientServicesException.CONFLICT) {
-					reason = Reason.DUPLICATE_FILE;
-					throw new FileServiceException(e, StringUtil.format("A file with the name {0} already exists on the server for this user", name), reason);
-				}
-				if (e.getResponseStatusCode()  == ClientServicesException.LENGTH_REQUIRED) {
-					reason = Reason.INVALID_INPUT;
-					throw new FileServiceException(e, StringUtil.format("Server doesn't support chunked transfer encoding; please pass a valid length; input length was {0} ", length), reason);
-				}
-				
-				if (e.isClientError()) {
-					reason = Reason.CLIENT_ERROR;
-				}
-				
-				throw new FileServiceException(e, StringUtil.format("Error uploading the file"), reason);
+			// TODO: agree on level of client exception. Any exception should be severe, but client exception
+			// aren't really exceptional behaviour and sometime expected as part of the API
+			if (logger.isLoggable(Level.WARNING)) {
+				logger.log(Level.WARNING, e.getMessage(), e);
 			}
+			Reason reason = Reason.SERVER_ERROR;
+			if (e.getResponseStatusCode() == ClientServicesException.CONFLICT) {
+				reason = Reason.DUPLICATE_FILE;
+				throw new FileServiceException(e, StringUtil.format(
+						"A file with the name {0} already exists on the server for this user", name), reason);
+			}
+			if (e.getResponseStatusCode() == ClientServicesException.LENGTH_REQUIRED) {
+				reason = Reason.INVALID_INPUT;
+				throw new FileServiceException(
+						e,
+						StringUtil
+								.format("Server doesn't support chunked transfer encoding; please pass a valid length; input length was {0} ",
+										length), reason);
+			}
+
+			if (e.isClientError()) {
+				reason = Reason.CLIENT_ERROR;
+			}
+
+			throw new FileServiceException(e, StringUtil.format("Error uploading the file"), reason);
+		}
 	}
 
 	/**
@@ -371,16 +383,18 @@ public class FileService extends BaseService {
 				this.reposInfo = super.getSingleEntry(FilesAPI.GET_REPOSITORY_INFO.getUrl(), true,
 						RepositoryInfo.class);
 			} catch (ClientServicesException e) {
-			 	//TODO: agree on level of client exception. Any exception should be severe, but client exception aren't really exceptional behaviour and sometime expected as part of the API
+				// TODO: agree on level of client exception. Any exception should be severe, but client
+				// exception aren't really exceptional behaviour and sometime expected as part of the API
 				if (logger.isLoggable(Level.WARNING)) {
-					logger.log(Level.WARNING,e.getMessage(), e);
+					logger.log(Level.WARNING, e.getMessage(), e);
 				}
-				Reason reason = Reason.SERVER_ERROR;	
+				Reason reason = Reason.SERVER_ERROR;
 				if (e.isClientError()) {
 					reason = Reason.CLIENT_ERROR;
 				}
-				
-				throw new FileServiceException(e, StringUtil.format("Error reading the file service API index"), reason);
+
+				throw new FileServiceException(e,
+						StringUtil.format("Error reading the file service API index"), reason);
 			}
 		}
 		return reposInfo;
@@ -424,19 +438,54 @@ public class FileService extends BaseService {
 			try {
 				entry.load();
 			} catch (ClientServicesException e) {
-			 	//TODO: agree on level of client exception. Any exception should be severe, but client exception aren't really exceptional behaviour and sometime expected as part of the API
+				// TODO: agree on level of client exception. Any exception should be severe, but client
+				// exception aren't really exceptional behaviour and sometime expected as part of the API
 				if (logger.isLoggable(Level.WARNING)) {
-					logger.log(Level.WARNING,e.getMessage(), e);
+					logger.log(Level.WARNING, e.getMessage(), e);
 				}
-				Reason reason = Reason.SERVER_ERROR;				
+				Reason reason = Reason.SERVER_ERROR;
 				if (e.isClientError()) {
 					reason = Reason.CLIENT_ERROR;
 				}
-				
-				throw new FileServiceException(e, StringUtil.format("Error reading the file entry with id {0}",id), reason);
+
+				throw new FileServiceException(e, StringUtil.format(
+						"Error reading the file entry with id {0}", id), reason);
 			}
 
 		}
+		return entry;
+	}
+
+	public FileEntry getEntry(String id, Boolean includeACL, FieldFilter filter) throws FileServiceException {
+		id = id.trim();
+		FileEntry entry = new FileEntry(id, this);
+
+		Map<String, String> parameters = new HashMap<String, String>();
+
+		if (filter != null) {
+			parameters.put("filter", filter.getForURLQuery());
+		}
+		if (includeACL != null) {
+			parameters.put("includeACL", includeACL.toString());
+		}
+
+		try {
+			entry.load(parameters);
+		} catch (ClientServicesException e) {
+			// TODO: agree on level of client exception. Any exception should be severe, but client
+			// exception aren't really exceptional behaviour and sometime expected as part of the API
+			if (logger.isLoggable(Level.WARNING)) {
+				logger.log(Level.WARNING, e.getMessage(), e);
+			}
+			Reason reason = Reason.SERVER_ERROR;
+			if (e.isClientError()) {
+				reason = Reason.CLIENT_ERROR;
+			}
+
+			throw new FileServiceException(e, StringUtil.format("Error reading the file entry with id {0}",
+					id), reason);
+		}
+
 		return entry;
 	}
 
@@ -448,7 +497,8 @@ public class FileService extends BaseService {
 			try {
 				return new FileEntry<DataFormat>(uuid, this);
 			} catch (FileServiceException e) {
-				//This exception handling applies only to the file service API where creating an entity ref requires to fetch the server file API to build the retrieval URL
+				// This exception handling applies only to the file service API where creating an entity ref
+				// requires to fetch the server file API to build the retrieval URL
 				throw new ClientServicesException(e);
 			}
 
@@ -466,7 +516,8 @@ public class FileService extends BaseService {
 			try {
 				return new FileEntry<DataFormat>(data, this);
 			} catch (FileServiceException e) {
-				//not to be taken as example, only applies to smartcloud file service API, other entities shouldn't fail construction
+				// not to be taken as example, only applies to smartcloud file service API, other entities
+				// shouldn't fail construction
 				throw new ClientServicesException(e);
 			}
 

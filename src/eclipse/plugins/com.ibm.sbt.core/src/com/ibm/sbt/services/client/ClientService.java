@@ -135,6 +135,26 @@ public abstract class ClientService {
 	protected void checkReadParameters(Map<String, String> parameters) throws ClientServicesException {
 		// nothing for now...
 	}
+	
+	protected String getBaseUrl() {
+		if (endpoint != null) {
+			return endpoint.getUrl();
+		}
+		return null;
+	}
+
+	protected void initialize(DefaultHttpClient httpClient) throws ClientServicesException {
+		if (endpoint != null) {
+			endpoint.initialize(httpClient);
+		}
+	}
+
+	protected boolean isForceTrustSSLCertificate() throws ClientServicesException {
+		if (endpoint != null) {
+			return endpoint.isForceTrustSSLCertificate();
+		}
+		return false;
+	}
 
 	protected void forceAuthentication(Args args) throws ClientServicesException {
 		if (endpoint != null) {
@@ -799,9 +819,8 @@ public abstract class ClientService {
 	protected Object _xhr(HttpRequestBase httpRequestBase, Args args, Object content)
 			throws ClientServicesException {
 		DefaultHttpClient httpClient = createHttpClient(httpRequestBase, args);
-		if (endpoint != null) {
-			endpoint.initialize(httpClient);
-		}
+		initialize(httpClient);
+
 		// HttpClient 4.1
 		// httpClient.addRequestInterceptor(new RequestAcceptEncoding());
 		// httpClient.addResponseInterceptor(new ResponseContentEncoding());
@@ -901,7 +920,7 @@ public abstract class ClientService {
 	}
 
 	protected String getUrlPath(Args args) {
-		String url = PathUtil.concatParts(endpoint.getUrl(), args.getServiceUrl(), '/');
+		String url = PathUtil.concatParts(getBaseUrl(), args.getServiceUrl(), '/');
 		return url;
 	}
 
@@ -1024,12 +1043,12 @@ public abstract class ClientService {
 			throws ClientServicesException {
 		// Check if we should trust the HTTPS certificates
 		DefaultHttpClient httpClient = new DefaultHttpClient();
-		if (endpoint != null && endpoint.isForceTrustSSLCertificate()) {
-			// PHIL; we don't check the scheme here as the Apachae library will still verify the
+		if (isForceTrustSSLCertificate()) {
+			// PHIL: we don't check the scheme here as the Apachae library will still verify the
 			// certificate for some http requests...
 			// String scheme = httpRequestBase.getURI().getScheme();
 			// if(scheme!=null && scheme.equalsIgnoreCase("https")) {
-			return SSLUtil.wrapHttpClient(httpClient);
+				return SSLUtil.wrapHttpClient(httpClient);
 			// }
 		}
 		return httpClient;

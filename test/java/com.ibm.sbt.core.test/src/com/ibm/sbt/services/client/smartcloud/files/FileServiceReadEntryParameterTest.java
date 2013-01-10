@@ -25,15 +25,19 @@ import com.ibm.commons.xml.DOMUtil;
 import com.ibm.commons.xml.XMLException;
 import com.ibm.sbt.services.client.ClientService.Args;
 import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.client.smartcloud.files.FileService.FieldFilter;
 
-public class FileServiceReadEntryTest extends TestEndpoint {
+public class FileServiceReadEntryParameterTest extends TestEndpoint {
 
 	public final static String	TEST_ID	= "bead66f9-2b8d-4609-ac43-07f1541e5566";
 
 	@Test
 	public void testRead() throws FileServiceException {
+		FieldFilter f = new FieldFilter();
+
 		FileService svc = new FileService();
-		FileEntry entry = svc.getEntry(TEST_ID);
+
+		FileEntry entry = svc.getEntry(TEST_ID, true, f);
 		assertNotNull(entry.getPageURL());
 
 	}
@@ -41,9 +45,31 @@ public class FileServiceReadEntryTest extends TestEndpoint {
 	@Test(expected = IllegalArgumentException.class)
 	public void testError1() throws IOException, FileServiceException {
 		FileService svc = new FileService();
-		FileEntry entry = svc.getEntry(null);
+		FileEntry entry = svc.getEntry(null, null, null);
 		assertNotNull(entry.getPageURL());
 		fail();
+	}
+
+	@Test
+	public void testRead2() throws FileServiceException {
+		FieldFilter f = new FieldFilter();
+
+		FileService svc = new FileService();
+
+		FileEntry entry = svc.getEntry(TEST_ID, null, f);
+		assertNotNull(entry.getPageURL());
+
+	}
+
+	@Test
+	public void testRead3() throws FileServiceException {
+		new FieldFilter();
+
+		FileService svc = new FileService();
+
+		FileEntry entry = svc.getEntry(TEST_ID, false, null);
+		assertNotNull(entry.getPageURL());
+
 	}
 
 	@Override

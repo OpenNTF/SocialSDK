@@ -58,6 +58,9 @@ define([],function() {
 		},
 		_xpath_communities_Feed : {
 				"entry"				:"/a:feed/a:entry",
+                "totalResults"      :"/a:feed/opensearch:totalResults",
+                "startIndex"        :"/a:feed/opensearch:startIndex",
+                "itemsPerPage"      :"/a:feed/opensearch:itemsPerPage",
 				"id"				:"snx:communityUuid",
 				"title"				:"a:title",
                 "communityUuid"     :"snx:communityUuid",
@@ -73,6 +76,9 @@ define([],function() {
 		},
 		_xpath_community_Members_Feed : {
 				"entry"				:"/a:feed/a:entry",
+                "totalResults"      :"/a:feed/opensearch:totalResults",
+                "startIndex"        :"/a:feed/opensearch:startIndex",
+                "itemsPerPage"      :"/a:feed/opensearch:itemsPerPage",
 				"id"				:"a:contributor/snx:userid",
 				"name"				:"a:contributor/a:name"
 		},

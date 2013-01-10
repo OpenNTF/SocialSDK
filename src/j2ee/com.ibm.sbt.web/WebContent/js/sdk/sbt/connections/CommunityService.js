@@ -158,10 +158,13 @@ define(
 				},
 
 				_getTags : function(fieldName) {					
-					var tagsObj = this.xpathArray(this.fieldXPathForEntry(fieldName));
+					var nodeArray = this.xpathArray(this.fieldXPathForEntry(fieldName));
+					if (nodeArray.length == 0) {
+					    nodeArray = this.xpathArray(this.fieldXPathForFeed(fieldName));
+					}
 					var tags = [];					
-					for(var count = 1;count < tagsObj.length; count ++){
-						var node = tagsObj[count];
+					for(var count = 1;count < nodeArray.length; count ++){
+						var node = nodeArray[count];
 						var tag = node.text || node.textContent;
 						tags.push(tag);
 					}

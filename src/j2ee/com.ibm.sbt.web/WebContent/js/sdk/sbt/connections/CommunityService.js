@@ -135,6 +135,9 @@ define(
 					if (fieldName == "tags") {
 						return this._getTags(fieldName);
 					}
+					if (fieldName == "published" || fieldName == "updated") {
+                        return this._getDate(fieldName);
+                    }
 					return this.fields[fieldName] || this.xpath(this.fieldXPathForEntry(fieldName)) || this.xpath(this.fieldXPathForFeed(fieldName));
 				},
 				
@@ -153,6 +156,7 @@ define(
 				remove : function(fieldName) {
 					delete this.fields[fieldName];
 				},
+
 				_getTags : function(fieldName) {					
 					var tagsObj = this.xpathArray(this.fieldXPathForEntry(fieldName));
 					var tags = [];					
@@ -164,6 +168,14 @@ define(
 					return tags;
 				},
 				
+                _getDate : function(fieldName) {                    
+                    var dateStr = this.fields[fieldName] || this.xpath(this.fieldXPathForEntry(fieldName)) || this.xpath(this.fieldXPathForFeed(fieldName));
+                    if (dateStr) {
+                        return new Date(dateStr);
+                    }
+                    return null;
+                },
+                
 				/**
 				 * Return the value of IBM Connections community ID from community ATOM entry document.
 				 * 
@@ -192,7 +204,6 @@ define(
 				 * @method getSummary
 				 * @return {String} Community description summary of the community
 				 */
-				
 				getSummary : function() {
 					return this.get("summary");
 				},
@@ -203,10 +214,10 @@ define(
 				 * @method getContent
 				 * @return {String} Community description of the community
 				 */
-				
 				getContent : function() {
 					return this.get("content");
 				},
+				
 				/**
 				 * Return the value of IBM Connections community URL  from community ATOM entry document.
 				 * 
@@ -233,18 +244,56 @@ define(
 				 * @method getTags
 				 * @return {Object} Array of tags of the community
 				 */
-				
 				getTags : function() {
 					return this.get("tags");
 				},
 				
+                /**
+                 * Return the member count of the IBM Connections community from community ATOM entry document.
+                 * 
+                 * @method getMemberCount
+                 * @return {Number} Member count for the Community
+                 */
+                getMemberCount : function() {
+                    return this.get("memberCount");
+                },
+                
+                /**
+                 * Return the community type of the IBM Connections community from community ATOM entry document.
+                 * 
+                 * @method getCommunityType
+                 * @return {String} Type of the Community
+                 */
+                getCommunityType : function() {
+                    return this.get("communityType");
+                },
+                
+                /**
+                 * Return the published date of the IBM Connections community from community ATOM entry document.
+                 * 
+                 * @method getPublished
+                 * @return {Date} Published date of the Community
+                 */
+                getPublished : function() {
+                    return this.get("published");
+                },
+                
+                /**
+                 * Return the last updated date of the IBM Connections community from community ATOM entry document.
+                 * 
+                 * @method getUpdated
+                 * @return {Date} Last updated date of the Community
+                 */
+                getUpdated : function() {
+                    return this.get("updated");
+                },
+                
 				/**
 				 * Sets title of IBM Connections community.
 				 * 
 				 * @method setTitle
 				 * @param {String} title Title of the community
 				 */
-				
 				setTitle : function(title) {
 					this.set("title", title);
 				},

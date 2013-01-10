@@ -456,6 +456,19 @@ public class FileService extends BaseService {
 		return entry;
 	}
 
+	/**
+	 * Returns a partially loaded file entry, using the FieldFilter to retrieve only specific fields from the
+	 * entry.
+	 * 
+	 * @param id
+	 *            The file entry object identifier
+	 * @param includeACL
+	 *            Boolean that determines if to retrieve or not the file entry ACL
+	 * @param filter
+	 *            The field filter, @see {@link FieldFilter}
+	 * @return
+	 * @throws FileServiceException
+	 */
 	public FileEntry getEntry(String id, Boolean includeACL, FieldFilter filter) throws FileServiceException {
 		id = id.trim();
 		FileEntry entry = new FileEntry(id, this);

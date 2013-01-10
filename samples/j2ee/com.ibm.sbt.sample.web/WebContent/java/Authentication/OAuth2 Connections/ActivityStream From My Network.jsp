@@ -16,6 +16,7 @@
  */ -->
  
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.sbt.services.client.activitystreams.ActivityStreamService"%>
 <%@page import="com.ibm.sbt.services.client.activitystreams.model.ActivityStreamEntry"%>
 <%@page import="com.ibm.sbt.services.endpoints.Endpoint"%>
@@ -45,16 +46,24 @@
 	<body>
 	
 		<%
+		Endpoint ep = null;
+		try {
 				// Check if user is authenticated, if not redirect to SmartCloud for authentication.
-				Endpoint ep = EndpointFactory.getEndpoint("connectionsOA2");
+				ep= EndpointFactory.getEndpoint("connectionsOA2");
 				if(!ep.isAuthenticationValid()) {	// Check, Do we have a valid token for this user
 					ep.authenticate(true);		// Authenticate
 		    		return;					// Exit, JSP would be invoked from Callback handler
 		    	}
+		} catch (Throwable e) {
+			out.println("<pre>");
+			e.printStackTrace(new PrintWriter(out));
+			out.println("</pre>");
+		}
 		%>
 		 
 		<h4>Updates from My Network</h4>
 	 	<%
+	 	try {
 			ActivityStreamService _service = new ActivityStreamService("connectionsOA2");
 			List<ActivityStreamEntry> _entries = (List)_service.getUpdatesFromMyNetwork();
 			if(_entries == null || _entries.isEmpty()) {
@@ -69,6 +78,11 @@
 					out.println("<br>");
 				}
 			}
+		} catch (Throwable e) {
+			out.println("<pre>");
+			e.printStackTrace(new PrintWriter(out));
+			out.println("</pre>");
+		}
 	 %>
 
 	</body>

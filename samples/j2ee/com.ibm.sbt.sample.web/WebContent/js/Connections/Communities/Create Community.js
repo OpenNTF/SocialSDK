@@ -1,4 +1,5 @@
 require(["sbt/connections/CommunityService","sbt/dom"], function(CommunityService,dom) {
+    config.Properties["loginUi"] = "dialog";
     var communityService = new CommunityService();  
     var community = communityService.getCommunity({     
         loadIt : false

@@ -138,7 +138,7 @@ define(
 					if (fieldName == "published" || fieldName == "updated") {
                         return this._getDate(fieldName);
                     }
-					return this.fields[fieldName] || this.xpath(this.fieldXPathForEntry(fieldName)) || this.xpath(this.fieldXPathForFeed(fieldName));
+					return this.fields[fieldName] || this.xpath(this.fieldXPathForEntry(fieldName));
 				},
 				
 				/**
@@ -158,10 +158,7 @@ define(
 				},
 
 				_getTags : function(fieldName) {					
-					var nodeArray = this.xpathArray(this.fieldXPathForEntry(fieldName));
-					if (nodeArray.length == 0) {
-					    nodeArray = this.xpathArray(this.fieldXPathForFeed(fieldName));
-					}
+					var nodeArray = this.xpathArray(this.fieldXPathForEntry(fieldName));					
 					var tags = [];					
 					for(var count = 1;count < nodeArray.length; count ++){
 						var node = nodeArray[count];
@@ -290,7 +287,46 @@ define(
                 getUpdated : function() {
                     return this.get("updated");
                 },
-                
+                /**
+				 * Gets author Id of IBM Connections community.
+				 * 
+				 * @method getAuthorId
+				 * @return {String} authorId Author Id of the community
+				 */
+				getAuthorId : function(){
+					return this.get("authorUid");					
+				},
+				/**
+				 * Gets contributor Id of IBM Connections community.
+				 * 
+				 * @method getContributorId
+				 * @return {String} contributorId Contributor Id of the community
+				 */
+				getContributorId : function(){
+					return this.get("contributorUid");					
+				},
+                /**
+				 * Gets an author of IBM Connections community.
+				 * 
+				 * @method getAuthor
+				 * @return {Member} author Author of the community
+				 */
+				getAuthor : function(){
+					var _authorId = this.get("authorUid");
+					var _author = new Member(this._service, _authorId);
+					return _author;
+				},
+				/**
+				 * Gets a contributor of IBM Connections community.
+				 * 
+				 * @method getContributor
+				 * @return {Member} contributor Contributor of the community
+				 */
+				getContributor : function(){
+					var _contributorId = this.get("contributorUid");
+					var _contributor = new Member(this._service, _contributorId);
+					return _contributor;
+				},
 				/**
 				 * Sets title of IBM Connections community.
 				 * 
@@ -404,7 +440,7 @@ define(
 				 */
 				
 				fieldXPathForEntry : function(fieldName) {
-					return Constants._xpath_community_Members_Feed[fieldName];
+					return Constants._xpath_member[fieldName];
 				},
 				
 				/**
@@ -425,8 +461,8 @@ define(
 				 * @param {String} fieldName Name of the field representing community member attribute in IBM Connections.
 				 * @return {String/Object} The value of the field from the community member ATOM entry document.
 				 */
-				get : function(fieldName) {
-					return this.memberFields[fieldName] || this.xpath(this.fieldXPathForEntry(fieldName)) || this.xpath(this.fieldXPathForFeed(fieldName));
+				get : function(fieldName) {					
+					return this.memberFields[fieldName] || this.xpath(this.fieldXPathForEntry(fieldName));
 				},
 				
 				/**
@@ -462,6 +498,15 @@ define(
 				 */
 				getRole : function() {
 					return this.get("role");
+				},
+				/**
+				 * Return the value of community member userId from community member ATOM entry document.
+				 * 
+				 * @method getId
+				 * @return {String} Community member userId
+				 */
+				getId : function(){
+					return this.get("uid");
 				},
 				
 				/**
@@ -620,7 +665,9 @@ define(
 								handleAs : "text",
 								content : content,
 								load : function(data) {
-									community.data = xml.parse(data);
+									//community.data = xml.parse(data);
+									var entry = xpath.selectNodes(xml.parse(data), Constants._xpath["entry"], con.namespaces);
+									community.data = entry[0];
 									if (args.load) {
 										args.load(community);
 									}
@@ -672,7 +719,9 @@ define(
 								handleAs : "text",
 								content : content,
 								load : function(data) {
-									member.data = xml.parse(data);
+									var entry = xpath.selectNodes(xml.parse(data), Constants._xpath_member["entry"], con.namespaces);
+									member.data = entry[0];
+									//member.data = xml.parse(data);
 									if (args.load) {
 										args.load(member);
 									}
@@ -877,7 +926,9 @@ define(
 								putData : this._constructCommunityRequestBody(community),
 								headers : headers,
 								load : function(data) {
-									community.data = xml.parse(data);
+									var entry = xpath.selectNodes(xml.parse(data), Constants._xpath["entry"], con.namespaces);
+									community.data = entry[0];
+									//community.data = xml.parse(data);
 									if (args.load)
 										args.load(community);
 									if (args.handle)

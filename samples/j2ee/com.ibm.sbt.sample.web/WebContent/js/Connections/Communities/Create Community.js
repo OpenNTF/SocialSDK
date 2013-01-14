@@ -1,4 +1,4 @@
-require(["sbt/connections/CommunityService","sbt/dom"], function(CommunityService,dom) {
+require(["sbt/connections/CommunityService","sbt/dom","sbt/config"], function(CommunityService,dom,config) {
     config.Properties["loginUi"] = "dialog";
     var communityService = new CommunityService();  
     var community = communityService.getCommunity({     

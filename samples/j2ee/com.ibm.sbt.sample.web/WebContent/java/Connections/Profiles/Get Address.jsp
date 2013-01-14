@@ -20,6 +20,7 @@
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.Map"%>
+<%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
 <%@page import="com.ibm.sbt.services.client.connections.profiles.ProfileService"%>
@@ -32,16 +33,25 @@
 </head>
 <body>
 	<%
-		String userId = Context.get().getProperty("sample.id1");
-		ProfileService connProfSvc = new ProfileService();
-		Profile profile = connProfSvc.getProfile(userId);
-		if(profile.getId()!=null){
-			HashMap<String,String> addressMap = (HashMap<String,String>)profile.getAddress();
-			Iterator<Map.Entry<String,String>> entries = addressMap.entrySet().iterator();
-			for (Map.Entry<String, String> entry : addressMap.entrySet()) {
-				out.println("<b>"+entry.getKey()+" : </b>"+ entry.getValue());
-	    	}
-    	}
+	try{
+			String userId = Context.get().getProperty("sample.id1");
+			ProfileService connProfSvc = new ProfileService();
+			Profile profile = connProfSvc.getProfile(userId);
+			if(profile != null){
+				HashMap<String,String> addressMap = (HashMap<String,String>)profile.getAddress();
+				Iterator<Map.Entry<String,String>> entries = addressMap.entrySet().iterator();
+				for (Map.Entry<String, String> entry : addressMap.entrySet()) {
+					out.println("<b>"+entry.getKey()+" : </b>"+ entry.getValue());
+		    	}
+    		}
+    		else {
+					out.println("error encountered in getting required Profile information");
+			}
+    	} catch (Throwable e) {
+			out.println("<pre>");
+			e.printStackTrace(new PrintWriter(out));
+			out.println("</pre>");
+		}
 	%>
 </body>
 </html>

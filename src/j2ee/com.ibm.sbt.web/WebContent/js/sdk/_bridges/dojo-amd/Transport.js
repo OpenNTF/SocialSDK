@@ -30,7 +30,8 @@ define([ 'dojo/_base/declare', 'dojo/_base/xhr', 'dojo/_base/lang', 'dojox/xml/p
                 self.handleResponse(data, ioArgs, args);
             };
 
-            dojo.xhr(method, _args, hasBody);
+           // dojo.xhr(method, _args, hasBody);
+           xhr(method, _args, hasBody);
         },
         handleResponse: function(data, ioArgs, args) {
             var _data = data;
@@ -59,6 +60,8 @@ define([ 'dojo/_base/declare', 'dojo/_base/xhr', 'dojo/_base/lang', 'dojox/xml/p
             var text = error.responseText || (error.response&&error.response.text);
             if (text) {
                 try {
+                	//using dojo/xml/parser to parse the response
+                	//this assumes the response is XML what if it is not ?
                     var dom = parser.parse(text);
                     var messages = dom.getElementsByTagName("message");
                     if (messages && messages.length != 0) {

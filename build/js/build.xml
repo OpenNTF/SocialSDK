@@ -4,6 +4,7 @@
 
   <!-- PROPERTIES -->
   <target name="properties">
+  	
       <property file="build.properties"/>
   </target>
 
@@ -117,18 +118,17 @@
 
   <target name="jsmin" depends="properties, prepare">
     <echo>--Minifying javascript code</echo>
-    <echo>Shrinksafe: java -jar ${jar.shrinksafe} -cp=${jar.rhino} ${dir.src} ${dir.min.output}/min.js</echo>
+    <echo>Shrinksafe: java -jar ${org.dojotoolkit:dojo-shrinksafe:jar} -cp=${rhino:js:jar} ${dir.src} ${dir.min.output}/min.js</echo>
     <!-- Run on every file and keep directory structure -->
-    <foreach target="processJS" param="file">
-      <fileset dir="${dir.src}" includes="**/*.js"/>
+    <foreach target="processJS" param="file" inheritall="true">
+      <fileset dir="${dir.src}" includes="**/**.js"/>
     </foreach>
-
     <!-- Append all files together
     <apply executable="java" parallel="false" output="${dir.min.output}/min.js">
       <fileset dir="${dir.src}" includes="**/*.js"/>
       <arg line="-jar"/>
-      <arg path="${jar.shrinksafe}"/>
-      <arg line="-cp=${jar.rhino}"/>
+      <arg path="${org.dojotoolkit:dojo-shrinksafe:jar}"/>
+      <arg line="-cp=${rhino:js:jar}"/>
     </apply>
     -->
     <echo>Done!</echo>
@@ -146,8 +146,15 @@
         <mkdir dir="${dir.min.output}\${relDir}"></mkdir>
       </else>
     </if>
-    <java jar="${jar.shrinksafe}" fork="true" output="${dir.min.output}\${relDir}\${filename}">
-      <arg line="-cp=${jar.rhino} ${file}"/>
+  	<!--This is the list of required jars to run shrinksafe, i.e. shrinksafe and rhino -->
+  	<path id="shrinksafe.classpath">
+        <pathelement path="${org.dojotoolkit:dojo-shrinksafe:jar}"/>
+  		<pathelement path="${rhino:js:jar}"/>
+  	</path>
+  	<!-- Here we run the main class from shrinksafe, giving it a classpath option and a file as an argument. -->
+    <java classname="org.dojotoolkit.shrinksafe.Main" fork="true" output="${dir.min.output}\${relDir}\${filename}" failonerror="true">
+        <classpath refid="shrinksafe.classpath"/>
+    	<arg value="${file}"/>
     </java>
     <echo>Minifying file ${file}</echo>
   </target>

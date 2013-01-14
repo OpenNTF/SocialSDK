@@ -17,13 +17,15 @@
 /**
  * Social Business Toolkit SDK - Some DOM utilities.
  */
-define(['dojo/dom'],function(dom) {
+define(['dojo/dom','dojo/_base/window'],function(dom,win) {
 	return {
 		byId: function(id) {
 			return dom.byId(id);
 		},
 		createTextNode: function(text) {
-			return dojo.doc.createTextNode(text);
+			//return dojo.doc.createTextNode(text);
+			//change also made to define, added 'dojo/_base/window'
+			return win.doc.createTextNode(text);
 		},
 		removeAll: function(node) {
 			node = this.byId(node);

@@ -26,15 +26,34 @@ define(['sbt/config'],function(sbt) {
  */
 	return sbt.base = {
 		// Namespaces used when parsing Atom feeds
-		namespaces: {
-			o:			"http://ns.opensocial.org/2008/opensocial",
-			app:		"http://www.w3.org/2007/app",
-			thr:		"http://purl.org/syndication/thread/1.0",
-			fh:			"http://purl.org/syndication/history/1.0",
-			snx:		"http://www.ibm.com/xmlns/prod/sn",
-			opensearch:	"http://a9.com/-/spec/opensearch/1.1/",
-			a:			"http://www.w3.org/2005/Atom",
-			h:			"http://www.w3.org/1999/xhtml"
-		},
+        namespaces : {
+            o : "http://ns.opensocial.org/2008/opensocial",
+            app : "http://www.w3.org/2007/app",
+            thr : "http://purl.org/syndication/thread/1.0",
+            fh : "http://purl.org/syndication/history/1.0",
+            snx : "http://www.ibm.com/xmlns/prod/sn",
+            opensearch : "http://a9.com/-/spec/opensearch/1.1/",
+            a : "http://www.w3.org/2005/Atom",
+            h : "http://www.w3.org/1999/xhtml"
+        },
+		
+		feedXPath : {
+            "entry" : "/a:feed/a:entry",
+            "totalResults" : "/a:feed/opensearch:totalResults",
+            "startIndex" : "/a:feed/opensearch:startIndex",
+            "itemsPerPage" : "/a:feed/opensearch:itemsPerPage"
+        },
+                
+        entryXPath : {
+            "title" : "a:title",
+            "summaryText" : "a:summary[@type='text']",
+            "selfUrl" : "a:link[@rel='self']/@href",
+            "terms" : "a:category/@term",
+            "contentHtml" : "a:content[@type='html']",
+            "published" : "a:published",
+            "updated" : "a:updated",
+            "authorId" : "a:author/snx:userid",
+            "contributorId" : "a:contributor/snx:userid"
+        }
 	};
 });

@@ -29,7 +29,8 @@ define(['dojo/_base/lang'],function(lang) {
 			return lang.isString(o);
 		},
         isFunction: function(o) {
-            return dojo.isFunction(o);
+            //return dojo.isFunction(o);
+            return lang.isFunction();
         },
 		clone: function(o) {
 			return lang.clone(o);

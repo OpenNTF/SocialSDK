@@ -18,6 +18,7 @@
  <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
+<%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.sbt.services.client.connections.profiles.ProfileService"%>
 <%@page import="com.ibm.sbt.services.client.connections.profiles.Profile"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"	pageEncoding="ISO-8859-1"%>
@@ -28,12 +29,25 @@
 </head>
 <body>
 	<%
-		String userId = Context.get().getProperty("sample.id1");
-		ProfileService connProfSvc = new ProfileService();
-		Profile profile = connProfSvc.getProfile(userId);
-		if(profile.getId()!=null){
-			out.println(profile.getPhoneNumber());
-		}		
+		try {
+			String userId = Context.get().getProperty("sample.id1");
+			ProfileService connProfSvc = new ProfileService();
+			Profile profile = connProfSvc.getProfile(userId);
+			if (profile != null) {
+				if (profile.getPhoneNumber() != null) {
+					out.println(profile.getPhoneNumber());
+				} else {
+					out.println("No information found");
+				}
+			}
+			else{
+				out.println("error encountered in getting required Profile information");
+			}
+		} catch (Throwable e) {
+			out.println("<pre>");
+			e.printStackTrace(new PrintWriter(out));
+			out.println("</pre>");
+		}
 	%>
 </body>
 </html>

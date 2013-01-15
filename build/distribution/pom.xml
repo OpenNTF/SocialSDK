@@ -1,17 +1,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.ibm.sbt.sdk</groupId>
-  <artifactId>distribution</artifactId>
-  <version>1.0.0</version>
-  <packaging>pom</packaging>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.ibm.sbt.sdk</groupId>
+	<artifactId>distribution</artifactId>
+	<version>1.0.0</version>
+	<packaging>pom</packaging>
 
-  <parent>
-    <groupId>com.ibm.sbt</groupId>
-    <artifactId>sbt.build</artifactId>
-    <version>1.0.0</version>
-    <relativePath>..</relativePath>
-  </parent>
+	<parent>
+		<groupId>com.ibm.sbt</groupId>
+		<artifactId>sbt.build</artifactId>
+		<version>1.0.0</version>
+		<relativePath>..</relativePath>
+	</parent>
 
   <!--
   <dependencies>
@@ -38,17 +38,17 @@
   </dependencies>
   -->
 
-  <build>
-    <plugins>
-	  <plugin>
-        <artifactId>maven-antrun-plugin</artifactId>
-        <version>1.7</version>
-        <executions>
-          <execution>
-            <phase>package</phase>
-            <configuration>
-              <tasks>
-				<!-- Package Tomcat -->
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.7</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<configuration>
+							<tasks>
+								<!-- Package Tomcat -->
 				<unzip src="./../../platform/tomcat/apache-tomcat-7.0.30.zip" dest="./../../../target/tomcat/unzip"/>	
 				<copy todir="./../../../target/tomcat/unzip/apache-tomcat-7.0.30/webapps" file="./../../../target/com.ibm.sbt.sdk/sbt/sbt.war"/>
 				<copy todir="./../../../target/tomcat/unzip/apache-tomcat-7.0.30/webapps" file="./../../../target/com.ibm.sbt.sdk/sbt.dojo180/sbt.dojo180.war"/>
@@ -66,52 +66,71 @@
 				<copy todir="./../../../target/tomcat/unzip/apache-tomcat-7.0.30/conf" file="./../../platform/tomcat/server.xml"/>
 				<copy todir="./../../../target/tomcat/unzip/apache-tomcat-7.0.30/conf" file="./../../src/config/sbt.properties"/>
 				<zip basedir="./../../../target/tomcat/unzip" destfile="./../../../target/tomcat/apache-tomcat-7.0.30-sbt.zip" compress="true"/>
-				<delete dir="./../../../target/tomcat/unzip"/>
-				<!-- Create Update Site -->
+								<delete dir="./../../../target/tomcat/unzip" />
+								<!-- Create Update Site -->
 				<zip basedir="./../../../target/com.ibm.sbt.domino/com.ibm.sbt.domino.updatesite/site" destfile="./../../../target/com.ibm.sbt.domino/com.ibm.sbt.domino.updatesite/com.ibm.sbt.domino.updatesite.zip" compress="true"/>
 				<delete dir="./../../../target/com.ibm.sbt.domino/com.ibm.sbt.domino.updatesite/site.zip"/>
-				<!-- Create a version file -->
-				<echo file="./../../../target/doc/version.txt">version: ${project.version}.${buildLabel}</echo>
-				<!-- Create a changelog file -->
+								<!-- Create a version file -->
+								<echo file="./../../../target/doc/version.txt">version: ${project.version}.${buildLabel}</echo>
+								<!-- Create a changelog file -->
 				<exec executable="${toolsDir}\git\bin\git.exe"  failonerror="false" output="./../../../target/doc/changelog.txt">
-				<arg value="log"/>
-				<arg value="--no-merges"/>
-				<arg value="--pretty=%s"/>
-				</exec>		
+									<arg value="log" />
+									<arg value="--no-merges" />
+									<arg value="--pretty=%s" />
+								</exec>
 				<exec executable="${toolsDir}\git\bin\git.exe"  failonerror="false" output="./../../../target/doc/weekly.txt">
-				<arg value="log" />
-				<arg value="--no-merges" />
-				<arg value="--pretty=%s" />
-				<arg value="--since" />
-				<arg value="1 week ago" />
-				</exec>				
-              </tasks>
-            </configuration>
-            <goals>
-              <goal>run</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <version>2.3</version>
-        <executions>
-          <execution>
-            <phase>package</phase>
-            <goals>
-              <goal>single</goal>
-            </goals>
-			<configuration>
-				<descriptor>assembly.xml</descriptor>
-				<finalName>sbtsdk-${project.version}.${buildLabel}</finalName>
-				<appendAssemblyId>false</appendAssemblyId>
-				<outputDirectory>../../../kit</outputDirectory>
-			</configuration>
-          </execution>
-        </executions>
-      </plugin>
-	</plugins>
-  </build>
+									<arg value="log" />
+									<arg value="--no-merges" />
+									<arg value="--pretty=%s" />
+									<arg value="--since" />
+									<arg value="1 week ago" />
+								</exec>
+
+								<!-- sanity checks before starting assembly -->
+								<property name="doc.dir" location="../../../target/doc" />
+								<fail unless="doc.dir" message="No documentation generated" />
+								<property name="javadoc.index" location="../../../target/doc/javadoc/index.html" />
+								<fail unless="javadoc.index" message="No javadoc generated" />
+								<property name="jsdoc.index" location="../../../target/doc/jsdoc/index.html" />
+								<fail unless="jsdoc.index" message="No jsdoc generated" />
+								<property name="version.info" location="./../../../target/doc/version.txt" />
+								<property name="changes.info" location="./../../../target/doc/changelog.txt" />
+								<property name="weekly.info" location="./../../../target/doc/weekly.txt" />
+
+								<fail unless="version.info" message="Missing version.txt" />
+								<fail unless="changes.info" message="Missing changelog.txt" />
+								<fail unless="weekly.info" message="Missing weekly.txt" />
+
+								<property name="updatesite.zip" location="../../../target/com.ibm.sbt.domino/com.ibm.sbt.domino.updatesite/com.ibm.sbt.domino.updatesite.zip" />
+								<fail unless="updatesite.zip" message="Update site not found" />
+
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.3</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<descriptor>assembly.xml</descriptor>
+							<finalName>sbtsdk-${project.version}.${buildLabel}</finalName>
+							<appendAssemblyId>false</appendAssemblyId>
+							<outputDirectory>../../../kit</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>

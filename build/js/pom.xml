@@ -1,70 +1,89 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.ibm.sbt.js</groupId>
-  <artifactId>js.parent</artifactId>
-  <version>1.0.0</version>
-  <packaging>pom</packaging>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.ibm.sbt.js</groupId>
+	<artifactId>js.parent</artifactId>
+	<version>1.0.0</version>
+	<packaging>pom</packaging>
 
-  <parent>
-    <groupId>com.ibm.sbt</groupId>
-    <artifactId>sbt.build</artifactId>
-    <version>1.0.0</version>
-    <relativePath>../</relativePath>
-  </parent>
+	<parent>
+		<groupId>com.ibm.sbt</groupId>
+		<artifactId>sbt.build</artifactId>
+		<version>1.0.0</version>
+		<relativePath>../</relativePath>
+	</parent>
 
-  <build>
-    <plugins>
-      <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-antrun-plugin</artifactId>
-          <version>1.7</version>
-          <dependencies>
-              <dependency>
-                  <groupId>ant-contrib</groupId>
-                  <artifactId>ant-contrib</artifactId>
-                  <version>1.0b3</version>
-                  <exclusions>
-                    <exclusion>
-                      <groupId>ant</groupId>
-                      <artifactId>ant</artifactId>
-                    </exclusion>
-                  </exclusions>
-              </dependency>
-              <dependency>
-                  <groupId>org.apache.ant</groupId> 
-                  <artifactId>ant-apache-regexp</artifactId> 
-                  <version>1.8.4</version> 
-                  <scope>runtime</scope> 
-              </dependency> 
-              <dependency> 
-                  <groupId>jakarta-regexp</groupId> 
-                  <artifactId>jakarta-regexp</artifactId> 
-                  <version>1.4</version> 
-              </dependency>
-              <dependency> 
-                  <groupId>org.dojotoolkit</groupId> 
-                  <artifactId>dojo-shrinksafe</artifactId> 
-                  <version>1.8.1</version> 
-              </dependency>
-          </dependencies>
-          <executions>
-            <execution>
-              <phase>compile</phase>
-              <configuration>
-                <tasks>
-                  <taskdef resource="net/sf/antcontrib/antlib.xml" classpathref="maven.plugin.classpath"/>
-                  <property name="toolsDir" value="${toolsDir}"/>
-                  <property name="jar.shrinksafe" value="${settings.localRepository}/org/dojotoolkit/dojo-shrinksafe/1.8.1/dojo-shrinksafe-1.8.1.jar"/>
-                  <property name="jar.rhino" value="${settings.localRepository}/rhino/js/1.7R1/js-1.7R1.jar"/>
-                  <ant antfile="build.xml" target="build"/>
-                </tasks>
-              </configuration>
-              <goals>
-                <goal>run</goal>
-              </goals>
-            </execution>
-          </executions>
-        </plugin>
-    </plugins>
-  </build>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.7</version>
+				<dependencies>
+					<dependency>
+						<groupId>ant-contrib</groupId>
+						<artifactId>ant-contrib</artifactId>
+						<version>1.0b3</version>
+						<exclusions>
+							<exclusion>
+								<groupId>ant</groupId>
+								<artifactId>ant</artifactId>
+							</exclusion>
+						</exclusions>
+					</dependency>
+					<dependency>
+						<groupId>org.apache.ant</groupId>
+						<artifactId>ant-apache-regexp</artifactId>
+						<version>1.8.4</version>
+						<scope>runtime</scope>
+					</dependency>
+					<dependency>
+						<groupId>jakarta-regexp</groupId>
+						<artifactId>jakarta-regexp</artifactId>
+						<version>1.4</version>
+					</dependency>
+					<dependency>
+						<groupId>org.dojotoolkit</groupId>
+						<artifactId>dojo-shrinksafe</artifactId>
+						<version>1.8.1</version>
+					</dependency>
+					<dependency>
+						<groupId>rhino</groupId>
+						<artifactId>js</artifactId>
+						<version>1.7R2</version>
+					</dependency>
+				</dependencies>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<configuration>
+							<tasks>
+								<taskdef resource="net/sf/antcontrib/antlib.xml"
+									classpathref="maven.plugin.classpath" />
+								
+								<ant antfile="build.xml" target="build"/>
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.dojotoolkit</groupId>
+			<artifactId>dojo-shrinksafe</artifactId>
+			<version>1.8.1</version>
+		</dependency>
+		<dependency>
+			<groupId>rhino</groupId>
+			<artifactId>js</artifactId>
+			<version>1.7R2</version>
+		</dependency>
+	</dependencies>
+
 </project>

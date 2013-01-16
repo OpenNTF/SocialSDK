@@ -45,7 +45,7 @@
 				<version>1.7</version>
 				<executions>
 					<execution>
-						<phase>package</phase>
+						<phase>post-integration-test</phase>
 						<configuration>
 							<tasks>
 								<!-- Package Tomcat -->
@@ -98,21 +98,25 @@
 								</exec>
 
 								<!-- sanity checks before starting assembly -->
-								<property name="doc.dir" location="../../../target/doc" />
+								<available  property="doc.dir" file="../../../target/doc" />
 								<fail unless="doc.dir" message="No documentation generated" />
-								<property name="javadoc.index" location="../../../target/doc/javadoc/index.html" />
-								<fail unless="javadoc.index" message="No javadoc generated" />
-								<property name="jsdoc.index" location="../../../target/doc/jsdoc/index.html" />
+								<available  property="javadoc.index" file="../../../target/doc/javadoc/index.html" />
+								<!--  waiting to enable this for the javadoc first execution error is fixed
+								<fail unless="javadoc.index" message="No javadoc generated" /> -->
+								<available  property="jsdoc.index" file="../../../target/doc/jsdoc/index.html" />
 								<fail unless="jsdoc.index" message="No jsdoc generated" />
-								<property name="version.info" location="./../../../target/doc/version.txt" />
-								<property name="changes.info" location="./../../../target/doc/changelog.txt" />
-								<property name="weekly.info" location="./../../../target/doc/weekly.txt" />
+								<available  property="surefire.report" file="../../../target/com.ibm.sbt.test/com.ibm.sbt.core.test/site/surefire-report.html" />
+								<fail unless="surefire.report" message="No javadoc generated" />
+								
+								<available  property="version.info" file="./../../../target/doc/version.txt" />
+								<available  property="changes.info" file="./../../../target/doc/changelog.txt" />
+								<available  property="weekly.info" file="./../../../target/doc/weekly.txt" />
 
 								<fail unless="version.info" message="Missing version.txt" />
 								<fail unless="changes.info" message="Missing changelog.txt" />
 								<fail unless="weekly.info" message="Missing weekly.txt" />
 
-								<property name="updatesite.zip" location="../../../target/com.ibm.sbt.domino/com.ibm.sbt.domino.updatesite/com.ibm.sbt.domino.updatesite.zip" />
+								<available  property="updatesite.zip" file="../../../target/com.ibm.sbt.domino/com.ibm.sbt.domino.updatesite/com.ibm.sbt.domino.updatesite.zip" />
 								<fail unless="updatesite.zip" message="Update site not found" />
 
 							</tasks>
@@ -129,7 +133,7 @@
 				<version>2.3</version>
 				<executions>
 					<execution>
-						<phase>package</phase>
+						<phase>post-integration-test</phase>
 						<goals>
 							<goal>single</goal>
 						</goals>

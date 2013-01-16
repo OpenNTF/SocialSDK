@@ -39,7 +39,8 @@ define([],function() {
 			updateProfile:		"/atom/profileEntry.do",
 			createProfile:		"/profiles/admin/atom/profiles.do",
 			deleteProfile:		"/profiles/admin/atom/profileEntry.do",
-			updateProfilePhoto:	"/photo.do"
+			updateProfilePhoto:	"/photo.do",
+			getNetworkContacts:	"/atom/connections.do"
 		},
 		ActivityStreamUrls: {
 			activityStreamBaseUrl:         "/connections/opensocial/",

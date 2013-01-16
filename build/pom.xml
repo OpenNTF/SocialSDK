@@ -9,6 +9,9 @@
     <maven.build.timestamp.format>yyyyMMdd-HHmm</maven.build.timestamp.format>
     <project.build.sourceEncoding>Cp1252</project.build.sourceEncoding>
     <tycho-version>0.16.0</tycho-version>
+    <code.source>1.6</code.source>
+    <code.target>1.6</code.target>
+    
   </properties>
 
   <repositories>
@@ -33,14 +36,16 @@
 
     <module>js</module>
     <module>reporting</module>
-    <module>distribution</module>
     
   	<module>test</module>
+  	
+    <module>distribution</module>
+    
   </modules>
 
   <build>
     <!-- project defaults for the sbt modules -->
-    <directory>../../../../../target/${project.groupId}/${project.artifactId}</directory>
+    <directory>${user.dir}/../../target/${project.groupId}/${project.artifactId}</directory>
     <outputDirectory>bin</outputDirectory>
     <finalName>${project.artifactId}</finalName>
     <testOutputDirectory>bin-test</testOutputDirectory>
@@ -73,8 +78,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>2.3.2</version>
         <configuration>
-          <source>1.6</source>
-          <target>1.6</target>
+          <source>${code.source}</source>
+          <target>${code.target}</target>
         </configuration>
       </plugin>
       <plugin>            
@@ -122,8 +127,8 @@
         <artifactId>tycho-compiler-plugin</artifactId>
         <version>${tycho-version}</version>
         <configuration>
-          <source>1.6</source>
-          <target>1.6</target>
+          <source>${code.source}</source>
+          <target>${code.target}</target>
           <encoding>UTF-8</encoding>
         </configuration>
       </plugin>    
@@ -170,13 +175,46 @@
           </environments>
         </configuration>
       </plugin>
-	  <plugin>
+      <!-- tycho test setup -->
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-surefire-plugin</artifactId>
+        <version>${tycho-version}</version>
+        <configuration>
+          <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory> 
+        </configuration>
+      </plugin>
+        <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-report-plugin</artifactId>
+        <version>2.13</version>
+        <executions>
+        <execution>
+          
+        <goals><goal>report-only</goal></goals>
+        <phase>post-integration-test</phase></execution>
+        </executions>
+        <configuration>
+        
+        </configuration>
+      </plugin>
+				  <plugin>
         <!-- javadoc configuration -->	  
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>2.8.1</version>
+        <version>2.9</version>
+        <executions><execution>
+            
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>aggregate</goal>
+            </goals>
+            <inherited>false</inherited>
+          
+          </execution></executions>
         <configuration>
-		  <aggregate>true</aggregate>
+        <aggregate>true</aggregate>
+        <failOnError>false</failOnError>
 		  <excludePackageNames>com.sun.*:com.ibm.commons.*:com.ibm.sbt.core.*:com.ibm.sbt.plugin.*:com.ibm.sbt.jslibrray.*:com.ibm.sbt.proxy.*:com.ibm.sbt.security.*:*.util.*:com.ibm.sbt.portlet.*:com.ibm.sbt.playground.*:demo.*:acme.*</excludePackageNames>
           <reportOutputDirectory>../../target/doc</reportOutputDirectory>
           <destDir>javadoc</destDir>		  

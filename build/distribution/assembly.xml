@@ -20,7 +20,7 @@
       </includes>
       <binaries>
         <outputDirectory>sbtsdk/redist/jar</outputDirectory>
-        <outputFileNameMapping>${module.artifactId}-${module.version}.${buildLabel}.${module.extension}</outputFileNameMapping>
+        <outputFileNameMapping>${module.artifactId}.${module.extension}</outputFileNameMapping>
         <unpack>false</unpack>
       </binaries>
     </moduleSet>
@@ -43,7 +43,7 @@
 	  </includes>
       <binaries>
         <outputDirectory>sbtsdk/samples/ear</outputDirectory>
-        <outputFileNameMapping>${module.artifactId}-${module.version}.${buildLabel}.${module.extension}</outputFileNameMapping>
+        <outputFileNameMapping>${module.artifactId}.${module.extension}</outputFileNameMapping>
         <unpack>false</unpack>
       </binaries>
     </moduleSet>
@@ -55,7 +55,7 @@
 	  </includes>
       <binaries>
         <outputDirectory>sbtsdk/samples/ear</outputDirectory>
-        <outputFileNameMapping>${module.artifactId}-${module.version}.${buildLabel}.${module.extension}</outputFileNameMapping>
+        <outputFileNameMapping>${module.artifactId}.${module.extension}</outputFileNameMapping>
         <unpack>false</unpack>
       </binaries>
     </moduleSet>

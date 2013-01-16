@@ -26,14 +26,18 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.DOMUtil;
 import com.ibm.commons.xml.XMLException;
+import com.ibm.sbt.util.XmlNavigator;
 import com.ibm.sbt.services.client.BaseService;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.SBTServiceException;
-import com.ibm.sbt.services.client.smartcloud.base.BaseEntity;
+import com.ibm.sbt.services.client.connections.communities.Community;
 import com.ibm.sbt.services.util.AuthUtil;
 
 /**
@@ -191,6 +195,64 @@ public class ProfileService extends BaseService {
 		}
 		return profile;
 	}
+	
+	/**
+	 * This method is used to get user's network contacts
+	 * 
+	 * @param profile
+	 * @return Profile[] - array of network contacts profiles
+	 */
+	public Profile[] getColleagues(Profile profile) {
+		return getColleagues(profile,null);
+	}
+	
+
+	/**
+	 * This method is used to get user's colleagues
+	 * 
+	 * @param profile
+	 * @param parameters - list of query string parameters to pass to API
+	 * @return Profile[] - array of network contacts profiles
+	 */
+	public Profile[] getColleagues(Profile profile, Map<String, String> parameters){
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.entering(sourceClass, "getColleagues", parameters);
+		}
+		Document data = null;
+		Profile[] colleagues = null;
+		if(parameters == null)
+			parameters = new HashMap<String, String>();
+		try {
+			String url = resolveProfileUrl(ProfileEntity.NONADMIN.getProfileEntityType(),
+					ProfileType.GETCOLLEAGUES.getProfileType());
+			if (isEmail(profile.getReqId())) {
+				parameters.put("email", profile.getReqId());
+			} else {
+				parameters.put("userid", profile.getReqId());
+			}
+			
+			if(parameters.get("connectionType") != null)// this is to remove any other values put in by sample user in following
+				parameters.remove("connectionType");	// mandatory parameters
+			if(parameters.get("outputType") != null)
+				parameters.remove("outputType");
+			parameters.put("connectionType","colleague");
+			parameters.put("outputType","profile");
+			
+			data = (Document)getClientService().get(url, parameters);
+			colleagues = Converter.convertToProfiles(this, data);
+		} catch (ClientServicesException e) {
+			if (logger.isLoggable(Level.SEVERE)) {
+				logger.log(Level.SEVERE, "Error encountered while getting colleagues information", e);
+			}
+		}
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.exiting(sourceClass, "getColleagues");
+		}
+		return colleagues;
+
+	}
+	
+
 
 	/**
 	 * Wrapper method to update a User's profile photo

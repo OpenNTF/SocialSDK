@@ -18,8 +18,8 @@
  * @author Vimal Dhupar
  * Helpers for accessing the SmartCloud Profiles services
  */
-define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt/Cache','sbt/smartcloud/Subscriber','sbt/Jsonpath','sbt/Endpoint', 'sbt/log'],
-		function(declare,cfg,lang,con,Cache,Subscriber,jsonPath, Endpoint, log) {
+define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt/Cache','sbt/smartcloud/Subscriber','sbt/Jsonpath','sbt/Endpoint', 'sbt/log' , 'sbt/validate'],
+		function(declare,cfg,lang,con,Cache,Subscriber,jsonPath, Endpoint, log, validate) {
 	/**
 	Javascript APIs for IBM SmartCloud Profiles Service.
 	@module sbt.smartcloud.ProfileService
@@ -58,6 +58,18 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 			this._service = service;
 			this._id = id;
 		},
+		
+		_validate : function(className, methodName, args, validateMap) {
+			
+			if (validateMap.isValidateType && !(validate._validateInputTypeAndNotify(className, methodName, "Profile", this, "sbt.smartcloud.Profile", args))) {
+				return false;
+			}
+			if (validateMap.isValidateId && !(validate._validateInputTypeAndNotify(className, methodName, "Subscriber Id", this._id, "string", args))) {
+				return false;
+			}			
+			return true;
+		},
+		
 		/**
 		Loads the profile object with the profile entry document associated with the profile. By
 		default, a network call is made to load the profile entry document in the profile object.
@@ -270,14 +282,6 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 			}
 		},
 		
-		_notifyError: function(error, args){			
-			if(args.error) {
-				args.error(error);
-			}
-			if(args.handle) { 
-				args.handle(error);
-			}
-		},
 		/**
 		Get the profile of a user. The fetched Profile is the Profile of the logged in user.
 		
@@ -304,6 +308,9 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 		},
 		_getOne: function(args) { 		
 			// here we first get the user's subscriber id from smartcloud using the Subscriber Helper.
+			if (!(validate._validateInputTypeAndNotify("ProfileService", "getProfile", "args", args, "object", args))) {
+				return ;
+			}
 			var _self = this;
 			var subscriber = new Subscriber(_endpoint);
 			subscriber.load(function(subscriber, response){
@@ -332,6 +339,14 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 			});
 		},
 		_load: function (profile, args) {
+			
+			if (!profile._validate("ProfileService", "getProfile", args, {
+				isValidateType : true,
+				isValidateId : true
+			})) {
+				return;
+			}
+			
 			var loadCb = null;
 			var handleCb = null;
 			if(args){
@@ -380,7 +395,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 						},
 						error: function(error){
 							log.debug("_load() : error occurred in load. Error code : {0}, Error status : {1} ", error.code, error.status);
-							_self._notifyError(error,args);
+							validate.notifyError(error,args);
 						}
 					});
 			} 

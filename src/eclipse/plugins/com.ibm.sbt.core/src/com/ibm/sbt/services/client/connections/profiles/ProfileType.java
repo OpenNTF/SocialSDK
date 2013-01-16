@@ -26,7 +26,8 @@ public enum ProfileType {
 	DELETEPROFILE("atom/profileEntry.do")  ,
 	ADDPROFILE("atom/profiles.do")  ,
 	UPDATEPROFILE("atom/profileEntry.do"),
-	UPDATEPROFILEPHOTO("photo.do");
+	UPDATEPROFILEPHOTO("photo.do"),
+	GETCOLLEAGUES("atom/connections.do");
 	
 	private String proType;
 	private ProfileType(String proType) {

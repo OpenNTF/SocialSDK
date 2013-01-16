@@ -155,7 +155,7 @@ public class Profile implements Serializable{
     	else
     		return get("name");
     }
-
+   
    
     /**
      * @return the email
@@ -277,7 +277,7 @@ public class Profile implements Serializable{
     public void setReqId(String reqId) {
     	this.reqId = reqId;
     }
-    
+       
     public void setAddress(Map<String, String> addressMap) {
     	
     	Iterator<Map.Entry<String,String>> address = addressMap.entrySet().iterator();

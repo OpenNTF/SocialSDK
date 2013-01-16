@@ -33,6 +33,8 @@ define(
 			var Community = declare("sbt.connections.Community", null, {
 				_service : null,
 				_id : "",
+				_author : null,
+				_contributor : null,
 				data : null,
 				fields : {},
 
@@ -286,25 +288,7 @@ define(
                  */
                 getUpdated : function() {
                     return this.get("updated");
-                },
-                /**
-				 * Gets author Id of IBM Connections community.
-				 * 
-				 * @method getAuthorId
-				 * @return {String} authorId Author Id of the community
-				 */
-				getAuthorId : function(){
-					return this.get("authorUid");					
-				},
-				/**
-				 * Gets contributor Id of IBM Connections community.
-				 * 
-				 * @method getContributorId
-				 * @return {String} contributorId Contributor Id of the community
-				 */
-				getContributorId : function(){
-					return this.get("contributorUid");					
-				},
+                },                
                 /**
 				 * Gets an author of IBM Connections community.
 				 * 
@@ -312,9 +296,13 @@ define(
 				 * @return {Member} author Author of the community
 				 */
 				getAuthor : function(){
-					var _authorId = this.get("authorUid");
-					var _author = new Member(this._service, _authorId);
-					return _author;
+					if(this._author){
+						return this._author;
+					}else{						
+						var _author = new Member(this._service, this.get("authorUid"), this.get("authorName"), this.get("authorEmail"));						
+						this._author = _author;
+						return _author;
+					}
 				},
 				/**
 				 * Gets a contributor of IBM Connections community.
@@ -323,9 +311,13 @@ define(
 				 * @return {Member} contributor Contributor of the community
 				 */
 				getContributor : function(){
-					var _contributorId = this.get("contributorUid");
-					var _contributor = new Member(this._service, _contributorId);
-					return _contributor;
+					if(this._contributor){
+						return this._contributor;
+					}else{					
+						var _contributor = new Member(this._service, this.get("contributorUid"), this.get("contributorName"), this.get("contributorEmail"));
+						this._contributor = _contributor;
+						return _contributor;
+					}
 				},
 				/**
 				 * Sets title of IBM Connections community.
@@ -390,12 +382,16 @@ define(
 			var Member = declare("sbt.connections.Member", null, {
 				_service : null,
 				_id : "",
+				_name:"",
+				_email:"",
 				data : null,
 				memberFields : {},
 
-				constructor : function(svc, id) {
+				constructor : function(svc, id, name, email) {
 					this._service = svc;
 					this._id = id;
+					this._name = name;
+					this._email = email;
 				},
 				/**
 				 * Loads the member object with the atom entry associated with the member of the community. By default, a network call is made to load the atom entry
@@ -480,15 +476,32 @@ define(
 				},
 				
 				/**
-				 * Return the value of community member name from community member ATOM entry document.
+				 * Return the value of community member name.
 				 * 
 				 * @method getName
 				 * @return {String} Community member name
 				 */
 				
 				getName : function() {
-					return this.get("name");
-				},			
+					if(!this._name){
+						this._name = this.get("name");
+					}
+					return this._name;
+				},	
+				
+				/**
+				 * Return the value of community member email.
+				 * 
+				 * @method getName
+				 * @return {String} Community member name
+				 */
+				
+				getEmail : function() {
+					if(!this._email){
+						this._email = this.get("email");
+					}
+					return this._email;					
+				},	
 				
 				/**
 				 * Return the value of community member role from community member ATOM entry document.
@@ -506,7 +519,10 @@ define(
 				 * @return {String} Community member userId
 				 */
 				getId : function(){
-					return this.get("uid");
+					if(!this._id){
+						this._id = this.get("uid");
+					}
+					return this._id;					
 				},
 				
 				/**
@@ -1244,10 +1260,11 @@ define(
 								load : function(data) {
 									var entities = [];
 									var xmlData = xml.parse(data);
+									var ioArgs = {};
 									var entry = xpath.selectNodes(xmlData, getArgs.xpath.entry, con.namespaces);
-                                    var totalResults = xpath.selectText(xmlData, getArgs.xpath.totalResults, con.namespaces);
-                                    var startIndex = xpath.selectText(xmlData, getArgs.xpath.startIndex, con.namespaces);
-                                    var itemsPerPage = xpath.selectText(xmlData, getArgs.xpath.itemsPerPage, con.namespaces);
+									ioArgs.totalResults = xpath.selectText(xmlData, getArgs.xpath.totalResults, con.namespaces);
+									ioArgs.startIndex = xpath.selectText(xmlData, getArgs.xpath.startIndex, con.namespaces);
+									ioArgs.itemsPerPage = xpath.selectText(xmlData, getArgs.xpath.itemsPerPage, con.namespaces);
 									for(var count = 0; count < entry.length; count ++){	
 										var node = entry[count];
 										if (getArgs.communityServiceEntity == "communities") {
@@ -1261,9 +1278,9 @@ define(
 										}
 									}
 									if (args.load)
-										args.load(entities, totalResults, startIndex, itemsPerPage);
+										args.load(entities, ioArgs);
 									if (args.handle)
-										args.handle(entities, totalResults, startIndex, itemsPerPage);
+										args.handle(entities, ioArgs);
 								},
 								error : function(error) {
 									validate.notifyError(error, args);

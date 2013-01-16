@@ -4,8 +4,8 @@ require(["sbt/connections/CommunityService","sbt/dom"], function(CommunityServic
 		parameters:{
 			ps:5
 		},
-		load: function(communities, totalResults, startIndex, itemsPerPage){
-		    var displayStr = "totalResults:" + totalResults + ", startIndex:" + startIndex + ", itemsPerPage:" + itemsPerPage;
+		load: function(communities, ioArgs){
+		    var displayStr = "totalResults:" + ioArgs.totalResults + ", startIndex:" + ioArgs.startIndex + ", itemsPerPage:" + ioArgs.itemsPerPage;
 			for(var count = 0; count < communities.length; count ++){
 				var community = communities[count];
 				displayStr += " [" + 

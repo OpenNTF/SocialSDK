@@ -54,7 +54,11 @@ define([],function() {
                 "published"         :"a:published",
                 "updated"           :"a:updated",
                 "authorUid"			:"a:author/snx:userid",
-    			"contributorUid"	:"a:contributor/snx:userid"
+                "authorName"		:"a:author/a:name",
+                "authorEmail"		:"a:author/a:email",
+    			"contributorUid"	:"a:contributor/snx:userid",
+    			"contributorName"	:"a:contributor/a:name",
+    			"contributorEmail"	:"a:contributor/a:email"
 		},
 		_xpath_member : {
 			"entry"				:"/a:entry",

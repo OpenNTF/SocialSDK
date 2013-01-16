@@ -49,6 +49,17 @@
 						<configuration>
 							<tasks>
 								<!-- Package Tomcat -->
+								
+								
+				<!--				<copy tofile="./../../../target/tomcat/unzip/apache-tomcat-7.0.30/webapps/sbt-${project.version}.${buildLabel}.war" file="./../../../target/com.ibm.sbt.sdk/sbt/sbt.war"/>
+				<copy tofile="./../../../target/tomcat/unzip/apache-tomcat-7.0.30/webapps/sbt.dojo180-${project.version}.${buildLabel}.war" file="./../../../target/com.ibm.sbt.sdk/sbt.dojo180/sbt.dojo180.war"/>
+				<copy tofile="./../../../target/tomcat/unzip/apache-tomcat-7.0.30/webapps/sbt.sample.web-${project.version}.${buildLabel}.war" file="./../../../target/com.ibm.sbt.sample/sbt.sample.web/sbt.sample.web.war"/>
+				<copy tofile="./../../../target/tomcat/unzip/apache-tomcat-7.0.30/webapps/acme.social.sample.dataapp-${project.version}.${buildLabel}.war" file="./../../../target/com.ibm.sbt.sample/acme.social.sample.dataapp/acme.social.sample.dataapp.war"/>
+				<copy tofile="./../../../target/tomcat/unzip/apache-tomcat-7.0.30/webapps/acme.social.sample.webapp-${project.version}.${buildLabel}.war" file="./../../../target/com.ibm.sbt.sample/acme.social.sample.webapp/acme.social.sample.webapp.war"/>
+				<copy tofile="./../../../target/tomcat/unzip/apache-tomcat-7.0.30/lib/com.ibm.commons.runtime-${project.version}.${buildLabel}.jar" file="./../../../target/com.ibm.sbt.sdk/com.ibm.commons.runtime/com.ibm.commons.runtime.jar"/>
+								-->
+								
+								
 				<unzip src="./../../platform/tomcat/apache-tomcat-7.0.30.zip" dest="./../../../target/tomcat/unzip"/>	
 				<copy todir="./../../../target/tomcat/unzip/apache-tomcat-7.0.30/webapps" file="./../../../target/com.ibm.sbt.sdk/sbt/sbt.war"/>
 				<copy todir="./../../../target/tomcat/unzip/apache-tomcat-7.0.30/webapps" file="./../../../target/com.ibm.sbt.sdk/sbt.dojo180/sbt.dojo180.war"/>

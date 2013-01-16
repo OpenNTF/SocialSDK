@@ -11,10 +11,6 @@
     <version>1.0.0</version>
     <relativePath>../</relativePath>
   </parent>
-
-  <build>
-    <directory>../../../../target/${project.groupId}/${project.artifactId}</directory>
-  </build>
   
   <modules>
     <!-- sample j2ee projects -->

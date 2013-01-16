@@ -89,6 +89,13 @@
         <include>**/*.*</include>
       </includes>
     </fileSet>
+        <fileSet>
+      <directory>../../../target/com.ibm.sbt.test/com.ibm.sbt.core.test/site</directory>
+      <outputDirectory>sbtsdk/reports</outputDirectory>
+      <includes>
+		<include>surefire-report.html</include>
+      </includes>
+    </fileSet>
     <fileSet>
       <directory>../../../target/doc</directory>
       <outputDirectory>sbtsdk</outputDirectory>

@@ -376,8 +376,7 @@ public class CommunityService extends BaseService {
 			if (logger.isLoggable(Level.WARNING)) {
 				logger.log(Level.WARNING, e.getMessage(), e);
 			}
-			throw new CommunityServiceException(e,
-					StringUtil.format("Error adding community community member"), reason);
+			throw new CommunityServiceException(e, StringUtil.format("Error adding community member"), reason);
 		}
 	}
 
@@ -404,8 +403,8 @@ public class CommunityService extends BaseService {
 			if (logger.isLoggable(Level.WARNING)) {
 				logger.log(Level.WARNING, e.getMessage(), e);
 			}
-			throw new CommunityServiceException(e,
-					StringUtil.format("Error adding community community member"), reason);
+			throw new CommunityServiceException(e, StringUtil.format("Error deleting community member"),
+					reason);
 		}
 	}
 

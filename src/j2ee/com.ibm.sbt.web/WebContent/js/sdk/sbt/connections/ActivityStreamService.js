@@ -20,8 +20,8 @@
  *  
  * Helpers for accessing the Connections Profiles services
  */
-define(['sbt/_bridge/declare','sbt/connections/core','sbt/connections/ActivityStreamConstants','sbt/Jsonpath','sbt/Endpoint','sbt/lang','sbt/json','sbt/log'],
-		function(declare,core,ASConstants,jsonPath, Endpoint, lang, json, log) {
+define(['sbt/_bridge/declare','sbt/config','sbt/connections/core','sbt/connections/ActivityStreamConstants','sbt/Jsonpath','sbt/Endpoint','sbt/lang','sbt/json','sbt/log', 'sbt/validate'],
+		function(declare, config, core,ASConstants,jsonPath, Endpoint, lang, json, log, validate) {
 	/**
 	Javascript APIs for IBM Connections Activity Stream Service.
 	@module sbt.connections.ActivityStreamService
@@ -144,6 +144,9 @@ define(['sbt/_bridge/declare','sbt/connections/core','sbt/connections/ActivitySt
 			javascript library error object, the status code and the error message.
 		**/
 		getStream: function(args) {
+			if (!(validate._validateInputTypeAndNotify("ActivityStreamService", "getStream", "args", args, "object", args))) {
+				return ;
+			}
 			this._userType = args.userType || ASConstants.ASUser.PUBLIC; //Default is public updates
 			this._groupType = args.groupType || ASConstants.ASGroup.ALL; // Default is all groups
 			this._applicationType = args.applicationType || ASConstants.ASApplication.ALL; // Default is all Apps
@@ -177,6 +180,9 @@ define(['sbt/_bridge/declare','sbt/connections/core','sbt/connections/ActivitySt
 			javascript library error object, the status code and the error message.
 		**/
 		postEntry: function(args) {
+			if (!(validate._validateInputTypeAndNotify("ActivityStreamService", "postEntry", "args", args, "object", args))) {
+				return ;
+			}
 			this._userType = args.userType || ASConstants.ASUser.PUBLIC; //Default is public updates
 			this._groupType = args.groupType || ASConstants.ASGroup.ALL; // Default is all groups
 			this._applicationType = args.applicationType || ASConstants.ASApplication.ALL; // Default is all Apps
@@ -206,6 +212,9 @@ define(['sbt/_bridge/declare','sbt/connections/core','sbt/connections/ActivitySt
 			javascript library error object, the status code and the error message.
 		**/
 		getUpdatesFromMyNetwork: function(args) {
+			if (!(validate._validateInputTypeAndNotify("ActivityStreamService", "getUpdatesFromMyNetwork", "args", args, "object", args))) {
+				return ;
+			}
 			this._userType = ASConstants.ASUser.ME;
 			this._groupType = ASConstants.ASGroup.FRIENDS;
 			this._applicationType = ASConstants.ASApplication.ALL;
@@ -237,6 +246,9 @@ define(['sbt/_bridge/declare','sbt/connections/core','sbt/connections/ActivitySt
 			javascript library error object, the status code and the error message.
 		**/
 		getMyStatusUpdates: function(args) {
+			if (!(validate._validateInputTypeAndNotify("ActivityStreamService", "getMyStatusUpdates", "args", args, "object", args))) {
+				return ;
+			}
 			this._userType = ASConstants.ASUser.ME;
 			this._groupType = ASConstants.ASGroup.ALL;
 			this._applicationType = ASConstants.ASApplication.STATUS;
@@ -268,6 +280,9 @@ define(['sbt/_bridge/declare','sbt/connections/core','sbt/connections/ActivitySt
 			javascript library error object, the status code and the error message.
 		**/
 		getUpdatesFromPeopleIFollow: function(args) {
+			if (!(validate._validateInputTypeAndNotify("ActivityStreamService", "getUpdatesFromPeopleIFollow", "args", args, "object", args))) {
+				return ;
+			}
 			this._userType = ASConstants.ASUser.ME;
 			this._groupType = ASConstants.ASGroup.FOLLOWING;
 			this._applicationType = ASConstants.ASApplication.PEOPLE;
@@ -299,6 +314,9 @@ define(['sbt/_bridge/declare','sbt/connections/core','sbt/connections/ActivitySt
 			javascript library error object, the status code and the error message.
 		**/
 		getUpdatesFromCommunitiesIFollow: function(args) {
+			if (!(validate._validateInputTypeAndNotify("ActivityStreamService", "getUpdatesFromCommunitiesIFollow", "args", args, "object", args))) {
+				return ;
+			}
 			this._userType = ASConstants.ASUser.ME;
 			this._groupType = ASConstants.ASGroup.ALL;
 			this._applicationType = ASConstants.ASApplication.COMMUNITIES;
@@ -331,13 +349,11 @@ define(['sbt/_bridge/declare','sbt/connections/core','sbt/connections/ActivitySt
 			javascript library error object, the status code and the error message.
 		**/
 		getUpdatesFromACommunity: function(args) {
-			if(typeof args != "object"){
-				log.error(ASConstants.errorMessages.args_object);
-				return;
+			if (!(validate._validateInputTypeAndNotify("ActivityStreamService", "getUpdatesFromACommunity", "args", args, "object", args))) {
+				return ;
 			}
-			if(!args.communityID){
-				log.error(ASConstants.errorMessages.required_communityid);
-				return;
+			if (!(validate._validateInputTypeAndNotify("ActivityStreamService", "getUpdatesFromACommunity", "args.communityID", args.communityID, "string", args))) {
+				return ;
 			}
 			this._userType = ASConstants.ASUser.COMMUNITY+args.communityID;
 			this._groupType = ASConstants.ASGroup.ALL;

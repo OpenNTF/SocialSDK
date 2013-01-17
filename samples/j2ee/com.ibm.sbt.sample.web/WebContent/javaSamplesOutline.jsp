@@ -48,18 +48,26 @@
 									List<AbstractNode> allSnippets = root.getAllChildrenFlat();
 									for(int i=0; i<allSnippets.size(); i++) {
 										AbstractNode node = allSnippets.get(i);
-										
 								%>
 									<% if(node.isCategory()) { %>
 											<li class="nav-header" style='margin-left: <%= ((node.getLevel()-1)*2)-1%>em'><%=node.getName()%></li>
 									<% } else if(node.isSnippet()) {
 											 %>
+											 <%
+										    	String snippetPath = ((DemoSnippetNode)node).getPath();
+												if (snippetPath.indexOf("Smartcloud")>0) {
+													endpointName = "smartcloud";
+												} else {
+													endpointName = "connections";
+												}
+									 		%>
 											 <%if((((DemoSnippetNode)node).getPath()+".jsp").equals(request.getParameter("javaSamplePath"))){ %>
 													<li class = "active" style='margin-left: <%= (node.getLevel()-1)*2%>em'> 
 											 <% }else{ %>	 
 													 <li style='margin-left: <%= (node.getLevel()-1)*2%>em'>
-											    <% } %>	 		
-														<a href="<%=((DemoSnippetNode)node).getJSPUrl(request)%>">
+											    <% } %>
+											    
+														<a href="<%=((DemoSnippetNode)node).getJSPUrl(request)%>&endpoint=<%=endpointName%>">
 															<%=node.getName()%>
 														</a>
 													</li>

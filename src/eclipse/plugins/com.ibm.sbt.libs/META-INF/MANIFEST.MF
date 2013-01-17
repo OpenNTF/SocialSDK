@@ -4,5 +4,4 @@ Bundle-Name: Third party libraries used by the SDK
 Bundle-SymbolicName: com.ibm.sbt.libs
 Bundle-Version: 1.0.0
 Bundle-Vendor: IBM
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Eclipse-ExtensibleAPI: true

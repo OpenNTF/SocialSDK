@@ -4,25 +4,20 @@ require(["sbt/connections/CommunityService","sbt/dom"], function(CommunityServic
 		parameters:{
 			ps:5
 		},
-		load: function(communities, ioArgs){
-		    var displayStr = "totalResults:" + ioArgs.totalResults + ", startIndex:" + ioArgs.startIndex + ", itemsPerPage:" + ioArgs.itemsPerPage;
-			for(var count = 0; count < communities.length; count ++){
-				var community = communities[count];
-				displayStr += " [" + 
-                    community.getCommunityUuid() + " ; " +
-                    community.getTitle() + " ; " +
-                    community.getSummary() + " ; " +
-                    community.getLogoUrl() + " ; " +
-                    community.getCommunityUrl() + " ; " +
-                    community.getContent() + " ; " +
-                    community.getMemberCount() + " ; " +
-                    community.getCommunityType() + " ; " +
-                    community.getPublished() + " ; " +
-                    community.getUpdated() + " ; " +
-                    community.getTags().join() +
-				"]  ";
-			}
-			dom.setText("content",displayStr);	
+		load: function(communities){		   
+			if (communities.length == 0) {
+				dom.setText("content", "No Result");
+            }else{
+				for(var count = 0; count < communities.length; count ++){
+					var displayStr = "";
+					var community = communities[count];				
+					displayStr +=  community.getTitle() + " : " + community.getCommunityUuid() + " : " + community.getAuthor().getName();               
+					var liElement = document.createElement("li");
+					liElement.setAttribute("id", "li" + count);
+					document.getElementById("content").appendChild(liElement);
+					dom.setText("li" + count, displayStr);
+				}
+            }
 		},
 		error: function(error){
 			dom.setText("content","Error received. Error Code = " +  error.code + ". Error Message = " + error.message);

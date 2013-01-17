@@ -72,14 +72,14 @@ function hideJsSnippetCode() {
     
    	<%
        		String endpointName = request.getParameter("endpoint");
-       			if(endpointName==null) {
-       		endpointName = "connections";
-       			}
-       			Endpoint ep = EndpointFactory.getEndpoint(endpointName);
-       			if(!ep.isAuthenticationValid()) {	// Check, Do we have a valid token for this user
-       		ep.authenticate(true);			// Authenticate
-       	    		return;							
-       	    	}
+    		if(endpointName==null) {
+    			endpointName = "connections";
+    		}
+       		Endpoint ep = EndpointFactory.getEndpoint(endpointName);
+       		if(!ep.isAuthenticationValid()) {	// Check, Do we have a valid token for this user
+       			ep.authenticate(true);			// Authenticate
+       	    	return;
+       	    }
        	%>
 
     <div class="navbar navbar-fixed-top">

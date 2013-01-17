@@ -4,7 +4,6 @@ Bundle-Name: Common Runtime Classes
 Bundle-SymbolicName: com.ibm.commons.runtime
 Bundle-Version: 1.0.0
 Bundle-Vendor: IBM
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: com.ibm.commons.runtime,
  com.ibm.commons.runtime.beans,
  com.ibm.commons.runtime.impl,

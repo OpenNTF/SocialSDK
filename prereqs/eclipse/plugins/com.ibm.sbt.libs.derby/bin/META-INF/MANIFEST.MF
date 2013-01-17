@@ -5,7 +5,6 @@ Bundle-SymbolicName: com.ibm.sbt.libs.derby
 Bundle-Version: 1.0.0
 Bundle-Vendor: IBM
 Fragment-Host: com.ibm.sbt.libs;bundle-version="1.0.0"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ClassPath: lib/derby.jar,
  lib/derbyclient.jar,
  lib/derbytools.jar,

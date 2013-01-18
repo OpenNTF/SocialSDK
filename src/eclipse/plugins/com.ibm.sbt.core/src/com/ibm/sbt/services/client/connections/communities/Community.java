@@ -297,12 +297,11 @@ public class Community {
 			Map.Entry<String, String> fieldMapPairs = entries.next();
 			// title and content are mandatory fields , if not provided in the update request then retrieved
 			// values will be used
-
-			if (fieldMapPairs.getKey().equalsIgnoreCase("title")) {
+			if (fieldMapPairs.getKey().equalsIgnoreCase("title") || !(body.contains("<title type=\"text\">"))) {
 				body += "<title type=\"text\">" + escapeHtmlSpecialChars(getTitle()) + "</title>";
 			}
 
-			if (fieldMapPairs.getKey().equalsIgnoreCase("content")) {
+			if (fieldMapPairs.getKey().equalsIgnoreCase("content") || !(body.contains("<content type=\"html\">"))) {
 				body += "<content type=\"html\">" + escapeHtmlSpecialChars(getContent()) + "</content>";
 			}
 

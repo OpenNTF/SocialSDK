@@ -921,7 +921,7 @@ public abstract class ClientService {
 
 	protected String getUrlPath(Args args) {
 		String baseUrl = getBaseUrl();
-		String serviceUrl = getBaseUrl();
+		String serviceUrl = args.getServiceUrl();
 		return PathUtil.concat(baseUrl,serviceUrl, '/');
 	}
 

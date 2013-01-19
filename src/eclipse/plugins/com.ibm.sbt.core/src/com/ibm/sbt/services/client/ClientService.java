@@ -920,8 +920,9 @@ public abstract class ClientService {
 	}
 
 	protected String getUrlPath(Args args) {
-		String url = PathUtil.concatParts(getBaseUrl(), args.getServiceUrl(), '/');
-		return url;
+		String baseUrl = getBaseUrl();
+		String serviceUrl = getBaseUrl();
+		return PathUtil.concat(baseUrl,serviceUrl, '/');
 	}
 
 	protected void addUrlParts(StringBuilder b, Args args) throws ClientServicesException {

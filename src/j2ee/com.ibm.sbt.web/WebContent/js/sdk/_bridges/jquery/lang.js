@@ -29,7 +29,7 @@ define([],function() {
 		    return (typeof o=="string"||o instanceof String);
 		},
         isFunction: function(o) {
-            return jQuery.isFunction(o);
+            return typeof o == 'function';
         },
 		clone: function(o) {
 			return jQuery.clone(o);

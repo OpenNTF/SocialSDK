@@ -34,7 +34,9 @@ define(['sbt/config'],function(sbt) {
             snx : "http://www.ibm.com/xmlns/prod/sn",
             opensearch : "http://a9.com/-/spec/opensearch/1.1/",
             a : "http://www.w3.org/2005/Atom",
-            h : "http://www.w3.org/1999/xhtml"
+            h : "http://www.w3.org/1999/xhtml",
+            td: "urn:ibm.com/td"
+            
         },
 		
 		feedXPath : {

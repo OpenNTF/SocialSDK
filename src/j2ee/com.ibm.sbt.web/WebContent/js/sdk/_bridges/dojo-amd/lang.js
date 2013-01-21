@@ -30,7 +30,7 @@ define(['dojo/_base/lang'],function(lang) {
 		},
         isFunction: function(o) {
             //return dojo.isFunction(o);
-            return lang.isFunction();
+            return typeof o == 'function';
         },
 		clone: function(o) {
 			return lang.clone(o);

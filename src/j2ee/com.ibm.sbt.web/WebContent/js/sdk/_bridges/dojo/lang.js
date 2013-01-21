@@ -29,7 +29,7 @@ define([],function() {
 			return dojo.isString(o);
 		},
 		isFunction: function(o) {
-            return dojo.isFunction(o);
+            return typeof o == 'function';
         },
 		clone: function(o) {
 			return dojo.clone(o);

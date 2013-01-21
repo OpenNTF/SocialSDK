@@ -893,12 +893,6 @@ public abstract class ClientService {
 			forceAuthentication(args);
 			return null;
 		}
-		if (response.getStatusLine().getStatusCode() == HttpServletResponse.SC_INTERNAL_SERVER_ERROR) {
-			throw new SBTException(null,
-					"Request for url: {0} did not complete successfully. Error code {1} [{2}] returned",
-					httpRequestBase.getURI(), response.getStatusLine().getStatusCode(), response
-							.getStatusLine().getReasonPhrase());
-		}
 		return _parseResult(httpRequestBase, response, args.handler);
 	}
 
@@ -993,12 +987,16 @@ public abstract class ClientService {
 	protected Object _parseResult(HttpRequestBase request, HttpResponse response, Handler format)
 			throws ClientServicesException {
 		try {
+			int statusCode = response.getStatusLine().getStatusCode();
+			if (response.getStatusLine().getStatusCode() == HttpServletResponse.SC_INTERNAL_SERVER_ERROR) {
+				return generateResultError500(statusCode, request, response);
+			}
+			
 			HttpEntity entity = response.getEntity();
 			if (format == null) {
 				format = createResponseHandler(response, entity);
 			}
 
-			int statusCode = response.getStatusLine().getStatusCode();
 			if ((statusCode != HttpStatus.SC_OK) && (statusCode != HttpStatus.SC_CREATED)
 					&& (statusCode != HttpStatus.SC_ACCEPTED) && (statusCode != HttpStatus.SC_NO_CONTENT)) { // Connections
 																												// Delete
@@ -1008,7 +1006,7 @@ public abstract class ClientService {
 																												// for
 																												// successful
 																												// deletion.
-				throw new ClientServicesException(response, request);
+				return generateResultError(statusCode, request, response, entity);
 			}
 
 			// SBT doesn't have a JS interpreter...
@@ -1025,6 +1023,19 @@ public abstract class ClientService {
 			}
 			throw new ClientServicesException(ex, "Error while parsing the REST service results");
 		}
+	}
+	
+	protected Object generateResultError500(int statusCode, HttpRequestBase request, HttpResponse response) throws ClientServicesException {
+		// PHIL:
+		// Why SBT exception and not ClientService
+		throw new SBTException(null,
+				"Request for url: {0} did not complete successfully. Error code {1} [{2}] returned",
+				request.getURI(), response.getStatusLine().getStatusCode(), response
+						.getStatusLine().getReasonPhrase());
+	}
+	
+	protected Object generateResultError(int statusCode, HttpRequestBase request, HttpResponse response, HttpEntity entity) throws ClientServicesException {
+		throw new ClientServicesException(response, request);
 	}
 
 	// Until we move to HttpClient 4.1

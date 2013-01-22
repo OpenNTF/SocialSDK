@@ -30,6 +30,7 @@ public class Snippet {
 	private String description;
 	private String[] tags;
 	private String[] documentation;
+	private String theme;
 	private String html;
 	private String js;
 	private String css;
@@ -56,7 +57,18 @@ public class Snippet {
 		if(StringUtil.isNotEmpty(tags)) {
 			this.labels = StringUtil.splitString(labels,',',true);
 		}
+        String theme = props.getProperty("theme");
+        if(StringUtil.isNotEmpty(theme)) {
+            this.theme = theme;
+        }
 	}
+
+    public String getTheme() {
+        return theme;
+    }
+    public void setTheme(String theme) {
+        this.theme = theme;
+    }
 
 	public String getDescription() {
 		return description;

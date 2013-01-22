@@ -1,12 +1,15 @@
 package com.ibm.sbt.services.client.connections.communities;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.w3c.dom.Document;
-
 import com.ibm.commons.util.HtmlTextUtil;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.DOMUtil;
@@ -31,7 +34,7 @@ public class Community {
 	private CommunityService			communityService;
 	private Document					data;
 	private String						communityUuid;
-
+	private String 						dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
 	static NamespaceContext	nameSpaceCtx = new NamespaceContext() {
 
 		@Override
@@ -75,7 +78,14 @@ public class Community {
 			{ "logoUrl", "/a:entry/a:link[@rel='http://www.ibm.com/xmlns/prod/sn/logo']/@href" },
 			{ "membersUrl", "/a:entry/a:link[@rel='http://www.ibm.com/xmlns/prod/sn/member-list']/@href" },
 			{ "communityUrl", "/a:entry/a:link[@rel='self']/@href" },
-			{ "tags", "/a:entry/a:category/@term" }, { "content", "/a:entry/a:content[@type='html']" } };
+			{ "tags", "/a:entry/a:category/@term" }, { "content", "/a:entry/a:content[@type='html']" },
+			{ "memberCount", "/a:entry/snx:membercount"},
+			{ "communityType", "/a:entry/snx:communityType"}, 
+			{ "published" , "/a:entry/a:published"},{ "updated"  , "/a:entry/a:updated"},
+			{ "authorUid" ,	"/a:entry/a:author/snx:userid"}, {"authorName", "/a:entry/a:author/a:name"},
+			{ "authorEmail"	, "/a:entry/a:author/a:email"}, {"contributorUid" , "/a:entry/a:contributor/snx:userid"},
+			{ "contributorName"	,"/a:entry/a:contributor/a:name"}, {"contributorEmail", "/a:entry/a:contributor/a:email"}
+		};
 		for (String[] pair : pairs) {
 			xpathMap.put(pair[0], pair[1]);
 		}
@@ -245,7 +255,75 @@ public class Community {
 	public void setDeletedTags(String deletedTags) {
 		fieldsMap.put("deletedTags", deletedTags);
 	}
+	
+	/**
+	 * @return the memberCount
+	 */
+	public String getMemberCount(){
+		return get("memberCount");
+	}
+	/**
+	 * @return the communityType
+	 */
+	public String getCommunityType(){
+		return get("communityType");		
+	}
+	/**
+	 * @return the authorUid
+	 */
+	public String getAuthorId(){
+		return get("authorUid");
+	}
+	/**
+	 * @return the ContributorId
+	 */
+	public String getContributorId(){
 
+		return get("contributorUid");
+	}
+	
+	/**
+	 * @return the published date of community
+	 */
+	public Date getPublished(){
+		Date publishedDate = null;
+		try {
+			DateFormat formatter = new SimpleDateFormat(dateFormat);
+			publishedDate = (Date)formatter.parse(get("published"));
+		} catch (ParseException e) {
+			logger.log(Level.SEVERE, "Error in parsing date");;
+		}
+		return publishedDate;
+	}
+	
+	/**
+	 * @return the update date of community
+	 */
+	public Date getUpdated(){
+		Date updatedDate = null;
+		try {
+			DateFormat formatter = new SimpleDateFormat(dateFormat);
+			updatedDate = (Date)formatter.parse(get("updated"));
+		} catch (ParseException e) {
+			logger.log(Level.SEVERE, "Error in parsing date");
+		}
+		return updatedDate;
+	}
+	/**
+	 * @return the authorUid
+	 */
+	public Member getAuthor(){
+		Member author = new Member(this.communityService,this.get("authorUid"),this.get("authorName"),this.get("authorEmail"));
+		return author;
+		
+	}
+	/**
+	 * @return the ContributorId
+	 */
+	public Member getContributor(){
+		Member contributor = new Member(this.communityService,this.get("contributorUid"),this.get("contributorName"),this.get("contributorEmail"));
+		return contributor;
+	}
 	/**
 	 * @return the membersUrl
 	 */

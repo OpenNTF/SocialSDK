@@ -73,12 +73,20 @@ public class Member {
 
 	private Document data;
 	private String id; // this can be userId or email. 
+	private String name;
+	private String email;
 
 	public Member(CommunityService communityService, String id) {
 		this.communityService = communityService;
 		this.id = id;
 	}
 
+	public Member(CommunityService communityService, String id, String name, String email) {
+		this.communityService = communityService;
+		this.id = id;
+		this.name = name;
+		this.email = email;
+	}
 	public Object getData() {
 		return data;
 	}
@@ -100,17 +108,40 @@ public class Member {
 	}
 
 	public String getId() {
-		return id;
+		String id = fieldsMap.get("id");
+    	if(id!= null)
+    		return id;
+    	else{
+    		if(this.id == null){    		
+    			this.id =  get("id");
+    		}
+    		return this.id;
+    	}
 	}
 
 	public String getName() {
 		String name = fieldsMap.get("name");
     	if(name!= null)
     		return name;
-    	else
-			return get("name");
+    	else{
+    		if(this.name == null){    		
+    			this.name =  get("name");
+    		}
+    		return this.name;
+    	}
 	}
 
+	public String getEmail() {
+		String email = fieldsMap.get("email");
+    	if(email!= null)
+    		return email;
+    	else{
+    		if(this.email == null){    		
+    			this.email =  get("email");
+    		}
+    		return this.email;
+    	}
+	}
 	public void setName(String name) {
 		fieldsMap.put("name",name);
 	}

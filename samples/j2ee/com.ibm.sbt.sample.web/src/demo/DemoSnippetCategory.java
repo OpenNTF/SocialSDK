@@ -23,19 +23,7 @@ import com.ibm.sbt.playground.snippets.CategoryNode;
  */
 public class DemoSnippetCategory extends CategoryNode {
 
-	private String path;
-	
-	public DemoSnippetCategory(CategoryNode parent, String name, String path) {
+	public DemoSnippetCategory(CategoryNode parent, String name) {
 		super(parent,name);
-		this.path = path;
 	}
-
-	public String getPath() {
-		return path;
-	}
-
-	public void setPath(String path) {
-		this.path = path;
-	}	
-	
 }

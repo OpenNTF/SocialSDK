@@ -23,7 +23,7 @@ import java.util.Properties;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.ReaderInputStream;
 import com.ibm.commons.util.io.StreamUtil;
-import com.ibm.sbt.playground.snippets.AbstractImportExport.VFSFile;
+import com.ibm.sbt.playground.vfs.VFSFile;
 
 
 /**
@@ -31,26 +31,20 @@ import com.ibm.sbt.playground.snippets.AbstractImportExport.VFSFile;
  */
 public class SnippetNode extends AbstractNode {
 
-	private String path;
-	
-	public SnippetNode(CategoryNode parent, String name, String path) {
+	public SnippetNode(CategoryNode parent, String name) {
 		super(parent,name);
-		this.path = path;
 	}
 
 	public SnippetNode(CategoryNode parent, String name, String category, String unid, String jspUrl) {
 		super(parent,name,category,unid,jspUrl);
 	}
-
-	public String getPath() {
-		return path;
-	}
 	
 	public Snippet load(VFSFile root) throws IOException {
-		String html = loadResource(root,"html");
-		String js = loadResource(root,"js");
-		String css = loadResource(root,"css");
-		String jsp = loadResource(root,"jsp");
+		VFSFile parent = getParentFile(root);
+		String html = loadResource(parent,"html");
+		String js = loadResource(parent,"js");
+		String css = loadResource(parent,"css");
+		String jsp = loadResource(parent,"jsp");
 		Snippet s = new Snippet();
 		s.setUnid(getUnid());
 		s.setHtml(html);
@@ -58,7 +52,7 @@ public class SnippetNode extends AbstractNode {
 		s.setCss(css);
 		s.setJsp(jsp);
 
-		String props = loadResource(root, "properties");
+		String props = loadResource(parent, "properties");
 		if(StringUtil.isNotEmpty(props)) {
 			Properties p = new Properties();
 			ReaderInputStream is = new ReaderInputStream(new StringReader(props));
@@ -71,15 +65,28 @@ public class SnippetNode extends AbstractNode {
 		}
 		return s;
 	}
+
+	private VFSFile getParentFile(VFSFile root) throws IOException {
+		if(getParent()!=null) {
+			String parentPath = getParent().getPath();
+			if(StringUtil.isNotEmpty(parentPath)) {
+				return root.getFile(parentPath);
+			}
+		}
+		return root;
+	}
 	
-	private String loadResource(VFSFile root, String ext) throws IOException {
-		String s = path + "." + ext;
-		InputStream is = root.getInputStream(s);
-		if(is!=null) {
-			try {
-				return StreamUtil.readString(is);
-			} finally {
-				StreamUtil.close(is);
+	private String loadResource(VFSFile parent, String ext) throws IOException {
+		String s = getName() + "." + ext;
+		VFSFile f = parent.getFile(s);
+		if(f!=null) {
+			InputStream is = f.getInputStream();
+			if(is!=null) {
+				try {
+					return StreamUtil.readString(is);
+				} finally {
+					StreamUtil.close(is);
+				}
 			}
 		}
 		return null;

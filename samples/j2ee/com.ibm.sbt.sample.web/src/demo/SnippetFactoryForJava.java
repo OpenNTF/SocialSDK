@@ -21,11 +21,11 @@ import javax.servlet.ServletContext;
 
 import com.ibm.sbt.playground.snippets.AbstractImportExport;
 import com.ibm.sbt.playground.snippets.AbstractImportExport.NodeFactory;
-import com.ibm.sbt.playground.snippets.AbstractImportExport.VFSFile;
 import com.ibm.sbt.playground.snippets.CategoryNode;
 import com.ibm.sbt.playground.snippets.Importer;
-import com.ibm.sbt.playground.snippets.RootNode;
 import com.ibm.sbt.playground.snippets.SnippetNode;
+import com.ibm.sbt.playground.vfs.ServletVFS;
+import com.ibm.sbt.playground.vfs.VFSFile;
 
 
 /**
@@ -45,20 +45,20 @@ public class SnippetFactoryForJava {
 		return root;
 	}
 	public static VFSFile getRootFile(ServletContext context) {
-		VFSFile file = AbstractImportExport.createVFSFile(context, "/java/");
-		return file;
+		ServletVFS vfs = new ServletVFS(context, "/java/");
+		return vfs.getRoot();
 	}
 
 	private static DemoRootNode readSnippets(ServletContext context) throws IOException {
 		VFSFile file = getRootFile(context);
 		NodeFactory factory = new AbstractImportExport.DefaultNodeFactory() {
 			@Override
-			public SnippetNode createSnippetNode(CategoryNode parent, String name, String path) {
-				return new DemoSnippetNode(parent, name, path);
+			public SnippetNode createSnippetNode(CategoryNode parent, String name) {
+				return new DemoSnippetNode(parent, name);
 			}
 			@Override
-			public CategoryNode createCategoryNode(CategoryNode parent, String name, String path) {
-				return new DemoSnippetCategory(parent, name, path);
+			public CategoryNode createCategoryNode(CategoryNode parent, String name) {
+				return new DemoSnippetCategory(parent, name);
 			}
 			
 		};

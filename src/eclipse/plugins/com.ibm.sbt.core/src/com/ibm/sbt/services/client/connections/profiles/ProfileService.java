@@ -175,8 +175,7 @@ public class ProfileService extends BaseService {
 			logger.entering(sourceClass, "getProfile", new Object[] { userId, loaded });
 		}
 		if (StringUtil.isEmpty(userId)) {
-			logger.fine("User id is empty, returning null profile");
-			return null;
+			throw new IllegalArgumentException(StringUtil.format("A null userId was passed"));
 		}
 		Profile profile = new Profile(this, userId);
 		if (loaded) {
@@ -217,6 +216,9 @@ public class ProfileService extends BaseService {
 	public Profile[] getColleagues(Profile profile, Map<String, String> parameters){
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getColleagues", parameters);
+		}
+		if (profile == null) {
+			throw new IllegalArgumentException(StringUtil.format("A null profile was passed"));
 		}
 		Document data = null;
 		Profile[] colleagues = null;
@@ -264,6 +266,9 @@ public class ProfileService extends BaseService {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "updatePhoto", profile.toString());
 		}
+		if (profile == null) {
+			throw new IllegalArgumentException(StringUtil.format("A null profile was passed"));
+		}
 		boolean returnVal = true;
 
 		Map<String, String> parameters = new HashMap<String, String>();
@@ -286,15 +291,11 @@ public class ProfileService extends BaseService {
 				throw new Exception("Extension of file being uploaded may not be null");
 			} catch (Exception e) {
 				returnVal = false;
-
-				// TODO Auto-generated catch block
 			}
 		}
 		Map<String, String> headers = new HashMap<String, String>();
 		if (ext.equalsIgnoreCase("jpg")) {
-			headers.put("Content-Type", "image/jpeg");// content-type should be
-														// image/jpeg for file
-														// extension - jpeg/jpg
+			headers.put("Content-Type", "image/jpeg");	// content-type should be image/jpeg for file extension - jpeg/jpg
 		} else {
 			headers.put("Content-Type", "image/" + ext);
 		}
@@ -325,6 +326,9 @@ public class ProfileService extends BaseService {
 	public boolean updateProfile(Profile profile) {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "update", profile);
+		}
+		if (profile == null) {
+			throw new IllegalArgumentException(StringUtil.format("A null profile was passed"));
 		}
 		boolean returnVal = true;
 
@@ -413,6 +417,7 @@ public class ProfileService extends BaseService {
 		}
 		// Do a cache lookup first. If cache miss, make a network call to get
 		// Profile
+		
 		Document data = getProfileDataFromCache(profile.getReqId());
 		if (data != null) {
 			profile.setData(data);

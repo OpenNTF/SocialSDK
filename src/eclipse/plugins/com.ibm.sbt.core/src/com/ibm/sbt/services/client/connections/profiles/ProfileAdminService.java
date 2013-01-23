@@ -58,13 +58,10 @@ public class ProfileAdminService extends ProfileService {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "deleteProfile", profile);
 		}
-
-		String userId = profile.getReqId();
-		if (StringUtil.isEmpty(userId)) {
-			logger.fine("Delete operation cancelled. User id is empty. ");
-			return false;
+		if (profile == null) {
+			throw new IllegalArgumentException(StringUtil.format("Delete operation cancelled. profile passed was null."));
 		}
-
+	
 		boolean success = true;		
 		Map<String, String> parameters = new HashMap<String, String>();
 
@@ -105,6 +102,9 @@ public class ProfileAdminService extends ProfileService {
 	{
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "create", profile);
+		}
+		if (profile == null) {
+			throw new IllegalArgumentException(StringUtil.format("Create operation cancelled. Profile passed was null."));
 		}
 		boolean returnVal = true;		
 		Map<String, String> parameters = new HashMap<String,String>();

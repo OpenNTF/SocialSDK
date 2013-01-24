@@ -14,4 +14,3 @@ Export-Package: com.ibm.sbt.playground.git,
  com.ibm.sbt.playground.vfs
 Import-Package: javax.servlet,
  javax.servlet.http
- 

@@ -12,6 +12,7 @@ Export-Package: com.ibm.sbt.playground.git,
  com.ibm.sbt.playground.snippets,
  com.ibm.sbt.playground.snippets.dojo,
  com.ibm.sbt.playground.vfs
-Import-Package: javax.servlet,
+Import-Package: com.ibm.sbt.services,
+ javax.servlet,
  javax.servlet.http
  

@@ -9,7 +9,15 @@
 		</xp:this.facets>
 		<xp:div
 			style="margin: -20px 0px 0px -25px; padding: 20px 0px 0px 25px; background: white">
-			<xp:button id="button4" value="New Import Source...">
+			<xp:button id="button4" value="Check GitHub...">
+
+			<xp:eventHandler event="onclick" submit="true"
+				refreshMode="norefresh">
+				<xp:this.action><![CDATA[#{javascript:var gh = new com.ibm.sbt.playground.git.GitImport("https://api.github.com",null,"OpenNTF/SocialSDK")
+gh.browse("samples/j2ee/com.ibm.sbt.sample.web/WebContent/js");
+print("done!")}]]></xp:this.action>
+			</xp:eventHandler></xp:button>
+			<xp:button id="button2" value="New Import Source...">
 				<xp:eventHandler event="onclick" submit="false">
 					<xp:this.script><![CDATA[XSP.openDialog("#{id:importSource}") ]]>
 					</xp:this.script>
@@ -115,7 +123,7 @@ document1.replaceItemValue("Source","file")}]]></xp:this.postNewDocument>
 						</xp:button>
 					</xp:panel>
 				</xp:this.facets>
-				<xe:formRow id="formRow2" label="Source Type:">
+				<xe:formRow id="formRow2" label="Import Type:">
 					<xp:comboBox id="comboBox1" required="true"
 						disableClientSideValidation="true" value="#{document1.Type}">
 						<xp:selectItem itemLabel="HTML/JavaScript Code Snippets"
@@ -128,14 +136,31 @@ document1.replaceItemValue("Source","file")}]]></xp:this.postNewDocument>
 						disableClientSideValidation="true" size="40" value="#{document1.Name}">
 					</xp:inputText>
 				</xe:formRow>
-				<xe:formRow id="formRow5" label="Source:" loaded="false">
-					<xp:inputText id="inputText3" required="true"
-						disableClientSideValidation="true" size="80" value="#{document1.Source}">
+				<xe:formRow id="formRow5" label="Source Type:">
+					<xp:comboBox id="comboBox2" required="true"
+						disableClientSideValidation="true" value="#{document1.Source}">
+						<xp:selectItem itemLabel="File System"
+							itemValue="file">
+						</xp:selectItem>
+						<xp:selectItem itemLabel="GitHub Repository"
+							itemValue="github">
+						</xp:selectItem>
+					</xp:comboBox>
+				</xe:formRow>
+				<xe:formRow id="formRow1" label="Location:">
+					<xp:inputText id="inputText1"
+						disableClientSideValidation="true" size="100" value="#{document1.Location}">
 					</xp:inputText>
 				</xe:formRow>
-				<xe:formRow id="formRow1" label="Import Path:">
-					<xp:inputText id="inputText1" required="true"
-						disableClientSideValidation="true" size="80" value="#{document1.Location}">
+				<xe:formRow id="formRow3" label="User:">
+					<xp:inputText id="inputText4"
+						disableClientSideValidation="true" size="40" value="#{document1.User}">
+					</xp:inputText>
+				</xe:formRow>
+				<xe:formRow id="formRow6" label="Password:">
+					<xp:inputText id="inputText5"
+						disableClientSideValidation="true" size="40"
+						value="#{document1.Password}" password="true">
 					</xp:inputText>
 				</xe:formRow>
 			</xe:formTable>

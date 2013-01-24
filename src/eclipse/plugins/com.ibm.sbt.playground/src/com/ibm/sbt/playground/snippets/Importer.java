@@ -21,6 +21,7 @@ import java.util.Set;
 
 import com.ibm.commons.util.QuickSort;
 import com.ibm.commons.util.StringUtil;
+import com.ibm.sbt.playground.vfs.VFSFile;
 
 public class Importer extends AbstractImportExport {
 
@@ -53,7 +54,7 @@ public class Importer extends AbstractImportExport {
 		VFSFile[] children = file.getChildren();
 		for(VFSFile s: children) {
 			if(s.isFolder()) {
-				CategoryNode cn = factory.createCategoryNode(node, s.getName(), s.getPath());
+				CategoryNode cn = factory.createCategoryNode(node, s.getName());
 				node.getChildren().add(cn);
 				browseDirectory(s,cn);
 			} else if(s.isFile()) {
@@ -62,8 +63,7 @@ public class Importer extends AbstractImportExport {
 					String fileName = s.getNameWithoutExtension();
 					if(!snippets.contains(fileName)) {
 						if(isExtension(ext)) {
-							String path = s.getPathWithoutExtension();
-							SnippetNode sn = factory.createSnippetNode(node,fileName,path);
+							SnippetNode sn = factory.createSnippetNode(node,fileName);
 							node.getChildren().add(sn);
 							snippets.add(fileName);
 						}
@@ -93,10 +93,5 @@ public class Importer extends AbstractImportExport {
 			}
 		}
 		return false;
-	}
-	
-//	public static void main(String[] args) {
-//		String path = "c:\\ibmdev\\workspace\\SDK\\java\\sample\\eclipse\\plugins\\com.ibm.sbt.sample.web\\WebContent\\js";
-//		Importer imp = new Importer(createVFSFile(new File(path)), new DefaultNodeFactory());
-//	}
+	}	
 }

@@ -29,6 +29,7 @@ public abstract class AbstractNode {
 	private CategoryNode parent;
 	private String category;
 	private String name;
+	private String path;
 	private String unid;
 	private String jspUrl;
 
@@ -47,6 +48,18 @@ public abstract class AbstractNode {
 		this.unid = encodeUnid(createName(new StringBuilder(),this,SEPARATOR).toString());
 		this.jspUrl = SEPARATOR_SLASH+createJspUrl(new StringBuilder(),this,SEPARATOR_SLASH).toString();
 	}
+
+	public String getPath() {
+		if(path==null) {
+			if(parent!=null) {
+				path = parent.getPath()+'/'+name;
+			} else {
+				path = name;
+			}
+		}
+		return path;
+	}
+	
 	
 	private StringBuilder createJspUrl(StringBuilder b, AbstractNode n, char sep) {
 		if(n!=null) {

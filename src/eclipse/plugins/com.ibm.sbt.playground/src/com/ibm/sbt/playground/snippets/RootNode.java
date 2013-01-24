@@ -20,8 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ibm.commons.util.StringUtil;
-import com.ibm.sbt.playground.snippets.AbstractImportExport.VFSFile;
 import com.ibm.sbt.playground.snippets.dojo.JsonTreeRenderer;
+import com.ibm.sbt.playground.vfs.VFSFile;
 
 
 /**

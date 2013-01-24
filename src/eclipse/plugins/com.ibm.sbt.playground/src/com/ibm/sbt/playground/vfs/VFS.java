@@ -13,17 +13,29 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-package demo;
+package com.ibm.sbt.playground.vfs;
 
-import com.ibm.sbt.playground.snippets.CategoryNode;
+import java.io.IOException;
 
 
-/**
- * Definition of a code snippet.
- */
-public class DemoSnippetCategory extends CategoryNode {
 
-	public DemoSnippetCategory(CategoryNode parent, String name) {
-		super(parent,name);
+//
+// Simple virtual file system
+//
+public abstract class VFS {
+	
+	public static final char SEPARATOR = '/';
+	
+	public VFS() {
+	}
+
+	public abstract VFSFile getRoot();
+
+	public VFSFile getFile(String path) throws IOException {
+		VFSFile root = getRoot();
+		if(root!=null) {
+			return root.getFile(path);
+		}
+		return null;
 	}
 }

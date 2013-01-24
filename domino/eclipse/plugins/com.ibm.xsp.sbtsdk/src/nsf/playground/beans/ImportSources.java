@@ -20,7 +20,10 @@ import com.ibm.sbt.playground.snippets.Importer;
 import com.ibm.sbt.playground.snippets.RootNode;
 import com.ibm.sbt.playground.snippets.Snippet;
 import com.ibm.sbt.playground.snippets.SnippetNode;
-import com.ibm.sbt.playground.snippets.AbstractImportExport.VFSFile;
+import com.ibm.sbt.playground.vfs.FileVFS;
+import com.ibm.sbt.playground.vfs.GitVFS;
+import com.ibm.sbt.playground.vfs.VFS;
+import com.ibm.sbt.playground.vfs.VFSFile;
 import com.ibm.xsp.FacesExceptionEx;
 import com.ibm.xsp.context.FacesContextEx;
 import com.ibm.xsp.extlib.beans.UserBean;
@@ -68,7 +71,9 @@ public class ImportSources implements Serializable {
 			String name = document.getItemValueString("Name");
 			String source = document.getItemValueString("Source");
 			String location = document.getItemValueString("Location");
-			Source src = new Source(type,name,source,location);
+			String userName = document.getItemValueString("UserName");
+			String password = document.getItemValueString("Password");
+			Source src = new Source(type,name,source,location,userName,password);
 			return src;
 		}
 		throw new FacesExceptionEx(null,"Unknown import source type {0}",type);
@@ -84,12 +89,16 @@ public class ImportSources implements Serializable {
 		private String name;
 		private String source;
 		private String location;
+		private String userName;
+		private String password;
 
-		public Source(String type, String name, String source, String location) {
+		public Source(String type, String name, String source, String location, String userName, String password) {
 			this.type = type;
 			this.name = name;
 			this.source = source;
 			this.location = location;
+			this.userName = userName;
+			this.password = password;
 		}
 		public String getType() {
 			return type;
@@ -102,6 +111,12 @@ public class ImportSources implements Serializable {
 		}
 		public String getLocation() {
 			return location;
+		}
+		public String getUserName() {
+			return userName;
+		}
+		public String getPassword() {
+			return password;
 		}
 		
 		// HTML/JS Snippets
@@ -143,21 +158,32 @@ public class ImportSources implements Serializable {
 		}
 		public void importSnippets() throws Exception {
 			if(!StringUtil.equals(getType(), "html")) {
-				throw new FacesExceptionEx(null,"Import snippet is not available for a type {0}",getType());
+				throw new FacesExceptionEx(null,"Import action is not available for a type {0}",getType());
 			}
+			VFS vfs = createImportVFS();
+			VFSFile rootDir = vfs.getRoot();
+			Importer.NodeFactory factory = new Importer.DefaultNodeFactory(); 
+			Importer imp = new Importer(rootDir,factory,Importer.HTMLJS_EXTENSIONS);
+			RootNode root = imp.readSnippets();
+			importSnippets(rootDir,root);
+		}
+		private VFS createImportVFS() {
 			if(StringUtil.equals(getSource(), "file")) {
-				File baseDir = new File(getLocation());
+				File baseDir = new File(getLocation().trim());
 				if(!baseDir.exists()) {
 					throw new FacesExceptionEx(null,"Import directory {0} does not exist",getLocation());
 				}
-				Importer.VFSFile rootDir = Importer.createVFSFile(baseDir);
-				Importer.NodeFactory factory = new Importer.DefaultNodeFactory(); 
-				Importer imp = new Importer(rootDir,factory,Importer.HTMLJS_EXTENSIONS);
-				RootNode root = imp.readSnippets();
-				importSnippets(rootDir,root);
-				return;
+				FileVFS vfs = new FileVFS(baseDir); 
+				return vfs;
+			} else if(StringUtil.equals(getSource(), "github")) {
+				String basePath = getLocation().trim();
+				if(!StringUtil.isEmpty(basePath)) {
+					throw new FacesExceptionEx(null,"GitHub: Location is empty",getLocation());
+				}
+				GitVFS vfs = new GitVFS(location,userName,password); 
+				return vfs;
 			}
-			throw new FacesExceptionEx(null,"Import snippet is not available for a source {0}",getSource());
+			throw new FacesExceptionEx(null,"Import action is not available for a source {0}",getSource());
 		}
 
 		

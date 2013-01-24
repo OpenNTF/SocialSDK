@@ -9,14 +9,16 @@
 		</xp:this.facets>
 		<xp:div
 			style="margin: -20px 0px 0px -25px; padding: 20px 0px 0px 25px; background: white">
-			<xp:button id="button4" value="Check GitHub...">
-
-			<xp:eventHandler event="onclick" submit="true"
-				refreshMode="norefresh">
-				<xp:this.action><![CDATA[#{javascript:var gh = new com.ibm.sbt.playground.git.GitImport("https://api.github.com",null,"OpenNTF/SocialSDK")
-gh.browse("samples/j2ee/com.ibm.sbt.sample.web/WebContent/js");
-print("done!")}]]></xp:this.action>
-			</xp:eventHandler></xp:button>
+			
+			<xc:ccAsyncProgress jobId="ImportSnippet" taskLabel="true"></xc:ccAsyncProgress>
+			
+			<xp:button id="button3" value="Dialog...">
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script><![CDATA[XSP.openDialog("#{id:asyncActionProgress}") ]]>
+					</xp:this.script>
+				</xp:eventHandler>
+			</xp:button>
+			
 			<xp:button id="button2" value="New Import Source...">
 				<xp:eventHandler event="onclick" submit="false">
 					<xp:this.script><![CDATA[XSP.openDialog("#{id:importSource}") ]]>
@@ -49,12 +51,13 @@ print("done!")}]]></xp:this.action>
 						partialRefresh="true" partialExecute="true">
 					</xp:pager>
 					<xp:panel xp:key="detail" id="pager1">
-						<xe:listInline id="listInline2">
+						<xe:listInline id="listInline2" loaded="${javascript:userBean.canCreateDocs}">
 							<xp:link escape="true" text="Import from Source" id="link1"
 								style="margin-left:10.0px">
-								<xp:eventHandler event="onclick" submit="true"
-									refreshMode="complete">
-									<xp:this.action><![CDATA[#{javascript:importSources.importSnippets(viewEntry.getColumnValue('name'));}]]></xp:this.action>
+								<xp:eventHandler event="onclick"
+									submit="true" refreshMode="complete">
+									<xp:this.action><![CDATA[#{javascript:var name = viewEntry.getColumnValue('name')
+importSources.importSnippets(name,true);}]]></xp:this.action>
 								</xp:eventHandler>
 							</xp:link>
 							<xp:link escape="true" text="Export" id="link2"
@@ -168,5 +171,4 @@ document1.replaceItemValue("Source","file")}]]></xp:this.postNewDocument>
 				value="#{document1}" />
 		</xp:panel>
 	</xe:dialog>
-
 </xp:view>

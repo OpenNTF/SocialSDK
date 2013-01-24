@@ -1,22 +1,20 @@
 <?xml version='1.0' encoding='utf-8'?>
 <note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='85257AA80077A28B'>
-<noteinfo noteid='1b2' unid='63A9C8767A1DA52685257A8E005525AD' sequence='13'>
+<noteinfo noteid='1b2' unid='63A9C8767A1DA52685257A8E005525AD' sequence='18'>
 <created><datetime dst='true'>20121005T113002,05-04</datetime></created>
-<modified><datetime>20121105T124541,87-05</datetime></modified>
-<revised><datetime>20121105T124541,86-05</datetime></revised>
-<lastaccessed><datetime>20121105T125015,61-05</datetime></lastaccessed>
+<modified><datetime>20130124T172443,16-05</datetime></modified>
+<revised><datetime>20130124T172443,15-05</datetime></revised>
+<lastaccessed><datetime>20130124T172443,16-05</datetime></lastaccessed>
 <addedtofile><datetime>20121104T143452,02-05</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name><name>CN=sbaadmin/O=renovations</name><name
->CN=Philippe Riand/OU=Westford/O=IBM</name><name>CN=sbaadmin/O=renovations</name><name
->CN=Philippe Riand/OU=Westford/O=IBM</name><name>CN=sbaadmin/O=renovations</name><name
->CN=Philippe Riand/OU=Westford/O=IBM</name></updatedby>
+<updatedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></updatedby>
 <wassignedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></wassignedby>
 <item name='$FormulaClass' sign='true'><text>1</text></item>
 <item name='$TITLE' sign='true'><text>AllSnippetsByImportSource</text></item>
 <item name='$Index' sign='true'><text/></item>
 <item name='$Formula' summary='true' sign='true'><formula compiled='true'>
-aAAFADIALQAFAAwAAgAEAAkABABJbXBvcnRTb3VyY2VJZE5hbWUkQ29uZmxpY3QkUkVGAAQABAAA
-ACQABQAEAEZvcm0BAAsAQ29kZVNuaXBwZXQACgIEAAQAAwAHAAwABQAJM1M0UwA=
+eAACAAwAAgAkNWkAAwAFADYAMQAGAAwAAgAEAAIACQAEAEltcG9ydFNvdXJjZUlkTmFtZSQ1JENv
+bmZsaWN0JFJFRgAEAAQAAAAkAAUABABGb3JtAQALAENvZGVTbmlwcGV0AAoCBAAEAAMABwAMAAUA
+CTNTNFMA
 </formula></item>
 <item name='$Collation' summary='true'>
 <rawitemdata type='2'>
@@ -24,13 +22,15 @@ LQADAABEiGYHAAAMAAhmAAwAAgCAZgAOAAQASW1wb3J0U291cmNlSWROYW1l
 </rawitemdata></item>
 <item name='$ViewFormat' summary='true' sign='true'>
 <rawitemdata type='5'>
-AQADAAYACAAAAFZDAwAMAA0AAAAAAKoAAQAACgABAAAAAAAAAAICAAAAVkMBAAIAAgAAAAAAygAB
-AAAKAAEAAAAAAAAAAgIAAABWQwEABAAEAAAAAACyAAEAAAoAAAAAAAAAAAACAgAAAEltcG9ydFNv
-dXJjZUltcG9ydCBTb3VyY2VJZElETmFtZU5hbWUmAAEAAAABAQAJAQAACgEBDgoAAAEArSsBAAEA
-AQAAAAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAP//AAAAAAAAAAAAAAAAAABX
-QwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAAV0MBAQAJAAAAAAAA
-AAAAAAAAAAAAAAAABAAAAAAA//8AAAAAAAAAAAAAAAAAAEIAAAAAAAEA////AAUA////AAEAAAAA
-AAAAAAAAAAAAAQD///8AAQD///8AAAABAAAAAAABAAAAAAABAAAAAAAAAAgAAAAAAAEA
+AQAEAAYACAAAAFZDAwAMAA0AAAAAAKoAAQAACgABAAAAAAAAAAICAAAAVkMBAAIAAgAAAAAAygAB
+AAAKAAEAAAAAAAAAAgIAAABWQwEABAAEAAAAAACyAAEAAAoAAAAAAAAAAAACAgAAAFZDAAACAAoA
+DgAAAFAAAQAACgAAAAAAAAAAAAICAAAASW1wb3J0U291cmNlSW1wb3J0IFNvdXJjZUlkSUROYW1l
+TmFtZSQ1Q3JlYXRlRGF0ZQ4AAgAMAAIAJDVpAAMAJgABAAAAAQEACQEAAAoBAQ4KAAABAK0rAQAB
+AAEAAAAAAAAAAABXQwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD//wAAAAAAAAAAAAAAAAAA
+V0MBAQAJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAFdDAQEACQAAAAAA
+AAAAAAAAAAAAAAAAAAQAAAAAAP//AAAAAAAAAAAAAAAAAABXQwEBAAkAAAAAAAAAAAAAAAAAAAAA
+AAAEAAAAAAD//wAAAAAAAAAAAAAAAAAAQgAAAAAAAQD///8ABQD///8AAQAAAAAAAAAAAAAAAAAB
+AP///wABAP///wAAAAEAAAAAAAEAAAAAAAEAAAAAAAAACAAAAAAAAQA=
 </rawitemdata></item>
 <item name='$Comment' sign='true'><text/></item>
 <item name='$Flags'><text>PY</text></item>

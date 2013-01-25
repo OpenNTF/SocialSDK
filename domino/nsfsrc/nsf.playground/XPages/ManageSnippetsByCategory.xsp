@@ -43,6 +43,20 @@
 									<xe:this.href><![CDATA[javascript:XSP.showContent("#{id:dynp}","form",{action:'editDocument',documentId:'#{javascript:viewEntry.getNoteID()}'})]]></xe:this.href>
 								</xe:viewSummaryColumn>
 							</xe:this.summaryColumn>
+							<xe:this.extraColumns>
+								<xe:viewExtraColumn columnName="ImportSource"
+									columnTitle="Source" style="width: 100px">
+								</xe:viewExtraColumn>
+								<xe:viewExtraColumn
+									columnName="CreateDate" columnTitle="Creation Date"
+									style="width: 100px">
+									<xe:this.converter>
+										<xp:convertDateTime
+											dateStyle="short" timeStyle="short" type="both">
+										</xp:convertDateTime>
+									</xe:this.converter>
+								</xe:viewExtraColumn>
+							</xe:this.extraColumns>
 						</xe:dataView>
 					</xp:panel>
 					<xp:panel xp:key="form" id="panel2">

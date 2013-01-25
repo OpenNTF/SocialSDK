@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:this.resources>
+		<xp:dojoModule name="dijit.ProgressBar"></xp:dojoModule>
+		<xp:dojoModule name="extlib.dijit.ExtLib"></xp:dojoModule>
+	</xp:this.resources>
+	<xe:jsonRpcService id="jsonRpcService1" serviceName="job">
+		<xe:this.methods>
+			<xe:remoteMethod name="getStatus">
+				<xe:this.script><![CDATA[var job = nsf.playground.jobs.AsyncAction.getJobProgressJavaScript(compositeData.jobId)
+return job]]></xe:this.script>
+			</xe:remoteMethod>
+		</xe:this.methods>
+	</xe:jsonRpcService>
+
+	<xp:scriptBlock id="scriptBlock1">
+		<xp:this.value><![CDATA[function xspAsyncProgressUpdate() {
+	var deferred = job.getStatus()
+	deferred.addCallback(function(result) {
+		if(result.running) {
+			setTimeout(xspAsyncProgressUpdate,800);
+		} else {
+			// Ok, done!
+		}
+		var taskTitle = dojo.byId("#{id:taskTitle}");
+		if(taskTitle) XSP.setNodeText(taskTitle,result.taskLabel);
+		var p1 = dijit.byId("#{id:progress1}");
+		if(p1) p1.update({ progress:result.taskCompletion });
+		var p2 = dijit.byId("#{id:progress2}");
+		if(p2) p2.update({ progress:result.fullCompletion });
+	});
+}
+]]></xp:this.value>
+	</xp:scriptBlock>
+
+	<xe:dialog id="asyncActionProgress" title="Importing Snippets">
+		<xe:dialogContent>
+			<xe:formTable id="formTable2">
+				<xe:formRow id="formRow1" label="Current Task:"
+					loaded="${javascript:compositeData.taskLabel}">
+					<xp:text escape="true" id="taskTitle"></xp:text>
+				</xe:formRow>
+				<xe:formRow id="formRow3" label="Task Completion:"
+					loaded="${javascript:compositeData.taskProgress}">
+					<xp:div dojoType="dijit.ProgressBar"
+						style="width:300px" id="progress1" />
+				</xe:formRow>
+				<xe:formRow id="formRow4" label="Overall Completion:"
+					loaded="${javascript:compositeData.fullProgress}">
+					<xp:div dojoType="dijit.ProgressBar"
+						style="width:300px" id="progress2" />
+				</xe:formRow>
+				<xe:formRow id="formRow2">
+					<xp:button value="Cancel" id="button1">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete">
+							<xp:this.action><![CDATA[#{javascript:nsf.playground.jobs.AsyncAction.cancel(compositeData.jobId)
+//var d = getComponent("asyncActionProgress"); d.hide();
+@ErrorMessage("Import action had been cancelled!")
+}]]></xp:this.action>
+						</xp:eventHandler></xp:button>
+				</xe:formRow>
+			</xe:formTable>
+		</xe:dialogContent>
+		<xp:eventHandler event="onShow" submit="false">
+			<xe:this.script><![CDATA[xspAsyncProgressUpdate()]]></xe:this.script>
+		</xp:eventHandler>
+	</xe:dialog>
+</xp:view>

@@ -9,7 +9,17 @@
 		</xp:this.facets>
 		<xp:div
 			style="margin: -20px 0px 0px -25px; padding: 20px 0px 0px 25px; background: white">
-			<xp:button id="button4" value="New Import Source...">
+			
+			<xc:ccAsyncProgress jobId="ImportSnippet" taskLabel="true"></xc:ccAsyncProgress>
+			
+			<xp:button id="button3" value="Dialog...">
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script><![CDATA[XSP.openDialog("#{id:asyncActionProgress}") ]]>
+					</xp:this.script>
+				</xp:eventHandler>
+			</xp:button>
+			
+			<xp:button id="button2" value="New Import Source...">
 				<xp:eventHandler event="onclick" submit="false">
 					<xp:this.script><![CDATA[XSP.openDialog("#{id:importSource}") ]]>
 					</xp:this.script>
@@ -41,12 +51,13 @@
 						partialRefresh="true" partialExecute="true">
 					</xp:pager>
 					<xp:panel xp:key="detail" id="pager1">
-						<xe:listInline id="listInline2">
+						<xe:listInline id="listInline2" loaded="${javascript:userBean.canCreateDocs}">
 							<xp:link escape="true" text="Import from Source" id="link1"
 								style="margin-left:10.0px">
-								<xp:eventHandler event="onclick" submit="true"
-									refreshMode="complete">
-									<xp:this.action><![CDATA[#{javascript:importSources.importSnippets(viewEntry.getColumnValue('name'));}]]></xp:this.action>
+								<xp:eventHandler event="onclick"
+									submit="true" refreshMode="complete">
+									<xp:this.action><![CDATA[#{javascript:var name = viewEntry.getColumnValue('name')
+importSources.importSnippets(name,true);}]]></xp:this.action>
 								</xp:eventHandler>
 							</xp:link>
 							<xp:link escape="true" text="Export" id="link2"
@@ -115,7 +126,7 @@ document1.replaceItemValue("Source","file")}]]></xp:this.postNewDocument>
 						</xp:button>
 					</xp:panel>
 				</xp:this.facets>
-				<xe:formRow id="formRow2" label="Source Type:">
+				<xe:formRow id="formRow2" label="Import Type:">
 					<xp:comboBox id="comboBox1" required="true"
 						disableClientSideValidation="true" value="#{document1.Type}">
 						<xp:selectItem itemLabel="HTML/JavaScript Code Snippets"
@@ -128,14 +139,31 @@ document1.replaceItemValue("Source","file")}]]></xp:this.postNewDocument>
 						disableClientSideValidation="true" size="40" value="#{document1.Name}">
 					</xp:inputText>
 				</xe:formRow>
-				<xe:formRow id="formRow5" label="Source:" loaded="false">
-					<xp:inputText id="inputText3" required="true"
-						disableClientSideValidation="true" size="80" value="#{document1.Source}">
+				<xe:formRow id="formRow5" label="Source Type:">
+					<xp:comboBox id="comboBox2" required="true"
+						disableClientSideValidation="true" value="#{document1.Source}">
+						<xp:selectItem itemLabel="File System"
+							itemValue="file">
+						</xp:selectItem>
+						<xp:selectItem itemLabel="GitHub Repository"
+							itemValue="github">
+						</xp:selectItem>
+					</xp:comboBox>
+				</xe:formRow>
+				<xe:formRow id="formRow1" label="Location:">
+					<xp:inputText id="inputText1"
+						disableClientSideValidation="true" size="100" value="#{document1.Location}">
 					</xp:inputText>
 				</xe:formRow>
-				<xe:formRow id="formRow1" label="Import Path:">
-					<xp:inputText id="inputText1" required="true"
-						disableClientSideValidation="true" size="80" value="#{document1.Location}">
+				<xe:formRow id="formRow3" label="User:">
+					<xp:inputText id="inputText4"
+						disableClientSideValidation="true" size="40" value="#{document1.User}">
+					</xp:inputText>
+				</xe:formRow>
+				<xe:formRow id="formRow6" label="Password:">
+					<xp:inputText id="inputText5"
+						disableClientSideValidation="true" size="40"
+						value="#{document1.Password}" password="true">
 					</xp:inputText>
 				</xe:formRow>
 			</xe:formTable>
@@ -143,5 +171,4 @@ document1.replaceItemValue("Source","file")}]]></xp:this.postNewDocument>
 				value="#{document1}" />
 		</xp:panel>
 	</xe:dialog>
-
 </xp:view>

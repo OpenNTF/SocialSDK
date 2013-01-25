@@ -30,10 +30,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.ibm.commons.runtime.servlet.BaseHttpServlet;
 import com.ibm.commons.runtime.util.UrlUtil;
 import com.ibm.commons.util.StringUtil;
-import com.ibm.sbt.playground.snippets.AbstractImportExport.VFSFile;
 import com.ibm.sbt.playground.snippets.AbstractNode;
 import com.ibm.sbt.playground.snippets.RootNode;
 import com.ibm.sbt.playground.snippets.Snippet;
+import com.ibm.sbt.playground.vfs.VFSFile;
 
 /**
  * @author mwallace

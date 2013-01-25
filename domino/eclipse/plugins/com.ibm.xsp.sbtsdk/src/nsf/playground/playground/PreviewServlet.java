@@ -21,6 +21,7 @@ import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.commons.util.io.json.JsonParser;
 import com.ibm.sbt.jslibrary.SBTEnvironment;
 import com.ibm.xsp.context.DojoLibrary;
+import com.ibm.xsp.context.DojoLibraryFactory;
 import com.ibm.xsp.extlib.servlet.FacesContextServlet;
 
 
@@ -200,9 +201,11 @@ public class PreviewServlet extends FacesContextServlet {
 	private String getDojoPath(DojoLibrary lib, String serverUrl) {
 //		//DOJO_URLPATH 		= "/xsp/.ibmxspres/dojoroot-1.8.0/";
 //		//return serverUrl+DOJO_URLPATH;
-//		//DojoLibrary lib = DojoLibraryFactory.getDefaultLibrary(false);
-//        //'-'+getDojoLibrary().getVersionTag()
-		return serverUrl+"/xsp/.ibmxspres/dojoroot/";
+		if(lib==null) {
+			lib = DojoLibraryFactory.getDefaultLibrary();
+		}
+        String s = '-'+lib.getVersionTag();
+		return serverUrl+"/xsp/.ibmxspres/dojoroot"+s+"/";
 	}
 	
 	private String composeServerUrl(HttpServletRequest req) {		

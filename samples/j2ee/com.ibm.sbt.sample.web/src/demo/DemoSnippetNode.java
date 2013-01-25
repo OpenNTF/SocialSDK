@@ -29,8 +29,8 @@ import com.ibm.sbt.playground.snippets.SnippetNode;
  */
 public class DemoSnippetNode extends SnippetNode {
 
-	public DemoSnippetNode(CategoryNode parent, String name, String path) {
-		super(parent,name,path);
+	public DemoSnippetNode(CategoryNode parent, String name) {
+		super(parent,name);
 	}
 
 	public String getUrl(HttpServletRequest request) {

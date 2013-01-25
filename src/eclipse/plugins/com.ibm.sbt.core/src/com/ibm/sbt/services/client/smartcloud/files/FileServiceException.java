@@ -26,7 +26,8 @@ public class FileServiceException extends AbstractException{
 	public enum Reason  {
 		CLIENT_ERROR,
 		SERVER_ERROR,
-		DUPLICATE_FILE, INVALID_INPUT
+		DUPLICATE_FILE, 
+		INVALID_INPUT
 	}
 	
 	/**

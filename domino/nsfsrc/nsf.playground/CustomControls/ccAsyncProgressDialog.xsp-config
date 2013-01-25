@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config>
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/custom</namespace-uri>
+    <default-prefix>xc</default-prefix>
+  </faces-config-extension>
+  <composite-component>
+    <component-type>ccAsyncProgressDialog</component-type>
+    <composite-name>ccAsyncProgressDialog</composite-name>
+    <composite-file>/ccAsyncProgressDialog.xsp</composite-file>
+    <composite-extension>
+      <designer-extension>
+        <in-palette>true</in-palette>
+      </designer-extension>
+    </composite-extension>
+    <property>
+      <property-name>jobId</property-name>
+      <property-class>string</property-class>
+      <property-extension>
+        <required>true</required>
+      </property-extension>
+    </property>
+    <property>
+      <property-name>taskProgress</property-name>
+      <property-class>boolean</property-class>
+    </property>
+    <property>
+      <property-name>fullProgress</property-name>
+      <property-class>string</property-class>
+    </property>
+    <property>
+      <property-name>taskLabel</property-name>
+      <property-class>string</property-class>
+    </property>
+  </composite-component>
+</faces-config>

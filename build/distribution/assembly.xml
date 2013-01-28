@@ -73,6 +73,17 @@
         <unpack>false</unpack>
       </binaries>
     </moduleSet>
+      <moduleSet>  
+      <useAllReactorProjects>true</useAllReactorProjects>
+      <includes>
+        <include>com.ibm.sbt.sample:sbt.sample.app</include>
+    </includes>
+      <binaries>
+        <outputDirectory>sbtsdk/samples/jar</outputDirectory>
+        <outputFileNameMapping>${module.artifactId}-${module.version}.${buildLabel}.${module.extension}</outputFileNameMapping>
+        <unpack>false</unpack>
+      </binaries>
+    </moduleSet>
   </moduleSets>
   <fileSets>
     <fileSet>

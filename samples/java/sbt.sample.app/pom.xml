@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>sbt.sample.app</artifactId>
+	<packaging>jar</packaging>
+
+	<parent>
+		<groupId>com.ibm.sbt.sample</groupId>
+		<artifactId>sample.parent</artifactId>
+		<version>1.0.0</version>
+		<relativePath>../../../build/sample</relativePath>
+	</parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.ibm.sbt.sdk</groupId>
+			<artifactId>com.ibm.commons</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm.sbt.sdk</groupId>
+			<artifactId>com.ibm.commons.xml</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm.sbt.sdk</groupId>
+			<artifactId>com.ibm.commons.runtime</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm.sbt.sdk</groupId>
+			<artifactId>com.ibm.sbt.core</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+	</dependencies>
+</project>

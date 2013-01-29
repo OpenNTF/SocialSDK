@@ -73,17 +73,21 @@
         <unpack>false</unpack>
       </binaries>
     </moduleSet>
-      <moduleSet>  
+    <!--  <moduleSet>  
       <useAllReactorProjects>true</useAllReactorProjects>
       <includes>
+        <include>com.ibm.sbt.sdk:com.ibm.commons</include>
+        <include>com.ibm.sbt.sdk:com.ibm.commons.runtime</include>
+        <include>com.ibm.sbt.sdk:com.ibm.commons.xml</include>
+        <include>com.ibm.sbt.sdk:com.ibm.sbt.core</include>
         <include>com.ibm.sbt.sample:sbt.sample.app</include>
     </includes>
       <binaries>
         <outputDirectory>sbtsdk/samples/jar</outputDirectory>
-        <outputFileNameMapping>${module.artifactId}-${module.version}.${buildLabel}.${module.extension}</outputFileNameMapping>
+        <outputFileNameMapping>${module.artifactId}-${module.version}.${module.extension}</outputFileNameMapping>
         <unpack>false</unpack>
       </binaries>
-    </moduleSet>
+    </moduleSet>-->
   </moduleSets>
   <fileSets>
     <fileSet>

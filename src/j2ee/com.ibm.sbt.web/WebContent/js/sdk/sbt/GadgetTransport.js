@@ -63,7 +63,7 @@ define(['dojo/_base/declare','dojo/_base/xhr','sbt/Gadget','sbt/lang'],function(
             params[gadgets.io.RequestParameters.HEADERS]       = args.headers || {};
             params[gadgets.io.RequestParameters.POST_DATA]     = this.getPostData(params[gadgets.io.RequestParameters.METHOD], args.postData || args.putData);
             if(args.preventCache) {
-                params[gadgets.io.RequestParameters.REFRESH_INTERVAL] = -1;
+                params[gadgets.io.RequestParameters.REFRESH_INTERVAL] = 0;
             }
             if(this.serviceName || args.serviceName) {
                 params[gadgets.io.RequestParameters.OAUTH_SERVICE_NAME] = this.serviceName || args.serviceName;

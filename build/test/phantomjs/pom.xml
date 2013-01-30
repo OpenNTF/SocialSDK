@@ -1,0 +1,58 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.ibm.sbt.test</groupId>
+	<artifactId>phantomjs</artifactId>
+	<version>1.0.0</version>
+	<packaging>pom</packaging>
+
+	<parent>
+    	<groupId>com.ibm.sbt.test</groupId>
+    	<artifactId>test.parent</artifactId>
+    	<version>1.0.0</version>
+    	<relativePath>../</relativePath>
+  	</parent>
+
+	<build>
+	  <plugins>
+	    <plugin>
+	      <groupId>org.apache.maven.plugins</groupId>
+	      <artifactId>maven-antrun-plugin</artifactId>
+	      <version>1.7</version>
+	      <executions>
+	        <execution>
+	 	  <phase>integration-test</phase>
+		  <configuration>
+		    <target>
+		      <taskdef resource="net/sf/antcontrib/antlib.xml" classpathref="maven.plugin.classpath" />
+		      <ant antfile="build.xml" target="build"/>
+		    </target>
+		  </configuration>
+		  <goals>
+		    <goal>run</goal>
+		  </goals>
+		</execution>
+	      </executions>
+	      <dependencies>
+	        <dependency>
+		  <groupId>ant-contrib</groupId>
+		  <artifactId>ant-contrib</artifactId>
+		  <version>1.0b3</version>
+		  <exclusions>
+		    <exclusion>
+		      <groupId>ant</groupId>
+		        <artifactId>ant</artifactId>
+		    </exclusion>
+		  </exclusions>
+		</dependency>
+		<dependency>
+		  <groupId>org.apache.ant</groupId>
+		  <artifactId>ant-apache-regexp</artifactId>
+		  <version>1.8.4</version>
+		  <scope>runtime</scope>
+		</dependency>
+	      </dependencies>
+	    </plugin>
+	  </plugins>
+	</build>
+</project>

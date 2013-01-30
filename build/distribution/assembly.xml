@@ -73,7 +73,7 @@
         <unpack>false</unpack>
       </binaries>
     </moduleSet>
-    <!--  <moduleSet>  
+    <moduleSet>  
       <useAllReactorProjects>true</useAllReactorProjects>
       <includes>
         <include>com.ibm.sbt.sdk:com.ibm.commons</include>
@@ -87,9 +87,27 @@
         <outputFileNameMapping>${module.artifactId}-${module.version}.${module.extension}</outputFileNameMapping>
         <unpack>false</unpack>
       </binaries>
-    </moduleSet>-->
+    </moduleSet>
   </moduleSets>
+  <dependencySets>
+  <dependencySet>
+   <includes>
+    <include>commons-logging:commons-logging</include>
+    <include>org.apache.httpcomponents:httpclient</include>
+    <include>org.apache.httpcomponents:httpcore</include>
+   </includes>
+  <outputDirectory>sbtsdk/samples/jar</outputDirectory>
+  </dependencySet>
+  </dependencySets>
+  
   <fileSets>
+  <fileSet>
+      <directory>../../samples/java/sbt.sample.app</directory>
+      <outputDirectory>sbtsdk/samples/jar</outputDirectory>
+      <includes>
+        <include>sbt.properties</include>
+      </includes>
+    </fileSet>
     <fileSet>
       <directory>../../../target/doc/javadoc</directory>
       <outputDirectory>sbtsdk/doc/javadoc</outputDirectory>

@@ -11,7 +11,6 @@
     <tycho-version>0.16.0</tycho-version>
     <code.source>1.6</code.source>
     <code.target>1.6</code.target>
-    
   </properties>
 
   <repositories>
@@ -30,17 +29,13 @@
   <modules>
     <module>plugins</module>
     <module>prereq</module>
-  	<module>sdk</module>
-  	<module>domino</module>
-  	<module>sample</module>
-
+    <module>sdk</module>
+    <module>domino</module>
+    <module>sample</module>
     <module>js</module>
     <module>reporting</module>
-    
-  	<module>test</module>
-  	
+    <module>test</module>
     <module>distribution</module>
-    
   </modules>
 
   <build>
@@ -82,7 +77,7 @@
           <target>${code.target}</target>
         </configuration>
       </plugin>
-      <plugin>            
+      <plugin>
         <!-- configure default web content for war packaging -->
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
@@ -99,10 +94,10 @@
                 <include>**/*.css</include>
                 <include>**/*.properties</include>
                 <include>**/*.html</include>
-				<include>**/*.xml</include>
-				<include>**/*.gif</include>
-				<include>**/*.jpeg</include>
-				<include>**/*.png</include>
+        				<include>**/*.xml</include>
+        				<include>**/*.gif</include>
+        				<include>**/*.jpeg</include>
+        				<include>**/*.png</include>
               </includes>
             </resource>
           </webResources>        
@@ -189,37 +184,37 @@
         <artifactId>maven-surefire-report-plugin</artifactId>
         <version>2.13</version>
         <executions>
-        <execution>
-          
-        <goals><goal>report-only</goal></goals>
-        <phase>post-integration-test</phase></execution>
+          <execution>
+            <goals><goal>report-only</goal></goals>
+            <phase>post-integration-test</phase>
+          </execution>
         </executions>
         <configuration>
         
         </configuration>
       </plugin>
-				  <plugin>
+			<plugin>
         <!-- javadoc configuration -->	  
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>2.9</version>
-        <executions><execution>
-            
+        <executions>
+          <execution>
             <phase>prepare-package</phase>
             <goals>
               <goal>aggregate</goal>
             </goals>
             <inherited>false</inherited>
-          
-          </execution></executions>
+          </execution>
+        </executions>
         <configuration>
-        <aggregate>true</aggregate>
-        <failOnError>false</failOnError>
-		  <excludePackageNames>com.sun.*:com.ibm.commons.*:com.ibm.sbt.core.*:com.ibm.sbt.plugin.*:com.ibm.sbt.jslibrray.*:com.ibm.sbt.proxy.*:com.ibm.sbt.security.*:*.util.*:com.ibm.sbt.portlet.*:com.ibm.sbt.playground.*:demo.*:acme.*</excludePackageNames>
+          <aggregate>true</aggregate>
+          <failOnError>false</failOnError>
+  		    <excludePackageNames>com.sun.*:com.ibm.commons.*:com.ibm.sbt.core.*:com.ibm.sbt.plugin.*:com.ibm.sbt.jslibrray.*:com.ibm.sbt.proxy.*:com.ibm.sbt.security.*:*.util.*:com.ibm.sbt.portlet.*:com.ibm.sbt.playground.*:demo.*:acme.*</excludePackageNames>
           <reportOutputDirectory>../../target/doc</reportOutputDirectory>
           <destDir>javadoc</destDir>		  
         </configuration>	    
-	  </plugin>
+	    </plugin>
     </plugins>
     <!--
     <pluginManagement>

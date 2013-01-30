@@ -12,6 +12,12 @@
     <relativePath>../</relativePath>
   </parent>
 
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <targetJdk>1.5</targetJdk>
+  </properties>
+  
   <reporting>
     <plugins>
       <!-- PMD -->
@@ -28,6 +34,10 @@
           </reportSet>
         </reportSets>
         <configuration>
+          <linkXRef>false</linkXRef>
+          <sourceEncoding>utf-8</sourceEncoding>
+          <minimumTokens>100</minimumTokens>
+          <verbose>true</verbose>
           <rulesets>
             <ruleset>./reporting/PMD/PMDrules.xml</ruleset>
           </rulesets>

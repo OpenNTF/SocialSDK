@@ -22,7 +22,7 @@
   </properties>
 
   <modules>
-    <module>../../../CSNext/test/j2ee/com.ibm.sbt.jasmine.web</module>
+    <module>../../../../test/j2ee/com.ibm.sbt.jasmine.web</module>
     <module>startcargo</module>
     <module>phantomjs</module>
     <module>../../test/java/com.ibm.sbt.core.test</module>

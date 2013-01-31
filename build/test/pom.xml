@@ -12,10 +12,21 @@
     <relativePath>../</relativePath>
   </parent>
 
+  <properties>
+    <project.target.directory>${user.dir}/../../target</project.target.directory>
+    <project.prereqs.directory>${user.dir}/../prereqs</project.prereqs.directory>
+    <project.platform.directory>${user.dir}/../platform</project.platform.directory>
+    <project.config.directory>${user.dir}/../src/config</project.config.directory>
+    <cargo.version>1.3.2</cargo.version>
+    <servlet.port>8080</servlet.port>
+  </properties>
+
   <modules>
-    <!-- sample projects
-    <module>../../java/test/eclipse/plugins/com.ibm.sbt.jasmine.web</module> -->
-    
-	<module>../../test/java/com.ibm.sbt.core.test</module>
+    <module>../../../CSNext/test/j2ee/com.ibm.sbt.jasmine.web</module>
+    <module>startcargo</module>
+    <module>phantomjs</module>
+    <module>../../test/java/com.ibm.sbt.core.test</module>
+    <module>stopcargo</module>
   </modules>
+
 </project>

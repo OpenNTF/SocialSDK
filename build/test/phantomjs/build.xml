@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<project name="JS" default="build" basedir=".">
+  <property environment="env"/>
+
+  <!-- PROPERTIES -->
+  <target name="properties">
+      <property file="build.properties"/>
+  </target>
+
+  <target name="prepare" depends="properties">
+  </target>
+
+  <target name="phantom-jasmine"> 
+    <echo>Executing Jasmine tests using library ${title}</echo>
+    <exec executable="${phantomjs.exec}" failonerror="false" outputproperty="phantomjs.output" resultproperty="phantomjs.result">
+      <arg value="--web-security=no"/> <!-- To avoid errors about Access-Control-Allow-Origin when trying to access some libraries -->
+      <arg value="run-jasmine.js"/>
+      <arg value="http://localhost:8080/sbt.jasmine.web/UnitTestRunner.jsp?title=${title-url}&amp;path=${path}&amp;params=djConfig%3D%22parseOnLoad%3A%20true%22&amp;lib=${lib}&amp;ver=${ver}"/>
+    </exec>
+    <if>
+      <equals arg1="${phantomjs.result}" arg2="0" />
+      <then>
+        <echo>Jasmine completed without errors, test results: </echo>
+        <echo>${phantomjs.output}</echo>
+      </then>
+      <else>
+        <echo>Jasmine completed with errors: </echo>
+        <echo>${phantomjs.output}</echo>
+        <fail message="Errors in Jasmine javascript tests, build failed!" />
+      </else>
+    </if>
+  </target>
+
+  <target name="phantom-jasmine-runs" depends="prepare">
+    <antcall target="phantom-jasmine">
+      <param name="title" value="Dojo 1.8.0"/>
+      <param name="title-url" value="Dojo%201.8.0"/>
+      <param name="path" value="/sbt.dojo180/dojo/dojo.js"/>
+      <param name="lib" value="dojo"/>
+      <param name="ver" value="1.8.0"/>
+    </antcall>
+
+    <antcall target="phantom-jasmine">
+      <param name="title" value="Dojo 1.7.4"/>
+      <param name="title-url" value="Dojo%201.7.4"/>
+      <param name="path" value="http://ajax.googleapis.com/ajax/libs/dojo/1.7.4/dojo/dojo.js"/>
+      <param name="lib" value="dojo"/>
+      <param name="ver" value="1.7.4"/>
+    </antcall>
+
+    <antcall target="phantom-jasmine">
+      <param name="title" value="Dojo 1.6.1"/>
+      <param name="title-url" value="Dojo%201.6.1"/>
+      <param name="path" value="http://ajax.googleapis.com/ajax/libs/dojo/1.6.1/dojo/dojo.js"/>
+      <param name="lib" value="dojo"/>
+      <param name="ver" value="1.6.1"/>
+    </antcall>
+
+    <antcall target="phantom-jasmine">
+      <param name="title" value="Dojo 1.4.3"/>
+      <param name="title-url" value="Dojo%201.4.3"/>
+      <param name="path" value="http://ajax.googleapis.com/ajax/libs/dojo/1.4.3/dojo/dojo.js"/>
+      <param name="lib" value="dojo"/>
+      <param name="ver" value="1.4.3"/>
+    </antcall>
+  </target>
+
+  <target name="build" depends="properties, prepare, phantom-jasmine-runs" />
+</project>

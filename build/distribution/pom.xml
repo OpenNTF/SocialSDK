@@ -52,8 +52,10 @@
 					<include name="keystore"/>
 					<include name="context.xml"/>
 					<include name="tomcat-users.xml"/>
-					<include name="server.xml"/>
 					<include name="sbt.properties"/>
+				  </fileset>
+				  <fileset dir="${user.dir}/../platform/tomcat" >
+					<include name="server.xml"/>
 				  </fileset>
 				</copy>
 

@@ -65,6 +65,6 @@ public class SnippetFactory {
 			
 		};
 		Importer imp = new Importer(file,factory,Importer.HTMLJS_EXTENSIONS);
-		return (DemoRootNode)imp.readSnippets(new DemoRootNode());
+		return (DemoRootNode)imp.readSnippets(new DemoRootNode(),null);
 	}
 }

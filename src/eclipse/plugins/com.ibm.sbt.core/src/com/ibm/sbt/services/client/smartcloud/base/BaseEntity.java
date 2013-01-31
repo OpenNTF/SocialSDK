@@ -76,7 +76,7 @@ public abstract class BaseEntity<DataFormat> {
 				return XML;
 			}
 			if (JsonObject.class.isAssignableFrom(k)) {
-				return XML;
+				return JSON;
 			}
 
 			throw new IllegalArgumentException("Unsupported handler " + k);

@@ -4,7 +4,7 @@
   <id>beta</id>
   <formats>
     <format>zip</format>
-	<format>tar.gz</format>
+    <format>tar.gz</format>
   </formats>
   <baseDirectory>target</baseDirectory>
   <includeBaseDirectory>false</includeBaseDirectory>
@@ -101,8 +101,8 @@
       <outputDirectory>sbtsdk</outputDirectory>
       <includes>
         <include>version.txt</include>
-		<include>changelog.txt</include>
-		<include>weekly.txt</include>
+	<include>changelog.txt</include>
+	<include>weekly.txt</include>
       </includes>
     </fileSet>
     <fileSet>

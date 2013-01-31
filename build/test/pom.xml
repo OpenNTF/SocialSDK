@@ -22,11 +22,15 @@
   </properties>
 
   <modules>
+<!--
     <module>../../../../test/j2ee/com.ibm.sbt.jasmine.web</module>
     <module>startcargo</module>
     <module>phantomjs</module>
+-->
     <module>../../test/java/com.ibm.sbt.core.test</module>
+<!--
     <module>stopcargo</module>
+-->
   </modules>
 
 </project>

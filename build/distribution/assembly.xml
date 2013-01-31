@@ -4,7 +4,7 @@
   <id>beta</id>
   <formats>
     <format>zip</format>
-    <format>tar.gz</format>
+	<format>tar.gz</format>
   </formats>
   <baseDirectory>target</baseDirectory>
   <includeBaseDirectory>false</includeBaseDirectory>
@@ -73,8 +73,41 @@
         <unpack>false</unpack>
       </binaries>
     </moduleSet>
+    <moduleSet>  
+      <useAllReactorProjects>true</useAllReactorProjects>
+      <includes>
+        <include>com.ibm.sbt.sdk:com.ibm.commons</include>
+        <include>com.ibm.sbt.sdk:com.ibm.commons.runtime</include>
+        <include>com.ibm.sbt.sdk:com.ibm.commons.xml</include>
+        <include>com.ibm.sbt.sdk:com.ibm.sbt.core</include>
+        <include>com.ibm.sbt.sample:sbt.sample.app</include>
+    </includes>
+      <binaries>
+        <outputDirectory>sbtsdk/samples/jar</outputDirectory>
+        <outputFileNameMapping>${module.artifactId}-${module.version}.${module.extension}</outputFileNameMapping>
+        <unpack>false</unpack>
+      </binaries>
+    </moduleSet>
   </moduleSets>
+  <dependencySets>
+  <dependencySet>
+   <includes>
+    <include>commons-logging:commons-logging</include>
+    <include>org.apache.httpcomponents:httpclient</include>
+    <include>org.apache.httpcomponents:httpcore</include>
+   </includes>
+  <outputDirectory>sbtsdk/samples/jar</outputDirectory>
+  </dependencySet>
+  </dependencySets>
+  
   <fileSets>
+  <fileSet>
+      <directory>../../samples/java/sbt.sample.app</directory>
+      <outputDirectory>sbtsdk/samples/jar</outputDirectory>
+      <includes>
+        <include>sbt.properties</include>
+      </includes>
+    </fileSet>
     <fileSet>
       <directory>../../../target/doc/javadoc</directory>
       <outputDirectory>sbtsdk/doc/javadoc</outputDirectory>
@@ -101,8 +134,8 @@
       <outputDirectory>sbtsdk</outputDirectory>
       <includes>
         <include>version.txt</include>
-	<include>changelog.txt</include>
-	<include>weekly.txt</include>
+		<include>changelog.txt</include>
+		<include>weekly.txt</include>
       </includes>
     </fileSet>
     <fileSet>

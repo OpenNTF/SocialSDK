@@ -5,7 +5,7 @@
   <!-- PROPERTIES -->
   <target name="properties">
   	
-      <property file="build.properties"/>
+      <property file="../build.properties"/>
   </target>
 
   <!--If the ant script is executed from ant ant not from maven antrun plugin we still have to define antcontrib taskdef -->

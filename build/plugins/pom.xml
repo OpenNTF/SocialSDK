@@ -22,12 +22,12 @@
 		<executions>
 		  <execution>
 		    <id>id.validate</id>
-			<phase>validate</phase>
+			<phase>generate-sources</phase>
 			<goals>
 			  <goal>run</goal>
 			</goals>
 			<configuration>
-			  <tasks>
+			  <target>
 			    <echo>Populating Domino eclipse plugin projects</echo>
 			    <delete includeemptydirs="true">
 				  <fileset dir="./../../domino/eclipse/plugins/com.ibm.commons.runtime">
@@ -79,7 +79,7 @@
 					<exclude name="pom.xml"/>
 				  </fileset>
 				</copy>
-			  </tasks>
+			  </target>
 			</configuration>
 		  </execution>
 		</executions>

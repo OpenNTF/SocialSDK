@@ -60,7 +60,7 @@
 									partialExecute="true">
 								</xp:pager>
 								<xp:panel xp:key="detail" id="pager1">
-									<xe:listInline id="listInline2">
+									<xe:listInline id="listInline2" loaded="${javascript:userBean.canCreateDocs}">
 										<xp:link escape="true"
 											text="Duplicate the environment" id="link1"
 											style="margin-left:10.0px">

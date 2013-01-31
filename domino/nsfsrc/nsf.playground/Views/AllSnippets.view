@@ -1,22 +1,20 @@
 <?xml version='1.0' encoding='utf-8'?>
 <note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='85257AA80077A28B'>
-<noteinfo noteid='1a6' unid='B5E39246351A7818852579F0006CDF0D' sequence='20'>
+<noteinfo noteid='1a6' unid='B5E39246351A7818852579F0006CDF0D' sequence='26'>
 <created><datetime dst='true'>20120430T154909,89-04</datetime></created>
-<modified><datetime>20121105T124541,81-05</datetime></modified>
-<revised><datetime>20121105T124541,80-05</datetime></revised>
-<lastaccessed><datetime>20121105T124827,62-05</datetime></lastaccessed>
+<modified><datetime>20130124T172414,35-05</datetime></modified>
+<revised><datetime>20130124T172414,34-05</datetime></revised>
+<lastaccessed><datetime>20130124T172414,35-05</datetime></lastaccessed>
 <addedtofile><datetime>20121104T143451,96-05</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name><name>CN=sbaadmin/O=renovations</name><name
->CN=Philippe Riand/OU=Westford/O=IBM</name><name>CN=sbaadmin/O=renovations</name><name
->CN=Philippe Riand/OU=Westford/O=IBM</name><name>CN=sbaadmin/O=renovations</name><name
->CN=Philippe Riand/OU=Westford/O=IBM</name></updatedby>
+<updatedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></updatedby>
 <wassignedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></wassignedby>
 <item name='$FormulaClass' sign='true'><text>1</text></item>
 <item name='$TITLE' sign='true'><text>AllSnippets</text></item>
 <item name='$Index' sign='true'><text/></item>
 <item name='$Formula' summary='true' sign='true'><formula compiled='true'>
-ZAAFAC4AKQAFAAgABAACAAkABABDYXRlZ29yeU5hbWVJZCRDb25mbGljdCRSRUYABAAEAAAAJAAF
-AAQARm9ybQEACwBDb2RlU25pcHBldAAKAgQABAADAAcADAAFAAkzUzRTAA==
+ggACAAwAAgAkNWkAAwAFAEAAOwAHAAgABAACAAwAAgAJAAQAQ2F0ZWdvcnlOYW1lSWRJbXBvcnRT
+b3VyY2UkNSRDb25mbGljdCRSRUYABAAEAAAAJAAFAAQARm9ybQEACwBDb2RlU25pcHBldAAKAgQA
+BAADAAcADAAFAAkzUzRTAA==
 </formula></item>
 <item name='$Collation' summary='true'>
 <rawitemdata type='2'>
@@ -24,17 +22,21 @@ IAACAABECGYHAAAIAIBmAAgABABDYXRlZ29yeU5hbWU=
 </rawitemdata></item>
 <item name='$ViewFormat' summary='true' sign='true'>
 <rawitemdata type='5'>
-AQADAAQACAAAAFZDAwAIAAgAAAAAAFAAAQAACgABAAAAAAAAAAICAAAAVkMBAAQABAAAAAAAsgAB
-AAAKAAAAAAAAAAAAAgIAAABWQwAAAgACAAAAAAD6AAEAAAoAAAAAAAAAAAACAgAAAENhdGVnb3J5
-Q2F0ZWdvcnlOYW1lTmFtZUlkSUQmAAEAAAABAQAJAQAACgEBDgoAAAEArSsBAAEAAQAAAAAAAAAA
+AQAFAAYACAAAAFZDAwAIAAgAAAAAAFAAAQAACgABAAAAAAAAAAICAAAAVkMBAAQABAAAAAAAsgAB
+AAAKAAAAAAAAAAAAAgIAAABWQwAAAgACAAAAAAD6AAEAAAoAAAAAAAAAAAACAgAAAFZDAAAMAAwA
+AAAAAFAAAQAACgAAAAAAAAAAAAICAAAAVkMAAAIACgAOAAAAUAABAAAKAAAAAAAAAAAAAgIAAABD
+YXRlZ29yeUNhdGVnb3J5TmFtZU5hbWVJZElESW1wb3J0U291cmNlSW1wb3J0U291cmNlJDVDcmVh
+dGVEYXRlDgACAAwAAgAkNWkAAwAmAAEAAAABAQAJAQAACgEBDgoAAAEArSsBAAEAAQAAAAAAAAAA
 AFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAABXQwEBAAkAAAAA
 AAAAAAAAAAAAAAAAAAAEAAAAAAD//wAAAAAAAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAA
-AAAABAAAAAAA//8AAAAAAAAAAAAAAAAAAEIAAAAAAAEA////AAUA////AAEAAAAAAAAAAAAAAAAA
-AQD///8AAQD///8AAAABAAAAAAABAAAAAAABAAAAAAAAAAgAAAAAAAEA
+AAAABAAAAAAA//8AAAAAAAAAAAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAP//
+AAAAAAAAAAAAAAAAAABXQwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD//wAAAAAAAAAAAAAA
+AAAAQgAAAAAAAQD///8ABQD///8AAQAAAAAAAAAAAAAAAAABAP///wABAP///wAAAAEAAAAAAAEA
+AAAAAAEAAAAAAAAACAAAAAAAAQA=
 </rawitemdata></item>
 <item name='$Comment' sign='true'><text/></item>
 <item name='$Flags'><text>PY</text></item>
-<item name='$DesignerVersion'><text>8.5.4</text></item>
+<item name='$DesignerVersion'><text>8.5.3</text></item>
 <item name='$SelQuery' sign='true'>
 <rawitemdata type='f'>
 gQYAAAAAif8XAAAAAAABAAsAQ29kZVNuaXBwZXQA

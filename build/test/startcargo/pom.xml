@@ -102,7 +102,7 @@
                 <todir>conf</todir>
               </configfile>
               <configfile>
-                <file>${project.platform.directory}/tomcat/server.xml</file>
+                <file>${project.platform.directory}/tomcat/secured/server.xml</file>
                 <todir>conf</todir>
               </configfile>
               <configfile>

@@ -57,12 +57,12 @@
 					<execution>
 						<phase>compile</phase>
 						<configuration>
-							<tasks>
+							<target>
 								<taskdef resource="net/sf/antcontrib/antlib.xml"
 									classpathref="maven.plugin.classpath" />
 								
 								<ant antfile="build.xml" target="build"/>
-							</tasks>
+							</target>
 						</configuration>
 						<goals>
 							<goal>run</goal>

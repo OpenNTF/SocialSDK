@@ -24,7 +24,6 @@ import com.ibm.sbt.playground.snippets.AbstractImportExport.NodeFactory;
 import com.ibm.sbt.playground.snippets.CategoryNode;
 import com.ibm.sbt.playground.snippets.Importer;
 import com.ibm.sbt.playground.snippets.SnippetNode;
-import com.ibm.sbt.playground.vfs.FileVFS;
 import com.ibm.sbt.playground.vfs.ServletVFS;
 import com.ibm.sbt.playground.vfs.VFSFile;
 
@@ -46,6 +45,7 @@ public class SnippetFactory {
 		}
 		return root;
 	}
+	
 	public static VFSFile getRootFile(ServletContext context) {
 		ServletVFS vfs = new ServletVFS(context, "/js/");
 		return vfs.getRoot();

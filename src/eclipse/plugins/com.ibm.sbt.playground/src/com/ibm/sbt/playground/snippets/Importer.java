@@ -24,6 +24,11 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.playground.vfs.VFSFile;
 
 public class Importer extends AbstractImportExport {
+	
+	public static interface Callback {
+		public boolean isCancelled();
+		public void update(String fileName);
+	}
 
 	public static final String[] HTMLJS_EXTENSIONS = new String[]{"html","js","css"};
 	public static final String[] JSP_EXTENSIONS = new String[]{"jsp"};
@@ -41,22 +46,32 @@ public class Importer extends AbstractImportExport {
 
 	
 	public RootNode readSnippets() throws IOException {
-		return readSnippets(new RootNode());
+		return readSnippets(new RootNode(),null);
 	}
 
-	public RootNode readSnippets(RootNode root) throws IOException {
-		browseDirectory(rootDirectory,root);
+	public RootNode readSnippets(Callback cb) throws IOException {
+		return readSnippets(new RootNode(),cb);
+	}
+
+	public RootNode readSnippets(RootNode root, Callback cb) throws IOException {
+		browseDirectory(rootDirectory,root,cb);
 		return root;
 	}
 	
-	private void browseDirectory(VFSFile file, CategoryNode node) throws IOException {
+	private void browseDirectory(VFSFile file, CategoryNode node, Callback cb) throws IOException {
+		if(cb!=null) {
+			if(cb.isCancelled()) {
+				return;
+			}
+			cb.update(StringUtil.format("Reading Folder: {0}",file.getPath()));
+		}
 		Set<String> snippets = new HashSet<String>();
 		VFSFile[] children = file.getChildren();
 		for(VFSFile s: children) {
 			if(s.isFolder()) {
 				CategoryNode cn = factory.createCategoryNode(node, s.getName());
 				node.getChildren().add(cn);
-				browseDirectory(s,cn);
+				browseDirectory(s,cn,cb);
 			} else if(s.isFile()) {
 				String ext = s.getExtension();
 				if(ext!=null) {

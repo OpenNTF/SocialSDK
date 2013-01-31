@@ -11,23 +11,22 @@
 				<xc:LeftManage id="ccLeftMenu"></xc:LeftManage>
 			</xp:panel>
 		</xp:this.facets>
-		<xp:div style="margin: -20px 0px 0px -25px; padding: 20px 0px 0px 25px; background: white">
-			<xe:dynamicContent id="dynp" defaultFacet="view" useHash="true" partialEvents="true">
+		<xp:div
+			style="margin: -20px 0px 0px -25px; padding: 20px 0px 0px 25px; background: white">
+			<xe:dynamicContent id="dynp" defaultFacet="view"
+				useHash="true" partialEvents="true">
 				<xp:this.facets>
 					<xp:panel xp:key="view" id="mainPanel">
-						<xc:ccManageActionBar
-							viewName="AllSnippetsByAuthor">
+						<xc:ccManageActionBar viewName="AllSnippetsByAuthor">
 						</xc:ccManageActionBar>
 						<br />
 						<xe:dataView id="dataView1" var="viewEntry"
 							collapsibleCategory="true" collapsibleRows="true" rows="15"
-							showCheckbox="${javascript:userBean.canCreateDocs}"
-							style="margin-left: 25px"
+							showCheckbox="${javascript:userBean.canCreateDocs}" style="margin-left: 25px"
 							showHeaderCheckbox="${javascript:userBean.canCreateDocs}"
 							columnTitles="true">
 							<xe:this.data>
-								<xp:dominoView var="view1"
-									viewName="AllSnippetsByAuthor">
+								<xp:dominoView var="view1" viewName="AllSnippetsByAuthor">
 								</xp:dominoView>
 							</xe:this.data>
 							<xp:this.facets>
@@ -36,8 +35,7 @@
 								</xp:pager>
 							</xp:this.facets>
 							<xe:this.categoryColumn>
-								<xe:viewCategoryColumn
-									columnName="Author">
+								<xe:viewCategoryColumn columnName="Author">
 								</xe:viewCategoryColumn>
 							</xe:this.categoryColumn>
 							<xe:this.summaryColumn>
@@ -46,6 +44,20 @@
 									<xe:this.href><![CDATA[javascript:XSP.showContent("#{id:dynp}","form",{action:'editDocument',documentId:'#{javascript:viewEntry.getNoteID()}'})]]></xe:this.href>
 								</xe:viewSummaryColumn>
 							</xe:this.summaryColumn>
+							<xe:this.extraColumns>
+								<xe:viewExtraColumn columnName="ImportSource"
+									columnTitle="Source" style="width: 100px">
+								</xe:viewExtraColumn>
+								<xe:viewExtraColumn
+									columnName="CreateDate" columnTitle="Creation Date"
+									style="width: 100px">
+									<xe:this.converter>
+										<xp:convertDateTime
+											dateStyle="short" timeStyle="short" type="both">
+										</xp:convertDateTime>
+									</xe:this.converter>
+								</xe:viewExtraColumn>
+							</xe:this.extraColumns>
 						</xe:dataView>
 					</xp:panel>
 					<xp:panel xp:key="form" id="panel2">

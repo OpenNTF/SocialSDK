@@ -1,0 +1,55 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.ibm.sbt.test</groupId>
+  <artifactId>stopcargo</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
+
+  <parent>
+    <groupId>com.ibm.sbt.test</groupId>
+    <artifactId>test.parent</artifactId>
+    <version>1.0.0</version>
+    <relativePath>../</relativePath>
+  </parent>
+
+  <properties>
+    <project.extracted.tomcat>${project.target.directory}/extracts/apache-tomcat-7.0.35/apache-tomcat-7.0.35</project.extracted.tomcat>
+  </properties>
+
+  <build>
+    <plugins>
+      <!-- CARGO PLUGIN START -->
+      <plugin>
+         <groupId>org.codehaus.cargo</groupId>
+         <artifactId>cargo-maven2-plugin</artifactId>
+         <version>${cargo.version}</version>
+         <configuration>
+          <container>
+            <containerId>tomcat7x</containerId>
+            <home>${project.extracted.tomcat}</home>
+          </container>
+          <configuration>
+            <home>${project.target.directory}/catalina-base</home>
+          </configuration>
+         </configuration>
+         <executions>
+           <execution>
+             <id>stop</id>
+             <phase>post-integration-test</phase>
+             <goals>
+               <goal>stop</goal>
+             </goals>
+           </execution>
+           <execution>
+             <id>package</id>
+             <phase>post-integration-test</phase>
+             <goals>
+               <goal>package</goal>
+             </goals>
+           </execution>
+         </executions>
+      </plugin>
+      <!-- CARGO PLUGIN END-->
+    </plugins>
+  </build>
+</project>

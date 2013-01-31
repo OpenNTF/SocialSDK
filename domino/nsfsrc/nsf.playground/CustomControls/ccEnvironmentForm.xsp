@@ -59,7 +59,7 @@ dataAccess.copyEnvironment(document1,v);
 }]]></xp:this.action>
 					</xp:eventHandler>
 				</xp:inputText>
-				<xp:div style="float: right;margin-right: 30px;">
+				<xp:div style="float: right;margin-right: 30px;" loaded="${javascript:userBean.canCreateDocs}">
 					<xe:valuePicker id="namePicker10" for="inputText20"
 						pickerText="Copy Content From...">
 						<xe:this.dataProvider>
@@ -86,7 +86,7 @@ dataAccess.copyEnvironment(document1,v);
 				value="#{document1.Preferred}" checkedValue="1" uncheckedValue="0">
 			</xp:checkBox>
 		</xe:formRow>
-		<xe:formRow id="formRow2" label="Properties">
+		<xe:formRow id="formRow2" label="Properties" loaded="${javascript:userBean.canCreateDocs || compositeData.editbean}">
 			<xp:inputTextarea id="inputTextarea1" value="#{document1.Properties}"
 				cols="80" rows="5">
 			</xp:inputTextarea>
@@ -95,7 +95,7 @@ dataAccess.copyEnvironment(document1,v);
 			<xp:div></xp:div>
 		</xe:formRow>
 		<xe:formRow id="formRow4" labelPosition="none">
-			<xp:section id="section1" header="Connections" initClosed="true">
+			<xp:section id="section1" header="Connections" initClosed="true" loaded="${javascript:userBean.canCreateDocs || compositeData.editbean}">
 				<xe:formTable labelWidth="12em">
 					<xe:formRow id="formRow3" label="URL:">
 						<xp:inputText id="inputText2"
@@ -132,7 +132,7 @@ dataAccess.copyEnvironment(document1,v);
 					</xe:formRow>
 				</xe:formTable>
 			</xp:section>
-			<xp:section id="section2" header="Smartcloud" initClosed="true">
+			<xp:section id="section2" header="Smartcloud" initClosed="true" loaded="${javascript:userBean.canCreateDocs || compositeData.editbean}">
 				<xe:formTable labelWidth="12em">
 					<xe:formRow id="formRow6" label="URL:">
 						<xp:inputText id="inputText3"

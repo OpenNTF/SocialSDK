@@ -82,7 +82,7 @@
 			todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.35/lib" />
 
 	        <copy todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.35/conf" >
-	          <fileset dir="${project.platform.directory}/tomcat/conf" >
+	          <fileset dir="${project.platform.directory}/tomcat" >
 		    <include name="keystore"/>
 		    <include name="context.xml"/>
 		    <include name="tomcat-users.xml"/>

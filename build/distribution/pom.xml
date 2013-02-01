@@ -22,6 +22,7 @@
   <properties>
     <project.target.directory>${user.dir}/../../target</project.target.directory>
     <project.platform.directory>${user.dir}/../platform</project.platform.directory>
+    <project.prereqs.directory>${user.dir}/../prereqs</project.prereqs.directory>
   </properties>
 
   <parent>
@@ -77,7 +78,7 @@
 
 	        <copy file="${project.target.directory}/com.ibm.sbt.sdk/com.ibm.commons.runtime/com.ibm.commons.runtime.jar" 
 			todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.35/lib" />
-	        <copy file="${project.target.directory}/eclipse/plugins/com.ibm.sbt.libs.j2ee/lib/commons-logging-1.1.1.jar" 
+	        <copy file="${project.prereqs.directory}/eclipse/plugins/com.ibm.sbt.libs.j2ee/lib/commons-logging-1.1.1.jar" 
 			todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.35/lib" />
 
 	        <copy todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.35/conf" >

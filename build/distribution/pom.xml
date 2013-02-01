@@ -10,125 +10,163 @@
     <project.target.directory>${user.dir}/../../target</project.target.directory>
   </properties>
 
-	<parent>
-		<groupId>com.ibm.sbt</groupId>
-		<artifactId>sbt.build</artifactId>
-		<version>1.0.0</version>
-		<relativePath>..</relativePath>
-	</parent>
+  <parent>
+    <groupId>com.ibm.sbt</groupId>
+    <artifactId>sbt.build</artifactId>
+    <version>1.0.0</version>
+    <relativePath>..</relativePath>
+  </parent>
 
-	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<version>1.7</version>
-				<executions>
-					<execution>
-						<phase>post-integration-test</phase>
-						<configuration>
-							<target>
-								<!-- Package Tomcat -->
+  <pluginRepository>
+    <id>sonatype-public-repository</id>
+    <url>https://oss.sonatype.org/content/groups/public</url>
+    <snapshots>
+        <enabled>true</enabled>
+    </snapshots>
+    <releases>
+        <enabled>true</enabled>
+    </releases>
+  </pluginRepository>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.googlecode.maven-download-plugin</groupId>
+        <artifactId>maven-download-plugin</artifactId>
+        <version>1.0.0</version>
+        <executions>
+	  <execution>
+	    <id>download-tomcat-7</id>
+	    <phase>pre-integration-test</phase>
+	    <goals>
+	      <goal>wget</goal>
+	    </goals>
+	    <configuration>
+	      <url>http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.35/bin/apache-tomcat-7.0.35.zip</url>
+	        <unpack>true</unpack>
+		<outputDirectory>${project.target.directory}/tomcat/unzip</outputDirectory>
+		<md5>1c7a7869d86b74dddb0a22d15f020922</md5>
+	    </configuration>
+	  </execution>
+	</executions>
+      </plugin>
+      <plugin>
+	<artifactId>maven-antrun-plugin</artifactId>
+	<version>1.7</version>
+	<executions>
+	  <execution>
+	    <phase>post-integration-test</phase>
+	    <configuration>
+	      <target>
+	        <!-- Package Tomcat -->
+<!--
+	        <unzip src="${project.target.directory}/downloads/apache-tomcat-7.0.35.zip" dest="${project.target.directory}/tomcat/unzip"/>	
+-->
+	        <copy todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.35/webapps" >
+	          <fileset dir="${project.target.directory}/catalina-base/webapps" >
+		    <include name="sbt.war"/>
+		    <include name="sbt.dojo180.war"/>
+		    <include name="sbt.sample.web.war"/>
+		    <include name="acme.social.sample.dataapp.war"/>
+		    <include name="acme.social.sample.webapp.war"/>
+	  	  </fileset>
+	        </copy>
+
+	        <copy todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.35/lib" >
+	          <fileset dir="${project.target.directory}/catalina-base/lib" >
+		    <include name="com.ibm.commons.runtime.jar"/>
+		    <include name="commons-logging-1.1.1.jar"/>
+	  	  </fileset>
+	        </copy>
+	        <copy todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.35/conf" >
+	          <fileset dir="${project.target.directory}/catalina-base/conf" >
+		    <include name="keystore"/>
+		    <include name="context.xml"/>
+		    <include name="tomcat-users.xml"/>
+		    <include name="sbt.properties"/>
+		  </fileset>
+		  <fileset dir="${user.dir}/../platform/tomcat" >
+		    <include name="server.xml"/>
+	  	  </fileset>
+	        </copy>
+
+	        <zip basedir="${project.target.directory}/tomcat/unzip" 
+			destfile="${project.target.directory}/tomcat/apache-tomcat-7.0.35-sbt.zip" compress="true"/>
+	        <delete dir="${project.target.directory}/tomcat/unzip" />
+
+	        <!-- Create Update Site -->
+	        <zip basedir="${project.target.directory}/com.ibm.sbt.domino/com.ibm.sbt.domino.updatesite/site" 
+			destfile="${project.target.directory}/com.ibm.sbt.domino/com.ibm.sbt.domino.updatesite/com.ibm.sbt.domino.updatesite.zip" 
+			compress="true"/>
+	        <delete dir="${project.target.directory}/com.ibm.sbt.domino/com.ibm.sbt.domino.updatesite/site.zip"/>
+
+	        <!-- Create a version file -->
+	        <echo file="${project.target.directory}/doc/version.txt">version: ${project.version}.${buildLabel}</echo>
+
+	        <!-- Create a changelog file -->
+	        <exec executable="${toolsDir}\git\bin\git.exe"  failonerror="false" output="${project.target.directory}/doc/changelog.txt">
+	          <arg value="log" />
+		  <arg value="--no-merges" />
+	  	  <arg value="--pretty=%s" />
+	        </exec>
+	        <exec executable="${toolsDir}\git\bin\git.exe"  failonerror="false" output="${project.target.directory}/doc/weekly.txt">
+		  <arg value="log" />
+		  <arg value="--no-merges" />
+		  <arg value="--pretty=%s" />
+		  <arg value="--since" />
+	  	  <arg value="1 week ago" />
+	        </exec>
+
+	       <!-- sanity checks before starting assembly -->
+	       <available  property="doc.dir" file="${project.target.directory}/doc" />
+	       <fail unless="doc.dir" message="No documentation generated" />
+	       <available  property="javadoc.index" file="${project.target.directory}/doc/javadoc/index.html" />
+
+	       <!--  waiting to enable this for the javadoc first execution error is fixed
+	       <fail unless="javadoc.index" message="No javadoc generated" /> -->
+	       <available  property="jsdoc.index" file="${project.target.directory}/doc/jsdoc/index.html" />
+	       <fail unless="jsdoc.index" message="No jsdoc generated" />
+	       <available  property="surefire.report" file="${project.target.directory}/com.ibm.sbt.test/com.ibm.sbt.core.test/site/surefire-report.html" />
+	       <fail unless="surefire.report" message="No javadoc generated" />
 								
-				<unzip src="${project.target.directory}/downloads/apache-tomcat-7.0.35.zip" dest="${project.target.directory}/tomcat/unzip"/>	
-				<copy todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.35/webapps" >
-				  <fileset dir="${project.target.directory}/catalina-base/webapps" >
-					<include name="sbt.war"/>
-					<include name="sbt.dojo180.war"/>
-					<include name="sbt.sample.web.war"/>
-					<include name="acme.social.sample.dataapp.war"/>
-					<include name="acme.social.sample.webapp.war"/>
-				  </fileset>
-				</copy>
+	       <available  property="version.info" file="${project.target.directory}/doc/version.txt" />
+	       <available  property="changes.info" file="${project.target.directory}/doc/changelog.txt" />
+	       <available  property="weekly.info" file="${project.target.directory}/doc/weekly.txt" />
 
-				<copy todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.35/lib" >
-				  <fileset dir="${project.target.directory}/catalina-base/lib" >
-					<include name="com.ibm.commons.runtime.jar"/>
-					<include name="commons-logging-1.1.1.jar"/>
-				  </fileset>
-				</copy>
+	       <fail unless="version.info" message="Missing version.txt" />
+	       <fail unless="changes.info" message="Missing changelog.txt" />
+	       <fail unless="weekly.info" message="Missing weekly.txt" />
 
-				<copy todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.35/conf" >
-				  <fileset dir="${project.target.directory}/catalina-base/conf" >
-					<include name="keystore"/>
-					<include name="context.xml"/>
-					<include name="tomcat-users.xml"/>
-					<include name="sbt.properties"/>
-				  </fileset>
-				  <fileset dir="${user.dir}/../platform/tomcat" >
-					<include name="server.xml"/>
-				  </fileset>
-				</copy>
-
-				<zip basedir="${project.target.directory}/tomcat/unzip" destfile="${project.target.directory}/tomcat/apache-tomcat-7.0.35-sbt.zip" compress="true"/>
-				<delete dir="${project.target.directory}/tomcat/unzip" />
-				<!-- Create Update Site -->
-				<zip basedir="${project.target.directory}/com.ibm.sbt.domino/com.ibm.sbt.domino.updatesite/site" destfile="${project.target.directory}/com.ibm.sbt.domino/com.ibm.sbt.domino.updatesite/com.ibm.sbt.domino.updatesite.zip" compress="true"/>
-				<delete dir="${project.target.directory}/com.ibm.sbt.domino/com.ibm.sbt.domino.updatesite/site.zip"/>
-								<!-- Create a version file -->
-								<echo file="${project.target.directory}/doc/version.txt">version: ${project.version}.${buildLabel}</echo>
-								<!-- Create a changelog file -->
-				<exec executable="${toolsDir}\git\bin\git.exe"  failonerror="false" output="${project.target.directory}/doc/changelog.txt">
-									<arg value="log" />
-									<arg value="--no-merges" />
-									<arg value="--pretty=%s" />
-								</exec>
-				<exec executable="${toolsDir}\git\bin\git.exe"  failonerror="false" output="${project.target.directory}/doc/weekly.txt">
-									<arg value="log" />
-									<arg value="--no-merges" />
-									<arg value="--pretty=%s" />
-									<arg value="--since" />
-									<arg value="1 week ago" />
-								</exec>
-
-								<!-- sanity checks before starting assembly -->
-								<available  property="doc.dir" file="${project.target.directory}/doc" />
-								<fail unless="doc.dir" message="No documentation generated" />
-								<available  property="javadoc.index" file="${project.target.directory}/doc/javadoc/index.html" />
-								<!--  waiting to enable this for the javadoc first execution error is fixed
-								<fail unless="javadoc.index" message="No javadoc generated" /> -->
-								<available  property="jsdoc.index" file="${project.target.directory}/doc/jsdoc/index.html" />
-								<fail unless="jsdoc.index" message="No jsdoc generated" />
-								<available  property="surefire.report" file="${project.target.directory}/com.ibm.sbt.test/com.ibm.sbt.core.test/site/surefire-report.html" />
-								<fail unless="surefire.report" message="No javadoc generated" />
-								
-								<available  property="version.info" file="${project.target.directory}/doc/version.txt" />
-								<available  property="changes.info" file="${project.target.directory}/doc/changelog.txt" />
-								<available  property="weekly.info" file="${project.target.directory}/doc/weekly.txt" />
-
-								<fail unless="version.info" message="Missing version.txt" />
-								<fail unless="changes.info" message="Missing changelog.txt" />
-								<fail unless="weekly.info" message="Missing weekly.txt" />
-
-								<available  property="updatesite.zip" file="${project.target.directory}/com.ibm.sbt.domino/com.ibm.sbt.domino.updatesite/com.ibm.sbt.domino.updatesite.zip" />
-								<fail unless="updatesite.zip" message="Update site not found" />
-
-							</target>
-						</configuration>
-						<goals>
-							<goal>run</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>2.3</version>
-				<executions>
-					<execution>
-						<phase>post-integration-test</phase>
-						<goals>
-							<goal>single</goal>
-						</goals>
-						<configuration>
-							<descriptor>assembly.xml</descriptor>
-							<finalName>sbtsdk-${project.version}.${buildLabel}</finalName>
-							<appendAssemblyId>false</appendAssemblyId>
-							<outputDirectory>../../../kit</outputDirectory>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
+	       <available property="updatesite.zip" 
+			file="${project.target.directory}/com.ibm.sbt.domino/com.ibm.sbt.domino.updatesite/com.ibm.sbt.domino.updatesite.zip" />
+	       <fail unless="updatesite.zip" message="Update site not found" />
+             </target>
+	   </configuration>
+	   <goals>
+	     <goal>run</goal>
+	   </goals>
+         </execution>
+       </executions>
+     </plugin>
+      <plugin>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-assembly-plugin</artifactId>
+	<version>2.3</version>
+	<executions>
+	  <execution>
+	    <phase>post-integration-test</phase>
+	    <goals>
+	      <goal>single</goal>
+	    </goals>
+	    <configuration>
+	      <descriptor>assembly.xml</descriptor>
+	      <finalName>sbtsdk-${project.version}.${buildLabel}</finalName>
+	      <appendAssemblyId>false</appendAssemblyId>
+	      <outputDirectory>../../../kit</outputDirectory>
+	    </configuration>
+	  </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>

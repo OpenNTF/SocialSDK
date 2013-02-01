@@ -75,10 +75,10 @@
 	  	  </fileset>
 	        </copy>
 
-	        <copy todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.35/lib" >
-                  <file>${project.target.directory}/com.ibm.sbt.sdk/com.ibm.commons.runtime/com.ibm.commons.runtime.jar</file>
-                  <file>${project.target.directory}/eclipse/plugins/com.ibm.sbt.libs.j2ee/lib/commons-logging-1.1.1.jar</file>
-	        </copy>
+	        <copy file="${project.target.directory}/com.ibm.sbt.sdk/com.ibm.commons.runtime/com.ibm.commons.runtime.jar" 
+			todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.35/lib" />
+	        <copy file="${project.target.directory}/eclipse/plugins/com.ibm.sbt.libs.j2ee/lib/commons-logging-1.1.1.jar" 
+			todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.35/lib" />
 
 	        <copy todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.35/conf" >
 	          <fileset dir="${project.platform.directory}/tomcat/conf" >

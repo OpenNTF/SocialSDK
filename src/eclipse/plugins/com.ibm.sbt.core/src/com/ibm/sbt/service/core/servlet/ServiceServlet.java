@@ -16,16 +16,18 @@
 package com.ibm.sbt.service.core.servlet;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ibm.commons.Platform;
 import com.ibm.commons.runtime.RuntimeConstants;
 import com.ibm.commons.runtime.servlet.BaseToolkitServlet;
 import com.ibm.commons.util.StringUtil;
-import com.ibm.sbt.service.core.IServiceHandler;
 import com.ibm.sbt.service.core.ServiceHandlerFactory;
 
 /**
@@ -41,6 +43,7 @@ public class ServiceServlet extends BaseToolkitServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private String[] services;
+	private HashMap<String,HttpServlet>	servlets = new HashMap<String, HttpServlet>();
 	
     public ServiceServlet() {
     }
@@ -56,8 +59,36 @@ public class ServiceServlet extends BaseToolkitServlet {
 	}
 
 	@Override
+	public void destroy() {
+		// Destroy the servlets
+		for(HttpServlet s: servlets.values()) {
+			try {
+				s.destroy();
+			} catch(Exception ex) {
+				Platform.getInstance().log(ex);
+			}
+		}
+	
+		super.destroy();
+	}
+
+	@Override
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Find the proxy handler
+        // Find the servlet corresponding to the request
+        HttpServlet servlet = findServlet(request, response);
+        
+        // Then, delegate to it
+        if(servlet!=null) {
+        	servlet.service(request, response);
+            return;
+        }
+        
+        // The handler is not available so it is a 404
+        String message = "Invalid proxy handler {0}";  // $NLX-ProxyServlet.Invalidproxyhandler0-1$
+        service404(request,response,message,request.getPathInfo());
+    }
+
+	protected HttpServlet findServlet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String pathInfo = request.getPathInfo();
         if(pathInfo==null) {
         	// Warn: the pathinfo can be null on certain web app server
@@ -72,25 +103,47 @@ public class ServiceServlet extends BaseToolkitServlet {
            pathInfo = pathInfo.substring(0, pos);
         }
         
+        return findServletByName(request, response, pathInfo);
+	}
+
+	protected HttpServlet findServletByName(HttpServletRequest request, HttpServletResponse response, String name) throws ServletException, IOException {
+		if(StringUtil.isEmpty(name)) {
+			return null;
+		}
+		
         // Look if the service is enabled
         if(services!=null && services.length>0) {
-        	if(!contains(services, pathInfo)) {
-        		service404(request, response, "Unknown service {0}", pathInfo);
-        		return;
+        	if(!contains(services, name)) {
+        		return null;
         	}
         }
         
-        // Find and delegate to the proxy handler
-        IServiceHandler handler = ServiceHandlerFactory.get().get(pathInfo);
-        if(handler!=null) {
-            handler.service(request, response);
-            return;
+        HttpServlet servlet = servlets.get(name);
+        if(servlet==null) {
+        	servlet = createServlet(request, response, name);
         }
         
-        // The proxy is not available so it is a 404
-        String message = "Invalid proxy handler {0}";  // $NLX-ProxyServlet.Invalidproxyhandler0-1$
-        service404(request,response,message,pathInfo);
-    }
+        return servlet;
+	}
+	
+	protected synchronized HttpServlet createServlet(HttpServletRequest request, HttpServletResponse response, String name) throws ServletException {
+        HttpServlet servlet = servlets.get(name);
+        if(servlet==null) {
+        	ServiceHandlerFactory factory = getServletFactory();
+        	if(factory!=null) {
+	        	servlet = factory.createServlet(name);
+	        	if(servlet!=null) {
+	        		servlet.init(getServletConfig());
+	        		servlets.put(name, servlet);
+	        	}
+        	}
+        }
+        return servlet;
+	}
+	
+	protected ServiceHandlerFactory getServletFactory() {
+		return ServiceHandlerFactory.get();
+	}
 
 	private static boolean contains(String[] a, String s) {
 		for(int i=0; i<a.length; i++) {

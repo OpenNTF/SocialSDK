@@ -17,6 +17,8 @@ package com.ibm.sbt.service.core;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServlet;
+
 import com.ibm.commons.Platform;
 import com.ibm.sbt.security.authentication.oauth.consumer.oauth_10a.servlet.OA2Callback;
 import com.ibm.sbt.security.authentication.oauth.consumer.oauth_10a.servlet.OACallback;
@@ -28,7 +30,7 @@ import com.ibm.sbt.service.core.handlers.PingHandler;
 
 
 /**
- * Proxy handler factory.
+ * Service handler factory.
  * @author priand
  */
 public class ServiceHandlerFactory {
@@ -38,7 +40,7 @@ public class ServiceHandlerFactory {
         return instance;
     }
 
-    private HashMap<String,Object> aliases;
+    private HashMap<String,Object> aliases = new HashMap<String,Object>();
     
     public ServiceHandlerFactory() {
         registerHandler(PingHandler.URL_PATH,PingHandler.class); 
@@ -50,14 +52,11 @@ public class ServiceHandlerFactory {
         registerHandler(EmailHandler.URL_PATH, EmailHandler.class);
     }
     
-    public IServiceHandler get(String name) {
-        // Look for an alias
-        if(aliases!=null) {
-            Object s = aliases.get(name);
-            if(s!=null) {
-                // Then instanciate the object
-            	return createInstance(s);
-            }
+    public HttpServlet createServlet(String name) {
+        Object s = aliases.get(name);
+        if(s!=null) {
+            // Then instanciate the object
+        	return createInstance(s);
         }
         
         // The handler does not exist
@@ -65,22 +64,17 @@ public class ServiceHandlerFactory {
     }
     
     public void registerHandler(String name, Object clazz) {
-        if(aliases==null) {
-            aliases = new HashMap<String, Object>();
-        }
         aliases.put(name,clazz);
     }
     
     public void unregisterHandler(String name) {
-        if(aliases!=null) {
-            aliases.remove(name);
-        }
+        aliases.remove(name);
     }
     
-    protected IServiceHandler createInstance(Object clazz) {
+    protected HttpServlet createInstance(Object clazz) {
         try {
             if(clazz instanceof Class<?>) {
-                return (IServiceHandler)((Class<?>)clazz).newInstance();
+                return (HttpServlet)((Class<?>)clazz).newInstance();
             }
             if(clazz instanceof String) {
                 ClassLoader cl = Thread.currentThread().getContextClassLoader();

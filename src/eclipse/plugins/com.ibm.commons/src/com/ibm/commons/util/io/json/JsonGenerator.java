@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * © Copyright IBM Corp. 2012-2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -18,6 +18,9 @@ package com.ibm.commons.util.io.json;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 
 import com.ibm.commons.util.StringUtil;
@@ -271,6 +274,46 @@ public class JsonGenerator {
             }
             out('\"');
         }
+        public void outCharInString(char c) throws IOException {
+            switch(c) {
+                case '"': {
+                    out("\\\""); //$NON-NLS-1$
+                } break;
+                case '\'': {
+                    out("\\\'"); //$NON-NLS-1$
+                } break;
+                case '\\': {
+                    out("\\\\"); //$NON-NLS-1$
+                } break;
+                case '/': {
+                    out("\\/"); //$NON-NLS-1$
+                } break;
+                case '\b': {
+                    out("\\b"); //$NON-NLS-1$
+                } break;
+                case '\f': {
+                    out("\\f"); //$NON-NLS-1$
+                } break;
+                case '\n': {
+                    out("\\n"); //$NON-NLS-1$
+                } break;
+                case '\r': {
+                    out("\\r"); //$NON-NLS-1$
+                } break;
+                case '\t': {
+                    out("\\t"); //$NON-NLS-1$
+                } break;
+                default: {
+                    // Ensure that it will be transmitted correctly...
+                    if(c>=32 && c<=128) {
+                        out(c);
+                    } else {
+                        out("\\u"); //$NON-NLS-1$
+                        out(StringUtil.toUnsignedHex(c,4));
+                    }
+                }
+            }
+        }
 
         public void outNumberLiteral(double d) throws IOException {
         	long l = (long)d;
@@ -283,6 +326,11 @@ public class JsonGenerator {
         	}
         }
         
+    	public void outDateLiteral_(Date value) throws IOException {
+            String s = dateToString(value);
+            outStringLiteral(s);
+        }
+
         public void outIntLiteral(int d) throws IOException {
             String s = Integer.toString(d);
             out(s);
@@ -373,6 +421,9 @@ public class JsonGenerator {
             super(factory,compact);
             this.b = new StringBuilder();
         }
+        public StringBuilder getStringBuilder() {
+        	return b;
+        }
         public void out(char c) throws IOException {
             b.append(c);
         }
@@ -386,10 +437,13 @@ public class JsonGenerator {
      * @ibm-not-published
      */
     public static class StringBuilderGenerator extends Generator { 
-        private StringBuilder b;
+        protected StringBuilder b;
         public StringBuilderGenerator(JsonFactory factory, StringBuilder b, boolean compact) {
             super(factory,compact);
             this.b = b;
+        }
+        public StringBuilder getStringBuilder() {
+        	return b;
         }
         public void out(char c) throws IOException {
             b.append(c);
@@ -422,4 +476,15 @@ public class JsonGenerator {
             writer.write(s);
         }
     }
+
+	public static final String TIME_FORMAT_B = "yyyy-MM-dd'T'HH:mm:ss"; //$NON-NLS-1$
+
+	private static SimpleDateFormat ISO8601 = new SimpleDateFormat(TIME_FORMAT_B);
+
+	public static String dateToString(Date value) throws IOException {
+		return ISO8601.format(value);
+	}
+	public static Date stringToDate(String value) throws IOException, ParseException {
+		return ISO8601.parse(value);
+	}
 }

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * © Copyright IBM Corp. 2012-2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -53,11 +53,40 @@ public class JsonJavaFactory implements JsonFactory {
             return new JsonJavaObject();
         }
     };
-    
+    public static final JsonJavaFactory instanceEx2 = new JsonJavaFactory() {
+        public Object createObject(Object parent, String propertyName) {
+            return new JsonJavaObject();
+        }
+        public List<Object> createTemporaryArray(Object parent) throws JsonException {
+            return new JsonJavaArray();
+        }
+		public Object createArray(Object parent, String propertyName, List<Object> values) {
+			if(values instanceof JsonJavaArray) {
+				return values;
+			}
+            return new JsonJavaArray(values);
+        }
+    };
+
+    public boolean supportFeature(int feature) {
+    	if(feature==FEATURE_INLINEJAVASCRIPT) {
+    		return true;
+    	}
+    	return false;
+	}
+
+	public boolean isValidValue(Object value) throws JsonException {
+		return isNull(value) || isUndefined(value) || isBoolean(value) || isNumber(value) || isString(value) || isObject(value) || isArray(value) || isJavaScriptCode(value);
+	}
+
     public Object createNull() throws JsonException {
         return null;
     }
-    
+    	
+    public Object createUndefined() throws JsonException {
+        throw new JsonException(null,"Undefined does not exist in Java");
+    }
+
     public Object createString(String value) throws JsonException {
         return value;
     }
@@ -78,6 +107,10 @@ public class JsonJavaFactory implements JsonFactory {
         return values;
     }
     
+    public Object createJavaScriptCode(String code) throws JsonException {
+    	return new JsonReference(code);
+    }
+
     @SuppressWarnings("unchecked") //$NON-NLS-1$
     public void setProperty(Object parent, String propertyName, Object value) throws JsonException {
         if(parent instanceof Map) {
@@ -103,7 +136,11 @@ public class JsonJavaFactory implements JsonFactory {
     public boolean isNull(Object value) throws JsonException {
         return value==null;
     }
-    
+    	
+    public boolean isUndefined(Object value) {
+        return false; // Doesn't exist in Java
+    }
+
     public boolean isString(Object value) throws JsonException {
         return value instanceof String;
     }
@@ -131,6 +168,20 @@ public class JsonJavaFactory implements JsonFactory {
     public boolean isObject(Object value) throws JsonException {
         return (value instanceof Map) || (value instanceof JsonObject);
     }
+	
+    public boolean isJavaScriptCode(Object value) throws JsonException {
+    	if(supportFeature(FEATURE_INLINEJAVASCRIPT)) {
+    		return value instanceof JsonReference;
+    	}
+    	return false;
+    }
+
+    public String getJavaScriptCode(Object value) throws JsonException {
+    	if(supportFeature(FEATURE_INLINEJAVASCRIPT)) {
+    		return ((JsonReference)value).getRef();
+    	}
+    	return null;
+    }
 
     @SuppressWarnings("unchecked") //$NON-NLS-1$
     public Iterator<String> iterateObjectProperties(Object object) throws JsonException {
@@ -145,10 +196,9 @@ public class JsonJavaFactory implements JsonFactory {
     }
     
     public boolean isArray(Object value) throws JsonException {
-    	
-    	if(null==value)
-    		return false;
-    	
+    	if(value instanceof JsonArray) {
+    		return true;
+    	}
         if(value instanceof List) {
             return true;
         }
@@ -158,8 +208,31 @@ public class JsonJavaFactory implements JsonFactory {
         return false;
     }
 
+    public int getArrayCount(Object value) throws JsonException {
+    	if(value instanceof JsonArray) {
+    		return ((JsonArray)value).length();
+    	}
+        if(value instanceof List) {
+    		return ((List<?>)value).size();
+        }
+        return ((Object[])value).length;
+    }
+
+    public Object getArrayItem(Object value, int index) throws JsonException {
+    	if(value instanceof JsonArray) {
+    		return ((JsonArray)value).get(index);
+    	}
+        if(value instanceof List) {
+    		return ((List<?>)value).get(index);
+        }
+        return ((Object[])value)[index];
+    }
+
     @SuppressWarnings("unchecked") //$NON-NLS-1$
     public Iterator<Object> iterateArrayValues(Object array) throws JsonException {
+    	if(array instanceof JsonArray) {
+    		return ((JsonArray)array).iterator();
+    	}
         if(array instanceof List) {
             List<Object> list = (List<Object>)array;
             return list.iterator();
@@ -170,4 +243,4 @@ public class JsonJavaFactory implements JsonFactory {
     public List<Object> createTemporaryArray(Object parent) throws JsonException {
         return new ArrayList<Object>();
     }
-}
+ }

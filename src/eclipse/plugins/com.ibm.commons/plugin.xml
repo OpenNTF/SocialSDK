@@ -25,4 +25,6 @@
 
    <extension-point id="Extension" name="Extension Service" schema="schema/Extension.exsd"/>
 
+<extension-point id="ExtensionBundle" name="Extension Service" schema="schema/ExtensionBundle.exsd"/>
+
 </plugin>

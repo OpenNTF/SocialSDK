@@ -7,14 +7,17 @@ Bundle-Localization: plugin
 Export-Package: com.ibm.commons,
  com.ibm.commons.extension,
  com.ibm.commons.log,
+ com.ibm.commons.log.eclipse,
  com.ibm.commons.log.jdk,
  com.ibm.commons.platform,
  com.ibm.commons.preferences,
+ com.ibm.commons.preferences.eclipse,
  com.ibm.commons.util,
  com.ibm.commons.util.io,
  com.ibm.commons.util.io.base64,
  com.ibm.commons.util.io.json,
  com.ibm.commons.util.io.json.parser,
+ com.ibm.commons.util.io.json.util,
  com.ibm.commons.util.print,
  com.ibm.commons.util.profiler
 Require-Bundle: org.eclipse.core.runtime

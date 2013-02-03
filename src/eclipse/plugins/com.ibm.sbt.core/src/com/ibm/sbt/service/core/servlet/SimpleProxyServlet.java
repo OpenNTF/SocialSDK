@@ -38,7 +38,7 @@ import javax.servlet.http.HttpServletResponse;
  * Proxy for transferring HTTP GET requests to the specified target URL. The result
  * returned by the target is transferred back to the original request initiator.
  */
-public class SimpleServiceServlet extends HttpServlet implements Servlet
+public class SimpleProxyServlet extends HttpServlet implements Servlet
 {
     /** The name of the original request parameter specifying target URL */
     private static final String PARAM_URL = "url";

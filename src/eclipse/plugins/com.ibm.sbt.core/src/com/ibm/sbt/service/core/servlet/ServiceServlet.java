@@ -15,26 +15,22 @@
  */
 package com.ibm.sbt.service.core.servlet;
 
-import java.io.IOException;
-import java.util.HashMap;
-
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import com.ibm.commons.Platform;
 import com.ibm.commons.runtime.RuntimeConstants;
-import com.ibm.commons.runtime.servlet.BaseToolkitServlet;
-import com.ibm.commons.util.StringUtil;
-import com.ibm.sbt.service.core.ServiceHandlerFactory;
+import com.ibm.sbt.security.authentication.oauth.consumer.oauth_10a.servlet.OA2Callback;
+import com.ibm.sbt.security.authentication.oauth.consumer.oauth_10a.servlet.OACallback;
+import com.ibm.sbt.security.authentication.oauth.consumer.oauth_10a.servlet.OAClientAuthentication;
+import com.ibm.sbt.service.core.ServletDispatcher;
+import com.ibm.sbt.service.core.ServletFactory;
+import com.ibm.sbt.service.core.handlers.BasicAuthCredsHandler;
+import com.ibm.sbt.service.core.handlers.EmailHandler;
+import com.ibm.sbt.service.core.handlers.PingHandler;
+import com.ibm.sbt.service.core.handlers.ProxyHandler;
 
 /**
- * Proxy servlet.
+ * Default service servlet used by SBT runtime.
  * @author priand
  */
-public class ServiceServlet extends BaseToolkitServlet {
+public class ServiceServlet extends ServletDispatcher {
 
 	public static String getServletPath() {
 		return RuntimeConstants.get().getConstant(RuntimeConstants.SERVICE_BASEURL);
@@ -42,115 +38,15 @@ public class ServiceServlet extends BaseToolkitServlet {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private String[] services;
-	private HashMap<String,HttpServlet>	servlets = new HashMap<String, HttpServlet>();
-	
     public ServiceServlet() {
+    	// Register the default servlets
+        register(new ServletFactory.PathInfoName(PingHandler.class,PingHandler.URL_PATH)); 
+        register(new ServletFactory.PathInfoName(ProxyHandler.class,ProxyHandler.URL_PATH)); 
+        register(new ServletFactory.PathInfoName(BasicAuthCredsHandler.class,BasicAuthCredsHandler.URL_PATH));
+        register(new ServletFactory.PathInfoName(OACallback.class,OACallback.URL_PATH)); 
+        register(new ServletFactory.PathInfoName(OAClientAuthentication.class,OAClientAuthentication.URL_PATH));
+        register(new ServletFactory.PathInfoName(OA2Callback.class,OA2Callback.URL_PATH));
+        register(new ServletFactory.PathInfoName(EmailHandler.class,EmailHandler.URL_PATH));
     }
     
-    @Override
-	public void init(ServletConfig servletConfig) throws ServletException {
-		super.init(servletConfig);
-		
-		String s = servletConfig.getInitParameter("services");
-		if(StringUtil.isNotEmpty(s)) {
-			this.services = StringUtil.splitString(s, ',', true);
-		}
-	}
-
-	@Override
-	public void destroy() {
-		// Destroy the servlets
-		for(HttpServlet s: servlets.values()) {
-			try {
-				s.destroy();
-			} catch(Exception ex) {
-				Platform.getInstance().log(ex);
-			}
-		}
-	
-		super.destroy();
-	}
-
-	@Override
-	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Find the servlet corresponding to the request
-        HttpServlet servlet = findServlet(request, response);
-        
-        // Then, delegate to it
-        if(servlet!=null) {
-        	servlet.service(request, response);
-            return;
-        }
-        
-        // The handler is not available so it is a 404
-        String message = "Invalid proxy handler {0}";  // $NLX-ProxyServlet.Invalidproxyhandler0-1$
-        service404(request,response,message,request.getPathInfo());
-    }
-
-	protected HttpServlet findServlet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String pathInfo = request.getPathInfo();
-        if(pathInfo==null) {
-        	// Warn: the pathinfo can be null on certain web app server
-        	pathInfo = "";
-        }
-        if(pathInfo.startsWith("/")) {
-            pathInfo = pathInfo.substring(1);
-        }
-        
-        int pos = pathInfo.indexOf('/');
-        if(pos >=0) {
-           pathInfo = pathInfo.substring(0, pos);
-        }
-        
-        return findServletByName(request, response, pathInfo);
-	}
-
-	protected HttpServlet findServletByName(HttpServletRequest request, HttpServletResponse response, String name) throws ServletException, IOException {
-		if(StringUtil.isEmpty(name)) {
-			return null;
-		}
-		
-        // Look if the service is enabled
-        if(services!=null && services.length>0) {
-        	if(!contains(services, name)) {
-        		return null;
-        	}
-        }
-        
-        HttpServlet servlet = servlets.get(name);
-        if(servlet==null) {
-        	servlet = createServlet(request, response, name);
-        }
-        
-        return servlet;
-	}
-	
-	protected synchronized HttpServlet createServlet(HttpServletRequest request, HttpServletResponse response, String name) throws ServletException {
-        HttpServlet servlet = servlets.get(name);
-        if(servlet==null) {
-        	ServiceHandlerFactory factory = getServletFactory();
-        	if(factory!=null) {
-	        	servlet = factory.createServlet(name);
-	        	if(servlet!=null) {
-	        		servlet.init(getServletConfig());
-	        		servlets.put(name, servlet);
-	        	}
-        	}
-        }
-        return servlet;
-	}
-	
-	protected ServiceHandlerFactory getServletFactory() {
-		return ServiceHandlerFactory.get();
-	}
-
-	private static boolean contains(String[] a, String s) {
-		for(int i=0; i<a.length; i++) {
-			if(a[i].equals(s)) {
-				return true;
-			}
-		}
-		return false;
-	}
 }

@@ -66,6 +66,10 @@ public class CommunityService extends BaseService {
 	public Community getCommunity(String communityUuid) throws XMLException, SBTServiceException {
 		return getCommunity(communityUuid, true);
 	}
+	
+	public Community getCommunity(boolean loadIt) throws XMLException, SBTServiceException {
+		return getCommunity("", loadIt);
+	}
 
 	/**
 	 * This method is the intermediate between the JSP methods and the Java implementation. This will

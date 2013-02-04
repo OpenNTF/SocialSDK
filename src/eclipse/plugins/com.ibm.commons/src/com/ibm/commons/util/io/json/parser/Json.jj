@@ -485,9 +485,41 @@ Object parseJson()throws JsonException:
       (
          object=objectLiteral(null,null)
         |object=arrayLiteral(null,null)
-      	|"(" object=parseJson() ")"
+
+        |object=nullLiteral()		// extension to JSON
+        |object=booleanLiteral()	// extension to JSON
+        |object=numericLiteral()	// extension to JSON
+        |object=stringLiteral()		// extension to JSON
+      	|"(" object=parseJson() ")" // extension to JSON
       ){
         return object;
        }
-      // JSON Extension: we support parenthesis enclosing the file
+    }
+
+void parseJsonList(List list) throws JsonException:
+    { Object value; }
+    {
+        (
+          	value=parseJson()
+          	{
+         		if(list!=null) {
+					list.add(value);
+				}
+			}
+        )*
+      	<EOF>  
+    }
+
+void parseJsonCallback(com.ibm.commons.util.io.json.JsonParser.ParseCallback callback) throws JsonException:
+    { Object value; }
+    {
+        (
+          	value=parseJson()
+          	{
+         		if(callback!=null) {
+					callback.jsonEntry(value);
+				}
+			}
+        )*
+      	<EOF>  
     }

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * © Copyright IBM Corp. 2012-2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -42,13 +42,12 @@ public class Base64OutputStream extends FilterOutputStream {
 
     /**
      * Default constructor.
-     * This constructs a Base64OutputStream with a line length of 76.
      * @param out the underlying output stream to encode
      * @pre out != null
      * @post out != null
      */
     public Base64OutputStream(OutputStream out) {
-        this(out, 76);
+        this(out, Integer.MAX_VALUE);
     }
 
     /**

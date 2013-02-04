@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * © Copyright IBM Corp. 2012-2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -32,11 +32,15 @@ import java.util.List;
  */
 public interface JsonFactory {
 	
-	// ====================================================================
-	// Object factories used by the parser
+	public static final int FEATURE_INLINEJAVASCRIPT	= 1;
+	
+	public boolean supportFeature(int feature) throws JsonException;
 
 	/** @ibm-api */
 	public Object createNull() throws JsonException;
+
+	/** @ibm-api */
+	public Object createUndefined() throws JsonException;
 	
 	/** @ibm-api */
 	public Object createString(String value) throws JsonException;
@@ -52,6 +56,9 @@ public interface JsonFactory {
 	
 	/** @ibm-api */
 	public Object createArray(Object parent, String propertyName, List<Object> values) throws JsonException;
+
+	/** @ibm-api */
+	public Object createJavaScriptCode(String code) throws JsonException;
 	
 	/** @ibm-api */
 	public void setProperty(Object parent, String propertyName, Object value) throws JsonException;	
@@ -63,15 +70,27 @@ public interface JsonFactory {
 	
 	/** @ibm-api */
 	public Object getProperty(Object parent, String propertyName) throws JsonException;
+
+	/** @ibm-api */
+	public boolean isValidValue(Object value) throws JsonException;
 	
 	/** @ibm-api */
 	public boolean isNull(Object value) throws JsonException;
+
+	/** @ibm-api */
+	public boolean isUndefined(Object value) throws JsonException;
 	
 	/** @ibm-api */
 	public boolean isString(Object value) throws JsonException;
 
 	/** @ibm-api */
 	public String getString(Object value) throws JsonException;
+
+	/** @ibm-api */
+	public boolean isJavaScriptCode(Object value) throws JsonException;
+
+	/** @ibm-api */
+	public String getJavaScriptCode(Object value) throws JsonException;
 	
 	/** @ibm-api */
 	public boolean isNumber(Object value) throws JsonException;
@@ -93,6 +112,9 @@ public interface JsonFactory {
 	
 	/** @ibm-api */
 	public boolean isArray(Object value) throws JsonException;
+
+	/** @ibm-api */
+	public int getArrayCount(Object value) throws JsonException;
 
 	/** @ibm-api */
 	public Iterator<Object> iterateArrayValues(Object array) throws JsonException;

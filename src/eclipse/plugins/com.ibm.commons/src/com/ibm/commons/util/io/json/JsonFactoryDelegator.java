@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * © Copyright IBM Corp. 2012-2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -16,7 +16,6 @@
 
 package com.ibm.commons.util.io.json;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -37,6 +36,14 @@ public class JsonFactoryDelegator implements JsonFactory {
 		this.delegate = delegate;
 	}
 
+	public boolean supportFeature(int feature) throws JsonException {
+		return delegate.supportFeature(feature);
+	}
+
+	public boolean isValidValue(Object value) throws JsonException {
+		return delegate.isValidValue(value);
+	}
+
 	public Object createArray(Object parent, String propertyName,
 			List<Object> values) throws JsonException {
 		return delegate.createArray(parent, propertyName, values);
@@ -50,6 +57,10 @@ public class JsonFactoryDelegator implements JsonFactory {
 		return delegate.createNull();
 	}
 
+	public Object createUndefined() throws JsonException {
+		return delegate.createUndefined();
+	}
+
 	public Object createNumber(double value) throws JsonException {
 		return delegate.createNumber(value);
 	}
@@ -61,6 +72,10 @@ public class JsonFactoryDelegator implements JsonFactory {
 
 	public Object createString(String value) throws JsonException {
 		return delegate.createString(value);
+	}
+
+	public Object createJavaScriptCode(String code) throws JsonException {
+		return delegate.createJavaScriptCode(code);
 	}
 
 	public boolean getBoolean(Object value) throws JsonException {
@@ -80,8 +95,16 @@ public class JsonFactoryDelegator implements JsonFactory {
 		return delegate.getString(value);
 	}
 
+	public String getJavaScriptCode(Object value) throws JsonException {
+		return getJavaScriptCode(value);
+	}
+
 	public boolean isArray(Object value) throws JsonException {
 		return delegate.isArray(value);
+	}
+
+	public int getArrayCount(Object value) throws JsonException {
+		return delegate.getArrayCount(value);
 	}
 
 	public boolean isBoolean(Object value) throws JsonException {
@@ -90,6 +113,10 @@ public class JsonFactoryDelegator implements JsonFactory {
 
 	public boolean isNull(Object value) throws JsonException {
 		return delegate.isNull(value);
+	}
+
+	public boolean isUndefined(Object value) throws JsonException {
+		return delegate.isUndefined(value);
 	}
 
 	public boolean isNumber(Object value) throws JsonException {
@@ -102,6 +129,10 @@ public class JsonFactoryDelegator implements JsonFactory {
 
 	public boolean isString(Object value) throws JsonException {
 		return delegate.isString(value);
+	}
+
+	public boolean isJavaScriptCode(Object value) throws JsonException {
+		return delegate.isJavaScriptCode(value);
 	}
 
 	public Iterator<Object> iterateArrayValues(Object array)

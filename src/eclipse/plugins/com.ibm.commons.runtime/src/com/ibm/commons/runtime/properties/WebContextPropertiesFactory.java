@@ -24,37 +24,46 @@ import javax.servlet.ServletContext;
 import com.ibm.commons.runtime.Application;
 
 /**
- * Properties factory implementation which reads init parameters from the ServletContext.
- *
+ * Properties factory implementation which reads init parameters from the
+ * ServletContext.
+ * 
  * @author Mark Wallace
  */
 public class WebContextPropertiesFactory extends AbstractPropertiesFactory {
-	
-	static final String sourceClass = WebContextPropertiesFactory.class.getName();
+
+	static final String sourceClass = WebContextPropertiesFactory.class
+			.getName();
 	static final Logger logger = Logger.getLogger(sourceClass);
-	
+
 	/**
 	 * Default constructor
 	 */
 	public WebContextPropertiesFactory() {
 	}
 
-	/* (non-Javadoc)
-	 * @see com.ibm.commons.runtime.impl.PropertiesFactory#getProperty(java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.ibm.commons.runtime.impl.PropertiesFactory#getProperty(java.lang.
+	 * String)
 	 */
 	@Override
 	public String getProperty(String name) {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getProperty", name);
 		}
-		
+
 		String value = null;
 		Application application = Application.getUnchecked();
 		if (application != null) {
 			Object context = application.getApplicationContext();
-			if (context instanceof ServletContext) {
-				ServletContext servletContext = (ServletContext)context;
-				value = servletContext.getInitParameter(name);
+			//prevent class not found exception if context is null because we're out of a container
+			if (context != null) {
+				if (context instanceof ServletContext) {
+					ServletContext servletContext = (ServletContext) context;
+					value = servletContext.getInitParameter(name);
+				}
 			}
 		}
 

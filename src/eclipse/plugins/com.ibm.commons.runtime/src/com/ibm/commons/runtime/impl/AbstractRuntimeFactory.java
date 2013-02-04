@@ -110,9 +110,6 @@ public abstract class AbstractRuntimeFactory extends RuntimeFactory {
 	@Override
 	public Context initContext(Context context) {
 		AbstractContext ctx = contexts.get();
-		if(ctx!=null) {
-			throw new IllegalStateException("Context is already initialized for the thread");
-		}
 		ctx = (AbstractContext)context;
 		contexts.set(ctx);
 		ctx._incReferences();

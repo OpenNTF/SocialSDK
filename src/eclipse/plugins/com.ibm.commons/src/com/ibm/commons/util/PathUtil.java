@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * © Copyright IBM Corp. 2012-2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -14,7 +14,6 @@
  * permissions and limitations under the License.
  */
 
-
 package com.ibm.commons.util;
 
 
@@ -23,7 +22,7 @@ package com.ibm.commons.util;
  * Some utilities for path handling.
  * @ibm-api
  */
-public final class PathUtil {
+public class PathUtil {
 	
     /**
      * Add to path ensuring there is just one separator in between the 2 parts..

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * © Copyright IBM Corp. 2012-2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -54,7 +54,7 @@ public class Base64 {
      */
     public static String encode(String str) {
     	try {
-    		StringBufferOutputStream baos = new StringBufferOutputStream(str.length()*3/2);
+    		StringBuidlerOutputStream baos = new StringBuidlerOutputStream(str.length()*3/2);
 	        Base64.OutputStream b64 = new Base64.OutputStream(baos);
 
 	        int len = str.length();
@@ -64,19 +64,19 @@ public class Base64 {
     		}
 	        b64.flushBuffer();
 
-	        return baos.buffer.toString();
+	        return baos.builder.toString();
     	} catch(IOException ex) {
     		ex.printStackTrace();
     		return null;
     	}
     }
 
-    private static class StringInputStream extends java.io.InputStream {
+    public static class StringInputStream extends java.io.InputStream {
 
     	private String str;
     	private int ptr;
     	
-    	StringInputStream(String str) {
+    	public StringInputStream(String str) {
     		this.str = str;
     	}
 
@@ -88,16 +88,31 @@ public class Base64 {
         }
     }
     
-    private static class StringBufferOutputStream extends java.io.OutputStream {
-    	StringBuffer buffer;
-    	StringBufferOutputStream(int size) {
+    public static class StringBufferOutputStream extends java.io.OutputStream {
+    	private StringBuffer buffer;
+    	public StringBufferOutputStream(int size) {
     		this.buffer = new StringBuffer(size);
+    	}
+    	public StringBuffer getStringBuffer() {
+    		return buffer;
     	}
         public void write(int b) throws IOException {
         	buffer.append((char)b);
         }
     }
     
+    public static class StringBuidlerOutputStream extends java.io.OutputStream {
+    	private StringBuilder builder;
+    	public StringBuidlerOutputStream(int size) {
+    		this.builder = new StringBuilder(size);
+    	}
+    	public StringBuilder getStringBuilder() {
+    		return builder;
+    	}
+        public void write(int b) throws IOException {
+        	builder.append((char)b);
+        }
+    }
     
 	
     public static class OutputStream extends Base64OutputStream {

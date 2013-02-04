@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * © Copyright IBM Corp. 2012-2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -12,10 +12,6 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
- */
-
-/*
- * Created on: Oct 12, 2005
  */
 
 package com.ibm.commons.util.io;
@@ -37,11 +33,6 @@ import com.ibm.commons.util.FastStringBuffer;
  * @ibm-api
  */
 public class StreamUtil {
-
-    /**
-     * Private constructor
-     */
-    private StreamUtil() {}
 
     /**
      * Call close on an output stream and ignore any exception.

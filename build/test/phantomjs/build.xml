@@ -4,7 +4,7 @@
 
   <!-- PROPERTIES -->
   <target name="properties">
-      <property file="build.properties"/>
+      <property file="../../build.properties"/>
   </target>
 
   <target name="prepare" depends="properties">

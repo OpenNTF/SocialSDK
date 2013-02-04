@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * © Copyright IBM Corp. 2012-2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -34,14 +34,30 @@ public class JsonEmptyFactory implements JsonFactory {
 	
 	public static final JsonEmptyFactory instance = new JsonEmptyFactory();
 	
+	public boolean supportFeature(int feature) throws JsonException {
+		return true;
+	}
+
+	public boolean isValidValue(Object value) throws JsonException {
+		return true;
+	}
+
 	public Object createNull() {
 		return null;
 	}
 	
+	public Object createUndefined() {
+		return null;
+	}
+
 	public Object createString(String value) {
 		return null;
 	}
 	
+	public Object createJavaScriptCode(String code) throws JsonException {
+		return null;
+	}
+
 	public Object createNumber(double value) {
 		return null;
 	}
@@ -69,12 +85,24 @@ public class JsonEmptyFactory implements JsonFactory {
 	public boolean isNull(Object value) throws JsonException {
 		return false;
 	}	
+	public boolean isUndefined(Object value) throws JsonException {
+		return false;
+	}
 	public boolean isString(Object value) throws JsonException {
 		return false;
 	}
 	public String getString(Object value) throws JsonException {
 		return null;
 	}
+
+	public boolean isJavaScriptCode(Object value) throws JsonException {
+		return false;
+	}
+
+	public String getJavaScriptCode(Object value) throws JsonException {
+		return null;
+	}
+
 	public boolean isNumber(Object value) throws JsonException {
 		return false;
 	}
@@ -97,7 +125,10 @@ public class JsonEmptyFactory implements JsonFactory {
 	public boolean isArray(Object value) throws JsonException {
 		return false;
 	}
-	@SuppressWarnings("unchecked") //$NON-NLS-1$
+	public int getArrayCount(Object value) throws JsonException {
+		return 0;
+	}
+	@SuppressWarnings("unchecked")
 	public Iterator<Object> iterateArrayValues(Object array) throws JsonException {
 		return EmptyIterator.getInstance();
 	}

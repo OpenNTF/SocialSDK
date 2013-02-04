@@ -15,47 +15,17 @@
  */
 package com.ibm.sbt.service.core.handlers;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import com.ibm.commons.util.StringUtil;
-import com.ibm.sbt.service.core.IServiceHandler;
+import javax.servlet.http.HttpServlet;
 
 /**
- * Abstract Proxy Handler.
+ * Abstract Service Handler.
  * @author priand
  */
-public abstract class AbstractServiceHandler implements IServiceHandler {
+public abstract class AbstractServiceHandler extends HttpServlet {
     
-    public AbstractServiceHandler() {
+	private static final long serialVersionUID = 1L;
+
+	public AbstractServiceHandler() {
     }
     
-    @Override
-	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	String req = request.getMethod();
-    	if(StringUtil.endsWithIgnoreCase(req, "get")) {
-    		doGet(request, response);
-    	} else if(StringUtil.endsWithIgnoreCase(req, "post")) {
-    		doPost(request, response);
-    	} else if(StringUtil.endsWithIgnoreCase(req, "put")) {
-    		doPut(request, response);
-    	} else if(StringUtil.endsWithIgnoreCase(req, "delete")) {
-    		doDelete(request, response);
-    	}
-    }
-
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    }
-
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    }
-
-    public void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    }
-
-    public void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    }
 }

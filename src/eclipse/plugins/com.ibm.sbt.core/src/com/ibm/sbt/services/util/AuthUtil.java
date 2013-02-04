@@ -34,12 +34,12 @@ public enum AuthUtil {
 	public String getAuthValue(Endpoint endpoint) {
 
 		if (null == endpoint) {
-			return null;
+			return BASIC; // default should be basic as per defect 48438
 		}
 
 		String authType = endpoint.getAuthType();
 		if (StringUtil.isEmpty(authType)) {
-			return null;
+			return BASIC;
 		}
 
 		String authValue = null;

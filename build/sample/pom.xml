@@ -23,8 +23,6 @@
     <module>../../samples/j2ee/acme.sample.webapp</module>
     <module>../../samples/j2ee/acme.social.sample.ear</module>
     <!-- sample java projects -->
-	<!--
     <module>../../samples/java/sbt.sample.app</module>
-	-->
   </modules>
 </project>

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * © Copyright IBM Corp. 2012-2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -13,7 +13,6 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-
 
 package com.ibm.commons.util;
 
@@ -82,7 +81,7 @@ public final class SystemCache {
                 if(StringUtil.isNotEmpty(value)) {
                 	int iv = Integer.parseInt(value);
                 	if(iv>0) {
-                		maxSize = 0;
+                		maxSize = iv;
                 	}
                 }
         	} catch(Throwable ex) {}

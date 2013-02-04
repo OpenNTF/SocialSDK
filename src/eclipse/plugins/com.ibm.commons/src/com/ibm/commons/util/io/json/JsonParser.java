@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * © Copyright IBM Corp. 2012-2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -17,6 +17,7 @@
 package com.ibm.commons.util.io.json;
 
 import java.io.Reader;
+import java.util.List;
 
 import com.ibm.commons.util.io.json.parser.Json;
 
@@ -31,6 +32,13 @@ import com.ibm.commons.util.io.json.parser.Json;
  */
 public class JsonParser {
 	
+	/**
+	 * Callback when a stream of json entries is parsed
+	 */
+	public static interface ParseCallback {
+		public void jsonEntry(Object o) throws JsonException;
+	}
+
 	/**
 	 * Check if a string a a valid JSON text.
 	 * @param json the JSON text to check
@@ -81,6 +89,42 @@ public class JsonParser {
 		}
 	}
 	
+	/**
+	 * Parse a JSON stream and add all the entries to a list.
+	 * @param factory the object factory
+	 * @param reader the JSON stream
+	 * @param cb the cllback to call for each entry
+	 * @return the object created from the JSON text
+	 * @throws JsonException
+	 * @ibm-api
+	 */
+	public static void fromJson(JsonFactory factory, Reader reader, List<Object> list) throws JsonException {
+		try {
+			Json parser = getParser(factory,reader);
+			parser.parseJsonList(list);
+        } catch(Throwable ex) {
+		    throw new JsonException(ex,"Error when parsing JSON list"); 
+		}
+	}
+	
+	/**
+	 * Parse a JSON stream and call a function for each entry.
+	 * @param factory the object factory
+	 * @param reader the JSON stream
+	 * @param cb the cllback to call for each entry
+	 * @return the object created from the JSON text
+	 * @throws JsonException
+	 * @ibm-api
+	 */
+	public static void fromJson(JsonFactory factory, Reader reader, ParseCallback cb) throws JsonException {
+		try {
+			Json parser = getParser(factory,reader);
+			parser.parseJsonCallback(cb);
+        } catch(Throwable ex) {
+		    throw new JsonException(ex,"Error when parsing JSON stream"); 
+		}
+	}
+
 	
     private static Json getParser(JsonFactory factory, Reader r) {
         Json parser = new Json(r);

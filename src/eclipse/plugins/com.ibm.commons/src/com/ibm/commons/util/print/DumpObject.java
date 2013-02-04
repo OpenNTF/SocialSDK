@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * © Copyright IBM Corp. 2012-2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -20,7 +20,7 @@ import java.beans.BeanInfo;
 import java.beans.PropertyDescriptor;
 import java.io.DataInputStream;
 import java.io.IOException;
-import java.io.PrintStream;
+import java.io.StringWriter;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -32,9 +32,18 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+
+import com.ibm.commons.Platform;
 import com.ibm.commons.util.QuickSort;
 import com.ibm.commons.util.StringUtil;
-import com.ibm.commons.util.TDiag;
+import com.ibm.commons.util.io.TextOutputStream;
 
 
 
@@ -46,14 +55,14 @@ public class DumpObject extends TablePrinter {
     
     public interface IFilter {
         public boolean acceptField(Field field);
-        public boolean acceptProperty(PropertyDescriptor desc);
+	public boolean acceptProperty(String name, Object property);
     }
 
-    private static DefaultAdapterFactory defaultFactory = new DefaultAdapterFactory();
-    private static DefaultFilter defaultFilter = new DefaultFilter();
+	public static DefaultAdapterFactory defaultFactory = new DefaultAdapterFactory();
+	public static DefaultFilter defaultFilter = new DefaultFilter();
     
     private AdapterFactory adapterFactory = defaultFactory;
-    private PrintStream ps = TDiag.getOutputStream();
+	private TextOutputStream ps = new TextOutputStream(Platform.getInstance().getOutputStream());
     private int depth=10;
     private int indent=2;
     private boolean printType;
@@ -62,6 +71,10 @@ public class DumpObject extends TablePrinter {
     public DumpObject() {
     }
     
+	public DumpObject(AdapterFactory adapterFactory) {
+		this.adapterFactory = adapterFactory;
+	}
+
     
     public AdapterFactory getAdapterFactory() {
         return adapterFactory;
@@ -79,11 +92,11 @@ public class DumpObject extends TablePrinter {
         this.depth = depth;
     }
 
-    public PrintStream getPrintStream() {
+	public TextOutputStream getTextOutputStream() {
         return ps;
     }
 
-    public void setPrintStream(PrintStream ps) {
+	public void setTextOutputStream(TextOutputStream ps) {
         this.ps = ps;
     }
 
@@ -112,13 +125,27 @@ public class DumpObject extends TablePrinter {
     }
 
 
-    public void dump(Object o) {
+	public void dump(Object o) throws IOException {
+		if(o!=null) {
         dump(new HashMap(), new ArrayList(), null, o, depth);
+		} else {
+			ps.println("<null>");
+		}
+		ps.flush();
     }
 
-    public interface AdapterFactory {
+    public static interface AdapterFactory {
         public Adapter createAdapter(Object o);
     }
+	public static class FactoryWrapper implements AdapterFactory {
+		private AdapterFactory wrapped;
+		public FactoryWrapper(AdapterFactory wrapped) {
+			this.wrapped = wrapped;
+		}
+		public Adapter createAdapter(Object o) {
+			return wrapped.createAdapter(o);
+		}
+	}
 
     public static abstract class Adapter {
         public String getTypeAsString() {
@@ -137,7 +164,9 @@ public class DumpObject extends TablePrinter {
         public Iterator arrayIterator() {
             return null;
         }
-        
+		public int arrayCount() {
+			return 0;
+		}
         public boolean isObject() {
             return false;
         }
@@ -145,17 +174,57 @@ public class DumpObject extends TablePrinter {
             return null;
         }
     }
+	public static class AdapterWrapper extends Adapter {
+		private Adapter wrapped;
+		public AdapterWrapper(Adapter wrapped) {
+			this.wrapped = wrapped;
+		}
+		@Override
+		public String getTypeAsString() {
+			return wrapped.getTypeAsString();
+		}
+		@Override
+		public boolean isValue() {
+			return wrapped.isValue();
+		}
+		@Override
+		public String getValue() {
+			return wrapped.getValue();
+		}
+		@Override
+		public boolean isArray() {
+			return wrapped.isArray();
+		}
+		@Override
+		public Iterator arrayIterator() {
+			return wrapped.arrayIterator();
+		}
+		@Override
+		public int arrayCount() {
+			return wrapped.arrayCount();
+		}
+		@Override
+		public boolean isObject() {
+			return wrapped.isObject();
+		}
+		@Override
+		public Map getPropertyMap(IFilter filter) {
+			return wrapped.getPropertyMap(filter);
+		}
+	}
 
     public static class DefaultFilter implements IFilter {
         public boolean acceptField(Field field) {
             return true;
         }
-        public boolean acceptProperty(PropertyDescriptor desc) {
-            String pName = desc.getName();
-            if(pName.equals("class")) { // $NON-NLS-1$
+        public boolean acceptProperty(String name, Object property) {
+			if(property instanceof PropertyDescriptor) {
+				if(name.equals("class")) {
                 return false;
             }
             return true;
+        }
+			return true;
         }
     }
 
@@ -205,6 +274,12 @@ public class DumpObject extends TablePrinter {
                 return new MapAdapter(o);
             }
             
+			// XML document
+			if(o instanceof Document) {
+				Node node = (Node)o;
+				return new XmlAdapter(node);
+			}
+
             // Try a Java bean
             if(beans) {
                 try {
@@ -262,7 +337,7 @@ public class DumpObject extends TablePrinter {
         public Map getPropertyMap(IFilter filter) {
             HashMap map = new HashMap();
             for( int i=0; i<desc.length; i++ ) {
-                if(filter!=null && !filter.acceptProperty(desc[i])) {
+				if(filter!=null && !filter.acceptProperty(desc[i].getName(),desc[i])) {
                     continue;
                 }
                 String name = desc[i].getName();
@@ -296,7 +371,7 @@ public class DumpObject extends TablePrinter {
         public Map getPropertyMap(IFilter filter) {
             HashMap map = new HashMap();
             for( int i=0; i<fields.length; i++ ) {
-                if(filter!=null && !filter.acceptField(fields[i])) {
+				if(filter!=null && !filter.acceptProperty(fields[i].getName(),fields[i])) {
                     continue;
                 }
                 String name = fields[i].getName();
@@ -336,6 +411,10 @@ public class DumpObject extends TablePrinter {
                 public void remove() {}
             };
         }
+		@Override
+		public int arrayCount() {
+			return Array.getLength(instance);
+		}
     }
     
     public static class CollectionAdapter extends Adapter {
@@ -349,6 +428,10 @@ public class DumpObject extends TablePrinter {
         public Iterator arrayIterator() {
             return ((Collection)instance).iterator();
         }
+		@Override
+		public int arrayCount() {
+			return ((Collection)instance).size();
+		}
     }
     
     public static class MapAdapter extends Adapter {
@@ -362,9 +445,47 @@ public class DumpObject extends TablePrinter {
         public Iterator arrayIterator() {
             return ((Map)instance).entrySet().iterator();
         }
+		@Override
+		public int arrayCount() {
+			return ((Map)instance).size();
+		}
     }
 
-    private void dump( HashMap map, ArrayList hierarchy, String propertyName, Object v, int depth ) {
+	public static class XmlAdapter extends Adapter {
+		Node instance;
+		public XmlAdapter(Node instance) {
+			this.instance = instance;
+		}
+		@Override
+		public String getTypeAsString() {
+			return "XML Node";
+		}
+		@Override
+		public boolean isValue() {
+			return true;
+		}
+		@Override
+		public String getValue() {
+            try {
+            	return writeToString(instance);
+            } catch(Exception e) {
+                return StringUtil.format("<XML error: {0}>",e.getMessage());
+            }
+		}
+		private String writeToString(Node node) {
+			try {
+				Transformer serializer = TransformerFactory.newInstance().newTransformer();
+				StringWriter writer = new StringWriter(); 
+				serializer.transform(new DOMSource(node), new StreamResult(writer));
+				return writer.toString();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+	}
+
+    private void dump( HashMap map, ArrayList hierarchy, String propertyName, Object v, int depth ) throws IOException {
         Adapter adapter = adapterFactory.createAdapter(v);
         
         // Limit the depth...
@@ -403,7 +524,7 @@ public class DumpObject extends TablePrinter {
             }
             
             if(adapter.isValue()) {
-                String vs = adapter.getValue();
+	            String vs = valueAndType(adapter.getValue(),adapter.getTypeAsString());
                 if( !StringUtil.isEmpty(vs) ) {
                     ps.print(vs);
                 }
@@ -420,7 +541,7 @@ public class DumpObject extends TablePrinter {
             // Display Object's property
             if( adapter.isObject() ) {
                 if(!inHierarchy(hierarchy, v)) {
-                    ps.print(StringUtil.format("{0}\n", v.getClass().getName())); //$NON-NLS-1$
+	                ps.print(StringUtil.format("{0}\n", valueAndType(adapter.getValue(),adapter.getTypeAsString())));
 
                     Map pMap = adapter.getPropertyMap(filter);
                     
@@ -444,7 +565,7 @@ public class DumpObject extends TablePrinter {
             // Display java arrays
             if( adapter.isArray() ) {
                 if(!inHierarchy(hierarchy, v)) {
-                    ps.print(" Array\n"); //$NON-NLS-1$
+	                ps.print(" Array ["+adapter.arrayCount()+"]\n");
                     int i = 0;
                     for( Iterator it=adapter.arrayIterator(); it.hasNext(); i++ ) {
                         Object value = it.next();
@@ -467,6 +588,23 @@ public class DumpObject extends TablePrinter {
         }
         return false;
     }
+
+    private String valueAndType(String value, String typeAsString) {
+    	StringBuilder b = new StringBuilder();
+    	if(StringUtil.isNotEmpty(value)) {
+    		b.append(value);
+    	} else {
+    		b.append("<empty>");
+    	}
+       	if(StringUtil.isNotEmpty(typeAsString) && !typeAsString.equals("java.lang.String")) {
+    		b.append(" (");
+    		b.append(typeAsString);
+    		b.append(")");
+    	}
+
+    	return b.toString();
+    }
+
     public void dump(DataInputStream ios) {
         dump(ios, Integer.MAX_VALUE);
     }
@@ -495,11 +633,11 @@ public class DumpObject extends TablePrinter {
               if (++j == 16) j = 0;
            }
            ps.println("");
+           ps.flush();
+           return;
         } catch(IOException e) {
-           ps.println(e);
+           Platform.getInstance().log(e);
         }
-          ps.flush();
-          return;
       }
     
 }

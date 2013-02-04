@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * © Copyright IBM Corp. 2012-2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -13,8 +13,6 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-
-
 package com.ibm.commons.extension;
 
 import java.io.BufferedReader;
@@ -23,11 +21,14 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
+import org.osgi.framework.Bundle;
 
 import com.ibm.commons.log.CommonsLogger;
 import com.ibm.commons.util.StringUtil;
@@ -170,7 +171,8 @@ public class ExtensionManager {
         }
         // In case of an application class loader, ignores it
         // Note that this is only for a Domino environment and the XPages runtime
-        if(loader instanceof ApplicationClassLoader) {
+        ApplicationClassLoader ac = adaptApplicationClassloader(loader);
+    	if(ac!=null) {
         	loader = loader.getParent();
         }
         list = loadServices(loader,serviceType);
@@ -312,9 +314,10 @@ public class ExtensionManager {
         public void findInitializer(ClassLoader loader, List<Object> initializers, String serviceType) {
         	// Load the global providers, from the platform
             try {
-                // Look if someone implemented an extension point to retrieve the platform
                 IExtensionRegistry reg = org.eclipse.core.runtime.Platform.getExtensionRegistry();
                 if (reg != null) {
+                	// Services defined individually
+                    // Look if someone implemented an extension point to retrieve the platform
                     IConfigurationElement[] elt = reg.getConfigurationElementsFor("com.ibm.commons.Extension"); // $NON-NLS-1$
                     for( int i=0; i<elt.length; i++ ) {
                         if( "service".equalsIgnoreCase(elt[i].getName()) ) { // $NON-NLS-1$
@@ -329,6 +332,21 @@ public class ExtensionManager {
                             }
                         }
                     }
+	            	// Services read from META-INF/services
+	            	//
+            		Set<URL> urls = new HashSet<URL>();
+                    elt = reg.getConfigurationElementsFor("com.ibm.commons.ExtensionBundle");  // $NON-NLS-1$
+                    for( int i=0; i<elt.length; i++ ) {
+                        try {
+                            OSGiExtensionService o = (OSGiExtensionService)elt[i].createExecutableExtension("class");
+                            Bundle bundle = o.getBundle();
+                            if(bundle!=null) {
+                            	findServicesClassLoader(o.getClass().getClassLoader(), urls, initializers, serviceType);
+                            }
+                        } catch(Throwable ex) {
+                            logCouldNotCreateContribution(ex, elt[i], serviceType);
+                        }
+                    }
                 }
             } catch( Throwable t ) {
                 t.printStackTrace();
@@ -336,23 +354,41 @@ public class ExtensionManager {
             
             // Then load the specific providers, from the current class loader
             // Change made for WAS environment
-        	if(loader instanceof ApplicationClassLoader) {
+            ApplicationClassLoader ac = adaptApplicationClassloader(loader);
+        	if(ac!=null) {
         		// Domino
         		super.findInitializer(loader, initializers, serviceType);
         	} else {
         		// WAS
         		if(loader==Thread.currentThread().getContextClassLoader()) {
-        			super.findInitializer(loader, initializers, serviceType);
-        		}
+            	super.findInitializer(loader, initializers, serviceType);
             }
         }
+        }
         Enumeration<URL> getResourcesList(ClassLoader loader, String serviceType) throws IOException {
-        	// In case of a Domino class loader, only return the resources from the class loader
-        	if(loader instanceof ApplicationClassLoader) {
-        		return ((ApplicationClassLoader)loader).findApplicationResources(PREFIX+serviceType);
+        	// In case of a Domino class loader, only return the resources from that class loader
+            ApplicationClassLoader ac = adaptApplicationClassloader(loader);
+        	if(ac!=null) {
+        		return ac.findApplicationResources(PREFIX+serviceType);
         	}
         	// Else, return a enumeration for all of them
         	return loader.getResources(PREFIX+serviceType);
+        }
+    	private void findServicesClassLoader(ClassLoader loader, Set<URL> urls, List<Object> list, String serviceType) throws IOException {
+        	// Look for all the resources in the class path
+            final String PREFIX = "META-INF/services/";
+        	for( Enumeration<URL> e=loader.getResources(PREFIX+serviceType); e.hasMoreElements(); ) {
+        		URL url = e.nextElement();
+        		findServicesClassLoader(list,loader, urls, url, serviceType);
+        	}
+    	}
+    	private void findServicesClassLoader(List<Object> list, ClassLoader loader, Set<URL> urls, URL url, String serviceType) throws IOException {
+    		if(url!=null && (urls==null || !urls.contains(url))) {
+           		parseResource(loader,list,url,serviceType);
+	            if(urls!=null) {
+            		urls.add(url);
+    			}
+    		}
         }
         void logCouldNotCreateContribution(Throwable ex,
                 IConfigurationElement ext, String type) {
@@ -365,4 +401,13 @@ public class ExtensionManager {
             }
         }
     }
+
+    // Helper
+    private static ApplicationClassLoader adaptApplicationClassloader(ClassLoader loader) {
+    	if(loader instanceof ApplicationClassLoader) {
+    		return (ApplicationClassLoader)loader;
+    	}
+    	return null;
+    }
+    
 }

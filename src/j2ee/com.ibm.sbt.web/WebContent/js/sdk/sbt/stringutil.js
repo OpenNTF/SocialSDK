@@ -26,7 +26,7 @@
  * @class stringutil
  * @static
  */
-define([], function() {
+define(['sbt/xml'], function(xml) {
 
 	var _regex = new RegExp("{-?[0-9]+}", "g");
 
@@ -54,6 +54,24 @@ define([], function() {
 					} else {
 						replace = "";
 					}
+					return replace;
+				});
+			}
+			return str;
+		},
+		/**
+		 * Replaces the String with pattern {<<string>>} with argument map provided. Replaces blank if key to be replaces is not found in argsMap.
+		 * 
+		 * @param {String} [str] String to be formatted
+		 * @param {Array} [argsMap] arguments Map		 
+		 * @static
+		 * @method replace
+		 */
+		replace : function(str, argsMap) {
+			if (str && argsMap) {
+				return str.replace(/{(\w*)}/g, function(m, key) {					
+					var replace;
+					replace = argsMap.hasOwnProperty(key) ? xml.encodeXmlEntry(argsMap[key]) : "";
 					return replace;
 				});
 			}

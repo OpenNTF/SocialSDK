@@ -22,8 +22,8 @@
  * 
  */
 define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml','sbt/xpath','sbt/Cache','sbt/Endpoint', 'sbt/base/BaseConstants', 
-        "sbt/validate", 'sbt/log'],
-		function(declare,cfg,lang,con,xml,xpath,Cache,Endpoint, BaseConstants, validate, log) {
+        "sbt/validate", 'sbt/log', 'sbt/stringutil'],
+		function(declare,cfg,lang,con,xml,xpath,Cache,Endpoint, BaseConstants, validate, log, stringutil) {
 	
 	var requests = {};
 	
@@ -38,6 +38,17 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
   		}
 	}
 	
+	function notifyCbNoCache(args, param) {
+
+		if (args) {
+			if (args.load)
+				args.load(param);
+			else if (args.handle)
+				args.handle(param);
+		} else {
+			log.error("Callbacks not defined. Return Value={0}", param);
+		}
+	}
 	/**
 	Base Entity class
 	@class BaseEntity
@@ -54,8 +65,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 		
 		constructor: function(svc,id,args) {
 			this._service = svc;
-			this._id = id;
-			this._service =	null,
+			this._id = id;			
 			this._fields = {};
 			this._data =	null;
 			
@@ -213,6 +223,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 			constructor : "manual"
 		},
 		
+		
 		_endpoint: null,
 		
 		constructor: function(_options) {
@@ -220,21 +231,22 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 			this._endpoint = Endpoint.find(options.endpoint);
 			this.Constants = lang.mixin(lang.mixin({}, BaseConstants), options.Constants);
 			this._con = options.con || con; //NameSpaces
+			
 		},
 		
-		_notifyResponse: function(args, response){
+		_notifyResponse: function(args, response, summary){
 			if (args.load || args.handle) {
 				if (args.handle) {
 					try {
-						args.handle(response);
-					} catch (ex) {
+						args.handle(response, summary);
+					} catch (error) {
 						log.error("Error running handle callback : {0}", error);
 					}
 				}
 				if (args.load) {
 					try {
-						args.load(response);
-					} catch (ex) {
+						args.load(response, summary);
+					} catch (error) {
 						log.error("Error running load callback : {0}", error);
 					}
 				}
@@ -254,14 +266,11 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 		},
 		
 		_load: function (entity,args,getArgs) {
-			if(!(entity._id)){
-				validate.notifyError({code:this.Constants.sbtErrorCodes.badRequest,message:this.Constants.sbtErrorMessages["null_"+entity._entityName+"Id"]}, args);
-				return;
-			}
+			getArgs.methodType = "get";
 			var loadCb = args.load;
 			var handleCb = args.handle;
 			var _self = this;
-			if(requests[entity._id]) {
+			if (getArgs.cachingEnabled && requests[entity._id]) {
 				// If there is a pending request for this id, then we simply add this callback to it
 				if(loadCb){
 					requests[entity._id].push(loadCb);
@@ -270,25 +279,40 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 					requests[entity._id].push(handleCb);
 				}
 			} else {
-				if(loadCb) {
-					requests[entity._id] = [loadCb];
-				}
-				if(handleCb && requests[entity._id]) {
-					requests[entity._id].push(handleCb);
-				}else if (handleCb){
-					requests[entity._id] = [handleCb];
+				if (getArgs.cachingEnabled) {
+					if(loadCb) {
+						requests[entity._id] = [loadCb];
+					}
+					if(handleCb && requests[entity._id]) {
+						requests[entity._id].push(handleCb);
+					}else if (handleCb){
+						requests[entity._id] = [handleCb];
+					}
 				}
 				this._endpoint.xhrGet({
 					serviceUrl:	this._constructServiceUrl(getArgs),
 					handleAs:	"text",
-					content:	getArgs.content,
-					load: function(data) {
-						entity.setData(xml.parse(data));					      		
-						notifyCb(entity._id,entity);
+					content:	_self._constructQueryObj(args,getArgs),
+					load: function(data, ioArgs) {						
+						var xpath_map = _self.Constants["xpath_" + getArgs.entityName];
+						var entry = xpath.selectNodes(xml.parse(data), xpath_map["entry"], _self._con.namespaces);
+						var node = entry[0];
+						entity.setData(node);
+						if(getArgs.onLoad){
+							getArgs.onLoad.apply(_self,[data, ioArgs, entity]);
+						}											      		
+						if (getArgs.cachingEnabled) {
+							notifyCb(entity._id, entity);
+						} else {
+							notifyCbNoCache(args, entity);
+						}					
 					},
 					error: function(error){
+						if(getArgs.onError){
+							getArgs.errorFunction.apply(null,[error]);
+						}else{
 						validate.notifyError(error, args);
-						
+						}
 					}
 				});
 			}
@@ -298,22 +322,32 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 			return entityId = (!(typeof inputEntity == "object")) ? inputEntity._id : inputEntity;
 		},
 		
-		_constructXMLPayload: function(xmlPayload,data){
-			return xmlPayload.replace(/{(\w*)}/g,function(m,key){return data.hasOwnProperty(key)?xml.encodeXmlEntry(data[key]):"";});
+		_constructXMLPayload: function(getArgs){
+			if(getArgs.xmlPayload){
+				return getArgs.xmlPayload;
+			}else{
+				return stringutil.replace(getArgs.xmlPayloadTemplate, getArgs.xmlData);				
+			}
 		},
 		
 		_createRequestObject: function(args, requestArgs){
-			var headers = {"Content-Type" : "application/atom+xml"};
+			
 			var _self = this;
 			if (args.parameters) {
-				requestArgs.urlParams = {};
-				lang.mixin(requestArgs.urlParams, args.parameters);
+				if(!(requestArgs.urlParams)){
+					requestArgs.urlParams = {};
+				}
+				requestArgs.urlParams = lang.mixin(requestArgs.urlParams, args.parameters);
 			}
 			return requestObject = {
 					serviceUrl:_self._constructServiceUrl(requestArgs),	
-					headers:headers,
+					headers:requestArgs.headers,
 					error: function(error){
-						validate.notifyError(error, args);
+						if(requestArgs.onError){
+							requestArgs.errorFunction.apply(null,[error]);
+						}else{
+							validate.notifyError(error, args);
+						}
 					}
 				};
 		},
@@ -330,18 +364,17 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 			@param {Function} [args.handle] 
 		
 		**/
-		createEntity: function (args, postArgs) {
+		_createEntity: function (args, postArgs) {
 			var _self = this;
+			var entity = postArgs.entity;
 			var requestObject = lang.mixin({
-				postData:_self._constructXMLPayload(postArgs.xmlPayloadTemplate, postArgs.xmlData),
+				postData:_self._constructXMLPayload(postArgs),
 				load:function(data, ioArgs){
-					if(args && args.loadIt != false){
-						var newEntityUrl = ioArgs.xhr.getResponseHeader("Location");					
-						var entityId = postArgs.parseId ? postArgs.parseId(newEntityUrl) : newEntityUrl;					
-						var newEntityObj = postArgs.entity.apply(null, [_self, entityId]);
-						_self._load(newEntityObj, args);
+					if(postArgs.onLoad){
+						postArgs.onLoad.apply(_self,[data, ioArgs, entity]);
 					}else{
-						_self._notifyResponse(args);
+					entity.data = xml.parse(data);
+					_self._notifyResponse(args,entity);
 					}
 				},
 			}, _self._createRequestObject(args, postArgs));
@@ -359,18 +392,19 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 			@param {Function} [args.handle] 
 		
 		**/
-		updateEntity: function (args, putArgs) {
-			if(!(putArgs.entity._id)){
-				validate.notifyError({code:this.Constants.sbtErrorCodes.badRequest,message:this.Constants.sbtErrorMessages["null_"+putArgs.entityName+"Id"]}, args);
-				return;
-			}
+		_updateEntity: function (args, putArgs) {
+			
 			var _self = this;
 			var entity = putArgs.entity;
 			var requestObject = lang.mixin({
-				putData:_self._constructXMLPayload(putArgs.xmlPayloadTemplate, putArgs.xmlData),
-				load:function(data){
+				putData:_self._constructXMLPayload(putArgs),
+				load:function(data, ioArgs){
+					if(putArgs.onLoad){
+						putArgs.onLoad.apply(_self,[data, ioArgs, entity]);
+					}else{
 					entity.data = xml.parse(data);
 					_self._notifyResponse(args,entity);
+					}
 				}
 			}, _self._createRequestObject(args, putArgs));
 			this._endpoint.xhrPut(requestObject);
@@ -387,83 +421,94 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 			@param {Function} [args.handle] 
 		
 		**/
-		deleteEntity: function (args, deleteArgs) {
+		_deleteEntity: function (args, deleteArgs) {
 			var _self = this;
 			var requestObject = lang.mixin({
-				load:function(data){
+				load:function(data, ioArgs){
+					if(deleteArgs.onLoad){
+						deleteArgs.onLoad.apply(_self,[data, ioArgs]);
+					}else{
 					_self._notifyResponse(args);
+					}
 				}
 			}, _self._createRequestObject(args, deleteArgs));
 			
 			this._endpoint.xhrDelete(requestObject);
 		},
 		
-		_getAuthType: function(){
-			var authType = "";
-			//SmartCloud doesn't support /oauth in urls until LotusLive is updated to a version >= 4
-			if (this._endpoint.proxyPath == "smartcloud") 
-				return authType;
-			var endpointAuthType = this._endpoint.authType;
-			switch (endpointAuthType) {
-				case "basic":
-					break;
-				case "oauth":
-					authType = "/oauth";
-					break;
-				default:
-					break;
-			}
-			return authType;
-		},
-		
-		_constructServiceUrl: function (requestArgs){
-			var authType = this._getAuthType();
-			var url = this.Constants.entityServiceBaseUrl + authType + this.Constants.serviceEntity[requestArgs.serviceEntity] + this.Constants.entityType[requestArgs.entityType];
+		_constructServiceUrl: function (requestArgs){			
+			var authType = requestArgs.authType;
+			authType = (requestArgs.authType)?requestArgs.authType : "";
 			
-			if (requestArgs.urlParams) {
-				url += "?";
-				var additionalElement = false;
-				for (param in requestArgs.urlParams) {
-					if (additionalElement) {
-						url+= "&";
+			var url = this.Constants.entityServiceBaseUrl + authType + (this.Constants.serviceEntity[requestArgs.serviceEntity]?this.Constants.serviceEntity[requestArgs.serviceEntity]: "") + (this.Constants.entityType[requestArgs.entityType] ? this.Constants.entityType[requestArgs.entityType] : "");
+			
+			if (requestArgs.replaceArgs) {
+				url = stringutil.replace(url, requestArgs.replaceArgs);
+			}
+			
+			if(requestArgs.methodType != "get"){
+				if (requestArgs.urlParams) {
+					url += "?";
+					var additionalElement = false;
+					for (param in requestArgs.urlParams) {
+						if (additionalElement) {
+							url+= "&";
+						}
+						else {
+							additionalElement = true;
+						}// encode url parameters
+						url += param + "=" + encodeURIComponent(requestArgs.urlParams[param]);
 					}
-					else {
-						additionalElement = true;
-					}
-					url += param + requestArgs.urlParams[param];
 				}
 			}
-			
 			return url;
 		},
 		
 		_constructQueryObj: function (args, requestArgs){
 			var params = args.parameters;
-			if(requestArgs.content){				
-				params = lang.mixin(params, requestArgs.content);
+			if(requestArgs.urlParams){				
+				params = lang.mixin(params, requestArgs.urlParams);
 			}
 			return params;
 		},
 		
 		_getEntities: function (args,getArgs) {
 			var _self=this;
+			getArgs.methodType = "get";
 			var xpath_map = _self.Constants["xpath_feed_"+getArgs.entityName];
 			var requestObject = lang.mixin({
-					content:_self._constructQueryObj(args,getArgs),
-					load:function(data){
-						var entities = [];
-						var entry = xpath.selectNodes(xml.parse(data),xpath_map["entry"],_self._con.namespaces);
-						for(var count=0; count < entry.length; count++){
-							var node = entry[count];
-							var entityId = xpath.selectText(node,xpath_map["id"],_self._con.namespaces);
-							entityId = getArgs.parseId ? getArgs.parseId(entityId) : entityId;
-							var entity = getArgs.entity.apply(null, [_self, entityId]);
-							entity.setData(node);
-							entities.push(entity);
-						}
-						_self._notifyResponse(args, entities);
+					content: _self._constructQueryObj(args,getArgs),
+					load:function(data, ioArgs){					
+							
+							var xmlData = xml.parse(data); 
+							var summary = {};
+							summary.totalResults = xpath.selectText(xmlData, xpath_map.totalResults, _self._con.namespaces);
+							summary.startIndex = xpath.selectText(xmlData, xpath_map.startIndex, _self._con.namespaces);
+							summary.itemsPerPage = xpath.selectText(xmlData, xpath_map.itemsPerPage, _self._con.namespaces);
+							var entities = [];
+							var entry = xpath.selectNodes(xmlData,xpath_map["entry"],_self._con.namespaces);
+							for(var count=0; count < entry.length; count++){
+								var entity = null;
+								var entityId = null;
+								if(getArgs.onLoad){
+									getArgs.onLoad.apply(_self,[entry]);
+								}else{
+									var node = entry[count];
+									 entityId = xpath.selectText(node,xpath_map["id"],_self._con.namespaces);
+									//entityId = getArgs.parseId ? getArgs.parseId(entityId) : entityId;
+									entity = getArgs.entity.apply(null, [_self, entityId]);
+									if(!(getArgs.ignoreData)){
+										entity.setData(node);
+									}
+								}
+								entities.push(entity);
+							}
+							_self._notifyResponse(args, entities, summary);
+						
 					}
+					
 				}, _self._createRequestObject(args, getArgs));
+			//requestObject.content =  _self._constructQueryObj(args,getArgs);
 			this._endpoint.xhrGet(requestObject);
 		},
 		

@@ -22,8 +22,8 @@
  * 
  */
 define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml','sbt/xpath','sbt/Cache','sbt/Endpoint', 'sbt/base/BaseConstants', 
-        "sbt/validate", 'sbt/log'],
-		function(declare,cfg,lang,con,xml,xpath,Cache,Endpoint, BaseConstants, validate, log) {
+        "sbt/validate", 'sbt/log', 'sbt/stringutil'],
+		function(declare,cfg,lang,con,xml,xpath,Cache,Endpoint, BaseConstants, validate, log, stringutil) {
 	
 	var requests = {};
 	
@@ -239,14 +239,14 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 				if (args.handle) {
 					try {
 						args.handle(response, summary);
-					} catch (ex) {
+					} catch (error) {
 						log.error("Error running handle callback : {0}", error);
 					}
 				}
 				if (args.load) {
 					try {
 						args.load(response, summary);
-					} catch (ex) {
+					} catch (error) {
 						log.error("Error running load callback : {0}", error);
 					}
 				}
@@ -326,7 +326,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 			if(getArgs.xmlPayload){
 				return getArgs.xmlPayload;
 			}else{
-				return getArgs.xmlPayloadTemplate.replace(/{(\w*)}/g,function(m,key){return getArgs.xmlData.hasOwnProperty(key)?xml.encodeXmlEntry(getArgs.xmlData[key]):"";});
+				return stringutil.replace(getArgs.xmlPayloadTemplate, getArgs.xmlData);				
 			}
 		},
 		
@@ -441,6 +441,10 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 			authType = (requestArgs.authType)?requestArgs.authType : "";
 			
 			var url = this.Constants.entityServiceBaseUrl + authType + (this.Constants.serviceEntity[requestArgs.serviceEntity]?this.Constants.serviceEntity[requestArgs.serviceEntity]: "") + (this.Constants.entityType[requestArgs.entityType] ? this.Constants.entityType[requestArgs.entityType] : "");
+			
+			if (requestArgs.replaceArgs) {
+				url = stringutil.replace(url, requestArgs.replaceArgs);
+			}
 			
 			if(requestArgs.methodType != "get"){
 				if (requestArgs.urlParams) {

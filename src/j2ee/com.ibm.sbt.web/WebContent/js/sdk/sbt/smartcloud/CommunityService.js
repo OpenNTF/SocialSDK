@@ -230,7 +230,8 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 			return this._getOne(args,
 				{entityName: "community", serviceEntity: "community", entityType: "instance",
 					entity: Community,
-					content : { communityUuid : args.id }
+					urlParams : { communityUuid : args.id },
+					headers : {"Content-Type" : "application/atom+xml"}
 				});
 		},
 		
@@ -259,7 +260,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 					"<snx:communityType xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\">{communityType}</snx:communityType>",
 				"</entry>"].join("");
 			var xmlData = { title: community.getTitle(), content: community.getContent(), communityType: "private" };
-			this.createEntity(args,
+			this._createEntity(args,
 					{entityName: "community", serviceEntity: "communities", entityType: "my",
 						entity: Community,
 						parseId: this._parseCommunityId,
@@ -288,7 +289,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 			//this.updateXmlField(community._data, "content", community.getContent());
 			var xmlPayloadTemplate = community.getUpdatePayload();
 			//var xmlData = { title: community.getTitle(), content: community.getContent(), communityType: "private" };
-			this.updateEntity(args,
+			this._updateEntity(args,
 					{entityName: "community", serviceEntity: "community", entityType: "instance",
 						entity: community,
 						xmlPayloadTemplate : xmlPayloadTemplate,
@@ -313,7 +314,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 				log.error("Need to pass community and arguments.");
 			}
 			var communityId = this.getIdFromIdOrObject(inputCommunity);
-			this.deleteEntity(args,{entityName: "community", serviceEntity: "community", entityType: "instance",
+			this._deleteEntity(args,{entityName: "community", serviceEntity: "community", entityType: "instance",
 				urlParams : { communityUuid: communityId }
 			});
 		},
@@ -344,7 +345,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 				 "</entry>"].join("");
 			var xmlData = { userId: inputMember, role: "member" };
 			var communityId = this.getIdFromIdOrObject(inputCommunity);
-			this.createEntity(args,
+			this._createEntity(args,
 					{entityName: "community", serviceEntity: "community", entityType: "members",
 						entity: Member,
 						xmlPayloadTemplate : xmlPayloadTemplate,
@@ -377,7 +378,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 			} else {
 				lang.mixin(params, { userid: memberId });
 			}
-			this.deleteEntity(args,{entityName: "community", serviceEntity: "community", entityType: "instance",
+			this._deleteEntity(args,{entityName: "community", serviceEntity: "community", entityType: "instance",
 				urlParams : params
 			});
 		},
@@ -401,7 +402,8 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 			this._getEntities(args,
 					{entityName: "community", serviceEntity: "communities", entityType: "public",
 						parseId: this._parseCommunityId,
-						entity: Community
+						entity: Community,
+						headers : {"Content-Type" : "application/atom+xml"}
 					});
 		},
 		
@@ -425,7 +427,8 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 			this._getEntities(args,
 					{entityName: "community", serviceEntity: "communities", entityType: "my",
 						parseId: this._parseCommunityId,
-						entity: Community
+						entity: Community,
+						headers : {"Content-Type" : "application/atom+xml"}
 					});
 		},
 		
@@ -450,7 +453,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 					{community: community,
 						entityName: "member", serviceEntity: "community", entityType: "members",
 						entity: Member,
-						content : { communityUuid : community._id }
+						urlParams : { communityUuid : community._id }
 					});
 			
 		},

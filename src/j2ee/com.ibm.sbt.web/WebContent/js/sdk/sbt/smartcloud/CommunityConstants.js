@@ -38,26 +38,24 @@ define([],function() {
 			null_memberId        	:"Null member Id",
 		},
 		xpath_community : {
-			"communityUuid"		:"/a:entry/snx:communityUuid",
-			"title"				:"/a:entry/a:title",
-			"summary"			:"/a:entry/a:summary[@type='text']",
-			"communityUrl"		:"/a:entry/a:link[@rel='self']/@href",
-			"logoUrl"			:"/a:entry/a:link[@rel='http://www.ibm.com/xmlns/prod/sn/logo']/@href",
-			"tags"				:"/a:entry/a:category/@term",
-			"content"			:"/a:entry/a:content[@type='html']"			
+			"entry"				:"/a:entry",
+			"communityUuid"		:"snx:communityUuid",
+			"title"				:"a:title",
+			"summary"			:"a:summary[@type='text']",
+			"communityUrl"		:"a:link[@rel='self']/@href",
+			"logoUrl"			:"a:link[@rel='http://www.ibm.com/xmlns/prod/sn/logo']/@href",
+			"tags"				:"a:category/@term",
+			"content"			:"a:content[@type='html']"			
 		},
 		xpath_feed_community : {
-			"entry"				:"/a:feed/a:entry",
-			"id"				:"a:id",
-			"title"				:"a:title",
+			"entry"				:"/a:feed/a:entry",			
 		},
 		xpath_member : {
-				"name"				:"/a:entry/a:contributor/a:name"
+				"entry"				:"/a:feed/a:entry",
+				"name"				:"a:contributor/a:name"
 		},
 		xpath_feed_member : {
-				"entry"				:"/a:feed/a:entry",
-				"id"				:"a:contributor/snx:userid",
-				"name"				:"a:contributor/a:name"
+				"entry"				:"/a:feed/a:entry"				
 		}
 	};
 });

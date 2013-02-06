@@ -6,6 +6,9 @@
 			<xe:pageTreeNode page="ManageSnippetsByAuthor" label="Snippets By Author" selection="/Manage/SnippetsByAuthor"></xe:pageTreeNode>
 			<xe:pageTreeNode page="ManageSnippetsMine" label="My Snippets" selection="/Manage/SnippetsMine"></xe:pageTreeNode>
 			<xe:separatorTreeNode></xe:separatorTreeNode>
+			<xe:pageTreeNode page="ManageAPIsByCategory" label="APIs By Category" selection="/Manage/APIsByCategory"></xe:pageTreeNode>
+			<xe:pageTreeNode page="ManageAPIsByAuthor" label="APIs By Author" selection="/Manage/APIsByAuthor"></xe:pageTreeNode>
+			<xe:separatorTreeNode></xe:separatorTreeNode>
 			<xe:pageTreeNode page="ManageEnvironments" label="Runtime Environments" selection="/Manage/Environments"></xe:pageTreeNode>
 <!--  			
 			<xe:separatorTreeNode></xe:separatorTreeNode>

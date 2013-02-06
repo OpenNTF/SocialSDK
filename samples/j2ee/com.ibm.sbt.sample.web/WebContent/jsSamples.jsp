@@ -19,8 +19,8 @@
 <%@page import="com.ibm.commons.util.HtmlTextUtil"%>
 <%@page import="com.ibm.commons.runtime.util.ParameterProcessor"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
-<%@page import="com.ibm.sbt.playground.snippets.RootNode"%>
-<%@page import="com.ibm.sbt.playground.snippets.Snippet"%>
+<%@page import="com.ibm.sbt.playground.assets.Node"%>
+<%@page import="com.ibm.sbt.playground.assets.jssnippets.JSSnippet"%>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>SBT Samples</title>
 
@@ -104,7 +104,7 @@ function hideJsSnippetCode() {
 						<!-- Display the current code snippet -->
 						<%
 							String snippetName = request.getParameter("snippet");
-							Snippet snippet = root.loadSnippet(SnippetFactory.getRootFile(application), snippetName);
+							JSSnippet snippet = (JSSnippet)root.loadAsset(SnippetFactory.getRootFile(application), snippetName);
 							String html = null;
 							String js = null;
 							String css = null;
@@ -135,13 +135,13 @@ function hideJsSnippetCode() {
 							 <div class="accordion-inner" id="accordianInner" style="display:none">
 								<%
 								if (StringUtil.isNotEmpty(js)) {
-									String s = "<pre id='jsCodePre' style='height:0px;'><span id='jsCodeSpan'>\n"
+									String s = "<pre id='jsCodePre' style='height:0px;'><span id='jsCodeSpan'>"
 											+ HtmlTextUtil.toHTMLContentString(js, false)
 											+ "</span></pre>\n";
 									out.println(s);
 								}
 								if (StringUtil.isNotEmpty(html)) {
-									String s = "<pre id='jsCodePre' style='height:0px;'><span id='jsCodeSpan'>\n"
+									String s = "<pre id='jsCodePre' style='height:0px;'><span id='jsCodeSpan'>"
 											+ HtmlTextUtil.toHTMLContentString(html, false)
 											+ "</span></pre>\n";
 									out.println(s);

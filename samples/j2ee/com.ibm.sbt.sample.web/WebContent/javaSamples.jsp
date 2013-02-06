@@ -16,17 +16,19 @@
  * permissions and limitations under the License.
  */ -->
  
-<%@page import="demo.DemoRootNode"%>
+<%@page import="com.ibm.sbt.playground.assets.javasnippets.JavaSnippet"%>
+<%@page import="com.ibm.sbt.playground.assets.jssnippets.JSSnippet"%>
+<%@page import="com.ibm.sbt.playground.assets.jssnippets.JSSnippetAssetNode"%>
 <%@page import="com.ibm.commons.util.HtmlTextUtil"%>
 <%@page import="com.ibm.commons.runtime.util.ParameterProcessor"%>
 <%@page import="com.ibm.commons.util.PathUtil"%>
 <%@page import="com.ibm.commons.util.StringUtil"%>
-<%@page import="com.ibm.sbt.playground.snippets.RootNode"%>
-<%@page import="com.ibm.sbt.playground.snippets.Snippet"%>
-<%@page import="demo.DemoSnippetNode"%>
-<%@page import="com.ibm.sbt.playground.snippets.AbstractNode"%>
+<%@page import="com.ibm.sbt.playground.assets.RootNode"%>
+<%@page import="com.ibm.sbt.playground.assets.javasnippets.JavaSnippetAssetNode"%>
+<%@page import="demo.DemoJavaSnippetNode"%>
+<%@page import="com.ibm.sbt.playground.assets.Node"%>
 <%@page import="java.util.List"%>
-<%@page import="com.ibm.sbt.playground.snippets.CategoryNode"%>
+<%@page import="com.ibm.sbt.playground.assets.CategoryNode"%>
 <%@page import="demo.SnippetFactoryForJava"%>
 <%@page import="com.ibm.sbt.services.endpoints.Endpoint"%>
 <%@page import="com.ibm.sbt.services.endpoints.EndpointFactory"%>
@@ -73,14 +75,14 @@ function hideJsSnippetCode() {
     
    	<%
        		String endpointName = request.getParameter("endpoint");
-    		if(endpointName==null) {
-    			endpointName = "connections";
-    		}
-       		Endpoint ep = EndpointFactory.getEndpoint(endpointName);
-       		if(!ep.isAuthenticationValid()) {	// Check, Do we have a valid token for this user
-       			ep.authenticate(true);			// Authenticate
-       	    	return;
-       	    }
+       	    		if(endpointName==null) {
+       	    			endpointName = "connections";
+       	    		}
+       	       		Endpoint ep = EndpointFactory.getEndpoint(endpointName);
+       	       		if(!ep.isAuthenticationValid()) {	// Check, Do we have a valid token for this user
+       	       			ep.authenticate(true);			// Authenticate
+       	       	    	return;
+       	       	    }
        	%>
 
     <div class="navbar navbar-fixed-top">
@@ -107,12 +109,12 @@ function hideJsSnippetCode() {
 				
 	<%
 		
-		String javaSamplePath= request.getParameter("javaSamplePath");
+		String javaSamplePath= request.getParameter("snippet");
 			if(javaSamplePath!=null) {
-				Snippet snippet = root.loadSnippetForJava(SnippetFactoryForJava.getRootFile(application), javaSamplePath);
+				JavaSnippet snippet = (JavaSnippet)root.loadAsset(SnippetFactoryForJava.getRootFile(application), javaSamplePath);
 				String jsp = null;
 				if (snippet != null) {
-					jsp = snippet.getJsp();
+					jsp = snippet.getJspForDisplay();
 					
 					// replace substitution variables
 					if (jsp != null) {
@@ -137,7 +139,7 @@ function hideJsSnippetCode() {
 							 <div class="accordion-inner" id="accordianInner" style="display:none">
 								<%
 								
-									String s = "<pre id='jspCodePre' style='height:0px;'><span id='jspCodeSpan'>\n"
+									String s = "<pre id='jspCodePre' style='height:0px;'><span id='jspCodeSpan'>"
 											+ HtmlTextUtil.toHTMLContentString(jsp, false)
 											+ "</span></pre>\n";
 									out.println(s);
@@ -149,10 +151,10 @@ function hideJsSnippetCode() {
 		             </div>
 				
 	       <%		
-				javaSamplePath = PathUtil.concat("/java", javaSamplePath, '/');
+				String jspPath = snippet.getJspPath();
 		   %>
 		   	
-	      <jsp:include page="<%=javaSamplePath %>" flush="false"/>
+	      <jsp:include page="<%=jspPath%>" flush="false"/>
 		  <% }%>
 		  			</div>
         </div><!--/span-->

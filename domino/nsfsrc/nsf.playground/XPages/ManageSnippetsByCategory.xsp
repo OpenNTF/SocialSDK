@@ -17,7 +17,7 @@
 				useHash="true" partialEvents="true">
 				<xp:this.facets>
 					<xp:panel xp:key="view" id="mainPanel">
-						<xc:ccManageActionBar viewName="AllSnippets"></xc:ccManageActionBar>
+						<xc:ManageSnippetsActionBar viewName="AllSnippets"></xc:ManageSnippetsActionBar>
 						<br />
 						<xe:dataView id="dataView1" var="viewEntry"
 							collapsibleCategory="true" collapsibleRows="true" rows="15"

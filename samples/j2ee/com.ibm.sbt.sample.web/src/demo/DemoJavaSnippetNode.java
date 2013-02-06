@@ -15,32 +15,25 @@
  */
 package demo;
 
-import java.net.URLEncoder;
-
 import javax.servlet.http.HttpServletRequest;
 
 import com.ibm.commons.runtime.util.UrlUtil;
-import com.ibm.sbt.playground.snippets.CategoryNode;
-import com.ibm.sbt.playground.snippets.SnippetNode;
+import com.ibm.sbt.playground.assets.CategoryNode;
+import com.ibm.sbt.playground.assets.javasnippets.JavaSnippetAssetNode;
 
 
 /**
- * Definition of a code snippet.
+ * Definition of a Java code snippet.
  */
-public class DemoSnippetNode extends SnippetNode {
+public class DemoJavaSnippetNode extends JavaSnippetAssetNode {
 
-	public DemoSnippetNode(CategoryNode parent, String name) {
+	public DemoJavaSnippetNode(CategoryNode parent, String name) {
 		super(parent,name);
 	}
 
-	public String getUrl(HttpServletRequest request) {
-		String unid = getUnid();
-		return UrlUtil.getRequestUrl(request,false)+"?snippet="+URLEncoder.encode(unid);
-	}
-	
 	// url for JSP's
 	public String getJSPUrl(HttpServletRequest request) {
-		String pathToJSPSample = getPath()+".jsp";	
-		return UrlUtil.getRequestUrl(request,false)+"?javaSamplePath="+pathToJSPSample;
+		String pathToJSPSample = getUnid(); //getPath()+".jsp";	
+		return UrlUtil.getRequestUrl(request,false)+"?snippet="+pathToJSPSample;
 	}
 }

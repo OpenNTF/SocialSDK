@@ -16,15 +16,16 @@
  * permissions and limitations under the License.
  */ -->
  
+<%@page import="com.ibm.sbt.playground.assets.AssetNode"%>
 <%@page import="com.ibm.commons.runtime.util.UrlUtil"%>
 <%@page import="com.ibm.commons.util.PathUtil"%>
 <%@page import="com.ibm.commons.util.StringUtil"%>
-<%@page import="com.ibm.sbt.playground.snippets.RootNode"%>
-<%@page import="com.ibm.sbt.playground.snippets.Snippet"%>
-<%@page import="demo.DemoSnippetNode"%>
-<%@page import="com.ibm.sbt.playground.snippets.AbstractNode"%>
+<%@page import="com.ibm.sbt.playground.assets.RootNode"%>
+<%@page import="com.ibm.sbt.playground.assets.jssnippets.JSSnippet"%>
+<%@page import="demo.DemoJavaSnippetNode"%>
+<%@page import="com.ibm.sbt.playground.assets.Node"%>
 <%@page import="java.util.List"%>
-<%@page import="com.ibm.sbt.playground.snippets.CategoryNode"%>
+<%@page import="com.ibm.sbt.playground.assets.CategoryNode"%>
 <%@page import="demo.SnippetFactoryForJava"%>
 <%@page import="com.ibm.sbt.services.endpoints.Endpoint"%>
 <%@page import="com.ibm.sbt.services.endpoints.EndpointFactory"%>
@@ -38,36 +39,47 @@
 	RootNode root = SnippetFactoryForJava.getSnippets(application);
 %>
 
-<% if(true) { %>
+<%
+	if(true) {
+%>
 
 <!-- REGULAR NAVIGATOR IMPLEMENTATION -->
 
           <div class="well sidebar-nav">
 			<ul class="nav nav-list">
 								<%
-									List<AbstractNode> allSnippets = root.getAllChildrenFlat();
-									for(int i=0; i<allSnippets.size(); i++) {
-										AbstractNode node = allSnippets.get(i);
+									List<Node> allSnippets = root.getAllChildrenFlat();
+															for(int i=0; i<allSnippets.size(); i++) {
+																Node node = allSnippets.get(i);
 								%>
-									<% if(node.isCategory()) { %>
-											<li class="nav-header" style='margin-left: <%= ((node.getLevel()-1)*2)-1%>em'><%=node.getName()%></li>
-									<% } else if(node.isSnippet()) {
+									<%
+										if(node.isCategory()) {
+									%>
+											<li class="nav-header" style='margin-left: <%=((node.getLevel()-1)*2)-1%>em'><%=node.getName()%></li>
+									<%
+										} else if(node.isAsset()) {
+									%>
+											 <%
+											 	String snippetPath = ((DemoJavaSnippetNode)node).getPath();
+											 										if (snippetPath.indexOf("Smartcloud")>0) {
+											 											endpointName = "smartcloud";
+											 										} else {
+											 											endpointName = "connections";
+											 										}
 											 %>
 											 <%
-										    	String snippetPath = ((DemoSnippetNode)node).getPath();
-												if (snippetPath.indexOf("Smartcloud")>0) {
-													endpointName = "smartcloud";
-												} else {
-													endpointName = "connections";
-												}
-									 		%>
-											 <%if((((DemoSnippetNode)node).getPath()+".jsp").equals(request.getParameter("javaSamplePath"))){ %>
-													<li class = "active" style='margin-left: <%= (node.getLevel()-1)*2%>em'> 
-											 <% }else{ %>	 
-													 <li style='margin-left: <%= (node.getLevel()-1)*2%>em'>
-											    <% } %>
+											 	if((((DemoJavaSnippetNode)node).getPath()+".jsp").equals(request.getParameter("snippet"))){
+											 %>
+													<li class = "active" style='margin-left: <%=(node.getLevel()-1)*2%>em'> 
+											 <%
+ 											 	}else{
+ 											 %>	 
+													 <li style='margin-left: <%=(node.getLevel()-1)*2%>em'>
+											    <%
+											    	}
+											    %>
 											    
-														<a href="<%=((DemoSnippetNode)node).getJSPUrl(request)%>&endpoint=<%=endpointName%>">
+														<a href="<%=((DemoJavaSnippetNode)node).getJSPUrl(request)%>&endpoint=<%=endpointName%>">
 															<%=node.getName()%>
 														</a>
 													</li>
@@ -164,7 +176,7 @@ function treeExpandId(tree,id) {
 							navTree.onClick = function(item){
 								if(item.url) {
 									var baseUrl = '<%=UrlUtil.getRequestUrl(request,false)%>';
-									window.location.href = baseUrl+"?javaSamplePath="+item.jspUrl+".jsp";
+									window.location.href = baseUrl+"?snippet="+item.jspUrl+".jsp";
 								}
 							};
 							navTree.startup();

@@ -1,0 +1,99 @@
+[
+{
+"getDatabases":
+{
+  "component":"Domino data service",
+  "description":"Gets a list of the databases on a server",
+  "auth":"basic",
+  "http_method":"get",
+  "host_property_name":"dataServiceHost",
+  "uri":"/api/data?{parameters}",
+  "parameters":"{parameters}",
+  "doc_url":"http://www-10.lotus.com/ldd/ddwiki.nsf/dx/Database_collection_GET_dds10"
+}  
+},
+
+{
+"getViewsAndFolders":
+{
+  "component":"Domino data service",
+  "description":"Gets a list of the views and folders in a database",
+  "auth":"basic",
+  "http_method":"get",
+  "host_property_name":"dataServiceHost",
+  "uri":"/XPagesExt.nsf/api/data/collections?{parameters}",
+  "parameters":"{parameters}",
+  "doc_url":"http://www-10.lotus.com/ldd/ddwiki.nsf/dx/Viewfolder_collection_GET_dds10"
+}  
+},
+
+{
+"getViewFolderDesign":
+{
+  "component":"Domino data service",
+  "description":"Gets the design for a view (or folder)",
+  "auth":"basic",
+  "http_method":"get",
+  "host_property_name":"dataServiceHost",
+  "uri":"/XPagesExt.nsf/api/data/collections/name/{view-or-folder-name}/design",
+  "doc_url":"http://www-10.lotus.com/ldd/ddwiki.nsf/dx/Viewfolder_design_GET_dds10"
+}  
+},
+
+{
+"getViewFolderEntries":
+{
+  "component":"Domino data service",
+  "description":"Gets a list of entries in a view (or folder)",
+  "auth":"basic",
+  "http_method":"get",
+  "host_property_name":"dataServiceHost",
+  "uri":"/XPagesExt.nsf/api/data/collections/name/{view-or-folder-name}?{parameters}",
+  "parameters":"{parameters}",
+  "doc_url":"http://www-10.lotus.com/ldd/ddwiki.nsf/dx/Viewfolder_entries_GET_dds10"
+}  
+},
+
+{
+"getDocument":
+{
+  "component":"Domino data service",
+  "description":"Gets a single document",
+  "auth":"basic",
+  "http_method":"get",
+  "host_property_name":"dataServiceHost",
+  "uri":"/XPagesExt.nsf/api/data/documents/unid/{document-unid}?{parameters}",
+  "parameters":"{parameters}",
+  "doc_url":"http://www-10.lotus.com/ldd/ddwiki.nsf/dx/Document_GET_dds10"
+}  
+},
+
+{
+"createDocument":
+{
+  "component":"Domino data service",
+  "description":"Creates a new document",
+  "auth":"basic",
+  "http_method":"post",
+  "host_property_name":"dataServiceHost",
+  "uri":"/XPagesExt.nsf/api/data/documents?form={form_name}&computewithform=true",
+  "parameters":"{parameters}",
+  "post_string":"{post_string}",
+  "post_content_type":"application/json",
+  "doc_url":"http://www-10.lotus.com/ldd/ddwiki.nsf/dx/Document_Collection_POST_dds10"
+}  
+},
+
+{
+"deleteDocument":
+{
+  "component":"Domino data service",
+  "description":"Deletes a document",
+  "auth":"basic",
+  "http_method":"delete",
+  "host_property_name":"dataServiceHost",
+  "uri":"/XPagesExt.nsf/api/data/documents/unid/{document-unid}",
+  "doc_url":"http://www-10.lotus.com/ldd/ddwiki.nsf/dx/Document_DELETE_dds10"
+}
+}
+]

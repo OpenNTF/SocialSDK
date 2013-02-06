@@ -69,4 +69,4 @@ Export-Package: org.apache.commons.codec,
  org.apache.james.mime4j.parser,
  org.apache.james.mime4j.storage,
  org.apache.james.mime4j.util
-Require-Bundle: com.ibm.xsp.core
+Require-Bundle: com.ibm.sbt.core

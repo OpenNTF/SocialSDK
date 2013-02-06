@@ -22,17 +22,16 @@
 <%@page import="com.ibm.commons.runtime.util.UrlUtil"%>
 <%@page import="com.ibm.commons.runtime.util.ParameterProcessor"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
-<%@page import="com.ibm.sbt.playground.snippets.RootNode"%>
-<%@page import="com.ibm.sbt.playground.snippets.Snippet"%>
-<%@page import="demo.DemoSnippetNode"%>
-<%@page import="com.ibm.sbt.playground.snippets.AbstractNode"%>
+<%@page import="com.ibm.sbt.playground.assets.RootNode"%>
+<%@page import="com.ibm.sbt.playground.assets.jssnippets.JSSnippet"%>
+<%@page import="com.ibm.sbt.playground.assets.Node"%>
 <%@page import="java.util.List"%>
-<%@page import="com.ibm.sbt.playground.snippets.CategoryNode"%>
+<%@page import="com.ibm.sbt.playground.assets.CategoryNode"%>
 <%@page import="demo.SnippetFactory"%>
 <%
 RootNode rootNode = SnippetFactory.getSnippets(application);
 String snippetName = request.getParameter("snippet");
-Snippet snippet = rootNode.loadSnippet(SnippetFactory.getRootFile(application), snippetName);
+JSSnippet snippet = (JSSnippet)rootNode.loadAssert(SnippetFactory.getRootFile(application), snippetName);
 String[] labels = snippet.getLabels();
 String name = (labels != null && labels.length > 0) ? labels[0] : snippetName;
 String html = null;

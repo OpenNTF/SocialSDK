@@ -16,31 +16,33 @@
  * permissions and limitations under the License.
  */ -->
  
+<%@page import="demo.DemoJSSnippetNode"%>
 <%@page import="com.ibm.commons.runtime.util.UrlUtil"%>
-<%@page import="demo.DemoRootNode"%>
-<%@page import="com.ibm.sbt.playground.snippets.AbstractNode"%>
-<%@page import="com.ibm.sbt.playground.snippets.RootNode"%>
+<%@page import="com.ibm.sbt.playground.assets.Node"%>
+<%@page import="com.ibm.sbt.playground.assets.RootNode"%>
 <%@page import="java.util.List"%>
-<%@page import="demo.DemoSnippetNode"%>
+<%@page import="demo.DemoJavaSnippetNode"%>
 <%@page import="com.ibm.commons.util.StringUtil"%>
 <%@page import="com.ibm.commons.runtime.util.ParameterProcessor"%>
 <%@page import="demo.SnippetFactory"%>
 <%@page import="com.ibm.sbt.playground.snippets.Snippet"%>
 
 <%
-	DemoRootNode root = SnippetFactory.getSnippets(application);
+	RootNode root = SnippetFactory.getSnippets(application);
 %>
 
-<% if(true) { %>
+<%
+	if(true) {
+%>
 
 <!-- REGULAR NAVIGATOR IMPLEMENTATION -->
 
 	<div class="well sidebar-nav">
 		<ul class="nav nav-list">
 			<%
-				List<AbstractNode> allSnippets = root.getAllChildrenFlat();
-				for (int i = 0; i < allSnippets.size(); i++) {
-					AbstractNode node = allSnippets.get(i);
+				List<Node> allSnippets = root.getAllChildrenFlat();
+					for (int i = 0; i < allSnippets.size(); i++) {
+						Node node = allSnippets.get(i);
 			%>
 
 			<%
@@ -50,7 +52,7 @@
 				style='margin-left: <%=((node.getLevel() - 1) * 2) - 1%>em'><%=node.getName()%>
 			</li>
 			<%
-				} else if (node.isSnippet()) {
+				} else if (node.isAsset()) {
 			%>
 			<%
 				if (node.getUnid().equals(request.getParameter("snippet"))) {
@@ -64,7 +66,7 @@
 			<li style='margin-left: <%=(node.getLevel() - 1) * 2%>em'>
 				<%
 					}
-				%> <a href="<%=((DemoSnippetNode) node).getUrl(request)%>"> <%=node.getName()%>
+				%> <a href="<%=((DemoJSSnippetNode) node).getUrl(request)%>"> <%=node.getName()%>
 			</a>
 			</li>
 			<%

@@ -19,29 +19,28 @@ import java.io.IOException;
 
 import javax.servlet.ServletContext;
 
-import com.ibm.sbt.playground.snippets.AbstractImportExport;
-import com.ibm.sbt.playground.snippets.AbstractImportExport.NodeFactory;
-import com.ibm.sbt.playground.snippets.CategoryNode;
-import com.ibm.sbt.playground.snippets.Importer;
-import com.ibm.sbt.playground.snippets.SnippetNode;
-import com.ibm.sbt.playground.vfs.FileVFS;
+import com.ibm.sbt.playground.assets.AssetBrowser;
+import com.ibm.sbt.playground.assets.CategoryNode;
+import com.ibm.sbt.playground.assets.RootNode;
+import com.ibm.sbt.playground.assets.jssnippets.JSSnippetAssetNode;
+import com.ibm.sbt.playground.assets.jssnippets.JSSnippetNodeFactory;
 import com.ibm.sbt.playground.vfs.ServletVFS;
 import com.ibm.sbt.playground.vfs.VFSFile;
 
 
 /**
- * Definition of a code snippet.
+ * Definition of a JS code snippet factory.
  */
-public class SnippetFactory {
+public class SnippetFactory extends JSSnippetNodeFactory {
 
 	//private static RootNode root = null;
-	public static DemoRootNode getSnippets(ServletContext context) {
-		DemoRootNode root = null;
+	public static RootNode getSnippets(ServletContext context) {
+		RootNode root = null;
 		if(root==null) {
 			try {
-				root = readSnippets(context);
+				root = readAssets(context);
 			} catch(IOException ex) {
-				root = new DemoRootNode();
+				root = new RootNode();
 			}
 		}
 		return root;
@@ -51,20 +50,14 @@ public class SnippetFactory {
 		return vfs.getRoot();
 	}
 	
-	private static DemoRootNode readSnippets(ServletContext context) throws IOException {
+	private static RootNode readAssets(ServletContext context) throws IOException {
 		VFSFile file = getRootFile(context);
-		NodeFactory factory = new AbstractImportExport.DefaultNodeFactory() {
-			@Override
-			public SnippetNode createSnippetNode(CategoryNode parent, String name) {
-				return new DemoSnippetNode(parent, name);
-			}
-			@Override
-			public CategoryNode createCategoryNode(CategoryNode parent, String name) {
-				return new DemoSnippetCategory(parent, name);
-			}
-			
-		};
-		Importer imp = new Importer(file,factory,Importer.HTMLJS_EXTENSIONS);
-		return (DemoRootNode)imp.readSnippets(new DemoRootNode(),null);
+		AssetBrowser imp = new AssetBrowser(file,new SnippetFactory());
+		return (RootNode)imp.readAssets(new RootNode(),null);
+	}
+	
+	@Override
+	public JSSnippetAssetNode createAssetNode(CategoryNode parent, String name) {
+		return new DemoJSSnippetNode(parent, name);
 	}
 }

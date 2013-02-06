@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="85257AA80077A28B" version="9.0" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="1f2" sequence="3" unid="3BC36B9E51D7D52285257AA8006AA4D2">
+<noteinfo noteid="1f2" sequence="9" unid="3BC36B9E51D7D52285257AA8006AA4D2">
 <created><datetime dst="true">20121031T152450,10-04</datetime></created>
-<modified><datetime>20121105T124542,57-05</datetime></modified>
-<revised><datetime>20121105T124542,56-05</datetime></revised>
-<lastaccessed><datetime>20121105T124542,57-05</datetime></lastaccessed>
+<modified><datetime>20130123T154418,33-05</datetime></modified>
+<revised><datetime>20130123T154418,32-05</datetime></revised>
+<lastaccessed><datetime>20130123T154418,33-05</datetime></lastaccessed>
 <addedtofile><datetime>20121104T143452,39-05</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name><name>CN=sbaadmin/O=renovations</name><name>CN=Philippe Riand/OU=Westford/O=IBM</name></updatedby>
+<updatedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></updatedby>
 <wassignedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></wassignedby>
 <item name="$TITLE"><text>home_section_closed_hover.png</text></item>
 <item name="$Flags"><text>D34CiQ</text></item>
@@ -13,9 +13,8 @@
 <item name="$ImagesWide" sign="true"><number>1</number></item>
 <item name="$ImagesHigh" sign="true"><number>1</number></item>
 <item name="$ImagesColorize" sign="true"><number>0</number></item>
-
-
-<item name="$MimeType" sign="true"><text>image/png</text></item>
 <item name="$FileModDT" sign="true"><datetime dst="true">20120423T130320,00-04</datetime></item>
 <item name="$ImageNames" sign="true"><text>home_section_closed_hover.png</text></item>
-<item name="$DesignerVersion"><text>8.5.4</text></item></note>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+</note>

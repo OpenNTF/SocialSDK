@@ -15,15 +15,26 @@
  */
 package demo;
 
-import com.ibm.sbt.playground.snippets.CategoryNode;
+import java.net.URLEncoder;
+
+import javax.servlet.http.HttpServletRequest;
+
+import com.ibm.commons.runtime.util.UrlUtil;
+import com.ibm.sbt.playground.assets.CategoryNode;
+import com.ibm.sbt.playground.assets.jssnippets.JSSnippetAssetNode;
 
 
 /**
- * Definition of a code snippet.
+ * Definition of a JavaScript code snippet.
  */
-public class DemoSnippetCategory extends CategoryNode {
+public class DemoJSSnippetNode extends JSSnippetAssetNode {
 
-	public DemoSnippetCategory(CategoryNode parent, String name) {
+	public DemoJSSnippetNode(CategoryNode parent, String name) {
 		super(parent,name);
+	}
+
+	public String getUrl(HttpServletRequest request) {
+		String unid = getUnid();
+		return UrlUtil.getRequestUrl(request,false)+"?snippet="+URLEncoder.encode(unid);
 	}
 }

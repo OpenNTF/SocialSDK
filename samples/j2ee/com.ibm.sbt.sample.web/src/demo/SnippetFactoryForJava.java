@@ -19,27 +19,27 @@ import java.io.IOException;
 
 import javax.servlet.ServletContext;
 
-import com.ibm.sbt.playground.snippets.AbstractImportExport;
-import com.ibm.sbt.playground.snippets.AbstractImportExport.NodeFactory;
-import com.ibm.sbt.playground.snippets.CategoryNode;
-import com.ibm.sbt.playground.snippets.Importer;
-import com.ibm.sbt.playground.snippets.SnippetNode;
+import com.ibm.sbt.playground.assets.AssetBrowser;
+import com.ibm.sbt.playground.assets.CategoryNode;
+import com.ibm.sbt.playground.assets.RootNode;
+import com.ibm.sbt.playground.assets.javasnippets.JavaSnippetAssetNode;
+import com.ibm.sbt.playground.assets.javasnippets.JavaSnippetNodeFactory;
 import com.ibm.sbt.playground.vfs.ServletVFS;
 import com.ibm.sbt.playground.vfs.VFSFile;
 
 
 /**
- * Definition of a code snippet.
+ * Definition of a Java code snippet factory.
  */
-public class SnippetFactoryForJava {
+public class SnippetFactoryForJava extends JavaSnippetNodeFactory {
 
-	private static DemoRootNode root = null;
-	public static DemoRootNode getSnippets(ServletContext context) {
+	private static RootNode root = null;
+	public static RootNode getSnippets(ServletContext context) {
 		if(root==null) {
 			try {
-				root = readSnippets(context);
+				root = readAssets(context);
 			} catch(IOException ex) {
-				root = new DemoRootNode();
+				root = new RootNode();
 			}
 		}
 		return root;
@@ -49,20 +49,14 @@ public class SnippetFactoryForJava {
 		return vfs.getRoot();
 	}
 
-	private static DemoRootNode readSnippets(ServletContext context) throws IOException {
+	private static RootNode readAssets(ServletContext context) throws IOException {
 		VFSFile file = getRootFile(context);
-		NodeFactory factory = new AbstractImportExport.DefaultNodeFactory() {
-			@Override
-			public SnippetNode createSnippetNode(CategoryNode parent, String name) {
-				return new DemoSnippetNode(parent, name);
-			}
-			@Override
-			public CategoryNode createCategoryNode(CategoryNode parent, String name) {
-				return new DemoSnippetCategory(parent, name);
-			}
-			
-		};
-		Importer imp = new Importer(file,factory,Importer.JSP_EXTENSIONS);
-		return (DemoRootNode)imp.readSnippets(new DemoRootNode(),null);
+		AssetBrowser imp = new AssetBrowser(file,new SnippetFactoryForJava());
+		return (RootNode)imp.readAssets(new RootNode(),null);
+	}
+
+	@Override
+	public JavaSnippetAssetNode createAssetNode(CategoryNode parent, String name) {
+		return new DemoJavaSnippetNode(parent, name);
 	}
 }

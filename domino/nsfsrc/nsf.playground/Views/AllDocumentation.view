@@ -1,15 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
 <note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='85257AA80077A28B'>
-<noteinfo noteid='1ba' unid='F78F3944007228CA85257A6300635ECF' sequence='18'>
+<noteinfo noteid='1ba' unid='F78F3944007228CA85257A6300635ECF' sequence='22'>
 <created><datetime dst='true'>20120823T140523,35-04</datetime></created>
-<modified><datetime>20121105T124541,75-05</datetime></modified>
-<revised><datetime>20121105T124541,74-05</datetime></revised>
-<lastaccessed><datetime>20121105T125039,12-05</datetime></lastaccessed>
+<modified><datetime>20130123T154417,81-05</datetime></modified>
+<revised><datetime>20130123T154417,80-05</datetime></revised>
+<lastaccessed><datetime>20130125T020040,18-05</datetime></lastaccessed>
 <addedtofile><datetime>20121104T143452,06-05</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=sbaadmin/O=renovations</name><name>CN=Philippe Riand/OU=Westford/O=IBM</name><name
->CN=sbaadmin/O=renovations</name><name>CN=Philippe Riand/OU=Westford/O=IBM</name><name
->CN=sbaadmin/O=renovations</name><name>CN=Philippe Riand/OU=Westford/O=IBM</name><name
->CN=sbaadmin/O=renovations</name><name>CN=Philippe Riand/OU=Westford/O=IBM</name></updatedby>
+<updatedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></updatedby>
 <wassignedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></wassignedby>
 <item name='$FormulaClass' sign='true'><text>1</text></item>
 <item name='$TITLE' sign='true'><text>AllDocumentation</text></item>

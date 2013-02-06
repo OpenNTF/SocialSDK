@@ -132,6 +132,9 @@ document1.replaceItemValue("Source","file")}]]></xp:this.postNewDocument>
 						<xp:selectItem itemLabel="HTML/JavaScript Code Snippets"
 							itemValue="html">
 						</xp:selectItem>
+						<xp:selectItem itemLabel="API Description"
+							itemValue="html">
+						</xp:selectItem>
 					</xp:comboBox>
 				</xe:formRow>
 				<xe:formRow id="formRow4" label="Source Name:">

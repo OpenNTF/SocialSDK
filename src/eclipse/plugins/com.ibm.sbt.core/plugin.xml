@@ -5,9 +5,7 @@
          <service type="com.ibm.sbt.jslibrary" class="com.ibm.sbt.jslibrary.servlet.DojoLibrary" />
    	</extension>
 
-<!--
    	<extension point="com.ibm.commons.Extension">
          <service type="com.ibm.sbt.jslibrary" class="com.ibm.sbt.jslibrary.servlet.JQueryLibrary" />
    	</extension>
--->
 </plugin>

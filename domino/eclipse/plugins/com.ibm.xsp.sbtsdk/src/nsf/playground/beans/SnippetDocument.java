@@ -13,11 +13,11 @@ import lotus.domino.ViewEntryCollection;
 import lotus.domino.ViewNavigator;
 
 import com.ibm.commons.util.StringUtil;
-import com.ibm.sbt.playground.snippets.AbstractNode;
-import com.ibm.sbt.playground.snippets.CategoryNode;
-import com.ibm.sbt.playground.snippets.RootNode;
-import com.ibm.sbt.playground.snippets.SnippetNode;
-import com.ibm.sbt.playground.snippets.dojo.JsonTreeRenderer;
+import com.ibm.sbt.playground.assets.CategoryNode;
+import com.ibm.sbt.playground.assets.Node;
+import com.ibm.sbt.playground.assets.RootNode;
+import com.ibm.sbt.playground.assets.jssnippets.JSSnippetAssetNode;
+import com.ibm.sbt.playground.dojo.JsonTreeRenderer;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.ibm.xsp.model.domino.wrapped.DominoDocument;
 
@@ -32,7 +32,7 @@ public class SnippetDocument {
 		// Create the encoded ID for the snippet
 		String category = doc.getItemValueString("Category");
 		String name = doc.getItemValueString("Name");
-		doc.replaceItemValue("Id",AbstractNode.encodeSnippet(category,name));
+		doc.replaceItemValue("Id",Node.encodeSnippet(category,name));
 		
 		return true;
 	}
@@ -63,7 +63,7 @@ public class SnippetDocument {
 					String name = (String)values.get(1);
 					String jspUrl = (String)values.get(2);
 					CategoryNode c = findCategory(root, cat);
-					SnippetNode snippet = new SnippetNode(c,name,cat,unid,jspUrl);
+					JSSnippetAssetNode snippet = new JSSnippetAssetNode(c,name,cat,unid,jspUrl);
 					c.getChildren().add(snippet);
 				}
 			} else { 
@@ -77,7 +77,7 @@ public class SnippetDocument {
 					String name = (String)values.get(1);
 					String jspUrl = (String)values.get(2);
 					CategoryNode c = findCategory(root, cat);
-					SnippetNode snippet = new SnippetNode(c,name,cat,unid,findUniqueUrl(c,unid,jspUrl));
+					JSSnippetAssetNode snippet = new JSSnippetAssetNode(c,name,cat,unid,findUniqueUrl(c,unid,jspUrl));
 					c.getChildren().add(snippet);
 				}
 			}
@@ -87,7 +87,7 @@ public class SnippetDocument {
 		}
 	}
 	private String findUniqueUrl(CategoryNode cat, String unid, String jspUrl) {
-		List<AbstractNode> children = cat.getChildren();
+		List<Node> children = cat.getChildren();
 		int childrenCount = children.size();
 		for(int i=0; i<childrenCount; i++) {
 			if(StringUtil.equals(children.get(i).getJspUrl(),jspUrl)) {
@@ -101,10 +101,10 @@ public class SnippetDocument {
 		return findCategory(node, cats, 0);
 	}
 	private CategoryNode findCategory(CategoryNode parent, String[] cats, int level) {
-		List<AbstractNode> children = parent.getChildren();
+		List<Node> children = parent.getChildren();
 		CategoryNode found = null;
 		for(int i=0; i<children.size(); i++) {
-			AbstractNode c = children.get(i);
+			Node c = children.get(i);
 			if(c instanceof CategoryNode) {
 				if(StringUtil.equals(cats[level], c.getName())) {
 					found = (CategoryNode)c;

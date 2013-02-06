@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="85257AA80077A28B" version="9.0" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="36a" sequence="1" unid="79036818D81E71D785257AC3005B06AB">
+<noteinfo noteid="36a" sequence="7" unid="79036818D81E71D785257AC3005B06AB">
 <created><datetime>20121127T113414,83-05</datetime></created>
-<modified><datetime>20121127T113414,85-05</datetime></modified>
-<revised><datetime>20121127T113414,84-05</datetime></revised>
-<lastaccessed><datetime>20121127T113414,85-05</datetime></lastaccessed>
+<modified><datetime>20130123T154418,63-05</datetime></modified>
+<revised><datetime>20130123T154418,62-05</datetime></revised>
+<lastaccessed><datetime>20130123T154418,63-05</datetime></lastaccessed>
 <addedtofile><datetime>20121127T113414,85-05</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></updatedby>
 <wassignedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></wassignedby>
@@ -13,9 +13,8 @@
 <item name="$ImagesWide" sign="true"><number>1</number></item>
 <item name="$ImagesHigh" sign="true"><number>1</number></item>
 <item name="$ImagesColorize" sign="true"><number>0</number></item>
-
-
-<item name="$MimeType" sign="true"><text>image/png</text></item>
 <item name="$FileModDT" sign="true"><datetime>20121127T113352,89-05</datetime></item>
 <item name="$ImageNames" sign="true"><text>helpicon.png</text></item>
-<item name="$DesignerVersion"><text>8.5.4</text></item></note>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+</note>

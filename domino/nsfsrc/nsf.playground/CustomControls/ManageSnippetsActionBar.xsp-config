@@ -5,9 +5,9 @@
     <default-prefix>xc</default-prefix>
   </faces-config-extension>
   <composite-component>
-    <component-type>ccManageActionBar</component-type>
-    <composite-name>ccManageActionBar</composite-name>
-    <composite-file>/ccManageActionBar.xsp</composite-file>
+    <component-type>ManageSnippetsActionBar</component-type>
+    <composite-name>ManageSnippetsActionBar</composite-name>
+    <composite-file>/ManageSnippetsActionBar.xsp</composite-file>
     <composite-extension>
       <designer-extension>
         <in-palette>true</in-palette>

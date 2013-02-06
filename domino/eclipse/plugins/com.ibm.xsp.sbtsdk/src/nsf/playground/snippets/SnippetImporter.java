@@ -15,12 +15,13 @@ import nsf.playground.jobs.AsyncAction;
 
 import com.ibm.commons.Platform;
 import com.ibm.commons.util.StringUtil;
-import com.ibm.sbt.playground.snippets.AbstractNode;
-import com.ibm.sbt.playground.snippets.CategoryNode;
-import com.ibm.sbt.playground.snippets.Importer;
-import com.ibm.sbt.playground.snippets.RootNode;
-import com.ibm.sbt.playground.snippets.Snippet;
-import com.ibm.sbt.playground.snippets.SnippetNode;
+import com.ibm.sbt.playground.assets.AssetBrowser;
+import com.ibm.sbt.playground.assets.CategoryNode;
+import com.ibm.sbt.playground.assets.Node;
+import com.ibm.sbt.playground.assets.RootNode;
+import com.ibm.sbt.playground.assets.jssnippets.JSSnippet;
+import com.ibm.sbt.playground.assets.jssnippets.JSSnippetAssetNode;
+import com.ibm.sbt.playground.assets.jssnippets.JSSnippetNodeFactory;
 import com.ibm.sbt.playground.vfs.FileVFS;
 import com.ibm.sbt.playground.vfs.GitVFS;
 import com.ibm.sbt.playground.vfs.VFS;
@@ -48,7 +49,7 @@ public class SnippetImporter {
 	private Source loadSource(String type, String srcName) throws Exception {
 		View v = db.getView("AllImportSourcesByType");
 		try {
-			Vector keys = new Vector();
+			Vector<Object> keys = new Vector<Object>();
 			keys.add(type);
 			keys.add(srcName);
 			Document doc = v.getDocumentByKey(keys);
@@ -121,8 +122,8 @@ public class SnippetImporter {
 		}
 		
 		// HTML/JS Snippets
-		public void createSnippet(VFSFile root, SnippetNode node) throws Exception {
-			Snippet snippet = node.load(root);
+		public void createSnippet(VFSFile root, JSSnippetAssetNode node) throws Exception {
+			JSSnippet snippet = node.load(root);
 			Document doc = db.createDocument();
 			try {
 				setItemValue(doc,"Form", "CodeSnippet");
@@ -143,20 +144,20 @@ public class SnippetImporter {
 				doc.recycle();
 			}
 		}
-		public int importSnippets(VFSFile root, AbstractNode node, final AsyncAction action) throws Exception {
+		public int importSnippets(VFSFile root, Node node, final AsyncAction action) throws Exception {
 			int count = 0;
 			if(node.isCategory()) {
 				CategoryNode cn = (CategoryNode)node;
 				// Browse recursively...
-				List<AbstractNode> children = cn.getChildren();
-				for(AbstractNode n: children) {
+				List<Node> children = cn.getChildren();
+				for(Node n: children) {
 					count += importSnippets(root,n,action);
 				}
-			} else if(node.isSnippet()) {
+			} else if(node.isAsset()) {
 				if(action!=null) {
 					action.updateTask(StringUtil.format("Importing Snippet: {0}", node.getPath()));
 				}
-				SnippetNode sn = (SnippetNode)node;
+				JSSnippetAssetNode sn = (JSSnippetAssetNode)node;
 				createSnippet(root,sn);
 				count++;
 			}
@@ -168,11 +169,13 @@ public class SnippetImporter {
 			}
 			VFS vfs = createImportVFS();
 			VFSFile rootDir = vfs.getRoot();
-			Importer.NodeFactory factory = new Importer.DefaultNodeFactory(); 
-			Importer imp = new Importer(rootDir,factory,Importer.HTMLJS_EXTENSIONS);
-			Importer.Callback cb = null;
+			
+			
+			AssetBrowser a = new AssetBrowser(rootDir, new JSSnippetNodeFactory());
+			
+			AssetBrowser.Callback cb = null;
 			if(action!=null) {
-				cb = new Importer.Callback() {
+				cb = new AssetBrowser.Callback() {
 					public void update(String statusString) {
 						action.updateTask(statusString);
 					}
@@ -181,7 +184,7 @@ public class SnippetImporter {
 					}
 				};
 			}
-			RootNode root = imp.readSnippets(cb);
+			RootNode root = a.readAssets(cb);
 			if(action!=null && action.isCancelled()) {
 				return 0;
 			}
@@ -200,7 +203,7 @@ public class SnippetImporter {
 				if(StringUtil.isEmpty(basePath)) {
 					throw new FacesExceptionEx(null,"GitHub: Location is empty",getLocation());
 				}
-				GitVFS vfs = new GitVFS(location,userName,password); 
+				GitVFS vfs = new GitVFS(location,getUserName(),getPassword()); 
 				return vfs;
 			}
 			throw new FacesExceptionEx(null,"Import action is not available for a source {0}",getSource());
@@ -223,7 +226,7 @@ public class SnippetImporter {
 			if(v.getClass().isArray()) {
 				int length = Array.getLength(v);
 				if(length>0) {
-					Vector vec = new Vector(length);
+					Vector<Object> vec = new Vector<Object>(length);
 					for(int i=0; i<length; i++) {
 						vec.add(toDominoType(Array.get(v, i)));
 					}

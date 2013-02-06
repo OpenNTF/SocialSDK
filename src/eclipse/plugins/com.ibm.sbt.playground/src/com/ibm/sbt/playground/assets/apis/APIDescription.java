@@ -13,30 +13,33 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-package demo;
+package com.ibm.sbt.playground.assets.apis;
 
-import java.io.IOException;
+import java.util.Properties;
 
-import com.ibm.sbt.playground.snippets.RootNode;
-import com.ibm.sbt.playground.snippets.dojo.JsonTreeRenderer;
+import com.ibm.sbt.playground.assets.Asset;
+
 
 
 /**
- * Definition of a code snippet.
+ * Description of an API.
  */
-public class DemoRootNode extends RootNode {
+public class APIDescription extends Asset {
 
-	public DemoRootNode() {
-		super();
+	private String json;
+	
+	public APIDescription() {
 	}
 	
 	@Override
-	public String getAsJson() {
-		try {
-			JsonTreeRenderer r = new JsonTreeRenderer();
-			return r.generateAsStringHier(this, true);
-		} catch (IOException e) {
-			return "{}";
-		}
+	public void init(Properties props) {
+		super.init(props);
+	}
+
+	public String getJson() {
+		return json;
+	}
+	public void setJson(String json) {
+		this.json = json;
 	}
 }

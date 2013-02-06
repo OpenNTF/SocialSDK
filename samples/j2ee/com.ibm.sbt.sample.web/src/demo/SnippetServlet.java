@@ -30,9 +30,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.ibm.commons.runtime.servlet.BaseHttpServlet;
 import com.ibm.commons.runtime.util.UrlUtil;
 import com.ibm.commons.util.StringUtil;
-import com.ibm.sbt.playground.snippets.AbstractNode;
-import com.ibm.sbt.playground.snippets.RootNode;
-import com.ibm.sbt.playground.snippets.Snippet;
+import com.ibm.sbt.playground.assets.Asset;
+import com.ibm.sbt.playground.assets.Node;
+import com.ibm.sbt.playground.assets.RootNode;
+import com.ibm.sbt.playground.assets.jssnippets.JSSnippet;
 import com.ibm.sbt.playground.vfs.VFSFile;
 
 /**
@@ -75,7 +76,7 @@ public class SnippetServlet extends BaseHttpServlet {
 			RootNode rootNode = SnippetFactory.getSnippets(getServletContext());
 			if (unid != null && unid.length() > 0) {
 				VFSFile rootFile = SnippetFactory.getRootFile(getServletContext());
-				Snippet snippet = rootNode.loadSnippet(rootFile, unid);
+				JSSnippet snippet = (JSSnippet)rootNode.loadAsset(rootFile, unid);
 				if (snippet == null) {
 					service400(request, response, "Invalid unid: {0}", unid);
 					return;
@@ -86,7 +87,7 @@ public class SnippetServlet extends BaseHttpServlet {
 					str = toXml(request, snippet);
 				}
 			} else {
-				List<AbstractNode> children = rootNode.getAllChildrenFlat();
+				List<Node> children = rootNode.getAllChildrenFlat();
 				if (FORMAT_JSON.equals(format)) {
 					str = toJson(request, children);
 				} else if (FORMAT_GADGETS_JSON.equals(format)) {
@@ -134,18 +135,18 @@ public class SnippetServlet extends BaseHttpServlet {
 	/*
 	 * Return list of children in json notation
 	 */
-	private String toJson(HttpServletRequest request, List<AbstractNode> children) {
+	private String toJson(HttpServletRequest request, List<Node> children) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("{\n");
 		for (int i = 0; i < children.size(); i++) {
-			AbstractNode node = children.get(i);
-			if (node.isSnippet()) {
-				DemoSnippetNode snippetNode = (DemoSnippetNode)node;
+			Node node = children.get(i);
+			if (node.isAsset()) {
+				DemoJavaSnippetNode snippetNode = (DemoJavaSnippetNode)node;
 				sb.append("\"").append(snippetNode.getUnid()).append("\": {\n");
 				sb.append("  \"level\": \"").append(snippetNode.getLevel()).append("\",\n");
 				sb.append("  \"path\": \"").append(snippetNode.getPath()).append("\",\n");
 				sb.append("  \"unid\": \"").append(snippetNode.getUnid()).append("\"\n");
-				sb.append("  \"url\": \"").append(snippetNode.getUrl(request)).append("\"\n");
+				sb.append("  \"url\": \"").append(snippetNode.getJSPUrl(request)).append("\"\n");
 				sb.append((i+1 < children.size()) ? "},\n" : "}\n");
 			}
 		}
@@ -156,13 +157,13 @@ public class SnippetServlet extends BaseHttpServlet {
 	/*
 	 * Return list of children in gadgets json notation
 	 */
-	private String toGadgetsJson(HttpServletRequest request, List<AbstractNode> children) {
+	private String toGadgetsJson(HttpServletRequest request, List<Node> children) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("{\"collections\": [\n");
 		for (int i = 0; i < children.size(); i++) {
-			AbstractNode node = children.get(i);
-			if (node.isSnippet()) {
-				DemoSnippetNode snippetNode = (DemoSnippetNode)node;
+			Node node = children.get(i);
+			if (node.isAsset()) {
+				DemoJavaSnippetNode snippetNode = (DemoJavaSnippetNode)node;
 				String unid = snippetNode.getUnid();
 				String gadgetUrl = UrlUtil.getBaseUrl(request)+"/gadget/sampleRunner.jsp?snippet="+URLEncoder.encode(unid);
 				sb.append("{\n");
@@ -181,18 +182,18 @@ public class SnippetServlet extends BaseHttpServlet {
 	/*
 	 * Return list of children in xml notation
 	 */
-	private String toXml(HttpServletRequest request, List<AbstractNode> children) {
+	private String toXml(HttpServletRequest request, List<Node> children) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("<snippets>\n");
 		for (int i = 0; i < children.size(); i++) {
-			AbstractNode node = children.get(i);
-			if (node.isSnippet()) {
-				DemoSnippetNode snippetNode = (DemoSnippetNode)node;
+			Node node = children.get(i);
+			if (node.isAsset()) {
+				DemoJavaSnippetNode snippetNode = (DemoJavaSnippetNode)node;
 				sb.append("  <snippet name=\"").append(snippetNode.getName()).append("\"\n");
 				sb.append("           level=\"").append(snippetNode.getLevel()).append("\"\n");
 				sb.append("           path=\"").append(snippetNode.getPath()).append("\"\n");
 				sb.append("           unid=\"").append(snippetNode.getUnid()).append("\"\n");
-				sb.append("           url=\"").append(snippetNode.getUrl(request)).append("\"/>\n");
+				sb.append("           url=\"").append(snippetNode.getJSPUrl(request)).append("\"/>\n");
 			}
 		}
 		sb.append("</snippets>\n");
@@ -202,7 +203,7 @@ public class SnippetServlet extends BaseHttpServlet {
 	/*
 	 * Return snippet in json notation
 	 */
-	private String toJson(HttpServletRequest request, Snippet snippet) {
+	private String toJson(HttpServletRequest request, JSSnippet snippet) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("{\n");
 		toJson(sb, "unid", snippet.getUnid());
@@ -275,7 +276,7 @@ public class SnippetServlet extends BaseHttpServlet {
 	/*
 	 * Return snippet in xml notation
 	 */
-	private String toXml(HttpServletRequest request, Snippet snippet) {
+	private String toXml(HttpServletRequest request, JSSnippet snippet) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("<snippet>\n");
 		addCDataElement(sb, "unid", snippet.getUnid());

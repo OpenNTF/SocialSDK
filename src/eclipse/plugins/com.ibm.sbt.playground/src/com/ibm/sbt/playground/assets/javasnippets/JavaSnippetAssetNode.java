@@ -35,7 +35,12 @@ public class JavaSnippetAssetNode extends AssetNode {
 	public JavaSnippetAssetNode(CategoryNode parent, String name, String category, String unid, String jspUrl) {
 		super(parent,name,category,unid,jspUrl);
 	}
-	
+
+	@Override
+	public JavaSnippet load(VFSFile root) throws IOException {
+		return (JavaSnippet)super.load(root);
+	}
+
 	@Override
 	public Asset createAsset(VFSFile root) throws IOException {
 		VFSFile parent = getParentFile(root);

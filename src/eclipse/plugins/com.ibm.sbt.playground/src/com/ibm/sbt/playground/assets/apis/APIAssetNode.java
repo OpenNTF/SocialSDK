@@ -35,7 +35,12 @@ public class APIAssetNode extends AssetNode {
 	public APIAssetNode(CategoryNode parent, String name, String category, String unid, String jspUrl) {
 		super(parent,name,category,unid,jspUrl);
 	}
-	
+
+	@Override
+	public APIDescription load(VFSFile root) throws IOException {
+		return (APIDescription)super.load(root);
+	}
+
 	@Override
 	public Asset createAsset(VFSFile root) throws IOException {
 		VFSFile parent = getParentFile(root);

@@ -5,7 +5,7 @@
 		<xp:dojoModule name="ibm.xsp.widget.layout.TypeAhead"></xp:dojoModule>
 		<xp:dojoModule name="extlib.dijit.Tabs"></xp:dojoModule>
 	</xp:this.resources>
-	<xc:ccLayout navigationPath="/Manage/SnippetsByCategory">
+	<xc:ccLayout navigationPath="/Manage/APIsByCategory">
 		<xp:this.facets>
 			<xp:panel xp:key="LeftColumn" id="panel4">
 				<xc:LeftManage id="ccLeftMenu"></xc:LeftManage>
@@ -17,7 +17,7 @@
 				useHash="true" partialEvents="true">
 				<xp:this.facets>
 					<xp:panel xp:key="view" id="mainPanel">
-						<xc:ManageSnippetsActionBar viewName="AllSnippets"></xc:ManageSnippetsActionBar>
+						<xc:ManageAPIsActionBar viewName="AllAPIs"></xc:ManageAPIsActionBar>
 						<br />
 						<xe:dataView id="dataView1" var="viewEntry"
 							collapsibleCategory="true" collapsibleRows="true" rows="15"
@@ -25,7 +25,7 @@
 							showHeaderCheckbox="${javascript:userBean.canCreateDocs}"
 							columnTitles="true">
 							<xe:this.data>
-								<xp:dominoView var="view1" viewName="AllSnippets">
+								<xp:dominoView var="view1" viewName="AllAPIs">
 								</xp:dominoView>
 							</xe:this.data>
 							<xp:this.facets>

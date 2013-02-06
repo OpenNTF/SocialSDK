@@ -109,7 +109,7 @@ function hideJsSnippetCode() {
 				
 	<%
 		
-		String javaSamplePath= request.getParameter("javaSamplePath");
+		String javaSamplePath= request.getParameter("snippet");
 			if(javaSamplePath!=null) {
 				JavaSnippet snippet = (JavaSnippet)root.loadAsset(SnippetFactoryForJava.getRootFile(application), javaSamplePath);
 				String jsp = null;

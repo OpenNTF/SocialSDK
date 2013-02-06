@@ -122,42 +122,20 @@ public class LibraryRequest {
     /**
      * Initialise the LibraryRequest
      * 
-     * @param defaultEnvironment
-     * @param toolkitUrl
-     * @param toolkitJsUrl
-     * @param serviceUrl
-     * @param iframeUrl
-     * @throws ServletException
-     * @throws IOException
-     */
-    public void init(SBTEnvironment defaultEnvironment, String toolkitUrl, String toolkitJsUrl, String serviceUrl, String iframeUrl)
-            throws ServletException, IOException {
-        init(defaultEnvironment, toolkitUrl, toolkitJsUrl, serviceUrl, iframeUrl, null, null);
-    }
-    
-    /**
-     * Initialise the LibraryRequest
+     * @param params
      * 
-     * @param defaultEnvironment
-     * @param toolkitUrl
-     * @param toolkitJsUrl
-     * @param serviceUrl
-     * @param iframeUrl
-     * @param toolkitExtUrl
-     * @param toolkitExtJsUrl
      * @throws ServletException
      * @throws IOException
      */
-    public void init(SBTEnvironment defaultEnvironment, String toolkitUrl, String toolkitJsUrl, String serviceUrl, String iframeUrl, String toolkitExtUrl, String toolkitExtJsUrl)
-            throws ServletException, IOException {
-        this.toolkitUrl = StringUtil.replace(toolkitUrl, "%local_server%", UrlUtil.getServerUrl(httpRequest));
-        this.toolkitJsUrl = StringUtil.replace(toolkitJsUrl, "%local_server%", UrlUtil.getServerUrl(httpRequest));
-        this.toolkitExtUrl = StringUtil.replace(toolkitExtUrl, "%local_server%", UrlUtil.getServerUrl(httpRequest));
-        this.toolkitExtJsUrl = StringUtil.replace(toolkitExtJsUrl, "%local_server%", UrlUtil.getServerUrl(httpRequest));
-        this.serviceUrl = StringUtil.replace(serviceUrl, "%local_application%", UrlUtil.getContextUrl(httpRequest));
-        this.iframeUrl = StringUtil.replace(iframeUrl, "%local_server%", UrlUtil.getServerUrl(httpRequest));
+    public void init(LibraryRequestParams params) throws ServletException, IOException {
+        this.toolkitUrl = StringUtil.replace(params.getToolkitUrl(), "%local_server%", UrlUtil.getServerUrl(httpRequest));
+        this.toolkitJsUrl = StringUtil.replace(params.getToolkitJsUrl(), "%local_server%", UrlUtil.getServerUrl(httpRequest));
+        this.toolkitExtUrl = StringUtil.replace(params.getToolkitExtUrl(), "%local_server%", UrlUtil.getServerUrl(httpRequest));
+        this.toolkitExtJsUrl = StringUtil.replace(params.getToolkitExtJsUrl(), "%local_server%", UrlUtil.getServerUrl(httpRequest));
+        this.serviceUrl = StringUtil.replace(params.getServiceUrl(), "%local_application%", UrlUtil.getContextUrl(httpRequest));
+        this.iframeUrl = StringUtil.replace(params.getIframeUrl(), "%local_server%", UrlUtil.getServerUrl(httpRequest));
 
-        readFromRequest(httpRequest, defaultEnvironment);
+        readFromRequest(httpRequest, params.getEnvironment());
 
         inited = true;
 

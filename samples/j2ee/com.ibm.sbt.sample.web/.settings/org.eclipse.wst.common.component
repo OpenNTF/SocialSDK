@@ -36,6 +36,9 @@
         <dependent-module archiveName="commons-logging-1.1.1.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/com.ibm.sbt.libs.j2ee/lib/commons-logging-1.1.1.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="com.ibm.sbtx.core.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/com.ibm.sbtx.core/com.ibm.sbtx.core">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="java-output-path" value="/SampleSocialApp/WebContent/WEB-INF/classes"/>
         <property name="context-root" value="sbt.sample.web"/>
     </wb-module>

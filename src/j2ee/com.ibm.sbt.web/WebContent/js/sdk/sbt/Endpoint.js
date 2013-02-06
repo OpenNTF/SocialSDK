@@ -112,6 +112,7 @@ var Endpoint = declare("sbt.Endpoint", null, {
                 args.handle(error);
             } catch (ex) {
                 // TODO log an error
+                var msg = ex.message;
             }
         }
         if (args.error) {
@@ -119,6 +120,7 @@ var Endpoint = declare("sbt.Endpoint", null, {
                 args.error(error);
             } catch (ex) {
                 // TODO log an error
+                var msg = ex.message;
             }
         }
 	},
@@ -133,6 +135,7 @@ var Endpoint = declare("sbt.Endpoint", null, {
                 args.handle(data, ioArgs);
             } catch (ex) {
                 // TODO log an error
+                var msg = ex.message;
             }
         }
         if (args.load) {
@@ -140,6 +143,7 @@ var Endpoint = declare("sbt.Endpoint", null, {
                 args.load(data, ioArgs);
             } catch (ex) {
                 // TODO log an error
+                var msg = ex.message;
             }
         }
     },

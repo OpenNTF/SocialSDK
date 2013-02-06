@@ -31,7 +31,10 @@
 		</managed-property>
 		<managed-property>
 			<property-name>properties</property-name>
-			<value>sample.email1,sample.email2</value>
+			<value><![CDATA[
+sample.email1=
+sample.email2=
+]]></value>
 		</managed-property>
 	</managed-bean>
 	

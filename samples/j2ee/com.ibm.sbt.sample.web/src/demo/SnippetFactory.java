@@ -20,9 +20,8 @@ import java.io.IOException;
 import javax.servlet.ServletContext;
 
 import com.ibm.sbt.playground.assets.AssetBrowser;
-import com.ibm.sbt.playground.assets.CategoryNode;
+import com.ibm.sbt.playground.assets.AssetNode;
 import com.ibm.sbt.playground.assets.RootNode;
-import com.ibm.sbt.playground.assets.jssnippets.JSSnippetAssetNode;
 import com.ibm.sbt.playground.assets.jssnippets.JSSnippetNodeFactory;
 import com.ibm.sbt.playground.vfs.ServletVFS;
 import com.ibm.sbt.playground.vfs.VFSFile;
@@ -45,6 +44,7 @@ public class SnippetFactory extends JSSnippetNodeFactory {
 		}
 		return root;
 	}
+	
 	public static VFSFile getRootFile(ServletContext context) {
 		ServletVFS vfs = new ServletVFS(context, "/js/");
 		return vfs.getRoot();
@@ -57,7 +57,7 @@ public class SnippetFactory extends JSSnippetNodeFactory {
 	}
 	
 	@Override
-	public JSSnippetAssetNode createAssetNode(CategoryNode parent, String name) {
-		return new DemoJSSnippetNode(parent, name);
+	public AssetNode createAssetNode(com.ibm.sbt.playground.assets.CategoryNode parent, String name) {
+	    return new DemoJSSnippetNode(parent, name);
 	}
 }

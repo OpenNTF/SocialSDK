@@ -68,7 +68,7 @@
 											 										}
 											 %>
 											 <%
-											 	if((((DemoJavaSnippetNode)node).getPath()+".jsp").equals(request.getParameter("javaSamplePath"))){
+											 	if((((DemoJavaSnippetNode)node).getPath()+".jsp").equals(request.getParameter("snippet"))){
 											 %>
 													<li class = "active" style='margin-left: <%=(node.getLevel()-1)*2%>em'> 
 											 <%
@@ -176,7 +176,7 @@ function treeExpandId(tree,id) {
 							navTree.onClick = function(item){
 								if(item.url) {
 									var baseUrl = '<%=UrlUtil.getRequestUrl(request,false)%>';
-									window.location.href = baseUrl+"?javaSamplePath="+item.jspUrl+".jsp";
+									window.location.href = baseUrl+"?snippet="+item.jspUrl+".jsp";
 								}
 							};
 							navTree.startup();

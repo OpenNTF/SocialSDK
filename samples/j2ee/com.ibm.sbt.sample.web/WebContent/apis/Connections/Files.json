@@ -2,9 +2,7 @@
 {
 "retrieveFileServiceDocument":
 {
-  "component":"files",
   "description":"Retrieve the file service document",
-  "auth":"basic",
   "http_method":"get",
   "host_property_name":"files_apiTargetHost",
   "uri":"/files/basic/api/introspection",
@@ -15,9 +13,7 @@
 {
 "retrieveFilesModerationServiceDocument":
 {
-  "component":"files",
   "description":"Retrieve the files moderation service document",
-  "auth":"basic",
   "http_method":"get",
   "host_property_name":"files_apiTargetHost",
   "uri":"/files/basic/api/moderation/atomsvc",
@@ -28,9 +24,7 @@
 {
 "getNonce":
 {
-  "component":"files",
   "description":"Get a nonce key",
-  "auth":"basic",
   "http_method":"get",
   "host_property_name":"files_apiTargetHost",
   "uri":"/files/basic/api/nonce",
@@ -39,244 +33,9 @@
 },
 
 {
-"getFeedOfPublicFilesAnonymous":
-{
-  "component":"files",
-  "description":"Get feed of public files",
-  "auth":"anonymous",
-  "http_method":"get",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/anonymous/api/documents/feed?visibility=public&{parameters}",
-  "parameters":"{parameters}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_a_feed_of_public_files_ic301"
-}  
-},
-
-{
-"getFeedOfYourPinnedFiles":
-{
-  "component":"files",
-  "description":"Get feed of your pinned files",
-  "auth":"basic",
-  "http_method":"get",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/api/myfavorites/documents/feed?{parameters}",
-  "parameters":"{parameters}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_a_feed_of_your_pinned_files_ic301"
-}  
-},
-
-{
-"getFeedOfFolders":
-{
-  "component":"files",
-  "description":"Get feed of your folders",
-  "auth":"basic",
-  "http_method":"get",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/api/collections/feed?{parameters}",
-  "parameters":"{parameters}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_a_feed_of_your_folders_ic301"
-}  
-},
-
-{
-"getFeedOfPinnedFolders":
-{
-  "component":"files",
-  "description":"Get feed of your pinned folders",
-  "auth":"basic",
-  "http_method":"get",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/api/myfavorites/collections/feed?{parameters}",
-  "parameters":"{parameters}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_a_feed_of_your_pinned_folders_ic301"
-}  
-},
-
-{
-"getFeedOfPinnedFolders":
-{
-  "component":"files",
-  "description":"Get feed of your pinned folders",
-  "auth":"basic",
-  "http_method":"get",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/api/myfavorites/collections/feed?{parameters}",
-  "parameters":"{parameters}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_a_feed_of_your_pinned_folders_ic301"
-}  
-},
-
-{
-"getFeedOfRecentlyUpdatedFolders":
-{
-  "component":"files",
-  "description":"Get feed of folders to which you recently added files",
-  "auth":"basic",
-  "http_method":"get",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/api/collections/addedto/feed?{parameters}",
-  "parameters":"{parameters}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_a_feed_of_folders_to_which_you_recently_added_files_ic301"
-}  
-},
-
-{
-"getFeedOfFilesInAFolder":
-{
-  "component":"files",
-  "description":"Get feed of files in a folder (collection)",
-  "auth":"basic",
-  "http_method":"get",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/api/collection/{collection-id}/feed?{parameters}",
-  "collection-id":"{collection-id}",
-  "parameters":"{parameters}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_a_feed_of_the_files_in_a_folder_ic301"
-}  
-},
-
-{
-"getFeedOfPublicFileFolders":
-{
-  "component":"files",
-  "description":"Get feed of public file folders",
-  "auth":"anonymous",
-  "http_method":"get",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/anonymous/api/collections/feed?{parameters}",
-  "parameters":"{parameters}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_a_feed_of_public_file_folders_ic301"
-}  
-},
-
-{
-"getFeedOfAPersonsLibraryAnonymous":
-{
-  "component":"files",
-  "description":"Get feed of a person's library (do not authenticate)",
-  "auth":"anonymous",
-  "http_method":"get",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/anonymous/api/userlibrary/{userid}/feed?{parameters}",
-  "userid":"{userid}",
-  "parameters":"{parameters}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_a_feed_of_a_persons_library_ic301"
-}  
-},
-
-{
-"getFeedOfAPersonsLibraryAndSharedFiles":
-{
-  "component":"files",
-  "description":"Get feed of a person's library and files shared with you",
-  "auth":"basic",
-  "http_method":"get",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/api/userlibrary/{userid}/feed?{parameters}",
-  "userid":"{userid}",
-  "parameters":"{parameters}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_a_feed_of_a_persons_library_ic301"
-}  
-},
-
-{
-"getFeedOfYourLibrary":
-{
-  "component":"files",
-  "description":"Get feed of your library",
-  "auth":"basic",
-  "http_method":"get",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/api/myuserlibrary/feed?{parameters}",
-  "parameters":"{parameters}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_a_feed_of_your_library_ic301"
-}  
-},
-
-{
-"getFeedOfFileShares":
-{
-  "component":"files",
-  "description":"Get feed of file shares",
-  "auth":"basic",
-  "http_method":"get",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/api/documents/shared/feed?{parameters}",
-  "parameters":"{parameters}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_a_feed_of_file_shares_ic301"
-}  
-},
-
-{
-"getFeedOfAFilesCommentsAnonymous":
-{
-  "component":"files",
-  "description":"Get feed of a file's comments (do not authenticate)",
-  "auth":"anonymous",
-  "http_method":"get",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/anonymous/api/userlibrary/{userid}/document/{document-id}/feed?category=comment&{parameters}",
-  "userid":"{userid}",
-  "document-id":"{document-id}",
-  "parameters":"{parameters}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_a_feed_of_a_files_comments_ic301"
-}  
-},
-
-{
-"getFeedOfAFilesComments":
-{
-  "component":"files",
-  "description":"Get feed of a file's comments",
-  "auth":"basic",
-  "http_method":"get",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/api/userlibrary/{userid}/document/{document-id}/feed?category=comment&{parameters}",
-  "userid":"{userid}",
-  "document-id":"{document-id}",
-  "parameters":"{parameters}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_a_feed_of_a_files_comments_ic301"
-}  
-},
-
-{
-"getFeedOfMyFilesComments":
-{
-  "component":"files",
-  "description":"Get feed of my file's comments",
-  "auth":"basic",
-  "http_method":"get",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/api/myuserlibrary/document/{document-id}/feed?category=comment&{parameters}",
-  "document-id":"{document-id}",
-  "parameters":"{parameters}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_a_feed_of_my_files_comments_ic301"
-}  
-},
-
-{
-"getFeedOfFilesInMyRecycleBin":
-{
-  "component":"files",
-  "description":"Get feed of files in my recycle bin",
-  "auth":"basic",
-  "http_method":"get",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/api/myuserlibrary/view/recyclebin/feed?{parameters}",
-  "parameters":"{parameters}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_a_feed_of_the_files_in_your_recycle_bin_ic301"
-}  
-},
-
-
-{
 "addFile":
 {
-  "component":"files",
   "description":"Add a file to your library",
-  "auth":"basic",
   "http_method":"post",
   "host_property_name":"files_apiTargetHost",
   "http_headers":"{http_headers}",
@@ -290,9 +49,7 @@
 {
 "downloadFileAnonymous":
 {
-  "component":"files",
   "description":"Download a file from your library (anonymous)",
-  "auth":"anonymous",
   "http_method":"get",
   "host_property_name":"files_apiTargetHost",
   "http_headers":"{http_headers}",
@@ -306,9 +63,7 @@
 {
 "downloadFile":
 {
-  "component":"files",
   "description":"Download a file from your library",
-  "auth":"basic",
   "http_method":"get",
   "host_property_name":"files_apiTargetHost",
   "http_headers":"{http_headers}",
@@ -322,9 +77,7 @@
 {
 "retrieveFileMetadataAnonymous":
 {
-  "component":"files",
   "description":"Retrieve an Atom document representation of the metadata for a file from your library (anonymous)",
-  "auth":"basic",
   "http_method":"get",
   "host_property_name":"files_apiTargetHost",
   "http_headers":"{http_headers}",
@@ -337,9 +90,7 @@
 {
 "retrieveFileMetadata":
 {
-  "component":"files",
   "description":"Retrieve an Atom document representation of the metadata for a file from your library",
-  "auth":"basic",
   "http_method":"get",
   "host_property_name":"files_apiTargetHost",
   "http_headers":"{http_headers}",
@@ -352,9 +103,7 @@
 {
 "deleteFileAndMetadata":
 {
-  "component":"files",
   "description":"Delete a file and the Atom document representation of its associated metadata from your collection",
-  "auth":"basic",
   "http_method":"delete",
   "host_property_name":"files_apiTargetHost",
   "http_headers":"{http_headers}",
@@ -366,9 +115,7 @@
 {
 "updateFile":
 {
-  "component":"files",
   "description":"Update a file in your file collection",
-  "auth":"basic",
   "http_method":"put",
   "host_property_name":"files_apiTargetHost",
   "http_headers":"{http_headers}",
@@ -382,9 +129,7 @@
 {
 "updateFileMetadata":
 {
-  "component":"files",
   "description":"Update the Atom document representation of the metadata for a file from your library",
-  "auth":"basic",
   "http_method":"put",
   "host_property_name":"files_apiTargetHost",
   "http_headers":"{http_headers}",
@@ -396,135 +141,10 @@
 }  
 },
 
-
-{
-"createFileFolder":
-{
-  "component":"files",
-  "description":"Create a file folder",
-  "auth":"basic",
-  "http_method":"post",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/api/collections/feed",
-  "post_string":"{post_string}",
-  "post_content_type":"application/atom+xml",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Creating_a_file_folder_ic301"
-}  
-},
-
-{
-"retrieveFileFolder":
-{
-  "component":"files",
-  "description":"Retrieve an Atom document representation of a file folder",
-  "auth":"basic",
-  "http_method":"get",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/api/collection/{collection-id}/entry",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Retrieving_a_file_folder_ic301"
-}  
-},
-
-{
-"deleteFileFolder":
-{
-  "component":"files",
-  "description":"Delete a file folder using the HTTP DELETE request. Deleting a folder does not delete the files in the folder.",
-  "auth":"basic",
-  "http_method":"delete",
-  "host_property_name":"files_apiTargetHost",
-  "http_headers":"{http_headers}",
-  "uri":"/files/basic/api/collection/{collection-id}/entry",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Deleting_a_file_folder_ic301"
-}  
-},
-
-{
-"updateFileFolder":
-{
-  "component":"files",
-  "description":"Update the Atom document representation of the file folder",
-  "auth":"basic",
-  "http_method":"put",
-  "host_property_name":"files_apiTargetHost",
-  "http_headers":"{http_headers}",
-  "uri":"/files/basic/api/collection/{collection-id}/entry",
-  "post_string":"{post_string}",
-  "post_content_type":"application/atom+xml",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Updating_a_file_folder_ic301"
-}  
-},
-
-{
-"addFilesToFolder":
-{
-  "component":"files",
-  "description":"Add a file or files to a folder",
-  "auth":"basic",
-  "http_method":"post",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/api/collection/{collection-id}/feed?{parameters}",
-  "parameters":"{parameters}",
-  "post_string":"{post_string}",
-  "post_content_type":"application/atom+xml",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Adding_a_file_or_set_of_files_to_a_folder_ic301"
-}  
-},
-
-{
-"addFilesToFolderById":
-{
-  "component":"files",
-  "description":"Add a file or files to a folder",
-  "auth":"basic",
-  "http_method":"post",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/api/collection/{collection-id}/feed?{parameters}",
-  "parameters":"{parameters}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Adding_a_file_or_set_of_files_to_a_folder_ic301"
-}  
-},
-
-{
-"addFileToFolders":
-{
-  "component":"files",
-  "description":"Add a file to a folder or multiple folders",
-  "auth":"basic",
-  "http_method":"post",
-  "host_property_name":"files_apiTargetHost",
-  "http_headers":"{http_headers}",
-  "uri":"/files/basic/api/myuserlibrary/document/{document-id}/feed?{parameters}",
-  "parameters":"{parameters}",
-  "post_string":"{post_string}",
-  "post_content_type":"application/atom+xml",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Adding_a_file_to_a_folder_or_multiple_folders_ic301"
-}  
-},
-
-{
-"removeFileFromFolder":
-{
-  "component":"files",
-  "description":"Removes a file from a folder. This action does not delete the file entirely; it only removes its association with the folder.",
-  "auth":"basic",
-  "http_method":"delete",
-  "host_property_name":"files_apiTargetHost",
-  "http_headers":"{http_headers}",
-  "uri":"/files/basic/api/collection/{collection-id}/feed?{parameters}",
-  "parameters":"{parameters}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Removing_a_file_from_a_folder_ic301"
-}  
-},
-
-
-
 {
 "createShare":
 {
-  "component":"files",
   "description":"Create a file share",
-  "auth":"basic",
   "http_method":"post",
   "host_property_name":"files_apiTargetHost",
   "uri":"/files/basic/api/shares/feed",
@@ -537,9 +157,7 @@
 {
 "shareFileWithCommunities":
 {
-  "component":"files",
   "description":"Share a file with a community or multiple communities",
-  "auth":"basic",
   "http_method":"post",
   "host_property_name":"files_apiTargetHost",
   "http_headers":"{http_headers}",
@@ -554,9 +172,7 @@
 {
 "retrieveFileShareAnonymous":
 {
-  "component":"files",
   "description":"Share a file with a community or multiple communities",
-  "http_method":"get",
   "host_property_name":"files_apiTargetHost",
   "http_headers":"{http_headers}",
   "uri":"/files/basic/anonymous/api/share/{share-id}/entry",
@@ -567,9 +183,7 @@
 {
 "retrieveFileShare":
 {
-  "component":"files",
   "description":"Share a file with a community or multiple communities",
-  "auth":"basic",
   "http_method":"get",
   "host_property_name":"files_apiTargetHost",
   "http_headers":"{http_headers}",
@@ -581,9 +195,7 @@
 {
 "deleteFileShare":
 {
-  "component":"files",
   "description":"Delete a file share",
-  "auth":"basic",
   "http_method":"delete",
   "host_property_name":"files_apiTargetHost",
   "http_headers":"{http_headers}",
@@ -594,278 +206,9 @@
 },
 
 {
-"createComment":
-{
-  "component":"files",
-  "description":"Create a comment",
-  "auth":"basic",
-  "http_method":"post",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/api/userlibrary/{userid}/document/{document-id}/feed?{parameters}",
-  "parameters":"{parameters}",
-  "post_string":"{post_string}",
-  "post_content_type":"application/atom+xml",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Creating_a_comment_ic301"
-}  
-},
-
-{
-"createCommentPlainText":
-{
-  "component":"files",
-  "description":"Create a comment",
-  "auth":"basic",
-  "http_method":"post",
-  "host_property_name":"files_apiTargetHost",
-  "http_headers":"{http_headers}",
-  "uri":"/files/basic/api/userlibrary/{userid}/document/{document-id}/feed?{parameters}",
-  "parameters":"{parameters}",
-  "post_string":"{post_string}",
-  "post_content_type":"text/plain",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Creating_a_comment_ic301"
-}  
-},
-
-{
-"retrieveSomeonesFileComment":
-{
-  "component":"files",
-  "description":"Retrieve an Atom document representation of a comment associated with a file belonging a file belonging to someone else",
-  "auth":"basic",
-  "http_method":"get",
-  "host_property_name":"files_apiTargetHost",
-  "http_headers":"{http_headers}",
-  "uri":"/files/basic/api/userlibrary/{userid}/document/{document-id}/comment/{comment-id}/entry?{parameters}",
-  "parameters":"{parameters}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Retrieving_a_file_comment_ic301"
-}  
-},
-
-{
-"retrieveYourFileComment":
-{
-  "component":"files",
-  "description":"Retrieve an Atom document representation of a comment associated with your file",
-  "auth":"basic",
-  "http_method":"get",
-  "host_property_name":"files_apiTargetHost",
-  "http_headers":"{http_headers}",
-  "uri":"/files/basic/api/myuserlibrary/document/{document-id}/comment/{comment-id}/entry?{parameters}",
-  "parameters":"{parameters}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Retrieving_a_file_comment_ic301"
-}  
-},
-
-{
-"deleteSomeonesFileComment":
-{
-  "component":"files",
-  "description":"Delete a comment associated with a file belonging to someone else and to which you have access",
-  "auth":"basic",
-  "http_method":"delete",
-  "host_property_name":"files_apiTargetHost",
-  "http_headers":"{http_headers}",
-  "uri":"/files/basic/api/userlibrary/{userid}/document/{document-id}/comment/{comment-id}/entry?{parameters}",
-  "parameters":"{parameters}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Deleting_a_comment_ic301"
-}  
-},
-
-{
-"deleteYourFileComment":
-{
-  "component":"files",
-  "description":"Delete a comment associated with a file belonging to you",
-  "auth":"basic",
-  "http_method":"delete",
-  "host_property_name":"files_apiTargetHost",
-  "http_headers":"{http_headers}",
-  "uri":"/files/basic/api/myuserlibrary/document/{document-id}/comment/{comment-id}/entry?{parameters}",
-  "parameters":"{parameters}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Deleting_a_comment_ic301"
-}  
-},
-
-{
-"updateSomeonesFileComment":
-{
-  "component":"files",
-  "description":"Update the Atom document representation of the comment associated with a file belonging to someone else",
-  "auth":"basic",
-  "http_method":"put",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/api/userlibrary/{userid}/document/{document-id}/comment/{comment-id}/entry?{parameters}",
-  "parameters":"{parameters}",
-  "post_string":"{post_string}",
-  "post_content_type":"application/atom+xml",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Updating_a_comment_ic301"
-}  
-},
-
-{
-"updateSomeonesFileCommentPlainText":
-{
-  "component":"files",
-  "description":"Update the Atom document representation of the comment associated with a file belonging to someone else",
-  "auth":"basic",
-  "http_method":"put",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/api/userlibrary/{userid}/document/{document-id}/comment/{comment-id}/entry?{parameters}",
-  "parameters":"{parameters}",
-  "post_string":"{post_string}",
-  "post_content_type":"text/plain",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Updating_a_comment_ic301"
-}  
-},
-
-{
-"updateYourFileComment":
-{
-  "component":"files",
-  "description":"Update the Atom document representation of the comment associated with a file belonging to you",
-  "auth":"basic",
-  "http_method":"put",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/api/userlibrary/{userid}/document/{document-id}/comment/{comment-id}/entry?{parameters}",
-  "parameters":"{parameters}",
-  "post_string":"{post_string}",
-  "post_content_type":"application/atom+xml",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Updating_a_comment_ic301"
-}  
-},
-
-{
-"updateYourFileCommentPlainText":
-{
-  "component":"files",
-  "description":"Update the Atom document representation of the comment associated with a file belonging to you",
-  "auth":"basic",
-  "http_method":"put",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/api/userlibrary/{userid}/document/{document-id}/comment/{comment-id}/entry?{parameters}",
-  "parameters":"{parameters}",
-  "post_string":"{post_string}",
-  "post_content_type":"text/plain",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Updating_a_comment_ic301"
-}  
-},
-
-
-{
-"retrieveFileFromSomeonesRecycleBin":
-{
-  "component":"files",
-  "description":"Retrieve a file from the specified user's recycle bin",
-  "auth":"basic",
-  "http_method":"get",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/api/userlibrary/{userid}/recyclebin/{document-id}/entry?{parameters}",
-  "parameters":"{parameters}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Retrieving_a_file_from_the_trash_ic301"
-}  
-},
-
-{
-"retrieveFileFromYourRecycleBin":
-{
-  "component":"files",
-  "description":"Retrieve a file from your recycle bin",
-  "auth":"basic",
-  "http_method":"get",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/api/myuserlibrary/recyclebin/{document-id}/entry?{parameters}",
-  "parameters":"{parameters}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Retrieving_a_file_from_the_trash_ic301"
-}  
-},
-
-{
-"deleteFileFromSomeonesRecycleBin":
-{
-  "component":"files",
-  "description":"Permanently delete a file from the specified user's recycle bin",
-  "auth":"basic",
-  "http_method":"delete",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/api/userlibrary/{userid}/recyclebin/{document-id}/entry",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Purging_a_file_from_the_trash_ic301"
-}  
-},
-
-{
-"deleteFileFromYourRecycleBin":
-{
-  "component":"files",
-  "description":"Permanently delete a file from your recycle bin",
-  "auth":"basic",
-  "http_method":"delete",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/api/myuserlibrary/recyclebin/{document-id}/entry",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Purging_a_file_from_the_trash_ic301"
-}  
-},
-
-{
-"deleteAllFilesFromSomeonesRecycleBin":
-{
-  "component":"files",
-  "description":"Permanently delete a file from the specified user's recycle bin",
-  "auth":"basic",
-  "http_method":"delete",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/api/userlibrary/{userid}/view/recyclebin/feed",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Purging_all_files_from_the_trash_ic301"
-}  
-},
-
-{
-"deleteAllFilesFromYourRecycleBin":
-{
-  "component":"files",
-  "description":"Permanently delete a file from your recycle bin",
-  "auth":"basic",
-  "http_method":"delete",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/api/myuserlibrary/view/recyclebin/feed",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Purging_all_files_from_the_trash_ic301"
-}  
-},
-
-{
-"restoreFileFromSomeonesRecycleBin":
-{
-  "component":"files",
-  "description":"Restore a file from the specified user's recycle bin",
-  "auth":"basic",
-  "http_method":"put",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/api/userlibrary/{userid}/recyclebin/{document-id}/entry?{parameters}",
-  "parameters":"{parameters}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Restoring_a_file_from_the_trash_ic301"
-}  
-},
-
-{
-"restoreFileFromYourRecycleBin":
-{
-  "component":"files",
-  "description":"Restore a file from your recycle bin",
-  "auth":"basic",
-  "http_method":"put",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/api/myuserlibrary/recyclebin/{document-id}/entry?{parameters}",
-  "parameters":"{parameters}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Restoring_a_file_from_the_trash_ic301"
-}  
-},
-
-
-{
 "createFileVersion":
 {
-  "component":"files",
   "description":"Create a version of a file",
-  "auth":"basic",
   "http_method":"put",
   "host_property_name":"files_apiTargetHost",
   "uri":"{document-library}?{parameters}",
@@ -877,9 +220,7 @@
 {
 "retrieveFileVersion":
 {
-  "component":"files",
   "description":"Retrieve an Atom document representation of a version of a file from your library",
-  "auth":"basic",
   "http_method":"get",
   "host_property_name":"files_apiTargetHost",
   "http_headers":"{http_headers}",
@@ -892,9 +233,7 @@
 {
 "downloadFileVersion":
 {
-  "component":"files",
   "description":"Download a version of a file from your library",
-  "auth":"basic",
   "http_method":"get",
   "host_property_name":"files_apiTargetHost",
   "http_headers":"{http_headers}",
@@ -907,9 +246,7 @@
 {
 "deleteAllFileVersions":
 {
-  "component":"files",
   "description":"Removes all versions of a file from your library",
-  "auth":"basic",
   "http_method":"delete",
   "host_property_name":"files_apiTargetHost",
   "http_headers":"{http_headers}",
@@ -922,9 +259,7 @@
 {
 "compareTwoFileVersions":
 {
-  "component":"files",
   "description":"Get a feed that lists the differences between two versions of a file",
-  "auth":"basic",
   "http_method":"get",
   "host_property_name":"files_apiTargetHost",
   "uri":"/files/basic/api/diff?{parameters}",
@@ -933,248 +268,10 @@
 }  
 },
 
-
-{
-"addFileAttachment":
-{
-  "component":"files",
-  "description":"Add a file attachment to a file in your library",
-  "auth":"basic",
-  "http_method":"post",
-  "host_property_name":"files_apiTargetHost",
-  "http_headers":"{http_headers}",
-  "uri":"/files/basic/api/myuserlibrary/document/{document-id}/feed?{parameters}",
-  "parameters":"{parameters}",
-  "post_string":"__file__",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Adding_a_file_attachment_ic301"
-}  
-},
-
-{
-"x_addFileAttachmentMP":
-{
-  "disabled": false,
-  "component":"files",
-  "description":"Add a file attachment to a file in your library using Multi-Part (not yet supported)",
-  "auth":"basic",
-  "http_method":"post",
-  "host_property_name":"files_apiTargetHost",
-  "http_headers":"{http_headers}",
-  "uri":"/files/basic/api/myuserlibrary/document/{document-id}/feed?{parameters}",
-  "parameters":"{parameters}",
-  "post_string":"__file__",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Adding_a_file_attachment_ic301"
-}  
-},
-
-{
-"downloadFileAttachment":
-{
-  "component":"files",
-  "description":"Download a file attachment from your library",
-  "auth":"basic",
-  "http_method":"get",
-  "host_property_name":"files_apiTargetHost",
-  "http_headers":"{http_headers}",
-  "uri":"/files/basic/api/myuserlibrary/document/{document-id}/attachment/{attachment-id}/media/{attachment-label}?{parameters}",
-  "parameters":"{parameters}",
-  "response_target":"__file__",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Downloading_a_file_attachment_ic301"
-}  
-},
-
-{
-"retrieveFileAttachment":
-{
-  "component":"files",
-  "description":"Retrieve an Atom document representation of a file attachment from your library",
-  "auth":"basic",
-  "http_method":"get",
-  "host_property_name":"files_apiTargetHost",
-  "http_headers":"{http_headers}",
-  "uri":"/files/basic/api/myuserlibrary/document/{document-id}/attachment/{attachment-id}/entry?{parameters}",
-  "parameters":"{parameters}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Retrieving_a_file_attachment_ic301"
-}  
-},
-
-{
-"deleteFileAttachment":
-{
-  "component":"files",
-  "description":"Removes a file attachment from a file. An attachment is also indirectly deleted when the file it is associated with is deleted.",
-  "auth":"basic",
-  "http_method":"delete",
-  "host_property_name":"files_apiTargetHost",
-  "http_headers":"{http_headers}",
-  "uri":"/files/basic/api/myuserlibrary/document/{document-id}/attachment/{attachment-id}/entry?{parameters}",
-  "parameters":"{parameters}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Deleting_a_file_attachment_ic301"
-}  
-},
-
-{
-"updateFileAttachment":
-{
-  "component":"files",
-  "description":"Update an attachment to a file in your file collection",
-  "auth":"basic",
-  "http_method":"put",
-  "host_property_name":"files_apiTargetHost",
-  "http_headers":"{http_headers}",
-  "uri":"/files/basic/api/myuserlibrary/document/{document-id}/attachment/{attachment-id}/entry?{parameters}",
-  "parameters":"{parameters}",
-  "post_string":"__file__",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Updating_a_file_attachment_ic301"
-}  
-},
-
-{
-"x_updateFileAttachmentMP":
-{
-  "disabled": false,
-  "component":"files",
-  "description":"Update an attachment to a file in your file collection using Multi-Part (not yet supported)",
-  "auth":"basic",
-  "http_method":"put",
-  "host_property_name":"files_apiTargetHost",
-  "http_headers":"{http_headers}",
-  "uri":"/files/basic/api/myuserlibrary/document/{document-id}/attachment/{attachment-id}/entry ?{parameters}",
-  "parameters":"{parameters}",
-  "post_string":"__file__",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Updating_a_file_attachment_ic301"
-}  
-},
-
-{
-"pinFile":
-{
-  "component":"files",
-  "description":"Pin file",
-  "auth":"basic",
-  "http_method":"post",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/api/myfavorites/documents/feed",
-  "post_string":"{post_string}",
-  "post_content_type":"application/atom+xml",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Pinning_a_file_programmatically_ic301"
-}  
-},
-
-{
-"pinFileById":
-{
-  "component":"files",
-  "description":"Pin file",
-  "auth":"basic",
-  "http_method":"post",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/api/myfavorites/documents/feed?{parameters}",
-  "parameters":"{parameters}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Pinning_a_file_programmatically_ic301"
-}  
-},
-
-{
-"removeFilePin":
-{
-  "component":"files",
-  "description":"Removes the file from the myfavorites feed",
-  "auth":"basic",
-  "http_headers":{"X-Method-Override":"DELETE"},
-  "http_method":"delete",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/api/myfavorites/documents/feed",
-  "post_string":"{post_string}",
-  "post_content_type":"application/atom+xml",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Removing_a_pin_from_a_file_programmatically_ic301"
-}  
-},
-
-{
-"removeFilePinById":
-{
-  "component":"files",
-  "description":"Removes the file from the myfavorites feed",
-  "auth":"basic",
-  "http_headers":{"X-Method-Override":"DELETE"},
-  "http_method":"delete",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/api/myfavorites/documents/feed?{parameters}",
-  "parameters":"{parameters}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Removing_a_pin_from_a_file_programmatically_ic301"
-}  
-},
-
-
-{
-"pinFolder":
-{
-  "component":"files",
-  "description":"Pin folder",
-  "auth":"basic",
-  "http_method":"post",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/api/myfavorites/collections/feed",
-  "post_string":"{post_string}",
-  "post_content_type":"application/atom+xml",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Pinning_a_folder_programmatically_ic301"
-}  
-},
-
-{
-"pinFolderById":
-{
-  "component":"files",
-  "description":"Pin folder",
-  "auth":"basic",
-  "http_method":"post",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/api/myfavorites/collections/feed?{parameters}",
-  "parameters":"{parameters}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Pinning_a_folder_programmatically_ic301"
-}  
-},
-
-{
-"removeFolderPin":
-{
-  "component":"files",
-  "description":"Removes the folder from the myfavorites feed",
-  "auth":"basic",
-  "http_headers":{"X-Method-Override":"DELETE"},
-  "http_method":"delete",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/api/myfavorites/collections/feed",
-  "post_string":"{post_string}",
-  "post_content_type":"application/atom+xml",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Removing_a_pin_from_a_folder_programmatically_ic301"
-}  
-},
-
-{
-"removeFolderPinById":
-{
-  "component":"files",
-  "description":"Removes the folder from the myfavorites feed",
-  "auth":"basic",
-  "http_headers":{"X-Method-Override":"DELETE"},
-  "http_method":"delete",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/api/myfavorites/collections/feed?{parameters}",
-  "parameters":"{parameters}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Removing_a_pin_from_a_folder_programmatically_ic301"
-}  
-},
-
-
-
 {
 "flagFileAsInappropriate":
 {
-  "component":"files",
   "description":"Flag a file as inappropriate",
-  "auth":"basic",
   "http_method":"post",
   "host_property_name":"files_apiTargetHost",
   "uri":"/files/basic/api/reports",
@@ -1187,237 +284,13 @@
 {
 "flagFileCommentAsInappropriate":
 {
-  "component":"files",
   "description":"Flag a file comment as inappropriate",
-  "auth":"basic",
   "http_method":"post",
   "host_property_name":"files_apiTargetHost",
   "uri":"/files/basic/api/reports",
   "post_string":"{post_string}",
   "post_content_type":"application/atom+xml",
   "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Flagging_a_file_comment_as_inappropriate_ic301"
-}  
-},
-
-{
-"getListOfCommunityFilesThatRequireAction":
-{
-  "component":"files",
-  "description":"Get a feed that lists the community files that are awaiting action by the moderator",
-  "auth":"basic",
-  "http_method":"get",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"{entries_mod_wkspace_approval_content}?{parameters}",
-  "entries_mod_wkspace_approval_content":"{entries_mod_wkspace_approval_content}",
-  "parameters":"{parameters}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_a_list_of_community_files_that_require_action_ic301"
-}  
-},
-
-{
-"actOnCommunityFileAwaitingApproval":
-{
-  "component":"files",
-  "description":"Take action on a community file that is waiting to be approved",
-  "auth":"basic",
-  "http_method":"post",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"{entries_mod_wkspace_approval_action}",
-  "entries_mod_wkspace_approval_action":"{entries_mod_wkspace_approval_action}",
-  "post_string":"{post_string}",
-  "post_content_type":"application/atom+xml",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Flagging_a_file_comment_as_inappropriate_ic301"
-}  
-},
-
-{
-"retrieveCommunityFileAwaitingApproval":
-{
-  "component":"files",
-  "description":"Retrieve a community file that is waiting to be approved",
-  "auth":"basic",
-  "http_method":"get",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"{file_approval_content_edit_uri}",
-  "file_approval_content_edit_uri":"{file_approval_content_edit_uri}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Retrieving_a_community_file_awaiting_approval_ic301"
-}  
-},
-
-{
-"deleteCommunityFileAwaitingApproval":
-{
-  "component":"files",
-  "description":"Delete a community file that is waiting to be approved",
-  "auth":"basic",
-  "http_method":"delete",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"{file_edit_uri}",
-  "file_edit_uri":"{file_edit_uri}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Deleting_community_files_awaiting_approval_ic301"
-}  
-},
-
-{
-"getListOfCommunityFileCommentsThatRequireAction":
-{
-  "component":"files",
-  "description":"Get a feed that lists the community file comments that are awaiting action by the moderator",
-  "auth":"basic",
-  "http_method":"get",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"{comments_mod_wkspace_approval_content}?{parameters}",
-  "comments_mod_wkspace_approval_content":"{comments_mod_wkspace_approval_content}",
-  "parameters":"{parameters}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_a_list_of_community_file_comments_that_require_action_ic301"
-}  
-},
-
-{
-"actOnCommunityFileCommentAwaitingApproval":
-{
-  "component":"files",
-  "description":"Take action on a community file comment that is waiting to be approved",
-  "auth":"basic",
-  "http_method":"post",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"{comment_mod_wkspace_approval_action}",
-  "comment_mod_wkspace_approval_action":"{comment_mod_wkspace_approval_action}",
-  "post_string":"{post_string}",
-  "post_content_type":"application/atom+xml",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Acting_on_a_community_file_comment_that_is_awaiting_approval_ic301"
-}  
-},
-
-{
-"deleteCommunityFileCommentAwaitingApproval":
-{
-  "component":"files",
-  "description":"Delete a community file comment that is waiting to be approved",
-  "auth":"basic",
-  "http_method":"delete",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"{file_comment_approvalv_content_edit_uri}",
-  "file_comment_approvalv_content_edit_uri":"{file_comment_approvalv_content_edit_uri}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Deleting_community_files_awaiting_approval_ic301"
-}  
-},
-
-{
-"getListOfFlaggedCommunityFiles":
-{
-  "component":"files",
-  "description":"Get a feed that lists the community files that have been flagged as inappropriate and are awaiting action by the moderator",
-  "auth":"basic",
-  "http_method":"get",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"{entries_mod_wkspace_review_content}?{parameters}",
-  "entries_mod_wkspace_review_content":"{entries_mod_wkspace_review_content}",
-  "parameters":"{parameters}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_a_list_of_flagged_community_files_ic301"
-}  
-},
-
-{
-"actOnFlaggedCommunityFile":
-{
-  "component":"files",
-  "description":"Take action on a community file that has been flagged as inappropriate",
-  "auth":"basic",
-  "http_method":"post",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"{entries_mod_wkspace_review_action}",
-  "entries_mod_wkspace_review_action":"{entries_mod_wkspace_review_action}",
-  "post_string":"{post_string}",
-  "post_content_type":"application/atom+xml",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Acting_on_a_flagged_community_file_ic301"
-}  
-},
-
-{
-"retrieveFlaggedCommunityFile":
-{
-  "component":"files",
-  "description":"Retrieve a flagged community file",
-  "auth":"basic",
-  "http_method":"get",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"{file_review_content_edit_uri}",
-  "file_review_content_edit_uri":"{file_review_content_edit_uri}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Retrieving_a_flagged_community_file_ic301"
-}  
-},
-
-{
-"updateFlaggedCommunityFile":
-{
-  "component":"files",
-  "description":"Updating a flagged community file",
-  "auth":"basic",
-  "http_method":"put",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"{file_review_content_edit_uri}",
-  "file_review_content_edit_uri":"{file_review_content_edit_uri}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Updating_a_flagged_community_file_ic301"
-}  
-},
-
-{
-"deleteFlaggedCommunityFile":
-{
-  "component":"files",
-  "description":"Deleting a flagged community file",
-  "auth":"basic",
-  "http_method":"delete",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"{file_review_content_edit_uri}",
-  "file_review_content_edit_uri":"{file_review_content_edit_uri}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Deleting_flagged_community_files_ic301"
-}  
-},
-
-{
-"getListOfFlaggedCommunityFileComments":
-{
-  "component":"files",
-  "description":"Get a feed that lists the community file comments that have been flagged as inappropriate and are awaiting action by the moderator",
-  "auth":"basic",
-  "http_method":"get",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"{comments_mod_wkspace_review_content}?{parameters}",
-  "comments_mod_wkspace_review_content":"{comments_mod_wkspace_review_content}",
-  "parameters":"{parameters}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_a_list_of_flagged_community_file_comments_ic301"
-}  
-},
-
-{
-"actOnFlaggedCommunityFileComment":
-{
-  "component":"files",
-  "description":"Take action on a comment that has been flagged as inappropriate",
-  "auth":"basic",
-  "http_method":"post",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"{comment_mod_wkspace_review_action}",
-  "comment_mod_wkspace_review_action":"{comment_mod_wkspace_review_action}",
-  "post_string":"{post_string}",
-  "post_content_type":"application/atom+xml",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Acting_on_a_flagged_community_file_comment_ic301"
-}  
-},
-
-{
-"deleteFlaggedCommunityFileComment":
-{
-  "component":"files",
-  "description":"Delete a community file comment that has been flagged as inappropriate",
-  "auth":"basic",
-  "http_method":"delete",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"{file_comment_review_content_edit_uri}",
-  "file_comment_review_content_edit_uri":"{file_comment_review_content_edit_uri}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Deleting_community_file_comments_awaiting_approval_ic301"
 }  
 }
 ]

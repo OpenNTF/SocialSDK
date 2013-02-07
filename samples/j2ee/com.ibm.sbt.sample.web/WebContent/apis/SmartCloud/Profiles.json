@@ -1,30 +1,24 @@
 [{
 	"name": "getMyProfile",
-	{
-		"description": "get my profile.<br><span class='highlight'>format</span> could be <span class='highlight'>json</span>, <span class='highlight'>xml</span> or <span class='highlight'>atom</span>. Default value is <span class='highlight'>json</span>",
-		"http_method": "get",
-		"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Profiles_API_sbar",
-		"uri": "/lotuslive-shindig-server/social/rest/people/@me/@self?format={format}"
-	}
+	"description": "get my profile.<br><span class='highlight'>format</span> could be <span class='highlight'>json</span>, <span class='highlight'>xml</span> or <span class='highlight'>atom</span>. Default value is <span class='highlight'>json</span>",
+	"http_method": "get",
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Profiles_API_sbar",
+	"uri": "/lotuslive-shindig-server/social/rest/people/@me/@self?format={format}"
 },
 {
 	"name": "getMyProfile_Header",
-	{
-		"description": "get my profile and specify responseFormat in '<span class='label'>Accept</span>' request header.<br><span class='highlight'>responseFormat</span> could be <span class='highlight'>application/json</span>, <span class='highlight'>application/xml</span> or <span class='highlight'>application/atom+xml</span>.",
-		"http_method": "get",
-		"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Profiles_API_sbar",
-		"uri": "/lotuslive-shindig-server/social/rest/people/@me/@self",
-		"inputs": "responseFormat"
-	}
+	"description": "get my profile and specify responseFormat in '<span class='label'>Accept</span>' request header.<br><span class='highlight'>responseFormat</span> could be <span class='highlight'>application/json</span>, <span class='highlight'>application/xml</span> or <span class='highlight'>application/atom+xml</span>.",
+	"http_method": "get",
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Profiles_API_sbar",
+	"uri": "/lotuslive-shindig-server/social/rest/people/@me/@self",
+	"inputs": "responseFormat"
 },
 {
 	"name": "getProfileByUserGUID",
-	{
-		"description": "get profile info by a user ID.<br><span class='highlight'>format</span> could be <span class='highlight'>json</span>, <span class='highlight'>xml</span> or <span class='highlight'>atom</span>. Default value is <span class='highlight'>json</span>",
-		"http_method": "get",
-		"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Profiles_API_sbar",
-		"uri": "/lotuslive-shindig-server/social/rest/people/lotuslive:user:{subscriberId}/@self?format={format}"
-	}
+	"description": "get profile info by a user ID.<br><span class='highlight'>format</span> could be <span class='highlight'>json</span>, <span class='highlight'>xml</span> or <span class='highlight'>atom</span>. Default value is <span class='highlight'>json</span>",
+	"http_method": "get",
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Profiles_API_sbar",
+	"uri": "/lotuslive-shindig-server/social/rest/people/lotuslive:user:{subscriberId}/@self?format={format}"
 },
 {
 	"name": "getProfileByUserGUID_Header",

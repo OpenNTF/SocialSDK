@@ -6,19 +6,45 @@
 		</managed-bean-class>
     <managed-bean-scope>application</managed-bean-scope>
   </managed-bean>
+
   <!--
-		Managed bean containing the business logic when accessing a snippet
-		document.
+		Bean holding the options for the whole playground.
+		This is mostly for development and debugging purposes.
 	-->
   <managed-bean>
-    <managed-bean-name>snippetDoc</managed-bean-name>
-    <managed-bean-class>nsf.playground.beans.SnippetDocument
+    <managed-bean-name>optionsBean</managed-bean-name>
+    <managed-bean-class>nsf.playground.beans.OptionsBean
+		</managed-bean-class>
+    <managed-bean-scope>application</managed-bean-scope>
+    <managed-property>
+      <property-name>playgroundEnabled</property-name>
+      <value>true</value>
+    </managed-property>
+    <managed-property>
+      <property-name>explorerEnabled</property-name>
+      <value>false</value>
+    </managed-property>
+  </managed-bean>
+  
+  <!--
+		Managed bean containing the business logic when accessing an asset document.
+	-->
+  <managed-bean>
+    <managed-bean-name>snippetBean</managed-bean-name>
+    <managed-bean-class>nsf.playground.beans.SnippetBean
 		</managed-bean-class>
     <managed-bean-scope>request</managed-bean-scope>
   </managed-bean>
   <managed-bean>
-    <managed-bean-name>importSources</managed-bean-name>
-    <managed-bean-class>nsf.playground.beans.ImportSources
+    <managed-bean-name>apiBean</managed-bean-name>
+    <managed-bean-class>nsf.playground.beans.APIBean
+		</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  
+  <managed-bean>
+    <managed-bean-name>importExport</managed-bean-name>
+    <managed-bean-class>nsf.playground.beans.ImportExport
 		</managed-bean-class>
     <managed-bean-scope>request</managed-bean-scope>
   </managed-bean>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xe:navigator id="outline">
+		<xe:this.treeNodes>
+			<xe:basicContainerNode transparent="true"
+				loaded="${javascript:optionsBean.playgroundEnabled}">
+				<xe:pageTreeNode page="ManageSnippetsByCategory"
+					label="Snippets By Category" selection="/Manage/SnippetsByCategory">
+				</xe:pageTreeNode>
+				<xe:pageTreeNode page="ManageSnippetsByAuthor"
+					label="Snippets By Author" selection="/Manage/SnippetsByAuthor">
+				</xe:pageTreeNode>
+				<xe:pageTreeNode page="ManageSnippetsMine" label="My Snippets"
+					selection="/Manage/SnippetsMine">
+				</xe:pageTreeNode>
+				<xe:pageTreeNode page="ManageImportSnippets" label="Import Assets"
+					selection="/Manage/ImportSnippets">
+				</xe:pageTreeNode>
+			</xe:basicContainerNode>
+			<xe:basicContainerNode transparent="true"
+				loaded="${javascript:optionsBean.explorerEnabled}">
+				<xe:separatorTreeNode></xe:separatorTreeNode>
+				<xe:pageTreeNode page="ManageAPIsByCategory" label="APIs By Category"
+					selection="/Manage/APIsByCategory">
+				</xe:pageTreeNode>
+				<xe:pageTreeNode page="ManageAPIsByAuthor" label="APIs By Author"
+					selection="/Manage/APIsByAuthor">
+				</xe:pageTreeNode>
+				<xe:pageTreeNode page="ManageImportAPIs" label="Import API Descriptions"
+					selection="/Manage/ImportAPIs">
+				</xe:pageTreeNode>
+			</xe:basicContainerNode>
+			<xe:separatorTreeNode></xe:separatorTreeNode>
+			<xe:pageTreeNode page="ManageEnvironments" label="Runtime Environments"
+				selection="/Manage/Environments">
+			</xe:pageTreeNode>
+			<!--
+				<xe:separatorTreeNode></xe:separatorTreeNode> <xe:pageTreeNode
+				page="ManageDocumentation" label="Documentation Entries"
+				selection="/Manage/Documentation"></xe:pageTreeNode>
+			-->
+		</xe:this.treeNodes>
+	</xe:navigator>
+</xp:view>

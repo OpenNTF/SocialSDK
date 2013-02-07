@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="85257AA80077A28B" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="3f6" sequence="1" unid="CDC3A603FFB660FC85257B0A007896FE">
+<created><datetime>20130206T165709,74-05</datetime></created>
+<modified><datetime>20130206T165709,75-05</datetime></modified>
+<revised><datetime>20130206T165709,74-05</datetime></revised>
+<lastaccessed><datetime>20130206T165709,75-05</datetime></lastaccessed>
+<addedtofile><datetime>20130206T165709,75-05</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></updatedby>
+<wassignedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></wassignedby>
+<item name="$TITLE"><text>explorer_delete.png</text></item>
+<item name="$Flags"><text>34CiQ</text></item>
+<item name="$FlagsExt"><text>D</text></item>
+<item name="$ImagesWide" sign="true"><number>1</number></item>
+<item name="$ImagesHigh" sign="true"><number>1</number></item>
+<item name="$ImagesColorize" sign="true"><number>0</number></item>
+
+
+<item name="$MimeType" sign="true"><text>image/png</text></item>
+<item name="$FileModDT" sign="true"><datetime dst="true">20121022T112150,00-04</datetime></item>
+<item name="$ImageNames" sign="true"><text>explorer_delete.png</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item></note>

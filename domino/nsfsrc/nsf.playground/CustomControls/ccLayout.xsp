@@ -66,11 +66,11 @@
 					<xe:pageTreeNode selection="/Home" label="Home"
 						page="/Home.xsp">
 					</xe:pageTreeNode>
-					<xe:pageTreeNode label="Playground"
+					<xe:pageTreeNode label="Playground" loaded="${javascript:optionsBean.playgroundEnabled}"
 						page="/Playground.xsp" selection="/Playground">
 					</xe:pageTreeNode>
-					<xe:pageTreeNode label="API Explorer" loaded="false"
-						page="/ApiExplorer.xsp" selection="/ApiExplorer">
+					<xe:pageTreeNode label="API Explorer" loaded="${javascript:optionsBean.explorerEnabled}"
+						page="/Explorer.xsp" selection="/Explorer">
 					</xe:pageTreeNode>
 				</xe:this.titleBarTabs>
 			</xe:applicationConfiguration>

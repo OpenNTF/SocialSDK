@@ -100,9 +100,12 @@
 
   <target name="jsdoc" depends="properties, prepare">
     <echo>--Generating javascript documentation</echo>
-    <echo>NodeJS executable: ${node.exec}</echo>
-    <echo>Arguments:         ${yuidoc.exec} ${dir.src} -o ${dir.jsdoc.output} -c ${dir.jsdoc.config}</echo>
-    <exec executable="${node.exec}" dir=".">
+  	<property name="resolved.node" location="${node.exec}"/>
+  	<property name="resolved.yui" location="${yuidoc.exec}"/>
+
+    <echo>NodeJS executable: ${resolved.node}</echo>
+    <echo>Arguments:         ${resolved.yui} ${dir.src} -o ${dir.jsdoc.output} -c ${dir.jsdoc.config}</echo>
+    <exec executable="${node.exec}" dir="." failonerror="true">
       <arg value="${yuidoc.exec}"/>
       <arg value="${dir.src}"/>
       <arg value="-o"/>
@@ -119,7 +122,7 @@
     <echo>--Minifying javascript code</echo>
     <echo>Shrinksafe: java -jar ${org.dojotoolkit:dojo-shrinksafe:jar} -cp=${rhino:js:jar} ${dir.src} ${dir.min.output}/min.js</echo>
     <!-- Run on every file and keep directory structure -->
-    <foreach target="processJS" param="file" inheritall="true">
+    <foreach target="processJS" param="file" inheritall="true" parallel="true">
       <fileset dir="${dir.src}" includes="**/**.js"/>
     </foreach>
     <!-- Append all files together
@@ -155,7 +158,7 @@
         <classpath refid="shrinksafe.classpath"/>
     	<arg value="${file}"/>
     </java>
-    <echo>Minifying file ${file}</echo>
+    <echo>Minifying file ${file} to ${dir.min.output}\${relDir}\ </echo>
   </target>
 
   <target name="build" depends="properties, prepare, jshint, jsdoc, jsmin" />

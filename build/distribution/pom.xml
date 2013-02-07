@@ -20,7 +20,7 @@
   </pluginRepositories>
 
   <properties>
-    <project.target.directory>${user.dir}/../../target</project.target.directory>
+    <project.target.directory>${build.target}</project.target.directory>
     <project.platform.directory>${user.dir}/../platform</project.platform.directory>
     <project.prereqs.directory>${user.dir}/../prereqs</project.prereqs.directory>
   </properties>
@@ -165,7 +165,7 @@
 	      <descriptor>assembly.xml</descriptor>
 	      <finalName>sbtsdk-${project.version}.${buildLabel}</finalName>
 	      <appendAssemblyId>false</appendAssemblyId>
-	      <outputDirectory>../../../kit</outputDirectory>
+	      <outputDirectory>${build.output}</outputDirectory>
 	    </configuration>
 	  </execution>
         </executions>

@@ -11,7 +11,7 @@
   </parent>
   
   <build>
-    <directory>../../../../target/${project.groupId}/${project.artifactId}</directory>
+    <directory>${build.target}/${project.groupId}/${project.artifactId}</directory>
   </build>
   
   <dependencies>

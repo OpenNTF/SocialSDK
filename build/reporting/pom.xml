@@ -41,6 +41,7 @@
           <rulesets>
             <ruleset>./reporting/PMD/PMDrules.xml</ruleset>
           </rulesets>
+          <outputDirectory>${build.target}/reporting/pmd</outputDirectory>
         </configuration>
       </plugin>
       <!-- FindBugs -->
@@ -51,7 +52,7 @@
         <configuration>
           <xmlOutput>true</xmlOutput>
           <!-- Optional directory to put findbugs xdoc xml report -->
-          <xmlOutputDirectory>target/reporting/findbugs</xmlOutputDirectory>
+          <xmlOutputDirectory>${build.target}/reporting/findbugs</xmlOutputDirectory>
           <excludeFilterFile>findbugs/excluded.xml</excludeFilterFile>
           <!--<includeFilterFile>findbugs-include.xml</includeFilterFile>-->
         </configuration>

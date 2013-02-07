@@ -26,18 +26,12 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.DOMUtil;
 import com.ibm.commons.xml.XMLException;
-import com.ibm.sbt.util.XmlNavigator;
 import com.ibm.sbt.services.client.BaseService;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
-import com.ibm.sbt.services.client.SBTServiceException;
-import com.ibm.sbt.services.client.connections.communities.Community;
 import com.ibm.sbt.services.util.AuthUtil;
 
 /**
@@ -56,7 +50,9 @@ public class ProfileService extends BaseService {
 	public static final String				ProfileBaseUrl	= "profiles";
 	public static final String				seperator		= "/";
 
-	private static Map<String, Document>	cache			= new HashMap<String, Document>();
+	//private static Map<String, Document>	cache			= new HashMap<String, Document>();
+	
+	private LRUCache lruCache;
 
 	public static enum ProfilesAPI {
 		GETPROFILE("profiles/atom/profile.do"), DELETEPROFILE("profiles/admin/atom/profileEntry.do"), ADDPROFILE(
@@ -85,6 +81,7 @@ public class ProfileService extends BaseService {
 
 	public ProfileService() {
 		this(DEFAULT_ENDPOINT_NAME, DEFAULT_CACHE_SIZE);
+		initializeCache(DEFAULT_CACHE_SIZE);
 	}
 
 	/**
@@ -96,6 +93,7 @@ public class ProfileService extends BaseService {
 
 	public ProfileService(String endpoint) {
 		this(endpoint, DEFAULT_CACHE_SIZE);
+		initializeCache(DEFAULT_CACHE_SIZE);
 	}
 
 	/**
@@ -108,6 +106,16 @@ public class ProfileService extends BaseService {
 
 	public ProfileService(String endpoint, int cacheSize) {
 		super(endpoint, cacheSize);
+		initializeCache(cacheSize);
+	}
+	/**
+	 * This method is used to initialize the LRU cache with given size. 
+	 * 
+	 * @param cacheSize
+	 */
+	
+	private void initializeCache(int cacheSize){
+		lruCache = new LRUCache(cacheSize);
 	}
 
 	/**
@@ -377,11 +385,11 @@ public class ProfileService extends BaseService {
 		}
 		if (isEmail(userId)) {
 			String key;
-			Set<String> keys = cache.keySet();
+			Set<String> keys = lruCache.getKeySet();
 			Iterator<String> itr = keys.iterator();
 			while (itr.hasNext()) {
 				key = itr.next();
-				Document data = cache.get(key);
+				Document data = lruCache.get(key);
 				// check if email in profile object is same as input userId
 				String email = "";
 				try {
@@ -392,13 +400,13 @@ public class ProfileService extends BaseService {
 
 				// cache hit
 				if (StringUtil.equalsIgnoreCase(email, userId)) {
-					cache.remove(key);
+					lruCache.remove(key);
 				}
 			}
 			// Cache miss
 
 		} else {
-			cache.remove(userId);
+			lruCache.remove(userId);
 		}
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.exiting(sourceClass, "removeProfileDataFromCache");
@@ -465,7 +473,9 @@ public class ProfileService extends BaseService {
 		if (isEmail(userId)) {
 			data = findInCache(userId);
 		} else {
-			data = cache.get(userId);
+			if(lruCache.hasKey(userId)){
+				data = lruCache.get(userId);
+			}
 		}
 		return data;
 	}
@@ -477,21 +487,8 @@ public class ProfileService extends BaseService {
 	 * @param content
 	 */
 	private void addProfileDataToCache(String userId, Document content) {
-		// If caching is disabled , no action
-		if (this.cacheSize == 0) {
-			return;
-		}
-		// Limit the cache size as per options
-		// to check if cache is full , remove if full using LRU algorithm
-		// for now remove first entry in the cache
-		if (cache.size() == this.cacheSize) {
-			Iterator<String> iterator = cache.keySet().iterator();
-			if (iterator.hasNext()) {
-				String firstEntry = iterator.next();
-				cache.remove(firstEntry);
-			}
-		}
-		cache.put(userId, content);
+	
+		lruCache.put(userId, content);
 	}
 
 	/*
@@ -502,11 +499,11 @@ public class ProfileService extends BaseService {
 	 */
 	private Document findInCache(String userId) {
 		String key;
-		Set<String> keys = cache.keySet();
+		Set<String> keys = lruCache.getKeySet();
 		Iterator<String> itr = keys.iterator();
 		while (itr.hasNext()) {
 			key = itr.next();
-			Document data = cache.get(key);
+			Document data = lruCache.get(key);
 			// check if email in profile object is same as input userId
 			String email = "";
 			try {

@@ -1,22 +1,14 @@
-[
-{
-  "getUserIdentity":
-  {
-    "component":"userInfo",
-    "description":"get user identity",
-    "http_method":"get",
-    "doc_url":"http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/OAuth_APIs_sbar",
-    "uri":"/manage/oauth/getUserIdentity"
-  }
+[{
+	"name": "getUserIdentity",
+	"description": "get user identity",
+	"http_method": "get",
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/OAuth_APIs_sbar",
+	"uri": "/manage/oauth/getUserIdentity"
 },
 {
-  "getUserServices":
-  {
-    "component":"userInfo",
-    "description":"get user services",
-    "http_method":"get",
-    "doc_url":"http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/OAuth_APIs_sbar",
-    "uri":"/manage/oauth/getUserServices"
-  }
-}
-]
+	"name": "getUserServices",
+	"description": "get user services",
+	"http_method": "get",
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/OAuth_APIs_sbar",
+	"uri": "/manage/oauth/getUserServices"
+}]

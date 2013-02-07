@@ -1,138 +1,107 @@
-[
-{
-"createComment":
-{
-  "description":"Create a comment",
-  "http_method":"post",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/api/userlibrary/{userid}/document/{document-id}/feed?{parameters}",
-  "parameters":"{parameters}",
-  "post_string":"{post_string}",
-  "post_content_type":"application/atom+xml",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Creating_a_comment_ic301"
-}  
+[{
+	"name": "createComment",
+	"description": "Create a comment",
+	"http_method": "post",
+	"host_property_name": "files_apiTargetHost",
+	"uri": "/files/basic/api/userlibrary/{userid}/document/{document-id}/feed?{parameters}",
+	"parameters": "{parameters}",
+	"post_string": "{post_string}",
+	"post_content_type": "application/atom+xml",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Creating_a_comment_ic301"
 },
-
 {
-"createCommentPlainText":
-{
-  "description":"Create a comment",
-  "http_method":"post",
-  "host_property_name":"files_apiTargetHost",
-  "http_headers":"{http_headers}",
-  "uri":"/files/basic/api/userlibrary/{userid}/document/{document-id}/feed?{parameters}",
-  "parameters":"{parameters}",
-  "post_string":"{post_string}",
-  "post_content_type":"text/plain",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Creating_a_comment_ic301"
-}  
+	"name": "createCommentPlainText",
+	"description": "Create a comment",
+	"http_method": "post",
+	"host_property_name": "files_apiTargetHost",
+	"http_headers": "{http_headers}",
+	"uri": "/files/basic/api/userlibrary/{userid}/document/{document-id}/feed?{parameters}",
+	"parameters": "{parameters}",
+	"post_string": "{post_string}",
+	"post_content_type": "text/plain",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Creating_a_comment_ic301"
 },
-
 {
-"retrieveSomeonesFileComment":
-{
-  "description":"Retrieve an Atom document representation of a comment associated with a file belonging a file belonging to someone else",
-  "http_method":"get",
-  "host_property_name":"files_apiTargetHost",
-  "http_headers":"{http_headers}",
-  "uri":"/files/basic/api/userlibrary/{userid}/document/{document-id}/comment/{comment-id}/entry?{parameters}",
-  "parameters":"{parameters}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Retrieving_a_file_comment_ic301"
-}  
+	"name": "retrieveSomeonesFileComment",
+	"description": "Retrieve an Atom document representation of a comment associated with a file belonging a file belonging to someone else",
+	"http_method": "get",
+	"host_property_name": "files_apiTargetHost",
+	"http_headers": "{http_headers}",
+	"uri": "/files/basic/api/userlibrary/{userid}/document/{document-id}/comment/{comment-id}/entry?{parameters}",
+	"parameters": "{parameters}",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Retrieving_a_file_comment_ic301"
 },
-
 {
-"retrieveYourFileComment":
-{
-  "description":"Retrieve an Atom document representation of a comment associated with your file",
-  "http_method":"get",
-  "host_property_name":"files_apiTargetHost",
-  "http_headers":"{http_headers}",
-  "uri":"/files/basic/api/myuserlibrary/document/{document-id}/comment/{comment-id}/entry?{parameters}",
-  "parameters":"{parameters}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Retrieving_a_file_comment_ic301"
-}  
+	"name": "retrieveYourFileComment",
+	"description": "Retrieve an Atom document representation of a comment associated with your file",
+	"http_method": "get",
+	"host_property_name": "files_apiTargetHost",
+	"http_headers": "{http_headers}",
+	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/comment/{comment-id}/entry?{parameters}",
+	"parameters": "{parameters}",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Retrieving_a_file_comment_ic301"
 },
-
 {
-"deleteSomeonesFileComment":
-{
-  "description":"Delete a comment associated with a file belonging to someone else and to which you have access",
-  "http_method":"delete",
-  "host_property_name":"files_apiTargetHost",
-  "http_headers":"{http_headers}",
-  "uri":"/files/basic/api/userlibrary/{userid}/document/{document-id}/comment/{comment-id}/entry?{parameters}",
-  "parameters":"{parameters}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Deleting_a_comment_ic301"
-}  
+	"name": "deleteSomeonesFileComment",
+	"description": "Delete a comment associated with a file belonging to someone else and to which you have access",
+	"http_method": "delete",
+	"host_property_name": "files_apiTargetHost",
+	"http_headers": "{http_headers}",
+	"uri": "/files/basic/api/userlibrary/{userid}/document/{document-id}/comment/{comment-id}/entry?{parameters}",
+	"parameters": "{parameters}",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Deleting_a_comment_ic301"
 },
-
 {
-"deleteYourFileComment":
-{
-  "description":"Delete a comment associated with a file belonging to you",
-  "http_method":"delete",
-  "host_property_name":"files_apiTargetHost",
-  "http_headers":"{http_headers}",
-  "uri":"/files/basic/api/myuserlibrary/document/{document-id}/comment/{comment-id}/entry?{parameters}",
-  "parameters":"{parameters}",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Deleting_a_comment_ic301"
-}  
+	"name": "deleteYourFileComment",
+	"description": "Delete a comment associated with a file belonging to you",
+	"http_method": "delete",
+	"host_property_name": "files_apiTargetHost",
+	"http_headers": "{http_headers}",
+	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/comment/{comment-id}/entry?{parameters}",
+	"parameters": "{parameters}",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Deleting_a_comment_ic301"
 },
-
 {
-"updateSomeonesFileComment":
-{
-  "description":"Update the Atom document representation of the comment associated with a file belonging to someone else",
-  "http_method":"put",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/api/userlibrary/{userid}/document/{document-id}/comment/{comment-id}/entry?{parameters}",
-  "parameters":"{parameters}",
-  "post_string":"{post_string}",
-  "post_content_type":"application/atom+xml",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Updating_a_comment_ic301"
-}  
+	"name": "updateSomeonesFileComment",
+	"description": "Update the Atom document representation of the comment associated with a file belonging to someone else",
+	"http_method": "put",
+	"host_property_name": "files_apiTargetHost",
+	"uri": "/files/basic/api/userlibrary/{userid}/document/{document-id}/comment/{comment-id}/entry?{parameters}",
+	"parameters": "{parameters}",
+	"post_string": "{post_string}",
+	"post_content_type": "application/atom+xml",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Updating_a_comment_ic301"
 },
-
 {
-"updateSomeonesFileCommentPlainText":
-{
-  "description":"Update the Atom document representation of the comment associated with a file belonging to someone else",
-  "http_method":"put",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/api/userlibrary/{userid}/document/{document-id}/comment/{comment-id}/entry?{parameters}",
-  "parameters":"{parameters}",
-  "post_string":"{post_string}",
-  "post_content_type":"text/plain",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Updating_a_comment_ic301"
-}  
+	"name": "updateSomeonesFileCommentPlainText",
+	"description": "Update the Atom document representation of the comment associated with a file belonging to someone else",
+	"http_method": "put",
+	"host_property_name": "files_apiTargetHost",
+	"uri": "/files/basic/api/userlibrary/{userid}/document/{document-id}/comment/{comment-id}/entry?{parameters}",
+	"parameters": "{parameters}",
+	"post_string": "{post_string}",
+	"post_content_type": "text/plain",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Updating_a_comment_ic301"
 },
-
 {
-"updateYourFileComment":
-{
-  "description":"Update the Atom document representation of the comment associated with a file belonging to you",
-  "http_method":"put",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/api/userlibrary/{userid}/document/{document-id}/comment/{comment-id}/entry?{parameters}",
-  "parameters":"{parameters}",
-  "post_string":"{post_string}",
-  "post_content_type":"application/atom+xml",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Updating_a_comment_ic301"
-}  
+	"name": "updateYourFileComment",
+	"description": "Update the Atom document representation of the comment associated with a file belonging to you",
+	"http_method": "put",
+	"host_property_name": "files_apiTargetHost",
+	"uri": "/files/basic/api/userlibrary/{userid}/document/{document-id}/comment/{comment-id}/entry?{parameters}",
+	"parameters": "{parameters}",
+	"post_string": "{post_string}",
+	"post_content_type": "application/atom+xml",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Updating_a_comment_ic301"
 },
-
 {
-"updateYourFileCommentPlainText":
-{
-  "description":"Update the Atom document representation of the comment associated with a file belonging to you",
-  "http_method":"put",
-  "host_property_name":"files_apiTargetHost",
-  "uri":"/files/basic/api/userlibrary/{userid}/document/{document-id}/comment/{comment-id}/entry?{parameters}",
-  "parameters":"{parameters}",
-  "post_string":"{post_string}",
-  "post_content_type":"text/plain",
-  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Updating_a_comment_ic301"
-}  
-}
-]
+	"name": "updateYourFileCommentPlainText",
+	"description": "Update the Atom document representation of the comment associated with a file belonging to you",
+	"http_method": "put",
+	"host_property_name": "files_apiTargetHost",
+	"uri": "/files/basic/api/userlibrary/{userid}/document/{document-id}/comment/{comment-id}/entry?{parameters}",
+	"parameters": "{parameters}",
+	"post_string": "{post_string}",
+	"post_content_type": "text/plain",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Updating_a_comment_ic301"
+}]

@@ -109,28 +109,28 @@
       </includes>
     </fileSet>
     <fileSet>
-      <directory>../../../target/doc/javadoc</directory>
+      <directory>${build.target}/doc/javadoc</directory>
       <outputDirectory>sbtsdk/doc/javadoc</outputDirectory>
       <includes>
         <include>**/*.*</include>
       </includes>
     </fileSet>
     <fileSet>
-      <directory>../../../target/doc/jsdoc</directory>
+      <directory>${build.target}/doc/jsdoc</directory>
       <outputDirectory>sbtsdk/doc/jsdoc</outputDirectory>
       <includes>
         <include>**/*.*</include>
       </includes>
     </fileSet>
         <fileSet>
-      <directory>../../../target/com.ibm.sbt.test/com.ibm.sbt.core.test/site</directory>
+      <directory>${build.target}/com.ibm.sbt.test/com.ibm.sbt.core.test/site</directory>
       <outputDirectory>sbtsdk/reports</outputDirectory>
       <includes>
 		<include>surefire-report.html</include>
       </includes>
     </fileSet>
     <fileSet>
-      <directory>../../../target/doc</directory>
+      <directory>${build.target}/doc</directory>
       <outputDirectory>sbtsdk</outputDirectory>
       <includes>
         <include>version.txt</include>
@@ -139,7 +139,7 @@
       </includes>
     </fileSet>
     <fileSet>
-      <directory>../../../target/tomcat</directory>
+      <directory>${build.target}/tomcat</directory>
       <outputDirectory>sbtsdk/tomcat</outputDirectory>
       <includes>
         <include>**/apache-tomcat-7.0.30-sbt.zip</include>
@@ -256,7 +256,7 @@
       </includes>
     </fileSet>
     <fileSet>
-	  <directory>../../../target/com.ibm.sbt.domino/com.ibm.sbt.domino.updatesite</directory>
+	  <directory>${build.target}/com.ibm.sbt.domino/com.ibm.sbt.domino.updatesite</directory>
       <outputDirectory>sbtsdk/redist/domino</outputDirectory>
       <includes>
         <include>com.ibm.sbt.domino.updatesite.zip</include>

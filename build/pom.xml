@@ -11,6 +11,11 @@
     <tycho-version>0.16.0</tycho-version>
     <code.source>1.6</code.source>
     <code.target>1.6</code.target>
+    
+    <workingDir>${user.dir}/../../</workingDir>
+    <build.target>${workingDir}/target</build.target>
+    <build.output>${workingDir}/kit</build.output>
+    
   </properties>
 
   <repositories>
@@ -40,7 +45,7 @@
 
   <build>
     <!-- project defaults for the sbt modules -->
-    <directory>${user.dir}/../../target/${project.groupId}/${project.artifactId}</directory>
+    <directory>${build.target}/${project.groupId}/${project.artifactId}</directory>
     <outputDirectory>bin</outputDirectory>
     <finalName>${project.artifactId}</finalName>
     <testOutputDirectory>bin-test</testOutputDirectory>
@@ -211,7 +216,7 @@
           <aggregate>true</aggregate>
           <failOnError>false</failOnError>
   		    <excludePackageNames>com.sun.*:com.ibm.commons.*:com.ibm.sbt.core.*:com.ibm.sbt.plugin.*:com.ibm.sbt.jslibrray.*:com.ibm.sbt.proxy.*:com.ibm.sbt.security.*:*.util.*:com.ibm.sbt.portlet.*:com.ibm.sbt.playground.*:demo.*:acme.*</excludePackageNames>
-          <reportOutputDirectory>../../target/doc</reportOutputDirectory>
+          <reportOutputDirectory>${build.target}/doc</reportOutputDirectory>
           <destDir>javadoc</destDir>		  
         </configuration>	    
 	    </plugin>

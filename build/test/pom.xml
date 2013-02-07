@@ -14,7 +14,7 @@
 
 <!--
   <properties>
-    <project.target.directory>${user.dir}/../../target</project.target.directory>
+    <project.target.directory>${build.target}</project.target.directory>
     <project.prereqs.directory>${user.dir}/../prereqs</project.prereqs.directory>
     <project.platform.directory>${user.dir}/../platform</project.platform.directory>
     <project.config.directory>${user.dir}/../src/config</project.config.directory>

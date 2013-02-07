@@ -4,7 +4,7 @@
 	<xc:ccLayout navigationPath="/Manage/SnippetsMine">
 		<xp:this.facets>
 			<xp:panel xp:key="LeftColumn" id="panel4">
-				<xc:LeftManage id="ccLeftMenu"></xc:LeftManage>
+				<xc:ManageLeftNavigator id="ccLeftMenu"></xc:ManageLeftNavigator>
 			</xp:panel>
 		</xp:this.facets>
 		<xp:div style="margin: -20px 0px 0px -25px; padding: 20px 0px 0px 25px; background: white">
@@ -54,7 +54,7 @@
 						</xe:dataView>
 					</xp:panel>
 					<xp:panel xp:key="form" id="panel2">
-						<xc:ccManageForm></xc:ccManageForm>
+						<xc:ManageSnippetsForm></xc:ManageSnippetsForm>
 					</xp:panel>
 				</xp:this.facets>
 			</xe:dynamicContent>

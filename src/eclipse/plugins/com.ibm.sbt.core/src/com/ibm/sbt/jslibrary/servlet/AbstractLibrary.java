@@ -259,7 +259,7 @@ abstract public class AbstractLibrary {
             Context context = Context.get();
             for (Property property : properties) {
                 String value = property.getValue();
-                if (value == null) {
+                if (StringUtil.isEmpty(value)) {
                     value = context.getProperty(property.getName());
                 }
                 if (value != null) {

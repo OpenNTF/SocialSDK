@@ -9,13 +9,9 @@
 		<xp:dojoModule name="extlib.codemirror.mode.javascript.javascript"></xp:dojoModule>
 		<xp:dojoModule name="extlib.codemirror.mode.xml.xml"></xp:dojoModule>
 		<xp:styleSheet href="/.ibmxspres/.extlib/codemirror/lib/codemirror.css"></xp:styleSheet>
-		<xp:styleSheet href="/playground.css"></xp:styleSheet>
 	</xp:this.resources>
 
-	<xc:OneUI21Styles
-		loaded="${javascript:com.ibm.xsp.extlib.util.ThemeUtil.isOneUIVersion(2,1)}"></xc:OneUI21Styles>
-	<xc:OneUI30Styles
-		loaded="${javascript:com.ibm.xsp.extlib.util.ThemeUtil.isOneUIVersion(3,0)}"></xc:OneUI30Styles>
+	<xc:ccMainPageResources></xc:ccMainPageResources>
 
 	<xp:scriptBlock>
 		<xp:this.value><![CDATA[var playground = {
@@ -36,7 +32,7 @@
 	// Other controls
 	cbEnv:			'#{id:cbEnv}',
 	viewNavPanel:	'#{id:panelView}',
-	snippetsTree:	'snippetsTree',
+	snippetsTree:	'assetsTree',
 	tabContainer:	'#{id:tabContainer}',
 	tabHtml:		'#{id:tabHtml}',
 	tabJs:			'#{id:tabJs}',
@@ -83,7 +79,7 @@ if(doc) {	o = {		status:		"ok",		id:			snippetId,		unid:		doc.getUniversalID
 			</xe:this.methods>
 		</xe:jsonRpcService>
 		<xc:ccLayout navigationPath="/Playground"
-			title="Social Business Toolkit Playground">
+			title="Social Business Toolkit - Playground">
 			<xp:this.facets>
 				<xp:panel id="PlaceBarActions" xp:key="PlaceBarActions">
 					<xp:link id="link2" style="padding-right:5.0px">
@@ -125,7 +121,7 @@ return v==dataAccess.CUSTOM}]]></xp:this.rendered>
 				<xe:djBorderPane id="djBorderPane3" region="leading"
 					splitter="true" style="width:280px">
 					<xp:div id="leftRefresh">
-						<xc:ccSnippetTree></xc:ccSnippetTree>
+						<xc:ccAssetTree type="snippet"></xc:ccAssetTree>
 					</xp:div>
 				</xe:djBorderPane>
 				<xe:djBorderPane id="djBorderPane2" region="center">
@@ -190,19 +186,19 @@ if(doc) {
 								<xe:djTabPane id="tabHtml" title="HTML"
 									onShow="playground.htmlEditor.refresh()">
 									<xp:div style="border: 1px solid #AAAAAA; height: 100%">
-										<xc:tabHtml></xc:tabHtml>
+										<xc:PlaygroundTabHtml></xc:PlaygroundTabHtml>
 									</xp:div>
 								</xe:djTabPane>
 								<xe:djTabPane id="tabJs" title="JavaScript"
 									onShow="playground.jsEditor.refresh()">
 									<xp:div style="border: 1px solid #AAAAAA; height: 100%">
-										<xc:tabJavaScript></xc:tabJavaScript>
+										<xc:PlaygroundTabJavaScript></xc:PlaygroundTabJavaScript>
 									</xp:div>
 								</xe:djTabPane>
 								<xe:djTabPane id="tabCss" title="CSS"
 									onShow="playground.cssEditor.refresh()">
 									<xp:div style="border: 1px solid #AAAAAA; height: 100%">
-										<xc:tabCss></xc:tabCss>
+										<xc:PlaygroundTabCss></xc:PlaygroundTabCss>
 									</xp:div>
 								</xe:djTabPane>
 								<!--
@@ -265,7 +261,7 @@ dojo.addOnLoad( function() {
 			<xp:this.data>
 				<xp:dominoDocument var="document1" formName="CodeSnippet">
 					<xp:this.postNewDocument><![CDATA[#{javascript:document1.replaceItemValue("Author",userBean.commonName)}]]></xp:this.postNewDocument>
-					<xp:this.querySaveDocument><![CDATA[#{javascript:return snippetDoc.querySave(document1)}]]></xp:this.querySaveDocument>
+					<xp:this.querySaveDocument><![CDATA[#{javascript:return snippetBean.querySave(document1)}]]></xp:this.querySaveDocument>
 				</xp:dominoDocument>
 			</xp:this.data>
 			<xe:formTable id="formTable2" formTitle="Code Snippet">
@@ -323,7 +319,7 @@ return document1.getDocument().getUniversalID()
 					<xe:valuePicker id="valuePicker2" for="inputText2">
 						<xe:this.dataProvider>
 							<xe:simpleValuePicker
-								valueList="#{javascript:snippetDoc.getAllCategories()}">
+								valueList="#{javascript:snippetBean.getAllCategories()}">
 							</xe:simpleValuePicker>
 						</xe:this.dataProvider>
 					</xe:valuePicker>
@@ -370,8 +366,8 @@ codeEditor.setValue(_codeData);
 		</xp:panel>
 	</xe:dialog>
 
-	<xc:ccPlaygroundCustomEnvDialog></xc:ccPlaygroundCustomEnvDialog>
-	<xc:ccPlaygroundEnvironmentTooltipDialog></xc:ccPlaygroundEnvironmentTooltipDialog>
+	<xc:PlaygroundCustomEnvDialog></xc:PlaygroundCustomEnvDialog>
+	<xc:PlaygroundEnvironmentTooltipDialog></xc:PlaygroundEnvironmentTooltipDialog>
 
 	<form id="PreviewForm" action="#{javascript:@FullUrl('/xsp/preview')}"
 		method="post" target="preview">

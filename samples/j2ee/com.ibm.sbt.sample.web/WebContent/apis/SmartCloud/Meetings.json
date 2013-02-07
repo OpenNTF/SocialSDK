@@ -1,48 +1,42 @@
 [
-{
-  "getMeetingDetails":
-  {
-    "component":"meetings",
-    "description":"get meeting details",
-    "http_method":"get",
-    "doc_extra":"http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Meetings_APIs_sbar",
-    "doc_url":"http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Get_meeting_room_details_sbar",
-    "uri":"/meetings/api/getMeetingDetails"
-  }
-},
-{
-  "getMeetingDetails_XML":
-  {
-    "component":"meetings",
-    "description":"get meeting details",
-    "http_method":"get",
-    "doc_extra":"http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Meetings_APIs_sbar",
-    "doc_url":"http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Get_meeting_room_details_sbar",
-    "uri":"/meetings/api/getMeetingDetails?returnType=xml"
-  },
-},
-{
-  "getMeetingSummary":
-  {
-    "component":"meetings",
-    "description":"get meeting summary of an on-going meeting.<br>
-    			   Before run this API, please go to web UI and start the meeting.",
-    "http_method":"get",
-    "doc_extra":"http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Meetings_APIs_sbar",
-    "doc_url":"http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Get_event_participants_sbar",
-    "uri":"/meetings/api/getMeetingSummary?TagCode=extSF&TagID={meetingId}"
-  }
-},
-{
-  "getMeetingSummary_XML":
-  {
-    "component":"meetings",
-    "description":"get meeting details of an on-going meeting.<br>
-    			   Before run this API, please go to web UI and start the meeting.",
-    "http_method":"get",
-    "doc_extra":"http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Meetings_APIs_sbar",
-    "doc_url":"http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Get_event_participants_sbar",
-    "uri":"/meetings/api/xml/getMeetingSummary?TagCode=extSF&TagID={meetingId}"
-  },
-}
+    {
+        "getMeetingDetails": {
+            "component": "meetings",
+            "description": "get meeting details",
+            "http_method": "get",
+            "doc_extra": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Meetings_APIs_sbar",
+            "doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Get_meeting_room_details_sbar",
+            "uri": "/meetings/api/getMeetingDetails"
+        }
+    },
+    {
+        "getMeetingDetails_XML": {
+            "component": "meetings",
+            "description": "get meeting details",
+            "http_method": "get",
+            "doc_extra": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Meetings_APIs_sbar",
+            "doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Get_meeting_room_details_sbar",
+            "uri": "/meetings/api/getMeetingDetails?returnType=xml"
+        }
+    },
+    {
+        "getMeetingSummary": {
+            "component": "meetings",
+            "description": "get meeting summary of an on-going meeting.<br>Before run this API, please go to web UI and start the meeting.",
+            "http_method": "get",
+            "doc_extra": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Meetings_APIs_sbar",
+            "doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Get_event_participants_sbar",
+            "uri": "/meetings/api/getMeetingSummary?TagCode=extSF&TagID={meetingId}"
+        }
+    },
+    {
+        "getMeetingSummary_XML": {
+            "component": "meetings",
+            "description": "get meeting details of an on-going meeting.<br>Before run this API, please go to web UI and start the meeting.",
+            "http_method": "get",
+            "doc_extra": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Meetings_APIs_sbar",
+            "doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Get_event_participants_sbar",
+            "uri": "/meetings/api/xml/getMeetingSummary?TagCode=extSF&TagID={meetingId}"
+        }
+    }
 ]

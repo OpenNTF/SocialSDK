@@ -96,6 +96,7 @@ abstract public class AbstractLibrary {
     public static final String MODULE_DELCARE = "sbt/_bridge/declare";
     public static final String MODULE_IFRAMETRANSPORT = "sbt/_bridge/IFrameTransport";
     public static final String MODULE_TRANSPORT = "sbt/_bridge/Transport";
+    public static final String MODULE_REQUESTTRANSPORT = "sbt/_bridge/RequestTransport";
     public static final String MODULE_ERROR_TRANSPORT = "sbt/ErrorTransport";
     public static final String MODULE_GADGET_TRANSPORT = "sbt/GadgetTransport";
     public static final String MODULE_CACHE = "sbt/Cache";
@@ -316,7 +317,7 @@ abstract public class AbstractLibrary {
             JsonReference transportRef = createTransportRef(request, endpoint, endpointName);
             if (transportRef != null) {
                 jsonEndpoint.putJsonProperty(PROP_TRANSPORT, transportRef);
-                String moduleName = endpoint.getTransport(endpointName).getModuleName();
+                String moduleName = getTransport(request, endpoint, endpointName).getModuleName();
                 jsonEndpoint.putJsonProperty(PROP_MODULE_TRANSPORT, moduleName);
             }
 
@@ -682,7 +683,7 @@ abstract public class AbstractLibrary {
      * @throws LibraryException
      */
     protected JsonReference createTransportRef(LibraryRequest request, Endpoint endpoint, String logicalName) throws LibraryException {
-        JSReference transport = endpoint.getTransport(logicalName);
+        JSReference transport = getTransport(request, endpoint, logicalName);
         if (transport != null) {
             try {
                 String paramValues = JsonGenerator.toJson(JsonJavaFactory.instanceEx, transport.getProperties());
@@ -693,6 +694,17 @@ abstract public class AbstractLibrary {
             }
         }
         return null;
+    }
+    
+    /**
+     * 
+     * @param request
+     * @param endpoint
+     * @param endpointName
+     * @return
+     */
+    protected JSReference getTransport(LibraryRequest request, Endpoint endpoint, String endpointName) {
+    	return endpoint.getTransport(endpointName, MODULE_TRANSPORT);
     }
 
     /*

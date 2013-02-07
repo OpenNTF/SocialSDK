@@ -4,7 +4,7 @@
 	<xc:ccLayout navigationPath="/Manage/Documentation">
 		<xp:this.facets>
 			<xp:panel xp:key="LeftColumn" id="panel4">
-				<xc:LeftManage id="ccLeftMenu"></xc:LeftManage>
+				<xc:ManageLeftNavigator id="ccLeftMenu"></xc:ManageLeftNavigator>
 			</xp:panel>
 		</xp:this.facets>
 		<xp:div style="padding: 20px 25px 0 25px">

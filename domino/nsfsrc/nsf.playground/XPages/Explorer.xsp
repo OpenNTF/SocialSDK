@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xp:this.resources>
+		<xp:script src="/explorer.js" clientSide="true"></xp:script>
+		<xp:dojoModule name="dojo.hash"></xp:dojoModule>
+	</xp:this.resources>
+
+	<xp:scriptBlock>
+		<xp:this.value><![CDATA[var pageGlobal = {
+	dynPanel:		'#{id:dynp}',
+}
+
+function prepend(h,f) {
+	return function() {
+		if(f) {
+			f.apply(this,arguments);
+		}
+		if(h) {
+			h.apply(this,arguments);
+		}
+	};
+}
+XSP._partialRefresh = prepend(XSP._partialRefresh,updateNavSelection);
+]]></xp:this.value>
+	</xp:scriptBlock>
+
+	<xc:ccMainPageResources></xc:ccMainPageResources>
+
+	<xc:ccLayout navigationPath="/Explorer"
+		title="Social Business Toolkit - API Explorer">
+		<xp:this.facets>
+		</xp:this.facets>
+		<xe:djBorderContainer id="djTabContainer1"
+			style="width:100%; height:1000px;" liveSplitters="true">
+			<xe:this.dojoAttributes>
+				<xp:dojoAttribute name="design" value="sidebar"></xp:dojoAttribute>
+			</xe:this.dojoAttributes>
+			<xe:djBorderPane id="djBorderPane3" region="leading"
+				splitter="true" style="width:280px">
+				<xp:div id="leftRefresh">
+					<xc:ccAssetTree type="api"></xc:ccAssetTree>
+				</xp:div>
+			</xe:djBorderPane>
+			<xe:djBorderPane id="djBorderPane2" region="center">
+			<xe:dynamicContent id="dynp" defaultFacet="api"
+				useHash="false"
+				partialEvents="true">
+				<xp:this.facets>
+					<xp:panel xp:key="api" id="panel1">
+						<xp:text escape="true" id="computedField1">
+							<xp:this.value><![CDATA[#{javascript:var e = param["api"]
+return "You asked for: "+e+" "+(new Date()).toISOString()}]]></xp:this.value>
+						</xp:text>
+					</xp:panel>
+				</xp:this.facets>
+			</xe:dynamicContent>
+			</xe:djBorderPane>
+		</xe:djBorderContainer>
+	</xc:ccLayout>
+
+	<xp:scriptBlock>
+		<xp:this.value><![CDATA[function loadFromHash() {
+	if(dojo.hash()) {
+		var obj = dojo.queryToObject(dojo.hash());
+		if(obj.api) {
+			loadAPI(obj.api);
+		} 
+	} else {
+		emptyAPI();
+	}
+}
+dojo.addOnLoad( function() {	
+	dojo.subscribe("/dojo/hashchange",loadFromHash);
+	if(dojo.hash()) {
+		loadFromHash()
+	}
+})
+]]></xp:this.value>
+	</xp:scriptBlock>
+
+</xp:view>

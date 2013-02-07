@@ -11,7 +11,7 @@
 	<xc:ccLayout navigationPath="/Manage/Environments">
 		<xp:this.facets>
 			<xp:panel xp:key="LeftColumn" id="panel4">
-				<xc:LeftManage id="ccLeftMenu"></xc:LeftManage>
+				<xc:ManageLeftNavigator id="ccLeftMenu"></xc:ManageLeftNavigator>
 			</xp:panel>
 		</xp:this.facets>
 		<xp:div>

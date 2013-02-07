@@ -33,7 +33,7 @@ public class TestAction extends AsyncAction {
 		if(!actionExists(ACTION_ID)) {
 			registerAction(ACTION_ID, new TestAction());
 		}
-		return start(ACTION_ID);
+		return runAction(ACTION_ID);
 	}	
 	
     public String getActionLabel() {

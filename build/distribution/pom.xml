@@ -46,7 +46,7 @@
 	      <goal>wget</goal>
 	    </goals>
 	    <configuration>
-	      <url>http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.35/bin/apache-tomcat-7.0.35.zip</url>
+	      <url>http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.30/bin/apache-tomcat-7.0.30.zip</url>
 	        <unpack>true</unpack>
 		<outputDirectory>${project.target.directory}/tomcat/unzip</outputDirectory>
 		<md5>1c7a7869d86b74dddb0a22d15f020922</md5>
@@ -63,36 +63,38 @@
 	    <configuration>
 	      <target>
 	        <!-- Package Tomcat -->
-<!--
-	        <unzip src="${project.target.directory}/downloads/apache-tomcat-7.0.35.zip" dest="${project.target.directory}/tomcat/unzip"/>	
--->
-	        <copy todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.35/webapps" >
-	          <fileset dir="${project.target.directory}" >
-		    <include name="com.ibm.sbt.skd/sbt/sbt.war"/>
-		    <include name="com.ibm.sbt.skd/sbt.dojo180/sbt.dojo180.war"/>
-		    <include name="com.ibm.sbt.sample/sbt.sample.web/sbt.sample.web.war"/>
-		    <include name="com.ibm.sbt.sample/acme.social.sample.dataapp/acme.social.sample.dataapp.war"/>
-		    <include name="com.ibm.sbt.sample/acme.social.sample.webapp/acme.social.sample.webapp.war"/>
-	  	  </fileset>
-	        </copy>
-
-	        <copy file="${project.target.directory}/com.ibm.sbt.sdk/com.ibm.commons.runtime/com.ibm.commons.runtime.jar" 
-			todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.35/lib" />
+            
+            <copy todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps" 
+                file="${project.target.directory}/com.ibm.sbt.sdk/sbt/sbt.war"/>
+            <copy todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps" 
+                file="${project.target.directory}/com.ibm.sbt.sdk/sbt.dojo180/sbt.dojo180.war"/>
+            <copy todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps" 
+                file="${project.target.directory}/com.ibm.sbt.sample/sbt.sample.web/sbt.sample.web.war"/>
+            <copy todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps" 
+                file="${project.target.directory}/com.ibm.sbt.sample/acme.social.sample.dataapp/acme.social.sample.dataapp.war"/>
+            <copy todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps" 
+                file="${project.target.directory}/com.ibm.sbt.sample/acme.social.sample.webapp/acme.social.sample.webapp.war"/>
+            <copy todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/conf" 
+                file="./../../src/config/sbt.properties"/>
+                
+                
+            <copy file="${project.target.directory}/com.ibm.sbt.sdk/com.ibm.commons.runtime/com.ibm.commons.runtime.jar" 
+			todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/lib" />
 	        <copy file="${project.prereqs.directory}/eclipse/plugins/com.ibm.sbt.libs.j2ee/lib/commons-logging-1.1.1.jar" 
-			todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.35/lib" />
-
-	        <copy todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.35/conf" >
+			todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/lib" />
+           
+                         
+	        <copy todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/conf" >
 	          <fileset dir="${project.platform.directory}/tomcat" >
 		    <include name="keystore"/>
 		    <include name="context.xml"/>
 		    <include name="tomcat-users.xml"/>
-		    <include name="sbt.properties"/>
 		    <include name="server.xml"/>
 		  </fileset>
 	        </copy>
 
 	        <zip basedir="${project.target.directory}/tomcat/unzip" 
-			destfile="${project.target.directory}/tomcat/apache-tomcat-7.0.35-sbt.zip" compress="true"/>
+			destfile="${project.target.directory}/tomcat/apache-tomcat-7.0.30-sbt.zip" compress="true"/>
 	        <delete dir="${project.target.directory}/tomcat/unzip" />
 
 	        <!-- Create Update Site -->

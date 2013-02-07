@@ -25,7 +25,7 @@
 <%@page import="com.ibm.commons.util.StringUtil"%>
 <%@page import="com.ibm.commons.runtime.util.ParameterProcessor"%>
 <%@page import="demo.SnippetFactory"%>
-<%@page import="com.ibm.sbt.playground.snippets.Snippet"%>
+<%@page import="com.ibm.sbt.playground.assets.jssnippets.JSSnippet"%>
 
 <%
 	RootNode root = SnippetFactory.getSnippets(application);

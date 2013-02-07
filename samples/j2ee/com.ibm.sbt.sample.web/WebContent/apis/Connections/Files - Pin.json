@@ -1,0 +1,105 @@
+[
+{
+"pinFile":
+{
+  "description":"Pin file",
+  "http_method":"post",
+  "host_property_name":"files_apiTargetHost",
+  "uri":"/files/basic/api/myfavorites/documents/feed",
+  "post_string":"{post_string}",
+  "post_content_type":"application/atom+xml",
+  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Pinning_a_file_programmatically_ic301"
+}  
+},
+
+{
+"pinFileById":
+{
+  "description":"Pin file",
+  "http_method":"post",
+  "host_property_name":"files_apiTargetHost",
+  "uri":"/files/basic/api/myfavorites/documents/feed?{parameters}",
+  "parameters":"{parameters}",
+  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Pinning_a_file_programmatically_ic301"
+}  
+},
+
+{
+"removeFilePin":
+{
+  "description":"Removes the file from the myfavorites feed",
+  "http_headers":{"X-Method-Override":"DELETE"},
+  "http_method":"delete",
+  "host_property_name":"files_apiTargetHost",
+  "uri":"/files/basic/api/myfavorites/documents/feed",
+  "post_string":"{post_string}",
+  "post_content_type":"application/atom+xml",
+  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Removing_a_pin_from_a_file_programmatically_ic301"
+}  
+},
+
+{
+"removeFilePinById":
+{
+  "description":"Removes the file from the myfavorites feed",
+  "http_headers":{"X-Method-Override":"DELETE"},
+  "http_method":"delete",
+  "host_property_name":"files_apiTargetHost",
+  "uri":"/files/basic/api/myfavorites/documents/feed?{parameters}",
+  "parameters":"{parameters}",
+  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Removing_a_pin_from_a_file_programmatically_ic301"
+}  
+},
+
+{
+"pinFolder":
+{
+  "description":"Pin folder",
+  "http_method":"post",
+  "host_property_name":"files_apiTargetHost",
+  "uri":"/files/basic/api/myfavorites/collections/feed",
+  "post_string":"{post_string}",
+  "post_content_type":"application/atom+xml",
+  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Pinning_a_folder_programmatically_ic301"
+}  
+},
+
+{
+"pinFolderById":
+{
+  "description":"Pin folder",
+  "http_method":"post",
+  "host_property_name":"files_apiTargetHost",
+  "uri":"/files/basic/api/myfavorites/collections/feed?{parameters}",
+  "parameters":"{parameters}",
+  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Pinning_a_folder_programmatically_ic301"
+}  
+},
+
+{
+"removeFolderPin":
+{
+  "description":"Removes the folder from the myfavorites feed",
+  "http_headers":{"X-Method-Override":"DELETE"},
+  "http_method":"delete",
+  "host_property_name":"files_apiTargetHost",
+  "uri":"/files/basic/api/myfavorites/collections/feed",
+  "post_string":"{post_string}",
+  "post_content_type":"application/atom+xml",
+  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Removing_a_pin_from_a_folder_programmatically_ic301"
+}  
+},
+
+{
+"removeFolderPinById":
+{
+  "description":"Removes the folder from the myfavorites feed",
+  "http_headers":{"X-Method-Override":"DELETE"},
+  "http_method":"delete",
+  "host_property_name":"files_apiTargetHost",
+  "uri":"/files/basic/api/myfavorites/collections/feed?{parameters}",
+  "parameters":"{parameters}",
+  "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Removing_a_pin_from_a_folder_programmatically_ic301"
+}  
+}
+]

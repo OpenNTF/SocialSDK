@@ -170,24 +170,22 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     }
     
     /* (non-Javadoc)
-     * @see com.ibm.sbt.services.endpoints.Endpoint#getTransport(java.lang.String)
+     * @see com.ibm.sbt.services.endpoints.Endpoint#getTransport(java.lang.String, java.lang.String)
      */
     @Override
-    public JSReference getTransport(String endpointName) {
-    	return new JSReference("sbt/_bridge/Transport");
+    public JSReference getTransport(String endpointName, String moduleId) {
+    	return new JSReference(moduleId);
     }
-    
+
     @Override
     public String getProxyPath(String endpointName) {
     	return endpointName;
     }
     
-    
     @Override
 	public String getAuthType(){
     	return null; 
     }
-    
     
     /* (non-Javadoc)
      * @see com.ibm.sbt.services.endpoints.Endpoint#getProxyHandlerPath()

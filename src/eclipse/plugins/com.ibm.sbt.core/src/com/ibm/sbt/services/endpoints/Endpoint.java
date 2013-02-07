@@ -74,10 +74,10 @@ public interface Endpoint {
     public JSReference getAuthenticator(String endpointName);
     
     /**
-     * Get the client transport to use, if any.
+     * Get the client transport using moduleId
      */
-    public JSReference getTransport(String endpointName);
-    
+    public JSReference getTransport(String endpointName, String moduleId);
+
     /**
      * Get the endpoint label, for the login dialog. 
      * @return

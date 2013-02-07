@@ -16,6 +16,8 @@
 package com.ibm.sbt.jslibrary.servlet;
 
 import com.ibm.commons.util.StringUtil;
+import com.ibm.sbt.services.endpoints.Endpoint;
+import com.ibm.sbt.services.endpoints.js.JSReference;
 
 /**
  * Dojo specific library implementation for versions that do not support AMD
@@ -179,5 +181,19 @@ public class DojoLibrary extends AbstractLibrary {
         sb.append("dojo.require('").append(module).append("')");
         return sb.toString();
     }
-
+    
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * com.ibm.sbt.jslibrary.servlet.AbstractLibrary#getTransport(LibraryRequest, Endpoint, java.lang.String)
+     */     
+    @Override
+    protected JSReference getTransport(LibraryRequest request, Endpoint endpoint, String endpointName) {
+    	// Dojo versions from 1.8 and above should use dojo/Request
+    	if(request.getJsVersion().startsWith("1.8")) {
+        	return endpoint.getTransport(endpointName, MODULE_REQUESTTRANSPORT);
+    	}
+    	return endpoint.getTransport(endpointName, MODULE_TRANSPORT);
+    }
 }

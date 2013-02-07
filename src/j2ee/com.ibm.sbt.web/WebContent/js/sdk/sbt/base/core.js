@@ -36,7 +36,25 @@ define(['sbt/config'],function(sbt) {
             a : "http://www.w3.org/2005/Atom",
             h : "http://www.w3.org/1999/xhtml",
             td: "urn:ibm.com/td"
-            
+        },
+        
+        feedXPath : {
+            "entry" : "/a:feed/a:entry",
+            "totalResults" : "/a:feed/opensearch:totalResults",
+            "startIndex" : "/a:feed/opensearch:startIndex",
+            "itemsPerPage" : "/a:feed/opensearch:itemsPerPage"
+        },
+                
+        entryXPath : {
+            "title" : "a:title",
+            "summaryText" : "a:summary[@type='text']",
+            "selfUrl" : "a:link[@rel='self']/@href",
+            "terms" : "a:category/@term",
+            "contentHtml" : "a:content[@type='html']",
+            "published" : "a:published",
+            "updated" : "a:updated",
+            "authorId" : "a:author/snx:userid",
+            "contributorId" : "a:contributor/snx:userid"
         }	
 	};
 });

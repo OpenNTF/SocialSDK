@@ -1,0 +1,29 @@
+[
+{
+  "XgetContacts":
+  {
+    "component":"ToBeDeprecated",
+    "description":"get my contacts",
+    "http_method":"get",
+    "uri":"/contacts/contacts/getContacts"
+  }
+},
+{
+  "XgetMyProfile":
+  {
+    "component":"ToBeDeprecated",
+    "description":"get my profile",
+    "http_method":"get",
+    "uri":"/contacts/profiles/getProfileInfo"
+  }
+},
+{
+  "XgetUserProfile":
+  {
+    "component":"ToBeDeprecated",
+    "description":"get LL user's profile",
+    "http_method":"get",
+    "uri":"/contacts/profiles/getProfileInfo?userid={subscriberEmail}"
+  }
+}
+]

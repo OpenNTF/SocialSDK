@@ -96,18 +96,18 @@ public abstract class AsyncAction {
 		return false;
 	}
 	
-	public static boolean start(String actionId) {
-		return start(actionId, null);
+	public static boolean runAction(String actionId) {
+		return runAction(actionId, null);
 	}
-	public static synchronized boolean start(String actionId, Object parameters) {
+	public static synchronized boolean runAction(String actionId, Object parameters) {
 		AsyncAction action = getActions().get(actionId);
 		if(action!=null) {
-			return start(action,parameters);
+			return runAction(action,parameters);
 		}
 		return false;
 	}
 	
-	public static synchronized boolean start(final AsyncAction action, final Object parameters) {
+	public static synchronized boolean runAction(final AsyncAction action, final Object parameters) {
 		// Do not start if it is already running
 		if(action!=null && action.isRunning()) {
 			return false;

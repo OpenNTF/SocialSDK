@@ -24,8 +24,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.ibm.commons.runtime.RuntimeConstants;
 import com.ibm.commons.runtime.util.UrlUtil;
-import com.ibm.sbt.jslibrary.SBTEnvironment;
 import com.ibm.sbt.jslibrary.servlet.LibraryRequest;
+import com.ibm.sbt.jslibrary.servlet.LibraryRequestParams;
 import com.ibm.sbt.jslibrary.servlet.LibraryServlet;
 import com.ibm.xsp.extlib.resources.ExtlibResourceProvider;
 
@@ -37,17 +37,21 @@ public class ToolkitServlet extends LibraryServlet {
 		public DominoLibraryRequest(HttpServletRequest req, HttpServletResponse resp) {
 			super(req, resp);
 		}
-	    public void init(SBTEnvironment defaultEnvironment, String toolkitUrl, String toolkitJsUrl, String serviceUrl, String iframeUrl, String toolkitExtUrl, String toolkitExtJsUrl) throws ServletException, IOException {
+	    public void init(LibraryRequestParams params) throws ServletException, IOException {
 			//public void init(SBTEnvironment defaultEnvironment, String toolkitUrl, String toolkitJsUrl, String proxyUrl, String iframeUrl) throws ServletException, IOException {
 			// Calculate the toolkit URL
 	    	//http://priand2/xsp/.ibmxspres/.extlib/sbt/Cache.js
-			toolkitUrl =UrlUtil.getServerUrl(getHttpRequest())+"/xsp"+ExtlibResourceProvider.RESOURCE_PATH;
-			toolkitJsUrl = toolkitUrl;
+			String toolkitUrl = UrlUtil.getServerUrl(getHttpRequest())+"/xsp"+ExtlibResourceProvider.RESOURCE_PATH;
+			String toolkitJsUrl = toolkitUrl;
 			
 			// Calculate the proxy URL
-			serviceUrl = RuntimeConstants.get().getBaseProxyUrl(getHttpRequest());
+			String serviceUrl = RuntimeConstants.get().getBaseProxyUrl(getHttpRequest());
 			
-			super.init(defaultEnvironment, toolkitUrl, toolkitJsUrl, serviceUrl, iframeUrl, toolkitExtUrl, toolkitExtJsUrl);
+			params.setToolkitUrl(toolkitUrl);
+			params.setToolkitJsUrl(toolkitJsUrl);
+			params.setServiceUrl(serviceUrl);
+			
+			super.init(params);
 		}
 	}
 	

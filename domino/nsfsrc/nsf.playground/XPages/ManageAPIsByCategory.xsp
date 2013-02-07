@@ -8,7 +8,7 @@
 	<xc:ccLayout navigationPath="/Manage/APIsByCategory">
 		<xp:this.facets>
 			<xp:panel xp:key="LeftColumn" id="panel4">
-				<xc:LeftManage id="ccLeftMenu"></xc:LeftManage>
+				<xc:ManageLeftNavigator id="ccLeftMenu"></xc:ManageLeftNavigator>
 			</xp:panel>
 		</xp:this.facets>
 		<xp:div
@@ -60,7 +60,7 @@
 						</xe:dataView>
 					</xp:panel>
 					<xp:panel xp:key="form" id="panel2">
-						<xc:ccManageForm></xc:ccManageForm>
+						<xc:ManageAPIsForm></xc:ManageAPIsForm>
 					</xp:panel>
 				</xp:this.facets>
 			</xe:dynamicContent>

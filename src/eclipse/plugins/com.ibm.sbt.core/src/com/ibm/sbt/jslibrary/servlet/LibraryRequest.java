@@ -272,9 +272,13 @@ public class LibraryRequest {
                 String message = MessageFormat.format("Unable to load environment: {0}", environmentName);
                 throw new ServletException(message);
             }
+            parentEnvironment.prepareEndpoints();
             environment = new RequestEnvironment(parentEnvironment);
         }
         if (environment == null) {
+        	if(defaultEnvironment!=null) {
+        		defaultEnvironment.prepareEndpoints();
+        	}
             environment = new RequestEnvironment(defaultEnvironment);
         }
     }

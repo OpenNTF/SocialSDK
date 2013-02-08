@@ -1,0 +1,147 @@
+[{
+	"name": "getListOfCommunityFilesThatRequireAction",
+	"description": "Get a feed that lists the community files that are awaiting action by the moderator",
+	"http_method": "get",
+	"host_property_name": "files_apiTargetHost",
+	"uri": "{entries_mod_wkspace_approval_content}?{parameters}",
+	"entries_mod_wkspace_approval_content": "{entries_mod_wkspace_approval_content}",
+	"parameters": "{parameters}",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_a_list_of_community_files_that_require_action_ic301"
+},
+{
+	"name": "actOnCommunityFileAwaitingApproval",
+	"description": "Take action on a community file that is waiting to be approved",
+	"http_method": "post",
+	"host_property_name": "files_apiTargetHost",
+	"uri": "{entries_mod_wkspace_approval_action}",
+	"entries_mod_wkspace_approval_action": "{entries_mod_wkspace_approval_action}",
+	"post_string": "{post_string}",
+	"post_content_type": "application/atom+xml",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Flagging_a_file_comment_as_inappropriate_ic301"
+},
+{
+	"name": "retrieveCommunityFileAwaitingApproval",
+	"description": "Retrieve a community file that is waiting to be approved",
+	"http_method": "get",
+	"host_property_name": "files_apiTargetHost",
+	"uri": "{file_approval_content_edit_uri}",
+	"file_approval_content_edit_uri": "{file_approval_content_edit_uri}",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Retrieving_a_community_file_awaiting_approval_ic301"
+},
+{
+	"name": "deleteCommunityFileAwaitingApproval",
+	"description": "Delete a community file that is waiting to be approved",
+	"http_method": "delete",
+	"host_property_name": "files_apiTargetHost",
+	"uri": "{file_edit_uri}",
+	"file_edit_uri": "{file_edit_uri}",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Deleting_community_files_awaiting_approval_ic301"
+},
+{
+	"name": "getListOfCommunityFileCommentsThatRequireAction",
+	"description": "Get a feed that lists the community file comments that are awaiting action by the moderator",
+	"http_method": "get",
+	"host_property_name": "files_apiTargetHost",
+	"uri": "{comments_mod_wkspace_approval_content}?{parameters}",
+	"comments_mod_wkspace_approval_content": "{comments_mod_wkspace_approval_content}",
+	"parameters": "{parameters}",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_a_list_of_community_file_comments_that_require_action_ic301"
+},
+{
+	"name": "actOnCommunityFileCommentAwaitingApproval",
+	"description": "Take action on a community file comment that is waiting to be approved",
+	"http_method": "post",
+	"host_property_name": "files_apiTargetHost",
+	"uri": "{comment_mod_wkspace_approval_action}",
+	"comment_mod_wkspace_approval_action": "{comment_mod_wkspace_approval_action}",
+	"post_string": "{post_string}",
+	"post_content_type": "application/atom+xml",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Acting_on_a_community_file_comment_that_is_awaiting_approval_ic301"
+},
+{
+	"name": "deleteCommunityFileCommentAwaitingApproval",
+	"description": "Delete a community file comment that is waiting to be approved",
+	"http_method": "delete",
+	"host_property_name": "files_apiTargetHost",
+	"uri": "{file_comment_approvalv_content_edit_uri}",
+	"file_comment_approvalv_content_edit_uri": "{file_comment_approvalv_content_edit_uri}",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Deleting_community_files_awaiting_approval_ic301"
+},
+{
+	"name": "getListOfFlaggedCommunityFiles",
+	"description": "Get a feed that lists the community files that have been flagged as inappropriate and are awaiting action by the moderator",
+	"http_method": "get",
+	"host_property_name": "files_apiTargetHost",
+	"uri": "{entries_mod_wkspace_review_content}?{parameters}",
+	"entries_mod_wkspace_review_content": "{entries_mod_wkspace_review_content}",
+	"parameters": "{parameters}",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_a_list_of_flagged_community_files_ic301"
+},
+{
+	"name": "actOnFlaggedCommunityFile",
+	"description": "Take action on a community file that has been flagged as inappropriate",
+	"http_method": "post",
+	"host_property_name": "files_apiTargetHost",
+	"uri": "{entries_mod_wkspace_review_action}",
+	"entries_mod_wkspace_review_action": "{entries_mod_wkspace_review_action}",
+	"post_string": "{post_string}",
+	"post_content_type": "application/atom+xml",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Acting_on_a_flagged_community_file_ic301"
+},
+{
+	"name": "retrieveFlaggedCommunityFile",
+	"description": "Retrieve a flagged community file",
+	"http_method": "get",
+	"host_property_name": "files_apiTargetHost",
+	"uri": "{file_review_content_edit_uri}",
+	"file_review_content_edit_uri": "{file_review_content_edit_uri}",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Retrieving_a_flagged_community_file_ic301"
+},
+{
+	"name": "updateFlaggedCommunityFile",
+	"description": "Updating a flagged community file",
+	"http_method": "put",
+	"host_property_name": "files_apiTargetHost",
+	"uri": "{file_review_content_edit_uri}",
+	"file_review_content_edit_uri": "{file_review_content_edit_uri}",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Updating_a_flagged_community_file_ic301"
+},
+{
+	"name": "deleteFlaggedCommunityFile",
+	"description": "Deleting a flagged community file",
+	"http_method": "delete",
+	"host_property_name": "files_apiTargetHost",
+	"uri": "{file_review_content_edit_uri}",
+	"file_review_content_edit_uri": "{file_review_content_edit_uri}",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Deleting_flagged_community_files_ic301"
+},
+{
+	"name": "getListOfFlaggedCommunityFileComments",
+	"description": "Get a feed that lists the community file comments that have been flagged as inappropriate and are awaiting action by the moderator",
+	"http_method": "get",
+	"host_property_name": "files_apiTargetHost",
+	"uri": "{comments_mod_wkspace_review_content}?{parameters}",
+	"comments_mod_wkspace_review_content": "{comments_mod_wkspace_review_content}",
+	"parameters": "{parameters}",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_a_list_of_flagged_community_file_comments_ic301"
+},
+{
+	"name": "actOnFlaggedCommunityFileComment",
+	"description": "Take action on a comment that has been flagged as inappropriate",
+	"http_method": "post",
+	"host_property_name": "files_apiTargetHost",
+	"uri": "{comment_mod_wkspace_review_action}",
+	"comment_mod_wkspace_review_action": "{comment_mod_wkspace_review_action}",
+	"post_string": "{post_string}",
+	"post_content_type": "application/atom+xml",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Acting_on_a_flagged_community_file_comment_ic301"
+},
+{
+	"name": "deleteFlaggedCommunityFileComment",
+	"description": "Delete a community file comment that has been flagged as inappropriate",
+	"http_method": "delete",
+	"host_property_name": "files_apiTargetHost",
+	"uri": "{file_comment_review_content_edit_uri}",
+	"file_comment_review_content_edit_uri": "{file_comment_review_content_edit_uri}",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Deleting_community_file_comments_awaiting_approval_ic301"
+}]

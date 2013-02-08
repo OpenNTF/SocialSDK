@@ -1,104 +1,75 @@
-[
-{
-  "getAllCommunities":
-  {
-    "component":"communities",
-    "description":"get communities feed",
-    "http_method":"get",
-    "doc_extra":"http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Communities_API_sbar",
-    "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_the_All_Communities_feed_lc3",
-    "uri":"/communities/service/atom/communities/all"
-  }
+[{
+	"name": "getAllCommunities",
+	"description": "get communities feed",
+	"http_method": "get",
+	"doc_extra": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Communities_API_sbar",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_the_All_Communities_feed_lc3",
+	"uri": "/communities/service/atom/communities/all"
 },
 {
-  "getMyCommunities":
-  {
-    "component":"communities",
-    "description":"get communities feed",
-    "http_method":"get",
-    "doc_extra":"http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Communities_API_sbar",
-    "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_the_My_Communities_feed_lc3",
-    "uri":"/communities/service/atom/communities/my"
-  }
+	"name": "getMyCommunities",
+	"description": "get communities feed",
+	"http_method": "get",
+	"doc_extra": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Communities_API_sbar",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_the_My_Communities_feed_lc3",
+	"uri": "/communities/service/atom/communities/my"
 },
 {
-  "createCommunity":
-  {
-    "component":"communities",
-    "description":"create a new community with name and description",
-    "http_method":"post",
-    "doc_extra":"http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Communities_API_sbar",
-    "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Creating_communities_programmatically_lc3",
-    "uri":"/communities/service/atom/communities/my",
-    "inputs":"communityName,communityDescription"
-  }
+	"name": "createCommunity",
+	"description": "create a new community with name and description",
+	"http_method": "post",
+	"doc_extra": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Communities_API_sbar",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Creating_communities_programmatically_lc3",
+	"uri": "/communities/service/atom/communities/my",
+	"inputs": "communityName,communityDescription"
 },
 {
-  "getCommunityEntry":
-  {
-    "component":"communities",
-    "description":"get community entry",
-    "http_method":"get",
-    "doc_extra":"http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Communities_API_sbar",
-    "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Retrieving_a_community_lc3",
-    "uri":"/communities/service/atom/community/instance?communityUuid={communityUuid}"
-  }
+	"name": "getCommunityEntry",
+	"description": "get community entry",
+	"http_method": "get",
+	"doc_extra": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Communities_API_sbar",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Retrieving_a_community_lc3",
+	"uri": "/communities/service/atom/community/instance?communityUuid={communityUuid}"
 },
 {
-  "updateCommunity":
-  {
-    "component":"communities",
-    "description":"Update a community with new name or description",
-    "http_method":"put",
-    "doc_extra":"http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Communities_API_sbar",
-    "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Updating_communities_lc3",
-    "uri":"/communities/service/atom/community/instance?communityUuid={communityUuid}",
-    "inputs":"communityName,communityDescription"
-  }
+	"name": "updateCommunity",
+	"description": "Update a community with new name or description",
+	"http_method": "put",
+	"doc_extra": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Communities_API_sbar",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Updating_communities_lc3",
+	"uri": "/communities/service/atom/community/instance?communityUuid={communityUuid}",
+	"inputs": "communityName,communityDescription"
 },
 {
-  "deleteCommunity":
-  {
-    "component":"communities",
-    "description":"Delete a community",
-    "http_method":"delete",
-    "doc_extra":"http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Communities_API_sbar",
-    "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Deleting_communities_programmatically_lc3",
-    "uri":"/communities/service/atom/community/instance?communityUuid={communityUuid}"
-  }
+	"name": "deleteCommunity",
+	"description": "Delete a community",
+	"http_method": "delete",
+	"doc_extra": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Communities_API_sbar",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Deleting_communities_programmatically_lc3",
+	"uri": "/communities/service/atom/community/instance?communityUuid={communityUuid}"
 },
 {
-  "getCommunityMembers":
-  {
-    "component":"communities",
-    "description":"get members of a community",
-    "http_method":"get",
-    "doc_extra":"http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Communities_API_sbar",
-    "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Retrieving_a_community_member_programmatically_lc3",
-    "uri":"/communities/service/atom/community/members?communityUuid={communityUuid}"
-  }
+	"name": "getCommunityMembers",
+	"description": "get members of a community",
+	"http_method": "get",
+	"doc_extra": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Communities_API_sbar",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Retrieving_a_community_member_programmatically_lc3",
+	"uri": "/communities/service/atom/community/members?communityUuid={communityUuid}"
 },
 {
-  "addCommunityMember":
-  {
-    "component":"communities",
-    "description":"Add member to a community.<br><span class='highlight'>userId</span> is the ID of user you want to add.<br><span class='highlight'>role</span> is the community role of the user, could be <span class='highlight'>owner</span> or <span class='highlight'>member</span>",
-    "http_method":"post",
-    "doc_extra":"http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Communities_API_sbar",
-    "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Adding_a_community_member_programmatically_lc3",
-    "uri":"/communities/service/atom/community/members?communityUuid={communityUuid}",
-    "inputs":"userId,role"
-  }
+	"name": "addCommunityMember",
+	"description": "Add member to a community.<br><span class='highlight'>userId</span> is the ID of user you want to add.<br><span class='highlight'>role</span> is the community role of the user, could be <span class='highlight'>owner</span> or <span class='highlight'>member</span>",
+	"http_method": "post",
+	"doc_extra": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Communities_API_sbar",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Adding_a_community_member_programmatically_lc3",
+	"uri": "/communities/service/atom/community/members?communityUuid={communityUuid}",
+	"inputs": "userId,role"
 },
 {
-  "deleteCommunityMember":
-  {
-    "component":"communities",
-    "description":"Delete a member of a community. The user is specified by <span class='highlight'>userId</span>",
-    "http_method":"delete",
-    "doc_extra":"http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Communities_API_sbar",
-    "doc_url":"http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Deleting_community_members_programmatically_lc3",
-    "uri":"/communities/service/atom/community/members?communityUuid={communityUuid}&userid={userId}"
-  }
-}
-]
+	"name": "deleteCommunityMember",
+	"description": "Delete a member of a community. The user is specified by <span class='highlight'>userId</span>",
+	"http_method": "delete",
+	"doc_extra": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Communities_API_sbar",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Deleting_community_members_programmatically_lc3",
+	"uri": "/communities/service/atom/community/members?communityUuid={communityUuid}&userid={userId}"
+}]

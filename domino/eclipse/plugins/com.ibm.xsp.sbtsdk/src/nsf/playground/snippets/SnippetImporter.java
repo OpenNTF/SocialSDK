@@ -49,9 +49,9 @@ public class SnippetImporter extends AssetImporter {
 			setItemValue(doc,"ImportSource", source.getName());
 			setItemValue(doc,"Tags", snippet.getTags());
 			setItemValue(doc,"Documentation", snippet.getDocumentation());
-			setItemValue(doc,"Html", snippet.getHtml());
-			setItemValue(doc,"Css", snippet.getCss());
-			setItemValue(doc,"JavaScript", snippet.getJs());
+			setItemValueRichText(doc,"Html", snippet.getHtml());
+			setItemValueRichText(doc,"Css", snippet.getCss());
+			setItemValueRichText(doc,"JavaScript", snippet.getJs());
 			
 			doc.save();
 		} finally {

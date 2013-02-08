@@ -32,7 +32,7 @@ public class GadgetEndpoint extends AbstractEndpoint {
 	 * @see com.ibm.sbt.services.endpoints.AbstractEndpoint#getTransport(java.lang.String)
 	 */
 	@Override
-	public JSReference getTransport(String endpointName) {
+	public JSReference getTransport(String endpointName, String moduleId) {
 		JSReference reference = new JSReference("sbt/GadgetTransport");
 		return reference;
 	}

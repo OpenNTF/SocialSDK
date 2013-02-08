@@ -177,6 +177,12 @@ public class SBTEnvironment {
 		this.endpoints = parseEndpoints(endpoints);
 	}
 	
+	//
+	// Used by the playground to setup the Endpoint before the request is processed
+	//
+	public void prepareEndpoints() {
+	}
+	
 
 	//
 	// Utilities to access properties

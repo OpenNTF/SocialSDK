@@ -15,8 +15,7 @@
 		-->
 	</xp:this.resources>
 	<script type="text/javascript"
-		src="https://dominosbt/SBTPlayground.nsf/xsp/.sbtlibrary?env=Quickstart Workshop"></script>
-
+		src="xsp/.sbtlibrary?env=Quickstart Workshop"></script>
 	<xp:scriptBlock>
 		<xp:this.value><![CDATA[var pageGlobal = {
 	dynPanel:		'#{id:dynp}',

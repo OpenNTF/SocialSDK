@@ -1,8 +1,22 @@
+/**
+ * Update the label in the toolbat 
+ */
+function updateLabel(id) {
+	var tt = dojo.byId("CurrentLabel");
+	if(tt) {
+		tt.innerHTML = id; 
+	}
+}
+
 function emptyAPI() {
+	updateLabel("");
+	//updateNavSelection();
 }
 
 function loadAPI(id) {
 	XSP.showContent(pageGlobal.dynPanel,"api",{api:id});
+	updateLabel(id);
+	//updateNavSelection();
 }
 
 function toggleSection(id) {
@@ -45,10 +59,10 @@ function executeService(params,panel) {
 					userid: "0EE5A7FA-3434-9A59-4825-7A7000278DAA"
 	    		},
 	    		load : function(response) {
-	    			updatePanel(panel,200,null,response);
+	    			updatePanel(panel,200,"",response);
 	    		},
 	    		error : function(error) {
-	    			updatePanel(panel,null,null,error);
+	    			updatePanel(panel,"","",error);
 	    		}
 		};
 		var body = null;
@@ -65,4 +79,8 @@ function updatePanel(id,code,headers,body) {
 		dom.setText(pre[1],headers);
 		dom.setText(pre[2],body);
 	});
+}
+
+function clearResultsPanel(id,code,headers,body) {
+	updatePanel(id,"","","");
 }

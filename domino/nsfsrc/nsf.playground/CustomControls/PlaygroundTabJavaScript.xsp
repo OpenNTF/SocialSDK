@@ -3,7 +3,7 @@
 	<xp:inputTextarea id="jsEditor" style="width:100%; height:100%">
 	</xp:inputTextarea>
 	<xp:scriptBlock>
-		<xp:this.value><![CDATA[playground.jsEditor = CodeMirror.fromTextArea(dojo.byId('#{id:jsEditor}'),
+		<xp:this.value><![CDATA[pageGlobal.jsEditor = CodeMirror.fromTextArea(dojo.byId('#{id:jsEditor}'),
 {
 	mode:"javascript",
 	lineNumbers: true

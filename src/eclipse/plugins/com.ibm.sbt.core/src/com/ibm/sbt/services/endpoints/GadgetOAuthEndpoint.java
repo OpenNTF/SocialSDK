@@ -54,7 +54,7 @@ public class GadgetOAuthEndpoint extends AbstractEndpoint {
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.ibm.sbt.services.endpoints.AbstractEndpoint#getTransport(java.lang.String)
+	 * @see com.ibm.sbt.services.endpoints.AbstractEndpoint#getTransport(java.lang.String, java.lang.String)
 	 */
 	@Override
 	public JSReference getTransport(String endpointName, String moduleId) {

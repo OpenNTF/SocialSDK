@@ -7,48 +7,51 @@
 		<xp:dojoModule name="dijit.Tree"></xp:dojoModule>
 	</xp:this.resources>
 
-	<xp:div style="margin-bottom: 5px">
-		<span title="Expand All" style="margin-left:3px;margin-right:3px">
-			<xp:link escape="true" id="link1">
-				<xp:image id="image2" alt="Submit search" url="/expandall.png">
-				</xp:image>
-				<xp:eventHandler event="onclick" submit="false">
-					<xp:this.script><![CDATA[treeExpandAll('assetsTree');]]></xp:this.script>
-				</xp:eventHandler>
-			</xp:link>
-		</span>
-		<span title="Collapse All" style="margin-left:3px;margin-right:8px">
-			<xp:link escape="true" id="link2">
-				<xp:image id="image3" alt="Submit search" url="/collapseall.png">
-				</xp:image>
-				<xp:eventHandler event="onclick" submit="false">
-					<xp:this.script><![CDATA[treeCollapseAll('assetsTree');]]></xp:this.script>
-				</xp:eventHandler>
-			</xp:link>
-		</span>
-		<xp:span id="widgetContainer2" loaded="${javascript:database.isFTIndexed()}"
-			styleClass="lotusSearch">
-			<xp:inputText id="search1" value="#{viewScope.assetSearch}"
-				styleClass="searchbox">
-				<xp:this.onkeypress><![CDATA[var kc=event.keyCode?event.keyCode:event.which;
-if(kc==13){dojo.byId('#{id:linkSearch1}').click(); return false;}
-return true;]]></xp:this.onkeypress>
-			</xp:inputText>
-			<span title="Submit search">
-				<xp:link escape="true" id="linkSearch1">
-					<xp:image id="image1" alt="Submit search" url="/search.png">
+	<xe:djBorderContainer style="height: 100%">
+		<xe:djBorderPane style="margin-bottom: 5px" region="top">
+			<span title="Expand All" style="margin-left:3px;margin-right:3px">
+				<xp:link escape="true" id="link1">
+					<xp:image id="image2" alt="Submit search" url="/expandall.png">
 					</xp:image>
-					<xp:eventHandler event="onclick" submit="true"
-						refreshMode="partial" refreshId="widgetContainer1">
+					<xp:eventHandler event="onclick" submit="false">
+						<xp:this.script><![CDATA[treeExpandAll('assetsTree');]]></xp:this.script>
 					</xp:eventHandler>
 				</xp:link>
 			</span>
-		</xp:span>
-	</xp:div>
+			<span title="Collapse All" style="margin-left:3px;margin-right:8px">
+				<xp:link escape="true" id="link2">
+					<xp:image id="image3" alt="Submit search" url="/collapseall.png">
+					</xp:image>
+					<xp:eventHandler event="onclick" submit="false">
+						<xp:this.script><![CDATA[treeCollapseAll('assetsTree');]]></xp:this.script>
+					</xp:eventHandler>
+				</xp:link>
+			</span>
+			<xp:span id="widgetContainer2" loaded="${javascript:database.isFTIndexed()}"
+				styleClass="lotusSearch">
+				<xp:inputText id="search1" value="#{viewScope.assetSearch}"
+					styleClass="searchbox">
+					<xp:this.onkeypress><![CDATA[var kc=event.keyCode?event.keyCode:event.which;
+if(kc==13){dojo.byId('#{id:linkSearch1}').click(); return false;}
+return true;]]></xp:this.onkeypress>
+				</xp:inputText>
+				<span title="Submit search">
+					<xp:link escape="true" id="linkSearch1">
+						<xp:image id="image1" alt="Submit search" url="/search.png">
+						</xp:image>
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="partial" refreshId="widgetContainer1">
+						</xp:eventHandler>
+					</xp:link>
+				</span>
+			</xp:span>
+		</xe:djBorderPane>
+		<xe:djBorderPane style="overflow:auto; height: 100%"
+			region="center">
 
-	<xp:div id="widgetContainer1" style="height: 750px; overflow:auto">
-		<xp:scriptBlock id="scriptBlock1">
-			<xp:this.value><![CDATA[dojo.addOnLoad(function() {
+			<xp:div id="widgetContainer1" style="overflow:auto; height: 100%">
+				<xp:scriptBlock id="scriptBlock1">
+					<xp:this.value><![CDATA[dojo.addOnLoad(function() {
 	var assetsData = #{javascript:switch(compositeData.type){case "snippet": return snippetBean.getSnippetsAsJson(); case "api": return apiBean.getSnippetsAsJson();} return "";};	var assetsStore = new dojo.data.ItemFileReadStore({data:{identifier:'id',label:'name',items:assetsData}});
 	var assetsModel = new dijit.tree.TreeStoreModel({		store: assetsStore	});
 	var navTree = new dijit.Tree({model: assetsModel, showRoot: false }, "#{id:assetsTree}");
@@ -59,6 +62,8 @@ return true;]]></xp:this.onkeypress>
 	};
 	// Suppress the wide out effect
 	dijit.defaultDuration = 0;
-});]]></xp:this.value>		</xp:scriptBlock>		<div id="assetsTree"></div>
-	</xp:div>
+});]]></xp:this.value>				</xp:scriptBlock>				<div id="assetsTree"></div>
+			</xp:div>
+		</xe:djBorderPane>
+	</xe:djBorderContainer>
 </xp:view>

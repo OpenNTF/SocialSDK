@@ -5,9 +5,9 @@
     <default-prefix>xc</default-prefix>
   </faces-config-extension>
   <composite-component>
-    <component-type>PreviewPane</component-type>
-    <composite-name>PreviewPane</composite-name>
-    <composite-file>/PreviewPane.xsp</composite-file>
+    <component-type>PlaygroundPreviewPane</component-type>
+    <composite-name>PlaygroundPreviewPane</composite-name>
+    <composite-file>/PlaygroundPreviewPane.xsp</composite-file>
     <composite-extension>
       <designer-extension>
         <in-palette>true</in-palette>

@@ -21,8 +21,7 @@ div.explorer_summary {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e8e8e8', endColorstr='#e0e0e0',GradientType=0 ); /* IE6-9 */
     background: linear-gradient(top, #e8e8e8 0%,#f6f6f6 12%,#ededed 83%,#e0e0e0 99%); /* W3C */
     border: 1px solid #BDBDBD; 
-    margin:8px 0 8px 0; 
-    /*padding: 10px;*/
+    margin:8px 0px 8px 0px; 
 }
 
 
@@ -48,25 +47,45 @@ div.explorer_details {
     border-radius:5px; 
     background-color: #fdfdfd;
     border: 1px solid #999999; 
-    margin: 10px; 
-    padding: 0 8px 0 8px; 
-}
-
-explorer_detailsTable {
+    margin: 6px; 
+    padding:6px 8px 6px 8px; 
 }
 
 .explorer_detailsTable th {
+	padding-left: 0;
+	padding-right: 0;
 	font-weight: bold;
 	text-align: left;
 }
 
-div.explorer_results {
+.explorer_detailsTable td {
+	margin-left: 0; /* Fix .xspColumn */
+}
+
+.bodyLabel {
+	font-weight: bold;
+	text-align: left;
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+
+a.apiheader:link {text-decoration:none;}
+a.apiheader:visited {text-decoration:none;}
+a.apiheader:hover {text-decoration:none;}
+a.apiheader:active {text-decoration:none;}
+
+.prelabel {
+	font-weight: bold;
+	text-align: left;
+	margin-top: 8px;
+	margin-bottom: 2px;
 }
 
 pre {
  	border: 1px solid rgba(0, 0, 0, 0.2);
-    padding: 10px;
-	white-space: pre-wrap; 
+    padding: 5px;
+    margin: 0;
+    white-space: pre-wrap; 
 	white-space: -moz-pre-wrap;
 	white-space: o-pre-wrap;
 }

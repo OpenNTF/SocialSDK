@@ -1,3 +1,23 @@
+/**
+ * Resize the main border container when the window is resized
+ * This is required as it should substract the size of the headers and footers
+ * @return
+ */
+function resize() {
+	require(["dojo/dom-geometry"], function(domGeom){
+		function eltHeight(c) {
+			var e = dojo.query(c);
+			var h = e && e.length>0?domGeom.getMarginBox(e[0]).h:0;
+			return h;
+		}
+		var h = document.body.clientHeight;
+		var hd = eltHeight(".lotusBanner")+eltHeight(".lotusTitleBar")+eltHeight(".lotusPlaceBar");
+		var ft = eltHeight(".lotusFooter")+eltHeight(".lotusLegal");
+		dojo.query(".lotusContent").style("height",(h-hd-ft)+"px");
+		//console.log("h="+h+", hd="+hd+", ft="+ft+", result="+(h-hd-ft-25))
+		dijit.byId(pageGlobal.borderContainer).resize()
+	});
+}
 
 //
 // Tree helpers

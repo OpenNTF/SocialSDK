@@ -7,18 +7,25 @@
 		<xp:script src="/explorer.js" clientSide="true"></xp:script>
 		<xp:dojoModule name="dojo.hash"></xp:dojoModule>
 		<xp:dojoModule name="dojo.fx"></xp:dojoModule>
-<!-- 		
-		<xp:script src="http://dominosbt/SBTPlayground.nsf/xsp/.sbtlibrary?env=Quickstart Workshop" clientSide="true"></xp:script>
-		<xp:dojoModule name="sbt.endpoint"></xp:dojoModule>
--->		
+		<!--
+			<xp:script
+			src="http://dominosbt/SBTPlayground.nsf/xsp/.sbtlibrary?env=Quickstart
+			Workshop" clientSide="true"></xp:script> <xp:dojoModule
+			name="sbt.endpoint"></xp:dojoModule>
+		-->
 	</xp:this.resources>
+	<script type="text/javascript"
+		src="https://dominosbt/SBTPlayground.nsf/xsp/.sbtlibrary?env=Quickstart Workshop"></script>
 
-  	<script type="text/javascript" src="https://dominosbt/SBTPlayground.nsf/xsp/.sbtlibrary?env=Quickstart Workshop"></script>
-  	
 	<xp:scriptBlock>
 		<xp:this.value><![CDATA[var pageGlobal = {
 	dynPanel:		'#{id:dynp}',
+	borderContainer:'#{id:djTabContainer1}'
 }
+dojo.addOnLoad(function() {
+   dojo.connect(window, "onresize", resize);
+   resize();
+});
 
 function prepend(h,f) {
 	return function() {
@@ -37,147 +44,179 @@ function prepend(h,f) {
 	<xc:ccMainPageResources></xc:ccMainPageResources>
 
 	<xc:ccLayout navigationPath="/Explorer"
-		title="Social Business Toolkit - API Explorer">
+		title="IBM Social Business Toolkit - API Explorer">
 		<xp:this.facets>
 		</xp:this.facets>
 		<xe:djBorderContainer id="djTabContainer1"
-			style="width:100%; height:1000px;" liveSplitters="true">
+			style="width:100%; height:100%" liveSplitters="true">
 			<xe:this.dojoAttributes>
 				<xp:dojoAttribute name="design" value="sidebar"></xp:dojoAttribute>
 			</xe:this.dojoAttributes>
 			<xe:djBorderPane id="djBorderPane3" region="leading"
 				splitter="true" style="width:280px">
-				<xp:div id="leftRefresh">
+				<xp:div id="leftRefresh" style="height: 100%">
 					<xc:ccAssetTree type="api"></xc:ccAssetTree>
 				</xp:div>
 			</xe:djBorderPane>
 			<xe:djBorderPane id="djBorderPane2" region="center">
-				<xe:dynamicContent id="dynp" defaultFacet="api"
-					useHash="false" partialEvents="true">
-					<xp:this.facets>
-						<xp:panel xp:key="api" id="panel1">
-							<xp:repeat id="repeat1" var="item">
-								<xp:this.value><![CDATA[#{javascript:var e = param["api"]
+				<div style="overflow-y: auto; height:100%">
+					<xe:dynamicContent id="dynp" defaultFacet="api"
+						useHash="false" partialEvents="true">
+						<xp:this.facets>
+							<xp:panel xp:key="api" id="panel1">
+								<xp:repeat id="repeat1" var="item">
+									<xp:this.value><![CDATA[#{javascript:var e = param["api"]
 var json = apiBean.loadAPI(e);
 if(json) {
 	return fromJson(json) // Should be a JS array
 }
 return null;}]]></xp:this.value>
-								<xp:text escape="true" id="computedField2" value="#{javascript:toJson(item)}">
-								</xp:text>
-								<br />
-								<xp:div styleClass="explorer_summary">
-									<xp:table styleClass="lotusTable" style="width:100%">
-										<xp:tr>
-											<xp:td styleClass="explorer_col1">
-												<xe:multiImage id="multiImage1"
-													value='#{javascript:item.http_method}'>
-													<xe:this.icons>
-														<xe:iconEntry url="/explorer_get.png"
-															selectedValue="get" alt="GET method">
-														</xe:iconEntry>
-														<xe:iconEntry url="/explorer_put.png"
-															selectedValue="put" alt="PUT method">
-														</xe:iconEntry>
-														<xe:iconEntry url="/explorer_post.png"
-															selectedValue="post" alt="POST method">
-														</xe:iconEntry>
-														<xe:iconEntry url="/explorer_delete.png"
-															selectedValue="delete" alt="DELETE method">
-														</xe:iconEntry>
-													</xe:this.icons>
-												</xe:multiImage>
-											</xp:td>
-											<xp:td styleClass="explorer_col3">
-												<xp:div styleClass="explorer_sum_title">
-													<h4 class="lotusTitle">
-														<xp:link escape="true" text="#{javascript:item.name}"
-															id="link1">
-															<xp:eventHandler event="onclick" submit="false">
-																<xp:this.script><![CDATA[toggleSection('#{id:expDetails}')]]></xp:this.script>
-															</xp:eventHandler>
-														</xp:link>
-													</h4>
-													<p>
-														<xp:text escape="true" id="computedField1"
-															value="#{javascript:item.description}">
-														</xp:text>
-													</p>
-												</xp:div>
-											</xp:td>
-										</xp:tr>
-									</xp:table>
-									<xp:div id="expDetails" styleClass="explorer_details"
-										style="display:none">
-										<xp:dataTable id="dataTable1" styleClass="explorer_detailsTable"
-											value="#{javascript:apiBean.loadParameters(item)}" var="p">
-											<xp:column id="column1" style="width: 8em">
-												<xp:this.facets>
-													<xp:span xp:key="header">
-														Name
+									<xp:text escape="true" id="computedField2" value="#{javascript:toJson(item)}" loaded="false">
+									</xp:text>
+									<br />
+									<xp:div styleClass="explorer_summary">
+										<xp:link id="link3" styleClass="apiheader">
+											<xp:eventHandler event="onclick" submit="false">
+												<xp:this.script><![CDATA[toggleSection('#{id:expDetails}')]]></xp:this.script>
+											</xp:eventHandler>
+											<xp:table styleClass="lotusTable" style="width:100%">
+												<xp:tr>
+													<xp:td styleClass="explorer_col1">
+														<xe:multiImage id="multiImage1"
+															value='#{javascript:item.http_method}'>
+															<xe:this.icons>
+																<xe:iconEntry url="/explorer_get.png"
+																	selectedValue="get" alt="GET method">
+																</xe:iconEntry>
+																<xe:iconEntry url="/explorer_put.png"
+																	selectedValue="put" alt="PUT method">
+																</xe:iconEntry>
+																<xe:iconEntry url="/explorer_post.png"
+																	selectedValue="post" alt="POST method">
+																</xe:iconEntry>
+																<xe:iconEntry url="/explorer_delete.png"
+																	selectedValue="delete" alt="DELETE method">
+																</xe:iconEntry>
+															</xe:this.icons>
+														</xe:multiImage>
+													</xp:td>
+													<xp:td styleClass="explorer_col3">
+														<xp:div styleClass="explorer_sum_title">
+															<h4 class="lotusTitle">
+																<xp:text value="#{javascript:item.name}" escape="true"
+																	id="computedField6">
+																</xp:text>
+															</h4>
+															<p>
+																<xp:text escape="true" id="computedField1"
+																	value="#{javascript:item.description}">
+																</xp:text>
+															</p>
+														</xp:div>
+													</xp:td>
+												</xp:tr>
+											</xp:table>
+										</xp:link>
+										<xp:panel id="expDetails" styleClass="explorer_details"
+											style="display:none">
+											<xp:this.dataContexts>
+												<xp:dataContext value="#{javascript:apiBean.loadParameters(item)}"
+													var="items">
+												</xp:dataContext>
+											</xp:this.dataContexts>
+											<xp:dataTable id="dataTable1" styleClass="explorer_detailsTable"
+												value="#{javascript:items}" var="p"
+												rendered="#{javascript:items.length>0}">
+												<xp:column id="column1" style="width: 8em">
+													<xp:this.facets>
+														<xp:span xp:key="header">
+															Name
 													</xp:span>
-												</xp:this.facets>
-												<xp:text escape="true" id="computedField3" value="#{p.name}">
-												</xp:text>
-											</xp:column>
-											<xp:column id="column2" style="width: 12em">
-												<xp:this.facets>
-													<xp:span xp:key="header">
-														Value
+													</xp:this.facets>
+													<xp:text escape="true" id="computedField3" value="#{p.name}">
+													</xp:text>
+												</xp:column>
+												<xp:column id="column2" style="width: 12em">
+													<xp:this.facets>
+														<xp:span xp:key="header">
+															Value
 													</xp:span>
-												</xp:this.facets>
-												<xp:inputText
-													value="#{p.value}" id="inputText1" size="20">
-												<xp:this.attrs>
-													<xp:attr
-														name="data-param" value="#{p.name}">
-													</xp:attr>
-												</xp:this.attrs></xp:inputText>
-											</xp:column>
-											<xp:column id="column3" style="width: 6em">
-												<xp:this.facets>
-													<xp:span xp:key="header">
-														Type
+													</xp:this.facets>
+													<xp:inputText value="#{p.value}" id="inputText1"
+														size="20">
+														<xp:this.attrs>
+															<xp:attr name="data-param" value="#{p.name}">
+															</xp:attr>
+														</xp:this.attrs>
+													</xp:inputText>
+												</xp:column>
+												<xp:column id="column3" style="width: 6em">
+													<xp:this.facets>
+														<xp:span xp:key="header">
+															Type
 													</xp:span>
-												</xp:this.facets>
-												<xp:text escape="true" id="computedField4" value="#{p.type}">
-												</xp:text>
-											</xp:column>
-											<xp:column id="column4">
-												<xp:this.facets>
-													<xp:span xp:key="header">
-														Description
+													</xp:this.facets>
+													<xp:text escape="true" id="computedField4" value="#{p.type}">
+													</xp:text>
+												</xp:column>
+												<xp:column id="column4">
+													<xp:this.facets>
+														<xp:span xp:key="header">
+															Description
 													</xp:span>
-												</xp:this.facets>
-												<xp:text escape="true" id="computedField5" value="#{p.description}">
-												</xp:text>
-											</xp:column>
-										</xp:dataTable>
-										<xp:div id="div1">
-											<xp:button value="Execute"
-												style="margin-top: 5px; margin-top: 5px; padding: -5px" id="button1">
-												<xp:eventHandler
-													event="onclick" submit="false">
-													<xp:this.script><![CDATA[expandSection('#{id:expResults}');
+													</xp:this.facets>
+													<xp:text escape="true" id="computedField5" value="#{p.description}">
+													</xp:text>
+												</xp:column>
+											</xp:dataTable>
+											<xp:table id="expBody"
+												rendered="#{javascript:item.http_method=='post' || item.http_method=='put'}"
+												style="width: 100%">
+												<xp:tr>
+													<xp:td>
+														<xp:label value="Body:" id="label1" style="font-weight:bold">
+														</xp:label>
+													</xp:td>
+												</xp:tr>
+												<xp:tr>
+													<xp:td>
+														<xp:inputTextarea id="inputTextarea1"
+															rows="8" style="width: 100%">
+														</xp:inputTextarea>
+													</xp:td>
+												</xp:tr>
+											</xp:table>
+											<xp:div id="div1">
+												<xp:button value="Execute"
+													style="margin-top: 5px; margin-top: 5px; padding: -5px" id="button1">
+													<xp:eventHandler event="onclick" submit="false">
+														<xp:this.script><![CDATA[expandSection('#{id:expResults}');
 var p = {method: '#{javascript:item.http_method}'}
 executeService(p,'#{id:expResults}');]]></xp:this.script>
-												</xp:eventHandler>
-											</xp:button>
-										</xp:div>
-										<xp:div id="expResults" styleClass="explorer_results" style="display:none">
-											<h4>Response Code</h4>
-											<pre class="respCode"></pre>
-											<h4>Headers</h4>
-											<pre class="respHeader"></pre>
-											<h4>Body</h4>
-											<pre class="respBody"></pre>
-										</xp:div>
+													</xp:eventHandler>
+												</xp:button>
+												<xp:link escape="true" text="Clear Results" id="link2">
+													<xp:eventHandler event="onclick" submit="false">
+														<xp:this.script><![CDATA[clearResultsPanel('#{id:expResults}');]]></xp:this.script>
+													</xp:eventHandler>
+												</xp:link>
+											</xp:div>
+											<xp:div id="expResults" styleClass="explorer_results"
+												style="display:none">
+												<div class="prelabel">Response Code</div>
+												<pre class="respCode"></pre>
+												<div class="prelabel">Headers</div>
+												<pre class="respHeader"></pre>
+												<div class="prelabel">Body</div>
+												<pre class="respBody"></pre>
+											</xp:div>
+										</xp:panel>
 									</xp:div>
-								</xp:div>
-							</xp:repeat>
-						</xp:panel>
-					</xp:this.facets>
-				</xe:dynamicContent>
+								</xp:repeat>
+							</xp:panel>
+						</xp:this.facets>
+					</xe:dynamicContent>
+				</div>
 			</xe:djBorderPane>
 		</xe:djBorderContainer>
 	</xc:ccLayout>

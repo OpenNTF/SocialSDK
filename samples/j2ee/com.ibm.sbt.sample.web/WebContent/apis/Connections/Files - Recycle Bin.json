@@ -1,0 +1,68 @@
+[{
+	"name": "retrieveFileFromSomeonesRecycleBin",
+	"description": "Retrieve a file from the specified user's recycle bin",
+	"http_method": "get",
+	"host_property_name": "files_apiTargetHost",
+	"uri": "/files/basic/api/userlibrary/{userid}/recyclebin/{document-id}/entry?{parameters}",
+	"parameters": "{parameters}",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Retrieving_a_file_from_the_trash_ic301"
+},
+{
+	"name": "retrieveFileFromYourRecycleBin",
+	"description": "Retrieve a file from your recycle bin",
+	"http_method": "get",
+	"host_property_name": "files_apiTargetHost",
+	"uri": "/files/basic/api/myuserlibrary/recyclebin/{document-id}/entry?{parameters}",
+	"parameters": "{parameters}",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Retrieving_a_file_from_the_trash_ic301"
+},
+{
+	"name": "deleteFileFromSomeonesRecycleBin",
+	"description": "Permanently delete a file from the specified user's recycle bin",
+	"http_method": "delete",
+	"host_property_name": "files_apiTargetHost",
+	"uri": "/files/basic/api/userlibrary/{userid}/recyclebin/{document-id}/entry",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Purging_a_file_from_the_trash_ic301"
+},
+{
+	"name": "deleteFileFromYourRecycleBin",
+	"description": "Permanently delete a file from your recycle bin",
+	"http_method": "delete",
+	"host_property_name": "files_apiTargetHost",
+	"uri": "/files/basic/api/myuserlibrary/recyclebin/{document-id}/entry",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Purging_a_file_from_the_trash_ic301"
+},
+{
+	"name": "deleteAllFilesFromSomeonesRecycleBin",
+	"description": "Permanently delete a file from the specified user's recycle bin",
+	"http_method": "delete",
+	"host_property_name": "files_apiTargetHost",
+	"uri": "/files/basic/api/userlibrary/{userid}/view/recyclebin/feed",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Purging_all_files_from_the_trash_ic301"
+},
+{
+	"name": "deleteAllFilesFromYourRecycleBin",
+	"description": "Permanently delete a file from your recycle bin",
+	"http_method": "delete",
+	"host_property_name": "files_apiTargetHost",
+	"uri": "/files/basic/api/myuserlibrary/view/recyclebin/feed",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Purging_all_files_from_the_trash_ic301"
+},
+{
+	"name": "restoreFileFromSomeonesRecycleBin",
+	"description": "Restore a file from the specified user's recycle bin",
+	"http_method": "put",
+	"host_property_name": "files_apiTargetHost",
+	"uri": "/files/basic/api/userlibrary/{userid}/recyclebin/{document-id}/entry?{parameters}",
+	"parameters": "{parameters}",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Restoring_a_file_from_the_trash_ic301"
+},
+{
+	"name": "restoreFileFromYourRecycleBin",
+	"description": "Restore a file from your recycle bin",
+	"http_method": "put",
+	"host_property_name": "files_apiTargetHost",
+	"uri": "/files/basic/api/myuserlibrary/recyclebin/{document-id}/entry?{parameters}",
+	"parameters": "{parameters}",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Restoring_a_file_from_the_trash_ic301"
+}]

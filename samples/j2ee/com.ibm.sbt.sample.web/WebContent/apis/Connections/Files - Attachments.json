@@ -1,0 +1,77 @@
+[{
+	"name": "addFileAttachment",
+	"description": "Add a file attachment to a file in your library",
+	"http_method": "post",
+	"host_property_name": "files_apiTargetHost",
+	"http_headers": "{http_headers}",
+	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/feed?{parameters}",
+	"parameters": "{parameters}",
+	"post_string": "__file__",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Adding_a_file_attachment_ic301"
+},
+{
+	"name": "x_addFileAttachmentMP",
+	"disabled": false,
+	"description": "Add a file attachment to a file in your library using Multi-Part (not yet supported)",
+	"http_method": "post",
+	"host_property_name": "files_apiTargetHost",
+	"http_headers": "{http_headers}",
+	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/feed?{parameters}",
+	"parameters": "{parameters}",
+	"post_string": "__file__",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Adding_a_file_attachment_ic301"
+},
+{
+	"name": "downloadFileAttachment",
+	"description": "Download a file attachment from your library",
+	"http_method": "get",
+	"host_property_name": "files_apiTargetHost",
+	"http_headers": "{http_headers}",
+	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/attachment/{attachment-id}/media/{attachment-label}?{parameters}",
+	"parameters": "{parameters}",
+	"response_target": "__file__",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Downloading_a_file_attachment_ic301"
+},
+{
+	"name": "retrieveFileAttachment",
+	"description": "Retrieve an Atom document representation of a file attachment from your library",
+	"http_method": "get",
+	"host_property_name": "files_apiTargetHost",
+	"http_headers": "{http_headers}",
+	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/attachment/{attachment-id}/entry?{parameters}",
+	"parameters": "{parameters}",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Retrieving_a_file_attachment_ic301"
+},
+{
+	"name": "deleteFileAttachment",
+	"description": "Removes a file attachment from a file. An attachment is also indirectly deleted when the file it is associated with is deleted.",
+	"http_method": "delete",
+	"host_property_name": "files_apiTargetHost",
+	"http_headers": "{http_headers}",
+	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/attachment/{attachment-id}/entry?{parameters}",
+	"parameters": "{parameters}",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Deleting_a_file_attachment_ic301"
+},
+{
+	"name": "updateFileAttachment",
+	"description": "Update an attachment to a file in your file collection",
+	"http_method": "put",
+	"host_property_name": "files_apiTargetHost",
+	"http_headers": "{http_headers}",
+	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/attachment/{attachment-id}/entry?{parameters}",
+	"parameters": "{parameters}",
+	"post_string": "__file__",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Updating_a_file_attachment_ic301"
+},
+{
+	"name": "x_updateFileAttachmentMP",
+	"disabled": false,
+	"description": "Update an attachment to a file in your file collection using Multi-Part (not yet supported)",
+	"http_method": "put",
+	"host_property_name": "files_apiTargetHost",
+	"http_headers": "{http_headers}",
+	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/attachment/{attachment-id}/entry ?{parameters}",
+	"parameters": "{parameters}",
+	"post_string": "__file__",
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Updating_a_file_attachment_ic301"
+}]

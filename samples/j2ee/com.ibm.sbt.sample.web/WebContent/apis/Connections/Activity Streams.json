@@ -1,36 +1,27 @@
-[
-{
-"Post":
-{
-  "component":"activity stream",
-  "description":"Post Event",
-  "http_method":"post",
-  "uri":"/vulcan/shindig/rest/activitystreams/@me/@all/@all",
-  "doc_url":"http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/POST_request_sbt",
-  "post_string":"{post_string}",
-  "post_content_type":"application/json"
-}  
+[{
+	"name": "Post",
+	"description": "Post Event",
+	"http_method": "post",
+	"uri": "/vulcan/shindig/rest/activitystreams/@me/@all/@all",
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/POST_request_sbt",
+	"post_string": "{post_string}",
+	"post_content_type": "application/json"
 },
 {
-"Get":
-{
-  "component":"activity stream",
-  "description":"Get Events",
-  "http_method":"get",
-  "uri":"/vulcan/shindig/rest/activitystreams/@me/@all/@all?{parameters}",
-  "parameters":"{parameters}",
-  "doc_url":"http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/GET_request_sbt"
-}
+	"name": "Get",
+	"description": "Get Events",
+	"http_method": "get",
+	"uri": "/vulcan/shindig/rest/activitystreams/@me/@all/@all?{parameters}",
+	"parameters": "{parameters}",
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/GET_request_sbt"
 },
 {
-"clearActivitystreamAll":
-{
-  "component":"activity stream",
-  "description":"Clear all Events",
-  "http_method":"post",
-  "http_headers":{"Content-Type":"application/json"},
-  "uri":"/vulcan/shindig/rest/activitystreams/@me/@all/@all/@all?X-HTTP-Method-Override=DELETE",
-  "doc_url":"http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/POST_request_sbt"
-}  
-}
-]
+	"name": "clearActivitystreamAll",
+	"description": "Clear all Events",
+	"http_method": "post",
+	"http_headers": {
+		"Content-Type": "application/json"
+	},
+	"uri": "/vulcan/shindig/rest/activitystreams/@me/@all/@all/@all?X-HTTP-Method-Override=DELETE",
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/POST_request_sbt"
+}]

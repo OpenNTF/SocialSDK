@@ -1,265 +1,208 @@
-[
-    {
-        "getCMISServiceDoc": {
-            "component": "files",
-            "description": "get service doc for CMIS API",
-            "http_method": "get",
-            "doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
-            "uri": "/files/basic/cmis/my/servicedoc"
-        }
-    },
-    {
-        "getMyFiles": {
-            "component": "files",
-            "description": "get files owned by me",
-            "http_method": "get",
-            "doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
-            "uri": "/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:files"
-        }
-    },
-    {
-        "getMyFilesAlternateWay": {
-            "component": "files",
-            "description": "get files owned by me (alternate way)",
-            "http_method": "get",
-            "doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
-            "uri": "/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:virtual!.!filesownedby"
-        }
-    },
-    {
-        "getMyFilesWithParameters": {
-            "component": "files",
-            "description": "get files owned by me but specify parameters (will be added into URL).<br><span class='highlight'>maxItems</span>: Specify the max item number in result. Leave blank to not use this parameter<br><span class='highlight'>skipCount</span>: Specify the number of items that should not be skipped in result. Leave blank to not use this parameter<br><span class='highlight'>filter</span>: Specify the CMIS properties (Comma separated) that you want return for each file entry. you should always include <span class='highlight'>cmis:objectId,cmis:objectTypeId</span> at a minimum. Leave blank to not use this parameter",
-            "http_method": "get",
-            "doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
-            "uri": "/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:files",
-            "inputs": "maxItems,skipCount,filter"
-        }
-    },
-    {
-        "getFileEntry": {
-            "component": "files",
-            "description": "get full details about a file entry",
-            "http_method": "get",
-            "doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
-            "uri": "/files/basic/cmis/repository/p!{subscriberId}/object/snx:file!{fileId}"
-        }
-    },
-    {
-        "getFileEntryWithParameters": {
-            "component": "files",
-            "description": "get one file entry but specify parameters (will be added into URL).<br><span class='highlight'>includeACL</span>: Specify if to include ACL information in result. Value could be <span class='highlight'>true</span> or <span class='highlight'>false</span>. Leave blank to not use this parameter<br><span class='highlight'>filter</font></span>: Specify the CMIS properties (Comma separated) that you want return. you should always include <span class='highlight'>cmis:objectId,cmis:objectTypeId</span> at a minimum. Leave blank to not use this parameter",
-            "http_method": "get",
-            "doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
-            "uri": "/files/basic/cmis/repository/p!{subscriberId}/object/snx:file!{fileId}",
-            "inputs": "includeACL,filter"
-        }
-    },
-    {
-        "getFileEntryByFileName": {
-            "component": "files",
-            "description": "get full details about a file entry given the file name",
-            "http_method": "get",
-            "doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
-            "uri": "/files/basic/cmis/repository/p!{subscriberId}/objectp?p=/files/{fileName}"
-        }
-    },
-    {
-        "uploadFile": {
-            "component": "files",
-            "description": "upload a new file. This will upload an image file named bludbg.jpg",
-            "http_method": "post",
-            "doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
-            "uri": "/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:files"
-        }
-    },
-    {
-        "updateFile": {
-            "component": "files",
-            "description": "update file (upload new version of file). This will update the file created in uploadFile API with another image file",
-            "http_method": "put",
-            "doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
-            "uri": "/files/basic/cmis/repository/p!{subscriberId}/object/snx:file!{fileId}/stream/{fileId}"
-        }
-    },
-    {
-        "createFileByAtomEntry": {
-            "component": "files",
-            "description": "create a new file by uploading an Atom Entry. The created file will be a text file. You can use <span class='highlight'>\"\\n\"</span> in fileContent for a new line",
-            "http_method": "post",
-            "doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
-            "uri": "/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:files",
-            "inputs": "fileName,fileContent"
-        }
-    },
-    {
-        "updateFileByAtomEntry": {
-            "component": "files",
-            "description": "update a text file name and/or content by an Atom Entry. You can use <span class='highlight'>\"\\n\"</span> in fileContent for a new line",
-            "http_method": "put",
-            "doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
-            "uri": "/files/basic/cmis/repository/p!{subscriberId}/object/snx:file!{fileId}",
-            "inputs": "fileName,fileContent"
-        }
-    },
-    {
-        "downloadFile": {
-            "component": "files",
-            "description": "download a file",
-            "http_method": "get",
-            "doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
-            "uri": "/files/basic/cmis/repository/p!{subscriberId}/object/snx:file!{fileId}/stream/{fileId}"
-        }
-    },
-    {
-        "deleteFile": {
-            "component": "files",
-            "description": "delete a file.<br><span class='highlight'>Note</span>: This method can only delete files with no more than 1 version. if the file have more than 1 version, please use the <span class='highlight'>deleteFileWithAllVersions</span> API.",
-            "http_method": "delete",
-            "doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
-            "uri": "/files/basic/cmis/repository/p!{subscriberId}/object/snx:file!{fileId}"
-        }
-    },
-    {
-        "deleteFileWithAllVersions": {
-            "component": "files",
-            "description": "delete a file with all versions.",
-            "http_method": "delete",
-            "doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
-            "uri": "/files/basic/cmis/repository/p!{subscriberId}/versions/snx:file!{fileId}"
-        }
-    },
-    {
-        "getFileComments": {
-            "component": "files",
-            "description": "get comments added to a file",
-            "http_method": "get",
-            "doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
-            "uri": "/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:comments!{fileId}"
-        }
-    },
-    {
-        "addFileComments": {
-            "component": "files",
-            "description": "add new file comments.<br>We will use a default comment xml as request body",
-            "http_method": "post",
-            "doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
-            "uri": "/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:comments!{fileId}"
-        }
-    },
-    {
-        "getFilesSharedWithMe": {
-            "component": "files",
-            "description": "get files shared with me",
-            "http_method": "get",
-            "doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
-            "uri": "/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:virtual!.!filessharedwith"
-        }
-    },
-    {
-        "getFileACLs": {
-            "component": "files",
-            "description": "get files sharing info (ACLs)",
-            "http_method": "get",
-            "doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
-            "uri": "/files/basic/cmis/repository/p!{subscriberId}/acl/snx:file!{fileId}"
-        }
-    },
-    {
-        "shareFileToUser": {
-            "component": "files",
-            "description": "share file to a user.<br>We will use a default ACL xml as request body.<br><span class='highlight'>permission</span> value could be <span class='highlight'>cmis:read</span> or <span class='highlight'>snx:editor</span> for reader/editor access respectively",
-            "http_method": "put",
-            "doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
-            "uri": "/files/basic/cmis/repository/p!{subscriberId}/acl/snx:file!{fileId}",
-            "inputs": "shareWithUserId,permission"
-        }
-    },
-    {
-        "editFileMetadata": {
-            "component": "files",
-            "description": "Change the Title or Description of a file entry",
-            "http_method": "put",
-            "doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
-            "uri": "/files/basic/cmis/repository/p!{subscriberId}/object/snx:file!{fileId}",
-            "inputs": "title,description"
-        }
-    },
-    {
-        "removeUserFromFileSharing": {
-            "component": "files",
-            "description": "remove user from file sharing.<br>We will retrieve the file ACL xml based on fileId and set it as the request body",
-            "http_method": "put",
-            "doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
-            "uri": "/files/basic/cmis/repository/p!{subscriberId}/acl-remover/snx:file!{fileId}",
-            "inputs": "removeUserId"
-        }
-    },
-    {
-        "shareFileToCommunity": {
-            "component": "files",
-            "description": "share file to a community (permission is reader).<br>We will retrieve the file entry xml based on fileId and set it as the request body",
-            "http_method": "post",
-            "doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
-            "uri": "/files/basic/cmis/repository/cs!{communityId}/folderc/snx:community",
-            "inputs": "fileId"
-        }
-    },
-    {
-        "removeCommunityFromFileSharing": {
-            "component": "files",
-            "description": "remove community from file sharing.<br>We will retrieve the file entry xml based on fileId and set it as the request body",
-            "http_method": "post",
-            "doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
-            "uri": "/files/basic/cmis/repository/cs!{communityId}/unfiled?removeFrom=snx:community",
-            "inputs": "fileId"
-        }
-    },
-    {
-        "getMyFolders": {
-            "component": "files",
-            "description": "get folders owned by me",
-            "http_method": "get",
-            "doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
-            "uri": "/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:collections"
-        }
-    },
-    {
-        "getFoldersSharedWithMe": {
-            "component": "files",
-            "description": "get folders shared with me",
-            "http_method": "get",
-            "doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
-            "uri": "/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:virtual!.!collectionssharedwith"
-        }
-    },
-    {
-        "addFileToFolder": {
-            "component": "files",
-            "description": "add a file to a folder.<br>We will retrieve the file entry xml based on fileId and set it as the request body",
-            "http_method": "post",
-            "doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
-            "uri": "/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:collection!{collectionId}",
-            "inputs": "fileId"
-        }
-    },
-    {
-        "getFilesInsideFolder": {
-            "component": "files",
-            "description": "get files inside a folder",
-            "http_method": "get",
-            "doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
-            "uri": "/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:collection!{collectionId}"
-        }
-    },
-    {
-        "removeFileFromFolder": {
-            "component": "files",
-            "description": "remove a file from a folder.<br>We will retrieve the file entry xml based on fileId and set it as the request body",
-            "http_method": "post",
-            "doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
-            "uri": "/files/basic/cmis/repository/p!{subscriberId}/unfiled?removeFrom=snx:collection!{collectionId}",
-            "inputs": "fileId"
-        }
-    }
-]
+[{
+	"name": "getCMISServiceDoc",
+	"description": "get service doc for CMIS API",
+	"http_method": "get",
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
+	"uri": "/files/basic/cmis/my/servicedoc"
+},
+{
+	"name": "getMyFiles",
+	"description": "get files owned by me",
+	"http_method": "get",
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
+	"uri": "/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:files"
+},
+{
+	"name": "getMyFilesAlternateWay",
+	"description": "get files owned by me (alternate way)",
+	"http_method": "get",
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
+	"uri": "/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:virtual!.!filesownedby"
+},
+{
+	"name": "getMyFilesWithParameters",
+	"description": "get files owned by me but specify parameters (will be added into URL).<br><span class='highlight'>maxItems</span>: Specify the max item number in result. Leave blank to not use this parameter<br><span class='highlight'>skipCount</span>: Specify the number of items that should not be skipped in result. Leave blank to not use this parameter<br><span class='highlight'>filter</span>: Specify the CMIS properties (Comma separated) that you want return for each file entry. you should always include <span class='highlight'>cmis:objectId,cmis:objectTypeId</span> at a minimum. Leave blank to not use this parameter",
+	"http_method": "get",
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
+	"uri": "/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:files",
+	"inputs": "maxItems,skipCount,filter"
+},
+{
+	"name": "getFileEntry",
+	"description": "get full details about a file entry",
+	"http_method": "get",
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
+	"uri": "/files/basic/cmis/repository/p!{subscriberId}/object/snx:file!{fileId}"
+},
+{
+	"name": "getFileEntryWithParameters",
+	"description": "get one file entry but specify parameters (will be added into URL).<br><span class='highlight'>includeACL</span>: Specify if to include ACL information in result. Value could be <span class='highlight'>true</span> or <span class='highlight'>false</span>. Leave blank to not use this parameter<br><span class='highlight'>filter</font></span>: Specify the CMIS properties (Comma separated) that you want return. you should always include <span class='highlight'>cmis:objectId,cmis:objectTypeId</span> at a minimum. Leave blank to not use this parameter",
+	"http_method": "get",
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
+	"uri": "/files/basic/cmis/repository/p!{subscriberId}/object/snx:file!{fileId}",
+	"inputs": "includeACL,filter"
+},
+{
+	"name": "getFileEntryByFileName",
+	"description": "get full details about a file entry given the file name",
+	"http_method": "get",
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
+	"uri": "/files/basic/cmis/repository/p!{subscriberId}/objectp?p=/files/{fileName}"
+},
+{
+	"name": "uploadFile",
+	"description": "upload a new file. This will upload an image file named bludbg.jpg",
+	"http_method": "post",
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
+	"uri": "/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:files"
+},
+{
+	"name": "updateFile",
+	"description": "update file (upload new version of file). This will update the file created in uploadFile API with another image file",
+	"http_method": "put",
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
+	"uri": "/files/basic/cmis/repository/p!{subscriberId}/object/snx:file!{fileId}/stream/{fileId}"
+},
+{
+	"name": "createFileByAtomEntry",
+	"description": "create a new file by uploading an Atom Entry. The created file will be a text file. You can use <span class='highlight'>\"\\n\"</span> in fileContent for a new line",
+	"http_method": "post",
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
+	"uri": "/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:files",
+	"inputs": "fileName,fileContent"
+},
+{
+	"name": "updateFileByAtomEntry",
+	"description": "update a text file name and/or content by an Atom Entry. You can use <span class='highlight'>\"\\n\"</span> in fileContent for a new line",
+	"http_method": "put",
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
+	"uri": "/files/basic/cmis/repository/p!{subscriberId}/object/snx:file!{fileId}",
+	"inputs": "fileName,fileContent"
+},
+{
+	"name": "downloadFile",
+	"description": "download a file",
+	"http_method": "get",
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
+	"uri": "/files/basic/cmis/repository/p!{subscriberId}/object/snx:file!{fileId}/stream/{fileId}"
+},
+{
+	"name": "deleteFile",
+	"description": "delete a file.<br><span class='highlight'>Note</span>: This method can only delete files with no more than 1 version. if the file have more than 1 version, please use the <span class='highlight'>deleteFileWithAllVersions</span> API.",
+	"http_method": "delete",
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
+	"uri": "/files/basic/cmis/repository/p!{subscriberId}/object/snx:file!{fileId}"
+},
+{
+	"name": "deleteFileWithAllVersions",
+	"description": "delete a file with all versions.",
+	"http_method": "delete",
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
+	"uri": "/files/basic/cmis/repository/p!{subscriberId}/versions/snx:file!{fileId}"
+},
+{
+	"name": "getFileComments",
+	"description": "get comments added to a file",
+	"http_method": "get",
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
+	"uri": "/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:comments!{fileId}"
+},
+{
+	"name": "addFileComments",
+	"description": "add new file comments.<br>We will use a default comment xml as request body",
+	"http_method": "post",
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
+	"uri": "/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:comments!{fileId}"
+},
+{
+	"name": "getFilesSharedWithMe",
+	"description": "get files shared with me",
+	"http_method": "get",
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
+	"uri": "/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:virtual!.!filessharedwith"
+},
+{
+	"name": "getFileACLs",
+	"description": "get files sharing info (ACLs)",
+	"http_method": "get",
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
+	"uri": "/files/basic/cmis/repository/p!{subscriberId}/acl/snx:file!{fileId}"
+},
+{
+	"name": "shareFileToUser",
+	"description": "share file to a user.<br>We will use a default ACL xml as request body.<br><span class='highlight'>permission</span> value could be <span class='highlight'>cmis:read</span> or <span class='highlight'>snx:editor</span> for reader/editor access respectively",
+	"http_method": "put",
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
+	"uri": "/files/basic/cmis/repository/p!{subscriberId}/acl/snx:file!{fileId}",
+	"inputs": "shareWithUserId,permission"
+},
+{
+	"name": "editFileMetadata",
+	"description": "Change the Title or Description of a file entry",
+	"http_method": "put",
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
+	"uri": "/files/basic/cmis/repository/p!{subscriberId}/object/snx:file!{fileId}",
+	"inputs": "title,description"
+},
+{
+	"name": "removeUserFromFileSharing",
+	"description": "remove user from file sharing.<br>We will retrieve the file ACL xml based on fileId and set it as the request body",
+	"http_method": "put",
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
+	"uri": "/files/basic/cmis/repository/p!{subscriberId}/acl-remover/snx:file!{fileId}",
+	"inputs": "removeUserId"
+},
+{
+	"name": "shareFileToCommunity",
+	"component": "files",
+	"description": "share file to a community (permission is reader).<br>We will retrieve the file entry xml based on fileId and set it as the request body",
+	"http_method": "post",
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
+	"uri": "/files/basic/cmis/repository/cs!{communityId}/folderc/snx:community",
+	"inputs": "fileId"
+},
+{
+	"name": "removeCommunityFromFileSharing",
+	"description": "remove community from file sharing.<br>We will retrieve the file entry xml based on fileId and set it as the request body",
+	"http_method": "post",
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
+	"uri": "/files/basic/cmis/repository/cs!{communityId}/unfiled?removeFrom=snx:community",
+	"inputs": "fileId"
+},
+{
+	"name": "getMyFolders",
+	"description": "get folders owned by me",
+	"http_method": "get",
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
+	"uri": "/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:collections"
+},
+{
+	"name": "getFoldersSharedWithMe",
+	"description": "get folders shared with me",
+	"http_method": "get",
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
+	"uri": "/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:virtual!.!collectionssharedwith"
+},
+{
+	"name": "addFileToFolder",
+	"description": "add a file to a folder.<br>We will retrieve the file entry xml based on fileId and set it as the request body",
+	"http_method": "post",
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
+	"uri": "/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:collection!{collectionId}",
+	"inputs": "fileId"
+},
+{
+	"name": "getFilesInsideFolder",
+	"description": "get files inside a folder",
+	"http_method": "get",
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
+	"uri": "/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:collection!{collectionId}"
+},
+{
+	"name": "removeFileFromFolder",
+	"description": "remove a file from a folder.<br>We will retrieve the file entry xml based on fileId and set it as the request body",
+	"http_method": "post",
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
+	"uri": "/files/basic/cmis/repository/p!{subscriberId}/unfiled?removeFrom=snx:collection!{collectionId}",
+	"inputs": "fileId"
+}]

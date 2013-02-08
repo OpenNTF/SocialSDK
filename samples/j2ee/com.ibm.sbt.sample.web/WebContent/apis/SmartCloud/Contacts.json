@@ -1,75 +1,52 @@
-[
-{
-  "getMyContacts":
-  {
-    "component":"contacts",
-    "description":"get my contacts.<br><span class='highlight'>format</span> could be <span class='highlight'>json</span>, <span class='highlight'>xml</span> or <span class='highlight'>atom</span>. Default value is <span class='highlight'>json</span>",
-    "http_method":"get",
-    "doc_url":"http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Contacts_API_sbar",
-    "uri":"/lotuslive-shindig-server/social/rest/people/@me/@all?format={format}"
-  }
+[{
+	"name": "getMyContacts",
+	"description": "get my contacts.<br><span class='highlight'>format</span> could be <span class='highlight'>json</span>, <span class='highlight'>xml</span> or <span class='highlight'>atom</span>. Default value is <span class='highlight'>json</span>",
+	"http_method": "get",
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Contacts_API_sbar",
+	"uri": "/lotuslive-shindig-server/social/rest/people/@me/@all?format={format}"
 },
 {
-  "getMyContacts_Header":
-  {
-    "component":"contacts",
-    "description":"get my contacts and specify responseFormat in '<span class='label'>Accept</span>' request header.<br><span class='highlight'>responseFormat</span> could be <span class='highlight'>application/json</span>, <span class='highlight'>application/xml</span> or <span class='highlight'>application/atom+xml</span>.",
-    "http_method":"get",
-    "doc_url":"http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Contacts_API_sbar",
-    "uri":"/lotuslive-shindig-server/social/rest/people/@me/@all",
-    "inputs":"responseFormat"
-  }
+	"name": "getMyContacts_Header",
+	"description": "get my contacts and specify responseFormat in '<span class='label'>Accept</span>' request header.<br><span class='highlight'>responseFormat</span> could be <span class='highlight'>application/json</span>, <span class='highlight'>application/xml</span> or <span class='highlight'>application/atom+xml</span>.",
+	"http_method": "get",
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Contacts_API_sbar",
+	"uri": "/lotuslive-shindig-server/social/rest/people/@me/@all",
+	"inputs": "responseFormat"
 },
 {
-  "getMyContacts_ByIndex":
-  {
-    "component":"contacts",
-    "description":"get my contacts based on startIndex and count. Using default format <span class='highlight'>json</span>",
-    "http_method":"get",
-    "doc_url":"http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Contacts_API_sbar",
-    "uri":"/lotuslive-shindig-server/social/rest/people/@me/@all?startIndex={startIndex}&count={count}"
-  }
+	"name": "getMyContacts_ByIndex",
+	"description": "get my contacts based on startIndex and count. Using default format <span class='highlight'>json</span>",
+	"http_method": "get",
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Contacts_API_sbar",
+	"uri": "/lotuslive-shindig-server/social/rest/people/@me/@all?startIndex={startIndex}&count={count}"
 },
 {
-  "getMyConnections":
-  {
-    "component":"contacts",
-    "description":"get my connections.<br><span class='highlight'>format</span> could be <span class='highlight'>json</span>, <span class='highlight'>xml</span> or <span class='highlight'>atom</span>. Default value is <span class='highlight'>json</span>",
-    "http_method":"get",
-    "doc_url":"http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Contacts_API_sbar",
-    "uri":"/lotuslive-shindig-server/social/rest/people/@me/@friends?format={format}"
-  }
+	"name": "getMyConnections",
+	"description": "get my connections.<br><span class='highlight'>format</span> could be <span class='highlight'>json</span>, <span class='highlight'>xml</span> or <span class='highlight'>atom</span>. Default value is <span class='highlight'>json</span>",
+	"http_method": "get",
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Contacts_API_sbar",
+	"uri": "/lotuslive-shindig-server/social/rest/people/@me/@friends?format={format}"
 },
 {
-  "getMyConnections_Header":
-  {
-    "component":"contacts",
-    "description":"get my connections and specify responseFormat in '<span class='label'>Accept</span>' request header.<br><span class='highlight'>responseFormat</span> could be <span class='highlight'>application/json</span>, <span class='highlight'>application/xml</span> or <span class='highlight'>application/atom+xml</span>.",
-    "http_method":"get",
-    "doc_url":"http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Contacts_API_sbar",
-    "uri":"/lotuslive-shindig-server/social/rest/people/@me/@friends",
-    "inputs":"responseFormat"
-  }
+	"name": "getMyConnections_Header",
+	"description": "get my connections and specify responseFormat in '<span class='label'>Accept</span>' request header.<br><span class='highlight'>responseFormat</span> could be <span class='highlight'>application/json</span>, <span class='highlight'>application/xml</span> or <span class='highlight'>application/atom+xml</span>.",
+	"http_method": "get",
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Contacts_API_sbar",
+	"uri": "/lotuslive-shindig-server/social/rest/people/@me/@friends",
+	"inputs": "responseFormat"
 },
 {
-  "getContactByGUID":
-  {
-    "component":"contacts",
-    "description":"get my contacts via contact GUID.<br><span class='highlight'>format</span> could be <span class='highlight'>json</span>, <span class='highlight'>xml</span> or <span class='highlight'>atom</span>. Default value is <span class='highlight'>json</span>",
-    "http_method":"get",
-    "doc_url":"http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Contacts_API_sbar",
-    "uri":"/lotuslive-shindig-server/social/rest/people/lotuslive:contact:{contactId}/@self?format={format}"
-  }
+	"name": "getContactByGUID",
+	"description": "get my contacts via contact GUID.<br><span class='highlight'>format</span> could be <span class='highlight'>json</span>, <span class='highlight'>xml</span> or <span class='highlight'>atom</span>. Default value is <span class='highlight'>json</span>",
+	"http_method": "get",
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Contacts_API_sbar",
+	"uri": "/lotuslive-shindig-server/social/rest/people/lotuslive:contact:{contactId}/@self?format={format}"
 },
 {
-  "getContactByGUID_Header":
-  {
-    "component":"contacts",
-    "description":"get my contacts via contact GUID and specify responseFormat in '<span class='label'>Accept</span>' request header.<br><span class='highlight'>responseFormat</span> could be <span class='highlight'>application/json</span>, <span class='highlight'>application/xml</span> or <span class='highlight'>application/atom+xml</span>.",
-    "http_method":"get",
-    "doc_url":"http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Contacts_API_sbar",
-    "uri":"/lotuslive-shindig-server/social/rest/people/lotuslive:contact:{contactId}/@self",
-    "inputs":"responseFormat"
-  }
-}
-]
+	"name": "getContactByGUID_Header",
+	"description": "get my contacts via contact GUID and specify responseFormat in '<span class='label'>Accept</span>' request header.<br><span class='highlight'>responseFormat</span> could be <span class='highlight'>application/json</span>, <span class='highlight'>application/xml</span> or <span class='highlight'>application/atom+xml</span>.",
+	"http_method": "get",
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Contacts_API_sbar",
+	"uri": "/lotuslive-shindig-server/social/rest/people/lotuslive:contact:{contactId}/@self",
+	"inputs": "responseFormat"
+}]

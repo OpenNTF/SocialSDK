@@ -1,11 +1,17 @@
 package nsf.playground.beans;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.Map;
+
 import lotus.domino.Database;
 import lotus.domino.Document;
 import lotus.domino.NotesException;
 import lotus.domino.ViewEntry;
 
+import com.ibm.commons.runtime.util.URLEncoding;
 import com.ibm.commons.util.StringUtil;
+import com.ibm.commons.util.UrlUtil;
 import com.ibm.jscript.std.ArrayObject;
 import com.ibm.jscript.std.ObjectObject;
 import com.ibm.jscript.types.FBSString;
@@ -31,6 +37,13 @@ public class APIBean extends AssetBean {
 		return "AllAPIs";
 	}
 	
+	public String getToolkitUrl() throws UnsupportedEncodingException, IOException {
+		Map<String,Object> sessionScope = ExtLibUtil.getSessionScope();
+		String env = (String)sessionScope.get("environment");
+		String url = "xsp/.sbtlibrary"+(StringUtil.isNotEmpty(env)?"?env="+encodeUrl(env):"");
+		return url;
+	}
+
 	protected AssetNode createAssetNode(String notesUnid, CategoryNode parent, String name, String category, String assetId) {
 		return new APIAssetNode(parent,name,category,notesUnid,assetId);
 	}

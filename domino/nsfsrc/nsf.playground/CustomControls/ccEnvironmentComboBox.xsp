@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xp:link id="link2" style="padding-right:5.0px">
+		<xp:eventHandler event="onclick" submit="false">
+			<xp:this.script><![CDATA[XSP.openTooltipDialog('#{id:envTooltipDialog}','#{id:link2}')]]></xp:this.script>
+		</xp:eventHandler>
+		<xp:image url="/helpicon.png" id="image3"></xp:image>
+	</xp:link>
+
+	<xp:comboBox id="cbEnv" style="margin-top:3.0px" value="#{sessionScope.environment}"
+		defaultValue="#{javascript:return dataAccess.getPreferredEnvironment()}">
+		<xp:selectItems>
+			<xp:this.value><![CDATA[#{javascript:dataAccess.getEnvironments()}]]></xp:this.value>
+		</xp:selectItems>
+		<xp:eventHandler event="onchange" submit="true"
+			refreshMode="partial" refreshId="PlaceBarActions">
+			<xp:this.action><![CDATA[#{javascript:var e = sessionScope.environment
+if(e==dataAccess.CUSTOM) {
+	var dlgId = getClientId("customEnvDialog")
+	view.postScript("setTimeout('XSP.openDialog(\\'"+dlgId+"\\')');");
+} else {
+	if(compositeData.fullRefresh) {
+		context.reloadPage()
+	}
+}}]]></xp:this.action>
+		</xp:eventHandler>
+	</xp:comboBox>
+
+	<xp:link escape="true" text="Edit..." id="link1" style="padding-left:5.0px">
+		<xp:this.rendered><![CDATA[#{javascript:var v = sessionScope.environment
+return v==dataAccess.CUSTOM}]]></xp:this.rendered>
+		<xp:eventHandler event="onclick" submit="false">
+			<xp:this.script><![CDATA[XSP.openDialog("#{id:customEnvDialog}")]]></xp:this.script>
+		</xp:eventHandler>
+		<xp:image id="image1" url="/edit.jpg"></xp:image>
+	</xp:link>
+
+</xp:view>

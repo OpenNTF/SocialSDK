@@ -13,7 +13,7 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-package com.ibm.sbt.service.core;
+package com.ibm.commons.runtime.servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,7 +24,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ibm.commons.Platform;
-import com.ibm.commons.runtime.servlet.BaseToolkitServlet;
 
 /**
  * Servlet dispatcher.

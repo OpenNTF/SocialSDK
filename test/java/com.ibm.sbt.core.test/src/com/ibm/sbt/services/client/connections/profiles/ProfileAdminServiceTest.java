@@ -12,7 +12,7 @@ import com.ibm.sbt.util.SBTException;
 
 /**
  * Tests for the java connections Profile API by calling Connections server using configuration in
- * faces-config
+ * managed-beans
  * 
  * @author Vineet Kanwal
  */

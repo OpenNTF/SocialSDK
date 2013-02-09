@@ -31,7 +31,7 @@ import com.ibm.commons.runtime.Application;
 import com.ibm.commons.util.io.StreamUtil;
 
 /**
- * This class creates the managed beans by reading a faces-config.xml from a URL
+ * This class creates the managed beans by reading a managed-beans.xml from a URL
  * retrieved from a JNDI lookup.
  *  
  * @author Mark Wallace
@@ -79,7 +79,7 @@ public class ContextResourceBeanFactory extends AbstractXmlConfigBeanFactory {
 	}
 
 	/*
-	 * Lookup the URL which points to the faces-config.xml.
+	 * Lookup the URL which points to the managed-beans.xml.
 	 * 
 	 * @param envCtx
 	 * @throws NamingException

@@ -87,35 +87,7 @@ if(doc) {	o = {		status:		"ok",		id:			snippetId,		unid:		doc.getUniversalID
 			title="IBM Social Business Toolkit - Playground">
 			<xp:this.facets>
 				<xp:panel id="PlaceBarActions" xp:key="PlaceBarActions">
-					<xp:link id="link2" style="padding-right:5.0px">
-						<xp:eventHandler event="onclick" submit="false">
-							<xp:this.script><![CDATA[XSP.openTooltipDialog('#{id:envTooltipDialog}','#{id:link2}')]]></xp:this.script>
-						</xp:eventHandler>
-						<xp:image url="/helpicon.png" id="image3"></xp:image>
-					</xp:link>
-					<xp:comboBox id="cbEnv" style="margin-top:3.0px"
-						value="#{sessionScope.environment}" defaultValue="#{javascript:return dataAccess.getPreferredEnvironment()}">
-						<xp:selectItems>
-							<xp:this.value><![CDATA[#{javascript:dataAccess.getEnvironments()}]]></xp:this.value>
-						</xp:selectItems>
-						<xp:eventHandler event="onchange" submit="true"
-							refreshMode="partial" refreshId="PlaceBarActions">
-							<xp:this.action><![CDATA[#{javascript:var e = sessionScope.environment
-if(e==dataAccess.CUSTOM) {
-	var dlgId = getClientId("customEnvDialog")
-	view.postScript("setTimeout('XSP.openDialog(\\'"+dlgId+"\\')');");
-}}]]></xp:this.action>
-						</xp:eventHandler>
-					</xp:comboBox>
-					<xp:link escape="true" text="Edit..." id="link1"
-						style="padding-left:5.0px">
-						<xp:this.rendered><![CDATA[#{javascript:var v = sessionScope.environment
-return v==dataAccess.CUSTOM}]]></xp:this.rendered>
-						<xp:eventHandler event="onclick" submit="false">
-							<xp:this.script><![CDATA[XSP.openDialog("#{id:customEnvDialog}")]]></xp:this.script>
-						</xp:eventHandler>
-						<xp:image id="image1" url="/edit.jpg"></xp:image>
-					</xp:link>
+					<xc:ccEnvironmentComboBox></xc:ccEnvironmentComboBox>
 				</xp:panel>
 			</xp:this.facets>
 			<xe:djBorderContainer id="djTabContainer1"
@@ -133,18 +105,16 @@ return v==dataAccess.CUSTOM}]]></xp:this.rendered>
 					<xe:djBorderContainer id="djBorderContainer1"
 						liveSplitters="true">
 						<xe:this.dojoAttributes>
-							<xp:dojoAttribute name="gutters"
-								value="false">
+							<xp:dojoAttribute name="gutters" value="false">
 							</xp:dojoAttribute>
 						</xe:this.dojoAttributes>
 						<xe:djBorderPane region="top">
 							<xe:toolbar id="toolbar1">
 								<xe:this.treeNodes>
-									<xe:basicLeafNode
-										label="New Snippet" styleClass="dijitIconNewTask" href="#">
+									<xe:basicLeafNode label="New Snippet"
+										styleClass="dijitIconNewTask" href="#">
 									</xe:basicLeafNode>
-									<xe:basicLeafNode label="Save"
-										styleClass="dijitIconSave"
+									<xe:basicLeafNode label="Save" styleClass="dijitIconSave"
 										loaded="${javascript:userBean.canCreateDocs}">
 										<xe:this.onClick><![CDATA[if("#{userBean.canCreateDocs}"!="true") {
 	alert("You are not allowed to save a document. Please authenticate with a different user.");
@@ -157,17 +127,15 @@ if(pageGlobal.unid) {
 }]]></xe:this.onClick>
 									</xe:basicLeafNode>
 									<xe:basicLeafNode label="Save As..."
-										styleClass="dijitIconSave"
-										loaded="${javascript:userBean.canCreateDocs}">
+										styleClass="dijitIconSave" loaded="${javascript:userBean.canCreateDocs}">
 										<xe:this.onClick><![CDATA[if("#{userBean.canCreateDocs}"!="true") {
 	alert("You are not allowed to save a document. Please authenticate with a different user.");
 	return;
 }
 XSP.openDialog("#{id:snippetDialog}")]]></xe:this.onClick>
 									</xe:basicLeafNode>
-									<xe:basicLeafNode
-										label="Delete Snippet..." styleClass="dijitIconDelete"
-										loaded="${javascript:userBean.canCreateDocs}">
+									<xe:basicLeafNode label="Delete Snippet..."
+										styleClass="dijitIconDelete" loaded="${javascript:userBean.canCreateDocs}">
 										<xe:this.onClick><![CDATA[if("#{userBean.canCreateDocs}"!="true") {
 	alert("You are not allowed to delete a document. Please authenticate with a different user.");
 	return;
@@ -178,12 +146,11 @@ if(confirm("This operation cannot be undone.\nDo you really want to delete this 
 									</xe:basicLeafNode>
 								</xe:this.treeNodes>
 							</xe:toolbar>
-							<xp:link escape="true" text="Edit..."
-								id="deleteLink" style="display:none">
+							<xp:link escape="true" text="Edit..." id="deleteLink"
+								style="display:none">
 								<xp:image id="image2" url="/edit.jpg"></xp:image>
-								<xp:eventHandler event="onclick"
-									submit="true" refreshMode="partial"
-									refreshId="widgetContainer1">
+								<xp:eventHandler event="onclick" submit="true"
+									refreshMode="partial" refreshId="widgetContainer1">
 									<xp:this.action><![CDATA[#{javascript:var unid = context.getSubmittedValue()
 var doc = database.getDocumentByUNID(unid);
 if(doc) {
@@ -194,27 +161,25 @@ if(doc) {
 								</xp:eventHandler>
 							</xp:link>
 						</xe:djBorderPane>
-						<xe:djBorderPane region="top" splitter="true" style="height:400px">
+						<xe:djBorderPane region="top" splitter="true"
+							style="height:400px">
 							<xe:djTabContainer id="tabContainer"
 								style="width: 100%; height: 100%; border: none">
 								<xe:djTabPane id="tabHtml" title="HTML"
 									onShow="pageGlobal.htmlEditor.refresh()">
-									<xp:div
-										style="border: 1px solid #AAAAAA; height: 100%">
+									<xp:div style="border: 1px solid #AAAAAA; height: 100%">
 										<xc:PlaygroundTabHtml></xc:PlaygroundTabHtml>
 									</xp:div>
 								</xe:djTabPane>
-								<xe:djTabPane id="tabJs"
-									title="JavaScript" onShow="pageGlobal.jsEditor.refresh()">
-									<xp:div
-										style="border: 1px solid #AAAAAA; height: 100%">
+								<xe:djTabPane id="tabJs" title="JavaScript"
+									onShow="pageGlobal.jsEditor.refresh()">
+									<xp:div style="border: 1px solid #AAAAAA; height: 100%">
 										<xc:PlaygroundTabJavaScript></xc:PlaygroundTabJavaScript>
 									</xp:div>
 								</xe:djTabPane>
 								<xe:djTabPane id="tabCss" title="CSS"
 									onShow="pageGlobal.cssEditor.refresh()">
-									<xp:div
-										style="border: 1px solid #AAAAAA; height: 100%">
+									<xp:div style="border: 1px solid #AAAAAA; height: 100%">
 										<xc:PlaygroundTabCss></xc:PlaygroundTabCss>
 									</xp:div>
 								</xe:djTabPane>
@@ -226,8 +191,7 @@ if(doc) {
 								-->
 							</xe:djTabContainer>
 						</xe:djBorderPane>
-						<xe:djBorderPane region="top"
-							splitter="false">
+						<xe:djBorderPane region="top" splitter="false">
 							<xe:toolbar id="toolbar2">
 								<xe:this.treeNodes>
 									<xe:basicLeafNode label="Run"
@@ -238,17 +202,16 @@ if(doc) {
 										styleClass="dijitEditorIcon dijitEditorIconViewSource"
 										onClick="runCode(true)">
 									</xe:basicLeafNode>
-									<xe:basicLeafNode
-										label="Show Generated HTML"
+									<xe:basicLeafNode label="Show Generated HTML"
 										styleClass="dijitEditorIcon dijitEditorIconViewSource"
 										onClick="showCode()">
 									</xe:basicLeafNode>
 								</xe:this.treeNodes>
 							</xe:toolbar>
 						</xe:djBorderPane>
-						<xe:djBorderPane region="center" style="border: 1px solid #AAAAAA;">
-							<xp:div
-								style="height: 100%">
+						<xe:djBorderPane region="center"
+							style="border: 1px solid #AAAAAA;">
+							<xp:div style="height: 100%">
 								<xc:PlaygroundPreviewPane></xc:PlaygroundPreviewPane>
 							</xp:div>
 						</xe:djBorderPane>
@@ -390,10 +353,9 @@ codeEditor.setValue(_codeData);
 			</xp:scriptBlock>
 		</xp:panel>
 	</xe:dialog>
-
-	<xc:PlaygroundCustomEnvDialog></xc:PlaygroundCustomEnvDialog>
-	<xc:PlaygroundEnvironmentTooltipDialog></xc:PlaygroundEnvironmentTooltipDialog>
-
+	
+	<xc:ccEnvironmentComboBoxDialogs></xc:ccEnvironmentComboBoxDialogs>
+	
 	<form id="PreviewForm" action="#{javascript:@FullUrl('/xsp/preview')}"
 		method="post" target="preview">
 		<input type="hidden" name="fm_html" id="html" />

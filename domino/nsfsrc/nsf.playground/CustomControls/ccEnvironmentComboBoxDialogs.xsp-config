@@ -5,9 +5,9 @@
     <default-prefix>xc</default-prefix>
   </faces-config-extension>
   <composite-component>
-    <component-type>PlaygroundCustomEnvDialog</component-type>
-    <composite-name>PlaygroundCustomEnvDialog</composite-name>
-    <composite-file>/PlaygroundCustomEnvDialog.xsp</composite-file>
+    <component-type>ccEnvironmentComboBoxDialogs</component-type>
+    <composite-name>ccEnvironmentComboBoxDialogs</composite-name>
+    <composite-file>/ccEnvironmentComboBoxDialogs.xsp</composite-file>
     <composite-extension>
       <designer-extension>
         <in-palette>true</in-palette>

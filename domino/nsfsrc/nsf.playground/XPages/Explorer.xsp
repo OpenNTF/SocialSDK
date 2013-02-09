@@ -14,8 +14,8 @@
 			name="sbt.endpoint"></xp:dojoModule>
 		-->
 	</xp:this.resources>
-	<script type="text/javascript"
-		src="xsp/.sbtlibrary?env=Quickstart Workshop"></script>
+
+	<script type="text/javascript" src="#{javascript:apiBean.getToolkitUrl()}"></script>
 	<xp:scriptBlock>
 		<xp:this.value><![CDATA[var pageGlobal = {
 	dynPanel:		'#{id:dynp}',
@@ -45,6 +45,9 @@ function prepend(h,f) {
 	<xc:ccLayout navigationPath="/Explorer"
 		title="IBM Social Business Toolkit - API Explorer">
 		<xp:this.facets>
+			<xp:panel id="PlaceBarActions" xp:key="PlaceBarActions">
+				<xc:ccEnvironmentComboBox fullRefresh="true"></xc:ccEnvironmentComboBox>
+			</xp:panel>
 		</xp:this.facets>
 		<xe:djBorderContainer id="djTabContainer1"
 			style="width:100%; height:100%" liveSplitters="true">
@@ -70,7 +73,8 @@ if(json) {
 	return fromJson(json) // Should be a JS array
 }
 return null;}]]></xp:this.value>
-									<xp:text escape="true" id="computedField2" value="#{javascript:toJson(item)}" loaded="false">
+									<xp:text escape="true" id="computedField2" value="#{javascript:toJson(item)}"
+										loaded="false">
 									</xp:text>
 									<br />
 									<xp:div styleClass="explorer_summary">
@@ -219,6 +223,8 @@ executeService(p,'#{id:expResults}');]]></xp:this.script>
 			</xe:djBorderPane>
 		</xe:djBorderContainer>
 	</xc:ccLayout>
+
+	<xc:ccEnvironmentComboBoxDialogs></xc:ccEnvironmentComboBoxDialogs>
 
 	<xp:scriptBlock>
 		<xp:this.value><![CDATA[function loadFromHash() {

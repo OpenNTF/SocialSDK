@@ -13,7 +13,7 @@ import com.ibm.sbt.services.BaseUnitTest;
 
 /**
  * Tests for the java connections Profile API by calling Connections server using configuration in
- * faces-config
+ * managed-beans
  * 
  * @author Vineet Kanwal
  */

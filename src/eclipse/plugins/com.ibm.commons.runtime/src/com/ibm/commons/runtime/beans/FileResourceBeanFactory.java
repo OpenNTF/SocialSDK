@@ -26,13 +26,13 @@ import com.ibm.commons.util.StringUtil;
 /**
  * SBT ManagedBean Factory.
  *
- * This class reads a faces-config file from a file in the user directory.
+ * This class reads a managed-beans file from a file in the user directory.
  * 
  * @author Mark Wallace
  */
 public class FileResourceBeanFactory extends AbstractXmlConfigBeanFactory {
 
-	public static final String DEFAULT_RESOURCENAME = "faces-config.xml";
+	public static final String DEFAULT_RESOURCENAME =  EnvironmentConfig.INSTANCE.getEnvironmentConfig();
 
 
 	public FileResourceBeanFactory() {

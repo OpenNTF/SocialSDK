@@ -16,11 +16,11 @@
 package com.ibm.sbt.service.core.servlet;
 
 import com.ibm.commons.runtime.RuntimeConstants;
+import com.ibm.commons.runtime.servlet.ServletDispatcher;
+import com.ibm.commons.runtime.servlet.ServletFactory;
 import com.ibm.sbt.security.authentication.oauth.consumer.oauth_10a.servlet.OA2Callback;
 import com.ibm.sbt.security.authentication.oauth.consumer.oauth_10a.servlet.OACallback;
 import com.ibm.sbt.security.authentication.oauth.consumer.oauth_10a.servlet.OAClientAuthentication;
-import com.ibm.sbt.service.core.ServletDispatcher;
-import com.ibm.sbt.service.core.ServletFactory;
 import com.ibm.sbt.service.core.handlers.BasicAuthCredsHandler;
 import com.ibm.sbt.service.core.handlers.EmailHandler;
 import com.ibm.sbt.service.core.handlers.PingHandler;

@@ -17,9 +17,12 @@
 package com.ibm.commons.runtime;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.ibm.commons.Platform;
 
 
 
@@ -52,13 +55,38 @@ public abstract class Application {
 	public synchronized static void destroy(Application application) {
 		RuntimeFactory.get().destroyApplication(application);
 	}
-	
-	
+
+	private List<ApplicationListener> listeners;
 	
 	protected Application() {
 	}
 	
-	public void close() {
+	public synchronized void addListener(ApplicationListener listener) {
+		if(listeners==null) {
+			listeners = new ArrayList<ApplicationListener>();
+		}
+		listeners.add(listener);
+	}
+	
+	public synchronized void removeListener(ApplicationListener listener) {
+		if(listeners!=null) {
+			listeners.remove(listener);
+			if(listeners.isEmpty()) {
+				listeners = null;
+			}
+		}
+	}
+
+	public synchronized void close() {
+		if(listeners!=null) {
+			for(ApplicationListener l: listeners) {
+				try {
+					l.close(this);
+				} catch(Exception ex) {
+					Platform.getInstance().log(ex);
+				}
+			}
+		}
 	}
 
 	public abstract ClassLoader getClassLoader();

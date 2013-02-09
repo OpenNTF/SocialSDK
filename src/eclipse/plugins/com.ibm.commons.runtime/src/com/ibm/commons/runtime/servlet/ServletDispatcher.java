@@ -120,7 +120,7 @@ public class ServletDispatcher extends BaseToolkitServlet {
 			factory.service(request, response);
 		} else {
 	        // No factory is not available so it is a 404
-	        String message = "Invalid proxy handler {0}";
+	        String message = "Invalid service handler {0}";
 	        service404(request,response,message,request.getPathInfo());
 		}
     }

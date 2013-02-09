@@ -48,6 +48,9 @@ public abstract class ServletFactory {
 		public PathInfoName(Object clazz, String name) {
 			super(clazz);
 			this.name = name;
+	        if(this.name.startsWith("/")) {
+	           this.name = this.name.substring(1);
+	        }
 		}
 		@Override
 		public int match(HttpServletRequest request) throws ServletException {
@@ -58,11 +61,6 @@ public abstract class ServletFactory {
 	        }
 	        if(pathInfo.startsWith("/")) {
 	            pathInfo = pathInfo.substring(1);
-	        }
-	        
-	        int pos = pathInfo.indexOf('/');
-	        if(pos >=0) {
-	           pathInfo = pathInfo.substring(0, pos);
 	        }
 	        return StringUtil.equals(this.name, pathInfo) ? this.name.length() : -1;
 		}

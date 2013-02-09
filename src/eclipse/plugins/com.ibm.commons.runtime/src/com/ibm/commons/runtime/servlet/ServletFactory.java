@@ -73,6 +73,9 @@ public abstract class ServletFactory {
 	private Object clazz;
 	private HttpServlet servlet;
 		
+	public ServletFactory() {
+	}
+
 	public ServletFactory(Object clazz) {
 		this.clazz = clazz;
 	}
@@ -99,29 +102,34 @@ public abstract class ServletFactory {
 	
 	protected synchronized void createServlet() throws ServletException {
         if(servlet==null) {
-        	servlet = newServletInstance(clazz);
+        	servlet = newServletInstance();
         	servlet.init(servletConfig);
         }
 	}
 
-    protected HttpServlet newServletInstance(Object clazz) throws ServletException {
-        try {
-            if(clazz instanceof Class<?>) {
-                return (HttpServlet)((Class<?>)clazz).newInstance();
-            }
-            if(clazz instanceof String) {
-                ClassLoader cl = Thread.currentThread().getContextClassLoader();
-                if(cl==null) {
-                    cl = getClass().getClassLoader();
-                }
-                Class<?> c = cl.loadClass((String)clazz);
-                return (HttpServlet)c.newInstance();
-            }
-        	String msg = StringUtil.format("Invalid servlet class object {0}", clazz);
+    protected HttpServlet newServletInstance() throws ServletException {
+    	if(clazz!=null) {
+	        try {
+	            if(clazz instanceof Class<?>) {
+	                return (HttpServlet)((Class<?>)clazz).newInstance();
+	            }
+	            if(clazz instanceof String) {
+	                ClassLoader cl = Thread.currentThread().getContextClassLoader();
+	                if(cl==null) {
+	                    cl = getClass().getClassLoader();
+	                }
+	                Class<?> c = cl.loadClass((String)clazz);
+	                return (HttpServlet)c.newInstance();
+	            }
+	        	String msg = StringUtil.format("Invalid servlet class object {0}", clazz);
+	        	throw new ServletException(msg);
+	        } catch(Exception ex) {
+	        	String msg = StringUtil.format("Cannot instanciate servlet class {0}", clazz);
+	        	throw new ServletException(msg,ex);
+	        }
+    	} else {
+        	String msg = StringUtil.format("Cannot instanciate empty servlet class");
         	throw new ServletException(msg);
-        } catch(Exception ex) {
-        	String msg = StringUtil.format("Cannot instanciate servlet class {0}", clazz);
-        	throw new ServletException(msg,ex);
-        }
+    	}
     }
 }

@@ -91,7 +91,7 @@ public class ContextPropertiesFactory extends AbstractPropertiesFactory {
 	}
 
 	/*
-	 * Lookup the URL which points to the faces-config.xml.
+	 * Lookup the URL which points to the sbt.properties.
 	 * 
 	 * @param envCtx
 	 * @throws NamingException

@@ -39,43 +39,90 @@ import com.ibm.commons.util.StringUtil;
  * @author priand
  */
 public abstract class ServletFactory {
-	
+
 	/**
-	 * Concrete factory based on the path info seen as a name.
+	 * Factory that manages a unique servlet with its full life cycle.
 	 */
-	public static class PathInfoName extends ServletFactory {
-		private String name;
-		public PathInfoName(Object clazz, String name) {
+	public static abstract class SingleServlet extends ServletFactory {
+		private Object clazz;
+		private HttpServlet servlet;
+		public SingleServlet(Object clazz) {
+			this.clazz = clazz;
+		}
+		@Override
+		public void destroy() {
+			if(servlet!=null) {
+				servlet.destroy();
+				servlet = null;
+			}
+		}
+		protected synchronized void createServlet() throws ServletException {
+	        if(servlet==null) {
+	        	servlet = newServletInstance(clazz);
+	        	servlet.init(getServletConfig());
+	        }
+		}
+	}
+	public static class SingleServletMatcher implements ServletMatcher {
+		private SingleServlet matcher;
+		private int matchLength;
+		public SingleServletMatcher(SingleServlet matcher, int matchLength) {
+			this.matcher = matcher;
+			this.matchLength = matchLength;
+		}
+		@Override
+		public int matchLengh() {
+			return matchLength;
+		}
+		@Override
+		public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			if(matcher.servlet==null) {
+				matcher.createServlet();
+			}
+			matcher.servlet.service(request,response);
+		}
+	}
+
+	/**
+	 * Concrete factory based on the PathInfo.
+	 */
+	public static class PathInfoFactory extends SingleServlet {
+		private String pathInfo;
+		public PathInfoFactory(Object clazz, String pathInfo) {
 			super(clazz);
-			this.name = name;
-	        if(this.name.startsWith("/")) {
-	           this.name = this.name.substring(1);
+			this.pathInfo = pathInfo;
+	        if(!this.pathInfo.startsWith("/")) {
+	        	// A path info, as returned by the servlet container, always starts with a '/'
+	           this.pathInfo = "/"+this.pathInfo;
 	        }
 		}
 		@Override
-		public int match(HttpServletRequest request) throws ServletException {
-	        String pathInfo = request.getPathInfo();
-	        if(pathInfo==null) {
-	        	// Warn: the pathinfo can be null on certain web app server
-	        	pathInfo = "";
+		public ServletMatcher match(HttpServletRequest request) throws ServletException {
+	        String pi = request.getPathInfo();
+        	// Warn: the pathinfo can be null on certain web app server
+	        if(StringUtil.isNotEmpty(pi)) {
+		        int matchLength = pi.startsWith(this.pathInfo) ? this.pathInfo.length() : -1;
+		        if(matchLength>=0) {
+		        	// Ensure that the pathinfo actual matches
+		        	if(matchLength==pi.length() || pi.charAt(matchLength)=='/') {
+		        		return new SingleServletMatcher(this,matchLength);
+		        	}
+		        }
 	        }
-	        if(pathInfo.startsWith("/")) {
-	            pathInfo = pathInfo.substring(1);
-	        }
-	        return StringUtil.equals(this.name, pathInfo) ? this.name.length() : -1;
+	        return null;
 		}
 	}
 
 	private ServletConfig servletConfig;
-	
-	private Object clazz;
-	private HttpServlet servlet;
 		
 	public ServletFactory() {
 	}
 
 	public ServletFactory(Object clazz) {
-		this.clazz = clazz;
+	}
+	
+	public ServletConfig getServletConfig() {
+		return servletConfig;
 	}
 
 	public void init(ServletConfig servletConfig) throws ServletException {
@@ -83,29 +130,11 @@ public abstract class ServletFactory {
 	}
 
 	public void destroy() {
-		if(servlet!=null) {
-			servlet.destroy();
-			servlet = null;
-		}
 	}
 
-	public abstract int match(HttpServletRequest request) throws ServletException;
+	public abstract ServletMatcher match(HttpServletRequest request) throws ServletException;
 
-	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(servlet==null) {
-			createServlet();
-		}
-		servlet.service(request,response);
-	}
-	
-	protected synchronized void createServlet() throws ServletException {
-        if(servlet==null) {
-        	servlet = newServletInstance();
-        	servlet.init(servletConfig);
-        }
-	}
-
-    protected HttpServlet newServletInstance() throws ServletException {
+    protected HttpServlet newServletInstance(Object clazz) throws ServletException {
     	if(clazz!=null) {
 	        try {
 	            if(clazz instanceof Class<?>) {

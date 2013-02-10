@@ -106,18 +106,20 @@ public class ServletDispatcher extends BaseToolkitServlet {
 		ServletFactory factory = null;
 		
 		// Select the best factory for this request
+		ServletMatcher matcher = null;
 		int count = factories.size();
 		for(int i=0; i<count; i++) {
-			int m = factories.get(i).match(request);
-			if(m>match) {
-				match = m;
-				factory = factories.get(i);
+			ServletMatcher m = factories.get(i).match(request);
+			if(m!=null) {
+				if(matcher==null || m.matchLengh()>matcher.matchLengh() ) {
+					matcher = m;
+				}
 			}
 		}
 		
 		// If there is a matching factory, then delegate the request
-		if(factory!=null) {
-			factory.service(request, response);
+		if(matcher!=null) {
+			matcher.service(request, response);
 		} else {
 	        // No factory is not available so it is a 404
 	        String message = "Invalid service handler {0}";

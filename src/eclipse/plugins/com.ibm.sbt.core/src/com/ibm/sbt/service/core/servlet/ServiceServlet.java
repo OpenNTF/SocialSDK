@@ -40,13 +40,13 @@ public class ServiceServlet extends ServletDispatcher {
 	
     public ServiceServlet() {
     	// Register the default servlets
-        register(new ServletFactory.PathInfoName(PingHandler.class,PingHandler.URL_PATH)); 
-        register(new ServletFactory.PathInfoName(ProxyHandler.class,ProxyHandler.URL_PATH)); 
-        register(new ServletFactory.PathInfoName(BasicAuthCredsHandler.class,BasicAuthCredsHandler.URL_PATH));
-        register(new ServletFactory.PathInfoName(OACallback.class,OACallback.URL_PATH)); 
-        register(new ServletFactory.PathInfoName(OAClientAuthentication.class,OAClientAuthentication.URL_PATH));
-        register(new ServletFactory.PathInfoName(OA2Callback.class,OA2Callback.URL_PATH));
-        register(new ServletFactory.PathInfoName(EmailHandler.class,EmailHandler.URL_PATH));
+        register(new ServletFactory.PathInfoFactory(PingHandler.class,PingHandler.URL_PATH)); 
+        register(new ServletFactory.PathInfoFactory(ProxyHandler.class,ProxyHandler.URL_PATH)); 
+        register(new ServletFactory.PathInfoFactory(BasicAuthCredsHandler.class,BasicAuthCredsHandler.URL_PATH));
+        register(new ServletFactory.PathInfoFactory(OACallback.class,OACallback.URL_PATH)); 
+        register(new ServletFactory.PathInfoFactory(OAClientAuthentication.class,OAClientAuthentication.URL_PATH));
+        register(new ServletFactory.PathInfoFactory(OA2Callback.class,OA2Callback.URL_PATH));
+        register(new ServletFactory.PathInfoFactory(EmailHandler.class,EmailHandler.URL_PATH));
     }
     
 }

@@ -3,7 +3,7 @@
 	xmlns:xe="http://www.ibm.com/xsp/coreex"
 	xmlns:xc="http://www.ibm.com/xsp/custom" dojoTheme="true">
 
-	<xp:this.afterPageLoad><![CDATA[#{javascript:view.setPageTitle("Social Business Toolkit - Playground")}]]></xp:this.afterPageLoad>
+	<xp:this.afterPageLoad><![CDATA[#{javascript:view.setPageTitle("IBM Social Business Toolkit - Playground")}]]></xp:this.afterPageLoad>
 
 	<xe:keepSessionAlive id="keepSessionAlive1"></xe:keepSessionAlive>
 	<xc:DevelopmentWarning loaded="false"></xc:DevelopmentWarning>
@@ -26,7 +26,6 @@
 				navigationPath="${javascript:compositeData.navigationPath}"
 				defaultNavigationPath="${javascript:compositeData.defaultNavigationPath}"
 				productLogoHeight="29px" productLogoWidth="77px"
-				legalText="(c) 2012 IBM Corp."
 				placeBarName="#{javascript:compositeData.title}"
 				productLogoStyle="margin-left:-15px">
 				<xe:this.bannerApplicationLinks>

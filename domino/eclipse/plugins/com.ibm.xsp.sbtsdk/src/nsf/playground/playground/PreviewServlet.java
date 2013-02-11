@@ -81,7 +81,7 @@ public class PreviewServlet extends FacesContextServlet {
 		
 		String envName = options.getString("env");
 		PlaygroundEnvironment env = dataAccess.getEnvironment(envName);
-		env.updateBeans();
+		env.prepareEndpoints();
 		
 		String serverUrl = composeServerUrl(req);
 		String dbUrl = composeDatabaseUrl(req,serverUrl);

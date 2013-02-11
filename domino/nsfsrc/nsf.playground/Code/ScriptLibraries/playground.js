@@ -1,5 +1,5 @@
 /**
- * 
+ * Update the label in the toolbat 
  */
 function updateLabel(r) {
 	var tt = dojo.byId("CurrentLabel");
@@ -14,29 +14,29 @@ function updateLabel(r) {
  * Create a new snippet 
  */
 function createSnippet() {
-	playground.id = "";
-	playground.unid = "";
-	if(playground.htmlEditor) {
-		playground.htmlEditor.setValue("");
-		selectTab(playground.tabHtml);
+	pageGlobal.id = "";
+	pageGlobal.unid = "";
+	if(pageGlobal.htmlEditor) {
+		pageGlobal.htmlEditor.setValue("");
+		selectTab(pageGlobal.tabHtml);
 	}
-	if(playground.jsEditor) {
-		playground.jsEditor.setValue("");
+	if(pageGlobal.jsEditor) {
+		pageGlobal.jsEditor.setValue("");
 	}
-	if(playground.cssEditor) {
-		playground.cssEditor.setValue("");
+	if(pageGlobal.cssEditor) {
+		pageGlobal.cssEditor.setValue("");
 	}
-	if(playground.javaEditor) {
-		playground.javaEditor.setValue("");
+	if(pageGlobal.javaEditor) {
+		pageGlobal.javaEditor.setValue("");
 	}
-	if(playground.xpagesEditor) {
-		playground.xpagesEditor.setValue("");
+	if(pageGlobal.xpagesEditor) {
+		pageGlobal.xpagesEditor.setValue("");
 	}
-	if(playground.docPanelId) {
-		dojo.byId(playground.docPanelId).innerHTML = "";
+	if(pageGlobal.docPanelId) {
+		dojo.byId(pageGlobal.docPanelId).innerHTML = "";
 	}
 	
-	dojo.byId("preview").src = playground._previewFrame;	
+	dojo.byId("preview").src = pageGlobal._previewFrame;	
 	updateLabel(null);
 	updateNavSelection();
 }
@@ -48,22 +48,22 @@ function loadSnippet(id) {
 	var deferred = server.loadSnippet(id)
 	deferred.addCallback(function(r) {
 		if(r.status=="ok") {
-			playground.id = id;
-			playground.unid = r.unid;
-			if(playground.htmlEditor) playground.htmlEditor.setValue(r.html);
-			if(playground.jsEditor) playground.jsEditor.setValue(r.js);
-			if(playground.cssEditor) playground.cssEditor.setValue(r.css);
+			pageGlobal.id = id;
+			pageGlobal.unid = r.unid;
+			if(pageGlobal.htmlEditor) pageGlobal.htmlEditor.setValue(r.html);
+			if(pageGlobal.jsEditor) pageGlobal.jsEditor.setValue(r.js);
+			if(pageGlobal.cssEditor) pageGlobal.cssEditor.setValue(r.css);
 			if(r.html.length>5) {
-				selectTab(playground.tabHtml);
+				selectTab(pageGlobal.tabHtml);
 			} else if(r.js.length>5) {
-				selectTab(playground.tabJs);
+				selectTab(pageGlobal.tabJs);
 			} else if(r.css.length>5) {
-				selectTab(playground.tabCss);
+				selectTab(pageGlobal.tabCss);
 			} else {
-				selectTab(playground.tabHtml);
+				selectTab(pageGlobal.tabHtml);
 			}
-			if(playground.docPanelId) {
-				XSP.showContent(playground.docPanelId,'main',{action:'openDocument',documentId:playground.unid})
+			if(pageGlobal.docPanelId) {
+				XSP.showContent(pageGlobal.docPanelId,'main',{action:'openDocument',documentId:pageGlobal.unid})
 			}
 			updateLabel(r);
 			updateNavSelection();
@@ -74,7 +74,7 @@ function loadSnippet(id) {
 	});	
 }
 function selectTab(tab) {
-	var tc = dijit.byId(playground.tabContainer);
+	var tc = dijit.byId(pageGlobal.tabContainer);
 	var pn = dijit.byId(tab);
 	tc.selectChild(pn);
 }
@@ -83,7 +83,7 @@ function selectTab(tab) {
  * Run
  */
 function runCode(debug) {
-	if(playground._loadingFrame) {
+	if(pageGlobal._loadingFrame) {
 		// This can fail is the iFrame was redirected to a different domain
 		// ex: OAuth dance
 		try {
@@ -94,12 +94,12 @@ function runCode(debug) {
 	}
 
 	// Compose the HTML code
-	var html = playground.htmlEditor.getValue();
-	var js = playground.jsEditor.getValue();
-	var css = playground.cssEditor.getValue();
+	var html = pageGlobal.htmlEditor.getValue();
+	var js = pageGlobal.jsEditor.getValue();
+	var css = pageGlobal.cssEditor.getValue();
 	
 	// Get the current environment
-	var env = dojo.byId(playground.cbEnv).value;
+	var env = dojo.byId(pageGlobal.cbEnv).value;
 	
 	var options = {
 		env: env,
@@ -120,9 +120,9 @@ function runCode(debug) {
  */
 function showCode() {
 	// Compose the HTML code
-	var html = playground.htmlEditor.getValue();
-	var js = playground.jsEditor.getValue();
-	var css = playground.cssEditor.getValue();
+	var html = pageGlobal.htmlEditor.getValue();
+	var js = pageGlobal.jsEditor.getValue();
+	var css = pageGlobal.cssEditor.getValue();
 	var form = dojo.byId("PreviewForm");
 	form["fm_html"].value = html;
 	form["fm_js"].value = js;
@@ -135,7 +135,7 @@ function showCode() {
 		load: function(data){
 			window._codeData = data; 
 			//alert(data);
-			XSP.openDialog(playground.codeDialog);			
+			XSP.openDialog(pageGlobal.codeDialog);			
 		},
         error: function(error){
 			alert(error);
@@ -150,11 +150,11 @@ function updateNavSelection() {
 	// When a view component is used
 	// Browse all the link and find the snippet with the id
 	// Why is this not working with a child id?
-	//dojo.query("a",playground.viewNavPanel).forEach(function(node, index, nodelist){
-	if(dojo.byId(playground.viewNavPanel)) {
+	//dojo.query("a",pageGlobal.viewNavPanel).forEach(function(node, index, nodelist){
+	if(dojo.byId(pageGlobal.viewNavPanel)) {
 		dojo.query("a").forEach(function(node, index, nodelist){
 			if(node.href&&node.href.indexOf("#snippet")>=0) {
-				if(playground.id && node.href.indexOf(playground.id)>=0) {
+				if(pageGlobal.id && node.href.indexOf(pageGlobal.id)>=0) {
 					dojo.addClass(node.parentNode,"lotusSelected")
 				} else {
 					dojo.removeClass(node.parentNode,"lotusSelected")
@@ -163,7 +163,7 @@ function updateNavSelection() {
 		});
 	}
 	// When a tree is created
-	if(dojo.byId(playground.snippetsTree)) {
-		treeSelectId(playground.snippetsTree,playground.id);
+	if(dojo.byId(pageGlobal.snippetsTree)) {
+		treeSelectId(pageGlobal.snippetsTree,pageGlobal.id);
 	}
 }

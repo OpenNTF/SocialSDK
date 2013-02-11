@@ -13,7 +13,7 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-package com.ibm.sbt.service.core;
+package com.ibm.commons.runtime.servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,7 +24,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ibm.commons.Platform;
-import com.ibm.commons.runtime.servlet.BaseToolkitServlet;
 
 /**
  * Servlet dispatcher.
@@ -107,21 +106,23 @@ public class ServletDispatcher extends BaseToolkitServlet {
 		ServletFactory factory = null;
 		
 		// Select the best factory for this request
+		ServletMatcher matcher = null;
 		int count = factories.size();
 		for(int i=0; i<count; i++) {
-			int m = factories.get(i).match(request);
-			if(m>match) {
-				match = m;
-				factory = factories.get(i);
+			ServletMatcher m = factories.get(i).match(request);
+			if(m!=null) {
+				if(matcher==null || m.matchLengh()>matcher.matchLengh() ) {
+					matcher = m;
+				}
 			}
 		}
 		
 		// If there is a matching factory, then delegate the request
-		if(factory!=null) {
-			factory.service(request, response);
+		if(matcher!=null) {
+			matcher.service(request, response);
 		} else {
 	        // No factory is not available so it is a 404
-	        String message = "Invalid proxy handler {0}";
+	        String message = "Invalid service handler {0}";
 	        service404(request,response,message,request.getPathInfo());
 		}
     }

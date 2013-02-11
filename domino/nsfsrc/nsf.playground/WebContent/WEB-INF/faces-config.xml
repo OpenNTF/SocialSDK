@@ -22,7 +22,7 @@
     </managed-property>
     <managed-property>
       <property-name>explorerEnabled</property-name>
-      <value>false</value>
+      <value>true</value>
     </managed-property>
   </managed-bean>
   

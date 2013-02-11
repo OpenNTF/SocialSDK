@@ -61,8 +61,8 @@ public class GitVFS extends RemoteVFS {
 		
 		private String path;
 		
-		public GitFile(GitFile parent, String name, String path, boolean file) {
-			super(parent,name,file);
+		public GitFile(VFS vfs, GitFile parent, String name, String path, boolean file) {
+			super(vfs,parent,name,file);
 			this.path = path;
 		}
 		
@@ -136,7 +136,7 @@ public class GitVFS extends RemoteVFS {
 							String eName = (String)m.get("name");
 							//String ePath = (String)m.get("path");
 							String eUrl = (String)m.get("url");
-							GitFile f = new GitFile(this, eName, eUrl, StringUtil.equals(eType,"file"));
+							GitFile f = new GitFile(getVFS(),this, eName, eUrl, StringUtil.equals(eType,"file"));
 							files.add(f);
 							//System.out.println(StringUtil.format("Type:{0}, Name:{1}, Path:{2}, Url:{3}",eType,eName,ePath,eUrl));
 						}
@@ -158,7 +158,7 @@ public class GitVFS extends RemoteVFS {
 	
 	public GitVFS(String baseUrl, String userName, String password) {
 		this.baseUrl = baseUrl;
-		this.root = new GitFile(null, "", baseUrl, false);
+		this.root = new GitFile(this,null, "", baseUrl, false);
 		this.userName = userName;
 		this.password = password;
 	}

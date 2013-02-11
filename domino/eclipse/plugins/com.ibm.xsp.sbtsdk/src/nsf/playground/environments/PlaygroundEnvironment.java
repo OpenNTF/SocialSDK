@@ -1,17 +1,5 @@
 package nsf.playground.environments;
 
-import java.beans.BeanDescriptor;
-import java.beans.BeanInfo;
-import java.beans.Introspector;
-import java.beans.PropertyDescriptor;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.ibm.commons.util.io.json.JsonException;
-import com.ibm.commons.util.io.json.JsonFactory;
-import com.ibm.commons.util.io.json.JsonJavaFactory;
-import com.ibm.commons.util.io.json.JsonObject;
-import com.ibm.commons.util.io.json.JsonParser;
 import com.ibm.sbt.jslibrary.SBTEnvironment;
 import com.ibm.sbt.services.endpoints.ConnectionsBasicEndpoint;
 import com.ibm.sbt.services.endpoints.ConnectionsOAuth2Endpoint;
@@ -212,7 +200,7 @@ public class PlaygroundEnvironment extends SBTEnvironment {
 		this.st_URL = st_URL;
 	}
 	
-	public void updateBeans() {
+	public void prepareEndpoints() {
 		FacesContextEx context = FacesContextEx.getCurrentInstance();
 		// Override the beans with the environment definition
 		{
@@ -265,97 +253,4 @@ public class PlaygroundEnvironment extends SBTEnvironment {
 			}
 		}
 	}
-	
-	//
-	// JSON serialization
-	//
-	
-//	public void fromJson(String json) throws JsonException {
-//		Object o = JsonParser.fromJson(JsonJavaFactory.instanceEx, json);
-//		if(o instanceof JsonObject) {
-//			JsonObject jo = (JsonObject)o;
-//			
-//			BeanInfo info = Introspector.getBeanInfo(getClass());
-//			PropertyDescriptor[] pds = info.getPropertyDescriptors();
-//			for(int i=0; i<pds.length; i++) {
-//				String name = pds[i].getName();
-//				if(name.startsWith("con_") || name.startsWith("sma_"))
-//			}
-//			
-//			// Connection
-//			this.con_URL;
-//			this.con_OA2_ConsumerKey;
-//			this.con_OA2_ConsumerSecret;
-//			this.con_OA2_AuthorizationURL;
-//			this.con_OA2_AccessTokenURL;
-//
-//			// Smartcloud
-//			this.sma_URL;
-//			this.sma_OA_ConsumerKey;
-//			this.sma_OA_ConsumerSecret;
-//			this.sma_OA_RequestTokenURL;
-//			this.sma_OA_AuthorizationURL;
-//			this.sma_OA_AccessTokenURL;
-//			this.sma_OA2_ConsumerKey;
-//			this.sma_OA2_ConsumerSecret;
-//			this.sma_OA2_AuthorizationURL;
-//			this.sma_OA2_AccessTokenURL;
-//
-//			// Domino
-//			this.dom_URL;
-//			
-//			// Sametime
-//			this.st_URL;
-//		}
-//		
-//		throw new JsonException(null,"Json text does not define an object");
-//	}
-//
-//	private List<PropertyDescriptor> getProperties() throws JsonException {
-//		ArrayList<PropertyDescriptor> l = new ArrayList<PropertyDescriptor>();
-//		BeanInfo info = Introspector.getBeanInfo(getClass());
-//		PropertyDescriptor[] pds = info.getPropertyDescriptors();
-//		for(int i=0; i<pds.length; i++) {
-//			String name = pds[i].getName();
-//			if(name.startsWith("con_") || name.startsWith("sma_") ||)
-//		}
-//		return l;
-//		Object o = JsonParser.fromJson(JsonJavaFactory.instanceEx, json);
-//		if(o instanceof JsonObject) {
-//			JsonObject jo = (JsonObject)o;
-//			
-//			
-//			// Connection
-//			this.con_URL;
-//			this.con_OA2_ConsumerKey;
-//			this.con_OA2_ConsumerSecret;
-//			this.con_OA2_AuthorizationURL;
-//			this.con_OA2_AccessTokenURL;
-//
-//			// Smartcloud
-//			this.sma_URL;
-//			this.sma_OA_ConsumerKey;
-//			this.sma_OA_ConsumerSecret;
-//			this.sma_OA_RequestTokenURL;
-//			this.sma_OA_AuthorizationURL;
-//			this.sma_OA_AccessTokenURL;
-//			this.sma_OA2_ConsumerKey;
-//			this.sma_OA2_ConsumerSecret;
-//			this.sma_OA2_AuthorizationURL;
-//			this.sma_OA2_AccessTokenURL;
-//
-//			// Domino
-//			this.dom_URL;
-//			
-//			// Sametime
-//			this.st_URL;
-//		}
-//		
-//		throw new JsonException(null,"Json text does not define an object");
-//	}
-//
-//	public String toJson() {
-//		
-//	}
-
 }

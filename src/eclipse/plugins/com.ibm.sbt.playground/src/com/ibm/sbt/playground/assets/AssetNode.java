@@ -23,6 +23,7 @@ import java.util.Properties;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.ReaderInputStream;
 import com.ibm.commons.util.io.StreamUtil;
+import com.ibm.sbt.playground.vfs.VFS;
 import com.ibm.sbt.playground.vfs.VFSFile;
 
 
@@ -30,6 +31,8 @@ import com.ibm.sbt.playground.vfs.VFSFile;
  * Definition of a code snippet.
  */
 public abstract class AssetNode extends Node {
+	
+	public static final String GLOBAL_PROPERTIES = "_global.properties";
 
 	public AssetNode(CategoryNode parent, String name) {
 		super(parent,name);
@@ -39,6 +42,10 @@ public abstract class AssetNode extends Node {
 		super(parent,name,category,unid,jspUrl);
 	}
 	
+	public VFSFile getFile(VFS vfs, String ext) throws IOException {
+		return vfs.getFile(getPath()+"."+ext);
+	}
+
 	/**
 	 * Load the assert from the VFSFile
 	 * @param root
@@ -46,24 +53,47 @@ public abstract class AssetNode extends Node {
 	 * @throws IOException
 	 */
 	public Asset load(VFSFile root) throws IOException {
-		VFSFile parent = getParentFile(root);
 		Asset s = createAsset(root);
 
 		s.setUnid(getUnid());
 
-		String props = loadResource(parent, "properties");
-		if(StringUtil.isNotEmpty(props)) {
-			Properties p = new Properties();
-			ReaderInputStream is = new ReaderInputStream(new StringReader(props));
+		// Read the properties, starting from the most global ones
+		Properties p = new Properties();
+		readProperties(root.getVFS(), this, p);
+		if(!p.isEmpty()) {
+			s.init(p);
+		}
+
+		return s;
+	}
+	protected void readProperties(VFS vfs, Node node, Properties p) throws IOException {
+		// Read the parent global first
+		CategoryNode parent =node.getParent();
+		if(parent!=null) {
+			readProperties(vfs, parent, p);
+		}
+		// Then the current file
+		if(node.isCategory()) {
+			String props = ((CategoryNode)node).readGlobalProperties(vfs);
+			addProperties(p, props);
+		} else if(node.isAsset()) {
+			String props = loadResource(parent.getFile(vfs), "properties");
+			addProperties(p, props);
+		}
+	}
+	protected void addProperties(Properties p, String value) throws IOException {
+		if(StringUtil.isNotEmpty(value)) {
+			ReaderInputStream is = new ReaderInputStream(new StringReader(value));
 			try {
 				p.load(is);
 			} finally {
 				StreamUtil.close(is);
 			}
-			s.init(p);
 		}
-		return s;
 	}
+	
+	
+	
 	public abstract Asset createAsset(VFSFile root) throws IOException;
 
 	

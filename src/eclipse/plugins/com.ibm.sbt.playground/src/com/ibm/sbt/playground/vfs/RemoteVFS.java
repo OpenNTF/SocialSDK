@@ -36,8 +36,8 @@ public abstract class RemoteVFS extends VFS {
 		private boolean file;
 		private BaseFile[] children;
 
-		protected BaseFile(VFSFile parent, String name, boolean file) {
-			super(parent,name);
+		protected BaseFile(VFS vfs, VFSFile parent, String name, boolean file) {
+			super(vfs,parent,name);
 			this.file = file;
 		}
 		protected void refresh() throws IOException {

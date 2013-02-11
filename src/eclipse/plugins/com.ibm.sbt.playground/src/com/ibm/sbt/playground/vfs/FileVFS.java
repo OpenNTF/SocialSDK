@@ -17,15 +17,10 @@ package com.ibm.sbt.playground.vfs;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-
-import com.ibm.commons.util.StringUtil;
-import com.ibm.sbt.services.client.ClientServicesException;
-import com.ibm.sbt.services.client.RestClient;
 
 
 /**
@@ -37,8 +32,8 @@ public class FileVFS extends VFS {
 
 	protected static class FileVFSFile extends VFSFile {
 		private File file;
-		public FileVFSFile(VFSFile parent, String name, File file) {
-			super(parent,name);
+		public FileVFSFile(VFS vfs, VFSFile parent, String name, File file) {
+			super(vfs,parent,name);
 			this.file = file;
 		}
 		@Override
@@ -71,7 +66,7 @@ public class FileVFS extends VFS {
 		public VFSFile getChild(String name) throws IOException {
 			File c = new File(file,name);
 			if(c.exists()) {
-				return new FileVFSFile(this, c.getName(), c);
+				return new FileVFSFile(getVFS(),this, c.getName(), c);
 			}
 			return null;
 		}
@@ -81,7 +76,7 @@ public class FileVFS extends VFS {
 			VFSFile[] files = new VFSFile[children.length];
 			for(int i=0; i<children.length; i++) {
 				File c = children[i];
-				files[i] = new FileVFSFile(this, c.getName(), c);
+				files[i] = new FileVFSFile(getVFS(),this, c.getName(), c);
 			}
 			return files;
 		}
@@ -90,7 +85,7 @@ public class FileVFS extends VFS {
 	private FileVFSFile root;
 	
 	public FileVFS(File file) {
-		this.root = new FileVFSFile(null, "", file);
+		this.root = new FileVFSFile(this,null, "", file);
 	}
 
 	@Override

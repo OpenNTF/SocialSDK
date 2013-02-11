@@ -65,20 +65,15 @@
 				cols="120" rows="5">
 			</xp:inputTextarea>
 		</xe:formRow>
-		<xe:formRow id="formRow2" label="Documentation:"
-			loaded="false">
-			<xe:djextListTextBox id="djextListTextBox4"
-				multipleSeparator="," multipleTrim="true"
-				value="#{document1.Documentation}" title="Documentation">
-			</xe:djextListTextBox>
-			<xe:valuePicker id="valuePicker1" for="djextListTextBox4"
-				pickerText="Add...">
-				<xe:this.dataProvider>
-					<xe:dominoViewValuePicker
-						viewName="AllDocumentation" labelColumn="Id">
-					</xe:dominoViewValuePicker>
-				</xe:this.dataProvider>
-			</xe:valuePicker>
+		<xe:formRow id="formRow6" label="Endpoint:">
+			<xp:inputText id="inputText7" required="true"
+				disableClientSideValidation="true" value="#{document1.Endpoint}" size="20">
+			</xp:inputText>
+		</xe:formRow>
+		<xe:formRow id="formRow2" label="Base Documentation URL:">
+			<xp:inputText id="inputText2"
+				disableClientSideValidation="true" value="#{document1.BaseDocUrl}" size="120">
+			</xp:inputText>
 		</xe:formRow>
 		<xe:formRow id="formRow4" labelPosition="above">
 			<xp:inputTextarea id="inputText4" value="#{document1.Json}"

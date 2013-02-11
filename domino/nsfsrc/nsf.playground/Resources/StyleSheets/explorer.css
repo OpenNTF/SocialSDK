@@ -88,4 +88,6 @@ pre {
     white-space: pre-wrap; 
 	white-space: -moz-pre-wrap;
 	white-space: o-pre-wrap;
+	max-height: 25em;
+	overflow-y: auto;
 }

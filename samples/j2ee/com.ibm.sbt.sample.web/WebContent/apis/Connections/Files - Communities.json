@@ -1,11 +1,12 @@
-[{
+[
+{
 	"name": "getListOfCommunityFilesThatRequireAction",
 	"description": "Get a feed that lists the community files that are awaiting action by the moderator",
 	"http_method": "get",
 	"host_property_name": "files_apiTargetHost",
-	"uri": "{entries_mod_wkspace_approval_content}?{parameters}",
+	"uri": "{entries_mod_wkspace_approval_content}",
 	"entries_mod_wkspace_approval_content": "{entries_mod_wkspace_approval_content}",
-	"parameters": "{parameters}",
+	"queryParameters": {},
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_a_list_of_community_files_that_require_action_ic301"
 },
 {
@@ -42,9 +43,9 @@
 	"description": "Get a feed that lists the community file comments that are awaiting action by the moderator",
 	"http_method": "get",
 	"host_property_name": "files_apiTargetHost",
-	"uri": "{comments_mod_wkspace_approval_content}?{parameters}",
+	"uri": "{comments_mod_wkspace_approval_content}",
 	"comments_mod_wkspace_approval_content": "{comments_mod_wkspace_approval_content}",
-	"parameters": "{parameters}",
+	"queryParameters": {},
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_a_list_of_community_file_comments_that_require_action_ic301"
 },
 {
@@ -72,9 +73,9 @@
 	"description": "Get a feed that lists the community files that have been flagged as inappropriate and are awaiting action by the moderator",
 	"http_method": "get",
 	"host_property_name": "files_apiTargetHost",
-	"uri": "{entries_mod_wkspace_review_content}?{parameters}",
+	"uri": "{entries_mod_wkspace_review_content}",
 	"entries_mod_wkspace_review_content": "{entries_mod_wkspace_review_content}",
-	"parameters": "{parameters}",
+	"queryParameters": {},
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_a_list_of_flagged_community_files_ic301"
 },
 {
@@ -120,9 +121,9 @@
 	"description": "Get a feed that lists the community file comments that have been flagged as inappropriate and are awaiting action by the moderator",
 	"http_method": "get",
 	"host_property_name": "files_apiTargetHost",
-	"uri": "{comments_mod_wkspace_review_content}?{parameters}",
+	"uri": "{comments_mod_wkspace_review_content}",
 	"comments_mod_wkspace_review_content": "{comments_mod_wkspace_review_content}",
-	"parameters": "{parameters}",
+	"queryParameters": {},
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_a_list_of_flagged_community_file_comments_ic301"
 },
 {

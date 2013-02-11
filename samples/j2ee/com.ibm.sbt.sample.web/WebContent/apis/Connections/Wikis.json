@@ -3,7 +3,11 @@
 	"description": "Retrieve wiki page",
 	"http_method": "get",
 	"host_property_name": "ae_quirks_wiki_apiTargetHost",
-	"uri": "/wikis/basic/anonymous/api/wiki/{wiki-label}/page/{page-label}/entry?{parameters}",
-	"parameters": "{parameters}",
+	"uri": "/wikis/basic/anonymous/api/wiki/{wiki-label}/page/{page-label}/entry",
+	"uriParameters": {
+		"wiki-label": {},
+		"page-label": {}
+	},
+	"queryParameters": {},
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Retrieving_a_wiki_page_ic301"
 }]

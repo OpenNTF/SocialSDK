@@ -4,11 +4,11 @@
 	"http_method": "get",
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Profiles_API_sbar",
 	"uri": "/lotuslive-shindig-server/social/rest/people/@me/@self?format={format}",
-	"uriParameters": {
-		"format": {}
-	},
-	"queryParameters": {
-	}
+	"uriParameters": [
+		{"name": "format"}
+	],
+	"queryParameters": [
+	]
 },
 {
 	"name": "getMyProfile_Header",
@@ -24,12 +24,12 @@
 	"http_method": "get",
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Profiles_API_sbar",
 	"uri": "/lotuslive-shindig-server/social/rest/people/lotuslive:user:{subscriberId}/@self?format={format}",
-	"uriParameters": {
-		"subscriberId": {},
-		"format": {}
-	},
-	"queryParameters": {
-	}
+	"uriParameters": [
+		{"name": "subscriberId"},
+		{"name": "format"}
+	],
+	"queryParameters": [
+	]
 },
 {
 	"name": "getProfileByUserGUID_Header",
@@ -38,9 +38,9 @@
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Contacts_API_sbar",
 	"uri": "/lotuslive-shindig-server/social/rest/people/lotuslive:user:{subscriberId}/@self",
 	"inputs": "responseFormat",
-	"uriParameters": {
-		"subscriberId": {}
-	},
-	"queryParameters": {
-	}
+	"uriParameters": [
+		{"name": "subscriberId"}
+	],
+	"queryParameters": [
+	]
 }]

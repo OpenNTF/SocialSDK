@@ -2,7 +2,6 @@
 	"name": "pinFile",
 	"description": "Pin file",
 	"http_method": "post",
-	"host_property_name": "files_apiTargetHost",
 	"uri": "/files/basic/api/myfavorites/documents/feed",
 	"post_string": "{post_string}",
 	"post_content_type": "application/atom+xml",
@@ -12,19 +11,17 @@
 	"name": "pinFileById",
 	"description": "Pin file",
 	"http_method": "post",
-	"host_property_name": "files_apiTargetHost",
 	"uri": "/files/basic/api/myfavorites/documents/feed",
-	"queryParameters": {},
+	"queryParameters": [],
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Pinning_a_file_programmatically_ic301"
 },
 {
 	"name": "removeFilePin",
 	"description": "Removes the file from the myfavorites feed",
-	"http_headers": {
-		"X-Method-Override": "DELETE"
-	},
+	"http_headers": [
+		{"name": "X-Method-Override", "value": "DELETE"}
+	],
 	"http_method": "delete",
-	"host_property_name": "files_apiTargetHost",
 	"uri": "/files/basic/api/myfavorites/documents/feed",
 	"post_string": "{post_string}",
 	"post_content_type": "application/atom+xml",
@@ -33,20 +30,19 @@
 {
 	"name": "removeFilePinById",
 	"description": "Removes the file from the myfavorites feed",
-	"http_headers": {
-		"X-Method-Override": "DELETE"
-	},
+	"http_headers": [
+		{"name": "X-Method-Override", "value": "DELETE"}
+	],
 	"http_method": "delete",
 	"host_property_name": "files_apiTargetHost",
 	"uri": "/files/basic/api/myfavorites/documents/feed",
-	"queryParameters": {},
+	"queryParameters": [],
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Removing_a_pin_from_a_file_programmatically_ic301"
 },
 {
 	"name": "pinFolder",
 	"description": "Pin folder",
 	"http_method": "post",
-	"host_property_name": "files_apiTargetHost",
 	"uri": "/files/basic/api/myfavorites/collections/feed",
 	"post_string": "{post_string}",
 	"post_content_type": "application/atom+xml",
@@ -56,19 +52,17 @@
 	"name": "pinFolderById",
 	"description": "Pin folder",
 	"http_method": "post",
-	"host_property_name": "files_apiTargetHost",
 	"uri": "/files/basic/api/myfavorites/collections/feed",
-	"queryParameters": {},
+	"queryParameters": [],
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Pinning_a_folder_programmatically_ic301"
 },
 {
 	"name": "removeFolderPin",
 	"description": "Removes the folder from the myfavorites feed",
-	"http_headers": {
-		"X-Method-Override": "DELETE"
-	},
+	"http_headers": [
+		{"name": "X-Method-Override", "value": "DELETE"}
+	],
 	"http_method": "delete",
-	"host_property_name": "files_apiTargetHost",
 	"uri": "/files/basic/api/myfavorites/collections/feed",
 	"post_string": "{post_string}",
 	"post_content_type": "application/atom+xml",
@@ -77,12 +71,11 @@
 {
 	"name": "removeFolderPinById",
 	"description": "Removes the folder from the myfavorites feed",
-	"http_headers": {
-		"X-Method-Override": "DELETE"
-	},
+	"http_headers": [
+		{"name": "X-Method-Override", "value": "DELETE"}
+	],
 	"http_method": "delete",
-	"host_property_name": "files_apiTargetHost",
 	"uri": "/files/basic/api/myfavorites/collections/feed",
-	"queryParameters": {},
+	"queryParameters": [],
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Removing_a_pin_from_a_folder_programmatically_ic301"
 }]

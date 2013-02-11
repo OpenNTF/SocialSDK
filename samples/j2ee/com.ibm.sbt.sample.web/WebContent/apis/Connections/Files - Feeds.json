@@ -2,163 +2,147 @@
 	"name": "getFeedOfPublicFilesAnonymous",
 	"description": "Get feed of public files",
 	"http_method": "get",
-	"host_property_name": "files_apiTargetHost",
 	"uri": "/files/basic/anonymous/api/documents/feed?visibility=public",
-	"queryParameters": {},
+	"queryParameters": [],
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_a_feed_of_public_files_ic301"
 },
 {
 	"name": "getFeedOfYourPinnedFiles",
 	"description": "Get feed of your pinned files",
 	"http_method": "get",
-	"host_property_name": "files_apiTargetHost",
 	"uri": "/files/basic/api/myfavorites/documents/feed",
-	"queryParameters": {},
+	"queryParameters": [],
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_a_feed_of_your_pinned_files_ic301"
 },
 {
 	"name": "getFeedOfFolders",
 	"description": "Get feed of your folders",
 	"http_method": "get",
-	"host_property_name": "files_apiTargetHost",
 	"uri": "/files/basic/api/collections/feed",
-	"queryParameters": {},
+	"queryParameters": [],
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_a_feed_of_your_folders_ic301"
 },
 {
 	"name": "getFeedOfPinnedFolders",
 	"description": "Get feed of your pinned folders",
 	"http_method": "get",
-	"host_property_name": "files_apiTargetHost",
 	"uri": "/files/basic/api/myfavorites/collections/feed",
-	"queryParameters": {},
+	"queryParameters": [],
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_a_feed_of_your_pinned_folders_ic301"
 },
 {
 	"name": "getFeedOfPinnedFolders",
 	"description": "Get feed of your pinned folders",
 	"http_method": "get",
-	"host_property_name": "files_apiTargetHost",
 	"uri": "/files/basic/api/myfavorites/collections/feed",
-	"queryParameters": {},
+	"queryParameters": [],
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_a_feed_of_your_pinned_folders_ic301"
 },
 {
 	"name": "getFeedOfRecentlyUpdatedFolders",
 	"description": "Get feed of folders to which you recently added files",
 	"http_method": "get",
-	"host_property_name": "files_apiTargetHost",
 	"uri": "/files/basic/api/collections/addedto/feed",
-	"queryParameters": {},
+	"queryParameters": [],
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_a_feed_of_folders_to_which_you_recently_added_files_ic301"
 },
 {
 	"name": "getFeedOfFilesInAFolder",
 	"description": "Get feed of files in a folder (collection)",
 	"http_method": "get",
-	"host_property_name": "files_apiTargetHost",
 	"uri": "/files/basic/api/collection/{collection-id}/feed",
-	"uriParameters": {
-		"collection-id": {}
-	},
-	"queryParameters": {},
+	"uriParameters": [
+		{"name": "collection-id"}
+	],
+	"queryParameters": [],
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_a_feed_of_the_files_in_a_folder_ic301"
 },
 {
 	"name": "getFeedOfPublicFileFolders",
 	"description": "Get feed of public file folders",
 	"http_method": "get",
-	"host_property_name": "files_apiTargetHost",
 	"uri": "/files/basic/anonymous/api/collections/feed",
-	"queryParameters": {},
+	"queryParameters": [],
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_a_feed_of_public_file_folders_ic301"
 },
 {
 	"name": "getFeedOfAPersonsLibraryAnonymous",
 	"description": "Get feed of a person's library (do not authenticate)",
 	"http_method": "get",
-	"host_property_name": "files_apiTargetHost",
 	"uri": "/files/basic/anonymous/api/userlibrary/{userid}/feed",
-	"uriParameters": {
-		"userid": {}
-	},
-	"queryParameters": {},
+	"uriParameters": [
+		{"name": "userid"}
+	],
+	"queryParameters": [],
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_a_feed_of_a_persons_library_ic301"
 },
 {
 	"name": "getFeedOfAPersonsLibraryAndSharedFiles",
 	"description": "Get feed of a person's library and files shared with you",
 	"http_method": "get",
-	"host_property_name": "files_apiTargetHost",
 	"uri": "/files/basic/api/userlibrary/{userid}/feed",
-	"uriParameters": {
-		"userid": {}
-	},
-	"queryParameters": {},
+	"uriParameters": [
+		{"name": "userid"}
+	],
+	"queryParameters": [],
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_a_feed_of_a_persons_library_ic301"
 },
 {
 	"name": "getFeedOfYourLibrary",
 	"description": "Get feed of your library",
 	"http_method": "get",
-	"host_property_name": "files_apiTargetHost",
 	"uri": "/files/basic/api/myuserlibrary/feed",
-	"queryParameters": {},
+	"queryParameters": [],
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_a_feed_of_your_library_ic301"
 },
 {
 	"name": "getFeedOfFileShares",
 	"description": "Get feed of file shares",
 	"http_method": "get",
-	"host_property_name": "files_apiTargetHost",
 	"uri": "/files/basic/api/documents/shared/feed",
-	"queryParameters": {},
+	"queryParameters": [],
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_a_feed_of_file_shares_ic301"
 },
 {
 	"name": "getFeedOfAFilesCommentsAnonymous",
 	"description": "Get feed of a file's comments (do not authenticate)",
 	"http_method": "get",
-	"host_property_name": "files_apiTargetHost",
 	"uri": "/files/basic/anonymous/api/userlibrary/{userid}/document/{document-id}/feed?category=comment",
-	"uriParameters": {
-		"userid": {},
-		"document-id": {}
-	},
-	"queryParameters": {},
+	"uriParameters": [
+		{"name": "userid"},
+		{"name": "document-id"}
+	],
+	"queryParameters": [],
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_a_feed_of_a_files_comments_ic301"
 },
 {
 	"name": "getFeedOfAFilesComments",
 	"description": "Get feed of a file's comments",
 	"http_method": "get",
-	"host_property_name": "files_apiTargetHost",
 	"uri": "/files/basic/api/userlibrary/{userid}/document/{document-id}/feed?category=comment",
-	"uriParameters": {
-		"userid": {},
-		"document-id": {}
-	},
-	"queryParameters": {},
+	"uriParameters": [
+		{"name": "userid"},
+		{"name": "document-id"}
+	],
+	"queryParameters": [],
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_a_feed_of_a_files_comments_ic301"
 },
 {
 	"name": "getFeedOfMyFilesComments",
 	"description": "Get feed of my file's comments",
 	"http_method": "get",
-	"host_property_name": "files_apiTargetHost",
 	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/feed?category=comment",
-	"uriParameters": {
-		"document-id": {}
-	},
-	"queryParameters": {},
+	"uriParameters": [
+		{"name": "document-id"}
+	],
+	"queryParameters": [],
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_a_feed_of_my_files_comments_ic301"
 },
 {
 	"name": "getFeedOfFilesInMyRecycleBin",
 	"description": "Get feed of files in my recycle bin",
 	"http_method": "get",
-	"host_property_name": "files_apiTargetHost",
 	"uri": "/files/basic/api/myuserlibrary/view/recyclebin/feed",
-	"queryParameters": {},
+	"queryParameters": [],
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_a_feed_of_the_files_in_your_recycle_bin_ic301"
 }]

@@ -86,7 +86,7 @@ public class ContextResourceBeanFactory extends AbstractXmlConfigBeanFactory {
 	 */
 	private Factory[] readFactoriesFromUrl(Context envCtx) {
 		try {
-			URL url = (URL)envCtx.lookup("url/FacesConfigXml"); //$NON-NLS-1$
+			URL url = (URL)envCtx.lookup("url/ManagedBeansXml"); //$NON-NLS-1$
 			if (url != null) {
 				if (logger.isLoggable(Level.FINER)) {
 					logger.finer("Reading context bean factories from: " + url);
@@ -103,11 +103,11 @@ public class ContextResourceBeanFactory extends AbstractXmlConfigBeanFactory {
 			}
 		} catch (Exception e) {
 			if (canIgnore(e)) {
-				// can ignore this, just means the url/FacesConfigXml has not be defined
-				logger.finer("Resource url/FacesConfigXml is not available");
+				// can ignore this, just means the url/ManagedBeansXml has not be defined
+				logger.finer("Resource url/ManagedBeansXml is not available");
 			}
 			else {
-				logger.log(Level.SEVERE, "Error reading context bean factories from url/FacesConfigXml", e);
+				logger.log(Level.SEVERE, "Error reading context bean factories from url/ManagedBeansXml", e);
 			}
 		}
 		return null;

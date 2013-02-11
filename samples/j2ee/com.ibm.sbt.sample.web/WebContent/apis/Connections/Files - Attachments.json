@@ -4,8 +4,11 @@
 	"http_method": "post",
 	"host_property_name": "files_apiTargetHost",
 	"http_headers": "{http_headers}",
-	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/feed?{parameters}",
-	"parameters": "{parameters}",
+	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/feed",
+	"uriParameters": {
+		"document-id": {}
+	},
+	"queryParameters": {},
 	"post_string": "__file__",
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Adding_a_file_attachment_ic301"
 },
@@ -16,8 +19,11 @@
 	"http_method": "post",
 	"host_property_name": "files_apiTargetHost",
 	"http_headers": "{http_headers}",
-	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/feed?{parameters}",
-	"parameters": "{parameters}",
+	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/feed",
+	"uriParameters": {
+		"document-id": {}
+	},
+	"queryParameters": {},
 	"post_string": "__file__",
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Adding_a_file_attachment_ic301"
 },
@@ -27,8 +33,13 @@
 	"http_method": "get",
 	"host_property_name": "files_apiTargetHost",
 	"http_headers": "{http_headers}",
-	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/attachment/{attachment-id}/media/{attachment-label}?{parameters}",
-	"parameters": "{parameters}",
+	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/attachment/{attachment-id}/media/{attachment-label}",
+	"uriParameters": {
+		"document-id": {},
+		"attachment-id": {},
+		"attachment-label": {}
+	},
+	"queryParameters": {},
 	"response_target": "__file__",
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Downloading_a_file_attachment_ic301"
 },
@@ -38,8 +49,12 @@
 	"http_method": "get",
 	"host_property_name": "files_apiTargetHost",
 	"http_headers": "{http_headers}",
-	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/attachment/{attachment-id}/entry?{parameters}",
-	"parameters": "{parameters}",
+	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/attachment/{attachment-id}/entry",
+	"uriParameters": {
+		"document-id": {},
+		"attachment-id": {}
+	},
+	"queryParameters": {},
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Retrieving_a_file_attachment_ic301"
 },
 {
@@ -48,8 +63,12 @@
 	"http_method": "delete",
 	"host_property_name": "files_apiTargetHost",
 	"http_headers": "{http_headers}",
-	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/attachment/{attachment-id}/entry?{parameters}",
-	"parameters": "{parameters}",
+	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/attachment/{attachment-id}/entry",
+	"uriParameters": {
+		"document-id": {},
+		"attachment-id": {}
+	},
+	"queryParameters": {},
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Deleting_a_file_attachment_ic301"
 },
 {
@@ -58,8 +77,12 @@
 	"http_method": "put",
 	"host_property_name": "files_apiTargetHost",
 	"http_headers": "{http_headers}",
-	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/attachment/{attachment-id}/entry?{parameters}",
-	"parameters": "{parameters}",
+	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/attachment/{attachment-id}/entry",
+	"uriParameters": {
+		"document-id": {},
+		"attachment-id": {}
+	},
+	"queryParameters": {},
 	"post_string": "__file__",
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Updating_a_file_attachment_ic301"
 },
@@ -70,8 +93,12 @@
 	"http_method": "put",
 	"host_property_name": "files_apiTargetHost",
 	"http_headers": "{http_headers}",
-	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/attachment/{attachment-id}/entry ?{parameters}",
-	"parameters": "{parameters}",
+	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/attachment/{attachment-id}/entry ",
+	"uriParameters": {
+		"document-id": {},
+		"attachment-id": {}
+	},
+	"queryParameters": {},
 	"post_string": "__file__",
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Updating_a_file_attachment_ic301"
 }]

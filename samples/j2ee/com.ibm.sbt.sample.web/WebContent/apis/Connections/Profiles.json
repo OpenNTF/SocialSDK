@@ -3,8 +3,8 @@
 	"description": "Retrieve a user's Profiles service document (service document content is needed for other APIs)  ",
 	"http_method": "get",
 	"host_property_name": "profiles_apiTargetHost",
-	"uri": "/profiles/atom/profileService.do?{parameters}",
-	"parameters": "{parameters}",
+	"uri": "/profiles/atom/profileService.do",
+	"queryParameters": {},
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Retrieving_the_Profiles_service_document_ic301"
 },
 {
@@ -12,8 +12,8 @@
 	"description": "Search for a set of profiles that match a specific criteria and return them in a feed. ",
 	"http_method": "get",
 	"host_property_name": "profiles_apiTargetHost",
-	"uri": "/profiles/atom/search.do?{parameters}",
-	"parameters": "{parameters}",
+	"uri": "/profiles/atom/search.do",
+	"queryParameters": {},
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Searching_Profiles_programmatically_ic301"
 },
 {
@@ -21,8 +21,8 @@
 	"description": "Retrieve a feed that contains a specific user's profile.",
 	"http_method": "get",
 	"host_property_name": "profiles_apiTargetHost",
-	"uri": "/profiles/atom/profile.do?{parameters}",
-	"parameters": "{parameters}",
+	"uri": "/profiles/atom/profile.do",
+	"queryParameters": {},
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Searching_for_a_users_profile_ic301"
 },
 {
@@ -31,7 +31,6 @@
 	"http_method": "get",
 	"host_property_name": "profiles_apiTargetHost",
 	"uri": "{profile_uri_for_user}",
-	"profile_uri_for_user": "{profile_uri_for_user}",
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Retrieving_a_profile_entry_ic301"
 },
 {
@@ -40,7 +39,6 @@
 	"http_method": "put",
 	"host_property_name": "profiles_apiTargetHost",
 	"uri": "{profile_uri_for_user}",
-	"profile_uri_for_user": "{profile_uri_for_user}",
 	"post_string": "{post_string}",
 	"post_content_type": "application/atom+xml",
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Updating_profile_entries_ic301"
@@ -52,7 +50,6 @@
 	"host_property_name": "profiles_apiTargetHost",
 	"http_headers": "{http_headers}",
 	"uri": "{pronunciation_uri}",
-	"pronunciation_uri": "{pronunciation_uri}",
 	"post_string": "__file__",
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Adding_a_name_pronunciation_file_to_a_profile_ic301"
 },
@@ -62,7 +59,6 @@
 	"http_method": "get",
 	"host_property_name": "profiles_apiTargetHost",
 	"uri": "{pronunciation_uri}",
-	"pronunciation_uri": "{pronunciation_uri}",
 	"response_target": "__file__",
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Retrieving_a_name_pronunciation_file_ic301"
 },
@@ -73,7 +69,6 @@
 	"host_property_name": "profiles_apiTargetHost",
 	"http_headers": "{http_headers}",
 	"uri": "{pronunciation_uri}",
-	"pronunciation_uri": "{pronunciation_uri}",
 	"post_string": "__file__",
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Replacing_a_name_pronunciation_file_ic301"
 },
@@ -83,7 +78,6 @@
 	"http_method": "delete",
 	"host_property_name": "profiles_apiTargetHost",
 	"uri": "{pronunciation_uri}",
-	"pronunciation_uri": "{pronunciation_uri}",
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Removing_a_name_pronunciation_file_from_a_profile_ic301"
 },
 {
@@ -92,7 +86,6 @@
 	"http_method": "delete",
 	"host_property_name": "profiles_apiTargetHost",
 	"uri": "{profile_extension_attribute_uri}",
-	"profile_extension_attribute_uri": "{profile_extension_attribute_uri}",
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Deleting_profile_extension_data_ic301"
 },
 {
@@ -101,7 +94,6 @@
 	"http_method": "get",
 	"host_property_name": "profiles_apiTargetHost",
 	"uri": "{profile_extension_attribute_uri}",
-	"profile_extension_attribute_uri": "{profile_extension_attribute_uri}",
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Retrieving_profile_extension_data_ic301"
 },
 {
@@ -110,7 +102,6 @@
 	"http_method": "put",
 	"host_property_name": "profiles_apiTargetHost",
 	"uri": "{profile_extension_attribute_uri}",
-	"profile_extension_attribute_uri": "{profile_extension_attribute_uri}",
 	"post_string": "{post_string}",
 	"post_content_type": "text/plain",
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Updating_profile_extension_data_ic301"
@@ -121,7 +112,6 @@
 	"http_method": "put",
 	"host_property_name": "profiles_apiTargetHost",
 	"uri": "{profile_extension_attribute_uri}",
-	"profile_extension_attribute_uri": "{profile_extension_attribute_uri}",
 	"post_string": "{post_string}",
 	"post_content_type": "text/xml",
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Updating_profile_extension_data_ic301"
@@ -172,8 +162,8 @@
 	"description": "Retrieve the profiles of the people who comprise a specific user's report-to chain",
 	"http_method": "get",
 	"host_property_name": "profiles_apiTargetHost",
-	"uri": "/profiles/atom/reportingChain.do?{parameters}",
-	"parameters": "{parameters}",
+	"uri": "/profiles/atom/reportingChain.do",
+	"queryParameters": {},
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Searching_for_a_persons_reportto_chain_ic301"
 },
 {
@@ -181,8 +171,8 @@
 	"description": "Retrieve the profiles of the people who report to a specific user",
 	"http_method": "get",
 	"host_property_name": "profiles_apiTargetHost",
-	"uri": "/profiles/atom/peopleManaged.do?{parameters}",
-	"parameters": "{parameters}",
+	"uri": "/profiles/atom/peopleManaged.do",
+	"queryParameters": {},
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Searching_for_a_persons_direct_reports_ic301"
 },
 {
@@ -190,8 +180,8 @@
 	"description": "Returns a feed that lists the contacts that a person has designated as colleagues.",
 	"http_method": "get",
 	"host_property_name": "profiles_apiTargetHost",
-	"uri": "/profiles/atom/connections.do?connectionType=colleague&{parameters}",
-	"parameters": "{parameters}",
+	"uri": "/profiles/atom/connections.do?connectionType=colleague",
+	"queryParameters": {},
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Searching_for_a_persons_colleagues_ic301"
 },
 {
@@ -201,7 +191,7 @@
 	"host_property_name": "profiles_apiTargetHost",
 	"uri": "{connection_entry_uri}&{parameters}",
 	"connection_entry_uri": "{connection_entry_uri}",
-	"parameters": "{parameters}",
+	"queryParameters": {},
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Retrieving_connections_ic301"
 },
 {
@@ -209,8 +199,8 @@
 	"description": "Return an entry of the colleague connection between two people if one exists",
 	"http_method": "get",
 	"host_property_name": "profiles_apiTargetHost",
-	"uri": "/profiles/atom/connection.do?connectionType=colleague&{parameters}",
-	"parameters": "{parameters}",
+	"uri": "/profiles/atom/connection.do?connectionType=colleague",
+	"queryParameters": {},
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Checking_whether_two_people_are_colleagues_ic301"
 },
 {
@@ -218,8 +208,8 @@
 	"description": "Retrieve the Colleagues In Common feed to find out what colleagues two people have in common",
 	"http_method": "get",
 	"host_property_name": "profiles_apiTargetHost",
-	"uri": "/profiles/atom/connectionsInCommon.do?connectionType=colleague&{parameters}",
-	"parameters": "{parameters}",
+	"uri": "/profiles/atom/connectionsInCommon.do?connectionType=colleague",
+	"queryParameters": {},
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Finding_colleagues_shared_by_two_people_ic301"
 },
 {
@@ -228,7 +218,6 @@
 	"http_method": "post",
 	"host_property_name": "profiles_apiTargetHost",
 	"uri": "{colleague_connection_feed_uri}?connectionType=colleague",
-	"colleague_connection_feed_uri": "{colleague_connection_feed_uri}",
 	"post_string": "{post_string}",
 	"post_content_type": "application/atom+xml",
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Inviting_a_person_to_become_your_colleague_ic301"
@@ -239,7 +228,6 @@
 	"http_method": "delete",
 	"host_property_name": "profiles_apiTargetHost",
 	"uri": "{connection_edit_uri}",
-	"connection_edit_uri": "{connection_edit_uri}",
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Deleting_connections_ic301"
 },
 {
@@ -261,8 +249,8 @@
 	"http_headers": {
 		"Content-Type": "application/atomcat+xml"
 	},
-	"uri": "/profiles/atom/profileTags.do?{parameters}",
-	"parameters": "{parameters}",
+	"uri": "/profiles/atom/profileTags.do",
+	"queryParameters": {},
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Creating_profile_tags_ic301"
 },
 {
@@ -270,8 +258,8 @@
 	"description": "Retrieve the tags assigned to a profile from the Profiles tag collection",
 	"http_method": "get",
 	"host_property_name": "profiles_apiTargetHost",
-	"uri": "/profiles/atom/profileTags.do?{parameters}",
-	"parameters": "{parameters}",
+	"uri": "/profiles/atom/profileTags.do",
+	"queryParameters": {},
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Retrieving_profile_tags_ic301"
 },
 {
@@ -282,7 +270,7 @@
 	"http_headers": {
 		"Content-Type": "application/atomcat+xml"
 	},
-	"uri": "/profiles/atom/profileTags.do?{parameters}",
-	"parameters": "{parameters}",
+	"uri": "/profiles/atom/profileTags.do",
+	"queryParameters": {},
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Updating_profile_tags_ic301"
 }]

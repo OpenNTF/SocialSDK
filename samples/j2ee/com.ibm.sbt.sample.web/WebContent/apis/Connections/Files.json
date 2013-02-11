@@ -5,6 +5,7 @@
 	"http_method": "get",
 	"host_property_name": "files_apiTargetHost",
 	"uri": "/files/basic/api/introspection",
+	"queryParameters": {},
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Retrieving_the_Files_service_document_ic301"
 },
 {
@@ -14,6 +15,7 @@
 	"http_method": "get",
 	"host_property_name": "files_apiTargetHost",
 	"uri": "/files/basic/api/moderation/atomsvc",
+	"queryParameters": {},
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Retrieving_the_Files_moderation_service_document_ic301"
 },
 {
@@ -23,6 +25,7 @@
 	"http_method": "get",
 	"host_property_name": "files_apiTargetHost",
 	"uri": "/files/basic/api/nonce",
+	"queryParameters": {},
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_a_cryptographic_key_ic301"
 },
 {
@@ -32,8 +35,9 @@
 	"http_method": "post",
 	"host_property_name": "files_apiTargetHost",
 	"http_headers": "{http_headers}",
-	"uri": "/files/basic/api/myuserlibrary/feed?{parameters}",
-	"parameters": "{parameters}",
+	"uri": "/files/basic/api/myuserlibrary/feed",
+	"queryParameters": {},
+	"queryParameters": {},
 	"post_string": "__file__",
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Adding_a_file_ic301"
 },
@@ -44,8 +48,11 @@
 	"http_method": "get",
 	"host_property_name": "files_apiTargetHost",
 	"http_headers": "{http_headers}",
-	"uri": "/files/basic/anonymous/api/document/{document-id}/media?{parameters}",
-	"parameters": "{parameters}",
+	"uri": "/files/basic/anonymous/api/document/{document-id}/media",
+	"uriParameters": {
+		"document-id": {}
+	},
+	"queryParameters": {},
 	"response_target": "__file__",
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Downloading_a_file_ic301"
 },
@@ -56,8 +63,11 @@
 	"http_method": "get",
 	"host_property_name": "files_apiTargetHost",
 	"http_headers": "{http_headers}",
-	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/media?{parameters}",
-	"parameters": "{parameters}",
+	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/media",
+	"uriParameters": {
+		"document-id": {}
+	},
+	"queryParameters": {},
 	"response_target": "__file__",
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Downloading_a_file_ic301"
 },
@@ -68,8 +78,11 @@
 	"http_method": "get",
 	"host_property_name": "files_apiTargetHost",
 	"http_headers": "{http_headers}",
-	"uri": "/files/basic/anonymous/api/document/{document-id}/entry?{parameters}",
-	"parameters": "{parameters}",
+	"uri": "/files/basic/anonymous/api/document/{document-id}/entry",
+	"uriParameters": {
+		"document-id": {}
+	},
+	"queryParameters": {},
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Retrieving_file_metadata_ic301"
 },
 {
@@ -79,8 +92,11 @@
 	"http_method": "get",
 	"host_property_name": "files_apiTargetHost",
 	"http_headers": "{http_headers}",
-	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/entry?{parameters}",
-	"parameters": "{parameters}",
+	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/entry",
+	"uriParameters": {
+		"document-id": {}
+	},
+	"queryParameters": {},
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Retrieving_file_metadata_ic301"
 },
 {
@@ -91,6 +107,10 @@
 	"host_property_name": "files_apiTargetHost",
 	"http_headers": "{http_headers}",
 	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/entry",
+	"uriParameters": {
+		"document-id": {}
+	},
+	"queryParameters": {},
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Deleting_a_file_and_its_metadata_ic301"
 },
 {
@@ -100,8 +120,11 @@
 	"http_method": "put",
 	"host_property_name": "files_apiTargetHost",
 	"http_headers": "{http_headers}",
-	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/media?{parameters}",
-	"parameters": "{parameters}",
+	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/media",
+	"uriParameters": {
+		"document-id": {}
+	},
+	"queryParameters": {},
 	"post_string": "__file__",
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Updating_a_file_ic301"
 },
@@ -112,8 +135,11 @@
 	"http_method": "put",
 	"host_property_name": "files_apiTargetHost",
 	"http_headers": "{http_headers}",
-	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/entry?{parameters}",
-	"parameters": "{parameters}",
+	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/entry",
+	"uriParameters": {
+		"document-id": {}
+	},
+	"queryParameters": {},
 	"post_string": "{post_string}",
 	"post_content_type": "application/atom+xml",
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Updating_file_metadata_ic301"
@@ -136,8 +162,11 @@
 	"http_method": "post",
 	"host_property_name": "files_apiTargetHost",
 	"http_headers": "{http_headers}",
-	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/feed?{parameters}",
-	"parameters": "{parameters}",
+	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/feed",
+	"uriParameters": {
+		"document-id": {}
+	},
+	"queryParameters": {},
 	"post_string": "{post_string}",
 	"post_content_type": "application/atom+xml",
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Sharing_a_file_with_a_community_or_communities_ic301"
@@ -149,6 +178,10 @@
 	"host_property_name": "files_apiTargetHost",
 	"http_headers": "{http_headers}",
 	"uri": "/files/basic/anonymous/api/share/{share-id}/entry",
+	"uriParameters": {
+		"share-id": {}
+	},
+	"queryParameters": {},
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Retrieving_a_file_share_ic301"
 },
 {
@@ -159,6 +192,10 @@
 	"host_property_name": "files_apiTargetHost",
 	"http_headers": "{http_headers}",
 	"uri": "/files/basic/api/share/{share-id}/entry",
+	"uriParameters": {
+		"share-id": {}
+	},
+	"queryParameters": {},
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Retrieving_a_file_share_ic301"
 },
 {
@@ -168,8 +205,10 @@
 	"http_method": "delete",
 	"host_property_name": "files_apiTargetHost",
 	"http_headers": "{http_headers}",
-	"uri": "/files/basic/api/shares/feed?sharedWhat={document-id}&{parameters}",
-	"parameters": "{parameters}",
+	"uri": "/files/basic/api/shares/feed",
+	"queryParameters": {
+		"sharedWhat": {"desc": "Document Id"}
+	},
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Deleting_a_file_share_ic301"
 },
 {
@@ -178,8 +217,8 @@
 	"endpoint": "connections",
 	"http_method": "put",
 	"host_property_name": "files_apiTargetHost",
-	"uri": "{document-library}?{parameters}",
-	"parameters": "{parameters}",
+	"uri": "{document-library}",
+	"queryParameters": {},
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Creating_a_version_ic301"
 },
 {
@@ -189,8 +228,12 @@
 	"http_method": "get",
 	"host_property_name": "files_apiTargetHost",
 	"http_headers": "{http_headers}",
-	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/version/{version-id}/entry?{parameters}",
-	"parameters": "{parameters}",
+	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/version/{version-id}/entry",
+	"uriParameters": {
+		"document-id": {},
+		"version-id": {}
+	},
+	"queryParameters": {},
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Retrieving_a_version_of_a_file_ic301"
 },
 {
@@ -200,8 +243,12 @@
 	"http_method": "get",
 	"host_property_name": "files_apiTargetHost",
 	"http_headers": "{http_headers}",
-	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/version/{version-id}/media?{parameters}",
-	"parameters": "{parameters}",
+	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/version/{version-id}/media",
+	"uriParameters": {
+		"document-id": {},
+		"version-id": {}
+	},
+	"queryParameters": {},
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Downloading_a_version_of_a_file_ic301"
 },
 {
@@ -211,8 +258,11 @@
 	"http_method": "delete",
 	"host_property_name": "files_apiTargetHost",
 	"http_headers": "{http_headers}",
-	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/feed?{parameters}",
-	"parameters": "{parameters}",
+	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/feed",
+	"uriParameters": {
+		"document-id": {}
+	},
+	"queryParameters": {},
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Deleting_all_versions_of_a_document_ic301"
 },
 {
@@ -221,8 +271,8 @@
 	"endpoint": "connections",
 	"http_method": "get",
 	"host_property_name": "files_apiTargetHost",
-	"uri": "/files/basic/api/diff?{parameters}",
-	"parameters": "{parameters}",
+	"uri": "/files/basic/api/diff",
+	"queryParameters": {},
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Comparing_two_versions_of_a_file_ic301"
 },
 {

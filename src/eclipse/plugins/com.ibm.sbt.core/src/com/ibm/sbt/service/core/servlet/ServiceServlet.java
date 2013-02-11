@@ -16,11 +16,11 @@
 package com.ibm.sbt.service.core.servlet;
 
 import com.ibm.commons.runtime.RuntimeConstants;
+import com.ibm.commons.runtime.servlet.ServletDispatcher;
+import com.ibm.commons.runtime.servlet.ServletFactory;
 import com.ibm.sbt.security.authentication.oauth.consumer.oauth_10a.servlet.OA2Callback;
 import com.ibm.sbt.security.authentication.oauth.consumer.oauth_10a.servlet.OACallback;
 import com.ibm.sbt.security.authentication.oauth.consumer.oauth_10a.servlet.OAClientAuthentication;
-import com.ibm.sbt.service.core.ServletDispatcher;
-import com.ibm.sbt.service.core.ServletFactory;
 import com.ibm.sbt.service.core.handlers.BasicAuthCredsHandler;
 import com.ibm.sbt.service.core.handlers.EmailHandler;
 import com.ibm.sbt.service.core.handlers.PingHandler;
@@ -40,13 +40,13 @@ public class ServiceServlet extends ServletDispatcher {
 	
     public ServiceServlet() {
     	// Register the default servlets
-        register(new ServletFactory.PathInfoName(PingHandler.class,PingHandler.URL_PATH)); 
-        register(new ServletFactory.PathInfoName(ProxyHandler.class,ProxyHandler.URL_PATH)); 
-        register(new ServletFactory.PathInfoName(BasicAuthCredsHandler.class,BasicAuthCredsHandler.URL_PATH));
-        register(new ServletFactory.PathInfoName(OACallback.class,OACallback.URL_PATH)); 
-        register(new ServletFactory.PathInfoName(OAClientAuthentication.class,OAClientAuthentication.URL_PATH));
-        register(new ServletFactory.PathInfoName(OA2Callback.class,OA2Callback.URL_PATH));
-        register(new ServletFactory.PathInfoName(EmailHandler.class,EmailHandler.URL_PATH));
+        register(new ServletFactory.PathInfoFactory(PingHandler.class,PingHandler.URL_PATH)); 
+        register(new ServletFactory.PathInfoFactory(ProxyHandler.class,ProxyHandler.URL_PATH)); 
+        register(new ServletFactory.PathInfoFactory(BasicAuthCredsHandler.class,BasicAuthCredsHandler.URL_PATH));
+        register(new ServletFactory.PathInfoFactory(OACallback.class,OACallback.URL_PATH)); 
+        register(new ServletFactory.PathInfoFactory(OAClientAuthentication.class,OAClientAuthentication.URL_PATH));
+        register(new ServletFactory.PathInfoFactory(OA2Callback.class,OA2Callback.URL_PATH));
+        register(new ServletFactory.PathInfoFactory(EmailHandler.class,EmailHandler.URL_PATH));
     }
     
 }

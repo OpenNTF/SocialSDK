@@ -14,7 +14,7 @@
 	<xc:ccMainPageResources></xc:ccMainPageResources>
 
 	<xp:scriptBlock>
-		<xp:this.value><![CDATA[var playground = {
+		<xp:this.value><![CDATA[var pageGlobal = {
 	id:				"",		// Current Snippet ID
 	unid:			"",		// Snippet UNID
 	
@@ -30,6 +30,7 @@
 	_loadingFrame:	null,
 	
 	// Other controls
+	borderContainer:'#{id:djTabContainer1}',
 	cbEnv:			'#{id:cbEnv}',
 	viewNavPanel:	'#{id:panelView}',
 	snippetsTree:	'assetsTree',
@@ -43,6 +44,10 @@
 	
 	docPanelId:		null	// Documentation Panel ID
 }
+dojo.addOnLoad(function() {
+   dojo.connect(window, "onresize", resize);
+   resize();
+});
 
 function prepend(h,f) {
 	return function() {
@@ -79,57 +84,31 @@ if(doc) {	o = {		status:		"ok",		id:			snippetId,		unid:		doc.getUniversalID
 			</xe:this.methods>
 		</xe:jsonRpcService>
 		<xc:ccLayout navigationPath="/Playground"
-			title="Social Business Toolkit - Playground">
+			title="IBM Social Business Toolkit - Playground">
 			<xp:this.facets>
 				<xp:panel id="PlaceBarActions" xp:key="PlaceBarActions">
-					<xp:link id="link2" style="padding-right:5.0px">
-						<xp:eventHandler event="onclick" submit="false">
-							<xp:this.script><![CDATA[XSP.openTooltipDialog('#{id:envTooltipDialog}','#{id:link2}')]]></xp:this.script>
-						</xp:eventHandler>
-						<xp:image url="/helpicon.png" id="image3"></xp:image>
-					</xp:link>
-					<xp:comboBox id="cbEnv" style="margin-top:3.0px"
-						value="#{sessionScope.environment}" defaultValue="#{javascript:return dataAccess.getPreferredEnvironment()}">
-						<xp:selectItems>
-							<xp:this.value><![CDATA[#{javascript:dataAccess.getEnvironments()}]]></xp:this.value>
-						</xp:selectItems>
-						<xp:eventHandler event="onchange" submit="true"
-							refreshMode="partial" refreshId="PlaceBarActions">
-							<xp:this.action><![CDATA[#{javascript:var e = sessionScope.environment
-if(e==dataAccess.CUSTOM) {
-	var dlgId = getClientId("customEnvDialog")
-	view.postScript("setTimeout('XSP.openDialog(\\'"+dlgId+"\\')');");
-}}]]></xp:this.action>
-						</xp:eventHandler>
-					</xp:comboBox>
-					<xp:link escape="true" text="Edit..." id="link1"
-						style="padding-left:5.0px">
-						<xp:this.rendered><![CDATA[#{javascript:var v = sessionScope.environment
-return v==dataAccess.CUSTOM}]]></xp:this.rendered>
-						<xp:eventHandler event="onclick" submit="false">
-							<xp:this.script><![CDATA[XSP.openDialog("#{id:customEnvDialog}")]]></xp:this.script>
-						</xp:eventHandler>
-						<xp:image id="image1" url="/edit.jpg"></xp:image>
-					</xp:link>
+					<xc:ccEnvironmentComboBox></xc:ccEnvironmentComboBox>
 				</xp:panel>
 			</xp:this.facets>
 			<xe:djBorderContainer id="djTabContainer1"
-				style="width:100%; height:1000px;" liveSplitters="true">
+				style="width:100%; height:100%;" liveSplitters="true">
 				<xe:this.dojoAttributes>
 					<xp:dojoAttribute name="design" value="sidebar"></xp:dojoAttribute>
 				</xe:this.dojoAttributes>
 				<xe:djBorderPane id="djBorderPane3" region="leading"
 					splitter="true" style="width:280px">
-					<xp:div id="leftRefresh">
+					<xp:div id="leftRefresh" style="height: 100%">
 						<xc:ccAssetTree type="snippet"></xc:ccAssetTree>
 					</xp:div>
 				</xe:djBorderPane>
 				<xe:djBorderPane id="djBorderPane2" region="center">
-					<xp:div id="djBorderContainer1" style="height: 100%">
+					<xe:djBorderContainer id="djBorderContainer1"
+						liveSplitters="true">
 						<xe:this.dojoAttributes>
-							<xp:dojoAttribute name="design" value="sidebar"></xp:dojoAttribute>
+							<xp:dojoAttribute name="gutters" value="false">
+							</xp:dojoAttribute>
 						</xe:this.dojoAttributes>
-						<xp:div id="djBorderPane5" style="width:100%">
+						<xe:djBorderPane region="top">
 							<xe:toolbar id="toolbar1">
 								<xe:this.treeNodes>
 									<xe:basicLeafNode label="New Snippet"
@@ -141,8 +120,8 @@ return v==dataAccess.CUSTOM}]]></xp:this.rendered>
 	alert("You are not allowed to save a document. Please authenticate with a different user.");
 	return;
 }
-if(playground.unid) {
-	XSP.openDialog("#{id:snippetDialog}",null,{action:'editDocument',documentId:playground.unid})
+if(pageGlobal.unid) {
+	XSP.openDialog("#{id:snippetDialog}",null,{action:'editDocument',documentId:pageGlobal.unid})
 } else {
 	XSP.openDialog("#{id:snippetDialog}")
 }]]></xe:this.onClick>
@@ -181,22 +160,25 @@ if(doc) {
 									<xp:this.script><![CDATA[XSP.setSubmitValue(playground.unid);]]></xp:this.script>
 								</xp:eventHandler>
 							</xp:link>
+						</xe:djBorderPane>
+						<xe:djBorderPane region="top" splitter="true"
+							style="height:400px">
 							<xe:djTabContainer id="tabContainer"
-								style="width: 100%; height: 350px; border: none">
+								style="width: 100%; height: 100%; border: none">
 								<xe:djTabPane id="tabHtml" title="HTML"
-									onShow="playground.htmlEditor.refresh()">
+									onShow="pageGlobal.htmlEditor.refresh()">
 									<xp:div style="border: 1px solid #AAAAAA; height: 100%">
 										<xc:PlaygroundTabHtml></xc:PlaygroundTabHtml>
 									</xp:div>
 								</xe:djTabPane>
 								<xe:djTabPane id="tabJs" title="JavaScript"
-									onShow="playground.jsEditor.refresh()">
+									onShow="pageGlobal.jsEditor.refresh()">
 									<xp:div style="border: 1px solid #AAAAAA; height: 100%">
 										<xc:PlaygroundTabJavaScript></xc:PlaygroundTabJavaScript>
 									</xp:div>
 								</xe:djTabPane>
 								<xe:djTabPane id="tabCss" title="CSS"
-									onShow="playground.cssEditor.refresh()">
+									onShow="pageGlobal.cssEditor.refresh()">
 									<xp:div style="border: 1px solid #AAAAAA; height: 100%">
 										<xc:PlaygroundTabCss></xc:PlaygroundTabCss>
 									</xp:div>
@@ -208,8 +190,8 @@ if(doc) {
 									</xe:djTabPane>
 								-->
 							</xe:djTabContainer>
-						</xp:div>
-						<xp:div id="djBorderPane6" style="width:100%;">
+						</xe:djBorderPane>
+						<xe:djBorderPane region="top" splitter="false">
 							<xe:toolbar id="toolbar2">
 								<xe:this.treeNodes>
 									<xe:basicLeafNode label="Run"
@@ -226,11 +208,14 @@ if(doc) {
 									</xe:basicLeafNode>
 								</xe:this.treeNodes>
 							</xe:toolbar>
-							<xp:div style="border: 1px solid #AAAAAA; margin: 5px 0px 5px 0px;">
-								<xc:PreviewPane></xc:PreviewPane>
+						</xe:djBorderPane>
+						<xe:djBorderPane region="center"
+							style="border: 1px solid #AAAAAA;">
+							<xp:div style="height: 100%">
+								<xc:PlaygroundPreviewPane></xc:PlaygroundPreviewPane>
 							</xp:div>
-						</xp:div>
-					</xp:div>
+						</xe:djBorderPane>
+					</xe:djBorderContainer>
 				</xe:djBorderPane>
 			</xe:djBorderContainer>
 		</xc:ccLayout>
@@ -311,8 +296,11 @@ return document1.getDocument().getUniversalID()
 					<xp:inputText id="inputText2" required="true"
 						disableClientSideValidation="true" value="#{document1.Category}"
 						size="40">
-						<xp:this.dojoAttributes><xp:dojoAttribute name="Dojo Attribute Name" value="Dojo Attribute Value"></xp:dojoAttribute></xp:this.dojoAttributes><xp:typeAhead mode="partial" minChars="1"
-							ignoreCase="true">
+						<xp:this.dojoAttributes>
+							<xp:dojoAttribute name="Dojo Attribute Name"
+								value="Dojo Attribute Value"></xp:dojoAttribute>
+						</xp:this.dojoAttributes>
+						<xp:typeAhead mode="partial" minChars="1" ignoreCase="true">
 							<xp:this.valueList><![CDATA[#{javascript:getComponent("valuePicker2").getTypeAheadValue(this)}]]></xp:this.valueList>
 						</xp:typeAhead>
 					</xp:inputText>
@@ -339,9 +327,9 @@ return document1.getDocument().getUniversalID()
 					style="display:none"></xp:inputTextarea>
 			</xp:div>
 			<xp:scriptBlock>
-				<xp:this.value><![CDATA[dojo.byId('#{id:jsDlgEditor}').value = playground.jsEditor.getValue();
-dojo.byId('#{id:cssDlgEditor}').value = playground.cssEditor.getValue();
-dojo.byId('#{id:htmlDlgEditor}').value = playground.htmlEditor.getValue();]]></xp:this.value>
+				<xp:this.value><![CDATA[dojo.byId('#{id:jsDlgEditor}').value = pageGlobal.jsEditor.getValue();
+dojo.byId('#{id:cssDlgEditor}').value = pageGlobal.cssEditor.getValue();
+dojo.byId('#{id:htmlDlgEditor}').value = pageGlobal.htmlEditor.getValue();]]></xp:this.value>
 			</xp:scriptBlock>
 		</xp:panel>
 	</xe:dialog>
@@ -365,10 +353,9 @@ codeEditor.setValue(_codeData);
 			</xp:scriptBlock>
 		</xp:panel>
 	</xe:dialog>
-
-	<xc:PlaygroundCustomEnvDialog></xc:PlaygroundCustomEnvDialog>
-	<xc:PlaygroundEnvironmentTooltipDialog></xc:PlaygroundEnvironmentTooltipDialog>
-
+	
+	<xc:ccEnvironmentComboBoxDialogs></xc:ccEnvironmentComboBoxDialogs>
+	
 	<form id="PreviewForm" action="#{javascript:@FullUrl('/xsp/preview')}"
 		method="post" target="preview">
 		<input type="hidden" name="fm_html" id="html" />

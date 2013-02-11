@@ -9,6 +9,7 @@ import javax.faces.application.FacesMessage;
 
 import lotus.domino.Database;
 import lotus.domino.Document;
+import lotus.domino.RichTextItem;
 import lotus.domino.View;
 import nsf.playground.jobs.AsyncAction;
 
@@ -261,6 +262,14 @@ public abstract class AssetImporter {
 		}
 		Object dominoValue=toDominoType(v);
 		doc.replaceItemValue(name, dominoValue);
+	}
+	protected void setItemValueRichText(Document doc, String name, String v) throws Exception {
+		setItemValue(doc, name, v);
+//		if(v==null) {
+//			return;
+//		}
+//        RichTextItem rti = doc.createRichTextItem(name);
+//        rti.appendText(v);
 	}
 
 	protected Object toDominoType(Object v) throws Exception {

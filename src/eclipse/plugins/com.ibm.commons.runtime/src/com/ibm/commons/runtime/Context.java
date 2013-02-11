@@ -18,13 +18,17 @@ package com.ibm.commons.runtime;
 
 import java.io.IOException;
 import java.util.AbstractMap;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ibm.commons.Platform;
 
 
 /**
@@ -59,12 +63,38 @@ public abstract class Context {
 	}
 	
 	private Application application;
+	private List<ContextListener> listeners;
 	
 	protected Context(Application application) {
 		this.application = application;
 	}
 	
+	public synchronized void addListener(ContextListener listener) {
+		if(listeners==null) {
+			listeners = new ArrayList<ContextListener>();
+		}
+		listeners.add(listener);
+	}
+	
+	public synchronized void removeListener(ContextListener listener) {
+		if(listeners!=null) {
+			listeners.remove(listener);
+			if(listeners.isEmpty()) {
+				listeners = null;
+			}
+		}
+	}
+	
 	public void close() {
+		if(listeners!=null) {
+			for(ContextListener l: listeners) {
+				try {
+					l.close(this);
+				} catch(Exception ex) {
+					Platform.getInstance().log(ex);
+				}
+			}
+		}
 	}
 
 	public ClassLoader getClassLoader() {

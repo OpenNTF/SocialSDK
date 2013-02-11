@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
 	xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xe:dialog id="customEnvDialog" title="Custom Environment">
+		<xp:panel
+			style="height: 36em; overflow-y: scroll; margin-left:10px; margin-right: 5px;">
+			<xp:this.data>
+				<xp:dominoDocument var="document1" formName="Environment">
+					<xp:this.postNewDocument><![CDATA[#{javascript:var env = dataAccess.getCustomEnvironment();
+dataAccess.writeEnvironment(env,document1.getDocument());}]]></xp:this.postNewDocument>
+				</xp:dominoDocument>
+			</xp:this.data>
+			<xc:ccEnvironmentForm editbean="true"></xc:ccEnvironmentForm>
+		</xp:panel>
+	</xe:dialog>
+
 	<xe:tooltipDialog id="envTooltipDialog" title="Environment">
 		<xp:panel style="max-width: 450px; margin-left:10px; margin-right: 5px;">
 			<xp:this.data>
-				<xp:dominoDocument var="document1"
-					formName="Environment" action="openDocument">
+				<xp:dominoDocument var="document1" formName="Environment"
+					action="openDocument">
 					<xp:this.documentId><![CDATA[#{javascript:var e = dataAccess.getEnvironment(sessionScope.environment)
 return e!=null ? e.getNoteID() : null}]]></xp:this.documentId>
 					<xp:this.postOpenDocument><![CDATA[#{javascript:if(sessionScope.environment==dataAccess.CUSTOM) {
@@ -25,4 +39,5 @@ return e!=null ? e.getNoteID() : null}]]></xp:this.documentId>
 			</xp:inputRichText>
 		</xp:panel>
 	</xe:tooltipDialog>
+
 </xp:view>

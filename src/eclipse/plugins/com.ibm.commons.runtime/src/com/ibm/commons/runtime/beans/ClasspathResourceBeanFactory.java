@@ -24,14 +24,14 @@ import com.ibm.commons.util.StringUtil;
 /**
  * SBT ManagedBean Factory.
  *
- * This class reads a faces-config file from the classpath resources, within the same
+ * This class reads a managed-beans file from the classpath resources, within the same
  * package than the factory class.
  *  
  * @author Philippe Riand
  */
 public abstract class ClasspathResourceBeanFactory extends AbstractXmlConfigBeanFactory {
 
-	public static final String DEFAULT_RESOURCENAME = "faces-config.xml";
+	public static final String DEFAULT_RESOURCENAME = EnvironmentConfig.INSTANCE.getEnvironmentConfig();
 	
 	
 	public ClasspathResourceBeanFactory() {

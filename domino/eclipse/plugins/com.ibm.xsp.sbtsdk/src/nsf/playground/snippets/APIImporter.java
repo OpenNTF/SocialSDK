@@ -48,7 +48,7 @@ public class APIImporter extends AssetImporter {
 			setItemValue(doc,"ImportSource", source.getName());
 			setItemValue(doc,"Tags", snippet.getTags());
 			setItemValue(doc,"Documentation", snippet.getDocumentation());
-			setItemValue(doc,"Json", snippet.getJson());
+			setItemValueRichText(doc,"Json", snippet.getJson());
 			
 			doc.save();
 		} finally {

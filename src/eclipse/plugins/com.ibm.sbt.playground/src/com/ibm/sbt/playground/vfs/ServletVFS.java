@@ -37,8 +37,8 @@ public class ServletVFS extends VFS {
 		private ServletContext context;
 		private String dir;
 		private VFSFile[] children;
-		public ServletVFSFile(VFSFile parent, String name, ServletContext context, String dir) {
-			super(parent,name);
+		public ServletVFSFile(VFS vfs, VFSFile parent, String name, ServletContext context, String dir) {
+			super(vfs,parent,name);
 			this.context = context;
 			this.dir = dir;
 		}
@@ -95,7 +95,7 @@ public class ServletVFS extends VFS {
 					} else {
 						name = s.substring(dir.length());
 					}
-					files[i++]= new ServletVFSFile(this, name, context, s);
+					files[i++]= new ServletVFSFile(getVFS(),this, name, context, s);
 				}
 				return files;
 			}
@@ -103,14 +103,10 @@ public class ServletVFS extends VFS {
 		}
 	}
 
-	public static VFSFile createVFSFile(ServletContext context, String baseDir) {
-		return new ServletVFSFile(null, "", context, baseDir);
-	}
-
 	private ServletVFSFile root;
 	
 	public ServletVFS(ServletContext context, String baseDir) {
-		this.root = new ServletVFSFile(null, "", context, baseDir);
+		this.root = new ServletVFSFile(this,null, "", context, baseDir);
 	}
 
 	@Override

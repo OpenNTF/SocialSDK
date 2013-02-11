@@ -4,11 +4,11 @@
 	"http_method": "get",
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Contacts_API_sbar",
 	"uri": "/lotuslive-shindig-server/social/rest/people/@me/@all",
-	"uriParameters": {
-	},
-	"queryParameters": {
-		"format": {}
-	}
+	"uriParameters": [
+	],
+	"queryParameters": [
+		{"name": "format"}
+	]
 },
 {
 	"name": "getMyContacts_Header",
@@ -17,9 +17,9 @@
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Contacts_API_sbar",
 	"uri": "/lotuslive-shindig-server/social/rest/people/@me/@all",
 	"inputs": "responseFormat",
-	"uriParameters": {
-	},
-	"queryParameters": {}
+	"uriParameters": [
+	,
+	"queryParameters": []
 },
 {
 	"name": "getMyContacts_ByIndex",
@@ -27,11 +27,11 @@
 	"http_method": "get",
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Contacts_API_sbar",
 	"uri": "/lotuslive-shindig-server/social/rest/people/@me/@all",
-	"uriParameters": {
-	},
-	"queryParameters": {
-		"startIndex": {},
-		"count": {}
+	"uriParameters": [
+	],
+	"queryParameters": [
+		{"name": "startIndex"},
+		{"name": "count"}
 	}
 },
 {
@@ -40,11 +40,11 @@
 	"http_method": "get",
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Contacts_API_sbar",
 	"uri": "/lotuslive-shindig-server/social/rest/people/@me/@friends",
-	"uriParameters": {
-	},
-	"queryParameters": {
-		"format": {}
-	}
+	"uriParameters": [
+	],
+	"queryParameters": [
+		{"name": "format"}
+	]
 },
 {
 	"name": "getMyConnections_Header",
@@ -53,7 +53,7 @@
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Contacts_API_sbar",
 	"uri": "/lotuslive-shindig-server/social/rest/people/@me/@friends",
 	"inputs": "responseFormat",
-	"queryParameters": {}
+	"queryParameters": []
 },
 {
 	"name": "getContactByGUID",
@@ -61,13 +61,13 @@
 	"http_method": "get",
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Contacts_API_sbar",
 	"uri": "/lotuslive-shindig-server/social/rest/people/lotuslive:contact:{contactId}/@self",
-	"uriParameters": {
-		"contactId": {},
-		"format": {}
+	"uriParameters": [
+		{"name": "contactId"},
+		{"name": "format"}
 	},
-	"queryParameters": {
-		"format": {}
-	}
+	"queryParameters": [
+		{"name": "format"}
+	]
 },
 {
 	"name": "getContactByGUID_Header",

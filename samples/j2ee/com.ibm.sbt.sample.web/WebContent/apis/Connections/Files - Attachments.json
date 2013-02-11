@@ -2,13 +2,11 @@
 	"name": "addFileAttachment",
 	"description": "Add a file attachment to a file in your library",
 	"http_method": "post",
-	"host_property_name": "files_apiTargetHost",
-	"http_headers": "{http_headers}",
 	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/feed",
-	"uriParameters": {
-		"document-id": {}
-	},
-	"queryParameters": {},
+	"uriParameters": [
+		{"name": "document-id"}
+	],
+	"queryParameters": [],
 	"post_string": "__file__",
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Adding_a_file_attachment_ic301"
 },
@@ -17,13 +15,11 @@
 	"disabled": false,
 	"description": "Add a file attachment to a file in your library using Multi-Part (not yet supported)",
 	"http_method": "post",
-	"host_property_name": "files_apiTargetHost",
-	"http_headers": "{http_headers}",
 	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/feed",
-	"uriParameters": {
-		"document-id": {}
-	},
-	"queryParameters": {},
+	"uriParameters": [
+		{"name": "document-id"}
+	],
+	"queryParameters": [],
 	"post_string": "__file__",
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Adding_a_file_attachment_ic301"
 },
@@ -31,15 +27,14 @@
 	"name": "downloadFileAttachment",
 	"description": "Download a file attachment from your library",
 	"http_method": "get",
-	"host_property_name": "files_apiTargetHost",
 	"http_headers": "{http_headers}",
 	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/attachment/{attachment-id}/media/{attachment-label}",
-	"uriParameters": {
-		"document-id": {},
-		"attachment-id": {},
-		"attachment-label": {}
-	},
-	"queryParameters": {},
+	"uriParameters": [
+		{"name": "document-id"},
+		{"name": "attachment-id"},
+		{"name": "attachment-label"}
+	],
+	"queryParameters": [],
 	"response_target": "__file__",
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Downloading_a_file_attachment_ic301"
 },
@@ -50,39 +45,35 @@
 	"host_property_name": "files_apiTargetHost",
 	"http_headers": "{http_headers}",
 	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/attachment/{attachment-id}/entry",
-	"uriParameters": {
-		"document-id": {},
-		"attachment-id": {}
-	},
-	"queryParameters": {},
+	"uriParameters": [
+		{"name": "document-id"},
+		{"name": "attachment-id"}
+	],
+	"queryParameters": [],
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Retrieving_a_file_attachment_ic301"
 },
 {
 	"name": "deleteFileAttachment",
 	"description": "Removes a file attachment from a file. An attachment is also indirectly deleted when the file it is associated with is deleted.",
 	"http_method": "delete",
-	"host_property_name": "files_apiTargetHost",
-	"http_headers": "{http_headers}",
 	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/attachment/{attachment-id}/entry",
-	"uriParameters": {
-		"document-id": {},
-		"attachment-id": {}
-	},
-	"queryParameters": {},
+	"uriParameters": [
+		{"name": "document-id"},
+		{"name": "attachment-id"}
+	],
+	"queryParameters": [],
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Deleting_a_file_attachment_ic301"
 },
 {
 	"name": "updateFileAttachment",
 	"description": "Update an attachment to a file in your file collection",
 	"http_method": "put",
-	"host_property_name": "files_apiTargetHost",
-	"http_headers": "{http_headers}",
 	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/attachment/{attachment-id}/entry",
-	"uriParameters": {
-		"document-id": {},
-		"attachment-id": {}
-	},
-	"queryParameters": {},
+	"uriParameters": [
+		{"name": "document-id"},
+		{"name": "attachment-id"}
+	],
+	"queryParameters": [],
 	"post_string": "__file__",
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Updating_a_file_attachment_ic301"
 },
@@ -91,14 +82,12 @@
 	"disabled": false,
 	"description": "Update an attachment to a file in your file collection using Multi-Part (not yet supported)",
 	"http_method": "put",
-	"host_property_name": "files_apiTargetHost",
-	"http_headers": "{http_headers}",
 	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/attachment/{attachment-id}/entry ",
-	"uriParameters": {
-		"document-id": {},
-		"attachment-id": {}
-	},
-	"queryParameters": {},
+	"uriParameters": [
+		{"name": "document-id"},
+		{"name": "attachment-id"}
+	],
+	"queryParameters": [],
 	"post_string": "__file__",
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Updating_a_file_attachment_ic301"
 }]

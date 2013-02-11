@@ -2,65 +2,59 @@
 	"name": "getDatabases",
 	"description": "Gets a list of the databases on a server",
 	"http_method": "get",
-	"host_property_name": "dataServiceHost",
 	"uri": "/api/data",
-	"queryParameters": {},
+	"queryParameters": [],
 	"doc_url": "http://www-10.lotus.com/ldd/ddwiki.nsf/dx/Database_collection_GET_dds10"
 },
 {
 	"name": "getViewsAndFolders",
 	"description": "Gets a list of the views and folders in a database",
 	"http_method": "get",
-	"host_property_name": "dataServiceHost",
 	"uri": "/XPagesExt.nsf/api/data/collections",
-	"queryParameters": {},
+	"queryParameters": [],
 	"doc_url": "http://www-10.lotus.com/ldd/ddwiki.nsf/dx/Viewfolder_collection_GET_dds10"
 },
 {
 	"name": "getViewFolderDesign",
 	"description": "Gets the design for a view (or folder)",
 	"http_method": "get",
-	"host_property_name": "dataServiceHost",
 	"uri": "/XPagesExt.nsf/api/data/collections/name/{view-or-folder-name}/design",
-	"uriParameters": {
-		"view-or-folder-name": {}
-	},
+	"uriParameters": [
+		{"name": "view-or-folder-name"}
+	],
 	"doc_url": "http://www-10.lotus.com/ldd/ddwiki.nsf/dx/Viewfolder_design_GET_dds10"
 },
 {
 	"name": "getViewFolderEntries",
 	"description": "Gets a list of entries in a view (or folder)",
 	"http_method": "get",
-	"host_property_name": "dataServiceHost",
 	"uri": "/XPagesExt.nsf/api/data/collections/name/{view-or-folder-name}",
-	"uriParameters": {
-		"view-or-folder-name": {}
-	},
-	"queryParameters": {},
+	"uriParameters": [
+		{"name": "view-or-folder-name"}
+	],
+	"queryParameters": [],
 	"doc_url": "http://www-10.lotus.com/ldd/ddwiki.nsf/dx/Viewfolder_entries_GET_dds10"
 },
 {
 	"name": "getDocument",
 	"description": "Gets a single document",
 	"http_method": "get",
-	"host_property_name": "dataServiceHost",
 	"uri": "/XPagesExt.nsf/api/data/documents/unid/{document-unid}",
-	"uriParameters": {
-		"document-unid": {}
-	},
-	"queryParameters": {},
+	"uriParameters": [
+		{"name": "document-unid"}
+	],
+	"queryParameters": [],
 	"doc_url": "http://www-10.lotus.com/ldd/ddwiki.nsf/dx/Document_GET_dds10"
 },
 {
 	"name": "createDocument",
 	"description": "Creates a new document",
 	"http_method": "post",
-	"host_property_name": "dataServiceHost",
 	"uri": "/XPagesExt.nsf/api/data/documents?form={form_name}&computewithform=true",
-	"uriParameters": {
-		"form_name": {}
-	},
-	"queryParameters": {},
+	"uriParameters": [
+		{"name": "form_name"}
+	],
+	"queryParameters": [],
 	"post_string": "{post_string}",
 	"post_content_type": "application/json",
 	"doc_url": "http://www-10.lotus.com/ldd/ddwiki.nsf/dx/Document_Collection_POST_dds10"
@@ -69,11 +63,10 @@
 	"name": "deleteDocument",
 	"description": "Deletes a document",
 	"http_method": "delete",
-	"host_property_name": "dataServiceHost",
 	"uri": "/XPagesExt.nsf/api/data/documents/unid/{document-unid}",
-	"uriParameters": {
-		"document-unid": {}
-	},
-	"queryParameters": {},
+	"uriParameters": [
+		{"name": "document-unid"}
+	],
+	"queryParameters": [],
 	"doc_url": "http://www-10.lotus.com/ldd/ddwiki.nsf/dx/Document_DELETE_dds10"
 }]

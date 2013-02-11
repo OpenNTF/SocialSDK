@@ -9,7 +9,6 @@ import javax.faces.application.FacesMessage;
 
 import lotus.domino.Database;
 import lotus.domino.Document;
-import lotus.domino.RichTextItem;
 import lotus.domino.View;
 import nsf.playground.jobs.AsyncAction;
 

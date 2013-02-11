@@ -5,7 +5,6 @@ import lotus.domino.Document;
 
 import com.ibm.sbt.playground.assets.AssetNode;
 import com.ibm.sbt.playground.assets.NodeFactory;
-import com.ibm.sbt.playground.assets.apis.APINodeFactory;
 import com.ibm.sbt.playground.assets.jssnippets.JSSnippet;
 import com.ibm.sbt.playground.assets.jssnippets.JSSnippetNodeFactory;
 import com.ibm.sbt.playground.vfs.VFSFile;

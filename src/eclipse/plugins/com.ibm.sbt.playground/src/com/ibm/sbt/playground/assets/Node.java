@@ -60,7 +60,6 @@ public abstract class Node {
 		return path;
 	}
 	
-	
 	private StringBuilder createJspUrl(StringBuilder b, Node n, char sep) {
 		if(n!=null) {
 			if(n.getParent()!=null) {

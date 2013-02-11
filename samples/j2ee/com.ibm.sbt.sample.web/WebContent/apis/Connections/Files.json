@@ -1,6 +1,7 @@
 [{
 	"name": "retrieveFileServiceDocument",
 	"description": "Retrieve the file service document",
+	"endpoint": "connections",
 	"http_method": "get",
 	"host_property_name": "files_apiTargetHost",
 	"uri": "/files/basic/api/introspection",
@@ -9,6 +10,7 @@
 {
 	"name": "retrieveFilesModerationServiceDocument",
 	"description": "Retrieve the files moderation service document",
+	"endpoint": "connections",
 	"http_method": "get",
 	"host_property_name": "files_apiTargetHost",
 	"uri": "/files/basic/api/moderation/atomsvc",
@@ -17,6 +19,7 @@
 {
 	"name": "getNonce",
 	"description": "Get a nonce key",
+	"endpoint": "connections",
 	"http_method": "get",
 	"host_property_name": "files_apiTargetHost",
 	"uri": "/files/basic/api/nonce",
@@ -25,6 +28,7 @@
 {
 	"name": "addFile",
 	"description": "Add a file to your library",
+	"endpoint": "connections",
 	"http_method": "post",
 	"host_property_name": "files_apiTargetHost",
 	"http_headers": "{http_headers}",
@@ -36,6 +40,7 @@
 {
 	"name": "downloadFileAnonymous",
 	"description": "Download a file from your library (anonymous)",
+	"endpoint": "connections",
 	"http_method": "get",
 	"host_property_name": "files_apiTargetHost",
 	"http_headers": "{http_headers}",
@@ -47,6 +52,7 @@
 {
 	"name": "downloadFile",
 	"description": "Download a file from your library",
+	"endpoint": "connections",
 	"http_method": "get",
 	"host_property_name": "files_apiTargetHost",
 	"http_headers": "{http_headers}",
@@ -58,6 +64,7 @@
 {
 	"name": "retrieveFileMetadataAnonymous",
 	"description": "Retrieve an Atom document representation of the metadata for a file from your library (anonymous)",
+	"endpoint": "connections",
 	"http_method": "get",
 	"host_property_name": "files_apiTargetHost",
 	"http_headers": "{http_headers}",
@@ -68,6 +75,7 @@
 {
 	"name": "retrieveFileMetadata",
 	"description": "Retrieve an Atom document representation of the metadata for a file from your library",
+	"endpoint": "connections",
 	"http_method": "get",
 	"host_property_name": "files_apiTargetHost",
 	"http_headers": "{http_headers}",
@@ -78,6 +86,7 @@
 {
 	"name": "deleteFileAndMetadata",
 	"description": "Delete a file and the Atom document representation of its associated metadata from your collection",
+	"endpoint": "connections",
 	"http_method": "delete",
 	"host_property_name": "files_apiTargetHost",
 	"http_headers": "{http_headers}",
@@ -87,6 +96,7 @@
 {
 	"name": "updateFile",
 	"description": "Update a file in your file collection",
+	"endpoint": "connections",
 	"http_method": "put",
 	"host_property_name": "files_apiTargetHost",
 	"http_headers": "{http_headers}",
@@ -98,6 +108,7 @@
 {
 	"name": "updateFileMetadata",
 	"description": "Update the Atom document representation of the metadata for a file from your library",
+	"endpoint": "connections",
 	"http_method": "put",
 	"host_property_name": "files_apiTargetHost",
 	"http_headers": "{http_headers}",
@@ -110,6 +121,7 @@
 {
 	"name": "createShare",
 	"description": "Create a file share",
+	"endpoint": "connections",
 	"http_method": "post",
 	"host_property_name": "files_apiTargetHost",
 	"uri": "/files/basic/api/shares/feed",
@@ -120,6 +132,7 @@
 {
 	"name": "shareFileWithCommunities",
 	"description": "Share a file with a community or multiple communities",
+	"endpoint": "connections",
 	"http_method": "post",
 	"host_property_name": "files_apiTargetHost",
 	"http_headers": "{http_headers}",
@@ -132,6 +145,7 @@
 {
 	"name": "retrieveFileShareAnonymous",
 	"description": "Share a file with a community or multiple communities",
+	"endpoint": "connections",
 	"host_property_name": "files_apiTargetHost",
 	"http_headers": "{http_headers}",
 	"uri": "/files/basic/anonymous/api/share/{share-id}/entry",
@@ -140,6 +154,7 @@
 {
 	"name": "retrieveFileShare",
 	"description": "Share a file with a community or multiple communities",
+	"endpoint": "connections",
 	"http_method": "get",
 	"host_property_name": "files_apiTargetHost",
 	"http_headers": "{http_headers}",
@@ -149,6 +164,7 @@
 {
 	"name": "deleteFileShare",
 	"description": "Delete a file share",
+	"endpoint": "connections",
 	"http_method": "delete",
 	"host_property_name": "files_apiTargetHost",
 	"http_headers": "{http_headers}",
@@ -159,6 +175,7 @@
 {
 	"name": "createFileVersion",
 	"description": "Create a version of a file",
+	"endpoint": "connections",
 	"http_method": "put",
 	"host_property_name": "files_apiTargetHost",
 	"uri": "{document-library}?{parameters}",
@@ -168,6 +185,7 @@
 {
 	"name": "retrieveFileVersion",
 	"description": "Retrieve an Atom document representation of a version of a file from your library",
+	"endpoint": "connections",
 	"http_method": "get",
 	"host_property_name": "files_apiTargetHost",
 	"http_headers": "{http_headers}",
@@ -178,6 +196,7 @@
 {
 	"name": "downloadFileVersion",
 	"description": "Download a version of a file from your library",
+	"endpoint": "connections",
 	"http_method": "get",
 	"host_property_name": "files_apiTargetHost",
 	"http_headers": "{http_headers}",
@@ -188,6 +207,7 @@
 {
 	"name": "deleteAllFileVersions",
 	"description": "Removes all versions of a file from your library",
+	"endpoint": "connections",
 	"http_method": "delete",
 	"host_property_name": "files_apiTargetHost",
 	"http_headers": "{http_headers}",
@@ -198,6 +218,7 @@
 {
 	"name": "compareTwoFileVersions",
 	"description": "Get a feed that lists the differences between two versions of a file",
+	"endpoint": "connections",
 	"http_method": "get",
 	"host_property_name": "files_apiTargetHost",
 	"uri": "/files/basic/api/diff?{parameters}",
@@ -207,6 +228,7 @@
 {
 	"name": "flagFileAsInappropriate",
 	"description": "Flag a file as inappropriate",
+	"endpoint": "connections",
 	"http_method": "post",
 	"host_property_name": "files_apiTargetHost",
 	"uri": "/files/basic/api/reports",
@@ -217,6 +239,7 @@
 {
 	"name": "flagFileCommentAsInappropriate",
 	"description": "Flag a file comment as inappropriate",
+	"endpoint": "connections",
 	"http_method": "post",
 	"host_property_name": "files_apiTargetHost",
 	"uri": "/files/basic/api/reports",

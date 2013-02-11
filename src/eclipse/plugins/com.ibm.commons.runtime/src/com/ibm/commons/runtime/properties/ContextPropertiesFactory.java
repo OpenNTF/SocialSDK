@@ -117,8 +117,8 @@ public class ContextPropertiesFactory extends AbstractPropertiesFactory {
 			}
 		} catch (Exception e) {
 			if (causeByNameNotFound(e)) {
-				// can ignore this, just means the url/FacesConfigXml has not be defined
-				logger.finer("Resource url/FacesConfigXml is not available");
+				// can ignore this, just means the url/SbtProperties has not be defined
+				logger.finer("Resource url/SbtProperties is not available");
 			}
 			else {
 				logger.log(Level.SEVERE, "Error reading context properties from url/SbtProperties", e);

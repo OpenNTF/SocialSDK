@@ -21,11 +21,11 @@
 	"doc_extra": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Meetings_APIs_sbar",
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Get_event_participants_sbar",
 	"uri": "/meetings/api/getMeetingSummary?TagCode=extSF&TagID={meetingId}",
-	"uriParameters": {
-		"meetingId": {}
-	},
-	"queryParameters": {
-	}
+	"uriParameters": [
+		{"name": "meetingId"}
+	],
+	"queryParameters": [
+	]
 },
 {
 	"name": "getMeetingSummary_XML",
@@ -34,9 +34,9 @@
 	"doc_extra": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Meetings_APIs_sbar",
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Get_event_participants_sbar",
 	"uri": "/meetings/api/xml/getMeetingSummary?TagCode=extSF&TagID={meetingId}",
-	"uriParameters": {
-		"meetingId": {}
-	},
-	"queryParameters": {
-	}
+	"uriParameters": [
+		{"name": "meetingId"}
+	],
+	"queryParameters": [
+	]
 }]

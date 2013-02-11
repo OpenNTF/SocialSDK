@@ -15,9 +15,9 @@
 	"description": "get LL user's profile",
 	"http_method": "get",
 	"uri": "/contacts/profiles/getProfileInfo?userid={subscriberEmail}",
-	"uriParameters": {
-		"subscriberEmail": {}
-	},
-	"queryParameters": {
-	}
+	"uriParameters": [
+		{"name": "subscriberEmail"}
+	],
+	"queryParameters": [
+	]
 }]

@@ -2,7 +2,6 @@
 	"name": "createFileFolder",
 	"description": "Create a file folder",
 	"http_method": "post",
-	"host_property_name": "files_apiTargetHost",
 	"uri": "/files/basic/api/collections/feed",
 	"post_string": "{post_string}",
 	"post_content_type": "application/atom+xml",
@@ -12,38 +11,33 @@
 	"name": "retrieveFileFolder",
 	"description": "Retrieve an Atom document representation of a file folder",
 	"http_method": "get",
-	"host_property_name": "files_apiTargetHost",
 	"uri": "/files/basic/api/collection/{collection-id}/entry",
-	"uriParameters": {
-		"collection-id": {}
-	},
-	"queryParameters": {},
+	"uriParameters": [
+		{"name": "collection-id"}
+	],
+	"queryParameters": [],
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Retrieving_a_file_folder_ic301"
 },
 {
 	"name": "deleteFileFolder",
 	"description": "Delete a file folder using the HTTP DELETE request. Deleting a folder does not delete the files in the folder.",
 	"http_method": "delete",
-	"host_property_name": "files_apiTargetHost",
-	"http_headers": "{http_headers}",
 	"uri": "/files/basic/api/collection/{collection-id}/entry",
-	"uriParameters": {
-		"collection-id": {}
-	},
-	"queryParameters": {},
+	"uriParameters": [
+		{"name": "collection-id"}
+	],
+	"queryParameters": [],
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Deleting_a_file_folder_ic301"
 },
 {
 	"name": "updateFileFolder",
 	"description": "Update the Atom document representation of the file folder",
 	"http_method": "put",
-	"host_property_name": "files_apiTargetHost",
-	"http_headers": "{http_headers}",
 	"uri": "/files/basic/api/collection/{collection-id}/entry",
-	"uriParameters": {
-		"collection-id": {}
-	},
-	"queryParameters": {},
+	"uriParameters": [
+		{"name": "collection-id"}
+	],
+	"queryParameters": [],
 	"post_string": "{post_string}",
 	"post_content_type": "application/atom+xml",
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Updating_a_file_folder_ic301"
@@ -52,12 +46,11 @@
 	"name": "addFilesToFolder",
 	"description": "Add a file or files to a folder",
 	"http_method": "post",
-	"host_property_name": "files_apiTargetHost",
 	"uri": "/files/basic/api/collection/{collection-id}/feed",
-	"uriParameters": {
-		"collection-id": {}
-	},
-	"queryParameters": {},
+	"uriParameters": [
+		{"name": "collection-id"}
+	],
+	"queryParameters": [],
 	"post_string": "{post_string}",
 	"post_content_type": "application/atom+xml",
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Adding_a_file_or_set_of_files_to_a_folder_ic301"
@@ -66,25 +59,22 @@
 	"name": "addFilesToFolderById",
 	"description": "Add a file or files to a folder",
 	"http_method": "post",
-	"host_property_name": "files_apiTargetHost",
 	"uri": "/files/basic/api/collection/{collection-id}/feed",
-	"uriParameters": {
-		"collection-id": {}
-	},
-	"queryParameters": {},
+	"uriParameters": [
+		{"name": "collection-id"}
+	],
+	"queryParameters": [],
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Adding_a_file_or_set_of_files_to_a_folder_ic301"
 },
 {
 	"name": "addFileToFolders",
 	"description": "Add a file to a folder or multiple folders",
 	"http_method": "post",
-	"host_property_name": "files_apiTargetHost",
-	"http_headers": "{http_headers}",
 	"uri": "/files/basic/api/myuserlibrary/document/{document-id}/feed",
-	"uriParameters": {
-		"collection-id": {}
-	},
-	"queryParameters": {},
+	"uriParameters": [
+		{"name": "collection-id"}
+	],
+	"queryParameters": [],
 	"post_string": "{post_string}",
 	"post_content_type": "application/atom+xml",
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Adding_a_file_to_a_folder_or_multiple_folders_ic301"
@@ -93,12 +83,10 @@
 	"name": "removeFileFromFolder",
 	"description": "Removes a file from a folder. This action does not delete the file entirely; it only removes its association with the folder.",
 	"http_method": "delete",
-	"host_property_name": "files_apiTargetHost",
-	"http_headers": "{http_headers}",
 	"uri": "/files/basic/api/collection/{collection-id}/feed",
-	"uriParameters": {
-		"collection-id": {}
-	},
-	"queryParameters": {},
+	"uriParameters": [
+		{"name": "collection-id"}
+	],
+	"queryParameters": [],
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Removing_a_file_from_a_folder_ic301"
 }]

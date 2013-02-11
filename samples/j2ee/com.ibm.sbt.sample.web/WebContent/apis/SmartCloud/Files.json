@@ -10,14 +10,24 @@
 	"description": "get files owned by me",
 	"http_method": "get",
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
-	"uri": "/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:files"
+	"uri": "/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:files",
+	"uriParameters": {
+		"subscriberId": {}
+	},
+	"queryParameters": {
+	}
 },
 {
 	"name": "getMyFilesAlternateWay",
 	"description": "get files owned by me (alternate way)",
 	"http_method": "get",
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
-	"uri": "/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:virtual!.!filesownedby"
+	"uri": "/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:virtual!.!filesownedby",
+	"uriParameters": {
+		"subscriberId": {}
+	},
+	"queryParameters": {
+	}
 },
 {
 	"name": "getMyFilesWithParameters",
@@ -25,14 +35,25 @@
 	"http_method": "get",
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
 	"uri": "/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:files",
-	"inputs": "maxItems,skipCount,filter"
+	"inputs": "maxItems,skipCount,filter",
+	"uriParameters": {
+		"subscriberId": {}
+	},
+	"queryParameters": {
+	}
 },
 {
 	"name": "getFileEntry",
 	"description": "get full details about a file entry",
 	"http_method": "get",
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
-	"uri": "/files/basic/cmis/repository/p!{subscriberId}/object/snx:file!{fileId}"
+	"uri": "/files/basic/cmis/repository/p!{subscriberId}/object/snx:file!{fileId}",
+	"uriParameters": {
+		"subscriberId": {},
+		"fileId": {}
+	},
+	"queryParameters": {
+	}
 },
 {
 	"name": "getFileEntryWithParameters",
@@ -40,28 +61,51 @@
 	"http_method": "get",
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
 	"uri": "/files/basic/cmis/repository/p!{subscriberId}/object/snx:file!{fileId}",
-	"inputs": "includeACL,filter"
+	"inputs": "includeACL,filter",
+	"uriParameters": {
+		"subscriberId": {},
+		"fileId": {}
+	},
+	"queryParameters": {
+	}
 },
 {
 	"name": "getFileEntryByFileName",
 	"description": "get full details about a file entry given the file name",
 	"http_method": "get",
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
-	"uri": "/files/basic/cmis/repository/p!{subscriberId}/objectp?p=/files/{fileName}"
+	"uri": "/files/basic/cmis/repository/p!{subscriberId}/objectp?p=/files/{fileName}",
+	"uriParameters": {
+		"subscriberId": {},
+		"fileName": {}
+	},
+	"queryParameters": {
+	}
 },
 {
 	"name": "uploadFile",
 	"description": "upload a new file. This will upload an image file named bludbg.jpg",
 	"http_method": "post",
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
-	"uri": "/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:files"
+	"uri": "/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:files",
+	"uriParameters": {
+		"subscriberId": {}
+	},
+	"queryParameters": {
+	}
 },
 {
 	"name": "updateFile",
 	"description": "update file (upload new version of file). This will update the file created in uploadFile API with another image file",
 	"http_method": "put",
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
-	"uri": "/files/basic/cmis/repository/p!{subscriberId}/object/snx:file!{fileId}/stream/{fileId}"
+	"uri": "/files/basic/cmis/repository/p!{subscriberId}/object/snx:file!{fileId}/stream/{fileId}",
+	"uriParameters": {
+		"subscriberId": {},
+		"fileId": {}
+	},
+	"queryParameters": {
+	}
 },
 {
 	"name": "createFileByAtomEntry",
@@ -69,7 +113,12 @@
 	"http_method": "post",
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
 	"uri": "/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:files",
-	"inputs": "fileName,fileContent"
+	"inputs": "fileName,fileContent",
+	"uriParameters": {
+		"subscriberId": {}
+	},
+	"queryParameters": {
+	}
 },
 {
 	"name": "updateFileByAtomEntry",
@@ -77,56 +126,103 @@
 	"http_method": "put",
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
 	"uri": "/files/basic/cmis/repository/p!{subscriberId}/object/snx:file!{fileId}",
-	"inputs": "fileName,fileContent"
+	"inputs": "fileName,fileContent",
+	"uriParameters": {
+		"subscriberId": {},
+		"fileId": {}
+	},
+	"queryParameters": {
+	}
 },
 {
 	"name": "downloadFile",
 	"description": "download a file",
 	"http_method": "get",
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
-	"uri": "/files/basic/cmis/repository/p!{subscriberId}/object/snx:file!{fileId}/stream/{fileId}"
+	"uri": "/files/basic/cmis/repository/p!{subscriberId}/object/snx:file!{fileId}/stream/{fileId}",
+	"uriParameters": {
+		"subscriberId": {},
+		"fileId": {}
+	},
+	"queryParameters": {
+	}
 },
 {
 	"name": "deleteFile",
 	"description": "delete a file.<br><span class='highlight'>Note</span>: This method can only delete files with no more than 1 version. if the file have more than 1 version, please use the <span class='highlight'>deleteFileWithAllVersions</span> API.",
 	"http_method": "delete",
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
-	"uri": "/files/basic/cmis/repository/p!{subscriberId}/object/snx:file!{fileId}"
+	"uri": "/files/basic/cmis/repository/p!{subscriberId}/object/snx:file!{fileId}",
+	"uriParameters": {
+		"subscriberId": {},
+		"fileId": {}
+	},
+	"queryParameters": {
+	}
 },
 {
 	"name": "deleteFileWithAllVersions",
 	"description": "delete a file with all versions.",
 	"http_method": "delete",
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
-	"uri": "/files/basic/cmis/repository/p!{subscriberId}/versions/snx:file!{fileId}"
+	"uri": "/files/basic/cmis/repository/p!{subscriberId}/versions/snx:file!{fileId}",
+	"uriParameters": {
+		"subscriberId": {},
+		"fileId": {}
+	},
+	"queryParameters": {
+	}
 },
 {
 	"name": "getFileComments",
 	"description": "get comments added to a file",
 	"http_method": "get",
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
-	"uri": "/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:comments!{fileId}"
+	"uri": "/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:comments!{fileId}",
+	"uriParameters": {
+		"subscriberId": {},
+		"fileId": {}
+	},
+	"queryParameters": {
+	}
 },
 {
 	"name": "addFileComments",
 	"description": "add new file comments.<br>We will use a default comment xml as request body",
 	"http_method": "post",
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
-	"uri": "/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:comments!{fileId}"
+	"uri": "/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:comments!{fileId}",
+	"uriParameters": {
+		"subscriberId": {},
+		"fileId": {}
+	},
+	"queryParameters": {
+	}
 },
 {
 	"name": "getFilesSharedWithMe",
 	"description": "get files shared with me",
 	"http_method": "get",
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
-	"uri": "/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:virtual!.!filessharedwith"
+	"uri": "/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:virtual!.!filessharedwith",
+	"uriParameters": {
+		"subscriberId": {}
+	},
+	"queryParameters": {
+	}
 },
 {
 	"name": "getFileACLs",
 	"description": "get files sharing info (ACLs)",
 	"http_method": "get",
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
-	"uri": "/files/basic/cmis/repository/p!{subscriberId}/acl/snx:file!{fileId}"
+	"uri": "/files/basic/cmis/repository/p!{subscriberId}/acl/snx:file!{fileId}",
+	"uriParameters": {
+		"subscriberId": {},
+		"fileId": {}
+	},
+	"queryParameters": {
+	}
 },
 {
 	"name": "shareFileToUser",
@@ -134,7 +230,13 @@
 	"http_method": "put",
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
 	"uri": "/files/basic/cmis/repository/p!{subscriberId}/acl/snx:file!{fileId}",
-	"inputs": "shareWithUserId,permission"
+	"inputs": "shareWithUserId,permission",
+	"uriParameters": {
+		"subscriberId": {},
+		"fileId": {}
+	},
+	"queryParameters": {
+	}
 },
 {
 	"name": "editFileMetadata",
@@ -142,7 +244,13 @@
 	"http_method": "put",
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
 	"uri": "/files/basic/cmis/repository/p!{subscriberId}/object/snx:file!{fileId}",
-	"inputs": "title,description"
+	"inputs": "title,description",
+	"uriParameters": {
+		"subscriberId": {},
+		"fileId": {}
+	},
+	"queryParameters": {
+	}
 },
 {
 	"name": "removeUserFromFileSharing",
@@ -150,7 +258,13 @@
 	"http_method": "put",
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
 	"uri": "/files/basic/cmis/repository/p!{subscriberId}/acl-remover/snx:file!{fileId}",
-	"inputs": "removeUserId"
+	"inputs": "removeUserId",
+	"uriParameters": {
+		"subscriberId": {},
+		"fileId": {}
+	},
+	"queryParameters": {
+	}
 },
 {
 	"name": "shareFileToCommunity",
@@ -159,7 +273,12 @@
 	"http_method": "post",
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
 	"uri": "/files/basic/cmis/repository/cs!{communityId}/folderc/snx:community",
-	"inputs": "fileId"
+	"inputs": "fileId",
+	"uriParameters": {
+		"communityId": {}
+	},
+	"queryParameters": {
+	}
 },
 {
 	"name": "removeCommunityFromFileSharing",
@@ -167,21 +286,36 @@
 	"http_method": "post",
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
 	"uri": "/files/basic/cmis/repository/cs!{communityId}/unfiled?removeFrom=snx:community",
-	"inputs": "fileId"
+	"inputs": "fileId",
+	"uriParameters": {
+		"communityId": {}
+	},
+	"queryParameters": {
+	}
 },
 {
 	"name": "getMyFolders",
 	"description": "get folders owned by me",
 	"http_method": "get",
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
-	"uri": "/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:collections"
+	"uri": "/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:collections",
+	"uriParameters": {
+		"subscriberId": {}
+	},
+	"queryParameters": {
+	}
 },
 {
 	"name": "getFoldersSharedWithMe",
 	"description": "get folders shared with me",
 	"http_method": "get",
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
-	"uri": "/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:virtual!.!collectionssharedwith"
+	"uri": "/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:virtual!.!collectionssharedwith",
+	"uriParameters": {
+		"subscriberId": {}
+	},
+	"queryParameters": {
+	}
 },
 {
 	"name": "addFileToFolder",
@@ -189,14 +323,26 @@
 	"http_method": "post",
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
 	"uri": "/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:collection!{collectionId}",
-	"inputs": "fileId"
+	"inputs": "fileId",
+	"uriParameters": {
+		"subscriberId": {},
+		"collectionId": {}
+	},
+	"queryParameters": {
+	}
 },
 {
 	"name": "getFilesInsideFolder",
 	"description": "get files inside a folder",
 	"http_method": "get",
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
-	"uri": "/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:collection!{collectionId}"
+	"uri": "/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:collection!{collectionId}",
+	"uriParameters": {
+		"subscriberId": {},
+		"collectionId": {}
+	},
+	"queryParameters": {
+	}
 },
 {
 	"name": "removeFileFromFolder",
@@ -204,5 +350,11 @@
 	"http_method": "post",
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Files_CMIS_API_sbar",
 	"uri": "/files/basic/cmis/repository/p!{subscriberId}/unfiled?removeFrom=snx:collection!{collectionId}",
-	"inputs": "fileId"
+	"inputs": "fileId",
+	"uriParameters": {
+		"subscriberId": {},
+		"collectionId": {}
+	},
+	"queryParameters": {
+	}
 }]

@@ -3,7 +3,12 @@
 	"description": "get my profile.<br><span class='highlight'>format</span> could be <span class='highlight'>json</span>, <span class='highlight'>xml</span> or <span class='highlight'>atom</span>. Default value is <span class='highlight'>json</span>",
 	"http_method": "get",
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Profiles_API_sbar",
-	"uri": "/lotuslive-shindig-server/social/rest/people/@me/@self?format={format}"
+	"uri": "/lotuslive-shindig-server/social/rest/people/@me/@self?format={format}",
+	"uriParameters": {
+		"format": {}
+	},
+	"queryParameters": {
+	}
 },
 {
 	"name": "getMyProfile_Header",
@@ -18,7 +23,13 @@
 	"description": "get profile info by a user ID.<br><span class='highlight'>format</span> could be <span class='highlight'>json</span>, <span class='highlight'>xml</span> or <span class='highlight'>atom</span>. Default value is <span class='highlight'>json</span>",
 	"http_method": "get",
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Profiles_API_sbar",
-	"uri": "/lotuslive-shindig-server/social/rest/people/lotuslive:user:{subscriberId}/@self?format={format}"
+	"uri": "/lotuslive-shindig-server/social/rest/people/lotuslive:user:{subscriberId}/@self?format={format}",
+	"uriParameters": {
+		"subscriberId": {},
+		"format": {}
+	},
+	"queryParameters": {
+	}
 },
 {
 	"name": "getProfileByUserGUID_Header",
@@ -26,5 +37,10 @@
 	"http_method": "get",
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Contacts_API_sbar",
 	"uri": "/lotuslive-shindig-server/social/rest/people/lotuslive:user:{subscriberId}/@self",
-	"inputs": "responseFormat"
+	"inputs": "responseFormat",
+	"uriParameters": {
+		"subscriberId": {}
+	},
+	"queryParameters": {
+	}
 }]

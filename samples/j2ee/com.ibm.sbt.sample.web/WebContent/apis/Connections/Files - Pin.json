@@ -13,8 +13,8 @@
 	"description": "Pin file",
 	"http_method": "post",
 	"host_property_name": "files_apiTargetHost",
-	"uri": "/files/basic/api/myfavorites/documents/feed?{parameters}",
-	"parameters": "{parameters}",
+	"uri": "/files/basic/api/myfavorites/documents/feed",
+	"queryParameters": {},
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Pinning_a_file_programmatically_ic301"
 },
 {
@@ -38,8 +38,8 @@
 	},
 	"http_method": "delete",
 	"host_property_name": "files_apiTargetHost",
-	"uri": "/files/basic/api/myfavorites/documents/feed?{parameters}",
-	"parameters": "{parameters}",
+	"uri": "/files/basic/api/myfavorites/documents/feed",
+	"queryParameters": {},
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Removing_a_pin_from_a_file_programmatically_ic301"
 },
 {
@@ -57,8 +57,8 @@
 	"description": "Pin folder",
 	"http_method": "post",
 	"host_property_name": "files_apiTargetHost",
-	"uri": "/files/basic/api/myfavorites/collections/feed?{parameters}",
-	"parameters": "{parameters}",
+	"uri": "/files/basic/api/myfavorites/collections/feed",
+	"queryParameters": {},
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Pinning_a_folder_programmatically_ic301"
 },
 {
@@ -82,7 +82,7 @@
 	},
 	"http_method": "delete",
 	"host_property_name": "files_apiTargetHost",
-	"uri": "/files/basic/api/myfavorites/collections/feed?{parameters}",
-	"parameters": "{parameters}",
+	"uri": "/files/basic/api/myfavorites/collections/feed",
+	"queryParameters": {},
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Removing_a_pin_from_a_folder_programmatically_ic301"
 }]

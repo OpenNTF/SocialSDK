@@ -3,6 +3,7 @@
 	"description": "Post Event",
 	"http_method": "post",
 	"uri": "/vulcan/shindig/rest/activitystreams/@me/@all/@all",
+	"queryParameters": {},
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/POST_request_sbt",
 	"post_string": "{post_string}",
 	"post_content_type": "application/json"
@@ -11,8 +12,8 @@
 	"name": "Get",
 	"description": "Get Events",
 	"http_method": "get",
-	"uri": "/vulcan/shindig/rest/activitystreams/@me/@all/@all?{parameters}",
-	"parameters": "{parameters}",
+	"uri": "/vulcan/shindig/rest/activitystreams/@me/@all/@all",
+	"queryParameters": {},
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/GET_request_sbt"
 },
 {
@@ -23,5 +24,6 @@
 		"Content-Type": "application/json"
 	},
 	"uri": "/vulcan/shindig/rest/activitystreams/@me/@all/@all/@all?X-HTTP-Method-Override=DELETE",
+	"queryParameters": {},
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/POST_request_sbt"
 }]

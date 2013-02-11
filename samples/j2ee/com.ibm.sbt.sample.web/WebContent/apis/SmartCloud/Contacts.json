@@ -3,7 +3,12 @@
 	"description": "get my contacts.<br><span class='highlight'>format</span> could be <span class='highlight'>json</span>, <span class='highlight'>xml</span> or <span class='highlight'>atom</span>. Default value is <span class='highlight'>json</span>",
 	"http_method": "get",
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Contacts_API_sbar",
-	"uri": "/lotuslive-shindig-server/social/rest/people/@me/@all?format={format}"
+	"uri": "/lotuslive-shindig-server/social/rest/people/@me/@all",
+	"uriParameters": {
+	},
+	"queryParameters": {
+		"format": {}
+	}
 },
 {
 	"name": "getMyContacts_Header",
@@ -11,21 +16,35 @@
 	"http_method": "get",
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Contacts_API_sbar",
 	"uri": "/lotuslive-shindig-server/social/rest/people/@me/@all",
-	"inputs": "responseFormat"
+	"inputs": "responseFormat",
+	"uriParameters": {
+	},
+	"queryParameters": {}
 },
 {
 	"name": "getMyContacts_ByIndex",
 	"description": "get my contacts based on startIndex and count. Using default format <span class='highlight'>json</span>",
 	"http_method": "get",
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Contacts_API_sbar",
-	"uri": "/lotuslive-shindig-server/social/rest/people/@me/@all?startIndex={startIndex}&count={count}"
+	"uri": "/lotuslive-shindig-server/social/rest/people/@me/@all",
+	"uriParameters": {
+	},
+	"queryParameters": {
+		"startIndex": {},
+		"count": {}
+	}
 },
 {
 	"name": "getMyConnections",
 	"description": "get my connections.<br><span class='highlight'>format</span> could be <span class='highlight'>json</span>, <span class='highlight'>xml</span> or <span class='highlight'>atom</span>. Default value is <span class='highlight'>json</span>",
 	"http_method": "get",
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Contacts_API_sbar",
-	"uri": "/lotuslive-shindig-server/social/rest/people/@me/@friends?format={format}"
+	"uri": "/lotuslive-shindig-server/social/rest/people/@me/@friends",
+	"uriParameters": {
+	},
+	"queryParameters": {
+		"format": {}
+	}
 },
 {
 	"name": "getMyConnections_Header",
@@ -33,14 +52,22 @@
 	"http_method": "get",
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Contacts_API_sbar",
 	"uri": "/lotuslive-shindig-server/social/rest/people/@me/@friends",
-	"inputs": "responseFormat"
+	"inputs": "responseFormat",
+	"queryParameters": {}
 },
 {
 	"name": "getContactByGUID",
 	"description": "get my contacts via contact GUID.<br><span class='highlight'>format</span> could be <span class='highlight'>json</span>, <span class='highlight'>xml</span> or <span class='highlight'>atom</span>. Default value is <span class='highlight'>json</span>",
 	"http_method": "get",
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Contacts_API_sbar",
-	"uri": "/lotuslive-shindig-server/social/rest/people/lotuslive:contact:{contactId}/@self?format={format}"
+	"uri": "/lotuslive-shindig-server/social/rest/people/lotuslive:contact:{contactId}/@self",
+	"uriParameters": {
+		"contactId": {},
+		"format": {}
+	},
+	"queryParameters": {
+		"format": {}
+	}
 },
 {
 	"name": "getContactByGUID_Header",

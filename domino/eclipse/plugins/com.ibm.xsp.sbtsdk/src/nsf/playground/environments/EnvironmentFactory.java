@@ -6,7 +6,6 @@ import javax.faces.context.FacesContext;
 
 import nsf.playground.beans.DataAccess;
 
-
 import com.ibm.sbt.jslibrary.SBTEnvironment;
 import com.ibm.sbt.jslibrary.SBTEnvironmentFactory;
 import com.ibm.xsp.util.ManagedBeanUtil;

@@ -16,14 +16,6 @@
     <managed-bean-class>nsf.playground.beans.OptionsBean
 		</managed-bean-class>
     <managed-bean-scope>application</managed-bean-scope>
-    <managed-property>
-      <property-name>playgroundEnabled</property-name>
-      <value>true</value>
-    </managed-property>
-    <managed-property>
-      <property-name>explorerEnabled</property-name>
-      <value>true</value>
-    </managed-property>
   </managed-bean>
   
   <!--

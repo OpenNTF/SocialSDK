@@ -1,6 +1,7 @@
 package nsf.playground.beans;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -12,6 +13,7 @@ import lotus.domino.ViewEntry;
 import lotus.domino.ViewEntryCollection;
 import lotus.domino.ViewNavigator;
 
+import com.ibm.commons.runtime.util.URLEncoding;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.playground.assets.AssetNode;
 import com.ibm.sbt.playground.assets.CategoryNode;
@@ -27,6 +29,10 @@ import com.ibm.xsp.model.domino.wrapped.DominoDocument;
  * @author priand
  */
 public abstract class AssetBean {
+
+	public String encodeUrl(String s) throws UnsupportedEncodingException, IOException {
+		return URLEncoding.encodeURIString(s, "utf-8", 0, true);
+	}
 	
 	protected abstract String getFlatView();
 

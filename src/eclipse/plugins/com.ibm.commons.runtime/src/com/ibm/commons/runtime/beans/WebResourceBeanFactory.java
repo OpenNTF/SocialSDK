@@ -31,7 +31,7 @@ import com.ibm.commons.util.StringUtil;
  */
 public class WebResourceBeanFactory extends AbstractXmlConfigBeanFactory {
 
-	public static final String DEFAULT_FILENAME = "/WEB-INF/faces-config.xml";
+	public static final String DEFAULT_FILENAME = "/WEB-INF/"+EnvironmentConfig.INSTANCE.getEnvironmentConfig();
 
 	public WebResourceBeanFactory() {
 		this(DEFAULT_FILENAME);

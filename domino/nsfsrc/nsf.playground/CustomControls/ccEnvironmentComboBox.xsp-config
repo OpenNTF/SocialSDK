@@ -5,13 +5,17 @@
     <default-prefix>xc</default-prefix>
   </faces-config-extension>
   <composite-component>
-    <component-type>PreviewPane</component-type>
-    <composite-name>PreviewPane</composite-name>
-    <composite-file>/PreviewPane.xsp</composite-file>
+    <component-type>ccEnvironmentComboBox</component-type>
+    <composite-name>ccEnvironmentComboBox</composite-name>
+    <composite-file>/ccEnvironmentComboBox.xsp</composite-file>
     <composite-extension>
       <designer-extension>
         <in-palette>true</in-palette>
       </designer-extension>
     </composite-extension>
+    <property>
+      <property-name>fullRefresh</property-name>
+      <property-class>boolean</property-class>
+    </property>
   </composite-component>
 </faces-config>

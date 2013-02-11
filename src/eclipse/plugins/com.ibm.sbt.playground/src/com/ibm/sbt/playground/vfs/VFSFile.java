@@ -29,13 +29,18 @@ public abstract class VFSFile {
 	
 	public static final char SEPARATOR = '/';
 	
+	private VFS vfs;
 	private VFSFile parent;
 	private String name;
 	private String path;
 	
-	public VFSFile(VFSFile parent, String name) {
+	public VFSFile(VFS vfs, VFSFile parent, String name) {
+		this.vfs = vfs;
 		this.parent = parent;
 		this.name = name;
+	}
+	public VFS getVFS() {
+		return vfs;
 	}
 	public VFSFile getParent() {
 		return parent;

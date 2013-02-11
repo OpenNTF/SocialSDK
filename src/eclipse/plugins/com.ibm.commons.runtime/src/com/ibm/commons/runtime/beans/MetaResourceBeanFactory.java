@@ -35,7 +35,7 @@ import com.ibm.commons.util.StringUtil;
  */
 public class MetaResourceBeanFactory extends AbstractXmlConfigBeanFactory {
 
-	public static final String DEFAULT_FILENAME = "META-INF/faces-config.xml";
+	public static final String DEFAULT_FILENAME = "META-INF/"+ EnvironmentConfig.INSTANCE.getEnvironmentConfig();
 
 	public MetaResourceBeanFactory() {
 		this(DEFAULT_FILENAME);

@@ -8,7 +8,7 @@ import com.ibm.sbt.services.BaseUnitTest;
 import com.ibm.sbt.services.client.SBTServiceException;
 
 /**
- * Tests for the java SmartCloud Profile API by calling SmartCloud server using configuration in faces-config
+ * Tests for the java SmartCloud Profile API by calling SmartCloud server using configuration in managed-beans
  * 
  * @author Vimal Dhupar
  */

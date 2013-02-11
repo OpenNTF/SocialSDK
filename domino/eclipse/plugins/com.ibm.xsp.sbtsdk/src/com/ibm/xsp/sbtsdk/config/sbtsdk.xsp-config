@@ -18,8 +18,8 @@
 <faces-config>
 
   <faces-config-extension>
-    <namespace-uri>http://www.ibm.com/xsp/bazaar</namespace-uri>
-    <default-prefix>bz</default-prefix>
+    <namespace-uri>http://www.ibm.com/xsp/extlib/sbtsdk</namespace-uri>
+    <default-prefix>sk</default-prefix>
   </faces-config-extension>
     
 </faces-config>

@@ -23,6 +23,6 @@
 
 	<virtual-host name="default_host" />
 
-	<resource-ref name="url/FacesConfigXml" binding-name="url/FacesConfigXml" />
+	<resource-ref name="url/ManagedBeansXml" binding-name="url/ManagedBeansXml" />
 	<resource-ref name="url/SbtProperties" binding-name="url/SbtProperties" />
 </web-bnd>

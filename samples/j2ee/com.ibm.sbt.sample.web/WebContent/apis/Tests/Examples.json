@@ -14,7 +14,7 @@
 	"queryParameters": [
 		{ "name": "param1", "optional":true,  "description":"Simple Parameter" },
 		{ "name": "param2", "optional":false, "description":"Simple Parameter, required" },
-		{ "name": "param3", "optional":true,  "description":"Simple Parameter, regexp validation", "validexpr": "[a-z]*" },
+		{ "name": "param3", "optional":true,  "description":"Simple Parameter, regexp validation [a-z]*", "regexp": "[a-z]*" },
 		{ "name": "param4", "optional":true,  "description":"Simple 'string' parameter", "type":"string" },
 		{ "name": "param5", "optional":true,  "description":"Simple 'int' parameter", "type":"int" },
 		{ "name": "param6", "optional":true,  "description":"Simple parameter with default value", "value":"Default Value" },

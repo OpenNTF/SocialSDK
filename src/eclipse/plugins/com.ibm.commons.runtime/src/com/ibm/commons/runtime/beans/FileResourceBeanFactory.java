@@ -32,7 +32,7 @@ import com.ibm.commons.util.StringUtil;
  */
 public class FileResourceBeanFactory extends AbstractXmlConfigBeanFactory {
 
-	public static final String DEFAULT_RESOURCENAME =  EnvironmentConfig.INSTANCE.getEnvironmentConfig();
+	public static final String DEFAULT_RESOURCENAME =  EnvironmentConfig.INSTANCE.getEnvironmentConfigFile();
 
 
 	public FileResourceBeanFactory() {

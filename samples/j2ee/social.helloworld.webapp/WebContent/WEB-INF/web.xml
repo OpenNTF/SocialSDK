@@ -45,7 +45,7 @@
 			
    	<resource-ref>
         <description>Reference to a URL resource which points to the managed bean configuration for the Social Business Toolkit.</description>
-        <res-ref-name>url/ManagedBeansXml</res-ref-name>
+        <res-ref-name>url/ibmsbt-managedbeansxml</res-ref-name>
         <res-type>java.net.URL</res-type>
         <res-auth>Container</res-auth>
         <res-sharing-scope>Shareable</res-sharing-scope>
@@ -53,7 +53,7 @@
 			
    	<resource-ref>
         <description>Reference to a URL resource which points to the configuration properties for the Social Business Toolkit.</description>
-        <res-ref-name>url/SbtProperties</res-ref-name>
+        <res-ref-name>url/ibmsbt-sbtproperties</res-ref-name>
         <res-type>java.net.URL</res-type>
         <res-auth>Container</res-auth>
         <res-sharing-scope>Shareable</res-sharing-scope>

@@ -12,14 +12,14 @@
 	"http_method": "get",
 	"uri": "/profiles/atom/profileService.do",
 	"queryParameters": [
-		{ "name": "param1", "optional":"true",  "description":"Simple Parameter" },
-		{ "name": "param2", "optional":"false", "description":"Simple Parameter, required" },
-		{ "name": "param3", "optional":"true",  "description":"Simple Parameter, regexp validation", "validexpr": "[a-z]*" },
-		{ "name": "param4", "optional":"true",  "description":"Simple 'string' parameter", "type":"string" },
-		{ "name": "param5", "optional":"true",  "description":"Simple 'int' parameter", "type":"int" },
-		{ "name": "param6", "optional":"true",  "description":"Simple parameter with default value", "value":"Default Value" },
-		{ "name": "param7", "optional":"true",  "description":"Simple Parameter" },
-		{ "name": "param8", "optional":"true",  "description":"Simple parameter with a list of values", "values":["Choice1","Choice2","Choice3"] }
+		{ "name": "param1", "optional":true,  "description":"Simple Parameter" },
+		{ "name": "param2", "optional":false, "description":"Simple Parameter, required" },
+		{ "name": "param3", "optional":true,  "description":"Simple Parameter, regexp validation", "validexpr": "[a-z]*" },
+		{ "name": "param4", "optional":true,  "description":"Simple 'string' parameter", "type":"string" },
+		{ "name": "param5", "optional":true,  "description":"Simple 'int' parameter", "type":"int" },
+		{ "name": "param6", "optional":true,  "description":"Simple parameter with default value", "value":"Default Value" },
+		{ "name": "param7", "optional":true,  "description":"Simple Parameter" },
+		{ "name": "param8", "optional":true,  "description":"Simple parameter with a list of values", "values":["Choice1","Choice2","Choice3"] }
 	],
 	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Retrieving_the_Profiles_service_document_ic301"
 }]

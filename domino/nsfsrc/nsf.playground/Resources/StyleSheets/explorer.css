@@ -33,6 +33,7 @@ div.explorer_summary:hover,div.explorer_summary:active {
 
 div.explorer_sum_title, h4.lotusTitle {
    display: inline;
+   font-weight: bold;
 }
 
 div.explorer_sum_help_button {
@@ -60,6 +61,10 @@ div.explorer_details {
 
 .explorer_detailsTable td {
 	margin-left: 0; /* Fix .xspColumn */
+}
+
+div.explorer_results {
+	margin-top: 8px;
 }
 
 .bodyLabel {

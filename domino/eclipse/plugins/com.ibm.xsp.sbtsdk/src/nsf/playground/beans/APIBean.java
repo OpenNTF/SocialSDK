@@ -16,6 +16,7 @@ import com.ibm.jscript.JSContext;
 import com.ibm.jscript.json.JsonJavaScriptFactory;
 import com.ibm.jscript.std.ArrayObject;
 import com.ibm.jscript.std.ObjectObject;
+import com.ibm.jscript.types.FBSBoolean;
 import com.ibm.jscript.types.FBSNull;
 import com.ibm.jscript.types.FBSString;
 import com.ibm.jscript.types.FBSUtility;
@@ -149,13 +150,14 @@ public class APIBean extends AssetBean {
 			break;
 		} while(true);
 	}
-	private void addParam(ArrayObject a, FBSValue name, FBSValue value, FBSValue type, FBSValue description) throws Exception {
+	private ObjectObject addParam(ArrayObject a, FBSValue name, FBSValue value, FBSValue type, FBSValue description) throws Exception {
 		ObjectObject o = new ObjectObject();
 		o.put("name",name);
 		o.put("value",value);
 		o.put("type",type);
 		o.put("description",description);
         a.addArrayValue(o);
+        return o;
 	}
 	
 	
@@ -178,7 +180,8 @@ public class APIBean extends AssetBean {
 		}
 
 		// Add a pseudo query string parameter
-		addParam(a, FBSString.get("query-string"), FBSString.emptyString, FBSUtility.wrap("string"), FBSUtility.wrap("Extra query string parameters"));
+		ObjectObject qs = addParam(a, FBSString.get("query-string"), FBSString.emptyString, FBSUtility.wrap("string"), FBSUtility.wrap("Extra query string parameters"));
+		qs.put("optional", FBSBoolean.TRUE);
 		
 		return a;
 	}

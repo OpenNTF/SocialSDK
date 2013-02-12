@@ -1,6 +1,3 @@
-/**
- * Update the label in the toolbat 
- */
 function updateLabel(id) {
 	var tt = dojo.byId("CurrentLabel");
 	if(tt) {
@@ -49,13 +46,31 @@ function collapseSection(id) {
 }
 
 function executeService(params,details,results) {
-	require(['dojo/_base/lang','dojo/io-query','dojo/query','sbt/Endpoint'], function(lang,ioQuery,query,Endpoint) {
+	require(['dojo/_base/lang','dojo/_base/array','dojo/io-query','dojo/query','dijit/registry','sbt/Endpoint'], function(lang,array,ioQuery,query,registry,Endpoint) {
 		function paramValue(name) {
 			var n = query("[data-param=\""+name+"\"]",details);
 			if(n.length>0) {
 				return n[0].value;
 			}
 			return null;
+		}
+		function validate(){
+			// See dijit.form._FormMixin
+			var didFocus = false;
+			return dojo.every(dojo.map(registry.findWidgets(dojo.byId(details)), function(widget){
+				widget._hasBeenBlurred = true;
+				var valid = widget.disabled || !widget.validate || widget.validate();
+				if(!valid && !didFocus){
+					dojo.window.scrollIntoView(widget.containerNode || widget.domNode);
+					widget.focus();
+					didFocus = true;
+				}
+				return valid;
+			}), function(item){ return item; });
+		}
+		if(!validate()) {
+			updatePanelError(results,"Invalid parameters - Please check the input fields");
+			return;
 		}
 		var item = params.item;
 		if(!params['endpoint']) {
@@ -111,11 +126,12 @@ function executeService(params,details,results) {
 		var args = {
 			serviceUrl : uri,
 			handleAs : "text",
+			loginUi: "popup",
 	    	load : function(response,ioArgs) {
-	    		updatePanel(results,200,"",response,ioArgs);
+	    		updatePanel(results,ep.baseUrl+this.serviceUrl,200,"",response,ioArgs);
 	    	},
 	    	error : function(error,ioArgs) {
-	    		updatePanel(results,"","",error,ioArgs);
+	    		updatePanel(results,ep.baseUrl+this.serviceUrl,error.code,"",error.message,ioArgs);
 	    	}
 		};
 		var body = null;
@@ -123,30 +139,54 @@ function executeService(params,details,results) {
 	});
 }
 
-function updatePanel(id,code,headers,body,ioArgs) {
-	updateResponse(id,code,headers,prettify(body.trim(),ioArgs));
+function updatePanel(id,url,code,headers,body,ioArgs) {
+	updateResponse(id,{url:url,status:code,headers:headers,body:prettify(body,ioArgs)});
 }
 
-function updatePanelError(id,error,ioArgs) {
-	updateResponse(id,ioArgs.xhr.status,"","Error\n"+error);
+function updatePanelError(id,error) {
+	updateResponse(id,{status:"Not Executed",body:error});
 }
 
 function clearResultsPanel(id,code,headers,body) {
-	updateResponse(id,"","","");
+	updateResponse(id,{});
 }
 
-function updateResponse(id,code,headers,body,ioArgs) {
+function updateResponse(id,content) {
 	require(['dojo/query','sbt/dom'], function(query,dom) {
-		dom.setText(query(".respCode",id)[0],code);
-		dom.setText(query(".respHeader",id)[0],headers);
-		dom.setText(query(".respBody",id)[0],body);
+		function update(clazz,value) {
+			var pnl = query(clazz+"Panel",id)[0];
+			var comp = query(clazz,id)[0];
+			if(value) {
+				dojo.style(pnl,"display","");
+				dom.setText(comp,value);
+				return comp;
+			} else {
+				dojo.style(pnl,"display","none");
+				dom.setText(comp,"");
+				return null;
+			}
+		}
+		update(".respUrl",content.url);
+		var stat = update(".respCode",content.status);
+		if(stat) {
+			dojo.style(stat,"color",content.status!=200?"red":"black");
+		}
+		update(".respHeaders",content.headers);
+		update(".respBody",content.body);
 	});
 }
 
 function prettify(s,ioArgs) {
 	try {
+		if(!s) {
+			return s;
+		}
+		s = s.trim();
 		// Check for XML result
 		if(s.indexOf("<?xml")==0) {
+			return prettifyXml(s);
+		}
+		if(s.indexOf("<html")==0) {
 			return prettifyXml(s);
 		}
 		// Check for Json result
@@ -207,6 +247,10 @@ function prettifyXml(xml) {
     }
 
     return formatted;
+}
+
+function prettifyHtml(html) {
+	return prettifyXml(html);
 }
 
 function prettifyJson(json) {

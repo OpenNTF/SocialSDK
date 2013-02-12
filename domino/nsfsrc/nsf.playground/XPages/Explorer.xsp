@@ -6,6 +6,7 @@
 		<xp:styleSheet href="/explorer.css"></xp:styleSheet>
 		<xp:script src="/explorer.js" clientSide="true"></xp:script>
 		<xp:dojoModule name="dojo.hash"></xp:dojoModule>
+		<xp:dojoModule name="dijit.form.ValidationTextBox"></xp:dojoModule>
 		<xp:dojoModule name="dojo.fx"></xp:dojoModule>
 		<!--
 			<xp:script
@@ -76,64 +77,48 @@ return apiBean.loadAPI(e);
 								<xp:repeat id="repeat1" var="item"
 									value="#{javascript:return apis.items;}">
 
-									<xp:text escape="true"
-										id="computedField2" value="#{javascript:toJson(item)}"
+									<xp:text escape="true" id="computedField2" value="#{javascript:toJson(item)}"
 										loaded="false">
 									</xp:text>
 									<br />
-									<xp:div
-										styleClass="explorer_summary">
-										<xp:link id="link3"
-											styleClass="apiheader"
+									<xp:div styleClass="explorer_summary">
+										<xp:link id="link3" styleClass="apiheader"
 											onclick="toggleSection('#{id:expDetails}')">
-											<xp:table
-												styleClass="lotusTable" style="width:100%">
+											<xp:table styleClass="lotusTable" style="width:100%">
 												<xp:tr>
-													<xp:td
-														styleClass="explorer_col1">
-														<xe:multiImage
-															id="multiImage1"
+													<xp:td styleClass="explorer_col1">
+														<xe:multiImage id="multiImage1"
 															value='#{javascript:item.http_method}'>
 															<xe:this.icons>
-																<xe:iconEntry
-																	url="/explorer_get.png" selectedValue="get"
-																	alt="GET method">
+																<xe:iconEntry url="/explorer_get.png"
+																	selectedValue="get" alt="GET method">
 																</xe:iconEntry>
-																<xe:iconEntry
-																	url="/explorer_put.png" selectedValue="put"
-																	alt="PUT method">
+																<xe:iconEntry url="/explorer_put.png"
+																	selectedValue="put" alt="PUT method">
 																</xe:iconEntry>
-																<xe:iconEntry
-																	url="/explorer_post.png" selectedValue="post"
-																	alt="POST method">
+																<xe:iconEntry url="/explorer_post.png"
+																	selectedValue="post" alt="POST method">
 																</xe:iconEntry>
-																<xe:iconEntry
-																	url="/explorer_delete.png" selectedValue="delete"
-																	alt="DELETE method">
+																<xe:iconEntry url="/explorer_delete.png"
+																	selectedValue="delete" alt="DELETE method">
 																</xe:iconEntry>
 															</xe:this.icons>
 														</xe:multiImage>
 													</xp:td>
-													<xp:td
-														styleClass="explorer_col3">
-														<xp:div
-															styleClass="explorer_sum_title">
-															<h4
-																class="lotusTitle">
-																<xp:text
-																	value="#{javascript:item.name}" escape="true"
-																	id="computedField6">
+													<xp:td styleClass="explorer_col3">
+														<xp:div styleClass="explorer_sum_title">
+															<h4 class="lotusTitle">
+																<xp:text value="#{javascript:item.name}" escape="true"
+																	id="computedField6" disableTheme="true">
 																</xp:text>
 															</h4>
 															<p>
-																<xp:text
-																	escape="true" id="computedField1"
-																	value="#{javascript:item.description}">
+																<xp:text escape="true" id="computedField1"
+																	value="#{javascript:item.description}" disableTheme="true">
 																</xp:text>
 															</p>
 															<p>
-																<xp:text
-																	escape="true" id="computedField7"
+																<xp:text escape="true" id="computedField7"
 																	value="#{javascript:item.uri}">
 																</xp:text>
 															</p>
@@ -142,70 +127,61 @@ return apiBean.loadAPI(e);
 												</xp:tr>
 											</xp:table>
 										</xp:link>
-										<xp:panel id="expDetails"
-											styleClass="explorer_details" style="display:none">
+										<xp:panel id="expDetails" styleClass="explorer_details"
+											style="display:none">
 											<xp:this.dataContexts>
-												<xp:dataContext
-													value="#{javascript:apiBean.loadParameters(item)}"
+												<xp:dataContext value="#{javascript:apiBean.loadParameters(item)}"
 													var="items">
 												</xp:dataContext>
 											</xp:this.dataContexts>
-											<xp:dataTable
-												id="dataTable1" styleClass="explorer_detailsTable"
+											<xp:dataTable id="dataTable1" styleClass="explorer_detailsTable"
 												value="#{javascript:items}" var="p"
 												rendered="#{javascript:items.length>0}">
-												<xp:column id="column1"
-													style="width: 8em">
+												<xp:column id="column1" style="width: 8em">
 													<xp:this.facets>
-														<xp:span
-															xp:key="header">
+														<xp:span xp:key="header">
 															Name
 														</xp:span>
 													</xp:this.facets>
-													<xp:text
-														escape="true" id="computedField3" value="#{p.name}">
+													<xp:text escape="true" id="computedField3" value="#{p.name}">
 													</xp:text>
 												</xp:column>
-												<xp:column id="column2"
-													style="width: 12em">
+												<xp:column id="column2">
 													<xp:this.facets>
-														<xp:span
-															xp:key="header">
+														<xp:span xp:key="header">
 															Value
 														</xp:span>
 													</xp:this.facets>
-													<xp:inputText
-														value="#{p.value}" id="inputText1" size="40">
+													<xp:inputText dojoType="dijit/form/ValidationTextBox"
+														id="inputText1" size="40">
 														<xp:this.attrs>
-															<xp:attr
-																name="data-param" value="#{p.name}">
+															<xp:attr name="data-param" value="#{p.name}">
 															</xp:attr>
 														</xp:this.attrs>
+														<xp:this.dojoAttributes>
+															<xp:dojoAttribute name="required"
+																value="#{javascript:p.optional!=true}">
+															</xp:dojoAttribute>
+														</xp:this.dojoAttributes>
 													</xp:inputText>
+													<xp:span rendered="#{p.optional!=true}">*</xp:span>
 												</xp:column>
-												<xp:column id="column3"
-													style="width: 6em">
+												<xp:column id="column3" style="width: 6em">
 													<xp:this.facets>
-														<xp:span
-															xp:key="header">
+														<xp:span xp:key="header">
 															Type
 														</xp:span>
 													</xp:this.facets>
-													<xp:text
-														escape="true" id="computedField4" value="#{p.type}">
+													<xp:text escape="true" id="computedField4" value="#{p.type}">
 													</xp:text>
 												</xp:column>
-												<xp:column
-													id="column4">
+												<xp:column id="column4">
 													<xp:this.facets>
-														<xp:span
-															xp:key="header">
+														<xp:span xp:key="header">
 															Description
 														</xp:span>
 													</xp:this.facets>
-													<xp:text
-														escape="true" id="computedField5"
-														value="#{p.description}">
+													<xp:text escape="true" id="computedField5" value="#{p.description}">
 													</xp:text>
 												</xp:column>
 											</xp:dataTable>
@@ -214,49 +190,63 @@ return apiBean.loadAPI(e);
 												style="width: 100%">
 												<xp:tr>
 													<xp:td>
-														<xp:label
-															value="Body:" id="label1" style="font-weight:bold">
+														<xp:label value="Body:" id="label1" style="font-weight:bold">
 														</xp:label>
 													</xp:td>
 												</xp:tr>
 												<xp:tr>
 													<xp:td>
-														<xp:inputTextarea
-															id="inputTextarea1" rows="8" style="width: 100%">
+														<xp:inputTextarea id="inputTextarea1"
+															rows="8" style="width: 100%">
 														</xp:inputTextarea>
 													</xp:td>
 												</xp:tr>
 											</xp:table>
 											<xp:div id="div1">
-												<xp:button
-													value="Execute"
-													style="margin-top: 5px; margin-top: 5px; padding: -5px"
-													id="button1">
-													<xp:this.onclick><![CDATA[expandSection('#{id:expResults}');
-var p = {endpoint: '#{javascript:apis.endpoint}',item: #{javascript:toJson(item)} }
+												<xp:button value="Execute"
+													style="margin-top: 5px; margin-top: 5px; padding: -5px" id="button1">
+													<xp:this.onclick><![CDATA[var p = {endpoint: '#{javascript:apis.endpoint}',item: #{javascript:toJson(item)} }
 executeService(p,'#{id:expDetails}','#{id:expResults}');]]></xp:this.onclick>
 												</xp:button>
-												<xp:link escape="true"
-													text="Clear Results" id="link2"
+												<xp:link escape="true" text="Clear Results" id="link2"
 													onclick="clearResultsPanel('#{id:expResults}');">
 												</xp:link>
 											</xp:div>
-											<xp:div id="expResults"
-												styleClass="explorer_results" style="display:none">
-												<div class="prelabel">
-													Response Code
+											<xp:div id="expResults" styleClass="explorer_results">
+												<table>
+													<tr class="respUrlPanel" style="display:none">
+														<td>
+															<span class="prelabel">
+																URL
+														</span>
+														</td>
+														<td>
+															<span class="respUrl"></span>
+														</td>
+													</tr>
+													<tr class="respCodePanel" style="display:none">
+														<td>
+															<span class="prelabel">
+																Status Code
+												</span>
+														</td>
+														<td>
+															<span class="respCode"></span>
+														</td>
+													</tr>
+												</table>
+												<div class="respHeadersPanel" style="display:none">
+													<div class="prelabel" style="display: none">
+														Headers
 												</div>
-												<span class="respCode"></span>
-												<div class="prelabel">
-													Headers
+													<pre class="respHeader" style="display: none"></pre>
 												</div>
-												<pre
-													class="respHeader">
-												</pre>
-												<div class="prelabel">
-													Response
+												<div class="respBodyPanel" style="display:none">
+													<div class="prelabel">
+														Response
 												</div>
-												<pre class="respBody"></pre>
+													<pre class="respBody"></pre>
+												</div>
 											</xp:div>
 										</xp:panel>
 									</xp:div>

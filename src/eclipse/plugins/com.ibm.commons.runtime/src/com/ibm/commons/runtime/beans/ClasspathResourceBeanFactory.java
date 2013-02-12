@@ -31,7 +31,7 @@ import com.ibm.commons.util.StringUtil;
  */
 public abstract class ClasspathResourceBeanFactory extends AbstractXmlConfigBeanFactory {
 
-	public static final String DEFAULT_RESOURCENAME = EnvironmentConfig.INSTANCE.getEnvironmentConfig();
+	public static final String DEFAULT_RESOURCENAME = EnvironmentConfig.INSTANCE.getEnvironmentConfigFile();
 	
 	
 	public ClasspathResourceBeanFactory() {

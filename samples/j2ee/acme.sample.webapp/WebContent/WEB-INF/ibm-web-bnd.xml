@@ -23,6 +23,6 @@
 
 	<virtual-host name="default_host" />
 
-	<resource-ref name="url/ManagedBeansXml" binding-name="url/ManagedBeansXml" />
-	<resource-ref name="url/SbtProperties" binding-name="url/SbtProperties" />
+	<resource-ref name="url/ibmsbt-managedbeansxml" binding-name="url/ibmsbt-managedbeansxml" />
+	<resource-ref name="url/ibmsbt-sbtproperties" binding-name="url/ibmsbt-sbtproperties" />
 </web-bnd>

@@ -5,9 +5,14 @@ public enum EnvironmentConfig {
 	INSTANCE;
 	
 	private final String configfile = "managed-beans.xml";
+	private final String configUrl = "url/ibmsbt-managedbeansxml";
 	
-	public String getEnvironmentConfig(){
+	public String getEnvironmentConfigFile(){
 		return configfile;
+	}
+	
+	public String getEnvironmentConfigUrl(){
+		return configUrl;
 	}
 
 }

@@ -1,0 +1,25 @@
+[{
+	"name": "example1",
+	"description": "Example 1, with no parameters",
+	"http_method": "get",
+	"uri": "/profiles/atom/profileService.do",
+	"queryParameters": [],
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Retrieving_the_Profiles_service_document_ic301"
+},
+{
+	"name": "example2",
+	"description": "Example 2, with no parameters",
+	"http_method": "get",
+	"uri": "/profiles/atom/profileService.do",
+	"queryParameters": [
+		{ "name": "param1", "optional":"false", "desc":"Simple Parameter" },
+		{ "name": "param1", "optional":"true",  "desc":"Simple Parameter, required" },
+		{ "name": "param1", "optional":"false", "desc":"Simple Parameter, regexp validation", "validexpr": "[a-z]*" },
+		{ "name": "param4", "optional":"false", "desc":"Simple 'string' parameter", "type":"string" },
+		{ "name": "param5", "optional":"false", "desc":"Simple 'int' parameter", "type":"int" },
+		{ "name": "param2", "optional":"false", "desc":"Simple parameter with default value", "value":"Default Value" },
+		{ "name": "param1", "optional":"false", "desc":"Simple Parameter" },
+		{ "name": "param3", "optional":"false", "desc":"Simple parameter with a list of values", "values":["Choice1","Choice2","Choice3"] }
+	],
+	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Retrieving_the_Profiles_service_document_ic301"
+}]

@@ -138,6 +138,7 @@ public class ParameterProcessor {
 					// process the parameter
 					String parameter = input.substring(start+delimStart.length(), paramEnd);
 					String replace = processParameter(parameter, provider);
+                    replace = StringUtil.trim(replace);
 					output.append(replace!=null?replace:""); // avoid 'null' string
 	
 					index = paramEnd + delimEnd.length();

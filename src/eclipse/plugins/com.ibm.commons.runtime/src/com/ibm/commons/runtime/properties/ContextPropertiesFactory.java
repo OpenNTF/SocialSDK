@@ -98,7 +98,7 @@ public class ContextPropertiesFactory extends AbstractPropertiesFactory {
 	 */
 	private Properties readPropertiesFromUrl(Context envCtx) {
 		try {
-			URL url = (URL)envCtx.lookup("url/SbtProperties"); //$NON-NLS-1$
+			URL url = (URL)envCtx.lookup(EnvironmentConfig.INSTANCE.getSbtPropertiesFileConfig()); //$NON-NLS-1$
 			if (url != null) {
 				if (logger.isLoggable(Level.FINER)) {
 					logger.finer("Reading context properties from: " + url);
@@ -117,11 +117,11 @@ public class ContextPropertiesFactory extends AbstractPropertiesFactory {
 			}
 		} catch (Exception e) {
 			if (causeByNameNotFound(e)) {
-				// can ignore this, just means the url/SbtProperties has not be defined
-				logger.finer("Resource url/SbtProperties is not available");
+				// can ignore this, just means the url/ibmsbt-sbtproperties has not be defined
+				logger.log(Level.FINER, "Resource {0} is not available", EnvironmentConfig.INSTANCE.getSbtPropertiesFileConfig());
 			}
 			else {
-				logger.log(Level.SEVERE, "Error reading context properties from url/SbtProperties", e);
+				logger.log(Level.SEVERE, "Error reading context properties from " + EnvironmentConfig.INSTANCE.getSbtPropertiesFileConfig(), e);
 			}
 		}
 		return null;

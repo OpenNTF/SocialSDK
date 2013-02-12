@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import nsf.playground.jobs.ImportAssetAction;
 import nsf.playground.snippets.AssetImporter;
-import nsf.playground.snippets.SnippetImporter;
 
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 

@@ -17,15 +17,12 @@
 package com.ibm.xsp.sbtsdk.runtime;
 
 import java.io.InputStream;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 
-import com.ibm.commons.extension.ExtensionManager;
-import com.ibm.commons.runtime.Application;
 import com.ibm.commons.runtime.impl.servlet.ApplicationServlet;
 import com.ibm.xsp.application.ApplicationEx;
 import com.ibm.xsp.extlib.util.ExtLibUtil;

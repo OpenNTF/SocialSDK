@@ -1,5 +1,7 @@
 package nsf.playground.beans;
 
+import com.ibm.xsp.model.domino.DominoUtils;
+
 
 /**
  * Bean used to drive the options used by the application.
@@ -14,6 +16,8 @@ public class OptionsBean {
 	private boolean explorerEnabled;
 	
 	public OptionsBean() {
+		this.playgroundEnabled = true;
+		this.explorerEnabled = DominoUtils.getEnvironmentInt("APIExplorer")!=0;
 	}
 
 	public boolean isPlaygroundEnabled() {

@@ -43,7 +43,7 @@
 
     <!-- Configures the location of a sbt.proeprties file which 
          contains the configuration proeprties for use with the Social Business Toolkit -->
-    <Resource name="url/SbtProperties" auth="Container" type="java.net.URL" 
+    <Resource name="url/ibmsbt-sbtproperties" auth="Container" type="java.net.URL" 
 		factory="com.ibm.commons.runtime.naming.UrlFactory" url="sbt.properties" />
 
     <!-- Configures the mail session for the SDK, by default this uses the IBM Developer QuickStart Image -->

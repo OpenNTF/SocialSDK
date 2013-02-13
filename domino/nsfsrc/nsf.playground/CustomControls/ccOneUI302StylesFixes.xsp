@@ -13,5 +13,10 @@
 		.CodeMirror { font-size: 10pt; width: 100%; height: 100%; }
 		.CodeMirror-scroll { width: 100%;height:100%; }
 		.lotusui30dojo .dijitToolbar { background: transparent; border: none; }
+		/* fix the banner that is too big... */
+		.lotusui30 .lotusBanner ul li a { padding: 8px 16px 8px; }
+		.lotusui30 .lotusBanner ul.lotusUtility li a { padding: 8px 16px 8px; }	
+		.lotusui30 .lotusPlaceBar .lotusInner { padding: 8px 0; }
+		.lotusui30 .lotusTitleBar2 .lotusNavTabs {padding-top: 5px;}		
 	</style>
 </xp:view>

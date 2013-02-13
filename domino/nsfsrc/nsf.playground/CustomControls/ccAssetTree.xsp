@@ -54,6 +54,13 @@ return true;]]></xp:this.onkeypress>
 	var assetsData = #{javascript:switch(compositeData.type){case "snippet": return snippetBean.getSnippetsAsJson(); case "api": return apiBean.getSnippetsAsJson();} return "";};	var assetsStore = new dojo.data.ItemFileReadStore({data:{identifier:'id',label:'name',items:assetsData}});
 	var assetsModel = new dijit.tree.TreeStoreModel({		store: assetsStore	});
 	var navTree = new dijit.Tree({model: assetsModel, showRoot: false }, "#{id:assetsTree}");
+	dojo.connect(navTree,"onLoad",function() {
+		if(!window.navTreeLoaded) {
+			window.navTreeLoaded = true;
+			console.log("clear selection");
+			treeClearSelection(navTree);
+		}
+	});
 	navTree.onClick = function(item){
 		if(item.url) {
 			dojo.hash("#{javascript:compositeData.type}="+item.jspUrl);

@@ -1,3 +1,13 @@
+dojo.declare("ValidationTextarea", [dijit.form.ValidationTextBox,dijit.form.SimpleTextarea], {
+	invalidMessage: "This value is required",
+	validate: function() {
+    	var v = this.inherited(arguments);
+    	if(!v) {
+    		this.displayMessage(this.getErrorMessage());
+    	}
+    }
+});
+
 function updateLabel(id) {
 	var tt = dojo.byId("CurrentLabel");
 	if(tt) {

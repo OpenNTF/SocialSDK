@@ -19,9 +19,9 @@
  * @module sbt.smartcloud.FileService
  */
 define([ 'sbt/_bridge/declare', 'sbt/config', 'sbt/lang', 'sbt/smartcloud/core', 'sbt/xml', 'sbt/xpath', 'sbt/Cache', 'sbt/Endpoint',
-		'sbt/smartcloud/FileConstants', 'sbt/smartcloud/Subscriber', 'sbt/base/BaseService', 'sbt/log', 'sbt/stringutil', 'sbt/validate' ], function(declare, cfg, lang, con,
-		xml, xpath, Cache, Endpoint, FileConstants, Subscriber, BaseService, log, stringutil, validate) {
-	
+		'sbt/smartcloud/FileConstants', 'sbt/smartcloud/Subscriber', 'sbt/base/BaseService', 'sbt/log', 'sbt/stringutil', 'sbt/validate' ], function(declare,
+		cfg, lang, con, xml, xpath, Cache, Endpoint, FileConstants, Subscriber, BaseService, log, stringutil, validate) {
+
 	function notifyCbNoCache(args, param) {
 
 		if (args) {
@@ -512,13 +512,25 @@ define([ 'sbt/_bridge/declare', 'sbt/config', 'sbt/lang', 'sbt/smartcloud/core',
 			var options = _options || {};
 			this._endpointName = options.endpoint || "smartcloud";
 			options = lang.mixin({
-				endpoint :this._endpointName,
+				endpoint : this._endpointName,
 				Constants : FileConstants,
 				con : con,
 				cachingEnabled : false
 			});
 			this.inherited(arguments, [ options ]);
-		},		
+		},
+
+		_constructPayloadForUpdate : function(fileTitle, propertiesMap) {
+			var payload = "<entry xmlns=\"http://www.w3.org/2005/Atom\"> <title type='text'>" + fileTitle + "</title><cmisra:object> <cmis:properties> ";
+			for ( var property in propertiesMap) {
+				var propertyType = FileConstants.fileUpdateProperties[property];
+				var value = propertiesMap[property];
+				payload += "<cmis:property" + propertyType + " propertyDefinitionId='snx:" + property + "'> <cmis:value>" + value
+						+ "</cmis:value>  </cmis:property" + propertyType + ">";
+			}
+			payload += "</cmis:properties> </cmisra:object> </entry>";
+			return payload;			
+		},
 
 		_getForURLQuery : function(filterList) {
 			// adding mandatory fields as per documentation
@@ -627,6 +639,9 @@ define([ 'sbt/_bridge/declare', 'sbt/config', 'sbt/lang', 'sbt/smartcloud/core',
 		 * @param {Object} [args.filter = null] optional additional filters
 		 */
 		getMyFilesWithPagination : function getMyFiles(args) {
+			if (!validate._validateInputTypeAndNotify("FileService", "getMyFilesWithPagination", "args", args, 'object', args)) {
+				return;
+			}
 			var _self = this;
 			if (!this._subscriberId) {
 				var subscriber = new Subscriber(this._endpoint);
@@ -676,6 +691,9 @@ define([ 'sbt/_bridge/declare', 'sbt/config', 'sbt/lang', 'sbt/smartcloud/core',
 		 * @param {Object} [args.parameters] The additional parameters like pageSize etc.
 		 */
 		getFileEntry : function readFileEntry(args) {
+			if (!validate._validateInputTypeAndNotify("FileService", "getFileComments", "File", file, "sbt.connections.FileEntry", args)) {
+				return;
+			}
 			var _self = this;
 			if (!this._subscriberId) {
 				var subscriber = new Subscriber(this._endpoint);
@@ -731,7 +749,7 @@ define([ 'sbt/_bridge/declare', 'sbt/config', 'sbt/lang', 'sbt/smartcloud/core',
 						var fileControl = document.getElementById(args.fileLocation);
 						var files = fileControl.files;
 						var filePath = fileControl.value;
-						var reader = new FileReader();						
+						var reader = new FileReader();
 						reader.onload = function(event) {
 							var binaryContent = event.target.result;
 							var url = _self._constructServiceUrl({
@@ -749,7 +767,17 @@ define([ 'sbt/_bridge/declare', 'sbt/config', 'sbt/lang', 'sbt/smartcloud/core',
 								index = filePath.lastIndexOf("/");
 							}
 							headers["Slug"] = filePath.substring(index + 1);
-							_self._executePostForFiles(args, url, headers, binaryContent);
+							_self._endpoint.xhrPost({
+								url : url,
+								postData : binaryContent,
+								headers : headers,
+								load : function(data) {
+									notifyCbNoCache(args, "SUCCESS");
+								},
+								error : function(error) {
+									validate.notifyError(error, args);
+								}
+							});
 						};
 						reader.onerror = function(event) {
 							validate.notifyError(error, args);
@@ -759,22 +787,45 @@ define([ 'sbt/_bridge/declare', 'sbt/config', 'sbt/lang', 'sbt/smartcloud/core',
 				});
 			}
 		},
-		updateFile : function(args){
-			
-		},
-		_executePostForFiles : function(args, url, headers, payload) {
+		updateFile : function(args) {
 			var _self = this;
-			this._endpoint.xhrPostForFileProxy({
-				serviceUrl : url,
-				postData : payload,
-				headers : headers,
-				load : function(data) {
-					notifyCbNoCache(args, "SUCCESS");
-				},
-				error : function(error) {
-					validate.notifyError(error, args);
-				}
-			});
+			if (!this._subscriberId) {
+				var subscriber = new Subscriber(this._endpoint);
+				subscriber.load(function(subscriber, response) {
+					if (subscriber) {
+						_self._subscriberId = subscriber.getSubscriberId(response);
+						_self._getOne({
+							load : function(file) {
+								var updatePayload = _self._constructPayloadForUpdate(file.getName(), args.updateProperties);
+								_self._updateEntity(args, {
+									xmlPayload : updatePayload,
+									entityName : "File",
+									serviceEntity : "ENTRY",
+									entityType : "UPDATE_FILE",
+									replaceArgs : {
+										subscriberId : _self._subscriberId,
+										fileId : args.id
+									},
+									entity : FileEntry
+								});
+
+							},
+							error : function(error) {
+								validate.notifyError(error, args);
+							}
+						}, {
+							entityName : "File",
+							serviceEntity : "ENTRY",
+							entityType : "GET_FILE_ENTRY",
+							replaceArgs : {
+								subscriberId : _self._subscriberId,
+								fileId : args.id
+							},
+							entity : FileEntry,
+						});
+					}
+				});
+			}
 
 		}
 	});

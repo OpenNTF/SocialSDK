@@ -15,9 +15,45 @@
  */
 
 /**
- * Social Business Toolkit SDK.
- * @module nls
+ * Social Business Toolkit SDK - Default resource bundle for ProfileService
  */
-define(['dojo/i18n!sbt/nls/resources'],function(resources) {
-	return resources;
+
+
+define({
+  root: ({
+	  invalid_argument : "Invalid Argument"
+  }),
+
+  "zh": true,
+  "zh-tw": true,
+  "tr": true,
+  "th": true,
+  "sv": true,
+  "sl": true,
+  "sk": true,
+  "ru": true,
+  "ro": true,
+  "pt": true,
+  "pt-pt": true,
+  "pl": true,
+  "nl": true,
+  "nb": true,
+  "ko": true,
+  "kk": true,
+  "ja": true,
+  "it": true,
+  "hu": true,
+  "hr": true,
+  "he": true,
+  "fr": true,
+  "fi": true,
+  "es": true,
+  "el": true,
+  "de": true,
+  "da": true,
+  "cs": true,
+  "ca": true,
+  "az": true,
+  "ar": true
+  
 });

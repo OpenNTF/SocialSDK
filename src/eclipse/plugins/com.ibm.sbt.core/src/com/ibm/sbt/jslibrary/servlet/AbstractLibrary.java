@@ -26,8 +26,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
+
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.util.PathUtil;
 import com.ibm.commons.util.StringUtil;
@@ -91,7 +93,6 @@ abstract public class AbstractLibrary {
 	public static final String		MODULE_DELCARE				= "sbt/_bridge/declare";
 	public static final String		MODULE_IFRAMETRANSPORT		= "sbt/_bridge/IFrameTransport";
 	public static final String		MODULE_TRANSPORT			= "sbt/_bridge/Transport";
-    public static final String 		MODULE_REQUESTTRANSPORT 	= "sbt/_bridge/RequestTransport";
 	public static final String		MODULE_ERROR_TRANSPORT		= "sbt/ErrorTransport";
 	public static final String		MODULE_GADGET_TRANSPORT		= "sbt/GadgetTransport";
 	public static final String		MODULE_CACHE				= "sbt/Cache";

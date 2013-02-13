@@ -22,9 +22,11 @@ import com.ibm.sbt.security.authentication.oauth.consumer.oauth_10a.servlet.OA2C
 import com.ibm.sbt.security.authentication.oauth.consumer.oauth_10a.servlet.OACallback;
 import com.ibm.sbt.security.authentication.oauth.consumer.oauth_10a.servlet.OAClientAuthentication;
 import com.ibm.sbt.service.core.handlers.BasicAuthCredsHandler;
+import com.ibm.sbt.service.core.handlers.ConnectionsFileHandler;
 import com.ibm.sbt.service.core.handlers.EmailHandler;
 import com.ibm.sbt.service.core.handlers.PingHandler;
 import com.ibm.sbt.service.core.handlers.ProxyHandler;
+import com.ibm.sbt.service.core.handlers.SmartcloudFileHandler;
 
 /**
  * Default service servlet used by SBT runtime.
@@ -46,7 +48,9 @@ public class ServiceServlet extends ServletDispatcher {
         register(new ServletFactory.PathInfoFactory(OACallback.class,OACallback.URL_PATH)); 
         register(new ServletFactory.PathInfoFactory(OAClientAuthentication.class,OAClientAuthentication.URL_PATH));
         register(new ServletFactory.PathInfoFactory(OA2Callback.class,OA2Callback.URL_PATH));
-        register(new ServletFactory.PathInfoFactory(EmailHandler.class,EmailHandler.URL_PATH));
+        register(new ServletFactory.PathInfoFactory(EmailHandler.class,EmailHandler.URL_PATH));        
+        register(new ServletFactory.PathInfoFactory(ConnectionsFileHandler.class,ConnectionsFileHandler.URL_PATH));
+        register(new ServletFactory.PathInfoFactory(SmartcloudFileHandler.class,SmartcloudFileHandler.URL_PATH));
     }
     
 }

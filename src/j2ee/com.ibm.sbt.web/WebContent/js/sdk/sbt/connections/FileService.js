@@ -746,32 +746,7 @@ define(
 								entries.push(entry);
 							}
 							return entries;
-						},
-
-						_executePostForFiles : function(args, url, headers, payload) {
-							var _self = this;
-							this._endpoint.xhrPostForFileProxy({
-								serviceUrl : url,
-								postData : payload,
-								headers : headers,
-								load : function(data) {
-									if (args.responseFormat && args.responseFormat == constants.responseFormat.NON_XML_FORMAT) {
-										_self._notifyCb(args, data);
-									} else {
-										var entries = _self._parseXmlData(data);
-										if (args.responseFormat && args.responseFormat == constants.responseFormat.SINGLE && entries.length == 1) {
-											_self._notifyCb(args, entries[0]);
-										} else {
-											_self._notifyCb(args, entries);
-										}
-									}
-								},
-								error : function(error) {
-									validate.notifyError(error, args);
-								}
-							});
-
-						},
+						},						
 
 						_executeDelete : function(args, url, headers) {
 							var _self = this;
@@ -867,7 +842,7 @@ define(
 
 						/**
 						 * Gets the files of the logged in user.
-						 * @method getFilesSharedByMe
+						 * @method getMyFiles
 						 * @param {Object} [args] Argument object
 						 * @param {Function} [args.load] The callback function will invoke when the files of the user are retrieved successfully. The function
 						 * expects one parameter, a list of FileEntry objects.
@@ -998,8 +973,9 @@ define(
 						 */
 						uploadFile : function(args) {
 
-							if (!validate._validateInputTypeAndNotify("FileService", "uploadFile", "fileLocation", args.fileLocation, "string", args)) {
-								return false;
+							if (!validate._validateInputTypesAndNotify("FileService", "uploadFile", [ "args", "fileLocation" ], [ args,
+									args ? args.fileLocation : null ], [ 'object', 'string' ], args)) {
+								return;
 							}
 
 							var fileControl = document.getElementById(args.fileLocation);
@@ -1020,10 +996,18 @@ define(
 								if (index == -1) {
 									index = filePath.lastIndexOf("/");
 								}
-								headers["Slug"] = filePath.substring(index + 1);
-								var _args = args ? lang.mixin({}, args) : {};
-								_args["responseFormat"] = constants.responseFormat.SINGLE;
-								_self._executePostForFiles(_args, url, headers, binaryContent);
+								headers["Slug"] = filePath.substring(index + 1);									
+								_self._endpoint.xhrPost({
+									url : url,
+									postData : binaryContent,
+									headers : headers,
+									load : function(data) {
+										_self._notifyCb(args, "Success");
+									},
+									error : function(error) {
+										validate.notifyError(error, args);
+									}
+								});								
 							};
 							reader.onerror = function(event) {
 								alert("error" + event);
@@ -1090,8 +1074,8 @@ define(
 						 */
 						addCommentToFile : function(file, args) {
 
-							if (!validate._validateInputTypesAndNotify("FileService", "addCommentToFile", [ "File", "comment" ], [ file, args.comment ], [
-									"sbt.connections.FileEntry", 'string' ], args)) {
+							if (!validate._validateInputTypesAndNotify("FileService", "addCommentToFile", [ "File", "args", "comment" ], [ file, args,
+									args ? args.comment : null ], [ "sbt.connections.FileEntry", 'object', 'string' ], args)) {
 								return;
 							}
 							if (!file.validate("FileService", "addCommentToFile", args, {
@@ -1135,8 +1119,8 @@ define(
 						 */
 						addCommentToMyFile : function(file, args) {
 
-							if (!validate._validateInputTypesAndNotify("FileService", "addCommentToMyFile", [ "File", "comment" ], [ file, args.comment ], [
-									"sbt.connections.FileEntry", 'string' ], args)) {
+							if (!validate._validateInputTypesAndNotify("FileService", "addCommentToMyFile", [ "File", "args", "comment" ], [ file, args,
+									args ? args.comment : null ], [ "sbt.connections.FileEntry", 'object', 'string' ], args)) {
 								return;
 							}
 							if (!file.validate("FileService", "addCommentToMyFile", args, {

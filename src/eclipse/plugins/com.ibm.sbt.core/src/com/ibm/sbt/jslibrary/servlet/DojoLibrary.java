@@ -34,12 +34,13 @@ public class DojoLibrary extends AbstractLibrary {
 	public static final String		MODULE_DOJO				= "sbt.dojo";				//$NON-NLS-1$
 	public static final String		MODULE_SBTX				= "sbtx";					//$NON-NLS-1$
 	public static final String		MODULE_AMDCOMPAT		= "sbt._bridge.amdcompat";	//$NON-NLS-1$
-	public static final String		MODULE_BRIDGE_AMD		= "sbt/_bridge";
+	public static final String		MODULE_BRIDGE_AMD		= "sbt/_bridge";            //$NON-NLS-1$
 	public static final String		MODULE_DOJO_AMD			= "sbt/dojo";				//$NON-NLS-1$
+    public static final String      MODULE_REQUESTTRANSPORT = "sbt/_bridge/RequestTransport"; //$NON-NLS-1$
 
 	public static final String		PATH_BRIDGE				= "_bridges/dojo";			//$NON-NLS-1$
 	public static final String		PATH_DOJO				= "dojo";					//$NON-NLS-1$
-	public static final String		PATH_BRIDGE_AMD			= "_bridges/dojo-amd";
+	public static final String		PATH_BRIDGE_AMD			= "_bridges/dojo-amd";      //$NON-NLS-1$
 
 	static private final String[][]	REGISTER_MODULES		= { { MODULE_SBT, PATH_SBT },
 			{ MODULE_BRIDGE, PATH_BRIDGE }, { MODULE_DOJO, PATH_DOJO } };
@@ -169,10 +170,10 @@ public class DojoLibrary extends AbstractLibrary {
      */     
     @Override
     protected JSReference getTransport(LibraryRequest request, Endpoint endpoint, String endpointName) {
-    	// Dojo versions from 1.8 and above should use dojo/Request
-    	if(request.getJsVersion().startsWith("1.8")) {
-        	return endpoint.getTransport(endpointName, MODULE_REQUESTTRANSPORT);
-    	}
+    	// Dojo versions from 1.8 and above should use dojo/request
+    	//if(request.getJsVersion().startsWith("1.8")) { what happens for version 2.0?
+        //	return endpoint.getTransport(endpointName, MODULE_REQUESTTRANSPORT);
+    	//}
     	return endpoint.getTransport(endpointName, MODULE_TRANSPORT);
     }
 }

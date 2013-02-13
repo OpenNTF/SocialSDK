@@ -30,6 +30,28 @@
    	</extension>
 
    	<extension point="com.ibm.commons.Extension">
+         <service type="com.ibm.sbt.jslibrary" class="com.ibm.xsp.sbtsdk.servlets.DominoDojoLibrary" />
+   	</extension>
+
+    <extension point="com.ibm.commons.Extension">
+         <service 
+         	type="com.ibm.xsp.GlobalResourceProvider" 
+         	class="com.ibm.xsp.sbtsdk.resources.SbtResourceProvider" />
+    </extension>
+
+    <extension point="com.ibm.commons.Extension">
+         <service
+            type="com.ibm.xsp.resource.DojoModulePathResource"
+            class="com.ibm.xsp.sbtsdk.resources.SbtModulePath" />
+    </extension>
+
+    <extension point="com.ibm.commons.Extension">
+         <service
+         	type="com.ibm.xsp.minifier.loader"
+         	class="com.ibm.xsp.sbtsdk.resources.SbtLoader" />
+    </extension>
+
+   	<extension point="com.ibm.commons.Extension">
          <service type="com.ibm.sbt.core.mimeemailfactory" class="com.ibm.xsp.sbtsdk.services.mail.DominoMimeEmailFactory" />
    	</extension>
 

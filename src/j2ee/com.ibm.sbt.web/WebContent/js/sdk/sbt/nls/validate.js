@@ -15,18 +15,16 @@
  */
 
 /**
- * Social Business Toolkit SDK - Default resource bundle.
+ * Social Business Toolkit SDK - Default resource bundle for validate module.
  */
 
 
 define({
-  root: ({
-	  // strings for validate.js
-	  notifyError_catchError:"Error running error callback : {0}",
-	  notifyError_console:"Error received. Error Code = {0}. Error Message = {1}",
-	  _validateInputTypeAndNotify_nullObject:"{0}.{1} : Null argument provided for {2}. Expected type is {3}",
-	  _validateInputTypeAndNotify_expectedType:"{0}.{1} : {2} argument type does not match expected type {3} for {4}"
-	  
+  root: ({	 
+	  error_callback:"Error running error callback : {0}",
+	  error_console:"Error received. Error Code = {0}. Error Message = {1}",
+	  validate_nullObject:"{0}.{1} : Null argument provided for {2}. Expected type is {3}",
+	  validate_expectedType:"{0}.{1} : {2} argument type does not match expected type {3} for {4}"
   }),
 
   "zh": true,

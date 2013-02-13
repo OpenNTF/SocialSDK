@@ -106,7 +106,7 @@ public class PreviewServlet extends FacesContextServlet {
 		pw.println("  <style type=\"text/css\">");
 		pw.println("    @import \""+dojoPath+"dijit/themes/claro/claro.css\";");
 		pw.println("    @import \""+dojoPath+"dojo/resources/dojo.css\";");
-		pw.println("    @import \"/xsp/.ibmxspres/.extlib/bootstrap/css/bootstrap.min.css\";");
+		pw.println("    @import \"/xsp/.ibmxspres/.sbtsdk/bootstrap/css/bootstrap.min.css\";");
 		pw.println("  </style>");
 
 		pw.println("  <script>");

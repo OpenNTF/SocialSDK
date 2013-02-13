@@ -92,7 +92,7 @@ window._sbt_bridge_compat = true;
 			// look for dojo/i18n! followed by anything for a resource module
 			var exclamationIndex = depName.indexOf("!");
 			if (exclamationIndex > -1) {
-				if (depName.substring(0, exclamationIndex) == "dojo.i18n") {
+				if (depName.substring(0, exclamationIndex) == "sbt.i18n") {
 					var bundleName = depName.substring(exclamationIndex+1);
 					var mod = dojo.require(bundleName);
 					arg = mod.root||mod;

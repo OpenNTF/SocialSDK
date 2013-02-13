@@ -17,7 +17,6 @@ import com.ibm.jscript.json.JsonJavaScriptFactory;
 import com.ibm.jscript.std.ArrayObject;
 import com.ibm.jscript.std.ObjectObject;
 import com.ibm.jscript.types.FBSBoolean;
-import com.ibm.jscript.types.FBSNull;
 import com.ibm.jscript.types.FBSString;
 import com.ibm.jscript.types.FBSUtility;
 import com.ibm.jscript.types.FBSValue;
@@ -139,16 +138,29 @@ public class APIBean extends AssetBean {
 				int end = value.indexOf("}",start);
 				if(end>start+1) {
 					FBSValue p = FBSUtility.wrap(value.substring(start+1,end).trim());
-					if(!a.contains(v)) {
+					if(!contains(a,p.stringValue())) {
 						System.out.println(StringUtil.format("Missing uri property {0}",p));
 						addParam(a, p, FBSString.emptyString, FBSUtility.wrap("string"), FBSString.emptyString);
-	                    pos = end + 1;
 					}
+                    pos = end + 1;
                     continue;
 				}
 			}
 			break;
 		} while(true);
+	}
+	private boolean contains(ArrayObject a, String name) throws Exception {
+		int count = a.getArrayLength();
+		for(int i=0; i<count; i++) {
+			FBSValue v = a.getArrayValue(i);
+			if(v.isJSObject()) {
+				FBSValue n = v.asObject().get("name");
+				if(n.isString() && n.stringValue().equals(name)) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 	private ObjectObject addParam(ArrayObject a, FBSValue name, FBSValue value, FBSValue type, FBSValue description) throws Exception {
 		ObjectObject o = new ObjectObject();
@@ -180,9 +192,18 @@ public class APIBean extends AssetBean {
 		}
 
 		// Add a pseudo query string parameter
-		ObjectObject qs = addParam(a, FBSString.get("query-string"), FBSString.emptyString, FBSUtility.wrap("string"), FBSUtility.wrap("Extra query string parameters"));
+		ObjectObject qs = addParam(a, FBSString.get("query-string"), FBSString.emptyString, FBSUtility.wrap("string"), FBSUtility.wrap("Extra query string parameters, as they would appear in the URL (a=1&b=2...)"));
 		qs.put("optional", FBSBoolean.TRUE);
 		
+		// Now, add the pseudo entries for the POST/PUT content 
+		FBSValue v = item.get("http_method");
+		if(v.isString()) {
+			String m = v.stringValue();
+			if(m.equalsIgnoreCase("post")||m.equalsIgnoreCase("put")) {
+				ObjectObject ct = addParam(a, FBSString.get("post_content_type"), item.get("post_content_type"), FBSUtility.wrap("string"), FBSUtility.wrap("Content-Type header of the payload"));
+				ObjectObject bd = addParam(a, FBSString.get("post_content"), item.get("post_content"), FBSUtility.wrap("textarea"), FBSUtility.wrap("Text content sent to the service"));
+			}
+		}
 		return a;
 	}
 

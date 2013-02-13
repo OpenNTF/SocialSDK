@@ -157,12 +157,12 @@ var Endpoint = declare("sbt.Endpoint", null, {
 	xhr: function(method,_args,hasBody) {
 		var self = this;
 		var args = lang.mixin({},_args);
-		if(args.serviceUrl) {
+		if(!args.url && args.serviceUrl) {
 			args.url = this.baseUrl+args.serviceUrl;
 			delete args.serviceUrl;
-		}
-		if(this.proxy) {
-			args.url = this.proxy.rewriteUrl(args.url,this.proxyPath);
+			if(this.proxy) {
+				args.url = this.proxy.rewriteUrl(args.url,this.proxyPath);
+			}
 		}
 		// Make sure the initial methods are not called
 		// seems that Dojo still call error(), even when handle is set

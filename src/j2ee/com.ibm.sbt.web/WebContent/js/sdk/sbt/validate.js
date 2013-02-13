@@ -24,7 +24,7 @@
  * @class validate
  * @static
  */
-define([ "sbt/log", "sbt/stringutil", "sbt/_bridge/nls" ],
+define([ "sbt/log", "sbt/stringutil", "sbt/i18n!sbt/nls/validate" ],
 		function(log, stringUtil, nls) {
 			var errorCode = 400;
 			var _notifyError = function notifyError(error, args) {

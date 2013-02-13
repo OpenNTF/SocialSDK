@@ -142,6 +142,7 @@
 {
 	"name": "retrieveFileShareAnonymous",
 	"description": "Share a file with a community or multiple communities",
+	"http_method": "get",
 	"uri": "/files/basic/anonymous/api/share/{share-id}/entry",
 	"uriParameters": [
 		{"name": "share-id"}

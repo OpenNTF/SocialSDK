@@ -263,8 +263,8 @@ public class LibraryRequest {
      * @throws IOException
      */
     protected void readFromRequest(HttpServletRequest req, SBTEnvironment defaultEnvironment) throws ServletException, IOException {
-        jsLib = readString(req, PARAM_JSLIB, DEFAULT_JSLIB);
-        jsVersion = readString(req, PARAM_JSVERSION, "dojo".equals(jsLib) ? DEFAULT_VERSION : "");
+        jsLib = readString(req, PARAM_JSLIB, getDefaultJsLib());
+        jsVersion = readString(req, PARAM_JSVERSION, "dojo".equals(jsLib) ? getDefaultJsVersion() : "");
         String environmentName = req.getParameter(PARAM_ENVIRONMENT);
         if (!StringUtil.isEmpty(environmentName)) {
             SBTEnvironment parentEnvironment = SBTEnvironmentFactory.get(environmentName);
@@ -281,6 +281,14 @@ public class LibraryRequest {
         	}
             environment = new RequestEnvironment(defaultEnvironment);
         }
+    }
+    
+    protected String getDefaultJsLib() {
+    	return DEFAULT_JSLIB;
+    }
+    
+    protected String getDefaultJsVersion() {
+    	return DEFAULT_VERSION;
     }
 
     /**

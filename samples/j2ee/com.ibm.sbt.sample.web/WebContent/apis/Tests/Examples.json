@@ -11,7 +11,7 @@
 	"description": "Example 2, with no parameters",
 	"http_method": "get",
 	"uri": "/profiles/atom/profileService.do",
-	"since": "2",
+	"since": "2.0",
 	"queryParameters": [
 		{ "name": "param1", "optional":true,  "description":"Simple Parameter" },
 		{ "name": "param2", "optional":false, "description":"Simple Parameter, required" },

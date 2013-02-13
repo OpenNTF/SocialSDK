@@ -53,32 +53,37 @@ function treeExpandAll(tree) {
     }
 }
 
-function treeExpandId(tree,id) {
+function treeFindPath(tree,id) {
 	tree = dijit.byId(tree);
 	function itemPath(model,items,item){
-	    items.push(item.id);
-	    if(item.id==id){
+	    items.push(item.id.toString()); // Make it a string else it is an object!
+	    if(item.id==id || item.jspUrl==id){
 	    	return items;
 	    }
 	    var cc = item.children;
 	    for(var i in cc){
-	        if(itemPath(model,items,cc[i])) {
-	        	return items;
+	        var it = itemPath(model,items,cc[i]);
+	        if(it) {
+	        	return it;
 	        }
 	    }
 	    items.pop();
-	    return undefined;
+	    return null;
 	}
 	return itemPath(tree.model,[],tree.model.root);
 }
 
 function treeSelectId(tree,id) {
 	tree = dijit.byId(tree);
-    var path = treeExpandId(tree,id);
-    //console.log('find path: ['+path+']')
+    var path = treeFindPath(tree,id);
     if(path){
-    	//tree.attr('path',path)
+        tree.set('paths',[path])
     }
+}
+
+function treeClearSelection(tree) {
+	tree = dijit.byId(tree);
+	tree.attr('paths',[])
 }
 
 /**

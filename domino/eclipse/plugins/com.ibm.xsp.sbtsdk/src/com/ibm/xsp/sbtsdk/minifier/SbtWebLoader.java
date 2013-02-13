@@ -89,6 +89,14 @@ public class SbtWebLoader extends ExtLibLoaderExtension {
     		return ExtLibUtil.getResourceURL(SbtWebActivator.instance.getBundle(), path);
     	}
     	// Access to the SDK
+    	if(name.startsWith("sbt/_bridge")) {
+    		String path = "WebContent/js/sdk/_bridges/dojo-amd"+name.substring(11);
+    		return ExtLibUtil.getResourceURL(SbtWebActivator.instance.getBundle(), path);
+    	}
+    	if(name.startsWith("sbt/dojo")) {
+    		String path = "WebContent/js/sdk/dojo"+name.substring(8);
+    		return ExtLibUtil.getResourceURL(SbtWebActivator.instance.getBundle(), path);
+    	}
 		String path = "WebContent/js/sdk/"+name;
 		return ExtLibUtil.getResourceURL(SbtWebActivator.instance.getBundle(), path);
     }

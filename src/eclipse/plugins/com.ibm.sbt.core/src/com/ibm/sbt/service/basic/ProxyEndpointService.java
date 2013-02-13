@@ -44,8 +44,8 @@ import com.ibm.sbt.services.util.SSLUtil;
  */
 public class ProxyEndpointService extends ProxyService {
 
-    private Endpoint endpoint;
-    private String requestURI;
+    protected Endpoint endpoint;
+    protected String requestURI;
     
     public ProxyEndpointService() {
     }

@@ -20,8 +20,8 @@
  *  
  * Helpers for accessing the Connections Profiles services
  */
-define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sbt/xml','sbt/util','sbt/xpath','sbt/Cache','sbt/connections/ProfileConstants','sbt/Endpoint','sbt/validate'],
-		function(declare,cfg,lang,con,xml,util,xpath,Cache,constants,Endpoint,validate) {
+define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sbt/xml','sbt/util','sbt/xpath','sbt/Cache','sbt/connections/ProfileConstants','sbt/Endpoint','sbt/validate','sbt/i18n!sbt/connections/nls/ProfileService'],
+		function(declare,cfg,lang,con,xml,util,xpath,Cache,constants,Endpoint,validate, profileServiceNls) {
 	
 	/**
 	Javascript APIs for IBM Connections Profiles Service.
@@ -44,10 +44,15 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 	@namespace connections
 	**/
 	
+	
 	var Profile = declare("sbt.connections.Profile", null, {
 		_service:	null,
 		_id:		"",
-		_idType:	"",// can take value - userId / email / id		
+		_idType:	"",// can take value - userId / email / id	
+		_email:		"",
+		_userId:	"",
+		_name:		"",
+
 		/**
 		Profile entry document of the associated profile
 		@private
@@ -64,9 +69,17 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 		**/
 		fields:		{},		
 		
-		constructor: function(svc,id) {
+		constructor: function(svc,id,name,email) {
 			this._service = svc;
 			this._id = id;
+			if(this._service._isEmail(id)){
+				this._email = id;
+			}else{
+				this._userId = id;
+			}
+			this._name = name;
+			this._email = email;
+			
 		},
 		/**
 		Loads the profile object with the profile entry document associated with the profile. By
@@ -141,7 +154,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 		@param {String} path xpath expression
 		@return {String} value of a field in profile entry document using the xpath expression
 		**/
-		xpath: function(path) {
+		xpath: function(path) {			
 			return this.data && path ? xpath.selectText(this.data,path,con.namespaces) : null;
 		},
 		/**
@@ -176,23 +189,41 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 		@return {String} id of the profile	
 		**/
 		getId: function () {
-			return this.get("uid");
+			if(!this._userId){
+				this._userId = this.get("uid");
+			}
+			return this._userId;
 		},
 		/**
 		Get display name of the profile
 		@method getDisplayName
 		@return {String} display name of the profile	
 		**/
-		getDisplayName: function () {			
-			return this.get("name");
+		getDisplayName: function () {	
+			if(!this._name){
+				this._name = this.get("name");
+			}
+			return this._name;
+			
 		},	
+		/**
+		Get groupware mail of the profile
+		@method getGroupwareMail
+		@return {String} email groupware mail of the profile	
+		**/
+		getGroupwareMail: function () {
+			return this.get("groupwareMail");
+		},
 		/**
 		Get email of the profile
 		@method getEmail
 		@return {String} email of the profile	
 		**/
 		getEmail: function () {
-			return this.get("email");
+			if(!this._email){
+				this._email = this.get("email");
+			}
+			return this._email;
 		},
 		/**
 		Get thumbnail URL of the profile
@@ -412,7 +443,8 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 		
 		getProfile: function(args) {
 			//return lang.isArray(args.id) ? this._getMultiple(args) : this._getOne(args);
-			//Not handling the multiple profiles id use case now.			
+			//Not handling the multiple profiles id use case now.	
+			
 			return this._getOne(args);
 		},
 		
@@ -506,7 +538,9 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 						handleAs:	"text",
 						content:	content,
 						load: function(data, ioArgs) {
-							profile.data = xml.parse(data);							
+							var entry = xpath.selectNodes(xml.parse(data), constants.xpath_profile["entry"], con.namespaces);
+							profile.data = entry[0];
+							//profile.data = xml.parse(data);							
 							profile.fields = {};
 							if(_self._profiles) {
 				      			_self._profiles.put(xpath.selectText(profile.data,constants.xpath_profile.uid,con.namespaces),profile.data);
@@ -530,15 +564,8 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 			}else {
 				authType = "";
 			}
-			if(methodName == constants._methodName.getProfile){				
-				return con.profileUrls["profileServiceBaseUrl"] + authType + con.profileUrls["getProfile"];
-			}
-			if(methodName == constants._methodName.updateProfile){				
-				return con.profileUrls["profileServiceBaseUrl"] + authType + con.profileUrls["updateProfile"];
-			}
-			if(methodName == constants._methodName.updateProfilePhoto){				
-				return con.profileUrls["profileServiceBaseUrl"] + authType + con.profileUrls["updateProfilePhoto"];
-			}			
+				
+			return con.profileUrls["profileServiceBaseUrl"] + authType + con.profileUrls[methodName];
 		},
 		_constructCreateRequest: function (profile, fieldMap){
 			var body = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns:app=\"http://www.w3.org/2007/app\" xmlns:thr=\"http://purl.org/syndication/thread/1.0\" xmlns:fh=\"http://purl.org/syndication/history/1.0\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\" xmlns:opensearch=\"http://a9.com/-/spec/opensearch/1.1/\" xmlns=\"http://www.w3.org/2005/Atom\"><category term=\"profile\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category><content type=\"application/xml\"><person xmlns=\"http://ns.opensocial.org/2008/opensocial\"><com.ibm.snx_profiles.attrib>";
@@ -704,6 +731,81 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 					});
 		    };
 		    reader.readAsArrayBuffer(files[0]);   
+		},
+		
+		_validateProfileObject : function(profile, args){
+			if (!(validate._validateInputTypeAndNotify("ProfileService", "updateProfile", "Profile", profile, "sbt.connections.Profile", args))) {
+				return ;
+			}
+			if (!profile._validate("ProfileService", "updateProfile", args, {
+				isValidateType : true,
+				isValidateId : true
+			})) {
+				return;
+			}
+		},
+		
+		getColleagues : function(profile, args){			
+			this._validateProfileObject(profile, args);
+			this._getEntities(args, {
+				profile : profile,
+				profileUrl : "getColleagues",
+				profileServiceEntity : "profiles"
+			});
+		},
+		
+		_constructQueryObj : function(args, getArgs) {
+			var params = {};
+			if(args && args.parameters){
+				params = args.parameters;
+			}
+			if(getArgs.profileUrl == "getColleagues"){
+				if(this._isEmail(getArgs.profile._id)) {
+					params.email = getArgs.profile._id; 
+				} else {
+					params.userid = getArgs.profile._id; 
+				}
+				params.connectionType = "colleague";				
+				params.outputType = "profile";
+			}
+			return params;
+		},
+		
+		_getEntities : function(args, getArgs) {
+			var _self = this;
+			var headers = {
+				"Content-Type" : "application/atom+xml"
+			};
+			this._endpoint.xhrGet({
+				serviceUrl : this._constructProfileUrl(getArgs.profileUrl),
+				headers : headers,
+				content : this._constructQueryObj(args, getArgs),
+				load : function(data) {
+					var entities = [];
+					var ioArgs = {};
+					var xmlData = xml.parse(data);
+					var entry = xpath.selectNodes(xmlData, constants.xpath_profile.entry, con.namespaces);
+					ioArgs.totalResults = xpath.selectText(xmlData, constants.xpath_profile.totalResults, con.namespaces);
+					ioArgs.startIndex = xpath.selectText(xmlData, constants.xpath_profile.startIndex, con.namespaces);
+					ioArgs.itemsPerPage = xpath.selectText(xmlData, constants.xpath_profile.itemsPerPage, con.namespaces);
+					for(var count = 0; count < entry.length; count ++){	
+						var node = entry[count];
+						if (getArgs.profileUrl == "getColleagues") {
+							var profile = new Profile(_self, xpath.selectText(node, constants.xpath_profile.uid, con.namespaces));
+							profile.data = node;
+							entities.push(profile);
+						} 
+					}
+					if (args.load)
+						args.load(entities, ioArgs);
+						//args.load(entities);
+					if (args.handle)
+						args.handle(entities, totalResults, startIndex, itemsPerPage);
+				},
+				error : function(error) {
+					validate.notifyError(error, args);
+				}
+			});
 		},
 		
 		_find: function(id, idType) {

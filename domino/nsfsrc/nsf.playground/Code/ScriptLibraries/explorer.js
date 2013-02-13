@@ -82,9 +82,13 @@ function executeService(params,details,results) {
 			updatePanelError(results,"Endpoint {0} specified in the API description is invalid",params['endpoint']);
 			return;
 		}
-		var m = item.http_method;
+		var m = item.http_method.toUpperCase();
 		if(!m) {
 			updatePanelError(results,"No HTTP method specified in the API description");
+			return;
+		}
+		if(m!="GET"&&m!="POST"&&m!="PUT"&&m!="DELETE") {
+			updatePanelError(results,"Invalid HTTP method "+m);
 			return;
 		}
 		
@@ -126,16 +130,27 @@ function executeService(params,details,results) {
 		var args = {
 			serviceUrl : uri,
 			handleAs : "text",
+			headers: {},
 			loginUi: "popup",
 	    	load : function(response,ioArgs) {
-	    		updatePanel(results,ep.baseUrl+this.serviceUrl,200,"",response,ioArgs);
+	    		updatePanel(results,m+" "+ep.baseUrl+this.serviceUrl,200,"",response,ioArgs);
 	    	},
 	    	error : function(error,ioArgs) {
-	    		updatePanel(results,ep.baseUrl+this.serviceUrl,error.code,"",error.message,ioArgs);
+	    		updatePanel(results,m+" "+ep.baseUrl+this.serviceUrl,error.code,"",error.message,ioArgs);
 	    	}
 		};
-		var body = null;
-		ep.xhr(m,args,body);
+		
+		// Compose the POST/PUT content
+		if(m=="PUT" || m=="POST") {
+			var type = paramValue("post_content_type");
+			if(type) {
+				args.headers["Content-Type"]=type;
+			}
+			var data = paramValue("post_content");
+			args.postData = data;
+		}
+
+		ep.xhr(m,args,args.postData);
 	});
 }
 

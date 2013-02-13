@@ -27,7 +27,7 @@ import com.ibm.commons.runtime.util.UrlUtil;
 import com.ibm.sbt.jslibrary.servlet.LibraryRequest;
 import com.ibm.sbt.jslibrary.servlet.LibraryRequestParams;
 import com.ibm.sbt.jslibrary.servlet.LibraryServlet;
-import com.ibm.xsp.extlib.resources.ExtlibResourceProvider;
+import com.ibm.xsp.sbtsdk.resources.SbtResourceProvider;
 
 public class ToolkitServlet extends LibraryServlet {
 
@@ -40,8 +40,8 @@ public class ToolkitServlet extends LibraryServlet {
 	    public void init(LibraryRequestParams params) throws ServletException, IOException {
 			//public void init(SBTEnvironment defaultEnvironment, String toolkitUrl, String toolkitJsUrl, String proxyUrl, String iframeUrl) throws ServletException, IOException {
 			// Calculate the toolkit URL
-	    	//http://priand2/xsp/.ibmxspres/.extlib/sbt/Cache.js
-			String toolkitUrl = UrlUtil.getServerUrl(getHttpRequest())+"/xsp"+ExtlibResourceProvider.RESOURCE_PATH;
+	    	//http://priand2/xsp/.ibmxspres/.sbtsdk/sbt/Cache.js
+			String toolkitUrl = UrlUtil.getServerUrl(getHttpRequest())+"/xsp"+SbtResourceProvider.RESOURCE_PATH+"/";
 			String toolkitJsUrl = toolkitUrl;
 			
 			// Calculate the proxy URL
@@ -53,7 +53,14 @@ public class ToolkitServlet extends LibraryServlet {
 			
 			super.init(params);
 		}
-	}
+	    protected String getDefaultJsLib() {
+	    	return DominoDojoLibrary.NAME;
+	    }
+	    
+	    protected String getDefaultJsVersion() {
+	    	return "1.7";
+	    }
+}
 	
 	protected LibraryRequest createLibraryRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		return new DominoLibraryRequest(req, resp);

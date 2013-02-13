@@ -6,7 +6,7 @@
 .lotusTable td.explorer_col3 {
 	vertical-align: top;
 	text-align: left;
-	padding-top: 17px;
+	padding-top: 5px;
 }
 
 div.explorer_summary {
@@ -51,6 +51,11 @@ div.explorer_details {
     margin: 6px; 
     padding:6px 8px 6px 8px; 
 }
+.explorer_detailsTable {
+	width: 100%;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
 
 .explorer_detailsTable th {
 	padding-left: 0;
@@ -60,7 +65,13 @@ div.explorer_details {
 }
 
 .explorer_detailsTable td {
-	margin-left: 0; /* Fix .xspColumn */
+	margin-left: 0;
+	margin-left: 3px;
+	margin-top: 3px;
+	margin-bottom: 3px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	border-bottom: 1px solid #EEEEEE;
 }
 
 div.explorer_results {
@@ -73,6 +84,15 @@ div.explorer_results {
 	margin-top: 10px;
 	margin-bottom: 5px;
 }
+
+.paramCol1 {vertical-align:top; font-weight: bold; width: 1px; white-space: nowrap;}
+.paramCol2 {vertical-align:top; width: 1px; }
+.paramCol3 {vertical-align:top; text-align: center;}
+.paramCol4 {vertical-align:top; margin-left: 5px; margin-right: 5px; width: 6em; white-space: nowrap;}
+.paramCol5 {vertical-align:top;}
+
+.resCol1 {vertical-align:top;}
+.resCol2 {vertical-align:top;}
 
 a.apiheader:link {text-decoration:none;}
 a.apiheader:visited {text-decoration:none;}

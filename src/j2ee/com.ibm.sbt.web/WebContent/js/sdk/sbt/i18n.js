@@ -15,13 +15,17 @@
  */
 
 /**
- * Social Business Toolkit SDK - Default resource bundle.
+ * Social Business Toolkit SDK.
+ * @module i18n
  */
-
-define({
-	  notifyError_catchError:"Error running error callback : {0}",
-	  notifyError_console:"Error received. Error Code = {0}. Error Message = {1}",
-	  _validateInputTypeAndNotify_nullObject:"{0}.{1} : Null argument provided for {2}. Expected type is {3}",
-	  _validateInputTypeAndNotify_expectedType:"{0}.{1} : {2} argument type does not match expected type {3} for {4}"
-	  
+define(['dojo/i18n'],function(i18n) {
+	    var load = function(id, require, callback){	    	
+	    	i18n.load(id, require, callback);      
+	      
+	    };	    
+	    return {
+	    	load : load	    	
+	    }; 
 });
+
+

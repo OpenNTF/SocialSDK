@@ -16,8 +16,16 @@
 
 /**
  * Social Business Toolkit SDK.
- * @module nls
+ * @module i18n
  */
-define(['dojo/i18n!sbt/nls/resources'],function(resources) {
-	return resources;
+define(['dojo/i18n'],function(i18n) {
+	    var load = function(id, require, callback){	    	
+	    	i18n.load(id, require, callback);      
+	      
+	    };	    
+	    return {
+	    	load : load	    	
+	    }; 
 });
+
+

@@ -40,7 +40,7 @@ define([],function() {
 			createProfile:		"/profiles/admin/atom/profiles.do",
 			deleteProfile:		"/profiles/admin/atom/profileEntry.do",
 			updateProfilePhoto:	"/photo.do",
-			getNetworkContacts:	"/atom/connections.do"
+			getColleagues:		"/atom/connections.do"
 		},
 		ActivityStreamUrls: {
 			activityStreamBaseUrl:         "/connections/opensocial/",

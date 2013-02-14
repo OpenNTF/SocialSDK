@@ -57,7 +57,6 @@ return true;]]></xp:this.onkeypress>
 	dojo.connect(navTree,"onLoad",function() {
 		if(!window.navTreeLoaded) {
 			window.navTreeLoaded = true;
-			console.log("clear selection");
 			treeClearSelection(navTree);
 		}
 	});

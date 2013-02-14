@@ -10,8 +10,11 @@
 		<xp:dojoModule name="dijit.form.ComboBox"></xp:dojoModule>
 		<xp:dojoModule name="dijit.form.NumberTextBox"></xp:dojoModule>
 		<xp:dojoModule name="dijit.form.SimpleTextarea"></xp:dojoModule>
+<!--
+TEMP until we move to Domino 9 and define/require will defined for these modules		
 		<xp:dojoModule name="sbt.Proxy"></xp:dojoModule>
 		<xp:dojoModule name="sbt.Endpoint"></xp:dojoModule>
+-->		
 		<xp:dojoModule name="dojo.fx"></xp:dojoModule>
 	</xp:this.resources>
 
@@ -169,7 +172,7 @@ return apiBean.loadAPI(e);
 														<xp:this.facets>
 															<xp:inputText
 																xp:key="text" value="#{p.value}"
-																dojoType="dijit/form/ValidationTextBox" id="inputText1"
+																dojoType="dijit.form.ValidationTextBox" id="inputText1"
 																style="width: 30em">
 																<xp:this.attrs>
 																	<xp:attr
@@ -188,7 +191,7 @@ return apiBean.loadAPI(e);
 															</xp:inputText>
 															<xp:inputText
 																xp:key="int" value="#{p.value}"
-																dojoType="dijit/form/NumberTextBox" id="inputText2"
+																dojoType="dijit.form.NumberTextBox" id="inputText2"
 																style="width: 30em">
 																<xp:this.attrs>
 																	<xp:attr
@@ -220,7 +223,7 @@ return apiBean.loadAPI(e);
 															</xp:inputTextarea>
 															<xp:comboBox
 																id="comboBox1" xp:key="enumerated" value="#{p.value}"
-																dojoType="dijit/form/ComboBox" style="width: 30em%">
+																dojoType="dijit.form.ComboBox" style="width: 30em%">
 																<xp:this.attrs>
 																	<xp:attr
 																		name="data-param" value="#{p.name}">

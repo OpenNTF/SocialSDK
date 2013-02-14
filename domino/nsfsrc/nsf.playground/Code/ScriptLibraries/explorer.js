@@ -5,6 +5,7 @@ dojo.declare("ValidationTextarea", [dijit.form.ValidationTextBox,dijit.form.Simp
     	if(!v) {
     		this.displayMessage(this.getErrorMessage());
     	}
+    	return v;
     }
 });
 
@@ -56,9 +57,10 @@ function collapseSection(id) {
 }
 
 function executeService(params,details,results) {
-	require(['dojo/_base/lang','dojo/_base/array','dojo/io-query','dojo/query','dijit/registry','sbt/Endpoint'], function(lang,array,ioQuery,query,registry,Endpoint) {
+	require(['dojo','dojo/_base/array','dojo','dojo','dijit','sbt/Endpoint'], function(lang,array,ioQuery,query,registry,Endpoint) {
+		//require(['dojo/_base/lang','dojo/_base/array','dojo/io-query','dojo/query','dijit/registry','sbt/Endpoint'], function(lang,array,ioQuery,query,registry,Endpoint) {
 		function paramValue(name) {
-			var n = query("[data-param=\""+name+"\"]",details);
+			var n = dojo.query("[data-param=\""+name+"\"]",details);
 			if(n.length>0) {
 				return n[0].value;
 			}
@@ -177,10 +179,12 @@ function clearResultsPanel(id,code,headers,body) {
 }
 
 function updateResponse(id,content) {
-	require(['dojo/query','sbt/dom'], function(query,dom) {
+	// TEMP for Dojo 1.6
+	//require(['dojo/query','sbt/dom'], function(query,dom) {
+	require(['dojo','sbt/dom'], function(query,dom) {
 		function update(clazz,value) {
-			var pnl = query(clazz+"Panel",id)[0];
-			var comp = query(clazz,id)[0];
+			var pnl = dojo.query(clazz+"Panel",id)[0];
+			var comp = dojo.query(clazz,id)[0];
 			if(value) {
 				dojo.style(pnl,"display","");
 				dom.setText(comp,value);

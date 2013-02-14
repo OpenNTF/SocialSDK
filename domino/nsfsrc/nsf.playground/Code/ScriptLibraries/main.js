@@ -4,7 +4,10 @@
  * @return
  */
 function resize() {
-	require(["dojo/dom-geometry"], function(domGeom){
+	// TEMP for Dojo 1.6
+	require(["dojo"], function(domGeom){
+		var domGeom={getMarginBox: dojo._getMarginBox}
+	//require(["dojo/dom-geometry"], function(domGeom){
 		function eltHeight(c) {
 			var e = dojo.query(c);
 			var h = e && e.length>0?domGeom.getMarginBox(e[0]).h:0;

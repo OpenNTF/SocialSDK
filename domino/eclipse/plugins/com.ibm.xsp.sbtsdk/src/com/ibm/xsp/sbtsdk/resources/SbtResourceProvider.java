@@ -52,8 +52,13 @@ public class SbtResourceProvider extends BundleResourceProvider {
     	}
     	// Access to the SDK
     	if(name.startsWith("sbt/_bridge/")) {
-    		String path = "WebContent/js/sdk/_bridges/dojo-amd/"+name.substring(12);
-    		return ExtLibUtil.getResourceURL(SbtWebActivator.instance.getBundle(), path);
+    	    if(ExtLibUtil.isXPages853()) {
+                String path = "WebContent/js/sdk/_bridges/dojo/"+name.substring(12);
+                return ExtLibUtil.getResourceURL(SbtWebActivator.instance.getBundle(), path);
+    	    } else {
+    	        String path = "WebContent/js/sdk/_bridges/dojo-amd/"+name.substring(12);
+    	        return ExtLibUtil.getResourceURL(SbtWebActivator.instance.getBundle(), path);
+    	    }
     	}
     	if(name.startsWith("sbt/dojo/")) {
     		String path = "WebContent/js/sdk/dojo/"+name.substring(9);

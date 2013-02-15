@@ -1,6 +1,7 @@
 [{
 	"name": "Post",
 	"description": "Post Event",
+	"since": "4.0",
 	"http_method": "post",
 	"uri": "/vulcan/shindig/rest/activitystreams/@me/@all/@all",
 	"queryParameters": [],
@@ -11,6 +12,7 @@
 {
 	"name": "Get",
 	"description": "Get Events",
+	"since": "4.0",
 	"http_method": "get",
 	"uri": "/vulcan/shindig/rest/activitystreams/@me/@all/@all",
 	"queryParameters": [],
@@ -19,6 +21,7 @@
 {
 	"name": "clearActivitystreamAll",
 	"description": "Clear all Events",
+	"since": "4.0",
 	"http_method": "post",
 	"http_headers": [
 		{"name": "Content-Type", "value": "application/json"}

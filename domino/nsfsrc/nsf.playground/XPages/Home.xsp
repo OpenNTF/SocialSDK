@@ -8,11 +8,12 @@
 		<xp:dojoModule name="dijit.layout.ContentPane"></xp:dojoModule>
 		<xp:dojoModule name="dijit.layout.AccordionContainer"></xp:dojoModule>
 	</xp:this.resources>
+	<xc:ccOneUIStylesFixes></xc:ccOneUIStylesFixes>	
 	<xc:ccLayout navigationPath="/Home">
 		<div class="gsBody" role="region" aria-label="content">
 			<div id="tab2" dojoType="dijit.layout.ContentPane" title="Home">
 				<!--MAIN CONTENT-->
-				<div class="gsMain" role="main" aria-label="Home">
+				<div class="gsMain tundra" role="main" aria-label="Home">
 					<!--divS-->
 					<div dojoType="dijit.layout.AccordionContainer">
 

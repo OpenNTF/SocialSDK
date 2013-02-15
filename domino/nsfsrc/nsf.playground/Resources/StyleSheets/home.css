@@ -10,7 +10,7 @@ article, aside, footer, header, hgroup,  nav, section{display:block;}/*html5 ele
 img {border: none;}
 
 /***BODY**/
-.gsMain{margin-top:20px;}/*this is a wrapper around the content area of each tab. The wrapper for each content area of the accordion is gsContent, defined in the SECTIONS section.*/
+.gsMain{margin-left:20px; margin-top:20px;}/*this is a wrapper around the content area of each tab. The wrapper for each content area of the accordion is gsContent, defined in the SECTIONS section.*/
 
 /*general elements.*/
 

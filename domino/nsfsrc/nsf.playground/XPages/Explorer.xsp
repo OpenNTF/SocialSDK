@@ -9,18 +9,17 @@
 		<xp:dojoModule name="dijit.form.ValidationTextBox"></xp:dojoModule>
 		<xp:dojoModule name="dijit.form.ComboBox"></xp:dojoModule>
 		<xp:dojoModule name="dijit.form.NumberTextBox"></xp:dojoModule>
+		<xp:dojoModule name="dijit.form.SimpleTextarea"></xp:dojoModule>
+<!--
+TEMP until we move to Domino 9 and define/require will defined for these modules		
 		<xp:dojoModule name="sbt.Proxy"></xp:dojoModule>
 		<xp:dojoModule name="sbt.Endpoint"></xp:dojoModule>
+-->		
 		<xp:dojoModule name="dojo.fx"></xp:dojoModule>
-		<!--
-			<xp:script
-			src="http://dominosbt/SBTPlayground.nsf/xsp/.sbtlibrary?env=Quickstart
-			Workshop" clientSide="true"></xp:script> <xp:dojoModule
-			name="sbt.endpoint"></xp:dojoModule>
-		-->
 	</xp:this.resources>
 
 	<script type="text/javascript" src="#{javascript:apiBean.getToolkitUrl()}"></script>
+
 	<xp:scriptBlock>
 		<xp:this.value><![CDATA[var pageGlobal = {
 	dynPanel:		'#{id:dynp}',
@@ -109,7 +108,7 @@ return apiBean.loadAPI(e);
 															</xe:this.icons>
 														</xe:multiImage>
 													</xp:td>
-													<xp:td styleClass="explorer_col3">
+													<xp:td styleClass="explorer_col2">
 														<xp:div styleClass="explorer_sum_title">
 															<h4 class="lotusTitle">
 																<xp:text value="#{javascript:item.name}" escape="true"
@@ -128,6 +127,20 @@ return apiBean.loadAPI(e);
 															</p>
 														</xp:div>
 													</xp:td>
+													<xp:td styleClass="explorer_col3" style="width: 1px">
+														<xp:link
+															escape="true" text="Documentation" id="link1"
+															rendered="#{javascript:item.doc_url}"
+															value="#{javascript:return item.doc_url;}"
+															target="_blank">
+														</xp:link>
+													</xp:td>
+													<xp:td styleClass="explorer_col4" style="width: 1px">
+														<xp:text escape="true" id="computedField9"
+															styleClass="sinceVersion" value="#{javascript:item.since}"
+															disableTheme="true" rendered="#{javascript:item.since}">
+														</xp:text>
+													</xp:td>
 												</xp:tr>
 											</xp:table>
 										</xp:link>
@@ -142,71 +155,78 @@ return apiBean.loadAPI(e);
 												value="#{javascript:items}" var="p"
 												rendered="#{javascript:items.length>0}">
 												<xp:column id="column1" styleClass="paramCol1">
-													<xp:text
-														escape="true" id="computedField3" value="#{p.name}"
+													<xp:text escape="true" id="computedField3" value="#{p.name}"
 														disableTheme="true">
 													</xp:text>
 												</xp:column>
+												<xp:column id="column7" styleClass="paramCol5">
+													<xp:text escape="true" id="computedField10"
+														styleClass="sinceVersionMini" value="#{javascript:p.since}"
+														disableTheme="true" rendered="#{javascript:p.since}">
+													</xp:text>
+												</xp:column>
 												<xp:column id="column2" styleClass="paramCol2">
-													<xe:switchFacet id="switchFacet1"
-														defaultFacet="text">
-														<xe:this.selectedFacet><![CDATA[#{javascript:if(p.values) {
-	return "combo";
-}
-if(p.type=="int") {
-	return "int";
-}
-if(p.type=="textarea") {
-	return "textarea";
-}
-return "text"}]]></xe:this.selectedFacet>
+													<xe:switchFacet
+														id="switchFacet1" defaultFacet="text">
+														<xe:this.selectedFacet><![CDATA[#{javascript:return p.type||"text"}]]></xe:this.selectedFacet>
 														<xp:this.facets>
-															<xp:inputText xp:key="text" value="#{p.value}"
-																dojoType="dijit/form/ValidationTextBox" id="inputText1"
+															<xp:inputText
+																xp:key="text" value="#{p.value}"
+																dojoType="dijit.form.ValidationTextBox" id="inputText1"
 																style="width: 30em">
 																<xp:this.attrs>
-																	<xp:attr name="data-param" value="#{p.name}">
+																	<xp:attr
+																		name="data-param" value="#{p.name}">
 																	</xp:attr>
 																</xp:this.attrs>
 																<xp:this.dojoAttributes>
-																	<xp:dojoAttribute name="required"
+																	<xp:dojoAttribute
+																		name="required"
 																		value="#{javascript:(p.optional!=true).toString()}">
 																	</xp:dojoAttribute>
-																	<xp:dojoAttribute name="regExp"
-																		value="#{javascript:p.regexp}">
+																	<xp:dojoAttribute
+																		name="regExp" value="#{javascript:p.regexp}">
 																	</xp:dojoAttribute>
 																</xp:this.dojoAttributes>
 															</xp:inputText>
-															<xp:inputText xp:key="int" value="#{p.value}"
-																dojoType="dijit/form/NumberTextBox" id="inputText2"
+															<xp:inputText
+																xp:key="int" value="#{p.value}"
+																dojoType="dijit.form.NumberTextBox" id="inputText2"
 																style="width: 30em">
 																<xp:this.attrs>
-																	<xp:attr name="data-param" value="#{p.name}">
+																	<xp:attr
+																		name="data-param" value="#{p.name}">
 																	</xp:attr>
 																</xp:this.attrs>
 																<xp:this.dojoAttributes>
-																	<xp:dojoAttribute name="required"
+																	<xp:dojoAttribute
+																		name="required"
 																		value="#{javascript:(p.optional!=true).toString()}">
 																	</xp:dojoAttribute>
 																</xp:this.dojoAttributes>
 															</xp:inputText>
-															<xp:inputTextarea xp:key="textarea"
-																value="#{p.value}" dojoType="dijit/form/TextArea" id="inputText3"
-																rows="10" style="width: 30em; margin-left: 1px">
+															<xp:inputTextarea
+																xp:key="textarea" value="#{p.value}"
+																dojoType="ValidationTextarea" id="inputText3" rows="10"
+																style="width: 30em; margin-left: 1px">
 																<xp:this.attrs>
-																	<xp:attr name="data-param" value="#{p.name}">
+																	<xp:attr
+																		name="data-param" value="#{p.name}">
 																	</xp:attr>
 																</xp:this.attrs>
 																<xp:this.dojoAttributes>
-																	<xp:dojoAttribute name="required"
+																	<xp:dojoAttribute
+																		name="required"
 																		value="#{javascript:(p.optional!=true).toString()}">
 																	</xp:dojoAttribute>
 																</xp:this.dojoAttributes>
 															</xp:inputTextarea>
-															<xp:comboBox id="comboBox1" xp:key="combo"
-																value="#{p.value}" dojoType="dijit/form/ComboBox" style="width: 30em%">
+															<xp:comboBox
+																id="comboBox1" xp:key="enumerated" value="#{p.value}"
+																dojoType="dijit.form.ComboBox" style="width: 30em%">
 																<xp:this.attrs>
-																	<xp:attr name="data-param" value="#{p.name}">
+																	<xp:attr
+																		name="data-param" value="#{p.name}">
 																	</xp:attr>
 																</xp:this.attrs>
 																<xp:selectItems>
@@ -223,7 +243,7 @@ return "text"}]]></xe:this.selectedFacet>
 													<xp:text escape="true" id="computedField4" value="#{p.type}">
 													</xp:text>
 												</xp:column>
-												<xp:column id="column4" styleClass="paramCol5">
+												<xp:column id="column4" styleClass="paramCol6">
 													<xp:text escape="true" id="computedField5" value="#{p.description}">
 													</xp:text>
 												</xp:column>

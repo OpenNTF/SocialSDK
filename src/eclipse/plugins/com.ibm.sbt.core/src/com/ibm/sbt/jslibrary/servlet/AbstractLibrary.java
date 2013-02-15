@@ -359,14 +359,13 @@ abstract public class AbstractLibrary {
 	}
 
 	protected StringBuilder generateModuleBlock(LibraryRequest request, String[][] registerModules,
-			String[] requireModules, int indentationLevel) {
+	        String[][] registerExtModules, String[] requireModules, int indentationLevel) {
 
 		StringBuilder sb = new StringBuilder();
 
 		// register the module paths and required modules
 		generateRegisterModules(sb, indentationLevel, request, registerModules, false);
-		if (StringUtil.isNotEmpty(request.getToolkitExtUrl())) {
-			String[][] registerExtModules = getRegisterExtModules();
+		if (registerExtModules != null) {
 			generateRegisterModules(sb, indentationLevel, request, registerExtModules, true);
 		}
 		generateRequireModules(sb, indentationLevel, requireModules);
@@ -474,10 +473,11 @@ abstract public class AbstractLibrary {
 
 			StringBuilder innerSB = new StringBuilder();
 			String[][] registerModules = getRegisterModules();
+			String[][] registerExtModules = StringUtil.isNotEmpty(request.getToolkitExtUrl()) ? getRegisterExtModules() : null;
 			String[] requireModules = getRequireModules();
 
 			indentationLevel += needsExternalAMDLoader ? 2 : 1;
-			innerSB = generateModuleBlock(request, registerModules, requireModules, indentationLevel);
+			innerSB = generateModuleBlock(request, registerModules, registerExtModules, requireModules, indentationLevel);
 			indentationLevel -= needsExternalAMDLoader ? 2 : 1;
 
 			indentationLevel++;
@@ -494,11 +494,12 @@ abstract public class AbstractLibrary {
 		}
 		// register the module paths and required modules
 		String[][] registerModulesAmd = getRegisterModulesAmd();
+		String[][] registerExtModulesAmd = StringUtil.isNotEmpty(request.getToolkitExtUrl()) ? getRegisterExtModulesAmd() : null;
 		String[] requireModulesAmd = getRequireModulesAmd();
 		if (isInnerBlock) {
 			indentationLevel++;
 		}
-		sb.append(generateModuleBlock(request, registerModulesAmd, requireModulesAmd, indentationLevel));
+		sb.append(generateModuleBlock(request, registerModulesAmd, registerExtModulesAmd, requireModulesAmd, indentationLevel));
 		if (isInnerBlock) {
 			indentationLevel--;
 		}
@@ -944,6 +945,13 @@ abstract public class AbstractLibrary {
 	protected String[][] getRegisterExtModules() {
 		return REGISTER_EXT_MODULES;
 	}
+
+    /**
+     * @return
+     */
+    protected String[][] getRegisterExtModulesAmd() {
+        return REGISTER_EXT_MODULES;
+    }
 
 	//
 	// Abstract stuff

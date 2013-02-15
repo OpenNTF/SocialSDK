@@ -147,21 +147,6 @@ function showCode() {
  * Update the selection for view.
  */
 function updateNavSelection() {
-	// When a view component is used
-	// Browse all the link and find the snippet with the id
-	// Why is this not working with a child id?
-	//dojo.query("a",pageGlobal.viewNavPanel).forEach(function(node, index, nodelist){
-	if(dojo.byId(pageGlobal.viewNavPanel)) {
-		dojo.query("a").forEach(function(node, index, nodelist){
-			if(node.href&&node.href.indexOf("#snippet")>=0) {
-				if(pageGlobal.id && node.href.indexOf(pageGlobal.id)>=0) {
-					dojo.addClass(node.parentNode,"lotusSelected")
-				} else {
-					dojo.removeClass(node.parentNode,"lotusSelected")
-				}
-			}
-		});
-	}
 	// When a tree is created
 	if(dojo.byId(pageGlobal.snippetsTree)) {
 		treeSelectId(pageGlobal.snippetsTree,pageGlobal.id);

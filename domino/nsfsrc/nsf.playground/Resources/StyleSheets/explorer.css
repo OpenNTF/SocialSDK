@@ -27,13 +27,47 @@ div.explorer_summary {
 
 div.explorer_summary:hover,div.explorer_summary:active {
     border: 1px solid #A4A4A4; 
-/*	cursor: pointer;
-	cursor: hand; */
 }
 
 div.explorer_sum_title, h4.lotusTitle {
    display: inline;
    font-weight: bold;
+}
+.sinceVersion {
+	margin-top: 8px;
+	padding: 5px 5px;
+	background: #4f81bd; /* Old browsers */
+	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+	background: -moz-linear-gradient(left, #4f81bd 0%, #8abbd7 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#4f81bd), color-stop(100%,#8abbd7)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(left, #4f81bd 0%,#8abbd7 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(left, #4f81bd 0%,#8abbd7 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(left, #4f81bd 0%,#8abbd7 100%); /* IE10+ */
+	background: linear-gradient(left, #4f81bd 0%,#8abbd7 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4f81bd', endColorstr='#8abbd7',GradientType=1 ); /* IE6-8 */
+ 	
+ 	border-radius: 10px;
+  	border: 2px solid white;
+	color: white;
+	font-size: 11pt;
+	font-weight: bold;
+}
+.sinceVersionMini {
+	padding: 2px 2px;
+	background: #4f81bd; /* Old browsers */
+	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+	background: -moz-linear-gradient(left, #4f81bd 0%, #8abbd7 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#4f81bd), color-stop(100%,#8abbd7)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(left, #4f81bd 0%,#8abbd7 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(left, #4f81bd 0%,#8abbd7 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(left, #4f81bd 0%,#8abbd7 100%); /* IE10+ */
+	background: linear-gradient(left, #4f81bd 0%,#8abbd7 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4f81bd', endColorstr='#8abbd7',GradientType=1 ); /* IE6-8 */
+ 	
+ 	border-radius: 5px;
+  	border: 1px solid white;
+	color: white;
+	font-size: 7pt;
 }
 
 div.explorer_sum_help_button {
@@ -89,7 +123,8 @@ div.explorer_results {
 .paramCol2 {vertical-align:top; width: 1px; }
 .paramCol3 {vertical-align:top; text-align: center;}
 .paramCol4 {vertical-align:top; margin-left: 5px; margin-right: 5px; width: 6em; white-space: nowrap;}
-.paramCol5 {vertical-align:top;}
+.paramCol5 {vertical-align:top; margin-left: 5px; margin-right: 5px; }
+.paramCol6 {vertical-align:top;}
 
 .resCol1 {vertical-align:top;}
 .resCol2 {vertical-align:top;}

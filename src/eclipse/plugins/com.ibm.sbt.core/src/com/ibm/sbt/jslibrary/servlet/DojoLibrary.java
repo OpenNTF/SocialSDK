@@ -30,17 +30,21 @@ public class DojoLibrary extends AbstractLibrary {
 
 	public static final String		NAME					= "dojo";					//$NON-NLS-1$
 
-	public static final String		MODULE_BRIDGE			= "sbt._bridge";
+    public static final String      MODULE_BRIDGE           = "sbt._bridge";            //$NON-NLS-1$
+    public static final String      MODULE_EXT_BRIDGE       = "sbtx._bridge";            //$NON-NLS-1$
 	public static final String		MODULE_DOJO				= "sbt.dojo";				//$NON-NLS-1$
 	public static final String		MODULE_SBTX				= "sbtx";					//$NON-NLS-1$
 	public static final String		MODULE_AMDCOMPAT		= "sbt._bridge.amdcompat";	//$NON-NLS-1$
-	public static final String		MODULE_BRIDGE_AMD		= "sbt/_bridge";            //$NON-NLS-1$
+    public static final String      MODULE_BRIDGE_AMD       = "sbt/_bridge";            //$NON-NLS-1$
+    public static final String      MODULE_EXT_BRIDGE_AMD   = "sbtx/_bridge";            //$NON-NLS-1$
 	public static final String		MODULE_DOJO_AMD			= "sbt/dojo";				//$NON-NLS-1$
     public static final String      MODULE_REQUESTTRANSPORT = "sbt/_bridge/RequestTransport"; //$NON-NLS-1$
 
 	public static final String		PATH_BRIDGE				= "_bridges/dojo";			//$NON-NLS-1$
-	public static final String		PATH_DOJO				= "dojo";					//$NON-NLS-1$
 	public static final String		PATH_BRIDGE_AMD			= "_bridges/dojo-amd";      //$NON-NLS-1$
+    public static final String      PATH_EXT_BRIDGE         = "_bridges/dojo";          //$NON-NLS-1$
+    public static final String      PATH_EXT_BRIDGE_AMD     = "_bridges/dojo-amd";      //$NON-NLS-1$
+    public static final String      PATH_DOJO               = "dojo";                   //$NON-NLS-1$
 
 	static private final String[][]	REGISTER_MODULES		= { { MODULE_SBT, PATH_SBT },
 			{ MODULE_BRIDGE, PATH_BRIDGE }, { MODULE_DOJO, PATH_DOJO } };
@@ -51,6 +55,11 @@ public class DojoLibrary extends AbstractLibrary {
 			{ MODULE_BRIDGE_AMD, PATH_BRIDGE_AMD }, { MODULE_DOJO_AMD, PATH_DOJO } };
 
 	static private final String[]	REQUIRE_MODULES_AMD		= new String[0];
+	
+	// extension modules
+	
+    private static final String[][] REGISTER_EXT_MODULES    = { { MODULE_SBTX, PATH_SBTX }, { MODULE_EXT_BRIDGE, PATH_EXT_BRIDGE } };
+    private static final String[][] REGISTER_EXT_MODULES_AMD= { { MODULE_SBTX, PATH_SBTX }, { MODULE_EXT_BRIDGE_AMD, PATH_EXT_BRIDGE_AMD } };
 
 	static private final String		DEFINE_MODULE			= MODULE_CONFIG;
 
@@ -110,6 +119,22 @@ public class DojoLibrary extends AbstractLibrary {
 	@Override
 	protected String[][] getRegisterModulesAmd() {
 		return REGISTER_MODULES_AMD;
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.ibm.sbt.jslibrary.servlet.AbstractLibrary#getRegisterExtModules()
+	 */
+	@Override
+	protected String[][] getRegisterExtModules() {
+	    return REGISTER_EXT_MODULES;
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.ibm.sbt.jslibrary.servlet.AbstractLibrary#getRegisterExtModulesAmd()
+	 */
+	@Override
+	protected String[][] getRegisterExtModulesAmd() {
+	    return REGISTER_EXT_MODULES_AMD;
 	}
 
 	/*

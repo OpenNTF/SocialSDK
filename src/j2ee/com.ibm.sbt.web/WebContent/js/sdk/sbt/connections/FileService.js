@@ -746,7 +746,7 @@ define(
 								entries.push(entry);
 							}
 							return entries;
-						},						
+						},
 
 						_executeDelete : function(args, url, headers) {
 							var _self = this;
@@ -996,7 +996,7 @@ define(
 								if (index == -1) {
 									index = filePath.lastIndexOf("/");
 								}
-								headers["Slug"] = filePath.substring(index + 1);									
+								headers["Slug"] = filePath.substring(index + 1);
 								_self._endpoint.xhrPost({
 									url : url,
 									postData : binaryContent,
@@ -1007,7 +1007,7 @@ define(
 									error : function(error) {
 										validate.notifyError(error, args);
 									}
-								});								
+								});
 							};
 							reader.onerror = function(event) {
 								alert("error" + event);
@@ -1315,20 +1315,83 @@ define(
 							this._executeGet(_args, url);
 						},
 
-						// ---------------------------------------------------
-
-						_addFilesToFolder : function(collectionId, fileIds, args) {
+						/**
+						 * Retrieve a folder.
+						 * @method getFolder						 
+						 * @param {Object} [args] Argument object
+						 * @param {String} [args.collectionId] the Id of the folder
+						 * @param {Function} [args.load] The callback function will invoke when the folder is retrieved successfully. The function expects one
+						 * parameter, the status of the retrieve openration.
+						 * @param {Function} [args.error] Sometimes the delete calls fails due to bad request (400 error). The error parameter is a callback
+						 * function that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the
+						 * error function is a JavaScript Error object indicating what the failure was. From the error object. one can access the javascript
+						 * library error object, the status code and the error message.
+						 * @param {Function} [args.handle] This callback function is called regardless of whether the call to get files in foldercompletes or
+						 * fails. The parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to
+						 * the javascript library error object, the status code and the error message.
+						 */
+						getFolder : function(args) {
+							if (!validate._validateInputTypesAndNotify("FileService", "getFilesInFolder", [ "args", "collectionId" ], [ args,
+									args ? args.collectionId : null ], [ 'object', 'string' ], args)) {
+								return;
+							}
 							var accessType = constants.accessType.AUTHENTICATED;
 							var subFilters = new _SubFilters();
-							subFilters.setCollectionId(collectionId);
-							var resultType = constants.resultType.FEED;
-							var parameters = args.parameters ? lang.mixin({}, args.parameters) : {};
-							parameters["itemId"] = fileIds;
-							var url = this._constructUrl(constants.baseUrl.FILES, accessType, null, null, null, subFilters, resultType, parameters);
-							this._executePost(args, url, null, null);
+							subFilters.setCollectionId(args.collectionId);
+							var resultType = constants.resultType.ENTRY;
+							var url = this._constructUrl(constants.baseUrl.FILES, accessType, null, null, null, subFilters, resultType);
+							var _args = args ? lang.mixin({}, args) : {};
+							_args["responseFormat"] = constants.responseFormat.SINGLE;
+							this._executeGet(_args, url);
 						},
 
-						_retrieveFileComment : function(file, comment, args) {
+						/**
+						 * Add files a folder.
+						 * @method addFilesToFolder						 
+						 * @param {Object} [args] Argument object
+						 * @param {String} [args.collectionId] the Id of the folder
+						 * @param {String} [args.fileIds] comma seperated list of fileIds
+						 * @param {Function} [args.load] The callback function will invoke when the file is added successfully. The function expects one
+						 * parameter, the status of the add openration.
+						 * @param {Function} [args.error] Sometimes the delete calls fails due to bad request (400 error). The error parameter is a callback
+						 * function that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the
+						 * error function is a JavaScript Error object indicating what the failure was. From the error object. one can access the javascript
+						 * library error object, the status code and the error message.
+						 * @param {Function} [args.handle] This callback function is called regardless of whether the call to Add files a folder completes or
+						 * fails. The parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to
+						 * the javascript library error object, the status code and the error message.
+						 */
+						addFilesToFolder : function(args) {
+							if (!validate._validateInputTypesAndNotify("FileService", "getFilesInFolder", [ "args", "collectionId", "fileIds" ], [ args,
+									args ? args.collectionId : null, args ? args.fileIds : null ], [ 'object', 'string', 'string' ], args)) {
+								return;
+							}
+
+							var _self = this;
+							this._getNonce({
+								load : function(nonceValue) {
+									var accessType = constants.accessType.AUTHENTICATED;
+									var subFilters = new _SubFilters();
+									subFilters.setCollectionId(args.collectionId);
+									var resultType = constants.resultType.FEED;
+									var parameters = args.parameters ? lang.mixin({}, args.parameters) : {};
+									parameters["itemId"] = args.fileIds;
+									var url = _self._constructUrl(constants.baseUrl.FILES, accessType, null, null, null, subFilters, resultType, parameters);
+									var headers = {
+										"X-Update-Nonce" : nonceValue
+									};
+									var _args = args ? lang.mixin({}, args) : {};
+									_args["responseFormat"] = constants.responseFormat.NON_XML_FORMAT;
+									_self._executePost(_args, url, headers, null);
+								},
+								error : function(error) {
+									validate.notifyError(error, args);
+								}
+							});
+
+						},
+
+						retrieveFileComment : function(file, comment, args) {
 							var accessType = constants.accessType.AUTHENTICATED;
 							var subFilters = new _SubFilters();
 							subFilters.setUserId(file.getPersonEntry().getAuthorId());

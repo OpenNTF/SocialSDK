@@ -43,12 +43,21 @@ public class ToolkitServlet extends LibraryServlet {
 	    	//http://priand2/xsp/.ibmxspres/.sbtsdk/sbt/Cache.js
 			String toolkitUrl = UrlUtil.getServerUrl(getHttpRequest())+"/xsp"+SbtResourceProvider.RESOURCE_PATH+"/";
 			String toolkitJsUrl = toolkitUrl;
+			params.setToolkitUrl(toolkitUrl);
+			params.setToolkitJsUrl(toolkitJsUrl);
+
+			// Should be contributed by the other library...
+			// Hard coded for now
+			boolean sbtx = true;
+			if(sbtx) {
+				String toolkitExtUrl = UrlUtil.getServerUrl(getHttpRequest())+"/xsp"+SbtResourceProvider.RESOURCE_PATH+"x/";
+				String toolkitExtJsUrl = toolkitExtUrl;
+				params.setToolkitExtUrl(toolkitExtUrl);
+				params.setToolkitExtJsUrl(toolkitExtJsUrl);
+			}
 			
 			// Calculate the proxy URL
 			String serviceUrl = RuntimeConstants.get().getBaseProxyUrl(getHttpRequest());
-			
-			params.setToolkitUrl(toolkitUrl);
-			params.setToolkitJsUrl(toolkitJsUrl);
 			params.setServiceUrl(serviceUrl);
 			
 			super.init(params);

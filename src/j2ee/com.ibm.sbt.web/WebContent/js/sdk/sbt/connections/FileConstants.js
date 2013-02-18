@@ -109,6 +109,7 @@ define([], function() {
 		views : {
 			"FILES" : "/documents",
 			"FOLDERS" : "/collections",
+			"FOLDER" : "/collection",
 			"RECYCLEBIN" : "/view/recyclebin"
 		},
 		responseFormat : {

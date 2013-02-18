@@ -23,8 +23,7 @@ import com.ibm.commons.util.io.json.JsonObject;
 public class DefaultMimeEmail extends AbstractMimeEmail implements MimeEmail {
     
     //TODO do we want to make this configurable?
-    private static final String SBT_SESSION_RESOURCE = "java:comp/env/mail/SBTSession";
-    
+        
     /**
      * Constructs a MIME email.
      */
@@ -101,7 +100,7 @@ public class DefaultMimeEmail extends AbstractMimeEmail implements MimeEmail {
         }
         try {
             InitialContext initCtx = new InitialContext();
-            Object obj = initCtx.lookup(SBT_SESSION_RESOURCE);
+            Object obj = initCtx.lookup(EnvironmentConfig.INSTANCE.getSbtSessionResource());
             if(!(obj instanceof Session)) {
                 throw new MimeEmailException("Could not get valid Session object.");
             } 

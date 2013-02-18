@@ -29,7 +29,6 @@ define(['dojo/_base/lang'],function(lang) {
 			return lang.isString(o);
 		},
         isFunction: function(o) {
-            //return dojo.isFunction(o);
             return typeof o == 'function';
         },
 		clone: function(o) {
@@ -49,6 +48,9 @@ define(['dojo/_base/lang'],function(lang) {
         		s = s + (o.charAt(0)=='/'?o.substring(1):o);
         	}
         	return s;
+        },
+        hitch: function() {
+            return lang.hitch(arguments);
         }
 	};
 });

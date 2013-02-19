@@ -157,22 +157,20 @@ public class DojoLibrary extends AbstractLibrary {
 	@Override
 	protected String generateRequire(String module) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("dojo.require('").append(module).append("')");
+		sb.append("dojo.require('").append(module).append("')").append(";\n");
 		return sb.toString();
 	}
-    
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * com.ibm.sbt.jslibrary.servlet.AbstractLibrary#getTransport(LibraryRequest, Endpoint, java.lang.String)
-     */     
-    @Override
-    protected JSReference getTransport(LibraryRequest request, Endpoint endpoint, String endpointName) {
-    	// Dojo versions from 1.8 and above should use dojo/Request
-    	if(request.getJsVersion().startsWith("1.8")) {
-        	return endpoint.getTransport(endpointName, MODULE_REQUESTTRANSPORT);
-    	}
-    	return endpoint.getTransport(endpointName, MODULE_TRANSPORT);
-    }
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.ibm.sbt.jslibrary.servlet.AbstractLibrary#getTransport(LibraryRequest, Endpoint, java.lang.String)
+	 */
+	@Override
+	protected JSReference getTransport(LibraryRequest request, Endpoint endpoint, String endpointName) {
+		// Dojo versions from 1.8 and above should use dojo/Request
+		if (request.getJsVersion().startsWith("1.8")) {
+			return endpoint.getTransport(endpointName, MODULE_REQUESTTRANSPORT);
+		}
+		return endpoint.getTransport(endpointName, MODULE_TRANSPORT);
+	}
 }

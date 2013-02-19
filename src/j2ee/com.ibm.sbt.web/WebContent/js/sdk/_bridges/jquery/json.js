@@ -2,7 +2,7 @@
  * JQuery implementation of the JSON methods.
  * @module json
  */
-define([],function() {
+define(['jquery'],function($) {
     return {
         /**
          * Parses a String of JSON and returns a JSON Object.
@@ -11,7 +11,7 @@ define([],function() {
          * @static
          */
         parse : function(jsonString) {
-            return jQuery.parseJSON(jsonString);
+            return $.parseJSON(jsonString);
         },
         
         /**

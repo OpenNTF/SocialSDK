@@ -20,7 +20,7 @@
  * 
  * Helpers for the core Connections capabilities
  */
-define([],function() {
+define(['sbt/config'],function(sbt) {
 	return sbt.connections = {
 		// Namespaces used when parsing the Connections Atom feeds
 		namespaces: {

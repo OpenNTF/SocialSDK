@@ -17,10 +17,10 @@
 /**
  * Social Business Toolkit SDK - Some DOM utilities.
  */
-define([], function() {
+define(['jquery'], function($) {
 	return {
         byId: function(id) {
-            return jQuery(id);
+            return $("#"+id)[0];
         },
         createTextNode: function(text) {
             return document.createTextNode(text);

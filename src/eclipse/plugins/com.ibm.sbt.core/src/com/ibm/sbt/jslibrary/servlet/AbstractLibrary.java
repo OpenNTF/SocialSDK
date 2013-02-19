@@ -108,7 +108,7 @@ abstract public class AbstractLibrary {
 	public static final String		MODULE_XPATH				= "sbt/xpath";
 	public static final String		MODULE_XSL					= "sbt/xsl";
 	public static final String		MODULE_BASIC				= "sbt/authenticator/Basic";
-	public static final String		MODULE_OAUTH10				= "sbt/authenticator/OAuth10";
+	public static final String		MODULE_OAUTH				= "sbt/authenticator/OAuth";
 
 	public static final String		PATH_SBT					= "sbt";							//$NON-NLS-1$
 	public static final String		PATH_SBTX					= "sbtx";							//$NON-NLS-1$
@@ -358,14 +358,13 @@ abstract public class AbstractLibrary {
 	}
 
 	protected StringBuilder generateModuleBlock(LibraryRequest request, String[][] registerModules,
-			String[] requireModules, int indentationLevel) {
+			String[][] registerExtModules, String[] requireModules, int indentationLevel) {
 
 		StringBuilder sb = new StringBuilder();
 
 		// register the module paths and required modules
 		generateRegisterModules(sb, indentationLevel, request, registerModules, false);
-		if (StringUtil.isNotEmpty(request.getToolkitExtUrl())) {
-			String[][] registerExtModules = getRegisterExtModules();
+		if (registerExtModules != null) {
 			generateRegisterModules(sb, indentationLevel, request, registerExtModules, true);
 		}
 		generateRequireModules(sb, indentationLevel, requireModules);
@@ -467,10 +466,13 @@ abstract public class AbstractLibrary {
 			indent(sb).append("if(typeof define=='undefined'){\n");
 
 			String[][] registerModules = getRegisterModules();
+			String[][] registerExtModules = StringUtil.isNotEmpty(request.getToolkitExtUrl()) ? getRegisterExtModules()
+					: null;
 			String[] requireModules = getRequireModules();
 
 			indentationLevel++;
-			sb.append(generateModuleBlock(request, registerModules, requireModules, indentationLevel));
+			sb.append(generateModuleBlock(request, registerModules, registerExtModules, requireModules,
+					indentationLevel));
 			indentationLevel--;
 
 			indent(sb).append("} else {\n");
@@ -479,11 +481,14 @@ abstract public class AbstractLibrary {
 		}
 		// register the module paths and required modules
 		String[][] registerModulesAmd = getRegisterModulesAmd();
+		String[][] registerExtModulesAmd = StringUtil.isNotEmpty(request.getToolkitExtUrl()) ? getRegisterExtModulesAmd()
+				: null;
 		String[] requireModulesAmd = getRequireModulesAmd();
 		if (isInnerBlock) {
 			indentationLevel++;
 		}
-		sb.append(generateModuleBlock(request, registerModulesAmd, requireModulesAmd, indentationLevel));
+		sb.append(generateModuleBlock(request, registerModulesAmd, registerExtModulesAmd, requireModulesAmd,
+				indentationLevel));
 		if (isInnerBlock) {
 			indentationLevel--;
 		}
@@ -914,6 +919,13 @@ abstract public class AbstractLibrary {
 	 * @return
 	 */
 	protected String[][] getRegisterExtModules() {
+		return REGISTER_EXT_MODULES;
+	}
+
+	/**
+	 * @return
+	 */
+	protected String[][] getRegisterExtModulesAmd() {
 		return REGISTER_EXT_MODULES;
 	}
 

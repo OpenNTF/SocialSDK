@@ -10,6 +10,8 @@ import lotus.domino.NotesException;
 import lotus.domino.ViewEntry;
 
 import com.ibm.commons.Platform;
+import com.ibm.commons.runtime.util.UrlUtil;
+import com.ibm.commons.util.PathUtil;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonParser;
 import com.ibm.jscript.JSContext;
@@ -32,6 +34,8 @@ import com.ibm.xsp.util.JavaScriptUtil;
  * @author priand
  */
 public class APIBean extends AssetBean {
+	
+	public static final boolean TRACE = false;
 
 	private static JSContext jsContext = JavaScriptUtil.getJSContext();
 
@@ -75,15 +79,12 @@ public class APIBean extends AssetBean {
 						o.put("endpoint", FBSString.get(endpoint));
 					}
 					String baseDocUrl = doc.getItemValueString("BaseDocUrl");
-					if(StringUtil.isNotEmpty(endpoint)) {
-						o.put("baseDocUrl", FBSString.get(baseDocUrl));
-					}
 					String json = doc.getItemValueString("Json");
 					if(StringUtil.isNotEmpty(json)) {
 						FBSValue value = (FBSValue)JsonParser.fromJson(new JsonJavaScriptFactory(jsContext), json);
 						o.put("items", value);
 					}
-					fixAPIObject(o);
+					fixAPIObject(o,baseDocUrl);
 				}
 			}
 		} catch(Exception ex) {
@@ -93,19 +94,21 @@ public class APIBean extends AssetBean {
 	}
 
 	// Make sure the Json objects are what is expected 
-	protected void fixAPIObject(ObjectObject o) throws Exception {
+	protected void fixAPIObject(ObjectObject o, String baseDocUrl) throws Exception {
 		ArrayObject a = (ArrayObject)o.get("items");
 		int count = a.getArrayLength();
 		for(int i=0; i<count; i++) {
 			ObjectObject item = (ObjectObject)a.getArrayElement(i);
-			fixItem(item);
+			fixItem(item,baseDocUrl);
 		}
 	}
-	protected void fixItem(ObjectObject item) throws Exception {
+	protected void fixItem(ObjectObject item, String baseDocUrl) throws Exception {
 		// Load the URI parameters
 		fixUriParameters(item);
 		// Load the Query parameters
 		fixQueryParameters(item);
+		// Load the full documentation URL
+		fixDocUrl(item,baseDocUrl);
 	}
 	
 	
@@ -125,6 +128,15 @@ public class APIBean extends AssetBean {
 			((ObjectObject)o).put("queryParameters",params);
 		}
 	}
+	protected void fixDocUrl(ObjectObject o, String baseDocUrl) throws Exception {
+		FBSValue params = o.get("doc_url");
+		if(!params.isNull()) {
+			String url = params.stringValue();
+			if(!UrlUtil.isAbsoluteUrl(url) && StringUtil.isNotEmpty(baseDocUrl)) {
+				o.put("doc_url", FBSString.get(PathUtil.concat(baseDocUrl, url, '/')));
+			}
+		} 
+	}
 	private void extract(ArrayObject a, ObjectObject parent, String prop) throws Exception {
 		FBSValue v = parent.get(prop);
 		if(!v.isString()) {
@@ -139,7 +151,9 @@ public class APIBean extends AssetBean {
 				if(end>start+1) {
 					FBSValue p = FBSUtility.wrap(value.substring(start+1,end).trim());
 					if(!contains(a,p.stringValue())) {
-						System.out.println(StringUtil.format("Missing uri property {0}",p));
+						if(TRACE) {
+							System.out.println(StringUtil.format("Missing uri property {0}",p));
+						}
 						addParam(a, p, FBSString.emptyString, FBSUtility.wrap("string"), FBSString.emptyString);
 					}
                     pos = end + 1;

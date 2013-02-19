@@ -202,7 +202,7 @@ dataAccess.copyEnvironment(document1,v);
 					</xe:formRow>
 				</xe:formTable>
 			</xp:section>
-			<xp:section loaded="false" id="section3" header="Domino"
+			<xp:section id="section3" header="Domino"
 				initClosed="true">
 				<xe:formTable>
 					<xe:formRow id="formRow7" label="URL:">

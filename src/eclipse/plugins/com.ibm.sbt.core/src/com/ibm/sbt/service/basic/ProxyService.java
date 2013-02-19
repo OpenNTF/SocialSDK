@@ -357,68 +357,70 @@ public class ProxyService {
 			for (Header header : headers) {
 				String headername = header.getName();
 
-				if (headername.equalsIgnoreCase("Set-Cookie") && forwardCookies(method, request)) { // $NON-NLS-1$
-					// If cookie, have to rewrite domain/path for browser.
-					String setcookieval = header.getValue();
-
-					if (setcookieval != null) {
-						String thisserver = request.getServerName();
-
-						String thisdomain;
-						if (thisserver.indexOf('.') == -1) {
-							thisdomain = "";
-						}
-						else {
-							thisdomain = thisserver.substring(thisserver.indexOf('.'));
-						}
-						String domain = null;
-
-						// path info = /protocol/server/path-on-server
-						//Matcher m = cookiePathPattern.matcher(request.getPathInfo());
-						String thispath = request.getContextPath() + request.getServletPath();
-						String path = null;
-
-						String[][] cookparams = getCookieStrings(setcookieval);
-
-						for (int j = 1; j < cookparams.length; j++) {
-							if ("domain".equalsIgnoreCase(cookparams[j][0])) { // $NON-NLS-1$
-								domain = cookparams[j][1];
-								cookparams[j][1] = null;
-							} else if ("path".equalsIgnoreCase(cookparams[j][0])) { // $NON-NLS-1$
-								path = cookparams[j][1];
-								cookparams[j][1] = null;
+				if (headername.equalsIgnoreCase("Set-Cookie") ) { // $NON-NLS-1$
+					if(forwardCookies(method, request)) {
+						// If cookie, have to rewrite domain/path for browser.
+						String setcookieval = header.getValue();
+	
+						if (setcookieval != null) {
+							String thisserver = request.getServerName();
+	
+							String thisdomain;
+							if (thisserver.indexOf('.') == -1) {
+								thisdomain = "";
 							}
-						}
-
-						if (domain == null) {
-							domain = method.getURI().getHost();
-						}
-
-						// Set cookie name
-						String encoded = encodeCookieNameAndPath(cookparams[0][0], path, domain);
-						if(encoded!=null) {
-							String newcookiename = PASSTHRUID + encoded;
-
-							StringBuilder newset = new StringBuilder(newcookiename);
-							newset.append('=');
-							newset.append(cookparams[0][1]);
-
+							else {
+								thisdomain = thisserver.substring(thisserver.indexOf('.'));
+							}
+							String domain = null;
+	
+							// path info = /protocol/server/path-on-server
+							//Matcher m = cookiePathPattern.matcher(request.getPathInfo());
+							String thispath = request.getContextPath() + request.getServletPath();
+							String path = null;
+	
+							String[][] cookparams = getCookieStrings(setcookieval);
+	
 							for (int j = 1; j < cookparams.length; j++) {
-								String settingname = cookparams[j][0];
-								String settingvalue = cookparams[j][1];
-								if (settingvalue != null) {
-									newset.append("; ").append(settingname); // $NON-NLS-1$
-									newset.append('=').append(settingvalue); // $NON-NLS-1$
+								if ("domain".equalsIgnoreCase(cookparams[j][0])) { // $NON-NLS-1$
+									domain = cookparams[j][1];
+									cookparams[j][1] = null;
+								} else if ("path".equalsIgnoreCase(cookparams[j][0])) { // $NON-NLS-1$
+									path = cookparams[j][1];
+									cookparams[j][1] = null;
 								}
 							}
-
-							newset.append("; domain=").append(thisdomain); // $NON-NLS-1$
-							newset.append("; path=").append(thispath); // $NON-NLS-1$
-
-							String newsetcookieval = newset.toString();
-							// this implementation of HttpServletRequest seems to have issues... setHeader works as I would
-							// expect addHeader to.
-							response.setHeader(headername, newsetcookieval);
+	
+							if (domain == null) {
+								domain = method.getURI().getHost();
+							}
+	
+							// Set cookie name
+							String encoded = encodeCookieNameAndPath(cookparams[0][0], path, domain);
+							if(encoded!=null) {
+								String newcookiename = PASSTHRUID + encoded;
+	
+								StringBuilder newset = new StringBuilder(newcookiename);
+								newset.append('=');
+								newset.append(cookparams[0][1]);
+	
+								for (int j = 1; j < cookparams.length; j++) {
+									String settingname = cookparams[j][0];
+									String settingvalue = cookparams[j][1];
+									if (settingvalue != null) {
+										newset.append("; ").append(settingname); // $NON-NLS-1$
+										newset.append('=').append(settingvalue); // $NON-NLS-1$
+									}
+								}
+	
+								newset.append("; domain=").append(thisdomain); // $NON-NLS-1$
+								newset.append("; path=").append(thispath); // $NON-NLS-1$
+	
+								String newsetcookieval = newset.toString();
+								// this implementation of HttpServletRequest seems to have issues... setHeader works as I would
+								// expect addHeader to.
+								response.setHeader(headername, newsetcookieval);
+							}
 						}
 					}
 				}

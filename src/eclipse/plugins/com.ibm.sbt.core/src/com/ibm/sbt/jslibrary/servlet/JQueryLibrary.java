@@ -206,7 +206,7 @@ public class JQueryLibrary extends AbstractLibrary {
 	 */
 	@Override
 	protected StringBuilder generateModuleBlock(LibraryRequest request, String[][] registerModules,
-			String[] requireModules, int indentationLevel) {
+			String[][] registerExtModules, String[] requireModules, int indentationLevel) {
 		StringBuilder sb = new StringBuilder();
 		indent(sb, indentationLevel).append("requirejs.config({\n");
 		indentationLevel += 1;
@@ -221,8 +221,7 @@ public class JQueryLibrary extends AbstractLibrary {
 		// register the module paths and required modules
 		boolean hasExtension = StringUtil.isNotEmpty(request.getToolkitExtUrl());
 		generateRegisterModules(sb, indentationLevel, request, registerModules, hasExtension);
-		if (hasExtension) {
-			String[][] registerExtModules = getRegisterExtModules();
+		if (registerExtModules != null) {
 			generateRegisterModules(sb, indentationLevel, request, registerExtModules, false);
 		}
 

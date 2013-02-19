@@ -14,10 +14,12 @@ public class OptionsBean {
 
 	private boolean playgroundEnabled;
 	private boolean explorerEnabled;
+	private boolean apacheLicense;
 	
 	public OptionsBean() {
 		this.playgroundEnabled = true;
-		this.explorerEnabled = DominoUtils.getEnvironmentInt("APIExplorer")!=0;
+		this.explorerEnabled = DominoUtils.getEnvironmentInt("Playground_APIExplorer")!=0;
+		this.apacheLicense = DominoUtils.getEnvironmentInt("Playground_ApacheLicense")!=0;
 	}
 
 	public boolean isPlaygroundEnabled() {
@@ -34,5 +36,13 @@ public class OptionsBean {
 
 	public void setExplorerEnabled(boolean explorerEnabled) {
 		this.explorerEnabled=explorerEnabled;
+	}
+
+	public boolean isApacheLicense() {
+		return apacheLicense;
+	}
+
+	public void setApacheLicense(boolean apacheLicense) {
+		this.apacheLicense=apacheLicense;
 	}
 }

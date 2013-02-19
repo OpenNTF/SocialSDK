@@ -3,8 +3,11 @@
 	xmlns:xc="http://www.ibm.com/xsp/custom">
 	<xp:this.resources>
 		<xp:script src="/main.js" clientSide="true"></xp:script>
+		<!-- TEMP for 8.5.3 -->
+		<xp:dojoModule name="sbt._bridge.amdcompat"
+			loaded="${javascript:com.ibm.xsp.extlib.util.ExtLibUtil.isXPages853()}">
+		</xp:dojoModule>
 		<xp:styleSheet href="/mainpage.css"></xp:styleSheet>
 	</xp:this.resources>
-	<xc:ccOneUI21StylesFixes loaded="${javascript:com.ibm.xsp.extlib.util.ThemeUtil.isOneUIVersion(2,1)}"></xc:ccOneUI21StylesFixes>
-	<xc:ccOneUI30StylesFixes loaded="${javascript:com.ibm.xsp.extlib.util.ThemeUtil.isOneUIVersion(3,0)}"></xc:ccOneUI30StylesFixes>
+	<xc:ccOneUIStylesFixes></xc:ccOneUIStylesFixes>
 </xp:view>

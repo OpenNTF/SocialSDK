@@ -192,7 +192,7 @@ if(doc) {
 							</xe:djTabContainer>
 						</xe:djBorderPane>
 						<xe:djBorderPane region="top" splitter="false">
-							<xe:toolbar id="toolbar2">
+							<xe:toolbar id="toolbar2" style="display: inline-block">
 								<xe:this.treeNodes>
 									<xe:basicLeafNode label="Run"
 										styleClass="dijitEditorIcon dijitEditorIconViewSource"
@@ -207,7 +207,7 @@ if(doc) {
 										onClick="showCode()">
 									</xe:basicLeafNode>
 								</xe:this.treeNodes>
-							</xe:toolbar>
+								</xe:toolbar>
 						</xe:djBorderPane>
 						<xe:djBorderPane region="center"
 							style="border: 1px solid #AAAAAA;">
@@ -264,9 +264,6 @@ return "You don't have enough rights to edit and save this snippet"}]]></xe:this
 									<xp:actionGroup>
 										<xp:saveDocument var="document1">
 										</xp:saveDocument>
-
-
-
 										<xp:executeScript>
 											<xp:this.script><![CDATA[#{javascript:getComponent("snippetDialog").hide('widgetContainer1')
 var s = "loadSnippet('"+document1.getDocument().getUniversalID()+"');"
@@ -353,9 +350,9 @@ codeEditor.setValue(_codeData);
 			</xp:scriptBlock>
 		</xp:panel>
 	</xe:dialog>
-	
+
 	<xc:ccEnvironmentComboBoxDialogs></xc:ccEnvironmentComboBoxDialogs>
-	
+
 	<form id="PreviewForm" action="#{javascript:@FullUrl('/xsp/preview')}"
 		method="post" target="preview">
 		<input type="hidden" name="fm_html" id="html" />

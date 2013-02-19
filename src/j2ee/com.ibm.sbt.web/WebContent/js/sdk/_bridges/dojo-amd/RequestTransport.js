@@ -20,21 +20,43 @@
  */
 define([ 'dojo/_base/declare', 'dojo/request', 'dojo/_base/lang', 'dojox/xml/parser' ], function(declare, request, lang, parser){
 	return declare("sbt._bridge.RequestTransport", null, {
-		xhr: function(method, args, hasBody) { 
+		xhr: function(method, args, hasBody) { 			
 			var _self = this;
 			var _args = lang.mixin({}, args);
 			
-			// Encapsulate the callers parameters making them suitable for request(URL, options)
+			// All options expected by dojo/Request and the defaults
 			var _options = {
+					data: null,
+					query: null,
+					preventCache: false,
 					method: method,
-					query: _args.content,
-					handleAs: _args.handleAs
+					timeout: null,
+					handleAs: _args.handleAs,
+					headers: null
 			};
+			
+			if(method == "GET") {
+				_options.query = _args.content;
+			}
+			if(method == "PUT") {
+				_options.data = _args.putData;
+				_options.headers = _args.headers;
+			}
+			if(method == "POST") {
+				_options.data = _args.postData;
+				_options.headers = _args.headers;
+			}
 			
 			var _promise = request(_args.url, _options);
 			_promise.response.then(
-				function(response) {
-					return _args.handle(response.data);
+				function(response) {					
+					return _args.handle(response.data, {
+						args: args,
+						url: response.url,
+						query: response.options.query,
+						handleAs: response.options.handleAs,
+						xhr: response.xhr						
+					});
 				},
 				function(error) {
 					return _args.handle(_self.createError(error));

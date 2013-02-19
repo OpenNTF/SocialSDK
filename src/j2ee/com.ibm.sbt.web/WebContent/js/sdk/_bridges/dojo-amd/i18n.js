@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2010
+ * © Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -14,16 +14,17 @@
  * permissions and limitations under the License.
  */
 
-package com.ibm.xsp.sbtsdk.minifier;
-
-import com.ibm.xsp.resource.DojoModulePathResource;
-
 /**
- * @author priand
+ * Social Business Toolkit SDK.
+ * @module i18n
  */
-public class SbtDojoModulePath extends DojoModulePathResource {
+define(['dojo/i18n'],function(i18n) {
+	    var load = function(id, require, callback){	    	
+	    	i18n.load(id, require, callback); 
+	    };	    
+	    return {
+	    	load : load	    	
+	    }; 
+});
 
-    public SbtDojoModulePath() {
-        super("sbt/dojo", "/.ibmxspres/.extlib/dojo"); // $NON-NLS-1$ $NON-NLS-2$
-    }
-}
+

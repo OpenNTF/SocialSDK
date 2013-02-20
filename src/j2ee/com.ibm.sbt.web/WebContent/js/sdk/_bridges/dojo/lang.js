@@ -48,9 +48,6 @@ define([],function() {
         		s = s + (o.charAt(0)=='/'?o.substring(1):o);
         	}
         	return s;
-        },
-        hitch: function() {
-            return dojo.hitch(arguments);
         }
 	};
 });

@@ -19,39 +19,77 @@
  * 
  * Implementation of a XML HTTP Request using the JQuery API.
  */
-define([ 'dojo/_base/declare' ], function(declare) {
-	return declare("sbt/base/Transport", null, {
+define(['jquery', 'sbt/_bridge/declare', 'sbt/util' ], function($, declare, util) {
+	return declare("sbt._bridge.Transport", null, {
 		xhr: function(method, args, hasBody) {
 		    var url = args.url;
+		    var self = this;
+		    var jqVersion = $().jquery;
+		    var jQ_v_gte_18 = util.minVersion("1.8", jqVersion);
 		    var settings = {
 		        type: method,
 		        data: args.content,
-		        dataType: args.handleAs,
-		        success: function(data, textStatus, jqXHR) {
-		            handleSuccess(args, data, textStatus, jqXHR);
-		        },
-		        error: function(jqXHR, textStatus, errorThrown)  {
-		            handleError(args, jqXHR, textStatus, errorThrown);
-		        }
+		        dataType: args.handleAs
 		    };
 		    
-		    jQuery.ajax(url, settings);
+		    if (!jQ_v_gte_18) {
+		    	settings = $.extend(settings, {
+		    		success: function(data, textStatus, jqXHR) {
+		    			self.handleSuccess(args, data, textStatus, jqXHR);
+		    		},
+		    		error: function(jqXHR, textStatus, errorThrown)  {
+		    			self.handleError(args, jqXHR, textStatus, errorThrown);
+		    		}
+		    	});
+		    }
+		    
+		    var jqXHR = $.ajax(url, settings);
+		    
+		    if (jQ_v_gte_18) {
+		    	jqXHR.done(function(data, textStatus, jqXHR) {
+		            self.handleSuccess(args, data, textStatus, jqXHR);
+		        }).fail(function(jqXHR, textStatus, errorThrown)  {
+		            self.handleError(args, jqXHR, textStatus, errorThrown);
+		        });	
+		    }
 		},
 		handleSuccess: function(args, data, textStatus, jqXHR) {
 		    if (args.handle) {
-		        
+		        args.handle(data, args);
 		    }
 		    if (args.load) {
-		        
+		        args.load(data, args);
 		    }
 		},
 		handleError: function(args, jqXHR, textStatus, errorThrown) {
+			var error = this.createError(jqXHR, textStatus, errorThrown);
             if (args.handle) {
-                
+		        args.handle(error, args);
             }
             if (args.error) {
-                
+		        args.error(error, args);
             }
-		}
+		},
+		createError: function(jqXHR, textStatus, errorThrown) {
+            var _error = new Error();
+            _error.code = jqXHR.status || 400;
+            _error.message = this.getErrorMessage(jqXHR);
+            _error.cause = errorThrown || jqXHR;
+            _error.response = jqXHR.getAllResponseHeaders();
+            return _error;
+        },
+        getErrorMessage: function(jqXHR, textStatus) {
+            var text = jqXHR.responseText;
+            if (!text && (text=jqXHR.responseXML)) {
+                try {
+                    text = $($($.parseXML(text)).find("message")[0]).text().trim();
+                } catch(ex) {
+                    console.log(ex);
+                }
+                return text || textStatus;
+            } else {
+                return jqXHR;
+            }
+        }
 	});
 });

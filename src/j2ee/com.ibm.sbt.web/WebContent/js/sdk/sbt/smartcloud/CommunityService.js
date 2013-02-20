@@ -457,6 +457,15 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 					});
 			
 		},
+		_createEntityObject : function (service, id, type){
+			if(type == "community"){
+				var community = new Community (service, id);
+				return community;
+			}else if (type == "member"){
+				var member = new Member (service, id);
+				return member;
+			}
+		},
 	});
 	return CommunityService;
 });

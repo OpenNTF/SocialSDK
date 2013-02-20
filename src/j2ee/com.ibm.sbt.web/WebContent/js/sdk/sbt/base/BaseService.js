@@ -179,11 +179,8 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 		xpathArray: function(path){
 			return this._data && path ? xpath.selectNodes(this._data,path,this._con.namespaces) : null;
 		},
-		get: function(fieldName) {
-			if(fieldName == "tags"){
-				return this._getTags(fieldName);
-			}
-			return this._fields[fieldName] || this.xpath(this.fieldXPathForEntry(fieldName)) || this.xpath(this.fieldXPathForFeed(fieldName));				
+		get: function(fieldName) {			
+			return this._fields[fieldName] || this.xpath(this.fieldXPathForEntry(fieldName));				
 		},
 		
 		set: function(fieldName,value) {
@@ -196,17 +193,8 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 		
 		remove: function(fieldName) {
 			delete this._fields[fieldName];
-		},
-		_getTags: function(fieldName){			
-				var tagsObj = this.xpathArray(this.fieldXPathForEntry(fieldName)).slice(1);
-				var tags = [];
-				for(var count=0; count < tagsObj.length; count++){
-					var node = tagsObj[count];
-					var tag = node.text || node.textContent;
-					tags.push(tag);
-				}
-				return tags;					
-		},
+		}
+		
 	});
 	
 	/**
@@ -226,11 +214,14 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 		
 		_endpoint: null,
 		
-		constructor: function(_options) {
-			var options = _options || {};
-			this._endpoint = Endpoint.find(options.endpoint);
-			this.Constants = lang.mixin(lang.mixin({}, BaseConstants), options.Constants);
-			this._con = options.con || con; //NameSpaces
+		constructor: function(_options) {			
+			this._endpoint = Endpoint.find(_options.endpoint);
+			this.Constants = lang.mixin(lang.mixin({}, BaseConstants), _options.Constants);
+			this._con = _options.con || con; //NameSpaces
+			var cacheSize = _options.cacheSize;
+			if(cacheSize && cacheSize>0) {
+				this._cache = new Cache(cacheSize);
+			}
 			
 		},
 		
@@ -255,8 +246,8 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 			}
 		},
 		
-		_getOne: function(args,getArgs) {
-			var entity = getArgs.entity.apply(null, [this, args.id]);
+		_getOne: function(args,getArgs) {			
+			var entity = this._createEntityObject(this, args.id, getArgs.entityName);			
 			if(args.loadIt == false){
 				this._notifyResponse(args,entity);
 			}else{
@@ -267,55 +258,69 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 		
 		_load: function (entity,args,getArgs) {
 			getArgs.methodType = "get";
-			var loadCb = args.load;
-			var handleCb = args.handle;
 			var _self = this;
+			var handleAs = (getArgs.handleAs)?getArgs.handleAs : "text";
 			if (getArgs.cachingEnabled && requests[entity._id]) {
-				// If there is a pending request for this id, then we simply add this callback to it
-				if(loadCb){
-					requests[entity._id].push(loadCb);
-				}
-				if(handleCb){
-					requests[entity._id].push(handleCb);
-				}
+				this._stackRequestsForExistingId(entity, args);				
 			} else {
 				if (getArgs.cachingEnabled) {
-					if(loadCb) {
-						requests[entity._id] = [loadCb];
-					}
-					if(handleCb && requests[entity._id]) {
-						requests[entity._id].push(handleCb);
-					}else if (handleCb){
-						requests[entity._id] = [handleCb];
-					}
+					this._stackRequestsForNewId(entity, args);
 				}
 				this._endpoint.xhrGet({
 					serviceUrl:	this._constructServiceUrl(getArgs),
-					handleAs:	"text",
+					handleAs:	handleAs,
 					content:	_self._constructQueryObj(args,getArgs),
-					load: function(data, ioArgs) {						
-						var xpath_map = _self.Constants["xpath_" + getArgs.entityName];
-						var entry = xpath.selectNodes(xml.parse(data), xpath_map["entry"], _self._con.namespaces);
-						var node = entry[0];
-						entity.setData(node);
-						if(getArgs.onLoad){
-							getArgs.onLoad.apply(_self,[data, ioArgs, entity]);
-						}											      		
-						if (getArgs.cachingEnabled) {
-							notifyCb(entity._id, entity);
-						} else {
-							notifyCbNoCache(args, entity);
-						}					
+					load: function(data, ioArgs) {
+						if(handleAs == "text"){							
+							_self._loadOnLoad(data, ioArgs, entity, args, getArgs);	
+						}
 					},
 					error: function(error){
-						if(getArgs.onError){
-							getArgs.errorFunction.apply(null,[error]);
-						}else{
-						validate.notifyError(error, args);
-						}
+						_self._loadOnError(error, args);
 					}
 				});
 			}
+		},
+		
+		_loadOnLoad : function (data, ioArgs, entity, args, getArgs){
+			var xpath_map = this.Constants["xpath_" + getArgs.entityName];
+			var entry = xpath.selectNodes(xml.parse(data), xpath_map["entry"], this._con.namespaces);
+			var node = entry[0];
+			entity.setData(node);
+			if (getArgs.cachingEnabled) {
+				if(this._cache){
+					this._cache.put(xpath.selectText(entity._data,xpath_map.uid,con.namespaces),entity._data);
+				}
+				notifyCb(entity._id, entity);
+			} else {
+				notifyCbNoCache(args, entity);
+			}	
+		},
+		
+		_loadOnError : function (error, args){
+			validate.notifyError(error, args);
+		},
+		
+		_stackRequestsForExistingId : function (entity, args){
+			if(args.load){
+				requests[entity._id].push(args.load);
+			}
+			if(args.handle){
+				requests[entity._id].push(args.handle);
+			}
+		},
+		
+		_stackRequestsForNewId : function (entity, args){
+			if(args.load) {
+				requests[entity._id] = [args.load];
+			}
+			if(args.handle){
+				if(requests[entity._id]) {
+					requests[entity._id].push(args.handle);
+				}else {
+					requests[entity._id] = [args.handle];
+				}
+			}	
 		},
 		
 		getIdFromIdOrObject: function(inputEntity){
@@ -326,30 +331,28 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 			if(getArgs.xmlPayload){
 				return getArgs.xmlPayload;
 			}else{
-				return stringutil.replace(getArgs.xmlPayloadTemplate, getArgs.xmlData);				
+				return getArgs.xmlPayloadTemplate.replace(/{$(\w*)}/g,function(m,key){return getArgs.xmlData.hasOwnProperty(key)?xml.encodeXmlEntry(getArgs.xmlData[key]):"";});
 			}
 		},
 		
 		_createRequestObject: function(args, requestArgs){
-			
 			var _self = this;
+			var requestObject = {
+					serviceUrl:_self._constructServiceUrl(requestArgs)									
+			};
 			if (args.parameters) {
 				if(!(requestArgs.urlParams)){
 					requestArgs.urlParams = {};
 				}
 				requestArgs.urlParams = lang.mixin(requestArgs.urlParams, args.parameters);
 			}
-			return requestObject = {
-					serviceUrl:_self._constructServiceUrl(requestArgs),	
-					headers:requestArgs.headers,
-					error: function(error){
-						if(requestArgs.onError){
-							requestArgs.errorFunction.apply(null,[error]);
-						}else{
-							validate.notifyError(error, args);
-						}
-					}
-				};
+			if(requestArgs.headers){
+				requestObject.headers = requestArgs.headers;
+			}
+			if(requestArgs.handleAs){
+				requestObject.handleAs = requestArgs.handleAs;
+			}
+			return requestObject;
 		},
 		
 		/**
@@ -367,18 +370,28 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 		_createEntity: function (args, postArgs) {
 			var _self = this;
 			var entity = postArgs.entity;
+			var handleAs = (postArgs.handleAs)?getArgs.handleAs : "text";
 			var requestObject = lang.mixin({
 				postData:_self._constructXMLPayload(postArgs),
 				load:function(data, ioArgs){
-					if(postArgs.onLoad){
-						postArgs.onLoad.apply(_self,[data, ioArgs, entity]);
-					}else{
-					entity.data = xml.parse(data);
-					_self._notifyResponse(args,entity);
+					if(handleAs == "text"){
+						_self._createEntityOnLoad(data, ioArgs, entity, args);
 					}
 				},
+				error:function(error){
+					_self._createEntityOnError(error, args);
+				}
 			}, _self._createRequestObject(args, postArgs));
 			this._endpoint.xhrPost(requestObject);
+		},
+		
+		_createEntityOnLoad : function (data, ioArgs, entity, args){
+			entity.data = xml.parse(data);
+			this._notifyResponse(args,entity);
+		},
+		
+		_createEntityOnError : function (error, args){
+			validate.notifyError(error, args);
 		},
 		
 		/**
@@ -396,18 +409,28 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 			
 			var _self = this;
 			var entity = putArgs.entity;
+			var handleAs = (putArgs.handleAs)?getArgs.handleAs : "text";
 			var requestObject = lang.mixin({
 				putData:_self._constructXMLPayload(putArgs),
 				load:function(data, ioArgs){
-					if(putArgs.onLoad){
-						putArgs.onLoad.apply(_self,[data, ioArgs, entity]);
-					}else{
-					entity.data = xml.parse(data);
-					_self._notifyResponse(args,entity);
+					if(handleAs == "text"){
+						_self._updateEntityOnLoad(data, ioArgs, entity, args);
 					}
+				},
+				error: function(error){
+					_self._updateEntityOnError(error, args);
 				}
 			}, _self._createRequestObject(args, putArgs));
 			this._endpoint.xhrPut(requestObject);
+		},
+		
+		_updateEntityOnLoad : function (data, ioArgs, entity, args){
+			entity.data = xml.parse(data);
+			this._notifyResponse(args,entity);
+		},
+		
+		_updateEntityOnError : function (error, args){
+			validate.notifyError(error, args);
 		},
 			
 		/**
@@ -423,17 +446,30 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 		**/
 		_deleteEntity: function (args, deleteArgs) {
 			var _self = this;
+			var entity = deleteArgs.entity;
+			var handleAs = (deleteArgs.handleAs)?getArgs.handleAs : "text";
 			var requestObject = lang.mixin({
 				load:function(data, ioArgs){
-					if(deleteArgs.onLoad){
-						deleteArgs.onLoad.apply(_self,[data, ioArgs]);
-					}else{
-					_self._notifyResponse(args);
+					if(handleAs == "text"){
+						_self._deleteEntityOnLoad(data, ioArgs, entity, args);
 					}
+				},
+				error: function(error){
+					_self._deleteEntityOnError(error, args);
 				}
 			}, _self._createRequestObject(args, deleteArgs));
-			
 			this._endpoint.xhrDelete(requestObject);
+		},
+		
+		_deleteEntityOnLoad : function (data, ioArgs, entity, args){
+			if(this._cache) {
+				this._deleteIdFromCache(entity._id);
+      		}
+			this._notifyResponse(args);
+		},
+		
+		_deleteEntityOnError : function (error, args){
+			validate.notifyError(error, args);
 		},
 		
 		_constructServiceUrl: function (requestArgs){			
@@ -441,10 +477,6 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 			authType = (requestArgs.authType)?requestArgs.authType : "";
 			
 			var url = this.Constants.entityServiceBaseUrl + authType + (this.Constants.serviceEntity[requestArgs.serviceEntity]?this.Constants.serviceEntity[requestArgs.serviceEntity]: "") + (this.Constants.entityType[requestArgs.entityType] ? this.Constants.entityType[requestArgs.entityType] : "");
-			
-			if (requestArgs.replaceArgs) {
-				url = stringutil.replace(url, requestArgs.replaceArgs);
-			}
 			
 			if(requestArgs.methodType != "get"){
 				if (requestArgs.urlParams) {
@@ -474,47 +506,67 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 		
 		_getEntities: function (args,getArgs) {
 			var _self=this;
-			getArgs.methodType = "get";
-			var xpath_map = _self.Constants["xpath_feed_"+getArgs.entityName];
+			getArgs.methodType = "get";	
+			var handleAs = (getArgs.handleAs)?getArgs.handleAs : "text";
 			var requestObject = lang.mixin({
-					content: _self._constructQueryObj(args,getArgs),
-					load:function(data, ioArgs){					
-							
-							var xmlData = xml.parse(data); 
-							var summary = {};
-							summary.totalResults = xpath.selectText(xmlData, xpath_map.totalResults, _self._con.namespaces);
-							summary.startIndex = xpath.selectText(xmlData, xpath_map.startIndex, _self._con.namespaces);
-							summary.itemsPerPage = xpath.selectText(xmlData, xpath_map.itemsPerPage, _self._con.namespaces);
-							var entities = [];
-							var entry = xpath.selectNodes(xmlData,xpath_map["entry"],_self._con.namespaces);
-							for(var count=0; count < entry.length; count++){
-								var entity = null;
-								var entityId = null;
-								if(getArgs.onLoad){
-									getArgs.onLoad.apply(_self,[entry]);
-								}else{
-									var node = entry[count];
-									 entityId = xpath.selectText(node,xpath_map["id"],_self._con.namespaces);
-									//entityId = getArgs.parseId ? getArgs.parseId(entityId) : entityId;
-									entity = getArgs.entity.apply(null, [_self, entityId]);
-									if(!(getArgs.ignoreData)){
-										entity.setData(node);
-									}
-								}
-								entities.push(entity);
-							}
-							_self._notifyResponse(args, entities, summary);
-						
+				content: _self._constructQueryObj(args,getArgs),
+				load:function(data, ioArgs){
+					if(handleAs == "text"){
+						summary = _self._getSummaryOnLoad(data, getArgs);
+						entities = _self._getEntititiesOnLoad(data, getArgs);
+						_self._notifyResponse(args, entities, summary);
 					}
-					
-				}, _self._createRequestObject(args, getArgs));
-			//requestObject.content =  _self._constructQueryObj(args,getArgs);
+				}
+				
+			}, _self._createRequestObject(args, getArgs));			
 			this._endpoint.xhrGet(requestObject);
+		},
+		
+		_getSummaryOnLoad: function (data, getArgs){
+			var xpath_map = this.Constants["xpath_feed_"+getArgs.entityName];
+			var xmlData = xml.parse(data); 
+			var summary = {};
+			summary.totalResults = xpath.selectText(xmlData, xpath_map.totalResults, this._con.namespaces);
+			summary.startIndex = xpath.selectText(xmlData, xpath_map.startIndex, this._con.namespaces);
+			summary.itemsPerPage = xpath.selectText(xmlData, xpath_map.itemsPerPage, this._con.namespaces);	
+			return summary;
+		},
+		_getEntititiesOnLoad: function (data, getArgs){
+			console.log(data);
+			var entities = [];
+			var xpath_map = this.Constants["xpath_feed_"+getArgs.entityName];
+			var xmlData = xml.parse(data);	
+			var entry = xpath.selectNodes(xmlData,xpath_map["entry"],this._con.namespaces);
+			for(var count=0; count < entry.length; count++){
+				var node = entry[count];
+				 var entityId = xpath.selectText(node,xpath_map["id"],this._con.namespaces);
+				 entityId = getArgs.parseId ? getArgs.parseId(entityId) : entityId;			
+				 var entity = this._createEntityObject(this, entityId, getArgs.entityName);
+				if(!(getArgs.ignoreData)){
+					entity.setData(node);
+				}
+				entities.push(entity);
+			}
+			return entities;
 		},
 		
 		_isEmail: function(id) {
 			return id && id.indexOf('@')>=0;
 		},
+		_deleteIdFromCache:function(_id){
+			if(this._cache) {
+				this._cache.remove(_id);
+			}
+		},
+		
+		_find: function(id) {
+			if(this._cache) {
+				return this._cache.get(id);
+			}
+			else{			
+				return null;
+			}
+		}
 	});
 	return BaseService;
 });

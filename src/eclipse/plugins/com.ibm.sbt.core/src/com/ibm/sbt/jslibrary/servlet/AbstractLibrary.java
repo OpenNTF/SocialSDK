@@ -26,10 +26,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
-
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.util.PathUtil;
 import com.ibm.commons.util.StringUtil;
@@ -93,6 +91,7 @@ abstract public class AbstractLibrary {
 	public static final String		MODULE_DELCARE				= "sbt/_bridge/declare";
 	public static final String		MODULE_IFRAMETRANSPORT		= "sbt/_bridge/IFrameTransport";
 	public static final String		MODULE_TRANSPORT			= "sbt/_bridge/Transport";
+	public static final String		MODULE_REQUESTTRANSPORT		= "sbt/_bridge/RequestTransport";
 	public static final String		MODULE_ERROR_TRANSPORT		= "sbt/ErrorTransport";
 	public static final String		MODULE_GADGET_TRANSPORT		= "sbt/GadgetTransport";
 	public static final String		MODULE_CACHE				= "sbt/Cache";
@@ -109,7 +108,7 @@ abstract public class AbstractLibrary {
 	public static final String		MODULE_XPATH				= "sbt/xpath";
 	public static final String		MODULE_XSL					= "sbt/xsl";
 	public static final String		MODULE_BASIC				= "sbt/authenticator/Basic";
-	public static final String		MODULE_OAUTH10				= "sbt/authenticator/OAuth10";
+	public static final String		MODULE_OAUTH				= "sbt/authenticator/OAuth";
 
 	public static final String		PATH_SBT					= "sbt";							//$NON-NLS-1$
 	public static final String		PATH_SBTX					= "sbtx";							//$NON-NLS-1$
@@ -327,7 +326,7 @@ abstract public class AbstractLibrary {
 			JsonReference transportRef = createTransportRef(request, endpoint, endpointName);
 			if (transportRef != null) {
 				jsonEndpoint.putJsonProperty(PROP_TRANSPORT, transportRef);
-                String moduleName = getTransport(request, endpoint, endpointName).getModuleName();
+				String moduleName = getTransport(request, endpoint, endpointName).getModuleName();
 				jsonEndpoint.putJsonProperty(PROP_MODULE_TRANSPORT, moduleName);
 			}
 
@@ -359,7 +358,7 @@ abstract public class AbstractLibrary {
 	}
 
 	protected StringBuilder generateModuleBlock(LibraryRequest request, String[][] registerModules,
-	        String[][] registerExtModules, String[] requireModules, int indentationLevel) {
+			String[][] registerExtModules, String[] requireModules, int indentationLevel) {
 
 		StringBuilder sb = new StringBuilder();
 
@@ -435,10 +434,6 @@ abstract public class AbstractLibrary {
 		return sb;
 	}
 
-	protected boolean isNeedsExternalAMDLoader() {
-		return false;
-	}
-
 	/**
 	 * Generate the JavaScript to be returned for the specified <code>LibraryRequest</code>
 	 * 
@@ -466,50 +461,41 @@ abstract public class AbstractLibrary {
 
 		boolean closeElse = false;
 		boolean isInnerBlock = false;
-		boolean needsExternalAMDLoader = isNeedsExternalAMDLoader();
 
 		if (enableDefineCheck(request.getJsVersion())) {
 			indent(sb).append("if(typeof define=='undefined'){\n");
 
-			StringBuilder innerSB = new StringBuilder();
 			String[][] registerModules = getRegisterModules();
-			String[][] registerExtModules = StringUtil.isNotEmpty(request.getToolkitExtUrl()) ? getRegisterExtModules() : null;
+			String[][] registerExtModules = StringUtil.isNotEmpty(request.getToolkitExtUrl()) ? getRegisterExtModules()
+					: null;
 			String[] requireModules = getRequireModules();
 
-			indentationLevel += needsExternalAMDLoader ? 2 : 1;
-			innerSB = generateModuleBlock(request, registerModules, registerExtModules, requireModules, indentationLevel);
-			indentationLevel -= needsExternalAMDLoader ? 2 : 1;
-
 			indentationLevel++;
-			if (needsExternalAMDLoader) {
-				indentationLevel++;
-				innerSB.append(generateSbtConfigDefine(request, endpoints, properties, indentationLevel));
-				indentationLevel--;
-			}
-			generateAMDLoader(sb, indentationLevel, innerSB);
+			sb.append(generateModuleBlock(request, registerModules, registerExtModules, requireModules,
+					indentationLevel));
 			indentationLevel--;
+
 			indent(sb).append("} else {\n");
 			closeElse = true;
 			isInnerBlock = true;
 		}
 		// register the module paths and required modules
 		String[][] registerModulesAmd = getRegisterModulesAmd();
-		String[][] registerExtModulesAmd = StringUtil.isNotEmpty(request.getToolkitExtUrl()) ? getRegisterExtModulesAmd() : null;
+		String[][] registerExtModulesAmd = StringUtil.isNotEmpty(request.getToolkitExtUrl()) ? getRegisterExtModulesAmd()
+				: null;
 		String[] requireModulesAmd = getRequireModulesAmd();
 		if (isInnerBlock) {
 			indentationLevel++;
 		}
-		sb.append(generateModuleBlock(request, registerModulesAmd, registerExtModulesAmd, requireModulesAmd, indentationLevel));
+		sb.append(generateModuleBlock(request, registerModulesAmd, registerExtModulesAmd, requireModulesAmd,
+				indentationLevel));
 		if (isInnerBlock) {
 			indentationLevel--;
 		}
 		if (closeElse) {
 			indent(sb).append("}\n");
 		}
-		if (!needsExternalAMDLoader) {
-			sb.append(generateSbtConfigDefine(request, endpoints, properties, indentationLevel));
-		}
-
+		sb.append(generateSbtConfigDefine(request, endpoints, properties, indentationLevel));
 		sb.append("}\n");
 
 		if (logger.isLoggable(Level.FINEST)) {
@@ -524,7 +510,7 @@ abstract public class AbstractLibrary {
 	 */
 	protected void generateRequireModules(StringBuilder sb, int indentationLevel, String[] requireModules) {
 		for (String requireModule : requireModules) {
-			indent(sb, indentationLevel).append(generateRequire(requireModule)).append(";\n");
+			indent(sb, indentationLevel).append(generateRequire(requireModule));
 		}
 	}
 
@@ -542,15 +528,6 @@ abstract public class AbstractLibrary {
 			String moduleUrl = getModuleUrl(request, registerModule[1], isExtension);
 			indent(sb, indentationLevel).append(generateRegisterModulePath(registerModule[0], moduleUrl));
 		}
-	}
-
-	/**
-	 * @param sb
-	 * @param padding
-	 * @param innerSB
-	 */
-	protected void generateAMDLoader(StringBuilder sb, int indentationLevel, StringBuilder innerSB) {
-		sb.append(innerSB);
 	}
 
 	/**
@@ -747,7 +724,7 @@ abstract public class AbstractLibrary {
 	 */
 	protected JsonReference createTransportRef(LibraryRequest request, Endpoint endpoint, String logicalName)
 			throws LibraryException {
-        JSReference transport = getTransport(request, endpoint, logicalName);
+		JSReference transport = getTransport(request, endpoint, logicalName);
 		if (transport != null) {
 			try {
 				String paramValues = JsonGenerator.toJson(JsonJavaFactory.instanceEx,
@@ -761,16 +738,15 @@ abstract public class AbstractLibrary {
 		return null;
 	}
 
-    /**
-     * 
-     * @param request
-     * @param endpoint
-     * @param endpointName
-     * @return
-     */
-    protected JSReference getTransport(LibraryRequest request, Endpoint endpoint, String endpointName) {
-    	return endpoint.getTransport(endpointName, MODULE_TRANSPORT);
-    }
+	/**
+	 * @param request
+	 * @param endpoint
+	 * @param endpointName
+	 * @return
+	 */
+	protected JSReference getTransport(LibraryRequest request, Endpoint endpoint, String endpointName) {
+		return endpoint.getTransport(endpointName, MODULE_TRANSPORT);
+	}
 
 	/*
 	 * Return true if the endpoint is valid for the specified request
@@ -946,12 +922,12 @@ abstract public class AbstractLibrary {
 		return REGISTER_EXT_MODULES;
 	}
 
-    /**
-     * @return
-     */
-    protected String[][] getRegisterExtModulesAmd() {
-        return REGISTER_EXT_MODULES;
-    }
+	/**
+	 * @return
+	 */
+	protected String[][] getRegisterExtModulesAmd() {
+		return REGISTER_EXT_MODULES;
+	}
 
 	//
 	// Abstract stuff

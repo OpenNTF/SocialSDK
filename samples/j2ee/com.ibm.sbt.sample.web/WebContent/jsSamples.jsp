@@ -33,20 +33,21 @@ body {
 </style>
 <link href="/sbt/bootstrap/css/bootstrap-responsive.css"
 	rel="stylesheet">
-<!-- THIS CAN BE CALCULATED -->
-<!-- Manually adding dojo -->
 
-<script type="text/javascript"
-	src="<%=request.getAttribute("jsLibPath")%>"></script>
 <link rel="stylesheet" href="<%=request.getAttribute("jsLibCSSPath")%>"
 	type="text/css" />
+<%
+	String requirejsPath = (String)request.getAttribute("requirejsPath");
+	String libraryPath = requirejsPath;
+	if (null == requirejsPath) {
+		libraryPath = (String)request.getAttribute("jsLibPath");
+	}
+%>
 
-
+<script type="text/javascript" src="<%=libraryPath%>"></script>
 
 <!-- Include the toolkit -->
-<script type="text/javascript"
-	src="<%=request.getAttribute("toolkit")%>"></script>
-
+<script type="text/javascript" src="<%=request.getAttribute("toolkit")%>"></script>
 
 <script type="text/javascript">
 function hideJsSnippetCode() {

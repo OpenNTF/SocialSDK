@@ -13,14 +13,11 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
+
 /**
  * Social Business Toolkit SDK.
- * Definition of constants for BaseService.
+ * @module nls
  */
-define(["sbt/config", "sbt/base/core"],function(sbt) {
-	return sbt.base.baseConstants = {
-		sbtErrorCodes:{
-			badRequest         :400
-		}
-	};
+define(['sbt/nls/resources'],function(resources) {
+	return resources;
 });

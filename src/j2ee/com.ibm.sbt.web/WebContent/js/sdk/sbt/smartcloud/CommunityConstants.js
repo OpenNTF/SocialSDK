@@ -17,21 +17,21 @@
  * Social Business Toolkit SDK.
  * Definition of constants for CommunitiesService.
  */
-define([],function() {
+define(["sbt/smartcloud/core"],function(sbt) {
 	return sbt.smartcloud.communityConstants = {
 		entityServiceBaseUrl	: "/communities/service/atom",
 		serviceEntity : {
-				"communities"	:"/communities",
-				"community"		:"/community",
+			"communities"	:"/communities",
+			"community"		:"/community"
 		},		
 		entityType : {
-				"members"				:"/members",
-				"subCommunities"		:"",
-				"bookmarks"				:"",
-				"invitees"				:"",
-				"public"				:"/all",
-				"my"					:"/my",
-				"instance"				:"/instance"
+			"members"				:"/members",
+			"subCommunities"		:"",
+			"bookmarks"				:"",
+			"invitees"				:"",
+			"public"				:"/all",
+			"my"					:"/my",
+			"instance"				:"/instance"
 		},
 		sbtErrorMessages:{
 			null_communityId        :"Null community Id",
@@ -45,17 +45,38 @@ define([],function() {
 			"communityUrl"		:"a:link[@rel='self']/@href",
 			"logoUrl"			:"a:link[@rel='http://www.ibm.com/xmlns/prod/sn/logo']/@href",
 			"tags"				:"a:category/@term",
-			"content"			:"a:content[@type='html']"			
+			"content"			:"a:content[@type='html']",
+            "memberCount"       :"snx:membercount",
+            "communityType"     :"snx:communityType",
+            "published"         :"a:published",
+            "updated"           :"a:updated",
+            "authorUid"			:"a:author/snx:userid",
+            "authorName"		:"a:author/a:name",
+            "authorEmail"		:"a:author/a:email",
+			"contributorUid"	:"a:contributor/snx:userid",
+			"contributorName"	:"a:contributor/a:name",
+			"contributorEmail"	:"a:contributor/a:email"				
 		},
 		xpath_feed_community : {
-			"entry"				:"/a:feed/a:entry",			
+			"entry"				:"/a:feed/a:entry",	
+			"id"				:"a:id",
+			"totalResults"      :"/a:feed/opensearch:totalResults",
+            "startIndex"        :"/a:feed/opensearch:startIndex",
+            "itemsPerPage"      :"/a:feed/opensearch:itemsPerPage",
+            "title"				:"a:title"            
 		},
 		xpath_member : {
-				"entry"				:"/a:feed/a:entry",
-				"name"				:"a:contributor/a:name"
+			"entry"				:"/a:feed/a:entry",				
+			"name"				:"a:contributor/a:name",
+			"uid"				:"a:contributor/snx:userid",
+			"role"				:"snx:role"
 		},
 		xpath_feed_member : {
-				"entry"				:"/a:feed/a:entry"				
+			"entry"				:"/a:feed/a:entry",
+			"id"				:"a:contributor/snx:userid",				
+			"totalResults"      :"/a:feed/opensearch:totalResults",
+            "startIndex"        :"/a:feed/opensearch:startIndex",
+            "itemsPerPage"      :"/a:feed/opensearch:itemsPerPage"
 		}
 	};
 });

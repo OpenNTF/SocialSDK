@@ -17,7 +17,7 @@
  * Social Business Toolkit SDK.
  * Definition of constants for ProfileService.
  */
-define([],function() {
+define(["sbt/config", "sbt/connections/core"],function(sbt) {
 	return sbt.connections.profileConstants = {
 		sbtErrorCodes:{
 			badRequest         :400
@@ -58,6 +58,14 @@ define([],function() {
                 "itemsPerPage"      :"/a:feed/opensearch:itemsPerPage",
 				
 		},
+		
+		xpath_feed_profile : {
+		 	"entry":			"/a:feed/a:entry",
+		 	"totalResults"      :"/a:feed/opensearch:totalResults",
+            "startIndex"        :"/a:feed/opensearch:startIndex",
+            "itemsPerPage"      :"/a:feed/opensearch:itemsPerPage",
+		 	"id"				:"a:contributor/snx:userid"
+		},
 		_updateMapAttributes: { 
 				"bldgId" : "X_BUILDING",
 				"floor" : "X_FLOOR",
@@ -88,6 +96,19 @@ define([],function() {
 			"deleteProfile"	  : "deleteProfile",
 			"updateProfilePhoto"    : "updateProfilePhoto"
 			
-		}
+		},
+		entityServiceBaseUrl	: "/profiles",
+		
+		serviceEntity : {
+			getProfile:         "/atom/profile.do",
+			updateProfile:		"/atom/profileEntry.do",
+			createProfile:		"/admin/atom/profiles.do",
+			deleteProfile:		"/admin/atom/profileEntry.do",
+			updateProfilePhoto:	"/photo.do",
+			getColleagues:		"/atom/connections.do"
+		},		
+		entityType : {
+				
+		},
 	};
 });

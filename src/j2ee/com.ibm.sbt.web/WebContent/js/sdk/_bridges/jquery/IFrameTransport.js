@@ -18,7 +18,7 @@
  * Social Business Toolkit SDK. 
  * Implementation of a proxy that uses an iFrame.
  */
-define(['sbt/base/declare'], function(declare) {
+define(['sbt/base/declare', 'jquery'], function(declare, $) {
 
     return declare("sbt.base.IFrameTransport", null, {
     
@@ -30,15 +30,58 @@ define(['sbt/base/declare'], function(declare) {
     	
     	constructor: function(iframeSrc){
     		var self = this;
+    		$.ready(function() {
+    			var i = self.iframe = $("<iframe></iframe>").attr("src", iframeSrc).addClass("dijitBackgroundIframe").css("opacity", 0.1);
+    			$("body").append(i);
+
+    			if(window.addEventListener) {
+    				window.addEventListener("message", $.proxy(self,self.processMessage), false );
+    			} else {
+    				window.attachEvent("onmessage", $.proxy(self,self.processMessage));
+    			}
+    		});
     	},
     	
     	processMessage: function(e) {
+    		if(e.source==this.iframe.contentWindow) {
+    			var o = $.parseJSON(e.data);
+    			if(o.method=="ready") {
+    				this.ready = true;
+    				for(var r in this.pendings) {
+    					this._xhr(this.pendings[r]);
+    				}
+    				this.pendings = [];
+    			} else if(o.method=="load") {
+    				var req = this.requests[o.id]; this.requests[o.id]=null;
+    				req.handle(o.data,o.ioArgs);
+    			} else if(o.method=="error") {
+    				var req = this.requests[o.id]; this.requests[o.id]=null;
+    				var error = new Error();
+    				$.extend(error,o.data);
+    				req.handle(error,o.ioArgs);
+    			} else {
+    			}
+    		}
     	},
     	
     	xhr: function(method,args,hasBody) {
+    		var id = this.idCounter++;
+    		this.requests[id] = args;
+    		var msg = {
+    			id:				id,
+    			method:			method,
+    			args:			args,
+    			hasBody:		hasBody
+    		};
+    		if(this.ready) {
+    			this._xhr(msg);
+    		} else {
+    			this.pendings.push(msg);
+    		}	
     	},
     	
     	_xhr: function(msg) {
+    		this.iframe.contentWindow.postMessage(JSON.stringify(msg),"*");
     	}
     });
 

@@ -48,9 +48,6 @@ define(['dojo/_base/lang'],function(lang) {
         		s = s + (o.charAt(0)=='/'?o.substring(1):o);
         	}
         	return s;
-        },
-        hitch: function() {
-            return lang.hitch(arguments);
         }
 	};
 });

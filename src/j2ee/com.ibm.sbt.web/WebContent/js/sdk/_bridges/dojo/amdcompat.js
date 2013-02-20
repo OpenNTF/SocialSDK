@@ -89,22 +89,30 @@ window._sbt_bridge_compat = true;
 		
 		for ( var args = [], depName, i = 0; i < deps.length; i++) {
 			depName = resolvePath(deps[i]);
+            var arg;
 			// look for dojo/i18n! followed by anything for a resource module
 			var exclamationIndex = depName.indexOf("!");
 			if (exclamationIndex > -1) {
 				if (depName.substring(0, exclamationIndex) == "sbt.i18n") {
-					var bundleName = depName.substring(exclamationIndex+1);
-					var mod = dojo.require(bundleName);
-					arg = mod.root||mod;
-					var bundles = findBundles(mod.root?mod:null,dojo.locale,bundleName);
-					for(var mi=0; mi<bundles.length; mi++) {
-						dojo.mixin(arg,dojo.require(bundles[mi]));
-					}
-				} else {
+                    var bundleName = depName.substring(exclamationIndex+1);
+                    var mod = dojo.require(bundleName);
+                    arg = mod.root||mod;
+                    var bundles = findBundles(mod.root?mod:null,dojo.locale,bundleName);
+                    for(var mi=0; mi<bundles.length; mi++) {
+                        dojo.mixin(arg,dojo.require(bundles[mi]));
+                    }
+				} else if (depName.substring(0, exclamationIndex) == "sbt.text") {
+                    var fileName = depName.substring(exclamationIndex+1);
+                    var moduleIndex = fileName.indexOf(".");
+                    var extnIndex = fileName.lastIndexOf(".");
+                    var moduleId = fileName.substring(0, moduleIndex);
+                    var url = fileName.substring(moduleIndex+1, extnIndex).replace(/\./g,'/');
+                    url += fileName.substring(extnIndex);
+                    arg = dojo.cache(moduleId, url);
+                } else {
 					arg = null;
 				}
 			} else {
-				var arg;
 				switch (depName) {
 				case "require":
 					arg = function(relativeId) {
@@ -132,8 +140,10 @@ window._sbt_bridge_compat = true;
 			}
 			args.push(arg);
 		}
+		
+		var returned;
 		if (typeof def == "function") {
-			var returned = def.apply(null, args);
+		    returned = def.apply(null, args);
 		} else {
 			returned = def;
 		}

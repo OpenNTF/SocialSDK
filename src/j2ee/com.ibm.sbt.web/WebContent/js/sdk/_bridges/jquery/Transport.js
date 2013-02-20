@@ -24,8 +24,9 @@ define(['jquery', 'sbt/_bridge/declare', 'sbt/util' ], function($, declare, util
 		xhr: function(method, args, hasBody) {
 		    var url = args.url;
 		    var self = this;
-		    var jqVersion = $().jquery;
-		    var jQ_v_gte_18 = util.minVersion("1.8", jqVersion);
+		    var usedJQVersion = $().jquery;
+		    var requiredJQVersion = "1.8";
+		    var jQ_v_gte_18 = util.minVersion(requiredJQVersion, usedJQVersion);
 		    var settings = {
 		        type: method,
 		        data: args.content,

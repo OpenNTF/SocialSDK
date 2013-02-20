@@ -529,7 +529,7 @@ define([ 'sbt/_bridge/declare', 'sbt/config', 'sbt/lang', 'sbt/smartcloud/core',
 						+ "</cmis:value>  </cmis:property" + propertyType + ">";
 			}
 			payload += "</cmis:properties> </cmisra:object> </entry>";
-			return payload;			
+			return payload;
 		},
 
 		_getForURLQuery : function(filterList) {
@@ -551,13 +551,12 @@ define([ 'sbt/_bridge/declare', 'sbt/config', 'sbt/lang', 'sbt/smartcloud/core',
 
 		},
 		_createEntityObject : function(service, id, entityName) {
-			if("File" == entityName){
+			if ("File" == entityName) {
 				return new FileEntry(service, id);
-			}
-			else {
+			} else {
 				return new UserProfile(service, id);
 			}
-			
+
 		},
 
 		/**
@@ -700,7 +699,8 @@ define([ 'sbt/_bridge/declare', 'sbt/config', 'sbt/lang', 'sbt/smartcloud/core',
 		 * @param {Object} [args.parameters] The additional parameters like pageSize etc.
 		 */
 		getFileEntry : function readFileEntry(args) {
-			if (!validate._validateInputTypeAndNotify("FileService", "getFileComments", "File", file, "sbt.connections.FileEntry", args)) {
+			if (!validate._validateInputTypesAndNotify("FileService", "getFileComments", [ "args", "fileId" ], [ args, args ? args.id : null ], [ "object",
+					"string" ], args)) {
 				return;
 			}
 			var _self = this;

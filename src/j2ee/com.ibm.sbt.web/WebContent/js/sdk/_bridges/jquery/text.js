@@ -16,14 +16,13 @@
 
 /**
  * Social Business Toolkit SDK.
+ * 
  * @module i18n
  */
-define(['requirejs/i18n'],function(i18n) {
+define([ "requirejs/text" ], function(text) {
     return {
     	load: function(name, req, onload, config){
-    		i18n.load(name, req, onload, config); 
+    		text.load(name, req, onload, config); 
     	}
     }; 
 });
-
-

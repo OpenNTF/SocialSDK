@@ -529,7 +529,7 @@ define([ 'sbt/_bridge/declare', 'sbt/config', 'sbt/lang', 'sbt/smartcloud/core',
 						+ "</cmis:value>  </cmis:property" + propertyType + ">";
 			}
 			payload += "</cmis:properties> </cmisra:object> </entry>";
-			return payload;			
+			return payload;
 		},
 
 		_getForURLQuery : function(filterList) {
@@ -548,6 +548,14 @@ define([ 'sbt/_bridge/declare', 'sbt/config', 'sbt/lang', 'sbt/smartcloud/core',
 			}
 			// NOTE: not encoded because it will be encoded after being passed to the base service
 			return concatenation;
+
+		},
+		_createEntityObject : function(service, id, entityName) {
+			if ("File" == entityName) {
+				return new FileEntry(service, id);
+			} else {
+				return new UserProfile(service, id);
+			}
 
 		},
 
@@ -691,7 +699,8 @@ define([ 'sbt/_bridge/declare', 'sbt/config', 'sbt/lang', 'sbt/smartcloud/core',
 		 * @param {Object} [args.parameters] The additional parameters like pageSize etc.
 		 */
 		getFileEntry : function readFileEntry(args) {
-			if (!validate._validateInputTypeAndNotify("FileService", "getFileComments", "File", file, "sbt.connections.FileEntry", args)) {
+			if (!validate._validateInputTypesAndNotify("FileService", "getFileComments", [ "args", "fileId" ], [ args, args ? args.id : null ], [ "object",
+					"string" ], args)) {
 				return;
 			}
 			var _self = this;
@@ -760,7 +769,7 @@ define([ 'sbt/_bridge/declare', 'sbt/config', 'sbt/lang', 'sbt/smartcloud/core',
 									subscriberId : _self._subscriberId
 								}
 							});
-							url = cfg.Properties.serviceUrl + "/smartcloudfiles/" + _self._endpointName + url;
+							url = cfg.Properties.serviceUrl + "/files/" + _self._endpointName + url;
 							var headers = {};
 							var index = filePath.lastIndexOf("\\");
 							if (index == -1) {

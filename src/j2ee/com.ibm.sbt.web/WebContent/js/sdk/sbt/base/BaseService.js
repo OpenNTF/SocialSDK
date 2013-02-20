@@ -331,7 +331,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 			if(getArgs.xmlPayload){
 				return getArgs.xmlPayload;
 			}else{
-				return getArgs.xmlPayloadTemplate.replace(/{$(\w*)}/g,function(m,key){return getArgs.xmlData.hasOwnProperty(key)?xml.encodeXmlEntry(getArgs.xmlData[key]):"";});
+								return stringutil.replace(getArgs.xmlPayloadTemplate, getArgs.xmlData);	
 			}
 		},
 		
@@ -478,6 +478,9 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 			
 			var url = this.Constants.entityServiceBaseUrl + authType + (this.Constants.serviceEntity[requestArgs.serviceEntity]?this.Constants.serviceEntity[requestArgs.serviceEntity]: "") + (this.Constants.entityType[requestArgs.entityType] ? this.Constants.entityType[requestArgs.entityType] : "");
 			
+			if (requestArgs.replaceArgs) {
+				url = stringutil.replace(url, requestArgs.replaceArgs);
+			}
 			if(requestArgs.methodType != "get"){
 				if (requestArgs.urlParams) {
 					url += "?";

@@ -28,6 +28,7 @@ public class Messages {
 	public static String	InvalidArgument_4		= "Invalid Input parameter : CollectionId";
 	public static String	InvalidArgument_5		= "Invalid Argument : File to be uploaded";
 	public static String	InvalidArgument_6		= "Invalid Argument : UserId";
+	public static String	InvalidArgument_7		= "Invalid Input parameter : CommentId";
 	public static String	UploadINFO_1			= "No File name specified. Checking for request Body.";
 	public static String	UploadINFO_2			= "No Request Body. Invalid call to upload.";
 	public static String	FileServiceException_1	= "Exception occurred in method";

@@ -32,6 +32,7 @@ import com.ibm.commons.xml.XMLException;
 import com.ibm.sbt.services.client.BaseService;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.client.smartcloud.communities.util.XMLCommunityPayloadBuilder;
 import com.ibm.sbt.services.util.AuthUtil;
 
 /**
@@ -262,7 +263,62 @@ public class ProfileService extends BaseService {
 
 	}
 	
+	/**
+	 * This method is used to Invite a person to become your colleague
+	 * 
+	 * @param profile
+	 * @param parameter - userId/userEmail to pass to 
+	 * @return boolean - if invite is sent successfully then return truw
+	 */
+	public boolean sendInvite(Profile profile, String parameter){
+		String defaultInviteMsg = "Please accept this invitation to be in my network of Connections colleagues.";
+		return sendInvite(profile, parameter, defaultInviteMsg);
+		
+	}
 
+	/**
+	 * This method is used to Invite a person to become your colleague
+	 * 
+	 * @param profile
+	 * @param parameter - userId/userEmail to pass to API
+	 * @param inviteMsg - message to the other user
+	 * @return boolean - if invite is sent successfully then return truw
+	 */
+	public boolean sendInvite(Profile profile, String parameter, String inviteMsg){
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.entering(sourceClass, "getColleagues", parameter);
+		}
+		if (profile == null) {
+			throw new IllegalArgumentException(StringUtil.format("A null profile was passed"));
+		}
+		boolean returnVal = true;
+
+		Map<String, String> parameters = new HashMap<String, String>();
+		try {
+			String url = resolveProfileUrl(ProfileEntity.NONADMIN.getProfileEntityType(),
+					ProfileType.GETCOLLEAGUES.getProfileType());
+			if (isEmail(parameter)) {
+				parameters.put("email",parameter);
+			} else {
+				parameters.put("userid", parameter);
+			}
+			parameters.put("connectionType","colleague");
+			XMLProfilesPayloadBuilder builder = XMLProfilesPayloadBuilder.INSTANCE;
+			Object content = builder.generateInviteRequestPayload(inviteMsg);
+			getClientService().post(url, parameters, content);
+		
+		} catch (ClientServicesException e) {
+			returnVal = false;
+			if (logger.isLoggable(Level.SEVERE)) {
+				logger.log(Level.SEVERE, "Error encountered while getting colleagues information", e);
+			}
+		}
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.exiting(sourceClass, "getColleagues");
+		}
+		return returnVal;
+
+	}
 
 	/**
 	 * Wrapper method to update a User's profile photo

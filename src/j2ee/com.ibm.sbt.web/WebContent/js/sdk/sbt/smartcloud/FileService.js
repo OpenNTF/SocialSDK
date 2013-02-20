@@ -550,6 +550,15 @@ define([ 'sbt/_bridge/declare', 'sbt/config', 'sbt/lang', 'sbt/smartcloud/core',
 			return concatenation;
 
 		},
+		_createEntityObject : function(service, id, entityName) {
+			if("File" == entityName){
+				return new FileEntry(service, id);
+			}
+			else {
+				return new UserProfile(service, id);
+			}
+			
+		},
 
 		/**
 		 * Gets the files of the logged in user.
@@ -760,7 +769,7 @@ define([ 'sbt/_bridge/declare', 'sbt/config', 'sbt/lang', 'sbt/smartcloud/core',
 									subscriberId : _self._subscriberId
 								}
 							});
-							url = cfg.Properties.serviceUrl + "/smartcloudfiles/" + _self._endpointName + url;
+							url = cfg.Properties.serviceUrl + "/files/" + _self._endpointName + url;
 							var headers = {};
 							var index = filePath.lastIndexOf("\\");
 							if (index == -1) {

@@ -33,7 +33,7 @@ import com.ibm.xsp.minifier.ResourceLoader;
 
 
 /**
- * Resource Loader that loads the resource from core SBT.
+ * Resource Loader that loads the resource from core DWA.
  */
 public class SbtLoader extends ResourceLoader {
 

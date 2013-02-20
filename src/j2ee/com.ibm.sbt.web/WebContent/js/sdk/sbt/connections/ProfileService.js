@@ -20,23 +20,13 @@
  *  
  * Helpers for accessing the Connections Profiles services
  */
-define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sbt/xml','sbt/util','sbt/xpath','sbt/Cache','sbt/connections/ProfileConstants','sbt/Endpoint','sbt/validate','sbt/i18n!sbt/connections/nls/ProfileService'],
-		function(declare,cfg,lang,con,xml,util,xpath,Cache,constants,Endpoint,validate, profileServiceNls) {
+define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sbt/xml','sbt/util','sbt/xpath','sbt/Cache','sbt/connections/ProfileConstants','sbt/Endpoint','sbt/validate','sbt/base/BaseService'],
+		function(declare,cfg,lang,con,xml,util,xpath,Cache,profileConstants,Endpoint,validate, BaseService) {
 	
 	/**
 	Javascript APIs for IBM Connections Profiles Service.
 	@module sbt.connections.ProfileService
 	**/
-	var requests = {};
-	function _notifyCb(id,param) {
-		var r = requests[id];
-  		if(r) {
-	  		delete requests[id];
-	  		for(var i=0; i<r.length; i++) {
-	  			r[i](param);
-	  		}
-  		}
-	}
 	
 	/**
 	Profile class associated with a profile. 
@@ -44,34 +34,16 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 	@namespace connections
 	**/
 	
-	
-	var Profile = declare("sbt.connections.Profile", null, {
-		_service:	null,
-		_id:		"",
+	var Profile = declare("sbt.connections.Profile", sbt.base.BaseEntity, {
+		
 		_idType:	"",// can take value - userId / email / id	
 		_email:		"",
 		_userId:	"",
-		_name:		"",
-
-		/**
-		Profile entry document of the associated profile
-		@private
-		@property data 
-		@type String
-		**/
-		data:		null,
-		/**
-		Field object associated with the profile. It holds the values of the profile attributes that
-		are used during updation of a profile and creation of a new profile.
-		@private
-		@property fields 
-		@type Object
-		**/
-		fields:		{},		
+		_name:		"",	
 		
 		constructor: function(svc,id,name,email) {
-			this._service = svc;
-			this._id = id;
+			var args = { entityName : "profile", Constants: profileConstants, con: con};
+			this.inherited(arguments, [svc, id, args]);
 			if(this._service._isEmail(id)){
 				this._email = id;
 			}else{
@@ -109,7 +81,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 		**/
 		
 		load: function(args) {
-			this.data = this._service._load(this, args);			
+			this._data = this._service._load(this, args);			
 		},
 		
 		/**
@@ -139,50 +111,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 			this._service.updateProfile(this, args);
 			
 		},
-		/**
-		Return the xpath expression for a field in the profile entry document.
-		@method fieldXPath
-		@param {String} fieldName Xml element name in profile entry document.
-		@return {String} xpath for the element in profile entry document.	
-		**/
-		fieldXPath: function(fieldName) {
-			return constants.xpath_profile[fieldName];
-		},
-		/**
-		Return the value of a field in profile entry document using xpath expression
-		@method xpath
-		@param {String} path xpath expression
-		@return {String} value of a field in profile entry document using the xpath expression
-		**/
-		xpath: function(path) {			
-			return this.data && path ? xpath.selectText(this.data,path,con.namespaces) : null;
-		},
-		/**
-		Return the value of a field in profile entry document
-		@method get
-		@param {String} fieldName fieldname
-		@return {String} value of the field in profile entry document
-		**/
-		get: function(fieldName) {
-			return this.fields[fieldName] || this.xpath(this.fieldXPath(fieldName));
-		},
-		/**
-		Set the value of a field in the field object
-		@method set
-		@param {String} fieldName fieldname
-		@param {String} value value of the field
-		**/
-		set: function(fieldName,value) {
-			this.fields[fieldName] = value;
-		},
-		/**
-		Remove a field from the field object
-		@method remove
-		@param {String} fieldName fieldname		
-		**/
-		remove: function(fieldName) {
-			delete this.fields[fieldName];
-		},
+		
 		/**
 		Get id of the profile
 		@method getId
@@ -397,17 +326,13 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 		profiles in one session.
 	
 	**/
-	var ProfileService = declare("sbt.connections.ProfileService", null, {
-		_endpoint: null,
+	var ProfileService = declare("sbt.connections.ProfileService", sbt.base.BaseService, {		
 		_profiles: null,		
 
-		constructor: function(options) {
-			options = options || {};			
-			this._endpoint = Endpoint.find(options.endpoint ||'connections');			
-			var cs = options.cacheSize;
-			if(cs && cs>0) {
-				this._profiles = new Cache(cs);
-			}
+		constructor: function(_options) {
+			var options = _options || {};
+			options = lang.mixin({endpoint: options.endpoint || "connections", Constants: profileConstants, con: con});
+			this.inherited(arguments, [options]);			
 		},
 		/**
 		Get the profile of a user.
@@ -443,118 +368,44 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 		
 		getProfile: function(args) {
 			//return lang.isArray(args.id) ? this._getMultiple(args) : this._getOne(args);
-			//Not handling the multiple profiles id use case now.	
+			//Not handling the multiple profiles id use case now.
 			
-			return this._getOne(args);
+			return this._getOne(args, {entityName: "profile", serviceEntity: "getProfile", entityType: "",
+				entity: Profile, cachingEnabled : true				
+			});
 		},
 		
-		_getOne: function(args) {			
+		_getOne: function(args, getArgs) {			
 			if (!(validate._validateInputTypeAndNotify("ProfileService", "getProfile", "args", args, "object", args))) {
 				return ;
 			}
 			if (!(validate._validateInputTypeAndNotify("ProfileService", "getProfile", "args.userId/args.email/args.id", args.userId || args.email || args.id, "string", args))) {
 				return ;
-			}
-			var profile = null;
-			if(args.userId){
-				 profile = new Profile(this,args.userId);
-				 profile._idType = constants._userIdentifiers.userId;
-			}else if(args.email){
-				profile = new Profile(this,args.email);
-				profile._idType = constants._userIdentifiers.email;
-			}else if(args.id){
-				profile = new Profile(this,args.id);
-				profile._idType = constants._userIdentifiers.id;
 			}			
-			if(args.loadIt == false){
-				if(args.load){
-					args.load(profile);
-				}
-				if(args.handle){
-					args.handle(profile);
-				}
-			}
-			else{
-				this._load(profile,args);
-			}
+			var content = {};
+			var _args = lang.mixin({},args); 
+			if(_args.userId){
+				_args.id = args.userId;
+				_args._idType = profileConstants._userIdentifiers.userId;
+				content.userid = _args.id;
+			}else if(_args.email){
+				_args.id = args.email;
+				_args._idType = profileConstants._userIdentifiers.email;
+				content.email = _args.id;
+			}else if(args.id){				
+				_args._idType = profileConstants._userIdentifiers.id;
+				content.userid = _args.id;
+			}			
+			getArgs.urlParams = content;			
+			var profile = this.inherited(arguments, [_args, getArgs]);			
 			return profile;
 		},
 		
-		/*_getMultiple: function(ids,cb,options) {
-			// For now. Should later use a single call for multiple entries
-			var a = [];
-			for(var i=0; i<ids.length; i++) {
-				a[i] = this._getOne(ids[i],cb,options);
-			}
-			return a;
-		},*/
-		
-		_load: function (profile,args) {
-			
-			if (!profile._validate("Profile", "load", args, {
-				isValidateType : true,
-				isValidateId : true
-			})) {
-				return;
-			}
-			var loadCb = null;
-			var handleCb = null;
-			if(args){
-				 loadCb = args.load;
-				 handleCb = args.handle;
-			}
-			var _self = this;
-			var x = this._find(profile._id,profile._idType);
-			if(x) {// the cached item is found. the call back function is called.
-				profile.data = x;
-				if(loadCb) loadCb(profile);
-				if(handleCb)handleCb(profile);
-			} else {// a network call is made to fetch the profile object and the cache is populated.
-				if(requests[profile._id]) {
-					// If there is a pending request for this id, then we simply add this callback to it
-					if(loadCb){
-						requests[profile._id].push(loadCb);
-					}
-					if(handleCb){
-						requests[profile._id].push(handleCb);
-					}
-				} else {
-					if(loadCb) {
-						requests[profile._id] = [loadCb];
-					}
-					if(handleCb && requests[profile._id]) {
-						requests[profile._id].push(handleCb);
-					}else if (handleCb){
-						requests[profile._id] = [handleCb];
-					}
-					var content = {};
-					if((profile._idType == constants._userIdentifiers.email) || (profile._idType == constants._userIdentifiers.id && this._isEmail(profile._id))) {
-						content.email = profile._id; 
-					} else {
-						content.userid = profile._id; 
-					}
-					this._endpoint.xhrGet({
-						serviceUrl:	this._constructProfileUrl(constants._methodName.getProfile),
-						handleAs:	"text",
-						content:	content,
-						load: function(data, ioArgs) {
-							var entry = xpath.selectNodes(xml.parse(data), constants.xpath_profile["entry"], con.namespaces);
-							profile.data = entry[0];
-							//profile.data = xml.parse(data);							
-							profile.fields = {};
-							if(_self._profiles) {
-				      			_self._profiles.put(xpath.selectText(profile.data,constants.xpath_profile.uid,con.namespaces),profile.data);
-				      		}
-							_notifyCb(profile._id,profile);
-						},
-						error: function(error){
-							validate.notifyError(error,args);
-							
-						}
-					});
-				}
-			}
+		_createEntityObject : function (service, id){
+			var profile = new Profile (service, id);
+			return profile;
 		},
+		
 		_constructProfileUrl: function(methodName){
 			var authType = "";
 			if(this._endpoint.authType == "basic"){
@@ -564,13 +415,13 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 			}else {
 				authType = "";
 			}
-				
+			
 			return con.profileUrls["profileServiceBaseUrl"] + authType + con.profileUrls[methodName];
 		},
 		_constructCreateRequest: function (profile, fieldMap){
 			var body = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns:app=\"http://www.w3.org/2007/app\" xmlns:thr=\"http://purl.org/syndication/thread/1.0\" xmlns:fh=\"http://purl.org/syndication/history/1.0\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\" xmlns:opensearch=\"http://a9.com/-/spec/opensearch/1.1/\" xmlns=\"http://www.w3.org/2005/Atom\"><category term=\"profile\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category><content type=\"application/xml\"><person xmlns=\"http://ns.opensocial.org/2008/opensocial\"><com.ibm.snx_profiles.attrib>";
 			for(key in fieldMap){
-				body += "<entry><key>" + constants._createMapAttributes[key] + "</key><value><type>text</type><data>"+ xml.encodeXmlEntry(fieldMap[key]) + "</data></value></entry>";
+				body += "<entry><key>" + profileConstants._createMapAttributes[key] + "</key><value><type>text</type><data>"+ xml.encodeXmlEntry(fieldMap[key]) + "</data></value></entry>";
 			}			
 			body += "</com.ibm.snx_profiles.attrib></person></content></entry>";
 			return body;
@@ -578,7 +429,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 		
 		_constructAddress: function(fieldMap){
 			var addressBody = "";
-			addressBody += constants._updateMapAttributes["workLocation"] + ":" + ";;" ;
+			addressBody += profileConstants._updateMapAttributes["workLocation"] + ":" + ";;" ;
 			addressBody += fieldMap["streetAddress"]? xml.encodeXmlEntry(fieldMap["streetAddress"]) + ";" : ";";
 			addressBody += fieldMap["locality"]? xml.encodeXmlEntry(fieldMap["locality"]) + ";" : ";";	
 			addressBody += fieldMap["region"]? xml.encodeXmlEntry(fieldMap["region"]) + ";" : ";";
@@ -612,7 +463,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 					this._removeAddressKeys(fieldMap);
 				}
 				else{
-					body += constants._updateMapAttributes[key] + ":"+ xml.encodeXmlEntry(fieldMap[key]) + "\n";					
+					body += profileConstants._updateMapAttributes[key] + ":"+ xml.encodeXmlEntry(fieldMap[key]) + "\n";					
 					delete fieldMap[key];					
 				}
 			}
@@ -655,22 +506,37 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 			var _id = inputProfile._id;
 			var _self = this;
 			var headers = {"Content-Type" : "application/atom+xml"};
-			var _param = _self._isEmail(_id) ? "email=" : "userid=";
-			var _fields = lang.mixin({},inputProfile.fields);
-			this._endpoint.xhrPut({
-				serviceUrl:	this._constructProfileUrl(constants._methodName.updateProfile)+ "?"+ _param +encodeURIComponent(_id)+"&output=vcard&format=full",
-				putData:this._constructUpdateRequestBody(inputProfile,_fields),
+			var _param = {};
+			if(_self._isEmail(_id)){
+				_param.email = _id;
+			}else{
+				_param.userid = _id;
+			}
+			var _fields = lang.mixin({},inputProfile._fields);
+			
+			this._updateEntity(args,{
+				entityName: "profile", serviceEntity: "updateProfile", entityType: "",
+				entity: inputProfile,
 				headers:headers,
-				load:function(data){					
-					_self._deleteIdFromCache(_id, inputProfile._idType);
-					if(args && args.reloadIt != false){
-						_self._load(inputProfile, args);	
-					}
-				},
-				error: function(error){
-					validate.notifyError(error,args);
+				xmlPayload : this._constructUpdateRequestBody(inputProfile,_fields),						
+				urlParams : _param,
+				
+			});			
+		},
+		
+		_updateEntityOnLoad : function (data, ioArgs, inputProfile, args){
+			this._deleteIdFromCache(inputProfile._id, inputProfile._idType);
+			if(args && args.reloadIt != false){
+				var _param = {};
+				if(this._isEmail(inputProfile._id)){
+					_param.email = inputProfile._id;
+				}else{
+					_param.userid = inputProfile._id;
 				}
-			});
+				this._load(inputProfile, args,{entityName: "profile", serviceEntity: "getProfile", entityType: "",
+					entity: Profile, cachingEnabled : true, urlParams : _param	
+				});	
+			}
 		},
 			
 		/**
@@ -716,7 +582,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 					var headers = {"Content-Type" : "image/gif"};					
 					var _param = _self._isEmail(_id) ? "email=" : "userid=";				
 					_self._endpoint.xhrPut({
-						serviceUrl:	_self._constructProfileUrl(constants._methodName.updateProfilePhoto) + "?" + _param +encodeURIComponent(_id),
+						serviceUrl:	_self._constructProfileUrl(profileConstants._methodName.updateProfilePhoto) + "?" + _param +encodeURIComponent(_id),
 						putData:binaryContent,					
 						headers:headers,
 						load:function(data){
@@ -746,98 +612,33 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 		},
 		
 		getColleagues : function(profile, args){			
-			this._validateProfileObject(profile, args);
-			this._getEntities(args, {
-				profile : profile,
-				profileUrl : "getColleagues",
-				profileServiceEntity : "profiles"
-			});
-		},
-		
-		_constructQueryObj : function(args, getArgs) {
+			this._validateProfileObject(profile, args);			
 			var params = {};
 			if(args && args.parameters){
 				params = args.parameters;
+			}			
+			if(this._isEmail(profile._id)) {
+				params.email = profile._id; 
+			} else {
+				params.userid = profile._id; 
 			}
-			if(getArgs.profileUrl == "getColleagues"){
-				if(this._isEmail(getArgs.profile._id)) {
-					params.email = getArgs.profile._id; 
-				} else {
-					params.userid = getArgs.profile._id; 
-				}
-				params.connectionType = "colleague";				
-				params.outputType = "profile";
-			}
-			return params;
-		},
-		
-		_getEntities : function(args, getArgs) {
-			var _self = this;
+			params.connectionType = "colleague";				
+			params.outputType = "profile";
+			
 			var headers = {
-				"Content-Type" : "application/atom+xml"
-			};
-			this._endpoint.xhrGet({
-				serviceUrl : this._constructProfileUrl(getArgs.profileUrl),
-				headers : headers,
-				content : this._constructQueryObj(args, getArgs),
-				load : function(data) {
-					var entities = [];
-					var ioArgs = {};
-					var xmlData = xml.parse(data);
-					var entry = xpath.selectNodes(xmlData, constants.xpath_profile.entry, con.namespaces);
-					ioArgs.totalResults = xpath.selectText(xmlData, constants.xpath_profile.totalResults, con.namespaces);
-					ioArgs.startIndex = xpath.selectText(xmlData, constants.xpath_profile.startIndex, con.namespaces);
-					ioArgs.itemsPerPage = xpath.selectText(xmlData, constants.xpath_profile.itemsPerPage, con.namespaces);
-					for(var count = 0; count < entry.length; count ++){	
-						var node = entry[count];
-						if (getArgs.profileUrl == "getColleagues") {
-							var profile = new Profile(_self, xpath.selectText(node, constants.xpath_profile.uid, con.namespaces));
-							profile.data = node;
-							entities.push(profile);
-						} 
-					}
-					if (args.load)
-						args.load(entities, ioArgs);
-						//args.load(entities);
-					if (args.handle)
-						args.handle(entities, totalResults, startIndex, itemsPerPage);
-				},
-				error : function(error) {
-					validate.notifyError(error, args);
-				}
-			});
-		},
-		
-		_find: function(id, idType) {
-			// Case of an email: find it in the cache
-			if(this._profiles) {
-				if((idType == constants._userIdentifiers.email) || (idType == constants._userIdentifiers.id && this._isEmail(id))) {
-					var _self = this;
-					return this._profiles.browse(function(k,v) {
-						var email = xpath.selectText(v,constants.xpath_profile.email,con.namespaces);
-						if(email==id) {
-							return _self._profiles.get(k);
-						}else{
-							return null;
-						}
+					"Content-Type" : "application/atom+xml"
+				};
+			
+			this._getEntities(args,
+					{entityName: "profile", serviceEntity: "getColleagues", entityType: "",						
+						entity: Profile, urlParams : params, headers : headers
+						
 					});
-				}else{
-					return this._profiles.get(id);
-				}
-			}else{			
-				return null;
-			}
 		},
-		
-		_isEmail: function(id) {
-			return id && id.indexOf('@')>=0;
-		},
-		
 		_findIdForEmailInCache:function(emailAtr){
-			if(this._profiles) {
-				//var _self = this;
-				return this._profiles.browse(function(k,v) {
-					var email = xpath.selectText(v,constants.xpath_profile.email,con.namespaces);
+			if(this._cache) {				
+				return this._cache.browse(function(k,v) {// see this code again
+					var email = xpath.selectText(v,profileConstants.xpath_profile.email,con.namespaces);
 					if(email==emailAtr) {
 						return k;
 					}
@@ -845,16 +646,6 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 			}
 			return null;
 		},
-		
-		_deleteIdFromCache:function(_id, idType){
-			if(this._profiles) {
-				if(!((idType == constants._userIdentifiers.email) || (idType == constants._userIdentifiers.id && this._isEmail(id)))){
-					this._profiles.remove(_id);
-				}else{
-					this._profiles.remove(this._findIdForEmailInCache(_id));
-				}
-			}
-		}
 	});	
 	return ProfileService;
 });

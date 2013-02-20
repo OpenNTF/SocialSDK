@@ -15,6 +15,10 @@
  */
 package com.ibm.sbt.jslibrary.servlet;
 
+import java.util.Map;
+import com.ibm.commons.util.StringUtil;
+import com.ibm.commons.util.io.json.JsonObject;
+
 /**
  * jQuery specific library implementation
  * 
@@ -22,21 +26,26 @@ package com.ibm.sbt.jslibrary.servlet;
  */
 public class JQueryLibrary extends AbstractLibrary {
 
-	public static final String		NAME				= "jquery";			//$NON-NLS-1$
+	public static final String		NAME					= "jquery";							//$NON-NLS-1$
 
-	public static final String		MODULE_BRIDGE		= "sbt._bridge";
-	public static final String		MODULE_JQUERY		= "sbt.jquery";		//$NON-NLS-1$
-
-	public static final String		PATH_BRIDGE			= "_bridges/jquery";	//$NON-NLS-1$
-	public static final String		PATH_JQUERY			= "jquery";			//$NON-NLS-1$
+	public static final String		MODULE_BRIDGE			= "sbt/_bridge";
+	public static final String		MODULE_JQUERY			= "jquery";							//$NON-NLS-1$
+	public static final String		MODULE_HAS				= "has";								//$NON-NLS-1$
+	public static final String		MODULE_SBTX				= "sbtx";								//$NON-NLS-1$
+	public static final String		PATH_HAS				= "/sbt/js/libs/has";					//$NON-NLS-1$
+	public static final String		PATH_BRIDGE				= "_bridges/jquery";					//$NON-NLS-1$
+	public static final String		PATH_JQUERY				= "/sbt.jquery182/js/jquery-1.8.0.min"; //$NON-NLS-1$
+	public static final String		PATH_SBTX				= "/sbtx/js/sdk/sbtx";
+	public static final String		PATH_BASEURL			= "/sbt/js/sdk";
 
 	// TODO Do these need to be dynamic
-	static private final String[][]	REGISTER_MODULES	= { { MODULE_SBT, PATH_SBT },
-			{ MODULE_BRIDGE, PATH_BRIDGE }				};
+	private static final String[][]	REGISTER_MODULES		= { { MODULE_BRIDGE, PATH_BRIDGE },
+			{ MODULE_HAS, PATH_HAS }, { MODULE_JQUERY, PATH_JQUERY } };
 
-	static private final String[]	REQUIRE_MODULES		= new String[0];
+	private static final String[][]	REGISTER_EXT_MODULES	= { { MODULE_SBTX, PATH_SBTX } };
+	private static final String[]	REQUIRE_MODULES			= new String[0];
 
-	static private final String		DEFINE_MODULE		= MODULE_CONFIG;
+	private static final String		DEFINE_MODULE			= MODULE_CONFIG;
 
 	/**
 	 * Default constructor
@@ -52,7 +61,7 @@ public class JQueryLibrary extends AbstractLibrary {
 	 */
 	@Override
 	public boolean enableDefineCheck(String version) {
-		return true;
+		return false;
 	}
 
 	/*
@@ -102,6 +111,15 @@ public class JQueryLibrary extends AbstractLibrary {
 
 	/*
 	 * (non-Javadoc)
+	 * @see com.ibm.sbt.jslibrary.servlet.AbstractLibrary#getRegisterExtModules()
+	 */
+	@Override
+	protected String[][] getRegisterExtModules() {
+		return REGISTER_EXT_MODULES;
+	}
+
+	/*
+	 * (non-Javadoc)
 	 * @see com.ibm.sbt.jslibrary.servlet.AbstractLibrary#getRequireModulesAmd()
 	 */
 	@Override
@@ -117,7 +135,8 @@ public class JQueryLibrary extends AbstractLibrary {
 		indent(sb, indentationLevel).append("paths: {\n");
 		indentationLevel += 1;
 		indent(sb, indentationLevel).append("'sbt': 'sbt',\n");
-		indent(sb, indentationLevel).append("'sbt._bridge': '_bridges/jquery'\n");
+		indent(sb, indentationLevel).append("'sbt._bridge': '_bridges/jquery',\n");
+		indent(sb, indentationLevel).append("'sbtx': '/sbtx/js/sdk/stbx'\n");
 		indentationLevel -= 1;
 		indent(sb, indentationLevel).append("}\n");
 		indentationLevel -= 1;
@@ -126,39 +145,39 @@ public class JQueryLibrary extends AbstractLibrary {
 	}
 
 	/*
-	 * (non-Javadoc)
-	 * @see com.ibm.sbt.jslibrary.servlet.AbstractLibrary#isNeedsExternalAMDLoader()
-	 */
-	@Override
-	protected boolean isNeedsExternalAMDLoader() {
-		return true;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.ibm.sbt.jslibrary.servlet.AbstractLibrary#generateAMDLoader(java.lang.StringBuilder, java.lang.String, java.lang.StringBuilder)
-	 */
-	@Override
-	protected void generateAMDLoader(StringBuilder sb, int indentationLevel, StringBuilder innerSB) {
-		indent(sb, indentationLevel).append("$.getScript('/sbt/js/libs/require.js', function(){\n");
-		indentationLevel++;
-		indent(sb, indentationLevel).append(generateRequireJSConfig(indentationLevel));
-		sb.append(innerSB);
-		indentationLevel--;
-		indent(sb, indentationLevel).append("});\n");
-	}
-
-	/*
-	 * (non-Javadoc)
+	 * We redefine the isExtension boolean parameter. The meaning here is that there are extension modules pending to be added (so we need to append a comma) (non-Javadoc)
 	 * @see com.ibm.sbt.jslibrary.servlet.AbstractLibrary#generateRegisterModules(java.lang.StringBuilder, int, com.ibm.sbt.jslibrary.servlet.LibraryRequest, java.lang.String[][], boolean)
 	 */
 	@Override
 	protected void generateRegisterModules(StringBuilder sb, int indentationLevel, LibraryRequest request,
 			String[][] registerModules, boolean isExtension) {
-		/*
-		 * if (registerModules == null) { return; } indent(sb, indentationLevel).append("require(["); int numModules = registerModules.length; for (int i = 0; i < numModules; i++) { String[] registerModule = registerModules[i]; sb.append("'").append(registerModule[0]).append("'"); if (i < numModules
-		 * - 1) { sb.append(", "); } } sb.append("]);\n");
-		 */
+
+		if (registerModules == null) {
+			return;
+		}
+		int numModules = registerModules.length;
+		for (int i = 0; i < numModules; i++) {
+			String[] registerModule = registerModules[i];
+			indent(sb, indentationLevel).append("'").append(registerModule[0]).append("' : '")
+					.append(registerModule[1]).append("'");
+			if (i < numModules - 1 || isExtension) {
+				sb.append(",");
+			}
+			sb.append("\n");
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.ibm.sbt.jslibrary.servlet.AbstractLibrary#generateSbtConfigDefine(com.ibm.sbt.jslibrary.servlet.LibraryRequest, java.util.Map, com.ibm.commons.util.io.json.JsonObject, int)
+	 */
+	@Override
+	protected StringBuilder generateSbtConfigDefine(LibraryRequest request,
+			Map<String, JsonObject> endpoints, JsonObject properties, int indentationLevel)
+			throws LibraryException {
+		StringBuilder sb = super.generateSbtConfigDefine(request, endpoints, properties, indentationLevel);
+
+		return sb;
 	}
 
 	/*
@@ -181,4 +200,37 @@ public class JQueryLibrary extends AbstractLibrary {
 		return sb.toString();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.ibm.sbt.jslibrary.servlet.AbstractLibrary#generateModuleBlock(com.ibm.sbt.jslibrary.servlet.LibraryRequest, java.lang.String[][], java.lang.String[], int)
+	 */
+	@Override
+	protected StringBuilder generateModuleBlock(LibraryRequest request, String[][] registerModules,
+			String[][] registerExtModules, String[] requireModules, int indentationLevel) {
+		StringBuilder sb = new StringBuilder();
+		indent(sb, indentationLevel).append("requirejs.config({\n");
+		indentationLevel += 1;
+		Boolean enforceDefine = true;
+		int waitSeconds = 0;
+		indent(sb, indentationLevel).append("enforceDefine: '").append(enforceDefine).append("',\n");
+		indent(sb, indentationLevel).append("waitSeconds: '").append(waitSeconds).append("',\n");
+		indent(sb, indentationLevel).append("baseUrl: '").append(PATH_BASEURL).append("',\n");
+		indent(sb, indentationLevel).append("paths: {\n");
+		indentationLevel += 1;
+
+		// register the module paths and required modules
+		boolean hasExtension = StringUtil.isNotEmpty(request.getToolkitExtUrl());
+		generateRegisterModules(sb, indentationLevel, request, registerModules, hasExtension);
+		if (registerExtModules != null) {
+			generateRegisterModules(sb, indentationLevel, request, registerExtModules, false);
+		}
+
+		generateRequireModules(sb, indentationLevel, requireModules);
+		indentationLevel -= 1;
+		indent(sb, indentationLevel).append("}\n");
+		indentationLevel -= 1;
+		indent(sb, indentationLevel).append("});\n");
+
+		return sb;
+	}
 }

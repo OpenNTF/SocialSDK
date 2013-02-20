@@ -17,8 +17,7 @@
 	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Contacts_API_sbar",
 	"uri": "/lotuslive-shindig-server/social/rest/people/@me/@all",
 	"inputs": "responseFormat",
-	"uriParameters": [
-	,
+	"uriParameters": [],
 	"queryParameters": []
 },
 {
@@ -32,7 +31,7 @@
 	"queryParameters": [
 		{"name": "startIndex"},
 		{"name": "count"}
-	}
+	]
 },
 {
 	"name": "getMyConnections",
@@ -64,7 +63,7 @@
 	"uriParameters": [
 		{"name": "contactId"},
 		{"name": "format"}
-	},
+	],
 	"queryParameters": [
 		{"name": "format"}
 	]

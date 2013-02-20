@@ -1,3 +1,123 @@
+<<<<<<< HEAD
+.lotusTable td.explorer_col1 {
+	text-align: center;
+    width: 107px;
+}
+
+.lotusTable td.explorer_col3 {
+	vertical-align: top;
+	text-align: left;
+	padding-top: 5px;
+}
+
+div.explorer_summary {
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px; 
+    border-radius:5px;
+    background: -moz-linear-gradient(top, #e8e8e8 0%, #f6f6f6 15%, #ededed 80%, #e0e0e0 92%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e8e8e8), color-stop(12%,#f6f6f6), color-stop(83%,#ededed), color-stop(99%,#e0e0e0)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #e8e8e8 0%,#f6f6f6 12%,#ededed 83%,#e0e0e0 99%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #e8e8e8 0%,#f6f6f6 12%,#ededed 83%,#e0e0e0 99%); /* Opera11.10+ */
+    background: -ms-linear-gradient(top, #e8e8e8 0%,#f6f6f6 12%,#ededed 83%,#e0e0e0 99%); /* IE10+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e8e8e8', endColorstr='#e0e0e0',GradientType=0 ); /* IE6-9 */
+    background: linear-gradient(top, #e8e8e8 0%,#f6f6f6 12%,#ededed 83%,#e0e0e0 99%); /* W3C */
+    border: 1px solid #BDBDBD; 
+    margin:8px 0px 8px 0px; 
+}
+
+
+div.explorer_summary:hover,div.explorer_summary:active {
+    border: 1px solid #A4A4A4; 
+/*	cursor: pointer;
+	cursor: hand; */
+}
+
+div.explorer_sum_title, h4.lotusTitle {
+   display: inline;
+   font-weight: bold;
+}
+
+div.explorer_sum_help_button {
+   display: inline;
+   float: right;
+   padding-right: 40px;
+}
+
+div.explorer_details {
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border-radius:5px; 
+    background-color: #fdfdfd;
+    border: 1px solid #999999; 
+    margin: 6px; 
+    padding:6px 8px 6px 8px; 
+}
+.explorer_detailsTable {
+	width: 100%;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.explorer_detailsTable th {
+	padding-left: 0;
+	padding-right: 0;
+	font-weight: bold;
+	text-align: left;
+}
+
+.explorer_detailsTable td {
+	margin-left: 0;
+	margin-left: 3px;
+	margin-top: 3px;
+	margin-bottom: 3px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	border-bottom: 1px solid #EEEEEE;
+}
+
+div.explorer_results {
+	margin-top: 8px;
+}
+
+.bodyLabel {
+	font-weight: bold;
+	text-align: left;
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+
+.paramCol1 {vertical-align:top; font-weight: bold; width: 1px; white-space: nowrap;}
+.paramCol2 {vertical-align:top; width: 1px; }
+.paramCol3 {vertical-align:top; text-align: center;}
+.paramCol4 {vertical-align:top; margin-left: 5px; margin-right: 5px; width: 6em; white-space: nowrap;}
+.paramCol5 {vertical-align:top;}
+
+.resCol1 {vertical-align:top;}
+.resCol2 {vertical-align:top;}
+
+a.apiheader:link {text-decoration:none;}
+a.apiheader:visited {text-decoration:none;}
+a.apiheader:hover {text-decoration:none;}
+a.apiheader:active {text-decoration:none;}
+
+.prelabel {
+	font-weight: bold;
+	text-align: left;
+	margin-top: 8px;
+	margin-bottom: 2px;
+}
+
+pre {
+ 	border: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 5px;
+    margin: 0;
+    white-space: pre-wrap; 
+	white-space: -moz-pre-wrap;
+	white-space: o-pre-wrap;
+	max-height: 25em;
+	overflow-y: auto;
+}
+=======
 .lotusTable td.explorer_col1 {
 	text-align: center;
     width: 107px;
@@ -151,3 +271,4 @@ pre {
 	max-height: 25em;
 	overflow-y: auto;
 }
+>>>>>>> 180f1c0a2e4c400fead946e18c678038137681bb

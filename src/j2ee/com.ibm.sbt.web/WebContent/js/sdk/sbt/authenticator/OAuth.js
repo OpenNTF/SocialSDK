@@ -25,7 +25,7 @@ define(['sbt/_bridge/declare','sbt/lang'], function(declare,lang) {
 	 * 
 	 * This class triggers the authentication for a service.
 	 */
-	return declare("sbt.authenticator.OAuth10", null, {
+	return declare("sbt.authenticator.OAuth", null, {
 		
 		url:			"",
 		loginUi:		"",	// mainWindow, dialog or popup

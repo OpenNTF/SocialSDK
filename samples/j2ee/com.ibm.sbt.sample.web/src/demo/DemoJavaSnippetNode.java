@@ -34,6 +34,6 @@ public class DemoJavaSnippetNode extends JavaSnippetAssetNode {
 	// url for JSP's
 	public String getJSPUrl(HttpServletRequest request) {
 		String pathToJSPSample = getUnid(); //getPath()+".jsp";	
-		return UrlUtil.getRequestUrl(request,false)+"?snippet="+pathToJSPSample;
+		return UrlUtil.getRequestUrl(request,3)+"?snippet="+pathToJSPSample;
 	}
 }

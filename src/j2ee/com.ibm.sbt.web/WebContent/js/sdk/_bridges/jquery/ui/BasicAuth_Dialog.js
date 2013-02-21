@@ -17,51 +17,115 @@
 /**
  * Social Business Toolkit SDK.
  * 
- * Definition of a dojo based dialog for OAuth 1.0.
+ * Definition of a jQuery UI based dialog for OAuth 1.0.
  */
-define(['dijit/Dialog',"dojo/cache"], function(Dialog, cache) {
+define(['jquery/ui', 'jquery/serialize'], function() {
+	
 	return {
+		submitOnClickHandle: function(contentForm) {
+			var o = {};
+			$.each(contentForm, function() {
+				if (o[this.name]) {
+					if (!o[this.name].push) {
+						o[this.name] = [o[this.name]];
+					}
+					o[this.name].push(this.value || '');
+				} else {
+					o[this.name] = this.value || '';
+				}
+			});
+			contentForm = o;
+			if(contentForm.username == "" || contentForm.password == ""){
+				$("#wrongCredsMessage").css("display","block");
+				return;
+			}else{
+				var proxy = options.proxy.proxyUrl;
+				var proxyServletURL = proxy.substring(0,proxy.lastIndexOf("/"))+"/basicAuth/"+options.proxyPath+"/JSApp";
+	    		var postToProxy = {
+					url: proxyServletURL, 
+					content: contentForm,
+					handle: function(data){
+						if(data instanceof Error){
+							var statusCode = data.code; // In the transport we already set the statusCode to error.code
+							if(statusCode == 401 || statusCode == 403){
+								$("#wrongCredsMessage").css("display","block");
+								return;
+							};
+						}
+						sbt.dialog.dialog("close");
+						sbt.dialog.dialog("destroy");
+						options.callback();
+				    }
+	    		};
+			    options.transport.xhr("POST",postToProxy,true);
+			};
+	    },
 		show: function(options, dialogLoginPage) {
-		  try{	
-			var proxy = options.proxy.proxyUrl;
-			var proxyServletURL = proxy.substring(0,proxy.lastIndexOf("/"))+"/basicAuth/"+options.proxyPath+"/JSApp";
-			var d = new Dialog({
-				title: "Authentication", 
-	            style: "width: 350px",
-	            content: cache("sbt", dialogLoginPage),
-	            submitOnClickHandle : function (contentForm) {
-	        		if(contentForm.username.value == "" || contentForm.password.value == ""){
-	        			dojo.style(dojo.byId("wrongCredsMessage"),"display","block");
-	        			return;
-	        		}else{
-	            		var postToProxy = {
-							url:proxyServletURL, 
-							content: {
-								username:contentForm.username.value,
-								password:contentForm.password.value
-							},
-							handle:function(data){
-								if(data instanceof Error){
-									var statusCode = data.status || data.response.status; // For dojo180 error code is in data.response.status 
-									if(statusCode == 401 || statusCode == 403){
-										dojo.style(dojo.byId("wrongCredsMessage"),"display","block");
-										return;
-									}
-								}
-								d.hide();
-								delete sbt.dialog;
-								options.callback();
-						    }
-	            		};
-	            		options.transport.xhr("POST",postToProxy,true);
-	        		}
-	            }
-	        });
+		  try{
+			var self = this;
+			require(['requirejs/text!sbt/'+dialogLoginPage],function(loginPage){
+				var _title = "Authentication";
+				var _isModal = false;
+				var _width = 350;
+				var _height = 220;
+				var _autoOpen = true;
+				var _resizeable = true;
+				var _draggable = true;
+				
+	            var d = sbt.dialog = $(loginPage).dialog({
+					title : _title,
+					modal: _isModal,
+					width: _width,
+					height: _height,
+					resizeable: _resizeable,
+					draggable: _draggable,
+					autoOpen : _autoOpen
+				});
+	            var attrsArray = [];
+	            $("div[role=dialog]").find("input[type=button]").each(function(index){
+	            	var attrs={};
+	            	$.each($(this)[0].attributes,function(idx, attr){
+	            		attrs[attr.nodeName] = attr.nodeValue;
+	            	});
+	            	attrsArray[index] = attrs;
+	            });
+	            $("div[role=dialog]").find("input[type=button]").replaceWith(function(idx){
+	            		var text = attrsArray[idx].value;
+	            		delete attrsArray[idx].value;
+	            		delete attrsArray[idx].onclick;
+	            		var thisButton = $("<button />", attrsArray[idx]).append($(this).contents()).
+            				attr("role","button").attr("aria-disabled", "false").
+            				addClass("ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only").
+            				append("<span class='ui-button-text'>"+text+"</span>");
+	            		thisButton.hover(
+	            			function() {
+	            				$(this).addClass("ui-state-hover");
+	            			},
+	            			function() {
+	            				$(this).removeClass("ui-state-hover");
+	            			}
+	            		);
+	            		if (text == "OK"){
+	            			thisButton.click(
+	            				function() {
+	            					self.submitOnClickHandle($("form").serializeArray());
+	            				}
+	            			);
+	            		}
+	            		if (text == "Cancel"){
+	            			thisButton.click(
+	            				function() {
+	            					sbt.dialog.dialog("close");
+	        						sbt.dialog.dialog("destroy");
+	            				}
+	            			);
+	            		}
+	            		return thisButton;
+	            });
+			});
 		  }catch(er){
 			  console.log("error in BasicAuth_Dialog "+er);
 		  }	
-		  sbt.dialog=d;
-	      d.show();
 		}
 	};
 });

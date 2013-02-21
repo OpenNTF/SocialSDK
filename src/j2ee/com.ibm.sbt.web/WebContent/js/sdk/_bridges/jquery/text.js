@@ -16,8 +16,13 @@
 
 /**
  * Social Business Toolkit SDK.
- * @module nls
+ * 
+ * @module i18n
  */
-define(['sbt/nls/resources'],function(resources) {
-	return resources;
+define([ "requirejs/text" ], function(text) {
+    return {
+    	load: function(name, req, onload, config){
+    		text.load(name, req, onload, config); 
+    	}
+    }; 
 });

@@ -61,8 +61,8 @@ define(['jquery', 'sbt/_bridge/declare', 'sbt/util' ], function($, declare, util
 		},
 		handleError: function(args, jqXHR, textStatus, errorThrown) {
 			var error = this.createError(jqXHR, textStatus, errorThrown);
-            if (args.error) {
-		        args.error(error, args);
+            if (args.handle) {
+		        args.handle(error, args);
             }
 		},
 		createError: function(jqXHR, textStatus, errorThrown) {

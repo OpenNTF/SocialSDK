@@ -37,6 +37,7 @@ import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.commons.util.io.json.JsonObject;
 import com.ibm.commons.util.io.json.JsonReference;
 import com.ibm.sbt.jslibrary.SBTEnvironment.Property;
+import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
 import com.ibm.sbt.services.endpoints.GadgetEndpoint;
@@ -76,6 +77,7 @@ abstract public class AbstractLibrary {
 	public static final String		PROP_LOGIN_PAGE				= "loginPage";
 	public static final String		PROP_LOGIN_DIALOG_PAGE		= "loginDialogPage";
 	public static final String		PROP_LOGIN_UI				= "loginUi";
+	public static final String		IS_AUTHENTICATED			= "isAuthenticated";
 
 	public static final String		PROP_MODULE_PREFIX			= "_module";
 	public static final String		PROP_MODULE_AUTHENTICATOR	= "_moduleAuthenticator";
@@ -301,6 +303,12 @@ abstract public class AbstractLibrary {
 		if (isValid(request, endpoint)) {
 			// set the endpoint url
 			jsonEndpoint.putJsonProperty(PROP_BASE_URL, endpoint.getUrl());
+			try {
+				jsonEndpoint.putJsonProperty(IS_AUTHENTICATED, endpoint.isAuthenticated());
+			} catch (ClientServicesException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 			// configure endpoint to use proxy
 			if (useProxy(endpoint)) {

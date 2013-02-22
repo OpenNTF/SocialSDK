@@ -21,6 +21,7 @@ import com.ibm.commons.runtime.servlet.ServletFactory;
 import com.ibm.sbt.security.authentication.oauth.consumer.oauth_10a.servlet.OA2Callback;
 import com.ibm.sbt.security.authentication.oauth.consumer.oauth_10a.servlet.OACallback;
 import com.ibm.sbt.security.authentication.oauth.consumer.oauth_10a.servlet.OAClientAuthentication;
+import com.ibm.sbt.service.core.handlers.AuthenticationHandler;
 import com.ibm.sbt.service.core.handlers.BasicAuthCredsHandler;
 import com.ibm.sbt.service.core.handlers.ConnectionsFileHandler;
 import com.ibm.sbt.service.core.handlers.EmailHandler;
@@ -51,6 +52,7 @@ public class ServiceServlet extends ServletDispatcher {
         register(new ServletFactory.PathInfoFactory(EmailHandler.class,EmailHandler.URL_PATH));        
         register(new ServletFactory.PathInfoFactory(ConnectionsFileHandler.class,ConnectionsFileHandler.URL_PATH));
         register(new ServletFactory.PathInfoFactory(SmartcloudFileHandler.class,SmartcloudFileHandler.URL_PATH));
+        register(new ServletFactory.PathInfoFactory(AuthenticationHandler.class,AuthenticationHandler.URL_PATH));
     }
     
 }

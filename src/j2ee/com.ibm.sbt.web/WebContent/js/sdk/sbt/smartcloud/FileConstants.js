@@ -36,11 +36,11 @@ define([], function() {
 		},
 		entityServiceBaseUrl : "/files/basic/cmis/repository/p!{subscriberId}",		
 		xpath_feed_File : {
-			entry : "/a:feed/a:entry",
-			id : "a:id",
+			entry : "/a:feed/a:entry"			
 		},
 		xpath_File : {
 			entry : "/a:entry",
+			uid : "a:id",
 			authorName : "a:author/a:name",
 			authorDisplayName : "a:author/lcmis:displayName",
 			authorEmail : "a:author/a:email",

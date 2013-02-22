@@ -94,10 +94,32 @@ var Endpoint = declare("sbt.Endpoint", null, {
 	dialogLoginPage:null,
 	
 	/**
+	 * Whether or not user is forced to login even if already logged in.
+	 * @property forceAuthentication
+	 * @type String
+	 */
+	forceAuthentication: false,
+	
+	/**
+	 * Whether auth dialog should come up automatically or not. In case of not 401 would be propagated to user.
+	 * @property autoAuthenticate
+	 * @type String
+	 */
+	autoAuthenticate: "true",
+	
+	/**
+	 * Whether user is authenticated to endpoint or not.
+	 * @property isAuthenticated
+	 * @type String
+	 */
+	isAuthenticated: "false",
+	
+	/**
 	 * Simple constructor that mixes in its parameters as object properties
 	 * @constructor
 	 * @param {Array} args
 	 */
+	
 	constructor: function(args) {
 		lang.mixin(this, args || {});	
 	},
@@ -172,20 +194,23 @@ var Endpoint = declare("sbt.Endpoint", null, {
 				var error = data;
 				// check for if authentication is required
 				if (error.code == 401 || (self.authType == 'oauth' && error.code == 403)) {
-					if(self.authenticator) {
-						options = {
-							dialogLoginPage:self.loginDialogPage,
-							loginPage:self.loginPage,
-							transport:self.transport, 
-							proxy: self.proxy,
-							proxyPath: self.proxyPath,
-							loginUi: args.loginUi || self.loginUi,
-							callback: function() {
-								self.xhr(method,_args,hasBody);
-							}
-						};
-						if(self.authenticator.authenticate(options)) {
-							return;
+					this.autoAuthenticate =  args.autoAuthenticate || sbt.Properties["autoAuth"] || this.autoAuthenticate || "true";
+					if(this.autoAuthenticate == "true"){
+						if(self.authenticator) {
+							options = {
+								dialogLoginPage:self.loginDialogPage,
+								loginPage:self.loginPage,
+								transport:self.transport, 
+								proxy: self.proxy,
+								proxyPath: self.proxyPath,
+								loginUi: args.loginUi || self.loginUi,
+								callback: function() {
+									self.xhr(method,_args,hasBody);
+								}
+							};
+							if(self.authenticator.authenticate(options)) {
+								return;
+								}
 						}
 					}
 				} 
@@ -230,7 +255,65 @@ var Endpoint = declare("sbt.Endpoint", null, {
 	 */
 	xhrDelete: function(args){
 		this.xhr("DELETE", args);
-	}	
+	},
+	
+	authenticate: function(forceAuthentication ,callbacks){
+		options = {
+				dialogLoginPage:this.loginDialogPage,
+				loginPage:this.loginPage,
+				transport:this.transport, 
+				proxy: this.proxy,
+				proxyPath: this.proxyPath,
+				loginUi: this.loginUi,
+				callback: callbacks.callback
+		};
+//		var autoAuth =  sbt.Properties["autoAuthenticate"] || this.autoAuthenticate || "true";
+		if(forceAuthentication == true){
+			this.logout();
+//			if(autoAuth == "true"){
+				if(this.authenticator.authenticate(options)) {
+					return;
+				}
+//			}else{
+//				callbacks.error();
+//			}
+		}else{
+			if(this.isAuthenticated == false){
+//				if(autoAuth == "true"){
+					if(this.authenticator.authenticate(options)) {
+						return;
+					}
+//				}else{
+//					callbacks.error();
+//				}
+			}else{
+				callbacks.callback();
+			}
+		}
+	},
+	
+	logout: function(callbacks){
+		var proxy = this.proxy.proxyUrl;
+		var actionURL = proxy.substring(0,proxy.lastIndexOf("/"))+"/authHandler/"+this.proxyPath+"/logout";
+		this.transport.xhr('POST', {
+	        handleAs: "json",
+			url: actionURL,
+			handle: function(response) {
+				if(callbacks.callback){
+		    		if(response.logout){
+		    			callbacks.callback(response.logout);
+					}else{
+						console.log("Logout operation failed");
+					}
+		    	}
+			    
+			},
+			error: function(error){
+				return error;
+			}
+	    }, true);
+	}
+	
 });
 
 sbt.Endpoints = {}; // Initially empty

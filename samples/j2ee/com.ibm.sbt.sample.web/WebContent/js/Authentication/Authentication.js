@@ -21,7 +21,7 @@ require(["sbt/dom", "sbt/Endpoint", "sbt/config"], function(dom, Endpoint, confi
 	loginStatusTH.setAttribute("id", "thLoginStatus");
 	loginActionTH.setAttribute("id", "thLoginAction");
 	dom.setText("thEPName", "Endpoint");
-	dom.setText("thLoginStatus", "Login Statusss");
+	dom.setText("thLoginStatus", "Login Status");
 	dom.setText("thLoginAction", "Login Action");
 	/*creating heared rows*/
 	

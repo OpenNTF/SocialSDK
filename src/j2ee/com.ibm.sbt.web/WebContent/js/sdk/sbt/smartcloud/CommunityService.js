@@ -22,10 +22,10 @@
  */
 define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt/xml','sbt/xpath','sbt/Cache',
         'sbt/Endpoint','sbt/smartcloud/CommunityConstants',
-        'sbt/base/BaseService', 'sbt/log'],
+        'sbt/base/BaseService', 'sbt/log','sbt/base/XmlHandler'],
 		function(declare,cfg,lang,con,xml,xpath,Cache,
 				Endpoint, CommunityConstants,
-				BaseService, log) {
+				BaseService, log, XmlHandler) {
 	
 	/**
 	 * Community class associated with a community. 
@@ -158,7 +158,8 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 		
 		constructor: function(_options) {
 			var options = _options || {};
-			options = lang.mixin({endpoint: options.endpoint || "smartcloud", Constants: CommunityConstants, con: con});
+			var handler = new XmlHandler({xpath_map: CommunityConstants.xpath_community, xpath_feed_map: CommunityConstants.xpath_feed_community,nameSpaces:con.namespaces});
+			options = lang.mixin({endpoint: options.endpoint || "smartcloud", Constants: CommunityConstants, con: con, dataHandler: handler});
 			this.inherited(arguments, [options]);
 		},
 		
@@ -457,11 +458,11 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 					});
 			
 		},
-		_createEntityObject : function (service, id, type){
-			if(type == "community"){
+		_createEntityObject : function (service, id, requestArgs, args){
+			if(requestArgs.entityName == "community"){
 				var community = new Community (service, id);
 				return community;
-			}else if (type == "member"){
+			}else if (requestArgs.entityName == "member"){
 				var member = new Member (service, id);
 				return member;
 			}

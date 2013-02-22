@@ -20,8 +20,8 @@
  *  
  * Helpers for accessing the Connections Profiles services
  */
-define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sbt/xml','sbt/util','sbt/xpath','sbt/Cache','sbt/connections/ProfileConstants','sbt/Endpoint','sbt/validate','sbt/base/BaseService'],
-		function(declare,cfg,lang,con,xml,util,xpath,Cache,profileConstants,Endpoint,validate, BaseService) {
+define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sbt/xml','sbt/util','sbt/xpath','sbt/Cache','sbt/connections/ProfileConstants','sbt/Endpoint','sbt/validate','sbt/base/BaseService', 'sbt/base/XmlHandler'],
+		function(declare,cfg,lang,con,xml,util,xpath,Cache,profileConstants,Endpoint,validate, BaseService, XmlHandler) {
 	
 	/**
 	Javascript APIs for IBM Connections Profiles Service.
@@ -331,7 +331,8 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 
 		constructor: function(_options) {
 			var options = _options || {};
-			options = lang.mixin({endpoint: options.endpoint || "connections", Constants: profileConstants, con: con});
+			var handler = new XmlHandler({xpath_map: profileConstants.xpath_profile, xpath_feed_map: profileConstants.xpath_feed_profile,nameSpaces:con.namespaces});
+			options = lang.mixin({endpoint: options.endpoint || "connections", Constants: profileConstants, con: con, dataHandler: handler});
 			this.inherited(arguments, [options]);			
 		},
 		/**

@@ -22,8 +22,8 @@
  * 
  */
 define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml','sbt/xpath','sbt/Cache','sbt/Endpoint', 'sbt/base/BaseConstants', 
-        "sbt/validate", 'sbt/log', 'sbt/stringutil'],
-		function(declare,cfg,lang,con,xml,xpath,Cache,Endpoint, BaseConstants, validate, log, stringutil) {
+        "sbt/validate", 'sbt/log', 'sbt/stringutil', 'sbt/base/BaseHandler'],
+		function(declare,cfg,lang,con,xml,xpath,Cache,Endpoint, BaseConstants, validate, log, stringutil, BaseHandler) {
 	
 	var requests = {};
 	
@@ -74,6 +74,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 			this._xpath = args.xpath || "xpath_"+this._entityName;
 			this._xpath_feed = args.xpath_feed || "xpath_feed_"+this._entityName;
 			this._con = args.con || con; //NameSpaces
+			this._dataHandler = this._service._dataHandler;
 		},
 		
 		/**
@@ -179,8 +180,12 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 		xpathArray: function(path){
 			return this._data && path ? xpath.selectNodes(this._data,path,this._con.namespaces) : null;
 		},
-		get: function(fieldName) {			
-			return this._fields[fieldName] || this.xpath(this.fieldXPathForEntry(fieldName));				
+		get: function(fieldName) {	
+			if(this._fields[fieldName]){
+				return this._fields[fieldName];
+			}else if (this._dataHandler._dataType == "xml"){
+			   return this.xpath(this.fieldXPathForEntry(fieldName));
+			}
 		},
 		
 		set: function(fieldName,value) {
@@ -222,7 +227,11 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 			if(cacheSize && cacheSize>0) {
 				this._cache = new Cache(cacheSize);
 			}
-			
+			if(_options.dataHandler){
+				this._dataHandler = _options.dataHandler;
+			}else{
+				this._dataHandler = new BaseHandler();
+			}
 		},
 		
 		_notifyResponse: function(args, response, summary){
@@ -246,8 +255,12 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 			}
 		},
 		
+		_createEntityObject : function (service, id, requestArgs, args){
+			return requestArgs.entity.apply(null,[service, id]);
+		},
+		
 		_getOne: function(args,getArgs) {			
-			var entity = this._createEntityObject(this, args.id, getArgs.entityName);			
+			var entity = this._createEntityObject(this, args.id, getArgs, args);			
 			if(args.loadIt == false){
 				this._notifyResponse(args,entity);
 			}else{
@@ -271,9 +284,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 					handleAs:	handleAs,
 					content:	_self._constructQueryObj(args,getArgs),
 					load: function(data, ioArgs) {
-						if(handleAs == "text"){							
-							_self._loadOnLoad(data, ioArgs, entity, args, getArgs);	
-						}
+						_self._loadOnLoad(data, ioArgs, entity, args, getArgs);	
 					},
 					error: function(error){
 						_self._loadOnError(error, args);
@@ -283,13 +294,11 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 		},
 		
 		_loadOnLoad : function (data, ioArgs, entity, args, getArgs){
-			var xpath_map = this.Constants["xpath_" + getArgs.entityName];
-			var entry = xpath.selectNodes(xml.parse(data), xpath_map["entry"], this._con.namespaces);
-			var node = entry[0];
-			entity.setData(node);
+			var dataHandler = (getArgs._dataHandler) ? getArgs._dataHandler : this._dataHandler ;			
+			entity.setData(dataHandler._extractEntryFromSingleEntryFeed(data, ioArgs));			
 			if (getArgs.cachingEnabled) {
 				if(this._cache){
-					this._cache.put(xpath.selectText(entity._data,xpath_map.uid,con.namespaces),entity._data);
+					this._cache.put(dataHandler._extractIdFromEntry(entity._data),entity._data);
 				}
 				notifyCb(entity._id, entity);
 			} else {
@@ -327,12 +336,9 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 			return entityId = (!(typeof inputEntity == "object")) ? inputEntity._id : inputEntity;
 		},
 		
-		_constructXMLPayload: function(getArgs){
-			if(getArgs.xmlPayload){
-				return getArgs.xmlPayload;
-			}else{
-								return stringutil.replace(getArgs.xmlPayloadTemplate, getArgs.xmlData);	
-			}
+		_constructPayload: function(requestArgs){
+			var dataHandler = (requestArgs._dataHandler) ? requestArgs._dataHandler : this._dataHandler ;			
+			return dataHandler._constructPayload(requestArgs);
 		},
 		
 		_createRequestObject: function(args, requestArgs){
@@ -369,14 +375,11 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 		**/
 		_createEntity: function (args, postArgs) {
 			var _self = this;
-			var entity = postArgs.entity;
-			var handleAs = (postArgs.handleAs)?getArgs.handleAs : "text";
+			var entity = postArgs.entity;			
 			var requestObject = lang.mixin({
-				postData:_self._constructXMLPayload(postArgs),
+				postData:_self._constructPayload(postArgs),
 				load:function(data, ioArgs){
-					if(handleAs == "text"){
-						_self._createEntityOnLoad(data, ioArgs, entity, args);
-					}
+					_self._createEntityOnLoad(data, ioArgs, entity, args);
 				},
 				error:function(error){
 					_self._createEntityOnError(error, args);
@@ -385,8 +388,9 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 			this._endpoint.xhrPost(requestObject);
 		},
 		
-		_createEntityOnLoad : function (data, ioArgs, entity, args){
-			entity.data = xml.parse(data);
+		_createEntityOnLoad : function (data, ioArgs, entity, args, postArgs){
+			var dataHandler = (postArgs._dataHandler) ? postArgs._dataHandler : this._dataHandler ;						
+			entity.data = dataHandler._extractEntryFromSingleEntryFeed(data, ioArgs);
 			this._notifyResponse(args,entity);
 		},
 		
@@ -408,14 +412,11 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 		_updateEntity: function (args, putArgs) {
 			
 			var _self = this;
-			var entity = putArgs.entity;
-			var handleAs = (putArgs.handleAs)?getArgs.handleAs : "text";
+			var entity = putArgs.entity;			
 			var requestObject = lang.mixin({
-				putData:_self._constructXMLPayload(putArgs),
+				putData:_self._constructPayload(putArgs),
 				load:function(data, ioArgs){
-					if(handleAs == "text"){
-						_self._updateEntityOnLoad(data, ioArgs, entity, args);
-					}
+					_self._updateEntityOnLoad(data, ioArgs, entity, args);
 				},
 				error: function(error){
 					_self._updateEntityOnError(error, args);
@@ -424,8 +425,9 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 			this._endpoint.xhrPut(requestObject);
 		},
 		
-		_updateEntityOnLoad : function (data, ioArgs, entity, args){
-			entity.data = xml.parse(data);
+		_updateEntityOnLoad : function (data, ioArgs, entity, args, putArgs){
+			var dataHandler = (putArgs._dataHandler) ? putArgs._dataHandler : this._dataHandler ;						
+			entity.data = dataHandler._extractEntryFromSingleEntryFeed(data, ioArgs);
 			this._notifyResponse(args,entity);
 		},
 		
@@ -446,13 +448,10 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 		**/
 		_deleteEntity: function (args, deleteArgs) {
 			var _self = this;
-			var entity = deleteArgs.entity;
-			var handleAs = (deleteArgs.handleAs)?getArgs.handleAs : "text";
+			var entity = deleteArgs.entity;			
 			var requestObject = lang.mixin({
 				load:function(data, ioArgs){
-					if(handleAs == "text"){
-						_self._deleteEntityOnLoad(data, ioArgs, entity, args);
-					}
+					_self._deleteEntityOnLoad(data, ioArgs, entity, args);
 				},
 				error: function(error){
 					_self._deleteEntityOnError(error, args);
@@ -478,9 +477,6 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 			
 			var url = this.Constants.entityServiceBaseUrl + authType + (this.Constants.serviceEntity[requestArgs.serviceEntity]?this.Constants.serviceEntity[requestArgs.serviceEntity]: "") + (this.Constants.entityType[requestArgs.entityType] ? this.Constants.entityType[requestArgs.entityType] : "");
 			
-			if (requestArgs.replaceArgs) {
-				url = stringutil.replace(url, requestArgs.replaceArgs);
-			}
 			if(requestArgs.methodType != "get"){
 				if (requestArgs.urlParams) {
 					url += "?";
@@ -510,41 +506,39 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 		_getEntities: function (args,getArgs) {
 			var _self=this;
 			getArgs.methodType = "get";	
-			var handleAs = (getArgs.handleAs)?getArgs.handleAs : "text";
 			var requestObject = lang.mixin({
 				content: _self._constructQueryObj(args,getArgs),
 				load:function(data, ioArgs){
-					if(handleAs == "text"){
-						summary = _self._getSummaryOnLoad(data, getArgs);
-						entities = _self._getEntititiesOnLoad(data, getArgs);
-						_self._notifyResponse(args, entities, summary);
-					}
+					summary = _self._getSummaryOnLoad(data, getArgs, args);
+					entities = _self._getEntititiesOnLoad(data, getArgs, args);
+					_self._notifyResponse(args, entities, summary);
+				},
+				error: function(error){
+					_self._getEntitiesOnError(error, args);
 				}
 				
 			}, _self._createRequestObject(args, getArgs));			
 			this._endpoint.xhrGet(requestObject);
 		},
 		
-		_getSummaryOnLoad: function (data, getArgs){
-			var xpath_map = this.Constants["xpath_feed_"+getArgs.entityName];
-			var xmlData = xml.parse(data); 
-			var summary = {};
-			summary.totalResults = xpath.selectText(xmlData, xpath_map.totalResults, this._con.namespaces);
-			summary.startIndex = xpath.selectText(xmlData, xpath_map.startIndex, this._con.namespaces);
-			summary.itemsPerPage = xpath.selectText(xmlData, xpath_map.itemsPerPage, this._con.namespaces);	
-			return summary;
+		_getEntitiesOnError : function (error, args){
+			validate.notifyError(error, args);
 		},
-		_getEntititiesOnLoad: function (data, getArgs){
-			console.log(data);
-			var entities = [];
-			var xpath_map = this.Constants["xpath_feed_"+getArgs.entityName];
-			var xmlData = xml.parse(data);	
-			var entry = xpath.selectNodes(xmlData,xpath_map["entry"],this._con.namespaces);
+		
+		_getSummaryOnLoad: function (data, getArgs, args){
+			var dataHandler = (getArgs._dataHandler) ? getArgs._dataHandler : this._dataHandler ;			
+			return dataHandler._extractSummaryFromEntitiesFeed(data);
+		},
+		
+		_getEntititiesOnLoad: function (data, getArgs, args){			
+			var dataHandler = (getArgs._dataHandler) ? getArgs._dataHandler : this._dataHandler ;			
+			var entities = [];			
+			var entry = dataHandler._extractEntriesFromEntitiesFeed(data);
 			for(var count=0; count < entry.length; count++){
-				var node = entry[count];
-				 var entityId = xpath.selectText(node,xpath_map["id"],this._con.namespaces);
+				 var node = entry[count];
+				 var entityId = dataHandler._extractIdFromEntry(node);
 				 entityId = getArgs.parseId ? getArgs.parseId(entityId) : entityId;			
-				 var entity = this._createEntityObject(this, entityId, getArgs.entityName);
+				 var entity = this._createEntityObject(this, entityId, getArgs, args);
 				if(!(getArgs.ignoreData)){
 					entity.setData(node);
 				}

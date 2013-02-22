@@ -133,39 +133,42 @@ public class ProxyEndpointService extends ProxyService {
         }
     }
 
-    @Override
-    protected void initProxy(HttpServletRequest request, HttpServletResponse response) throws ServletException {
-        String pathinfo = request.getPathInfo();
-        // Skip the URL_PATH of the proxy
-        //   /[proxy root]/[URL_PATH]/[endpointname]/[http/...]
-        int startEndPoint = getProxyUrlPath().length()+2;
-        if(startEndPoint<pathinfo.length()) {
-            int startProxyUrl = pathinfo.indexOf('/',startEndPoint);
-            if(startProxyUrl>=0) {
-                String endPointName = pathinfo.substring(startEndPoint,startProxyUrl);
-                this.endpoint = (Endpoint)EndpointFactory.getEndpoint(endPointName);
-                if (!endpoint.isAllowClientAccess()) {
-                	throw new ServletException(StringUtil.format("Client access forbidden for the specified endpoint {0}",endPointName));
-                }
-
-                String url = pathinfo.substring(startProxyUrl+1).replaceFirst("\\/", "://");
-                
-                String serverUrl = endpoint.getUrl();
-                if(!url.startsWith(serverUrl)) {
-                    throw new ServletException(StringUtil.format("The proxied url does not correspond to the endpoint {0}",endPointName));
-                }
-                requestURI = url;
-                return;
-            }
-        }
-        StringBuffer b = request.getRequestURL();
-        String q = request.getQueryString();
-        if(StringUtil.isNotEmpty(q)) {
-            b.append('?');
-            b.append(q);
-        }
-        throw new ServletException(StringUtil.format("Invalid url {0}",b.toString()));
-    }
+	@Override
+	protected void initProxy(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException {
+		String pathinfo = request.getPathInfo();
+		// Skip the URL_PATH of the proxy
+		// /[proxy root]/[URL_PATH]/[endpointname]/[http/...]
+		int startEndPoint = getProxyUrlPath().length() + 2;
+		if (startEndPoint < pathinfo.length()) {
+			int startProxyUrl = pathinfo.indexOf('/', startEndPoint);
+			if (startProxyUrl >= 0) {
+				String endPointName = pathinfo.substring(startEndPoint, startProxyUrl);
+				this.endpoint = EndpointFactory.getEndpoint(endPointName);
+				if (!endpoint.isAllowClientAccess()) {
+					throw new ServletException(StringUtil.format(
+							"Client access forbidden for the specified endpoint {0}", endPointName));
+				}
+				String url = pathinfo.substring(startProxyUrl);
+				url = endpoint.getUrl() + url; // Concatenate the server url with the service url ( eg : connections url + atom url )
+				// url = url.replaceFirst("\\/", "://");
+				String serverUrl = endpoint.getUrl();
+				if (!url.startsWith(serverUrl)) {
+					throw new ServletException(StringUtil.format(
+							"The proxied url does not correspond to the endpoint {0}", endPointName));
+				}
+				requestURI = url;
+				return;
+			}
+		}
+		StringBuffer b = request.getRequestURL();
+		String q = request.getQueryString();
+		if (StringUtil.isNotEmpty(q)) {
+			b.append('?');
+			b.append(q);
+		}
+		throw new ServletException(StringUtil.format("Invalid url {0}", b.toString()));
+	}
     
     @Override
     protected String getRequestURIPath(HttpServletRequest request) throws ServletException {

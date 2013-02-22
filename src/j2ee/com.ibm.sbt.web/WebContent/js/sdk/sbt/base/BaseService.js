@@ -477,6 +477,10 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 			
 			var url = this.Constants.entityServiceBaseUrl + authType + (this.Constants.serviceEntity[requestArgs.serviceEntity]?this.Constants.serviceEntity[requestArgs.serviceEntity]: "") + (this.Constants.entityType[requestArgs.entityType] ? this.Constants.entityType[requestArgs.entityType] : "");
 			
+			if (requestArgs.replaceArgs) {
+				url = stringutil.replace(url, requestArgs.replaceArgs);
+			}
+			
 			if(requestArgs.methodType != "get"){
 				if (requestArgs.urlParams) {
 					url += "?";

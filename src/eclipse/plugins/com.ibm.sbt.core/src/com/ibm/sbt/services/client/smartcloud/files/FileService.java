@@ -74,12 +74,17 @@ public class FileService extends BaseService {
 	private RepositoryInfo		reposInfo;
 
 	protected static enum FilesAPI {
-		GET_REPOSITORY_INFO("/files/basic/cmis/my/servicedoc"),
-		GET_FILE_ENTRY("/files/basic/cmis/repository/p!{subscriberId}/object/snx:file!{fileId}"),
-		POST_FILE_UPLOAD("/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:files"),
-		GET_MY_FILES("/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:files"),
-		GET_MY_FILES_ALT("/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:virtual!.!filesownedby"),
-		GET_MY_FILES_WITH_FILTER("/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:files");
+		GET_REPOSITORY_INFO("/files/basic/cmis/my/servicedoc"), GET_FILE_ENTRY(
+				"/files/basic/cmis/repository/p!{subscriberId}/object/snx:file!{fileId}"), POST_FILE_UPLOAD(
+				"/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:files"), GET_MY_FILES(
+				"/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:files"), GET_MY_FILES_ALT(
+				"/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:virtual!.!filesownedby"), GET_MY_FILES_WITH_FILTER(
+				"/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:files"), GET_FILES_SHARED_WITH_ME(
+				"/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:virtual!.!filessharedwith"), GET_MY_COLLECTION(
+				"/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:collections"), GET_COLLECTIONS_SHARED_WITH_ME(
+				"/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:virtual!.!collectionssharedwith"), GET_FILES_INSIDE_FOLDER(
+				"/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:collection!{IdToBeReplaced}"), GET_FILE_COMMENTS(
+				"/files/basic/cmis/repository/p!{subscriberId}/folderc/snx:comments!{IdToBeReplaced}");
 
 		private String	url;
 
@@ -87,12 +92,22 @@ public class FileService extends BaseService {
 			this.url = url;
 		}
 
-		String getUrl(String repositoryID) {
-			if (repositoryID != null) {
-				return url.replace("p!{subscriberId}", repositoryID);
+		String getUrl(String repositoryId) {
+			if (repositoryId != null) {
+				return url.replace("p!{subscriberId}", repositoryId);
 			} else {
 				return url;
 			}
+		}
+
+		String getUrl(String repositoryId, String idToBeReplaced) {
+			if (repositoryId != null) {
+				url = url.replace("p!{subscriberId}", repositoryId);
+			}
+			if (idToBeReplaced != null) {}
+			url = url.replace("{IdToBeReplaced}", idToBeReplaced);
+
+			return url;
 		}
 
 		public String getUrl() {
@@ -156,6 +171,149 @@ public class FileService extends BaseService {
 		try {
 			entries = super.getMultipleEntities(
 					FilesAPI.GET_MY_FILES.getUrl(getReposInfo().getRepositoryID()), null, FileEntry.class);
+		} catch (ClientServicesException e) {
+			Reason reason = Reason.SERVER_ERROR;
+			if (e.isClientError()) {
+				reason = reason.CLIENT_ERROR;
+			}
+			// TODO: agree on level of client exception. Any exception should be severe, but client exception
+			// aren't really exceptional behaviour and sometime expected as part of the API
+			if (logger.isLoggable(Level.WARNING)) {
+				logger.log(Level.WARNING, e.getMessage(), e);
+			}
+			throw new FileServiceException(e, StringUtil.format("Error reading files"), reason);
+		}
+
+		return entries;
+	}
+
+	/**
+	 * Executes a service call to return all files shared with the user
+	 * 
+	 * @return all the files for the current SmartCloud account
+	 * @throws FileServiceException
+	 */
+	public List<FileEntry> getFilesSharedWithMe() throws FileServiceException {
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.entering(sourceClass, "getFilesSharedWithMe");
+		}
+
+		new HashMap<String, String>();
+
+		@SuppressWarnings("unchecked")
+		List<FileEntry> entries;
+
+		try {
+			entries = super.getMultipleEntities(
+					FilesAPI.GET_FILES_SHARED_WITH_ME.getUrl(getReposInfo().getRepositoryID()), null,
+					FileEntry.class);
+		} catch (ClientServicesException e) {
+			Reason reason = Reason.SERVER_ERROR;
+			if (e.isClientError()) {
+				reason = reason.CLIENT_ERROR;
+			}
+			// TODO: agree on level of client exception. Any exception should be severe, but client exception
+			// aren't really exceptional behaviour and sometime expected as part of the API
+			if (logger.isLoggable(Level.WARNING)) {
+				logger.log(Level.WARNING, e.getMessage(), e);
+			}
+			throw new FileServiceException(e, StringUtil.format("Error reading files"), reason);
+		}
+
+		return entries;
+	}
+
+	/**
+	 * Executes a service call to return User's Collections
+	 * 
+	 * @return all the collections for the current SmartCloud account
+	 * @throws FileServiceException
+	 */
+	public List<FileEntry> getMyCollections() throws FileServiceException {
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.entering(sourceClass, "getMyCollections");
+		}
+
+		new HashMap<String, String>();
+
+		@SuppressWarnings("unchecked")
+		List<FileEntry> entries;
+
+		try {
+			entries = super.getMultipleEntities(
+					FilesAPI.GET_MY_COLLECTION.getUrl(getReposInfo().getRepositoryID()), null,
+					FileEntry.class);
+		} catch (ClientServicesException e) {
+			Reason reason = Reason.SERVER_ERROR;
+			if (e.isClientError()) {
+				reason = reason.CLIENT_ERROR;
+			}
+			// TODO: agree on level of client exception. Any exception should be severe, but client exception
+			// aren't really exceptional behaviour and sometime expected as part of the API
+			if (logger.isLoggable(Level.WARNING)) {
+				logger.log(Level.WARNING, e.getMessage(), e);
+			}
+			throw new FileServiceException(e, StringUtil.format("Error reading files"), reason);
+		}
+
+		return entries;
+	}
+
+	/**
+	 * Executes a service call to return Collections shared with the current SmartCloud User
+	 * 
+	 * @return all the collections shared with the current SmartCloud account
+	 * @throws FileServiceException
+	 */
+	public List<FileEntry> getCollectionsSharedWithMe() throws FileServiceException {
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.entering(sourceClass, "getCollectionsSharedWithMe");
+		}
+
+		new HashMap<String, String>();
+
+		@SuppressWarnings("unchecked")
+		List<FileEntry> entries;
+
+		try {
+			entries = super.getMultipleEntities(
+					FilesAPI.GET_COLLECTIONS_SHARED_WITH_ME.getUrl(getReposInfo().getRepositoryID()), null,
+					FileEntry.class);
+		} catch (ClientServicesException e) {
+			Reason reason = Reason.SERVER_ERROR;
+			if (e.isClientError()) {
+				reason = reason.CLIENT_ERROR;
+			}
+			// TODO: agree on level of client exception. Any exception should be severe, but client exception
+			// aren't really exceptional behaviour and sometime expected as part of the API
+			if (logger.isLoggable(Level.WARNING)) {
+				logger.log(Level.WARNING, e.getMessage(), e);
+			}
+			throw new FileServiceException(e, StringUtil.format("Error reading files"), reason);
+		}
+
+		return entries;
+	}
+
+	/**
+	 * Executes a service call to return Files inside the Folder for which the Id is given
+	 * 
+	 * @return all the files inside the given Folder
+	 * @throws FileServiceException
+	 */
+	public List<FileEntry> getFilesInsideFolder(String folderId) throws FileServiceException {
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.entering(sourceClass, "getFilesInsideFolder");
+		}
+
+		new HashMap<String, String>();
+
+		@SuppressWarnings("unchecked")
+		List<FileEntry> entries;
+		try {
+			entries = super.getMultipleEntities(
+					FilesAPI.GET_FILES_INSIDE_FOLDER.getUrl(getReposInfo().getRepositoryID(), folderId),
+					null, FileEntry.class);
 		} catch (ClientServicesException e) {
 			Reason reason = Reason.SERVER_ERROR;
 			if (e.isClientError()) {
@@ -544,5 +702,4 @@ public class FileService extends BaseService {
 		}
 		throw new IllegalArgumentException("Entity decoding not supported" + entityName);
 	}
-
 }

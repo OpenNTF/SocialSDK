@@ -181,6 +181,7 @@ var Endpoint = declare("sbt.Endpoint", null, {
 		var args = lang.mixin({},_args);
 		if(!args.url && args.serviceUrl) {
 			//args.url = this.baseUrl+args.serviceUrl; // dont concatenate the endpoint url here #54917
+			args.url = args.serviceUrl;
 			delete args.serviceUrl;
 			if(this.proxy) {
 				args.url = this.proxy.rewriteUrl(args.url,this.proxyPath);

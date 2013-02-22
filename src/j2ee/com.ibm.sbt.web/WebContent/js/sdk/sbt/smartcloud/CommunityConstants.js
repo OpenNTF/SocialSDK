@@ -17,7 +17,7 @@
  * Social Business Toolkit SDK.
  * Definition of constants for CommunitiesService.
  */
-define(["sbt/config", "sbt/smartcloud/core"],function(sbt) {
+define([],function() {
 	return sbt.smartcloud.communityConstants = {
 		entityServiceBaseUrl	: "/communities/service/atom",
 		serviceEntity : {
@@ -40,6 +40,7 @@ define(["sbt/config", "sbt/smartcloud/core"],function(sbt) {
 		xpath_community : {
 			"entry"				:"/a:entry",
 			"communityUuid"		:"snx:communityUuid",
+			"uid"				:"a:id",
 			"title"				:"a:title",
 			"summary"			:"a:summary[@type='text']",
 			"communityUrl"		:"a:link[@rel='self']/@href",
@@ -73,7 +74,8 @@ define(["sbt/config", "sbt/smartcloud/core"],function(sbt) {
 		},
 		xpath_feed_member : {
 			"entry"				:"/a:feed/a:entry",
-			"id"				:"a:contributor/snx:userid",				
+			"id"				:"a:contributor/snx:userid",
+			"uid"				:"a:contributor/snx:userid",
 			"totalResults"      :"/a:feed/opensearch:totalResults",
             "startIndex"        :"/a:feed/opensearch:startIndex",
             "itemsPerPage"      :"/a:feed/opensearch:itemsPerPage"

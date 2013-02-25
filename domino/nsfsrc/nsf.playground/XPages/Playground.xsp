@@ -215,6 +215,21 @@ if(doc) {
 								<xc:PlaygroundPreviewPane></xc:PlaygroundPreviewPane>
 							</xp:div>
 						</xe:djBorderPane>
+						<xe:djBorderPane region="bottom" splitter="false">
+						<xp:div
+							loaded="${javascript:optionsBean.apacheLicense}">
+							All code available from the Playground on
+							IBM Greenhouse is provided under the&#160;
+							<a href="http://www.apache.org/licenses/">
+								Apache License Version 2.0
+							</a>
+							. See&#160;
+							<a href="http://openntf.org/legal/terms">
+								OpenNTF Terms of Use
+							</a>
+							&#160;for full details.
+						</xp:div>
+						</xe:djBorderPane>
 					</xe:djBorderContainer>
 				</xe:djBorderPane>
 			</xe:djBorderContainer>

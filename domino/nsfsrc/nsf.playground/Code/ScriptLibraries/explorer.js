@@ -10,7 +10,7 @@ dojo.declare("ValidationTextarea", [dijit.form.ValidationTextBox,dijit.form.Simp
 });
 
 function updateLabel(id) {
-	var tt = dojo.byId("CurrentLabel");
+	var tt = dojo.Id("CurrentLabel");
 	if(tt) {
 		tt.innerHTML = id; 
 	}
@@ -168,6 +168,8 @@ function executeService(params,details,results) {
 
 function updatePanel(id,url,code,headers,body,ioArgs) {
 	updateResponse(id,{url:url,status:code,headers:headers,body:prettify(body,ioArgs)});
+	// Should we just pretty print one div?
+	prettyPrint();
 }
 
 function updatePanelError(id,error) {
@@ -213,14 +215,17 @@ function prettify(s,ioArgs) {
 		s = s.trim();
 		// Check for XML result
 		if(s.indexOf("<?xml")==0) {
-			return prettifyXml(s);
+			return vkbeautify.xml(s);
+			//return prettifyXml(s);
 		}
 		if(s.indexOf("<html")==0) {
-			return prettifyXml(s);
+			return vkbeautify.xml(s);
+			//return prettifyXml(s);
 		}
 		// Check for Json result
 		if(s.indexOf("{")==0) {
-			return prettifyJson(s);
+			return vkbeautify.json(s);
+			//return prettifyJson(s);
 		}
 	} catch(e) {} // Return the initial string
 	return s;

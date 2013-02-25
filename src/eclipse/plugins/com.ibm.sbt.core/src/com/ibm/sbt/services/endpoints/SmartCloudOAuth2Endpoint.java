@@ -25,6 +25,8 @@ import com.ibm.sbt.services.client.smartcloud.SmartCloudService;
  */
 public class SmartCloudOAuth2Endpoint extends OAuth2Endpoint {
 
+	private static final int authenticationErrorCode = 403;
+	
     public SmartCloudOAuth2Endpoint() {
     }
 
@@ -35,6 +37,6 @@ public class SmartCloudOAuth2Endpoint extends OAuth2Endpoint {
     
     @Override
 	public int getAuthenticationErrorCode(){
-    	return 403;
+    	return authenticationErrorCode;
     }
 }

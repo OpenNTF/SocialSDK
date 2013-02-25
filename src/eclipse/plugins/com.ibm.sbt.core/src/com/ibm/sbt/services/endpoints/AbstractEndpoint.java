@@ -45,6 +45,7 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     private String dialogLoginPage;
     private String loginPage;
     private String loginUi;
+    private String autoAuthenticate;
     private String authenticationService;
     private String clientServiceClass;
     private boolean requiresAuthentication;
@@ -79,6 +80,10 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     @Override
 	public boolean isHeaderAllowed(String headerName, String serviceUrl){
     	return true;
+    }
+	@Override
+	public int getAuthenticationErrorCode(){
+    	return 401;
     }
 
     public void setRequiresAuthentication(boolean requiresAuthentication) throws ClientServicesException {
@@ -155,6 +160,14 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     }
     public void setLoginUi(String loginUi) {
         this.loginUi = loginUi;
+    }
+    
+    @Override
+    public String getAutoAuthenticate() {
+        return autoAuthenticate;
+    }
+    public void setAutoAuthenticate(String autoAuthenticate) {
+        this.autoAuthenticate = autoAuthenticate;
     }
 
 	public String getClientServiceClass() {

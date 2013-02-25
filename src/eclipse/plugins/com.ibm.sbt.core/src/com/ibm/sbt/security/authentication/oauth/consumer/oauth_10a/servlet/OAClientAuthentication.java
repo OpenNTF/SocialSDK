@@ -18,11 +18,9 @@ package com.ibm.sbt.security.authentication.oauth.consumer.oauth_10a.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.service.core.handlers.AbstractServiceHandler;
 import com.ibm.sbt.service.core.servlet.ServiceServlet;
@@ -33,87 +31,88 @@ import com.ibm.sbt.services.endpoints.EndpointFactory;
 /**
  * OAuth client authentication.
  * <p>
- * This servlet gets is used to trigger the authentication from a Javascript client,
- * generally in a pop-up window.
+ * This servlet gets is used to trigger the authentication from a Javascript client, generally in a pop-up
+ * window.
  * </p>
+ * 
  * @author Philippe Riand
  */
 public class OAClientAuthentication extends AbstractServiceHandler {
 
-    public static final String URL_PATH = "oauth10_jsauth";
-    
-    public static final String MODE_MAINWINDOW	= "main";
-    public static final String MODE_POPUP		= "popup";
-    public static final String MODE_DIALOG		= "dialog";
-    
+	public static final String	URL_PATH			= "oauth_jsauth";
 
-    @SuppressWarnings("unused")
-	private static final long serialVersionUID = 1L;
+	public static final String	MODE_MAINWINDOW		= "main";
+	public static final String	MODE_POPUP			= "popup";
+	public static final String	MODE_DIALOG			= "dialog";
 
-    @Override
+	@SuppressWarnings("unused")
+	private static final long	serialVersionUID	= 1L;
+
+	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    	// The URL to call the service should be of the form:
-    	//   .../oauth10_jsauth/[endpoint]
-    	int len = URL_PATH.length()+2;
-    	String pathInfo = req.getPathInfo();
-    	if(pathInfo.length()<=len) {
-    		ServiceServlet.service500(req, resp, "Empty endpoint name");
-    		return;
-    	}
-    	String epName = pathInfo.substring(len);
-    	Endpoint ep = EndpointFactory.getEndpoint(epName);
-    	if(ep==null) {
-    		ServiceServlet.service500(req, resp, "Cannot find endpoint {0}",epName);
-    		return;
-    	}
-    	
-    	try {
-    		// If the endpoint is not authenticated, then authenticate
-    		// else redirect the main page
-	    	if(!ep.isAuthenticationValid()) {
+		// The URL to call the service should be of the form:
+		// .../oauth_jsauth/[endpoint]
+		int len = URL_PATH.length() + 2;
+		String pathInfo = req.getPathInfo();
+		if (pathInfo.length() <= len) {
+			ServiceServlet.service500(req, resp, "Empty endpoint name");
+			return;
+		}
+		String epName = pathInfo.substring(len);
+		Endpoint ep = EndpointFactory.getEndpoint(epName);
+		if (ep == null) {
+			ServiceServlet.service500(req, resp, "Cannot find endpoint {0}", epName);
+			return;
+		}
+
+		try {
+			// If the endpoint is not authenticated, then authenticate
+			// else redirect the main page
+			if (!ep.isAuthenticationValid()) {
 				ep.authenticate(true);
-	    	} else {
-	    		generateCloseScript(req, resp);
-	    	}
+			} else {
+				generateCloseScript(req, resp);
+			}
 		} catch (ClientServicesException ex) {
 			throw new ServletException(ex);
 		}
-    }
-    
-    protected void generateCloseScript(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    	String mode = req.getParameter("loginUi");
-    	
-    	PrintWriter pw = resp.getWriter();
-    	try {
-    		pw.println("<html>");
-    		pw.println("<head>");
-    		pw.println("</head>");
-    		pw.println("<body>");
-    		pw.println("<script>");
-			if(StringUtil.isEmpty(mode) || mode.equalsIgnoreCase(MODE_MAINWINDOW)) {
+	}
+
+	protected void generateCloseScript(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		String mode = req.getParameter("loginUi");
+
+		PrintWriter pw = resp.getWriter();
+		try {
+			pw.println("<html>");
+			pw.println("<head>");
+			pw.println("</head>");
+			pw.println("<body>");
+			pw.println("<script>");
+			if (StringUtil.isEmpty(mode) || mode.equalsIgnoreCase(MODE_MAINWINDOW)) {
 				String redirect = req.getParameter("oaredirect");
-				pw.println("  window.location.href = '"+redirect+"';");
-			} else if(mode.equalsIgnoreCase(MODE_POPUP)) {
+				pw.println("  window.location.href = '" + redirect + "';");
+			} else if (mode.equalsIgnoreCase(MODE_POPUP)) {
 				pw.println("  if (window.opener && !window.opener.closed) {");
-    			//pw.println("    window.opener.location.reload();");
+				// pw.println("    window.opener.location.reload();");
 				pw.println("window.opener.sbt.callback();");
 				pw.println("delete window.opener.sbt.callback;");
-    			pw.println("  }");
-    			pw.println("  window.close();");
-    		} else if(mode.equalsIgnoreCase(MODE_DIALOG)) {
-//    			
-//    			pw.println("  if (window.opener && !window.opener.closed) {");
-//    			pw.println("    window.opener.location.reload();");
-//    			pw.println("  }");
-//    			pw.println("  window.close();");
-    		} else {
-    			throw new ServletException(StringUtil.format("Invalid mode {0}", mode));
-    		}
-    		pw.println("</script>");
-    		pw.println("</body>");
-    		pw.println("</html>");
-    	} finally {
-    		pw.flush();
-    	}
-    }
+				pw.println("  }");
+				pw.println("  window.close();");
+			} else if (mode.equalsIgnoreCase(MODE_DIALOG)) {
+				//
+				// pw.println("  if (window.opener && !window.opener.closed) {");
+				// pw.println("    window.opener.location.reload();");
+				// pw.println("  }");
+				// pw.println("  window.close();");
+			} else {
+				throw new ServletException(StringUtil.format("Invalid mode {0}", mode));
+			}
+			pw.println("</script>");
+			pw.println("</body>");
+			pw.println("</html>");
+		} finally {
+			pw.flush();
+		}
+	}
 }

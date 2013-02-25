@@ -17,12 +17,30 @@
 /**
  * Social Business Toolkit SDK.
  * 
- * Definition of a dojo based dialog for OAuth 1.0.
+ * Definition of a jQuery UI based dialog for OAuth 1.0.
  */
-define([], function() {
+define(['jquery/ui'], function() {
 	return {
 		show: function(url) {
+			var _title = "Authentication";
+			var _isModal = false;
+			var _width = 650;
+			var _height = 700;
+			var _autoOpen = true;
+			var _resizeable = true;
+			var _draggable = true;
 			var frameUrl = url + "?loginUi=dialog";
+			var d = $("<iframe src='"+frameUrl+"' style='width: 650px; height=700px'></iframe>");
+			$.dialog({
+				title : _title,
+				modal: _isModal,
+				width: _width,
+				height: _height,
+				resizeable: _resizeable,
+				draggable: _draggable,
+				buttons: {'Close': function(){ $(this).dialog('close'); } },
+				autoOpen : _autoOpen
+			});
 		}
 	};
 });

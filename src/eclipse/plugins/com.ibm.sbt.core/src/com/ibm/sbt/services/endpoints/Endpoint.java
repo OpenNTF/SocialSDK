@@ -91,6 +91,12 @@ public interface Endpoint {
     public boolean isAllowClientAccess();
     
     /**
+     * Gets the error code for authentication failure.
+     * @return
+     */
+    public int getAuthenticationErrorCode();
+    
+    /**
      * Get page for the login popup and main window. 
      * @return
      */
@@ -108,9 +114,14 @@ public interface Endpoint {
      */
     public String getLoginUi();
     
+    /**
+     * Get information whether default Authentication will be triggered or not.. 
+     * @return
+     */
+    public String getAutoAuthenticate();
 
     /**
-     * Get auth type for the endpoint. 
+     * Get authentication type for the endpoint. like basicAuth, oauth etc.
      * @return
      */
     public String getAuthType();

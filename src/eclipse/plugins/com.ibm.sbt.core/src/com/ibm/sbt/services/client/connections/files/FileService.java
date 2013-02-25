@@ -37,7 +37,6 @@ import com.ibm.sbt.services.client.BaseService;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientService.Handler;
 import com.ibm.sbt.services.client.ClientServicesException;
-import com.ibm.sbt.services.client.SBTServiceException;
 import com.ibm.sbt.services.client.connections.files.exception.FileServiceException;
 import com.ibm.sbt.services.client.connections.files.model.FileEntry;
 import com.ibm.sbt.services.client.connections.files.model.FileRequestParams;
@@ -45,7 +44,6 @@ import com.ibm.sbt.services.client.connections.files.model.FileRequestPayload;
 import com.ibm.sbt.services.client.connections.files.model.Headers;
 import com.ibm.sbt.services.client.connections.files.utils.Messages;
 import com.ibm.sbt.services.client.connections.files.utils.NamespacesConnections;
-import com.ibm.sbt.services.client.smartcloud.base.BaseEntity;
 import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
 import com.ibm.sbt.services.util.AuthUtil;
@@ -443,17 +441,16 @@ public class FileService extends BaseService {
 	 * Rest API used : /files/basic/api/collection/{collection-id}/feed <br>
 	 * 
 	 * @param collectionId
-	 *            - uuid of the file to be added. For adding more than one files, enter coma separated list of
-	 *            file ids.
+	 *            ID of the Collection / Folder to which File(s) need to be added.
 	 * @param FileEntry
-	 *            - pass the fileEntry object to be updated
+	 *            Specifies the file to be added to the collection.
 	 * @param params
 	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
 	 * @return List<FileEntry>
 	 * @throws FileServiceException
 	 */
-	@SuppressWarnings({ "unchecked", "unused" })
-	private List<FileEntry> addFilesToFolder(String collectionId, FileEntry fileEntry,
+	@SuppressWarnings("unchecked")
+	public List<FileEntry> addFilesToFolder(String collectionId, FileEntry fileEntry,
 			Map<String, String> params) throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "addFilesToFolder");
@@ -461,6 +458,12 @@ public class FileService extends BaseService {
 		String accessType = AccessType.AUTHENTICATED.getAccessType();
 		if (StringUtil.isEmpty(collectionId)) {
 			throw new IllegalArgumentException(Messages.InvalidArgument_4);
+		}
+		if (fileEntry == null) {
+			throw new IllegalArgumentException(Messages.InvalidArgument_1);
+		}
+		if (StringUtil.isEmpty(fileEntry.getFileId())) {
+			throw new IllegalArgumentException(Messages.InvalidArgument_2);
 		}
 		SubFilters subFilters = new SubFilters();
 		subFilters.setCollectionId(collectionId);
@@ -484,17 +487,27 @@ public class FileService extends BaseService {
 	 * Rest API used : /files/basic/api/userlibrary/{userid}/document/{document-id}/comment/{comment-id}/entry
 	 * 
 	 * @param FileEntry
-	 *            - pass the fileEntry object to be updated
 	 * @param commentId
 	 * @param params
 	 * @return List<FileEntry>
 	 * @throws FileServiceException
 	 */
-	@SuppressWarnings("unused")
-	private List<FileEntry> retrieveFileComment(FileEntry fileEntry, String commentId,
+	public List<FileEntry> retrieveFileComment(FileEntry fileEntry, String commentId,
 			Map<String, String> params) throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "retrieveFileComment");
+		}
+		if (StringUtil.isEmpty(commentId)) {
+			throw new IllegalArgumentException(Messages.InvalidArgument_7);
+		}
+		if (fileEntry == null) {
+			throw new IllegalArgumentException(Messages.InvalidArgument_1);
+		}
+		if (StringUtil.isEmpty(fileEntry.getFileId())) {
+			throw new IllegalArgumentException(Messages.InvalidArgument_2);
+		}
+		if (StringUtil.isEmpty(fileEntry.getAuthorEntry().getUserUuid())) {
+			throw new IllegalArgumentException(Messages.InvalidArgument_3);
 		}
 		String accessType = AccessType.AUTHENTICATED.getAccessType();
 		SubFilters subFilters = new SubFilters();
@@ -508,22 +521,29 @@ public class FileService extends BaseService {
 	}
 
 	/**
-	 * retrieveFileComment
+	 * retrieveMyFileComment
 	 * <p>
 	 * Rest API used : /files/basic/api/myuserlibrary/document/{document-id}/comment/{comment-id}/entry
 	 * 
 	 * @param FileEntry
-	 *            - pass the fileEntry object to be updated
 	 * @param commentId
 	 * @param params
 	 * @return List<FileEntry>
 	 * @throws FileServiceException
 	 */
-	@SuppressWarnings("unused")
-	private List<FileEntry> retrieveMyFileComment(FileEntry fileEntry, String commentId,
+	public List<FileEntry> retrieveMyFileComment(FileEntry fileEntry, String commentId,
 			Map<String, String> params) throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "retrieveMyFileComment");
+		}
+		if (StringUtil.isEmpty(commentId)) {
+			throw new IllegalArgumentException(Messages.InvalidArgument_7);
+		}
+		if (fileEntry == null) {
+			throw new IllegalArgumentException(Messages.InvalidArgument_1);
+		}
+		if (StringUtil.isEmpty(fileEntry.getFileId())) {
+			throw new IllegalArgumentException(Messages.InvalidArgument_2);
 		}
 		String accessType = AccessType.AUTHENTICATED.getAccessType();
 		String category = Categories.MYLIBRARY.getCategory();
@@ -541,14 +561,27 @@ public class FileService extends BaseService {
 	 * <p>
 	 * Rest API used : /files/basic/api/userlibrary/{userid}/document/{document-id}/comment/{comment-id}/entry
 	 * 
-	 * @param fileId
+	 * @param FileEntry
+	 *            specifies the file for which the comment needs to be deleted.
 	 * @param commentId
+	 *            Id of the comment to be deleted.
 	 * @throws FileServiceException
 	 */
-	@SuppressWarnings("unused")
-	private void deleteComment(FileEntry fileEntry, String commentId) throws FileServiceException {
+	public void deleteComment(FileEntry fileEntry, String commentId) throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "deleteComment");
+		}
+		if (fileEntry == null) {
+			throw new IllegalArgumentException(Messages.InvalidArgument_1);
+		}
+		if (StringUtil.isEmpty(fileEntry.getFileId())) {
+			throw new IllegalArgumentException(Messages.InvalidArgument_2);
+		}
+		if (StringUtil.isEmpty(fileEntry.getAuthorEntry().getUserUuid())) {
+			throw new IllegalArgumentException(Messages.InvalidArgument_3);
+		}
+		if (StringUtil.isEmpty(commentId)) {
+			throw new IllegalArgumentException(Messages.InvalidArgument_7);
 		}
 		String accessType = AccessType.AUTHENTICATED.getAccessType();
 		SubFilters subFilters = new SubFilters();
@@ -570,15 +603,23 @@ public class FileService extends BaseService {
 	 * @param commentId
 	 * @throws FileServiceException
 	 */
-	@SuppressWarnings("unused")
-	private void deleteMyComment(String fileId, String commentId) throws FileServiceException {
+	public void deleteMyComment(FileEntry fileEntry, String commentId) throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "deleteMyComment");
+		}
+		if (fileEntry == null) {
+			throw new IllegalArgumentException(Messages.InvalidArgument_1);
+		}
+		if (StringUtil.isEmpty(fileEntry.getFileId())) {
+			throw new IllegalArgumentException(Messages.InvalidArgument_2);
+		}
+		if (StringUtil.isEmpty(commentId)) {
+			throw new IllegalArgumentException(Messages.InvalidArgument_7);
 		}
 		String accessType = AccessType.AUTHENTICATED.getAccessType();
 		String category = Categories.MYLIBRARY.getCategory();
 		SubFilters subFilters = new SubFilters();
-		subFilters.setDocumentId(fileId);
+		subFilters.setDocumentId(fileEntry.getFileId());
 		subFilters.setCommentId(commentId);
 		String resultType = ResultType.ENTRY.getResultType();
 		String requestUri = constructUrl(BaseUrl.FILES.getBaseUrl(), accessType, category, null, null,
@@ -593,18 +634,32 @@ public class FileService extends BaseService {
 	 * <br>
 	 * Updates comment from someone else's file whose userid is specified
 	 * 
-	 * @param fileId
+	 * @param FileEntry
+	 *            File for which the comment needs to be updated.
 	 * @param commentId
+	 *            Id of the comment to be updated.
 	 * @param params
 	 * @param comment
+	 *            New comment String.
 	 * @return FileEntry
 	 * @throws FileServiceException
 	 */
-	@SuppressWarnings("unused")
-	private FileEntry updateComment(FileEntry fileEntry, String commentId, Map<String, String> params,
+	public FileEntry updateComment(FileEntry fileEntry, String commentId, Map<String, String> params,
 			String comment) throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "updateComment");
+		}
+		if (fileEntry == null) {
+			throw new IllegalArgumentException(Messages.InvalidArgument_1);
+		}
+		if (StringUtil.isEmpty(fileEntry.getFileId())) {
+			throw new IllegalArgumentException(Messages.InvalidArgument_2);
+		}
+		if (StringUtil.isEmpty(fileEntry.getAuthorEntry().getUserUuid())) {
+			throw new IllegalArgumentException(Messages.InvalidArgument_3);
+		}
+		if (StringUtil.isEmpty(commentId)) {
+			throw new IllegalArgumentException(Messages.InvalidArgument_7);
 		}
 		String accessType = AccessType.AUTHENTICATED.getAccessType();
 		SubFilters subFilters = new SubFilters();
@@ -630,23 +685,34 @@ public class FileService extends BaseService {
 	 * Rest API used : /files/basic/api/myuserlibrary/document/{document-id}/comment/{comment-id}/entry <br>
 	 * Updates comment in one of "my" library file
 	 * 
-	 * @param fileId
+	 * @param FileEntry
+	 *            File for which the comment needs to be updated.
 	 * @param commentId
+	 *            Id of the comment to be updated.
 	 * @param params
 	 * @param comment
+	 *            New comment String.
 	 * @return FileEntry
 	 * @throws FileServiceException
 	 */
-	@SuppressWarnings("unused")
-	private FileEntry updateMyComment(String fileId, String commentId, Map<String, String> params,
+	public FileEntry updateMyComment(FileEntry fileEntry, String commentId, Map<String, String> params,
 			String comment) throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "updateMyComment");
 		}
+		if (fileEntry == null) {
+			throw new IllegalArgumentException(Messages.InvalidArgument_1);
+		}
+		if (StringUtil.isEmpty(fileEntry.getFileId())) {
+			throw new IllegalArgumentException(Messages.InvalidArgument_2);
+		}
+		if (StringUtil.isEmpty(commentId)) {
+			throw new IllegalArgumentException(Messages.InvalidArgument_7);
+		}
 		String accessType = AccessType.AUTHENTICATED.getAccessType();
 		String category = Categories.MYLIBRARY.getCategory();
 		SubFilters subFilters = new SubFilters();
-		subFilters.setDocumentId(fileId);
+		subFilters.setDocumentId(fileEntry.getFileId());
 		subFilters.setCommentId(commentId);
 		String resultType = ResultType.ENTRY.getResultType();
 		String requestUri = constructUrl(BaseUrl.FILES.getBaseUrl(), accessType, category, null, null,

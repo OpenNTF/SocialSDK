@@ -31,7 +31,7 @@
 <%
 RootNode rootNode = SnippetFactory.getSnippets(application);
 String snippetName = request.getParameter("snippet");
-JSSnippet snippet = (JSSnippet)rootNode.loadAssert(SnippetFactory.getRootFile(application), snippetName);
+JSSnippet snippet = (JSSnippet)rootNode.loadAsset(SnippetFactory.getRootFile(application), snippetName);
 String[] labels = snippet.getLabels();
 String name = (labels != null && labels.length > 0) ? labels[0] : snippetName;
 String html = null;

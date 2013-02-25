@@ -17,13 +17,11 @@
 package com.ibm.sbt.services.endpoints;
 
 import java.io.IOException;
-
 import org.apache.http.HttpException;
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpRequestInterceptor;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.HttpContext;
-
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.RuntimeConstants;
 import com.ibm.commons.util.StringUtil;
@@ -41,190 +39,199 @@ import com.ibm.sbt.util.SBTException;
  * Bean that provides authentication via OAuth.
  * <p>
  * </p>
+ * 
  * @author Philippe Riand
  */
 public class OAuthEndpoint extends AbstractEndpoint {
-    
-    private OAProvider oaProvider = new OAProvider();
 
-    public OAuthEndpoint() {
-    }
+	private final OAProvider	oaProvider	= new OAProvider();
 
-    @Override
+	public OAuthEndpoint() {
+	}
+
+	@Override
 	public void checkValid() throws SBTException {
-    	super.checkValid();
-    	if(StringUtil.isEmpty(oaProvider.getConsumerKey())) {
-    		throw new SBTException(null,"The Endpoint consumer key is empty, class {0}",getClass());
-    	}
-    	if(StringUtil.isEmpty(oaProvider.getConsumerSecret())) {
-    		throw new SBTException(null,"The Endpoint consumer secret is empty, class {0}",getClass());
-    	}
-    	if(StringUtil.isEmpty(oaProvider.getAuthorizationURL())) {
-    		throw new SBTException(null,"The Endpoint authorization URL is empty, class {0}",getClass());
-    	}
-    	if(StringUtil.isEmpty(oaProvider.getRequestTokenURL())) {
-    		throw new SBTException(null,"The Endpoint request token URL is empty, class {0}",getClass());
-    	}
-    	if(StringUtil.isEmpty(oaProvider.getAccessTokenURL())) {
-    		throw new SBTException(null,"The Endpoint access token URL is empty, class {0}",getClass());
-    	}
-    }
+		super.checkValid();
+		if (StringUtil.isEmpty(oaProvider.getConsumerKey())) {
+			throw new SBTException(null, "The Endpoint consumer key is empty, class {0}", getClass());
+		}
+		if (StringUtil.isEmpty(oaProvider.getConsumerSecret())) {
+			throw new SBTException(null, "The Endpoint consumer secret is empty, class {0}", getClass());
+		}
+		if (StringUtil.isEmpty(oaProvider.getAuthorizationURL())) {
+			throw new SBTException(null, "The Endpoint authorization URL is empty, class {0}", getClass());
+		}
+		if (StringUtil.isEmpty(oaProvider.getRequestTokenURL())) {
+			throw new SBTException(null, "The Endpoint request token URL is empty, class {0}", getClass());
+		}
+		if (StringUtil.isEmpty(oaProvider.getAccessTokenURL())) {
+			throw new SBTException(null, "The Endpoint access token URL is empty, class {0}", getClass());
+		}
+	}
 
-    public OAProvider getOAuthProvider() {
-        return oaProvider;
-    }
+	public OAProvider getOAuthProvider() {
+		return oaProvider;
+	}
 
-    @Override
-    public void setUrl(String url) {
-        super.setUrl(url);
-        // Make the URL the service name if not already set
-        if(StringUtil.isEmpty(oaProvider.getServiceName())) {
-            oaProvider.setServiceName(url);
-        }
-    }
+	@Override
+	public void setUrl(String url) {
+		super.setUrl(url);
+		// Make the URL the service name if not already set
+		if (StringUtil.isEmpty(oaProvider.getServiceName())) {
+			oaProvider.setServiceName(url);
+		}
+	}
 
-    public String getConsumerKey() {
-        return oaProvider.getConsumerKey();
-    }
-    public void setConsumerKey(String consumerKey) {
-        oaProvider.setConsumerKey(consumerKey);
-    }
+	public String getConsumerKey() {
+		return oaProvider.getConsumerKey();
+	}
 
-    public String getConsumerSecret() {
-        return oaProvider.getConsumerSecret();
-    }
-    public void setConsumerSecret(String consumerSecret) {
-        oaProvider.setConsumerSecret(consumerSecret);
-    }
+	public void setConsumerKey(String consumerKey) {
+		oaProvider.setConsumerKey(consumerKey);
+	}
 
-    public String getTokenStore() {
-        return oaProvider.getTokenStore();
-    }
-    public void setTokenStore(String tokenStore) {
-        oaProvider.setTokenStore(tokenStore);
-    }
+	public String getConsumerSecret() {
+		return oaProvider.getConsumerSecret();
+	}
 
-    public String getAppId() {
-        return oaProvider.getAppId();
-    }
-    public void setAppId(String appId) {
-        oaProvider.setAppId(appId);
-    }
+	public void setConsumerSecret(String consumerSecret) {
+		oaProvider.setConsumerSecret(consumerSecret);
+	}
 
-    public String getServiceName() {
-        return oaProvider.getServiceName();
-    }
-    public void setServiceName(String serviceName) {
-        oaProvider.setServiceName(serviceName);
-    }
+	public String getTokenStore() {
+		return oaProvider.getTokenStore();
+	}
 
-    public String getRequestTokenURL() {
-        return oaProvider.getRequestTokenURL();
-    }
-    public void setRequestTokenURL(String requestTokenURL) {
-        oaProvider.setRequestTokenURL(requestTokenURL);
-    }
+	public void setTokenStore(String tokenStore) {
+		oaProvider.setTokenStore(tokenStore);
+	}
 
-    public String getAuthorizationURL() {
-        return oaProvider.getAuthorizationURL();
-    }
-    public void setAuthorizationURL(String authorizationURL) {
-        oaProvider.setAuthorizationURL(authorizationURL);
-    }
+	public String getAppId() {
+		return oaProvider.getAppId();
+	}
 
-    public String getAccessTokenURL() {
-        return oaProvider.getAccessTokenURL();
-    }
-    public void setAccessTokenURL(String accessTokenURL) {
-        oaProvider.setAccessTokenURL(accessTokenURL);
-    }
+	public void setAppId(String appId) {
+		oaProvider.setAppId(appId);
+	}
 
-    public String getSignatureMethod() {
-        return oaProvider.getSignatureMethod();
-    }
-    public void setSignatureMethod(String signatureMethod) {
-        oaProvider.setSignatureMethod(signatureMethod);
-    }
-    
+	public String getServiceName() {
+		return oaProvider.getServiceName();
+	}
+
+	public void setServiceName(String serviceName) {
+		oaProvider.setServiceName(serviceName);
+	}
+
+	public String getRequestTokenURL() {
+		return oaProvider.getRequestTokenURL();
+	}
+
+	public void setRequestTokenURL(String requestTokenURL) {
+		oaProvider.setRequestTokenURL(requestTokenURL);
+	}
+
+	public String getAuthorizationURL() {
+		return oaProvider.getAuthorizationURL();
+	}
+
+	public void setAuthorizationURL(String authorizationURL) {
+		oaProvider.setAuthorizationURL(authorizationURL);
+	}
+
+	public String getAccessTokenURL() {
+		return oaProvider.getAccessTokenURL();
+	}
+
+	public void setAccessTokenURL(String accessTokenURL) {
+		oaProvider.setAccessTokenURL(accessTokenURL);
+	}
+
+	public String getSignatureMethod() {
+		return oaProvider.getSignatureMethod();
+	}
+
+	public void setSignatureMethod(String signatureMethod) {
+		oaProvider.setSignatureMethod(signatureMethod);
+	}
+
 	@Override
 	public String getAuthType() {
 		return "oauth1.0a";
 	}
 
-    @Override
+	@Override
 	public boolean isForceTrustSSLCertificate() {
-        return oaProvider.getForceTrustSSLCertificate();
-    }
-    
-    @Override
+		return oaProvider.getForceTrustSSLCertificate();
+	}
+
+	@Override
 	public void setForceTrustSSLCertificate(boolean forceTrustSSLCertificate) {
-    	oaProvider.setForceTrustSSLCertificate(forceTrustSSLCertificate);
-    }
-    
-    @Override
-    public JSReference getAuthenticator(String endpointName) {
-    	Context ctx = Context.get();
-    	JSReference reference = new JSReference("sbt/authenticator/OAuth10");
-    	StringBuilder b = new StringBuilder();
-    	RuntimeConstants.get().appendBaseProxyUrl(b, ctx);
-        b.append("/");
-    	b.append(OAClientAuthentication.URL_PATH);
-    	b.append('/');
-    	b.append(endpointName);
-    	String url = b.toString();
-    	reference.getProperties().put("url", url);
-    	return reference;
-    }
+		oaProvider.setForceTrustSSLCertificate(forceTrustSSLCertificate);
+	}
 
-    @Override
+	@Override
+	public JSReference getAuthenticator(String endpointName) {
+		Context ctx = Context.get();
+		JSReference reference = new JSReference("sbt/authenticator/OAuth");
+		StringBuilder b = new StringBuilder();
+		RuntimeConstants.get().appendBaseProxyUrl(b, ctx);
+		b.append("/");
+		b.append(OAClientAuthentication.URL_PATH);
+		b.append('/');
+		b.append(endpointName);
+		String url = b.toString();
+		reference.getProperties().put("url", url);
+		return reference;
+	}
+
+	@Override
 	public boolean isAuthenticated() throws ClientServicesException {
-        try {
-            return oaProvider.acquireToken()!=null;
-        } catch(OAuthException ex) {
-            throw new ClientServicesException(ex);
-        }
-    }
+		try {
+			return oaProvider.acquireToken() != null;
+		} catch (OAuthException ex) {
+			throw new ClientServicesException(ex);
+		}
+	}
 
-    @Override
+	@Override
 	public void authenticate(boolean force) throws ClientServicesException {
-        try {
-            oaProvider.acquireToken(true,force);
-        } catch(OAuthException ex) {
-            throw new ClientServicesException(ex);
-        }
-    }
-    
-    @Override
+		try {
+			oaProvider.acquireToken(true, force);
+		} catch (OAuthException ex) {
+			throw new ClientServicesException(ex);
+		}
+	}
+
+	@Override
 	public void initialize(DefaultHttpClient httpClient) throws ClientServicesException {
-        try {
-        	AccessToken token = oaProvider.acquireToken(false);
-            if(token!=null) {
-	            HttpRequestInterceptor oauthInterceptor = new OAuthInterceptor(token);
-	            httpClient.addRequestInterceptor(oauthInterceptor, 0);
-            }
-        } catch(OAuthException ex) {
-            throw new ClientServicesException(ex);
-        }
-    }
+		try {
+			AccessToken token = oaProvider.acquireToken(false);
+			if (token != null) {
+				HttpRequestInterceptor oauthInterceptor = new OAuthInterceptor(token);
+				httpClient.addRequestInterceptor(oauthInterceptor, 0);
+			}
+		} catch (OAuthException ex) {
+			throw new ClientServicesException(ex);
+		}
+	}
 
+	private static class OAuthInterceptor implements HttpRequestInterceptor {
 
-    private static class OAuthInterceptor implements HttpRequestInterceptor {
-        
-        private AccessToken token;
+		private final AccessToken	token;
 
-        public OAuthInterceptor(AccessToken token) {
-            this.token = token;
-        }
+		public OAuthInterceptor(AccessToken token) {
+			this.token = token;
+		}
 
-        @Override
-		public void process(HttpRequest request, HttpContext context)throws HttpException, IOException {
-        	
-        	Context contextForHandler = Context.get();
-        	OAuthHandler oaHandler = (OAuthHandler) contextForHandler.getSessionMap().get(Configuration.OAUTH_HANDLER);
-        	String authorizationheader =  oaHandler.createAuthorizationHeader();
-        	request.addHeader("Authorization", authorizationheader);
-        	}
-    }
+		@Override
+		public void process(HttpRequest request, HttpContext context) throws HttpException, IOException {
 
+			Context contextForHandler = Context.get();
+			OAuthHandler oaHandler = (OAuthHandler) contextForHandler.getSessionMap().get(
+					Configuration.OAUTH_HANDLER);
+			String authorizationheader = oaHandler.createAuthorizationHeader();
+			request.addHeader("Authorization", authorizationheader);
+		}
+	}
 
 }

@@ -16,7 +16,7 @@
 /**
  * Social Business Toolkit SDK. Definition of constants for FileService.
  */
-define([], function() {
+define(["sbt/config", "sbt/smartcloud/core"],function(sbt) {
 	return sbt.smartcloud.fileConstants = {
 		sbtErrorCodes : {
 			badRequest : 400

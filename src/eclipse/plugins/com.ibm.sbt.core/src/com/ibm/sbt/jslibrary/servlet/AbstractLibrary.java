@@ -77,6 +77,7 @@ abstract public class AbstractLibrary {
 	public static final String		PROP_LOGIN_PAGE				= "loginPage";
 	public static final String		PROP_LOGIN_DIALOG_PAGE		= "loginDialogPage";
 	public static final String		PROP_LOGIN_UI				= "loginUi";
+	public static final String		PROP_AUTO_AUTHENTICATE       = "autoAuthenticate";
 	public static final String		IS_AUTHENTICATED			= "isAuthenticated";
 
 	public static final String		PROP_MODULE_PREFIX			= "_module";
@@ -348,6 +349,9 @@ abstract public class AbstractLibrary {
 			}
 			if (endpoint.getLoginUi() != null) {
 				jsonEndpoint.putJsonProperty(PROP_LOGIN_UI, endpoint.getLoginUi());
+			}
+			if (endpoint.getAutoAuthenticate() != null) {
+				jsonEndpoint.putJsonProperty(PROP_AUTO_AUTHENTICATE, endpoint.getAutoAuthenticate());
 			}
 		} else {
 			// set the endpoint url

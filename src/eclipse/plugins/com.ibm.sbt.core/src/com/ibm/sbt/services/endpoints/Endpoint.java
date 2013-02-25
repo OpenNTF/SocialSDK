@@ -91,6 +91,12 @@ public interface Endpoint {
     public boolean isAllowClientAccess();
     
     /**
+     * Gets the error code for authentication failure.
+     * @return
+     */
+    public int getAuthenticationErrorCode();
+    
+    /**
      * Get page for the login popup and main window. 
      * @return
      */

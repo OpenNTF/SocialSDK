@@ -115,6 +115,13 @@ var Endpoint = declare("sbt.Endpoint", null, {
 	isAuthenticated: "false",
 	
 	/**
+	 * The error code that is returned from the endpoint on authentication failure.
+	 * @property authenticationErrorCode
+	 * @type String
+	 */
+	authenticationErrorCode: null,
+	
+	/**
 	 * Simple constructor that mixes in its parameters as object properties
 	 * @constructor
 	 * @param {Array} args
@@ -193,8 +200,8 @@ var Endpoint = declare("sbt.Endpoint", null, {
 		args.handle = function(data,ioArgs) {
 			if(data instanceof Error) {
 				var error = data;
-				// check for if authentication is required
-				if (error.code == 401 || (self.authType == 'oauth' && error.code == 403)) {
+				// check for if authentication is required				
+				if (error.code == self.authenticationErrorCode) {
 					var autoAuthenticate =  args.autoAuthenticate || self.autoAuthenticate || sbt.Properties["autoAuthenticate"] || "true";
 					if(autoAuthenticate == "true"){
 						if(self.authenticator) {

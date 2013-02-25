@@ -17,7 +17,7 @@
  * Social Business Toolkit SDK.
  * Definition of constants for ActivityStreamService.
  */
-define(['sbt/config', 'sbt/connections/core'],function(sbt) {
+define(["sbt/config", "sbt/connections/core"],function(sbt) {
 	return sbt.connections.communityConstants = {
 		_methodName : {
 			"createCommunity" : "createCommunity",

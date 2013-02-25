@@ -32,4 +32,9 @@ public class SmartCloudOAuth2Endpoint extends OAuth2Endpoint {
 	public ClientService getClientService() throws ClientServicesException {
     	return new SmartCloudService(this);
     }
+    
+    @Override
+	public int getAuthenticationErrorCode(){
+    	return 403;
+    }
 }

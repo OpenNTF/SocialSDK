@@ -33,4 +33,9 @@ public class DominoOAuth2Endpoint extends OAuth2Endpoint {
 	public ClientService getClientService() throws ClientServicesException {
     	return new DominoService(this);
     }
+    
+    @Override
+	public int getAuthenticationErrorCode(){
+    	return 403;
+    }
 }

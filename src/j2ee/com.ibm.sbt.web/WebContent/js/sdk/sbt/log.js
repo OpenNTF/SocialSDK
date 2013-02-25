@@ -24,7 +24,7 @@
  * @class log
  * @static
  */
-define([ 'sbt/stringutil' ], function(stringutil) {
+define(['sbt/config', 'sbt/stringutil' ], function(sbt, stringutil) {
 	var loggingEnabled = sbt.Properties["js.logging.enabled"] ? sbt.Properties["js.logging.enabled"].toLowerCase() == "true" : true;
 	var Level = {
 		DEBUG : 1,

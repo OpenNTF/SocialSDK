@@ -105,7 +105,7 @@ var Endpoint = declare("sbt.Endpoint", null, {
 	 * @property autoAuthenticate
 	 * @type String
 	 */
-	autoAuthenticate: "true",
+	autoAuthenticate: null,
 	
 	/**
 	 * Whether user is authenticated to endpoint or not.
@@ -195,8 +195,8 @@ var Endpoint = declare("sbt.Endpoint", null, {
 				var error = data;
 				// check for if authentication is required
 				if (error.code == 401 || (self.authType == 'oauth' && error.code == 403)) {
-					this.autoAuthenticate =  args.autoAuthenticate || sbt.Properties["autoAuth"] || this.autoAuthenticate || "true";
-					if(this.autoAuthenticate == "true"){
+					var autoAuthenticate =  args.autoAuthenticate || self.autoAuthenticate || sbt.Properties["autoAuthenticate"] || "true";
+					if(autoAuthenticate == "true"){
 						if(self.authenticator) {
 							options = {
 								dialogLoginPage:self.loginDialogPage,
@@ -259,6 +259,9 @@ var Endpoint = declare("sbt.Endpoint", null, {
 	},
 	
 	authenticate: function(forceAuthentication ,callbacks){
+		if(typeof callbacks != "object"){
+			callbacks = {};
+		}
 		options = {
 				dialogLoginPage:this.loginDialogPage,
 				loginPage:this.loginPage,
@@ -300,14 +303,15 @@ var Endpoint = declare("sbt.Endpoint", null, {
 	        handleAs: "json",
 			url: actionURL,
 			handle: function(response) {
-				if(callbacks.callback){
-		    		if(response.logout){
-		    			callbacks.callback(response.logout);
-					}else{
-						console.log("Logout operation failed");
-					}
-		    	}
-			    
+				if(callbacks){
+					if(callbacks.callback){
+			    		if(response.logout){
+			    			callbacks.callback(response.logout);
+						}else{
+							console.log("Logout operation failed");
+						}
+			    	}
+				}
 			},
 			error: function(error){
 				return error;

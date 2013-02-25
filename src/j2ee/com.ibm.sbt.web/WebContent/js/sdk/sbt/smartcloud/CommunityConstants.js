@@ -17,7 +17,7 @@
  * Social Business Toolkit SDK.
  * Definition of constants for CommunitiesService.
  */
-define([],function() {
+define(["sbt/config", "sbt/smartcloud/core"],function(sbt) {
 	return sbt.smartcloud.communityConstants = {
 		entityServiceBaseUrl	: "/communities/service/atom",
 		serviceEntity : {

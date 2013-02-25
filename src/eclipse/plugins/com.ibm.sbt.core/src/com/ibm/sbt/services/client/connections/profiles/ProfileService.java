@@ -266,47 +266,43 @@ public class ProfileService extends BaseService {
 	/**
 	 * This method is used to Invite a person to become your colleague
 	 * 
-	 * @param profile
-	 * @param parameter - userId/userEmail to pass to 
-	 * @return boolean - if invite is sent successfully then return truw
+	 * @param profile - profile of the user to whom the invite needs to be sent	 * @param profile
+	 * @return boolean - if invite is sent successfully then return true
 	 */
-	public boolean sendInvite(Profile profile, String parameter){
+	public boolean sendInvite(Profile profile){
 		String defaultInviteMsg = "Please accept this invitation to be in my network of Connections colleagues.";
-		return sendInvite(profile, parameter, defaultInviteMsg);
+		return sendInvite(profile, defaultInviteMsg);
 		
 	}
 
 	/**
 	 * This method is used to Invite a person to become your colleague
 	 * 
-	 * @param profile
-	 * @param parameter - userId/userEmail to pass to API
+	 * @param profile - profile of the user to whom the invite needs to be sent
 	 * @param inviteMsg - message to the other user
-	 * @return boolean - if invite is sent successfully then return truw
+	 * @return boolean - if invite is sent successfully then return true
 	 */
-	public boolean sendInvite(Profile profile, String parameter, String inviteMsg){
+	public boolean sendInvite(Profile profile, String inviteMsg){
 		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "getColleagues", parameter);
+			logger.entering(sourceClass, "getColleagues", inviteMsg);
 		}
 		if (profile == null) {
 			throw new IllegalArgumentException(StringUtil.format("A null profile was passed"));
 		}
 		boolean returnVal = true;
-
 		Map<String, String> parameters = new HashMap<String, String>();
 		try {
 			String url = resolveProfileUrl(ProfileEntity.NONADMIN.getProfileEntityType(),
 					ProfileType.GETCOLLEAGUES.getProfileType());
-			if (isEmail(parameter)) {
-				parameters.put("email",parameter);
+			if (isEmail(profile.getReqId())) {
+				parameters.put("email",profile.getReqId());
 			} else {
-				parameters.put("userid", parameter);
+				parameters.put("userid", profile.getReqId());
 			}
 			parameters.put("connectionType","colleague");
 			XMLProfilesPayloadBuilder builder = XMLProfilesPayloadBuilder.INSTANCE;
 			Object content = builder.generateInviteRequestPayload(inviteMsg);
 			getClientService().post(url, parameters, content);
-		
 		} catch (ClientServicesException e) {
 			returnVal = false;
 			if (logger.isLoggable(Level.SEVERE)) {

@@ -196,6 +196,9 @@ public class JsonJavaFactory implements JsonFactory {
     }
     
     public boolean isArray(Object value) throws JsonException {
+		if (value == null) {
+			return false;
+		}
     	if(value instanceof JsonArray) {
     		return true;
     	}

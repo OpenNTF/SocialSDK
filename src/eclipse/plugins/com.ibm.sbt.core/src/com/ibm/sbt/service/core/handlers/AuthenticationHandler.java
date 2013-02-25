@@ -69,15 +69,16 @@ public class AuthenticationHandler extends AbstractServiceHandler {
         			logoutResponse.putJsonProperty("logout", "success");
         		}
         		writer.write(logoutResponse.toString());
-        	}else if(getAuthAction(pathInfo).equals(IS_AUTHENTICATED)){
-        		JsonObject jsonResponse = new JsonJavaObject();
-        		try {
-        			jsonResponse.putJsonProperty("isAuthenticated", basicendpoint.isAuthenticated());
-        		} catch (ClientServicesException e) {
-        			e.printStackTrace();
-        		}
-                writer.write(jsonResponse.toString());
         	}
+//        	else if(getAuthAction(pathInfo).equals(IS_AUTHENTICATED)){
+//        		JsonObject jsonResponse = new JsonJavaObject();
+//        		try {
+//        			jsonResponse.putJsonProperty("isAuthenticated", basicendpoint.isAuthenticated());
+//        		} catch (ClientServicesException e) {
+//        			e.printStackTrace();
+//        		}
+//                writer.write(jsonResponse.toString());
+//        	}
             response.setStatus(HttpServletResponse.SC_OK);
             response.setContentType(APPLICATION_JSON);
         } catch (Exception e) {

@@ -42,6 +42,8 @@ import com.ibm.sbt.util.SBTException;
  */
 public class ApplicationEndpoint implements Endpoint {
 
+	private static final int authenticationErrorCode = 401;
+	
     public ApplicationEndpoint() {
     }
     
@@ -128,7 +130,7 @@ public class ApplicationEndpoint implements Endpoint {
     
     @Override
 	public int getAuthenticationErrorCode(){
-    	return 401;
+    	return authenticationErrorCode;
     }
     
     @Override

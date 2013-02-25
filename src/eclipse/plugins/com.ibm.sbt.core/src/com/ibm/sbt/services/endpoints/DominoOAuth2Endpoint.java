@@ -26,6 +26,8 @@ import com.ibm.sbt.services.client.domino.DominoService;
  */
 public class DominoOAuth2Endpoint extends OAuth2Endpoint {
 
+	private static final int authenticationErrorCode = 403;
+	
     public DominoOAuth2Endpoint() {
     }
 
@@ -36,6 +38,6 @@ public class DominoOAuth2Endpoint extends OAuth2Endpoint {
     
     @Override
 	public int getAuthenticationErrorCode(){
-    	return 403;
+    	return authenticationErrorCode;
     }
 }

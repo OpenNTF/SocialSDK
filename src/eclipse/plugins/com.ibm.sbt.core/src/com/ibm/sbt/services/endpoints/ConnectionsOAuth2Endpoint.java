@@ -26,6 +26,8 @@ import com.ibm.sbt.services.client.connections.ConnectionsService;
  */
 public class ConnectionsOAuth2Endpoint extends OAuth2Endpoint {
 
+	private static final int authenticationErrorCode = 403;
+	
     public ConnectionsOAuth2Endpoint() {
     }
     
@@ -58,6 +60,6 @@ public class ConnectionsOAuth2Endpoint extends OAuth2Endpoint {
     
     @Override
 	public int getAuthenticationErrorCode(){
-    	return 403;
+    	return authenticationErrorCode;
     }
 }

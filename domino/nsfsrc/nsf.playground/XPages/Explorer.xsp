@@ -10,6 +10,10 @@
 		<xp:dojoModule name="dijit.form.ComboBox"></xp:dojoModule>
 		<xp:dojoModule name="dijit.form.NumberTextBox"></xp:dojoModule>
 		<xp:dojoModule name="dijit.form.SimpleTextarea"></xp:dojoModule>
+		<xp:dojoModule name="extlib.prettify.prettify"></xp:dojoModule>
+		<xp:dojoModule name="extlib.vkbeautify.vkbeautify"></xp:dojoModule>
+		<xp:styleSheet href="/.ibmxspres/.extlib/prettify/prettify.css"></xp:styleSheet>
+		
 <!--
 TEMP until we move to Domino 9 and define/require will defined for these modules		
 		<xp:dojoModule name="sbt.Proxy"></xp:dojoModule>
@@ -297,7 +301,7 @@ executeService(p,'#{id:expDetails}','#{id:expResults}');]]></xp:this.onclick>
 													</span>
 														</td>
 														<td class="resCol2">
-															<pre class="respBody"></pre>
+															<pre class="respBody prettyprint"></pre>
 														</td>
 													</tr>
 												</table>

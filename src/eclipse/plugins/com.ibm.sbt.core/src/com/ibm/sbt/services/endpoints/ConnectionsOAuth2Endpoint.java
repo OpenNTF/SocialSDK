@@ -55,4 +55,9 @@ public class ConnectionsOAuth2Endpoint extends OAuth2Endpoint {
 	public ClientService getClientService() throws ClientServicesException {
     	return new ConnectionsService(this);
     }
+    
+    @Override
+	public int getAuthenticationErrorCode(){
+    	return 403;
+    }
 }

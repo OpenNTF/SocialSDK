@@ -127,6 +127,11 @@ public class ApplicationEndpoint implements Endpoint {
     }
     
     @Override
+	public int getAuthenticationErrorCode(){
+    	return 401;
+    }
+    
+    @Override
 	public boolean isRequiresAuthentication() throws ClientServicesException {
     	return false;
     }

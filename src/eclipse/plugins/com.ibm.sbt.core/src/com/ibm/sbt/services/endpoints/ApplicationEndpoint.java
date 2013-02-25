@@ -112,6 +112,11 @@ public class ApplicationEndpoint implements Endpoint {
     }
     
     @Override
+	public String getAutoAuthenticate() {
+    	return null;
+    }
+    
+    @Override
 	public String getAuthType() {
     	return "application";
     }

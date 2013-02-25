@@ -16,7 +16,7 @@
 /**
  * Social Business Toolkit SDK. Definition of constants for FileService.
  */
-define([], function() {
+define(["sbt/config", "sbt/smartcloud/core"],function(sbt) {
 	return sbt.smartcloud.fileConstants = {
 		sbtErrorCodes : {
 			badRequest : 400
@@ -36,11 +36,11 @@ define([], function() {
 		},
 		entityServiceBaseUrl : "/files/basic/cmis/repository/p!{subscriberId}",		
 		xpath_feed_File : {
-			entry : "/a:feed/a:entry",
-			id : "a:id",
+			entry : "/a:feed/a:entry"			
 		},
 		xpath_File : {
 			entry : "/a:entry",
+			uid : "a:id",
 			authorName : "a:author/a:name",
 			authorDisplayName : "a:author/lcmis:displayName",
 			authorEmail : "a:author/a:email",

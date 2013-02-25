@@ -24,7 +24,11 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 		function(declare,cfg,lang,con,xml,util,xpath,Cache,profileService,constants,validate) {
 	
 	var ProfileAdminService = declare("sbt.connections.ProfileAdminService", sbt.connections.ProfileService, {
-
+		
+		constructor: function(_options) {
+			this.inherited(arguments, [_options]);
+		},
+		
 		createProfile: function (inputProfile, args) {
 			if (!(validate._validateInputTypeAndNotify("ProfileAdminService", "createProfile", "Profile", inputProfile, "sbt.connections.Profile", args))) {
 				return ;
@@ -38,20 +42,32 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 			var headers = {"Content-Type" : "application/atom+xml"};
 			var _self = this;
 			var _id= inputProfile._id;
-			var _param = (inputProfile._idType == "email" || inputProfile._idType == "id" && _self._isEmail(_id)) ? "email=" : "userid=";			
-			this._endpoint.xhrPost({
-				serviceUrl:	con.profileUrls["createProfile"]+"?"+_param + encodeURIComponent(_id),
-				postData:_self._constructCreateRequest(inputProfile,inputProfile.fields),
+			var param = {};
+			if(inputProfile._idType == "email"){
+				param.email = _id;
+			}else{
+				param.userid = _id;
+			}
+			this._createEntity(args,{
+				entityName: "profile", serviceEntity: "createProfile", entityType: "",
+				entity: inputProfile,
 				headers:headers,
-				load:function(data){
-					inputProfile.fields = {};
-					_self._load(inputProfile, args);					
-				},
-				error: function(error){
-					validate.notifyError(error,args);
-				}
-			});
-		},		
+				xmlPayload : _self._constructCreateRequest(inputProfile,inputProfile._fields),						
+				urlParams : param				
+			});		
+		},
+		_createEntityOnLoad : function (data, ioArgs, inputProfile, args){
+			var param = {};
+			if(inputProfile._idType == "email"){
+				param.email = inputProfile._id;
+			}else{
+				param.userid = inputProfile._id;
+			}
+			inputProfile.fields = {};				
+			this._load(inputProfile, args,{entityName: "profile", serviceEntity: "getProfile", entityType: "", _cachingEnabled : true, urlParams:param});	
+			
+		},
+		
 		deleteProfile: function (inputProfile, args) {			
 			if(!(typeof inputProfile == "object")){
 				var profile = new Profile(this, inputProfile);				
@@ -71,24 +87,21 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 				return;
 			}
 			var headers = {};
+			headers["Content-Type"] = "application/atom+xml";
 			var _self = this;
 			var _id= inputProfile._id;
-			var _param = (inputProfile._idType == "email" || inputProfile._idType == "id" && _self._isEmail(_id)) ? "email=" : "userid=";
-			headers["Content-Type"] = "application/atom+xml";
-			this._endpoint.xhrDelete({
-				serviceUrl:	con.profileUrls["deleteProfile"] + "?"+_param + encodeURIComponent(_id) ,
-				headers:headers,
-				load:function(data){
-					if(_self._profiles) {
-						_self._deleteIdFromCache(_id);
-		      		}
-					if(args.load) args.load();
-					if(args.handle)args.handle();
-				},
-				error: function(error){
-					validate.notifyError(error,args);
-				}
-			});
+			var param = {};
+			if(inputProfile._idType == "email"){
+				param.email = _id;
+			}else{
+				param.userid = _id;
+			}			
+			this._deleteEntity(args,{
+				entityName: "profile", serviceEntity: "deleteProfile", entityType: "",
+				entity: inputProfile,
+				headers:headers,									
+				urlParams : param
+			});		
 		},
 	});
 	

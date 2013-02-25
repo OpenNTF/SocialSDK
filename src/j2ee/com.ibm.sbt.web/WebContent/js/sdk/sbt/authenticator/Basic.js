@@ -17,13 +17,13 @@
  * Social Business Toolkit SDK.
  * Definition of an authentication mechanism.
  */
-define([],function() {
+define(["sbt/_bridge/declare"],function(declare) {
 /**
  * Proxy basic authentication.
  * 
  * This class triggers the authentication for a service.
  */
-return dojo.declare("sbt.authenticator.Basic", null, {
+return declare("sbt.authenticator.Basic", null, {
 	loginUi:		"",
 	loginPage:		"/sbt/authenticator/templates/login.html",
 	dialogLoginPage:"authenticator/templates/loginDialog.html",

@@ -170,6 +170,23 @@ return apiBean.loadAPI(e);
 													</xp:text>
 												</xp:column>
 												<xp:column id="column2" styleClass="paramCol2">
+<<<<<<< HEAD
+													<xe:switchFacet id="switchFacet1"
+														defaultFacet="text">
+														<xe:this.selectedFacet><![CDATA[#{javascript:if(p.values) {
+	return "combo";
+}
+if(p.type=="int") {
+	return "int";
+}
+if(p.type=="textarea") {
+	return "textarea";
+}
+return "text"}]]></xe:this.selectedFacet>
+														<xp:this.facets>
+															<xp:inputText xp:key="text" value="#{p.value}"
+																dojoType="dijit/form/ValidationTextBox" id="inputText1"
+=======
 													<xe:switchFacet
 														id="switchFacet1" defaultFacet="text">
 														<xe:this.selectedFacet><![CDATA[#{javascript:return p.type||"text"}]]></xe:this.selectedFacet>
@@ -177,6 +194,7 @@ return apiBean.loadAPI(e);
 															<xp:inputText
 																xp:key="text" value="#{p.value}"
 																dojoType="dijit.form.ValidationTextBox" id="inputText1"
+>>>>>>> 180f1c0a2e4c400fead946e18c678038137681bb
 																style="width: 30em">
 																<xp:this.attrs>
 																	<xp:attr

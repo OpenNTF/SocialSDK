@@ -18,14 +18,8 @@
  * Social Business Toolkit SDK.
  * @module i18n
  */
-define(['dojo/i18n'],function(i18n) {
-	    var load = function(id, require, callback){	    	
-	    	i18n.load(id, require, callback);      
-	      
-	    };	    
-	    return {
-	    	load : load	    	
-	    }; 
+define(['sbt/_bridge/i18n'],function(i18n) {
+	    return i18n;
 });
 
 

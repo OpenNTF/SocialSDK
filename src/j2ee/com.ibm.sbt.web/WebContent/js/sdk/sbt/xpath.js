@@ -27,7 +27,7 @@ define(['sbt/_bridge/declare'],function(declare) {
 	@class xpath
 	@static
 	*/
-	declare("sbt.xpathexpr", null, {
+	var XPathExpr = declare("sbt.xpathexpr", null, {
 		ie:		false,
 		constructor: function(xpath, nsArray){
 		     this.xpath = xpath;    
@@ -107,7 +107,7 @@ define(['sbt/_bridge/declare'],function(declare) {
 		@static	
 		**/
 		selectNodes : function(node, xpath, nsArray) {
-			var expr = new sbt.xpathexpr(xpath, nsArray);
+			var expr = new XPathExpr(xpath, nsArray);
 			return expr.selectNodes(node);
 		},
 		/**
@@ -120,7 +120,7 @@ define(['sbt/_bridge/declare'],function(declare) {
 		@static	
 		**/
 		selectSingleNode : function(node, xpath, nsArray) {
-			var expr = new sbt.xpathexpr(xpath, nsArray);
+			var expr = new XPathExpr(xpath, nsArray);
 			return expr.selectSingleNode(node);
 		},
 		/**
@@ -133,7 +133,7 @@ define(['sbt/_bridge/declare'],function(declare) {
 		@static	
 		**/
 		selectText : function(node, xpath, nsArray) {
-			var expr = new sbt.xpathexpr(xpath, nsArray);
+			var expr = new XPathExpr(xpath, nsArray);
 			return expr.selectText(node);
 		}
 	};

@@ -27,10 +27,19 @@ import com.ibm.commons.util.StringUtil;
  */
 public class UrlUtil {
 	
+	public static final int URL_SERVER		= 0; 
+	public static final int URL_CONTEXTPATH	= 1; 
+	public static final int URL_SERVLETPATH	= 2; 
+	public static final int URL_PATHINFO	= 3; 
+	public static final int URL_QUERYSTRING	= 4; 
+	
     public static String getRequestUrl(HttpServletRequest req) {
     	return getRequestUrl(req, true);
     }
     public static String getRequestUrl(HttpServletRequest req, boolean querystring) {
+    	return getRequestUrl(req, URL_QUERYSTRING);
+    }
+    public static String getRequestUrl(HttpServletRequest req, int url) {
     	// We cannot use request.getRequestURL() as this uses requestURI() which does not
     	// include the full path after a Domino redirection (mydb.nsf/).
     	// We have to recompose it entirely here
@@ -47,23 +56,29 @@ public class UrlUtil {
             b.append(":");
             b.append(req.getServerPort());
         }
-        String contextPath =  req.getContextPath();
-        if(StringUtil.isNotEmpty(contextPath)) {
-        	b.append(contextPath);
-        }
-        String servletPath =  req.getServletPath();
-        if(StringUtil.isNotEmpty(servletPath)) {
-        	b.append(servletPath);
-        }
-        String pathInfo =  req.getPathInfo();
-        if(StringUtil.isNotEmpty(pathInfo)) {
-        	b.append(pathInfo);
-        }
-        if(querystring) {
-			String qs = req.getQueryString();
-			if(StringUtil.isNotEmpty(qs)) {
-	            b.append("?");
-				b.append(qs);
+        if(url>=URL_CONTEXTPATH) {
+        	String contextPath =  req.getContextPath();
+        	if(StringUtil.isNotEmpty(contextPath)) {
+        		b.append(contextPath);
+        	}
+            if(url>=URL_SERVLETPATH) {
+            	String servletPath =  req.getServletPath();
+            	if(StringUtil.isNotEmpty(servletPath)) {
+            		b.append(servletPath);
+            	}
+                if(url>=URL_PATHINFO) {
+                	String pathInfo =  req.getPathInfo();
+                	if(StringUtil.isNotEmpty(pathInfo)) {
+                		b.append(pathInfo);
+                	}
+                    if(url>=URL_QUERYSTRING) {
+                    	String qs = req.getQueryString();
+                    	if(StringUtil.isNotEmpty(qs)) {
+                    		b.append("?");
+                    		b.append(qs);
+                    	}
+                    }
+                }
 			}
         }
         return b.toString();

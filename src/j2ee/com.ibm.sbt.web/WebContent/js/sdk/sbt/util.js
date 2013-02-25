@@ -77,6 +77,32 @@ define([],function() {
 			}else{
 				return true;
 			}
-		}		
+		},
+		minVersion: function(required, used) {
+		    var reqParts = required.split('.');
+		    var usedParts = used.split('.');
+		    
+		    for (var i = 0; i < reqParts.length; ++i) {
+		        if (usedParts.length == i) {
+		            return false;
+		        }
+		        
+		        if (reqParts[i] == usedParts[i]) {
+		            continue;
+		        }
+		        else if (reqParts[i] > usedParts[i]) {
+		            return false;
+		        }
+		        else {
+		            return true;
+		        }
+		    }
+		    
+		    if (reqParts.length != usedParts.length) {
+		        return true;
+		    }
+		    
+		    return true;
+		}
 	};
 });

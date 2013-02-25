@@ -51,6 +51,7 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     private boolean requiresAuthentication;
     private boolean forceTrustSSLCertificate;
     private boolean allowClientAccess = true;
+    private static final int authenticationErrorCode = 401;
     
     public AbstractEndpoint() {
     }
@@ -83,7 +84,7 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     }
 	@Override
 	public int getAuthenticationErrorCode(){
-    	return 401;
+    	return authenticationErrorCode;
     }
 
     public void setRequiresAuthentication(boolean requiresAuthentication) throws ClientServicesException {

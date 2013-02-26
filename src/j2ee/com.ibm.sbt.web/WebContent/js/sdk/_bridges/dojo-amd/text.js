@@ -17,7 +17,7 @@
 /**
  * Social Business Toolkit SDK.
  * 
- * @module i18n
+ * @module text
  */
 define([ "dojo/text" ], function(text) {
     var load = function(id,require,load) {

@@ -30,7 +30,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.ibm.commons.runtime.servlet.BaseHttpServlet;
 import com.ibm.commons.runtime.util.UrlUtil;
 import com.ibm.commons.util.StringUtil;
-import com.ibm.sbt.playground.assets.Asset;
 import com.ibm.sbt.playground.assets.Node;
 import com.ibm.sbt.playground.assets.RootNode;
 import com.ibm.sbt.playground.assets.jssnippets.JSSnippet;
@@ -163,7 +162,7 @@ public class SnippetServlet extends BaseHttpServlet {
 		for (int i = 0; i < children.size(); i++) {
 			Node node = children.get(i);
 			if (node.isAsset()) {
-				DemoJavaSnippetNode snippetNode = (DemoJavaSnippetNode)node;
+				DemoJSSnippetNode snippetNode = (DemoJSSnippetNode)node;
 				String unid = snippetNode.getUnid();
 				String gadgetUrl = UrlUtil.getBaseUrl(request)+"/gadget/sampleRunner.jsp?snippet="+URLEncoder.encode(unid);
 				sb.append("{\n");

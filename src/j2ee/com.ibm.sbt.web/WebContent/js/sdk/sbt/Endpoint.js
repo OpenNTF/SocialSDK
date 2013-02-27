@@ -201,7 +201,7 @@ var Endpoint = declare("sbt.Endpoint", null, {
 			if(data instanceof Error) {
 				var error = data;
 				// check for if authentication is required				
-				if (error.code == self.authenticationErrorCode) {
+				if (error.code == 401 || error.code == self.authenticationErrorCode) {
 					var autoAuthenticate =  args.autoAuthenticate || self.autoAuthenticate || sbt.Properties["autoAuthenticate"] || "true";
 					if(autoAuthenticate == "true"){
 						if(self.authenticator) {

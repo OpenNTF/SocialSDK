@@ -12,7 +12,7 @@ require([ "sbt/connections/ProfileService", "sbt/dom", "sbt/config" ], function(
             dom.setText("content", profile.getTitle());
         },
         error : function(error) {
-            dom.setText("content", error.message);
+        	dom.setText("content","Error received. Error Code = " +  error.code + ". Error Message = " + error.message);
         }
     });
 });

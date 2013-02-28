@@ -32,7 +32,7 @@
 <body>
 	<%
 	try {
-		String userId = Context.get().getProperty("sample.id3");
+		String userId = Context.get().getProperty("sample.id1");
 		ProfileService connProfSvc = new ProfileService();
 		Profile profile = connProfSvc.getProfile(userId);
 		Profile[] profiles = connProfSvc.getDirectReports(profile);

@@ -29,10 +29,12 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpEntityEnclosingRequest;
@@ -49,7 +51,9 @@ import org.apache.http.entity.InputStreamEntity;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.cookie.BasicClientCookie;
+
 import com.ibm.commons.util.StringUtil;
+import com.ibm.commons.util.io.ByteStreamCache;
 import com.ibm.commons.util.io.ReaderInputStream;
 import com.ibm.commons.util.io.StreamUtil;
 import com.ibm.commons.util.io.TraceOutputStream;
@@ -183,16 +187,38 @@ public class ProxyService {
 
 	private HttpRequestBase prepareMethodWithUpdatedContent(
 			HttpRequestBase method, HttpServletRequest request) throws ServletException {
-
-		InputStreamEntity payloadEntity = null;
+		// PHIL, 2/28/2013
+		// We should use the length when available, for HTTP 1.1
+		// -> it optimizes with HTTP 1.1
+		// -> it prevents the HTTP client to use Transfert-Encoding: chunked, which doesn't
+		//    seem to work will all HTTP servers (ex: Domino)
+		// A browser should anyway provide the length.
+		long length = -1;
+		String slength = request.getHeader("Content-Length");
+		if(StringUtil.isNotEmpty(slength)) {
+			length = Long.parseLong(slength);
+		}
 		try {
-			payloadEntity = new InputStreamEntity(request.getInputStream(), -1);
+			// When no length is specified, the HTTP client core forces Transfert-Encoding: chunked
+			// The code bellow shows a workaround, although we should avoid that
+			if(false) {
+				if(length<0) {
+					ByteStreamCache bs = new ByteStreamCache();
+					bs.copyFrom(request.getInputStream());
+					HttpEntity payloadEntity = new InputStreamEntity(bs.getInputStream(), bs.getLength());
+					((HttpEntityEnclosingRequest) method).setEntity(payloadEntity);
+					return method;
+				}
+			}
+			// Regular code
+			HttpEntity payloadEntity = new InputStreamEntity(request.getInputStream(), length);
 			((HttpEntityEnclosingRequest) method).setEntity(payloadEntity);
 		}catch(Exception e){
 			throw new ServletException("Error while parsing the payload");
 		}
 		return method;
 	}
+
 	protected void initProxy(HttpServletRequest request, HttpServletResponse response) throws ServletException {
 	}
 

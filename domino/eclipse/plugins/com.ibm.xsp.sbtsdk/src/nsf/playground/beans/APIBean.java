@@ -206,8 +206,11 @@ public class APIBean extends AssetBean {
 		}
 
 		// Add a pseudo query string parameter
-		ObjectObject qs = addParam(a, FBSString.get("query-string"), FBSString.emptyString, FBSUtility.wrap("string"), FBSUtility.wrap("Extra query string parameters, as they would appear in the URL (a=1&b=2...)"));
-		qs.put("optional", FBSBoolean.TRUE);
+		boolean qstring = item.get("queryString").booleanValue();
+		if(qstring) {
+			ObjectObject qs = addParam(a, FBSString.get("query-string"), FBSString.emptyString, FBSUtility.wrap("string"), FBSUtility.wrap("Extra query string parameters, as they would appear in the URL (a=1&b=2...)"));
+			qs.put("optional", FBSBoolean.TRUE);
+		}
 		
 		// Now, add the pseudo entries for the POST/PUT content 
 		FBSValue v = item.get("http_method");
@@ -215,7 +218,9 @@ public class APIBean extends AssetBean {
 			String m = v.stringValue();
 			if(m.equalsIgnoreCase("post")||m.equalsIgnoreCase("put")) {
 				ObjectObject ct = addParam(a, FBSString.get("post_content_type"), item.get("post_content_type"), FBSUtility.wrap("string"), FBSUtility.wrap("Content-Type header of the payload"));
+				ct.put("optional", FBSBoolean.TRUE);
 				ObjectObject bd = addParam(a, FBSString.get("post_content"), item.get("post_content"), FBSUtility.wrap("textarea"), FBSUtility.wrap("Text content sent to the service"));
+				bd.put("optional", FBSBoolean.TRUE);
 			}
 		}
 		return a;

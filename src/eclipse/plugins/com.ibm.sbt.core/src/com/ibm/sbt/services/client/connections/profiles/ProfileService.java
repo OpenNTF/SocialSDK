@@ -119,7 +119,7 @@ public class ProfileService extends BaseService {
 	 * @param userIds
 	 * @return Profile[]
 	 */
-	public Profile[] getProfiles(String[] userIds) {
+	private Profile[] getProfiles(String[] userIds) {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getProfiles", userIds);
 		}
@@ -261,8 +261,12 @@ public class ProfileService extends BaseService {
 	 * 
 	 * @param profile - profile of the user whose reporting chain is required
 	 * @return Profile[] - array of network contacts profiles
+	 * 
+	 * @deprecated Do not use this method!
 	 */
-	public Profile[] getReportToChain(Profile profile){
+
+	
+	private Profile[] getReportToChain(Profile profile){
 		return getReportToChain(profile,null);
 		
 	}
@@ -272,8 +276,10 @@ public class ProfileService extends BaseService {
 	 * @param profile - profile of the user whose reporting chain is required
 	 * @param parameters - parameter map
 	 * @return Profile[] - array of reporting chain profiles
-	 */
-	public Profile[] getReportToChain(Profile profile, Map<String, String> parameters){
+	 * 
+	 * @deprecated Do not use this method!
+	 * 	 */
+	private Profile[] getReportToChain(Profile profile, Map<String, String> parameters){
 		
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getReportToChain", parameters);
@@ -311,8 +317,10 @@ public class ProfileService extends BaseService {
 	 * 
 	 * @param profile - profile of the user whose reporting chain is required
 	 * @return Profile[] - array of direct reports profiles
+	 * 
+	 * @deprecated Do not use this method!
 	 */
-	public Profile[] getDirectReports(Profile profile){
+	private Profile[] getDirectReports(Profile profile){
 		return getDirectReports(profile,null);
 		
 	}
@@ -322,8 +330,10 @@ public class ProfileService extends BaseService {
 	 * @param profile - profile of the user whose reporting chain is required
 	 * @param parameters - parameter map
 	 * @return Profile[] - array of direct reports profiles
+	 * 
+	 * @deprecated Do not use this method!
 	 */
-	public Profile[] getDirectReports(Profile profile, Map<String, String> parameters){
+	private Profile[] getDirectReports(Profile profile, Map<String, String> parameters){
 		
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getDirectReports", parameters);
@@ -362,9 +372,11 @@ public class ProfileService extends BaseService {
 	 * @param parameters - parameter map
 	 * @return object[] - if outputType is connection then , array of connection entries is returned and
 	 * 					  if outputType is profile then array of profile
+	 * 
+	 * @deprecated Do not use this method!
 	 *  is returned
 	 */
-	public Object[] getInvites(Map<String, String> parameters){
+	private Object[] getInvites(Map<String, String> parameters){
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "viewInvites", parameters);
 		}
@@ -452,11 +464,13 @@ public class ProfileService extends BaseService {
 	/**
 	 * This method is used to accept a Invite 
 	 * 
-	 * @param connectionId - uniqu9e id of the
+	 * @param connectionId - unique id of the
 	 * @param title - message to the other user
 	 * @return content - if invite is sent successfully then return true
+	 * 
+	 * @deprecated Do not use this method!
 	 */
-	public boolean acceptInvite(String connectionId, String title, String content){
+	private boolean acceptInvite(String connectionId, String title, String content){
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "acceptInvite", connectionId);
 		}
@@ -486,8 +500,10 @@ public class ProfileService extends BaseService {
 	 * This method is used to delete/ignore a Invite 
 	 * 
 	 * @param connectionId - unique id of the connection
+	 * 
+	 * @deprecated Do not use this method!
 	 */
-	public boolean deleteInvite(String connectionId){
+	private boolean deleteInvite(String connectionId){
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "deleteInvite", connectionId);
 		}

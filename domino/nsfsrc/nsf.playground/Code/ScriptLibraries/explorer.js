@@ -216,16 +216,13 @@ function prettify(s,ioArgs) {
 		// Check for XML result
 		if(s.indexOf("<?xml")==0) {
 			return vkbeautify.xml(s);
-			//return prettifyXml(s);
 		}
 		if(s.indexOf("<html")==0) {
 			return vkbeautify.xml(s);
-			//return prettifyXml(s);
 		}
 		// Check for Json result
 		if(s.indexOf("{")==0) {
 			return vkbeautify.json(s);
-			//return prettifyJson(s);
 		}
 	} catch(e) {} // Return the initial string
 	return s;

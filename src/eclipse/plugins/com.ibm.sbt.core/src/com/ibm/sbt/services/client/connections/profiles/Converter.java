@@ -65,6 +65,35 @@ public class Converter {
 		return profile;
 	}
 	
+    static public ColleagueConnection[] returnColleagueConnections(ProfileService cs, Document data)
+	{
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.entering(sourceClass, "returnColleagueConnections");
+		}
+		NodeList connectionEntries = data.getElementsByTagName("entry");
+		ColleagueConnection[] connections = new ColleagueConnection[connectionEntries.getLength()];
+		if(connectionEntries != null && connectionEntries.getLength() > 0) {
+			for(int i = 0 ; i < connectionEntries.getLength();i++) {
+				Node entry = connectionEntries.item(i);
+				Document doc;
+				try {
+					doc = DOMUtil.createDocument();
+					Node dup = doc.importNode(entry, true);
+					doc.appendChild(dup);
+					connections[i] = new ColleagueConnection(cs, entry.getFirstChild().getTextContent());
+					connections[i].setData(doc);
+				} catch (XMLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			
+			}
+		}
+		if (logger.isLoggable(Level.FINEST)) {
+    		logger.exiting(sourceClass, "returnColleagueConnections", connections);
+		}
+		return connections;
+	}
 	
 
 }

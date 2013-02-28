@@ -187,8 +187,8 @@ var Endpoint = declare("sbt.Endpoint", null, {
 		var self = this;
 		var args = lang.mixin({},_args);
 		if(!args.url && args.serviceUrl) {
-			//args.url = this.baseUrl+args.serviceUrl; // dont concatenate the endpoint url here #54917
 			args.url = args.serviceUrl;
+			args.baseUrl = this.baseUrl;
 			delete args.serviceUrl;
 			if(this.proxy) {
 				args.url = this.proxy.rewriteUrl(args.url,this.proxyPath);
@@ -201,7 +201,7 @@ var Endpoint = declare("sbt.Endpoint", null, {
 			if(data instanceof Error) {
 				var error = data;
 				// check for if authentication is required				
-				if (error.code == self.authenticationErrorCode) {
+				if (error.code == 401 || error.code == self.authenticationErrorCode) {
 					var autoAuthenticate =  args.autoAuthenticate || self.autoAuthenticate || sbt.Properties["autoAuthenticate"] || "true";
 					if(autoAuthenticate == "true"){
 						if(self.authenticator) {

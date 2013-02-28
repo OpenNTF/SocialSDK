@@ -34,7 +34,7 @@
 	<%
 		try{		
 			
-			String userId = Context.get().getProperty("sample.id3");
+			String userId = Context.get().getProperty("sample.id1");
 			ProfileService connProfSvc = new ProfileService();
 			Map<String, String> params = new HashMap<String, String>();
 			params.put("connectionType", "colleague");

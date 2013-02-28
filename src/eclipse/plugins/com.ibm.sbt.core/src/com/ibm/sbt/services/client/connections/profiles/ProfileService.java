@@ -32,7 +32,6 @@ import com.ibm.commons.xml.XMLException;
 import com.ibm.sbt.services.client.BaseService;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
-import com.ibm.sbt.services.client.smartcloud.communities.util.XMLCommunityPayloadBuilder;
 import com.ibm.sbt.services.util.AuthUtil;
 
 /**
@@ -42,17 +41,12 @@ import com.ibm.sbt.services.util.AuthUtil;
  * @Represents Connections ProfileService
  * @author Swati Singh
  */
-
 public class ProfileService extends BaseService {
 
 	static final String						sourceClass		= ProfileService.class.getName();
 	static final Logger						logger			= Logger.getLogger(sourceClass);
-
 	public static final String				ProfileBaseUrl	= "profiles";
 	public static final String				seperator		= "/";
-
-	//private static Map<String, Document>	cache			= new HashMap<String, Document>();
-	
 	private LRUCache lruCache;
 
 	public static enum ProfilesAPI {
@@ -262,6 +256,145 @@ public class ProfileService extends BaseService {
 		return colleagues;
 
 	}
+	/**
+	 * This method is used to get a person's report to chain
+	 * 
+	 * @param profile - profile of the user whose reporting chain is required
+	 * @return Profile[] - array of network contacts profiles
+	 */
+	public Profile[] getReportToChain(Profile profile){
+		return getReportToChain(profile,null);
+		
+	}
+	/**
+	 * This method is used to get a person's report to chain
+	 * 
+	 * @param profile - profile of the user whose reporting chain is required
+	 * @param parameters - parameter map
+	 * @return Profile[] - array of reporting chain profiles
+	 */
+	public Profile[] getReportToChain(Profile profile, Map<String, String> parameters){
+		
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.entering(sourceClass, "getReportToChain", parameters);
+		}
+		if (profile == null) {
+			throw new IllegalArgumentException(StringUtil.format("A null profile was passed"));
+		}
+		Document data = null;
+		Profile[] reportingChain = null;
+		if(parameters == null)
+			parameters = new HashMap<String, String>();
+		try {
+			String url = resolveProfileUrl(ProfileEntity.NONADMIN.getProfileEntityType(),
+					ProfileType.REPORTINGCHAIN.getProfileType());
+			if (isEmail(profile.getReqId())) {
+				parameters.put("email", profile.getReqId());
+			} else {
+				parameters.put("userid", profile.getReqId());
+			}
+			data = (Document)getClientService().get(url, parameters);
+			reportingChain = Converter.convertToProfiles(this, data);
+		} catch (ClientServicesException e) {
+			if (logger.isLoggable(Level.SEVERE)) {
+				logger.log(Level.SEVERE, "Error encountered while getting colleagues information", e);
+			}
+		}
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.exiting(sourceClass, "getReportToChain");
+		}
+		return reportingChain;
+		
+	}
+	/**
+	 * This method is used to get a person's direct reports
+	 * 
+	 * @param profile - profile of the user whose reporting chain is required
+	 * @return Profile[] - array of direct reports profiles
+	 */
+	public Profile[] getDirectReports(Profile profile){
+		return getDirectReports(profile,null);
+		
+	}
+	/**
+	 * This method is used to get a person's direct reports
+	 * 
+	 * @param profile - profile of the user whose reporting chain is required
+	 * @param parameters - parameter map
+	 * @return Profile[] - array of direct reports profiles
+	 */
+	public Profile[] getDirectReports(Profile profile, Map<String, String> parameters){
+		
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.entering(sourceClass, "getDirectReports", parameters);
+		}
+		if (profile == null) {
+			throw new IllegalArgumentException(StringUtil.format("A null profile was passed"));
+		}
+		Document data = null;
+		Profile[] reportingChain = null;
+		if(parameters == null)
+			parameters = new HashMap<String, String>();
+		try {
+			String url = resolveProfileUrl(ProfileEntity.NONADMIN.getProfileEntityType(),
+					ProfileType.DIRECTREPORTS.getProfileType());
+			if (isEmail(profile.getReqId())) {
+				parameters.put("email", profile.getReqId());
+			} else {
+				parameters.put("userid", profile.getReqId());
+			}
+			data = (Document)getClientService().get(url, parameters);
+			reportingChain = Converter.convertToProfiles(this, data);
+		} catch (ClientServicesException e) {
+			if (logger.isLoggable(Level.SEVERE)) {
+				logger.log(Level.SEVERE, "Error encountered in getting direct reports information", e);
+			}
+		}
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.exiting(sourceClass, "getDirectReports");
+		}
+		return reportingChain;
+		
+	}
+	/**
+	 * This method is used to get list of Invites a person has received
+	 * 
+	 * @param parameters - parameter map
+	 * @return object[] - if outputType is connection then , array of connection entries is returned and
+	 * 					  if outputType is profile then array of profile
+	 *  is returned
+	 */
+	public Object[] getInvites(Map<String, String> parameters){
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.entering(sourceClass, "viewInvites", parameters);
+		}
+
+		Document data = null;
+		ColleagueConnection[] colleagues = null;
+		try {
+			String url = resolveProfileUrl(ProfileEntity.NONADMIN.getProfileEntityType(),
+					ProfileType.GETCOLLEAGUES.getProfileType());
+			data = (Document)getClientService().get(url, parameters);
+			if(parameters.containsKey("outputType")){
+				if(parameters.get("outputType").equalsIgnoreCase("profile")){
+					return Converter.convertToProfiles(this, data);
+				}
+				else 
+					return Converter.returnColleagueConnections(this, data);
+			}
+			else{
+				return Converter.returnColleagueConnections(this, data);
+			}
+		} catch (ClientServicesException e) {
+			if (logger.isLoggable(Level.SEVERE)) {
+				logger.log(Level.SEVERE, "Error encountered while getting invites", e);
+			}
+		}
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.exiting(sourceClass, "viewInvites");
+		}
+		return colleagues;
+	}
 	
 	/**
 	 * This method is used to Invite a person to become your colleague
@@ -274,9 +407,9 @@ public class ProfileService extends BaseService {
 		return sendInvite(profile, defaultInviteMsg);
 		
 	}
-
+	
 	/**
-	 * This method is used to Invite a person to become your colleague
+	 * This method is used to send a Invite to person to be your connect
 	 * 
 	 * @param profile - profile of the user to whom the invite needs to be sent
 	 * @param inviteMsg - message to the other user
@@ -316,6 +449,66 @@ public class ProfileService extends BaseService {
 
 	}
 
+	/**
+	 * This method is used to accept a Invite 
+	 * 
+	 * @param connectionId - uniqu9e id of the
+	 * @param title - message to the other user
+	 * @return content - if invite is sent successfully then return true
+	 */
+	public boolean acceptInvite(String connectionId, String title, String content){
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.entering(sourceClass, "acceptInvite", connectionId);
+		}
+		boolean returnVal = true;
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put("connectionId", connectionId);
+		String url = resolveProfileUrl(ProfileEntity.NONADMIN.getProfileEntityType(),
+				ProfileType.UPDATEINVITE.getProfileType());
+		
+		XMLProfilesPayloadBuilder builder = XMLProfilesPayloadBuilder.INSTANCE;
+		Object payload = builder.generateAcceptInvitePayload(connectionId, title, content);
+		try {
+			getClientService().put(url, parameters, payload);
+		} catch (ClientServicesException e) {
+			returnVal = false;
+			if (logger.isLoggable(Level.SEVERE)) {
+				logger.log(Level.SEVERE, "Error encountered in accepting invite", e);
+			}
+		}
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.exiting(sourceClass, "acceptInvite");
+		}
+		return returnVal;
+	}
+	
+	/**
+	 * This method is used to delete/ignore a Invite 
+	 * 
+	 * @param connectionId - unique id of the connection
+	 */
+	public boolean deleteInvite(String connectionId){
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.entering(sourceClass, "deleteInvite", connectionId);
+		}
+		boolean returnVal = true;
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put("connectionId", connectionId);
+		String url = resolveProfileUrl(ProfileEntity.NONADMIN.getProfileEntityType(),
+				ProfileType.UPDATEINVITE.getProfileType());
+		try {
+			getClientService().delete(url, parameters);
+		} catch (ClientServicesException e) {
+			returnVal = false;
+			if (logger.isLoggable(Level.SEVERE)) {
+				logger.log(Level.SEVERE, "Error encountered in deletting invite", e);
+			}
+		}
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.exiting(sourceClass, "deleteInvite");
+		}
+		return returnVal;
+	}
 	/**
 	 * Wrapper method to update a User's profile photo
 	 * 

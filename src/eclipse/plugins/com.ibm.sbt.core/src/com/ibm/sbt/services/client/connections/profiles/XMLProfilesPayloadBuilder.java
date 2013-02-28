@@ -29,6 +29,7 @@ public class XMLProfilesPayloadBuilder extends XMLPayloadBuilder{
     private static final String XMLNS_ATOM = "xmlns:atom";
     private static final String TYPE = "type";
     private static final String TEXT = "text";
+    private static final String ID = "id";
     private static final String HTML = "html";
     private static final String TERM = "term";
     private static final String SCHEME = "scheme";
@@ -40,6 +41,8 @@ public class XMLProfilesPayloadBuilder extends XMLPayloadBuilder{
     private static final String CONNECTION = "connection";
     private static final String COLLEAGUE = "colleague";
     private static final String PENDING = "pending";
+    private static final String ACCEPTED = "accepted";
+    private static final String ENTRYID = "tag:profiles.ibm.com,2006:entry";
     
     public static XMLProfilesPayloadBuilder INSTANCE = new XMLProfilesPayloadBuilder();
     
@@ -112,6 +115,52 @@ public class XMLProfilesPayloadBuilder extends XMLPayloadBuilder{
     		logger.exiting(sourceClass, "generateInviteRequestPayload", new Object[] { doc });
         }
 		return doc;
+	}
+	
+	public Document generateAcceptInvitePayload(String id, String title, String content) {
+		if (logger.isLoggable(Level.FINEST)) {
+    		logger.entering(sourceClass, "generateInviteRequestPayload", new Object[] {  });
+        }
+
+		Document doc = createPayload();
+		Element rootElement = doc.getDocumentElement();
+		
+		Element entryId = doc.createElement(ID);
+		entryId.appendChild(doc.createTextNode(ENTRYID.concat(id)));// have to check this
+		rootElement.appendChild(entryId);
+		
+		Element Title = doc.createElement(TITLE);
+		Title.appendChild(doc.createTextNode(title));// have to check this
+		rootElement.appendChild(Title);
+		
+		Element category = doc.createElement(CATEGORY);
+		category.setAttribute(SCHEME, namespaces.get(SCHEME));
+		category.setAttribute(TERM, CONNECTION);
+		
+		rootElement.appendChild(category);
+		
+		category = doc.createElement(CATEGORY);
+		category.setAttribute(SCHEME, namespaces.get(SCHEME_COLLEAGUE));
+		category.setAttribute(TERM, COLLEAGUE);
+		rootElement.appendChild(category);
+		
+		category = doc.createElement(CATEGORY);
+		category.setAttribute(SCHEME, namespaces.get(SCHEME_STATUS));
+
+		category.setAttribute(TERM, ACCEPTED);
+		rootElement.appendChild(category);
+		
+		Element Content = doc.createElement(CONTENT);
+		Content.setAttribute(TYPE, HTML);
+		Content.appendChild(doc.createTextNode(content));// have to check this
+		rootElement.appendChild(Content);
+
+		if (logger.isLoggable(Level.FINEST)) {
+    		logger.exiting(sourceClass, "generateInviteRequestPayload", new Object[] { doc });
+        }
+		
+		return doc;		
+
 	}
 
 }

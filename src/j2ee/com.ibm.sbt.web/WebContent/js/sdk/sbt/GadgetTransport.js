@@ -15,10 +15,10 @@
  */
 
 /**
- * Implements a transport for when the SDK is within a gadget.
+ * Implements a transport for when the SDK is used from a gadget.
  * @module
  */
-define(['dojo/_base/declare','dojo/_base/xhr','sbt/Gadget','sbt/lang'],function(declare,xhr,gadget,lang) {
+define(['sbt/_bridge/declare','sbt/lang'],function(declare,lang) {
     var MethodTypes = {
         'POST':   gadgets.io.MethodType.POST,
         'PUT':    gadgets.io.MethodType.PUT,
@@ -41,8 +41,8 @@ define(['dojo/_base/declare','dojo/_base/xhr','sbt/Gadget','sbt/lang'],function(
     };
     return declare("sbt._bridge.GadgetTransport", null, {
         serviceName: null,
-        constructor: function(serviceName, authorization) {
-            this.serviceName = serviceName;
+        constructor: function(args) {
+            this.serviceName = args.serviceName || null;
         },
         /**
          * Performs an XHR request using the gadget APIs.
@@ -137,6 +137,7 @@ define(['dojo/_base/declare','dojo/_base/xhr','sbt/Gadget','sbt/lang'],function(
         },
         buildUrl: function(args) {
             var params = [];
+            var url = args.url;
             if (args.content) {
                 for (name in args.content) {
                     var param = encodeURIComponent(name) + "=" + encodeURIComponent(args.content[name]);
@@ -144,12 +145,14 @@ define(['dojo/_base/declare','dojo/_base/xhr','sbt/Gadget','sbt/lang'],function(
                 }
                 if (params.length > 0) {
                     var query = params.join("&");
-                    var url = args.url;
                     url += (~url.indexOf('?') ? '&' : '?') + query;
-                    return url;
+                    return args.baseUrl + url;
                 }
             }
-            return args.url;
+            if (args.baseUrl) {
+                url = args.baseUrl + url;
+            } 
+            return url;
         }
     });
 });

@@ -27,7 +27,11 @@ public enum ProfileType {
 	ADDPROFILE("atom/profiles.do")  ,
 	UPDATEPROFILE("atom/profileEntry.do"),
 	UPDATEPROFILEPHOTO("photo.do"),
-	GETCOLLEAGUES("atom/connections.do");
+	GETCOLLEAGUES("atom/connections.do"),
+	UPDATEINVITE("atom/connection.do"),
+	REPORTINGCHAIN("atom/reportingChain.do"),
+	DIRECTREPORTS("atom/peopleManaged.do");
+	
 	
 	private String proType;
 	private ProfileType(String proType) {

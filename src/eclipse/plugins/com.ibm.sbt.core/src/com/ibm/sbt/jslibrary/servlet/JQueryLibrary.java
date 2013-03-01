@@ -16,6 +16,7 @@
 package com.ibm.sbt.jslibrary.servlet;
 
 import java.util.Map;
+
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonObject;
 
@@ -118,10 +119,10 @@ public class JQueryLibrary extends AbstractLibrary {
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.ibm.sbt.jslibrary.servlet.AbstractLibrary#getRegisterExtModules()
+	 * @see com.ibm.sbt.jslibrary.servlet.AbstractLibrary#getRegisterExtModules(LibraryRequest)
 	 */
 	@Override
-	protected String[][] getRegisterExtModules() {
+	protected String[][] getRegisterExtModules(LibraryRequest request) {
 		return REGISTER_EXT_MODULES;
 	}
 

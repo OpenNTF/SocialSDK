@@ -1,4 +1,4 @@
-require([ "sbt/dom", "sbt/Endpoint" ], function(dom, Endpoint) {
+require(["sbt/dom", "sbt/Endpoint", "sbt/config" ], function(dom, Endpoint) {
     var endpoint = Endpoint.find("connections");
     endpoint.xhrGet({
         serviceUrl : "/profiles/atom/profile.do",

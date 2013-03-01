@@ -17,7 +17,7 @@
 /**
  * Social Business Toolkit SDK - Utilities script
  */
-define([],function() {
+define(['sbt/lang'],function(lang) {
 	var errorCode = 400;	
 	function log (text, arg1, arg2) {
 		if (console) {	
@@ -103,6 +103,26 @@ define([],function() {
 		    }
 		    
 		    return true;
-		}
+		},
+        getAllResponseHeaders: function(xhr) {
+            var headers = {};
+            try {
+                var headersStr = xhr.getAllResponseHeaders();
+                if (headersStr) {
+                    var headersStrs = headersStr.split('\n');
+                    for (var i=0; i<headersStrs.length; i++) {
+                        var index = headersStrs[i].indexOf(':');
+                        var key = lang.trim(headersStrs[i].substring(0, index));
+                        var value = lang.trim(headersStrs[i].substring(index+1));
+                        if (key.length > 0) {
+                            headers[key] = value;
+                        }
+                    }
+                }
+            } catch(ex) {
+                console.log(ex);
+            }
+            return headers;
+        }
 	};
 });

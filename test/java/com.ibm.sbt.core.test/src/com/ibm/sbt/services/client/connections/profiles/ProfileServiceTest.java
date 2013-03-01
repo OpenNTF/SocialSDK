@@ -65,10 +65,11 @@ public class ProfileServiceTest extends BaseUnitTest {
 		assertEquals(properties.getProperty("userId1"), profile.getUniqueId());
 	}
 
+	/**
 	@Ignore
 	@Test
 	public final void testGetProfiles() {
-
+		//TODO: fix test with the final API
 		ProfileService profileService = new ProfileService();
 		Profile[] profiles = profileService.getProfiles(new String[] { properties.getProperty("email1"),
 				properties.getProperty("email2") });
@@ -81,6 +82,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 		assertNotNull(profiles[1].getData());
 		assertEquals("Bill Jordan", profiles[1].getDisplayName());
 	}
+	*/
 
 	@Ignore
 	@Test

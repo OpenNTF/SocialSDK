@@ -18,7 +18,7 @@
  * Social Business Toolkit SDK. 
  * Implementation of a transport using the Dojo Request API.
  */
-define([ 'dojo/_base/declare', 'dojo/request', 'dojo/_base/lang', 'dojox/xml/parser' ], function(declare, request, lang, parser){
+define([ 'dojo/_base/declare', 'dojo/request', 'dojo/_base/lang', 'dojox/xml/parser', 'sbt/util' ], function(declare, request, lang, parser, util){
 	return declare("sbt._bridge.RequestTransport", null, {
 		xhr: function(method, args, hasBody) { 			
 			var _self = this;
@@ -50,13 +50,12 @@ define([ 'dojo/_base/declare', 'dojo/request', 'dojo/_base/lang', 'dojox/xml/par
 			var _promise = request(_args.url, _options);
 			_promise.response.then(
 				function(response) {					
-					return _args.handle(response.data, {
-						args: args,
-						url: response.url,
-						query: response.options.query,
-						handleAs: response.options.handleAs,
-						xhr: response.xhr						
-					});
+	                var _ioArgs = {
+	                    'args' : args,
+	                    'headers' : util.getAllResponseHeaders(ioArgs.xhr),
+	                    '_ioargs' : ioArgs
+	                };
+					return _args.handle(response.data, _ioArgs);
 				},
 				function(error) {
 					return _args.handle(_self.createError(error));

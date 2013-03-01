@@ -103,8 +103,11 @@ define(['sbt/_bridge/declare','sbt/lang'],function(declare,lang) {
         },
         notifyResponse: function(args, response) {
             if (args.load || args.handle) {
-                var ioArgs = {};
-                lang.mixin(ioArgs, response);
+                var ioArgs = {
+                    'args' : args,
+                    'headers' : response.headers,
+                    '_ioargs' : response
+                };
                 if (args.handle) {
                     args.handle(response.data || response.text, ioArgs);
                 }

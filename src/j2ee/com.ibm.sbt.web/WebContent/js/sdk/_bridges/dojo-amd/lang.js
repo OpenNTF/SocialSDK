@@ -34,7 +34,7 @@ define(['dojo/_base/lang'],function(lang) {
 		clone: function(o) {
 			return lang.clone(o);
 		},
-        concatPath: function () {
+        concatPath: function() {
         	var a = arguments;
         	if(a.length==1 && this.isArray(a[0])) {
         		a = a[0];
@@ -48,6 +48,9 @@ define(['dojo/_base/lang'],function(lang) {
         		s = s + (o.charAt(0)=='/'?o.substring(1):o);
         	}
         	return s;
+        },
+        trim: function(str) {
+            return lang.trim(str);
         }
 	};
 });

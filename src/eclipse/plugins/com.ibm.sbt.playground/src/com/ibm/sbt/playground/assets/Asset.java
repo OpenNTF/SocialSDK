@@ -15,8 +15,11 @@
  */
 package com.ibm.sbt.playground.assets;
 
+import java.io.IOException;
+import java.io.StringWriter;
 import java.util.Properties;
 
+import com.ibm.commons.Platform;
 import com.ibm.commons.util.StringUtil;
 
 
@@ -27,67 +30,99 @@ import com.ibm.commons.util.StringUtil;
 public class Asset {
 
 	private String unid;
-	private String description;
-	private String[] tags;
-	private String[] documentation;
-	private String[] labels;
+	private Properties properties; 
 	
 	public Asset() {
 	}
 	
+	public Properties getProperties() {
+		return properties;
+	}
+	public String getPropertiesAsString() {
+		if(properties!=null) {
+			try {
+				StringWriter sw = new StringWriter();
+				properties.store(sw, null);
+				return sw.toString();
+			} catch(IOException ex) {
+				// just log and return null
+				Platform.getInstance().log(ex);
+			}
+		}
+		return null;
+	}
+	
+	public String getProperty(String name) {
+		if(properties!=null) {
+			return properties.getProperty(name);
+		}
+		return null;
+	}
+	
+	public String[] getPropertyArray(String name) {
+		return getPropertyArray(name,',');
+	}
+	public String[] getPropertyArray(String name, char c) {
+		String value = getProperty(name);
+		if(value!=null) {
+			return StringUtil.splitString(value,c,true);
+		}
+		return null;
+	}
+	
+	public boolean setProperty(String name, String value) {
+		if(properties!=null) {
+			properties.put(name,value);
+			return true;
+		}
+		return false;
+	}	
+	public boolean setPropertyArray(String name, String[] values) {
+		return setPropertyArray(name,values,',');
+	}
+	public boolean setPropertyArray(String name, String[] values, char c) {
+		if(values!=null) {
+			return setProperty(name,StringUtil.concatStrings(values,c,true));
+		}
+		return setProperty(name,null);
+	}
+	
 	public void init(Properties props) {
-		String desc = props.getProperty("description");
-		if(StringUtil.isNotEmpty(desc)) {
-			this.description = desc;
-		}
-		String tags = props.getProperty("tags");
-		if(StringUtil.isNotEmpty(tags)) {
-			this.tags = StringUtil.splitString(tags,',',true);
-		}
-		String documentation = props.getProperty("documentation");
-		if(StringUtil.isNotEmpty(documentation)) {
-			this.documentation = StringUtil.splitString(documentation,',',true);
-		}
-		String labels = props.getProperty("labels");
-		if(StringUtil.isNotEmpty(tags)) {
-			this.labels = StringUtil.splitString(labels,',',true);
-		}
+		this.properties = props;
 	}
 
 	public String getUnid() {
 		return unid;
 	}
-
 	public void setUnid(String unid) {
 		this.unid = unid;
 	}
 
 	public String getDescription() {
-		return description;
+		return getProperty("description");
 	}
 	public void setDescription(String description) {
-		this.description = description;
+		setProperty("description",description);
 	}
 
 	public String[] getTags() {
-		return tags;
+		return getPropertyArray("tags");
 	}
 	public void setTags(String[] tags) {
-		this.tags = tags;
+		setPropertyArray("tags",tags);
 	}
 
 	public String[] getDocumentation() {
-		return documentation;
+		return getPropertyArray("documentation");
 	}
 	public void setDocumentation(String[] documentation) {
-		this.documentation = documentation;
+		setPropertyArray("documentation",documentation);
 	}
 
 	public String[] getLabels() {
-		return labels;
+		return getPropertyArray("labels");
 	}
-
 	public void setLabels(String[] labels) {
-		this.labels = labels;
+		setPropertyArray("labels",labels);
 	}
 }

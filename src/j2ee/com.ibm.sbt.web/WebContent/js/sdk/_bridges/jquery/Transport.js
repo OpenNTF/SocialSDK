@@ -30,7 +30,7 @@ define(['jquery', 'sbt/_bridge/declare', 'sbt/util' ], function($, declare, util
 		    var settings = {
 		        type: method,
 		        data: args.content,
-		        dataType: args.handleAs
+		        dataType: args.handleAs || "text"
 		    };
 		    
 		    if (!jQ_v_gte_18) {
@@ -56,7 +56,12 @@ define(['jquery', 'sbt/_bridge/declare', 'sbt/util' ], function($, declare, util
 		},
 		handleSuccess: function(args, data, textStatus, jqXHR) {
 		    if (args.handle) {
-		        args.handle(data, args);
+                var _ioArgs = {
+                    'args' : args,
+                    'headers' : util.getAllResponseHeaders(jqXHR),
+                    '_ioargs' : jqXHR
+                };
+		        args.handle(data, _ioArgs);
 		    }
 		},
 		handleError: function(args, jqXHR, textStatus, errorThrown) {

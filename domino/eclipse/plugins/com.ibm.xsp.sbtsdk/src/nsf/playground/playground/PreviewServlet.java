@@ -138,7 +138,8 @@ public class PreviewServlet extends FacesContextServlet {
 			pw.println("    @import \"/xsp/.ibmxspres/domino/oneuiv2.1/defaultTheme/dojoTheme.css\";");
 			pw.println("  </style>");
 			bodyTheme = "lotusui";
-		} else if( (ExtLibUtil.isXPages900() && StringUtil.equals(theme, "oneui")) || StringUtil.equals(theme, "oneui302")) {
+		//} else if( (ExtLibUtil.isXPages900() && StringUtil.equals(theme, "oneui")) || StringUtil.equals(theme, "oneui302")) {
+		} else if( (!ExtLibUtil.isXPages853() && StringUtil.equals(theme, "oneui")) || StringUtil.equals(theme, "oneui302")) {
 			pw.println("  <style type=\"text/css\">");
 			pw.println("    @import \""+dojoPath+"dijit/themes/claro/claro.css\";");
 			pw.println("    @import \""+dojoPath+"dojo/resources/dojo.css\";");

@@ -4,7 +4,7 @@
 function updateLabel(r) {
 	var tt = dojo.byId("CurrentLabel");
 	if(tt) {
-		var label = r ? (r.category+" / "+(r.name||"")) : "[New Snippet]";
+		var label = r ? (r.category+"/"+(r.name||"")) : "[New Snippet]";
 		// Use text here!
 		tt.innerHTML = label; 
 	}

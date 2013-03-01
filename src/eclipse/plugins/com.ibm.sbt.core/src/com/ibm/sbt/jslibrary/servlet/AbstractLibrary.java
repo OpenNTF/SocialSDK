@@ -26,8 +26,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
+
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.util.PathUtil;
 import com.ibm.commons.util.StringUtil;
@@ -482,7 +484,7 @@ abstract public class AbstractLibrary {
 			indent(sb).append("if(typeof define=='undefined'){\n");
 
 			String[][] registerModules = getRegisterModules();
-			String[][] registerExtModules = StringUtil.isNotEmpty(request.getToolkitExtUrl()) ? getRegisterExtModules()
+			String[][] registerExtModules = StringUtil.isNotEmpty(request.getToolkitExtUrl()) ? getRegisterExtModules(request)
 					: null;
 			String[] requireModules = getRequireModules();
 
@@ -497,7 +499,7 @@ abstract public class AbstractLibrary {
 		}
 		// register the module paths and required modules
 		String[][] registerModulesAmd = getRegisterModulesAmd();
-		String[][] registerExtModulesAmd = StringUtil.isNotEmpty(request.getToolkitExtUrl()) ? getRegisterExtModulesAmd()
+		String[][] registerExtModulesAmd = StringUtil.isNotEmpty(request.getToolkitExtUrl()) ? getRegisterExtModulesAmd(request)
 				: null;
 		String[] requireModulesAmd = getRequireModulesAmd();
 		if (isInnerBlock) {
@@ -934,14 +936,14 @@ abstract public class AbstractLibrary {
 	/**
 	 * @return
 	 */
-	protected String[][] getRegisterExtModules() {
+	protected String[][] getRegisterExtModules(LibraryRequest request) {
 		return REGISTER_EXT_MODULES;
 	}
 
 	/**
 	 * @return
 	 */
-	protected String[][] getRegisterExtModulesAmd() {
+	protected String[][] getRegisterExtModulesAmd(LibraryRequest request) {
 		return REGISTER_EXT_MODULES;
 	}
 

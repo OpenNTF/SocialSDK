@@ -25,6 +25,7 @@ import com.ibm.sbt.jslibrary.SBTEnvironment;
 import com.ibm.xsp.context.DojoLibrary;
 import com.ibm.xsp.context.DojoLibraryFactory;
 import com.ibm.xsp.extlib.servlet.FacesContextServlet;
+import com.ibm.xsp.extlib.util.ExtLibUtil;
 
 
 public class PreviewServlet extends FacesContextServlet {
@@ -126,7 +127,7 @@ public class PreviewServlet extends FacesContextServlet {
 			pw.println("    @import \"/xsp/.ibmxspres/.sbtsdk/bootstrap/css/bootstrap.min.css\";");
 			pw.println("  </style>");
 //			bodyTheme = "claro";
-		} else if(StringUtil.equals(theme, "oneui21")) {
+		} else if( (ExtLibUtil.isXPages853() && StringUtil.equals(theme, "oneui")) || StringUtil.equals(theme, "oneuiv2.1")) {
 			pw.println("  <style type=\"text/css\">");
 			pw.println("    @import \""+dojoPath+"dijit/themes/claro/claro.css\";");
 			pw.println("    @import \""+dojoPath+"dojo/resources/dojo.css\";");
@@ -137,7 +138,7 @@ public class PreviewServlet extends FacesContextServlet {
 			pw.println("    @import \"/xsp/.ibmxspres/domino/oneuiv2.1/defaultTheme/dojoTheme.css\";");
 			pw.println("  </style>");
 			bodyTheme = "lotusui";
-		} else if(StringUtil.equals(theme, "oneui")) {
+		} else if( (ExtLibUtil.isXPages900() && StringUtil.equals(theme, "oneui")) || StringUtil.equals(theme, "oneui302")) {
 			pw.println("  <style type=\"text/css\">");
 			pw.println("    @import \""+dojoPath+"dijit/themes/claro/claro.css\";");
 			pw.println("    @import \""+dojoPath+"dojo/resources/dojo.css\";");

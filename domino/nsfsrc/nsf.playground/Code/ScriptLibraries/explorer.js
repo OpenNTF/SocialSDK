@@ -10,7 +10,7 @@ dojo.declare("ValidationTextarea", [dijit.form.ValidationTextBox,dijit.form.Simp
 });
 
 function updateLabel(id) {
-	var tt = dojo.Id("CurrentLabel");
+	var tt = dojo.byId("CurrentLabel");
 	if(tt) {
 		tt.innerHTML = id; 
 	}
@@ -139,16 +139,17 @@ function executeService(params,details,results) {
 			uri += (uri.match(/\?/) ? '&' : '?') + encodeURI(qs); 
 		}
 		
+		var startTs = Date.now();
 		var args = {
 			serviceUrl : uri,
 			handleAs : "text",
 			headers: {},
 			loginUi: "popup",
 	    	load : function(response,ioArgs) {
-	    		updatePanel(results,m+" "+ep.baseUrl+this.serviceUrl,200,"",response,ioArgs);
+	    		updatePanel(results,m+" "+ep.baseUrl+this.serviceUrl,200,"",response,ioArgs,startTs);
 	    	},
 	    	error : function(error,ioArgs) {
-	    		updatePanel(results,m+" "+ep.baseUrl+this.serviceUrl,error.code,"",error.message,ioArgs);
+	    		updatePanel(results,m+" "+ep.baseUrl+this.serviceUrl,error.code,"",error.message,ioArgs,startTs);
 	    	}
 		};
 		
@@ -162,13 +163,24 @@ function executeService(params,details,results) {
 			args.postData = data;
 		}
 
+		dojo.style(dojo.query(".respProgress",results)[0],"display","");
 		ep.xhr(m,args,args.postData);
 	});
 }
 
-function updatePanel(id,url,code,headers,body,ioArgs) {
-	updateResponse(id,{url:url,status:code,headers:headers,body:prettify(body,ioArgs)});
-	// Should we just pretty print one div?
+function updatePanel(id,url,code,headers,body,ioargs,startTs) {
+	var hd = "";
+    var headers = ioargs && ioargs.headers;
+	if(headers) {
+        for(var h in headers) {
+            if(headers.hasOwnProperty(h)) {
+            	if(hd) hd += "\n";
+            	hd += h + ": " + headers[h];
+            }
+        }				
+	}
+	updateResponse(id,{url:url,status:code,headers:prettify(hd,ioargs),body:prettify(body,ioargs),startTs:startTs});
+	// Should we just pretty print one div instead of the whole document?
 	prettyPrint();
 }
 
@@ -204,6 +216,14 @@ function updateResponse(id,content) {
 		}
 		update(".respHeaders",content.headers);
 		update(".respBody",content.body);
+		dojo.style(dojo.query(".respProgress",id)[0],"display","none");
+		if(content.startTs) {
+			var endTs = Date.now();
+			var sec = (endTs-content.startTs)/1000;
+			update(".respTime",sec);
+		} else {
+			update(".respTime","");
+		}
 	});
 }
 

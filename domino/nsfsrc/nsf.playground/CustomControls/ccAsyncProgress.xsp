@@ -17,6 +17,10 @@ return job]]></xe:this.script>
 	<xp:scriptBlock id="scriptBlock1">
 		<xp:this.value><![CDATA[
 function xspAsyncProgressUpdate() {
+	if(!job) {
+		setTimeout(xspAsyncProgressUpdate,50);
+		return;
+	}
 	var deferred = job.getStatus()
 	deferred.addCallback(function(result) {
 		//console.log("LOG: "+XSP.toJson(result))
@@ -48,7 +52,7 @@ function xspAsyncProgressUpdate() {
 		setTimeout(xspAsyncProgressUpdate,800);
 	});
 }
-dojo.ready(xspAsyncProgressUpdate);
+setTimeout(xspAsyncProgressUpdate,50);
 ]]></xp:this.value>
 	</xp:scriptBlock>
 

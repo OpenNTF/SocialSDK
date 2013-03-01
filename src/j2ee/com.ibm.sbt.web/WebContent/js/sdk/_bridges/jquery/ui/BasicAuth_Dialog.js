@@ -19,7 +19,7 @@
  * 
  * Definition of a jQuery UI based dialog for OAuth 1.0.
  */
-define(['jquery/ui', 'jquery/serialize'], function() {
+define(['jquery/ui'], function() {
 	
 	return {
 		submitOnClickHandle: function(contentForm) {

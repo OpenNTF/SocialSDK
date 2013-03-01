@@ -15,8 +15,6 @@
  */
 package com.ibm.sbt.playground.assets.apis;
 
-import java.util.Properties;
-
 import com.ibm.sbt.playground.assets.Asset;
 
 
@@ -27,17 +25,8 @@ import com.ibm.sbt.playground.assets.Asset;
 public class APIDescription extends Asset {
 
 	private String json;
-	private String endpoint;
-	private String baseDocUrl;
 	
 	public APIDescription() {
-	}
-	
-	@Override
-	public void init(Properties props) {
-		super.init(props);
-		this.endpoint = props.getProperty("endpoint");
-		this.baseDocUrl = props.getProperty("basedocurl");
 	}
 
 	public String getJson() {
@@ -46,19 +35,19 @@ public class APIDescription extends Asset {
 	public void setJson(String json) {
 		this.json = json;
 	}
-
+	
 	public String getEndpoint() {
-		return endpoint;
+		return getProperty("endpoint");
 	}
 	public void setEndpoint(String endpoint) {
-		this.endpoint = endpoint;
+		setProperty("endpoint",endpoint);
 	}
 
 	public String getBaseDocUrl() {
-		return baseDocUrl;
+		return getProperty("basedocurl");
 	}
 	public void setBaseDocUrl(String baseDocUrl) {
-		this.baseDocUrl = baseDocUrl;
+		setProperty("basedocurl",baseDocUrl);
 	}
 	
 }

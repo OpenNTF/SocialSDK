@@ -22,6 +22,7 @@
 	htmlEditor:		null,	// HTML editor ID
 	jsEditor:		null,	// JS editor ID
 	cssEditor:		null,	// CSS editor ID
+	propertiesEditor: null, // Properties editor
 	javaEditor:		null,	// Java editor ID
 	xpagesEditor:	null,	// XPages editor ID
 	
@@ -79,7 +80,8 @@ if(e) {
 	doc = database.getDocumentByUNID(snippetId);
 }
 if(doc) {	o = {		status:		"ok",		id:			snippetId,		unid:		doc.getUniversalID(),
-		category:	doc.getItemValueString("category"),		author:		doc.getAuthors().get(0),		name:		doc.getItemValueString("name"),		tags:		doc.getItemValueString("tags"),		doc:		doc.getItemValueString("documentation"),		html:		doc.getItemValueString("html"),		css:		doc.getItemValueString("css"),		js:			doc.getItemValueString("javascript"),		java:		doc.getItemValueString("java"),		xpages:		doc.getItemValueString("xpages")	}	return o;}o = {	status:		"error",	msg:		"Cannot open document with id "+id}return o;]]></xe:this.script>
+		category:	doc.getItemValueString("category"),		author:		doc.getAuthors().get(0),		name:		doc.getItemValueString("name"),		tags:		doc.getItemValueString("tags"),		doc:		doc.getItemValueString("documentation"),		html:		doc.getItemValueString("html"),		css:		doc.getItemValueString("css"),		properties:	doc.getItemValueString("properties"),
+		js:			doc.getItemValueString("javascript"),		java:		doc.getItemValueString("java"),		xpages:		doc.getItemValueString("xpages")	}	return o;}o = {	status:		"error",	msg:		"Cannot open document with id "+id}return o;]]></xe:this.script>
 				</xe:remoteMethod>
 			</xe:this.methods>
 		</xe:jsonRpcService>
@@ -181,6 +183,12 @@ if(doc) {
 									onShow="pageGlobal.cssEditor.refresh()">
 									<xp:div style="border: 1px solid #AAAAAA; height: 100%">
 										<xc:PlaygroundTabCss></xc:PlaygroundTabCss>
+									</xp:div>
+								</xe:djTabPane>
+								<xe:djTabPane id="djTabPane1" title="Properties"
+									onShow="pageGlobal.propertiesEditor.refresh()">
+									<xp:div style="border: 1px solid #AAAAAA; height: 100%">
+										<xc:PlaygroundTabProperties></xc:PlaygroundTabProperties>
 									</xp:div>
 								</xe:djTabPane>
 								<!--
@@ -337,10 +345,13 @@ return document1.getDocument().getUniversalID()
 					style="display:none"></xp:inputTextarea>
 				<xp:inputTextarea id="htmlDlgEditor" value="#{document1.Html}"
 					style="display:none"></xp:inputTextarea>
+				<xp:inputTextarea id="propertiesDlgEditor" value="#{document1.properties}"
+					style="display:none"></xp:inputTextarea>
 			</xp:div>
 			<xp:scriptBlock>
 				<xp:this.value><![CDATA[dojo.byId('#{id:jsDlgEditor}').value = pageGlobal.jsEditor.getValue();
 dojo.byId('#{id:cssDlgEditor}').value = pageGlobal.cssEditor.getValue();
+dojo.byId('#{id:propertiesDlgEditor}').value = pageGlobal.propertiesEditor.getValue();
 dojo.byId('#{id:htmlDlgEditor}').value = pageGlobal.htmlEditor.getValue();]]></xp:this.value>
 			</xp:scriptBlock>
 		</xp:panel>
@@ -373,6 +384,7 @@ codeEditor.setValue(_codeData);
 		<input type="hidden" name="fm_html" id="html" />
 		<input type="hidden" name="fm_js" id="js" />
 		<input type="hidden" name="fm_css" id="css" />
+		<input type="hidden" name="fm_properties" id="properties" />
 		<input type="hidden" name="fm_options" id="options" />
 	</form>
 </xp:view>

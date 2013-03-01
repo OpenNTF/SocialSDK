@@ -95,6 +95,11 @@ public class PreviewServlet extends FacesContextServlet {
 //		}
 		PrintWriter pw = resp.getWriter();
 		
+		String theme = "oneui";
+		//env.
+		
+		String bodyTheme = "claro";
+		
 		pw.println("<!DOCTYPE html>");
 		pw.println("<html lang=\"en\">");
 		//pw.println("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">");
@@ -103,12 +108,43 @@ public class PreviewServlet extends FacesContextServlet {
 		pw.println("<head>");
 		pw.println("  <title>Social Business Playground</title>");
 		
-		pw.println("  <style type=\"text/css\">");
-		pw.println("    @import \""+dojoPath+"dijit/themes/claro/claro.css\";");
-		pw.println("    @import \""+dojoPath+"dojo/resources/dojo.css\";");
-		pw.println("    @import \"/xsp/.ibmxspres/.sbtsdk/bootstrap/css/bootstrap.min.css\";");
-		pw.println("  </style>");
-
+		if(StringUtil.equals(theme, "bootstrap")) {
+			pw.println("  <style type=\"text/css\">");
+			pw.println("    @import \""+dojoPath+"dijit/themes/claro/claro.css\";");
+			pw.println("    @import \""+dojoPath+"dojo/resources/dojo.css\";");
+			pw.println("    @import \"/xsp/.ibmxspres/.sbtsdk/bootstrap/css/bootstrap.min.css\";");
+			pw.println("  </style>");
+			bodyTheme = "claro";
+		} else if(StringUtil.equals(theme, "oneui210")) {
+			pw.println("  <style type=\"text/css\">");
+			pw.println("    @import \""+dojoPath+"dijit/themes/claro/claro.css\";");
+			pw.println("    @import \""+dojoPath+"dojo/resources/dojo.css\";");
+			pw.println("    @import \""+dojoPath+"dijit/themes/dijit.css\";");			
+			pw.println("    @import \"/xsp/.ibmxspres/domino/oneuiv2.1/base/core.css\";");
+			pw.println("    @import \"/xsp/.ibmxspres/domino/oneuiv2.1/base/dojo.css\";");
+			pw.println("    @import \"/xsp/.ibmxspres/domino/oneuiv2.1/defaultTheme/defaultTheme.css\";");
+			pw.println("    @import \"/xsp/.ibmxspres/domino/oneuiv2.1/defaultTheme/dojoTheme.css\";");
+			pw.println("  </style>");
+			bodyTheme = "lotusui";
+		} else if(StringUtil.equals(theme, "oneui")) {
+			pw.println("  <style type=\"text/css\">");
+			pw.println("    @import \""+dojoPath+"dijit/themes/claro/claro.css\";");
+			pw.println("    @import \""+dojoPath+"dojo/resources/dojo.css\";");
+			pw.println("    @import \""+dojoPath+"dijit/themes/dijit.css\";");			
+			pw.println("    @import \"/xsp/.ibmxspres/.oneuiv302/oneui/css/base/core.css\";");
+			pw.println("    @import \"/xsp/.ibmxspres/.oneuiv302/oneui/css/base/dojo.css\";");
+			pw.println("    @import \"/xsp/.ibmxspres/.oneuiv302/oneui/css/defaultTheme/defaultTheme.css\";");
+			pw.println("    @import \"/xsp/.ibmxspres/.oneuiv302/oneui/css/defaultTheme/dojoTheme.css\";");
+			pw.println("    @import \"/xsp/.ibmxspres/.oneuiv302/oneui/dojoTheme/lotusui30dojo/lotusui30dojo.css\";");
+			pw.println("  </style>");
+			bodyTheme = "lotusui30_body lotusui30_fonts lotusui30 lotusui30dojo";
+		} else {
+			pw.println("  <style type=\"text/css\">");
+			pw.println("    @import \""+dojoPath+"dijit/themes/claro/claro.css\";");
+			pw.println("    @import \""+dojoPath+"dojo/resources/dojo.css\";");
+			pw.println("  </style>");
+			bodyTheme = "claro";
+		}
 		pw.println("  <script>");
 		pw.println("    dojoConfig= {");
 		pw.println("      parseOnLoad: true,");
@@ -164,7 +200,7 @@ public class PreviewServlet extends FacesContextServlet {
 		}
 		
 		pw.println("</head>");
-		pw.println("<body class=\"claro\">");
+		pw.println("<body class=\""+bodyTheme+"\">");
 		pw.println(html);
 		if(StringUtil.isNotEmpty(js)) {
 			String s =   "<script>\n"

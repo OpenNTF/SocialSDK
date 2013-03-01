@@ -178,31 +178,37 @@ var Endpoint = declare("sbt.Endpoint", null, {
     },
     
 	/**
+	 * Sends a request using XMLHttpRequest with the given URL and options.
+	 * 
 	 * @method xhr
-	 * @param method
-	 * @param _args
-	 * @param hasBody
+	 * @param {String} [method] The HTTP method to use to make the request. Must be uppercase. Default is 'GET'.
+	 * @param {Object} [args]
+     *     @param {String} [args.url]
+     *     @param {Function} [args.handle]
+     *     @param {Function} [args.load]
+     *     @param {Function} [args.error]
+	 * @param {Boolean} [hasBody]
 	 */
-	xhr: function(method,_args,hasBody) {
+	xhr: function(method,args,hasBody) {
 		var self = this;
-		var args = lang.mixin({},_args);
-		if(!args.url && args.serviceUrl) {
-			args.url = args.serviceUrl;
-			args.baseUrl = this.baseUrl;
-			delete args.serviceUrl;
+		var _args = lang.mixin({},args);
+		if(!_args.url && _args.serviceUrl) {
+			_args.url = _args.serviceUrl;
+			_args.baseUrl = this.baseUrl;
+			delete _args.serviceUrl;
 			if(this.proxy) {
-				args.url = this.proxy.rewriteUrl(args.url,this.proxyPath);
+				_args.url = this.proxy.rewriteUrl(_args.url,this.proxyPath);
 			}
 		}
 		// Make sure the initial methods are not called
 		// seems that Dojo still call error(), even when handle is set
-		delete args.load; delete args.error;
-		args.handle = function(data,ioArgs) {
+		delete _args.load; delete _args.error;
+		_args.handle = function(data,ioArgs) {
 			if(data instanceof Error) {
 				var error = data;
 				// check for if authentication is required				
 				if (error.code == 401 || error.code == self.authenticationErrorCode) {
-					var autoAuthenticate =  args.autoAuthenticate || self.autoAuthenticate || sbt.Properties["autoAuthenticate"] || "true";
+					var autoAuthenticate =  _args.autoAuthenticate || self.autoAuthenticate || sbt.Properties["autoAuthenticate"] || "true";
 					if(autoAuthenticate == "true"){
 						if(self.authenticator) {
 							options = {
@@ -211,9 +217,9 @@ var Endpoint = declare("sbt.Endpoint", null, {
 								transport:self.transport, 
 								proxy: self.proxy,
 								proxyPath: self.proxyPath,
-								loginUi: args.loginUi || self.loginUi,
+								loginUi: _args.loginUi || self.loginUi,
 								callback: function() {
-									self.xhr(method,_args,hasBody);
+									self.xhr(method,args,hasBody);
 								}
 							};
 							if(self.authenticator.authenticate(options)) {
@@ -224,13 +230,13 @@ var Endpoint = declare("sbt.Endpoint", null, {
 				} 
 
                 // notify handle and error callbacks is available
-				self._notifyError(_args, error);
+				self._notifyError(args, error);
 			} else {
 			    // notify handle and load callbacks is available
-			    self._notifyResponse(_args, data, ioArgs);
+			    self._notifyResponse(args, data, ioArgs);
 			}
 		};	
-		this.transport.xhr(method, args, hasBody);
+		this.transport.xhr(method, _args, hasBody);
 	},
 	
 	/**

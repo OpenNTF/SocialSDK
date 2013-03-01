@@ -19,7 +19,7 @@
  * 
  * Implementation of a transport using the Dojo XHR API.
  */
-define([ 'dojo/_base/declare', 'dojo/_base/xhr', 'dojo/_base/lang', 'dojox/xml/parser' ], function(declare, xhr, lang, parser) {
+define([ 'dojo/_base/declare', 'dojo/_base/xhr', 'dojo/_base/lang', 'dojox/xml/parser', 'sbt/util' ], function(declare, xhr, lang, parser, util) {
     return declare("sbt._bridge.Transport", null, {
         xhr: function(method, args, hasBody) {
             var _args = lang.mixin({}, args);
@@ -41,7 +41,12 @@ define([ 'dojo/_base/declare', 'dojo/_base/xhr', 'dojo/_base/lang', 'dojox/xml/p
             }
             
             try {
-                args.handle(_data, ioArgs); 
+                var _ioArgs = {
+                    'args' : args,
+                    'headers' : util.getAllResponseHeaders(ioArgs.xhr),
+                    '_ioargs' : ioArgs
+                };
+                args.handle(_data, _ioArgs); 
             } catch (ex) {
                 // TODO log error
             }

@@ -26,25 +26,26 @@ import com.ibm.sbt.services.endpoints.js.JSReference;
  */
 public class DojoLibrary extends AbstractLibrary {
 
-	private String					minimumAmdVersion;
+    private String minimumAmdVersion;
+    private String minimumDojo2Version;
 
 	public static final String		NAME					= "dojo";					//$NON-NLS-1$
 
     public static final String      MODULE_BRIDGE           = "sbt._bridge";            //$NON-NLS-1$
-    public static final String      MODULE_EXT_BRIDGE       = "sbtx._bridge";            //$NON-NLS-1$
 	public static final String		MODULE_DOJO				= "sbt.dojo";				//$NON-NLS-1$
 	public static final String		MODULE_SBTX				= "sbtx";					//$NON-NLS-1$
+    public static final String      MODULE_SBTX_WIDGET      = "sbtx.widget";            //$NON-NLS-1$
 	public static final String		MODULE_AMDCOMPAT		= "sbt._bridge.amdcompat";	//$NON-NLS-1$
     public static final String      MODULE_BRIDGE_AMD       = "sbt/_bridge";            //$NON-NLS-1$
-    public static final String      MODULE_EXT_BRIDGE_AMD   = "sbtx/_bridge";            //$NON-NLS-1$
-	public static final String		MODULE_DOJO_AMD			= "sbt/dojo";				//$NON-NLS-1$
+    public static final String      MODULE_DOJO_AMD         = "sbt/dojo";               //$NON-NLS-1$
+    public static final String      MODULE_SBTX_WIDGET_AMD  = "sbtx/widget";            //$NON-NLS-1$
     public static final String      MODULE_REQUESTTRANSPORT = "sbt/_bridge/RequestTransport"; //$NON-NLS-1$
 
 	public static final String		PATH_BRIDGE				= "_bridges/dojo";			//$NON-NLS-1$
 	public static final String		PATH_BRIDGE_AMD			= "_bridges/dojo-amd";      //$NON-NLS-1$
-    public static final String      PATH_EXT_BRIDGE         = "_bridges/dojo";          //$NON-NLS-1$
-    public static final String      PATH_EXT_BRIDGE_AMD     = "_bridges/dojo-amd";      //$NON-NLS-1$
     public static final String      PATH_DOJO               = "dojo";                   //$NON-NLS-1$
+    public static final String      PATH_SBTX_DOJO          = "dojo";                   //$NON-NLS-1$
+    public static final String      PATH_SBTX_DOJO2         = "dojo2";                   //$NON-NLS-1$
 
 	static private final String[][]	REGISTER_MODULES		= { { MODULE_SBT, PATH_SBT },
 			{ MODULE_BRIDGE, PATH_BRIDGE }, { MODULE_DOJO, PATH_DOJO } };
@@ -58,8 +59,8 @@ public class DojoLibrary extends AbstractLibrary {
 	
 	// extension modules
 	
-    private static final String[][] REGISTER_EXT_MODULES    = { { MODULE_SBTX, PATH_SBTX }, { MODULE_EXT_BRIDGE, PATH_EXT_BRIDGE } };
-    private static final String[][] REGISTER_EXT_MODULES_AMD= { { MODULE_SBTX, PATH_SBTX }, { MODULE_EXT_BRIDGE_AMD, PATH_EXT_BRIDGE_AMD } };
+    private static final String[][] REGISTER_EXT_MODULES    = { { MODULE_SBTX, PATH_SBTX }, { MODULE_SBTX_WIDGET, PATH_SBTX_DOJO } };
+    private static final String[][] REGISTER_EXT_MODULES_AMD= { { MODULE_SBTX, PATH_SBTX }, { MODULE_SBTX_WIDGET_AMD, null } };
 
 	static private final String		DEFINE_MODULE			= MODULE_CONFIG;
 
@@ -70,6 +71,7 @@ public class DojoLibrary extends AbstractLibrary {
 		// TODO remove hardcoded strings
 		super(NAME, "1.4", ""); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		minimumAmdVersion = normalizeVersion("1.7.2");
+		minimumDojo2Version = normalizeVersion("1.8.0");
 	}
 
 	/**
@@ -122,18 +124,24 @@ public class DojoLibrary extends AbstractLibrary {
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.ibm.sbt.jslibrary.servlet.AbstractLibrary#getRegisterExtModules()
+	 * @see com.ibm.sbt.jslibrary.servlet.AbstractLibrary#getRegisterExtModules(LibraryRequest)
 	 */
 	@Override
-	protected String[][] getRegisterExtModules() {
+	protected String[][] getRegisterExtModules(LibraryRequest request) {
 	    return REGISTER_EXT_MODULES;
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.ibm.sbt.jslibrary.servlet.AbstractLibrary#getRegisterExtModulesAmd()
+	 * @see com.ibm.sbt.jslibrary.servlet.AbstractLibrary#getRegisterExtModulesAmd(LibraryRequest)
 	 */
 	@Override
-	protected String[][] getRegisterExtModulesAmd() {
+	protected String[][] getRegisterExtModulesAmd(LibraryRequest request) {
+	    if (isExceedsVersion(request.getJsVersion(), minimumDojo2Version)) {
+	        REGISTER_EXT_MODULES_AMD[1][1] = PATH_SBTX_DOJO2;
+	    } else {
+            REGISTER_EXT_MODULES_AMD[1][1] = PATH_SBTX_DOJO;
+	    }
+	    
 	    return REGISTER_EXT_MODULES_AMD;
 	}
 

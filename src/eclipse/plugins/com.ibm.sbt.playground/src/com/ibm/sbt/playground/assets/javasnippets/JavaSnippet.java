@@ -15,8 +15,6 @@
  */
 package com.ibm.sbt.playground.assets.javasnippets;
 
-import java.util.Properties;
-
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.playground.assets.Asset;
 
@@ -27,23 +25,17 @@ import com.ibm.sbt.playground.assets.Asset;
  */
 public class JavaSnippet extends Asset {
 
-	private String theme;
 	private String jsp;
 	private String jspPath;
 	
 	public JavaSnippet() {
 	}
-	
-	@Override
-	public void init(Properties props) {
-		super.init(props);
-	}
 
     public String getTheme() {
-        return theme;
+		return getProperty("theme");
     }
     public void setTheme(String theme) {
-        this.theme = theme;
+		setProperty("theme",theme);
     }
 	
 	public String getJsp() {

@@ -3,6 +3,8 @@ package nsf.playground.playground;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
+import java.io.StringReader;
+import java.util.Properties;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +17,7 @@ import com.ibm.commons.runtime.RuntimeConstants;
 import com.ibm.commons.runtime.util.ParameterProcessor;
 import com.ibm.commons.util.PathUtil;
 import com.ibm.commons.util.StringUtil;
+import com.ibm.commons.util.io.ReaderInputStream;
 import com.ibm.commons.util.io.json.JsonJavaFactory;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.commons.util.io.json.JsonParser;
@@ -35,11 +38,13 @@ public class PreviewServlet extends FacesContextServlet {
 		String html;
 		String js;
 		String css;
-        public RequestParams(String sOptions, String html, String js, String css) {
+		String properties;
+        public RequestParams(String sOptions, String html, String js, String css, String properties) {
         	this.sOptions = sOptions;
         	this.html = html;
         	this.js = js;
         	this.css = css;
+        	this.properties = properties;
         }
 	}
 	
@@ -61,7 +66,8 @@ public class PreviewServlet extends FacesContextServlet {
 		String html = req.getParameter("fm_html");
 		String js = req.getParameter("fm_js");
         String css = req.getParameter("fm_css");
-        RequestParams requestParams = new RequestParams(sOptions,html,js,css);
+        String properties = req.getParameter("fm_properties");
+        RequestParams requestParams = new RequestParams(sOptions,html,js,css,properties);
         req.getSession().setAttribute(LAST_REQUEST, requestParams);
         execRequest(req, resp, requestParams);
 	}
@@ -76,6 +82,13 @@ public class PreviewServlet extends FacesContextServlet {
 		} catch(Exception ex) {}
 		boolean debug = options.getBoolean("debug");
 		
+		Properties properties = new Properties();
+		try {
+			if(StringUtil.isNotEmpty(requestParams.properties)) {
+				properties.load(new ReaderInputStream(new StringReader(requestParams.properties)));
+			}
+		} catch(Exception ex) {}
+
 		DataAccess dataAccess = DataAccess.get();
 		
 		String envName = options.getString("env");
@@ -95,10 +108,8 @@ public class PreviewServlet extends FacesContextServlet {
 //		}
 		PrintWriter pw = resp.getWriter();
 		
-		String theme = "oneui";
-		//env.
-		
-		String bodyTheme = "claro";
+		String theme = properties.getProperty("theme");
+		String bodyTheme = null;
 		
 		pw.println("<!DOCTYPE html>");
 		pw.println("<html lang=\"en\">");
@@ -110,12 +121,12 @@ public class PreviewServlet extends FacesContextServlet {
 		
 		if(StringUtil.equals(theme, "bootstrap")) {
 			pw.println("  <style type=\"text/css\">");
-			pw.println("    @import \""+dojoPath+"dijit/themes/claro/claro.css\";");
-			pw.println("    @import \""+dojoPath+"dojo/resources/dojo.css\";");
+//			pw.println("    @import \""+dojoPath+"dijit/themes/claro/claro.css\";");
+//			pw.println("    @import \""+dojoPath+"dojo/resources/dojo.css\";");
 			pw.println("    @import \"/xsp/.ibmxspres/.sbtsdk/bootstrap/css/bootstrap.min.css\";");
 			pw.println("  </style>");
-			bodyTheme = "claro";
-		} else if(StringUtil.equals(theme, "oneui210")) {
+//			bodyTheme = "claro";
+		} else if(StringUtil.equals(theme, "oneui21")) {
 			pw.println("  <style type=\"text/css\">");
 			pw.println("    @import \""+dojoPath+"dijit/themes/claro/claro.css\";");
 			pw.println("    @import \""+dojoPath+"dojo/resources/dojo.css\";");
@@ -138,7 +149,7 @@ public class PreviewServlet extends FacesContextServlet {
 			pw.println("    @import \"/xsp/.ibmxspres/.oneuiv302/oneui/dojoTheme/lotusui30dojo/lotusui30dojo.css\";");
 			pw.println("  </style>");
 			bodyTheme = "lotusui30_body lotusui30_fonts lotusui30 lotusui30dojo";
-		} else {
+		} else if(StringUtil.equals(theme, "claro")) {
 			pw.println("  <style type=\"text/css\">");
 			pw.println("    @import \""+dojoPath+"dijit/themes/claro/claro.css\";");
 			pw.println("    @import \""+dojoPath+"dojo/resources/dojo.css\";");
@@ -148,7 +159,9 @@ public class PreviewServlet extends FacesContextServlet {
 		pw.println("  <script>");
 		pw.println("    dojoConfig= {");
 		pw.println("      parseOnLoad: true,");
-		pw.println("      isDebug: true");
+		if(debug) {
+			pw.println("      isDebug: true");
+		}
 		pw.println("    };");
 		pw.println("  </script>");		
 
@@ -200,7 +213,12 @@ public class PreviewServlet extends FacesContextServlet {
 		}
 		
 		pw.println("</head>");
-		pw.println("<body class=\""+bodyTheme+"\">");
+		pw.print("<body");
+		if(StringUtil.isNotEmpty(bodyTheme)) {
+			pw.print(" class=\"");
+			pw.print(bodyTheme);
+		}
+		pw.println("\">");
 		pw.println(html);
 		if(StringUtil.isNotEmpty(js)) {
 			String s =   "<script>\n"

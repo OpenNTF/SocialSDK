@@ -26,6 +26,9 @@ function createSnippet() {
 	if(pageGlobal.cssEditor) {
 		pageGlobal.cssEditor.setValue("");
 	}
+	if(pageGlobal.propertiesEditor) {
+		pageGlobal.propertiesEditor.setValue("");
+	}
 	if(pageGlobal.javaEditor) {
 		pageGlobal.javaEditor.setValue("");
 	}
@@ -53,6 +56,7 @@ function loadSnippet(id) {
 			if(pageGlobal.htmlEditor) pageGlobal.htmlEditor.setValue(r.html);
 			if(pageGlobal.jsEditor) pageGlobal.jsEditor.setValue(r.js);
 			if(pageGlobal.cssEditor) pageGlobal.cssEditor.setValue(r.css);
+			if(pageGlobal.propertiesEditor) pageGlobal.propertiesEditor.setValue(r.properties);
 			if(r.html.length>5) {
 				selectTab(pageGlobal.tabHtml);
 			} else if(r.js.length>5) {
@@ -97,6 +101,7 @@ function runCode(debug) {
 	var html = pageGlobal.htmlEditor.getValue();
 	var js = pageGlobal.jsEditor.getValue();
 	var css = pageGlobal.cssEditor.getValue();
+	var properties = pageGlobal.propertiesEditor.getValue();
 	
 	// Get the current environment
 	var env = dojo.byId(pageGlobal.cbEnv).value;
@@ -111,6 +116,7 @@ function runCode(debug) {
 	form["fm_html"].value = html;
 	form["fm_js"].value = js;
 	form["fm_css"].value = css;
+	form["fm_properties"].value = properties;
 	form["fm_options"].value = dojo.toJson(options);
 	form.submit();
 }
@@ -123,10 +129,12 @@ function showCode() {
 	var html = pageGlobal.htmlEditor.getValue();
 	var js = pageGlobal.jsEditor.getValue();
 	var css = pageGlobal.cssEditor.getValue();
+	var properties = pageGlobal.propertiesEditor.getValue();
 	var form = dojo.byId("PreviewForm");
 	form["fm_html"].value = html;
 	form["fm_js"].value = js;
 	form["fm_css"].value = css;
+	form["fm_properties"].value = properties;
 	
 	// And update the frame by executing a post to a servlet
 	dojo.xhrPost({

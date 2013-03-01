@@ -108,6 +108,9 @@ define(["has", "jquery"],function(has, $) {
 
             var parts = name.split("."), p = parts.pop(), obj = getProp(parts, true, context);
             return obj && p ? (obj[p] = value) : undefined; // Object
+        },
+        trim: function(str) {
+            return $.trim(str);
         }
 	};
 });

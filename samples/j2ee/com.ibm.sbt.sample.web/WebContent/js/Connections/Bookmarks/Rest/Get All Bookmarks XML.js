@@ -1,4 +1,4 @@
-require(["sbt/dom"], function(dom) {
+require(["sbt/dom", "sbt/config"], function(dom) {
     var ep = sbt.Endpoints['connections'];
     ep.xhrGet({
         serviceUrl : "/dogear/atom",

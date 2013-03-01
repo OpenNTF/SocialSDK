@@ -30,7 +30,7 @@ define(['jquery', 'sbt/_bridge/declare', 'sbt/util' ], function($, declare, util
 		    var settings = {
 		        type: method,
 		        data: args.content,
-		        dataType: args.handleAs
+		        dataType: args.handleAs || "text"
 		    };
 		    
 		    if (!jQ_v_gte_18) {

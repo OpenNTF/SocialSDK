@@ -278,10 +278,26 @@ executeService(p,'#{id:expDetails}','#{id:expResults}');]]></xp:this.onclick>
 											</xp:div>
 											<xp:div id="expResults" styleClass="explorer_results">
 												<table>
+													<tr class="respProgress" style="display:none">
+														<td class="resCol1" colspan="2">
+															<xp:image url="/progressIndicator.gif" id="image1">
+															</xp:image>
+														</td>
+													</tr>
+													<tr class="respTimePanel" style="display:none">
+														<td class="resCol1">
+															<span class="prelabel">
+																Request Time:
+														</span>
+														</td>
+														<td class="resCol2">
+															<span class="respTime"></span>s															
+														</td>
+													</tr>
 													<tr class="respUrlPanel" style="display:none">
 														<td class="resCol1">
 															<span class="prelabel">
-																URL
+																URL:
 														</span>
 														</td>
 														<td class="resCol2">
@@ -291,7 +307,7 @@ executeService(p,'#{id:expDetails}','#{id:expResults}');]]></xp:this.onclick>
 													<tr class="respCodePanel" style="display:none">
 														<td class="resCol1">
 															<span class="prelabel">
-																Status Code
+																Status Code:
 												</span>
 														</td>
 														<td class="resCol2">
@@ -301,7 +317,7 @@ executeService(p,'#{id:expDetails}','#{id:expResults}');]]></xp:this.onclick>
 													<tr class="respBodyPanel" style="display:none">
 														<td class="resCol1">
 															<span class="prelabel">
-																Response
+																Response:
 													</span>
 														</td>
 														<td class="resCol2">
@@ -310,12 +326,12 @@ executeService(p,'#{id:expDetails}','#{id:expResults}');]]></xp:this.onclick>
 													</tr>
 													<tr class="respHeadersPanel" style="display:none">
 														<td class="resCol1">
-															<span class="prelabel" style="display: none">
-																Headers
+															<span class="prelabel">
+																Headers:
 													</span>
 														</td>
 														<td class="resCol2">
-															<pre class="respHeader" style="display: none"></pre>
+															<pre class="respHeaders"></pre>
 														</td>
 													</tr>
 												</table>

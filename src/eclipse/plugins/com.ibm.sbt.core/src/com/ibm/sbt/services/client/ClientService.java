@@ -560,7 +560,7 @@ public abstract class ClientService {
 				if (encoding == null) {
 					encoding = "UTF-8";
 				}
-				Reader reader = new InputStreamReader(getEntityContent(request, response, entity), encoding);
+				Reader reader = createReader(request, response, entity, encoding);
 				try {
 					return JsonParser.fromJson(factory, reader);
 				} catch (JsonException ex) {
@@ -572,6 +572,9 @@ public abstract class ClientService {
 				}
 			}
 			return null;
+		}
+		protected Reader createReader(HttpRequestBase request, HttpResponse response, HttpEntity entity, String encoding) throws IOException {
+			return new InputStreamReader(getEntityContent(request, response, entity), encoding);
 		}
 	}
 

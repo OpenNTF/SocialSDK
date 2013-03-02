@@ -788,7 +788,7 @@ public abstract class ClientService {
 		}
 	}
 
-	public Object execRequest(HttpRequestBase httpRequestBase, Args args, Object content)
+	protected Object execRequest(HttpRequestBase httpRequestBase, Args args, Object content)
 			throws ClientServicesException {
 
 		if (Profiler.isEnabled()) {

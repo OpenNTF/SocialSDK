@@ -112,7 +112,7 @@ var Endpoint = declare("sbt.Endpoint", null, {
 	 * @property isAuthenticated
 	 * @type String
 	 */
-	isAuthenticated: "false",
+	isAuthenticated: false,
 	
 	/**
 	 * The error code that is returned from the endpoint on authentication failure.
@@ -224,7 +224,7 @@ var Endpoint = declare("sbt.Endpoint", null, {
 							};
 							if(self.authenticator.authenticate(options)) {
 								return;
-								}
+							}
 						}
 					}
 				} 
@@ -271,65 +271,78 @@ var Endpoint = declare("sbt.Endpoint", null, {
 		this.xhr("DELETE", args);
 	},
 	
-	authenticate: function(forceAuthentication ,callbacks){
-		if(typeof callbacks != "object"){
-			callbacks = {};
-		}
+	/**
+	 * @method authenticate
+	 * @param args
+	 */
+	authenticate : function(args) {
 		options = {
-				dialogLoginPage:this.loginDialogPage,
-				loginPage:this.loginPage,
-				transport:this.transport, 
-				proxy: this.proxy,
-				proxyPath: this.proxyPath,
-				loginUi: this.loginUi,
-				callback: callbacks.callback
+			dialogLoginPage : this.loginDialogPage,
+			loginPage : this.loginPage,
+			transport : this.transport,
+			proxy : this.proxy,
+			proxyPath : this.proxyPath,
+			loginUi : this.loginUi
 		};
-//		var autoAuth =  sbt.Properties["autoAuthenticate"] || this.autoAuthenticate || "true";
-		if(forceAuthentication == true){
-			this.logout();
-//			if(autoAuth == "true"){
-				if(this.authenticator.authenticate(options)) {
-					return;
+		if (args) {
+			if (args.success) {
+				options.callback = args.success;
+			}
+			if (args.forceAuthentication == true) {
+				if (this.isAuthenticated == true) {
+					this.logout({
+						success: function(){
+							alert("l cb");
+							this.openAuthenticator(options);
+						}
+					});
+				}else{
+					this.openAuthenticator(options);
 				}
-//			}else{
-//				callbacks.error();
-//			}
-		}else{
-			if(this.isAuthenticated == false){
-//				if(autoAuth == "true"){
-					if(this.authenticator.authenticate(options)) {
-						return;
+			} else {
+				if (this.isAuthenticated == false) {
+					this.openAuthenticator(options);
+				} else {
+					if (args.success) {
+						args.success();
 					}
-//				}else{
-//					callbacks.error();
-//				}
-			}else{
-				callbacks.callback();
+				}
 			}
 		}
 	},
 	
-	logout: function(callbacks){
+
+	logout : function(args) {
 		var proxy = this.proxy.proxyUrl;
-		var actionURL = proxy.substring(0,proxy.lastIndexOf("/"))+"/authHandler/"+this.proxyPath+"/logout";
-		this.transport.xhr('POST', {
-	        handleAs: "json",
-			url: actionURL,
-			handle: function(response) {
-				if(callbacks){
-					if(callbacks.callback){
-			    		if(response.logout){
-			    			callbacks.callback(response.logout);
-						}else{
-							console.log("Logout operation failed");
-						}
-			    	}
+		var actionURL = proxy.substring(0, proxy
+			.lastIndexOf("/"))
+			+ "/authHandler/"
+			+ this.proxyPath
+			+ "/logout";
+		this.transport.xhr('POST',{
+			handleAs : "json",
+			url : actionURL,
+			handle : function(response) {
+				if (args) {
+					if (args.success && response.logout == "success") {
+						args.success(response.logout);
+					} else if (args.failure && response.logout == "failure") {
+						args.failure(response.logout);
+					}
 				}
 			},
-			error: function(error){
+			error : function(error) {
+				//TODO : Handle possible error here
 				return error;
 			}
-	    }, true);
+		}, true);
+	},
+	
+	openAuthenticator : function(options){
+		alert("oa");
+		if (this.authenticator.authenticate(options)) {
+			return;
+		}
 	}
 	
 });

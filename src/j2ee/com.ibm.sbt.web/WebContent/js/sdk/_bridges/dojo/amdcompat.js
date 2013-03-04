@@ -102,13 +102,20 @@ window._sbt_bridge_compat = true;
                         dojo.mixin(arg,dojo.require(bundles[mi]));
                     }
 				} else if (depName.substring(0, exclamationIndex) == "sbt.text") {
-                    var fileName = depName.substring(exclamationIndex+1);
-                    var moduleIndex = fileName.indexOf(".");
-                    var extnIndex = fileName.lastIndexOf(".");
-                    var moduleId = fileName.substring(0, moduleIndex);
-                    var url = fileName.substring(moduleIndex+1, extnIndex).replace(/\./g,'/');
-                    url += fileName.substring(extnIndex);
-                    arg = dojo.cache(moduleId, url);
+                    var fileName = deps[i].substring(exclamationIndex+1);
+                    if (fileName.charAt(0) == '.') {
+                        var loc = dojo.doc.location;
+                        var index = loc.pathname.indexOf('/', 1);
+                        var url = loc.protocol + "//" + loc.host + loc.pathname.substring(0, index);
+                        url += fileName.substring(1);
+                        arg = dojo.cache(new dojo._Url(url));
+                    } else {
+                        var moduleIndex = fileName.indexOf("/");
+                        var extnIndex = fileName.lastIndexOf(".");
+                        var moduleId = fileName.substring(0, moduleIndex);
+                        var url = fileName.substring(moduleIndex+1);
+                        arg = dojo.cache(moduleId, url);
+                    }
                 } else {
 					arg = null;
 				}

@@ -292,7 +292,6 @@ var Endpoint = declare("sbt.Endpoint", null, {
 				if (this.isAuthenticated == true) {
 					this.logout({
 						success: function(){
-							alert("l cb");
 							this.openAuthenticator(options);
 						}
 					});
@@ -339,7 +338,6 @@ var Endpoint = declare("sbt.Endpoint", null, {
 	},
 	
 	openAuthenticator : function(options){
-		alert("oa");
 		if (this.authenticator.authenticate(options)) {
 			return;
 		}

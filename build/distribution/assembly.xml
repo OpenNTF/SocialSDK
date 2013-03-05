@@ -29,6 +29,7 @@
       <includes>
         <include>com.ibm.sbt.sdk:sbt</include>
         <include>com.ibm.sbt.sdk:sbt.dojo180</include>
+        <include>com.ibm.sbt.sdk:sbt.bootstrap211</include>
 	  </includes>
       <binaries>
         <outputDirectory>sbtsdk/redist/war</outputDirectory>

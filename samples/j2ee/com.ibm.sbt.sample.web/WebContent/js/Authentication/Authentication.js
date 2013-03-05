@@ -64,8 +64,11 @@ require(["sbt/dom", "sbt/Endpoint", "sbt/config"], function(dom, Endpoint, confi
 			dom.setText("td2"+endpointName, "Logged in");
 			logoutButton.onclick= function (){
 				Endpoint.find(this.name).logout({
-					callback: function(logoutResult){
-						document.location.reload()
+					success: function(logoutResult){
+						document.location.reload();
+					},
+					failure: function(logoutResult){
+						alert("failed");
 					}
 				}); 
 			};
@@ -73,10 +76,7 @@ require(["sbt/dom", "sbt/Endpoint", "sbt/config"], function(dom, Endpoint, confi
 			logoutButton.style.display = "none";
 			dom.setText("td2"+endpointName, "Not Logged in");
 			loginButton.onclick= function (){
-				Endpoint.find(this.name).authenticate(false, {
-					callback: function(loginResult){
-					}
-				}); 
+				Endpoint.find(this.name).authenticate(); 
 			};
 		}
 	}

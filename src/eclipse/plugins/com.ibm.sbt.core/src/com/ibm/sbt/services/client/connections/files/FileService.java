@@ -18,6 +18,7 @@ package com.ibm.sbt.services.client.connections.files;
 
 import java.io.File;
 import java.io.StringReader;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -450,8 +451,8 @@ public class FileService extends BaseService {
 	 * @throws FileServiceException
 	 */
 	@SuppressWarnings("unchecked")
-	public List<FileEntry> addFilesToFolder(String collectionId, FileEntry fileEntry,
-			Map<String, String> params) throws FileServiceException {
+	public List<FileEntry> addFilesToFolder(String collectionId, List<FileEntry> fileEntry,
+			Map<String, String> params) throws FileServiceException, UnsupportedEncodingException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "addFilesToFolder");
 		}
@@ -462,8 +463,10 @@ public class FileService extends BaseService {
 		if (fileEntry == null) {
 			throw new IllegalArgumentException(Messages.InvalidArgument_1);
 		}
-		if (StringUtil.isEmpty(fileEntry.getFileId())) {
-			throw new IllegalArgumentException(Messages.InvalidArgument_2);
+		for (FileEntry entry : fileEntry) {
+			if (StringUtil.isEmpty(entry.getFileId())) {
+				throw new IllegalArgumentException(Messages.InvalidArgument_2);
+			}
 		}
 		SubFilters subFilters = new SubFilters();
 		subFilters.setCollectionId(collectionId);
@@ -471,10 +474,12 @@ public class FileService extends BaseService {
 		if (null == params) {
 			params = new HashMap<String, String>();
 		}
-		params.put(FileRequestParams.ITEMID, fileEntry.getFileId());
 		String requestUri = constructUrl(BaseUrl.FILES.getBaseUrl(), accessType, null, null, null,
 				subFilters, resultType);
-		Document result = executePost(requestUri, params, null, null);
+		Map<String, String> headers = new HashMap<String, String>();
+		headers.put(Headers.ContentType, Headers.ATOM);
+		Object payload = constructPayloadForMultipleEntries(fileEntry, FileRequestParams.ITEMID);
+		Document result = executePost(requestUri, params, headers, payload);
 		if (result == null) {
 			return (List<FileEntry>) result;
 		}
@@ -1343,7 +1348,9 @@ public class FileService extends BaseService {
 			logger.entering(sourceClass, "constructPayload");
 		}
 		if (payloadMap == null || payloadMap.isEmpty()) {
-			throw new IllegalArgumentException(Messages.PayloadInfo_1);
+			logger.log(Level.ALL, Messages.PayloadInfo_1);
+			return null;
+			// throw new IllegalArgumentException(Messages.PayloadInfo_1);
 		}
 		StringBuilder requestBody = new StringBuilder("<entry xmlns=\"http://www.w3.org/2005/Atom\">");
 		requestBody
@@ -1373,6 +1380,21 @@ public class FileService extends BaseService {
 			entries.remove();
 		}
 		requestBody.append("</entry>");
+		return convertToXML(requestBody.toString());
+	}
+
+	public Document constructPayloadForMultipleEntries(List<FileEntry> fileEntries, String multipleEntryId) {
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.entering(sourceClass, "constructPayload");
+		}
+		StringBuilder requestBody = new StringBuilder(
+				"<?xml version=\"1.0\" encoding=\"UTF-8\"?><feed xmlns=\"http://www.w3.org/2005/Atom\">");
+		for (FileEntry entry : fileEntries) {
+			requestBody.append("<entry><" + multipleEntryId + " xmlns=\"urn:ibm.com/td\">"
+					+ entry.getFileId() + "</" + multipleEntryId + "></entry>");
+		}
+		requestBody.append("</feed>");
+		System.err.println("requestBody " + requestBody.toString());
 		return convertToXML(requestBody.toString());
 	}
 

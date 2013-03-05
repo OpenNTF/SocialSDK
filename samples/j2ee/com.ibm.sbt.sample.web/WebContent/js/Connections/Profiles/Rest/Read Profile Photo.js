@@ -9,12 +9,12 @@ require([ "sbt/connections/core", "sbt/dom", "sbt/xml", "sbt/xpath", "sbt/Endpoi
         load : function(response) {
             var doc = xml.parse(response);
             var photo = xpath.selectText(doc, "/a:feed/a:entry/a:content/h:div/h:span/h:div/h:img[@class='photo']/@src", conn.namespaces);
-            dojo.create("img", {
+            dom.create("img", {
                 src : photo
-            }, dojo.byId("content"));
+            }, dom.byId("content"));
         },
         error : function(error) {
-            dojo.byId("content").appendChild(dojo.doc.createTextNode(error));
+            dom.byId("content").appendChild(document.createTextNode(error));
         }
     });
 });

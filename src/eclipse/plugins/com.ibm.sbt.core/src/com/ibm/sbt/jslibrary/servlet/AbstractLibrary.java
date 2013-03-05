@@ -26,10 +26,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
-
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.util.PathUtil;
 import com.ibm.commons.util.StringUtil;
@@ -60,70 +58,70 @@ abstract public class AbstractLibrary {
 	private final String			minimumVersion;
 	private final String			maximumVersion;
 
-	public static boolean			minify						= false;
+	public static boolean			minify							= false;
 
-	public static final String		REFERER						= "Referer";						//$NON-NLS-1$
+	public static final String		REFERER							= "Referer";						//$NON-NLS-1$
 
-	public static final String		APPLICATION_JAVASCRIPT		= "application/javascript";		//$NON-NLS-1$
-	public static final String		UTF8						= "utf-8";							//$NON-NLS-1$
+	public static final String		APPLICATION_JAVASCRIPT			= "application/javascript";		//$NON-NLS-1$
+	public static final String		UTF8							= "utf-8";							//$NON-NLS-1$
 
-	public static final String		PROP_TRANSPORT				= "transport";
-	public static final String		PROP_INVALID				= "invalid";
-	public static final String		PROP_AUTHENTICATOR			= "authenticator";
-	public static final String		PROP_PROXY_PATH				= "proxyPath";
-	public static final String		PROP_PROXY					= "proxy";
-	public static final String		PROP_BASE_URL				= "baseUrl";
-	public static final String		PROP_TOOLKIT_URL			= "sbtUrl";
-	public static final String		PROP_SERVICE_URL			= "serviceUrl";
-	public static final String		PROP_AUTH_TYPE				= "authType";
-	public static final String		PROP_LOGIN_PAGE				= "loginPage";
-	public static final String		PROP_LOGIN_DIALOG_PAGE		= "loginDialogPage";
-	public static final String		PROP_LOGIN_UI				= "loginUi";
-	public static final String		PROP_AUTO_AUTHENTICATE       = "autoAuthenticate";
-	public static final String		IS_AUTHENTICATED			= "isAuthenticated";
-	public static final String		PROP_AUTHENTICATION_ERROR_CODE		= "authenticationErrorCode";
+	public static final String		PROP_TRANSPORT					= "transport";
+	public static final String		PROP_INVALID					= "invalid";
+	public static final String		PROP_AUTHENTICATOR				= "authenticator";
+	public static final String		PROP_PROXY_PATH					= "proxyPath";
+	public static final String		PROP_PROXY						= "proxy";
+	public static final String		PROP_BASE_URL					= "baseUrl";
+	public static final String		PROP_TOOLKIT_URL				= "sbtUrl";
+	public static final String		PROP_SERVICE_URL				= "serviceUrl";
+	public static final String		PROP_AUTH_TYPE					= "authType";
+	public static final String		PROP_LOGIN_PAGE					= "loginPage";
+	public static final String		PROP_LOGIN_DIALOG_PAGE			= "loginDialogPage";
+	public static final String		PROP_LOGIN_UI					= "loginUi";
+	public static final String		PROP_AUTO_AUTHENTICATE			= "autoAuthenticate";
+	public static final String		IS_AUTHENTICATED				= "isAuthenticated";
+	public static final String		PROP_AUTHENTICATION_ERROR_CODE	= "authenticationErrorCode";
 
-	public static final String		PROP_MODULE_PREFIX			= "_module";
-	public static final String		PROP_MODULE_AUTHENTICATOR	= "_moduleAuthenticator";
-	public static final String		PROP_MODULE_TRANSPORT		= "_moduleTransport";
+	public static final String		PROP_MODULE_PREFIX				= "_module";
+	public static final String		PROP_MODULE_AUTHENTICATOR		= "_moduleAuthenticator";
+	public static final String		PROP_MODULE_TRANSPORT			= "_moduleTransport";
 
-	public static final String		REF_SBT_TRANSPORT			= "sbtTransport";
-	public static final String		REF_ERR_TRANSPORT			= "errTransport";
-	public static final String		REF_SBT_PROXY				= "sbtProxy";
-	public static final String		REF_SBT_AUTHENTICATOR		= "sbtAuthenticator";
+	public static final String		REF_SBT_TRANSPORT				= "sbtTransport";
+	public static final String		REF_ERR_TRANSPORT				= "errTransport";
+	public static final String		REF_SBT_PROXY					= "sbtProxy";
+	public static final String		REF_SBT_AUTHENTICATOR			= "sbtAuthenticator";
 
-	public static final String		MODULE_SBT					= "sbt";
-	public static final String		MODULE_SBTX					= "sbtx";
-	public static final String		MODULE_DELCARE				= "sbt/_bridge/declare";
-	public static final String		MODULE_IFRAMETRANSPORT		= "sbt/_bridge/IFrameTransport";
-	public static final String		MODULE_TRANSPORT			= "sbt/_bridge/Transport";
-	public static final String		MODULE_REQUESTTRANSPORT		= "sbt/_bridge/RequestTransport";
-	public static final String		MODULE_ERROR_TRANSPORT		= "sbt/ErrorTransport";
-	public static final String		MODULE_GADGET_TRANSPORT		= "sbt/GadgetTransport";
-	public static final String		MODULE_CACHE				= "sbt/Cache";
-	public static final String		MODULE_CONFIG				= "sbt/config";
-	public static final String		MODULE_DOM					= "sbt/dom";
-	public static final String		MODULE_ENDPOINT				= "sbt/Endpoint";
-	public static final String		MODULE_GADGET				= "sbt/Gadget";
-	public static final String		MODULE_IWIDGET				= "sbt/IWidget";
-	public static final String		MODULE_JSONPATH				= "sbt/jsonpath";
-	public static final String		MODULE_LANG					= "sbt/lang";
-	public static final String		MODULE_PORTLET				= "sbt/Portlet";
-	public static final String		MODULE_PROXY				= "sbt/Proxy";
-	public static final String		MODULE_XML					= "sbt/xml";
-	public static final String		MODULE_XPATH				= "sbt/xpath";
-	public static final String		MODULE_XSL					= "sbt/xsl";
-	public static final String		MODULE_BASIC				= "sbt/authenticator/Basic";
-	public static final String		MODULE_OAUTH				= "sbt/authenticator/OAuth";
+	public static final String		MODULE_SBT						= "sbt";
+	public static final String		MODULE_SBTX						= "sbtx";
+	public static final String		MODULE_DECLARE					= "sbt/_bridge/declare";
+	public static final String		MODULE_IFRAMETRANSPORT			= "sbt/_bridge/IFrameTransport";
+	public static final String		MODULE_TRANSPORT				= "sbt/_bridge/Transport";
+	public static final String		MODULE_REQUESTTRANSPORT			= "sbt/_bridge/RequestTransport";
+	public static final String		MODULE_ERROR_TRANSPORT			= "sbt/ErrorTransport";
+	public static final String		MODULE_GADGET_TRANSPORT			= "sbt/GadgetTransport";
+	public static final String		MODULE_CACHE					= "sbt/Cache";
+	public static final String		MODULE_CONFIG					= "sbt/config";
+	public static final String		MODULE_DOM						= "sbt/dom";
+	public static final String		MODULE_ENDPOINT					= "sbt/Endpoint";
+	public static final String		MODULE_GADGET					= "sbt/Gadget";
+	public static final String		MODULE_IWIDGET					= "sbt/IWidget";
+	public static final String		MODULE_JSONPATH					= "sbt/jsonpath";
+	public static final String		MODULE_LANG						= "sbt/lang";
+	public static final String		MODULE_PORTLET					= "sbt/Portlet";
+	public static final String		MODULE_PROXY					= "sbt/Proxy";
+	public static final String		MODULE_XML						= "sbt/xml";
+	public static final String		MODULE_XPATH					= "sbt/xpath";
+	public static final String		MODULE_XSL						= "sbt/xsl";
+	public static final String		MODULE_BASIC					= "sbt/authenticator/Basic";
+	public static final String		MODULE_OAUTH					= "sbt/authenticator/OAuth";
 
-	public static final String		PATH_SBT					= "sbt";							//$NON-NLS-1$
-	public static final String		PATH_SBTX					= "sbtx";							//$NON-NLS-1$
+	public static final String		PATH_SBT						= "sbt";							//$NON-NLS-1$
+	public static final String		PATH_SBTX						= "sbtx";							//$NON-NLS-1$
 
-	private static final String		PADDING						= "    ";
-	private static final String[][]	REGISTER_EXT_MODULES		= { { MODULE_SBTX, PATH_SBTX } };
+	private static final String		PADDING							= "    ";
+	private static final String[][]	REGISTER_EXT_MODULES			= { { MODULE_SBTX, PATH_SBTX } };
 
-	static final String				sourceClass					= AbstractLibrary.class.getName();
-	static final Logger				logger						= Logger.getLogger(sourceClass);
+	static final String				sourceClass						= AbstractLibrary.class.getName();
+	static final Logger				logger							= Logger.getLogger(sourceClass);
 
 	/**
 	 * @param libraryName
@@ -356,8 +354,8 @@ abstract public class AbstractLibrary {
 			if (endpoint.getAutoAuthenticate() != null) {
 				jsonEndpoint.putJsonProperty(PROP_AUTO_AUTHENTICATE, endpoint.getAutoAuthenticate());
 			}
-			jsonEndpoint.putJsonProperty(PROP_AUTHENTICATION_ERROR_CODE, endpoint.getAuthenticationErrorCode());
-		
+			jsonEndpoint.putJsonProperty(PROP_AUTHENTICATION_ERROR_CODE,
+					endpoint.getAuthenticationErrorCode());
 
 		} else {
 			// set the endpoint url

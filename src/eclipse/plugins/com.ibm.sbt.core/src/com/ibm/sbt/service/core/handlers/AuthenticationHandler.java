@@ -34,6 +34,7 @@ import com.ibm.commons.util.io.json.JsonJavaFactory;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.commons.util.io.json.JsonObject;
 import com.ibm.commons.util.io.json.JsonParser;
+import com.ibm.sbt.security.authentication.oauth.OAuthException;
 import com.ibm.sbt.security.authentication.password.PasswordException;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.email.MimeEmail;
@@ -42,6 +43,8 @@ import com.ibm.sbt.services.client.email.MimeEmailFactory;
 import com.ibm.sbt.services.endpoints.BasicEndpoint;
 import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
+import com.ibm.sbt.services.endpoints.OAuth2Endpoint;
+import com.ibm.sbt.services.endpoints.OAuthEndpoint;
 
 
 public class AuthenticationHandler extends AbstractServiceHandler {
@@ -54,40 +57,90 @@ public class AuthenticationHandler extends AbstractServiceHandler {
 	public void service(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
 		String pathInfo = request.getPathInfo();
     	Endpoint endpoint = EndpointFactory.getEndpoint(getEndpointName(pathInfo));  //remove hardcoded name ..get second token from path info
-    	BasicEndpoint basicendpoint = null;
+    	PrintWriter writer = new PrintWriter(new OutputStreamWriter(response.getOutputStream(), "utf-8"));
     	if(endpoint instanceof BasicEndpoint ){
-    		basicendpoint = (BasicEndpoint)endpoint;
-    	}
-        PrintWriter writer = new PrintWriter(new OutputStreamWriter(response.getOutputStream(), "utf-8"));
-        try {
         	if(getAuthAction(pathInfo).equals(LOG_OUT)){
-        		basicendpoint.logout();
-        		JsonObject logoutResponse = new JsonJavaObject();
-        		if(basicendpoint.isAuthenticated())
-        			logoutResponse.putJsonProperty("logout", "failure");
-        		else{
-        			logoutResponse.putJsonProperty("logout", "success");
-        		}
-        		writer.write(logoutResponse.toString());
+        		basicLogoutAction(endpoint, writer);
         	}
-//        	else if(getAuthAction(pathInfo).equals(IS_AUTHENTICATED)){
-//        		JsonObject jsonResponse = new JsonJavaObject();
-//        		try {
-//        			jsonResponse.putJsonProperty("isAuthenticated", basicendpoint.isAuthenticated());
-//        		} catch (ClientServicesException e) {
-//        			e.printStackTrace();
-//        		}
-//                writer.write(jsonResponse.toString());
-//        	}
-            response.setStatus(HttpServletResponse.SC_OK);
-            response.setContentType(APPLICATION_JSON);
-        } catch (Exception e) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, e.getMessage());
-            return;
-        } finally {
-            writer.flush();
-        }
+    	}else if(endpoint instanceof OAuthEndpoint ){
+    		if(getAuthAction(pathInfo).equals(LOG_OUT)){
+        		oAuthLogoutAction(endpoint, writer);
+        	}
+    	}else if(endpoint instanceof OAuth2Endpoint ){
+    		if(getAuthAction(pathInfo).equals(LOG_OUT)){
+        		oAuth2LogoutAction(endpoint, writer);
+        	}
+    	}
+        response.setStatus(HttpServletResponse.SC_OK);
+        response.setContentType(APPLICATION_JSON);
+    	writer.flush();
 	}    	
+	
+	public void basicLogoutAction(Endpoint endpoint, PrintWriter writer){
+		BasicEndpoint basicendpoint = (BasicEndpoint)endpoint;
+		JsonObject logoutResponse = new JsonJavaObject();
+		try {
+			basicendpoint.logout();
+		} catch (PasswordException e) {
+			logoutResponse.putJsonProperty("logout", "failure");
+			e.printStackTrace();
+		}
+		try {
+			if(basicendpoint.isAuthenticated())
+				logoutResponse.putJsonProperty("logout", "failure");
+			else{
+				logoutResponse.putJsonProperty("logout", "success");
+			}
+		} catch (ClientServicesException e) {
+			logoutResponse.putJsonProperty("logout", "failure");
+			e.printStackTrace();
+		}
+		writer.write(logoutResponse.toString());
+	}
+	
+	public void oAuthLogoutAction(Endpoint endpoint, PrintWriter writer){
+		OAuthEndpoint oAuthEndpoint = (OAuthEndpoint)endpoint;
+		JsonObject logoutResponse = new JsonJavaObject();
+		try {
+			oAuthEndpoint.logout();
+		} catch (ClientServicesException e) {
+			logoutResponse.putJsonProperty("logout", "failure");
+		} catch (OAuthException e) {
+			logoutResponse.putJsonProperty("logout", "failure");
+		}
+		try {
+			if(oAuthEndpoint.isAuthenticated())
+				logoutResponse.putJsonProperty("logout", "failure");
+			else{
+				logoutResponse.putJsonProperty("logout", "success");
+			}
+		} catch (ClientServicesException e) {
+			logoutResponse.putJsonProperty("logout", "failure");
+		}
+		writer.write(logoutResponse.toString());
+	}
+	
+	public void oAuth2LogoutAction(Endpoint endpoint, PrintWriter writer){
+		OAuth2Endpoint oAuth2Endpoint = (OAuth2Endpoint)endpoint;
+		JsonObject logoutResponse = new JsonJavaObject();
+		try {
+			oAuth2Endpoint.logout();
+		} catch (ClientServicesException e) {
+			logoutResponse.putJsonProperty("logout", "failure");
+			e.printStackTrace();
+		}
+		try {
+			if(oAuth2Endpoint.isAuthenticated())
+				logoutResponse.putJsonProperty("logout", "failure");
+			else{
+				logoutResponse.putJsonProperty("logout", "success");
+			}
+		} catch (ClientServicesException e) {
+			logoutResponse.putJsonProperty("logout", "failure");
+			e.printStackTrace();
+		}
+		writer.write(logoutResponse.toString());
+	}
 	
 	public String getAuthAction(String pathInfo){//returns string JSApp or JavaApp
 		String authAction = ""; 

@@ -146,8 +146,10 @@ public class BasicAuthCredsHandler extends AbstractServiceHandler {
 	    				pw.println("window.location.href = '"+redirectToLogin+"&redirectURL=empty&loginUi="+mode+"&showWrongCredsMessage=true'");
 	    			}else if(authentication.equals(AUTH_ACCEPTED)){
 	    				//pw.println("window.opener.sbt.Endpoints['"+req.getParameter(ENDPOINT_NAME)+"'].callback();");
+	    				pw.println("if(window.opener.sbt.callback){");
 	    				pw.println("window.opener.sbt.callback();");
 	    				pw.println("delete window.opener.sbt.callback;");
+	    				pw.println("}");
 	    				pw.println("window.close();");
 	    			}
 	    			pw.println("}");

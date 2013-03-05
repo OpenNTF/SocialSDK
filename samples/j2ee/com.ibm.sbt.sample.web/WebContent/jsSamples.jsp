@@ -38,13 +38,40 @@ body {
 	type="text/css" />
 <%
 	String requirejsPath = (String)request.getAttribute("requirejsPath");
+	String jsLibPath = (String)request.getAttribute("jsLibPath");
 	String libraryPath = requirejsPath;
 	if (null == requirejsPath) {
-		libraryPath = (String)request.getAttribute("jsLibPath");
+		libraryPath = jsLibPath;
+	} else {
+		if (jsLibPath.endsWith(".js")) {
+			jsLibPath = jsLibPath.substring(0, jsLibPath.lastIndexOf(".js"));
+		}
 	}
 %>
 
 <script type="text/javascript" src="<%=libraryPath%>"></script>
+
+<%
+	if (null != requirejsPath) {%>
+		<script type="text/javascript">
+			requirejs.config({
+		        paths: {
+		            'has' : '/sbt/js/libs/has',
+		            'jquery' : '<%= jsLibPath %>',
+		            'jquery/ui' : '/sbt.jquery182/js/jquery-ui-1.8.23.custom.min',
+		            'requirejs/i18n' : '/sbt/js/libs/requirejsPlugins/i18n',
+		            'requirejs/text' : '/sbt/js/libs/requirejsPlugins/text'
+		        },
+		        shim: {
+		            'jquery/ui': {
+		                deps: ['jquery'],
+		                exports: '$'
+		            },
+		        }
+		    });
+		</script>
+	<%}
+%>
 
 <!-- Include the toolkit -->
 <script type="text/javascript" src="<%=request.getAttribute("toolkit")%>"></script>
@@ -55,7 +82,7 @@ function hideJsSnippetCode() {
 	var jsCodeSpan =  document.getElementById("jsCodeSpan");
 	var accordianInner =  document.getElementById("accordianInner");
 	var ShowCodeLink =  document.getElementById("ShowCodeLink");
-	var HideCodeLink =  document.getElementById("HideCodeLink");
+	var HideCodeLink =  document.getElementById("HideCodeLink")
 	if(jsCodePre.style.height == '0px'){
 		ShowCodeLink.style.display = 'none';
 		HideCodeLink.style.display = '';

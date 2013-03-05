@@ -25,6 +25,13 @@ define(['jquery'], function($) {
         createTextNode: function(text) {
             return document.createTextNode(text);
         },
+        create: function(element, props, refNode) {
+        	var node = $(element).attr(props);
+        	if (refNode) {
+        		node.appendTo($(refNode));
+        	}
+			return node[0];
+		},
         removeAll: function(id) {
             var node = this.byId(id);
             if (node) {

@@ -16,7 +16,6 @@
 package com.ibm.sbt.jslibrary.servlet;
 
 import java.util.Map;
-
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonObject;
 
@@ -27,28 +26,16 @@ import com.ibm.commons.util.io.json.JsonObject;
  */
 public class JQueryLibrary extends AbstractLibrary {
 
-	public static final String		NAME					= "jquery";										//$NON-NLS-1$
+	public static final String		NAME					= "jquery";							//$NON-NLS-1$
 
 	public static final String		MODULE_BRIDGE			= "sbt/_bridge";
-	public static final String		MODULE_JQUERY			= "jquery";										//$NON-NLS-1$
-	public static final String		MODULE_HAS				= "has";											//$NON-NLS-1$
-	public static final String		MODULE_SBTX				= "sbtx";											//$NON-NLS-1$
-	public static final String		MODULE_JQUERY_UI		= "jquery/ui";										//$NON-NLS-1$
-	public static final String		PLUGIN_I18N				= "requirejs/i18n";								//$NON-NLS-1$
-	public static final String		PLUGIN_TEXT				= "requirejs/text";								//$NON-NLS-1$
-	public static final String		PATH_HAS				= "/sbt/js/libs/has";								//$NON-NLS-1$
-	public static final String		PATH_BRIDGE				= "_bridges/jquery";								//$NON-NLS-1$
-	public static final String		PATH_JQUERY				= "/sbt.jquery182/js/jquery-1.8.0.min";			//$NON-NLS-1$
-	public static final String		PATH_JQUERY_UI			= "/sbt.jquery182/js/jquery-ui-1.8.23.custom.min";	//$NON-NLS-1$
+	public static final String		MODULE_SBTX				= "sbtx";								//$NON-NLS-1$
+	public static final String		PATH_BRIDGE				= "_bridges/jquery";					//$NON-NLS-1$
 	public static final String		PATH_SBTX				= "/sbtx/js/sdk/sbtx";
 	public static final String		PATH_BASEURL			= "/sbt/js/sdk";
-	public static final String		PATH_I18N				= "/sbt/js/libs/requirejsPlugins/i18n";
-	public static final String		PATH_TEXT				= "/sbt/js/libs/requirejsPlugins/text";
 
 	// TODO Do these need to be dynamic
-	private static final String[][]	REGISTER_MODULES		= { { MODULE_BRIDGE, PATH_BRIDGE },
-			{ MODULE_HAS, PATH_HAS }, { MODULE_JQUERY, PATH_JQUERY }, { MODULE_JQUERY_UI, PATH_JQUERY_UI },
-			{ PLUGIN_I18N, PATH_I18N }, { PLUGIN_TEXT, PATH_TEXT } };
+	private static final String[][]	REGISTER_MODULES		= { { MODULE_BRIDGE, PATH_BRIDGE } };
 
 	private static final String[][]	REGISTER_EXT_MODULES	= { { MODULE_SBTX, PATH_SBTX } };
 	private static final String[]	REQUIRE_MODULES			= new String[0];
@@ -235,20 +222,7 @@ public class JQueryLibrary extends AbstractLibrary {
 
 		generateRequireModules(sb, indentationLevel, requireModules);
 		indentationLevel -= 1;
-		indent(sb, indentationLevel).append("},\n"); // end paths
-
-		indent(sb, indentationLevel).append("shim: {\n"); // begin shim
-		indentationLevel += 1;
-
-		indent(sb, indentationLevel).append("'jquery/ui': {\n");
-		indentationLevel += 1;
-		indent(sb, indentationLevel).append("deps: ['jquery'],\n"); // begin jquery/ui
-		indent(sb, indentationLevel).append("exports: '$'\n");
-		indentationLevel -= 1;
-		indent(sb, indentationLevel).append("},\n"); // end jquery/ui
-
-		indentationLevel -= 1;
-		indent(sb, indentationLevel).append("}\n"); // end shim
+		indent(sb, indentationLevel).append("}\n"); // end paths
 
 		indentationLevel -= 1;
 		indent(sb, indentationLevel).append("});\n"); // end requirejs.config

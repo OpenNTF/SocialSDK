@@ -1,23 +1,31 @@
 <form>
 	<table>
 		<tr>
-			<td colspan=2><label name='wrongCredsMessage'
-				id='wrongCredsMessage' style='color: red; display: none;'>
-					Wrong Credentials </label></td>
+			<td colspan=2>
+				<label name='wrongCredsMessage' id='wrongCredsMessage' style='color: red; display: none;'>Wrong Credentials </label>
+			</td>
 		</tr>
 		<tr>
-			<td><label for='name'>Username: </label></td>
-			<td><input type='text' id='username' name='username' /></td>
+			<td>
+				<label for='name'>Username: </label>
+			</td>
+			<td>
+				<input type='text' id='username' name='username' />
+			</td>
 		</tr>
 		<tr>
-			<td><label for='name'>Password: </label></td>
-			<td><input type='password' id='password' name='password' /></td>
+			<td>
+				<label for='name'>Password: </label>
+			</td>
+			<td>
+				<input type='password' id='password' name='password' />
+			</td>
 		</tr>
 		<tr>
-			<td colspan=2><input type='button'
-				onClick='sbt.dialog.submitOnClickHandle(this.form)' value='OK' /> <input
-				type='button' onClick='sbt.dialog.hide();delete sbt.dialog;'
-				value='Cancel' /></td>
+			<td colspan=2>
+				<input type='button' onClick='sbt.dialog.submitOnClickHandle(this.form)' value='OK'  name='submitBtn' />
+				<input type='button' onClick='sbt.dialog.hide();delete sbt.dialog;' value='Cancel' />
+			</td>
 		</tr>
 	</table>
 </form>

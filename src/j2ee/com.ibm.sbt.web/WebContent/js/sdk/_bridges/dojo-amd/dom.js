@@ -17,7 +17,7 @@
 /**
  * Social Business Toolkit SDK - Some DOM utilities.
  */
-define(['dojo/dom','dojo/_base/window'],function(dom,win) {
+define(['dojo/dom','dojo/_base/window', 'dojo/dom-construct'],function(dom,win,domConstruct) {
 	return {
 		byId: function(id) {
 			return dom.byId(id);
@@ -26,6 +26,9 @@ define(['dojo/dom','dojo/_base/window'],function(dom,win) {
 			//return dojo.doc.createTextNode(text);
 			//change also made to define, added 'dojo/_base/window'
 			return win.doc.createTextNode(text);
+		},
+		create: function(element, props, refNode) {
+			return domConstruct.create(element, props, refNode);
 		},
 		removeAll: function(node) {
 			node = this.byId(node);

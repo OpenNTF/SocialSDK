@@ -25,6 +25,9 @@ define([],function() {
 		createTextNode: function(text) {
 			return dojo.doc.createTextNode(text);
 		},
+		create: function(element, props, refNode) {
+			return dojo.create(element, props, refNode);
+		},
 		removeAll: function(id) {
 			var node = this.byId(id);
 			if(node) {

@@ -21,7 +21,7 @@
 	pageEncoding="ISO-8859-1"%>
 <html>
 <head>
-<title>SBT JAVA Sample - Get All My Files</title>
+<title>SBT JAVA Sample - Get Files Shared with Me</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
@@ -33,7 +33,7 @@
 			FileService svc = new FileService();
 			//in this example, the entry id is known
 
-			List<FileEntry> entries = svc.getMyFiles();
+			List<FileEntry> entries = svc.getFilesSharedWithMe();
 			for (FileEntry entry : entries) {
 				out.println("<br>loaded " + entry.getDisplayName() + " as found at the <a href='"
 						+ entry.getPageURL() + "'>SmartCloud File Page</a>");

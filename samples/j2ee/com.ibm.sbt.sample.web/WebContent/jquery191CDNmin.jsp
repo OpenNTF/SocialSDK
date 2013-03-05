@@ -7,7 +7,7 @@
 
 <%
 String baseUrl = UrlUtil.getBaseUrl(request);
-request.setAttribute("jsLibPath","/sbt.jquery182/js/jquery-1.8.0.min");
+request.setAttribute("jsLibPath","//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min");
 request.setAttribute("jsLibTheme","tundra");
 request.setAttribute("jsLibCSSPath","/sbt.jquery182/css/ui-lightness/jquery-ui-1.8.23.custom.css");
 request.setAttribute("toolkit",PathUtil.concat(baseUrl,"/library?lib=jquery&ver=1.8.0",'/'));

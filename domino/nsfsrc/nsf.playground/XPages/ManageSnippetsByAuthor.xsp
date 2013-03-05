@@ -21,15 +21,18 @@
 						</xc:ManageSnippetsActionBar>
 						<br />
 						<xe:dataView id="dataView1" var="viewEntry"
-							collapsibleCategory="true" collapsibleRows="true" rows="15"
+							collapsibleCategory="true" collapsibleRows="true" rows="20"
 							showCheckbox="${javascript:userBean.canCreateDocs}" style="margin-left: 25px"
 							showHeaderCheckbox="${javascript:userBean.canCreateDocs}"
 							columnTitles="true">
 							<xe:this.data>
-								<xp:dominoView var="view1" viewName="AllSnippetsByAuthor">
+								<xp:dominoView var="view1"
+									viewName="AllSnippetsByAuthor" expandLevel="1">
 								</xp:dominoView>
 							</xe:this.data>
 							<xp:this.facets>
+								<xe:pagerExpand id="pagerExpand1" xp:key="pagerTopLeft">
+								</xe:pagerExpand>
 								<xp:pager layout="Previous Group Next" id="pager2"
 									xp:key="pagerTopRight" partialRefresh="true" partialExecute="true">
 								</xp:pager>

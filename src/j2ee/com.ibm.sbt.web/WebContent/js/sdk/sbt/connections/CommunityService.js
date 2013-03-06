@@ -310,7 +310,7 @@ define(
 				 * @method getContributor
 				 * @return {Member} contributor Contributor of the community
 				 */
-				getContributor : function(){
+				getContributor : function() {
 					if(this._contributor){
 						return this._contributor;
 					}else{					
@@ -318,6 +318,27 @@ define(
 						this._contributor = _contributor;
 						return _contributor;
 					}
+				},
+				/**
+                 * Get members of this community.
+                 * 
+                 * @method getMembers
+                 * @param {Object} [args] Argument object
+                 * @param {Function} [args.load] This function is invoked when the call to get the members of a community completes. The function expects to receive one
+                 *            parameter, the members object - an array of members of the community.
+                 * @param {Function} [args.error] Sometimes the getMembers call fails with bad request such as 400 or server errors such as 500. The error
+                 *            parameter is another callback function that is only invoked when an error occurs. This allows to control what happens when
+                 *            an error occurs without having to put a lot of logic into your load function to check for error conditions. The parameter
+                 *            passed to the error function is a JavaScript Error object indicating what the failure was. From the error object. one can
+                 *            get access to the javascript library error object, the status code and the error message.
+                 * @param {Function} [args.handle] This callback is called regardless of whether the call to get the members of the community completes or fails. The parameter
+                 *            passed to this callback is the members object (or error object). From the error object. one can get access to the
+                 *            javascript library error object, the status code and the error message.
+                 * @param {Object}  [args.parameters] Object representing various parameters that can be passed to get a feed of members of a community. The
+                 *            parameters must be exactly as they are supported by IBM Connections like ps, sortBy etc.
+				 */
+				getMembers : function(args) {
+				    this._service.getMembers(this, args);
 				},
 				/**
 				 * Sets title of IBM Connections community.
@@ -359,6 +380,63 @@ define(
 				setDeletedTags : function(deletedTags) {
 					this.set("deletedTags", deletedTags);
 				},
+				
+                /**
+                 * Add member to a community
+                 * 
+                 * @method addMember
+                 * @param {Object} [args] Argument object
+                 * @param {Object} [args.member] Object representing the member to be added
+                 * @param {String} [args.email] Object representing the email of the memeber to be added
+                 * @param {String} [args.id] String representing the id of the member to be added
+                 * @param {Function} [args.load] This function is invoked when the member is added to the community. The function expects to receive one
+                 *            parameter, the loaded member object.
+                 * @param {Function} [args.error] Sometimes the addMember call fails with bad request such as 400 or server errors such as 500. The error
+                 *            parameter is another callback function that is only invoked when an error occurs. This allows to control what happens when
+                 *            an error occurs without having to put a lot of logic into your load function to check for error conditions. The parameter
+                 *            passed to the error function is a JavaScript Error object indicating what the failure was. From the error object. one can
+                 *            get access to the javascript library error object, the status code and the error message.
+                 * @param {Function} [args.handle] This callback is called regardless of whether the call to add member to the community completes or fails. The parameter
+                 *            passed to this callback is the member object (or error object). From the error object. one can get access to the
+                 *            javascript library error object, the status code and the error message.
+                 */
+				addMember : function(args) {
+				    var _args = lang.mixin({}, args);
+				    
+				    var member = null;
+				    if (_args.member) {
+				        member = _args.member;
+				        delete _args.member;
+				    } else if (_args.email) {
+				        member = new Member(this._service, null, null, _args.email);
+				        delete _args.email;
+				    } else if (_args.id) {
+                        member = new Member(this._service, _args.id, null, null);
+                        delete _args.email;
+                    }
+				    
+				    this._service.addMember(this, member, _args);
+				},
+				
+                /**
+                 * Remove member of a community
+                 * 
+                 * @method removeMember
+                 * @param {String/Object} member id of the member or member object (of the member to be removed)
+                 * @param {Object} [args] Argument object
+                 * @param {Function} [args.load] This function is invoked when the member is removed from the community. 
+                 * @param {Function} [args.error] Sometimes the removeMember call fails with bad request such as 400 or server errors such as 500. The error
+                 *            parameter is another callback function that is only invoked when an error occurs. This allows to control what happens when
+                 *            an error occurs without having to put a lot of logic into your load function to check for error conditions. The parameter
+                 *            passed to the error function is a JavaScript Error object indicating what the failure was. From the error object. one can
+                 *            get access to the javascript library error object, the status code and the error message.
+                 * @param {Function} [args.handle] This callback is called regardless of whether the call to remove a member from the community completes or fails. The parameter
+                 *            passed to this callback is the error object (in case of error). From the error object. one can get access to the
+                 *            javascript library error object, the status code and the error message.
+                 */
+                removeMember : function(member, args) {
+                    this._service.removeMember(this, member, args);
+                },
 				
 				_validate : function(className, methodName, args, validateMap) {
 					
@@ -540,7 +618,7 @@ define(
 					if (validateMap.isValidateType && !(validate._validateInputTypeAndNotify(className, methodName, "Member", this, "sbt.connections.Member", args))) {
 						return false;
 					}
-					if (validateMap.isValidateId && !(validate._validateInputTypeAndNotify(className, methodName, "Member Id", this._id, "string", args))) {
+					if (validateMap.isValidateId && !(validate._validateInputTypeAndNotify(className, methodName, "Member Id or EMail", this._id || this._email, "string", args))) {
 						return false;
 					}			
 					return true;
@@ -761,6 +839,8 @@ define(
 								} else {
 									body += "<snx:userid xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\">" + xml.encodeXmlEntry(member._id) + "</snx:userid>";
 								}
+							} else if (member._email) {
+							    body += "<email>" + xml.encodeXmlEntry(member._email) + "</email>";
 							}
 							body += "</contributor>";
 							if (member.memberFields.role) {
@@ -888,7 +968,7 @@ define(
 								postData : this._constructCommunityRequestBody(community),
 								headers : headers,
 								load : function(data, ioArgs) {
-									var newCommunityUrl = ioArgs.xhr.getResponseHeader("Location");
+									var newCommunityUrl = ioArgs.headers["Location"];
 									var communityId = newCommunityUrl.substring(newCommunityUrl.indexOf("communityUuid=") + "communityUuid=".length);
 									community._id = communityId;
 									community.fields = {};
@@ -1075,7 +1155,7 @@ define(
 						/**
 						 * Remove member of a community
 						 * 
-						 * @method removeMember
+						 * @method 
 						 * @param {String/Object} community id of the community or the community object.
 						 * @param {String/Object} member id of the member or member object (of the member to be removed)
 						 * @param {Object} [args] Argument object
@@ -1268,11 +1348,11 @@ define(
 									for(var count = 0; count < entry.length; count ++){	
 										var node = entry[count];
 										if (getArgs.communityServiceEntity == "communities") {
-											var community = new Community(this, xpath.selectText(node, getArgs.xpath.id, con.namespaces));
+											var community = new Community(_self, xpath.selectText(node, getArgs.xpath.id, con.namespaces));
 											community.data = node;
 											entities.push(community);
 										} else if (getArgs.communityServiceEntity == "community" && getArgs.communitiesType == "members") {
-											var member = new Member(this, xpath.selectText(node, getArgs.xpath.id, con.namespaces));
+											var member = new Member(_self, xpath.selectText(node, getArgs.xpath.id, con.namespaces));
 											member.data = node;
 											entities.push(member);
 										}

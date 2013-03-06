@@ -1,5 +1,5 @@
 require([ "sbt/dom", "sbt/config", "sbt/Endpoint" ], function(dom, config, Endpoint) {
-    config.Properties["loginUi"] = "popup";
+    config.Properties["loginUi"] = "dialog";
     var endpoint = Endpoint.find("connections");
     endpoint.xhrGet({
         serviceUrl : "/communities/service/atom/communities/my?ps=5",

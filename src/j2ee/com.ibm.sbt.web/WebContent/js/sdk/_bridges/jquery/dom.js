@@ -32,6 +32,9 @@ define(['jquery'], function($) {
         	}
 			return node[0];
 		},
+		destroy: function(node) {
+		    $(node).remove();
+		},
         removeAll: function(id) {
             var node = this.byId(id);
             if (node) {

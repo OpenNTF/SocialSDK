@@ -145,6 +145,9 @@ function hideJsSnippetCode() {
 								if (js != null) {
 									js = ParameterProcessor.process(js);
 								}
+								if (html != null) {
+									html = ParameterProcessor.process(html);
+								}
 							}
 							if (StringUtil.isNotEmpty(js) || StringUtil.isNotEmpty(html)) {
 							%>

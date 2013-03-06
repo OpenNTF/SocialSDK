@@ -48,7 +48,7 @@ define([ 'dojo/_base/declare', 'dojo/_base/xhr', 'dojo/_base/lang', 'dojox/xml/p
                 };
                 args.handle(_data, _ioArgs); 
             } catch (ex) {
-                // TODO log error
+                console.log(ex);
             }
         },
         createError: function(error, ioArgs) {

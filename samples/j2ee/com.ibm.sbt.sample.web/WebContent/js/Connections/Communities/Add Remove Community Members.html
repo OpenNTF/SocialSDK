@@ -1,0 +1,26 @@
+<div id="error" style="display:none;" class="alert alert-error"></div>
+<div id="success" style="display:none;" class="alert alert-success">Email sent successfully!</div>
+<div class="form-horizontal">
+    <legend  id="communityTitle"></legend>
+    <div class="control-group">
+    	<label class="control-label">Members:</label>
+        <div class="controls">
+            <select multiple="multiple" id="membersList" style="width:400px">
+			</select>
+        </div>
+        <div style="height:4px"></div>
+        <div class="controls">
+	        <button class="btn" id="removeBtn">Remove</button>
+	        <button class="btn" id="refreshBtn">Refresh</button>
+        </div>
+    </div>
+    
+    <legend>New Member</legend>
+    <div class="control-group">
+        <label class="control-label">Email:</label>
+        <div class="controls">
+            <input id="memberEmail" type="text" placeholder="%{sample.email2}"></input>
+	    	<button class="btn btn-primary" id="addBtn">Add</button>
+        </div>
+    </div>
+</div>

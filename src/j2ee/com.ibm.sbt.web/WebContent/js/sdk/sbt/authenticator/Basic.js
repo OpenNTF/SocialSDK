@@ -49,6 +49,9 @@ return declare("sbt.authenticator.Basic", null, {
 	},	
 	
 	_authDialog: function(options, dialogLoginPage) {
+		if(options.cancelAction){
+			sbt.cancelAction = options.cancelAction;
+		}
 		require(["sbt/_bridge/ui/BasicAuth_Dialog"], function(dialog) {
 			dialog.show(options, dialogLoginPage);
 		});
@@ -56,7 +59,12 @@ return declare("sbt.authenticator.Basic", null, {
 	},
 	
 	_authPopup: function(options, loginPage) {
-		sbt.callback = options.callback;
+		if(options.callback){
+			sbt.callback = options.callback;
+		}
+		if(options.cancelAction){
+			sbt.cancelAction = options.cancelAction;
+		}
 		var proxy = options.proxy.proxyUrl;
 		var actionURL = proxy.substring(0,proxy.lastIndexOf("/"))+"/basicAuth/"+options.proxyPath+"/JSApp";
 		var url = sbt.Properties["sbtUrl"]+loginPage+'?actionURL='+encodeURIComponent(actionURL)

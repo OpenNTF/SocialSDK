@@ -276,36 +276,46 @@ var Endpoint = declare("sbt.Endpoint", null, {
 	 * @param args
 	 */
 	authenticate : function(args) {
+		var self = this;
 		options = {
-			dialogLoginPage : this.loginDialogPage,
-			loginPage : this.loginPage,
-			transport : this.transport,
-			proxy : this.proxy,
-			proxyPath : this.proxyPath,
-			loginUi : this.loginUi
+			dialogLoginPage : self.loginDialogPage,
+			loginPage : self.loginPage,
+			transport : self.transport,
+			proxy : self.proxy,
+			proxyPath : self.proxyPath,
+			loginUi : self.loginUi
 		};
 		if (args) {
 			if (args.success) {
 				options.callback = args.success;
 			}
+			if (args.cancelAction) {
+				options.cancelAction = args.cancelAction;
+			}
 			if (args.forceAuthentication == true) {
-				if (this.isAuthenticated == true) {
-					this.logout({
-						success: function(){
-							this.openAuthenticator(options);
+				if (self.isAuthenticated == true) {
+					self.logout({
+						success: function(response){
+							if(response.logout == "success"){
+								self.openAuthenticator(options);
+							}
 						}
 					});
 				}else{
-					this.openAuthenticator(options);
+					self.openAuthenticator(options);
 				}
 			} else {
-				if (this.isAuthenticated == false) {
-					this.openAuthenticator(options);
+				if (self.isAuthenticated == false) {
+					self.openAuthenticator(options);
 				} else {
 					if (args.success) {
 						args.success();
 					}
 				}
+			}
+		}else{
+			if (self.isAuthenticated == false) {
+				self.openAuthenticator(options);
 			}
 		}
 	},
@@ -324,9 +334,9 @@ var Endpoint = declare("sbt.Endpoint", null, {
 			handle : function(response) {
 				if (args) {
 					if (args.success && response.logout == "success") {
-						args.success(response.logout);
+						args.success(response);
 					} else if (args.failure && response.logout == "failure") {
-						args.failure(response.logout);
+						args.failure(response);
 					}
 				}
 			},

@@ -24,6 +24,7 @@
 <%@page import="java.util.Iterator"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>  
+<%@page import="com.ibm.sbt.services.client.connections.files.model.*"%>
  
 <%@page 
 	language="java" contentType="text/html; charset=ISO-8859-1"
@@ -42,14 +43,13 @@
 			out.println("<br>"); 
 			String fileId = Context.get().getProperty("sample.fileId");
 			FileEntry fileEntry = fileService.getFile(fileId, true);
-			List<FileEntry> fileEntries = fileService.getFilesComments(fileEntry, null);
-			if(fileEntries != null && ! fileEntries.isEmpty())
+			List<CommentEntry> commentEs = fileService.getFilesComments(fileEntry, null);
+			if(commentEs != null && ! commentEs.isEmpty())
 			{
-				for (Iterator iterator = fileEntries.iterator(); iterator.hasNext();)
+				for (CommentEntry entry : commentEs)
 				{
-					FileEntry subFileEntry = (FileEntry) iterator.next();
-					out.println("Comment	: " + subFileEntry.getCommentEntry().getComment() + " , ");
-					out.println("Comment Id	: " + subFileEntry.getCommentEntry().getCommentId());
+					out.println("Comment	: " + entry.getComment() + " , ");
+					out.println("Comment Id	: " + entry.getCommentId());
 					out.println("<br>");
 				}
 			}

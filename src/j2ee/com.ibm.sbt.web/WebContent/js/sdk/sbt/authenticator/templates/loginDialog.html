@@ -24,7 +24,7 @@
 		<tr>
 			<td colspan=2>
 				<input type='button' onClick='sbt.dialog.submitOnClickHandle(this.form)' value='OK'  name='submitBtn' />
-				<input type='button' onClick='sbt.dialog.hide();delete sbt.dialog;' value='Cancel' />
+				<input type='button' onClick='sbt.dialog.hide();if(sbt.cancelAction){sbt.cancelAction();}delete sbt.dialog;' value='Cancel' />
 			</td>
 		</tr>
 	</table>

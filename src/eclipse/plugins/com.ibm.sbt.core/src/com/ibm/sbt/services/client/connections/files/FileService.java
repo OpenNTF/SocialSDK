@@ -39,6 +39,7 @@ import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientService.Handler;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.connections.files.exception.FileServiceException;
+import com.ibm.sbt.services.client.connections.files.model.CommentEntry;
 import com.ibm.sbt.services.client.connections.files.model.FileEntry;
 import com.ibm.sbt.services.client.connections.files.model.FileRequestParams;
 import com.ibm.sbt.services.client.connections.files.model.FileRequestPayload;
@@ -203,7 +204,7 @@ public class FileService extends BaseService {
 		if (null == result) {
 			return (FileEntry) result;
 		}
-		return createFileEntriesFromResultFeed(result).get(0);
+		return (FileEntry) parseAndProcessResultFeed(result, FileEntry.class).get(0);
 	}
 
 	/**
@@ -254,7 +255,7 @@ public class FileService extends BaseService {
 		if (null == result) {
 			return (FileEntry) result;
 		}
-		return createFileEntriesFromResultFeed(result).get(0);
+		return (FileEntry) parseAndProcessResultFeed(result, FileEntry.class).get(0);
 	}
 
 	/**
@@ -287,7 +288,7 @@ public class FileService extends BaseService {
 		if (null == result) {
 			return (FileEntry) result;
 		}
-		return createFileEntriesFromResultFeed(result).get(0);
+		return (FileEntry) parseAndProcessResultFeed(result, FileEntry.class).get(0);
 	}
 
 	/**
@@ -320,7 +321,7 @@ public class FileService extends BaseService {
 		if (null == result) {
 			return (FileEntry) result;
 		}
-		return createFileEntriesFromResultFeed(result).get(0);
+		return (FileEntry) parseAndProcessResultFeed(result, FileEntry.class).get(0);
 	}
 
 	/**
@@ -391,7 +392,7 @@ public class FileService extends BaseService {
 		if (result == null) {
 			return (FileEntry) result;
 		}
-		return createFileEntriesFromResultFeed(result).get(0);
+		return (FileEntry) parseAndProcessResultFeed(result, FileEntry.class).get(0);
 	}
 
 	/**
@@ -433,7 +434,7 @@ public class FileService extends BaseService {
 		if (result == null) {
 			return (FileEntry) result;
 		}
-		return createFileEntriesFromResultFeed(result).get(0);
+		return (FileEntry) parseAndProcessResultFeed(result, FileEntry.class).get(0);
 	}
 
 	/**
@@ -483,7 +484,12 @@ public class FileService extends BaseService {
 		if (result == null) {
 			return (List<FileEntry>) result;
 		}
-		return createFileEntriesFromResultFeed(result);
+		List<Object> resultantObjects = parseAndProcessResultFeed(result, FileEntry.class);
+		List<FileEntry> resultantEntries = new ArrayList<FileEntry>();
+		for (Object eachObject : resultantObjects) {
+			resultantEntries.add((FileEntry) eachObject);
+		}
+		return resultantEntries;
 	}
 
 	/**
@@ -494,11 +500,11 @@ public class FileService extends BaseService {
 	 * @param FileEntry
 	 * @param commentId
 	 * @param params
-	 * @return List<FileEntry>
+	 * @return CommentEntry
 	 * @throws FileServiceException
 	 */
-	public List<FileEntry> retrieveFileComment(FileEntry fileEntry, String commentId,
-			Map<String, String> params) throws FileServiceException {
+	public CommentEntry retrieveFileComment(FileEntry fileEntry, String commentId, Map<String, String> params)
+			throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "retrieveFileComment");
 		}
@@ -522,7 +528,8 @@ public class FileService extends BaseService {
 		String resultType = ResultType.ENTRY.getResultType();
 		String requestUri = constructUrl(BaseUrl.FILES.getBaseUrl(), accessType, null, null, null,
 				subFilters, resultType);
-		return executeGet(requestUri, params, ClientService.FORMAT_XML);
+		return (CommentEntry) executeGet(requestUri, params, ClientService.FORMAT_XML, CommentEntry.class)
+				.get(0);
 	}
 
 	/**
@@ -533,10 +540,10 @@ public class FileService extends BaseService {
 	 * @param FileEntry
 	 * @param commentId
 	 * @param params
-	 * @return List<FileEntry>
+	 * @return CommentEntry
 	 * @throws FileServiceException
 	 */
-	public List<FileEntry> retrieveMyFileComment(FileEntry fileEntry, String commentId,
+	public CommentEntry retrieveMyFileComment(FileEntry fileEntry, String commentId,
 			Map<String, String> params) throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "retrieveMyFileComment");
@@ -558,7 +565,8 @@ public class FileService extends BaseService {
 		String resultType = ResultType.ENTRY.getResultType();
 		String requestUri = constructUrl(BaseUrl.FILES.getBaseUrl(), accessType, category, null, null,
 				subFilters, resultType);
-		return executeGet(requestUri, params, ClientService.FORMAT_XML);
+		return (CommentEntry) executeGet(requestUri, params, ClientService.FORMAT_XML, CommentEntry.class)
+				.get(0);
 	}
 
 	/**
@@ -646,10 +654,10 @@ public class FileService extends BaseService {
 	 * @param params
 	 * @param comment
 	 *            New comment String.
-	 * @return FileEntry
+	 * @return CommentEntry
 	 * @throws FileServiceException
 	 */
-	public FileEntry updateComment(FileEntry fileEntry, String commentId, Map<String, String> params,
+	public CommentEntry updateComment(FileEntry fileEntry, String commentId, Map<String, String> params,
 			String comment) throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "updateComment");
@@ -679,9 +687,9 @@ public class FileService extends BaseService {
 		Object payload = constructPayloadForComments(comment);
 		Document result = executePut(requestUri, params, headers, payload);
 		if (result == null) {
-			return (FileEntry) result;
+			return (CommentEntry) result;
 		}
-		return createFileEntriesFromResultFeed(result).get(0);
+		return (CommentEntry) parseAndProcessResultFeed(result, CommentEntry.class).get(0);
 	}
 
 	/**
@@ -697,10 +705,10 @@ public class FileService extends BaseService {
 	 * @param params
 	 * @param comment
 	 *            New comment String.
-	 * @return FileEntry
+	 * @return CommentEntry
 	 * @throws FileServiceException
 	 */
-	public FileEntry updateMyComment(FileEntry fileEntry, String commentId, Map<String, String> params,
+	public CommentEntry updateMyComment(FileEntry fileEntry, String commentId, Map<String, String> params,
 			String comment) throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "updateMyComment");
@@ -727,9 +735,9 @@ public class FileService extends BaseService {
 		Object payload = constructPayloadForComments(comment);
 		Document result = executePut(requestUri, params, headers, payload);
 		if (result == null) {
-			return (FileEntry) result;
+			return (CommentEntry) result;
 		}
-		return createFileEntriesFromResultFeed(result).get(0);
+		return (CommentEntry) parseAndProcessResultFeed(result, CommentEntry.class).get(0);
 	}
 
 	/**
@@ -771,6 +779,7 @@ public class FileService extends BaseService {
 	 * @return List<FileEntry>
 	 * @throws FileServiceException
 	 */
+
 	public List<FileEntry> getMyFiles() throws FileServiceException {
 		return getMyFiles(null);
 	}
@@ -786,6 +795,7 @@ public class FileService extends BaseService {
 	 * @return List<FileEntry>
 	 * @throws FileServiceException
 	 */
+
 	public List<FileEntry> getMyFiles(Map<String, String> params) throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getMyFiles");
@@ -795,7 +805,14 @@ public class FileService extends BaseService {
 		String resultType = ResultType.FEED.getResultType();
 		String requestUri = constructUrl(BaseUrl.FILES.getBaseUrl(), accessType, category, null, null, null,
 				resultType);
-		return executeGet(requestUri, params, ClientService.FORMAT_XML);
+
+		List<Object> resultantObjects = executeGet(requestUri, params, ClientService.FORMAT_XML,
+				FileEntry.class);
+		List<FileEntry> resultantEntries = new ArrayList<FileEntry>();
+		for (Object eachObject : resultantObjects) {
+			resultantEntries.add((FileEntry) eachObject);
+		}
+		return resultantEntries;
 	}
 
 	/**
@@ -806,6 +823,7 @@ public class FileService extends BaseService {
 	 * @return List<FileEntry>
 	 * @throws FileServiceException
 	 */
+
 	public List<FileEntry> getFilesSharedWithMe() throws FileServiceException {
 		return getFilesSharedWithMe(null);
 	}
@@ -821,6 +839,7 @@ public class FileService extends BaseService {
 	 * @return List<FileEntry>
 	 * @throws FileServiceException
 	 */
+
 	public List<FileEntry> getFilesSharedWithMe(Map<String, String> params) throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getFilesSharedWithMe");
@@ -835,7 +854,14 @@ public class FileService extends BaseService {
 		params.put(FileRequestParams.DIRECTION, "inbound");
 		String requestUri = constructUrl(BaseUrl.FILES.getBaseUrl(), accessType, null, view, filter, null,
 				resultType);
-		return executeGet(requestUri, params, ClientService.FORMAT_XML);
+
+		List<Object> resultantObjects = executeGet(requestUri, params, ClientService.FORMAT_XML,
+				FileEntry.class);
+		List<FileEntry> resultantEntries = new ArrayList<FileEntry>();
+		for (Object eachObject : resultantObjects) {
+			resultantEntries.add((FileEntry) eachObject);
+		}
+		return resultantEntries;
 	}
 
 	/**
@@ -861,6 +887,7 @@ public class FileService extends BaseService {
 	 * @return List<FileEntry>
 	 * @throws FileServiceException
 	 */
+
 	public List<FileEntry> getFilesSharedByMe(Map<String, String> params) throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getFilesSharedWithMe");
@@ -875,7 +902,13 @@ public class FileService extends BaseService {
 		params.put(FileRequestParams.DIRECTION, "outbound");
 		String requestUri = constructUrl(BaseUrl.FILES.getBaseUrl(), accessType, null, view, filter, null,
 				resultType);
-		return executeGet(requestUri, params, ClientService.FORMAT_XML);
+		List<Object> resultantObjects = executeGet(requestUri, params, ClientService.FORMAT_XML,
+				FileEntry.class);
+		List<FileEntry> resultantEntries = new ArrayList<FileEntry>();
+		for (Object eachObject : resultantObjects) {
+			resultantEntries.add((FileEntry) eachObject);
+		}
+		return resultantEntries;
 	}
 
 	/**
@@ -889,6 +922,7 @@ public class FileService extends BaseService {
 	 * @return List<FileEntry>
 	 * @throws FileServiceException
 	 */
+
 	public List<FileEntry> getPublicFiles(Map<String, String> params) throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getPublicFiles");
@@ -902,7 +936,13 @@ public class FileService extends BaseService {
 			params = new HashMap<String, String>();
 		}
 		params.put(FileRequestParams.VISIBILITY, "public");
-		return executeGet(requestUri, params, ClientService.FORMAT_XML);
+		List<Object> resultantObjects = executeGet(requestUri, params, ClientService.FORMAT_XML,
+				FileEntry.class);
+		List<FileEntry> resultantEntries = new ArrayList<FileEntry>();
+		for (Object eachObject : resultantObjects) {
+			resultantEntries.add((FileEntry) eachObject);
+		}
+		return resultantEntries;
 	}
 
 	/**
@@ -915,6 +955,7 @@ public class FileService extends BaseService {
 	 * @return List<FileEntry>
 	 * @throws FileServiceException
 	 */
+
 	public List<FileEntry> getPinnedFiles(Map<String, String> params) throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getPinnedFiles");
@@ -925,7 +966,13 @@ public class FileService extends BaseService {
 		String resultType = ResultType.FEED.getResultType();
 		String requestUri = constructUrl(BaseUrl.FILES.getBaseUrl(), accessType, category, view, null, null,
 				resultType);
-		return executeGet(requestUri, params, ClientService.FORMAT_XML);
+		List<Object> resultantObjects = executeGet(requestUri, params, ClientService.FORMAT_XML,
+				FileEntry.class);
+		List<FileEntry> resultantEntries = new ArrayList<FileEntry>();
+		for (Object eachObject : resultantObjects) {
+			resultantEntries.add((FileEntry) eachObject);
+		}
+		return resultantEntries;
 	}
 
 	/**
@@ -938,6 +985,7 @@ public class FileService extends BaseService {
 	 * @return List<FileEntry>
 	 * @throws FileServiceException
 	 */
+
 	public List<FileEntry> getMyFolders(Map<String, String> params) throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getMyFolders");
@@ -947,7 +995,13 @@ public class FileService extends BaseService {
 		String resultType = ResultType.FEED.getResultType();
 		String requestUri = constructUrl(BaseUrl.FILES.getBaseUrl(), accessType, null, view, null, null,
 				resultType);
-		return executeGet(requestUri, params, ClientService.FORMAT_XML);
+		List<Object> resultantObjects = executeGet(requestUri, params, ClientService.FORMAT_XML,
+				FileEntry.class);
+		List<FileEntry> resultantEntries = new ArrayList<FileEntry>();
+		for (Object eachObject : resultantObjects) {
+			resultantEntries.add((FileEntry) eachObject);
+		}
+		return resultantEntries;
 	}
 
 	/**
@@ -960,6 +1014,7 @@ public class FileService extends BaseService {
 	 * @return List<FileEntry>
 	 * @throws FileServiceException
 	 */
+
 	public List<FileEntry> getMyPinnedFolders(Map<String, String> params) throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getMyPinnedFolders");
@@ -970,7 +1025,13 @@ public class FileService extends BaseService {
 		String resultType = ResultType.FEED.getResultType();
 		String requestUri = constructUrl(BaseUrl.FILES.getBaseUrl(), accessType, category, view, null, null,
 				resultType);
-		return executeGet(requestUri, params, ClientService.FORMAT_XML);
+		List<Object> resultantObjects = executeGet(requestUri, params, ClientService.FORMAT_XML,
+				FileEntry.class);
+		List<FileEntry> resultantEntries = new ArrayList<FileEntry>();
+		for (Object eachObject : resultantObjects) {
+			resultantEntries.add((FileEntry) eachObject);
+		}
+		return resultantEntries;
 	}
 
 	/**
@@ -983,6 +1044,7 @@ public class FileService extends BaseService {
 	 * @return List<FileEntry>
 	 * @throws FileServiceException
 	 */
+
 	public List<FileEntry> getFoldersWithRecentlyAddedFiles(Map<String, String> params)
 			throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -994,7 +1056,13 @@ public class FileService extends BaseService {
 		String resultType = ResultType.FEED.getResultType();
 		String requestUri = constructUrl(BaseUrl.FILES.getBaseUrl(), accessType, null, view, filter, null,
 				resultType);
-		return executeGet(requestUri, params, ClientService.FORMAT_XML);
+		List<Object> resultantObjects = executeGet(requestUri, params, ClientService.FORMAT_XML,
+				FileEntry.class);
+		List<FileEntry> resultantEntries = new ArrayList<FileEntry>();
+		for (Object eachObject : resultantObjects) {
+			resultantEntries.add((FileEntry) eachObject);
+		}
+		return resultantEntries;
 	}
 
 	/**
@@ -1009,6 +1077,7 @@ public class FileService extends BaseService {
 	 * @return List<FileEntry>
 	 * @throws FileServiceException
 	 */
+
 	public List<FileEntry> getFilesInFolder(String collectionId, Map<String, String> params)
 			throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -1023,7 +1092,13 @@ public class FileService extends BaseService {
 		String resultType = ResultType.FEED.getResultType();
 		String requestUri = constructUrl(BaseUrl.FILES.getBaseUrl(), accessType, null, null, null,
 				subFilters, resultType);
-		return executeGet(requestUri, params, ClientService.FORMAT_XML);
+		List<Object> resultantObjects = executeGet(requestUri, params, ClientService.FORMAT_XML,
+				FileEntry.class);
+		List<FileEntry> resultantEntries = new ArrayList<FileEntry>();
+		for (Object eachObject : resultantObjects) {
+			resultantEntries.add((FileEntry) eachObject);
+		}
+		return resultantEntries;
 	}
 
 	/**
@@ -1037,6 +1112,7 @@ public class FileService extends BaseService {
 	 * @return List<FileEntry>
 	 * @throws FileServiceException
 	 */
+
 	public List<FileEntry> getPublicFileFolders(Map<String, String> params) throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getPublicFileFolders");
@@ -1046,7 +1122,13 @@ public class FileService extends BaseService {
 		String resultType = ResultType.FEED.getResultType();
 		String requestUri = constructUrl(BaseUrl.FILES.getBaseUrl(), accessType, null, view, null, null,
 				resultType);
-		return executeGet(requestUri, params, ClientService.FORMAT_XML);
+		List<Object> resultantObjects = executeGet(requestUri, params, ClientService.FORMAT_XML,
+				FileEntry.class);
+		List<FileEntry> resultantEntries = new ArrayList<FileEntry>();
+		for (Object eachObject : resultantObjects) {
+			resultantEntries.add((FileEntry) eachObject);
+		}
+		return resultantEntries;
 	}
 
 	/**
@@ -1061,6 +1143,7 @@ public class FileService extends BaseService {
 	 * @return List<FileEntry>
 	 * @throws FileServiceException
 	 */
+
 	public List<FileEntry> getPersonLibrary(String userId, Map<String, String> params)
 			throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -1075,7 +1158,13 @@ public class FileService extends BaseService {
 		String resultType = ResultType.FEED.getResultType();
 		String requestUri = constructUrl(BaseUrl.FILES.getBaseUrl(), accessType, null, null, null,
 				subFilters, resultType);
-		return executeGet(requestUri, params, ClientService.FORMAT_XML);
+		List<Object> resultantObjects = executeGet(requestUri, params, ClientService.FORMAT_XML,
+				FileEntry.class);
+		List<FileEntry> resultantEntries = new ArrayList<FileEntry>();
+		for (Object eachObject : resultantObjects) {
+			resultantEntries.add((FileEntry) eachObject);
+		}
+		return resultantEntries;
 	}
 
 	/**
@@ -1088,10 +1177,11 @@ public class FileService extends BaseService {
 	 *            - pass the fileEntry object to be updated
 	 * @param params
 	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
-	 * @return List<FileEntry>
+	 * @return List<CommentEntry>
 	 * @throws FileServiceException
 	 */
-	public List<FileEntry> getPublicFilesComments(FileEntry fileEntry, Map<String, String> params)
+
+	public List<CommentEntry> getPublicFilesComments(FileEntry fileEntry, Map<String, String> params)
 			throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getPublicFilesComments");
@@ -1113,7 +1203,13 @@ public class FileService extends BaseService {
 		params.put(FileRequestParams.CATEGORY, "comment");
 		String requestUri = constructUrl(BaseUrl.FILES.getBaseUrl(), accessType, null, null, null,
 				subFilters, resultType);
-		return executeGet(requestUri, params, ClientService.FORMAT_XML);
+		List<Object> resultantObjects = executeGet(requestUri, params, ClientService.FORMAT_XML,
+				CommentEntry.class);
+		List<CommentEntry> resultantEntries = new ArrayList<CommentEntry>();
+		for (Object eachObject : resultantObjects) {
+			resultantEntries.add((CommentEntry) eachObject);
+		}
+		return resultantEntries;
 	}
 
 	/**
@@ -1125,10 +1221,11 @@ public class FileService extends BaseService {
 	 *            - pass the fileEntry object to be updated
 	 * @param params
 	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
-	 * @return List<FileEntry>
+	 * @return List<CommentEntry>
 	 * @throws FileServiceException
 	 */
-	public List<FileEntry> getFilesComments(FileEntry fileEntry, Map<String, String> params)
+
+	public List<CommentEntry> getFilesComments(FileEntry fileEntry, Map<String, String> params)
 			throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getFilesComments");
@@ -1153,7 +1250,13 @@ public class FileService extends BaseService {
 		params.put(FileRequestParams.CATEGORY, "comment");
 		String requestUri = constructUrl(BaseUrl.FILES.getBaseUrl(), accessType, null, null, null,
 				subFilters, resultType);
-		return executeGet(requestUri, params, ClientService.FORMAT_XML);
+		List<Object> resultantObjects = executeGet(requestUri, params, ClientService.FORMAT_XML,
+				CommentEntry.class);
+		List<CommentEntry> resultantEntries = new ArrayList<CommentEntry>();
+		for (Object eachObject : resultantObjects) {
+			resultantEntries.add((CommentEntry) eachObject);
+		}
+		return resultantEntries;
 	}
 
 	/**
@@ -1165,10 +1268,11 @@ public class FileService extends BaseService {
 	 *            - pass the fileEntry object to be updated
 	 * @param params
 	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
-	 * @return List<FileEntry>
+	 * @return List<CommentEntry>
 	 * @throws FileServiceException
 	 */
-	public List<FileEntry> getMyFilesComments(FileEntry fileEntry, Map<String, String> params)
+
+	public List<CommentEntry> getMyFilesComments(FileEntry fileEntry, Map<String, String> params)
 			throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getMyFilesComments");
@@ -1190,7 +1294,13 @@ public class FileService extends BaseService {
 		params.put(FileRequestParams.CATEGORY, "comment");
 		String requestUri = constructUrl(BaseUrl.FILES.getBaseUrl(), accessType, category, null, null,
 				subFilters, resultType);
-		return executeGet(requestUri, params, ClientService.FORMAT_XML);
+		List<Object> resultantObjects = executeGet(requestUri, params, ClientService.FORMAT_XML,
+				CommentEntry.class);
+		List<CommentEntry> resultantEntries = new ArrayList<CommentEntry>();
+		for (Object eachObject : resultantObjects) {
+			resultantEntries.add((CommentEntry) eachObject);
+		}
+		return resultantEntries;
 	}
 
 	/**
@@ -1203,6 +1313,7 @@ public class FileService extends BaseService {
 	 * @return List<FileEntry>
 	 * @throws FileServiceException
 	 */
+
 	public List<FileEntry> getFilesInMyRecycleBin(Map<String, String> params) throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getFilesInMyRecycleBin");
@@ -1213,7 +1324,13 @@ public class FileService extends BaseService {
 		String resultType = ResultType.FEED.getResultType();
 		String requestUri = constructUrl(BaseUrl.FILES.getBaseUrl(), accessType, category, view, null, null,
 				resultType);
-		return executeGet(requestUri, params, ClientService.FORMAT_XML);
+		List<Object> resultantObjects = executeGet(requestUri, params, ClientService.FORMAT_XML,
+				FileEntry.class);
+		List<FileEntry> resultantEntries = new ArrayList<FileEntry>();
+		for (Object eachObject : resultantObjects) {
+			resultantEntries.add((FileEntry) eachObject);
+		}
+		return resultantEntries;
 	}
 
 	/**
@@ -1385,7 +1502,7 @@ public class FileService extends BaseService {
 
 	public Document constructPayloadForMultipleEntries(List<FileEntry> fileEntries, String multipleEntryId) {
 		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "constructPayload");
+			logger.entering(sourceClass, "constructPayloadForMultipleEntries");
 		}
 		StringBuilder requestBody = new StringBuilder(
 				"<?xml version=\"1.0\" encoding=\"UTF-8\"?><feed xmlns=\"http://www.w3.org/2005/Atom\">");
@@ -1588,9 +1705,16 @@ public class FileService extends BaseService {
 			requestUri = constructUrl(BaseUrl.FILES.getBaseUrl(), AccessType.AUTHENTICATED.getAccessType(),
 					Categories.MYLIBRARY.getCategory(), null, null, subFilters,
 					ResultType.ENTRY.getResultType());
-			List<FileEntry> files = executeGet(requestUri, parameters, ClientService.FORMAT_XML);
-			if (files != null && !files.isEmpty()) {
-				file = files.get(0);
+
+			List<Object> resultantObjects = executeGet(requestUri, parameters, ClientService.FORMAT_XML,
+					FileEntry.class);
+			List<FileEntry> resultantEntries = new ArrayList<FileEntry>();
+			for (Object eachObject : resultantObjects) {
+				resultantEntries.add((FileEntry) eachObject);
+			}
+
+			if (resultantEntries != null && !resultantEntries.isEmpty()) {
+				file = resultantEntries.get(0);
 			}
 		}
 		return file;
@@ -1608,8 +1732,8 @@ public class FileService extends BaseService {
 	 * @throws FileServiceException
 	 */
 
-	public List<FileEntry> executeGet(String requestUri, Map<String, String> parameters, Handler format)
-			throws FileServiceException {
+	public List<Object> executeGet(String requestUri, Map<String, String> parameters, Handler format,
+			Class objectType) throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "executeGet");
 		}
@@ -1624,7 +1748,7 @@ public class FileService extends BaseService {
 		if (result == null) {
 			return null;
 		}
-		return createFileEntriesFromResultFeed((Document) result);
+		return parseAndProcessResultFeed((Document) result, objectType);
 	}
 
 	/**
@@ -1637,11 +1761,12 @@ public class FileService extends BaseService {
 	 * @return List<FileEntry>
 	 * @throws FileServiceException
 	 */
-	public List<FileEntry> createFileEntriesFromResultFeed(Document result) throws FileServiceException {
+	private List<Object> parseAndProcessResultFeed(Document result, Class objectType)
+			throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "createFileEntriesFromResultFeed");
 		}
-		List<FileEntry> fileObjects = new ArrayList<FileEntry>();
+		List<Object> fileObjects = new ArrayList<Object>();
 		try {
 			if (null != result) {
 				NodeList fileEntries = result.getElementsByTagName("entry");
@@ -1652,8 +1777,8 @@ public class FileService extends BaseService {
 						Node dup = doc.importNode(entry, true);
 						doc.appendChild(dup);
 
-						FileEntry file = FileEntry.createResultFileWithData(doc);
-						fileObjects.add(file);
+						Object resultingEntry = FileEntry.createResultFileWithData(doc, objectType);
+						fileObjects.add(resultingEntry);
 					}
 				}
 			}

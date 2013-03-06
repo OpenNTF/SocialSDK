@@ -30,6 +30,9 @@ define(['dojo/dom','dojo/_base/window', 'dojo/dom-construct'],function(dom,win,d
 		create: function(element, props, refNode) {
 			return domConstruct.create(element, props, refNode);
 		},
+        destroy: function(node) {
+            return domConstruct.destroy(node);
+        },
 		removeAll: function(node) {
 			node = this.byId(node);
 			if(node) {

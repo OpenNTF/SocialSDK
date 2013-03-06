@@ -28,6 +28,9 @@ define([],function() {
 		create: function(element, props, refNode) {
 			return dojo.create(element, props, refNode);
 		},
+        destroy: function(node) {
+            return dojo.destroy(node);
+        },
 		removeAll: function(id) {
 			var node = this.byId(id);
 			if(node) {

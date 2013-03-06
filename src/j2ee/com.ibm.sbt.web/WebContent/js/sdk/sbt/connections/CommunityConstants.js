@@ -64,6 +64,7 @@ define(["sbt/config", "sbt/connections/core"],function(sbt) {
 			"entry"				:"/a:entry",
 			"name"				:"a:contributor/a:name",
 			"uid"				:"a:contributor/snx:userid",
+			"email"             :"a:contributor/a:email",
 			"role"				:"snx:role"
 		},
 		_xpath_communities_Feed : {

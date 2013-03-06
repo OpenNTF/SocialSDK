@@ -47,7 +47,7 @@ define([ 'sbt/_bridge/declare', 'dojo/_base/xhr', 'dojox/xml/parser', 'sbt/util'
                 };
                 args.handle(_data, _ioArgs); 
             } catch (ex) {
-                // TODO log error
+                console.log(ex);
             }
         },
         createError: function(error, ioArgs) {

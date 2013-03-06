@@ -30,6 +30,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import com.ibm.sbt.services.BaseUnitTest;
 import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.client.connections.files.model.CommentEntry;
 import com.ibm.sbt.services.client.connections.files.model.FileEntry;
 import com.ibm.sbt.services.client.connections.files.model.FileRequestParams;
 import com.ibm.sbt.services.client.connections.files.model.FileRequestPayload;
@@ -211,10 +212,10 @@ public class FileServiceTest extends BaseUnitTest {
 		FileService fileService = new FileService();
 		authenticateEndpoint(fileService.getEndpoint(), "***REMOVED***", "***REMOVED***");
 		FileEntry fileEntry = fileService.getFile(TEST_FILEID, true);
-		List<FileEntry> fileEntries = fileService.getPublicFilesComments(fileEntry, null);
-		if (fileEntries != null && !fileEntries.isEmpty()) {
-			for (FileEntry fEntry : fileEntries) {
-				assertEquals(fEntry.getCategory(), "comment");
+		List<CommentEntry> commentEntries = fileService.getPublicFilesComments(fileEntry, null);
+		if (commentEntries != null && !commentEntries.isEmpty()) {
+			for (CommentEntry fEntry : commentEntries) {
+				assertNotNull(fEntry.getComment());
 			}
 		}
 	}
@@ -225,10 +226,10 @@ public class FileServiceTest extends BaseUnitTest {
 		FileService fileService = new FileService();
 		authenticateEndpoint(fileService.getEndpoint(), "***REMOVED***", "***REMOVED***");
 		FileEntry fileEntry = fileService.getFile(TEST_FILEID, true);
-		List<FileEntry> fileEntries = fileService.getFilesComments(fileEntry, null);
-		if (fileEntries != null && !fileEntries.isEmpty()) {
-			for (FileEntry fEntry : fileEntries) {
-				assertEquals(fEntry.getCategory(), "comment");
+		List<CommentEntry> commentEntries = fileService.getFilesComments(fileEntry, null);
+		if (commentEntries != null && !commentEntries.isEmpty()) {
+			for (CommentEntry fEntry : commentEntries) {
+				assertNotNull(fEntry.getComment());
 			}
 		}
 	}
@@ -239,10 +240,10 @@ public class FileServiceTest extends BaseUnitTest {
 		FileService fileService = new FileService();
 		authenticateEndpoint(fileService.getEndpoint(), "***REMOVED***", "***REMOVED***");
 		FileEntry fileEntry = fileService.getFile(TEST_FILEID, true);
-		List<FileEntry> fileEntries = fileService.getMyFilesComments(fileEntry, null);
-		if (fileEntries != null && !fileEntries.isEmpty()) {
-			for (FileEntry fEntry : fileEntries) {
-				assertEquals(fEntry.getCategory(), "comment");
+		List<CommentEntry> commentEntries = fileService.getMyFilesComments(fileEntry, null);
+		if (commentEntries != null && !commentEntries.isEmpty()) {
+			for (CommentEntry fEntry : commentEntries) {
+				assertNotNull(fEntry.getComment());
 			}
 		}
 	}

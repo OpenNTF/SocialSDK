@@ -224,7 +224,7 @@ public class FileEntry {
 	 * @param result
 	 * @return FileEntry
 	 */
-	public static FileEntry createResultFileWithData(Document result) {
+	public static Object createResultFileWithData(Document result, Class objectType) {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "createResultFileWithData");
 		}
@@ -239,6 +239,11 @@ public class FileEntry {
 			logger.exiting(sourceClass, "createResultFileWithData");
 		}
 
+		if (objectType.equals(CommentEntry.class)) {
+			return file.getCommentEntry();
+		} else if (objectType.equals(PersonEntry.class)) {
+			return file.getAuthorEntry();
+		}
 		return file;
 	}
 

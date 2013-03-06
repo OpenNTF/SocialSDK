@@ -21,6 +21,9 @@ require(["sbt/connections/CommunityService",'sbt/Endpoint',"sbt/dom","sbt/config
 					dom.setText("content","Error received. Error Code = " +  error.code + ". Error Message = " + error.message);
 				}		
 			});
+		},
+		cancelAction: function(){
+			dom.setText("content","You need to Login to see Communties List");
 		}
 	});
 });

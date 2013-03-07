@@ -1,5 +1,7 @@
 package com.ibm.sbt.services.client.connections.communities;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -61,31 +63,32 @@ public class Converter {
 	 * @return Community[] 
 	 * @throws XMLException
 	 */
-	static public Community[] returnCommunities(CommunityService cs, Document data) throws XMLException
+	static public Collection<Community> returnCommunities(CommunityService cs, Document data) throws XMLException
 	{
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "returnCommunities");
 		}
-		Community[] community = null;
+		Collection<Community> communities = null;
 		
 		if(data != null){
 			NodeList communityEntries = data.getElementsByTagName("entry");
-			community = new Community[communityEntries.getLength()];
+			communities = new ArrayList<Community>();
 			if(communityEntries != null && communityEntries.getLength() > 0) {
 				for(int i = 0 ; i < communityEntries.getLength();i++) {
 					Node entry = communityEntries.item(i);
 					Document doc =  DOMUtil.createDocument();
 					Node dup = doc.importNode(entry, true);
 					doc.appendChild(dup);
-					community[i] = new Community(cs, entry.getFirstChild().getTextContent());//snx:communityUuid
-					community[i].setData(doc);
+					Community community = new Community(cs, entry.getFirstChild().getTextContent());//snx:communityUuid
+					community.setData(doc);
+					communities.add(community);
 				}
 			}
 		}
 		if (logger.isLoggable(Level.FINEST)) {
     		logger.exiting(sourceClass, "returnCommunities");
 		}
-		return community;
+		return communities;
 	}
 	
 	 /**

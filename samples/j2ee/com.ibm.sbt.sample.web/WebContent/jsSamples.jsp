@@ -80,6 +80,8 @@ body {
 function hideJsSnippetCode() {
 	var jsCodePre =  document.getElementById("jsCodePre");
 	var jsCodeSpan =  document.getElementById("jsCodeSpan");
+	var htmlCodePre =  document.getElementById("htmlCodePre");
+	var htmlCodeSpan =  document.getElementById("htmlCodeSpan");
 	var accordianInner =  document.getElementById("accordianInner");
 	var ShowCodeLink =  document.getElementById("ShowCodeLink");
 	var HideCodeLink =  document.getElementById("HideCodeLink")
@@ -90,6 +92,9 @@ function hideJsSnippetCode() {
 		jsCodePre.style.height = 'auto';
 		jsCodePre.style.display = '';
 		jsCodeSpan.style.display = '';
+		htmlCodePre.style.height = 'auto';
+		htmlCodePre.style.display = '';
+		htmlCodeSpan.style.display = '';
 	}else{
 		ShowCodeLink.style.display = '';
 		HideCodeLink.style.display = 'none';
@@ -97,6 +102,9 @@ function hideJsSnippetCode() {
 		jsCodeSpan.style.display = 'none';
 		jsCodePre.style.height = '0px';
 		jsCodePre.style.display = 'none';
+		htmlCodePre.style.height = 'none';
+		htmlCodePre.style.display = '0px';
+		htmlCodeSpan.style.display = 'none';
 	}
 }
 </script>
@@ -162,9 +170,9 @@ function hideJsSnippetCode() {
 		         					Hide Snippet Code
 		       				</a>
 		                  </div>
-		   				<div class="accordion-body" id="jsSnoppetCode" style="height: auto;">
-							 <div class="accordion-inner" id="accordianInner" style="display:none">
-								<%
+		   				<div class="accordion-body" id="jsSnippetCode" style="height: auto;">
+							<div class="accordion-inner" id="accordianInner" style="display:none">
+							<%
 								if (StringUtil.isNotEmpty(js)) {
 									String s = "<pre id='jsCodePre' style='height:0px;'><span id='jsCodeSpan'>"
 											+ HtmlTextUtil.toHTMLContentString(js, false)
@@ -172,13 +180,13 @@ function hideJsSnippetCode() {
 									out.println(s);
 								}
 								if (StringUtil.isNotEmpty(html)) {
-									String s = "<pre id='jsCodePre' style='height:0px;'><span id='jsCodeSpan'>"
+									String s = "<pre id='htmlCodePre' style='height:0px;'><span id='htmlCodeSpan'>"
 											+ HtmlTextUtil.toHTMLContentString(html, false)
 											+ "</span></pre>\n";
 									out.println(s);
 								}
-								}
-								%>
+							}
+							%>
 							</div>
 		         		</div>
 		               </div>

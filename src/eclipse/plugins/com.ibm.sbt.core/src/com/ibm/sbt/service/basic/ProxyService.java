@@ -65,6 +65,9 @@ import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.commons.util.profiler.Profiler;
 import com.ibm.commons.util.profiler.ProfilerAggregator;
 import com.ibm.commons.util.profiler.ProfilerType;
+import com.ibm.sbt.service.debug.DebugProxyHook;
+import com.ibm.sbt.service.debug.DebugServiceHookFactory;
+import com.ibm.sbt.service.debug.DebugServiceHookFactory.Type;
 
 /**
  * Basic proxy.
@@ -89,10 +92,15 @@ public class ProxyService {
 	 */
 	private static final String PASSTHRUID               = "sbtsdkck";
 
-
+	private DebugProxyHook debugHook;
+	
 	public ProxyService() {
 	}
 
+	public DebugProxyHook getDebugHook() {
+		return debugHook;
+	}
+	
 	public int getSocketReadTimeout() {
 		return 120; // default, in seconds
 	}
@@ -161,27 +169,38 @@ public class ProxyService {
 		}
 	}
 	protected void serviceProxy(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		this.debugHook = (DebugProxyHook)DebugServiceHookFactory.get().get(Type.PROXY,request,response);
+		if(debugHook!=null) {
+			request = debugHook.getRequestWrapper();
+			response = debugHook.getResponseWrapper();
+		}
 		try {
-			initProxy(request, response);
 			try {
-				checkRequestAllowed(request);
-				String smethod = request.getMethod();
-				DefaultHttpClient client = getClient(request, getSocketReadTimeout());
-				URI url = getRequestURI(request);
-				HttpRequestBase method = createMethod(smethod, url,request);
-
-				if (prepareForwardingMethod(method, request, client)) {
-					HttpResponse clientResponse = executeMethod(client, method);
-					prepareResponse(method, request, response, clientResponse, true);
+				initProxy(request, response);
+				try {
+					checkRequestAllowed(request);
+					String smethod = request.getMethod();
+					DefaultHttpClient client = getClient(request, getSocketReadTimeout());
+					URI url = getRequestURI(request);
+					HttpRequestBase method = createMethod(smethod, url,request);
+					if (prepareForwardingMethod(method, request, client)) {
+						HttpResponse clientResponse = executeMethod(client, method);
+						prepareResponse(method, request, response, clientResponse, true);
+					}
+					response.flushBuffer();
+				} catch (Exception e) {
+					writeErrorResponse("Unexpected Exception", new String[] {"exception"},new String[] {e.toString()}, response, request);
+				}finally {
+					termProxy(request, response);
 				}
-				response.flushBuffer();
 			} catch (Exception e) {
 				writeErrorResponse("Unexpected Exception", new String[] {"exception"},new String[] {e.toString()}, response, request);
-			}finally {
-				termProxy(request, response);
 			}
-		} catch (Exception e) {
-			writeErrorResponse("Unexpected Exception", new String[] {"exception"},new String[] {e.toString()}, response, request);
+		} finally {
+			if(debugHook!=null) {
+				debugHook.terminate();
+				debugHook = null;
+			}
 		}
 	}
 
@@ -226,6 +245,10 @@ public class ProxyService {
 	}
 
 	protected HttpRequestBase createMethod(String smethod, URI uri,HttpServletRequest request) throws ServletException {
+		if(getDebugHook()!=null) {
+			getDebugHook().getDumpRequest().setMethod(smethod);
+			getDebugHook().getDumpRequest().setUrl(uri.toString());
+		}
 		if (smethod.equalsIgnoreCase("get")) {
 			HttpGet method = new HttpGet(uri);
 			return method;
@@ -281,6 +304,9 @@ public class ProxyService {
 									methodcookie.setDomain(domain);
 									methodcookie.setPath(path);
 									cs.addCookie(methodcookie);
+									if(getDebugHook()!=null) {
+										getDebugHook().getDumpRequest().addCookie(methodcookie.getName(), methodcookie.toString());
+									}
 								}
 							}
 						} else if(isCookieAllowed(cookiename)) {
@@ -301,6 +327,9 @@ public class ProxyService {
 							}
 							methodcookie.setPath(path);
 							cs.addCookie(methodcookie);
+							if(getDebugHook()!=null) {
+								getDebugHook().getDumpRequest().addCookie(methodcookie.getName(), methodcookie.toString());
+							}
 						}
 					}
 				}
@@ -329,11 +358,17 @@ public class ProxyService {
 			// Ensure that the header is allowed
 			if(isHeaderAllowed(headerName)) {
 				method.addHeader(headerName, headerValue);
+				if(getDebugHook()!=null) {
+					getDebugHook().getDumpRequest().addHeader(headerName, headerValue);
+				}
 			}
 		}
 		String xForward = xForwardedForHeader.toString();
 		if(StringUtil.isNotEmpty(xForward)) {
 			method.addHeader("X-Forwarded-For", xForward);
+			if(getDebugHook()!=null) {
+				getDebugHook().getDumpRequest().addHeader("X-Forwarded-For", xForward);
+			}
 		}
 		return true;
 	}
@@ -377,6 +412,9 @@ public class ProxyService {
 				clientResponse.setHeader("WWW-Authenticate", "");
 			}
 			response.setStatus(statusCode);
+			if(getDebugHook()!=null) {
+				getDebugHook().getDumpResponse().setStatus(statusCode);
+			}
 
 			// Passed back all heads, but process cookies differently.
 			Header[] headers = clientResponse.getAllHeaders();
@@ -446,6 +484,9 @@ public class ProxyService {
 								// this implementation of HttpServletRequest seems to have issues... setHeader works as I would
 								// expect addHeader to.
 								response.setHeader(headername, newsetcookieval);
+								if(getDebugHook()!=null) {
+									getDebugHook().getDumpResponse().addCookie(headername, newsetcookieval);
+								}
 							}
 						}
 					}
@@ -466,6 +507,9 @@ public class ProxyService {
 							break;
 						} else {
 							response.setHeader(headername, headerval);
+							if(getDebugHook()!=null) {
+								getDebugHook().getDumpResponse().addHeader(headername, headerval);
+							}
 						}
 					} else if ( (statusCode == 401 || statusCode == 403)  && headername.equalsIgnoreCase("WWW-Authenticate")) { // $NON-NLS-1$
 						if (headerval.indexOf("Basic") != -1) { // $NON-NLS-1$
@@ -482,10 +526,16 @@ public class ProxyService {
 								strb.append('"');
 								headerval = strb.toString();
 								response.setHeader(headername, headerval);
+								if(getDebugHook()!=null) {
+									getDebugHook().getDumpResponse().addHeader(headername, headerval);
+								}
 							}
 						}
 					} else {
 						response.setHeader(headername, headerval);
+						if(getDebugHook()!=null) {
+							getDebugHook().getDumpResponse().addHeader(headername, headerval);
+						}
 					}
 				}
 			}
@@ -493,6 +543,9 @@ public class ProxyService {
 			// Need to move response body over too
 			if(statusCode == HttpServletResponse.SC_NO_CONTENT || statusCode == HttpServletResponse.SC_NOT_MODIFIED) {
 				response.setHeader("Content-Length", "0");
+				if(getDebugHook()!=null) {
+					getDebugHook().getDumpResponse().addHeader("Content-Length", "0");
+				}
 			} else if(isCopy) {
 				HttpEntity entity = clientResponse.getEntity();
 				InputStream inStream = entity.getContent();
@@ -507,6 +560,9 @@ public class ProxyService {
 				}
 				else {
 					response.setHeader("Content-Length", "0");
+					if(getDebugHook()!=null) {
+						getDebugHook().getDumpResponse().addHeader("Content-Length", "0");
+					}
 				}
 			}
 		} catch(IOException ex) {

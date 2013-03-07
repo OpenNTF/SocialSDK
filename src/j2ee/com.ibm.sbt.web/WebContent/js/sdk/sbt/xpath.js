@@ -64,6 +64,27 @@ define(['sbt/_bridge/declare'],function(declare) {
 			}
 		},	
 		
+        selectNumber : function(xmlDomCtx){
+            var doc = xmlDomCtx.ownerDocument || xmlDomCtx;
+            if (this.ie) {
+                try {
+                    doc.setProperty("SelectionLanguage", "XPath");
+                    doc.setProperty("SelectionNamespaces", this.nsString);
+                    if (xmlDomCtx === doc) xmlDomCtx = doc.documentElement;
+                    return xmlDomCtx.selectNodes(this.xpath).length;
+                } catch (ex) {
+                    throw "XPath is not supported";
+                }
+            } else {
+                var _this = this;
+                var result = doc.evaluate(this.xpath, xmlDomCtx,
+                    function(prefix) {
+                        return _this.nsArray[prefix];
+                    }, XPathResult.NUMBER_TYPE, null);
+                return result.numberValue;
+            }
+        },
+		
 		selectNodes : function(xmlDomCtx) {
 			var doc = xmlDomCtx.ownerDocument || xmlDomCtx;
 			if (this.ie) {
@@ -92,7 +113,7 @@ define(['sbt/_bridge/declare'],function(declare) {
 		selectText : function(node) {
 			var result = this.selectSingleNode(node);
 			return result ? (result.text || result.textContent) : null;
-		}
+		},
 		
 	});
 	
@@ -135,6 +156,11 @@ define(['sbt/_bridge/declare'],function(declare) {
 		selectText : function(node, xpath, nsArray) {
 			var expr = new XPathExpr(xpath, nsArray);
 			return expr.selectText(node);
+		},
+		
+		selectNumber : function(node, xpath, nsArray){
+		    var expr = new XPathExpr(xpath, nsArray);
+		    return expr.selectNumber(node);
 		}
 	};
 });

@@ -3,6 +3,7 @@ package com.ibm.sbt.services.client.connections.communities;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -112,11 +113,11 @@ public class CommunityService extends BaseService {
 	/**
 	 * Wrapper method to get Public Communities
 	 * 
-	 * @return Community[] - array of community This method is used to get All Communities
+	 * @return list of All Communities
 	 * @throws XMLException
 	 * @throws SBTServiceException
 	 */
-	public Community[] getPublicCommunities() throws XMLException // getPublicCommunities
+	public Collection<Community> getPublicCommunities() throws XMLException // getPublicCommunities
 			, SBTServiceException {
 		return getPublicCommunities(null);
 	}
@@ -125,11 +126,11 @@ public class CommunityService extends BaseService {
 	 *  Wrapper method to get All Communities with different parameters for eg. Tag, sortBy. argument should be the parameter map
 	 * 
 	 * @param parameters - parameter Map
-	 * @return Community[] - array of community This method is used 
+	 * @return list of all communities
 	 * @throws XMLException
 	 * @throws SBTServiceException
 	 */
-	public Community[] getPublicCommunities(Map<String, String> parameters) throws XMLException,
+	public Collection<Community> getPublicCommunities(Map<String, String> parameters) throws XMLException,
 			SBTServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getPublicCommunities", parameters);
@@ -137,14 +138,14 @@ public class CommunityService extends BaseService {
 		Document data = getCommunityEntities(
 				resolveCommunityUrl(CommunityEntity.COMMUNITIES.getCommunityEntityType(),
 						CommunityType.ALL.getCommunityType()), parameters);
-		Community[] communities = Converter.returnCommunities(this, data);
+		Collection<Community> communities = Converter.returnCommunities(this, data);
 		if (logger.isLoggable(Level.FINEST)) {
-			logger.exiting(sourceClass, "getPublicCommunities", Arrays.toString(communities));
+			logger.exiting(sourceClass, "getPublicCommunities", communities.toString());
 		}
 		if (logger.isLoggable(Level.FINEST)) {
 			String log = "";
 			if (communities != null) {
-				log = Integer.toString(communities.length);
+				log = Integer.toString(communities.size());
 			} else {
 				log = "empty response from server for requested communities";
 			}
@@ -156,10 +157,10 @@ public class CommunityService extends BaseService {
 	/**
 	 * This method is used to get Communities of which the user is a member or owner.
 	 * 
-	 * @return Community[] - array of community
+	 * @return list of communities
 	 * @throws SBTServiceException
 	 */
-	public Community[] getMyCommunities() throws XMLException, SBTServiceException {
+	public Collection<Community> getMyCommunities() throws XMLException, SBTServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getMyCommunities");
 		}
@@ -167,11 +168,11 @@ public class CommunityService extends BaseService {
 		Document data = getCommunityEntities(
 				resolveCommunityUrl(CommunityEntity.COMMUNITIES.getCommunityEntityType(),
 						CommunityType.MY.getCommunityType()), parameters);
-		Community[] communities = Converter.returnCommunities(this, data);
+		Collection<Community> communities = Converter.returnCommunities(this, data);
 		if (logger.isLoggable(Level.FINEST)) {
 			String log = "";
 			if (communities != null) {
-				log = Integer.toString(communities.length);
+				log = Integer.toString(communities.size());
 			} else {
 				log = "empty response from server for requested communities";
 			}
@@ -188,7 +189,7 @@ public class CommunityService extends BaseService {
 	 * @throws XMLException
 	 * @throws SBTServiceException
 	 */
-	public Community[] getSubCommunities(Community community) throws XMLException, SBTServiceException {
+	public Collection<Community> getSubCommunities(Community community) throws XMLException, SBTServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getSubCommunities", community);
 		}
@@ -200,11 +201,11 @@ public class CommunityService extends BaseService {
 		Document data = getCommunityEntities(
 				resolveCommunityUrl(CommunityEntity.COMMUNITY.getCommunityEntityType(),
 						CommunityType.SUBCOMMUNITIES.getCommunityType()), parameters);
-		Community[] communities = Converter.returnCommunities(this, data);
+		Collection<Community> communities = Converter.returnCommunities(this, data);
 		if (logger.isLoggable(Level.FINEST)) {
 			String log = "";
 			if (communities != null) {
-				log = Integer.toString(communities.length);
+				log = Integer.toString(communities.size());
 			} else {
 				log = "empty response from server for requested communities";
 			}

@@ -17,6 +17,7 @@
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
+<%@page import="java.util.Collection"%>
 <%@page
 	import="com.ibm.sbt.services.client.connections.communities.Community"%>
 <%@page
@@ -33,12 +34,12 @@
 	<%
 		try {
 			CommunityService communityService = new CommunityService();
-			Community[] communities = communityService.getMyCommunities();
-			if (communities.length > 0) {
-				out.println("<b> My Communities </b>");
-				out.println("<br>");
-				for (int i = 0; i < communities.length; i++) {
-					out.println("<b>Title : </b> " + communities[i].getTitle());
+			Collection<Community> communities = communityService.getMyCommunities();
+			out.println("<b> My Communities </b>");
+			out.println("<br>");
+			if (communities.size() > 0) {
+				for (Community community : communities) {
+					out.println("<b>Name : </b> " + community.getTitle());
 					out.println("<br>");
 				}
 			} else {

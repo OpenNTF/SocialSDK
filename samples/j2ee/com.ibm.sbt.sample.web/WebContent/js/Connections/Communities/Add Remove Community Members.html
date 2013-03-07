@@ -1,8 +1,18 @@
 <div id="error" style="display:none;" class="alert alert-error"></div>
-<div id="success" style="display:none;" class="alert alert-success">Email sent successfully!</div>
+<div id="success" style="display:none;" class="alert alert-success"></div>
 <div class="form-horizontal">
-    <legend  id="communityTitle"></legend>
+    <legend>Community Details</legend>
     <div class="control-group">
+    	<label class="control-label">Community Id:</label>
+        <div class="controls">
+            <input id="communityId" type="text" placeholder="Community Id" style="width:400px" disabled="disabled"></input>
+        </div>
+        <div style="height:4px"></div>
+    	<label class="control-label">Community Title:</label>
+        <div class="controls">
+            <input id="communityTitle" type="text" placeholder="Community Title" style="width:400px" disabled="disabled"></input>
+        </div>
+        <div style="height:4px"></div>
     	<label class="control-label">Members:</label>
         <div class="controls">
             <select multiple="multiple" id="membersList" style="width:400px">
@@ -14,7 +24,6 @@
 	        <button class="btn" id="refreshBtn">Refresh</button>
         </div>
     </div>
-    
     <legend>New Member</legend>
     <div class="control-group">
         <label class="control-label">Email:</label>
@@ -23,4 +32,5 @@
 	    	<button class="btn btn-primary" id="addBtn">Add</button>
         </div>
     </div>
+    <input id="entry" type="hidden"></input>
 </div>

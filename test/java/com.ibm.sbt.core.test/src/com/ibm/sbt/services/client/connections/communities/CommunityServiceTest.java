@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,9 +55,9 @@ public class CommunityServiceTest extends BaseUnitTest {
 	public final void testGetPublicCommunities() throws Exception {
 		CommunityService communityService = new CommunityService();
 
-		List<Community> communities;
+		Collection<Community> communities;
 		try {
-			communities = Arrays.asList(communityService.getPublicCommunities());
+			communities = communityService.getPublicCommunities();
 		} catch (XMLException e) {
 			fail(e.getMessage());
 			return;
@@ -76,12 +77,12 @@ public class CommunityServiceTest extends BaseUnitTest {
 	public final void testGetPublicCommunitiesByParameters() throws Exception {
 		CommunityService communityService = new CommunityService();
 
-		List<Community> communities;
+		Collection<Community> communities;
 		try {
 			Map<String, String> parameters = new HashMap<String, String>();
 			parameters.put("tag", "test");
 			parameters.put("ps", "5");
-			communities = Arrays.asList(communityService.getPublicCommunities(parameters));
+			communities = communityService.getPublicCommunities(parameters);
 		} catch (XMLException e) {
 			fail(e.getMessage());
 			return;
@@ -103,9 +104,9 @@ public class CommunityServiceTest extends BaseUnitTest {
 		authenticateEndpoint(communityService.getEndpoint(), properties.getProperty("user1"),
 				properties.getProperty("passwordUser1"));
 
-		List<Community> communities;
+		Collection<Community> communities;
 		try {
-			communities = Arrays.asList(communityService.getMyCommunities());
+			communities = communityService.getMyCommunities();
 		} catch (XMLException e) {
 			fail(e.getMessage());
 			return;

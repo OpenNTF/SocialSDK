@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import lib.TestEndpoint;
@@ -39,9 +40,9 @@ public class CommunitiesTest extends TestEndpoint {
 
 		CommunityService svc = new CommunityService();
 
-		List<Community> communities;
+		Collection<Community> communities;
 		try {
-			communities = Arrays.asList(svc.getPublicCommunities());
+			communities = svc.getPublicCommunities();
 		} catch (XMLException e) {
 			fail(e.getMessage());
 			return;

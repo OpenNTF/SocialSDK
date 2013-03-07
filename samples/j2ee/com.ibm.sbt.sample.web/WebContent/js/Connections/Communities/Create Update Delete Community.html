@@ -1,5 +1,5 @@
 <div id="error" style="display:none;" class="alert alert-error"></div>
-<div id="success" style="display:none;" class="alert alert-success">Email sent successfully!</div>
+<div id="success" style="display:none;" class="alert alert-success"></div>
 <div class="form-horizontal">
     <legend>Community Details</legend>
     <div class="control-group">
@@ -7,6 +7,7 @@
         <div class="controls">
             <input id="communityId" type="text" placeholder="Community Id" style="width:400px" disabled="disabled"></input>
         </div>
+        <div style="height:4px"></div>
         <label class="control-label">Title:</label>
         <div class="controls">
             <input id="communityTitle" type="text" placeholder="Title" style="width:400px"></input>
@@ -21,12 +22,13 @@
         <div class="controls">
             <input id="communityTags" type="text" placeholder="Tags" style="width:400px"></input>
         </div>
-        <div style="height:4px"></div>
+        <div style="height:8px"></div>
         <div class="controls">
 	    	<button class="btn btn-primary" id="loadBtn">Load</button>
 	    	<button class="btn" id="createBtn">Create</button>
 	    	<button class="btn" id="updateBtn">Update</button>
 	        <button class="btn" id="deleteBtn">Delete</button>
         </div>
+        <input id="entry" type="hidden"></input>
     </div>
 </div>

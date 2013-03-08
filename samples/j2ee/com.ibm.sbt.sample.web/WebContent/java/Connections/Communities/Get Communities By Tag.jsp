@@ -20,6 +20,7 @@
 <%@page import="com.ibm.sbt.services.client.connections.communities.Community"%> 
 <%@page import="com.ibm.sbt.services.client.connections.communities.CommunityParams"%> 
 <%@page import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
+<%@page import="java.util.Collection"%>
 <%@page 
 	language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -36,15 +37,15 @@
 		CommunityService communityService = new CommunityService();
 		CommunityParams params = new CommunityParams();
 		params.setTag(tag);
-		Community[] communities = communityService.getPublicCommunities(params.getParameterMap());
-		if(communities.length > 0){
+		Collection<Community> communities = communityService.getPublicCommunities(params.getParameterMap());
+		if(communities.size() > 0){
 			out.println("<b> Communities associated with Tag: </b>"+tag);	
 			out.println("<br>");
+			for (Community community : communities) {
+					out.println("<b>Title : </b> " + community.getTitle());
+					out.println("<br>");
+				}
 		
-			for (int i = 0; i < communities.length; i++) { 
-	    		out.println("<b>Title : </b> "+communities[i].getTitle());
-	     		out.println("<br>");
-			}
 		}
 		else{
 			out.println("No result");

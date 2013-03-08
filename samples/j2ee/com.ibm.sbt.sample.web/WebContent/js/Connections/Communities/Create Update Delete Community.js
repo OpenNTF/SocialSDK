@@ -8,7 +8,7 @@ require(["sbt/Endpoint", "sbt/connections/CommunityService", "sbt/dom"], functio
             handleLoggedIn(response.entry, CommunityService, dom);
         },
         error: function(error) {
-            displayError(dom, error);
+            handleError(dom, error);
         }
     });
     displayMessage(dom, "Please wait... Loading your profile entry");
@@ -21,7 +21,7 @@ function loadCommunity(communityService, dom) {
             handleCommunitiesLoaded(communities, dom);
         },
         error: function(error) {
-            displayError(dom, error);
+            handleError(dom, error);
         }       
     });
 }
@@ -39,7 +39,7 @@ function createCommunity(communityService, title, content, dom) {
             handleCommunityCreated(community, dom);
         },
         error : function(error) {
-            displayError(dom, error);
+            handleError(dom, error);
         }
     });
     
@@ -52,7 +52,7 @@ function deleteCommunity(community, dom) {
             handleCommunityDeleted(community, dom);
         },
         error : function(error) {
-            displayError(dom, error);
+            handleError(dom, error);
         }
     });
     
@@ -68,7 +68,7 @@ function updateCommunity(community, title, content, tags, dom) {
             handleCommunityUpdated(community, dom);
         },
         error : function(error) {
-            displayError(dom, error);
+            handleError(dom, error);
         }
     });
     displayMessage(dom, "Please wait... Updating community: " + community.getCommunityUuid());
@@ -167,7 +167,7 @@ function displayMessage(dom, msg) {
     dom.byId("error").style.display = "none";
 }
 
-function displayError(dom, error) {
+function handleError(dom, error) {
     dom.setText("error", "Error: " + error.message);
     
     dom.byId("success").style.display = "none";

@@ -11,7 +11,7 @@ require(["sbt/Endpoint", "sbt/connections/CommunityService", "sbt/dom"], functio
             displayError(dom, error);
         }
     });
-    displayMessage(dom, "Please wait... Retrieving your profile entry");
+    displayMessage(dom, "Please wait... Loading your profile entry");
 });
 
 function loadCommunity(communityService, dom) {
@@ -82,7 +82,7 @@ function handleLoggedIn(entry, CommunityService, dom) {
 
     addOnClickHandlers(communityService, dom);
     
-    displayMessage(dom, "Please wait... Retrieving your latest community");
+    displayMessage(dom, "Please wait... Loading your latest community");
 }
 
 function handleCommunitiesLoaded(communities, dom) {
@@ -106,7 +106,7 @@ function handleCommunitiesLoaded(communities, dom) {
     }
     dom.byId("communityContent").value = content;
    
-    displayMessage(dom, "Successfully retrieved community: " + communities[0].getCommunityUuid());
+    displayMessage(dom, "Successfully loaded community: " + communities[0].getCommunityUuid());
 }
 
 function handleCommunityCreated(community, dom) {

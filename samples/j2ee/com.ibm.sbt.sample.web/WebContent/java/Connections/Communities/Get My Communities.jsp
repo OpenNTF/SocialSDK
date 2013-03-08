@@ -39,7 +39,7 @@
 			out.println("<br>");
 			if (communities.size() > 0) {
 				for (Community community : communities) {
-					out.println("<b>Name : </b> " + community.getTitle());
+					out.println("<b>Title : </b> " + community.getTitle());
 					out.println("<br>");
 				}
 			} else {

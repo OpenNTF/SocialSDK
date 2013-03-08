@@ -35,7 +35,10 @@ define(['sbt/config'],function(sbt) {
             opensearch : "http://a9.com/-/spec/opensearch/1.1/",
             a : "http://www.w3.org/2005/Atom",
             h : "http://www.w3.org/1999/xhtml",
-            td: "urn:ibm.com/td"
+            td: "urn:ibm.com/td",
+            relevance: "http://a9.com/-/opensearch/extensions/relevance/1.0/",
+            ibmsc: "http://www.ibm.com/search/content/2010",
+            xhtml: "http://www.w3.org/1999/xhtml"
         },
         
         feedXPath : {

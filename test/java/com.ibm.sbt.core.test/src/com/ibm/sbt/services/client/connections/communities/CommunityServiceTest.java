@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,21 +54,12 @@ public class CommunityServiceTest extends BaseUnitTest {
 	@Test
 	public final void testGetPublicCommunities() throws Exception {
 		CommunityService communityService = new CommunityService();
-
-		List<Community> communities;
-		try {
-			communities = Arrays.asList(communityService.getPublicCommunities());
-		} catch (XMLException e) {
-			fail(e.getMessage());
-			return;
-		}
-
+		Collection<Community> communities = communityService.getPublicCommunities();
 		for (Community community : communities) {
 			assertNotNull(community.getTitle());
 			assertNotNull(community.getCommunityUrl());
 			assertNotNull(community.getCommunityUuid());
 			assertNotNull(community.getMembersUrl());
-
 		}
 	}
 
@@ -75,18 +67,10 @@ public class CommunityServiceTest extends BaseUnitTest {
 	@Test
 	public final void testGetPublicCommunitiesByParameters() throws Exception {
 		CommunityService communityService = new CommunityService();
-
-		List<Community> communities;
-		try {
-			Map<String, String> parameters = new HashMap<String, String>();
-			parameters.put("tag", "test");
-			parameters.put("ps", "5");
-			communities = Arrays.asList(communityService.getPublicCommunities(parameters));
-		} catch (XMLException e) {
-			fail(e.getMessage());
-			return;
-		}
-
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put("tag", "test");
+		parameters.put("ps", "5");
+		Collection<Community> communities = communityService.getPublicCommunities(parameters);
 		for (Community community : communities) {
 			assertNotNull(community.getTitle());
 			assertNotNull(community.getCommunityUrl());
@@ -102,15 +86,7 @@ public class CommunityServiceTest extends BaseUnitTest {
 		CommunityService communityService = new CommunityService();
 		authenticateEndpoint(communityService.getEndpoint(), properties.getProperty("user1"),
 				properties.getProperty("passwordUser1"));
-
-		List<Community> communities;
-		try {
-			communities = Arrays.asList(communityService.getMyCommunities());
-		} catch (XMLException e) {
-			fail(e.getMessage());
-			return;
-		}
-
+		Collection<Community> communities = communityService.getMyCommunities();
 		for (Community community : communities) {
 			assertNotNull(community.getTitle());
 			assertNotNull(community.getCommunityUrl());
@@ -124,16 +100,9 @@ public class CommunityServiceTest extends BaseUnitTest {
 	@Test
 	public final void testGetCommunityBookmarks() throws Exception {
 		CommunityService communityService = new CommunityService();
-		List<Bookmark> bookmarks;
-		try {
-			Community community = communityService
-					.getCommunity(properties.getProperty("communityUuid"), true);
-			bookmarks = Arrays.asList(communityService.getBookmarks(community));
-		} catch (XMLException e) {
-			fail(e.getMessage());
-			return;
-		}
-
+		Community community = communityService.getCommunity(properties.getProperty("communityUuid"), true);
+		List<Bookmark> 	bookmarks = Arrays.asList(communityService.getBookmarks(community));
+		
 		for (Bookmark bookmark : bookmarks) {
 			assertNotNull(bookmark.getTitle());
 			assertNotNull(bookmark.getSummary());
@@ -144,15 +113,8 @@ public class CommunityServiceTest extends BaseUnitTest {
 	@Test
 	public final void testGetCommunityForumTopics() throws Exception {
 		CommunityService communityService = new CommunityService();
-		List<ForumTopic> forumTopics;
-		try {
-			Community community = communityService
-					.getCommunity(properties.getProperty("communityUuid"), true);
-			forumTopics = Arrays.asList(communityService.getForumTopics(community));
-		} catch (XMLException e) {
-			fail(e.getMessage());
-			return;
-		}
+		Community community = communityService.getCommunity(properties.getProperty("communityUuid"), true);
+		List<ForumTopic> forumTopics = Arrays.asList(communityService.getForumTopics(community));
 
 		for (ForumTopic forumTopic : forumTopics) {
 			assertNotNull(forumTopic.getTitle());
@@ -163,14 +125,8 @@ public class CommunityServiceTest extends BaseUnitTest {
 	@Test
 	public final void testGetMembers() throws Exception {
 		CommunityService communityService = new CommunityService();
-		List<Member> members;
-		try {
-			Community community = communityService.getCommunity(properties.getProperty("communityUuid"));
-			members = Arrays.asList(communityService.getMembers(community));
-		} catch (XMLException e) {
-			fail(e.getMessage());
-			return;
-		}
+		Community community = communityService.getCommunity(properties.getProperty("communityUuid"));
+		List<Member> members = Arrays.asList(communityService.getMembers(community));
 
 		for (Member member : members) {
 			assertNotNull(member.getId());

@@ -267,7 +267,11 @@ define(
                  * @return {String} Type of the Community
                  */
                 getCommunityType : function() {
-                    return this.get("communityType");
+                    var type = this.get("communityType");
+                    if (!type) {
+                        type = "public";
+                    }
+                    return type;
                 },
                 
                 /**
@@ -296,13 +300,15 @@ define(
 				 * @return {Member} author Author of the community
 				 */
 				getAuthor : function(){
-					if(this._author){
-						return this._author;
-					}else{						
-						var _author = new Member(this._service, this.get("authorUid"), this.get("authorName"), this.get("authorEmail"));						
-						this._author = _author;
-						return _author;
+					if (!this._author){
+						this._author = new Member({
+						    community: this,
+						    id: this.get("authorUid"), 
+						    name: this.get("authorName"), 
+						    email: this.get("authorEmail")
+						});						
 					}
+                    return this._author;
 				},
 				/**
 				 * Gets a contributor of IBM Connections community.
@@ -311,13 +317,15 @@ define(
 				 * @return {Member} contributor Contributor of the community
 				 */
 				getContributor : function() {
-					if(this._contributor){
-						return this._contributor;
-					}else{					
-						var _contributor = new Member(this._service, this.get("contributorUid"), this.get("contributorName"), this.get("contributorEmail"));
-						this._contributor = _contributor;
-						return _contributor;
-					}
+                    if (!this._contributor){
+                        this._contributor = new Member({
+                            community: this,
+                            id: this.get("contributorUid"), 
+                            name: this.get("contributorName"), 
+                            email: this.get("contributorEmail")
+                        });                     
+                    }
+                    return this._contributor;
 				},
 				/**
                  * Get members of this community.
@@ -360,6 +368,23 @@ define(
 					this.set("content", content);
 				},
 				
+                /**
+                 * Set new tags to be associated with this IBM Connections community.
+                 * 
+                 * @method setTags
+                 * @param {Object} Array of tags to be added to the community
+                 */
+                
+                setTags : function(tags) {
+                    if (lang.isArray(tags)) {
+                        this.set("tags", tags);
+                    } else if (lang.isString(tags)) {
+                        this.set("tags", tags.split(/[ ,]+/));
+                    } else {
+                        throw new Error("Invalid argument for tags: "+tags);
+                    }
+                },
+                
 				/**
 				 * Set new tags to be added to IBM Connections community.
 				 * 
@@ -382,6 +407,35 @@ define(
 				},
 				
                 /**
+                 * Set the community type of the IBM Connections community.
+                 * 
+                 * @method setCommunityType
+                 * @param {String} Type of the Community
+                 */
+                setCommunityType : function(communityType) {
+                    this.set("communityType", communityType);
+                },
+                
+                /**
+                 * Sets the author of this IBM Connections community.
+                 * 
+                 * @method setAuthor
+                 */
+                setAuthor : function(args) {
+                    var _args = lang.mixin({ community: this }, args);
+                    this._author = new Member(_args);
+                },
+                /**
+                 * Sets the contributor of this IBM Connections community.
+                 * 
+                 * @method setContributor
+                 */
+                setContributor : function(args) {
+                    var _args = lang.mixin({ community: this }, args);
+                    this._contributor = new Member(_args);
+                },
+
+                /**
                  * Add member to a community
                  * 
                  * @method addMember
@@ -401,21 +455,9 @@ define(
                  *            javascript library error object, the status code and the error message.
                  */
 				addMember : function(args) {
-				    var _args = lang.mixin({}, args);
-				    
-				    var member = null;
-				    if (_args.member) {
-				        member = _args.member;
-				        delete _args.member;
-				    } else if (_args.email) {
-				        member = new Member(this._service, null, null, _args.email);
-				        delete _args.email;
-				    } else if (_args.id) {
-                        member = new Member(this._service, _args.id, null, null);
-                        delete _args.email;
-                    }
-				    
-				    this._service.addMember(this, member, _args);
+				    var _args = lang.mixin({ community: this }, args);
+				    var member = new Member(_args);
+				    this._service.addMember(this, member, args);
 				},
 				
                 /**
@@ -438,6 +480,25 @@ define(
                     this._service.removeMember(this, member, args);
                 },
 				
+                /**
+                 * Remove this community
+                 * 
+                 * @method remove
+                 * @param {Object} [args] Argument object
+                 * @param {Function} [args.load] This function is invoked when the community is deleted from the server.
+                 * @param {Function} [args.error] Sometimes the deleteCommunity call fails with bad request such as 400 or server errors such as 500. The error
+                 *            parameter is another callback function that is only invoked when an error occurs. This allows to control what happens when
+                 *            an error occurs without having to put a lot of logic into your load function to check for error conditions. The parameter
+                 *            passed to the error function is a JavaScript Error object indicating what the failure was. From the error object. one can
+                 *            get access to the javascript library error object, the status code and the error message.
+                 * @param {Function} [args.handle] This callback is called regardless of whether the call to delete the community completes or fails. The parameter
+                 *            passed to this callback is the error object (in case of an error). From the error object. one can get access to the
+                 *            javascript library error object, the status code and the error message.
+                 */
+                remove : function(args) {
+                    this._service.deleteCommunity(this, args);
+                },
+
 				_validate : function(className, methodName, args, validateMap) {
 					
 					if (validateMap.isValidateType && !(validate._validateInputTypeAndNotify(className, methodName, "Community", this, "sbt.connections.Community", args))) {
@@ -458,18 +519,46 @@ define(
 			 * @namespace connections
 			 */
 			var Member = declare("sbt.connections.Member", null, {
-				_service : null,
-				_id : "",
-				_name:"",
-				_email:"",
-				data : null,
-				memberFields : {},
+				_community : null,
+				_id : null,
+				_name: null,
+				_email: null,
+				data: null,
+				memberFields: {},
 
-				constructor : function(svc, id, name, email) {
-					this._service = svc;
-					this._id = id;
-					this._name = name;
-					this._email = email;
+				constructor : function(args) {
+				    if (!(args.community || args.member)) {
+				        throw new Error("Unable to create community member without a community instance");
+				    }
+				    if (!(args.id || args.email || args.member)) {
+                        throw new Error("Unable to create community member without a user id or email");
+                    }
+				    
+				    if (args.member) {
+                        this._community = args.member.community;
+                        this._name = args.member.name;
+                        this._id = args.member.id;
+                        this._email = args.member.email;
+				    } else {
+    					this._community = args.community;
+                        this._name = args.name || args.displayName || null;
+                        if (args.id) {
+                            if (this._isEmail(args.id)) {
+                                this._email = args.id;
+                            } else {
+                                if (args.id.indexOf("urn:lsid:lconn.ibm.com:profiles.person:") != -1) {
+                                    this._id = args.id.substring("urn:lsid:lconn.ibm.com:profiles.person:".length);
+                                } else {
+                                    this._id = args.id;
+                                }
+                            }
+                        }
+                        if (args.emails) {
+                            this._email = args.emails[0].value;
+                        } else {
+                            this._email = args.email || null;
+                        }
+				    }
 				},
 				/**
 				 * Loads the member object with the atom entry associated with the member of the community. By default, a network call is made to load the atom entry
@@ -553,6 +642,17 @@ define(
 					delete this.memberFields[fieldName];
 				},
 				
+                /**
+                 * Return the community associated with this member.
+                 * 
+                 * @method getCommunity
+                 * @return {Object} Community
+                 */
+                
+                getCommunity : function() {
+                    return this._community;
+                },  
+                
 				/**
 				 * Return the value of community member name.
 				 * 
@@ -613,6 +713,17 @@ define(
 					this.set("role", role);
 				},
 				
+				toXml : function() {
+				  return "<name>" + this.getName() + 
+				      "</name><email>" + this.getEmail() +
+				      "</email><snx:userid>" + this.getId() +
+				      "</snx:userid><snx:userState>active</snx:userState>";  
+				},
+				
+                _isEmail : function(id) {
+                    return id && id.indexOf('@') >= 0;
+                },
+				
 				_validate : function(className, methodName, args, validateMap) {
 					
 					if (validateMap.isValidateType && !(validate._validateInputTypeAndNotify(className, methodName, "Member", this, "sbt.connections.Member", args))) {
@@ -665,8 +776,6 @@ define(
 						 *            javascript library error object, the status code and the error message.
 						 */
 						getMember : function(args) {
-							// return lang.isArray(id) ? this._getMultiple(id,
-							// cb,options) : this._getOne(id,load, cb,options);
 							return this._getOneMember(args);
 						},
 
@@ -725,7 +834,7 @@ define(
 							if (!(validate._validateInputTypeAndNotify("CommunityService", "getMember", "args", args, "object", args))) {
 								return ;
 							}
-							var member = new Member(this, args.id);
+							var member = new Member(args);
 							if (args.loadIt == false) {
 								if (args.load) {
 									args.load(member);
@@ -853,6 +962,8 @@ define(
 
 						_constructCommunityRequestBody : function(community) {
 							var body = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:app=\"http://www.w3.org/2007/app\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\">";
+
+							// community title and content are mandatory fields in the request body
 							if (!community.fields.title) {
 								if (community.getTitle()) {
 									body += "<title type=\"text\">" + xml.encodeXmlEntry(community.getTitle()) + "</title>";
@@ -865,16 +976,34 @@ define(
 									body += "<content type=\"html\"></content>";
 								}
 							}
-							// community title and content are mandatory fields
-							// in the request body
-							for (key in community.fields) {
+                            if (!community.fields.communityType) {
+                                body += "<snx:communityType xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\">" + community.getCommunityType() + "</snx:communityType>";
+                            }
+
+                            // TODO is this needed?
+                            //if (community.getCommunityUuid() == null) {
+                            //    body += "<author>" + community.getAuthor().toXml() + "</author>";
+                            //    body += "<contributor>" + community.getContributor().toXml() + "</contributor>";;
+							//}
+							
+                            for (key in community.fields) {
+							    var value = xml.encodeXmlEntry(community.fields[key]);
 								if (key == "title") {
-									body += "<title type=\"text\">" + xml.encodeXmlEntry(community.fields.title) + "</title>";
+									body += "<title type=\"text\">" + value + "</title>";
 								}
-								if (key == "content") {
-									body += "<content type=\"html\">" + xml.encodeXmlEntry(community.fields.content) + "</content>";
+								else if (key == "content") {
+									body += "<content type=\"html\">" + value + "</content>";
 								}
-								if (key == "addedTags") {
+                                else if (key == "communityType") {
+                                    body += "<snx:communityType xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\">" + value + "</snx:communityType>";
+                                }
+                                else if (key == "tags") {
+                                    var tags = community.fields.tags;
+                                    for (var i=0; i<tags.length; i++) {
+                                        body += "<category term=\"" + xml.encodeXmlEntry(tags[i]) + "\"/>";
+                                    }
+                                }
+								else if (key == "addedTags") {
 									var _concatTags = community.getTags();
 									var _addedTags = this._getUniqueElements(community.fields.addedTags);
 									for ( var count = 0; count < _addedTags.length; count++) {
@@ -886,7 +1015,7 @@ define(
 										body += "<category term=\"" + xml.encodeXmlEntry(_concatTags.shift()) + "\"/>";
 									}
 								}
-								if (key == "deletedTags") {
+								else if (key == "deletedTags") {
 									var _originalTags = community.getTags();
 									for ( var len = 0; len < community.fields.deletedTags.length; len++) {
 										if (_originalTags.indexOf(community.fields.deletedTags[len]) != -1) {
@@ -898,7 +1027,7 @@ define(
 									}
 								}
 							}
-							body += "<category term=\"community\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category><snx:communityType xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\">public</snx:communityType></entry>";
+							body += "<category term=\"community\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category></entry>";
 							return body;
 						},
 
@@ -1178,7 +1307,7 @@ define(
 								community = inputCommunity;
 							}
 							if (!(typeof inputMember == "object")) {
-								member = new Member(this, inputMember);
+								member = new Member({ community: community, id: inputMember });
 							} else {
 								member = inputMember;
 							}
@@ -1352,7 +1481,10 @@ define(
 											community.data = node;
 											entities.push(community);
 										} else if (getArgs.communityServiceEntity == "community" && getArgs.communitiesType == "members") {
-											var member = new Member(_self, xpath.selectText(node, getArgs.xpath.id, con.namespaces));
+											var member = new Member( {
+											    community: getArgs.community,
+											    id: xpath.selectText(node, getArgs.xpath.id, con.namespaces)
+											});
 											member.data = node;
 											entities.push(member);
 										}

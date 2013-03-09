@@ -2,7 +2,6 @@ package com.ibm.sbt.services.client.connections.communities;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +14,7 @@ import com.ibm.sbt.services.client.BaseService;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.SBTServiceException;
-import com.ibm.sbt.services.client.smartcloud.base.BaseEntity;
+import com.ibm.sbt.services.client.connections.communities.utils.Messages;
 import com.ibm.sbt.services.util.AuthUtil;
 
 /**
@@ -64,11 +63,11 @@ public class CommunityService extends BaseService {
 		super(endpoint, cacheSize);
 	}
 
-	public Community getCommunity(String communityUuid) throws XMLException, SBTServiceException {
+	public Community getCommunity(String communityUuid) throws CommunityServiceException {
 		return getCommunity(communityUuid, true);
 	}
 	
-	public Community getCommunity(boolean loadIt) throws XMLException, SBTServiceException {
+	public Community getCommunity(boolean loadIt) throws CommunityServiceException {
 		return getCommunity("", loadIt);
 	}
 
@@ -85,8 +84,7 @@ public class CommunityService extends BaseService {
 	 * @throws SBTServiceException
 	 */
 
-	public Community getCommunity(String communityUuid, boolean loadIt) throws XMLException,
-			SBTServiceException {
+	public Community getCommunity(String communityUuid, boolean loadIt) throws CommunityServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getCommunity", new Object[] { communityUuid, loadIt });
 		}
@@ -101,9 +99,9 @@ public class CommunityService extends BaseService {
 		if (logger.isLoggable(Level.FINEST)) {
 			String log = "";
 			if (community.getCommunityUuid() != null) {
-				log = "returning  requested community";
+				log = Messages.CommunityInfo_10;
 			} else {
-				log = "empty response from server for requested community";
+				log = Messages.CommunityInfo_9;
 			}
 			logger.exiting(sourceClass, log);
 		}
@@ -117,8 +115,8 @@ public class CommunityService extends BaseService {
 	 * @throws XMLException
 	 * @throws SBTServiceException
 	 */
-	public Collection<Community> getPublicCommunities() throws XMLException // getPublicCommunities
-			, SBTServiceException {
+	public Collection<Community> getPublicCommunities()
+	throws CommunityServiceException{
 		return getPublicCommunities(null);
 	}
 
@@ -130,12 +128,12 @@ public class CommunityService extends BaseService {
 	 * @throws XMLException
 	 * @throws SBTServiceException
 	 */
-	public Collection<Community> getPublicCommunities(Map<String, String> parameters) throws XMLException,
-			SBTServiceException {
+	public Collection<Community> getPublicCommunities(Map<String, String> parameters)
+	throws CommunityServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getPublicCommunities", parameters);
 		}
-		Document data = getCommunityEntities(
+		Document data = executeGet(
 				resolveCommunityUrl(CommunityEntity.COMMUNITIES.getCommunityEntityType(),
 						CommunityType.ALL.getCommunityType()), parameters);
 		Collection<Community> communities = Converter.returnCommunities(this, data);
@@ -147,7 +145,7 @@ public class CommunityService extends BaseService {
 			if (communities != null) {
 				log = Integer.toString(communities.size());
 			} else {
-				log = "empty response from server for requested communities";
+				log = Messages.CommunityInfo_9;
 			}
 			logger.exiting(sourceClass, "getPublicCommunities", log);
 		}
@@ -160,12 +158,12 @@ public class CommunityService extends BaseService {
 	 * @return list of communities
 	 * @throws SBTServiceException
 	 */
-	public Collection<Community> getMyCommunities() throws XMLException, SBTServiceException {
+	public Collection<Community> getMyCommunities() throws CommunityServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getMyCommunities");
 		}
 		Map<String, String> parameters = new HashMap<String, String>();
-		Document data = getCommunityEntities(
+		Document data = executeGet(
 				resolveCommunityUrl(CommunityEntity.COMMUNITIES.getCommunityEntityType(),
 						CommunityType.MY.getCommunityType()), parameters);
 		Collection<Community> communities = Converter.returnCommunities(this, data);
@@ -174,7 +172,7 @@ public class CommunityService extends BaseService {
 			if (communities != null) {
 				log = Integer.toString(communities.size());
 			} else {
-				log = "empty response from server for requested communities";
+				log = Messages.CommunityInfo_9;
 			}
 			logger.exiting(sourceClass, "getMyCommunities", log);
 		}
@@ -189,16 +187,16 @@ public class CommunityService extends BaseService {
 	 * @throws XMLException
 	 * @throws SBTServiceException
 	 */
-	public Collection<Community> getSubCommunities(Community community) throws XMLException, SBTServiceException {
+	public Collection<Community> getSubCommunities(Community community) throws CommunityServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getSubCommunities", community);
 		}
 		if (null == community){
-			throw new IllegalArgumentException("community passed was null");
+			throw new IllegalArgumentException(Messages.InvalidArgument_1);
 		}
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("communityUuid", community.getCommunityUuid());
-		Document data = getCommunityEntities(
+		Document data = executeGet(
 				resolveCommunityUrl(CommunityEntity.COMMUNITY.getCommunityEntityType(),
 						CommunityType.SUBCOMMUNITIES.getCommunityType()), parameters);
 		Collection<Community> communities = Converter.returnCommunities(this, data);
@@ -207,7 +205,7 @@ public class CommunityService extends BaseService {
 			if (communities != null) {
 				log = Integer.toString(communities.size());
 			} else {
-				log = "empty response from server for requested communities";
+				log = Messages.CommunityInfo_9;
 			}
 			logger.exiting(sourceClass, "getSubCommunities", log);
 		}
@@ -222,16 +220,16 @@ public class CommunityService extends BaseService {
 	 * @throws XMLException
 	 * @throws SBTServiceException
 	 */
-	public Member[] getMembers(Community community) throws XMLException, SBTServiceException {
+	public Member[] getMembers(Community community) throws CommunityServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getMembers", community);
 		}
 		if (null == community){
-			throw new IllegalArgumentException("community passed was null");
+			throw new IllegalArgumentException(Messages.InvalidArgument_1);
 		}
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("communityUuid", community.getCommunityUuid());
-		Document data = getCommunityEntities(
+		Document data = executeGet(
 				resolveCommunityUrl(CommunityEntity.COMMUNITY.getCommunityEntityType(),
 						CommunityType.MEMBERS.getCommunityType()), parameters);
 		Member[] members = Converter.returnMembers(this, data);
@@ -240,7 +238,7 @@ public class CommunityService extends BaseService {
 			if (members != null) {
 				log = Integer.toString(members.length);
 			} else {
-				log = "empty response from server for members";
+				log = Messages.CommunityInfo_9;
 			}
 			logger.exiting(sourceClass, "getMembers", log);
 		}
@@ -256,16 +254,16 @@ public class CommunityService extends BaseService {
 	 * @throws SBTServiceException
 	 */
 
-	public Bookmark[] getBookmarks(Community community) throws XMLException, SBTServiceException {
+	public Bookmark[] getBookmarks(Community community) throws CommunityServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getBookmarks", community);
 		}
 		if (null == community){
-			throw new IllegalArgumentException("community passed was null");
+			throw new IllegalArgumentException(Messages.InvalidArgument_1);
 		}
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("communityUuid", community.getCommunityUuid());
-		Document data = getCommunityEntities(
+		Document data = executeGet(
 				resolveCommunityUrl(CommunityEntity.COMMUNITY.getCommunityEntityType(),
 						CommunityType.BOOKMARKS.getCommunityType()), parameters);
 		Bookmark[] bookmarks = Converter.returnBookmarks(this, data);
@@ -274,7 +272,7 @@ public class CommunityService extends BaseService {
 			if (bookmarks != null) {
 				log = Integer.toString(bookmarks.length);
 			} else {
-				log = "empty response from server for bookmarks";
+				log = Messages.CommunityInfo_9;
 			}
 			logger.exiting(sourceClass, "getBookmarks", log);
 		}
@@ -290,16 +288,16 @@ public class CommunityService extends BaseService {
 	 * @throws XMLException
 	 * @throws SBTServiceException
 	 */
-	public ForumTopic[] getForumTopics(Community community) throws XMLException, SBTServiceException {
+	public ForumTopic[] getForumTopics(Community community) throws CommunityServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "getCommunityForumTopics", community);
+			logger.entering(sourceClass, "getForumTopics", community);
 		}
 		if (null == community){
-			throw new IllegalArgumentException("community passed was null");
+			throw new IllegalArgumentException(Messages.InvalidArgument_1);
 		}
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("communityUuid", community.getCommunityUuid());
-		Document data = getCommunityEntities(
+		Document data = executeGet(
 				resolveCommunityUrl(CommunityEntity.COMMUNITY.getCommunityEntityType(),
 						CommunityType.FORUMTOPICS.getCommunityType()), parameters);
 		ForumTopic[] forumTopics = Converter.returnForumTopics(this, data);
@@ -308,50 +306,44 @@ public class CommunityService extends BaseService {
 			if (forumTopics != null) {
 				log = Integer.toString(forumTopics.length);
 			} else {
-				log = "empty response from server for forum Topics";
+				log = Messages.CommunityInfo_9;
 			}
-			logger.exiting(sourceClass, "getBookmarks", log);
+			logger.exiting(sourceClass, "getForumTopics", log);
 		}
 		return forumTopics;
 	}
 
 	/**
-	 * This method is used by other wrapper methods to get community related data for eg. 
-	 * getBookmarks() calls it internally to get the community bookmarks data
+	 * executeGet
 	 * 
 	 * @param uri
 	 * @param params
 	 * @return Document 
-	 * @throws XMLException
-	 * @throws SBTServiceException
+	 * @throws CommunityServiceException
 	 */
-	protected Document getCommunityEntities(String uri, Map<String, String> params) throws XMLException,
-			SBTServiceException {
+	protected Document executeGet(String uri, Map<String, String> params)
+	throws CommunityServiceException{
 		if (logger.isLoggable(Level.FINEST)) {
-			logger.exiting(sourceClass, "getCommunityEntities", new Object[] { uri, params });
+			logger.exiting(sourceClass, "executeGet", new Object[] { uri, params });
 		}
 		Document data = null;
 		try {
 			data = (Document) getClientService().get(uri, params);
 		} catch (ClientServicesException e) {
 			if (logger.isLoggable(Level.SEVERE)) {
-				logger.log(Level.SEVERE, "Error encountered in getting community data", e);
+				logger.log(Level.SEVERE, Messages.CommunityServiceException_1 + "executeGet()", e);
 			}
 			throw new CommunityServiceException(e);
 		}
-		if (logger.isLoggable(Level.FINEST)) {
-			String log = "";
-			if (data != null) {
-				log = "returning data for getCommunityEntities";
-			} else {
-				log = "empty response from server for community data";
-			}
-			logger.exiting(sourceClass, "getCommunityEntities", log);
+		if (data == null) {
+			return null;
 		}
 		return data;
 	}
 
-	public Community createCommunity(Community community) throws XMLException, SBTServiceException {
+
+	
+	public Community createCommunity(Community community) throws CommunityServiceException {
 		return createCommunity(community, true);
 	}
 	/**
@@ -363,12 +355,12 @@ public class CommunityService extends BaseService {
 	 * @throws XMLException
 	 * @throws SBTServiceException
 	 */
-	public Community createCommunity(Community community, boolean loadIt) throws XMLException, SBTServiceException {
+	public Community createCommunity(Community community, boolean loadIt) throws CommunityServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "createCommunity", community);
 		}
 		if (null == community){
-			throw new IllegalArgumentException("community passed was null");
+			throw new IllegalArgumentException(Messages.InvalidArgument_1);
 		}
 
 		try {
@@ -390,10 +382,10 @@ public class CommunityService extends BaseService {
 		} catch (ClientServicesException e) {
 			if (e.getResponseStatusCode() == ClientServicesException.CONFLICT) {
 				throw new DuplicateCommunityException(e, StringUtil.format(
-						"A community already exists with this title {0} ", community.getTitle()));
+						Messages.CommunityInfo_8, community.getTitle()));
 			}
 			if (logger.isLoggable(Level.SEVERE)) {
-				logger.log(Level.SEVERE, "Error encountered in creating community", e);
+				logger.log(Level.SEVERE, Messages.CommunityInfo_7, e);
 			}
 			throw new CommunityServiceException(e);
 		}
@@ -411,13 +403,13 @@ public class CommunityService extends BaseService {
 	 * @throws XMLException
 	 * @throws SBTServiceException
 	 */
-	public boolean updateCommunity(Community community) throws XMLException, SBTServiceException {
+	public boolean updateCommunity(Community community) throws CommunityServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "updateCommunity", community);
 		}
 		boolean returnVal = true;
 		if (null == community){
-			throw new IllegalArgumentException("community passed was null");
+			throw new IllegalArgumentException(Messages.InvalidArgument_1);
 		}
 
 		Map<String, String> parameters = new HashMap<String, String>();
@@ -432,7 +424,7 @@ public class CommunityService extends BaseService {
 
 			returnVal = false;
 			if (logger.isLoggable(Level.SEVERE)) {
-				logger.log(Level.SEVERE, "Error encountered in updating community", e);
+				logger.log(Level.SEVERE, Messages.CommunityInfo_6, e);
 			}
 			throw new CommunityServiceException(e);
 		}
@@ -452,13 +444,13 @@ public class CommunityService extends BaseService {
 	 * @throws XMLException
 	 * @throws SBTServiceException
 	 */
-	public boolean addMember(Community community, Member member) throws XMLException, SBTServiceException {
+	public boolean addMember(Community community, Member member) throws CommunityServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "AddCommunityMember", new Object[] { community, member });
 		}
 		boolean returnVal = true;
 		if (null == community){
-			throw new IllegalArgumentException("community passed was null");
+			throw new IllegalArgumentException(Messages.InvalidArgument_1);
 		}
 
 		Map<String, String> parameters = new HashMap<String, String>();
@@ -473,7 +465,7 @@ public class CommunityService extends BaseService {
 		} catch (ClientServicesException e) {
 			returnVal = false;
 			if (logger.isLoggable(Level.SEVERE)) {
-				logger.log(Level.SEVERE, "Error encountered in adding member", e);
+				logger.log(Level.SEVERE, Messages.CommunityInfo_5, e);
 			}
 			throw new CommunityServiceException(e);
 		}
@@ -492,13 +484,13 @@ public class CommunityService extends BaseService {
 	 * @throws XMLException
 	 * @throws SBTServiceException
 	 */
-	public boolean removeMember(Community community, Member member) throws XMLException, SBTServiceException { 
+	public boolean removeMember(Community community, Member member) throws CommunityServiceException { 
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "removeMember", new Object[] { community, member });
 		}
 		boolean returnVal = true;
 		if (null == community){
-			throw new IllegalArgumentException("community passed was null");
+			throw new IllegalArgumentException(Messages.InvalidArgument_1);
 		}
 
 		Map<String, String> parameters = new HashMap<String, String>();
@@ -518,7 +510,7 @@ public class CommunityService extends BaseService {
 		} catch (ClientServicesException e) {
 			returnVal = false;
 			if (logger.isLoggable(Level.SEVERE)) {
-				logger.log(Level.SEVERE, "Error encountered in removing member", e);
+				logger.log(Level.SEVERE, Messages.CommunityInfo_4, e);
 			}
 			throw new CommunityServiceException(e);
 
@@ -537,13 +529,13 @@ public class CommunityService extends BaseService {
 	 * @throws XMLException
 	 * @throws SBTServiceException
 	 */
-	public boolean deleteCommunity(Community community) throws XMLException, SBTServiceException {
+	public boolean deleteCommunity(Community community) throws CommunityServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "deleteCommunity", community);
 		}
 		boolean returnVal = true;
 		if (null == community){
-			throw new IllegalArgumentException("community passed was null");
+			throw new IllegalArgumentException(Messages.InvalidArgument_1);
 		}
 
 		Map<String, String> parameters = new HashMap<String, String>();
@@ -555,7 +547,7 @@ public class CommunityService extends BaseService {
 		} catch (ClientServicesException e) {
 			returnVal = false;
 			if (logger.isLoggable(Level.SEVERE)) {
-				logger.log(Level.SEVERE, "Error encountered in deleting Community", e);
+				logger.log(Level.SEVERE, Messages.CommunityInfo_3, e);
 			}
 			throw new CommunityServiceException(e);
 		}
@@ -571,7 +563,7 @@ public class CommunityService extends BaseService {
 	 * @param community
 	 */
 
-	public void load(Community community) throws XMLException, SBTServiceException {
+	public void load(Community community) throws CommunityServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "load");
 		}
@@ -584,7 +576,7 @@ public class CommunityService extends BaseService {
 					CommunityType.INSTANCE.getCommunityType());
 			result = getClientService().get(url, parameters, ClientService.FORMAT_XML);
 		} catch (ClientServicesException e) {
-			logger.log(Level.SEVERE, "Error loading Community", e);
+			logger.log(Level.SEVERE, Messages.CommunityServiceException_1 + "load()", e);
 			throw new CommunityServiceException(e);
 		}
 		community.setData((Document) result);
@@ -650,7 +642,7 @@ public class CommunityService extends BaseService {
 		}
 
 		if (logger.isLoggable(Level.FINEST)) {
-			logger.log(Level.FINEST, "resolved Community URL :" + comBaseUrl.toString());
+			logger.log(Level.FINEST, Messages.CommunityInfo_2 + comBaseUrl.toString());
 		}
 
 		return comBaseUrl.toString();

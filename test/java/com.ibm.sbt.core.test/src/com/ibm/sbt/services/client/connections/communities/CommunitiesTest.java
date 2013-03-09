@@ -40,14 +40,7 @@ public class CommunitiesTest extends TestEndpoint {
 
 		CommunityService svc = new CommunityService();
 
-		Collection<Community> communities;
-		try {
-			communities = svc.getPublicCommunities();
-		} catch (XMLException e) {
-			fail(e.getMessage());
-			return;
-		}
-
+		Collection<Community> communities = svc.getPublicCommunities();
 		// some sample assertion, a proper test would be much more detailed than this
 		for (Community community : communities) {
 			assertNotNull(community.getTitle());

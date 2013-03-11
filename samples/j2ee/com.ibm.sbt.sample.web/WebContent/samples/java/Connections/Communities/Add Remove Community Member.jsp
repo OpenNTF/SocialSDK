@@ -15,6 +15,7 @@
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@page import="java.io.PrintWriter"%>
+<%@page import="java.util.Collection"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.Community"%> 
@@ -31,16 +32,36 @@
 </head>
 
 <body>	
-	<h4>Add Community Member</h4>
+	<h4>Add & Remove a Community Member</h4>
 	<div id="content">
 	<%
 	try {
 		CommunityService communityService = new CommunityService();
 		Collection<Community> communities = communityService.getPublicCommunities();
 		Community community = communities.iterator().next();
-		String id = Context.get().getProperty("sample.id2");
-		Member member = new Member(communityService,id);
-		out.println(communityService.addMember(community,member));
+		Member[] members = communityService.getMembers(community);
+		if (members.length == 1) {
+		    String id = Context.get().getProperty("sample.id2");
+			Member member = new Member(communityService,id);
+			boolean added = communityService.addMember(community, member);
+			out.println("Added " + member.getId() + " : " + added);
+
+			community = communityService.getCommunity(community.getCommunityUuid());
+			out.println("<br/>");
+
+			boolean removed = communityService.removeMember(community, member);
+			out.println("Removed " + member.getId() + " result:" + removed);
+		} else {
+			Member member = members[members.length-1];
+			boolean removed = communityService.removeMember(community, member);
+			out.println("Removed " + member.getName() + " result:" + removed);
+
+			community = communityService.getCommunity(community.getCommunityUuid());
+			out.println("<br/>");
+
+			boolean added = communityService.addMember(community, member);
+			out.println("Added " + member.getName() + " : " + added);
+		}
 	} catch (Throwable e) {
 		out.println("<pre>");
 		e.printStackTrace(new PrintWriter(out));

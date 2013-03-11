@@ -31,15 +31,15 @@
 </head>
 
 <body>
+	<h4>My Communities</h4>
+	<div id="content">
 	<%
 		try {
 			CommunityService communityService = new CommunityService();
 			Collection<Community> communities = communityService.getMyCommunities();
-			out.println("<b> My Communities </b>");
-			out.println("<br>");
 			if (communities.size() > 0) {
 				for (Community community : communities) {
-					out.println("<b>Title : </b> " + community.getTitle());
+					out.println("<b>Title :</b> " + community.getTitle());
 					out.println("<br>");
 				}
 			} else {
@@ -51,6 +51,6 @@
 			out.println("</pre>");
 		}
 	%>
-	<br>
+	</div>
 </body>
 </html>

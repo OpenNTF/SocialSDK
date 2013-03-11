@@ -14,6 +14,8 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@page import="java.util.Collection"%>
+<%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.Community"%> 
@@ -29,24 +31,33 @@
 </head>
 
 <body>	
+	<h4>Update Community Tags</h4>
+	<div id="content">
 	<%
-			String communityID = Context.get().getProperty("sample.communityId");
-			CommunityService communityService = new CommunityService();
-			Community community = communityService.getCommunity(communityID);
-			community.setAddedTags("ntfghjk");
-			communityService.updateCommunity(community);
-			community = communityService.getCommunity(communityID);
-			out.println("<b> Community Updated :</b>");
-			out.println("<b>" + community.getTitle() + "</b>");
+	try {
+		CommunityService communityService = new CommunityService();
+		Collection<Community> communities = communityService.getPublicCommunities();
+		Community community = communities.iterator().next();
+		community.setTitle("Test Community" + System.currentTimeMillis());
+		community.setContent("Test Community updated by Update Community Java sample");
+		community.setAddedTags("NewTag");
+		communityService.updateCommunity(community);
+		
+		community = communityService.getCommunity(community.getCommunityUuid());
+		 
+		out.println("Community Tags:");
+		out.println("<br>");
+		String[] tags = community.getTags();
+		for (int i = 0; i < tags.length; i++) {
+			out.println(tags[i]);
 			out.println("<br>");
-			out.println("Community Tags:");
-			out.println("<br>");
-			String[] tags = community.getTags();
-			for (int i = 0; i < tags.length; i++) {
-				out.println(tags[i]);
-				out.println("<br>");
-			}
-		%>
-	 <br>
+		}
+	} catch (Throwable e) {
+		out.println("<pre>");
+		e.printStackTrace(new PrintWriter(out));
+		out.println("</pre>");
+	}
+	%>
+	</div>
 </body>
 </html>

@@ -41,8 +41,8 @@
 		Community community = communities.iterator().next();
 		Member[] members = communityService.getMembers(community);
 		if (members.length == 1) {
-		    String id = Context.get().getProperty("sample.id2");
-			Member member = new Member(communityService,id);
+		    String email = Context.get().getProperty("sample.email2");
+			Member member = new Member(communityService, email);
 			boolean added = communityService.addMember(community, member);
 			out.println("Added " + member.getId() + " : " + added);
 
@@ -50,7 +50,7 @@
 			out.println("<br/>");
 
 			boolean removed = communityService.removeMember(community, member);
-			out.println("Removed " + member.getId() + " result:" + removed);
+			out.println("Removed " + member.getId() + " result : " + removed);
 		} else {
 			Member member = members[members.length-1];
 			boolean removed = communityService.removeMember(community, member);

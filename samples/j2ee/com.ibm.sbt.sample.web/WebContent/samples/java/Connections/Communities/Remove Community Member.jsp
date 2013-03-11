@@ -33,23 +33,24 @@
 </head>
 
 <body>
+	<h4>Remove Community Member</h4>
+	<div id="content">
 	<%
-		try {
-
-			String communityID = Context.get().getProperty("sample.communityId");
-			CommunityService communityService = new CommunityService();
-			Community community = communityService.getCommunity(communityID, false);
-			String id = Context.get().getProperty("sample.id1");
-			Member member = new Member(communityService, id);
-			out.println("<b> Member Removed :</b>");
-			out.println("<br>");
-			out.println(communityService.removeMember(community, member));
-		} catch (Throwable e) {
-			out.println("<pre>");
-			e.printStackTrace(new PrintWriter(out));
-			out.println("</pre>");
-		}
+	try {
+		CommunityService communityService = new CommunityService();
+		Collection<Community> communities = communityService.getPublicCommunities();
+		Community community = communities.iterator().next();
+		String id = Context.get().getProperty("sample.id1");
+		Member member = new Member(communityService, id);
+		out.println("<b> Member Removed :</b>");
+		out.println("<br>");
+		out.println(communityService.removeMember(community, member));
+	} catch (Throwable e) {
+		out.println("<pre>");
+		e.printStackTrace(new PrintWriter(out));
+		out.println("</pre>");
+	}
 	%>
-	<br>
+	</div>
 </body>
 </html>

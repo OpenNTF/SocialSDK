@@ -30,14 +30,14 @@
 </head>
 
 <body>
+	<h4>Community By Id</h4>
+	<div id="content">
 	<%
 		try {
 			String communityUuid = Context.get().getProperty("sample.communityId");
 			CommunityService svc = new CommunityService();
 			Community community = svc.getCommunity(communityUuid);
 			if (community.getCommunityUuid() != null) {
-				out.println("<b>Community Details</b>");
-				out.println("<br>");
 				out.println("<b>Title: </b>" + community.getTitle());
 				out.println("<br>");
 			} else {
@@ -49,6 +49,6 @@
 			out.println("</pre>");
 		}
 	%>
-	<br>
+	</div>
 </body>
 </html>

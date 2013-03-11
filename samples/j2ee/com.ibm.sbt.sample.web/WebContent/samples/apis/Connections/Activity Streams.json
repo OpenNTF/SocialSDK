@@ -1,0 +1,32 @@
+[{
+	"name": "Post",
+	"description": "Post Event",
+	"since": "4.0",
+	"http_method": "post",
+	"uri": "/vulcan/shindig/rest/activitystreams/@me/@all/@all",
+	"queryParameters": [],
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/POST_request_sbt",
+	"post_string": "{post_string}",
+	"post_content_type": "application/json"
+},
+{
+	"name": "Get",
+	"description": "Get Events",
+	"since": "4.0",
+	"http_method": "get",
+	"uri": "/vulcan/shindig/rest/activitystreams/@me/@all/@all",
+	"queryParameters": [],
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/GET_request_sbt"
+},
+{
+	"name": "clearActivitystreamAll",
+	"description": "Clear all Events",
+	"since": "4.0",
+	"http_method": "post",
+	"http_headers": [
+		{"name": "Content-Type", "value": "application/json"}
+	],
+	"uri": "/vulcan/shindig/rest/activitystreams/@me/@all/@all/@all?X-HTTP-Method-Override=DELETE",
+	"queryParameters": [],
+	"doc_url": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/POST_request_sbt"
+}]

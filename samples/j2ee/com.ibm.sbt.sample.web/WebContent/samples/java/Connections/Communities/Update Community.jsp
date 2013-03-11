@@ -14,6 +14,7 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@page import="java.util.Collection"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
@@ -31,22 +32,23 @@
 </head>
 
 <body>
+	<h4>Update Community</h4>
+	<div id="content">
 	<%
-		try {
-			String communityID = Context.get().getProperty("sample.communityId");
-			CommunityService communityService = new CommunityService();
-			Community community = communityService.getCommunity(communityID);
-			community.setTitle("test Title");
-			community.setContent("test Content");
-			out.println("<b> Community Updated :</b>");
-			out.println("<br>");
-			out.println(communityService.updateCommunity(community));
-		} catch (Throwable e) {
-			out.println("<pre>");
-			e.printStackTrace(new PrintWriter(out));
-			out.println("</pre>");
-		}
+	try {
+		CommunityService communityService = new CommunityService();
+		Collection<Community> communities = communityService.getPublicCommunities();
+		Community community = communities.iterator().next();
+		community.setTitle("Test Community" + System.currentTimeMillis());
+		community.setContent("Test Community updated by Update Community Java sample");
+		out.println("<br>");
+		out.println(communityService.updateCommunity(community));
+	} catch (Throwable e) {
+		out.println("<pre>");
+		e.printStackTrace(new PrintWriter(out));
+		out.println("</pre>");
+	}
 	%>
-	<br>
+	</div>
 </body>
 </html>

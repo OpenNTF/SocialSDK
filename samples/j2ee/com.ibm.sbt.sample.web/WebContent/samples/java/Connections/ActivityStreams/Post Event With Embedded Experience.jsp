@@ -52,12 +52,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
-
 <body>
-
 	<h4>Posting Event to Activity Stream</h4>
-
-
+	<div id="content">
 	<%
 		try {
 			JsonJavaObject postPayload = new JsonJavaObject();
@@ -94,13 +91,15 @@
 			header.put("Content-Type", "application/json");
 
 			ActivityStreamService _service = new ActivityStreamService();
-			_service.postEntry(postPayload, header);
+			JsonJavaObject entry = _service.postEntry(postPayload, header);
+			String entryId = entry.getJsonObject("entry").getString("id");
+			out.println("Created entry:" + entryId);
 		} catch (Throwable e) {
 			out.println("<pre>");
 			e.printStackTrace(new PrintWriter(out));
 			out.println("</pre>");
 		}
 	%>
-
+	</div>
 </body>
 </html>

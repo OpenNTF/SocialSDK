@@ -39,9 +39,7 @@
 <%@page import="org.w3c.dom.Document"%>
 <%@page import="org.w3c.dom.Node"%>
 <%@page import="org.w3c.dom.Node"%>
-<%@page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-
+<%@page language="java" contentType="text/html; charset=ISO-8859-1"	pageEncoding="ISO-8859-1"%>
 <html>
 
 <head>
@@ -49,12 +47,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
-
 <body>
-
 	<h4>Updates from Communities I Follow</h4>
-
-
+	<div id="content">
 	<%
 		try {
 			ActivityStreamService _service = new ActivityStreamService();
@@ -78,6 +73,6 @@
 			out.println("</pre>");
 		}
 	%>
-
+	</div>
 </body>
 </html>

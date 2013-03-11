@@ -15,6 +15,7 @@
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@page import="java.io.PrintWriter"%>
+<%@page import="java.util.Collection"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
 <%@page
@@ -32,15 +33,15 @@
 </head>
 
 <body>
+	<h4>Community Bookmarks</h4>
+	<div id="content">
 	<%
 		try {
-			String communityUuid = Context.get().getProperty("sample.communityId");
 			CommunityService communityService = new CommunityService();
-			Community community = communityService.getCommunity(communityUuid, true);
+			Collection<Community> communities = communityService.getPublicCommunities();
+			Community community = communities.iterator().next();
 			Bookmark[] bookmarks = communityService.getBookmarks(community);
 			if (bookmarks.length > 0) {
-				out.println("<b>Community Bookmarks</b>");
-				out.println("<br>");
 				for (int i = 0; i < bookmarks.length; i++) {
 					out.println("<b>Title : </b> " + bookmarks[i].getTitle());
 					out.println("<br>");
@@ -54,6 +55,6 @@
 			out.println("</pre>");
 		}
 	%>
-	<br>
+	</div>
 </body>
 </html>

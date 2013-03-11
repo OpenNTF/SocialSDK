@@ -52,43 +52,42 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
-
 <body>
-
 	<h4>Posting Event to Activity Stream</h4>
-
-
+	<div id="content">
 	<%
 		try {
-		JsonJavaObject postPayload = new JsonJavaObject();
-
-		JsonJavaObject actor = new JsonJavaObject();
-		actor.put("id", "@self");
-
-		JsonJavaObject object = new JsonJavaObject();
-		object.put("summary", "Posting Microblog Through API");
-		object.put("objectType", "note");
-		object.put("id", "randomobjectid");
-		object.put("displayName", "Display Name for Microblogging sameple");
-		object.put("url", "http://www.ibm.com");
-
-		postPayload.put("actor", actor);
-		postPayload.put("verb", ASVerb.POST.getVerbType());
-		postPayload.put("title", "post");
-		postPayload.put("content", "post");
-		postPayload.put("updated", new Date().getTime());
-		postPayload.put("object", object);
-		Map<String, String> header = new HashMap<String, String>();
-		header.put("Content-Type", "application/json");
-
-		ActivityStreamService _service = new ActivityStreamService();
-		_service.postEntry(postPayload, header);
+			JsonJavaObject postPayload = new JsonJavaObject();
+	
+			JsonJavaObject actor = new JsonJavaObject();
+			actor.put("id", "@self");
+	
+			JsonJavaObject object = new JsonJavaObject();
+			object.put("summary", "Posting Microblog Through API");
+			object.put("objectType", "note");
+			object.put("id", "randomobjectid");
+			object.put("displayName", "Display Name for Microblogging sameple");
+			object.put("url", "http://www.ibm.com");
+	
+			postPayload.put("actor", actor);
+			postPayload.put("verb", ASVerb.POST.getVerbType());
+			postPayload.put("title", "post");
+			postPayload.put("content", "post");
+			postPayload.put("updated", new Date().getTime());
+			postPayload.put("object", object);
+			Map<String, String> header = new HashMap<String, String>();
+			header.put("Content-Type", "application/json");
+	
+			ActivityStreamService _service = new ActivityStreamService();
+			JsonJavaObject entry = _service.postEntry(postPayload, header);
+			String entryId = entry.getJsonObject("entry").getString("id");
+			out.println("Created entry:" + entryId);
 		} catch (Throwable e) {
 			out.println("<pre>");
 			e.printStackTrace(new PrintWriter(out));
 			out.println("</pre>");
 		}
 	%>
-
+	</div>
 </body>
 </html>

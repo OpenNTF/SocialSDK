@@ -1,0 +1,23 @@
+[{
+	"name": "XgetContacts",
+	"description": "get my contacts",
+	"http_method": "get",
+	"uri": "/contacts/contacts/getContacts"
+},
+{
+	"name": "XgetMyProfile",
+	"description": "get my profile",
+	"http_method": "get",
+	"uri": "/contacts/profiles/getProfileInfo"
+},
+{
+	"name": "XgetUserProfile",
+	"description": "get LL user's profile",
+	"http_method": "get",
+	"uri": "/contacts/profiles/getProfileInfo?userid={subscriberEmail}",
+	"uriParameters": [
+		{"name": "subscriberEmail"}
+	],
+	"queryParameters": [
+	]
+}]

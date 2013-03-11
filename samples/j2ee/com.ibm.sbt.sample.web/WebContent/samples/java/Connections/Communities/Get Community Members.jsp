@@ -15,6 +15,7 @@
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@page import="java.io.PrintWriter"%>
+<%@page import="java.util.Collection"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
 <%@page
@@ -32,28 +33,28 @@
 </head>
 
 <body>
+	<h4>Community Members</h4>
+	<div id="content">
 	<%
-		try {
-			String communityUuid = Context.get().getProperty("sample.communityId");
-			CommunityService communityService = new CommunityService();
-			Community community = communityService.getCommunity(communityUuid, true);
-			Member[] members = communityService.getMembers(community);
-			if (members.length > 0) {
-				out.println("<b>Community Members</b>");
+	try {
+		CommunityService communityService = new CommunityService();
+		Collection<Community> communities = communityService.getPublicCommunities();
+		Community community = communities.iterator().next();
+		Member[] members = communityService.getMembers(community);
+		if (members.length > 0) {
+			for (int i = 0; i < members.length; i++) {
+				out.println("<b>Name : </b> " + members[i].getName());
 				out.println("<br>");
-				for (int i = 0; i < members.length; i++) {
-					out.println("<b>Name : </b> " + members[i].getName());
-					out.println("<br>");
-				}
-			} else {
-				out.println("No result");
 			}
-		} catch (Throwable e) {
-			out.println("<pre>");
-			e.printStackTrace(new PrintWriter(out));
-			out.println("</pre>");
+		} else {
+			out.println("No result");
 		}
+	} catch (Throwable e) {
+		out.println("<pre>");
+		e.printStackTrace(new PrintWriter(out));
+		out.println("</pre>");
+	}
 	%>
-	<br>
+	</div>
 </body>
 </html>

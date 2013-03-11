@@ -1,8 +1,0 @@
-[{
-	"name": "getActivitiesFeed",
-	"description": "get activities feed",
-	"http_method": "get",
-	"doc_extra": "http://www-10.lotus.com/ldd/appdevwiki.nsf/dx/Activities_API_sbar",
-	"doc_url": "http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Getting_Activities_feeds_lc3",
-	"uri": "/activities/service/atom2/activities"
-}]

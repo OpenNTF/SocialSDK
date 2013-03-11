@@ -47,7 +47,7 @@ public class JavaSnippetAssetNode extends AssetNode {
 		String jsp = loadResource(parent,"jsp");
 		JavaSnippet s = (JavaSnippet)new JavaSnippet();
 		s.setJsp(jsp);
-		s.setJspPath("/java"+parent.getPath()+"/"+getName()+".jsp");
+		s.setJspPath("/samples/java"+parent.getPath()+"/"+getName()+".jsp"); // TODO read the base part of the directory from the VFS
 		return s;
 	}
 }

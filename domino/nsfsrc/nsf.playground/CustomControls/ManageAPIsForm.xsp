@@ -60,23 +60,19 @@
 			</xp:inputText>
 		</xe:formRow>
 		<xe:formRow id="formRow3" label="Description:">
-			<xp:inputTextarea id="inputText6" required="true"
+			<xp:inputTextarea id="inputText6"
 				disableClientSideValidation="true" value="#{document1.Description}"
 				cols="120" rows="5">
 			</xp:inputTextarea>
 		</xe:formRow>
-		<xe:formRow id="formRow6" label="Endpoint:">
-			<xp:inputText id="inputText7" required="true"
-				disableClientSideValidation="true" value="#{document1.Endpoint}" size="20">
-			</xp:inputText>
-		</xe:formRow>
-		<xe:formRow id="formRow2" label="Base Documentation URL:">
-			<xp:inputText id="inputText2"
-				disableClientSideValidation="true" value="#{document1.BaseDocUrl}" size="120">
-			</xp:inputText>
-		</xe:formRow>
-		<xe:formRow id="formRow4" labelPosition="above">
+		<xe:formRow id="formRow4" labelPosition="above" label="Definition">
 			<xp:inputTextarea id="inputText4" value="#{document1.Json}"
+				style="width:100%;height:100%;font-family:Courier New;font-size:10pt"
+				rows="14">
+			</xp:inputTextarea>
+		</xe:formRow>
+		<xe:formRow id="formRow2" labelPosition="above" label="Properties">
+			<xp:inputTextarea id="inputTextarea1" value="#{document1.Properties}"
 				style="width:100%;height:100%;font-family:Courier New;font-size:10pt"
 				rows="14">
 			</xp:inputTextarea>

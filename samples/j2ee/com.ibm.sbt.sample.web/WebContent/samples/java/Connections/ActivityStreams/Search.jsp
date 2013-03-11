@@ -49,12 +49,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
-
 <body>
-
 	<h4>ActivityStreams Search</h4>
-
-
+	<div id="content">
 	<%
 		try {
 			ActivityStreamService _service = new ActivityStreamService();
@@ -78,6 +75,6 @@
 			out.println("</pre>");
 		}
 	%>
-
+	</div>
 </body>
 </html>

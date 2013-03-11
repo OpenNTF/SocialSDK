@@ -15,9 +15,8 @@
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@page import="java.io.PrintWriter"%>
-<%@page import="java.util.Collection"%>
-<%@page import="java.util.Iterator"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
+<%@page import="java.util.Collection"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
 <%@page
 	import="com.ibm.sbt.services.client.connections.communities.Community"%>
@@ -36,20 +35,16 @@
 		try {
 			CommunityService communityService = new CommunityService();
 			Collection<Community> communities = communityService.getMyCommunities();
-			if (!communities.isEmpty()) {
-				out.println("<b> My Communities </b>");
-				out.println("<br>");
-				Iterator<Community> iterator = communities.iterator();
-				while (iterator.hasNext()) {
-					out.println("<b>Title : </b> " + iterator.next().getTitle());
+			out.println("<b> My Communities </b>");
+			out.println("<br>");
+			if (communities.size() > 0) {
+				for (Community community : communities) {
+					out.println("<b>Title : </b> " + community.getTitle());
 					out.println("<br>");
 				}
 			} else {
 				out.println("No result");
 			}
-			/*
-			if (communities.length > 0) {
-			*/
 		} catch (Throwable e) {
 			out.println("<pre>");
 			e.printStackTrace(new PrintWriter(out));

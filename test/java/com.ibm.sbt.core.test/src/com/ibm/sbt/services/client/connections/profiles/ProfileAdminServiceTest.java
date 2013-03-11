@@ -20,7 +20,7 @@ public class ProfileAdminServiceTest extends BaseUnitTest {
 
 	@Ignore
 	@Test
-	public final void testCreateAndDeleteProfile() {
+	public final void testCreateAndDeleteProfile() throws Exception{
 		ProfileAdminService profileAdminService = new ProfileAdminService();
 		authenticateEndpoint(profileAdminService.getEndpoint(), properties.getProperty("adminUser"),
 				properties.getProperty("passwordAdmin"));
@@ -48,7 +48,7 @@ public class ProfileAdminServiceTest extends BaseUnitTest {
 
 	@Ignore
 	@Test
-	public final void testCreateProfileForInvalidCredentials() {
+	public final void testCreateProfileForInvalidCredentials() throws Exception{
 		ProfileAdminService profileAdminService = new ProfileAdminService();
 		authenticateEndpoint(profileAdminService.getEndpoint(), properties.getProperty("user1"),
 				properties.getProperty("passwordUser1"));
@@ -68,7 +68,7 @@ public class ProfileAdminServiceTest extends BaseUnitTest {
 
 	@Ignore
 	@Test(expected = SBTException.class)
-	public final void testCreateProfileForError() {
+	public final void testCreateProfileForError() throws Exception {
 		ProfileAdminService profileAdminService = new ProfileAdminService();
 		authenticateEndpoint(profileAdminService.getEndpoint(), properties.getProperty("adminUser"),
 				properties.getProperty("passwordAdmin"));
@@ -79,7 +79,7 @@ public class ProfileAdminServiceTest extends BaseUnitTest {
 
 	@Ignore
 	@Test
-	public final void testDeleteProfileForNonExistingProfile() {
+	public final void testDeleteProfileForNonExistingProfile() throws Exception {
 		ProfileAdminService profileAdminService = new ProfileAdminService();
 		authenticateEndpoint(profileAdminService.getEndpoint(), properties.getProperty("adminUser"),
 				properties.getProperty("passwordAdmin"));

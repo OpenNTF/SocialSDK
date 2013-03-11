@@ -53,7 +53,7 @@
   <head>
     <meta charset="utf-8">
     <title>Social Business Toolkit - JavaScript Preview</title>
-    <link href="images/sbt.ico" rel="shortcut icon">
+    <link href="images/sbt.png" rel="shortcut icon">
 	<%
 	String[] styleHrefs = Util.getStyles(request, theme);
 	for (String styleHref : styleHrefs) {

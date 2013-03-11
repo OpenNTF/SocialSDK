@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Social Business Toolkit - Java Samples</title>
-    <link href="images/sbt.ico" rel="shortcut icon">
+    <link href="images/sbt.png" rel="shortcut icon">
     <link rel="stylesheet" href="/sbt.dojo180/dijit/themes/claro/claro.css">
 	
 	<%

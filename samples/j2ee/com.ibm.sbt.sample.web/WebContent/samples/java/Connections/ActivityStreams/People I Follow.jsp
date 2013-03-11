@@ -51,10 +51,8 @@
 
 
 <body>
-
 	<h4>Updates from People I Follow</h4>
-
-
+	<div id="content">
 	<%
 		try {
 			ActivityStreamService _service = new ActivityStreamService();
@@ -92,6 +90,6 @@
 			out.println("</pre>");
 		}
 	%>
-
+	</div>
 </body>
 </html>

@@ -111,6 +111,12 @@ public class Profile implements Serializable{
 	};
     
 
+	public Profile() {
+	}
+	
+	public Profile(String reqId) {
+		this.reqId = reqId;
+	}
     public Profile(ProfileService profileService, String reqId) {
     	this.profileService = profileService;
     	this.reqId = reqId;
@@ -270,6 +276,11 @@ public class Profile implements Serializable{
     public String getUniqueId() {
     	return get("uid");
     }
+
+    public Profile getProfileEntry() {
+		setReqId(getReqId());
+		return this;
+	}
 
     public String getReqId() {
     	return reqId;

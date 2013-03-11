@@ -1,5 +1,7 @@
 package com.ibm.sbt.services.client.connections.profiles;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.w3c.dom.Document;
@@ -8,6 +10,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import com.ibm.commons.xml.DOMUtil;
 import com.ibm.commons.xml.XMLException;
+import com.ibm.sbt.services.client.connections.profiles.utils.Messages;
 
 /**
  * This file contains the converter functions, these functions are used by Profile Service wrapper methods
@@ -65,28 +68,35 @@ public class Converter {
 		return profile;
 	}
 	
-    static public ColleagueConnection[] returnColleagueConnections(ProfileService cs, Document data)
+    static public Collection<ConnectionEntry> returnConnectionEntries(Document data, String type)
 	{
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "returnColleagueConnections");
 		}
-		NodeList connectionEntries = data.getElementsByTagName("entry");
-		ColleagueConnection[] connections = new ColleagueConnection[connectionEntries.getLength()];
-		if(connectionEntries != null && connectionEntries.getLength() > 0) {
-			for(int i = 0 ; i < connectionEntries.getLength();i++) {
-				Node entry = connectionEntries.item(i);
-				Document doc;
-				try {
-					doc = DOMUtil.createDocument();
-					Node dup = doc.importNode(entry, true);
-					doc.appendChild(dup);
-					connections[i] = new ColleagueConnection(cs, entry.getFirstChild().getTextContent());
-					connections[i].setData(doc);
-				} catch (XMLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+		Collection<ConnectionEntry> connections = null;
+		
+		if(data != null){
+			NodeList connectionEntries = data.getElementsByTagName("entry");
+			connections = new ArrayList<ConnectionEntry>();
+			if(connectionEntries != null && connectionEntries.getLength() > 0) {
+				for(int i = 0 ; i < connectionEntries.getLength();i++) {
+					Node entry = connectionEntries.item(i);
+					Document doc;
+					try {
+						doc = DOMUtil.createDocument();
+						Node dup = doc.importNode(entry, true);
+						Element root = doc.createElement("feed");
+						root.appendChild(dup);
+						doc.appendChild(root);
+						ConnectionEntry connectionEntry = ConnectionEntry.createConnectionEntryWithData(doc, type);
+						connections.add(connectionEntry);
+					} catch (XMLException e) {
+						if (logger.isLoggable(Level.SEVERE)) {
+							logger.log(Level.SEVERE, Messages.ProfileError_2 + "returnColleagueConnections()", e);
+						}
+					}
+				
 				}
-			
 			}
 		}
 		if (logger.isLoggable(Level.FINEST)) {

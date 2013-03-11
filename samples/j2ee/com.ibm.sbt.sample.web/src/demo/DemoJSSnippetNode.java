@@ -35,6 +35,6 @@ public class DemoJSSnippetNode extends JSSnippetAssetNode {
 
 	public String getUrl(HttpServletRequest request) {
 		String unid = getUnid();
-		return UrlUtil.getRequestUrl(request,3)+"?snippet="+URLEncoder.encode(unid);
+		return UrlUtil.getRequestUrl(request,false)+"?snippet="+URLEncoder.encode(unid);
 	}
 }

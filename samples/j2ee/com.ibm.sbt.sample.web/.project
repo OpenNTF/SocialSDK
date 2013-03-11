@@ -3,11 +3,14 @@
 	<name>com.ibm.sbt.sample.web</name>
 	<comment></comment>
 	<projects>
-		<project>com.ibm.commons</project>
-		<project>com.ibm.commons.xml</project>
-		<project>com.ibm.sbt.core</project>
 		<project>com.ibm.sbt.playground</project>
+		<project>com.ibm.sbt.core</project>
+		<project>com.ibm.commons.xml</project>
 		<project>com.ibm.commons.runtime</project>
+		<project>com.ibm.commons</project>
+		<project>com.ibm.xsp.extlibx.bazaar.interpreter</project>
+		<project>com.ibm.xsp.extlibx.bazaar</project>
+		<project>com.ibm.xsp.extlibx.bazaar.codemirror</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
@@ -27,16 +30,6 @@
 		</buildCommand>
 		<buildCommand>
 			<name>org.eclipse.wst.validation.validationbuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
-		<buildCommand>
-			<name>org.eclipse.pde.ManifestBuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
-		<buildCommand>
-			<name>org.eclipse.pde.SchemaBuilder</name>
 			<arguments>
 			</arguments>
 		</buildCommand>

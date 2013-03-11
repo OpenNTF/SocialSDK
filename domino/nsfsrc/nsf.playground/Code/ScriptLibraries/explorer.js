@@ -21,8 +21,8 @@ function emptyAPI() {
 	//updateNavSelection();
 }
 
-function loadAPI(id) {
-	XSP.showContent(pageGlobal.dynPanel,"api",{api:id});
+function loadAPI(id,expand,filter) {
+	XSP.showContent(pageGlobal.dynPanel,"api",{api:id,expand:expand,filter:filter});
 	updateLabel(id);
 	//updateNavSelection();
 }
@@ -31,9 +31,9 @@ function toggleSection(id) {
 	var d = dojo.byId(id);
 	if(d) {
 		if(d.style.display=="none") {
-			dojo.fx.wipeIn({node:d, duration:100}).play();
+			dojo.fx.wipeIn({node:d, duration:100, onEnd:refreshFrameHeight}).play();
 		} else {
-			dojo.fx.wipeOut({node:d, duration:100}).play();
+			dojo.fx.wipeOut({node:d, duration:100, onEnd:refreshFrameHeight}).play();
 		}
 	}
 }
@@ -42,7 +42,7 @@ function expandSection(id) {
 	var d = dojo.byId(id);
 	if(d) {
 		if(d.style.display=="none") {
-			dojo.fx.wipeIn({node:d, duration:100}).play();
+			dojo.fx.wipeIn({node:d, duration:100, onEnd:refreshFrameHeight}).play();
 		}
 	}
 }
@@ -51,12 +51,12 @@ function collapseSection(id) {
 	var d = dojo.byId(id);
 	if(d) {
 		if(d.style.display!="none") {
-			dojo.fx.wipeOut({node:d, duration:100}).play();
+			dojo.fx.wipeOut({node:d, duration:100, onEnd:refreshFrameHeight}).play();
 		}
 	}
 }
 
-function executeService(params,details,results) {
+function executeService(params,details,results,callback) {
 	require(['dojo','dojo/_base/array','dojo','dojo','dijit','sbt/Endpoint'], function(lang,array,ioQuery,query,registry,Endpoint) {
 		//require(['dojo/_base/lang','dojo/_base/array','dojo/io-query','dojo/query','dijit/registry','sbt/Endpoint'], function(lang,array,ioQuery,query,registry,Endpoint) {
 		function paramValue(name) {
@@ -147,9 +147,15 @@ function executeService(params,details,results) {
 			loginUi: "popup",
 	    	load : function(response,ioArgs) {
 	    		updatePanel(results,m+" "+ep.baseUrl+this.serviceUrl,200,"",response,ioArgs,startTs);
+	    		if(callback) {
+	    			callback();
+	    		}
 	    	},
 	    	error : function(error,ioArgs) {
 	    		updatePanel(results,m+" "+ep.baseUrl+this.serviceUrl,error.code,"",error.message,ioArgs,startTs);
+	    		if(callback) {
+	    			callback();
+	    		}
 	    	}
 		};
 		

@@ -45,13 +45,10 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
-
-	<body>
-	
-
+<body>
 	 <h4>ActivityStreams Search By HashTag</h4>
 	 <h4>Search for iPhone and Nokia HashTags</h4>
-	 
+	<div id="content">
 	 	<%
 	 	try {
 			ActivityStreamService _service = new ActivityStreamService();
@@ -75,6 +72,6 @@
 		}
 
 	 %>
-
+	</div>
 </body>
 </html>

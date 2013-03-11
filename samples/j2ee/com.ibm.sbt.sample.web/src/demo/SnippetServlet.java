@@ -22,9 +22,11 @@ import java.net.URLEncoder;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import com.ibm.commons.runtime.servlet.BaseHttpServlet;
 import com.ibm.commons.runtime.util.UrlUtil;
 import com.ibm.commons.util.StringUtil;
@@ -35,45 +37,45 @@ import com.ibm.sbt.playground.vfs.VFSFile;
 
 /**
  * @author mwallace
+ *
  */
 public class SnippetServlet extends BaseHttpServlet {
+	
+	private static final long serialVersionUID = 1L;
 
-	private static final long	serialVersionUID		= 1L;
+	public static final String PARAM_FORMAT 				= "format"; //$NON-NLS-1$
+	public static final String PARAM_UNID	 				= "unid"; //$NON-NLS-1$
+	public static final String PARAM_SNIPPET	 			= "snippet"; //$NON-NLS-1$
 
-	public static final String	PARAM_FORMAT			= "format";						//$NON-NLS-1$
-	public static final String	PARAM_UNID				= "unid";							//$NON-NLS-1$
-	public static final String	PARAM_SNIPPET			= "snippet";						//$NON-NLS-1$
+	public static final String FORMAT_JSON 					= "json"; //$NON-NLS-1$
+	public static final String FORMAT_XML 					= "xml"; //$NON-NLS-1$
+	public static final String FORMAT_GADGETS_JSON 			= "gadgets_json"; //$NON-NLS-1$
 
-	public static final String	FORMAT_JSON				= "json";							//$NON-NLS-1$
-	public static final String	FORMAT_XML				= "xml";							//$NON-NLS-1$
-	public static final String	FORMAT_GADGETS_JSON		= "gadgets_json";					//$NON-NLS-1$
-
-	public static final String	APPLICATION_JAVASCRIPT	= "application/javascript";		//$NON-NLS-1$
-	public static final String	APPLICATION_XML			= "application/xml";				//$NON-NLS-1$
-	public static final String	UTF8					= "utf-8";							//$NON-NLS-1$
-
-	static final String			sourceClass				= SnippetServlet.class.getName();
-	static final Logger			logger					= Logger.getLogger(sourceClass);
-
-	/*
-	 * (non-Javadoc)
+	public static final String APPLICATION_JAVASCRIPT 		= "application/javascript"; //$NON-NLS-1$
+	public static final String APPLICATION_XML 				= "application/xml"; //$NON-NLS-1$
+	public static final String UTF8 						= "utf-8"; //$NON-NLS-1$
+	
+	static final String sourceClass = SnippetServlet.class.getName();
+	static final Logger logger = Logger.getLogger(sourceClass);
+	
+	/* (non-Javadoc)
 	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
 	 */
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException,
-			IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		try {
 			String unid = request.getParameter(PARAM_UNID);
 			if (unid == null || unid.length() == 0) {
 				unid = request.getParameter(PARAM_SNIPPET);
 			}
 			String format = getFormat(request);
-
+			
 			String str = null;
 			RootNode rootNode = SnippetFactory.getSnippets(getServletContext());
 			if (unid != null && unid.length() > 0) {
 				VFSFile rootFile = SnippetFactory.getRootFile(getServletContext());
-				JSSnippet snippet = (JSSnippet) rootNode.loadAsset(rootFile, unid);
+				JSSnippet snippet = (JSSnippet)rootNode.loadAsset(rootFile, unid);
 				if (snippet == null) {
 					service400(request, response, "Invalid unid: {0}", unid);
 					return;
@@ -86,46 +88,46 @@ public class SnippetServlet extends BaseHttpServlet {
 			} else {
 				List<Node> children = rootNode.getAllChildrenFlat();
 				if (FORMAT_JSON.equals(format)) {
-					str = toJson(request, children);
+					str = rootNode.getAsJson();
 				} else if (FORMAT_GADGETS_JSON.equals(format)) {
 					str = toGadgetsJson(request, children);
 				} else {
 					str = toXml(request, children);
 				}
 			}
-
+			
 			// write response
 			PrintWriter writer = new PrintWriter(new OutputStreamWriter(response.getOutputStream(), UTF8));
-			try {
-				// response is of type application/javascript
-				response.setStatus(HttpServletResponse.SC_OK);
-				boolean isJson = FORMAT_JSON.equals(format) || FORMAT_GADGETS_JSON.equals(format);
+		    try {
+		    	// response is of type application/javascript
+		    	response.setStatus(HttpServletResponse.SC_OK);
+		    	boolean isJson = FORMAT_JSON.equals(format) || FORMAT_GADGETS_JSON.equals(format);
 				response.setContentType(isJson ? APPLICATION_JAVASCRIPT : APPLICATION_XML);
 				writer.write(str);
-			} finally {
-				writer.flush();
-			}
+		    } finally {
+		    	writer.flush();
+		    }
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, "Error generating json for sample snippets", e);
 		}
 	}
-
+	
 	/*
 	 * Return format
 	 */
 	private String getFormat(HttpServletRequest request) {
-		String val = request.getParameter(PARAM_FORMAT);
-		if (val != null && val.length() > 0) {
-			if (FORMAT_GADGETS_JSON.equalsIgnoreCase(val)) {
-				return FORMAT_GADGETS_JSON;
-			}
-			if (FORMAT_JSON.equalsIgnoreCase(val)) {
-				return FORMAT_JSON;
-			}
-			if (FORMAT_XML.equalsIgnoreCase(val)) {
-				return FORMAT_XML;
-			}
-		}
+    	String val = request.getParameter(PARAM_FORMAT);
+    	if(val != null && val.length() > 0) {
+    		if (FORMAT_GADGETS_JSON.equalsIgnoreCase(val)) {
+    			return FORMAT_GADGETS_JSON;
+    		}
+    		if (FORMAT_JSON.equalsIgnoreCase(val)) {
+    			return FORMAT_JSON;
+    		}
+    		if (FORMAT_XML.equalsIgnoreCase(val)) {
+    			return FORMAT_XML;
+    		}
+    	}
 		return FORMAT_XML;
 	}
 
@@ -138,13 +140,13 @@ public class SnippetServlet extends BaseHttpServlet {
 		for (int i = 0; i < children.size(); i++) {
 			Node node = children.get(i);
 			if (node.isAsset()) {
-				DemoJavaSnippetNode snippetNode = (DemoJavaSnippetNode) node;
+                DemoJSSnippetNode snippetNode = (DemoJSSnippetNode)node;
 				sb.append("\"").append(snippetNode.getUnid()).append("\": {\n");
 				sb.append("  \"level\": \"").append(snippetNode.getLevel()).append("\",\n");
 				sb.append("  \"path\": \"").append(snippetNode.getPath()).append("\",\n");
 				sb.append("  \"unid\": \"").append(snippetNode.getUnid()).append("\"\n");
-				sb.append("  \"url\": \"").append(snippetNode.getJSPUrl(request)).append("\"\n");
-				sb.append((i + 1 < children.size()) ? "},\n" : "}\n");
+				sb.append("  \"url\": \"").append(snippetNode.getUrl(request)).append("\"\n");
+				sb.append((i+1 < children.size()) ? "},\n" : "}\n");
 			}
 		}
 		sb.append("}\n");
@@ -160,21 +162,16 @@ public class SnippetServlet extends BaseHttpServlet {
 		for (int i = 0; i < children.size(); i++) {
 			Node node = children.get(i);
 			if (node.isAsset()) {
-				DemoJSSnippetNode snippetNode = (DemoJSSnippetNode) node;
+				DemoJSSnippetNode snippetNode = (DemoJSSnippetNode)node;
 				String unid = snippetNode.getUnid();
-				String gadgetUrl = UrlUtil.getBaseUrl(request) + "/gadget/sampleRunner.jsp?snippet="
-						+ URLEncoder.encode(unid);
+				String gadgetUrl = UrlUtil.getBaseUrl(request)+"/gadget/sampleRunner.jsp?snippet="+URLEncoder.encode(unid);
 				sb.append("{\n");
-				sb.append("\"name\": \"").append(snippetNode.getCategory()).append("->")
-						.append(snippetNode.getName()).append("\",\n");
-				sb.append("\"Description\": \"").append(snippetNode.getName()).append(" from ")
-						.append(snippetNode.getCategory()).append("\",\n");
+				sb.append("\"name\": \"").append(snippetNode.getName()).append("\",\n");
+				sb.append("\"Description\": \"").append(snippetNode.getName()).append(" from ").append(snippetNode.getCategory()).append("\",\n");
 				sb.append("\"apps\" : [\n");
-				sb.append("{\"name\": \"").append(snippetNode.getCategory()).append("->")
-						.append(snippetNode.getName()).append("\", \"url\": \"").append(gadgetUrl)
-						.append("\"}\n");
+				sb.append("{\"name\": \"").append(snippetNode.getName()).append("\", \"url\": \"").append(gadgetUrl).append("\"}\n");
 				sb.append("]\n");
-				sb.append((i + 1 < children.size()) ? "},\n" : "}\n");
+	  			sb.append((i+1 < children.size()) ? "},\n" : "}\n");
 			}
 		}
 		sb.append("] }\n");
@@ -190,12 +187,12 @@ public class SnippetServlet extends BaseHttpServlet {
 		for (int i = 0; i < children.size(); i++) {
 			Node node = children.get(i);
 			if (node.isAsset()) {
-				DemoJavaSnippetNode snippetNode = (DemoJavaSnippetNode) node;
+				DemoJSSnippetNode snippetNode = (DemoJSSnippetNode)node;
 				sb.append("  <snippet name=\"").append(snippetNode.getName()).append("\"\n");
 				sb.append("           level=\"").append(snippetNode.getLevel()).append("\"\n");
 				sb.append("           path=\"").append(snippetNode.getPath()).append("\"\n");
 				sb.append("           unid=\"").append(snippetNode.getUnid()).append("\"\n");
-				sb.append("           url=\"").append(snippetNode.getJSPUrl(request)).append("\"/>\n");
+				sb.append("           url=\"").append(snippetNode.getUrl(request)).append("\"/>\n");
 			}
 		}
 		sb.append("</snippets>\n");
@@ -213,8 +210,8 @@ public class SnippetServlet extends BaseHttpServlet {
 		toJson(sb, "html", snippet.getHtml());
 		toJson(sb, "css", snippet.getCss());
 		toJson(sb, "description", snippet.getDescription());
-		toJson(sb, "tags", snippet.getTags());
-		toJson(sb, "labels", snippet.getLabels());
+		toJson(sb, "tags", snippet.getTags());		
+		toJson(sb, "labels", snippet.getLabels());		
 		sb.append("}\n");
 		return sb.toString();
 	}
@@ -228,7 +225,7 @@ public class SnippetServlet extends BaseHttpServlet {
 			toJson(sb, name, StringUtil.concatStrings(values, ',', true));
 		}
 	}
-
+	
 	/**
 	 * @param snippet
 	 * @param sb
@@ -238,51 +235,42 @@ public class SnippetServlet extends BaseHttpServlet {
 		encodeJson(sb, value, true);
 		sb.append("\",\n");
 	}
+	
+    /** Minimum printable ASCII character */
+    private static final int ASCII_MIN = 32;
+    /** Maximum printable ASCII character */
+    private static final int ASCII_MAX = 126;
 
-	/** Minimum printable ASCII character */
-	private static final int	ASCII_MIN	= 32;
-	/** Maximum printable ASCII character */
-	private static final int	ASCII_MAX	= 126;
-
-	/*
+    /*
 	 * Encode for use as JSON value
 	 */
-	private void encodeJson(StringBuilder b, String s, boolean preventBackslash) {
-		if (s == null || s.length() == 0) {
-			return;
-		}
-		int length = s.length();
-		for (int i = 0; i < length; i++) {
-			char c = s.charAt(i);
-			switch (c) {
-				case '\b':
-					b.append("\\b");break; //$NON-NLS-1$
-				case '\t':
-					b.append("\\t");break; //$NON-NLS-1$
-				case '\n':
-					b.append("\\n");break; //$NON-NLS-1$
-				case '\f':
-					b.append("\\f");break; //$NON-NLS-1$
-				case '\r':
-					b.append("\\r");break; //$NON-NLS-1$
-				case '\'':
-					b.append("\\'");break; //$NON-NLS-1$
-				case '\"':
-					b.append("\\\"");break; //$NON-NLS-1$
-				case '\\':
-					if (!preventBackslash) {
-						b.append("\\\\");}break; //$NON-NLS-1$
-				default: {
-					if ((c < ASCII_MIN) || (c > ASCII_MAX)) {
-						b.append("\\u"); //$NON-NLS-1$
-						b.append(StringUtil.toUnsignedHex(c, 4));
-					} else {
-						b.append(c);
-					}
-				}
-			}
-		}
-	}
+    private void encodeJson(StringBuilder b, String s,  boolean preventBackslash) {
+    	if (s == null || s.length() == 0) {
+    		return;
+    	}
+        int length = s.length();
+        for( int i=0; i<length; i++ ) {
+            char c = s.charAt(i);
+            switch(c) {
+                case '\b':  b.append( "\\b" );  break; //$NON-NLS-1$
+                case '\t':  b.append( "\\t" );  break; //$NON-NLS-1$
+                case '\n':  b.append( "\\n" );  break; //$NON-NLS-1$
+                case '\f':  b.append( "\\f" );  break; //$NON-NLS-1$
+                case '\r':  b.append( "\\r" );  break; //$NON-NLS-1$
+                case '\'':  b.append( "\\'" );  break; //$NON-NLS-1$
+                case '\"':  b.append( "\\\"" ); break; //$NON-NLS-1$
+                case '\\':  if( !preventBackslash ){ b.append( "\\\\" ); } break; //$NON-NLS-1$
+                default : {
+                    if((c<ASCII_MIN) || (c > ASCII_MAX)) {
+                        b.append( "\\u" ); //$NON-NLS-1$
+                        b.append( StringUtil.toUnsignedHex(c,4) );
+                    } else {
+                        b.append(c);
+                    }
+                }
+            }
+        }
+    }
 
 	/*
 	 * Return snippet in xml notation
@@ -305,15 +293,15 @@ public class SnippetServlet extends BaseHttpServlet {
 		return sb.toString();
 	}
 
-	/*
+	/* 
 	 * Create element with cdata section containing value
 	 */
 	private void addCDataElement(StringBuilder sb, String name, String value) {
+        sb.append("<").append(name).append(">");
 		if (value != null && value.length() != 0) {
-			sb.append("<").append(name).append(">\n");
 			sb.append("<![CDATA[").append(value).append("]]>\n");
-			sb.append("</").append(name).append(">\n");
 		}
+        sb.append("</").append(name).append(">\n");
 	}
 
 }

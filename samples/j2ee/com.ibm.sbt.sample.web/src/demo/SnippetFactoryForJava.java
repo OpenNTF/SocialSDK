@@ -18,10 +18,12 @@ package demo;
 import java.io.IOException;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 
 import com.ibm.sbt.playground.assets.AssetBrowser;
 import com.ibm.sbt.playground.assets.CategoryNode;
 import com.ibm.sbt.playground.assets.RootNode;
+import com.ibm.sbt.playground.assets.javasnippets.JavaSnippet;
 import com.ibm.sbt.playground.assets.javasnippets.JavaSnippetAssetNode;
 import com.ibm.sbt.playground.assets.javasnippets.JavaSnippetNodeFactory;
 import com.ibm.sbt.playground.vfs.ServletVFS;
@@ -34,6 +36,18 @@ import com.ibm.sbt.playground.vfs.VFSFile;
 public class SnippetFactoryForJava extends JavaSnippetNodeFactory {
 
 	private static RootNode root = null;
+	
+    public static JavaSnippet getSnippet(ServletContext context, HttpServletRequest request, String snippetName) {
+        try {
+            RootNode root = SnippetFactoryForJava.getSnippets(context);
+            String json = root.getAsJson();
+            return (JavaSnippet)root.loadAsset(getRootFile(context), snippetName);
+        } catch (IOException ioe) {
+            return null;
+        }
+    }
+    
+	
 	public static RootNode getSnippets(ServletContext context) {
 		if(root==null) {
 			try {
@@ -44,8 +58,9 @@ public class SnippetFactoryForJava extends JavaSnippetNodeFactory {
 		}
 		return root;
 	}
+	
 	public static VFSFile getRootFile(ServletContext context) {
-		ServletVFS vfs = new ServletVFS(context, "/java/");
+		ServletVFS vfs = new ServletVFS(context, "/samples/java/");
 		return vfs.getRoot();
 	}
 

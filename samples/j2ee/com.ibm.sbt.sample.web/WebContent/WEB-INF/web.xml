@@ -16,14 +16,9 @@
  * permissions and limitations under the License.
  */ -->
 <web-app id="WebApp_ID" version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
-	<display-name>SDK Test Web Application</display-name>
+	<display-name>Social Business Toolkit SDK Samples</display-name>
 	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
-		<welcome-file>index.htm</welcome-file>
-		<welcome-file>index.jsp</welcome-file>
-		<welcome-file>default.html</welcome-file>
-		<welcome-file>default.htm</welcome-file>
-		<welcome-file>default.jsp</welcome-file>
+		<welcome-file>home.jsp</welcome-file>
 	</welcome-file-list>
 
 	<servlet>
@@ -42,7 +37,11 @@
 		<display-name>Social Business Toolkit Library Servlet</display-name>
 		<servlet-name>LibraryServlet</servlet-name>
 		<servlet-class>com.ibm.sbt.jslibrary.servlet.LibraryServlet</servlet-class>
-    </servlet>
+		<init-param>
+			<param-name>toolkitExtUrl</param-name>
+			<param-value>%local_server%/sbtx</param-value>
+		</init-param>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>LibraryServlet</servlet-name>
 		<url-pattern>/library/*</url-pattern>
@@ -73,7 +72,7 @@
         <res-type>java.net.URL</res-type>
         <res-auth>Container</res-auth>
         <res-sharing-scope>Shareable</res-sharing-scope>
-   	</resource-ref>		
+   	</resource-ref>	
 
 	<servlet>
 		<description>The snippet servlet handles requests to retrieve details of available snippets.</description>

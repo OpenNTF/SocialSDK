@@ -15,6 +15,7 @@
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@page import="java.io.PrintWriter"%>
+<%@page import="java.util.Collection"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.Community"%> 
@@ -30,14 +31,15 @@
 </head>
 
 <body>	
+	<h4>Community Tags</h4>
+	<div id="content">
 	<%
 	try {
-		String communityUuid = Context.get().getProperty("sample.communityId");
 		CommunityService communityService = new CommunityService();
-		Community community = communityService.getCommunity(communityUuid);
+		Collection<Community> communities = communityService.getPublicCommunities();
+		Community community = communities.iterator().next();
 		String[] tags =community.getTags();
 		if(tags.length > 0){
-			out.println("<b>Community Tags:</b>");	
 	   		for(int i = 0; i<tags.length; i++){
 				out.println(tags[i]);
 				out.println("<br>");
@@ -52,6 +54,6 @@
 		out.println("</pre>");
 	}
 	%>
-	 <br>
+	</div>
 </body>
 </html>

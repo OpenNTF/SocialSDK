@@ -26,6 +26,7 @@ import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.commons.util.io.json.JsonObject;
@@ -855,7 +856,7 @@ public class ActivityStreamService extends BaseService {
 	/*
 	 * This method allows user to set json payload and headers Rest of the parameters like user,group and app are assumed to be default
 	 */
-	public void postEntry(JsonJavaObject postPayload, Map<String, String> header) throws SBTServiceException {
+	public JsonJavaObject postEntry(JsonJavaObject postPayload, Map<String, String> header) throws SBTServiceException {
 
 		if (null == postPayload) {
 			throw new IllegalArgumentException("postPayload passed was null");
@@ -863,11 +864,10 @@ public class ActivityStreamService extends BaseService {
 
 		try {
 			ClientService svc = endpoint.getClientService();
-			svc.post(
+			return (JsonJavaObject)svc.post(
 					resolveUrlForPostingAS(ASUser.ME.getUserType(), ASGroup.ALL.getGroupType(),
 							ASApplication.ALL.getApplicationType()), null, header, postPayload,
-					ClientService.FORMAT_JSON);
-
+					ClientService.FORMAT_JSON);			
 		} catch (ClientServicesException e) {
 			logger.log(Level.SEVERE, "postEvent caused exception", e);
 			throw new ActivityStreamServiceException(e);

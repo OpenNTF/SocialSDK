@@ -21,7 +21,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 
 	@Ignore
 	@Test
-	public final void testGetProfileForEmail() {
+	public final void testGetProfileForEmail() throws Exception {
 
 		ProfileService profileService = new ProfileService();
 		Profile profile = profileService.getProfile(properties.getProperty("email1"));
@@ -44,7 +44,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 
 	@Ignore
 	@Test
-	public final void testGetProfileForUserId() {
+	public final void testGetProfileForUserId() throws Exception{
 
 		ProfileService profileService = new ProfileService();
 		Profile profile = profileService.getProfile(properties.getProperty("userId1"));
@@ -86,7 +86,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 
 	@Ignore
 	@Test
-	public final void testGetProfileWithLoadFalse() {
+	public final void testGetProfileWithLoadFalse() throws Exception {
 
 		ProfileService profileService = new ProfileService();
 		Profile profile = profileService.getProfile(properties.getProperty("email1"), false);
@@ -96,7 +96,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 
 	@Ignore
 	@Test
-	public final void testGetProfileForInvalidEmail() {
+	public final void testGetProfileForInvalidEmail() throws Exception {
 
 		ProfileService profileService = new ProfileService();
 		Profile profile = profileService.getProfile("Test@Ignore @Test.com");
@@ -106,7 +106,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 
 	@Ignore
 	@Test
-	public final void testGetProfileForInvalidUserId() {
+	public final void testGetProfileForInvalidUserId() throws Exception {
 
 		ProfileService profileService = new ProfileService();
 		Profile profile = profileService.getProfile("ewuirewi983298329832");
@@ -116,7 +116,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 
 	@Ignore
 	@Test
-	public final void testUpdateProfile() {
+	public final void testUpdateProfile() throws Exception{
 
 		ProfileService profileService = new ProfileService();
 		authenticateEndpoint(profileService.getEndpoint(), properties.getProperty("user1"),
@@ -148,7 +148,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 	 */
 	@Ignore
 	@Test
-	public final void testUpdateProfileWithInvalidCredentials() {
+	public final void testUpdateProfileWithInvalidCredentials() throws Exception{
 
 		ProfileService profileService = new ProfileService();
 		authenticateEndpoint(profileService.getEndpoint(), properties.getProperty("user2"),
@@ -165,7 +165,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 
 	@Ignore
 	@Test
-	public final void testUpdateProfileForEmptyFields() {
+	public final void testUpdateProfileForEmptyFields() throws Exception{
 
 		ProfileService profileService = new ProfileService();
 		authenticateEndpoint(profileService.getEndpoint(), properties.getProperty("user1"),
@@ -177,7 +177,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 
 	@Ignore
 	@Test
-	public final void testUpdateProfileForNull() {
+	public final void testUpdateProfileForNull() throws Exception{
 
 		ProfileService profileService = new ProfileService();
 		authenticateEndpoint(profileService.getEndpoint(), properties.getProperty("user1"),
@@ -188,7 +188,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 
 	@Ignore
 	@Test
-	public final void testUpdateProfilePhoto() {
+	public final void testUpdateProfilePhoto() throws Exception{
 
 		ProfileService profileService = new ProfileService();
 		authenticateEndpoint(profileService.getEndpoint(), properties.getProperty("user1"),
@@ -202,7 +202,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 
 	@Ignore
 	@Test
-	public final void testUpdateProfilePhotoNullExtension() {
+	public final void testUpdateProfilePhotoNullExtension() throws Exception {
 
 		ProfileService profileService = new ProfileService();
 		authenticateEndpoint(profileService.getEndpoint(), properties.getProperty("user1"),
@@ -216,7 +216,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 
 	@Ignore
 	@Test
-	public final void testUpdateProfilePhotoForInvalidFilePath() {
+	public final void testUpdateProfilePhotoForInvalidFilePath() throws Exception{
 
 		ProfileService profileService = new ProfileService();
 		authenticateEndpoint(profileService.getEndpoint(), properties.getProperty("user1"),

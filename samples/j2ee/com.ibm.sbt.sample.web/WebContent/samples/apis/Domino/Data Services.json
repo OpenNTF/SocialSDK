@@ -1,0 +1,110 @@
+[{
+	"name": "getDatabases",
+	"description": "Gets a list of the databases on a server",
+	"http_method": "get",
+	"uri": "/api/data",
+	"queryParameters": [],
+	"doc_url": "http://www-10.lotus.com/ldd/ddwiki.nsf/dx/Database_collection_GET_dds10"
+},
+{
+	"name": "getViewsAndFolders",
+	"description": "Gets a list of the views and folders in a database",
+	"http_method": "get",
+	"uri": "/{database}/api/data/collections",
+	"uriParameters": [
+		{"name": "database", "value":"XPagesExt.nsf"}
+	],
+	"queryParameters": [],
+	"doc_url": "http://www-10.lotus.com/ldd/ddwiki.nsf/dx/Viewfolder_collection_GET_dds10"
+},
+{
+	"name": "getViewFolderDesign",
+	"description": "Gets the design for a view (or folder)",
+	"http_method": "get",
+	"uri": "/{database}/api/data/collections/name/{view-or-folder-name}/design",
+	"uriParameters": [
+		{"name": "database", "value":"XPagesExt.nsf"},
+		{"name": "view-or-folder-name", "value": "AllContacts"}
+	],
+	"doc_url": "http://www-10.lotus.com/ldd/ddwiki.nsf/dx/Viewfolder_design_GET_dds10"
+},
+{
+	"name": "getViewFolderEntries",
+	"description": "Gets a list of entries in a view (or folder)",
+	"http_method": "get",
+	"uri": "/{database}/api/data/collections/name/{view-or-folder-name}",
+	"uriParameters": [
+		{"name": "database", "value":"XPagesExt.nsf"},
+		{"name": "view-or-folder-name", "value": "AllContacts"}
+	],
+	"queryParameters": [
+		{ "name": "start", "optional":true,  "description":"Starting entry. Defaults to 0.", "type":"int" },
+		{ "name": "count", "optional":true,  "description":"Maximum number of entries. Defaults to 10.", "type":"int" },
+		{ 
+			"name": "entrycount", 
+			"optional":true,  
+			"description":"Include a Content-Range header in the response. Defaults to true.", 
+			"type":"boolean" 
+		},
+		{ "name": "search", "optional":true,  "description":"Search string." },
+		{ "name": "searchmaxdocs", "optional":true,  "description":"Limits the number of entries returned in a search.", "type":"int" },
+		{ "name": "sortcolumn", "optional":true,  "description":"Name of column used to sort results." },
+		{ 
+			"name": "sortorder", 
+			"optional":true,  
+			"description":"Sort order. Defaults to ascending.", 
+			"regexp":"\\bascending\\b|\\bdescending\\b" 
+		},
+		{ "name": "keys", "optional":true,  "description":"Get results starting at a specific key value. Combine this with the sortcolumn parameter." },
+		{ "name": "keysexactmatch", "optional":true,  "description":"Match keys exactly. Combine this with the keys parameter.", "type":"boolean" },
+		{ "name": "expandlevel", "optional":true,  "description":"Return entries at the specified indent level or higher. Defaults to 0.", "type":"int" },
+		{ "name": "category", "optional":true,  "description":"Return entries in the specified category." },
+		{ "name": "parentid", "optional":true,  "description":"Return children of the specified parent." }
+	],
+	"doc_url": "http://www-10.lotus.com/ldd/ddwiki.nsf/dx/Viewfolder_entries_GET_dds10"
+},
+{
+	"name": "getDocument",
+	"description": "Gets a single document",
+	"http_method": "get",
+	"uri": "/{database}/api/data/documents/unid/{document-unid}",
+	"uriParameters": [
+		{"name": "database", "value":"XPagesExt.nsf"},
+		{"name": "document-unid"}
+	],
+	"queryParameters": [
+		{ "name": "hidden", "optional":true,  "description":"Emit hidden items (beginning with $). Defaults to false.", "type":"boolean" },
+		{ "name": "markRead", "optional":true,  "description":"Update unread marks on the server. Defaults to true.", "type":"boolean" },
+		{ "name": "strongtype", "optional":true,  "description":"Emits date/time items as strongly typed JSON objects. Defaults to false.", "type":"boolean" }
+	],
+	"doc_url": "http://www-10.lotus.com/ldd/ddwiki.nsf/dx/Document_GET_dds10"
+},
+{
+	"name": "createDocument",
+	"description": "Creates a new document",
+	"http_method": "post",
+	"uri": "/{database}/api/data/documents",
+	"uriParameters": [
+		{"name": "database", "value":"XPagesExt.nsf"}
+	],
+	"queryParameters": [
+		{ "name": "form", "optional":true,  "description":"Form name.", "value": "Contact" },
+		{ "name": "computewithform", "optional":true,  "description":"Compute the document items with form-based forumlas. Combine with the form parameter. Defaults to false.", "type":"boolean" },
+		{ "name": "parentid", "optional":true,  "description":"Create the new document as a response to the specified document." }
+	],
+	"post_string": "",
+	"post_content_type": "application/json",
+	"doc_url": "http://www-10.lotus.com/ldd/ddwiki.nsf/dx/Document_Collection_POST_dds10"
+},
+{
+	"name": "deleteDocument",
+	"description": "Deletes a document",
+	"http_method": "delete",
+	"uri": "/{database}/api/data/documents/unid/{document-unid}",
+	"uriParameters": [
+		{"name": "database", "value":"XPagesExt.nsf"},
+		{"name": "document-unid"}
+	],
+	"queryParameters": [],
+	"doc_url": "http://www-10.lotus.com/ldd/ddwiki.nsf/dx/Document_DELETE_dds10"
+}]

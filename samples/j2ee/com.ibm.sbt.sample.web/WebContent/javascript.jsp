@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <title>Social Business Toolkit - JavaScript Samples</title>
-    <link href="images/sbt.ico" rel="shortcut icon">
+    <link href="images/sbt.png" rel="shortcut icon">
     <link rel="stylesheet" href="/sbt.dojo180/dijit/themes/claro/claro.css">
     <link rel="stylesheet" href="/sbt.jquery182/css/ui-lightness/jquery-ui-1.8.23.custom.css">
     <link rel="stylesheet" href="libs/codemirror/lib/codemirror.css">

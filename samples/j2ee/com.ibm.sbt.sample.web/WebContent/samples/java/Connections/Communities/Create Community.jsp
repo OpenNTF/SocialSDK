@@ -30,17 +30,16 @@
 </head>
 
 <body>	
+	<h4>Create Community</h4>
+	<div id="content">
 	<%
 	try {
 			CommunityService communityService = new CommunityService();
 			Community community = communityService.getCommunity(false);
-			community.setTitle("test098Community");
-			community.setContent("test Community Content");
-			out.println("<b> Community Created :</b>");	
-			out.println("<br>");
+			community.setTitle("Test Community" + System.currentTimeMillis());
+			community.setContent("Test Community created by Create Community Java sample");
 			community = communityService.createCommunity(community,true);
 			out.println(community.getCommunityUuid());
-			out.println("<br>");
 			out.println(community.getTitle());
 	} catch (Throwable e) {
 		out.println("<pre>");
@@ -48,6 +47,6 @@
 		out.println("</pre>");
 	}
 	%>
-	 <br>
+	</div>
 </body>
 </html>

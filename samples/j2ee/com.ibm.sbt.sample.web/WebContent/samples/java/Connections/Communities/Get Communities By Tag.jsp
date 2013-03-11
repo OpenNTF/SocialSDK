@@ -31,6 +31,8 @@
 </head>
 
 <body>	
+	<h4>Communities By Tag</h4>
+	<div id="content">
 	<%
 	try {
 		String tag = "test";
@@ -39,8 +41,6 @@
 		params.setTag(tag);
 		Collection<Community> communities = communityService.getPublicCommunities(params.getParameterMap());
 		if(communities.size() > 0){
-			out.println("<b> Communities associated with Tag: </b>"+tag);	
-			out.println("<br>");
 			for (Community community : communities) {
 					out.println("<b>Title : </b> " + community.getTitle());
 					out.println("<br>");
@@ -56,6 +56,6 @@
 		out.println("</pre>");
 	}
 	%>
-	 <br>
+	</div>
 </body>
 </html>

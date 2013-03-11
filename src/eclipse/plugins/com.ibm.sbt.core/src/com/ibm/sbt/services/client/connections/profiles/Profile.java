@@ -27,6 +27,7 @@ import java.lang.Object;
 import com.ibm.commons.xml.DOMUtil;
 import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.XMLException;
+import com.ibm.sbt.services.client.connections.profiles.exception.ProfileServiceException;
 import com.ibm.sbt.services.util.XmlTextUtil;
 
 /**
@@ -127,12 +128,12 @@ public class Profile implements Serializable{
     	return fieldsMap;
     }
 
-    public void load()
+    public void load() throws ProfileServiceException
     {
     	profileService.load(this);
     }
     
-    public void update()
+    public void update() throws ProfileServiceException
     {
     	profileService.updateProfile(this);
     }

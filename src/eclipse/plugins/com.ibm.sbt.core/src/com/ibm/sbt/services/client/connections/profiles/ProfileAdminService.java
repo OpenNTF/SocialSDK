@@ -7,6 +7,8 @@ import java.util.logging.Level;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.client.connections.profiles.exception.ProfileServiceException;
+import com.ibm.sbt.services.client.connections.profiles.utils.Messages;
 
 
 public class ProfileAdminService extends ProfileService {
@@ -52,17 +54,17 @@ public class ProfileAdminService extends ProfileService {
 	 * argument should be a unique id of the user whose profile needs to be deleted
 	 * the argument could either be a email or userid
 	 * User should be logged in as a administrator to call this method
+	 * @throws ProfileServiceException 
 	 */
-	public boolean deleteProfile(Profile profile)
+	public boolean deleteProfile(Profile profile) throws ProfileServiceException
 	{	
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "deleteProfile", profile);
 		}
 		if (profile == null) {
-			throw new IllegalArgumentException(StringUtil.format("Delete operation cancelled. profile passed was null."));
+			throw new IllegalArgumentException(Messages.InvalidArgument_3);
 		}
-	
-		boolean success = true;		
+		
 		Map<String, String> parameters = new HashMap<String, String>();
 
 		if (isEmail(profile.getReqId())) {
@@ -70,24 +72,14 @@ public class ProfileAdminService extends ProfileService {
 		} else {
 			parameters.put("userid", profile.getReqId());
 		}
-
-		try {
-			getClientService().delete(ProfilesAPI.DELETEPROFILE.getUrl(), parameters);
-		} catch (ClientServicesException e) {
-
-			if (logger.isLoggable(Level.SEVERE)) {
-				logger.log(Level.SEVERE,
-						"Error encountered in deleting profile", e);
-				success = false;
-			}
-		}
+		boolean result = executeDelete(ProfilesAPI.DELETEPROFILE.getUrl(), parameters);
 
 		removeProfileDataFromCache(profile.getReqId());
 
 		if (logger.isLoggable(Level.FINEST)) {
-			logger.exiting(sourceClass, "deleteProfile", success);
+			logger.exiting(sourceClass, "deleteProfile", result);
 		}
-		return success;
+		return result;
 	}
 
 	/**
@@ -97,39 +89,29 @@ public class ProfileAdminService extends ProfileService {
 	 * 
 	 * This method is used to create a user's profile.
 	 * User should be logged in as a administrator to call this method
+	 * @throws ProfileServiceException 
 	 */
-	public boolean createProfile(Profile profile) 
+	public boolean createProfile(Profile profile) throws ProfileServiceException 
 	{
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "create", profile);
 		}
 		if (profile == null) {
-			throw new IllegalArgumentException(StringUtil.format("Create operation cancelled. Profile passed was null."));
-		}
-		boolean returnVal = true;		
+			throw new IllegalArgumentException(Messages.InvalidArgument_3);
+		}		
 		Map<String, String> parameters = new HashMap<String,String>();
 		Map<String, String> headers = new HashMap<String,String>();
-		headers.put("Content-Type","application/atom+xml");
+		headers.put(Headers.ContentType,Headers.ATOM);
 
 		if(isEmail(profile.getReqId())){
-			parameters.put("email",profile.getReqId());
+			parameters.put(ProfileRequestParams.EMAIL,profile.getReqId());
 		}
 		else{
-			parameters.put("userid",profile.getReqId()); 
+			parameters.put(ProfileRequestParams.USERID,profile.getReqId()); 
 		}
-		// check if all the required fields are present in the request
+		Object createPayload = profile.constructCreateRequestBody();
+		boolean returnVal = executePost(ProfilesAPI.ADDPROFILE.getUrl(), parameters, headers, createPayload, ClientService.FORMAT_NULL);
 
-		try {
-			Object createPayload = profile.constructCreateRequestBody();
-			getClientService().post(ProfilesAPI.ADDPROFILE.getUrl(), parameters, headers, createPayload, ClientService.FORMAT_NULL);
-
-		} catch (ClientServicesException e) {
-
-			if (logger.isLoggable(Level.SEVERE)) {
-				logger.log(Level.SEVERE, "Error encountered while creating profile", e);
-				returnVal = false;
-			}
-		}
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.exiting(sourceClass, "create");
 		}

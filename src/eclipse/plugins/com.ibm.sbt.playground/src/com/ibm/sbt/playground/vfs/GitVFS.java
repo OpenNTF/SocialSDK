@@ -61,9 +61,14 @@ public class GitVFS extends RemoteVFS {
 		
 		private String path;
 		
-		public GitFile(VFS vfs, GitFile parent, String name, String path, boolean file) {
+		public GitFile(GitVFS vfs, GitFile parent, String name, String path, boolean file) {
 			super(vfs,parent,name,file);
 			this.path = path;
+		}
+		
+		@Override
+		public GitVFS getVFS() {
+			return (GitVFS)super.getVFS();
 		}
 		
 		public String getUrl() {

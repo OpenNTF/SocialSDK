@@ -132,9 +132,9 @@
             postCode(document.getElementById('previewFrame'), true);
         });
 
-        $("#showHtmlButton").click(function(e){
-            showDialog();
-        });
+        //$("#showHtmlButton").click(function(e){
+        //    showDialog();
+        //});
 
         $("div[class*='leafNode'] > div > span").css('cursor', 'pointer');
 

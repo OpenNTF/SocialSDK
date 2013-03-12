@@ -113,18 +113,24 @@ public class APIImporter extends AssetImporter {
 			String id = Node.encodeUnid(ed.getValue().path); 
 			String category = trimSeparator(extractCategory(ed.getValue().path));
 			String name = trimSeparator(extractName(ed.getValue().path));
-			String json = JsonGenerator.toJson(JsonJavaFactory.instanceEx2, ed.getValue().content);
-			String properties = createPropertiesAsString();
+			String json = JsonGenerator.toJson(JsonJavaFactory.instanceEx, ed.getValue().content);
+			String properties = createPropertiesAsString(ed.getValue().path);
 			saveAsset(id, category, name, source.getName(), json, properties);
 		}
 		
 		return apiDocs.size();
 	}
-	private String createPropertiesAsString() throws IOException {
+	private String createPropertiesAsString(String path) throws IOException {
 		Properties properties = new Properties();
-		properties.put("endpoint", "connections");
-		//properties.put("endpoint", "domino");
-		//properties.put("basedocurl", "http://www-10.lotus.com/ldd/ddwiki.nsf");
+		// For now, hard coded
+		if(StringUtil.indexOfIgnoreCase(path,"domino")>=0) {
+			properties.put("endpoint", "domino");
+			properties.put("basedocurl", "http://www-10.lotus.com/ldd/ddwiki.nsf");
+		} else if(StringUtil.indexOfIgnoreCase(path,"smartcloud")>=0) {
+			properties.put("endpoint", "smartcloud");
+		} else {
+			properties.put("endpoint", "connections");
+		}
 		StringWriter sw = new StringWriter();
 		properties.store(sw, null);
 		return sw.toString();

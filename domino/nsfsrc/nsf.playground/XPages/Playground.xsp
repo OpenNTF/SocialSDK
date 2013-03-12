@@ -249,7 +249,7 @@ if(doc) {
 	if(dojo.hash()) {
 		var obj = dojo.queryToObject(dojo.hash());
 		if(obj.snippet) {
-			loadSnippet(obj.snippet);
+			setTimeout(function() {loadSnippet(obj.snippet)});
 		} 
 	} else {
 		createSnippet();

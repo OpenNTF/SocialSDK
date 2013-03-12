@@ -33,6 +33,9 @@ dojo.addOnLoad(function() {
    dojo.connect(window, "onresize", resize);
    resize();
 });
+function refreshFrameHeight() {
+	// Nothing - only for the mini explorer
+}
 
 function prepend(h,f) {
 	return function() {
@@ -95,7 +98,7 @@ return apiBean.loadAPI(e);
 												<xp:tr>
 													<xp:td styleClass="explorer_col1">
 														<xe:multiImage id="multiImage1"
-															value='#{javascript:item.http_method}'>
+															value='#{javascript:item.http_method.toLowerCase()}'>
 															<xe:this.icons>
 																<xe:iconEntry url="/explorer_get.png"
 																	selectedValue="get" alt="GET method">

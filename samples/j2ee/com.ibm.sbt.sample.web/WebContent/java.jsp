@@ -48,8 +48,8 @@
 		</div>
 	</div>
 
-    <script src="/sbt.jquery182/js/jquery-1.8.0.min.js"></script>
-    <script src="/sbt.jquery182/js/jquery-ui-1.8.23.custom.min.js"></script>
+    <script src="/sbt.jquery180/js/jquery-1.8.0.min.js"></script>
+    <!-- <script src="/sbt.jqueryui1823/js/jquery-ui-1.8.23.custom.min.js"></script> -->
     <script src="js/java_jquery/jqueryNavbar.js"></script>
     <script src="js/java_jquery/jqueryAjax.js"></script>
   </body>

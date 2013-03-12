@@ -23,7 +23,7 @@
         <p><a class="btn btn-primary btn-large" href="http://bit.ly/ibmsbtcommunity">Learn more &raquo;</a></p>
       </div>
       <div class="container">
-        <img src="images/ssbanner.png" class="img-polaroid">
+        <img src="https://dw1.s81c.com/developerworks/mydeveloperworks/blogs/0f357879-ccee-4927-98c1-7bb88d5dc81f/resource/ssbanner.png" class="img-polaroid">
       </div>
       <!-- main content ends -->
       <div id="push"></div>

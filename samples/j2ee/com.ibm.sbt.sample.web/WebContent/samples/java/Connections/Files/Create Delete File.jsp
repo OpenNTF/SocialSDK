@@ -37,42 +37,33 @@
 </head> 
           
 <body>	
-	<h4>Upload File</h4>
+	<h4>Create & Delete File</h4>
 	<div id="content">
 	<%
-	try {
-		VFSFile rootFile = SnippetFactoryForJava.getRootFile(application);
-		FileService service = new FileService();
-		String pathOfFileOnServer = Context.get().getProperty("sample.uploadFilePath");
-		out.println("<br> Test file upload - Path = " + pathOfFileOnServer );
-		FileEntry fileEntry = service.upload(pathOfFileOnServer);
-		out.println("<br> File Upload Status : " + service.FileStatus );
+	try {		
+		FileService fileService = new FileService();
+		String content = "Content uploaded by Create Delete File java sample";
+		String id = "File" + System.currentTimeMillis() + ".txt";
 		
-		if(fileEntry!=null)
-		{
-		out.println("<br> Display Uploaded file's Data");
-		out.println("<br>File name : " + fileEntry.getLabel());
-		out.println("<br>File created : " + fileEntry.getCreated());
-		out.println("<br>File Media Size" + fileEntry.getTotalMediaSize());
-		}
-		//Upload File with Metadata 
-		pathOfFileOnServer = Context.get().getProperty("sample.uploadMultiPartFilePath");
-		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put(FileRequestParams.TAG, "multipartPost-UploadFile-Tag");
-		parameters.put(FileRequestParams.IDENTIFIER, "label");
+		Map<String, String> params = new HashMap<String, String>();
+		params.put(FileRequestParams.VISIBILITY, "public");
+		params.put(FileRequestParams.TAG, "text");
+		params.put(FileRequestParams.IDENTIFIER, id);
+		
 		Map<String, String> headers = new HashMap<String, String>();
-		headers.put(Headers.XUpdateNonce, service.getNonce());
-		FileEntry fileE = service.uploadFileWithMetadata(pathOfFileOnServer, parameters, headers, null);
-		out.println("<br> Test file upload Multipart - Path = " + pathOfFileOnServer );
-		if(fileE != null)
-			out.println("<br> TotalMediaSize : " + fileE.getTotalMediaSize());
+		headers.put(Headers.XUpdateNonce, fileService.getNonce());
+		headers.put(Headers.Slug, id);
 		
-		out.println(service.FileStatus);
+		FileEntry fileEntry = fileService.upload(content, params, headers);
+		out.println("Created file: " + fileEntry.getFileId());
+		
+		fileService.delete(fileEntry.getFileId());
+		out.println("<br/>Deleted file: " + fileEntry.getFileId());
 	} catch (Throwable e) {
-			out.println("<pre>");
-			e.printStackTrace(new PrintWriter(out));
-			out.println("</pre>");
-	}	
+		out.println("<pre>");
+		e.printStackTrace(new PrintWriter(out));
+		out.println("</pre>");	
+	}					
 	%>
 	</div>
 </body>

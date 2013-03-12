@@ -14,11 +14,13 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@page import="java.util.List"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.model.FileRequestParams"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.FileService"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>  
 <%@page import="java.util.Map"%>
+<%@page import="java.util.List"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.model.FileEntry"%>
@@ -33,29 +35,25 @@
 </head>
 
 <body>	
+	<h4>Add Comment To File</h4>
+	<div id="content">
 	<%
-	try { 
-				FileService service = new FileService();
-				String fileToBeUpdated = Context.get().getProperty("sample.fileId");
-
-				Map<String, String> params = new HashMap<String, String>(); 
-				
-				FileEntry fileEntry = service.getFile(fileToBeUpdated, params, true); 
-				out.println("<b> Adding Comment</b>");
-				out.println("<br>");    
-				String comment = "Comment added from JSP..";
-				fileEntry = service.addCommentToFile(fileEntry, params, comment); 
-				if(fileEntry != null)
-				{
-					out.println("File's comment Id : " + fileEntry.getCommentEntry().getCommentId());
-					out.println("File's Modifier's Email : " + fileEntry.getModifier().getEmail());
-				}
-				out.println("Status : " + service.FileStatus);
-		}catch (Throwable e) {
-			out.println("<pre>");
-			e.printStackTrace(new PrintWriter(out));
-			out.println("</pre>");
-		}
+	    try { 
+	        FileService fileService = new FileService();
+	        List<FileEntry> fileEntries = fileService.getMyFiles();
+	        FileEntry fileEntry = fileEntries.get(0);
+	        Map<String, String> params = new HashMap<String, String>(); 
+	        fileEntry = fileService.addCommentToFile(fileEntry, params, "Comment added by Add Comment To File java sample");
+	        if (fileEntry != null) {
+	        	String commentId = fileEntry.getCommentEntry().getCommentId();
+	        	String modifier = fileEntry.getModifier().getEmail();
+	            out.println("Comment Id : " + commentId + "<br/>" + "Modifier : " + modifier);
+	        }
+	    } catch (Throwable e) {
+	        out.println("<pre>");
+	        e.printStackTrace(new PrintWriter(out));
+	        out.println("</pre>");
+	    }
 	%>
 	 <br>   
 </body>

@@ -20,10 +20,12 @@ package com.ibm.sbt.services.client.connections.files.model;
  * @author Vimal Dhupar
  */
 public class Headers {
-	
-	public static final String ATOM = "application/atom+xml";
-	public static final String	UTF				= "UTF-8";
-	public static final String XUpdateNonce = "X-Update-Nonce";
-	public static final String ContentType = "Content-Type";
-	public static final String	ContentLanguage	= "Content-Language";
+
+    public static final String ATOM                = "application/atom+xml";
+	public static final String UTF				   = "UTF-8";
+	public static final String XUpdateNonce        = "X-Update-Nonce";
+	public static final String ContentType         = "Content-Type";
+    public static final String ContentLanguage     = "Content-Language";
+    public static final String Slug                = "Slug";
+
 }

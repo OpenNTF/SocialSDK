@@ -23,46 +23,40 @@
 <%@page import="java.io.PrintWriter"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
-<%@page import="com.ibm.commons.runtime.Context"%>  
+<%@page import="com.ibm.commons.runtime.Context"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.model.*"%>
- 
-<%@page 
-	language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+
+<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <html>
 <head>
-	<title>SBT JAVA Sample - Files</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>SBT JAVA Sample - Files</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
-<body>	
+<body>
+	<h4>Get File Comments</h4>
+	<div id="content">
 	<%
-	try {		
-			FileService fileService = new FileService();
-			out.println("<b> Get Files Comments: " + "</b>");	
-			out.println("<br>"); 
-			String fileId = Context.get().getProperty("sample.fileId");
-			FileEntry fileEntry = fileService.getFile(fileId, true);
-			List<CommentEntry> commentEs = fileService.getFilesComments(fileEntry, null);
-			if(commentEs != null && ! commentEs.isEmpty())
-			{
-				for (CommentEntry entry : commentEs)
-				{
-					out.println("Comment	: " + entry.getComment() + " , ");
-					out.println("Comment Id	: " + entry.getCommentId());
-					out.println("<br>");
-				}
-			}
-			else
-			{
-				out.println("No Results");
-			}
-		}catch (Throwable e) {
-			out.println("<pre>");
-			e.printStackTrace(new PrintWriter(out));
-			out.println("</pre>");	
-		}	
-		%>
-	 <br>
+    try {
+        FileService fileService = new FileService();
+        List<FileEntry> fileEntries = fileService.getMyFiles();
+        FileEntry fileEntry = fileEntries.get(0);
+        List<CommentEntry> commentEntries = fileService.getFilesComments(fileEntry, null);
+        if (commentEntries != null && !commentEntries.isEmpty()) {
+            for (CommentEntry commentEntry : commentEntries) {
+                out.println("Comment Id	: " + commentEntry.getCommentId() + " , ");
+                out.println("Comment : " + commentEntry.getComment());
+                out.println("<br>");
+            }
+        } else {
+            out.println("No Results");
+        }
+    } catch (Throwable e) {
+        out.println("<pre>");
+        e.printStackTrace(new PrintWriter(out));
+        out.println("</pre>");
+    }
+	%>
+	</div>
 </body>
 </html>

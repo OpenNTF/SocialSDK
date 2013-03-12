@@ -41,7 +41,7 @@ public class Util {
         { "Dojo Toolkit 1.7.0 CDN Async", "dojo170cdnasync", "includes/dojo170cdnasync.jsp", "/library?lib=dojo&ver=1.7.0" }, 
         { "Dojo Toolkit 1.4.3", "dojo143", "includes/dojo143.jsp", "/library?lib=dojo&ver=1.4.3" }, 
         { "jQuery 1.8.0", "jquery180", "includes/jquery180.jsp", "/library?lib=jquery&ver=1.8.0" },
-        { "jQuery 1.8.0 Debug", "jquery180debug", "includes/jquery180debug.jsp", "/library?lib=jquery&ver=1.8.0" }, 
+        //{ "jQuery 1.8.0 Debug", "jquery180debug", "includes/jquery180debug.jsp", "/library?lib=jquery&ver=1.8.0" }, 
         { "jQuery 1.9.1 CDN", "jquery191cdn", "includes/jquery191cdn.jsp", "/library?lib=jquery&ver=1.9.1" },
         { "jQuery 1.9.1 CDN Debug", "jquery191cdndebug", "includes/jquery191cdndebug.jsp", "/library?lib=jquery&ver=1.9.1" }
     };

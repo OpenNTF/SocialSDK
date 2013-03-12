@@ -3,6 +3,7 @@ package com.ibm.sbt.services.client.connections.communities;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+
 import org.w3c.dom.Document;
 
 import com.ibm.commons.util.StringUtil;
@@ -10,7 +11,6 @@ import com.ibm.commons.xml.DOMUtil;
 import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.XMLException;
 import com.ibm.sbt.services.client.ClientServicesException;
-import com.ibm.sbt.util.XmlNavigator;
 
 public class Member {
 

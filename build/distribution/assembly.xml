@@ -181,6 +181,9 @@
     <fileSet>
       <directory>../../src/scripts</directory>
       <outputDirectory>sbtsdk/scripts</outputDirectory>
+	  <excludes>
+		<exclude>**/.project</exclude>
+	  </excludes>
       <includes>
         <include>*.*</include>
       </includes>

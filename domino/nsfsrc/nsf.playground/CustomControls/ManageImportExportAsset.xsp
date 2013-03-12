@@ -119,6 +119,9 @@ document1.replaceItemValue("Source","file")}]]></xp:this.postNewDocument>
 						<xp:selectItem itemLabel="GitHub Repository"
 							itemValue="github">
 						</xp:selectItem>
+						<xp:selectItem itemLabel="API Documentation Wiki"
+							itemValue="apidoc">
+						</xp:selectItem>
 					</xp:comboBox>
 				</xe:formRow>
 				<xe:formRow id="formRow1" label="Location:">

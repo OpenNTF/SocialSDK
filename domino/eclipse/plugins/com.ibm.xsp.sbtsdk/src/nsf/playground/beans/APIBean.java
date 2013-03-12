@@ -1,8 +1,10 @@
 package nsf.playground.beans;
 
 import java.io.IOException;
+import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
+import java.util.Properties;
 
 import lotus.domino.Database;
 import lotus.domino.Document;
@@ -74,11 +76,19 @@ public class APIBean extends AssetBean {
 				ViewEntry e = database.getView("AllAPIsById").getEntryByKey(id);
 				if(e!=null) {
 					Document doc = e.getDocument();
-					String endpoint = doc.getItemValueString("Endpoint");
+					Properties p = new Properties();
+					String props = doc.getItemValueString("Properties");
+					if(StringUtil.isNotEmpty(props)) {
+						p.load(new StringReader(props));
+					}
+					String endpoint = p.getProperty("endpoint");
 					if(StringUtil.isNotEmpty(endpoint)) {
 						o.put("endpoint", FBSString.get(endpoint));
 					}
-					String baseDocUrl = doc.getItemValueString("BaseDocUrl");
+					String baseDocUrl = doc.getItemValueString("basedocurl");
+					if(StringUtil.isNotEmpty(endpoint)) {
+						o.put("doc_url", FBSString.get(baseDocUrl));
+					}
 					String json = doc.getItemValueString("Json");
 					if(StringUtil.isNotEmpty(json)) {
 						FBSValue value = (FBSValue)JsonParser.fromJson(new JsonJavaScriptFactory(jsContext), json);

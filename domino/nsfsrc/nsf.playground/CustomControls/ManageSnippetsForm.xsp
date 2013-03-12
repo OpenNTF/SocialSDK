@@ -60,7 +60,7 @@
 			</xp:inputText>
 		</xe:formRow>
 		<xe:formRow id="formRow3" label="Description:">
-			<xp:inputTextarea id="inputText6" required="true"
+			<xp:inputTextarea id="inputText6"
 				disableClientSideValidation="true" value="#{document1.Description}"
 				cols="120" rows="5">
 			</xp:inputTextarea>

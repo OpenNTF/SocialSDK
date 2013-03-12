@@ -36,7 +36,7 @@
 </head>
 
 <body>
-	<h4>Update File</h4>
+	<h4>Update File (work in progress!!!)</h4>
 	<div id="content">
 		<%
     try {
@@ -52,8 +52,8 @@
 			
 		Map<String, String> payloadMap = new HashMap<String, String>();
 		payloadMap.put(FileRequestPayload.LABEL, "File updated by Update File java sample");
-		fileEntry = fileService.update(fileEntry, paramsMap, payloadMap);
-		out.println("Tag Added : " + fileEntry.getLabel());
+		//fileEntry = fileService.update(fileEntry, paramsMap, payloadMap);
+		//out.println("Tag Added : " + fileEntry.getLabel());
 		
 		paramsMap = new HashMap<String, String>();
 		paramsMap.put(FileRequestParams.REMOVETAG, tag);

@@ -26,12 +26,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
+
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.DOMUtil;
 import com.ibm.sbt.services.client.BaseService;
@@ -257,6 +260,48 @@ public class FileService extends BaseService {
 		}
 		return (FileEntry) parseAndProcessResultFeed(result, FileEntry.class).get(0);
 	}
+
+    /**
+     * upload
+     * <p>
+     * Rest API Used : /files/basic/api/myuserlibrary/feed <br>
+     * 
+     * @description A file consists of both the information about the file, which is also known as metadata,
+     *              and the binary data that the file contains. You can provide either of the following
+     *              inputs: - Binary data and no Atom entry document to define the metadata. Metadata is
+     *              created automatically and sets all values to the default values, except for the value of
+     *              the title element, which it takes from the SLUG header. - Atom entry document that defines
+     *              the metadata of the file and no binary data.
+     * @param filePath
+     *            - the path of the file on server, to be uploaded.
+     * @param params
+     *            - Map of Parameters. See {@link FileRequestParams} for possible values.
+     * @param headers
+     *            - Map of Headers. See {@link Headers} for possible values.
+     * @return FileEntry
+     * @throws FileServiceException
+     */
+    public FileEntry upload(Object content, Map<String, String> params, Map<String, String> headers) throws FileServiceException {
+        if (logger.isLoggable(Level.FINEST)) {
+            logger.entering(sourceClass, "upload", new Object[] { content, params, headers });
+        }
+        
+        String accessType = AccessType.AUTHENTICATED.getAccessType();
+        String category = Categories.MYLIBRARY.getCategory();
+        String resultType = ResultType.FEED.getResultType();
+        String requestUri = constructUrl(BaseUrl.FILES.getBaseUrl(), accessType, category, null, null, null, resultType);
+        Document result = executePost(requestUri, params, headers, content);
+        
+        FileEntry fileEntry = null;
+        if (null != result) {
+            fileEntry = (FileEntry)parseAndProcessResultFeed(result, FileEntry.class).get(0);
+        }
+        
+        if (logger.isLoggable(Level.FINEST)) {
+            logger.exiting(sourceClass, "upload", fileEntry);
+        }
+        return fileEntry;
+    }
 
 	/**
 	 * lock

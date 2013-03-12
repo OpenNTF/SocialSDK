@@ -1,7 +1,7 @@
 <div class="btn-group" style="margin-bottom: 20px">
    	<button id="runButton" class="btn btn-small">Run</button>
    	<button id="debugButton" class="btn btn-small">Debug</button>
-   	<button id="showHtmlButton" class="btn btn-small">Show Generated HTML</button>
+   	<button id="showHtmlButton" class="btn btn-small" disabled="disabled">Show Generated HTML</button>
 </div>
 
 <div class="iframeWrapper" style="border-style:solid;border-width:1px;width=500px;height:450px;border-color:#D3D3D3;overflow:scroll;padding:10px;">

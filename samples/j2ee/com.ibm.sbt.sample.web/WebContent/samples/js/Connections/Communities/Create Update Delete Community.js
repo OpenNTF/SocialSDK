@@ -15,15 +15,30 @@ require(["sbt/Endpoint", "sbt/connections/CommunityService", "sbt/dom"], functio
 });
 
 function loadCommunity(communityService, dom) {
-    communityService.getMyCommunities({
-        parameters: { ps: 1 },
-        load: function(communities) {
-            handleCommunitiesLoaded(communities, dom);
-        },
-        error: function(error) {
-            handleError(dom, error);
-        }       
-    });
+    var communityId = dom.byId("communityId").value;
+    if (communityId) {
+        communityService.getCommunity({
+            id: communityId,
+            load: function(community) {
+                handleCommunityLoaded(community, dom);
+            },
+            error: function(error) {
+                handleError(dom, error);
+            }       
+        });
+        
+    } else {
+        communityService.getMyCommunities({
+            parameters: { ps: 1 },
+            load: function(communities) {
+                var community = (!communities || communities.length == 0) ? null : communities[0];
+                handleCommunityLoaded(community, dom);
+            },
+            error: function(error) {
+                handleError(dom, error);
+            }       
+        });
+    }
 }
 
 function createCommunity(communityService, title, content, dom) {
@@ -85,28 +100,28 @@ function handleLoggedIn(entry, CommunityService, dom) {
     displayMessage(dom, "Please wait... Loading your latest community");
 }
 
-function handleCommunitiesLoaded(communities, dom) {
-    if (!communities || communities.length == 0) {
+function handleCommunityLoaded(community, dom) {
+    if (!community) {
         dom.byId("communityId").value = "";
         dom.byId("communityTitle").value = "";
         dom.byId("communityContent").value = "";
         dom.byId("communityTags").value = "";
-        displayMessage(dom, "You are not a member of any communities."); 
+        displayMessage(dom, "Unable to load community."); 
         return;
     }
     
-    dom.byId("communityTitle").value = communities[0].getTitle();
-    dom.byId("communityTags").value = communities[0].getTags().join();
-    dom.byId("communityId").value = communities[0].getCommunityUuid();
-    dom.byId("communityId").setUserData("community", communities[0], function() {});
+    dom.byId("communityTitle").value = community.getTitle();
+    dom.byId("communityTags").value = community.getTags().join();
+    dom.byId("communityId").value = community.getCommunityUuid();
+    dom.byId("communityId").setUserData("community", community, function() {});
 
-    var content = communities[0].getContent();
+    var content = community.getContent();
     if (!content || content.length == 0) {
-        content = communities[0].getSummary();
+        content = community.getSummary();
     }
     dom.byId("communityContent").value = content;
    
-    displayMessage(dom, "Successfully loaded community: " + communities[0].getCommunityUuid());
+    displayMessage(dom, "Successfully loaded community: " + community.getCommunityUuid());
 }
 
 function handleCommunityCreated(community, dom) {

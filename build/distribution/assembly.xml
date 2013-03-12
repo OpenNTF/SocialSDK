@@ -29,6 +29,7 @@
       <includes>
         <include>com.ibm.sbt.sdk:sbt</include>
         <include>com.ibm.sbt.sdk:sbt.dojo180</include>
+        <include>com.ibm.sbt.sdk:sbt.jquery180</include>
         <include>com.ibm.sbt.sdk:sbt.bootstrap211</include>
 	  </includes>
       <binaries>
@@ -175,6 +176,13 @@
       <outputDirectory>sbtsdk</outputDirectory>
       <includes>
         <include>README.txt</include>
+      </includes>
+    </fileSet>
+    <fileSet>
+      <directory>../../src/scripts</directory>
+      <outputDirectory>sbtsdk/scripts</outputDirectory>
+      <includes>
+        <include>*.*</include>
       </includes>
     </fileSet>
     <fileSet>

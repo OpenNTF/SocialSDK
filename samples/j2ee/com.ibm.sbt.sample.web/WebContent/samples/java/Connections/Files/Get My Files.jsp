@@ -34,38 +34,27 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
-<body>	
+<body>
+	<h4>My Files</h4>
+	<div id="content">
 	<%
-	try {
-			FileService fileService = new FileService();
-				out.println("<b> My Files: " + "</b>");	
-				out.println("<br>"); 
-				List<FileEntry> fileEntries = fileService.getMyFiles(); 
-				if(fileEntries != null && ! fileEntries.isEmpty())
-				{
-					for (Iterator iterator = fileEntries.iterator(); iterator.hasNext();)
-					{
-						FileEntry fileEntry = (FileEntry) iterator.next();
-						out.println("File Name : " + fileEntry.getLabel());
-						out.println("<br>");
-						out.println("File's UUID : " + fileEntry.getFileId());
-						out.println("<br>");
-						out.println("Last Modified By : " + fileEntry.getModifier().getName());
-						out.println("<br>");
-						out.println("Download File : <a href=\"" + fileEntry.getDownloadLink() + "\"> "+ fileEntry.getLabel() + "</a>" );
-						out.println("<br>************************************************************<br>");
-					}
-				}
-				else
-				{
-					out.println("No Results");
-				}
-		}catch (Throwable e) {
-			out.println("<pre>");
-			e.printStackTrace(new PrintWriter(out));
-			out.println("</pre>");	
-		}					
-		%>
-	 <br>
+	try {		
+		FileService fileService = new FileService();
+		List<FileEntry> files = fileService.getMyFiles(); 
+		if(files != null && ! files.isEmpty()) {
+			for (Iterator iterator = files.iterator(); iterator.hasNext();) {
+				FileEntry file = (FileEntry)iterator.next();
+				out.println("<a href=\"" + file.getDownloadLink() + "\"> " + file.getLabel() + "</a><br/>" );
+			}
+		} else {
+			out.println("No Results");
+		}
+	} catch (Throwable e) {
+		out.println("<pre>");
+		e.printStackTrace(new PrintWriter(out));
+		out.println("</pre>");	
+	}					
+	%>
+	</div>
 </body>
 </html>

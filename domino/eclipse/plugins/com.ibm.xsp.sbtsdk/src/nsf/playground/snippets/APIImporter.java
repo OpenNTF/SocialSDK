@@ -167,7 +167,7 @@ public class APIImporter extends AssetImporter {
 			}
 			List mt = (List)doc.get("RequestsDetails");
 			for(int i=0; i<mt.size(); i++) {
-				String apiExplorerPath = doc.getAsString("APIExplorerPath");
+				String apiExplorerPath = doc.getString("APIExplorerPath");
 				APIDocument apiDoc = apiDocs.get(apiExplorerPath);
 				if(apiDoc==null) {
 					apiDoc = new APIDocument(apiExplorerPath);

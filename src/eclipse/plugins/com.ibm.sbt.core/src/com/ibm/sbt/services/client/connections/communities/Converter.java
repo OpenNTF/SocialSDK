@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
 import com.ibm.commons.xml.DOMUtil;
 import com.ibm.commons.xml.XMLException;
 import com.ibm.sbt.services.client.connections.communities.utils.Messages;
@@ -46,7 +48,7 @@ public class Converter {
 						Document doc =  DOMUtil.createDocument();
 						Node dup = doc.importNode(entry, true);
 						doc.appendChild(dup);
-						members[i] = new Member(cs, entry.getFirstChild().getTextContent());
+						members[i] = new Member(cs, null);
 						members[i].setData(doc);
 					}
 				}

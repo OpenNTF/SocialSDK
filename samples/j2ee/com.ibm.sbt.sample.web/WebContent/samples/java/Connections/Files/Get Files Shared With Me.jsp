@@ -30,36 +30,27 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
-<body>	
+<body>
+	<h4>Get Files Shared By Me</h4>
+	<div id="content">
 	<%
 	try {		
-			FileService fileService = new FileService();
-				out.println("<b> Files Shared with Me : " + "</b>");	
-				out.println("<br>");
-				List<FileEntry> fileEntries = fileService.getFilesSharedWithMe();
-				if(fileEntries != null && ! fileEntries.isEmpty())
-				{
-					for (Iterator iterator = fileEntries.iterator(); iterator.hasNext();)
-					{
-						FileEntry fileEntry = (FileEntry) iterator.next();
-						out.println("File Name : " + fileEntry.getLabel());
-						out.println("<br>");
-						out.println("File's UUID : " + fileEntry.getFileId());
-						out.println("<br>");
-						out.println("Download File : <a href=\"" + fileEntry.getDownloadLink() + "\"> "+ fileEntry.getLabel() + "</a>" );
-						out.println("<br>************************************************************<br>");
-					}
-				}
-				else
-				{
-					out.println("No Results");
-				}
-		}catch (Throwable e) {
-			out.println("<pre>");
-			e.printStackTrace(new PrintWriter(out));
-			out.println("</pre>");	
-		}					
-		%>
-	 <br>
+		FileService fileService = new FileService();
+		List<FileEntry> fileEntries = fileService.getFilesSharedWithMe(); 
+		if(fileEntries != null && ! fileEntries.isEmpty()) {
+			for (Iterator iterator = fileEntries.iterator(); iterator.hasNext();) {
+				FileEntry fileEntry = (FileEntry)iterator.next();
+				out.println("<a href=\"" + fileEntry.getDownloadLink() + "\"> " + fileEntry.getLabel() + "</a><br/>" );
+			}
+		} else {
+			out.println("No Results");
+		}
+	} catch (Throwable e) {
+		out.println("<pre>");
+		e.printStackTrace(new PrintWriter(out));
+		out.println("</pre>");	
+	}					
+	%>
+	</div>
 </body>
 </html>

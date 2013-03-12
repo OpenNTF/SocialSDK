@@ -24,6 +24,7 @@
     <!-- web module projects -->
     <module>../../src/j2ee/com.ibm.sbt.web</module>
     <module>../../src/j2ee/com.ibm.sbt.dojo180</module>
+    <module>../../src/j2ee/com.ibm.sbt.jquery180</module>
     <module>../../src/j2ee/com.ibm.sbt.bootstrap211</module>
   </modules>
 </project>

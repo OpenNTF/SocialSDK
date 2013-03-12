@@ -22,7 +22,6 @@ import java.util.Set;
 
 import javax.servlet.ServletContext;
 
-import com.ibm.commons.util.PathUtil;
 import com.ibm.commons.util.StringUtil;
 
 
@@ -37,10 +36,14 @@ public class ServletVFS extends VFS {
 		private ServletContext context;
 		private String dir;
 		private VFSFile[] children;
-		public ServletVFSFile(VFS vfs, VFSFile parent, String name, ServletContext context, String dir) {
+		public ServletVFSFile(ServletVFS vfs, VFSFile parent, String name, ServletContext context, String dir) {
 			super(vfs,parent,name);
 			this.context = context;
 			this.dir = dir;
+		}
+		@Override
+		public ServletVFS getVFS() {
+			return (ServletVFS)super.getVFS();
 		}
 		@Override
 		public boolean isFile() throws IOException {

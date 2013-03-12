@@ -32,9 +32,13 @@ public class FileVFS extends VFS {
 
 	protected static class FileVFSFile extends VFSFile {
 		private File file;
-		public FileVFSFile(VFS vfs, VFSFile parent, String name, File file) {
+		public FileVFSFile(FileVFS vfs, VFSFile parent, String name, File file) {
 			super(vfs,parent,name);
 			this.file = file;
+		}
+		@Override
+		public FileVFS getVFS() {
+			return (FileVFS)super.getVFS();
 		}
 		@Override
 		public boolean isFile() throws IOException {

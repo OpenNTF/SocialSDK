@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config>
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/custom</namespace-uri>
+    <default-prefix>xc</default-prefix>
+  </faces-config-extension>
+  <composite-component>
+    <component-type>ccLayoutMini</component-type>
+    <composite-name>ccLayoutMini</composite-name>
+    <composite-file>/ccLayoutMini.xsp</composite-file>
+    <composite-extension>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <render-markup/>
+      </designer-extension>
+    </composite-extension>
+    <property>
+      <property-name>title</property-name>
+      <property-class>string</property-class>
+      <display-name>Title</display-name>
+    </property>
+    <property>
+      <property-name>navigationPath</property-name>
+      <property-class>string</property-class>
+    </property>
+    <property>
+      <property-name>defaultNavigationPath</property-name>
+      <property-class>string</property-class>
+    </property>
+  </composite-component>
+</faces-config>

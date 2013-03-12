@@ -6,7 +6,7 @@
     <title>Social Business Toolkit - JavaScript Samples</title>
     <link href="images/sbt.png" rel="shortcut icon">
     <link rel="stylesheet" href="/sbt.dojo180/dijit/themes/claro/claro.css">
-    <link rel="stylesheet" href="/sbt.jquery182/css/ui-lightness/jquery-ui-1.8.23.custom.css">
+    <!-- <link rel="stylesheet" href="/sbt.jqueryui1823/css/ui-lightness/jquery-ui-1.8.23.custom.css"> -->
     <link rel="stylesheet" href="libs/codemirror/lib/codemirror.css">
     <script src="libs/codemirror/lib/codemirror.js.uncompressed.js"></script>
     <script src="libs/codemirror/mode/javascript/javascript.js"></script>
@@ -66,8 +66,8 @@
 			</div>
 		</div>
 	</div>
-    <script src="/sbt.jquery182/js/jquery-1.8.0.min.js"></script>
-    <script src="/sbt.jquery182/js/jquery-ui-1.8.23.custom.min.js"></script>
+    <script src="/sbt.jquery180/js/jquery-1.8.0.min.js"></script>
+    <!-- <script src="/sbt.jqueryui1823/js/jquery-ui-1.8.23.custom.min.js"></script> -->
     <script src="js/js_jquery/jqueryNavbar.js"></script>
     <script src="js/js_jquery/jqueryAjax.js"></script>
   </body>

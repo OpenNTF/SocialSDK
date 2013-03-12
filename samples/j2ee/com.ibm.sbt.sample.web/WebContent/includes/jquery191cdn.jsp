@@ -19,4 +19,4 @@ requirejs.config({
     });
 </script>
 
-<link rel="stylesheet" type="text/css" title="Style" href="/sbt.jquery182/css/ui-lightness/jquery-ui-1.8.23.custom.css">
+<link rel="stylesheet" type="text/css" title="Style" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/themes/base/jquery-ui.css">

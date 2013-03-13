@@ -1,3 +1,6 @@
+var currentCommunity = null;
+var currentMembers = null;
+
 require(["sbt/Endpoint", "sbt/connections/CommunityService", "sbt/dom"], function(Endpoint, CommunityService, dom) {
     var endpoint = Endpoint.find("connections");
     endpoint.xhrGet({
@@ -15,6 +18,7 @@ require(["sbt/Endpoint", "sbt/connections/CommunityService", "sbt/dom"], functio
 });
 
 function loadCommunity(communityService, dom) {
+    currentCommunity = null;
     communityService.getMyCommunities({
         parameters: { ps: 1 },
         load: function(communities) {
@@ -27,6 +31,7 @@ function loadCommunity(communityService, dom) {
 }
 
 function loadMembers(community, dom) {
+    currentMembers = null;
     community.getMembers({
         load: function(members) {
             handleMembersLoaded(members, dom);
@@ -63,8 +68,6 @@ function addMember(community, email, dom) {
 }
 
 function handleLoggedIn(entry, CommunityService, dom) {
-    dom.byId("entry").setUserData("entry", entry, function() {});
-    
     var communityService = new CommunityService();
     loadCommunity(communityService, dom);
 
@@ -83,7 +86,8 @@ function handleCommunitiesLoaded(communities, dom) {
     
     dom.byId("communityTitle").value = communities[0].getTitle();
     dom.byId("communityId").value = communities[0].getCommunityUuid();
-    dom.byId("communityId").setUserData("community", communities[0], function() {});
+    
+    currentCommunity = communities[0];
     
     loadMembers(communities[0], dom);
    
@@ -97,39 +101,49 @@ function handleMembersLoaded(members, dom) {
     }
     for(var i = 0; i < members.length; i++) {
         var node = dom.create("option", { value: members[i].getId(), innerHTML: members[i].getEmail() }, select);
-        node.setUserData("member", members[i], function() {});
     }
+    
+    currentMembers = members;
     
     displayMessage(dom, "Sucessfully loaded community members for: " + members[0].getCommunity().getCommunityUuid());
 }
 
+function getMember(id) {
+    if (currentMembers) {
+        for(var i = 0; i < currentMembers.length; i++) {
+            if (id == currentMembers[i].getId()) {
+                return currentMembers[i];
+            }
+        }
+    }
+}
+
 function addOnClickHandlers(communityService, dom) {
     dom.byId("removeBtn").onclick = function(evt) {
-        var community = dom.byId("communityId").getUserData("community");
-        if (community) {
+        if (currentCommunity) {
             var select = dom.byId("membersList");
             var members = [];
             for(var i = 0; i < select.childNodes.length; i++) {
                 var option = select.childNodes[i];
                 if (option.selected) {
-                    var member = option.getUserData("member");
-                    members.push(member);
+                    var member = getMember(option.value);
+                    if (member) {
+                        members.push(member);
+                    }
                 }
             }
-            removeMembers(community, members, dom);
+            removeMembers(currentCommunity, members, dom);
         }
     };
     dom.byId("refreshBtn").onclick = function(evt) {
-        var community = dom.byId("communityId").getUserData("community");
-        if (community) {
-            loadMembers(community, dom);
+        if (currentCommunity) {
+            loadMembers(currentCommunity, dom);
         }
     };
     dom.byId("addBtn").onclick = function(evt) {
-        var community = dom.byId("communityId").getUserData("community");
-        if (community) {
+        if (currentCommunity) {
             var input = dom.byId("memberEmail");
-            community.addMember({
+            currentCommunity.addMember({
                 email: input.value,
                 load : function(member){
                     getMembers(dom, community);
@@ -139,7 +153,7 @@ function addOnClickHandlers(communityService, dom) {
                 }
             });
 
-            loadMembers(community, dom);
+            loadMembers(currentCommunity, dom);
         }
     };
 }

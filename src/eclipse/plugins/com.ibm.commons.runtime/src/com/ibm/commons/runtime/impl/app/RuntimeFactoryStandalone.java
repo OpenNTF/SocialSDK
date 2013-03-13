@@ -27,7 +27,7 @@ import com.ibm.commons.runtime.impl.AbstractRuntimeFactory;
 public class RuntimeFactoryStandalone extends AbstractRuntimeFactory {
 
     public RuntimeFactoryStandalone() {
-	set(this);
+        set(this);
     }
 
     /* (non-Javadoc)
@@ -35,7 +35,7 @@ public class RuntimeFactoryStandalone extends AbstractRuntimeFactory {
      */
     @Override
     public Application createApplication(Object applicationContext) {
-	return new ApplicationStandalone(applicationContext);
+        return new ApplicationStandalone(applicationContext);
     }
 
     /* (non-Javadoc)
@@ -43,7 +43,7 @@ public class RuntimeFactoryStandalone extends AbstractRuntimeFactory {
      */
     @Override
     public Context createContext(Application application, Object request, Object response) {
-	return new ContextStandalone(application, request, response);
+        return new ContextStandalone(application, request, response);
     }
 
 }

@@ -39,10 +39,12 @@
 		    if (StringUtil.isNotEmpty(html)) {
 			    html = ParameterProcessor.process(html);
 		    }
+		} else if (snippetName != null && snippetName.length() > 0) {
+			js = "require(['sbt/dom'], function(dom) {\ndom.setText('content', 'Error, unable to load: " + snippetName + "');\n});";
 		}
     } 
     // doPost
-    else if (request.getMethod().equals("POST")){
+    else if (request.getMethod().equals("POST")) {
         html = request.getParameter("htmlData");
         js = request.getParameter("jsData");
         css = request.getParameter("cssData");

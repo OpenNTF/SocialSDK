@@ -61,20 +61,6 @@ public class ContextServlet extends AbstractContext {
 		return ANONYMOUS;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.ibm.commons.runtime.impl.AbstractContext#getProperty(java.lang.String, java.lang.String)
-	 */
-	@Override
-	public String getProperty(String propertyName, String defaultValue) {
-	    HttpServletRequest request = getHttpRequest();
-	    String value = request.getParameter(propertyName);
-	    if (StringUtil.isNotEmpty(value)) {
-	        return value;
-	    }
-	    
-	    return super.getProperty(propertyName, defaultValue);
-	}
-	
 	@Override
 	public HttpServletRequest getRequest() {
 		return (HttpServletRequest)super.getRequest();

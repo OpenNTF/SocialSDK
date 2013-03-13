@@ -20,6 +20,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.ibm.commons.runtime.Application;
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.util.StringUtil;
@@ -56,6 +58,37 @@ public class ParameterProcessor {
 		}
 		return input;
 	}
+
+    /**
+     * 
+     * @param input
+     * @return
+     */
+    public static String process(String input, final HttpServletRequest request) {
+        if(StringUtil.isNotEmpty(input)) {
+            // default behaviour is to use context or if not available use application properties
+            final Context context = Context.getUnchecked();
+            final Application application = Application.getUnchecked();
+            ParameterProvider provider = new ParameterProvider() {
+                @Override
+                public String getParameter(String name) {
+                    if (request != null) {
+                        String value = request.getParameter(name);
+                        if (!StringUtil.isEmpty(value)) {
+                            return value;
+                        }
+                    }
+                    if (context != null) {
+                        return context.getProperty(name);
+                    }
+                    return (application == null) ? null : application.getProperty(name);
+                }
+            };
+            
+            return process(input, DELIM_START, DELIM_END, provider);
+        }
+        return input;
+    }
 
 	/**
 	 * 

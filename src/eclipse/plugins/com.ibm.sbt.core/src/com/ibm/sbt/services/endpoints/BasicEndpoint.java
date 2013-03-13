@@ -67,6 +67,7 @@ public class BasicEndpoint extends AbstractEndpoint {
     
     public BasicEndpoint() {
     }
+    
     public BasicEndpoint(String user, String password, String authenticationPage) {
         this.user = user;
         this.password = password;
@@ -183,10 +184,10 @@ public class BasicEndpoint extends AbstractEndpoint {
                     
             	} catch (IOException e) {
             		throw new ClientServicesException(null,"Authentication page not found. Could not redirect to login page");
-			}
-            }
-            else
+            	}
+            } else {
             	throw new ClientServicesException(null,"Authentication page is empty in the basic authentication bean");
+            }
         }
     }
 

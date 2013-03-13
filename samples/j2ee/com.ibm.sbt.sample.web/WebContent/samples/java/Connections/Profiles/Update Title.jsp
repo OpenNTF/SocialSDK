@@ -34,7 +34,7 @@
 		ProfileService connProfSvc = new ProfileService();
 		Profile profile = connProfSvc.getProfile(userId);
 		if(profile.getId()!=null){
-			profile.setTitle("test fAdams title");
+			profile.setTitle("new title1");
 			profile.update();
 			profile = connProfSvc.getProfile(userId);
 			out.println(profile.getTitle());

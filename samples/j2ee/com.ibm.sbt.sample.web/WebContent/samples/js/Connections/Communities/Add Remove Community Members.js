@@ -45,11 +45,19 @@ function loadMembers(community, dom) {
 }
 
 function removeMembers(community, members, dom) {
-    for (var i=0; i<members.length; i++) {
+    for (var i=0; i<members.length-1; i++) {
         community.removeMember(members[i]);
     }
-    
-    loadMembers(community, dom);
+
+    // wait for the last remove before reloading
+    community.removeMember(members[members.length-1], {
+        load: function(members) {
+            loadMembers(community, dom);
+        },
+        error: function(error) {
+            handleError(dom, error);
+        }
+    });
 }
 
 function addMember(community, email, dom) {

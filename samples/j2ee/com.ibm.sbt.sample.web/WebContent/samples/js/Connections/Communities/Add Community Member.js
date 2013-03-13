@@ -1,13 +1,13 @@
 require(["sbt/connections/CommunityService","sbt/dom"], function(CommunityService,dom) {
 	var communityService = new CommunityService();
 	var communityId = "%{sample.communityId}";
-	var userId = "%{sample.id2}";
+	var email = "%{sample.email2}";
 	var community = communityService.getCommunity({
 		id : communityId,
 		loadIt : false
 	});
 	var member = communityService.getMember({
-		id : userId,
+		email : email,
 		loadIt : false
 	});
 	member.setRole("member");

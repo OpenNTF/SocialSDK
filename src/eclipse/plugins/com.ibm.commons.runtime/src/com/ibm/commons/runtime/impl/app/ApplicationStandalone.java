@@ -29,7 +29,7 @@ public class ApplicationStandalone extends AbstractApplication {
      * @param applicationContext
      */
     protected ApplicationStandalone(Object applicationContext) {
-	super(applicationContext);
+        super(applicationContext);
     }
 
     /*
@@ -38,7 +38,7 @@ public class ApplicationStandalone extends AbstractApplication {
      */
     @Override
     public InputStream getResourceAsStream(String name) {
-	return this.getClassLoader().getResourceAsStream(name);
+        return this.getClassLoader().getResourceAsStream(name);
     }
 
 }

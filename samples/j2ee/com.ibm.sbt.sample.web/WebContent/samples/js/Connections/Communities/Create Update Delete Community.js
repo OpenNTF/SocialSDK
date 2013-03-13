@@ -1,3 +1,5 @@
+var currentCommunity = null;
+
 require(["sbt/Endpoint", "sbt/connections/CommunityService", "sbt/dom"], function(Endpoint, CommunityService, dom) {
     var endpoint = Endpoint.find("connections");
     endpoint.xhrGet({
@@ -15,6 +17,7 @@ require(["sbt/Endpoint", "sbt/connections/CommunityService", "sbt/dom"], functio
 });
 
 function loadCommunity(communityService, dom) {
+    currentCommunity = null;
     var communityId = dom.byId("communityId").value;
     if (communityId) {
         communityService.getCommunity({
@@ -42,13 +45,10 @@ function loadCommunity(communityService, dom) {
 }
 
 function createCommunity(communityService, title, content, dom) {
-    var entry = dom.byId("entry").getUserData("entry");
-    
+    currentCommunity = null;
     var community = communityService.getCommunity({ loadIt : false }); 
     community.setTitle(title);
     community.setContent(content);
-    community.setAuthor(entry);
-    community.setContributor(entry);
     communityService.createCommunity(community, {               
         load : function(community) { 
             handleCommunityCreated(community, dom);
@@ -90,8 +90,6 @@ function updateCommunity(community, title, content, tags, dom) {
 }
 
 function handleLoggedIn(entry, CommunityService, dom) {
-    dom.byId("entry").setUserData("entry", entry, function() {});
-    
     var communityService = new CommunityService();
     loadCommunity(communityService, dom);
 
@@ -113,7 +111,8 @@ function handleCommunityLoaded(community, dom) {
     dom.byId("communityTitle").value = community.getTitle();
     dom.byId("communityTags").value = community.getTags().join();
     dom.byId("communityId").value = community.getCommunityUuid();
-    dom.byId("communityId").setUserData("community", community, function() {});
+    
+    currentCommunity = community;
 
     var content = community.getContent();
     if (!content || content.length == 0) {
@@ -127,17 +126,19 @@ function handleCommunityLoaded(community, dom) {
 function handleCommunityCreated(community, dom) {
     var id = dom.byId("communityId");
     id.value = community.getCommunityUuid();
-    id.setUserData("community", community, function() {});
+    
+    currentCommunity = community;
     
     displayMessage(dom, "Successfully created community: " + community.getCommunityUuid());
 }
 
 function handleCommunityDeleted(community, dom) {
     dom.byId("communityId").value = "";
-    dom.byId("communityId").setUserData("community", null, function() {});
     dom.byId("communityTitle").value = "";
     dom.byId("communityContent").value = "";
     dom.byId("communityTags").value = "";
+    
+    currentCommunity = null;
 
     displayMessage(dom, "Successfully deleted community: " + community.getCommunityUuid());
 }
@@ -158,19 +159,17 @@ function addOnClickHandlers(communityService, dom) {
     };
     dom.byId("deleteBtn").onclick = function(evt) {
         var id = dom.byId("communityId");
-        var community = id.getUserData("community");
-        if (community) {
-            deleteCommunity(community, dom);
+        if (currentCommunity) {
+            deleteCommunity(currentCommunity, dom);
         }
     };
     dom.byId("updateBtn").onclick = function(evt) {
         var id = dom.byId("communityId");
-        var community = id.getUserData("community");
-        if (community) {
+        if (currentCommunity) {
             var title = dom.byId("communityTitle");
             var content = dom.byId("communityContent");
             var tags = dom.byId("communityTags");
-            updateCommunity(community, title.value, content.value, tags.value, dom);
+            updateCommunity(currentCommunity, title.value, content.value, tags.value, dom);
         }
     };
 }

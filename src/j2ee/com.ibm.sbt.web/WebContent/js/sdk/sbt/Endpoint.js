@@ -94,13 +94,6 @@ var Endpoint = declare("sbt.Endpoint", null, {
 	dialogLoginPage:null,
 	
 	/**
-	 * Whether or not user is forced to login even if already logged in.
-	 * @property forceAuthentication
-	 * @type String
-	 */
-	forceAuthentication: false,
-	
-	/**
 	 * Whether auth dialog should come up automatically or not. In case of not 401 would be propagated to user.
 	 * @property autoAuthenticate
 	 * @type String
@@ -285,6 +278,7 @@ var Endpoint = declare("sbt.Endpoint", null, {
 			proxyPath : self.proxyPath,
 			loginUi : self.loginUi
 		};
+		var doAuthentication = false;
 		if (args) {
 			if (args.success) {
 				options.callback = args.success;
@@ -293,20 +287,10 @@ var Endpoint = declare("sbt.Endpoint", null, {
 				options.cancelAction = args.cancelAction;
 			}
 			if (args.forceAuthentication == true) {
-				if (self.isAuthenticated == true) {
-					self.logout({
-						success: function(response){
-							if(response.logout == "success"){
-								self.openAuthenticator(options);
-							}
-						}
-					});
-				}else{
-					self.openAuthenticator(options);
-				}
+				doAuthentication = true;
 			} else {
 				if (self.isAuthenticated == false) {
-					self.openAuthenticator(options);
+					doAuthentication = true;
 				} else {
 					if (args.success) {
 						args.success();
@@ -315,11 +299,15 @@ var Endpoint = declare("sbt.Endpoint", null, {
 			}
 		}else{
 			if (self.isAuthenticated == false) {
-				self.openAuthenticator(options);
+				doAuthentication = true;
+			}
+		}
+		if(doAuthentication == true){
+			if (this.authenticator.authenticate(options)) {
+				return;
 			}
 		}
 	},
-	
 
 	logout : function(args) {
 		var proxy = this.proxy.proxyUrl;
@@ -337,12 +325,6 @@ var Endpoint = declare("sbt.Endpoint", null, {
 				}
 			}
 		}, true);
-	},
-	
-	openAuthenticator : function(options){
-		if (this.authenticator.authenticate(options)) {
-			return;
-		}
 	}
 	
 });

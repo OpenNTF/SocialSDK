@@ -12,7 +12,6 @@ import lotus.domino.Database;
 import lotus.domino.Document;
 import nsf.playground.jobs.AsyncAction;
 
-import com.ibm.commons.Platform;
 import com.ibm.commons.runtime.util.URLEncoding;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonException;
@@ -150,11 +149,13 @@ public class APIImporter extends AssetImporter {
 		return path;
 	}
 	private String trimSeparator(String path) {
-		if(path.startsWith("/")) {
-			path = path.substring(1);
-		}
-		if(path.endsWith("/")) {
-			path = path.substring(0,path.length()-1);
+		if(path!=null) {
+			if(path.startsWith("/")) {
+				path = path.substring(1);
+			}
+			if(path.endsWith("/")) {
+				path = path.substring(0,path.length()-1);
+			}
 		}
 		return path;
 	}
@@ -167,7 +168,7 @@ public class APIImporter extends AssetImporter {
 			}
 			List mt = (List)doc.get("RequestsDetails");
 			for(int i=0; i<mt.size(); i++) {
-				String apiExplorerPath = doc.getString("APIExplorerPath");
+				String apiExplorerPath = trimSeparator(doc.getString("APIExplorerPath"));
 				APIDocument apiDoc = apiDocs.get(apiExplorerPath);
 				if(apiDoc==null) {
 					apiDoc = new APIDocument(apiExplorerPath);
@@ -180,12 +181,17 @@ public class APIImporter extends AssetImporter {
 	}
 	protected JsonJavaObject createAPIEntry(JsonJavaObject e, int method, AsyncAction action) throws Exception {
 		JsonJavaObject je = new JsonJavaObject();
-		je.putString("name", e.get("Title"));
+		String name = (String)e.get("Title");
+		je.putString("name", name);
 		je.putString("description", e.get("Abstract"));
+		String unid=Node.encodeUnid(name);
+		if(method>1) {
+			unid = unid + "_" + Integer.toString(method);
+		}
+		je.putString("unid", unid);
 		JsonJavaObject rd = (JsonJavaObject)((List)e.get("RequestsDetails")).get(method);
 		je.putString("http_method", rd.get("method") );
 		je.putString("uri", rd.get("uri") );
-		Object upar = e.get("URLParameters");
 		je.putObject("uriParameters", e.get("URLParameters") );
 		je.putObject("queryParameters", e.get("QueryParameters") );
 		je.putObject("headers", e.get("Headers") );
@@ -227,7 +233,7 @@ public class APIImporter extends AssetImporter {
 					if(entry instanceof Map) {
 						Map m = (Map)entry;
 						String unid = (String)m.get("@unid");
-						String exPath = (String)m.get("APIExplorerPath");
+						String exPath = trimSeparator((String)m.get("APIExplorerPath"));
 						String title = (String)m.get("Title");
 						list.add(new DocEntry(unid,exPath,title));
 					}

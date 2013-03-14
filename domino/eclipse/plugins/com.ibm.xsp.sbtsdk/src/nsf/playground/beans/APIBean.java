@@ -26,6 +26,7 @@ import com.ibm.jscript.types.FBSUtility;
 import com.ibm.jscript.types.FBSValue;
 import com.ibm.sbt.playground.assets.AssetNode;
 import com.ibm.sbt.playground.assets.CategoryNode;
+import com.ibm.sbt.playground.assets.Node;
 import com.ibm.sbt.playground.assets.apis.APIAssetNode;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.ibm.xsp.util.JavaScriptUtil;
@@ -39,8 +40,16 @@ public class APIBean extends AssetBean {
 	
 	public static final boolean TRACE = false;
 
+	
 	private static JSContext jsContext = JavaScriptUtil.getJSContext();
 
+	private String id;
+	private String unid;
+	private ObjectObject cache;
+	
+	public APIBean() {
+	}
+	
 	protected String getFlatView() {
 		return "AllAPIsFlat";
 	}
@@ -69,6 +78,20 @@ public class APIBean extends AssetBean {
 	}
 	
 	public ObjectObject loadAPI(String id) throws NotesException {
+		return loadAPI(id,null);
+	}
+	public ObjectObject loadAPI(String id, String unid) throws NotesException {
+		// The method can be called when the page is created and the in the rendeing pahse
+		// we cache the value to avoid multiple DB access
+		// Not that this requires the bean to be set to the request scope, and not shared
+		if(cache!=null) {
+			if(StringUtil.equals(id, this.id) && StringUtil.equals(unid, this.unid)) {
+				return cache;
+			}
+			this.cache = null;
+			this.id = null;
+			this.unid = null;
+		}
 		ObjectObject o = new ObjectObject(jsContext);
 		try {
 			if(StringUtil.isNotEmpty(id)) {
@@ -94,22 +117,43 @@ public class APIBean extends AssetBean {
 						FBSValue value = (FBSValue)JsonParser.fromJson(new JsonJavaScriptFactory(jsContext), json);
 						o.put("items", value);
 					}
-					fixAPIObject(o,baseDocUrl);
+					fixAPIObject(o,baseDocUrl,unid);
 				}
 			}
 		} catch(Exception ex) {
 			Platform.getInstance().log(ex);
 		}
+		this.cache = o;
+		this.id = id;
+		this.unid = unid;
 		return o;
 	}
-
+	
 	// Make sure the Json objects are what is expected 
-	protected void fixAPIObject(ObjectObject o, String baseDocUrl) throws Exception {
-		ArrayObject a = (ArrayObject)o.get("items");
-		int count = a.getArrayLength();
+	protected void fixAPIObject(ObjectObject o, String baseDocUrl, String unid) throws Exception {
+		ArrayObject items = (ArrayObject)o.get("items");
+
+		ArrayObject result = items;
+		if(StringUtil.isNotEmpty(unid)) {
+			result = new ArrayObject();
+			o.put("items", result);
+		}
+		int count = items.getArrayLength();
 		for(int i=0; i<count; i++) {
-			ObjectObject item = (ObjectObject)a.getArrayElement(i);
-			fixItem(item,baseDocUrl);
+			ObjectObject item = (ObjectObject)items.getArrayElement(i);
+			// Fix the unid if it doesn't exist
+			fixSnippetUnid(item);
+			// And then filter it, or just fix it
+			if(result!=items) {
+				String oid = item.get("unid").stringValue(); 
+				if(oid.equals(unid)) {
+					fixItem(item,baseDocUrl);
+					result.addArrayValue(item);
+					return;
+				}
+			} else {
+				fixItem(item,baseDocUrl);
+			}
 		}
 	}
 	protected void fixItem(ObjectObject item, String baseDocUrl) throws Exception {
@@ -121,6 +165,13 @@ public class APIBean extends AssetBean {
 		fixDocUrl(item,baseDocUrl);
 	}
 	
+	protected void fixSnippetUnid(ObjectObject o) throws Exception {
+		FBSValue unid = o.get("unid");
+		if(!unid.booleanValue()) {
+			unid = FBSString.get(Node.encodeUnid(o.get("name").stringValue()));
+			o.put("unid", unid);
+		}
+	}
 	
 	protected void fixUriParameters(ObjectObject o) throws Exception {
 		FBSValue params = o.get("uriParameters");
@@ -201,15 +252,15 @@ public class APIBean extends AssetBean {
 		ObjectObject item = (ObjectObject)o;
 		ArrayObject a = new ArrayObject(jsContext);
 
-		ArrayObject a1 = (ArrayObject)item.get("uriParameters");
-		if(a1.getArrayLength()>0) {
+		FBSValue a1 = (FBSValue)item.get("uriParameters");
+		if(a1.isArray()) {
 			for(int i=0; i<a1.getArrayLength(); i++) {
 				a.addArrayValue(a1.getArrayValue(i));
 			}
 		}
 		
-		ArrayObject a2 = (ArrayObject)item.get("queryParameters");
-		if(a2.getArrayLength()>0) {
+		FBSValue a2 = (FBSValue)item.get("queryParameters");
+		if(a2.isArray()) {
 			for(int i=0; i<a2.getArrayLength(); i++) {
 				a.addArrayValue(a2.getArrayValue(i));
 			}

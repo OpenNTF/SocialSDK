@@ -21,8 +21,8 @@ function emptyAPI() {
 	//updateNavSelection();
 }
 
-function loadAPI(id,expand,filter) {
-	XSP.showContent(pageGlobal.dynPanel,"api",{api:id,expand:expand,filter:filter});
+function loadAPI(id,unid) {
+	XSP.showContent(pageGlobal.dynPanel,"api",{api:id,unid:unid});
 	updateLabel(id);
 	//updateNavSelection();
 }

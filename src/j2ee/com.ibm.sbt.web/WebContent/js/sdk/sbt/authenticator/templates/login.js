@@ -42,9 +42,9 @@ function cancelOnClick() {
     var redirectURL = decodeURIComponent(agrsMap.redirectURL);
     var loginUi = decodeURIComponent(agrsMap.loginUi);
     if (loginUi == "popup") {
-    	if(window.opener.sbt.cancelAction){
-        	window.opener.sbt.cancelAction();
-            delete window.opener.sbt.cancelAction;
+    	if(window.opener.sbt.cancel){
+        	window.opener.sbt.cancel();
+            delete window.opener.sbt.cancel;
         }
         delete window.opener.sbt.callback;
         window.close();

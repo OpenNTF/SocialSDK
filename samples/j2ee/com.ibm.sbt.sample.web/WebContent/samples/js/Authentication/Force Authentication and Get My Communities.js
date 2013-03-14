@@ -22,7 +22,7 @@ require(["sbt/connections/CommunityService",'sbt/Endpoint',"sbt/dom","sbt/config
 				}		
 			});
 		},
-		cancelAction: function(){
+		cancel: function(){
 			dom.setText("content","You need to Login to see Communties List");
 		}
 	});

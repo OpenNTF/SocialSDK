@@ -6,6 +6,7 @@ Bundle-Version: 1.0.0
 Bundle-Vendor: IBM
 Require-Bundle: com.ibm.commons,
  com.ibm.commons.runtime,
+ com.ibm.commons.xml,
  com.ibm.sbt.core,
  com.ibm.sbt.libs
 Export-Package: com.ibm.sbt.playground.assets,

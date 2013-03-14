@@ -21,11 +21,11 @@
 <%@page import="com.ibm.commons.runtime.Context"%>
 <%@page import="com.ibm.sbt.playground.assets.RootNode"%>
 <%@page import="com.ibm.sbt.playground.assets.jssnippets.JSSnippet"%>
-<%@page import="demo.DemoJavaSnippetNode"%>
+<%@page import="com.ibm.sbt.sample.web.util.JavaSnippetNode"%>
 <%@page import="com.ibm.sbt.playground.assets.Node"%>
 <%@page import="java.util.List"%>
 <%@page import="com.ibm.sbt.playground.assets.CategoryNode"%>
-<%@page import="demo.SnippetFactory"%>
+<%@page import="com.ibm.sbt.sample.web.util.SnippetFactory"%>
 <Module>
   <ModulePrefs title="Social Business Toolkit Samples">
     <Require feature="settitle"/>
@@ -56,7 +56,7 @@
 	<div class="well sidebar-nav">
 		<ul class="nav nav-list">
 		<%
-		RootNode rootNode = SnippetFactory.getSnippets(application);
+		RootNode rootNode = SnippetFactory.getJsSnippets(application);
 		List<Node> children = rootNode.getAllChildrenFlat();
 		for (int i=0; i<children.size(); i++) {
 			Node node = children.get(i);

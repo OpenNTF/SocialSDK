@@ -8,7 +8,6 @@ var djConfig = {
 <script type="text/javascript" src="/sbt.dojo143/dojo/dojo.js"></script>
 
 <link rel="stylesheet" type="text/css" title="Style" href="/sbt.dojo143/dojo/resources/dojo.css">
-<link rel="stylesheet" type="text/css" title="Style" href="/sbt.dojo143/dijit/themes/claro/claro.css">
 <link rel="stylesheet" type="text/css" title="Style" href="/sbt.dojo143/dojox/grid/enhanced/resources/claro/EnhancedGrid.css">
 <link rel="stylesheet" type="text/css" title="Style" href="/sbt.dojo143/dojox/grid/enhanced/resources/EnhancedGrid_rtl.css">
 

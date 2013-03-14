@@ -4,7 +4,7 @@
 <%@page import="com.ibm.commons.runtime.Context"%>
 <%@page import="com.ibm.sbt.playground.assets.RootNode"%>
 <%@page import="com.ibm.sbt.playground.assets.javasnippets.JavaSnippet"%>
-<%@page import="demo.SnippetFactoryForJava"%>
+<%@page import="com.ibm.sbt.sample.web.util.SnippetFactory"%>
 <ul class="nav nav-tabs">
     <li class="active">
 		<a href="#">JavaServer Page</a>
@@ -14,13 +14,12 @@
     </li>
 </ul>
 <%
-RootNode root = SnippetFactoryForJava.getSnippets(application);
-String javaSamplePath= request.getParameter("snippet");
+String javaSamplePath = request.getParameter("snippet");
 String jsp = null;
 if (StringUtil.isNotEmpty(javaSamplePath)) {
-	JavaSnippet snippet = (JavaSnippet)root.loadAsset(SnippetFactoryForJava.getRootFile(application), javaSamplePath);
+	JavaSnippet snippet = SnippetFactory.getJavaSnippet(application, request, javaSamplePath);
 	if (snippet != null) {
-		jsp = snippet.getJsp();
+		jsp = snippet.getJspForDisplay();
 		
 		// replace substitution variables
 		if (StringUtil.isNotEmpty(jsp)) {

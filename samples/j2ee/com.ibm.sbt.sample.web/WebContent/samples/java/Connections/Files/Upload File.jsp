@@ -26,54 +26,56 @@
 <%@page import="com.ibm.sbt.services.endpoints.EndpointFactory"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
-<%@page import="com.ibm.sbt.services.client.connections.files.model.FileEntry"%> 
+<%@page import="com.ibm.sbt.services.client.connections.files.model.FileEntry"%>
+<%@page import="com.ibm.sbt.sample.web.util.SnippetFactory"%> 
+<%@page import="com.ibm.sbt.playground.vfs.VFSFile"%>
 <%@page 
-	language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+    language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <html>
 <head>
-	<title>SBT JAVA Sample - Upload File</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <title>SBT JAVA Sample - Upload File</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head> 
           
-<body>	
-	<h4>Upload File</h4>
-	<div id="content">
-	<%
-	try {
-		VFSFile rootFile = SnippetFactoryForJava.getRootFile(application);
-		FileService service = new FileService();
-		String pathOfFileOnServer = Context.get().getProperty("sample.uploadFilePath");
-		out.println("<br> Test file upload - Path = " + pathOfFileOnServer );
-		FileEntry fileEntry = service.upload(pathOfFileOnServer);
-		out.println("<br> File Upload Status : " + service.FileStatus );
-		
-		if(fileEntry!=null)
-		{
-		out.println("<br> Display Uploaded file's Data");
-		out.println("<br>File name : " + fileEntry.getLabel());
-		out.println("<br>File created : " + fileEntry.getCreated());
-		out.println("<br>File Media Size" + fileEntry.getTotalMediaSize());
-		}
-		//Upload File with Metadata 
-		pathOfFileOnServer = Context.get().getProperty("sample.uploadMultiPartFilePath");
-		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put(FileRequestParams.TAG, "multipartPost-UploadFile-Tag");
-		parameters.put(FileRequestParams.IDENTIFIER, "label");
-		Map<String, String> headers = new HashMap<String, String>();
-		headers.put(Headers.XUpdateNonce, service.getNonce());
-		FileEntry fileE = service.uploadFileWithMetadata(pathOfFileOnServer, parameters, headers, null);
-		out.println("<br> Test file upload Multipart - Path = " + pathOfFileOnServer );
-		if(fileE != null)
-			out.println("<br> TotalMediaSize : " + fileE.getTotalMediaSize());
-		
-		out.println(service.FileStatus);
-	} catch (Throwable e) {
-			out.println("<pre>");
-			e.printStackTrace(new PrintWriter(out));
-			out.println("</pre>");
-	}	
-	%>
-	</div>
+<body>  
+    <h4>Upload File</h4>
+    <div id="content">
+    <%
+    try {
+        VFSFile rootFile = SnippetFactory.getJavaRootFile(application);
+        FileService service = new FileService();
+        String pathOfFileOnServer = Context.get().getProperty("sample.uploadFilePath");
+        out.println("<br> Test file upload - Path = " + pathOfFileOnServer );
+        FileEntry fileEntry = service.upload(pathOfFileOnServer);
+        out.println("<br> File Upload Status : " + service.FileStatus );
+        
+        if(fileEntry!=null)
+        {
+        out.println("<br> Display Uploaded file's Data");
+        out.println("<br>File name : " + fileEntry.getLabel());
+        out.println("<br>File created : " + fileEntry.getCreated());
+        out.println("<br>File Media Size" + fileEntry.getTotalMediaSize());
+        }
+        //Upload File with Metadata 
+        pathOfFileOnServer = Context.get().getProperty("sample.uploadMultiPartFilePath");
+        Map<String, String> parameters = new HashMap<String, String>();
+        parameters.put(FileRequestParams.TAG, "multipartPost-UploadFile-Tag");
+        parameters.put(FileRequestParams.IDENTIFIER, "label");
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put(Headers.XUpdateNonce, service.getNonce());
+        FileEntry fileE = service.uploadFileWithMetadata(pathOfFileOnServer, parameters, headers, null);
+        out.println("<br> Test file upload Multipart - Path = " + pathOfFileOnServer );
+        if(fileE != null)
+            out.println("<br> TotalMediaSize : " + fileE.getTotalMediaSize());
+        
+        out.println(service.FileStatus);
+    } catch (Throwable e) {
+            out.println("<pre>");
+            e.printStackTrace(new PrintWriter(out));
+            out.println("</pre>");
+    }   
+    %>
+    </div>
 </body>
 </html>

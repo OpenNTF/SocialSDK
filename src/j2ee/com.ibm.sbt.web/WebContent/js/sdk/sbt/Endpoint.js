@@ -283,8 +283,8 @@ var Endpoint = declare("sbt.Endpoint", null, {
 			if (args.success) {
 				options.callback = args.success;
 			}
-			if (args.cancelAction) {
-				options.cancelAction = args.cancelAction;
+			if (args.cancel) {
+				options.cancel = args.cancel;
 			}
 			if (args.forceAuthentication == true) {
 				doAuthentication = true;

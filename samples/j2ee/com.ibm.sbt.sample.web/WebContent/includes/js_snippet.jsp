@@ -3,30 +3,30 @@
 <%@page import="com.ibm.commons.runtime.util.ParameterProcessor"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
 <%@page import="com.ibm.sbt.playground.assets.RootNode"%>
-<%@page import="demo.SnippetFactory"%>
+<%@page import="com.ibm.sbt.sample.web.util.SnippetFactory"%>
 <%@page import="com.ibm.sbt.playground.assets.RootNode"%>
 <%@page import="com.ibm.sbt.playground.assets.jssnippets.JSSnippet"%>
     <%
-    String snippetName = request.getParameter("snippet");
-    JSSnippet snippet = SnippetFactory.getSnippet(application, request, snippetName);
-    String html = null;
-    String js = null;
-    String css = null;
-    String[] doc = null;
-    if (snippet != null) {
-        html = snippet.getHtml();
-        js = snippet.getJs();
-        css = snippet.getCss();
-        doc = snippet.getDocumentation();
-        
-        // replace substitution variables
-        if (StringUtil.isNotEmpty(js)) {
-            js = ParameterProcessor.process(js);
+    	String snippetName = request.getParameter("snippet");
+        JSSnippet snippet = SnippetFactory.getJsSnippet(application, request, snippetName);
+        String html = null;
+        String js = null;
+        String css = null;
+        String[] doc = null;
+        if (snippet != null) {
+            html = snippet.getHtml();
+            js = snippet.getJs();
+            css = snippet.getCss();
+            doc = snippet.getDocumentation();
+            
+            // replace substitution variables
+            if (StringUtil.isNotEmpty(js)) {
+                js = ParameterProcessor.process(js);
+            }
+            if (StringUtil.isNotEmpty(html)) {
+                html = ParameterProcessor.process(html);
+            }
         }
-        if (StringUtil.isNotEmpty(html)) {
-            html = ParameterProcessor.process(html);
-        }
-    }
     %>
     <div id="jsContents">
     <%

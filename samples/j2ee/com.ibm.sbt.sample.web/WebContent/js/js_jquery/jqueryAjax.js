@@ -18,7 +18,7 @@
             parameters = parameters + "&themeId=" + themeId;
         var snippetQuery = snippetPage + parameters;
         $("#snippetContainer").load(snippetQuery);
-        // refresh iframe with js_runner.jsp.
+        // refresh iframe with javascriptPreview.jsp.
         var previewQuery = previewPage + parameters;
         $("#previewFrame").attr('src', previewQuery);
 
@@ -35,7 +35,7 @@
         var js = jsDiv.CodeMirror ? jsDiv.CodeMirror.getValue() : jsDiv.textContent;
         var css = cssDiv.CodeMirror ? cssDiv.CodeMirror.getValue() : cssDiv.textContent;
 
-        $.post(previewPage, { htmlData: html, jsData: js, cssData: css, debug: debug, jsLibId:getJsLibId, themeId: getThemeId()}, function(data) {
+        $.post(previewPage, { htmlData: html, jsData: js, cssData: css, debug: debug, jsLibId:getJsLibId(), themeId: getThemeId()}, function(data) {
                 var wrapper = $(".iframeWrapper");
                 wrapper.find(frame).remove();
                 var $frame = $('<iframe id="previewFrame" src=""  width="100%" height="100%" style="border-style:none;"></iframe>');
@@ -115,15 +115,6 @@
         setJsLibIdFromUrl(window.location.href);
         setThemeIdFromUrl(window.location.href);
 
-        $(".leafNode").click(function(e){
-            var snippet = this.id;
-
-            setSnippet(snippet);
-            var theme = getThemeId();
-            var jsLibId = getJsLibId() != null ? getJsLibId() : getUrlParameter(url, "jsLibId");
-            ajaxRefresh(snippet, jsLibId, theme);
-        });
-
         $("#runButton").click(function(e){
             postCode(document.getElementById('previewFrame'), false);
         });
@@ -132,19 +123,42 @@
             postCode(document.getElementById('previewFrame'), true);
         });
 
-        //$("#showHtmlButton").click(function(e){
-        //    showDialog();
-        //});
+        $("#showHtmlButton").click(function(e){
+            showDialog();
+        });
+        
+        var onLeafNodeClicked = function(e){
+            var snippet = this.id;
 
-        $("div[class*='leafNode'] > div > span").css('cursor', 'pointer');
+            setSnippet(snippet);
+            var theme = getThemeId();
+            var jsLibId = getJsLibId() != null ? getJsLibId() : getUrlParameter(url, "jsLibId");
+            ajaxRefresh(snippet, jsLibId, theme);
+        };
+        
+        var setLeafBehaviour = function(){
+            $(".leafNode").click(onLeafNodeClicked);
+            $("div[class*='leafNode'] > div > span").css('cursor', 'pointer');
+        };
 
+        $('#tree').on("newNodeEvent", function(e){
+            setLeafBehaviour();
+        });
+        
+        setLeafBehaviour();
+        
         $("#libChange").change(function(e){
             e.preventDefault();
             var jsLibId = getUrlParameter($("#libChange option:selected").attr("value"), "jsLibId");
             setJsLibId(jsLibId);
             ajaxRefresh(getSnippet(), getJsLibId(), getThemeId());
         });
-
+        var cssObj = {
+                'max-height' : document.body.scrollHeight,
+                'height' : '100%',
+                'overflow' : 'auto'
+        };
+        $('.span3').css(cssObj);
     });
 
 })(jQuery);

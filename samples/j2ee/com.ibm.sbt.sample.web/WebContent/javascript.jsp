@@ -1,4 +1,4 @@
-<%@page import="demo.Util"%>
+<%@page import="com.ibm.sbt.sample.web.util.Util"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -35,7 +35,7 @@
     <div class="container-fluid">
 		<div class="row-fluid">
 			<div class="span3">
-				<%@include file="includes/js_outline.jsp"%>
+				<%@include file="includes/outline.jsp"%>
 			</div>
 			<div class="span8">
                 <div>

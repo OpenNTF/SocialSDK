@@ -7,63 +7,19 @@
         return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(url)||[,""])[1].replace(/\+/g, '%20'))||null;
     }
 
-    function buildUrl(){
-
-    }
-
-    function ajaxRefresh(snippet, jsLibId, themeId){
-        // refresh snippet with js_snippet.jsp
+    function ajaxRefresh(snippet, themeId){
+        // refresh snippet with java_snippet.jsp
         var parameters = "?snippet=" + snippet;
         if(themeId!=null && themeId!="")
             parameters = parameters + "&themeId=" + themeId;
         var snippetQuery = snippetPage + parameters;
         $("#snippetContainer").load(snippetQuery);
-        // refresh iframe with js_runner.jsp.
+        // refresh iframe with javaPreview.jsp.
         var previewQuery = previewPage + parameters;
         $("#previewFrame").attr('src', previewQuery);
 
         // update previewLink
         $("#previewLink").attr("href", previewQuery).text(previewQuery);
-    }
-    // Debug flags whether we are going to use firebug.
-    function postCode(frame, debug){
-        var htmlDiv = document.getElementById("htmlContents").firstChild;
-        var jsDiv = document.getElementById("jsContents").firstChild; 
-        var cssDiv = document.getElementById("cssContents").firstChild;
-
-        var html = htmlDiv.CodeMirror ? htmlDiv.CodeMirror.getValue() : htmlDiv.textContent;
-        var js = jsDiv.CodeMirror ? jsDiv.CodeMirror.getValue() : jsDiv.textContent;
-        var css = cssDiv.CodeMirror ? cssDiv.CodeMirror.getValue() : cssDiv.textContent;
-
-        $.post(previewPage, { htmlData: html, jsData: js, cssData: css, debug: debug, jsLibId:getJsLibId, themeId: getThemeId()}, function(data) {
-                var wrapper = $(".iframeWrapper");
-                wrapper.find(frame).remove();
-                var $frame = $('<iframe id="previewFrame" src=""  width="100%" height="100%" style="border-style:none;"></iframe>');
-                wrapper.append($frame);
-
-                var preview=($frame[0].contentWindow || $frame[0].contentDocument);
-                if (preview.document)
-                    preview = preview.document;
-
-                preview.open();
-                preview.write(data);
-                preview.close();
-        }, 'html');
-    }
-
-    function showDialog(){
-        var $popoutDiv = $("#showHtmlPopout");
-        $popoutDiv.dialog({
-            height: "auto",
-            width: "500",
-            modal: true,
-            open: function(){
-                $popoutDiv.text($("#previewFrame").contents().find("html").html()).addCodeMirror("text/html");
-            },
-            close: function(){
-                $popoutDiv.empty();
-            }
-        });
     }
 
     function setSnippet(snippet){
@@ -72,17 +28,6 @@
 
     function setSnippetFromUrl(url){
         setSnippet(getUrlParameter(url, "snippet"));
-    }
-
-    function setJsLibId(jsLibId){
-        if(jsLibId)
-            $("body").data("jsLibId", jsLibId);
-        else
-            $("body").data("jsLibId", "dojo180");
-    }
-
-    function setJsLibIdFromUrl(url){
-        setJsLibId(getUrlParameter(url, "jsLibId"));
     }
 
     function setThemeId(themeId){
@@ -101,10 +46,6 @@
         return $("body").data("snippet");
     }
 
-    function getJsLibId(){
-        return $("body").data("jsLibId");
-    }
-
     $.fn.makeActive = function(){
         $(this).siblings().removeClass('active');
         $(this).addClass('active');
@@ -112,39 +53,27 @@
 
     $(document).ready(function(){
         setSnippetFromUrl(window.location.href);
-        setJsLibIdFromUrl(window.location.href);
         setThemeIdFromUrl(window.location.href);
-
-        $(".leafNode").click(function(e){
+        
+        var onLeafNodeClicked = function(e){
             var snippet = this.id;
 
             setSnippet(snippet);
             var theme = getThemeId();
-            var jsLibId = getJsLibId() != null ? getJsLibId() : getUrlParameter(url, "jsLibId");
-            ajaxRefresh(snippet, jsLibId, theme);
+            ajaxRefresh(snippet, theme);
+        };
+        
+        var setLeafBehaviour = function(){
+            $(".leafNode").click(onLeafNodeClicked);
+            $("div[class*='leafNode'] > div > span").css('cursor', 'pointer');
+        };
+
+        $('#tree').on("newNodeEvent", function(e){
+            setLeafBehaviour();
         });
-
-        $("#runButton").click(function(e){
-            postCode(document.getElementById('previewFrame'), false);
-        });
-
-        $("#debugButton").click(function(e){
-            postCode(document.getElementById('previewFrame'), true);
-        });
-
-        //$("#showHtmlButton").click(function(e){
-        //    showDialog();
-        //});
-
-        $("div[class*='leafNode'] > div > span").css('cursor', 'pointer');
-
-        $("#libChange").change(function(e){
-            e.preventDefault();
-            var jsLibId = getUrlParameter($("#libChange option:selected").attr("value"), "jsLibId");
-            setJsLibId(jsLibId);
-            ajaxRefresh(getSnippet(), getJsLibId(), getThemeId());
-        });
-
+        
+        setLeafBehaviour();
+        
     });
 
 })(jQuery);

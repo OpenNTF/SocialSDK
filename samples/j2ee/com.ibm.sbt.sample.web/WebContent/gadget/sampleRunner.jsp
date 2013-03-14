@@ -27,11 +27,11 @@
 <%@page import="com.ibm.sbt.playground.assets.Node"%>
 <%@page import="java.util.List"%>
 <%@page import="com.ibm.sbt.playground.assets.CategoryNode"%>
-<%@page import="demo.SnippetFactory"%>
+<%@page import="com.ibm.sbt.sample.web.util.SnippetFactory"%>
 <%
-RootNode rootNode = SnippetFactory.getSnippets(application);
+RootNode rootNode = SnippetFactory.getJsSnippets(application);
 String snippetName = request.getParameter("snippet");
-JSSnippet snippet = (JSSnippet)rootNode.loadAsset(SnippetFactory.getRootFile(application), snippetName);
+JSSnippet snippet = (JSSnippet)rootNode.loadAsset(SnippetFactory.getJsRootFile(application), snippetName);
 String[] labels = snippet.getLabels();
 String name = (labels != null && labels.length > 0) ? labels[0] : snippetName;
 String html = null;

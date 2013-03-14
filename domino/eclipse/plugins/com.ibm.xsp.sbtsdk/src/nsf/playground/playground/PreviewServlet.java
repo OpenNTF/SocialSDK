@@ -151,12 +151,30 @@ public class PreviewServlet extends FacesContextServlet {
 			pw.println("    @import \"/xsp/.ibmxspres/.oneuiv302/oneui/dojoTheme/lotusui30dojo/lotusui30dojo.css\";");
 			pw.println("  </style>");
 			bodyTheme = "lotusui30_body lotusui30_fonts lotusui30 lotusui30dojo";
-		} else if(StringUtil.equals(theme, "claro")) {
+		} else if(StringUtil.equals(theme, "dojo") || StringUtil.equals(theme, "dojo-claro")) {
 			pw.println("  <style type=\"text/css\">");
 			pw.println("    @import \""+dojoPath+"dijit/themes/claro/claro.css\";");
 			pw.println("    @import \""+dojoPath+"dojo/resources/dojo.css\";");
 			pw.println("  </style>");
 			bodyTheme = "claro";
+		} else if(StringUtil.equals(theme, "dojo-tundra")) {
+			pw.println("  <style type=\"text/css\">");
+			pw.println("    @import \""+dojoPath+"dijit/themes/tundra/tundra.css\";");
+			pw.println("    @import \""+dojoPath+"dojo/resources/dojo.css\";");
+			pw.println("  </style>");
+			bodyTheme = "tundra";
+		} else if(StringUtil.equals(theme, "dojo-soria")) {
+			pw.println("  <style type=\"text/css\">");
+			pw.println("    @import \""+dojoPath+"dijit/themes/soria/soria.css\";");
+			pw.println("    @import \""+dojoPath+"dojo/resources/dojo.css\";");
+			pw.println("  </style>");
+			bodyTheme = "soria";
+		} else if(StringUtil.equals(theme, "dojo-nihilo")) {
+			pw.println("  <style type=\"text/css\">");
+			pw.println("    @import \""+dojoPath+"dijit/themes/nihilo/nihilo.css\";");
+			pw.println("    @import \""+dojoPath+"dojo/resources/dojo.css\";");
+			pw.println("  </style>");
+			bodyTheme = "soria";
 		}
 		pw.println("  <script>");
 		pw.println("    dojoConfig= {");

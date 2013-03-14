@@ -128,17 +128,20 @@ public abstract class Node {
 		return encodeUnid(name);
 	}
 	public static String encodeUnid(String s) {
-		StringBuilder b = new StringBuilder();
-		for(int i=0; i<s.length(); i++) {
-			char c = s.charAt(i);
-			if(Character.isLetterOrDigit(c)) {
-				b.append(c);
-			} else if(c=='_'||c=='-'||c=='.'||c=='@'||c=='$'||c=='('||c==')') {
-				b.append(c);
-			} else {
-				b.append('_');
+		if(StringUtil.isNotEmpty(s)) {
+			StringBuilder b = new StringBuilder();
+			for(int i=0; i<s.length(); i++) {
+				char c = s.charAt(i);
+				if(Character.isLetterOrDigit(c)) {
+					b.append(c);
+				} else if(c=='_'||c=='-'||c=='.'||c=='@'||c=='$'||c=='('||c==')') {
+					b.append(c);
+				} else {
+					b.append('_');
+				}
 			}
+			return b.toString();
 		}
-		return b.toString();
+		return s;
 	}
 }

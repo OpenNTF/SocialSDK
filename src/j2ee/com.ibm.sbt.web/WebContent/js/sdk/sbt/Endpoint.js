@@ -277,7 +277,7 @@ var Endpoint = declare("sbt.Endpoint", null, {
 	 */
 	authenticate : function(args) {
 		var self = this;
-		options = {
+		var options = {
 			dialogLoginPage : self.loginDialogPage,
 			loginPage : self.loginPage,
 			transport : self.transport,
@@ -323,11 +323,7 @@ var Endpoint = declare("sbt.Endpoint", null, {
 
 	logout : function(args) {
 		var proxy = this.proxy.proxyUrl;
-		var actionURL = proxy.substring(0, proxy
-			.lastIndexOf("/"))
-			+ "/authHandler/"
-			+ this.proxyPath
-			+ "/logout";
+		var actionURL = proxy.substring(0, proxy.lastIndexOf("/")) + "/authHandler/" + this.proxyPath + "/logout";
 		this.transport.xhr('POST',{
 			handleAs : "json",
 			url : actionURL,
@@ -339,10 +335,6 @@ var Endpoint = declare("sbt.Endpoint", null, {
 						args.failure(response);
 					}
 				}
-			},
-			error : function(error) {
-				//TODO : Handle possible error here
-				return error;
 			}
 		}, true);
 	},

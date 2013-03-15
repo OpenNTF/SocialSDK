@@ -317,9 +317,9 @@ var Endpoint = declare("sbt.Endpoint", null, {
 			url : actionURL,
 			handle : function(response) {
 				if (args) {
-					if (args.success && response.logout == "success") {
+					if (args.success && response.success == true) {
 						args.success(response);
-					} else if (args.failure && response.logout == "failure") {
+					} else if (args.failure && response.success == false) {
 						args.failure(response);
 					}
 				}

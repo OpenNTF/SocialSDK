@@ -49,19 +49,22 @@ public class AuthenticationHandler extends AbstractServiceHandler {
     		try {
 				endpoint.logout();
 			} catch (AuthenticationException e) {
-				logoutResponse.putJsonProperty("logout", "failure");
+				logoutResponse.putJsonProperty("success", false);
+				logoutResponse.putJsonProperty("status", 500);
 			}
 			try {
-				if(endpoint.isAuthenticated())
-					logoutResponse.putJsonProperty("logout", "failure");
-				else{
-					logoutResponse.putJsonProperty("logout", "success");
+				if(endpoint.isAuthenticated()){
+					logoutResponse.putJsonProperty("success", false);
+					logoutResponse.putJsonProperty("status", 500);
+				}else{
+					logoutResponse.putJsonProperty("success", true);
+					logoutResponse.putJsonProperty("status", 200);
 				}
 			} catch (ClientServicesException e) {
-				logoutResponse.putJsonProperty("logout", "failure");
+				logoutResponse.putJsonProperty("success", false);
+				logoutResponse.putJsonProperty("status", 500);
 			}
     	}
-        response.setStatus(HttpServletResponse.SC_OK);
         response.setContentType(APPLICATION_JSON);
         writer.write(logoutResponse.toString());
     	writer.flush();

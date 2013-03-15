@@ -7,9 +7,11 @@ package com.ibm.sbt.services.client.connections.profiles.utils;
  */
 public class Messages {
 
-	public static String	InvalidArgument_1		= "Invalid Input parameter : id";
-	public static String	InvalidArgument_2		= "Invalid Input parameter : connectionId";
+	public static String	InvalidArgument_1		= "Required input parameter is missing : id";
+	public static String	InvalidArgument_2		= "Required input parameter is missing : connectionId";
 	public static String	InvalidArgument_3		= "Invalid Input  : Null profile was passed";
+	public static String	InvalidArgument_4		= "Required input parameter is missing  : source id is missing";
+	public static String	InvalidArgument_5		= "Required input parameter is missing  : target id is missing";
 	public static String	GetProfileInfo_1		= "returning  requested profile";
 	public static String	GetProfileInfo_2		= "empty response from server for requested profile";
 	public static String	GetProfileInfo_3		= "Error while loading a profile";

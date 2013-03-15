@@ -13,5 +13,8 @@ public class ProfileRequestParams {
 	public static final String	CONNECTIONTYPE			= "connectionType";	
 	public static final String	OUTPUT					= "output";
 	public static final String	FORMAT					= "format";
-
+	public static final String  SOURCEUSERID			= "sourceUserid";
+	public static final String  SOURCEEMAIL				= "sourceEmail";
+	public static final String  TARGETUSERID			= "targetUserid";
+	public static final String  TARGETEMAIL				= "targetEmail";
 }

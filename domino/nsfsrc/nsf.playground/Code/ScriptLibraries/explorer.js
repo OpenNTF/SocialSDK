@@ -174,6 +174,29 @@ function executeService(params,details,results,callback) {
 	});
 }
 
+function loginEndpoint(endpoint) {
+	logInOut(endpoint,true);
+}
+
+function logoutEndpoint(endpoint) {
+	logInOut(endpoint,false);
+}
+
+function logInOut(endpoint,login) {
+	require(['sbt/Endpoint'], function(Endpoint) {
+		var ep = Endpoint.find(endpoint);
+		if(!ep) {
+			alert("Endpoint "+endpoint+" specified in the API description is invalid");
+			return;
+		}
+		if(login) {
+			ep.authenticate({loginUi:'popup',forceAuthentication:true});
+		} else {
+			ep.logout();
+		}
+	});
+}
+
 function updatePanel(id,url,code,headers,body,ioargs,startTs) {
 	var hd = "";
     var headers = ioargs && ioargs.headers;

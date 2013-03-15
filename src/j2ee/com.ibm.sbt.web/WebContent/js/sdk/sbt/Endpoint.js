@@ -269,40 +269,18 @@ var Endpoint = declare("sbt.Endpoint", null, {
 	 * @param args
 	 */
 	authenticate : function(args) {
-		var self = this;
+		args = args || {};
 		var options = {
-			dialogLoginPage : self.loginDialogPage,
-			loginPage : self.loginPage,
-			transport : self.transport,
-			proxy : self.proxy,
-			proxyPath : self.proxyPath,
-			loginUi : self.loginUi
+			dialogLoginPage : this.loginDialogPage,
+			loginPage : this.loginPage,
+			transport : this.transport,
+			proxy : this.proxy,
+			proxyPath : this.proxyPath,
+			loginUi : args.loginUi || this.loginUi,
+			callback: args.success,
+			cancel: args.cancel
 		};
-		var doAuthentication = false;
-		if (args) {
-			if (args.success) {
-				options.callback = args.success;
-			}
-			if (args.cancel) {
-				options.cancel = args.cancel;
-			}
-			if (args.forceAuthentication == true) {
-				doAuthentication = true;
-			} else {
-				if (self.isAuthenticated == false) {
-					doAuthentication = true;
-				} else {
-					if (args.success) {
-						args.success();
-					}
-				}
-			}
-		}else{
-			if (self.isAuthenticated == false) {
-				doAuthentication = true;
-			}
-		}
-		if(doAuthentication == true){
+		if(args.forceAuthentication || !this.isAuthenticated) {
 			if (this.authenticator.authenticate(options)) {
 				return;
 			}

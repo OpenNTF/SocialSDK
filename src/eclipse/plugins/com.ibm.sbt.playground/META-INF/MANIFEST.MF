@@ -19,5 +19,6 @@ Export-Package: com.ibm.sbt.playground.assets,
  com.ibm.sbt.playground.assets,
  com.ibm.sbt.playground.dojo,
  com.ibm.sbt.playground.vfs
-Import-Package: javax.servlet,
+Import-Package: com.ibm.commons.xml,
+ javax.servlet,
  javax.servlet.http

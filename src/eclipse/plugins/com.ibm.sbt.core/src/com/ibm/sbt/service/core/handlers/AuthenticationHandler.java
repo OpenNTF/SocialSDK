@@ -23,19 +23,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.commons.util.io.json.JsonObject;
 import com.ibm.sbt.security.authentication.AuthenticationException;
-import com.ibm.sbt.security.authentication.oauth.OAuthException;
 import com.ibm.sbt.security.authentication.password.PasswordException;
 import com.ibm.sbt.services.client.ClientServicesException;
-import com.ibm.sbt.services.client.email.MimeEmail;
-import com.ibm.sbt.services.client.email.MimeEmailException;
-import com.ibm.sbt.services.client.email.MimeEmailFactory;
 import com.ibm.sbt.services.endpoints.BasicEndpoint;
 import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
-import com.ibm.sbt.services.endpoints.OAuth2Endpoint;
-import com.ibm.sbt.services.endpoints.OAuthEndpoint;
 
 
 public class AuthenticationHandler extends AbstractServiceHandler {

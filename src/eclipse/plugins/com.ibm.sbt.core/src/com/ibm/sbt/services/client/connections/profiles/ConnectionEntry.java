@@ -78,18 +78,14 @@ public class ConnectionEntry{
 				return uri;
 			}
 
-			// Dummy implementation - not used!
 			@Override
 			public Iterator<String> getPrefixes(String val) {
 				return null;
 			}
-
-			// Dummy implementation - not used!
 			@Override
 			public String getPrefix(String uri) {
 				return null;
 			}
-
 			@Override
 			public Iterator<String> getPrefixes() {
 				return null;
@@ -136,10 +132,7 @@ public class ConnectionEntry{
 				return connectionId;
 			}
 	    	String selfLink = get("selfLinkFromEntry");
-	    	System.out.println("selfLink"+selfLink);
-	    	
-	    	//String connectionId = selfLink.substring(selfLink.lastIndexOf("connectionId="),selfLink.length());
-	    	String connectionId = selfLink.substring(selfLink.lastIndexOf("connectionId="),selfLink.lastIndexOf('&'));
+	    	String connectionId = selfLink.substring(selfLink.lastIndexOf("connectionId="),selfLink.lastIndexOf('&'));// check why the selfLink is not returned
 			return connectionId;
 	    }
 	   

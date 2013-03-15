@@ -23,13 +23,13 @@
       	<version>1.0.0</version>
     </dependency>
     <dependency>
-      	<groupId>com.ibm.sbt.sdk</groupId>
-      	<artifactId>com.ibm.commons.runtime</artifactId>
-      	<version>1.0.0</version>
+        <groupId>com.ibm.sbt.sdk</groupId>
+        <artifactId>com.ibm.commons.xml</artifactId>
+        <version>1.0.0</version>
     </dependency>
     <dependency>
       	<groupId>com.ibm.sbt.sdk</groupId>
-      	<artifactId>com.ibm.commons.xml</artifactId>
+      	<artifactId>com.ibm.commons.runtime</artifactId>
       	<version>1.0.0</version>
     </dependency>
     <dependency>

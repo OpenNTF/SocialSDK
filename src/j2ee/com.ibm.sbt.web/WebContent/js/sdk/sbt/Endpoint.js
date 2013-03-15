@@ -281,9 +281,7 @@ var Endpoint = declare("sbt.Endpoint", null, {
 			cancel: args.cancel
 		};
 		if(args.forceAuthentication || !this.isAuthenticated) {
-			if (this.authenticator.authenticate(options)) {
-				return;
-			}
+			this.authenticator.authenticate(options);
 		}
 	},
 

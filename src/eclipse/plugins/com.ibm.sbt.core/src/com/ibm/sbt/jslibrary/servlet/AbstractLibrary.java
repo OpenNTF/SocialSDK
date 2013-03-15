@@ -308,7 +308,7 @@ abstract public class AbstractLibrary {
 			try {
 				jsonEndpoint.putJsonProperty(IS_AUTHENTICATED, endpoint.isAuthenticated());
 			} catch (ClientServicesException e) {
-				jsonEndpoint.putJsonProperty(IS_AUTHENTICATED, null);
+				jsonEndpoint.putJsonProperty(IS_AUTHENTICATED, false);
 			}
 
 			// configure endpoint to use proxy

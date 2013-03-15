@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="85257AA80077A28B" version="9.0" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="432" sequence="175" unid="658A11150F2D148E85257B25006CB94D">
+<noteinfo noteid="432" sequence="208" unid="658A11150F2D148E85257B25006CB94D">
 <created><datetime>20130305T144733,25-05</datetime></created>
-<modified><datetime dst="true">20130312T213821,69-04</datetime></modified>
-<revised><datetime dst="true">20130312T213821,68-04</datetime></revised>
-<lastaccessed><datetime dst="true">20130312T213821,69-04</datetime></lastaccessed>
+<modified><datetime dst="true">20130315T153719,38-04</datetime></modified>
+<revised><datetime dst="true">20130315T153719,37-04</datetime></revised>
+<lastaccessed><datetime dst="true">20130315T153719,38-04</datetime></lastaccessed>
 <addedtofile><datetime>20130305T144733,26-05</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></updatedby>
 <wassignedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></wassignedby>
@@ -13,8 +13,7 @@
 
 
 <item name="$FileNames" sign="true"><text>ExplorerMini.xsp</text></item>
-<item name="$DesignerVersion"><text>8.5.3</text></item>
-
+<item name="$DesignerVersion"><text>8.5</text></item>
 
 
 

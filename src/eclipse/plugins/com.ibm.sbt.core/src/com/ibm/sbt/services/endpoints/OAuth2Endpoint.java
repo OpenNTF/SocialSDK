@@ -198,7 +198,8 @@ public class OAuth2Endpoint extends AbstractEndpoint {
 		return reference;
 	}
 	
-	public void logout() throws ClientServicesException {
+	@Override
+	public void logout() {
 		//DONT KNOW IF THIS IS CORRECT WAY TO LOGOUT. IT IS WORK IN PROGRESS
 		oAuthHandler.setConsumerKey(null);
 		oAuthHandler.setConsumerSecret(null);

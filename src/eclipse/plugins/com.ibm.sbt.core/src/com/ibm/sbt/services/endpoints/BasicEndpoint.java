@@ -261,7 +261,8 @@ public class BasicEndpoint extends AbstractEndpoint {
         // How can we verify the user is properly authenticated?
         return true;
     }
-
+    
+    @Override
     public void logout() throws PasswordException {
         setUser(null);
         setPassword(null);

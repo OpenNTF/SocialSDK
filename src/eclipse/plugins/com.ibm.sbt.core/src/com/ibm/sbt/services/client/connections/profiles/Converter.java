@@ -105,5 +105,44 @@ public class Converter {
 		return connections;
 	}
 	
+    static public Collection<Profile> returnProfileEntries(ProfileService ps, Document data)
+	{
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.entering(sourceClass, "returnProfileEntries");
+		}
+		
+		Collection<Profile> profiles = null;
+		
+		if(data != null){
+			NodeList profileEntries = data.getElementsByTagName("entry");
+			profiles = new ArrayList<Profile>();
+			if(profileEntries != null && profileEntries.getLength() > 0) {
+				for(int i = 0 ; i < profileEntries.getLength();i++) {
+					Node entry = profileEntries.item(i);
+					Document doc;
+					try {
+						doc = DOMUtil.createDocument();
+						Node dup = doc.importNode(entry, true);
+						Element root = doc.createElement("feed");
+						root.appendChild(dup);
+						doc.appendChild(root);
+						Profile profile = new Profile(ps, DOMUtil.value(entry, "contributor/snx:userid"));
+						profile.setData(doc);
+						profiles.add(profile);
+					} catch (XMLException e) {
+						if (logger.isLoggable(Level.SEVERE)) {
+							logger.log(Level.SEVERE, Messages.ProfileError_2 + "returnProfileEntries()", e);
+						}
+					}
+				}
+			}
+		}
+		if (logger.isLoggable(Level.FINEST)) {
+    		logger.exiting(sourceClass, "returnProfileEntries");
+		}
+		return profiles;
+	}
+	
+	
 
 }

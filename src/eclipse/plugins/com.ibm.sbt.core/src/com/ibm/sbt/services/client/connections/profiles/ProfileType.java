@@ -27,11 +27,16 @@ public enum ProfileType {
 	ADDPROFILE("atom/profiles.do")  ,
 	UPDATEPROFILE("atom/profileEntry.do"),
 	UPDATEPROFILEPHOTO("photo.do"),
-	GETCOLLEAGUES("atom/connections.do"),
-	UPDATEINVITE("atom/connection.do"),
+	CONNECTIONS("atom/connections.do"),
+	CONNECTION("atom/connection.do"),
 	REPORTINGCHAIN("atom/reportingChain.do"),
-	DIRECTREPORTS("atom/peopleManaged.do");
-	
+	DIRECTREPORTS("atom/peopleManaged.do"),
+	CONNECTIONS_IN_COMMON("atom/connectionsInCommon.do"),
+	SEARCH("atom/search.do"),
+	MESSAGES_ALL("atom/mv/theboard/entries/all.do"),
+	MESSAGE_BOARD_ENTRIES("atom/mv/theboard/entries.do"),
+	MESSAGE_BOARD_COMMENTS("atom/mv/theboard/comments.do"),
+	MESSAGES_COLLEAGUES("atom/mv/theboard/entries/related.do");
 	
 	private String proType;
 	private ProfileType(String proType) {

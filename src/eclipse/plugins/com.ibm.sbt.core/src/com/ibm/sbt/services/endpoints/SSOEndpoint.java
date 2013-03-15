@@ -29,6 +29,7 @@ import org.apache.http.impl.cookie.BasicClientCookie2;
 import org.apache.http.protocol.HttpContext;
 
 import com.ibm.commons.runtime.Context;
+import com.ibm.sbt.security.authentication.AuthenticationException;
 import com.ibm.sbt.services.client.ClientServicesException;
 
 /**
@@ -122,4 +123,10 @@ public class SSOEndpoint extends AbstractEndpoint {
             context.setAttribute(ClientContext.COOKIE_STORE, cookieStore);
         }
     }
+
+	@Override
+	public void logout() throws AuthenticationException {
+		// TODO Auto-generated method stub
+		
+	}
 }

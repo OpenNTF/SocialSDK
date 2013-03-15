@@ -20,6 +20,7 @@ import java.util.Map;
 
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import com.ibm.sbt.security.authentication.AuthenticationException;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientService.Args;
 import com.ibm.sbt.services.client.ClientService.Handler;
@@ -172,6 +173,13 @@ public interface Endpoint {
      * @throws ClientServicesException
      */
     public void initialize(DefaultHttpClient httpClient) throws ClientServicesException;
+    
+    /**
+     * Invoked to logout from endpoint.
+     * 
+     * @throws AuthenticationException
+     */
+    public void logout() throws AuthenticationException;
 
     /**
      * 

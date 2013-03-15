@@ -18,6 +18,7 @@ package com.ibm.sbt.services.endpoints;
 
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import com.ibm.sbt.security.authentication.AuthenticationException;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.endpoints.js.JSReference;
 
@@ -86,6 +87,12 @@ public class GadgetOAuthEndpoint extends AbstractEndpoint {
 	 */
 	@Override
 	public void initialize(DefaultHttpClient httpClient) throws ClientServicesException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void logout() throws AuthenticationException {
 		// TODO Auto-generated method stub
 		
 	}

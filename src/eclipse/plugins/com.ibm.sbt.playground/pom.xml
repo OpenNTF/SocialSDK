@@ -29,6 +29,11 @@
     </dependency>
     <dependency>
       	<groupId>com.ibm.sbt.sdk</groupId>
+      	<artifactId>com.ibm.commons.xml</artifactId>
+      	<version>1.0.0</version>
+    </dependency>
+    <dependency>
+      	<groupId>com.ibm.sbt.sdk</groupId>
       	<artifactId>com.ibm.sbt.core</artifactId>
       	<version>1.0.0</version>
     </dependency>

@@ -26,6 +26,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.util.UrlUtil;
+import com.ibm.sbt.security.authentication.AuthenticationException;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.ClientService.Args;
@@ -243,4 +244,10 @@ public class ApplicationEndpoint implements Endpoint {
 	public boolean isForceTrustSSLCertificate() {
     	throw newNotApplicableException();
     }
+
+	@Override
+	public void logout() throws AuthenticationException {
+		// TODO Auto-generated method stub
+		
+	}
 }

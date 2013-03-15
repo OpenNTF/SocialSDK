@@ -18,6 +18,7 @@ package com.ibm.sbt.services.endpoints;
 
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import com.ibm.sbt.security.authentication.AuthenticationException;
 import com.ibm.sbt.services.client.ClientServicesException;
 
 
@@ -46,4 +47,10 @@ public class AnonymousEndpoint extends AbstractEndpoint {
 	public void initialize(DefaultHttpClient httpClient) {
         // nothing
     }
+
+	@Override
+	public void logout() throws AuthenticationException {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -37,8 +37,6 @@ function getBodyHeight() {
 	}
 	return -1; 
 }
-dojo.ready(10000,setTimeout(refreshFrameHeight,200));
-
 ]]></xp:this.value>
 	</xp:scriptBlock>
 
@@ -61,17 +59,21 @@ return apiBean.loadAPI(e,param["unid"]);
 }]]></xp:this.value>
 						</xp:dataContext>
 					</xp:this.dataContexts>
-					<xp:div rendered="#{javascript:return !(apis.items &amp;&amp; apis.items.length>0);}">
+					<xp:div
+						rendered="#{javascript:return !(apis.items &amp;&amp; apis.items.length>0);}">
 						There is no API Explorer entry available
 					</xp:div>
-					<xp:div rendered="#{javascript:return (apis.items &amp;&amp; apis.items.length>0);}">
+					<xp:div
+						rendered="#{javascript:return (apis.items &amp;&amp; apis.items.length>0);}">
 						<xp:repeat id="repeat1" var="item"
 							value="#{javascript:return apis.items;}" indexVar="idx">
-							<xc:ccExplorerAPIEntry
-								expandEntries="true">
+							<xc:ccExplorerAPIEntry expandEntries="true">
 							</xc:ccExplorerAPIEntry>
 						</xp:repeat>
 					</xp:div>
+					<script>
+						setTimeout(refreshFrameHeight,0);
+					</script>
 				</xp:panel>
 			</xp:this.facets>
 		</xe:dynamicContent>
@@ -88,10 +90,10 @@ return apiBean.loadAPI(e,param["unid"]);
 	}
 }
 dojo.addOnLoad( function() {	
-	dojo.subscribe("/dojo/hashchange",loadFromHash);
 	if(dojo.hash()) {
 		loadFromHash()
 	}
+	setTimeout(refreshFrameHeight,0);
 })
 ]]></xp:this.value>
 	</xp:scriptBlock>

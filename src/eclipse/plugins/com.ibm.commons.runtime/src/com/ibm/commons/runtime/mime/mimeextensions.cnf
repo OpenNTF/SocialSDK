@@ -22,7 +22,7 @@
 .tif,      image/tiff                           # TIFF
 .tiff,     image/tiff                           # TIFF
 .ras,      image/cmu-raster                     # CMU raster format
-.png,      image/x-png                          # PNG
+.png,      image/png                          	# PNG
 .pnm,      image/x-portable-anymap              # PBM Anymap format
 .pbm,      image/x-portable-bitmap              # PBM Bitmap format
 .pgm,      image/x-portable-graymap             # PBM Graymap format

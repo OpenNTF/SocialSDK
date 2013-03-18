@@ -421,18 +421,39 @@ define(
                  * 
                  * @method setAuthor
                  */
-                setAuthor : function(args) {
-                    var _args = lang.mixin({ community: this }, args);
-                    this._author = new Member(_args);
+                setAuthor : function(member) {
+                	if(member.declaredClass){
+						if (!(validate._validateInputTypeAndNotify("CommunityService", "setContributor", "Member", member, "sbt.connections.Member"))) {
+							return ;
+						}
+						this._author = member;
+					}else{
+						if (!(validate._validateInputTypeAndNotify("CommunityService", "setContributor", "Member", member, "object"))) {
+							return ;
+						}
+						var _args = lang.mixin({ community: this }, member);
+	                    this._author = new Member(_args);
+					}
                 },
                 /**
                  * Sets the contributor of this IBM Connections community.
                  * 
                  * @method setContributor
                  */
-                setContributor : function(args) {
-                    var _args = lang.mixin({ community: this }, args);
-                    this._contributor = new Member(_args);
+                setContributor : function(member) {
+                	if(member.declaredClass){
+						if (!(validate._validateInputTypeAndNotify("CommunityService", "setContributor", "Member", member, "sbt.connections.Member"))) {
+							return ;
+						}
+						this._contributor = member;
+					}else{
+						if (!(validate._validateInputTypeAndNotify("CommunityService", "setContributor", "Member", member, "object"))) {
+							return ;
+						}
+						var _args = lang.mixin({ community: this }, member);
+	                    this._contributor = new Member(_args);
+					}
+                    
                 },
 
                 /**
@@ -454,9 +475,7 @@ define(
                  *            passed to this callback is the member object (or error object). From the error object. one can get access to the
                  *            javascript library error object, the status code and the error message.
                  */
-				addMember : function(args) {
-				    var _args = lang.mixin({ community: this }, args);
-				    var member = new Member(_args);
+				addMember : function(member, args) {				   
 				    this._service.addMember(this, member, args);
 				},
 				
@@ -527,8 +546,6 @@ define(
 				memberFields: {},
 
 				constructor : function(args) {
-				    
-				    
 				    if (args.member) {
                         this._community = args.member.community;
                         this._name = args.member.name;
@@ -573,7 +590,8 @@ define(
                             this._userid = args.userid || null;
                         }
 				    }
-				},
+				}
+				,
 				/**
 				 * Loads the member object with the atom entry associated with the member of the community. By default, a network call is made to load the atom entry
 				 * document in the member object.
@@ -1275,10 +1293,18 @@ define(
 							})) {
 								return;
 							}
-							if (!(validate._validateInputTypeAndNotify("CommunityService", "addMember", "Member", inputMember, "sbt.connections.Member", args))) {
-								return ;
+							if(inputMember.declaredClass){
+								if (!(validate._validateInputTypeAndNotify("CommunityService", "addMember", "Member", inputMember, "sbt.connections.Member", args))) {
+									return ;
+								}
+							}else{
+								if (!(validate._validateInputTypeAndNotify("CommunityService", "addMember", "Member", inputMember, "object", args))) {
+									return ;
+								}
+								member = new Member(inputMember);
+								member.memberFields = inputMember;
 							}
-							if (!inputMember._validate("CommunityService", "addMember", args, {
+							if (!member._validate("CommunityService", "addMember", args, {
 								isValidateId : true
 							})) {
 								return;

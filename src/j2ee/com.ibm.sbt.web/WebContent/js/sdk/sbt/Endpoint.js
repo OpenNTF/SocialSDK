@@ -282,21 +282,59 @@ var Endpoint = declare("sbt.Endpoint", null, {
 		};
 		if(args.forceAuthentication || !this.isAuthenticated) {
 			this.authenticator.authenticate(options);
+		}else{//call success if authentication is not required.
+			if (args.success) {
+				args.success();
+			}
 		}
 	},
 
 	logout : function(args) {
+		var self = this;
 		var proxy = this.proxy.proxyUrl;
 		var actionURL = proxy.substring(0, proxy.lastIndexOf("/")) + "/authHandler/" + this.proxyPath + "/logout";
 		this.transport.xhr('POST',{
 			handleAs : "json",
 			url : actionURL,
 			handle : function(response) {
+				sbt.Endpoints[self.proxyPath].isAuthenticated = false;
 				if (args) {
 					if (args.success && response.success == true) {
 						args.success(response);
 					} else if (args.failure && response.success == false) {
 						args.failure(response);
+					}
+				}
+			}
+		}, true);
+	},
+	
+	isAuthenticated : function(args) {
+		var proxy = this.proxy.proxyUrl;
+		var actionURL = proxy.substring(0, proxy.lastIndexOf("/")) + "/authHandler/" + this.proxyPath + "/isAuth";
+		this.transport.xhr('POST',{
+			handleAs : "json",
+			url : actionURL,
+			handle : function(response) {
+				if (args) {
+					if (args.load) {
+						args.load(response);
+					}
+				}
+			}
+		}, true);
+	},
+	
+	isAuthenticationValid : function(args) {
+		var proxy = this.proxy.proxyUrl;
+		var actionURL = proxy.substring(0, proxy.lastIndexOf("/")) + "/authHandler/" + this.proxyPath + "/isAuthValid";
+		this.transport.xhr('POST',{
+			handleAs : "json",
+			url : actionURL,
+			handle : function(response) {
+				if (args) {
+					if (args.load) {
+						args.load(response);
 					}
 				}
 			}

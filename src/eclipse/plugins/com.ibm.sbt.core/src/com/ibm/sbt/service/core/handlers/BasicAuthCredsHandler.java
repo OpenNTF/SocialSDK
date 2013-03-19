@@ -123,7 +123,9 @@ public class BasicAuthCredsHandler extends AbstractServiceHandler {
 	}
 	
 	protected void generateCloseScript(HttpServletRequest req, HttpServletResponse resp, String authentication) throws ServletException, IOException {
-    	String mode = req.getParameter(LOGIN_UI);
+		String pathInfo = req.getPathInfo();
+    	String endpointName = getEndpointName(pathInfo);
+		String mode = req.getParameter(LOGIN_UI);
     	if(mode != null){ //mode is null for dojo dialog LOGIN_UI. No action required in that case. 
 			String redirectToLogin = req.getParameter(REDIRECT_URL_TO_LOGIN);    	
 	    	PrintWriter pw = resp.getWriter();
@@ -145,7 +147,7 @@ public class BasicAuthCredsHandler extends AbstractServiceHandler {
 	    			if(authentication.equals(AUTH_DECLINED)){
 	    				pw.println("window.location.href = '"+redirectToLogin+"&redirectURL=empty&loginUi="+mode+"&showWrongCredsMessage=true'");
 	    			}else if(authentication.equals(AUTH_ACCEPTED)){
-	    				//pw.println("window.opener.sbt.Endpoints['"+req.getParameter(ENDPOINT_NAME)+"'].callback();");
+	    				pw.println("window.opener.sbt.Endpoints['"+endpointName+"'].isAuthenticated = false;");
 	    				pw.println("if(window.opener.sbt.callback){");
 	    				pw.println("window.opener.sbt.callback();");
 	    				pw.println("delete window.opener.sbt.callback;");

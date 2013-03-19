@@ -4,7 +4,7 @@
 <%@page import="com.ibm.commons.runtime.Context"%>
 <%@page import="com.ibm.sbt.playground.assets.RootNode"%>
 <%@page import="com.ibm.sbt.playground.assets.javasnippets.JavaSnippet"%>
-<%@page import="com.ibm.sbt.sample.web.util.SnippetFactory"%>
+<%@page import="demo.SnippetFactory"%>
 <ul class="nav nav-tabs">
     <li class="active">
 		<a href="#">JavaServer Page</a>

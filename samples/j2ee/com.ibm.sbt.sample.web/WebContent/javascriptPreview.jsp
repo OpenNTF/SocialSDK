@@ -6,8 +6,8 @@
 <%@page import="java.util.List"%>
 <%@page import="com.ibm.commons.util.StringUtil"%>
 <%@page import="com.ibm.commons.runtime.util.ParameterProcessor"%>
-<%@page import="com.ibm.sbt.sample.web.util.SnippetFactory"%>
-<%@page import="com.ibm.sbt.sample.web.util.Util"%>
+<%@page import="demo.SnippetFactory"%>
+<%@page import="demo.Util"%>
 <!DOCTYPE html>
 <html lang="en" style="height: 100%;">
   <%

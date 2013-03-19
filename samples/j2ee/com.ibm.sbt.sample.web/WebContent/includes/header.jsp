@@ -1,5 +1,5 @@
 <%@page import="java.net.URLEncoder"%>
-<%@page import="com.ibm.sbt.sample.web.util.Util"%>
+<%@page import="demo.Util"%>
 <%
 String homeClass = "";
 String jsClass = "";

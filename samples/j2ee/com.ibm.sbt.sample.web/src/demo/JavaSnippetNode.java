@@ -13,28 +13,27 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-package com.ibm.sbt.sample.web.util;
-
-import java.net.URLEncoder;
+package demo;
 
 import javax.servlet.http.HttpServletRequest;
 
 import com.ibm.commons.runtime.util.UrlUtil;
 import com.ibm.sbt.playground.assets.CategoryNode;
-import com.ibm.sbt.playground.assets.jssnippets.JSSnippetAssetNode;
+import com.ibm.sbt.playground.assets.javasnippets.JavaSnippetAssetNode;
 
 
 /**
- * Definition of a JavaScript code snippet.
+ * Definition of a Java code snippet.
  */
-public class JSSnippetNode extends JSSnippetAssetNode {
+public class JavaSnippetNode extends JavaSnippetAssetNode {
 
-	public JSSnippetNode(CategoryNode parent, String name) {
+	public JavaSnippetNode(CategoryNode parent, String name) {
 		super(parent,name);
 	}
 
-	public String getUrl(HttpServletRequest request) {
-		String unid = getUnid();
-		return UrlUtil.getRequestUrl(request,false)+"?snippet="+URLEncoder.encode(unid);
+	// url for JSP's
+	public String getJSPUrl(HttpServletRequest request) {
+		String pathToJSPSample = getUnid(); //getPath()+".jsp";	
+		return UrlUtil.getRequestUrl(request,false)+"?snippet="+pathToJSPSample;
 	}
 }

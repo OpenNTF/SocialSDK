@@ -1,4 +1,4 @@
-<%@page import="com.ibm.sbt.sample.web.util.Util"%>
+<%@page import="demo.Util"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>

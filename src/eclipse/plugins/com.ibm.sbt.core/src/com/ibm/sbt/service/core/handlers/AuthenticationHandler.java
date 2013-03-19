@@ -37,6 +37,7 @@ public class AuthenticationHandler extends AbstractServiceHandler {
 	public static final String URL_PATH                 = "authHandler";
     public static final String LOG_OUT					= "logout";
     public static final String IS_AUTHENTICATED			= "isAuth";
+    public static final String IS_AUTHENTICATION_VALID	= "isAuthValid";
     private static final String APPLICATION_JSON        = "application/json";
 	
 	@Override
@@ -44,52 +45,50 @@ public class AuthenticationHandler extends AbstractServiceHandler {
 		String pathInfo = request.getPathInfo();
     	Endpoint endpoint = EndpointFactory.getEndpoint(getEndpointName(pathInfo));  //remove hardcoded name ..get second token from path info
     	PrintWriter writer = new PrintWriter(new OutputStreamWriter(response.getOutputStream(), "utf-8"));
-		JsonObject logoutResponse = new JsonJavaObject();
+		JsonObject jsonResponse = new JsonJavaObject();
     	if(getAuthAction(pathInfo).equals(LOG_OUT)){
+    		boolean logoutSuccessful = true;
     		try {
 				endpoint.logout();
 			} catch (AuthenticationException e) {
-				logoutResponse.putJsonProperty("success", false);
-				logoutResponse.putJsonProperty("status", 500);
+				logoutSuccessful = false;
 			}
 			try {
 				if(endpoint.isAuthenticated()){
-					logoutResponse.putJsonProperty("success", false);
-					logoutResponse.putJsonProperty("status", 500);
-				}else{
-					logoutResponse.putJsonProperty("success", true);
-					logoutResponse.putJsonProperty("status", 200);
+					logoutSuccessful = false;
 				}
 			} catch (ClientServicesException e) {
-				logoutResponse.putJsonProperty("success", false);
-				logoutResponse.putJsonProperty("status", 500);
+				logoutSuccessful = false;
+			}
+			if(logoutSuccessful){
+				jsonResponse.putJsonProperty("success", true);
+				jsonResponse.putJsonProperty("status", 200);
+			}else{
+				jsonResponse.putJsonProperty("success", false);
+				jsonResponse.putJsonProperty("status", 500);
 			}
     	}
-        response.setContentType(APPLICATION_JSON);
-        writer.write(logoutResponse.toString());
-    	writer.flush();
-	}    	
-	
-	public void basicLogoutAction(Endpoint endpoint, PrintWriter writer){
-		BasicEndpoint basicendpoint = (BasicEndpoint)endpoint;
-		JsonObject logoutResponse = new JsonJavaObject();
-		try {
-			basicendpoint.logout();
-		} catch (PasswordException e) {
-			logoutResponse.putJsonProperty("logout", "failure");
-			e.printStackTrace();
-		}
-		try {
-			if(basicendpoint.isAuthenticated())
-				logoutResponse.putJsonProperty("logout", "failure");
-			else{
-				logoutResponse.putJsonProperty("logout", "success");
+    	if(getAuthAction(pathInfo).equals(IS_AUTHENTICATED)){
+				try {
+					jsonResponse.putJsonProperty("result", endpoint.isAuthenticated());
+					jsonResponse.putJsonProperty("status", 200);
+				} catch (ClientServicesException e) {
+					jsonResponse.putJsonProperty("result", false);
+					jsonResponse.putJsonProperty("status", 500);
+				}
+    	}
+    	if(getAuthAction(pathInfo).equals(IS_AUTHENTICATION_VALID)){
+			try {
+				jsonResponse.putJsonProperty("result", endpoint.isAuthenticationValid());
+				jsonResponse.putJsonProperty("status", 200);
+			} catch (ClientServicesException e) {
+				jsonResponse.putJsonProperty("result", false);
+				jsonResponse.putJsonProperty("status", 500);
 			}
-		} catch (ClientServicesException e) {
-			logoutResponse.putJsonProperty("logout", "failure");
-			e.printStackTrace();
-		}
-		writer.write(logoutResponse.toString());
+	}
+        response.setContentType(APPLICATION_JSON);
+        writer.write(jsonResponse.toString());
+    	writer.flush();
 	}
 	
 	public String getAuthAction(String pathInfo){//returns string JSApp or JavaApp

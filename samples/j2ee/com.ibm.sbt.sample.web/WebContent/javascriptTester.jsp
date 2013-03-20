@@ -55,7 +55,7 @@
 	        var error = new Error("Expected " + val2 + " to equal to " + val1);
 	        handleError(error);
 	    } else {
-	    	displayMessage(val2 + " matches expected value: " + val1);
+	    	trace(val2 + " matches expected value: " + val1);
 	    }
 	}
 	
@@ -63,14 +63,14 @@
 	    document.getElementById("result").innerHTML = "Pass";
 	}
 	
-	function displayMessage(msg) {
-	    var successMsg = document.getElementById("success").innerHTML;
-		if (successMsg) {
-			successMsg += "<br/>" + msg;
+	function trace(msg) {
+	    var traceMsg = document.getElementById("trace").innerHTML;
+		if (traceMsg) {
+			traceMsg += "<br/>" + msg;
 		} else {
-			successMsg = msg;
+			traceMsg = msg;
 		}
-		document.getElementById("success").innerHTML = successMsg; 
+		document.getElementById("trace").innerHTML = traceMsg; 
 	}
 	
 	function fail(msg, error) {
@@ -90,7 +90,7 @@
 
   <body class="<%=Util.getBodyClass(request, theme)%>" style="width: 90%; height: 100%;">
 	<div id="result" style="" class="alert"></div>
-	<div id="success" style="" class="alert alert-success"></div>
+	<div id="trace" style="" class="alert alert-success"></div>
 	<div id="error" style="" class="alert alert-error"></div>
     <%
     if (StringUtil.isNotEmpty(css)) {

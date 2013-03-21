@@ -78,7 +78,7 @@
 		<description>The snippet servlet handles requests to retrieve details of available snippets.</description>
 		<display-name>Snippet Servlet</display-name>
 		<servlet-name>SnippetServlet</servlet-name>
-		<servlet-class>demo.SnippetServlet</servlet-class>
+		<servlet-class>com.ibm.sbt.sample.web.util.SnippetServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>SnippetServlet</servlet-name>

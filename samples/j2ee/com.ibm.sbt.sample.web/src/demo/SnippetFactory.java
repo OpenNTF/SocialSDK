@@ -16,13 +16,16 @@
 package demo;
 
 import java.io.IOException;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.w3c.dom.Document;
+
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.DOMUtil;
 import com.ibm.commons.xml.XResult;
@@ -199,7 +202,22 @@ public class SnippetFactory {
 
 	private static String readRemoteJson(ServletContext context, HttpServletRequest request) {
 	    String baseUrl = computeSbtxSampleWebUrl(request);
-	    return httpGet(baseUrl + "/snippet?format=json");
+	    String sbtxJson = httpGet(baseUrl + "/snippet?format=json");
+	    
+	    baseUrl = computeSbtApiWebUrl(request);
+        String apiJson = httpGet(baseUrl + "/snippet?format=json");
+        
+        String remoteJson = null;
+        if (apiJson == null) {
+            remoteJson = sbtxJson;
+        } else if (sbtxJson == null) {
+            remoteJson = apiJson;
+        } else {
+            apiJson = apiJson.substring("[{\"id\":\"_root\",\"name\":\"_root\",\"children\":[".length());
+            remoteJson = sbtxJson.substring(0, sbtxJson.length()-3) + "," + apiJson;
+        }
+	    
+	    return remoteJson;
 	}
 	
     private static JSSnippet loadAssetRemote(ServletContext context, HttpServletRequest request, String snippetId) {
@@ -207,12 +225,22 @@ public class SnippetFactory {
         String xml = httpGet(baseUrl + "/snippet?snippet=" + snippetId);
         if (xml != null) {
             return createSnippetFromXml(xml);
+        } else {
+            baseUrl = computeSbtApiWebUrl(request);
+            xml = httpGet(baseUrl + "/snippet?snippet=" + snippetId);
+            if (xml != null) {
+                return createSnippetFromXml(xml);
+            }
         }
         return null;
     }
     
     private static String computeSbtxSampleWebUrl(HttpServletRequest request) {
         return request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/sbtx.sample.web";
+    }
+    
+    private static String computeSbtApiWebUrl(HttpServletRequest request) {
+        return request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/sbt.api.web";
     }
     
     private static String httpGet(String url) {

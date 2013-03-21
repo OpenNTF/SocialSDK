@@ -52,10 +52,11 @@
     <script type="text/javascript">
     function assertEquals(val1, val2) {
 	    if (val1 != val2) {
-	        var error = new Error("Expected " + val2 + " to equal to " + val1);
-	        handleError(error);
+	    	var msg = "Comparison failure, expected ["  + val1 + "] but was [" + val2 + "]";
+	        var error = new Error(msg);
+	        throw error;
 	    } else {
-	    	trace(val2 + " matches expected value: " + val1);
+	    	trace("[" + val2 + "] matches expected [" + val1 + "]");
 	    }
 	}
 	

@@ -5,9 +5,9 @@
 <%@page import="java.util.List"%>
 <%@page import="com.ibm.commons.util.StringUtil"%>
 <%@page import="com.ibm.commons.runtime.util.ParameterProcessor"%>
-<%@page import="demo.SnippetFactory"%>
+<%@page import="com.ibm.sbt.sample.web.util.SnippetFactory"%>
 <%@page import="com.ibm.sbt.playground.assets.javasnippets.JavaSnippet"%>
-<%@page import="demo.Util"%>
+<%@page import="com.ibm.sbt.sample.web.util.Util"%>
 <div class="well sidebar-nav">
 	<div class="btn-group">
 		<button class="btn btn-mini" id="expandAll">

@@ -36,6 +36,15 @@ public class SmartCloudOAuthEndpoint extends OAuthEndpoint {
     }
     
     @Override
+	public boolean isHeaderAllowed(String headerName, String serviceUrl){
+    	if (headerName.equalsIgnoreCase("Origin"))
+		{
+			return false;
+		}
+		return true;
+
+    }
+    @Override
 	public int getAuthenticationErrorCode(){
     	return authenticationErrorCode;
     }

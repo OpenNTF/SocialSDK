@@ -14,11 +14,13 @@
 
 package com.ibm.sbt.security.authentication.oauth.consumer;
 
+import java.awt.Desktop;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.net.URI;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
@@ -78,6 +80,7 @@ public class OAuth2Handler extends OAuthHandler {
 	private String applicationPage;
 	private int expireThreshold;
 	public boolean forceTrustSSLCertificate = false;
+	public boolean supportsFrames = true;
 	
 	// Persistence store code
 	private boolean storeRead;
@@ -302,7 +305,7 @@ public class OAuth2Handler extends OAuthHandler {
 		return "Bearer "+ accessToken;
 	}
 
-	private void setOAuthData(String responseBody) {
+	protected void setOAuthData(String responseBody) {
 		accessToken = getTokenValue(responseBody, Configuration.OAUTH2_ACCESS_TOKEN);
 		refreshToken = getTokenValue(responseBody, Configuration.OAUTH2_REFRESH_TOKEN);
 		String issuedOnDate = getTokenValue(responseBody, Configuration.OAUTH2_ISSUEDON);
@@ -465,6 +468,13 @@ public class OAuth2Handler extends OAuthHandler {
 		return consumerKey;
 	}
 	
+	public void setSupportsFrames(boolean supportsFrames) {
+		this.supportsFrames = supportsFrames;
+	}
+
+	public boolean getSupportsFrames() {
+		return supportsFrames;
+	}
 	//Persistance related code
 	
     
@@ -689,7 +699,13 @@ public class OAuth2Handler extends OAuthHandler {
 		
 		Object resp = Context.get().getHttpResponse();
 		try {
-			Context.get().sendRedirect(getAuthorizationNetworkUrl());
+			if(getSupportsFrames()){
+				Context.get().sendRedirect(getAuthorizationNetworkUrl());
+			}
+			else{
+				// Certain outh based app's do not support frames, open a new window for them
+				Desktop.getDesktop().browse(new URI(getAuthorizationNetworkUrl())); 
+			}
 		} catch (Exception e) {
 			Platform.getInstance().log(e);
 		}

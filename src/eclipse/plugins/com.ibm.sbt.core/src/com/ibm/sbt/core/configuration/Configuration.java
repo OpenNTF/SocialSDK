@@ -34,6 +34,7 @@ public class Configuration {
 	public static final String OAUTH2_GRANT_TYPE = "grant_type";
 	public static final String OAUTH2_CODE = "code";
 	public static final String OAUTH2_CALLBACK_URI = "callback_uri";
+	public static final String OAUTH2_REDIRECT_URI = "redirect_uri";
 	public static final String OAUTH2_AUTHORIZATION_CODE = "authorization_code";
 	public static final String OAUTH2_ACCESS_TOKEN = "access_token";
 	public static final String OAUTH2_REFRESH_TOKEN = "refresh_token";

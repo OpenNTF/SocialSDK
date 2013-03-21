@@ -447,12 +447,18 @@ public class OAProvider implements Serializable{
             if(StringUtil.isEmpty(userId)) {
                 return;
             }
+            
         }
+        if(StringUtil.equals(userId, "anonymous"))
+		{
+        	AnonymousCredentialStore.deleteCredentials(context, getAppId(),getServiceName()); 
+		}
+        else {
         TokenStore ts = OATokenStoreFactory.getTokenStore(getTokenStore());
         if(ts!=null) {
             // Find the token for this user
             ts.deleteAccessToken(getAppId(), getServiceName(), getConsumerKey(), null, null, userId);
-        }
+        }}
     }
     
 

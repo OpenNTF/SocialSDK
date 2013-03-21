@@ -1,7 +1,7 @@
-<%@page import="demo.SnippetFactory"%>
+<%@page import="com.ibm.sbt.sample.web.util.SnippetFactory"%>
 <%@page import="com.ibm.sbt.playground.assets.javasnippets.JavaSnippet"%>
 <%@page import="com.ibm.commons.runtime.util.UrlUtil"%>
-<%@page import="demo.Util"%>
+<%@page import="com.ibm.sbt.sample.web.util.Util"%>
  <%
  String snippetId = request.getParameter("snippet");
  String pagePath = "includes/java_error.jsp?snippet=" + snippetId;

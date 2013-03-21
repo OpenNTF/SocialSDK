@@ -21,11 +21,11 @@
 <%@page import="com.ibm.commons.runtime.Context"%>
 <%@page import="com.ibm.sbt.playground.assets.RootNode"%>
 <%@page import="com.ibm.sbt.playground.assets.javasnippets.JavaSnippetAssetNode"%>
-<%@page import="demo.JavaSnippetNode"%>
+<%@page import="com.ibm.sbt.sample.web.util.JavaSnippetNode"%>
 <%@page import="com.ibm.sbt.playground.assets.Node"%>
 <%@page import="java.util.List"%>
 <%@page import="com.ibm.sbt.playground.assets.CategoryNode"%>
-<%@page import="demo.SnippetFactory"%>
+<%@page import="com.ibm.sbt.sample.web.util.SnippetFactory"%>
 <Module>
   <ModulePrefs title="Social Business Toolkit Samples">
     <Require feature="settitle"/>

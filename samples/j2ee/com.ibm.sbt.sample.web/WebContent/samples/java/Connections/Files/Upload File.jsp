@@ -27,7 +27,7 @@
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.model.FileEntry"%>
-<%@page import="demo.SnippetFactory"%> 
+<%@page import="com.ibm.sbt.sample.web.util.SnippetFactory"%> 
 <%@page import="com.ibm.sbt.playground.vfs.VFSFile"%>
 <%@page 
     language="java" contentType="text/html; charset=ISO-8859-1"

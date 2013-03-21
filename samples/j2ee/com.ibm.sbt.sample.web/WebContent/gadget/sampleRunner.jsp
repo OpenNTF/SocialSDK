@@ -27,7 +27,7 @@
 <%@page import="com.ibm.sbt.playground.assets.Node"%>
 <%@page import="java.util.List"%>
 <%@page import="com.ibm.sbt.playground.assets.CategoryNode"%>
-<%@page import="demo.SnippetFactory"%>
+<%@page import="com.ibm.sbt.sample.web.util.SnippetFactory"%>
 <%
 RootNode rootNode = SnippetFactory.getJsSnippets(application);
 String snippetName = request.getParameter("snippet");

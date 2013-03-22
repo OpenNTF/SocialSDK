@@ -49,7 +49,7 @@
 	<!-- Connections -->   
     <managed-bean>
         <managed-bean-name>connections</managed-bean-name>
-        <managed-bean-class>com.ibm.sbt.services.endpoints.OAuth2Endpoint</managed-bean-class>
+        <managed-bean-class>com.ibm.sbt.services.endpoints.ConnectionsOAuth2Endpoint</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
         <managed-property>
             <property-name>url</property-name>

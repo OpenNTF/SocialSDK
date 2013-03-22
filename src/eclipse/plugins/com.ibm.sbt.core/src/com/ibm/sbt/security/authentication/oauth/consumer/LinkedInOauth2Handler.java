@@ -47,6 +47,8 @@ public class LinkedInOauth2Handler extends OAuth2Handler {
 	//for logging 
 	private static final String sourceClass = OAuth1Handler.class.getName();
     private static final Logger logger = Logger.getLogger(sourceClass);
+    private String scope;
+    private String state;
 	
 	/**
 	 * Generates the authorization url for fetching the authorization tokens
@@ -69,9 +71,15 @@ public class LinkedInOauth2Handler extends OAuth2Handler {
 			url.append('=');
 			url.append(URLEncoder.encode(getConsumerKey(), "UTF-8"));
 			url.append('&');
-			url.append("scope=r_fullprofile%20r_emailaddress%20r_network&");
-			url.append("state=manish&");
-			url.append("redirect_uri");
+			url.append(Configuration.OAUTH_SCOPE);
+			url.append('=');
+			url.append(URLEncoder.encode(getScope(),"UTF-8"));
+			url.append('&');
+			url.append(Configuration.OAUTH_STATE);
+			url.append('=');
+			url.append(URLEncoder.encode(getState(),"UTF-8"));
+			url.append('&');
+			url.append(Configuration.OAUTH2_REDIRECT_URI);
 			url.append('=');
 			url.append(URLEncoder.encode(getClient_uri(), "UTF-8"));
 		} catch (UnsupportedEncodingException e) {
@@ -151,5 +159,22 @@ public class LinkedInOauth2Handler extends OAuth2Handler {
 		super.setAccessToken(getTokenValue(responseBody, Configuration.OAUTH2_ACCESS_TOKEN));
 		super.setExpiresIn(getTokenValue(responseBody, Configuration.OAUTH2_EXPIRESIN));
 	}
+	
+	public void setScope(String scope) {
+		this.scope = scope;
+	}
 
+	public String getScope() {
+		System.err.println("returning scope as "+scope);
+		return scope;
+	}
+	
+	
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getState() {
+		return state;
+	}
 }

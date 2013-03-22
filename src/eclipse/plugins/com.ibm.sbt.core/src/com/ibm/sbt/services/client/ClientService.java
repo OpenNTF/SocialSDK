@@ -65,6 +65,7 @@ import com.ibm.commons.xml.util.XMIConverter;
 import com.ibm.sbt.plugin.SbtCoreLogger;
 import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
+import com.ibm.sbt.services.endpoints.LinkedInOAuth2Endpoint;
 import com.ibm.sbt.services.util.SSLUtil;
 import com.ibm.sbt.util.SBTException;
 
@@ -236,6 +237,9 @@ public abstract class ClientService {
 			throws ClientServicesException {
 		Args args = new Args();
 		args.setServiceUrl(serviceUrl);
+		if(endpoint.getUrl().contains("linkedin")){ // linkedin requires security token as a param instead of header
+			parameters.put("oauth2_access_token", ((LinkedInOAuth2Endpoint)endpoint).getHandler().getAccessToken());
+		}
 		args.setParameters(parameters);
 		return args;
 	}

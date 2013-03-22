@@ -42,6 +42,8 @@ public class Configuration {
 	public static final String OAUTH2_EXPIRESIN = "expires_in";
 	public static final String OAUTH2_TOKENTYPE = "token_type";
 	public static final String OAUTH2_ACCESS_TOKEN_EXPIRED = "oauth_access_token_expired";
+	public static final String OAUTH_SCOPE = "scope";
+	public static final String OAUTH_STATE = "state";
 	
 	public static final String OAUTH_ERROR = "oauth_error";
 	public static final String OAUTH_DENIED = "oauth_denied";

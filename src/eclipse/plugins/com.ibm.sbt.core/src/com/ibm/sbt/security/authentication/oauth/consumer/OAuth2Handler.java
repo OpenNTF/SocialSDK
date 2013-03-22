@@ -22,11 +22,15 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URLEncoder;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
@@ -54,8 +58,6 @@ import com.ibm.sbt.security.authentication.oauth.consumer.store.TokenStore;
 import com.ibm.sbt.service.util.ServiceUtil;
 import com.ibm.sbt.services.util.AnonymousCredentialStore;
 import com.ibm.sbt.services.util.SSLUtil;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 public class OAuth2Handler extends OAuthHandler {
@@ -279,6 +281,8 @@ public class OAuth2Handler extends OAuthHandler {
 		}
 		if (responseCode != HttpStatus.SC_OK) {
 			if (responseCode == HttpStatus.SC_UNAUTHORIZED) {
+			    String msg = "Unable to retrieve access token. Please check in OAuth 2.0 registration for {0} that the client secret matches {1}";
+			    logger.info(MessageFormat.format(msg, consumerKey, consumerSecret));
 				throw new Exception("getAccessToken failed with Response Code: Unauthorized (401),<br>Msg: " + responseBody);
 			} else if (responseCode == HttpStatus.SC_BAD_REQUEST) {
 				throw new Exception("getAccessToken failed with Response Code: Bad Request (400),<br>Msg: " + responseBody);

@@ -19,10 +19,7 @@ package com.ibm.sbt.services.endpoints;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.ibm.sbt.security.authentication.oauth.consumer.LinkedInOauth2Handler;
-import com.ibm.sbt.security.authentication.oauth.consumer.OAuth2Handler;
-import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
-import com.ibm.sbt.services.endpoints.OAuth2Endpoint;
 
 
 

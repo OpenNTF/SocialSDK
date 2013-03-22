@@ -281,8 +281,8 @@ public class OAuth2Handler extends OAuthHandler {
 		}
 		if (responseCode != HttpStatus.SC_OK) {
 			if (responseCode == HttpStatus.SC_UNAUTHORIZED) {
-			    String msg = "Unable to retrieve access token. Please check in OAuth 2.0 registration for {0} that the client secret matches {1}";
-			    logger.info(MessageFormat.format(msg, consumerKey, consumerSecret));
+			    String msg = "Unable to retrieve access token. Please check in OAuth 2.0 registration for {0} that the client secret matches the consumer key.";
+			    logger.info(MessageFormat.format(msg, consumerKey));
 				throw new Exception("getAccessToken failed with Response Code: Unauthorized (401),<br>Msg: " + responseBody);
 			} else if (responseCode == HttpStatus.SC_BAD_REQUEST) {
 				throw new Exception("getAccessToken failed with Response Code: Bad Request (400),<br>Msg: " + responseBody);

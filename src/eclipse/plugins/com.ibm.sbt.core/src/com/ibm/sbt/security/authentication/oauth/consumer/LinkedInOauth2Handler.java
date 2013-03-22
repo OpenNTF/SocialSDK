@@ -20,25 +20,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.conn.params.ConnRoutePNames;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.protocol.HTTP;
 
 import com.ibm.sbt.core.configuration.Configuration;
 import com.ibm.sbt.services.util.SSLUtil;
@@ -112,18 +100,7 @@ public class LinkedInOauth2Handler extends OAuth2Handler {
 			HttpClient client = new DefaultHttpClient();
 			if(forceTrustSSLCertificate)
 				client = (DefaultHttpClient)SSLUtil.wrapHttpClient((DefaultHttpClient)client);
-			
-			StringBuffer url = new StringBuffer(2048);
- 			url.append(getAccessTokenURL()).append("?");
-			url.append(Configuration.OAUTH2_REDIRECT_URI).append('=').append(URLEncoder.encode(getClient_uri(), "UTF-8"));
-			url.append('&');
-			url.append(Configuration.OAUTH2_CLIENT_ID).append('=').append(URLEncoder.encode(getConsumerKey(), "UTF-8"));
-			url.append('&');
-			url.append(Configuration.OAUTH2_CLIENT_SECRET).append('=').append(URLEncoder.encode(getConsumerSecret(), "UTF-8"));
-			url.append('&');
-			url.append(Configuration.OAUTH2_GRANT_TYPE).append('=').append(Configuration.OAUTH2_AUTHORIZATION_CODE);
-			url.append('&');
-			url.append(Configuration.OAUTH2_CODE).append('=').append(URLEncoder.encode(getAuthorization_code(), "UTF-8"));
+			String url = getAccessTokenUrl();
 			method = new HttpPost(url.toString());
 			
 			HttpResponse httpResponse =client.execute(method);
@@ -133,7 +110,6 @@ public class LinkedInOauth2Handler extends OAuth2Handler {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(content));
 			responseBody = reader.readLine();
 		} catch (Exception e) {
-			e.printStackTrace();
 			throw new Exception("getAccessToken failed with Exception: <br>" + e);
 		} finally {
 			content.close();
@@ -151,6 +127,28 @@ public class LinkedInOauth2Handler extends OAuth2Handler {
 		} else {
 			setOAuthData(responseBody); //save the returned data
 		}
+	}
+	
+	
+	public String getAccessTokenUrl() throws Exception {
+		try {
+			StringBuffer url = new StringBuffer(2048);
+			url.append(getAccessTokenURL()).append("?");
+			url.append(Configuration.OAUTH2_REDIRECT_URI).append('=').append(URLEncoder.encode(getClient_uri(), "UTF-8"));
+			url.append('&');
+			url.append(Configuration.OAUTH2_CLIENT_ID).append('=').append(URLEncoder.encode(getConsumerKey(), "UTF-8"));
+			url.append('&');
+			url.append(Configuration.OAUTH2_CLIENT_SECRET).append('=').append(URLEncoder.encode(getConsumerSecret(), "UTF-8"));
+			url.append('&');
+			url.append(Configuration.OAUTH2_GRANT_TYPE).append('=').append(Configuration.OAUTH2_AUTHORIZATION_CODE);
+			url.append('&');
+			url.append(Configuration.OAUTH2_CODE).append('=').append(URLEncoder.encode(getAuthorization_code(), "UTF-8"));
+			return url.toString();
+		} catch (Exception e) {
+			throw new Exception(
+					"getAccessTokenUrl  : Exception occured in generating url for fetching Access Token");
+		}
+
 	}
 	
 	

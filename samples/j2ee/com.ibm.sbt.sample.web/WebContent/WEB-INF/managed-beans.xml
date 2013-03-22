@@ -349,9 +349,17 @@
 			<property-name>appId</property-name>
 			<value>%{linkedinoa2.appId}</value>
 		</managed-property>
-				<managed-property>
+		<managed-property>
 			<property-name>supportsFrames</property-name>
 			<value>false</value>
 		</managed-property>
+		<managed-property>
+			<property-name>scope</property-name>
+			<value>%{linkedinoa2.scope}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>state</property-name>
+			<value>%{linkedinoa2.state}</value>
+		</managed-property>		
 	</managed-bean>
 </faces-config>

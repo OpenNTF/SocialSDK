@@ -39,8 +39,26 @@ public class LinkedInOAuth2Endpoint extends OAuth2Endpoint {
     }
 
    
-    @Override
+	public void setScope(String scope) {
+		((LinkedInOauth2Handler)oAuthHandler).setScope(scope);
+	}
+
+	public String getScope() {
+		return ((LinkedInOauth2Handler)oAuthHandler).getScope();
+	}
+	
+	public void setState(String state) {
+		((LinkedInOauth2Handler)oAuthHandler).setState(state);
+	}
+
+	public String getState() {
+		return ((LinkedInOauth2Handler)oAuthHandler).getState();
+	}
+	
+	
+	
+	@Override
 	public void initialize(DefaultHttpClient httpClient) throws ClientServicesException {
-		// do not add request headers for linkedin
+		// do nothing, interceptor can not add parameters, it can only add headers
 	}
 }

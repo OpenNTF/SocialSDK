@@ -123,7 +123,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/connections/core','sbt/connectio
 		Get activity stream based on userType, groupType and applicationType.
 		
 		@method getStream
-		@param {Object} args  Argument object
+		@param {Object} [args]  Argument object
 			@param {String} [args.userType] User type for which activity stream is to be obtained. default value is "@public".
 			@param {String} [args.groupType] Group type for which activity stream is to be obtained. default value is "@all".
 			@param {String} [args.applicationType] Application type for which activity stream is to be obtained. default value is "@all".
@@ -160,7 +160,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/connections/core','sbt/connectio
 		Post an entry .
 		
 		@method postEntry
-		@param {Object} args  Argument object
+		@param {Object} [args]  Argument object
 			@param {String} [args.userType] User type of activity stream to which entry is to be posted. default value is "@public".
 			@param {String} [args.groupType] Group type of activity stream to which entry is to be posted. default value is "@all".
 			@param {String} [args.applicationType] Application type of activity stream to which entry is to be posted. default value is "@all".
@@ -194,7 +194,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/connections/core','sbt/connectio
 		Get Updates from user's network.
 		
 		@method getUpdatesFromMyNetwork
-		@param {Object} args  Argument object
+		@param {Object} [args]  Argument object
 			@param {Object} [args.parameters] Object containing all query parameters as properties to be passed with get call.
 			@param {Function} [args.load] The function getUpdatesFromMyNetwork invokes when the activity stream is 
 			loaded from the server. The function expects to receive one parameter, 
@@ -228,7 +228,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/connections/core','sbt/connectio
 		Get Status Updates for user.
 		
 		@method getMyStatusUpdates
-		@param {Object} args  Argument object
+		@param {Object} [args]  Argument object
 			@param {Object} [args.parameters] Object containing all query parameters as properties to be passed with get call.
 			@param {Function} [args.load] The function getMyStatusUpdates invokes when the activity stream is 
 			loaded from the server. The function expects to receive one parameter, 
@@ -262,7 +262,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/connections/core','sbt/connectio
 		Get Updates from people followed by user .
 		
 		@method getUpdatesFromPeopleIFollow
-		@param {Object} args  Argument object
+		@param {Object} [args]  Argument object
 			@param {Object} [args.parameters] Object containing all query parameters as properties to be passed with get call.
 			@param {Function} [args.load] The function getUpdatesFromPeopleIFollow invokes when the activity stream is 
 			loaded from the server. The function expects to receive one parameter, 
@@ -296,7 +296,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/connections/core','sbt/connectio
 		Get Updates from communities followed by user .
 		
 		@method getUpdatesFromCommunitiesIFollow
-		@param {Object} args  Argument object
+		@param {Object} [args]  Argument object
 			@param {Object} [args.parameters] Object containing all query parameters as properties to be passed with get call.
 			@param {Function} [args.load] The function getUpdatesFromCommunitiesIFollow invokes when the activity stream is 
 			loaded from the server. The function expects to receive one parameter, 
@@ -330,7 +330,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/connections/core','sbt/connectio
 		Get Updates from a single community .
 		
 		@method getUpdatesFromACommunity
-		@param {Object} args  Argument object
+		@param {Object} [args]  Argument object
 			@param {String} [communityID] Community ID for which activity stream is to be obtained..
 			@param {Object} [args.parameters] Object containing all query parameters as properties to be passed with get call.
 			@param {Function} [args.load] The function getUpdatesFromCommunitiesIFollow invokes when the activity stream is 

@@ -8,9 +8,6 @@
 		<project>com.ibm.commons.xml</project>
 		<project>com.ibm.commons.runtime</project>
 		<project>com.ibm.commons</project>
-		<project>com.ibm.xsp.extlibx.bazaar.interpreter</project>
-		<project>com.ibm.xsp.extlibx.bazaar</project>
-		<project>com.ibm.xsp.extlibx.bazaar.codemirror</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

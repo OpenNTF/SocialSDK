@@ -15,17 +15,17 @@
  */
 
 /**
- * Defination of the endpoint module
+ * Definition of the endpoint module
  * @module sbt.Endpoint
  */
 
 /**
- * This class encapsulate an actual endpoint, with its URL, proxy and its authentication
+ * This class encapsulates an actual endpoint, with its URL, proxy and its authentication
  * mechanism.
  * @class Endpoint
  * 
  */
-define(['sbt/_bridge/declare','sbt/lang','sbt/ErrorTransport'],function(declare,lang,ErrorTransport) {
+define(['sbt/_bridge/declare','sbt/lang','sbt/ErrorTransport','sbt/pathUtil'],function(declare,lang,ErrorTransport,pathUtil) {
 
 
 var Endpoint = declare("sbt.Endpoint", null, {
@@ -185,12 +185,12 @@ var Endpoint = declare("sbt.Endpoint", null, {
 	xhr: function(method,args,hasBody) {
 		var self = this;
 		var _args = lang.mixin({},args);
-		if(!_args.url && _args.serviceUrl) {
-			_args.url = _args.serviceUrl;
-			_args.baseUrl = this.baseUrl;
-			delete _args.serviceUrl;
+		// We make sure that args has a 'url' member, with or without a proxy 
+		if(!_args.url) {
 			if(this.proxy) {
-				_args.url = this.proxy.rewriteUrl(_args.url,this.proxyPath);
+				_args.url = this.proxy.rewriteUrl(this.baseUrl,_args.serviceUrl,this.proxyPath);
+			} else {
+				_args.url = pathUtil.concat(this.baseUrl,_args.serviceUrl);
 			}
 		}
 		// Make sure the initial methods are not called

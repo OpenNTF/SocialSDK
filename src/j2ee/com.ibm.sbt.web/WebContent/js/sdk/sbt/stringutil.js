@@ -76,6 +76,18 @@ define(['sbt/xml'], function(xml) {
 				});
 			}
 			return str;
+		},
+		
+		trim: function x_trim(s) {
+			return s ? s.replace(/^\s+|\s+$/g,"") : s;
+		},
+		
+		startsWith: function x_sw(s,prefix) {
+			return s.length>=prefix.length && s.substring(0,prefix.length)==prefix;
+		},
+		
+		endsWith: function x_ew(s,suffix) {
+			return s.length>=suffix.length && s.substring(s.length-suffix.length)==suffix;
 		}
 	};
 });

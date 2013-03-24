@@ -18,10 +18,10 @@
  * Social Business Toolkit SDK. 
  * Definition of a proxy re-writer.
  */
-define(['sbt/_bridge/declare','sbt/lang'],function(declare,lang) {
+define(['sbt/_bridge/declare','sbt/lang','sbt/pathUtil'],function(declare,lang,pathUtil) {
 
 /**
- * Defination of the proxy module
+ * Definition of the proxy module
  * 
  * @module sbt.Proxy
  * 
@@ -34,7 +34,10 @@ declare("sbt.Proxy", null, {
 		lang.mixin(this, args);	
 	},
 	
-	rewriteUrl: function(u,proxyPath) {
+	rewriteUrl: function(baseUrl,serviceUrl,proxyPath) {
+		// When this proxy is being used, we don't add the base URL as it will be added on the server side
+		// A different implementation might use the full URL
+		var u = serviceUrl;
 		if(this.proxyUrl) {
 			if(u.indexOf("http://")==0) {
 				u = "/http/"+u.substring(7);
@@ -42,9 +45,9 @@ declare("sbt.Proxy", null, {
 				u = "/https/"+u.substring(8);
 			}
 			if(proxyPath) {
-				u = "/" + proxyPath + u;
+				u = pathUtil.concat(proxyPath,u);
 			}
-			return this.proxyUrl + u;
+			return pathUtil.concat(this.proxyUrl,u);
 		}
 		return u;
 	}

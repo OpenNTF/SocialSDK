@@ -237,7 +237,7 @@ public abstract class ClientService {
 			throws ClientServicesException {
 		Args args = new Args();
 		args.setServiceUrl(serviceUrl);
-		if(endpoint.getUrl().contains("linkedin")){ // linkedin requires security token as a param instead of header
+		if(endpoint!=null && endpoint.getUrl().contains("linkedin")){ // linkedin requires security token as a param instead of header
 			parameters.put("oauth2_access_token", ((LinkedInOAuth2Endpoint)endpoint).getHandler().getAccessToken());
 		}
 		args.setParameters(parameters);

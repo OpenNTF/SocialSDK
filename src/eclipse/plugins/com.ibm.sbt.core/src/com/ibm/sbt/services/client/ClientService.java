@@ -98,7 +98,7 @@ public abstract class ClientService {
 	// ?? What is it for?
 	public static final Handler			FORMAT_CONNECTIONS_OUTPUT	= new HandlerConnectionHeader();
 
-	private Endpoint					endpoint;
+	protected Endpoint					endpoint;
 
 	public ClientService() {
 	}
@@ -237,9 +237,6 @@ public abstract class ClientService {
 			throws ClientServicesException {
 		Args args = new Args();
 		args.setServiceUrl(serviceUrl);
-		if(endpoint.getUrl().contains("linkedin")){ // linkedin requires security token as a param instead of header
-			parameters.put("oauth2_access_token", ((LinkedInOAuth2Endpoint)endpoint).getHandler().getAccessToken());
-		}
 		args.setParameters(parameters);
 		return args;
 	}

@@ -19,7 +19,9 @@ package com.ibm.sbt.services.endpoints;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.ibm.sbt.security.authentication.oauth.consumer.LinkedInOauth2Handler;
+import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.client.LinkedInClientService;
 
 
 
@@ -58,4 +60,9 @@ public class LinkedInOAuth2Endpoint extends OAuth2Endpoint {
 	public void initialize(DefaultHttpClient httpClient) throws ClientServicesException {
 		// do nothing, interceptor can not add parameters, it can only add headers
 	}
+	
+    @Override
+	public ClientService getClientService() throws ClientServicesException {
+    	return new LinkedInClientService(this);
+    }
 }

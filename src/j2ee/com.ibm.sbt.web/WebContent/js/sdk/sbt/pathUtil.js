@@ -29,7 +29,7 @@ define(['sbt/stringutil'],function(stringUtil) {
 			if(stringUtil.endsWith(path1,"/")) {
 				path1 = path1.substring(0,path1.length());
 			}
-			if(stringUtil.endsWith(path2,"/")) {
+			if(stringUtil.startsWith(path2,"/")) {
 				path2 = path2.substring(1);
 			}
 			return path1 + "/" + path2;

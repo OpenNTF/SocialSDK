@@ -21,6 +21,7 @@
 <%@page import="java.util.Map"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="com.ibm.commons.util.io.json.JsonObject"%>
+<%@page import="com.ibm.sbt.services.client.LinkedInClientService"%>
 <%@page import="com.ibm.sbt.services.client.ClientService"%>
 <%@page import="com.ibm.sbt.services.endpoints.EndpointFactory"%>
 <%@page import="com.ibm.sbt.services.endpoints.Endpoint"%>
@@ -57,35 +58,27 @@
 		String linkedinSearch = "v1/people-search";
 		System.err.println("url "+linkedinSearch);
 		LinkedInOAuth2Endpoint linkedinep = (LinkedInOAuth2Endpoint)EndpointFactory.getEndpoint("linkedinOA2");
-		ClientService svc = linkedinep.getClientService();
+		LinkedInClientService svc = (LinkedInClientService)linkedinep.getClientService();
         
         Map<String, String> params = new HashMap<String,String>();
-        //LinkedInOA2Endpoint li2ep = (LinkedInOA2Endpoint)EndpointFactory.getEndpoint("linkedinOA2");
-       // String accessToken = linkedinep.getHandler().getAccessToken();
-       // params.put("oauth2_access_token", accessToken);
-        //System.err.println("oauth2_access_token "+accessToken);
         params.put("keywords","IBM Social Business Toolkit");
         params.put("start", "1");
         params.put("count", "20"); 
         Object result = svc.get(linkedinSearch, params, ClientService.FORMAT_XML);		
-        System.err.println("result  "+DOMUtil.getXMLString((Document)result).toString());
  		Document resultDoc = (Document)result;
  		Element connElt = resultDoc.getDocumentElement();
- 		NamedNodeMap nnm = connElt.getAttributes();
- 		//Node total = nnm.getNamedItem("total"); 
- 		//String connCount = total.getNodeValue(); 
+ 		String count = connElt.getFirstChild().getAttributes().item(0).getNodeValue();
+ 		int total = Integer.parseInt(count);
 	 %>
 		
 	<%
  		NodeList nl = DOMUtil.getAllChildElementsByName(resultDoc.getDocumentElement(), "person");
- 		for (int i = 0; i < 10; i++) {
+ 		for (int i = 0; i < total; i++) {
 			Element onePerson = (Element)nl.item(i);
 			
 			NodeList idList = DOMUtil.getAllChildElementsByName(onePerson, "id");
 			Node idnode = idList.item(0);
 			String id = idnode.getTextContent();
-			
-			
 			NodeList firstNameList = DOMUtil.getAllChildElementsByName(onePerson, "first-name");
 			Node firstName = firstNameList.item(0);
 			String fName = firstName.getTextContent();
@@ -95,8 +88,6 @@
 			NodeList picList = DOMUtil.getAllChildElementsByName(onePerson, "picture-url");
 			
 			%>
-
-			
 			<div><%= "<a href='http://www.linkedin.com/profile/view?"+id+ "' target='_blank'>" + fName + " " + lName+"</a>"%></div>		
 			
  	<%	} 

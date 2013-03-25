@@ -25,11 +25,11 @@ define(['requirejs/i18n'],function(i18n) {
     	},
     	
     	getUpdatedLabel: function(dateStr) {
-    	    i18n.getUpdatedLabel(dateStr);
+    	    return i18n.getUpdatedLabel(dateStr);
         },
         
         getSearchUpdatedLabel: function(dateStr) {
-            i18n.getSearchUpdatedLabel(dateStr);
+             return i18n.getSearchUpdatedLabel(dateStr);
         },
         
         getLocalizedTime: function(date) {

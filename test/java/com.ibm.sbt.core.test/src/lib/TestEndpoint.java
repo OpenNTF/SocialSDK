@@ -2,6 +2,7 @@ package lib;
 
 import org.junit.After;
 import org.junit.Before;
+
 import com.ibm.commons.runtime.Context;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientService.Args;
@@ -52,11 +53,11 @@ public abstract class TestEndpoint extends BasicEndpoint {
 
 	@Override
 	public ClientService getClientService() throws ClientServicesException {
-		final TestEndpoint endpoint = this;
+		final TestEndpoint testEndpoint = this;
 		return new ClientService() {
 			@Override
 			public Object xhr(String method, Args args, Object content) throws ClientServicesException {
-				Object ret = endpoint.testRequest(method, args, content);
+				Object ret = testEndpoint.testRequest(method, args, content);
 				if (ret == null) {
 					throw new ClientServicesException(new IllegalArgumentException(
 							"Testing service only, please implement " + method + " at "

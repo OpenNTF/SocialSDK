@@ -354,6 +354,10 @@
 			<value>false</value>
 		</managed-property>
 		<managed-property>
+			<property-name>usingFrames</property-name>
+			<value>true</value>
+		</managed-property>
+		<managed-property>
 			<property-name>scope</property-name>
 			<value>%{linkedinoa2.scope}</value>
 		</managed-property>

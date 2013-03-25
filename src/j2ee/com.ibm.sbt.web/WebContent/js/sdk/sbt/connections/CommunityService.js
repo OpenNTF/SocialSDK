@@ -421,18 +421,39 @@ define(
                  * 
                  * @method setAuthor
                  */
-                setAuthor : function(args) {
-                    var _args = lang.mixin({ community: this }, args);
-                    this._author = new Member(_args);
+                setAuthor : function(member) {
+                	if(member.declaredClass){
+						if (!(validate._validateInputTypeAndNotify("CommunityService", "setContributor", "Member", member, "sbt.connections.Member"))) {
+							return ;
+						}
+						this._author = member;
+					}else{
+						if (!(validate._validateInputTypeAndNotify("CommunityService", "setContributor", "Member", member, "object"))) {
+							return ;
+						}
+						var _args = lang.mixin({ community: this }, member);
+	                    this._author = new Member(_args);
+					}
                 },
                 /**
                  * Sets the contributor of this IBM Connections community.
                  * 
                  * @method setContributor
                  */
-                setContributor : function(args) {
-                    var _args = lang.mixin({ community: this }, args);
-                    this._contributor = new Member(_args);
+                setContributor : function(member) {
+                	if(member.declaredClass){
+						if (!(validate._validateInputTypeAndNotify("CommunityService", "setContributor", "Member", member, "sbt.connections.Member"))) {
+							return ;
+						}
+						this._contributor = member;
+					}else{
+						if (!(validate._validateInputTypeAndNotify("CommunityService", "setContributor", "Member", member, "object"))) {
+							return ;
+						}
+						var _args = lang.mixin({ community: this }, member);
+	                    this._contributor = new Member(_args);
+					}
+                    
                 },
 
                 /**
@@ -454,9 +475,7 @@ define(
                  *            passed to this callback is the member object (or error object). From the error object. one can get access to the
                  *            javascript library error object, the status code and the error message.
                  */
-				addMember : function(args) {
-				    var _args = lang.mixin({ community: this }, args);
-				    var member = new Member(_args);
+				addMember : function(member, args) {				   
 				    this._service.addMember(this, member, args);
 				},
 				
@@ -520,25 +539,33 @@ define(
 			 */
 			var Member = declare("sbt.connections.Member", null, {
 				_community : null,
-				_id : null,
+				_userid : null,
 				_name: null,
 				_email: null,
 				data: null,
 				memberFields: {},
 
 				constructor : function(args) {
-				    if (!(args.community || args.member)) {
-				        throw new Error("Unable to create community member without a community instance");
-				    }
-				    if (!(args.id || args.email || args.member)) {
-                        throw new Error("Unable to create community member without a user id or email");
-                    }
-				    
 				    if (args.member) {
                         this._community = args.member.community;
                         this._name = args.member.name;
-                        this._id = args.member.id;
-                        this._email = args.member.email;
+                        if(args.member.id){
+	                        if(this._isEmail(args.member.id)){
+	                        	this._email = args.member.id;
+	                        }else{
+	                        	if (args.member.id.indexOf("urn:lsid:lconn.ibm.com:profiles.person:") != -1) {
+	                                this._userid = args.member.id.substring("urn:lsid:lconn.ibm.com:profiles.person:".length);
+	                            } else {
+	                                this._userid = args.member.id;
+	                            }
+	                        }
+                        }
+                        if(args.member.email){
+                        	this._email = args.member.email;
+                        }
+                        if(args.member.userid){
+                        	this._userid = args.member.userid;
+                        }
 				    } else {
     					this._community = args.community;
                         this._name = args.name || args.displayName || null;
@@ -547,19 +574,24 @@ define(
                                 this._email = args.id;
                             } else {
                                 if (args.id.indexOf("urn:lsid:lconn.ibm.com:profiles.person:") != -1) {
-                                    this._id = args.id.substring("urn:lsid:lconn.ibm.com:profiles.person:".length);
+                                    this._userid = args.id.substring("urn:lsid:lconn.ibm.com:profiles.person:".length);
                                 } else {
-                                    this._id = args.id;
+                                    this._userid = args.id;
                                 }
                             }
                         }
                         if (args.emails) {
                             this._email = args.emails[0].value;
-                        } else {
+                        } 
+                        if(args.email){
                             this._email = args.email || null;
                         }
+                        if(args.userid){
+                            this._userid = args.userid || null;
+                        }
 				    }
-				},
+				}
+				,
 				/**
 				 * Loads the member object with the atom entry associated with the member of the community. By default, a network call is made to load the atom entry
 				 * document in the member object.
@@ -697,10 +729,10 @@ define(
 				 * @return {String} Community member userId
 				 */
 				getId : function(){
-					if(!this._id){
-						this._id = this.get("uid");
+					if(!this._userid){
+						this._userid = this.get("uid");
 					}
-					return this._id;					
+					return this._userid;					
 				},
 				
 				/**
@@ -729,7 +761,7 @@ define(
 					if (validateMap.isValidateType && !(validate._validateInputTypeAndNotify(className, methodName, "Member", this, "sbt.connections.Member", args))) {
 						return false;
 					}
-					if (validateMap.isValidateId && !(validate._validateInputTypeAndNotify(className, methodName, "Member Id or EMail", this._id || this._email, "string", args))) {
+					if (validateMap.isValidateId && !(validate._validateInputTypeAndNotify(className, methodName, "Member Id or EMail", this._userid || this._email, "string", args))) {
 						return false;
 					}			
 					return true;
@@ -834,6 +866,10 @@ define(
 							if (!(validate._validateInputTypeAndNotify("CommunityService", "getMember", "args", args, "object", args))) {
 								return ;
 							}
+							if (!(validate._validateInputTypeAndNotify("CommunityService", "getMember", "args.userid/args.email/args.id", args.id || args.email || args.userid, "string", args))) {
+								return ;
+							}
+							
 							var member = new Member(args);
 							if (args.loadIt == false) {
 								if (args.load) {
@@ -912,10 +948,10 @@ define(
 							var content = {
 								communityUuid : communityId
 							};
-							if (this._isEmail(member._id)) {
-								content.email = member._id;
+							if (member._userid) {
+								content.userid = member._userid;
 							} else {
-								content.userid = member._id;
+								content.email = member._email;
 							}
 							this._endpoint.xhrGet({
 								serviceUrl : this._constructCommunityUrl(Constants._methodName.getMember),
@@ -942,12 +978,8 @@ define(
 						_constructAddMemberRequestBody : function(member) {
 							var body = "<entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:app=\"http://www.w3.org/2007/app\" xmlns:opensearch=\"http://a9.com/-/spec/opensearch/1.1/\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\">";
 							body += "<contributor>";
-							if (member._id) {
-								if (this._isEmail(member._id)) {
-									body += "<email>" + xml.encodeXmlEntry(member._id) + "</email>";
-								} else {
-									body += "<snx:userid xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\">" + xml.encodeXmlEntry(member._id) + "</snx:userid>";
-								}
+							if (member._userid) {
+								body += "<snx:userid xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\">" + xml.encodeXmlEntry(member._userid) + "</snx:userid>";
 							} else if (member._email) {
 							    body += "<email>" + xml.encodeXmlEntry(member._email) + "</email>";
 							}
@@ -1084,9 +1116,19 @@ define(
 						 *            passed to this callback is the community object (or error object). From the error object. one can get access to the
 						 *            javascript library error object, the status code and the error message.
 						 */
-						createCommunity : function(community, args) {
-							if (!(validate._validateInputTypeAndNotify("CommunityService", "createCommunity", "Community", community, "sbt.connections.Community", args))) {
-								return ;
+						createCommunity : function(communityArgs, args) {
+							if(!communityArgs.declaredClass){
+								if (!(validate._validateInputTypeAndNotify("CommunityService", "createCommunity", "Community", communityArgs, "object", args))) {
+									return ;
+								}
+							var community = new Community(this);
+							community.fields = communityArgs;
+							}
+								else {
+									if (!(validate._validateInputTypeAndNotify("CommunityService", "createCommunity", "Community", communityArgs, "sbt.connections.Community", args))) {
+										return ;
+									}
+									var community = communityArgs;
 							}
 							var headers = {
 								"Content-Type" : "application/atom+xml"
@@ -1251,10 +1293,18 @@ define(
 							})) {
 								return;
 							}
-							if (!(validate._validateInputTypeAndNotify("CommunityService", "addMember", "Member", inputMember, "sbt.connections.Member", args))) {
-								return ;
+							if(inputMember.declaredClass){
+								if (!(validate._validateInputTypeAndNotify("CommunityService", "addMember", "Member", inputMember, "sbt.connections.Member", args))) {
+									return ;
+								}
+							}else{
+								if (!(validate._validateInputTypeAndNotify("CommunityService", "addMember", "Member", inputMember, "object", args))) {
+									return ;
+								}
+								member = new Member(inputMember);
+								member.memberFields = inputMember;
 							}
-							if (!inputMember._validate("CommunityService", "addMember", args, {
+							if (!member._validate("CommunityService", "addMember", args, {
 								isValidateId : true
 							})) {
 								return;
@@ -1331,10 +1381,11 @@ define(
 							var headers = {
 								"Content-Type" : "application/atom+xml"
 							};
-							var _param = _self._isEmail(member._id) ? "&email=" : "&userid=";
+							var _param = member._userid ?  "&userid=" : "&email=" ;
+							var _memberId = member._userid ? member._userid : member._email ;
 							this._endpoint.xhrDelete({
 								serviceUrl : this._constructCommunityUrl(Constants._methodName.removeMember) + "?communityUuid="
-										+ encodeURIComponent(community._id) + _param + encodeURIComponent(member._id),
+										+ encodeURIComponent(community._id) + _param + encodeURIComponent(_memberId),
 								headers : headers,
 								load : function(data) {
 									if (args.load)

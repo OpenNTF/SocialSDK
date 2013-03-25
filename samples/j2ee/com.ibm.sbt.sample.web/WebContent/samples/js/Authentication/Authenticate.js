@@ -1,30 +1,5 @@
 require(["sbt/dom", "sbt/Endpoint", "sbt/config"], function(dom, Endpoint, config) {
-	
-	/*creating table*/
-	var table = document.createElement("table");
-	table.setAttribute("class", "table table-bordered table-striped");
-	document.getElementById("content").appendChild(table);
-	/*creating table*/
-	
-	/*creating header rows*/
-	var headRow = document.createElement("tr");
-	headRow.setAttribute("class", "label label-info");
-	table.appendChild(headRow);
-	var endpointNameTH = document.createElement("th");
-	var loginStatusTH = document.createElement("th");
-	var loginActionTH = document.createElement("th");
-	headRow.appendChild(endpointNameTH);
-	headRow.appendChild(loginStatusTH);
-	headRow.appendChild(loginActionTH);
-	endpointNameTH.setAttribute("id", "thEPName");
-	loginStatusTH.setAttribute("id", "thLoginStatus");
-	loginStatusTH.setAttribute("id", "thLoginStatus");
-	loginActionTH.setAttribute("id", "thLoginAction");
-	dom.setText("thEPName", "Endpoint");
-	dom.setText("thLoginStatus", "Login Status");
-	dom.setText("thLoginAction", "Login Action");
-	/*creating heared rows*/
-	
+	var table = dom.byId('authenticationTable');
 	/*creating rows*/
 	var endpoints = sbt.Endpoints;
 	for (var endpointName in endpoints) {
@@ -63,12 +38,12 @@ require(["sbt/dom", "sbt/Endpoint", "sbt/config"], function(dom, Endpoint, confi
 			loginButton.style.display = "none";
 			dom.setText("td2"+endpointName, "Logged in");
 			logoutButton.onclick= function (){
-				Endpoint.find(this.name).logout({
+				Endpoint.find(this.name).logout({           // Calling logout. (this.name has endpoint name)
 					success: function(logoutResult){
 						document.location.reload();
 					},
 					failure: function(logoutResult){
-						alert("failed");
+						dom.setText("td2"+endpointName, "Logged in - failed to logout");
 					}
 				}); 
 			};
@@ -76,7 +51,7 @@ require(["sbt/dom", "sbt/Endpoint", "sbt/config"], function(dom, Endpoint, confi
 			logoutButton.style.display = "none";
 			dom.setText("td2"+endpointName, "Not Logged in");
 			loginButton.onclick= function (){
-				Endpoint.find(this.name).authenticate(); 
+				Endpoint.find(this.name).authenticate();    // Calling authenticate. (this.name has endpoint name)
 			};
 		}
 	}

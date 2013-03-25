@@ -282,7 +282,9 @@ public class SnippetServlet extends BaseHttpServlet {
 		addCDataElement(sb, "js", snippet.getJs());
 		addCDataElement(sb, "html", snippet.getHtml());
 		addCDataElement(sb, "css", snippet.getCss());
+		addCDataElement(sb, "theme", snippet.getTheme());
 		addCDataElement(sb, "description", snippet.getDescription());
+		
 		if (snippet.getTags() != null) {
 			addCDataElement(sb, "tags", StringUtil.concatStrings(snippet.getTags(), ',', true));
 		}

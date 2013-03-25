@@ -16,6 +16,7 @@
 package com.ibm.sbt.sample.web.util;
 
 import java.io.IOException;
+import java.util.Properties;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -267,14 +268,37 @@ public class SnippetFactory {
     private static JSSnippet createSnippetFromXml(String xml) {
         try {
             Document document = DOMUtil.createDocument(xml);
+            XResult unid = DOMUtil.evaluateXPath(document, "unid");
             XResult js = DOMUtil.evaluateXPath(document.getDocumentElement(), "js");
             XResult html = DOMUtil.evaluateXPath(document.getDocumentElement(), "html");
             XResult css = DOMUtil.evaluateXPath(document.getDocumentElement(), "css");
+            XResult theme = DOMUtil.evaluateXPath(document.getDocumentElement(), "theme");
+            XResult description = DOMUtil.evaluateXPath(document.getDocumentElement(), "description");
+            XResult tags = DOMUtil.evaluateXPath(document.getDocumentElement(), "tags");
+            XResult labels = DOMUtil.evaluateXPath(document.getDocumentElement(), "labels");
             
             JSSnippet snippet = new JSSnippet();
-            if (js != null) snippet.setJs(js.getStringValue());
-            if (html != null) snippet.setHtml(html.getStringValue());
-            if (css != null) snippet.setCss(css.getStringValue());
+            if(unid != null) 
+            	snippet.setUnid(unid.getStringValue());
+            if (js != null) 
+            	snippet.setJs(js.getStringValue());
+            if (html != null) 
+            	snippet.setHtml(html.getStringValue());
+            if (css != null) 
+            	snippet.setCss(css.getStringValue());
+            
+            Properties p = new Properties();
+            snippet.init(p);
+            
+            if(theme != null) 
+            	snippet.setTheme(theme.getStringValue());
+            if(description != null) 
+            	snippet.setDescription(description.getStringValue());
+            if(tags != null) 
+            	snippet.setTags(tags.getValues());
+            if(labels != null) 
+            	snippet.setLabels(labels.getValues());
+            
             return snippet;
         } catch (Exception e) {
             return null;

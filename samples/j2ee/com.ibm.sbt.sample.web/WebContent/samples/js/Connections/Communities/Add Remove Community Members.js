@@ -62,8 +62,7 @@ function removeMembers(community, members, dom) {
 
 function addMember(community, email, dom) {
     var input = dom.byId("memberEmail");
-    community.addMember({
-        email: email,
+    community.addMember({id : email},{       
         load : function(member){
             loadMembers(community, dom);
         },
@@ -108,7 +107,7 @@ function handleMembersLoaded(members, dom) {
         dom.destroy(select.childNodes[0]);
     }
     for(var i = 0; i < members.length; i++) {
-        var node = dom.create("option", { value: members[i].getId(), innerHTML: members[i].getEmail() }, select);
+        var node = dom.create("option", { value: members[i].getId(), innerHTML: members[i].getEmail() || members[i].getName() }, select);
     }
     
     currentMembers = members;
@@ -151,8 +150,7 @@ function addOnClickHandlers(communityService, dom) {
     dom.byId("addBtn").onclick = function(evt) {
         if (currentCommunity) {
             var input = dom.byId("memberEmail");
-            currentCommunity.addMember({
-                email: input.value,
+            currentCommunity.addMember({ id: input.value},{
                 load : function(member){
                     getMembers(dom, community);
                 },

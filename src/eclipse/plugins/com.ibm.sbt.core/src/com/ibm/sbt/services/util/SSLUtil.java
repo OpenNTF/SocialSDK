@@ -16,6 +16,7 @@
 package com.ibm.sbt.services.util;
 
 import java.io.IOException;
+import java.security.SecureRandom;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 

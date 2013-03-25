@@ -14,7 +14,7 @@
 				id="eventHandler2" refreshMode="partial" refreshId="mainPanel">
 				<xp:this.action>
 					<xp:deleteSelectedDocuments view="dataView1"
-						message="This operation cannot be undone.\nDo you want to continue?">
+						message="This operation cannot be undone.\\nDo you want to continue?">
 					</xp:deleteSelectedDocuments>
 				</xp:this.action>
 			</xp:eventHandler>
@@ -26,7 +26,7 @@
 					<xp:actionGroup>
 						<xp:actionGroup>
 							<xp:confirm
-								message="You are deleting all the snippets in this view. This operation cannot be undone.\nDo you want to continue?">
+								message="You are deleting all the snippets in this view. This operation cannot be undone. Do you want to continue?">
 							</xp:confirm>
 						</xp:actionGroup>
 						<xp:executeScript>

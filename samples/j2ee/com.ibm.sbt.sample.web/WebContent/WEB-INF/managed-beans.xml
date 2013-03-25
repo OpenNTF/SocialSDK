@@ -290,4 +290,76 @@
 			<value>true</value>
 		</managed-property>
 	</managed-bean>
+
+	<!-- Linkedin -->	
+	
+	<managed-bean>
+		<managed-bean-name>LinkedInStore</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.security.authentication.oauth.consumer.store.MemoryTokenStore</managed-bean-class>
+
+		<managed-bean-scope>application</managed-bean-scope>
+		<!-- Fixed OAuth Application parameters -->
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>linkedinOA2</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.services.endpoints.LinkedInOAuth2Endpoint</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<!-- Endpoint URL -->
+		<managed-property>
+			<property-name>url</property-name>
+			<value>%{linkedinoa2.url}</value>
+		</managed-property>
+		<!-- Trust the connection -->
+		<managed-property>
+			<property-name>forceTrustSSLCertificate</property-name>
+			<value>true</value>
+		</managed-property>
+		<!-- Fixed values for the registered application -->
+		<managed-property>
+			<property-name>consumerKey</property-name>
+			<value>%{linkedinoa2.consumerKey}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>consumerSecret</property-name>
+			<value>%{linkedinoa2.consumerSecret}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>requestTokenURL</property-name>
+			<value>%{linkedinoa2.requestTokenURL}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>authorizationURL</property-name>
+			<value>%{linkedinoa2.authorizationURL}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>accessTokenURL</property-name>
+			<value>%{linkedinoa2.accessTokenURL}</value>
+		</managed-property>	
+		<!-- Access to the token store -->
+		<managed-property>
+			<property-name>tokenStore</property-name>
+			<value>LinkedInStore</value>
+		</managed-property>
+		<managed-property>
+			<property-name>serviceName</property-name>
+			<value>linkedinoa2</value>
+		</managed-property>
+		<managed-property>
+			<property-name>appId</property-name>
+			<value>%{linkedinoa2.appId}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>supportsFrames</property-name>
+			<value>false</value>
+		</managed-property>
+		<managed-property>
+			<property-name>scope</property-name>
+			<value>%{linkedinoa2.scope}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>state</property-name>
+			<value>%{linkedinoa2.state}</value>
+		</managed-property>		
+	</managed-bean>
 </faces-config>

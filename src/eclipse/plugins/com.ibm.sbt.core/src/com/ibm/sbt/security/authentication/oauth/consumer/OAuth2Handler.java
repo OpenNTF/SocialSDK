@@ -14,17 +14,23 @@
 
 package com.ibm.sbt.security.authentication.oauth.consumer;
 
+import java.awt.Desktop;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.net.URI;
 import java.net.URLEncoder;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
@@ -52,8 +58,6 @@ import com.ibm.sbt.security.authentication.oauth.consumer.store.TokenStore;
 import com.ibm.sbt.service.util.ServiceUtil;
 import com.ibm.sbt.services.util.AnonymousCredentialStore;
 import com.ibm.sbt.services.util.SSLUtil;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 public class OAuth2Handler extends OAuthHandler {
@@ -78,6 +82,7 @@ public class OAuth2Handler extends OAuthHandler {
 	private String applicationPage;
 	private int expireThreshold;
 	public boolean forceTrustSSLCertificate = false;
+	public boolean supportsFrames = true;
 	
 	// Persistence store code
 	private boolean storeRead;
@@ -276,6 +281,8 @@ public class OAuth2Handler extends OAuthHandler {
 		}
 		if (responseCode != HttpStatus.SC_OK) {
 			if (responseCode == HttpStatus.SC_UNAUTHORIZED) {
+			    String msg = "Unable to retrieve access token. Please check in OAuth 2.0 registration for {0} that the client secret matches the consumer key.";
+			    logger.info(MessageFormat.format(msg, consumerKey));
 				throw new Exception("getAccessToken failed with Response Code: Unauthorized (401),<br>Msg: " + responseBody);
 			} else if (responseCode == HttpStatus.SC_BAD_REQUEST) {
 				throw new Exception("getAccessToken failed with Response Code: Bad Request (400),<br>Msg: " + responseBody);
@@ -302,7 +309,7 @@ public class OAuth2Handler extends OAuthHandler {
 		return "Bearer "+ accessToken;
 	}
 
-	private void setOAuthData(String responseBody) {
+	protected void setOAuthData(String responseBody) {
 		accessToken = getTokenValue(responseBody, Configuration.OAUTH2_ACCESS_TOKEN);
 		refreshToken = getTokenValue(responseBody, Configuration.OAUTH2_REFRESH_TOKEN);
 		String issuedOnDate = getTokenValue(responseBody, Configuration.OAUTH2_ISSUEDON);
@@ -465,6 +472,13 @@ public class OAuth2Handler extends OAuthHandler {
 		return consumerKey;
 	}
 	
+	public void setSupportsFrames(boolean supportsFrames) {
+		this.supportsFrames = supportsFrames;
+	}
+
+	public boolean getSupportsFrames() {
+		return supportsFrames;
+	}
 	//Persistance related code
 	
     
@@ -689,7 +703,13 @@ public class OAuth2Handler extends OAuthHandler {
 		
 		Object resp = Context.get().getHttpResponse();
 		try {
-			Context.get().sendRedirect(getAuthorizationNetworkUrl());
+			if(getSupportsFrames()){
+				Context.get().sendRedirect(getAuthorizationNetworkUrl());
+			}
+			else{
+				// Certain outh based app's do not support frames, open a new window for them
+				Desktop.getDesktop().browse(new URI(getAuthorizationNetworkUrl())); 
+			}
 		} catch (Exception e) {
 			Platform.getInstance().log(e);
 		}

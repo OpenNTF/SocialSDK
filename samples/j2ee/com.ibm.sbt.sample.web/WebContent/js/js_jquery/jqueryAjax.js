@@ -2,6 +2,7 @@
 
     var snippetPage = "includes/js_snippet.jsp";
     var previewPage = "javascriptPreview.jsp";
+    var testerPage = "javascriptTester.jsp";
 
     function getUrlParameter(url, name) {
         return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(url)||[,""])[1].replace(/\+/g, '%20'))||null;
@@ -20,6 +21,9 @@
         $("#snippetContainer").load(snippetQuery);
         // refresh iframe with javascriptPreview.jsp.
         var previewQuery = previewPage + parameters;
+        if (snippet.substring(0, 4) == "sbt_") {
+            previewQuery = testerPage + parameters;
+        }
         $("#previewFrame").attr('src', previewQuery);
 
         // update previewLink
@@ -137,7 +141,11 @@
         };
         
         var setLeafBehaviour = function(){
-            $(".leafNode").click(onLeafNodeClicked);
+            $(".leafNode").each(function(index) {
+                var data = $.hasData( this ) && $._data( this );
+                if(!data)
+                    $(this).click(onLeafNodeClicked);
+            });
             $("div[class*='leafNode'] > div > span").css('cursor', 'pointer');
         };
 

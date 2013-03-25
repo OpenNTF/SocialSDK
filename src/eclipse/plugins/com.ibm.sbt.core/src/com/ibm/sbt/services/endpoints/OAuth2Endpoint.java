@@ -28,7 +28,7 @@ import com.ibm.sbt.util.SBTException;
 
 public class OAuth2Endpoint extends AbstractEndpoint {
 
-	private final OAuth2Handler	oAuthHandler	= new OAuth2Handler();
+	protected OAuth2Handler	oAuthHandler	= new OAuth2Handler();
 
 	@Override
 	public void checkValid() throws SBTException {
@@ -167,6 +167,15 @@ public class OAuth2Endpoint extends AbstractEndpoint {
 	public String getConsumerSecret() {
 		return oAuthHandler.getConsumerSecret();
 	}
+	
+	public void setSupportsFrames(boolean supportsFrames) {
+		oAuthHandler.setSupportsFrames(supportsFrames);
+	}
+
+	public boolean getSupportsFrames() {
+		return oAuthHandler.getSupportsFrames();
+	}
+	
 
 	@Override
 	public String getAuthType() {
@@ -204,6 +213,14 @@ public class OAuth2Endpoint extends AbstractEndpoint {
 		oAuthHandler.setConsumerKey(null);
 		oAuthHandler.setConsumerSecret(null);
 		oAuthHandler.getAccessToken();
+	}
+	
+	public OAuth2Handler getHandler(){
+		return oAuthHandler;
+	}
+	
+	protected void setHandler(OAuth2Handler handler){
+		this.oAuthHandler = handler;
 	}
 
 }

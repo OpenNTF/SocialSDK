@@ -1,7 +1,9 @@
 require(["sbt/connections/ActivityStreamService", "sbt/dom"], function(ActivityStreamService, dom) {
+	var id = "%{sample.id1}";
 	dom.byId("loading").style.visibility = "visible"; 
 	var activityStreamService = new ActivityStreamService();
-	activityStreamService.getMyStatusUpdates({
+	activityStreamService.getUpdatesFromUser({
+		userID : id,
 		load : function(as) {
 			var aEntries = as.getEntries();//get array of all activityEntry Objects
 			if(aEntries.length == 0){
@@ -20,6 +22,6 @@ require(["sbt/connections/ActivityStreamService", "sbt/dom"], function(ActivityS
 	        dom.setText("content","Error received. Error Code = " +  error.code + ". Error Message = " + error.message);
 	        dom.byId("loading").style.visibility = "hidden"; 
 		}
-}
+	}
 	);
 });

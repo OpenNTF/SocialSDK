@@ -1,4 +1,4 @@
-require(["sbt/connections/ActivityStreamService", "sbt/connections/ActivityStreamConstants","sbt/dom"], function(ActivityStreamService, ASConstants, dom) {
+require(["sbt/connections/ActivityStreamService","sbt/dom"], function(ActivityStreamService, dom) {
 	dom.byId("loading").style.visibility = "visible"; 
 	var activityStreamService = new ActivityStreamService();
 	activityStreamService.getUpdatesFromMyNetwork({

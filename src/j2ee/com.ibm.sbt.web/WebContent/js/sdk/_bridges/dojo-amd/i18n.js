@@ -18,12 +18,47 @@
  * Social Business Toolkit SDK.
  * @module i18n
  */
-define(['dojo/i18n'],function(i18n) {
+define(['dojo/i18n', 'dojo/date/locale'],function(i18n, dateLocale) {
 	    var load = function(id, require, callback){	    	
 	    	i18n.load(id, require, callback); 
-	    };	    
+	    };
+	    
+	    var nls = {
+	            todayAt : "today at ",
+	            on : "on "
+	    };
 	    return {
-	    	load : load	    	
+	    	load : load,
+	    	
+	    	getUpdatedLabel: function(dateStr) {
+	            var date = new Date(dateStr);
+	            var dateClone = new Date(date.getTime());
+	            var now = new Date();
+	            if (dateClone.setHours(0,0,0,0) == now.setHours(0,0,0,0)) {
+	                return nls.todayAt + this.getLocalizedTime(date);
+	            } else {
+	                return nls.on + this.getLocalizedDate(date);
+	            }
+	        },
+	        
+	        getSearchUpdatedLabel: function(dateStr) {
+	            var date = new Date(dateStr);
+	            var dateClone = new Date(date.getTime());
+	            var now = new Date();
+	            if (dateClone.setHours(0,0,0,0) == now.setHours(0,0,0,0)) {
+	                return nls.todayAt + this.getLocalizedTime(date);
+	            } else {
+	                return this.getLocalizedDate(date);
+	            }
+	        },
+	        
+	        getLocalizedTime: function(date) {
+	            return dateLocale.format(date, { selector:"time",formatLength:"short" });
+	        },
+	            
+	        getLocalizedDate: function(date) {
+	            return dateLocale.format(date, { selector:"date",formatLength:"medium" });
+	        }
 	    }; 
 });
 

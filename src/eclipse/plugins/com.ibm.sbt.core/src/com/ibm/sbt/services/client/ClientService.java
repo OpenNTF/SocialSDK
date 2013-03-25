@@ -65,6 +65,7 @@ import com.ibm.commons.xml.util.XMIConverter;
 import com.ibm.sbt.plugin.SbtCoreLogger;
 import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
+import com.ibm.sbt.services.endpoints.LinkedInOAuth2Endpoint;
 import com.ibm.sbt.services.util.SSLUtil;
 import com.ibm.sbt.util.SBTException;
 
@@ -97,7 +98,7 @@ public abstract class ClientService {
 	// ?? What is it for?
 	public static final Handler			FORMAT_CONNECTIONS_OUTPUT	= new HandlerConnectionHeader();
 
-	private Endpoint					endpoint;
+	protected Endpoint					endpoint;
 
 	public ClientService() {
 	}

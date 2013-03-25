@@ -60,7 +60,7 @@ importExport.importAssets(type,name,true);}]]></xp:this.action>
 								refreshMode="complete">
 								<xp:this.action><![CDATA[#{javascript:var name = viewEntry.getColumnValue('name')
 var type = viewEntry.getColumnValue('type')
-importExport.deleteSnippets(type,name);}]]></xp:this.action>
+importExport.deleteAssets(type,name);}]]></xp:this.action>
 							</xp:eventHandler>
 						</xp:link>
 					</xe:listInline>
@@ -81,7 +81,7 @@ importExport.deleteSnippets(type,name);}]]></xp:this.action>
 document1.replaceItemValue("Source","file")}]]></xp:this.postNewDocument>
 				</xp:dominoDocument>
 			</xp:this.data>
-			<xe:formTable id="formTable2" formTitle="Code Snippet"
+			<xe:formTable id="formTable2" formTitle="Assets"
 				formDescription="Import Source">
 				<xp:this.facets>
 					<xp:panel xp:key="footer" id="panel2">

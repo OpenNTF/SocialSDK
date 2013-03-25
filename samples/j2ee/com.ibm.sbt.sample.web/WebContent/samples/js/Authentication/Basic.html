@@ -1,0 +1,24 @@
+<div class="form-horizontal">
+    <legend>Basic Authentication</legend>
+	<table class='table table-bordered'>
+		<tr class='label label-info'>
+			<td><b>LOGIN STATUS</b></th>
+			<td><b>ACTION</b></th>
+		</tr>
+		<tr>
+			<td align=center width=50%>
+				<span id="connectionsLoginStatus"></span>
+			</td>
+			<td align=center width=50%>
+				<div class="btn-group" id="connectionsLogin">
+					<button class="btn" id="connectionsLoginPopup" onclick="login('popup')">Popup</button>
+					<button class="btn" id="connectionsLoginDialog" onclick="login('dialog')">Dialog</button>
+					<button class="btn" id="connectionsLoginMW" onclick="login('mainWindow')">Main Window</button>
+				</div>
+				<div class="btn-group" id="connectionsLogout">
+					<button class="btn" onclick="logout()">Logout</button>
+				</div>
+			</td>
+		</tr>
+	</table>
+</div>

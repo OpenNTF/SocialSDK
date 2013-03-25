@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config>
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/custom</namespace-uri>
+    <default-prefix>xc</default-prefix>
+  </faces-config-extension>
+  <composite-component>
+    <component-type>ccExplorerAPIEntry</component-type>
+    <composite-name>ccExplorerAPIEntry</composite-name>
+    <composite-file>/ccExplorerAPIEntry.xsp</composite-file>
+    <composite-extension>
+      <designer-extension>
+        <in-palette>true</in-palette>
+      </designer-extension>
+    </composite-extension>
+    <property>
+      <property-name>expandEntries</property-name>
+      <property-class>boolean</property-class>
+      <display-name>Expand Entries</display-name>
+    </property>
+  </composite-component>
+</faces-config>

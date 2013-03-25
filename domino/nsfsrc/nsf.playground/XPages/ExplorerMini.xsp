@@ -37,8 +37,6 @@ function getBodyHeight() {
 	}
 	return -1; 
 }
-dojo.ready(10000,setTimeout(refreshFrameHeight,200));
-
 ]]></xp:this.value>
 	</xp:scriptBlock>
 
@@ -61,268 +59,21 @@ return apiBean.loadAPI(e,param["unid"]);
 }]]></xp:this.value>
 						</xp:dataContext>
 					</xp:this.dataContexts>
-					<xp:div rendered="#{javascript:return !(apis.items &amp;&amp; apis.items.length>0);}">
+					<xp:div
+						rendered="#{javascript:return !(apis.items &amp;&amp; apis.items.length>0);}">
 						There is no API Explorer entry available
 					</xp:div>
-					<xp:div rendered="#{javascript:return (apis.items &amp;&amp; apis.items.length>0);}">
+					<xp:div
+						rendered="#{javascript:return (apis.items &amp;&amp; apis.items.length>0);}">
 						<xp:repeat id="repeat1" var="item"
 							value="#{javascript:return apis.items;}" indexVar="idx">
-
-							<xp:div styleClass="explorer_summary">
-								<xp:link id="link3" styleClass="apiheader"
-									onclick="toggleSection('#{id:expDetails}')">
-									<xp:table styleClass="lotusTable" style="width:100%">
-										<xp:tr>
-											<xp:td styleClass="explorer_col1">
-												<xe:multiImage id="multiImage1"
-													value='#{javascript:item.http_method}'>
-													<xe:this.icons>
-														<xe:iconEntry url="/explorer_get.png"
-															selectedValue="get" alt="GET method">
-														</xe:iconEntry>
-														<xe:iconEntry url="/explorer_put.png"
-															selectedValue="put" alt="PUT method">
-														</xe:iconEntry>
-														<xe:iconEntry url="/explorer_post.png"
-															selectedValue="post" alt="POST method">
-														</xe:iconEntry>
-														<xe:iconEntry url="/explorer_delete.png"
-															selectedValue="delete" alt="DELETE method">
-														</xe:iconEntry>
-													</xe:this.icons>
-												</xe:multiImage>
-											</xp:td>
-											<xp:td styleClass="explorer_col2">
-												<xp:div styleClass="explorer_sum_title">
-													<h4 class="lotusTitle">
-														<xp:text value="#{javascript:item.name}" escape="true"
-															id="computedField6" disableTheme="true">
-														</xp:text>
-													</h4>
-													<p>
-														<xp:text escape="true" id="computedField1"
-															value="#{javascript:item.description}" disableTheme="true">
-														</xp:text>
-													</p>
-													<p>
-														<xp:text escape="true" id="computedField7" value="#{javascript:item.uri}">
-														</xp:text>
-													</p>
-												</xp:div>
-											</xp:td>
-											<xp:td styleClass="explorer_col3" style="width: 1px">
-												<xp:link escape="true" text="Documentation" id="link1"
-													rendered="#{javascript:item.doc_url}" value="#{javascript:return item.doc_url;}"
-													target="_blank">
-												</xp:link>
-											</xp:td>
-											<xp:td styleClass="explorer_col4" style="width: 1px">
-												<xp:text escape="true" id="computedField9"
-													styleClass="sinceVersion" value="#{javascript:item.since}"
-													disableTheme="true" rendered="#{javascript:item.since}">
-												</xp:text>
-											</xp:td>
-										</xp:tr>
-									</xp:table>
-								</xp:link>
-								<xp:panel id="expDetails" styleClass="explorer_details">
-									<xp:this.dataContexts>
-										<xp:dataContext value="#{javascript:apiBean.loadParameters(item)}"
-											var="items">
-										</xp:dataContext>
-									</xp:this.dataContexts>
-									<xp:dataTable id="dataTable1" styleClass="explorer_detailsTable"
-										value="#{javascript:items}" var="p" rendered="#{javascript:items.length>0}">
-										<xp:column id="column1" styleClass="paramCol1">
-											<xp:text escape="true" id="computedField3" value="#{p.name}"
-												disableTheme="true">
-											</xp:text>
-										</xp:column>
-										<xp:column id="column7" styleClass="paramCol5">
-											<xp:text escape="true" id="computedField10"
-												styleClass="sinceVersionMini" value="#{javascript:p.since}"
-												disableTheme="true" rendered="#{javascript:p.since}">
-											</xp:text>
-										</xp:column>
-										<xp:column id="column2" styleClass="paramCol2">
-											<xe:switchFacet id="switchFacet1"
-												defaultFacet="text">
-												<xe:this.selectedFacet><![CDATA[#{javascript:return p.type||"text"}]]></xe:this.selectedFacet>
-												<xp:this.facets>
-													<xp:inputText xp:key="text" value="#{p.value}"
-														dojoType="dijit.form.ValidationTextBox" id="inputText1"
-														style="width: 30em">
-														<xp:this.attrs>
-															<xp:attr name="data-param" value="#{p.name}">
-															</xp:attr>
-														</xp:this.attrs>
-														<xp:this.dojoAttributes>
-															<xp:dojoAttribute name="required"
-																value="#{javascript:(p.optional!=true).toString()}">
-															</xp:dojoAttribute>
-															<xp:dojoAttribute name="regExp"
-																value="#{javascript:p.regexp}">
-															</xp:dojoAttribute>
-														</xp:this.dojoAttributes>
-													</xp:inputText>
-													<xp:inputText xp:key="int" value="#{p.value}"
-														dojoType="dijit.form.NumberTextBox" id="inputText2" style="width: 30em">
-														<xp:this.attrs>
-															<xp:attr name="data-param" value="#{p.name}">
-															</xp:attr>
-														</xp:this.attrs>
-														<xp:this.dojoAttributes>
-															<xp:dojoAttribute name="required"
-																value="#{javascript:(p.optional!=true).toString()}">
-															</xp:dojoAttribute>
-														</xp:this.dojoAttributes>
-													</xp:inputText>
-													<xp:inputTextarea xp:key="textarea" value="#{p.value}"
-														dojoType="dijit.form.SimpleTextarea" id="inputText3" rows="10"
-														style="width: 30em; margin-left: 1px">
-														<xp:this.attrs>
-															<xp:attr name="data-param" value="#{p.name}">
-															</xp:attr>
-														</xp:this.attrs>
-														<xp:this.dojoAttributes>
-															<xp:dojoAttribute name="required"
-																value="#{javascript:(p.optional!=true).toString()}">
-															</xp:dojoAttribute>
-														</xp:this.dojoAttributes>
-													</xp:inputTextarea>
-													<!--
-														Doesn't seem to work properly and anyway is not needed
-														<xp:inputTextarea xp:key="textarea" value="#{p.value}"
-														dojoType="ValidationTextarea" id="inputTextarea1"
-														rows="10" style="width: 30em; margin-left: 1px">
-														<xp:this.attrs> <xp:attr name="data-param"
-														value="#{p.name}"> </xp:attr> </xp:this.attrs>
-														<xp:this.dojoAttributes> <xp:dojoAttribute name="required"
-														value="#{javascript:(p.optional!=true).toString()}">
-														</xp:dojoAttribute> </xp:this.dojoAttributes>
-														</xp:inputTextarea>
-													-->
-													<xp:comboBox id="comboBox1" value="#{p.value}"
-														xp:key="boolean" dojoType="dijit.form.ComboBox" style="width: 30em%">
-														<xp:this.attrs>
-															<xp:attr name="data-param" value="#{p.name}">
-															</xp:attr>
-														</xp:this.attrs>
-														<xp:selectItem itemLabel="">
-														</xp:selectItem>
-														<xp:selectItem itemLabel="true">
-														</xp:selectItem>
-														<xp:selectItem itemLabel="false">
-														</xp:selectItem>
-													</xp:comboBox>
-													<xp:comboBox id="comboBox2" value="#{p.value}"
-														xp:key="enumerated" dojoType="dijit.form.ComboBox" style="width: 30em%">
-														<xp:this.attrs>
-															<xp:attr name="data-param" value="#{p.name}">
-															</xp:attr>
-														</xp:this.attrs>
-														<xp:selectItems>
-															<xp:this.value><![CDATA[#{javascript:p.values}]]></xp:this.value>
-														</xp:selectItems>
-													</xp:comboBox>
-												</xp:this.facets>
-											</xe:switchFacet>
-										</xp:column>
-										<xp:column id="column5" styleClass="paramCol3">
-											<xp:span rendered="#{p.optional!=true}">
-												*
-										</xp:span>
-										</xp:column>
-										<xp:column id="column3" styleClass="paramCol4">
-											<xp:text escape="true" id="computedField4" value="#{p.type}">
-											</xp:text>
-										</xp:column>
-										<xp:column id="column4" styleClass="paramCol6">
-											<xp:text escape="true" id="computedField5" value="#{p.description}">
-											</xp:text>
-										</xp:column>
-									</xp:dataTable>
-									<xp:div id="div1">
-										<xp:button value="Execute"
-											style="margin-top: 5px; margin-top: 5px; padding: -5px" id="button1">
-											<xp:this.onclick><![CDATA[var p = {endpoint: '#{javascript:apis.endpoint}',item: #{javascript:toJson(item)} }
-executeService(p,'#{id:expDetails}','#{id:expResults}',refreshFrameHeight);
-]]></xp:this.onclick>
-										</xp:button>
-										<xp:link escape="true" text="Clear Results" id="link2">
-											<xp:this.onclick><![CDATA[clearResultsPanel('#{id:expResults}');
-if(refreshFrameHeight) refreshFrameHeight();]]></xp:this.onclick>
-										</xp:link>
-									</xp:div>
-									<xp:div id="expResults" styleClass="explorer_results">
-										<table>
-											<tr class="respProgress" style="display:none">
-												<td class="resCol1" colspan="2">
-													<xp:image url="/progressIndicator.gif" id="image1">
-													</xp:image>
-												</td>
-											</tr>
-											<tr class="respTimePanel" style="display:none">
-												<td class="resCol1">
-													<span class="prelabel">
-														Request Time:
-												</span>
-												</td>
-												<td class="resCol2">
-													<span class="respTime">
-													</span>
-													s
-												</td>
-											</tr>
-											<tr class="respUrlPanel" style="display:none">
-												<td class="resCol1">
-													<span class="prelabel">
-														URL:
-												</span>
-												</td>
-												<td class="resCol2">
-													<span class="respUrl"></span>
-												</td>
-											</tr>
-											<tr class="respCodePanel" style="display:none">
-												<td class="resCol1">
-													<span class="prelabel">
-														Status Code:
-												</span>
-												</td>
-												<td class="resCol2">
-													<span class="respCode">
-													</span>
-												</td>
-											</tr>
-											<tr class="respBodyPanel" style="display:none">
-												<td class="resCol1">
-													<span class="prelabel">
-														Response:
-												</span>
-												</td>
-												<td class="resCol2">
-													<pre class="respBody prettyprint">
-													</pre>
-												</td>
-											</tr>
-											<tr class="respHeadersPanel" style="display:none">
-												<td class="resCol1">
-													<span class="prelabel">
-														Headers:
-												</span>
-												</td>
-												<td class="resCol2">
-													<pre class="respHeaders">
-													</pre>
-												</td>
-											</tr>
-										</table>
-									</xp:div>
-								</xp:panel>
-							</xp:div>
+							<xc:ccExplorerAPIEntry expandEntries="true">
+							</xc:ccExplorerAPIEntry>
 						</xp:repeat>
 					</xp:div>
+					<script>
+						setTimeout(refreshFrameHeight,0);
+					</script>
 				</xp:panel>
 			</xp:this.facets>
 		</xe:dynamicContent>
@@ -339,10 +90,10 @@ if(refreshFrameHeight) refreshFrameHeight();]]></xp:this.onclick>
 	}
 }
 dojo.addOnLoad( function() {	
-	dojo.subscribe("/dojo/hashchange",loadFromHash);
 	if(dojo.hash()) {
 		loadFromHash()
 	}
+	setTimeout(refreshFrameHeight,0);
 })
 ]]></xp:this.value>
 	</xp:scriptBlock>

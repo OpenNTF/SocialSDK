@@ -140,7 +140,7 @@ define(['sbt/_bridge/declare','sbt/lang'],function(declare,lang) {
         },
         buildUrl: function(args) {
             var params = [];
-            var url = args.url;
+            var url = args._url;
             if (args.content) {
                 for (name in args.content) {
                     var param = encodeURIComponent(name) + "=" + encodeURIComponent(args.content[name]);
@@ -149,12 +149,8 @@ define(['sbt/_bridge/declare','sbt/lang'],function(declare,lang) {
                 if (params.length > 0) {
                     var query = params.join("&");
                     url += (~url.indexOf('?') ? '&' : '?') + query;
-                    return args.baseUrl + url;
                 }
             }
-            if (args.baseUrl) {
-                url = args.baseUrl + url;
-            } 
             return url;
         }
     });

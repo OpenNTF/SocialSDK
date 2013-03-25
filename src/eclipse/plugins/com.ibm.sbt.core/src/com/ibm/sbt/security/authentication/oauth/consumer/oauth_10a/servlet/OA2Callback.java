@@ -16,6 +16,8 @@
 package com.ibm.sbt.security.authentication.oauth.consumer.oauth_10a.servlet;
 
 import java.io.IOException;
+import java.text.MessageFormat;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -43,11 +45,23 @@ public class OA2Callback extends AbstractServiceHandler {
 	public static final String URL_PATH = "oauth20_cb";
 	private static final ProfilerType profilerAcquireToken = new ProfilerType("OAuth2.0: Acquire a token from the service"); //$NON-NLS-1$
 	OAuth2Handler oAuthHandler;
+	
+	private static final String sourceClass = OA2Callback.class.getName();
+	private static final Logger logger = Logger.getLogger(sourceClass);
 
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
 	 	Context context = Context.get();
 		OAuth2Handler oAuthHandler = (OAuth2Handler)context.getSessionMap().get(Configuration.OAUTH_HANDLER);
+		if (oAuthHandler == null) {
+		    // this can happen if you access the application using a different hostname
+		    // to the one registered as the OAuth2.0 redirect URI
+		    StringBuffer requestUrl = request.getRequestURL();
+		    String msg = "Unable to retrieve OAuth2.0 handler for redirect request to {0}. Please check you are accessing the application using the same hostname used in the OAuth 2.0 redirect URI.";
+		    logger.info(MessageFormat.format(msg, requestUrl));
+		    return;
+		}
+		
 		String authcode = extractAuthorizationToken(request);
 		oAuthHandler.setAuthorization_code(authcode);
 		try {

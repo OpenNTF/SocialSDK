@@ -34,10 +34,10 @@
           
               // replace substitution variables
               if (StringUtil.isNotEmpty(js)) {
-          js = ParameterProcessor.process(js);
+          js = ParameterProcessor.process(js, request);
               }
               if (StringUtil.isNotEmpty(html)) {
-          html = ParameterProcessor.process(html);
+          html = ParameterProcessor.process(html, request);
               }
           }
       } 

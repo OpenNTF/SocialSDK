@@ -15,17 +15,17 @@
  */
 
 /**
- * Defination of the endpoint module
+ * Definition of the endpoint module
  * @module sbt.Endpoint
  */
 
 /**
- * This class encapsulate an actual endpoint, with its URL, proxy and its authentication
+ * This class encapsulates an actual endpoint, with its URL, proxy and its authentication
  * mechanism.
  * @class Endpoint
  * 
  */
-define(['sbt/_bridge/declare','sbt/lang','sbt/ErrorTransport'],function(declare,lang,ErrorTransport) {
+define(['sbt/_bridge/declare','sbt/lang','sbt/ErrorTransport','sbt/pathUtil'],function(declare,lang,ErrorTransport,pathUtil) {
 
 
 var Endpoint = declare("sbt.Endpoint", null, {
@@ -185,12 +185,12 @@ var Endpoint = declare("sbt.Endpoint", null, {
 	xhr: function(method,args,hasBody) {
 		var self = this;
 		var _args = lang.mixin({},args);
-		if(!_args.url && _args.serviceUrl) {
-			_args.url = _args.serviceUrl;
-			_args.baseUrl = this.baseUrl;
-			delete _args.serviceUrl;
+		// We make sure that args has a 'url' member, with or without a proxy 
+		if(!_args.url) {
 			if(this.proxy) {
-				_args.url = this.proxy.rewriteUrl(_args.url,this.proxyPath);
+				_args.url = this.proxy.rewriteUrl(this.baseUrl,_args.serviceUrl,this.proxyPath);
+			} else {
+				_args.url = pathUtil.concat(this.baseUrl,_args.serviceUrl);
 			}
 		}
 		// Make sure the initial methods are not called
@@ -265,63 +265,109 @@ var Endpoint = declare("sbt.Endpoint", null, {
 	},
 	
 	/**
-	 * @method authenticate
-	 * @param args
+	 authenticate to an endpoint
+	 
+	 @method authenticate
+	 @param {Object} [args]  Argument object
+			@param {boolean} [args.forceAuthentication] Whether authentication is to be forced in case user is already authenticated.
+			@param {String} [args.loginUi] LoginUi to be used for authentication. possible values are: 'popup', 'dialog' and 'mainWindow'
+			@param {String} [args.loginPage] login page to be used for authentication. this property should be used in case default
+			login page is to be overridden. This only applies to 'popup' and 'mainWindow' loginUi
+			@param {String} [args.dialogLoginPage] dialog login page to be used for authentication. this property should be used in
+			case default dialog login page is to be overridden. This only applies to 'dialog' loginUi.
+			@param {Function} [args.success] This is the function which authenticate invokes when the authentication is successful.
+			@param {Function} [args.cancel] This is the function which authenticate invokes when cancel button of authenticator is clicked.
 	 */
 	authenticate : function(args) {
-		var self = this;
+		args = args || {};
 		var options = {
-			dialogLoginPage : self.loginDialogPage,
-			loginPage : self.loginPage,
-			transport : self.transport,
-			proxy : self.proxy,
-			proxyPath : self.proxyPath,
-			loginUi : self.loginUi
+			dialogLoginPage : this.loginDialogPage,
+			loginPage : this.loginPage,
+			transport : this.transport,
+			proxy : this.proxy,
+			proxyPath : this.proxyPath,
+			loginUi : args.loginUi || this.loginUi,
+			callback: args.success,
+			cancel: args.cancel
 		};
-		var doAuthentication = false;
-		if (args) {
+		if(args.forceAuthentication || !this.isAuthenticated) {
+			this.authenticator.authenticate(options);
+		}else{//call success if authentication is not required.
 			if (args.success) {
-				options.callback = args.success;
-			}
-			if (args.cancel) {
-				options.cancel = args.cancel;
-			}
-			if (args.forceAuthentication == true) {
-				doAuthentication = true;
-			} else {
-				if (self.isAuthenticated == false) {
-					doAuthentication = true;
-				} else {
-					if (args.success) {
-						args.success();
-					}
-				}
-			}
-		}else{
-			if (self.isAuthenticated == false) {
-				doAuthentication = true;
-			}
-		}
-		if(doAuthentication == true){
-			if (this.authenticator.authenticate(options)) {
-				return;
+				args.success();
 			}
 		}
 	},
-
+	
+	/**
+	 logout from an endpoint
+	 
+	 @method logout
+	 @param {Object} [args]  Argument object
+			@param {Function} [args.success] This is the function which authenticate invokes when the logout is successful.
+			@param {Function} [args.failure] This is the function which authenticate invokes when the logout is unsuccessful.
+	 */
 	logout : function(args) {
+		args = args || {};
+		var self = this;
 		var proxy = this.proxy.proxyUrl;
 		var actionURL = proxy.substring(0, proxy.lastIndexOf("/")) + "/authHandler/" + this.proxyPath + "/logout";
 		this.transport.xhr('POST',{
 			handleAs : "json",
 			url : actionURL,
 			handle : function(response) {
-				if (args) {
-					if (args.success && response.success == true) {
-						args.success(response);
-					} else if (args.failure && response.success == false) {
-						args.failure(response);
-					}
+				sbt.Endpoints[self.proxyPath].isAuthenticated = false;
+				if (args.success && response.success) {
+					args.success(response);
+				} else if (args.failure && !response.success) {
+					args.failure(response);
+				}
+			}
+		}, true);
+	},
+	
+	/**
+	 Find whether endpoint is authenticated or not.
+	 
+	 @method isAuthenticated
+	 @param {Object} [args]  Argument object
+			@param {Function} [args.load] This is the function which isAuthenticated invokes when authentication information is retrieved.
+			result property in response object returns true/false depending on whether endpoint is authenticated or not.
+	*/
+	isAuthenticated : function(args) {
+		args = args || {};
+		var proxy = this.proxy.proxyUrl;
+		var actionURL = proxy.substring(0, proxy.lastIndexOf("/")) + "/authHandler/" + this.proxyPath + "/isAuth";
+		this.transport.xhr('POST',{
+			handleAs : "json",
+			url : actionURL,
+			handle : function(response) {
+				if (args.load) {
+					args.load(response);
+				}
+			}
+		}, true);
+	},
+	
+	/**
+	 Find whether endpoint authentication is valid or not.
+	 
+	 @method isAuthenticationValid
+	 @param {Object} [args]  Argument object
+			@param {Function} [args.load] This is the function which isAuthenticationValid invokes when 
+			authentication information is retrieved.
+			result property in response object returns true/false depending on whether authentication is valid or not.
+	*/
+	isAuthenticationValid : function(args) {
+		args = args || {};
+		var proxy = this.proxy.proxyUrl;
+		var actionURL = proxy.substring(0, proxy.lastIndexOf("/")) + "/authHandler/" + this.proxyPath + "/isAuthValid";
+		this.transport.xhr('POST',{
+			handleAs : "json",
+			url : actionURL,
+			handle : function(response) {
+				if (args.load) {
+					args.load(response);
 				}
 			}
 		}, true);

@@ -15,75 +15,75 @@
 
   <build>
     <plugins>
-	  <plugin>
-		<groupId>org.apache.maven.plugins</groupId>
-		<artifactId>maven-antrun-plugin</artifactId>
-		<version>1.7</version>
-		<executions>
-		  <execution>
-		    <id>id.validate</id>
-			<phase>generate-sources</phase>
-			<goals>
-			  <goal>run</goal>
-			</goals>
-			<configuration>
-			  <target>
-			    <echo>Populating Domino eclipse plugin projects</echo>
-			    <delete includeemptydirs="true">
-				  <fileset dir="./../../domino/eclipse/plugins/com.ibm.commons.runtime">
-					<exclude name="pom.xml"/>
-					<exclude name=".jazzignore"/>
-					<exclude name="build.properties"/>
-					<exclude name="META-INF/MANIFEST.MF"/>
-				  </fileset>
-				  <fileset dir="./../../domino/eclipse/plugins/com.ibm.sbt.core">
-					<exclude name="pom.xml"/>
-					<exclude name=".jazzignore"/>
-					<exclude name="build.properties"/>
-					<exclude name="META-INF/MANIFEST.MF"/>
-				  </fileset>
-				  <fileset dir="./../../domino/eclipse/plugins/com.ibm.sbt.web">
-					<exclude name="pom.xml"/>
-					<exclude name=".jazzignore"/>
-					<exclude name="build.properties"/>
-					<exclude name="META-INF/MANIFEST.MF"/>
-				  </fileset>
-				  <fileset dir="./../../domino/eclipse/plugins/com.ibm.sbt.playground">
-					<exclude name="pom.xml"/>
-					<exclude name=".jazzignore"/>
-					<exclude name="build.properties"/>
-					<exclude name="META-INF/MANIFEST.MF"/>
-				  </fileset>
-				</delete>
-				<copy todir="./../../domino/eclipse/plugins/com.ibm.commons.runtime" overwrite="true">
-				  <fileset dir="./../../src/eclipse/plugins/com.ibm.commons.runtime">
-					<exclude name=".jazzignore"/>
-					<exclude name="pom.xml"/>
-				  </fileset>
-				</copy>
-				<copy todir="./../../domino/eclipse/plugins/com.ibm.sbt.core" overwrite="true">
-				  <fileset dir="./../../src/eclipse/plugins/com.ibm.sbt.core">
-					<exclude name=".jazzignore"/>
-					<exclude name="pom.xml"/>
-				  </fileset>
-				</copy>
-				<copy todir="./../../domino/eclipse/plugins/com.ibm.sbt.web" overwrite="true">
-				  <fileset dir="./../../src/j2ee/com.ibm.sbt.web">
-					<exclude name=".jazzignore"/>
-					<exclude name="pom.xml"/>
-				  </fileset>
-				</copy>
-				<copy todir="./../../domino/eclipse/plugins/com.ibm.sbt.playground" overwrite="true">
-				  <fileset dir="./../../src/eclipse/plugins/com.ibm.sbt.playground">
-					<exclude name=".jazzignore"/>
-					<exclude name="pom.xml"/>
-				  </fileset>
-				</copy>
-			  </target>
-			</configuration>
-		  </execution>
-		</executions>
-	  </plugin>	
-	</plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.7</version>
+        <executions>
+          <execution>
+            <id>id.validate</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target>
+                <echo>Populating Domino eclipse plugin projects</echo>
+                <delete includeemptydirs="true">
+                  <fileset dir="./../../domino/eclipse/plugins/com.ibm.commons.runtime">
+                    <exclude name="pom.xml"/>
+                    <exclude name=".jazzignore"/>
+                    <exclude name="build.properties"/>
+                    <exclude name="META-INF/MANIFEST.MF"/>
+                  </fileset>
+                  <fileset dir="./../../domino/eclipse/plugins/com.ibm.sbt.core">
+                    <exclude name="pom.xml"/>
+                    <exclude name=".jazzignore"/>
+                    <exclude name="build.properties"/>
+                    <exclude name="META-INF/MANIFEST.MF"/>
+                  </fileset>
+                  <fileset dir="./../../domino/eclipse/plugins/com.ibm.sbt.web">
+                    <exclude name="pom.xml"/>
+                    <exclude name=".jazzignore"/>
+                    <exclude name="build.properties"/>
+                    <exclude name="META-INF/MANIFEST.MF"/>
+                  </fileset>
+                  <fileset dir="./../../domino/eclipse/plugins/com.ibm.sbt.playground">
+                    <exclude name="pom.xml"/>
+                    <exclude name=".jazzignore"/>
+                    <exclude name="build.properties"/>
+                    <!--<exclude name="META-INF/MANIFEST.MF"/>-->
+                  </fileset>
+                </delete>
+                <copy todir="./../../domino/eclipse/plugins/com.ibm.commons.runtime" overwrite="true">
+                  <fileset dir="./../../src/eclipse/plugins/com.ibm.commons.runtime">
+                    <exclude name=".jazzignore"/>
+                    <exclude name="pom.xml"/>
+                  </fileset>
+                </copy>
+                <copy todir="./../../domino/eclipse/plugins/com.ibm.sbt.core" overwrite="true">
+                  <fileset dir="./../../src/eclipse/plugins/com.ibm.sbt.core">
+                    <exclude name=".jazzignore"/>
+                    <exclude name="pom.xml"/>
+                  </fileset>
+                </copy>
+                <copy todir="./../../domino/eclipse/plugins/com.ibm.sbt.web" overwrite="true">
+                  <fileset dir="./../../src/j2ee/com.ibm.sbt.web">
+                    <exclude name=".jazzignore"/>
+                    <exclude name="pom.xml"/>
+                  </fileset>
+                </copy>
+                <copy todir="./../../domino/eclipse/plugins/com.ibm.sbt.playground" overwrite="true">
+                  <fileset dir="./../../src/eclipse/plugins/com.ibm.sbt.playground">
+                    <exclude name=".jazzignore"/>
+                    <exclude name="pom.xml"/>
+                  </fileset>
+                </copy>
+              </target>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin> 
+    </plugins>
   </build>
 </project>

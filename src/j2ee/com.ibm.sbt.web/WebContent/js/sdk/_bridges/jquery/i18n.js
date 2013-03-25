@@ -22,7 +22,25 @@ define(['requirejs/i18n'],function(i18n) {
     return {
     	load: function(name, req, onload, config){
     		i18n.load(name, req, onload, config); 
-    	}
+    	},
+    	
+    	getUpdatedLabel: function(dateStr) {
+    	    i18n.getUpdatedLabel(dateStr);
+        },
+        
+        getSearchUpdatedLabel: function(dateStr) {
+            i18n.getSearchUpdatedLabel(dateStr);
+        },
+        
+        getLocalizedTime: function(date) {
+            return i18n.getLocalizedTime(date);
+        },
+            
+        getLocalizedDate: function(date) {
+            return i18n.getLocalizedDate(date);
+        }
+        
+    
     }; 
 });
 

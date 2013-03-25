@@ -28,7 +28,8 @@ define([],function() {
 		ALL        :"@all",
 		FOLLOWING  :"@following",
 		FRIENDS    :"@friends",
-		SELF       :"@self"
+		SELF       :"@self",
+		INVOLVED   :"@involved"
 	},
 	ASApplication:{
 		ALL        :"@all",

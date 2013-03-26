@@ -60,10 +60,9 @@
 </form>
 
 	<%
-	ServletContext context = pageContext.getServletContext();
-	String filePath = context.getInitParameter("fileUpload"); // we specify the parameter in web.xml for customized location for creating temp files. 
 	InputStream uploadedStream = null;
 	String contentType = request.getContentType();
+	
 	if (contentType != null && (contentType.indexOf("multipart/form-data") >= 0)) {
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 	  	ServletFileUpload upload = new ServletFileUpload(factory);
@@ -89,7 +88,6 @@
 		    		Map<String, String> headers = new HashMap<String, String>();
 					headers.put(Headers.XUpdateNonce, service.getNonce());
 					headers.put(Headers.Slug, fileName);
-					//headers.put(Headers.ContentType, contentType);
 					FileEntry fileEntry = service.upload(uploadedStream, params, headers);
 			   		if(fileEntry!=null)
 					{

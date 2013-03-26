@@ -35,6 +35,12 @@
         <dependent-module archiveName="httpcore-4.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/com.ibm.sbt.libs.j2ee/lib/httpcore-4.0.1.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="commons-io-2.4.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/com.ibm.sbt.libs.j2ee/lib/commons-io-2.4.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="commons-fileupload-1.2.2.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/com.ibm.sbt.libs.j2ee/lib/commons-fileupload-1.2.2.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="java-output-path" value="/com.ibm.sbt.sample.web/WebContent/WEB-INF/classes"/>
         <property name="context-root" value="sbt.sample.web"/>
     </wb-module>

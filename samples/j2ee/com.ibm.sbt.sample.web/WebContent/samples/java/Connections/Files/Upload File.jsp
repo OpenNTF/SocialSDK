@@ -75,6 +75,7 @@
 	        	String fileName = fi.getName();
 	        	if (fileName == "") 
 	        	{ // do nothing
+	        	out.println("No File selected");
 	        	}
 	        	else 
 	        	{
@@ -100,9 +101,10 @@
 			}
 		} 
 		catch(Exception ex) { 
-			System.out.println(ex); 
+			out.println(ex); 
 		}
 		finally {
+			if(uploadedStream != null)
 				uploadedStream.close();
 		}
 	}

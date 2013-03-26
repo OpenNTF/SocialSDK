@@ -31,7 +31,10 @@ define([],function() {
 		isFunction: function(o) {
             return typeof o == 'function';
         },
-		clone: function(o) {
+        isObject: function(o) {
+            return typeof o == 'object';
+        },
+        clone: function(o) {
 			return dojo.clone(o);
 		},
         concatPath: function () {

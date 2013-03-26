@@ -59,6 +59,9 @@ define(["has", "jquery"],function(has, $) {
         isFunction: function(o) {
             return typeof o == 'function';
         },
+        isObject: function(o) {
+            return typeof o == 'object';
+        },
 		clone: function(o) {
 			return $.clone(o);
 		},

@@ -290,13 +290,13 @@ public class SnippetFactory {
             Properties p = new Properties();
             snippet.init(p);
             
-            if(theme != null) 
+            if(theme != null && theme.getStringValue() != null) 
             	snippet.setTheme(theme.getStringValue());
-            if(description != null) 
+            if(description != null && description.getStringValue() != null) 
             	snippet.setDescription(description.getStringValue());
-            if(tags != null) 
+            if(tags != null && tags.getValues() != null) 
             	snippet.setTags(tags.getValues());
-            if(labels != null) 
+            if(labels != null && labels.getValues() != null) 
             	snippet.setLabels(labels.getValues());
             
             return snippet;
@@ -304,5 +304,5 @@ public class SnippetFactory {
             return null;
         }
     }
-	
+    
 }

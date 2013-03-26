@@ -31,6 +31,9 @@ define(['dojo/_base/lang'],function(lang) {
         isFunction: function(o) {
             return typeof o == 'function';
         },
+        isObject: function(o) {
+            return typeof o == 'object';
+        },
 		clone: function(o) {
 			return lang.clone(o);
 		},

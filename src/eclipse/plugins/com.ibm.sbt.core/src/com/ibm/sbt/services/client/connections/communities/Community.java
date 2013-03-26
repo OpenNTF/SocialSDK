@@ -9,7 +9,9 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.w3c.dom.Document;
+
 import com.ibm.commons.util.HtmlTextUtil;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.DOMUtil;
@@ -238,15 +240,24 @@ public class Community {
 	 * @return the array of Tags
 	 * @throws XMLException
 	 */
-	public String[] getTags() throws XMLException {
+	public String[] getTags() {
+	    if (this.data == null) {
+	        return new String[0];
+	    }
+	    
 		String xpQuery = getXPathQuery("tags");
-		String[] categoryFields = DOMUtil.value(this.data, xpQuery, nameSpaceCtx).split(" ");
-		String[] tags = new String[categoryFields.length - 1];
-		for (int i = 1; i < categoryFields.length; i++) {// remove occurence of category term which has scheme
-															// of "http://www.ibm.com/xmlns/prod/sn/type"
-			tags[i - 1] = categoryFields[i];
+		try {
+	        String[] categoryFields = DOMUtil.value(this.data, xpQuery, nameSpaceCtx).split(" ");
+	        String[] tags = new String[categoryFields.length - 1];
+	        // remove occurence of category term which has scheme of "http://www.ibm.com/xmlns/prod/sn/type"
+	        for (int i = 1; i < categoryFields.length; i++) {
+	            tags[i - 1] = categoryFields[i];
+	        }
+	        return tags;
+		} catch (Exception xe) {
+		    logger.log(Level.SEVERE, "Error executing xpath query on Community XML", xe);
+		    return new String[0];
 		}
-		return tags;
 	}
 
 	/**
@@ -386,29 +397,29 @@ public class Community {
 			if (fieldMapPairs.getKey().equalsIgnoreCase("addedTags")) {
 
 				String[] originalTags;
-				try {
+				//try {
 					originalTags = getTags();
 					for (String originalTag : originalTags) {// add original tags in the request
 						body += "<category term=\"" + originalTag + "\"/>";
 					}
 					body += "<category term=\"" + fieldMapPairs.getValue() + "\"/>";
 
-				} catch (XMLException e) {
-					logger.log(Level.SEVERE, "Error creating request body", e);
-				}
+				//} catch (XMLException e) {
+				//	logger.log(Level.SEVERE, "Error creating request body", e);
+				//}
 			}
 			if (fieldMapPairs.getKey().equalsIgnoreCase("deletedTags")) {
 				String[] originalTags;
-				try {
+				//try {
 					originalTags = getTags();
 					for (int i = 0; i < originalTags.length; i++) {
 						if (!fieldMapPairs.getValue().equalsIgnoreCase(originalTags[i])) {
 							body += "<category term=\"" + originalTags[i] + "\"/>";
 						}
 					}
-				} catch (XMLException e) {
-					logger.log(Level.SEVERE, "Error creating request body", e);
-				}
+				//} catch (XMLException e) {
+				//	logger.log(Level.SEVERE, "Error creating request body", e);
+				//}
 			}
 		}// end while
 

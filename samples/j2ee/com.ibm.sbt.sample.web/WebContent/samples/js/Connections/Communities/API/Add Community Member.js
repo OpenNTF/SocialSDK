@@ -1,4 +1,4 @@
-require(["sbt/connections/CommunityService","sbt/dom"], function(CommunityService,dom) {
+require(["sbt/connections/CommunityService", "sbt/dom", "sbt/json"], function(CommunityService, dom, json) {
 	var communityService = new CommunityService();
 	var communityId = "%{sample.communityId}";
 	var email = "%{sample.email2}";
@@ -13,10 +13,10 @@ require(["sbt/connections/CommunityService","sbt/dom"], function(CommunityServic
 	member.setRole("member");
 	communityService.addMember(community, member, {
 		load : function(member){
-			dom.setText("content", member.getName());
+			dom.setText("json", json.jsonBeanStringify(member));
 		},
 		error : function(error){
-			dom.setText('content',"Error received. Error Code = " +  error.code + ". Error Message = " + error.message);
+			dom.setText("json", json.jsonBeanStringify(error));
 		}
 	});
 });

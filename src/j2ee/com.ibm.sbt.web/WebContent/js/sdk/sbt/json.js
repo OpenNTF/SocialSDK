@@ -26,7 +26,7 @@
  * @static
  **/
 
-define(['sbt/_bridge/json'], function(jsonLib) {
+define(['sbt/_bridge/json', 'sbt/_bridge/lang', 'sbt/stringutil'], function(jsonLib, lang, stringUtil) {
     return {
         /**
          * Parses a String of JSON and returns a JSON Object.
@@ -49,6 +49,98 @@ define(['sbt/_bridge/json'], function(jsonLib) {
         stringify : function(jsonObj) {
             var jsonImpl = JSON || jsonLib;
             return jsonImpl.stringify(jsonObj);
+        },
+        
+        jsonBeanStringify: function(theObj) {
+            if (lang.isArray(theObj)) {
+                var jsonObjs = "[";
+                for (var i=0; i<theObj.length; i++) {
+                    jsonObjs += this._jsonBeanStringify(theObj[i]);
+                    if ((i+1)<theObj.length) {
+                        jsonObjs += ",";
+                    }
+                }
+                jsonObjs += "]";
+                return jsonObjs;
+            } else {
+                return this._jsonBeanStringify(theObj);
+            }
+        },
+        
+        jsonBean: function(theObj) {
+            if (lang.isArray(theObj)) {
+                var jsonObjs = [];
+                for (var i=0; i<theObj.length; i++) {
+                    jsonObjs.push(this._jsonBean(theObj[i]));
+                }
+                return jsonObjs;
+            } else {
+                return this._jsonBean(theObj);
+            }
+        },
+        
+        _jsonBeanStringify: function(theObj) {
+            var jsonObj = this.jsonBean(theObj);
+            return this._stringifyCyclicCheck(jsonObj, 4);
+        },
+        
+        _stringifyCyclicCheck: function(jsonObj, indent) {
+            var jsonImpl = JSON || jsonLib;
+            var seen = [];
+            return jsonImpl.stringify(jsonObj, function(key, val) {
+                if (lang.isObject(val)) {
+                    if (seen.indexOf(val) >= 0)
+                        return undefined;
+                    seen.push(val);
+                }
+                return val;
+            }, indent);
+        },
+        
+        _jsonBean: function(theObj, seen) {
+            // first check for cyclic references
+            if (!seen) {
+                seen = [];
+            }
+            if (seen.indexOf(theObj) >= 0) {
+                return undefined;
+            }
+            seen.push(theObj);
+            
+            var jsonObj = {};
+            for (var property in theObj) {
+                var value = this._getObjectValue(theObj, property, seen);
+                if (value) {
+                    jsonObj[property] = value;
+                }
+            }
+            return jsonObj;
+        },
+        
+        _getObjectValue: function(theObj, property, seen) {
+            if (lang.isFunction(theObj[property])) {
+                if (stringUtil.startsWith(property, "get") || stringUtil.startsWith(property, "is")) {
+                    try {
+                        var value = theObj[property].apply(theObj);
+                        if (value && !this._isBuiltin(value) && lang.isObject(value)) {
+                            return this._jsonBean(value, seen);
+                        }
+                        return value;
+                    } catch(error) {}
+                }
+            } else {
+                if (!stringUtil.startsWith(property, "_")) {
+                    return theObj[property];
+                }
+            }
+            return undefined;
+        },
+        
+        _isBuiltin: function(value) {
+            return ((value instanceof Date) || 
+                    (value instanceof Number) || 
+                    (value instanceof Boolean) || 
+                    lang.isArray(value));
         }
     };
 });

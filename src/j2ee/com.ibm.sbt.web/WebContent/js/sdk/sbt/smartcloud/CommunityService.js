@@ -24,8 +24,12 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
         'sbt/Endpoint','sbt/smartcloud/CommunityConstants',
         'sbt/base/BaseService', 'sbt/log','sbt/base/XmlHandler'],
 		function(declare,cfg,lang,con,xml,xpath,Cache,
-				Endpoint, CommunityConstants,
+				Endpoint, communityConstants,
 				BaseService, log, XmlHandler) {
+	
+	var communityHandler = new XmlHandler({xpath_map: communityConstants.xpath_community, xpath_feed_map: communityConstants.xpath_feed_community,nameSpaces:con.namespaces});
+	var memberHandler = new XmlHandler({xpath_map: communityConstants.xpath_member, xpath_feed_map: communityConstants.xpath_feed_member,nameSpaces:con.namespaces});
+	
 	
 	/**
 	 * Community class associated with a community. 
@@ -38,7 +42,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 	var Community = declare("sbt.smartcloud.Community", sbt.base.BaseEntity, {
 		
 		constructor: function(svc,id) {
-			var args = { entityName : "community", Constants: CommunityConstants, con: con};
+			var args = { entityName : "community", Constants: communityConstants, con: con, dataHandler: communityHandler};
 			this.inherited(arguments, [svc, id, args]);
 		},
 		
@@ -120,7 +124,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 	var Member = declare("sbt.smartcloud.Member", sbt.base.BaseEntity, {
 		
 		constructor: function(svc,id) {
-			var args = { entityName : "member", Constants: CommunityConstants};
+			var args = { entityName : "member", Constants: communityConstants, dataHandler: memberHandler};
 			this.inherited(arguments, [svc, id, args]);
 		},
 		
@@ -157,9 +161,8 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 	var CommunityService = declare("sbt.smartcloud.CommunityService", sbt.base.BaseService, {
 		
 		constructor: function(_options) {
-			var options = _options || {};
-			var handler = new XmlHandler({xpath_map: CommunityConstants.xpath_community, xpath_feed_map: CommunityConstants.xpath_feed_community,nameSpaces:con.namespaces});
-			options = lang.mixin({endpoint: options.endpoint || "smartcloud", Constants: CommunityConstants, con: con, dataHandler: handler});
+			var options = _options || {};			
+			options = lang.mixin({endpoint: options.endpoint || "smartcloud", Constants: communityConstants, con: con});
 			this.inherited(arguments, [options]);
 		},
 		
@@ -261,14 +264,36 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 					"<snx:communityType xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\">{communityType}</snx:communityType>",
 				"</entry>"].join("");
 			var xmlData = { title: community.getTitle(), content: community.getContent(), communityType: "private" };
+			var headers = {
+					"Content-Type" : "application/atom+xml"
+				};
 			this._createEntity(args,
 					{entityName: "community", serviceEntity: "communities", entityType: "my",
-						entity: Community,
-						parseId: this._parseCommunityId,
+						entity: community,
+						headers: headers,
 						xmlPayloadTemplate : xmlPayloadTemplate,
 						xmlData : xmlData
+						
 					});
 		},
+		
+		_createEntityOnLoad : function (data, ioArgs, entity, args, postArgs){
+			var newCommunityUrl = ioArgs.xhr.getResponseHeader("Location");
+			var communityId = newCommunityUrl.substring(newCommunityUrl.indexOf("communityUuid=") + "communityUuid=".length);
+			entity._id = communityId;
+			entity._fields = {};
+			if (args && args.loadIt != false) {									
+				this._load(entity, args,{entityName: "community", serviceEntity: "community", entityType: "instance",
+					entity: Community, urlParams : { communityUuid : entity._id },
+					headers : {"Content-Type" : "application/atom+xml"}
+				});
+			}else{
+				this._notifyResponse(args,entity);
+			}
+		},						
+			
+			
+		
 		
 		/**
 		Update an existing community
@@ -379,7 +404,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 			} else {
 				lang.mixin(params, { userid: memberId });
 			}
-			this._deleteEntity(args,{entityName: "community", serviceEntity: "community", entityType: "instance",
+			this._deleteEntity(args,{entityName: "community", serviceEntity: "community", entityType: "members",
 				urlParams : params
 			});
 		},
@@ -404,7 +429,8 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 					{entityName: "community", serviceEntity: "communities", entityType: "public",
 						parseId: this._parseCommunityId,
 						entity: Community,
-						headers : {"Content-Type" : "application/atom+xml"}
+						headers : {"Content-Type" : "application/atom+xml"},
+						dataHandler : communityHandler
 					});
 		},
 		
@@ -429,7 +455,8 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 					{entityName: "community", serviceEntity: "communities", entityType: "my",
 						parseId: this._parseCommunityId,
 						entity: Community,
-						headers : {"Content-Type" : "application/atom+xml"}
+						headers : {"Content-Type" : "application/atom+xml"},
+						dataHandler : communityHandler
 					});
 		},
 		
@@ -454,7 +481,8 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 					{community: community,
 						entityName: "member", serviceEntity: "community", entityType: "members",
 						entity: Member,
-						urlParams : { communityUuid : community._id }
+						urlParams : { communityUuid : community._id },
+						dataHandler : memberHandler
 					});
 			
 		},

@@ -21,8 +21,8 @@
  */
 define(
 		[ 'sbt/_bridge/declare', 'sbt/config', 'sbt/lang', 'sbt/connections/core', 'sbt/xml', 'sbt/util', 'sbt/xpath', 'sbt/Cache', 'sbt/Endpoint',
-				'sbt/connections/CommunityConstants','sbt/validate' ],
-		function(declare, cfg, lang, con, xml, util, xpath, Cache, Endpoint, Constants, validate) {
+				'sbt/connections/CommunityConstants','sbt/validate', 'sbt/base/BaseService', 'sbt/base/XmlHandler' ],
+		function(declare, cfg, lang, con, xml, util, xpath, Cache, Endpoint, communityConstants, validate, BaseService, XmlHandler) {
 
 			/**
 			 * Community class associated with a community.
@@ -30,7 +30,10 @@ define(
 			 * @class Community
 			 * @namespace connections
 			 */
-			var Community = declare("sbt.connections.Community", null, {
+			var communityHandler = new XmlHandler({xpath_map: communityConstants.xpath_community, xpath_feed_map: communityConstants.xpath_feed_community,nameSpaces:con.namespaces});
+			var memberHandler = new XmlHandler({xpath_map: communityConstants.xpath_member, xpath_feed_map: communityConstants.xpath_feed_member,nameSpaces:con.namespaces});
+			
+			var Community = declare("sbt.connections.Community", sbt.base.BaseEntity , {
 				_service : null,
 				_id : "",
 				_author : null,
@@ -38,7 +41,9 @@ define(
 				data : null,
 				fields : {},
 
-				constructor : function(svc, id) {
+				constructor : function(svc, id) {					
+					var args = { entityName : "community", Constants: communityConstants, con: con, dataHandler: communityHandler};
+					this.inherited(arguments, [svc, id, args]);
 					this._service = svc;
 					this._id = id;
 				},
@@ -85,46 +90,7 @@ define(
 					this._service.updateCommunity(this, args);
 				},
 
-				/**
-				 * Return the xpath expression for a field in the atom entry document of the community.
-				 * 
-				 * @method fieldXPathForEntry
-				 * @param {String} fieldName Xml element name in atom entry document of the community.
-				 * @return {String} xpath for the element in atom entry document of the community.
-				 */
-				fieldXPathForEntry : function(fieldName) {
-					return Constants._xpath[fieldName];
-				},
-				/**
-				 * Return the xpath expression for a field in the atom entry of the community within a feed of communities.
-				 * 
-				 * @method fieldXPathForFeed
-				 * @param {String} fieldName Xml element name in entry of the community.
-				 * @return {String} xpath for the element in entry of the community.
-				 */
-				fieldXPathForFeed : function(fieldName) {
-					return Constants._xpath_communities_Feed[fieldName];
-				},
-				/**
-				 * Return the value of a field in the community entry using xpath expression
-				 * 
-				 * @method xpath
-				 * @param {String} path xpath expression
-				 * @return {String} value of a field in community entry using the xpath expression
-				 */
-				xpath : function(path) {
-					return this.data && path ? xpath.selectText(this.data, path, con.namespaces) : null;
-				},
-				/**
-				 * Return an array of nodes from a community entry using xpath expression
-				 * 
-				 * @method xpathArray
-				 * @param {String} path xpath expression
-				 * @return {Object} an array of nodes from a community entry using xpath expression
-				 */
-				xpathArray : function(path) {
-					return this.data && path ? xpath.selectNodes(this.data, path, con.namespaces) : null;
-				},
+				
 				
 				/**
 				 * Return the value of IBM Connections community attribute from community ATOM entry document.
@@ -537,7 +503,7 @@ define(
 			 * @class Member
 			 * @namespace connections
 			 */
-			var Member = declare("sbt.connections.Member", null, {
+			var Member = declare("sbt.connections.Member", sbt.base.BaseEntity, {
 				_community : null,
 				_userid : null,
 				_name: null,
@@ -546,6 +512,8 @@ define(
 				memberFields: {},
 
 				constructor : function(args) {
+					
+					
 				    if (args.member) {
                         this._community = args.member.community;
                         this._name = args.member.name;
@@ -590,6 +558,8 @@ define(
                             this._userid = args.userid || null;
                         }
 				    }
+				    var _args = { entityName : "member", Constants: communityConstants, con: con, dataHandler: memberHandler};
+					this.inherited(arguments, [null, args.id, _args]);
 				}
 				,
 				/**
@@ -615,70 +585,13 @@ define(
 				load : function(args) {					
 					this.data = this._service._loadMember(this, args);					
 				},
-				/**
-				 * Return the xpath expression for a field in the atom entry of the community member within a feed of community members.
-				 * 
-				 * @method fieldXPathForFeed
-				 * @param {String} fieldName Field name in entry of the community member.
-				 * @return {String} xpath for the element in entry of the community member.
-				 */
-				fieldXPathForFeed : function(fieldName) {
-					return Constants._xpath_member[fieldName];
-				},
 				
-				/**
-				 * Return the xpath expression for a field in the atom entry of a community member.
-				 * 
-				 * @method fieldXPathForEntry
-				 * @param {String} fieldName Field name in entry of the community member.
-				 * @return {String} xpath for the element in entry of the community member.
-				 */
-				
-				fieldXPathForEntry : function(fieldName) {
-					return Constants._xpath_member[fieldName];
-				},
-				
-				/**
-				 * Return the value of a field in the community member entry using xpath expression
-				 * 
-				 * @method xpath
-				 * @param {String} path xpath expression for the field
-				 * @return {String} Value of a field in community entry using the xpath expression
-				 */
-				xpath : function(path) {
-					return this.data && path ? xpath.selectText(this.data, path, con.namespaces) : null;
-				},
-				
-				/**
-				 * Return the value of IBM Connections member attribute from community member ATOM entry document.
-				 * 
-				 * @method get
-				 * @param {String} fieldName Name of the field representing community member attribute in IBM Connections.
-				 * @return {String/Object} The value of the field from the community member ATOM entry document.
-				 */
-				get : function(fieldName) {					
-					return this.memberFields[fieldName] || this.xpath(this.fieldXPathForEntry(fieldName));
-				},
-				
-				/**
-				 * Sets the value of IBM Connections community member attribute.
-				 * 
-				 * @method set
-				 * @param {String} fieldName Name of the field representing community member attribute in IBM Connections.
-				 * @param {String} value Value of the field representing community member attribute in IBM Connections.				 
-				 */
-				set : function(fieldName, value) {
-					this.memberFields[fieldName] = value;
-				},
-				remove : function(fieldName) {
-					delete this.memberFields[fieldName];
-				},
 				
                 /**
-                 * Return the community associated with this member.
+                 * Return the community id of the community associated with this member.
                  * 
                  * @method getCommunity
-                 * @return {Object} Community
+                 * @return {String} Community Id of the member
                  */
                 
                 getCommunity : function() {
@@ -765,7 +678,8 @@ define(
 						return false;
 					}			
 					return true;
-				}
+				},
+				
 			});
 			/**
 			 * Community service class associated with the community service of IBM Connections.
@@ -778,14 +692,16 @@ define(
 			 */
 			var CommunityService = declare(
 					"sbt.connections.CommunityService",
-					null,
+					sbt.base.BaseService ,
 					{
 						_endpoint : null,
-
-						constructor : function(options) {
-							options = options || {};
-							this._endpoint = Endpoint.find(options.endpoint || 'connections');
-						},						
+						community : null,
+						constructor : function(_options) {
+							var options = _options || {};							
+							options = lang.mixin({endpoint: options.endpoint || "connections", Constants: communityConstants, con: con});
+							this.inherited(arguments, [options]);							
+						},
+						
 						/**
 						 * Get member entry document of a member of a community
 						 * 
@@ -834,32 +750,21 @@ define(
 						getCommunity : function(args) {
 							// return lang.isArray(id) ? this._getMultiple(id,
 							// cb,options) : this._getOne(id,load, cb,options);
-							return this._getOne(args);
+							return this._getOneCommunity(args);
 						},
 
-						_getOne : function(args) {
+						_getOneCommunity : function(args) {
 							if(args){
 								if (!(validate._validateInputTypeAndNotify("CommunityService", "getCommunity", "args", args, "object", args))) {
 									return ;
 								}
 							}
-							var community = null;
-							if(args && args.id){
-								community = new Community(this, args.id);
-							}else{
-								community = new Community(this);
-							}
-							if (args && (args.loadIt == false)) {
-								if (args.load) {
-									args.load(community);
-								}
-								if (args.handle) {
-									args.handle(community);
-								}
-							} else {
-								this._load(community, args);
-							}
-							return community;
+							return this._getOne(args,
+									{entityName: "community", serviceEntity: "community", entityType: "instance",
+										entity: Community,
+										urlParams : { communityUuid : args.id },
+										headers : {"Content-Type" : "application/atom+xml"}
+									});						
 						},
 
 						_getOneMember : function(args) {
@@ -870,111 +775,46 @@ define(
 								return ;
 							}
 							
-							var member = new Member(args);
-							if (args.loadIt == false) {
-								if (args.load) {
-									args.load(member);
-								}
-								if (args.handle) {
-									args.handle(member);
-								}
-							} else {
-								this._loadMember(member, args);
+							var communityId;							
+							if(this._checkCommunityPresence(args, args)){
+								if (!(typeof args.community == "object")) {
+									communityId = args.community ;								
+								} else {
+									if (!(validate._validateInputTypeAndNotify("CommunityService", "getMember", "args.community", args.community, "sbt.connections.Community", args))) {
+										return ;
+									}
+									if (!(validate._validateInputTypeAndNotify("CommunityService", "getMember", "args.community.id", args.community._id, "string", args))) {
+										return ;
+									}
+									communityId = args.community._id;
+								}	
 							}
-							return member;
+							var content = {
+									communityUuid : communityId
+								};
+							var _args = lang.mixin({},args); 
+							if(_args.userId){
+								_args.id = args.userId;								
+								content.userid = _args.id;
+							}else if(_args.email){
+								_args.id = args.email;								
+								content.email = _args.id;
+							}else if(args.id){							
+								content.userid = _args.id;
+							}
+							
+							return this._getOne(_args,
+									{entityName: "member", serviceEntity: "community", entityType: "members",
+										entity: Member,
+										urlParams : content
+									});
 						},
 
 						/*
 						 * _getMultiple: function(ids,cb,options) { // For now. Should later use a single call for multiple entries var a = []; for(var i=0; i<ids.length;
 						 * i++) { a[i] = this._getOne(ids[i],cb,options); } return a; },
 						 */
-
-						_load : function(community, args) {
-							if (!community._validate("Community", "load", args, {
-								isValidateType : true,
-								isValidateId : true
-							})) {
-								return;
-							}
-							var _self = this;
-							var content = {};
-							content.communityUuid = community._id;
-							this._endpoint.xhrGet({
-								serviceUrl : this._constructCommunityUrl(Constants._methodName.getCommunity),
-								handleAs : "text",
-								content : content,
-								load : function(data) {
-									//community.data = xml.parse(data);
-									var entry = xpath.selectNodes(xml.parse(data), Constants._xpath["entry"], con.namespaces);
-									community.data = entry[0];
-									if (args.load) {
-										args.load(community);
-									}
-									if (args.handle) {
-										args.handle(community);
-									}
-								},
-								error : function(error) {
-									validate.notifyError(error, args);
-
-								}
-							});
-
-						},
-
-						_loadMember : function(member, args) {
-							if (!member._validate("Member", "load", args, {
-								isValidateType : true,
-								isValidateId : true
-							})) {
-								return;
-							}
-							var communityId;
-							if(!(this._checkCommunityPresence(args, args))){
-								return;
-							}
-							if (!(typeof args.community == "object")) {
-								communityId = args.community ;								
-							} else {
-								if (!(validate._validateInputTypeAndNotify("CommunityService", "getMember", "args.community", args.community, "sbt.connections.Community", args))) {
-									return ;
-								}
-								if (!(validate._validateInputTypeAndNotify("CommunityService", "getMember", "args.community.id", args.community._id, "string", args))) {
-									return ;
-								}
-								communityId = args.community._id;
-							}
-							var _self = this;
-							var content = {
-								communityUuid : communityId
-							};
-							if (member._userid) {
-								content.userid = member._userid;
-							} else {
-								content.email = member._email;
-							}
-							this._endpoint.xhrGet({
-								serviceUrl : this._constructCommunityUrl(Constants._methodName.getMember),
-								handleAs : "text",
-								content : content,
-								load : function(data) {
-									var entry = xpath.selectNodes(xml.parse(data), Constants._xpath_member["entry"], con.namespaces);
-									member.data = entry[0];
-									//member.data = xml.parse(data);
-									if (args.load) {
-										args.load(member);
-									}
-									if (args.handle) {
-										args.handle(member);
-									}
-								},
-								error : function(error) {
-									validate.notifyError(error, args);
-
-								}
-							});
-						},
-
+					
 						_constructAddMemberRequestBody : function(member) {
 							var body = "<entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:app=\"http://www.w3.org/2007/app\" xmlns:opensearch=\"http://a9.com/-/spec/opensearch/1.1/\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\">";
 							body += "<contributor>";
@@ -1061,40 +901,7 @@ define(
 							}
 							body += "<category term=\"community\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category></entry>";
 							return body;
-						},
-
-						_constructCommunityUrl : function(methodName) {
-							var authType = "";
-							if (this._endpoint.authType == "basic") {
-								authType = "";
-							} else if (this._endpoint.authType == "oauth") {
-								authType = "/oauth";
-							} else {
-								authType = "";
-							}
-							if (methodName == Constants._methodName.createCommunity) {
-								return con.communitiesUrls["communitiesServiceBaseUrl"] + authType + con.communitiesUrls["createCommunity"];
-							}
-							if (methodName == Constants._methodName.updateCommunity) {
-								return con.communitiesUrls["communitiesServiceBaseUrl"] + authType + con.communitiesUrls["updateCommunity"];
-							}
-							if (methodName == Constants._methodName.deleteCommunity) {
-								return con.communitiesUrls["communitiesServiceBaseUrl"] + authType + con.communitiesUrls["deleteCommunity"];
-							}
-							if (methodName == Constants._methodName.addMember) {
-								return con.communitiesUrls["communitiesServiceBaseUrl"] + authType + con.communitiesUrls["addCommunityMember"];
-							}
-							if (methodName == Constants._methodName.removeMember) {
-								return con.communitiesUrls["communitiesServiceBaseUrl"] + authType + con.communitiesUrls["removeCommunityMember"];
-							}
-							if (methodName == Constants._methodName.getCommunity) {
-								return con.communitiesUrls["communitiesServiceBaseUrl"] + authType + con.communitiesUrls["getCommunity"];
-							}
-							if (methodName == Constants._methodName.getMember) {
-								return con.communitiesUrls["communitiesServiceBaseUrl"] + authType + con.communitiesUrls["getCommunityMember"];
-							}
-
-						},
+						},					
 
 						/**
 						 * Create a new community
@@ -1117,45 +924,65 @@ define(
 						 *            javascript library error object, the status code and the error message.
 						 */
 						createCommunity : function(communityArgs, args) {
+							var community = null;
 							if(!communityArgs.declaredClass){
 								if (!(validate._validateInputTypeAndNotify("CommunityService", "createCommunity", "Community", communityArgs, "object", args))) {
 									return ;
 								}
-							var community = new Community(this);
+							community = new Community(this);
 							community.fields = communityArgs;
 							}
 								else {
 									if (!(validate._validateInputTypeAndNotify("CommunityService", "createCommunity", "Community", communityArgs, "sbt.connections.Community", args))) {
 										return ;
 									}
-									var community = communityArgs;
+									community = communityArgs;
 							}
 							var headers = {
 								"Content-Type" : "application/atom+xml"
 							};
-							var _self = this;
-							this._endpoint.xhrPost({
-								serviceUrl : this._constructCommunityUrl(Constants._methodName.createCommunity),
-								postData : this._constructCommunityRequestBody(community),
-								headers : headers,
-								load : function(data, ioArgs) {
-									var newCommunityUrl = ioArgs.headers["Location"];
-									var communityId = newCommunityUrl.substring(newCommunityUrl.indexOf("communityUuid=") + "communityUuid=".length);
-									community._id = communityId;
-									community.fields = {};
-									if (args && args.loadIt != false) {									
-										_self._load(community, args);
-									} else {
-										if (args.load)
-											args.load(community);
-										if (args.handle)
-											args.handle(community);
-									}
-								},
-								error : function(error) {
-									validate.notifyError(error, args);
+							var _self = this;						
+							var headers = {
+									"Content-Type" : "application/atom+xml"
+								};
+							this._createEntity(args,
+									{entityName: "community", serviceEntity: "communities", entityType: "my",
+										methodName : "createCommunity",
+										entity: community,
+										headers: headers,
+										xmlPayload : _self._constructCommunityRequestBody(community)										
+									});
+						},
+						
+						_createEntityOnLoad : function (data, ioArgs, entity, args, postArgs){
+							if(postArgs.methodName == "createCommunity"){
+								var newCommunityUrl = ioArgs.headers["Location"];
+								var communityId = newCommunityUrl.substring(newCommunityUrl.indexOf("communityUuid=") + "communityUuid=".length);
+								entity._id = communityId;
+								entity._fields = {};
+								if (args && args.loadIt != false) {									
+									this._load(entity, args,{entityName: "community", serviceEntity: "community", entityType: "instance",
+										entity: entity, urlParams : { communityUuid : entity._id },
+										headers : {"Content-Type" : "application/atom+xml"}
+									});
+								}else{
+									this._notifyResponse(args,entity);
 								}
-							});
+							}else if(postArgs.methodName == "addMember"){
+								var content = {communityUuid : postArgs.urlParams.communityUuid};
+								if(this._isEmail(entity._id)){																
+									content.email = entity._id;
+								}else{																
+									content.userid = entity._id;
+								}								
+								this._load(entity, args,{entityName: "member", serviceEntity: "community", entityType: "members",
+									entity: entity, urlParams : content,
+									headers : {"Content-Type" : "application/atom+xml"}
+								});
+							}							
+							else{
+								this.inherited(arguments, [data, ioArgs, entity, args, postArgs]);
+							}
 						},
 						/**
 						 * Update an existing community
@@ -1182,29 +1009,18 @@ define(
 								isValidateId : true
 							})) {
 								return;
-							}
-							var _id = community._id;
+							}							
 							var _self = this;
 							var headers = {
 								"Content-Type" : "application/atom+xml"
-							};
-							this._endpoint.xhrPut({
-								serviceUrl : this._constructCommunityUrl(Constants._methodName.updateCommunity) + "?communityUuid=" + encodeURIComponent(_id),
-								putData : this._constructCommunityRequestBody(community),
-								headers : headers,
-								load : function(data) {
-									var entry = xpath.selectNodes(xml.parse(data), Constants._xpath["entry"], con.namespaces);
-									community.data = entry[0];
-									//community.data = xml.parse(data);
-									if (args.load)
-										args.load(community);
-									if (args.handle)
-										args.handle(community);
-								},
-								error : function(error, ioargs) {
-									validate.notifyError(error, args);
-								}
-							});
+							};							
+							this._updateEntity(args,
+									{entityName: "community", serviceEntity: "community", entityType: "instance",
+										entity: community,
+										xmlPayload : _self._constructCommunityRequestBody(community),
+										headers: headers,
+										urlParams : { communityUuid: community._id}
+									});
 						},
 
 						/**
@@ -1242,21 +1058,10 @@ define(
 							}
 							var headers = {
 								"Content-Type" : "application/atom+xml"
-							};
-							var _self = this;
-							var _id = community._id;
-							this._endpoint.xhrDelete({
-								serviceUrl : this._constructCommunityUrl(Constants._methodName.deleteCommunity) + "?communityUuid=" + encodeURIComponent(_id),
-								headers : headers,
-								load : function(data) {
-									if (args.load)
-										args.load();
-									if (args.handle)
-										args.handle();
-								},
-								error : function(error, ioargs) {
-									validate.notifyError(error, args);
-								}
+							};					
+							var params = { communityUuid: community._id };							
+							this._deleteEntity(args,{entityName: "community", serviceEntity: "community", entityType: "instance",
+								urlParams : params, headers : headers
 							});
 						},
 						/**
@@ -1313,22 +1118,14 @@ define(
 							var communityId = community._id;
 							var headers = {
 								"Content-Type" : "application/atom+xml"
-							};
-							this._endpoint
-									.xhrPost({
-										serviceUrl : this._constructCommunityUrl(Constants._methodName.addMember) + "?communityUuid="
-												+ encodeURIComponent(communityId),
-										postData : this._constructAddMemberRequestBody(member),
+							};							
+							this._createEntity(args,
+									{entityName: "community", serviceEntity: "community", entityType: "members",
+										methodName: "addMember",
+										entity: member,
+										xmlPayload : _self._constructAddMemberRequestBody(member),										
 										headers : headers,
-										load : function(data) {
-											var _args = lang.mixin({
-												"community" : community
-											}, args);
-											_self._loadMember(inputMember, _args);
-										},
-										error : function(error) {
-											validate.notifyError(error, args);
-										}
+										urlParams : { communityUuid: communityId }
 									});
 						},
 						/**
@@ -1380,22 +1177,15 @@ define(
 							var _self = this;
 							var headers = {
 								"Content-Type" : "application/atom+xml"
-							};
-							var _param = member._userid ?  "&userid=" : "&email=" ;
-							var _memberId = member._userid ? member._userid : member._email ;
-							this._endpoint.xhrDelete({
-								serviceUrl : this._constructCommunityUrl(Constants._methodName.removeMember) + "?communityUuid="
-										+ encodeURIComponent(community._id) + _param + encodeURIComponent(_memberId),
-								headers : headers,
-								load : function(data) {
-									if (args.load)
-										args.load();
-									if (args.handle)
-										args.handle();
-								},
-								error : function(error) {
-									validate.notifyError(error, args);
-								}
+							};							
+							var params = { communityUuid: community._id };
+							if (_self._isEmail(member._id)) {
+								lang.mixin(params, { email: member._id });
+							} else {
+								lang.mixin(params, { userid: member._id });
+							}
+							this._deleteEntity(args,{entityName: "community", serviceEntity: "community", entityType: "members",
+								urlParams : params, headers : headers
 							});
 						},
 						/**
@@ -1417,11 +1207,13 @@ define(
 						 *            parameters must be exactly as they are supported by IBM Connections like ps, sortBy etc.
 						 */
 						getPublicCommunities : function(args) {
-							this._getEntities(args, {
-								communityServiceEntity : "communities",
-								communitiesType : "public",
-								xpath : Constants._xpath_communities_Feed
-							});
+							this._getEntities(args,
+									{entityName: "community", serviceEntity: "communities", entityType: "public",
+										parseId: this._parseCommunityId,
+										entity: Community,
+										headers : {"Content-Type" : "application/atom+xml"},
+										dataHandler : communityHandler
+									});
 						},
 
 						/**
@@ -1444,11 +1236,13 @@ define(
 						 */
 
 						getMyCommunities : function(args) {
-							this._getEntities(args, {
-								communityServiceEntity : "communities",
-								communitiesType : "my",
-								xpath : Constants._xpath_communities_Feed
-							});
+							this._getEntities(args,
+									{entityName: "community", serviceEntity: "communities", entityType: "my",
+										parseId: this._parseCommunityId,
+										entity: Community,
+										headers : {"Content-Type" : "application/atom+xml"},
+										dataHandler : communityHandler
+									});
 						},
 						/**
 						 * Get members of a community.
@@ -1471,85 +1265,26 @@ define(
 						getMembers : function(communityArg, args) {
 							if (!(typeof communityArg == "object")) {
 								var community = new Community(this, communityArg);
-								this._getEntities(args, {
-									community : community,
-									communityServiceEntity : "community",
-									communitiesType : "members",
-									xpath : Constants._xpath_community_Members_Feed
-								});
+								this._getEntities(args,
+										{community: community,
+											entityName: "member", serviceEntity: "community", entityType: "members",
+											entity: Member,
+											urlParams : { communityUuid : community._id },
+											dataHandler : memberHandler
+										});
+								
 							} else {
-								this._getEntities(args, {
-									community : communityArg,
-									communityServiceEntity : "community",
-									communitiesType : "members",
-									xpath : Constants._xpath_community_Members_Feed
-								});
+								this._getEntities(args,
+										{community: communityArg,
+											entityName: "member", serviceEntity: "community", entityType: "members",
+											entity: Member,
+											urlParams : { communityUuid : communityArg._id },
+											dataHandler : memberHandler
+										});
+								
 							}
 
-						},
-						_constructServiceUrl : function(getArgs) {
-							var authType = "";
-							if (this._endpoint.authType == "basic") {
-								authType = "";
-							} else if (this._endpoint.authType == "oauth") {
-								authType = "/oauth";
-							} else {
-								authType = "";
-							}
-							return con.communitiesUrls["communitiesServiceBaseUrl"] + authType
-									+ Constants.communityServiceEntity[getArgs.communityServiceEntity] + Constants.communitiesType[getArgs.communitiesType];
-						},
-						_constructQueryObj : function(args, getArgs) {
-							var params = args.parameters;
-							if (getArgs.communitiesType == "members") {
-								params = lang.mixin(params, {
-									"communityUuid" : getArgs.community._id
-								});
-							}
-							return params;
-						},
-						_getEntities : function(args, getArgs) {
-							var _self = this;
-							var headers = {
-								"Content-Type" : "application/atom+xml"
-							};
-							this._endpoint.xhrGet({
-								serviceUrl : this._constructServiceUrl(getArgs),
-								headers : headers,
-								content : this._constructQueryObj(args, getArgs),
-								load : function(data) {
-									var entities = [];
-									var xmlData = xml.parse(data);
-									var ioArgs = {};
-									var entry = xpath.selectNodes(xmlData, getArgs.xpath.entry, con.namespaces);
-									ioArgs.totalResults = xpath.selectText(xmlData, getArgs.xpath.totalResults, con.namespaces);
-									ioArgs.startIndex = xpath.selectText(xmlData, getArgs.xpath.startIndex, con.namespaces);
-									ioArgs.itemsPerPage = xpath.selectText(xmlData, getArgs.xpath.itemsPerPage, con.namespaces);
-									for(var count = 0; count < entry.length; count ++){	
-										var node = entry[count];
-										if (getArgs.communityServiceEntity == "communities") {
-											var community = new Community(_self, xpath.selectText(node, getArgs.xpath.id, con.namespaces));
-											community.data = node;
-											entities.push(community);
-										} else if (getArgs.communityServiceEntity == "community" && getArgs.communitiesType == "members") {
-											var member = new Member( {
-											    community: getArgs.community,
-											    id: xpath.selectText(node, getArgs.xpath.id, con.namespaces)
-											});
-											member.data = node;
-											entities.push(member);
-										}
-									}
-									if (args.load)
-										args.load(entities, ioArgs);
-									if (args.handle)
-										args.handle(entities, ioArgs);
-								},
-								error : function(error) {
-									validate.notifyError(error, args);
-								}
-							});
-						},
+						},						
 						_isEmail : function(id) {
 							return id && id.indexOf('@') >= 0;
 						},
@@ -1566,14 +1301,23 @@ define(
 						_checkCommunityPresence : function(obj, args){
 							if (!(obj.community)) {
 								validate.notifyError({
-									code : Constants.sbtErrorCodes.badRequest,
-									message : Constants.sbtErrorMessages.null_community
+									code : communityConstants.sbtErrorCodes.badRequest,
+									message : communityConstants.sbtErrorMessages.null_community
 								}, args);
 								return false;
 							} else {
 								return true;
 							}
 						},
+						_createEntityObject : function (service, id, requestArgs, args){
+							if(requestArgs.entityName == "community"){
+								var community = new Community (service, id);
+								return community;
+							}else if (requestArgs.entityName == "member"){
+								var member = new Member ({id : id, community : requestArgs.urlParams.communityUuid});
+								return member;
+							}
+						}
 					});
 			return CommunityService;
 		});

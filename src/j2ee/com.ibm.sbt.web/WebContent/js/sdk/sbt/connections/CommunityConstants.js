@@ -104,6 +104,63 @@ define(["sbt/config", "sbt/connections/core"],function(sbt) {
 				"invitees"				:"",
 				"public"				:"/all",
 				"my"					:"/my"
+		},
+		entityServiceBaseUrl	: "/communities/service/atom",
+		serviceEntity : {
+			"communities"	:"/communities",
+			"community"		:"/community"
+		},		
+		entityType : {
+			"members"				:"/members",
+			"subCommunities"		:"",
+			"bookmarks"				:"",
+			"invitees"				:"",
+			"public"				:"/all",
+			"my"					:"/my",
+			"instance"				:"/instance"
+		},
+		xpath_community : {
+			"entry"				:"/a:entry",
+			"communityUuid"		:"snx:communityUuid",
+			"uid"				:"snx:communityUuid",
+			"title"				:"a:title",
+			"summary"			:"a:summary[@type='text']",
+			"communityUrl"		:"a:link[@rel='self']/@href",
+			"logoUrl"			:"a:link[@rel='http://www.ibm.com/xmlns/prod/sn/logo']/@href",
+			"tags"				:"a:category/@term",
+			"content"			:"a:content[@type='html']",
+            "memberCount"       :"snx:membercount",
+            "communityType"     :"snx:communityType",
+            "published"         :"a:published",
+            "updated"           :"a:updated",
+            "authorUid"			:"a:author/snx:userid",
+            "authorName"		:"a:author/a:name",
+            "authorEmail"		:"a:author/a:email",
+			"contributorUid"	:"a:contributor/snx:userid",
+			"contributorName"	:"a:contributor/a:name",
+			"contributorEmail"	:"a:contributor/a:email"				
+		},
+		xpath_feed_community : {
+			"entry"				:"/a:feed/a:entry",	
+			"id"				:"a:id",
+			"totalResults"      :"/a:feed/opensearch:totalResults",
+            "startIndex"        :"/a:feed/opensearch:startIndex",
+            "itemsPerPage"      :"/a:feed/opensearch:itemsPerPage",
+            "title"				:"a:title"            
+		},
+		xpath_member : {
+			"entry"				:"/a:entry",				
+			"name"				:"a:contributor/a:name",
+			"uid"				:"a:contributor/snx:userid",
+			"role"				:"snx:role"
+		},
+		xpath_feed_member : {
+			"entry"				:"/a:feed/a:entry",
+			"id"				:"a:contributor/snx:userid",
+			"uid"				:"a:contributor/snx:userid",
+			"totalResults"      :"/a:feed/opensearch:totalResults",
+            "startIndex"        :"/a:feed/opensearch:startIndex",
+            "itemsPerPage"      :"/a:feed/opensearch:itemsPerPage"
 		}
 	};
 });

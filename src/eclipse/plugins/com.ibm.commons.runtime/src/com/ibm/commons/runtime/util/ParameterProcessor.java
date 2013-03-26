@@ -74,7 +74,7 @@ public class ParameterProcessor {
                 public String getParameter(String name) {
                     if (request != null) {
                         String value = request.getParameter(name);
-                        if (!StringUtil.isEmpty(value)) {
+                        if (value != null) {
                             return value;
                         }
                     }

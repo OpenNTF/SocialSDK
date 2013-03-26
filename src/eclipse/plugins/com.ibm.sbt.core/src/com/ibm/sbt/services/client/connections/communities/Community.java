@@ -236,16 +236,23 @@ public class Community {
 
 	/**
 	 * @return the array of Tags
-	 * @throws XMLException
 	 */
-	public String[] getTags() throws XMLException {
+	public String[] getTags(){
 		String xpQuery = getXPathQuery("tags");
-		String[] categoryFields = DOMUtil.value(this.data, xpQuery, nameSpaceCtx).split(" ");
-		String[] tags = new String[categoryFields.length - 1];
-		for (int i = 1; i < categoryFields.length; i++) {// remove occurence of category term which has scheme
-															// of "http://www.ibm.com/xmlns/prod/sn/type"
-			tags[i - 1] = categoryFields[i];
+		String[] categoryFields;
+		String[] tags;
+		try {
+			categoryFields = DOMUtil.value(this.data, xpQuery, nameSpaceCtx).split(" ");
+			tags = new String[categoryFields.length - 1];
+			for (int i = 1; i < categoryFields.length; i++) {// remove occurence of category term which has scheme
+																// of "http://www.ibm.com/xmlns/prod/sn/type"
+				tags[i - 1] = categoryFields[i];
+			}
+		} catch (XMLException e) {
+			tags = null;
+			logger.log(Level.SEVERE, "Error getting tags info", e);
 		}
+		
 		return tags;
 	}
 
@@ -386,28 +393,23 @@ public class Community {
 			if (fieldMapPairs.getKey().equalsIgnoreCase("addedTags")) {
 
 				String[] originalTags;
-				try {
-					originalTags = getTags();
+				originalTags = getTags();
+				if(null != originalTags){
 					for (String originalTag : originalTags) {// add original tags in the request
 						body += "<category term=\"" + originalTag + "\"/>";
 					}
-					body += "<category term=\"" + fieldMapPairs.getValue() + "\"/>";
-
-				} catch (XMLException e) {
-					logger.log(Level.SEVERE, "Error creating request body", e);
 				}
+				body += "<category term=\"" + fieldMapPairs.getValue() + "\"/>";
 			}
 			if (fieldMapPairs.getKey().equalsIgnoreCase("deletedTags")) {
 				String[] originalTags;
-				try {
-					originalTags = getTags();
+				originalTags = getTags();
+				if(null != originalTags){
 					for (int i = 0; i < originalTags.length; i++) {
 						if (!fieldMapPairs.getValue().equalsIgnoreCase(originalTags[i])) {
 							body += "<category term=\"" + originalTags[i] + "\"/>";
 						}
 					}
-				} catch (XMLException e) {
-					logger.log(Level.SEVERE, "Error creating request body", e);
 				}
 			}
 		}// end while

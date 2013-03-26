@@ -1,5 +1,5 @@
 <!-- /*
- * © Copyright IBM Corp. 2012
+ * ï¿½ Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -14,68 +14,103 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@page import="java.io.InputStream"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.model.Headers"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.model.FileRequestParams"%>
-<%@page import="org.w3c.dom.Document"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.FileService"%>
 <%@page import="com.ibm.sbt.services.endpoints.Endpoint"%>
-<%@page import="java.util.Map"%>
-<%@page import="java.util.HashMap"%>
-<%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.sbt.services.client.ClientService"%>
 <%@page import="com.ibm.sbt.services.endpoints.EndpointFactory"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.model.FileEntry"%>
-<%@page import="com.ibm.sbt.sample.web.util.SnippetFactory"%> 
-<%@page import="com.ibm.sbt.playground.vfs.VFSFile"%>
+<%@page import="org.w3c.dom.Document"%> 
+<%@page import="java.io.File"%>
+<%@page import="org.apache.commons.fileupload.disk.*"%>
+<%@page import="org.apache.commons.fileupload.*"%>
+<%@page import="org.apache.commons.fileupload.servlet.*"%> 
+<%@page import="org.apache.commons.io.output.*"%>
+<%@page import="java.util.*"%>
+<%@ page import="javax.servlet.*" %>
+<%@ page import="javax.servlet.http.*" %>
+
 <%@page 
-    language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <html>
 <head>
-    <title>SBT JAVA Sample - Upload File</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>SBT JAVA Sample - Upload File</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head> 
           
-<body>  
-    <h4>Upload File</h4>
-    <div id="content">
-    <%
-    try {
-        VFSFile rootFile = SnippetFactory.getJavaRootFile(application);
-        FileService service = new FileService();
-        String pathOfFileOnServer = Context.get().getProperty("sample.uploadFilePath");
-        out.println("<br> Test file upload - Path = " + pathOfFileOnServer );
-        FileEntry fileEntry = service.upload(pathOfFileOnServer);
-        out.println("<br> File Upload Status : " + service.FileStatus );
-        
-        if(fileEntry!=null)
-        {
-        out.println("<br> Display Uploaded file's Data");
-        out.println("<br>File name : " + fileEntry.getLabel());
-        out.println("<br>File created : " + fileEntry.getCreated());
-        out.println("<br>File Media Size" + fileEntry.getTotalMediaSize());
-        }
-        //Upload File with Metadata 
-        pathOfFileOnServer = Context.get().getProperty("sample.uploadMultiPartFilePath");
-        Map<String, String> parameters = new HashMap<String, String>();
-        parameters.put(FileRequestParams.TAG, "multipartPost-UploadFile-Tag");
-        parameters.put(FileRequestParams.IDENTIFIER, "label");
-        Map<String, String> headers = new HashMap<String, String>();
-        headers.put(Headers.XUpdateNonce, service.getNonce());
-        FileEntry fileE = service.uploadFileWithMetadata(pathOfFileOnServer, parameters, headers, null);
-        out.println("<br> Test file upload Multipart - Path = " + pathOfFileOnServer );
-        if(fileE != null)
-            out.println("<br> TotalMediaSize : " + fileE.getTotalMediaSize());
-        
-        out.println(service.FileStatus);
-    } catch (Throwable e) {
-            out.println("<pre>");
-            e.printStackTrace(new PrintWriter(out));
-            out.println("</pre>");
-    }   
-    %>
-    </div>
+<%
+	Endpoint ep = EndpointFactory.getEndpoint("connections"); 
+	if(!ep.isAuthenticationValid()) {
+		ep.authenticate(true);
+   		return;
+   	}
+%>
+<body>
+
+<form enctype="multipart/form-data" name="myForm" method="post" accept-charset="UTF-8">
+	<b>Choose the file To Upload:</b><br>
+   	<input type="file" name="filename">
+    <input type="submit" name="Submit" value="Upload">
+    <input type="reset" name="Reset" value="Cancel">
+</form>
+
+	<%
+	ServletContext context = pageContext.getServletContext();
+	String filePath = context.getInitParameter("fileUpload"); // we specify the parameter in web.xml for customized location for creating temp files. 
+	InputStream uploadedStream = null;
+	String contentType = request.getContentType();
+	if (contentType != null && (contentType.indexOf("multipart/form-data") >= 0)) {
+		DiskFileItemFactory factory = new DiskFileItemFactory();
+	  	ServletFileUpload upload = new ServletFileUpload(factory);
+	  	try { 
+	    	List fileItems = upload.parseRequest(request);
+	    	Iterator i = fileItems.iterator();
+	    	i.hasNext ();
+		    FileItem fi = (FileItem)i.next();
+		    if (!fi.isFormField ()) {
+	        	String fileName = fi.getName();
+	        	if (fileName == "") 
+	        	{ // do nothing
+	        	}
+	        	else 
+	        	{
+					uploadedStream = fi.getInputStream();
+		    	
+		    		FileService service = new FileService();  
+		    		Map<String, String> params = new HashMap<String, String>();
+					params.put(FileRequestParams.VISIBILITY, "public");
+					params.put(FileRequestParams.TAG, "text");
+		    		
+		    		Map<String, String> headers = new HashMap<String, String>();
+					headers.put(Headers.XUpdateNonce, service.getNonce());
+					headers.put(Headers.Slug, fileName);
+					//headers.put(Headers.ContentType, contentType);
+					FileEntry fileEntry = service.upload(uploadedStream, params, headers);
+			   		if(fileEntry!=null)
+					{
+						out.println("<br><b> Display Uploaded file's Data </b><br>");
+						out.println("<br>File name : " + fileEntry.getLabel());
+						out.println("<br>File created : " + fileEntry.getCreated());
+						out.println("<br>File Media Size : " + fileEntry.getTotalMediaSize());
+					}
+				}
+			}
+		} 
+		catch(Exception ex) { 
+			System.out.println(ex); 
+		}
+		finally {
+				uploadedStream.close();
+		}
+	}
+	else {
+	}
+%>
+	 <br>
 </body>
 </html>

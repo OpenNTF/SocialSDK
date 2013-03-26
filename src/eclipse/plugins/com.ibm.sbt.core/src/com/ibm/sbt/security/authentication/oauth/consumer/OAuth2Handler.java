@@ -14,7 +14,7 @@
 
 package com.ibm.sbt.security.authentication.oauth.consumer;
 
-import java.awt.Desktop;
+//import java.awt.Desktop;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -716,14 +716,14 @@ public class OAuth2Handler extends OAuthHandler {
 		try {
 			//getSupportsFrames : Endpoint supports frames
 			// getUsingFrames	: Application is using frames
-			if(!(getSupportsFrames()) && getUsingFrames()){
-				// Certain outh based app's do not support frames, open a new window for them only if application is using frames
-				Desktop.getDesktop().browse(new URI(getAuthorizationNetworkUrl())); 
-				
-			}
-			else{
+//			if(!(getSupportsFrames()) && getUsingFrames()){
+//				// Certain outh based app's do not support frames, open a new window for them only if application is using frames
+//				Desktop.getDesktop().browse(new URI(getAuthorizationNetworkUrl())); 
+//				
+//			}
+//			else{
 				Context.get().sendRedirect(getAuthorizationNetworkUrl());
-			}
+//			}
 		} catch (Exception e) {
 			Platform.getInstance().log(e);
 		}

@@ -65,7 +65,6 @@ import com.ibm.commons.xml.util.XMIConverter;
 import com.ibm.sbt.plugin.SbtCoreLogger;
 import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
-import com.ibm.sbt.services.endpoints.LinkedInOAuth2Endpoint;
 import com.ibm.sbt.services.util.SSLUtil;
 import com.ibm.sbt.util.SBTException;
 
@@ -136,7 +135,7 @@ public abstract class ClientService {
 	protected void checkReadParameters(Map<String, String> parameters) throws ClientServicesException {
 		// nothing for now...
 	}
-	
+
 	protected String getBaseUrl() {
 		if (endpoint != null) {
 			return endpoint.getUrl();
@@ -416,7 +415,11 @@ public abstract class ClientService {
 			} else {
 				this.stream = new BufferedInputStream(stream);
 			}
-			this.name = name.trim();
+			if (!StringUtil.isEmpty(name)) {
+				this.name = name.trim();
+			} else {
+				this.name = name;
+			}
 		}
 
 		public ContentStream(InputStream stream) {
@@ -476,6 +479,10 @@ public abstract class ClientService {
 			if (content instanceof File) {
 				return new ContentFile((File) content, contentType);
 			}
+			if (content instanceof InputStream) {
+				return new ContentStream(args.getHeaders().get("Slug"), (InputStream) content, -1,
+						contentType);
+			}
 		} else {
 			if (content instanceof String) {
 				return new ContentString((String) content);
@@ -488,6 +495,9 @@ public abstract class ClientService {
 			}
 			if (content instanceof File) {
 				return new ContentFile((File) content);
+			}
+			if (content instanceof InputStream) {
+				return new ContentStream((InputStream) content);
 			}
 		}
 
@@ -574,7 +584,9 @@ public abstract class ClientService {
 			}
 			return null;
 		}
-		protected Reader createReader(HttpRequestBase request, HttpResponse response, HttpEntity entity, String encoding) throws IOException {
+
+		protected Reader createReader(HttpRequestBase request, HttpResponse response, HttpEntity entity,
+				String encoding) throws IOException {
 			return new InputStreamReader(getEntityContent(request, response, entity), encoding);
 		}
 	}
@@ -920,7 +932,7 @@ public abstract class ClientService {
 	protected String getUrlPath(Args args) {
 		String baseUrl = getBaseUrl();
 		String serviceUrl = args.getServiceUrl();
-		return PathUtil.concat(baseUrl,serviceUrl, '/');
+		return PathUtil.concat(baseUrl, serviceUrl, '/');
 	}
 
 	protected void addUrlParts(StringBuilder b, Args args) throws ClientServicesException {
@@ -995,7 +1007,7 @@ public abstract class ClientService {
 			if (response.getStatusLine().getStatusCode() == HttpServletResponse.SC_INTERNAL_SERVER_ERROR) {
 				return generateResultError500(statusCode, request, response);
 			}
-			
+
 			HttpEntity entity = response.getEntity();
 			if (format == null) {
 				format = createResponseHandler(response, entity);
@@ -1028,17 +1040,19 @@ public abstract class ClientService {
 			throw new ClientServicesException(ex, "Error while parsing the REST service results");
 		}
 	}
-	
-	protected Object generateResultError500(int statusCode, HttpRequestBase request, HttpResponse response) throws ClientServicesException {
+
+	protected Object generateResultError500(int statusCode, HttpRequestBase request, HttpResponse response)
+			throws ClientServicesException {
 		// PHIL:
 		// Why SBT exception and not ClientService
 		throw new SBTException(null,
 				"Request for url: {0} did not complete successfully. Error code {1} [{2}] returned",
-				request.getURI(), response.getStatusLine().getStatusCode(), response
-						.getStatusLine().getReasonPhrase());
+				request.getURI(), response.getStatusLine().getStatusCode(), response.getStatusLine()
+						.getReasonPhrase());
 	}
-	
-	protected Object generateResultError(int statusCode, HttpRequestBase request, HttpResponse response, HttpEntity entity) throws ClientServicesException {
+
+	protected Object generateResultError(int statusCode, HttpRequestBase request, HttpResponse response,
+			HttpEntity entity) throws ClientServicesException {
 		throw new ClientServicesException(response, request);
 	}
 
@@ -1064,7 +1078,7 @@ public abstract class ClientService {
 			// certificate for some http requests...
 			// String scheme = httpRequestBase.getURI().getScheme();
 			// if(scheme!=null && scheme.equalsIgnoreCase("https")) {
-				return SSLUtil.wrapHttpClient(httpClient);
+			return SSLUtil.wrapHttpClient(httpClient);
 			// }
 		}
 		return httpClient;

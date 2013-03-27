@@ -47,7 +47,9 @@ define(['sbt/config'],function(sbt) {
 			activityStreamRestUrl:         "/rest/activitystreams/"
 		},
 		communitiesUrls: {
-			communitiesServiceBaseUrl:"/communities/service/atom",
+		    communitiesServiceBaseUrl:"/communities/service/atom",
+		    allCommunities : "/communities/service/atom/communities/all",
+            myCommunities : "/communities/service/atom/communities/my",
 			getCommunity:		"/community/instance",
 			updateCommunity:	"/community/instance",
 			createCommunity:	"/communities/my",
@@ -57,8 +59,31 @@ define(['sbt/config'],function(sbt) {
 			getCommunityMember:"/community/members"
 		},
 		fileUrls: {
-			getMyFiles:		"/files/basic/api/myuserlibrary/feed",
-			getFilesShared:	"/files/basic/api/documents/shared/feed"		
+			publicFiles : "/files/basic/anonymous/api/documents/feed?visibility=public",
+            pinnedFiles : "/files/basic/api/myfavorites/documents/feed",
+            folders : "/files/basic/api/collections/feed",
+            pinnedFolders : "/files/basic/api/myfavorites/collections/feed",
+            activeFolders : "/files//basic/api/collections/addedto/feed", // Folders you recently added files too.
+            publicFolders : "/files/basic/anonymous/api/collections/feed",
+            library : "/files/basic/api/myuserlibrary/feed",
+            shares : "/files/basic/api/documents/shared/feed", // only lists files shared with you.
+            recycledFiles : "/files/basic/api/myuserlibrary/view/recyclebin/feed",
+            fileComments : "/files/basic/api/userlibrary/${userId}/document/${fileId}/feed?category=comment",
+            fileShares : "/files/basic/api/documents/shared/feed"
+		},
+		profileUrls: {
+		    profile : "/profiles/atom/profile.do", 
+            reportingChain : "/profiles/atom/reportingChain.do?outputType=profile&format=full", 
+            colleagues: "/profiles/atom/connections.do?connectionType=colleague&outputType=profile&format=full" , 
+            peopleManaged: "/profiles/atom/peopleManaged.do",
+            statusUpdates: "/profiles/atom/mv/theboard/entries.do?outputType=profile&format=full",
+            connectionsInCommon: "/profiles/atom/connectionsInCommon.do?connectionType=colleague&outputType=profile&format=full"
+		},
+		searchUrls: {
+		    searchPeople: "/search/atom/search/facets/people",
+            searchTags: "/search/atom/search/facets/tags",
+            searchApps: "/search/atom/search/facets/source",
+            searchAll: "/search/atom/mysearch/results"
 		}
 	};
 });

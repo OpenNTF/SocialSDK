@@ -40,13 +40,22 @@
 <head>
 <title>SBT Sample - LinkedIn</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-
-</head>
+<script type="text/javascript" src="/sbt.dojo180/dojo/dojo.js.uncompressed.js"></script>
+<script type="text/javascript" src="/sbt.sample.web/library?lib=dojo&ver=1.8.0"></script></head>
 <body>
 	<%
 		LinkedInOAuth2Endpoint ep = (LinkedInOAuth2Endpoint)EndpointFactory.getEndpoint("linkedinOA2");
 		if(!ep.isAuthenticationValid()) {
-			ep.authenticate(true);
+    %>
+   	Please authenticate with the LinkedIn popup window
+    <script>
+    	require(['sbt/Endpoint'], function(Endpoint) {
+    		var ep = Endpoint.find("linkedinOA2");
+    		ep.authenticate({loginUi: "popup"});
+    	});
+    </script>
+	<%
+			//ep.authenticate(true);
     		return; 
     	}
 	 %>

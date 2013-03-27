@@ -15,8 +15,10 @@
  */
 package com.ibm.sbt.services.client.smartcloud.profiles;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
@@ -25,8 +27,11 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonObject;
 import com.ibm.sbt.services.client.BaseService;
 import com.ibm.sbt.services.client.ClientService;
+import com.ibm.sbt.services.client.ClientService.Handler;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.SBTServiceException;
+import com.ibm.sbt.services.client.connections.files.exception.FileServiceException;
+import com.ibm.sbt.services.client.connections.files.model.FileRequestParams;
 import com.ibm.sbt.services.client.connections.files.utils.Messages;
 import com.ibm.sbt.services.client.smartcloud.SmartCloudService;
 import com.ibm.sbt.services.endpoints.Endpoint;
@@ -42,10 +47,10 @@ import com.ibm.sbt.util.DataNavigator;
  */
 public class ProfileService extends BaseService {
 	Endpoint									endpoint;
-
-	private static HashMap<String, JsonObject>	cache		= new HashMap<String, JsonObject>();
-	private static final String					sourceClass	= ProfileService.class.getName();
-	private static final Logger					logger		= Logger.getLogger(sourceClass);
+	private static HashMap<String, JsonObject>	cache			= new HashMap<String, JsonObject>();
+	private static final String					sourceClass		= ProfileService.class.getName();
+	private static final Logger					logger			= Logger.getLogger(sourceClass);
+	private static final Handler				DefaultFormat	= ClientService.FORMAT_JSON;
 
 	/**
 	 * Default Constructor - 0 argument constructor Calls the Constructor of BaseService Class.
@@ -110,23 +115,102 @@ public class ProfileService extends BaseService {
 	 * load argument as true / false
 	 * 
 	 * @param userId
-	 * @param load
+	 * @param loadIt
 	 * @return Profile
 	 * @throws SBTServiceException
 	 */
-	public Profile getProfile(String userId, boolean load) throws SBTServiceException {
+	public Profile getProfile(String userId, boolean loadIt) throws SBTServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "getProfile", new Object[] { userId, load });
+			logger.entering(sourceClass, "getProfile", new Object[] { userId, loadIt });
 		}
 		if (StringUtil.isEmpty(userId)) {
 			logger.log(Level.ALL, Messages.InvalidValue_1);
 			return null;
 		}
+		String serviceUrl = ProfilesAPIMap.GETPROFILEUSINGUSERGUID.getUrl(userId);
+
 		Profile profile = new Profile(userId, this);
-		if (load) {
-			load(profile); // fetches profile content from server and populates content of data member
+		if (loadIt) {
+			load(profile, serviceUrl, DefaultFormat); // fetches profile content from server and populates
+														// content of data member
 		}
 		return profile;
+	}
+
+	/**
+	 * getContactByGUID
+	 * <p>
+	 * 
+	 * @param userId
+	 *            contact Guid of the profile to be fetched
+	 * @return Profile
+	 * @throws SBTServiceException
+	 */
+	public Profile getContactByGUID(String userGUId) throws SBTServiceException {
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.entering(sourceClass, "getProfile", userGUId);
+		}
+		if (StringUtil.isEmpty(userGUId)) {
+			logger.log(Level.ALL, Messages.InvalidValue_1);
+			return null;
+		}
+		String serviceUrl = ProfilesAPIMap.GETCONTACTBYCONTACTGUID.getUrl(userGUId);
+		Profile profile = new Profile(userGUId, this);
+		load(profile, serviceUrl, DefaultFormat);
+		return profile;
+	}
+
+	/**
+	 * getMyContacts
+	 * 
+	 * @return List<Profile>
+	 * @throws SBTServiceException
+	 */
+	public List<Profile> getMyContacts() throws SBTServiceException {
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.entering(sourceClass, "getMyContacts");
+		}
+
+		String serviceUrl = ProfilesAPIMap.GETMYCONTACTS.getUrl();
+		Map<String, String> params = new HashMap<String, String>();
+		return executeGet(serviceUrl, params, ClientService.FORMAT_JSON);
+	}
+
+	/**
+	 * getMyContactsByIndex
+	 * 
+	 * @param startIndex
+	 * @param count
+	 * @return List<Profile>
+	 * @throws SBTServiceException
+	 */
+	public List<Profile> getMyContactsByIndex(int startIndex, int count) throws SBTServiceException {
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.entering(sourceClass, "getMyContactsByIndex", new Object[] { startIndex, count });
+		}
+
+		String serviceUrl = ProfilesAPIMap.GETMYCONTACTS.getUrl();
+		Integer startI = new Integer(startIndex);
+		Integer countI = new Integer(count);
+		Map<String, String> paramsMap = new HashMap<String, String>();
+		paramsMap.put("startIndex", startI.toString());
+		paramsMap.put("count", countI.toString());
+		return executeGet(serviceUrl, paramsMap, DefaultFormat);
+	}
+
+	/**
+	 * getMyConnections
+	 * 
+	 * @return List<Profile>
+	 * @throws SBTServiceException
+	 */
+	public List<Profile> getMyConnections() throws SBTServiceException {
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.entering(sourceClass, "getMyConnections");
+		}
+		String serviceUrl = ProfilesAPIMap.GETMYCONNECTIONS.getUrl();
+		Map<String, String> paramsMap = new HashMap<String, String>();
+		return executeGet(serviceUrl, paramsMap, DefaultFormat);
 	}
 
 	/**
@@ -137,7 +221,7 @@ public class ProfileService extends BaseService {
 	 * @param profile
 	 * @throws SBTServiceException
 	 */
-	public void load(Profile profile) throws SBTServiceException {
+	public void load(Profile profile, String serviceUrl, Handler format) throws SBTServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "load", new Object[] { profile });
 		}
@@ -145,11 +229,11 @@ public class ProfileService extends BaseService {
 		if (data != null) {
 			profile.setData(data);
 		} else {
-			SmartCloudService svc = new SmartCloudService(this.endpoint);
+			new SmartCloudService(this.endpoint);
 			Map<String, String> parameters = new HashMap<String, String>();
 			Object result = null;
 			try {
-				result = svc.get(ProfilesAPIMap.GETPROFILE.getUrl(), parameters, ClientService.FORMAT_JSON);
+				result = getClientService().get(serviceUrl, parameters, format);
 			} catch (ClientServicesException e) {
 				throw new ProfileServiceException(e);
 			}
@@ -252,4 +336,62 @@ public class ProfileService extends BaseService {
 		}
 		return userId.contains("@");
 	}
+
+	/**
+	 * executeGet
+	 * 
+	 * @param requestUri
+	 *            - api to be executed.
+	 * @param parameters
+	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
+	 * @param format
+	 * @return List<FileEntry>
+	 * @throws ProfileServiceException
+	 * @throws FileServiceException
+	 */
+
+	public List<Profile> executeGet(String requestUri, Map<String, String> parameters, Handler format)
+			throws ProfileServiceException {
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.entering(sourceClass, "executeGet");
+		}
+		Object result = null;
+		try {
+			result = getClientService().get(requestUri, parameters, format);
+		} catch (ClientServicesException e) {
+			logger.log(Level.SEVERE, Messages.FileServiceException_1 + "executeGet()", e);
+			throw new ProfileServiceException(e);
+		}
+		if (result == null) {
+			return null;
+		}
+		return parseAndProcessResultFeed((JsonObject) result);
+	}
+
+	/**
+	 * parseAndProcessResultFeed
+	 * 
+	 * @param result
+	 *            result feed obtained from the server
+	 * @return List<Profile> - List of profile Objects
+	 */
+	private List<Profile> parseAndProcessResultFeed(JsonObject result) {
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.entering(sourceClass, "parseAndProcessResultFeed", result);
+		}
+		List<Profile> _profileEntryList = new ArrayList<Profile>();
+		try {
+			DataNavigator.Json nav = new DataNavigator.Json(result);
+			DataNavigator entry = nav.get("entry");
+			int noOfEntries = entry.getCount();
+			for (int i = 0; i < noOfEntries; i++) {
+				Profile profileEntry = new Profile(entry.get(i).stringValue("id"), this, entry.get(i));
+				_profileEntryList.add(profileEntry);
+			}
+		} catch (Exception e) {
+			logger.log(Level.SEVERE, "parseAndProcessResultFeed caused exception", e);
+		}
+		return _profileEntryList;
+	}
+
 }

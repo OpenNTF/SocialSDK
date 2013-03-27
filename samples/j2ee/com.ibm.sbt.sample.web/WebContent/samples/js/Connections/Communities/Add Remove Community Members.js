@@ -112,7 +112,7 @@ function handleMembersLoaded(members, dom) {
     
     currentMembers = members;
     
-    displayMessage(dom, "Sucessfully loaded community members for: " + members[0].getCommunity().getCommunityUuid());
+    displayMessage(dom, "Sucessfully loaded community members for: " + members[0].getCommunity());
 }
 
 function getMember(id) {

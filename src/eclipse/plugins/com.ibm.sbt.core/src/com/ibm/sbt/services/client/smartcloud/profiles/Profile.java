@@ -21,6 +21,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonObject;
+import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.SBTServiceException;
 import com.ibm.sbt.services.client.connections.files.utils.Messages;
 import com.ibm.sbt.util.DataNavigator;
@@ -48,6 +49,12 @@ public class Profile implements Serializable {
 	public Profile(String reqId, ProfileService service) {
 		this.reqId = reqId;
 		this.service = service;
+	}
+
+	public Profile(String reqId, ProfileService service, DataNavigator resultObject) {
+		this.reqId = reqId;
+		this.service = service;
+		this.data = (JsonObject) resultObject.getCurrentNode();
 	}
 
 	/**
@@ -91,7 +98,8 @@ public class Profile implements Serializable {
 	 * @throws SBTServiceException
 	 */
 	public void load() throws SBTServiceException {
-		service.load(this);
+		service.load(this, ProfilesAPIMap.GETPROFILEUSINGUSERGUID.getUrl(this.getId()),
+				ClientService.FORMAT_JSON);
 	}
 
 	/**
@@ -227,6 +235,10 @@ public class Profile implements Serializable {
 		}
 		DataNavigator.Json nav = new DataNavigator.Json(this.data); // this.data has the response feed.
 		DataNavigator entry = nav.get("entry");
+		if (entry.getCurrentNode() == null) {
+			entry = nav; // this means we have already set the entry itself in the data, and not the feed. So
+							// we take the nav itself as the data and parse through it.
+		}
 		if (fieldName.equals("thumbnailUrl")) {
 			String photo = entry.stringValue("photo");
 			if (!StringUtil.isEmpty(photo)) {
@@ -251,7 +263,7 @@ public class Profile implements Serializable {
 		logger.log(Level.FINEST, Messages.ProfileInfo_6 + result);
 		return result;
 	}
-
+	
 	@Override
 	public String toString() {
 		return this.toString();

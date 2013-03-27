@@ -51,7 +51,7 @@ return true;]]></xp:this.onkeypress>
 			<xp:div id="widgetContainer1" style="overflow:auto; height: 100%">
 				<xp:scriptBlock id="scriptBlock1">
 					<xp:this.value><![CDATA[dojo.addOnLoad(function() {
-	var assetsData = #{javascript:switch(compositeData.type){case "snippet": return snippetBean.getSnippetsAsJson(); case "api": return apiBean.getSnippetsAsJson();} return "";};	var assetsStore = new dojo.data.ItemFileReadStore({data:{identifier:'id',label:'name',items:assetsData}});
+	var assetsData = #{javascript:switch(compositeData.type){case "snippet": return snippetBean.getSnippetsAsJson(); case "api": return apiBean.getSnippetsAsJson();} return "";};	var assetsStore = new dojo.data.ItemFileReadStore({data:{identifier:'id',label:'name',items:assetsData}});
 	var assetsModel = new dijit.tree.TreeStoreModel({		store: assetsStore	});
 	var navTree = new dijit.Tree({model: assetsModel, showRoot: false }, "#{id:assetsTree}");
 	dojo.connect(navTree,"onLoad",function() {

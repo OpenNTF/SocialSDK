@@ -22,7 +22,11 @@ package com.ibm.sbt.services.client.smartcloud.profiles;
  */
 public enum ProfilesAPIMap {
 	GETPROFILE("/lotuslive-shindig-server/social/rest/people/@me/@self"), GETUSERIDENTITY(
-			"/manage/oauth/getUserIdentity");
+			"/manage/oauth/getUserIdentity"), GETCONTACTBYCONTACTGUID(
+			"/lotuslive-shindig-server/social/rest/people/lotuslive:contact:p!{idToBeReplaced}/@self"), GETPROFILEUSINGUSERGUID(
+			"/lotuslive-shindig-server/social/rest/people/lotuslive:user:p!{idToBeReplaced}/@self"), GETMYCONTACTS(
+			"/lotuslive-shindig-server/social/rest/people/@me/@all"), GETMYCONNECTIONS(
+			"/lotuslive-shindig-server/social/rest/people/@me/@friends");
 
 	private final String	url;
 
@@ -31,7 +35,15 @@ public enum ProfilesAPIMap {
 	}
 
 	public String getUrl() {
-		return url;
+		return getUrl(null);
+	}
+
+	public String getUrl(String id) {
+		if (id != null) {
+			return url.replace("p!{idToBeReplaced}", id);
+		} else {
+			return url;
+		}
 	}
 
 	@Override

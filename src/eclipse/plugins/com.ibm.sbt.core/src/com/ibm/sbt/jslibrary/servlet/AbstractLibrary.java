@@ -541,7 +541,7 @@ abstract public class AbstractLibrary {
 		}
 		for (String[] registerModule : registerModules) {
 			String moduleUrl = getModuleUrl(request, registerModule[1], isExtension);
-			indent(sb, indentationLevel).append(generateRegisterModulePath(registerModule[0], moduleUrl));
+			indent(sb, indentationLevel).append(generateRegisterModulePath(request, registerModule[0], moduleUrl));
 		}
 	}
 
@@ -986,9 +986,10 @@ abstract public class AbstractLibrary {
 	abstract protected String[] getRequireModulesAmd();
 
 	/**
+	 * @param request TODO
 	 * @return
 	 */
-	abstract protected String generateRegisterModulePath(String moduleName, String moduleUrl);
+	abstract protected String generateRegisterModulePath(LibraryRequest request, String moduleName, String moduleUrl);
 
 	/**
 	 * @return

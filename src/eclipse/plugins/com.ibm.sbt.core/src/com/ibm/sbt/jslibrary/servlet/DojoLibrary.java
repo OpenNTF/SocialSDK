@@ -70,7 +70,7 @@ public class DojoLibrary extends AbstractLibrary {
 	public DojoLibrary() {
 		// TODO remove hardcoded strings
 		super(NAME, "1.4", ""); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		minimumAmdVersion = normalizeVersion("1.7.2");
+		minimumAmdVersion = normalizeVersion("1.7.0");
 		minimumDojo2Version = normalizeVersion("1.8.0");
 	}
 
@@ -177,11 +177,19 @@ public class DojoLibrary extends AbstractLibrary {
 	 * @see com.ibm.sbt.jslibrary.servlet.AbstractLibrary#generateRegisterModulePath (java.lang.String, java.lang.String)
 	 */
 	@Override
-	protected String generateRegisterModulePath(String moduleName, String moduleUrl) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("dojo.registerModulePath('").append(moduleName).append("','").append(moduleUrl)
-				.append("')").append(";\n");
-		return sb.toString();
+	protected String generateRegisterModulePath(LibraryRequest request, String moduleName, String moduleUrl) {
+	    if (isExceedsVersion(request.getJsVersion(), minimumAmdVersion)) {
+			// Dojo AMD syntax
+			StringBuilder sb = new StringBuilder();
+			sb.append("require({paths:{'").append(moduleName).append("': '").append(moduleUrl).append("'}});\n");
+			return sb.toString();
+		} else {
+			// Non AMD dojo syntax
+			StringBuilder sb = new StringBuilder();
+			sb.append("dojo.registerModulePath('").append(moduleName).append("','").append(moduleUrl)
+					.append("')").append(";\n");
+			return sb.toString();
+		}
 	}
 
 	/*

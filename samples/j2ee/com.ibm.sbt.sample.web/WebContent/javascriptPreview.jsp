@@ -87,6 +87,8 @@
     if (StringUtil.isNotEmpty(js)) {
         String s = "<script>" + js + "</script>\n";
         out.println(s);
+    } else {
+    	out.println("<div>Error, unable to load: "+snippetName+"</div>");
     }
     %>
   </body>

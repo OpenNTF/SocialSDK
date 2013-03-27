@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2012
+ * � Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -30,15 +30,20 @@ define(["sbt/config", "sbt/connections/core"],function(sbt) {
 			null_profile   :"Null profile"
 		},
 		 xpath_profile : {
+		        "id":               "a:id",
 			 	"entry":			"/a:feed/a:entry",
 				"uid":				"a:contributor/snx:userid",
 				"name":				"a:contributor/a:name",
-				"email":			"a:contributor/a:email",
-				"photo":			"a:content/h:div/h:span/h:div/h:img[@class='photo']/@src",			
-				"title":			"a:content/h:div/h:span/h:div[@class='title']",
+				"email":            "a:contributor/a:email",
+				"title":            "a:title",
+				"statusUpdate":     "a:title[@type='text']",
+				"statusLastUpdate": "a:updated",
+				"altEmail":         "a:content/h:div/h:span/h:div[@class='x-groupwareMail']",
+				"photo":			"a:link[@rel='http://www.ibm.com/xmlns/prod/sn/image']/@href",			
+				"jobTitle":			"a:content/h:div/h:span/h:div[@class='title']",
 				"organizationUnit":	"a:content/h:div/h:span/h:div[@class='org']/h:span[@class='organization-unit']",
 				"fnUrl":			"a:content/h:div/h:span/h:div/h:a[@class='fn url']/@href",			
-				"telephoneNumber":	"a:content/h:div/h:span/h:div[@class='tel']",			
+				"telephoneNumber":	"a:content/h:div/h:span/h:div[@class='tel']/h:span[@class='value']",			
 				"bldgId":			"a:content/h:div/h:span/h:div/h:span[@class='x-building']",			
 				"floor":			"a:content/h:div/h:span/h:div/h:span[@class='x-floor']",
 				"streetAddress":	"a:content/h:div/h:span/h:div/h:div[@class='street-address']",
@@ -56,7 +61,6 @@ define(["sbt/config", "sbt/connections/core"],function(sbt) {
                 "totalResults"      :"/a:feed/opensearch:totalResults",
                 "startIndex"        :"/a:feed/opensearch:startIndex",
                 "itemsPerPage"      :"/a:feed/opensearch:itemsPerPage",
-				
 		},
 		
 		xpath_feed_profile : {

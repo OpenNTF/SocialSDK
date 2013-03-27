@@ -28,6 +28,8 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 	@module sbt.connections.ProfileService
 	**/
 	
+	var handler = new XmlHandler({xpath_map: profileConstants.xpath_profile, xpath_feed_map: profileConstants.xpath_feed_profile,nameSpaces:con.namespaces});
+	
 	/**
 	Profile class associated with a profile. 
 	@class Profile
@@ -42,7 +44,8 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 		_name:		"",	
 		
 		constructor: function(svc,id,name,email) {
-			var args = { entityName : "profile", Constants: profileConstants, con: con};
+			
+			var args = { entityName : "profile", Constants: profileConstants, con: con, dataHandler: handler};
 			this.inherited(arguments, [svc, id, args]);
 			if(this._service._isEmail(id)){
 				this._email = id;
@@ -330,9 +333,8 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 		_profiles: null,		
 
 		constructor: function(_options) {
-			var options = _options || {};
-			var handler = new XmlHandler({xpath_map: profileConstants.xpath_profile, xpath_feed_map: profileConstants.xpath_feed_profile,nameSpaces:con.namespaces});
-			options = lang.mixin({endpoint: options.endpoint || "connections", Constants: profileConstants, con: con, dataHandler: handler});
+			var options = _options || {};			
+			options = lang.mixin({endpoint: options.endpoint || "connections", Constants: profileConstants, con: con});
 			this.inherited(arguments, [options]);			
 		},
 		/**
@@ -632,7 +634,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 			
 			this._getEntities(args,
 					{entityName: "profile", serviceEntity: "getColleagues", entityType: "",						
-						entity: Profile, urlParams : params, headers : headers
+						entity: Profile, urlParams : params, headers : headers, dataHandler: handler
 						
 					});
 		},

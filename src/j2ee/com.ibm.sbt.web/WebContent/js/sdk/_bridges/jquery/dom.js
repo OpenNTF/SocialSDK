@@ -20,7 +20,11 @@
 define(['jquery'], function($) {
 	return {
         byId: function(id) {
-            return $("#"+id)[0];
+        	if (id instanceof HTMLElement) {
+        		return id;
+        	} else if (id instanceof String) {
+        		return $("#"+id)[0];
+        	}
         },
         createTextNode: function(text) {
             return document.createTextNode(text);

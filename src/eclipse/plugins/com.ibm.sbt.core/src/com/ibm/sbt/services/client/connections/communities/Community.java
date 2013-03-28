@@ -3,9 +3,12 @@ package com.ibm.sbt.services.client.connections.communities;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -229,44 +232,47 @@ public class Community {
 	}
 
 	/**
-	 * @sets the tag
-	 * @param addedTags
+	 * @return the list of Tags
 	 */
-	public void setAddedTags(String addedTags) {
-		fieldsMap.put("addedTags", addedTags);
-	}
-
-	/**
-	 * @return the array of Tags
-	 */
-	public String[] getTags() {
+	
+	public ArrayList<String> getTags() {
 	    if (this.data == null) {
-	        return new String[0];
+	        return null;
 	    }
 		String xpQuery = getXPathQuery("tags");
 		String[] categoryFields;
-		String[] tags;
+		ArrayList<String> tags = new ArrayList<String>();
 		try {
-			categoryFields = DOMUtil.value(this.data, xpQuery, nameSpaceCtx).split(" ");
-			tags = new String[categoryFields.length - 1];
+			categoryFields = DOMUtil.value(this.data, xpQuery, nameSpaceCtx).split(" ");  
 			// remove occurence of category term which has scheme
             // of "http://www.ibm.com/xmlns/prod/sn/type"
 			for (int i = 1; i < categoryFields.length; i++) {
-				tags[i - 1] = categoryFields[i];
+				tags.add(categoryFields[i]);
 			}
 		} catch (XMLException e) {
-			tags = new String[0];
 			logger.log(Level.SEVERE, "Error getting tags info", e);
+			return null;
 		}
 		
 		return tags;
 	}
+	
+	/**
+	 * @sets the tags
+	 */
+	public void setTags(List<String> tags) {
+		if(!tags.isEmpty()){
+			for (int i = 0; i < tags.size(); i++){
+				   fieldsMap.put("tag" + i , tags.get(i));
+			}
+		}
+	}
 
 	/**
-	 * @sets the tag
+	 * @sets the tags
 	 */
-	public void setDeletedTags(String deletedTags) {
-		fieldsMap.put("deletedTags", deletedTags);
+	public void setTags(String tags) {
+		fieldsMap.put("tags", tags);
 	}
 	
 	/**
@@ -395,28 +401,12 @@ public class Community {
 			if (fieldMapPairs.getKey().equalsIgnoreCase("content") || !(body.contains("<content type=\"html\">"))) {
 				body += "<content type=\"html\">" + escapeHtmlSpecialChars(getContent()) + "</content>";
 			}
-
-			if (fieldMapPairs.getKey().equalsIgnoreCase("addedTags")) {
-
-				String[] originalTags;
-				originalTags = getTags();
-				if(null != originalTags){
-					for (String originalTag : originalTags) {// add original tags in the request
-						body += "<category term=\"" + originalTag + "\"/>";
-					}
-				}
-				body += "<category term=\"" + fieldMapPairs.getValue() + "\"/>";
-			}
-			if (fieldMapPairs.getKey().equalsIgnoreCase("deletedTags")) {
-				String[] originalTags;
-				originalTags = getTags();
-				if(null != originalTags){
-					for (int i = 0; i < originalTags.length; i++) {
-						if (!fieldMapPairs.getValue().equalsIgnoreCase(originalTags[i])) {
-							body += "<category term=\"" + originalTags[i] + "\"/>";
-						}
-					}
-				}
+			if (fieldMapPairs.getKey().startsWith("tag")) {
+				String[] tags = fieldMapPairs.getValue().split(",");
+				for (String tag : tags) {// add original tags in the request
+					body += "<category term=\"" + tag + "\"/>";
+				} 
+				
 			}
 		}// end while
 

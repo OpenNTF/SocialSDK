@@ -21,6 +21,7 @@
 <%@page import="com.ibm.sbt.services.client.connections.communities.Community"%> 
 <%@page import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
 <%@page import="java.util.HashMap"%>
+<%@page import="java.util.ArrayList"%>
 <%@page 
 	language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -40,16 +41,19 @@
 		Community community = communities.iterator().next();
 		community.setTitle("Test Community" + System.currentTimeMillis());
 		community.setContent("Test Community updated by Update Community Java sample");
-		community.setAddedTags("NewTag");
+		ArrayList<String> tags = new ArrayList<String>();
+		tags.add("tag1"); 
+		tags.add("tag2"); 
+		tags.add("tag3");
+		community.setTags(tags);
 		communityService.updateCommunity(community);
-		
 		community = communityService.getCommunity(community.getCommunityUuid());
 		 
 		out.println("Community Tags:");
 		out.println("<br>");
-		String[] tags = community.getTags();
-		for (int i = 0; i < tags.length; i++) {
-			out.println(tags[i]);
+		tags = community.getTags();
+		for (int i = 0; i < tags.size(); i++) {
+			out.println(tags.get(i));
 			out.println("<br>");
 		}
 	} catch (Throwable e) {

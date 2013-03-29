@@ -22,7 +22,7 @@ define(['jquery'], function($) {
         byId: function(id) {
         	if (id instanceof HTMLElement) {
         		return id;
-        	} else if (id instanceof String) {
+        	} else if (typeof id === 'string') {
         		return $("#"+id)[0];
         	}
         },

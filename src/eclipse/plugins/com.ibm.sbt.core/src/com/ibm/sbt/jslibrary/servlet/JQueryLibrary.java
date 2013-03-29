@@ -180,7 +180,7 @@ public class JQueryLibrary extends AbstractLibrary {
 	 * @see com.ibm.sbt.jslibrary.servlet.AbstractLibrary#generateRegisterModulePath (java.lang.String, java.lang.String)
 	 */
 	@Override
-	protected String generateRegisterModulePath(String moduleName, String moduleUrl) {
+	protected String generateRegisterModulePath(LibraryRequest request, String moduleName, String moduleUrl) {
 		return "";
 	}
 

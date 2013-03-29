@@ -26,6 +26,8 @@
 <head>
 	<title>SBT JAVA Sample - Get About me</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<script type="text/javascript" src="/sbt.dojo180/dojo/dojo.js.uncompressed.js"></script>
+	<script type="text/javascript" src="http://priandw.swg.usma.ibm.com:8080/sbt.sample.web/library?lib=dojo&ver=1.8.0"></script>
 </head>
 <body>
 	<div id="content">

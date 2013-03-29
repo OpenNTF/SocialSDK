@@ -23,14 +23,6 @@ define(['requirejs/i18n'],function(i18n) {
     	load: function(name, req, onload, config){
     		i18n.load(name, req, onload, config); 
     	},
-    	
-    	getUpdatedLabel: function(dateStr) {
-    	    return i18n.getUpdatedLabel(dateStr);
-        },
-        
-        getSearchUpdatedLabel: function(dateStr) {
-             return i18n.getSearchUpdatedLabel(dateStr);
-        },
         
         getLocalizedTime: function(date) {
             return i18n.getLocalizedTime(date);
@@ -39,8 +31,6 @@ define(['requirejs/i18n'],function(i18n) {
         getLocalizedDate: function(date) {
             return i18n.getLocalizedDate(date);
         }
-        
-    
     }; 
 });
 

@@ -19,6 +19,8 @@
  * @module i18n
  */
 define([],function() {
+    dojo.require("dojo.i18n");
+    dojo.require("dojo.date.locale");
     var i18n = dojo.i18n;
     var dateLocale = dojo.date.locale;
     

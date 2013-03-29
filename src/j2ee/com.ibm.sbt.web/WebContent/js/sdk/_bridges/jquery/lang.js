@@ -50,7 +50,7 @@ define(["has", "jquery"],function(has, $) {
 		mixin: function(dest,sources) {
 			return $.extend(dest,sources);
 		},
-		isArray: function(obj) {
+		isArray: function(o) {
 			return $.isArray(o);
 		},
 		isString: function(o) {

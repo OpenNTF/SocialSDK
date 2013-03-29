@@ -21,9 +21,11 @@
 <%@page import="com.ibm.sbt.services.client.connections.communities.Community"%> 
 <%@page import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.Member"%> 
+<%@page import="java.util.ArrayList"%>
 <%@page 
 	language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	
 <html>
 <head>
 	<title>SBT JAVA Sample - Get Community Tags</title>
@@ -38,10 +40,11 @@
 		CommunityService communityService = new CommunityService();
 		Collection<Community> communities = communityService.getPublicCommunities();
 		Community community = communities.iterator().next();
-		String[] tags =community.getTags();
-		if(tags.length > 0){
-	   		for(int i = 0; i<tags.length; i++){
-				out.println(tags[i]);
+		ArrayList<String> tags = new ArrayList<String>();
+		tags = community.getTags();
+		if(!tags.isEmpty()){
+	   		for(int i = 0; i < tags.size(); i++){
+				out.println(tags.get(i));
 				out.println("<br>");
 			}
 		}

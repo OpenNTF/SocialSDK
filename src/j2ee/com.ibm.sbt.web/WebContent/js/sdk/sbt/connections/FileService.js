@@ -1390,6 +1390,94 @@ define(
 							});
 
 						},
+						
+						/**
+						 * To pin a file, by sending a POST request to the myfavorites feed.
+						 * @method pinFile
+						 * @param {Object} file FileEntry object which needs to be pinned
+						 * @param {Object} [args] Argument object
+						 * @param {Function} [args.load] The callback function will invoke when the file is deleted successfully. The function expects one
+						 * parameter, the status of the delete openration.
+						 * @param {Function} [args.error] Sometimes the delete calls fails due to bad request (400 error). The error parameter is a callback
+						 * function that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the
+						 * error function is a JavaScript Error object indicating what the failure was. From the error object. one can access the javascript
+						 * library error object, the status code and the error message.
+						 * @param {Function} [args.handle] This callback function is called regardless of whether the call to pin the File completes or
+						 * fails. The parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to
+						 * the javascript library error object, the status code and the error message.
+						 */
+						pinFile : function(file, args) {		
+							if (!validate._validateInputTypeAndNotify("FileService", "pinFile", "File", file, "sbt.connections.FileEntry", args)) {
+								return;
+							}
+							if (!file.validate("FileService", "pinFile", args, {
+								isValidateId : true
+							})) {
+
+								return;
+							}
+							var accessType = constants.accessType.AUTHENTICATED;
+							var subFilters = new _SubFilters();
+							subFilters.setCollectionId(args.collectionId);
+							var resultType = constants.resultType.FEED;
+							var parameters = args.parameters ? lang.mixin({}, args.parameters) : {};
+							parameters["itemId"] = file.getId();
+							var category = constants.categories.PINNED;
+							var view = constants.views.FILES;
+							var url = this._constructUrl(constants.baseUrl.FILES, accessType, category, view, null, subFilters, resultType, parameters);							
+							var _args = args ? lang.mixin({}, args) : {};
+							_args["responseFormat"] = constants.responseFormat.NON_XML_FORMAT;
+							this._executePost(_args, url, null, null);
+						},
+						
+						/**
+						 * Removes the file from the myfavorites feed.
+						 * @method removePinFromFile
+						 * @param {Object} file FileEntry object which needs to be pinned
+						 * @param {Object} [args] Argument object
+						 * @param {Function} [args.load] The callback function will invoke when the file is deleted successfully. The function expects one
+						 * parameter, the status of the delete openration.
+						 * @param {Function} [args.error] Sometimes the delete calls fails due to bad request (400 error). The error parameter is a callback
+						 * function that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the
+						 * error function is a JavaScript Error object indicating what the failure was. From the error object. one can access the javascript
+						 * library error object, the status code and the error message.
+						 * @param {Function} [args.handle] This callback function is called regardless of whether the call to remove pin for the File completes or
+						 * fails. The parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to
+						 * the javascript library error object, the status code and the error message.
+						 */
+						removePinFromFile : function(file, args) {		
+							if (!validate._validateInputTypeAndNotify("FileService", "removePinFromFile", "File", file, "sbt.connections.FileEntry", args)) {
+								return;
+							}
+							if (!file.validate("FileService", "removePinFromFile", args, {
+								isValidateId : true
+							})) {
+
+								return;
+							}
+							
+							var _self = this;
+							this._getNonce({
+								load : function(nonceValue) {
+									var accessType = constants.accessType.AUTHENTICATED;
+									var subFilters = new _SubFilters();
+									subFilters.setCollectionId(args.collectionId);
+									var resultType = constants.resultType.FEED;
+									var parameters = args.parameters ? lang.mixin({}, args.parameters) : {};
+									parameters["itemId"] = file.getId();
+									var category = constants.categories.PINNED;
+									var view = constants.views.FILES;
+									var url = _self._constructUrl(constants.baseUrl.FILES, accessType, category, view, null, subFilters, resultType, parameters);	
+									var headers = {
+											"X-Update-Nonce" : nonceValue
+										};
+									_self._executeDelete(args, url, headers, null);
+								},
+								error : function(error) {
+									validate.notifyError(error, args);
+								}
+							});
+						},
 
 						retrieveFileComment : function(file, comment, args) {
 							var accessType = constants.accessType.AUTHENTICATED;

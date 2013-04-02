@@ -382,6 +382,48 @@ define(['sbt/_bridge/declare','sbt/config','sbt/connections/core','sbt/connectio
 			return as;
 		},
 		
+		getNotificationsForMe: function(args) {
+			if (!(validate._validateInputTypeAndNotify("ActivityStreamService", "getNotificationsForMe", "args", args, "object", args))) {
+				return ;
+			}
+			this._userType = ASConstants.ASUser.ME;
+			this._groupType = ASConstants.ASGroup.NOTESFORME;
+			this._applicationType = ASConstants.ASApplication.ALL;
+			var as = new ActivityStream();
+			if(args.load || args.handle) {
+				this._load(as,args);
+			}
+			return as;
+		},
+		
+		getNotificationsFromMe: function(args) {
+			if (!(validate._validateInputTypeAndNotify("ActivityStreamService", "getNotificationsFromMe", "args", args, "object", args))) {
+				return ;
+			}
+			this._userType = ASConstants.ASUser.ME;
+			this._groupType = ASConstants.ASGroup.NOTESFROMME;
+			this._applicationType = ASConstants.ASApplication.ALL;
+			var as = new ActivityStream();
+			if(args.load || args.handle) {
+				this._load(as,args);
+			}
+			return as;
+		},
+		
+		getResponsesToMyContent: function(args) {
+			if (!(validate._validateInputTypeAndNotify("ActivityStreamService", "getResponsesToMyContent", "args", args, "object", args))) {
+				return ;
+			}
+			this._userType = ASConstants.ASUser.ME;
+			this._groupType = ASConstants.ASGroup.RESPONSES;
+			this._applicationType = ASConstants.ASApplication.ALL;
+			var as = new ActivityStream();
+			if(args.load || args.handle) {
+				this._load(as,args);
+			}
+			return as;
+		},
+		
 		_createPostUrl: function (_self) {
 			return core.ActivityStreamUrls.activityStreamBaseUrl+_self._endpoint.authType+core.ActivityStreamUrls.activityStreamRestUrl+_self._userType+"/"+_self._groupType+"/"+_self._applicationType;
 		},

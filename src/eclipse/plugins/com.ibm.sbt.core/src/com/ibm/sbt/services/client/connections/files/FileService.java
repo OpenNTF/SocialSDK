@@ -1747,13 +1747,15 @@ public class FileService extends BaseService {
 
 			List<Object> resultantObjects = executeGet(requestUri, parameters, ClientService.FORMAT_XML,
 					FileEntry.class);
-			List<FileEntry> resultantEntries = new ArrayList<FileEntry>();
-			for (Object eachObject : resultantObjects) {
-				resultantEntries.add((FileEntry) eachObject);
-			}
+			if (resultantObjects != null) {
+				List<FileEntry> resultantEntries = new ArrayList<FileEntry>();
+				for (Object eachObject : resultantObjects) {
+					resultantEntries.add((FileEntry) eachObject);
+				}
 
-			if (resultantEntries != null && !resultantEntries.isEmpty()) {
-				file = resultantEntries.get(0);
+				if (resultantEntries != null && !resultantEntries.isEmpty()) {
+					file = resultantEntries.get(0);
+				}
 			}
 		}
 		return file;

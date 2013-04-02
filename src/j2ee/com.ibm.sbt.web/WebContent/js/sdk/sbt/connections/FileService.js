@@ -1392,7 +1392,7 @@ define(
 						},
 						
 						/**
-						 * To pin a file, by sending a POST request to the myfavorites feed.
+						 * Pin a file, by sending a POST request to the myfavorites feed.
 						 * @method pinFile
 						 * @param {Object} file FileEntry object which needs to be pinned
 						 * @param {Object} [args] Argument object

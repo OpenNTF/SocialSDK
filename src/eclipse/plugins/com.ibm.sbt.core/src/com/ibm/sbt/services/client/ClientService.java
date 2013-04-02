@@ -905,7 +905,7 @@ public abstract class ClientService {
 			}
 		}
 		if ((response.getStatusLine().getStatusCode() == HttpServletResponse.SC_UNAUTHORIZED)
-				|| (response.getStatusLine().getStatusCode() == HttpServletResponse.SC_FORBIDDEN)) {
+				|| (endpoint.getAuthenticationErrorCode() == response.getStatusLine().getStatusCode())) {
 			forceAuthentication(args);
 			return null;
 		}

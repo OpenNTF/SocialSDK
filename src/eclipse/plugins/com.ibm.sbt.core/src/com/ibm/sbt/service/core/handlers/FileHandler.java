@@ -22,20 +22,35 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ibm.sbt.service.basic.ConnectionsFileProxyService;
+import com.ibm.sbt.service.basic.ProxyEndpointService;
+import com.ibm.sbt.service.basic.SmartcloudFileProxyService;
 
 /**
  * 
  * @author Vineet Kanwal
  *
  */
-public class ConnectionsFileHandler extends AbstractServiceHandler {
+public class FileHandler extends AbstractServiceHandler {
 
+	private static final long serialVersionUID = -4063343007626745356L;
 	public static final String URL_PATH = "files";
 
 	@Override
 	public void service(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
 
-		ConnectionsFileProxyService connectionsFile = new ConnectionsFileProxyService();
-		connectionsFile.serviceProxy(request, response);
+		String pathinfo = request.getPathInfo();
+		String[] pathTokens = pathinfo.split("/");
+		ProxyEndpointService proxyEndpointService = null;
+		if (pathTokens.length > 4) {
+			String fileType = pathTokens[3];
+			if ("connections".equals(fileType)) {
+				proxyEndpointService = new ConnectionsFileProxyService();
+			} else if ("smartcloud".equals(fileType)) {
+				proxyEndpointService = new SmartcloudFileProxyService();
+			}
+			proxyEndpointService.service(request, response);
+
+		}
+
 	}
 }

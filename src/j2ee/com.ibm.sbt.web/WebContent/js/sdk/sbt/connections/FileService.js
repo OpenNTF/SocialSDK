@@ -957,10 +957,10 @@ define(
 
 						/**
 						 * Uploads a new file for logged in user.
-						 * @method uploadFile
-						 * @param {Object} fileControl FileEntry object with file path of file which needs to be uploaded, Use FileService.getFile() with loadIt
-						 * false to create this object.
+						 * @method uploadFile						
 						 * @param {Object} [args] Argument object
+						 * @param {Objecr} [args.fileControlId] The Id of html control
+						 * @param {Object} [args.fileControl] The html control
 						 * @param {Function} [args.load] The callback function will invoke when the file is uploaded successfully. The function expects one
 						 * parameter, the status of upload.
 						 * @param {Function} [args.error] Sometimes the upload calls fails due to bad request (400 error). The error parameter is a callback
@@ -970,49 +970,93 @@ define(
 						 * @param {Function} [args.handle] This callback function is called regardless of whether the call to upload the file completes or
 						 * fails. The parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to
 						 * the javascript library error object, the status code and the error message.
+						 * @param {Object} [args.parameters] The additional parameters
 						 */
 						uploadFile : function(args) {
 
-							if (!validate._validateInputTypesAndNotify("FileService", "uploadFile", [ "args", "fileLocation" ], [ args,
-									args ? args.fileLocation : null ], [ 'object', 'string' ], args)) {
+							if (!validate._validateInputTypeAndNotify("FileService", "uploadFile", "args", args, 'object', args)) {
 								return;
 							}
+							var files = null;
+							var filePath = null;
 
-							var fileControl = document.getElementById(args.fileLocation);
-							var files = fileControl.files;
-							var filePath = fileControl.value;
+							if (args.fileControlId) {
+								var fileControl = document.getElementById(args.fileControlId);
+								filePath = fileControl.value;
+								files = fileControl.files;
+							} else if (args.fileControl) {
+								filePath = args.fileControl.value;
+								files = args.fileControl.files;
+							} else {
+								validate.notifyError("Either File Control of File Control ID is required for upload", args);
+							}
+							
+							var index = filePath.lastIndexOf("\\");
+							if (index == -1) {
+								index = filePath.lastIndexOf("/");
+							}
+
 							var reader = new FileReader();
 							var _self = this;
 							reader.onload = function(event) {
 								var binaryContent = event.target.result;
-								var accessType = constants.accessType.AUTHENTICATED;
-								var category = constants.categories.MYLIBRARY;
-								var resultType = constants.resultType.FEED;
-								var baseUrl = constants.baseUrl.FILES;
-								var url = _self._constructUrl(baseUrl, accessType, category, null, null, null, resultType, null);
-								url = cfg.Properties.serviceUrl + "/files/" + _self._endpointName + url;
-								var headers = {};
+								var _args = lang.mixin({}, args);								
 								var index = filePath.lastIndexOf("\\");
 								if (index == -1) {
 									index = filePath.lastIndexOf("/");
+								}								
+								_args["fileName"] = filePath.substring(index + 1);
+								_self.uploadFileBinary(binaryContent, _args);
+							};
+							reader.onerror = function(error) {
+								validate.notifyError(error, args);
+							};
+							reader.readAsBinaryString(files[0]);
+						},
+
+						/**
+						 * Uploads a new file for logged in user.
+						 * @method uploadFile
+						 * @param {Object} [binaryContent] The binary content of the file						
+						 * @param {Object} [args] Argument object						 
+						 * @param {Function} [args.load] The callback function will invoke when the file is uploaded successfully. The function expects one
+						 * parameter, the status of upload.
+						 * @param {Function} [args.error] Sometimes the upload calls fails due to bad request (400 error). The error parameter is a callback
+						 * function that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the
+						 * error function is a JavaScript Error object indicating what the failure was. From the error object. one can access the javascript
+						 * library error object, the status code and the error message.
+						 * @param {Function} [args.handle] This callback function is called regardless of whether the call to upload the file completes or
+						 * fails. The parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to
+						 * the javascript library error object, the status code and the error message.
+						 * @param {String} [args.fileName] The file name
+						 * @param {Object} [args.parameters] The additional parameters
+						 */
+						uploadFileBinary : function(binaryContent, args) {
+							if (!validate._validateInputTypesAndNotify("FileService", "uploadFile", [ "args", "binaryContent", "fileName" ], [ args,
+									binaryContent, args ? args.fileName : null ], [ 'object', 'string', 'string' ], args)) {
+								return;
+							}
+
+							var accessType = constants.accessType.AUTHENTICATED;
+							var category = constants.categories.MYLIBRARY;
+							var resultType = constants.resultType.FEED;
+							var baseUrl = constants.baseUrl.FILES;
+							var url = this._constructUrl(baseUrl, accessType, category, null, null, null, resultType, args.parameters);
+							url = cfg.Properties.serviceUrl + "/files/" + this._endpointName + "/" + constants.FILE_TYPE_CONNECTIONS + "/" + url;
+							var headers = {};
+							headers["Slug"] = args.fileName;
+							var _self = this;
+							this._endpoint.xhrPost({
+								url : url,
+								postData : binaryContent,
+								headers : headers,
+								load : function(data) {
+									_self._notifyCb(args, "Success");
+								},
+								error : function(error) {
+									validate.notifyError(error, args);
 								}
-								headers["Slug"] = filePath.substring(index + 1);
-								_self._endpoint.xhrPost({
-									url : url,
-									postData : binaryContent,
-									headers : headers,
-									load : function(data) {
-										_self._notifyCb(args, "Success");
-									},
-									error : function(error) {
-										validate.notifyError(error, args);
-									}
-								});
-							};
-							reader.onerror = function(event) {
-								alert("error" + event);
-							};
-							reader.readAsArrayBuffer(files[0]);
+							});
 						},
 
 						/**

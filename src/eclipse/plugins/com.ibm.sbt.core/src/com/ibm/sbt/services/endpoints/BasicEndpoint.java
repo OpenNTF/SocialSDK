@@ -37,10 +37,14 @@ import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.util.UrlUtil;
 import com.ibm.commons.util.PathUtil;
 import com.ibm.commons.util.StringUtil;
+import com.ibm.sbt.security.authentication.AuthenticationException;
 import com.ibm.sbt.security.authentication.password.PasswordException;
 import com.ibm.sbt.security.authentication.password.consumer.UserPassword;
 import com.ibm.sbt.security.authentication.password.consumer.store.PasswordStore;
 import com.ibm.sbt.security.authentication.password.consumer.store.PasswordStoreFactory;
+import com.ibm.sbt.security.credential.store.CredentialStore;
+import com.ibm.sbt.security.credential.store.CredentialStoreException;
+import com.ibm.sbt.security.credential.store.CredentialStoreFactory;
 import com.ibm.sbt.service.core.handlers.BasicAuthCredsHandler;
 import com.ibm.sbt.service.core.servlet.ServiceServlet;
 import com.ibm.sbt.services.client.ClientServicesException;
@@ -58,6 +62,9 @@ public class BasicEndpoint extends AbstractEndpoint {
 
     // Key used by the bean when it needs to redirect
     public static final String REDIRECT_PAGE_KEY    = "xsp.endpoint.redirectpage";
+    
+    // Type used to store the credentials
+    public static final String STORE_TYPE	= "Basic";
     
     private String user;
     private String password;
@@ -190,7 +197,7 @@ public class BasicEndpoint extends AbstractEndpoint {
             }
         }
     }
-
+    
     public boolean readFromStore() throws PasswordException {
         if(!storeAlreadyTried) {
             synchronized (this) {
@@ -224,7 +231,7 @@ public class BasicEndpoint extends AbstractEndpoint {
 	            return true;
 	        }
     	} else {
-    		AnonymousCredentialStore.storeCredentials(context,new UserPassword(getUrl(),getUser(),getPassword()),getUrl(),null);
+    		AnonymousCredentialStore.storeCredentials(context,new UserPassword(getUser(),getPassword()),getUrl(),null);
     	}
         return false;
     }
@@ -242,6 +249,49 @@ public class BasicEndpoint extends AbstractEndpoint {
     	}
         return false;
     }
+    
+    
+    public boolean readFromStore2() throws CredentialStoreException {
+        if(!storeAlreadyTried) {
+            synchronized (this) {
+            	Context context = Context.get();
+                UserPassword u = null;
+            	CredentialStore cs = CredentialStoreFactory.getCredentialStore(getCredentialStore());
+	            if(cs!=null) {
+	                u = (UserPassword)cs.load(getApplicationName(),getUrl(),STORE_TYPE,context.getCurrentUserId(),createEncryptor());
+            	}
+                if(u!=null) {
+                    this.user = u.getUser();
+                    this.password = u.getPassword();
+                    return true;
+                }
+                storeAlreadyTried = true;
+            }
+        }
+        return false;
+    }
+
+    public boolean writeToStore2() throws CredentialStoreException {
+    	Context context = Context.get();
+    	CredentialStore cs = CredentialStoreFactory.getCredentialStore(getCredentialStore());
+        if(cs!=null) {
+        	UserPassword u = new UserPassword(user,password);
+            cs.store(getApplicationName(), getUrl(), STORE_TYPE, context.getCurrentUserId(), u, createEncryptor());
+            return true;
+        }
+        return false;
+    }
+
+    public boolean clearFromStore2() throws CredentialStoreException {
+    	Context context = Context.get();
+    	CredentialStore cs = CredentialStoreFactory.getCredentialStore(getCredentialStore());
+        if(cs!=null) {
+            cs.remove(getApplicationName(), getUrl(), STORE_TYPE, context.getCurrentUserId());
+            return true;
+        }
+        return false;
+    }
+
     
     public boolean login(String user, String password) throws PasswordException {
         return login(user,password,false);

@@ -186,8 +186,7 @@ define(["sbt/config", "sbt/connections/core"],function(sbt) {
 			"emailModifier" : "td:modifier/a:email"
 		},
 		baseUrl : {
-			"FILES" : "/files",
-			"BASIC" : "/basic"
+			"FILES" : "/files"			
 		},
 		accessType : {
 			"PUBLIC" : "/anonymous/api",

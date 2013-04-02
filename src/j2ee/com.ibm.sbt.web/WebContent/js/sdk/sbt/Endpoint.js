@@ -128,10 +128,10 @@ var Endpoint = declare("sbt.Endpoint", null, {
      * @method _notifyError
      * @param error
      */
-	_notifyError: function(args, error) {
+	_notifyError: function(args, error, ioArgs) {
         if (args.handle) {
             try {
-                args.handle(error);
+                args.handle(error, ioArgs);
             } catch (ex) {
                 // TODO log an error
                 var msg = ex.message;
@@ -139,7 +139,7 @@ var Endpoint = declare("sbt.Endpoint", null, {
         }
         if (args.error) {
             try {
-                args.error(error);
+                args.error(error, ioArgs);
             } catch (ex) {
                 // TODO log an error
                 var msg = ex.message;
@@ -223,7 +223,7 @@ var Endpoint = declare("sbt.Endpoint", null, {
 				} 
 
                 // notify handle and error callbacks is available
-				self._notifyError(args, error);
+				self._notifyError(args, error, ioArgs);
 			} else {
 			    // notify handle and load callbacks is available
 			    self._notifyResponse(args, data, ioArgs);

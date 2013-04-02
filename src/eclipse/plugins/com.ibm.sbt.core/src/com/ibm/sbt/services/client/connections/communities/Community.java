@@ -4,7 +4,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -82,7 +81,8 @@ public class Community {
 			{ "title", "/a:entry/a:title" }, { "summary", "/a:entry/a:summary[@type='text']" },
 			{ "logoUrl", "/a:entry/a:link[@rel='http://www.ibm.com/xmlns/prod/sn/logo']/@href" },
 			{ "membersUrl", "/a:entry/a:link[@rel='http://www.ibm.com/xmlns/prod/sn/member-list']/@href" },
-			{ "communityUrl", "/a:entry/a:link[@rel='self']/@href" },
+            { "communityUrl", "/a:entry/a:link[@rel='alternate']/@href" },
+			{ "communityAtomUrl", "/a:entry/a:link[@rel='self']/@href" },
 			{ "tags", "/a:entry/a:category/@term" }, { "content", "/a:entry/a:content[@type='html']" },
 			{ "memberCount", "/a:entry/snx:membercount"},
 			{ "communityType", "/a:entry/snx:communityType"}, 
@@ -278,8 +278,8 @@ public class Community {
 	/**
 	 * @return the memberCount
 	 */
-	public String getMemberCount(){
-		return get("memberCount");
+	public int getMemberCount(){
+		return getAsInt("memberCount");
 	}
 	/**
 	 * @return the communityType
@@ -357,6 +357,16 @@ public class Community {
 		String xpQuery = getXPathQuery(fieldName);
 		return getFieldUsingXPath(xpQuery);
 	}
+
+    /**
+     * @return value for specified field. Field names follow IBM Connections naming convention
+     */
+    public int getAsInt(String fieldName) {
+        String xpQuery = getXPathQuery(fieldName);
+        String value = getFieldUsingXPath(xpQuery);
+        // TODO should we handle badly formed values or allow the error to propogate
+        return (StringUtil.isEmpty(value)) ? 0 : Integer.parseInt(value);
+    }
 
 	/**
 	 * @return xpath query for specified field. Field names follow IBM Connections naming convention

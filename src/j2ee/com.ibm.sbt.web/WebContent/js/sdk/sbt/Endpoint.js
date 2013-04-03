@@ -25,7 +25,7 @@
  * @class Endpoint
  * 
  */
-define(['sbt/_bridge/declare','sbt/lang','sbt/ErrorTransport','sbt/pathUtil'],function(declare,lang,ErrorTransport,pathUtil) {
+define(['sbt/_bridge/declare', 'sbt/lang', 'sbt/ErrorTransport', 'sbt/pathUtil'],function(declare, lang, ErrorTransport, pathUtil) {
 
 
 var Endpoint = declare("sbt.Endpoint", null, {
@@ -372,7 +372,6 @@ var Endpoint = declare("sbt.Endpoint", null, {
 			}
 		}, true);
 	}
-	
 });
 
 sbt.Endpoints = {}; // Initially empty

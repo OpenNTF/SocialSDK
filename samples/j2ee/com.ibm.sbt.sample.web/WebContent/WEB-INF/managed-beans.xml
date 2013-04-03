@@ -57,6 +57,10 @@
 			<value>%{connections.url}</value>
 		</managed-property>
 		<managed-property>
+			<property-name>apiVersion</property-name>
+			<value>%{connections.apiVersion}</value>
+		</managed-property>
+		<managed-property>
 			<property-name>passwordStore</property-name>
 			<value>PwdStore</value>
 		</managed-property>
@@ -84,6 +88,10 @@
 		<managed-property>
 			<property-name>url</property-name>
 			<value>%{connectionsOA2.url}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>apiVersion</property-name>
+			<value>%{connectionsOA2.apiVersion}</value>
 		</managed-property>
 		<managed-property>
 			<property-name>serviceName</property-name>
@@ -136,6 +144,10 @@
             <property-name>url</property-name>
             <value>%{connections.url}</value>
         </managed-property>
+		<managed-property>
+			<property-name>apiVersion</property-name>
+			<value>%{connections.apiVersion}</value>
+		</managed-property>
     </managed-bean>
         
 	<!--  SmartCloud OAuth 1.0 -->	
@@ -147,6 +159,10 @@
 		<managed-property>
 			<property-name>url</property-name>
 			<value>%{smartcloud.url}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>apiVersion</property-name>
+			<value>%{smartcloud.apiVersion}</value>
 		</managed-property>
 		<!-- Trust the connection -->
 		<managed-property>
@@ -203,6 +219,10 @@
 		<managed-property>
 			<property-name>url</property-name>
 			<value>%{smartcloudOA2.url}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>apiVersion</property-name>
+			<value>%{smartcloudOA2.apiVersion}</value>
 		</managed-property>
 		<managed-property>
 			<property-name>serviceName</property-name>

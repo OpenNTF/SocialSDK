@@ -48,6 +48,7 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     private String autoAuthenticate;
     private String authenticationService;
     private String clientServiceClass;
+    private String apiVersion;
     private boolean requiresAuthentication;
     private boolean forceTrustSSLCertificate;
     private boolean allowClientAccess = true;
@@ -122,6 +123,21 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     }
     public void setLabel(String label) {
         this.label = label;
+    }
+    
+    /* (non-Javadoc)
+     * @see com.ibm.sbt.services.endpoints.Endpoint#getApiVersion()
+     */
+    @Override
+    public String getApiVersion() {
+        return this.apiVersion;
+    }
+    
+    /**
+     * @param apiVersion the apiVersion to set
+     */
+    public void setApiVersion(String apiVersion) {
+        this.apiVersion = apiVersion;
     }
     
     /* (non-Javadoc)

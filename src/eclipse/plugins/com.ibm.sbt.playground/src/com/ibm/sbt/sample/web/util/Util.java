@@ -48,9 +48,9 @@ public class Util {
     
     public static String[][] THEMES = new String[][] {
         // title, id
-        { "One UI", "oneui" },
+        { "Dojo Claro", "dojo" },
         { "Bootstrap", "bootstrap" },
-        { "Dojo Claro", "dojo" }
+        { "One UI", "oneui" }
     };
     
     public static String[] BOOTSTRAP_STYLES = {   

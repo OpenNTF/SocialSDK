@@ -30,6 +30,7 @@ import com.ibm.sbt.service.core.handlers.ProxyHandler;
 
 /**
  * Default service servlet used by SBT runtime.
+ * 
  * @author priand
  */
 public class ServiceServlet extends ServletDispatcher {
@@ -37,19 +38,23 @@ public class ServiceServlet extends ServletDispatcher {
 	public static String getServletPath() {
 		return RuntimeConstants.get().getConstant(RuntimeConstants.SERVICE_BASEURL);
 	}
-	
-	private static final long serialVersionUID = 1L;
-	
-    public ServiceServlet() {
-    	// Register the default servlets
-        register(new ServletFactory.PathInfoFactory(PingHandler.class,PingHandler.URL_PATH)); 
-        register(new ServletFactory.PathInfoFactory(ProxyHandler.class,ProxyHandler.URL_PATH)); 
-        register(new ServletFactory.PathInfoFactory(BasicAuthCredsHandler.class,BasicAuthCredsHandler.URL_PATH));
-        register(new ServletFactory.PathInfoFactory(OACallback.class,OACallback.URL_PATH)); 
-        register(new ServletFactory.PathInfoFactory(OAClientAuthentication.class,OAClientAuthentication.URL_PATH));
-        register(new ServletFactory.PathInfoFactory(OA2Callback.class,OA2Callback.URL_PATH));
-        register(new ServletFactory.PathInfoFactory(EmailHandler.class,EmailHandler.URL_PATH));        
-        register(new ServletFactory.PathInfoFactory(FileHandler.class,FileHandler.URL_PATH));       
-    }
-    
+
+	private static final long	serialVersionUID	= 1L;
+
+	public ServiceServlet() {
+		// Register the default servlets
+		register(new ServletFactory.PathInfoFactory(PingHandler.class, PingHandler.URL_PATH));
+		register(new ServletFactory.PathInfoFactory(ProxyHandler.class, ProxyHandler.URL_PATH));
+		register(new ServletFactory.PathInfoFactory(BasicAuthCredsHandler.class,
+				BasicAuthCredsHandler.URL_PATH));
+		register(new ServletFactory.PathInfoFactory(OACallback.class, OACallback.URL_PATH));
+		register(new ServletFactory.PathInfoFactory(OAClientAuthentication.class,
+				OAClientAuthentication.URL_PATH));
+		register(new ServletFactory.PathInfoFactory(OA2Callback.class, OA2Callback.URL_PATH));
+		register(new ServletFactory.PathInfoFactory(EmailHandler.class, EmailHandler.URL_PATH));
+		register(new ServletFactory.PathInfoFactory(FileHandler.class, FileHandler.URL_PATH));
+		register(new ServletFactory.PathInfoFactory(AuthenticationHandler.class,
+				AuthenticationHandler.URL_PATH));
+	}
+
 }

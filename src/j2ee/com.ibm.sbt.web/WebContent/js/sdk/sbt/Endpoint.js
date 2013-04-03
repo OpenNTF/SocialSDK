@@ -375,7 +375,6 @@ var Endpoint = declare("sbt.Endpoint", null, {
 			}
 		}, true);
 	}
-	
 });
 
 sbt.Endpoints = {}; // Initially empty

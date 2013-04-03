@@ -20,7 +20,7 @@
  */
 define(['sbt/_bridge/declare', 'sbt/base/BaseHandler','sbt/xml','sbt/xpath'],function(declare, BaseHandler, xml, xpath) {
 
-	var XmlHandler = declare("sbt.base.XmlHandler", sbt.base.BaseHandler, {	
+	var XmlHandler = declare("sbt.base.XmlHandler", BaseHandler, {	
 		
 		_dataType : "xml",
 		_xpath_map : null,

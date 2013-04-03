@@ -18,7 +18,7 @@
  * Definition of constants for BaseService.
  */
 define(["sbt/config", "sbt/base/core"],function(sbt) {
-	return sbt.base.baseConstants = {
+	return {
 		sbtErrorCodes:{
 			badRequest         :400
 		}

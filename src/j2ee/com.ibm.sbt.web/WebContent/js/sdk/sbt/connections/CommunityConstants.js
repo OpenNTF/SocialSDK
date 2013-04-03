@@ -18,7 +18,7 @@
  * Definition of constants for CommunityService.
  */
 define(["sbt/config", "sbt/connections/core"],function(sbt) {
-	return sbt.connections.communityConstants = {
+	return {
 		_methodName : {
 			"createCommunity" : "createCommunity",
 			"updateCommunity" : "updateCommunity",
@@ -125,7 +125,8 @@ define(["sbt/config", "sbt/connections/core"],function(sbt) {
 			"uid"				:"snx:communityUuid",
 			"title"				:"a:title",
 			"summary"			:"a:summary[@type='text']",
-			"communityUrl"		:"a:link[@rel='self']/@href",
+			"communityUrl"      :"a:link[@rel='alternate']/@href",
+			"communityFeedUrl"  :"a:link[@rel='self']/@href",
 			"logoUrl"			:"a:link[@rel='http://www.ibm.com/xmlns/prod/sn/logo']/@href",
 			"tags"				:"a:category/@term",
 			"content"			:"a:content[@type='html']",

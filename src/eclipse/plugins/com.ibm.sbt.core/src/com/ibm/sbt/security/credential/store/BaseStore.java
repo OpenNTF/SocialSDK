@@ -19,6 +19,9 @@ import java.io.ByteArrayInputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import com.ibm.commons.runtime.Application;
+import com.ibm.commons.runtime.Context;
+import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.ByteStreamCache;
 
 
@@ -31,12 +34,66 @@ import com.ibm.commons.util.io.ByteStreamCache;
  */
 public abstract class BaseStore implements CredentialStore {
 
+	private String applicationName;
+	private String encryptor;
+	
 	public BaseStore() {
 	}
 	
-	protected byte[] serialize(Object object, CredentialEncryptor encryptor) throws CredentialStoreException {
+	public String getApplicationName() {
+		return applicationName;
+	}
+
+	public void setApplicationName(String applicationName) {
+		this.applicationName = applicationName;
+	}
+
+	public String getEncryptor() {
+		return encryptor;
+	}
+
+	public void setEncryptor(String encryptor) {
+		this.encryptor = encryptor;
+	}
+
+	public String findApplicationName() {
+		// Look if the application name had been forced and the return it
+		String appName = getApplicationName();
+		if(StringUtil.isNotEmpty(appName)) {
+			return appName;
+		}
+		
+		// Else, look at the application
+		Application app = Application.getUnchecked();
+		if(app!=null) {
+			return app.getName();
+		}
+		
+		// Else, we don't know...
+		return null;
+	}
+	
+	public CredentialEncryptor findEncryptor() throws CredentialStoreException {
+		String name = getEncryptor();
+		if(StringUtil.isNotEmpty(name)) {
+	    	Context context = Context.get();
+	        // Look for a bean and/or class
+	        Object o = context.getBean(name);
+	        if(o==null) {
+	            throw new CredentialStoreException(null,"Encryptor bean {0} is not available. Please verify your configuration files.",name); 
+	        }
+	        if(!(o instanceof CredentialStore)) {
+	            throw new CredentialStoreException(null,"Invalid Encryptor bean implementation {0}, class {1}",name,o.getClass()); 
+	        }
+	        return (CredentialEncryptor)o;
+		}
+		return null;
+	}
+
+	protected byte[] serialize(Object object) throws CredentialStoreException {
 		byte[] ser = toByteArray(object);
 		if(ser!=null) {
+			CredentialEncryptor encryptor = findEncryptor();
 			if(encryptor!=null) {
 				return encryptor.encrypt(ser);
 			}
@@ -45,9 +102,12 @@ public abstract class BaseStore implements CredentialStore {
 		return null;
 	}
 
-	protected Object deSerialize(byte[] bytes, CredentialEncryptor encryptor) throws CredentialStoreException {
-		if(encryptor!=null && bytes!=null) {
-			bytes = encryptor.decrypt(bytes);
+	protected Object deSerialize(byte[] bytes) throws CredentialStoreException {
+		if(bytes!=null) {
+			CredentialEncryptor encryptor = findEncryptor();
+			if(encryptor!=null) {
+				bytes = encryptor.decrypt(bytes);
+			}
 		}
 		return fromByteArray(bytes);
 	}

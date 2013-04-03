@@ -18,19 +18,19 @@ require(["sbt/dom", "sbt/Endpoint", "sbt/config"], function(dom, Endpoint, confi
 		
 		/*creating login logout buttons*/
 		var logoutButton = document.createElement("input");
-		td3.appendChild(logoutButton);
 		logoutButton.setAttribute("id", "logout"+endpointName);
 		logoutButton.setAttribute('name',endpointName);
 		logoutButton.setAttribute('type','button');
 		logoutButton.setAttribute('value','Logout');
 		logoutButton.setAttribute('class','btn');
+		td3.appendChild(logoutButton);
 		var loginButton = document.createElement("input");
-		td3.appendChild(loginButton);
 		loginButton.setAttribute("id", "login"+endpointName);
 		loginButton.setAttribute('name',endpointName);
 		loginButton.setAttribute('type','button');
 		loginButton.setAttribute('value','Login');
 		loginButton.setAttribute('class','btn');
+		td3.appendChild(loginButton);
 		/*creating login logout buttons*/
 		
 		var ep = Endpoint.find(endpointName);

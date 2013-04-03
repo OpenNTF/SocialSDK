@@ -27,13 +27,16 @@ import com.ibm.commons.Platform;
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.util.PathUtil;
 import com.ibm.commons.util.StringUtil;
-import com.ibm.sbt.security.authentication.password.PasswordException;
+import com.ibm.sbt.security.authentication.AuthenticationException;
 import com.ibm.sbt.services.endpoints.BasicEndpoint;
 import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
 
 
 public class BasicAuthCredsHandler extends AbstractServiceHandler {
+
+	private static final long serialVersionUID = 1L;
+	
 	public static final String URL_PATH = "basicAuth";
 	public static final String MODE_MAINWINDOW			= "mainWindow";
     public static final String MODE_POPUP				= "popup";
@@ -82,7 +85,7 @@ public class BasicAuthCredsHandler extends AbstractServiceHandler {
 		    			redirectToJavaApp(request, response, AUTH_DECLINED);
 		    		}
 				}
-			} catch (PasswordException e) {
+			} catch (AuthenticationException e) {
 				Platform.getInstance().log("PasswordException in BasicAuthCredsHandler"+e);
 			}
     	}

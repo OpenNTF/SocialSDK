@@ -40,34 +40,32 @@ public class AnonymousSessionCredentialStore extends BaseStore {
 	}
 	
 	@Override
-	public Object load(String application, String service, String type, String user, CredentialEncryptor encryptor) throws CredentialStoreException {
+	public Object load(String service, String type, String user) throws CredentialStoreException {
 		Context context = Context.get();
-		String key = createKey(application, service, type, user);
-		return deSerialize((byte[])context.getSessionMap().get(key), encryptor);
+		String key = createKey(service, type, user);
+		return deSerialize((byte[])context.getSessionMap().get(key));
 	}
 	
 	@Override
-	public void store(String application, String service, String type, String user, Object credentials, CredentialEncryptor encryptor) throws CredentialStoreException {
+	public void store(String service, String type, String user, Object credentials) throws CredentialStoreException {
 		Context context = Context.get();
-		String key = createKey(application, service, type, user);
-		context.getSessionMap().put(key, serialize(credentials, encryptor) );
+		String key = createKey(service, type, user);
+		context.getSessionMap().put(key, serialize(credentials));
 	}
 
 	@Override
-	public void remove(String application, String service, String type, String user) throws CredentialStoreException {
+	public void remove(String service, String type, String user) throws CredentialStoreException {
 		Context context = Context.get();
-		String key = createKey(application, service, type, user);
+		String key = createKey(service, type, user);
 		context.getSessionMap().remove(key);
 	}
 	
 	/**
 	 * Create a key for the internal map.
 	 */
-	protected String createKey(String application, String service, String type, String user) throws CredentialStoreException {
+	protected String createKey(String service, String type, String user) throws CredentialStoreException {
 		StringBuilder b = new StringBuilder(128);
-		b.append("__sbt.credentials::");
-		b.append(StringUtil.getNonNullString(application));
-		b.append('|');
+		b.append("::sbt.credentials::");
 		b.append(StringUtil.getNonNullString(service));
 		b.append('|');
 		b.append(StringUtil.getNonNullString(type));

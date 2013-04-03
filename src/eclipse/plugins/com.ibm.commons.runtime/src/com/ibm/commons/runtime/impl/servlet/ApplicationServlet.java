@@ -35,6 +35,11 @@ public class ApplicationServlet extends AbstractApplication {
 
 	protected ApplicationServlet(ServletContext servletContext) {
 		super(servletContext);
+		// For J2EE apps, the application name is coming from the context path
+		String cp = servletContext.getContextPath();
+		if(cp!=null) {
+			setName(cp);
+		}
 	}
 
 	@Override

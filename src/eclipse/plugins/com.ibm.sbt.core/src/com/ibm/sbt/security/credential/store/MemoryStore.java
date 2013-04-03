@@ -25,7 +25,7 @@ import com.ibm.commons.util.StringUtil;
 
 
 /**
- * Implementation of a credential store storing the credential in memory.
+ * Implementation of a credential store storing the credentials in memory.
  * <p>
  * </p>
  * @author Philippe Riand
@@ -38,19 +38,22 @@ public class MemoryStore extends BaseStore {
 	}
 	
 	@Override
-	public Object load(String application, String service, String type, String user, CredentialEncryptor encryptor) throws CredentialStoreException {
+	public Object load(String service, String type, String user) throws CredentialStoreException {
+		String application = findApplicationName();
 		String key = createKey(application, service, type, user);
-		return deSerialize(map.get(key), encryptor);
+		return deSerialize(map.get(key));
 	}
 	
 	@Override
-	public void store(String application, String service, String type, String user, Object credentials, CredentialEncryptor encryptor) throws CredentialStoreException {
+	public void store(String service, String type, String user, Object credentials) throws CredentialStoreException {
+		String application = findApplicationName();
 		String key = createKey(application, service, type, user);
-		map.put(key, serialize(credentials, encryptor) );
+		map.put(key, serialize(credentials) );
 	}
 
 	@Override
-	public void remove(String application, String service, String type, String user) throws CredentialStoreException {
+	public void remove(String service, String type, String user) throws CredentialStoreException {
+		String application = findApplicationName();
 		String key = createKey(application, service, type, user);
 		map.remove(key);
 	}

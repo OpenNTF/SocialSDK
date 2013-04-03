@@ -78,7 +78,7 @@
         if(jsLibId)
             $("body").data("jsLibId", jsLibId);
         else
-            $("body").data("jsLibId", "dojo180");
+            $("body").data("jsLibId", "dojo143");
     }
 
     function setJsLibIdFromUrl(url){

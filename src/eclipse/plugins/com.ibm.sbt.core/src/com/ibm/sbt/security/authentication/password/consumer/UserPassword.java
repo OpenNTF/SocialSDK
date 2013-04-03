@@ -28,24 +28,15 @@ public class UserPassword implements Serializable {
     
 	private static final long serialVersionUID = 1L;
 
-	private String requestUri;
     private String user;
     private String password;
     
 	public UserPassword() {
 	}
 
-	public UserPassword(String requestUri, String user, String password) {
-	    this.requestUri = requestUri;
+	public UserPassword(String user, String password) {
         this.user = user;
         this.password = password;
-    }
-
-    /**
-     * @return the requestUri
-     */
-    public String getRequestUri() {
-        return requestUri;
     }
 
     /**

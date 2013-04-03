@@ -17,8 +17,8 @@
  * Social Business Toolkit SDK.
  * Definition of constants for ProfileService.
  */
-define(["sbt/config", "sbt/connections/core"],function(sbt) {
-	return sbt.connections.profileConstants = {
+define([],function() {
+	return {
 		sbtErrorCodes:{
 			badRequest         :400
 		},

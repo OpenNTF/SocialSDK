@@ -116,10 +116,13 @@ define(['sbt/_bridge/json', 'sbt/_bridge/lang', 'sbt/log', 'sbt/stringutil'], fu
             }
             return jsonObj;
         },
-        
+        _notReserved: function(property) {
+        	return property!=='isInstanceOf' && property!=='getInherited';
+        },        
         _getObjectValue: function(theObj, property, seen) {
+        	var self = this;
             if (lang.isFunction(theObj[property])) {
-                if (stringUtil.startsWith(property, "get") || stringUtil.startsWith(property, "is")) {
+                if ((stringUtil.startsWith(property, "get") || stringUtil.startsWith(property, "is")) && self._notReserved(property)) {
                     try {
                         var value = theObj[property].apply(theObj);
                         if (value && !this._isBuiltin(value) && lang.isObject(value)) {

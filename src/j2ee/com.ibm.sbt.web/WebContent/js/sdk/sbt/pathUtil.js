@@ -37,5 +37,5 @@ define(['sbt/stringutil'],function(stringUtil) {
 		isAbsolute: function(url) {
 			return url.indexOf("://")>=0;
 		}
-	}
+	};
 });

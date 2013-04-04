@@ -1,5 +1,9 @@
 // This snippet shows you how to test the underlying JavaScript library
 // It just use straight JS so the result can be used to load the SDK library 
+function update(text) {
+    document.getElementById('content').innerHTML = "You are using: <span style='font-weight: bold'>"+text+"</span>";
+}
+
 if(window.dojo) {
 	if(dojo.version) {
 		update("Dojo "+dojo.version);
@@ -12,8 +16,4 @@ if(window.dojo) {
 	update("JQuery "+jQuery.fn.jquery);
 } else {
 	update("Unknown");
-}
-
-function update(text) {
-	document.getElementById('content').innerHTML = "You are using: <span style='font-weight: bold'>"+text+"</span>";
 }

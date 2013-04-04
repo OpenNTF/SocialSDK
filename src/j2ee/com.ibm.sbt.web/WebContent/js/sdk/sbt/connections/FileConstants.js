@@ -16,8 +16,8 @@
 /**
  * Social Business Toolkit SDK. Definition of constants for FileService.
  */
-define([],function() {
-	return {
+define(["sbt/config", "sbt/connections/core"],function(sbt) {
+	return sbt.connections.fileConstants = {
 		sbtErrorCodes : {
 			badRequest : 400
 		},

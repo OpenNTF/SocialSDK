@@ -18,7 +18,7 @@
  * Definition of constants for CommunityService.
  */
 define(["sbt/config", "sbt/connections/core"],function(sbt) {
-	return {
+	return sbt.connections.communityConstants = {
 		_methodName : {
 			"createCommunity" : "createCommunity",
 			"updateCommunity" : "updateCommunity",

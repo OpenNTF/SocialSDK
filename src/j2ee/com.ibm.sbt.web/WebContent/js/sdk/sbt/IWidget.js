@@ -21,6 +21,6 @@ define([],function() {
 
 sbt.getUserPref = function(ns,name) {
 	
-}
+};
 
 });

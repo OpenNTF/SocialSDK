@@ -19,6 +19,13 @@
  */
 define(["has", "jquery"],function(has, $) {
 	// Helper methods
+	has.add("bug-for-in-skips-shadowed", function(){
+		// if true, the for-in iterator skips object properties that exist in Object's prototype (IE 6 - ?)
+		for(var i in {toString: 1}){
+			return 0;
+		}
+		return 1;
+	});
     var _extraNames =
         has("bug-for-in-skips-shadowed") ?
             "hasOwnProperty.valueOf.isPrototypeOf.propertyIsEnumerable.toLocaleString.toString.constructor".split(".") : [];
@@ -48,9 +55,22 @@ define(["has", "jquery"],function(has, $) {
     
 	return {
 		mixin: function(dest,sources) {
-			return $.extend(dest,sources);
+			dest = $.extend(dest,sources);
+			if(has("bug-for-in-skips-shadowed")){
+				var i, s, empty = {};
+				if(sources){
+					for(i = 0; i < _extraLen; ++i){
+						name = _extraNames[i];
+						s = sources[name];
+						if(!(name in dest) || (dest[name] !== s && (!(name in empty) || empty[name] !== s))){
+							dest[name] = s;
+						}
+					}
+				}
+			}
+			return dest;
 		},
-		isArray: function(obj) {
+		isArray: function(o) {
 			return $.isArray(o);
 		},
 		isString: function(o) {

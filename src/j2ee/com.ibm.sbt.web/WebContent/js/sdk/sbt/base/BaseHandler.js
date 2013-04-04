@@ -18,33 +18,37 @@
  * Social Business Toolkit SDK. 
  * Helpers for the base capabilities of data handlers.
  */
-define(['sbt/_bridge/declare','sbt/xml','sbt/xpath'],function(declare, xml, xpath) {
+define(['sbt/_bridge/declare'], 
+    function(declare) {
 
-	var BaseHandler = declare("sbt.base.BaseHandler", null, {	
-		
-		_dataType : "base",
-		
-		constructor : function (options){
-		},
-		
-		_extractEntryFromSingleEntryFeed : function (data, ioArgs){			
-			return data;
-		},
-		
-		_extractIdFromEntry : function(entryData){
-			return null;			
-		},
-		
-		_extractSummaryFromEntitiesFeed : function (data, ioArgs){
-			return null;
-		},
-		_extractEntriesFromEntitiesFeed : function (data, ioArgs){
-			return data;
-		},
-		_constructPayload : function (requestArgs){
-			return null;
-		}
-	
-	});
-	return BaseHandler;
-});
+    	var BaseHandler = declare("sbt.base.BaseHandler", null, {	
+    		
+    		_dataType : "base",
+    		
+    		constructor : function(options) {
+    		},
+    		
+    		_extractEntryFromSingleEntryFeed : function(data, ioArgs) {			
+    			return data;
+    		},
+    		
+    		_extractIdFromEntry : function(entryData) {
+    			return null;			
+    		},
+    		
+    		_extractSummaryFromEntitiesFeed : function(data, ioArgs) {
+    			return null;
+    		},
+    		
+    		_extractEntriesFromEntitiesFeed : function(data, ioArgs) {
+    			return data;
+    		},
+    		
+    		_constructPayload : function(requestArgs) {
+    			return null;
+    		}
+    	
+    	});
+    	return BaseHandler;
+    }
+);

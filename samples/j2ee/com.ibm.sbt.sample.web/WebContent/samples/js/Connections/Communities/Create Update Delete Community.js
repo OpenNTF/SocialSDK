@@ -13,7 +13,7 @@ require(["sbt/Endpoint", "sbt/connections/CommunityService", "sbt/dom"], functio
             handleError(dom, error);
         }
     });
-    displayMessage(dom, "Please wait... Loading your profile entry");
+    dom.setText("success", "Please wait... Loading your profile entry");
 });
 
 function loadCommunity(communityService, dom) {
@@ -44,11 +44,12 @@ function loadCommunity(communityService, dom) {
     }
 }
 
-function createCommunity(communityService, title, content, dom) {
+function createCommunity(communityService, title, content, tags, dom) {
     currentCommunity = null;
     var community = communityService.getCommunity({ loadIt : false }); 
     community.setTitle(title);
     community.setContent(content);
+    community.setTags(tags);
     communityService.createCommunity(community, {               
         load : function(community) { 
             handleCommunityCreated(community, dom);
@@ -108,9 +109,9 @@ function handleCommunityLoaded(community, dom) {
         return;
     }
     
+    dom.byId("communityId").value = community.getCommunityUuid();
     dom.byId("communityTitle").value = community.getTitle();
     dom.byId("communityTags").value = community.getTags().join();
-    dom.byId("communityId").value = community.getCommunityUuid();
     
     currentCommunity = community;
 
@@ -124,10 +125,7 @@ function handleCommunityLoaded(community, dom) {
 }
 
 function handleCommunityCreated(community, dom) {
-    var id = dom.byId("communityId");
-    id.value = community.getCommunityUuid();
-    
-    currentCommunity = community;
+    handleCommunityLoaded(community, dom);
     
     displayMessage(dom, "Successfully created community: " + community.getCommunityUuid());
 }
@@ -155,7 +153,8 @@ function addOnClickHandlers(communityService, dom) {
         dom.byId("communityId").value = "";
         var title = dom.byId("communityTitle");
         var content = dom.byId("communityContent");
-        createCommunity(communityService, title.value, content.value, dom);
+        var tags = dom.byId("communityTags");
+        createCommunity(communityService, title.value, content.value, tags.value, dom);
     };
     dom.byId("deleteBtn").onclick = function(evt) {
         var id = dom.byId("communityId");

@@ -4,13 +4,13 @@ require(["sbt/dom", "sbt/Endpoint", "sbt/config" ], function(dom, Endpoint) {
         serviceUrl : "/profiles/atom/profile.do",
         handleAs : "text",
         content : {
-            email : "%{sample.id1}"
+            email : "%{sample.email1}"
         },
         load : function(response) {
-            dom.byId("content").appendChild(dom.createTextNode(response));
+            dom.setText("xml", response);
         },
         error : function(error) {
-            dom.byId("content").appendChild(dom.createTextNode(error));
+            dom.setText("xml", json.jsonBeanStringify(error));
         }
     });
 });

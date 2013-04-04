@@ -28,9 +28,9 @@ import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.util.UrlUtil;
 import com.ibm.sbt.security.authentication.AuthenticationException;
 import com.ibm.sbt.services.client.ClientService;
-import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.ClientService.Args;
 import com.ibm.sbt.services.client.ClientService.Handler;
+import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.endpoints.js.JSReference;
 import com.ibm.sbt.util.SBTException;
 
@@ -122,6 +122,11 @@ public class ApplicationEndpoint implements Endpoint {
     @Override
 	public String getAuthType() {
     	return "application";
+    }
+    
+    @Override
+    public String getApiVersion() {
+        return null;
     }
     
     @Override

@@ -95,21 +95,11 @@ define(['sbt/xml'], function(xml) {
 		    return template.replace(/\$\{([^\s\:\}]+)(?:\:([^\s\:\}]+))?\}/g,
 		        function(match, key, format){
 		            var value = map[key] || "";
-                    if (typeof value == 'function') {
-                        // invoke function to return the value
-                        try {
-                            value = value.apply(thisObject, [ map ]);
-                        } catch (ex) {
-                            value = "ERROR:" + key + " " + ex;
-                        }
-                    }
-                    if (transformer) {
-		                value = transformer.call(thisObject, value, key).toString();
-		            } 
-	                if (typeof value == "undefined" || value == null) {
-	                    return "";
-	                }
-		            return value;
+		            if (transformer) {
+		                return transformer.call(thisObject, value, key).toString();
+		            } else {
+		                return value.toString();
+		            }
 		        }
 		    );
 		}

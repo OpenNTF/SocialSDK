@@ -208,8 +208,11 @@ public class OAuth2Endpoint extends AbstractEndpoint {
 	}
 	
 	@Override
-	public void logout() throws OAuthException {
-		oAuthHandler.deleteToken();
+	public void logout() {
+		//DONT KNOW IF THIS IS CORRECT WAY TO LOGOUT. IT IS WORK IN PROGRESS
+		oAuthHandler.setConsumerKey(null);
+		oAuthHandler.setConsumerSecret(null);
+		oAuthHandler.getAccessToken();
 	}
 	
 	public OAuth2Handler getHandler(){

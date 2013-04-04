@@ -61,10 +61,6 @@ public class FileResourcePropertiesFactory extends AbstractPropertiesFactory {
 			return null;
 		}
 		File file = new File(userDir, fileName);
-		if (!(file.exists())) { // if file was not present in user dir, search in home directory
-			userDir = getHomeDirectory();
-			file = new File(userDir, fileName);
-		}
 		if (file.exists()) {
 			try {
 				Properties properties = new Properties();
@@ -83,10 +79,6 @@ public class FileResourcePropertiesFactory extends AbstractPropertiesFactory {
 		if (StringUtil.isEmpty(directory)) {
 			directory = System.getProperty("user.dir");
 		}
-		return directory;
-	}
-	private String getHomeDirectory() {
-		String directory = System.getProperty("user.home");
 		return directory;
 	}
 }

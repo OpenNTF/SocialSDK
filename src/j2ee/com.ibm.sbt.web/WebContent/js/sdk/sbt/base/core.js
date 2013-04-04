@@ -18,9 +18,13 @@
  * Social Business Toolkit SDK. 
  * Helpers for the core capabilities
  */
-define([],function() {
+define(['sbt/config'],function(sbt) {
 
-	return {
+
+/**
+ * Global Namespaces Object.
+ */
+	return sbt.base = {
 		// Namespaces used when parsing Atom feeds
         namespaces : {
             o : "http://ns.opensocial.org/2008/opensocial",

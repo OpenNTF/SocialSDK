@@ -586,6 +586,44 @@ public class OAuth2Handler extends OAuthHandler {
     
     
     // ==========================================================
+    //  Delete token
+    // ==========================================================
+    
+    public void deleteToken() throws OAuthException {
+        if (Profiler.isEnabled()) {
+            ProfilerAggregator agg = Profiler.startProfileBlock(profilerDeleteToken, "");
+            long ts = Profiler.getCurrentTime();
+            try {
+                _deleteToken(Context.get(), null);
+            } finally {
+                Profiler.endProfileBlock(agg, ts);
+            }
+        } else {
+            _deleteToken(Context.get(), null);
+        }
+    }
+    protected void _deleteToken(Context context, String userId) throws OAuthException {
+    	readConsumerToken();
+    	
+        if(StringUtil.isEmpty(userId)) {
+            userId = context.getCurrentUserId();
+            if(StringUtil.isEmpty(userId)) {
+                return;
+            }
+            
+        }
+        if(StringUtil.equals(userId, "anonymous"))
+		{
+        	AnonymousCredentialStore.deleteCredentials(context, getAppId(),getServiceName()); 
+		}
+        else {
+        TokenStore ts = OATokenStoreFactory.getTokenStore(getTokenStore());
+        if(ts!=null) {
+            // Find the token for this user
+            ts.deleteAccessToken(getAppId(), getServiceName(), getConsumerKey(), null, null, userId);
+        }}
+    }
+    
     //  Renew the token
     // ==========================================================
 

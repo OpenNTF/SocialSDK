@@ -11,7 +11,7 @@ require(["sbt/Endpoint", "sbt/dom" ], function(Endpoint, dom) {
             content: { email: emails[i] },
             handle: function(response) {
                 text += "\n" + response;
-                dom.setText("json", text);
+                dom.setText("xml", text);
             }
         });
     }

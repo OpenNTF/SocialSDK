@@ -13,7 +13,7 @@ require(["sbt/Endpoint", "sbt/connections/CommunityService", "sbt/dom"], functio
             handleError(dom, error);
         }
     });
-    displayMessage(dom, "Please wait... Loading your profile entry");
+    dom.setText("success", "Please wait... Loading your profile entry");
 });
 
 function loadCommunity(communityService, dom) {

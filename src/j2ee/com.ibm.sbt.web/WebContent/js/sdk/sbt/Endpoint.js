@@ -201,8 +201,11 @@ var Endpoint = declare("sbt.Endpoint", null, {
 				var error = data;
 				// check for if authentication is required				
 				if (error.code == 401 || error.code == self.authenticationErrorCode) {
-					var autoAuthenticate =  _args.autoAuthenticate || self.autoAuthenticate || sbt.Properties["autoAuthenticate"] || "true";
-					if(autoAuthenticate == "true"){
+					var autoAuthenticate =  _args.autoAuthenticate || self.autoAuthenticate || sbt.Properties["autoAuthenticate"];
+					if(autoAuthenticate == undefined){
+						autoAuthenticate = true;
+					}
+					if(autoAuthenticate){
 						if(self.authenticator) {
 							options = {
 								dialogLoginPage:self.loginDialogPage,
@@ -399,3 +402,4 @@ Endpoint.find = function(name){
 
 return Endpoint;
 });
+

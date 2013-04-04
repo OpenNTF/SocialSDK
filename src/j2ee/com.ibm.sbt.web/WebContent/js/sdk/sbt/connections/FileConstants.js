@@ -64,7 +64,7 @@ define([ "sbt/config", "sbt/connections/core" ], function(sbt) {
 			"lastAccessed" : "td:lastAccessed",
 			"libraryId" : "td:libraryId",
 			"propagation" : "td:propagation",
-			"objectTypeId" : "td:objectTypeId",
+			"objectTypeId" : "td:objectTypeId"
 		},
 
 		xpath_files : {

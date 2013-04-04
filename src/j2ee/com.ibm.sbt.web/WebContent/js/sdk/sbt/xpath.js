@@ -113,8 +113,7 @@ define(['sbt/_bridge/declare'],function(declare) {
 		selectText : function(node) {
 			var result = this.selectSingleNode(node);
 			return result ? (result.text || result.textContent) : null;
-		},
-		
+		}
 	});
 	
 	return {

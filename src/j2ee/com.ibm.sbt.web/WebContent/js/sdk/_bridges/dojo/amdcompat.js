@@ -49,8 +49,6 @@ window._sbt_bridge_compat = true;
 		currentModule = moduleName;
 		try {
 			return _load.apply(null,arguments);
-		} catch(ex){ 
-			console.log(ex.message);
 		} finally {
 			currentModule = null;
 		}

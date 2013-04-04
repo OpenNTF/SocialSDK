@@ -20,9 +20,9 @@
 define(['jquery'], function($) {
 	return {
         byId: function(id) {
-        	if (id.NodeType == 1) { //Check if it is Node.ELEMENT_NODE
+        	if (id instanceof HTMLElement) {
         		return id;
-        	} else if (typeof id === 'string') {
+        	} else if (id instanceof String) {
         		return $("#"+id)[0];
         	}
         },

@@ -95,11 +95,11 @@ define(['sbt/_bridge/declare'],function(declare){
 				         try { return $ && _v && eval(x.replace(/@/g, "_v")); }
 				         catch(e) { throw new SyntaxError("jsonPath: " + e.message + ": " + x.replace(/@/g, "_v").replace(/\^/g, "_a")); }
 				      }
-			 }
+			 };
 			 var $ = obj;
 			   if (expr && obj && (P.resultType == "VALUE" || P.resultType == "PATH")) {
 			      P.trace(P.normalize(expr).replace(/^\$;/,""), obj, "$");
 			      return P.result.length ? P.result : false;
 			   }
-		}		
+		};	
 });

@@ -56,7 +56,10 @@ define(['sbt/lang'], function(lang) {
 			return xmlDoc;
 		},
 		asString: function(xmlDoc) {
+			var xmlDoc = null;
 			if(window.ActiveXObject){
+				xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
+				xmlDoc.async="false";
 				return xmlDoc.xml;
 			} else {
 				return (new XMLSerializer()).serializeToString(xmlDoc);

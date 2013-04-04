@@ -128,6 +128,12 @@ public interface Endpoint {
     public String getAuthType();
     
     /**
+     * Get API version for the endpoint
+     * @return
+     */
+    public String getApiVersion();
+    
+    /**
      * Verifies whether the given header is supported by the endpoint
      * @param headerName name of the header
      * @return boolean

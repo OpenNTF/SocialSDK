@@ -29,7 +29,10 @@ define([],function() {
 		FOLLOWING  :"@following",
 		FRIENDS    :"@friends",
 		SELF       :"@self",
-		INVOLVED   :"@involved"
+		INVOLVED   :"@involved",
+		NOTESFORME :"@notesforme",
+		NOTESFROMME:"@notesforme",
+		RESPONSES  :"@responses"
 	},
 	ASApplication:{
 		ALL        :"@all",
@@ -155,7 +158,6 @@ define([],function() {
 	errorMessages:{
 		args_object	   : "argument passed to get stream should be an Object",
 		required_communityid   : "Community ID is required"
-	},
-
+	}
 };
 });

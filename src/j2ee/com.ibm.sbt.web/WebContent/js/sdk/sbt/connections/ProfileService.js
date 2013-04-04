@@ -522,8 +522,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 				entity: inputProfile,
 				headers:headers,
 				xmlPayload : this._constructUpdateRequestBody(inputProfile,_fields),						
-				urlParams : _param,
-				
+				urlParams : _param
 			});			
 		},
 		
@@ -615,11 +614,11 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 		},
 		
 		getColleagues : function(profile, args){			
-			this._validateProfileObject(profile, args);			
+			this._validateProfileObject(profile, args);
 			var params = {};
 			if(args && args.parameters){
 				params = args.parameters;
-			}			
+			}
 			if(this._isEmail(profile._id)) {
 				params.email = profile._id; 
 			} else {
@@ -630,14 +629,14 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 			
 			var headers = {
 					"Content-Type" : "application/atom+xml"
-				};
+			};
 			
 			this._getEntities(args,
 					{entityName: "profile", serviceEntity: "getColleagues", entityType: "",						
 						entity: Profile, urlParams : params, headers : headers, dataHandler: handler
-						
-					});
+			});
 		},
+		
 		_findIdForEmailInCache:function(emailAtr){
 			if(this._cache) {				
 				return this._cache.browse(function(k,v) {// see this code again
@@ -648,7 +647,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 				});
 			}
 			return null;
-		},
+		}
 	});	
 	return ProfileService;
 });

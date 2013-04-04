@@ -678,8 +678,7 @@ define(
 						return false;
 					}			
 					return true;
-				},
-				
+				}
 			});
 			/**
 			 * Community service class associated with the community service of IBM Connections.

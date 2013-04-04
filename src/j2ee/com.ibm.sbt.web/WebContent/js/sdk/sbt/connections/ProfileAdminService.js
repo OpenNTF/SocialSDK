@@ -21,9 +21,9 @@
  * Helpers for accessing the Connections Profiles services
  */
 define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sbt/xml','sbt/util','sbt/xpath','sbt/Cache','sbt/connections/ProfileService','sbt/connections/ProfileConstants','sbt/validate'],
-		function(declare,cfg,lang,con,xml,util,xpath,Cache,ProfileService,constants,validate) {
+		function(declare,cfg,lang,con,xml,util,xpath,Cache,profileService,constants,validate) {
 	
-	var ProfileAdminService = declare("sbt.connections.ProfileAdminService", ProfileService, {
+	var ProfileAdminService = declare("sbt.connections.ProfileAdminService", sbt.connections.ProfileService, {
 		
 		constructor: function(_options) {
 			this.inherited(arguments, [_options]);

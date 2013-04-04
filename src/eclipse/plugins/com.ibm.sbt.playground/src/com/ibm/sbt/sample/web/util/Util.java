@@ -45,7 +45,7 @@ public class Util {
         { "jQuery 1.9.1 CDN", "jquery191cdn", "includes/jquery191cdn.jsp", "/library?lib=jquery&ver=1.9.1" },
         { "jQuery 1.9.1 CDN Debug", "jquery191cdndebug", "includes/jquery191cdndebug.jsp", "/library?lib=jquery&ver=1.9.1" }
     };
-    
+
     public static String[][] THEMES = new String[][] {
         // title, id
         { "One UI", "oneui" },
@@ -110,11 +110,15 @@ public class Util {
     }
     
     public static String getSelectedLibrary(HttpServletRequest request) {
-        return getJsLibId(request);
+        String id = request.getParameter("jsLibId");
+        return (StringUtil.isEmpty(id)) ? JS_LIBS[0][1] : id; 
     }
     
     public static String getLibraryInclude(HttpServletRequest request) {
-        String id = getJsLibId(request);
+        String id = request.getParameter("jsLibId");
+        if (StringUtil.isEmpty(id)) {
+            id = JS_LIBS[0][1];
+        }
         String libraryInclude = null;
         for (int i=0; i<JS_LIBS.length; i++) {
             if (JS_LIBS[i][1].equals(id)) {
@@ -126,7 +130,10 @@ public class Util {
     }
     
     public static String getLibraryUrl(HttpServletRequest request) {
-        String id = getJsLibId(request);
+        String id = request.getParameter("jsLibId");
+        if (StringUtil.isEmpty(id)) {
+            id = JS_LIBS[0][1];
+        }
         String libraryUrl = null;
         for (int i=0; i<JS_LIBS.length; i++) {
             if (JS_LIBS[i][1].equals(id)) {
@@ -141,7 +148,7 @@ public class Util {
     public static String getJsLibId(HttpServletRequest request) {
         String id = request.getParameter("jsLibId");
         if (StringUtil.isEmpty(id)) {
-            id = JS_LIBS[5][1];
+            id = JS_LIBS[0][1];
         }
         return id;
     }

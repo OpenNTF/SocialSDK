@@ -26,7 +26,7 @@
  * @static
  **/
 
-define(['sbt/_bridge/json', 'sbt/_bridge/lang', 'sbt/log', 'sbt/stringutil'], function(jsonLib, lang, log, stringUtil) {
+define(['sbt/_bridge/json', 'sbt/_bridge/lang', 'sbt/stringutil'], function(jsonLib, lang, stringUtil) {
     return {
         /**
          * Parses a String of JSON and returns a JSON Object.
@@ -116,25 +116,20 @@ define(['sbt/_bridge/json', 'sbt/_bridge/lang', 'sbt/log', 'sbt/stringutil'], fu
             }
             return jsonObj;
         },
-        _notReserved: function(property) {
-        	return property!=='isInstanceOf' && property!=='getInherited';
-        },        
+        
         _getObjectValue: function(theObj, property, seen) {
-        	var self = this;
             if (lang.isFunction(theObj[property])) {
-                if ((stringUtil.startsWith(property, "get") || stringUtil.startsWith(property, "is")) && self._notReserved(property)) {
+                if (stringUtil.startsWith(property, "get") || stringUtil.startsWith(property, "is")) {
                     try {
                         var value = theObj[property].apply(theObj);
                         if (value && !this._isBuiltin(value) && lang.isObject(value)) {
                             return this._jsonBean(value, seen);
                         }
                         return value;
-                    } catch(error) {
-                        //log.error("Error {0}.{1} caused {2}", theObj, property, error);
-                    }
+                    } catch(error) {}
                 }
             } else {
-                if (!stringUtil.startsWith(property, "_") && !stringUtil.startsWith(property, "-")) {
+                if (!stringUtil.startsWith(property, "_")) {
                     return theObj[property];
                 }
             }

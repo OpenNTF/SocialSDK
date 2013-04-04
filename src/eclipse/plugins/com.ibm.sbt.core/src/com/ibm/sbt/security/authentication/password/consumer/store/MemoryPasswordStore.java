@@ -35,7 +35,7 @@ public class MemoryPasswordStore implements PasswordStore {
         protected UserPwd() {
         }
         protected UserPwd(String requestUri, String user, String password) {
-            super(user, password);
+            super(requestUri, user, password);
         }
     }
     

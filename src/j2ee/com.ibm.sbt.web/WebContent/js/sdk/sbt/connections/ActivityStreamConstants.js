@@ -29,10 +29,7 @@ define([],function() {
 		FOLLOWING  :"@following",
 		FRIENDS    :"@friends",
 		SELF       :"@self",
-		INVOLVED   :"@involved",
-		NOTESFORME :"@notesforme",
-		NOTESFROMME:"@notesforme",
-		RESPONSES  :"@responses"
+		INVOLVED   :"@involved"
 	},
 	ASApplication:{
 		ALL        :"@all",

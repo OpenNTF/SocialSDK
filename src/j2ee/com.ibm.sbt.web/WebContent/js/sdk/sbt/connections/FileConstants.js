@@ -18,7 +18,6 @@
  */
 define([],function() {
 	return {
-		FILE_TYPE_CONNECTIONS : "connections",
 		sbtErrorCodes : {
 			badRequest : 400
 		},

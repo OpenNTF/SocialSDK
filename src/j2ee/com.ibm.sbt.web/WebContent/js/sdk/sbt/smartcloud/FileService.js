@@ -23,8 +23,6 @@ define(
 				'sbt/smartcloud/FileConstants', 'sbt/smartcloud/Subscriber', 'sbt/base/BaseService', 'sbt/log', 'sbt/stringutil', 'sbt/validate',
 				'sbt/base/XmlHandler' ], function(declare, cfg, lang, con, xml, xpath, Cache, Endpoint, FileConstants, Subscriber, BaseService, log,
 				stringutil, validate, XmlHandler) {
-			
-			var fileHandler = new XmlHandler({xpath_map: FileConstants.xpath_File, xpath_feed_map: FileConstants.xpath_feed_File,nameSpaces:con.namespaces});
 
 			function notifyCbNoCache(args, param) {
 
@@ -52,8 +50,7 @@ define(
 					var args = {
 						entityName : "File",
 						Constants : FileConstants,
-						con : con,
-						dataHandler: fileHandler
+						con : con
 					};
 					this.inherited(arguments, [ svc, id, args ]);
 				},
@@ -453,8 +450,7 @@ define(
 					var args = {
 						entityName : "UserProfile",
 						Constants : FileConstants,
-						con : con,
-						dataHandler: fileHandler
+						con : con
 					};
 					this.inherited(arguments, [ svc, id, args ]);
 				},
@@ -516,12 +512,14 @@ define(
 				_endpointName : null,
 				constructor : function(_options) {
 					var options = _options || {};
-					this._endpointName = options.endpoint || "smartcloud";					
+					this._endpointName = options.endpoint || "smartcloud";
+					var handler = new XmlHandler({xpath_map: FileConstants.xpath_File, xpath_feed_map: FileConstants.xpath_feed_File,nameSpaces:con.namespaces});
 					options = lang.mixin({
 						endpoint : this._endpointName,
 						Constants : FileConstants,
 						con : con,
-						cachingEnabled : false
+						cachingEnabled : false,
+						dataHandler: handler
 					});
 					this.inherited(arguments, [ options ]);
 				},
@@ -596,8 +594,7 @@ define(
 										subscriberId : _self._subscriberId
 									},
 									entity : FileEntry,
-									urlParams : args.parameters,
-									dataHandler: fileHandler
+									urlParams : args.parameters
 								});
 							}
 						});
@@ -633,8 +630,7 @@ define(
 										subscriberId : _self._subscriberId
 									},
 									entity : FileEntry,
-									urlParams : args.parameters,
-									dataHandler: fileHandler									
+									urlParams : args.parameters
 								});
 							}
 						});
@@ -688,8 +684,7 @@ define(
 										subscriberId : _self._subscriberId
 									},
 									entity : FileEntry,
-									urlParams : parameters,
-									dataHandler: fileHandler
+									urlParams : parameters
 								});
 							}
 						});
@@ -737,8 +732,7 @@ define(
 										fileId : args.id
 									},
 									entity : FileEntry,
-									urlParams : parameters,
-									dataHandler: fileHandler
+									urlParams : parameters
 								});
 							}
 						});
@@ -808,6 +802,47 @@ define(
 							}
 						});
 					}
+				},
+				updateFile : function(args) {
+					var _self = this;
+					if (!this._subscriberId) {
+						var subscriber = new Subscriber(this._endpoint);
+						subscriber.load(function(subscriber, response) {
+							if (subscriber) {
+								_self._subscriberId = subscriber.getSubscriberId(response);
+								_self._getOne({
+									load : function(file) {
+										var updatePayload = _self._constructPayloadForUpdate(file.getName(), args.updateProperties);
+										_self._updateEntity(args, {
+											xmlPayload : updatePayload,
+											entityName : "File",
+											serviceEntity : "ENTRY",
+											entityType : "UPDATE_FILE",
+											replaceArgs : {
+												subscriberId : _self._subscriberId,
+												fileId : args.id
+											},
+											entity : FileEntry
+										});
+
+									},
+									error : function(error) {
+										validate.notifyError(error, args);
+									}
+								}, {
+									entityName : "File",
+									serviceEntity : "ENTRY",
+									entityType : "GET_FILE_ENTRY",
+									replaceArgs : {
+										subscriberId : _self._subscriberId,
+										fileId : args.id
+									},
+									entity : FileEntry,
+								});
+							}
+						});
+					}
+
 				}
 			});
 			return FileService;

@@ -29,7 +29,7 @@ define(["sbt/config", "sbt/connections/core"],function(sbt) {
 			args_profile   :"Invalid profile",
 			null_profile   :"Null profile"
 		},
-		 xpath_profile : {
+		xpath_profile : {
 		        "id":               "a:id",
 			 	"entry":			"/a:feed/a:entry",
 				"uid":				"a:contributor/snx:userid",
@@ -60,7 +60,7 @@ define(["sbt/config", "sbt/connections/core"],function(sbt) {
 				"networkProfileEmail":	"snx:connection/a:contributor[@snx:rel='http://www.ibm.com/xmlns/prod/sn/connection/target']/a:email",
                 "totalResults"      :"/a:feed/opensearch:totalResults",
                 "startIndex"        :"/a:feed/opensearch:startIndex",
-                "itemsPerPage"      :"/a:feed/opensearch:itemsPerPage",
+                "itemsPerPage"      :"/a:feed/opensearch:itemsPerPage"
 		},
 		
 		xpath_feed_profile : {
@@ -113,6 +113,6 @@ define(["sbt/config", "sbt/connections/core"],function(sbt) {
 		},		
 		entityType : {
 				
-		},
+		}
 	};
 });

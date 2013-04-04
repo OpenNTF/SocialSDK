@@ -158,7 +158,6 @@ define([],function() {
 	errorMessages:{
 		args_object	   : "argument passed to get stream should be an Object",
 		required_communityid   : "Community ID is required"
-	},
-
+	}
 };
 });

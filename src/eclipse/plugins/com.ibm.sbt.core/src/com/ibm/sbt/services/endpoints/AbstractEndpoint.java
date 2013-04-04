@@ -21,6 +21,7 @@ import java.util.Map;
 import com.ibm.commons.runtime.Application;
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.util.StringUtil;
+import com.ibm.sbt.security.credential.store.CredentialEncryptor;
 import com.ibm.sbt.service.core.handlers.ProxyHandler;
 import com.ibm.sbt.services.client.AuthenticationService;
 import com.ibm.sbt.services.client.ClientService;
@@ -48,6 +49,8 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     private String autoAuthenticate;
     private String authenticationService;
     private String clientServiceClass;
+    private String apiVersion;
+    private String credentialStore;
     private boolean requiresAuthentication;
     private boolean forceTrustSSLCertificate;
     private boolean allowClientAccess = true;
@@ -125,6 +128,21 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     }
     
     /* (non-Javadoc)
+     * @see com.ibm.sbt.services.endpoints.Endpoint#getApiVersion()
+     */
+    @Override
+    public String getApiVersion() {
+        return this.apiVersion;
+    }
+    
+    /**
+     * @param apiVersion the apiVersion to set
+     */
+    public void setApiVersion(String apiVersion) {
+        this.apiVersion = apiVersion;
+    }
+    
+    /* (non-Javadoc)
      * @see com.ibm.sbt.services.endpoints.Endpoint#isAllowClientAccess()
      */
     @Override
@@ -176,6 +194,20 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     }
     public void setClientServiceClass(String clientServiceClass) {
         this.clientServiceClass = clientServiceClass;
+    }
+    
+    public String getApplicationName() {
+    	return null;
+    }
+	public String getCredentialStore() {
+        return credentialStore;
+    }
+    public void setCredentialStore(String credentialStore) {
+        this.credentialStore = credentialStore;
+    }
+    
+	public CredentialEncryptor createEncryptor() {
+        return null;
     }
 
     @Override

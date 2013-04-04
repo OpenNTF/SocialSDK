@@ -15,7 +15,7 @@ function login(loginUi) {
 	require(['sbt/Endpoint',"sbt/dom","sbt/config"], function(Endpoint,dom,config) {
 		config.Properties["loginUi"] = loginUi;
 		Endpoint.find("connections").authenticate({
-			success: function(response){
+			load: function(response){
 				dom.setText("connectionsLoginStatus","You are authenticated");
 				dom.byId("connectionsLogin").style.display = "none";
 				dom.byId("connectionsLogout").style.display = "inline";	
@@ -30,7 +30,7 @@ function login(loginUi) {
 function logout() {
 	require(['sbt/Endpoint',"sbt/dom"], function(Endpoint,dom) {
 		Endpoint.find("connections").logout({
-			success: function(response){
+			load: function(response){
 				dom.setText("connectionsLoginStatus","You are not authenticated");
 				dom.byId("connectionsLogin").style.display = "inline";
 				dom.byId("connectionsLogout").style.display = "none";

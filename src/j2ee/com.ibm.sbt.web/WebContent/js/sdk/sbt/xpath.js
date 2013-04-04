@@ -27,7 +27,7 @@ define(['sbt/_bridge/declare'],function(declare) {
 	@class xpath
 	@static
 	*/
-	var XPathExpr = declare(null, {
+	var XPathExpr = declare("sbt.xpathexpr", null, {
 		ie:		false,
 		constructor: function(xpath, nsArray){
 		     this.xpath = xpath;    

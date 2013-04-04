@@ -25,7 +25,7 @@
  * @class Endpoint
  * 
  */
-define(['sbt/_bridge/declare','sbt/lang','sbt/ErrorTransport','sbt/pathUtil','sbt/compat'],function(declare,lang,ErrorTransport,pathUtil) {
+define(['sbt/_bridge/declare','sbt/lang','sbt/ErrorTransport','sbt/pathUtil'],function(declare,lang,ErrorTransport,pathUtil) {
 
 
 var Endpoint = declare("sbt.Endpoint", null, {
@@ -128,10 +128,10 @@ var Endpoint = declare("sbt.Endpoint", null, {
      * @method _notifyError
      * @param error
      */
-	_notifyError: function(args, error, ioArgs) {
+	_notifyError: function(args, error) {
         if (args.handle) {
             try {
-                args.handle(error, ioArgs);
+                args.handle(error);
             } catch (ex) {
                 // TODO log an error
                 var msg = ex.message;
@@ -139,7 +139,7 @@ var Endpoint = declare("sbt.Endpoint", null, {
         }
         if (args.error) {
             try {
-                args.error(error, ioArgs);
+                args.error(error);
             } catch (ex) {
                 // TODO log an error
                 var msg = ex.message;
@@ -201,11 +201,8 @@ var Endpoint = declare("sbt.Endpoint", null, {
 				var error = data;
 				// check for if authentication is required				
 				if (error.code == 401 || error.code == self.authenticationErrorCode) {
-					var autoAuthenticate =  _args.autoAuthenticate || self.autoAuthenticate || sbt.Properties["autoAuthenticate"];
-					if(autoAuthenticate == undefined){
-						autoAuthenticate = true;
-					}
-					if(autoAuthenticate){
+					var autoAuthenticate =  _args.autoAuthenticate || self.autoAuthenticate || sbt.Properties["autoAuthenticate"] || "true";
+					if(autoAuthenticate == "true"){
 						if(self.authenticator) {
 							options = {
 								dialogLoginPage:self.loginDialogPage,
@@ -226,7 +223,7 @@ var Endpoint = declare("sbt.Endpoint", null, {
 				} 
 
                 // notify handle and error callbacks is available
-				self._notifyError(args, error, ioArgs);
+				self._notifyError(args, error);
 			} else {
 			    // notify handle and load callbacks is available
 			    self._notifyResponse(args, data, ioArgs);
@@ -375,6 +372,7 @@ var Endpoint = declare("sbt.Endpoint", null, {
 			}
 		}, true);
 	}
+	
 });
 
 sbt.Endpoints = {}; // Initially empty

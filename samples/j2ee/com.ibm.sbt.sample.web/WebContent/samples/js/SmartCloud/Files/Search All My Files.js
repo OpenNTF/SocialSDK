@@ -1,26 +1,19 @@
 require([ "sbt/smartcloud/FileService", "sbt/dom" ], function(FileService, dom) {
-	dom.byId("loading").style.visibility = "visible"; 
 	var fileService = new FileService();
 	fileService.getMyFilesAlt({
 		load : function(files) {
+			var content = "";
 			for (counter in files) {
-				var liElement = document.createElement("li");
-				liElement.setAttribute("id", "li" + counter);
-				document.getElementById("content").appendChild(liElement);
-				var aElement = document.createElement("a");
-				aElement.setAttribute("id", "a" + counter);
-				aElement.setAttribute("href", files[counter].getDownloadLink());
-				document.getElementById("li" + counter).appendChild(aElement);
-				dom.setText("a" + counter, files[counter].getName());
+				var userProfile = files[counter].getCreatedBy();
+				content = content + files[counter].getId() + " : " + files[counter].getName() + " : " + userProfile.getName() +((counter == files.length - 1) ? "" : " , ");
 			}
 			if (files.length == 0) {
-				dom.setText("content", "No Result Found");
+				content = "No Result Found";
 			}
-			dom.byId("loading").style.visibility = "hidden"; 
+			dom.setText("content", content);
 		},
 		error : function(error) {
 			dom.setText("content", "Error received. Error Code = " + error.code + ". Error Message = " + error.message);
-			dom.byId("loading").style.visibility = "hidden"; 
 		}
 	});
 });

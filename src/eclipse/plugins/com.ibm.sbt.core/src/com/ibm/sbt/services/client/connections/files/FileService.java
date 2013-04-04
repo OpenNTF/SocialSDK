@@ -131,8 +131,11 @@ public class FileService extends BaseService {
 		String requestUri = constructUrl(BaseUrl.FILES.getBaseUrl(), accessType, category, null, null,
 				subFilters, resultType); // we pass null value for non applicable types.
 		Map<String, String> headers = new HashMap<String, String>();
-		headers.put(Headers.ContentType, Headers.ATOM);
-		Object updateFilePayload = constructPayload(fileEntry, payloadMap);
+		Object updateFilePayload = null;
+		if (payloadMap != null && !payloadMap.isEmpty()) {
+			headers.put(Headers.ContentType, Headers.ATOM);
+			updateFilePayload = constructPayload(fileEntry, payloadMap);
+		}
 		Document result = executePut(requestUri, params, headers, updateFilePayload);
 		return updateFileEntryWithResponseFeed(fileEntry, result);
 	}
@@ -175,7 +178,9 @@ public class FileService extends BaseService {
 		String requestUri = constructUrl(BaseUrl.FILES.getBaseUrl(), accessType, category, null, null,
 				subFilters, resultType); // we pass null value for non applicable types.
 		Map<String, String> headers = new HashMap<String, String>();
-		headers.put(Headers.ContentType, Headers.ATOM);
+		if (requestBody != null) {
+			headers.put(Headers.ContentType, Headers.ATOM);
+		}
 		Document result = executePut(requestUri, params, headers, requestBody);
 		return updateFileEntryWithResponseFeed(fileEntry, result);
 	}
@@ -1742,13 +1747,15 @@ public class FileService extends BaseService {
 
 			List<Object> resultantObjects = executeGet(requestUri, parameters, ClientService.FORMAT_XML,
 					FileEntry.class);
-			List<FileEntry> resultantEntries = new ArrayList<FileEntry>();
-			for (Object eachObject : resultantObjects) {
-				resultantEntries.add((FileEntry) eachObject);
-			}
+			if (resultantObjects != null) {
+				List<FileEntry> resultantEntries = new ArrayList<FileEntry>();
+				for (Object eachObject : resultantObjects) {
+					resultantEntries.add((FileEntry) eachObject);
+				}
 
-			if (resultantEntries != null && !resultantEntries.isEmpty()) {
-				file = resultantEntries.get(0);
+				if (resultantEntries != null && !resultantEntries.isEmpty()) {
+					file = resultantEntries.get(0);
+				}
 			}
 		}
 		return file;

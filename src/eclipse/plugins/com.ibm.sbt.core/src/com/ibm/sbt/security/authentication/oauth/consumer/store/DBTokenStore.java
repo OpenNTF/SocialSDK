@@ -52,7 +52,6 @@ public class DBTokenStore implements TokenStore {
 	private String			jndiName;
 	private String			jdbcDriverClass;
 	private String			defaultJndiName = "jdbc/ibmsbt-dbtokenstore";
-	private TokenStoreEncryptor encryptorClass;
 	
 	public DBTokenStore() {
 //		setJdbcDriverClass("org.apache.derby.jdbc.EmbeddedDriver");
@@ -125,8 +124,7 @@ public class DBTokenStore implements TokenStore {
 					ResultSet rs = stmt.executeQuery();
 					try {
 						token = deSerializeObject(rs);
-						byte[] fetchedToken = getEncryptorClass().decrypt(convertToBytes(token));
-						token = deSerializeObject(fetchedToken);
+						
 					} finally {
 						rs.close();
 					}
@@ -153,8 +151,7 @@ public class DBTokenStore implements TokenStore {
 			try {
 				PreparedStatement ps = connection.prepareStatement("INSERT INTO APPTOKEN VALUES (?, ?, ?)");
 				try {
-					byte[] byteapptoken = convertToBytes(token);
-					byteapptoken = getEncryptorClass().encrypt(byteapptoken);
+					byte[] byteapptoken = convertToBytesForUpload(token);
 					ps.setString(1, application);
 					ps.setString(2, serviceName);
 					ps.setObject(3, byteapptoken);
@@ -189,9 +186,6 @@ public class DBTokenStore implements TokenStore {
 						ResultSet rs = stmt.executeQuery();
 						try {
 							token = deSerializeObject(rs);
-							System.err.println(" trying to print token information "+((AccessToken)token).getAppId());
-							byte[] fetchedToken = getEncryptorClass().decrypt(convertToBytes(token));
-							token = deSerializeObject(fetchedToken);
 						} finally {
 							rs.close();
 						}
@@ -226,9 +220,7 @@ public class DBTokenStore implements TokenStore {
 					ps.setString(2, serviceName);
 					ps.setString(3, userId);
 
-					byte[] data = convertToBytes(token);
-					data = getEncryptorClass().encrypt(data);
-					
+					byte[] data = convertToBytesForUpload(token);
 					ps.setObject(4, data);
 					ps.executeUpdate();
 				} finally {
@@ -290,14 +282,6 @@ public class DBTokenStore implements TokenStore {
 	public void setJdbcDriverClass(String jdbcDriverClass) {
 		this.jdbcDriverClass = jdbcDriverClass;
 	}
-	
-	public TokenStoreEncryptor getEncryptorClass() {
-		return encryptorClass;
-	}
-
-	public void setEncryptorClass(TokenStoreEncryptor encryptorClass) {
-		this.encryptorClass = encryptorClass;
-	}
 
 	// All utility methods here
 	
@@ -308,25 +292,9 @@ public class DBTokenStore implements TokenStore {
 		try {
 			rs.next();
 			byte[] buf = rs.getBytes(1);
-			if (buf != null) {
-					Object deSerializedObject = deSerializeObject(buf);
-					return deSerializedObject;
-				} 
-		} catch (Exception e) {
-			throw new OAuthException(e);
-		}
-		return null;
-	}
-	
-	
-	/*
-	 * Method for de-serializing the object from bytes to java object
-	 */
-	private Object deSerializeObject(byte[] tokendata) throws OAuthException{
-		try {
 			ObjectInputStream objectIn = null;
-			if (tokendata != null) {
-					objectIn = new ObjectInputStream(new ByteArrayInputStream(tokendata));
+			if (buf != null) {
+					objectIn = new ObjectInputStream(new ByteArrayInputStream(buf));
 					Object deSerializedObject = objectIn.readObject();
 					return deSerializedObject;
 				} 
@@ -362,7 +330,7 @@ public class DBTokenStore implements TokenStore {
 	/*
 	 * Converts the input object to byte array for serializing into DB
 	 */
-	public byte[] convertToBytes(Object object) throws OAuthException {
+	public byte[] convertToBytesForUpload(Object object) throws OAuthException {
 		try {
 			ByteArrayOutputStream bos = new ByteArrayOutputStream();
 			ObjectOutputStream oos = new ObjectOutputStream(bos);

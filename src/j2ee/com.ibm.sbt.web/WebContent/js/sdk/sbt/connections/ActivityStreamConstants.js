@@ -32,7 +32,9 @@ define([],function() {
 		INVOLVED   :"@involved",
 		NOTESFORME :"@notesforme",
 		NOTESFROMME:"@notesforme",
-		RESPONSES  :"@responses"
+		RESPONSES  :"@responses",
+		ACTIONS    :"@actions",
+		SAVED      :"@saved"
 	},
 	ASApplication:{
 		ALL        :"@all",

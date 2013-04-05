@@ -209,8 +209,8 @@ public class DojoLibrary extends AbstractLibrary {
 	 */
 	@Override
 	protected JSReference getTransport(LibraryRequest request, Endpoint endpoint, String endpointName) {
-    	// Dojo versions from 1.8 and above should use dojo/request
-    	//if(request.getJsVersion().startsWith("1.8")) { what happens for version 2.0?
+    	// Dojo2 versions from 1.8 and above should use RequestTransport
+	    //if (isExceedsVersion(request.getJsVersion(), minimumDojo2Version)) {
         //	return endpoint.getTransport(endpointName, MODULE_REQUESTTRANSPORT);
     	//}
 		return endpoint.getTransport(endpointName, MODULE_TRANSPORT);

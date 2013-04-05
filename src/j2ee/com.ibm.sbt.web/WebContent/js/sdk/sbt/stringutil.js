@@ -59,6 +59,7 @@ define(['sbt/xml'], function(xml) {
 			}
 			return str;
 		},
+		
 		/**
 		 * Replaces the String with pattern {<<string>>} with argument map provided. Replaces blank if key to be replaces is not found in argsMap.
 		 * 
@@ -88,6 +89,29 @@ define(['sbt/xml'], function(xml) {
 		
 		endsWith: function x_ew(s,suffix) {
 			return s.length>=suffix.length && s.substring(s.length-suffix.length)==suffix;
+		},
+		
+		transform: function(template, map, transformer, thisObject) {
+		    return template.replace(/\$\{([^\s\:\}]+)(?:\:([^\s\:\}]+))?\}/g,
+		        function(match, key, format){
+		            var value = map[key] || "";
+                    if (typeof value == 'function') {
+                        // invoke function to return the value
+                        try {
+                            value = value.apply(thisObject, [ map ]);
+                        } catch (ex) {
+                            value = "ERROR:" + key + " " + ex;
+                        }
+                    }
+                    if (transformer) {
+		                value = transformer.call(thisObject, value, key).toString();
+		            } 
+	                if (typeof value == "undefined" || value == null) {
+	                    return "";
+	                }
+		            return value;
+		        }
+		    );
 		}
 	};
 });

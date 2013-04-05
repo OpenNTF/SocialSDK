@@ -18,7 +18,7 @@
  * Definition of constants for CommunityService.
  */
 define(["sbt/config", "sbt/connections/core"],function(sbt) {
-	return {
+	return sbt.connections.communityConstants = {
 		_methodName : {
 			"createCommunity" : "createCommunity",
 			"updateCommunity" : "updateCommunity",
@@ -38,7 +38,6 @@ define(["sbt/config", "sbt/connections/core"],function(sbt) {
 			args_object				:"Invalid argument",
 			args_member				:"Invalid member",
 			args_community			:"Invalid community"
-			
 		},
 		_xpath : {
 				"entry"				:"/a:entry",
@@ -109,7 +108,7 @@ define(["sbt/config", "sbt/connections/core"],function(sbt) {
 		serviceEntity : {
 			"communities"	:"/communities",
 			"community"		:"/community"
-		},		
+		},
 		entityType : {
 			"members"				:"/members",
 			"subCommunities"		:"",

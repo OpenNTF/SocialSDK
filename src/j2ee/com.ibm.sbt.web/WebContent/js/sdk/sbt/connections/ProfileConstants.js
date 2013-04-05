@@ -17,8 +17,8 @@
  * Social Business Toolkit SDK.
  * Definition of constants for ProfileService.
  */
-define([],function() {
-	return {
+define(["sbt/config", "sbt/connections/core"],function(sbt) {
+	return sbt.connections.profileConstants = {
 		sbtErrorCodes:{
 			badRequest         :400
 		},
@@ -29,7 +29,7 @@ define([],function() {
 			args_profile   :"Invalid profile",
 			null_profile   :"Null profile"
 		},
-		 xpath_profile : {
+		xpath_profile : {
 		        "id":               "a:id",
 			 	"entry":			"/a:feed/a:entry",
 				"uid":				"a:contributor/snx:userid",
@@ -60,7 +60,7 @@ define([],function() {
 				"networkProfileEmail":	"snx:connection/a:contributor[@snx:rel='http://www.ibm.com/xmlns/prod/sn/connection/target']/a:email",
                 "totalResults"      :"/a:feed/opensearch:totalResults",
                 "startIndex"        :"/a:feed/opensearch:startIndex",
-                "itemsPerPage"      :"/a:feed/opensearch:itemsPerPage",
+                "itemsPerPage"      :"/a:feed/opensearch:itemsPerPage"
 		},
 		
 		xpath_feed_profile : {
@@ -113,6 +113,6 @@ define([],function() {
 		},		
 		entityType : {
 				
-		},
+		}
 	};
 });

@@ -19,9 +19,10 @@
  * 
  * @module sbt.connections.CommunityService
  */
-define(['sbt/_bridge/declare', 'sbt/config', 'sbt/lang', 'sbt/connections/core', 'sbt/xml', 'sbt/util', 'sbt/xpath', 'sbt/Cache', 'sbt/Endpoint',
-				'sbt/connections/CommunityConstants','sbt/validate', 'sbt/base/BaseService', 'sbt/base/XmlHandler', 'sbt/base/BaseEntity' ],
-		function(declare, cfg, lang, con, xml, util, xpath, Cache, Endpoint, communityConstants, validate, BaseService, XmlHandler, BaseEntity) {
+define(
+		[ 'sbt/_bridge/declare', 'sbt/config', 'sbt/lang', 'sbt/connections/core', 'sbt/xml', 'sbt/util', 'sbt/xpath', 'sbt/Cache', 'sbt/Endpoint',
+				'sbt/connections/CommunityConstants','sbt/validate', 'sbt/base/BaseService', 'sbt/base/XmlHandler' ],
+		function(declare, cfg, lang, con, xml, util, xpath, Cache, Endpoint, communityConstants, validate, BaseService, XmlHandler) {
 
 			/**
 			 * Community class associated with a community.
@@ -32,7 +33,7 @@ define(['sbt/_bridge/declare', 'sbt/config', 'sbt/lang', 'sbt/connections/core',
 			var communityHandler = new XmlHandler({xpath_map: communityConstants.xpath_community, xpath_feed_map: communityConstants.xpath_feed_community,nameSpaces:con.namespaces});
 			var memberHandler = new XmlHandler({xpath_map: communityConstants.xpath_member, xpath_feed_map: communityConstants.xpath_feed_member,nameSpaces:con.namespaces});
 			
-			var Community = declare(BaseEntity , {
+			var Community = declare("sbt.connections.Community", sbt.base.BaseEntity , {
 				_service : null,
 				_id : "",
 				_author : null,
@@ -502,7 +503,7 @@ define(['sbt/_bridge/declare', 'sbt/config', 'sbt/lang', 'sbt/connections/core',
 			 * @class Member
 			 * @namespace connections
 			 */
-			var Member = declare(BaseEntity, {
+			var Member = declare("sbt.connections.Member", sbt.base.BaseEntity, {
 				_community : null,
 				_userid : null,
 				_name: null,
@@ -677,8 +678,7 @@ define(['sbt/_bridge/declare', 'sbt/config', 'sbt/lang', 'sbt/connections/core',
 						return false;
 					}			
 					return true;
-				},
-				
+				}
 			});
 			/**
 			 * Community service class associated with the community service of IBM Connections.

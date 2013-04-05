@@ -424,6 +424,40 @@ define(['sbt/_bridge/declare','sbt/config','sbt/connections/core','sbt/connectio
 			return as;
 		},
 		
+		getMyActionableView: function(args) {
+			if (!(validate._validateInputTypeAndNotify("ActivityStreamService", "getMyActionableView", "args", args, "object", args))) {
+				return ;
+			}
+			if (args.application && !(validate._validateInputTypeAndNotify("ActivityStreamService", "getMyActionableView", "args.application", args.application, "string", args))) {
+				return ;
+			}
+			this._userType = ASConstants.ASUser.ME;
+			this._groupType = ASConstants.ASGroup.ACTIONS;
+			this._applicationType = args.application || ASConstants.ASApplication.ALL;
+			var as = new ActivityStream();
+			if(args.load || args.handle) {
+				this._load(as,args);
+			}
+			return as;
+		},
+		
+		getMySavedView: function(args) {
+			if (!(validate._validateInputTypeAndNotify("ActivityStreamService", "getMySavedView", "args", args, "object", args))) {
+				return ;
+			}
+			if (args.application && !(validate._validateInputTypeAndNotify("ActivityStreamService", "getMySavedView", "args.application", args.application, "string", args))) {
+				return ;
+			}
+			this._userType = ASConstants.ASUser.ME;
+			this._groupType = ASConstants.ASGroup.SAVED;
+			this._applicationType = args.application || ASConstants.ASApplication.ALL;
+			var as = new ActivityStream();
+			if(args.load || args.handle) {
+				this._load(as,args);
+			}
+			return as;
+		},
+		
 		_createPostUrl: function (_self) {
 			return core.ActivityStreamUrls.activityStreamBaseUrl+_self._endpoint.authType+core.ActivityStreamUrls.activityStreamRestUrl+_self._userType+"/"+_self._groupType+"/"+_self._applicationType;
 		},

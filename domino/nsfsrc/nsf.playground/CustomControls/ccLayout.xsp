@@ -27,7 +27,8 @@
 				defaultNavigationPath="${javascript:compositeData.defaultNavigationPath}"
 				productLogoHeight="29px" productLogoWidth="77px"
 				placeBarName="#{javascript:compositeData.title}"
-				productLogoStyle="margin-left:-15px" mastHeader="true">
+				productLogoStyle="margin-left:-15px" mastHeader="true"
+				footer="false">
 				<xe:this.bannerApplicationLinks>
 					<xe:basicLeafNode label="Home" selected="true"
 						href="/">

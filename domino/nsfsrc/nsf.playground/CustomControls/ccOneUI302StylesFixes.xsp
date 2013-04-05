@@ -8,7 +8,7 @@
 		.lotusui30dojo .dijitTabContainerTopStrip { border-style: none; top: 0px; left: 0px }
 		.lotusui30dojo .dijitTabContainerTop-dijitContentPane {padding: 5px 0px 5px 0px; }
 		.lotusui30_layout .lotusMain .lotusContent  {padding-top: 0px; }
-		.lotusui30 .lotusContent { padding-top: 0px; padding-right: 0px; padding-left: 0px; border: none; }
+		.lotusui30 .lotusContent { padding-top: 0px; padding-right: 0px; padding-left: 0px; border: none; height:100%; }
 		.lotusui30 .lotusMain {margin: 5px 0px 0px 0px; }
 		.CodeMirror { font-size: 10pt; width: 100%; height: 100%; }
 		.CodeMirror-scroll { width: 100%;height:100%; }

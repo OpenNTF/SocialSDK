@@ -59,8 +59,8 @@
 			<value>%{connections.apiVersion}</value>
 		</managed-property>
 		<managed-property>
-			<property-name>passwordStore</property-name>
-			<value>PwdStore</value>
+			<property-name>credentialStore</property-name>
+			<value>CredStore</value>
 		</managed-property>
 		<managed-property>
 			<property-name>authenticationPage</property-name>
@@ -264,8 +264,8 @@
 			<value>%{domino.url}</value>
 		</managed-property>
 		<managed-property>
-			<property-name>passwordStore</property-name>
-			<value>PwdStore</value>
+			<property-name>credentialStore</property-name>
+			<value>CredStore</value>
 		</managed-property>
 		<managed-property>
 			<property-name>authenticationPage</property-name>
@@ -293,8 +293,8 @@
 			<value>%{sametime.url}</value>
 		</managed-property>
 		<managed-property>
-			<property-name>passwordStore</property-name>
-			<value>PwdStore</value>
+			<property-name>credentialStore</property-name>
+			<value>CredStore</value>
 		</managed-property>
 		<managed-property>
 			<property-name>authenticationPage</property-name>

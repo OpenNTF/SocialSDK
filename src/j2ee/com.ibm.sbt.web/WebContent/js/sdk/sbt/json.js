@@ -130,7 +130,7 @@ define(['sbt/_bridge/json', 'sbt/_bridge/lang', 'sbt/log', 'sbt/stringutil'], fu
                         }
                         return value;
                     } catch(error) {
-                        log.error("Error {0}.{1} caused {2}", theObj, property, error);
+                        //log.error("Error {0}.{1} caused {2}", theObj, property, error);
                     }
                 }
             } else {

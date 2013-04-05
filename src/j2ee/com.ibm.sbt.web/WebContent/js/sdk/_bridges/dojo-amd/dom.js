@@ -33,6 +33,9 @@ define(['dojo/dom','dojo/_base/window', 'dojo/dom-construct'],function(dom,win,d
         destroy: function(node) {
             return domConstruct.destroy(node);
         },
+        toDom: function(node){
+            return domConstruct.toDom(node);
+        },
 		removeAll: function(node) {
 			node = this.byId(node);
 			if(node) {

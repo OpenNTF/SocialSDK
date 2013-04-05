@@ -2,7 +2,6 @@
 
     var snippetPage = "includes/js_snippet.jsp";
     var previewPage = "javascriptPreview.jsp";
-    var testerPage = "javascriptTester.jsp";
 
     function getUrlParameter(url, name) {
         return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(url)||[,""])[1].replace(/\+/g, '%20'))||null;
@@ -21,9 +20,6 @@
         $("#snippetContainer").load(snippetQuery);
         // refresh iframe with javascriptPreview.jsp.
         var previewQuery = previewPage + parameters;
-        if (snippet.substring(0, 4) == "sbt_") {
-            previewQuery = testerPage + parameters;
-        }
         $("#previewFrame").attr('src', previewQuery);
 
         // update previewLink
@@ -82,7 +78,7 @@
         if(jsLibId)
             $("body").data("jsLibId", jsLibId);
         else
-            $("body").data("jsLibId", "dojo180");
+            $("body").data("jsLibId", "dojo143");
     }
 
     function setJsLibIdFromUrl(url){

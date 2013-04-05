@@ -2,7 +2,7 @@ require(["sbt/Endpoint", "sbt/dom", "sbt/config"], function(Endpoint, dom, confi
     var ep = Endpoint.find("connections");
     config.Properties["loginUi"] = "mainWindow";
     ep.authenticate({
-        success: function(response){
+        load: function(response){
             dom.setText("content", "Successfully logged in");    
         }
     });

@@ -104,12 +104,12 @@ define(['sbt/xml'], function(xml) {
                         }
                     }
                     if (transformer) {
-		                value = transformer.call(thisObject, value, key).toString();
+		                value = transformer.call(thisObject, value, key);
 		            } 
 	                if (typeof value == "undefined" || value == null) {
 	                    return "";
 	                }
-		            return value;
+		            return value.toString();
 		        }
 		    );
 		}

@@ -18,7 +18,7 @@
  * Definition of constants for ActivityStreamService.
  */
 define([],function() {
-	return {
+	return activityStreamConstants = {
 	ASUser:{
 		ME         :"@me",
 		PUBLIC     :"@public",
@@ -32,7 +32,9 @@ define([],function() {
 		INVOLVED   :"@involved",
 		NOTESFORME :"@notesforme",
 		NOTESFROMME:"@notesforme",
-		RESPONSES  :"@responses"
+		RESPONSES  :"@responses",
+		ACTIONS    :"@actions",
+		SAVED      :"@saved"
 	},
 	ASApplication:{
 		ALL        :"@all",
@@ -158,7 +160,6 @@ define([],function() {
 	errorMessages:{
 		args_object	   : "argument passed to get stream should be an Object",
 		required_communityid   : "Community ID is required"
-	},
-
+	}
 };
 });

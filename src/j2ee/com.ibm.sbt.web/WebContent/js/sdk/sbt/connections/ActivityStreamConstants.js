@@ -18,7 +18,7 @@
  * Definition of constants for ActivityStreamService.
  */
 define([],function() {
-	return activityStreamConstants = {
+	return {
 	ASUser:{
 		ME         :"@me",
 		PUBLIC     :"@public",

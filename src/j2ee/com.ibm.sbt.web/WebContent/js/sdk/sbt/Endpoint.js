@@ -128,10 +128,10 @@ var Endpoint = declare("sbt.Endpoint", null, {
      * @method _notifyError
      * @param error
      */
-	_notifyError: function(args, error) {
+	_notifyError: function(args, error, ioArgs) {
         if (args.handle) {
             try {
-                args.handle(error);
+                args.handle(error, ioArgs);
             } catch (ex) {
                 // TODO log an error
                 var msg = ex.message;
@@ -139,7 +139,7 @@ var Endpoint = declare("sbt.Endpoint", null, {
         }
         if (args.error) {
             try {
-                args.error(error);
+                args.error(error, ioArgs);
             } catch (ex) {
                 // TODO log an error
                 var msg = ex.message;
@@ -201,8 +201,11 @@ var Endpoint = declare("sbt.Endpoint", null, {
 				var error = data;
 				// check for if authentication is required				
 				if (error.code == 401 || error.code == self.authenticationErrorCode) {
-					var autoAuthenticate =  _args.autoAuthenticate || self.autoAuthenticate || sbt.Properties["autoAuthenticate"] || "true";
-					if(autoAuthenticate == "true"){
+					var autoAuthenticate =  _args.autoAuthenticate || self.autoAuthenticate || sbt.Properties["autoAuthenticate"];
+					if(autoAuthenticate == undefined){
+						autoAuthenticate = true;
+					}
+					if(autoAuthenticate){
 						if(self.authenticator) {
 							options = {
 								dialogLoginPage:self.loginDialogPage,
@@ -223,7 +226,7 @@ var Endpoint = declare("sbt.Endpoint", null, {
 				} 
 
                 // notify handle and error callbacks is available
-				self._notifyError(args, error);
+				self._notifyError(args, error, ioArgs);
 			} else {
 			    // notify handle and load callbacks is available
 			    self._notifyResponse(args, data, ioArgs);
@@ -372,7 +375,6 @@ var Endpoint = declare("sbt.Endpoint", null, {
 			}
 		}, true);
 	}
-	
 });
 
 sbt.Endpoints = {}; // Initially empty

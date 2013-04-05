@@ -19,7 +19,7 @@
  * 
  * Definition of a dojo based dialog for OAuth 1.0.
  */
-define(['dijit/Dialog',"dojo/cache"], function(Dialog, cache) {
+define(['dijit/Dialog',"dojo/cache", "dojo/dom"], function(Dialog, cache, dom) {
 	return {
 		show: function(options, dialogLoginPage) {
 		  try{	
@@ -31,7 +31,7 @@ define(['dijit/Dialog',"dojo/cache"], function(Dialog, cache) {
 	            content: cache("sbt", dialogLoginPage),
 	            submitOnClickHandle : function (contentForm) {
 	        		if(contentForm.username.value == "" || contentForm.password.value == ""){
-	        			dojo.style(dojo.byId("wrongCredsMessage"),"display","block");
+	        			dojo.style(dom.byId("wrongCredsMessage"),"display","block");
 	        			return;
 	        		}else{
 	            		var postToProxy = {
@@ -44,7 +44,7 @@ define(['dijit/Dialog',"dojo/cache"], function(Dialog, cache) {
 								if(data instanceof Error){
 									var statusCode = data.status || data.response.status; // For dojo180 error code is in data.response.status 
 									if(statusCode == 401 || statusCode == 403){
-										dojo.style(dojo.byId("wrongCredsMessage"),"display","block");
+										dojo.style(dom.byId("wrongCredsMessage"),"display","block");
 										return;
 									}
 								}

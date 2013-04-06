@@ -168,14 +168,7 @@ public class OAuth2Endpoint extends AbstractEndpoint {
 		return oAuthHandler.getConsumerSecret();
 	}
 	
-	public void setSupportsFrames(boolean supportsFrames) {
-		oAuthHandler.setSupportsFrames(supportsFrames);
-	}
 
-	public boolean getSupportsFrames() {
-		return oAuthHandler.getSupportsFrames();
-	}
-	
 
 	@Override
 	public String getAuthType() {
@@ -184,12 +177,12 @@ public class OAuth2Endpoint extends AbstractEndpoint {
 
 	@Override
 	public boolean isForceTrustSSLCertificate() {
-		return oAuthHandler.forceTrustSSLCertificate;
+		return oAuthHandler.isForceTrustSSLCertificate();
 	}
 
 	@Override
 	public void setForceTrustSSLCertificate(boolean forceTrustSSLCertificate) {
-		oAuthHandler.forceTrustSSLCertificate = forceTrustSSLCertificate;
+		oAuthHandler.setForceTrustSSLCertificate(forceTrustSSLCertificate);
 	}
 
 	@Override

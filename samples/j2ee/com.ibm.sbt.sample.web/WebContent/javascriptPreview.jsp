@@ -88,7 +88,7 @@
         String s = "<script>" + js + "</script>\n";
         out.println(s);
     } else {
-    	out.println("<div>Error, unable to load: "+snippetName+"</div>");
+    	out.println("<div>Error, unable to load snippet: "+snippetName+"</div>");
     }
     %>
   </body>

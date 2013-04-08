@@ -15,84 +15,70 @@
  */
 
 /**
- * Social Business Toolkit SDK. 
- * Implementation of a transport using the Dojo Request API.
+ * Social Business Toolkit SDK. Implementation of a transport using the dojo/request API.
  */
-define([ 'dojo/_base/declare', 'dojo/request', 'dojo/_base/lang', 'dojox/xml/parser', 'sbt/util' ], function(declare, request, lang, parser, util){
-	return declare("sbt._bridge.RequestTransport", null, {
-		xhr: function(method, args, hasBody) { 			
-			var _self = this;
-			var _args = lang.mixin({}, args);
-			
-			// All options expected by dojo/Request and the defaults
-			var _options = {
-					data: null,
-					query: null,
-					preventCache: false,
-					method: method,
-					timeout: null,
-					handleAs: _args.handleAs,
-					headers: null
-			};
-			
-			if(method == "GET") {
-				_options.query = _args.content;
-			}
-			if(method == "PUT") {
-				_options.data = _args.putData;
-				_options.headers = _args.headers;
-			}
-			if(method == "POST") {
-				_options.data = _args.postData;
-				_options.headers = _args.headers;
-			}
-			
-			var _promise = request(_args.url, _options);
-			_promise.response.then(
-				function(response) {					
-	                var _ioArgs = {
-	                    'args' : args,
-	                    'headers' : util.getAllResponseHeaders(ioArgs.xhr),
-	                    '_ioargs' : ioArgs
-	                };
-					return _args.handle(response.data, _ioArgs);
-				},
-				function(error) {
-					return _args.handle(_self.createError(error));
-				}
-			);    
-		},
-		
-		createError: function(error) {
+define([ "dojo/_base/declare", "dojo/request", "dojo/_base/lang", "sbt/util" ], function(declare,request,lang,util) {
+    return declare("sbt._bridge.RequestTransport", null, {
+        xhr : function(method,args,hasBody) {
+            // all options expected by dojo/request and the defaults
+            args = lang.mixin({}, args);
+            var options = {
+                data : args.putData || args.postData,
+                query : args.content || {},
+                preventCache : args.preventCache || false,
+                method : method,
+                timeout : args.timeout || null,
+                handleAs : args.handleAs || "text",
+                headers : args.headers || null
+            };
+
+            var self = this;
+            var promise = request(args.url, options);
+            promise.response.then(
+                function(response) {
+                    var _ioArgs = {
+                        args : args,
+                        headers : {},
+                        _ioargs : response
+                    };
+                    return args.handle(response.data || response.text, _ioArgs);
+                }, 
+                function(error) {
+                    return args.handle(self.createError(error));
+                }
+            );
+        },
+
+        createError : function(error) {
             var _error = new Error();
-            _error.code = error.status || (error.response&&error.response.status) || 400;
+            _error.code = error.status || (error.response && error.response.status) || 400;
             _error.message = this.getErrorMessage(error);
             _error.cause = error;
             if (error.response) {
                 _error.response = lang.mixin({}, error.response);
             }
-			return _error;	
-		},
-		
-		getErrorMessage: function(error) {
-            var text = error.responseText || (error.response&&error.response.text);
+            return _error;
+        },
+
+        getErrorMessage : function(error) {
+            var text = error.responseText || (error.response && error.response.text);
             if (text) {
                 try {
-                	//using dojo/xml/parser to parse the response
-                	//this assumes the response is XML what if it is not ?
+                    // using dojo/xml/parser to parse the response
+                    // this assumes the response is XML what if it is not ?
                     var dom = parser.parse(text);
                     var messages = dom.getElementsByTagName("message");
                     if (messages && messages.length != 0) {
                         text = messages[0].textContent;
                         text = lang.trim(text);
                     }
-                } catch(ex) {
+                } catch (ex) {
                     console.log(ex);
                 }
                 return text;
             } else {
                 return error;
-            }	
-		}
-	});
+            }
+        }
+    });
 });

@@ -32,6 +32,7 @@ import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.RuntimeFactory;
 import com.ibm.commons.runtime.impl.servlet.RuntimeFactoryServlet;
 import com.ibm.commons.util.NotImplementedException;
+import com.ibm.domino.xsp.module.nsf.NotesContext;
 import com.ibm.xsp.application.ApplicationEx;
 import com.ibm.xsp.application.events.ApplicationListener;
 import com.ibm.xsp.context.FacesContextEx;
@@ -82,7 +83,16 @@ public class XspRuntimeFactory extends RuntimeFactoryServlet {
 	@Override
 	public Application createApplication(Object context) {
 		ApplicationEx facesApplication = ApplicationEx.getInstance();
-		return new XspApplication(facesApplication,(ServletContext)context);
+		// Try to find the application name
+		// We start from the the NotesContext, which should be defined
+		String name = null;
+		NotesContext ctx = NotesContext.getCurrentUnchecked();
+		if(ctx!=null) {
+			name = ctx.getModule().getModuleName();
+		} else {
+			name = facesApplication.getApplicationId();
+		}
+		return new XspApplication(facesApplication,(ServletContext)context,name);
 	}
 
 	public XspContext getContextUnchecked() {

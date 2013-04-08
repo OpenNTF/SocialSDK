@@ -40,8 +40,6 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.security.authentication.AuthenticationException;
 import com.ibm.sbt.security.authentication.password.PasswordException;
 import com.ibm.sbt.security.authentication.password.consumer.UserPassword;
-import com.ibm.sbt.security.authentication.password.consumer.store.PasswordStore;
-import com.ibm.sbt.security.authentication.password.consumer.store.PasswordStoreFactory;
 import com.ibm.sbt.security.credential.store.CredentialStore;
 import com.ibm.sbt.security.credential.store.CredentialStoreException;
 import com.ibm.sbt.security.credential.store.CredentialStoreFactory;
@@ -49,7 +47,6 @@ import com.ibm.sbt.service.core.handlers.BasicAuthCredsHandler;
 import com.ibm.sbt.service.core.servlet.ServiceServlet;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.endpoints.js.JSReference;
-import com.ibm.sbt.services.util.AnonymousCredentialStore;
 
 
 /**
@@ -69,7 +66,6 @@ public class BasicEndpoint extends AbstractEndpoint {
     private String user;
     private String password;
     private String authenticationPage;
-    private String passwordStore;
     private boolean storeAlreadyTried;
     
     public BasicEndpoint() {
@@ -96,7 +92,7 @@ public class BasicEndpoint extends AbstractEndpoint {
                 u = getUser();
             }
             return u;
-        } catch(PasswordException ex) {
+        } catch(AuthenticationException ex) {
             throw new ClientServicesException(ex);
         }
     }
@@ -139,17 +135,9 @@ public class BasicEndpoint extends AbstractEndpoint {
                 return readFromStore();
             }
             return true;
-        } catch(PasswordException ex) {
+        } catch(AuthenticationException ex) {
             throw new ClientServicesException(ex);
         }
-    }
-    
-
-    public String getPasswordStore() {
-        return passwordStore;
-    }
-    public void setPasswordStore(String passwordStore) {
-        this.passwordStore = passwordStore;
     }
 
     @Override
@@ -197,107 +185,66 @@ public class BasicEndpoint extends AbstractEndpoint {
             }
         }
     }
-    
-    public boolean readFromStore() throws PasswordException {
-        if(!storeAlreadyTried) {
-            synchronized (this) {
-            	Context context = Context.get();
-                UserPassword u = null;
-            	if(!context.isCurrentUserAnonymous()) {
-	                PasswordStore pwd = PasswordStoreFactory.getPasswordStore(getPasswordStore());
-	                if(pwd!=null) {
-	                    u = pwd.loadUserPassword(getUrl());
+        
+    public boolean readFromStore() throws AuthenticationException {
+    	try {
+	        if(!storeAlreadyTried) {
+	            synchronized (this) {
+	            	Context context = Context.get();
+	                UserPassword u = null;
+	            	CredentialStore cs = CredentialStoreFactory.getCredentialStore(getCredentialStore());
+		            if(cs!=null) {
+		                u = (UserPassword)cs.load(getUrl(),STORE_TYPE,context.getCurrentUserId());
+	            	}
+	                if(u!=null) {
+	                    this.user = u.getUser();
+	                    this.password = u.getPassword();
+	                    return true;
 	                }
-            	} else {
-            		u = (UserPassword)AnonymousCredentialStore.loadCredentials(context,getUrl(),null);
-            	}
-                if(u!=null) {
-                    this.user = u.getUser();
-                    this.password = u.getPassword();
-                    return true;
-                }
-                storeAlreadyTried = true;
-            }
-        }
-        return false;
+	                storeAlreadyTried = true;
+	            }
+	        }
+	        return false;
+    	} catch(CredentialStoreException ex) {
+    		throw new AuthenticationException(ex,"Error while reading basic credentials from the store");
+    	}
     }
 
-    public boolean writeToStore() throws PasswordException {
-    	Context context = Context.get();
-    	if(!context.isCurrentUserAnonymous()) {
-	        PasswordStore pwd = PasswordStoreFactory.getPasswordStore(getPasswordStore());
-	        if(pwd!=null) {
-	            pwd.saveUserPassword(getUrl(), getUser(), getPassword());
+    public boolean writeToStore() throws AuthenticationException {
+    	try {
+	    	Context context = Context.get();
+	    	CredentialStore cs = CredentialStoreFactory.getCredentialStore(getCredentialStore());
+	        if(cs!=null) {
+	        	UserPassword u = new UserPassword(user,password);
+	            cs.store(getUrl(), STORE_TYPE, context.getCurrentUserId(), u);
 	            return true;
 	        }
-    	} else {
-    		AnonymousCredentialStore.storeCredentials(context,new UserPassword(getUser(),getPassword()),getUrl(),null);
+	        return false;
+    	} catch(CredentialStoreException ex) {
+    		throw new AuthenticationException(ex,"Error while writing basic credentials to the store");
     	}
-        return false;
     }
 
-    public boolean clearFromStore() throws PasswordException {
-    	Context context = Context.get();
-    	if(!context.isCurrentUserAnonymous()) {
-	        PasswordStore pwd = PasswordStoreFactory.getPasswordStore(getPasswordStore());
-	        if(pwd!=null) {
-	            pwd.deleteUserPassword(getUrl());
+    public boolean clearFromStore() throws AuthenticationException {
+    	try {
+	    	Context context = Context.get();
+	    	CredentialStore cs = CredentialStoreFactory.getCredentialStore(getCredentialStore());
+	        if(cs!=null) {
+	            cs.remove(getUrl(), STORE_TYPE, context.getCurrentUserId());
 	            return true;
 	        }
-    	} else {
-    		AnonymousCredentialStore.deleteCredentials(context,getUrl(),null);
-    	}
-        return false;
-    }
-    
-    
-    public boolean readFromStore2() throws CredentialStoreException {
-        if(!storeAlreadyTried) {
-            synchronized (this) {
-            	Context context = Context.get();
-                UserPassword u = null;
-            	CredentialStore cs = CredentialStoreFactory.getCredentialStore(getCredentialStore());
-	            if(cs!=null) {
-	                u = (UserPassword)cs.load(getApplicationName(),getUrl(),STORE_TYPE,context.getCurrentUserId(),createEncryptor());
-            	}
-                if(u!=null) {
-                    this.user = u.getUser();
-                    this.password = u.getPassword();
-                    return true;
-                }
-                storeAlreadyTried = true;
-            }
-        }
-        return false;
-    }
-
-    public boolean writeToStore2() throws CredentialStoreException {
-    	Context context = Context.get();
-    	CredentialStore cs = CredentialStoreFactory.getCredentialStore(getCredentialStore());
-        if(cs!=null) {
-        	UserPassword u = new UserPassword(user,password);
-            cs.store(getApplicationName(), getUrl(), STORE_TYPE, context.getCurrentUserId(), u, createEncryptor());
-            return true;
-        }
-        return false;
-    }
-
-    public boolean clearFromStore2() throws CredentialStoreException {
-    	Context context = Context.get();
-    	CredentialStore cs = CredentialStoreFactory.getCredentialStore(getCredentialStore());
-        if(cs!=null) {
-            cs.remove(getApplicationName(), getUrl(), STORE_TYPE, context.getCurrentUserId());
-            return true;
-        }
-        return false;
+	        return false;
+		} catch(CredentialStoreException ex) {
+			throw new AuthenticationException(ex,"Error while deleting basic credentials from the store");
+		}
     }
 
     
-    public boolean login(String user, String password) throws PasswordException {
+    public boolean login(String user, String password) throws AuthenticationException {
         return login(user,password,false);
     }
 
-    public boolean login(String user, String password, boolean writeToStore) throws PasswordException {
+    public boolean login(String user, String password, boolean writeToStore) throws AuthenticationException {
         setUser(user);
         setPassword(password);
         if(!isAuthenticationValid()) {
@@ -313,7 +260,7 @@ public class BasicEndpoint extends AbstractEndpoint {
     }
     
     @Override
-    public void logout() throws PasswordException {
+    public void logout() throws AuthenticationException {
         setUser(null);
         setPassword(null);
         clearFromStore();

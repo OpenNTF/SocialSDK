@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <faces-config>
-	<!-- Password store physical implementation -->
+	<!-- Credential store physical implementation -->
 	<managed-bean>
-		<managed-bean-name>PwdStore</managed-bean-name>
-		<managed-bean-class>com.ibm.sbt.security.authentication.password.consumer.store.MemoryPasswordStore</managed-bean-class>
+		<managed-bean-name>CredStore</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.security.credential.store.MemoryStore</managed-bean-class>
 		<managed-bean-scope>application</managed-bean-scope>
 	</managed-bean>
 
@@ -32,8 +32,8 @@
 			<value>%{connections.url}</value>
 		</managed-property>
 		<managed-property>
-			<property-name>passwordStore</property-name>
-			<value>PwdStore</value>
+			<property-name>credentialStore</property-name>
+			<value>CredStore</value>
 		</managed-property>
 		<managed-property>
 			<property-name>forceTrustSSLCertificate</property-name>

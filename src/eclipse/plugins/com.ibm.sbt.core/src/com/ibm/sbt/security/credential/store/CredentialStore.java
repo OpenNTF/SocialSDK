@@ -35,16 +35,15 @@ public interface CredentialStore {
 	/**
 	 * Load credentials from the store. 
 	 * 
-	 * @param application	the name of the calling application (ex: myapp, crm...). Cannot be null. 
 	 * @param service		the target service (ex: connections, domino...). Cannot be null.
 	 * @param type			the type of credentials being stored. Can be null.
 	 * @param user			the user associated with these credentials. if null, then it is application wise.
 	 * @return
 	 * @throws AuthenticationException
 	 */
-	public Object load(String application, String service, String type, String user, CredentialEncryptor encryptor) throws CredentialStoreException;
+	public Object load(String service, String type, String user) throws CredentialStoreException;
 	
-	public void store(String application, String service, String type, String user, Object credentials, CredentialEncryptor encryptor) throws CredentialStoreException;
+	public void store(String service, String type, String user, Object credentials) throws CredentialStoreException;
 
-	public void remove(String application, String service, String type, String user) throws CredentialStoreException;
+	public void remove(String service, String type, String user) throws CredentialStoreException;
 }

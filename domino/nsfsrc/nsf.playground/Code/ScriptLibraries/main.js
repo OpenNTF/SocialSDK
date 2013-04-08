@@ -4,19 +4,23 @@
  * @return
  */
 function resize() {
-	// TEMP for Dojo 1.6
+	// TEMP for Dojo 1.6 until we move to D9
 	require(["dojo"], function(domGeom){
 		var domGeom={getMarginBox: dojo._getMarginBox}
 	//require(["dojo/dom-geometry"], function(domGeom){
+		function windowHeight() {
+			var scrollRoot = (dojo.doc.compatMode == 'BackCompat') ? dojo.body() : dojo.doc.documentElement;
+			return scrollRoot.clientHeight;
+		}
 		function eltHeight(c) {
 			var e = dojo.query(c);
 			var h = e && e.length>0?domGeom.getMarginBox(e[0]).h:0;
 			return h;
 		}
-		var h = document.body.clientHeight;
-		var hd = eltHeight(".lotusBanner")+eltHeight(".lotusTitleBar")+eltHeight(".lotusPlaceBar");
+		var h = windowHeight();
+		var hd = eltHeight(".lotusBanner")+eltHeight(".lotusTitleBar2")+eltHeight(".lotusTitleBar")+eltHeight(".lotusPlaceBar");
 		var ft = eltHeight(".lotusFooter")+eltHeight(".lotusLegal");
-		dojo.query(".lotusContent").style("height",(h-hd-ft)+"px");
+		dojo.query(".lotusMain").style("height",(h-hd-ft)+"px");
 		//console.log("h="+h+", hd="+hd+", ft="+ft+", result="+(h-hd-ft-25))
 		dijit.byId(pageGlobal.borderContainer).resize()
 	});

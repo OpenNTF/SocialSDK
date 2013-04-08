@@ -914,6 +914,31 @@ define(
 							var url = this._constructUrl(constants.baseUrl.FILES, accessType, null, view, filter, null, resultType, parameters);
 							this._executeGet(args, url);
 						},
+						/**
+						 * Gets the files pinned by the logged in user.
+						 * @method getFilespinnedByMe
+						 * @param {Object} [args] Argument object
+						 * @param {Function} [args.load] The callback function will invoke when the files pinned by the user are retrieved successfully. The
+						 * function expects one parameter, a list of FileEntry objects.
+						 * @param {Function} [args.error] Sometimes the call to get files pinned by the user fails due to bad request (400 error). The error
+						 * parameter is a callback function that is only invoked when an error occurs. This allows to write logic when an error occurs. The
+						 * parameter passed to the error function is a JavaScript Error object indicating what the failure was. From the error object. one can
+						 * access the javascript library error object, the status code and the error message.
+						 * @param {Function} [args.handle] This callback function is called regardless of whether the call to get files pinned by the user
+						 * completes or fails. The parameter passed to this callback is the list of FileEntry objects (or error object). From the error object.
+						 * one can get access to the javascript library error object, the status code and the error message.
+						 * @param {Object} [args.parameters] The additional parameters like pageSize etc.
+						 */
+						getMyPinnedFiles : function(args) {
+							
+							var accessType = constants.accessType.AUTHENTICATED;
+							var view = constants.views.FILES;
+							var filter = constants.filters.NULL;
+							var resultType = constants.resultType.FEED;	
+							var category = constants.categories.PINNED;
+							var url = this._constructUrl(constants.baseUrl.FILES, accessType, category, view, filter, null, resultType, args.parameters);
+							this._executeGet(args, url);
+						},
 
 						/**
 						 * Gets the comments for a file.

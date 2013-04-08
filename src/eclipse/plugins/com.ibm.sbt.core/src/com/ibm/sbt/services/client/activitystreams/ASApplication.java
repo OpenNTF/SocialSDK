@@ -10,9 +10,6 @@ public enum ASApplication {
 	TAGS("@tags"),
 	PEOPLE("@people"),
 	STATUS("@status"),
-	NOTESFORME("@notesforme"),
-	NOTESFROMME("@notesfromme"),
-	RESPONSES("@responses"),
 	ALL("@all"),
 	NOAPP("NOAPP");
 	

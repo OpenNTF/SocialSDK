@@ -81,9 +81,8 @@ public class OAuth2Handler extends OAuthHandler {
 	private String userid;
 	private String applicationPage;
 	private int expireThreshold;
-	public boolean forceTrustSSLCertificate = false;
-	public boolean supportsFrames = true;
-	public boolean usingFrames = true;
+	private boolean forceTrustSSLCertificate;
+	
 	
 	// Persistence store code
 	private boolean storeRead;
@@ -473,22 +472,6 @@ public class OAuth2Handler extends OAuthHandler {
 		return consumerKey;
 	}
 	
-	public void setSupportsFrames(boolean supportsFrames) {
-		this.supportsFrames = supportsFrames;
-	}
-
-	public boolean getSupportsFrames() {
-		return supportsFrames;
-	}
-	
-	
-	public void setUsingFrames(boolean usingFrames) {
-		this.usingFrames = usingFrames;
-	}
-
-	public boolean getUsingFrames() {
-		return this.usingFrames;
-	}
 	
 	//Persistance related code
 	
@@ -752,16 +735,7 @@ public class OAuth2Handler extends OAuthHandler {
 		
 		Object resp = Context.get().getHttpResponse();
 		try {
-			//getSupportsFrames : Endpoint supports frames
-			// getUsingFrames	: Application is using frames
-//			if(!(getSupportsFrames()) && getUsingFrames()){
-//				// Certain outh based app's do not support frames, open a new window for them only if application is using frames
-//				Desktop.getDesktop().browse(new URI(getAuthorizationNetworkUrl())); 
-//				
-//			}
-//			else{
 				Context.get().sendRedirect(getAuthorizationNetworkUrl());
-//			}
 		} catch (Exception e) {
 			Platform.getInstance().log(e);
 		}
@@ -873,6 +847,13 @@ public class OAuth2Handler extends OAuthHandler {
 	public void doPostAuthorizationFlow() throws Exception {
 		// TODO Auto-generated method stub
 		 
+	}
+	public boolean isForceTrustSSLCertificate() {
+		return forceTrustSSLCertificate;
+	}
+
+	public void setForceTrustSSLCertificate(boolean forceTrustSSLCertificate) {
+		this.forceTrustSSLCertificate = forceTrustSSLCertificate;
 	}
 
 }

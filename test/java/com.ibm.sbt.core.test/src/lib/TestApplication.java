@@ -12,6 +12,7 @@ import com.ibm.commons.runtime.Application;
 public class TestApplication extends Application {
 	
 	protected TestApplication() {
+		setName("Test Application");
 	}
 	
 	@Override

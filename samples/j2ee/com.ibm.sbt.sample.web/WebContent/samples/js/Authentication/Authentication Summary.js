@@ -39,10 +39,10 @@ require(["sbt/dom", "sbt/Endpoint", "sbt/config"], function(dom, Endpoint, confi
 			dom.setText("td2"+endpointName, "Logged in");
 			logoutButton.onclick= function (){
 				Endpoint.find(this.name).logout({           // Calling logout. (this.name has endpoint name)
-					success: function(logoutResult){
+					load: function(logoutResult){
 						document.location.reload();
 					},
-					failure: function(logoutResult){
+					error: function(logoutResult){
 						dom.setText("td2"+endpointName, "Logged in - failed to logout");
 					}
 				}); 

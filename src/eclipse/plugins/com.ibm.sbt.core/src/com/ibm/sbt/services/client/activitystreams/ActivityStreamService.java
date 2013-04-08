@@ -422,6 +422,204 @@ public class ActivityStreamService extends BaseService {
 				ASGroup.ALL.getGroupType(), ASApplication.NOAPP.getApplicationType(), params);
 
 	}
+	
+	/**
+	 * Wrapper method to get Filtered view of a user's stream based on notification events
+	 * <p>
+	 * Assumes {@link ASUser} as ME in parameter, {@link ASGroup} as NOTESFORME and {@link ASApplication} as NOAPP
+	 * 
+	 * @param params
+	 *            Additional parameters used for constructing URL's
+	 * @return List<ActivityStreamEntry>
+	 * @throws SBTServiceException
+	 *             ,IllegalArgumentException
+	 */
+	public List<ActivityStreamEntry> getNotificationsForMe(Map<String, String> params)
+			throws SBTServiceException {
+
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.entering(sourceClass, "getNotificationsForMe");
+		}
+
+		if (null == params) {
+			params = new HashMap<String, String>();
+			params.put(ActivityStreamRequestParams.lang, getUserLanguage());
+		}
+		return getActivityStreamEntries(ASUser.ME.getUserType(),ASGroup.NOTESFORME.getGroupType(), ASApplication.NOAPP.getApplicationType(), params);
+
+	}
+	
+	
+	/**
+	 * Wrapper method to get Filtered view of a user's stream based on notification events
+	 * <p>
+	 * Assumes {@link ASUser} as ME in parameter, {@link ASGroup} as NOTESFROMME and {@link ASApplication} as NOAPP
+	 * 
+	 * @param params
+	 *            Additional parameters used for constructing URL's
+	 * @return List<ActivityStreamEntry>
+	 * @throws SBTServiceException
+	 *             ,IllegalArgumentException
+	 */
+	public List<ActivityStreamEntry> getNotificationsFromMe(Map<String, String> params)
+			throws SBTServiceException {
+
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.entering(sourceClass, "getNotificationsFromMe");
+		}
+
+		if (null == params) {
+			params = new HashMap<String, String>();
+			params.put(ActivityStreamRequestParams.lang, getUserLanguage());
+		}
+		return getActivityStreamEntries(ASUser.ME.getUserType(),ASGroup.NOTESFROMME.getGroupType(), ASApplication.NOAPP.getApplicationType(), params);
+
+	}
+	
+	
+	/**
+	 * Wrapper method to get Filtered view of a user's stream based on notification events
+	 * <p>
+	 * Assumes {@link ASUser} as ME in parameter, {@link ASGroup} as RESPONSES and {@link ASApplication} as NOAPP
+	 * 
+	 * @param params
+	 *            Additional parameters used for constructing URL's
+	 * @return List<ActivityStreamEntry>
+	 * @throws SBTServiceException
+	 *             ,IllegalArgumentException
+	 */
+	public List<ActivityStreamEntry> getResponsesToMyContent(Map<String, String> params)
+			throws SBTServiceException {
+
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.entering(sourceClass, "getResponsesToMyContent");
+		}
+
+		if (null == params) {
+			params = new HashMap<String, String>();
+			params.put(ActivityStreamRequestParams.lang, getUserLanguage());
+		}
+		return getActivityStreamEntries(ASUser.ME.getUserType(),ASGroup.RESPONSES.getGroupType(), ASApplication.NOAPP.getApplicationType(), params);
+
+	}
+	
+	
+	/**
+	 * Wrapper method to get view of Actionable  events
+	 * <p>
+	 * Assumes {@link ASUser} as ME in parameter, {@link ASGroup} as ACTION and {@link ASApplication} as NOAPP
+	 * 
+	 * @param params
+	 *            Additional parameters used for constructing URL's
+	 * @return List<ActivityStreamEntry>
+	 * @throws SBTServiceException
+	 *             ,IllegalArgumentException
+	 */
+	public List<ActivityStreamEntry> getMyActionableView(Map<String, String> params)
+			throws SBTServiceException {
+
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.entering(sourceClass, "getMyActionableView");
+		}
+
+		if (null == params) {
+			params = new HashMap<String, String>();
+			params.put(ActivityStreamRequestParams.lang, getUserLanguage());
+		}
+		return getActivityStreamEntries(ASUser.ME.getUserType(),ASGroup.ACTION.getGroupType(), ASApplication.NOAPP.getApplicationType(), params);
+
+	}
+	
+	
+	/**
+	 * Wrapper method to get view of Actionable  events
+	 * <p>
+	 * Assumes {@link ASUser} as ME in parameter, {@link ASGroup} as ACTION
+	 * 
+	 * @param id
+	 * 			  Application type ( blogs/wikis etc. ) 
+	 * 			  {@see http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Support_for_Saved_and_Actionable_events&content=pdcontent}
+	 *            
+	 * @param params
+	 *            Additional parameters used for constructing URL's
+	 * @return List<ActivityStreamEntry>
+	 * @throws SBTServiceException
+	 *             ,IllegalArgumentException
+	 */
+	public List<ActivityStreamEntry> getMyActionableViewForApplication(String application, Map<String, String> params)
+			throws SBTServiceException {
+
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.entering(sourceClass, "getMyActionableView");
+		}
+
+		if (null == params) {
+			params = new HashMap<String, String>();
+			params.put(ActivityStreamRequestParams.lang, getUserLanguage());
+		}
+		return getActivityStreamEntries(ASUser.ME.getUserType(),ASGroup.ACTION.getGroupType(), application, params);
+
+	}
+	
+	
+	/**
+	 * Wrapper method to get view of SAVED  events
+	 * <p>
+	 * Assumes {@link ASUser} as ME in parameter, {@link ASGroup} as SAVED and {@link ASApplication} as NOAPP
+	 * 
+	 * @param params
+	 *            Additional parameters used for constructing URL's
+	 * @return List<ActivityStreamEntry>
+	 * @throws SBTServiceException
+	 *             ,IllegalArgumentException
+	 */
+	public List<ActivityStreamEntry> getMySavedView(Map<String, String> params)
+			throws SBTServiceException {
+
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.entering(sourceClass, "getMySavedView");
+		}
+
+		if (null == params) {
+			params = new HashMap<String, String>();
+			params.put(ActivityStreamRequestParams.lang, getUserLanguage());
+		}
+		return getActivityStreamEntries(ASUser.ME.getUserType(),ASGroup.SAVED.getGroupType(), ASApplication.NOAPP.getApplicationType(), params);
+
+	}
+	
+	
+	 /** Wrapper method to get view of SAVED  events
+	 * <p>
+	 * Assumes {@link ASUser} as ME in parameter, {@link ASGroup} as SAVED
+	 * 
+	 * @param id
+	 * 			  Application type ( blogs/wikis etc. ) 
+	 * 			  {@see http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Support_for_Saved_and_Actionable_events&content=pdcontent}
+	 *            
+	 * @param params
+	 *            Additional parameters used for constructing URL's
+	 * @return List<ActivityStreamEntry>
+	 * @throws SBTServiceException
+	 *             ,IllegalArgumentException
+	 */
+	public List<ActivityStreamEntry> getMySavedViewForApplication(String application, Map<String, String> params)
+			throws SBTServiceException {
+
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.entering(sourceClass, "getMyActionableView");
+		}
+
+		if (null == params) {
+			params = new HashMap<String, String>();
+			params.put(ActivityStreamRequestParams.lang, getUserLanguage());
+		}
+		return getActivityStreamEntries(ASUser.ME.getUserType(),ASGroup.SAVED.getGroupType(), application, params);
+
+	}
+	
+	
+	
 
 	/**
 	 * Wrapper method to search in ActivityStreams

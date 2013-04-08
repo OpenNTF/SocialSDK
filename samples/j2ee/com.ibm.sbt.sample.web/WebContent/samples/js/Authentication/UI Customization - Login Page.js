@@ -5,7 +5,7 @@ require(['sbt/Endpoint',"sbt/dom","sbt/config"], function(Endpoint,dom,config) {
 	config.Properties["loginPage"] = "/sbt/authenticator/templates/QSlogin.html";
 	ep.authenticate({
 		forceAuthentication: true,
-		success: function(response){
+		load: function(response){
 			dom.setText("content","You successfully logged in to connections");	
 		},
 		cancel: function(){

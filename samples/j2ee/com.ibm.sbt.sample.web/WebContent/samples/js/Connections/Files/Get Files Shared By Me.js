@@ -3,7 +3,7 @@ require([ "sbt/connections/FileService", "sbt/dom" ], function(FileService, dom)
 	fileService.getFilesSharedByMe({
 		load : function(files) {
 			var content = "";
-			for (counter in files) {
+			for (var counter=0; counter<files.length; counter++) {
 				content = content + files[counter].getName() + ((counter == files.length - 1) ? "" : " , ");
 			}
 			if (files.length == 0) {

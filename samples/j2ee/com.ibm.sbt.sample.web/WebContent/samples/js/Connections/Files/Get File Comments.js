@@ -7,7 +7,7 @@ require([ "sbt/connections/FileService", "sbt/dom" ], function(FileService, dom)
 			fileService.getFileComments(file, {
 				load : function(comments) {
 					var content = "";
-					for (counter in comments) {
+					for (var counter=0; counter<comments.length; counter++) {
 						content = content + comments[counter].getComment() + ((counter == comments.length - 1) ? "" : ", ");
 					}
 					if (comments.length == 0) {

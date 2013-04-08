@@ -10,7 +10,7 @@ require(["sbt/connections/CommunityService", "sbt/dom", "sbt/json"], function(Co
 		email : email,
 		loadIt : false
 	});
-	member.setRole("member");
+	if (member) member.setRole("member");
 	communityService.addMember(community, member, {
 		load : function(member){
 			dom.setText("json", json.jsonBeanStringify(member));

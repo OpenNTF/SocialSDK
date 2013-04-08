@@ -57,8 +57,18 @@ public abstract class Application {
 	}
 
 	private List<ApplicationListener> listeners;
+	private String name;
 	
 	protected Application() {
+		this.name = "<unknown application name>";
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	public synchronized void addListener(ApplicationListener listener) {

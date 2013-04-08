@@ -48,19 +48,24 @@ public class DojoLibrary extends AbstractLibrary {
     public static final String      PATH_SBTX_DOJO2         = "dojo2";                   //$NON-NLS-1$
 
 	static private final String[][]	REGISTER_MODULES		= { { MODULE_SBT, PATH_SBT },
-			{ MODULE_BRIDGE, PATH_BRIDGE }, { MODULE_DOJO, PATH_DOJO } };
+			                                                    { MODULE_BRIDGE, PATH_BRIDGE }, 
+			                                                    { MODULE_DOJO, PATH_DOJO } };
 
 	static private final String[]	REQUIRE_MODULES			= { MODULE_AMDCOMPAT };
 
 	static private final String[][]	REGISTER_MODULES_AMD	= { { MODULE_SBT, PATH_SBT },
-			{ MODULE_BRIDGE_AMD, PATH_BRIDGE_AMD }, { MODULE_DOJO_AMD, PATH_DOJO } };
+			                                                    { MODULE_BRIDGE_AMD, PATH_BRIDGE_AMD }, 
+			                                                    { MODULE_DOJO_AMD, PATH_DOJO } };
 
 	static private final String[]	REQUIRE_MODULES_AMD		= new String[0];
 	
 	// extension modules
 	
-    private static final String[][] REGISTER_EXT_MODULES    = { { MODULE_SBTX, PATH_SBTX }, { MODULE_SBTX_WIDGET, PATH_SBTX_DOJO } };
-    private static final String[][] REGISTER_EXT_MODULES_AMD= { { MODULE_SBTX, PATH_SBTX }, { MODULE_SBTX_WIDGET_AMD, null } };
+    private static final String[][] REGISTER_EXT_MODULES    = { { MODULE_SBTX, PATH_SBTX }, 
+                                                                { MODULE_SBTX_WIDGET, PATH_SBTX_DOJO } };
+    
+    private static final String[][] REGISTER_EXT_MODULES_AMD= { { MODULE_SBTX, PATH_SBTX }, 
+                                                                { MODULE_SBTX_WIDGET_AMD, null } };
 
 	static private final String		DEFINE_MODULE			= MODULE_CONFIG;
 

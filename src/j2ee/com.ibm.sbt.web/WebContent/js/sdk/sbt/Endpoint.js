@@ -201,8 +201,11 @@ var Endpoint = declare("sbt.Endpoint", null, {
 				var error = data;
 				// check for if authentication is required				
 				if (error.code == 401 || error.code == self.authenticationErrorCode) {
-					var autoAuthenticate =  _args.autoAuthenticate || self.autoAuthenticate || sbt.Properties["autoAuthenticate"] || "true";
-					if(autoAuthenticate == "true"){
+					var autoAuthenticate =  _args.autoAuthenticate || self.autoAuthenticate || sbt.Properties["autoAuthenticate"];
+					if(autoAuthenticate == undefined){
+						autoAuthenticate = true;
+					}
+					if(autoAuthenticate){
 						if(self.authenticator) {
 							options = {
 								dialogLoginPage:self.loginDialogPage,
@@ -275,7 +278,7 @@ var Endpoint = declare("sbt.Endpoint", null, {
 			login page is to be overridden. This only applies to 'popup' and 'mainWindow' loginUi
 			@param {String} [args.dialogLoginPage] dialog login page to be used for authentication. this property should be used in
 			case default dialog login page is to be overridden. This only applies to 'dialog' loginUi.
-			@param {Function} [args.success] This is the function which authenticate invokes when the authentication is successful.
+			@param {Function} [args.load] This is the function which authenticate invokes when the authentication is successful.
 			@param {Function} [args.cancel] This is the function which authenticate invokes when cancel button of authenticator is clicked.
 	 */
 	authenticate : function(args) {
@@ -287,14 +290,14 @@ var Endpoint = declare("sbt.Endpoint", null, {
 			proxy : this.proxy,
 			proxyPath : this.proxyPath,
 			loginUi : args.loginUi || this.loginUi,
-			callback: args.success,
+			callback: args.load,
 			cancel: args.cancel
 		};
 		if(args.forceAuthentication || !this.isAuthenticated) {
 			this.authenticator.authenticate(options);
-		}else{//call success if authentication is not required.
-			if (args.success) {
-				args.success();
+		}else{//call load if authentication is not required.
+			if (args.load) {
+				args.load();
 			}
 		}
 	},
@@ -304,8 +307,8 @@ var Endpoint = declare("sbt.Endpoint", null, {
 	 
 	 @method logout
 	 @param {Object} [args]  Argument object
-			@param {Function} [args.success] This is the function which authenticate invokes when the logout is successful.
-			@param {Function} [args.failure] This is the function which authenticate invokes when the logout is unsuccessful.
+			@param {Function} [args.load] This is the function which authenticate invokes when the logout is successful.
+			@param {Function} [args.error] This is the function which authenticate invokes when the logout is unsuccessful.
 	 */
 	logout : function(args) {
 		args = args || {};
@@ -317,10 +320,10 @@ var Endpoint = declare("sbt.Endpoint", null, {
 			url : actionURL,
 			handle : function(response) {
 				sbt.Endpoints[self.proxyPath].isAuthenticated = false;
-				if (args.success && response.success) {
-					args.success(response);
-				} else if (args.failure && !response.success) {
-					args.failure(response);
+				if (args.load && response.success) {
+					args.load(response);
+				} else if (args.error && !response.success) {
+					args.error(response);
 				}
 			}
 		}, true);
@@ -332,6 +335,7 @@ var Endpoint = declare("sbt.Endpoint", null, {
 	 @method isAuthenticated
 	 @param {Object} [args]  Argument object
 			@param {Function} [args.load] This is the function which isAuthenticated invokes when authentication information is retrieved.
+			@param {Function} [args.error] This is the function which isAuthenticated invokes if an error occurs.
 			result property in response object returns true/false depending on whether endpoint is authenticated or not.
 	*/
 	isAuthenticated : function(args) {
@@ -344,6 +348,8 @@ var Endpoint = declare("sbt.Endpoint", null, {
 			handle : function(response) {
 				if (args.load) {
 					args.load(response);
+				} else if (args.error) {
+					args.error(response);
 				}
 			}
 		}, true);
@@ -356,6 +362,7 @@ var Endpoint = declare("sbt.Endpoint", null, {
 	 @param {Object} [args]  Argument object
 			@param {Function} [args.load] This is the function which isAuthenticationValid invokes when 
 			authentication information is retrieved.
+			@param {Function} [args.error] This is the function which isAuthenticationValid invokes if an error occurs.
 			result property in response object returns true/false depending on whether authentication is valid or not.
 	*/
 	isAuthenticationValid : function(args) {
@@ -368,6 +375,8 @@ var Endpoint = declare("sbt.Endpoint", null, {
 			handle : function(response) {
 				if (args.load) {
 					args.load(response);
+				} else if (args.error) {
+					args.error(response);
 				}
 			}
 		}, true);

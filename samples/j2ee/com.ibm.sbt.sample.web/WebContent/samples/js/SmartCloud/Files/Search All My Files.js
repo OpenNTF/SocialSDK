@@ -3,7 +3,7 @@ require([ "sbt/smartcloud/FileService", "sbt/dom" ], function(FileService, dom) 
 	var fileService = new FileService();
 	fileService.getMyFilesAlt({
 		load : function(files) {
-			for (counter in files) {
+			for (var counter=0; counter<files.length; counter++) {
 				var liElement = document.createElement("li");
 				liElement.setAttribute("id", "li" + counter);
 				document.getElementById("content").appendChild(liElement);

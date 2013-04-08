@@ -19,9 +19,11 @@
  */
 define([],function() {
 	if (!Array.prototype.indexOf){
-		Array.prototype.indexOf = function(obj, start) {
-		     for (var i = (start || 0), j = this.length; i < j; i++) {
-		         if (this[i] === obj) { return i; }
+		Array.prototype.indexOf = function(item, start) {
+			 var index = start || 0;
+			 var max = this.length;
+		     for (; index < max; index++) {
+		         if (this[index] === item) { return index; }
 		     }
 		     return -1;
 		};

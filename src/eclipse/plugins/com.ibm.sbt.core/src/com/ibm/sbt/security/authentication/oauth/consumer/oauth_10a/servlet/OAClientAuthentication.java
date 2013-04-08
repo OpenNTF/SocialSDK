@@ -94,9 +94,11 @@ public class OAClientAuthentication extends AbstractServiceHandler {
 				pw.println("  window.location.href = '" + redirect + "';");
 			} else if (mode.equalsIgnoreCase(MODE_POPUP)) {
 				pw.println("  if (window.opener && !window.opener.closed) {");
-				// pw.println("    window.opener.location.reload();");
-				pw.println("window.opener.sbt.callback();");
-				pw.println("delete window.opener.sbt.callback;");
+				pw.println("    window.opener.location.reload();"); 
+					pw.println("  if (window.opener.sbt.callback) {");
+						pw.println("window.opener.sbt.callback();");
+						pw.println("delete window.opener.sbt.callback;");
+					pw.println("  }");
 				pw.println("  }");
 				pw.println("  window.close();");
 			} else if (mode.equalsIgnoreCase(MODE_DIALOG)) {

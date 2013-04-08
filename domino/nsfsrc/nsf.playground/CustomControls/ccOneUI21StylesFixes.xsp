@@ -6,7 +6,7 @@
 		.tundra .dijitTabContainerTop-container { border-style: none; top: 0px; left: 0px }
 		.tundra .dijitTabContainerTopStrip { border-style: none; top: 0px; left: 0px }
 		.tundra .dijitTabContainerTop-dijitContentPane { padding: 5px 0px 5px 0px; }
-		.lotusui .lotusContent { padding-top: 0px; padding-right: 0px; padding-left: 0px; border: none; }
+		.lotusui .lotusContent { padding-top: 0px; padding-right: 0px; padding-left: 0px; border: none; height:100%;}
 		.lotusui .lotusMain { margin: 5px 0px 0px 0px; }
 		.CodeMirror { font-size: 10pt; width: 100%; height: 100%; }
 		.CodeMirror-scroll { width: 100%;height: 100%; }

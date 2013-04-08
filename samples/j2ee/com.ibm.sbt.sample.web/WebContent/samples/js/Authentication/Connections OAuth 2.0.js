@@ -30,12 +30,12 @@ function login(loginUi) {
 function logout() {
 	require(['sbt/Endpoint',"sbt/dom"], function(Endpoint,dom) {
 		Endpoint.find("connectionsOA2").logout({
-			success: function(response){
+			load: function(response){
 				dom.setText("ConnOAuth2LoginStatus","You are not authenticated");
 				dom.byId("ConnOAuth2Login").style.display = "inline";
 				dom.byId("ConnOAuth2Logout").style.display = "none";
 			},
-			failure: function(){
+			error: function(){
 				dom.setText("content","Failed to Logout");
 			}
 		});

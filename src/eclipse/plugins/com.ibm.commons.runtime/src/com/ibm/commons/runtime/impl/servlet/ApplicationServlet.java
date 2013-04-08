@@ -21,6 +21,7 @@ import java.io.InputStream;
 import javax.servlet.ServletContext;
 
 import com.ibm.commons.runtime.impl.AbstractApplication;
+import com.ibm.commons.util.StringUtil;
 
 
 
@@ -34,11 +35,20 @@ import com.ibm.commons.runtime.impl.AbstractApplication;
 public class ApplicationServlet extends AbstractApplication {
 
 	protected ApplicationServlet(ServletContext servletContext) {
+		this(servletContext,null);
+	}
+	protected ApplicationServlet(ServletContext servletContext, String name) {
 		super(servletContext);
 		// For J2EE apps, the application name is coming from the context path
-		String cp = servletContext.getContextPath();
-		if(cp!=null) {
-			setName(cp);
+		// Note that Domino does not support getContextPath() (servlet 2.5) so the module name
+		// is passed as a parameter.
+		if(StringUtil.isEmpty(name)) {
+			try {
+				name = servletContext.getContextPath();
+			} catch(Exception ex) {} // Make sure it never fails
+		}
+		if(StringUtil.isNotEmpty(name)) {
+			setName(name);
 		}
 	}
 

@@ -14,7 +14,11 @@ public enum ASGroup {
 	INVOLVED("@involved"),
 	SAVED("@saved"),
 	ACTION("@actions"),
-	RESPONSES("@responses");
+	RESPONSES("@responses"),
+	NOTESFORME ("@notesforme"),
+	NOTESFROMME("@notesfromme");
+
+	
 	String groupType;
 	private ASGroup(String groupType) {
 		this.groupType = groupType;

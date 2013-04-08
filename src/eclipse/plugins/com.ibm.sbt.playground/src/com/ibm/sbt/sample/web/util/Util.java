@@ -141,6 +141,10 @@ public class Util {
                 break;
             }
         }  
+        String transport = request.getParameter("transport");
+        if (StringUtil.isNotEmpty(transport)) {
+            libraryUrl += "&transport=" + transport;
+        }
         String baseUrl = UrlUtil.getBaseUrl(request);
         return PathUtil.concat(baseUrl, libraryUrl,'/');
     }

@@ -1,4 +1,4 @@
-<script type="text/javascript" src="/sbt.jquery182/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="/sbt.jquery180/js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="/sbt/js/libs/require.js"></script>
 
 <script type="text/javascript">

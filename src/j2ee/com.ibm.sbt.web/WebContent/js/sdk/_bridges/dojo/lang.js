@@ -20,7 +20,7 @@
 define([],function() {
 	return {
 		mixin: function(dest,sources) {
-			return dojo.mixin(dest,sources);
+			return dojo.mixin.apply(this, arguments);
 		},
 		isArray: function(o) {
 			return dojo.isArray(o);

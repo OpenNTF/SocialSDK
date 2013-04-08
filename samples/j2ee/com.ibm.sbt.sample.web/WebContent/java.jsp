@@ -6,15 +6,6 @@
     <link href="images/sbt.png" rel="shortcut icon">
     <link rel="stylesheet" href="/sbt.dojo180/dijit/themes/claro/claro.css">
     
-    <%
-    String[] styleHrefs = Util.getStyles(request, "oneui");
-    for (String styleHref : styleHrefs) {
-    %>
-    <link rel="stylesheet" type="text/css" title="Style" href="<%=styleHref%>"></link>
-    <%
-    }
-    %>
-
     <link href="/sbt.bootstrap211/bootstrap/css/bootstrap.css" rel="stylesheet"></link>
     <style type="text/css">
       body {

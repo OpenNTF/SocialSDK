@@ -94,7 +94,7 @@ define(["sbt/config", "sbt/connections/core"],function(sbt) {
 		},
 		communityServiceEntity : {
 				"communities"	:"/communities",
-				"community"		:"/community",
+				"community"		:"/community"
 		},		
 		communitiesType : {
 				"members"				:"/members",

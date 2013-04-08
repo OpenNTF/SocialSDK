@@ -55,21 +55,30 @@ define(["has", "jquery"],function(has, $) {
     
 	return {
 		mixin: function(dest,sources) {
-			dest = $.extend(dest,sources);
-			if(has("bug-for-in-skips-shadowed")){
-				var i, s, empty = {};
-				if(sources){
-					for(i = 0; i < _extraLen; ++i){
-						name = _extraNames[i];
-						s = sources[name];
-						if(!(name in dest) || (dest[name] !== s && (!(name in empty) || empty[name] !== s))){
-							dest[name] = s;
-						}
-					}
-				}
-			}
-			return dest;
+		    if (!dest) { 
+		        dest = {}; 
+		    }
+            for (var i = 1, l = arguments.length; i < l; i++) {
+                this._mixin(dest, arguments[i]);
+            }
+            return dest;
 		},
+        _mixin: function(dest,sources) {
+            dest = $.extend(dest,sources);
+            if(has("bug-for-in-skips-shadowed")){
+                var i, s, empty = {};
+                if(sources){
+                    for(i = 0; i < _extraLen; ++i){
+                        name = _extraNames[i];
+                        s = sources[name];
+                        if(!(name in dest) || (dest[name] !== s && (!(name in empty) || empty[name] !== s))){
+                            dest[name] = s;
+                        }
+                    }
+                }
+            }
+            return dest;
+        },
 		isArray: function(o) {
 			return $.isArray(o);
 		},

@@ -20,7 +20,7 @@
 define(['dojo/_base/lang'],function(lang) {
 	return {
 		mixin: function(dest,sources) {
-			return lang.mixin(dest,sources);
+		    return lang.mixin.apply(this, arguments);
 		},
 		isArray: function(o) {
 			return lang.isArray(o);

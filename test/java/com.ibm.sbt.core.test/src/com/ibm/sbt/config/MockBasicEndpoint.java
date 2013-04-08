@@ -24,7 +24,7 @@ public class MockBasicEndpoint extends BasicEndpoint {
 
 	public MockBasicEndpoint() {
 		setUrl("http://sbtdev.swg.usma.ibm.com:81");
-		setPasswordStore("PwdStore");
+		setCredentialStore("CredStore");
 		setAuthenticationPage("_BasicLogin?endpoint=sbtdevConnections");
 		setAuthenticationService("communities/service/atom/communities/my");
 	}

@@ -37,23 +37,26 @@ public class CredentialStoreFactory {
     public static CredentialStore getCredentialStore(String name) throws CredentialStoreException {
     	Context context = Context.get();
     	
-    	// If the user is anonynmous, then the store should happen in memory
-    	// This is a shared object for all the users
-    	if(context.isCurrentUserAnonymous()) {
-    		return AnonymousSessionCredentialStore.get();
-    	}
-    	
         // Look for a global property if the name is empty
         if(StringUtil.isEmpty(name)) {
             name = context.getProperty("sbt.credentialstore", null);
-            if(StringUtil.isEmpty(name)) {
-                name = "CredentialStore";
-            }
         }
+        if(StringUtil.isEmpty(name)) {
+        	return null; 
+        }
+    	
+    	// If the user is anonynmous, then the store should happen in memory
+    	// This is a shared object for all the users
+        // Do we actually need this? If the beans are set to the session scope, then this
+        // is redundant.
+    	if(context.isCurrentUserAnonymous()) {
+    		return AnonymousSessionCredentialStore.get();
+    	}
+        
         // Look for a bean and/or class
         Object o = context.getBean(name);
         if(o==null) {
-            throw new CredentialStoreException(null,"Credential store {0} is not available. Please verify your configuration file.",name); 
+            throw new CredentialStoreException(null,"Credential store {0} is not available. Please verify your configuration files.",name); 
         }
         if(!(o instanceof CredentialStore)) {
             throw new CredentialStoreException(null,"Invalid credential store implementation {0}, class {1}",name,o.getClass()); 

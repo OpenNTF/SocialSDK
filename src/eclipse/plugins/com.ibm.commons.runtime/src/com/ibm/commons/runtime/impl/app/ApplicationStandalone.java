@@ -30,6 +30,8 @@ public class ApplicationStandalone extends AbstractApplication {
      */
     protected ApplicationStandalone(Object applicationContext) {
         super(applicationContext);
+        // Standalone application name
+        setName("Standalone Java Application");
     }
 
     /*

@@ -44,19 +44,23 @@ public abstract class AbstractRuntimeFactory extends RuntimeFactory {
 	//
 	//
 	
+	protected ClassLoader getContextClassLoader() {
+		return Thread.currentThread().getContextClassLoader();
+	}
+	
 	public Map<ClassLoader,AbstractApplication> getApplicationMap() {
 		return applications;
 	}
 
 	@Override
 	public Application getApplicationUnchecked() {
-		ClassLoader cl = Thread.currentThread().getContextClassLoader();
+		ClassLoader cl = getContextClassLoader();
 		return applications.get(cl);
 	}
 
 	@Override
 	public synchronized Application initApplication(Object servletContext) {
-		ClassLoader cl = Thread.currentThread().getContextClassLoader();
+		ClassLoader cl = getContextClassLoader();
 		AbstractApplication app = applications.get(cl);
 		if(app==null) {
 			RuntimeFactory rtFactory = RuntimeFactory.get();
@@ -69,7 +73,7 @@ public abstract class AbstractRuntimeFactory extends RuntimeFactory {
 
 	@Override
 	public synchronized void destroyApplication(Application application) {
-		ClassLoader cl = Thread.currentThread().getContextClassLoader();
+		ClassLoader cl = getContextClassLoader();
 		AbstractApplication app = applications.get(cl);
 		if(app==null || app!=application) { // should not happen
 			throw new IllegalStateException("Cannot destroy an application that doesn't exist");

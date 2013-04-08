@@ -3,7 +3,7 @@ require(["sbt/Endpoint", "sbt/dom", "sbt/config"], function(Endpoint, dom, confi
     config.Properties["loginUi"] = "popup";
     ep.authenticate({
         forceAuthentication: true,
-        success: function(response){
+        load: function(response){
             dom.setText("content", "Successfully logged in");    
         }
     });

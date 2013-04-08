@@ -38,8 +38,8 @@ public class XspApplication extends ApplicationServlet {
 	
 	private ApplicationEx jsfApplication;
 	
-	public XspApplication(ApplicationEx app, ServletContext context) {
-		super(context);
+	public XspApplication(ApplicationEx app, ServletContext context, String name) {
+		super(context,name);
 		this.jsfApplication = app;
 	}
 

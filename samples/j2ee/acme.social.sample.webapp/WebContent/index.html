@@ -8,6 +8,9 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 
+	<link rel="stylesheet" type="text/css" title="Style" href="/sbt.dojo180/dojo/resources/dojo.css">
+	<link rel="stylesheet" type="text/css" title="Style" href="/sbt.dojo180/dijit/themes/claro/claro.css">
+
     <link href="/sbt/bootstrap/css/bootstrap.css" rel="stylesheet">
     <style type="text/css">
       body {
@@ -17,10 +20,19 @@
     </style>
     <link href="/sbt/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 
-    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+	<script type="text/javascript">
+	var djConfig = {
+		async: false,
+    	parseOnLoad: true,
+    	locale: 'en',
+    	paths: {'acme':'../../acme.sample.webapp/js', 'acmesocial':'../../acme.social.sample.webapp/js'}, 
+    	deps: ['dojo/parser', 'acmesocial/main']
+	};
+	</script>
+
+	<script type="text/javascript" src="/sbt.dojo180/dojo/dojo.js.uncompressed.js"></script>
+
+    <script type="text/javascript" src="library?ver=1.8.0"></script>
   </head>
   <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -49,10 +61,6 @@
 
     </div>
 
-    <script data-dojo-config="async:false, parseOnLoad:true, paths:{'acme':'../../acme.social.sample.webapp/js'}, deps:['dojo/parser', 'acme/main']" 
-    src="/sbt.dojo180/dojo/dojo.js.uncompressed.js"></script>
-    <script type="text/javascript" src="library?ver=1.8.0"></script>
-    
     <script type="text/template" id="homeTmpl">
 		<div>
 			<div class="hero-unit">
@@ -109,6 +117,7 @@
 			<td>${Time}</td>
 			<td>${FlightTime} HR</td>
 			<td><button class="btn btn-primary" type="button">Book</button><td>
+			<td><div id="gridDiv"></div><td>
 		</tr>
     </script>
     
@@ -136,5 +145,15 @@
             <td>${state}</td>
         </tr>
     </script>
+    
+    <script type="text/template" id="flightColleagues">
+		<span class="vcard" dojoAttachPoint="vcardNode">
+			<a class="fn lotusPerson hasHover url hasHover" title="${title}" aria-describedby="semtagmenu"
+			   href="${profileLink}" aria-label="${title}" icbizcard_ref="1" icbizcard_idx="22">
+				<img tabindex="-1" alt="${title}" src="${photo}" width="32" height="32" class="img-polaroid">
+				<span style="display: none" data-dojo-attach-point="idNode" class="x-lconn-userid">${userid}</span>
+			</a>
+		</span>
+	</script>
   </body>
 </html>

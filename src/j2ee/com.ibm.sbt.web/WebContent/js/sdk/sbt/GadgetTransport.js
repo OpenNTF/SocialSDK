@@ -140,7 +140,7 @@ define(['sbt/_bridge/declare','sbt/lang'],function(declare,lang) {
         },
         buildUrl: function(args) {
             var params = [];
-            var url = args._url;
+            var url = args.url;
             if (args.content) {
                 for (name in args.content) {
                     var param = encodeURIComponent(name) + "=" + encodeURIComponent(args.content[name]);

@@ -1,12 +1,12 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Acme Airelines Dataapp
+Bundle-Name: Acme Airlines DataApp
 Bundle-SymbolicName: acme.social.sample.dataapp
 Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: dataapp.jar,
  lib/servlet-api.jar
-Export-Package: acme.social.dataapp,
- acme.social.interfaces,
- acme.social.sample.services
+Export-Package: acme.dataapp,
+ acme.interfaces,
+ acme.sample.services
 Import-Package: javax.servlet;version="2.5.0",
  javax.servlet.http;version="2.5.0"

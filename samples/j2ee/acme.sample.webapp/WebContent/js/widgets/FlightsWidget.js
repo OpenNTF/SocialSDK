@@ -15,7 +15,7 @@ define(['dojo/_base/declare', 'dijit/_WidgetBase', 'dijit/_TemplatedMixin',
                     var self = this;
                     var successCallback = function(flights) {
                         arrayUtil.forEach(flights, function(flight) {
-                            var row = new FlightRowWidget(flight);
+                            var row = self.createFlightRow(flight);
                             query('#flightsTable tbody').append(row.domNode);
                             self.startup();
                         });
@@ -26,6 +26,10 @@ define(['dojo/_base/declare', 'dijit/_WidgetBase', 'dijit/_TemplatedMixin',
                     };
                     
                     flights.getAllFlights({loadCallback: successCallback, errorCallback: error});
+                }, 
+                
+                createFlightRow : function(flight) {
+                    return new FlightRowWidget(flight);
                 }
             });
         });

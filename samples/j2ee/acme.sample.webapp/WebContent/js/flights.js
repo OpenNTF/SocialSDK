@@ -110,6 +110,29 @@ define(["sbt/_bridge/declare", "sbt/Endpoint", "sbt/json"], function(declare, en
         },
         
         /**
+         * Gets all the flights for a user.
+         * @param {Object} [args] Arguments to get the users flight information.
+         * @example
+         *  var myLoadCallback = function(flights) {
+         *    for(var i = 0; i < flights.length; i++) {
+         *      //do something with the flight information
+         *    }
+         *  };
+         *  
+         *  var myErrorCallback = function(error) {
+         *    //an error occurred do something
+         *  };
+         *  
+         *  flights.getFlightsForUser({userId: "example@renovations.com", loadCallback: myLoadCallback, errorCallback: myErrorCallback});
+         */
+        getUsersForFlight : function(args) {
+            var loadCallback = args['loadCallback'];
+            var errorCallback = args['errorCallback'];
+            var flightId = args['flightId'];
+            acmeGet(restPath + '/' + flightId + '/users', loadCallback, errorCallback);
+        },
+        
+        /**
          * Updates a booked flight.
          * @param {Object} [args] Arguments to update a user's booked flight.
          * @example

@@ -403,7 +403,7 @@ public class FileService extends BaseService {
 	 * @return FileEntry
 	 * @throws FileServiceException
 	 */
-	public FileEntry addCommentToFile(FileEntry fileEntry, Map<String, String> params, String comment)
+	public CommentEntry addCommentToFile(FileEntry fileEntry, Map<String, String> params, String comment)
 			throws FileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "addCommentToFile");
@@ -429,9 +429,9 @@ public class FileService extends BaseService {
 		Object payload = constructPayloadForComments(comment);
 		Document result = executePost(requestUri, params, headers, payload);
 		if (result == null) {
-			return (FileEntry) result;
+			return (CommentEntry) result;
 		}
-		return (FileEntry) parseAndProcessResultFeed(result, FileEntry.class).get(0);
+		return (CommentEntry) parseAndProcessResultFeed(result, CommentEntry.class).get(0);
 	}
 
 	/**

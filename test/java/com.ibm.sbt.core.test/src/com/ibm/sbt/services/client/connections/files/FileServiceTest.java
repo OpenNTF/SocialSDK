@@ -313,8 +313,9 @@ public class FileServiceTest extends BaseUnitTest {
 		authenticateEndpoint(fileService.getEndpoint(), "fadams", "passw0rd");
 		FileEntry fileEntry = fileService.getFile(TEST_FILEID, true);
 		String comment = "Junit Comment - Added from FileServiceTest, testAddCommentToFile";
-		fileEntry = fileService.addCommentToFile(fileEntry, null, comment);
-		assertEquals(fileEntry.getCommentEntry().getComment(),
+		CommentEntry commentEntry;
+		commentEntry = fileService.addCommentToFile(fileEntry, null, comment);
+		assertEquals(commentEntry.getComment(),
 				"Junit Comment - Added from FileServiceTest, testAddCommentToFile");
 	}
 

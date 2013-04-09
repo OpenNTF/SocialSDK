@@ -1,0 +1,17 @@
+<div class="lotusPaging" dojoAttachPoint="pagingHeader">
+	<div class="lotusLeft"></div>
+	<div class="lotusLeft" dojoAttachPoint="showingResultsMessage">${pagingResults}</div>
+	<ul class="lotusRight lotusInlinelist">
+		<li class="lotusFirst prevPageLink">
+			<a style="${hidePreviousLink}" title="${nls.previousPage}" href="javascript: void(0)" data-dojo-attach-event="onclick: prevPage">${nls.previous}</a>
+			<span style="${hidePreviousLabel}">${nls.previous}</span>
+		</li>
+		<li class="nextPageLink">
+			<a style="${hideNextLink}" title="${nls.nextPage}" href="javascript: void(0)" data-dojo-attach-event="onclick: nextPage">${nls.next}</a>
+			<span style="${hideNextLabel}">${nls.next}</span>
+		</li>
+	</ul>
+	<div>
+		<div dojoAttachPoint="catCenterPagingTop"></div>
+	</div>
+</div>

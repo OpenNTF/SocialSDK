@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entry xmlns:thr="http://purl.org/syndication/thread/1.0"
+	xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"
+	xmlns:td="urn:ibm.com/td" xmlns="http://www.w3.org/2005/Atom">
+	<id>urn:lsid:ibm.com:td:9d717967-73ad-4cb9-b1e4-ff8fb1dcba75</id>
+	<td:uuid>9d717967-73ad-4cb9-b1e4-ff8fb1dcba75</td:uuid>
+	<td:label>Updates.odp</td:label>
+	<link
+		href="https://qs.renovations.com:444/files/basic/api/library/d3d42877-3d96-4e40-a04c-4430603cc625/document/9d717967-73ad-4cb9-b1e4-ff8fb1dcba75/entry"
+		rel="self"></link>
+	<link
+		href="https://qs.renovations.com:444/files/app/file/9d717967-73ad-4cb9-b1e4-ff8fb1dcba75"
+		rel="alternate" type="text/html"></link>
+	<link
+		href="https://qs.renovations.com:444/files/basic/api/library/d3d42877-3d96-4e40-a04c-4430603cc625/document/9d717967-73ad-4cb9-b1e4-ff8fb1dcba75/entry"
+		rel="edit"></link>
+	<link
+		href="https://qs.renovations.com:444/files/basic/api/library/d3d42877-3d96-4e40-a04c-4430603cc625/document/9d717967-73ad-4cb9-b1e4-ff8fb1dcba75/media"
+		rel="edit-media"></link>
+	<link
+		href="https://qs.renovations.com:444/files/basic/anonymous/api/library/d3d42877-3d96-4e40-a04c-4430603cc625/document/9d717967-73ad-4cb9-b1e4-ff8fb1dcba75/media/Updates.odp"
+		rel="enclosure" type="application/vnd.oasis.opendocument.presentation"
+		title="Updates.odp" hreflang="en" length="103509"></link>
+	<link href="" rel="thumbnail"></link>
+	<category term="document" scheme="tag:ibm.com,2006:td/type"
+		label="document"></category>
+	<link
+		href="https://qs.renovations.com:444/files/basic/api/library/d3d42877-3d96-4e40-a04c-4430603cc625/document/9d717967-73ad-4cb9-b1e4-ff8fb1dcba75/feed"
+		rel="replies" type="application/atom+xml" thr:count="2"
+		xmlns:thr="http://purl.org/syndication/thread/1.0"></link>
+	<author>
+		<name>Frank Adams</name>
+		<snx:userid>0EE5A7FA-3434-9A59-4825-7A7000278DAA</snx:userid>
+		<email>FrankAdams@renovations.com</email>
+		<snx:userState>active</snx:userState>
+	</author>
+	<title type="text">Updates.odp</title>
+	<published>2012-11-06T02:32:10.411Z</published>
+	<updated>2013-01-30T14:42:00.298Z</updated>
+	<td:created>2012-11-06T02:32:10.411Z</td:created>
+	<td:modified>2012-11-06T02:32:10.411Z</td:modified>
+	<td:lastAccessed></td:lastAccessed>
+	<td:modifier>
+		<name>Frank Adams</name>
+		<snx:userid>0EE5A7FA-3434-9A59-4825-7A7000278DAA</snx:userid>
+		<email>FrankAdams@renovations.com</email>
+		<snx:userState>active</snx:userState>
+	</td:modifier>
+	<td:visibility>shared</td:visibility>
+	<td:libraryId>d3d42877-3d96-4e40-a04c-4430603cc625</td:libraryId>
+	<td:libraryType>personalFiles</td:libraryType>
+	<td:versionUuid>c3c05f7c-7d4f-4486-8733-42f097818976</td:versionUuid>
+	<td:versionLabel>1</td:versionLabel>
+	<td:propagation>true</td:propagation>
+	<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+	<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">2</snx:rank>
+	<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/share">2</snx:rank>
+	<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/collections">0</snx:rank>
+	<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/attachments">0</snx:rank>
+	<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/versions">1</snx:rank>
+	<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/references">0</snx:rank>
+	<td:totalMediaSize>103509</td:totalMediaSize>
+	<summary type="text"></summary>
+	<content type="application/vnd.oasis.opendocument.presentation"
+		src="https://qs.renovations.com:444/files/basic/api/library/d3d42877-3d96-4e40-a04c-4430603cc625/document/9d717967-73ad-4cb9-b1e4-ff8fb1dcba75/media"></content>
+	<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+	<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/anonymous_hit">0</snx:rank>
+	<td:restrictedVisibility>false</td:restrictedVisibility>
+	<td:objectTypeId>snx:file</td:objectTypeId>
+	<td:lock type="NONE"></td:lock>
+</entry>

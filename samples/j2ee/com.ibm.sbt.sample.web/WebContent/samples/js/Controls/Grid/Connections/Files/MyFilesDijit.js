@@ -1,0 +1,1 @@
+dojo.require("sbt.controls.grid.connections.FileGrid");

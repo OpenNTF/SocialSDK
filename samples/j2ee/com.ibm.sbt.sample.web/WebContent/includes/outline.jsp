@@ -27,52 +27,57 @@
         
     %>
     <script type="text/javascript">
-        dojo.require("dojo.data.ItemFileReadStore");
-        dojo.require( "dijit.Tree" );
-        var rawdata=<%=json%>;
-        
-        function prepare(){
-            var store = new dojo.data.ItemFileReadStore({
-                data: { identifier: 'id', label : 'name', url: 'jspUrl', items: rawdata }
-            });
-            // hack to remove root node since dojo insists on adding its own.
-            store._jsonData.items = store._jsonData.items[0].children;
-            var treeModel = new dijit.tree.ForestStoreModel({ store: store });
-            var tree = new dijit.Tree({
-                model: treeModel,
-                showRoot: false,
-                openOnClick: true,
-                autoExpand: false,
-                _createTreeNode: function(args){
-                    var tnode = new dijit._TreeNode(args);
-                    tnode.labelNode.innerHTML = args.label;
-                    
-                    // Add the class leafNode to the dom node of leaf elements,
-                    // so we can identify when leaf nodes are clicked
-                    if(!tnode.isExpandable){
-                        dojo.addClass(tnode.domNode, "leafNode");
-                        tnode.domNode.id = args.item.url;
-                        setTimeout(function(){//small timeout to ensure that when this event is fired the tnode is already returned.
-                            var tree = dojo.byId("tree");
-                            var event = new CustomEvent("newNodeEvent", {});
-                            tree.dispatchEvent(event);
-                        }, 30);
-                    }
-                    return tnode;
-                }
-            }, "tree" );
-
-			// TODO want the tree to be autoExpand:false
-			            
-            dojo.byId("collapseAll").onclick = function(evt) {
-            	tree.collapseAll();
-            };
-            
-            dojo.byId("expandAll").onclick = function(evt) {
-            	tree.expandAll();
-            };
-        }
-
-        dojo.ready(prepare);
+    require(["dojo/_base/declare", "dojo/ready", "dojo/dom", "dojo/dom-class", "dojo/store/Memory",
+             "dijit/tree/ObjectStoreModel", "dijit/Tree"], 
+        function(declare, ready, dom, domClass, Memory, ObjectStoreModel, Tree){
+             var rawData=<%=json%>;
+             var treeStore = new Memory({
+                 data: rawData,
+                 getChildren: function(object){
+                     return object.children !== undefined ? object.children : [];
+                 }
+             });
+             var treeModel = new ObjectStoreModel({
+                 store: treeStore,
+                 query: {id: '_root'},
+                 mayHaveChildren: function(item){
+                     return item.hasOwnProperty("children");
+                 }
+             });
+             ready(function(){
+                 var tree = new Tree({
+                     model: treeModel,
+                     showRoot: false,
+                     openOnClick: true,
+                     _createTreeNode: function(args){
+                         var treeNode = new Tree._TreeNode(args);
+                         treeNode.labelNode.innerHTML = args.label;
+                         
+                         // Add the class leafNode to the dom node of leaf elements,
+                         // so we can identify when leaf nodes are clicked
+                         if(!args.item.children){
+                             domClass.add(treeNode.domNode, "leafNode");
+                             treeNode.domNode.id = args.item.url;
+                             setTimeout(function(){//small timeout to ensure that when this event is fired the tnode is already returned.
+                                 var tree = dom.byId("tree");
+                                 var event = new CustomEvent("newNodeEvent", {});
+                                 tree.dispatchEvent(event);
+                             }, 30);
+                         }
+                         return treeNode;
+                     }
+                 });
+                 tree.placeAt(dom.byId("tree"));
+                 tree.startup();
+                 
+                 dom.byId("collapseAll").onclick = function(evt) {
+                     tree.collapseAll();
+                 };
+                 
+                 dom.byId("expandAll").onclick = function(evt) {
+                     tree.expandAll();
+                 };
+             });
+         });
     </script>
 </div>

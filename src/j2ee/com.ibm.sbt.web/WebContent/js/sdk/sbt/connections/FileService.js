@@ -1485,18 +1485,29 @@ define(
 
 								return;
 							}
-							var accessType = constants.accessType.AUTHENTICATED;
-							var subFilters = new _SubFilters();
-							subFilters.setCollectionId(args.collectionId);
-							var resultType = constants.resultType.FEED;
-							var parameters = args.parameters ? lang.mixin({}, args.parameters) : {};
-							parameters["itemId"] = file.getId();
-							var category = constants.categories.PINNED;
-							var view = constants.views.FILES;
-							var url = this._constructUrl(constants.baseUrl.FILES, accessType, category, view, null, subFilters, resultType, parameters);							
-							var _args = args ? lang.mixin({}, args) : {};
-							_args["responseFormat"] = constants.responseFormat.NON_XML_FORMAT;
-							this._executePost(_args, url, null, null);
+							var _self = this;
+							this._getNonce({
+								load : function(nonceValue) {
+									var accessType = constants.accessType.AUTHENTICATED;
+									var subFilters = new _SubFilters();
+									subFilters.setCollectionId(args.collectionId);
+									var resultType = constants.resultType.FEED;
+									var parameters = args.parameters ? lang.mixin({}, args.parameters) : {};
+									parameters["itemId"] = file.getId();
+									var category = constants.categories.PINNED;
+									var view = constants.views.FILES;
+									var url = _self._constructUrl(constants.baseUrl.FILES, accessType, category, view, null, subFilters, resultType, parameters);							
+									var _args = args ? lang.mixin({}, args) : {};
+									_args["responseFormat"] = constants.responseFormat.NON_XML_FORMAT;
+									var headers = {
+											"X-Update-Nonce" : nonceValue
+										};
+									_self._executePost(_args, url, headers, null);
+								},
+								error : function(error) {
+									validate.notifyError(error, args);
+								}
+							});
 						},
 						
 						/**

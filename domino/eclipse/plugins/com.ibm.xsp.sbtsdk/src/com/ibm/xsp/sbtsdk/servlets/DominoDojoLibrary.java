@@ -24,10 +24,6 @@ import com.ibm.sbt.jslibrary.servlet.DojoLibrary;
  */
 public class DominoDojoLibrary extends DojoLibrary {
 	
-	static private final String[][]	REGISTER_MODULES_AMD	= {
-			{ MODULE_SBT, PATH_SBT }
-	};
-	
 	public static final String	NAME	= "dojod";					//$NON-NLS-1$
 	public static final String	VERSION	= "1.7";					//$NON-NLS-1$
 	
@@ -36,7 +32,7 @@ public class DominoDojoLibrary extends DojoLibrary {
 		super(NAME,"1.6","1.8");
 	}
 
-	protected String[][] getRegisterModules() {
-		return REGISTER_MODULES_AMD;
-	}	
+//	protected String[][] getRegisterModules() {
+//		return REGISTER_MODULES_AMD;
+//	}	
 }

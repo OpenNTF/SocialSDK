@@ -4,7 +4,7 @@
 //TODO Consider breaking some of the functionality in here out into its own class, maybe move it into the GadgetApprovalWidget?
 require(['dojo/domReady!'], function() {
     require(['dojo/_base/array', 'dojo/query', 'acme/flights', 
-             'acme/widgets/gadgets/airlines/GadgetApprovalWidget', 'sbt/lang', 'dojo/NodeList-manipulate', 
+             'acmesocial/widgets/gadgets/airlines/GadgetApprovalWidget', 'sbt/lang', 'dojo/NodeList-manipulate', 
              'dojo/NodeList-dom'], 
               function(arrayUtil, query, flights, GadgetApprovalWidget, lang) {
         
@@ -51,6 +51,9 @@ require(['dojo/domReady!'], function() {
                                 flightCallback(response, flight);
                             },
                             errorCallback : function(response) {
+                                var msg = response.message || response;
+                                query('#mainContainer span').innerHTML(getAlertHtml('alert-error', 
+                                    'There was an error retrieving flight information: '+msg));
                                 console.error("There was an error retrieving flight information");
                             }});
                         //break out of the loop

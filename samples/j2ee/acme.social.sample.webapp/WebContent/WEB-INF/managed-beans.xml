@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <faces-config>
-	<!--
-        Password store physical implementation.
-    -->
+	<!-- 
+		Credential store physical implementation 
+	-->
 	<managed-bean>
-		<managed-bean-name>PwdStore</managed-bean-name>
-		<managed-bean-class>com.ibm.sbt.security.authentication.password.consumer.store.MemoryPasswordStore</managed-bean-class>
+		<managed-bean-name>CredStore</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.security.credential.store.MemoryStore</managed-bean-class>
 		<managed-bean-scope>application</managed-bean-scope>
 	</managed-bean>
 
@@ -27,13 +27,26 @@
 		<managed-bean-scope>application</managed-bean-scope>
 		<managed-property>
 			<property-name>endpoints</property-name>
-			<value>connections,acmeAir,conAcmeApp</value>
+			<value>connections,connectionsOA2,acmeAir,conAcmeApp</value>
 		</managed-property>
 		<managed-property>
 			<property-name>properties</property-name>
 			<value>sample.email1</value>
 		</managed-property>
 	</managed-bean>
+        
+    <!-- Acme Airlines -->
+    <managed-bean>
+        <managed-bean-name>acmeAir</managed-bean-name>
+        <managed-bean-class>
+            com.ibm.sbt.services.endpoints.AnonymousEndpoint
+        </managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>url</property-name>
+            <value>%{acme.url}</value>
+        </managed-property>
+    </managed-bean>
     
     <!--  OpenSocial Environment -->
     <managed-bean>
@@ -49,6 +62,28 @@
 	<!-- Connections -->   
     <managed-bean>
         <managed-bean-name>connections</managed-bean-name>
+        <managed-bean-class>
+            com.ibm.sbt.services.endpoints.BasicEndpoint
+        </managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>url</property-name>
+            <value>%{connections.url}</value>
+        </managed-property>
+        <managed-property>
+			<property-name>credentialStore</property-name>
+			<value>CredStore</value>
+        </managed-property>
+        <!-- Trust the connection -->
+        <managed-property>
+            <property-name>forceTrustSSLCertificate</property-name>
+            <value>true</value>
+        </managed-property>
+    </managed-bean>
+        	
+	<!-- Connections OA2 -->   
+    <managed-bean>
+        <managed-bean-name>connectionsOA2</managed-bean-name>
         <managed-bean-class>com.ibm.sbt.services.endpoints.ConnectionsOAuth2Endpoint</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
         <managed-property>
@@ -81,19 +116,6 @@
         </managed-property> 
     </managed-bean>
     
-    <!-- Acme Airlines -->
-    <managed-bean>
-        <managed-bean-name>acmeAir</managed-bean-name>
-        <managed-bean-class>
-            com.ibm.sbt.services.endpoints.AnonymousEndpoint
-        </managed-bean-class>
-        <managed-bean-scope>session</managed-bean-scope>
-        <managed-property>
-            <property-name>url</property-name>
-            <value>%{acme.url}</value>
-        </managed-property>
-    </managed-bean>
-    
     <!-- OpenSocial Acme Airlines App -->
     <managed-bean>
         <managed-bean-name>acmeAirOS</managed-bean-name>
@@ -124,8 +146,8 @@
             <value>%{connections.url}</value>
         </managed-property>
         <managed-property>
-            <property-name>passwordStore</property-name>
-            <value>PwdStore</value>
+			<property-name>credentialStore</property-name>
+			<value>CredStore</value>
         </managed-property>
         <managed-property>
             <!-- The user specified here must has the necessary privileges to post to any users activity stream -->
@@ -147,5 +169,4 @@
             <value>true</value>
         </managed-property>
     </managed-bean>
-        	
 </faces-config>

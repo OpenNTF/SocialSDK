@@ -1,0 +1,33 @@
+{
+	"myflights": [{
+		"FlightId":"207","UserId":"FrankAdams@renovations.com","ApproverId":"LucilleSuarez@renovations.com","Reason":"business","state":"approved"
+	},
+	{
+		"FlightId":"101","UserId":"JasmineHaj@renovations.com","ApproverId":"LucilleSuarez@renovations.com","Reason":"business","state":"approved"
+	},
+	{
+		"FlightId":"101","UserId":"LouiseFitzgerald@renovations.com","ApproverId":"GeorgeBandini@renovations.com","Reason":"business","state":"approved"
+	},
+	{
+		"FlightId":"202","UserId":"DinaMaroni@renovations.com","ApproverId":"LucilleSuarez@renovations.com","Reason":"business","state":"approved"
+	},
+	{
+		"FlightId":"102","UserId":"DinaMaroni@renovations.com","ApproverId":"LucilleSuarez@renovations.com","Reason":"business","state":"approved"
+	},
+	{
+		"FlightId":"102","UserId":"AllieSingh@renovations.com","ApproverId":"GeorgeBandini@renovations.com","Reason":"business","state":"approved"
+	},
+	{
+		"FlightId":"102","UserId":"BoydGossens@renovations.com","ApproverId":"GeorgeBandini@renovations.com","Reason":"business","state":"approved"
+	},
+	{
+		"FlightId":"102","UserId":"MadisonArmond@renovations.com ","ApproverId":"GeorgeBandini@renovations.com","Reason":"business","state":"approved"
+	},
+	{
+		"FlightId":"103","UserId":"LouiseFitzgerald@renovations.com","ApproverId":"LucilleSuarez@renovations.com","Reason":"business","state":"approved"
+	},
+	{
+		"FlightId":"103","UserId":"TedAmado@renovations.com","ApproverId":"GeorgeBandini@renovations.com","Reason":"business","state":"approved"
+	}]
+	 
+}

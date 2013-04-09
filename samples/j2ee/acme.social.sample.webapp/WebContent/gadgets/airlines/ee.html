@@ -41,11 +41,19 @@
     </div>
     
     <!-- Dojo -->
-    <script data-dojo-config="async:false, parseOnLoad:true, paths:{'acme':'../../acme.social.sample.webapp/js'}, deps:['dojo/parser', 'acme/eeMain']" 
-    src="/sbt.dojo180/dojo/dojo.js.uncompressed.js"></script>
+ 	<script type="text/javascript">
+	var djConfig = {
+		async: false,
+    	parseOnLoad: true,
+    	locale: 'en',
+    	paths: {'acme':'../../acme.sample.webapp/js', 'acmesocial':'../../acme.social.sample.webapp/js'}, 
+    	deps: ['dojo/parser', 'acmesocial/eeMain']
+	};
+	</script>
+	<script type="text/javascript" src="/sbt.dojo180/dojo/dojo.js.uncompressed.js"></script>
     
     <!-- Social Business SDK -->
-    <script type="text/javascript" src="../../library?ver=1.8.0&context=gadget&env=openSocial"></script>
+    <script type="text/javascript" src="../../library?ver=1.8.0&env=openSocial"></script>
     
     <!-- Templates -->
     <script type="text/template" id="eeTmpl">

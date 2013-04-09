@@ -1,0 +1,36 @@
+<tr style="cursor: pointer;" class="lotusFirst">
+    <td style="width: 100%;" class="lotusFirstCell">
+        <h4 class="lotusBreakWord">
+            <a class="entry-title" rel="bookmark" title="${title}" href="${folderUrl}"> 
+                ${title} 
+            </a>
+        </h4>
+        <div class="lotusMeta" role="list">
+            <span role="listitem" title="${detailedCreated}"> 
+                <span class="vcard" dojoAttachPoint="vcardNode">
+  						<a aria-label="${nls.ariaVcard}" href="javascript:void(0);" class="fn url">${authorName}</a>
+  						<span data-dojo-attach-point="idNode" class="x-lconn-userid" style="display: none;">${authorUid}</span>
+					</span>
+					 ${_nls.created} ${createdLabel} | ${itemCount} ${_nls.files}
+            </span>
+        </div>
+    </td>
+    <td style="padding-right: 20px;">
+        <a class="lconnPinnedToggle _folderPinned" href="#" topic="lconn/files/folders/myfavorites/toggle" role="button"
+        title="${nls.pin}" aria-label="${nls.pin}"
+        uid="${uuid}">
+            <img src="images/blank.gif"
+            alt="" class="lconnSprite lconnSprite-iconPinned16-off"
+            style="margin-top: 1px;">
+            <span class="lotusAltText">${_nls.pin}</span>
+        </a>
+    </td>
+    <td style="padding-right: 30px;" class="lotusNowrap" title="${shareLabel}">
+    <a href="${folderUrl}" aria-label="${shareLabel}">
+        <img src="images/blank.gif"
+        class="lconnSprite lconnSprite-icon${visibilityLabel}16"
+        alt="" title=""
+        style="margin-top: 1px;">
+        <span class="lotusAltText">${shareLabel}</span></a></td>
+ 
+</tr>

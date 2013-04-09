@@ -1,0 +1,48 @@
+<tr class="lotusCommentList">
+    <td class="lotusCommentItem lotusFirst">
+        <div class="lotusPost lotusCommentMy">
+            <a id="comment-${uuid}"
+                name="comment-${uuid}"
+                class="lotusHidden"></a>
+            <div class="lotusPostAuthorInfo" style="position: static;">
+                <div class="lotusPostAvatar">
+                    <img style="width: 35px; height: 35px;"
+                        src="https://qs.renovations.com:444/profiles/photo.do?userid=${authorUid}"
+                        alt="">
+                        <span></span>
+                </div>
+            </div>
+            <div class="lotusPostContent" style="position: static;">
+                <div class="lotusMeta">
+                <span class="lotusRight" title="Friday, February 15, 2013 10:06:18 AM GMT Standard Time">${commentEditedLabel}</span>
+                    <span title="${published}">
+                         <span class="vcard" dojoAttachPoint="vcardNode">
+  							<a href="javascript:void(0);" class="fn url">${authorName}</a>
+  							<span data-dojo-attach-point="idNode" class="x-lconn-userid" style="display: none;">${authorUid}</span>
+  							
+  							</span>
+                        ${_nls.commented} ${createdLabel}
+                    </span>
+                </div>
+                <div class="lotusPostDetails">
+                    <div class="lotusChunk lotusBreakWord">
+                        ${formattedContent}<br>
+                    </div>
+                </div>
+                <div class="lotusActions">
+                    <ul class="lotusInlinelist">
+                        <li class="lotusFirst">
+                            <a class="_qkrEditLink" href="" role="button" title="Edit this comment">${_nls.edit}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="" role="button"
+                                title="Permanently delete this comment">${_nls._delete}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </td>
+</tr>

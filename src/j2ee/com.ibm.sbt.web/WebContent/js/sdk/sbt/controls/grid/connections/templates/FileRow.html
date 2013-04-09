@@ -1,0 +1,55 @@
+<tr class="lotusFirst">
+    <td class="lotusFirstCell" width="32" title="${title}">
+        <input value="${title}" name="${title}" aria-label="${nls.ariaCheckbox}" type="checkbox" class="lotusCheckbox">
+    </td>
+    <td class=lotusNowrap>
+        <a title="Download ${title}" href="${downloadUrl}" class="lconnDownloadable lconnDownloadableIcon">
+            <img alt="" src="images/blank.gif" class="lconn-ftype32 lconn-ftype32-${ftype}"><span class="lotusAltText" title="">${_nls.download}</span>
+        </a>
+    </td>
+    <td style="width: 100%;">
+        <h4 class="lotusBreakWord lotusLeft">
+            <a class="entry-title" rel="bookmark" title="${tooltip}" href="" data-dojo-attach-event="onclick: handleClick">${title}</a>    
+        </h4>
+        <div class="lotusMeta lotusClear">
+            <ul class="lotusInlinelist">
+                <li class="lotusFirst" title="">
+                    <span class="vcard" dojoAttachPoint="vcardNode">
+  						<a aria-label="${nls.ariaVcard}" href="javascript:void(0);" class="fn url">${authorName}</a>
+  						<span data-dojo-attach-point="idNode" class="x-lconn-userid" style="display: none;">${authorUid}</span>
+					</span>
+                ${_nls.created} ${createdLabel}
+                </li>
+                <li>
+                    ${hitCount} ${_nls.downloads}
+                </li>
+                <li>
+                    ${commentCount} ${_nls.comments}
+                </li>
+            </ul>
+        </div>
+    </td>
+    <td style="padding-right: 25px;" class="lotusNowrap">
+        <div>
+            <div class="lotusLike">
+                <a class="lotusLikeCount lotusLikeSimple" title="${recommendationLabel}" aria-label="${recommendationLabel}">
+                    <img src="images/blank.gif" class="lotusIconLike" alt="">${recommendationCount}
+                </a>
+            </div>
+        </div>
+    </td>
+    <td style="padding-right: 25px;" title="Pin this file">
+        <a class="lconnPinnedToggle _filePinned" href="#" topic="lconn/files/files/myfavorites/toggle" data-dojo-attach-event="onclick: pinFile" role="button" aria-label="${nls.pin}" uid="${uuid}">
+            <img src="images/blank.gif" alt="${nls.pin}" class="lconnSprite lconnSprite-iconPinned16-off" />
+        </a>
+    </td>
+    <td style="padding-right: 25px;" class="lotusNowrap" title="${shareLabel}">
+        <a aria-label="${shareLabel}" href="${fileUrl}?section=share">
+            <img src="images/blank.gif" class="lconnSprite lconnSprite-icon${visibilityLabel}16" alt="" title="" style="margin-top: 1px;">
+            <span class="lotusAltText">${shareLabel}</span>
+        </a>
+    </td>
+   
+
+</tr>
+

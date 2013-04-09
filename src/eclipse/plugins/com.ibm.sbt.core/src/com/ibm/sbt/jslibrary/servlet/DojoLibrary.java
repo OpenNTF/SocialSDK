@@ -32,30 +32,31 @@ public class DojoLibrary extends AbstractLibrary {
 	public static final String		NAME					= "dojo";					//$NON-NLS-1$
 
     public static final String      MODULE_BRIDGE           = "sbt._bridge";            //$NON-NLS-1$
-	public static final String		MODULE_DOJO				= "sbt.dojo";				//$NON-NLS-1$
+    public static final String      MODULE_SBT_WIDGET       = "sbt.widget";             //$NON-NLS-1$
 	public static final String		MODULE_SBTX				= "sbtx";					//$NON-NLS-1$
     public static final String      MODULE_SBTX_WIDGET      = "sbtx.widget";            //$NON-NLS-1$
 	public static final String		MODULE_AMDCOMPAT		= "sbt._bridge.amdcompat";	//$NON-NLS-1$
     public static final String      MODULE_BRIDGE_AMD       = "sbt/_bridge";            //$NON-NLS-1$
-    public static final String      MODULE_DOJO_AMD         = "sbt/dojo";               //$NON-NLS-1$
+    public static final String      MODULE_SBT_WIDGET_AMD   = "sbt/widget";             //$NON-NLS-1$
     public static final String      MODULE_SBTX_WIDGET_AMD  = "sbtx/widget";            //$NON-NLS-1$
     public static final String      MODULE_REQUESTTRANSPORT = "sbt/_bridge/RequestTransport"; //$NON-NLS-1$
 
 	public static final String		PATH_BRIDGE				= "_bridges/dojo";			//$NON-NLS-1$
 	public static final String		PATH_BRIDGE_AMD			= "_bridges/dojo-amd";      //$NON-NLS-1$
     public static final String      PATH_DOJO               = "dojo";                   //$NON-NLS-1$
+    public static final String      PATH_DOJO2              = "dojo2";                  //$NON-NLS-1$
     public static final String      PATH_SBTX_DOJO          = "dojo";                   //$NON-NLS-1$
-    public static final String      PATH_SBTX_DOJO2         = "dojo2";                   //$NON-NLS-1$
+    public static final String      PATH_SBTX_DOJO2         = "dojo2";                  //$NON-NLS-1$
 
 	static private final String[][]	REGISTER_MODULES		= { { MODULE_SBT, PATH_SBT },
 			                                                    { MODULE_BRIDGE, PATH_BRIDGE }, 
-			                                                    { MODULE_DOJO, PATH_DOJO } };
+			                                                    { MODULE_SBT_WIDGET, PATH_DOJO } };
 
 	static private final String[]	REQUIRE_MODULES			= { MODULE_AMDCOMPAT };
 
 	static private final String[][]	REGISTER_MODULES_AMD	= { { MODULE_SBT, PATH_SBT },
 			                                                    { MODULE_BRIDGE_AMD, PATH_BRIDGE_AMD }, 
-			                                                    { MODULE_DOJO_AMD, PATH_DOJO } };
+			                                                    { MODULE_SBT_WIDGET_AMD, PATH_DOJO } };
 
 	static private final String[]	REQUIRE_MODULES_AMD		= new String[0];
 	

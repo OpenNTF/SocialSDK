@@ -1,5 +1,5 @@
-require(["sbt/connections/CommunityService", "sbt/dom"], 
-    function(CommunityService,dom) {
+require(["sbt/connections/CommunityService", "sbt/dom", "sbt/json"], 
+    function(CommunityService,dom,json) {
     	var communityService = new CommunityService();	
     	communityService.getCommunity({
     		id: "%{sample.communityId}",

@@ -44,7 +44,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/connections/core','sbt/connectio
 			return this.data.list;
 		},
 		/**
-		Get items per page
+		Get items per page.
 		@method getItemsPerPage
 		@return {int} items per page of the activity stream
 		**/
@@ -76,7 +76,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/connections/core','sbt/connectio
 			return this.data.connections.isAdmin;
 		},
 		/**
-		Get total results for activity stream
+		Get total results for activity stream. returns -1 if its not available
 		@method getTotalResults
 		@return {int} total results for activity stream
 		**/
@@ -301,7 +301,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/connections/core','sbt/connectio
 			@param {Function} [args.load] The function getUpdatesFromCommunitiesIFollow invokes when the activity stream is 
 			loaded from the server. The function expects to receive one parameter, 
 			the loaded ActivityStream object.
-			@param {Function} [args.error] Sometimes the getUpdatesFromCommunitiesIFollow call fail with bad request such as 400  
+			@param {Function} [args.error] Sometimes the getUpdatesFromCommunitiesIFollow call can fail with bad request such as 400  
 			or server errors such as 500. The error parameter is another callback function
 			that is only invoked when an error occurs. This allows to control what happens
 		    when an error occurs without having to put a lot of logic into your load function
@@ -330,13 +330,13 @@ define(['sbt/_bridge/declare','sbt/config','sbt/connections/core','sbt/connectio
 		Get Updates from a single community .
 		
 		@method getUpdatesFromACommunity
-		@param {Object} [args]  Argument object
-			@param {String} [communityID] Community ID for which activity stream is to be obtained..
+		@param {Object} args  Argument object
+			@param {String} communityID Community ID for which activity stream is to be obtained..
 			@param {Object} [args.parameters] Object containing all query parameters as properties to be passed with get call.
-			@param {Function} [args.load] The function getUpdatesFromCommunitiesIFollow invokes when the activity stream is 
+			@param {Function} [args.load] The function getUpdatesFromACommunity invokes when the activity stream is 
 			loaded from the server. The function expects to receive one parameter, 
 			the loaded ActivityStream object.
-			@param {Function} [args.error] Sometimes the getUpdatesFromCommunitiesIFollow call fail with bad request such as 400  
+			@param {Function} [args.error] Sometimes the getUpdatesFromACommunity call can fail with bad request such as 400  
 			or server errors such as 500. The error parameter is another callback function
 			that is only invoked when an error occurs. This allows to control what happens
 		    when an error occurs without having to put a lot of logic into your load function
@@ -364,7 +364,28 @@ define(['sbt/_bridge/declare','sbt/config','sbt/connections/core','sbt/connectio
 			}
 			return as;
 		},
+		/**
+		Get Updates from a single user .
 		
+		@method getUpdatesFromUser
+		@param {Object} args  Argument object
+			@param {String} userID User ID for which activity stream is to be obtained..
+			@param {Object} [args.parameters] Object containing all query parameters as properties to be passed with get call.
+			@param {Function} [args.load] The function getUpdatesFromUser invokes when the activity stream is 
+			loaded from the server. The function expects to receive one parameter, 
+			the loaded ActivityStream object.
+			@param {Function} [args.error] Sometimes the getUpdatesFromUser call fail with bad request such as 400  
+			or server errors such as 500. The error parameter is another callback function
+			that is only invoked when an error occurs. This allows to control what happens
+		    when an error occurs without having to put a lot of logic into your load function
+		    to check for error conditions. The parameter passed to the error function is a 
+		    JavaScript Error object indicating what the failure was. From the error object. one can get access to the 
+			javascript library error object, the status code and the error message.
+			@param {Function} [args.handle] This callback is called regardless of whether 
+			the call to get the activity stream completes or fails. The  parameter passed to this callback
+			is the ActivityStream object (or error object). From the error object. one can get access to the 
+			javascript library error object, the status code and the error message.
+		**/
 		getUpdatesFromUser: function(args) {
 			if (!(validate._validateInputTypeAndNotify("ActivityStreamService", "getUpdatesFromUser", "args", args, "object", args))) {
 				return ;
@@ -381,7 +402,27 @@ define(['sbt/_bridge/declare','sbt/config','sbt/connections/core','sbt/connectio
 			}
 			return as;
 		},
+		/**
+		Get notifications for me .
 		
+		@method getNotificationsForMe
+		@param {Object} [args]  Argument object
+			@param {Object} [args.parameters] Object containing all query parameters as properties to be passed with get call.
+			@param {Function} [args.load] The function getNotificationsForMe invokes when the activity stream is 
+			loaded from the server. The function expects to receive one parameter, 
+			the loaded ActivityStream object.
+			@param {Function} [args.error] Sometimes the getNotificationsForMe call can fail with bad request such as 400  
+			or server errors such as 500. The error parameter is another callback function
+			that is only invoked when an error occurs. This allows to control what happens
+		    when an error occurs without having to put a lot of logic into your load function
+		    to check for error conditions. The parameter passed to the error function is a 
+		    JavaScript Error object indicating what the failure was. From the error object. one can get access to the 
+			javascript library error object, the status code and the error message.
+			@param {Function} [args.handle] This callback is called regardless of whether 
+			the call to get the activity stream completes or fails. The  parameter passed to this callback
+			is the ActivityStream object (or error object). From the error object. one can get access to the 
+			javascript library error object, the status code and the error message.
+		**/
 		getNotificationsForMe: function(args) {
 			if (!(validate._validateInputTypeAndNotify("ActivityStreamService", "getNotificationsForMe", "args", args, "object", args))) {
 				return ;
@@ -395,7 +436,27 @@ define(['sbt/_bridge/declare','sbt/config','sbt/connections/core','sbt/connectio
 			}
 			return as;
 		},
+		/**
+		Get notifications from me .
 		
+		@method getNotificationsFromMe
+		@param {Object} [args]  Argument object
+			@param {Object} [args.parameters] Object containing all query parameters as properties to be passed with get call.
+			@param {Function} [args.load] The function getNotificationsFromMe invokes when the activity stream is 
+			loaded from the server. The function expects to receive one parameter, 
+			the loaded ActivityStream object.
+			@param {Function} [args.error] Sometimes the getNotificationsFromMe call can fail with bad request such as 400  
+			or server errors such as 500. The error parameter is another callback function
+			that is only invoked when an error occurs. This allows to control what happens
+		    when an error occurs without having to put a lot of logic into your load function
+		    to check for error conditions. The parameter passed to the error function is a 
+		    JavaScript Error object indicating what the failure was. From the error object. one can get access to the 
+			javascript library error object, the status code and the error message.
+			@param {Function} [args.handle] This callback is called regardless of whether 
+			the call to get the activity stream completes or fails. The  parameter passed to this callback
+			is the ActivityStream object (or error object). From the error object. one can get access to the 
+			javascript library error object, the status code and the error message.
+		**/
 		getNotificationsFromMe: function(args) {
 			if (!(validate._validateInputTypeAndNotify("ActivityStreamService", "getNotificationsFromMe", "args", args, "object", args))) {
 				return ;
@@ -409,7 +470,27 @@ define(['sbt/_bridge/declare','sbt/config','sbt/connections/core','sbt/connectio
 			}
 			return as;
 		},
+		/**
+		Get responses to my content
 		
+		@method getResponsesToMyContent
+		@param {Object} [args]  Argument object
+			@param {Object} [args.parameters] Object containing all query parameters as properties to be passed with get call.
+			@param {Function} [args.load] The function getResponsesToMyContent invokes when the activity stream is 
+			loaded from the server. The function expects to receive one parameter, 
+			the loaded ActivityStream object.
+			@param {Function} [args.error] Sometimes the getResponsesToMyContent call can fail with bad request such as 400  
+			or server errors such as 500. The error parameter is another callback function
+			that is only invoked when an error occurs. This allows to control what happens
+		    when an error occurs without having to put a lot of logic into your load function
+		    to check for error conditions. The parameter passed to the error function is a 
+		    JavaScript Error object indicating what the failure was. From the error object. one can get access to the 
+			javascript library error object, the status code and the error message.
+			@param {Function} [args.handle] This callback is called regardless of whether 
+			the call to get the activity stream completes or fails. The  parameter passed to this callback
+			is the ActivityStream object (or error object). From the error object. one can get access to the 
+			javascript library error object, the status code and the error message.
+		**/
 		getResponsesToMyContent: function(args) {
 			if (!(validate._validateInputTypeAndNotify("ActivityStreamService", "getResponsesToMyContent", "args", args, "object", args))) {
 				return ;
@@ -423,7 +504,27 @@ define(['sbt/_bridge/declare','sbt/config','sbt/connections/core','sbt/connectio
 			}
 			return as;
 		},
+		/**
+		Get my actionable view
 		
+		@method getMyActionableView
+		@param {Object} [args]  Argument object
+			@param {Object} [args.parameters] Object containing all query parameters as properties to be passed with get call.
+			@param {Function} [args.load] The function getMyActionableView invokes when the activity stream is 
+			loaded from the server. The function expects to receive one parameter, 
+			the loaded ActivityStream object.
+			@param {Function} [args.error] Sometimes the getMyActionableView call can fail with bad request such as 400  
+			or server errors such as 500. The error parameter is another callback function
+			that is only invoked when an error occurs. This allows to control what happens
+		    when an error occurs without having to put a lot of logic into your load function
+		    to check for error conditions. The parameter passed to the error function is a 
+		    JavaScript Error object indicating what the failure was. From the error object. one can get access to the 
+			javascript library error object, the status code and the error message.
+			@param {Function} [args.handle] This callback is called regardless of whether 
+			the call to get the activity stream completes or fails. The  parameter passed to this callback
+			is the ActivityStream object (or error object). From the error object. one can get access to the 
+			javascript library error object, the status code and the error message.
+		**/
 		getMyActionableView: function(args) {
 			if (!(validate._validateInputTypeAndNotify("ActivityStreamService", "getMyActionableView", "args", args, "object", args))) {
 				return ;
@@ -440,7 +541,27 @@ define(['sbt/_bridge/declare','sbt/config','sbt/connections/core','sbt/connectio
 			}
 			return as;
 		},
+		/**
+		Get my saved view
 		
+		@method getMySavedView
+		@param {Object} [args]  Argument object
+			@param {Object} [args.parameters] Object containing all query parameters as properties to be passed with get call.
+			@param {Function} [args.load] The function getMyActionableView invokes when the activity stream is 
+			loaded from the server. The function expects to receive one parameter, 
+			the loaded ActivityStream object.
+			@param {Function} [args.error] Sometimes the getMyActionableView call can fail with bad request such as 400  
+			or server errors such as 500. The error parameter is another callback function
+			that is only invoked when an error occurs. This allows to control what happens
+		    when an error occurs without having to put a lot of logic into your load function
+		    to check for error conditions. The parameter passed to the error function is a 
+		    JavaScript Error object indicating what the failure was. From the error object. one can get access to the 
+			javascript library error object, the status code and the error message.
+			@param {Function} [args.handle] This callback is called regardless of whether 
+			the call to get the activity stream completes or fails. The  parameter passed to this callback
+			is the ActivityStream object (or error object). From the error object. one can get access to the 
+			javascript library error object, the status code and the error message.
+		**/
 		getMySavedView: function(args) {
 			if (!(validate._validateInputTypeAndNotify("ActivityStreamService", "getMySavedView", "args", args, "object", args))) {
 				return ;
@@ -451,6 +572,184 @@ define(['sbt/_bridge/declare','sbt/config','sbt/connections/core','sbt/connectio
 			this._userType = ASConstants.ASUser.ME;
 			this._groupType = ASConstants.ASGroup.SAVED;
 			this._applicationType = args.application || ASConstants.ASApplication.ALL;
+			var as = new ActivityStream();
+			if(args.load || args.handle) {
+				this._load(as,args);
+			}
+			return as;
+		},
+		/**
+		Get get activity stream search results. supported parameters(all optional) are: query, queryLanguage, filters, dateFilter,facetRequests, preferSearchIndex, snapshot.
+		
+		@method search
+		@param {Object} [args]  Argument object
+			@param {Object} [args.parameters] Object containing all query parameters as properties to be passed with get call.
+			@param {Function} [args.load] The function search invokes when the activity stream is 
+			loaded from the server. The function expects to receive one parameter, 
+			the loaded ActivityStream object.
+			@param {Function} [args.error] Sometimes the search call can fail with bad request such as 400  
+			or server errors such as 500. The error parameter is another callback function
+			that is only invoked when an error occurs. This allows to control what happens
+		    when an error occurs without having to put a lot of logic into your load function
+		    to check for error conditions. The parameter passed to the error function is a 
+		    JavaScript Error object indicating what the failure was. From the error object. one can get access to the 
+			javascript library error object, the status code and the error message.
+			@param {Function} [args.handle] This callback is called regardless of whether 
+			the call to get the activity stream completes or fails. The  parameter passed to this callback
+			is the ActivityStream object (or error object). From the error object. one can get access to the 
+			javascript library error object, the status code and the error message.
+		**/
+		search: function(args) {
+			if (!(validate._validateInputTypeAndNotify("ActivityStreamService", "search", "args", args, "object", args))) {
+				return ;
+			}
+			args.parameters = args.parameters || {};
+			args.parameters.query = args.query;
+			args.parameters.queryLanguage = args.queryLanguage;
+			args.parameters.filters = args.filters;
+			args.parameters.dateFilter = args.dateFilter;
+			args.parameters.facetRequests = args.facetRequests;
+			args.parameters.preferSearchIndex = args.preferSearchIndex;
+			args.parameters.snapshot = args.snapshot;
+			this._userType = args.userType || ASConstants.ASUser.PUBLIC; //Default is public updates
+			this._groupType = args.groupType || ASConstants.ASGroup.ALL; // Default is all groups
+			this._applicationType = args.applicationType || ASConstants.ASApplication.ALL; // Default is all Apps
+			var as = new ActivityStream();
+			if(args.load || args.handle) {
+				this._load(as,args);
+			}
+			return as;
+		},
+		/**
+		Get activity stream search results by query.
+		
+		@method searchByQuery
+		@param {Object} args  Argument object
+			@param {String} query string for which activity stream search is to be done.
+			@param {Object} [args.parameters] Object containing all query parameters as properties to be passed with get call.
+			@param {Function} [args.load] The function searchByQuery invokes when the activity stream is 
+			loaded from the server. The function expects to receive one parameter, 
+			the loaded ActivityStream object.
+			@param {Function} [args.error] Sometimes the searchByQuery call can fail with bad request such as 400  
+			or server errors such as 500. The error parameter is another callback function
+			that is only invoked when an error occurs. This allows to control what happens
+		    when an error occurs without having to put a lot of logic into your load function
+		    to check for error conditions. The parameter passed to the error function is a 
+		    JavaScript Error object indicating what the failure was. From the error object. one can get access to the 
+			javascript library error object, the status code and the error message.
+			@param {Function} [args.handle] This callback is called regardless of whether 
+			the call to get the activity stream completes or fails. The  parameter passed to this callback
+			is the ActivityStream object (or error object). From the error object. one can get access to the 
+			javascript library error object, the status code and the error message.
+		**/
+		searchByQuery: function(args) {
+			if (!(validate._validateInputTypeAndNotify("ActivityStreamService", "search", "args", args, "object", args))) {
+				return ;
+			}
+			if (!(validate._validateInputTypeAndNotify("ActivityStreamService", "search", "args.query", args.query, "string", args))) {
+				return ;
+			}
+			args.parameters = args.parameters || {};
+			args.parameters.query = args.query;
+			this._userType = ASConstants.ASUser.PUBLIC;
+			this._groupType = ASConstants.ASGroup.ALL;
+			this._applicationType = ASConstants.ASApplication.ALL;
+			var as = new ActivityStream();
+			if(args.load || args.handle) {
+				this._load(as,args);
+			}
+			return as;
+		},
+		/**
+		Get activity stream search results by filters.
+		
+		@method searchByFilters
+		@param {Object} args  Argument object
+			@param {Object} filters array of filter objects for which activity stream search is to be done. here is a sample array of two filters:
+				  [
+		          {
+		        	  'type':'actor',
+		        	  'values':["%{sample.id1}"]
+		          },
+		          {
+		        	  'type':'tag',
+		        	  'values':['test',"mobile"]
+		          }
+		          ]
+		          supported filters: actor, target_person, involved, source, community, object, tag, topic, hot_topic
+			@param {Object} [args.parameters] Object containing all query parameters as properties to be passed with get call.
+			@param {Function} [args.load] The function searchByFilters invokes when the activity stream is 
+			loaded from the server. The function expects to receive one parameter, 
+			the loaded ActivityStream object.
+			@param {Function} [args.error] Sometimes the searchByFilters call can fail with bad request such as 400  
+			or server errors such as 500. The error parameter is another callback function
+			that is only invoked when an error occurs. This allows to control what happens
+		    when an error occurs without having to put a lot of logic into your load function
+		    to check for error conditions. The parameter passed to the error function is a 
+		    JavaScript Error object indicating what the failure was. From the error object. one can get access to the 
+			javascript library error object, the status code and the error message.
+			@param {Function} [args.handle] This callback is called regardless of whether 
+			the call to get the activity stream completes or fails. The  parameter passed to this callback
+			is the ActivityStream object (or error object). From the error object. one can get access to the 
+			javascript library error object, the status code and the error message.
+		**/
+		searchByFilters: function(args) {
+			if (!(validate._validateInputTypeAndNotify("ActivityStreamService", "searchByFilters", "args", args, "object", args))) {
+				return ;
+			}
+			if (!(validate._validateInputTypeAndNotify("ActivityStreamService", "searchByFilters", "args.filters", args.filters, "object", args))) {
+				return ;
+			}
+			args.parameters = args.parameters || {};
+			var filters = "";
+			for (var i = 0; i < args.filters.length; i++) {
+				if(i>0) filters = filters + ",";
+			    filters = filters + json.stringify(args.filters[i]);
+			}
+			args.parameters.filters = "["+filters+"]";
+			this._userType = ASConstants.ASUser.PUBLIC;
+			this._groupType = ASConstants.ASGroup.ALL;
+			this._applicationType = ASConstants.ASApplication.ALL;
+			var as = new ActivityStream();
+			if(args.load || args.handle) {
+				this._load(as,args);
+			}
+			return as;
+		},
+		/**
+		Get activity stream search results by tags.
+		
+		@method searchByTags
+		@param {Object} args  Argument object
+			@param {String} tags string containing tags saperated commas for which activity stream search is to be done.
+			@param {Object} [args.parameters] Object containing all query parameters as properties to be passed with get call.
+			@param {Function} [args.load] The function searchByTags invokes when the activity stream is 
+			loaded from the server. The function expects to receive one parameter, 
+			the loaded ActivityStream object.
+			@param {Function} [args.error] Sometimes the searchByTags call can fail with bad request such as 400  
+			or server errors such as 500. The error parameter is another callback function
+			that is only invoked when an error occurs. This allows to control what happens
+		    when an error occurs without having to put a lot of logic into your load function
+		    to check for error conditions. The parameter passed to the error function is a 
+		    JavaScript Error object indicating what the failure was. From the error object. one can get access to the 
+			javascript library error object, the status code and the error message.
+			@param {Function} [args.handle] This callback is called regardless of whether 
+			the call to get the activity stream completes or fails. The  parameter passed to this callback
+			is the ActivityStream object (or error object). From the error object. one can get access to the 
+			javascript library error object, the status code and the error message.
+		**/
+		searchByTags: function(args) {
+			if (!(validate._validateInputTypeAndNotify("ActivityStreamService", "search", "args", args, "object", args))) {
+				return ;
+			}
+			if (!(validate._validateInputTypeAndNotify("ActivityStreamService", "search", "args.tags", args.tags, "string", args))) {
+				return ;
+			}
+			args.parameters = args.parameters || {};
+			args.parameters.filters = "[{'type':'tag','values':['"+args.tags+"']}]";
+			this._userType = ASConstants.ASUser.PUBLIC;
+			this._groupType = ASConstants.ASGroup.ALL;
+			this._applicationType = ASConstants.ASApplication.ALL;
 			var as = new ActivityStream();
 			if(args.load || args.handle) {
 				this._load(as,args);

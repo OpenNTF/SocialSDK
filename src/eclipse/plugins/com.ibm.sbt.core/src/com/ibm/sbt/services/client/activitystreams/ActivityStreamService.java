@@ -73,7 +73,9 @@ public class ActivityStreamService extends BaseService {
 	/**
 	 * Used in constructing REST APIs
 	 */
-	public static final String	restUrl		= "/rest/activitystreams";
+	public static final String	restUrl		= "/rest";
+	public static final String  activityStreamsUrl = "/activitystreams";
+	public static final String  boardUrl = "/ublog";
 
 	/**
 	 * Constructor Creates ActivityStreamService Object with default endpoint
@@ -619,6 +621,44 @@ public class ActivityStreamService extends BaseService {
 	}
 	
 	
+	/*
+	 * 
+	 * Microblogging api's
+	 * 
+	 */
+	
+	/**
+	 * Wrapper method to fetch updates from logged in user board
+	 * <p>
+	 * Assumes {@link ASUser} as ME , {@link ASGroup} as ALL and {@link ASApplication} as NOAPP
+	 * 
+	 
+	 * @return List<ActivityStreamEntry>
+	 * @throws SBTServiceException
+	 *             ,IllegalArgumentException
+	 */
+	public List<ActivityStreamEntry> getUpdatesFromMyBoard() throws SBTServiceException {
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.entering(sourceClass, "getUpdatesFromMyBoard");
+		}
+		return getUpdatesFromMyBoard(null);
+	}
+	
+	public List<ActivityStreamEntry> getUpdatesFromMyBoard(Map<String, String> params)throws SBTServiceException{
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.entering(sourceClass, "getUpdatesFromMyBoard");
+		}
+		
+		if (null == params) {
+			params = new HashMap<String, String>();
+			params.put(ActivityStreamRequestParams.lang, getUserLanguage());
+		}
+		
+		return getMicroblogEntries(ASUser.ME.getUserType(),ASGroup.ALL.getGroupType(), ASApplication.NOAPP.getApplicationType(), params);
+		
+	}
+	
+	
 	
 
 	/**
@@ -890,6 +930,39 @@ public class ActivityStreamService extends BaseService {
 		}
 
 	}
+	
+	
+	
+	/*
+	 * Returns the updates from User Boards. Constructs the api using the inputs provided in parameters, makes the network call and returns the ActivityStreamEntry list.
+	 * @param User see {@link ASUser} for possible values
+	 * @param Group see {@link ASGroup} for possible values
+	 * @param User see {@link ASApplication} for possible values
+	 * @param params Additional parameters used for constructing URL's
+	 * @throws SBTServiceException
+	 */
+
+	public List<ActivityStreamEntry> getMicroblogEntries(String user, String group, String app,
+			Map<String, String> params) throws SBTServiceException {
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.entering(sourceClass, "getActivityStreamEntries");
+		}
+
+		Map<String, String> parameters = new HashMap<String, String>();
+		try {
+			JsonObject listOfMicroBlogEnteries = (JsonObject) endpoint.xhrGet(
+					resolveUrlForFetchingMicroblog(user, group, app, params), parameters, ClientService.FORMAT_JSON);
+			return populateMicroBlogEntryData(listOfMicroBlogEnteries);
+
+		} catch (ClientServicesException e) {
+			Object[] args = new Object[] { user, group, app };
+			String message = MessageFormat.format(
+					"Error retrieving activity stream entries for user:{0} group:{1} app:{2}", args);
+			logger.log(Level.SEVERE, message, e);
+			throw new ActivityStreamServiceException(e);
+		}
+
+	}
 
 	/*
 	 * populateActivityEntryData converts the JsonObject into List of ActivityStreamEntry.
@@ -916,6 +989,33 @@ public class ActivityStreamService extends BaseService {
 
 		return _activityStreamEntry;
 	}
+	
+	
+	/*
+	 * populateActivityEntryData converts the JsonObject into List of ActivityStreamEntry.
+	 */
+	private List<ActivityStreamEntry> populateMicroBlogEntryData(JsonObject listOfActivityStremEnteries) {
+
+		List<ActivityStreamEntry> microBlogEntryList = new ArrayList<ActivityStreamEntry>();
+
+		try {
+			DataNavigator.Json nav = new DataNavigator.Json(listOfActivityStremEnteries); // this.data has the response feed.
+			DataNavigator entry = nav.get("list");
+			int numberOfStreamUpdates = entry.getCount();
+			for (int i = 0; i < numberOfStreamUpdates; i++) {
+
+				// Create and populate the ActivityStreamEntryObject
+				ActivityStreamEntry entryObject = ActivityStreamEntry.createMicroBlogEntryObject(entry
+						.get(i));
+				microBlogEntryList.add(entryObject);
+			}
+
+		} catch (Exception e) {
+			logger.log(Level.SEVERE, "populateActivityEntryData caused exception", e);
+		}
+
+		return microBlogEntryList;
+	}
 
 	/*
 	 * Method responsible for generating appropriate REST URLs
@@ -928,7 +1028,27 @@ public class ActivityStreamService extends BaseService {
 
 		StringBuilder streamUrl = new StringBuilder(baseUrl);
 		streamUrl.append(AuthUtil.INSTANCE.getAuthValue(endpoint)).append(restUrl); // Basic or Oauth supported for now
+		
+		streamUrl.append(activityStreamsUrl); // include a condition here to switch this to board url
 
+		return resolveUrlForFetch(streamUrl,user,group,application,params);
+
+	}
+	
+	private String resolveUrlForFetchingMicroblog(String user, String group, String application,
+			Map<String, String> params){
+		
+		StringBuilder streamUrl = new StringBuilder(baseUrl);
+		streamUrl.append(AuthUtil.INSTANCE.getAuthValue(endpoint)).append(restUrl); // Basic or Oauth supported for now
+		
+		streamUrl.append(boardUrl); // include a condition here to switch this to board url
+		return resolveUrlForFetch(streamUrl,user,group,application,params);
+		
+	}
+	
+	private String resolveUrlForFetch(StringBuilder baseurl, String user, String group, String application,
+			Map<String, String> params){
+		
 		if (StringUtil.isEmpty(group)) {
 			group = ASGroup.ALL.getGroupType();
 		}
@@ -941,43 +1061,41 @@ public class ActivityStreamService extends BaseService {
 			application = ASApplication.STATUS.getApplicationType();
 		}
 
-		streamUrl.append(seperator).append(user).append(seperator).append(group);
+		baseurl.append(seperator).append(user).append(seperator).append(group);
 		if (!(application.equals(ASApplication.NOAPP.getApplicationType()))) {
-			streamUrl.append(seperator + application);
+			baseurl.append(seperator + application);
 		}
 
 		// Add required parameters
 		if (null != params) {
 			if (params.size() > 0) {
-				streamUrl.append("?");
+				baseurl.append("?");
 				boolean setSeperator = false;
 				for (Map.Entry<String, String> param : params.entrySet()) {
 					if (setSeperator) {
-						streamUrl.append("&");
+						baseurl.append("&");
 					}
 					String paramvalue = "";
 					try {
 						paramvalue = URLEncoder.encode(param.getValue(), "UTF-8");
 					} catch (UnsupportedEncodingException e) {}
 					if (param.getKey().equals(ActivityStreamRequestParams.custom)) { // this indicates user passed in custom value, we do not add key
-						streamUrl.append(paramvalue);
+						baseurl.append(paramvalue);
 					} else {
-						streamUrl.append(param.getKey() + "=" + paramvalue);
+						baseurl.append(param.getKey() + "=" + paramvalue);
 					}
 					setSeperator = true;
 				}
 			}
 		} else { // Parameters were null, default to english language
-			streamUrl.append("?" + ActivityStreamRequestParams.lang + "=" + getUserLanguage());
+			baseurl.append("?" + ActivityStreamRequestParams.lang + "=" + getUserLanguage());
 		}
 
 		if (logger.isLoggable(Level.FINEST)) {
-			logger.log(Level.FINEST, "resolved URL :" + streamUrl.toString());
+			logger.log(Level.FINEST, "resolved URL :" + baseurl.toString());
 		}
-
-		System.err.println("resolved url :: " + streamUrl.toString());
-		return streamUrl.toString();
-
+		return baseurl.toString();
+		
 	}
 
 	/*
@@ -990,6 +1108,8 @@ public class ActivityStreamService extends BaseService {
 
 		StringBuilder streamUrl = new StringBuilder(baseUrl);
 		streamUrl.append(AuthUtil.INSTANCE.getAuthValue(endpoint)).append(restUrl); // Basic or Oauth
+		
+		streamUrl.append(activityStreamsUrl); // include a condition here to switch this to board url
 
 		if (StringUtil.isEmpty(user)) {
 			user = ASUser.PUBLIC.getUserType();

@@ -3,57 +3,64 @@ package com.ibm.sbt.services.client.connections.profiles;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
-
-import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.ClientService;
-import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.connections.profiles.exception.ProfileServiceException;
 import com.ibm.sbt.services.client.connections.profiles.utils.Messages;
 
-
+/**
+ * ProfileAdminService can be used to perform Admin operations related to Connection Profiles. 
+ * 
+ * @Represents Connections ProfileAdminService
+ * @author Swati Singh
+ * <pre>
+ * Sample Usage
+ * {@code
+ *  ProfileAdminService _service = new ProfileAdminService();
+ *  Profile profile = _service.getProfile("testUser61@renovations.com", false);
+ *  profile.set("uid", "testUser");
+ *  boolean success = service.createProfile(profile);
+ * }
+ * </pre>
+ */
 public class ProfileAdminService extends ProfileService {
+
 	/**
-	 * Default Constructor - 0 argument constructor
-	 *  
-	 * Calls the Constructor of BaseService Class.
+	 * Constructor Creates ProfileAdminService Object with default endpoint and default cache size
 	 */
-	
 	public ProfileAdminService() {
 		this(DEFAULT_ENDPOINT_NAME, DEFAULT_CACHE_SIZE);
     }
-	/** 
-	 * Constructor - 1 argument constructor
+	
+	/**
+	 * Constructor 
 	 * 
 	 * @param endpoint
-	 * Creates ProfileService with specified endpoint and a default CacheSize
+	 *            Creates ProfileAdminService with specified endpoint and a default CacheSize
 	 */
-	
 	public ProfileAdminService(String endpoint) {
 		this(endpoint, DEFAULT_CACHE_SIZE);
 	}
 	
-	/** 
-	 * Constructor - 2 argument constructor
+	/**
+	 * Constructor 
 	 * 
 	 * @param endpoint
 	 * @param cacheSize
-	 * 
-	 * Creates ProfileService with specified values of endpoint and CacheSize
+	 *            Creates ProfileAdminService with specified endpoint and CacheSize
 	 */
-	
 	public ProfileAdminService(String endpoint, int cacheSize) {
 		super(endpoint, cacheSize);
 	}
 	
 	/**
-	 * deleteProfile - to delete profile
-	 * @param userId
-	 * @return
-	 * 
-	 * This method is used to delete a user's profile.
-	 * argument should be a unique id of the user whose profile needs to be deleted
-	 * the argument could either be a email or userid
+	 * Wrapper method to delete a User's profile
+	 * <p>
 	 * User should be logged in as a administrator to call this method
+	 * 
+	 * @param userId
+	 * 			unique identifier of user whose profile is to be deleted, it can either be a email or userid
+	 * @return boolean
+	 * 				returns true if profile is deleted succesfully
 	 * @throws ProfileServiceException 
 	 */
 	public boolean deleteProfile(Profile profile) throws ProfileServiceException
@@ -72,7 +79,8 @@ public class ProfileAdminService extends ProfileService {
 		} else {
 			parameters.put("userid", profile.getReqId());
 		}
-		boolean result = executeDelete(ProfilesAPI.DELETEPROFILE.getUrl(), parameters);
+		boolean result = executeDelete(resolveProfileUrl(ProfileEntity.ADMIN.getProfileEntityType(), ProfileType.DELETEPROFILE.getProfileType()),
+				parameters);
 
 		removeProfileDataFromCache(profile.getReqId());
 
@@ -83,12 +91,13 @@ public class ProfileAdminService extends ProfileService {
 	}
 
 	/**
-	 * create - to create a User's profile
-	 * @param userId
-	 * @return
-	 * 
-	 * This method is used to create a user's profile.
+	 * Wrapper method to create a User's profile
+	 * <p>
 	 * User should be logged in as a administrator to call this method
+	 * 
+	 * @param Profile
+	 * @return boolean
+	 * 				value is true if profile is create successfully
 	 * @throws ProfileServiceException 
 	 */
 	public boolean createProfile(Profile profile) throws ProfileServiceException 
@@ -110,7 +119,8 @@ public class ProfileAdminService extends ProfileService {
 			parameters.put(ProfileRequestParams.USERID,profile.getReqId()); 
 		}
 		Object createPayload = profile.constructCreateRequestBody();
-		boolean returnVal = executePost(ProfilesAPI.ADDPROFILE.getUrl(), parameters, headers, createPayload, ClientService.FORMAT_NULL);
+		boolean returnVal = executePost(resolveProfileUrl(ProfileEntity.ADMIN.getProfileEntityType(),ProfileType.ADDPROFILE.getProfileType()),
+				parameters, headers, createPayload, ClientService.FORMAT_NULL);
 
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.exiting(sourceClass, "create");

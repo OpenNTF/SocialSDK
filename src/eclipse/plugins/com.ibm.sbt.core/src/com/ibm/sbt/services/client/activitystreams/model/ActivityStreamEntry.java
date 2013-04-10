@@ -64,6 +64,34 @@ public class ActivityStreamEntry {
 	private String						eventTitle;
 	private String						tags;
 	private String						itemUrl;
+	// Microblogs
+	private String content;
+	private String repliesUrl;
+	private String likesUrl;
+	
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+	
+	public String getRepliesUrl() {
+		return repliesUrl;
+	}
+
+	public void setRepliesUrl(String repliesUrl) {
+		this.repliesUrl = repliesUrl;
+	}
+
+	public String getLikesUrl() {
+		return likesUrl;
+	}
+
+	public void setLikesUrl(String likesUrl) {
+		this.likesUrl = likesUrl;
+	}
 
 	private List<ActivityStreamEntry>	replies;
 
@@ -525,5 +553,52 @@ public class ActivityStreamEntry {
 		community.setCommunityName(communityName);
 		return community;
 	}
+	/*
+	 * Parsing for Microblogs 
+	 */
+	
+	/**
+	 * Converts a json entry to ActivityStreamEntry Java object
+	 * 
+	 * @param parent
+	 * @return ActivityStreamEntry
+	 */
+	public static ActivityStreamEntry createMicroBlogEntryObject(DataNavigator parent) {
 
+		ActivityStreamEntry entryObj = new ActivityStreamEntry();
+
+		Actor actor = new Actor();
+
+		DataNavigator actornav = parent.get("author");
+
+		// Parent ( Root )
+		entryObj.setPublished(parent.stringValue("published"));
+		entryObj.setUrl(parent.stringValue("url"));
+		entryObj.setSummary(parent.stringValue("summary"));
+		entryObj.setContent(parent.stringValue("content"));
+		entryObj.setObjectType(parent.stringValue("objectType"));
+		entryObj.setId(parent.stringValue("id"));
+		
+
+		// actor
+		actor.setName(actornav.stringValue("displayName"));
+		actor.setUid(actornav.stringValue("id"));
+		actor.setType(actornav.stringValue("objectType"));
+		entryObj.setActor(actor);
+		
+		
+		DataNavigator replies = parent.get("replies");
+		entryObj.setRepliesUrl(replies.stringValue("replies"));
+		entryObj.setNumComments(replies.intValue("totalItems"));
+		
+		
+		DataNavigator likes = parent.get("likes");
+		entryObj.setLikesUrl(likes.stringValue("url"));
+		entryObj.setNumLikes(likes.intValue("totalItems"));
+		
+		Attachment attachment = fetchAttachment(parent); // fetch attachments
+		entryObj.setAttachment(attachment);
+
+		return entryObj;
+	}
 }

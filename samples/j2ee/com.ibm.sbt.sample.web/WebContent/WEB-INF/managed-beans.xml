@@ -25,7 +25,7 @@
 		<managed-bean-scope>application</managed-bean-scope>
 		<managed-property>
 			<property-name>endpoints</property-name>
-			<value>connections,connectionsOA2,smartcloud,smartcloudOA2,domino</value>
+			<value>connections,connectionsOA2,smartcloud,smartcloudOA2,domino,acmeAir,conAcmeApp</value>
 			<!-- <value>connections,connectionsOA2,smartcloud,smartcloudOA2,domino,sametime</value> -->
 		</managed-property>
 		<managed-property>
@@ -282,35 +282,59 @@
 		</managed-property>
 	</managed-bean>
 
-	<!-- Sametime -->	
-	<!-- 
-	<managed-bean>
-		<managed-bean-name>sametime</managed-bean-name>
-		<managed-bean-class>com.ibm.sbt.services.endpoints.SametimeBasicEndpoint</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-		<managed-property>
-			<property-name>url</property-name>
-			<value>%{sametime.url}</value>
-		</managed-property>
-		<managed-property>
+    <!-- Acme Airlines -->
+    <managed-bean>
+        <managed-bean-name>acmeAir</managed-bean-name>
+        <managed-bean-class>
+            com.ibm.sbt.services.endpoints.AnonymousEndpoint
+        </managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>url</property-name>
+            <value>%{acme.url}</value>
+        </managed-property>
+    </managed-bean>
+    
+    <!-- 
+    Connections Basic Auth Endpoint
+    This endpoint is only used for the purpose of posting an activity stream entry
+    to streams other than the current user or if the app needs to post to the activity
+    stream from a class on the server where using 3-legged OAuth is not possible.  If
+    you can use 3-legged OAuth and you are using Connections 4.x please use OAuth it
+    is far more secure than basic auth.
+     -->
+    <managed-bean>
+        <managed-bean-name>conAcmeApp</managed-bean-name>
+        <managed-bean-class>
+            com.ibm.sbt.services.endpoints.BasicEndpoint
+        </managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>url</property-name>
+            <value>%{connections.url}</value>
+        </managed-property>
+        <managed-property>
 			<property-name>credentialStore</property-name>
 			<value>CredStore</value>
-		</managed-property>
-		<managed-property>
-			<property-name>authenticationPage</property-name>
-			<value></value>
-		</managed-property>
-		<managed-property>
-			<property-name>authenticationService</property-name>
-			<value></value>
-		</managed-property>
-	 -->
-		<!-- Trust the connection 
-		<managed-property>
-			<property-name>forceTrustSSLCertificate</property-name>
-			<value>true</value>
-		</managed-property>
-	</managed-bean>
-		-->
-	
+        </managed-property>
+        <managed-property>
+            <!-- The user specified here must has the necessary privileges to post to any users activity stream -->
+            <!-- See  http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Distributing_events&content=pdcontent -->
+            <property-name>user</property-name>
+            <value>%{connections.app.as.user}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>password</property-name>
+            <value>%{connections.app.as.password}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>authenticationService</property-name>
+            <value>communities/service/atom/communities/my</value>
+        </managed-property>
+        <!-- Trust the connection -->
+        <managed-property>
+            <property-name>forceTrustSSLCertificate</property-name>
+            <value>true</value>
+        </managed-property>
+    </managed-bean>
 </faces-config>

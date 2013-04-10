@@ -57,7 +57,7 @@ define(['sbt/_bridge/json', 'sbt/_bridge/lang', 'sbt/log', 'sbt/stringutil'], fu
                 for (var i=0; i<theObj.length; i++) {
                     jsonObjs += this._jsonBeanStringify(theObj[i]);
                     if ((i+1)<theObj.length) {
-                        jsonObjs += ",";
+                        jsonObjs += ",\n";
                     }
                 }
                 jsonObjs += "]";

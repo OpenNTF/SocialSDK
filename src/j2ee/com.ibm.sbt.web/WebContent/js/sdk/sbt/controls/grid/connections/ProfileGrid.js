@@ -138,8 +138,8 @@ define([ "sbt/_bridge/declare",
                
             };
 
-            this._activeSortAnchor = this._sortInfo.displayName;
-            this._activeSortIsDesc = true;
+            this._activeSortAnchor = this._sortInfo.recent;
+            this._activeSortIsDesc = false;
         },
         
         

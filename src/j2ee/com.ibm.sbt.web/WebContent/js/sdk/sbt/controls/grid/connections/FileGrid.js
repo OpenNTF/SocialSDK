@@ -204,8 +204,13 @@ define([ "sbt/_bridge/declare",
                 }
             };
 
-            this._activeSortAnchor = this._sortInfo.name;
-            this._activeSortIsDesc = true;
+            if(args.type == "publicFiles"){
+            	this._activeSortAnchor = this._sortInfo.created;
+            }else {
+            	this._activeSortAnchor = this._sortInfo.updated;  	
+            }
+            
+            this._activeSortIsDesc = false;
         },
         
         /**

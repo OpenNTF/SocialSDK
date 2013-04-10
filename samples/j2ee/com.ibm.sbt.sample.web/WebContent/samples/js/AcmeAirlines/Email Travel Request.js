@@ -46,8 +46,7 @@ require([ "sbt/Endpoint", "sbt/emailservice", "sbt/json", "sbt/dom"],
      * @return {String} The home page URL of the Acme Airlines app.
      */
     function getHomePageUrl() {
-        var serviceUrl = sbt.Properties.serviceUrl;
-        return serviceUrl.substring(0, serviceUrl.lastIndexOf('/')+1);
+        return "http://acmeairlines.com:8080/acme.social.sample.webapp/";
     };
     
     /**

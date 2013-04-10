@@ -103,11 +103,7 @@ require(["sbt/Endpoint", "sbt/connections/ActivityStreamService", "sbt/json", "s
      * @return {String} The home page URL of the Acme Airlines app.
      */
     function getHomePageUrl() {
-        var endpoint = Endpoint.find('acmeAir');
-        var baseUrl = endpoint.baseUrl;
-        var path = require.toUrl('acmesocial');
-        path = path.substring(0, path.lastIndexOf('/')+1);
-        return baseUrl + path;
+        return "http://acmeairlines.com:8080/acme.social.sample.webapp/";
     };
     
     /**
@@ -120,7 +116,7 @@ require(["sbt/Endpoint", "sbt/connections/ActivityStreamService", "sbt/json", "s
     
     // demonstrate calling the method
     var flight = {
-        "FlightId":"103", "UserId":"%{sample.email1}", "ApproverId":"%{sample.email3}", "Reason":"business", "state":"started"
+        "FlightId":"203", "UserId":"%{sample.email1}", "ApproverId":"%{sample.email3}", "Arrive":"CDG", "Depart":"ORD"
     };
     var personObj = {
         "displayName": "%{sample.displayName1}",
@@ -131,8 +127,8 @@ require(["sbt/Endpoint", "sbt/connections/ActivityStreamService", "sbt/json", "s
                 "primary": true
             }
         ],
-        "id": "%{sample.userid1}"
+        "id": "%{sample.userId1}"
     };
-    var approverId = "%{sample.email3}";
+    var approverId = "%{sample.userId3}";
     postASEntry(flight, personObj, approverId);    
 });

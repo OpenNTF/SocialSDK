@@ -34,18 +34,22 @@ import com.ibm.sbt.services.client.BaseService;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.ClientService.Handler;
-import com.ibm.sbt.services.client.connections.files.model.FileRequestParams;
-import com.ibm.sbt.services.client.connections.files.model.Headers;
 import com.ibm.sbt.services.client.connections.profiles.exception.ProfileServiceException;
 import com.ibm.sbt.services.client.connections.profiles.utils.Messages;
 import com.ibm.sbt.services.util.AuthUtil;
 
 /**
- * ProfileService can be used to perform Profile Related operations. This is a dedicated Service for
- * Connections Profiles.
+ * ProfileService can be used to perform operations related to Profiles. 
  * 
  * @Represents Connections ProfileService
  * @author Swati Singh
+ * <pre>
+ * Sample Usage
+ * {@code
+ * 	ProfileService _service = new ProfileService();
+ *  Profile profile = _service.getProfile(userId);
+ * }
+ * </pre>
  */
 public class ProfileService extends BaseService {
 
@@ -55,38 +59,17 @@ public class ProfileService extends BaseService {
 	public static final String				seperator		= "/";
 	private LRUCache lruCache;
 
-	public static enum ProfilesAPI {
-		GETPROFILE("profiles/atom/profile.do"), DELETEPROFILE("profiles/admin/atom/profileEntry.do"), ADDPROFILE(
-				"profiles/admin/atom/profiles.do"), UPDATEPROFILE("profiles/atom/profileEntry.do"), UPDATEPROFILEPHOTO(
-				"profiles/photo.do");
-
-		private final String	url;
-
-		ProfilesAPI(String url) {
-			this.url = url;
-		}
-
-		public String getUrl() {
-			return url;
-		}
-
-		@Override
-		public String toString() {
-			return this.url;
-		}
-	}
-
 	/**
-	 * Default Constructor - 0 argument constructor Calls the Constructor of BaseService Class.
+	 * Constructor Creates ProfileService Object with default endpoint and default cache size
 	 */
-
+	
 	public ProfileService() {
 		this(DEFAULT_ENDPOINT_NAME, DEFAULT_CACHE_SIZE);
 		initializeCache(DEFAULT_CACHE_SIZE);
 	}
 
 	/**
-	 * Constructor - 1 argument constructor
+	 * Constructor 
 	 * 
 	 * @param endpoint
 	 *            Creates ProfileService with specified endpoint and a default CacheSize
@@ -98,11 +81,11 @@ public class ProfileService extends BaseService {
 	}
 
 	/**
-	 * Constructor - 2 argument constructor
+	 * Constructor 
 	 * 
 	 * @param endpoint
 	 * @param cacheSize
-	 *            Creates ProfileService with specified values of endpoint and CacheSize
+	 *            Creates ProfileService with specified endpoint and CacheSize
 	 */
 
 	public ProfileService(String endpoint, int cacheSize) {
@@ -110,7 +93,7 @@ public class ProfileService extends BaseService {
 		initializeCache(cacheSize);
 	}
 	/**
-	 * This method is used to initialize the LRU cache with given size. 
+	 * Initializes the LRU cache with given size. 
 	 * 
 	 * @param cacheSize
 	 */
@@ -120,10 +103,11 @@ public class ProfileService extends BaseService {
 	}
 
 	/**
-	 * This method is used to get the profile's of multiple user's. 
+	 * Returns profile's of multiple user's. 
 	 * 
 	 * @param userIds
 	 * @return Profile[]
+	 * @throws ProfileServiceException
 	 */
 	private Profile[] getProfiles(String[] userIds) throws ProfileServiceException{
 		if (logger.isLoggable(Level.FINEST)) {
@@ -160,24 +144,29 @@ public class ProfileService extends BaseService {
 	}
 	
 	/**
-	 * This method is used by getProfiles method to fetch the Profile's of users, one at a time. this
-	 * Single argument method, calls the getProfile method with 2 arguments, passing true to load the
-	 * profile of the person..
+	 * Wrapper method to get profile of a user
+	 * <p>
+	 * fetches profile content from server and populates the data member of {@link Profile} with the fetched content 
 	 *
+	 * @param userId
+	 *			   unique identifier of User , it can either be email or id
 	 * @return Profile
+	 * @throws ProfileServiceException
 	 */
 	public Profile getProfile(String userId) throws ProfileServiceException{
 		return getProfile(userId, true);
 	}
 
 	/**
-	 * Wrapper method , it makes the network call to fetch the Profile's of a user based on load parameter being true
-	 * / false. This method can be called directly by passing the userId / Subscriber id of the user and a
-	 * loaded argument as true / false
+	 * Wrapper method to get profile of a user, it makes the network call to fetch the Profile's of a user based on load parameter
+	 * being true/false.
 	 *
 	 * @param userId
+	 *             unique identifier of User , it can either be email or id 				
 	 * @param loaded
+	 * 			    if true, fetches profile content from server and populates the data member of {@link Profile} with the fetched content 
 	 * @return Profile
+	 * @throws ProfileServiceException
 	 */
 	public Profile getProfile(String userId, boolean loaded) throws ProfileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -188,10 +177,8 @@ public class ProfileService extends BaseService {
 		}
 		Profile profile = new Profile(this, userId);
 		if (loaded) {
-			load(profile); // fetches profile content from server and populates
-							// content of data member
+			load(profile);
 		}
-
 		if (logger.isLoggable(Level.FINEST)) {
 			String log = "";
 			if (profile.getId() != null) {
@@ -204,10 +191,11 @@ public class ProfileService extends BaseService {
 		return profile;
 	}
 	/**
-	 * This method is used to search profiles 
+	 * Wrapper method to search profiles based on different parameters
 	 * 
-	 * @param parameters - list of query string parameters to pass to API
-	 * @return list of searched profiles
+	 * @param parameters 
+	 * 				  list of query string parameters to pass to API
+	 * @return Collection<Profile>
 	 */
 	public Collection<Profile> searchProfiles( Map<String, String> parameters){
 		if (logger.isLoggable(Level.FINEST)) {
@@ -235,20 +223,26 @@ public class ProfileService extends BaseService {
 	}
 
 	/**
-	 * This method is used to get user's network contacts
+	 * Wrapper method to get user's network contacts
 	 * 
 	 * @param profile
-	 * @return Profile[] - array of network contacts profiles
+	 * 				profile of the user whose contacts are to be returned
+	 * @return Profile[] 
+	 * @throws ProfileServiceException
 	 */
 	public Profile[] getColleagues(Profile profile) throws ProfileServiceException{
 		return getColleagues(profile,null);
 	}
+	
 	/**
-	 * This method is used to get user's colleagues
+	 * Wrapper method to get user's colleagues
 	 * 
 	 * @param profile
-	 * @param parameters - list of query string parameters to pass to API
-	 * @return Profile[] - array of network contacts profiles
+	 * 				profile of the user whose contacts are to be returned
+	 * @param parameters 
+	 * 				list of query string parameters to pass to API
+	 * @return Profile[] 
+	 * @throws ProfileServiceException
 	 */
 	public Profile[] getColleagues(Profile profile, Map<String, String> parameters)
 	throws ProfileServiceException{
@@ -286,7 +280,18 @@ public class ProfileService extends BaseService {
 		return colleagues;
 
 	}
-	
+	/**
+	 * Wrapper method to get check if two users are colleagues
+	 * 
+	 * @param sourceId 
+	 * 				 userid or email of first user
+	 * @param targetId 
+	 * 				 userid or email of second user
+	 * @param parameters 
+	 * 				list of query string parameters to pass to API
+	 * @return ConnectionEntry 
+	 * @throws ProfileServiceException
+	 */
 	private ConnectionEntry checkColleague(String sourceId, String targetId, Map<String, String> parameters) throws ProfileServiceException{
 		
 		if (logger.isLoggable(Level.FINEST)) {
@@ -327,12 +332,14 @@ public class ProfileService extends BaseService {
 	}
 	
 	/**
-	 * This method is used to get common colleagues of two users
+	 * Wrapper method to get  common colleagues of two users
 	 * 
-	 * @param sourceId - userid or email of first person
-	 * @param targetId - userid or email of second person
-	 * @return Collection<ConnectionEntry> - common connections between two users
-	 * 
+	 * @param sourceId 
+	 * 				 userid or email of first user
+	 * @param targetId 
+	 * 				 userid or email of second user
+	 * @return Collection<ConnectionEntry>
+	 * @throws ProfileServiceException
 	 */
 	private Collection<ConnectionEntry> getColleaguesInCommon(String sourceId, String targetId,  Map<String, String> parameters) throws ProfileServiceException{
 		
@@ -374,13 +381,14 @@ public class ProfileService extends BaseService {
 	}
 
 	/**
-	 * This method is used to get a person's report to chain
+	 * Wrapper method to get a user's report to chain
 	 * 
-	 * @param id - id of user whose direct reports are needed
-	 * @param parameters - parameter map
-	 * @return profiles
-	 * 
-	 * 	
+	 * @param id 
+	 * 		   unique identifier of the user whose direct reports are needed, it can be email or userID
+	 * @param parameters 
+	 * 				list of query string parameters to pass to API
+	 * @return Collection<Profile>
+	 * @throws ProfileServiceException	
 	 */
 	public Collection<Profile> getReportToChain (String id, Map<String, String> parameters)throws ProfileServiceException{
 		
@@ -403,11 +411,14 @@ public class ProfileService extends BaseService {
 	}
 	
 	/**
-	 * This method is used to get a person's direct reports
+	 * Wrapper method to get a person's direct reports
 	 * 
-	 * @param id - id of user whose direct reports are needed
-	 * @param parameters - parameter map
-	 * @return direct reports profiles
+	 * @param id
+	 * 		   unique identifier of the user whose direct reports are needed, it can be email or userID
+	 * @param parameters
+	 * 		   list of query string parameters to pass to API
+	 * @return Collection<Profile>
+	 * @throws ProfileServiceException
 	 * 
 	 */
 	public Collection<Profile> getDirectReports(String id, Map<String, String> parameters)throws ProfileServiceException{
@@ -431,10 +442,12 @@ public class ProfileService extends BaseService {
 		
 	}
 	/**
-	 * This method is used to get list of pending invites 
+	 * Wrapper method to get a list of pending invites for a user 
 	 * 
-	 * @param parameters - parameter map
-	 * @return object[] - invites list
+	 * @param parameters
+	 * 				  list of query string parameters to pass to API
+	 * @return Collection<ConnectionEntry>
+	 * @throws ProfileServiceException
 	 * 
 	 */
 	private Collection<ConnectionEntry> getMyInvites(Map<String, String> parameters)throws ProfileServiceException{
@@ -464,10 +477,15 @@ public class ProfileService extends BaseService {
 	}
 	
 	/**
-	 * This method is used to Invite a person to become your colleague
-	 * 
-	 * @param profile - profile of the user to whom the invite needs to be sent	 * @param profile
-	 * @return boolean - if invite is sent successfully then return true
+	 * Wrapper method to send Invite to a user to become colleague
+	 * <p>
+	 * a default Invite message is used while sending the invite
+	 *  
+	 * @param profile 
+	 * 			   profile of the user to whom the invite is to be sent
+	 * @return boolean 
+	 *  		   if invite is sent successfully then value is true else value is false
+	 * @throws ProfileServiceException
 	 */
 	public boolean sendInvite(Profile profile)throws ProfileServiceException{
 		String defaultInviteMsg = Messages.SendInviteMsg;
@@ -476,11 +494,15 @@ public class ProfileService extends BaseService {
 	}
 	
 	/**
-	 * This method is used to send a Invite to person to be your connect
+	 * Wrapper method to send Invite to a user to become colleague
 	 * 
-	 * @param profile - profile of the user to whom the invite needs to be sent
-	 * @param inviteMsg - message to the other user
-	 * @return boolean - if invite is sent successfully then return true
+	 * @param profile 
+	 *				profile of the user to whom the invite is to be sent
+	 * @param inviteMsg 
+	 * 				Invite message to the other user
+	 * @return boolean
+	 * 				if invite is sent successfully then return true
+	 * @throws ProfileServiceException
 	 */
 	public boolean sendInvite(Profile profile, String inviteMsg)throws ProfileServiceException{
 		if (logger.isLoggable(Level.FINEST)) {
@@ -510,11 +532,17 @@ public class ProfileService extends BaseService {
 	}
 
 	/**
-	 * This method is used to accept a Invite 
+	 * Wrapper method to accept a Invite 
 	 * 
-	 * @param connectionId - unique id of the
-	 * @param title - message to the other user
-	 * @return content - if invite is sent successfully then return true
+	 * @param connectionId 
+	 * 					 unique id of the connection 
+	 * @param title 
+	 * 			 message to the other user
+	 * @param content
+	 * 			message to the other user
+	 * @return boolean 
+	 * 		       if invite is accepted then return true
+	 * @throws ProfileServiceException
 	 * 
 	 */
 	public boolean acceptInvite(String connectionId, String title, String content)throws ProfileServiceException{
@@ -530,7 +558,6 @@ public class ProfileService extends BaseService {
 		XMLProfilesPayloadBuilder builder = XMLProfilesPayloadBuilder.INSTANCE;
 		Object payload = builder.generateAcceptInvitePayload(connectionId, title, content);
 		boolean	result = executePut(url, parameters, null, payload, null);
-			//getClientService().put(url, parameters, payload);
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.exiting(sourceClass, "acceptInvite");
 		}
@@ -538,10 +565,13 @@ public class ProfileService extends BaseService {
 	}
 	
 	/**
-	 * This method is used to delete/ignore a Invite 
+	 * Wrapper method is used to delete/ignore a Invite 
 	 * 
-	 * @param connectionId - unique id of the connection
-	 * 
+	 * @param connectionId 
+	 * 					unique id of the connection
+	 * @return boolean
+	 * 				returns true if invite is deleted successfully 
+	 * @throws ProfileServiceException
 	 */
 	public boolean deleteInvite(String connectionId)throws ProfileServiceException{
 		if (logger.isLoggable(Level.FINEST)) {
@@ -558,11 +588,14 @@ public class ProfileService extends BaseService {
 		}
 		return result;
 	}
+	
 	/**
 	 * Wrapper method to update a User's profile photo
 	 * 
 	 * @param Profile
 	 * @return boolean
+	 * 				returns true, if profile photo is updated
+	 * @throws ProfileServiceException
 	 */
 	public boolean updateProfilePhoto(Profile profile) throws ProfileServiceException{
 		if (logger.isLoggable(Level.FINEST)) {
@@ -618,6 +651,8 @@ public class ProfileService extends BaseService {
 	 * 
 	 * @param Profile
 	 * @return boolean
+	 * 				returns true if profile is updated successfully
+	 * @throws ProfileServiceException
 	 */
 	public boolean updateProfile(Profile profile) throws ProfileServiceException{
 		if (logger.isLoggable(Level.FINEST)) {
@@ -792,18 +827,19 @@ public class ProfileService extends BaseService {
 		return null;
 	}
 
-	/*
+	/**
 	 * Method responsible for generating appropriate REST URLs
 	 * 
 	 * @param ProfileEntity ( Ref Class : ProfileEntity )
 	 * @param ProfileType ( Ref Class : ProfileType )
 	 *
-	 *  @return String
+	 * @return String
 	 */
 	public String resolveProfileUrl(String profileEntity, String profileType) {
 		return resolveProfileUrl(profileEntity, profileType, null);
 	}
-	/*
+	
+	/**
 	 * Method responsible for generating appropriate REST URLs
 	 * 
 	 * @param ProfileEntity ( Ref Class : ProfileEntity )
@@ -870,10 +906,12 @@ public class ProfileService extends BaseService {
 	 * executeGet
 	 * 
 	 * @param uri
+	 *           api to be executed.
 	 * @param params
+	 *           Map of Parameters. See {@link ProfileRequestParams} for possible values.
 	 * @throws ProfileServiceException
 	 */
-	protected Document executeGet(String uri, Map<String, String> params, Handler format)
+	public Document executeGet(String uri, Map<String, String> params, Handler format)
 	throws ProfileServiceException{
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.exiting(sourceClass, "executeGet", new Object[] { uri, params });
@@ -897,10 +935,14 @@ public class ProfileService extends BaseService {
 	 * executeDelete
 	 * 
 	 * @param uri
+	 *           api to be executed.
 	 * @param params
+	 *            Map of Parameters. See {@link ProfileRequestParams} for possible values.
+	 * @return boolean
+	 * 			  returns true if request is successful	
 	 * @throws ProfileServiceException
 	 */
-	protected boolean executeDelete(String uri, Map<String, String> params)
+	public boolean executeDelete(String uri, Map<String, String> params)
 	throws ProfileServiceException{
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.exiting(sourceClass, "executeDelete", new Object[] { uri, params });
@@ -923,18 +965,17 @@ public class ProfileService extends BaseService {
 	 * executePut
 	 * 
 	 * @param requestUri
-	 *            - api to be executed.
+	 *            	  api to be executed.
 	 * @param params
-	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
+	 *            Map of Parameters. See {@link ProfileRequestParams} for possible values.
 	 * @param headers
-	 *            - Map of Headers. See {@link Headers} for possible values.
+	 *            Map of Headers. See {@link Headers} for possible values.
 	 * @param payload
-	 *            - Document which is passed directly as requestBody to the execute request. This method is
-	 *            used to update the metadata/content of File in Connections.
+	 *            Document which is passed directly as requestBody to the execute request.
 	 * @return boolean
+	 * 			  returns true if request is successful
 	 * @throws ProfileServiceException
 	 */
-
 	public boolean executePut(String requestUri, Map<String, String> parameters,
 			Map<String, String> headers, Object payload, Handler format) throws ProfileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -955,18 +996,17 @@ public class ProfileService extends BaseService {
 	 * executePost
 	 * 
 	 * @param requestUri
-	 *            - api to be executed.
+	 *               api to be executed.
 	 * @param params
-	 *            - Map of Parameters. See {@link FileRequestParams} for possible values.
+	 *             Map of Parameters. See {@link ProfileRequestParams} for possible values.
 	 * @param headers
-	 *            - Map of Headers. See {@link Headers} for possible values.
+	 *             Map of Headers. See {@link Headers} for possible values.
 	 * @param payload
-	 *            - Document which is passed directly as requestBody to the execute request. This method is
-	 *            used to update the metadata/content of File in Connections.
+	 *             Document which is passed directly as requestBody to the execute request. 
 	 * @return boolean
+	 * 			   returns true if request is successful
 	 * @throws ProfileServiceException
 	 */
-
 	public boolean executePost(String requestUri, Map<String, String> parameters,
 			Map<String, String> headers, Object payload, Handler format) throws ProfileServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
@@ -984,7 +1024,9 @@ public class ProfileService extends BaseService {
 	}
 
 	/*
-	 * Method to check if the userid is email. Current check is based on finding @ in the userid.
+	 * Method to check if the userid is email
+	 * <p>
+	 * Current check is based on finding @ in the userid.
 	 * 
 	 * @param userId
 	 * @return boolean

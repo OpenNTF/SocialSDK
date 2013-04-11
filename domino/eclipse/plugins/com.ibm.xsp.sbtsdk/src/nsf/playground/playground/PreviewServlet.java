@@ -15,6 +15,7 @@ import nsf.playground.environments.PlaygroundEnvironment;
 
 import com.ibm.commons.runtime.RuntimeConstants;
 import com.ibm.commons.runtime.util.ParameterProcessor;
+import com.ibm.commons.runtime.util.UrlUtil;
 import com.ibm.commons.util.PathUtil;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.ReaderInputStream;
@@ -33,6 +34,7 @@ public class PreviewServlet extends FacesContextServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private static final String LAST_REQUEST = "playground.lastrequest"; 
+
 	static class RequestParams implements Serializable {
 		private static final long serialVersionUID = 1L;
 		String sOptions;
@@ -70,7 +72,9 @@ public class PreviewServlet extends FacesContextServlet {
         String properties = req.getParameter("fm_properties");
         RequestParams requestParams = new RequestParams(sOptions,html,js,css,properties);
         req.getSession().setAttribute(LAST_REQUEST, requestParams);
-        execRequest(req, resp, requestParams);
+        // 2013-01-11: Use the post-redirect-get pattern so a reload works properly
+        resp.sendRedirect(UrlUtil.getRequestUrl(req));
+        //execRequest(req, resp, requestParams);
 	}
 
 	protected void execRequest(HttpServletRequest req, HttpServletResponse resp, RequestParams requestParams) throws ServletException, IOException {

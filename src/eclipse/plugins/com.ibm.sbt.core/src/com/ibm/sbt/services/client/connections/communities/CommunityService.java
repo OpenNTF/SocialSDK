@@ -43,7 +43,7 @@ public class CommunityService extends BaseService {
 	}
 
 	/**
-	 * Constructor 
+	 * Constructor - Creates CommunityService Object with a specified endpoint
 	 * 
 	 * @param endpoint
 	 *            Creates CommunityService with specified endpoint and a default CacheSize
@@ -53,7 +53,7 @@ public class CommunityService extends BaseService {
 	}
 
 	/**
-	 * Constructor 
+	 * Constructor - Creates CommunityService Object with specified endpoint and cache size
 	 * 
 	 * @param endpoint
 	 * @param cacheSize
@@ -70,7 +70,7 @@ public class CommunityService extends BaseService {
 	 *
 	 * @param communityUuid
 	 *			   id of community
-	 * @return Community
+	 * @return A Community
 	 * @throws CommunityServiceException
 	 */
 	public Community getCommunity(String communityUuid) throws CommunityServiceException {
@@ -81,6 +81,7 @@ public class CommunityService extends BaseService {
 	 * Wrapper method to get a empty Community object
 	 *
 	 * @param loadIt
+	 * @return Community
 	 * @throws CommunityServiceException
 	 */
 	public Community getCommunity(boolean loadIt) throws CommunityServiceException {
@@ -93,8 +94,9 @@ public class CommunityService extends BaseService {
 	 *
 	 * @param communityUuid
 	 *			    id of community
-	 * @return loadIt
+	 * @param loadIt
 	 * 				if true, fetches community content from server and populates the data member of {@link Community} with the fetched content
+	 * @return A Community
 	 * @throws CommunityServiceException
 	 */
 	public Community getCommunity(String communityUuid, boolean loadIt) throws CommunityServiceException {
@@ -124,7 +126,7 @@ public class CommunityService extends BaseService {
 	/**
 	 * Wrapper method to get Public Communities
 	 * 
-	 * @return Collection<Community>
+	 * @return A list of public communities
 	 * @throws CommunityServiceException
 	 */
 	public Collection<Community> getPublicCommunities()
@@ -137,7 +139,7 @@ public class CommunityService extends BaseService {
 	 * 
 	 * @param parameters 
 	 * 				list of query string parameters to pass to API
-	 * @return Collection<Community>
+	 * @return A list of public communities>
 	 * @throws CommunityServiceException
 	 */
 	public Collection<Community> getPublicCommunities(Map<String, String> parameters)
@@ -167,7 +169,7 @@ public class CommunityService extends BaseService {
 	/**
 	 * Wrapper method to get Communities of which the user is a member or owner.
 	 * 
-	 * @return Collection<Community>
+	 * @return A list of communities of which the user is a member or owner
 	 * @throws CommunityServiceException
 	 */
 	public Collection<Community> getMyCommunities() throws CommunityServiceException {
@@ -196,7 +198,7 @@ public class CommunityService extends BaseService {
 	 * 
 	 * @param community 
 	 * 				 community for which SubCommunities are to be fetched
-	 * @return Collection<Community>
+	 * @return A list of communities
 	 * @throws CommunityServiceException
 	 */
 	public Collection<Community> getSubCommunities(Community community) throws CommunityServiceException {
@@ -229,7 +231,7 @@ public class CommunityService extends BaseService {
 	 * 
 	 * @param community 
 	 * 				 community for which members are to be fetched
-	 * @return Member[]
+	 * @return Members of the given Community
 	 * @throws CommunityServiceException
 	 */
 	public Member[] getMembers(Community community) throws CommunityServiceException {
@@ -262,7 +264,7 @@ public class CommunityService extends BaseService {
 	 * 
 	 * @param community
 	 * 				community for which bookmarks are to be fetched
-	 * @return Bookmark[]
+	 * @return Bookmarks of the given Community
 	 * @throws CommunityServiceException
 	 */
 	public Bookmark[] getBookmarks(Community community) throws CommunityServiceException {
@@ -296,7 +298,7 @@ public class CommunityService extends BaseService {
 	 * 
 	 * @param community
 	 * 				community for which forum topics are to be fetched
-	 * @return ForumTopic[] 
+	 * @return Forum topics of the given Community 
 	 * @throws CommunityServiceException
 	 */
 	public ForumTopic[] getForumTopics(Community community) throws CommunityServiceException {
@@ -331,6 +333,7 @@ public class CommunityService extends BaseService {
 	 *           api to be executed.
 	 * @param params
 	 *           Map of Parameters. See {@link CommunityParams} for possible values.
+	 * @return Document          
 	 * @throws CommunityServiceException
 	 */
 	protected Document executeGet(String uri, Map<String, String> params)
@@ -361,7 +364,7 @@ public class CommunityService extends BaseService {
 	 * @param community
 	 * @param loadIt
 	 * 			if true populates the data member of {@link Community} with the created Community content
-	 * @return Community
+	 * @return The created Community
 	 * @throws CommunityServiceException
 	 */	
 	public Community createCommunity(Community community) throws CommunityServiceException {
@@ -375,7 +378,7 @@ public class CommunityService extends BaseService {
 	 * @param community
 	 * @param loadIt
 	 * 			if true populates the data member of {@link Community} with the created Community content
-	 * @return Community
+	 * @return The created Community
 	 * @throws CommunityServiceException
 	 */
 	public Community createCommunity(Community community, boolean loadIt) throws CommunityServiceException {
@@ -425,8 +428,7 @@ public class CommunityService extends BaseService {
 	 * 
 	 * @param community
 	 * 				community which is to be updated
-	 * @return boolean 
-	 *				if community is updated successfully then value is true else value is false
+	 * @return value is true if community is updated successfully else value is false
 	 * @throws CommunityServiceException
 	 */
 	public boolean updateCommunity(Community community) throws CommunityServiceException {
@@ -469,8 +471,7 @@ public class CommunityService extends BaseService {
 	 * 				 community to which the member needs to be added
 	 * @param member
 	 * 				 member which is to be added
-	 * @return boolean 
-	 * 				 if member is added successfully to the community then value is true else value is false
+	 * @return value is true if member is added successfully to the community else value is false
 	 * @throws CommunityServiceException
 	 */
 	public boolean addMember(Community community, Member member) throws CommunityServiceException {
@@ -513,8 +514,7 @@ public class CommunityService extends BaseService {
 	 * 				 community to which the member is to be removed
 	 * @param member
 	 * 				 member which is to be removed
-	 * @return boolean 
-	 * 				 if member is removed successfully from the community then value is true else value is false
+	 * @return value is true if member is removed successfully else value is false
 	 * @throws CommunityServiceException
 	 */
 	public boolean removeMember(Community community, Member member) throws CommunityServiceException { 
@@ -561,8 +561,7 @@ public class CommunityService extends BaseService {
 	 * 
 	 * @param community
 	 * 				community which is to be deleted
-	 * @return boolean
-	 * 				returns true, if community is deleted successfully else false is returned 
+	 * @return value is true, if community is deleted successfully, else false is returned 
 	 * @throws CommunityServiceException
 	 */
 	public boolean deleteCommunity(Community community) throws CommunityServiceException {
@@ -593,8 +592,8 @@ public class CommunityService extends BaseService {
 		return returnVal;
 	}
 	
-	/*
-	 * Method to fetch the community content from server and poupulates the data member of {@link Community}.
+	/**
+	 * Method to fetch the community content from server and populates the data member of {@link Community}.
 	 * 
 	 * @param community
 	 */
@@ -621,7 +620,7 @@ public class CommunityService extends BaseService {
 		}
 	}
 
-	/*
+	/**
 	 * Method to generate appropriate REST URLs
 	 * 
 	 * @param communityEntity ( Ref Class : CommunityEntity )
@@ -631,7 +630,7 @@ public class CommunityService extends BaseService {
 		return resolveCommunityUrl(communityEntity, communityType, null);
 	}
 
-	/*
+	/**
 	 * Method to generate appropriate REST URLs
 	 * 
 	 * @param communityEntity ( Ref Class : CommunityEntity )

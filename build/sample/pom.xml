@@ -14,10 +14,8 @@
   
   <modules>
     <!-- sample j2ee projects -->
-    <module>../../samples/j2ee/com.ibm.sbt.sample.portlets</module>
     <module>../../samples/j2ee/com.ibm.sbt.sample.web</module>
     <module>../../samples/j2ee/com.ibm.sbt.sample.ear</module>
-    <module>../../samples/j2ee/com.ibm.sbt.sample.portlets.ear</module>
     <module>../../samples/j2ee/acme.social.sample.dataapp</module>
     <module>../../samples/j2ee/acme.social.sample.webapp</module>
     <module>../../samples/j2ee/acme.sample.webapp</module>

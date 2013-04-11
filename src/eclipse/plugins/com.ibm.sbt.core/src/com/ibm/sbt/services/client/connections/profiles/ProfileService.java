@@ -69,7 +69,7 @@ public class ProfileService extends BaseService {
 	}
 
 	/**
-	 * Constructor 
+	 * Constructor  - Creates ProfileService Object with a specified endpoint
 	 * 
 	 * @param endpoint
 	 *            Creates ProfileService with specified endpoint and a default CacheSize
@@ -81,7 +81,7 @@ public class ProfileService extends BaseService {
 	}
 
 	/**
-	 * Constructor 
+	 * Constructor - Creates ProfileService Object with specified endpoint and CacheSize
 	 * 
 	 * @param endpoint
 	 * @param cacheSize
@@ -223,11 +223,11 @@ public class ProfileService extends BaseService {
 	}
 
 	/**
-	 * Wrapper method to get user's network contacts
+	 * Wrapper method to get user's colleagues
 	 * 
 	 * @param profile
 	 * 				profile of the user whose contacts are to be returned
-	 * @return Profile[] 
+	 * @return Profiles of User's colleagues 
 	 * @throws ProfileServiceException
 	 */
 	public Profile[] getColleagues(Profile profile) throws ProfileServiceException{
@@ -241,7 +241,7 @@ public class ProfileService extends BaseService {
 	 * 				profile of the user whose contacts are to be returned
 	 * @param parameters 
 	 * 				list of query string parameters to pass to API
-	 * @return Profile[] 
+	 * @return Profiles of User's colleagues  
 	 * @throws ProfileServiceException
 	 */
 	public Profile[] getColleagues(Profile profile, Map<String, String> parameters)
@@ -387,7 +387,7 @@ public class ProfileService extends BaseService {
 	 * 		   unique identifier of the user whose direct reports are needed, it can be email or userID
 	 * @param parameters 
 	 * 				list of query string parameters to pass to API
-	 * @return Collection<Profile>
+	 * @return List of Profiles
 	 * @throws ProfileServiceException	
 	 */
 	public Collection<Profile> getReportToChain (String id, Map<String, String> parameters)throws ProfileServiceException{
@@ -417,7 +417,7 @@ public class ProfileService extends BaseService {
 	 * 		   unique identifier of the user whose direct reports are needed, it can be email or userID
 	 * @param parameters
 	 * 		   list of query string parameters to pass to API
-	 * @return Collection<Profile>
+	 * @return List of Profiles
 	 * @throws ProfileServiceException
 	 * 
 	 */
@@ -483,8 +483,7 @@ public class ProfileService extends BaseService {
 	 *  
 	 * @param profile 
 	 * 			   profile of the user to whom the invite is to be sent
-	 * @return boolean 
-	 *  		   if invite is sent successfully then value is true else value is false
+	 * @return value is true if invite is sent successfully else value is false
 	 * @throws ProfileServiceException
 	 */
 	public boolean sendInvite(Profile profile)throws ProfileServiceException{
@@ -500,8 +499,7 @@ public class ProfileService extends BaseService {
 	 *				profile of the user to whom the invite is to be sent
 	 * @param inviteMsg 
 	 * 				Invite message to the other user
-	 * @return boolean
-	 * 				if invite is sent successfully then return true
+	 * @return value is true if invite is sent successfully else value is false
 	 * @throws ProfileServiceException
 	 */
 	public boolean sendInvite(Profile profile, String inviteMsg)throws ProfileServiceException{
@@ -540,8 +538,7 @@ public class ProfileService extends BaseService {
 	 * 			 message to the other user
 	 * @param content
 	 * 			message to the other user
-	 * @return boolean 
-	 * 		       if invite is accepted then return true
+	 * @return if invite is accepted then return true 
 	 * @throws ProfileServiceException
 	 * 
 	 */
@@ -569,8 +566,7 @@ public class ProfileService extends BaseService {
 	 * 
 	 * @param connectionId 
 	 * 					unique id of the connection
-	 * @return boolean
-	 * 				returns true if invite is deleted successfully 
+	 * @return returns true if invite is deleted successfully 
 	 * @throws ProfileServiceException
 	 */
 	public boolean deleteInvite(String connectionId)throws ProfileServiceException{
@@ -593,8 +589,7 @@ public class ProfileService extends BaseService {
 	 * Wrapper method to update a User's profile photo
 	 * 
 	 * @param Profile
-	 * @return boolean
-	 * 				returns true, if profile photo is updated
+	 * @return returns true, if profile photo is updated
 	 * @throws ProfileServiceException
 	 */
 	public boolean updateProfilePhoto(Profile profile) throws ProfileServiceException{
@@ -650,8 +645,7 @@ public class ProfileService extends BaseService {
 	 * Wrapper method to update a User's profile
 	 * 
 	 * @param Profile
-	 * @return boolean
-	 * 				returns true if profile is updated successfully
+	 * @return returns true if profile is updated successfully
 	 * @throws ProfileServiceException
 	 */
 	public boolean updateProfile(Profile profile) throws ProfileServiceException{
@@ -687,7 +681,7 @@ public class ProfileService extends BaseService {
 		return result;
 	}
 
-	/*
+	/**
 	 * Method to remove the user profile from cache.
 	 * 
 	 * @param userId
@@ -727,7 +721,7 @@ public class ProfileService extends BaseService {
 
 	}
 
-	/*
+	/**
 	 * Method responsible for loading the profile.
 	 * 
 	 * @param profile
@@ -908,7 +902,8 @@ public class ProfileService extends BaseService {
 	 * @param uri
 	 *           api to be executed.
 	 * @param params
-	 *           Map of Parameters. See {@link ProfileRequestParams} for possible values.
+	 *           Map of Parameters See {@link ProfileRequestParams} for possible values.
+	 * @return Document          
 	 * @throws ProfileServiceException
 	 */
 	public Document executeGet(String uri, Map<String, String> params, Handler format)
@@ -938,8 +933,7 @@ public class ProfileService extends BaseService {
 	 *           api to be executed.
 	 * @param params
 	 *            Map of Parameters. See {@link ProfileRequestParams} for possible values.
-	 * @return boolean
-	 * 			  returns true if request is successful	
+	 * @return returns true if request is successful	
 	 * @throws ProfileServiceException
 	 */
 	public boolean executeDelete(String uri, Map<String, String> params)
@@ -972,8 +966,7 @@ public class ProfileService extends BaseService {
 	 *            Map of Headers. See {@link Headers} for possible values.
 	 * @param payload
 	 *            Document which is passed directly as requestBody to the execute request.
-	 * @return boolean
-	 * 			  returns true if request is successful
+	 * @return returns true if request is successful
 	 * @throws ProfileServiceException
 	 */
 	public boolean executePut(String requestUri, Map<String, String> parameters,
@@ -1003,8 +996,7 @@ public class ProfileService extends BaseService {
 	 *             Map of Headers. See {@link Headers} for possible values.
 	 * @param payload
 	 *             Document which is passed directly as requestBody to the execute request. 
-	 * @return boolean
-	 * 			   returns true if request is successful
+	 * @return returns true if request is successful
 	 * @throws ProfileServiceException
 	 */
 	public boolean executePost(String requestUri, Map<String, String> parameters,

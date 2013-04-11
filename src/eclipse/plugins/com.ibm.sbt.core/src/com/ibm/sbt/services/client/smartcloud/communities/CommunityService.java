@@ -235,7 +235,7 @@ public class CommunityService extends BaseService {
 	 * 
 	 * @param communityUuid
 	 *            The community Id
-	 * @return A list of members of the given
+	 * @return A list of members of the given community
 	 * @throws CommunityServiceException
 	 */
 	@SuppressWarnings("unchecked")

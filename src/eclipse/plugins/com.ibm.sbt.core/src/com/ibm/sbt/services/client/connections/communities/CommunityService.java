@@ -14,7 +14,6 @@ import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.connections.communities.utils.Messages;
 import com.ibm.sbt.services.util.AuthUtil;
-
 /**
  * CommunityService can be used to perform Community Related operations.
  * 

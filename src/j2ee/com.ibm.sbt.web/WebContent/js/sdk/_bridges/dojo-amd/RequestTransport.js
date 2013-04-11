@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -15,15 +15,56 @@
  */
 
 /**
- * Social Business Toolkit SDK. Implementation of a transport using the dojo/request API.
+ * Social Business Toolkit SDK. Implementation of a transport using the
+ * dojo/request API.
+ * 
+ * @module sbt._bridge.RequestTransport
  */
-define([ "dojo/_base/declare", "dojo/request", "dojo/_base/lang", "sbt/util" ], function(declare,request,lang,util) {
+define([ "dojo/_base/declare", "dojo/_base/lang", "dojo/request", "sbt/util" ], function(declare,lang,request,util) {
     return declare("sbt._bridge.RequestTransport", null, {
+
+        /**
+         * Provides an asynchronous request.
+         * 
+         * @method request
+         * @param {String)
+         *            url The URL the request should be made to.
+         * @param {Object}
+         *            [options] Optional A hash of any options for the provider.
+         * @param {String|Object}
+         *            [options.data=null] Data, if any, that should be sent with
+         *            the request.
+         * @param {String|Object}
+         *            [options.query=null] The query string, if any, that should
+         *            be sent with the request.
+         * @param {Boolean}
+         *            [options.preventCache=false] If true will send an extra
+         *            query parameter to ensure the the server won’t supply
+         *            cached values.
+         * @param {String}
+         *            [options.method=GET] The HTTP method that should be used
+         *            to send the request.
+         * @param {Integer}
+         *            [options.timeout=null] The number of milliseconds to wait
+         *            for the response. If this time passes the request is
+         *            canceled and the promise rejected.
+         * @param {String}
+         *            [options.handleAs=text] The content handler to process the
+         *            response payload with.
+         * 
+         */
+        request : function(url,options) {
+            return request(url, options);
+        },
+
+        /**
+         * @deprecated
+         */
         xhr : function(method,args,hasBody) {
             // all options expected by dojo/request and the defaults
             args = lang.mixin({}, args);
             var options = {
-                data : args.putData || args.postData,
+                data : args.putData || args.postData || args.content || null,
                 query : args.content || {},
                 preventCache : args.preventCache || false,
                 method : method,
@@ -34,21 +75,21 @@ define([ "dojo/_base/declare", "dojo/request", "dojo/_base/lang", "sbt/util" ], 
 
             var self = this;
             var promise = request(args.url, options);
-            promise.response.then(
-                function(response) {
-                    var _ioArgs = {
-                        args : args,
-                        headers : {},
-                        _ioargs : response
-                    };
-                    return args.handle(response.data || response.text, _ioArgs);
-                }, 
-                function(error) {
-                    return args.handle(self.createError(error));
-                }
-            );
+            promise.response.then(function(response) {
+                var _ioArgs = {
+                    args : args,
+                    headers : {},
+                    _ioargs : response
+                };
+                return args.handle(response.data || response.text, _ioArgs);
+            }, function(error) {
+                return args.handle(self.createError(error));
+            });
         },
 
+        /**
+         * @deprecated
+         */
         createError : function(error) {
             var _error = new Error();
             _error.code = error.status || (error.response && error.response.status) || 400;
@@ -60,6 +101,9 @@ define([ "dojo/_base/declare", "dojo/request", "dojo/_base/lang", "sbt/util" ], 
             return _error;
         },
 
+        /**
+         * @deprecated
+         */
         getErrorMessage : function(error) {
             var text = error.responseText || (error.response && error.response.text);
             if (text) {

@@ -1,7 +1,0 @@
-/*Grid need a explicit width/height by default*/
-#grid {
-    width: 100em;
-    height: 20em;
-}
-
-.dojoxGrid-header { display:none; }

@@ -123,13 +123,11 @@ define(['jquery', 'sbt/_bridge/declare', 'sbt/util' ], function($, declare, util
             return _error;
         },
         getErrorMessage: function(jqXHR, textStatus, type) {
-        	var xml = (type==="xml" ? jqXHR.responseXML : type==="text" ? $.parseXML(jqXHR.responseText) : undefined );
-            if (xml) {
-                try {
-                    var text = $($(xml).find("message")[0]).text().trim();
-                } catch(ex) {
-                    console.log(ex);
-                }
+            try {
+            	var xml = (type==="xml" ? jqXHR.responseXML : type==="text" ? $.parseXML(jqXHR.responseText) : undefined );
+                var text = $($(xml).find("message")[0]).text().trim();
+            } catch(ex) {
+                console.log(ex);
             }
             return text || jqXHR.statusText || jqXHR.responseText || textStatus || jqXHR;
         }

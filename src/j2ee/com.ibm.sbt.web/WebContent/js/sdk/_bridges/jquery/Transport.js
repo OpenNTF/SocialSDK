@@ -27,11 +27,21 @@ define(['jquery', 'sbt/_bridge/declare', 'sbt/util' ], function($, declare, util
 		    var usedJQVersion = $().jquery;
 		    var requiredJQVersion = "1.8";
 		    var jQ_v_gte_18 = util.minVersion(requiredJQVersion, usedJQVersion);
+		    var xhrData = args.content || args.putData || args.postData || "";
+		    if (!args.handleAs) {
+		    	$.extend(args, {handleAs: "text"});
+		    }
 		    var settings = {
 		        type: method,
-		        data: args.content,
-		        dataType: args.handleAs || "text"
+		        data: xhrData,
+		        dataType: args.handleAs
 		    };
+		    
+		    if (method === "POST") {
+		    	settings = $.extend(settings, {
+		    		contentType: args.headers["Content-Type"]	
+		    	});
+		    }
 		    
 		    if (!jQ_v_gte_18) {
 		    	settings = $.extend(settings, {
@@ -65,31 +75,29 @@ define(['jquery', 'sbt/_bridge/declare', 'sbt/util' ], function($, declare, util
 		    }
 		},
 		handleError: function(args, jqXHR, textStatus, errorThrown) {
-			var error = this.createError(jqXHR, textStatus, errorThrown);
+			var error = this.createError(jqXHR, textStatus, errorThrown, args.handleAs);
             if (args.handle) {
 		        args.handle(error, args);
             }
 		},
-		createError: function(jqXHR, textStatus, errorThrown) {
+		createError: function(jqXHR, textStatus, errorThrown, type) {
             var _error = new Error();
             _error.code = jqXHR.status || 400;
-            _error.message = this.getErrorMessage(jqXHR);
+            _error.message = this.getErrorMessage(jqXHR, textStatus, type);
             _error.cause = errorThrown || jqXHR;
             _error.response = jqXHR.getAllResponseHeaders();
             return _error;
         },
-        getErrorMessage: function(jqXHR, textStatus) {
-            var text = jqXHR.responseText;
-            if (!text && (text=jqXHR.responseXML)) {
+        getErrorMessage: function(jqXHR, textStatus, type) {
+        	var xml = (type==="xml" ? jqXHR.responseXML : type==="text" ? $.parseXML(jqXHR.responseText) : undefined );
+            if (xml) {
                 try {
-                    text = $($($.parseXML(text)).find("message")[0]).text().trim();
+                    var text = $($(xml).find("message")[0]).text().trim();
                 } catch(ex) {
                     console.log(ex);
                 }
-                return text || textStatus;
-            } else {
-                return jqXHR;
             }
+            return text || jqXHR.statusText || jqXHR.responseText || textStatus || jqXHR;
         }
 	});
 });

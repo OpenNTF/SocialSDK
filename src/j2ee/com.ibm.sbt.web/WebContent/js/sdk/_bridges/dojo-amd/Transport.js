@@ -19,8 +19,64 @@
  * 
  * Implementation of a transport using the Dojo XHR API.
  */
-define([ 'dojo/_base/declare', 'dojo/_base/xhr', 'dojo/_base/lang', 'dojox/xml/parser', 'sbt/util' ], function(declare, xhr, lang, parser, util) {
+define([ 'dojo/_base/declare', 'dojo/_base/xhr', 'dojo/_base/lang', 'dojox/xml/parser', 'sbt/util', 'sbt/Promise' ], function(declare, xhr, lang, parser, util, Promise) {
     return declare("sbt._bridge.Transport", null, {
+        
+        /**
+         * Provides an asynchronous request using the associated Transport.
+         * 
+         * @method request
+         * @param {String)
+         *            url The URL the request should be made to.
+         * @param {Object}
+         *            [options] Optional A hash of any options for the provider.
+         * @param {String|Object}
+         *            [options.data=null] Data, if any, that should be sent with
+         *            the request.
+         * @param {String|Object}
+         *            [options.query=null] The query string, if any, that should
+         *            be sent with the request.
+         * @param {Object}
+         *            [options.headers=null] The headers, if any, that should
+         *            be sent with the request.
+         * @param {Boolean}
+         *            [options.preventCache=false] If true will send an extra
+         *            query parameter to ensure the the server won’t supply
+         *            cached values.
+         * @param {String}
+         *            [options.method=GET] The HTTP method that should be used
+         *            to send the request.
+         * @param {Integer}
+         *            [options.timeout=null] The number of milliseconds to wait
+         *            for the response. If this time passes the request is
+         *            canceled and the promise rejected.
+         * @param {String}
+         *            [options.handleAs=text] The content handler to process the
+         *            response payload with.
+         * @return {sbt.Promise}
+         */
+        request : function(url, options) {
+            var method = options.method;
+            var args = {
+                url : url,
+                content : options.query || options.data || null,
+                handleAs : options.handleAs || "text"
+            };
+            var hasBody = options.data;
+            
+            var promise = new Promise();
+            args.handle = function(response, ioArgs) {
+                if (response instanceof Error) {
+                    promise.rejected(response);
+                } else {
+                    promise.fullFilled(response);
+                }
+            };
+            
+            this.xhr(method, args, hasBody);
+            return promise;
+        },
+        
         xhr: function(method, args, hasBody) {
             var _args = lang.mixin({}, args);
             

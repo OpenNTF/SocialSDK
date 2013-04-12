@@ -69,15 +69,13 @@ public class AssetBrowser {
 				node.getChildren().add(cn);
 				browseDirectory(s,cn,cb);
 			} else if(s.isFile()) {
-				String ext = s.getExtension();
+				String ext = getExtension(s.getName(), extensions);
 				if(ext!=null) {
-					String fileName = s.getNameWithoutExtension();
+					String fileName = getNameWithoutExtension(s.getName(), ext);
 					if(!snippets.contains(fileName)) {
-						if(isExtension(ext)) {
-							AssetNode sn = factory.createAssetNode(node,fileName);
-							node.getChildren().add(sn);
-							snippets.add(fileName);
-						}
+						AssetNode sn = factory.createAssetNode(node,fileName);
+						node.getChildren().add(sn);
+						snippets.add(fileName);
 					}
 				}
 			}
@@ -105,4 +103,22 @@ public class AssetBrowser {
 		}
 		return false;
 	}	
+    protected String getExtension(String name, String[] exts) {
+        if (exts != null) {
+            for (int i=0; i<exts.length; i++) {
+                if (name.endsWith(exts[i])) {
+                    return exts[i];
+                }
+            }
+        } else {
+            int pos = name.lastIndexOf('.');
+            if(pos>=0) {
+                return name.substring(pos+1);
+            }
+        }
+        return null;
+    }
+    protected String getNameWithoutExtension(String name, String ext) {
+        return name.substring(0, name.length() - (ext.length() + 1));
+    }
 }

@@ -25,8 +25,8 @@
  * @class Endpoint
  * 
  */
-define(['sbt/_bridge/declare','sbt/lang','sbt/ErrorTransport','sbt/pathUtil','sbt/compat'],function(declare,lang,ErrorTransport,pathUtil) {
-
+define(['sbt/_bridge/declare','sbt/lang','sbt/ErrorTransport','sbt/Promise','sbt/pathUtil','sbt/compat'],
+function(declare,lang,ErrorTransport,Promise,pathUtil,compat) {
 
 var Endpoint = declare("sbt.Endpoint", null, {
 	
@@ -125,51 +125,71 @@ var Endpoint = declare("sbt.Endpoint", null, {
 	},
 	
     /**
-     * @method _notifyError
-     * @param error
+     * Provides an asynchronous request using the associated Transport.
+     * 
+     * @method request
+     * @param {String)
+     *            url The URL the request should be made to.
+     * @param {String)
+     *            loginUi The type of UI to use when authenticating,
+     *            valid values are: mainWindow, popup, dialog.
+     * @param {Boolean)
+     *            authAuthenticate if true the Endpoint with authenticate
+     *            when a 401 (or associated authenication code) is received.
+     * @param {Object}
+     *            [options] Optional A hash of any options for the provider.
+     * @param {String|Object}
+     *            [options.data=null] Data, if any, that should be sent with
+     *            the request.
+     * @param {String|Object}
+     *            [options.query=null] The query string, if any, that should
+     *            be sent with the request.
+     * @param {Object}
+     *            [options.headers=null] The headers, if any, that should
+     *            be sent with the request.
+     * @param {Boolean}
+     *            [options.preventCache=false] If true will send an extra
+     *            query parameter to ensure the the server won’t supply
+     *            cached values.
+     * @param {String}
+     *            [options.method=GET] The HTTP method that should be used
+     *            to send the request.
+     * @param {Integer}
+     *            [options.timeout=null] The number of milliseconds to wait
+     *            for the response. If this time passes the request is
+     *            canceled and the promise rejected.
+     * @param {String}
+     *            [options.handleAs=text] The content handler to process the
+     *            response payload with.
+     * @return {sbt.Promise}
      */
-	_notifyError: function(args, error, ioArgs) {
-        if (args.handle) {
-            try {
-                args.handle(error, ioArgs);
-            } catch (ex) {
-                // TODO log an error
-                var msg = ex.message;
+    request : function(url, options) {
+        // rewrite the url if needed
+        var qurl = url;
+        if (qurl.indexOf("http") != 0) {
+            if (this.proxy) {
+                qurl = this.proxy.rewriteUrl(this.baseUrl, url, this.proxyPath);
+            } else {
+                qurl = pathUtil.concat(this.baseUrl, url);
             }
         }
-        if (args.error) {
-            try {
-                args.error(error, ioArgs);
-            } catch (ex) {
-                // TODO log an error
-                var msg = ex.message;
+        
+        var promise = new Promise();
+        var self = this;
+        this.transport.request(qurl, options).then(
+            function(response) {
+                promise.fullFilled(response);
+            }, function(error) {
+                if (self._isAuthRequired(error, options)) {
+                    return self._authenticate(url, options, promise);
+                }
+                promise.rejected(error);
             }
-        }
-	},
-	
-    /**
-     * @method _notifyResponse
-     * @param error
-     */
-    _notifyResponse: function(args, data, ioArgs) {
-        if (args.handle) {
-            try {
-                args.handle(data, ioArgs);
-            } catch (ex) {
-                // TODO log an error
-                var msg = ex.message;
-            }
-        }
-        if (args.load) {
-            try {
-                args.load(data, ioArgs);
-            } catch (ex) {
-                // TODO log an error
-                var msg = ex.message;
-            }
-        }
+        );
+        
+        return promise;
     },
-    
+	
 	/**
 	 * Sends a request using XMLHttpRequest with the given URL and options.
 	 * 
@@ -380,7 +400,101 @@ var Endpoint = declare("sbt.Endpoint", null, {
 				}
 			}
 		}, true);
-	}
+	},
+	
+	// Internal stuff goes here and should not be documented
+	
+    /*
+     * Invoke error function with the error
+     */
+    _notifyError: function(args, error, ioArgs) {
+        if (args.handle) {
+            try {
+                args.handle(error, ioArgs);
+            } catch (ex) {
+                // TODO log an error
+                var msg = ex.message;
+            }
+        }
+        if (args.error) {
+            try {
+                args.error(error, ioArgs);
+            } catch (ex) {
+                // TODO log an error
+                var msg = ex.message;
+            }
+        }
+    },
+    
+    /*
+     * Invoke handle and/or load function with the response
+     */
+    _notifyResponse: function(args, data, ioArgs) {
+        if (args.handle) {
+            try {
+                args.handle(data, ioArgs);
+            } catch (ex) {
+                // TODO log an error
+                var msg = ex.message;
+            }
+        }
+        if (args.load) {
+            try {
+                args.load(data, ioArgs);
+            } catch (ex) {
+                // TODO log an error
+                var msg = ex.message;
+            }
+        }
+    },
+
+    /*
+     * Invoke automatic authentication for the specified request.
+     */
+    _authenticate: function(url, options, promise) {
+        var self = this;
+        var authOptions = {
+            dialogLoginPage: this.loginDialogPage,
+            loginPage: this.loginPage,
+            transport: this.transport, 
+            proxy: this.proxy,
+            proxyPath: this.proxyPath,
+            loginUi: options.loginUi || this.loginUi,
+            callback: function() {
+                self.request(url, options).then(
+                    function(response) {
+                        promise.fullFilled(response);
+                    }, function(error) {
+                        promise.rejected(error);
+                    }
+                );
+            },
+            cancel: function() {
+                self._authRejected = true;
+                var error = new Error();
+                error.message = "Authentication is required and has failed or has not yet been provided.";
+                error.code = 401;
+                promise.rejected(error);
+            }
+        };
+        
+        return this.authenticator.authenticate(authOptions);
+    },
+
+    /*
+     * Return true if automatic authentication is required. 
+     */
+    _isAuthRequired : function(error, options) {
+        var status = error.response.status || null;
+        var isAuthErr = status == 401 || status == this.authenticationErrorCode;
+        
+        var isAutoAuth =  options.autoAuthenticate || this.autoAuthenticate || sbt.Properties["autoAuthenticate"];
+        if (isAutoAuth == undefined){
+            isAutoAuth = true;
+        } 
+        
+        return isAuthErr && isAutoAuth && this.authenticator && !this._authRejected;
+    }
 	
 });
 

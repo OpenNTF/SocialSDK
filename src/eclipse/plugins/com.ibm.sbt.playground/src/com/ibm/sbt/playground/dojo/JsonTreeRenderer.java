@@ -136,6 +136,11 @@ public class JsonTreeRenderer {
 					jw.outStringLiteral(((AssetNode)node).getUnid());
 				jw.endProperty();
 			}
+			if(StringUtil.isNotEmpty(node.getTooltip())) {
+				jw.startProperty("tooltip");
+					jw.outStringLiteral(node.getTooltip());
+				jw.endProperty();
+			}
 			if(StringUtil.isNotEmpty(node.getJspUrl())) {
 				if(node instanceof AssetNode) {
 					jw.startProperty("jspUrl");

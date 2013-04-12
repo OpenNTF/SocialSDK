@@ -29,14 +29,14 @@ function createSnippet() {
 	if(pageGlobal.propertiesEditor) {
 		pageGlobal.propertiesEditor.setValue("");
 	}
+	if(pageGlobal.documentationPanel) {
+		pageGlobal.documentationPanel.innerHTML = "";
+	}
 	if(pageGlobal.javaEditor) {
 		pageGlobal.javaEditor.setValue("");
 	}
 	if(pageGlobal.xpagesEditor) {
 		pageGlobal.xpagesEditor.setValue("");
-	}
-	if(pageGlobal.docPanelId) {
-		dojo.byId(pageGlobal.docPanelId).innerHTML = "";
 	}
 	
 	dojo.byId("preview").src = pageGlobal._previewFrame;	
@@ -57,6 +57,7 @@ function loadSnippet(id) {
 			if(pageGlobal.jsEditor) pageGlobal.jsEditor.setValue(r.js);
 			if(pageGlobal.cssEditor) pageGlobal.cssEditor.setValue(r.css);
 			if(pageGlobal.propertiesEditor) pageGlobal.propertiesEditor.setValue(r.properties);
+			if(pageGlobal.documentationPanel) pageGlobal.documentationPanel.innerHTML = r.documentation;
 			if(r.html.length>5) {
 				selectTab(pageGlobal.tabHtml);
 			} else if(r.js.length>5) {
@@ -65,9 +66,6 @@ function loadSnippet(id) {
 				selectTab(pageGlobal.tabCss);
 			} else {
 				selectTab(pageGlobal.tabHtml);
-			}
-			if(pageGlobal.docPanelId) {
-				XSP.showContent(pageGlobal.docPanelId,'main',{action:'openDocument',documentId:pageGlobal.unid})
 			}
 			updateLabel(r);
 			updateNavSelection();

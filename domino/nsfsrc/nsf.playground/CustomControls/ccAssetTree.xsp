@@ -5,6 +5,7 @@
 		<xp:dojoModule name="dijit.tree.TreeStoreModel"></xp:dojoModule>
 		<xp:dojoModule name="dojo.data.ItemFileReadStore"></xp:dojoModule>
 		<xp:dojoModule name="dijit.Tree"></xp:dojoModule>
+		<xp:dojoModule name="dijit.Tooltip"></xp:dojoModule>
 	</xp:this.resources>
 
 	<xe:djBorderContainer style="height: 100%">
@@ -53,7 +54,18 @@ return true;]]></xp:this.onkeypress>
 					<xp:this.value><![CDATA[dojo.addOnLoad(function() {
 	var assetsData = #{javascript:switch(compositeData.type){case "snippet": return snippetBean.getSnippetsAsJson(); case "api": return apiBean.getSnippetsAsJson();} return "";};	var assetsStore = new dojo.data.ItemFileReadStore({data:{identifier:'id',label:'name',items:assetsData}});
 	var assetsModel = new dijit.tree.TreeStoreModel({		store: assetsStore	});
-	var navTree = new dijit.Tree({model: assetsModel, showRoot: false }, "#{id:assetsTree}");
+	var navTree = new dijit.Tree({
+		model: assetsModel, 
+		showRoot: false,
+		_onNodeMouseEnter: function (node,evt) {
+			if(node.item.tooltip) {
+       			dijit.showTooltip(node.item.tooltip,node.domNode);
+       		}
+    	},
+    	_onNodeMouseLeave: function (node,evt) {
+       		dijit.hideTooltip(node.domNode);
+    	}
+	},"#{id:assetsTree}");
 	dojo.connect(navTree,"onLoad",function() {
 		if(!window.navTreeLoaded) {
 			window.navTreeLoaded = true;

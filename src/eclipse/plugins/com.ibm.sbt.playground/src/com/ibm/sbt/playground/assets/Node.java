@@ -30,6 +30,7 @@ public abstract class Node {
 	private String category;
 	private String name;
 	private String path;
+	private String tooltip;
 	private String unid;
 	private String jspUrl;
 
@@ -107,6 +108,14 @@ public abstract class Node {
 
 	public String getUnid() {
 		return unid;
+	}
+
+	public String getTooltip() {
+		return tooltip;
+	}
+
+	public void setTooltip(String tooltip) {
+		this.tooltip = tooltip;
 	}
 	
 	public String getJspUrl() {

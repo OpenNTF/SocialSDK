@@ -1,54 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	<xp:div id="documentationPanel" style="width:100%; height:100%; overflow-y: auto">
+	</xp:div>
 	<xp:scriptBlock>
-		<xp:this.value><![CDATA[pageGlobal.docPanelId = '#{id:docPanel}';
+		<xp:this.value><![CDATA[pageGlobal.documentationPanel = dojo.byId('#{id:documentationPanel}');
 ]]></xp:this.value>
 	</xp:scriptBlock>
-
-	<xe:dynamicContent id="docPanel" defaultFacet="main">
-		<xp:this.facets>
-			<xp:panel id="docMain" xp:key="main">
-				<xp:this.data>
-					<xp:dominoDocument var="doc"
-						formName="CodeSnippet">
-					</xp:dominoDocument>
-				</xp:this.data>
-				<xp:text escape="true" id="computedField1"
-					value="#{doc.Name}"
-					style="font-size:14pt;font-weight:bold;font-style:italic">
-				</xp:text>
-				<xp:br />
-				<xp:br />
-				<xp:span style="font-weight:bold">
-					Description
-				</xp:span>
-				<xp:br />
-<!-- 				
-				<xp:text id="computedField2">
-					<xp:this.value>#{doc.description}</xp:this.value>
-				</xp:text>
- -->				
-				<xp:br />
-				<xp:br />
-				<xp:span style="font-weight:bold">
-					Related documentation
-				</xp:span>
-				<xp:br />
-				<ul>
-					<xp:repeat id="repeat1" rows="30" var="docValue">
-						<xp:this.value><![CDATA[#{javascript:var d = doc.getItemValue('documentation');
-return d}]]></xp:this.value>
-					<li>
-						<xp:link escape="true" text="#{javascript:docValue}" id="link1"
-							target="_blank">
-							<xp:this.value><![CDATA[#{javascript:return @DbLookup(null,"AllDocumentation",docValue,"Url")
-}]]></xp:this.value>
-						</xp:link>
-					</li>
-					</xp:repeat>
-				</ul>
-			</xp:panel>
-		</xp:this.facets>
-	</xe:dynamicContent>
-
 </xp:view>

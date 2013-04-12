@@ -22,9 +22,11 @@ import java.net.URLEncoder;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import com.ibm.commons.runtime.servlet.BaseHttpServlet;
 import com.ibm.commons.runtime.util.UrlUtil;
 import com.ibm.commons.util.StringUtil;
@@ -210,6 +212,7 @@ public class SnippetServlet extends BaseHttpServlet {
 		toJson(sb, "unid", snippet.getUnid());
 		toJson(sb, "js", snippet.getJs());
 		toJson(sb, "html", snippet.getHtml());
+		toJson(sb, "docHtml", snippet.getDocHtml());
 		toJson(sb, "css", snippet.getCss());
 		toJson(sb, "description", snippet.getDescription());
 		toJson(sb, "tags", snippet.getTags());
@@ -292,6 +295,7 @@ public class SnippetServlet extends BaseHttpServlet {
 		addCDataElement(sb, "unid", snippet.getUnid());
 		addCDataElement(sb, "js", snippet.getJs());
 		addCDataElement(sb, "html", snippet.getHtml());
+		addCDataElement(sb, "docHtml", snippet.getDocHtml());
 		addCDataElement(sb, "css", snippet.getCss());
 		addCDataElement(sb, "theme", snippet.getTheme());
 		addCDataElement(sb, "description", snippet.getDescription());

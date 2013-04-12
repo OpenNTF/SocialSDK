@@ -26,7 +26,8 @@ import com.ibm.sbt.playground.assets.Asset;
  */
 public class JSSnippet extends Asset {
 
-	private String html;
+    private String html;
+    private String docHtml;
 	private String js;
 	private String css;
 	
@@ -51,6 +52,13 @@ public class JSSnippet extends Asset {
 	public void setHtml(String html) {
 		this.html = html;
 	}
+
+    public String getDocHtml() {
+        return docHtml;
+    }
+    public void setDocHtml(String docHtml) {
+        this.docHtml = docHtml;
+    }
 
 	public String getJs() {
 		return js;

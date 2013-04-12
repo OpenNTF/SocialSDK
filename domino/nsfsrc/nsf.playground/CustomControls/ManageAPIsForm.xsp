@@ -42,8 +42,7 @@
 			<xp:inputText id="inputText1" required="true"
 				disableClientSideValidation="true" value="#{document1.Category}"
 				size="60">
-				<xp:typeAhead mode="partial" minChars="1"
-					ignoreCase="true">
+				<xp:typeAhead mode="partial" minChars="1" ignoreCase="true">
 					<xp:this.valueList><![CDATA[#{javascript:getComponent("valuePicker2").getTypeAheadValue(this)}]]></xp:this.valueList>
 				</xp:typeAhead>
 			</xp:inputText>
@@ -76,6 +75,23 @@
 				style="width:100%;height:100%;font-family:Courier New;font-size:10pt"
 				rows="14">
 			</xp:inputTextarea>
+		</xe:formRow>
+		<xe:formRow id="formRow5" labelPosition="above">
+			<xe:djTabContainer id="djTabContainer2"
+				style="width: 900px; height: 250px; border: none">
+				<xe:djTabPane id="djTabPane1" title="Definition">
+					<xp:inputTextarea id="inputTextarea3" value="#{document1.Json}"
+						style="width:100%;height:100%;font-family:Courier New;font-size:10pt"
+						rows="14">
+					</xp:inputTextarea>
+				</xe:djTabPane>
+				<xe:djTabPane id="djTabPane4" title="Properties">
+					<xp:inputTextarea id="inputTextarea2" value="#{document1.Properties}"
+						style="width:100%;height:100%;font-family:Courier New;font-size:10pt"
+						rows="14">
+					</xp:inputTextarea>
+				</xe:djTabPane>
+			</xe:djTabContainer>
 		</xe:formRow>
 	</xe:formTable>
 	<xe:dumpObject loaded="false" id="dumpObject1" title="document"

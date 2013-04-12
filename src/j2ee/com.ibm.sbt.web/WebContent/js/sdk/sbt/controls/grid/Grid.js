@@ -168,9 +168,11 @@ define([ "sbt/_bridge/declare", "sbt/lang", "sbt/itemFactory", "sbt/widget/grid/
             
             if (this.store) {
                 var options = { 
-                		start : 0, count : this.pageSize,
-                		sort: [{ attribute: this._activeSortAnchor.sortParameter }]
+                		start : 0, count : this.pageSize
                 };
+                if (this._activeSortAnchor) {
+                    options.sort = [{ attribute: this._activeSortAnchor.sortParameter }];
+                }
                 
             if (this.data) {
                 options.start = Math.max(0, this.data.start - options.count);
@@ -180,7 +182,10 @@ define([ "sbt/_bridge/declare", "sbt/lang", "sbt/itemFactory", "sbt/widget/grid/
            	 options.tag = this.filterTag;
             }
             
-            options.sort[0].descending = this._activeSortIsDesc;
+            if (this._activeSortIsDesc && options.sort) {
+                options.sort[0].descending = this._activeSortIsDesc;
+            }
+            
             this._doQuery(this.store, options);
             }
         },
@@ -197,9 +202,11 @@ define([ "sbt/_bridge/declare", "sbt/lang", "sbt/itemFactory", "sbt/widget/grid/
             
             if (this.store) {
             	var options = { 
-                    	start : 0, count : this.pageSize ,
-                    	sort: [{ attribute: this._activeSortAnchor.sortParameter }]
+                    	start : 0, count : this.pageSize
                 };
+            	if (this._activeSortAnchor) {
+            	    options.sort = [{ attribute: this._activeSortAnchor.sortParameter }];
+            	}
              if (this.data) {
                  options.start = this.data.start + options.count;
              }
@@ -208,7 +215,10 @@ define([ "sbt/_bridge/declare", "sbt/lang", "sbt/itemFactory", "sbt/widget/grid/
             	 options.tag = this.filterTag;
              }
              
-             options.sort[0].descending = this._activeSortIsDesc;
+             if (this._activeSortIsDesc && options.sort) {
+                 options.sort[0].descending = this._activeSortIsDesc;
+             }
+             
              this._doQuery(this.store, options);
             }
         },

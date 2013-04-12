@@ -31,7 +31,7 @@ import com.ibm.sbt.services.endpoints.EndpointFactory;
  * @author mwallace
  * @date 10 Dec 2012
  */
-public class SampleApp {
+public class GetProfileXml {
 
 	/**
 	 * @param args

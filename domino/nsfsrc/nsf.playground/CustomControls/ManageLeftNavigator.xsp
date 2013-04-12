@@ -34,11 +34,6 @@
 			<xe:pageTreeNode page="ManageEnvironments" label="Runtime Environments"
 				selection="/Manage/Environments">
 			</xe:pageTreeNode>
-			<!--
-				<xe:separatorTreeNode></xe:separatorTreeNode> <xe:pageTreeNode
-				page="ManageDocumentation" label="Documentation Entries"
-				selection="/Manage/Documentation"></xe:pageTreeNode>
-			-->
 		</xe:this.treeNodes>
 	</xe:navigator>
 </xp:view>

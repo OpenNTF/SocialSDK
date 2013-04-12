@@ -13,6 +13,10 @@ public enum ASUser {
 		this.userType = userType;
 	}
 	
+	/**
+	 * Wrapper method to return user type
+	 * <p>
+	 */
 	public String getUserType(){return userType;}
 
 }

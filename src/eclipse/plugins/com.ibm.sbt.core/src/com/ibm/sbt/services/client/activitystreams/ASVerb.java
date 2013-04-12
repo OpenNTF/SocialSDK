@@ -94,6 +94,10 @@ public enum ASVerb {
 		this.verbType = verbType;
 	}
 	
+	/**
+	 * Wrapper method to return verb type
+	 * <p>
+	 */
 	public String getVerbType(){return verbType;}
 
 }

@@ -1,6 +1,8 @@
-require(["sbt/dom", "sbt/controls/grid/connections/CommunityGrid", 
-         "sbt/text!./samples/js/Controls/Grid/Connections/Communities/templates/CustomCommunityRow.html"], 
+require(["sbt/dom", "sbt/controls/grid/connections/CommunityGrid"], 
     function(dom, CommunityGrid, CustomCommunityRow) {
+        var domNode = dom.byId("communityRow");
+        var CustomCommunityRow = domNode.text || domNode.textContent;
+
         var grid = new CommunityGrid();
         grid.renderer.template = CustomCommunityRow;
                  

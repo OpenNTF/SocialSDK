@@ -5,7 +5,7 @@ package com.ibm.sbt.services.client.activitystreams;
  */
 public enum ASGroup {
 	
-	//// Possible values : @all,@following,@friends,@self
+	//// Possible values : @all,@following,@friends,@self,@involved
 	
 	ALL("@all"),
 	FOLLOWING("@following"),
@@ -20,10 +20,15 @@ public enum ASGroup {
 
 	
 	String groupType;
+	
 	private ASGroup(String groupType) {
 		this.groupType = groupType;
 	}
 	
+	/**
+	 * Wrapper method to return group type
+	 * <p>
+	 */
 	public String getGroupType(){return groupType;}
 
 }

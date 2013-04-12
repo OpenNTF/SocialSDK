@@ -18,6 +18,11 @@ package com.ibm.sbt.services.client.activitystreams.model;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.ibm.sbt.services.client.SBTServiceException;
+import com.ibm.sbt.services.client.activitystreams.ASApplication;
+import com.ibm.sbt.services.client.activitystreams.ASGroup;
+import com.ibm.sbt.services.client.activitystreams.ASUser;
 import com.ibm.sbt.util.DataNavigator;
 
 /**
@@ -64,137 +69,303 @@ public class ActivityStreamEntry {
 	private String						eventTitle;
 	private String						tags;
 	private String						itemUrl;
+	
 	// Microblogs
 	private String content;
 	private String repliesUrl;
 	private String likesUrl;
 	
+	/**
+	 * Wrapper method to return content from ActivityStreamEntry object
+	 * <p>
+	 * @return String
+	 */
 	public String getContent() {
 		return content;
 	}
 
+	/**
+	 * Wrapper method to set Content
+	 * <p>
+	 * @param content
+	 */
 	public void setContent(String content) {
 		this.content = content;
 	}
 	
+	/**
+	 * Wrapper method to return url for replies from ActivityStreamEntry object
+	 * <p>
+	 * @return String
+	 */
 	public String getRepliesUrl() {
 		return repliesUrl;
 	}
 
+	/**
+	 * Wrapper method to set replies Url
+	 * <p>
+	 * @param repliesUrl
+	 */
 	public void setRepliesUrl(String repliesUrl) {
 		this.repliesUrl = repliesUrl;
 	}
 
+	/**
+	 * Wrapper method to return url for likes from ActivityStreamEntry object
+	 * <p>
+	 * @return String
+	 */
 	public String getLikesUrl() {
 		return likesUrl;
 	}
 
+	/**
+	 * Wrapper method to set likes Url
+	 * <p>
+	 * @param likesUrl
+	 */
 	public void setLikesUrl(String likesUrl) {
 		this.likesUrl = likesUrl;
 	}
 
 	private List<ActivityStreamEntry>	replies;
 
+	/**
+	 * Wrapper method to return Replies from ActivityStreamEntry object
+	 * <p>
+	 * @return List<ActivityStreamEntry>
+	 */
 	public List<ActivityStreamEntry> getReplies() {
 		return replies;
 	}
 
+	/**
+	 * Wrapper method to set replies
+	 * <p>
+	 * @param replies
+	 * 		List of replies
+	 */
 	public void setReplies(List<ActivityStreamEntry> replies) {
 		this.replies = replies;
 	}
 
+	/**
+	 * Wrapper method to return Title from ActivityStreamEntry object
+	 * <p>
+	 * @return String
+	 */
 	public String getTitle() {
 		return title;
 	}
 
+	/**
+	 * Wrapper method to set title
+	 * <p>
+	 * @param title
+	 */
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
+	/**
+	 * Wrapper method to return Short Title from ActivityStreamEntry object
+	 * <p>
+	 * @return String
+	 */
 	public String getShortTitle() {
 		return shortTitle;
 	}
 
+	/**
+	 * Wrapper method to set short title
+	 * <p>
+	 * @param short title
+	 */
 	public void setShortTitle(String shortTitle) {
 		this.shortTitle = shortTitle;
 	}
 
+	/**
+	 * Wrapper method to return Plain Title from ActivityStreamEntry object
+	 * <p>
+	 * @return String
+	 */
 	public String getPlainTitle() {
 		return plainTitle;
 	}
 
+	/**
+	 * Wrapper method to set plain title
+	 * <p>
+	 * @param plain title
+	 */
 	public void setPlainTitle(String plainTitle) {
 		this.plainTitle = plainTitle;
 	}
 
+	/**
+	 * Wrapper method to return Actor object from ActivityStreamEntry object
+	 * <p>
+	 * @return Actor
+	 */
 	public Actor getActor() {
 		return actor;
 	}
 
+	/**
+	 * Wrapper method to set actor
+	 * <p>
+	 * @param Actor
+	 */
 	public void setActor(Actor actor) {
 		this.actor = actor;
 	}
 
+	/**
+	 * Wrapper method to return Object Type from ActivityStreamEntry object
+	 * <p>
+	 * @return String
+	 */
 	public String getObjectType() {
 		return objectType;
 	}
 
+	/**
+	 * Wrapper method to set object type
+	 * <p>
+	 * @param objectType
+	 */
 	public void setObjectType(String objectType) {
 		this.objectType = objectType;
 	}
 
+	/**
+	 * Wrapper method to return Published from ActivityStreamEntry object
+	 * <p>
+	 * @return String
+	 */
 	public String getPublished() {
 		return published;
 	}
 
+	/**
+	 * Wrapper method to set published
+	 * <p>
+	 * @param published
+	 * 		published date in String format
+	 */
 	public void setPublished(String published) {
 		this.published = published;
 	}
 
+	/**
+	 * Wrapper method to return URL from ActivityStreamEntry object
+	 * <p>
+	 * @return String
+	 */
 	public String getUrl() {
 		return url;
 	}
 
+	/**
+	 * Wrapper method to set url
+	 * <p>
+	 * @param url
+	 */
 	public void setUrl(String url) {
 		this.url = url;
 	}
 
+	/**
+	 * Wrapper method to return Updated from ActivityStreamEntry object
+	 * <p>
+	 * @return String
+	 */
 	public String getUpdated() {
 		return updated;
 	}
 
+	/**
+	 * Wrapper method to set updated
+	 * <p>
+	 * @param updated
+	 * 		updated date in String format
+	 */
 	public void setUpdated(String updated) {
 		this.updated = updated;
 	}
 
+	/**
+	 * Wrapper method to return ID from ActivityStreamEntry object
+	 * <p>
+	 * @return String
+	 */
 	public String getId() {
 		return id;
 	}
 
+	/**
+	 * Wrapper method to set id
+	 * <p>
+	 * @param id
+	 */
 	public void setId(String id) {
 		this.id = id;
 	}
 
+	/**
+	 * Wrapper method to return Community from ActivityStreamEntry object
+	 * <p>
+	 * @return Community
+	 */
 	public Community getCommunity() {
 		return community;
 	}
 
+	/**
+	 * Wrapper method to set community
+	 * <p>
+	 * @param Community
+	 */
 	public void setCommunity(Community community) {
 		this.community = community;
 	}
 
+	/**
+	 * Wrapper method to return Attachment from ActivityStreamEntry object
+	 * <p>
+	 * @return Attachment
+	 */
 	public Attachment getAttachment() {
 		return attachment;
 	}
 
+	/**
+	 * Wrapper method to set Attachment
+	 * <p>
+	 * @param Attachment
+	 */
 	public void setAttachment(Attachment attachment) {
 		this.attachment = attachment;
 	}
 
+	/**
+	 * Wrapper method to returns true/false if update contains attachment from ActivityStreamEntry object
+	 * <p>
+	 * @return Boolean
+	 */
 	public Boolean isContainAttachment() {
 		return containAttachment;
 	}
 
+	/**
+	 * Wrapper method to set contain Attachment
+	 * <p>
+	 * @param containAttachment
+	 * 		true if update contains an attachment
+	 * 		false if update does not contain an attachment
+	 */
 	public void setContainAttachment(Boolean containAttachment) {
 		if (null == containAttachment) {
 			return;
@@ -202,10 +373,20 @@ public class ActivityStreamEntry {
 		this.containAttachment = containAttachment;
 	}
 
+	/**
+	 * Wrapper method to return isBroadcast from ActivityStreamEntry object
+	 * <p>
+	 * @return Boolean
+	 */
 	public Boolean isBroadcast() {
 		return broadcast;
 	}
 
+	/**
+	 * Wrapper method to set Broadcast
+	 * <p>
+	 * @param setBroadcast
+	 */
 	public void setBroadcast(Boolean broadcast) {
 		if (null == broadcast) {
 			return;
@@ -213,10 +394,20 @@ public class ActivityStreamEntry {
 		this.broadcast = broadcast;
 	}
 
+	/**
+	 * Wrapper method to return isPublic from ActivityStreamEntry object
+	 * <p>
+	 * @return Boolean
+	 */
 	public Boolean isPublic() {
 		return isPublic;
 	}
 
+	/**
+	 * Wrapper method to set visibility of update
+	 * <p>
+	 * @param isPublic
+	 */
 	public void setPublic(Boolean isPublic) {
 		if (null == isPublic) {
 			return;
@@ -224,10 +415,20 @@ public class ActivityStreamEntry {
 		this.isPublic = isPublic;
 	}
 
+	/**
+	 * Wrapper method to return isSaved from ActivityStreamEntry object
+	 * <p>
+	 * @return Boolean
+	 */
 	public Boolean isSaved() {
 		return Saved;
 	}
 
+	/**
+	 * Wrapper method to set saved
+	 * <p>
+	 * @param Saved
+	 */
 	public void setSaved(Boolean saved) {
 		if (null == saved) {
 			return;
@@ -235,38 +436,84 @@ public class ActivityStreamEntry {
 		Saved = saved;
 	}
 
+	/**
+	 * Wrapper method to return Atom URL from ActivityStreamEntry object
+	 * <p>
+	 * @return String
+	 */
 	public String getAtomUrl() {
 		return atomUrl;
 	}
 
+	/**
+	 * Wrapper method to set atom url
+	 * <p>
+	 * @param atomUrl
+	 */
 	public void setAtomUrl(String atomUrl) {
 		this.atomUrl = atomUrl;
 	}
 
+	/**
+	 * Wrapper method to return connectionsContentUrl from ActivityStreamEntry object
+	 * <p>
+	 * @return String
+	 */
 	public String getConnectionsContentUrl() {
 		return connectionsContentUrl;
 	}
 
+	/**
+	 * Wrapper method to set connectionsContentUrl
+	 * <p>
+	 * @param connectionsContentUrl
+	 */
 	public void setConnectionsContentUrl(String connectionsContentUrl) {
 		this.connectionsContentUrl = connectionsContentUrl;
 	}
 
+	
+	/**
+	 * Wrapper method to return eventType from ActivityStreamEntry object
+	 * <p>
+	 * @return String
+	 */
 	public String getEventType() {
 		return eventType;
 	}
 
+	/**
+	 * Wrapper method to set eventType
+	 * <p>
+	 * @param eventType
+	 */
 	public void setEventType(String eventType) {
 		this.eventType = eventType;
 	}
 
+	/**
+	 * Wrapper method to return eventId from ActivityStreamEntry object
+	 * <p>
+	 * @return String
+	 */
 	public String getEventId() {
 		return eventId;
 	}
 
+	/**
+	 * Wrapper method to set eventId
+	 * <p>
+	 * @param eventId
+	 */
 	public void setEventId(String eventId) {
 		this.eventId = eventId;
 	}
 
+	/**
+	 * Wrapper method to return number of Likes from ActivityStreamEntry object
+	 * <p>
+	 * @return String
+	 */
 	public int getNumLikes() {
 		return numLikes;
 	}
@@ -280,58 +527,129 @@ public class ActivityStreamEntry {
 
 	}
 
+	/**
+	 * Wrapper method to return number of Comments from ActivityStreamEntry object
+	 * <p>
+	 * @return String
+	 */
 	public int getNumComments() {
 		return numComments;
 	}
 
+	
+	/**
+	 * Wrapper method to set numOfComments
+	 * <p>
+	 * @param numOfComments
+	 */
 	public void setNumComments(int numComments) {
 		this.numComments = numComments;
 	}
 
+	/**
+	 * Wrapper method to return RollUpUrl from ActivityStreamEntry object
+	 * <p>
+	 * @return String
+	 */
 	public String getRollUpUrl() {
 		return rollUpUrl;
 	}
 
+	/**
+	 * Wrapper method to set RollUpUrl
+	 * <p>
+	 * @param RollUpUrl
+	 */
 	public void setRollUpUrl(String rollUpUrl) {
 		this.rollUpUrl = rollUpUrl;
 	}
 
+	/**
+	 * Wrapper method to return Event Title from ActivityStreamEntry object
+	 * <p>
+	 * @return String
+	 */
 	public String getEventTitle() {
 		return eventTitle;
 	}
 
+	/**
+	 * Wrapper method to set  Event Title 
+	 * <p>
+	 * @param  EventTitle 
+	 */
 	public void setEventTitle(String eventTitle) {
 		this.eventTitle = eventTitle;
 	}
 
+	/**
+	 * Wrapper method to return RollUpId from ActivityStreamEntry object
+	 * <p>
+	 * @return String
+	 */
 	public String getRollUpId() {
 		return rollUpId;
 	}
 
+	/**
+	 * Wrapper method to set  RollUpId
+	 * <p>
+	 * @param  RollUpId 
+	 */
 	public void setRollUpId(String rollUpId) {
 		this.rollUpId = rollUpId;
 	}
 
+	/**
+	 * Wrapper method to return ContainerId from ActivityStreamEntry object
+	 * <p>
+	 * @return String
+	 */
 	public String getContainerId() {
 		return containerId;
 	}
 
+	/**
+	 * Wrapper method to set  ContainerId
+	 * <p>
+	 * @param  ContainerId 
+	 */
 	public void setContainerId(String containerId) {
 		this.containerId = containerId;
 	}
 
+	/**
+	 * Wrapper method to return containerName from ActivityStreamEntry object
+	 * <p>
+	 * @return String
+	 */
 	public String getContainerName() {
 		return containerName;
 	}
 
+	/**
+	 * Wrapper method to set  ContainerName
+	 * <p>
+	 * @param  ContainerName 
+	 */
 	public void setContainerName(String containerName) {
 		this.containerName = containerName;
 	}
 
+	/**
+	 * Wrapper method to return isFollowedResource from ActivityStreamEntry object
+	 * <p>
+	 * @return Boolean
+	 */
 	public Boolean isFollowedResource() {
 		return followedResource;
 	}
 
+	/**
+	 * Wrapper method to set  followedResource
+	 * <p>
+	 * @param  followedResource 
+	 */
 	public void setFollowedResource(Boolean followedResource) {
 		if (null == followedResource) {
 			return;
@@ -339,52 +657,112 @@ public class ActivityStreamEntry {
 		this.followedResource = followedResource;
 	}
 
+	
+	/**
+	 * Wrapper method to return getVerb from ActivityStreamEntry object
+	 * <p>
+	 * @return String
+	 */
 	public String getVerb() {
 		return verb;
 	}
 
+	/**
+	 * Wrapper method to set  verb
+	 * <p>
+	 * @param  verb 
+	 */
 	public void setVerb(String verb) {
 		this.verb = verb;
 	}
 
 	private String	summary;
 
+	/**
+	 * Wrapper method to return summary from ActivityStreamEntry object
+	 * <p>
+	 * @return String
+	 */
 	public String getSummary() {
 		return summary;
 	}
 
+	/**
+	 * Wrapper method to set  summary
+	 * <p>
+	 * @param  summary 
+	 */
 	public void setSummary(String summary) {
 		this.summary = summary;
 	}
 
+	/**
+	 * Wrapper method to return iconUrl from ActivityStreamEntry object
+	 * <p>
+	 * @return String
+	 */
 	public String getIconUrl() {
 		return iconUrl;
 	}
 
+	/**
+	 * Wrapper method to set iconurl
+	 * <p>
+	 * @param  iconurl 
+	 */
 	public void setIconUrl(String iconUrl) {
 		this.iconUrl = iconUrl;
 	}
 
+	/**
+	 * Wrapper method to return contextId from ActivityStreamEntry object
+	 * <p>
+	 * @return String
+	 */
 	public String getContextId() {
 		return contextId;
 	}
-
+	/**
+	 * Wrapper method to set contextId
+	 * <p>
+	 * @param  contextId 
+	 */
 	public void setContextId(String contextId) {
 		this.contextId = contextId;
 	}
 
+	/**
+	 * Wrapper method to return tags from ActivityStreamEntry object
+	 * <p>
+	 * @return String
+	 */
 	public String getTags() {
 		return tags;
 	}
 
+	/**
+	 * Wrapper method to set tags
+	 * <p>
+	 * @param  tags 
+	 */
 	public void setTags(String tags) {
 		this.tags = tags;
 	}
 
+	/**
+	 * Wrapper method to return itemUrl from ActivityStreamEntry object
+	 * <p>
+	 * @return String
+	 */
 	public String getItemUrl() {
 		return itemUrl;
 	}
 
+	/**
+	 * Wrapper method to set item url
+	 * <p>
+	 * @param  itemUrl 
+	 */
 	public void setItemUrl(String itemUrl) {
 		this.itemUrl = itemUrl;
 	}
@@ -553,6 +931,9 @@ public class ActivityStreamEntry {
 		community.setCommunityName(communityName);
 		return community;
 	}
+	
+	
+	
 	/*
 	 * Parsing for Microblogs 
 	 */
@@ -601,4 +982,5 @@ public class ActivityStreamEntry {
 
 		return entryObj;
 	}
+
 }

@@ -74,7 +74,13 @@ public class ActivityStreamService extends BaseService {
 	 * Used in constructing REST APIs
 	 */
 	public static final String	restUrl		= "/rest";
+	/**
+	 * Used in constructing REST APIs for Activity Stream
+	 */
 	public static final String  activityStreamsUrl = "/activitystreams";
+	/**
+	 * Used in constructing REST APIs for Microblogging
+	 */
 	public static final String  boardUrl = "/ublog";
 
 	/**
@@ -620,19 +626,15 @@ public class ActivityStreamService extends BaseService {
 
 	}
 	
+	// Microblogging apis
 	
-	/*
-	 * 
-	 * Microblogging api's
-	 * 
-	 */
-	
+
 	/**
 	 * Wrapper method to fetch updates from logged in user board
 	 * <p>
 	 * Assumes {@link ASUser} as ME , {@link ASGroup} as ALL and {@link ASApplication} as NOAPP
-	 * 
-	 
+	 * @param params
+	 * 		Additional parameters used for constructing URL's
 	 * @return List<ActivityStreamEntry>
 	 * @throws SBTServiceException
 	 *             ,IllegalArgumentException
@@ -644,6 +646,15 @@ public class ActivityStreamService extends BaseService {
 		return getUpdatesFromMyBoard(null);
 	}
 	
+	
+	/**
+	 * Wrapper method to fetch updates from logged in user board
+	 * <p>
+	 * Assumes {@link ASUser} as ME , {@link ASGroup} as ALL and {@link ASApplication} as NOAPP
+	 * @return List<ActivityStreamEntry>
+	 * @throws SBTServiceException
+	 *             ,IllegalArgumentException
+	 */
 	public List<ActivityStreamEntry> getUpdatesFromMyBoard(Map<String, String> params)throws SBTServiceException{
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getUpdatesFromMyBoard");
@@ -899,9 +910,13 @@ public class ActivityStreamService extends BaseService {
 		return getActivityStreamEntries(ASUser.PUBLIC.getUserType(), ASGroup.ALL.getGroupType(),
 				ASApplication.ALL.getApplicationType(), params);
 	}
-
-	/*
-	 * Returns the updates from Activity Stream. Constructs the api using the inputs provided in parameters, makes the network call and returns the ActivityStreamEntry list.
+	
+	
+	
+	/**
+	 * Wrapper method to fetch updates from Activity Stream
+	 * Constructs the api using the inputs provided in parameters, makes the network call and returns the ActivityStreamEntry list.
+	 * <p>
 	 * @param User see {@link ASUser} for possible values
 	 * @param Group see {@link ASGroup} for possible values
 	 * @param User see {@link ASApplication} for possible values
@@ -932,9 +947,9 @@ public class ActivityStreamService extends BaseService {
 	}
 	
 	
-	
-	/*
-	 * Returns the updates from User Boards. Constructs the api using the inputs provided in parameters, makes the network call and returns the ActivityStreamEntry list.
+	/**
+	 * Returns the updates from User Boards. 
+	 * <p>
 	 * @param User see {@link ASUser} for possible values
 	 * @param Group see {@link ASGroup} for possible values
 	 * @param User see {@link ASApplication} for possible values

@@ -39,13 +39,13 @@ define(
 				_author : null,
 				_contributor : null,
 				data : null,
-				fields : {},
 
 				constructor : function(svc, id) {					
 					var args = { entityName : "community", Constants: communityConstants, con: con, dataHandler: communityHandler};
 					this.inherited(arguments, [svc, id, args]);
 					this._service = svc;
 					this._id = id;
+					this.fields = {};
 				},
 				/**
 				 * Loads the community object with the atom entry associated with the community. By default, a network call is made to load the atom entry

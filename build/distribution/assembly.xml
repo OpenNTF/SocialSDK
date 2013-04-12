@@ -203,6 +203,34 @@
       </includes>
     </fileSet>
     <fileSet>
+      <directory>../../domino/eclipse/plugins/com.ibm.xsp.sbtsdk</directory>
+      <outputDirectory>sbtsdk/source/com.ibm.xsp.sbtsdk</outputDirectory>
+    <excludes>
+    <exclude>**/bin/</exclude>
+    <exclude>**/pom.xml</exclude>
+    <exclude>**/.jazzignore</exclude>
+    <exclude>**/.apt_generated</exclude>
+    <exclude>**/.factorypath</exclude>
+    </excludes>
+      <includes>
+        <include>**/*.*</include>
+      </includes>
+    </fileSet>
+    <fileSet>
+      <directory>../../domino/eclipse/features</directory>
+      <outputDirectory>sbtsdk/source</outputDirectory>
+    <excludes>
+    <exclude>**/bin/</exclude>
+    <exclude>**/pom.xml</exclude>
+    <exclude>**/.jazzignore</exclude>
+    <exclude>**/.apt_generated</exclude>
+    <exclude>**/.factorypath</exclude>
+    </excludes>
+      <includes>
+        <include>**/*.*</include>
+      </includes>
+    </fileSet>
+    <fileSet>
       <directory>../../src/j2ee</directory>
       <outputDirectory>sbtsdk/source</outputDirectory>
 	  <excludes>

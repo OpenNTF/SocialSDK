@@ -56,25 +56,76 @@ define([ 'dojo/_base/declare', 'dojo/_base/xhr', 'dojo/_base/lang', 'dojox/xml/p
          * @return {sbt.Promise}
          */
         request : function(url, options) {
-            var method = options.method;
+            var method = options.method.toUpperCase();
+            var query = this.createQuery(options.query);
+            if(url && query){
+                url += (~url.indexOf('?') ? '&' : '?') + query;
+            } 
             var args = {
                 url : url,
-                content : options.query || options.data || null,
                 handleAs : options.handleAs || "text"
             };
-            var hasBody = options.data;
+            if (options.query) {
+                args.content = options.query;
+            }
+            if (options.headers) {
+                args.headers = options.headers;
+            }
+            var hasBody = false;
+            if (method == "PUT") {
+                args.putData = options.data || null;
+                hasBody = true;
+            } else if (method == "POST") {
+                args.postData = options.data || null;
+                hasBody = true;
+            }
             
             var promise = new Promise();
-            args.handle = function(response, ioArgs) {
+            promise.response = new Promise();
+            var self = this;
+            args.handle = function(response, ioargs) {
                 if (response instanceof Error) {
-                    promise.rejected(response);
+                    var error = response;
+                    error.response = self.createResponse(url, options, response, ioargs);
+                    promise.rejected(error);
+                    promise.response.rejected(error);
                 } else {
                     promise.fullFilled(response);
+                    promise.response.fullFilled(self.createResponse(url, options, response, ioargs));
                 }
             };
             
             this.xhr(method, args, hasBody);
             return promise;
+        },
+        
+        createResponse: function(url, options, response, ioargs) {
+            var xhr = ioargs._ioargs.xhr;
+            var handleAs = options.handleAs || "text";
+            return { 
+                url : url,
+                options : options,
+                data : response,
+                text : (handleAs == "text") ? response : null,
+                status : xhr.status,
+                getHeader : function(headerName) {
+                    return xhr.getResponseHeader(headerName);
+                },
+                xhr : xhr,
+                _ioargs : ioargs._ioargs
+            };
+        },
+        
+        createQuery: function(queryMap) {
+            if (!queryMap) {
+                return null;
+            }
+            var pairs = [];
+            for(var name in queryMap){
+                var value = queryMap[name];
+                pairs.push(encodeURIComponent(name) + "=" + encodeURIComponent(value));
+            }
+            return pairs.join("&");
         },
         
         xhr: function(method, args, hasBody) {

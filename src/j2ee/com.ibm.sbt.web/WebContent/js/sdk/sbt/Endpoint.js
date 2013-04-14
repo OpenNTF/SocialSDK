@@ -175,15 +175,19 @@ var Endpoint = declare("sbt.Endpoint", null, {
         }
         
         var promise = new Promise();
+        promise.response = new Promise();
+        
         var self = this;
-        this.transport.request(qurl, options).then(
+        this.transport.request(qurl, options).response.then(
             function(response) {
-                promise.fullFilled(response);
+                promise.fullFilled(response.data);
+                promise.response.fullFilled(response);
             }, function(error) {
                 if (self._isAuthRequired(error, options)) {
                     return self._authenticate(url, options, promise);
                 }
                 promise.rejected(error);
+                promise.response.rejected(response);
             }
         );
         

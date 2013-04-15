@@ -55,14 +55,17 @@ public class ProfileService extends BaseService {
 
 	static final String						sourceClass		= ProfileService.class.getName();
 	static final Logger						logger			= Logger.getLogger(sourceClass);
-	public static final String				ProfileBaseUrl	= "profiles";
-	public static final String				seperator		= "/";
+	private static final String				seperator		= "/";
 	private LRUCache lruCache;
+	
+	/**
+	 * Used in constructing REST APIs
+	 */
+	public static final String				ProfileBaseUrl	= "profiles";
 
 	/**
 	 * Constructor Creates ProfileService Object with default endpoint and default cache size
 	 */
-	
 	public ProfileService() {
 		this(DEFAULT_ENDPOINT_NAME, DEFAULT_CACHE_SIZE);
 		initializeCache(DEFAULT_CACHE_SIZE);
@@ -721,7 +724,7 @@ public class ProfileService extends BaseService {
 
 	}
 
-	/**
+	/*
 	 * Method responsible for loading the profile.
 	 * 
 	 * @param profile
@@ -821,7 +824,7 @@ public class ProfileService extends BaseService {
 		return null;
 	}
 
-	/**
+	/*
 	 * Method responsible for generating appropriate REST URLs
 	 * 
 	 * @param ProfileEntity ( Ref Class : ProfileEntity )
@@ -829,11 +832,11 @@ public class ProfileService extends BaseService {
 	 *
 	 * @return String
 	 */
-	public String resolveProfileUrl(String profileEntity, String profileType) {
+	protected String resolveProfileUrl(String profileEntity, String profileType) {
 		return resolveProfileUrl(profileEntity, profileType, null);
 	}
 	
-	/**
+	/*
 	 * Method responsible for generating appropriate REST URLs
 	 * 
 	 * @param ProfileEntity ( Ref Class : ProfileEntity )
@@ -841,7 +844,7 @@ public class ProfileService extends BaseService {
 	 * @param params : ( Ref Class : ProfileParams )
 	 * @return String
 	 */
-	public String resolveProfileUrl(String profileEntity, String profileType, Map<String, String> params) {
+	protected String resolveProfileUrl(String profileEntity, String profileType, Map<String, String> params) {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "resolveCommunityUrl", profileEntity + profileType);
 		}
@@ -857,7 +860,6 @@ public class ProfileService extends BaseService {
 																	// Profile
 																	// Type
 		}
-
 		if (AuthUtil.INSTANCE.getAuthValue(endpoint).equalsIgnoreCase("oauth")) {
 			if (profileEntity.equalsIgnoreCase(ProfileEntity.NONADMIN.getProfileEntityType())) {
 				proBaseUrl.append(seperator).append("oauth");
@@ -897,7 +899,7 @@ public class ProfileService extends BaseService {
 	}
 	
 	/**
-	 * executeGet
+	 * Method to execute GET Request 
 	 * 
 	 * @param uri
 	 *           api to be executed.
@@ -927,7 +929,7 @@ public class ProfileService extends BaseService {
 	}
 
 	/**
-	 * executeDelete
+	 * Method to execute DELETE Request
 	 * 
 	 * @param uri
 	 *           api to be executed.
@@ -956,7 +958,7 @@ public class ProfileService extends BaseService {
 	}
 	
 	/**
-	 * executePut
+	 * Method to execute PUT Request
 	 * 
 	 * @param requestUri
 	 *            	  api to be executed.
@@ -986,7 +988,7 @@ public class ProfileService extends BaseService {
 	}
 	
 	/**
-	 * executePost
+	 * Method to execute POST Request
 	 * 
 	 * @param requestUri
 	 *               api to be executed.

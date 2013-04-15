@@ -61,7 +61,7 @@ define(['jquery', 'sbt/_bridge/declare', 'sbt/util' ], function($, declare, util
 		    var usedJQVersion = $().jquery;
 		    var requiredJQVersion = "1.8";
 		    var jQ_v_gte_18 = util.minVersion(requiredJQVersion, usedJQVersion);
-		    var xhrData = args.content || args.putData || args.postData || "";
+		    var xhrData = args.putData || args.postData || args.content || "";
 		    if (!args.handleAs) {
 		    	$.extend(args, {handleAs: "text"});
 		    }

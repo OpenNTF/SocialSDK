@@ -71,7 +71,7 @@ define(['jquery', 'sbt/_bridge/declare', 'sbt/util' ], function($, declare, util
 		        dataType: args.handleAs
 		    };
 		    
-		    if (method === "POST") {
+		    if (method === "PUT" || method === "POST") {
 		    	settings = $.extend(settings, {
 		    		contentType: args.headers["Content-Type"]	
 		    	});

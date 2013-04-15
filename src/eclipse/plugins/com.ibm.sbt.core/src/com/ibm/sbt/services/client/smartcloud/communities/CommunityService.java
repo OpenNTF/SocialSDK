@@ -38,7 +38,7 @@ import com.ibm.sbt.services.client.smartcloud.communities.util.XMLCommunityPaylo
  * Sample Usage
  * {@code
  * 	CommunityService	service	= new CommunityService();
- * 	List&lt;Community&lt;Node&gt;&gt; communities = (List)service.getMyCommunities();
+ *  List<Community<Node>> communities = (List)service.getMyCommunities();
  * }
  * </pre>
  * 

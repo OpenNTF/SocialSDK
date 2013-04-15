@@ -77,7 +77,6 @@
         case "DOCUMENTATION": 
             var docDiv = $("#docContents");
             docDiv.showSnippetDivContents(); 
-            docDiv.setCodeMirror("text/plain"); 
             break;
         default: 
             console.log($li.text().trim().toUpperCase());

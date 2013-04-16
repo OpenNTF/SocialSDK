@@ -22,8 +22,8 @@ define([ "sbt/_bridge/declare", "sbt/dom", "sbt/lang", "dojo/string", "sbt/widge
 
     /**
      * @module sbt.controls.grid.GridRenderer
-     * @class - GridRenderer
-     * @namespace - grid
+     * @class  GridRenderer
+     * @namespace  sbt.controls.grid
      */
     declare("sbt.controls.grid.GridRenderer", [ sbt.widget.grid._GridRenderer ], {
         /**Strings used in the grid*/
@@ -409,13 +409,13 @@ define([ "sbt/_bridge/declare", "sbt/dom", "sbt/lang", "dojo/string", "sbt/widge
         _doFindCheckboxes: function(grid, el, items) {
             var checkboxes = [];
             var inputs = (el.all || el.getElementsByTagName("input"));
-            for (var i in inputs) {
+            for (var i = 0;i < inputs.length;i++) {
                 if (inputs[i].type == "checkbox") { 
                     checkboxes.push(inputs[i]);
                 }    
             }
             if (checkboxes.length == items.length) {
-                for (var i in checkboxes) {
+                for (var i = 0;i<checkboxes.length;i++) {
                    // checkboxes[i].setUserData("item", items[i], function() {}); - Deprecated
                 	var checkBox= {
                 		element : checkboxes[i],

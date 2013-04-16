@@ -73,8 +73,8 @@ define(['jquery', 'sbt/_bridge/declare', 'sbt/util' ], function($, declare, util
 		    var usedJQVersion = $().jquery;
 		    var requiredJQVersion = "1.8";
 		    var jQ_v_gte_18 = util.minVersion(requiredJQVersion, usedJQVersion);
-		    var query = (args.content && (method==="PUT"||method==="POST"))?self.createQuery(args.content):null;
-		    
+		    var query = (args.content && (method==="PUT"||method==="POST"))?self.createQuery(args.content):"";
+		    url += (url.indexOf('?') != -1) ? "?"+query : "&"+query;
 		    var xhrData = args.putData || args.postData || args.content || null;
 		    
 		    if (!args.handleAs) {

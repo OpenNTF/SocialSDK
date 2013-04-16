@@ -61,7 +61,7 @@ define(['jquery', 'sbt/_bridge/declare', 'sbt/util' ], function($, declare, util
 		    var usedJQVersion = $().jquery;
 		    var requiredJQVersion = "1.8";
 		    var jQ_v_gte_18 = util.minVersion(requiredJQVersion, usedJQVersion);
-		    var xhrData = args.putData || args.postData || args.content || "";
+		    var xhrData = args.putData || args.postData || args.content || null;
 		    if (!args.handleAs) {
 		    	$.extend(args, {handleAs: "text"});
 		    }
@@ -71,7 +71,7 @@ define(['jquery', 'sbt/_bridge/declare', 'sbt/util' ], function($, declare, util
 		        dataType: args.handleAs
 		    };
 		    
-		    if (method === "PUT" || method === "POST") {
+		    if (args.headers && args.headers["Content-Type"]) {
 		    	settings = $.extend(settings, {
 		    		contentType: args.headers["Content-Type"]	
 		    	});

@@ -17,7 +17,7 @@
 /**
  * Implementation of a transport that emits an error the first time it is invoked.
  */
-define(['sbt/_bridge/declare','sbt/lang'], function(declare,lang) {
+define(['sbt/_bridge/declare','sbt/lang','sbt/Promise'], function(declare,lang,Promise) {
     return declare("sbt.ErrorTransport", null, {
         _called: false,
         _endpointName: null,
@@ -30,6 +30,18 @@ define(['sbt/_bridge/declare','sbt/lang'], function(declare,lang) {
             } else {
                 this._message = "Required endpoint is not available: " + endpointName;
             }
+        },
+        
+        request : function(url,options) {
+            if (!this._called) {
+                alert(this._message);
+                this._called = true;
+            }
+            var promise = new Promise();
+            var error = new Error(this._message);
+            error.status = 400;
+            promise.rejected(error);
+            return promise;
         },
         
         xhr: function(method, args, hasBody) {

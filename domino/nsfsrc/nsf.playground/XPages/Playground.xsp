@@ -23,6 +23,7 @@
 	jsEditor:		null,	// JS editor ID
 	cssEditor:		null,	// CSS editor ID
 	propertiesEditor: null, // Properties editor
+	documentationPanel: 		null, 	// Documentation panel
 	javaEditor:		null,	// Java editor ID
 	xpagesEditor:	null,	// XPages editor ID
 	
@@ -42,8 +43,6 @@
 	tabJava:		'#{id:tabJava}',
 	tabXPages:		'#{id:tabXPages}',
 	codeDialog:		'#{id:codeDialog}',
-	
-	docPanelId:		null	// Documentation Panel ID
 }
 dojo.addOnLoad(function() {
    dojo.connect(window, "onresize", resize);
@@ -79,16 +78,19 @@ if(e) {
 	// Else, we try the UNID
 	doc = database.getDocumentByUNID(snippetId);
 }
-if(doc) {	o = {		status:		"ok",		id:			snippetId,		unid:		doc.getUniversalID(),
-		category:	doc.getItemValueString("category"),		author:		doc.getAuthors().get(0),		name:		doc.getItemValueString("name"),		tags:		doc.getItemValueString("tags"),		doc:		doc.getItemValueString("documentation"),		html:		doc.getItemValueString("html"),		css:		doc.getItemValueString("css"),		properties:	doc.getItemValueString("properties"),
-		js:			doc.getItemValueString("javascript"),		java:		doc.getItemValueString("java"),		xpages:		doc.getItemValueString("xpages")	}	return o;}o = {	status:		"error",	msg:		"Cannot open document with id "+id}return o;]]></xe:this.script>
+if(doc) {	o = {		status:			"ok",		id:				snippetId,		unid:			doc.getUniversalID(),
+		category:		doc.getItemValueString("category"),		author:			doc.getAuthors().get(0),		name:			doc.getItemValueString("name"),		tags:			doc.getItemValueString("tags"),		doc:			doc.getItemValueString("documentation"),		html:			doc.getItemValueString("html"),		css:			doc.getItemValueString("css"),		properties:		doc.getItemValueString("properties"),
+		js:				doc.getItemValueString("javascript"),		java:			doc.getItemValueString("java"),		documentation:	doc.getItemValueString("documentation"),
+		xpages:			doc.getItemValueString("xpages")	}
+	return o;}o = {	status:		"error",	msg:		"Cannot open document with id "+id}return o;]]></xe:this.script>
 				</xe:remoteMethod>
 			</xe:this.methods>
 		</xe:jsonRpcService>
 		<xc:ccLayout navigationPath="/Playground"
-			title="IBM Social Business Toolkit - Playground">
+			title="IBM Social Business Toolkit - Playground" wholePage="true">
 			<xp:this.facets>
-				<xp:panel id="PlaceBarActions" xp:key="PlaceBarActions">
+				<xp:panel id="PlaceBarActions"
+					xp:key="PlaceBarActions">
 					<xc:ccEnvironmentComboBox></xc:ccEnvironmentComboBox>
 				</xp:panel>
 			</xp:this.facets>
@@ -107,16 +109,18 @@ if(doc) {	o = {		status:		"ok",		id:			snippetId,		unid:		doc.getUniversalID
 					<xe:djBorderContainer id="djBorderContainer1"
 						liveSplitters="true">
 						<xe:this.dojoAttributes>
-							<xp:dojoAttribute name="gutters" value="false">
+							<xp:dojoAttribute name="gutters"
+								value="false">
 							</xp:dojoAttribute>
 						</xe:this.dojoAttributes>
 						<xe:djBorderPane region="top">
 							<xe:toolbar id="toolbar1">
 								<xe:this.treeNodes>
-									<xe:basicLeafNode label="New Snippet"
-										styleClass="dijitIconNewTask" href="#">
+									<xe:basicLeafNode
+										label="New Snippet" styleClass="dijitIconNewTask" href="#">
 									</xe:basicLeafNode>
-									<xe:basicLeafNode label="Save" styleClass="dijitIconSave"
+									<xe:basicLeafNode label="Save"
+										styleClass="dijitIconSave"
 										loaded="${javascript:userBean.canCreateDocs}">
 										<xe:this.onClick><![CDATA[if("#{userBean.canCreateDocs}"!="true") {
 	alert("You are not allowed to save a document. Please authenticate with a different user.");
@@ -129,15 +133,17 @@ if(pageGlobal.unid) {
 }]]></xe:this.onClick>
 									</xe:basicLeafNode>
 									<xe:basicLeafNode label="Save As..."
-										styleClass="dijitIconSave" loaded="${javascript:userBean.canCreateDocs}">
+										styleClass="dijitIconSave"
+										loaded="${javascript:userBean.canCreateDocs}">
 										<xe:this.onClick><![CDATA[if("#{userBean.canCreateDocs}"!="true") {
 	alert("You are not allowed to save a document. Please authenticate with a different user.");
 	return;
 }
 XSP.openDialog("#{id:snippetDialog}")]]></xe:this.onClick>
 									</xe:basicLeafNode>
-									<xe:basicLeafNode label="Delete Snippet..."
-										styleClass="dijitIconDelete" loaded="${javascript:userBean.canCreateDocs}">
+									<xe:basicLeafNode
+										label="Delete Snippet..." styleClass="dijitIconDelete"
+										loaded="${javascript:userBean.canCreateDocs}">
 										<xe:this.onClick><![CDATA[if("#{userBean.canCreateDocs}"!="true") {
 	alert("You are not allowed to delete a document. Please authenticate with a different user.");
 	return;
@@ -148,11 +154,12 @@ if(confirm("This operation cannot be undone.\nDo you really want to delete this 
 									</xe:basicLeafNode>
 								</xe:this.treeNodes>
 							</xe:toolbar>
-							<xp:link escape="true" text="Edit..." id="deleteLink"
-								style="display:none">
+							<xp:link escape="true" text="Edit..."
+								id="deleteLink" style="display:none">
 								<xp:image id="image2" url="/edit.jpg"></xp:image>
-								<xp:eventHandler event="onclick" submit="true"
-									refreshMode="partial" refreshId="widgetContainer1">
+								<xp:eventHandler event="onclick"
+									submit="true" refreshMode="partial"
+									refreshId="widgetContainer1">
 									<xp:this.action><![CDATA[#{javascript:var unid = context.getSubmittedValue()
 var doc = database.getDocumentByUNID(unid);
 if(doc) {
@@ -169,38 +176,46 @@ if(doc) {
 								style="width: 100%; height: 100%; border: none">
 								<xe:djTabPane id="tabHtml" title="HTML"
 									onShow="pageGlobal.htmlEditor.refresh()">
-									<xp:div style="border: 1px solid #AAAAAA; height: 100%">
+									<xp:div
+										style="border: 1px solid #AAAAAA; height: 100%">
 										<xc:PlaygroundTabHtml></xc:PlaygroundTabHtml>
 									</xp:div>
 								</xe:djTabPane>
-								<xe:djTabPane id="tabJs" title="JavaScript"
-									onShow="pageGlobal.jsEditor.refresh()">
-									<xp:div style="border: 1px solid #AAAAAA; height: 100%">
+								<xe:djTabPane id="tabJs"
+									title="JavaScript" onShow="pageGlobal.jsEditor.refresh()">
+									<xp:div
+										style="border: 1px solid #AAAAAA; height: 100%">
 										<xc:PlaygroundTabJavaScript></xc:PlaygroundTabJavaScript>
 									</xp:div>
 								</xe:djTabPane>
 								<xe:djTabPane id="tabCss" title="CSS"
 									onShow="pageGlobal.cssEditor.refresh()">
-									<xp:div style="border: 1px solid #AAAAAA; height: 100%">
+									<xp:div
+										style="border: 1px solid #AAAAAA; height: 100%">
 										<xc:PlaygroundTabCss></xc:PlaygroundTabCss>
 									</xp:div>
 								</xe:djTabPane>
-								<xe:djTabPane id="djTabPane1" title="Properties"
+								<xe:djTabPane id="djTabProperties"
+									title="Properties"
 									onShow="pageGlobal.propertiesEditor.refresh()">
-									<xp:div style="border: 1px solid #AAAAAA; height: 100%">
+									<xp:div
+										style="border: 1px solid #AAAAAA; height: 100%">
 										<xc:PlaygroundTabProperties></xc:PlaygroundTabProperties>
 									</xp:div>
 								</xe:djTabPane>
-								<!--
-									<xe:djTabPane id="tabDocumentation" title="Documentation"
-									onShow=""> <xp:div style="border: 1px solid #AAAAAA; height:
-									100%"> <xc:tabDocumentation></xc:tabDocumentation> </xp:div>
-									</xe:djTabPane>
-								-->
+								<xe:djTabPane id="djTabDocumentation"
+									title="Documentation">
+									<xp:div
+										style="border: 1px solid #AAAAAA; height: 100%">
+										<xc:PlaygroundTabDocumentation></xc:PlaygroundTabDocumentation>
+									</xp:div>
+								</xe:djTabPane>
 							</xe:djTabContainer>
 						</xe:djBorderPane>
-						<xe:djBorderPane region="top" splitter="false">
-							<xe:toolbar id="toolbar2" style="display: inline-block">
+						<xe:djBorderPane region="top"
+							splitter="false">
+							<xe:toolbar id="toolbar2"
+								style="display: inline-block">
 								<xe:this.treeNodes>
 									<xe:basicLeafNode label="Run"
 										styleClass="dijitEditorIcon dijitEditorIconViewSource"
@@ -210,12 +225,13 @@ if(doc) {
 										styleClass="dijitEditorIcon dijitEditorIconViewSource"
 										onClick="runCode(true)">
 									</xe:basicLeafNode>
-									<xe:basicLeafNode label="Show Generated HTML"
+									<xe:basicLeafNode
+										label="Show Generated HTML"
 										styleClass="dijitEditorIcon dijitEditorIconViewSource"
 										onClick="showCode()">
 									</xe:basicLeafNode>
 								</xe:this.treeNodes>
-								</xe:toolbar>
+							</xe:toolbar>
 						</xe:djBorderPane>
 						<xe:djBorderPane region="center"
 							style="border: 1px solid #AAAAAA;">
@@ -223,20 +239,24 @@ if(doc) {
 								<xc:PlaygroundPreviewPane></xc:PlaygroundPreviewPane>
 							</xp:div>
 						</xe:djBorderPane>
-						<xe:djBorderPane region="bottom" splitter="false">
-						<xp:div
-							loaded="${javascript:optionsBean.apacheLicense}">
-							All code available from the Playground on
-							IBM Greenhouse is provided under the&#160;
-							<a href="http://www.apache.org/licenses/">
-								Apache License Version 2.0
-							</a>
-							. See&#160;
-							<a href="http://openntf.org/legal/terms">
-								OpenNTF Terms of Use
-							</a>
-							&#160;for full details.
-						</xp:div>
+						<xe:djBorderPane region="bottom"
+							splitter="false">
+							<xp:div
+								loaded="${javascript:optionsBean.apacheLicense}">
+								All code available from the Playground
+								on IBM Greenhouse is provided under
+								the&#160;
+								<a
+									href="http://www.apache.org/licenses/">
+									Apache License Version 2.0
+								</a>
+								. See&#160;
+								<a
+									href="http://openntf.org/legal/terms">
+									OpenNTF Terms of Use
+								</a>
+								&#160;for full details.
+							</xp:div>
 						</xe:djBorderPane>
 					</xe:djBorderContainer>
 				</xe:djBorderPane>

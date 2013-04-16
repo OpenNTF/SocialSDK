@@ -37,6 +37,9 @@ define([ "dojo/_base/declare", "dojo/_base/lang", "dojo/request", "sbt/util" ], 
          * @param {String|Object}
          *            [options.query=null] The query string, if any, that should
          *            be sent with the request.
+         * @param {Object}
+         *            [options.headers=null] The headers, if any, that should
+         *            be sent with the request.
          * @param {Boolean}
          *            [options.preventCache=false] If true will send an extra
          *            query parameter to ensure the the server won’t supply

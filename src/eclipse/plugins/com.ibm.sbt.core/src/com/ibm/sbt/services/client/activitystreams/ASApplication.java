@@ -4,7 +4,7 @@ package com.ibm.sbt.services.client.activitystreams;
  * @author Manish Kataria
  */
 public enum ASApplication {
-	// Possibile values : @communities,@tags,@people,@status,@notesforme,@notesfromme,@responses
+	// Possibile values : @communities,@tags,@people,@status
 	
 	COMMUNITIES("@communities"),
 	TAGS("@tags"),
@@ -17,6 +17,9 @@ public enum ASApplication {
 	ASApplication(String applicationType){
 		this.applicationType = applicationType;
 	}
-	
+	/**
+	 * Wrapper method to return application type
+	 * <p>
+	 */
 	public String getApplicationType(){return applicationType;}
 }

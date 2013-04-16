@@ -74,7 +74,8 @@ define([ "sbt/_bridge/declare",
             "folders" : {
                 storeArgs : {
                     url : sbt.connections.fileUrls.folders,
-                    attributes : sbt.connections.fileConstants.xpath_folders
+                    attributes : sbt.connections.fileConstants.xpath_folders,
+                    paramSchema: parameter.files.all 
                 },
                 rendererArgs : {
                     type : "folder"

@@ -272,6 +272,7 @@ public class SnippetFactory {
             XResult js = DOMUtil.evaluateXPath(document.getDocumentElement(), "js");
             XResult html = DOMUtil.evaluateXPath(document.getDocumentElement(), "html");
             XResult css = DOMUtil.evaluateXPath(document.getDocumentElement(), "css");
+            XResult docHtml = DOMUtil.evaluateXPath(document.getDocumentElement(), "docHtml");
             XResult theme = DOMUtil.evaluateXPath(document.getDocumentElement(), "theme");
             XResult description = DOMUtil.evaluateXPath(document.getDocumentElement(), "description");
             XResult tags = DOMUtil.evaluateXPath(document.getDocumentElement(), "tags");
@@ -286,6 +287,8 @@ public class SnippetFactory {
             	snippet.setHtml(html.getStringValue());
             if (css != null) 
             	snippet.setCss(css.getStringValue());
+            if (docHtml != null)
+                snippet.setDocHtml(docHtml.getStringValue());
             
             Properties p = new Properties();
             snippet.init(p);

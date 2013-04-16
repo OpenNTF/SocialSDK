@@ -31,9 +31,12 @@ import com.ibm.sbt.services.util.AuthUtil;
 public class CommunityService extends BaseService {
 	static final String			sourceClass			= CommunityService.class.getName();
 	static final Logger			logger				= Logger.getLogger(sourceClass);
-
+	private static final String	seperator			= "/";
+	
+	/**
+	 * Used in constructing REST APIs
+	 */
 	public static final String	CommunityBaseUrl	= "communities/service/atom";
-	public static final String	seperator			= "/";
 	
 	/**
 	 * Constructor Creates CommunityService Object with default endpoint and default cache size
@@ -327,7 +330,7 @@ public class CommunityService extends BaseService {
 	}
 
 	/**
-	 * executeGet
+	 * Method to execute GET Request
 	 * 
 	 * @param uri
 	 *           api to be executed.
@@ -592,12 +595,13 @@ public class CommunityService extends BaseService {
 		return returnVal;
 	}
 	
-	/**
+	/*
 	 * Method to fetch the community content from server and populates the data member of {@link Community}.
 	 * 
 	 * @param community
+	 * @throws CommunityServiceException
 	 */
-	public void load(Community community) throws CommunityServiceException {
+	protected void load(Community community) throws CommunityServiceException {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "load");
 		}
@@ -620,24 +624,24 @@ public class CommunityService extends BaseService {
 		}
 	}
 
-	/**
+	/*
 	 * Method to generate appropriate REST URLs
 	 * 
 	 * @param communityEntity ( Ref Class : CommunityEntity )
 	 * @param communityType ( Ref Class : CommunityType )
 	 */
-	public String resolveCommunityUrl(String communityEntity, String communityType) {
+	protected String resolveCommunityUrl(String communityEntity, String communityType) {
 		return resolveCommunityUrl(communityEntity, communityType, null);
 	}
 
-	/**
+	/*
 	 * Method to generate appropriate REST URLs
 	 * 
 	 * @param communityEntity ( Ref Class : CommunityEntity )
 	 * @param communityType ( Ref Class : CommunityType )
 	 * @param params : ( Ref Class : CommunityParams )
 	 */
-	public String resolveCommunityUrl(String communityEntity, String communityType, Map<String, String> params) {
+	protected String resolveCommunityUrl(String communityEntity, String communityType, Map<String, String> params) {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "resolveCommunityUrl", communityEntity + communityType);
 		}

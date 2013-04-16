@@ -34,10 +34,17 @@ import com.ibm.sbt.services.client.smartcloud.base.BaseEntity;
 import com.ibm.sbt.services.client.smartcloud.files.FileServiceException.Reason;
 
 /**
- * Service class for all SmartCloud file operations
+ * FileService can be used to perform File related operations.
+ * <p>
+ * Relies on the ID's provided by the user to perform the task.
  * 
  * @author Lorenzo Boccaccia
+ * @Represents Smartcloud FileService
+ * @see http 
+ *      ://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=API+Reference#action=openDocument
+ *      &res_title=Files_CMIS_API_sbar&content=pdcontent
  */
+
 public class FileService extends BaseService {
 
 	public static class FieldFilter extends HashSet<String> {
@@ -153,6 +160,8 @@ public class FileService extends BaseService {
 	}
 
 	/**
+	 * getMyFiles
+	 * <p>
 	 * Executes a service call to return all the user files
 	 * 
 	 * @return all the files for the current SmartCloud account
@@ -188,6 +197,8 @@ public class FileService extends BaseService {
 	}
 
 	/**
+	 * getFilesSharedWithMe
+	 * <p>
 	 * Executes a service call to return all files shared with the user
 	 * 
 	 * @return all the files for the current SmartCloud account
@@ -224,6 +235,8 @@ public class FileService extends BaseService {
 	}
 
 	/**
+	 * getMyCollections
+	 * <p>
 	 * Executes a service call to return User's Collections
 	 * 
 	 * @return all the collections for the current SmartCloud account
@@ -260,6 +273,8 @@ public class FileService extends BaseService {
 	}
 
 	/**
+	 * getCollectionsSharedWithMe
+	 * <p>
 	 * Executes a service call to return Collections shared with the current SmartCloud User
 	 * 
 	 * @return all the collections shared with the current SmartCloud account
@@ -296,6 +311,8 @@ public class FileService extends BaseService {
 	}
 
 	/**
+	 * getFilesInsideFolder
+	 * <p>
 	 * Executes a service call to return Files inside the Folder for which the Id is given
 	 * 
 	 * @return all the files inside the given Folder
@@ -331,6 +348,8 @@ public class FileService extends BaseService {
 	}
 
 	/**
+	 * getMyFilesAlt
+	 * <p>
 	 * Executes a service query to list all the user files
 	 * 
 	 * @return all the files for the current SmartCloud account
@@ -365,6 +384,8 @@ public class FileService extends BaseService {
 	}
 
 	/**
+	 * getMyFiles
+	 * <p>
 	 * This API allows to read a list of file entries limiting both the size of the returned list and the size
 	 * of the returned entries
 	 * 
@@ -418,6 +439,8 @@ public class FileService extends BaseService {
 	}
 
 	/**
+	 * uploadFile
+	 * <p>
 	 * Uploads a file to SmartCloud A file with the same name must not exists.
 	 * 
 	 * @param f
@@ -431,6 +454,8 @@ public class FileService extends BaseService {
 	}
 
 	/**
+	 * uploadFile
+	 * <p>
 	 * Uploads a file to SmartCloud A file with the same name must not exists. This version allow to upload
 	 * the file under a different name
 	 * 
@@ -461,6 +486,8 @@ public class FileService extends BaseService {
 	}
 
 	/**
+	 * uploadFile
+	 * <p>
 	 * Upload a binary stream to SmartCloud as a file. The length of the stream must be know
 	 * 
 	 * @param stream
@@ -570,6 +597,8 @@ public class FileService extends BaseService {
 	}
 
 	/**
+	 * getEntry
+	 * <p>
 	 * Returns a fully loaded file entry.
 	 * 
 	 * @param id
@@ -581,6 +610,8 @@ public class FileService extends BaseService {
 	}
 
 	/**
+	 * getEntry
+	 * <p>
 	 * Returns a fully loaded file entry.
 	 * 
 	 * @param id
@@ -618,6 +649,8 @@ public class FileService extends BaseService {
 	}
 
 	/**
+	 * getEntry
+	 * <p>
 	 * Returns a partially loaded file entry, using the FieldFilter to retrieve only specific fields from the
 	 * entry.
 	 * 

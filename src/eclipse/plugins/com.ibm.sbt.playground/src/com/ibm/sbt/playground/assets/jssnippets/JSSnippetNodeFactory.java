@@ -23,7 +23,7 @@ import com.ibm.sbt.playground.assets.RootNode;
 
 public class JSSnippetNodeFactory implements NodeFactory {
 	
-	public static final String[] EXTENSIONS = new String[]{"html","js","css"};
+	public static final String[] EXTENSIONS = new String[]{"doc.html","html","js","css"};
 	
 	public JSSnippetNodeFactory() {
 	}

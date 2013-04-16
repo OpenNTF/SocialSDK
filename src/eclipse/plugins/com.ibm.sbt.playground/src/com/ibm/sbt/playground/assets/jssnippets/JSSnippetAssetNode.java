@@ -45,10 +45,12 @@ public class JSSnippetAssetNode extends AssetNode {
 	public Asset createAsset(VFSFile root) throws IOException {
 		VFSFile parent = getParentFile(root);
 		String html = loadResource(parent,"html");
+		String docHtml = loadResource(parent,"doc.html");
 		String js = loadResource(parent,"js");
 		String css = loadResource(parent,"css");
 		JSSnippet s = (JSSnippet)new JSSnippet();
 		s.setHtml(html);
+		s.setDocHtml(docHtml);
 		s.setJs(js);
 		s.setCss(css);
 		return s;

@@ -61,7 +61,7 @@ public class ProfileService extends BaseService {
 	}
 
 	/**
-	 * Constructor - 1 argument constructor
+	 * Constructor
 	 * 
 	 * @param endpoint
 	 *            Creates ProfileService with specified endpoint and a default CacheSize
@@ -72,7 +72,7 @@ public class ProfileService extends BaseService {
 	}
 
 	/**
-	 * Constructor - 2 argument constructor
+	 * Constructor
 	 * 
 	 * @param endpoint
 	 * @param cacheSize
@@ -89,7 +89,7 @@ public class ProfileService extends BaseService {
 	 * This method is used to fetch the Profile of users. This method fetches the Subscriber ID of the logged
 	 * in user, and then calls the getProfile Method to load the user's profile.
 	 * 
-	 * @return Profile
+	 * @return Profile - returns the fetched Profile
 	 * @throws SBTServiceException
 	 */
 	public Profile getProfile() throws SBTServiceException {
@@ -140,6 +140,7 @@ public class ProfileService extends BaseService {
 	/**
 	 * getContactByGUID
 	 * <p>
+	 * Fetches the contact information of the user based on the input GUID.
 	 * 
 	 * @param userId
 	 *            contact Guid of the profile to be fetched
@@ -162,6 +163,8 @@ public class ProfileService extends BaseService {
 
 	/**
 	 * getMyContacts
+	 * <p>
+	 * Fetches User's Contacts
 	 * 
 	 * @return List<Profile>
 	 * @throws SBTServiceException
@@ -178,6 +181,9 @@ public class ProfileService extends BaseService {
 
 	/**
 	 * getMyContactsByIndex
+	 * <p>
+	 * Fetches User's Contacts based on the index provided ie fetches the next "count" no of contacts,
+	 * starting from the starting index "startIndex" specified as input.
 	 * 
 	 * @param startIndex
 	 * @param count
@@ -200,6 +206,8 @@ public class ProfileService extends BaseService {
 
 	/**
 	 * getMyConnections
+	 * <p>
+	 * Fetches the Connections of the User
 	 * 
 	 * @return List<Profile>
 	 * @throws SBTServiceException

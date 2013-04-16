@@ -3,9 +3,10 @@ require(["sbt/controls/grid/Grid",
          "sbt/config",
          "sbt/i18n",
          "sbt/dom", 
+         "sbt/store/parameter",
          "sbt/text!sbt/controls/grid/connections/templates/CommunityRow.html",
          "sbt/connections/CommunityConstants"],
-        function(Grid, ConnectionsGridRenderer, sbt, i18n, dom, CommunityRow) {
+        function(Grid, ConnectionsGridRenderer, sbt, i18n, dom, parameter, CommunityRow) {
     
         var gridRenderer = new ConnectionsGridRenderer({
             _nls: { 
@@ -43,7 +44,8 @@ require(["sbt/controls/grid/Grid",
         var grid = new Grid({
             storeArgs : {
                 url : sbt.connections.communitiesUrls.allCommunities,
-                attributes : sbt.connections.communityConstants.xpath_community
+                attributes : sbt.connections.communityConstants.xpath_community,
+                paramSchema: parameter.communities.all
             },
             renderer : gridRenderer
         });

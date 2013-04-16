@@ -6,7 +6,7 @@ require(["sbt/dom", "sbt/controls/grid/connections/ColleagueGrid" ],
 
     var grid = new ColleagueGrid({
         type: "dynamic",
-        rendererArgs: { hideViewAll: true },
+        rendererArgs: { hideViewAll: true, template : template },
         email: "%{sample.email1}",
         targetEmails: [ "%{sample.email1}", "%{sample.email2}" ]
     });

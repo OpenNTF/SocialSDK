@@ -38,9 +38,6 @@ define([ "sbt/_bridge/declare", "sbt/data/AtomReadStore", "sbt/widget/_Templated
             };
             
             var handleComplete = function(results, args) {
-            	
-            	
-            	
                 self.data = {
                     items : results,
                     start : options.start,
@@ -57,8 +54,9 @@ define([ "sbt/_bridge/declare", "sbt/data/AtomReadStore", "sbt/widget/_Templated
             };
             
             var args = this._mixin(options, {
-                    onComplete: handleComplete,
-                    onError: handleError
+                scope: this,
+                onComplete: handleComplete,
+                onError: handleError
             });
             
             store.fetch(args);

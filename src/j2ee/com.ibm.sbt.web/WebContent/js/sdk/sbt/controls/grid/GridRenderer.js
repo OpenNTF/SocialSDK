@@ -167,6 +167,9 @@ define([ "sbt/_bridge/declare", "sbt/dom", "sbt/lang", "dojo/string", "sbt/widge
          * @param - el - The Current Element
          * */
         renderEmpty: function(grid, el) {
+           while (el.childNodes[0]) {
+               this._destroy(el.childNodes[0]);
+           }
            var ediv = this._create("div", {
              "class": this.emptyClass,
              innerHTML: this.nls.empty,
@@ -182,6 +185,9 @@ define([ "sbt/_bridge/declare", "sbt/dom", "sbt/lang", "dojo/string", "sbt/widge
          * @param - el - The Current Element
          * @param - error - The error message to be displayed*/
         renderError: function(grid, el, error) {
+            while (el.childNodes[0]) {
+                this._destroy(el.childNodes[0]);
+            }
            var ediv = this._create("div", {
               "class": this.errorClass,
               innerHTML: error.message,

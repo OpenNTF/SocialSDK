@@ -6,6 +6,10 @@
         return this;
     };
     
+    $("#snippetContainer").ajaxComplete(function(){
+        showNavContent($(".span8 ul li.active"));
+    });
+    
     /**
      * Adds a CodeMirror Instance to the specified object.
      */
@@ -50,34 +54,19 @@
         return this;
     };
     
-    $("#snippetContainer").ajaxComplete(function(){
-        showNavContent($(".span8 ul li.active"));
-    });
-    
     /**
      * Display the correct div based on the nav li that was just pressed. Add CodeMirror if not present, remove the other divs' CodeMirrors.
      */
     function showNavContent($li){
         switch($li.text().trim().toUpperCase()){
-        case "JAVASCRIPT": 
-            var jsDiv = $("#jsContents");
-            jsDiv.showSnippetDivContents();
-            jsDiv.setCodeMirror("text/javascript");
-            break;
-        case "HTML": 
-            var htmlDiv = $("#htmlContents");
-            htmlDiv.showSnippetDivContents();
-            htmlDiv.setCodeMirror("text/html");
-            break;
-        case "CSS": 
-            var cssDiv = $("#cssContents");
-            cssDiv.showSnippetDivContents(); 
-            cssDiv.setCodeMirror("text/css"); 
+        case "JAVASERVER PAGE": 
+            var jspDiv = $("#jspContents");
+            jspDiv.showSnippetDivContents();
+            jspDiv.setCodeMirror("application/x-jsp");
             break;
         case "DOCUMENTATION": 
             var docDiv = $("#docContents");
             docDiv.showSnippetDivContents(); 
-            docDiv.setCodeMirror("text/plain"); 
             break;
         default: 
             console.log($li.text().trim().toUpperCase());

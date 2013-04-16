@@ -16,6 +16,9 @@
 
 package com.ibm.xsp.sbtsdk.runtime;
 
+import java.security.AccessController;
+import java.security.PrivilegedAction;
+
 import javax.faces.FacesException;
 import javax.faces.FactoryFinder;
 import javax.faces.context.ExternalContext;
@@ -36,6 +39,8 @@ import com.ibm.domino.xsp.module.nsf.NotesContext;
 import com.ibm.xsp.application.ApplicationEx;
 import com.ibm.xsp.application.events.ApplicationListener;
 import com.ibm.xsp.context.FacesContextEx;
+import com.ibm.xsp.core.ResourceHandler;
+import com.ibm.xsp.core.ResourceHandlerImpl;
 import com.ibm.xsp.event.FacesContextListener;
 
 
@@ -56,6 +61,20 @@ public class XspRuntimeFactory extends RuntimeFactoryServlet {
 	private static XspRuntimeFactory instance = new XspRuntimeFactory();
 	public static final RuntimeFactory get() {
 		return instance;
+	}
+
+	protected ClassLoader getContextClassLoader() {
+		// Get it from the faces context, if available
+		FacesContextEx ctx = FacesContextEx.getCurrentInstance();
+		if(ctx!=null) {
+			return ctx.getContextClassLoader();
+		}
+		// Else, execute this is a privileged block
+        return AccessController.doPrivileged(new PrivilegedAction<ClassLoader>() {
+            public ClassLoader run() {
+        		return Thread.currentThread().getContextClassLoader();
+            }
+        });
 	}
 
 	public XspApplication getApplicationUnchecked() {

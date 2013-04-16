@@ -54,6 +54,18 @@ define(['jquery', 'sbt/_bridge/declare', 'sbt/util' ], function($, declare, util
         request : function(url,options) {
             return null;
         },
+        
+        createQuery: function(queryMap) {
+            if (!queryMap) {
+                return null;
+            }
+            var pairs = [];
+            for(var name in queryMap){
+                var value = queryMap[name];
+                pairs.push(encodeURIComponent(name) + "=" + encodeURIComponent(value));
+            }
+            return pairs.join("&");
+        },
 
 		xhr: function(method, args, hasBody) {
 		    var url = args.url;
@@ -61,7 +73,10 @@ define(['jquery', 'sbt/_bridge/declare', 'sbt/util' ], function($, declare, util
 		    var usedJQVersion = $().jquery;
 		    var requiredJQVersion = "1.8";
 		    var jQ_v_gte_18 = util.minVersion(requiredJQVersion, usedJQVersion);
+		    var query = (args.content && (method==="PUT"||method==="POST"))?self.createQuery(args.content):null;
+		    
 		    var xhrData = args.putData || args.postData || args.content || null;
+		    
 		    if (!args.handleAs) {
 		    	$.extend(args, {handleAs: "text"});
 		    }
@@ -71,10 +86,8 @@ define(['jquery', 'sbt/_bridge/declare', 'sbt/util' ], function($, declare, util
 		        dataType: args.handleAs
 		    };
 		    
-		    if (args.headers && args.headers["Content-Type"]) {
-		    	settings = $.extend(settings, {
-		    		contentType: args.headers["Content-Type"]	
-		    	});
+		    if (args.headers) {
+		    	settings.headers = args.headers;	
 		    }
 		    
 		    if (!jQ_v_gte_18) {

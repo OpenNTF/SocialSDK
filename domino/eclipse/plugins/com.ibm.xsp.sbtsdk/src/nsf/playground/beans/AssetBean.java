@@ -76,6 +76,7 @@ public abstract class AssetBean {
 					String jspUrl = (String)values.get(2);
 					CategoryNode c = findCategory(root, cat);
 					AssetNode node = createAssetNode(notesUnid,c,name,cat,jspUrl);
+					node.setTooltip((String)values.get(5));
 					c.getChildren().add(node);
 				}
 			} else { 
@@ -90,6 +91,7 @@ public abstract class AssetBean {
 					String assetId = (String)values.get(2);
 					CategoryNode c = findCategory(root, cat);
 					AssetNode node = createAssetNode(notesUnid,c,name,cat,findUniqueUrl(c,notesUnid,assetId));
+					node.setTooltip((String)values.get(5));
 					c.getChildren().add(node);
 				}
 			}

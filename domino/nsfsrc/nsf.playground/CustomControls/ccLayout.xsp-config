@@ -27,5 +27,9 @@
       <property-name>defaultNavigationPath</property-name>
       <property-class>string</property-class>
     </property>
+    <property>
+      <property-name>wholePage</property-name>
+      <property-class>boolean</property-class>
+    </property>
   </composite-component>
 </faces-config>

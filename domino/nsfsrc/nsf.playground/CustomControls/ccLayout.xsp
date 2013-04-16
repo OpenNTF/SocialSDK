@@ -4,7 +4,7 @@
 	xmlns:xc="http://www.ibm.com/xsp/custom" dojoTheme="true">
 
 	<xp:this.afterPageLoad><![CDATA[#{javascript:view.setPageTitle("IBM Social Business Toolkit - Playground")
-view.setStyle("overflow: hidden");}]]></xp:this.afterPageLoad>
+if(compositeData.wholePage)view.setStyle("overflow: hidden");}]]></xp:this.afterPageLoad>
 
 	<xe:keepSessionAlive id="keepSessionAlive1"></xe:keepSessionAlive>
 	<xc:DevelopmentWarning loaded="false"></xc:DevelopmentWarning>

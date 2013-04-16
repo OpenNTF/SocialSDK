@@ -12,12 +12,12 @@
         String html = null;
         String js = null;
         String css = null;
-        String[] doc = null;
+        String docHtml = null;
         if (snippet != null) {
             html = snippet.getHtml();
             js = snippet.getJs();
             css = snippet.getCss();
-            doc = snippet.getDocumentation();
+            docHtml = html = snippet.getDocHtml();
             
             // replace substitution variables
             if (StringUtil.isNotEmpty(js)) {
@@ -55,9 +55,8 @@
     
     <div id="docContents" style="display: hidden;">
     <% 
-    if(doc!=null && StringUtil.isNotEmpty(doc[0])){
-        String pre = HtmlTextUtil.toHTMLContentString(doc[0], false);
-        out.println(pre);
+    if(docHtml!=null && StringUtil.isNotEmpty(docHtml)){
+        out.println(docHtml);
     }
     %>
     </div>

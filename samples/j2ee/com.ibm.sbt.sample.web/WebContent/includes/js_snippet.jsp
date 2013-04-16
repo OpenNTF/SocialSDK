@@ -17,7 +17,7 @@
             html = snippet.getHtml();
             js = snippet.getJs();
             css = snippet.getCss();
-            docHtml = html = snippet.getDocHtml();
+            docHtml = snippet.getDocHtml();
             
             // replace substitution variables
             if (StringUtil.isNotEmpty(js)) {
@@ -39,7 +39,7 @@
     <div id="htmlContents" style="display: hidden;">
     <%
     if(StringUtil.isNotEmpty(html)){
-        String pre = HtmlTextUtil.toHTMLContentString(html, false);
+        String pre = "<pre>" + HtmlTextUtil.toHTMLContentString(html, false) + "</pre>";
         out.println(pre);
     }
     %>

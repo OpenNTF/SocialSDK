@@ -2,6 +2,7 @@ package com.ibm.sbt.services.client.email;
 
 import java.util.List;
 
+import com.ibm.commons.runtime.Application;
 import com.ibm.commons.util.io.json.JsonObject;
 
 /**
@@ -9,7 +10,8 @@ import com.ibm.commons.util.io.json.JsonObject;
  *
  */
 public class DefaultMimeEmailFactory implements MimeEmailFactory {
-    
+	
+	private static final String EXTENSION_ID = "com.ibm.sbt.core.mimeemailfactory";
     private static MimeEmailFactory instance;
     
     private DefaultMimeEmailFactory() {};
@@ -30,8 +32,19 @@ public class DefaultMimeEmailFactory implements MimeEmailFactory {
      * @return An instance of DefaultMimeEmailFactory.
      */
     public static MimeEmailFactory getInstance() {
-        if(instance == null) {
-            instance = new DefaultMimeEmailFactory();
+    	if(instance == null) {
+            Application app = Application.getUnchecked();
+            if (app != null) {
+                List<Object> factories = app.findServices(EXTENSION_ID);
+                for(Object o : factories) {
+                    if(o instanceof MimeEmailFactory) {
+                        instance = (MimeEmailFactory)o;
+                    }
+                }
+            }
+            if(instance == null) {
+            	instance = new DefaultMimeEmailFactory();
+            }
         }
         return instance;
     }

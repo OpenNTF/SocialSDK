@@ -12,7 +12,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.ibm.commons.runtime.Application;
 import com.ibm.commons.util.io.json.JsonJavaFactory;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.commons.util.io.json.JsonObject;
@@ -33,9 +32,8 @@ public class EmailHandler extends AbstractServiceHandler {
      */
     public static final String URL_PATH = "mailer";
     
-    private static final String EXTENSION_ID = "com.ibm.sbt.core.mimeemailfactory";
+    
     private static final String APPLICATION_JSON = "application/json";
-    private static MimeEmailFactory emailFactory;
 
     /* (non-Javadoc)
      * @see com.ibm.sbt.proxy.core.handlers.AbstractProxyHandler#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
@@ -80,7 +78,7 @@ public class EmailHandler extends AbstractServiceHandler {
      * @return A JSON response of what emails were successfully sent and which ones had errors.
      */
     private JsonObject send(List<JsonObject> emails) {
-        MimeEmailFactory emailFactory = getEmailFactory();
+        MimeEmailFactory emailFactory = DefaultMimeEmailFactory.getInstance();
         List<JsonObject> successful = new ArrayList<JsonObject>();
         List<JsonObject> error = new ArrayList<JsonObject>();
         for(JsonObject json : emails) {
@@ -161,27 +159,5 @@ public class EmailHandler extends AbstractServiceHandler {
         buf.close();
         String body = buf.toString();
         return body;
-    }
-    
-    /**
-     * Gets an instance of MimeEmailFactory to use to send emails.
-     * @return An instance of MimeEmailFactory to use to send emails.
-     */
-    private MimeEmailFactory getEmailFactory() {
-        if(emailFactory == null) {
-            Application app = Application.getUnchecked();
-            if (app != null) {
-                List<Object> factories = app.findServices(EXTENSION_ID);
-                for(Object o : factories) {
-                    if(o instanceof MimeEmailFactory) {
-                        emailFactory = (MimeEmailFactory)o;
-                    }
-                }
-            }
-            if(emailFactory==null) {
-            	emailFactory = DefaultMimeEmailFactory.getInstance();
-            }
-        }
-        return emailFactory;
     }
 }

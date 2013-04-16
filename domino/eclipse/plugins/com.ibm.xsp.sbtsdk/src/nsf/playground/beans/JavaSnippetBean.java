@@ -2,24 +2,24 @@ package nsf.playground.beans;
 
 import com.ibm.sbt.playground.assets.AssetNode;
 import com.ibm.sbt.playground.assets.CategoryNode;
-import com.ibm.sbt.playground.assets.jssnippets.JSSnippetAssetNode;
+import com.ibm.sbt.playground.assets.javasnippets.JavaSnippetAssetNode;
 
 /**
- * Classes that encapsulates the business logic for a JS snippet.
+ * Classes that encapsulates the business logic for a Java snippet.
  * 
  * @author priand
  */
-public class SnippetBean extends AssetBean {
+public class JavaSnippetBean extends AssetBean {
 
 	protected String getFlatView() {
-		return "AllSnippetsFlat";
+		return "AllJavaSnippetsFlat";
 	}
 
 	protected String getAllView() {
-		return "AllSnippets";
+		return "AllJavaSnippets";
 	}
 	
 	protected AssetNode createAssetNode(String notesUnid, CategoryNode parent, String name, String category, String assetId) {
-		return new JSSnippetAssetNode(parent,name,category,notesUnid,assetId);
+		return new JavaSnippetAssetNode(parent,name,category,notesUnid,assetId);
 	}
 }

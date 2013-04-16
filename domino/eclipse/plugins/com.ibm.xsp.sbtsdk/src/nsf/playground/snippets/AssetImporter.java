@@ -36,8 +36,12 @@ import com.ibm.xsp.context.FacesContextEx;
 public abstract class AssetImporter {
 
 	public static AssetImporter createImporter(String type, Database db) {
-		if(StringUtil.equals(type, SnippetImporter.TYPE)) {
-			return new SnippetImporter(db);
+		if(StringUtil.equals(type, JavaScriptSnippetImporter.TYPE)) {
+			return new JavaScriptSnippetImporter(db);
+		} else if(StringUtil.equals(type, JavaSnippetImporter.TYPE)) {
+			return new JavaSnippetImporter(db);
+		} else if(StringUtil.equals(type, XPagesSnippetImporter.TYPE)) {
+			return new XPagesSnippetImporter(db);
 		} else if(StringUtil.equals(type, APIImporter.TYPE)) {
 			return new APIImporter(db);
 		}

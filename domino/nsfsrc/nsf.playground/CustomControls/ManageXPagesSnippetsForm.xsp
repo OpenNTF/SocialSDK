@@ -2,13 +2,13 @@
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
 	xmlns:xe="http://www.ibm.com/xsp/coreex">
 	<xp:this.data>
-		<xp:dominoDocument var="document1" formName="JavaSnippet">
+		<xp:dominoDocument var="document1" formName="XPagesSnippet">
 			<xp:this.queryNewDocument><![CDATA[#{javascript:document1.replaceItemValue("Author",userBean.commonName)}]]></xp:this.queryNewDocument>
-			<xp:this.querySaveDocument><![CDATA[#{javascript:return snippetBean.querySave(document1)}]]></xp:this.querySaveDocument>
+			<xp:this.querySaveDocument><![CDATA[#{javascript:return xPagesSnippetBean.querySave(document1)}]]></xp:this.querySaveDocument>
 		</xp:dominoDocument>
 	</xp:this.data>
-	<xe:formTable id="formTable2" formTitle="Code Snippet"
-		formDescription="Enter here the data for your code snippet">
+	<xe:formTable id="formTable2" formTitle="XPages Snippet"
+		formDescription="Enter here the data for your XPages snippet">
 		<xp:this.facets>
 			<xp:panel xp:key="footer" id="panel3">
 				<xp:button value="Save" id="button1"
@@ -49,7 +49,7 @@
 			<xe:valuePicker id="valuePicker2" for="inputText1">
 				<xe:this.dataProvider>
 					<xe:simpleValuePicker
-						valueList="#{javascript:snippetBean.getAllCategories()}">
+						valueList="#{javascript:xPagesSnippetBean.getAllCategories()}">
 					</xe:simpleValuePicker>
 				</xe:this.dataProvider>
 			</xe:valuePicker>
@@ -68,18 +68,8 @@
 		<xe:formRow id="formRow5" labelPosition="above">
 			<xe:djTabContainer id="djTabContainer2"
 				style="width: 900px; height: 250px; border: none">
-				<xe:djTabPane id="djTabPane1" title="JavaScript">
-					<xp:inputTextarea id="inputTextarea1" value="#{document1.JavaScript}"
-						style="width:100%;height:100%;font-family:Courier New;font-size:10pt">
-					</xp:inputTextarea>
-				</xe:djTabPane>
-				<xe:djTabPane id="djTabPane2" title="HTML">
-					<xp:inputTextarea id="inputText2" value="#{document1.Html}"
-						style="width:100%;height:100%;font-family:Courier New;font-size:10pt">
-					</xp:inputTextarea>
-				</xe:djTabPane>
-				<xe:djTabPane id="djTabPane3" title="CSS">
-					<xp:inputTextarea id="inputText3" value="#{document1.Css}"
+				<xe:djTabPane id="djTabPane1" title="Java">
+					<xp:inputTextarea id="inputTextarea1" value="#{document1.Jsp}"
 						style="width:100%;height:100%;font-family:Courier New;font-size:10pt">
 					</xp:inputTextarea>
 				</xe:djTabPane>

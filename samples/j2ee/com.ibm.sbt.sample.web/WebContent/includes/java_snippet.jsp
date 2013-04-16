@@ -5,17 +5,10 @@
 <%@page import="com.ibm.sbt.playground.assets.RootNode"%>
 <%@page import="com.ibm.sbt.playground.assets.javasnippets.JavaSnippet"%>
 <%@page import="com.ibm.sbt.sample.web.util.SnippetFactory"%>
-<ul class="nav nav-tabs">
-    <li class="active">
-		<a href="#">JavaServer Page</a>
-    </li>
-    <li class="disabled">
-    	<a href="#">Documentation</a>
-    </li>
-</ul>
 <%
 String javaSamplePath = request.getParameter("snippet");
 String jsp = null;
+String doc = null;
 if (StringUtil.isNotEmpty(javaSamplePath)) {
 	JavaSnippet snippet = SnippetFactory.getJavaSnippet(application, request, javaSamplePath);
 	if (snippet != null) {
@@ -28,11 +21,20 @@ if (StringUtil.isNotEmpty(javaSamplePath)) {
 	}
 }
 %>
-<div id="snippetJava" style="border-style:solid;border-width:1px;width=500px;height:300px;border-color:#D3D3D3;overflow:scroll;">
+<div id="jspContents">
 <%
 if (StringUtil.isNotEmpty(jsp)) {
 	String pre = "<pre style='background-color:#FFFFFF;border-style:none'>" + HtmlTextUtil.toHTMLContentString(jsp, false) + "</pre>\n";
 	out.println(pre);
+}
+%>
+</div>
+
+<div id="docContents" style="display: hidden;">
+<%
+if (StringUtil.isNotEmpty(jsp)) {
+    String pre = ""; //TODO add correct doc when java samples get doc.
+    out.println(pre);
 }
 %>
 </div>

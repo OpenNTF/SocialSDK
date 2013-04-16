@@ -13,23 +13,20 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-package com.ibm.sbt.playground.assets.javasnippets;
+package com.ibm.sbt.playground.assets.xpages;
 
-import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.playground.assets.Asset;
 
 
-
 /**
- * Description of a Java snippet.
+ * Description of an XPages snippet.
  */
-public class JavaSnippet extends Asset {
+public class XPagesSnippet extends Asset {
 
-	private String jsp;
+	private String xsp;
     private String docHtml;
-	private String jspPath;
 	
-	public JavaSnippet() {
+	public XPagesSnippet() {
 	}
 
     public String getTheme() {
@@ -39,18 +36,11 @@ public class JavaSnippet extends Asset {
 		setProperty("theme",theme);
     }
 	
-	public String getJsp() {
-		return jsp;
+	public String getXsp() {
+		return xsp;
 	}
-	public void setJsp(String jsp) {
-		this.jsp = jsp;
-	}
-	
-	public String getJspPath() {
-		return jspPath;
-	}
-	public void setJspPath(String jspPath) {
-		this.jspPath = jspPath;
+	public void setXsp(String xsp) {
+		this.xsp = xsp;
 	}
 
     public String getDocHtml() {
@@ -59,16 +49,4 @@ public class JavaSnippet extends Asset {
     public void setDocHtml(String docHtml) {
         this.docHtml = docHtml;
     }
-
-	public String getJspForDisplay() {
-		String s = getJsp();
-		if(s!=null) {
-			int start = StringUtil.indexOfIgnoreCase(s, "<body>");
-			int end = StringUtil.indexOfIgnoreCase(s, "</body>");
-			if(start>=0 && end>=start+6) {
-				return s.substring(start+6,end).trim();
-			}
-		}
-		return s;
-	}
 }

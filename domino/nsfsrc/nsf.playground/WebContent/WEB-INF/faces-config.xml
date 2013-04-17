@@ -26,6 +26,18 @@
     <managed-bean-scope>request</managed-bean-scope>
   </managed-bean>
   <managed-bean>
+    <managed-bean-name>javaSnippetBean</managed-bean-name>
+    <managed-bean-class>nsf.playground.beans.JavaSnippetBean
+		</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>xPagesSnippetBean</managed-bean-name>
+    <managed-bean-class>nsf.playground.beans.XPagesSnippetBean
+		</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
     <managed-bean-name>apiBean</managed-bean-name>
     <managed-bean-class>nsf.playground.beans.APIBean
 		</managed-bean-class>

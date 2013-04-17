@@ -2,7 +2,7 @@ package nsf.playground.beans;
 
 import com.ibm.sbt.playground.assets.AssetNode;
 import com.ibm.sbt.playground.assets.CategoryNode;
-import com.ibm.sbt.playground.assets.apis.APIAssetNode;
+import com.ibm.sbt.playground.assets.jssnippets.JSSnippetAssetNode;
 
 /**
  * Classes that encapsulates the business logic for a JS snippet.
@@ -20,6 +20,6 @@ public class SnippetBean extends AssetBean {
 	}
 	
 	protected AssetNode createAssetNode(String notesUnid, CategoryNode parent, String name, String category, String assetId) {
-		return new APIAssetNode(parent,name,category,notesUnid,assetId);
+		return new JSSnippetAssetNode(parent,name,category,notesUnid,assetId);
 	}
 }

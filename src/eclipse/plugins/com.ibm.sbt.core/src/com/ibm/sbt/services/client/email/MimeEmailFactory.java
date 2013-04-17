@@ -13,7 +13,7 @@ public interface MimeEmailFactory {
     /**
      * Creates a MimeEmail from a JSON object.  The JSON should follow the below
      * model.
-     * <code>
+     * {@code
      *   {
      *     "to" : ["fadams@renovations.com", "tamado@renovations.com"],
      *     "cc" : ["pclemmons@renovations.com"],
@@ -45,8 +45,8 @@ public interface MimeEmailFactory {
      *       }
      *     ]
      *   }
+     * }
      *
-     * </code>
      * @param json The JSON object to create the email from.
      * @return A MimeEmail object.
      * @throws MimeEmailException Thrown if the MIME email cannot be created.

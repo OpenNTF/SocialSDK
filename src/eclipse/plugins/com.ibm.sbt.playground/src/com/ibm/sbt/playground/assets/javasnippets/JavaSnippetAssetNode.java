@@ -45,9 +45,11 @@ public class JavaSnippetAssetNode extends AssetNode {
 	public Asset createAsset(VFSFile root) throws IOException {
 		VFSFile parent = getParentFile(root);
 		String jsp = loadResource(parent,"jsp");
+		String docHtml = loadResource(parent,"doc.html");
 		JavaSnippet s = (JavaSnippet)new JavaSnippet();
 		s.setJsp(jsp);
 		s.setJspPath("/samples/java"+parent.getPath()+"/"+getName()+".jsp"); // TODO read the base part of the directory from the VFS
+		s.setDocHtml(docHtml);
 		return s;
 	}
 }

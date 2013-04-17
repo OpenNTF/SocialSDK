@@ -22,7 +22,7 @@
 define(['jquery/ui'], function() {
 	
 	return {
-		submitOnClickHandle: function(contentForm) {
+		submitOnClickHandle: function(contentForm, options) {
 			var o = {};
 			$.each(contentForm, function() {
 				if (o[this.name]) {
@@ -44,6 +44,9 @@ define(['jquery/ui'], function() {
 	    		var postToProxy = {
 					url: proxyServletURL, 
 					content: contentForm,
+					headers: {
+						"Content-Type": "application/x-www-form-urlencoded"
+					},
 					handle: function(data){
 						if(data instanceof Error){
 							var statusCode = data.code; // In the transport we already set the statusCode to error.code
@@ -108,7 +111,7 @@ define(['jquery/ui'], function() {
 	            		if (text == "OK"){
 	            			thisButton.click(
 	            				function() {
-	            					self.submitOnClickHandle($("form").serializeArray());
+	            					self.submitOnClickHandle($("form").serializeArray(), options);
 	            				}
 	            			);
 	            		}

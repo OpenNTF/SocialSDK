@@ -64,7 +64,11 @@
         };
         
         var setLeafBehaviour = function(){
-            $(".leafNode").click(onLeafNodeClicked);
+            $(".leafNode").each(function(index) {
+                var data = $.hasData( this ) && $._data( this );
+                if(!data)
+                    $(this).click(onLeafNodeClicked);
+            });
             $("div[class*='leafNode'] > div > span").css('cursor', 'pointer');
         };
 

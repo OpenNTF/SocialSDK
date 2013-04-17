@@ -3,18 +3,28 @@
 	<xe:navigator id="outline">
 		<xe:this.treeNodes>
 			<xe:basicContainerNode transparent="true"
-				loaded="${javascript:optionsBean.playgroundEnabled}">
+				loaded="${javascript:optionsBean.javaScriptSnippetsEnabled}">
 				<xe:pageTreeNode page="ManageSnippetsByCategory"
-					label="Snippets By Category" selection="/Manage/SnippetsByCategory">
+					label="JavaScript Snippets By Category" selection="/Manage/SnippetsByCategory">
 				</xe:pageTreeNode>
 				<xe:pageTreeNode page="ManageSnippetsByAuthor"
-					label="Snippets By Author" selection="/Manage/SnippetsByAuthor">
+					label="JavaScript Snippets By Author" selection="/Manage/SnippetsByAuthor">
 				</xe:pageTreeNode>
-				<xe:pageTreeNode page="ManageSnippetsMine" label="My Snippets"
-					selection="/Manage/SnippetsMine">
-				</xe:pageTreeNode>
-				<xe:pageTreeNode page="ManageImportSnippets" label="Import Snippets"
+				<xe:pageTreeNode page="ManageImportSnippets" label="Import JavaScript Snippets"
 					selection="/Manage/ImportSnippets">
+				</xe:pageTreeNode>
+			</xe:basicContainerNode>
+			<xe:basicContainerNode transparent="true"
+				loaded="${javascript:optionsBean.javaSnippetsEnabled}">
+				<xe:separatorTreeNode></xe:separatorTreeNode>
+				<xe:pageTreeNode page="ManageJavaSnippetsByCategory"
+					label="Java Snippets By Category" selection="/Manage/JavaSnippetsByCategory">
+				</xe:pageTreeNode>
+				<xe:pageTreeNode page="ManageJavaSnippetsByAuthor"
+					label="Java Snippets By Author" selection="/Manage/JavaSnippetsByAuthor">
+				</xe:pageTreeNode>
+				<xe:pageTreeNode page="ManageImportJavaSnippets" label="Import Java Snippets"
+					selection="/Manage/ImportJavaSnippets">
 				</xe:pageTreeNode>
 			</xe:basicContainerNode>
 			<xe:basicContainerNode transparent="true"

@@ -5,21 +5,23 @@ import lotus.domino.Document;
 
 import com.ibm.sbt.playground.assets.AssetNode;
 import com.ibm.sbt.playground.assets.NodeFactory;
+import com.ibm.sbt.playground.assets.javasnippets.JavaSnippet;
+import com.ibm.sbt.playground.assets.javasnippets.JavaSnippetNodeFactory;
 import com.ibm.sbt.playground.assets.jssnippets.JSSnippet;
 import com.ibm.sbt.playground.assets.jssnippets.JSSnippetNodeFactory;
 import com.ibm.sbt.playground.vfs.VFSFile;
 
 /**
- * Class for importing JS Snippets.
+ * Class for importing Java Snippets.
  * 
  * @author priand
  *
  */
-public class SnippetImporter extends AssetImporter {
+public class JavaSnippetImporter extends AssetImporter {
 	
-	public static final String TYPE = "html";
+	public static final String TYPE = "java";
 	
-	public SnippetImporter(Database db) {
+	public JavaSnippetImporter(Database db) {
 		super(db);
 	}
 	
@@ -28,18 +30,18 @@ public class SnippetImporter extends AssetImporter {
 	}
 
 	protected String getAssetView() {
-		return "AllSnippetsByImportSource";
+		return "AllJavaSnippetsByImportSource";
 	}
 
 	protected NodeFactory getNodeFactory() {
-		return new JSSnippetNodeFactory();
+		return new JavaSnippetNodeFactory();
 	}
 
 	protected void saveAsset(ImportSource source, VFSFile root, AssetNode node) throws Exception {
-		JSSnippet snippet = (JSSnippet)node.load(root);
+		JavaSnippet snippet = (JavaSnippet)node.load(root);
 		Document doc = getDatabase().createDocument();
 		try {
-			setItemValue(doc,"Form", "CodeSnippet");
+			setItemValue(doc,"Form", "JavaSnippet");
 			setItemValue(doc,"Author", doc.getParentDatabase().getParent().getUserName()); // Should we make this private (reader field)?
 			setItemValue(doc,"Id", node.getUnid());
 			setItemValue(doc,"Category", node.getCategory());
@@ -47,9 +49,7 @@ public class SnippetImporter extends AssetImporter {
 			setItemValue(doc,"Description", snippet.getProperty("description"));
 			setItemValue(doc,"Tags", snippet.getProperty("tags"));
 			setItemValue(doc,"ImportSource", source.getName());
-			setItemValueRichText(doc,"Html", snippet.getHtml());
-			setItemValueRichText(doc,"Css", snippet.getCss());
-			setItemValueRichText(doc,"JavaScript", snippet.getJs());
+			setItemValueRichText(doc,"Jsp", snippet.getJsp());
 			setItemValueRichText(doc,"Properties", snippet.getPropertiesAsString());
 			setItemValueRichText(doc,"Documentation", snippet.getDocHtml());
 			

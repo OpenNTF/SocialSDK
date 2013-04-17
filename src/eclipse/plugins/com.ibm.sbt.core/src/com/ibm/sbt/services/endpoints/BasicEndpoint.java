@@ -248,6 +248,8 @@ public class BasicEndpoint extends AbstractEndpoint {
         setUser(user);
         setPassword(password);
         if(!isAuthenticationValid()) {
+        	setUser(null);
+            setPassword(null);
             return false;
         }
         if(writeToStore) {

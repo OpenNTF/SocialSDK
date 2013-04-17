@@ -5,7 +5,14 @@
     <title>Social Business Toolkit - Java Samples</title>
     <link href="images/sbt.png" rel="shortcut icon">
     <link rel="stylesheet" href="/sbt.dojo180/dijit/themes/claro/claro.css">
-    
+    <link rel="stylesheet" href="libs/codemirror/lib/codemirror.css">
+    <script src="libs/codemirror/lib/codemirror.js.uncompressed.js"></script>
+    <script src="libs/codemirror/mode/javascript/javascript.js"></script>
+    <script src="libs/codemirror/mode/xml/xml.js"></script>
+    <script src="libs/codemirror/mode/css/css.js"></script>
+    <script src="libs/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+    <script src="libs/codemirror/mode/htmlembedded/htmlembedded.js"></script>
+    <script src="libs/codemirror/lib/util/formatting.js"></script>
     <link href="/sbt.bootstrap211/bootstrap/css/bootstrap.css" rel="stylesheet"></link>
     <style type="text/css">
       body {
@@ -30,8 +37,18 @@
                 <%@include file="includes/outline.jsp"%>
             </div>
             <div class="span8">
-                <div id="snippetContainer">
-                    <%@include file="includes/java_snippet.jsp"%>
+                <div>
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="#">JavaServer Page</a>
+                        </li>
+                        <li>
+                            <a href="#">Documentation</a>
+                        </li>
+                    </ul>
+                    <div id="snippetContainer" style="border-style:solid;border-width:1px;width=500px;height:300px;border-color:#D3D3D3;overflow:none;">
+                        <%@include file="includes/java_snippet.jsp"%>
+                    </div>
                 </div>
                 <div><hr/></div>
                 <%@include file="includes/java_runner.jsp"%>

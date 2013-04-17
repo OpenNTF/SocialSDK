@@ -26,6 +26,7 @@ import com.ibm.sbt.playground.assets.Asset;
 public class JavaSnippet extends Asset {
 
 	private String jsp;
+    private String docHtml;
 	private String jspPath;
 	
 	public JavaSnippet() {
@@ -51,7 +52,14 @@ public class JavaSnippet extends Asset {
 	public void setJspPath(String jspPath) {
 		this.jspPath = jspPath;
 	}
-	
+
+    public String getDocHtml() {
+        return docHtml;
+    }
+    public void setDocHtml(String docHtml) {
+        this.docHtml = docHtml;
+    }
+
 	public String getJspForDisplay() {
 		String s = getJsp();
 		if(s!=null) {

@@ -67,7 +67,7 @@
 						page="/Home.xsp">
 					</xe:pageTreeNode>
 					<xe:pageTreeNode label="Playground"
-						loaded="${javascript:optionsBean.playgroundEnabled}"
+						loaded="${javascript:optionsBean.javaScriptSnippetsEnabled}"
 						page="/Playground.xsp" selection="/Playground">
 					</xe:pageTreeNode>
 					<xe:pageTreeNode label="API Explorer"

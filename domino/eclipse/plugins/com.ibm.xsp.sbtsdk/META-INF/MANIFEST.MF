@@ -26,6 +26,7 @@ Require-Bundle: org.eclipse.core.runtime,
 Bundle-ActivationPolicy: lazy
 Export-Package: com.ibm.xsp.sbtsdk,
  com.ibm.xsp.sbtsdk.library,
+ com.ibm.xsp.sbtsdk.resources,
  com.ibm.xsp.sbtsdk.runtime,
  com.ibm.xsp.sbtsdk.services.mail,
  com.ibm.xsp.sbtsdk.servlets,

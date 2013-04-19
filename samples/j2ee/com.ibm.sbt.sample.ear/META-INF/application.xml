@@ -15,5 +15,26 @@
  		<web-uri>com.ibm.sbt.sample.web.war</web-uri>
  		<context-root>sbt.sample.web</context-root>
  	</web>
- </module> 
- </application> 
+ </module>
+ <module id="Module_1366299031096">
+   <web>
+     <web-uri>com.ibm.sbt.bootstrap211.war</web-uri>
+     <context-root>sbt.bootstrap211</context-root>
+   </web>
+ </module>
+ <module id="Module_1366299437786">
+   <web>
+     <web-uri>com.ibm.sbt.dojo180.war</web-uri>
+     <context-root>sbt.dojo180</context-root>
+   </web>
+ </module>
+ <module id="Module_1366299568328">
+   <web>
+     <web-uri>com.ibm.sbt.jquery180.war</web-uri>
+     <context-root>sbt.jquery180</context-root>
+   </web>
+ </module>
+
+
+ 
+</application> 

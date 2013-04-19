@@ -5,6 +5,9 @@
 	<projects>
 		<project>com.ibm.sbt.web</project>
 		<project>com.ibm.sbt.sample.web</project>
+		<project>com.ibm.sbt.bootstrap211</project>
+		<project>com.ibm.sbt.dojo180</project>
+		<project>com.ibm.sbt.jquery180</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

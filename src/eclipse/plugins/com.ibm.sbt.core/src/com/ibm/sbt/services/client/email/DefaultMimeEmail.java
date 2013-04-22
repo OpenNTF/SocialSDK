@@ -13,7 +13,9 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.naming.InitialContext;
+import javax.naming.NameNotFoundException;
 
+import com.ibm.commons.runtime.Context;
 import com.ibm.commons.util.io.json.JsonObject;
 
 /**
@@ -21,10 +23,8 @@ import com.ibm.commons.util.io.json.JsonObject;
  *
  */
 public class DefaultMimeEmail extends AbstractMimeEmail implements MimeEmail {
-    
-    //TODO do we want to make this configurable?
-        
-    /**
+
+	/**
      * Constructs a MIME email.
      */
     public DefaultMimeEmail() {
@@ -98,13 +98,30 @@ public class DefaultMimeEmail extends AbstractMimeEmail implements MimeEmail {
         if(getTo().isEmpty() && getCC().isEmpty() && getBCC().isEmpty()) {
             throw new MimeEmailException("The email's to, cc, and bcc fields are empty.");
         }
+      
+
         try {
-            InitialContext initCtx = new InitialContext();
-            Object obj = initCtx.lookup(EnvironmentConfig.INSTANCE.getSbtSessionResource());
-            if(!(obj instanceof Session)) {
-                throw new MimeEmailException("Could not get valid Session object.");
-            } 
-            Session session = (Session)obj;
+        	  Session session = null;
+    		try {
+    			//Lookup a session at the default name, if no session is found lookup a session factory and try to create a new one
+               
+                InitialContext initCtx = new InitialContext();
+                Object obj = initCtx.lookup(EnvironmentConfig.INSTANCE.getSbtSessionResource());
+                if((obj instanceof Session)) {
+                    session = (Session)obj;
+    			}
+    		} catch (NameNotFoundException ex) {
+            	//we can recover from this
+            }
+           if (session == null) {
+				Context appCtx = Context.get();
+				 Object obj = appCtx.getBean(EnvironmentConfig.INSTANCE.getSbtSessionFactoryResource());
+				if (!(obj instanceof MailSessionFactory)) {
+					throw new MimeEmailException("Could not get valid Session object.");
+				}
+				session = ((MailSessionFactory) obj).getInstance();
+			}      
+		
             MimeMessage msg = new MimeMessage(session);
             msg.setFrom();
             msg.setRecipients(Message.RecipientType.TO, 

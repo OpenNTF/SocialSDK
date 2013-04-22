@@ -22,7 +22,7 @@ define([ "sbt/_bridge/declare", "sbt/lang", "sbt/itemFactory", "sbt/widget/grid/
 
     /**
      * @class grid
-     * @namespace grid
+     * @namespace sbt.controls.grid
      * @module sbt.controls.grid.Grid
      */
     declare("sbt.controls.grid.Grid", [ _Grid ], {
@@ -77,6 +77,7 @@ define([ "sbt/_bridge/declare", "sbt/lang", "sbt/itemFactory", "sbt/widget/grid/
                     if (args && args.type && this.options.hasOwnProperty(args.type)) {
                         rendererArgs = this.options[args.type].rendererArgs;
                     }
+
                     this.renderer = this.createDefaultRenderer(rendererArgs);
                 }
             }
@@ -167,13 +168,18 @@ define([ "sbt/_bridge/declare", "sbt/lang", "sbt/itemFactory", "sbt/widget/grid/
             this._stopEvent(ev);
             
             if (this.store) {
-                var options = { 
-                		start : 0, count : this.pageSize
-                };
-                if (this._activeSortAnchor) {
-                    options.sort = [{ attribute: this._activeSortAnchor.sortParameter }];
-                }
-                
+            	
+            	//if sorting
+            	if(this._activeSortAnchor){
+	                var options = { 
+	                		start : 0, count : this.pageSize,
+	                		sort: [{ attribute: this._activeSortAnchor.sortParameter }]
+	                };
+            	}else{
+            		var options = { 
+	                		start : 0, count : this.pageSize,
+	                };
+            	}
             if (this.data) {
                 options.start = Math.max(0, this.data.start - options.count);
             }
@@ -182,10 +188,10 @@ define([ "sbt/_bridge/declare", "sbt/lang", "sbt/itemFactory", "sbt/widget/grid/
            	 options.tag = this.filterTag;
             }
             
-            if (this._activeSortIsDesc && options.sort) {
-                options.sort[0].descending = this._activeSortIsDesc;
+            //if sorting is being used
+            if(this._activeSortIsDesc){
+            	options.sort[0].descending = this._activeSortIsDesc;
             }
-            
             this._doQuery(this.store, options);
             }
         },
@@ -201,11 +207,16 @@ define([ "sbt/_bridge/declare", "sbt/lang", "sbt/itemFactory", "sbt/widget/grid/
             this._stopEvent(ev);
             
             if (this.store) {
-            	var options = { 
-                    	start : 0, count : this.pageSize
-                };
-            	if (this._activeSortAnchor) {
-            	    options.sort = [{ attribute: this._activeSortAnchor.sortParameter }];
+            	//if there is sorting available
+            	if(this._activeSortAnchor){
+	            	var options = { 
+	                    	start : 0, count : this.pageSize ,
+	                    	sort: [{ attribute: this._activeSortAnchor.sortParameter }]
+	                };
+            	}else {
+            		var options = { 
+	                    	start : 0, count : this.pageSize 
+	                };
             	}
              if (this.data) {
                  options.start = this.data.start + options.count;
@@ -215,10 +226,10 @@ define([ "sbt/_bridge/declare", "sbt/lang", "sbt/itemFactory", "sbt/widget/grid/
             	 options.tag = this.filterTag;
              }
              
-             if (this._activeSortIsDesc && options.sort) {
-                 options.sort[0].descending = this._activeSortIsDesc;
+             //if there is sorting
+             if(this._activeSortAnchor){
+            	 options.sort[0].descending = this._activeSortIsDesc;
              }
-             
              this._doQuery(this.store, options);
             }
         },

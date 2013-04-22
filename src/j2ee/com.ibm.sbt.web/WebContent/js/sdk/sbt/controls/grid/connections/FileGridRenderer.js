@@ -38,6 +38,8 @@ define(["sbt/_bridge/declare",
     	 * Strings for the Grid
     	 */
         _nls: nls,
+        
+        pinFiles:"",
     
          /**
           * @method - constructor
@@ -53,6 +55,8 @@ define(["sbt/_bridge/declare",
              } else if (args.type == "comment"){
                  this.template = commentTemplate;
              }
+             
+             
          },
          
          /**
@@ -209,6 +213,15 @@ define(["sbt/_bridge/declare",
                 return string.substitute(this._nls.nLikes, item);
             }
         },
+        
+        pinFileOnOrOff: function(grid, item, i, items){
+        	if(this.pinFiles == "off"){
+        		return "";
+        	}else if (this.pinFiles == "on"){
+        		return "lconnSprite lconnSprite-iconPinned16-off";
+        	}
+        	
+        }
 
        
     });

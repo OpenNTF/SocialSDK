@@ -26,8 +26,10 @@ define([ "sbt/_bridge/declare",
          "dojo/string", 
          "sbt/store/parameter",
          "sbt/connections/FileService",
+         "sbt/lang",
+         "sbt/dom",
          "sbt/connections/FileConstants"], 
-        function(declare, Grid, FileGridRenderer, FileAction, sbt, SemanticTagService, string, parameter,FileService) {
+        function(declare, Grid, FileGridRenderer, FileAction, sbt, SemanticTagService, string, parameter,FileService,lang,domClass) {
 
     /**
      * @class FileGrid
@@ -37,6 +39,7 @@ define([ "sbt/_bridge/declare",
     declare("sbt.controls.grid.connections.FileGrid", Grid, {
 
     	gridSortType: "",
+    	
     	/**
     	 * Options determine which type of file grid will be created
     	 */
@@ -75,7 +78,7 @@ define([ "sbt/_bridge/declare",
                 storeArgs : {
                     url : sbt.connections.fileUrls.folders,
                     attributes : sbt.connections.fileConstants.xpath_folders,
-                    paramSchema: parameter.files.all 
+                    paramSchema: parameter.files.all
                 },
                 rendererArgs : {
                     type : "folder"
@@ -94,7 +97,8 @@ define([ "sbt/_bridge/declare",
             "pinnedFolders" : {
                 storeArgs : {
                     url : sbt.connections.fileUrls.pinnedFolders,
-                    attributes : sbt.connections.fileConstants.xpath_folders
+                    attributes : sbt.connections.fileConstants.xpath_folders,
+                    paramSchema: parameter.files.all
                 },
                 rendererArgs : {
                     type : "folder"
@@ -103,7 +107,8 @@ define([ "sbt/_bridge/declare",
             "activeFolders" : {
                 storeArgs : {
                     url : sbt.connections.fileUrls.activeFolders,
-                    attributes : sbt.connections.fileConstants.xpath_folders
+                    attributes : sbt.connections.fileConstants.xpath_folders,
+                    paramSchema: parameter.files.all
                 },
                 rendererArgs : {
                     type : "folder"
@@ -112,7 +117,8 @@ define([ "sbt/_bridge/declare",
             "shares" : {
                 storeArgs : {
                     url : sbt.connections.fileUrls.shares,
-                    attributes : sbt.connections.fileConstants.xpath_files
+                    attributes : sbt.connections.fileConstants.xpath_files,
+                    paramSchema: parameter.files.all
                 },
                 rendererArgs : {
                     type : "file"
@@ -155,7 +161,6 @@ define([ "sbt/_bridge/declare",
         	
         	/**gridSortType is used to determine what sorting anchors should be used,
         	 * for example folders have different sort anchors than files, file comments have no anchors etc*/
-        	
         	if(args.type=="fileShares" || args.type == "library" || args.type == "pinnedFiles"){
         		gridSortType = "file";
         	}else if(args.type == "fileComments" || args.type == "recycledFiles"){
@@ -207,11 +212,19 @@ define([ "sbt/_bridge/declare",
 
             if(args.type == "publicFiles"){
             	this._activeSortAnchor = this._sortInfo.created;
+            	this._activeSortIsDesc = false;  
+            }else if(args.type == "folders"){
+            	this._activeSortAnchor = this._sortInfo.name;
+            	this._activeSortIsDesc = true;  
             }else {
-            	this._activeSortAnchor = this._sortInfo.updated;  	
+            	this._activeSortAnchor = this._sortInfo.updated; 
+            	this._activeSortIsDesc = true;  
             }
             
-            this._activeSortIsDesc = false;
+            if(args && args.pinFile){
+            	this.renderer.pinFiles = args.pinFile;
+            }
+              
         },
         
         /**
@@ -246,20 +259,20 @@ define([ "sbt/_bridge/declare",
         
         /**
          * Called after the grid is created
+         * The semanticTagService is loaded, which is responsible for displaying business card functionality.
          * @method - postCreate
          */
         postCreate: function() {        	
         	this.inherited(arguments);
-        	
         	SemanticTagService.loadSemanticTagService();
         },
         
         /**
          * Event handler for onClick events
          * @method - handleClick
-         * @param el - the element that fired the event
-         * @param data -the data associated with the element
-         * @param ev - the event
+         * @param el The element that fired the event
+         * @param data The data associated with this table row
+         * @param ev The event, onclick
          */
         handleClick: function(el, data, ev) {
             if (this.fileAction) {
@@ -302,11 +315,11 @@ define([ "sbt/_bridge/declare",
         },
         
         /**
-         * Sort the grid rows by last modified date
-         * @method - sortByName
-         * @param el - The element that was clicked, typically a "sort by" button
-         * @param data - the data associated with the element
-         * @param ev - the event
+         * Sort the grid rows by name
+         * @method  sortByName
+         * @param el The element that fired the event
+         * @param data The data associated with this table row
+         * @param ev The event, onclick
          */
         sortByName: function(el, data, ev) {
             this._sort("name", true, el, data, ev);
@@ -314,63 +327,138 @@ define([ "sbt/_bridge/declare",
         
         /**
          * Sort the grid rows by last modified date
-         * @method - sortByName
-         * @param el - The element that was clicked, typically a "sort by" button
-         * @param data - the data associated with the element
-         * @param ev - the event
+         * @method  sortByLastUpdated
+         * @param el The element that fired the event
+         * @param data The data associated with this table row
+         * @param ev The event, onclick
          */
         sortByLastUpdated: function(el, data, ev) {
             this._sort("updated", true, el, data, ev);
         },
         
         /**
-         * Sort the grid rows by last modified date
-         * @method - sortByName
-         * @param el - The element that was clicked, typically a "sort by" button
-         * @param data - the data associated with the element
-         * @param ev - the event
+         * Sort the grid rows by the amount of times a file has been downloaded. 
+         * @method  sortByDownloads
+         * @param el The element that fired the event
+         * @param data The data associated with this table row
+         * @param ev The event, onclick
          */
         sortByDownloads: function(el, data, ev) {
             this._sort("downloads", true, el, data, ev);
         },
         
         /**
-         * Sort the grid rows by last modified date
-         * @method - sortByName
-         * @param el - The element that was clicked, typically a "sort by" button
-         * @param data - the data associated with the element
-         * @param ev - the event
+         * Sort the grid rows by the amount of comments a file has.
+         * @method - sortByComments
+         * @param el The element that fired the event
+         * @param data The data associated with this table row
+         * @param ev The event, onclick
          */
         sortByComments: function(el, data, ev) {
             this._sort("comments", true, el, data, ev);
         },
         
         /**
-         * Sort the grid rows by last modified date
-         * @method - sortByName
-         * @param el - The element that was clicked, typically a "sort by" button
-         * @param data - the data associated with the element
-         * @param ev - the event
+         * Sort the grid rows by the number of "likes" that a file has. 
+         * @method  sortByLikes
+         * @param el The element that fired the event
+         * @param data The data associated with this table row
+         * @param ev The event, onclick
          */
         sortByLikes: function(el, data, ev) {
             this._sort("likes", true, el, data, ev);
         },
         
+        /**
+         * Sort the grid rows by when the files were first created
+         * @method  sortByCreatedDate
+         * @param el The element that fired the event
+         * @param data The data associated with this table row
+         * @param ev The event, onclick
+         */
         sortByCreatedDate:function(el, data, ev) {
             this._sort("created", true, el, data, ev);
         },
         
+        /**
+         * Sorts the grid, based on the number of files contained in each folder.
+         * This is for grids that display folders.
+         * @method sortByNumberOfFiles
+         * @param el The element that fired the event
+         * @param data The data associated with this table row
+         * @param ev The event, onclick
+         */
         sortByNumberOfFiles: function(el, data, ev) {
             this._sort("files", true, el, data, ev);
         },
+       
+        /**
+         * Event handler to show and hide the more options in the files grid
+         * @method - showMore
+         * @param el The element that fired the event
+         * @param data The data associated with this table row
+         * @param ev The event, onclick
+         */
+        showMore: function(el, data, ev){
+        	/**TODO - to be implemented in iteration 9 */	
+        },
         
-        pinFile: function(el, data, ev){
+        /**
+         * @method onUpdate This is called after the grid is updated
+         * In this implementation, a list of pinned files is received from the server
+         * then all of the pin file links, are retrieved by class name,
+         * then if the file is a pinned file, its css class will be changed to reflect this 
+         * NOTE: this function will only execute, if file pin functionality is passed as an argument to the grid
+         */
+        onUpdate: function(){
         	
+	        if(this.renderer.pinFiles == "on"){
+	        	
+	        	/**Get all of the pin file img tags, we do this by classname*/
+	        	var pinElements = document.getElementsByClassName("lconnSprite lconnSprite-iconPinned16-off");
+	        	/**ids will hold the ID of each element, the id of the element is the uuid of the file.*/
+	        	var ids = [];
+	        	/**set the Ids into the ids array*/
+	        	for(var x =0;x <pinElements.length;x++){
+	        		ids[x] = pinElements[x].id;
+	        	}
+	        	/**we use the array of ids, and not the array of elements
+	        	because as we remove a class from an element, the array of elements will dynamically reduce*/
+	        	var fileService = new FileService();
+	        	lang.hitch(ids,fileService.getMyPinnedFiles({
+	        		load : function(files) {
+	        			for(var k=0;k<ids.length;k++){
+	        				for(var i=0;i<files.length;i++){
+	        					if(ids[k] == files[i].getId()){
+	        						domClass.removeClass(ids[k],"lconnSprite lconnSprite-iconPinned16-off");
+	        						domClass.addClass(ids[k],"lconnSprite lconnSprite-iconPinned16-on");
+	        					}
+	        				}
+	        			}
+	        		},
+	        		error : function(error) {
+	        			console.log("error getting pinned files");
+	        		}
+	        	}));
+	        	
+	          }
+        },	
+        /**This function pins(favourites) a file,
+         * It will send a request to the server using the file service API,
+         * And when the request returns successfully, the css clas
+         * of the link will be change to reflect that the file is now pinned. 
+         * If the file is already pinned, it will remove the pin from the file.
+         * @method doPinFile
+         * @param el The element that fired the event
+         * @param data The data associated with this table row
+         * @param ev The event, onclick
+         */
+        doPinFile: function(el, data, ev){
         	var uuid = "";
         	if(data.uuid){
         		uuid = data.uuid;
-        	}else if(data.element.children[1].textContent){
-        		uuid = data.element.children[1].textContent;
+        	}else if(data._attribs.uuid){
+        		uuid = data._attribs.uuid;
         	}
         		
         	var fileService = new FileService();
@@ -379,37 +467,30 @@ define([ "sbt/_bridge/declare",
         		loadIt : false
         	});
         	
-        	 fileService.pinFile(file,{
-        		load : function(response) {
-        			/**TODO handle response */
-        			//domClass.remove(el.firstElementChild, "lconnSprite-iconPinned16-off");
-        			//domClass.add(el.firstElementChild, "lconnSprite-iconPinned16-on");
-
-        			
-        		},
-        		error : function(response) {
-        			//console.log("Error pinning file");
-        		}
-        	});
-
+        	if(el.firstElementChild.className == "lconnSprite lconnSprite-iconPinned16-off"){
+	        	 lang.hitch(el,fileService.pinFile(file,{
+	        		load : function(response) {
+	        			domClass.removeClass(el.firstElementChild, "lconnSprite lconnSprite-iconPinned16-off");
+	        			domClass.addClass(el.firstElementChild, "lconnSprite lconnSprite-iconPinned16-on");	
+	
+	        		},
+	        		error : function(response) {
+	        			console.log("Error pinning file");
+	        		}
+	        	}));
+        	}else if (el.firstElementChild.className == "lconnSprite lconnSprite-iconPinned16-on"){
+        		lang.hitch(el,fileService.removePinFromFile(file, {
+        			load : function(data) {
+        				domClass.removeClass(el.firstElementChild, "lconnSprite lconnSprite-iconPinned16-on");
+	        			domClass.addClass(el.firstElementChild, "lconnSprite lconnSprite-iconPinned16-off");	
+        			},
+        			error : function(error) {
+        				console.log("error removing pin from file");
+        			}
+        		}));
+        	}
+        	
         },
-
-        /**
-         * Event handler to show and hide the more options in the files grid
-         * @method - showMore
-         * @param el - The "more" link that was clicked
-         * @param data - the data for the row
-         * @param ev - the event - onClick
-         */
-        showMore: function(el, data, ev){
-        	/**TODO - to be implemented in iteration 9 */	
-        },
-
-        
-        getPinnedFiles: function(){
-        	/**TODO - To be implemented in iteration 8 */
-        },
-        
         // Internals
         _buildUrl: function(url) {
             url = string.substitute(url, this);

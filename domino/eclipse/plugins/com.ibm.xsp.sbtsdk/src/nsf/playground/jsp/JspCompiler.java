@@ -16,7 +16,6 @@
 
 package nsf.playground.jsp;
 
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -37,51 +36,14 @@ public class JspCompiler {
 	public static final String START_TAG = "<%"; //$NON-NLS-1$
 	public static final String END_TAG 	 = "%>";  //$NON-NLS-1$
 
-	private static final String IMPORTPATTERN = "<%@page[ \\t]+import[ \\t]*=[ \\t]*[\\\'\\\"]([\\d\\w\\s\\.]+)[\\\'\\\"][ \\t]*%>";
+	private static final String IMPORTPATTERN = "<%@page[ \\t\\n\\r]+import[ \\t\\n\\r]*=[ \\t\\n\\r]*[\\\'\\\"]([^\\\'\\\"]+)[\\\'\\\"][ \\t\\n\\r]*%>";
 	private static Pattern importPattern = Pattern.compile(IMPORTPATTERN);
 	
 	public JspCompiler() {
 	}
 	
-//	public Class<JspFragment> process(String source) throws InterpretException {
-//		// Generate the Java class
-//		String jsSource = generateScript(source);
-//		
-//		// And execute it
-//		return generateSourceCode(jsSource);
-//	}
-
-//	String mydata = "some string with 'the data i want' inside";
-//	Pattern pattern = Pattern.compile("'(.*?)'");
-//	Matcher matcher = pattern.matcher(mydata);
-//	if (matcher.find())
-//	{
-//	    System.out.println(matcher.group(1));
-//	}
-	
-	public String preprocessSourceCode(String source, String className) throws FacesException {
-		ArrayList<String> imports = new ArrayList<String>();
-		
-		// 1- gather all the import statements
-		Pattern pattern = Pattern.compile("'(.*?)'");
-		Matcher matcher = pattern.matcher(source);
-		while(matcher.find()) {
-		    imports.add(matcher.group(1));
-		}
-		
-		// 2- Keep what is in <body> tags
-		int start = StringUtil.indexOfIgnoreCase(source, "<body>");
-		int end = StringUtil.indexOfIgnoreCase(source, "</body>");
-		if(start>=0 && end>=start+6) {
-			return source.substring(start+6,end).trim();
-		}
-		
-		return source;
-	}
-	
 	// Generate the JavaScript code that then output the final text
-	public String generateSourceCode(String source, String className) throws FacesException {
-		
+	public String compileJsp(String source, String className) throws FacesException {
 		StringBuilder javaSource = new StringBuilder(2048);
 		
 		generateHeader(javaSource, source, className);
@@ -93,8 +55,9 @@ public class JspCompiler {
 			int exp = source.indexOf(START_TAG,pos);
 			int end = exp>=0 ? exp : slen;
 			if(end>pos) {
-				javaSource.append("    emit(w,");
-				javaSource.append(TextUtil.toJavaString(source.substring(pos,end),true));
+				javaSource.append("    emit(out,");
+				String emit = TextUtil.toJavaString(source.substring(pos,end),true);
+				javaSource.append(emit);
 				pos = end;
 				javaSource.append(");\n");
 			}
@@ -106,9 +69,10 @@ public class JspCompiler {
 				
 				if(source.charAt(exp+2)=='=') { 
 					String sub = source.substring(exp+3,stend).trim();
-					javaSource.append("    emit(w,");
-					javaSource.append(sub); 
-					javaSource.append(")\n");
+					javaSource.append("    emit(out,");
+					String emit = sub;
+					javaSource.append(emit);
+					javaSource.append(");\n");
 				} else {
 					String sub = source.substring(exp+2,stend).trim();
 					javaSource.append(sub);
@@ -126,7 +90,7 @@ public class JspCompiler {
 		return javaSource.toString();
 	}
 
-	protected String extractBody(String source) throws FacesException {
+	public static String extractBody(String source) throws FacesException {
 		int start = StringUtil.indexOfIgnoreCase(source, "<body>");
 		int end = StringUtil.indexOfIgnoreCase(source, "</body>");
 		if(start>=0 && end>=start+6) {
@@ -145,10 +109,16 @@ public class JspCompiler {
 		}
 		generateImports(b, source);
 		b.append("public class ").append(genClass).append(" extends nsf.playground.jsp.JspFragment {\n");
-		b.append("  public void exec(Writer w) throws IOException {\n");
+		b.append("  public void exec(JspWriter out, HttpServletRequest request, HttpServletResponse response) throws Exception {\n");
 	}
 
 	protected void generateImports(StringBuilder b, String source) throws FacesException {
+		// Std imports
+		b.append("import javax.servlet.http.HttpServletRequest;\n");
+		b.append("import javax.servlet.http.HttpServletResponse;\n");
+		b.append("import javax.servlet.jsp.JspWriter;\n");
+		
+		// Then import from the JSP page
 		Matcher matcher = importPattern.matcher(source);
 		while(matcher.find()) {
 			String imp = matcher.group(1); 
@@ -163,6 +133,7 @@ public class JspCompiler {
 		b.append("} // class\n");
 	}
 	
+/*	
 	public static void main(String[] args) {
 //		test("<body>Simple JSP</body>"); 
 //		test("<html><head><%@page import=\"mypack1\"%></head><body>Simple JSP</body></html>"); 
@@ -177,11 +148,12 @@ public class JspCompiler {
 			System.out.println(StringUtil.format("Pattern: {0}",IMPORTPATTERN)); 
 			System.out.println(StringUtil.format(">>>>Source:\n{0}\n",s)); 
 			JspCompiler p = new JspCompiler();
-			String javaCode = p.generateSourceCode(s,"myPackage.MyClass");
+			String javaCode = p.compileJsp(s,"myPackage.MyClass");
 			System.out.println(StringUtil.format(">>>>Generated Java class:\n{0}\n",javaCode)); 
 		} catch(Exception e) {
 			System.out.println(StringUtil.format("Error while processing text")); 
 			e.printStackTrace();
 		}
 	}
+*/	
 }

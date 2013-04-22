@@ -39,8 +39,6 @@ import com.ibm.domino.xsp.module.nsf.NotesContext;
 import com.ibm.xsp.application.ApplicationEx;
 import com.ibm.xsp.application.events.ApplicationListener;
 import com.ibm.xsp.context.FacesContextEx;
-import com.ibm.xsp.core.ResourceHandler;
-import com.ibm.xsp.core.ResourceHandlerImpl;
 import com.ibm.xsp.event.FacesContextListener;
 
 

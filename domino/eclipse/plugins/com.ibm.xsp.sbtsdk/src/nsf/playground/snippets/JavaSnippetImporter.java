@@ -7,8 +7,6 @@ import com.ibm.sbt.playground.assets.AssetNode;
 import com.ibm.sbt.playground.assets.NodeFactory;
 import com.ibm.sbt.playground.assets.javasnippets.JavaSnippet;
 import com.ibm.sbt.playground.assets.javasnippets.JavaSnippetNodeFactory;
-import com.ibm.sbt.playground.assets.jssnippets.JSSnippet;
-import com.ibm.sbt.playground.assets.jssnippets.JSSnippetNodeFactory;
 import com.ibm.sbt.playground.vfs.VFSFile;
 
 /**

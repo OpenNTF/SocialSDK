@@ -5,9 +5,6 @@
 		<xp:script src="/javaScriptSnippets.js" clientSide="true"></xp:script>
 		<xp:dojoModule name="dojo.hash"></xp:dojoModule>
 		<xp:dojoModule name="extlib.codemirror.lib.codemirror"></xp:dojoModule>
-		<xp:dojoModule name="extlib.codemirror.mode.css.css"></xp:dojoModule>
-		<xp:dojoModule name="extlib.codemirror.mode.javascript.javascript"></xp:dojoModule>
-		<xp:dojoModule name="extlib.codemirror.mode.xml.xml"></xp:dojoModule>
 		<xp:styleSheet href="/.ibmxspres/.extlib/codemirror/lib/codemirror.css"></xp:styleSheet>
 	</xp:this.resources>
 
@@ -67,7 +64,6 @@ XSP._partialRefresh = prepend(XSP._partialRefresh,updateNavSelection);
 						<xe:remoteMethodArg name="snippetId"></xe:remoteMethodArg>
 					</xe:this.arguments>
 					<xe:this.script><![CDATA[var doc = null;
-print("ZZZ");
 var e = database.getView('AllSnippetsById').getEntryByKey(snippetId)
 if(e) {
 	// Ok, we found it by key

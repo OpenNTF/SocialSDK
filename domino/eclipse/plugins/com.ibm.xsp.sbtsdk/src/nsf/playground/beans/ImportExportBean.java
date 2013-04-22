@@ -12,11 +12,11 @@ import com.ibm.xsp.extlib.util.ExtLibUtil;
  * 
  * @author priand
  */
-public class ImportExport implements Serializable {
+public abstract class ImportExportBean implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
-	public ImportExport() {
+	public ImportExportBean() {
 	}
 	
 	public void importAssets(String type, String sourceName) throws Exception {

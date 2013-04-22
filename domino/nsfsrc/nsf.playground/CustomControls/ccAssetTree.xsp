@@ -81,7 +81,7 @@ return true;]]></xp:this.onkeypress>
 	});
 	navTree.onClick = function(item){
 		if(item.url) {
-			dojo.hash("#{javascript:compositeData.type}="+item.jspUrl);
+			dojo.hash("#{javascript:compositeData.pname||'snippet'}="+item.jspUrl);
 		}
 	};
 	// Suppress the wide out effect

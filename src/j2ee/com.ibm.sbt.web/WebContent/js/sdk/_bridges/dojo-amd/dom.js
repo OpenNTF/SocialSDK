@@ -17,8 +17,11 @@
 /**
  * Social Business Toolkit SDK - Some DOM utilities.
  */
-define(['dojo/dom','dojo/_base/window', 'dojo/dom-construct'],function(dom,win,domConstruct) {
+define(['dojo/dom','dojo/_base/window', 'dojo/dom-construct', 'dojo/dom-class'],function(dom,win,domConstruct,domClass) {
 	return {
+		addClass: function(node,className){
+			return domClass.add(node,className);
+		},
 		byId: function(id) {
 			return dom.byId(id);
 		},
@@ -39,6 +42,9 @@ define(['dojo/dom','dojo/_base/window', 'dojo/dom-construct'],function(dom,win,d
 				while(node.firstChild) node.removeChild(node.firstChild);
 			}
             return node;
+		},
+		removeClass: function(node, className){
+			return domClass.remove(node,className);
 		},
 		setText: function(node,text) {
 			node = this.byId(node);

@@ -27,6 +27,7 @@ import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.impl.servlet.ContextServlet;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.xsp.context.FacesContextEx;
+import com.ibm.xsp.context.RequestParameters;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.ibm.xsp.util.ManagedBeanUtil;
 
@@ -67,6 +68,12 @@ public class XspContext extends ContextServlet {
 	public String getProperty(String propertyName, String defaultValue) {
 		String s = getFacesContext().getProperty(propertyName);
 		return s!=null ? s : defaultValue;
+	}
+
+	@Override
+	public void setProperty(String propertyName, String value) {
+        RequestParameters p = getFacesContext().getRequestParameters();
+        p.setProperty(propertyName, value);
 	}
 	
 	public Object getBean(String beanName) {

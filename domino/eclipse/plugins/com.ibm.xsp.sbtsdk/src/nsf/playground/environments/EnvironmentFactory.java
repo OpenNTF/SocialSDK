@@ -15,6 +15,7 @@ public class EnvironmentFactory extends SBTEnvironmentFactory {
 	public EnvironmentFactory() {
 	}
 	
+	// a change
 	public SBTEnvironment getEnvironment(String name) {
 		try {
 			DataAccessBean acc = (DataAccessBean) ManagedBeanUtil.getBean(FacesContext.getCurrentInstance(), DataAccessBean.BEAN_NAME);

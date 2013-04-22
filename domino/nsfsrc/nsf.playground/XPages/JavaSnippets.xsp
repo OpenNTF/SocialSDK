@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:this.resources>
+		<xp:script src="/javaSnippets.js" clientSide="true"></xp:script>
+		<xp:dojoModule name="dojo.hash"></xp:dojoModule>
+		<xp:dojoModule name="extlib.codemirror.lib.codemirror"></xp:dojoModule>
+		<xp:dojoModule name="extlib.codemirror.mode.clike.clike"></xp:dojoModule>
+		<xp:dojoModule name="extlib.codemirror.mode.xml.xml"></xp:dojoModule>
+		<xp:styleSheet href="/.ibmxspres/.extlib/codemirror/lib/codemirror.css"></xp:styleSheet>
+	</xp:this.resources>
+
+	<xc:ccMainPageResources></xc:ccMainPageResources>
+
+	<xp:scriptBlock>
+		<xp:this.value><![CDATA[var pageGlobal = {
+	id:				"",		// Current Snippet ID
+	unid:			"",		// Snippet UNID
+	
+	// Code mirror Editors
+	jspEditor:			null,	// Java editor ID
+	propertiesEditor:	null,	// Properties editor
+	documentationPanel: null, 	// Documentation panel
+	
+	// IFrame content
+	_previewFrame:	null,
+	_loadingFrame:	null,
+	
+	// Other controls
+	borderContainer:'#{id:djTabContainer1}',
+	cbEnv:			'#{id:cbEnv}',
+	viewNavPanel:	'#{id:panelView}',
+	snippetsTree:	'assetsTree',
+	tabContainer:	'#{id:tabContainer}',
+	tabJsp:			'#{id:tabJsp}',
+	codeDialog:		'#{id:codeDialog}',
+}
+dojo.addOnLoad(function() {
+   dojo.connect(window, "onresize", resize);
+   resize();
+});
+
+function prepend(h,f) {
+	return function() {
+		if(f) {
+			f.apply(this,arguments);
+		}
+		if(h) {
+			h.apply(this,arguments);
+		}
+	};
+}
+XSP._partialRefresh = prepend(XSP._partialRefresh,updateNavSelection);
+]]></xp:this.value>
+	</xp:scriptBlock>
+
+	<xp:form>
+		<xe:jsonRpcService id="jsonRpcService1" serviceName="server">
+			<xe:this.methods>
+				<xe:remoteMethod name="loadSnippet">
+					<xe:this.arguments>
+						<xe:remoteMethodArg name="snippetId"></xe:remoteMethodArg>
+					</xe:this.arguments>
+					<xe:this.script><![CDATA[var doc = null;
+var e = database.getView('AllJavaSnippetsById').getEntryByKey(snippetId)
+if(e) {
+	// Ok, we found it by key
+	doc = e.getDocument();} else {
+	// Else, we try the UNID
+	doc = database.getDocumentByUNID(snippetId);
+}
+if(doc) {	o = {		status:			"ok",		id:				snippetId,		unid:			doc.getUniversalID(),
+		category:		doc.getItemValueString("category"),		author:			doc.getAuthors().get(0),		name:			doc.getItemValueString("name"),		tags:			doc.getItemValueString("tags"),		jsp:			nsf.playground.jsp.JspCompiler.extractBody(doc.getItemValueString("jsp")),
+		properties:		doc.getItemValueString("properties"),
+		documentation:	doc.getItemValueString("documentation")
+	}
+	return o;}o = {	status:		"error",	msg:		"Cannot open document with id "+id}return o;]]></xe:this.script>
+				</xe:remoteMethod>
+			</xe:this.methods>
+		</xe:jsonRpcService>
+		<xc:ccLayout navigationPath="/JavaSnippets"
+			title="IBM Social Business Toolkit - Java Snippets" wholePage="true">
+			<xp:this.facets>
+				<xp:panel id="PlaceBarActions"
+					xp:key="PlaceBarActions">
+					<xc:ccEnvironmentComboBox></xc:ccEnvironmentComboBox>
+				</xp:panel>
+			</xp:this.facets>
+			<xe:djBorderContainer id="djTabContainer1"
+				style="width:100%; height:100%;" liveSplitters="true">
+				<xe:this.dojoAttributes>
+					<xp:dojoAttribute name="design" value="sidebar"></xp:dojoAttribute>
+				</xe:this.dojoAttributes>
+				<xe:djBorderPane id="djBorderPane3" region="leading"
+					splitter="true" style="width:280px">
+					<xp:div id="leftRefresh" style="height: 100%">
+						<xc:ccAssetTree type="javaSnippet"></xc:ccAssetTree>
+					</xp:div>
+				</xe:djBorderPane>
+				<xe:djBorderPane id="djBorderPane2" region="center">
+					<xe:djBorderContainer id="djBorderContainer1"
+						liveSplitters="true">
+						<xe:this.dojoAttributes>
+							<xp:dojoAttribute name="gutters"
+								value="false">
+							</xp:dojoAttribute>
+						</xe:this.dojoAttributes>
+						<xe:djBorderPane region="top">
+							<xe:toolbar id="toolbar1">
+								<xe:this.treeNodes>
+									<xe:basicLeafNode
+										label="For security reason, Java snippets cannot be edited" href="#">
+									</xe:basicLeafNode>
+								</xe:this.treeNodes>
+							</xe:toolbar>
+						</xe:djBorderPane>
+						<xe:djBorderPane region="top" splitter="true"
+							style="height:400px">
+							<xe:djTabContainer id="tabContainer"
+								style="width: 100%; height: 100%; border: none">
+								<xe:djTabPane id="tabJsp" title="Jsp"
+									onShow="pageGlobal.jspEditor.refresh()">
+									<xp:div
+										style="border: 1px solid #AAAAAA; height: 100%">
+										<xc:PlaygroundTabJsp></xc:PlaygroundTabJsp>
+									</xp:div>
+								</xe:djTabPane>
+								<xe:djTabPane id="djTabProperties"
+									title="Properties"
+									onShow="pageGlobal.propertiesEditor.refresh()">
+									<xp:div
+										style="border: 1px solid #AAAAAA; height: 100%">
+										<xc:PlaygroundTabProperties></xc:PlaygroundTabProperties>
+									</xp:div>
+								</xe:djTabPane>
+								<xe:djTabPane id="djTabDocumentation"
+									title="Documentation">
+									<xp:div
+										style="border: 1px solid #AAAAAA; height: 100%">
+										<xc:PlaygroundTabDocumentation></xc:PlaygroundTabDocumentation>
+									</xp:div>
+								</xe:djTabPane>
+							</xe:djTabContainer>
+						</xe:djBorderPane>
+						<xe:djBorderPane region="top"
+							splitter="false">
+							<xe:toolbar id="toolbar2"
+								style="display: inline-block">
+								<xe:this.treeNodes>
+									<xe:basicLeafNode label="Run"
+										styleClass="dijitEditorIcon dijitEditorIconViewSource"
+										onClick="runCode(false)">
+									</xe:basicLeafNode>
+								</xe:this.treeNodes>
+							</xe:toolbar>
+						</xe:djBorderPane>
+						<xe:djBorderPane region="center"
+							style="border: 1px solid #AAAAAA;">
+							<xp:div style="height: 100%">
+								<xc:JavaSnippetsPreviewPane></xc:JavaSnippetsPreviewPane>
+							</xp:div>
+						</xe:djBorderPane>
+						<xe:djBorderPane region="bottom"
+							splitter="false">
+							<xc:ApacheLicense></xc:ApacheLicense>
+							</xe:djBorderPane>
+					</xe:djBorderContainer>
+				</xe:djBorderPane>
+			</xe:djBorderContainer>
+		</xc:ccLayout>
+	</xp:form>
+
+	<xp:scriptBlock>
+		<xp:this.value><![CDATA[function loadFromHash() {
+	if(dojo.hash()) {
+		var obj = dojo.queryToObject(dojo.hash());
+		if(obj.snippet) {
+			setTimeout(function() {loadSnippet(obj.snippet)});
+		} 
+	} else {
+		createSnippet();
+	}
+}
+dojo.addOnLoad( function() {	
+	dojo.subscribe("/dojo/hashchange",loadFromHash);
+	if(dojo.hash()) {
+		loadFromHash()
+	}
+})
+]]></xp:this.value>
+	</xp:scriptBlock>
+
+	<xc:ccEnvironmentComboBoxDialogs></xc:ccEnvironmentComboBoxDialogs>
+
+	<form id="PreviewForm" action="#{javascript:@FullUrl('/xsp/preview/javasnippet')}"
+		method="post" target="preview">
+		<input type="hidden" name="fm_id" id="id" />
+		<input type="hidden" name="fm_options" id="options" />
+	</form>
+</xp:view>

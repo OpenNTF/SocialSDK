@@ -25,7 +25,7 @@ import com.ibm.xsp.util.ManagedBeanUtil;
 /**
  * This is a managed bean used to cache and access the configuration data in the DB.
  */
-public class DataAccess {
+public abstract class DataAccessBean {
 
 	public static final String BEAN_NAME = "dataAccess";
 
@@ -33,8 +33,8 @@ public class DataAccess {
 
 	private static boolean TRACE = false;
 	
-	public static DataAccess get() {
-		return (DataAccess)ManagedBeanUtil.getBean(FacesContext.getCurrentInstance(), "dataAccess");
+	public static DataAccessBean get() {
+		return (DataAccessBean)ManagedBeanUtil.getBean(FacesContext.getCurrentInstance(), "dataAccess");
 	}
 	
 	//
@@ -54,7 +54,7 @@ public class DataAccess {
 	private String[] envNames = StringUtil.EMPTY_STRING_ARRAY;
 	private String preferredEnvironment;
 	
-	public DataAccess() {
+	public DataAccessBean() {
 	}
 	
 	public synchronized void clearCache() {

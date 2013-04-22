@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	<xp:this.resources>
+		<xp:dojoModule name="extlib.codemirror.mode.clike.clike"></xp:dojoModule>
+		<xp:dojoModule name="extlib.codemirror.mode.xml.xml"></xp:dojoModule>
+		<xp:dojoModule name="extlib.codemirror.mode.javascript.javascript"></xp:dojoModule>
+		<xp:dojoModule name="extlib.codemirror.mode.htmlmixed.htmlmixed"></xp:dojoModule>
+		<xp:dojoModule name="extlib.codemirror.mode.htmlembedded.htmlembedded"></xp:dojoModule>
+	</xp:this.resources>
 	<xp:inputTextarea id="jspEditor" style="width:100%; height:100%">
 	</xp:inputTextarea>
 	<xp:scriptBlock>
 		<xp:this.value><![CDATA[pageGlobal.jspEditor = CodeMirror.fromTextArea(dojo.byId('#{id:jspEditor}'),
 {
-	mode:"java",
+	mode:"application/x-jsp",
+	readOnly: #{javascript:compositeData.readOnly||false},
 	lineNumbers: true
 });
 ]]></xp:this.value>

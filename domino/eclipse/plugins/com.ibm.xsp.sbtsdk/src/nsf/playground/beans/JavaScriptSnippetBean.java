@@ -9,7 +9,7 @@ import com.ibm.sbt.playground.assets.jssnippets.JSSnippetAssetNode;
  * 
  * @author priand
  */
-public class SnippetBean extends AssetBean {
+public abstract class JavaScriptSnippetBean extends AssetBean {
 
 	protected String getFlatView() {
 		return "AllSnippetsFlat";

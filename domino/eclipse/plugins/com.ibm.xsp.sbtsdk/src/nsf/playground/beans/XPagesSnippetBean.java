@@ -9,7 +9,7 @@ import com.ibm.sbt.playground.assets.javasnippets.JavaSnippetAssetNode;
  * 
  * @author priand
  */
-public class XPagesSnippetBean extends AssetBean {
+public abstract class XPagesSnippetBean extends AssetBean {
 
 	protected String getFlatView() {
 		return "AllXPagesSnippetsFlat";

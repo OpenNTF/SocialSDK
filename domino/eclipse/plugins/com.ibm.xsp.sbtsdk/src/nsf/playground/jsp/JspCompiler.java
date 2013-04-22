@@ -36,7 +36,7 @@ public class JspCompiler {
 	public static final String START_TAG = "<%"; //$NON-NLS-1$
 	public static final String END_TAG 	 = "%>";  //$NON-NLS-1$
 
-	private static final String IMPORTPATTERN = "<%@page[ \\t\\n\\r]+import[ \\t\\n\\r]*=[ \\t\\n\\r]*[\\\'\\\"]([^\\\'\\\"]+)[\\\'\\\"][ \\t\\n\\r]*%>";
+	private static final String IMPORTPATTERN = "<%@[ \\t\\n\\r]*page[ \\t\\n\\r]+import[ \\t\\n\\r]*=[ \\t\\n\\r]*[\\\'\\\"]([^\\\'\\\"]+)[\\\'\\\"][ \\t\\n\\r]*%>";
 	private static Pattern importPattern = Pattern.compile(IMPORTPATTERN);
 	
 	public JspCompiler() {

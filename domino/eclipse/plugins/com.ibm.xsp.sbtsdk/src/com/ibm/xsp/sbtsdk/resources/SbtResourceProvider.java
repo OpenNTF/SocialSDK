@@ -45,28 +45,7 @@ public class SbtResourceProvider extends BundleResourceProvider {
 
     @Override
     protected URL getResourceURL(HttpServletRequest request, String name) {
-    	// Access to bootstrap css
-    	if(name.startsWith("bootstrap/")) {
-    		String path = "WebContent/"+name;
-    		return ExtLibUtil.getResourceURL(SbtWebActivator.instance.getBundle(), path);
-    	}
-    	// Access to the SDK
-    	if(name.startsWith("sbt/_bridge/")) {
-    	    if(ExtLibUtil.isXPages853()) {
-                String path = "WebContent/js/sdk/_bridges/dojo/"+name.substring(12);
-                return ExtLibUtil.getResourceURL(SbtWebActivator.instance.getBundle(), path);
-    	    } else {
-    			String path = "WebContent/js/sdk/_bridges/dojo-amd/"+name.substring(12);
-    			return ExtLibUtil.getResourceURL(SbtWebActivator.instance.getBundle(), path);
-    		}
-    	}
-    	if(name.startsWith("sbt/dojo/")) {
-    		String path = "WebContent/js/sdk/dojo/"+name.substring(9);
-    		return ExtLibUtil.getResourceURL(SbtWebActivator.instance.getBundle(), path);
-    	}
-    	// Just regular sbt files
-		String path = "WebContent/js/sdk/"+name;
-		return ExtLibUtil.getResourceURL(SbtWebActivator.instance.getBundle(), path);
+    	String path = "WebContent/"+name;
+    	return ExtLibUtil.getResourceURL(SbtWebActivator.instance.getBundle(), path);
     }
-
 }

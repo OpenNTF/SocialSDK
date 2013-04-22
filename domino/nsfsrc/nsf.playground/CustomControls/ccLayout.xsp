@@ -68,10 +68,20 @@ if(compositeData.wholePage)view.setStyle("overflow: hidden");}]]></xp:this.after
 					<xe:pageTreeNode selection="/Home" label="Home"
 						page="/Home.xsp">
 					</xe:pageTreeNode>
-					<xe:pageTreeNode label="Playground"
+					<xe:pageTreeNode label="JavaScript Snippets"
 						loaded="${javascript:optionsBean.javaScriptSnippetsEnabled}"
-						page="/Playground.xsp" selection="/Playground">
+						page="/JavaScriptSnippets.xsp" selection="/JavaScriptSnippets">
 					</xe:pageTreeNode>
+					<xe:pageTreeNode label="Java Snippets"
+						loaded="${javascript:optionsBean.javaSnippetsEnabled}"
+						page="/JavaSnippets.xsp" selection="/JavaSnippets">
+					</xe:pageTreeNode>
+<!--					
+					<xe:pageTreeNode label="XPages Snippets"
+						loaded="${javascript:optionsBean.xPagesSnippetsEnabled}"
+						page="/XPagesSnippets.xsp" selection="/XPagesSnippets">
+					</xe:pageTreeNode>
+-->					
 					<xe:pageTreeNode label="API Explorer"
 						loaded="${javascript:optionsBean.explorerEnabled}"
 						page="/Explorer.xsp" selection="/Explorer">

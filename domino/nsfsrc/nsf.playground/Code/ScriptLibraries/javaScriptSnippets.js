@@ -32,12 +32,6 @@ function createSnippet() {
 	if(pageGlobal.documentationPanel) {
 		pageGlobal.documentationPanel.innerHTML = "";
 	}
-	if(pageGlobal.javaEditor) {
-		pageGlobal.javaEditor.setValue("");
-	}
-	if(pageGlobal.xpagesEditor) {
-		pageGlobal.xpagesEditor.setValue("");
-	}
 	
 	dojo.byId("preview").src = pageGlobal._previewFrame;	
 	updateLabel(null);

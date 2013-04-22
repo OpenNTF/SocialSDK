@@ -17,7 +17,10 @@
 package nsf.playground.jsp;
 
 import java.io.IOException;
-import java.io.Writer;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.JspWriter;
 
 import com.ibm.commons.util.StringUtil;
 
@@ -32,9 +35,9 @@ import com.ibm.commons.util.StringUtil;
  */
 public abstract class JspFragment {
 
-	public abstract void exec(Writer w) throws IOException;
+	public abstract void exec(JspWriter out, HttpServletRequest request, HttpServletResponse response) throws Exception;
 
-	public void emit(Writer w, Object o) throws IOException {
+	public void emit(JspWriter w, Object o) throws IOException {
 		if(o!=null) {
 			String s = o.toString();
 			if(StringUtil.isNotEmpty(s)) {

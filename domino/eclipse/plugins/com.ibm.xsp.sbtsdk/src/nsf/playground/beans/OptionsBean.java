@@ -10,7 +10,7 @@ import com.ibm.xsp.model.domino.DominoUtils;
  * 
  * @author priand
  */
-public class OptionsBean {
+public abstract class OptionsBean {
 
 	private boolean javaScriptSnippetsEnabled;
 	private boolean javaSnippetsEnabled;
@@ -33,7 +33,6 @@ public class OptionsBean {
 	public void setJavaScriptSnippetsEnabled(boolean javaScriptSnippetsEnabled) {
 		this.javaScriptSnippetsEnabled=javaScriptSnippetsEnabled;
 	}
-
 
 	public boolean isJavaSnippetsEnabled() {
 		return javaSnippetsEnabled;

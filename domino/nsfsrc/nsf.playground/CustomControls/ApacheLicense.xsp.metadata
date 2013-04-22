@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="85257AA80077A28B" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="4e6" sequence="17" unid="C8CF4BFAD1510E0D85257B5200698227">
+<created><datetime dst="true">20130419T151225,99-04</datetime></created>
+<modified><datetime dst="true">20130419T151315,96-04</datetime></modified>
+<revised><datetime dst="true">20130419T151315,95-04</datetime></revised>
+<lastaccessed><datetime dst="true">20130419T151315,96-04</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20130419T151226,00-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></updatedby>
+<wassignedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></wassignedby>
+<item name="$Flags"><text>gC~4;</text></item>
+
+
+<item name="$TITLE" sign="true"><text>ApacheLicense.xsp</text></item>
+<item name="$DesignerVersion"><text>8.5</text></item>
+
+
+
+
+
+
+
+<item name="$FileNames" sign="true"><text>ApacheLicense.xsp</text></item></note>

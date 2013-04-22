@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	<xp:this.resources>
+		<xp:dojoModule name="extlib.codemirror.mode.xml.xml"></xp:dojoModule>
+	</xp:this.resources>
 	<xp:inputTextarea id="xPagesEditor" style="width:100%; height:100%">
 	</xp:inputTextarea>
 	<xp:scriptBlock>
 		<xp:this.value><![CDATA[pageGlobal.xPagesEditor = CodeMirror.fromTextArea(dojo.byId('#{id:xPagesEditor}'),
 {
 	mode:"xml",
+	readOnly: #{javascript:compositeData.readOnly||false},
 	lineNumbers: true
 });
 ]]></xp:this.value>

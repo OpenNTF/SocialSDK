@@ -1,10 +1,14 @@
 Social Business Toolkit SDK
-(c) Copyright IBM Corp. 2010, 2012
+(c) Copyright IBM Corp. 2010, 2013
 
 This product includes software developed at
 OpenNTF (http://www.OpenNTF.Org/).
 
-The project contains XPages Social Features which uses network services such as Dropbox and Facebook.  It is your responsibility to ensure that your use of such services is in compliance with their associated Terms of Use or Terms of Service.  Further, use of the Twitter API is subject to the Twitter API Terms - https://dev.twitter.com/terms/api-terms and Twitters Terms of Service - http://twitter.com/tos, under your own contract with Twitter.  It is your responsibility to ensure compliance with these Terms."
+The project contains XPages Social Features which uses network services such as Dropbox and Facebook.  It is your responsibility to ensure that your use of such services is in compliance with their associated Terms of Use or Terms of Service.  Further, use of the Twitter API is subject to the Twitter API Terms - https://dev.twitter.com/terms/api-terms and Twitters Terms of Service - http://twitter.com/tos, under your own contract with Twitter.  It is your responsibility to ensure compliance with these Terms.
+
+This distribution includes cryptographic software. The country in which you currently reside may have restrictions on the import, possession, use, and/or re-export to another country, of encryption software. BEFORE using any encryption software, please check your country's laws, regulations and policies concerning the import, possession, or use, and re-export of encryption software, to see if this is permitted. See <http://www.wassenaar.org/> for more information.
+
+The U.S. Government Department of Commerce, Bureau of Industry and Security (BIS), has classified this software as Export Commodity Control Number (ECCN) 5D002.C.1, which includes information security software using or performing cryptographic functions with asymmetric algorithms. The form and manner of this OpenNTF distribution makes it eligible for export under the License Exception ENC Technology Software Unrestricted (TSU) exception (see the BIS Export Administration Regulations, Section 740.13) for both object code and source code.
 
 The project includes the following third party packages whose Notice files, which list third party components, are included in this package separately from this Notice file.
 
@@ -27,7 +31,44 @@ Licensed under Apache 2.0
 Available from http://incubator.apache.org/wink/downloads.html
   Copyright 2009-2010 The Apache Software Foundation
   This product includes software developed at
+  The Apache Software Foundation (http://www.apache.org/)
+
+Apache Commons Email 1.2
+Licensed under Apache 2.0
+Available from http://commons.apache.org/email/
+  Copyright 2001-2009 The Apache Software Foundation
+  This product includes software developed by
+  The Apache Software Foundation (http://www.apache.org/)
+
+Apache Commons FileUpload 1.2.2, 
+Licensed under Apache 2.0
+Available from http://commons.apache.org/fileupload/
+  Copyright 2002-2010 The Apache Software Foundation
+  This product includes software developed by
   The Apache Software Foundation (http://www.apache.org/).
+
+Apache Commons IO 2.4.
+Licensed under Apache 2.0
+Available from http://commons.apache.org/io/
+  Copyright 2002-2012 The Apache Software Foundation
+  This product includes software developed by
+  The Apache Software Foundation (http://www.apache.org/).
+
+Apache HTTPComponents Client 4.2.1
+Licensed under Apache 2.0
+Available from http://hc.apache.org/downloads.cgi
+  Copyright 1999-2012 The Apache Software Foundation
+  This product includes software developed by
+  The Apache Software Foundation (http://www.apache.org/).
+
+Apache HttpComponents Core 4.2.1
+Licensed under Apache 2.0
+Available from http://archive.apache.org/dist/httpcomponents/
+   Copyright 2005-2012 The Apache Software Foundation
+   This product includes software developed by
+   The Apache Software Foundation (http://www.apache.org/).
+   This project contains annotations derived from JCIP-ANNOTATIONS
+   Copyright (c) 2005 Brian Goetz and Tim Peierls. See http://www.jcip.net
 
 Dojo 1.8 
 Licensed under either the terms of the modified BSD license or the Academic Free License version 2.1
@@ -120,8 +161,21 @@ jQuery 1.8.2
 Licensed under the MIT license
 Available from http://jquery.com/
 
+jQuery UI 1.8.24
+Licensed under the MIT license
+Available from http://jquery.com/
 
-The following two sources are not shipped with this package - but are loaded and executed dynamically.
+JavaMail 1.4.5
+Partially licensed under CDDL 1.0, and partially under BSD.
+Available from http://kenai.com/projects/javamail
+
+Jasmine 1.3.1
+Licensed under the MIT license
+Available from https://github.com/pivotal/jasmine/downloads
+
+
+
+The following three sources are not shipped with this package - but are loaded and executed dynamically.
 
 SHA-1 (javascript) 2.1a 
 Licensed under the BSD license
@@ -129,6 +183,11 @@ Available from http://oauth.googlecode.com/svn/code/javascript/sha1.js
 
 OAuth(javascript), 2012-09-26, 
 Licensed under Apache 2.0
+Available from http://oauth.googlecode.com/svn/code/javascript/oauth.js
+
+Yui-min 3.8.0
+Licensed under the BSD license
+Available from http://yui.yahooapis.com/combo?3.8.0pr2/build/yui/yui-min.js
 
 
 

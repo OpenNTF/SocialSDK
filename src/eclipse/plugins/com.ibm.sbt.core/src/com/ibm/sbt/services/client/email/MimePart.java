@@ -48,16 +48,16 @@ public class MimePart {
     /**
      * Constructs a MIME part from a JSON object.  The JSON should follow the format of the 
      * below example.
-     * <code>
-     * {
-     *   "mimeType" : "text/plain",
-     *   "content" : "This is plain text"
-     *   "headers" : {
-     *     "header1" : "value1",
-     *     "header2" : "value2"
+     * {@code
+     *   {
+     *     "mimeType" : "text/plain",
+     *     "content" : "This is plain text"
+     *     "headers" : {
+     *       "header1" : "value1",
+     *       "header2" : "value2"
+     *     }
      *   }
      * }
-     * </code>
      * The MIME type SHOULD be registered with <a href="http://www.iana.org/assignments/media-types/index.html">IANA</a>.
      * @param json The JSON to create the MIME part from.
      * @throws MimeEmailException Thrown when the MIME part cannot be created.

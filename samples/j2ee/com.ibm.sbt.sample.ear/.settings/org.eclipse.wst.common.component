@@ -9,5 +9,17 @@
             <dependent-object>Module_1351598968552</dependent-object>
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="com.ibm.sbt.bootstrap211.war" deploy-path="/" handle="module:/resource/com.ibm.sbt.bootstrap211/com.ibm.sbt.bootstrap211">
+            <dependent-object>Module_1366299031096</dependent-object>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="com.ibm.sbt.dojo180.war" deploy-path="/" handle="module:/resource/com.ibm.sbt.dojo180/com.ibm.sbt.dojo180">
+            <dependent-object>Module_1366299437786</dependent-object>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="com.ibm.sbt.jquery180.war" deploy-path="/" handle="module:/resource/com.ibm.sbt.jquery180/com.ibm.sbt.jquery180">
+            <dependent-object>Module_1366299568328</dependent-object>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
     </wb-module>
 </project-modules>

@@ -52,6 +52,9 @@ define([],function() {
         	}
         	return s;
         },
+        hitch: function(context,method){
+        	return dojo.hitch(context,method);
+        },
         trim: function(str) {
             return dojo.trim(str);
         }

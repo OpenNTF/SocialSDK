@@ -86,8 +86,10 @@
                 
             <copy file="${project.target.directory}/com.ibm.sbt.sdk/com.ibm.commons.runtime/com.ibm.commons.runtime.jar" 
 			todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/lib" />
-	        <copy file="${project.prereqs.directory}/eclipse/plugins/com.ibm.sbt.libs.j2ee/lib/commons-logging-1.1.1.jar" 
+	        <copy file="${project.prereqs.directory}/eclipse/plugins/com.ibm.sbt.libs.java/lib/commons-logging-1.1.1.jar"
 			todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/lib" />
+            <copy file="${project.prereqs.directory}/eclipse/plugins/com.ibm.sbt.libs.java/lib/com.ibm.sbt.javamail-1.4.5.jar"
+            todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/lib" />
            
                          
 	        <copy todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/conf" >

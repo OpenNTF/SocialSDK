@@ -1,6 +1,9 @@
 package nsf.playground.beans;
 
+import javax.faces.context.FacesContext;
+
 import com.ibm.xsp.model.domino.DominoUtils;
+import com.ibm.xsp.util.ManagedBeanUtil;
 
 
 /**
@@ -11,12 +14,17 @@ import com.ibm.xsp.model.domino.DominoUtils;
  * @author priand
  */
 public abstract class OptionsBean {
+	
+	public static OptionsBean get() {
+		return (OptionsBean)ManagedBeanUtil.getBean(FacesContext.getCurrentInstance(), "optionsBean");
+	}
 
 	private boolean javaScriptSnippetsEnabled;
 	private boolean javaSnippetsEnabled;
 	private boolean xPagesSnippetsEnabled;
 	private boolean explorerEnabled;
 	private boolean apacheLicense;
+	private String environments;
 	
 	public OptionsBean() {
 		this.javaScriptSnippetsEnabled = true;
@@ -24,6 +32,7 @@ public abstract class OptionsBean {
 		this.xPagesSnippetsEnabled = DominoUtils.getEnvironmentInt("Playground_XPagesSnippets")!=0;
 		this.explorerEnabled = DominoUtils.getEnvironmentInt("Playground_APIExplorer")!=0;
 		this.apacheLicense = DominoUtils.getEnvironmentInt("Playground_ApacheLicense")!=0;
+		this.environments = DominoUtils.getEnvironmentString("Playground_Environments");
 	}
 
 	public boolean isJavaScriptSnippetsEnabled() {
@@ -64,5 +73,13 @@ public abstract class OptionsBean {
 
 	public void setApacheLicense(boolean apacheLicense) {
 		this.apacheLicense=apacheLicense;
+	}
+
+	public String getEnvironments() {
+		return environments;
+	}
+
+	public void setEnvironments(String environments) {
+		this.environments=environments;
 	}
 }

@@ -97,6 +97,8 @@ public abstract class DataAccessBean {
 			if(TRACE) {
 				System.out.println("Filling cache...");
 			}
+			String[] envs = StringUtil.splitString(OptionsBean.get().getEnvironments(),',');
+
 			cacheFilled = true;
 			List<String> allEnvs = new ArrayList<String>();
 			Database db = ExtLibUtil.getCurrentDatabase();
@@ -108,11 +110,13 @@ public abstract class DataAccessBean {
 						Document d = e.getDocument();
 						try {
 							PlaygroundEnvironment env = readEnvironment(d);
-							environments.put(env.getName(), env);
-							if(TRACE) {
-								System.out.println("Loading environment: "+env.getName());
+							if(envs.length==0 || StringUtil.contains(envs, env.getName())) {
+								environments.put(env.getName(), env);
+								if(TRACE) {
+									System.out.println("Loading environment: "+env.getName());
+								}
+								allEnvs.add(env.getName());
 							}
-							allEnvs.add(env.getName());
 						} finally {
 							d.recycle();
 						}

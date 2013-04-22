@@ -5,8 +5,6 @@
 		<xp:script src="/javaSnippets.js" clientSide="true"></xp:script>
 		<xp:dojoModule name="dojo.hash"></xp:dojoModule>
 		<xp:dojoModule name="extlib.codemirror.lib.codemirror"></xp:dojoModule>
-		<xp:dojoModule name="extlib.codemirror.mode.clike.clike"></xp:dojoModule>
-		<xp:dojoModule name="extlib.codemirror.mode.xml.xml"></xp:dojoModule>
 		<xp:styleSheet href="/.ibmxspres/.extlib/codemirror/lib/codemirror.css"></xp:styleSheet>
 	</xp:this.resources>
 
@@ -109,7 +107,7 @@ if(doc) {	o = {		status:			"ok",		id:				snippetId,		unid:			doc.getUniversa
 							<xe:toolbar id="toolbar1">
 								<xe:this.treeNodes>
 									<xe:basicLeafNode
-										label="For security reason, Java snippets cannot be edited" href="#">
+										label="For security reason, Java snippets cannot be edited">
 									</xe:basicLeafNode>
 								</xe:this.treeNodes>
 							</xe:toolbar>
@@ -122,7 +120,9 @@ if(doc) {	o = {		status:			"ok",		id:				snippetId,		unid:			doc.getUniversa
 									onShow="pageGlobal.jspEditor.refresh()">
 									<xp:div
 										style="border: 1px solid #AAAAAA; height: 100%">
-										<xc:PlaygroundTabJsp></xc:PlaygroundTabJsp>
+										<xc:PlaygroundTabJsp
+											readOnly="true">
+										</xc:PlaygroundTabJsp>
 									</xp:div>
 								</xe:djTabPane>
 								<xe:djTabPane id="djTabProperties"
@@ -130,14 +130,18 @@ if(doc) {	o = {		status:			"ok",		id:				snippetId,		unid:			doc.getUniversa
 									onShow="pageGlobal.propertiesEditor.refresh()">
 									<xp:div
 										style="border: 1px solid #AAAAAA; height: 100%">
-										<xc:PlaygroundTabProperties></xc:PlaygroundTabProperties>
+										<xc:PlaygroundTabProperties
+											readOnly="true">
+										</xc:PlaygroundTabProperties>
 									</xp:div>
 								</xe:djTabPane>
 								<xe:djTabPane id="djTabDocumentation"
 									title="Documentation">
 									<xp:div
 										style="border: 1px solid #AAAAAA; height: 100%">
-										<xc:PlaygroundTabDocumentation></xc:PlaygroundTabDocumentation>
+										<xc:PlaygroundTabDocumentation
+											readOnly="true">
+										</xc:PlaygroundTabDocumentation>
 									</xp:div>
 								</xe:djTabPane>
 							</xe:djTabContainer>

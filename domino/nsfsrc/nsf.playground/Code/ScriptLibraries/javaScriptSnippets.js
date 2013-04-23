@@ -1,5 +1,5 @@
 /**
- * Update the label in the toolbat 
+ * Update the label in the toolbar 
  */
 function updateLabel(r) {
 	var tt = dojo.byId("CurrentLabel");

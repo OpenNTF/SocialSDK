@@ -32,7 +32,7 @@
     <managed-bean-scope>request</managed-bean-scope>
   </managed-bean>
   <managed-bean>
-    <managed-bean-name>xPagesSnippetBean</managed-bean-name>
+    <managed-bean-name>xpagesSnippetBean</managed-bean-name>
     <managed-bean-class>playground.beans.XPagesSnippetBean
 		</managed-bean-class>
     <managed-bean-scope>request</managed-bean-scope>

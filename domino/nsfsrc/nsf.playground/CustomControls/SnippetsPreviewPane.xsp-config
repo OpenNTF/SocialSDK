@@ -5,9 +5,9 @@
     <default-prefix>xc</default-prefix>
   </faces-config-extension>
   <composite-component>
-    <component-type>JavaScriptSnippetsPreviewPane</component-type>
-    <composite-name>JavaScriptSnippetsPreviewPane</composite-name>
-    <composite-file>/JavaScriptSnippetsPreviewPane.xsp</composite-file>
+    <component-type>SnippetsPreviewPane</component-type>
+    <composite-name>SnippetsPreviewPane</composite-name>
+    <composite-file>/SnippetsPreviewPane.xsp</composite-file>
     <composite-extension>
       <designer-extension>
         <in-palette>true</in-palette>

@@ -15,8 +15,8 @@ function updateLabel(r) {
 function createSnippet() {
 	pageGlobal.id = "";
 	pageGlobal.unid = "";
-	if(pageGlobal.jspEditor) {
-		pageGlobal.jspEditor.setValue("");
+	if(pageGlobal.xPagesEditor) {
+		pageGlobal.xPagesEditor.setValue("");
 	}
 	if(pageGlobal.propertiesEditor) {
 		pageGlobal.propertiesEditor.setValue("");
@@ -39,10 +39,10 @@ function loadSnippet(id) {
 		if(r.status=="ok") {
 			pageGlobal.id = id;
 			pageGlobal.unid = r.unid;
-			if(pageGlobal.jspEditor) pageGlobal.jspEditor.setValue(r.jsp);
+			if(pageGlobal.xPagesEditor) pageGlobal.xPagesEditor.setValue(r.xPages);
 			if(pageGlobal.propertiesEditor) pageGlobal.propertiesEditor.setValue(r.properties);
 			if(pageGlobal.documentationPanel) pageGlobal.documentationPanel.innerHTML = r.documentation;
-			selectTab(pageGlobal.tabJsp);
+			selectTab(pageGlobal.tabXPages);
 			updateLabel(r);
 			updateNavSelection();
 			runCode(false);

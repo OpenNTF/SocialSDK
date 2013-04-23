@@ -21,7 +21,7 @@ public abstract class OptionsBean {
 
 	private boolean javaScriptSnippetsEnabled;
 	private boolean javaSnippetsEnabled;
-	private boolean xPagesSnippetsEnabled;
+	private boolean xpagesSnippetsEnabled;
 	private boolean explorerEnabled;
 	private boolean apacheLicense;
 	private String environments;
@@ -29,7 +29,7 @@ public abstract class OptionsBean {
 	public OptionsBean() {
 		this.javaScriptSnippetsEnabled = true;
 		this.javaSnippetsEnabled = DominoUtils.getEnvironmentInt("Playground_JavaSnippets")!=0;
-		this.xPagesSnippetsEnabled = DominoUtils.getEnvironmentInt("Playground_XPagesSnippets")!=0;
+		this.xpagesSnippetsEnabled = DominoUtils.getEnvironmentInt("Playground_XPagesSnippets")!=0;
 		this.explorerEnabled = DominoUtils.getEnvironmentInt("Playground_APIExplorer")!=0;
 		this.apacheLicense = DominoUtils.getEnvironmentInt("Playground_ApacheLicense")!=0;
 		this.environments = DominoUtils.getEnvironmentString("Playground_Environments");
@@ -51,14 +51,14 @@ public abstract class OptionsBean {
 		this.javaSnippetsEnabled=javaSnippetsEnabled;
 	}
 
-	public boolean isXPagesSnippetsEnabled() {
-		return xPagesSnippetsEnabled;
+	public boolean isXpagesSnippetsEnabled() {
+		return xpagesSnippetsEnabled;
 	}
 
-	public void setXPagesSnippetsEnabled(boolean xPagesSnippetsEnabled) {
-		this.xPagesSnippetsEnabled=xPagesSnippetsEnabled;
+	public void setXpagesSnippetsEnabled(boolean xpagesSnippetsEnabled) {
+		this.xpagesSnippetsEnabled=xpagesSnippetsEnabled;
 	}
-	
+
 	public boolean isExplorerEnabled() {
 		return explorerEnabled;
 	}

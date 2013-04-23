@@ -9,5 +9,6 @@
 		</xp:dojoModule>
 		<xp:styleSheet href="/mainpage.css"></xp:styleSheet>
 	</xp:this.resources>
-	<xc:ccOneUIStylesFixes></xc:ccOneUIStylesFixes>
+	<xc:ccOneUIStylesFixes></xc:ccOneUIStylesFixes>	
+	
 </xp:view>

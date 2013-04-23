@@ -1,4 +1,21 @@
 /**
+ * Fix the issue with the tab container and code mirror CTRL HOME+END.
+ * Else, the key strokes are handled by the tab container and the tab switch
+ */
+dojo.addOnLoad(function() {
+	if(pageGlobal && pageGlobal.tabContainer) {
+   		var tbList = dijit.byId(pageGlobal.tabContainer).tablist;
+   		var oldkeyPress = tbList.onkeypress;  
+   		tbList.onkeypress=function(e){
+   			if(e.ctrlKey && (e.charOrCode==dojo.keys.HOME || e.charOrCode==dojo.keys.END)) {
+   				return;
+   			}
+   	   		oldkeyPress.apply(this,arguments);
+     	}
+   	}
+});
+
+/**
  * Resize the main border container when the window is resized
  * This is required as it should substract the size of the headers and footers
  * @return

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom" xmlns:bz="http://www.ibm.com/xsp/bazaar">
+	<bz:controlFactory id="controlFactory1" autoCreate="true">
+		<bz:this.controlBuilder>
+			<bz:markupControlBuilder>
+
+				<bz:this.xmlMarkup><![CDATA[#{javascript:var p = sessionScope["xpagessnippet.lastrequest"]
+if(p) {
+	var sOpt = p.getOptions();
+	if(sOpt) {
+		var opt = fromJson(sOpt);
+		var env = dataAccess.getEnvironment(opt.env);
+		if(env) {
+			env.prepareEndpoints();
+		}
+	}
+	var id = p.id;
+	var doc = database.getDocumentByUNID(id)
+	if(doc) {
+		return doc.getItemValueString("XPages");
+	}
+}
+return "<xp:span>Cannot interpret XPages markup</xp:span>";}]]></bz:this.xmlMarkup>
+			</bz:markupControlBuilder>
+		</bz:this.controlBuilder>
+	</bz:controlFactory>
+
+</xp:view>

@@ -107,7 +107,7 @@ if(doc) {	o = {		status:			"ok",		id:				snippetId,		unid:			doc.getUniversa
 							<xe:toolbar id="toolbar1">
 								<xe:this.treeNodes>
 									<xe:basicLeafNode
-										label="For security reason, Java snippets cannot be edited">
+										label="For security reasons, because of their server side nature, Java snippets cannot be edited">
 									</xe:basicLeafNode>
 								</xe:this.treeNodes>
 							</xe:toolbar>
@@ -144,7 +144,7 @@ if(doc) {	o = {		status:			"ok",		id:				snippetId,		unid:			doc.getUniversa
 										</xc:PlaygroundTabDocumentation>
 									</xp:div>
 								</xe:djTabPane>
-							</xe:djTabContainer>
+								</xe:djTabContainer>
 						</xe:djBorderPane>
 						<xe:djBorderPane region="top"
 							splitter="false">
@@ -161,7 +161,7 @@ if(doc) {	o = {		status:			"ok",		id:				snippetId,		unid:			doc.getUniversa
 						<xe:djBorderPane region="center"
 							style="border: 1px solid #AAAAAA;">
 							<xp:div style="height: 100%">
-								<xc:JavaSnippetsPreviewPane></xc:JavaSnippetsPreviewPane>
+								<xc:SnippetsPreviewPane></xc:SnippetsPreviewPane>
 							</xp:div>
 						</xe:djBorderPane>
 						<xe:djBorderPane region="bottom"

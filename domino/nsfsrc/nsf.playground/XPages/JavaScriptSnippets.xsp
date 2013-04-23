@@ -230,7 +230,7 @@ if(doc) {
 						<xe:djBorderPane region="center"
 							style="border: 1px solid #AAAAAA;">
 							<xp:div style="height: 100%">
-								<xc:JavaScriptSnippetsPreviewPane></xc:JavaScriptSnippetsPreviewPane>
+								<xc:SnippetsPreviewPane></xc:SnippetsPreviewPane>
 							</xp:div>
 						</xe:djBorderPane>
 						<xe:djBorderPane region="bottom"

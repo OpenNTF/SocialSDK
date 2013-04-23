@@ -28,6 +28,19 @@
 				</xe:pageTreeNode>
 			</xe:basicContainerNode>
 			<xe:basicContainerNode transparent="true"
+				loaded="${javascript:optionsBean.xpagesSnippetsEnabled}">
+				<xe:separatorTreeNode></xe:separatorTreeNode>
+				<xe:pageTreeNode page="ManageXPagesSnippetsByCategory"
+					label="XPages Snippets By Category" selection="/Manage/XPagesSnippetsByCategory">
+				</xe:pageTreeNode>
+				<xe:pageTreeNode page="ManageXPagesSnippetsByAuthor"
+					label="XPages Snippets By Author" selection="/Manage/XPagesSnippetsByAuthor">
+				</xe:pageTreeNode>
+				<xe:pageTreeNode page="ManageImportXPagesSnippets" label="Import XPages Snippets"
+					selection="/Manage/ImportXPagesSnippets">
+				</xe:pageTreeNode>
+			</xe:basicContainerNode>
+			<xe:basicContainerNode transparent="true"
 				loaded="${javascript:optionsBean.explorerEnabled}">
 				<xe:separatorTreeNode></xe:separatorTreeNode>
 				<xe:pageTreeNode page="ManageAPIsByCategory" label="APIs By Category"

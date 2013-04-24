@@ -66,9 +66,9 @@ define([ 'dojo/_base/declare', 'dojo/_base/xhr', 'dojo/_base/lang', 'dojox/xml/p
                 url : url,
                 handleAs : options.handleAs || "text"
             };
-            if (options.query) {
-                args.content = options.query;
-            }
+            //if (options.query) {
+            //    args.content = options.query;
+            //}
             if (options.headers) {
                 args.headers = options.headers;
             }

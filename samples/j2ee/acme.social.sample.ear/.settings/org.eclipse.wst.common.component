@@ -17,5 +17,9 @@
             <dependent-object>Module_1350933923710</dependent-object>
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="acme.sample.webapp.war" deploy-path="/" handle="module:/resource/acme.sample.webapp/acme.sample.webapp">
+            <dependent-object>Module_1366729591213</dependent-object>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
     </wb-module>
 </project-modules>

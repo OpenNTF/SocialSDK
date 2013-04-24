@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+
+	Here is the list of public Communities:
+	<xp:br></xp:br>
+	<xp:repeat id="repeat1" rows="30" var="community">
+		<xp:this.value><![CDATA[#{javascript:var svc = new com.ibm.sbt.services.client.connections.communities.CommunityService()
+return svc.getPublicCommunities()
+}]]></xp:this.value>
+		<xp:div>
+			Name:
+			<xp:text escape="true" id="computedField1"
+				value="#{javascript:community.getTitle()}">
+			</xp:text>
+		</xp:div>
+	</xp:repeat>
+</xp:view>

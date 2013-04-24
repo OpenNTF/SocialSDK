@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	<xp:this.resources>
+		<xp:script
+			src="/xsp/.sbtlibrary"
+			clientSide="true">
+		</xp:script>
+	</xp:this.resources>
+	
+	Here is the list of public Communities:<xp:br></xp:br>
+	<xp:panel id="content"></xp:panel>
+
+	<xp:scriptBlock id="scriptBlock1">
+		<xp:this.value><![CDATA[require(["sbt/connections/CommunityService", "sbt/dom"], 
+    function(CommunityService, dom, json) {
+    	var communityService = new CommunityService();
+    	communityService.getPublicCommunities({
+    		parameters: { ps: 5 },
+            load: function(communities){
+                var text = "";
+                for(var i=0; i<communities.length; i++){
+                    var community = communities[i];
+                    text += community.getTitle() + ((i==communities.length-1) ? "" : ", ");
+                }
+                if (text.length == 0) {
+                    text = "You are not a member of any communities.";
+                }
+                dom.setText("#{id:content}", text);   
+            },
+            error: function(error){
+                dom.setText("#{id:content}", "Error code:" +  error.code + ", message:" + error.message);
+            }       
+    	});
+    }
+);]]></xp:this.value>
+	</xp:scriptBlock>
+</xp:view>

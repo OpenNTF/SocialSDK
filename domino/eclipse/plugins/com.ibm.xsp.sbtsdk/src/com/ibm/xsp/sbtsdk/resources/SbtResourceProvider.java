@@ -45,6 +45,13 @@ public class SbtResourceProvider extends BundleResourceProvider {
 
     @Override
     protected URL getResourceURL(HttpServletRequest request, String name) {
+        if(name.startsWith("js/sdk/_bridge/")) {
+            if(ExtLibUtil.isXPages853()) {
+                name = "js/sdk/_bridges/dojo/"+name.substring("js/sdk/_bridge/".length());
+            } else {
+                name = "js/sdk/_bridges/dojo-amd/"+name.substring("js/sdk/_bridge/".length());
+            }
+        }
     	String path = "WebContent/"+name;
     	return ExtLibUtil.getResourceURL(SbtWebActivator.instance.getBundle(), path);
     }

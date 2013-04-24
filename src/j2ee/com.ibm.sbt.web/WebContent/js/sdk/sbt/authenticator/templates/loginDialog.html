@@ -1,13 +1,13 @@
-<form id='ibmsbt.loginActionForm'>
+<form role='form' id='ibmsbt.loginActionForm'>
 	<table>
 		<tr>
 			<td colspan=2>
-				<label name='wrongCredsMessage' id='wrongCredsMessage' style='color: red; display: none;'>Wrong Credentials </label>
+				<label for='wrong_creds_message' name='wrongCredsMessage' id='wrongCredsMessage' style='color: red; display: none;'>Wrong Credentials </label>
 			</td>
 		</tr>
 		<tr>
 			<td>
-				<label for='name'>Username: </label>
+				<label for='username'>Username: </label>
 			</td>
 			<td>
 				<input type='text' id='username' name='username' />
@@ -15,7 +15,7 @@
 		</tr>
 		<tr>
 			<td>
-				<label for='name'>Password: </label>
+				<label for='password'>Password: </label>
 			</td>
 			<td>
 				<input type='password' id='password' name='password' />
@@ -23,8 +23,8 @@
 		</tr>
 		<tr>
 			<td colspan=2>
-				<input type='button' onClick='sbt.dialog.submitOnClickHandle(this.form)' value='OK'  name='submitBtn' />
-				<input type='button' onClick='sbt.dialog.hide();if(sbt.cancel){sbt.cancel();}delete sbt.dialog;' value='Cancel' />
+				<input type='button' id='loginFormOK' onClick='sbt.dialog.submitOnClickHandle(this.form)' value='OK'  name='submitBtn' />
+				<input type='button' id='loginFormCancel' onClick='sbt.dialog.hide();if(sbt.cancel){sbt.cancel();}delete sbt.dialog;' value='Cancel' />
 			</td>
 		</tr>
 	</table>

@@ -19,7 +19,7 @@
  * 
  * Implementation of a XML HTTP Request using the JQuery API.
  */
-define(['jquery', 'sbt/_bridge/declare', 'sbt/util' ], function($, declare, util) {
+define(['jquery', 'sbt/_bridge/declare', 'sbt/util', 'sbt/Promise' ], function($, declare, util, Promise) {
 	return declare("sbt._bridge.Transport", null, {
         /**
          * Provides an asynchronous request using the associated Transport.
@@ -65,9 +65,9 @@ define(['jquery', 'sbt/_bridge/declare', 'sbt/util' ], function($, declare, util
                 url : url,
                 handleAs : options.handleAs || "text"
             };
-            if (options.query) {
-                args.content = options.query;
-            }
+            //if (options.query) {
+            //    args.content = options.query;
+            //}
             if (options.headers) {
                 args.headers = options.headers;
             }
@@ -134,18 +134,6 @@ define(['jquery', 'sbt/_bridge/declare', 'sbt/util' ], function($, declare, util
             return pairs.join("&");
         },
         
-        createQuery: function(queryMap) {
-            if (!queryMap) {
-                return null;
-            }
-            var pairs = [];
-            for(var name in queryMap){
-                var value = queryMap[name];
-                pairs.push(encodeURIComponent(name) + "=" + encodeURIComponent(value));
-            }
-            return pairs.join("&");
-        },
-
 		xhr: function(method, args, hasBody) {
 		    var url = args.url;
 		    var self = this;
@@ -201,7 +189,7 @@ define(['jquery', 'sbt/_bridge/declare', 'sbt/util' ], function($, declare, util
                 var _ioArgs = {
                     'args' : args,
                     'headers' : util.getAllResponseHeaders(jqXHR),
-                    '_ioargs' : jqXHR
+                    '_ioargs' : { xhr : jqXHR }
                 };
 		        args.handle(data, _ioArgs);
 		    }
@@ -209,7 +197,12 @@ define(['jquery', 'sbt/_bridge/declare', 'sbt/util' ], function($, declare, util
 		handleError: function(args, jqXHR, textStatus, errorThrown) {
 			var error = this.createError(jqXHR, textStatus, errorThrown, args.handleAs);
             if (args.handle) {
-		        args.handle(error, args);
+                var _ioArgs = {
+                    'args' : args,
+                    'headers' : util.getAllResponseHeaders(jqXHR),
+                    '_ioargs' : { xhr : jqXHR }
+                };
+		        args.handle(error, _ioArgs);
             }
 		},
 		createError: function(jqXHR, textStatus, errorThrown, type) {

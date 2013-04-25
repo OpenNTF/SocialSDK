@@ -52,13 +52,21 @@ return declare("sbt.authenticator.Basic", null, {
 		if(options.cancel){
 			sbt.cancel = options.cancel;
 		}
-		require(["sbt/_bridge/ui/BasicAuth_Dialog"], function(dialog) {
+		require(["sbt/_bridge/ui/BasicAuth_Dialog", "sbt/i18n!sbt/nls/loginForm", "sbt/dom"], function(dialog, loginForm, dom) {
 			dialog.show(options, dialogLoginPage);
+			dom.byId('wrongCredsMessage').innerHTML = loginForm.wrong_creds_message;
+			dom.byId('basicLoginFormUsername').innerHTML = loginForm.username;
+			dom.byId('basicLoginFormPassword').innerHTML = loginForm.password;
+			dom.byId('basicLoginFormOK').value = loginForm.login_ok;
+			dom.byId('basicLoginFormCancel').value = loginForm.login_cancel;
 		});
 		return true;
 	},
 	
 	_authPopup: function(options, loginPage) {
+		require(["sbt/i18n!sbt/nls/loginForm"], function(loginForm) {
+			globalLoginFormStrings = loginForm;
+		});
 		if(options.callback){
 			sbt.callback = options.callback;
 		}

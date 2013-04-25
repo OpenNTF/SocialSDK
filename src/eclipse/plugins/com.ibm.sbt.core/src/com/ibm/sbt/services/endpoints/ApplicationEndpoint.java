@@ -253,6 +253,10 @@ public class ApplicationEndpoint implements Endpoint {
 	@Override
 	public void logout() throws AuthenticationException {
 		// TODO Auto-generated method stub
-		
 	}
+	
+    @Override
+    public String getEndpointQueryArgs() {
+    	return null;
+    }
 }

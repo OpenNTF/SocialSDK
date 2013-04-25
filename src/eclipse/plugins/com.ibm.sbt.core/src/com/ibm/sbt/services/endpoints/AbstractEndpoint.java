@@ -354,4 +354,8 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     public Object xhrDelete(Args args) throws ClientServicesException {
     	return getClientService().delete(args);
     }
+    @Override
+    public String getEndpointQueryArgs() {
+    	return null;
+    }
 }

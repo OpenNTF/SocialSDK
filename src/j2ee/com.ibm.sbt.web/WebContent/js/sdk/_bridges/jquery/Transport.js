@@ -19,10 +19,10 @@
  * 
  * Implementation of a XML HTTP Request using the JQuery API.
  */
-define(['jquery', 'sbt/_bridge/declare', 'sbt/util' ], function($, declare, util) {
+define(['jquery', 'sbt/_bridge/declare', 'sbt/util', 'sbt/Promise' ], function($, declare, util, Promise) {
 	return declare("sbt._bridge.Transport", null, {
         /**
-         * Provides an asynchronous request.
+         * Provides an asynchronous request using the associated Transport.
          * 
          * @method request
          * @param {String)
@@ -34,6 +34,9 @@ define(['jquery', 'sbt/_bridge/declare', 'sbt/util' ], function($, declare, util
          *            the request.
          * @param {String|Object}
          *            [options.query=null] The query string, if any, that should
+         *            be sent with the request.
+         * @param {Object}
+         *            [options.headers=null] The headers, if any, that should
          *            be sent with the request.
          * @param {Boolean}
          *            [options.preventCache=false] If true will send an extra
@@ -49,12 +52,76 @@ define(['jquery', 'sbt/_bridge/declare', 'sbt/util' ], function($, declare, util
          * @param {String}
          *            [options.handleAs=text] The content handler to process the
          *            response payload with.
-         * 
+         * @return {sbt.Promise}
          */
-        request : function(url,options) {
-            return null;
+        request : function(url, options) {
+            var method = options.method || "GET";
+            method = method.toUpperCase();
+            var query = this.createQuery(options.query);
+            if(url && query){
+                url += (~url.indexOf('?') ? '&' : '?') + query;
+            } 
+            var args = {
+                url : url,
+                handleAs : options.handleAs || "text"
+            };
+            //if (options.query) {
+            //    args.content = options.query;
+            //}
+            if (options.headers) {
+                args.headers = options.headers;
+            }
+            var hasBody = false;
+            if (method == "PUT") {
+                args.putData = options.data || null;
+                hasBody = true;
+            } else if (method == "POST") {
+                args.postData = options.data || null;
+                hasBody = true;
+            }
+            
+            var promise = new Promise();
+            promise.response = new Promise();
+            var self = this;
+            args.handle = function(response, ioargs) {
+                if (response instanceof Error) {
+                    var error = response;
+                    error.response = self.createResponse(url, options, response, ioargs);
+                    promise.rejected(error);
+                    promise.response.rejected(error);
+                } else {
+                    promise.fullFilled(response);
+                    promise.response.fullFilled(self.createResponse(url, options, response, ioargs));
+                }
+            };
+            
+            this.xhr(method, args, hasBody);
+            return promise;
         },
         
+        /*
+         * Create a response object
+         */
+        createResponse: function(url, options, response, ioargs) {
+            var xhr = ioargs._ioargs.xhr;
+            var handleAs = options.handleAs || "text";
+            return { 
+                url : url,
+                options : options,
+                data : response,
+                text : (handleAs == "text") ? response : null,
+                status : xhr.status,
+                getHeader : function(headerName) {
+                    return xhr.getResponseHeader(headerName);
+                },
+                xhr : xhr,
+                _ioargs : ioargs._ioargs
+            };
+        },
+
+        /*
+         * Create a query string from an object
+         */
         createQuery: function(queryMap) {
             if (!queryMap) {
                 return null;
@@ -66,7 +133,7 @@ define(['jquery', 'sbt/_bridge/declare', 'sbt/util' ], function($, declare, util
             }
             return pairs.join("&");
         },
-
+        
 		xhr: function(method, args, hasBody) {
 		    var url = args.url;
 		    var self = this;
@@ -122,7 +189,7 @@ define(['jquery', 'sbt/_bridge/declare', 'sbt/util' ], function($, declare, util
                 var _ioArgs = {
                     'args' : args,
                     'headers' : util.getAllResponseHeaders(jqXHR),
-                    '_ioargs' : jqXHR
+                    '_ioargs' : { xhr : jqXHR }
                 };
 		        args.handle(data, _ioArgs);
 		    }
@@ -130,7 +197,12 @@ define(['jquery', 'sbt/_bridge/declare', 'sbt/util' ], function($, declare, util
 		handleError: function(args, jqXHR, textStatus, errorThrown) {
 			var error = this.createError(jqXHR, textStatus, errorThrown, args.handleAs);
             if (args.handle) {
-		        args.handle(error, args);
+                var _ioArgs = {
+                    'args' : args,
+                    'headers' : util.getAllResponseHeaders(jqXHR),
+                    '_ioargs' : { xhr : jqXHR }
+                };
+		        args.handle(error, _ioArgs);
             }
 		},
 		createError: function(jqXHR, textStatus, errorThrown, type) {

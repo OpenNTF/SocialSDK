@@ -56,7 +56,8 @@ define([ 'dojo/_base/declare', 'dojo/_base/xhr', 'dojo/_base/lang', 'dojox/xml/p
          * @return {sbt.Promise}
          */
         request : function(url, options) {
-            var method = options.method.toUpperCase();
+            var method = options.method || "GET";
+            method = method.toUpperCase();
             var query = this.createQuery(options.query);
             if(url && query){
                 url += (~url.indexOf('?') ? '&' : '?') + query;
@@ -65,9 +66,9 @@ define([ 'dojo/_base/declare', 'dojo/_base/xhr', 'dojo/_base/lang', 'dojox/xml/p
                 url : url,
                 handleAs : options.handleAs || "text"
             };
-            if (options.query) {
-                args.content = options.query;
-            }
+            //if (options.query) {
+            //    args.content = options.query;
+            //}
             if (options.headers) {
                 args.headers = options.headers;
             }
@@ -99,6 +100,9 @@ define([ 'dojo/_base/declare', 'dojo/_base/xhr', 'dojo/_base/lang', 'dojox/xml/p
             return promise;
         },
         
+        /*
+         * Create a response object
+         */
         createResponse: function(url, options, response, ioargs) {
             var xhr = ioargs._ioargs.xhr;
             var handleAs = options.handleAs || "text";
@@ -115,7 +119,10 @@ define([ 'dojo/_base/declare', 'dojo/_base/xhr', 'dojo/_base/lang', 'dojox/xml/p
                 _ioargs : ioargs._ioargs
             };
         },
-        
+
+        /*
+         * Create a query string from an object
+         */
         createQuery: function(queryMap) {
             if (!queryMap) {
                 return null;

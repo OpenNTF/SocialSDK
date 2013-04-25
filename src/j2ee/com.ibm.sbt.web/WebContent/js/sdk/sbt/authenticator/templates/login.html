@@ -1,4 +1,4 @@
-<html lang=“en">
+<html lang=en>
 <head>
 <title>Authentication</title>
 <script type="text/javascript" src="login.js"></script>
@@ -6,35 +6,13 @@
 <body onLoad="self.focus()">
 	<div role="main">
 		<form role="form" method='post' id='ibmsbt.loginActionForm' onSubmit='submitOnClick(this);'>
-			<table>
-				<tr>
-					<td colspan=2>
-						<label name='wrongCredsMessage' id='wrongCredsMessage' style='color: red; display: none;'> Wrong Credentials </label>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<label for='username'>Username: </label>
-					</td>
-					<td>
-						<input type='text' id='username' name='username' />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<label for='password'>Password: </label>
-					</td>
-					<td>
-						<input type='password' id='password' name='password' />
-					</td>
-				</tr>
-				<tr>
-					<td colspan=2>
-						<input type='submit' value='OK' name='submitBtn'  /> 
-						<input type='button' onClick='cancelOnClick()' value='Cancel' />
-					</td>
-				</tr>
-			</table>
+			<label name='wrongCredsMessage' id='wrongCredsMessage' style='color: red; display: none;'> Wrong Credentials </label>
+			<label id='basicLoginFormUsername' for='username'>User name: </label><br>
+			<input type='text' name='username' id='username' /><br>
+			<label id='basicLoginFormPassword' for='password'>Password: </label><br>
+			<input type='password' name='password' id='password' /><br>
+			<input type='submit' id='basicLoginFormOK' value='Log in' name='submitBtn' /> 
+			<input type='button' id='basicLoginFormCancel' onClick='cancelOnClick()' value='Cancel' />
 		</form>
 	</div>
 	<script>

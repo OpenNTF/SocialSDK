@@ -19,14 +19,14 @@
  * 
  * Definition of a dojo based dialog for OAuth 1.0.
  */
-define(['dijit/Dialog',"dojo/cache"], function(Dialog, cache) {
+define(['dijit/Dialog',"dojo/cache","sbt/i18n!sbt/nls/loginForm"], function(Dialog, cache, loginForm) {
 	return {
 		show: function(options, dialogLoginPage) {
-		  try{	
+		  try{
 			var proxy = options.proxy.proxyUrl;
 			var proxyServletURL = proxy.substring(0,proxy.lastIndexOf("/"))+"/basicAuth/"+options.proxyPath+"/JSApp";
 			var d = new Dialog({
-				title: "Authentication", 
+				title: loginForm.authentication_dialog_title,
 	            style: "width: 350px",
 	            content: cache("sbt", dialogLoginPage),
 	            submitOnClickHandle : function (contentForm) {
@@ -37,8 +37,8 @@ define(['dijit/Dialog',"dojo/cache"], function(Dialog, cache) {
 	            		var postToProxy = {
 							url:proxyServletURL, 
 							content: {
-								username:contentForm.username.value,
-								password:contentForm.password.value
+								username : contentForm.username.value,
+								password : contentForm.password.value
 							},
 							handle:function(data){
 								if(data instanceof Error){
@@ -63,5 +63,6 @@ define(['dijit/Dialog',"dojo/cache"], function(Dialog, cache) {
 		  sbt.dialog=d;
 	      d.show();
 		}
+
 	};
 });

@@ -366,4 +366,9 @@ public interface Endpoint {
      * This is to be used in development mode only, when SSL certificates for the server are not available.
      */
     public boolean isForceTrustSSLCertificate();
+    
+    /*
+     * allows an endpoint to append query args to a proxied request 
+     */ 
+    public String getEndpointQueryArgs();
 }

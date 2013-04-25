@@ -7,6 +7,7 @@
 		<project>com.ibm.sbt.web</project>
 		<project>acme.social.sample.webapp</project>
 		<project>acme.social.sample.dataapp</project>
+		<project>acme.sample.webapp</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

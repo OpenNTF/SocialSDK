@@ -24,5 +24,9 @@ api</editor-parameter>
         </designer-extension>
       </property-extension>
     </property>
+    <property>
+      <property-name>pname</property-name>
+      <property-class>string</property-class>
+    </property>
   </composite-component>
 </faces-config>

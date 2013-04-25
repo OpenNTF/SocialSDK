@@ -370,5 +370,5 @@ public interface Endpoint {
     /*
      * allows an endpoint to append query args to a proxied request 
      */ 
-    public String getEndpointQueryArgs();
+    public String getProxyQueryArgs();
 }

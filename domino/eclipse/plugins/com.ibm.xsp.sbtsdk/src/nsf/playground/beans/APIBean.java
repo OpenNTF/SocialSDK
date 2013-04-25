@@ -36,7 +36,7 @@ import com.ibm.xsp.util.JavaScriptUtil;
  * 
  * @author priand
  */
-public class APIBean extends AssetBean {
+public abstract class APIBean extends AssetBean {
 	
 	public static final boolean TRACE = false;
 
@@ -61,7 +61,7 @@ public class APIBean extends AssetBean {
 	public String getToolkitUrl() throws UnsupportedEncodingException, IOException {
 		Map<String,Object> sessionScope = ExtLibUtil.getSessionScope();
 
-		DataAccess dataAccess = DataAccess.get();
+		DataAccessBean dataAccess = DataAccessBean.get();
 		String envName = (String)sessionScope.get("environment");
 		if(StringUtil.isEmpty(envName)) {
 			envName = dataAccess.getPreferredEnvironment();

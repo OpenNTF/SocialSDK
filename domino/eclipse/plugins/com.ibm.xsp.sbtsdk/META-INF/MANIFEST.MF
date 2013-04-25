@@ -22,7 +22,8 @@ Require-Bundle: org.eclipse.core.runtime,
  com.ibm.sbt.core;bundle-version="1.0.0";visibility:=reexport,
  com.ibm.sbt.playground;bundle-version="1.0.0";visibility:=reexport,
  com.ibm.xsp.extlib;bundle-version="8.5.3",
- com.ibm.sbt.web;bundle-version="1.0.0"
+ com.ibm.sbt.web;bundle-version="1.0.0",
+ com.ibm.pvc.servlet.jsp;bundle-version="2.1.0"
 Bundle-ActivationPolicy: lazy
 Export-Package: com.ibm.xsp.sbtsdk,
  com.ibm.xsp.sbtsdk.library,
@@ -34,5 +35,6 @@ Export-Package: com.ibm.xsp.sbtsdk,
  nsf.playground.beans,
  nsf.playground.environments,
  nsf.playground.jobs,
+ nsf.playground.jsp,
  nsf.playground.playground,
  nsf.playground.snippets

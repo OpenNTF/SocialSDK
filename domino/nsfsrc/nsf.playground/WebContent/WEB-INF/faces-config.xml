@@ -2,7 +2,7 @@
 <faces-config>
   <managed-bean>
     <managed-bean-name>dataAccess</managed-bean-name>
-    <managed-bean-class>nsf.playground.beans.DataAccess
+    <managed-bean-class>playground.beans.DataAccessBean
 		</managed-bean-class>
     <managed-bean-scope>application</managed-bean-scope>
   </managed-bean>
@@ -12,7 +12,7 @@
 	-->
   <managed-bean>
     <managed-bean-name>optionsBean</managed-bean-name>
-    <managed-bean-class>nsf.playground.beans.OptionsBean
+    <managed-bean-class>playground.beans.OptionsBean
 		</managed-bean-class>
     <managed-bean-scope>application</managed-bean-scope>
   </managed-bean>
@@ -21,31 +21,31 @@
 	-->
   <managed-bean>
     <managed-bean-name>snippetBean</managed-bean-name>
-    <managed-bean-class>nsf.playground.beans.SnippetBean
+    <managed-bean-class>playground.beans.JavaScriptSnippetBean
 		</managed-bean-class>
     <managed-bean-scope>request</managed-bean-scope>
   </managed-bean>
   <managed-bean>
     <managed-bean-name>javaSnippetBean</managed-bean-name>
-    <managed-bean-class>nsf.playground.beans.JavaSnippetBean
+    <managed-bean-class>playground.beans.JavaSnippetBean
 		</managed-bean-class>
     <managed-bean-scope>request</managed-bean-scope>
   </managed-bean>
   <managed-bean>
-    <managed-bean-name>xPagesSnippetBean</managed-bean-name>
-    <managed-bean-class>nsf.playground.beans.XPagesSnippetBean
+    <managed-bean-name>xpagesSnippetBean</managed-bean-name>
+    <managed-bean-class>playground.beans.XPagesSnippetBean
 		</managed-bean-class>
     <managed-bean-scope>request</managed-bean-scope>
   </managed-bean>
   <managed-bean>
     <managed-bean-name>apiBean</managed-bean-name>
-    <managed-bean-class>nsf.playground.beans.APIBean
+    <managed-bean-class>playground.beans.APIBean
 		</managed-bean-class>
     <managed-bean-scope>request</managed-bean-scope>
   </managed-bean>
   <managed-bean>
     <managed-bean-name>importExport</managed-bean-name>
-    <managed-bean-class>nsf.playground.beans.ImportExport
+    <managed-bean-class>playground.beans.ImportExportBean
 		</managed-bean-class>
     <managed-bean-scope>request</managed-bean-scope>
   </managed-bean>
@@ -112,6 +112,10 @@
 			</property-name>
       <value>communities/service/atom/communities/my
 			</value>
+    </managed-property>
+    <managed-property>
+      <property-name>authenticationPage</property-name>
+      <value>/xsp/.ibmxspres/.sbtsdk/loginForm.html?endpoint=connections</value>
     </managed-property>
     <!-- Trust the connection -->
     <managed-property>

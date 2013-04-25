@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	<xp:div loaded="${javascript:optionsBean.apacheLicense}">
+		All code available from the Playground
+		on IBM Greenhouse is provided under
+		the&#160;
+		<a href="http://www.apache.org/licenses/">
+			Apache License Version 2.0
+								</a>
+		. See&#160;
+		<a href="http://openntf.org/legal/terms">
+			OpenNTF Terms of Use
+								</a>
+		&#160;for full details.
+	</xp:div>
+</xp:view>

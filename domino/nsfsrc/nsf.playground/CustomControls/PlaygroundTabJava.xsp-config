@@ -5,13 +5,17 @@
     <default-prefix>xc</default-prefix>
   </faces-config-extension>
   <composite-component>
-    <component-type>PlaygroundPreviewPane</component-type>
-    <composite-name>PlaygroundPreviewPane</composite-name>
-    <composite-file>/PlaygroundPreviewPane.xsp</composite-file>
+    <component-type>PlaygroundTabJava</component-type>
+    <composite-name>PlaygroundTabJava</composite-name>
+    <composite-file>/PlaygroundTabJava.xsp</composite-file>
     <composite-extension>
       <designer-extension>
         <in-palette>true</in-palette>
       </designer-extension>
     </composite-extension>
+    <property>
+      <property-name>readOnly</property-name>
+      <property-class>boolean</property-class>
+    </property>
   </composite-component>
 </faces-config>

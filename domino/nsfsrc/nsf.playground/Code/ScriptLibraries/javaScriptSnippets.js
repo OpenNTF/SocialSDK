@@ -1,5 +1,5 @@
 /**
- * Update the label in the toolbat 
+ * Update the label in the toolbar 
  */
 function updateLabel(r) {
 	var tt = dojo.byId("CurrentLabel");
@@ -31,12 +31,6 @@ function createSnippet() {
 	}
 	if(pageGlobal.documentationPanel) {
 		pageGlobal.documentationPanel.innerHTML = "";
-	}
-	if(pageGlobal.javaEditor) {
-		pageGlobal.javaEditor.setValue("");
-	}
-	if(pageGlobal.xpagesEditor) {
-		pageGlobal.xpagesEditor.setValue("");
 	}
 	
 	dojo.byId("preview").src = pageGlobal._previewFrame;	

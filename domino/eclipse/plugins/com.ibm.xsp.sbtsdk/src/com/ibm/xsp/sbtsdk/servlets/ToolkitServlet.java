@@ -41,7 +41,7 @@ public class ToolkitServlet extends LibraryServlet {
 			//public void init(SBTEnvironment defaultEnvironment, String toolkitUrl, String toolkitJsUrl, String proxyUrl, String iframeUrl) throws ServletException, IOException {
 			// Calculate the toolkit URL
 	    	//http://priand2/xsp/.ibmxspres/.sbtsdk/sbt/Cache.js
-			String toolkitUrl = UrlUtil.getServerUrl(getHttpRequest())+"/xsp"+SbtResourceProvider.RESOURCE_PATH+"/";
+			String toolkitUrl = UrlUtil.getServerUrl(getHttpRequest())+"/xsp"+SbtResourceProvider.RESOURCE_PATH+"/js/sdk/";
 			String toolkitJsUrl = toolkitUrl;
 			params.setToolkitUrl(toolkitUrl);
 			params.setToolkitJsUrl(toolkitJsUrl);
@@ -50,7 +50,7 @@ public class ToolkitServlet extends LibraryServlet {
 			// Hard coded for now
 			boolean sbtx = true;
 			if(sbtx) {
-				String toolkitExtUrl = UrlUtil.getServerUrl(getHttpRequest())+"/xsp"+SbtResourceProvider.RESOURCE_PATH+"x/";
+				String toolkitExtUrl = UrlUtil.getServerUrl(getHttpRequest())+"/xsp"+SbtResourceProvider.RESOURCE_PATH+"x/js/sdk/";
 				String toolkitExtJsUrl = toolkitExtUrl;
 				params.setToolkitExtUrl(toolkitExtUrl);
 				params.setToolkitExtJsUrl(toolkitExtJsUrl);

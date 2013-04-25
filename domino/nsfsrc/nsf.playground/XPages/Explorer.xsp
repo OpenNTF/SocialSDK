@@ -68,7 +68,7 @@ function prepend(h,f) {
 			<xe:djBorderPane id="djBorderPane3" region="leading"
 				splitter="true" style="width:280px">
 				<xp:div id="leftRefresh" style="height: 100%">
-					<xc:ccAssetTree type="api"></xc:ccAssetTree>
+					<xc:ccAssetTree type="api" pname="api"></xc:ccAssetTree>
 				</xp:div>
 			</xe:djBorderPane>
 			<xe:djBorderPane id="djBorderPane2" region="center">

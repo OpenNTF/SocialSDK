@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="85257AA80077A28B" version="9.0" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="2ae" sequence="1323" unid="9842D001AF2B8448852579F0005D293D">
+<noteinfo noteid="2ae" sequence="1527" unid="9842D001AF2B8448852579F0005D293D">
 <created><datetime dst="true">20120430T125734,05-04</datetime></created>
-<modified><datetime>20121210T210336,73-05</datetime></modified>
-<revised><datetime>20121210T210336,72-05</datetime></revised>
-<lastaccessed><datetime>20121210T210336,73-05</datetime></lastaccessed>
+<modified><datetime dst="true">20130419T143706,49-04</datetime></modified>
+<revised><datetime dst="true">20130419T143706,48-04</datetime></revised>
+<lastaccessed><datetime dst="true">20130419T143706,49-04</datetime></lastaccessed>
 <addedtofile><datetime>20121104T143453,39-05</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name><name>CN=sbaadmin/O=renovations</name><name>CN=Philippe Riand/OU=Westford/O=IBM</name><name>CN=sbaadmin/O=renovations</name><name>CN=Philippe Riand/OU=Westford/O=IBM</name><name>CN=sbaadmin/O=renovations</name><name>CN=Philippe Riand/OU=Westford/O=IBM</name><name>CN=sbaadmin/O=renovations</name><name>CN=Philippe Riand/OU=Westford/O=IBM</name><name>CN=sbaadmin/O=renovations</name><name>CN=Philippe Riand/OU=Westford/O=IBM</name><name>CN=sbaadmin/O=renovations</name><name>CN=Philippe Riand/OU=Westford/O=IBM</name></updatedby>
+<updatedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></updatedby>
 <wassignedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></wassignedby>
 <item name="$Flags"><text>gC~4K</text></item>
 <item name="$TITLE"><text>Playground.xsp</text></item>
 
 
 
-<item name="$DesignerVersion"><text>8.5.2</text></item>
+<item name="$FileNames" sign="true"><text>Playground.xsp</text></item>
+<item name="$DesignerVersion"><text>8.5</text></item>
 
 
 
-
-
-<item name="$FileNames" sign="true"><text>Playground.xsp</text></item></note>
+</note>

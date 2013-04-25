@@ -256,7 +256,7 @@ public class ApplicationEndpoint implements Endpoint {
 	}
 	
     @Override
-    public String getEndpointQueryArgs() {
+    public String getProxyQueryArgs() {
     	return null;
     }
 }

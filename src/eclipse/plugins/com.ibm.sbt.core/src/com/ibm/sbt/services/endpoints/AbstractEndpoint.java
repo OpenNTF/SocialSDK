@@ -355,7 +355,7 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     	return getClientService().delete(args);
     }
     @Override
-    public String getEndpointQueryArgs() {
+    public String getProxyQueryArgs() {
     	return null;
     }
 }

@@ -187,7 +187,7 @@ var Endpoint = declare("sbt.Endpoint", null, {
                     return self._authenticate(url, options, promise);
                 }
                 promise.rejected(error);
-                promise.response.rejected(response);
+                promise.response.rejected(error);
             }
         );
         

@@ -37,7 +37,8 @@ public class PreviewXPagesHandler extends PreviewHandler {
 		String id = req.getParameter("fm_id");
         RequestParams requestParams = new RequestParams(sOptions,id);
         req.getSession().setAttribute(LAST_REQUEST, requestParams);
-        resp.sendRedirect("/SBTPlayground.nsf/_PreviewXPages.xsp");
+        String baseUrl = UrlUtil.getContextUrl(req);
+        resp.sendRedirect(baseUrl+"/_PreviewXPages.xsp");
 	}
 
 	@Override

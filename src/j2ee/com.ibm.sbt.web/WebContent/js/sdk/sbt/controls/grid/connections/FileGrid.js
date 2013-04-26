@@ -39,6 +39,7 @@ define([ "sbt/_bridge/declare",
     declare("sbt.controls.grid.connections.FileGrid", Grid, {
 
     	gridSortType: "",
+    	fileService: null,
     	
     	/**
     	 * Options determine which type of file grid will be created
@@ -158,6 +159,8 @@ define([ "sbt/_bridge/declare",
          * @method - constructor
          * */
         constructor: function(args){
+
+        	this.fileService = new FileService(this.endpointName || "connections");
         	
         	/**gridSortType is used to determine what sorting anchors should be used,
         	 * for example folders have different sort anchors than files, file comments have no anchors etc*/
@@ -412,26 +415,32 @@ define([ "sbt/_bridge/declare",
          */
         onUpdate: function(){
         	
-	        if(this.renderer.pinFiles == "on"){
+	        if(this.renderer.pinFiles){
 	        	
-	        	/**Get all of the pin file img tags, we do this by classname*/
-	        	var pinElements = document.getElementsByClassName("lconnSprite lconnSprite-iconPinned16-off");
-	        	/**ids will hold the ID of each element, the id of the element is the uuid of the file.*/
+	        	//Get all of the pin file img tags, we do this by classname
+	        	var pinElements = document.getElementsByClassName(this.renderer.unPinnedClass);
+	        	//ids will hold the ID of each element, the id of the element is the uuid of the file.
 	        	var ids = [];
-	        	/**set the Ids into the ids array*/
+	        	//set the Ids into the ids array
 	        	for(var x =0;x <pinElements.length;x++){
 	        		ids[x] = pinElements[x].id;
 	        	}
-	        	/**we use the array of ids, and not the array of elements
-	        	because as we remove a class from an element, the array of elements will dynamically reduce*/
-	        	var fileService = new FileService();
-	        	lang.hitch(ids,fileService.getMyPinnedFiles({
+	            
+	        	//create an args object containing these three vars to hitch. 
+	        	var pinClass = this.renderer.pinnedClass;
+	            var unPinnedClass = this.renderer.unPinnedClass
+	            var renderer = this.renderer;
+	            var args = {pinClass:pinClass,unPinnedClass:unPinnedClass,ids:ids,renderer:renderer};
+	            
+	        	//we use the array of ids, and not the array of elements
+	        	//because as we remove a class from an element, the array of elements will dynamically reduce
+	        	this.renderer._hitch(args,this.fileService.getMyPinnedFiles({
 	        		load : function(files) {
-	        			for(var k=0;k<ids.length;k++){
+	        			for(var k=0;k<args.ids.length;k++){
 	        				for(var i=0;i<files.length;i++){
-	        					if(ids[k] == files[i].getId()){
-	        						domClass.removeClass(ids[k],"lconnSprite lconnSprite-iconPinned16-off");
-	        						domClass.addClass(ids[k],"lconnSprite lconnSprite-iconPinned16-on");
+	        					if(args.ids[k] == files[i].getId()){
+	        						args.renderer._removeClass(args.ids[k],args.unPinnedClass);
+	        						args.renderer._addClass(args.ids[k],args.pinClass);
 	        					}
 	        				}
 	        			}
@@ -460,29 +469,34 @@ define([ "sbt/_bridge/declare",
         	}else if(data._attribs.uuid){
         		uuid = data._attribs.uuid;
         	}
-        		
-        	var fileService = new FileService();
-        	var file = fileService.getFile({
+        	
+        	var file = this.fileService.getFile({
         		id : uuid,
         		loadIt : false
         	});
+   
+        	//create an args object containing these three vars to hitch. 
+        	var pinClass = this.renderer.pinnedClass;
+            var unPinnedClass = this.renderer.unPinnedClass;
+            var renderer = this.renderer;
+            var args = {pinClass:pinClass,unPinnedClass:unPinnedClass,el:el,renderer:renderer};
         	
-        	if(el.firstElementChild.className == "lconnSprite lconnSprite-iconPinned16-off"){
-	        	 lang.hitch(el,fileService.pinFile(file,{
+        	if(el.firstElementChild.className == this.renderer.unPinnedClass){
+	        	 this.renderer._hitch(args,this.fileService.pinFile(file,{
 	        		load : function(response) {
-	        			domClass.removeClass(el.firstElementChild, "lconnSprite lconnSprite-iconPinned16-off");
-	        			domClass.addClass(el.firstElementChild, "lconnSprite lconnSprite-iconPinned16-on");	
+	        			args.renderer._removeClass(args.el.firstElementChild, args.unPinnedClass);
+	        			args.renderer._addClass(args.el.firstElementChild, args.pinClass);	
 	
 	        		},
 	        		error : function(response) {
 	        			console.log("Error pinning file");
 	        		}
 	        	}));
-        	}else if (el.firstElementChild.className == "lconnSprite lconnSprite-iconPinned16-on"){
-        		lang.hitch(el,fileService.removePinFromFile(file, {
+        	}else if (el.firstElementChild.className == this.renderer.pinnedClass){
+        		this.renderer._hitch(args,this.fileService.removePinFromFile(file, {
         			load : function(data) {
-        				domClass.removeClass(el.firstElementChild, "lconnSprite lconnSprite-iconPinned16-on");
-	        			domClass.addClass(el.firstElementChild, "lconnSprite lconnSprite-iconPinned16-off");	
+        				args.renderer._removeClass(args.el.firstElementChild, args.pinClass);
+        				args.renderer._addClass(args.el.firstElementChild, args.unPinnedClass);	
         			},
         			error : function(error) {
         				console.log("error removing pin from file");

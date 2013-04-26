@@ -19,7 +19,7 @@
  * 
  * Definition of a dojo based dialog for Basic Auth
  */
-define([], function() {
+define(["sbt/i18n!sbt/nls/loginForm"], function(loginForm) {
 	return {
 		show: function(options, dialogLoginPage) {
 		  try{	
@@ -27,7 +27,7 @@ define([], function() {
 			var proxyServletURL = proxy.substring(0,proxy.lastIndexOf("/"))+"/basicAuth/"+options.proxyPath+"/JSApp";
 			require(["dijit.Dialog", "dojo.cache"]);
 					var d = new dijit.Dialog({
-						title: "Authentication", 
+						title: loginForm.authentication_dialog_title,
 			            style: "width: 350px",
 			            content: dojo.cache("sbt", dialogLoginPage),
 			            submitOnClickHandle : function (contentForm) {

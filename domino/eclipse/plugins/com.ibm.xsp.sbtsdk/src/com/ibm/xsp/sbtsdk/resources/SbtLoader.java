@@ -107,7 +107,11 @@ public class SbtLoader extends ResourceLoader {
             String basePath;
             if(name.startsWith("sbt._bridge.")) {
             	dojoName = dojoName.substring(12);
-            	basePath = "WebContent/js/sdk/_bridges/dojo-amd/"; // $NON-NLS-1$
+            	if(ExtLibUtil.isXPages853()) {
+                	basePath = "WebContent/js/sdk/_bridges/dojo/"; // $NON-NLS-1$
+            	} else {
+            		basePath = "WebContent/js/sdk/_bridges/dojo-amd/"; // $NON-NLS-1$
+            	}
             } else if(name.startsWith("sbt.dojo.")) {
             	dojoName = dojoName.substring(9);
             	basePath = "WebContent/js/sdk/dojo/"; // $NON-NLS-1$

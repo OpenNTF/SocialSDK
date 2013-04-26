@@ -113,10 +113,10 @@
       <value>communities/service/atom/communities/my
 			</value>
     </managed-property>
-	<managed-property>
-		<property-name>authenticationPage</property-name>
-		<value>/xsp/.ibmxspres/.sbtsdk/loginForm.html?endpoint=connections</value>
-	</managed-property>
+    <managed-property>
+      <property-name>authenticationPage</property-name>
+      <value>/xsp/.ibmxspres/.sbtsdk/loginForm.html?endpoint=connections</value>
+    </managed-property>
     <!-- Trust the connection -->
     <managed-property>
       <property-name>forceTrustSSLCertificate

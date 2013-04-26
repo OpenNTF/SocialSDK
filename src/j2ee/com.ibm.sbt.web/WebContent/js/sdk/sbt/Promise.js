@@ -35,13 +35,23 @@ define(["sbt/_bridge/declare"], function(declare) {
         _isCancelled : false,
         _callbacks : null,
         _errbacks : null,
+        response : null,
+        error : null,
         
         /*
          * Constructor for the promise.
          */
-        constructor: function() {
-            this._callbacks = [];
-            this._errbacks = [];
+        constructor: function(response) {
+            if (response) {
+                if (response instanceof Error) {
+                    this.rejected(response);
+                } else {
+                    this.fullFilled(response);
+                }
+            } else {
+                this._callbacks = [];
+                this._errbacks = [];
+            }
         },
         
         /*
@@ -49,7 +59,15 @@ define(["sbt/_bridge/declare"], function(declare) {
          */
         then: function(callback, errback) {
             if (this._isFulfilled) {
-                callback(this.items);
+                if (callback) {
+                    callback(this.data);
+                }
+                return;
+            }
+            if (this._isRejected) {
+                if (errback) {
+                    errback(this.error);
+                }
                 return;
             }
             
@@ -99,14 +117,23 @@ define(["sbt/_bridge/declare"], function(declare) {
         /*
          * Called if the promise has been fullfilled
          */
-        fullFilled : function(response) {
+        fullFilled : function(data) {
             if (this._isCancelled) {
                 return;
             }
+            
             this._isFulfilled = true;
-            while (this._callbacks.length > 0) {
-                var callback = this._callbacks.shift();
-                callback(response);
+            this.data = data;
+            
+            if (this._callbacks) {
+                while (this._callbacks.length > 0) {
+                    var callback = this._callbacks.shift();
+                    try {
+                        callback(data);
+                    } catch (err) {
+                        var msg = err.message;
+                    }
+                }
             }
         },
         
@@ -117,10 +144,19 @@ define(["sbt/_bridge/declare"], function(declare) {
             if (this._isCancelled) {
                 return;
             }
+            
             this._isRejected = true;
-            while (this._errbacks.length > 0) {
-                var errback = this._errbacks.shift();
-                errback(error);
+            this.error = error;
+            
+            if (this._errbacks) {
+                while (this._errbacks.length > 0) {
+                    var errback = this._errbacks.shift();
+                    try {
+                        errback(error);
+                    } catch (err) {
+                        var msg = err.message;
+                    }
+                }
             }
         }
 	

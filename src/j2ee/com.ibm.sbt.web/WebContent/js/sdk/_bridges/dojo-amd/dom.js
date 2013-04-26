@@ -17,7 +17,7 @@
 /**
  * Social Business Toolkit SDK - Some DOM utilities.
  */
-define(['dojo/dom','dojo/_base/window', 'dojo/dom-construct'],function(dom,win,domConstruct) {
+define(['dojo/dom','dojo/_base/window', 'dojo/dom-construct', 'dojo/dom-class'],function(dom,win,domConstruct,domClass) {
 	return {
 		byId: function(id) {
 			return dom.byId(id);

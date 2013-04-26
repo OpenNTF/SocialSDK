@@ -20,14 +20,14 @@
 define([ "sbt/_bridge/declare", "sbt/store/AtomStore", "dojo/_base/lang", "dojo/_base/Deferred", "sbt/widget/_TemplatedWidget"], 
         function(declare, AtomStore, lang, Deferred, _TemplatedWidget) {
 
-    /**
+    /*
      * @module sbt._bridge.grid._Grid
      */
     declare("sbt._bridge.grid._Grid", [ _TemplatedWidget ], {
 
         templatePath: require.toUrl("sbt/controls/grid/templates/Grid.html"),
         
-        /**
+        /*
          * Creates an instance of an atom store.
          * @param args - atom store arguments - such as url and attributes
          * @returns {AtomStore} - an instance of an atom store
@@ -36,7 +36,7 @@ define([ "sbt/_bridge/declare", "sbt/store/AtomStore", "dojo/_base/lang", "dojo/
             return new AtomStore(args);
         },        
         
-        /**retrieves the data from the Atom Store*/
+        /*retrieves the data from the Atom Store*/
         _doQuery: function(store, options, query) {
             query = query || {};
             

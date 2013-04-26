@@ -59,6 +59,24 @@ function onLoginPageLoad() {
     if (showWrongCredsMessage == "true") {
         document.getElementById("wrongCredsMessage").style.display = "block";
     }
+    if(opener && opener.globalLoginFormStrings){
+        var loginForm = opener.globalLoginFormStrings;
+    	document.getElementById('wrongCredsMessage').innerHTML = loginForm.wrong_creds_message;
+    	document.getElementById('basicLoginFormUsername').innerHTML = loginForm.username;
+    	document.getElementById('basicLoginFormPassword').innerHTML = loginForm.password;
+    	document.getElementById('basicLoginFormOK').value = loginForm.login_ok;
+    	document.getElementById('basicLoginFormCancel').value = loginForm.login_cancel;
+    }
+//    else{
+//    	require(["sbt/i18n!sbt/nls/loginForm"], function(loginForm) {
+//    		document.getElementById('wrongCredsMessage').innerHTML = loginForm.wrong_creds_message;
+//        	document.getElementById('basicLoginFormUsername').innerHTML = loginForm.username;
+//        	document.getElementById('basicLoginFormPassword').innerHTML = loginForm.password;
+//        	document.getElementById('basicLoginFormOK').value = loginForm.login_ok;
+//        	document.getElementById('basicLoginFormCancel').value = loginForm.login_cancel;
+//		});
+//    }
+
 }
 
 function getArgsMap() {

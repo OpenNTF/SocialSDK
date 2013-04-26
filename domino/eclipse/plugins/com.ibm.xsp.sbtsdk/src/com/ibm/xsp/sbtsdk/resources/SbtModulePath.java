@@ -26,6 +26,6 @@ import com.ibm.xsp.resource.DojoModulePathResource;
 public class SbtModulePath extends DojoModulePathResource {
 
     public SbtModulePath() {
-        super("sbt", SbtResourceProvider.RESOURCE_PATH+"/sbt"); // $NON-NLS-1$ $NON-NLS-2$
+        super("sbt", SbtResourceProvider.RESOURCE_PATH+"/js/sdk"); // $NON-NLS-1$ $NON-NLS-2$
     }
 }

@@ -136,7 +136,8 @@ define([ "sbt/_bridge/declare", "sbt/dom", "sbt/lang", "dojo/string", "sbt/widge
                 border:"0",
                 cellspacing:"0",
                 cellpadding:"0",
-                summary:this.nls.summary
+               // summary:this.nls.summary
+                role:"presentation"
             }, el);
             var tbody = this._create("tbody", null, table);
             return tbody;

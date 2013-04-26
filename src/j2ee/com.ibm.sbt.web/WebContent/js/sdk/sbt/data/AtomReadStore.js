@@ -197,14 +197,13 @@ define(["sbt/Endpoint", "sbt/lang", "sbt/base/core", "sbt/xml", "sbt/xpath","doj
          * this method executes the query and makes the results available as data items.
          */
         fetch: function(args) {
-            console.log(args);
             var self = this;
             var scope = args.scope || self;
             
             var serviceUrl = this._getServiceUrl(this._getQuery(args));
             if (!serviceUrl) {
                 if (args.onError) {
-                    args.onError.call(scope, new Error("sbt.data.AtomReadStore: No service URL specified."));
+                    args.onError.call(new Error("sbt.data.AtomReadStore: No service URL specified."));
                 }
                 return;
             }
@@ -221,6 +220,8 @@ define(["sbt/Endpoint", "sbt/lang", "sbt/base/core", "sbt/xml", "sbt/xpath","doj
                         self.itemsPerPage = parseInt(xpath.selectText(self._xmlData, self.atom.itemsPerPage, self.namespaces));
                         self.items = self._createItems(self._xmlData);
                         
+                        
+                        
                         // invoke callbacks
                         if (args.onBegin) {
                             args.onBegin.call(scope, self.totalResults, args);
@@ -235,13 +236,13 @@ define(["sbt/Endpoint", "sbt/lang", "sbt/base/core", "sbt/xml", "sbt/xpath","doj
                         }
                     } catch (e) {
                         if (args.onError) {
-                            args.onError.call(scope, e);
+                            args.onError.call(e);
                         }
                     }
                 },
                 error : function(error) {
                     if (args.onError) {
-                        args.onError.call(scope, error);
+                        args.onError.call(error);
                     }
                 }
             });

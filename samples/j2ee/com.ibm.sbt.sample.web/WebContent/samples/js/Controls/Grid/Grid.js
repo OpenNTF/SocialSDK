@@ -35,6 +35,7 @@ require(["sbt/controls/grid/Grid",
                         "class": "lotusFirstCell",
                         width: "64",
                         height: "64",
+                        alt: "",
                         src: this.getValue(item, "logoUrl")
                      }, td);
                      // community details
@@ -54,19 +55,19 @@ require(["sbt/controls/grid/Grid",
                      var ul = dom.create("ul", {
                         "class": "lotusInlinelist",
                      }, div);
-                     var liPeople = dom.create("ul", {
-                        "class": "lotusInlinelist",
-                     }, ul);
-                     var liUpdatedBy = dom.create("ul", {
+                    // var liPeople = dom.create("ul", {
+                    //    "class": "lotusInlinelist",
+                    // }, ul);
+                     var liUpdatedBy = dom.create("li", {
                         innerHTML: "Updated by "
                      }, ul);
                      var aUpdatedBy = dom.create("a", {
                         "class": "lotusPerson",
                         innerHTML: this.getValue(item, "contributorName")
                      }, liUpdatedBy);
-                     var liUpdatedWhen = dom.create("ul", {
-                        innerHTML: this.getValue(item, "updated")
-                     }, ul);
+                    // var liUpdatedWhen = dom.create("ul", {
+                      //  innerHTML: this.getValue(item, "updated")
+                    // }, ul);
                  },
                  getValue: function(item, name) {
                      if (item.hasOwnProperty(name)) {

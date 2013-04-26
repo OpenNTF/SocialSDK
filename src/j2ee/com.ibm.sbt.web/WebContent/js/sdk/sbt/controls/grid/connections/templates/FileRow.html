@@ -30,6 +30,7 @@
         </div>
     </td>
     <td style="padding-right: 25px;" class="lotusNowrap">
+    
         <div>
             <div class="lotusLike">
                 <a class="lotusLikeCount lotusLikeSimple" title="${recommendationLabel}" aria-label="${recommendationLabel}">
@@ -37,10 +38,11 @@
                 </a>
             </div>
         </div>
+                
     </td>
     <td style="padding-right: 25px;" title="Pin this file">
-        <a class="lconnPinnedToggle _filePinned" href="#" topic="lconn/files/files/myfavorites/toggle" data-dojo-attach-event="onclick: pinFile" role="button" aria-label="${nls.pin}" uid="${uuid}">
-            <img src="images/blank.gif" alt="${nls.pin}" class="lconnSprite lconnSprite-iconPinned16-off" />
+        <a class="lconnPinnedToggle _filePinned" href="javascript:" topic="lconn/files/files/myfavorites/toggle" data-dojo-attach-event="onclick: doPinFile" role="button" aria-label="${nls.pin}" >
+            <img src="images/blank.gif" alt="${nls.pin}" id ="${uuid}" class="${pinFileOnOrOff}" />
         </a>
     </td>
     <td style="padding-right: 25px;" class="lotusNowrap" title="${shareLabel}">

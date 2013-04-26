@@ -191,4 +191,19 @@ public class ProxyEndpointService extends ProxyService {
         String proxyUrl = b.toString();
         return proxyUrl;
     }
+
+    @Override
+	protected String getRequestURLQueryString(HttpServletRequest request) throws ServletException {
+		String queryargs = request.getQueryString();
+		String proxyqueryargs = endpoint.getProxyQueryArgs();
+		if (proxyqueryargs != null) {
+			if (queryargs == null)
+				return proxyqueryargs;
+			else
+				return queryargs + "&" + proxyqueryargs;
+		}
+		return queryargs;
+	}
+
+    
 }

@@ -61,7 +61,13 @@ define([ "sbt/_bridge/declare" ],
             } else {
                 return dojo.hitch(scope, method);
             }
-        }
+        },
+        _addClass: function(node,className){
+			return dojo.addClass(node,className);
+		},
+		_removeClass: function(node, className){
+			return dojo.removeClass(node,className);
+		}
        
     });
     

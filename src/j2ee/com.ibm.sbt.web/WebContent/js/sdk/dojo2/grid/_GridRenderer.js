@@ -17,28 +17,28 @@
 /**
  * 
  */
-define([ "sbt/_bridge/declare", "dojo/_base/lang", "dojo/dom-construct", "dijit/_WidgetBase" ], 
-         function(declare, lang, domConstruct, _WidgetBase) {
+define([ "sbt/_bridge/declare", "dojo/_base/lang", "dojo/dom-construct", "dijit/_WidgetBase" ,'dojo/dom-class'], 
+         function(declare, lang, domConstruct, _WidgetBase, domClass) {
 
-    /**
+    /*
      * @module sbt.widget.grid._GridRenderer
      */
     declare("sbt.widget.grid._GridRenderer", null, {
         
         _blankGif: dijit._WidgetBase.prototype._blankGif,
         
-        /**Utility to mix to objects or classes together*/
+        /*Utility to mix to objects or classes together*/
         _mixin: function(dest,sources) {
             return lang.mixin(dest,sources);
         },
         
-        /**destroy a DOM node
+        /*destroy a DOM node
          * @node - the node to be destroyed*/
         _destroy: function(node) {
             domConstruct.destroy(node);
         },
         
-        /**Create a DOM node
+        /*Create a DOM node
          * @name - the name of the element, for example DIV
          * @attribs - the attributes of the element, for example id
          * @parent - the element to which the newly created node will be attached to*/
@@ -46,7 +46,7 @@ define([ "sbt/_bridge/declare", "dojo/_base/lang", "dojo/dom-construct", "dijit/
             return domConstruct.create(name, attribs, parent);
         },
         
-        /**Similar to create, takes an HTML String an converts it into a DOM node
+        /*Similar to create, takes an HTML String an converts it into a DOM node
          * This function takes a HTML template which is converted to a DOM node
          * @template - the HTML template to be used
          * @parent - the parent node that the newly created node will attach to
@@ -55,7 +55,7 @@ define([ "sbt/_bridge/declare", "dojo/_base/lang", "dojo/dom-construct", "dijit/
             return domConstruct.toDom(template, parent);
         },
         
-        /**Check if an objects type is String*/
+        /*Check if an objects type is String*/
         _isString: function(obj) {
             return lang.isString(obj);
         },
@@ -64,13 +64,13 @@ define([ "sbt/_bridge/declare", "dojo/_base/lang", "dojo/dom-construct", "dijit/
             return lang.getObject(name, create, context);
         },
         
-        /**Removes White space from the beginning and end of a string
+        /*Removes White space from the beginning and end of a string
          * @str - the string to remove white space from */
         _trim: function(str) {
             return lang.trim(str);
         },
        
-        /**A function that allows a function to execute in a different scope
+        /*A function that allows a function to execute in a different scope
          * @scope - the scope you wish to execute in
          * @method - the function to execute*/
         _hitch: function(scope, method) {
@@ -79,7 +79,13 @@ define([ "sbt/_bridge/declare", "dojo/_base/lang", "dojo/dom-construct", "dijit/
             } else {
                 return lang.hitch(scope, method);
             }
-        }
+        },
+        _addClass: function(node,className){
+			return domClass.add(node,className);
+		},
+		_removeClass: function(node, className){
+			return domClass.remove(node,className);
+		}
                
     });
     

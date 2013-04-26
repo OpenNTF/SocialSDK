@@ -39,7 +39,9 @@ define(["sbt/_bridge/declare",
     	 */
         _nls: nls,
         
-        pinFiles:"",
+        pinFiles: false,
+        pinnedClass: "lconnSprite lconnSprite-iconPinned16-on",
+        unPinnedClass: "lconnSprite lconnSprite-iconPinned16-off",
     
          /**
           * @method - constructor
@@ -215,10 +217,10 @@ define(["sbt/_bridge/declare",
         },
         
         pinFileOnOrOff: function(grid, item, i, items){
-        	if(this.pinFiles == "off"){
+        	if(!this.pinFiles){
         		return "";
-        	}else if (this.pinFiles == "on"){
-        		return "lconnSprite lconnSprite-iconPinned16-off";
+        	}else if (this.pinFiles){
+        		return this.unPinnedClass;
         	}
         	
         }

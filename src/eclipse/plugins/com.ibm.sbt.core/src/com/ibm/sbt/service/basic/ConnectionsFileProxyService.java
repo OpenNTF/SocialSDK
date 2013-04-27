@@ -17,8 +17,4 @@ public class ConnectionsFileProxyService extends AbstractFileProxyService {
 		return new ContentFile(file);
 	}
 
-	@Override
-	protected String getFileType() {		
-		return "connections";
-	}
 }

@@ -14,9 +14,9 @@ import com.ibm.sbt.services.client.ClientService.ContentStream;
  * @author Vineet Kanwal
  *
  */
-public class SmartcloudFileProxyService extends AbstractFileProxyService {
+public class SmartCloudFileProxyService extends AbstractFileProxyService {
 
-	static final String sourceClass = SmartcloudFileProxyService.class.getName();
+	static final String sourceClass = SmartCloudFileProxyService.class.getName();
 	static final Logger logger = Logger.getLogger(sourceClass);
 
 	@Override

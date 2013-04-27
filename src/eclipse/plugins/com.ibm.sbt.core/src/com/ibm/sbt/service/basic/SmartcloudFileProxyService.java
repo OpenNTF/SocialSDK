@@ -31,9 +31,5 @@ public class SmartcloudFileProxyService extends AbstractFileProxyService {
 
 	}
 
-	@Override
-	protected String getFileType() {		
-		return "connections";
-	}
 
 }

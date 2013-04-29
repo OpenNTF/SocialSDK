@@ -76,6 +76,7 @@ abstract public class AbstractLibrary {
 	public static final String		PROP_BASE_URL					= "baseUrl";
 	public static final String		PROP_TOOLKIT_URL				= "sbtUrl";
 	public static final String		PROP_SERVICE_URL				= "serviceUrl";
+	public static final String		PROP_LIBRARY_URL				= "libraryUrl";
 	public static final String		PROP_AUTH_TYPE					= "authType";
 	public static final String		PROP_LOGIN_PAGE					= "loginPage";
 	public static final String		PROP_LOGIN_DIALOG_PAGE			= "loginDialogPage";
@@ -265,6 +266,7 @@ abstract public class AbstractLibrary {
 		// add the built-in properties
 		jsonProperties.putJsonProperty(PROP_TOOLKIT_URL, request.getToolkitJsUrl());
 		jsonProperties.putJsonProperty(PROP_SERVICE_URL, request.getServiceUrl());
+		jsonProperties.putJsonProperty(PROP_LIBRARY_URL, request.getLibraryUrl());
 
 		// add the requested properties
 		Property[] properties = request.getEnvironment().getPropertiesArray();

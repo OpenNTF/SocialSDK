@@ -23,7 +23,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.ibm.commons.util.PathUtil;
 import com.ibm.commons.util.StringUtil;
-import com.ibm.sbt.service.core.handlers.FileHandler;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientService.Args;
 import com.ibm.sbt.services.client.ClientService.Content;
@@ -33,22 +32,19 @@ import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
 import com.ibm.sbt.services.util.SSLUtil;
 
-/** @author Vineet Kanwal */
+/**
+ * 
+ * @author Vineet Kanwal
+ *
+ */
 public abstract class AbstractFileProxyService extends ProxyEndpointService {
 	protected String uploadUrl;
 
 	@Override
-	protected String getProxyUrlPath() {
-		return FileHandler.URL_PATH + "/" + getFileType();
-	}
-
-	protected abstract String getFileType();
-
-	@Override
 	protected void initProxy(HttpServletRequest request, HttpServletResponse response) throws ServletException {
-		String pathinfo = request.getPathInfo();		
+		String pathinfo = request.getPathInfo().substring(request.getPathInfo().indexOf("/files")); 
 		String[] pathTokens = pathinfo.split("/");
-		if (pathTokens.length > 3) {			
+		if (pathTokens.length > 3) {
 			String endPointName = pathTokens[2];
 			this.endpoint = (Endpoint) EndpointFactory.getEndpoint(endPointName);
 			if (!endpoint.isAllowClientAccess()) {
@@ -57,7 +53,6 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 			int start = pathinfo.indexOf(pathTokens[4] + "/" + pathTokens[5]) - 1;
 			requestURI = pathinfo.substring(start);
 			return;
-			// }
 		}
 		StringBuffer b = request.getRequestURL();
 		String q = request.getQueryString();
@@ -106,7 +101,7 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 
 				Map<String, String> headers = new HashMap<String, String>();
 				// this.endpoint.getClientService().post(uploadUrl, params, headers, content, ClientService.FORMAT_XML);
-				xhr(request, response, url.getPath(), new HashMap<String, String[]>(), headers, content, ClientService.FORMAT_XML);
+				xhr(request, response, url.getPath(), params, headers, content, ClientService.FORMAT_XML);
 			}
 		} catch (Exception e) {
 			if (e instanceof ClientServicesException) {

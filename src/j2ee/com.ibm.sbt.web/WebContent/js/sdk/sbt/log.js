@@ -32,7 +32,7 @@ define(['sbt/config', 'sbt/stringutil' ], function(sbt, stringutil) {
 		WARN : 3,
 		ERROR : 4
 	};
-	var loggingLevel = Level[sbt.Properties["js.logging.level"] ? sbt.Properties["js.logging.level"] : "DEBUG"];
+	var loggingLevel = Level[sbt.Properties["js.logging.level"] ? sbt.Properties["js.logging.level"] : "ERROR"];
 
 	return {
 		/**
@@ -143,6 +143,27 @@ define(['sbt/config', 'sbt/stringutil' ], function(sbt, stringutil) {
 					console.error(formattedText);
 				} else {
 					console.log("ERROR : " + formattedText);
+				}
+			}
+		},
+		/**
+		 * log an exception
+		 * @static
+		 * @method error
+		 */
+		exception : function() {
+			if (!loggingEnabled) {
+				return;
+			}
+			if (console && arguments.length > 0) {
+				var args = Array.prototype.slice.call(arguments);
+				var text = args[0];				
+				args = args.slice(1);
+				var formattedText = stringutil.substitute(text, args);
+				if (console.error) {
+					console.error("EXCEPTION : " + formattedText);
+				} else {
+					console.log("EXCEPTION : " + formattedText);
 				}
 			}
 		}

@@ -63,6 +63,7 @@ import com.ibm.commons.xml.DOMUtil;
 import com.ibm.commons.xml.XMLException;
 import com.ibm.commons.xml.util.XMIConverter;
 import com.ibm.sbt.plugin.SbtCoreLogger;
+import com.ibm.sbt.service.debug.ProxyDebugUtil;
 import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
 import com.ibm.sbt.services.util.SSLUtil;
@@ -152,6 +153,12 @@ public abstract class ClientService {
 	protected boolean isForceTrustSSLCertificate() throws ClientServicesException {
 		if (endpoint != null) {
 			return endpoint.isForceTrustSSLCertificate();
+		}
+		return false;
+	}
+	protected boolean isCaptureNetworkTraffic() throws ClientServicesException {
+		if (endpoint != null) {
+			return endpoint.isCaptureNetworkTraffic();
 		}
 		return false;
 	}
@@ -1087,9 +1094,21 @@ public abstract class ClientService {
 			// certificate for some http requests...
 			// String scheme = httpRequestBase.getURI().getScheme();
 			// if(scheme!=null && scheme.equalsIgnoreCase("https")) {
-			return SSLUtil.wrapHttpClient(httpClient);
+			httpClient = SSLUtil.wrapHttpClient(httpClient);
 			// }
 		}
+		// Capture network traffic through a network proxy like Fiddler or WireShark for debug purposes
+		if(isCaptureNetworkTraffic()){
+			
+			if(StringUtil.isEmpty(endpoint.getCaptureNetworkTrafficAtHostName())){
+				// Use default Fiddler ports
+				return ProxyDebugUtil.wrapHttpClient(httpClient);
+			}else{
+				return ProxyDebugUtil.wrapHttpClient(httpClient,endpoint.getCaptureNetworkTrafficAtHostName(),endpoint.getCaptureNetworkTrafficAtPort());
+			}
+			
+		}
+		
 		return httpClient;
 	}
 }

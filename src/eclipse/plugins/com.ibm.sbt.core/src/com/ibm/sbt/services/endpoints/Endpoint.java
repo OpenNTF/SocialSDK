@@ -366,6 +366,14 @@ public interface Endpoint {
      * This is to be used in development mode only, when SSL certificates for the server are not available.
      */
     public boolean isForceTrustSSLCertificate();
+
+    /**
+     * This is to be used in development/debug mode only, when we want to capture all network traffic from SDK
+     */
+	public boolean isCaptureNetworkTraffic();
+    public String getCaptureNetworkTrafficAtHostName();
+    public int getCaptureNetworkTrafficAtPort();
+
     
     /*
      * allows an endpoint to append query args to a proxied request 

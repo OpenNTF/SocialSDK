@@ -252,6 +252,22 @@ public class ApplicationEndpoint implements Endpoint {
 	public void logout() throws AuthenticationException {
 		// TODO Auto-generated method stub
 	}
+
+	@Override
+	public boolean isCaptureNetworkTraffic() {
+		throw newNotApplicableException();
+	}
+
+	@Override
+	public String getCaptureNetworkTrafficAtHostName() {
+		throw newNotApplicableException();
+	}
+
+	@Override
+	public int getCaptureNetworkTrafficAtPort() {
+		throw newNotApplicableException();
+	}
+
 	
     @Override
     public String getProxyQueryArgs() {

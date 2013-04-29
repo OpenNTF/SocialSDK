@@ -65,6 +65,7 @@
       <useAllReactorProjects>true</useAllReactorProjects>
       <includes>
         <include>com.ibm.sbt.sample:sbt.sample.web</include>
+        <include>com.ibm.sbt.sample:com.ibm.sbt.landing</include>
         <include>com.ibm.sbt.sample:acme.social.sample.dataapp</include>
         <include>com.ibm.sbt.sample:acme.social.sample.webapp</include>
         <include>com.ibm.sbt.sample:acme.sample.webapp</include>

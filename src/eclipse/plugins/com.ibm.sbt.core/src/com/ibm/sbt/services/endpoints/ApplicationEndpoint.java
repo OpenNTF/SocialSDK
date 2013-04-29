@@ -22,8 +22,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.util.UrlUtil;
 import com.ibm.sbt.security.authentication.AuthenticationException;
@@ -160,7 +158,7 @@ public class ApplicationEndpoint implements Endpoint {
     
     @Override
 	public void authenticate(boolean force) throws ClientServicesException {
-    	throw new NotImplementedException();
+    	throw new UnsupportedOperationException("Not Yet Implemented");
     }
     
     @Override

@@ -63,6 +63,7 @@
 	    <configuration>
 	      <target>
 	        <!-- Package Tomcat -->
+            <delete dir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps/ROOT"/>
             
             <copy todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps" 
                 file="${project.target.directory}/com.ibm.sbt.sdk/sbt/sbt.war"/>
@@ -74,6 +75,8 @@
                 file="${project.target.directory}/com.ibm.sbt.sdk/sbt.bootstrap211/sbt.bootstrap211.war"/>
             <copy todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps" 
                 file="${project.target.directory}/com.ibm.sbt.sample/sbt.sample.web/sbt.sample.web.war"/>
+            <copy tofile="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps/ROOT.war" 
+                file="${project.target.directory}/com.ibm.sbt.sample/com.ibm.sbt.landing/com.ibm.sbt.landing.war"/>
             <copy todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps" 
                 file="${project.target.directory}/com.ibm.sbt.sample/acme.social.sample.dataapp/acme.social.sample.dataapp.war"/>
             <copy todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps" 
@@ -86,8 +89,10 @@
                 
             <copy file="${project.target.directory}/com.ibm.sbt.sdk/com.ibm.commons.runtime/com.ibm.commons.runtime.jar" 
 			todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/lib" />
-	        <copy file="${project.prereqs.directory}/eclipse/plugins/com.ibm.sbt.libs.j2ee/lib/commons-logging-1.1.1.jar" 
+	        <copy file="${project.prereqs.directory}/eclipse/plugins/com.ibm.sbt.libs.java/lib/commons-logging-1.1.1.jar"
 			todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/lib" />
+            <copy file="${project.prereqs.directory}/eclipse/plugins/com.ibm.sbt.libs.java/lib/com.ibm.sbt.javamail-1.4.5.jar"
+            todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/lib" />
            
                          
 	        <copy todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/conf" >

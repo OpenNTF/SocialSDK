@@ -337,4 +337,38 @@
             <value>true</value>
         </managed-property>
     </managed-bean>
+      <managed-bean>
+    <managed-bean-name>ibmsbt-sessionfactory</managed-bean-name>
+    <managed-bean-class>com.ibm.sbt.services.client.email.MailSessionFactory</managed-bean-class>
+    <managed-bean-scope>application</managed-bean-scope>
+    <managed-property>
+      <property-name>auth</property-name>
+      <value>%{mail.auth}</value>
+    </managed-property>
+    <managed-property>
+      <property-name>mailSmtpHost</property-name>
+      <value>%{mail.smtp.host}</value>
+    </managed-property>
+    <managed-property>
+      <property-name>mailSmtpAuth</property-name>
+      <value>%{mail.smtp.auth}</value>
+    </managed-property>
+    <managed-property>
+      <property-name>mailUser</property-name>
+      <value>%{mail.user}</value>
+    </managed-property>
+    <!-- Trust the connection -->
+    <managed-property>
+      <property-name>mailPassword</property-name>
+      <value>%{mail.password}</value>
+    </managed-property>
+    <managed-property>
+      <property-name>mailFrom</property-name>
+      <value>%{mail.from}</value>
+    </managed-property>
+    <managed-property>
+      <property-name>mailDebug</property-name>
+      <value>%{mail.debug}</value>
+    </managed-property>
+  </managed-bean>
 </faces-config>

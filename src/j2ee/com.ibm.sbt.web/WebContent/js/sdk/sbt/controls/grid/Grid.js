@@ -56,7 +56,7 @@ define([ "sbt/_bridge/declare", "sbt/lang", "sbt/itemFactory", "sbt/widget/grid/
          */
         constructor: function(args) {
         	
-        	if(args.endpoint){
+        	if(args && args.endpoint){
         		endpointName = args.endpoint;
         	}
         	

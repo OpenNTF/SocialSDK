@@ -52,6 +52,11 @@ public class SbtResourceProvider extends BundleResourceProvider {
                 name = "js/sdk/_bridges/dojo-amd/"+name.substring("js/sdk/_bridge/".length());
             }
         }
+        if(ExtLibUtil.isXPages853()) { // We seem to be here with 853 only?
+            if(name.startsWith("js/sdk/sbt/_bridge/")) { 
+                name = "js/sdk/_bridges/dojo/"+name.substring("js/sdk/sbt/_bridge/".length());
+            }
+        }
     	String path = "WebContent/"+name;
     	return ExtLibUtil.getResourceURL(SbtWebActivator.instance.getBundle(), path);
     }

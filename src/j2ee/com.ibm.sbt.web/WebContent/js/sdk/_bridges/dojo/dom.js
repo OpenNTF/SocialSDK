@@ -19,6 +19,9 @@
  */
 define([],function() {
 	return {
+		addClass: function(node,className){
+			return dojo.addClass(node,className);
+		},
 		byId: function(id) {
 			return dojo.byId(id);
 		},
@@ -39,6 +42,9 @@ define([],function() {
 				}
 			}
 			return node;
+		},
+		removeClass: function(node, className){
+			return dojo.removeClass(node,className);
 		},
 		setText: function(id,text) {
 			var node = this.byId(id);

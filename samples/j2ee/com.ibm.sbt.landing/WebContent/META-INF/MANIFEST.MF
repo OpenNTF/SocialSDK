@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Web
+Bundle-SymbolicName: com.ibm.sbt.landing;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0"
+Import-Package: javax.servlet,
+ javax.servlet.http

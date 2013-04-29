@@ -306,7 +306,7 @@
     <managed-bean>
         <managed-bean-name>conAcmeApp</managed-bean-name>
         <managed-bean-class>
-            com.ibm.sbt.services.endpoints.BasicEndpoint
+            com.ibm.sbt.services.endpoints.ConnectionsBasicEndpoint
         </managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
         <managed-property>

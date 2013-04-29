@@ -45,9 +45,7 @@ define([ "sbt/_bridge/declare", "sbt/lang", "sbt/itemFactory", "sbt/widget/grid/
         hideSorter: false,
         /**FilterTag, is used for sorting and paging, as to only sort as filtered set of results*/
         filterTag: "",
-        /** The name of the endpoint for the grid to use, IE connections,smartcloud */
-        endpointName: null,
-        
+
         /**
          * Constructor method for the grid.
          * Creates a default store and renderer, if none have been already created
@@ -55,11 +53,7 @@ define([ "sbt/_bridge/declare", "sbt/lang", "sbt/itemFactory", "sbt/widget/grid/
          * @param args
          */
         constructor: function(args) {
-        	
-        	if(args && args.endpoint){
-        		endpointName = args.endpoint;
-        	}
-        	
+        
             lang.mixin(this, args);
             
             if (!this.store) {

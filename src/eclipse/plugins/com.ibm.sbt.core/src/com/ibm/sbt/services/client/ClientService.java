@@ -680,7 +680,15 @@ public abstract class ClientService {
 
 	public final Object get(String serviceUrl, Map<String, String> parameters, Handler format)
 			throws ClientServicesException {
+		return get(serviceUrl, parameters, null, format);
+	}
+
+	public final Object get(String serviceUrl, Map<String, String> parameters, Map<String, String> headers,
+			Handler format) throws ClientServicesException {
 		Args args = createArgs(serviceUrl, parameters);
+		if (headers != null) {
+			args.setHeaders(headers);
+		}
 		args.setHandler(format);
 		return get(args);
 	}
@@ -905,7 +913,8 @@ public abstract class ClientService {
 			}
 		}
 		if ((response.getStatusLine().getStatusCode() == HttpServletResponse.SC_UNAUTHORIZED)
-				|| (endpoint!=null && endpoint.getAuthenticationErrorCode() == response.getStatusLine().getStatusCode())) {
+				|| (endpoint != null && endpoint.getAuthenticationErrorCode() == response.getStatusLine()
+						.getStatusCode())) {
 			forceAuthentication(args);
 			return null;
 		}

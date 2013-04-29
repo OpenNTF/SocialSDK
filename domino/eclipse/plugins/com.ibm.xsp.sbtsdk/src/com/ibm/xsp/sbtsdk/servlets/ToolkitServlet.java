@@ -60,6 +60,10 @@ public class ToolkitServlet extends LibraryServlet {
 			String serviceUrl = RuntimeConstants.get().getBaseProxyUrl(getHttpRequest());
 			params.setServiceUrl(serviceUrl);
 			
+			// Calculate the library servlet URL
+			String libraryUrl = RuntimeConstants.get().getBaseLibraryUrl(getHttpRequest());
+			params.setLibraryUrl(libraryUrl);
+			
 			super.init(params);
 		}
 	    protected String getDefaultJsLib() {

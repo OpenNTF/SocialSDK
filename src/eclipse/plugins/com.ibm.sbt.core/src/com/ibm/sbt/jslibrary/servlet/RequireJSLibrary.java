@@ -24,20 +24,20 @@ import com.ibm.commons.util.io.json.JsonObject;
  * 
  * @author mwallace
  */
-public class RequireJSLibrary extends AbstractLibrary {
+public abstract class RequireJSLibrary extends AbstractLibrary {
 
-	public static final String			MODULE_BRIDGE			= "sbt/_bridge";						//$NON-NLS-1$
-	public static final String			MODULE_SBTX_WIDGET		= "sbtx/widget";						//$NON-NLS-1$
-	public static final String			MODULE_HAS				= "has";								//$NON-NLS-1$
-	public static final String			MODULE_REQUIRE_I18N		= "requirejs/i18n";					//$NON-NLS-1$
-	public static final String			MODULE_REQUIRE_TEXT		= "requirejs/text";					//$NON-NLS-1$
+	protected static final String		MODULE_BRIDGE			= "sbt/_bridge";						//$NON-NLS-1$
+	protected static final String		MODULE_SBTX_WIDGET		= "sbtx/widget";						//$NON-NLS-1$
+	protected static final String		MODULE_HAS				= "has";								//$NON-NLS-1$
+	protected static final String		MODULE_REQUIRE_I18N		= "requirejs/i18n";					//$NON-NLS-1$
+	protected static final String		MODULE_REQUIRE_TEXT		= "requirejs/text";					//$NON-NLS-1$
 
-	public static final String			PATH_SBTX				= "sbtx/js/sdk/sbtx";					//$NON-NLS-1$
+	protected static final String		PATH_SBTX				= "sbtx/js/sdk/sbtx";					//$NON-NLS-1$
 
-	public static final String			PATH_HAS				= "/sbt/js/libs/has";					//$NON-NLS-1$
+	protected static final String		PATH_HAS				= "/sbt/js/libs/has";					//$NON-NLS-1$
 
-	public static final String			PATH_REQUIRE_I18N		= "/sbt/js/libs/requirejsPlugins/i18n"; //$NON-NLS-1$
-	public static final String			PATH_REQUIRE_TEXT		= "/sbt/js/libs/requirejsPlugins/text"; //$NON-NLS-1$
+	protected static final String		PATH_REQUIRE_I18N		= "/sbt/js/libs/requirejsPlugins/i18n"; //$NON-NLS-1$
+	protected static final String		PATH_REQUIRE_TEXT		= "/sbt/js/libs/requirejsPlugins/text"; //$NON-NLS-1$
 	// TODO Do these need to be dynamic
 	protected static final String[][]	REGISTER_MODULES		= { { MODULE_SBT, PATH_SBT },
 			{ MODULE_BRIDGE }									};
@@ -70,15 +70,6 @@ public class RequireJSLibrary extends AbstractLibrary {
 	@Override
 	public boolean enableDefineCheck(String version) {
 		return false;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.ibm.sbt.jslibrary.servlet.BaseLibrary#getName()
-	 */
-	@Override
-	public String getName() {
-		return "";
 	}
 
 	/*

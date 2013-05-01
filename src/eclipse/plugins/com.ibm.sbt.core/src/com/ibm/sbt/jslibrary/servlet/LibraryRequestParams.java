@@ -30,6 +30,7 @@ public class LibraryRequestParams {
     private String _iframeUrl;
     private String _toolkitExtUrl;
     private String _toolkitExtJsUrl;
+    private String _libraryUrl;
 
     /**
      * @return the defaultEnvironment
@@ -135,5 +136,19 @@ public class LibraryRequestParams {
     public void setToolkitExtJsUrl(String toolkitExtJsUrl) {
         _toolkitExtJsUrl = toolkitExtJsUrl;
     }
+
+	/**
+	 * @return the libraryUrl
+	 */
+	public String getLibraryUrl() {
+		return _libraryUrl;
+	}
+
+	/**
+	 * @param _libraryUrl the libraryUrl to set
+	 */
+	public void setLibraryUrl(String _libraryUrl) {
+		this._libraryUrl = _libraryUrl;
+	}
 
 }

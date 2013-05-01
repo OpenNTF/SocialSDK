@@ -50,6 +50,7 @@ public class LibraryRequest {
     protected String toolkitUrl;
     protected String toolkitJsUrl;
     protected String serviceUrl;
+    protected String libraryUrl;
     protected String iframeUrl;
     protected String toolkitExtUrl;
     protected String toolkitExtJsUrl;
@@ -133,6 +134,7 @@ public class LibraryRequest {
         this.toolkitExtUrl = StringUtil.replace(params.getToolkitExtUrl(), "%local_server%", UrlUtil.getServerUrl(httpRequest));
         this.toolkitExtJsUrl = StringUtil.replace(params.getToolkitExtJsUrl(), "%local_server%", UrlUtil.getServerUrl(httpRequest));
         this.serviceUrl = StringUtil.replace(params.getServiceUrl(), "%local_application%", UrlUtil.getContextUrl(httpRequest));
+        this.libraryUrl = StringUtil.replace(params.getLibraryUrl(), "%local_application%", UrlUtil.getContextUrl(httpRequest));
         this.iframeUrl = StringUtil.replace(params.getIframeUrl(), "%local_server%", UrlUtil.getServerUrl(httpRequest));
 
         readFromRequest(httpRequest, params.getEnvironment());
@@ -179,6 +181,14 @@ public class LibraryRequest {
      */
     public String getServiceUrl() {
         return serviceUrl;
+    }
+    
+    /**
+     * 
+     * @return
+     */
+    public String getLibraryUrl() {
+        return libraryUrl;
     }
 
     /**

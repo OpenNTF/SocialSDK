@@ -39,21 +39,10 @@ define([ "sbt/_bridge/declare", "sbt/store/AtomStore", "dojo/_base/lang", "dojo/
         /*retrieves the data from the Atom Store*/
         _doQuery: function(store, options, query) {
             query = query || {};
-            
-          //if sorting is being used
-            if(this._activeSortAnchor){
-                
-            	options.sort =  [{ attribute: this._activeSortAnchor.sortParameter }];
-            }
-            if(this._activeSortIsDesc){
-            	options.sort[0].descending = this._activeSortIsDesc;
-            }
-            
             var self = this;
-            
             var errCallback = lang.hitch(this, this._updateWithError);
-            
             var results = store.query(query, options);
+            
             Deferred.when(results.total, function(totalCount) {
                 Deferred.when(results, function(results) {
                     self.data = {

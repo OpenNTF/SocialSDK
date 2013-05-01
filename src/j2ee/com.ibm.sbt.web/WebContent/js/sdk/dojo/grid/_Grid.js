@@ -59,15 +59,6 @@ define([ "sbt/_bridge/declare", "sbt/data/AtomReadStore", "sbt/widget/_Templated
                 onError: handleError
             });
             
-          //if sorting is being used
-            if(this._activeSortAnchor){
-                
-            	args.sort =  [{ attribute: this._activeSortAnchor.sortParameter }];
-            }
-            if(this._activeSortIsDesc){
-            	args.sort[0].descending = this._activeSortIsDesc;
-            }
-            
             store.fetch(args);
         }
     

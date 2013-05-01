@@ -128,7 +128,8 @@ define([ "sbt/_bridge/declare",
             "recycledFiles" : {
                 storeArgs : {
                     url : sbt.connections.fileUrls.recycledFiles,
-                    attributes : sbt.connections.fileConstants.xpath_files
+                    attributes : sbt.connections.fileConstants.xpath_files,
+                    paramSchema: parameter.files.all
                 },
                 rendererArgs : {
                     type : "recycledFile"
@@ -137,7 +138,8 @@ define([ "sbt/_bridge/declare",
             "fileComments" : {
                 storeArgs : {
                     url : sbt.connections.fileUrls.fileComments,
-                    attributes : sbt.connections.fileConstants.xpath_comments
+                    attributes : sbt.connections.fileConstants.xpath_comments,
+                    paramSchema: parameter.files.all
                 },
                 rendererArgs : {
                     type : "comment"
@@ -146,7 +148,8 @@ define([ "sbt/_bridge/declare",
             "fileShares" : {
                 storeArgs : {
                     url : sbt.connections.fileUrls.fileShares,
-                    attributes : sbt.connections.fileConstants.xpath_files
+                    attributes : sbt.connections.fileConstants.xpath_files,
+                    paramSchema: parameter.files.all
                 },
                 rendererArgs : {
                     type : "file"

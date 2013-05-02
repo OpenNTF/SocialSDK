@@ -52,9 +52,7 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     private String credentialStore;
     private boolean requiresAuthentication;
     private boolean forceTrustSSLCertificate;
-    private boolean captureNetworkTraffic;
-    private String captureNetworkTrafficAtHostName;
-	private int captureNetworkTrafficAtPort;
+    private String httpProxy;
     private boolean allowClientAccess = true;
     private static final int authenticationErrorCode = 401;
     
@@ -251,33 +249,18 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
         this.forceTrustSSLCertificate = forceTrustSSLCertificate;
     }
     
+
     @Override
-	public boolean isCaptureNetworkTraffic() {
-		return captureNetworkTraffic;
+	public String getHttpProxy(){
+		return httpProxy;
 	}
 
-	public void setCaptureNetworkTraffic(boolean captureNetworkTraffic) {
-		this.captureNetworkTraffic = captureNetworkTraffic;
-	}
-	
-    @Override
-	public String getCaptureNetworkTrafficAtHostName() {
-		return captureNetworkTrafficAtHostName;
+	public void setHttpProxy(
+			String httpProxy) {
+		this.httpProxy = httpProxy;
 	}
 
-	public void setCaptureNetworkTrafficAtHostName(
-			String captureNetworkTrafficAtHostName) {
-		this.captureNetworkTrafficAtHostName = captureNetworkTrafficAtHostName;
-	}
 
-	@Override
-	public int getCaptureNetworkTrafficAtPort() {
-		return captureNetworkTrafficAtPort;
-	}
-
-	public void setCaptureNetworkTrafficAtPort(int captureNetworkTrafficAtPort) {
-		this.captureNetworkTrafficAtPort = captureNetworkTrafficAtPort;
-	}
     
     //
     // Client service access

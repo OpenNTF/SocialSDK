@@ -46,6 +46,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.w3c.dom.Node;
+import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.NoAccessSignal;
 import com.ibm.commons.util.FastStringBuffer;
 import com.ibm.commons.util.PathUtil;
@@ -156,11 +157,15 @@ public abstract class ClientService {
 		}
 		return false;
 	}
-	protected boolean isCaptureNetworkTraffic() throws ClientServicesException {
+	protected String getHttpProxy() throws ClientServicesException {
 		if (endpoint != null) {
-			return endpoint.isCaptureNetworkTraffic();
+			String proxyinfo = endpoint.getHttpProxy();
+			if(StringUtil.isEmpty(proxyinfo)){
+				proxyinfo = Context.get().getProperty("sbt.httpProxy");
+			}
+			return proxyinfo;
 		}
-		return false;
+		return "";
 	}
 
 	protected void forceAuthentication(Args args) throws ClientServicesException {
@@ -1098,15 +1103,8 @@ public abstract class ClientService {
 			// }
 		}
 		// Capture network traffic through a network proxy like Fiddler or WireShark for debug purposes
-		if(isCaptureNetworkTraffic()){
-			
-			if(StringUtil.isEmpty(endpoint.getCaptureNetworkTrafficAtHostName())){
-				// Use default Fiddler ports
-				return ProxyDebugUtil.wrapHttpClient(httpClient);
-			}else{
-				return ProxyDebugUtil.wrapHttpClient(httpClient,endpoint.getCaptureNetworkTrafficAtHostName(),endpoint.getCaptureNetworkTrafficAtPort());
-			}
-			
+		if (StringUtil.isNotEmpty(getHttpProxy())) {
+			return ProxyDebugUtil.wrapHttpClient(httpClient,getHttpProxy());
 		}
 		
 		return httpClient;

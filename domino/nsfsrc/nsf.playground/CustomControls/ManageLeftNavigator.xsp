@@ -28,6 +28,19 @@
 				</xe:pageTreeNode>
 			</xe:basicContainerNode>
 			<xe:basicContainerNode transparent="true"
+				loaded="${javascript:optionsBean.gadgetSnippetsEnabled}">
+				<xe:separatorTreeNode></xe:separatorTreeNode>
+				<xe:pageTreeNode page="ManageGadgetSnippetsByCategory"
+					label="OpenSocial Gadgets By Category" selection="/Manage/GadgetSnippetsByCategory">
+				</xe:pageTreeNode>
+				<xe:pageTreeNode page="ManageGadgetSnippetsByAuthor"
+					label="OpenSocial Gadgets By Author" selection="/Manage/GadgetSnippetsByAuthor">
+				</xe:pageTreeNode>
+				<xe:pageTreeNode page="ManageImportGadgetSnippets" label="Import OpenSocial Gadgets"
+					selection="/Manage/ImportGadgetSnippets">
+				</xe:pageTreeNode>
+			</xe:basicContainerNode>
+			<xe:basicContainerNode transparent="true"
 				loaded="${javascript:optionsBean.xpagesSnippetsEnabled}">
 				<xe:separatorTreeNode></xe:separatorTreeNode>
 				<xe:pageTreeNode page="ManageXPagesSnippetsByCategory"

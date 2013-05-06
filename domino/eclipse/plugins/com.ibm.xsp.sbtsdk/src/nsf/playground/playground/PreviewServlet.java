@@ -17,6 +17,7 @@ public class PreviewServlet extends FacesContextServlet {
 	private PreviewJavaScriptHandler javaScriptHandler;
 	private PreviewJavaHandler javaHandler;
 	private PreviewXPagesHandler xpagesHandler;
+	private PreviewGadgetHandler gadgetHandler;
 	
 	public PreviewServlet() {
 	}
@@ -41,6 +42,13 @@ public class PreviewServlet extends FacesContextServlet {
 		}
 		return xpagesHandler;
 	}
+
+	public PreviewHandler getGadgetSnippetHandler() {
+		if(gadgetHandler==null) {
+			gadgetHandler = new PreviewGadgetHandler();
+		}
+		return gadgetHandler;
+	}
 	
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -52,6 +60,8 @@ public class PreviewServlet extends FacesContextServlet {
 			getJavaSnippetHandler().doService(req, resp);
 		} else if(StringUtil.equalsIgnoreCase(pathInfo, "/xpagessnippet")) {
 			getXPagesSnippetHandler().doService(req, resp);
+		} else if(StringUtil.equalsIgnoreCase(pathInfo, "/gadgetsnippet")) {
+			getGadgetSnippetHandler().doService(req, resp);
 		}
 	}
 }

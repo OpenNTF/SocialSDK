@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:this.resources>
+	</xp:this.resources>
+
+	<xc:ccMainPageResources></xc:ccMainPageResources>
+
+	<xp:form>
+		<xc:ccLayout navigationPath="/GadgetSnippets"
+			title="IBM Social Business Toolkit - OpenSocial Gadgets" wholePage="true">
+			not yet implemented
+		</xc:ccLayout>
+	</xp:form>
+</xp:view>

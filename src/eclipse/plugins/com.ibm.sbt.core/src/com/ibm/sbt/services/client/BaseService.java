@@ -463,15 +463,16 @@ public abstract class BaseService {
 
 		@SuppressWarnings("unchecked")
 		DataFormat result = (DataFormat) retrieveData(url, parameters);
-		DataExtractor<DataFormat> dataExtractor = getNodeExtractorFromData(result);
-		Collection<DataFormat> entries = dataExtractor.getEntitiesFromServiceResult(result);
 		List<Entity> entities = new ArrayList<Entity>();
-		for (DataFormat entry : entries) {
-			@SuppressWarnings("unchecked")
-			Entity entity = (Entity) getEntityFromData(entityClass.getSimpleName(), entry);
-			entities.add(entity);
+		if (result != null) {
+			DataExtractor<DataFormat> dataExtractor = getNodeExtractorFromData(result);
+			Collection<DataFormat> entries = dataExtractor.getEntitiesFromServiceResult(result);
+			for (DataFormat entry : entries) {
+				@SuppressWarnings("unchecked")
+				Entity entity = (Entity) getEntityFromData(entityClass.getSimpleName(), entry);
+				entities.add(entity);
+			}
 		}
-
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.exiting(sourceClass, "getMultipleEntries");
 		}

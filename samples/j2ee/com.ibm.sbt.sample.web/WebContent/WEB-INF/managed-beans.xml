@@ -371,4 +371,75 @@
       <value>%{mail.debug}</value>
     </managed-property>
   </managed-bean>
+  
+  	<!-- Twitter -->
+	<managed-bean>
+		<managed-bean-name>TwitterStore</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.security.authentication.oauth.consumer.store.MemoryTokenStore</managed-bean-class>
+
+		<managed-bean-scope>application</managed-bean-scope>
+		<!-- Fixed OAuth Application parameters -->
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>twitter</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.services.endpoints.TwitterOAuth1Endpoint</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+		<!-- Endpoint URL -->
+		<managed-property>
+			<property-name>url</property-name>
+			<value>%{twitter.url}</value>
+		</managed-property>
+
+		<!-- Trust the connection -->
+		<managed-property>
+			<property-name>forceTrustSSLCertificate</property-name>
+			<value>true</value>
+		</managed-property>
+		
+		<!-- Fixed values for the registered application -->
+		<managed-property>
+			<property-name>consumerKey</property-name>
+			<value>%{twitter.consumerKey}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>consumerSecret</property-name>
+			<value>%{twitter.consumerSecret}</value>
+		</managed-property>
+		<!--  Access Token obtained from the Twitter Application. This is required for authorizing the API calls  -->
+		<managed-property>
+			<property-name>applicationAccessToken</property-name>
+			<value>%{twitter.applicationAccessToken}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>requestTokenURL</property-name>
+			<value>%{twitter.requestTokenURL}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>authorizationURL</property-name>
+			<value>%{twitter.authorizeURL}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>accessTokenURL</property-name>
+			<value>%{twitter.accessTokenURL}</value>
+		</managed-property>		
+		<managed-property>
+			<property-name>signatureMethod</property-name>
+			<value>HMAC-SHA1</value>
+		</managed-property>
+
+		<!-- Access to the token store -->
+		<managed-property>
+			<property-name>tokenStore</property-name>
+			<value>TwitterStore</value>
+		</managed-property>
+		<managed-property>
+			<property-name>serviceName</property-name>
+			<value>Twitter</value>
+		</managed-property>
+		<managed-property>
+			<property-name>appId</property-name>
+			<value>%{twitter.appId}</value>
+		</managed-property>
+	</managed-bean>
+  
 </faces-config>

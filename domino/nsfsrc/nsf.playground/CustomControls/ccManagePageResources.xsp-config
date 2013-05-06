@@ -5,17 +5,13 @@
     <default-prefix>xc</default-prefix>
   </faces-config-extension>
   <composite-component>
-    <component-type>ManageAPIsActionBar</component-type>
-    <composite-name>ManageAPIsActionBar</composite-name>
-    <composite-file>/ManageAPIsActionBar.xsp</composite-file>
+    <component-type>ccManagePageResources</component-type>
+    <composite-name>ccManagePageResources</composite-name>
+    <composite-file>/ccManagePageResources.xsp</composite-file>
     <composite-extension>
       <designer-extension>
         <in-palette>true</in-palette>
       </designer-extension>
     </composite-extension>
-    <property>
-      <property-name>viewName</property-name>
-      <property-class>string</property-class>
-    </property>
   </composite-component>
 </faces-config>

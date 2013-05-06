@@ -34,9 +34,7 @@ public abstract class AssetBean {
 		return URLEncoding.encodeURIString(s, "utf-8", 0, true);
 	}
 	
-	protected abstract String getFlatView();
-
-	protected abstract String getAllView();
+	protected abstract String getAssetForm(); 
 	
 	protected abstract AssetNode createAssetNode(String notesUnid, CategoryNode parent, String name, String category, String assetId);
 
@@ -61,37 +59,39 @@ public abstract class AssetBean {
 	}
 	private RootNode readSnippetsNodes() throws NotesException {
 		Database db = ExtLibUtil.getCurrentDatabase();
-		View v = db.getView(getFlatView());
+		View v = db.getView("AllSnippetsFlat");
 		try {
 			RootNode root = new RootNode();
 			String apisSearch = (String)ExtLibUtil.getViewScope().get("assetSearch");
 			if(StringUtil.isNotEmpty(apisSearch)) {
 				v.FTSearch(apisSearch);
-				ViewEntryCollection col = v.getAllEntries();
+				ViewEntryCollection col = v.getAllEntriesByKey(getAssetForm());
 				for(ViewEntry e=col.getFirstEntry(); e!=null; e=col.getNextEntry()) {
 					Vector<?> values = e.getColumnValues();
 					String notesUnid = e.getUniversalID();
-					String cat = (String)values.get(0);
-					String name = (String)values.get(1);
-					String jspUrl = (String)values.get(2);
+					String type = (String)values.get(0);
+					String cat = (String)values.get(1);
+					String name = (String)values.get(2);
+					String jspUrl = (String)values.get(3);
 					CategoryNode c = findCategory(root, cat);
 					AssetNode node = createAssetNode(notesUnid,c,name,cat,jspUrl);
-					node.setTooltip((String)values.get(5));
+					node.setTooltip((String)values.get(6));
 					c.getChildren().add(node);
 				}
 			} else { 
 				v.setAutoUpdate(false);
-				ViewNavigator nav = v.createViewNav();
+				ViewNavigator nav = v.createViewNavFromCategory(getAssetForm());
 				nav.setBufferMaxEntries(500);
 				for(ViewEntry e=nav.getFirst(); e!=null; e=nav.getNext()) {
 					Vector<?> values = e.getColumnValues();
 					String notesUnid = e.getUniversalID();
-					String cat = (String)values.get(0);
-					String name = (String)values.get(1);
-					String assetId = (String)values.get(2);
+					String type = (String)values.get(0);
+					String cat = (String)values.get(1);
+					String name = (String)values.get(2);
+					String assetId = (String)values.get(3);
 					CategoryNode c = findCategory(root, cat);
 					AssetNode node = createAssetNode(notesUnid,c,name,cat,findUniqueUrl(c,notesUnid,assetId));
-					node.setTooltip((String)values.get(5));
+					node.setTooltip((String)values.get(6));
 					c.getChildren().add(node);
 				}
 			}
@@ -141,8 +141,8 @@ public abstract class AssetBean {
 	 */
 	public String[] getAllCategories() throws NotesException {
 		Database db = ExtLibUtil.getCurrentDatabase();
-		View v = db.getView(getAllView());
-		ViewNavigator nav = v.createViewNav();
+		View v = db.getView("AllSnippets");
+		ViewNavigator nav = v.createViewNavFromCategory(getAssetForm());
 		try {
 			nav.setMaxLevel(0);
 			//nav.setCacheSize(128);

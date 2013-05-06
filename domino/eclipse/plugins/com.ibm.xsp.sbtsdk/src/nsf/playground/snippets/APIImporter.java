@@ -10,6 +10,7 @@ import java.util.Properties;
 
 import lotus.domino.Database;
 import lotus.domino.Document;
+import nsf.playground.beans.APIBean;
 import nsf.playground.jobs.AsyncAction;
 
 import com.ibm.commons.runtime.util.URLEncoding;
@@ -38,6 +39,7 @@ import com.ibm.xsp.FacesExceptionEx;
 public class APIImporter extends AssetImporter {
 
 	public static final String TYPE = "api";
+	public static final String FORM = APIBean.FORM;
 	
 	public APIImporter(Database db) {
 		super(db);
@@ -47,8 +49,8 @@ public class APIImporter extends AssetImporter {
 		return TYPE;
 	}
 
-	protected String getAssetView() {
-		return "AllAPIsByImportSource";
+	protected String getAssetForm() {
+		return FORM;
 	}
 
 	protected NodeFactory getNodeFactory() {
@@ -63,7 +65,7 @@ public class APIImporter extends AssetImporter {
 	protected void saveAsset(String id, String category, String name, String source, String json, String properties) throws Exception {
 		Document doc = getDatabase().createDocument();
 		try {
-			setItemValue(doc,"Form", "APIDescription");
+			setItemValue(doc,"Form", FORM);
 			setItemValue(doc,"Author", doc.getParentDatabase().getParent().getUserName()); // Should we make this private (reader field)?
 			setItemValue(doc,"Id", id);
 			setItemValue(doc,"Category", category);

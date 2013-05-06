@@ -42,17 +42,18 @@ window._sbt_bridge_compat = true;
 	* 
 	*/ 
 	var global = window;
-	var currentModule;
+	var currentModule = null;
 	
 	var _load = dojo._loadModule; 
 	dojo._loadModule = dojo.require = function(/*String*/moduleName, /*Boolean?*/omitModuleCheck){
+		var oldModule = currentModule; 
 		currentModule = moduleName;
 		try {
 			return _load.apply(null,arguments);
 		} catch(ex){ 
 			console.log(ex.message);
 		} finally {
-			currentModule = null;
+			currentModule = oldModule;
 		}
 	};
 	
@@ -209,4 +210,18 @@ window._sbt_bridge_compat = true;
 		return dojo.declare;	
 	});
 	
+	// 4/17/2013: make the new AMD syntax available to the dojo parser
+	var oldGetObject = dojo.getObject; 
+	dojo.getObject = function(/*String*/name, /*Boolean?*/create, /*Object?*/context){
+		if(dojo.isString(name)&&name.indexOf('/')>=0) {
+			// create=true, not supported as we cannot create modules this way
+			// context!=null, not supported as modules cannot have a root context
+			if(!create && !context) {
+				var dottedName = name.replace(/\//g, ".");
+				var m = dojo.require(dottedName);
+				return m;
+			}
+		}
+		return oldGetObject.apply(this,arguments);
+	};	
 })();

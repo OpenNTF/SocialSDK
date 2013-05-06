@@ -12,6 +12,7 @@ public class JavaSnippetBean extends nsf.playground.beans.JavaSnippetBean {
 	
 	public static boolean DEBUG = false;
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Class<JspFragment> getCompiledClass(String jspClassName) throws Exception {
 		JavaSourceClassLoader loader = getSourceClassLoader();
@@ -22,6 +23,7 @@ public class JavaSnippetBean extends nsf.playground.beans.JavaSnippetBean {
 //		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public synchronized Class<JspFragment> compileSnippet(String jspClassName, String source) throws Exception {
 		JavaSourceClassLoader loader = getSourceClassLoader();

@@ -1,7 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
 	xmlns:xc="http://www.ibm.com/xsp/custom" xmlns:bz="http://www.ibm.com/xsp/bazaar">
-	<bz:controlFactory id="controlFactory1" autoCreate="true">
+	<xp:this.beforeRenderResponse><![CDATA[#{javascript:var p = sessionScope["xpagessnippet.lastrequest"]
+if(p) {
+	var sOpt = p.getOptions();
+	if(sOpt) {
+		var opt = fromJson(sOpt);
+		var env = dataAccess.getEnvironment(opt.env);
+		if(env) {
+			env.prepareEndpoints();
+		}
+	}
+	var id = p.id;
+	var doc = database.getDocumentByUNID(id)
+	if(doc) {
+		var xpages = doc.getItemValueString("XPages");
+		var pageName = "playground/"+id+"_"+doc.getLastModified().toJavaDate().getTime();
+		dynamicXPagesBean.compile(pageName,xpages);
+		context.redirectToPage(pageName);
+	}
+}}]]></xp:this.beforeRenderResponse>
+	<bz:controlFactory id="controlFactory1" autoCreate="true" loaded="false">
 		<bz:this.controlBuilder>
 			<bz:markupControlBuilder>
 

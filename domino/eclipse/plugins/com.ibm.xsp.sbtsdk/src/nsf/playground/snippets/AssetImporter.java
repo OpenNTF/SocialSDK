@@ -65,9 +65,7 @@ public abstract class AssetImporter {
 	
 	// "html", "api"...
 	protected abstract String getAssetType(); 
-
-	// "AllSnippetsByImportSource", "AllAPIsByImportSource"...
-	protected abstract String getAssetView(); 
+	protected abstract String getAssetForm(); 
 
 	protected abstract NodeFactory getNodeFactory(); 
 	
@@ -246,9 +244,12 @@ public abstract class AssetImporter {
 	}
 
 	protected void deleteAssets(ImportSource source, AsyncAction action) throws Exception {
-		View v = db.getView(getAssetView());
+		View v = db.getView("AllSnippetsByImportSource");
 		try {
-			v.getAllEntriesByKey(source.getName()).removeAll(true);
+			Vector key = new Vector();
+			key.add(getAssetForm());
+			key.add(source.getName());
+			v.getAllEntriesByKey(key).removeAll(true);
 		} finally {
 			v.recycle();
 		}

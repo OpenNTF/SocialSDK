@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:this.data>
+		<xp:dominoDocument var="document1" formName="GadgetSnippet">
+			<xp:this.queryNewDocument><![CDATA[#{javascript:document1.replaceItemValue("Author",userBean.commonName)}]]></xp:this.queryNewDocument>
+			<xp:this.querySaveDocument><![CDATA[#{javascript:return gadgetSnippetBean.querySave(document1)}]]></xp:this.querySaveDocument>
+		</xp:dominoDocument>
+	</xp:this.data>
+	<xe:formTable id="formTable2" formTitle="OpenSocial Gadget Snippet"
+		formDescription="Enter here the data for your Gadget snippet">
+		<xp:this.facets>
+			<xp:panel xp:key="footer" id="panel3">
+				<xp:button value="Save" id="button1"
+					loaded="${javascript:userBean.canCreateDocs}">
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="complete">
+						<xp:this.action>
+							<xp:actionGroup>
+								<xp:saveDocument var="document1">
+								</xp:saveDocument>
+								<xe:changeDynamicContentAction
+									facetName="view">
+								</xe:changeDynamicContentAction>
+							</xp:actionGroup>
+						</xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+				<xp:button value="Cancel" id="button2">
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="complete" immediate="true" save="false">
+						<xp:this.action>
+							<xe:changeDynamicContentAction
+								facetName="view">
+							</xe:changeDynamicContentAction>
+						</xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+			</xp:panel>
+		</xp:this.facets>
+		<xe:formRow id="formRow1" label="Category:">
+			<xp:inputText id="inputText1" required="true"
+				disableClientSideValidation="true" value="#{document1.Category}"
+				size="60">
+				<xp:typeAhead mode="partial" minChars="1" ignoreCase="true">
+					<xp:this.valueList><![CDATA[#{javascript:getComponent("valuePicker2").getTypeAheadValue(this)}]]></xp:this.valueList>
+				</xp:typeAhead>
+			</xp:inputText>
+			<xe:valuePicker id="valuePicker2" for="inputText1">
+				<xe:this.dataProvider>
+					<xe:simpleValuePicker
+						valueList="#{javascript:gadgetSnippetBean.getAllCategories()}">
+					</xe:simpleValuePicker>
+				</xe:this.dataProvider>
+			</xe:valuePicker>
+		</xe:formRow>
+		<xe:formRow id="formRow8" label="Name:">
+			<xp:inputText id="inputText5" required="true"
+				disableClientSideValidation="true" value="#{document1.Name}" size="120">
+			</xp:inputText>
+		</xe:formRow>
+		<xe:formRow id="formRow3" label="Description:">
+			<xp:inputTextarea id="inputText6"
+				disableClientSideValidation="true" value="#{document1.Description}"
+				cols="120" rows="5">
+			</xp:inputTextarea>
+		</xe:formRow>
+		<xe:formRow id="formRow5" labelPosition="above">
+			<xe:djTabContainer id="djTabContainer2"
+				style="width: 900px; height: 250px; border: none">
+				<xe:djTabPane id="djTabPane1" title="Gadget.xml">
+					<xp:inputTextarea id="inputTextarea1" value="#{document1.Xml}"
+						style="width:100%;height:100%;font-family:Courier New;font-size:10pt">
+					</xp:inputTextarea>
+				</xe:djTabPane>
+				<xe:djTabPane id="djTabPane4" title="Properties">
+					<xp:inputTextarea id="inputTextarea2" value="#{document1.Properties}"
+						style="width:100%;height:100%;font-family:Courier New;font-size:10pt">
+					</xp:inputTextarea>
+				</xe:djTabPane>
+				<xe:djTabPane id="djTabPane5" title="Documentation">
+					<xp:inputTextarea id="inputTextarea3" value="#{document1.Documentation}"
+						style="width:100%;height:100%;font-family:Courier New;font-size:10pt">
+					</xp:inputTextarea>
+				</xe:djTabPane>
+			</xe:djTabContainer>
+		</xe:formRow>
+	</xe:formTable>
+	<xe:dumpObject loaded="false" id="dumpObject1" title="document"
+		value="#{document1}" />
+</xp:view>

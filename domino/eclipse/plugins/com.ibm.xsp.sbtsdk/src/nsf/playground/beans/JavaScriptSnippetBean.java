@@ -11,12 +11,10 @@ import com.ibm.sbt.playground.assets.jssnippets.JSSnippetAssetNode;
  */
 public abstract class JavaScriptSnippetBean extends AssetBean {
 
-	protected String getFlatView() {
-		return "AllSnippetsFlat";
-	}
-
-	protected String getAllView() {
-		return "AllSnippets";
+	public static final String FORM = "JavaScriptSnippet";
+	
+	protected String getAssetForm() {
+		return FORM;
 	}
 	
 	protected AssetNode createAssetNode(String notesUnid, CategoryNode parent, String name, String category, String assetId) {

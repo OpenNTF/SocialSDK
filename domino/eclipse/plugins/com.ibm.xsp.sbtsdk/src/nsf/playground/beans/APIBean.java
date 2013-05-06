@@ -5,6 +5,7 @@ import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Vector;
 
 import lotus.domino.Database;
 import lotus.domino.Document;
@@ -40,6 +41,7 @@ public abstract class APIBean extends AssetBean {
 	
 	public static final boolean TRACE = false;
 
+	public static final String FORM = "APIDescription";
 	
 	private static JSContext jsContext = JavaScriptUtil.getJSContext();
 
@@ -50,12 +52,8 @@ public abstract class APIBean extends AssetBean {
 	public APIBean() {
 	}
 	
-	protected String getFlatView() {
-		return "AllAPIsFlat";
-	}
-
-	protected String getAllView() {
-		return "AllAPIs";
+	protected String getAssetForm() {
+		return FORM;
 	}
 	
 	public String getToolkitUrl() throws UnsupportedEncodingException, IOException {
@@ -96,7 +94,10 @@ public abstract class APIBean extends AssetBean {
 		try {
 			if(StringUtil.isNotEmpty(id)) {
 				Database database = ExtLibUtil.getCurrentDatabase();
-				ViewEntry e = database.getView("AllAPIsById").getEntryByKey(id);
+				Vector v = new Vector();
+				v.add(FORM);
+				v.add(id);
+				ViewEntry e = database.getView("AllSnippetsById").getEntryByKey(v);
 				if(e!=null) {
 					Document doc = e.getDocument();
 					Properties p = new Properties();

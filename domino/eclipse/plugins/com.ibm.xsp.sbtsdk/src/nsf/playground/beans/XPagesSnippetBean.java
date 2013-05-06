@@ -11,12 +11,10 @@ import com.ibm.sbt.playground.assets.xpages.XPagesSnippetAssetNode;
  */
 public abstract class XPagesSnippetBean extends AssetBean {
 
-	protected String getFlatView() {
-		return "AllXPagesSnippetsFlat";
-	}
-
-	protected String getAllView() {
-		return "AllXPagesSnippets";
+	public static final String FORM = "XPagesSnippet";
+	
+	protected String getAssetForm() {
+		return FORM;
 	}
 	
 	protected AssetNode createAssetNode(String notesUnid, CategoryNode parent, String name, String category, String assetId) {

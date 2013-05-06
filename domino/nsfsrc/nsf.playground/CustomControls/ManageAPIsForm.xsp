@@ -2,7 +2,7 @@
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
 	xmlns:xe="http://www.ibm.com/xsp/coreex">
 	<xp:this.data>
-		<xp:dominoDocument var="document1" formName="CodeSnippet">
+		<xp:dominoDocument var="document1" formName="APIDescription">
 			<xp:this.queryNewDocument><![CDATA[#{javascript:document1.replaceItemValue("Author",userBean.commonName)}]]></xp:this.queryNewDocument>
 			<xp:this.querySaveDocument><![CDATA[#{javascript:return apiBean.querySave(document1)}]]></xp:this.querySaveDocument>
 		</xp:dominoDocument>

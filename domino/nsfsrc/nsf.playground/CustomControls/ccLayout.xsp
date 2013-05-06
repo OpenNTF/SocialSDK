@@ -76,6 +76,10 @@ if(compositeData.wholePage)view.setStyle("overflow: hidden");}]]></xp:this.after
 						loaded="${javascript:optionsBean.javaSnippetsEnabled}"
 						page="/JavaSnippets.xsp" selection="/JavaSnippets">
 					</xe:pageTreeNode>
+					<xe:pageTreeNode label="Open Social Gadgets"
+						loaded="${javascript:optionsBean.gadgetSnippetsEnabled}"
+						page="/GadgetSnippets.xsp" selection="/GadgetSnippets">
+					</xe:pageTreeNode>
 					<xe:pageTreeNode label="XPages Snippets"
 						loaded="${javascript:optionsBean.xpagesSnippetsEnabled}"
 						page="/XPagesSnippets.xsp" selection="/XPagesSnippets">

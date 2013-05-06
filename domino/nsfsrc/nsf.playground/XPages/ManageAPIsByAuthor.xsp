@@ -5,6 +5,7 @@
 		<xp:dojoModule name="ibm.xsp.widget.layout.TypeAhead"></xp:dojoModule>
 		<xp:dojoModule name="extlib.dijit.Tabs"></xp:dojoModule>
 	</xp:this.resources>
+	<xc:ccManagePageResources></xc:ccManagePageResources>
 	<xc:ccLayout navigationPath="/Manage/APIsByAuthor">
 		<xp:this.facets>
 			<xp:panel xp:key="LeftColumn" id="panel4">
@@ -17,8 +18,8 @@
 				useHash="true" partialEvents="true">
 				<xp:this.facets>
 					<xp:panel xp:key="view" id="mainPanel">
-						<xc:ManageAPIsActionBar viewName="AllAPIsByAuthor">
-						</xc:ManageAPIsActionBar>
+						<xc:ManageSnippetsActionBar type="APIDescription">
+						</xc:ManageSnippetsActionBar>
 						<br />
 						<xe:dataView id="dataView1" var="viewEntry"
 							collapsibleCategory="true" collapsibleRows="true" rows="20"
@@ -27,7 +28,8 @@
 							columnTitles="true">
 							<xe:this.data>
 								<xp:dominoView var="view1"
-									viewName="AllAPIsByAuthor" expandLevel="1">
+									viewName="AllSnippetsByAuthor" categoryFilter="APIDescription"
+									expandLevel="1">
 								</xp:dominoView>
 							</xe:this.data>
 							<xp:this.facets>

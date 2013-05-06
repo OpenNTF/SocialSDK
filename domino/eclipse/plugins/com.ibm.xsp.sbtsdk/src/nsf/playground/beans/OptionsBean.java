@@ -22,6 +22,7 @@ public abstract class OptionsBean {
 	private boolean javaScriptSnippetsEnabled;
 	private boolean javaSnippetsEnabled;
 	private boolean xpagesSnippetsEnabled;
+	private boolean gadgetSnippetsEnabled;
 	private boolean explorerEnabled;
 	private boolean apacheLicense;
 	private String environments;
@@ -30,6 +31,7 @@ public abstract class OptionsBean {
 		this.javaScriptSnippetsEnabled = true;
 		this.javaSnippetsEnabled = DominoUtils.getEnvironmentInt("Playground_JavaSnippets")!=0;
 		this.xpagesSnippetsEnabled = DominoUtils.getEnvironmentInt("Playground_XPagesSnippets")!=0;
+		this.gadgetSnippetsEnabled = DominoUtils.getEnvironmentInt("Playground_GadgetSnippets")!=0;
 		this.explorerEnabled = DominoUtils.getEnvironmentInt("Playground_APIExplorer")!=0;
 		this.apacheLicense = DominoUtils.getEnvironmentInt("Playground_ApacheLicense")!=0;
 		this.environments = DominoUtils.getEnvironmentString("Playground_Environments");
@@ -38,7 +40,6 @@ public abstract class OptionsBean {
 	public boolean isJavaScriptSnippetsEnabled() {
 		return javaScriptSnippetsEnabled;
 	}
-
 	public void setJavaScriptSnippetsEnabled(boolean javaScriptSnippetsEnabled) {
 		this.javaScriptSnippetsEnabled=javaScriptSnippetsEnabled;
 	}
@@ -46,7 +47,6 @@ public abstract class OptionsBean {
 	public boolean isJavaSnippetsEnabled() {
 		return javaSnippetsEnabled;
 	}
-
 	public void setJavaSnippetsEnabled(boolean javaSnippetsEnabled) {
 		this.javaSnippetsEnabled=javaSnippetsEnabled;
 	}
@@ -54,15 +54,20 @@ public abstract class OptionsBean {
 	public boolean isXpagesSnippetsEnabled() {
 		return xpagesSnippetsEnabled;
 	}
-
 	public void setXpagesSnippetsEnabled(boolean xpagesSnippetsEnabled) {
 		this.xpagesSnippetsEnabled=xpagesSnippetsEnabled;
+	}
+
+	public boolean isGadgetSnippetsEnabled() {
+		return gadgetSnippetsEnabled;
+	}
+	public void setGadgetSnippetsEnabled(boolean gadgetSnippetsEnabled) {
+		this.gadgetSnippetsEnabled=gadgetSnippetsEnabled;
 	}
 
 	public boolean isExplorerEnabled() {
 		return explorerEnabled;
 	}
-
 	public void setExplorerEnabled(boolean explorerEnabled) {
 		this.explorerEnabled=explorerEnabled;
 	}
@@ -70,7 +75,6 @@ public abstract class OptionsBean {
 	public boolean isApacheLicense() {
 		return apacheLicense;
 	}
-
 	public void setApacheLicense(boolean apacheLicense) {
 		this.apacheLicense=apacheLicense;
 	}

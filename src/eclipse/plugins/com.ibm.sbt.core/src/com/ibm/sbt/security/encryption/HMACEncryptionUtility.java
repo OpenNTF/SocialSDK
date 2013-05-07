@@ -17,6 +17,8 @@ package com.ibm.sbt.security.encryption;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 import javax.crypto.Mac;
 import javax.crypto.SecretKey;
@@ -36,12 +38,13 @@ import com.ibm.sbt.core.configuration.Configuration;
 public class HMACEncryptionUtility {
 
 	public static String generateHMACSignature(String apiUrl, String method, String consumerSecret,
-			String tokenSecret, Map<String, String> paramsSortedMap) {
+			String tokenSecret, Map<String, String> paramsSortedMap) throws Exception {
 		try {
 			String parameterString = generateParameterString(paramsSortedMap);
 			String signature_base_string = generateSignatureBaseString(method, apiUrl, parameterString);
 			String signingKey = null;
 			if (StringUtil.isEmpty(tokenSecret)) {
+				// No token secret is available when call is made from getRequestToken, tokensecret is fetched later in OADance
 				signingKey = consumerSecret + "&";
 			} else {
 				signingKey = consumerSecret + "&" + tokenSecret;
@@ -54,9 +57,10 @@ public class HMACEncryptionUtility {
 			byte[] text = signature_base_string.getBytes();
 			String signature = new String(Base64.encodeBase64(mac.doFinal(text))).trim();
 			return signature;
-		} catch (Exception e) {
-			// TODO
-			return "";
+		} catch (NoSuchAlgorithmException e) {
+			throw new RuntimeException(e.getMessage());
+		} catch (InvalidKeyException e) {
+			throw new RuntimeException(e.getMessage());
 		}
 	}
 
@@ -73,7 +77,7 @@ public class HMACEncryptionUtility {
 
 	public static String percentDecode(String str) {
 		return str;
-	}
+	} 
 
 	public static String generateParameterString(Map<String, String> paramsMap) {
 
@@ -94,7 +98,7 @@ public class HMACEncryptionUtility {
 			signatureBaseString.append(method.toUpperCase()).append("&").append(percentEncode(url))
 					.append("&").append(URLEncoder.encode(parameterString, "UTF-8"));
 		} catch (UnsupportedEncodingException e) {
-			// TODO
+			throw new RuntimeException(e.getMessage());
 		}
 		return signatureBaseString.toString();
 	}

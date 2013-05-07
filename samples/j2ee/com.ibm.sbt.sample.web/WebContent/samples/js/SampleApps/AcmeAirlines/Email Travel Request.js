@@ -1,4 +1,4 @@
-require([ "sbt/Endpoint", "sbt/emailservice", "sbt/json", "sbt/dom"], 
+require([ "sbt/Endpoint", "sbt/emailService", "sbt/json", "sbt/dom"], 
     function(Endpoint, emailService, json, dom) {
 
     /**
@@ -35,7 +35,7 @@ require([ "sbt/Endpoint", "sbt/emailservice", "sbt/json", "sbt/dom"],
             error: function(error) {
                 dom.setText("json", json.jsonBeanStringify(error));
             },
-            success : function(response) {
+            load : function(response) {
                 dom.setText("json", json.jsonBeanStringify(response));
             }
         });

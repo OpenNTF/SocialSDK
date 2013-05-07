@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="85257AA80077A28B" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="5ba" sequence="2" unid="DC63E68F29199C1285257B6300555567">
+<created><datetime dst="true">20130506T113204,23-04</datetime></created>
+<modified><datetime dst="true">20130506T113204,26-04</datetime></modified>
+<revised><datetime dst="true">20130506T113204,25-04</datetime></revised>
+<lastaccessed><datetime dst="true">20130506T113204,26-04</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20130506T113204,24-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></updatedby>
+<wassignedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></wassignedby>
+<item name="$Flags"><text>34567Cg~[</text></item>
+<item name="$TITLE"><text>playground/beans/GadgetSnippetBean.java</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+
+<item name="$FileNames" sign="true"><text>playground/beans/GadgetSnippetBean.java</text></item></note>

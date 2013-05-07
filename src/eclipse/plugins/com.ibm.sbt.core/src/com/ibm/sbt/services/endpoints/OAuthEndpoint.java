@@ -44,7 +44,7 @@ import com.ibm.sbt.util.SBTException;
  */
 public class OAuthEndpoint extends AbstractEndpoint {
 
-	private final OAProvider	oaProvider	= new OAProvider();
+	protected final OAProvider	oaProvider	= new OAProvider();
 
 	public OAuthEndpoint() {
 	}
@@ -154,6 +154,14 @@ public class OAuthEndpoint extends AbstractEndpoint {
 		oaProvider.setSignatureMethod(signatureMethod);
 	}
 
+	public OAuthHandler getOaHandler() {
+		return oaProvider.oauthHandler;
+	}
+
+	public void setOaHandler(OAuthHandler oaHandler) {
+		oaProvider.oauthHandler = oaHandler;
+	}
+
 	@Override
 	public String getAuthType() {
 		return "oauth1.0a";
@@ -201,7 +209,7 @@ public class OAuthEndpoint extends AbstractEndpoint {
 			throw new ClientServicesException(ex);
 		}
 	}
-	
+
 	@Override
 	public void logout() throws OAuthException {
 		oaProvider.deleteToken();

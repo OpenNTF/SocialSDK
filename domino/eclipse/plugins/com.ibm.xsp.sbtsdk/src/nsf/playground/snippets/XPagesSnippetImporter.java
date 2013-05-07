@@ -1,5 +1,6 @@
 package nsf.playground.snippets;
 
+import nsf.playground.beans.XPagesSnippetBean;
 import lotus.domino.Database;
 import lotus.domino.Document;
 
@@ -18,6 +19,7 @@ import com.ibm.sbt.playground.vfs.VFSFile;
 public class XPagesSnippetImporter extends AssetImporter {
 	
 	public static final String TYPE = "xpages";
+	public static final String FORM = XPagesSnippetBean.FORM;
 	
 	public XPagesSnippetImporter(Database db) {
 		super(db);
@@ -27,8 +29,8 @@ public class XPagesSnippetImporter extends AssetImporter {
 		return TYPE;
 	}
 
-	protected String getAssetView() {
-		return "AllXPagesSnippetsByImportSource";
+	protected String getAssetForm() {
+		return FORM;
 	}
 
 	protected NodeFactory getNodeFactory() {
@@ -39,7 +41,7 @@ public class XPagesSnippetImporter extends AssetImporter {
 		XPagesSnippet snippet = (XPagesSnippet)node.load(root);
 		Document doc = getDatabase().createDocument();
 		try {
-			setItemValue(doc,"Form", "XPagesSnippet");
+			setItemValue(doc,"Form", FORM);
 			setItemValue(doc,"Author", doc.getParentDatabase().getParent().getUserName()); // Should we make this private (reader field)?
 			setItemValue(doc,"Id", node.getUnid());
 			setItemValue(doc,"Category", node.getCategory());

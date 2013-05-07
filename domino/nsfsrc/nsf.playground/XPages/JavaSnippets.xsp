@@ -60,7 +60,8 @@ XSP._partialRefresh = prepend(XSP._partialRefresh,updateNavSelection);
 						<xe:remoteMethodArg name="snippetId"></xe:remoteMethodArg>
 					</xe:this.arguments>
 					<xe:this.script><![CDATA[var doc = null;
-var e = database.getView('AllJavaSnippetsById').getEntryByKey(snippetId)
+var k = new java.util.Vector(); k.add("JavaSnippet"); k.add(snippetId);										
+var e = database.getView('AllSnippetsById').getEntryByKey(k)
 if(e) {
 	// Ok, we found it by key
 	doc = e.getDocument();} else {

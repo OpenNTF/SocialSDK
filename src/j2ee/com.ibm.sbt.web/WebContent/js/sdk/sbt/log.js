@@ -24,15 +24,20 @@
  * @class log
  * @static
  */
-define(['sbt/config', 'sbt/stringutil' ], function(sbt, stringutil) {
-	var loggingEnabled = sbt.Properties["js.logging.enabled"] ? sbt.Properties["js.logging.enabled"].toLowerCase() == "true" : true;
+define(['sbt/stringUtil'], function(stringUtil) {
+	var loggingEnabled = function isLoggingEnabled(){
+		return sbt.Properties["js.logging.enabled"] ? sbt.Properties["js.logging.enabled"].toLowerCase() == "true" : true;
+	};
 	var Level = {
 		DEBUG : 1,
 		INFO : 2,
 		WARN : 3,
 		ERROR : 4
 	};
-	var loggingLevel = Level[sbt.Properties["js.logging.level"] ? sbt.Properties["js.logging.level"] : "ERROR"];
+	
+	var loggingLevel = function getLoggingLevel(){
+		 return Level[sbt.Properties["js.logging.level"] ? sbt.Properties["js.logging.level"] : "DEBUG"];
+	};
 
 	return {
 		/**
@@ -69,7 +74,7 @@ define(['sbt/config', 'sbt/stringutil' ], function(sbt, stringutil) {
 				var args = Array.prototype.slice.call(arguments);
 				var text = args[0];
 				args = args.slice(1);
-				var formattedText = stringutil.substitute(text, args);
+				var formattedText = stringUtil.substitute(text, args);
 				if (console.debug) {
 					console.debug(formattedText);
 				} else {
@@ -93,7 +98,7 @@ define(['sbt/config', 'sbt/stringutil' ], function(sbt, stringutil) {
 				var args = Array.prototype.slice.call(arguments);
 				var text = args[0];
 				args = args.slice(1);
-				var formattedText = stringutil.substitute(text, args);
+				var formattedText = stringUtil.substitute(text, args);
 				if (console.info) {
 					console.info(formattedText);
 				} else {
@@ -117,7 +122,7 @@ define(['sbt/config', 'sbt/stringutil' ], function(sbt, stringutil) {
 				var args = Array.prototype.slice.call(arguments);
 				var text = args[0];
 				args = args.slice(1);
-				var formattedText = stringutil.substitute(text, args);
+				var formattedText = stringUtil.substitute(text, args);
 				if (console.warn) {
 					console.warn(formattedText);
 				} else {
@@ -138,7 +143,7 @@ define(['sbt/config', 'sbt/stringutil' ], function(sbt, stringutil) {
 				var args = Array.prototype.slice.call(arguments);
 				var text = args[0];
 				args = args.slice(1);
-				var formattedText = stringutil.substitute(text, args);
+				var formattedText = stringUtil.substitute(text, args);
 				if (console.error) {
 					console.error(formattedText);
 				} else {

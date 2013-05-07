@@ -26,7 +26,7 @@
  * @static
  **/
 
-define(['sbt/_bridge/json', 'sbt/_bridge/lang', 'sbt/log', 'sbt/stringutil'], function(jsonLib, lang, log, stringUtil) {
+define(['sbt/_bridge/json', 'sbt/_bridge/lang', 'sbt/log', 'sbt/stringUtil'], function(jsonLib, lang, log, stringUtil) {
     return {
         /**
          * Parses a String of JSON and returns a JSON Object.

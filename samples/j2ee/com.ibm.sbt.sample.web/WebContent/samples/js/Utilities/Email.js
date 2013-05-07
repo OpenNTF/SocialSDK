@@ -1,4 +1,4 @@
-require(['sbt/emailservice'], function(email) {
+require(['sbt/emailService'], function(email) {
     var to = [];
     var cc = [];
     var bcc = [];
@@ -45,7 +45,7 @@ require(['sbt/emailservice'], function(email) {
           mimeParts: mimeParts
         };
         email.send(emailJson, { 
-            callback: function(response) {
+            handle: function(response) {
                 var successElement = document.getElementById('success');
                 successElement.setAttribute('style', 'display:none;');
                 var errorElement = document.getElementById('error');

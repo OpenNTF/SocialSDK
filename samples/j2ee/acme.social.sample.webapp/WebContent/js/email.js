@@ -3,7 +3,7 @@
  * @module
  */
 define(["sbt/_bridge/declare", "sbt/Endpoint", "sbt/emailservice"], 
-    function(declare, Endpoint, emailservice) {
+    function(declare, Endpoint, emailService) {
 
     return {
         /**
@@ -40,7 +40,7 @@ define(["sbt/_bridge/declare", "sbt/Endpoint", "sbt/emailservice"],
                 error: function(response) {
                     alert(response);
                 },
-                success : function(response) {
+                load : function(response) {
                     console.log(response);
                 }
             });

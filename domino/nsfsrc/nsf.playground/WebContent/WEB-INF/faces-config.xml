@@ -17,6 +17,15 @@
     <managed-bean-scope>application</managed-bean-scope>
   </managed-bean>
   <!--
+		Bean used to dynamically compile and load dome XPages.
+		This is mostly for development and debugging purposes.
+	-->
+  <managed-bean>
+    <managed-bean-name>dynamicXPagesBean</managed-bean-name>
+    <managed-bean-class>playground.beans.DynamicXPagesBean</managed-bean-class>
+    <managed-bean-scope>application</managed-bean-scope>
+  </managed-bean>
+  <!--
 		Managed bean containing the business logic when accessing an asset document.
 	-->
   <managed-bean>
@@ -34,6 +43,12 @@
   <managed-bean>
     <managed-bean-name>xpagesSnippetBean</managed-bean-name>
     <managed-bean-class>playground.beans.XPagesSnippetBean
+		</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>gadgetSnippetBean</managed-bean-name>
+    <managed-bean-class>playground.beans.GadgetSnippetBean
 		</managed-bean-class>
     <managed-bean-scope>request</managed-bean-scope>
   </managed-bean>

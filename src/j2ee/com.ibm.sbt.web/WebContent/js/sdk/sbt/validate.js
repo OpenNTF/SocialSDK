@@ -24,46 +24,12 @@
  * @class validate
  * @static
  */
-define([ "sbt/log", "sbt/stringutil", "sbt/i18n!sbt/nls/validate" ],
-		function(log, stringUtil, nls) {
+define([ "sbt/log", "sbt/stringUtil", "sbt/i18n!sbt/nls/validate","sbt/util" ],
+		function(log, stringUtil, nls, util) {
 			var errorCode = 400;
-			var _notifyError = function notifyError(error, args) {
-
-				if (args && (args.error || args.handle)) {
-					if (args.error) {
-						try {
-							args.error(error);
-						} catch (error) {
-							log.error(nls.notifyError_catchError, error);
-						}
-					}
-					if (args.handle) {
-						try {
-							args.handle(error);
-						} catch (error) {
-							log.error(nls.notifyError_catchError, error);
-						}
-					}
-				} else {
-					log.error(nls.notifyError_console, error.code, error.message);
-				}
-
-			};
+			
 			return {
-				/**
-				 * Notifies the error using error callbacks.
-				 * @param {Object} [error] error Object
-				 * @param {Object} [args] Arguments containing callbacks
-				 * @param {Function} [args.error] The error parameter is a callback function that is only invoked when an error occurs. This allows to write
-				 * logic when an error occurs. The parameter passed to the error function is a JavaScript Error object indicating what the failure was. From the
-				 * error object. one can access the javascript library error object, the status code and the error message.
-				 * @param {Function} [args.handle] This callback function is called regardless of whether the call to update the file completes or fails. The
-				 * parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to the javascript
-				 * library error object, the status code and the error message.
-				 * @static
-				 * @method notifyError
-				 */
-				notifyError : _notifyError,
+				
 				/**
 				 * Validates Input to be not null and of expected Type
 				 * @param {String} [className] class which called this utility
@@ -87,7 +53,7 @@ define([ "sbt/log", "sbt/stringutil", "sbt/i18n!sbt/nls/validate" ],
 							|| (typeof object != "object" && typeof object != expectedType)) {
 						var message;
 						if (!object) {
-							message = stringUtil.substitute(nls._validateInputTypeAndNotify_nullObject, [ className, methodName,
+							message = stringUtil.substitute(nls.validate_nullObject, [ className, methodName,
 									fieldName, expectedType ]);
 						} else {
 							var actualType;
@@ -96,10 +62,10 @@ define([ "sbt/log", "sbt/stringutil", "sbt/i18n!sbt/nls/validate" ],
 							} else {
 								actualType = typeof object;
 							}
-							message = stringUtil.substitute(nls._validateInputTypeAndNotify_expectedType, [ className, methodName,
+							message = stringUtil.substitute(nls.validate_expectedType, [ className, methodName,
 									actualType, expectedType, fieldName ]);
 						}
-						_notifyError({
+						util.notifyError({
 							code : errorCode,
 							message : message
 						}, args);
@@ -136,6 +102,6 @@ define([ "sbt/log", "sbt/stringutil", "sbt/i18n!sbt/nls/validate" ],
 					}
 					return true;
 
-				}
+				},
 			};
 		});

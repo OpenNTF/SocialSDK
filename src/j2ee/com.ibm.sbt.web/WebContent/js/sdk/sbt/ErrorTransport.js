@@ -17,7 +17,7 @@
 /**
  * Implementation of a transport that emits an error the first time it is invoked.
  */
-define(['sbt/_bridge/declare','sbt/lang','sbt/Promise'], function(declare,lang,Promise) {
+define(['sbt/_bridge/declare','sbt/lang','sbt/Promise','sbt/stringUtil','sbt/log','sbt/i18n!sbt/nls/ErrorTransport'], function(declare,lang,Promise,stringUtil,log,nls) {
     return declare("sbt.ErrorTransport", null, {
         _called: false,
         _endpointName: null,
@@ -28,7 +28,7 @@ define(['sbt/_bridge/declare','sbt/lang','sbt/Promise'], function(declare,lang,P
             if (message) {
                 this._message = message;
             } else {
-                this._message = "Required endpoint is not available: " + endpointName;
+            	this._message = stringUtil.substitute(nls.endpoint_not_available, [endpointName]);
             }
         },
         
@@ -46,14 +46,20 @@ define(['sbt/_bridge/declare','sbt/lang','sbt/Promise'], function(declare,lang,P
         
         xhr: function(method, args, hasBody) {
             if (!this._called) {
-                alert(this._message);
+                log.error(this._message);
                 this._called = true;
             }
             var _handle = args.handle;
-            if (lang.isFunction(_handle)) {
+            var _error = args.error;
+            if (lang.isFunction(_error) || lang.isFunction(_handle)) {
                 var error = new Error(this._message);
                 error.status = 400;
-                _handle(error);
+                if(lang.isFunction(_error)){
+                	_error(error);
+                }
+                if(lang.isFunction(_handle)){
+                	_handle(error);
+                }                
             }
         }
     });

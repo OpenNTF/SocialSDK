@@ -15,7 +15,7 @@
  */
 /**
  * Email Service module
- * @module sbt.emailservice
+ * @module sbt.emailService
  */
 
 /**
@@ -33,8 +33,8 @@ define(['sbt/_bridge/declare', 'sbt/lang', 'sbt/config', 'sbt/_bridge/Transport'
          * @method send
          * @static
          * @param {Object || Array} email The JSON object representing the email to send.
-         * @param {Object} [callbacks] An object of callback functions.  The possible properties for callback functions are success,
-         * error, and callback.
+         * @param {Object} [callbacks] An object of callback functions.  The possible properties for callback functions are load,
+         * error, and handle.
          * 
          * @example
          *     var emails = 
@@ -88,7 +88,7 @@ define(['sbt/_bridge/declare', 'sbt/lang', 'sbt/config', 'sbt/_bridge/Transport'
          *                         ]
          *              }
          *         ];
-         *     var successCallback = function(response) {
+         *     var loadCallback = function(response) {
          *         //If you send multiple emails, for example emails is an array of email objects,
          *         //than it is possible that some emails succeeded being sent while others may have
          *         //failed.  It is good practice to check for any emails that had errors being sent.
@@ -110,13 +110,13 @@ define(['sbt/_bridge/declare', 'sbt/lang', 'sbt/config', 'sbt/_bridge/Transport'
          *         }
          *     };
          *  
-         *     var allCallback = function(response) {
+         *     var handleCallback = function(response) {
          *         //This callback is called no matter whether the request succeeded or failed.
          *         errorCallback(response);
-         *         successCallback(response);
+         *         loadCallback(response);
          *     };
          *  
-         *     email.send(emails, {success: successCallback, error: errorCallback, callback: allCallback});
+         *     email.send(emails, {load: loadCallback, error: errorCallback, handle: handleCallback});
          */
         send : function(emails, callbacks) {
             transport.xhr('POST', {
@@ -125,8 +125,8 @@ define(['sbt/_bridge/declare', 'sbt/lang', 'sbt/config', 'sbt/_bridge/Transport'
                 headers: {"Content-Type" : "application/json"},
                 handleAs: "json",
                 handle: function(response) {
-                    if(callbacks && callbacks['callback']) {
-                        callbacks['callback'](response);
+                    if(callbacks && callbacks['handle']) {
+                        callbacks['handle'](response);
                     }
                 },
                 error: function(response) {
@@ -135,8 +135,8 @@ define(['sbt/_bridge/declare', 'sbt/lang', 'sbt/config', 'sbt/_bridge/Transport'
                     }
                 },
                 load: function(response) {
-                    if(callbacks && callbacks['success']) {
-                        callbacks['success'](response);
+                    if(callbacks && callbacks['load']) {
+                        callbacks['load'](response);
                     }
                 }
             }, true);

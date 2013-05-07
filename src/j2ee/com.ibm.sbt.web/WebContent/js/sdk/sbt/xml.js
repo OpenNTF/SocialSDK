@@ -64,6 +64,13 @@ define(['sbt/lang'], function(lang) {
 				return (new XMLSerializer()).serializeToString(xmlDoc);
 			}
 		},
+		getText : function (xmlElement){
+			if(navigator.appName == 'Microsoft Internet Explorer'){
+				return xmlElement.text;
+			}else{
+				return xmlElement.textContent;
+			}
+		},
 		encodeXmlEntry: function(string) {
 		    if (lang.isArray(string)) {
 		        string = string.join();
@@ -72,7 +79,7 @@ define(['sbt/lang'], function(lang) {
 				return xml_to_encoded[item];
 			});
 		},
-		decodeXmlEnry: function (string) {
+		decodeXmlEntry: function (string) {
 			return string.replace(/(&quot;|&lt;|&gt;|&amp;)/g,function(str, item) {
 				return encoded_to_xml[item];
 			});

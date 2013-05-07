@@ -4,18 +4,18 @@ if grep '/sbtk' /proc/mounts; then
 else
 	echo "Mounting /sbtk"
 	sudo mkdir -p /sbtk
-	sudo mount --bind .. /sbtk
+	sudo mount --bind . /sbtk
 fi
 cd /sbtk
 UNZIPPED_TOMCAT=/sbtk/tomcat/apache-tomcat-7.0.30
 if [ ! -d "$UNZIPPED_TOMCAT" ]; then
-	echo "Unzipping tomcat"
+	echo "Unzipped tomcat"
 	cd tomcat
 	if hash unzip 2>/dev/null; then
-        unzip apache-tomcat-7.0.30-sbt.zip
-    else
-        jar xf apache-tomcat-7.0.30-sbt.zip
-    fi
+		unzip apache-tomcat-7.0.30-sbt.zip
+	else
+		jar xf apache-tomcat-7.0.30-sbt.zip
+	fi
 	cd ..
 fi
 echo "Done!"

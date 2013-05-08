@@ -3,11 +3,8 @@
 <script type="text/javascript">
 requirejs.config({
        paths: {
-           'has' : '/sbt/js/libs/has',
            'jquery' : '//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery',
            'jquery/ui' : '//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui',
-           'requirejs/i18n' : '/sbt/js/libs/requirejsPlugins/i18n',
-           'requirejs/text' : '/sbt/js/libs/requirejsPlugins/text'
         },
         shim : {
             'jquery/ui' : {

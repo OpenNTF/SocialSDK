@@ -18,16 +18,15 @@
  * @module jquery
  */
 
-define(['sbt/log'],function(log) {
-	return {
+define(['jquery','sbt/log'],function(jq, log) {
+	function getJQuery() {
 		if (typeof jQuery != 'undefined') {
-			return jQuery;
-		} else if (require.specified('jquery')) {
-			require(['jquery'],function(jQuery) {
-				return jQuery;
-			});	
+			return $;
 		} else {
 			log.error('jQuery not found');
+			return null;
 		};
-	};
+	}
+	
+	return getJQuery();
 });

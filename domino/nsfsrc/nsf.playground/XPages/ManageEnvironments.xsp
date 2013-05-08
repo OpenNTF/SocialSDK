@@ -8,6 +8,7 @@
 		<xp:dojoModule name="extlib.dijit.OneUIDialog"></xp:dojoModule>
 		<xp:dojoModule name="ibm.xsp.widget.layout.xspCKEditor"></xp:dojoModule>		
 	</xp:this.resources>
+	<xc:ccManagePageResources></xc:ccManagePageResources>
 	<xc:ccLayout navigationPath="/Manage/Environments">
 		<xp:this.facets>
 			<xp:panel xp:key="LeftColumn" id="panel4">

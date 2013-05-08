@@ -20,9 +20,9 @@
  */
 define(
 		[ 'sbt/_bridge/declare', 'sbt/config', 'sbt/lang', 'sbt/smartcloud/core', 'sbt/xml', 'sbt/xpath', 'sbt/Cache', 'sbt/Endpoint',
-				'sbt/smartcloud/FileConstants', 'sbt/smartcloud/Subscriber', 'sbt/base/BaseService', 'sbt/log', 'sbt/stringutil', 'sbt/validate',
+				'sbt/smartcloud/FileConstants', 'sbt/smartcloud/Subscriber', 'sbt/base/BaseService', 'sbt/log', 'sbt/stringUtil', 'sbt/validate',
 				'sbt/base/XmlHandler' ], function(declare, cfg, lang, con, xml, xpath, Cache, Endpoint, FileConstants, Subscriber, BaseService, log,
-				stringutil, validate, XmlHandler) {
+				stringUtil, validate, XmlHandler) {
 			
 			var fileHandler = new XmlHandler({xpath_map: FileConstants.xpath_File, xpath_feed_map: FileConstants.xpath_feed_File,nameSpaces:con.namespaces});
 

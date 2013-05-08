@@ -14,7 +14,7 @@
       </designer-extension>
     </composite-extension>
     <property>
-      <property-name>viewName</property-name>
+      <property-name>type</property-name>
       <property-class>string</property-class>
     </property>
   </composite-component>

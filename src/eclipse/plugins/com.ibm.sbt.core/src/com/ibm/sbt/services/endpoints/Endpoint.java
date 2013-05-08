@@ -370,9 +370,7 @@ public interface Endpoint {
     /**
      * This is to be used in development/debug mode only, when we want to capture all network traffic from SDK
      */
-	public boolean isCaptureNetworkTraffic();
-    public String getCaptureNetworkTrafficAtHostName();
-    public int getCaptureNetworkTrafficAtPort();
+    public String getHttpProxy();
 
     
     /*

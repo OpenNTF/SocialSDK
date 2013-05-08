@@ -64,7 +64,8 @@ XSP._partialRefresh = prepend(XSP._partialRefresh,updateNavSelection);
 						<xe:remoteMethodArg name="snippetId"></xe:remoteMethodArg>
 					</xe:this.arguments>
 					<xe:this.script><![CDATA[var doc = null;
-var e = database.getView('AllSnippetsById').getEntryByKey(snippetId)
+var k = new java.util.Vector(); k.add("JavaScriptSnippet"); k.add(snippetId);										
+var e = database.getView('AllSnippetsById').getEntryByKey(k)
 if(e) {
 	// Ok, we found it by key
 	doc = e.getDocument();} else {
@@ -266,7 +267,7 @@ dojo.addOnLoad( function() {
 	<xe:dialog id="snippetDialog" title="Save Snippet">
 		<xp:panel id="panel1" style="padding: 5px">
 			<xp:this.data>
-				<xp:dominoDocument var="document1" formName="CodeSnippet">
+				<xp:dominoDocument var="document1" formName="JavaScriptSnippet">
 					<xp:this.postNewDocument><![CDATA[#{javascript:document1.replaceItemValue("Author",userBean.commonName)}]]></xp:this.postNewDocument>
 					<xp:this.querySaveDocument><![CDATA[#{javascript:return snippetBean.querySave(document1)}]]></xp:this.querySaveDocument>
 				</xp:dominoDocument>

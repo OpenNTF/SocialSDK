@@ -18,7 +18,7 @@
  * @module jquery
  */
 
-define(['jquery','sbt/log'],function(jq, log) {
+define(['sbt/log','jquery',],function(log) {
 	function getJQuery() {
 		if (typeof jQuery != 'undefined') {
 			return $.noConflict();

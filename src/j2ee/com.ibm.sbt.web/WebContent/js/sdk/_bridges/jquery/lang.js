@@ -17,7 +17,7 @@
 /**
  * Social Business Toolkit SDK - Some language utilities.
  */
-define(["has", "sbt/_bridge/jquery"],function(has, jQuery) {
+define(["has", "sbt/_bridge/jquery"],function(has) {
 	// Helper methods
 	has.add("bug-for-in-skips-shadowed", function(){
 		// if true, the for-in iterator skips object properties that exist in Object's prototype (IE 6 - ?)

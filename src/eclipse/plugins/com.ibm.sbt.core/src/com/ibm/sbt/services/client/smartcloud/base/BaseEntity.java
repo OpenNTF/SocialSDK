@@ -163,7 +163,11 @@ public abstract class BaseEntity<DataFormat> {
 	 * @return value
 	 */
 	public String get(String fieldName) {
-		return dataNavigator.get(fieldName);
+		if (dataNavigator != null) {
+			return dataNavigator.get(fieldName);
+		} else {
+			return null;
+		}
 	}
 
 	/**
@@ -196,15 +200,16 @@ public abstract class BaseEntity<DataFormat> {
 		DataFormat data;
 
 		data = (DataFormat) svc.retrieveData(selfLoadUrl, parameters, nameParameterId);
-
-		DataExtractor<DataFormat> dataExtractor = getExtractor(data);
-		List<DataFormat> entries = dataExtractor.getEntitiesFromServiceResult(data);
-		if (entries.size() == 0) {
-			throw new RuntimeException("No entries loaded");
-		}
-		setData(entries.get(0));
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.exiting(sourceClass, "load");
+		if (data != null) {
+			DataExtractor<DataFormat> dataExtractor = getExtractor(data);
+			List<DataFormat> entries = dataExtractor.getEntitiesFromServiceResult(data);
+			if (entries.size() == 0) {
+				throw new RuntimeException("No entries loaded");
+			}
+			setData(entries.get(0));
+			if (logger.isLoggable(Level.FINEST)) {
+				logger.exiting(sourceClass, "load");
+			}
 		}
 	}
 

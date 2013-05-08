@@ -253,18 +253,9 @@ public class ApplicationEndpoint implements Endpoint {
 		// TODO Auto-generated method stub
 	}
 
-	@Override
-	public boolean isCaptureNetworkTraffic() {
-		throw newNotApplicableException();
-	}
 
-	@Override
-	public String getCaptureNetworkTrafficAtHostName() {
-		throw newNotApplicableException();
-	}
-
-	@Override
-	public int getCaptureNetworkTrafficAtPort() {
+    @Override
+	public String getHttpProxy(){
 		throw newNotApplicableException();
 	}
 

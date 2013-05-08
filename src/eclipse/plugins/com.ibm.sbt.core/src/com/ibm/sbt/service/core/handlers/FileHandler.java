@@ -16,46 +16,59 @@
 package com.ibm.sbt.service.core.handlers;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.ibm.sbt.service.basic.AbstractFileProxyService;
-import com.ibm.sbt.service.basic.ConnectionsFileProxyService;
+import com.ibm.commons.runtime.Application;
 import com.ibm.sbt.service.basic.ProxyEndpointService;
-import com.ibm.sbt.service.basic.SmartCloudFileProxyService;
+import com.ibm.sbt.service.ext.ProxyEndpointServiceProvider;
 
 /**
  * 
  * @author Vineet Kanwal
  *
  */
-public class FileHandler extends AbstractServiceHandler {
+public class FileHandler extends AbstractServiceHandler {	
 
 	private static final long serialVersionUID = -4063343007626745356L;
+	
+	static final String	sourceClass	= FileHandler.class.getName();
+	static final Logger	logger		= Logger.getLogger(sourceClass);
+	
 	public static final String URL_PATH = "files";
-	private Map<String, AbstractFileProxyService> fileProxyMap = new HashMap<String, AbstractFileProxyService>();
 
-	public FileHandler() {
-		fileProxyMap.put("connections", new ConnectionsFileProxyService());
-		fileProxyMap.put("smartcloud", new SmartCloudFileProxyService());
-	}
 
 	@Override
 	public void service(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
 
+		ProxyEndpointService proxyEndpointService = null;
 		String pathinfo = request.getPathInfo().substring(request.getPathInfo().indexOf("/files")); 
 		String[] pathTokens = pathinfo.split("/");		
 		if (pathTokens.length > 4) {
 			String serviceType = pathTokens[3];
-			ProxyEndpointService proxyEndpointService = fileProxyMap.get(serviceType);
-			if (proxyEndpointService != null) {
-				proxyEndpointService.service(request, response);
-			}
+			Application application = Application.get();
+			List<Object> proxyServiceProviders = application.findServices(ProxyEndpointServiceProvider.PROXY_SERVICE_TYPE);
+			if(proxyServiceProviders != null && !proxyServiceProviders.isEmpty()){
+				for(Object o : proxyServiceProviders){
+					ProxyEndpointServiceProvider pvdr = (ProxyEndpointServiceProvider)o;
+					proxyEndpointService = pvdr.createProxyEndpointService(serviceType);
+					if(proxyEndpointService != null){
+						break;
+					}
+				}
+			}			
 		}
-
+		if(proxyEndpointService != null){
+			proxyEndpointService.service(request, response);
+		}
+		else{
+			logger.log(Level.SEVERE, "ProxyEndpoint Service could not be retrieved for PathInfo {0}", pathinfo);
+			 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ProxyEndpoint Service could not be retrieved");
+		}
 	}
 }

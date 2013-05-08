@@ -3,13 +3,13 @@
 	xmlns:xe="http://www.ibm.com/xsp/coreex">
 	<xc:ccNoAccessUser></xc:ccNoAccessUser>
 	<xp:panel style="padding: 0px 5px 0px 5px;" loaded="${javascript:userBean.canCreateDocs}">
-		<xp:button value="New Snippet" id="button3">
+		<xp:button value="New Entry" id="button3">
 			<xp:eventHandler event="onclick" submit="false"
 				id="eventHandler1">
 				<xp:this.script><![CDATA[XSP.showContent("#{id:dynp}","form")]]></xp:this.script>
 			</xp:eventHandler>
 		</xp:button>
-		<xp:button value="Delete Selected Snippets" id="button4">
+		<xp:button value="Delete Selected Entries" id="button4">
 			<xp:eventHandler event="onclick" submit="true"
 				id="eventHandler2" refreshMode="partial" refreshId="mainPanel">
 				<xp:this.action>
@@ -19,7 +19,7 @@
 				</xp:this.action>
 			</xp:eventHandler>
 		</xp:button>
-		<xp:button value="Delete All Snippets" id="button1">
+		<xp:button value="Delete All Entries" id="button1">
 			<xp:eventHandler event="onclick" submit="true"
 				id="eventHandler3" refreshMode="partial" refreshId="mainPanel">
 				<xp:this.action>
@@ -30,8 +30,8 @@
 							</xp:confirm>
 						</xp:actionGroup>
 						<xp:executeScript>
-							<xp:this.script><![CDATA[#{javascript:var v:NotesView = database.getView(compositeData.viewName);
-v.getAllEntries().removeAll(true);
+							<xp:this.script><![CDATA[#{javascript:var v:NotesView = database.getView("AllSnippetsFlat");
+v.getAllEntriesByKey(compositeData.type).removeAll(true);
 context.reloadPage(); // Why is this needed?
 }]]></xp:this.script>
 						</xp:executeScript>

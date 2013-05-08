@@ -22,8 +22,8 @@
  * 
  */
 define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml','sbt/xpath','sbt/Cache','sbt/Endpoint', 'sbt/base/BaseConstants', 
-        "sbt/validate", 'sbt/log', 'sbt/stringutil', 'sbt/base/BaseHandler'],
-		function(declare,cfg,lang,con,xml,xpath,Cache,Endpoint, BaseConstants, validate, log, stringutil, BaseHandler) {
+        "sbt/validate", 'sbt/log', 'sbt/stringUtil', 'sbt/base/BaseHandler','sbt/util'],
+		function(declare,cfg,lang,con,xml,xpath,Cache,Endpoint, BaseConstants, validate, log, stringUtil, BaseHandler, util) {
 	
 	var requests = {};
 	
@@ -303,7 +303,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 		},
 		
 		_loadOnError : function (error, args){
-			validate.notifyError(error, args);
+			util.notifyError(error, args);
 		},
 		
 		_stackRequestsForExistingId : function (entity, args){
@@ -391,7 +391,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 		},
 		
 		_createEntityOnError : function (error, args){
-			validate.notifyError(error, args);
+			util.notifyError(error, args);
 		},
 		
 		/**
@@ -428,7 +428,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 		},
 		
 		_updateEntityOnError : function (error, args){
-			validate.notifyError(error, args);
+			util.notifyError(error, args);
 		},
 			
 		/**
@@ -464,7 +464,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 		},
 		
 		_deleteEntityOnError : function (error, args){
-			validate.notifyError(error, args);
+			util.notifyError(error, args);
 		},
 		
 		_constructServiceUrl: function (requestArgs){			
@@ -474,7 +474,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 			var url = this.Constants.entityServiceBaseUrl + authType + (this.Constants.serviceEntity[requestArgs.serviceEntity]?this.Constants.serviceEntity[requestArgs.serviceEntity]: "") + (this.Constants.entityType[requestArgs.entityType] ? this.Constants.entityType[requestArgs.entityType] : "");
 			
 			if (requestArgs.replaceArgs) {
-				url = stringutil.replace(url, requestArgs.replaceArgs);
+				url = stringUtil.replace(url, requestArgs.replaceArgs);
 			}
 			
 			if(requestArgs.methodType != "get"){
@@ -522,7 +522,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 		},
 		
 		_getEntitiesOnError : function (error, args){
-			validate.notifyError(error, args);
+			util.notifyError(error, args);
 		},
 		
 		_getSummaryOnLoad: function (data, getArgs, args){

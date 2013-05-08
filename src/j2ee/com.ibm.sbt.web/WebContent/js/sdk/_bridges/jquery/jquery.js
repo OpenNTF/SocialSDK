@@ -21,7 +21,7 @@
 define(['jquery',],function(log) {
 	function getJQuery() {
 		if (typeof jQuery != 'undefined') {
-			return $;
+			return $.noConflict();
 		} else {
 			return null;
 		};

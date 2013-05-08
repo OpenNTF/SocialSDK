@@ -17,7 +17,7 @@
 /**
  * Social Business Toolkit SDK - Some language utilities.
  */
-define(["has", "sbt/_bridge/jquery"],function(has, $) {
+define(["has", "sbt/_bridge/jquery"],function(has, jQuery) {
 	// Helper methods
 	has.add("bug-for-in-skips-shadowed", function(){
 		// if true, the for-in iterator skips object properties that exist in Object's prototype (IE 6 - ?)
@@ -54,7 +54,7 @@ define(["has", "sbt/_bridge/jquery"],function(has, $) {
     };
 
     function _mixin(dest,sources) {
-        dest = $.extend(dest,sources);
+        dest = jQuery.extend(dest,sources);
         if(has("bug-for-in-skips-shadowed")){
             var i, s, empty = {};
             if(sources){
@@ -81,7 +81,7 @@ define(["has", "sbt/_bridge/jquery"],function(has, $) {
             return dest;
 		},
 		isArray: function(o) {
-			return $.isArray(o);
+			return jQuery.isArray(o);
 		},
 		isString: function(o) {
 		    return (typeof o=="string"||o instanceof String);
@@ -93,7 +93,7 @@ define(["has", "sbt/_bridge/jquery"],function(has, $) {
             return typeof o == 'object';
         },
 		clone: function(o) {
-			return $.clone(o);
+			return jQuery.clone(o);
 		},
         concatPath: function () {
         	var a = arguments;
@@ -143,7 +143,7 @@ define(["has", "sbt/_bridge/jquery"],function(has, $) {
             return obj && p ? (obj[p] = value) : undefined; // Object
         },
         trim: function(str) {
-            return $.trim(str);
+            return jQuery.trim(str);
         }
 	};
 });

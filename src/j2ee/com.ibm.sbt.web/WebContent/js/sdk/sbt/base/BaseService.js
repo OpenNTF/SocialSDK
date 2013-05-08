@@ -222,7 +222,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 		},
 		
 		_notifyResponse: function(args, response, summary){
-			if (args.load || args.handle) {
+			if (args.load || args.handle || args.loadIt == false) {
 				if (args.handle) {
 					try {
 						args.handle(response, summary);

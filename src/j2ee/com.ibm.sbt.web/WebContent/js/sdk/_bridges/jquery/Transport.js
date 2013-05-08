@@ -19,7 +19,7 @@
  * 
  * Implementation of a XML HTTP Request using the JQuery API.
  */
-define(['sbt/_bridge/jquery', 'sbt/_bridge/declare', 'sbt/util', 'sbt/Promise' ], function(jQuery, declare, util, Promise) {
+define(['sbt/_bridge/declare', 'sbt/util', 'sbt/Promise', 'sbt/_bridge/jquery'], function(declare, util, Promise) {
 	return declare("sbt._bridge.Transport", null, {
         /**
          * Provides an asynchronous request using the associated Transport.

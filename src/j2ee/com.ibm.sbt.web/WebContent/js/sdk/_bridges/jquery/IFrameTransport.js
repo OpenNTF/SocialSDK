@@ -18,7 +18,7 @@
  * Social Business Toolkit SDK. 
  * Implementation of a proxy that uses an iFrame.
  */
-define(['sbt/base/declare', '"sbt/_bridge/jquery'], function(declare, jQuery) {
+define(['sbt/base/declare', '"sbt/_bridge/jquery'], function(declare) {
 
     return declare("sbt.base.IFrameTransport", null, {
     

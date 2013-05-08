@@ -26,6 +26,7 @@ import javax.crypto.spec.SecretKeySpec;
 import org.apache.commons.codec.binary.Base64;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.core.configuration.Configuration;
+import com.ibm.sbt.security.authentication.oauth.OAuthException;
 
 /**
  * HMACEncryptionUtility can be used to generate HMAC based signature for OAuth1 Authentication
@@ -38,7 +39,7 @@ import com.ibm.sbt.core.configuration.Configuration;
 public class HMACEncryptionUtility {
 
 	public static String generateHMACSignature(String apiUrl, String method, String consumerSecret,
-			String tokenSecret, Map<String, String> paramsSortedMap) throws Exception {
+			String tokenSecret, Map<String, String> paramsSortedMap) throws OAuthException {
 		try {
 			String parameterString = generateParameterString(paramsSortedMap);
 			String signature_base_string = generateSignatureBaseString(method, apiUrl, parameterString);
@@ -58,9 +59,9 @@ public class HMACEncryptionUtility {
 			String signature = new String(Base64.encodeBase64(mac.doFinal(text))).trim();
 			return signature;
 		} catch (NoSuchAlgorithmException e) {
-			throw new RuntimeException(e.getMessage());
+			throw new OAuthException(e,"HMACEncryptionUtility : generateHMACSignature caused NoSuchAlgorithmException exception");
 		} catch (InvalidKeyException e) {
-			throw new RuntimeException(e.getMessage());
+			throw new OAuthException(e,"HMACEncryptionUtility : generateHMACSignature caused InvalidKeyException exception");
 		}
 	}
 
@@ -91,14 +92,14 @@ public class HMACEncryptionUtility {
 		return parameterString.deleteCharAt(parameterString.length() - 1).toString();
 	}
 
-	public static String generateSignatureBaseString(String method, String url, String parameterString) {
+	public static String generateSignatureBaseString(String method, String url, String parameterString) throws OAuthException {
 		StringBuilder signatureBaseString = new StringBuilder();
 
 		try {
 			signatureBaseString.append(method.toUpperCase()).append("&").append(percentEncode(url))
 					.append("&").append(URLEncoder.encode(parameterString, "UTF-8"));
 		} catch (UnsupportedEncodingException e) {
-			throw new RuntimeException(e.getMessage());
+			throw new OAuthException(e,"HMACEncryptionUtility : generateSignatureBaseString caused UnsupportedEncodingException exception");
 		}
 		return signatureBaseString.toString();
 	}

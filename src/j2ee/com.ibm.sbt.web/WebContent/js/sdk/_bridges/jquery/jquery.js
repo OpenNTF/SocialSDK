@@ -18,12 +18,11 @@
  * @module jquery
  */
 
-define(['sbt/log','jquery',],function(log) {
+define(['jquery',],function(log) {
 	function getJQuery() {
 		if (typeof jQuery != 'undefined') {
-			return $.noConflict();
+			return $;
 		} else {
-			log.error('jQuery not found');
 			return null;
 		};
 	}

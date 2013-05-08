@@ -11,7 +11,7 @@ requirejs.config({
         shim : {
             'jquery/ui' : {
                 deps : [ 'jquery' ],
-                exports : '$'
+                exports : 'jQuery'
             }
         }
     });

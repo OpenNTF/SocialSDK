@@ -21,7 +21,7 @@
 define(['jquery','sbt/log'],function(jq, log) {
 	function getJQuery() {
 		if (typeof jQuery != 'undefined') {
-			return $;
+			return $.noConflict();
 		} else {
 			log.error('jQuery not found');
 			return null;

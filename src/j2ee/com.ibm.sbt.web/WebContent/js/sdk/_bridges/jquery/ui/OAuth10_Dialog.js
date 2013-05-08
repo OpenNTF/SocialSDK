@@ -30,15 +30,15 @@ define(['jquery/ui'], function() {
 			var _resizeable = true;
 			var _draggable = true;
 			var frameUrl = url + "?loginUi=dialog";
-			var d = $("<iframe src='"+frameUrl+"' style='width: 650px; height=700px'></iframe>");
-			$.dialog({
+			var d = jQuery("<iframe src='"+frameUrl+"' style='width: 650px; height=700px'></iframe>");
+			jQuery.dialog({
 				title : _title,
 				modal: _isModal,
 				width: _width,
 				height: _height,
 				resizeable: _resizeable,
 				draggable: _draggable,
-				buttons: {'Close': function(){ $(this).dialog('close'); } },
+				buttons: {'Close': function(){ jQuery(this).dialog('close'); } },
 				autoOpen : _autoOpen
 			});
 		}

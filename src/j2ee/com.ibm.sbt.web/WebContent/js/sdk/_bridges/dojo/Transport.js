@@ -166,30 +166,11 @@ define([ 'sbt/_bridge/declare', 'dojo/_base/xhr', 'dojox/xml/parser', 'sbt/util'
         createError: function(error, ioArgs) {
             var _error = new Error();
             _error.code = error.status || (error.response&&error.response.status) || 400;
-            _error.message = this.getErrorMessage(error);
             _error.cause = error;
             if (error.response) {
                 _error.response = dojo.mixin({}, error.response);
             }
             return _error;
-        },
-        getErrorMessage: function(error) {
-            var text = error.responseText || (error.response&&error.response.text);
-            if (text) {
-                try {
-                    var dom = parser.parse(text);
-                    var messages = dom.getElementsByTagName("message");
-                    if (messages && messages.length != 0) {
-                        text = messages[0].textContent;
-                        text = dojo.trim(text);
-                    }
-                } catch(ex) {
-                    console.log(ex);
-                }
-                return text;
-            } else {
-                return error;
-            }
         }
     });
 });

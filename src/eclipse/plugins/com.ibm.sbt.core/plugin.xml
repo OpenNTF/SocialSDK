@@ -8,4 +8,11 @@
    	<extension point="com.ibm.commons.Extension">
          <service type="com.ibm.sbt.jslibrary" class="com.ibm.sbt.jslibrary.servlet.JQueryLibrary" />
    	</extension>
+    <extension
+          point="com.ibm.commons.Extension">
+       <service
+             class="com.ibm.sbt.service.ext.DefaultProxyEndpointServiceProvider"
+             type="com.ibm.sbt.service.proxyendpointservice.provider">
+       </service>
+    </extension>
 </plugin>

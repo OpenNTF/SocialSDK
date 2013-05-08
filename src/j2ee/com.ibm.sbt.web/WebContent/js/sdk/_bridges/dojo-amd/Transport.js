@@ -168,32 +168,11 @@ define([ 'dojo/_base/declare', 'dojo/_base/xhr', 'dojo/_base/lang', 'dojox/xml/p
         createError: function(error, ioArgs) {
             var _error = new Error();
             _error.code = error.status || (error.response&&error.response.status) || 400;
-            _error.message = this.getErrorMessage(error);
             _error.cause = error;
             if (error.response) {
                 _error.response = lang.mixin({}, error.response);
             }
             return _error;
-        },
-        getErrorMessage: function(error) {
-            var text = error.responseText || (error.response&&error.response.text);
-            if (text) {
-                try {
-                	//using dojo/xml/parser to parse the response
-                	//this assumes the response is XML what if it is not ?
-                    var dom = parser.parse(text);
-                    var messages = dom.getElementsByTagName("message");
-                    if (messages && messages.length != 0) {
-                        text = messages[0].textContent;
-                        text = lang.trim(text);
-                    }
-                } catch(ex) {
-                    console.log(ex);
-                }
-                return text;
-            } else {
-                return error;
-            }
-        }
+        }        
     });
 });

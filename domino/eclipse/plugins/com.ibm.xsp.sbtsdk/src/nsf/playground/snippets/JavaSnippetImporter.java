@@ -1,5 +1,6 @@
 package nsf.playground.snippets;
 
+import nsf.playground.beans.JavaSnippetBean;
 import lotus.domino.Database;
 import lotus.domino.Document;
 
@@ -18,6 +19,7 @@ import com.ibm.sbt.playground.vfs.VFSFile;
 public class JavaSnippetImporter extends AssetImporter {
 	
 	public static final String TYPE = "java";
+	public static final String FORM = JavaSnippetBean.FORM;
 	
 	public JavaSnippetImporter(Database db) {
 		super(db);
@@ -27,8 +29,8 @@ public class JavaSnippetImporter extends AssetImporter {
 		return TYPE;
 	}
 
-	protected String getAssetView() {
-		return "AllJavaSnippetsByImportSource";
+	protected String getAssetForm() {
+		return FORM;
 	}
 
 	protected NodeFactory getNodeFactory() {
@@ -39,7 +41,7 @@ public class JavaSnippetImporter extends AssetImporter {
 		JavaSnippet snippet = (JavaSnippet)node.load(root);
 		Document doc = getDatabase().createDocument();
 		try {
-			setItemValue(doc,"Form", "JavaSnippet");
+			setItemValue(doc,"Form", FORM);
 			setItemValue(doc,"Author", doc.getParentDatabase().getParent().getUserName()); // Should we make this private (reader field)?
 			setItemValue(doc,"Id", node.getUnid());
 			setItemValue(doc,"Category", node.getCategory());

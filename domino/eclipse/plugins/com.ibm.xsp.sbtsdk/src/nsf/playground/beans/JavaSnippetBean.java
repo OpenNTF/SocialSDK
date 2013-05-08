@@ -13,12 +13,10 @@ import com.ibm.sbt.playground.assets.javasnippets.JavaSnippetAssetNode;
  */
 public abstract class JavaSnippetBean extends AssetBean {
 
-	protected String getFlatView() {
-		return "AllJavaSnippetsFlat";
-	}
-
-	protected String getAllView() {
-		return "AllJavaSnippets";
+	public static final String FORM = "JavaSnippet";
+	
+	protected String getAssetForm() {
+		return FORM;
 	}
 	
 	protected AssetNode createAssetNode(String notesUnid, CategoryNode parent, String name, String category, String assetId) {

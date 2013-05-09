@@ -53,6 +53,12 @@ public class Util {
         { "One UI", "oneui" }
     };
     
+    public static String[][] ENVIRONMENTS = new String[][] {
+        // title, id
+        { "Default", "defaultEnvironment" },
+        { "SmartCloud Only", "smartCloud" }
+    };
+    
     public static String[] BOOTSTRAP_STYLES = {   
         "/sbt.bootstrap211/bootstrap/css/bootstrap.css",
         "/sbt.bootstrap211/bootstrap/css/bootstrap-responsive.css"
@@ -145,6 +151,10 @@ public class Util {
         if (StringUtil.isNotEmpty(transport)) {
             libraryUrl += "&transport=" + transport;
         }
+        String environment = request.getParameter("env");
+        if (StringUtil.isNotEmpty(environment)) {
+            libraryUrl += "&env=" + environment;
+        }
         String baseUrl = UrlUtil.getBaseUrl(request);
         return PathUtil.concat(baseUrl, libraryUrl,'/');
     }
@@ -198,6 +208,10 @@ public class Util {
     }
     
     public static String getPageUrl(HttpServletRequest request, String jsLibId, String themeId) {
+        return getPageUrl(request, jsLibId, themeId, null);
+    }
+    
+    public static String getPageUrl(HttpServletRequest request, String jsLibId, String themeId, String envId) {
         String url = request.getRequestURL().toString();
         if (url.indexOf('?') != -1) {
             url = url.substring(0, url.indexOf('?'));
@@ -212,6 +226,11 @@ public class Util {
             themeId = getThemeId(request);
         }
         url += "&themeId=" + themeId;
+        
+        if (StringUtil.isEmpty(envId)) {
+            envId = getEnvironmentId(request);
+        }
+        url += "&env=" + envId;
         
         String snippet = request.getParameter("snippet");
         if (StringUtil.isNotEmpty(snippet)) {
@@ -237,7 +256,19 @@ public class Util {
         
         return url;
     }
+    
+    public static String[][] getEnvironments(HttpServletRequest request) {
+        return ENVIRONMENTS;
+    }
 
+    public static String getEnvironmentId(HttpServletRequest request) {
+        String id = request.getParameter("env");
+        if (StringUtil.isEmpty(id)) {
+            id = ENVIRONMENTS[0][1];
+        }
+        return id;
+    }
+    
     //
     // Internals
     // 

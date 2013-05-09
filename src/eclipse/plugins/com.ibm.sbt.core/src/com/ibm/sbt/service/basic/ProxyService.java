@@ -182,7 +182,7 @@ public class ProxyService {
 					String smethod = request.getMethod();
 					DefaultHttpClient client = getClient(request, getSocketReadTimeout());
 					URI url = getRequestURI(request);
-					HttpRequestBase method = createMethod(smethod, url,request);
+					HttpRequestBase method = createMethod(smethod, url, request);
 					if (prepareForwardingMethod(method, request, client)) {
 						HttpResponse clientResponse = executeMethod(client, method);
 						prepareResponse(method, request, response, clientResponse, true);

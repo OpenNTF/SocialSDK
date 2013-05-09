@@ -24,7 +24,7 @@ define(['jquery/ui'], function() {
 	return {
 		submitOnClickHandle: function(contentForm, options) {
 			var o = {};
-			$.each(contentForm, function() {
+			jQuery.each(contentForm, function() {
 				if (o[this.name]) {
 					if (!o[this.name].push) {
 						o[this.name] = [o[this.name]];
@@ -36,7 +36,7 @@ define(['jquery/ui'], function() {
 			});
 			contentForm = o;
 			if(contentForm.username == "" || contentForm.password == ""){
-				$("#wrongCredsMessage").css("display","block");
+				jQuery("#wrongCredsMessage").css("display","block");
 				return;
 			}else{
 				var proxy = options.proxy.proxyUrl;
@@ -51,7 +51,7 @@ define(['jquery/ui'], function() {
 						if(data instanceof Error){
 							var statusCode = data.code; // In the transport we already set the statusCode to error.code
 							if(statusCode == 401 || statusCode == 403){
-								$("#wrongCredsMessage").css("display","block");
+								jQuery("#wrongCredsMessage").css("display","block");
 								return;
 							};
 						}
@@ -75,7 +75,7 @@ define(['jquery/ui'], function() {
 				var _resizeable = true;
 				var _draggable = true;
 				
-	            var d = sbt.dialog = $(loginPage).dialog({
+	            var d = sbt.dialog = jQuery(loginPage).dialog({
 					title : _title,
 					modal: _isModal,
 					width: _width,
@@ -85,33 +85,33 @@ define(['jquery/ui'], function() {
 					autoOpen : _autoOpen
 				});
 	            var attrsArray = [];
-	            $("div[role=dialog]").find("input[type=button]").each(function(index){
+	            jQuery("div[role=dialog]").find("input[type=button]").each(function(index){
 	            	var attrs={};
-	            	$.each($(this)[0].attributes,function(idx, attr){
+	            	jQuery.each(jQuery(this)[0].attributes,function(idx, attr){
 	            		attrs[attr.nodeName] = attr.nodeValue;
 	            	});
 	            	attrsArray[index] = attrs;
 	            });
-	            $("div[role=dialog]").find("input[type=button]").replaceWith(function(idx){
+	            jQuery("div[role=dialog]").find("input[type=button]").replaceWith(function(idx){
 	            		var text = attrsArray[idx].value;
 	            		delete attrsArray[idx].value;
 	            		delete attrsArray[idx].onclick;
-	            		var thisButton = $("<button />", attrsArray[idx]).append($(this).contents()).
+	            		var thisButton = jQuery("<button />", attrsArray[idx]).append(jQuery(this).contents()).
             				attr("role","button").attr("aria-disabled", "false").
             				addClass("ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only").
             				append("<span class='ui-button-text'>"+text+"</span>");
 	            		thisButton.hover(
 	            			function() {
-	            				$(this).addClass("ui-state-hover");
+	            				jQuery(this).addClass("ui-state-hover");
 	            			},
 	            			function() {
-	            				$(this).removeClass("ui-state-hover");
+	            				jQuery(this).removeClass("ui-state-hover");
 	            			}
 	            		);
 	            		if (text == "OK"){
 	            			thisButton.click(
 	            				function() {
-	            					self.submitOnClickHandle($("form").serializeArray(), options);
+	            					self.submitOnClickHandle(jQuery("form").serializeArray(), options);
 	            				}
 	            			);
 	            		}

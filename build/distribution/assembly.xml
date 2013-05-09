@@ -140,6 +140,7 @@
 		<include>changelog.txt</include>
 		<include>weekly.txt</include>
       </includes>
+      <lineEnding>crlf</lineEnding>
     </fileSet>
     <fileSet>
       <directory>${build.target}/tomcat</directory>
@@ -320,5 +321,17 @@
       </includes>
     </fileSet>
 	-->
+  <fileSet>
+    <directory>../../workspaces</directory>
+    <outputDirectory>sbtsdk/</outputDirectory>
+    <useDefaultExcludes>false</useDefaultExcludes>
+    <excludes>
+      <exclude>**/.jazzignore</exclude>
+      <exclude>**/.gitignore</exclude>
+    </excludes>
+    <includes>
+      <include>**/*.*</include>
+    </includes>
+  </fileSet>
   </fileSets>
 </assembly>

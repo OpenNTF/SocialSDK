@@ -54,7 +54,9 @@ define(["sbt/lang", "sbt/base/core", "sbt/xml", "sbt/xpath", "sbt/Endpoint", "sb
         constructor: function(args, query, options) {
             this._endpoint = Endpoint.find(args.endpoint || "connections");
             this._options = options;
-
+            this._callbacks = [];
+            this._errbacks = [];
+            
             if (args) {
                 this.url = args.url;
                 this.attributes = args.attributes || this.attributes;

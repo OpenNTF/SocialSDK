@@ -51,8 +51,8 @@
   		gadgets.Hub.publish("com.ibm.sbt.sample.unid", unid);
 	}
     </script>
-    <link href="/sbt/bootstrap/css/bootstrap.css" rel="stylesheet">
-    <link href="/sbt/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="/sbt.bootstrap211/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="/sbt.bootstrap211/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 	<div class="well sidebar-nav">
 		<ul class="nav nav-list">
 		<%

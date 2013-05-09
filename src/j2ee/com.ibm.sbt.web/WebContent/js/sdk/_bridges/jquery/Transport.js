@@ -207,10 +207,12 @@ define(['jquery', 'sbt/_bridge/declare', 'sbt/util', 'sbt/Promise' ], function($
 		},
 		createError: function(jqXHR, textStatus, errorThrown, type) {
             var _error = new Error();
+            _error.responseText = jqXHR.responseText;
             _error.code = jqXHR.status || 400;
-            _error.message = this.getErrorMessage(jqXHR, textStatus, type);
-            _error.cause = errorThrown || jqXHR;
-            _error.response = jqXHR.getAllResponseHeaders();
+            _error.cause = {
+            		responseText: jqXHR.responseText
+            };
+            _error.response = jqXHR;
             return _error;
         },
         getErrorMessage: function(jqXHR, textStatus, type) {

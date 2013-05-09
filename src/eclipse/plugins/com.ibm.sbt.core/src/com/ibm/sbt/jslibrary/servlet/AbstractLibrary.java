@@ -26,10 +26,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
-
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.util.PathUtil;
 import com.ibm.commons.util.StringUtil;
@@ -67,7 +65,7 @@ abstract public class AbstractLibrary {
 	public static final String		APPLICATION_JAVASCRIPT			= "application/javascript";		//$NON-NLS-1$
 	public static final String		UTF8							= "utf-8";							//$NON-NLS-1$
 
-	public static final String      PROP_API_VERSION                = "apiVersion";
+	public static final String		PROP_API_VERSION				= "apiVersion";
 	public static final String		PROP_TRANSPORT					= "transport";
 	public static final String		PROP_INVALID					= "invalid";
 	public static final String		PROP_AUTHENTICATOR				= "authenticator";
@@ -227,7 +225,8 @@ abstract public class AbstractLibrary {
 		Map<String, JsonObject> jsonEndpoints = new HashMap<String, JsonObject>();
 
 		// Read the list of endpoint
-		com.ibm.sbt.jslibrary.SBTEnvironment.Endpoint[] endpoints = request.getEnvironment().getEndpointsArray();
+		com.ibm.sbt.jslibrary.SBTEnvironment.Endpoint[] endpoints = request.getEnvironment()
+				.getEndpointsArray();
 		if (endpoints != null) {
 			for (com.ibm.sbt.jslibrary.SBTEnvironment.Endpoint endpoint : endpoints) {
 				String endpointAlias = endpoint.getAlias();
@@ -237,7 +236,7 @@ abstract public class AbstractLibrary {
 					endpointAlias = endpointName;
 				}
 
-				Endpoint theEndpoint = EndpointFactory.getEndpointUnchecked(endpointName); 
+				Endpoint theEndpoint = EndpointFactory.getEndpointUnchecked(endpointName);
 				JsonObject jsonEndpoint = createJsonForEndpoint(request, theEndpoint, endpointAlias,
 						endpointName);
 				jsonEndpoints.put(endpointAlias, jsonEndpoint);
@@ -305,12 +304,12 @@ abstract public class AbstractLibrary {
 
 		// use the base url from the endpoint
 		if (isValid(request, endpoint)) {
-		    // set the endpoint api version
-		    String apiVersion = endpoint.getApiVersion();
-		    if (StringUtil.isNotEmpty(apiVersion)) {
-		        jsonEndpoint.putJsonProperty(PROP_API_VERSION, apiVersion);
-		    }
-		    
+			// set the endpoint api version
+			String apiVersion = endpoint.getApiVersion();
+			if (StringUtil.isNotEmpty(apiVersion)) {
+				jsonEndpoint.putJsonProperty(PROP_API_VERSION, apiVersion);
+			}
+
 			// set the endpoint url
 			jsonEndpoint.putJsonProperty(PROP_BASE_URL, endpoint.getUrl());
 			try {
@@ -549,7 +548,8 @@ abstract public class AbstractLibrary {
 		}
 		for (String[] registerModule : registerModules) {
 			String moduleUrl = getModuleUrl(request, registerModule[1], isExtension);
-			indent(sb, indentationLevel).append(generateRegisterModulePath(request, registerModule[0], moduleUrl));
+			indent(sb, indentationLevel).append(
+					generateRegisterModulePath(request, registerModule[0], moduleUrl));
 		}
 	}
 
@@ -994,10 +994,12 @@ abstract public class AbstractLibrary {
 	abstract protected String[] getRequireModulesAmd();
 
 	/**
-	 * @param request TODO
+	 * @param request
+	 *            TODO
 	 * @return
 	 */
-	abstract protected String generateRegisterModulePath(LibraryRequest request, String moduleName, String moduleUrl);
+	abstract protected String generateRegisterModulePath(LibraryRequest request, String moduleName,
+			String moduleUrl);
 
 	/**
 	 * @return

@@ -17,7 +17,7 @@
 /**
  * Social Business Toolkit SDK - URL utilities
  */
-define(['sbt/stringutil'],function(stringUtil) {
+define(['sbt/stringUtil'],function(stringUtil) {
 	return {
 		concat: function(path1,path2) {
 			if(!path1) {
@@ -37,5 +37,5 @@ define(['sbt/stringutil'],function(stringUtil) {
 		isAbsolute: function(url) {
 			return url.indexOf("://")>=0;
 		}
-	};
+	}
 });

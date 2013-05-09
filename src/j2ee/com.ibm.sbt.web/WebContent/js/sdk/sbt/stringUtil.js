@@ -17,13 +17,13 @@
 /**
  * Defination of some string Utilities
  * 
- * @module sbt.stringutil
+ * @module sbt.stringUtil
  */
 
 /**
  * Implements String helpers.
  * 
- * @class stringutil
+ * @class stringUtil
  * @static
  */
 define(['sbt/xml'], function(xml) {

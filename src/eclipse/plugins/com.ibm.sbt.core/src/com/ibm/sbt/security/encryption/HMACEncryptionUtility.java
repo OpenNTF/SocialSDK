@@ -17,6 +17,8 @@ package com.ibm.sbt.security.encryption;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 import javax.crypto.Mac;
 import javax.crypto.SecretKey;
@@ -24,6 +26,7 @@ import javax.crypto.spec.SecretKeySpec;
 import org.apache.commons.codec.binary.Base64;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.core.configuration.Configuration;
+import com.ibm.sbt.security.authentication.oauth.OAuthException;
 
 /**
  * HMACEncryptionUtility can be used to generate HMAC based signature for OAuth1 Authentication
@@ -36,12 +39,13 @@ import com.ibm.sbt.core.configuration.Configuration;
 public class HMACEncryptionUtility {
 
 	public static String generateHMACSignature(String apiUrl, String method, String consumerSecret,
-			String tokenSecret, Map<String, String> paramsSortedMap) {
+			String tokenSecret, Map<String, String> paramsSortedMap) throws OAuthException {
 		try {
 			String parameterString = generateParameterString(paramsSortedMap);
 			String signature_base_string = generateSignatureBaseString(method, apiUrl, parameterString);
 			String signingKey = null;
 			if (StringUtil.isEmpty(tokenSecret)) {
+				// No token secret is available when call is made from getRequestToken, tokensecret is fetched later in OADance
 				signingKey = consumerSecret + "&";
 			} else {
 				signingKey = consumerSecret + "&" + tokenSecret;
@@ -54,9 +58,10 @@ public class HMACEncryptionUtility {
 			byte[] text = signature_base_string.getBytes();
 			String signature = new String(Base64.encodeBase64(mac.doFinal(text))).trim();
 			return signature;
-		} catch (Exception e) {
-			// TODO
-			return "";
+		} catch (NoSuchAlgorithmException e) {
+			throw new OAuthException(e,"HMACEncryptionUtility : generateHMACSignature caused NoSuchAlgorithmException exception");
+		} catch (InvalidKeyException e) {
+			throw new OAuthException(e,"HMACEncryptionUtility : generateHMACSignature caused InvalidKeyException exception");
 		}
 	}
 
@@ -73,7 +78,7 @@ public class HMACEncryptionUtility {
 
 	public static String percentDecode(String str) {
 		return str;
-	}
+	} 
 
 	public static String generateParameterString(Map<String, String> paramsMap) {
 
@@ -87,14 +92,14 @@ public class HMACEncryptionUtility {
 		return parameterString.deleteCharAt(parameterString.length() - 1).toString();
 	}
 
-	public static String generateSignatureBaseString(String method, String url, String parameterString) {
+	public static String generateSignatureBaseString(String method, String url, String parameterString) throws OAuthException {
 		StringBuilder signatureBaseString = new StringBuilder();
 
 		try {
 			signatureBaseString.append(method.toUpperCase()).append("&").append(percentEncode(url))
 					.append("&").append(URLEncoder.encode(parameterString, "UTF-8"));
 		} catch (UnsupportedEncodingException e) {
-			// TODO
+			throw new OAuthException(e,"HMACEncryptionUtility : generateSignatureBaseString caused UnsupportedEncodingException exception");
 		}
 		return signatureBaseString.toString();
 	}

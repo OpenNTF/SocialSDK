@@ -17,43 +17,30 @@
 /**
  * Social Business Toolkit SDK - Utilities script
  */
-define(['sbt/lang'],function(lang) {
+define(['sbt/lang','sbt/i18n!sbt/nls/util','sbt/log'],function(lang, nls, log) {
 	var errorCode = 400;	
-	function log (text, arg1, arg2) {
-		if (console) {	
-			if(arg1 && arg2){
-				console.log(text,arg1, arg2);
-			}else if (arg1){
-				console.log(text,arg1);
-			}else {
-				console.log(text);
-			}				
-		}
-	}	
 	function _notifyError(error, args){	
-		if(args.error || args.handle){
-			if(args.error){
-				try{
+		if (args && (args.error || args.handle)) {
+			if (args.error) {
+				try {
 					args.error(error);
-				}catch(error){
-					log("Error running error callback.");
+				} catch (error) {
+					log.error(nls.notifyError_catchError, error);
 				}
 			}
-			if(args.handle){
-				try{
+			if (args.handle) {
+				try {
 					args.handle(error);
-				}catch(error){
-					log("Error running handle callback.");
+				} catch (error) {
+					log.error(nls.notifyError_catchError, error);
 				}
 			}
-		}
-		else{
-			log("Error received. Error Code = %d. Error Message = %s" , error.code, error.message);
+		} else {
+			log.error(nls.notifyError_console, error.code, error.message);
 		}
 	}	
 	return {
-		notifyError: _notifyError,		
-		log: log,		
+		notifyError: _notifyError,			
 		checkObjectClass: function(object, className, message, args){
 			if(object.declaredClass != className){
 				if(args){

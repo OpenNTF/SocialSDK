@@ -13,12 +13,19 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-
 /**
- * Social Business Toolkit SDK - Some language utilities.
+ * JQuery module to delegate to a Global jQuery or a jQuery module.
+ * @module jquery
  */
-define(["sbt/_bridge/jquery"],function() {
-	return function(fct) {
-		return jQuery(document).ready(fct);
-	};
+
+define(['jquery',],function(log) {
+	function getJQuery() {
+		if (typeof jQuery != 'undefined') {
+			return $.noConflict();
+		} else {
+			return null;
+		};
+	}
+	
+	return getJQuery();
 });

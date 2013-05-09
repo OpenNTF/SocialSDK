@@ -7,27 +7,23 @@ require(["sbt/dom",
          "sbt/lang"], 
 		
 function(dom, CommunityGrid, ProfileGrid,CommunityService,CommunityRendererMixin,ProfileRendererMixin, lang, CustomCommunityRow) {
-    
+	
 	var communityService = new CommunityService();
-	
-	//Set the custom template
-	var domNode = dom.byId("communityRow");
-    var CustomCommunityRow = domNode.text || domNode.textContent;
-	
+
     //Create a new community Grid
 	var communitiesGrid = new CommunityGrid({
 	     type: "my"
 	});
 	
 	lang.mixin(communitiesGrid.renderer, CommunityRendererMixin);
-	//set the CommunityGrid Renderer to use the custom template
+	
+	//Set the custom template
+	var domNode = dom.byId("communityRow");
+    var CustomCommunityRow = domNode.text || domNode.textContent;
 	communitiesGrid.renderer.template = CustomCommunityRow;  
 	
-	
-	
-    //append the grid 
 	dom.byId("communitiesDiv").appendChild(communitiesGrid.domNode);
-	//update the grid with data             
+          
 	communitiesGrid.update();
 	
 	//create a new profile grid
@@ -37,9 +33,9 @@ function(dom, CommunityGrid, ProfileGrid,CommunityService,CommunityRendererMixin
 	});
 	
 	lang.mixin(profileGrid.renderer, ProfileRendererMixin);
-	//append the grid
+
 	dom.byId("profilesDiv").appendChild(profileGrid.domNode);
-	//update the grid with profile data
+
 	profileGrid.update();
 	
 	//event handler for the add button

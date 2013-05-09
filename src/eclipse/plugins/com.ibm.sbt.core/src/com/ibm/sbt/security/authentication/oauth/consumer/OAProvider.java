@@ -87,6 +87,7 @@ public class OAProvider implements Serializable {
 	private String						signatureMethod;
 	private boolean						forceTrustSSLCertificate;
 	public String						applicationAccessToken;
+	private String						url;
 
 	public OAuthHandler					oauthHandler			= new OAuth1Handler();
 
@@ -158,12 +159,33 @@ public class OAProvider implements Serializable {
 		this.accessTokenURL = accessTokenURL;
 	}
 
+	public OAuthHandler getOauthHandler() {
+		return oauthHandler;
+	}
+
+	public void setOauthHandler(OAuthHandler oauthHandler) {
+		this.oauthHandler = oauthHandler;
+	}
+
 	public String getSignatureMethod() {
 		return signatureMethod;
 	}
 
 	public void setSignatureMethod(String signatureMethod) {
 		this.signatureMethod = signatureMethod;
+
+		// If HMAC is used, change the handler
+		if (StringUtil.equalsIgnoreCase(Configuration.HMAC_SIGNATURE, signatureMethod)) {
+			this.setOauthHandler(new HMACOAuth1Handler());
+		}
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	public int getExpireThreshold() {

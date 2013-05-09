@@ -17,6 +17,8 @@
 package com.ibm.sbt.services.endpoints;
 
 import java.io.IOException;
+import java.util.Map;
+import java.util.TreeMap;
 import org.apache.http.HttpException;
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpRequestInterceptor;
@@ -24,10 +26,12 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.HttpContext;
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.RuntimeConstants;
+import com.ibm.commons.util.PathUtil;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.core.configuration.Configuration;
 import com.ibm.sbt.security.authentication.oauth.OAuthException;
 import com.ibm.sbt.security.authentication.oauth.consumer.AccessToken;
+import com.ibm.sbt.security.authentication.oauth.consumer.HMACOAuth1Handler;
 import com.ibm.sbt.security.authentication.oauth.consumer.OAProvider;
 import com.ibm.sbt.security.authentication.oauth.consumer.OAuthHandler;
 import com.ibm.sbt.security.authentication.oauth.consumer.oauth_10a.servlet.OAClientAuthentication;
@@ -76,6 +80,7 @@ public class OAuthEndpoint extends AbstractEndpoint {
 	@Override
 	public void setUrl(String url) {
 		super.setUrl(url);
+		oaProvider.setUrl(url);
 		// Make the URL the service name if not already set
 		if (StringUtil.isEmpty(oaProvider.getServiceName())) {
 			oaProvider.setServiceName(url);
@@ -154,14 +159,6 @@ public class OAuthEndpoint extends AbstractEndpoint {
 		oaProvider.setSignatureMethod(signatureMethod);
 	}
 
-	public OAuthHandler getOaHandler() {
-		return oaProvider.oauthHandler;
-	}
-
-	public void setOaHandler(OAuthHandler oaHandler) {
-		oaProvider.oauthHandler = oaHandler;
-	}
-
 	@Override
 	public String getAuthType() {
 		return "oauth1.0a";
@@ -175,6 +172,14 @@ public class OAuthEndpoint extends AbstractEndpoint {
 	@Override
 	public void setForceTrustSSLCertificate(boolean forceTrustSSLCertificate) {
 		oaProvider.setForceTrustSSLCertificate(forceTrustSSLCertificate);
+	}
+
+	public String getApplicationAccessToken() {
+		return oaProvider.applicationAccessToken;
+	}
+
+	public void setApplicationAccessToken(String applicationAccessToken) {
+		oaProvider.applicationAccessToken = applicationAccessToken;
 	}
 
 	@Override
@@ -242,9 +247,39 @@ public class OAuthEndpoint extends AbstractEndpoint {
 			Context contextForHandler = Context.get();
 			OAuthHandler oaHandler = (OAuthHandler) contextForHandler.getSessionMap().get(
 					Configuration.OAUTH_HANDLER);
-			String authorizationheader = oaHandler.createAuthorizationHeader();
-			request.addHeader("Authorization", authorizationheader);
+			OAProvider oaProvider = (OAProvider) contextForHandler.getSessionMap().get("oaProvider");
+			String authorizationheader = null;
+			if (oaHandler.getClass().equals(HMACOAuth1Handler.class)) {
+
+				Map<String, String> mapOfParams = new TreeMap<String, String>();
+				String requestUri = request.getRequestLine().getUri().toString();
+				if (requestUri.contains("?")) {
+
+					// if parameters are a part of the request uri
+					String queryStr = requestUri.substring(requestUri.indexOf("?") + 1, requestUri.length());
+					requestUri = requestUri.substring(0, requestUri.indexOf("?"));
+					String[] paramsList = queryStr.split("&");
+					for (String i : paramsList) {
+						String[] parameter = i.split("=");
+						mapOfParams.put(parameter[0], parameter[1]);
+					}
+				}
+				try {
+					requestUri = PathUtil.concat(oaProvider.getUrl(), requestUri, '/');
+
+					// creating authorization header
+					authorizationheader = ((HMACOAuth1Handler) oaHandler).createAuthorizationHeader(
+							requestUri, mapOfParams);
+				} catch (OAuthException e) {
+					throw new HttpException(
+							"OAuthException thrown while creating Authorization header in OAuthInterceptor",
+							e);
+				}
+				request.addHeader("Authorization", authorizationheader);
+			} else {
+				authorizationheader = oaHandler.createAuthorizationHeader();
+				request.addHeader("Authorization", authorizationheader);
+			}
 		}
 	}
-
 }

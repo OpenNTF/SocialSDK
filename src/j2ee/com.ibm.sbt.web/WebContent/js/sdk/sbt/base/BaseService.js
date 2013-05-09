@@ -237,8 +237,6 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/base/core','sbt/xml',
 						log.error("Error running load callback : {0}", error);
 					}
 				}
-			} else {
-				log.error("Error received. Couldn't find load or handle callbacks");
 			}
 		},
 		

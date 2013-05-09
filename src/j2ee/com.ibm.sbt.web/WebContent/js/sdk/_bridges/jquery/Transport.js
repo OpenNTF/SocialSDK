@@ -214,15 +214,6 @@ define(['sbt/_bridge/declare', 'sbt/util', 'sbt/Promise', 'sbt/_bridge/jquery'],
             };
             _error.response = jqXHR;
             return _error;
-        },
-        getErrorMessage: function(jqXHR, textStatus, type) {
-            try {
-            	var xml = (type==="xml" ? jqXHR.responseXML : type==="text" ? jQuery.parseXML(jqXHR.responseText) : undefined );
-                var text = jQuery(jQuery(xml).find("message")[0]).text().trim();
-            } catch(ex) {
-                console.log(ex);
-            }
-            return text || jqXHR.statusText || jqXHR.responseText || textStatus || jqXHR;
         }
 	});
 });

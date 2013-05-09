@@ -19,7 +19,7 @@
  * 
  * Implementation of a XML HTTP Request using the JQuery API.
  */
-define(['jquery', 'sbt/_bridge/declare', 'sbt/util', 'sbt/Promise' ], function($, declare, util, Promise) {
+define(['sbt/_bridge/declare', 'sbt/util', 'sbt/Promise', 'sbt/_bridge/jquery'], function(declare, util, Promise) {
 	return declare("sbt._bridge.Transport", null, {
         /**
          * Provides an asynchronous request using the associated Transport.
@@ -137,7 +137,7 @@ define(['jquery', 'sbt/_bridge/declare', 'sbt/util', 'sbt/Promise' ], function($
 		xhr: function(method, args, hasBody) {
 		    var url = args.url;
 		    var self = this;
-		    var usedJQVersion = $().jquery;
+		    var usedJQVersion = jQuery.fn.jquery;
 		    var requiredJQVersion = "1.8";
 		    var jQ_v_gte_18 = util.minVersion(requiredJQVersion, usedJQVersion);
 		    
@@ -151,7 +151,7 @@ define(['jquery', 'sbt/_bridge/declare', 'sbt/util', 'sbt/Promise' ], function($
 		    var xhrData = args.putData || args.postData || args.content || null;
 		    
 		    if (!args.handleAs) {
-		    	$.extend(args, {handleAs: "text"});
+		    	jQuery.extend(args, {handleAs: "text"});
 		    }
 		    var settings = {
 		        type: method,
@@ -164,7 +164,7 @@ define(['jquery', 'sbt/_bridge/declare', 'sbt/util', 'sbt/Promise' ], function($
 		    }
 		    
 		    if (!jQ_v_gte_18) {
-		    	settings = $.extend(settings, {
+		    	settings = jQuery.extend(settings, {
 		    		success: function(data, textStatus, jqXHR) {
 		    			self.handleSuccess(args, data, textStatus, jqXHR);
 		    		},
@@ -174,7 +174,7 @@ define(['jquery', 'sbt/_bridge/declare', 'sbt/util', 'sbt/Promise' ], function($
 		    	});
 		    }
 		    
-		    var jqXHR = $.ajax(url, settings);
+		    var jqXHR = jQuery.ajax(url, settings);
 		    
 		    if (jQ_v_gte_18) {
 		    	jqXHR.done(function(data, textStatus, jqXHR) {
@@ -215,8 +215,8 @@ define(['jquery', 'sbt/_bridge/declare', 'sbt/util', 'sbt/Promise' ], function($
         },
         getErrorMessage: function(jqXHR, textStatus, type) {
             try {
-            	var xml = (type==="xml" ? jqXHR.responseXML : type==="text" ? $.parseXML(jqXHR.responseText) : undefined );
-                var text = $($(xml).find("message")[0]).text().trim();
+            	var xml = (type==="xml" ? jqXHR.responseXML : type==="text" ? jQuery.parseXML(jqXHR.responseText) : undefined );
+                var text = jQuery(jQuery(xml).find("message")[0]).text().trim();
             } catch(ex) {
                 console.log(ex);
             }

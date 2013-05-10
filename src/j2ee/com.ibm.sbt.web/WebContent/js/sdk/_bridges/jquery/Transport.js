@@ -207,20 +207,13 @@ define(['sbt/_bridge/declare', 'sbt/util', 'sbt/Promise', 'sbt/_bridge/jquery'],
 		},
 		createError: function(jqXHR, textStatus, errorThrown, type) {
             var _error = new Error();
+            _error.responseText = jqXHR.responseText;
             _error.code = jqXHR.status || 400;
-            _error.message = this.getErrorMessage(jqXHR, textStatus, type);
-            _error.cause = errorThrown || jqXHR;
-            _error.response = jqXHR.getAllResponseHeaders();
+            _error.cause = {
+            		responseText: jqXHR.responseText
+            };
+            _error.response = jqXHR;
             return _error;
-        },
-        getErrorMessage: function(jqXHR, textStatus, type) {
-            try {
-            	var xml = (type==="xml" ? jqXHR.responseXML : type==="text" ? jQuery.parseXML(jqXHR.responseText) : undefined );
-                var text = jQuery(jQuery(xml).find("message")[0]).text().trim();
-            } catch(ex) {
-                console.log(ex);
-            }
-            return text || jqXHR.statusText || jqXHR.responseText || textStatus || jqXHR;
         }
 	});
 });

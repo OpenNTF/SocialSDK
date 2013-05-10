@@ -20,8 +20,8 @@
  */
 define(
 		[ "sbt/_bridge/declare", "sbt/config", "sbt/lang", "sbt/connections/core", "sbt/xml", "sbt/xpath", "sbt/Endpoint", "sbt/connections/FileConstants",
-				"sbt/validate", "sbt/log" ],
-		function(declare, cfg, lang, con, xml, xpath, endpoint, constants, validate, log) {
+				"sbt/validate", "sbt/log", "sbt/util" ],
+		function(declare, cfg, lang, con, xml, xpath, endpoint, constants, validate, log, util) {
 
 			// TODO revisit this
 			function evaluateXpath(data, path) {
@@ -658,7 +658,7 @@ define(
 									}
 								},
 								error : function(error) {
-									validate.notifyError(error, args);
+									util.notifyError(error, args);
 								}
 							});
 
@@ -685,7 +685,7 @@ define(
 									}
 								},
 								error : function(error) {
-									validate.notifyError(error, args);
+									util.notifyError(error, args);
 								}
 							});
 
@@ -712,7 +712,7 @@ define(
 									}
 								},
 								error : function(error) {
-									validate.notifyError(error, args);
+									util.notifyError(error, args);
 								}
 							});
 
@@ -757,7 +757,7 @@ define(
 									_self._notifyCb(args, "Success");
 								},
 								error : function(error, ioargs) {
-									validate.notifyError(error, args);
+									util.notifyError(error, args);
 								}
 							});
 						},
@@ -1013,7 +1013,7 @@ define(
 								filePath = args.fileControl.value;
 								files = args.fileControl.files;
 							} else {
-								validate.notifyError("Either File Control of File Control ID is required for upload", args);
+								util.notifyError("Either File Control of File Control ID is required for upload", args);
 							}
 							
 							var index = filePath.lastIndexOf("\\");
@@ -1034,7 +1034,7 @@ define(
 								_self.uploadFileBinary(binaryContent, _args);
 							};
 							reader.onerror = function(error) {
-								validate.notifyError(error, args);
+								util.notifyError(error, args);
 							};
 							reader.readAsBinaryString(files[0]);
 						},
@@ -1079,7 +1079,7 @@ define(
 									_self._notifyCb(args, "Success");
 								},
 								error : function(error) {
-									validate.notifyError(error, args);
+									util.notifyError(error, args);
 								}
 							});
 						},
@@ -1258,7 +1258,7 @@ define(
 									_self._executePost(args, url, headers, null);
 								},
 								error : function(error) {
-									validate.notifyError(error, args);
+									util.notifyError(error, args);
 								}
 							});
 						},
@@ -1305,7 +1305,7 @@ define(
 									_self._executePost(args, url, headers, null);
 								},
 								error : function(error) {
-									validate.notifyError(error, args);
+									util.notifyError(error, args);
 								}
 							});
 						},
@@ -1351,7 +1351,7 @@ define(
 									_self._executeDelete(args, url, headers);
 								},
 								error : function(error) {
-									validate.notifyError(error, args);
+									util.notifyError(error, args);
 								}
 							});
 
@@ -1454,7 +1454,7 @@ define(
 									_self._executePost(_args, url, headers, null);
 								},
 								error : function(error) {
-									validate.notifyError(error, args);
+									util.notifyError(error, args);
 								}
 							});
 
@@ -1505,7 +1505,7 @@ define(
 									_self._executePost(_args, url, headers, null);
 								},
 								error : function(error) {
-									validate.notifyError(error, args);
+									util.notifyError(error, args);
 								}
 							});
 						},
@@ -1554,7 +1554,7 @@ define(
 									_self._executeDelete(args, url, headers, null);
 								},
 								error : function(error) {
-									validate.notifyError(error, args);
+									util.notifyError(error, args);
 								}
 							});
 						},

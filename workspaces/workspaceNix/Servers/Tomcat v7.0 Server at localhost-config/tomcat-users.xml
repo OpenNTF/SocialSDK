@@ -1,0 +1,125 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<tomcat-users>
+<!--
+  NOTE:  By default, no user is included in the "manager-gui" role required
+  to operate the "/manager/html" web application.  If you wish to use this app,
+  you must define such a user - the username and password are arbitrary.
+-->
+<!--
+  NOTE:  The sample user and role entries below are wrapped in a comment
+  and thus are ignored when reading this file. Do not forget to remove
+  <!.. ..> that surrounds them.
+-->
+<!--
+  <role rolename="tomcat"/>
+  <role rolename="role1"/>
+  <user username="tomcat" password="tomcat" roles="tomcat"/>
+  <user username="both" password="tomcat" roles="tomcat,role1"/>
+  <user username="role1" password="tomcat" roles="role1"/>
+-->
+  <role rolename="manager-gui"/>
+  <role rolename="user"/>
+  <user username="admin" password="admin" roles="manager-gui"/>
+  <user username="sbaadmin" password="passw0rd" roles="user,manager-gui"/>
+  <user username="fadams@renovations.com" password="passw0rd" roles="user"/>
+  <user username="aalain@renovations.com" password="passw0rd" roles="user"/>
+  <user username="tamado@renovations.com" password="passw0rd" roles="user"/>
+  <user username="marmond@renovations.com" password="passw0rd" roles="user"/>
+  <user username="pbabinea@renovations.com" password="passw0rd" roles="user"/>
+  <user username="gbandini@renovations.com" password="passw0rd" roles="user"/>
+  <user username="abauer@renovations.com" password="passw0rd" roles="user"/>
+  <user username="aberzat@renovations.com" password="passw0rd" roles="user"/>
+  <user username="ablanks@renovations.com" password="passw0rd" roles="user"/>
+  <user username="eblanks@renovations.com" password="passw0rd" roles="user"/>
+  <user username="rbooth@renovations.com" password="passw0rd" roles="user"/>
+  <user username="cbounar@renovations.com" password="passw0rd" roles="user"/>
+  <user username="fbrion@renovations.com" password="passw0rd" roles="user"/>
+  <user username="gachao@renovations.com" password="passw0rd" roles="user"/>
+  <user username="jchetelat@renovations.com" password="passw0rd" roles="user"/>
+  <user username="stevecho@renovations.com" password="passw0rd" roles="user"/>
+  <user username="vclare@renovations.com" password="passw0rd" roles="user"/>
+  <user username="pclemmons@renovations.com" password="passw0rd" roles="user"/>
+  <user username="gcloud@renovations.com" password="passw0rd" roles="user"/>
+  <user username="samcurman@renovations.com" password="passw0rd" roles="user"/>
+  <user username="sdaryn@renovations.com" password="passw0rd" roles="user"/>
+  <user username="simdray@renovations.com" password="passw0rd" roles="user"/>
+  <user username="siduma@renovations.com" password="passw0rd" roles="user"/>
+  <user username="pdumont@renovations.com" password="passw0rd" roles="user"/>
+  <user username="sdurgan@renovations.com" password="passw0rd" roles="user"/>
+  <user username="eelamon@renovations.com" password="passw0rd" roles="user"/>
+  <user username="lfedynsky@renovations.com" password="passw0rd" roles="user"/>
+  <user username="rferrar@renovations.com" password="passw0rd" roles="user"/>
+  <user username="lfitzgerald@renovations.com" password="passw0rd" roles="user"/>
+  <user username="tfrankel@renovations.com" password="passw0rd" roles="user"/>
+  <user username="cgarfield@renovations.com" password="passw0rd" roles="user"/>
+  <user username="lgeiger@renovations.com" password="passw0rd" roles="user"/>
+  <user username="rgestner@renovations.com" password="passw0rd" roles="user"/>
+  <user username="bgossens@renovations.com" password="passw0rd" roles="user"/>
+  <user username="hgreene@renovations.com" password="passw0rd" roles="user"/>
+  <user username="jhaj@renovations.com" password="passw0rd" roles="user"/>
+  <user username="vhanley@renovations.com" password="passw0rd" roles="user"/>
+  <user username="khardart@renovations.com" password="passw0rd" roles="user"/>
+  <user username="bheinz@renovations.com" password="passw0rd" roles="user"/>
+  <user username="mihiro@renovations.com" password="passw0rd" roles="user"/>
+  <user username="bjordan@renovations.com" password="passw0rd" roles="user"/>
+  <user username="lklein@renovations.com" password="passw0rd" roles="user"/>
+  <user username="mklensch@renovations.com" password="passw0rd" roles="user"/>
+  <user username="mkravitz@renovations.com" password="passw0rd" roles="user"/>
+  <user username="rlasky@renovations.com" password="passw0rd" roles="user"/>
+  <user username="mleclair@renovations.com" password="passw0rd" roles="user"/>
+  <user username="jlendler@renovations.com" password="passw0rd" roles="user"/>
+  <user username="jodyliu@renovations.com" password="passw0rd" roles="user"/>
+  <user username="nludlow@renovations.com" password="passw0rd" roles="user"/>
+  <user username="kmacgyver@renovations.com" password="passw0rd" roles="user"/>
+  <user username="smaiti@renovations.com" password="passw0rd" roles="user"/>
+  <user username="dmaroni@renovations.com" password="passw0rd" roles="user"/>
+  <user username="smazar@renovations.com" password="passw0rd" roles="user"/>
+  <user username="hmedway@renovations.com" password="passw0rd" roles="user"/>
+  <user username="cmilan@renovations.com" password="passw0rd" roles="user"/>
+  <user username="dmisawa@renovations.com" password="passw0rd" roles="user"/>
+  <user username="dmishkey@renovations.com" password="passw0rd" roles="user"/>
+  <user username="dmissille@renovations.com" password="passw0rd" roles="user"/>
+  <user username="larmoriarty@renovations.com" password="passw0rd" roles="user"/>
+  <user username="mmotler@renovations.com" password="passw0rd" roles="user"/>
+  <user username="hmuzakis@renovations.com" password="passw0rd" roles="user"/>
+  <user username="vnehru@renovations.com" password="passw0rd" roles="user"/>
+  <user username="nolmos@renovations.com" password="passw0rd" roles="user"/>
+  <user username="mpierpont@renovations.com" password="passw0rd" roles="user"/>
+  <user username="branney@renovations.com" password="passw0rd" roles="user"/>
+  <user username="graynes@renovations.com" password="passw0rd" roles="user"/>
+  <user username="hreeds@renovations.com" password="passw0rd" roles="user"/>
+  <user username="jsanchez@renovations.com" password="passw0rd" roles="user"/>
+  <user username="lschonfeld@renovations.com" password="passw0rd" roles="user"/>
+  <user username="rsegal@renovations.com" password="passw0rd" roles="user"/>
+  <user username="mshani@renovations.com" password="passw0rd" roles="user"/>
+  <user username="lingshin@renovations.com" password="passw0rd" roles="user"/>
+  <user username="noshin@renovations.com" password="passw0rd" roles="user"/>
+  <user username="asingh@renovations.com" password="passw0rd" roles="user"/>
+  <user username="nsmith@renovations.com" password="passw0rd" roles="user"/>
+  <user username="lstarky@renovations.com" password="passw0rd" roles="user"/>
+  <user username="pstarky@renovations.com" password="passw0rd" roles="user"/>
+  <user username="lsuarez@renovations.com" password="passw0rd" roles="user"/>
+  <user username="mtompkin@renovations.com" password="passw0rd" roles="user"/>
+  <user username="ltruoc@renovations.com" password="passw0rd" roles="user"/>
+  <user username="malivo@renovations.com" password="passw0rd" roles="user"/>
+  <user username="rwashington@renovations.com" password="passw0rd" roles="user"/>
+  <user username="dyannatos@renovations.com" password="passw0rd" roles="user"/>
+  <user username="bzechman@renovations.com" password="passw0rd" roles="user"/>
+  <user username="pazhou@renovations.com" password="passw0rd" roles="user"/>
+</tomcat-users>

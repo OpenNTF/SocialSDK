@@ -18,7 +18,7 @@
  * Social Business Toolkit SDK. 
  * Implementation of a proxy that uses an iFrame.
  */
-define(['sbt/base/declare', 'jquery'], function(declare, $) {
+define(['sbt/base/declare', 'sbt/_bridge/jquery'], function(declare) {
 
     return declare("sbt.base.IFrameTransport", null, {
     
@@ -30,21 +30,21 @@ define(['sbt/base/declare', 'jquery'], function(declare, $) {
     	
     	constructor: function(iframeSrc){
     		var self = this;
-    		$.ready(function() {
-    			var i = self.iframe = $("<iframe></iframe>").attr("src", iframeSrc).addClass("dijitBackgroundIframe").css("opacity", 0.1);
-    			$("body").append(i);
+    		jQuery.ready(function() {
+    			var i = self.iframe = jQuery("<iframe></iframe>").attr("src", iframeSrc).addClass("dijitBackgroundIframe").css("opacity", 0.1);
+    			jQuery("body").append(i);
 
     			if(window.addEventListener) {
-    				window.addEventListener("message", $.proxy(self,self.processMessage), false );
+    				window.addEventListener("message", jQuery.proxy(self,self.processMessage), false );
     			} else {
-    				window.attachEvent("onmessage", $.proxy(self,self.processMessage));
+    				window.attachEvent("onmessage", jQuery.proxy(self,self.processMessage));
     			}
     		});
     	},
     	
     	processMessage: function(e) {
     		if(e.source==this.iframe.contentWindow) {
-    			var o = $.parseJSON(e.data);
+    			var o = jQuery.parseJSON(e.data);
     			if(o.method=="ready") {
     				this.ready = true;
     				for(var r in this.pendings) {
@@ -57,7 +57,7 @@ define(['sbt/base/declare', 'jquery'], function(declare, $) {
     			} else if(o.method=="error") {
     				var req = this.requests[o.id]; this.requests[o.id]=null;
     				var error = new Error();
-    				$.extend(error,o.data);
+    				jQuery.extend(error,o.data);
     				req.handle(error,o.ioArgs);
     			} else {
     			}

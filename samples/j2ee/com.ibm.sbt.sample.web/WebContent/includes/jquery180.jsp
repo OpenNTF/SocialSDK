@@ -1,5 +1,4 @@
 <script type="text/javascript" src="/sbt/js/libs/require.js"></script>
-
 <script type="text/javascript">
 requirejs.config({
        paths: {
@@ -9,7 +8,7 @@ requirejs.config({
         shim : {
             'jquery/ui' : {
                 deps : [ 'jquery' ],
-                exports : '$'
+                exports : 'jQuery'
             }
         }
     });

@@ -183,7 +183,9 @@ var Endpoint = declare("sbt.Endpoint", null, {
                 promise.fullFilled(response.data);
                 promise.response.fullFilled(response);
             }, function(error) {
-            	error.message = self.getErrorMessage(error.cause);
+            	if(!error.message){
+            		error.message = self.getErrorMessage(error.cause);
+            	}
                 if (self._isAuthRequired(error, options)) {
                     return self._authenticate(url, options, promise);
                 }                

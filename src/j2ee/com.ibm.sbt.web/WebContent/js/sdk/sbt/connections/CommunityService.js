@@ -1299,7 +1299,7 @@ define(
 						
 						_checkCommunityPresence : function(obj, args){
 							if (!(obj.community)) {
-								validate.notifyError({
+								util.notifyError({
 									code : communityConstants.sbtErrorCodes.badRequest,
 									message : communityConstants.sbtErrorMessages.null_community
 								}, args);

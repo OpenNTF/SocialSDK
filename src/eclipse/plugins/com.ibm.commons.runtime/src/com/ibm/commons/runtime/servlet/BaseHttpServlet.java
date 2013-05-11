@@ -68,14 +68,21 @@ abstract public class BaseHttpServlet extends HttpServlet {
 		return StringUtil.isEmpty(value) ? defaultValue : value;
 	}
 
-	
+	protected static PrintWriter getWriter(HttpServletResponse response) throws IOException {
+		// Use what is available
+		try {
+    		return response.getWriter();
+		} catch(IllegalStateException ex) {}
+		return new PrintWriter(new OutputStreamWriter(response.getOutputStream(),"utf-8")); 
+	}
+
 	protected void infoServletContext(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			response.setStatus(HttpServletResponse.SC_OK);
 			boolean rtl = isErrorPageRTL(request, response);
 			String title = getErrorPageTitle(request, response);
 			String lang = getErrorPageLang(request, response);
-			PrintWriter w = new PrintWriter(new OutputStreamWriter(response.getOutputStream(), "utf-8"));
+			PrintWriter w = getWriter(response);
 			try {
 				writeServletContext(request, w, title, lang, rtl);
 			} finally {
@@ -161,9 +168,10 @@ abstract public class BaseHttpServlet extends HttpServlet {
 		String title = getErrorPageTitle(request, response);
 		String lang = getErrorPageLang(request, response);
         
-        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+		response.reset();
+		response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         response.setContentType( "text/html" ); 
-        PrintWriter w = new PrintWriter(new OutputStreamWriter(response.getOutputStream(),"utf-8")); 
+        PrintWriter w = getWriter(response);
         try {
             w.println("<html>");
             w.println("<body>");
@@ -192,9 +200,10 @@ abstract public class BaseHttpServlet extends HttpServlet {
 	 */
 	public static void service404(HttpServletRequest request, HttpServletResponse response, String fmt, Object...parameters) throws ServletException, IOException {
         String s = StringUtil.format(fmt, parameters);
+        response.reset();
         response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         response.setContentType( "text/html" ); 
-        PrintWriter w = new PrintWriter(new OutputStreamWriter(response.getOutputStream(),"utf-8")); 
+        PrintWriter w = getWriter(response);
         try {
             w.println("<html>");
             w.println("<body>");
@@ -223,9 +232,10 @@ abstract public class BaseHttpServlet extends HttpServlet {
 	 */
 	public static void service500(HttpServletRequest request, HttpServletResponse response, String fmt, Object...parameters) throws ServletException, IOException {
         String s = StringUtil.format(fmt, parameters);
+        response.reset();
         response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         response.setContentType( "text/html" ); //$NON-NLS-1$
-        PrintWriter w = new PrintWriter(new OutputStreamWriter(response.getOutputStream(),"utf-8")); 
+        PrintWriter w = getWriter(response);
         try {
             w.println("<html>"); 
             w.println("<body>"); 
@@ -259,10 +269,11 @@ abstract public class BaseHttpServlet extends HttpServlet {
     	serviceException(request, response, t, lang, rtl);
     }
     public static void serviceException(HttpServletRequest request, HttpServletResponse response, Throwable t, String lang, boolean isRTL) throws IOException, ServletException {
+		response.reset();
 		response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         response.setContentType( "text/html" ); //$NON-NLS-1$
 
-        PrintWriter writer = new PrintWriter(new OutputStreamWriter(response.getOutputStream(),"utf-8")); 
+        PrintWriter writer = getWriter(response);
 
         writeErrorPageHeader(writer, "Runtime Error", lang, isRTL); 
 

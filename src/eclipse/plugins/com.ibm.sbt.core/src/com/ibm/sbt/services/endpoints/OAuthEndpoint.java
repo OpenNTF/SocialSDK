@@ -49,6 +49,7 @@ import com.ibm.sbt.util.SBTException;
 public class OAuthEndpoint extends AbstractEndpoint {
 
 	protected final OAProvider	oaProvider	= new OAProvider();
+	protected static String		applicationUrl;
 
 	public OAuthEndpoint() {
 	}
@@ -80,7 +81,7 @@ public class OAuthEndpoint extends AbstractEndpoint {
 	@Override
 	public void setUrl(String url) {
 		super.setUrl(url);
-		oaProvider.setUrl(url);
+		// oaProvider.setUrl(url);
 		// Make the URL the service name if not already set
 		if (StringUtil.isEmpty(oaProvider.getServiceName())) {
 			oaProvider.setServiceName(url);
@@ -224,6 +225,7 @@ public class OAuthEndpoint extends AbstractEndpoint {
 	public void initialize(DefaultHttpClient httpClient) throws ClientServicesException {
 		try {
 			AccessToken token = oaProvider.acquireToken(false);
+			applicationUrl = super.getUrl();
 			if (token != null) {
 				HttpRequestInterceptor oauthInterceptor = new OAuthInterceptor(token);
 				httpClient.addRequestInterceptor(oauthInterceptor, 0);
@@ -247,7 +249,7 @@ public class OAuthEndpoint extends AbstractEndpoint {
 			Context contextForHandler = Context.get();
 			OAuthHandler oaHandler = (OAuthHandler) contextForHandler.getSessionMap().get(
 					Configuration.OAUTH_HANDLER);
-			OAProvider oaProvider = (OAProvider) contextForHandler.getSessionMap().get("oaProvider");
+			contextForHandler.getSessionMap().get("oaProvider");
 			String authorizationheader = null;
 			if (oaHandler.getClass().equals(HMACOAuth1Handler.class)) {
 
@@ -265,7 +267,7 @@ public class OAuthEndpoint extends AbstractEndpoint {
 					}
 				}
 				try {
-					requestUri = PathUtil.concat(oaProvider.getUrl(), requestUri, '/');
+					requestUri = PathUtil.concat(applicationUrl, requestUri, '/');
 
 					// creating authorization header
 					authorizationheader = ((HMACOAuth1Handler) oaHandler).createAuthorizationHeader(

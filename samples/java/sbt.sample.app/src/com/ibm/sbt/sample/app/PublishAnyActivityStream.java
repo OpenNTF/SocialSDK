@@ -16,8 +16,12 @@
 package com.ibm.sbt.sample.app;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -30,10 +34,8 @@ import com.ibm.commons.runtime.properties.FileResourcePropertiesFactory;
 import com.ibm.commons.util.io.json.JsonException;
 import com.ibm.commons.util.io.json.JsonJavaFactory;
 import com.ibm.commons.util.io.json.JsonJavaObject;
-import com.ibm.commons.util.io.json.JsonObject;
 import com.ibm.commons.util.io.json.JsonParser;
 import com.ibm.sbt.security.authentication.AuthenticationException;
-import com.ibm.sbt.services.client.SBTServiceException;
 import com.ibm.sbt.services.client.activitystreams.ActivityStreamService;
 import com.ibm.sbt.services.endpoints.BasicEndpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
@@ -57,11 +59,22 @@ public class PublishAnyActivityStream {
 		StringBuilder sb = new StringBuilder();
 		try {
 			String sCurrentLine;
-			br = new BufferedReader(new FileReader(filePath));
-			while ((sCurrentLine = br.readLine()) != null) {
-				sb.append(sCurrentLine);
+			
+			URL path = getClass().getResource(filePath);
+			if(path!=null) {
+				File f;
+				f = new File(path.toURI());
+				br = new BufferedReader(new FileReader(f));
+				while ((sCurrentLine = br.readLine()) != null) {
+					sb.append(sCurrentLine);
+				}
+			} else {
+				throw new FileNotFoundException();
 			}
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			try {
@@ -73,12 +86,31 @@ public class PublishAnyActivityStream {
 		return sb.toString();
 	}
 	
+	
 	/*
 	 * Merges template with data
 	 */
 	private JsonJavaObject mergeData(String templatePath, String propertiesPath) throws JsonException{
 		String template = readFile(templatePath);
 		FileResourcePropertiesFactory frpf = new FileResourcePropertiesFactory(propertiesPath);
+		
+		Enumeration<?> keys = frpf.getKeys();
+		
+		while(keys.hasMoreElements()) {
+			String key = (String)keys.nextElement();
+			String value = frpf.getProperty(key);
+			template = template.replaceAll("\\^\\{"+key+"\\}\\$", value);
+		}
+		
+		/*int lastIndex = 0;
+		int beginIndex = 0;
+		int endIndex = 0;
+		
+		beginIndex = template.indexOf("^{", lastIndex);
+		lastIndex = endIndex = template.indexOf("}$", beginIndex);
+		
+		
+		*/
 		JsonJavaObject templateObj = (JsonJavaObject)JsonParser.fromJson(JsonJavaFactory.instanceEx, template);
 		for (Iterator<String> it = templateObj.getJsonProperties(); it.hasNext(); ) {
 			String key=it.next();
@@ -94,26 +126,25 @@ public class PublishAnyActivityStream {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		if (args.length >=3) {
+		if (args.length >=2) {
 			PublishAnyActivityStream paas = new PublishAnyActivityStream();
 			RuntimeFactory runtimeFactory = new RuntimeFactoryStandalone();
 			Application application = runtimeFactory.initApplication(null);
 			Context context = Context.init(application, null, null);
 			BasicEndpoint endpoint = (BasicEndpoint)EndpointFactory.getEndpoint(ActivityStreamService.DEFAULT_ENDPOINT_NAME);
 			try {
-				JsonJavaObject data = paas.mergeData(args[1], args[2]);
+				JsonJavaObject data = paas.mergeData(args[0], args[1]);
 				endpoint.login("admin", "passw0rd", true);
 				ActivityStreamService _service = new ActivityStreamService();
 		        Map<String, String> header = new HashMap<String, String>();
 				header.put("Content-Type", APPLICATION_JSON);
-				_service.postEntry(data, header);
+				//_service.postEntry(data, header);
 			} catch (AuthenticationException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} catch (SBTServiceException e) {
-				// TODO Auto-generated catch block
+			}/* catch (SBTServiceException e) {
 				e.printStackTrace();
-			} catch (JsonException e) {
+			}*/ catch (JsonException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

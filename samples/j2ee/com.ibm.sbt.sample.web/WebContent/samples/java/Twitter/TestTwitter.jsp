@@ -27,12 +27,11 @@
 	 	
 	<%
 		String twitterUrl = "1/followers/ids.json";
-		ClientService svc = new SmartCloudService(EndpointFactory.getEndpoint("twitter"));
+        ClientService svc = ep.getClientService();
         
-       Map<String, String> params = new HashMap<String,String>();
-     /*    params.put("page", "1"); 
-         params.put("count", "3"); 
-         params.put("ps", "1");  */
+       	Map<String, String> params = new HashMap<String,String>();
+     	params.put("page", "1"); 
+        params.put("count", "3"); 
         
         Object result = svc.get( twitterUrl, params);
 	 %>

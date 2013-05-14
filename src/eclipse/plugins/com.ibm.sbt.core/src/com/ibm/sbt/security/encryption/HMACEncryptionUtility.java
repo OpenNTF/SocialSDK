@@ -79,10 +79,6 @@ public class HMACEncryptionUtility {
 		return encodedStr;
 	}
 
-	public static String percentDecode(String str) {
-		return str;
-	}
-
 	public static String generateParameterString(Map<String, String> paramsMap) {
 
 		StringBuilder parameterString = new StringBuilder();

@@ -36,6 +36,7 @@ import com.ibm.commons.util.io.json.JsonJavaFactory;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.commons.util.io.json.JsonParser;
 import com.ibm.sbt.security.authentication.AuthenticationException;
+import com.ibm.sbt.services.client.SBTServiceException;
 import com.ibm.sbt.services.client.activitystreams.ActivityStreamService;
 import com.ibm.sbt.services.endpoints.BasicEndpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
@@ -93,7 +94,6 @@ public class PublishAnyActivityStream {
 	private JsonJavaObject mergeData(String templatePath, String propertiesPath) throws JsonException{
 		String template = readFile(templatePath);
 		FileResourcePropertiesFactory frpf = new FileResourcePropertiesFactory(propertiesPath);
-		
 		Enumeration<?> keys = frpf.getKeys();
 		
 		while(keys.hasMoreElements()) {
@@ -102,23 +102,7 @@ public class PublishAnyActivityStream {
 			template = template.replaceAll("\\^\\{"+key+"\\}\\$", value);
 		}
 		
-		/*int lastIndex = 0;
-		int beginIndex = 0;
-		int endIndex = 0;
-		
-		beginIndex = template.indexOf("^{", lastIndex);
-		lastIndex = endIndex = template.indexOf("}$", beginIndex);
-		
-		
-		*/
 		JsonJavaObject templateObj = (JsonJavaObject)JsonParser.fromJson(JsonJavaFactory.instanceEx, template);
-		for (Iterator<String> it = templateObj.getJsonProperties(); it.hasNext(); ) {
-			String key=it.next();
-			String value = frpf.getProperty(key);
-			if (null!=value) {
-				templateObj.putJsonProperty(key, value);
-			}
-		}
 		return templateObj;
 	}
 	
@@ -138,13 +122,13 @@ public class PublishAnyActivityStream {
 				ActivityStreamService _service = new ActivityStreamService();
 		        Map<String, String> header = new HashMap<String, String>();
 				header.put("Content-Type", APPLICATION_JSON);
-				//_service.postEntry(data, header);
+				_service.postEntry(data, header);
 			} catch (AuthenticationException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}/* catch (SBTServiceException e) {
+			} catch (SBTServiceException e) {
 				e.printStackTrace();
-			}*/ catch (JsonException e) {
+			} catch (JsonException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

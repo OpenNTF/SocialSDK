@@ -157,10 +157,11 @@ public abstract class ClientService {
 		}
 		return false;
 	}
+
 	protected String getHttpProxy() throws ClientServicesException {
 		if (endpoint != null) {
 			String proxyinfo = endpoint.getHttpProxy();
-			if(StringUtil.isEmpty(proxyinfo)){
+			if (StringUtil.isEmpty(proxyinfo)) {
 				proxyinfo = Context.get().getProperty("sbt.httpProxy");
 			}
 			return proxyinfo;
@@ -912,8 +913,7 @@ public abstract class ClientService {
 
 	protected Object processResponse(HttpClient httpClient, HttpRequestBase httpRequestBase,
 			HttpResponse response, Args args) throws ClientServicesException {
-		if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK
-				&& response.getStatusLine().getStatusCode() != HttpStatus.SC_CREATED) {
+		if (!checkStatus(response.getStatusLine().getStatusCode())) {
 			if (SbtCoreLogger.SBT.isErrorEnabled()) {
 				// Do not throw an exception here as some of the non OK responses are not error cases.
 				SbtCoreLogger.SBT
@@ -931,6 +931,13 @@ public abstract class ClientService {
 			return null;
 		}
 		return _parseResult(httpRequestBase, response, args.handler);
+	}
+
+	private boolean checkStatus(int statusCode) {
+		if (statusCode >= 200 && statusCode < 300) {
+			return true;
+		}
+		return false;
 	}
 
 	// =================================================================
@@ -1104,9 +1111,9 @@ public abstract class ClientService {
 		}
 		// Capture network traffic through a network proxy like Fiddler or WireShark for debug purposes
 		if (StringUtil.isNotEmpty(getHttpProxy())) {
-			return ProxyDebugUtil.wrapHttpClient(httpClient,getHttpProxy());
+			return ProxyDebugUtil.wrapHttpClient(httpClient, getHttpProxy());
 		}
-		
+
 		return httpClient;
 	}
 }

@@ -33,6 +33,7 @@ import com.ibm.sbt.services.util.SSLUtil;
 
 /**
  * @author Vimal Dhupar
+ * @author Manish Kataria
  */
 
 public class OAuth1Handler extends OAuthHandler {
@@ -313,19 +314,13 @@ public class OAuth1Handler extends OAuthHandler {
 		OAProvider oaprovider = getOAProvider();
 		StringBuilder authHdr = new StringBuilder(1024);
 		authHdr.append("OAuth ");
-		authHdr.append(Configuration.CONSUMER_KEY).append("='")
-				.append(percentEncode(oaprovider.getConsumerKey())).append("',");
-		authHdr.append(Configuration.OAUTH_TOKEN).append("='").append(percentEncode(accessToken))
-				.append("',");
-		authHdr.append(Configuration.SIGNATURE_METHOD).append("='").append(Configuration.PLAINTEXT_SIGNATURE)
-				.append("',");
-		authHdr.append(Configuration.SIGNATURE).append("='")
-				.append(percentEncode(buildSignature(oaprovider.getConsumerSecret(), accessTokenSecret)))
-				.append("',");
-		authHdr.append(Configuration.TIMESTAMP).append("='").append(percentEncode(getTimestamp()))
-				.append("',");
-		authHdr.append(Configuration.NONCE).append("='").append(percentEncode(getNonce())).append("',");
-		authHdr.append(Configuration.VERSION).append("='").append(Configuration.OAUTH_VERSION1).append("'");
+		authHdr.append(Configuration.CONSUMER_KEY).append("=\"").append(percentEncode(oaprovider.getConsumerKey())).append("\",");
+		authHdr.append(Configuration.OAUTH_TOKEN).append("=\"").append(percentEncode(accessToken)).append("\",");
+		authHdr.append(Configuration.SIGNATURE_METHOD).append("=\"").append(Configuration.PLAINTEXT_SIGNATURE).append("\",");
+		authHdr.append(Configuration.SIGNATURE).append("=\"").append(percentEncode(buildSignature(oaprovider.getConsumerSecret(), getAccessTokenSecret()))).append("\",");
+		authHdr.append(Configuration.TIMESTAMP).append("=\"").append(percentEncode(getTimestamp())).append("\",");
+		authHdr.append(Configuration.NONCE).append("=\"").append(percentEncode(getNonce())).append("\",");
+		authHdr.append(Configuration.VERSION).append("=\"").append(Configuration.OAUTH_VERSION1).append("\"");
 		return authHdr.toString();
 	}
 

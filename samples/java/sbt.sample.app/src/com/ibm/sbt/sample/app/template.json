@@ -1,10 +1,10 @@
 {
     generator : {
         image : {
-            url : "^{homepageUrl}$favicon.ico"
+            url : "^{homePageUrl}$favicon.ico"
         },
-        id : "AcmeAirlines",
-        displayName : "Acme Airlines",
+        id : "^{generator.id}$",
+        displayName : "^{generator.displayName}$",
         url : "^{homePageUrl}$"
     },
     actor : {
@@ -13,7 +13,7 @@
     verb : "created",
     title : "${Actor} created a ${Object} in the ${Target}.",
     content : "Please approve ^{personObj.displayName}$'s flight request for flight ^{flight.FlightId}$.",
-    updated : "2012-01-01T12:00:00.000Z",
+    updated : "^{updated}$",
     object : {
         summary : "^{personObj.displayName}$ is requesting to fly from ^{flight.Depart}$ to ^{flight.Arrive}$ on flight ^{flight.FlightId}$.",
         objectType : "flight",
@@ -22,10 +22,10 @@
         url : "^{homePageUrl}$"
     },
     target : {
-        summary : "Airlines Booking App",
+        summary : "^{target.summary}$",
         objectType : "application",
-        id : "AcmeAirlines",
-        displayName : "Acme Airlines Booking App",
+        id : "^{target.id}$",
+        displayName : "^{target.displayName}$",
         url : "^{homePageUrl}$"
     },
     openSocial : {

@@ -128,6 +128,7 @@ public class ProxyEndpointService extends ProxyService {
     protected void initEndpoint(HttpRequestBase method, HttpServletRequest request, DefaultHttpClient client, Endpoint endpoint) throws ServletException {
         try {
             endpoint.initialize(client);
+            endpoint.updateHeaders(client, request, method);
         } catch(ClientServicesException ex) {
             throw new ServletException(ex);
         }

@@ -18,6 +18,11 @@ package com.ibm.sbt.services.endpoints;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.impl.client.DefaultHttpClient;
+
 import com.ibm.commons.runtime.Application;
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.util.StringUtil;
@@ -370,5 +375,14 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     @Override
     public String getProxyQueryArgs() {
     	return null;
+    }
+    @Override
+    public void updateHeaders(DefaultHttpClient client, HttpServletRequest request, HttpRequestBase method) {
+    }
+    @Override
+    public void updateUrl(DefaultHttpClient client, HttpServletRequest request, String url) {
+    }
+    @Override
+    public void handleAuthenticationError(HttpServletRequest request) {
     }
 }

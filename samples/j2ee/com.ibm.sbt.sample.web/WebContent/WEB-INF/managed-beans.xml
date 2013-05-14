@@ -457,7 +457,7 @@
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>twitter</managed-bean-name>
-		<managed-bean-class>com.ibm.sbt.services.endpoints.TwitterOAuth1Endpoint</managed-bean-class>
+		<managed-bean-class>com.ibm.sbt.services.endpoints.OAuthEndpoint</managed-bean-class>
 		<managed-bean-scope>application</managed-bean-scope>
 		<!-- Endpoint URL -->
 		<managed-property>

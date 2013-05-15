@@ -87,6 +87,16 @@ public class UrlUtil {
 		return b.toString();
 	}
 
+	/**
+	 * getParamsMap
+	 * <p>
+	 * Method to obtain a map of parameters from the request Uri containing query string parameters added to
+	 * it.
+	 * 
+	 * @param requestUriWithQueryParams
+	 *            - input is the request Uri containing the parameters added to it as Query String parameters.
+	 * @return - Map of parameters, extracted from the Uri
+	 */
 	public static Map<String, String> getParamsMap(String requestUriWithQueryParams) {
 		Map<String, String> mapOfParams = new TreeMap<String, String>();
 		if (requestUriWithQueryParams.contains("?")) {

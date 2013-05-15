@@ -15,7 +15,7 @@ function login(loginUi) {
 	require(['sbt/Endpoint',"sbt/dom","sbt/config"], function(Endpoint,dom,config) {
 		config.Properties["loginUi"] = loginUi;
 		Endpoint.find("connectionsOA2").authenticate({
-			success: function(response){
+			load: function(response){
 				dom.setText("ConnOAuth2LoginStatus","You are authenticated");
 				dom.byId("ConnOAuth2Login").style.display = "none";
 				dom.byId("ConnOAuth2Logout").style.display = "inline";	

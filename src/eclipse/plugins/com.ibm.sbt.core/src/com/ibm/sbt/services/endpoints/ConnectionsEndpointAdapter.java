@@ -23,12 +23,11 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.http.Header;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import com.ibm.commons.runtime.Context;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.StreamUtil;
 import com.ibm.sbt.services.client.ClientService;
@@ -76,7 +75,7 @@ class ConnectionsEndpointAdapter {
      * retrieved and cached in the user session for later use or the already
      * cached value will be reused.
      */
-    void updateHeaders(DefaultHttpClient client, HttpServletRequest request, HttpRequestBase method) {
+    void updateHeaders(DefaultHttpClient client, HttpRequestBase method) {
         try {
             List<Header> headers = findTokenHeaders(method);
             if (headers.isEmpty()) {
@@ -84,7 +83,7 @@ class ConnectionsEndpointAdapter {
             }
             for (Header header : headers) {
                 if (X_UPDATE_NONCE.equalsIgnoreCase(header.getName())) {
-                    updateNonceHeader(request, method);
+                    updateNonceHeader(method);
                 }
             }
         } catch (Exception e) {
@@ -105,8 +104,8 @@ class ConnectionsEndpointAdapter {
      * this allow the cached 'X-Update-Nonce' to be cleared as it it no longer valid
      * after an authentication failure.
      */
-    void handleAuthenticationError(HttpServletRequest request) {
-        clearNonceHeader(request);
+    void handleAuthenticationError() {
+        clearNonceHeader();
     }
     
     //
@@ -116,24 +115,16 @@ class ConnectionsEndpointAdapter {
     /*
      * Update the nonce header with the real value. 
      */
-    private void updateNonceHeader(HttpServletRequest request, HttpRequestBase method) throws ClientServicesException, IOException {
+    private void updateNonceHeader(HttpRequestBase method) throws ClientServicesException, IOException {
         if (!endpoint.isAuthenticated()) {
-            clearNonceHeader(request);
+            clearNonceHeader();
             return;
         }
         
-        String nonce = retrieveNonceHeader(request);
+        String nonce = retrieveNonceHeader();
         updateNonceHeader(method, nonce);
     }
 
-    /*
-     * Return true if the method contains a valid 'X-Update-Nonce' header.
-     */
-    private boolean hasValidNonceHeader(HttpRequestBase method) {
-        Header header = findHeader(method, X_UPDATE_NONCE);
-        return (header != null && !"{X-Update-Nonce}".equalsIgnoreCase(header.getValue()));
-    }
-    
     /*
      * Return the named header
      */
@@ -176,8 +167,11 @@ class ConnectionsEndpointAdapter {
     /*
      * Remove any cached 'X-Update-Nonce' header.
      */
-    private void clearNonceHeader(HttpServletRequest request) {
-        request.getSession().removeAttribute(X_UPDATE_NONCE);
+    private void clearNonceHeader() {
+        Context context = Context.getUnchecked();
+        if (context != null) {
+            context.getSessionMap().remove(X_UPDATE_NONCE);
+        }
     }
 
     /*
@@ -195,8 +189,12 @@ class ConnectionsEndpointAdapter {
      * Retrieve the current nonce value i.e. if the value exists in the cache then
      * user that value otherwise emit a request to retrieve it.
      */
-    private String retrieveNonceHeader(HttpServletRequest request) throws ClientServicesException, IOException {
-        Object nonce = request.getSession().getAttribute(X_UPDATE_NONCE);
+    private String retrieveNonceHeader() throws ClientServicesException, IOException {
+        Object nonce = null;
+        Context context = Context.getUnchecked();
+        if (context != null) {
+            nonce = context.getSessionMap().get(X_UPDATE_NONCE);
+        }
         if (nonce != null) {
             // return the cached value
             return nonce.toString();
@@ -205,7 +203,7 @@ class ConnectionsEndpointAdapter {
             nonce = StreamUtil.readString(response);
             
             // cache the value
-            request.getSession().setAttribute(X_UPDATE_NONCE, nonce);
+            context.getSessionMap().put(X_UPDATE_NONCE, nonce);
             
             return nonce.toString();
         }

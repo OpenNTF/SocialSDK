@@ -16,7 +16,6 @@
  */
 package com.ibm.sbt.services.endpoints;
 
-import javax.servlet.http.HttpServletRequest;
 
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -42,8 +41,8 @@ public class ConnectionsBasicEndpoint extends BasicEndpoint {
     }
     
     @Override
-    public void updateHeaders(DefaultHttpClient client, HttpServletRequest request, HttpRequestBase method) {
-        endpointAdapter.updateHeaders(client, request, method);
+    public void updateHeaders(DefaultHttpClient client, HttpRequestBase method) {
+        endpointAdapter.updateHeaders(client, method);
     }
 
     @Override

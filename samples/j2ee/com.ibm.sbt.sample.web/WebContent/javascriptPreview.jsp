@@ -12,18 +12,16 @@
 <html lang="en" style="height: 100%;">
   <%
       String snippetName = request.getParameter("snippet");
-      JSSnippet snippet = (JSSnippet)SnippetFactory.getJsSnippet(application, request, snippetName);
       String html = null;
       String js = null;
       String css = null;
       String theme = request.getParameter("themeId");
-      if(StringUtil.isEmpty(theme))
-          theme = snippet.getTheme();
       boolean debug = false;
       boolean loadDojo = true;
       
       // doGet
       if(request.getMethod().equals("GET")){
+          JSSnippet snippet = (JSSnippet)SnippetFactory.getJsSnippet(application, request, snippetName);
           if (snippet != null) {
               if (html == null)
                   html = snippet.getHtml();
@@ -31,6 +29,8 @@
                   js = snippet.getJs();
               if (css == null)
                   css = snippet.getCss();
+              if(StringUtil.isEmpty(theme))
+                  theme = snippet.getTheme();
           
               // replace substitution variables
               if (StringUtil.isNotEmpty(js)) {
@@ -43,6 +43,11 @@
       } 
       // doPost
       else if (request.getMethod().equals("POST")){
+    	  JSSnippet snippet = null;
+          if (StringUtil.isEmpty(theme)){
+              snippet = (JSSnippet)SnippetFactory.getJsSnippet(application, request, snippetName);
+              theme = snippet.getTheme();
+          }
           html = request.getParameter("htmlData");
           js = request.getParameter("jsData");
           css = request.getParameter("cssData");

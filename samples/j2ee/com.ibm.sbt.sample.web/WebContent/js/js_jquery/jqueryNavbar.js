@@ -43,7 +43,19 @@
             $(this).removeCodeMirror();
         });
         var el = this.get(0);
-        if(el && el.firstChild && !el.firstChild.CodeMirror){
+        if(el){
+            var add = false;
+            // add if no children or if no codemirror.
+            if(el.firstChild){
+                if(el.firstChild.CodeMirror) 
+                    add = false;
+                else
+                    add = true;
+            }
+            else{
+                add = true;
+            }
+            if(add)
             this.addCodeMirror(mode);
         }
         

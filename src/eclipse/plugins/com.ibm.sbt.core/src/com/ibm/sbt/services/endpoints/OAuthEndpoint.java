@@ -49,7 +49,6 @@ import com.ibm.sbt.util.SBTException;
 public class OAuthEndpoint extends AbstractEndpoint {
 
 	protected final OAProvider	oaProvider	= new OAProvider();
-	protected static String		applicationUrl;
 
 	public OAuthEndpoint() {
 	}
@@ -225,9 +224,8 @@ public class OAuthEndpoint extends AbstractEndpoint {
 	public void initialize(DefaultHttpClient httpClient) throws ClientServicesException {
 		try {
 			AccessToken token = oaProvider.acquireToken(false);
-			applicationUrl = super.getUrl();
 			if (token != null) {
-				HttpRequestInterceptor oauthInterceptor = new OAuthInterceptor(token);
+				HttpRequestInterceptor oauthInterceptor = new OAuthInterceptor(token, super.getUrl());
 				httpClient.addRequestInterceptor(oauthInterceptor, 0);
 			}
 		} catch (OAuthException ex) {
@@ -238,9 +236,17 @@ public class OAuthEndpoint extends AbstractEndpoint {
 	private static class OAuthInterceptor implements HttpRequestInterceptor {
 
 		private final AccessToken	token;
+		private final String		baseUrl;
 
+		@SuppressWarnings("unused")
 		public OAuthInterceptor(AccessToken token) {
 			this.token = token;
+			this.baseUrl = null;
+		}
+
+		public OAuthInterceptor(AccessToken token, String baseUrl) {
+			this.token = token;
+			this.baseUrl = baseUrl;
 		}
 
 		@Override
@@ -257,7 +263,7 @@ public class OAuthEndpoint extends AbstractEndpoint {
 				Map<String, String> mapOfParams = UrlUtil.getParamsMap(requestUri);
 				try {
 					requestUri = requestUri.substring(0, requestUri.indexOf("?"));
-					requestUri = PathUtil.concat(applicationUrl, requestUri, '/');
+					requestUri = PathUtil.concat(baseUrl, requestUri, '/');
 
 					// creating authorization header
 					authorizationheader = ((HMACOAuth1Handler) oaHandler).createAuthorizationHeader(

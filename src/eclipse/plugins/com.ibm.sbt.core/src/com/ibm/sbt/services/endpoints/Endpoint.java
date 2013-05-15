@@ -13,12 +13,9 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-
 package com.ibm.sbt.services.endpoints;
 
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -30,7 +27,6 @@ import com.ibm.sbt.services.client.ClientService.Handler;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.endpoints.js.JSReference;
 import com.ibm.sbt.util.SBTException;
-
 
 /**
  * Service end point.
@@ -384,17 +380,16 @@ public interface Endpoint {
     /**
      * Allows an endpoint to update the headers for the specified request.
      */
-    public void updateHeaders(DefaultHttpClient client, HttpServletRequest request, HttpRequestBase method);
+    public void updateHeaders(DefaultHttpClient client, HttpRequestBase method);
     
     /**
      * Allows an endpoint to update the url for the specified request.
      */
-    public void updateUrl(DefaultHttpClient client, HttpServletRequest request, String url);
+    public void updateUrl(DefaultHttpClient client, String url);
 
     /**
      * Notifies the endpoint that en authentication error was detected for the specified request.
-     * @param request
      */
-    public void handleAuthenticationError(HttpServletRequest request);
+    public void handleAuthenticationError();
 
 }

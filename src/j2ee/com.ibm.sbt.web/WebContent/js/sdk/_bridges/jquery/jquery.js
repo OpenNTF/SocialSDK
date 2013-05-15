@@ -18,7 +18,7 @@
  * @module jquery
  */
 
-define(['jquery',],function() {
+define(['jquery'],function() {
 	function getJQuery() {
 		if (typeof jQuery != 'undefined') {
 			return $.noConflict();

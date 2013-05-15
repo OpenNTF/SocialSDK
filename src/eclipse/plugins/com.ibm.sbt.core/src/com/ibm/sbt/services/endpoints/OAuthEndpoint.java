@@ -18,7 +18,6 @@ package com.ibm.sbt.services.endpoints;
 
 import java.io.IOException;
 import java.util.Map;
-import java.util.TreeMap;
 import org.apache.http.HttpException;
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpRequestInterceptor;
@@ -26,6 +25,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.HttpContext;
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.RuntimeConstants;
+import com.ibm.commons.runtime.util.UrlUtil;
 import com.ibm.commons.util.PathUtil;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.core.configuration.Configuration;
@@ -49,7 +49,6 @@ import com.ibm.sbt.util.SBTException;
 public class OAuthEndpoint extends AbstractEndpoint {
 
 	protected final OAProvider	oaProvider	= new OAProvider();
-	protected static String		applicationUrl;
 
 	public OAuthEndpoint() {
 	}
@@ -225,9 +224,8 @@ public class OAuthEndpoint extends AbstractEndpoint {
 	public void initialize(DefaultHttpClient httpClient) throws ClientServicesException {
 		try {
 			AccessToken token = oaProvider.acquireToken(false);
-			applicationUrl = super.getUrl();
 			if (token != null) {
-				HttpRequestInterceptor oauthInterceptor = new OAuthInterceptor(token);
+				HttpRequestInterceptor oauthInterceptor = new OAuthInterceptor(token, super.getUrl());
 				httpClient.addRequestInterceptor(oauthInterceptor, 0);
 			}
 		} catch (OAuthException ex) {
@@ -238,9 +236,17 @@ public class OAuthEndpoint extends AbstractEndpoint {
 	private static class OAuthInterceptor implements HttpRequestInterceptor {
 
 		private final AccessToken	token;
+		private final String		baseUrl;
 
+		@SuppressWarnings("unused")
 		public OAuthInterceptor(AccessToken token) {
 			this.token = token;
+			this.baseUrl = null;
+		}
+
+		public OAuthInterceptor(AccessToken token, String baseUrl) {
+			this.token = token;
+			this.baseUrl = baseUrl;
 		}
 
 		@Override
@@ -252,22 +258,12 @@ public class OAuthEndpoint extends AbstractEndpoint {
 			contextForHandler.getSessionMap().get("oaProvider");
 			String authorizationheader = null;
 			if (oaHandler.getClass().equals(HMACOAuth1Handler.class)) {
-
-				Map<String, String> mapOfParams = new TreeMap<String, String>();
 				String requestUri = request.getRequestLine().getUri().toString();
-				if (requestUri.contains("?")) {
-
-					// if parameters are a part of the request uri
-					String queryStr = requestUri.substring(requestUri.indexOf("?") + 1, requestUri.length());
-					requestUri = requestUri.substring(0, requestUri.indexOf("?"));
-					String[] paramsList = queryStr.split("&");
-					for (String i : paramsList) {
-						String[] parameter = i.split("=");
-						mapOfParams.put(parameter[0], parameter[1]);
-					}
-				}
+				// Using UrlUtil's getParamsMap for creating the ParamsMap from the query String Request Uri.
+				Map<String, String> mapOfParams = UrlUtil.getParamsMap(requestUri);
 				try {
-					requestUri = PathUtil.concat(applicationUrl, requestUri, '/');
+					requestUri = requestUri.substring(0, requestUri.indexOf("?"));
+					requestUri = PathUtil.concat(baseUrl, requestUri, '/');
 
 					// creating authorization header
 					authorizationheader = ((HMACOAuth1Handler) oaHandler).createAuthorizationHeader(
@@ -277,11 +273,10 @@ public class OAuthEndpoint extends AbstractEndpoint {
 							"OAuthException thrown while creating Authorization header in OAuthInterceptor",
 							e);
 				}
-				request.addHeader("Authorization", authorizationheader);
 			} else {
 				authorizationheader = oaHandler.createAuthorizationHeader();
-				request.addHeader("Authorization", authorizationheader);
 			}
+			request.addHeader("Authorization", authorizationheader);
 		}
 	}
 }

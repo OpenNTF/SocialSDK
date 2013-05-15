@@ -31,9 +31,9 @@
         var jsDiv = document.getElementById("jsContents"); 
         var cssDiv = document.getElementById("cssContents");
 
-        var html = htmlDiv.firstChild.CodeMirror ? htmlDiv.firstChild.CodeMirror.getValue() : htmlDiv.textContent;
-        var js = jsDiv.firstChild.CodeMirror ? jsDiv.firstChild.CodeMirror.getValue() : jsDiv.textContent;
-        var css = cssDiv.firstChild.CodeMirror ? cssDiv.firstChild.CodeMirror.getValue() : cssDiv.textContent;
+        var html = htmlDiv.firstChild && htmlDiv.firstChild.CodeMirror ? htmlDiv.firstChild.CodeMirror.getValue() : htmlDiv.textContent;
+        var js = jsDiv.firstChild && jsDiv.firstChild.CodeMirror ? jsDiv.firstChild.CodeMirror.getValue() : jsDiv.textContent;
+        var css = cssDiv.firstChild && cssDiv.firstChild.CodeMirror ? cssDiv.firstChild.CodeMirror.getValue() : cssDiv.textContent;
 
         $.post(previewPage, { snippet: getSnippet(), htmlData: html, jsData: js, cssData: css, debug: debug, jsLibId:getJsLibId(), themeId: getThemeId()}, function(data) {
                 var wrapper = $(".iframeWrapper");

@@ -18,6 +18,9 @@ package com.ibm.sbt.services.endpoints;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.ibm.sbt.security.authentication.AuthenticationException;
@@ -368,13 +371,30 @@ public interface Endpoint {
     public boolean isForceTrustSSLCertificate();
 
     /**
-     * This is to be used in development/debug mode only, when we want to capture all network traffic from SDK
+     * This is to be used in development/debug mode only, when we want to capture all network traffic from SDK.
      */
     public String getHttpProxy();
 
     
-    /*
-     * allows an endpoint to append query args to a proxied request 
+    /**
+     * Allows an endpoint to append query args to a proxied request.
      */ 
     public String getProxyQueryArgs();
+
+    /**
+     * Allows an endpoint to update the headers for the specified request.
+     */
+    public void updateHeaders(DefaultHttpClient client, HttpServletRequest request, HttpRequestBase method);
+    
+    /**
+     * Allows an endpoint to update the url for the specified request.
+     */
+    public void updateUrl(DefaultHttpClient client, HttpServletRequest request, String url);
+
+    /**
+     * Notifies the endpoint that en authentication error was detected for the specified request.
+     * @param request
+     */
+    public void handleAuthenticationError(HttpServletRequest request);
+
 }

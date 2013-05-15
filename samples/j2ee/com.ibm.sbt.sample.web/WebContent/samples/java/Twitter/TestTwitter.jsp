@@ -12,7 +12,7 @@
 	pageEncoding="ISO-8859-1"%>
 <html>
 <head>
-	<title>SBTX Sample - Twitter</title>
+	<title>Twitter Sample</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 <body>
@@ -26,12 +26,10 @@
 	 	
 	<%
 		String twitterUrl = "1/followers/ids.json";
-		ClientService svc  = ep.getClientService();        
      	Map<String, String> params = new HashMap<String,String>();
        	params.put("page", "1"); 
         params.put("count", "3"); 
-        
-        Object result = svc.get( twitterUrl, params);
+        Object result = ep.xhrGet(twitterUrl, params);
 	 %>
 	 <pre>
 	 <code>

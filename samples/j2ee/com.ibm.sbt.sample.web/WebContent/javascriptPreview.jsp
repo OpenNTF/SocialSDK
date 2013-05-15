@@ -17,6 +17,8 @@
       String js = null;
       String css = null;
       String theme = request.getParameter("themeId");
+      if(StringUtil.isEmpty(theme))
+          theme = snippet.getTheme();
       boolean debug = false;
       boolean loadDojo = true;
       
@@ -29,8 +31,6 @@
                   js = snippet.getJs();
               if (css == null)
                   css = snippet.getCss();
-              if(theme == null)
-                  theme = snippet.getTheme();
           
               // replace substitution variables
               if (StringUtil.isNotEmpty(js)) {
@@ -88,7 +88,7 @@
         String s = "<script>" + js + "</script>\n";
         out.println(s);
     } else {
-    	out.println("<div>Error, unable to load snippet: "+snippetName+"</div>");
+        out.println("<div>Error, unable to load snippet: "+snippetName+"</div>");
     }
     %>
   </body>

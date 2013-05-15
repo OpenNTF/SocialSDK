@@ -261,12 +261,12 @@ public class ApplicationEndpoint implements Endpoint {
     	return null;
     }
     @Override
-    public void updateHeaders(DefaultHttpClient client, HttpServletRequest request, HttpRequestBase method) {
+    public void updateHeaders(DefaultHttpClient client, HttpRequestBase method) {
     }
     @Override
-    public void updateUrl(DefaultHttpClient client, HttpServletRequest request, String url) {
+    public void updateUrl(DefaultHttpClient client, String url) {
     }
     @Override
-    public void handleAuthenticationError(HttpServletRequest request) {
+    public void handleAuthenticationError() {
     }
 }

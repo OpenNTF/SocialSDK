@@ -17,6 +17,11 @@
 		.lotusui30 .lotusBanner ul li a { padding: 8px 16px 8px; }
 		.lotusui30 .lotusBanner ul.lotusUtility li a { padding: 8px 16px 8px; }	
 		.lotusui30 .lotusPlaceBar .lotusInner { padding: 8px 0; }
-		.lotusui30 .lotusTitleBar2 .lotusNavTabs {padding-top: 5px;}		
+		.lotusui30 .lotusTitleBar2 .lotusNavTabs {padding-top: 5px;}
+		/* fix the form inside the title */
+		.lotusui30 .lotusDialog h2 {color: black;background: white;background-color: transparent;}
+		/* no border on fieldset */
+		fieldset { border: 0; }
+		.lotusui30 .lotusFormTable {margin: 0;}				
 	</style>
 </xp:view>

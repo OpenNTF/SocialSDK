@@ -60,7 +60,14 @@
                              treeNode.domNode.id = args.item.url;
                              setTimeout(function(){//small timeout to ensure that when this event is fired the tnode is already returned.
                                  var tree = dom.byId("tree");
-                                 var event = new CustomEvent("newNodeEvent", {});
+                                 var event;
+                                 if(document.createEvent){
+                                     event = document.createEvent('HTMLEvents');
+                                     event.initEvent("newNodeEvent", true, true);
+                                 }else if(document.createEventObject){// IE < 9
+                                     event = document.createEventObject();
+                                     event.eventType = "newNodeEvent";
+                                 }
                                  tree.dispatchEvent(event);
                              }, 30);
                          }

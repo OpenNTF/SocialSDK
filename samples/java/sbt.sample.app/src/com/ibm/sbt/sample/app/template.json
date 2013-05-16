@@ -1,41 +1,41 @@
 {
     generator : {
         image : {
-            url : "^{homePageUrl}$favicon.ico"
+            url : "%{homePageUrl}favicon.ico"
         },
-        id : "^{generator.id}$",
-        displayName : "^{generator.displayName}$",
-        url : "^{homePageUrl}$"
+        id : "%{generator.id}",
+        displayName : "%{generator.displayName}",
+        url : "%{homePageUrl}"
     },
     actor : {
-        id : "^{personObj.id}$"
+        id : "%{personObj.id}"
     },
     verb : "created",
     title : "${Actor} created a ${Object} in the ${Target}.",
-    content : "Please approve ^{personObj.displayName}$'s flight request for flight ^{flight.FlightId}$.",
-    updated : "^{updated}$",
+    content : "Please approve %{personObj.displayName}'s flight request for flight %{flight.FlightId}.",
+    updated : "%{updated}",
     object : {
-        summary : "^{personObj.displayName}$ is requesting to fly from ^{flight.Depart}$ to ^{flight.Arrive}$ on flight ^{flight.FlightId}$.",
+        summary : "%{personObj.displayName} is requesting to fly from %{flight.Depart} to %{flight.Arrive} on flight %{flight.FlightId}.",
         objectType : "flight",
-        id : "^{flight.FlightId}$",
+        id : "%{flight.FlightId}",
         displayName : "Flight Request",
-        url : "^{homePageUrl}$"
+        url : "%{homePageUrl}"
     },
     target : {
-        summary : "^{target.summary}$",
+        summary : "%{target.summary}",
         objectType : "application",
-        id : "^{target.id}$",
-        displayName : "^{target.displayName}$",
-        url : "^{homePageUrl}$"
+        id : "%{target.id}",
+        displayName : "%{target.displayName}",
+        url : "%{homePageUrl}"
     },
     openSocial : {
         deliverTo : [{
             objectType : "person",
-            id : "^{approverId}$"
+            id : "%{approverId}"
         }]
     },
     connections : {
-        rollupid : "^{id}$",
+        rollupid : "%{id}",
         actionable: "true"
     }
 }

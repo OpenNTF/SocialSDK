@@ -2,7 +2,7 @@
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
 	xmlns:xe="http://www.ibm.com/xsp/coreex">
 	<xc:ccManagePageResources></xc:ccManagePageResources>
-	<xc:ccLayout navigationPath="/Manage/ImportSnippets">
+	<xc:ccLayout navigationPath="/Manage/ImportJavaScriptSnippets">
 		<xp:this.facets>
 			<xp:panel xp:key="LeftColumn" id="panel4">
 				<xc:ManageLeftNavigator id="ccLeftMenu"></xc:ManageLeftNavigator>

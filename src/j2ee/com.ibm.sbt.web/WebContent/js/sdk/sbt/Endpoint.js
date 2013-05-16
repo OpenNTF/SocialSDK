@@ -536,11 +536,13 @@ var Endpoint = declare("sbt.Endpoint", null, {
  * @param name
  */
 Endpoint.find = function(name){
-    if (!sbt || !sbt.Endpoints || !sbt.Endpoints[name]){
+	if (!sbt || !sbt.Endpoints) {
+		var nf = !sbt? "sbt" : "sbt.Endpoints";
+		throw new Error(nf+" object not defined");
+	}
+    if (!sbt.Endpoints[name]){
         log.error(stringUtil.substitute(nls.cannot_find_endpoint, [name]));
         var transport = new ErrorTransport(name);
-        if (!sbt) sbt = {};
-        if (!sbt.Endpoints) sbt.Endpoints={};
         sbt.Endpoints[name] = new Endpoint({
             "transport" : transport,
             "baseUrl"   : ""

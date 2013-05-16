@@ -6,7 +6,7 @@
 		<xp:dojoModule name="extlib.dijit.Tabs"></xp:dojoModule>
 	</xp:this.resources>
 	<xc:ccManagePageResources></xc:ccManagePageResources>
-	<xc:ccLayout navigationPath="/Manage/SnippetsByCategory">
+	<xc:ccLayout navigationPath="/Manage/JavaScriptSnippetsByCategory">
 		<xp:this.facets>
 			<xp:panel xp:key="LeftColumn" id="panel4">
 				<xc:ManageLeftNavigator id="ccLeftMenu"></xc:ManageLeftNavigator>
@@ -65,7 +65,7 @@
 						</xe:dataView>
 					</xp:panel>
 					<xp:panel xp:key="form" id="panel2">
-						<xc:ManageSnippetsForm></xc:ManageSnippetsForm>
+						<xc:ManageJavaScriptSnippetsForm></xc:ManageJavaScriptSnippetsForm>
 					</xp:panel>
 				</xp:this.facets>
 			</xe:dynamicContent>

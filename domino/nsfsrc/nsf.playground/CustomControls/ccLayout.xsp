@@ -61,7 +61,7 @@ if(compositeData.wholePage)view.setStyle("overflow: hidden");}]]></xp:this.after
 				<xe:this.placeBarActions>
 					<xe:pageTreeNode
 						loaded="${javascript:userBean.accessLevel>=4}"
-						page="/ManageSnippetsByCategory.xsp" label="Manage">
+						page="/ManageJavaScriptSnippetsByCategory.xsp" label="Manage">
 					</xe:pageTreeNode>
 				</xe:this.placeBarActions>
 				<xe:this.titleBarTabs>

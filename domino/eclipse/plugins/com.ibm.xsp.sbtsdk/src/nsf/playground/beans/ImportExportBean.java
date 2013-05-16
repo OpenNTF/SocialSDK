@@ -5,6 +5,8 @@ import java.io.Serializable;
 import nsf.playground.jobs.ImportAssetAction;
 import nsf.playground.snippets.AssetImporter;
 
+import com.ibm.commons.Platform;
+import com.ibm.domino.xsp.module.nsf.platform.NotesPlatform;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 
 /**
@@ -24,8 +26,8 @@ public abstract class ImportExportBean implements Serializable {
 	}
 
 	public void importAssets(String type, String sourceName, boolean async) throws Exception {
-		// TEMP: Async is only supported on 9.0 because of an issue in 853
-		if(ExtLibUtil.isXPages853()) {
+		// TEMP: Async is only supported on 9.0 because of an issue in 853, as well as in the client
+		if(ExtLibUtil.isXPages853() || Platform.getInstance().isPlatform(NotesPlatform.NOTES_PLATFORM)) {
 			async = false;
 		}
 		if(async) {

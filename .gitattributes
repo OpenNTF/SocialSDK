@@ -7,15 +7,18 @@
 *.java text
 *.MF text
 *.properties text
+*.jsp text
 
 # XML
 *.xml text
 *.XML text
 *.xmi text
 
-# Javascript
+# Web
 *.js text
 *.json text
+*.html text
+*.css text
 
 # Eclipse
 *.prefs text
@@ -27,6 +30,9 @@
 *.png binary
 *.jpg binary
 *.gif binary
+
+#XPages
+*.xsp
 
 # Standard to msysgit
 *.doc diff=astextplain

@@ -75,9 +75,13 @@ define([ "sbt/Endpoint" ], function(Endpoint) {
         }
 
         var serviceUrl = "/profiles/ibm_semanticTagServlet/javascript/semanticTagService.js?inclDojo=" + inclDojo;
+        var locale = dojo.config.locale || "en"; 
         endpoint.xhrGet({
             serviceUrl : serviceUrl,
             handleAs : "text",
+            headers: {
+                "Accept-Language": locale + ",en;q=0.8" // set request locale to dojo locale, fall back to english if unavailable.
+            },
             load : function(response) {
                 SemTagSvcConfig.loading = false;
                 try {

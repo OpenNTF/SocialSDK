@@ -12,7 +12,6 @@
 <html lang="en" style="height: 100%;">
   <%
       String snippetName = request.getParameter("snippet");
-      JSSnippet snippet = (JSSnippet)SnippetFactory.getJsSnippet(application, request, snippetName);
       String html = null;
       String js = null;
       String css = null;
@@ -22,6 +21,7 @@
       
       // doGet
       if(request.getMethod().equals("GET")){
+          JSSnippet snippet = (JSSnippet)SnippetFactory.getJsSnippet(application, request, snippetName);
           if (snippet != null) {
               if (html == null)
                   html = snippet.getHtml();
@@ -29,7 +29,7 @@
                   js = snippet.getJs();
               if (css == null)
                   css = snippet.getCss();
-              if(theme == null)
+              if(StringUtil.isEmpty(theme))
                   theme = snippet.getTheme();
           
               // replace substitution variables
@@ -43,6 +43,11 @@
       } 
       // doPost
       else if (request.getMethod().equals("POST")){
+    	  JSSnippet snippet = null;
+          if (StringUtil.isEmpty(theme)){
+              snippet = (JSSnippet)SnippetFactory.getJsSnippet(application, request, snippetName);
+              theme = snippet.getTheme();
+          }
           html = request.getParameter("htmlData");
           js = request.getParameter("jsData");
           css = request.getParameter("cssData");
@@ -88,7 +93,7 @@
         String s = "<script>" + js + "</script>\n";
         out.println(s);
     } else {
-    	out.println("<div>Error, unable to load snippet: "+snippetName+"</div>");
+        out.println("<div>Error, unable to load snippet: "+snippetName+"</div>");
     }
     %>
   </body>

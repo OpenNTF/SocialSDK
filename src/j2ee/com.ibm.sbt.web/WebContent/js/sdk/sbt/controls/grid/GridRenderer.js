@@ -17,7 +17,7 @@
 /**
  * 
  */
-define([ "sbt/_bridge/declare", "sbt/dom", "sbt/lang", "dojo/string", "sbt/widget/grid/_GridRenderer" ], 
+define([ "../../_bridge/declare", "../../dom", "../../lang", "dojo/string", "../../widget/grid/_GridRenderer" ], 
          function(declare, dom, lang, string, _GridRenderer) {
 
     /**
@@ -25,7 +25,7 @@ define([ "sbt/_bridge/declare", "sbt/dom", "sbt/lang", "dojo/string", "sbt/widge
      * @class  GridRenderer
      * @namespace  sbt.controls.grid
      */
-    declare("sbt.controls.grid.GridRenderer", [ sbt.widget.grid._GridRenderer ], {
+    var GridRenderer = declare([ _GridRenderer ], {
         /**Strings used in the grid*/
     	nls: null,
     	/**CSS class to be used for tables - see ConnectionsGridRenderer*/
@@ -191,7 +191,7 @@ define([ "sbt/_bridge/declare", "sbt/dom", "sbt/lang", "dojo/string", "sbt/widge
             }
            var ediv = this._create("div", {
               "class": this.errorClass,
-              innerHTML: error.message,
+              innerHTML: error,
               role: "alert",
               tabIndex: 0
             }, el, "only");
@@ -436,5 +436,5 @@ define([ "sbt/_bridge/declare", "sbt/dom", "sbt/lang", "dojo/string", "sbt/widge
         
     });
     
-    return sbt.controls.grid.GridRenderer;
+    return GridRenderer;
 });

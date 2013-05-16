@@ -79,11 +79,21 @@ window._sbt_bridge_compat = true;
 		function resolvePath(relativeId) {
 			// do relative path resolution
 			if (relativeId.charAt(0) === '.') {
-				relativeId = name.substring(0, name.lastIndexOf('/') + 1)
-						+ relativeId;
-				while (lastId !== relativeId) {
-					var lastId = relativeId;
-					relativeId = relativeId.replace(/\/[^\/]*\/\.\.\//, '/');
+				if(relativeId.indexOf("text!") >0 && relativeId.charAt(relativeId.indexOf("!")+1) === '.'){
+					var base = name.substring(0,name.indexOf("/")+1) + "text!";
+					relativeId = name.substring(0, name.lastIndexOf('/') + 1)+ relativeId;
+					while (lastId !== relativeId) {
+						var lastId = relativeId;
+						relativeId = relativeId.replace(/\/[^\/]*\/\.\.\//, '/');
+					}
+					relativeId = base+relativeId;
+				}else{
+					relativeId = name.substring(0, name.lastIndexOf('/') + 1)
+							+ relativeId;
+					while (lastId !== relativeId) {
+						var lastId = relativeId;
+						relativeId = relativeId.replace(/\/[^\/]*\/\.\.\//, '/');
+					}
 				}
 				relativeId = relativeId.replace(/\/\.\//g, '/');
 			}
@@ -105,7 +115,8 @@ window._sbt_bridge_compat = true;
                         dojo.mixin(arg,dojo.require(bundles[mi]));
                     }
 				} else if (depName.substring(0, exclamationIndex) == "sbt.text") {
-                    var fileName = deps[i].substring(exclamationIndex+1);
+					exclamationIndex = deps[i].indexOf("!");
+                    var fileName = deps[i].substring(exclamationIndex+1,deps[i].length);
                     if (fileName.charAt(0) == '.') {
                         var loc = dojo.doc.location;
                         var index = loc.pathname.indexOf('/', 1);
@@ -118,7 +129,7 @@ window._sbt_bridge_compat = true;
                         var moduleId = fileName.substring(0, moduleIndex);
                         var url = fileName.substring(moduleIndex+1);
                         arg = dojo.cache(moduleId, url);
-                    }
+                    } 
                 } else {
 					arg = null;
 				}

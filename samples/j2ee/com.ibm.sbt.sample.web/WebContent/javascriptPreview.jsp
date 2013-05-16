@@ -4,6 +4,7 @@
 <%@page import="com.ibm.sbt.playground.assets.RootNode"%>
 <%@page import="com.ibm.sbt.playground.assets.jssnippets.JSSnippet"%>
 <%@page import="java.util.List"%>
+<%@page import="javax.servlet.http.HttpServletRequest"%>
 <%@page import="com.ibm.commons.util.StringUtil"%>
 <%@page import="com.ibm.commons.runtime.util.ParameterProcessor"%>
 <%@page import="com.ibm.commons.runtime.util.ParameterProcessor.ParameterProvider"%>
@@ -34,17 +35,18 @@
                   theme = snippet.getTheme();
           
               // replace substitution variables
+          	  final HttpServletRequest finalRequest = request;
               if (StringUtil.isNotEmpty(js)) {
           		js = ParameterProcessor.process(js, new ParameterProvider() {
           			public String getParameter(String name) {
-          				return request.getParameter(name);
+          				return finalRequest.getParameter(name);
           			}
           		}, true);
               }
               if (StringUtil.isNotEmpty(html)) {
           		html = ParameterProcessor.process(html, new ParameterProvider() {
           			public String getParameter(String name) {
-          				return request.getParameter(name);
+          				return finalRequest.getParameter(name);
           			}
           		}, true);
               }

@@ -20,6 +20,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.ibm.commons.runtime.Context;
@@ -247,21 +248,25 @@ public class ApplicationEndpoint implements Endpoint {
 	public boolean isForceTrustSSLCertificate() {
     	throw newNotApplicableException();
     }
-
 	@Override
 	public void logout() throws AuthenticationException {
 		// TODO Auto-generated method stub
 	}
-
-
     @Override
 	public String getHttpProxy(){
 		throw newNotApplicableException();
 	}
-
-	
     @Override
     public String getProxyQueryArgs() {
     	return null;
+    }
+    @Override
+    public void updateHeaders(DefaultHttpClient client, HttpRequestBase method) {
+    }
+    @Override
+    public void updateUrl(DefaultHttpClient client, String url) {
+    }
+    @Override
+    public void handleAuthenticationError() {
     }
 }

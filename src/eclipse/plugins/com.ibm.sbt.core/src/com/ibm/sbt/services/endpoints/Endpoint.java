@@ -13,11 +13,11 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-
 package com.ibm.sbt.services.endpoints;
 
 import java.util.Map;
 
+import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.ibm.sbt.security.authentication.AuthenticationException;
@@ -27,7 +27,6 @@ import com.ibm.sbt.services.client.ClientService.Handler;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.endpoints.js.JSReference;
 import com.ibm.sbt.util.SBTException;
-
 
 /**
  * Service end point.
@@ -368,13 +367,29 @@ public interface Endpoint {
     public boolean isForceTrustSSLCertificate();
 
     /**
-     * This is to be used in development/debug mode only, when we want to capture all network traffic from SDK
+     * This is to be used in development/debug mode only, when we want to capture all network traffic from SDK.
      */
     public String getHttpProxy();
 
     
-    /*
-     * allows an endpoint to append query args to a proxied request 
+    /**
+     * Allows an endpoint to append query args to a proxied request.
      */ 
     public String getProxyQueryArgs();
+
+    /**
+     * Allows an endpoint to update the headers for the specified request.
+     */
+    public void updateHeaders(DefaultHttpClient client, HttpRequestBase method);
+    
+    /**
+     * Allows an endpoint to update the url for the specified request.
+     */
+    public void updateUrl(DefaultHttpClient client, String url);
+
+    /**
+     * Notifies the endpoint that en authentication error was detected for the specified request.
+     */
+    public void handleAuthenticationError();
+
 }

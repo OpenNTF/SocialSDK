@@ -51,12 +51,24 @@ public class HMACEncryptionUtility {
 			} else {
 				signingKey = consumerSecret + "&" + tokenSecret;
 			}
-			SecretKey secretKey = null;
-			byte[] keyBytes = signingKey.getBytes();
-			secretKey = new SecretKeySpec(keyBytes, "HmacSHA1");
+
+			byte[] keyBytes = null;
+			try {
+				keyBytes = signingKey.getBytes(Configuration.ENCODING);
+			} catch (UnsupportedEncodingException e) {
+				throw new OAuthException(e,
+						"HMACEncryptionUtility : generateHMACSignature caused UnsupportedEncodingException exception");
+			}
+			SecretKey secretKey = new SecretKeySpec(keyBytes, "HmacSHA1");
 			Mac mac = Mac.getInstance("HmacSHA1");
 			mac.init(secretKey);
-			byte[] text = signature_base_string.getBytes();
+			byte[] text = null;
+			try {
+				text = signature_base_string.getBytes(Configuration.ENCODING);
+			} catch (UnsupportedEncodingException e) {
+				throw new OAuthException(e,
+						"HMACEncryptionUtility : generateHMACSignature caused UnsupportedEncodingException exception");
+			}
 			String signature = new String(Base64.encodeBase64(mac.doFinal(text))).trim();
 			return signature;
 		} catch (NoSuchAlgorithmException e) {

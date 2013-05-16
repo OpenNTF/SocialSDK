@@ -16,42 +16,37 @@
  */
 package com.ibm.sbt.services.endpoints;
 
+
+import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.impl.client.DefaultHttpClient;
+
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
-import com.ibm.sbt.services.client.connections.ConnectionsService;
 
 /**
  * @author priand
  *
  */
 public class ConnectionsBasicEndpoint extends BasicEndpoint {
+    
+    private ConnectionsEndpointAdapter endpointAdapter;
 
     public ConnectionsBasicEndpoint() {
+        endpointAdapter = new ConnectionsEndpointAdapter(this);
     }
-
-    /**
-	 * The method blocks the header x-requested-with only for calls to IBM Connections Activities Service.
-	 * The Activities Service does not return the correct feed when this header is present in the request.
-	 * @param headerName Header name
-	 * @param serviceUrl HTTP Request
-	 * @return boolean true depicting header is passed
-	 * 
-	 */
 
     @Override
 	public boolean isHeaderAllowed(String headerName, String serviceUrl){
-    	if (headerName.equalsIgnoreCase("x-requested-with"))
-		{
-			if(serviceUrl.indexOf("activities/service") != -1){
-				return false;
-			}
-		}
-		return true;
-
+		return endpointAdapter.isHeaderAllowed(headerName, serviceUrl);
+    }
+    
+    @Override
+    public void updateHeaders(DefaultHttpClient client, HttpRequestBase method) {
+        endpointAdapter.updateHeaders(client, method);
     }
 
     @Override
 	public ClientService getClientService() throws ClientServicesException {
-    	return new ConnectionsService(this);
+    	return endpointAdapter.getClientService();
     }
 }

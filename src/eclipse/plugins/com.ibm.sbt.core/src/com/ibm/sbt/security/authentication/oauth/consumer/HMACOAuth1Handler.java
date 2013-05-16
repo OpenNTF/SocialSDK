@@ -75,7 +75,7 @@ public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 			signatureParamsMap.put(Configuration.CALLBACK, callbackUrl);
 			signatureParamsMap.put(Configuration.CONSUMER_KEY, consumerKey);
 			signatureParamsMap.put(Configuration.NONCE, nonce);
-			signatureParamsMap.put(Configuration.SIGNATURE_METHOD, Configuration.HMAC_SIGNATURE);
+			signatureParamsMap.put(Configuration.SIGNATURE_METHOD, oaProvider.getSignatureMethod());
 			signatureParamsMap.put(Configuration.TIMESTAMP, timeStamp);
 			signatureParamsMap.put(Configuration.VERSION, Configuration.OAUTH_VERSION1);
 
@@ -91,7 +91,7 @@ public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 			headerStr.append(",").append(Configuration.CONSUMER_KEY).append("=\"").append(consumerKey)
 					.append("\"");
 			headerStr.append(",").append(Configuration.SIGNATURE_METHOD).append("=\"")
-					.append(Configuration.HMAC_SIGNATURE).append("\"");
+					.append(oaProvider.getSignatureMethod()).append("\"");
 			headerStr.append(",").append(Configuration.TIMESTAMP).append("=\"").append(timeStamp)
 					.append("\"");
 			headerStr.append(",").append(Configuration.NONCE).append("=\"").append(nonce).append("\"");
@@ -115,7 +115,7 @@ public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 			throw new OAuthException(e, "Internal error - getRequestToken failed Exception: ");
 		}
 		if (responseCode != HttpStatus.SC_OK) {
-			Exception exception = checkStatus(responseCode, responseBody);
+			Exception exception = createException(responseCode, responseBody);
 			if (exception != null) {
 				throw new OAuthException(exception,
 						"HMACOAuth1Handler.java : getRequestToken caused exception");
@@ -138,7 +138,7 @@ public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 		}
 	}
 
-	private Exception checkStatus(int responseCode, String responseBody) {
+	private Exception createException(int responseCode, String responseBody) {
 		Exception exception = null;
 		if (responseCode == HttpStatus.SC_NOT_IMPLEMENTED) {
 			exception = new Exception(
@@ -148,7 +148,7 @@ public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 					+ responseBody);
 		} else if (responseCode == HttpStatus.SC_BAD_REQUEST) {
 			exception = new Exception("getRequestToken failed with Response Code: Bad Request (400), Msg: "
-					+ responseBody.toString());
+					+ responseBody);
 		} else if (responseCode == HttpStatus.SC_INTERNAL_SERVER_ERROR) {
 			exception = new Exception(
 					"getRequestToken failed with Response Code: Internal Server error (500), Msg: "
@@ -196,7 +196,7 @@ public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 			signatureParamsMap.put(Configuration.CONSUMER_KEY, consumerKey);
 			signatureParamsMap.put(Configuration.NONCE, nonce);
 			signatureParamsMap.put(Configuration.OAUTH_TOKEN, requestToken);
-			signatureParamsMap.put(Configuration.SIGNATURE_METHOD, Configuration.HMAC_SIGNATURE);
+			signatureParamsMap.put(Configuration.SIGNATURE_METHOD, oaProvider.getSignatureMethod());
 			signatureParamsMap.put(Configuration.TIMESTAMP, timeStamp);
 			signatureParamsMap.put(Configuration.VERSION, Configuration.OAUTH_VERSION1);
 
@@ -211,7 +211,7 @@ public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 			headerStr.append("OAuth ").append(Configuration.CONSUMER_KEY).append("=\"").append(consumerKey)
 					.append("\"");
 			headerStr.append(",").append(Configuration.SIGNATURE_METHOD).append("=\"")
-					.append(Configuration.HMAC_SIGNATURE).append("\"");
+					.append(oaProvider.getSignatureMethod()).append("\"");
 			headerStr.append(",").append(Configuration.TIMESTAMP).append("=\"").append(timeStamp)
 					.append("\"");
 			headerStr.append(",").append(Configuration.NONCE).append("=\"").append(nonce).append("\"");
@@ -240,7 +240,7 @@ public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 			throw new OAuthException(e, "Internal error - getAccessToken failed Exception: ");
 		}
 		if (responseCode != HttpStatus.SC_OK) {
-			Exception exception = checkStatus(responseCode, responseBody);
+			Exception exception = createException(responseCode, responseBody);
 			if (exception != null) {
 				throw new OAuthException(exception,
 						"HMACOAuth1Handler.java : getAccessToken caused exception");
@@ -289,7 +289,7 @@ public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 		TreeMap<String, String> treeMap = new TreeMap<String, String>();
 		treeMap.put(Configuration.CONSUMER_KEY, consumerKey);
 		treeMap.put(Configuration.NONCE, nonce);
-		treeMap.put(Configuration.SIGNATURE_METHOD, Configuration.HMAC_SIGNATURE);
+		treeMap.put(Configuration.SIGNATURE_METHOD, oaProvider.getSignatureMethod());
 		treeMap.put(Configuration.VERSION, Configuration.OAUTH_VERSION1);
 		treeMap.put(Configuration.TIMESTAMP, timeStamp);
 		treeMap.put(Configuration.OAUTH_TOKEN, applicationAccessToken);
@@ -320,7 +320,7 @@ public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 					"createAuthorizationHeader failed with UnsupportedEncodingException");
 		}
 		headerStr.append(",").append(Configuration.SIGNATURE_METHOD).append("=\"")
-				.append(Configuration.HMAC_SIGNATURE).append("\"");
+				.append(oaProvider.getSignatureMethod()).append("\"");
 		headerStr.append(",").append(Configuration.TIMESTAMP).append("=\"").append(timeStamp).append("\"");
 		headerStr.append(",").append(Configuration.OAUTH_TOKEN).append("=\"").append(applicationAccessToken)
 				.append("\"");

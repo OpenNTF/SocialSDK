@@ -47,7 +47,7 @@ import com.ibm.sbt.services.endpoints.EndpointFactory;
  * @author Carlos Manias
  * @date 13 May 2013
  */
-public class PublishAnyActivityStream {
+public class AdminPublishActivityStream {
 	
 	private static final String  APPLICATION_JSON  = "application/json";
 	
@@ -110,7 +110,7 @@ public class PublishAnyActivityStream {
 	 */
 	public static void main(String[] args) {
 		if (args.length >=2) {
-			PublishAnyActivityStream paas = new PublishAnyActivityStream();
+			AdminPublishActivityStream paas = new AdminPublishActivityStream();
 			RuntimeFactory runtimeFactory = new RuntimeFactoryStandalone();
 			Application application = runtimeFactory.initApplication(null);
 			Context context = Context.init(application, null, null);

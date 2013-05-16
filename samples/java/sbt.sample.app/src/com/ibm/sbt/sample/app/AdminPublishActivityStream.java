@@ -22,14 +22,15 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 import com.ibm.commons.runtime.Application;
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.RuntimeFactory;
 import com.ibm.commons.runtime.impl.app.RuntimeFactoryStandalone;
 import com.ibm.commons.runtime.properties.FileResourcePropertiesFactory;
+import com.ibm.commons.runtime.util.ParameterProcessor;
 import com.ibm.commons.util.io.json.JsonException;
 import com.ibm.commons.util.io.json.JsonJavaFactory;
 import com.ibm.commons.util.io.json.JsonJavaObject;
@@ -86,20 +87,14 @@ public class AdminPublishActivityStream {
 		return sb.toString();
 	}
 	
-	
 	/*
 	 * Merges template with data
 	 */
 	private JsonJavaObject mergeData(String templatePath, String propertiesPath) throws JsonException{
 		String template = readFile(templatePath);
-		FileResourcePropertiesFactory frpf = new FileResourcePropertiesFactory(propertiesPath);
-		Enumeration<?> keys = frpf.getKeys();
-		
-		while(keys.hasMoreElements()) {
-			String key = (String)keys.nextElement();
-			String value = frpf.getProperty(key);
-			template = template.replaceAll("\\^\\{"+key+"\\}\\$", value);
-		}
+		FileResourcePropertiesFactory frpf = new FileResourcePropertiesFactory();
+		Properties props = frpf.readFactoriesFromFile(propertiesPath);
+		template = ParameterProcessor.process(template, props);
 		
 		JsonJavaObject templateObj = (JsonJavaObject)JsonParser.fromJson(JsonJavaFactory.instanceEx, template);
 		return templateObj;

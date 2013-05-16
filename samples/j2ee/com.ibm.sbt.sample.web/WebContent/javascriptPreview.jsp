@@ -6,6 +6,7 @@
 <%@page import="java.util.List"%>
 <%@page import="com.ibm.commons.util.StringUtil"%>
 <%@page import="com.ibm.commons.runtime.util.ParameterProcessor"%>
+<%@page import="com.ibm.commons.runtime.util.ParameterProcessor.ParameterProvider"%>
 <%@page import="com.ibm.sbt.sample.web.util.SnippetFactory"%>
 <%@page import="com.ibm.sbt.sample.web.util.Util"%>
 <!DOCTYPE html>
@@ -34,10 +35,18 @@
           
               // replace substitution variables
               if (StringUtil.isNotEmpty(js)) {
-          js = ParameterProcessor.process(js, request);
+          		js = ParameterProcessor.process(js, new ParameterProvider() {
+          			public String getParameter(String name) {
+          				return request.getParameter(name);
+          			}
+          		}, true);
               }
               if (StringUtil.isNotEmpty(html)) {
-          html = ParameterProcessor.process(html, request);
+          		html = ParameterProcessor.process(html, new ParameterProvider() {
+          			public String getParameter(String name) {
+          				return request.getParameter(name);
+          			}
+          		}, true);
               }
           }
       } 

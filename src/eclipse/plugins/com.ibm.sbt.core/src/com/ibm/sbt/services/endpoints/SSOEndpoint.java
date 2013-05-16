@@ -31,6 +31,7 @@ import org.apache.http.protocol.HttpContext;
 import com.ibm.commons.runtime.Context;
 import com.ibm.sbt.security.authentication.AuthenticationException;
 import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.endpoints.js.JSReference;
 
 /**
  * Bean that provides a authentication using an LTPA token.
@@ -54,6 +55,12 @@ public class SSOEndpoint extends AbstractEndpoint {
 	public void authenticate(boolean force) throws ClientServicesException {
     }
 
+    @Override
+    public JSReference getAuthenticator(String endpointName) {
+    	JSReference reference = new JSReference("sbt/authenticator/SSO");
+    	return reference;
+    }
+    
     public void redirect() {
     }
 

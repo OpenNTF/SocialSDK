@@ -7,7 +7,7 @@
 			<xp:this.querySaveDocument><![CDATA[#{javascript:return snippetBean.querySave(document1)}]]></xp:this.querySaveDocument>
 		</xp:dominoDocument>
 	</xp:this.data>
-	<xe:formTable id="formTable2" formTitle="Code Snippet"
+	<xe:formTable id="formTable2" formTitle="JavaScript Snippet"
 		formDescription="Enter here the data for your code snippet">
 		<xp:this.facets>
 			<xp:panel xp:key="footer" id="panel3">

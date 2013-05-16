@@ -19,7 +19,7 @@
  * 
  * @module sbt.Promise
  */
-define(["sbt/_bridge/declare"], function(declare) {
+define(["sbt/_bridge/declare","sbt/log"], function(declare,log) {
 
     /**
      * Promise class
@@ -131,7 +131,7 @@ define(["sbt/_bridge/declare"], function(declare) {
                     try {
                         callback(data);
                     } catch (err) {
-                        var msg = err.message;
+                        log.error("Callback error: "+err);
                     }
                 }
             }

@@ -182,7 +182,7 @@ public abstract class RequireJSLibrary extends AbstractLibrary {
 			Map<String, JsonObject> endpoints, JsonObject properties, int indentationLevel)
 			throws LibraryException {
 		StringBuilder sb = super.generateSbtConfigDefine(request, endpoints, properties, indentationLevel);
-		indent(sb, indentationLevel).append("require(['sbt/config'], function(){console.log('Config module loaded')});\n");
+		indent(sb, indentationLevel).append("require(['sbt/config'], function(){});\n");
 		return sb;
 	};
 

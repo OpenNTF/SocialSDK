@@ -50,7 +50,7 @@ dlg.hide();}]]></xp:this.action>
 					</xp:button>
 				</xp:panel>
 			</xp:panel>
-			<xp:panel xp:key="header" id="panel4">
+			<xp:panel xp:key="header" id="panel4" loaded="${javascript:userBean.canCreateDocs}">
 				<xp:inputText id="inputText20" style="display:none">
 					<xp:eventHandler event="onchange" submit="true"
 						refreshMode="complete">
@@ -59,7 +59,7 @@ dataAccess.copyEnvironment(document1,v);
 }]]></xp:this.action>
 					</xp:eventHandler>
 				</xp:inputText>
-				<xp:div style="float: right;margin-right: 30px;" loaded="${javascript:userBean.canCreateDocs}">
+				<xp:div style="float: right;margin-right: 30px;">
 					<xe:valuePicker id="namePicker10" for="inputText20"
 						pickerText="Copy Content From...">
 						<xe:this.dataProvider>
@@ -91,9 +91,11 @@ dataAccess.copyEnvironment(document1,v);
 				cols="80" rows="5">
 			</xp:inputTextarea>
 		</xe:formRow>
+<!-- 		
 		<xe:formRow id="formRow13" labelPosition="none">
 			<xp:div></xp:div>
 		</xe:formRow>
+ -->		
 		<xe:formRow id="formRow4" labelPosition="none">
 			<xp:section id="section1" header="Connections" initClosed="true" loaded="${javascript:userBean.canCreateDocs || compositeData.editbean}">
 				<xe:formTable labelWidth="12em">

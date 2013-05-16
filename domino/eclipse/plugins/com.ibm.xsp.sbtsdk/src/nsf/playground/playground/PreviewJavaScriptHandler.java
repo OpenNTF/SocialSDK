@@ -28,6 +28,33 @@ import com.ibm.xsp.extlib.util.ExtLibUtil;
 
 
 public class PreviewJavaScriptHandler extends PreviewHandler {
+	
+	public static class JSLibrary {
+
+		private String label;
+		private String libType;
+		private String libVersion;
+		private String libUrl;
+		public JSLibrary(String label, String libType, String libVersion, String libUrl) {
+			this.label = label;
+			this.libType = libType;
+			this.libVersion = 
+			this.libUrl = libUrl;
+		}
+	}
+	// See: https://developers.google.com/speed/libraries/devguide
+//	public static JSLibrary[] LIBRARIES = {
+//		new JSLibrary("<default>","dojo","1.6.1",""),
+//		//new JSLibrary("Dojo Toolkit 1.4.3","dojo","1.4.3","//ajax.googleapis.com/ajax/libs/dojo/1.4.3/dojo/dojo.js"),
+//		new JSLibrary("Dojo Toolkit 1.4.3","dojo","1.4.3","//ajax.googleapis.com/ajax/libs/dojo/1.4.3"),
+//		new JSLibrary("Dojo Toolkit 1.5.2","dojo","1.5.2","//ajax.googleapis.com/ajax/libs/dojo/1.5.2"),
+//		new JSLibrary("Dojo Toolkit 1.6.1","dojo","1.6.1","//ajax.googleapis.com/ajax/libs/dojo/1.6.1"),
+//		new JSLibrary("Dojo Toolkit 1.7.4","dojo","1.7.4","//ajax.googleapis.com/ajax/libs/dojo/1.7.4"),
+//		new JSLibrary("Dojo Toolkit 1.8.4","dojo","1.8.4","//ajax.googleapis.com/ajax/libs/dojo/1.8.4"),
+//		new JSLibrary("Dojo Toolkit 1.9.0","dojo","1.9.0","//ajax.googleapis.com/ajax/libs/dojo/1.9.0"),
+//		//new JSLibrary("JQuery 1.8.3","jquery","1.8.3","//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"),
+//		new JSLibrary("JQuery 1.8.3","jquery","1.8.3","//ajax.googleapis.com/ajax/libs/jquery/1.8.3"),
+//	};
 
 	private static final String LAST_REQUEST = "javascriptsnippet.lastrequest"; 
 

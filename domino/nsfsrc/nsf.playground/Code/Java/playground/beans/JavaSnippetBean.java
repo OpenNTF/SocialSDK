@@ -47,6 +47,7 @@ public class JavaSnippetBean extends nsf.playground.beans.JavaSnippetBean {
 						"com.ibm.commons.xml",
 						"com.ibm.commons.runtime",
 						"com.ibm.sbt.core",
+						"com.ibm.sbt.libs",
 						"com.ibm.xsp.sbtsdk",
 						"org.eclipse.equinox.http.servlet",
 						"com.ibm.pvc.servlet.jsp"

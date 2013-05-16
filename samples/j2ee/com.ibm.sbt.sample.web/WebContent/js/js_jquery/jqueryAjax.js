@@ -27,15 +27,15 @@
     }
     // Debug flags whether we are going to use firebug.
     function postCode(frame, debug){
-        var htmlDiv = document.getElementById("htmlContents").firstChild;
-        var jsDiv = document.getElementById("jsContents").firstChild; 
-        var cssDiv = document.getElementById("cssContents").firstChild;
+        var htmlDiv = document.getElementById("htmlContents");
+        var jsDiv = document.getElementById("jsContents"); 
+        var cssDiv = document.getElementById("cssContents");
 
-        var html = htmlDiv.CodeMirror ? htmlDiv.CodeMirror.getValue() : htmlDiv.textContent;
-        var js = jsDiv.CodeMirror ? jsDiv.CodeMirror.getValue() : jsDiv.textContent;
-        var css = cssDiv.CodeMirror ? cssDiv.CodeMirror.getValue() : cssDiv.textContent;
+        var html = htmlDiv.firstChild && htmlDiv.firstChild.CodeMirror ? htmlDiv.firstChild.CodeMirror.getValue() : htmlDiv.textContent;
+        var js = jsDiv.firstChild && jsDiv.firstChild.CodeMirror ? jsDiv.firstChild.CodeMirror.getValue() : jsDiv.textContent;
+        var css = cssDiv.firstChild && cssDiv.firstChild.CodeMirror ? cssDiv.firstChild.CodeMirror.getValue() : cssDiv.textContent;
 
-        $.post(previewPage, { htmlData: html, jsData: js, cssData: css, debug: debug, jsLibId:getJsLibId(), themeId: getThemeId()}, function(data) {
+        $.post(previewPage, { snippet: getSnippet(), htmlData: html, jsData: js, cssData: css, debug: debug, jsLibId:getJsLibId(), themeId: getThemeId()}, function(data) {
                 var wrapper = $(".iframeWrapper");
                 wrapper.find(frame).remove();
                 var $frame = $('<iframe id="previewFrame" src=""  width="100%" height="100%" style="border-style:none;"></iframe>');

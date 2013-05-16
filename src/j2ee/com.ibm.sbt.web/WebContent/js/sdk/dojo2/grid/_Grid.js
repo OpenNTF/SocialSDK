@@ -17,13 +17,13 @@
 /**
  * 
  */
-define([ "sbt/_bridge/declare", "sbt/store/AtomStore", "dojo/_base/lang", "dojo/_base/Deferred", "sbt/widget/_TemplatedWidget"], 
+define([ "../../_bridge/declare", "../../store/AtomStore", "dojo/_base/lang", "dojo/_base/Deferred", "../../widget/_TemplatedWidget"], 
         function(declare, AtomStore, lang, Deferred, _TemplatedWidget) {
 
     /*
      * @module sbt._bridge.grid._Grid
      */
-    declare("sbt._bridge.grid._Grid", [ _TemplatedWidget ], {
+    var _Grid = declare([ _TemplatedWidget ], {
 
         templatePath: require.toUrl("sbt/controls/grid/templates/Grid.html"),
         
@@ -65,5 +65,5 @@ define([ "sbt/_bridge/declare", "sbt/store/AtomStore", "dojo/_base/lang", "dojo/
     
     });
     
-    return sbt._bridge.grid._Grid;
+    return _Grid;
 });

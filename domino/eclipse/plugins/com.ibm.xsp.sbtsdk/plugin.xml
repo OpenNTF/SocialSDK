@@ -33,6 +33,10 @@
          <service type="com.ibm.sbt.jslibrary" class="com.ibm.xsp.sbtsdk.servlets.DominoDojoLibrary" />
    	</extension>
 
+   	<extension point="com.ibm.commons.Extension">
+         <service type="com.ibm.sbt.jslibrary" class="com.ibm.xsp.sbtsdk.servlets.DominoJQueryLibrary" />
+   	</extension>
+
     <extension point="com.ibm.commons.Extension">
          <service 
          	type="com.ibm.xsp.GlobalResourceProvider" 

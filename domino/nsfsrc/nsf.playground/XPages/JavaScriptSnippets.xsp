@@ -272,7 +272,7 @@ dojo.addOnLoad( function() {
 					<xp:this.querySaveDocument><![CDATA[#{javascript:return snippetBean.querySave(document1)}]]></xp:this.querySaveDocument>
 				</xp:dominoDocument>
 			</xp:this.data>
-			<xe:formTable id="formTable2" formTitle="Code Snippet">
+			<xe:formTable id="formTable2" formTitle="JavaScript Snippet">
 				<xe:this.formDescription><![CDATA[#{javascript:if(document1.isEditable()) {
 	return "Enter there the data for your code snippet";
 }

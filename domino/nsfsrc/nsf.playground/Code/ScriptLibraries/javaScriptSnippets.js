@@ -97,10 +97,11 @@ function runCode(debug) {
 	
 	// Get the current environment
 	var env = dojo.byId(pageGlobal.cbEnv).value;
-	
+	var lib = dojo.byId(pageGlobal.cbLibrary).selectedIndex;
 	var options = {
 		env: env,
-		debug: debug
+		debug: debug,
+		lib: lib
 	}
 	
 	// And update the frame by executing a post to a servlet

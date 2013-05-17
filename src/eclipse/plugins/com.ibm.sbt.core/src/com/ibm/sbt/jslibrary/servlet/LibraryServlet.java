@@ -100,6 +100,11 @@ public class LibraryServlet extends BaseToolkitServlet {
      */
     static public final String PARAM_ENVIRONMENT = "environment"; //$NON-NLS-1$
 
+    /**
+     * Name of the service creating the libraries.
+     */
+    static public final String LIBRARY_SERVICE_TYPE = "com.ibm.sbt.jslibrary"; //$NON-NLS-1$
+    
     //
     // Default values for library servlet parameters
     //
@@ -112,8 +117,6 @@ public class LibraryServlet extends BaseToolkitServlet {
     static final String DEFAULT_ENDPOINTS = "connections,smartcloud,domino,sametime"; //$NON-NLS-1$
     static final String DEFAULT_CLIENT_PROPERTIES = null; //$NON-NLS-1$
     static final String DEFAULT_ENVIRONMENT = "defaultEnvironment"; //$NON-NLS-1$
-
-    static final String LIBRARY_SERVICE_TYPE = "com.ibm.sbt.jslibrary"; //$NON-NLS-1$
 
     static final String sourceClass = LibraryServlet.class.getName();
     static final Logger logger = Logger.getLogger(sourceClass);
@@ -148,7 +151,10 @@ public class LibraryServlet extends BaseToolkitServlet {
         _defaultParams.setLibraryUrl(getInitParameter(config, PARAM_LIBRARY_URL, defaultLibraryUrl));
         _defaultParams.setIframeUrl(PathUtil.concat(_defaultParams.getToolkitUrl(), getInitParameter(config, PARAM_IFRAME_PATH, defaultIFramePath), '/'));
         // create the libraries
-        libraries = application.findServices(LIBRARY_SERVICE_TYPE);
+        libraries = readLibraries(application);
+    }
+    protected List<Object> readLibraries(Application application) {
+        return application.findServices(LIBRARY_SERVICE_TYPE);
     }
 
     /*
@@ -261,5 +267,4 @@ public class LibraryServlet extends BaseToolkitServlet {
         }
         return null;
     }
-
 }

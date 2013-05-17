@@ -17,13 +17,18 @@
 package com.ibm.xsp.sbtsdk.servlets;
 
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ibm.commons.runtime.Application;
 import com.ibm.commons.runtime.RuntimeConstants;
 import com.ibm.commons.runtime.util.UrlUtil;
+import com.ibm.sbt.jslibrary.servlet.DojoLibrary;
+import com.ibm.sbt.jslibrary.servlet.JQueryLibrary;
 import com.ibm.sbt.jslibrary.servlet.LibraryRequest;
 import com.ibm.sbt.jslibrary.servlet.LibraryRequestParams;
 import com.ibm.sbt.jslibrary.servlet.LibraryServlet;
@@ -67,13 +72,32 @@ public class ToolkitServlet extends LibraryServlet {
 			super.init(params);
 		}
 	    protected String getDefaultJsLib() {
-	    	return DominoDojoLibrary.NAME;
+	    	return JavaScriptLibraries.LIBRARIES[0].getLibType().toString();
 	    }
 	    
 	    protected String getDefaultJsVersion() {
-	    	return "1.7";
+	    	return JavaScriptLibraries.LIBRARIES[0].getLibVersion();
 	    }
-}
+	}
+	
+    protected List<Object> readLibraries(Application application) {
+    	List<Object> libraries = super.readLibraries(application);
+    	
+    	// Filter out the conflicting libraries
+    	for(Iterator<Object> it=libraries.iterator(); it.hasNext(); ) {
+    		Object o = it.next();
+    		if(o instanceof DojoLibrary) {
+    			if(!(o instanceof DominoDojoLibrary)) {
+    				it.remove();
+    			}
+    		} else if(o instanceof JQueryLibrary) {
+    			if(!(o instanceof JQueryLibrary)) {
+    				it.remove();
+    			}
+    		}
+    	}
+    	return libraries;
+    }
 	
 	protected LibraryRequest createLibraryRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		return new DominoLibraryRequest(req, resp);

@@ -17,12 +17,12 @@
 /**
  * 
  */
-define(["sbt/_bridge/declare"], function(declare) {
+define(["../../_bridge/declare"], function(declare) {
 
     /**
      * @module sbt.controls.grid.GridAction
      */
-    declare("sbt.controls.grid.GridAction", [], {
+    var GridAction = declare(null, {
          
     	 /**
     	  * Grid Action Constructor function
@@ -55,5 +55,5 @@ define(["sbt/_bridge/declare"], function(declare) {
 
     });
     
-    return sbt.controls.grid.GridAction;
+    return GridAction;
 });

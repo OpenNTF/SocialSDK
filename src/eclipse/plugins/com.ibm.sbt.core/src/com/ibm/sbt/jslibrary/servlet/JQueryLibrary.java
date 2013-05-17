@@ -34,7 +34,10 @@ public class JQueryLibrary extends RequireJSLibrary {
 	 * Default constructor
 	 */
 	public JQueryLibrary() {
-		super(NAME); //$NON-NLS-1$
+		this(NAME); 
+	}
+	public JQueryLibrary(String name) {
+		super(NAME);
 	}
 
 	/*

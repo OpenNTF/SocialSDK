@@ -3,6 +3,7 @@ package nsf.playground.beans;
 import com.ibm.sbt.playground.assets.AssetNode;
 import com.ibm.sbt.playground.assets.CategoryNode;
 import com.ibm.sbt.playground.assets.jssnippets.JSSnippetAssetNode;
+import com.ibm.xsp.sbtsdk.servlets.JavaScriptLibraries;
 
 /**
  * Classes that encapsulates the business logic for a JS snippet.
@@ -11,7 +12,16 @@ import com.ibm.sbt.playground.assets.jssnippets.JSSnippetAssetNode;
  */
 public abstract class JavaScriptSnippetBean extends AssetBean {
 
+	
 	public static final String FORM = "JavaScriptSnippet";
+	
+	public String[] getJavaScriptLibraries() {
+		String[] libs = new String[JavaScriptLibraries.LIBRARIES.length];
+		for(int i=0; i<libs.length; i++) {
+			libs[i] = JavaScriptLibraries.LIBRARIES[i].getLabel();
+		}
+		return libs;
+	}
 	
 	protected String getAssetForm() {
 		return FORM;

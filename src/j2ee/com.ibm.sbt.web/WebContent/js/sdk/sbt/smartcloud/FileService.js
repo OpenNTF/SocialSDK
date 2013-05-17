@@ -21,8 +21,8 @@
 define(
 		[ 'sbt/_bridge/declare', 'sbt/config', 'sbt/lang', 'sbt/smartcloud/core', 'sbt/xml', 'sbt/xpath', 'sbt/Cache', 'sbt/Endpoint',
 				'sbt/smartcloud/FileConstants', 'sbt/smartcloud/Subscriber', 'sbt/base/BaseService', 'sbt/log', 'sbt/stringUtil', 'sbt/validate',
-				'sbt/base/XmlHandler' ], function(declare, cfg, lang, con, xml, xpath, Cache, Endpoint, FileConstants, Subscriber, BaseService, log,
-				stringUtil, validate, XmlHandler) {
+				'sbt/base/XmlHandler', 'sbt/util' ], function(declare, cfg, lang, con, xml, xpath, Cache, Endpoint, FileConstants, Subscriber, BaseService, log,
+				stringUtil, validate, XmlHandler, util) {
 			
 			var fileHandler = new XmlHandler({xpath_map: FileConstants.xpath_File, xpath_feed_map: FileConstants.xpath_feed_File,nameSpaces:con.namespaces});
 
@@ -797,12 +797,12 @@ define(
 											notifyCbNoCache(args, "SUCCESS");
 										},
 										error : function(error) {
-											validate.notifyError(error, args);
+											util.notifyError(error, args);
 										}
 									});
 								};
 								reader.onerror = function(event) {
-									validate.notifyError(error, args);
+									util.notifyError(error, args);
 								};
 								reader.readAsArrayBuffer(files[0]);
 							}

@@ -594,7 +594,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 							}
 						},
 						error: function(error){
-							validate.notifyError(error,args);
+							util.notifyError(error,args);
 						}
 					});
 		    };

@@ -17,14 +17,14 @@
 /**
  * 
  */
-define([ "sbt/_bridge/declare",
+define([ "../_bridge/declare",
          "dijit/_Widget", "dijit/_Templated"], 
         function(declare, _Widget, _Templated) {
 
     /**
      * @module sbt.widget._TemplatedWidget
      */
-    declare("sbt.widget._TemplatedWidget", [ dijit._Widget, dijit._Templated ], {
+    var _TemplatedWidget = declare([ dijit._Widget, dijit._Templated ], {
         
         _blankGif: dijit._Widget.prototype._blankGif,
 
@@ -42,5 +42,5 @@ define([ "sbt/_bridge/declare",
         
     });
     
-    return sbt.widget._TemplatedWidget;
+    return _TemplatedWidget;
 });

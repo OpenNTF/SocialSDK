@@ -17,13 +17,13 @@
 /**
  * 
  */
-define([ "sbt/_bridge/declare", "dojo/_base/lang", "dojo/dom-construct", "dijit/_WidgetBase" ,'dojo/dom-class'], 
+define([ "../../_bridge/declare", "dojo/_base/lang", "dojo/dom-construct", "dijit/_WidgetBase" ,'dojo/dom-class'], 
          function(declare, lang, domConstruct, _WidgetBase, domClass) {
 
     /*
      * @module sbt.widget.grid._GridRenderer
      */
-    declare("sbt.widget.grid._GridRenderer", null, {
+    var _GridRenderer = declare(null, {
         
         _blankGif: dijit._WidgetBase.prototype._blankGif,
         
@@ -89,5 +89,5 @@ define([ "sbt/_bridge/declare", "dojo/_base/lang", "dojo/dom-construct", "dijit/
                
     });
     
-    return sbt.widget.grid._GridRenderer;
+    return _GridRenderer;
 });

@@ -17,13 +17,13 @@
 /**
  * 
  */
-define([ "sbt/_bridge/declare" ], 
+define([ "../../_bridge/declare" ], 
          function(declare) {
 
     /**
      * @module sbt.widget.grid._GridRenderer
      */
-    declare("sbt.widget.grid._GridRenderer", null, {
+    var _GridRenderer = declare(null, {
         
         _blankGif: dijit._Widget.prototype._blankGif,
         
@@ -71,5 +71,5 @@ define([ "sbt/_bridge/declare" ],
        
     });
     
-    return sbt.widget.grid._GridRenderer;
+    return _GridRenderer;
 });

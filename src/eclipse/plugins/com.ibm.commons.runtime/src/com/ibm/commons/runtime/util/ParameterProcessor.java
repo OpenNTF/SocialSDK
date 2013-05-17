@@ -20,8 +20,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-import javax.servlet.http.HttpServletRequest;
-
 import com.ibm.commons.runtime.Application;
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.util.StringUtil;
@@ -64,16 +62,19 @@ public class ParameterProcessor {
      * @param input
      * @return
      */
-    public static String process(String input, final HttpServletRequest request) {
+    public static String process(String input, final ParameterProvider provider, boolean includeDefault) {
+        if (!includeDefault) {
+            return process(input, provider);
+        }
         if(StringUtil.isNotEmpty(input)) {
             // default behaviour is to use context or if not available use application properties
             final Context context = Context.getUnchecked();
             final Application application = Application.getUnchecked();
-            ParameterProvider provider = new ParameterProvider() {
+            ParameterProvider defaultProvider = new ParameterProvider() {
                 @Override
                 public String getParameter(String name) {
-                    if (request != null) {
-                        String value = request.getParameter(name);
+                    if (provider != null) {
+                        String value = provider.getParameter(name);
                         if (value != null) {
                             return value;
                         }
@@ -85,7 +86,7 @@ public class ParameterProcessor {
                 }
             };
             
-            return process(input, DELIM_START, DELIM_END, provider);
+            return process(input, DELIM_START, DELIM_END, defaultProvider);
         }
         return input;
     }

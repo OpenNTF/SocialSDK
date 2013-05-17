@@ -79,22 +79,13 @@ window._sbt_bridge_compat = true;
 		function resolvePath(relativeId) {
 			// do relative path resolution
 			if (relativeId.charAt(0) === '.') {
-				if(relativeId.indexOf("text!") >0 && relativeId.charAt(relativeId.indexOf("!")+1) === '.'){
-					var base = name.substring(0,name.indexOf("/")+1) + "text!";
-					relativeId = name.substring(0, name.lastIndexOf('/') + 1)+ relativeId;
-					while (lastId !== relativeId) {
-						var lastId = relativeId;
-						relativeId = relativeId.replace(/\/[^\/]*\/\.\.\//, '/');
-					}
-					relativeId = base+relativeId;
-				}else{
-					relativeId = name.substring(0, name.lastIndexOf('/') + 1)
+				relativeId = name.substring(0, name.lastIndexOf('/') + 1)
 							+ relativeId;
 					while (lastId !== relativeId) {
 						var lastId = relativeId;
 						relativeId = relativeId.replace(/\/[^\/]*\/\.\.\//, '/');
 					}
-				}
+				
 				relativeId = relativeId.replace(/\/\.\//g, '/');
 			}
 			return relativeId.replace(/\//g, ".");

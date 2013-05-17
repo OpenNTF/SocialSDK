@@ -75,9 +75,7 @@ public class DojoLibrary extends AbstractLibrary {
 	 */
 	public DojoLibrary() {
 		// TODO remove hardcoded strings
-		super(NAME, "1.4", ""); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		minimumAmdVersion = normalizeVersion("1.7.0");
-		minimumDojo2Version = normalizeVersion("1.8.0");
+		this(NAME, "1.4", ""); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 
 	/**
@@ -88,6 +86,8 @@ public class DojoLibrary extends AbstractLibrary {
 	 */
 	public DojoLibrary(String libraryName, String minimumVersion, String maximumVersion) {
 		super(libraryName, minimumVersion, maximumVersion);
+		minimumAmdVersion = normalizeVersion("1.7.0");
+		minimumDojo2Version = normalizeVersion("1.8.0");
 	}
 
 	/*

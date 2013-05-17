@@ -25,37 +25,11 @@ import com.ibm.commons.util.io.json.JsonParser;
 import com.ibm.xsp.context.DojoLibrary;
 import com.ibm.xsp.context.DojoLibraryFactory;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
+import com.ibm.xsp.sbtsdk.servlets.JavaScriptLibraries;
 
 
 public class PreviewJavaScriptHandler extends PreviewHandler {
 	
-	public static class JSLibrary {
-
-		private String label;
-		private String libType;
-		private String libVersion;
-		private String libUrl;
-		public JSLibrary(String label, String libType, String libVersion, String libUrl) {
-			this.label = label;
-			this.libType = libType;
-			this.libVersion = 
-			this.libUrl = libUrl;
-		}
-	}
-	// See: https://developers.google.com/speed/libraries/devguide
-//	public static JSLibrary[] LIBRARIES = {
-//		new JSLibrary("<default>","dojo","1.6.1",""),
-//		//new JSLibrary("Dojo Toolkit 1.4.3","dojo","1.4.3","//ajax.googleapis.com/ajax/libs/dojo/1.4.3/dojo/dojo.js"),
-//		new JSLibrary("Dojo Toolkit 1.4.3","dojo","1.4.3","//ajax.googleapis.com/ajax/libs/dojo/1.4.3"),
-//		new JSLibrary("Dojo Toolkit 1.5.2","dojo","1.5.2","//ajax.googleapis.com/ajax/libs/dojo/1.5.2"),
-//		new JSLibrary("Dojo Toolkit 1.6.1","dojo","1.6.1","//ajax.googleapis.com/ajax/libs/dojo/1.6.1"),
-//		new JSLibrary("Dojo Toolkit 1.7.4","dojo","1.7.4","//ajax.googleapis.com/ajax/libs/dojo/1.7.4"),
-//		new JSLibrary("Dojo Toolkit 1.8.4","dojo","1.8.4","//ajax.googleapis.com/ajax/libs/dojo/1.8.4"),
-//		new JSLibrary("Dojo Toolkit 1.9.0","dojo","1.9.0","//ajax.googleapis.com/ajax/libs/dojo/1.9.0"),
-//		//new JSLibrary("JQuery 1.8.3","jquery","1.8.3","//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"),
-//		new JSLibrary("JQuery 1.8.3","jquery","1.8.3","//ajax.googleapis.com/ajax/libs/jquery/1.8.3"),
-//	};
-
 	private static final String LAST_REQUEST = "javascriptsnippet.lastrequest"; 
 
 	static class RequestParams implements Serializable {
@@ -125,8 +99,14 @@ public class PreviewJavaScriptHandler extends PreviewHandler {
 		String dbUrl = composeDatabaseUrl(req,serverUrl);
 		
 		//DojoLibrary dojoLib = DojoLibraryFactory.getDefaultLibrary();
-		String dojoPath = getDojoPath(null,serverUrl);
-
+		int libIdx = Math.max(0, options.getInt("lib"));
+		JavaScriptLibraries.JSLibrary jsLib = JavaScriptLibraries.LIBRARIES[libIdx]; 
+		
+		String jsLibraryPath = jsLib.getLibUrl();
+		if(libIdx==0) {
+			jsLibraryPath = getDefautLibraryPath(serverUrl);
+		}
+		
 //		Map m = req.getParameterMap();
 //		for(Object k: m.keySet()) {
 //			Object v = m.get(k);
@@ -145,6 +125,7 @@ public class PreviewJavaScriptHandler extends PreviewHandler {
 		pw.println("<head>");
 		pw.println("  <title>Social Business Playground</title>");
 		
+		boolean isDojo = jsLib.getLibType()==JavaScriptLibraries.LibType.DOJO;
 		if(StringUtil.equals(theme, "bootstrap")) {
 			pw.println("  <style type=\"text/css\">");
 //			pw.println("    @import \""+dojoPath+"dijit/themes/claro/claro.css\";");
@@ -154,68 +135,110 @@ public class PreviewJavaScriptHandler extends PreviewHandler {
 //			bodyTheme = "claro";
 		} else if( (ExtLibUtil.isXPages853() && StringUtil.equals(theme, "oneui")) || StringUtil.equals(theme, "oneuiv2.1")) {
 			pw.println("  <style type=\"text/css\">");
-			pw.println("    @import \""+dojoPath+"dijit/themes/claro/claro.css\";");
-			pw.println("    @import \""+dojoPath+"dojo/resources/dojo.css\";");
-			pw.println("    @import \""+dojoPath+"dijit/themes/dijit.css\";");			
+			if(isDojo) {
+				pw.println("    @import \""+jsLibraryPath+"dijit/themes/claro/claro.css\";");
+				pw.println("    @import \""+jsLibraryPath+"dojo/resources/dojo.css\";");
+				pw.println("    @import \""+jsLibraryPath+"dijit/themes/dijit.css\";");
+			}
 			pw.println("    @import \"/xsp/.ibmxspres/domino/oneuiv2.1/base/core.css\";");
 			pw.println("    @import \"/xsp/.ibmxspres/domino/oneuiv2.1/base/dojo.css\";");
-			pw.println("    @import \"/xsp/.ibmxspres/domino/oneuiv2.1/defaultTheme/defaultTheme.css\";");
-			pw.println("    @import \"/xsp/.ibmxspres/domino/oneuiv2.1/defaultTheme/dojoTheme.css\";");
+			if(isDojo) {
+				pw.println("    @import \"/xsp/.ibmxspres/domino/oneuiv2.1/defaultTheme/defaultTheme.css\";");
+				pw.println("    @import \"/xsp/.ibmxspres/domino/oneuiv2.1/defaultTheme/dojoTheme.css\";");
+			}
 			pw.println("  </style>");
 			bodyTheme = "lotusui";
 		//} else if( (ExtLibUtil.isXPages900() && StringUtil.equals(theme, "oneui")) || StringUtil.equals(theme, "oneui302")) {
 		} else if( (!ExtLibUtil.isXPages853() && StringUtil.equals(theme, "oneui")) || StringUtil.equals(theme, "oneui302")) {
 			pw.println("  <style type=\"text/css\">");
-			pw.println("    @import \""+dojoPath+"dijit/themes/claro/claro.css\";");
-			pw.println("    @import \""+dojoPath+"dojo/resources/dojo.css\";");
-			pw.println("    @import \""+dojoPath+"dijit/themes/dijit.css\";");			
+			if(isDojo) {
+				pw.println("    @import \""+jsLibraryPath+"dijit/themes/claro/claro.css\";");
+				pw.println("    @import \""+jsLibraryPath+"dojo/resources/dojo.css\";");
+				pw.println("    @import \""+jsLibraryPath+"dijit/themes/dijit.css\";");
+			}
 			pw.println("    @import \"/xsp/.ibmxspres/.oneuiv302/oneui/css/base/core.css\";");
 			pw.println("    @import \"/xsp/.ibmxspres/.oneuiv302/oneui/css/base/dojo.css\";");
 			pw.println("    @import \"/xsp/.ibmxspres/.oneuiv302/oneui/css/defaultTheme/defaultTheme.css\";");
-			pw.println("    @import \"/xsp/.ibmxspres/.oneuiv302/oneui/css/defaultTheme/dojoTheme.css\";");
-			pw.println("    @import \"/xsp/.ibmxspres/.oneuiv302/oneui/dojoTheme/lotusui30dojo/lotusui30dojo.css\";");
+			if(isDojo) {
+				pw.println("    @import \"/xsp/.ibmxspres/.oneuiv302/oneui/css/defaultTheme/dojoTheme.css\";");
+				pw.println("    @import \"/xsp/.ibmxspres/.oneuiv302/oneui/dojoTheme/lotusui30dojo/lotusui30dojo.css\";");
+			}
 			pw.println("  </style>");
 			bodyTheme = "lotusui30_body lotusui30_fonts lotusui30 lotusui30dojo";
 		} else if(StringUtil.equals(theme, "dojo") || StringUtil.equals(theme, "dojo-claro")) {
 			pw.println("  <style type=\"text/css\">");
-			pw.println("    @import \""+dojoPath+"dijit/themes/claro/claro.css\";");
-			pw.println("    @import \""+dojoPath+"dojo/resources/dojo.css\";");
+			pw.println("    @import \""+jsLibraryPath+"dijit/themes/claro/claro.css\";");
+			pw.println("    @import \""+jsLibraryPath+"dojo/resources/dojo.css\";");
 			pw.println("  </style>");
 			bodyTheme = "claro";
 		} else if(StringUtil.equals(theme, "dojo-tundra")) {
 			pw.println("  <style type=\"text/css\">");
-			pw.println("    @import \""+dojoPath+"dijit/themes/tundra/tundra.css\";");
-			pw.println("    @import \""+dojoPath+"dojo/resources/dojo.css\";");
+			pw.println("    @import \""+jsLibraryPath+"dijit/themes/tundra/tundra.css\";");
+			pw.println("    @import \""+jsLibraryPath+"dojo/resources/dojo.css\";");
 			pw.println("  </style>");
 			bodyTheme = "tundra";
 		} else if(StringUtil.equals(theme, "dojo-soria")) {
 			pw.println("  <style type=\"text/css\">");
-			pw.println("    @import \""+dojoPath+"dijit/themes/soria/soria.css\";");
-			pw.println("    @import \""+dojoPath+"dojo/resources/dojo.css\";");
+			pw.println("    @import \""+jsLibraryPath+"dijit/themes/soria/soria.css\";");
+			pw.println("    @import \""+jsLibraryPath+"dojo/resources/dojo.css\";");
 			pw.println("  </style>");
 			bodyTheme = "soria";
 		} else if(StringUtil.equals(theme, "dojo-nihilo")) {
 			pw.println("  <style type=\"text/css\">");
-			pw.println("    @import \""+dojoPath+"dijit/themes/nihilo/nihilo.css\";");
-			pw.println("    @import \""+dojoPath+"dojo/resources/dojo.css\";");
+			pw.println("    @import \""+jsLibraryPath+"dijit/themes/nihilo/nihilo.css\";");
+			pw.println("    @import \""+jsLibraryPath+"dojo/resources/dojo.css\";");
 			pw.println("  </style>");
 			bodyTheme = "soria";
 		}
-		pw.println("  <script>");
-		pw.println("    dojoConfig= {");
-		pw.println("      parseOnLoad: true,");
-		if(debug) {
-			pw.println("      isDebug: true");
+
+		switch(jsLib.getLibType()) {
+			case DOJO: {
+				jsLibraryPath = PathUtil.concat(jsLibraryPath,"/dojo/dojo.js",'/');
+				pw.println("  <script type=\"text/javascript\">");
+				pw.println("  	dojoConfig = {");
+				if(jsLib.isAsync()) {
+					pw.println("  	    async: true,");
+				}
+				if(debug) {
+					pw.println("        isDebug: true,");
+				}
+				pw.println("  	    parseOnLoad: true");
+				pw.println("  	};");
+				pw.println("  </script>");
+				pw.println("  <script type=\"text/javascript\" src=\""+jsLibraryPath+"\"></script>");
+			} break;
+			case JQUERY: {
+				if(true) {
+					String jqueryPath = PathUtil.concat(jsLibraryPath,"/jquery.min",'/');
+					String jqueryUiPath = PathUtil.concat(jsLibraryPath,"/jquery-ui.min",'/');
+					String jqueryUiCssPath = PathUtil.concat(jsLibraryPath,"/themes/base/jquery-ui.css",'/');
+					pw.println("  <script type=\"text/javascript\" src=\"https://priand64.swg.usma.ibm.com/xsp/.ibmxspres/.sbtsdk/js/libs/require.js\"></script>");
+					pw.println("  <script type=\"text/javascript\">");
+					pw.println("  	requirejs.config({");
+					pw.println("  	  paths: {");
+					pw.println("        'jquery' : '"+jqueryPath+"',");
+					pw.println("        'jqueryui' : '"+jqueryUiPath+"'");
+					pw.println("  	  },");
+					pw.println("  	  shim: {");
+					pw.println("        'jquery/ui': {");
+					pw.println("          deps: ['jquery'],");
+					pw.println("          exports: '$'");
+					pw.println("        }");
+					pw.println("  	  }");
+					pw.println("  	});");
+					pw.println("  </script>");
+					pw.println("  <link rel=\"stylesheet\" type=\"text/css\" title=\"Style\" href=\""+jqueryUiCssPath+"\">");
+				} else {
+					jsLibraryPath = PathUtil.concat(jsLibraryPath,"/jquery.min.js",'/');
+					pw.println("  <script type=\"text/javascript\" src=\"/xsp/.ibmxspres/.sbtsdk/js/libs/require.js\"></script>");
+					pw.println("  <script type=\"text/javascript\" src=\""+jsLibraryPath+"\"></script>");
+				}
+			} break;
 		}
-		pw.println("    };");
-		pw.println("  </script>");		
-
-		//pw.println("  <script type=\"text/javascript\" src=\""+dojoPath+"dojo/dojo.js\"></script>");
-		pw.println("  <script type=\"text/javascript\" src=\""+dojoPath+"dojo/dojo.js\" data-dojo-config=\"parseOnLoad: true\"></script>");
-
 		
-		String dojoVersion = "1.6.1"; //dojoLib.getVersionTag();
-		pw.print("  <script type=\"text/javascript\" src=\""+composeToolkitUrl(dbUrl)+"?ver="+dojoVersion);
+		String libType = jsLib.getLibType().toString();
+		String libVersion = jsLib.getLibVersion();
+		pw.print("  <script type=\"text/javascript\" src=\""+composeToolkitUrl(dbUrl)+"?lib="+libType+"&ver="+libVersion);
 		pw.print("&env=");
 		pw.print(envName);
 		pw.println("\"></script>");
@@ -248,9 +271,11 @@ public class PreviewJavaScriptHandler extends PreviewHandler {
 		}
 		
 		// Script for the dojo parser
-		pw.println("  <script>");
-		pw.println("    require(['dojo/parser']);"); // avoid dojo warning
-		pw.println("  </script>");		
+		if(isDojo) {
+			pw.println("  <script>");
+			pw.println("    require(['dojo/parser']);"); // avoid dojo warning
+			pw.println("  </script>");
+		}
 		
 		// Add the firebug lite debugging tools
 		if(debug) {
@@ -282,12 +307,8 @@ public class PreviewJavaScriptHandler extends PreviewHandler {
 		pw.close();
 	}	
 	
-	private String getDojoPath(DojoLibrary lib, String serverUrl) {
-//		//DOJO_URLPATH 		= "/xsp/.ibmxspres/dojoroot-1.8.0/";
-//		//return serverUrl+DOJO_URLPATH;
-		if(lib==null) {
-			lib = DojoLibraryFactory.getDefaultLibrary();
-		}
+	private String getDefautLibraryPath(String serverUrl) {
+		DojoLibrary lib = DojoLibraryFactory.getDefaultLibrary();
         String s = '-'+lib.getVersionTag();
 		return serverUrl+"/xsp/.ibmxspres/dojoroot"+s+"/";
 	}

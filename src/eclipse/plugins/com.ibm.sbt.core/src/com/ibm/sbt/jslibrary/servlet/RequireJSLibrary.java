@@ -51,7 +51,7 @@ public abstract class RequireJSLibrary extends AbstractLibrary {
 
 	private static final String			DEFINE_MODULE			= MODULE_CONFIG;
 
-	private enum MODULE_TYPE {
+	public enum MODULE_TYPE {
 		MODULE, EXTENSION, LIBRARY
 	};
 

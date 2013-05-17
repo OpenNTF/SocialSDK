@@ -92,7 +92,7 @@
 		</managed-property>
 	</managed-bean>
 	
-	<!-- SSO -->	
+	<!-- Connections SSO -->	
 	<managed-bean>
 		<managed-bean-name>connectionsSSO</managed-bean-name>
 		<managed-bean-class>com.ibm.sbt.services.endpoints.ConnectionsSSOEndpoint</managed-bean-class>

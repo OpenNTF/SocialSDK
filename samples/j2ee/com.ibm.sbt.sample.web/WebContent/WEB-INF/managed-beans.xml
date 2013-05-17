@@ -25,7 +25,7 @@
 		<managed-bean-scope>application</managed-bean-scope>
 		<managed-property>
 			<property-name>endpoints</property-name>
-			<value>connections,connectionsOA2,smartcloud,smartcloudOA2,domino,acmeAir,conAcmeApp</value>
+			<value>connections,connectionsOA2,smartcloud,smartcloudOA2,domino,acmeAir,conAcmeApp,connectionsSSO</value>
 			<!-- <value>connections,connectionsOA2,smartcloud,smartcloudOA2,domino,sametime</value> -->
 		</managed-property>
 		<managed-property>
@@ -84,6 +84,22 @@
 		<managed-property>
 			<property-name>authenticationService</property-name>
 			<value>communities/service/atom/communities/my</value>
+		</managed-property>
+		<!-- Trust the connection -->
+		<managed-property>
+			<property-name>forceTrustSSLCertificate</property-name>
+			<value>true</value>
+		</managed-property>
+	</managed-bean>
+	
+	<!-- Connections SSO -->	
+	<managed-bean>
+		<managed-bean-name>connectionsSSO</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.services.endpoints.ConnectionsSSOEndpoint</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>url</property-name>
+			<value>%{sso.url}</value>
 		</managed-property>
 		<!-- Trust the connection -->
 		<managed-property>

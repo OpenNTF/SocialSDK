@@ -17,14 +17,14 @@
 /**
  * 
  */
-define([ "sbt/_bridge/declare",
+define([ "../_bridge/declare",
          "dojo/_base/lang", "dojo/_base/connect", "dojo/touch", "dijit/_WidgetBase", "dijit/_TemplatedMixin"], 
         function(declare, lang, connect, touch, _WidgetBase, _TemplatedMixin) {
 
     /**
      * @module sbt.widget._TemplatedWidget
      */
-    declare("sbt.widget._TemplatedWidget", [ dijit._WidgetBase, dijit._TemplatedMixin ], {
+    var _TemplatedWidget = declare([ dijit._WidgetBase, dijit._TemplatedMixin ], {
         
         _blankGif: dijit._WidgetBase.prototype._blankGif,
 
@@ -43,5 +43,5 @@ define([ "sbt/_bridge/declare",
     
     });
     
-    return sbt.widget._TemplatedWidget;
+    return _TemplatedWidget;
 });

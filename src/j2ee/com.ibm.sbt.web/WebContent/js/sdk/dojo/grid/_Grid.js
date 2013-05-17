@@ -17,12 +17,12 @@
 /**
  * 
  */
-define([ "sbt/_bridge/declare", "sbt/data/AtomReadStore", "sbt/widget/_TemplatedWidget"], 
+define([ "../../_bridge/declare", "../../data/AtomReadStore", "../../widget/_TemplatedWidget"], 
         function(declare, AtomReadStore, _TemplatedWidget){
     /**
      * @module sbt.widget.grid._Grid
      */
-    declare("sbt.widget.grid._Grid", [ _TemplatedWidget ], {
+    var _Grid = declare([ _TemplatedWidget ], {
 
         templatePath: dojo.moduleUrl("sbt", "controls/grid/templates/Grid.html"),
      
@@ -64,5 +64,5 @@ define([ "sbt/_bridge/declare", "sbt/data/AtomReadStore", "sbt/widget/_Templated
     
     });
     
-    return sbt.widget.grid._Grid;
+    return _Grid;
 });

@@ -183,7 +183,9 @@ var Endpoint = declare("sbt.Endpoint", null, {
                 promise.fullFilled(response.data);
                 promise.response.fullFilled(response);
             }, function(error) {
-            	error.message = self.getErrorMessage(error.cause);
+            	if(!error.message){
+            		error.message = self.getErrorMessage(error.cause);
+            	}
                 if (self._isAuthRequired(error, options)) {
                     return self._authenticate(url, options, promise);
                 }                
@@ -534,6 +536,10 @@ var Endpoint = declare("sbt.Endpoint", null, {
  * @param name
  */
 Endpoint.find = function(name){
+	if (!sbt || !sbt.Endpoints) {
+		var nf = !sbt? "sbt" : "sbt.Endpoints";
+		throw new Error(nf+" object not defined");
+	}
     if (!sbt.Endpoints[name]){
         log.error(stringUtil.substitute(nls.cannot_find_endpoint, [name]));
         var transport = new ErrorTransport(name);

@@ -8,7 +8,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 
  * 
  * Unless required by applicable law or agreed to in writing, software 
- * distributed under the License is distributed on an "AS IS" BASIS, 
+ * distributed under the License is distributed on an "AS IS" BASIS,  
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
@@ -158,12 +158,25 @@ public class OAProvider implements Serializable {
 		this.accessTokenURL = accessTokenURL;
 	}
 
+	public OAuthHandler getOauthHandler() {
+		return oauthHandler;
+	}
+
+	public void setOauthHandler(OAuthHandler oauthHandler) {
+		this.oauthHandler = oauthHandler;
+	}
+
 	public String getSignatureMethod() {
 		return signatureMethod;
 	}
 
 	public void setSignatureMethod(String signatureMethod) {
 		this.signatureMethod = signatureMethod;
+
+		// If HMAC is used, change the handler
+		if (StringUtil.equalsIgnoreCase(Configuration.HMAC_SIGNATURE, signatureMethod)) {
+			this.setOauthHandler(new HMACOAuth1Handler());
+		}
 	}
 
 	public int getExpireThreshold() {

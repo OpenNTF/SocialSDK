@@ -17,7 +17,7 @@
 /**
  * 
  */
-define([ "sbt/_bridge/declare", "sbt/lang", "sbt/itemFactory", "sbt/widget/grid/_Grid"], 
+define([ "../../_bridge/declare", "../../lang", "../../itemFactory", "../../widget/grid/_Grid"], 
         function(declare, lang, itemFactory, _Grid) {
 
     /**
@@ -25,7 +25,7 @@ define([ "sbt/_bridge/declare", "sbt/lang", "sbt/itemFactory", "sbt/widget/grid/
      * @namespace sbt.controls.grid
      * @module sbt.controls.grid.Grid
      */
-    declare("sbt.controls.grid.Grid", [ _Grid ], {
+    var Grid = declare([_Grid], {
 
         _strings: {},
         _storeArgs: null,
@@ -342,10 +342,12 @@ define([ "sbt/_bridge/declare", "sbt/lang", "sbt/itemFactory", "sbt/widget/grid/
         
 
         _updateWithError: function(e) {
+        	console.error(e.message);
+        	e = "There Was An Error Communicating With The Server";
            this.renderer.renderError(this, this.gridNode, e);
         }
 
     });
     
-    return sbt.controls.grid.Grid;
+    return Grid;
 });

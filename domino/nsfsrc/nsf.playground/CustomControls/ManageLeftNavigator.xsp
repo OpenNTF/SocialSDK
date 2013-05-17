@@ -4,14 +4,14 @@
 		<xe:this.treeNodes>
 			<xe:basicContainerNode transparent="true"
 				loaded="${javascript:optionsBean.javaScriptSnippetsEnabled}">
-				<xe:pageTreeNode page="ManageSnippetsByCategory"
-					label="JavaScript Snippets By Category" selection="/Manage/SnippetsByCategory">
+				<xe:pageTreeNode page="ManageJavaScriptSnippetsByCategory"
+					label="JavaScript Snippets By Category" selection="/Manage/JavaScriptSnippetsByCategory">
 				</xe:pageTreeNode>
-				<xe:pageTreeNode page="ManageSnippetsByAuthor"
-					label="JavaScript Snippets By Author" selection="/Manage/SnippetsByAuthor">
+				<xe:pageTreeNode page="ManageJavaScriptSnippetsByAuthor"
+					label="JavaScript Snippets By Author" selection="/Manage/JavaScriptSnippetsByAuthor">
 				</xe:pageTreeNode>
-				<xe:pageTreeNode page="ManageImportSnippets" label="Import JavaScript Snippets"
-					selection="/Manage/ImportSnippets">
+				<xe:pageTreeNode page="ManageImportJavaScriptSnippets" label="Import JavaScript Snippets"
+					selection="/Manage/ImportJavaScriptSnippets">
 				</xe:pageTreeNode>
 			</xe:basicContainerNode>
 			<xe:basicContainerNode transparent="true"

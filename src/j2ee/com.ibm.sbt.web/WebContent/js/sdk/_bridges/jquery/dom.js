@@ -17,11 +17,11 @@
 /**
  * Social Business Toolkit SDK - Some DOM utilities.
  */
-define(['jquery'], function($) {
+define(['sbt/_bridge/jquery'], function() {
 	return {
         byId: function(id) {
         	if (typeof id === 'string') {
-        		return $("#"+id)[0];
+        		return jQuery("#"+id)[0];
         	} else {
         		return id;
         	}
@@ -30,14 +30,14 @@ define(['jquery'], function($) {
             return document.createTextNode(text);
         },
         create: function(element, props, refNode) {
-        	var node = $(element).attr(props);
+        	var node = jQuery(element).attr(props);
         	if (refNode) {
-        		node.appendTo($(refNode));
+        		node.appendTo(jQuery(refNode));
         	}
 			return node[0];
 		},
 		destroy: function(node) {
-		    $(node).remove();
+		    jQuery(node).remove();
 		},
         removeAll: function(id) {
             var node = this.byId(id);

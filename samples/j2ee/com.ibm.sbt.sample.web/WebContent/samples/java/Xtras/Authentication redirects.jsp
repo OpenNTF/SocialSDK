@@ -71,7 +71,7 @@ and that additional code must not fail in such conditions.
 
 		} catch (Throwable e) {
 			out.println("<pre>");
-			e.printStackTrace(new PrintWriter(out));
+			out.println(e.getMessage());
 			out.println("</pre>");
 			//blocking exeution from continuing if the API call fails (after showing an error message).
 			return;

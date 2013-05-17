@@ -4,15 +4,16 @@
 <%@page import="com.ibm.sbt.playground.assets.RootNode"%>
 <%@page import="com.ibm.sbt.playground.assets.jssnippets.JSSnippet"%>
 <%@page import="java.util.List"%>
+<%@page import="javax.servlet.http.HttpServletRequest"%>
 <%@page import="com.ibm.commons.util.StringUtil"%>
 <%@page import="com.ibm.commons.runtime.util.ParameterProcessor"%>
+<%@page import="com.ibm.commons.runtime.util.ParameterProcessor.ParameterProvider"%>
 <%@page import="com.ibm.sbt.sample.web.util.SnippetFactory"%>
 <%@page import="com.ibm.sbt.sample.web.util.Util"%>
 <!DOCTYPE html>
 <html lang="en" style="height: 100%;">
   <%
       String snippetName = request.getParameter("snippet");
-      JSSnippet snippet = (JSSnippet)SnippetFactory.getJsSnippet(application, request, snippetName);
       String html = null;
       String js = null;
       String css = null;
@@ -22,6 +23,7 @@
       
       // doGet
       if(request.getMethod().equals("GET")){
+          JSSnippet snippet = (JSSnippet)SnippetFactory.getJsSnippet(application, request, snippetName);
           if (snippet != null) {
               if (html == null)
                   html = snippet.getHtml();
@@ -29,20 +31,34 @@
                   js = snippet.getJs();
               if (css == null)
                   css = snippet.getCss();
-              if(theme == null)
+              if(StringUtil.isEmpty(theme))
                   theme = snippet.getTheme();
           
               // replace substitution variables
+          	  final HttpServletRequest finalRequest = request;
               if (StringUtil.isNotEmpty(js)) {
-          js = ParameterProcessor.process(js, request);
+          		js = ParameterProcessor.process(js, new ParameterProvider() {
+          			public String getParameter(String name) {
+          				return finalRequest.getParameter(name);
+          			}
+          		}, true);
               }
               if (StringUtil.isNotEmpty(html)) {
-          html = ParameterProcessor.process(html, request);
+          		html = ParameterProcessor.process(html, new ParameterProvider() {
+          			public String getParameter(String name) {
+          				return finalRequest.getParameter(name);
+          			}
+          		}, true);
               }
           }
       } 
       // doPost
       else if (request.getMethod().equals("POST")){
+    	  JSSnippet snippet = null;
+          if (StringUtil.isEmpty(theme)){
+              snippet = (JSSnippet)SnippetFactory.getJsSnippet(application, request, snippetName);
+              theme = snippet.getTheme();
+          }
           html = request.getParameter("htmlData");
           js = request.getParameter("jsData");
           css = request.getParameter("cssData");
@@ -88,7 +104,7 @@
         String s = "<script>" + js + "</script>\n";
         out.println(s);
     } else {
-    	out.println("<div>Error, unable to load snippet: "+snippetName+"</div>");
+        out.println("<div>Error, unable to load snippet: "+snippetName+"</div>");
     }
     %>
   </body>

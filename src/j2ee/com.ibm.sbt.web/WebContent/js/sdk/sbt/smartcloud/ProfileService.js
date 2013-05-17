@@ -18,8 +18,8 @@
  * @author Vimal Dhupar
  * Helpers for accessing the SmartCloud Profiles services
  */
-define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt/Cache','sbt/smartcloud/Subscriber','sbt/Jsonpath','sbt/Endpoint', 'sbt/log' , 'sbt/validate'],
-		function(declare,cfg,lang,con,Cache,Subscriber,jsonPath, Endpoint, log, validate) {
+define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt/Cache','sbt/smartcloud/Subscriber','sbt/Jsonpath','sbt/Endpoint', 'sbt/log' , 'sbt/validate', 'sbt/util'],
+		function(declare,cfg,lang,con,Cache,Subscriber,jsonPath, Endpoint, log, validate, util) {
 	/**
 	Javascript APIs for IBM SmartCloud Profiles Service.
 	@module sbt.smartcloud.ProfileService
@@ -395,7 +395,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 						},
 						error: function(error){
 							log.debug("_load() : error occurred in load. Error code : {0}, Error status : {1} ", error.code, error.status);
-							validate.notifyError(error,args);
+							util.notifyError(error,args);
 						}
 					});
 			} 

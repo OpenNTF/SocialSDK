@@ -9,7 +9,7 @@ require(["sbt/connections/CommunityService", "sbt/dom"],
     				var community = communities[i];
     				text += community.getTitle() + ((i==communities.length-1) ? "" : ", ");
     			}
-                if (text.length == 0) {
+                if (!text.length) {
                     text = "You are not a member of any communities.";
                 }
     			dom.setText("content", text);	

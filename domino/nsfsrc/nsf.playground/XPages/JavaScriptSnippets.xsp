@@ -36,6 +36,7 @@
 	tabJs:			'#{id:tabJs}',
 	tabCss:			'#{id:tabCss}',
 	codeDialog:		'#{id:codeDialog}',
+	cbLibrary:		'#{id:comboLibrary}'
 }
 dojo.addOnLoad(function() {
    dojo.connect(window, "onresize", resize);
@@ -227,7 +228,11 @@ if(doc) {
 									</xe:basicLeafNode>
 								</xe:this.treeNodes>
 							</xe:toolbar>
-						</xe:djBorderPane>
+							<xp:comboBox id="comboLibrary">
+								<xp:selectItems>
+									<xp:this.value><![CDATA[#{javascript:snippetBean.getJavaScriptLibraries()}]]></xp:this.value>
+								</xp:selectItems>
+							</xp:comboBox></xe:djBorderPane>
 						<xe:djBorderPane region="center"
 							style="border: 1px solid #AAAAAA;">
 							<xp:div style="height: 100%">

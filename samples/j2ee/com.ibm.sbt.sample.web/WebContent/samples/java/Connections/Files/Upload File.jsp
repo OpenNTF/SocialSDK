@@ -101,7 +101,7 @@
 			}
 		} 
 		catch(Exception ex) { 
-			out.println(ex); 
+			out.println(ex.getMessage());
 		}
 		finally {
 			if(uploadedStream != null)

@@ -31,7 +31,7 @@
 </head>
 
 <body>
-	<h4>Get Files Shared By Me</h4>
+	<h4>Get Files Shared With Me</h4>
 	<div id="content">
 	<%
 	try {		
@@ -47,7 +47,7 @@
 		}
 	} catch (Throwable e) {
 		out.println("<pre>");
-		e.printStackTrace(new PrintWriter(out));
+		out.println(e.getMessage());
 		out.println("</pre>");	
 	}					
 	%>

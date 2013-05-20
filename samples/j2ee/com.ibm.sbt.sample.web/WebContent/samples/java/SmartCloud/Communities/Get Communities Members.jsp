@@ -14,6 +14,7 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"> 
+<%@page import="com.ibm.commons.runtime.Context"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="java.util.Collection"%>
 <%@page import="com.ibm.sbt.services.client.smartcloud.communities.Member"%> 
@@ -33,7 +34,7 @@
 	<%
 		try {
 			CommunityService svc = new CommunityService();
-			String communityUuid = "af20ded8-0daa-45aa-bdd3-0b5829b53581";
+			String communityUuid = Context.get().getProperty("sample.smartcloud.communityId1");
 			out.println("<b>Communities Members</b>");
 			out.println("<br>");
 			Collection<Member<Node>> members = svc
@@ -47,7 +48,7 @@
 			out.println("<br> Found " + members.size() + " members");
 		} catch (Throwable e) {
 			out.println("<pre>");
-			e.printStackTrace(new PrintWriter(out));
+			out.println(e.getMessage());
 			out.println("</pre>");
 		}
 	%>

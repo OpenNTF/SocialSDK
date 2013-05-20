@@ -44,7 +44,7 @@
 		out.println(communityService.addMember(community,member));
 	} catch (Throwable e) {
 		out.println("<pre>");
-		e.printStackTrace(new PrintWriter(out));
+		out.println(e.getMessage());
 		out.println("</pre>");
 	}			
 	%>

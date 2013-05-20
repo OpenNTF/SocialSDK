@@ -59,11 +59,13 @@ define([ "../../_bridge/declare", "../../lang", "../../itemFactory", "../../widg
             if (!this.store) {
                 if (args && args.storeArgs) {
                     this._storeArgs = args.storeArgs;
+                    this._storeArgs.endpoint = this.endpoint;
                     this.store = this.createDefaultStore(args.storeArgs);
                 } else if (this.options) {
                     this._storeArgs = this.options[this.defaultOption].storeArgs;
                     if (args && args.type && this.options.hasOwnProperty(args.type)) {
                         this._storeArgs = this.options[args.type].storeArgs;
+                        this._storeArgs.endpoint = this.endpoint;
                     }   
                 }
                 this.store = this.createDefaultStore(this._storeArgs);

@@ -3,7 +3,7 @@ require(["sbt/dom",
          "sbt/connections/controls/bootstrap/CommunityRendererMixin",
          "sbt/lang",
          "sbt/connections/CommunityService"], 
-    function(dom, CommunityGrid, CommunityRendererMixin, lang, CommunityService, CustomCommunityRow) {
+    function(dom, CommunityGrid, CommunityRendererMixin, lang, CommunityService) {
 	    
 		var communityService = new CommunityService();
 		var communitiesGrid = new CommunityGrid();

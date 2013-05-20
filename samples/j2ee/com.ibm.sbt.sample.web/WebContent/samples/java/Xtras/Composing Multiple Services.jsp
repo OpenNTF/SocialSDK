@@ -127,7 +127,7 @@ with the side effect of having the file uploaded twice.
 			}
 		} catch (Throwable e) {
 			out.println("<pre>");
-			e.printStackTrace(new PrintWriter(out));
+			out.println(e.getMessage());
 			out.println("</pre>");
 		}
 	%>

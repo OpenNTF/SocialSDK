@@ -8,7 +8,7 @@ public enum ProfileEntity {
 	 *  communities for referring to multiple community
 	 */
 
-	ADMIN("admin"),
+	ADMIN("/admin"),
 	NONADMIN("");
 	
 	String ProfileEntity;

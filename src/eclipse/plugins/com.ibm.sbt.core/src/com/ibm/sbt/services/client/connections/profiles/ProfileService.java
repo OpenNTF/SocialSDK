@@ -611,7 +611,12 @@ public class ProfileService extends BaseService {
 			parameters.put(ProfileRequestParams.USERID, profile.getReqId());
 		}
 		String filePath = profile.getFieldsMap().get("imageLocation");
-		java.io.File file = new java.io.File(filePath);
+		java.io.File file;
+		try{
+			file = new java.io.File(filePath);
+		}catch(NullPointerException e){
+			throw new ProfileServiceException(e);
+		}
 		String name = filePath.substring(filePath.lastIndexOf('\\') + 1);
 
 		int dot = name.lastIndexOf('.');

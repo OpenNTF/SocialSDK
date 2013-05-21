@@ -24,7 +24,7 @@
  * @class validate
  * @static
  */
-define([ "sbt/log", "sbt/stringUtil", "sbt/i18n!sbt/nls/validate","sbt/util" ],
+define([ "./log", "./stringUtil", "sbt/i18n!sbt/nls/validate","./util" ],
 		function(log, stringUtil, nls, util) {
 			var errorCode = 400;
 			

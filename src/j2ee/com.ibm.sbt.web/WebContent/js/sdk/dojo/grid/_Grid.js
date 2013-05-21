@@ -17,7 +17,7 @@
 /**
  * 
  */
-define([ "../../_bridge/declare", "../../data/AtomReadStore", "../../widget/_TemplatedWidget"], 
+define([ "../../declare", "../../data/AtomReadStore", "../../widget/_TemplatedWidget"], 
         function(declare, AtomReadStore, _TemplatedWidget){
     /**
      * @module sbt.widget.grid._Grid

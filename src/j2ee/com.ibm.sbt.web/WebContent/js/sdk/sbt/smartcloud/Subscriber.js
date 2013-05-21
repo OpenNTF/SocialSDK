@@ -18,7 +18,7 @@
  * @author Vimal Dhupar 
  * Definition of a Subscriber Helper for getting the Subscriber ID for a SmartCloud User.
  */
-define(['sbt/_bridge/declare','sbt/Endpoint','sbt/smartcloud/core'],
+define(['sbt/declare','sbt/Endpoint','sbt/smartcloud/core'],
 		function(declare,Endpoint,core) {
 
 /**

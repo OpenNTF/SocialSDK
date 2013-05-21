@@ -21,7 +21,7 @@
  */
 
   
-define(['sbt/_bridge/dom'],function(dom) {
+define(['./_bridge/dom'],function(dom) {
 	// The actual implementation is library dependent
 	// NOTE: dom.byId returns either a DOM element or false (null/undefined) 
 	return dom;

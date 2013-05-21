@@ -17,7 +17,7 @@
 /**
  * 
  */
-define([ "../../../_bridge/declare", 
+define([ "../../../declare", 
          "../../../controls/grid/Grid", 
          "../../../connections/controls/communities/CommunityGridRenderer", 
          "../../../connections/controls/communities/CommunityAction", 

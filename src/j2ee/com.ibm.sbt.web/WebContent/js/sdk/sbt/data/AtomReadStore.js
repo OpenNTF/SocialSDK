@@ -17,7 +17,7 @@
 /**
  * 
  */
-define(["sbt/Endpoint", "sbt/lang", "sbt/base/core", "sbt/xml", "sbt/xpath","dojox/html/entities"], function(Endpoint, lang, core, xml, xpath, entities) {
+define(["../declare","../Endpoint", "../lang", "../base/core", "../xml", "../xpath","dojox/html/entities"], function(declare, Endpoint, lang, core, xml, xpath, entities) {
     
     /**
      * A data store for Atom XML based services or documents.   This store is still under development
@@ -27,7 +27,7 @@ define(["sbt/Endpoint", "sbt/lang", "sbt/base/core", "sbt/xml", "sbt/xpath","doj
      * @namespace sbt.data
      * @module sbt.data.AtomReadStore
      */
-    dojo.declare("sbt.data.AtomReadStore", null, {
+    var AtomReadStore = declare(null, {
         // private
         _endpoint : null,
         _xmlData : null,
@@ -376,6 +376,6 @@ define(["sbt/Endpoint", "sbt/lang", "sbt/base/core", "sbt/xml", "sbt/xpath","doj
         
         
     });
-    return sbt.data.AtomReadStore;
+    return AtomReadStore;
     
 });

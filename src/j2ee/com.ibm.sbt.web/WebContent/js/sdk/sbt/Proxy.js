@@ -18,41 +18,41 @@
  * Social Business Toolkit SDK. 
  * Definition of a proxy re-writer.
  */
-define(['sbt/_bridge/declare','sbt/lang','sbt/pathUtil'],function(declare,lang,pathUtil) {
+define(['./declare','./lang','./pathUtil'],function(declare,lang,pathUtil) {
 
-/**
- * Definition of the proxy module
- * 
- * @module sbt.Proxy
- * 
- */
-declare("sbt.Proxy", null, {
-	
-	proxyUrl		: null, 
-	
-	constructor: function(args){
-		lang.mixin(this, args);	
-	},
-	
-	rewriteUrl: function(baseUrl,serviceUrl,proxyPath) {
-		// When this proxy is being used, we don't add the base URL as it will be added on the server side
-		// A different implementation might use the full URL
-		var u = serviceUrl;
-		if(this.proxyUrl) {
-			if(u.indexOf("http://")==0) {
-				u = "/http/"+u.substring(7);
-			} else if(u.indexOf("https://")==0) {
-				u = "/https/"+u.substring(8);
-			}
-			if(proxyPath) {
-				u = pathUtil.concat(proxyPath,u);
-			}
-			return pathUtil.concat(this.proxyUrl,u);
-		}
-		return u;
-	}
-});
-
-return sbt.Proxy;
+    /**
+     * Definition of the proxy module
+     * 
+     * @module sbt.Proxy
+     * 
+     */
+    var Proxy = declare(null, {
+    	
+    	proxyUrl		: null, 
+    	
+    	constructor: function(args){
+    		lang.mixin(this, args);	
+    	},
+    	
+    	rewriteUrl: function(baseUrl,serviceUrl,proxyPath) {
+    		// When this proxy is being used, we don't add the base URL as it will be added on the server side
+    		// A different implementation might use the full URL
+    		var u = serviceUrl;
+    		if(this.proxyUrl) {
+    			if(u.indexOf("http://")==0) {
+    				u = "/http/"+u.substring(7);
+    			} else if(u.indexOf("https://")==0) {
+    				u = "/https/"+u.substring(8);
+    			}
+    			if(proxyPath) {
+    				u = pathUtil.concat(proxyPath,u);
+    			}
+    			return pathUtil.concat(this.proxyUrl,u);
+    		}
+    		return u;
+    	}
+    });
+    
+    return Proxy;
 
 });

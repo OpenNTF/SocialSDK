@@ -20,12 +20,12 @@
  * Helpers for accessing the SmartCloud Community services
  * @module sbt.CommunityService
  */
-define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt/xml','sbt/xpath','sbt/Cache',
+define(['sbt/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt/xml','sbt/xpath','sbt/Cache',
         'sbt/Endpoint','sbt/smartcloud/CommunityConstants',
-        'sbt/base/BaseService', 'sbt/log','sbt/base/XmlHandler'],
+        'sbt/base/BaseService', 'sbt/base/BaseEntity', 'sbt/log','sbt/base/XmlHandler'],
 		function(declare,cfg,lang,con,xml,xpath,Cache,
 				Endpoint, communityConstants,
-				BaseService, log, XmlHandler) {
+				BaseService, BaseEntity, log, XmlHandler) {
 	
 	var communityHandler = new XmlHandler({xpath_map: communityConstants.xpath_community, xpath_feed_map: communityConstants.xpath_feed_community,nameSpaces:con.namespaces});
 	var memberHandler = new XmlHandler({xpath_map: communityConstants.xpath_member, xpath_feed_map: communityConstants.xpath_feed_member,nameSpaces:con.namespaces});
@@ -39,7 +39,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 	 * @param {Object} CommunityService  communityService object
 	 * @param {String} id community id associated with the community.
 	 */		
-	var Community = declare("sbt.smartcloud.Community", sbt.base.BaseEntity, {
+	var Community = declare("sbt.smartcloud.Community", BaseEntity, {
 		
 		constructor: function(svc,id) {
 			var args = { entityName : "community", Constants: communityConstants, con: con, dataHandler: communityHandler};
@@ -121,7 +121,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 	 * @param {Object} CommunityService  communityService object
 	 * @param {String} id id of the member. This can be userid or email of the member.
 	 */
-	var Member = declare("sbt.smartcloud.Member", sbt.base.BaseEntity, {
+	var Member = declare("sbt.smartcloud.Member", BaseEntity, {
 		
 		constructor: function(svc,id) {
 			var args = { entityName : "member", Constants: communityConstants, dataHandler: memberHandler};
@@ -158,7 +158,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt
 	 * @param {String} [options.endpoint=smartcloud]  Endpoint to be used by CommunityService.
 	 * 		
 	 */
-	var CommunityService = declare("sbt.smartcloud.CommunityService", sbt.base.BaseService, {
+	var CommunityService = declare("sbt.smartcloud.CommunityService", BaseService, {
 		
 		constructor: function(_options) {
 			var options = _options || {};			

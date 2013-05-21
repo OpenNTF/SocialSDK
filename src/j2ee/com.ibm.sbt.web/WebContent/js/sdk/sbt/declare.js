@@ -17,6 +17,6 @@
 /**
  * Social Business Toolkit SDK - declare() function.
  */
-define(['sbt/_bridge/declare'],function(declare) {
+define(['./_bridge/declare'],function(declare) {
 	return declare;
 });

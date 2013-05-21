@@ -17,7 +17,7 @@
 /**
  * 
  */
-define([ "../../_bridge/declare", "../../store/AtomStore", "dojo/_base/lang", "dojo/_base/Deferred", "../../widget/_TemplatedWidget"], 
+define([ "../../declare", "../../store/AtomStore", "dojo/_base/lang", "dojo/_base/Deferred", "../../widget/_TemplatedWidget"], 
         function(declare, AtomStore, lang, Deferred, _TemplatedWidget) {
 
     /*

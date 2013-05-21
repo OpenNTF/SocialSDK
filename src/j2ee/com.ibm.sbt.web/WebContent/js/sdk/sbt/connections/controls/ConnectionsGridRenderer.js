@@ -17,7 +17,7 @@
 /**
  * 
  */
-define([ "../../_bridge/declare", "../../controls/grid/GridRenderer",
+define([ "../../declare", "../../controls/grid/GridRenderer",
         "../../text!sbt/controls/grid/templates/GridPager.html", 
         "../../text!sbt/controls/grid/templates/GridSorter.html",
         "../../text!sbt/controls/grid/templates/SortAnchor.html",

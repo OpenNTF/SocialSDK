@@ -17,7 +17,7 @@
 /**
  * 
  */
-define(["sbt/_bridge/declare",
+define(["sbt/declare",
         "sbt/controls/grid/connections/ConnectionsGridRenderer",
         "dojo/_base/lang", "dojo/string", "sbt/i18n",
         "dojo/i18n!sbt/controls/grid/connections/nls/SearchGridRenderer",

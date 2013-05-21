@@ -17,7 +17,7 @@
 /**
  * 
  */
-define([ "../../_bridge/declare", "../../dom", "../../lang", "dojo/string", "../../widget/grid/_GridRenderer" ], 
+define([ "../../declare", "../../dom", "../../lang", "dojo/string", "../../widget/grid/_GridRenderer" ], 
          function(declare, dom, lang, string, _GridRenderer) {
 
     /**

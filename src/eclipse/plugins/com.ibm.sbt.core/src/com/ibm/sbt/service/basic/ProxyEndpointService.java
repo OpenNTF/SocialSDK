@@ -137,26 +137,32 @@ public class ProxyEndpointService extends ProxyService {
 	@Override
 	protected void initProxy(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException {
-		String pathinfo = request.getPathInfo();
+		String pathInfo = request.getPathInfo();
 		// Skip the URL_PATH of the proxy
-		// /[proxy root]/[URL_PATH]/[endpointname]/[http/...]
+		//     /[proxy root]/[URL_PATH]/[endpointname]/[full qualified url starting with http] 
+		// or
+        //     /[proxy root]/[URL_PATH]/[endpointname]/[service url]
 		int startEndPoint = getProxyUrlPath().length() + 2;
-		if (startEndPoint < pathinfo.length()) {
-			int startProxyUrl = pathinfo.indexOf('/', startEndPoint);
+		if (startEndPoint < pathInfo.length()) {
+			int startProxyUrl = pathInfo.indexOf('/', startEndPoint);
 			if (startProxyUrl >= 0) {
-				String endPointName = pathinfo.substring(startEndPoint, startProxyUrl);
+				String endPointName = pathInfo.substring(startEndPoint, startProxyUrl);
 				this.endpoint = EndpointFactory.getEndpoint(endPointName);
 				if (!endpoint.isAllowClientAccess()) {
 					throw new ServletException(StringUtil.format(
 							"Client access forbidden for the specified endpoint {0}", endPointName));
 				}
-				String url = pathinfo.substring(startProxyUrl);
-				url = endpoint.getUrl() + url; // Concatenate the server url with the service url ( eg : connections url + atom url )
-				// url = url.replaceFirst("\\/", "://");
-				String serverUrl = endpoint.getUrl();
-				if (!url.startsWith(serverUrl)) {
-					throw new ServletException(StringUtil.format(
-							"The proxied url does not correspond to the endpoint {0}", endPointName));
+				
+				String url = null;
+                String endpointUrl = endpoint.getUrl();
+				if (pathInfo.substring(startProxyUrl+1).startsWith("http")) {
+				    url = pathInfo.substring(startProxyUrl+1).replaceFirst("\\/", "://");
+	                if (!url.startsWith(endpointUrl)) {
+	                    throw new ServletException(StringUtil.format(
+	                            "The proxied url does not correspond to the endpoint {0}", endPointName));
+	                }
+				} else {
+				    url = endpointUrl + pathInfo.substring(startProxyUrl);
 				}
 				requestURI = url;
 				return;

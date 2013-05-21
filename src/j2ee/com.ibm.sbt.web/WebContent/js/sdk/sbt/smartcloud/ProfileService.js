@@ -18,7 +18,7 @@
  * @author Vimal Dhupar
  * Helpers for accessing the SmartCloud Profiles services
  */
-define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt/Cache','sbt/smartcloud/Subscriber','sbt/Jsonpath','sbt/Endpoint', 'sbt/log' , 'sbt/validate', 'sbt/util'],
+define(['sbt/declare','sbt/config','sbt/lang','sbt/smartcloud/core','sbt/Cache','sbt/smartcloud/Subscriber','sbt/Jsonpath','sbt/Endpoint', 'sbt/log' , 'sbt/validate', 'sbt/util'],
 		function(declare,cfg,lang,con,Cache,Subscriber,jsonPath, Endpoint, log, validate, util) {
 	/**
 	Javascript APIs for IBM SmartCloud Profiles Service.

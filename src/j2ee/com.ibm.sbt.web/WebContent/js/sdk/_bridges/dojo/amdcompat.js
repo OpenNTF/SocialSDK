@@ -94,10 +94,11 @@ window._sbt_bridge_compat = true;
 		for ( var args = [], depName, i = 0; i < deps.length; i++) {
 			depName = resolvePath(deps[i]);
             var arg;
-			// look for dojo/i18n! followed by anything for a resource module
+			// check has an plugin been specified
 			var exclamationIndex = depName.indexOf("!");
 			if (exclamationIndex > -1) {
-				if (depName.substring(0, exclamationIndex) == "sbt.i18n") {
+			    var pluginName = depName.substring(0, exclamationIndex);
+				if (pluginName == "sbt.i18n") {
                     var bundleName = depName.substring(exclamationIndex+1);
                     var mod = dojo.require(bundleName);
                     arg = mod.root||mod;
@@ -105,7 +106,7 @@ window._sbt_bridge_compat = true;
                     for(var mi=0; mi<bundles.length; mi++) {
                         dojo.mixin(arg,dojo.require(bundles[mi]));
                     }
-				} else if (depName.substring(0, exclamationIndex) == "sbt.text") {
+				} else if (pluginName == "sbt.text") {
 					exclamationIndex = deps[i].indexOf("!");
                     var fileName = deps[i].substring(exclamationIndex+1,deps[i].length);
                     if (fileName.charAt(0) == '.') {

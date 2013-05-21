@@ -17,9 +17,9 @@
 /**
  * 
  */
-define(["sbt/lang", "sbt/controls/grid/bootstrap/GridRendererMixin",
-         "sbt/text!sbt/connections/controls/bootstrap/templates/CommunityRow.html",
-         "sbt/text!sbt/connections/controls/bootstrap/templates/TagAnchor.html" ], 
+define(["../../../lang", "../../../controls/grid/bootstrap/GridRendererMixin",
+         "../../../text!sbt/connections/controls/bootstrap/templates/CommunityRow.html",
+         "../../../text!sbt/connections/controls/bootstrap/templates/TagAnchor.html" ], 
         function(lang, GridRendererMixin, CommunityRow, TagAnchor) {
 
     /**

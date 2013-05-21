@@ -18,7 +18,7 @@
  * Implements a transport for when the SDK is used from a gadget.
  * @module
  */
-define(['sbt/_bridge/declare','sbt/lang'],function(declare,lang) {
+define(['./declare','./lang'],function(declare,lang) {
     var MethodTypes = {
         'POST':   gadgets.io.MethodType.POST,
         'PUT':    gadgets.io.MethodType.PUT,
@@ -39,7 +39,7 @@ define(['sbt/_bridge/declare','sbt/lang'],function(declare,lang) {
             'OAUTH2':  gadgets.io.AuthorizationType.OAUTH2, 
             'SIGNED':  gadgets.io.AuthorizationType.SIGNED
     };
-    return declare("sbt._bridge.GadgetTransport", null, {
+    return declare(null, {
         serviceName: null,
         constructor: function(args) {
             this.serviceName = args.serviceName || null;

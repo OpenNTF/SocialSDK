@@ -35,16 +35,15 @@
  * Defination of the Cache module
  * @module sbt.Cache
  */
-  
-define(['sbt/_bridge/declare'],function(declare) {
-	var c = declare("sbt.Cache", null, {	
+  define(['./declare'],function(declare) {
+	var Cache = declare(null, {	
 		constructor: function(max) {
 			this.limit = max;// This is the maximum limit of the cache.
 			this._cache = {};//Variable to hold the items in the cache.
 			this.head = null;// Pointer to the head of the cache
 			this.tail = null;// Pointer to the tail of the cache
 			this.count = 0;// Counter for number of items in the cache
-			},
+		},
 		get: function _cg(key) { //Retrieves a cached item.
 			var k = this._cache[key];
 			if(k){//Item found in the cache. Move the accessed node to the top of the cache.
@@ -106,5 +105,5 @@ define(['sbt/_bridge/declare'],function(declare) {
 		}
 	});
 
-	return c;
+	return Cache;
 });

@@ -45,7 +45,9 @@ define([ "../../_bridge/declare", "../../lang", "../../itemFactory", "../../widg
         hideSorter: false,
         /**FilterTag, is used for sorting and paging, as to only sort as filtered set of results*/
         filterTag: "",
-
+        /**Selected rows are the rows of the grid that have been selected by checking a check box */
+        selectedRows: null,
+        
         /**
          * Constructor method for the grid.
          * Creates a default store and renderer, if none have been already created
@@ -55,6 +57,8 @@ define([ "../../_bridge/declare", "../../lang", "../../itemFactory", "../../widg
         constructor: function(args) {
         
             lang.mixin(this, args);
+            
+            this.selectedRows = [];
             
             if (!this.store) {
                 if (args && args.storeArgs) {
@@ -239,23 +243,38 @@ define([ "../../_bridge/declare", "../../lang", "../../itemFactory", "../../widg
             }
         },
         
+        /**Called when the user clicks a checkbox 
+         * The row gets added or removed to an array, 
+         * to retrieve the array call getSelected
+         * @method handleCheckBox*/
+        handleCheckBox: function (el, data, ev){
+        	
+        if(el.checked){
+        	this.selectedRows.push(data);
+        }else if(!el.checked){
+        	var rows = this.getSelected();
+        	for(var i=0;i<rows.length;i++){
+        		if(rows[i].data == data){
+        			//selected row
+        			this.selectedRows.splice(i,1);
+        		}
+        	}
+        }
+         
+        	
+        },
         /**If the grid rows have checkboxes , get a list of the rows which are currently selected
          * (That have a checked checkbox)
          * @method - getSelected
          * */
         getSelected: function() {
             var items = [];
-            var checkboxes = this.renderer._checkboxes;
-            if (checkboxes) {
-                for (var i=0; i<checkboxes.length; i++) {
-                    if (checkboxes[i].element.checked) {
+            if (this.selectedRows) {
+                for (var i=0; i<this.selectedRows.length; i++) {
                         var item = {
-                            index: i,
-                            //data: checkboxes[i].getUserData("item") 
-                            data: checkboxes[i].row
+                            data: this.selectedRows[i]
                         };
                         items.push(item);
-                    }
                 }
             }
             return items;

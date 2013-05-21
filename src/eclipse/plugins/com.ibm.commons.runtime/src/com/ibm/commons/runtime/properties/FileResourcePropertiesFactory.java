@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Enumeration;
 import java.util.Properties;
 import com.ibm.commons.util.StringUtil;
 
@@ -51,6 +52,10 @@ public class FileResourcePropertiesFactory extends AbstractPropertiesFactory {
 		this.properties = readFactoriesFromFile(fileName);
 	}
 
+	public Enumeration<?> getKeys(){
+		return properties.keys();
+	}
+	
 	public Properties readFactoriesFromFile(String fileName) {
 		if(StringUtil.isEmpty(fileName)) {
 			return null;

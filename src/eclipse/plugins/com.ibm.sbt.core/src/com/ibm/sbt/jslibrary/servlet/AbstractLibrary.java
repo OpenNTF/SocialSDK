@@ -225,8 +225,7 @@ abstract public class AbstractLibrary {
 		Map<String, JsonObject> jsonEndpoints = new HashMap<String, JsonObject>();
 
 		// Read the list of endpoint
-		com.ibm.sbt.jslibrary.SBTEnvironment.Endpoint[] endpoints = request.getEnvironment()
-				.getEndpointsArray();
+		com.ibm.sbt.jslibrary.SBTEnvironment.Endpoint[] endpoints = request.getEnvironment().getEndpointsArray();
 		if (endpoints != null) {
 			for (com.ibm.sbt.jslibrary.SBTEnvironment.Endpoint endpoint : endpoints) {
 				String endpointAlias = endpoint.getAlias();
@@ -237,8 +236,7 @@ abstract public class AbstractLibrary {
 				}
 
 				Endpoint theEndpoint = EndpointFactory.getEndpointUnchecked(endpointName);
-				JsonObject jsonEndpoint = createJsonForEndpoint(request, theEndpoint, endpointAlias,
-						endpointName);
+				JsonObject jsonEndpoint = createJsonForEndpoint(request, theEndpoint, endpointAlias, endpointName);
 				jsonEndpoints.put(endpointAlias, jsonEndpoint);
 			}
 		}

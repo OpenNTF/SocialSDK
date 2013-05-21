@@ -17,7 +17,7 @@
 /**
  * Social Business Toolkit SDK - Some DOM utilities.
  */
-define(['sbt/_bridge/jquery'], function() {
+define(['./jquery'], function() {
 	return {
         byId: function(id) {
         	if (typeof id === 'string') {

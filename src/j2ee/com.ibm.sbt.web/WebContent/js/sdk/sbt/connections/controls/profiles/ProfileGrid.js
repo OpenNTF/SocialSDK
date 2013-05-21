@@ -17,7 +17,7 @@
 /**
  * 
  */
-define([ "../../../_bridge/declare", 
+define([ "../../../declare", 
 		 "../../../controls/grid/Grid", 
 		 "../../../connections/controls/profiles/ProfileGridRenderer", 
 		 "../../../connections/controls/profiles/ProfileAction", 

@@ -18,7 +18,7 @@
  * Social Business Toolkit SDK.
  * @module i18n
  */
-define(['sbt/_bridge/i18n'],function(i18n) {
+define(['./_bridge/i18n'],function(i18n) {
     var nls = {
         todayAt : "today at ",
         on : "on "

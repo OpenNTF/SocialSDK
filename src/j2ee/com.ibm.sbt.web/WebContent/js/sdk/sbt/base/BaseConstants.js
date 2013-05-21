@@ -17,8 +17,8 @@
  * Social Business Toolkit SDK.
  * Definition of constants for BaseService.
  */
-define(["sbt/config", "sbt/base/core"],function(sbt) {
-	return sbt.base.baseConstants = {
+define(["../config"],function(sbt) {
+	return {
 		sbtErrorCodes:{
 			badRequest         :400
 		}

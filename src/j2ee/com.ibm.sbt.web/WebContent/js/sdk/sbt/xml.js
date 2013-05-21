@@ -17,7 +17,7 @@
 /**
  * Social Business Toolkit SDK - XML utilities.
  */
-define(['sbt/lang'], function(lang) {
+define(['./lang'], function(lang) {
 	var xml_to_encoded = {
 		'&': '&amp;',
 		'"': '&quot;',

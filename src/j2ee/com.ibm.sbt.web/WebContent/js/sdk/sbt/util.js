@@ -17,7 +17,7 @@
 /**
  * Social Business Toolkit SDK - Utilities script
  */
-define(['sbt/lang','sbt/i18n!sbt/nls/util','sbt/log'],function(lang, nls, log) {
+define(['./lang','sbt/i18n!sbt/nls/util','./log'],function(lang, nls, log) {
 	var errorCode = 400;	
 	function _notifyError(error, args){	
 		if (args && (args.error || args.handle)) {

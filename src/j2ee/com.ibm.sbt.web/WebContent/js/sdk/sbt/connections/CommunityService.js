@@ -20,9 +20,9 @@
  * @module sbt.connections.CommunityService
  */
 define(
-		[ 'sbt/_bridge/declare', 'sbt/config', 'sbt/lang', 'sbt/connections/core', 'sbt/xml', 'sbt/util', 'sbt/xpath', 'sbt/Cache', 'sbt/Endpoint',
-				'sbt/connections/CommunityConstants','sbt/validate', 'sbt/base/BaseService', 'sbt/base/XmlHandler' ],
-		function(declare, cfg, lang, con, xml, util, xpath, Cache, Endpoint, communityConstants, validate, BaseService, XmlHandler) {
+		[ 'sbt/declare', 'sbt/config', 'sbt/lang', 'sbt/connections/core', 'sbt/xml', 'sbt/util', 'sbt/xpath', 'sbt/Cache', 'sbt/Endpoint',
+				'sbt/connections/CommunityConstants','sbt/validate', 'sbt/base/BaseService', 'sbt/base/BaseEntity', 'sbt/base/XmlHandler' ],
+		function(declare, cfg, lang, con, xml, util, xpath, Cache, Endpoint, communityConstants, validate, BaseService, BaseEntity, XmlHandler) {
 
 			/**
 			 * Community class associated with a community.
@@ -33,7 +33,7 @@ define(
 			var communityHandler = new XmlHandler({xpath_map: communityConstants.xpath_community, xpath_feed_map: communityConstants.xpath_feed_community,nameSpaces:con.namespaces});
 			var memberHandler = new XmlHandler({xpath_map: communityConstants.xpath_member, xpath_feed_map: communityConstants.xpath_feed_member,nameSpaces:con.namespaces});
 			
-			var Community = declare("sbt.connections.Community", sbt.base.BaseEntity , {
+			var Community = declare("sbt.connections.Community", BaseEntity , {
 				_service : null,
 				_id : "",
 				_author : null,
@@ -503,7 +503,7 @@ define(
 			 * @class Member
 			 * @namespace connections
 			 */
-			var Member = declare("sbt.connections.Member", sbt.base.BaseEntity, {
+			var Member = declare("sbt.connections.Member", BaseEntity, {
 				_community : null,
 				_userid : null,
 				_name: null,
@@ -691,7 +691,7 @@ define(
 			 */
 			var CommunityService = declare(
 					"sbt.connections.CommunityService",
-					sbt.base.BaseService ,
+					BaseService ,
 					{
 						_endpoint : null,
 						community : null,

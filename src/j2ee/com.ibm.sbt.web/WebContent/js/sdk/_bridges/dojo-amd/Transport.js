@@ -19,8 +19,8 @@
  * 
  * Implementation of a transport using the Dojo XHR API.
  */
-define([ 'dojo/_base/declare', 'dojo/_base/xhr', 'dojo/_base/lang', 'dojox/xml/parser', 'sbt/util', 'sbt/Promise' ], function(declare, xhr, lang, parser, util, Promise) {
-    return declare("sbt._bridge.Transport", null, {
+define([ 'dojo/_base/declare', 'dojo/_base/xhr', 'dojo/_base/lang', 'dojox/xml/parser', '../util', '../Promise' ], function(declare, xhr, lang, parser, util, Promise) {
+    return declare(null, {
         
         /**
          * Provides an asynchronous request using the associated Transport.

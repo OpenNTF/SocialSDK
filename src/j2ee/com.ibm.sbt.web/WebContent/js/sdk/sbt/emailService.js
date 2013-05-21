@@ -24,8 +24,7 @@
  * @static
  * 
  */
-define(['sbt/_bridge/declare', 'sbt/lang', 'sbt/config', 'sbt/_bridge/Transport', 'sbt/json'], function(declare, lang, 
-        config, Transport, sbtJson) {
+define(['./declare', './lang', './config', './_bridge/Transport', './json'], function(declare, lang, config, Transport, sbtJson) {
     var transport = new Transport();
     return {
         /**

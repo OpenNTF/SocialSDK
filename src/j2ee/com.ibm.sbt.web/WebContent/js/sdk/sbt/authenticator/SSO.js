@@ -17,14 +17,14 @@
  * Social Business Toolkit SDK.
  * Definition of an authentication mechanism.
  */
-define(["sbt/_bridge/declare", "sbt/i18n!sbt/nls/messageSSO"],function(declare, ssoMessage) {
+define(["../declare", "sbt/i18n!sbt/authenticator/nls/SSO"],function(declare, ssoMessage) {
 /**
  * Proxy SSO authentication.
  * 
  * This class triggers the authentication for a service.
  */
 return declare(null, {
-	message:		"/sbt/authenticator/templates/Message.html",
+	message:		"sbt/authenticator/templates/Message.html",
 	
 	authenticate: function(options) {
 		globalSSOMessageStrings = ssoMessage;

@@ -19,7 +19,7 @@
  * @module sbt.connections.FileService
  */
 define(
-		[ "sbt/_bridge/declare", "sbt/config", "sbt/lang", "sbt/connections/core", "sbt/xml", "sbt/xpath", "sbt/Endpoint", "sbt/connections/FileConstants",
+		[ "sbt/declare", "sbt/config", "sbt/lang", "sbt/connections/core", "sbt/xml", "sbt/xpath", "sbt/Endpoint", "sbt/connections/FileConstants",
 				"sbt/validate", "sbt/log", "sbt/util" ],
 		function(declare, cfg, lang, con, xml, xpath, endpoint, constants, validate, log, util) {
 

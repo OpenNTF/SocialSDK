@@ -17,7 +17,7 @@
 /**
  * 
  */
-define(["../../../_bridge/declare", "dojo/string",
+define(["../../../declare", "dojo/string",
         "../../../connections/controls/ConnectionsGridRenderer",
         "../../../i18n!sbt/connections/controls/profiles/nls/ColleagueGridRenderer",
         "../../../text!sbt/connections/controls/profiles/templates/ColleagueItem.html",

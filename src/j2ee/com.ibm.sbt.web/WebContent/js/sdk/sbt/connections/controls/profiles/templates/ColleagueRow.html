@@ -1,6 +1,6 @@
 <tr class="${rowClass}">
 	<td style="width: 25px" class=lotusFirstCell>
-		<div><input id="${uid}" value=${uid} type=checkbox aria-label="${name}"></input></div>
+		<div><input id="${uid}" value=${uid} type=checkbox data-dojo-attach-event="onclick: handleCheckBox" aria-label="${name}"></input></div>
 	</td>
 	<td style="width: 70px">
 		<div><img alt="${name}" src="${photo}" width=55 height=55></img></div>

@@ -20,8 +20,8 @@
  * 
  * @module sbt._bridge.RequestTransport
  */
-define([ "dojo/_base/declare", "dojo/_base/lang", "dojo/request", "sbt/util" ], function(declare,lang,request,util) {
-    return declare("sbt._bridge.RequestTransport", null, {
+define([ "dojo/_base/declare", "dojo/_base/lang", "dojo/request", "../util" ], function(declare,lang,request,util) {
+    return declare(null, {
 
         /**
          * Provides an asynchronous request.

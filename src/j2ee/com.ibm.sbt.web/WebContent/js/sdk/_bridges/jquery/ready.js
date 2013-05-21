@@ -17,7 +17,7 @@
 /**
  * Social Business Toolkit SDK - Some language utilities.
  */
-define(["sbt/_bridge/jquery"],function() {
+define(["./jquery"],function() {
 	return function(fct) {
 		return jQuery(document).ready(fct);
 	};

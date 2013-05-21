@@ -19,7 +19,7 @@
  * 
  * JQuery implementation of the declare() function.
  */
-define(["has", "sbt/lang"], function(has, lang){
+define(["has", "../lang"], function(has, lang){
 
 	var mix = lang.mixin, op = Object.prototype, opts = op.toString,
 		xtor = new Function, counter = 0, cname = "constructor";

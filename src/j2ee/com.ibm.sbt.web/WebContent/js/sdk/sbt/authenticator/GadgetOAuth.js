@@ -18,14 +18,14 @@
  * Social Business Toolkit SDK. 
  * Definition of the authentication mechanism for OAuth 1.0.
  */
-define([ "sbt/_bridge/declare", "sbt/lang" ], function(declare,lang) {
+define([ "../declare", "../lang" ], function(declare,lang) {
 
     /**
      * OpenSocial OAuth authentication.
      * 
      * This class triggers the authentication for a service.
      */
-    return declare("sbt.authenticator.GadgetOAuth", null, {
+    return declare(null, {
 
         constructor : function(args) {
             lang.mixin(this, args || {});

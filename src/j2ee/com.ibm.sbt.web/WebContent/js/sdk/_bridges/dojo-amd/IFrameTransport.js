@@ -18,9 +18,9 @@
  * Social Business Toolkit SDK. 
  * Implementation of a proxy that uses an iFrame.
  */
-define(['dojo/declare','dojo/ready','dojo/_base/lang'],function(declare,ready,lang) {
+define(['./declare','dojo/ready','dojo/_base/lang'],function(declare,ready,lang) {
 
-return declare("sbt.base.IFrameTransport", null, {
+return declare(null, {
 
 	idCounter: 0,
 	iframe:	null,

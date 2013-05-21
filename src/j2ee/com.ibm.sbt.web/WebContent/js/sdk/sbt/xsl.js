@@ -16,7 +16,7 @@
  * Social Business Toolkit SDK - XSL utilities.
  * Borrowed from the Connections source code, for now
  */
-define(['sbt/Cache','sbt/xml','sbt/lang'],function(cache,xml,lang) {
+define(['./Cache','./xml','./lang'],function(cache,sbtXml,lang) {
 	return {
 	
 		/**
@@ -31,7 +31,7 @@ define(['sbt/Cache','sbt/xml','sbt/lang'],function(cache,xml,lang) {
 			
 			// Resolve the XML if it is a URL
 			if(lang.isString(xml)) {
-				xml = sbt.xml.parse(sbt.cache.get(xml));
+				xml = sbtXml.parse(sbt.cache.get(xml));
 			}
 	
 			// Resolve the XSL if it is a URL

@@ -17,7 +17,7 @@
 /**
  * 
  */
-define([ "../../_bridge/declare", "../../lang", "../../itemFactory", "../../widget/grid/_Grid"], 
+define([ "../../declare", "../../lang", "../../itemFactory", "../../widget/grid/_Grid"], 
         function(declare, lang, itemFactory, _Grid) {
 
     /**

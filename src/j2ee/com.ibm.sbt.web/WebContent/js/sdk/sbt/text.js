@@ -18,7 +18,7 @@
  * Social Business Toolkit SDK.
  * @module text
  */
-define(['sbt/_bridge/text'],function(text) {
+define(['./_bridge/text'],function(text) {
 	    return text;
 });
 

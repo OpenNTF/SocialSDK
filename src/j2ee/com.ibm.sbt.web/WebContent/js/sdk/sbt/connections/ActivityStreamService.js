@@ -20,7 +20,7 @@
  *  
  * Helpers for accessing the Connections Profiles services
  */
-define(['sbt/_bridge/declare','sbt/config','sbt/connections/core','sbt/connections/ActivityStreamConstants','sbt/Jsonpath','sbt/Endpoint','sbt/lang','sbt/json','sbt/log', 'sbt/validate'],
+define(['sbt/declare','sbt/config','sbt/connections/core','sbt/connections/ActivityStreamConstants','sbt/Jsonpath','sbt/Endpoint','sbt/lang','sbt/json','sbt/log', 'sbt/validate'],
 		function(declare, config, core,ASConstants,jsonPath, Endpoint, lang, json, log, validate) {
 	/**
 	Javascript APIs for IBM Connections Activity Stream Service.

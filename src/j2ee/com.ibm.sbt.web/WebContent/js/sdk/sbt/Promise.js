@@ -19,7 +19,7 @@
  * 
  * @module sbt.Promise
  */
-define(["sbt/_bridge/declare","sbt/log"], function(declare,log) {
+define(["./declare","./log"], function(declare,log) {
 
     /**
      * Promise class
@@ -27,7 +27,7 @@ define(["sbt/_bridge/declare","sbt/log"], function(declare,log) {
      * @class Promise
      * @namespace sbt
      */     
-	var Promise = declare("sbt.Promise", null, {	
+	var Promise = declare(null, {	
 		
         // private
         _isRejected : false,

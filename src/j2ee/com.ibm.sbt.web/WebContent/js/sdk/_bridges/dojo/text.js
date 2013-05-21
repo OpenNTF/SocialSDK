@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -15,15 +15,13 @@
  */
 
 /**
+ * Social Business Toolkit SDK.
  * 
+ * @module text
  */
-define(["../../../lang", "../../../controls/grid/bootstrap/GridRendererMixin",
-         "../../../text!sbt/connections/controls/bootstrap/templates/ProfileRow.html" ], 
-        function(lang, GridRendererMixin, ProfileRow) {
-
-    /**
-     * @module sbt.controls.grid.bootstrap.CommunityRendererMixin
-     */
-    return lang.mixin(GridRendererMixin, { template : ProfileRow });
-    
+define([], function() {
+    return {
+        load: function(name, req, onload, config){
+        }
+    }; 
 });

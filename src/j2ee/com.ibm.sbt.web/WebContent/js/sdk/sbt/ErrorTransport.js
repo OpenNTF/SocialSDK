@@ -17,8 +17,8 @@
 /**
  * Implementation of a transport that emits an error the first time it is invoked.
  */
-define(['sbt/_bridge/declare','sbt/lang','sbt/Promise','sbt/stringUtil','sbt/log','sbt/i18n!sbt/nls/ErrorTransport'], function(declare,lang,Promise,stringUtil,log,nls) {
-    return declare("sbt.ErrorTransport", null, {
+define(['./declare','./lang','./Promise','./stringUtil','./log','sbt/i18n!sbt/nls/ErrorTransport'], function(declare,lang,Promise,stringUtil,log,nls) {
+    return declare(null, {
         _called: false,
         _endpointName: null,
         _message: null,

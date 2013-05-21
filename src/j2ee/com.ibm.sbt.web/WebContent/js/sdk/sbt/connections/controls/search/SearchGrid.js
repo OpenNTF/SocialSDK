@@ -17,7 +17,7 @@
 /**
  * 
  */
-define([ "sbt/_bridge/declare", 
+define([ "sbt/declare", 
          "sbt/controls/grid/Grid", 
          "sbt/controls/grid/connections/SearchGridRenderer", 
          "sbt/store/AtomStore", 

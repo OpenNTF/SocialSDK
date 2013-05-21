@@ -18,10 +18,10 @@
  * Social Business Toolkit SDK. 
  * Helpers for the base capabilities of data handlers.
  */
-define(['sbt/_bridge/declare'], 
+define(['../declare'], 
     function(declare) {
 
-    	var BaseHandler = declare("sbt.base.BaseHandler", null, {	
+    	var BaseHandler = declare(null, {	
     		
     		_dataType : "base",
     		

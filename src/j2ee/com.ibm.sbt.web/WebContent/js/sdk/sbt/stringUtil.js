@@ -26,7 +26,7 @@
  * @class stringUtil
  * @static
  */
-define(['sbt/xml'], function(xml) {
+define(['./xml'], function(xml) {
 
 	var _regex = new RegExp("{-?[0-9]+}", "g");
 

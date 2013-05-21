@@ -17,7 +17,7 @@
 /**
  * Social Business Toolkit SDK - URL utilities
  */
-define(['sbt/stringUtil'],function(stringUtil) {
+define(['./stringUtil'],function(stringUtil) {
 	return {
 		concat: function(path1,path2) {
 			if(!path1) {

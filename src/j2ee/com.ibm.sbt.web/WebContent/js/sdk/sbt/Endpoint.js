@@ -25,10 +25,10 @@
  * @class Endpoint
  * 
  */
-define(['sbt/_bridge/declare','sbt/lang','sbt/ErrorTransport','sbt/Promise','sbt/pathUtil','sbt/compat','sbt/log', 'sbt/stringUtil', 'sbt/i18n!sbt/nls/Endpoint', 'sbt/xml'],
+define(['./declare','./lang','./ErrorTransport','./Promise','./pathUtil','./compat','./log', './stringUtil', 'sbt/i18n!sbt/nls/Endpoint', './xml'],
 function(declare,lang,ErrorTransport,Promise,pathUtil,compat,log,stringUtil,nls,xml) {
 
-var Endpoint = declare("sbt.Endpoint", null, {
+var Endpoint = declare(null, {
 	
 	/**
 	 * URL of the server used to connect to the endpoint

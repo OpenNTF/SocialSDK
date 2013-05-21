@@ -17,7 +17,7 @@
 /**
  * 
  */
-define([ "../../_bridge/declare", "../../controls/grid/GridAction", "dojo/string" ], 
+define([ "../../declare", "../../controls/grid/GridAction", "dojo/string" ], 
         function(declare, GridAction, string) {
 
     /**

@@ -17,7 +17,7 @@
 /**
  * 
  */
-define([ "../../../_bridge/declare", "../../../Endpoint", "../../../xml", "../../../xpath", "../../../connections/core",
+define([ "../../../declare", "../../../Endpoint", "../../../xml", "../../../xpath", "../../../connections/core",
          "../../../connections/controls/profiles/ProfileGrid", 
          "../../../connections/controls/profiles/ColleagueGridRenderer", 
          "../../../connections/controls/ViewAllAction" ], 

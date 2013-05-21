@@ -17,14 +17,14 @@
 /**
  * 
  */
-define(["sbt/lang", "sbt/base/core", "sbt/xml", "sbt/xpath", "sbt/Endpoint", "sbt/itemFactory",
+define(["../declare","../lang", "../base/core", "../xml", "../xpath", "../Endpoint", "../itemFactory",
         "dojo/_base/Deferred", "dojo/promise/Promise", "dojo/store/util/QueryResults", "dojox/html/entities"], 
-        function(lang, core, xml, xpath, Endpoint, itemFactory, Deferred, Promise, QueryResults, entities) {
+        function(declare,lang, core, xml, xpath, Endpoint, itemFactory, Deferred, Promise, QueryResults, entities) {
   
     /**
      * @module sbt.store.AtomStore
      */
-    var AtomStorePromise = dojo.declare("sbt.store.AtomStorePromise", Promise, {
+    var AtomStorePromise = declare(Promise, {
         // private
         _store : null,
         _isRejected : false,
@@ -319,7 +319,7 @@ define(["sbt/lang", "sbt/base/core", "sbt/xml", "sbt/xpath", "sbt/Endpoint", "sb
     /**
       * @module sbt.store.AtomStore
       */
-    dojo.declare("sbt.store.AtomStore", null, {
+    var AtomStore = declare(null, {
         
         // Indicates the property to use as the identity property. The values of this
         // property should be unique.
@@ -371,6 +371,6 @@ define(["sbt/lang", "sbt/base/core", "sbt/xml", "sbt/xpath", "sbt/Endpoint", "sb
             return QueryResults(results);
         }
     });
-    return sbt.store.AtomStore;
+    return AtomStore;
     
 });

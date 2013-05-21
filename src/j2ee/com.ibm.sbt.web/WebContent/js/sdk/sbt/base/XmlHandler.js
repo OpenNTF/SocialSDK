@@ -18,9 +18,9 @@
  * Social Business Toolkit SDK. 
  * Helpers for handling xml data from the feed.
  */
-define(['sbt/_bridge/declare', 'sbt/base/BaseHandler','sbt/xml','sbt/xpath'],function(declare, BaseHandler, xml, xpath) {
+define(['../declare', './BaseHandler','../xml','../xpath'],function(declare, BaseHandler, xml, xpath) {
 
-	var XmlHandler = declare("sbt.base.XmlHandler", sbt.base.BaseHandler, {	
+	var XmlHandler = declare(BaseHandler, {	
 		
 		_dataType : "xml",
 		_xpath_map : null,

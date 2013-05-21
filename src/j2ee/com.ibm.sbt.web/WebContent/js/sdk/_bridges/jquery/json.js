@@ -18,7 +18,7 @@
  * JQuery implementation of the JSON methods.
  * @module json
  */
-define(['sbt/_bridge/jquery'],function() {
+define(['./jquery'],function() {
     return {
         /**
          * Parses a String of JSON and returns a JSON Object.

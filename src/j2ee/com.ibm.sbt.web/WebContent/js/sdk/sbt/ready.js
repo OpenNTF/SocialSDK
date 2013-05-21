@@ -17,6 +17,6 @@
 /**
  * Social Business Toolkit SDK - ready() function.
  */
-define(['sbt/_bridge/ready'],function(ready) {
+define(['./_bridge/ready'],function(ready) {
 	return ready;
 });

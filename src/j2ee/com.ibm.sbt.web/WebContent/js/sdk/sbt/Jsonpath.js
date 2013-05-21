@@ -19,7 +19,7 @@
  * JSONPath 0.8.0 - XPath for JSON
  * Would be replaced with JsonPath version of Github
  */
-define(['sbt/_bridge/declare'],function(declare){
+define(['./declare'],function(declare){
 		return function(obj, expr, arg)
 		{
 			 var P = {

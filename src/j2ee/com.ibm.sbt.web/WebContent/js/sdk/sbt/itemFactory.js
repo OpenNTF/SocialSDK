@@ -17,7 +17,7 @@
 /**
  * I18n utilities
  */
-define(["sbt/lang", "sbt/xpath", "sbt/base/core"], function(lang, xpath, core) {
+define(["./lang", "./xpath", "./base/core"], function(lang, xpath, core) {
     
     var XPathCountFunction = /^count\(.*\)$/;
 

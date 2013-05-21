@@ -17,7 +17,7 @@
 /**
  * 
  */
-define(["../../_bridge/declare"], function(declare) {
+define(["../../declare"], function(declare) {
 
     /**
      * @module sbt.controls.grid.GridAction

@@ -35,9 +35,6 @@ define([ "../../declare", "../../dom", "../../lang", "dojo/string", "../../widge
         loadingClass: null,
         loadingImgClass: null,
         
-        /**Check boxes used in the grid rows - used to check if a row is selected*/
-        _checkboxes: null,
-        
         /**Constructor function
          * @method - constructor
          *  */
@@ -68,7 +65,7 @@ define([ "../../declare", "../../dom", "../../lang", "dojo/string", "../../widge
               for (var i=0; i<items.length; i++) {
                   this.renderItem(grid, tbody, data, items[i], i, items);
               }
-              this._checkboxes = this._doFindCheckboxes(grid, el, items);
+             
            }
         },
         
@@ -411,27 +408,6 @@ define([ "../../declare", "../../dom", "../../lang", "dojo/string", "../../widge
                     }
                 }
             }
-        },
-        
-        _doFindCheckboxes: function(grid, el, items) {
-            var checkboxes = [];
-            var inputs = (el.all || el.getElementsByTagName("input"));
-            for (var i = 0;i < inputs.length;i++) {
-                if (inputs[i].type == "checkbox") { 
-                    checkboxes.push(inputs[i]);
-                }    
-            }
-            if (checkboxes.length == items.length) {
-                for (var i = 0;i<checkboxes.length;i++) {
-                   // checkboxes[i].setUserData("item", items[i], function() {}); - Deprecated
-                	var checkBox= {
-                		element : checkboxes[i],
-                		row : items[i]	
-                	};
-                	checkboxes[i] = checkBox;
-                }
-            }
-            return checkboxes;
         }
         
     });

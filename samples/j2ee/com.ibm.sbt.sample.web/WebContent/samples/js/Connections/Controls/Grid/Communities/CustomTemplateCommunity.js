@@ -1,5 +1,5 @@
 require(["sbt/dom", "sbt/connections/controls/communities/CommunityGrid"], 
-    function(dom, CommunityGrid, CustomCommunityRow) {
+    function(dom, CommunityGrid) {
         var domNode = dom.byId("communityRow");
         var CustomCommunityRow = domNode.text || domNode.textContent;
 

@@ -450,7 +450,7 @@
 		<!-- Endpoint URL -->
 		<managed-property>
 			<property-name>url</property-name>
-			<value>%{twitter.url}</value>
+			<value>%{twitter.url=https://api.twitter.com}</value>
 		</managed-property>
 
 		<!-- Trust the connection -->
@@ -475,15 +475,15 @@
 		</managed-property>
 		<managed-property>
 			<property-name>requestTokenURL</property-name>
-			<value>%{twitter.requestTokenURL}</value>
+			<value>%{twitter.requestTokenURL=https://api.twitter.com/oauth/request_token}</value>
 		</managed-property>
 		<managed-property>
 			<property-name>authorizationURL</property-name>
-			<value>%{twitter.authorizeURL}</value>
+			<value>%{twitter.authorizeURL=https://api.twitter.com/oauth/authorize}</value>
 		</managed-property>
 		<managed-property>
 			<property-name>accessTokenURL</property-name>
-			<value>%{twitter.accessTokenURL}</value>
+			<value>%{twitter.accessTokenURL=https://api.twitter.com/oauth/access_token}</value>
 		</managed-property>		
 		<managed-property>
 			<property-name>signatureMethod</property-name>

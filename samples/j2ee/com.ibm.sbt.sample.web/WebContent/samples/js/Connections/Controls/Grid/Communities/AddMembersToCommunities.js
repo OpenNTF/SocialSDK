@@ -6,7 +6,7 @@ require(["sbt/dom",
          "sbt/connections/controls/bootstrap/ProfileRendererMixin",
          "sbt/lang"], 
 		
-function(dom, CommunityGrid, ProfileGrid,CommunityService,CommunityRendererMixin,ProfileRendererMixin, lang, CustomCommunityRow) {
+function(dom, CommunityGrid, ProfileGrid,CommunityService,CommunityRendererMixin,ProfileRendererMixin, lang) {
 	
 	var communityService = new CommunityService();
 

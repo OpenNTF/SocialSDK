@@ -17,7 +17,7 @@
 /**
  * 
  */
-define(["../../../_bridge/declare",
+define(["../../../declare",
         "../../../connections/controls/ConnectionsGridRenderer",
         "../../../i18n!sbt/connections/controls/profiles/nls/ProfileGridRenderer",
         "../../../text!sbt/connections/controls/profiles/templates/ProfileRow.html",

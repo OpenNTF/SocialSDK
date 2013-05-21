@@ -36,7 +36,7 @@
 	
 	<!-- SmartCloud Environment -->
 	<managed-bean>
-		<managed-bean-name>smartCloud</managed-bean-name>
+		<managed-bean-name>smartcloudEnvironment</managed-bean-name>
 		<managed-bean-class>com.ibm.sbt.jslibrary.SBTEnvironment</managed-bean-class>
 		<managed-bean-scope>application</managed-bean-scope>
 		<managed-property>
@@ -239,66 +239,6 @@
 		</managed-property>
 	</managed-bean>
 	
-	<!--  SmartCloud Connections OAuth 1.0 -->	
-	<managed-bean>
-		<managed-bean-name>smartcloud:connections</managed-bean-name>
-		<managed-bean-class>com.ibm.sbt.services.endpoints.SmartCloudOAuthEndpoint</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-		<!-- Endpoint URL -->
-		<managed-property>
-			<property-name>url</property-name>
-			<value>%{smartcloud.url}</value>
-		</managed-property>
-		<managed-property>
-			<property-name>apiVersion</property-name>
-			<value>%{smartcloud.apiVersion}</value>
-		</managed-property>
-		<!-- Trust the connection -->
-		<managed-property>
-			<property-name>forceTrustSSLCertificate</property-name>
-			<value>true</value>
-		</managed-property>
-		<!-- Fixed values for the registered application -->
-		<managed-property>
-			<property-name>consumerKey</property-name>
-			<value>%{smartcloud.consumerKey}</value>
-		</managed-property>
-		<managed-property>
-			<property-name>consumerSecret</property-name>
-			<value>%{smartcloud.consumerSecret}</value>
-		</managed-property>
-		<managed-property>
-			<property-name>requestTokenURL</property-name>
-			<value>%{smartcloud.requestTokenURL}</value>
-		</managed-property>
-		<managed-property>
-			<property-name>authorizationURL</property-name>
-			<value>%{smartcloud.authorizationURL}</value>
-		</managed-property>
-		<managed-property>
-			<property-name>accessTokenURL</property-name>
-			<value>%{smartcloud.accessTokenURL}</value>
-		</managed-property>	
-		<managed-property>
-			<property-name>signatureMethod</property-name>
-			<!-- <value>HMAC-SHA1</value> -->
-			<value>PLAINTEXT</value>
-		</managed-property>
-		<!-- Access to the token store -->
-		<managed-property>
-			<property-name>tokenStore</property-name>
-			<value>SmartCloudStore</value>
-		</managed-property>
-		<managed-property>
-			<property-name>serviceName</property-name>
-			<value>smartcloud</value>
-		</managed-property>
-		<managed-property>
-			<property-name>appId</property-name>
-			<value>%{smartcloud.appId}</value>
-		</managed-property>
-	</managed-bean>
-	
 	<!--  SmartCloud OAuth 2.0 -->	
 	<managed-bean>
 		<managed-bean-name>smartcloudOA2</managed-bean-name>
@@ -344,6 +284,38 @@
 			<value>true</value>
 		</managed-property>
 	</managed-bean>
+	
+	<!-- SmartCloud Connections -->
+	<managed-bean>
+		<managed-bean-name>smartcloud:connections</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.services.endpoints.SmartCloudBasicEndpoint</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>url</property-name>
+			<value>%{smartcloud.basic.url}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>apiVersion</property-name>
+			<value>%{smartcloud.basic.apiVersion}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>credentialStore</property-name>
+			<value>CredStore</value>
+		</managed-property>
+		<managed-property>
+			<property-name>authenticationPage</property-name>
+			<value>/sbt/loginForm.html?endpoint=connections</value>
+		</managed-property>
+		<managed-property>
+			<property-name>authenticationService</property-name>
+			<value>communities/service/atom/communities/my</value>
+		</managed-property>
+		<!-- Trust the connection -->
+		<managed-property>
+			<property-name>forceTrustSSLCertificate</property-name>
+			<value>true</value>
+		</managed-property>
+	</managed-bean>	
 	
 	<!-- Domino -->	
 	<managed-bean>

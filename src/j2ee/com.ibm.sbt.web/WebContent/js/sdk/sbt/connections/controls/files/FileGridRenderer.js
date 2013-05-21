@@ -17,7 +17,7 @@
 /**
  * 
  */
-define(["../../../_bridge/declare",
+define(["../../../declare",
         "../../../connections/controls/ConnectionsGridRenderer",
         "dojo/string", "../../../i18n",
         "../../../i18n!sbt/connections/controls/files/nls/FileGridRenderer",

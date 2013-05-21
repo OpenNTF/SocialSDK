@@ -18,9 +18,9 @@
  * Social Business Toolkit SDK. 
  * Helpers for handling json data.
  */
-define(['sbt/_bridge/declare', 'sbt/base/BaseHandler', 'sbt/xml','sbt/xpath'],function(declare, BaseHandler, xml, xpath) {
+define(['../declare', './BaseHandler', '../xml','../xpath'],function(declare, BaseHandler, xml, xpath) {
 
-	var JsonHandler = declare("sbt.base.JsonHandler", sbt.base.BaseHandler , {	
+	var JsonHandler = declare(BaseHandler , {	
 		
 		_dataType : "json",
 		

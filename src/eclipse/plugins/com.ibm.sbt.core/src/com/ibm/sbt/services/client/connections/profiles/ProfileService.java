@@ -612,7 +612,7 @@ public class ProfileService extends BaseService {
 			parameters.put(ProfileRequestParams.USERID, profile.getReqId());
 		}
 		String filePath = profile.getFieldsMap().get("imageLocation");
-		if(!filePath.isEmpty()){
+		if(!StringUtil.isEmpty(filePath)){
 			File file;
 			try{
 				file = new File(filePath);

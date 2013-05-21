@@ -20,8 +20,8 @@
  *  
  * Helpers for accessing the Connections Profiles services
  */
-define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sbt/xml','sbt/util','sbt/xpath','sbt/Cache','sbt/connections/ProfileConstants','sbt/Endpoint','sbt/validate','sbt/base/BaseService', 'sbt/base/XmlHandler'],
-		function(declare,cfg,lang,con,xml,util,xpath,Cache,profileConstants,Endpoint,validate, BaseService, XmlHandler) {
+define(['sbt/declare','sbt/config','sbt/lang','sbt/connections/core','sbt/xml','sbt/util','sbt/xpath','sbt/Cache','sbt/connections/ProfileConstants','sbt/Endpoint','sbt/validate','sbt/base/BaseService', 'sbt/base/BaseEntity', 'sbt/base/XmlHandler'],
+		function(declare,cfg,lang,con,xml,util,xpath,Cache,profileConstants,Endpoint,validate, BaseService, BaseEntity, XmlHandler) {
 	
 	/**
 	Javascript APIs for IBM Connections Profiles Service.
@@ -36,7 +36,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 	@namespace connections
 	**/
 	
-	var Profile = declare("sbt.connections.Profile", sbt.base.BaseEntity, {
+	var Profile = declare("sbt.connections.Profile", BaseEntity, {
 		
 		_idType:	"",// can take value - userId / email / id	
 		_email:		"",
@@ -329,7 +329,7 @@ define(['sbt/_bridge/declare','sbt/config','sbt/lang','sbt/connections/core','sb
 		profiles in one session.
 	
 	**/
-	var ProfileService = declare("sbt.connections.ProfileService", sbt.base.BaseService, {		
+	var ProfileService = declare("sbt.connections.ProfileService", BaseService, {		
 		_profiles: null,		
 
 		constructor: function(_options) {

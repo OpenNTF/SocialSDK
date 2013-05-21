@@ -17,7 +17,7 @@
 /**
  * Social Business Toolkit SDK - XPath utilities.
  */
-define(['sbt/_bridge/declare'],function(declare) {
+define(['./declare'],function(declare) {
 	/**
 	Module for defining some Xpath Utilities
 	@module sbt.xpath
@@ -27,7 +27,7 @@ define(['sbt/_bridge/declare'],function(declare) {
 	@class xpath
 	@static
 	*/
-	var XPathExpr = declare("sbt.xpathexpr", null, {
+	var XPathExpr = declare(null, {
 		ie:		false,
 		constructor: function(xpath, nsArray){
 		     this.xpath = xpath;    

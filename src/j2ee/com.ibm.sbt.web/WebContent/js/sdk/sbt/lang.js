@@ -17,7 +17,7 @@
 /**
  * Social Business Toolkit SDK - Some language utilities.
  */
-define(['sbt/_bridge/lang'],function(lang) {
+define(['./_bridge/lang'],function(lang) {
 	// The actual implementation is library dependent
 	return lang;
 });

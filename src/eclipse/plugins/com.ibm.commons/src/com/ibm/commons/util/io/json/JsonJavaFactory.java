@@ -205,7 +205,7 @@ public class JsonJavaFactory implements JsonFactory {
         if(value instanceof List) {
             return true;
         }
-        if (value instanceof ArrayList) {
+        if (value.getClass().isArray()) {
 			return true;
 		}
         return false;

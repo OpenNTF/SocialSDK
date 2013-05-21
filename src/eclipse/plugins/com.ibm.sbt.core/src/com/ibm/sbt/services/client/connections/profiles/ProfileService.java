@@ -16,6 +16,7 @@
 
 package com.ibm.sbt.services.client.connections.profiles;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 
 import java.net.URLEncoder;
@@ -602,7 +603,7 @@ public class ProfileService extends BaseService {
 		if (profile == null) {
 			throw new IllegalArgumentException(Messages.InvalidArgument_3);
 		}
-		boolean returnVal = true;
+		boolean returnVal = false;
 
 		Map<String, String> parameters = new HashMap<String, String>();
 		if (isEmail(profile.getReqId())) {
@@ -611,33 +612,42 @@ public class ProfileService extends BaseService {
 			parameters.put(ProfileRequestParams.USERID, profile.getReqId());
 		}
 		String filePath = profile.getFieldsMap().get("imageLocation");
-		java.io.File file = new java.io.File(filePath);
-		String name = filePath.substring(filePath.lastIndexOf('\\') + 1);
-
-		int dot = name.lastIndexOf('.');
-		String ext = null;
-		if (dot > -1) {
-			ext = name.substring(dot + 1); // add one for the dot!
-		}
-		if (StringUtil.isEmpty(ext)) {
-			try {
-				throw new Exception(Messages.UpdateProfileInfo_1);
-			} catch (Exception e) {
-				returnVal = false;
+		if(!StringUtil.isEmpty(filePath)){
+			File file;
+			try{
+				file = new File(filePath);
+			}catch(Exception e){
+				logger.log(Level.SEVERE, Messages.ProfileInfo_9 + "updateProfilePhoto()", e);
+				throw new ProfileServiceException(e);
 			}
+			String name = filePath.substring(filePath.lastIndexOf('\\') + 1);
+	
+			int dot = name.lastIndexOf('.');
+			String ext = null;
+			if (dot > -1) {
+				ext = name.substring(dot + 1); // add one for the dot!
+			}
+			if (StringUtil.isEmpty(ext)) {
+				try {
+					throw new Exception(Messages.UpdateProfileInfo_1);
+				} catch (Exception e) {
+					returnVal = false;
+				}
+			}
+			Map<String, String> headers = new HashMap<String, String>();
+			if (ext.equalsIgnoreCase("jpg")) {
+				headers.put(Headers.ContentType, "image/jpeg");	// content-type should be image/jpeg for file extension - jpeg/jpg
+			} else {
+				headers.put(Headers.ContentType, "image/" + ext);
+			}
+			String url = resolveProfileUrl(ProfileEntity.NONADMIN.getProfileEntityType(),
+					ProfileType.UPDATEPROFILEPHOTO.getProfileType());
+			returnVal = executePut(url, parameters, headers, file, ClientService.FORMAT_NULL);
+	
+			profile.clearFieldsMap();
+			removeProfileDataFromCache(profile.getReqId());
 		}
-		Map<String, String> headers = new HashMap<String, String>();
-		if (ext.equalsIgnoreCase("jpg")) {
-			headers.put(Headers.ContentType, "image/jpeg");	// content-type should be image/jpeg for file extension - jpeg/jpg
-		} else {
-			headers.put(Headers.ContentType, "image/" + ext);
-		}
-		String url = resolveProfileUrl(ProfileEntity.NONADMIN.getProfileEntityType(),
-				ProfileType.UPDATEPROFILEPHOTO.getProfileType());
-		returnVal = executePut(url, parameters, headers, file, ClientService.FORMAT_NULL);
-
-		profile.clearFieldsMap();
-		removeProfileDataFromCache(profile.getReqId());
+				
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.exiting(sourceClass, "updatePhoto" + returnVal);
 		}

@@ -1,4 +1,4 @@
-require(["sbt/dom", "sbt/controls/grid/connections/ColleagueGrid" ], 
+require(["sbt/dom", "sbt/connections/controls/profiles/ColleagueGrid" ], 
     function(dom, ColleagueGrid) {
     
     var domNode = dom.byId("colleagues");

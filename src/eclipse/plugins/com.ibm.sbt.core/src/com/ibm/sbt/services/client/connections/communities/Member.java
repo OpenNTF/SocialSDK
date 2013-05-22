@@ -183,8 +183,6 @@ public class Member {
 		try {
 			return DOMUtil.value(this.data, xpathQuery, nameSpaceCtx);
 		} catch (XMLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			return null;
 		}	
 	}

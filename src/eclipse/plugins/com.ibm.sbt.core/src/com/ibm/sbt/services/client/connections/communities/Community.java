@@ -1,5 +1,6 @@
 package com.ibm.sbt.services.client.connections.communities;
 
+import java.net.URL;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,6 +15,7 @@ import java.util.logging.Logger;
 
 import org.w3c.dom.Document;
 
+import com.ibm.commons.runtime.util.UrlUtil;
 import com.ibm.commons.util.HtmlTextUtil;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.DOMUtil;
@@ -102,11 +104,11 @@ public class Community {
 
 	public Community(CommunityService communityService, String communityUuid) {
 		this.communityService = communityService;
-		this.communityUuid = communityUuid;
+		this.communityUuid = extractCommunityUuid(communityUuid);
 	}
 
 	public Community(String communityUuid) {
-		this.communityUuid = communityUuid;
+		this.communityUuid = extractCommunityUuid(communityUuid);
 	}
 
 	/**
@@ -163,7 +165,6 @@ public class Community {
 	 * @return title
 	 */
 	public String getTitle() {
-
 		if (StringUtil.isEmpty(fieldsMap.get("title"))) {
 			return get("title");
 		} else {
@@ -178,6 +179,15 @@ public class Community {
 	 */
 	public void setTitle(String title) {
 		fieldsMap.put("title", title);
+	}
+
+	/**
+	 * @sets the communityType
+	 * 
+	 * @param communityType
+	 */
+	public void setCommunityType(String communityType) {
+		fieldsMap.put("communityType", communityType);
 	}
 
 	/**
@@ -401,29 +411,36 @@ public class Community {
 
 		Iterator<Map.Entry<String, String>> entries = fieldsMap.entrySet().iterator();
 		while (entries.hasNext()) {
-			Map.Entry<String, String> fieldMapPairs = entries.next();
-			// title and content are mandatory fields , if not provided in the update request then retrieved
-			// values will be used
-			if (fieldMapPairs.getKey().equalsIgnoreCase("title") || !(body.contains("<title type=\"text\">"))) {
-				body += "<title type=\"text\">" + escapeHtmlSpecialChars(getTitle()) + "</title>";
-			}
-
-			if (fieldMapPairs.getKey().equalsIgnoreCase("content") || !(body.contains("<content type=\"html\">"))) {
-				body += "<content type=\"html\">" + escapeHtmlSpecialChars(getContent()) + "</content>";
-			}
-			if (fieldMapPairs.getKey().startsWith("tag")) {
-				String[] tags = fieldMapPairs.getValue().split(",");
+			Map.Entry<String, String> entry = entries.next();
+			if (entry.getKey().equalsIgnoreCase("title")) {
+				body += "<title type=\"text\">" + escapeHtmlSpecialChars(entry.getValue()) + "</title>";
+			} else if (entry.getKey().equalsIgnoreCase("content")) {
+				body += "<content type=\"html\">" + escapeHtmlSpecialChars(entry.getValue()) + "</content>";
+			} else if (entry.getKey().equalsIgnoreCase("communityType")) {
+				body += "<snx:communityType>" + escapeHtmlSpecialChars(entry.getValue()) + "</snx:communityType>";
+			} else if (entry.getKey().startsWith("tag")) {
+				String[] tags = entry.getValue().split(",");
 				for (String tag : tags) {// add original tags in the request
 					body += "<category term=\"" + tag + "\"/>";
 				} 
-				
 			}
 		}// end while
 
-		body += "<category term=\"community\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category><snx:communityType xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\">public</snx:communityType></entry>";
+		// title and content are mandatory fields , if not provided in the update request then retrieved values will be used
+		if (!(body.contains("<title type=\"text\">"))) {
+			body += "<title type=\"text\">" + escapeHtmlSpecialChars(getTitle()) + "</title>";
+		}
+		if (!(body.contains("<content type=\"html\">"))) {
+			body += "<content type=\"html\">" + escapeHtmlSpecialChars(getContent()) + "</content>";
+		}
+		if (!(body.contains("<snx:communityType>"))) {
+			String communityType = (getCommunityType() != null) ? getCommunityType() : "private";
+			body += "<snx:communityType>" + escapeHtmlSpecialChars(communityType) + "</snx:communityType>";
+		}
+		
+		body += "<category term=\"community\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category></entry>";
 
 		return body;
-
 	}
 
 	@Override
@@ -439,6 +456,17 @@ public class Community {
 	private String escapeHtmlSpecialChars(String content){
 		String contentStr = HtmlTextUtil.toHTMLContentString(content, false);
 		return contentStr;
+	}
+
+	private String extractCommunityUuid(String communityUuid) {
+		if (StringUtil.startsWithIgnoreCase(communityUuid, "http")) {
+			// e.g. http://communities.ibm.com:2006/service/atom/community/instance?communityUuid=2488b807-8428-42ce-bea4-e45cfc4815a8
+			int index = communityUuid.indexOf("communityUuid=");
+			if (index != -1) {
+				communityUuid = communityUuid.substring(index + "communityUuid=".length());
+			}
+		}
+		return communityUuid;
 	}
 
 }

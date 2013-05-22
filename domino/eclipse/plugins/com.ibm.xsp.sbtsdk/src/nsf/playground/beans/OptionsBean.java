@@ -1,7 +1,9 @@
 package nsf.playground.beans;
 
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
+import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.ibm.xsp.model.domino.DominoUtils;
 import com.ibm.xsp.util.ManagedBeanUtil;
 
@@ -35,6 +37,20 @@ public abstract class OptionsBean {
 		this.explorerEnabled = DominoUtils.getEnvironmentInt("Playground_APIExplorer")!=0;
 		this.apacheLicense = DominoUtils.getEnvironmentInt("Playground_ApacheLicense")!=0;
 		this.environments = DominoUtils.getEnvironmentString("Playground_Environments");
+	}
+	
+	public boolean checkSSLWarning() {
+		// Just display a warning once (the first time a session hits it)
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		boolean emitWarning = !((HttpServletRequest)facesContext.getExternalContext().getRequest()).getScheme().equals("https");
+		if(emitWarning) {
+			boolean checked = ExtLibUtil.getSessionScope(facesContext).containsKey("__sslchecked");
+			if(!checked) {
+				ExtLibUtil.getSessionScope(facesContext).put("__sslchecked",Boolean.TRUE);
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public boolean isJavaScriptSnippetsEnabled() {

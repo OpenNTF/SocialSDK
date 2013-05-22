@@ -1,19 +1,12 @@
 <div id="error" style="display:none;" class="alert alert-error"></div>
-<div id="success" style="" class="alert alert-success">Add Selected Users To Selected Communities</div>
+<div id="success" style="" class="alert alert-success">Join A Community</div>
 
-<div style="float:left; width:45%;">
-<h2 >Choose a list of communities you wish to add members to</h2>
-<div id="communitiesDiv" ></div>
+<div role="form">
+<div id="gridDiv"></div>
+<br/>
+<div>Add User:<input type="text" value="Enter User's Email" id="emailTextField" /></div>
+<button class="btn" id="selectedBtn">Add User To Communities</button>
 </div>
-
-
-<div style="float:right;width:45%;">
-<h2>Choose members to add to communities </h2>
-<div id="profilesDiv"></div>
-<input class="btn" id="addButton" type="button" value="Add To Communities" ></input>
-</div>
-
-
 <script type="text/template" id="communityRow">
 
 <tr class="${rowClass}" >

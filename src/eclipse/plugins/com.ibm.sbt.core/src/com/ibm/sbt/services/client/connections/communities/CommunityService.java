@@ -388,7 +388,7 @@ public class CommunityService extends BaseService {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "createCommunity", community);
 		}
-		if (null == community){
+		if (null == community) {
 			throw new IllegalArgumentException(Messages.InvalidArgument_1);
 		}
 

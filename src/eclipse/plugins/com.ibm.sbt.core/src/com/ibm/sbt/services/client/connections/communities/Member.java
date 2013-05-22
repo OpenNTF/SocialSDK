@@ -75,6 +75,9 @@ public class Member {
 	private String id; // this can be userId or email. 
 	private String name;
 	private String email;
+	
+	static public final String MEMBER = "member"; //$NON-NLS-1$
+	static public final String OWNER = "owner"; //$NON-NLS-1$
 
 	public Member(CommunityService communityService, String id) {
 		this.communityService = communityService;
@@ -195,15 +198,15 @@ public class Member {
 			body += "<email>" + getId() + "</email>";
 		}
 		else{
-			body += "<snx:userid xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\">" + getId() + "</snx:userid>";
+			body += "<snx:userid>" + getId() + "</snx:userid>";
 		}
 
 		body += "</contributor>";
 		if(getRole() != null){
-			body += "<snx:role xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\" component=\"http://www.ibm.com/xmlns/prod/sn/communities\">" + getRole() + "</snx:role>";
+			body += "<snx:role component=\"http://www.ibm.com/xmlns/prod/sn/communities\">" + getRole() + "</snx:role>";
 		}
 		body += "</entry>";
-		
+		System.out.println(body);
 		return body;
 	}
 

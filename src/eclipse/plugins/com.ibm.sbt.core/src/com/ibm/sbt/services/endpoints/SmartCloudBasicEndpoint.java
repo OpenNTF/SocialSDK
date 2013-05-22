@@ -31,6 +31,8 @@ public class SmartCloudBasicEndpoint extends BasicEndpoint {
     
     private ConnectionsEndpointAdapter endpointAdapter;
 
+    private static final int FORBIDDEN = 403;
+    
     public SmartCloudBasicEndpoint() {
         endpointAdapter = new ConnectionsEndpointAdapter(this);
     }
@@ -48,5 +50,10 @@ public class SmartCloudBasicEndpoint extends BasicEndpoint {
     @Override
 	public ClientService getClientService() throws ClientServicesException {
     	return endpointAdapter.getClientService();
+    }
+    
+    @Override
+    public int getAuthenticationErrorCode() {
+    	return FORBIDDEN;
     }
 }

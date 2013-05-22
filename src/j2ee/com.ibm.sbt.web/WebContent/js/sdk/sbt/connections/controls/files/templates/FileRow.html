@@ -1,6 +1,6 @@
 <tr class="lotusFirst">
     <td class="lotusFirstCell" width="32" title="${title}">
-        <input value="${title}" name="${title}" aria-label="${nls.ariaCheckbox}" type="checkbox" class="lotusCheckbox">
+        <input value="${title}" name="${title}" aria-label="${nls.ariaCheckbox}" data-dojo-attach-event="onclick: handleCheckBox" type="checkbox" class="lotusCheckbox">
     </td>
     <td class=lotusNowrap>
         <a title="Download ${title}" href="${downloadUrl}" class="lconnDownloadable lconnDownloadableIcon">

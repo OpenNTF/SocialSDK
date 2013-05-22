@@ -4,6 +4,7 @@ import com.ibm.sbt.jslibrary.SBTEnvironment;
 import com.ibm.sbt.services.endpoints.ConnectionsBasicEndpoint;
 import com.ibm.sbt.services.endpoints.ConnectionsOAuth2Endpoint;
 import com.ibm.sbt.services.endpoints.DominoBasicEndpoint;
+import com.ibm.sbt.services.endpoints.OAuthEndpoint;
 import com.ibm.sbt.services.endpoints.SametimeBasicEndpoint;
 import com.ibm.sbt.services.endpoints.SmartCloudOAuth2Endpoint;
 import com.ibm.sbt.services.endpoints.SmartCloudOAuthEndpoint;
@@ -44,6 +45,10 @@ public class PlaygroundEnvironment extends SBTEnvironment {
 	
 	// Sametime
 	private String st_URL;
+	
+	// Twitter
+	private String twitter_OA_ConsumerKey;
+	private String twitter_OA_ConsumerSecret;
 	
 	public PlaygroundEnvironment() {
 		this(null,null);
@@ -200,6 +205,20 @@ public class PlaygroundEnvironment extends SBTEnvironment {
 		this.st_URL = st_URL;
 	}
 	
+	public String getTwitter_OA_ConsumerKey() {
+		return twitter_OA_ConsumerKey;
+	}
+	public void setTwitter_OA_ConsumerKey(String twitter_OA_ConsumerKey) {
+		this.twitter_OA_ConsumerKey=twitter_OA_ConsumerKey;
+	}
+
+	public String getTwitter_OA_ConsumerSecret() {
+		return twitter_OA_ConsumerSecret;
+	}
+	public void setTwitter_OA_ConsumerSecret(String twitter_OA_ConsumerSecret) {
+		this.twitter_OA_ConsumerSecret=twitter_OA_ConsumerSecret;
+	}
+
 	public void prepareEndpoints() {
 		FacesContextEx context = FacesContextEx.getCurrentInstance();
 		// Override the beans with the environment definition
@@ -250,6 +269,14 @@ public class PlaygroundEnvironment extends SBTEnvironment {
 			SametimeBasicEndpoint ep = (SametimeBasicEndpoint)ManagedBeanUtil.getBean(context, "sametime");
 			if(ep!=null) {
 				ep.setUrl(getSt_URL());
+			}
+		}
+		{
+			// Temporarily use OAuth endpoint
+			OAuthEndpoint ep = (OAuthEndpoint)ManagedBeanUtil.getBean(context, "twitter");
+			if(ep!=null) {
+				ep.setConsumerKey(getTwitter_OA_ConsumerKey());
+				ep.setConsumerSecret(getTwitter_OA_ConsumerSecret());
 			}
 		}
 	}

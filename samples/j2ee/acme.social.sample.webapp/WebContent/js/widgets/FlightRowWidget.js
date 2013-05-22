@@ -2,7 +2,7 @@
  * Widget for an individual flight row.
  */
 define(['require', 'dojo/_base/declare', 'dojo/query', 'acme/widgets/FlightRowWidget', 'acme/flights', 'acme/templateUtils',
-        'acmesocial/login', 'acmesocial/email', 'acmesocial/activitystream', 'sbt/controls/grid/connections/ColleagueGrid' ],
+        'acmesocial/login', 'acmesocial/email', 'acmesocial/activitystream', 'sbt/connections/controls/profiles/ColleagueGrid' ],
         function(require, declare, query, FlightRowWidget, flights, templateUtils, login, email, activitystream, ColleagueGrid) {
             return declare('FlightRowWidget', [ FlightRowWidget ], {
                 

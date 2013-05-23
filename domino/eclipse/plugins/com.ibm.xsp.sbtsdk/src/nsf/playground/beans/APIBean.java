@@ -79,7 +79,7 @@ public abstract class APIBean extends AssetBean {
 		return loadAPI(id,null);
 	}
 	public ObjectObject loadAPI(String id, String unid) throws NotesException {
-		// The method can be called when the page is created and the in the rendeing pahse
+		// The method can be called when the page is created and the in the rendering phase
 		// we cache the value to avoid multiple DB access
 		// Not that this requires the bean to be set to the request scope, and not shared
 		if(cache!=null) {

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex" dojoParseOnLoad="true">
+	<xp:this.resources>
+		<xp:dojoModule name="ibm.xsp.widget.layout.xspCKEditor"></xp:dojoModule>
+		<xp:dojoModule name="extlib.dijit.OneUIDialog"></xp:dojoModule>
+	</xp:this.resources>
+
+	<xc:ccMainPageResources></xc:ccMainPageResources>
+
+	<xc:ApiDocPageLayout navigationPath="/ApiEditor" title="API Documentation Editor">
+		<xe:dynamicContent id="dynp" defaultFacet="view"
+			useHash="true" partialEvents="true">
+			<xp:this.facets>
+				<xp:panel xp:key="view" id="panel1">
+					<xc:ApiDocView></xc:ApiDocView>
+				</xp:panel>
+				<xp:panel xp:key="Category" id="panel2">
+					<xc:ApiDocFormCategory></xc:ApiDocFormCategory>
+				</xp:panel>
+				<xp:panel xp:key="API" id="panel3">
+					<xc:ApiDocFormApi></xc:ApiDocFormApi>
+				</xp:panel>
+			</xp:this.facets>
+		</xe:dynamicContent>
+	</xc:ApiDocPageLayout>
+</xp:view>

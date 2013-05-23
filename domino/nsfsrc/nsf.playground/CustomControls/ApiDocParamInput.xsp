@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xp:link escape="true" text="Add..." id="link7">
+		<xp:eventHandler event="onclick" submit="false">
+			<xp:this.script><![CDATA[XSP.openDialog("#{id:paramDialog}",null,{field:'#{javascript:compositeData.field}',refresh:'#{id:detailsPanel}'})]]></xp:this.script>
+		</xp:eventHandler>
+		<xp:image id="image1" url="/miniadd.png" style="margin: 0 4px"></xp:image>
+	</xp:link>
+	&#160;&#160;
+	<xp:link escape="true" text="Edit Json..." id="link8">
+		<xp:eventHandler event="onclick" submit="false">
+			<xp:this.script><![CDATA[XSP.openDialog("#{id:jsonDialog}",null,{field:'#{javascript:compositeData.field}',refresh:'#{id:detailsPanel}'})]]></xp:this.script>
+		</xp:eventHandler>
+		<xp:image id="image2" url="/miniedit.png" style="margin: 0 4px"></xp:image>
+	</xp:link>
+	<xp:panel id="detailsPanel">
+		<xp:dataTable id="dataTable3a" var="up" indexVar="idx"
+			disableTheme="true" style="margin-left: 12px">
+			<xp:this.value><![CDATA[#{javascript:fromJson(document1.getItemValueString(compositeData.field)||"[]")}]]></xp:this.value>
+			<xp:column id="column9">
+				<xp:link id="link12">
+					<xp:image id="image9" url="/minidelete.png"></xp:image>
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="partial" refreshId="detailsPanel">
+						<xp:this.action><![CDATA[#{javascript:docBean.remove(document1,compositeData.field,idx)}]]></xp:this.action>
+					</xp:eventHandler>
+				</xp:link>
+			</xp:column>
+			<xp:column id="column5" style="width:8em">
+				<xp:link escape="true" text="#{up.name}" id="link9">
+					<xp:eventHandler event="onclick" submit="false">
+						<xp:this.script><![CDATA[XSP.openDialog("#{id:paramDialog}",null,{field:'#{javascript:compositeData.field}',idx:'#{javascript:idx}',refresh:'#{id:detailsPanel}'})]]></xp:this.script>
+					</xp:eventHandler>
+				</xp:link>
+			</xp:column>
+			<xp:column id="column6">
+				<xp:text escape="true" id="computedField3"
+					value="#{up.since}">
+				</xp:text>
+			</xp:column>
+			<xp:column id="column1">
+				<xp:text escape="true" id="computedField1"
+					value="#{up.description}">
+				</xp:text>
+			</xp:column>
+		</xp:dataTable>
+	</xp:panel>
+
+
+	<!--
+		Dialog for editing a parameter list (URL or Query) 
+	 -->
+	<xe:dialog id="paramDialog" title="Parameter Definition">
+		<xp:panel id="panel1" style="padding: 5px">
+			<xp:this.data>
+				<xe:objectData var="ctx">
+					<xe:this.createObject><![CDATA[#{javascript:var field = param['field']; 
+var refresh = param['refresh']; 
+var idx = param['idx']?parseFloat(param['idx']):-1;
+var value = idx>=0 ? fromJson(document1.getItemValueString(param['field']))[idx] : {} 
+return {field:field, idx:idx, value:value, refresh: refresh}}]]></xe:this.createObject>
+				</xe:objectData>
+			</xp:this.data>
+			<xp:this.dataContexts>
+				<xp:dataContext var="def" value="#{ctx.value}">
+				</xp:dataContext>
+			</xp:this.dataContexts>
+			<xe:formTable id="formTable2"
+				formTitle="Enter the definition for the parameter">
+				<xe:this.formDescription></xe:this.formDescription>
+				<xp:this.facets>
+					<xp:panel xp:key="footer" id="panel4">
+						<xp:button value="Ok" id="button5">
+							<xp:eventHandler event="onclick" submit="true"
+								refreshMode="complete">
+								<xp:this.action><![CDATA[#{javascript:var params = fromJson(document1.getItemValueString(ctx.field)||"[]");								
+if(ctx.idx>=0) {
+	params[ctx.idx] = def;
+} else {
+	params.push(def);
+}
+document1.replaceItemValue(ctx.field,toJson(params));
+getComponent("paramDialog").hide(ctx.refresh)}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:button>
+						<xp:button value="Cancel" id="button7">
+							<xp:eventHandler event="onclick" submit="false">
+								<xp:this.script><![CDATA[XSP.closeDialog('#{id:paramDialog}')]]></xp:this.script>
+							</xp:eventHandler>
+						</xp:button>
+					</xp:panel>
+				</xp:this.facets>
+				<xe:formRow id="formRow5" label="Name:">
+					<xp:inputText id="inputText3" required="true"
+						disableClientSideValidation="true" value="#{def.name}" size="40">
+					</xp:inputText>
+					&#160;&#160;Since:
+					<xp:inputText id="inputText4"
+						disableClientSideValidation="true" value="#{def.since}" size="8">
+					</xp:inputText>
+					&#160;&#160;Deprecated Since:
+					<xp:inputText id="inputText7"
+						disableClientSideValidation="true" value="#{def.deprecated}" size="8">
+					</xp:inputText>
+				</xe:formRow>
+				<xe:formRow id="formRow6" label="Description:">
+					<xp:inputTextarea id="inputTextarea4" value="#{def.description}"
+						cols="120" rows="5">
+					</xp:inputTextarea>
+				</xe:formRow>
+				<xe:formRow id="formRow12" label=""
+					loaded="${javascript:!compositeData.response}">
+					<xp:checkBox text="Optional" value="#{def.optional}"
+						id="checkBox1">
+					</xp:checkBox>
+				</xe:formRow>
+				<xe:formRow id="formRow13" label="Type:" >
+					<xp:comboBox id="comboBox2" required="true" value="#{def.type}">
+						<xp:selectItem itemLabel="String" itemValue="string">
+						</xp:selectItem>
+						<xp:selectItem itemLabel="Enumerated" itemValue="enumerated"></xp:selectItem>
+						<xp:selectItem itemLabel="Integer" itemValue="int">
+						</xp:selectItem>
+						<xp:selectItem itemLabel="Boolean" itemValue="boolean"></xp:selectItem>
+						<xp:selectItem itemLabel="Number" itemValue="number">
+						</xp:selectItem>
+						<xp:selectItem itemLabel="Date" itemValue="date">
+						</xp:selectItem>
+						<xp:eventHandler event="onchange" submit="true"
+							refreshMode="complete" disableValidators="true">
+						</xp:eventHandler>
+					</xp:comboBox>
+				</xe:formRow>
+				<xe:formRow id="formRow15" label="Reg Exp:"
+					rendered="#{def.type==null||def.type=='string'}" loaded="${javascript:!compositeData.response}">
+					<xp:inputText id="inputText8"
+						disableClientSideValidation="true" value="#{def.regexp}" size="80">
+					</xp:inputText>
+				</xe:formRow>
+				<xe:formRow id="formRow14" label="Values:"
+					rendered="#{def.type=='enumerated'}" loaded="${javascript:!compositeData.response}">
+					<xp:inputTextarea id="inputTextarea5" value="#{def.values}"
+						cols="120" rows="5" style="font-family:Courier New">
+					</xp:inputTextarea>
+				</xe:formRow>
+				<xe:formRow id="formRow37" label="Default Value:" loaded="${javascript:!compositeData.response}">
+					<xp:inputText id="inputText13"
+						disableClientSideValidation="true" value="#{def.value}" size="80">
+					</xp:inputText>
+				</xe:formRow>
+			</xe:formTable>
+		</xp:panel>
+	</xe:dialog>
+
+	
+</xp:view>

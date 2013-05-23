@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xp:link escape="true" text="Add..." id="link7">
+		<xp:eventHandler event="onclick" submit="false">
+			<xp:this.script><![CDATA[XSP.openDialog("#{id:refDialog}",null,{field:'#{javascript:compositeData.field}',refresh:'#{id:detailsPanel}'})]]></xp:this.script>
+		</xp:eventHandler>
+		<xp:image id="image1" url="/miniadd.png" style="margin: 0 4px"></xp:image>
+	</xp:link>
+	&#160;&#160;
+	<xp:link escape="true" text="Edit Json..." id="link8">
+		<xp:eventHandler event="onclick" submit="false">
+			<xp:this.script><![CDATA[XSP.openDialog("#{id:jsonDialog}",null,{field:'#{javascript:compositeData.field}',refresh:'#{id:detailsPanel}'})]]></xp:this.script>
+		</xp:eventHandler>
+		<xp:image id="image2" url="/miniedit.png" style="margin: 0 4px"></xp:image>
+	</xp:link>
+	<xp:panel id="detailsPanel">
+		<xp:dataTable id="dataTable3b" var="up" indexVar="idx"
+			disableTheme="true" style="margin-left: 12px">
+			<xp:this.value><![CDATA[#{javascript:fromJson(document1.getItemValueString(compositeData.field)||"[]")}]]></xp:this.value>
+			<xp:column id="column9">
+				<xp:link id="link12">
+					<xp:image id="image9" url="/minidelete.png"></xp:image>
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="partial" refreshId="detailsPanel">
+						<xp:this.action><![CDATA[#{javascript:docBean.remove(document1,compositeData.field,idx)}]]></xp:this.action>
+					</xp:eventHandler>
+				</xp:link>
+			</xp:column>
+			<xp:column id="column5" style="width:16em">
+				<xp:link escape="true" text="#{up.name}" id="link9">
+					<xp:eventHandler event="onclick" submit="false">
+						<xp:this.script><![CDATA[XSP.openDialog("#{id:refDialog}",null,{field:'#{javascript:compositeData.field}',idx:'#{javascript:idx}',refresh:'#{id:detailsPanel}'})]]></xp:this.script>
+					</xp:eventHandler>
+				</xp:link>
+			</xp:column>
+			<xp:column id="column6">
+				<xp:text escape="true" id="computedField3"
+					value="#{up.ref}">
+				</xp:text>
+			</xp:column>
+		</xp:dataTable>
+	</xp:panel>
+	
+</xp:view>

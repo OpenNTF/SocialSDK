@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex" dojoParseOnLoad="true">
+
+	<xp:this.resources>
+		<xp:styleSheet href="/apirender.css"></xp:styleSheet>
+	</xp:this.resources>
+
+	<xc:ccMainPageResources></xc:ccMainPageResources>
+	
+	<xp:scriptBlock>
+		<xp:this.value><![CDATA[var pageGlobal = {
+	id:				"",		// Current Snippet ID
+	unid:			"",		// Snippet UNID
+	
+	borderContainer:'#{id:djTabContainer1}',
+}
+dojo.addOnLoad(function() {
+   dojo.connect(window, "onresize", resize);
+   resize();
+});
+
+function prepend(h,f) {
+	return function() {
+		if(f) {
+			f.apply(this,arguments);
+		}
+		if(h) {
+			h.apply(this,arguments);
+		}
+	};
+}
+//XSP._partialRefresh = prepend(XSP._partialRefresh,updateNavSelection);
+]]></xp:this.value>
+	</xp:scriptBlock>
+
+	<xc:ApiDocPageLayout navigationPath="/ApiDocumentation" title="API Documentation Viewer">
+		<xe:djBorderContainer id="djTabContainer1"
+			style="width:100%; height:100%;" liveSplitters="true">
+			<xe:this.dojoAttributes>
+				<xp:dojoAttribute name="design" value="sidebar"></xp:dojoAttribute>
+			</xe:this.dojoAttributes>
+			<xe:djBorderPane id="djBorderPane3" region="leading"
+				splitter="true" style="width:280px">
+				<xp:div id="leftRefresh" style="height: 100%">
+					<xc:ApiDocTree></xc:ApiDocTree>
+				</xp:div>
+			</xe:djBorderPane>
+			<xe:djBorderPane id="djBorderPane2" region="center">
+				<xp:div style="overflow-y: auto; height:100%; padding-right: 1em;">
+					<xe:dynamicContent id="dynp" defaultFacet="empty"
+						useHash="true" partialEvents="true">
+						<xp:this.facets>
+							<xp:panel xp:key="empty" id="panel3">
+								Please, select a documentation entry on the left navigator
+							</xp:panel>
+							<xp:panel xp:key="Category" id="panel1" style="overflow:auto">
+								<xc:ApiDocRenderCategory></xc:ApiDocRenderCategory>
+							</xp:panel>
+							<xp:panel xp:key="API" id="panel2" style="overflow:auto">
+								<xc:ApiDocRenderApi></xc:ApiDocRenderApi>
+							</xp:panel>
+						</xp:this.facets>
+					</xe:dynamicContent>
+				</xp:div>
+			</xe:djBorderPane>
+		</xe:djBorderContainer>
+	</xc:ApiDocPageLayout>
+</xp:view>

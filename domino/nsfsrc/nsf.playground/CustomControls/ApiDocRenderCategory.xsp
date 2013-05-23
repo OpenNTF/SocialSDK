@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:this.data>
+		<xp:dominoDocument var="document1" formName="Category"
+			computeWithForm="onload">
+		</xp:dominoDocument>
+	</xp:this.data>
+	<xc:ApiDocBreadcrumb></xc:ApiDocBreadcrumb>
+	
+	<xp:text escape="true" id="computedField1"
+		value="#{document1.Title}" style="font-size:16pt;font-weight:bold">
+	</xp:text>
+	<xp:br></xp:br>
+	<xp:br></xp:br>
+	<xp:br></xp:br>
+	
+	<xp:section id="section1" header="Abstract">
+		<xp:text escape="true" id="computedField2"
+			value="#{document1.Abstract}">
+		</xp:text>
+	</xp:section>
+	<xp:br></xp:br>
+	<xp:br></xp:br>
+	
+	<xp:inputRichText id="inputRichText1"
+		value="#{document1.Description}" readonly="true">
+	</xp:inputRichText>
+
+</xp:view>

@@ -206,7 +206,7 @@ public class Member {
 			body += "<snx:role component=\"http://www.ibm.com/xmlns/prod/sn/communities\">" + getRole() + "</snx:role>";
 		}
 		body += "</entry>";
-		System.out.println(body);
+		
 		return body;
 	}
 

@@ -168,12 +168,17 @@ public abstract class AssetImporter {
 				FacesContextEx.getCurrentInstance().addMessage(null, m);
 			}
 		} catch(Exception ex) {
+			String msg = StringUtil.format("Error while importing assets from source \"{0}\"", sourceName);
+
 			FacesContextEx ctx = FacesContextEx.getCurrentInstance();
 			if(ctx!=null) {
 				Platform.getInstance().log(ex);
-				String msg = StringUtil.format("Error while importing assets from source {0}", sourceName);
 				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg, msg);
 				FacesContextEx.getCurrentInstance().addMessage(null, m);
+			}
+
+			if(action!=null) {
+				action.updateException(ex,msg);
 			}
 		}	
 	}
@@ -203,17 +208,18 @@ public abstract class AssetImporter {
 	}
 	
 	protected VFS createImportVFS(ImportSource source) {
-		if(StringUtil.equals(source.getSource(), "file")) {
-			File baseDir=new File(source.getLocation().trim());
+		String location = source.getSource();
+		if(StringUtil.equals(location, "file")) {
+			File baseDir=new File(location.trim());
 			if(!baseDir.exists()) {
-				throw new FacesExceptionEx(null, "Import directory {0} does not exist", source.getLocation());
+				throw new FacesExceptionEx(null, "Import directory {0} does not exist", location);
 			}
 			FileVFS vfs=new FileVFS(baseDir);
 			return vfs;
 		} else if(StringUtil.equals(source.getSource(), "github")) {
-			String basePath=source.getLocation().trim();
+			String basePath=location.trim();
 			if(StringUtil.isEmpty(basePath)) {
-				throw new FacesExceptionEx(null, "GitHub: Location is empty", source.getLocation());
+				throw new FacesExceptionEx(null, "GitHub: Location is empty", location);
 			}
 			GitVFS vfs=new GitVFS(source.getLocation(), source.getUserName(), source.getPassword());
 			return vfs;
@@ -232,7 +238,7 @@ public abstract class AssetImporter {
 			ImportSource source = getSource(getAssetType(),sourceName);
 			deleteAssets(source,null);
 			
-			String msg = StringUtil.format("Assets sucessfully deleted from source {0}", sourceName);
+			String msg = StringUtil.format("Assets successfully deleted from source {0}", sourceName);
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, msg, msg);
 			FacesContextEx.getCurrentInstance().addMessage(null, m);
 		} catch(Exception ex) {

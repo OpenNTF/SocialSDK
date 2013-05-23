@@ -1,0 +1,109 @@
+.tbClass {
+	margin-top: 1em;
+	border-width: 1px;
+	border-spacing: 0px;
+	border-style: outset;
+	border-color: black;
+	border-collapse: separate;
+	width: 100%;
+}
+
+.tbHeaderClass {
+	padding: 4px;
+	font-size: 11pt;
+	font-weight: bold;
+	background-color: lightgrey;
+	border-width: 1px;
+	border-style: inset;
+	border-color: gray;
+	text-align: left;
+}
+
+.tbColumnClass {
+	padding: 4px;
+	border-width: 1px;
+	border-style: inset;
+	border-color: gray;
+	vertical-align: text-top;
+}
+
+.sinceVersion {
+	margin-left: 8px;
+	padding: 3px 5px;
+	background: #4f81bd; /* Old browsers IE9 SVG, needs conditional override of 'filter' to 'none' */
+	background: -moz-linear-gradient(left, #4f81bd 0%, #8abbd7 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%, #4f81bd), color-stop(100%, #8abbd7) ); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(left, #4f81bd 0%, #8abbd7 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(left, #4f81bd 0%, #8abbd7 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(left, #4f81bd 0%, #8abbd7 100%); /* IE10+ */
+	background: linear-gradient(left, #4f81bd 0%, #8abbd7 100%); /* W3C */
+	filter: progid : DXImageTransform.Microsoft.gradient ( startColorstr = '#4f81bd', endColorstr = '#8abbd7', GradientType = 1 ); /* IE6-8 */
+	border-radius: 10px;
+	border: 2px solid white;
+	color: white;
+	font-size: 11pt;
+	font-weight: bold;
+}
+
+.deprecatedVersion {
+	margin-left: 8px;
+	padding: 3px 5px;
+	background: #FF2626; /* Old browsers IE9 SVG, needs conditional override of 'filter' to 'none' */
+	background: -moz-linear-gradient(left, #FF2626 0%, #FF7373 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%, #FF2626), color-stop(100%, #FF7373) ); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(left, #FF2626 0%, #FF7373 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(left, #FF2626 0%, #FF7373 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(left, #FF2626 0%, #FF7373 100%); /* IE10+ */
+	background: linear-gradient(left, #FF2626 0%, #FF7373 100%); /* W3C */
+	filter: progid : DXImageTransform.Microsoft.gradient ( startColorstr = '#FF2626', endColorstr = '#FF7373', GradientType = 1 ); /* IE6-8 */
+	border-radius: 10px;
+	border: 2px solid white;
+	color: white;
+	font-size: 11pt;
+	font-weight: bold;
+}
+
+.sinceVersionMini {
+	padding: 2px 2px;
+	background: #4f81bd; /* Old browsers IE9 SVG, needs conditional override of 'filter' to 'none' */
+	background: -moz-linear-gradient(left, #4f81bd 0%, #8abbd7 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%, #4f81bd), color-stop(100%, #8abbd7) ); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(left, #4f81bd 0%, #8abbd7 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(left, #4f81bd 0%, #8abbd7 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(left, #4f81bd 0%, #8abbd7 100%); /* IE10+ */
+	background: linear-gradient(left, #4f81bd 0%, #8abbd7 100%); /* W3C */
+	filter: progid : DXImageTransform.Microsoft.gradient ( startColorstr = '#4f81bd', endColorstr = '#8abbd7', GradientType = 1); /* IE6-8 */
+	border-radius: 5px;
+	border: 1px solid white;
+	color: white;
+	font-size: 7pt;
+}
+
+.deprecatedVersionMini {
+	padding: 2px 2px;
+	background: #4f81bd; /* Old browsers IE9 SVG, needs conditional override of 'filter' to 'none' */
+	background: -moz-linear-gradient(left, #FF2626 0%, #FF7373 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%, #FF2626), color-stop(100%, #FF7373) ); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(left, #FF2626 0%, #FF7373 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(left, #FF2626 0%, #FF7373 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(left, #FF2626 0%, #FF7373 100%); /* IE10+ */
+	background: linear-gradient(left, #FF2626 0%, #FF7373 100%); /* W3C */
+	filter: progid : DXImageTransform.Microsoft.gradient ( startColorstr = '#FF2626', endColorstr = '#FF7373', GradientType = 1); /* IE6-8 */
+	border-radius: 5px;
+	border: 1px solid white;
+	color: white;
+	font-size: 7pt;
+}
+
+.wikiCode {
+	border: 1px solid silver;
+} 
+.wikiCode pre {
+    background-color: #F3F3F3;
+    border: medium none;
+    color: black;
+    font-family: consolas,"Courier new",Courier,Monospace;
+    font-size: 1em;
+    margin: 0;
+    padding: 0;
+}

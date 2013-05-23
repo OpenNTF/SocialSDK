@@ -76,7 +76,7 @@ public class JavaScriptLibraries {
 		new JSLibrary("Dojo Toolkit 1.9.0",LibType.DOJO,"1.9.0","//ajax.googleapis.com/ajax/libs/dojo/1.9.0",false),
 		new JSLibrary("Dojo Toolkit 1.9.0 - Async",LibType.DOJO,"1.9.0","//ajax.googleapis.com/ajax/libs/dojo/1.9.0",true),
 //		//new JSLibrary("JQuery 1.8.3","jquery","1.8.3","//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"),
-//		new JSLibrary("JQuery 1.8.3",LibType.JQUERY,"1.8.3","//ajax.googleapis.com/ajax/libs/jquery/1.8.3",false),
+		new JSLibrary("JQuery 1.8.3",LibType.JQUERY,"1.8.3","//ajax.googleapis.com/ajax/libs/jquery/1.8.3",false),
 	};
 
 

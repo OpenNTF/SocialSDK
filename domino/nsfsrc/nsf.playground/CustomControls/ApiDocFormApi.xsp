@@ -1,0 +1,676 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:this.data>
+		<xp:dominoDocument var="document1" formName="API"
+			computeWithForm="onload">
+		</xp:dominoDocument>
+	</xp:this.data>
+	<xc:ApiDocBreadcrumb></xc:ApiDocBreadcrumb>
+	<xe:formTable id="formTable1" formTitle="API Documentation"
+		formDescription="" labelWidth="12em">
+		<xp:this.facets>
+			<xp:panel xp:key="footer" id="panel15">
+				<xp:panel id="panel16">
+					<xp:button value="Save" id="button15">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="partial" refreshId="dynp">
+							<xp:this.action>
+								<xp:actionGroup>
+									<xp:saveDocument var="document1"></xp:saveDocument>
+									<xe:changeDynamicContentAction
+										facetName="view">
+									</xe:changeDynamicContentAction>
+								</xp:actionGroup>
+							</xp:this.action>
+						</xp:eventHandler>
+					</xp:button>
+					<!--
+						<xp:button value="Cancel" id="button2"
+						onclick="window.history.back()"> </xp:button>
+					-->
+					<xp:button value="Cancel" id="button16" onclick="window.history.back()">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="partial" refreshId="dynp">
+							<xp:this.action>
+								<xe:changeDynamicContentAction
+									facetName="view">
+								</xe:changeDynamicContentAction>
+							</xp:this.action>
+						</xp:eventHandler>
+					</xp:button>
+				</xp:panel>
+			</xp:panel>
+		</xp:this.facets>
+		<xe:formRow id="formRow27" label="Supported Products:">
+			<xe:djextListTextBox id="djextListTextBox4"
+				required="true" multipleSeparator="," multipleTrim="true"
+				value="#{document1.Products}" title="Supported Products">
+			</xe:djextListTextBox>
+			<xe:valuePicker id="valuePicker1" for="djextListTextBox4"
+				dojoType="extlib.dijit.PickerCheckbox" pickerText="Set">
+				<xe:this.dataProvider>
+					<xe:simpleValuePicker valueList="Connections,SmartCloud,Domino,WCM"
+						valueListSeparator=",">
+					</xe:simpleValuePicker>
+				</xe:this.dataProvider>
+			</xe:valuePicker>
+		</xe:formRow>
+		<xe:formRow id="formRow8" label="Title:">
+			<xp:inputText id="inputText5" required="true"
+				disableClientSideValidation="true" value="#{document1.title}" size="60">
+			</xp:inputText>
+			&#160;&#160;Since:
+			<xp:inputText id="inputText1"
+				disableClientSideValidation="true" value="#{document1.since}" size="8">
+			</xp:inputText>
+			&#160;&#160;Deprecated In:
+			<xp:inputText id="inputText2"
+				disableClientSideValidation="true" value="#{document1.deprecated}"
+				size="8">
+			</xp:inputText>
+		</xe:formRow>
+		<xe:formRow id="formRow1" label="Abstract:">
+			<xp:inputTextarea id="inputTextarea1" value="#{document1.Abstract}"
+				rows="4" style="width:100%">
+			</xp:inputTextarea>
+		</xe:formRow>
+		<xe:formRow id="formRow2" label="Description:">
+			<xp:inputRichText id="inputRichText1"
+				value="#{document1.Description}">
+			</xp:inputRichText>
+		</xe:formRow>
+		<xe:formRow id="formRow18" labelPosition="none">
+			<xp:section id="section1" header="Request" initClosed="false">
+				<xe:formTable disableErrorSummary="true">
+					<xe:formRow id="formRow7" label="Details:">
+						<xp:link escape="true" text="Add..." id="link7">
+							<xp:eventHandler event="onclick" submit="false">
+								<xp:this.script><![CDATA[XSP.openDialog("#{id:requestDetailsDialog}",null,{refresh:'#{id:requestsDetailsPanel}'})]]></xp:this.script>
+							</xp:eventHandler>
+							<xp:image id="image1" url="/miniadd.png" style="margin: 0 4px">
+							</xp:image>
+						</xp:link>
+						&#160;&#160;
+						<xp:link escape="true" text="Edit Json..." id="link8">
+							<xp:eventHandler event="onclick" submit="false">
+								<xp:this.script><![CDATA[XSP.openDialog("#{id:jsonDialog}",null,{field:'requestsDetails',refresh:'#{id:requestsDetailsPanel}'})]]></xp:this.script>
+							</xp:eventHandler>
+							<xp:image id="image2" url="/miniedit.png" style="margin: 0 4px">
+							</xp:image>
+						</xp:link>
+						<xp:panel id="requestsDetailsPanel">
+							<xp:dataTable id="dataTable3" var="up" indexVar="idx"
+								disableTheme="true" style="margin-left: 12px">
+								<xp:this.value><![CDATA[#{javascript:fromJson(document1.getItemValueString('requestsDetails')||"[]")}]]></xp:this.value>
+								<xp:column id="column9">
+									<xp:link id="link12">
+										<xp:image id="image9" url="/minidelete.png">
+										</xp:image>
+										<xp:eventHandler event="onclick" submit="true"
+											refreshMode="partial" refreshId="requestsDetailsPanel">
+											<xp:this.action><![CDATA[#{javascript:docBean.remove(document1,'requestsDetails',idx)}]]></xp:this.action>
+										</xp:eventHandler>
+									</xp:link>
+								</xp:column>
+								<xp:column id="column5" style="width:6em">
+									<xp:link escape="true" text="#{up.method}" id="link9">
+										<xp:eventHandler event="onclick" submit="false">
+											<xp:this.script><![CDATA[XSP.openDialog("#{id:requestDetailsDialog}",null,{refresh:'#{id:requestsDetailsPanel}',idx:'#{javascript:idx}'})]]></xp:this.script>
+										</xp:eventHandler>
+									</xp:link>
+								</xp:column>
+								<xp:column id="column6">
+									<xp:text escape="true" id="computedField3" value="#{up.uri}">
+									</xp:text>
+								</xp:column>
+							</xp:dataTable>
+						</xp:panel>
+						<xp:panel id="formRow16">
+							<xp:table>
+								<xp:tr>
+									<xp:td>Content Type:</xp:td>
+									<xp:td>
+										<xp:comboBox id="comboBox3" value="#{document1.RequestContentType}">
+											<xp:selectItem itemLabel="">
+											</xp:selectItem>
+											<xp:selectItem itemLabel="application/atom+xml">
+											</xp:selectItem>
+											<xp:selectItem itemLabel="application/json">
+											</xp:selectItem>
+											<xp:selectItem itemLabel="application/xml">
+											</xp:selectItem>
+											<xp:selectItem itemLabel="text/html">
+											</xp:selectItem>
+											<xp:selectItem itemLabel="text/plain">
+											</xp:selectItem>
+										</xp:comboBox>
+										<xp:link escape="true" text="Data Schema..." id="link13"
+											style="margin-left: 12px">
+											<xp:this.onclick><![CDATA[alert("Not yet implemented")]]></xp:this.onclick>
+										</xp:link>
+									</xp:td>
+								</xp:tr>
+								<xp:tr>
+									<xp:td>Request Fields:</xp:td>
+									<xp:td>
+										<xc:ApiDocParamInput field="RequestFields">
+										</xc:ApiDocParamInput>
+									</xp:td>
+								</xp:tr>
+								<xp:tr>
+									<xp:td>Payload Sample:</xp:td>
+									<xp:td>
+										<xp:inputTextarea id="inputTextarea9"
+											value="#{document1.RequestSample}" rows="4" cols="80">
+										</xp:inputTextarea>
+									</xp:td>
+								</xp:tr>
+							</xp:table>
+						</xp:panel>
+					</xe:formRow>
+					<xe:formRow id="formRow5" label="HTTP Headers:">
+						<xc:ApiDocParamInput field="Headers">
+						</xc:ApiDocParamInput>
+					</xe:formRow>
+					<xe:formRow id="formRow19" label="URL Parameters:">
+						<xc:ApiDocParamInput field="URLParameters">
+						</xc:ApiDocParamInput>
+					</xe:formRow>
+					<xe:formRow id="formRow4" label="Query Parameters:">
+						<xc:ApiDocParamInput field="QueryParameters">
+						</xc:ApiDocParamInput>
+					</xe:formRow>
+				</xe:formTable>
+			</xp:section>
+		</xe:formRow>
+		<xe:formRow id="formRow17" labelPosition="none">
+			<xp:section id="section2" header="Response" initClosed="false">
+				<xe:formTable disableErrorSummary="true">
+					<xe:formRow id="formRow21" label="Content Type:">
+						<xp:table>
+							<xp:tr>
+								<xp:td colspan='2'>
+									<xp:comboBox id="comboBox4" value="#{document1.ResponseContentType}">
+										<xp:selectItem itemLabel=""></xp:selectItem>
+										<xp:selectItem itemLabel="application/atom+xml">
+										</xp:selectItem>
+										<xp:selectItem itemLabel="application/json">
+										</xp:selectItem>
+										<xp:selectItem itemLabel="application/xml">
+										</xp:selectItem>
+										<xp:selectItem itemLabel="text/html"></xp:selectItem>
+										<xp:selectItem itemLabel="text/plain"></xp:selectItem>
+									</xp:comboBox>
+									<xp:link escape="true" text="Data Schema..." id="link1"
+										style="margin-left: 12px">
+										<xp:this.onclick><![CDATA[alert("Not yet implemented")]]></xp:this.onclick>
+									</xp:link>
+								</xp:td>
+							</xp:tr>
+							<xp:tr>
+								<xp:td>Response Fields:</xp:td>
+								<xp:td>
+									<xc:ApiDocParamInput field="ResponseFields">
+									</xc:ApiDocParamInput>
+								</xp:td>
+							</xp:tr>
+						</xp:table>
+					</xe:formRow>
+					<xe:formRow id="formRow22" label="HTTP Headers:">
+						<xc:ApiDocParamInput field="ResponseHeaders" response="true">
+						</xc:ApiDocParamInput>
+					</xe:formRow>
+					<xe:formRow id="formRow23" label="Status Code:">
+						<xp:link escape="true" text="Add..." id="link4">
+							<xp:eventHandler event="onclick" submit="false">
+								<xp:this.script><![CDATA[XSP.openDialog("#{id:responseStatusDialog}",null,{refresh:'#{id:responseStatusPanel}'})]]></xp:this.script>
+							</xp:eventHandler>
+							<xp:image id="image4" url="/miniadd.png" style="margin: 0 4px"></xp:image>
+						</xp:link>
+						&#160;&#160;
+						<xp:link escape="true" text="Edit Json..." id="link5">
+							<xp:eventHandler event="onclick" submit="false">
+								<xp:this.script><![CDATA[XSP.openDialog("#{id:jsonDialog}",null,{field:'ResponseStatus',refresh:'#{id:responseStatusPanel}'})]]></xp:this.script>
+							</xp:eventHandler>
+							<xp:image id="image5" url="/miniedit.png" style="margin: 0 4px"></xp:image>
+						</xp:link>
+						<xp:panel id="responseStatusPanel">
+							<xp:dataTable id="dataTable1" var="up" indexVar="idx"
+								disableTheme="true" style="margin-left: 12px">
+								<xp:this.value><![CDATA[#{javascript:fromJson(document1.getItemValueString('ResponseStatus')||"[]")}]]></xp:this.value>
+								<xp:column id="column1">
+									<xp:link id="link2">
+										<xp:image id="image3" url="/minidelete.png"></xp:image>
+										<xp:eventHandler event="onclick" submit="true"
+											refreshMode="partial" refreshId="requestsDetailsPanel">
+											<xp:this.action><![CDATA[#{javascript:docBean.remove(document1,'ResponseStatus',idx)}]]></xp:this.action>
+										</xp:eventHandler>
+									</xp:link>
+								</xp:column>
+								<xp:column id="column2" style="width:6em">
+									<xp:link escape="true" text="#{up.code}" id="link3">
+										<xp:eventHandler event="onclick" submit="false">
+											<xp:this.script><![CDATA[XSP.openDialog("#{id:responseStatusDialog}",null,{refresh:'#{id:responseStatusPanel}',idx:'#{javascript:idx}'})]]></xp:this.script>
+										</xp:eventHandler>
+									</xp:link>
+								</xp:column>
+								<xp:column id="column4">
+									<xp:text escape="true" id="computedField2" value="#{up.since}">
+									</xp:text>
+								</xp:column>
+								<xp:column id="column3">
+									<xp:text escape="true" id="computedField1" value="#{up.description}">
+									</xp:text>
+								</xp:column>
+							</xp:dataTable>
+						</xp:panel>
+					</xe:formRow>
+				</xe:formTable>
+			</xp:section>
+		</xe:formRow>
+		<xe:formRow id="formRow25" labelPosition="none">
+			<xp:section id="section3" header="Examples" initClosed="false">
+				<xe:formTable disableErrorSummary="true">
+					<xe:formRow id="formRow39" label="API Explorer Path:">
+						<xp:inputText id="inputText14"
+							disableClientSideValidation="true" value="#{document1.APIExplorerPath}"
+							size="60">
+						</xp:inputText>
+					</xe:formRow>
+					<xe:formRow id="formRow28" label="Playground Snippets:">
+						<xc:ApiDocReferenceInput field="Playground">
+						</xc:ApiDocReferenceInput>
+					</xe:formRow>
+					<xe:formRow id="formRow29" label="Other References:">
+						<xc:ApiDocReferenceInput field="References">
+						</xc:ApiDocReferenceInput>
+					</xe:formRow>
+					<xe:formRow id="formRow36" label="Examples:">
+						<xc:ApiDocReferenceInput field="Examples">
+						</xc:ApiDocReferenceInput>
+					</xe:formRow>
+				</xe:formTable>
+			</xp:section>
+		</xe:formRow>
+	</xe:formTable>
+
+
+
+
+	<!--
+		Dialog for editing a request detail 
+	 -->
+	<xe:dialog id="requestDetailsDialog" title="Request Detail">
+		<xp:panel id="panel8" style="padding: 5px">
+			<xp:this.data>
+				<xe:objectData var="ctx">
+					<xe:this.createObject><![CDATA[#{javascript:var idx = param['idx']?parseFloat(param['idx']):-1;
+var refresh = param['refresh']; 
+var value = idx>=0 ? fromJson(document1.getItemValueString('requestsDetails'))[idx] : {} 
+return {idx:idx, value:value, refresh: refresh}}]]></xe:this.createObject>
+				</xe:objectData>
+			</xp:this.data>
+			<xp:this.dataContexts>
+				<xp:dataContext var="def" value="#{ctx.value}">
+				</xp:dataContext>
+			</xp:this.dataContexts>
+			<xe:formTable id="formTable4" formTitle="Enter the definition for the request">
+				<xp:this.facets>
+					<xp:panel xp:key="footer" id="panel9">
+						<xp:button value="Ok" id="button6">
+							<xp:eventHandler event="onclick" submit="true"
+								refreshMode="complete">
+								<xp:this.action><![CDATA[#{javascript:var params = fromJson(@Trim(document1.getItemValueString('requestsDetails'))||"[]");								
+if(ctx.idx>=0) {
+	params[ctx.idx] = def;
+} else {
+	params.push(def);
+}
+document1.replaceItemValue('requestsDetails',toJson(params));
+getComponent("requestDetailsDialog").hide(ctx.refresh)}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:button>
+						<xp:button value="Cancel" id="button8">
+							<xp:eventHandler event="onclick" submit="false">
+								<xp:this.script><![CDATA[XSP.closeDialog('#{id:requestDetailsDialog}')]]></xp:this.script>
+							</xp:eventHandler>
+						</xp:button>
+					</xp:panel>
+				</xp:this.facets>
+				<xe:formRow id="formRow9" label="Method:">
+					<xp:comboBox id="comboBox1" required="true" value="#{def.method}">
+						<xp:selectItem itemLabel="GET">
+						</xp:selectItem>
+						<xp:selectItem itemLabel="POST">
+						</xp:selectItem>
+						<xp:selectItem itemLabel="PUT">
+						</xp:selectItem>
+						<xp:selectItem itemLabel="DELETE">
+						</xp:selectItem>
+						<xp:selectItem itemLabel="HEAD">
+						</xp:selectItem>
+					</xp:comboBox>
+				</xe:formRow>
+				<xe:formRow id="formRow10" label="Uri:">
+					<xp:inputText id="inputText6" required="true"
+						disableClientSideValidation="true" value="#{def.uri}" size="80">
+					</xp:inputText>
+				</xe:formRow>
+				<xe:formRow id="formRow11" label="Description:">
+					<xp:inputTextarea id="inputTextarea3" value="#{def.description}"
+						cols="120" rows="5">
+					</xp:inputTextarea>
+				</xe:formRow>
+			</xe:formTable>
+		</xp:panel>
+	</xe:dialog>
+
+	<!--
+		Dialog for editing a response status code 
+	 -->
+	<xe:dialog id="responseStatusDialog" title="Response Status Code">
+		<xp:panel id="panel5" style="padding: 5px">
+			<xp:this.data>
+				<xe:objectData var="ctx">
+					<xe:this.createObject><![CDATA[#{javascript:var idx = param['idx']?parseFloat(param['idx']):-1;
+var refresh = param['refresh']; 
+var value = idx>=0 ? fromJson(document1.getItemValueString('ResponseStatus'))[idx] : {} 
+return {idx:idx, value:value, refresh: refresh}}]]></xe:this.createObject>
+				</xe:objectData>
+			</xp:this.data>
+			<xp:this.dataContexts>
+				<xp:dataContext var="def" value="#{ctx.value}">
+				</xp:dataContext>
+			</xp:this.dataContexts>
+			<xe:formTable id="formTable5"
+				formTitle="Enter the definition for the response status">
+				<xp:this.facets>
+					<xp:panel xp:key="footer" id="panel10">
+						<xp:button value="Ok" id="button9">
+							<xp:eventHandler event="onclick" submit="true"
+								refreshMode="complete">
+								<xp:this.action><![CDATA[#{javascript:var params = fromJson(@Trim(document1.getItemValueString('ResponseStatus'))||"[]");								
+if(ctx.idx>=0) {
+	params[ctx.idx] = def;
+} else {
+	params.push(def);
+}
+document1.replaceItemValue('ResponseStatus',toJson(params));
+getComponent("responseStatusDialog").hide(ctx.refresh)}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:button>
+						<xp:button value="Cancel" id="button10">
+							<xp:eventHandler event="onclick" submit="false">
+								<xp:this.script><![CDATA[XSP.closeDialog('#{id:responseStatusDialog}')]]></xp:this.script>
+							</xp:eventHandler>
+						</xp:button>
+					</xp:panel>
+				</xp:this.facets>
+				<xe:formRow id="formRow24" label="Status Code:">
+					<xp:comboBox id="cbStatusCode" required="true" value="#{def.code}">
+						<xp:selectItem itemLabel="">
+						</xp:selectItem>
+						<xp:selectItem itemLabel="200">
+						</xp:selectItem>
+						<xp:selectItem itemLabel="400">
+						</xp:selectItem>
+						<xp:selectItem itemLabel="401">
+						</xp:selectItem>
+						<xp:selectItem itemLabel="403">
+						</xp:selectItem>
+						<xp:selectItem itemLabel="500">
+						</xp:selectItem>
+						<xp:eventHandler event="onchange" submit="true"
+							refreshMode="partial" refreshId="txStatusCode">
+							<xp:this.action><![CDATA[#{javascript:var v=getComponent('cbStatusCode').getValue()
+if(v=='200') {
+	def.description = "OK. Indicates that the request was received successfully."
+} else if(v=='400') {
+	def.description = "Bad Request. Returned when no matching user record can be found."
+} else if(v=='401') {
+	def.description = "Unauthorized. Returned when no authenticated user or no userid, email, or key parameter are provided on the request."
+} else if(v=='403') {
+	def.description = "Forbidden. The server refuses to fulfill a request, typically because the request was for an object that you don't have permission to access.";
+} else if(v=='500') {
+	def.description = "Internal server error. The server encountered an unexpected condition that prevented it from fulfilling the request.";
+} else {
+	def.description = "";
+}}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:comboBox>
+					&#160;&#160;Since:
+					<xp:inputText id="inputText9"
+						disableClientSideValidation="true" value="#{def.since}" size="8">
+					</xp:inputText>
+					&#160;&#160;Deprecated In:
+					<xp:inputText id="inputText15"
+						disableClientSideValidation="true" value="#{def.deprecated}" size="8">
+					</xp:inputText>
+				</xe:formRow>
+				<xe:formRow id="formRow26" label="Description:">
+					<xp:inputTextarea id="txStatusCode" value="#{def.description}"
+						cols="120" rows="5">
+					</xp:inputTextarea>
+				</xe:formRow>
+			</xe:formTable>
+		</xp:panel>
+	</xe:dialog>
+
+	<!--
+		Dialog for editing a reference list (Playground, others...)
+	-->
+	<xe:dialog id="refDialog" title="Reference Definition">
+		<xp:panel id="panel11" style="padding: 5px">
+			<xp:this.data>
+				<xe:objectData var="ctx">
+					<xe:this.createObject><![CDATA[#{javascript:var field = param['field']; 
+var refresh = param['refresh']; 
+var idx = param['idx']?parseFloat(param['idx']):-1;
+var value = idx>=0 ? fromJson(document1.getItemValueString(param['field']))[idx] : {} 
+return {field:field, idx:idx, value:value, refresh: refresh}}]]></xe:this.createObject>
+				</xe:objectData>
+			</xp:this.data>
+			<xp:this.dataContexts>
+				<xp:dataContext var="def" value="#{ctx.value}">
+				</xp:dataContext>
+			</xp:this.dataContexts>
+			<xe:formTable id="formTable6"
+				formTitle="Enter the definition for the reference">
+				<xe:this.formDescription></xe:this.formDescription>
+				<xp:this.facets>
+					<xp:panel xp:key="footer" id="panel12">
+						<xp:button value="Ok" id="button11">
+							<xp:eventHandler event="onclick" submit="true"
+								refreshMode="complete">
+								<xp:this.action><![CDATA[#{javascript:var params = fromJson(document1.getItemValueString(ctx.field)||"[]");								
+if(ctx.idx>=0) {
+	params[ctx.idx] = def;
+} else {
+	params.push(def);
+}
+document1.replaceItemValue(ctx.field,toJson(params));
+getComponent("refDialog").hide(ctx.refresh)}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:button>
+						<xp:button value="Cancel" id="button12">
+							<xp:eventHandler event="onclick" submit="false">
+								<xp:this.script><![CDATA[XSP.closeDialog('#{id:refDialog}')]]></xp:this.script>
+							</xp:eventHandler>
+						</xp:button>
+					</xp:panel>
+				</xp:this.facets>
+				<xe:formRow id="formRow30" label="Title:">
+					<xp:inputText id="inputText10" required="true"
+						disableClientSideValidation="true" value="#{def.name}" size="120">
+					</xp:inputText>
+				</xe:formRow>
+				<xe:formRow id="formRow31" label="Reference:">
+					<xp:inputText id="inputText11" required="true"
+						disableClientSideValidation="true" value="#{def.ref}" size="120">
+					</xp:inputText>
+				</xe:formRow>
+			</xe:formTable>
+		</xp:panel>
+	</xe:dialog>
+
+
+	<!--
+		Dialog for editing an example 
+	 -->
+	<xe:dialog id="exampleDialog" title="Example Definition">
+		<xp:panel id="panel13" style="padding: 5px">
+			<xp:this.data>
+				<xe:objectData var="ctx">
+					<xe:this.createObject><![CDATA[#{javascript:var field = param['field']; 
+var refresh = param['refresh']; 
+var idx = param['idx']?parseFloat(param['idx']):-1;
+var value = idx>=0 ? fromJson(document1.getItemValueString(param['field']))[idx] : {} 
+return {field:field, idx:idx, value:value, refresh: refresh}}]]></xe:this.createObject>
+				</xe:objectData>
+			</xp:this.data>
+			<xp:this.dataContexts>
+				<xp:dataContext var="def" value="#{ctx.value}">
+				</xp:dataContext>
+			</xp:this.dataContexts>
+			<xe:formTable id="formTable7" formTitle="Enter the definition for the example">
+				<xe:this.formDescription></xe:this.formDescription>
+				<xp:this.facets>
+					<xp:panel xp:key="footer" id="panel14">
+						<xp:button value="Ok" id="button13">
+							<xp:eventHandler event="onclick" submit="true"
+								refreshMode="complete">
+								<xp:this.action><![CDATA[#{javascript:var params = fromJson(document1.getItemValueString(ctx.field)||"[]");								
+if(ctx.idx>=0) {
+	params[ctx.idx] = def;
+} else {
+	params.push(def);
+}
+document1.replaceItemValue(ctx.field,toJson(params));
+getComponent("exampleDialog").hide(ctx.refresh)}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:button>
+						<xp:button value="Cancel" id="button14">
+							<xp:eventHandler event="onclick" submit="false">
+								<xp:this.script><![CDATA[XSP.closeDialog('#{id:exampleDialog}')]]></xp:this.script>
+							</xp:eventHandler>
+						</xp:button>
+					</xp:panel>
+				</xp:this.facets>
+				<xe:formRow id="formRow32" label="Name:">
+					<xp:inputText id="inputText12" required="true"
+						disableClientSideValidation="true" value="#{def.name}" size="120">
+					</xp:inputText>
+				</xe:formRow>
+				<xe:formRow id="formRow33" label="Description:">
+					<xp:inputTextarea id="inputTextarea7" value="#{def.description}"
+						cols="120" rows="3" style="font-family:Courier New">
+					</xp:inputTextarea>
+				</xe:formRow>
+				<xe:formRow id="formRow34" label="Request:">
+					<xp:link escape="true" text="Prettify" id="link6">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete">
+							<xp:this.action><![CDATA[#{javascript:docBean.prettify(getComponent("request"))}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+					<xp:link escape="true" text="Compact" id="link10">
+						&#160;&#160;
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete">
+							<xp:this.action><![CDATA[#{javascript:docBean.compact(getComponent("request"))}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+					<xp:inputTextarea id="request" value="#{def.request}"
+						cols="120" rows="8" style="font-family:Courier New">
+					</xp:inputTextarea>
+				</xe:formRow>
+				<xe:formRow id="formRow35" label="Response:">
+					<xp:link escape="true" text="Prettify" id="link11">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete">
+							<xp:this.action><![CDATA[#{javascript:docBean.prettify(getComponent("response"))}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+					<xp:link escape="true" text="Compact" id="link14">
+						&#160;&#160;
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete">
+							<xp:this.action><![CDATA[#{javascript:docBean.compact(getComponent("response"))}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+					<xp:inputTextarea id="response" value="#{def.response}"
+						cols="120" rows="8" style="font-family:Courier New">
+					</xp:inputTextarea>
+				</xe:formRow>
+			</xe:formTable>
+		</xp:panel>
+	</xe:dialog>
+
+	<!--
+		Dialog for editing a field stored as JSON 
+	 -->
+	<xe:dialog id="jsonDialog" title="Edit JSON Field">
+		<xp:panel id="panel6" style="padding: 5px">
+			<xp:this.data>
+				<xe:objectData var="ctx">
+					<xe:this.createObject><![CDATA[#{javascript:var field = param['field']; 
+var refresh = param['refresh']; 
+var value = document1.getItemValueString(field)
+if(value) {
+	value = toJson(fromJson(value),false)
+} 
+return {field:field, value:value, refresh: refresh}}]]></xe:this.createObject>
+				</xe:objectData>
+			</xp:this.data>
+			<xe:formTable id="formTable3" formTitle="Enter the JSON text">
+				<xp:this.facets>
+					<xp:panel xp:key="footer" id="panel7">
+						<xp:button value="Ok" id="button2">
+							<xp:eventHandler event="onclick" submit="true"
+								refreshMode="complete">
+								<xp:this.action><![CDATA[#{javascript:try {
+	var v = @Trim(ctx.value) ? toJson(fromJson(ctx.value),true) : ""
+	document1.replaceItemValue(ctx.field,v);
+	getComponent("jsonDialog").hide(ctx.refresh);
+} catch(e) {
+	@ErrorMessage("Invalid JSON text, "+e.toString());
+}}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:button>
+						<xp:button value="Cancel" id="button4">
+							<xp:eventHandler event="onclick" submit="false">
+								<xp:this.script><![CDATA[XSP.closeDialog('#{id:jsonDialog}')]]></xp:this.script>
+							</xp:eventHandler>
+						</xp:button>
+					</xp:panel>
+				</xp:this.facets>
+				<xe:formRow id="formRow38" labelPosition="none">
+					<xp:link escape="true" text="Prettify" id="link15">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete">
+							<xp:this.action><![CDATA[#{javascript:docBean.prettify(getComponent("jsonText"))}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+					<xp:link escape="true" text="Compact" id="link16">
+						&#160;&#160;
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete">
+							<xp:this.action><![CDATA[#{javascript:docBean.compact(getComponent("jsonText"))}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+				</xe:formRow>
+				<xe:formRow id="formRow20" labelPosition="none">
+					<xp:inputTextarea id="jsonText" value="#{ctx.value}"
+						cols="120" rows="20" style="font-family:Courier New">
+					</xp:inputTextarea>
+				</xe:formRow>
+			</xe:formTable>
+		</xp:panel>
+	</xe:dialog>
+
+
+	<!--
+		<xe:dumpObject id="dumpObject1" value="#{document1}"></xe:dumpObject>
+	-->
+</xp:view>

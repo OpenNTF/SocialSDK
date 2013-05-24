@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core"
 	xmlns:xc="http://www.ibm.com/xsp/custom">
-	<xc:ccOneUIStylesFixes></xc:ccOneUIStylesFixes>		
+	<xp:this.resources>
+		<xp:dojoModule name="extlib.dijit.Tabs"></xp:dojoModule>
+		<xp:dojoModule name="extlib.dijit.TabPane"></xp:dojoModule>
+		<xp:dojoModule name="extlib.dijit.Picker"></xp:dojoModule>
+		<xp:dojoModule name="extlib.dijit.OneUIv302PickerList"></xp:dojoModule>
+	</xp:this.resources>
+	<xc:ccOneUIStylesFixes></xc:ccOneUIStylesFixes>
 </xp:view>

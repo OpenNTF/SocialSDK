@@ -208,23 +208,23 @@ public abstract class AssetImporter {
 	}
 	
 	protected VFS createImportVFS(ImportSource source) {
-		String location = source.getSource();
-		if(StringUtil.equals(location, "file")) {
-			File baseDir=new File(location.trim());
+		if(StringUtil.equals(source.getSource(), "file")) {
+			String location=source.getLocation().trim();
+			File baseDir=new File(location);
 			if(!baseDir.exists()) {
 				throw new FacesExceptionEx(null, "Import directory {0} does not exist", location);
 			}
 			FileVFS vfs=new FileVFS(baseDir);
 			return vfs;
 		} else if(StringUtil.equals(source.getSource(), "github")) {
-			String basePath=location.trim();
-			if(StringUtil.isEmpty(basePath)) {
+			String location=source.getLocation().trim();
+			if(StringUtil.isEmpty(location)) {
 				throw new FacesExceptionEx(null, "GitHub: Location is empty", location);
 			}
-			GitVFS vfs=new GitVFS(source.getLocation(), source.getUserName(), source.getPassword());
+			GitVFS vfs=new GitVFS(location, source.getUserName(), source.getPassword());
 			return vfs;
 		}
-		throw new FacesExceptionEx(null, "Import action is not available for a source {0}", source.getSource());
+		throw new FacesExceptionEx(null, "Import action is not available for a source type {0}", source.getSource());
 	}
 
 	

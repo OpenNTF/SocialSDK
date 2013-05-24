@@ -6,7 +6,7 @@
 		<xp:dojoModule name="extlib.dijit.OneUIDialog"></xp:dojoModule>
 	</xp:this.resources>
 
-	<xc:ccMainPageResources></xc:ccMainPageResources>
+	<xc:ccDocumentationPageResources></xc:ccDocumentationPageResources>
 
 	<xc:ApiDocPageLayout navigationPath="/ApiEditor" title="API Documentation Editor">
 		<xe:dynamicContent id="dynp" defaultFacet="view"

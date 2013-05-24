@@ -22,6 +22,9 @@
 		.lotusui30 .lotusDialog h2 {color: black;background: white;background-color: transparent;}
 		/* no border on fieldset */
 		fieldset { border: 0; }
-		.lotusui30 .lotusFormTable {margin: 0;}				
+		.lotusui30 .lotusFormTable {margin: 0px;}
+		.lotusui30 .lotusFormTable td {padding: 2px;}
+		/* Form in a dialog */
+		.lotusui30 .lotusDialog .lotusFormTable, .lotusui30 .lotusDialog .lotusFormTable td, .lotusui30 .lotusDialog .lotusDialogContent {padding: 2px;}				
 	</style>
 </xp:view>

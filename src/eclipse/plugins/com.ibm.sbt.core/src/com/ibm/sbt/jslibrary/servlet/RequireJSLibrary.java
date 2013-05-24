@@ -133,19 +133,10 @@ public abstract class RequireJSLibrary extends AbstractLibrary {
 		int numModules = registerModules.length;
 		for (int i = 0; i < numModules; i++) {
 			String[] registerModule = registerModules[i];
-			/*
-			 * indent(sb, indentationLevel).append("'").append(registerModule[0]).append("' : '") .append(registerModule[1]).append("'"); if (i < numModules - 1 || isExtension) { sb.append(","); } sb.append("\n");
-			 */
-			if (i == 0) {
-				if (type == ModuleType.SBTX_MODULE) {
-					// delimit from standard module paths
-					sb.append(",");
-				}
-			}
 			String moduleUrl = getModuleUrl(request, registerModule[1], type);
-			sb.append("'").append(registerModule[0]).append("':'").append(moduleUrl).append("'");
+			indent(sb, indentationLevel).append("'").append(registerModule[0]).append("':'").append(moduleUrl).append("'");
 			if (i < numModules - 1) {
-				sb.append(",");
+				sb.append(",").append(newLine());
 			}
 		}
 	}
@@ -159,7 +150,7 @@ public abstract class RequireJSLibrary extends AbstractLibrary {
 			Map<String, JsonObject> endpoints, JsonObject properties, int indentationLevel)
 			throws LibraryException {
 		StringBuilder sb = super.generateSbtConfigDefine(request, endpoints, properties, indentationLevel);
-		indent(sb, indentationLevel).append("require(['sbt/config'], function(){});\n");
+		indent(sb, indentationLevel).append("require(['sbt/config'], function(){});").append(newLine());
 		return sb;
 	};
 
@@ -191,7 +182,7 @@ public abstract class RequireJSLibrary extends AbstractLibrary {
 	protected StringBuilder generateModuleBlock(LibraryRequest request, String[][] registerModules,
 			String[][] registerExtModules, String[] requireModules, int indentationLevel) {
 		StringBuilder sb = new StringBuilder();
-		indent(sb, indentationLevel).append("requirejs.config({\n"); // begin requirejs.config
+		indent(sb, indentationLevel).append("requirejs.config({").append(newLine()); // begin requirejs.config
 		indentationLevel += 1;
 		// indent(sb, indentationLevel).append("enforceDefine: '").append(enforceDefine).append("',\n");
 		// indent(sb, indentationLevel).append("waitSeconds: '").append(waitSeconds).append("',\n");
@@ -199,18 +190,22 @@ public abstract class RequireJSLibrary extends AbstractLibrary {
 		indent(sb, indentationLevel).append("paths: {"); // begin paths
 
 		// register the module paths and required modules
+		indentationLevel++;
+		sb.append(newLine());
 		generateRegisterModules(sb, indentationLevel, request, registerModules, ModuleType.SBT_MODULE);
 		if (registerExtModules != null) {
+			sb.append(",").append(newLine());
 			generateRegisterModules(sb, indentationLevel, request, registerExtModules, ModuleType.SBTX_MODULE);
 		}
-		sb.append(",");
+		sb.append(",").append(newLine());
 		generateRegisterModules(sb, indentationLevel, request, LIBRARY_MODULES, ModuleType.JS_LIBRARY);
 
 		generateRequireModules(sb, indentationLevel, requireModules);
-		sb.append("}\n"); // end paths
+		indentationLevel -= 1;
+		indent(sb, indentationLevel).append("}").append(newLine()); // end paths
 
 		indentationLevel -= 1;
-		indent(sb, indentationLevel).append("});\n"); // end requirejs.config
+		indent(sb, indentationLevel).append("});").append(newLine()); // end requirejs.config
 
 		return sb;
 	}

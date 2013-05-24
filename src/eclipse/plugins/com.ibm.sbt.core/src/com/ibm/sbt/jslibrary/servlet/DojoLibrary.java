@@ -187,13 +187,13 @@ public class DojoLibrary extends AbstractLibrary {
 	    if (isExceedsVersion(request.getJsVersion(), minimumAmdVersion)) {
 			// Dojo AMD syntax
 			StringBuilder sb = new StringBuilder();
-			sb.append("require({paths:{'").append(moduleName).append("': '").append(moduleUrl).append("'}});\n");
+			sb.append("require({paths:{'").append(moduleName).append("': '").append(moduleUrl).append("'}});").append(newLine());
 			return sb.toString();
 		} else {
 			// Non AMD dojo syntax
 			StringBuilder sb = new StringBuilder();
 			sb.append("dojo.registerModulePath('").append(moduleName).append("','").append(moduleUrl)
-					.append("')").append(";\n");
+					.append("')").append(";").append(newLine());
 			return sb.toString();
 		}
 	}
@@ -205,7 +205,7 @@ public class DojoLibrary extends AbstractLibrary {
 	@Override
 	protected String generateRequire(String module) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("dojo.require('").append(module).append("')").append(";\n");
+		sb.append("dojo.require('").append(module).append("')").append(";").append(newLine());
 		return sb.toString();
 	}
 

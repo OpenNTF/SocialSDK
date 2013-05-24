@@ -31,6 +31,7 @@ public class LibraryRequestParams {
     private String _toolkitExtUrl;
     private String _toolkitExtJsUrl;
     private String _libraryUrl;
+    private String _jsLibraryUrl;
 
     /**
      * @return the defaultEnvironment
@@ -145,10 +146,23 @@ public class LibraryRequestParams {
 	}
 
 	/**
+	 * @return the jsLibraryUrl
+	 */
+	public String getJsLibraryUrl() {
+		return _jsLibraryUrl;
+	}
+	
+	/**
 	 * @param _libraryUrl the libraryUrl to set
 	 */
 	public void setLibraryUrl(String _libraryUrl) {
 		this._libraryUrl = _libraryUrl;
 	}
 
+	/**
+	 * @param _jsLibraryUrl the jsLibraryUrl to set
+	 */
+	public void setJsLibraryUrl(String _jsLibraryUrl) {
+		this._jsLibraryUrl = _jsLibraryUrl;
+	}
 }

@@ -19,6 +19,7 @@ package com.ibm.sbt.jslibrary.servlet;
  * jQuery specific library implementation
  * 
  * @author mwallace
+ * @author cmanias
  */
 public class JQueryLibrary extends RequireJSLibrary {
 

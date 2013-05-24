@@ -51,6 +51,9 @@ public class ToolkitServlet extends LibraryServlet {
 			params.setToolkitUrl(toolkitUrl);
 			params.setToolkitJsUrl(toolkitJsUrl);
 
+			String jsLibraryUrl = UrlUtil.getServerUrl(getHttpRequest())+"/xsp"+SbtResourceProvider.RESOURCE_PATH+"/js/libs/";
+			params.setJsLibraryUrl(jsLibraryUrl);
+
 			// Should be contributed by the other library...
 			// Hard coded for now
 			boolean sbtx = true;

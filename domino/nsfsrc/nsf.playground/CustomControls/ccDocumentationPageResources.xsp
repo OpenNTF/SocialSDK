@@ -3,8 +3,6 @@
 	xmlns:xc="http://www.ibm.com/xsp/custom">
 	<xp:this.resources>
 		<xp:script src="/main.js" clientSide="true"></xp:script>
-		<xp:styleSheet href="/mainpage.css"></xp:styleSheet>
-		<xp:dojoModule name="dojo.dom-geometry"></xp:dojoModule>
 	</xp:this.resources>
 
 	<xc:ccOneUIStylesFixes></xc:ccOneUIStylesFixes>	

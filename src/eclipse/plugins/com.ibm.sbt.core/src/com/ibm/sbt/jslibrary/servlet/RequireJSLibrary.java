@@ -23,6 +23,7 @@ import com.ibm.commons.util.io.json.JsonObject;
  * Library implementation for libraries which use RequireJS as an AMD loader
  * 
  * @author mwallace
+ * @author cmanias
  */
 public abstract class RequireJSLibrary extends AbstractLibrary {
 
@@ -34,10 +35,10 @@ public abstract class RequireJSLibrary extends AbstractLibrary {
 
 	protected static final String		PATH_SBTX				= "sbtx/js/sdk/sbtx";					//$NON-NLS-1$
 
-	protected static final String		PATH_HAS				= "/sbt/js/libs/has";					//$NON-NLS-1$
+	protected static final String		PATH_HAS				= "has";					//$NON-NLS-1$
 
-	protected static final String		PATH_REQUIRE_I18N		= "/sbt/js/libs/requirejsPlugins/i18n"; //$NON-NLS-1$
-	protected static final String		PATH_REQUIRE_TEXT		= "/sbt/js/libs/requirejsPlugins/text"; //$NON-NLS-1$
+	protected static final String		PATH_REQUIRE_I18N		= "requirejsPlugins/i18n"; //$NON-NLS-1$
+	protected static final String		PATH_REQUIRE_TEXT		= "requirejsPlugins/text"; //$NON-NLS-1$
 	// TODO Do these need to be dynamic
 	protected static final String[][]	REGISTER_MODULES		= { { MODULE_SBT, PATH_SBT },
 			{ MODULE_BRIDGE }									};
@@ -50,10 +51,6 @@ public abstract class RequireJSLibrary extends AbstractLibrary {
 	private static final String[]		REQUIRE_MODULES			= new String[0];
 
 	private static final String			DEFINE_MODULE			= MODULE_CONFIG;
-
-	public enum MODULE_TYPE {
-		MODULE, EXTENSION, LIBRARY
-	};
 
 	/**
 	 * Default constructor
@@ -122,33 +119,13 @@ public abstract class RequireJSLibrary extends AbstractLibrary {
 		return REQUIRE_MODULES;
 	}
 
-	protected String getModuleUrl(LibraryRequest request, String modulePath, MODULE_TYPE type) {
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "getModuleUrl", new Object[] { request, modulePath });
-		}
-		String moduleUrl = "";
-		switch (type) {
-			case MODULE:
-			case EXTENSION:
-				moduleUrl = super.getModuleUrl(request, modulePath, type == MODULE_TYPE.EXTENSION);
-				break;
-			case LIBRARY:
-			default:
-				moduleUrl = modulePath;
-				break;
-		}
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.exiting(sourceClass, "getModuleUrl", moduleUrl);
-		}
-		return moduleUrl;
-	}
-
 	/*
 	 * We redefine the isExtension boolean parameter. The meaning here is that there are extension modules pending to be added (so we need to append a comma) (non-Javadoc)
 	 * @see com.ibm.sbt.jslibrary.servlet.AbstractLibrary#generateRegisterModules(java.lang.StringBuilder, int, com.ibm.sbt.jslibrary.servlet.LibraryRequest, java.lang.String[][], boolean)
 	 */
+	@Override
 	protected void generateRegisterModules(StringBuilder sb, int indentationLevel, LibraryRequest request,
-			String[][] registerModules, MODULE_TYPE type) {
+			String[][] registerModules, ModuleType type) {
 
 		if (registerModules == null) {
 			return;
@@ -160,7 +137,7 @@ public abstract class RequireJSLibrary extends AbstractLibrary {
 			 * indent(sb, indentationLevel).append("'").append(registerModule[0]).append("' : '") .append(registerModule[1]).append("'"); if (i < numModules - 1 || isExtension) { sb.append(","); } sb.append("\n");
 			 */
 			if (i == 0) {
-				if (type == MODULE_TYPE.EXTENSION) {
+				if (type == ModuleType.SBTX_MODULE) {
 					// delimit from standard module paths
 					sb.append(",");
 				}
@@ -222,12 +199,12 @@ public abstract class RequireJSLibrary extends AbstractLibrary {
 		indent(sb, indentationLevel).append("paths: {"); // begin paths
 
 		// register the module paths and required modules
-		generateRegisterModules(sb, indentationLevel, request, registerModules, MODULE_TYPE.MODULE);
+		generateRegisterModules(sb, indentationLevel, request, registerModules, ModuleType.SBT_MODULE);
 		if (registerExtModules != null) {
-			generateRegisterModules(sb, indentationLevel, request, registerExtModules, MODULE_TYPE.EXTENSION);
+			generateRegisterModules(sb, indentationLevel, request, registerExtModules, ModuleType.SBTX_MODULE);
 		}
 		sb.append(",");
-		generateRegisterModules(sb, indentationLevel, request, LIBRARY_MODULES, MODULE_TYPE.LIBRARY);
+		generateRegisterModules(sb, indentationLevel, request, LIBRARY_MODULES, ModuleType.JS_LIBRARY);
 
 		generateRequireModules(sb, indentationLevel, requireModules);
 		sb.append("}\n"); // end paths

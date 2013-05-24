@@ -21,10 +21,7 @@ dojo.addOnLoad(function() {
  * @return
  */
 function resize() {
-	// TEMP for Dojo 1.6 until we move to D9
-	require(["dojo"], function(domGeom){
-		var domGeom={getMarginBox: dojo._getMarginBox}
-	//require(["dojo/dom-geometry"], function(domGeom){
+	require(["dojo/dom-geometry"], function(domGeom){
 		function windowHeight() {
 			var scrollRoot = (dojo.doc.compatMode == 'BackCompat') ? dojo.body() : dojo.doc.documentElement;
 			return scrollRoot.clientHeight;
@@ -49,32 +46,12 @@ function resize() {
 
 function treeCollapseAll(tree) {
 	tree = dijit.byId(tree);
-	if(tree.collapseAll) { // 1.8 and later
-		tree.collapseAll();
-	} else {
-        function collapse(node) {
-        	if(node!=tree.rootNode) {
-        		tree._collapseNode(node);
-        	}
-            dojo.map(node.getChildren(),collapse);
-        }
-        return collapse(tree.rootNode);
-    }
+	tree.collapseAll();
 }
 
 function treeExpandAll(tree) { 
 	tree = dijit.byId(tree);
-	if(tree.expandAll) { // 1.8 and later
-		tree.expandAll();
-	} else {
-        function expand(node) {
-        	if(node!=tree.rootNode) {
-        		tree._expandNode(node);
-        	}
-            dojo.map(node.getChildren(),expand);
-        }
-        return expand(tree.rootNode);
-    }
+	tree.expandAll();
 }
 
 function treeFindPath(tree,id) {

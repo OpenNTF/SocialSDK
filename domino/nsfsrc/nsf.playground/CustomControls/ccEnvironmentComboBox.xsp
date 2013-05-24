@@ -9,7 +9,7 @@
 		<xp:image url="/helpicon.png" id="image3"></xp:image>
 	</xp:link>
 
-	<xp:comboBox id="cbEnv" style="margin-top:3.0px" value="#{sessionScope.environment}"
+	<xp:comboBox id="cbEnv" style="margin: 3px 5px" value="#{sessionScope.environment}"
 		defaultValue="#{javascript:return dataAccess.getPreferredEnvironment()}">
 		<xp:selectItems>
 			<xp:this.value><![CDATA[#{javascript:dataAccess.getEnvironments()}]]></xp:this.value>

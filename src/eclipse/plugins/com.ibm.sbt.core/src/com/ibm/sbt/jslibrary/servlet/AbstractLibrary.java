@@ -51,6 +51,7 @@ import com.ibm.sbt.services.util.AuthUtil;
  * Handles initialising the Social Business Toolkit library with the appropriate bridge to the underlying JavaScript library i.e. dojo or jquery or ... This class need to be thread safe, only a single instance will be created.
  * 
  * @author mwallace
+ * @author cmanias
  */
 abstract public class AbstractLibrary {
 
@@ -125,8 +126,12 @@ abstract public class AbstractLibrary {
 	static final String				sourceClass						= AbstractLibrary.class.getName();
 	static final Logger				logger							= Logger.getLogger(sourceClass);
 
+	/**
+	 * This is used to determine how to generate the module URL
+	 *
+	 */
 	protected enum ModuleType {
-		MODULE, EXTENSION, LIBRARY
+		SBT_MODULE, SBTX_MODULE, JS_LIBRARY
 	};
 	
 	/**
@@ -387,9 +392,9 @@ abstract public class AbstractLibrary {
 		StringBuilder sb = new StringBuilder();
 
 		// register the module paths and required modules
-		generateRegisterModules(sb, indentationLevel, request, registerModules, ModuleType.MODULE);
+		generateRegisterModules(sb, indentationLevel, request, registerModules, ModuleType.SBT_MODULE);
 		if (registerExtModules != null) {
-			generateRegisterModules(sb, indentationLevel, request, registerExtModules, ModuleType.EXTENSION);
+			generateRegisterModules(sb, indentationLevel, request, registerExtModules, ModuleType.SBTX_MODULE);
 		}
 		generateRequireModules(sb, indentationLevel, requireModules);
 		return sb;
@@ -615,13 +620,13 @@ abstract public class AbstractLibrary {
 		String jsUrl = "";
 		String moduleUrl = "";
 		switch (type) {
-			case MODULE:
+			case SBT_MODULE:
 				jsUrl = request.getToolkitJsUrl();
 				break;
-			case EXTENSION:
+			case SBTX_MODULE:
 				jsUrl = request.getToolkitExtJsUrl();
 				break;
-			case LIBRARY:
+			case JS_LIBRARY:
 				jsUrl = request.getJsLibraryUrl();
 				break;
 			default:

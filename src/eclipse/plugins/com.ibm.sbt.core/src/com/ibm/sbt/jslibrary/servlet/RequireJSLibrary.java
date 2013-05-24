@@ -23,6 +23,7 @@ import com.ibm.commons.util.io.json.JsonObject;
  * Library implementation for libraries which use RequireJS as an AMD loader
  * 
  * @author mwallace
+ * @author cmanias
  */
 public abstract class RequireJSLibrary extends AbstractLibrary {
 
@@ -136,7 +137,7 @@ public abstract class RequireJSLibrary extends AbstractLibrary {
 			 * indent(sb, indentationLevel).append("'").append(registerModule[0]).append("' : '") .append(registerModule[1]).append("'"); if (i < numModules - 1 || isExtension) { sb.append(","); } sb.append("\n");
 			 */
 			if (i == 0) {
-				if (type == ModuleType.EXTENSION) {
+				if (type == ModuleType.SBTX_MODULE) {
 					// delimit from standard module paths
 					sb.append(",");
 				}
@@ -198,12 +199,12 @@ public abstract class RequireJSLibrary extends AbstractLibrary {
 		indent(sb, indentationLevel).append("paths: {"); // begin paths
 
 		// register the module paths and required modules
-		generateRegisterModules(sb, indentationLevel, request, registerModules, ModuleType.MODULE);
+		generateRegisterModules(sb, indentationLevel, request, registerModules, ModuleType.SBT_MODULE);
 		if (registerExtModules != null) {
-			generateRegisterModules(sb, indentationLevel, request, registerExtModules, ModuleType.EXTENSION);
+			generateRegisterModules(sb, indentationLevel, request, registerExtModules, ModuleType.SBTX_MODULE);
 		}
 		sb.append(",");
-		generateRegisterModules(sb, indentationLevel, request, LIBRARY_MODULES, ModuleType.LIBRARY);
+		generateRegisterModules(sb, indentationLevel, request, LIBRARY_MODULES, ModuleType.JS_LIBRARY);
 
 		generateRequireModules(sb, indentationLevel, requireModules);
 		sb.append("}\n"); // end paths

@@ -125,6 +125,10 @@ abstract public class AbstractLibrary {
 	static final String				sourceClass						= AbstractLibrary.class.getName();
 	static final Logger				logger							= Logger.getLogger(sourceClass);
 
+	protected enum ModuleType {
+		MODULE, EXTENSION, LIBRARY
+	};
+	
 	/**
 	 * @param libraryName
 	 * @param minimumVersion
@@ -383,9 +387,9 @@ abstract public class AbstractLibrary {
 		StringBuilder sb = new StringBuilder();
 
 		// register the module paths and required modules
-		generateRegisterModules(sb, indentationLevel, request, registerModules, false);
+		generateRegisterModules(sb, indentationLevel, request, registerModules, ModuleType.MODULE);
 		if (registerExtModules != null) {
-			generateRegisterModules(sb, indentationLevel, request, registerExtModules, true);
+			generateRegisterModules(sb, indentationLevel, request, registerExtModules, ModuleType.EXTENSION);
 		}
 		generateRequireModules(sb, indentationLevel, requireModules);
 		return sb;
@@ -540,12 +544,12 @@ abstract public class AbstractLibrary {
 	 * @param registerModules
 	 */
 	protected void generateRegisterModules(StringBuilder sb, int indentationLevel, LibraryRequest request,
-			String[][] registerModules, boolean isExtension) {
+			String[][] registerModules, ModuleType type) {
 		if (registerModules == null) {
 			return;
 		}
 		for (String[] registerModule : registerModules) {
-			String moduleUrl = getModuleUrl(request, registerModule[1], isExtension);
+			String moduleUrl = getModuleUrl(request, registerModule[1], type);
 			indent(sb, indentationLevel).append(
 					generateRegisterModulePath(request, registerModule[0], moduleUrl));
 		}
@@ -604,24 +608,32 @@ abstract public class AbstractLibrary {
 		return modules.toArray(new String[modules.size()]);
 	}
 
-	/**
-	 * @param module
-	 * @return
-	 */
-	protected String getModuleUrl(LibraryRequest request, String modulePath, boolean isExtension) {
+	protected String getModuleUrl(LibraryRequest request, String modulePath, ModuleType type) {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "getModuleUrl", new Object[] { request, modulePath });
 		}
-
-		String toolkitJsUrl = isExtension ? request.getToolkitExtJsUrl() : request.getToolkitJsUrl();
-		String moduleUrl = PathUtil.concat(toolkitJsUrl, modulePath, '/');
-
+		String jsUrl = "";
+		String moduleUrl = "";
+		switch (type) {
+			case MODULE:
+				jsUrl = request.getToolkitJsUrl();
+				break;
+			case EXTENSION:
+				jsUrl = request.getToolkitExtJsUrl();
+				break;
+			case LIBRARY:
+				jsUrl = request.getJsLibraryUrl();
+				break;
+			default:
+				moduleUrl = modulePath;
+				break;
+		}
+		moduleUrl = moduleUrl.isEmpty() ? PathUtil.concat(jsUrl, modulePath, '/') : moduleUrl;
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.exiting(sourceClass, "getModuleUrl", moduleUrl);
 		}
 		return moduleUrl;
 	}
-
 	/**
 	 * @param properties
 	 * @return

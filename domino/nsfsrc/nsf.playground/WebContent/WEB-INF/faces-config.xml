@@ -1,266 +1,278 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <faces-config>
-	<managed-bean>
-		<managed-bean-name>dataAccess</managed-bean-name>
-		<managed-bean-class>playground.beans.DataAccessBean
+  <managed-bean>
+    <managed-bean-name>dataAccess</managed-bean-name>
+    <managed-bean-class>playground.beans.DataAccessBean
 		</managed-bean-class>
-		<managed-bean-scope>application</managed-bean-scope>
-	</managed-bean>
-	<!--
+    <managed-bean-scope>application</managed-bean-scope>
+  </managed-bean>
+  <!--
 		Bean holding the options for the whole playground. This is mostly for
 		development and debugging purposes.
 	-->
-	<managed-bean>
-		<managed-bean-name>optionsBean</managed-bean-name>
-		<managed-bean-class>playground.beans.OptionsBean
+  <managed-bean>
+    <managed-bean-name>optionsBean</managed-bean-name>
+    <managed-bean-class>playground.beans.OptionsBean
 		</managed-bean-class>
-		<managed-bean-scope>application</managed-bean-scope>
-	</managed-bean>
-	<!--
+    <managed-bean-scope>application</managed-bean-scope>
+  </managed-bean>
+  <!--
 		Bean used to dynamically compile and load dome XPages. This is mostly
 		for development and debugging purposes.
 	-->
-	<managed-bean>
-		<managed-bean-name>dynamicXPagesBean
+  <managed-bean>
+    <managed-bean-name>dynamicXPagesBean
 		</managed-bean-name>
-		<managed-bean-class>playground.beans.DynamicXPagesBean
+    <managed-bean-class>playground.beans.DynamicXPagesBean
 		</managed-bean-class>
-		<managed-bean-scope>application</managed-bean-scope>
-	</managed-bean>
-	<!--
+    <managed-bean-scope>application</managed-bean-scope>
+  </managed-bean>
+  <!--
 		Managed bean containing the business logic when accessing an asset
 		document.
 	-->
-	<managed-bean>
-		<managed-bean-name>snippetBean</managed-bean-name>
-		<managed-bean-class>playground.beans.JavaScriptSnippetBean
+  <managed-bean>
+    <managed-bean-name>snippetBean</managed-bean-name>
+    <managed-bean-class>playground.beans.JavaScriptSnippetBean
 		</managed-bean-class>
-		<managed-bean-scope>request</managed-bean-scope>
-	</managed-bean>
-	<managed-bean>
-		<managed-bean-name>javaSnippetBean</managed-bean-name>
-		<managed-bean-class>playground.beans.JavaSnippetBean
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>javaSnippetBean</managed-bean-name>
+    <managed-bean-class>playground.beans.JavaSnippetBean
 		</managed-bean-class>
-		<managed-bean-scope>request</managed-bean-scope>
-	</managed-bean>
-	<managed-bean>
-		<managed-bean-name>xpagesSnippetBean
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>xpagesSnippetBean
 		</managed-bean-name>
-		<managed-bean-class>playground.beans.XPagesSnippetBean
+    <managed-bean-class>playground.beans.XPagesSnippetBean
 		</managed-bean-class>
-		<managed-bean-scope>request</managed-bean-scope>
-	</managed-bean>
-	<managed-bean>
-		<managed-bean-name>gadgetSnippetBean
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>gadgetSnippetBean
 		</managed-bean-name>
-		<managed-bean-class>playground.beans.GadgetSnippetBean
+    <managed-bean-class>playground.beans.GadgetSnippetBean
 		</managed-bean-class>
-		<managed-bean-scope>request</managed-bean-scope>
-	</managed-bean>
-	<managed-bean>
-		<managed-bean-name>apiBean</managed-bean-name>
-		<managed-bean-class>playground.beans.APIBean
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>apiBean</managed-bean-name>
+    <managed-bean-class>playground.beans.APIBean
 		</managed-bean-class>
-		<managed-bean-scope>request</managed-bean-scope>
-	</managed-bean>
-	<managed-bean>
-		<managed-bean-name>importExport</managed-bean-name>
-		<managed-bean-class>playground.beans.ImportExportBean
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>importExport</managed-bean-name>
+    <managed-bean-class>playground.beans.ImportExportBean
 		</managed-bean-class>
-		<managed-bean-scope>request</managed-bean-scope>
-	</managed-bean>
-	
-	<!-- Credential store physical implementation -->
-	<managed-bean>
-		<managed-bean-name>CredStore</managed-bean-name>
-		<managed-bean-class>com.ibm.sbt.security.credential.store.MemoryStore</managed-bean-class>
-		<managed-bean-scope>application</managed-bean-scope>
-	</managed-bean>
-	
-	<!--  SmartCloud OAuth 1.0 -->
-	<managed-bean>
-		<managed-bean-name>smartcloud</managed-bean-name>
-		<managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <!-- Credential store physical implementation -->
+  <managed-bean>
+    <managed-bean-name>CredStore</managed-bean-name>
+    <managed-bean-class>com.ibm.sbt.security.credential.store.MemoryStore
+		</managed-bean-class>
+    <managed-bean-scope>application</managed-bean-scope>
+  </managed-bean>
+  <!--  SmartCloud OAuth 1.0 -->
+  <managed-bean>
+    <managed-bean-name>smartcloud</managed-bean-name>
+    <managed-bean-class>
 			com.ibm.sbt.services.endpoints.SmartCloudOAuthEndpoint
 		</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-		<!-- Trust the connection -->
-		<managed-property>
-			<property-name>forceTrustSSLCertificate
+    <managed-bean-scope>session</managed-bean-scope>
+    <!-- Trust the connection -->
+    <managed-property>
+      <property-name>forceTrustSSLCertificate
 			</property-name>
-			<value>true</value>
-		</managed-property>
-		<managed-property>
-			<property-name>signatureMethod</property-name>
-			<!-- <value>HMAC-SHA1</value> -->
-			<value>PLAINTEXT</value>
-		</managed-property>
-		<!-- Access to the token store -->
-		<managed-property>
-			<property-name>serviceName</property-name>
-			<value>smartcloud</value>
-		</managed-property>
-		<managed-property>
-			<property-name>appId</property-name>
-			<value>SBTPlayground</value>
-		</managed-property>
-	</managed-bean>
-	<!--  SmartCloud OAuth 2.0 -->
-	<managed-bean>
-		<managed-bean-name>smartcloudOA2</managed-bean-name>
-		<managed-bean-class>
+      <value>true</value>
+    </managed-property>
+    <managed-property>
+      <property-name>signatureMethod</property-name>
+      <!-- <value>HMAC-SHA1</value> -->
+      <value>PLAINTEXT</value>
+    </managed-property>
+    <!-- Access to the token store -->
+    <managed-property>
+      <property-name>serviceName</property-name>
+      <value>smartcloud</value>
+    </managed-property>
+    <managed-property>
+      <property-name>appId</property-name>
+      <value>SBTPlayground</value>
+    </managed-property>
+  </managed-bean>
+  <!--  SmartCloud OAuth 2.0 -->
+  <managed-bean>
+    <managed-bean-name>smartcloudOA2</managed-bean-name>
+    <managed-bean-class>
 			com.ibm.sbt.services.endpoints.SmartCloudOAuth2Endpoint
 		</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-		<!-- Trust the connection -->
-		<managed-property>
-			<property-name>forceTrustSSLCertificate
+    <managed-bean-scope>session</managed-bean-scope>
+    <!-- Trust the connection -->
+    <managed-property>
+      <property-name>forceTrustSSLCertificate
 			</property-name>
-			<value>true</value>
-		</managed-property>
-		<!-- Access to the token store -->
-		<managed-property>
-			<property-name>serviceName</property-name>
-			<value>smartcloudOA2</value>
-		</managed-property>
-		<managed-property>
-			<property-name>appId</property-name>
-			<value>SBTPlayground</value>
-		</managed-property>
-	</managed-bean>
-	<!-- Connections -->
-	<managed-bean>
-		<managed-bean-name>connections</managed-bean-name>
-		<managed-bean-class>
+      <value>true</value>
+    </managed-property>
+    <!-- Access to the token store -->
+    <managed-property>
+      <property-name>serviceName</property-name>
+      <value>smartcloudOA2</value>
+    </managed-property>
+    <managed-property>
+      <property-name>appId</property-name>
+      <value>SBTPlayground</value>
+    </managed-property>
+  </managed-bean>
+  <!-- Connections -->
+  <managed-bean>
+    <managed-bean-name>connections</managed-bean-name>
+    <managed-bean-class>
 			com.ibm.sbt.services.endpoints.ConnectionsBasicEndpoint
 		</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-		<managed-property>
-			<property-name>authenticationService
+    <managed-bean-scope>session</managed-bean-scope>
+    <managed-property>
+      <property-name>authenticationService
 			</property-name>
-			<value>communities/service/atom/communities/my
+      <value>communities/service/atom/communities/my
 			</value>
-		</managed-property>
-		<managed-property>
-			<property-name>authenticationPage</property-name>
-			<value>/xsp/.ibmxspres/.sbtsdk/loginForm.html?endpoint=connections
+    </managed-property>
+    <managed-property>
+      <property-name>authenticationPage</property-name>
+      <value>/xsp/.ibmxspres/.sbtsdk/loginForm.html?endpoint=connections
 			</value>
-		</managed-property>
-		<!-- Trust the connection -->
-		<managed-property>
-			<property-name>forceTrustSSLCertificate
+    </managed-property>
+    <!-- Trust the connection -->
+    <managed-property>
+      <property-name>forceTrustSSLCertificate
 			</property-name>
-			<value>true</value>
-		</managed-property>
-	</managed-bean>
-	<!-- Connections OAuth 2.0 -->
-	<managed-bean>
-		<managed-bean-name>connectionsOA2</managed-bean-name>
-		<managed-bean-class>
+      <value>true</value>
+    </managed-property>
+  </managed-bean>
+  <!-- Connections OAuth 2.0 -->
+  <managed-bean>
+    <managed-bean-name>connectionsOA2</managed-bean-name>
+    <managed-bean-class>
 			com.ibm.sbt.services.endpoints.ConnectionsOAuth2Endpoint
 		</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-		<!-- Trust the connection -->
-		<managed-property>
-			<property-name>forceTrustSSLCertificate
+    <managed-bean-scope>session</managed-bean-scope>
+    <!-- Trust the connection -->
+    <managed-property>
+      <property-name>forceTrustSSLCertificate
 			</property-name>
-			<value>true</value>
-		</managed-property>
-		<!-- Access to the token store -->
-		<managed-property>
-			<property-name>serviceName</property-name>
-			<value>connectionsOA2</value>
-		</managed-property>
-		<managed-property>
-			<property-name>appId</property-name>
-			<value>SBTPlayground</value>
-		</managed-property>
-	</managed-bean>
-	<!-- Domino -->
-	<managed-bean>
-		<managed-bean-name>domino</managed-bean-name>
-		<managed-bean-class>
+      <value>true</value>
+    </managed-property>
+    <!-- Access to the token store -->
+    <managed-property>
+      <property-name>serviceName</property-name>
+      <value>connectionsOA2</value>
+    </managed-property>
+    <managed-property>
+      <property-name>appId</property-name>
+      <value>SBTPlayground</value>
+    </managed-property>
+  </managed-bean>
+  <!-- Domino -->
+  <managed-bean>
+    <managed-bean-name>domino</managed-bean-name>
+    <managed-bean-class>
 			com.ibm.sbt.services.endpoints.DominoBasicEndpoint
 		</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-		<!-- Trust the connection -->
-		<managed-property>
-			<property-name>forceTrustSSLCertificate
+    <managed-bean-scope>session</managed-bean-scope>
+    <!-- Trust the connection -->
+    <managed-property>
+      <property-name>forceTrustSSLCertificate
 			</property-name>
-			<value>true</value>
-		</managed-property>
-		<managed-property>
-			<property-name>user
+      <value>true</value>
+    </managed-property>
+    <managed-property>
+      <property-name>user
 			</property-name>
-			<value>***REMOVED***</value>
-		</managed-property>
-		<managed-property>
-			<property-name>password
+      <value>***REMOVED***</value>
+    </managed-property>
+    <managed-property>
+      <property-name>password
 			</property-name>
-			<value>***REMOVED***</value>
-		</managed-property>
-	</managed-bean>
-
-	<!-- Twitter -->
-	<managed-bean>
-		<managed-bean-name>twitter</managed-bean-name>
-		<managed-bean-class>com.ibm.sbt.services.endpoints.OAuthEndpoint
+      <value>***REMOVED***</value>
+    </managed-property>
+  </managed-bean>
+  <!-- Twitter -->
+  <managed-bean>
+    <managed-bean-name>twitter</managed-bean-name>
+    <managed-bean-class>com.ibm.sbt.services.endpoints.OAuthEndpoint
 		</managed-bean-class>
-		<managed-bean-scope>application</managed-bean-scope>
-		<!-- Endpoint URL -->
-		<managed-property>
-			<property-name>url</property-name>
-			<value>https://api.twitter.com</value>
-		</managed-property>
-
-		<!-- Trust the connection -->
-		<managed-property>
-			<property-name>forceTrustSSLCertificate
+    <managed-bean-scope>application</managed-bean-scope>
+    <!-- Endpoint URL -->
+    <managed-property>
+      <property-name>url</property-name>
+      <value>https://api.twitter.com</value>
+    </managed-property>
+    <!-- Trust the connection -->
+    <managed-property>
+      <property-name>forceTrustSSLCertificate
 			</property-name>
-			<value>true</value>
-		</managed-property>
-		<!--
+      <value>true</value>
+    </managed-property>
+    <!--
 			Access Token obtained from the Twitter Application. This is required
 			for authorizing the API calls
 		-->
-		<!--
-		<managed-property>
-			<property-name>applicationAccessToken
-			</property-name>
-			<value>%{twitter.applicationAccessToken}
-			</value>
-		</managed-property>
+    <!--
+			<managed-property> <property-name>applicationAccessToken
+			</property-name> <value>%{twitter.applicationAccessToken} </value>
+			</managed-property>
 		-->
-		<managed-property>
-			<property-name>requestTokenURL</property-name>
-			<value>https://api.twitter.com/oauth/request_token</value>
-		</managed-property>
-		<managed-property>
-			<property-name>authorizationURL</property-name>
-			<value>https://api.twitter.com/oauth/authorize</value>
-		</managed-property>
-		<managed-property>
-			<property-name>accessTokenURL</property-name>
-			<value>https://api.twitter.com/oauth/access_token</value>
-		</managed-property>
-		<managed-property>
-			<property-name>signatureMethod</property-name>
-			<value>HMAC-SHA1</value>
-		</managed-property>
-
-		<!-- Access to the token store -->
-		<managed-property>
-			<property-name>serviceName</property-name>
-			<value>Twitter</value>
-		</managed-property>
-		<managed-property>
-			<property-name>appId</property-name>
-			<value>XPagesSBT</value>
-		</managed-property>
-	</managed-bean>
-	<!--
-		AUTOGEN-START-BUILDER: Automatically generated by IBM Domino Designer.
-		Do not modify.
-	-->
-	<!--AUTOGEN-END-BUILDER: End of automatically generated section-->
+    <managed-property>
+      <property-name>requestTokenURL</property-name>
+      <value>https://api.twitter.com/oauth/request_token
+			</value>
+    </managed-property>
+    <managed-property>
+      <property-name>authorizationURL</property-name>
+      <value>https://api.twitter.com/oauth/authorize
+			</value>
+    </managed-property>
+    <managed-property>
+      <property-name>accessTokenURL</property-name>
+      <value>https://api.twitter.com/oauth/access_token
+			</value>
+    </managed-property>
+    <managed-property>
+      <property-name>signatureMethod</property-name>
+      <value>HMAC-SHA1</value>
+    </managed-property>
+    <!-- Access to the token store -->
+    <managed-property>
+      <property-name>serviceName</property-name>
+      <value>Twitter</value>
+    </managed-property>
+    <managed-property>
+      <property-name>appId</property-name>
+      <value>XPagesSBT</value>
+    </managed-property>
+  </managed-bean>
+  <!--
+		Beans for API Documentation capability  
+	 -->
+  <managed-bean>
+    <managed-bean-name>docBean</managed-bean-name>
+    <managed-bean-class>doc.DocAPI</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>docOptionsBean</managed-bean-name>
+    <managed-bean-class>doc.OptionsBean
+		</managed-bean-class>
+    <managed-bean-scope>application</managed-bean-scope>
+    <!--
+			<managed-property> <property-name>playgroundUrl</property-name>
+			<value>https://priand64.swg.usma.ibm.com/SBTPlayground.nsf</value>
+			</managed-property>
+		-->
+  </managed-bean>
+  <!--AUTOGEN-START-BUILDER: Automatically generated by IBM Domino Designer. Do not modify.-->
+  <!--AUTOGEN-END-BUILDER: End of automatically generated section-->
 </faces-config>

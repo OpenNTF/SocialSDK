@@ -80,7 +80,7 @@ public class ContextPropertiesFactory extends AbstractPropertiesFactory {
 			} catch (NoInitialContextException nice) {
 				// ignoring this, only known to happen when running unit tests
 			} catch (NamingException ne) {
-				logger.log(Level.SEVERE, "Error reading context properties", ne);
+				logger.log(Level.WARNING, ne.getMessage());
 			}
 		}
 		

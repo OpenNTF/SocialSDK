@@ -121,6 +121,8 @@ abstract public class AbstractLibrary {
 	public static final String		PATH_SBTX						= "sbtx";							//$NON-NLS-1$
 
 	private static final String		PADDING							= "    ";
+	private static final String		NL								= "\n";
+	private static 	String nl										= NL;
 	private static final String[][]	REGISTER_EXT_MODULES			= { { MODULE_SBTX, PATH_SBTX } };
 
 	static final String				sourceClass						= AbstractLibrary.class.getName();
@@ -178,7 +180,8 @@ abstract public class AbstractLibrary {
 			// populate list of endpoint/properties
 			Map<String, JsonObject> endpoints = populateEndpoints(request);
 			JsonObject properties = populateProperties(request);
-
+			minify = !request.isDebug();
+			nl=minify?"":NL;
 			// write response
 			HttpServletResponse response = request.getHttpResponse();
 			PrintWriter writer = new PrintWriter(new OutputStreamWriter(response.getOutputStream(), UTF8));
@@ -209,12 +212,17 @@ abstract public class AbstractLibrary {
 	protected StringBuilder indent(StringBuilder sb) {
 		return indent(sb, 1);
 	}
+	
+	protected String newLine(){
+		return nl;
+	}
 
 	/**
 	 * @param sb
 	 * @param ammount
 	 */
 	protected StringBuilder indent(StringBuilder sb, int ammount) {
+		ammount = minify ? 0 : ammount;
 		for (int i = 0; i < ammount; i++) {
 			sb.append(PADDING);
 		}
@@ -420,22 +428,22 @@ abstract public class AbstractLibrary {
 		String dmList = toQuotedString(dependModules, ",");
 		String dmNames = toString(moduleNames, ",");
 		indent(sb, indentationLevel).append("define('").append(getDefineModule()).append("',[")
-				.append(dmList).append("],function(").append(dmNames).append("){\n");
+				.append(dmList).append("],function(").append(dmNames).append("){").append(newLine());
 
 		indentationLevel++;
 
 		// Create the sbt object
-		indent(sb, indentationLevel).append("window.sbt = {};\n");
+		indent(sb, indentationLevel).append("window.sbt = {};").append(newLine());
 
 		// define the properties
 		Iterator<String> jsonProps = properties.getJsonProperties();
 		if (jsonProps.hasNext()) {
-			indent(sb, indentationLevel).append("sbt.Properties=").append(toJson(properties)).append(";\n");
+			indent(sb, indentationLevel).append("sbt.Properties=").append(toJson(properties)).append(";").append(newLine());
 		}
 
 		// define the endpoints
 		if (!endpoints.isEmpty()) {
-			indent(sb, indentationLevel).append("sbt.Endpoints={\n");
+			indent(sb, indentationLevel).append("sbt.Endpoints={").append(newLine());
 			Iterator<Map.Entry<String, JsonObject>> entrySet = endpoints.entrySet().iterator();
 			indentationLevel++;
 			while (entrySet.hasNext()) {
@@ -446,19 +454,19 @@ abstract public class AbstractLibrary {
 				indent(sb, indentationLevel).append("'").append(toJavaScriptString(name))
 						.append("':new Endpoint(").append(toJson(endpointParams)).append(")");
 				if (entrySet.hasNext()) {
-					sb.append(",\n");
+					sb.append(",").append(newLine());
 				} else {
-					sb.append("\n");
+					sb.append(newLine());
 					indentationLevel--;
-					indent(sb, indentationLevel).append("};\n"); // Close sbt.Endpoints={
+					indent(sb, indentationLevel).append("};").append(newLine()); // Close sbt.Endpoints={
 				}
 			}
 		}
 
 		// close define invocation
-		indent(sb, indentationLevel).append("return sbt;\n");
+		indent(sb, indentationLevel).append("return sbt;").append(newLine());
 		indentationLevel--;
-		indent(sb, indentationLevel).append("});\n");
+		indent(sb, indentationLevel).append("});").append(newLine());
 
 		return sb;
 	}
@@ -485,14 +493,14 @@ abstract public class AbstractLibrary {
 		StringBuilder sb = new StringBuilder();
 		int indentationLevel = 1;
 		// make sure the library is only defined once (open if)
-		sb.append("if(typeof _sbt=='undefined' || window._sbt_bridge_compat){\n");
-		indent(sb).append("_sbt=0;\n");
+		sb.append("if(typeof _sbt=='undefined' || window._sbt_bridge_compat){").append(newLine());
+		indent(sb).append("_sbt=0;").append(newLine());
 
 		boolean closeElse = false;
 		boolean isInnerBlock = false;
 
 		if (enableDefineCheck(request.getJsVersion())) {
-			indent(sb).append("if(typeof define=='undefined'){\n");
+			indent(sb).append("if(typeof define=='undefined'){").append(newLine());
 
 			String[][] registerModules = getRegisterModules();
 			String[][] registerExtModules = StringUtil.isNotEmpty(request.getToolkitExtUrl()) ? getRegisterExtModules(request)
@@ -504,7 +512,7 @@ abstract public class AbstractLibrary {
 					indentationLevel));
 			indentationLevel--;
 
-			indent(sb).append("} else {\n");
+			indent(sb).append("} else {").append(newLine());
 			closeElse = true;
 			isInnerBlock = true;
 		}
@@ -522,10 +530,10 @@ abstract public class AbstractLibrary {
 			indentationLevel--;
 		}
 		if (closeElse) {
-			indent(sb).append("}\n");
+			indent(sb).append("}").append(newLine());
 		}
 		sb.append(generateSbtConfigDefine(request, endpoints, properties, indentationLevel));
-		sb.append("}\n");
+		sb.append("}").append(newLine());
 
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.exiting(sourceClass, "generateJavaScript", sb.toString());

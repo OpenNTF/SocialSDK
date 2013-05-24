@@ -70,27 +70,27 @@
 				style="width: 900px; height: 250px; border: none">
 				<xe:djTabPane id="djTabPane1" title="JavaScript">
 					<xp:inputTextarea id="inputTextarea1" value="#{document1.JavaScript}"
-						style="width:100%;height:100%;font-family:Courier New;font-size:10pt">
+						style="width:99%;height:99%;font-family:Courier New;font-size:10pt">
 					</xp:inputTextarea>
 				</xe:djTabPane>
 				<xe:djTabPane id="djTabPane2" title="HTML">
 					<xp:inputTextarea id="inputText2" value="#{document1.Html}"
-						style="width:100%;height:100%;font-family:Courier New;font-size:10pt">
+						style="width:99%;height:99%;font-family:Courier New;font-size:10pt">
 					</xp:inputTextarea>
 				</xe:djTabPane>
 				<xe:djTabPane id="djTabPane3" title="CSS">
 					<xp:inputTextarea id="inputText3" value="#{document1.Css}"
-						style="width:100%;height:100%;font-family:Courier New;font-size:10pt">
+						style="width:99%;height:99%;font-family:Courier New;font-size:10pt">
 					</xp:inputTextarea>
 				</xe:djTabPane>
 				<xe:djTabPane id="djTabPane4" title="Properties">
 					<xp:inputTextarea id="inputTextarea2" value="#{document1.Properties}"
-						style="width:100%;height:100%;font-family:Courier New;font-size:10pt">
+						style="width:99%;height:99%;font-family:Courier New;font-size:10pt">
 					</xp:inputTextarea>
 				</xe:djTabPane>
 				<xe:djTabPane id="djTabPane5" title="Documentation">
 					<xp:inputTextarea id="inputTextarea3" value="#{document1.Documentation}"
-						style="width:100%;height:100%;font-family:Courier New;font-size:10pt">
+						style="width:99%;height:99%;font-family:Courier New;font-size:10pt">
 					</xp:inputTextarea>
 				</xe:djTabPane>
 			</xe:djTabContainer>

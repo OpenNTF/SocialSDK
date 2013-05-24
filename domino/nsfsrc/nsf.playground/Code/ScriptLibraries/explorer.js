@@ -57,8 +57,8 @@ function collapseSection(id) {
 }
 
 function executeService(params,details,results,callback) {
-	require(['dojo','dojo/_base/array','dojo','dojo','dijit','sbt/Endpoint'], function(lang,array,ioQuery,query,registry,Endpoint) {
-		//require(['dojo/_base/lang','dojo/_base/array','dojo/io-query','dojo/query','dijit/registry','sbt/Endpoint'], function(lang,array,ioQuery,query,registry,Endpoint) {
+	//require(['dojo','dojo/_base/array','dojo','dojo','dijit','sbt/Endpoint'], function(lang,array,ioQuery,query,registry,Endpoint) {
+	require(['dojo/_base/lang','dojo/_base/array','dojo/io-query','dojo/query','dijit/registry','sbt/Endpoint'], function(lang,array,ioQuery,query,registry,Endpoint) {
 		function paramValue(name) {
 			var n = dojo.query("[data-param=\""+name+"\"]",details);
 			if(n.length>0) {
@@ -223,8 +223,8 @@ function clearResultsPanel(id,code,headers,body) {
 
 function updateResponse(id,content) {
 	// TEMP for Dojo 1.6
-	//require(['dojo/query','sbt/dom'], function(query,dom) {
-	require(['dojo','sbt/dom'], function(query,dom) {
+	require(['dojo/query','sbt/dom'], function(query,dom) {
+	//require(['dojo','sbt/dom'], function(query,dom) {
 		function update(clazz,value) {
 			var pnl = dojo.query(clazz+"Panel",id)[0];
 			var comp = dojo.query(clazz,id)[0];

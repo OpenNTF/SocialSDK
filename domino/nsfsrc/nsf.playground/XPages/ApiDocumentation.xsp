@@ -6,7 +6,7 @@
 		<xp:styleSheet href="/apirender.css"></xp:styleSheet>
 	</xp:this.resources>
 
-	<xc:ccMainPageResources></xc:ccMainPageResources>
+	<xc:ccDocumentationPageResources></xc:ccDocumentationPageResources>
 	
 	<xp:scriptBlock>
 		<xp:this.value><![CDATA[var pageGlobal = {

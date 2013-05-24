@@ -211,7 +211,8 @@ public class PreviewJavaScriptHandler extends PreviewHandler {
 				if(true) {
 					String jqueryPath = PathUtil.concat(jsLibraryPath,"/jquery.min",'/');
 					String jqueryUiPath = PathUtil.concat(jsLibraryPath,"/jquery-ui.min",'/');
-					String jqueryUiCssPath = PathUtil.concat(jsLibraryPath,"/themes/base/jquery-ui.css",'/');
+					//String jqueryUiCssPath = PathUtil.concat(jsLibraryPath,"/themes/base/jquery-ui.css",'/');
+					String jqueryUiCssPath = "//ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js";
 					pw.println("  <script type=\"text/javascript\" src=\"https://priand64.swg.usma.ibm.com/xsp/.ibmxspres/.sbtsdk/js/libs/require.js\"></script>");
 					pw.println("  <script type=\"text/javascript\">");
 					pw.println("  	requirejs.config({");

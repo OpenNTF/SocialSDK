@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:this.data>
+		<xp:dominoDocument var="document1" formName="Category"
+			computeWithForm="onload"></xp:dominoDocument>
+	</xp:this.data>
+	<xc:ApiDocBreadcrumb></xc:ApiDocBreadcrumb>
+	<xe:formTable id="formTable1" formTitle="API Category"
+		formDescription="" labelWidth="12em">
+		<xp:this.facets>
+			<xp:panel xp:key="footer" id="panel3">
+				<xp:panel id="panel2">
+					<xp:button value="Save" id="button1">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete">
+							<xp:this.action>
+								<xp:actionGroup>
+									<xp:saveDocument var="document1"></xp:saveDocument>
+									<xe:changeDynamicContentAction
+										facetName="view">
+									</xe:changeDynamicContentAction>
+								</xp:actionGroup>
+							</xp:this.action>
+						</xp:eventHandler>
+					</xp:button>
+					<!--
+						<xp:button value="Cancel" id="button2"
+						onclick="window.history.back()"> </xp:button>
+					-->
+					<xp:button value="Cancel" id="button3" onclick="window.history.back()">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="partial" refreshId="dynp">
+							<xp:this.action>
+								<xe:changeDynamicContentAction
+									facetName="view">
+								</xe:changeDynamicContentAction>
+							</xp:this.action>
+						</xp:eventHandler>
+					</xp:button>
+				</xp:panel>
+			</xp:panel>
+		</xp:this.facets>
+		<xe:formRow id="formRow8" label="Title:">
+			<xp:inputText id="inputText5" required="true"
+				disableClientSideValidation="true" value="#{document1.title}" size="60">
+			</xp:inputText>
+		</xe:formRow>
+		<xe:formRow id="formRow3" label="Abstract:">
+			<xp:inputTextarea id="inputTextarea1" value="#{document1.Abstract}"
+				cols="120" rows="4">
+			</xp:inputTextarea>
+		</xe:formRow>
+		<xe:formRow id="formRow2" label="Content:">
+			<xp:inputRichText id="inputRichText1" value="#{document1.Description}">
+			</xp:inputRichText>
+		</xe:formRow>
+		<xe:formRow id="formRow1" label="Category Sub Entries"
+			labelPosition="above">
+			<xc:ApiDocView parentId="#{javascript:document1.getNoteID()}">
+			</xc:ApiDocView>
+		</xe:formRow>
+	</xe:formTable>
+</xp:view>

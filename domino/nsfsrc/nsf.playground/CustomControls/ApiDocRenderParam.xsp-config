@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config>
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/custom</namespace-uri>
+    <default-prefix>xc</default-prefix>
+  </faces-config-extension>
+  <composite-component>
+    <component-type>ApiDocRenderParam</component-type>
+    <composite-name>ApiDocRenderParam</composite-name>
+    <composite-file>/ApiDocRenderParam.xsp</composite-file>
+    <composite-extension>
+      <designer-extension>
+        <in-palette>true</in-palette>
+      </designer-extension>
+    </composite-extension>
+    <property>
+      <property-name>fieldName</property-name>
+      <property-class>string</property-class>
+    </property>
+  </composite-component>
+</faces-config>

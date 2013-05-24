@@ -84,20 +84,21 @@ public class APIImporter extends AssetImporter {
 	@Override
 	protected int importAssets(ImportSource source, final AsyncAction action) throws Exception {
 		if(StringUtil.equals(source.getSource(), "apidoc")) {
-			String database=source.getLocation().trim();
-			if(StringUtil.isEmpty(database)) {
-				throw new FacesExceptionEx(null, "NSF Database path: Path is empty", source.getLocation());
-			}
-			return importAssetsNSF(source, action);
+			String location=source.getLocation().trim();
+			return importAssetsNSF(source, location, action);
 		} else {
 			return super.importAssets(source, action);
 		}
 	}
 
-	protected int importAssetsNSF(ImportSource source, AsyncAction action) throws Exception {
+	protected int importAssetsNSF(ImportSource source, String location, AsyncAction action) throws Exception {
 		Map<String,APIDocument> apiDocs = new HashMap<String, APIImporter.APIDocument>();
 
-		RestClient client = createDominoClient(source.getLocation(),source.getUserName(),source.getPassword());
+		if(StringUtil.isEmpty(location)) {
+			location = PathUtil.concat("http://127.0.0.1",getDatabase().getFilePath(),'/');
+		}
+		
+		RestClient client = createDominoClient(location,source.getUserName(),source.getPassword());
 		
 		List<DocEntry> list = loadEntries(client,source);
 		if(action!=null&&action.isCancelled()) {

@@ -6,7 +6,6 @@ require(["sbt/Endpoint", "sbt/connections/CommunityService", "sbt/dom"], functio
     endpoint.xhrGet({
         serviceUrl: "/connections/opensocial/basic/rest/people/@me/",
         handleAs: "json",
-        loginUi: "popup",
         load: function(response) {
             handleLoggedIn(response.entry, CommunityService, dom);
         },

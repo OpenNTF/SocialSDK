@@ -37,7 +37,7 @@
 						page="/ApiDocumentation.xsp">
 					</xe:pageTreeNode>
 					<xe:pageTreeNode selection="/ApiEditor" label="Editor"
-						page="/ApiEditor.xsp">
+						page="/ApiEditor.xsp" loaded="${javascript:userBean.canCreateDocs}">
 					</xe:pageTreeNode>
 				</xe:this.titleBarTabs>
 			</xe:applicationConfiguration>

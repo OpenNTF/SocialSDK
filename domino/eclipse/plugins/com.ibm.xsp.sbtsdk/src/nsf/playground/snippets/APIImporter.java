@@ -14,6 +14,7 @@ import nsf.playground.beans.APIBean;
 import nsf.playground.jobs.AsyncAction;
 
 import com.ibm.commons.runtime.util.URLEncoding;
+import com.ibm.commons.util.PathUtil;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonException;
 import com.ibm.commons.util.io.json.JsonGenerator;
@@ -83,20 +84,21 @@ public class APIImporter extends AssetImporter {
 	@Override
 	protected int importAssets(ImportSource source, final AsyncAction action) throws Exception {
 		if(StringUtil.equals(source.getSource(), "apidoc")) {
-			String database=source.getLocation().trim();
-			if(StringUtil.isEmpty(database)) {
-				throw new FacesExceptionEx(null, "NSF Database path: Path is empty", source.getLocation());
-			}
-			return importAssetsNSF(source, action);
+			String location=source.getLocation().trim();
+			return importAssetsNSF(source, location, action);
 		} else {
 			return super.importAssets(source, action);
 		}
 	}
 
-	protected int importAssetsNSF(ImportSource source, AsyncAction action) throws Exception {
+	protected int importAssetsNSF(ImportSource source, String location, AsyncAction action) throws Exception {
 		Map<String,APIDocument> apiDocs = new HashMap<String, APIImporter.APIDocument>();
 
-		RestClient client = createDominoClient(source.getLocation(),source.getUserName(),source.getPassword());
+		if(StringUtil.isEmpty(location)) {
+			location = PathUtil.concat("http://127.0.0.1",getDatabase().getFilePath(),'/');
+		}
+		
+		RestClient client = createDominoClient(location,source.getUserName(),source.getPassword());
 		
 		List<DocEntry> list = loadEntries(client,source);
 		if(action!=null&&action.isCancelled()) {
@@ -111,23 +113,41 @@ public class APIImporter extends AssetImporter {
 		}
 
 		for(Map.Entry<String, APIDocument> ed: apiDocs.entrySet()) {
-			String id = Node.encodeUnid(ed.getValue().path); 
-			String category = trimSeparator(extractCategory(ed.getValue().path));
-			String name = trimSeparator(extractName(ed.getValue().path));
-			String json = JsonGenerator.toJson(JsonJavaFactory.instanceEx, ed.getValue().content);
-			String properties = createPropertiesAsString(ed.getValue().path);
-			saveAsset(id, category, name, source.getName(), json, properties);
+			String[] products = ed.getValue().products;
+			if(products==null) {
+				continue;
+			}
+			for(int i=0; i<products.length; i++) {
+				String product = products[i];
+				if(StringUtil.isNotEmpty(product)) {
+					String path = ed.getValue().path;
+					if(StringUtil.indexOfIgnoreCase(product,"domino")>=0) {
+						path = PathUtil.concat("Domino",path,'/');
+					} else if(StringUtil.indexOfIgnoreCase(product,"connections")>=0) {
+						path = PathUtil.concat("Connections",path,'/');
+					} else if(StringUtil.indexOfIgnoreCase(product,"smartcloud")>=0) {
+						path = PathUtil.concat("SmartCloud",path,'/');
+					}
+					String id = Node.encodeUnid(path);
+					String category = trimSeparator(extractCategory(path));
+					String name = trimSeparator(extractName(path));
+					String json = JsonGenerator.toJson(JsonJavaFactory.instanceEx, ed.getValue().content);
+					String properties = createPropertiesAsString(product,path);
+					saveAsset(id, category, name, source.getName(), json, properties);
+				}
+			}
 		}
 		
 		return apiDocs.size();
 	}
-	private String createPropertiesAsString(String path) throws IOException {
+	
+	private String createPropertiesAsString(String product, String path) throws IOException {
 		Properties properties = new Properties();
 		// For now, hard coded
-		if(StringUtil.indexOfIgnoreCase(path,"domino")>=0) {
+		if(StringUtil.equalsIgnoreCase(product,"domino")) {
 			properties.put("endpoint", "domino");
 			properties.put("basedocurl", "http://www-10.lotus.com/ldd/ddwiki.nsf");
-		} else if(StringUtil.indexOfIgnoreCase(path,"smartcloud")>=0) {
+		} else if(StringUtil.equalsIgnoreCase(product,"smartcloud")) {
 			properties.put("endpoint", "smartcloud");
 		} else {
 			properties.put("endpoint", "connections");
@@ -168,12 +188,13 @@ public class APIImporter extends AssetImporter {
 			if(action!=null) {
 				action.updateTask("Importing: {0}", doc.get("Title"));
 			}
+			String apiExplorerPath = trimSeparator(doc.getString("APIExplorerPath"));
+			String[] products = StringUtil.splitString(doc.getString("Products"),',');
 			List mt = (List)doc.get("RequestsDetails");
 			for(int i=0; i<mt.size(); i++) {
-				String apiExplorerPath = trimSeparator(doc.getString("APIExplorerPath"));
 				APIDocument apiDoc = apiDocs.get(apiExplorerPath);
 				if(apiDoc==null) {
-					apiDoc = new APIDocument(apiExplorerPath);
+					apiDoc = new APIDocument(products,apiExplorerPath);
 					apiDocs.put(apiExplorerPath, apiDoc);
 				}
 				JsonJavaObject je = createAPIEntry(doc, i, action);
@@ -201,9 +222,11 @@ public class APIImporter extends AssetImporter {
 	}
 
 	private static class APIDocument {
+		String[] products;
 		String path;
 		List<Object> content;
-		public APIDocument(String path) {
+		public APIDocument(String[] products, String path) {
+			this.products = products;
 			this.path = path;
 			this.content = new ArrayList<Object>();
 		}

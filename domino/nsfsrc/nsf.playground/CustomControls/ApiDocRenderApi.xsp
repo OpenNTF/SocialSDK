@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:this.data>
+		<xp:dominoDocument var="document1" formName="API"
+			computeWithForm="onload">
+		</xp:dominoDocument>
+	</xp:this.data>
+
+	<script>
+		function tryMe(id,url) {
+		var wait = dojo.byId("tryme_wait");
+		var
+		frm = dojo.byId("tryme_frm");
+		wait.style.display = 'block';
+		frm.style.display = 'block';
+		var rand = Date.now(); // Force the reload		
+		url = url.replace("123456789",rand);
+		frm.src = url;
+		window.addEventListener("message", function(event) {
+		var wait =
+		dojo.byId("tryme_wait");
+		var frm = dojo.byId("tryme_frm");
+		wait.style.display = 'none';
+		var h = parseInt(event.data);
+		if(h>0) {
+		frm.style.height = h+"px";
+		}
+		}, false);
+		}
+	</script>
+
+	<xc:ApiDocBreadcrumb></xc:ApiDocBreadcrumb>
+
+	<xp:div>
+		<xp:image url="/proddocblue24.png" id="image1" style="margin-right: 1em">
+		</xp:image>
+		<xp:text escape="true" id="computedField1" value="#{document1.Title}"
+			style="font-size:16pt;font-weight:bold; vertical-align: bottom">
+		</xp:text>
+		<xp:span rendered="#{javascript:!docBean.isEmpty(document1,'Since')}">
+			<xp:text escape="true" id="computedField18" value="#{document1.Since}"
+				styleClass="sinceVersion">
+			</xp:text>
+		</xp:span>
+		<xp:span rendered="#{javascript:!docBean.isEmpty(document1,'Deprecated')}">
+			<xp:text escape="true" id="computedField19" value="#{document1.Deprecated}"
+				styleClass="deprecatedVersion">
+			</xp:text>
+		</xp:span>
+	</xp:div>
+
+	<xp:section id="section1" header="Abstract" style="margin-top: 1em">
+		<xp:text escape="true" id="computedField2" value="#{document1.Abstract}">
+		</xp:text>
+	</xp:section>
+
+	<xp:div style="margin-top:1em"
+		rendered="#{javascript:!docBean.isEmpty(document1,'Description')}">
+		<xp:inputRichText id="inputRichText1" value="#{document1.Description}"
+			readonly="true">
+		</xp:inputRichText>
+	</xp:div>
+
+	<xp:div style="font-weight:bold;font-size:14pt;margin-top:1em">Input</xp:div>
+
+	<xp:section id="section2" header="Request Details"
+		rendered="#{javascript:!docBean.isEmpty(document1,'requestsDetails')}"
+		style="margin-top:1em;">
+		<xp:div style="padding-left:3em;">
+			<xp:dataTable id="dataTable1" var="up" indexVar="idx"
+				headerClass="tbHeaderClass" styleClass="tbClass" columnClasses="tbColumnClass">
+				<xp:this.value><![CDATA[#{javascript:fromJson(document1.getItemValueString('requestsDetails')||'[]')}]]></xp:this.value>
+				<xp:column id="column1" style="width:6em">
+					<xp:this.facets>
+						<xp:span xp:key="header">Method</xp:span>
+					</xp:this.facets>
+					<xp:text escape="true" id="computedField6" value="#{up.method}">
+					</xp:text>
+				</xp:column>
+				<xp:column id="column14" style="width:6em"
+					loaded="${javascript:@Trim(document1.getItemValueString('APIExplorerPath'))}">
+					<xp:link id="link3" text="Try Me!">
+						<xp:eventHandler event="onclick" submit="false">
+							<xp:this.script><![CDATA[tryMe("#{id:tryme}","#{javascript:docOptionsBean.getAPIExplorerMiniUrl(document1.getItemValueString('Products'),document1.getItemValueString('APIExplorerPath'),document1.getItemValueString('Title'),idx)}")]]></xp:this.script>
+						</xp:eventHandler>
+					</xp:link>
+				</xp:column>
+				<xp:column id="column7">
+					<xp:this.facets>
+						<xp:span xp:key="header">URI</xp:span>
+					</xp:this.facets>
+					<xp:text escape="true" id="computedField9" value="#{up.uri}">
+					</xp:text>
+				</xp:column>
+				<xp:column id="column2">
+					<xp:this.facets>
+						<xp:span xp:key="header">Description</xp:span>
+					</xp:this.facets>
+					<xp:text escape="true" id="computedField3" value="#{up.description}">
+					</xp:text>
+				</xp:column>
+			</xp:dataTable>
+
+			<div id="tryme_wait" style="display: none;">
+				<xp:image url="/progressIndicator.gif" id="image2"></xp:image>
+			</div>
+			<div>
+				<iframe id="tryme_frm"
+					style="display: none; width:100%; height:1px; border: none"></iframe>
+			</div>
+
+			<xp:panel
+				rendered="#{javascript:@Trim(document1.getItemValueString('RequestContentType'))}">
+				<xp:table style='width: 100%'>
+					<xp:tr
+						rendered="#{javascript:@Trim(document1.getItemValueString('RequestContentType'))}">
+						<xp:td>
+							<xp:span style="font-weight:bold">Content Type:</xp:span>
+						</xp:td>
+						<xp:td>
+							<xp:text escape="true" id="computedField33"
+								value="#{document1.RequestContentType}">
+							</xp:text>
+							<xp:link escape="true" text="Data Schema..." id="link1"
+								style="margin-left: 12px">
+								<xp:this.onclick><![CDATA[alert("Not yet implemented")]]></xp:this.onclick>
+							</xp:link>
+						</xp:td>
+					</xp:tr>
+					<xp:tr
+						rendered="#{javascript:@Trim(document1.getItemValueString('RequestSample'))}">
+						<xp:td valign='top'>
+							<xp:span style="font-weight:bold">Sample Request:</xp:span>
+						</xp:td>
+						<xp:td valign='top'>
+							<xp:div styleClass="wikiCode" style='width: 100%'>
+								<xp:text escape="true" id="computedField30" value="#{document1.RequestSample}"
+									tagName="pre">
+								</xp:text>
+							</xp:div>
+						</xp:td>
+					</xp:tr>
+				</xp:table>
+			</xp:panel>
+
+			<xp:panel
+				rendered="#{javascript:@Trim(document1.getItemValueString('RequestFields'))}" style="margin-top: 1em">
+				Use the table bellow that represents the expected fields:
+				<xc:ApiDocRenderParam fieldName="RequestFields"></xc:ApiDocRenderParam>
+			</xp:panel>
+
+			<xp:panel rendered="#{javascript:!docBean.isEmpty(document1,'Playground')}">
+				<xp:div style="font-weight:bold">Related live JavaScript samples</xp:div>
+				<xe:list id="list2">
+					<xp:repeat id="repeat2" var="lnk">
+						<xp:this.value><![CDATA[#{javascript:fromJson(document1.getItemValueString('Playground')||'[]')}]]></xp:this.value>
+						<xp:link id="link4" text="#{lnk.name}"
+							value="#{javascript:return docOptionsBean.getPlaygroundUrl(lnk.ref)}"
+							target="_blank">
+						</xp:link>
+					</xp:repeat>
+				</xe:list>
+			</xp:panel>
+		</xp:div>
+
+	</xp:section>
+
+	<xp:section id="section3" header="URL Parameters"
+		rendered="#{javascript:!docBean.isEmpty(document1,'URLParameters')}"
+		style="margin-top:1em;">
+		<xp:div style="padding-left:3em;">
+			<xc:ApiDocRenderParam fieldName="URLParameters"></xc:ApiDocRenderParam>
+		</xp:div>
+	</xp:section>
+
+	<xp:section id="section4" header="Query Parameters"
+		rendered="#{javascript:!docBean.isEmpty(document1,'QueryParameters')}"
+		style="margin-top:1em;">
+		<xp:div style="padding-left:3em;">
+			<xc:ApiDocRenderParam fieldName="QueryParameters"></xc:ApiDocRenderParam>
+		</xp:div>
+	</xp:section>
+
+	<xp:section id="section5" header="HTTP Headers"
+		rendered="#{javascript:!docBean.isEmpty(document1,'Headers')}" style="margin-top:1em;">
+		<xp:div style="padding-left:3em;">
+			<xc:ApiDocRenderParam fieldName="Headers"></xc:ApiDocRenderParam>
+		</xp:div>
+	</xp:section>
+
+	<xp:div style="font-weight:bold;font-size:14pt;margin-top:1em">Output</xp:div>
+
+	<xp:panel style="margin-top:1em;"
+		rendered="#{javascript:@Trim(document1.getItemValueString('ResponseContentType'))}">
+		<xp:span style="font-weight:bold">Content Type:</xp:span>
+		<xp:text escape="true" id="computedField34" value="#{document1.ResponseContentType}">
+		</xp:text>
+		<xp:link escape="true" text="Data Schema..." id="link2"
+			style="margin-left: 12px">
+			<xp:this.onclick><![CDATA[alert("Not yet implemented")]]></xp:this.onclick>
+		</xp:link>
+	</xp:panel>
+
+	<xp:panel style="margin-top:1em;"
+		rendered="#{javascript:@Trim(document1.getItemValueString('ResponseFields'))}">
+		<xp:div style="padding-left:3em;">
+			Use the table bellow that represents the returned fields:
+			<xc:ApiDocRenderParam fieldName="ResponseFields"></xc:ApiDocRenderParam>
+		</xp:div>
+	</xp:panel>
+
+	<xp:section id="section7" header="HTTP Headers"
+		rendered="#{javascript:!docBean.isEmpty(document1,'ResponseHeaders')}">
+		<xp:div style="padding-left:3em;">
+			<xc:ApiDocRenderParam fieldName="ResponseHeaders"></xc:ApiDocRenderParam>
+		</xp:div>
+	</xp:section>
+
+	<xp:section id="section9" header="Status Code" style="margin-top:1em;"
+		rendered="#{javascript:!docBean.isEmpty(document1,'ResponseStatus')}">
+		<xp:div style="padding-left:3em;">
+			<xp:dataTable id="dataTable7" var="up" indexVar="idx"
+				headerClass="tbHeaderClass" styleClass="tbClass" columnClasses="tbColumnClass">
+				<xp:this.value><![CDATA[#{javascript:fromJson(document1.getItemValueString('ResponseStatus')||'[]')}]]></xp:this.value>
+				<xp:column id="column30" style="width:6em">
+					<xp:this.facets>
+						<xp:span xp:key="header">Code</xp:span>
+					</xp:this.facets>
+					<xp:text escape="true" id="computedField44" value="#{up.code}">
+					</xp:text>
+					<xp:div id="div4" style="float:right">
+						<xp:text escape="true" id="computedField29"
+							rendered="#{javascript:@Trim(up.since)!=''}" value="#{up.since}"
+							styleClass="sinceVersionMini">
+						</xp:text>
+						<xp:text escape="true" id="computedField39"
+							rendered="#{javascript:@Trim(up.deprecated)!=''}" value="#{up.deprecated}"
+							styleClass="deprecatedVersionMini">
+						</xp:text>
+					</xp:div>
+				</xp:column>
+				<xp:column id="column34">
+					<xp:this.facets>
+						<xp:span xp:key="header">Description</xp:span>
+					</xp:this.facets>
+					<xp:text escape="true" id="computedField48" value="#{up.description}">
+					</xp:text>
+				</xp:column>
+			</xp:dataTable>
+		</xp:div>
+	</xp:section>
+
+	<xp:div rendered="#{javascript:!docBean.isEmpty(document1,'References')}"
+		style="margin-top:1em;">
+		<xp:div style="font-weight:bold;font-size:14pt">References</xp:div>
+		<xe:list id="list3">
+			<xp:repeat id="repeat3" var="lnk">
+				<xp:this.value><![CDATA[#{javascript:fromJson(document1.getItemValueString('References')||'[]')}]]></xp:this.value>
+				<xp:link id="link5" text="#{lnk.name}" value="#{lnk.ref}"
+					target="_blank">
+				</xp:link>
+			</xp:repeat>
+		</xe:list>
+	</xp:div>
+
+	<xp:div rendered="#{javascript:!docBean.isEmpty(document1,'Examples')}"
+		style="margin-top:1em;">
+		<xp:div style="font-weight:bold;font-size:14pt">Examples</xp:div>
+		<xp:repeat id="repeat4" var="ex">
+			<xp:this.value><![CDATA[#{javascript:fromJson(document1.getItemValueString('Examples')||'[]')}]]></xp:this.value>
+			<xp:section id="section8" header="#{ex.name}" style="margin-top:1em;">
+				<xp:div style="margin-left: 2em; margin-top: 12px;">
+					<xp:text escape="true" id="computedField35" value="#{ex.description}"
+						tagName="div">
+					</xp:text>
+					<xp:div styleClass="wikiCode">
+						<xp:text escape="true" id="computedField36" value="#{ex.request}"
+							tagName="pre">
+						</xp:text>
+					</xp:div>
+					<xp:br />
+					Response returned by the server
+					<xp:div styleClass="wikiCode">
+						<xp:text escape="true" id="computedField37" value="#{ex.response}"
+							tagName="pre">
+						</xp:text>
+					</xp:div>
+				</xp:div>
+			</xp:section>
+		</xp:repeat>
+	</xp:div>
+</xp:view>

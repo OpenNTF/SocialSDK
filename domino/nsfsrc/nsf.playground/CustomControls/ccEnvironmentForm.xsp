@@ -227,6 +227,22 @@ dataAccess.copyEnvironment(document1,v);
 				</xe:formTable>
 			</xp:section>
 		</xe:formRow>
+			<xp:section id="section5" header="Twitter" initClosed="true" loaded="${javascript:false &amp;&amp; (userBean.canCreateDocs || compositeData.editbean)}">
+				<xe:formTable labelWidth="12em">
+					<xe:formRow id="formRow28" label="Consumer Key:">
+						<xp:inputText id="inputText21"
+							disableClientSideValidation="true" value="#{document1.Twitter_OA_ConsumerKey}"
+							size="80">
+						</xp:inputText>
+					</xe:formRow>
+					<xe:formRow id="formRow29" label="Consumer Secret:">
+						<xp:inputText id="inputText22"
+							disableClientSideValidation="true" value="#{document1.Twitter_OA_ConsumerSecret}"
+							size="80">
+						</xp:inputText>
+					</xe:formRow>
+				</xe:formTable>
+			</xp:section>
 	</xe:formTable>
 
 	<xe:dumpObject loaded="false" id="dumpObject1" title="document"

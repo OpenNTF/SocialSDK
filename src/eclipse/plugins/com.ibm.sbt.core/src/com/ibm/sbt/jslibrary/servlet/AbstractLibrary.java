@@ -207,14 +207,18 @@ abstract public class AbstractLibrary {
 	}
 
 	/**
+	 * 
+	 * @return
+	 */
+	protected String newLine(){
+		return nl;
+	}
+	
+	/**
 	 * @param sb
 	 */
 	protected StringBuilder indent(StringBuilder sb) {
 		return indent(sb, 1);
-	}
-	
-	protected String newLine(){
-		return nl;
 	}
 
 	/**
@@ -222,8 +226,7 @@ abstract public class AbstractLibrary {
 	 * @param ammount
 	 */
 	protected StringBuilder indent(StringBuilder sb, int ammount) {
-		ammount = minify ? 0 : ammount;
-		for (int i = 0; i < ammount; i++) {
+		for (int i = 0; !minify && i < ammount; i++) {
 			sb.append(PADDING);
 		}
 		return sb;

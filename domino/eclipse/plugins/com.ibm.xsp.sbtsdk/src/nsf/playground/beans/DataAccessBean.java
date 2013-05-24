@@ -175,7 +175,6 @@ public abstract class DataAccessBean {
 		env.setCon_OA2_ConsumerSecret(d.getItemValueString("Con_OA2_ConsumerSecret"));
 		env.setCon_OA2_AuthorizationURL(d.getItemValueString("Con_OA2_AuthorizationURL"));
 		env.setCon_OA2_AccessTokenURL(d.getItemValueString("Con_OA2_AccessTokenURL"));
-
 		env.setSma_URL(d.getItemValueString("Sma_URL"));
 		env.setSma_OA_ConsumerKey(d.getItemValueString("Sma_OA_ConsumerKey"));
 		env.setSma_OA_ConsumerSecret(d.getItemValueString("Sma_OA_ConsumerSecret"));
@@ -190,6 +189,9 @@ public abstract class DataAccessBean {
 		env.setDom_URL(d.getItemValueString("Dom_URL"));
 
 		env.setSt_URL(d.getItemValueString("St_URL"));
+
+		env.setTwitter_OA_ConsumerKey(d.getItemValueString("Twitter_OA_ConsumerKey"));
+		env.setTwitter_OA_ConsumerSecret(d.getItemValueString("Twitter_OA_ConsumerSecret"));
 		
 		return env;
 	}
@@ -216,7 +218,8 @@ public abstract class DataAccessBean {
 
 		d.replaceItemValue("Dom_URL",env.getDom_URL());
 
-		d.replaceItemValue("St_URL",env.getSt_URL());
+		d.replaceItemValue("Twitter_OA_ConsumerKey",env.getTwitter_OA_ConsumerKey());
+		d.replaceItemValue("Twitter_OA_ConsumerSecret",env.getTwitter_OA_ConsumerSecret());
 		
 		return env;
 	}

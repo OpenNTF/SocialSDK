@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+
+	<xp:dataTable id="dataTable5" var="up" indexVar="idx"
+		headerClass="tbHeaderClass" styleClass="tbClass"
+		columnClasses="tbColumnClass">
+		<xp:this.value><![CDATA[#{javascript:fromJson(document1.getItemValueString(compositeData.fieldName)||'[]')}]]></xp:this.value>
+		<xp:column id="column11" style="width:6em">
+			<xp:this.facets>
+				<xp:span xp:key="header">Name</xp:span>
+			</xp:this.facets>
+			<xp:text escape="true" id="computedField31"
+				value="#{up.name}">
+			</xp:text>
+			<xp:div id="div5" style="float:right">
+				<xp:text escape="true" id="computedField38"
+					rendered="#{javascript:@Trim(up.since)!=''}" value="#{up.since}"
+					styleClass="sinceVersionMini">
+				</xp:text>
+				<xp:text escape="true" id="computedField47"
+					rendered="#{javascript:@Trim(up.deprecated)!=''}"
+					value="#{up.deprecated}" styleClass="deprecatedVersionMini">
+				</xp:text>
+			</xp:div>
+		</xp:column>
+		<xp:column id="column16">
+			<xp:this.facets>
+				<xp:span xp:key="header">Type</xp:span>
+			</xp:this.facets>
+			<xp:text escape="true" id="computedField49"
+				value="#{javascript:up.type||'string'}">
+			</xp:text>
+		</xp:column>
+		<xp:column id="column20">
+			<xp:this.facets>
+				<xp:span xp:key="header">Optional</xp:span>
+			</xp:this.facets>
+			<xp:text escape="true" id="computedField50"
+				value="#{javascript:up.optional=='true'?'Yes':'No'}">
+			</xp:text>
+		</xp:column>
+		<xp:column id="column21">
+			<xp:this.facets>
+				<xp:span xp:key="header">Description</xp:span>
+			</xp:this.facets>
+			<xp:text escape="true" id="computedField51"
+				value="#{up.description}">
+			</xp:text>
+			<xp:div rendered="#{javascript:up.type=='enumerated'}"
+				style="margin-top:1em">
+				Authorized values:
+				<br />
+				<xp:text escape="false" id="computedField52"
+					value="#{javascript:docBean.generateValueList(up.values)}">
+				</xp:text>
+			</xp:div>
+		</xp:column>
+	</xp:dataTable>
+
+</xp:view>

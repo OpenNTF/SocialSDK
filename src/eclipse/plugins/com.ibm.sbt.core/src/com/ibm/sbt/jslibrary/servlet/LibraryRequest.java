@@ -54,6 +54,7 @@ public class LibraryRequest {
     protected String iframeUrl;
     protected String toolkitExtUrl;
     protected String toolkitExtJsUrl;
+    protected String jsLibraryUrl;
 
     protected SBTEnvironment environment;
 
@@ -135,6 +136,7 @@ public class LibraryRequest {
         this.toolkitExtJsUrl = StringUtil.replace(params.getToolkitExtJsUrl(), "%local_server%", UrlUtil.getServerUrl(httpRequest));
         this.serviceUrl = StringUtil.replace(params.getServiceUrl(), "%local_application%", UrlUtil.getContextUrl(httpRequest));
         this.libraryUrl = StringUtil.replace(params.getLibraryUrl(), "%local_application%", UrlUtil.getContextUrl(httpRequest));
+        this.jsLibraryUrl = StringUtil.replace(params.getJsLibraryUrl(), "%local_server%", UrlUtil.getServerUrl(httpRequest));
         this.iframeUrl = StringUtil.replace(params.getIframeUrl(), "%local_server%", UrlUtil.getServerUrl(httpRequest));
 
         readFromRequest(httpRequest, params.getEnvironment());
@@ -191,6 +193,14 @@ public class LibraryRequest {
         return libraryUrl;
     }
 
+    /**
+     * 
+     * @return
+     */
+    public String getJsLibraryUrl() {
+        return jsLibraryUrl;
+    }
+    
     /**
      * 
      * @return
@@ -337,6 +347,7 @@ public class LibraryRequest {
         sb.append(";environment=").append(environment);
         sb.append(";toolkitUrl=").append(toolkitUrl);
         sb.append(";toolkitJsUrl=").append(toolkitJsUrl);
+        sb.append(";jsLibraryUrl=").append(jsLibraryUrl);
         sb.append("}");
         return sb.toString();
     }

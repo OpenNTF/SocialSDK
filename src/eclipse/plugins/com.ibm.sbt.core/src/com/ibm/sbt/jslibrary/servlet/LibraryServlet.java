@@ -59,6 +59,13 @@ public class LibraryServlet extends BaseToolkitServlet {
     static public final String PARAM_TOOLKIT_EXT_URL = "toolkitExtUrl"; //$NON-NLS-1$
 
     /**
+     * Servlet parameter which allows the location of the javascript libraries to
+     * be overridden, the default value is %local_server%/sbt/js/libs. %local_server%
+     * is dynamically replaced by http://<server>:<port>
+     */
+    static public final String PARAM_JS_LIBRARY_URL = "jsLibraryUrl"; //$NON-NLS-1$
+    
+    /**
      * Servlet parameter which allows the path to the JavaScript library to be
      * overridden, the default value is /js/sdk
      */
@@ -110,6 +117,7 @@ public class LibraryServlet extends BaseToolkitServlet {
     //
     static final String DEFAULT_TOOLKIT_URL = "%local_server%/sbt"; //$NON-NLS-1$
     static final String DEFAULT_TOOLKIT_EXT_URL = null;
+    static final String DEFAULT_JS_LIBRARY_URL = null;
     static final String DEFAULT_JAVASCRIPT_PATH = "/js/sdk"; //$NON-NLS-1$
     static final String DEFAULT_SERVICE_URL = "%local_application%/service"; //$NON-NLS-1$
     static final String DEFAULT_LIBRARY_URL = "%local_application%/library";
@@ -137,6 +145,7 @@ public class LibraryServlet extends BaseToolkitServlet {
         Application application = Application.get();
         String defaultToolkitUrl = getAppParameter(application, PARAM_TOOLKIT_URL, DEFAULT_TOOLKIT_URL);
         String defaultToolkitExtUrl = getAppParameter(application, PARAM_TOOLKIT_EXT_URL, DEFAULT_TOOLKIT_EXT_URL);
+        String defaultJsLibraryUrl = getAppParameter(application, PARAM_JS_LIBRARY_URL, DEFAULT_JS_LIBRARY_URL);
         String defaultJavaScriptPath = getAppParameter(application, PARAM_JAVASCRIPT_PATH, DEFAULT_JAVASCRIPT_PATH);
         String defaultServiceUrl = getAppParameter(application, PARAM_SERVICE_URL, DEFAULT_SERVICE_URL);
         String defaultLibraryUrl = getAppParameter(application, PARAM_LIBRARY_URL, DEFAULT_LIBRARY_URL);
@@ -149,10 +158,12 @@ public class LibraryServlet extends BaseToolkitServlet {
         _defaultParams.setToolkitExtJsUrl(PathUtil.concat(_defaultParams.getToolkitExtUrl(), getInitParameter(config, PARAM_JAVASCRIPT_PATH, defaultJavaScriptPath), '/'));
         _defaultParams.setServiceUrl(getInitParameter(config, PARAM_SERVICE_URL, defaultServiceUrl));
         _defaultParams.setLibraryUrl(getInitParameter(config, PARAM_LIBRARY_URL, defaultLibraryUrl));
+        _defaultParams.setJsLibraryUrl(getInitParameter(config, PARAM_JS_LIBRARY_URL, defaultJsLibraryUrl));
         _defaultParams.setIframeUrl(PathUtil.concat(_defaultParams.getToolkitUrl(), getInitParameter(config, PARAM_IFRAME_PATH, defaultIFramePath), '/'));
         // create the libraries
         libraries = readLibraries(application);
     }
+    
     protected List<Object> readLibraries(Application application) {
         return application.findServices(LIBRARY_SERVICE_TYPE);
     }

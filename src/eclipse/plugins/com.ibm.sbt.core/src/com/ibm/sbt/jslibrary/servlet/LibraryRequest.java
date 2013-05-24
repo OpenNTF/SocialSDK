@@ -55,12 +55,14 @@ public class LibraryRequest {
     protected String toolkitExtUrl;
     protected String toolkitExtJsUrl;
     protected String jsLibraryUrl;
+    protected boolean debug;
 
     protected SBTEnvironment environment;
 
     // List of the default endpoints being added by default.
     public static final String DEFAULT_JSLIB = "dojo";
     public static final String DEFAULT_VERSION = "1.4";
+    public static final Boolean DEFAULT_DEBUG = false;
 
     // Definition of the servlet parameters (query string)
 
@@ -89,6 +91,11 @@ public class LibraryRequest {
      */
     public static final String PARAM_ENVIRONMENT = "env";
 
+    /**
+     * Sets debug mode if true
+     */
+    public static final String PARAM_DEBUG = "debug";
+    
     /**
      * Enables/Disables the aggregator (default is false)
      */
@@ -208,6 +215,14 @@ public class LibraryRequest {
     public boolean useIFrame() {
         return false;
     }
+    
+    /**
+     * 
+     * @return
+     */
+    public boolean isDebug() {
+        return debug;
+    }
 
     /**
      * 
@@ -285,6 +300,7 @@ public class LibraryRequest {
     protected void readFromRequest(HttpServletRequest req, SBTEnvironment defaultEnvironment) throws ServletException, IOException {
         jsLib = readString(req, PARAM_JSLIB, getDefaultJsLib());
         jsVersion = readString(req, PARAM_JSVERSION, "dojo".equals(jsLib) ? getDefaultJsVersion() : "");
+        debug = Boolean.parseBoolean(readString(req, PARAM_DEBUG, getDefaultDebug()));
         String environmentName = req.getParameter(PARAM_ENVIRONMENT);
         if (!StringUtil.isEmpty(environmentName)) {
             SBTEnvironment parentEnvironment = SBTEnvironmentFactory.get(environmentName);
@@ -309,6 +325,10 @@ public class LibraryRequest {
     
     protected String getDefaultJsVersion() {
     	return DEFAULT_VERSION;
+    }
+    
+    protected String getDefaultDebug() {
+    	return DEFAULT_DEBUG.toString();
     }
 
     /**

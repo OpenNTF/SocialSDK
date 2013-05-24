@@ -60,7 +60,7 @@ public class LibraryServlet extends BaseToolkitServlet {
 
     /**
      * Servlet parameter which allows the location of the javascript libraries to
-     * be overridden, the default value is %local_server%/js/libs. %local_server%
+     * be overridden, the default value is %local_server%/sbt/js/libs. %local_server%
      * is dynamically replaced by http://<server>:<port>
      */
     static public final String PARAM_JS_LIBRARY_URL = "jsLibraryUrl"; //$NON-NLS-1$

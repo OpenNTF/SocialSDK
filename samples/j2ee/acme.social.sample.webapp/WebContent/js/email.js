@@ -2,7 +2,7 @@
  * Helper module for send an embedded experience email.
  * @module
  */
-define(["sbt/_bridge/declare", "sbt/Endpoint", "sbt/emailService"], 
+define(["sbt/declare", "sbt/Endpoint", "sbt/emailService"], 
     function(declare, Endpoint, emailService) {
 
     return {

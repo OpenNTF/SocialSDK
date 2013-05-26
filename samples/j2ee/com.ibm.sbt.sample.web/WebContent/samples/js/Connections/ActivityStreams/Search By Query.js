@@ -1,26 +1,40 @@
-require(["sbt/connections/ActivityStreamService", "sbt/dom"], function(ActivityStreamService, dom) {
-	dom.byId("loading").style.visibility = "visible"; 
-	var activityStreamService = new ActivityStreamService();
-	activityStreamService.searchByQuery({
-		query : "test",
-		load : function(as) {
-			var aEntries = as.getEntries();//get array of all activityEntry Objects
-			if(aEntries.length == 0){
-				dom.setText("content","No Results");
-			}
-			for(var i=0; i<aEntries.length; i++){
-				var thisEntry = aEntries[i];
-				var liElement = document.createElement("li");
-				liElement.setAttribute("id", "li"+i);
-				document.getElementById("content").appendChild(liElement);
-				dom.setText("li"+i,thisEntry.connections.plainTitle);
-			}
-			dom.byId("loading").style.visibility = "hidden"; 
-		},
-		error : function(error){
-	        dom.setText("content","Error received. Error Code = " +  error.code + ". Error Message = " + error.message);
-	        dom.byId("loading").style.visibility = "hidden"; 
-		}
-	}
-	);
-});
+require(["sbt/connections/ActivityStreamService", "sbt/connections/ActivityStreamConstants", "sbt/dom"], 
+    function(ActivityStreamService, ASConstants, dom) {
+        var createRow = function(i) {
+            var table = dom.byId("activityStreamTable");
+            var tr = document.createElement("tr");
+            table.appendChild(tr);
+            var td = document.createElement("td");
+            td.setAttribute("id", "actor"+i);
+            tr.appendChild(td);
+            td = document.createElement("td");
+            td.setAttribute("id", "type"+i);
+            tr.appendChild(td);
+            td = document.createElement("td");
+            td.setAttribute("id", "text"+i);
+            tr.appendChild(td);
+        };
+    	var activityStreamService = new ActivityStreamService();
+    	var promise = activityStreamService.searchByQuery(
+    		"community"
+    	);
+    	promise.then(
+            function(as){
+                if (as.length == 0) {
+                    dom.setText("content", "No Results for this Stream.");
+                } else {
+                    for(var i=0; i<as.length; i++){
+                        var ase = as[i];
+                        createRow(i);
+                        dom.setText("actor"+i, ase.getActorDisplayName());
+                        dom.setText("type"+i, ase.getVerb());
+                        dom.setText("text"+i, ase.getPlainTitle());
+                    }
+                }
+            },
+            function(error){
+                dom.setText("content", "Error code:" +  error.code + ", message:" + error.message);
+            }       
+    	);
+    }
+);

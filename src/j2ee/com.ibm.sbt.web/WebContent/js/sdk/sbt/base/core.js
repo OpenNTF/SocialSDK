@@ -18,7 +18,7 @@
  * Social Business Toolkit SDK. 
  * Helpers for the core capabilities
  */
-define(['../config'],function(sbt) {
+define(['sbt/config'],function(sbt) {
 
 
 /**

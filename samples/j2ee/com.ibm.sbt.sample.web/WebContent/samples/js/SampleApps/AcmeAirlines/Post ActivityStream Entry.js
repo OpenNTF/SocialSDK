@@ -19,17 +19,16 @@ require(["sbt/Endpoint", "sbt/connections/ActivityStreamService", "sbt/json", "s
         
         var self = this;
         var activityStreamService = new ActivityStreamService({endpoint:"conAcmeApp"});
-        activityStreamService.postEntry({
-            postData : entry,
-            load : function(response) {
+        activityStreamService.postEntry(entry).then(
+            function(response) {
                 results.push(response);
                 dom.setText("json", json.jsonBeanStringify(results));
             },
-            error : function(error) {
+            function(error) {
                 results.push(error);
                 dom.setText("json", json.jsonBeanStringify(results));
             }
-        });
+        );
     }
     
     /**

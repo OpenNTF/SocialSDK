@@ -29,8 +29,125 @@ define([ "../../../declare",
          "../../../lang",
          "../../../dom",
          "../../../connections/FileConstants"], 
-        function(declare, Grid, FileGridRenderer, FileAction, sbt, SemanticTagService, string, parameter,FileService,lang,domClass) {
+        function(declare, Grid, FileGridRenderer, FileAction, sbt, SemanticTagService, string, parameter, FileService, lang, domClass) {
 
+	// TODO use values from constants and handle authType
+	var fileUrls = {
+		publicFiles : "/files/basic/anonymous/api/documents/feed?visibility=public",
+        pinnedFiles : "/files/basic/api/myfavorites/documents/feed",
+        folders : "/files/basic/api/collections/feed",
+        pinnedFolders : "/files/basic/api/myfavorites/collections/feed",
+        activeFolders : "/files//basic/api/collections/addedto/feed", // Folders you recently added files too.
+        publicFolders : "/files/basic/anonymous/api/collections/feed",
+        library : "/files/basic/api/myuserlibrary/feed",
+        shares : "/files/basic/api/documents/shared/feed", // only lists files shared with you.
+        recycledFiles : "/files/basic/api/myuserlibrary/view/recyclebin/feed",
+        fileComments : "/files/basic/api/userlibrary/${userId}/document/${fileId}/feed?category=comment",
+        fileShares : "/files/basic/api/documents/shared/feed"
+	};
+	var xpath_files = {
+		"id" : "id",
+		"uuid" : "td:uuid",
+		"title" : "a:title",
+		"label" : "td:label",
+		"fileSize" : "td:totalMediaSize",
+		"fileUrl" : "a:link[@rel='alternate']/@href",
+		"downloadUrl" : "a:link[@rel='edit-media']/@href",
+		"tags" : "a:category/@term",
+		"summary" : "a:summary[@type='text']",
+		"content" : "a:content[@type='html']",
+		"visibility" : "td:visibility",
+		"notification" : "td:notification",
+		"versionUuid" : "td:versionUuid",
+		"versionLabel" : "td:versionLabel",
+		"documentVersionUuid" : "td:documentVersionUuid",
+		"documentVersionLabel" : "td:documentVersionLabel",
+		"shareCount" : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/share']",
+		"commentCount" : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/comment']",
+		"hitCount" : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/hit']",
+		"anonymousHitCount" : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/anonymous_hit']",
+		"attachmentCount" : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/attachments']",
+		"referenceCount" : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/references']",
+		"recommendationCount" : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/recommendations']",
+		"collectionCount" : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/collections']",
+		"versionCount" : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/versions']",
+		"modified" : "td:modified",
+		"created" : "td:created",
+		"published" : "a:published",
+		"updated" : "a:updated",
+		"authorName" : "a:author/a:name",
+		"authorUid" : "a:author/snx:userid",
+		"authorEmail" : "a:author/a:email",
+		"modifierName" : "a:modifier/a:name",
+		"modifierId" : "a:modifier/snx:userid",
+		"modifierEmail" : "a:modifier/a:email"
+	};
+	var xpath_folders = {
+		"id" : "id",
+		"uuid" : "td:uuid",
+		"title" : "a:title",
+		"label" : "td:label",
+		"folderUrl" : "a:link[@rel='alternate']/@href",
+		"logoUrl" : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/logo']/@href",
+		"tags" : "a:category/@term",
+		"summary" : "a:summary[@type='text']",
+		"content" : "a:content[@type='html']",
+		"visibility" : "td:visibility",
+		"notification" : "td:notification",
+		"versionUuid" : "td:versionUuid",
+		"versionLabel" : "td:versionLabel",
+		"documentVersionUuid" : "td:documentVersionUuid",
+		"documentVersionLabel" : "td:documentVersionLabel",
+		"itemCount" : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/item']",
+		"shareCount" : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/user']",
+		"groupShareCount" : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/group']",
+		"modified" : "td:modified",
+		"created" : "td:created",
+		"updated" : "a:updated",
+		"authorName" : "a:author/a:name",
+		"authorUid" : "a:author/snx:userid",
+		"authorEmail" : "a:author/a:email",
+		"content" : "a:content[@type='text']",
+		"modifierName" : "a:modifier/a:name",
+		"modifierId" : "a:modifier/snx:userid",
+		"modifierEmail" : "a:modifier/a:email"
+	};
+	var xpath_comments = {
+		"id" : "a:id",
+		"uuid" : "td:uuid",
+		"title" : "a:title",
+		"content" : "a:content[@type='text']",
+		"created" : "td:created",
+		"modified" : "td:modified",
+		"versionLabel" : "td:versionLabel",
+		"updated" : "a:updated",
+		"published" : "a:published",
+		"modifierName" : "a:modifier/a:name",
+		"modifierId" : "a:modifier/snx:userid",
+		"modifierEmail" : "a:modifier/a:email",
+		"authorName" : "a:author/a:name",
+		"authorUid" : "a:author/snx:userid",
+		"authorEmail" : "a:author/a:email"
+	};
+	var xpath_shares = {
+		"id" : "id",
+		"uuid" : "td:uuid",
+		"title" : "a:title",
+		"summary" : "a:summary[@type='text']",
+		"sharedResourceType" : "td:sharedResourceType", // always set to document, but will add the attribute anyway
+		"sharePermission" : "td:sharePermission",
+		"sharedWhat" : "td:sharedWhat",
+		"sharedWithName" : "a:sharedWith/a:name",
+		"sharedWithId" : "a:sharedWith/snx:userid",
+		"sharedWithEmail" : "a:sharedWith/a:email",
+		"documentOwner" : "td:documentOwner",
+		"updated" : "a:updated",
+		"published" : "a:published",
+		"authorName" : "a:author/a:name",
+		"authorUid" : "a:author/snx:userid",
+		"authorEmail" : "a:author/a:email"
+	};
+	
     /**
      * @class FileGrid
      * @namespace sbt.controls.grid.connections
@@ -47,8 +164,8 @@ define([ "../../../declare",
         options : {
             "library" : {
                 storeArgs : {
-                    url : sbt.connections.fileUrls.library,
-                    attributes : sbt.connections.fileConstants.xpath_files,
+                    url : fileUrls.library,
+                    attributes : xpath_files,
                     paramSchema: parameter.files.all
                 },
                 rendererArgs : {
@@ -57,8 +174,8 @@ define([ "../../../declare",
             },
             "publicFiles" : {
                 storeArgs : {
-                    url : sbt.connections.fileUrls.publicFiles,
-                    attributes : sbt.connections.fileConstants.xpath_files,
+                    url : fileUrls.publicFiles,
+                    attributes : xpath_files,
                     paramSchema: parameter.files.all
                 },
                 rendererArgs : {
@@ -67,8 +184,8 @@ define([ "../../../declare",
             },
             "pinnedFiles" : {
                 storeArgs : {
-                    url : sbt.connections.fileUrls.pinnedFiles,
-                    attributes : sbt.connections.fileConstants.xpath_files,
+                    url : fileUrls.pinnedFiles,
+                    attributes : xpath_files,
                     paramSchema: parameter.files.all
                 },
                 rendererArgs : {
@@ -77,8 +194,8 @@ define([ "../../../declare",
             },
             "folders" : {
                 storeArgs : {
-                    url : sbt.connections.fileUrls.folders,
-                    attributes : sbt.connections.fileConstants.xpath_folders,
+                    url : fileUrls.folders,
+                    attributes : xpath_folders,
                     paramSchema: parameter.files.all
                 },
                 rendererArgs : {
@@ -87,8 +204,8 @@ define([ "../../../declare",
             },
             "publicFolders" : {
                 storeArgs : {
-                    url : sbt.connections.fileUrls.publicFolders,
-                    attributes : sbt.connections.fileConstants.xpath_folders,
+                    url : fileUrls.publicFolders,
+                    attributes : xpath_folders,
                     paramSchema: parameter.files.all
                 },
                 rendererArgs : {
@@ -97,8 +214,8 @@ define([ "../../../declare",
             },
             "pinnedFolders" : {
                 storeArgs : {
-                    url : sbt.connections.fileUrls.pinnedFolders,
-                    attributes : sbt.connections.fileConstants.xpath_folders,
+                    url : fileUrls.pinnedFolders,
+                    attributes : xpath_folders,
                     paramSchema: parameter.files.all
                 },
                 rendererArgs : {
@@ -107,8 +224,8 @@ define([ "../../../declare",
             },
             "activeFolders" : {
                 storeArgs : {
-                    url : sbt.connections.fileUrls.activeFolders,
-                    attributes : sbt.connections.fileConstants.xpath_folders,
+                    url : fileUrls.activeFolders,
+                    attributes : xpath_folders,
                     paramSchema: parameter.files.all
                 },
                 rendererArgs : {
@@ -117,8 +234,8 @@ define([ "../../../declare",
             },
             "shares" : {
                 storeArgs : {
-                    url : sbt.connections.fileUrls.shares,
-                    attributes : sbt.connections.fileConstants.xpath_files,
+                    url : fileUrls.shares,
+                    attributes : xpath_files,
                     paramSchema: parameter.files.all
                 },
                 rendererArgs : {
@@ -127,8 +244,8 @@ define([ "../../../declare",
             },
             "recycledFiles" : {
                 storeArgs : {
-                    url : sbt.connections.fileUrls.recycledFiles,
-                    attributes : sbt.connections.fileConstants.xpath_files,
+                    url : fileUrls.recycledFiles,
+                    attributes : xpath_files,
                     paramSchema: parameter.files.all
                 },
                 rendererArgs : {
@@ -137,8 +254,8 @@ define([ "../../../declare",
             },
             "fileComments" : {
                 storeArgs : {
-                    url : sbt.connections.fileUrls.fileComments,
-                    attributes : sbt.connections.fileConstants.xpath_comments,
+                    url : fileUrls.fileComments,
+                    attributes : xpath_comments,
                     paramSchema: parameter.files.all
                 },
                 rendererArgs : {
@@ -147,8 +264,8 @@ define([ "../../../declare",
             },
             "fileShares" : {
                 storeArgs : {
-                    url : sbt.connections.fileUrls.fileShares,
-                    attributes : sbt.connections.fileConstants.xpath_files,
+                    url : fileUrls.fileShares,
+                    attributes : xpath_files,
                     paramSchema: parameter.files.all
                 },
                 rendererArgs : {
@@ -437,8 +554,8 @@ define([ "../../../declare",
 	            
 	        	//we use the array of ids, and not the array of elements
 	        	//because as we remove a class from an element, the array of elements will dynamically reduce
-	        	this.renderer._hitch(args,this.fileService.getMyPinnedFiles({
-	        		load : function(files) {
+	        	this.renderer._hitch(args,this.fileService.getMyPinnedFiles().then(
+	        		function(files) {
 	        			for(var k=0;k<args.ids.length;k++){
 	        				for(var i=0;i<files.length;i++){
 	        					if(args.ids[k] == files[i].getId()){
@@ -448,10 +565,10 @@ define([ "../../../declare",
 	        				}
 	        			}
 	        		},
-	        		error : function(error) {
+	        		function(error) {
 	        			console.log("error getting pinned files");
 	        		}
-	        	}));
+	        	));
 	        	
 	          }
         },	
@@ -473,11 +590,6 @@ define([ "../../../declare",
         		uuid = data._attribs.uuid;
         	}
         	
-        	var file = this.fileService.getFile({
-        		id : uuid,
-        		loadIt : false
-        	});
-   
         	//create an args object containing these three vars to hitch. 
         	var pinClass = this.renderer.pinnedClass;
             var unPinnedClass = this.renderer.unPinnedClass;
@@ -485,26 +597,26 @@ define([ "../../../declare",
             var args = {pinClass:pinClass,unPinnedClass:unPinnedClass,el:el,renderer:renderer};
         	
         	if(el.firstElementChild.className == this.renderer.unPinnedClass){
-	        	 this.renderer._hitch(args,this.fileService.pinFile(file,{
-	        		load : function(response) {
+	        	 this.renderer._hitch(args,this.fileService.pinFile(uuid).then(
+	        		function(response) {
 	        			args.renderer._removeClass(args.el.firstElementChild, args.unPinnedClass);
 	        			args.renderer._addClass(args.el.firstElementChild, args.pinClass);	
 	
 	        		},
-	        		error : function(response) {
+	        		function(response) {
 	        			console.log("Error pinning file");
 	        		}
-	        	}));
-        	}else if (el.firstElementChild.className == this.renderer.pinnedClass){
-        		this.renderer._hitch(args,this.fileService.removePinFromFile(file, {
-        			load : function(data) {
+	        	));
+        	} else if (el.firstElementChild.className == this.renderer.pinnedClass){
+        		this.renderer._hitch(args,this.fileService.unpinFile(uuid).then(
+        			function(data) {
         				args.renderer._removeClass(args.el.firstElementChild, args.pinClass);
         				args.renderer._addClass(args.el.firstElementChild, args.unPinnedClass);	
         			},
-        			error : function(error) {
+        			function(error) {
         				console.log("error removing pin from file");
         			}
-        		}));
+        		));
         	}
         	
         },

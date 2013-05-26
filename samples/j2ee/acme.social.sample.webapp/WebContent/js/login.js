@@ -2,7 +2,7 @@
  * Helper module for logging in and retrieving the reporting chain for the logged in user.
  * @module
  */
-define(["sbt/_bridge/declare", "sbt/Endpoint", "sbt/json", "sbt/xml", "sbt/xpath", "sbt/connections/core"], 
+define(["sbt/declare", "sbt/Endpoint", "sbt/json", "sbt/xml", "sbt/xpath", "sbt/connections/ConnectionsConstants"], 
     function(declare, endpoint, json, xml, xpath, connections) {
 
     var basicPeopleMe = '/connections/opensocial/basic/rest/people/@me/';
@@ -145,7 +145,7 @@ define(["sbt/_bridge/declare", "sbt/Endpoint", "sbt/json", "sbt/xml", "sbt/xpath
             if (!reportingChain) {
                 return null;
             }
-            return xpath.selectText(reportingChain, approverEmailXPath, connections.namespaces);
+            return xpath.selectText(reportingChain, approverEmailXPath, connections.Namespaces);
         },
         
         /**
@@ -157,7 +157,7 @@ define(["sbt/_bridge/declare", "sbt/Endpoint", "sbt/json", "sbt/xml", "sbt/xpath
             if (!reportingChain) {
                 return null;
             }
-            return xpath.selectText(reportingChain, approverUserIdXPath, connections.namespaces);
+            return xpath.selectText(reportingChain, approverUserIdXPath, connections.Namespaces);
         }
     };
 });

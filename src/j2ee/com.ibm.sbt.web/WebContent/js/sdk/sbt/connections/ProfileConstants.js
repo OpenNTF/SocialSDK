@@ -1,5 +1,5 @@
 /*
- * ï¿½ Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2012,2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -14,105 +14,143 @@
  * permissions and limitations under the License.
  */
 /**
- * Social Business Toolkit SDK.
- * Definition of constants for ProfileService.
+ * Social Business Toolkit SDK. Definition of constants for CommunityService.
  */
-define(["sbt/config", "sbt/connections/core"],function(sbt) {
-	return sbt.connections.profileConstants = {
-		sbtErrorCodes:{
-			badRequest         :400
+define([ "sbt/lang", "sbt/connections/ConnectionsConstants" ], function(lang,conn) {
+
+    return lang.mixin(conn, {
+        
+        /**
+         * Default size for the profile cache
+         */
+        DefaultCacheSize : 10,
+        
+        /**
+         * Fields used to populate the Address object
+         */
+        AddressFields : [ "streetAddress", "extendedAddress", "locality", "region", "postalCode", "countryName" ],
+
+        /**
+         * XPath expressions used when parsing a Connections Profiles ATOM feed
+         */
+        ProfileFeedXPath : conn.ConnectionsFeedXPath,
+
+        /**
+         * XPath expressions to be used when reading a Profile Entry
+         */
+        ProfileXPath : {
+            // used by getEntityData
+            entry : "/a:feed/a:entry",
+            // used by getEntityId
+            uid : "a:contributor/snx:userid",
+            // used by getters
+            id : "a:id",
+            userid : "a:contributor/snx:userid",
+            name : "a:contributor/a:name",
+            email : "a:contributor/a:email",
+            title : "a:title",
+            updated : "a:updated",
+            altEmail : "a:content/h:div/h:span/h:div[@class='x-groupwareMail']", // TODO do we need this? it's a dupe of groupwareMail
+            photoUrl : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/image']/@href", 
+            fnUrl : "a:content/h:div/h:span/h:div/h:a[@class='fn url']/@href",
+            soundUrl : "a:content/h:div/h:span/h:div/h:a[@class='sound url']/@href",
+            jobTitle : "a:content/h:div/h:span/h:div[@class='title']",
+            organizationUnit : "a:content/h:div/h:span/h:div[@class='org']/h:span[@class='organization-unit']",
+            telephoneNumber : "a:content/h:div/h:span/h:div[@class='tel']/h:span[@class='value']",
+            building : "a:content/h:div/h:span/h:div/h:span[@class='x-building']",
+            floor : "a:content/h:div/h:span/h:div/h:span[@class='x-floor']",
+            officeNumber : "a:content/h:div/h:span/h:div/h:span[@class='x-office-number']",
+            streetAddress : "a:content/h:div/h:span/h:div/h:div[@class='street-address']",
+            extendedAddress : "a:content/h:div/h:span/h:div/h:div[@class='extended-address x-streetAddress2']",
+            locality : "a:content/h:div/h:span/h:div/h:span[@class='locality']",
+            postalCode : "a:content/h:div/h:span/h:div/h:span[@class='postal-code']",
+            region : "a:content/h:div/h:span/h:div/h:span[@class='region']",
+            countryName : "a:content/h:div/h:span/h:div/h:div[@class='country-name']",
+            summary : "a:summary",
+            groupwareMail : "a:content/h:div/h:span/h:div[@class='x-groupwareMail']",
+            blogUrl : "a:content/h:div/h:span/h:div/h:a[@class='x-blog-url url']/@href",
+            role : "a:content/h:div/h:span/h:div[@class='role']",
+            managerUid : "a:content/h:div/h:span/h:div[@class='x-manager-uid']",
+            isManager : "a:content/h:div/h:span/h:div[@class='x-is-manager']"
+            
+            
+        },
+        
+        /**
+         * XPath expressions to be used when reading a Community Entry with VCard content
+         */
+        ProfileVCardXPath : {
+            // used by getEntityData
+            entry : "/a:feed/a:entry",
+            // used by getEntityId
+            uid : "a:contributor/snx:userid",
+            // used by parseVCard
+            vcard : "a:content",
+            // used by getters
+            id : "a:id",
+            userid : "a:contributor/snx:userid",
+            name : "a:contributor/a:name",
+            email : "a:contributor/a:email",
+            title : "a:title",
+            updated : "a:updated",
+            altEmail : "EMAIL;X_GROUPWARE_MAIL", // TODO do we need this? it's a dupe of groupwareMail
+            photoUrl : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/image']/@href",
+            fnUrl : "URL",
+            soundUrl : "SOUND;VALUE=URL",
+            jobTitle : "TITLE",
+            organizationUnit : "a:content/h:div/h:span/h:div[@class='org']/h:span[@class='organization-unit']",
+            telephoneNumber : "TEL;WORK",
+            building : "X_BUILDING",
+            floor : "X_FLOOR",
+            officeNumber : "X_OFFICE_NUMBER",
+            workLocation : "ADR;WORK",
+            streetAddress : "a:content/h:div/h:span/h:div/h:div[@class='street-address']",
+            extendedAddress : "a:content/h:div/h:span/h:div/h:div[@class='extended-address x-streetAddress2']",
+            locality : "a:content/h:div/h:span/h:div/h:span[@class='locality']",
+            postalCode : "a:content/h:div/h:span/h:div/h:span[@class='postal-code']",
+            region : "a:content/h:div/h:span/h:div/h:span[@class='region']",
+            countryName : "a:content/h:div/h:span/h:div/h:div[@class='country-name']",
+            summary : "a:summary",
+            groupwareMail : "EMAIL;X_GROUPWARE_MAIL"
+        },
+        
+        /**
+         * XML elements to be used when creating a Profile Entry
+         *                    
+         **/        
+        profileCreateAttributes : {
+				guid : "com.ibm.snx_profiles.base.guid",
+				email : "com.ibm.snx_profiles.base.email",
+				uid : "com.ibm.snx_profiles.base.uid",
+				distinguishedName : "com.ibm.snx_profiles.base.distinguishedName",
+				displayName : "com.ibm.snx_profiles.base.displayName",
+				givenNames : "com.ibm.snx_profiles.base.givenNames",
+				surname : "com.ibm.snx_profiles.base.surname",
+				userState :"com.ibm.snx_profiles.base.userState"
 		},
-		sbtErrorMessages:{
-			null_id        :"Null userId/email/id",
-			null_profileId :"Null id",
-			args_object	   :"Invalid argument",
-			args_profile   :"Invalid profile",
-			null_profile   :"Null profile"
-		},
-		xpath_profile : {
-		        "id":               "a:id",
-			 	"entry":			"/a:feed/a:entry",
-				"uid":				"a:contributor/snx:userid",
-				"name":				"a:contributor/a:name",
-				"email":            "a:contributor/a:email",
-				"title":            "a:title",
-				"statusUpdate":     "a:title[@type='text']",
-				"statusLastUpdate": "a:updated",
-				"altEmail":         "a:content/h:div/h:span/h:div[@class='x-groupwareMail']",
-				"photo":			"a:link[@rel='http://www.ibm.com/xmlns/prod/sn/image']/@href",			
-				"jobTitle":			"a:content/h:div/h:span/h:div[@class='title']",
-				"organizationUnit":	"a:content/h:div/h:span/h:div[@class='org']/h:span[@class='organization-unit']",
-				"fnUrl":			"a:content/h:div/h:span/h:div/h:a[@class='fn url']/@href",			
-				"telephoneNumber":	"a:content/h:div/h:span/h:div[@class='tel']/h:span[@class='value']",			
-				"bldgId":			"a:content/h:div/h:span/h:div/h:span[@class='x-building']",			
-				"floor":			"a:content/h:div/h:span/h:div/h:span[@class='x-floor']",
-				"streetAddress":	"a:content/h:div/h:span/h:div/h:div[@class='street-address']",
-				"extendedAddress":	"a:content/h:div/h:span/h:div/h:div[@class='extended-address x-streetAddress2']",
-				"locality":			"a:content/h:div/h:span/h:div/h:span[@class='locality']",
-				"postalCode":		"a:content/h:div/h:span/h:div/h:span[@class='postal-code']",
-				"region":			"a:content/h:div/h:span/h:div/h:span[@class='region']",
-				"countryName":		"a:content/h:div/h:span/h:div/h:div[@class='country-name']",			
-				"soundUrl":			"a:content/h:div/h:span/h:div/h:a[@class='sound url']/@href",	
-				"summary":			"a:summary",
-				"groupwareMail":	"a:content/h:div/h:span/h:div[@class='x-groupwareMail']",				
-				"networkProfileId":	"snx:connection/a:contributor[@snx:rel='http://www.ibm.com/xmlns/prod/sn/connection/target']/snx:userid",
-				"networkProfileName":	"snx:connection/a:contributor[@snx:rel='http://www.ibm.com/xmlns/prod/sn/connection/target']/a:name",
-				"networkProfileEmail":	"snx:connection/a:contributor[@snx:rel='http://www.ibm.com/xmlns/prod/sn/connection/target']/a:email",
-                "totalResults"      :"/a:feed/opensearch:totalResults",
-                "startIndex"        :"/a:feed/opensearch:startIndex",
-                "itemsPerPage"      :"/a:feed/opensearch:itemsPerPage"
-		},
-		
-		xpath_feed_profile : {
-		 	"entry":			"/a:feed/a:entry",
-		 	"totalResults"      :"/a:feed/opensearch:totalResults",
-            "startIndex"        :"/a:feed/opensearch:startIndex",
-            "itemsPerPage"      :"/a:feed/opensearch:itemsPerPage",
-		 	"id"				:"a:contributor/snx:userid"
-		},
-		_updateMapAttributes: { 
-				"bldgId" : "X_BUILDING",
-				"floor" : "X_FLOOR",
-				"officeName":"X_OFFICE_NUMBER",
-				"title":"TITLE",
-				"telephoneNumber":"TEL;WORK",
-				"workLocation":"ADR;WORK"
-			},
-		_createMapAttributes : {
-				"guid":	"com.ibm.snx_profiles.base.guid",
-				"email":"com.ibm.snx_profiles.base.email",
-				"uid": "com.ibm.snx_profiles.base.uid",
-				"distinguishedName": "com.ibm.snx_profiles.base.distinguishedName",
-				"displayName": "com.ibm.snx_profiles.base.displayName",
-				"givenNames": "com.ibm.snx_profiles.base.givenNames",
-				"surname": "com.ibm.snx_profiles.base.surname",
-				"userState":"com.ibm.snx_profiles.base.userState"
-			},
-		_userIdentifiers :{
-				"userId":"userId",
-				"email":"email",
-				"id":"id"
-		},
-		_methodName : {
-			"getProfile" 	  : "getProfile",
-			"updateProfile"   : "updateProfile",
-			"createProfile"   : "createProfile",
-			"deleteProfile"	  : "deleteProfile",
-			"updateProfilePhoto"    : "updateProfilePhoto"
-			
-		},
-		entityServiceBaseUrl	: "/profiles",
-		
-		serviceEntity : {
-			getProfile:         "/atom/profile.do",
-			updateProfile:		"/atom/profileEntry.do",
-			createProfile:		"/admin/atom/profiles.do",
-			deleteProfile:		"/admin/atom/profileEntry.do",
-			updateProfilePhoto:	"/photo.do",
-			getColleagues:		"/atom/connections.do"
-		},		
-		entityType : {
-				
-		}
-	};
+        
+		/**
+         * Retrieve a profile entry.
+         */
+        AtomProfileDo : "/profiles{authType}/atom/profile.do",
+        
+        /**
+         * Update a profile entry.
+         */
+        AtomProfileEntry : "/profiles{authType}/atom/profileEntry.do",
+        
+        /**
+         * Retrieve a profiles connections.
+         */
+        AtomConnectionsDo : "/profiles{authType}/atom/connections.do",
+        /**
+         * Admin API - create a new profile.
+         */
+        AdminAtomProfileDo : "/profiles/admin/atom/profiles.do",
+        /**
+         * Admin API - delete a  profile.
+         */
+        AdminAtomProfileEntryDo : "/profiles/admin/atom/profileEntry.do",
+
+    });
 });

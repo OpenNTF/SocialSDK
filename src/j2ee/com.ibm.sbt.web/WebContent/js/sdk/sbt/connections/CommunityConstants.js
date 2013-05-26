@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * © Copyright IBM Corp. 2012,2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -14,153 +14,168 @@
  * permissions and limitations under the License.
  */
 /**
- * Social Business Toolkit SDK.
- * Definition of constants for CommunityService.
+ * Social Business Toolkit SDK. Definition of constants for CommunityService.
  */
-define(["sbt/config", "sbt/connections/core"],function(sbt) {
-	return sbt.connections.communityConstants = {
-		_methodName : {
-			"createCommunity" : "createCommunity",
-			"updateCommunity" : "updateCommunity",
-			"deleteCommunity" : "deleteCommunity",
-			"addMember"		  : "addMember",
-			"removeMember"    : "removeMember",
-			"getCommunity"    : "getCommunity",
-			"getMember"		  : "getMember"
-		},
-		sbtErrorCodes:{
-			badRequest         :400
-		},
-		sbtErrorMessages:{
-			null_communityId        :"Undefined community Id",
-			null_memberId        	:"Undefined member Id",
-			null_community			:"Undefined community",
-			args_object				:"Invalid argument",
-			args_member				:"Invalid member",
-			args_community			:"Invalid community"
-		},
-		_xpath : {
-				"entry"				:"/a:entry",
-				"communityUuid"		:"snx:communityUuid",
-				"title"				:"a:title",
-				"summary"			:"a:summary[@type='text']",
-				"communityUrl"		:"a:link[@rel='self']/@href",
-				"logoUrl"			:"a:link[@rel='http://www.ibm.com/xmlns/prod/sn/logo']/@href",
-				"tags"				:"a:category/@term",
-				"content"			:"a:content[@type='html']",
-                "memberCount"       :"snx:membercount",
-                "communityType"     :"snx:communityType",
-                "published"         :"a:published",
-                "updated"           :"a:updated",
-                "authorUid"			:"a:author/snx:userid",
-                "authorName"		:"a:author/a:name",
-                "authorEmail"		:"a:author/a:email",
-    			"contributorUid"	:"a:contributor/snx:userid",
-    			"contributorName"	:"a:contributor/a:name",
-    			"contributorEmail"	:"a:contributor/a:email"
-		},
-		_xpath_member : {
-			"entry"				:"/a:entry",
-			"name"				:"a:contributor/a:name",
-			"uid"				:"a:contributor/snx:userid",
-			"email"             :"a:contributor/a:email",
-			"role"				:"snx:role"
-		},
-		_xpath_communities_Feed : {
-				"entry"				:"/a:feed/a:entry",
-                "totalResults"      :"/a:feed/opensearch:totalResults",
-                "startIndex"        :"/a:feed/opensearch:startIndex",
-                "itemsPerPage"      :"/a:feed/opensearch:itemsPerPage",
-				"id"				:"snx:communityUuid",
-				"title"				:"a:title",
-                "communityUuid"     :"snx:communityUuid",
-                "summary"           :"a:summary[@type='text']",
-                "communityUrl"      :"a:link[@rel='self']/@href",
-                "logoUrl"           :"a:link[@rel='http://www.ibm.com/xmlns/prod/sn/logo']/@href",
-                "tags"              :"a:category/@term",
-                "content"           :"a:content[@type='html']",        
-                "memberCount"       :"snx:membercount",
-                "communityType"     :"snx:communityType",
-                "published"         :"a:published",
-                "updated"           :"a:updated"
-		},
-		_xpath_community_Members_Feed : {
-				"entry"				:"/a:feed/a:entry",
-                "totalResults"      :"/a:feed/opensearch:totalResults",
-                "startIndex"        :"/a:feed/opensearch:startIndex",
-                "itemsPerPage"      :"/a:feed/opensearch:itemsPerPage",
-				"id"				:"a:contributor/snx:userid",
-				"name"				:"a:contributor/a:name"
-		},
-		communityServiceEntity : {
-				"communities"	:"/communities",
-				"community"		:"/community"
-		},		
-		communitiesType : {
-				"members"				:"/members",
-				"subCommunities"		:"",
-				"bookmarks"				:"",
-				"invitees"				:"",
-				"public"				:"/all",
-				"my"					:"/my"
-		},
-		entityServiceBaseUrl	: "/communities/service/atom",
-		serviceEntity : {
-			"communities"	:"/communities",
-			"community"		:"/community"
-		},
-		entityType : {
-			"members"				:"/members",
-			"subCommunities"		:"",
-			"bookmarks"				:"",
-			"invitees"				:"",
-			"public"				:"/all",
-			"my"					:"/my",
-			"instance"				:"/instance"
-		},
-		xpath_community : {
-			"entry"				:"/a:entry",
-			"communityUuid"		:"snx:communityUuid",
-			"uid"				:"snx:communityUuid",
-			"title"				:"a:title",
-			"summary"			:"a:summary[@type='text']",
-			"communityUrl"      :"a:link[@rel='alternate']/@href",
-			"communityFeedUrl"  :"a:link[@rel='self']/@href",
-			"logoUrl"			:"a:link[@rel='http://www.ibm.com/xmlns/prod/sn/logo']/@href",
-			"tags"				:"a:category/@term",
-			"content"			:"a:content[@type='html']",
-            "memberCount"       :"snx:membercount",
-            "communityType"     :"snx:communityType",
-            "published"         :"a:published",
-            "updated"           :"a:updated",
-            "authorUid"			:"a:author/snx:userid",
-            "authorName"		:"a:author/a:name",
-            "authorEmail"		:"a:author/a:email",
-			"contributorUid"	:"a:contributor/snx:userid",
-			"contributorName"	:"a:contributor/a:name",
-			"contributorEmail"	:"a:contributor/a:email"				
-		},
-		xpath_feed_community : {
-			"entry"				:"/a:feed/a:entry",	
-			"id"				:"a:id",
-			"totalResults"      :"/a:feed/opensearch:totalResults",
-            "startIndex"        :"/a:feed/opensearch:startIndex",
-            "itemsPerPage"      :"/a:feed/opensearch:itemsPerPage",
-            "title"				:"a:title"            
-		},
-		xpath_member : {
-			"entry"				:"/a:entry",				
-			"name"				:"a:contributor/a:name",
-			"uid"				:"a:contributor/snx:userid",
-			"role"				:"snx:role"
-		},
-		xpath_feed_member : {
-			"entry"				:"/a:feed/a:entry",
-			"id"				:"a:contributor/snx:userid",
-			"uid"				:"a:contributor/snx:userid",
-			"totalResults"      :"/a:feed/opensearch:totalResults",
-            "startIndex"        :"/a:feed/opensearch:startIndex",
-            "itemsPerPage"      :"/a:feed/opensearch:itemsPerPage"
-		}
-	};
+define([ "sbt/lang", "./ConnectionsConstants" ], function(lang,conn) {
+
+    return lang.mixin({
+        
+        /**
+         * Public community
+         */
+        Public : "public",
+
+        /**
+         * Moderated community
+         */
+        Moderated : "publicInviteOnly",
+
+        /**
+         * Restricted community
+         */
+        Restricted : "private",
+
+        /**
+         * Community owner
+         */
+        Owner : "owner",
+        
+        /**
+         * Community member
+         */
+        Member : "member",
+        
+        /**
+         * XPath expressions used when parsing a Connections Communities ATOM feed
+         */
+        CommunityFeedXPath : conn.ConnectionsFeedXPath,
+
+        /**
+         * XPath expressions to be used when reading a Community Entry
+         */
+        CommunityXPath : {
+            // used by getEntityData
+            entry : "/a:entry",
+            // used by getEntityId
+            uid : "a:id",
+            // used by getters
+            communityUuid : "a:id",
+            communityTheme : "snx:communityTheme",
+            title : "a:title",
+            summary : "a:summary[@type='text']",
+            communityUrl : "a:link[@rel='alternate']/@href",
+            communityAtomUrl : "a:link[@rel='self']/@href",
+            logoUrl : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/logo']/@href",
+            tags : "a:category[not(@scheme)]/@term",
+            content : "a:content[@type='html']",
+            memberCount : "snx:membercount",
+            communityType : "snx:communityType",
+            published : "a:published",
+            updated : "a:updated",
+            authorUserid : "a:author/snx:userid",
+            authorName : "a:author/a:name",
+            authorEmail : "a:author/a:email",
+            contributorUserid : "a:contributor/snx:userid",
+            contributorName : "a:contributor/a:name",
+            contributorEmail : "a:contributor/a:email"
+        },
+        
+        /**
+         * XPath expressions to be used when reading a Community Member Entry
+         */
+        MemberXPath : {
+            // used by getEntityData
+            entry : "/a:entry",
+            // used by getEntityId
+            uid : "a:contributor/snx:userid",
+            // used by getters
+            userid : "a:contributor/snx:userid",
+            name : "a:contributor/a:name",
+            email : "a:contributor/a:email",
+            role : "snx:role"
+        },
+
+        /**
+         * XPath expressions to be used when reading a Community Invite Entry
+         */
+        InviteXPath : {
+            // used by getEntityData
+            entry : "/a:entry",
+            // used by getEntityId
+            uid : "a:id",
+            // used by getters
+            title : "a:title",
+            content : "a:content[@type='text']",
+            updated : "a:updated",
+            authorUserid : "a:author/snx:userid",
+            authorName : "a:author/a:name",
+            contributorUserid : "a:contributor/snx:userid",
+            contributorName : "a:contributor/a:name"
+        },
+
+        /**
+         * asc  Specifies whether the results should be displayed in ascending order. Options are true or false.
+         * email   Internet email address. Search for communities of which the user you specify by email address is a member.
+         * ps  Page size. Specify the number of entries to return per page.
+         * search  Well-formed full text search query. Performs a text search on community titles and descriptions.
+         * since   Includes in the resulting feed all communities updated after a specified date. Specify the date using a date-time value that conforms to RFC3339. Use an upper case "T" to separate the date and time, and an uppercase "Z" in the absence of a numeric time zone offset. For example: 2009-01-04T20:32:31.171Z.
+         * sortField   Order in which to sort the results. Options are:
+         *                                          lastmod – Sorts the results by last modified date.
+         *                                          name – Sorts the results by entry name.
+         *                                          count – Sorts the results by relevance.
+         * tag Returns communities with the specified tag. Search by one tag at a time.
+         * userid  Unique ID that represents a specific person.
+         */
+        
+        /**
+         * A feed of all public communities.
+         *  
+         * Get the All Communities feed to see a list of all public communities to which the authenticated user has access or pass in parameters to search for communities that match a specific criteria.
+         * 
+         * Supports: asc, email, ps, search, since, sortField, tag, userid
+         */
+        AtomCommunitiesAll : "/communities/service/atom/{authType}/communities/all",
+
+        /**
+         * A feed of communities of which the authenticated user is a member.
+         * 
+         * Get the My Communities feed to see a list of the communities to which the authenticated user is a member or pass in parameters to search for a subset of those communities that match a specific criteria.
+         * 
+         * Supports: asc, email, ps, search, since, sortField, tag, userid
+         */
+        AtomCommunitiesMy : "/communities/service/atom/{authType}/communities/my",
+        
+        /**
+         * A feed of invitations.
+         * 
+         * Get a list of the outstanding community invitations of the currently authenticated user or provide parameters to search for a subset of those invitations.
+         * 
+         * Supports: asc, ps, search, since, sortField
+         */
+        AtomCommunityInvitesMy : "/communities/service/atom/{authType}/community/invites/my",
+        
+        /**
+         * A feed of subcommunities.
+         * 
+         * Get a list of subcommunities associated with a community.
+         * 
+         * Supports: asc, page, ps, since, sortBy, sortOrder, sortField
+         */
+        AtomCommunitySubCommunities : "communities/service/atom/{authType}/community/subcommunities",
+            
+        /**
+         * A feed of members.
+         * 
+         * Retrieve the members feed to view a list of the members who belong to a given community.
+         * 
+         * Supports: asc, email, page, ps, role, since, sortField, userid
+         */
+        AtomCommunityMembers : "communities/service/atom/{authType}/community/members",
+        
+        /**
+         * A community entry.
+         */
+        AtomCommunityInstance : "communities/service/atom/{authType}/community/instance"
+
+    }, conn);
 });

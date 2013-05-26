@@ -1,44 +1,45 @@
 var currentCommunity = null;
 var currentMembers = null;
 
-require(["sbt/Endpoint", "sbt/connections/CommunityService", "sbt/dom"], function(Endpoint, CommunityService, dom) {
+require(["sbt/Endpoint", "sbt/connections/CommunityService", "sbt/dom", "sbt/stringUtil"], function(Endpoint, CommunityService, dom, stringUtil) {
     var endpoint = Endpoint.find("connections");
-    endpoint.xhrGet({
-        serviceUrl: "/connections/opensocial/basic/rest/people/@me/",
-        handleAs: "json",
-        load: function(response) {
+    var url = "/connections/opensocial/basic/rest/people/@me/";
+    if (stringUtil.startsWith(endpoint.proxyPath, "smartcloud")) {
+        url = "/manage/oauth/getUserIdentity";
+    }
+    endpoint.request(url, {handleAs: "json"}).then(
+        function(response) {
             handleLoggedIn(response.entry, CommunityService, dom);
         },
-        error: function(error) {
+        function(error) {
             handleError(dom, error);
         }
-    });
+    );
     dom.setText("success", "Please wait... Loading your profile entry");
 });
 
 function loadCommunity(communityService, dom) {
     currentCommunity = null;
-    communityService.getMyCommunities({
-        parameters: { ps: 1 },
-        load: function(communities) {
+    communityService.getMyCommunities({ ps: 1 }).then(
+        function(communities) {
             handleCommunitiesLoaded(communities, dom);
         },
-        error: function(error) {
+        function(error) {
             handleError(dom, error);
         }       
-    });
+    );
 }
 
 function loadMembers(community, dom) {
     currentMembers = null;
-    community.getMembers({
-        load: function(members) {
+    community.getMembers().then(
+        function(members) {
             handleMembersLoaded(members, dom);
         },
-        error: function(error) {
+        function(error) {
             handleError(dom, error);
         }
-    });
+    );
     
     displayMessage(dom, "Please wait... Loading members for : " + community.getCommunityUuid());
 }
@@ -49,28 +50,28 @@ function removeMembers(community, members, dom) {
     }
 
     // wait for the last remove before reloading
-    community.removeMember(members[members.length-1], {
-        load: function(members) {
+    community.removeMember(members[members.length-1]).then(
+        function(memberId) {
             loadMembers(community, dom);
         },
-        error: function(error) {
+        function(error) {
             handleError(dom, error);
         }
-    });
+    );
 }
 
 function addMember(community, email, dom) {
     var input = dom.byId("memberEmail");
-    community.addMember({id : email},{       
-        load : function(member){
+    community.addMember(email).then(       
+        function(member){
             loadMembers(community, dom);
         },
-        error : function(error){
+        function(error){
             handleError(dom, error);
         }
-    });
+    );
     
-    displayMessage(dom, "Please wait... Adding member: " + member.getEmail());
+    displayMessage(dom, "Please wait... Adding member: " + email);
 }
 
 function handleLoggedIn(entry, CommunityService, dom) {
@@ -106,18 +107,18 @@ function handleMembersLoaded(members, dom) {
         dom.destroy(select.childNodes[0]);
     }
     for(var i = 0; i < members.length; i++) {
-        var node = dom.create("option", { value: members[i].getId(), innerHTML: members[i].getEmail() || members[i].getName() }, select);
+        var node = dom.create("option", { value: members[i].getUserid(), innerHTML: members[i].getEmail() || members[i].getName() }, select);
     }
     
     currentMembers = members;
     
-    displayMessage(dom, "Sucessfully loaded community members for: " + members[0].getCommunity());
+    displayMessage(dom, "Sucessfully loaded community members for: " + members[0].getCommunityUuid());
 }
 
 function getMember(id) {
     if (currentMembers) {
         for(var i = 0; i < currentMembers.length; i++) {
-            if (id == currentMembers[i].getId()) {
+            if (id == currentMembers[i].getUserid()) {
                 return currentMembers[i];
             }
         }
@@ -149,16 +150,7 @@ function addOnClickHandlers(communityService, dom) {
     dom.byId("addBtn").onclick = function(evt) {
         if (currentCommunity) {
             var input = dom.byId("memberEmail");
-            currentCommunity.addMember({ id: input.value},{
-                load : function(member){
-                    getMembers(dom, community);
-                },
-                error : function(error){
-                    handleError(dom, error);
-                }
-            });
-
-            loadMembers(currentCommunity, dom);
+            addMember(currentCommunity, input.value, dom);
         }
     };
 }

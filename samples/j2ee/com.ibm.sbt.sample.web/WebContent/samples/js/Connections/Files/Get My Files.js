@@ -1,26 +1,34 @@
-require([ "sbt/connections/FileService", "sbt/dom" ], function(FileService, dom) {
-	dom.byId("loading").style.visibility = "visible";
-	var fileService = new FileService();
-	fileService.getMyFiles({
-		load : function(files) {
-			for (var counter=0; counter<files.length; counter++) {
-				var liElement = document.createElement("li");
-				liElement.setAttribute("id", "li" + counter);
-				document.getElementById("content").appendChild(liElement);
-				var aElement = document.createElement("a");
-				aElement.setAttribute("id", "a" + counter);
-				aElement.setAttribute("href", files[counter].getDownloadLink());
-				document.getElementById("li" + counter).appendChild(aElement);
-				dom.setText("a" + counter, files[counter].getName());
-			}
-			if (files.length == 0) {
-				dom.setText("content", "No Result Found");
-			}
-			dom.byId("loading").style.visibility = "hidden"; 
-		},
-		error : function(error) {
-			dom.setText("content", "Error received. Error Code = " + error.code + ". Error Message = " + error.message);
-			dom.byId("loading").style.visibility = "hidden"; 
-		}
-	});
-});
+require(["sbt/connections/FileService", "sbt/dom"], 
+    function(FileService,dom) {
+        var createRow = function(i) {
+            var table = dom.byId("filesTable");
+            var tr = document.createElement("tr");
+            table.appendChild(tr);
+            var td = document.createElement("td");
+            td.setAttribute("id", "title"+i);
+            tr.appendChild(td);
+            td = document.createElement("td");
+            td.setAttribute("id", "id"+i);
+            tr.appendChild(td);
+        };
+
+        var fileService = new FileService();
+    	fileService.getMyFiles().then(
+            function(files) {
+                if (files.length == 0) {
+                	 dom.setText("content","You are not an owner of any files.");
+                } else {
+                    for(var i=0; i<files.length; i++){
+                        var file = files[i];
+                        createRow(i);
+                        dom.setText("title"+i, file.getTitle()); 
+                        dom.setText("id"+i, file.getId()); 
+                    }
+                }
+            },
+            function(error) {
+                dom.setText("content", "Error code:" +  error.code + ", message:" + error.message);
+            }       
+    	);
+    }
+);

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns:app="http://www.w3.org/2007/app" xmlns:thr="http://purl.org/syndication/thread/1.0"
+	xmlns:fh="http://purl.org/syndication/history/1.0" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"
+	xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns="http://www.w3.org/2005/Atom">
+	<id>tag:profiles.ibm.com,2006:feed</id>
+	<generator version="4.0.0.0" uri="http://www.ibm.com/xmlns/prod/sn">IBM Connections - Profiles
+	</generator>
+	<title type="text">profile with email FrankAdams@renovations.com</title>
+	<author>
+		<name>IBM Connections - Profiles</name>
+	</author>
+	<updated>2013-04-05T18:31:50.714Z</updated>
+	<fh:complete></fh:complete>
+	<link
+		href="https://qs.renovations.com:444/profiles/atom/profileTags.do?targetKey=e0b62b52-6a67-4489-b03b-4eb1f62c73e7&amp;lastMod=1365182136427"
+		rel="http://www.ibm.com/xmlns/prod/sn/tag-cloud" type="application/atomcat+xml"></link>
+	<link
+		href="https://qs.renovations.com:444/profiles/atom/mv/theboard/entries.do?key=e0b62b52-6a67-4489-b03b-4eb1f62c73e7&amp;lastMod=1365182136427"
+		rel="http://www.ibm.com/xmlns/prod/sn/mv/theboard" type="application/atom+xml"></link>
+	<link
+		href="https://qs.renovations.com:444/profiles/atom/mv/theboard/entry/status.do?key=e0b62b52-6a67-4489-b03b-4eb1f62c73e7"
+		rel="http://www.ibm.com/xmlns/prod/sn/status" type="application/atom+xml"></link>
+	<link
+		href="https://qs.renovations.com:444/profiles/atom/connections.do?connectionType=colleague&amp;key=e0b62b52-6a67-4489-b03b-4eb1f62c73e7&amp;lastMod=1365182136427"
+		rel="http://www.ibm.com/xmlns/prod/sn/connections/colleague" type="application/atom+xml"></link>
+	<link
+		href="https://qs.renovations.com:444/profiles/atom/reportingChain.do?key=e0b62b52-6a67-4489-b03b-4eb1f62c73e7"
+		rel="http://www.ibm.com/xmlns/prod/sn/reporting-chain" type="application/atom+xml"></link>
+	<link
+		href="https://qs.renovations.com:444/profiles/atom/profileType.do?type=default"
+		rel="http://www.ibm.com/xmlns/prod/sn/profile-type" type="application/profile-type+xml"></link>
+	<link
+		href="https://qs.renovations.com:444/profiles/atom/profileExtension.do?key=e0b62b52-6a67-4489-b03b-4eb1f62c73e7&amp;extensionId=profileLinks&amp;lastMod=1365182136427"
+		rel="http://www.ibm.com/xmlns/prod/sn/ext-attr" type="text/xml"
+		snx:extensionId="profileLinks" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></link>
+	<link
+		href="https://qs.renovations.com:444/profiles/atom/profile.do?output=hcard&amp;email=FrankAdams%40renovations.com&amp;format=lite"
+		rel="self" type="application/atom+xml"></link>
+	<entry>
+		<id>tag:profiles.ibm.com,2006:entrye0b62b52-6a67-4489-b03b-4eb1f62c73e7
+		</id>
+		<title type="text">Frank Adams</title>
+		<updated>2013-04-05T17:15:36.427Z</updated>
+		<category term="profile" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category>
+		<contributor>
+			<name>Frank Adams</name>
+			<snx:userid>0EE5A7FA-3434-9A59-4825-7A7000278DAA</snx:userid>
+			<email>FrankAdams@renovations.com</email>
+			<snx:userState>active</snx:userState>
+		</contributor>
+		<link
+			href="https://qs.renovations.com:444/profiles/atom/profileEntry.do?key=e0b62b52-6a67-4489-b03b-4eb1f62c73e7"
+			rel="self" type="application/atom+xml"></link>
+		<link
+			href="https://qs.renovations.com:444/profiles/atom/profileType.do?type=default"
+			rel="http://www.ibm.com/xmlns/prod/sn/profile-type" type="application/profile-type+xml"></link>
+		<link
+			href="https://qs.renovations.com:444/profiles/html/profileView.do?key=e0b62b52-6a67-4489-b03b-4eb1f62c73e7"
+			rel="related" type="text/html"></link>
+		<link
+			href="https://qs.renovations.com:444/profiles/photo.do?key=e0b62b52-6a67-4489-b03b-4eb1f62c73e7&amp;lastMod=1365182136427"
+			rel="http://www.ibm.com/xmlns/prod/sn/image" type="image"></link>
+		<link
+			href="https://qs.renovations.com:444/profiles/audio.do?key=e0b62b52-6a67-4489-b03b-4eb1f62c73e7&amp;lastMod=1365182136427"
+			rel="http://www.ibm.com/xmlns/prod/sn/pronunciation" type="audio"></link>
+		<link
+			href="https://qs.renovations.com:444/profiles/vcard/profile.do?key=e0b62b52-6a67-4489-b03b-4eb1f62c73e7"
+			rel="alternate" type="text/directory"></link>
+		<summary type="text">Profile information for Frank Adams</summary>
+		<content type="xhtml">
+			<sp_0:div xmlns="http://www.w3.org/1999/xhtml" xmlns:sp_0="http://www.w3.org/1999/xhtml">
+				<span class="vcard">
+					<div>
+						<img
+							src="https://qs.renovations.com:444/profiles/photo.do?key=e0b62b52-6a67-4489-b03b-4eb1f62c73e7&amp;lastMod=1365182136427"
+							class="photo"></img>
+					</div>
+					<div>
+						<a class="fn url"
+							href="https://qs.renovations.com:444/profiles/atom/profile.do?key=e0b62b52-6a67-4489-b03b-4eb1f62c73e7">Frank Adams</a>
+					</div>
+					<div>
+						<a class="sound url"
+							href="https://qs.renovations.com:444/profiles/audio.do?key=e0b62b52-6a67-4489-b03b-4eb1f62c73e7&amp;lastMod=1365182136427">Pronunciation</a>
+					</div>
+					<div>
+						<a class="email" href="mailto:FrankAdams@renovations.com">FrankAdams@renovations.com</a>
+					</div>
+					<div class="x-groupwareMail" style="display:none">fadams@gmail.com</div>
+					<div class="org">
+						<span class="organization-unit"></span>
+					</div>
+					<div class="role"></div>
+					<div class="title">Chief Operating Officer</div>
+					<div class="x-office">
+						<span class="x-building">Building1</span>
+						<span class="x-floor">Floor1</span>
+						<span class="x-office-number">Office1</span>
+					</div>
+					<div class="tel">
+						<abbr class="type" title="work">Work:</abbr>
+						<span class="value">55555555</span>
+					</div>
+					<div class="x-manager-uid" style="display:none">lsuarez</div>
+					<div class="x-is-manager" style="display:none">N</div>
+					<div class="x-profile-key">e0b62b52-6a67-4489-b03b-4eb1f62c73e7</div>
+					<div class="uid">0EE5A7FA-3434-9A59-4825-7A7000278DAA</div>
+					<div class="x-profile-uid">FAdams</div>
+					<div class="x-lconn-userid">0EE5A7FA-3434-9A59-4825-7A7000278DAA</div>
+					<div class="rev" style="display:none">2013-04-05T17:15:36.427Z</div>
+					<div class="x-profile-type" style="display:none">default</div>
+				</span>
+			</sp_0:div>
+		</content>
+	</entry>
+</feed>

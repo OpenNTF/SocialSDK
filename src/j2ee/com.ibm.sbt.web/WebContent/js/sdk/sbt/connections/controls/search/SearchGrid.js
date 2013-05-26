@@ -24,8 +24,16 @@ define([ "sbt/declare",
          "sbt/config", 
          "dojo/string", 
          "sbt/connections/SearchConstants"], 
-        function(declare, Grid, SearchGridRenderer, AtomStore, sbt, string) {
+        function(declare, Grid, SearchGridRenderer, AtomStore, sbt, string, SearchConstants) {
 
+	// TODO use values from constants and handle authType
+	var searchUrls = {
+	    searchPeople: "/search/atom/search/facets/people",
+        searchTags: "/search/atom/search/facets/tags",
+        searchApps: "/search/atom/search/facets/source",
+        searchAll: "/search/atom/mysearch/results"
+	};
+	
     /**
      * @class SearchGrid
      * @namespace sbt.controls.grid.connections
@@ -36,8 +44,8 @@ define([ "sbt/declare",
         options : {
             "all" : {
                 storeArgs : {
-                    url : sbt.connections.searchUrls.searchAll,
-                    attributes : sbt.connections.searchConstants.xpath_search
+                    url : searchUrls.searchAll,
+                    attributes : SearchConstants.xpath_search
                 },
                 rendererArgs : {
                     type : "all"
@@ -46,8 +54,8 @@ define([ "sbt/declare",
             
             "people" : {
                 storeArgs : {
-                    url : sbt.connections.searchUrls.searchPeople,
-                    attributes : sbt.connections.searchConstants.xpath_search
+                    url : searchUrls.searchPeople,
+                    attributes : SearchConstants.xpath_search
                 },
                 rendererArgs : {
                     type : "people"
@@ -56,8 +64,8 @@ define([ "sbt/declare",
             
             "tags" : {
                 storeArgs : {
-                    url : sbt.connections.searchUrls.searchTags,
-                    attributes : sbt.connections.searchConstants.xpath_search
+                    url : searchUrls.searchTags,
+                    attributes : SearchConstants.xpath_search
                 },
                 rendererArgs : {
                     type : "tags"
@@ -66,8 +74,8 @@ define([ "sbt/declare",
             
             "apps" : {
                 storeArgs : {
-                    url : sbt.connections.searchUrls.searchApps,
-                    attributes : sbt.connections.searchConstants.xpath_search
+                    url : searchUrls.searchApps,
+                    attributes : SearchConstants.xpath_search
                 },
                 rendererArgs : {
                     type : "apps"

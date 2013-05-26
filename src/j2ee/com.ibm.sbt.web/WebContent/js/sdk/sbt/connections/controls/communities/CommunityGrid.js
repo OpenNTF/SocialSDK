@@ -27,6 +27,52 @@ define([ "../../../declare",
          "../../../connections/CommunityConstants"], 
         function(declare, Grid, CommunityGridRenderer, CommunityAction, SemanticTagService, sbt, parameter, communityConstants) {
 
+	// TODO use values from constants and handle authType    	
+	var communitiesUrls = {
+	    communitiesServiceBaseUrl:"/communities/service/atom",
+	    allCommunities : "/communities/service/atom/communities/all",
+        myCommunities : "/communities/service/atom/communities/my",
+		getCommunity : "/community/instance",
+		updateCommunity : "/community/instance",
+		createCommunity : "/communities/my",
+		deleteCommunity : "/community/instance",			
+		addCommunityMember : "/community/members",
+		removeCommunityMember : "/community/members",
+		getCommunityMember : "/community/members"
+	};
+	
+	var xpath_community = {
+		"entry"				:"/a:entry",
+		"communityUuid"		:"snx:communityUuid",
+		"uid"				:"snx:communityUuid",
+		"title"				:"a:title",
+		"summary"			:"a:summary[@type='text']",
+		"communityUrl"      :"a:link[@rel='alternate']/@href",
+		"communityFeedUrl"  :"a:link[@rel='self']/@href",
+		"logoUrl"			:"a:link[@rel='http://www.ibm.com/xmlns/prod/sn/logo']/@href",
+		"tags"				:"a:category/@term",
+		"content"			:"a:content[@type='html']",
+        "memberCount"       :"snx:membercount",
+        "communityType"     :"snx:communityType",
+        "published"         :"a:published",
+        "updated"           :"a:updated",
+        "authorUid"			:"a:author/snx:userid",
+        "authorName"		:"a:author/a:name",
+        "authorEmail"		:"a:author/a:email",
+		"contributorUid"	:"a:contributor/snx:userid",
+		"contributorName"	:"a:contributor/a:name",
+		"contributorEmail"	:"a:contributor/a:email"				
+	};
+	
+	var xpath_feed_community = {
+		"entry"				:"/a:feed/a:entry",	
+		"id"				:"a:id",
+		"totalResults"      :"/a:feed/opensearch:totalResults",
+        "startIndex"        :"/a:feed/opensearch:startIndex",
+        "itemsPerPage"      :"/a:feed/opensearch:itemsPerPage",
+        "title"				:"a:title"            
+	};
+	
     /**
      * @class  CommunityGrid
      * @namespace  sbt.controls.grid.connections
@@ -34,23 +80,24 @@ define([ "../../../declare",
      */
     var CommunityGrid = declare(Grid, {
     	
+    	
     	/**
     	 * Options are for which type of community grid is to be created
     	 */
         options : {
             "public" : {
                 storeArgs : {
-                    url : sbt.connections.communitiesUrls.allCommunities,
-                    attributes : communityConstants.xpath_community,
-                    feedXPath: communityConstants.xpath_feed_community,
+                    url : communitiesUrls.allCommunities,
+                    attributes : xpath_community,
+                    feedXPath: xpath_feed_community,
                     paramSchema: parameter.communities.all
                 },
                 rendererArgs : null
             },
             "my" : {
                 storeArgs : {
-                   url : sbt.connections.communitiesUrls.myCommunities,
-                    attributes : sbt.connections.communityConstants.xpath_community,
+                   url : communitiesUrls.myCommunities,
+                    attributes : xpath_community,
                     paramSchema: parameter.communities.all
                 },
                 rendererArgs : null

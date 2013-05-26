@@ -27,6 +27,50 @@ define([ "../../../declare",
 		 "../../../connections/ProfileConstants"], 
         function(declare, Grid, ProfileGridRenderer, ProfileAction, SemanticTagService, sbt, parameter) {
 
+	// TODO use values from constants and handle authType
+	var profileUrls = {
+	    profile : "/profiles/atom/profile.do", 
+        reportingChain : "/profiles/atom/reportingChain.do?outputType=profile&format=full", 
+        colleagues: "/profiles/atom/connections.do?connectionType=colleague&outputType=profile&format=full" , 
+        peopleManaged: "/profiles/atom/peopleManaged.do",
+        statusUpdates: "/profiles/atom/mv/theboard/entries.do?outputType=profile&format=full",
+        connectionsInCommon: "/profiles/atom/connectionsInCommon.do?connectionType=colleague&outputType=profile&format=full"
+	};
+	
+	var xpath_profile = {
+        "id":               "a:id",
+	 	"entry":			"/a:feed/a:entry",
+		"uid":				"a:contributor/snx:userid",
+		"name":				"a:contributor/a:name",
+		"email":            "a:contributor/a:email",
+		"title":            "a:title",
+		"statusUpdate":     "a:title[@type='text']",
+		"statusLastUpdate": "a:updated",
+		"altEmail":         "a:content/h:div/h:span/h:div[@class='x-groupwareMail']",
+		"photo":			"a:link[@rel='http://www.ibm.com/xmlns/prod/sn/image']/@href",			
+		"jobTitle":			"a:content/h:div/h:span/h:div[@class='title']",
+		"organizationUnit":	"a:content/h:div/h:span/h:div[@class='org']/h:span[@class='organization-unit']",
+		"fnUrl":			"a:content/h:div/h:span/h:div/h:a[@class='fn url']/@href",			
+		"telephoneNumber":	"a:content/h:div/h:span/h:div[@class='tel']/h:span[@class='value']",			
+		"bldgId":			"a:content/h:div/h:span/h:div/h:span[@class='x-building']",			
+		"floor":			"a:content/h:div/h:span/h:div/h:span[@class='x-floor']",
+		"streetAddress":	"a:content/h:div/h:span/h:div/h:div[@class='street-address']",
+		"extendedAddress":	"a:content/h:div/h:span/h:div/h:div[@class='extended-address x-streetAddress2']",
+		"locality":			"a:content/h:div/h:span/h:div/h:span[@class='locality']",
+		"postalCode":		"a:content/h:div/h:span/h:div/h:span[@class='postal-code']",
+		"region":			"a:content/h:div/h:span/h:div/h:span[@class='region']",
+		"countryName":		"a:content/h:div/h:span/h:div/h:div[@class='country-name']",			
+		"soundUrl":			"a:content/h:div/h:span/h:div/h:a[@class='sound url']/@href",	
+		"summary":			"a:summary",
+		"groupwareMail":	"a:content/h:div/h:span/h:div[@class='x-groupwareMail']",				
+		"networkProfileId":	"snx:connection/a:contributor[@snx:rel='http://www.ibm.com/xmlns/prod/sn/connection/target']/snx:userid",
+		"networkProfileName":	"snx:connection/a:contributor[@snx:rel='http://www.ibm.com/xmlns/prod/sn/connection/target']/a:name",
+		"networkProfileEmail":	"snx:connection/a:contributor[@snx:rel='http://www.ibm.com/xmlns/prod/sn/connection/target']/a:email",
+        "totalResults"      :"/a:feed/opensearch:totalResults",
+        "startIndex"        :"/a:feed/opensearch:startIndex",
+        "itemsPerPage"      :"/a:feed/opensearch:itemsPerPage"
+	};
+
     /**
      * @class ProfileGrid
      * @namespace sbt.controls.grid.connections
@@ -43,8 +87,8 @@ define([ "../../../declare",
         options : {
             "reportingChain" : {
                 storeArgs : {
-                    url : sbt.connections.profileUrls.reportingChain,
-                    attributes : sbt.connections.profileConstants.xpath_profile,
+                    url : profileUrls.reportingChain,
+                    attributes : xpath_profile,
                     paramSchema: parameter.profiles.all
                 },
                 rendererArgs : {
@@ -53,8 +97,8 @@ define([ "../../../declare",
             },
             "profile" : {
                 storeArgs : {
-                    url : sbt.connections.profileUrls.profile,
-                    attributes : sbt.connections.profileConstants.xpath_profile,
+                    url : profileUrls.profile,
+                    attributes : xpath_profile,
                     paramSchema: parameter.profiles.all
                 },
                 rendererArgs : {
@@ -63,8 +107,8 @@ define([ "../../../declare",
             },
             "colleagues" : {
                 storeArgs : {
-                     url : sbt.connections.profileUrls.colleagues,
-                    attributes : sbt.connections.profileConstants.xpath_profile,
+                     url : profileUrls.colleagues,
+                    attributes : xpath_profile,
                     paramSchema: parameter.profiles.all
                 },
                 rendererArgs : {
@@ -73,8 +117,8 @@ define([ "../../../declare",
             },
             "peopleManaged" : {
                 storeArgs : {
-                    url : sbt.connections.profileUrls.peopleManaged,
-                    attributes : sbt.connections.profileConstants.xpath_profile,
+                    url : profileUrls.peopleManaged,
+                    attributes : xpath_profile,
                     paramSchema: parameter.profiles.all
                 },
                 rendererArgs : {
@@ -83,8 +127,8 @@ define([ "../../../declare",
             },
             "connectionsInCommon" : {
                 storeArgs : {
-                    url : sbt.connections.profileUrls.connectionsInCommon,
-                    attributes : sbt.connections.profileConstants.xpath_profile,
+                    url : profileUrls.connectionsInCommon,
+                    attributes : xpath_profile,
                     paramSchema: parameter.profiles.all
                 },
                 rendererArgs : {
@@ -93,7 +137,7 @@ define([ "../../../declare",
             },
             "dynamic" : {
                 storeArgs : {
-                    attributes : sbt.connections.profileConstants.xpath_profile
+                    attributes : xpath_profile
                 },
                 rendererArgs : {
                     type : "profile"

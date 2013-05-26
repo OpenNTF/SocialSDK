@@ -14,13 +14,12 @@
  * permissions and limitations under the License.
  */
 /**
- * Social Business Toolkit SDK.
- * Definition of constants for BaseService.
+ * Social Business Toolkit SDK. Definition of constants for BaseService.
  */
-define(["../config"],function(sbt) {
-	return {
-		sbtErrorCodes:{
-			badRequest         :400
-		}
-	};
+define([ "sbt/config", "sbt/base/core" ], function(sbt) {
+    return {
+        sbtErrorCodes : {
+            badRequest : 400
+        }
+    };
 });

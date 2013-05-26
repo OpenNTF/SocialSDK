@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app"
+	xmlns:snx="http://www.ibm.com/xmlns/prod/sn">
+	<id>http://communities.ibm.com:2006/service/atom/community/instance?communityUuid=ad7bdb90-bebd-42a1-be13-a7cd80dc4378
+	</id>
+	<title type="text">Restricted Communty 1</title>
+	<summary type="text">&#xD;
+		This is a test restricted community </summary>
+	<content type="html">&lt;p dir="ltr"&gt;&#xD;
+		This is a test restricted community&lt;/p&gt;</content>
+	<published>2013-03-28T07:20:25.991Z</published>
+	<author>
+		<name>Frank Adams</name>
+		<email>frankadams@renovations.com</email>
+		<snx:userid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">0EE5A7FA-3434-9A59-4825-7A7000278DAA
+		</snx:userid>
+		<snx:userState xmlns:snx="http://www.ibm.com/xmlns/prod/sn">active</snx:userState>
+	</author>
+	<updated>2013-03-28T07:20:27.889Z</updated>
+	<contributor>
+		<name>Frank Adams</name>
+		<email>frankadams@renovations.com</email>
+		<snx:userid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">0EE5A7FA-3434-9A59-4825-7A7000278DAA
+		</snx:userid>
+		<snx:userState xmlns:snx="http://www.ibm.com/xmlns/prod/sn">active</snx:userState>
+	</contributor>
+	<category term="community" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category>
+	<category term="tag1"></category>
+	<category term="tag2"></category>
+	<category term="tag3"></category>
+	<link
+		href="https://qs.renovations.com:444/communities/service/atom/community/instance?communityUuid=ad7bdb90-bebd-42a1-be13-a7cd80dc4378"
+		rel="self"></link>
+	<link
+		href="https://qs.renovations.com:444/communities/service/atom/community/instance?communityUuid=ad7bdb90-bebd-42a1-be13-a7cd80dc4378"
+		rel="edit"></link>
+	<link
+		href="https://qs.renovations.com:444/communities/service/html/communityview?communityUuid=ad7bdb90-bebd-42a1-be13-a7cd80dc4378"
+		rel="alternate" type="text/html"></link>
+	<link
+		href="https://qs.renovations.com:444/communities/service/html/image?communityUuid=ad7bdb90-bebd-42a1-be13-a7cd80dc4378&amp;lastMod=1364455225991"
+		rel="http://www.ibm.com/xmlns/prod/sn/logo"></link>
+	<link
+		href="https://qs.renovations.com:444/communities/service/atom/community/service?communityUuid=ad7bdb90-bebd-42a1-be13-a7cd80dc4378"
+		rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml"></link>
+	<link
+		href="https://qs.renovations.com:444/communities/service/atom/community/members?communityUuid=ad7bdb90-bebd-42a1-be13-a7cd80dc4378"
+		rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml"></link>
+	<link
+		href="https://qs.renovations.com:444/communities/service/atom/community/bookmarks?communityUuid=ad7bdb90-bebd-42a1-be13-a7cd80dc4378"
+		rel="http://www.ibm.com/xmlns/prod/sn/bookmarks" type="application/atom+xml"></link>
+	<link
+		href="https://qs.renovations.com:444/communities/service/atom/community/feeds?communityUuid=ad7bdb90-bebd-42a1-be13-a7cd80dc4378"
+		rel="http://www.ibm.com/xmlns/prod/sn/feeds" type="application/atom+xml"></link>
+	<link
+		href="https://qs.renovations.com:444/communities/service/atom/community/remoteApplications?communityUuid=ad7bdb90-bebd-42a1-be13-a7cd80dc4378"
+		rel="http://www.ibm.com/xmlns/prod/sn/remote-applications" type="application/atom+xml"></link>
+	<link
+		href="https://qs.renovations.com:444/communities/service/atom/community/forum/topics?communityUuid=ad7bdb90-bebd-42a1-be13-a7cd80dc4378"
+		rel="http://www.ibm.com/xmlns/prod/sn/forum-topics" type="application/atom+xml"></link>
+	<link
+		href="https://qs.renovations.com:444/communities/service/atom/community/invites?communityUuid=ad7bdb90-bebd-42a1-be13-a7cd80dc4378"
+		rel="http://www.ibm.com/xmlns/prod/sn/invitations-list" type="application/atom+xml"></link>
+	<snx:membercount xmlns:snx="http://www.ibm.com/xmlns/prod/sn">5</snx:membercount>
+	<snx:communityType xmlns:snx="http://www.ibm.com/xmlns/prod/sn">private
+	</snx:communityType>
+	<snx:handle xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:handle>
+	<link
+		href="https://qs.renovations.com:444/communities/service/atom/community/subcommunities?communityUuid=ad7bdb90-bebd-42a1-be13-a7cd80dc4378"
+		rel="http://www.ibm.com/xmlns/prod/sn/subcommunities" type="application/atom+xml"></link>
+	<snx:preModeration xmlns:snx="http://www.ibm.com/xmlns/prod/sn">false
+	</snx:preModeration>
+	<snx:postModeration xmlns:snx="http://www.ibm.com/xmlns/prod/sn">false
+	</snx:postModeration>
+	<link
+		href="https://qs.renovations.com:444/connections/opensocial/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:ad7bdb90-bebd-42a1-be13-a7cd80dc4378/@all/@all?format=atom"
+		rel="http://www.ibm.com/xmlns/prod/sn/activitystream" type="application/atom+xml"></link>
+	<link
+		href="https://qs.renovations.com:444/connections/opensocial/rest/ublog/urn:lsid:lconn.ibm.com:communities.community:ad7bdb90-bebd-42a1-be13-a7cd80dc4378/@all?format=atom"
+		rel="http://www.ibm.com/xmlns/prod/sn/microblog" type="application/atom+xml"></link>
+	<snx:communityUuid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">ad7bdb90-bebd-42a1-be13-a7cd80dc4378
+	</snx:communityUuid>
+	<snx:communityTheme xmlns:snx="http://www.ibm.com/xmlns/prod/sn"
+		snx:uuid="default"></snx:communityTheme>
+	<link
+		href="https://qs.renovations.com:444/communities/service/atom/community/broadcasts?communityUuid=ad7bdb90-bebd-42a1-be13-a7cd80dc4378"
+		rel="http://www.ibm.com/xmlns/prod/sn/community-broadcasts" type="application/atom+xml"></link>
+</entry>

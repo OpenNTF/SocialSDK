@@ -1,4 +1,4 @@
-require(["sbt/Endpoint", "sbt/json", "sbt/dom", "sbt/xml", "sbt/xpath", "sbt/connections/core"], 
+require(["sbt/Endpoint", "sbt/json", "sbt/dom", "sbt/xml", "sbt/xpath", "sbt/connections/ConnectionsConstants"], 
     function(Endpoint, json, dom, xml, xpath, connections) {
 
     var basicReportingChain = "/profiles/atom/reportingChain.do?userid="; 
@@ -40,14 +40,14 @@ require(["sbt/Endpoint", "sbt/json", "sbt/dom", "sbt/xml", "sbt/xpath", "sbt/con
         if (!reportingChain) {
             return null;
         }
-        return xpath.selectText(reportingChain, approverEmailXPath, connections.namespaces);
+        return xpath.selectText(reportingChain, approverEmailXPath, connections.Namespaces);
     };
     
     getApproverUserId = function() {
         if (!reportingChain) {
             return null;
         }
-        return xpath.selectText(reportingChain, approverUserIdXPath, connections.namespaces);
+        return xpath.selectText(reportingChain, approverUserIdXPath, connections.Namespaces);
     };
 
     // demonstrate calling the method

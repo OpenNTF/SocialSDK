@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app"
+	xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn">
+	<opensearch:totalResults>1</opensearch:totalResults>
+	<opensearch:startIndex>1</opensearch:startIndex>
+	<opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+	<title type="text">Another Test Private Community 3 - Members</title>
+	<id>https://apps.na.collabserv.com/communities/service/atom/community/members?communityUuid=28585bd0-1330-4e49-a46b-2ccb0baa147a
+	</id>
+	<updated>2013-05-09T15:01:29.080Z</updated>
+	<generator uri="http://www.ibm.com/xmlns/prod/sn" version="3.6.1.0">IBM
+		Connections - Communities</generator>
+	<link
+		href="https://apps.lotuslive.com/communities/service/atom/community/members?communityUuid=28585bd0-1330-4e49-a46b-2ccb0baa147a"
+		rel="self"></link>
+	<link
+		href="https://apps.na.collabserv.com/communities/service/atom/community/members?communityUuid=28585bd0-1330-4e49-a46b-2ccb0baa147a&amp;outputType=categories"
+		rel="http://www.ibm.com/xmlns/prod/sn/tag-cloud" type="application/atomcat+xml"></link>
+	<link
+		href="https://apps.na.collabserv.com/communities/service/atom/community/service?communityUuid=28585bd0-1330-4e49-a46b-2ccb0baa147a"
+		rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml"></link>
+	<snx:communityLastMod component="http://www.ibm.com/xmlns/prod/sn/communities">1368111499824
+	</snx:communityLastMod>
+	<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/user">1</snx:rank>
+	<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/group">0</snx:rank>
+	<entry>
+		<id>http://communities.ibm.com:2006/service/atom/community/members?communityUuid=28585bd0-1330-4e49-a46b-2ccb0baa147a&amp;userid=20547574
+		</id>
+		<title type="text">Frank Adams</title>
+		<summary type="text">Frank Adams</summary>
+		<published>2013-05-09T14:58:19.808Z</published>
+		<updated>2013-05-09T14:58:19.808Z</updated>
+		<contributor>
+			<snx:userid>20547574</snx:userid>
+			<snx:userState>active</snx:userState>
+			<name>Frank Adams</name>
+		</contributor>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/members?communityUuid=28585bd0-1330-4e49-a46b-2ccb0baa147a&amp;userid=20547574"
+			rel="self"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/members?communityUuid=28585bd0-1330-4e49-a46b-2ccb0baa147a&amp;userid=20547574"
+			rel="edit"></link>
+		<snx:role component="http://www.ibm.com/xmlns/prod/sn/communities">owner</snx:role>
+		<category term="business-owner" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category>
+		<category term="person" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category>
+		<snx:orgId>20542369</snx:orgId>
+		<content type="xhtml">
+			<div xmlns="http://www.w3.org/1999/xhtml">
+				<span>
+					<div class="x-guid">20547574</div>
+					<div class="x-community-role">owner</div>
+				</span>
+			</div>
+		</content>
+	</entry>
+</feed>

@@ -17,11 +17,11 @@
 /**
  * 
  */
-define([ "../../../declare", "../../../Endpoint", "../../../xml", "../../../xpath", "../../../connections/core",
+define([ "../../../declare", "../../../Endpoint", "../../../xml", "../../../xpath", "../../../connections/ConnectionsConstants",
          "../../../connections/controls/profiles/ProfileGrid", 
          "../../../connections/controls/profiles/ColleagueGridRenderer", 
          "../../../connections/controls/ViewAllAction" ], 
-        function(declare, Endpoint, xml, xpath, core, ProfileGrid, ColleagueGridRenderer, ViewAllAction) {
+        function(declare, Endpoint, xml, xpath, conn, ProfileGrid, ColleagueGridRenderer, ViewAllAction) {
 
     /**
      * @class ColleagueGrid
@@ -89,7 +89,7 @@ define([ "../../../declare", "../../../Endpoint", "../../../xml", "../../../xpat
                         handleAs: "text",
                         load: function(response) {
                             var document = xml.parse(response);
-                            var email = xpath.selectText(document, "/a:entry/a:contributor/a:email", core.namespaces);
+                            var email = xpath.selectText(document, "/a:entry/a:contributor/a:email", conn.Namespaces);
                             self.addProfile(endpoint, email);
                         },
                         error: function(error) {

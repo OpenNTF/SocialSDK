@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -15,1627 +15,1180 @@
  */
 
 /**
- * Javascript APIs for IBM Connections File Service.
+ * JavaScript API for IBM Connections File Service.
+ * 
  * @module sbt.connections.FileService
  */
-define(
-		[ "sbt/declare", "sbt/config", "sbt/lang", "sbt/connections/core", "sbt/xml", "sbt/xpath", "sbt/Endpoint", "sbt/connections/FileConstants",
-				"sbt/validate", "sbt/log", "sbt/util" ],
-		function(declare, cfg, lang, con, xml, xpath, endpoint, constants, validate, log, util) {
 
-			// TODO revisit this
-			function evaluateXpath(data, path) {
-				return data && path ? xpath.selectText(data, path, sbt.connections.namespaces) : null;
-			}
+define([ "sbt/_bridge/declare", "sbt/lang", "sbt/stringUtil", "sbt/Endpoint", "sbt/Promise", "./FileConstants", "../base/BaseService", "../base/BaseEntity", "../base/XmlDataHandler", "sbt/xml" ],
+		function(declare, lang, stringUtil, Endpoint, Promise, consts, BaseService, BaseEntity, XmlDataHandler, xml) {
 
 			/**
-			 * FileEntry class associated with a file document returned in xml feed and also used to represent a file.
-			 * @class FileEntry
-			 * @constructor
-			 * @param {Object} FileService fileService object
-			 * @param {String} id id associated with the file.
+			 * Comment class associated with a file comment.
+			 * 
+			 * @class Comment
+			 * @namespace sbt.connections
 			 */
-			var FileEntry = declare("sbt.connections.FileEntry", null, {
+			var Comment = declare(BaseEntity, {
 
-				_service : null,
-				_data : null,
-				_id : null,
-				fields : {},
-				commentEntries : [],
-				personEntry : null,
-
-				constructor : function(svc, id) {
-					this._id = id;
-					this._service = svc;
-					this.personEntry = new PersonEntry(svc);
-					this.personEntry._data = this._data;
-				},
-				_setData : function(newData) {
-					this._data = newData;
-					this.personEntry._data = newData;
-				},
 				/**
-				 * get method for getting any field in FileEntry
-				 * @method get
-				 * @param {String} fieldName
-				 * @returns {Object} value of the field
-				 */
-				get : function(fieldName) {
-					return this.fields[fieldName] || evaluateXpath(this._data, constants.xpathMapFile[fieldName]);
-				},
-				/**
-				 * set method for setting any field in FileEntry
-				 * @method set
-				 * @param {String} fieldName
-				 * @param {Object} value of the field
-				 */
-				set : function(fieldName, value) {
-					this.fields[fieldName] = value;
-				},
-				/**
-				 * gets the fieldId
+				 * Returned the Comment Id
 				 * @method getId
-				 * @returns {String} Id of the file
+				 * @rturns {String} File Id
 				 */
 				getId : function() {
-					return this._id || this.get("uuid");
+					return this.id ? this.id : this.getAsString("uid");
 				},
 				/**
-				 * gets the download link for file
-				 * @method getDownloadLink
-				 * @returns {String} DownloadLink of the file
-				 */
-				getDownloadLink : function() {
-					return this.get("dwnLink");
-				},
-				/**
-				 * gets the size file
-				 * @method getSize
-				 * @returns {String} size of the file
-				 */
-				getSize : function() {
-					return this.get("size");
-				},
-				/**
-				 * gets the created Date of file
-				 * @method getCreatedDate
-				 * @returns {String} CreatedDate of the file
-				 */
-				getCreatedDate : function() {
-					return this.get("createdDate");
-				},
-				/**
-				 * gets the Category of file
-				 * @method getCategory
-				 * @returns {String} Category of the file
-				 */
-				getCategory : function() {
-					return this.get("category");
-				},
-				/**
-				 * gets the Lock state of file
-				 * @method getLock
-				 * @returns {String} lock state of the file
-				 */
-				getLock : function() {
-					return this.get("lock");
-				},
-				/**
-				 * gets the Name of file
-				 * @method getLock
-				 * @returns {String} lock state of the file
-				 */
-				getName : function() {
-					return this.get("name");
-				},
-				/**
-				 * gets the modifed date of the file
-				 * @method getModified
-				 * @returns {String} modifed date of the file
-				 */
-				getModified : function() {
-					return this.get("modified");
-				},
-				/**
-				 * gets the visibility of the file
-				 * @method getVisibility
-				 * @returns {String} visibility of the file
-				 */
-				getVisibility : function() {
-					return this.get("visibility");
-				},
-				/**
-				 * gets the LibraryType of the file
-				 * @method getLibraryType
-				 * @returns {String} libraryType of the file
-				 */
-				getLibraryType : function() {
-					return this.get("libraryType");
-				},
-				/**
-				 * gets the version Id of the file
-				 * @method getVersionUuid
-				 * @returns {String} version Id of the file
-				 */
-				getVersionUuid : function() {
-					return this.get("versionUuid");
-				},
-				/**
-				 * gets the summary of the file
-				 * @method getSummary
-				 * @returns {String} summary of the file
-				 */
-				getSummary : function() {
-					return this.get("summary");
-				},
-				/**
-				 * gets the restrictedVisibility of the file
-				 * @method getRestrictedVisibility
-				 * @returns {String} restrictedVisibility of the file
-				 */
-				getRestrictedVisibility : function() {
-					return this.get("restrictedVisibility");
-				},
-				/**
-				 * gets the title of the file
+				 * Returns Comment Title
 				 * @method getTitle
-				 * @returns {String} title of the file
+				 * @returns {String} title
 				 */
 				getTitle : function() {
-					return this.get("title");
+					return this.getAsString("title");
 				},
 				/**
-				 * sets the label to be updated for the file
+				 * Returns the Comment Content
+				 * @method getContent
+				 * @returns {String} content
+				 */
+				getContent : function() {
+					return this.getAsString("content");
+				},
+				/**
+				 * Returns The create Date
+				 * @method getCreated
+				 * @returns {Date} create Date
+				 */
+				getCreated : function() {
+					return this.getAsDate("created");
+				},
+				/**
+				 * Returns The modified Date
+				 * @method getModified
+				 * @returns {Date} modified Date
+				 */
+				getModified : function() {
+					return this.getAsDate("modified");
+				},
+				/**
+				 * Returns the version label
+				 * @method getVersionLabel
+				 * @returns {String} version label
+				 */
+				getVersionLabel : function() {
+					return this.getAsString("versionLabel");
+				},
+				/**
+				 * Returns the updated Date
+				 * @method getModified
+				 * @returns {Date} modified Date
+				 */
+				getUpdated : function() {
+					return this.getAsDate("updated");
+				},
+				/**
+				 * Returns the published Date
+				 * @method getPublished
+				 * @returns {Date} modified Date
+				 */
+				getPublished : function() {
+					return this.getAsDate("published");
+				},
+				/**
+				 * Returns the modifier
+				 * @method getModifier
+				 * @returns {Object} modifier
+				 */
+				getModifier : function() {
+					return this.getAsObject([ "modifierName", "modifierUserId", "modifierEmail", "modifierUserState" ]);
+				},
+				/**
+				 * Returns the author
+				 * @method getAuthor
+				 * @returns {Object} author
+				 */
+				getAuthor : function() {
+					return this.getAsObject([ "authorName", "authorUserId", "authorEmail", "authorUserState" ]);
+				},
+				/**
+				 * Returns the language
+				 * @method getLanguage
+				 * @returns {String} language
+				 */
+				getLanguage : function() {
+					return this.getAsString("language");
+				},
+				/**
+				 * Returns the flag for delete with record
+				 * @method getDeleteWithRecord
+				 * @returns {Boolean} delete with record
+				 */
+				getDeleteWithRecord : function() {
+					return this.getAsBoolean("deleteWithRecord");
+				}
+			});
+
+			/**
+			 * File class associated with a file.
+			 * 
+			 * @class File
+			 * @namespace sbt.connections
+			 */
+			var File = declare(BaseEntity, {
+
+				/**
+				 * Returns the file Id
+				 * @method getId
+				 * @returns {String} file Id
+				 */
+				getId : function() {
+					return this.id ? this.id : this._fields.id ? this._fields.id : this.getAsString("uid");
+				},
+				/**
+				 * Returns the label
+				 * @method getLabel
+				 * @returns {String} label
+				 */
+				getLabel : function() {
+					return this.getAsString("label");
+				},
+				/**
+				 * Returns the self URL
+				 * @method getSelfUrl
+				 * @returns {String} self URL
+				 */
+				getSelfUrl : function() {
+					return this.getAsString("selfUrl");
+				},
+				/**
+				 * Returns the alternate URL
+				 * @method getAlternateUrl
+				 * @returns {String} alternate URL
+				 */
+				getAlternateUrl : function() {
+					return this.getAsString("alternateUrl");
+				},
+				/**
+				 * Returns the download URL
+				 * @method getDownloadUrl
+				 * @returns {String} download URL
+				 */
+				getDownloadUrl : function() {
+					return this.getAsString("downloadUrl");
+				},
+				/**
+				 * Returns the type
+				 * @method getType
+				 * @returns {String} type
+				 */
+				getType : function() {
+					return this.getAsString("type");
+				},
+				/**
+				 * Returns the length
+				 * @method getLength
+				 * @returns {Number} length
+				 */
+				getLength : function() {
+					return this.getAsNumber("length");
+				},
+				/**
+				 * Returns the Edit Link
+				 * @method getEditLink
+				 * @returns {String} edit link
+				 */
+				getEditLink : function() {
+					return this.getAsString("editLink");
+				},
+				/**
+				 * Returns the Edit Media Link
+				 * @method getEditMediaLink
+				 * @returns {String} edit media link
+				 */
+				getEditMediaLink : function() {
+					return this.getAsString("editMediaLink");
+				},
+				/**
+				 * Returns the Thumbnail URL
+				 * @method getThumbnailUrl
+				 * @returns {String} thumbnail URL
+				 */
+				getThumbnailUrl : function() {
+					return this.getAsString("thumbnailUrl");
+				},
+				/**
+				 * Returns the Comments URL
+				 * @method getCommentsUrl
+				 * @returns {String} comments URL
+				 */
+				getCommentsUrl : function() {
+					return this.getAsString("commentsUrl");
+				},
+				/**
+				 * Returns the author
+				 * @method getAuthor
+				 * @returns {Object} author
+				 */
+				getAuthor : function() {
+					return this.getAsObject([ "authorName", "authorUserId", "authorEmail", "authorUserState" ]);
+				},
+				/**
+				 * Returns the Title
+				 * @method getTitle
+				 * @returns {String} title
+				 */
+				getTitle : function() {
+					return this.getAsString("title");
+				},
+				/**
+				 * Returns the published date
+				 * @method getPublished
+				 * @returns {Date} published date
+				 */
+				getPublished : function() {
+					return this.getAsDate("published");
+				},
+				/**
+				 * Returns the updated date
+				 * @method getUpdated
+				 * @returns {Date} updated date
+				 */
+				getUpdated : function() {
+					return this.getAsDate("updated");
+				},
+				/**
+				 * Returns the created date
+				 * @method getCreated
+				 * @returns {Date} created date
+				 */
+				getCreated : function() {
+					return this.getAsDate("created");
+				},
+				/**
+				 * Returns the modified date
+				 * @method getModified
+				 * @returns {Date} modified date
+				 */
+				getModified : function() {
+					return this.getAsDate("modified");
+				},
+				/**
+				 * Returns the last accessed date
+				 * @method getLastAccessed
+				 * @returns {Date} last accessed date
+				 */
+				getLastAccessed : function() {
+					return this.getAsDate("lastAccessed");
+				},
+				/**
+				 * Returns the modifier
+				 * @method getModifier
+				 * @returns {Object} modifier
+				 */
+				getModifier : function() {
+					return this.getAsObject([ "modifierName", "modifierUserId", "modifierEmail", "modifierUserState" ]);
+				},
+				/**
+				 * Returns the visibility
+				 * @method getVisibility
+				 * @returns {String} visibility
+				 */
+				getVisibility : function() {
+					return this.getAsString("visibility");
+				},
+				/**
+				 * Returns the library Id
+				 * @method getLibraryId
+				 * @returns {String} library Id
+				 */
+				getLibraryId : function() {
+					return this.getAsString("libraryId");
+				},
+				/**
+				 * Returns the library Type
+				 * @method getLibraryType
+				 * @returns {String} library Type
+				 */
+				getLibraryType : function() {
+					return this.getAsString("libraryType");
+				},
+				/**
+				 * Returns the version Id
+				 * @method getVersionUuid
+				 * @returns {String} version Id
+				 */
+				getVersionUuid : function() {
+					return this.getAsString("versionUuid");
+				},
+				/**
+				 * Returns the version label
+				 * @method getVersionLabel
+				 * @returns {String} version label
+				 */
+				getVersionLabel : function() {
+					return this.getAsString("versionLabel");
+				},
+				/**
+				 * Returns the propagation
+				 * @method getPropagation
+				 * @returns {String} propagation
+				 */
+				getPropagation : function() {
+					return this.getAsString("propagation");
+				},
+				/**
+				 * Returns the recommendations Count
+				 * @method getRecommendationsCount
+				 * @returns {Number} recommendations Count
+				 */
+				getRecommendationsCount : function() {
+					return this.getAsNumber("recommendationsCount");
+				},
+				/**
+				 * Returns the comments Count
+				 * @method getCommentsCount
+				 * @returns {Number} comments Count
+				 */
+				getCommentsCount : function() {
+					return this.getAsNumber("commentsCount");
+				},
+				/**
+				 * Returns the shares Count
+				 * @method getSharesCount
+				 * @returns {Number} shares Count
+				 */
+				getSharesCount : function() {
+					return this.getAsNumber("sharesCount");
+				},
+				/**
+				 * Returns the folders Count
+				 * @method getFoldersCount
+				 * @returns {Number} folders Count
+				 */
+				getFoldersCount : function() {
+					return this.getAsNumber("foldersCount");
+				},
+				/**
+				 * Returns the attachments Count
+				 * @method getAttachmentsCount
+				 * @returns {Number} attachments Count
+				 */
+				getAttachmentsCount : function() {
+					return this.getAsNumber("attachmentsCount");
+				},
+				/**
+				 * Returns the versions Count
+				 * @method getVersionsCount
+				 * @returns {Number} versions Count
+				 */
+				getVersionsCount : function() {
+					return this.getAsNumber("versionsCount");
+				},
+				/**
+				 * Returns the references Count
+				 * @method getReferencesCount
+				 * @returns {Number} references Count
+				 */
+				getReferencesCount : function() {
+					return this.getAsNumber("referencesCount");
+				},
+				/**
+				 * Returns the total Media Size
+				 * @method getTotalMediaSize
+				 * @returns {Number} total Media Size
+				 */
+				getTotalMediaSize : function() {
+					return this.getAsNumber("totalMediaSize");
+				},
+				/**
+				 * Returns the Summary
+				 * @method getSummary
+				 * @returns {String} Summary
+				 */
+				getSummary : function() {
+					return this.getAsString("summary");
+				},
+				/**
+				 * Returns the Content URL
+				 * @method getContentUrl
+				 * @returns {String} Content URL
+				 */
+				getContentUrl : function() {
+					return this.getAsString("contentUrl");
+				},
+				/**
+				 * Returns the Content Type
+				 * @method getContentType
+				 * @returns {String} Content Type
+				 */
+				getContentType : function() {
+					return this.getAsString("contentType");
+				},
+				/**
+				 * Returns the objectTypeId
+				 * @method getObjectTypeId
+				 * @returns {String} objectTypeId
+				 */
+				getObjectTypeId : function() {
+					return this.getAsString("objectTypeId");
+				},
+				/**
+				 * Returns the lock state
+				 * @method getLock
+				 * @returns {String} lock state
+				 */
+				getLock : function() {
+					return this.getAsString("lock");
+				},
+				/**
+				 * Returns the permission ACLs
+				 * @method getAcls
+				 * @returns {String} ACLs
+				 */
+				getAcls : function() {
+					return this.getAsString("acls");
+				},
+				/**
+				 * Returns the hit count
+				 * @method getHitCount
+				 * @returns {Number} hit count
+				 */
+				getHitCount : function() {
+					return this.getAsNumber("hitCount");
+				},
+				/**
+				 * Returns the anonymous hit count
+				 * @method getAnonymousHitCount
+				 * @returns {Number} anonymous hit count
+				 */
+				getAnonymousHitCount : function() {
+					return this.getAsNumber("anonymousHitCount");
+				},
+				/**
+				 * Returns the tags
+				 * @method getTags
+				 * @returns {String} tags
+				 */
+				getTags : function() {
+					return this.getAsString("tags");
+				},
+				/**
+				 * Sets the label
 				 * @method setLabel
-				 * @param {String} label to be updated
+				 * @param {String} label
 				 */
 				setLabel : function(label) {
-					this.set("label", label);
+					return this.setAsString("label", label);
 				},
 				/**
-				 * sets the summary to be updated for the file
+				 * Sets the summary
 				 * @method setSummary
-				 * @param {String} summary to be updated
+				 * @param {String} summary
 				 */
 				setSummary : function(summary) {
-					this.set("summary", summary);
+					return this.setAsString("summary", summary);
 				},
 				/**
-				 * sets the visibility to be updated for the file
+				 * Sets the visibility
 				 * @method setVisibility
-				 * @param {String} visibility to be updated
+				 * @param {String} visibility
 				 */
 				setVisibility : function(visibility) {
-					this.set("visibility", visibility);
+					return this.setAsString("visibility", visibility);
 				},
 				/**
-				 * updates metadata about a file like title, visibility, etc.
-				 * @method update
+				 * Loads the file object with the atom entry associated with the file. By default, a network call is made to load the atom entry document in the file object.
+				 * 
+				 * @method load
 				 * @param {Object} [args] Argument object
-				 * @param {Function} [args.load] The callback function will invoke when the file is updated. The function expects one parameter, the updated
-				 * FileEntry object.
-				 * @param {Function} [args.error] Sometimes the update calls fails due to bad request (400 error). The error parameter is a callback function
-				 * that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the error function is a
-				 * JavaScript Error object indicating what the failure was. From the error object. one can access the javascript library error object, the
-				 * status code and the error message.
-				 * @param {Function} [args.handle] This callback function is called regardless of whether the call to update the file completes or fails. The
-				 * parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to the javascript
-				 * library error object, the status code and the error message.
 				 */
-				update : function(args) {
-					if (!this._service) {
-						this._service = new FileService();
+				load : function(args, isPublic) {
+					// detect a bad request by validating required arguments
+					var fileUuid = this.getId();
+					var promise = this.service.validateField("fileId", fileUuid);
+					if (promise) {
+						return promise;
 					}
-					this._service.updateFile(this, args);
+
+					var self = this;
+					var callbacks = {
+						createEntity : function(service, data, response) {
+							self.dataHandler = new XmlDataHandler({
+								data : data,
+								namespaces : consts.Namespaces,
+								xpath : consts.FileXPath
+							});
+							return self;
+						}
+					};
+
+					var requestArgs = lang.mixin({
+						fileUuid : fileUuid
+					}, args || {});
+					var options = {
+						handleAs : "text",
+						query : requestArgs
+					};
+
+					var url = consts.AtomFileInstance;
+
+					if (isPublic) {
+						url = consts.AtomFileInstancePublic;
+					}
+
+					url = this.service.constructUrl(url, null, {
+						"authType" : this.service.endpoint.authType,
+						"documentId" : fileUuid
+					});
+					return this.service.getEntity(url, options, fileUuid, callbacks, args);
 				},
 				/**
-				 * Gets the comments for a file.
-				 * @method getFileComments
+				 * Save this file
+				 * 
+				 * @method save
 				 * @param {Object} [args] Argument object
-				 * @param {Function} [args.load] The callback function will invoke when the comments are retrieved successfully. The function expects one
-				 * parameter, the list of CommentEntry objects.
-				 * @param {Function} [args.error] Sometimes the call to get comments of a file fails due to bad request (400 error). The error parameter is a
-				 * callback function that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the
-				 * error function is a JavaScript Error object indicating what the failure was. From the error object. one can access the javascript library
-				 * error object, the status code and the error message.
-				 * @param {Function} [args.handle] This callback function is called regardless of whether the call to get the comments completes or fails. The
-				 * parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to the javascript
-				 * library error object, the status code and the error message.
 				 */
-				getComments : function(args) {
-					if (!this._service) {
-						this._service = new FileService();
+				save : function(args) {
+					if (this.getId()) {
+						return this.service.updateFileMetadata(this, args);
 					}
-					this._service.getFileComments(this, args);
+				}
+
+			});
+
+			/**
+			 * Callbacks used when reading a feed that contains File entries.
+			 */
+			var FileFeedCallbacks = {
+				createEntities : function(service, data, response) {
+					return new XmlDataHandler({
+						data : data,
+						namespaces : consts.Namespaces,
+						xpath : consts.FileFeedXPath
+					});
 				},
+				createEntity : function(service, data, response) {
+					var entry = null;
+					if (typeof data == "object") {
+						entry = data;
+					} else {
+						var feedHandler = new XmlDataHandler({
+							data : data,
+							namespaces : consts.Namespaces,
+							xpath : consts.FileXPath
+						});
+						entry = feedHandler.data;
+					}
+					var entryHandler = new XmlDataHandler({
+						data : entry,
+						namespaces : consts.Namespaces,
+						xpath : consts.FileXPath
+					});
+					return new File({
+						service : service,
+						dataHandler : entryHandler
+					});
+				}
+			};
+
+			/**
+			 * Callbacks used when reading a feed that contains File Comment entries.
+			 */
+			var CommentCallbacks = {
+				createEntities : function(service, data, response) {
+					return new XmlDataHandler({
+						data : data,
+						namespaces : consts.Namespaces,
+						xpath : consts.CommentFeedXPath
+					});
+				},
+				createEntity : function(service, data, response) {
+					var entry = null;
+					if (typeof data == "object") {
+						entry = data;
+					} else {
+						var feedHandler = new XmlDataHandler({
+							data : data,
+							namespaces : consts.Namespaces,
+							xpath : consts.CommentXPath
+						});
+						entry = feedHandler.data;
+					}
+					var entryHandler = new XmlDataHandler({
+						data : entry,
+						namespaces : consts.Namespaces,
+						xpath : consts.CommentXPath
+					});
+					return new Comment({
+						service : service,
+						dataHandler : entryHandler
+					});
+				}
+			};
+
+			/**
+			 * FileService class.
+			 * 
+			 * @class FileService
+			 * @namespace sbt.connections
+			 */
+			var FileService = declare(BaseService, {
+
 				/**
-				 * Uploads a new file for logged in user.
-				 * @method upload
+				 * Constructor for FileService
+				 * 
+				 * @constructor
+				 * @param args
+				 */
+				constructor : function(args) {
+					if (!this.endpoint) {
+						this.endpoint = Endpoint.find(args ? (args.endpoint ? args.endpoint : this.getDefaultEndpointName()) : this.getDefaultEndpointName());
+					}
+				},
+
+				/**
+				 * Return the default endpoint name if client did not specify one.
+				 * @returns {String}
+				 */
+				getDefaultEndpointName : function() {
+					return "connections";
+				},
+				
+				/**
+				 * Callbacks used when reading a feed that contains File entries.
+				 */
+				getFileFeedCallbacks : function() {
+					return FileFeedCallbacks;
+				},
+
+				/**
+				 * Callbacks used when reading a feed that contains File Comment entries.
+				 */
+				getCommentFeedCallbacks : function() {
+					return CommentCallbacks;
+				},
+
+				/**
+				 * Returns a File instance from File or JSON or String. Throws an error if the argument was neither.
+				 * @param {Object} [fileOrJsonOrString] the file Object or json String for File
+				 */
+				newFile : function(fileOrJsonOrString) {
+					if (fileOrJsonOrString instanceof File) {
+						return fileOrJsonOrString;
+					} else {
+						if (lang.isString(fileOrJsonOrString)) {
+							fileOrJsonOrString = {
+								id : fileOrJsonOrString
+							};
+						}
+						return new File({
+							service : this,
+							_fields : lang.mixin({}, fileOrJsonOrString)
+						});
+					}
+				},
+
+				/**
+				 * Loads File with the ID passed
+				 * @method getFile
+				 * @param {String} File ID
 				 * @param {Object} [args] Argument object
-				 * @param {Function} [args.load] The callback function will invoke when the file is uploaded successfully. The function expects one parameter,
-				 * the status of upload.
-				 * @param {Function} [args.error] Sometimes the upload calls fails due to bad request (400 error). The error parameter is a callback function
-				 * that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the error function is a
-				 * JavaScript Error object indicating what the failure was. From the error object. one can access the javascript library error object, the
-				 * status code and the error message.
-				 * @param {Function} [args.handle] This callback function is called regardless of whether the call to upload the file completes or fails. The
-				 * parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to the javascript
-				 * library error object, the status code and the error message.
 				 */
-				upload : function(args) {
-					if (!this._service) {
-						this._service = new FileService();
-					}
-					this._service.uploadFile(this, args);
+				getFile : function(fileId, args) {
+					var file = this.newFile({
+						id : fileId
+					});
+					return file.load(args);
+
+				},
+
+				/**
+				 * Get my files from IBM Connections
+				 * 
+				 * @method getMyFiles
+				 * @param {Object} [args] Argument object. Object representing various parameters that can be passed. The parameters must be exactly as they are supported by IBM Connections like ps,
+				 * sortBy etc.
+				 */
+				getMyFiles : function(args) {
+					var options = {
+						method : "GET",
+						handleAs : "text",
+						query : args || {}
+					};
+
+					var url = this.constructUrl(consts.AtomFilesMy, null, {
+						authType : this.endpoint.authType
+					});
+
+					return this.getEntities(url, options, this.getFileFeedCallbacks(), args);
 				},
 				/**
-				 * Adds comment to a file of any user.
-				 * @method addComment
-				 * @param {Object} [args] Argument object
-				 * @param {Function} [args.load] The callback function will invoke when the comment is added successfully to the file. The function expects one
-				 * parameter, the newly created comment object.
-				 * @param {Function} [args.error] Sometimes the update calls fails due to bad request (400 error). The error parameter is a callback function
-				 * that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the error function is a
-				 * JavaScript Error object indicating what the failure was. From the error object. one can access the javascript library error object, the
-				 * status code and the error message.
-				 * @param {Function} [args.handle] This callback function is called regardless of whether the call to update the profile completes or fails. The
-				 * parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to the javascript
-				 * library error object, the status code and the error message.
+				 * Get files shared with logged in user from IBM Connections
+				 * 
+				 * @method getFilesSharedWithMe
+				 * @param {Object} [args] Argument object. Object representing various parameters that can be passed. The parameters must be exactly as they are supported by IBM Connections like ps,
+				 * sortBy etc.
 				 */
-				addComment : function(args) {
-					if (!this._service) {
-						this._service = new FileService();
-					}
-					this._service.addCommentToFile(this, args);
+				getFilesSharedWithMe : function(args) {
+
+					var options = {
+						method : "GET",
+						handleAs : "text",
+						request : args || {},
+						query : lang.mixin({
+							direction : "inbound"
+						}, args ? args : {})
+					};
+
+					var url = this.constructUrl(consts.AtomFilesShared, null, {
+						authType : this.endpoint.authType
+					});
+					return this.getEntities(url, options, this.getFileFeedCallbacks(), args);
 				},
 				/**
-				 * Adds comment to a file of logged in user.
+				 * Get files shared by the logged in user from IBM Connections
+				 * 
+				 * @method getFilesSharedByMe
+				 * @param {Object} [args] Argument object. Object representing various parameters that can be passed. The parameters must be exactly as they are supported by IBM Connections like ps,
+				 * sortBy etc.
+				 */
+				getFilesSharedByMe : function(args) {
+
+					var options = {
+						method : "GET",
+						handleAs : "text",
+						request : args || {},
+						query : lang.mixin({
+							direction : "outbound"
+						}, args ? args : {})
+					};
+
+					var url = this.constructUrl(consts.AtomFilesShared, null, {
+						authType : this.endpoint.authType
+					});
+					return this.getEntities(url, options, this.getFileFeedCallbacks(), args);
+				},
+				/**
+				 * Get public files from IBM Connections
+				 * 
+				 * @method getPublicFiles
+				 * @param {Object} [args] Argument object. Object representing various parameters that can be passed. The parameters must be exactly as they are supported by IBM Connections like ps,
+				 * sortBy etc.
+				 */
+				getPublicFiles : function(args) {
+					var options = {
+						method : "GET",
+						handleAs : "text",
+						request : args || {},
+						query : args || {}
+					};
+
+					var url = this.constructUrl(consts.AtomFilesPublic, null, {
+						authType : this.endpoint.authType
+					});
+					return this.getEntities(url, options, this.getFileFeedCallbacks(), args);
+				},
+				/**
+				 * Get my folders from IBM Connections
+				 * 
+				 * @method getMyFolders
+				 * @param {Object} [args] Argument object. Object representing various parameters that can be passed. The parameters must be exactly as they are supported by IBM Connections like ps,
+				 * sortBy etc.
+				 */
+				getMyFolders : function(args) {
+					var options = {
+						method : "GET",
+						handleAs : "text",
+						query : args || {}
+					};
+
+					var url = this.constructUrl(consts.AtomFoldersMy, null, {
+						authType : this.endpoint.authType
+					});
+					return this.getEntities(url, options, this.getFileFeedCallbacks(), args);
+				},
+				/**
+				 * A feed of comments associated with files to which you have access. You must authenticate this request.
+				 * 
+				 * @method getMyFolders
+				 * @param {Object} [args] Argument object. Object representing various parameters that can be passed. The parameters must be exactly as they are supported by IBM Connections like ps,
+				 * sortBy etc.
+				 */
+				getMyFileComments : function(userId, fileId, args) {
+
+					var promise = this.validateField("fileId", fileId);
+					if (!promise) {
+						promise = this.validateField("userId", userId);
+					}
+					if (promise) {
+						return promise;
+					}
+					var options = {
+						method : "GET",
+						handleAs : "text",
+						query : args || {}
+					};
+
+					var url = this.constructUrl(consts.AtomFileCommentsMy, null, {
+						authType : this.endpoint.authType,
+						userid : userId,
+						"documentId" : fileId
+					});
+					return this.getEntities(url, options, this.getCommentFeedCallbacks(), args);
+				},
+				/**
+				 * A feed of comments associated with all public files. Do not authenticate this request.
+				 * 
+				 * @method getPublicFileComments
+				 * @param {Object} [args] Argument object. Object representing various parameters that can be passed. The parameters must be exactly as they are supported by IBM Connections like ps,
+				 * sortBy etc.
+				 */
+				getPublicFileComments : function(userId, fileId, args) {
+
+					var promise = this.validateField("fileId", fileId);
+					if (!promise) {
+						promise = this.validateField("userId", userId);
+					}
+					if (promise) {
+						return promise;
+					}
+
+					var options = {
+						method : "GET",
+						handleAs : "text",
+						query : args || {}
+					};
+
+					var url = this.constructUrl(consts.AtomAddCommentToFile, null, {
+						authType : this.endpoint.authType,
+						userid : userId,
+						documentId : fileId
+					});
+					return this.getEntities(url, options, this.getCommentFeedCallbacks(), args);
+				},
+
+				/**
+				 * Adds a comment to the specified file.
+				 * 
+				 * @method addCommentToFile
+				 * @param {String} [args.comment] the comment to be added
+				 * @param {Object} [args] Argument object. Object representing various parameters that can be passed. The parameters must be exactly as they are supported by IBM Connections like ps,
+				 * sortBy etc.
+				 */
+				addCommentToFile : function(userId, fileId, comment, args) {
+					var promise = this.validateField("fileId", fileId);
+					if (!promise) {
+						promise = this.validateField("comment", comment);
+					}
+					if (promise) {
+						return promise;
+					}
+					var options = {
+						method : "POST",
+						query : args || {},
+						headers : consts.AtomXmlHeaders,
+						data : this._constructPayloadForComment(false, comment)
+					};
+					var url = null;
+
+					if (!userId) {
+						url = this.constructUrl(consts.AtomAddCommentToMyFile, null, {
+							authType : this.endpoint.authType,
+							documentId : fileId
+						});
+					} else {
+						url = this.constructUrl(consts.AtomAddCommentToFile, null, {
+							authType : this.endpoint.authType,
+							userid : userId,
+							documentId : fileId
+						});
+					}
+					return this.updateEntity(url, options, this.getCommentFeedCallbacks(), args);
+				},
+
+				/**
+				 * Adds a comment to the specified file of logged in user.
+				 * 
 				 * @method addCommentToMyFile
-				 * @param {Object} [args] Argument object
-				 * @param {Function} [args.load] The callback function will invoke when the comment is added successfully to the file. The function expects one
-				 * parameter, the newly created comment object.
-				 * @param {Function} [args.error] Sometimes the update calls fails due to bad request (400 error). The error parameter is a callback function
-				 * that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the error function is a
-				 * JavaScript Error object indicating what the failure was. From the error object. one can access the javascript library error object, the
-				 * status code and the error message.
-				 * @param {Function} [args.handle] This callback function is called regardless of whether the call to update the profile completes or fails. The
-				 * parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to the javascript
-				 * library error object, the status code and the error message.
+				 * @param {String} [args.comment] the comment to be added
+				 * @param {Object} [args] Argument object. Object representing various parameters that can be passed. The parameters must be exactly as they are supported by IBM Connections like ps,
+				 * sortBy etc.
 				 */
-				addCommentToMyFile : function(args) {
-					if (!this._service) {
-						this._service = new FileService();
-					}
-					this._service.addCommentToMyFile(this, args);
+				addCommentToMyFile : function(fileId, comment, args) {
+					return this.addCommentToFile(null, fileId, comment, args);
 				},
+
 				/**
-				 * Lock a file.
-				 * @method lockFile
-				 * @param {Object} [args] Argument object
-				 * @param {Function} [args.load] The callback function will invoke when the file is locked successfully. The function expects one parameter, the
-				 * status of uncock operation.
-				 * @param {Function} [args.error] Sometimes the lock file calls fails due to bad request (400 error). The error parameter is a callback function
-				 * that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the error function is a
-				 * JavaScript Error object indicating what the failure was. From the error object. one can access the javascript library error object, the
-				 * status code and the error message.
-				 * @param {Function} [args.handle] This callback function is called regardless of whether the call to lock the file completes or fails. The
-				 * parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to the javascript
-				 * library error object, the status code and the error message.
+				 * Update the Atom document representation of the metadata for a file from logged in user's library.
+				 * @method updateFileMetadata
+				 * @param {Object} [file] file to be updated
+				 * @param {Object} [args] Argument object. Object representing various parameters that can be passed. The parameters must be exactly as they are supported by IBM Connections like ps,
+				 * sortBy etc.
 				 */
-				lock : function(args) {
-					if (!this._service) {
-						this._service = new FileService();
-					}
-					this._service.lockFile(this, args);
+				updateFileMetadata : function(fileOrJson, args) {
+					var file = this.newFile(fileOrJson);
+					var options = {
+						method : "PUT",
+						query : args || {},
+						headers : consts.AtomXmlHeaders,
+						data : this._constructPayload(file._fields, file.getId())
+					};
+
+					var url = this.constructUrl(consts.AtomUpdateFileMetadata, null, {
+						authType : this.endpoint.authType,
+						documentId : file.getId()
+					});
+					return this.updateEntity(url, options, this.getFileFeedCallbacks(), args);
 				},
+
 				/**
-				 * UnLock a file.
-				 * @method unlockFile
-				 * @param {Object} [args] Argument object
-				 * @param {Function} [args.load] The callback function will invoke when the file is unlocked successfully. The function expects one parameter,
-				 * the status of uncock operation.
-				 * @param {Function} [args.error] Sometimes the lock file calls fails due to bad request (400 error). The error parameter is a callback function
-				 * that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the error function is a
-				 * JavaScript Error object indicating what the failure was. From the error object. one can access the javascript library error object, the
-				 * status code and the error message.
-				 * @param {Function} [args.handle] This callback function is called regardless of whether the call to unlock the file completes or fails. The
-				 * parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to the javascript
-				 * library error object, the status code and the error message.
+				 * Pin a file, by sending a POST request to the myfavorites feed.
+				 * @method pinFile
+				 * @param {String} [fileId] ID of file which needs to be pinned
+				 * @param {Object} [args] Argument object.
 				 */
-				unLock : function(args) {
-					if (!this._service) {
-						this._service = new FileService();
-					}
-					this._service.unlockFile(this, args);
+				pinFile : function(fileId, args) {
+
+					var parameters = args ? lang.mixin({}, args) : {};
+					parameters["itemId"] = fileId;
+
+					var options = {
+						method : "POST",
+						headers : {
+							"X-Update-Nonce" : "{X-Update-Nonce}"
+						}
+					};
+					var url = this.constructUrl(consts.AtomPinFile, parameters, {
+						authType : this.endpoint.authType
+					});
+
+					var callbacks = {
+						createEntity : function(service, data, response) {
+							return "Success";
+						}
+					};
+
+					return this.updateEntity(url, options, callbacks, args);
+
 				},
+
+				/**
+				 * Unpin a file, by sending a DELETE request to the myfavorites feed.
+				 * @method unpinFile
+				 * @param {String} [fileId] ID of file which needs to be pinned
+				 * @param {Object} [args] Argument object.
+				 */
+				unpinFile : function(fileId, args) {
+					var promise = this.validateField("fileId", fileId);
+					if (promise) {
+						return promise;
+					}
+
+					var parameters = args ? lang.mixin({}, args) : {};
+					parameters["itemId"] = fileId;
+
+					var options = {
+						method : "DELETE",
+						headers : {
+							"X-Update-Nonce" : "{X-Update-Nonce}"
+						}
+					};
+					var url = this.constructUrl(consts.AtomPinFile, parameters, {
+						authType : this.endpoint.authType
+					});
+
+					return this.deleteEntity(url, options, fileId, args);
+
+				},
+
+				/**
+				 * Add a file or files to a folder.
+				 * 
+				 * You cannot add a file from your local directory to a folder; the file must already have been uploaded to the Files application. To add a file to a folder you must be an editor of
+				 * the folder.
+				 * 
+				 * @method addFilesToFolder
+				 * @param {Object} [args] Argument object
+				 * @param {String} [folderId] the Id of the folder
+				 * @param {List} [fileIds] list of file Ids to be added to the folder
+				 * @param {Object} [args] Argument object.
+				 */
+				addFilesToFolder : function(fileIds, folderId, args) {
+
+					var promise = this.validateField("fileIds", fileIds);
+					if (!promise) {
+						promise = this.validateField("folderId", folderId);
+					}
+
+					var options = {
+						method : "POST",
+						headers : {
+							"X-Update-Nonce" : "{X-Update-Nonce}"
+						}
+					};
+					var url = this.constructUrl(consts.AtomAddFilesToFolder, null, {
+						authType : this.endpoint.authType,
+						collectionId : folderId
+					});
+
+					var char = "?";
+					for ( var counter in fileIds) {
+						url += char + "itemId=" + fileIds[counter];
+						char = "&";
+					}
+
+					var callbacks = {
+						createEntity : function(service, data, response) {
+							return "Success";
+						}
+					};
+
+					return this.updateEntity(url, options, callbacks, args);
+
+				},
+
+				/**
+				 * Gets the files pinned by the logged in user.
+				 * @method getMyPinnedFiles
+				 * @param {Object} [args] Argument object for the additional parameters like pageSize etc.
+				 */
+				getMyPinnedFiles : function(args) {
+
+					var options = {
+						method : "GET",
+						handleAs : "text",
+						query : args || {}
+					};
+
+					var url = this.constructUrl(consts.AtomFilesMyPinned, null, {
+						authType : this.endpoint.authType,
+					});
+					return this.getEntities(url, options, this.getFileFeedCallbacks(), args);
+				},
+
 				/**
 				 * Delete a file.
 				 * @method deleteFile
+				 * @param {String} fileId Id of the file which needs to be deleted
 				 * @param {Object} [args] Argument object
-				 * @param {Function} [args.load] The callback function will invoke when the file is deleted successfully. The function expects one parameter,
-				 * the status of the delete openration.
-				 * @param {Function} [args.error] Sometimes the delete calls fails due to bad request (400 error). The error parameter is a callback function
-				 * that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the error function is a
-				 * JavaScript Error object indicating what the failure was. From the error object. one can access the javascript library error object, the
-				 * status code and the error message.
-				 * @param {Function} [args.handle] This callback function is called regardless of whether the call to delete the File completes or fails. The
-				 * parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to the javascript
-				 * library error object, the status code and the error message.
 				 */
-				deleteFile : function(args) {
-					if (!this._service) {
-						this._service = new FileService();
+				deleteFile : function(fileId, args) {
+
+					var promise = this.validateField("fileId", fileId);
+					if (promise) {
+						return promise;
 					}
-					this._service.deleteFile(this, args);
-				},
-				/**
-				 * Get the loaded comments for the File
-				 * @returns {Object} commentEntries
-				 */
-				getComments : function() {
-					return this.commentEntries;
-				},
-				/**
-				 * Get the person entry for author and modifier for the File
-				 * @returns {Object} PersonEntry
-				 */
-				getPersonEntry : function() {
-					return this.personEntry;
-				},
-				validate : function(className, methodName, args, validateMap) {
-					if (validateMap.isValidateId && !(validate._validateInputTypeAndNotify(className, methodName, "File Id", this._id, "string", args))) {
-						return false;
-					}
-					if (validateMap.isValidateUser
-							&& (!(validate._validateInputTypeAndNotify(className, methodName, "File.personEntry", this.personEntry,
-									"sbt.connections.PersonEntry", args)) || !(validate._validateInputTypeAndNotify(className, methodName, "File.UserId",
-									this.personEntry ? this.personEntry.getAuthorId() : null, "string", args)))) {
-						return false;
-					}
-					return true;
-				}
-			});
 
-			/**
-			 * CommentEntry class associated with a Coment document returned in xml feed and also used to represent a Comment.
-			 * @class CommentEntry
-			 * @constructor
-			 * @param {Object} FileService fileService object
-			 * @param {String} id id associated with the comment.
-			 */
-			var CommentEntry = declare("sbt.connections.CommentEntry", null, {
-
-				_service : null,
-				_data : null,
-				_id : null,
-				fields : {},
-
-				constructor : function(svc, id) {
-					this._id = id;
-					this._service = svc;
-				},
-				_setData : function(newData) {
-					this._data = newData;
-				},
-				get : function(fieldName) {
-					return this.fields[fieldName] || evaluateXpath(this._data, constants.xpathMapComment[fieldName]);
-				},
-				set : function(fieldName, value) {
-					this.fields[fieldName] = value;
-				},
-				/**
-				 * gets the comment Id
-				 * @method getId
-				 * @returns {String} Id of the Comment
-				 */
-				getId : function() {
-					return this._id || this.get("uuid");
-				},
-				/**
-				 * gets the comment text
-				 * @method getComment
-				 * @returns {String} text of the Comment
-				 */
-				getComment : function() {
-					return this.get("comment");
-				}
-			});
-
-			/**
-			 * PersonEntry class associated with a Person document returned in xml feed and also used to represent a file.
-			 * @class PersonEntry
-			 * @constructor
-			 * @param {Object} FileService fileService object
-			 * @param {String} id userId of the person.
-			 */
-			var PersonEntry = declare("sbt.connections.PersonEntry", null, {
-
-				_service : null,
-				_data : null,
-				_id : null,
-				fields : {},
-
-				constructor : function(svc, id) {
-					this._id = id;
-					this._service = svc;
-				},
-				get : function(fieldName) {
-					return this.fields[fieldName] || evaluateXpath(this._data, constants.xpathMapPerson[fieldName]);
-				},
-				set : function(fieldName, value) {
-					this.fields[fieldName] = value;
-				},
-				/**
-				 * gets the author's userId
-				 * @method getAuthorId
-				 * @returns {String} author Id of the file
-				 */
-				getAuthorId : function() {
-					return this._id || this.get("userUuid");
-				},
-				/**
-				 * gets the author's name
-				 * @method getAuthorName
-				 * @returns {String} author name of the file
-				 */
-				getAuthorName : function() {
-					return this.get("author");
-				},
-				/**
-				 * gets the author's email
-				 * @method getAuthorEmail
-				 * @returns {String} author email of the file
-				 */
-				getAuthorEmail : function() {
-					return this.get("email");
-				},
-				/**
-				 * gets the author's user state
-				 * @method getAuthorUserState
-				 * @returns {String} author's user state of the file
-				 */
-				getAuthorUserState : function() {
-					return this.get("userState");
-				},
-				/**
-				 * gets the modifier's user Id
-				 * @method getModifierId
-				 * @returns {String} modifier's user Id of the file
-				 */
-				getModifierId : function() {
-					return this.get("userUuidModifier");
-				},
-				/**
-				 * gets the modifier's Name
-				 * @method getModifierName
-				 * @returns {String} modifier's name of the file
-				 */
-				getModifierName : function() {
-					return this.get("nameModifier");
-				},
-				/**
-				 * gets the modifier's Email
-				 * @method getModifierEmail
-				 * @returns {String} modifier's email of the file
-				 */
-				getModifierEmail : function() {
-					return this.get("emailModifier");
-				},
-				/**
-				 * gets the modifier's user state
-				 * @method getModifierUserState
-				 * @returns {String} modifier's user state of the file
-				 */
-				getModifierUserState : function() {
-					return this.get("userStateModifier");
-				}
-			});
-
-			var _SubFilters = declare("sbt.connections.FileEntry._SubFilters", null, {
-				DOCUMENT : "/document",
-				COMMENT : "/comment",
-				COLLECTION : "/collection",
-				LIBRARY : "/userlibrary",
-				userId : null,
-				documentId : null,
-				commentId : null,
-				collectionId : null,
-
-				getUserId : function() {
-					return this.userId;
-				},
-				setUserId : function(id) {
-					this.userId = id;
-				},
-				getDocumentId : function() {
-					return this.documentId;
-				},
-				setDocumentId : function(docId) {
-					this.documentId = docId;
-				},
-				getCommentId : function() {
-					return this.commentId;
-				},
-				setCommentId : function(id) {
-					this.commentId = id;
-				},
-				getCollectionId : function() {
-					return this.collectionId;
-				},
-				setCollectionId : function(id) {
-					this.collectionId = id;
-				}
-			});
-
-			/**
-			 * File service class associated with files API of IBM Connections.
-			 * @class FileService
-			 * @constructor
-			 * @param {Object} parameters Parameter object
-			 * @param {String} [parameters.endpoint=connections] Endpoint to be used by FileService.
-			 */
-			var FileService = declare(
-					"sbt.connections.FileService",
-					null,
-					{
-						_endpoint : null,
-						_file : null,
-						_endpointName : null,
-						_nonce : null,
-
-						constructor : function(parameters) {
-							parameters = parameters || {};
-							this._endpointName = parameters.endpoint || "connections";
-							this._endpoint = endpoint.find(this._endpointName);
-						},
-						_notifyCb : function(args, param) {
-
-							if (args) {
-								if (args.load)
-									args.load(param);
-								else if (args.handle)
-									args.handle(param);
-							} else {
-								log.error("Callbacks not defined. Return Value={0}", param);
-							}
-						},
-
-						/**
-						 * Getter for FileEntry Object representing File Entry Document or used to do File API operations.
-						 * @method getFile
-						 * @param {Object} [args=null] Argument object
-						 * @param {String} [args.id=null] FileId of the file, default null in case of new File created.
-						 * @param {Boolean} [args.loadIt=true] Loads the FileEntry object with file entry document. If an empty FileEntry object associated with
-						 * a FileEntry (with no file entry document), then the load method must be called with this parameter set to false. By default, this
-						 * parameter is true.
-						 * @param {Function} [args.load] The function invokes when the file is loaded successfully from the server. The function expects to
-						 * receive one parameter, the loaded FileEntry object.
-						 * @param {Function} [args.error] Sometimes the getFile call fails with bad request such as 400 or server errors such as 500. The error
-						 * parameter is another callback function that is only invoked when an error occurs. This allows to control what happens when an error
-						 * occurs without having to put a lot of logic into your load function to check for error conditions. The parameter passed to the error
-						 * function is a JavaScript Error object indicating what the failure was. From the error object. one can get access to the javascript
-						 * library error object, the status code and the error message.
-						 * @param {Function} [args.handle] This callback is called regardless of whether the call to get the file completes or fails. The
-						 * parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to the
-						 * javascript library error object, the status code and the error message.
-						 */
-						getFile : function(args) {
-							if (!args) {
-								args = {};
-							}
-							var file = new FileEntry(this, args.id);
-							if (args.loadIt == null || args.loadIt == undefined || args.loadIt == true) {
-								this._loadFile(file, args);
-							}
-							return file;
-						},
-
-						/**
-						 * Getter for CommentEntry Object.
-						 * @method getComment
-						 * @param {String} [args.Id=null] CommentId of the Comment, default null in case of a new comment created.
-						 */
-						getComment : function(id) {
-							return new CommentEntry(this, id);
-						},
-
-						_executeGet : function(args, url, file) {
-
-							var _self = this;
-							this._endpoint.xhrGet({
-								serviceUrl : url,
-								handleAs : "text",
-								load : function(data) {
-									if (args.responseFormat && args.responseFormat == constants.responseFormat.NON_XML_FORMAT) {
-										_self._notifyCb(args, data);
-									} else {
-										var entries = _self._parseXmlData(data, file);
-										if (args.responseFormat && args.responseFormat == constants.responseFormat.SINGLE && entries.length == 1) {
-											_self._notifyCb(args, entries[0]);
-										} else {
-											_self._notifyCb(args, entries);
-										}
-									}
-								},
-								error : function(error) {
-									util.notifyError(error, args);
-								}
-							});
-
-						},
-
-						_executePut : function(args, url, headers, payload) {
-
-							var _self = this;
-
-							this._endpoint.xhrPut({
-								serviceUrl : url,
-								putData : payload,
-								headers : headers,
-								load : function(data) {
-									if (args.responseFormat && args.responseFormat == constants.responseFormat.NON_XML_FORMAT) {
-										_self._notifyCb(args, data);
-									} else {
-										var entries = _self._parseXmlData(data);
-										if (args.responseFormat && args.responseFormat == constants.responseFormat.SINGLE && entries.length == 1) {
-											_self._notifyCb(args, entries[0]);
-										} else {
-											_self._notifyCb(args, entries);
-										}
-									}
-								},
-								error : function(error) {
-									util.notifyError(error, args);
-								}
-							});
-
-						},
-
-						_executePost : function(args, url, headers, payload) {
-
-							var _self = this;
-
-							this._endpoint.xhrPost({
-								serviceUrl : url,
-								postData : payload,
-								headers : headers,
-								load : function(data) {
-									if (args.responseFormat && args.responseFormat == constants.responseFormat.NON_XML_FORMAT) {
-										_self._notifyCb(args, data);
-									} else {
-										var entries = _self._parseXmlData(data);
-										if (args.responseFormat && args.responseFormat == constants.responseFormat.SINGLE && entries.length == 1) {
-											_self._notifyCb(args, entries[0]);
-										} else {
-											_self._notifyCb(args, entries);
-										}
-									}
-								},
-								error : function(error) {
-									util.notifyError(error, args);
-								}
-							});
-
-						},
-
-						_parseXmlData : function(data, file) {
-							var entries = [];
-							if (!data || data == "") {
-								return entries;
-							}
-							var xmlData = xml.parse(data);
-
-							var entryNodes = xpath.selectNodes(xmlData, constants.xPathEntry, sbt.connections.namespaces);
-							if (entryNodes.length == 0) {
-								entryNodes = xpath.selectNodes(xmlData, constants.xpathMapFile["entry"], sbt.connections.namespaces);
-							}
-							for ( var count = 0; count < entryNodes.length; count++) {
-								var node = entryNodes[count];
-								var entry = null;
-								var category = evaluateXpath(node, constants.xpathMapFile["category"]);
-								var id = evaluateXpath(node, constants.xpathMapFile["uuid"]);
-								if (category == "comment") {
-									entry = new CommentEntry(this, id);
-									if (file) {
-										file.commentEntries.push(entry);
-									}
-								} else {
-									entry = new FileEntry(this, id);
-								}
-								entry._setData(node);
-								entries.push(entry);
-							}
-							return entries;
-						},
-
-						_executeDelete : function(args, url, headers) {
-							var _self = this;
-							this._endpoint.xhrDelete({
-								serviceUrl : url,
-								headers : headers,
-								load : function(data) {
-									_self._notifyCb(args, "Success");
-								},
-								error : function(error, ioargs) {
-									util.notifyError(error, args);
-								}
-							});
-						},
-
-						_constructUrl : function(baseUrl, accessType, category, view, filter, subFilters, resultType, parameters) {
-
-							var url = baseUrl + constants.SEPARATOR + this._endpoint.authType;
-
-							if (!accessType && !category && !view && !filter && !subFilters) {
-								accessType = constants.accessType.AUTHENTICATED;
-								category = constants.categories.MYLIBRARY;
-								view = constants.views.FILES;
-								filter = constants.filters.NULL;
-							}
-
-							if (accessType)
-								url = url + accessType;
-							if (category)
-								url = url + category;
-							if (view)
-								url = url + view;
-							if (filter)
-								url = url + filter;
-
-							if (subFilters) {
-								if (subFilters.getCollectionId())
-									url = url + subFilters.COLLECTION + constants.SEPARATOR + subFilters.getCollectionId();
-								if (subFilters.getUserId())
-									url = url + subFilters.LIBRARY + constants.SEPARATOR + subFilters.getUserId();
-								if (subFilters.getDocumentId())
-									url = url + subFilters.DOCUMENT + constants.SEPARATOR + subFilters.getDocumentId();
-								if (subFilters.getCommentId())
-									url = url + subFilters.COMMENT + constants.SEPARATOR + subFilters.getCommentId();
-							}
-
-							if (resultType)
-								url = url + resultType;
-
-							if (parameters) {
-								var c = "?";
-								for ( var key in parameters) {
-									url = url + c + encodeURIComponent(key) + "=" + encodeURIComponent(parameters[key]);
-									c = "&";
-								}
-							}
-							return url;
-						},
-
-						_constructPayload : function(payloadMap, documentId) {
-							var payload = "<entry xmlns=\"http://www.w3.org/2005/Atom\"><category term=\"document\" label=\"document\" scheme=\"tag:ibm.com,2006:td/type\"></category>";
-							payload += "<id>urn:lsid:ibm.com:td:" + xml.encodeXmlEntry(documentId) + "</id>";
-							if (payloadMap) {
-								for (key in payloadMap) {
-									var value = payloadMap[key];
-									if (key == "label") {
-										payload += "<label xmlns=\"" + con.namespaces.td + "\">" + xml.encodeXmlEntry(value) + "</label>";
-										payload += "<title>" + xml.encodeXmlEntry(value) + "</title>";
-									} else if (key == "summary") {
-										payload += "<summary type=\"text\">" + xml.encodeXmlEntry(value) + "</summary>";
-									} else if (key == "visibility") {
-										payload += "<visibility xmlns=\"" + con.namespaces.td + "\">" + xml.encodeXmlEntry(value) + "</visibility>";
-									}
-								}
-							}
-
-							payload += "</entry>";
-							log.debug("Payload for file update " + payload);
-							return payload;
-						},
-						_constructPayloadForComment : function(isDelete, comment) {
-							var payload = "<entry xmlns=\"http://www.w3.org/2005/Atom\">";
-							payload += "<category term=\"comment\" label=\"comment\" scheme=\"tag:ibm.com,2006:td/type\"/>";
-
-							if (isDelete == true)
-								payload += "<deleteWithRecord xmlns=\"" + con.namespaces.td + "\">false</deleteWithRecord>";
-							else
-								payload += "<content type=\"text/plain\">" + xml.encodeXmlEntry(comment) + "</content>";
-							payload += "</entry>";
-							log.debug("Payload for Comment" + payload);
-							return payload;
-						},
-
-						/**
-						 * Gets the files of the logged in user.
-						 * @method getMyFiles
-						 * @param {Object} [args] Argument object
-						 * @param {Function} [args.load] The callback function will invoke when the files of the user are retrieved successfully. The function
-						 * expects one parameter, a list of FileEntry objects.
-						 * @param {Function} [args.error] Sometimes the call to get files of the user fails due to bad request (400 error). The error parameter
-						 * is a callback function that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter
-						 * passed to the error function is a JavaScript Error object indicating what the failure was. From the error object. one can access the
-						 * javascript library error object, the status code and the error message.
-						 * @param {Function} [args.handle] This callback function is called regardless of whether the call to get files of the user completes or
-						 * fails. The parameter passed to this callback is the list of FileEntry objects (or error object). From the error object. one can get
-						 * access to the javascript library error object, the status code and the error message.
-						 * @param {Object} [args.parameters] The additional parameters like pageSize etc.
-						 */
-						getMyFiles : function(args) {
-							var accessType = constants.accessType.AUTHENTICATED;
-							var category = constants.categories.MYLIBRARY;
-							var resultType = constants.resultType.FEED;
-							var url = this._constructUrl(constants.baseUrl.FILES, accessType, category, null, null, null, resultType, args.parameters);
-							this._executeGet(args, url);
-						},
-
-						/**
-						 * Gets the files shared with the logged in user.
-						 * @method getFilesSharedWithMe
-						 * @param {Object} [args] Argument object
-						 * @param {Function} [args.load] The callback function will invoke when the files shared with the user are retrieved successfully. The
-						 * function expects one parameter, a list of FileEntry objects.
-						 * @param {Function} [args.error] Sometimes the call to get files shared with the user fails due to bad request (400 error). The error
-						 * parameter is a callback function that is only invoked when an error occurs. This allows to write logic when an error occurs. The
-						 * parameter passed to the error function is a JavaScript Error object indicating what the failure was. From the error object. one can
-						 * access the javascript library error object, the status code and the error message.
-						 * @param {Function} [args.handle] This callback function is called regardless of whether the call to get files shared with the user
-						 * completes or fails. The parameter passed to this callback is the list of FileEntry objects (or error object). From the error object.
-						 * one can get access to the javascript library error object, the status code and the error message.
-						 * @param {Object} [args.parameters] The additional parameters like pageSize etc.
-						 */
-						getFilesSharedWithMe : function(args) {
-							var accessType = constants.accessType.AUTHENTICATED;
-							var view = constants.views.FILES;
-							var filter = constants.filters.SHARED;
-							var resultType = constants.resultType.FEED;
-							var parameters = args.parameters ? lang.mixin({}, args.parameters) : {};
-							parameters["direction"] = "inbound";
-							var url = this._constructUrl(constants.baseUrl.FILES, accessType, null, view, filter, null, resultType, parameters);
-							this._executeGet(args, url);
-						},
-
-						/**
-						 * Gets the files shared by the logged in user.
-						 * @method getFilesSharedByMe
-						 * @param {Object} [args] Argument object
-						 * @param {Function} [args.load] The callback function will invoke when the files shared by the user are retrieved successfully. The
-						 * function expects one parameter, a list of FileEntry objects.
-						 * @param {Function} [args.error] Sometimes the call to get files shared by the user fails due to bad request (400 error). The error
-						 * parameter is a callback function that is only invoked when an error occurs. This allows to write logic when an error occurs. The
-						 * parameter passed to the error function is a JavaScript Error object indicating what the failure was. From the error object. one can
-						 * access the javascript library error object, the status code and the error message.
-						 * @param {Function} [args.handle] This callback function is called regardless of whether the call to get files shared by the user
-						 * completes or fails. The parameter passed to this callback is the list of FileEntry objects (or error object). From the error object.
-						 * one can get access to the javascript library error object, the status code and the error message.
-						 * @param {Object} [args.parameters] The additional parameters like pageSize etc.
-						 */
-						getFilesSharedByMe : function(args) {
-							var accessType = constants.accessType.AUTHENTICATED;
-							var view = constants.views.FILES;
-							var filter = constants.filters.SHARED;
-							var resultType = constants.resultType.FEED;
-							var parameters = args.parameters ? lang.mixin({}, args.parameters) : {};
-							parameters["direction"] = "outbound";
-							var url = this._constructUrl(constants.baseUrl.FILES, accessType, null, view, filter, null, resultType, parameters);
-							this._executeGet(args, url);
-						},
-						/**
-						 * Gets the files pinned by the logged in user.
-						 * @method getFilespinnedByMe
-						 * @param {Object} [args] Argument object
-						 * @param {Function} [args.load] The callback function will invoke when the files pinned by the user are retrieved successfully. The
-						 * function expects one parameter, a list of FileEntry objects.
-						 * @param {Function} [args.error] Sometimes the call to get files pinned by the user fails due to bad request (400 error). The error
-						 * parameter is a callback function that is only invoked when an error occurs. This allows to write logic when an error occurs. The
-						 * parameter passed to the error function is a JavaScript Error object indicating what the failure was. From the error object. one can
-						 * access the javascript library error object, the status code and the error message.
-						 * @param {Function} [args.handle] This callback function is called regardless of whether the call to get files pinned by the user
-						 * completes or fails. The parameter passed to this callback is the list of FileEntry objects (or error object). From the error object.
-						 * one can get access to the javascript library error object, the status code and the error message.
-						 * @param {Object} [args.parameters] The additional parameters like pageSize etc.
-						 */
-						getMyPinnedFiles : function(args) {
-							
-							var accessType = constants.accessType.AUTHENTICATED;
-							var view = constants.views.FILES;
-							var filter = constants.filters.NULL;
-							var resultType = constants.resultType.FEED;	
-							var category = constants.categories.PINNED;
-							var url = this._constructUrl(constants.baseUrl.FILES, accessType, category, view, filter, null, resultType, args.parameters);
-							this._executeGet(args, url);
-						},
-
-						/**
-						 * Gets the comments for a file.
-						 * @method getFileComments
-						 * @param {Object} file FileEntry object whose comments you want to get. Use FileService.getFile() with loadIt true to create this
-						 * object.
-						 * @param {Object} [args] Argument object
-						 * @param {Function} [args.load] The callback function will invoke when the comments are retrieved successfully. The function expects
-						 * one parameter, the list of CommentEntry objects.
-						 * @param {Function} [args.error] Sometimes the call to get comments of a file fails due to bad request (400 error). The error parameter
-						 * is a callback function that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter
-						 * passed to the error function is a JavaScript Error object indicating what the failure was. From the error object. one can access the
-						 * javascript library error object, the status code and the error message.
-						 * @param {Function} [args.handle] This callback function is called regardless of whether the call to get the comments completes or
-						 * fails. The parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to
-						 * the javascript library error object, the status code and the error message.
-						 * @param {Object} [args.parameters] The additional parameters like pageSize etc.
-						 */
-						getFileComments : function(file, args) {
-							if (!validate._validateInputTypeAndNotify("FileService", "getFileComments", "File", file, "sbt.connections.FileEntry", args)) {
-								return;
-							}
-							if (!file.validate("FileService", "getFileComments", args, {
-								isValidateId : true,
-								isValidateUser : true
-							})) {
-								return;
-							}
-
-							var accessType = constants.accessType.AUTHENTICATED;
-							var subFilters = new _SubFilters();
-							subFilters.setUserId(file.getPersonEntry().getAuthorId());
-							subFilters.setDocumentId(file.getId());
-							var resultType = constants.resultType.FEED;
-							var parameters = args.parameters ? lang.mixin({}, args.parameters) : {};
-							parameters["category"] = "comment";
-							var url = this._constructUrl(constants.baseUrl.FILES, accessType, null, null, null, subFilters, resultType, parameters);
-							this._executeGet(args, url, file);
-
-						},
-
-						/**
-						 * Uploads a new file for logged in user.
-						 * @method uploadFile						
-						 * @param {Object} [args] Argument object
-						 * @param {Objecr} [args.fileControlId] The Id of html control
-						 * @param {Object} [args.fileControl] The html control
-						 * @param {Function} [args.load] The callback function will invoke when the file is uploaded successfully. The function expects one
-						 * parameter, the status of upload.
-						 * @param {Function} [args.error] Sometimes the upload calls fails due to bad request (400 error). The error parameter is a callback
-						 * function that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the
-						 * error function is a JavaScript Error object indicating what the failure was. From the error object. one can access the javascript
-						 * library error object, the status code and the error message.
-						 * @param {Function} [args.handle] This callback function is called regardless of whether the call to upload the file completes or
-						 * fails. The parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to
-						 * the javascript library error object, the status code and the error message.
-						 * @param {Object} [args.parameters] The additional parameters
-						 */
-						uploadFile : function(args) {
-
-							if (!validate._validateInputTypeAndNotify("FileService", "uploadFile", "args", args, 'object', args)) {
-								return;
-							}
-							var files = null;
-							var filePath = null;
-
-							if (args.fileControlId) {
-								var fileControl = document.getElementById(args.fileControlId);
-								filePath = fileControl.value;
-								files = fileControl.files;
-							} else if (args.fileControl) {
-								filePath = args.fileControl.value;
-								files = args.fileControl.files;
-							} else {
-								util.notifyError("Either File Control of File Control ID is required for upload", args);
-							}
-							
-							var index = filePath.lastIndexOf("\\");
-							if (index == -1) {
-								index = filePath.lastIndexOf("/");
-							}
-
-							var reader = new FileReader();
-							var _self = this;
-							reader.onload = function(event) {
-								var binaryContent = event.target.result;
-								var _args = lang.mixin({}, args);								
-								var index = filePath.lastIndexOf("\\");
-								if (index == -1) {
-									index = filePath.lastIndexOf("/");
-								}								
-								_args["fileName"] = filePath.substring(index + 1);
-								_self.uploadFileBinary(binaryContent, _args);
-							};
-							reader.onerror = function(error) {
-								util.notifyError(error, args);
-							};
-							reader.readAsBinaryString(files[0]);
-						},
-
-						/**
-						 * Uploads a new file for logged in user.
-						 * @method uploadFile
-						 * @param {Object} [binaryContent] The binary content of the file						
-						 * @param {Object} [args] Argument object						 
-						 * @param {Function} [args.load] The callback function will invoke when the file is uploaded successfully. The function expects one
-						 * parameter, the status of upload.
-						 * @param {Function} [args.error] Sometimes the upload calls fails due to bad request (400 error). The error parameter is a callback
-						 * function that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the
-						 * error function is a JavaScript Error object indicating what the failure was. From the error object. one can access the javascript
-						 * library error object, the status code and the error message.
-						 * @param {Function} [args.handle] This callback function is called regardless of whether the call to upload the file completes or
-						 * fails. The parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to
-						 * the javascript library error object, the status code and the error message.
-						 * @param {String} [args.fileName] The file name
-						 * @param {Object} [args.parameters] The additional parameters
-						 */
-						uploadFileBinary : function(binaryContent, args) {
-							if (!validate._validateInputTypesAndNotify("FileService", "uploadFile", [ "args", "binaryContent", "fileName" ], [ args,
-									binaryContent, args ? args.fileName : null ], [ 'object', 'string', 'string' ], args)) {
-								return;
-							}
-
-							var accessType = constants.accessType.AUTHENTICATED;
-							var category = constants.categories.MYLIBRARY;
-							var resultType = constants.resultType.FEED;
-							var baseUrl = constants.baseUrl.FILES;
-							var url = this._constructUrl(baseUrl, accessType, category, null, null, null, resultType, args.parameters);
-							url = cfg.Properties.serviceUrl + "/files/" + this._endpointName + "/" + constants.FILE_TYPE_CONNECTIONS + "/" + url;
-							var headers = {};
-							headers["Slug"] = args.fileName;
-							var _self = this;
-							this._endpoint.xhrPost({
-								url : url,
-								postData : binaryContent,
-								headers : headers,
-								load : function(data) {
-									_self._notifyCb(args, "Success");
-								},
-								error : function(error) {
-									util.notifyError(error, args);
-								}
-							});
-						},
-
-						/**
-						 * updates metadata about a file like title, visibility, etc.
-						 * @method updateFile
-						 * @param {Object} file FileEntry object which needs to be updated with containing updated values. Use FileService.getFile() with loadIt
-						 * false to create this object.
-						 * @param {Object} [args] Argument object
-						 * @param {Function} [args.load] The callback function will invoke when the file is updated. The function expects one parameter, the
-						 * updated FileEntry object.
-						 * @param {Function} [args.error] Sometimes the update calls fails due to bad request (400 error). The error parameter is a callback
-						 * function that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the
-						 * error function is a JavaScript Error object indicating what the failure was. From the error object. one can access the javascript
-						 * library error object, the status code and the error message.
-						 * @param {Function} [args.handle] This callback function is called regardless of whether the call to update the file completes or
-						 * fails. The parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to
-						 * the javascript library error object, the status code and the error message.
-						 */
-						updateFile : function(file, args) {
-
-							if (!validate._validateInputTypeAndNotify("FileService", "updatefile", "File", file, "sbt.connections.FileEntry", args)) {
-								return;
-							}
-							if (!file.validate("FileService", "updateFile", args, {
-								isValidateId : true
-							})) {
-								return;
-							}
-
-							var accessType = constants.accessType.AUTHENTICATED;
-							var category = constants.categories.MYLIBRARY;
-							var subFilters = new _SubFilters();
-							subFilters.setDocumentId(file.getId());
-							var resultType = constants.resultType.ENTRY;
-							var url = this._constructUrl(constants.baseUrl.FILES, accessType, category, null, null, subFilters, resultType, null);
-							var headers = {};
-							headers["Content-Type"] = constants.atom;
-							var updateFilePayload = this._constructPayload(file.fields, file.getId());
-							var _args = args ? lang.mixin({}, args) : {};
-							_args["responseFormat"] = constants.responseFormat.SINGLE;
-							this._executePut(_args, url, headers, updateFilePayload);
-						},
-
-						/**
-						 * Adds comment to a file of any user.
-						 * @method addCommentToFile
-						 * @param {Object} file FileEntry object to which comment needs to be added. Id and Comment needs to be set on this object. Use
-						 * FileService.getFile() with loadIt true to create this object.
-						 * @param {Object} [args] Argument object
-						 * @param {Function} [args.load] The callback function will invoke when the comment is added successfully to the file. The function
-						 * expects one parameter, the newly created comment object.
-						 * @param {Function} [args.error] Sometimes the update calls fails due to bad request (400 error). The error parameter is a callback
-						 * function that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the
-						 * error function is a JavaScript Error object indicating what the failure was. From the error object. one can access the javascript
-						 * library error object, the status code and the error message.
-						 * @param {Function} [args.handle] This callback function is called regardless of whether the call to update the profile completes or
-						 * fails. The parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to
-						 * the javascript library error object, the status code and the error message.
-						 */
-						addCommentToFile : function(file, args) {
-
-							if (!validate._validateInputTypesAndNotify("FileService", "addCommentToFile", [ "File", "args", "comment" ], [ file, args,
-									args ? args.comment : null ], [ "sbt.connections.FileEntry", 'object', 'string' ], args)) {
-								return;
-							}
-							if (!file.validate("FileService", "addCommentToFile", args, {
-								isValidateId : true,
-								isValidateUser : true
-							})) {
-
-								return;
-							}
-
-							var accessType = constants.accessType.AUTHENTICATED;
-							var subFilters = new _SubFilters();
-							subFilters.setUserId(file.getPersonEntry().getAuthorId());
-							subFilters.setDocumentId(file.getId());
-							var resultType = constants.resultType.FEED;
-
-							var url = this._constructUrl(constants.baseUrl.FILES, accessType, null, null, null, subFilters, resultType, null);
-							var headers = {};
-							headers["Content-Type"] = constants.atom;
-							var payload = this._constructPayloadForComment(false, args.comment);
-							var _args = args ? lang.mixin({}, args) : {};
-							_args["responseFormat"] = constants.responseFormat.SINGLE;
-							this._executePost(_args, url, headers, payload);
-						},
-
-						/**
-						 * Adds comment to a file of logged in user.
-						 * @method addCommentToMyFile
-						 * @param {Object} file FileEntry object to which comment needs to be added. Id and Comment needs to be set on this object. Use
-						 * FileService.getFile() with loadIt false to create this object.
-						 * @param {Object} [args] Argument object
-						 * @param {Function} [args.load] The callback function will invoke when the comment is added successfully to the file. The function
-						 * expects one parameter, the newly created comment object.
-						 * @param {Function} [args.error] Sometimes the update calls fails due to bad request (400 error). The error parameter is a callback
-						 * function that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the
-						 * error function is a JavaScript Error object indicating what the failure was. From the error object. one can access the javascript
-						 * library error object, the status code and the error message.
-						 * @param {Function} [args.handle] This callback function is called regardless of whether the call to update the profile completes or
-						 * fails. The parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to
-						 * the javascript library error object, the status code and the error message.
-						 */
-						addCommentToMyFile : function(file, args) {
-
-							if (!validate._validateInputTypesAndNotify("FileService", "addCommentToMyFile", [ "File", "args", "comment" ], [ file, args,
-									args ? args.comment : null ], [ "sbt.connections.FileEntry", 'object', 'string' ], args)) {
-								return;
-							}
-							if (!file.validate("FileService", "addCommentToMyFile", args, {
-								isValidateId : true
-							})) {
-
-								return;
-							}
-
-							var accessType = constants.accessType.AUTHENTICATED;
-							var category = constants.categories.MYLIBRARY;
-							var subFilters = new _SubFilters();
-							subFilters.setDocumentId(file.getId());
-							var resultType = constants.resultType.FEED;
-
-							var url = this._constructUrl(constants.baseUrl.FILES, accessType, category, null, null, subFilters, resultType, null);
-							var headers = {};
-							headers["Content-Type"] = constants.atom;
-							var payload = this._constructPayloadForComment(false, args.comment);
-							var _args = args ? lang.mixin({}, args) : {};
-							_args["responseFormat"] = constants.responseFormat.SINGLE;
-							this._executePost(_args, url, headers, payload);
-						},
-
-						/**
-						 * Lock a file.
-						 * @method lockFile
-						 * @param {Object} file FileEntry object which needs to be unlocked
-						 * @param {Object} [args] Argument object
-						 * @param {Function} [args.load] The callback function will invoke when the file is locked successfully. The function expects one
-						 * parameter, the status of uncock operation.
-						 * @param {Function} [args.error] Sometimes the lock file calls fails due to bad request (400 error). The error parameter is a callback
-						 * function that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the
-						 * error function is a JavaScript Error object indicating what the failure was. From the error object. one can access the javascript
-						 * library error object, the status code and the error message.
-						 * @param {Function} [args.handle] This callback function is called regardless of whether the call to lock the file completes or fails.
-						 * The parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to the
-						 * javascript library error object, the status code and the error message.
-						 * @param {Object} [args.parameters] The additional parameters like pageSize etc.
-						 */
-						lockFile : function(file, args) {
-
-							if (!validate._validateInputTypeAndNotify("FileService", "lockFile", "File", file, "sbt.connections.FileEntry", args)) {
-								return;
-							}
-							if (!file.validate("FileService", "lockFile", args, {
-								isValidateId : true
-							})) {
-
-								return;
-							}
-
-							var _self = this;
-							this._getNonce({
-								load : function(nonceValue) {
-									var accessType = constants.accessType.AUTHENTICATED;
-									var subFilters = new _SubFilters();
-									subFilters.setDocumentId(file.getId());
-									var resultType = constants.resultType.LOCK;
-									var parameters = args.parameters ? lang.mixin({}, args.parameters) : {};
-									parameters["type"] = "HARD";
-									var url = _self._constructUrl(constants.baseUrl.FILES, accessType, null, null, null, subFilters, resultType, parameters);
-									var headers = {
-										"X-Update-Nonce" : nonceValue
-									};
-									_self._executePost(args, url, headers, null);
-								},
-								error : function(error) {
-									util.notifyError(error, args);
-								}
-							});
-						},
-
-						/**
-						 * UnLock a file.
-						 * @method unlockFile
-						 * @param {Object} file FileEntry object which needs to be unlocked
-						 * @param {Object} [args] Argument object
-						 * @param {Function} [args.load] The callback function will invoke when the file is unlocked successfully. The function expects one
-						 * parameter, the status of uncock operation.
-						 * @param {Function} [args.error] Sometimes the unlock file calls fails due to bad request (400 error). The error parameter is a
-						 * callback function that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to
-						 * the error function is a JavaScript Error object indicating what the failure was. From the error object. one can access the javascript
-						 * library error object, the status code and the error message.
-						 * @param {Function} [args.handle] This callback function is called regardless of whether the call to unlock the file completes or
-						 * fails. The parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to
-						 * the javascript library error object, the status code and the error message.
-						 */
-						unlockFile : function(file, args) {
-
-							if (!validate._validateInputTypeAndNotify("FileService", "unlockFile", "File", file, "sbt.connections.FileEntry", args)) {
-								return;
-							}
-							if (!file.validate("FileService", "unlockFile", args, {
-								isValidateId : true
-							})) {
-
-								return;
-							}
-							var _self = this;
-							this._getNonce({
-								load : function(nonceValue) {
-									var accessType = constants.accessType.AUTHENTICATED;
-									var subFilters = new _SubFilters();
-									subFilters.setDocumentId(file.getId());
-									var resultType = constants.resultType.LOCK;
-									var parameters = args.parameters ? lang.mixin({}, args.parameters) : {};
-									parameters["type"] = "NONE";
-									var url = _self._constructUrl(constants.baseUrl.FILES, accessType, null, null, null, subFilters, resultType, parameters);
-									var headers = {
-										"X-Update-Nonce" : nonceValue
-									};
-									_self._executePost(args, url, headers, null);
-								},
-								error : function(error) {
-									util.notifyError(error, args);
-								}
-							});
-						},
-
-						/**
-						 * Delete a file.
-						 * @method deleteFile
-						 * @param {Object} file FileEntry object which needs to be deleted
-						 * @param {Object} [args] Argument object
-						 * @param {Function} [args.load] The callback function will invoke when the file is deleted successfully. The function expects one
-						 * parameter, the status of the delete openration.
-						 * @param {Function} [args.error] Sometimes the delete calls fails due to bad request (400 error). The error parameter is a callback
-						 * function that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the
-						 * error function is a JavaScript Error object indicating what the failure was. From the error object. one can access the javascript
-						 * library error object, the status code and the error message.
-						 * @param {Function} [args.handle] This callback function is called regardless of whether the call to delete the File completes or
-						 * fails. The parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to
-						 * the javascript library error object, the status code and the error message.
-						 */
-						deleteFile : function(file, args) {
-
-							if (!validate._validateInputTypeAndNotify("FileService", "deleteFile", "File", file, "sbt.connections.FileEntry", args)) {
-								return;
-							}
-							if (!file.validate("FileService", "deleteFile", args, {
-								isValidateId : true
-							})) {
-
-								return;
-							}
-							var _self = this;
-							this._getNonce({
-								load : function(nonceValue) {
-									var accessType = constants.accessType.AUTHENTICATED;
-									var category = constants.categories.MYLIBRARY;
-									var subFilters = new _SubFilters();
-									subFilters.setDocumentId(file.getId());
-									var resultType = constants.resultType.ENTRY;
-									var url = _self._constructUrl(constants.baseUrl.FILES, accessType, category, null, null, subFilters, resultType, null);
-									var headers = {
-										"X-Update-Nonce" : nonceValue
-									};
-									_self._executeDelete(args, url, headers);
-								},
-								error : function(error) {
-									util.notifyError(error, args);
-								}
-							});
-
-						},
-
-						_getNonce : function(args) {
-							var accessType = constants.accessType.AUTHENTICATED;
-							var resultType = constants.resultType.NONCE;
-							var url = this._constructUrl(constants.baseUrl.FILES, accessType, null, null, null, null, resultType);
-							var _args = args ? lang.mixin({}, args) : {};
-							_args["responseFormat"] = constants.responseFormat.NON_XML_FORMAT;
-							this._executeGet(_args, url);
-						},
-						_loadFile : function(file, args) {
-							if (!validate._validateInputTypeAndNotify("FileService", "_loadFile", "File", file, "sbt.connections.FileEntry", args)) {
-								return;
-							}
-							if (!file.validate("FileService", "_loadFile", args, {
-								isValidateId : true
-							})) {
-
-								return;
-							}
-							var subFilters = new _SubFilters();
-							subFilters.setDocumentId(file.getId());
-							var url = this._constructUrl(constants.baseUrl.FILES, constants.accessType.AUTHENTICATED, constants.categories.MYLIBRARY, null,
-									null, subFilters, constants.resultType.ENTRY);
-							var _args = args ? lang.mixin({}, args) : {};
-							_args["responseFormat"] = constants.responseFormat.SINGLE;
-							this._executeGet(_args, url);
-						},
-
-						/**
-						 * Retrieve a folder.
-						 * @method getFolder						 
-						 * @param {Object} [args] Argument object
-						 * @param {String} [args.collectionId] the Id of the folder
-						 * @param {Function} [args.load] The callback function will invoke when the folder is retrieved successfully. The function expects one
-						 * parameter, the status of the retrieve openration.
-						 * @param {Function} [args.error] Sometimes the delete calls fails due to bad request (400 error). The error parameter is a callback
-						 * function that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the
-						 * error function is a JavaScript Error object indicating what the failure was. From the error object. one can access the javascript
-						 * library error object, the status code and the error message.
-						 * @param {Function} [args.handle] This callback function is called regardless of whether the call to get files in foldercompletes or
-						 * fails. The parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to
-						 * the javascript library error object, the status code and the error message.
-						 */
-						getFolder : function(args) {
-							if (!validate._validateInputTypesAndNotify("FileService", "getFilesInFolder", [ "args", "collectionId" ], [ args,
-									args ? args.collectionId : null ], [ 'object', 'string' ], args)) {
-								return;
-							}
-							var accessType = constants.accessType.AUTHENTICATED;
-							var subFilters = new _SubFilters();
-							subFilters.setCollectionId(args.collectionId);
-							var resultType = constants.resultType.ENTRY;
-							var url = this._constructUrl(constants.baseUrl.FILES, accessType, null, null, null, subFilters, resultType);
-							var _args = args ? lang.mixin({}, args) : {};
-							_args["responseFormat"] = constants.responseFormat.SINGLE;
-							this._executeGet(_args, url);
-						},
-
-						/**
-						 * Add files a folder.
-						 * @method addFilesToFolder						 
-						 * @param {Object} [args] Argument object
-						 * @param {String} [args.collectionId] the Id of the folder
-						 * @param {String} [args.fileIds] comma seperated list of fileIds
-						 * @param {Function} [args.load] The callback function will invoke when the file is added successfully. The function expects one
-						 * parameter, the status of the add openration.
-						 * @param {Function} [args.error] Sometimes the delete calls fails due to bad request (400 error). The error parameter is a callback
-						 * function that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the
-						 * error function is a JavaScript Error object indicating what the failure was. From the error object. one can access the javascript
-						 * library error object, the status code and the error message.
-						 * @param {Function} [args.handle] This callback function is called regardless of whether the call to Add files a folder completes or
-						 * fails. The parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to
-						 * the javascript library error object, the status code and the error message.
-						 */
-						addFilesToFolder : function(args) {
-							if (!validate._validateInputTypesAndNotify("FileService", "getFilesInFolder", [ "args", "collectionId", "fileIds" ], [ args,
-									args ? args.collectionId : null, args ? args.fileIds : null ], [ 'object', 'string', 'string' ], args)) {
-								return;
-							}
-
-							var _self = this;
-							this._getNonce({
-								load : function(nonceValue) {
-									var accessType = constants.accessType.AUTHENTICATED;
-									var subFilters = new _SubFilters();
-									subFilters.setCollectionId(args.collectionId);
-									var resultType = constants.resultType.FEED;
-									var parameters = args.parameters ? lang.mixin({}, args.parameters) : {};
-									parameters["itemId"] = args.fileIds;
-									var url = _self._constructUrl(constants.baseUrl.FILES, accessType, null, null, null, subFilters, resultType, parameters);
-									var headers = {
-										"X-Update-Nonce" : nonceValue
-									};
-									var _args = args ? lang.mixin({}, args) : {};
-									_args["responseFormat"] = constants.responseFormat.NON_XML_FORMAT;
-									_self._executePost(_args, url, headers, null);
-								},
-								error : function(error) {
-									util.notifyError(error, args);
-								}
-							});
-
-						},
-						
-						/**
-						 * Pin a file, by sending a POST request to the myfavorites feed.
-						 * @method pinFile
-						 * @param {Object} file FileEntry object which needs to be pinned
-						 * @param {Object} [args] Argument object
-						 * @param {Function} [args.load] The callback function will invoke when the file is deleted successfully. The function expects one
-						 * parameter, the status of the delete openration.
-						 * @param {Function} [args.error] Sometimes the delete calls fails due to bad request (400 error). The error parameter is a callback
-						 * function that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the
-						 * error function is a JavaScript Error object indicating what the failure was. From the error object. one can access the javascript
-						 * library error object, the status code and the error message.
-						 * @param {Function} [args.handle] This callback function is called regardless of whether the call to pin the File completes or
-						 * fails. The parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to
-						 * the javascript library error object, the status code and the error message.
-						 */
-						pinFile : function(file, args) {		
-							if (!validate._validateInputTypeAndNotify("FileService", "pinFile", "File", file, "sbt.connections.FileEntry", args)) {
-								return;
-							}
-							if (!file.validate("FileService", "pinFile", args, {
-								isValidateId : true
-							})) {
-
-								return;
-							}
-							var _self = this;
-							this._getNonce({
-								load : function(nonceValue) {
-									var accessType = constants.accessType.AUTHENTICATED;
-									var subFilters = new _SubFilters();
-									subFilters.setCollectionId(args.collectionId);
-									var resultType = constants.resultType.FEED;
-									var parameters = args.parameters ? lang.mixin({}, args.parameters) : {};
-									parameters["itemId"] = file.getId();
-									var category = constants.categories.PINNED;
-									var view = constants.views.FILES;
-									var url = _self._constructUrl(constants.baseUrl.FILES, accessType, category, view, null, subFilters, resultType, parameters);							
-									var _args = args ? lang.mixin({}, args) : {};
-									_args["responseFormat"] = constants.responseFormat.NON_XML_FORMAT;
-									var headers = {
-											"X-Update-Nonce" : nonceValue
-										};
-									_self._executePost(_args, url, headers, null);
-								},
-								error : function(error) {
-									util.notifyError(error, args);
-								}
-							});
-						},
-						
-						/**
-						 * Removes the file from the myfavorites feed.
-						 * @method removePinFromFile
-						 * @param {Object} file FileEntry object which needs to be pinned
-						 * @param {Object} [args] Argument object
-						 * @param {Function} [args.load] The callback function will invoke when the file is deleted successfully. The function expects one
-						 * parameter, the status of the delete openration.
-						 * @param {Function} [args.error] Sometimes the delete calls fails due to bad request (400 error). The error parameter is a callback
-						 * function that is only invoked when an error occurs. This allows to write logic when an error occurs. The parameter passed to the
-						 * error function is a JavaScript Error object indicating what the failure was. From the error object. one can access the javascript
-						 * library error object, the status code and the error message.
-						 * @param {Function} [args.handle] This callback function is called regardless of whether the call to remove pin for the File completes or
-						 * fails. The parameter passed to this callback is the FileEntry object (or error object). From the error object. one can get access to
-						 * the javascript library error object, the status code and the error message.
-						 */
-						removePinFromFile : function(file, args) {		
-							if (!validate._validateInputTypeAndNotify("FileService", "removePinFromFile", "File", file, "sbt.connections.FileEntry", args)) {
-								return;
-							}
-							if (!file.validate("FileService", "removePinFromFile", args, {
-								isValidateId : true
-							})) {
-
-								return;
-							}
-							
-							var _self = this;
-							this._getNonce({
-								load : function(nonceValue) {
-									var accessType = constants.accessType.AUTHENTICATED;
-									var subFilters = new _SubFilters();
-									subFilters.setCollectionId(args.collectionId);
-									var resultType = constants.resultType.FEED;
-									var parameters = args.parameters ? lang.mixin({}, args.parameters) : {};
-									parameters["itemId"] = file.getId();
-									var category = constants.categories.PINNED;
-									var view = constants.views.FILES;
-									var url = _self._constructUrl(constants.baseUrl.FILES, accessType, category, view, null, subFilters, resultType, parameters);	
-									var headers = {
-											"X-Update-Nonce" : nonceValue
-										};
-									_self._executeDelete(args, url, headers, null);
-								},
-								error : function(error) {
-									util.notifyError(error, args);
-								}
-							});
-						},
-
-						retrieveFileComment : function(file, comment, args) {
-							var accessType = constants.accessType.AUTHENTICATED;
-							var subFilters = new _SubFilters();
-							subFilters.setUserId(file.getPersonEntry().getAuthorId());
-							subFilters.setDocumentId(file.getId());
-							subFilters.setCommentId(comment.getId());
-							var resultType = constants.resultType.ENTRY;
-							var url = this._constructUrl(constants.baseUrl.FILES, accessType, null, null, null, subFilters, resultType, args.parameters);
-							this._executeGet(args, url);
-						},
-						_retrieveMyFileComment : function(file, comment, args) {
-							var accessType = constaqnts.accessType.AUTHENTICATED;
-							var category = consants.categories.MYLIBRARY;
-							var subFilters = new _SubFilters();
-							subFilters.setDocumentId(file.getId());
-							subFilters.setCommentId(comment.getId());
-							var resultType = constants.resultType.ENTRY;
-							var url = this._constructUrl(constants.baseUrl.FILES, accessType, category, null, null, subFilters, resultType, args.parameters);
-							this._executeGet(args, url);
-						},
-						_deleteComment : function(file, comment, args) {
-							var accessType = constants.accessType.AUTHENTICATED;
-							var subFilters = new _SubFilters();
-							subFilters.setUserId(file.getPersonEntry().getAuthorId());
-							subFilters.setDocumentId(file.getId());
-							subFilters.setCommentId(comment.getId());
-							var resultType = constants.resultType.ENTRY;
-							var url = this._constructUrl(constants.baseUrl.FILES, accessType, null, null, null, subFilters, resultType, parameters);
-							this._executeDelete(args, url, null);
-						},
-						_deleteMyComment : function(file, comment, args) {
-							var accessType = constants.accessType.AUTHENTICATED;
-							var category = consants.categories.MYLIBRARY;
-							var subFilters = new _SubFilters();
-							subFilters.setDocumentId(file.getId());
-							subFilters.setCommentId(comment.getId());
-							var resultType = constants.resultType.ENTRY;
-							var url = this._constructUrl(constants.baseUrl.FILES, accessType, category, null, null, subFilters, resultType, parameters);
-							this._executeDelete(args, url, null);
-						},
-						_updateComment : function(file, comment, args) {
-							var accessType = constants.accessType.AUTHENTICATED;
-							var subFilters = new _SubFilters();
-							subFilters.setUserId(file.getPersonEntry().getAuthorId());
-							subFilters.setDocumentId(file.getId());
-							subFilters.setCommentId(comment.getId());
-							var resultType = constants.resultType.ENTRY;
-							var url = this._constructUrl(constants.baseUrl.FILES, accessType, null, null, null, subFilters, resultType, parameters);
-							var headers = {};
-							headers["Content-Type"] = constants.atom;
-							var payload = this._constructPayloadForComment(false, comment.getComment());
-							this._executePut(args, url, headers, payload);
-						},
-						_updateMyComment : function(file, comment, args) {
-							var accessType = constants.accessType.AUTHENTICATED;
-							var category = consants.categories.MYLIBRARY;
-							var subFilters = new _SubFilters();
-							subFilters.setDocumentId(file.getId());
-							subFilters.setCommentId(comment.getId());
-							var resultType = constants.resultType.ENTRY;
-							var url = this._constructUrl(constants.baseUrl.FILES, accessType, category, null, null, subFilters, resultType, parameters);
-							var headers = {};
-							headers["Content-Type"] = constants.atom;
-							var payload = this._constructPayloadForComment(false, comment.getComment());
-							this._executePut(args, url, headers, payload);
-						},
-						_getPublicFiles : function(args) {
-							var accessType = constants.accessType.PUBLIC;
-							var view = constants.views.FILES;
-							var resultType = constants.resultType.FEED;
-							var parameters = args.parameters ? lang.mixin({}, args.parameters) : {};
-							parameters["visibility"] = "public";
-							var url = this._constructUrl(constants.baseUrl.FILES, accessType, null, view, null, null, resultType, parameters);
-							this._executeGet(args, url);
+					var options = {
+						method : "DELETE",
+						headers : {
+							"X-Update-Nonce" : "{X-Update-Nonce}"
 						}
+					};
+					var url = this.constructUrl(consts.AtomDeleteFile, null, {
+						authType : this.endpoint.authType,
+						documentId : fileId
 					});
 
+					return this.deleteEntity(url, options, fileId, args);
+				},
+
+				/**
+				 * Lock a file
+				 * @method lockFile
+				 * @param {String} fileId Id of the file which needs to be deleted
+				 * @param {Object} [args] Argument object
+				 */
+				lockFile : function(fileId, args) {
+					var parameters = args ? lang.mixin({}, args) : {};
+					parameters["type"] = "HARD";
+
+					var options = {
+						method : "POST",
+						headers : {
+							"X-Update-Nonce" : "{X-Update-Nonce}"
+						},
+						query : args || {}
+					};
+					var url = this.constructUrl(consts.AtomLockUnlockFile, parameters, {
+						authType : this.endpoint.authType,
+						documentId : fileId
+					});
+
+					var callbacks = {
+						createEntity : function(service, data, response) {
+							return "Success";
+						}
+					};
+
+					return this.updateEntity(url, options, callbacks, args);
+				},
+
+				/**
+				 * unlock a file
+				 * @method lockFile
+				 * @param {String} fileId Id of the file which needs to be deleted
+				 * @param {Object} [args] Argument object
+				 */
+				unlockFile : function(fileId, args) {
+					var parameters = args ? lang.mixin({}, args) : {};
+					parameters["type"] = "NONE";
+
+					var options = {
+						method : "POST",
+						headers : {
+							"X-Update-Nonce" : "{X-Update-Nonce}"
+						},
+						query : args || {}
+					};
+					var url = this.constructUrl(consts.AtomLockUnlockFile, parameters, {
+						authType : this.endpoint.authType,
+						documentId : fileId
+					});
+
+					var callbacks = {
+						createEntity : function(service, data, response) {
+							return "Success";
+						}
+					};
+
+					return this.updateEntity(url, options, callbacks, args);
+				},
+
+				_constructPayloadForComment : function(isDelete, comment) {
+					var payload = "<entry xmlns=\"http://www.w3.org/2005/Atom\">";
+					payload += "<category term=\"comment\" label=\"comment\" scheme=\"tag:ibm.com,2006:td/type\"/>";
+
+					if (isDelete == true)
+						payload += "<deleteWithRecord xmlns=\"" + consts.Namespaces.td + "\">false</deleteWithRecord>";
+					else
+						payload += "<content type=\"text/plain\">" + xml.encodeXmlEntry(comment) + "</content>";
+					payload += "</entry>";
+					return payload;
+				},
+
+				_constructPayload : function(payloadMap, documentId) {
+					var payload = "<entry xmlns=\"http://www.w3.org/2005/Atom\"><category term=\"document\" label=\"document\" scheme=\"tag:ibm.com,2006:td/type\"></category>";
+					payload += "<id>urn:lsid:ibm.com:td:" + xml.encodeXmlEntry(documentId) + "</id>";
+					if (payloadMap) {
+						for (key in payloadMap) {
+							var value = payloadMap[key];
+							if (key == "label") {
+								payload += "<label xmlns=\"" + consts.Namespaces.td + "\">" + xml.encodeXmlEntry(value) + "</label>";
+								payload += "<title>" + xml.encodeXmlEntry(value) + "</title>";
+							} else if (key == "summary") {
+								payload += "<summary type=\"text\">" + xml.encodeXmlEntry(value) + "</summary>";
+							} else if (key == "visibility") {
+								payload += "<visibility xmlns=\"" + consts.Namespaces.td + "\">" + xml.encodeXmlEntry(value) + "</visibility>";
+							}
+						}
+					}
+
+					payload += "</entry>";
+					return payload;
+				}
+
+			});
 			return FileService;
 		});
-

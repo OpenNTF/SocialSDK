@@ -17,13 +17,13 @@
  * Social Business Toolkit SDK.
  * Definition of constants for ActivityStreamService.
  */
-define(["sbt/config", "sbt/connections/core"],function(sbt) {
+define(["sbt/config"],function(sbt) {
     return sbt.connections.searchConstants = {
-        sbtErrorCodes:{
-            badRequest         :400
+        sbtErrorCodes : {
+            badRequest : 400
         },
         
-        sbtErrorMessages:{
+        sbtErrorMessages : {
         },
         
         xpath_search : {

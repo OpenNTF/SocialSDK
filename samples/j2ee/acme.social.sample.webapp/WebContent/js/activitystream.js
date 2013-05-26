@@ -2,7 +2,7 @@
  * Helper module for posting to the activity stream.
  * @module
  */
-define(["sbt/_bridge/declare", "sbt/Endpoint", "sbt/connections/ActivityStreamService"], 
+define(["sbt/declare", "sbt/Endpoint", "sbt/connections/ActivityStreamService"], 
     function(declare, Endpoint, ActivityStreamService) {
 
     return {
@@ -18,15 +18,14 @@ define(["sbt/_bridge/declare", "sbt/Endpoint", "sbt/connections/ActivityStreamSe
             entry.openSocial.embed = this.getEEDataModel(flight);
             var self = this;
             var activityStreamService = new ActivityStreamService({endpoint:"conAcmeApp"});
-            activityStreamService.postEntry({
-                postData : entry,
-                load : function(response) {
+            activityStreamService.postEntry(entry).then(
+                function(response) {
                     console.log(response);
                 },
-                error : function(error) {
+                function(error) {
                     alert(error.message);
                 }
-            });
+            );
         },
         
         /**

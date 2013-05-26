@@ -1,0 +1,19 @@
+require([ "sbt/dom", "sbt/json", "sbt/connections/ActivityStreamService", "sbt/connections/ActivityStreamConstants" ], function(dom,json,ActivityStreamService, ASConstants) {
+    var acticityStreamService = new ActivityStreamService();
+    var communityID = "%{sample.communityId}";
+    var promise = acticityStreamService.getUpdatesFromACommunity(
+    	communityID,
+		{
+			count: 5
+		}
+	);
+    promise.then(
+        function(as) {
+            dom.setText("json", json.jsonBeanStringify(as));
+        },
+        function(error) {
+            dom.setText("json", json.jsonBeanStringify(error));
+        }
+    );
+    
+});

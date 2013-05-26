@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * © Copyright IBM Corp. 2012, 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -15,395 +15,441 @@
  */
 
 /**
+ * Javascript Base APIs for IBM Connections
  * 
- * Javascript Base APIs for IBM Connections 
- * @module sbt.connections.BaseService
+ * @module sbt.base.BaseService
  * @author Carlos Manias
- * 
  */
-define(['../declare','../config','../lang','../base/core','../xml','../xpath','../Cache','../Endpoint', '../base/BaseConstants', 
-        "../validate", '../log', '../stringUtil', '../base/BaseHandler','../util','./BaseEntity'],
-		function(declare,cfg,lang,con,xml,xpath,Cache,Endpoint, BaseConstants, validate, log, stringUtil, BaseHandler, util, BaseEntity) {
-	
-	var requests = {};
-	
-	function notifyCallbacks(id,param) {
-		log.debug("notifyCallbacks() : called with id : {0}, and param : {1}", id, param);
-		var r = requests[id];
-  		if(r) {
-	  		delete requests[id];
-	  		for(var i=0; i<r.length; i++) {
-	  			r[i](param);
-	  		}
-  		}
-	}
-	
-	/**
-	Base service class.
+define([ "sbt/_bridge/declare", "sbt/lang", "sbt/log", "sbt/stringUtil", "sbt/Cache", "sbt/Endpoint", "sbt/Promise" ], 
+    function(declare,lang,log,stringUtil,Cache,Endpoint,Promise) {
 
-	@class BaseService
-	@constructor
-	@param {Object} options  Options object
-	@param {String} [options.endpoint]  Endpoint to be used.
-		
-	**/
-	var BaseService = declare(null, {
-		"-chains-" : {
-			constructor : "manual"
-		},	
-		
-		_endpoint: null,
-		
-		constructor: function(_options) {			
-			this._endpoint = Endpoint.find(_options.endpoint);
-			this.Constants = lang.mixin(lang.mixin({}, BaseConstants), _options.Constants);
-			this._con = _options.con || con; //NameSpaces
-			var cacheSize = _options.cacheSize;
-			if(cacheSize && cacheSize>0) {
-				this._cache = new Cache(cacheSize);
-			}			
-		},
-		
-		_notifyResponse: function(args, response, summary){
-			if (args.load || args.handle) {
-				if (args.handle) {
-					try {
-						args.handle(response, summary);
-					} catch (error) {
-						log.error("Error running handle callback : {0}", error);
-					}
-				}
-				if (args.load) {
-					try {
-						args.load(response, summary);
-					} catch (error) {
-						log.error("Error running load callback : {0}", error);
-					}
-				}
-			}
-		},
-		
-		_createEntityObject : function (service, id, requestArgs, args){
-			return requestArgs.entity.apply(null,[service, id]);
-		},
-		
-		_getOne: function(args,getArgs) {			
-			var entity = this._createEntityObject(this, args.id, getArgs, args);			
-			if(args.loadIt == false){
-				this._notifyResponse(args,entity);
-			}else{
-				this._load(entity,args,getArgs);
-			}
-			return entity;
-		},
-		
-		_load: function (entity,args,getArgs) {
-			getArgs.methodType = "get";
-			var _self = this;
-			var handleAs = (getArgs.handleAs)?getArgs.handleAs : "text";
-			var cachedData = null;
-			if(getArgs.cachingEnabled){
-				cachedData = this._find(entity._id);
-			}
-			if(cachedData) {				
-					entity.setData(cachedData);		
-					this._notifyResponse(args, entity);
-			}else{
-				if (getArgs.cachingEnabled && requests[entity._id]) {
-					this._stackRequestsForExistingId(entity, args);				
-				} else {
-					if (getArgs.cachingEnabled) {
-						this._stackRequestsForNewId(entity, args);
-					}
-					this._endpoint.xhrGet({
-						serviceUrl:	_self._constructServiceUrl(getArgs),
-						handleAs:	handleAs,
-						content:	_self._constructQueryObj(args,getArgs),
-						load: function(data, ioArgs) {
-							_self._loadOnLoad(data, ioArgs, entity, args, getArgs);	
-						},
-						error: function(error){
-							_self._loadOnError(error, args);
-						}
-					});
-				}
-			}
-		},
-		
-		_loadOnLoad : function (data, ioArgs, entity, args, getArgs){
-			var dataHandler = (getArgs.dataHandler) ? getArgs.dataHandler : entity._dataHandler ;			
-			entity.setData(dataHandler._extractEntryFromSingleEntryFeed(data, ioArgs));			
-			if (getArgs.cachingEnabled) {
-				if(this._cache){
-					this._cache.put(dataHandler._extractIdFromEntry(entity._data),entity._data);
-				}
-				notifyCallbacks(entity._id, entity);
-			} else {
-				this._notifyResponse(args, entity);
-			}	
-		},
-		
-		_loadOnError : function (error, args){
-			util.notifyError(error, args);
-		},
-		
-		_stackRequestsForExistingId : function (entity, args){
-			if(args.load){
-				requests[entity._id].push(args.load);
-			}
-			if(args.handle){
-				requests[entity._id].push(args.handle);
-			}
-		},
-		
-		_stackRequestsForNewId : function (entity, args){
-			if(args.load) {
-				requests[entity._id] = [args.load];
-			}
-			if(args.handle){
-				if(requests[entity._id]) {
-					requests[entity._id].push(args.handle);
-				}else {
-					requests[entity._id] = [args.handle];
-				}
-			}	
-		},
-		
-		getIdFromIdOrObject: function(inputEntity){
-			return entityId = (!(typeof inputEntity == "object")) ? inputEntity._id : inputEntity;
-		},
-		
-		_constructPayload: function(requestArgs){
-			var dataHandler = (requestArgs.dataHandler) ? requestArgs.dataHandler : requestArgs.entity._dataHandler ;			
-			return dataHandler._constructPayload(requestArgs);
-		},
-		
-		_createRequestObject: function(args, requestArgs){
-			var _self = this;
-			var requestObject = {
-					serviceUrl:_self._constructServiceUrl(requestArgs)									
-			};
-			if (args.parameters) {
-				if(!(requestArgs.urlParams)){
-					requestArgs.urlParams = {};
-				}
-				requestArgs.urlParams = lang.mixin(requestArgs.urlParams, args.parameters);
-			}
-			if(requestArgs.headers){
-				requestObject.headers = requestArgs.headers;
-			}
-			if(requestArgs.handleAs){
-				requestObject.handleAs = requestArgs.handleAs;
-			}
-			return requestObject;
-		},
-		
-		/**
-			Create a new entity
-			
-			@method createEntity
-			@param {Object} entity  Entity object
-			@param {Object} [args]  Argument object
-			@param {Boolean} [args.loadIt=true] 
-			@param {Function} [args.load] 
-			@param {Function} [args.error] 
-			@param {Function} [args.handle] 
-		
-		**/
-		_createEntity: function (args, postArgs) {
-			var _self = this;
-			var entity = postArgs.entity;			
-			var requestObject = lang.mixin({
-				postData:_self._constructPayload(postArgs),
-				load:function(data, ioArgs){
-					_self._createEntityOnLoad(data, ioArgs, entity, args, postArgs);
-				},
-				error:function(error){
-					_self._createEntityOnError(error, args);
-				}
-			}, _self._createRequestObject(args, postArgs));
-			this._endpoint.xhrPost(requestObject);
-		},
-		
-		_createEntityOnLoad : function (data, ioArgs, entity, args, postArgs){
-			var dataHandler = (postArgs.dataHandler) ? postArgs.dataHandler : entity._dataHandler ;						
-			entity._data = dataHandler._extractEntryFromSingleEntryFeed(data, ioArgs);
-			this._notifyResponse(args,entity);
-		},
-		
-		_createEntityOnError : function (error, args){
-			util.notifyError(error, args);
-		},
-		
-		/**
-		Update an existing entity
-		
-		@method updateEntity
-		@param {Object} entity  Entity object
-		@param {Object} [args]  Argument object			
-			@param {Function} [args.load] 
-			@param {Function} [args.error] 
-			@param {Function} [args.handle] 
-		
-		**/
-		_updateEntity: function (args, putArgs) {
-			
-			var _self = this;
-			var entity = putArgs.entity;			
-			var requestObject = lang.mixin({
-				putData:_self._constructPayload(putArgs),
-				load:function(data, ioArgs){
-					_self._updateEntityOnLoad(data, ioArgs, entity, args, putArgs);
-				},
-				error: function(error){
-					_self._updateEntityOnError(error, args);
-				}
-			}, _self._createRequestObject(args, putArgs));
-			this._endpoint.xhrPut(requestObject);
-		},
-		
-		_updateEntityOnLoad : function (data, ioArgs, entity, args, putArgs){
-			var dataHandler = (putArgs.dataHandler) ? putArgs.dataHandler : entity._dataHandler ;						
-			entity._data = dataHandler._extractEntryFromSingleEntryFeed(data, ioArgs);
-			this._notifyResponse(args,entity);
-		},
-		
-		_updateEntityOnError : function (error, args){
-			util.notifyError(error, args);
-		},
-			
-		/**
-		Delete an existing entity
-		
-		@method deleteEntity
-		@param {String/Object} entity  id of the entity or the entity object.
-		@param {Object} [args]  Argument object			
-			@param {Function} [args.load] 
-			@param {Function} [args.error] 
-			@param {Function} [args.handle] 
-		
-		**/
-		_deleteEntity: function (args, deleteArgs) {
-			var _self = this;
-			var entity = deleteArgs.entity;			
-			var requestObject = lang.mixin({
-				load:function(data, ioArgs){
-					_self._deleteEntityOnLoad(data, ioArgs, entity, args);
-				},
-				error: function(error){
-					_self._deleteEntityOnError(error, args);
-				}
-			}, _self._createRequestObject(args, deleteArgs));
-			this._endpoint.xhrDelete(requestObject);
-		},
-		
-		_deleteEntityOnLoad : function (data, ioArgs, entity, args){
-			if(this._cache) {
-				this._deleteIdFromCache(entity._id);
-      		}
-			this._notifyResponse(args);
-		},
-		
-		_deleteEntityOnError : function (error, args){
-			util.notifyError(error, args);
-		},
-		
-		_constructServiceUrl: function (requestArgs){			
-			var authType = requestArgs.authType;
-			authType = (requestArgs.authType)?requestArgs.authType : "";
-			
-			var url = this.Constants.entityServiceBaseUrl + authType + (this.Constants.serviceEntity[requestArgs.serviceEntity]?this.Constants.serviceEntity[requestArgs.serviceEntity]: "") + (this.Constants.entityType[requestArgs.entityType] ? this.Constants.entityType[requestArgs.entityType] : "");
-			
-			if (requestArgs.replaceArgs) {
-				url = stringUtil.replace(url, requestArgs.replaceArgs);
-			}
-			
-			if(requestArgs.methodType != "get"){
-				if (requestArgs.urlParams) {
-					url += "?";
-					var additionalElement = false;
-					for (param in requestArgs.urlParams) {
-						if (additionalElement) {
-							url+= "&";
-						}
-						else {
-							additionalElement = true;
-						}// encode url parameters
-						url += param + "=" + encodeURIComponent(requestArgs.urlParams[param]);
-					}
-				}
-			}
-			return url;
-		},
-		
-		_constructQueryObj: function (args, requestArgs){
-			var params = args.parameters;
-			if(requestArgs.urlParams){				
-				params = lang.mixin(params, requestArgs.urlParams);
-			}
-			return params;
-		},
-		
-		_getEntities: function (args,getArgs) {
-			var _self=this;
-			getArgs.methodType = "get";	
-			var requestObject = lang.mixin({
-				content: _self._constructQueryObj(args,getArgs),
-				load:function(data, ioArgs){
-					summary = _self._getSummaryOnLoad(data, getArgs, args);
-					entities = _self._getEntititiesOnLoad(data, getArgs, args);
-					_self._notifyResponse(args, entities, summary);
-				},
-				error: function(error){
-					_self._getEntitiesOnError(error, args);
-				}
-				
-			}, _self._createRequestObject(args, getArgs));			
-			this._endpoint.xhrGet(requestObject);
-		},
-		
-		_getEntitiesOnError : function (error, args){
-			util.notifyError(error, args);
-		},
-		
-		_getSummaryOnLoad: function (data, getArgs, args){
-			var dataHandler = getArgs.dataHandler;			
-			return dataHandler._extractSummaryFromEntitiesFeed(data);
-		},
-		
-		_getEntititiesOnLoad: function (data, getArgs, args){			
-			var dataHandler = getArgs.dataHandler ;			
-			var entities = [];			
-			var entry = dataHandler._extractEntriesFromEntitiesFeed(data);
-			for(var count=0; count < entry.length; count++){
-				 var node = entry[count];
-				 var entityId = dataHandler._extractIdFromEntry(node);
-				 entityId = getArgs.parseId ? getArgs.parseId(entityId) : entityId;			
-				 var entity = this._createEntityObject(this, entityId, getArgs, args);
-				if(!(getArgs.ignoreData)){
-					entity.setData(node);
-				}
-				entities.push(entity);
-			}
-			return entities;
-		},
-		
-		_isEmail: function(id) {
-			return id && id.indexOf('@')>=0;
-		},
-		_deleteIdFromCache:function(_id){
-			if(this._cache) {
-				this._cache.remove(_id);
-			}
-		},		
-		_find: function(id) {
-			if(this._cache) {
-				return this._cache.get(id);
-			}
-			else{			
-				return null;
-			}
-		}
-	});
-	return BaseService;
+    var BadRequest = 400;
+    
+    var requests = {};
+
+    /**
+     * BaseService class.
+     * 
+     * @class BaseService
+     * @namespace sbt.base
+     */
+    var BaseService = declare(null, {
+    	
+        /**
+         * The Endpoint associated with the service.
+         */
+        endpoint : null,
+
+        /*
+         * The Cache associated with the service.
+         */
+        _cache : null,
+        
+        _regExp : new RegExp("/{2}"),
+
+        /**
+         * Constructor for BaseService
+         * 
+         * An endpoint is required so subclasses must check if one
+         * was created here and if not set the default endpoint.
+         * 
+         * @constructor
+         * @param {Object} args Arguments for this entity.
+         */
+        constructor : function(args) {
+            // create an endpoint if name was specified
+            if (args && args.endpoint) {
+                this.endpoint = Endpoint.find(args.endpoint);
+            }
+
+            // optionally create a cache
+            if (args && args.cacheSize) {
+                this._cache = new Cache(args.cacheSize);
+            }
+        },
+
+        /**
+         * 
+         * @method constructUrl
+         * @param url
+         * @param params
+         * @param urlParams
+         * @returns
+         */
+        constructUrl : function(url,params,urlParams) {
+            if (!url) {
+                throw new Error("BaseService.constructUrl: Invalid argument, url is undefined or null.");
+            }
+            if (urlParams) {
+                url = stringUtil.replace(url, urlParams);
+                
+                if (url.indexOf("//") != -1) {
+                	// handle empty values
+                	url = url.replace(this._regExp, "/");
+                }
+            }
+            if (params) {
+                for (param in params) {
+                    if (url.indexOf("?") == -1) {
+                        url += "?";
+                    } else if (url.indexOf("&") != (url.length - 1)) {
+                        url += "&";
+                    }
+                    var value = encodeURIComponent(params[param]);
+                    if (value) {
+                        url += param + "=" + value;
+                    }
+                }
+            }
+            return url;
+        },
+        
+        /**
+         * 
+         * @method getEntities
+         * @param url
+         * @param options
+         * @param callbacks
+         * @param request
+         */
+        getEntities : function(url,options,callbacks,args) {
+            var self = this;
+            var promise = new Promise();
+            promise.args = args;
+            this.xhrGet(url,options,null,promise).response.then(
+                function(response) {
+                    promise.response = response;
+                    var feedHandler = callbacks.createEntities.apply(self, [ self, response.data, response ]);
+                    var entitiesArray = feedHandler.getEntitiesDataArray();
+                    var entities = [];
+                    for ( var i = 0; i < entitiesArray.length; i++) {
+                        var entity = callbacks.createEntity.apply(self, [ self, entitiesArray[i], response ]);
+                        entities.push(entity);
+                    }
+                    promise.summary = feedHandler.getSummary();
+                    promise.fullFilled(entities);
+                },
+                function(error) {
+                    promise.rejected(error);
+                }
+            );
+            return promise;
+        },
+
+        /**
+         * 
+         * @method getEntity
+         * @param url
+         * @param options
+         * @param callbacks
+         * @param request
+         */
+        getEntity : function(url,options,entityId,callbacks,args) {
+            var promise = this._validateEntityId(entityId, args);
+            if (promise) {
+                return promise;
+            }
+            
+            // check cache
+            var promise = new Promise();
+            var data = this.getFromCache(entityId);
+            if (data) {
+                promise.fullFilled(data);
+                return promise;
+            }
+
+            var self = this;
+            promise.args = args;
+            this.xhrGet(url,options,entityId,promise).response.then(
+                function(response) {
+                    promise.response = response;
+                    var entity = callbacks.createEntity.apply(self, [ self, response.data, response ]);
+                    if (self._cache && entityId) {
+                        self.fullFillOrRejectPromises.apply(self, [ entityId, entity, response ]);
+                    } else {
+                        promise.fullFilled(entity);
+                    }
+                },
+                function(error) {
+                    if (self._cache && entityId) {
+                        self.fullFillOrRejectPromises.apply(self, [ entityId, error ]);
+                    } else {
+                        promise.rejected(error);
+                    }
+                }
+            );
+            return promise;
+        },
+        
+        /**
+         * 
+         * @method updateEntity
+         * @param url
+         * @param options
+         * @param callbacks
+         * @param request
+         */
+        updateEntity : function(url, options, callbacks, args) {
+            var self = this;
+            var promise = new Promise();
+            promise.args = args;
+            this.endpoint.request(url,options,null,promise).response.then(
+                function(response) {
+                    promise.response = response;
+                    var entity = callbacks.createEntity.apply(self, [ self, response.data, response ]);
+                    // callback can return a promise if an additional
+                    // request is required to load the associated entity
+                    if (entity instanceof Promise) {
+                        entity.then(
+                            function(response) {
+                                // entity promise is fullfilled
+                                self.addToCache(response);
+                                promise.fullFilled(response);
+                            },
+                            function(error) {
+                                promise.rejected(error);
+                            }
+                        );
+                    } else {
+                        self.addToCache(entity);
+                        promise.fullFilled(entity);
+                    }
+                },
+                function(error) {
+                    promise.rejected(error);
+                }
+            );
+            return promise;
+        },
+
+        /**
+         * 
+         * @method deleteEntity
+         * @param url
+         * @param options
+         * @param callbacks
+         * @param request
+         */
+        deleteEntity : function(url,options,entityId,args) {
+            var promise = this._validateEntityId(entityId, args);
+            if (promise) {
+                return promise;
+            }
+
+            var self = this;
+            var promise = new Promise();
+            promise.args = args;
+            this.endpoint.request(url,options,entityId,promise).response.then(
+                function(response) {
+                    promise.response = response;
+                    promise.fullFilled(entityId);
+                },
+                function(error) {
+                    promise.rejected(error);
+                }
+            );
+            return promise;
+        },
+        
+        /**
+         * Perform an xhrGet with cache support
+         * 
+         * @method xhrGet
+         * @param url
+         * @param options
+         * @param entityId
+         * @param promise
+         */
+        xhrGet : function(url,options,entityId,promise) {
+            if (this._cache && entityId) {
+                this.pushPromise(entityId, promise);
+            }
+            return this.endpoint.request(url,options);
+        },
+
+        /**
+         * Push set of promise onto stack for specified request id
+         * 
+         * @method
+         * @param
+         * @param
+         */
+        pushPromise : function(id,promise) {
+            log.debug("pushPromise, id : {0}, promise : {1}", id, promise);
+            if (!requests[id]) {
+                requests[id] = [];
+            }
+            requests[id].push(promise);
+        },
+
+        /**
+         * Notify set of promises and pop from stack for specified request id
+         * 
+         * @method
+         * @param
+         * @param
+         */
+        fullFillOrRejectPromises : function(id,data,response) {
+            log.debug("fullFillOrRejectPromises, id : {0}, data : {1}, response : {2}", id, data, response);
+            this.addToCache(id, data);
+            var r = requests[id];
+            if (r) {
+                delete requests[id];
+                for ( var i = 0; i < r.length; i++) {
+                    var promise = r[i];
+                    this.fullFillOrReject.apply(this, [ promise, data, response ]);
+                }
+            }
+        },
+
+        /**
+         * Fullfill or reject specified promise
+         * 
+         * @method
+         * @param
+         * @param
+         */
+        fullFillOrReject : function(promise,data,response) {
+            if (promise) {
+                try {
+                    promise.response = response;
+                    if (data instanceof Error) {
+                        promise.rejected(data);
+                    } else {
+                        promise.fullFilled(data);
+                    }
+                } catch (error) {
+                    log.debug("fullFillOrReject: " + error.message);
+                }
+            }
+        },
+
+        /**
+         * Add the specified data into the cache
+         * 
+         * @param id
+         * @param data
+         */
+        addToCache : function(id, data) {
+            if (this._cache && !(data instanceof Error)) {
+                this._cache.put(id, data);
+            }
+        },
+        
+        /**
+         * Remove the cached data for the specified id
+         * 
+         * @param id
+         */
+        removeFromCache : function(id) {
+            if (this._cache) {
+                this._cache.remove(id);
+            }
+        },
+                
+        /**
+         * Get the cached data for the specified id
+         * 
+         * @param id
+         */
+        getFromCache : function(id) {
+            if (this._cache) {
+                return this._cache.get(id);
+            }
+        },
+                
+        /**
+         * @method createBadRequestError
+         * @param message
+         * @returns {Error}
+         */
+        createBadRequestError : function(message) {
+            var error = new Error();
+            error.code = BadRequest;
+            error.message = message;
+            return error;
+        },
+        
+        /**
+         * @method createBadRequestPromise
+         * @param message
+         * @returns {Promise}
+         */
+        createBadRequestPromise : function(message) {
+            return new Promise(this.createBadRequestError(message));
+        },
+        
+        /**
+         * Return true if the specified id is an email 
+         * 
+         * @method isEmail
+         * @param id
+         * @returns
+         */
+        isEmail : function(id) {
+            return id && id.indexOf('@') >= 0;
+        },
+        
+        /**
+         * 
+         * @method getLocationParameter
+         * @param ioArgs
+         * @param name
+         * @returns
+         */
+        getLocationParameter: function (response, name) {
+            var location = response.getHeader("Location") || undefined;
+            if (location) {
+                return this.getUrlParameter(location, name);
+            }
+        },
+        
+        /**
+         * 
+         * @mehtod getUrlParameter
+         * @param url
+         * @param name
+         * @returns {Boolean}
+         */
+        getUrlParameter : function (url, name) {
+            return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(url)||[,""])[1].replace(/\+/g, '%20'))||null;
+        },
+        
+        /**
+         * Validate a string field, and return a Promise if invalid.
+         */
+        validateField : function(fieldName, fieldValue) {
+            if (!fieldValue) {
+                var message = "Invalid value {0} for field {1}, the field must not be empty or undefined.";
+                message = stringUtil.substitute(message, [ fieldValue || "'undefined'", fieldName ]);
+                return this.createBadRequestPromise(message);
+            }
+        },
+        
+        /**
+         * Validate a map of fields, and return a Promise for first invalid field found.
+         */
+        validateFields : function(fieldMap) {
+            for(var name in fieldMap){
+                var value = fieldMap[name];
+                var promise = this.validateField(name, value);
+                if (promise) {
+                    return promise;
+                }
+            }
+        },
+        
+        /*
+         * Validate the entityId and if invalid notify callbacks
+         */
+        _validateEntityId : function(entityId, args) {
+            if (!entityId || !lang.isString(entityId)) {
+                var message = "Invalid argument {0}, expected valid entity identifier.";
+                message = stringUtil.substitute(message, [ entityId || "'undefined'" ]);
+                return this.createBadRequestPromise(message);
+            }
+        }
+
+    });
+    return BaseService;
 });

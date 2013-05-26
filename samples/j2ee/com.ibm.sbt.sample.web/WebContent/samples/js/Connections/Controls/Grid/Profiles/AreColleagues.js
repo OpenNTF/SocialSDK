@@ -1,5 +1,5 @@
 require(["sbt/dom", "sbt/connections/controls/profiles/ColleagueGrid"], 
-    function(dom, ColleagueGrid, Endpoint, xml, xpath, core) {
+    function(dom, ColleagueGrid) {
         var grid = new ColleagueGrid({
             type: "dynamic",
             rendererArgs: { hideViewAll: true },

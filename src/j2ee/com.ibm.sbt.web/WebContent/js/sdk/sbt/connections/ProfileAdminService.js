@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -14,96 +14,86 @@
  * permissions and limitations under the License.
  */
 
-
 /**
- * Social Business Toolkit SDK.
- *  
- * Helpers for accessing the Connections Profiles services
+ * JavaScript API for IBM Connections Profile Service.
+ * 
+ * @module sbt.connections.ProfileService
  */
-define(['sbt/declare','sbt/config','sbt/lang','sbt/connections/core','sbt/xml','sbt/util','sbt/xpath','sbt/Cache','sbt/connections/ProfileService','sbt/connections/ProfileConstants','sbt/validate'],
-		function(declare,cfg,lang,con,xml,util,xpath,Cache,profileService,constants,validate) {
-	
-	var ProfileAdminService = declare("sbt.connections.ProfileAdminService", sbt.connections.ProfileService, {
-		
-		constructor: function(_options) {
-			this.inherited(arguments, [_options]);
-		},
-		
-		createProfile: function (inputProfile, args) {
-			if (!(validate._validateInputTypeAndNotify("ProfileAdminService", "createProfile", "Profile", inputProfile, "sbt.connections.Profile", args))) {
-				return ;
-			}
-			if (!inputProfile._validate("ProfileAdminService", "createProfile", args, {
-				isValidateId : true
-			})) {
-				return;
-			}
-			
-			var headers = {"Content-Type" : "application/atom+xml"};
-			var _self = this;
-			var _id= inputProfile._id;
-			var param = {};
-			if(inputProfile._idType == "email"){
-				param.email = _id;
-			}else{
-				param.userid = _id;
-			}
-			this._createEntity(args,{
-				entityName: "profile", serviceEntity: "createProfile", entityType: "",
-				entity: inputProfile,
-				headers:headers,
-				xmlPayload : _self._constructCreateRequest(inputProfile,inputProfile._fields),						
-				urlParams : param				
-			});		
-		},
-		_createEntityOnLoad : function (data, ioArgs, inputProfile, args){
-			var param = {};
-			if(inputProfile._idType == "email"){
-				param.email = inputProfile._id;
-			}else{
-				param.userid = inputProfile._id;
-			}
-			inputProfile.fields = {};				
-			this._load(inputProfile, args,{entityName: "profile", serviceEntity: "getProfile", entityType: "", _cachingEnabled : true, urlParams:param});	
-			
-		},
-		
-		deleteProfile: function (inputProfile, args) {			
-			if(!(typeof inputProfile == "object")){
-				var profile = new Profile(this, inputProfile);				
-				profile._idType = "id";
-				this._deleteProfile(profile, args);
-			}else{
-				this._deleteProfile(inputProfile, args);
-			}			
-		},
-		_deleteProfile: function (inputProfile, args) {
-			if (!(validate._validateInputTypeAndNotify("ProfileAdminService", "deleteProfile", "Profile", inputProfile, "sbt.connections.Profile", args))) {
-				return ;
-			}
-			if (!inputProfile._validate("ProfileAdminService", "deleteProfile", args, {
-				isValidateId : true
-			})) {
-				return;
-			}
-			var headers = {};
-			headers["Content-Type"] = "application/atom+xml";
-			var _self = this;
-			var _id= inputProfile._id;
-			var param = {};
-			if(inputProfile._idType == "email"){
-				param.email = _id;
-			}else{
-				param.userid = _id;
-			}			
-			this._deleteEntity(args,{
-				entityName: "profile", serviceEntity: "deleteProfile", entityType: "",
-				entity: inputProfile,
-				headers:headers,									
-				urlParams : param
-			});		
-		},
-	});
-	
-	return ProfileAdminService;
+define([ "sbt/_bridge/declare", "sbt/lang", "sbt/config", "sbt/stringUtil", "./ProfileConstants", "../base/BaseService", "../base/XmlDataHandler", "./ProfileService" ], function(
+        declare,lang,config,stringUtil,consts,BaseService,XmlDataHandler, ProfileService) { 
+    
+    /**
+     * ProfileAdminService class.
+     * 
+     * @class ProfileAdminService
+     * @namespace sbt.connections
+     */
+    var ProfileAdminService = declare(ProfileService , {
+    	
+        /**
+         * Create a profile
+         * 
+         * @method createProfile
+         * @param {Object}
+         *            profileOrJson Profile object or Json
+         * @param {Object}
+         *            [args] Argument object
+         */
+        createProfile : function(profileOrJson,args) {
+            var profile = this._toProfile(profileOrJson);
+            var promise = this._validateProfile(profile);
+            if (promise) {
+                return promise;
+            }
+
+            var requestArgs = {};
+            profile.getUserid() ? requestArgs.userid = profile.getUserid() : requestArgs.email = profile.getEmail();
+            lang.mixin(requestArgs, args || {});
+            
+            var callbacks = {};            
+            callbacks.createEntity = function(service,data,response) {                
+                return profile;
+            };        
+            
+            var options = {
+                    method : "POST",
+                    query : requestArgs,
+                    headers : consts.AtomXmlHeaders,
+                    data : this._constructProfilePutData(profile)
+                };   
+            
+            return this.updateEntity(consts.AdminAtomProfileDo, options, callbacks, args);
+            
+        },
+        
+        /**
+         * Delete an existing profile
+         * 
+         * @method deleteProfile
+         * @param {Object}
+         *            profileId userid or email of the profile
+         * @param {Object}
+         *            [args] Argument object
+         */
+        deleteProfile : function(profileId,args) {
+        	var promise = this._validateProfileId(profileId);
+            if (promise) {
+                return promise;
+            }
+
+            var requestArgs = {};
+            this.isEmail(profileId) ? requestArgs.email = profileId : requestArgs.userid = profileId;
+            lang.mixin(requestArgs, args || {});
+            
+            var options = {
+                method : "DELETE",
+                query : requestArgs,
+                handleAs : "text"
+            };
+            
+            return this.deleteEntity(consts.AdminAtomProfileEntryDo, options, profileId, args);
+            
+        }        
+    });
+    return ProfileAdminService;
 });

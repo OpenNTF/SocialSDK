@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app"
+	xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn">
+	<id>https://apps.na.collabserv.com/communities/service/atom/communities/all?ps=5
+	</id>
+	<updated>2013-05-09T12:55:22.465Z</updated>
+	<title type="text">IBM Test - SDK Renovations Communities</title>
+	<link
+		href="https://apps.na.collabserv.com/communities/service/html/allcommunities"
+		rel="alternate"></link>
+	<generator uri="http://www.ibm.com/xmlns/prod/sn" version="3.6.1.0">IBM
+		Connections - Communities</generator>
+	<opensearch:totalResults>7</opensearch:totalResults>
+	<opensearch:startIndex>1</opensearch:startIndex>
+	<opensearch:itemsPerPage>5</opensearch:itemsPerPage>
+	<link
+		href="https://apps.na.collabserv.com/communities/service/atom/communities/all?ps=5"
+		rel="first"></link>
+	<link
+		href="https://apps.na.collabserv.com/communities/service/atom/communities/all?ps=5&amp;page=2"
+		rel="last"></link>
+	<link
+		href="https://apps.na.collabserv.com/communities/service/atom/communities/all?ps=5&amp;page=2"
+		rel="next"></link>
+	<link
+		href="https://apps.na.collabserv.com/communities/service/atom/communities/all?ps=5"
+		rel="self"></link>
+	<link href="https://apps.na.collabserv.com/communities/service/atom/service"
+		rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml"></link>
+	<link
+		href="https://apps.na.collabserv.com/communities/service/atom/communities/all?ps=5&amp;outputType=categories"
+		rel="http://www.ibm.com/xmlns/prod/sn/tag-cloud" type="application/atomcat+xml"></link>
+	<entry>
+		<id>http://communities.ibm.com:2006/service/atom/community/instance?communityUuid=aeaf73af-84a8-4f57-be61-31d0f61fb88f
+		</id>
+		<title type="text">Test Open Community</title>
+		<summary type="text"></summary>
+		<content type="html"></content>
+		<published>2013-05-09T12:54:36.770Z</published>
+		<author>
+			<name>Frank Adams</name>
+			<snx:userid>20547574</snx:userid>
+			<snx:userState>active</snx:userState>
+		</author>
+		<updated>2013-05-09T12:54:38.314Z</updated>
+		<contributor>
+			<name>Frank Adams</name>
+			<snx:userid>20547574</snx:userid>
+			<snx:userState>active</snx:userState>
+		</contributor>
+		<category term="community" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/instance?communityUuid=aeaf73af-84a8-4f57-be61-31d0f61fb88f"
+			rel="self"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/instance?communityUuid=aeaf73af-84a8-4f57-be61-31d0f61fb88f"
+			rel="edit"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/html/communityview?communityUuid=aeaf73af-84a8-4f57-be61-31d0f61fb88f"
+			rel="alternate" type="text/html"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/html/image?communityUuid=aeaf73af-84a8-4f57-be61-31d0f61fb88f&amp;lastMod=1368104076770"
+			rel="http://www.ibm.com/xmlns/prod/sn/logo"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/service?communityUuid=aeaf73af-84a8-4f57-be61-31d0f61fb88f"
+			rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/members?communityUuid=aeaf73af-84a8-4f57-be61-31d0f61fb88f"
+			rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/bookmarks?communityUuid=aeaf73af-84a8-4f57-be61-31d0f61fb88f"
+			rel="http://www.ibm.com/xmlns/prod/sn/bookmarks" type="application/atom+xml"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/feeds?communityUuid=aeaf73af-84a8-4f57-be61-31d0f61fb88f"
+			rel="http://www.ibm.com/xmlns/prod/sn/feeds" type="application/atom+xml"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/remoteApplications?communityUuid=aeaf73af-84a8-4f57-be61-31d0f61fb88f"
+			rel="http://www.ibm.com/xmlns/prod/sn/remote-applications" type="application/atom+xml"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/forum/topics?communityUuid=aeaf73af-84a8-4f57-be61-31d0f61fb88f"
+			rel="http://www.ibm.com/xmlns/prod/sn/forum-topics" type="application/atom+xml"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/invites?communityUuid=aeaf73af-84a8-4f57-be61-31d0f61fb88f"
+			rel="http://www.ibm.com/xmlns/prod/sn/invitations-list" type="application/atom+xml"></link>
+		<snx:membercount>1</snx:membercount>
+		<snx:communityType>public</snx:communityType>
+		<snx:handle></snx:handle>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/subcommunities?communityUuid=aeaf73af-84a8-4f57-be61-31d0f61fb88f"
+			rel="http://www.ibm.com/xmlns/prod/sn/subcommunities" type="application/atom+xml"></link>
+		<snx:preModeration>true</snx:preModeration>
+		<snx:postModeration>true</snx:postModeration>
+		<snx:isExternal>false</snx:isExternal>
+	</entry>
+	<entry>
+		<id>http://communities.ibm.com:2006/service/atom/community/instance?communityUuid=5c9e9b91-84d3-4d57-b42d-0b008ee9626e
+		</id>
+		<title type="text">abc</title>
+		<summary type="text">abc</summary>
+		<content type="html"></content>
+		<published>2012-12-03T05:26:07.477Z</published>
+		<author>
+			<name>Frank Adams</name>
+			<snx:userid>20547574</snx:userid>
+			<snx:userState>active</snx:userState>
+		</author>
+		<updated>2013-03-30T07:04:03.092Z</updated>
+		<contributor>
+			<name>Frank Adams</name>
+			<snx:userid>20547574</snx:userid>
+			<snx:userState>active</snx:userState>
+		</contributor>
+		<category term="community" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/instance?communityUuid=5c9e9b91-84d3-4d57-b42d-0b008ee9626e"
+			rel="self"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/instance?communityUuid=5c9e9b91-84d3-4d57-b42d-0b008ee9626e"
+			rel="edit"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/html/communityview?communityUuid=5c9e9b91-84d3-4d57-b42d-0b008ee9626e"
+			rel="alternate" type="text/html"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/html/image?communityUuid=5c9e9b91-84d3-4d57-b42d-0b008ee9626e&amp;lastMod=1354512367477"
+			rel="http://www.ibm.com/xmlns/prod/sn/logo"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/service?communityUuid=5c9e9b91-84d3-4d57-b42d-0b008ee9626e"
+			rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/members?communityUuid=5c9e9b91-84d3-4d57-b42d-0b008ee9626e"
+			rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/bookmarks?communityUuid=5c9e9b91-84d3-4d57-b42d-0b008ee9626e"
+			rel="http://www.ibm.com/xmlns/prod/sn/bookmarks" type="application/atom+xml"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/feeds?communityUuid=5c9e9b91-84d3-4d57-b42d-0b008ee9626e"
+			rel="http://www.ibm.com/xmlns/prod/sn/feeds" type="application/atom+xml"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/remoteApplications?communityUuid=5c9e9b91-84d3-4d57-b42d-0b008ee9626e"
+			rel="http://www.ibm.com/xmlns/prod/sn/remote-applications" type="application/atom+xml"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/forum/topics?communityUuid=5c9e9b91-84d3-4d57-b42d-0b008ee9626e"
+			rel="http://www.ibm.com/xmlns/prod/sn/forum-topics" type="application/atom+xml"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/invites?communityUuid=5c9e9b91-84d3-4d57-b42d-0b008ee9626e"
+			rel="http://www.ibm.com/xmlns/prod/sn/invitations-list" type="application/atom+xml"></link>
+		<snx:membercount>3</snx:membercount>
+		<snx:communityType>public</snx:communityType>
+		<snx:handle></snx:handle>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/subcommunities?communityUuid=5c9e9b91-84d3-4d57-b42d-0b008ee9626e"
+			rel="http://www.ibm.com/xmlns/prod/sn/subcommunities" type="application/atom+xml"></link>
+		<snx:preModeration>true</snx:preModeration>
+		<snx:postModeration>true</snx:postModeration>
+		<snx:isExternal>false</snx:isExternal>
+	</entry>
+	<entry>
+		<id>http://communities.ibm.com:2006/service/atom/community/instance?communityUuid=570814ed-609f-4880-acdc-15c9efe7f4cb
+		</id>
+		<title type="text">Edgar Burnett SDK Community</title>
+		<summary type="text">&#xD;
+			This community is owned by Edgar. </summary>
+		<content type="html"></content>
+		<published>2012-12-05T11:31:17.914Z</published>
+		<author>
+			<name>Edgar Burnett</name>
+			<snx:userid>20548041</snx:userid>
+			<snx:userState>active</snx:userState>
+		</author>
+		<updated>2012-12-05T11:31:18.152Z</updated>
+		<contributor>
+			<name>Edgar Burnett</name>
+			<snx:userid>20548041</snx:userid>
+			<snx:userState>active</snx:userState>
+		</contributor>
+		<category term="community" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category>
+		<category term="sdk"></category>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/instance?communityUuid=570814ed-609f-4880-acdc-15c9efe7f4cb"
+			rel="self"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/instance?communityUuid=570814ed-609f-4880-acdc-15c9efe7f4cb"
+			rel="edit"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/html/communityview?communityUuid=570814ed-609f-4880-acdc-15c9efe7f4cb"
+			rel="alternate" type="text/html"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/html/image?communityUuid=570814ed-609f-4880-acdc-15c9efe7f4cb&amp;lastMod=1354707077914"
+			rel="http://www.ibm.com/xmlns/prod/sn/logo"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/service?communityUuid=570814ed-609f-4880-acdc-15c9efe7f4cb"
+			rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/members?communityUuid=570814ed-609f-4880-acdc-15c9efe7f4cb"
+			rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/bookmarks?communityUuid=570814ed-609f-4880-acdc-15c9efe7f4cb"
+			rel="http://www.ibm.com/xmlns/prod/sn/bookmarks" type="application/atom+xml"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/feeds?communityUuid=570814ed-609f-4880-acdc-15c9efe7f4cb"
+			rel="http://www.ibm.com/xmlns/prod/sn/feeds" type="application/atom+xml"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/remoteApplications?communityUuid=570814ed-609f-4880-acdc-15c9efe7f4cb"
+			rel="http://www.ibm.com/xmlns/prod/sn/remote-applications" type="application/atom+xml"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/forum/topics?communityUuid=570814ed-609f-4880-acdc-15c9efe7f4cb"
+			rel="http://www.ibm.com/xmlns/prod/sn/forum-topics" type="application/atom+xml"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/invites?communityUuid=570814ed-609f-4880-acdc-15c9efe7f4cb"
+			rel="http://www.ibm.com/xmlns/prod/sn/invitations-list" type="application/atom+xml"></link>
+		<snx:membercount>2</snx:membercount>
+		<snx:communityType>public</snx:communityType>
+		<snx:handle></snx:handle>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/subcommunities?communityUuid=570814ed-609f-4880-acdc-15c9efe7f4cb"
+			rel="http://www.ibm.com/xmlns/prod/sn/subcommunities" type="application/atom+xml"></link>
+		<snx:preModeration>true</snx:preModeration>
+		<snx:postModeration>true</snx:postModeration>
+		<snx:isExternal>false</snx:isExternal>
+	</entry>
+	<entry>
+		<id>http://communities.ibm.com:2006/service/atom/community/instance?communityUuid=9f726565-7c4a-48c3-ac10-2a5c9834236c
+		</id>
+		<title type="text">Android 2.3</title>
+		<summary type="text"></summary>
+		<content type="html"></content>
+		<published>2012-12-04T05:36:13.506Z</published>
+		<author>
+			<name>Shankar Vakil</name>
+			<snx:userid>20548043</snx:userid>
+			<snx:userState>active</snx:userState>
+		</author>
+		<updated>2012-12-04T05:36:13.885Z</updated>
+		<contributor>
+			<name>Shankar Vakil</name>
+			<snx:userid>20548043</snx:userid>
+			<snx:userState>active</snx:userState>
+		</contributor>
+		<category term="community" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/instance?communityUuid=9f726565-7c4a-48c3-ac10-2a5c9834236c"
+			rel="self"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/instance?communityUuid=9f726565-7c4a-48c3-ac10-2a5c9834236c"
+			rel="edit"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/html/communityview?communityUuid=9f726565-7c4a-48c3-ac10-2a5c9834236c"
+			rel="alternate" type="text/html"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/html/image?communityUuid=9f726565-7c4a-48c3-ac10-2a5c9834236c&amp;lastMod=1354599373506"
+			rel="http://www.ibm.com/xmlns/prod/sn/logo"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/service?communityUuid=9f726565-7c4a-48c3-ac10-2a5c9834236c"
+			rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/members?communityUuid=9f726565-7c4a-48c3-ac10-2a5c9834236c"
+			rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/bookmarks?communityUuid=9f726565-7c4a-48c3-ac10-2a5c9834236c"
+			rel="http://www.ibm.com/xmlns/prod/sn/bookmarks" type="application/atom+xml"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/feeds?communityUuid=9f726565-7c4a-48c3-ac10-2a5c9834236c"
+			rel="http://www.ibm.com/xmlns/prod/sn/feeds" type="application/atom+xml"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/remoteApplications?communityUuid=9f726565-7c4a-48c3-ac10-2a5c9834236c"
+			rel="http://www.ibm.com/xmlns/prod/sn/remote-applications" type="application/atom+xml"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/forum/topics?communityUuid=9f726565-7c4a-48c3-ac10-2a5c9834236c"
+			rel="http://www.ibm.com/xmlns/prod/sn/forum-topics" type="application/atom+xml"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/invites?communityUuid=9f726565-7c4a-48c3-ac10-2a5c9834236c"
+			rel="http://www.ibm.com/xmlns/prod/sn/invitations-list" type="application/atom+xml"></link>
+		<snx:membercount>1</snx:membercount>
+		<snx:communityType>publicInviteOnly</snx:communityType>
+		<snx:handle></snx:handle>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/subcommunities?communityUuid=9f726565-7c4a-48c3-ac10-2a5c9834236c"
+			rel="http://www.ibm.com/xmlns/prod/sn/subcommunities" type="application/atom+xml"></link>
+		<snx:preModeration>true</snx:preModeration>
+		<snx:postModeration>true</snx:postModeration>
+		<snx:isExternal>false</snx:isExternal>
+	</entry>
+	<entry>
+		<id>http://communities.ibm.com:2006/service/atom/community/instance?communityUuid=3ee311fc-937a-47af-b077-9449750c53bc
+		</id>
+		<title type="text">Public community by Fadams</title>
+		<summary type="text"></summary>
+		<content type="html"></content>
+		<published>2012-12-03T09:30:47.035Z</published>
+		<author>
+			<name>Frank Adams</name>
+			<snx:userid>20547574</snx:userid>
+			<snx:userState>active</snx:userState>
+		</author>
+		<updated>2012-12-04T05:30:55.198Z</updated>
+		<contributor>
+			<name>Shankar Vakil</name>
+			<snx:userid>20548043</snx:userid>
+			<snx:userState>active</snx:userState>
+		</contributor>
+		<category term="community" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/instance?communityUuid=3ee311fc-937a-47af-b077-9449750c53bc"
+			rel="self"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/instance?communityUuid=3ee311fc-937a-47af-b077-9449750c53bc"
+			rel="edit"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/html/communityview?communityUuid=3ee311fc-937a-47af-b077-9449750c53bc"
+			rel="alternate" type="text/html"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/html/image?communityUuid=3ee311fc-937a-47af-b077-9449750c53bc&amp;lastMod=1354527047035"
+			rel="http://www.ibm.com/xmlns/prod/sn/logo"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/service?communityUuid=3ee311fc-937a-47af-b077-9449750c53bc"
+			rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/members?communityUuid=3ee311fc-937a-47af-b077-9449750c53bc"
+			rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/bookmarks?communityUuid=3ee311fc-937a-47af-b077-9449750c53bc"
+			rel="http://www.ibm.com/xmlns/prod/sn/bookmarks" type="application/atom+xml"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/feeds?communityUuid=3ee311fc-937a-47af-b077-9449750c53bc"
+			rel="http://www.ibm.com/xmlns/prod/sn/feeds" type="application/atom+xml"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/remoteApplications?communityUuid=3ee311fc-937a-47af-b077-9449750c53bc"
+			rel="http://www.ibm.com/xmlns/prod/sn/remote-applications" type="application/atom+xml"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/forum/topics?communityUuid=3ee311fc-937a-47af-b077-9449750c53bc"
+			rel="http://www.ibm.com/xmlns/prod/sn/forum-topics" type="application/atom+xml"></link>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/invites?communityUuid=3ee311fc-937a-47af-b077-9449750c53bc"
+			rel="http://www.ibm.com/xmlns/prod/sn/invitations-list" type="application/atom+xml"></link>
+		<snx:membercount>2</snx:membercount>
+		<snx:communityType>public</snx:communityType>
+		<snx:handle></snx:handle>
+		<link
+			href="https://apps.na.collabserv.com/communities/service/atom/community/subcommunities?communityUuid=3ee311fc-937a-47af-b077-9449750c53bc"
+			rel="http://www.ibm.com/xmlns/prod/sn/subcommunities" type="application/atom+xml"></link>
+		<snx:preModeration>true</snx:preModeration>
+		<snx:postModeration>true</snx:postModeration>
+		<snx:isExternal>false</snx:isExternal>
+	</entry>
+</feed>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app"
+	xmlns:snx="http://www.ibm.com/xmlns/prod/sn">
+	<id>http://communities.ibm.com:2006/service/atom/community/members?communityUuid=62b096ca-f719-4f9b-8372-000b94a01f5e&amp;email=frankadams@renovations.com
+	</id>
+	<title type="text">Frank Adams</title>
+	<summary type="text">Frank Adams</summary>
+	<link
+		href="https://qs.renovations.com:444/profiles/atom/profile.do?email=frankadams@renovations.com"
+		type="application/atom+xml"></link>
+	<link
+		href="https://qs.renovations.com:444/profiles/vcard/profile.do?email=frankadams@renovations.com"
+		type="text/directory"></link>
+	<published>2013-05-23T10:05:29.390Z</published>
+	<updated>2013-05-23T10:05:29.390Z</updated>
+	<contributor>
+		<email>frankadams@renovations.com</email>
+		<snx:userid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">0EE5A7FA-3434-9A59-4825-7A7000278DAA
+		</snx:userid>
+		<snx:userState xmlns:snx="http://www.ibm.com/xmlns/prod/sn">active</snx:userState>
+		<name>Frank Adams</name>
+	</contributor>
+	<link
+		href="https://qs.renovations.com:444/communities/service/atom/community/members?communityUuid=62b096ca-f719-4f9b-8372-000b94a01f5e&amp;email=frankadams@renovations.com"
+		rel="self"></link>
+	<link
+		href="https://qs.renovations.com:444/communities/service/atom/community/members?communityUuid=62b096ca-f719-4f9b-8372-000b94a01f5e&amp;email=frankadams@renovations.com"
+		rel="edit"></link>
+	<snx:role xmlns:snx="http://www.ibm.com/xmlns/prod/sn"
+		component="http://www.ibm.com/xmlns/prod/sn/communities">owner</snx:role>
+	<category term="person" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category>
+	<snx:orgId xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:orgId>
+	<content type="xhtml">
+		<div xmlns="http://www.w3.org/1999/xhtml">
+			<span>
+				<a
+					href="https://qs.renovations.com:444/profiles/atom/profile.do?email=frankadams@renovations.com"
+					class="url fn">Frank Adams</a>
+				<div>
+					<a href="mailto:frankadams@renovations.com" class="email">frankadams@renovations.com
+					</a>
+				</div>
+				<div class="x-guid">0EE5A7FA-3434-9A59-4825-7A7000278DAA</div>
+				<div class="x-community-role">owner</div>
+			</span>
+		</div>
+	</content>
+</entry>

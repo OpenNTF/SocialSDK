@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns="http://www.w3.org/2005/Atom">
+  <id>urn:lsid:ibm.com:communities:invites-21d28e8a-4af8-47c7-913c-d4194e0a7664</id>
+  <title type="text">Invitations for Frank Adams</title>
+  <updated>2013-03-31T14:54:37.643Z</updated>
+  <generator version="4.0.0.0" uri="http://www.ibm.com/xmlns/prod/sn">IBM Connections - Communities</generator>
+  <link href="https://qs.renovations.com:444/communities/service/atom/service" rel="http://www.ibm.com/xmlns/prod/sn/service">
+  </link>
+  <link href="https://qs.renovations.com:444/communities/service/atom/service" rel="service">
+  </link>
+  <link href="https://qs.renovations.com:444/communities/service/atom/community/invites/my" rel="self">
+  </link>
+  <opensearch:totalResults>3</opensearch:totalResults>
+  <opensearch:startIndex>1</opensearch:startIndex>
+  <opensearch:itemsPerPage>20</opensearch:itemsPerPage>
+  <entry>
+    <id>urn:lsid:ibm.com:communities:invite-bf9a49e2-e961-45ad-8b8a-edacce62b3c9-21d28e8a-4af8-47c7-913c-d4194e0a7664</id>
+    <title type="text">Invitation for Frank Adams to Lucilles Restricted Community 3</title>
+    <category term="invite" scheme="http://www.ibm.com/xmlns/prod/sn/type">
+    </category>
+    <link href="https://qs.renovations.com:444/communities/service/atom/community/invites?communityUuid=bf9a49e2-e961-45ad-8b8a-edacce62b3c9&amp;userid=21d28e8a-4af8-47c7-913c-d4194e0a7664" rel="self">
+    </link>
+    <link href="https://qs.renovations.com:444/communities/service/atom/community/invites?communityUuid=bf9a49e2-e961-45ad-8b8a-edacce62b3c9&amp;userid=21d28e8a-4af8-47c7-913c-d4194e0a7664" rel="edit">
+    </link>
+    <link href="https://qs.renovations.com:444/communities/service/atom/community?communityUuid=bf9a49e2-e961-45ad-8b8a-edacce62b3c9" rel="http://www.ibm.com/xmlns/prod/sn/community">
+    </link>
+    <updated>2013-03-31T14:19:13.671Z</updated>
+    <author>
+      <name>Lucille Suarez</name>
+      <snx:userid>662B6E42-3313-8316-4825-7A7000268F34</snx:userid>
+    </author>
+    <content type="text"></content>
+    <contributor>
+      <name>Frank Adams</name>
+      <snx:userid>0EE5A7FA-3434-9A59-4825-7A7000278DAA</snx:userid>
+      <snx:userState>active</snx:userState>
+    </contributor>
+  </entry>
+  <entry>
+    <id>urn:lsid:ibm.com:communities:invite-6eaf7fd7-9262-4782-93c6-17305be5a949-21d28e8a-4af8-47c7-913c-d4194e0a7664</id>
+    <title type="text">Invitation for Frank Adams to Lucilles Restricted Community 2</title>
+    <category term="invite" scheme="http://www.ibm.com/xmlns/prod/sn/type">
+    </category>
+    <link href="https://qs.renovations.com:444/communities/service/atom/community/invites?communityUuid=6eaf7fd7-9262-4782-93c6-17305be5a949&amp;userid=21d28e8a-4af8-47c7-913c-d4194e0a7664" rel="self">
+    </link>
+    <link href="https://qs.renovations.com:444/communities/service/atom/community/invites?communityUuid=6eaf7fd7-9262-4782-93c6-17305be5a949&amp;userid=21d28e8a-4af8-47c7-913c-d4194e0a7664" rel="edit">
+    </link>
+    <link href="https://qs.renovations.com:444/communities/service/atom/community?communityUuid=6eaf7fd7-9262-4782-93c6-17305be5a949" rel="http://www.ibm.com/xmlns/prod/sn/community">
+    </link>
+    <updated>2013-03-31T14:16:51.918Z</updated>
+    <author>
+      <name>Lucille Suarez</name>
+      <snx:userid>662B6E42-3313-8316-4825-7A7000268F34</snx:userid>
+    </author>
+    <content type="text"></content>
+    <contributor>
+      <name>Frank Adams</name>
+      <snx:userid>0EE5A7FA-3434-9A59-4825-7A7000278DAA</snx:userid>
+      <snx:userState>active</snx:userState>
+    </contributor>
+  </entry>
+  <entry>
+    <id>urn:lsid:ibm.com:communities:invite-39628baa-7949-4d1c-827a-771fcb4245ed-21d28e8a-4af8-47c7-913c-d4194e0a7664</id>
+    <title type="text">Invitation for Frank Adams to Lucilles Restricted Community 1</title>
+    <category term="invite" scheme="http://www.ibm.com/xmlns/prod/sn/type">
+    </category>
+    <link href="https://qs.renovations.com:444/communities/service/atom/community/invites?communityUuid=39628baa-7949-4d1c-827a-771fcb4245ed&amp;userid=21d28e8a-4af8-47c7-913c-d4194e0a7664" rel="self">
+    </link>
+    <link href="https://qs.renovations.com:444/communities/service/atom/community/invites?communityUuid=39628baa-7949-4d1c-827a-771fcb4245ed&amp;userid=21d28e8a-4af8-47c7-913c-d4194e0a7664" rel="edit">
+    </link>
+    <link href="https://qs.renovations.com:444/communities/service/atom/community?communityUuid=39628baa-7949-4d1c-827a-771fcb4245ed" rel="http://www.ibm.com/xmlns/prod/sn/community">
+    </link>
+    <updated>2013-03-31T14:15:44.023Z</updated>
+    <author>
+      <name>Lucille Suarez</name>
+      <snx:userid>662B6E42-3313-8316-4825-7A7000268F34</snx:userid>
+    </author>
+    <content type="text"></content>
+    <contributor>
+      <name>Frank Adams</name>
+      <snx:userid>0EE5A7FA-3434-9A59-4825-7A7000278DAA</snx:userid>
+      <snx:userState>active</snx:userState>
+    </contributor>
+  </entry>
+</feed>

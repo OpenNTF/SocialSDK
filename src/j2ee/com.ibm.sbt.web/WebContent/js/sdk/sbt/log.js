@@ -164,7 +164,7 @@ define(['./stringUtil'], function(stringUtil) {
 				var args = Array.prototype.slice.call(arguments);
 				var text = args[0];				
 				args = args.slice(1);
-				var formattedText = stringutil.substitute(text, args);
+				var formattedText = stringUtil.substitute(text, args);
 				if (console.error) {
 					console.error("EXCEPTION : " + formattedText);
 				} else {

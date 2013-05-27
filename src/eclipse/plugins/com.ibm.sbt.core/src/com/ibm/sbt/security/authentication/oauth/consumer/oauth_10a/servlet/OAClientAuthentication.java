@@ -83,6 +83,11 @@ public class OAClientAuthentication extends AbstractServiceHandler {
 		String mode = req.getParameter("loginUi");
 
 		PrintWriter pw = resp.getWriter();
+		/*
+		 * Fix : Adding content type in response. Not setting this, results in
+		 * the html being rendered as text/plain.
+		 */
+		resp.setContentType("text/html");
 		try {
 			pw.println("<html>");
 			pw.println("<head>");

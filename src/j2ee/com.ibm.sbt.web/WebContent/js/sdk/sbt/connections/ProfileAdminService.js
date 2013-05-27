@@ -19,7 +19,7 @@
  * 
  * @module sbt.connections.ProfileService
  */
-define([ "sbt/_bridge/declare", "sbt/lang", "sbt/config", "sbt/stringUtil", "./ProfileConstants", "../base/BaseService", "../base/XmlDataHandler", "./ProfileService" ], function(
+define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConstants", "../base/BaseService", "../base/XmlDataHandler", "./ProfileService" ], function(
         declare,lang,config,stringUtil,consts,BaseService,XmlDataHandler, ProfileService) { 
     
     /**

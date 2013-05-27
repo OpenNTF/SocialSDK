@@ -16,37 +16,44 @@
 /**
  * Social Business Toolkit SDK. Definition of constants for ProfileService.
  */
-define([ "sbt/lang" ], function(lang) {
+define([ "../lang" ], function(lang) {
 
     return lang.mixin( {} , {
         /**
          * Default size for the profile cache
          */
         DefaultCacheSize : 10,
+        
 		/**
          * Retrieve the profile entry of the logged in user.
          */
         GetProfile : "/lotuslive-shindig-server/social/rest/people/@me/@self",
+        
         /**
          * Retrieve the logged in user's profile connections.
          */
         GetMyConnections : "/lotuslive-shindig-server/social/rest/people/@me/@friends",
+        
         /**
          * Retrieve a profile's user Identity.
          */
         GetUserIdentity : "/manage/oauth/getUserIdentity",
+        
         /**
          * Retrieve a Contact's Profile.
          */
         GetContactByGUID : "/lotuslive-shindig-server/social/rest/people/lotuslive:contact:{idToBeReplaced}/@self",
+        
         /**
          * Retrieve a profiles entry using GUID.
          */
         GetProfileByGUID : "/lotuslive-shindig-server/social/rest/people/lotuslive:user:{idToBeReplaced}/@self",
+        
         /**
          * Retrieve the logged in user's profile contacts.
          */
         GetMyContacts : "/lotuslive-shindig-server/social/rest/people/@me/@all",
+        
         /**
          * JsonPath expressions to be used when reading a Profile Entry
          */

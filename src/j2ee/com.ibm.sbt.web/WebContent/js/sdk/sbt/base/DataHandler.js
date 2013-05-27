@@ -20,7 +20,7 @@
  * 
  * @module sbt.base.DataHandler
  */
-define([ "sbt/_bridge/declare", "sbt/lang" ], function(declare,lang) {
+define([ "../declare", "../lang" ], function(declare,lang) {
 
     /**
      * DataHandler class

@@ -16,7 +16,7 @@
 /**
  * Social Business Toolkit SDK. Definition of constants for CommunityService.
  */
-define([ "sbt/lang", "sbt/connections/ConnectionsConstants" ], function(lang,conn) {
+define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
 
     return lang.mixin(conn, {
         

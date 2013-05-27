@@ -20,7 +20,7 @@
  * @module sbt.base.BaseService
  * @author Carlos Manias
  */
-define([ "sbt/_bridge/declare", "sbt/lang", "sbt/log", "sbt/stringUtil" ], 
+define([ "../declare", "../lang", "../log", "../stringUtil" ], 
     function(declare,lang,log,stringUtil) {
 
     var BadRequest = 400;

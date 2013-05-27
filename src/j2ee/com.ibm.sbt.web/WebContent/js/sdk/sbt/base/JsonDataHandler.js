@@ -20,7 +20,7 @@
  * 
  * @module sbt.base.JsonDataHandler
  */
-define(["sbt/_bridge/declare", "sbt/lang", "sbt/json", "./DataHandler", "sbt/Jsonpath", "sbt/stringUtil"], 
+define(["../declare", "../lang", "../json", "./DataHandler", "../Jsonpath", "../stringUtil"], 
     function(declare, lang, json, DataHandler, jsonPath, stringUtil) {
 
     /**

@@ -21,7 +21,7 @@
  *	@module sbt.smartcloud.ProfileService
 **/
 
-define(['sbt/_bridge/declare','sbt/lang', "sbt/config", "sbt/stringUtil",'sbt/Cache','sbt/smartcloud/Subscriber','sbt/Jsonpath','sbt/Endpoint', "../base/BaseService", "../base/JsonDataHandler", "./ProfileConstants", "../base/BaseEntity"],
+define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscriber","../Jsonpath","../Endpoint", "../base/BaseService", "../base/JsonDataHandler", "./ProfileConstants", "../base/BaseEntity"],
 		function(declare, lang, Config, StringUtil, Cache, Subscriber, JsonPath, Endpoint, BaseService, JsonDataHandler, Consts, BaseEntity) {
 	/**
      * Profile class.

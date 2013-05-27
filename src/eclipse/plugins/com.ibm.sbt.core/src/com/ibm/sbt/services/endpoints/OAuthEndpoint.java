@@ -80,7 +80,6 @@ public class OAuthEndpoint extends AbstractEndpoint {
 	@Override
 	public void setUrl(String url) {
 		super.setUrl(url);
-		// oaProvider.setUrl(url);
 		// Make the URL the service name if not already set
 		if (StringUtil.isEmpty(oaProvider.getServiceName())) {
 			oaProvider.setServiceName(url);
@@ -238,12 +237,6 @@ public class OAuthEndpoint extends AbstractEndpoint {
 		private final AccessToken	token;
 		private final String		baseUrl;
 
-		@SuppressWarnings("unused")
-		public OAuthInterceptor(AccessToken token) {
-			this.token = token;
-			this.baseUrl = null;
-		}
-
 		public OAuthInterceptor(AccessToken token, String baseUrl) {
 			this.token = token;
 			this.baseUrl = baseUrl;
@@ -257,24 +250,29 @@ public class OAuthEndpoint extends AbstractEndpoint {
 					Configuration.OAUTH_HANDLER);
 			contextForHandler.getSessionMap().get("oaProvider");
 			String authorizationheader = null;
-			if (oaHandler.getClass().equals(HMACOAuth1Handler.class)) {
-				String requestUri = request.getRequestLine().getUri().toString();
-				// Using UrlUtil's getParamsMap for creating the ParamsMap from the query String Request Uri.
-				Map<String, String> mapOfParams = UrlUtil.getParamsMap(requestUri);
-				try {
-					requestUri = requestUri.substring(0, requestUri.indexOf("?"));
-					requestUri = PathUtil.concat(baseUrl, requestUri, '/');
-
-					// creating authorization header
-					authorizationheader = ((HMACOAuth1Handler) oaHandler).createAuthorizationHeader(
-							requestUri, mapOfParams);
-				} catch (OAuthException e) {
-					throw new HttpException(
-							"OAuthException thrown while creating Authorization header in OAuthInterceptor",
-							e);
+			if(oaHandler != null) {
+				if (oaHandler.getClass().equals(HMACOAuth1Handler.class)) {
+					String requestUri = request.getRequestLine().getUri().toString();
+					// Using UrlUtil's getParamsMap for creating the ParamsMap from the query String Request Uri.
+					Map<String, String> mapOfParams = UrlUtil.getParamsMap(requestUri);
+					try {
+						requestUri = requestUri.substring(0, requestUri.indexOf("?"));
+						requestUri = PathUtil.concat(baseUrl, requestUri, '/');
+	
+						// creating authorization header
+						authorizationheader = ((HMACOAuth1Handler) oaHandler).createAuthorizationHeader(
+								requestUri, mapOfParams);
+					} catch (OAuthException e) {
+						throw new HttpException(
+								"OAuthException thrown while creating Authorization header in OAuthInterceptor",
+								e);
+					}
+				} else {
+					authorizationheader = oaHandler.createAuthorizationHeader();
 				}
-			} else {
-				authorizationheader = oaHandler.createAuthorizationHeader();
+			}
+			else {
+				throw new HttpException("Error retrieving OAuth Handler. OAuth Handler is null");
 			}
 			request.addHeader("Authorization", authorizationheader);
 		}

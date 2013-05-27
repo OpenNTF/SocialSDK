@@ -27,7 +27,8 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	</head>
 	<body>
-	<%					
+	<%
+	try {					
 		ProfileAdminService service = new ProfileAdminService(); //If no endpoint is specified, it uses default end point i.e connections
 		Profile profile = service.getProfile("testUser61@renovations.com", false);
 		String email = "testUser61@renovations.com";
@@ -49,7 +50,11 @@
 		else{
 			out.println("error while trying to create Profile");
 		}
-		
+	} catch (Throwable e) {
+			out.println("<pre>");
+			out.println(e.getMessage());
+			out.println("</pre>");
+		}
 	%>
 	</body>
 </html>

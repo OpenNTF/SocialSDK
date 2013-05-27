@@ -16,6 +16,7 @@ package com.ibm.sbt.security.authentication.oauth.consumer;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.net.URLEncoder;
 import java.security.SecureRandom;
 import java.util.logging.Level;
@@ -36,7 +37,10 @@ import com.ibm.sbt.services.util.SSLUtil;
  * @author Manish Kataria
  */
 
-public class OAuth1Handler extends OAuthHandler {
+public class OAuth1Handler extends OAuthHandler implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
 	private static final int			BYTE_ARRAY_SIZE	= ((23 * 5) / 8) + 1;
 	private static final SecureRandom	SECURE_RANDOM	= new SecureRandom();
 

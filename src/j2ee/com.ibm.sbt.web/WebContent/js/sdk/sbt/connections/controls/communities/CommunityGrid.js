@@ -19,60 +19,14 @@
  */
 define([ "../../../declare", 
          "../../../controls/grid/Grid", 
-         "../../../connections/controls/communities/CommunityGridRenderer", 
-         "../../../connections/controls/communities/CommunityAction", 
+         "./CommunityGridRenderer", 
+         "./CommunityAction", 
          "../../../controls/vcard/connections/SemanticTagService",
          "../../../config",
-         "../../../store/parameter",
-         "../../../connections/CommunityConstants"], 
-        function(declare, Grid, CommunityGridRenderer, CommunityAction, SemanticTagService, sbt, parameter, communityConstants) {
+         "../../../connections/CommunityConstants",
+         "../../../store/parameter" ], 
+        function(declare, Grid, CommunityGridRenderer, CommunityAction, SemanticTagService, sbt, consts, parameter) {
 
-	// TODO use values from constants and handle authType    	
-	var communitiesUrls = {
-	    communitiesServiceBaseUrl:"/communities/service/atom",
-	    allCommunities : "/communities/service/atom/communities/all",
-        myCommunities : "/communities/service/atom/communities/my",
-		getCommunity : "/community/instance",
-		updateCommunity : "/community/instance",
-		createCommunity : "/communities/my",
-		deleteCommunity : "/community/instance",			
-		addCommunityMember : "/community/members",
-		removeCommunityMember : "/community/members",
-		getCommunityMember : "/community/members"
-	};
-	
-	var xpath_community = {
-		"entry"				:"/a:entry",
-		"communityUuid"		:"snx:communityUuid",
-		"uid"				:"snx:communityUuid",
-		"title"				:"a:title",
-		"summary"			:"a:summary[@type='text']",
-		"communityUrl"      :"a:link[@rel='alternate']/@href",
-		"communityFeedUrl"  :"a:link[@rel='self']/@href",
-		"logoUrl"			:"a:link[@rel='http://www.ibm.com/xmlns/prod/sn/logo']/@href",
-		"tags"				:"a:category/@term",
-		"content"			:"a:content[@type='html']",
-        "memberCount"       :"snx:membercount",
-        "communityType"     :"snx:communityType",
-        "published"         :"a:published",
-        "updated"           :"a:updated",
-        "authorUid"			:"a:author/snx:userid",
-        "authorName"		:"a:author/a:name",
-        "authorEmail"		:"a:author/a:email",
-		"contributorUid"	:"a:contributor/snx:userid",
-		"contributorName"	:"a:contributor/a:name",
-		"contributorEmail"	:"a:contributor/a:email"				
-	};
-	
-	var xpath_feed_community = {
-		"entry"				:"/a:feed/a:entry",	
-		"id"				:"a:id",
-		"totalResults"      :"/a:feed/opensearch:totalResults",
-        "startIndex"        :"/a:feed/opensearch:startIndex",
-        "itemsPerPage"      :"/a:feed/opensearch:itemsPerPage",
-        "title"				:"a:title"            
-	};
-	
     /**
      * @class  CommunityGrid
      * @namespace  sbt.controls.grid.connections
@@ -80,41 +34,45 @@ define([ "../../../declare",
      */
     var CommunityGrid = declare(Grid, {
     	
-    	
     	/**
     	 * Options are for which type of community grid is to be created
     	 */
         options : {
             "public" : {
                 storeArgs : {
-                    url : communitiesUrls.allCommunities,
-                    attributes : xpath_community,
-                    feedXPath: xpath_feed_community,
-                    paramSchema: parameter.communities.all
+                    url : consts.AtomCommunitiesAll,
+                    attributes : consts.CommunityXPath,
+                    feedXPath : consts.CommunityFeedXPath,
+                    paramSchema : parameter.communities.all
                 },
                 rendererArgs : null
             },
             "my" : {
                 storeArgs : {
-                   url : communitiesUrls.myCommunities,
-                    attributes : xpath_community,
-                    paramSchema: parameter.communities.all
+                    url : consts.AtomCommunitiesMy,
+                    attributes : consts.CommunityXPath,
+                    feedXPath : consts.CommunityFeedXPath,
+                    paramSchema : parameter.communities.all
                 },
                 rendererArgs : null
             }
         },
         
-        /**Instantiate Actions for Community Grids*/
+        /**
+         * Default CommunityAction will open the Community.
+         */
         communityAction: new CommunityAction(),
         
-        /**The default grid to be created if an option is not specified*/
+        /**
+         * Default grid option is to display a list of public communities.
+         */
         defaultOption: "public",
             
-        /**Constructor function
-         * @method - constructor
-         * */
-        constructor: function(args){
-        	
+        /**
+         * Constructor function
+         * @method constructor
+         */
+        constructor: function(args) {
             var nls = this.renderer.nls;
             this._sortInfo = {
                 date: { 
@@ -133,15 +91,14 @@ define([ "../../../declare",
                     sortParameter: "name"
                 }
             };
-
             this._activeSortAnchor = this._sortInfo.date;
             this._activeSortIsDesc = true;
         },
         
         /**
          * Create the CommunityGrid Renderer
-         * @method - createDefaultRenderer
-         * @param args - Arguments that can be passed to the renderer
+         * @method createDefaultRenderer
+         * @param args Arguments that can be passed to the renderer
          * @returns {CommunityGridRenderer}
          */
         createDefaultRenderer : function(args) {
@@ -152,7 +109,7 @@ define([ "../../../declare",
          * Function is called after the grid is created,
          * Here we call the superclass postCreate and then load the 
          * Semantic tag service, which if for business cared functionality
-         * @method - postCreate
+         * @method postCreate
          */
         postCreate: function() {        	
         	this.inherited(arguments);
@@ -162,10 +119,10 @@ define([ "../../../declare",
         
         /**
          * Event handler for onClick Events
-         * @method - handleClick
-         * @param el - The element that fired the event
-         * @param data - the data associated with the element
-         * @param ev - the event
+         * @method handleClick
+         * @param el The element that fired the event
+         * @param data the data associated with the element
+         * @param ev the event
          */
         handleClick: function(el, data, ev) {
             if (this.communityAction) {
@@ -175,7 +132,12 @@ define([ "../../../declare",
             }
         },
         
-        
+        /**
+         * Filter the community by specified tag
+         * @param el
+         * @param data
+         * @param ev
+         */
         filterByTag: function(el, data, ev){
         	this._stopEvent(ev);
             
@@ -189,7 +151,7 @@ define([ "../../../declare",
         /**
          * Gets sorting information, such as
          * if the results are ascending or descending, and the sort anchors
-         * @method - getSortInfo
+         * @method getSortInfo
          * @returns An object containing sorting information
          */
         getSortInfo: function() {
@@ -204,10 +166,10 @@ define([ "../../../declare",
                 
         /**
          * Sort the grid rows by last modified date
-         * @method - sortByLastModified
-         * @param el - The element that was clicked, typically a "sort by" button
-         * @param data - the data associated with the element
-         * @param ev - the event
+         * @method sortByLastModified
+         * @param el The element that was clicked, typically a "sort by" button
+         * @param data the data associated with the element
+         * @param ev the event
          */
         sortByDate: function(el, data, ev) {
             this._sort("date", true, el, data, ev);
@@ -215,10 +177,10 @@ define([ "../../../declare",
         
         /**
          * Sort the grid rows by popularity
-         * @method - sortByPopularity
-         * @param el - The element that was clicked, typically a "sort by" button
-         * @param data - the data associated with the element
-         * @param ev - the event
+         * @method sortByPopularity
+         * @param el The element that was clicked, typically a "sort by" button
+         * @param data the data associated with the element
+         * @param ev the event
          */
         sortByPopularity: function(el, data, ev) {
             this._sort("popularity", true, el, data, ev);
@@ -226,14 +188,15 @@ define([ "../../../declare",
         
         /**
          * Sort the grid rows by title
-         * @method - sortByTitle
-         * @param el - The element that was clicked, typically a "sort by" button
-         * @param data - the data associated with the element
-         * @param ev - the event
+         * @method sortByTitle
+         * @param el The element that was clicked, typically a "sort by" button
+         * @param data the data associated with the element
+         * @param ev the event
          */
         sortByName: function(el, data, ev) {
             this._sort("name", false, el, data, ev);
         }
+        
     });
 
     return CommunityGrid;

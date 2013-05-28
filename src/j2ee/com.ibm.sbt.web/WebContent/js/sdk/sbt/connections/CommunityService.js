@@ -393,9 +393,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
                 query : requestArgs
             };
             
-            var url = this.service._encodeAuthUrl(consts.AtomCommunityInstance);
-            
-            return this.service.getEntity(url, options, communityUuid, callbacks, args);
+            return this.service.getEntity(consts.AtomCommunityInstance, options, communityUuid, callbacks, args);
         },
 
         /**
@@ -603,9 +601,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
                 query : requestArgs
             };
 
-            var url = this.service._encodeAuthUrl(consts.AtomCommunityMembers);
-            
-            return this.service.getEntity(url, options, memberId, callbacks, args);
+            return this.service.getEntity(consts.AtomCommunityMembers, options, memberId, callbacks, args);
         },
         
         /**
@@ -873,9 +869,8 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
                 handleAs : "text",
                 query : args || {}
             };
-            var url = this._encodeAuthUrl(consts.AtomCommunitiesAll);
             
-            return this.getEntities(url, options, this.getCommunityFeedCallbacks(), args);
+            return this.getEntities(consts.AtomCommunitiesAll, options, this.getCommunityFeedCallbacks(), args);
         },
 
         /**
@@ -896,9 +891,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
                 request : args || {}
             };
             
-            var url = this._encodeAuthUrl(consts.AtomCommunitiesMy);
-            
-            return this.getEntities(url, options, this.getCommunityFeedCallbacks(), args);
+            return this.getEntities(consts.AtomCommunitiesMy, options, this.getCommunityFeedCallbacks(), args);
         },
 
         /**
@@ -928,9 +921,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
             };
             var callbacks = this.getMemberFeedCallbacks(communityUuid);
             
-            var url = this._encodeAuthUrl(consts.AtomCommunityMembers);
-            
-            return this.getEntities(url, options, callbacks, args);
+            return this.getEntities(consts.AtomCommunityMembers, options, callbacks, args);
         },
 
         /**
@@ -976,9 +967,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
                 query : args || {}
             };
             
-            var url = this._encodeAuthUrl(consts.AtomCommunityInvitesMy);
-            
-            return this.getEntities(url, options, this.getInviteFeedCallbacks(), args);
+            return this.getEntities(consts.AtomCommunityInvitesMy, options, this.getInviteFeedCallbacks(), args);
         },
 
         /**
@@ -1006,9 +995,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
                 query : requestArgs
             };
             
-            var url = this._encodeAuthUrl(consts.AtomCommunitySubCommunities);
-            
-            return this.getEntities(url, options, this.getCommunityFeedCallbacks(), args);
+            return this.getEntities(consts.AtomCommunitySubCommunities, options, this.getCommunityFeedCallbacks(), args);
         },
 
         /**
@@ -1097,9 +1084,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
                 data : this._constructCommunityPostData(community)
             };
             
-            var url = this._encodeAuthUrl(consts.AtomCommunitiesMy);
-            
-            return this.updateEntity(url, options, callbacks, args);
+            return this.updateEntity(consts.AtomCommunitiesMy, options, callbacks, args);
         },
 
         /**
@@ -1135,9 +1120,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
                 data : this._constructCommunityPostData(community)
             };
             
-            var url = this._encodeAuthUrl(consts.AtomCommunityInstance);
-            
-            return this.updateEntity(url, options, callbacks, args);
+            return this.updateEntity(consts.AtomCommunityInstance, options, callbacks, args);
         },
 
         /**
@@ -1166,9 +1149,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
                 handleAs : "text"
             };
             
-            var url = this._encodeAuthUrl(consts.AtomCommunityInstance);
-            
-            return this.deleteEntity(url, options, communityUuid, args);
+            return this.deleteEntity(consts.AtomCommunityInstance, options, communityUuid, args);
         },
 
         /**
@@ -1212,9 +1193,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
                 data : this._constructMemberPostData(member)
             };
             
-            var url = this._encodeAuthUrl(consts.AtomCommunityMembers);
-            
-            return this.updateEntity(url, options, callbacks, args);
+            return this.updateEntity(consts.AtomCommunityMembers, options, callbacks, args);
         },
 
         /**
@@ -1253,9 +1232,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
                 handleAs : "text"
             };
             
-            var url = this._encodeAuthUrl(consts.AtomCommunityMembers);
-            
-            return this.deleteEntity(url, options, value, args);
+            return this.deleteEntity(consts.AtomCommunityMembers, options, value, args);
         },
         
         /*
@@ -1446,17 +1423,6 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
                 return value;
             };
             return stringUtil.transform(MemberTmpl, member, transformer, member);
-        },
-        
-        /*
-         * Encode the correct authorization into the url
-         */
-        _encodeAuthUrl : function(url) {
-        	if (this.endpoint && this.endpoint.authType == consts.AuthTypes.OAuth) {
-        		return this.constructUrl(url, null, { authType : consts.AuthTypes.OAuth });
-        	} else {
-        		return this.constructUrl(url, null, { authType : "" });
-        	}
         }
     });
     return CommunityService;

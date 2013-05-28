@@ -1,9 +1,14 @@
 require(["sbt/Endpoint", "sbt/dom", "sbt/config"], function(Endpoint, dom, config) {
-    var ep = Endpoint.find("smartcloud");
+    var endpoint = Endpoint.find("smartcloud");
+    
     config.Properties["loginUi"] = "mainWindow";
-    ep.authenticate({
-        load: function(response){
+
+    endpoint.authenticate({ forceAuthentication: false }).then(
+    	function(response){
             dom.setText("content", "Successfully logged in");    
-        }
-    });
+        },
+        function(response){
+            dom.setText("content", "Cancelled log in");
+        }      
+    );
 });

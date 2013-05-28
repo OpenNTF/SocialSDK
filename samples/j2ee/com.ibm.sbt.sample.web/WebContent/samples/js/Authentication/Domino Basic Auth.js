@@ -14,27 +14,30 @@ require(['sbt/Endpoint',"sbt/dom","sbt/config"], function(Endpoint,dom,config) {
 function login(loginUi) {
 	require(['sbt/Endpoint',"sbt/dom","sbt/config"], function(Endpoint,dom,config) {
 		config.Properties["loginUi"] = loginUi;
-		Endpoint.find("domino").authenticate({
-			load: function(response){
+		Endpoint.find("domino").authenticate().then(
+			function(response){
 				dom.setText("dominoLoginStatus","You are authenticated");
 				dom.byId("dominoLogin").style.display = "none";
 				dom.byId("dominoLogout").style.display = "inline";	
 			},
-			cancel: function(){
+			function(){
 				dom.setText("content","You need to Login to Proceed");
 			}
-		});
+		);
 	});
 }
 
 function logout() {
 	require(['sbt/Endpoint',"sbt/dom"], function(Endpoint,dom) {
-		Endpoint.find("domino").logout({
-			load: function(response){
+		Endpoint.find("domino").logout().then(
+			function(response){
 				dom.setText("dominoLoginStatus","You are not authenticated");
 				dom.byId("dominoLogin").style.display = "inline";
 				dom.byId("dominoLogout").style.display = "none";
+			},
+			function(){
+				dom.setText("content","Failed to Logout");
 			}	
-		});
+		);
 	});
 }

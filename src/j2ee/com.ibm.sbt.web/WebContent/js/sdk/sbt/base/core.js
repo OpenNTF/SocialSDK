@@ -42,6 +42,7 @@ define(['../config'],function(sbt) {
         
         feedXPath : {
             "entry" : "/a:feed/a:entry",
+            "entries" : "/a:feed/a:entry",
             "totalResults" : "/a:feed/opensearch:totalResults",
             "startIndex" : "/a:feed/opensearch:startIndex",
             "itemsPerPage" : "/a:feed/opensearch:itemsPerPage"

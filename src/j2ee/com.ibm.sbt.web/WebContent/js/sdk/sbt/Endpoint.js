@@ -204,7 +204,7 @@ var Endpoint = declare(null, {
         return promise;
     },
 	
-	/**
+	/*
 	 * Sends a request using XMLHttpRequest with the given URL and options.
 	 * 
 	 * @method xhr
@@ -272,7 +272,7 @@ var Endpoint = declare(null, {
 		this.transport.xhr(method, _args, hasBody);
 	},
 	
-	/**
+	/*
 	 * @method xhrGet
 	 * @param args
 	 */
@@ -280,7 +280,7 @@ var Endpoint = declare(null, {
 		this.xhr("GET",args);
 	},
 	
-	/**
+	/*
 	 * @method xhrPost
 	 * @param args
 	 */
@@ -288,7 +288,7 @@ var Endpoint = declare(null, {
 		this.xhr("POST", args, true); 
 	},
 	
-	/**
+	/*
 	 * @method xhrPut
 	 * @param args
 	 */
@@ -296,7 +296,7 @@ var Endpoint = declare(null, {
 		this.xhr("PUT", args, true);
 	},
 	
-	/**
+	/*
 	 * @method xhrDelete
 	 * @param args
 	 */
@@ -305,49 +305,50 @@ var Endpoint = declare(null, {
 	},
 	
 	/**
-	 authenticate to an endpoint
-	 
-	 @method authenticate
-	 @param {Object} [args]  Argument object
-			@param {boolean} [args.forceAuthentication] Whether authentication is to be forced in case user is already authenticated.
-			@param {String} [args.loginUi] LoginUi to be used for authentication. possible values are: 'popup', 'dialog' and 'mainWindow'
-			@param {String} [args.loginPage] login page to be used for authentication. this property should be used in case default
-			login page is to be overridden. This only applies to 'popup' and 'mainWindow' loginUi
-			@param {String} [args.dialogLoginPage] dialog login page to be used for authentication. this property should be used in
-			case default dialog login page is to be overridden. This only applies to 'dialog' loginUi.
-			@param {Function} [args.load] This is the function which authenticate invokes when the authentication is successful.
-			@param {Function} [args.cancel] This is the function which authenticate invokes when cancel button of authenticator is clicked.
+	 * authenticate to an endpoint
+	 *
+	 * @method authenticate
+	 * @param {Object} [args]  Argument object
+	 *		@param {boolean} [args.forceAuthentication] Whether authentication is to be forced in case user is already authenticated.
+	 *		@param {String} [args.loginUi] LoginUi to be used for authentication. possible values are: 'popup', 'dialog' and 'mainWindow'
+	 *		@param {String} [args.loginPage] login page to be used for authentication. this property should be used in case default
+	 *		login page is to be overridden. This only applies to 'popup' and 'mainWindow' loginUi
+	 *		@param {String} [args.dialogLoginPage] dialog login page to be used for authentication. this property should be used in
+	 *		case default dialog login page is to be overridden. This only applies to 'dialog' loginUi.
 	 */
 	authenticate : function(args) {
-		args = args || {};
-		var options = {
-			dialogLoginPage : this.loginDialogPage,
-			loginPage : this.loginPage,
-			transport : this.transport,
-			proxy : this.proxy,
-			proxyPath : this.proxyPath,
-			loginUi : args.loginUi || this.loginUi,
-			callback: args.load,
-			cancel: args.cancel
-		};
-		if(args.forceAuthentication || !this.isAuthenticated) {
+		var promise = new Promise();
+		if (args.forceAuthentication || !this.isAuthenticated) {
+			args = args || {};
+			var options = {
+				dialogLoginPage : this.loginDialogPage,
+				loginPage : this.loginPage,
+				transport : this.transport,
+				proxy : this.proxy,
+				proxyPath : this.proxyPath,
+				loginUi : args.loginUi || this.loginUi,
+				callback: function(response) {
+					promise.fullFilled(response);
+				},
+				cancel: function(response) {
+					promise.rejected(response);
+				}
+			};
 			this.authenticator.authenticate(options);
-		}else{//call load if authentication is not required.
-			if (args.load) {
-				args.load();
-			}
+		} else {
+			promise.fullFilled(true);
 		}
+		return promise;
 	},
 	
 	/**
-	 logout from an endpoint
-	 
-	 @method logout
-	 @param {Object} [args]  Argument object
-			@param {Function} [args.load] This is the function which authenticate invokes when the logout is successful.
-			@param {Function} [args.error] This is the function which authenticate invokes when the logout is unsuccessful.
+	 * Logout from an endpoint
+	 *
+	 * @method logout
+	 * @param {Object} [args]  Argument object
 	 */
 	logout : function(args) {
+		var promise = new Promise();
 		args = args || {};
 		var self = this;
 		var proxy = this.proxy.proxyUrl;
@@ -355,41 +356,42 @@ var Endpoint = declare(null, {
 		this.transport.xhr('POST',{
 			handleAs : "json",
 			url : actionURL,
-			handle : function(response) {
-				sbt.Endpoints[self.proxyPath].isAuthenticated = false;
-				if (args.load && response.success) {
-					args.load(response);
-				} else if (args.error && !response.success) {
-					args.error(response);
-				}
+			load : function(response) {
+				self.isAuthenticated = false;
+				promise.fullFilled(response);
+			},
+			error : function(response) {
+				self.isAuthenticated = false;
+				promise.rejected(rejected);
 			}
 		}, true);
+		return promise;
 	},
 	
 	/**
-	 Find whether endpoint is authenticated or not.
-	 
-	 @method isAuthenticated
-	 @param {Object} [args]  Argument object
-			@param {Function} [args.load] This is the function which isAuthenticated invokes when authentication information is retrieved.
-			@param {Function} [args.error] This is the function which isAuthenticated invokes if an error occurs.
-			result property in response object returns true/false depending on whether endpoint is authenticated or not.
-	*/
+	 * Find whether endpoint is authenticated or not.
+	 *
+	 * @method isAuthenticated
+	 * @param {Object} [args]  Argument object
+	 */
 	isAuthenticated : function(args) {
+		var promise = new Promise();
 		args = args || {};
+		var self = this;
 		var proxy = this.proxy.proxyUrl;
 		var actionURL = proxy.substring(0, proxy.lastIndexOf("/")) + "/authHandler/" + this.proxyPath + "/isAuth";
 		this.transport.xhr('POST',{
 			handleAs : "json",
 			url : actionURL,
-			handle : function(response) {
-				if (args.load) {
-					args.load(response);
-				} else if (args.error) {
-					args.error(response);
-				}
+			load : function(response) {
+				self.isAuthenticated = true;
+				promise.fullFilled(response);
+			},
+			error : function(response) {
+				promise.rejected(response);
 			}
 		}, true);
+		return promise;
 	},
 	
 	/**
@@ -409,12 +411,12 @@ var Endpoint = declare(null, {
 		this.transport.xhr('POST',{
 			handleAs : "json",
 			url : actionURL,
-			handle : function(response) {
-				if (args.load) {
-					args.load(response);
-				} else if (args.error) {
-					args.error(response);
-				}
+			load : function(response) {
+				self.isAuthenticated = false;
+				promise.fullFilled(response);
+			},
+			error : function(response) {
+				promise.rejected(response);
 			}
 		}, true);
 	},

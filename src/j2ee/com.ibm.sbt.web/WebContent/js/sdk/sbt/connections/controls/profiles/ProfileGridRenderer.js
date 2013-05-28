@@ -27,8 +27,8 @@ define(["../../../declare",
 		
     /**
      * @class ProfileGridRenderer
-     * @namespace sbt.controls.grid.connections
-     * @module sbt.controls.grid.connections.ProfileGridRenderer
+     * @namespace sbt.connections.controls.profiles
+     * @module sbt.connections.controls.profiles.ProfileGridRenderer
      */
     var ProfileGridRenderer = declare(ConnectionsGridRenderer, {
 
@@ -37,7 +37,7 @@ define(["../../../declare",
         
          /**
           * The constructor function
-          * @method - constructor
+          * @method constructor
           * @param args
           */
          constructor: function(args) {
@@ -50,11 +50,11 @@ define(["../../../declare",
 
          /**
           * Sets the css class for the row
-          * @method - rowClass
-          * @param grid - The Grid Dijit 
-          * @param item - the current row
-          * @param i - the number of the current row, ie 0, 1, 2 etc
-          * @param items - all of the rows in the grid
+          * @method rowClass
+          * @param grid The Grid Dijit 
+          * @param item the current row
+          * @param i the number of the current row, ie 0, 1, 2 etc
+          * @param items all of the rows in the grid
           */
          rowClass: function(grid, item, i, items) {
              item.rowClass = (i === 0 ? "lotusFirst" : (i % 2 === 1 ? "lotusAltRow" : null));
@@ -62,12 +62,12 @@ define(["../../../declare",
          
          /**
           * Displays a tooltip by calling the getTooltip function in the ProfileAction class
-          * @method - tooltip
-          * @param grid - The Grid Dijit
-          * @param item - the element to display the tooltip
-          * @param i - the number of the current row
-          * @param items - all of the items in the grid row
-          * @returns - A Tooltip - the default for profiles is to display the vCard
+          * @method tooltip
+          * @param grid The Grid Dijit
+          * @param item the element to display the tooltip
+          * @param i the number of the current row
+          * @param items all of the items in the grid row
+          * @returns A Tooltip the default for profiles is to display the vCard
           */
          tooltip: function(grid, item, i, items) {
              if (grid.profileAction) {

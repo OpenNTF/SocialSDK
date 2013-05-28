@@ -27,8 +27,8 @@ define(["../../../declare", "dojo/string",
 		
     /**
      * @class ColleagueGridRenderer
-     * @namespace sbt.controls.grid.connections
-     * @module sbt.controls.grid.connections.ColleagueGridRenderer
+     * @namespace sbt.connections.controls.profiles
+     * @module sbt.connections.controls.profiles.ColleagueGridRenderer
      */
     var ColleagueGridRenderer = declare(ConnectionsGridRenderer, {
 

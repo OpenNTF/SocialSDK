@@ -15,27 +15,21 @@
  */
 
 /**
- * Social Business Toolkit SDK - Resources utilities.
- */
-
-//
-//  The cache implements the Least Recently Used (LRU)Algorithm by doubly linked list. Every node has 4 variables - key, value, next and previous.
-//  The key stores the key of the node and value stores the actual data for the key. The next and previous variables point to the 
-// next and previous nodes in the cache. 
-//  The cache has a head variable pointing to the top cache node and a tail variable pointing to the last cache node.
-
- //   Head ->  A --->  B  --->  C ---> D  <--  Tail
- //              <---     <---   <---
-  
- // Suppose the cache has 4 entries and its max size limit is 4 (the cache is full right now). The structure of the cache would be as described by figure above.
- // The entries are listed as per their order of recent access. 
- // So when a new entry E is added to the cache, the new order of the cache entries would be EABC. D would be deleted from the cache.
-
-/**
- * Defination of the Cache module
+ * The cache implements the Least Recently Used (LRU)Algorithm by doubly linked list. Every node has 4 variables - key, value, next and previous.
+ * The key stores the key of the node and value stores the actual data for the key. The next and previous variables point to the 
+ * next and previous nodes in the cache. 
+ *  The cache has a head variable pointing to the top cache node and a tail variable pointing to the last cache node.
+ *
+ *   Head ->  A --->  B  --->  C ---> D  <--  Tail
+ *              <---     <---   <---
+ *
+ * Suppose the cache has 4 entries and its max size limit is 4 (the cache is full right now). The structure of the cache would be as described by figure above.
+ * The entries are listed as per their order of recent access. 
+ * So when a new entry E is added to the cache, the new order of the cache entries would be EABC. D would be deleted from the cache.
+ * 
  * @module sbt.Cache
  */
-  define(['./declare'],function(declare) {
+define(['./declare'],function(declare) {
 	var Cache = declare(null, {	
 		constructor: function(max) {
 			this.limit = max;// This is the maximum limit of the cache.

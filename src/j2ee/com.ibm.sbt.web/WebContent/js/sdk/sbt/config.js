@@ -20,6 +20,7 @@
  * This module should normally generated dynamically, but a static version is provided when the dynamic
  * generation mechanism is not being used.
  * 
+ * @module sbt.Cache
  */
 define([],function() {
 

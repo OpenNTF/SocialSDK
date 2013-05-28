@@ -20,14 +20,18 @@
  */
 
 /**
- * This class encapsulates an actual endpoint, with its URL, proxy and its authentication
- * mechanism.
- * @class Endpoint
+ * Endpoint which defines a connection to a back-end server.
  * 
+ * @module sbt.Endpoint
  */
 define(['./declare','./lang','./ErrorTransport','./Promise','./pathUtil','./compat','./log', './stringUtil', 'sbt/i18n!sbt/nls/Endpoint', './xml'],
 function(declare,lang,ErrorTransport,Promise,pathUtil,compat,log,stringUtil,nls,xml) {
 
+/**
+ * This class encapsulates an actual endpoint, with its URL, proxy and its authentication mechanism.
+ * 
+ * @class sbt.Endpoint
+ */
 var Endpoint = declare(null, {
 	
 	/**
@@ -35,63 +39,63 @@ var Endpoint = declare(null, {
 	 * @property baseUrl
 	 * @type String
 	 */
-	baseUrl: 		null,
+	baseUrl: null,
 	
 	/**
 	 * Proxy to be used
 	 * @property proxy
 	 * @type String 
 	 */
-	proxy:			null,
+	proxy: null,
 	
 	/**
 	 * Path to be added to the proxy url, if any
 	 * @property proxyPath
 	 * @type String 
 	 */
-	proxyPath:		null,
+	proxyPath: null,
 	
 	/**
 	 * Transport to be used
 	 * @property transport
 	 * @type String
 	 */
-	transport:		null,
+	transport: null,
 	
 	/**
 	 * Authenticator to be used
 	 * @property authenticator
 	 * @type String
 	 */
-	authenticator:	null,
+	authenticator: null,
 	
 	/**
 	 * Auth Type to be used
 	 * @property authType
 	 * @type String
 	 */
-	authType:	null,
+	authType: null,
 	
 	/**
 	 * UI Login mode: mainWindow, dialog or popup
 	 * @property loginUi
 	 * @type String
 	 */
-	loginUi:		"",
+	loginUi: "",
 	
 	/**
 	 * Page for login form for mainWindow and popup
 	 * @property loginPage
 	 * @type String
 	 */
-	loginPage:      null,
+	loginPage: null,
 	
 	/**
 	 * Page for login form for dialog
 	 * @property dialogLoginPage
 	 * @type String
 	 */
-	dialogLoginPage:null,
+	dialogLoginPage: null,
 	
 	/**
 	 * Whether auth dialog should come up automatically or not. In case of not 401 would be propagated to user.
@@ -118,8 +122,7 @@ var Endpoint = declare(null, {
 	 * Simple constructor that mixes in its parameters as object properties
 	 * @constructor
 	 * @param {Array} args
-	 */
-	
+	 */	
 	constructor: function(args) {
 		lang.mixin(this, args || {});	
 	},

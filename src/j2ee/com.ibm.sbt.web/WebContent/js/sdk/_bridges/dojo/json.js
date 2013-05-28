@@ -1,6 +1,5 @@
 /**
  * A Dojo implementation of the JSON functions.
- * @module json
  */
 define([],function() {
     return {

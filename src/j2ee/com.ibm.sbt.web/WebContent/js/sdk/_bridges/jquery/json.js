@@ -16,7 +16,6 @@
 
 /**
  * JQuery implementation of the JSON methods.
- * @module json
  */
 define(['./jquery'],function() {
     return {

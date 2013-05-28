@@ -22,8 +22,8 @@ define([ "../../../declare", "../../../controls/grid/GridAction", "dojo/string" 
 
     /**
      * @class FileAction
-     * @namespace sbt.controls.grid.connections
-     * @module sbt.controls.grid.connections.FileAction
+     * @namespace sbt.connections.controls.files
+     * @module sbt.connections.controls.files.FileAction
      */
     var FileAction = declare(GridAction, {
         
@@ -33,14 +33,14 @@ define([ "../../../declare", "../../../controls/grid/GridAction", "dojo/string" 
         },
        
         /**Constructor function
-         * @method - constructor
+         * @method constructor
          *  */
         constructor: function() {
         },
         
         /**function to get the string to be displayed in an elements tooltip
-         * @method - getTooltip
-         * @param item - The element for which the tolltip will be displayed
+         * @method getTooltip
+         * @param item The element for which the tolltip will be displayed
          * @return A String, with the text to be displayed in the elements tooltip
          * */
         getTooltip: function(item) {
@@ -50,10 +50,10 @@ define([ "../../../declare", "../../../controls/grid/GridAction", "dojo/string" 
         /**
          * Execute function provides the default action for files
          * This function is called from the handle click function.
-         * @method - execute
-         * @param item - the element that fired the event
+         * @method execute
+         * @param item the element that fired the event
          * @param opts
-         * @param event - the event
+         * @param event the event
          */
         execute: function(item, opts, event) {
           window.open(item.getValue("fileUrl"));

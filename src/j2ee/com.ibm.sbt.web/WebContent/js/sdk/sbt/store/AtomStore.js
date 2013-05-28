@@ -15,14 +15,14 @@
  */
 
 /**
- * 
+ * @module sbt.store.AtomStore
  */
 define(["../declare","../lang", "../base/core", "../xml", "../xpath", "../Endpoint", "../itemFactory",
         "dojo/_base/Deferred", "dojo/promise/Promise", "dojo/store/util/QueryResults", "dojox/html/entities"], 
         function(declare,lang, core, xml, xpath, Endpoint, itemFactory, Deferred, Promise, QueryResults, entities) {
   
     /**
-     * @module sbt.store.AtomStore
+     * @class sbt.store.AtomStore
      */
     var AtomStorePromise = declare(Promise, {
         // private

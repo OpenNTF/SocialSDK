@@ -23,6 +23,7 @@ import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.util.ParameterProcessor;
 import com.ibm.commons.runtime.util.UrlUtil;
 import com.ibm.commons.util.IExceptionEx;
+import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonJavaFactory;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.commons.util.io.json.JsonParser;
@@ -48,15 +49,26 @@ public class PreviewJavaHandler extends PreviewHandler {
 
 	@Override
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String sOptions = req.getParameter("fm_options");
-		String id = req.getParameter("fm_id");
-        RequestParams requestParams = new RequestParams(sOptions,id);
-        req.getSession().setAttribute(LAST_REQUEST, requestParams);
-        resp.sendRedirect(UrlUtil.getRequestUrl(req));
+		String pathInfo = req.getPathInfo();
+		if(pathInfo.equals("/javasnippet")) {
+			String sOptions = req.getParameter("fm_options");
+			String id = req.getParameter("fm_id");
+			RequestParams requestParams = new RequestParams(sOptions,id);
+			req.getSession().setAttribute(LAST_REQUEST, requestParams);
+			String url = UrlUtil.getRequestUrl(req);
+			url = StringUtil.replace(url, "/javasnippet", "/jsppage");
+			resp.sendRedirect(url);
+		} else {
+			execRequest(req, resp);
+		}
 	}
 
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		execRequest(req, resp);
+	}
+
+	public void execRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		RequestParams requestParams = (RequestParams)req.getSession().getAttribute(LAST_REQUEST);
 		if(requestParams!=null) {
 	        execRequest(req, resp, requestParams);

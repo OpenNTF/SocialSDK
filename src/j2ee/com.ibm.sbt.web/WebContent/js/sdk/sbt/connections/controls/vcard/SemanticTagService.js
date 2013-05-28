@@ -24,7 +24,7 @@ define([ "sbt/Endpoint" ], function(Endpoint) {
      * 
      * @class sbt.controls.vcard.connections.SemanticTagService
      */
-    var SemanticTagService = dojo.declare("sbt.controls.vcard.connections.SemanticTagService", null, {
+    var SemanticTagService = dojo.declare("sbt.connections.controls.vcard.SemanticTagService", null, {
     });
 
     /**

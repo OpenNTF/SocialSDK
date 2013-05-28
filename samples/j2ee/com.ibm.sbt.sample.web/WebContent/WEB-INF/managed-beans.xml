@@ -186,6 +186,10 @@
 		<managed-bean-scope>session</managed-bean-scope>
 		<!-- Endpoint URL -->
 		<managed-property>
+			<property-name>httpProxy</property-name>
+			<value>127.0.0.1:8888</value>
+		</managed-property>
+		<managed-property>
 			<property-name>url</property-name>
 			<value>%{smartcloud.url}</value>
 		</managed-property>

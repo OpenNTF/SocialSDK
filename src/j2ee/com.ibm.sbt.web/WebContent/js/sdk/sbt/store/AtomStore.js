@@ -177,7 +177,7 @@ define(["../declare","../lang", "../base/core", "../xml", "../xpath", "../Endpoi
                             self._options.onComplete.call(self._options.scope || self, self.items, self._options);
                         }
                         // invoke callbacks
-                        self._fullFilled(self.totalResults);
+                        self._fulfilled(self.totalResults);
                     } catch (error) {
                         self._rejected(error);
                     }
@@ -292,7 +292,7 @@ define(["../declare","../lang", "../base/core", "../xml", "../xpath", "../Endpoi
             return result;
         },
         
-        _fullFilled : function(totalCount) {
+        _fulfilled : function(totalCount) {
             if (this._isCancelled) {
                 return;
             }

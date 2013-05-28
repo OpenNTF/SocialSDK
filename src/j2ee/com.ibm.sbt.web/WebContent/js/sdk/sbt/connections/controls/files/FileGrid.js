@@ -275,9 +275,20 @@ define([ "../../../declare",
 
         },
         
-        /**Constructor function
+        /**
+         * The default grid, if no options are selected
+         */
+        defaultOption: "publicFiles",
+        
+        /**
+         * FileAction defines the default actions for files, which can be overridden 
+         */
+        fileAction: new FileAction(),
+        	
+        /**
+         * Constructor function
          * @method - constructor
-         * */
+         */
         constructor: function(args){
 
         	this.fileService = new FileService(this.endpointName || "connections");
@@ -350,14 +361,6 @@ define([ "../../../declare",
               
         },
         
-        /**
-         * The default grid, if no options are selected
-         */
-        defaultOption: "publicFiles",
-        
-        /**FileAction defines the default actions for files, which can be overridden */
-        fileAction: new FileAction(),
-        	
         /**
          * Creates a new AtomStore
          * @method - createDefaultStore

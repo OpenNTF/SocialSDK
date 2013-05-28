@@ -25,8 +25,8 @@ define([ "../../../declare", "../../../Endpoint", "../../../xml", "../../../xpat
 
     /**
      * @class ColleagueGrid
-     * @namespace sbt.controls.grid.connections
-     * @module sbt.controls.grid.connections.ColleagueGrid
+     * @namespace sbt.connections.controls.profiles
+     * @module sbt.connections.controls.profiles.ColleagueGrid
      */
 	var ColleagueGrid = declare(ProfileGrid, {
     	
@@ -39,8 +39,8 @@ define([ "../../../declare", "../../../Endpoint", "../../../xml", "../../../xpat
         /**
          * Creates a renderer for the grid.The renderer is responsible for 
          * loading the grid's HTML content.
-         * @method - createDefaultRenderer
-         * @param - args - sets the template the renderer will use, by checking args.type, but for
+         * @method createDefaultRenderer
+         * @param args sets the template the renderer will use, by checking args.type, but for
          * profile grids this will always be "profile"
          * @returns an instance of a  profile gird renderer.
          */
@@ -52,7 +52,7 @@ define([ "../../../declare", "../../../Endpoint", "../../../xml", "../../../xpat
          * The post create function is called, after the grid has been created.
          * The function will call the super classes post create
          * then if target emails/ids were set will.
-         * @method - postCreate
+         * @method postCreate
          */
         postCreate: function() {            
             this.inherited(arguments);
@@ -129,10 +129,10 @@ define([ "../../../declare", "../../../Endpoint", "../../../xml", "../../../xpat
          * In the grid HTML an element can have an event attached 
          * using dojo-attach-event="onClick: handleViewAll".
          * This method is the handler for the onclick event.
-         * @method - handleViewAll
-         * @param el - the element that fired the event
-         * @param data - all of the items from the current row of the grid. 
-         * @param ev - the event 
+         * @method handleViewAll
+         * @param el the element that fired the event
+         * @param data all of the items from the current row of the grid. 
+         * @param ev the event 
          */
         handleViewAll: function(el, data, ev) {
             if (this.viewAllAction) {

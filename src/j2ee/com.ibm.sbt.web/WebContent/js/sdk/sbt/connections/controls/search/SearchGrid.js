@@ -36,10 +36,10 @@ define([ "sbt/declare",
 	
     /**
      * @class SearchGrid
-     * @namespace sbt.controls.grid.connections
-     * @module sbt.controls.connections.SearchGrid
+     * @namespace sbt.connections.controls.search
+     * @module sbt.connections.controls.search
      */
-    declare("sbt.controls.grid.connections.SearchGrid", Grid, {
+    declare(Grid, {
 
         options : {
             "all" : {

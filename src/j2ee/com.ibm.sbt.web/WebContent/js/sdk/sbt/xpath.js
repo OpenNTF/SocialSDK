@@ -16,17 +16,13 @@
 
 /**
  * Social Business Toolkit SDK - XPath utilities.
+ * 
+ * @module sbt.xpath
  */
 define(['./declare'],function(declare) {
-	/**
-	Module for defining some Xpath Utilities
-	@module sbt.xpath
-	**/
-	
-	/**
-	@class xpath
-	@static
-	*/
+	/*
+	 * @class sbt.xpath.XPathExpr
+	 */
 	var XPathExpr = declare(null, {
 		ie:		false,
 		constructor: function(xpath, nsArray){
@@ -118,45 +114,67 @@ define(['./declare'],function(declare) {
 	
 	return {
 		/**
-		Selects nodes from XML data object
-		@method selectNodes
-		@param {Object} node xml data to be parsed
-		@param {String} xpath xpath expression
-		@param {Array} nsArray Array of namespaces for the xml.
-		@return {Array} Array of nodes
-		@static	
-		**/
+		 * Selects nodes from XML data object
+		 * 
+		 * @method selectNodes
+		 * @param {Object}
+		 *            node xml data to be parsed
+		 * @param {String}
+		 *            xpath xpath expression
+		 * @param {Array}
+		 *            nsArray Array of namespaces for the xml.
+		 * @return {Array} Array of nodes
+		 * @static
+		 */
 		selectNodes : function(node, xpath, nsArray) {
 			var expr = new XPathExpr(xpath, nsArray);
 			return expr.selectNodes(node);
 		},
+
 		/**
-		Selects single node from XML data object
-		@method selectSingleNode
-		@param {Object} node xml data to be parsed
-		@param {String} xpath xpath expression
-		@param {Array} nsArray Array of namespaces for the xml.
-		@return {Object} selected node object
-		@static	
-		**/
+		 * Selects single node from XML data object
+		 * 
+		 * @method selectSingleNode
+		 * @param {Object}
+		 *            node xml data to be parsed
+		 * @param {String}
+		 *            xpath xpath expression
+		 * @param {Array}
+		 *            nsArray Array of namespaces for the xml.
+		 * @return {Object} selected node object
+		 * @static
+		 */
 		selectSingleNode : function(node, xpath, nsArray) {
 			var expr = new XPathExpr(xpath, nsArray);
 			return expr.selectSingleNode(node);
 		},
+		
+
 		/**
-		Selects text from a single node from XML data object
-		@method selectText
-		@param {Object} node xml data to be parsed
-		@param {String} xpath xpath expression
-		@param {Array} nsArray Array of namespaces for the xml.
-		@return {String} inner text of the node object
-		@static	
-		**/
+		 * Selects text from a single node from XML data object
+		 * 
+		 * @method selectText
+		 * @param {Object}
+		 *            node xml data to be parsed
+		 * @param {String}
+		 *            xpath xpath expression
+		 * @param {Array}
+		 *            nsArray Array of namespaces for the xml.
+		 * @return {String} inner text of the node object
+		 * @static
+		 */
 		selectText : function(node, xpath, nsArray) {
 			var expr = new XPathExpr(xpath, nsArray);
 			return expr.selectText(node);
 		},
 		
+		/**
+		 * 
+		 * @param node
+		 * @param xpath
+		 * @param nsArray
+		 * @returns
+		 */
 		selectNumber : function(node, xpath, nsArray){
 		    var expr = new XPathExpr(xpath, nsArray);
 		    return expr.selectNumber(node);

@@ -13,9 +13,9 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
+
 /**
  * JQuery module to delegate to a Global jQuery or a jQuery module.
- * @module jquery
  */
 
 define(['jquery'],function() {

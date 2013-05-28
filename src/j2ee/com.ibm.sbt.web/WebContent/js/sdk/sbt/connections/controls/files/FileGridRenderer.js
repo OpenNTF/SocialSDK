@@ -29,8 +29,8 @@ define(["../../../declare",
     
     /**
      * @class FileGridRenderer
-     * @namespace sbt.controls.grid.connections
-     * @module sbt.controls.grid.connections.FileGridRenderer
+     * @namespace sbt.connections.controls.files
+     * @module sbt.connections.controls.files.FileGridRenderer
      */
     var FileGridRenderer = declare(ConnectionsGridRenderer, {
     	
@@ -44,7 +44,7 @@ define(["../../../declare",
         unPinnedClass: "lconnSprite lconnSprite-iconPinned16-off",
     
          /**
-          * @method - constructor
+          * @method constructor
           * @param args, setting args.type, will set the appropriate template
           */
          constructor: function(args) {
@@ -63,12 +63,12 @@ define(["../../../declare",
          
          /**
           * Sets the CSS Class for each row
-          * @method - renderItem
-          * @param grid - The Grid Element
-          * @param el - The Table Body Element, that contains the rows of the grid
-          * @param data - An object containing data for all of the rows
-          * @param item - An object containing all of the items in the current row
-          * @param i - the number of the current grid row
+          * @method renderItem
+          * @param grid The Grid Element
+          * @param el The Table Body Element, that contains the rows of the grid
+          * @param data An object containing data for all of the rows
+          * @param item An object containing all of the items in the current row
+          * @param i the number of the current grid row
           * @param items An Object Containing data for all of the rows
           */
          renderItem: function(grid, el, data, item, i, items) {
@@ -78,12 +78,12 @@ define(["../../../declare",
          
          /**
           * Gets the tooltip text to be displayed for a HTML element
-          * @method - tooltip
-          * @param grid - The grid Element
-          * @param item - The item for which the tolltip is displayed
-          * @param i - A number representing Current Grid row
-          * @param items - All of the rows in the grid
-          * @returns - A String containing the Tooltip text 
+          * @method tooltip
+          * @param grid The grid Element
+          * @param item The item for which the tolltip is displayed
+          * @param i A number representing Current Grid row
+          * @param items All of the rows in the grid
+          * @returns A String containing the Tooltip text 
           */
          tooltip: function(grid, item, i, items) {
              if (grid.fileAction) {
@@ -93,12 +93,12 @@ define(["../../../declare",
          
          /**
           * Functions that returns the date a file was created, as a String
-          * @method - createdLabel
-          * @param grid - The Grid Element
-          * @param item - The HTML element/Item which will use the label
-          * @param i - A Number representing the current grid row
-          * @param items - An object containg all of the Items in each grid row
-          * @returns - A String, when the File was created
+          * @method createdLabel
+          * @param grid The Grid Element
+          * @param item The HTML element/Item which will use the label
+          * @param i A Number representing the current grid row
+          * @param items An object containg all of the Items in each grid row
+          * @returns A String, when the File was created
           */
          createdLabel: function(grid, item, i, items){
              var result = i18n.getUpdatedLabel(item.getValue('created'));
@@ -112,11 +112,11 @@ define(["../../../declare",
          
          /**
           * Returns a String, containing when the file was last modified
-          * @method - modifiedLabel
-          * @param grid - The Grid
-          * @param item - The HTML element which will use the string
-          * @param i - the Number of a the current grid row
-          * @param items - An Object containing data for each grid row
+          * @method modifiedLabel
+          * @param grid The Grid
+          * @param item The HTML element which will use the string
+          * @param i the Number of a the current grid row
+          * @param items An Object containing data for each grid row
           * @returns String, Last modified date
           */
          modifiedLabel: function(grid, item, i, items){
@@ -126,11 +126,11 @@ define(["../../../declare",
          
          /**
           * Returns a String, containing when the file was last "edited"
-          * @method - commentEditedLabel
-          * @param grid - The Grid
-          * @param item - The HTML element which will use the string
-          * @param i - the Number of a the current grid row
-          * @param items - An Object containing data for each grid row
+          * @method commentEditedLabel
+          * @param grid The Grid
+          * @param item The HTML element which will use the string
+          * @param i the Number of a the current grid row
+          * @param items An Object containing data for each grid row
           * @returns String, Last modified date
           */
          commentEditedLabel: function(grid, item, i, items){
@@ -144,11 +144,11 @@ define(["../../../declare",
          },
          /**
           * Returns a label to say if the file is public, private or shared 
-          * @method - shareLabel
-          * @param grid - The Grid Element
-          * @param item - An object containing all of the data in the row
-          * @param i - The Number of the current row
-          * @param items - An object containing all of the data for each row.
+          * @method shareLabel
+          * @param grid The Grid Element
+          * @param item An object containing all of the data in the row
+          * @param i The Number of the current row
+          * @param items An object containing all of the data for each row.
           * @returns A Label
           */
          shareLabel: function(grid, item, i, items) {
@@ -157,12 +157,12 @@ define(["../../../declare",
          
          /**
           * Returns the visibility of a file, for example shared, private etc.
-          * @method - visibilityLabel
-          * @param grid - The Grid Element
-          * @param item - An object containing all of the data in the row
-          * @param i - The Number of the current row
-          * @param items - An object containing all of the data for each row.
-          * @returns - The Visibility Label
+          * @method visibilityLabel
+          * @param grid The Grid Element
+          * @param item An object containing all of the data in the row
+          * @param i The Number of the current row
+          * @param items An object containing all of the data for each row.
+          * @returns The Visibility Label
           */
          visibilityLabel: function(grid, item, i, items){
              var visibility = item.getValue('visibility');
@@ -171,11 +171,11 @@ define(["../../../declare",
          
          /**
           * Returns the Full UTC time for when a file was created
-          * @method - detailedCreated
-          * @param grid - The Grid Element
-          * @param item - An object containing all of the data in the row
-          * @param i - The Number of the current row
-          * @param items - An object containing all of the data for each row.
+          * @method detailedCreated
+          * @param grid The Grid Element
+          * @param item An object containing all of the data in the row
+          * @param i The Number of the current row
+          * @param items An object containing all of the data for each row.
           * @returns
           */
          detailedCreated: function(grid, item, i, items){
@@ -184,12 +184,12 @@ define(["../../../declare",
          
          /**
           * Returns the file type, so an appropriate icon can be used
-          * @method - ftype
-          * @param grid - The Grid Element
-          * @param item - An object containing all of the data in the row
-          * @param i - The Number of the current row
-          * @param items - An object containing all of the data for each row.
-          * @returns - The File Type, A String containing the extension
+          * @method ftype
+          * @param grid The Grid Element
+          * @param item An object containing all of the data in the row
+          * @param i The Number of the current row
+          * @param items An object containing all of the data for each row.
+          * @returns The File Type, A String containing the extension
           */
          ftype: function(grid, item, i, items) {
              return item.getValue('title').slice(-3);
@@ -199,12 +199,12 @@ define(["../../../declare",
           * Returns the label, for the "Likes icon"
           * If there are zero "likes" it will display "No one likes this"
           * If there is one like, "One person likes this" etc.
-          * @method - recommendationLabel
-          * @param grid - The Grid Element
-          * @param item - An object containing all of the data in the row
-          * @param i - The Number of the current row
-          * @param items - An object containing all of the data for each row.
-          * @returns - A String to be used as a label for the "likes icon"
+          * @method recommendationLabel
+          * @param grid The Grid Element
+          * @param item An object containing all of the data in the row
+          * @param i The Number of the current row
+          * @param items An object containing all of the data for each row.
+          * @returns A String to be used as a label for the "likes icon"
           */
          recommendationLabel : function(grid, item, i, items) {
             if (item.getValue('recommendationCount') == 0) {

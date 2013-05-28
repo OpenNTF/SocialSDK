@@ -1,17 +1,22 @@
 require(["sbt/config","sbt/dom"], function(sbt, dom) {
-    var ep = sbt.Endpoints['connections'];
-    ep.xhrGet({
-        serviceUrl : "/activities/service/atom2/activities",
+    var endpoint = sbt.Endpoints['connections'];
+    
+    var url = "/activities/service/atom2/activities";
+    
+    var options = { 
+        method : "GET", 
         handleAs : "text",
-        content : {
+        query : {
             email : "%{sample.email1}"
-        },
-        load : function(response) {
-            dom.byId("content").appendChild(dom.createTextNode(response));
-        },
-        error : function(error) {
-            dom.byId("content").appendChild(
-                    dom.createTextNode("Error: " + error));
         }
-    });
+    };
+    
+    endpoint.request(url, options).then(
+    	function(response) {
+    		dom.setText("content", response);
+        },
+        function(error){
+            dom.setText("content", error);
+        }
+    );
 });

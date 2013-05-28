@@ -58,6 +58,8 @@ public class PreviewServlet extends FacesContextServlet {
 			getJavaScriptSnippetHandler().doService(req, resp);
 		} else if(StringUtil.equalsIgnoreCase(pathInfo, "/javasnippet")) {
 			getJavaSnippetHandler().doService(req, resp);
+		} else if(StringUtil.equalsIgnoreCase(pathInfo, "/jsppage")) {
+			getJavaSnippetHandler().doService(req, resp);
 		} else if(StringUtil.equalsIgnoreCase(pathInfo, "/xpagessnippet")) {
 			getXPagesSnippetHandler().doService(req, resp);
 		} else if(StringUtil.equalsIgnoreCase(pathInfo, "/gadgetsnippet")) {

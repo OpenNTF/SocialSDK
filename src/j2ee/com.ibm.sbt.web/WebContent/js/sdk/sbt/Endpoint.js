@@ -174,6 +174,13 @@ var Endpoint = declare(null, {
             }
         }
         
+        if (!options) {
+        	options = { 
+        	   	method : "GET", 
+        	   	handleAs : "text"
+        	};
+        }
+        
         var promise = new Promise();
         promise.response = new Promise();
         

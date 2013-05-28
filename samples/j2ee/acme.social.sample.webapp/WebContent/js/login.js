@@ -2,8 +2,8 @@
  * Helper module for logging in and retrieving the reporting chain for the logged in user.
  * @module
  */
-define(["sbt/declare", "sbt/Endpoint", "sbt/json", "sbt/xml", "sbt/xpath", "sbt/connections/ConnectionsConstants"], 
-    function(declare, endpoint, json, xml, xpath, connections) {
+define(["sbt/declare", "sbt/config", "sbt/Endpoint", "sbt/json", "sbt/xml", "sbt/xpath", "sbt/connections/ConnectionsConstants"], 
+    function(declare, config, endpoint, json, xml, xpath, connections) {
 
     var basicPeopleMe = '/connections/opensocial/basic/rest/people/@me/';
     var oauthPeopleMe = '/connections/opensocial/oauth/rest/people/@me/';
@@ -24,26 +24,24 @@ define(["sbt/declare", "sbt/Endpoint", "sbt/json", "sbt/xml", "sbt/xpath", "sbt/
         if (endpoint.authType == 'oauth') {
             path = oauthPeopleMe;
         }
+      
+        config.Properties["loginUi"] = "dialog";
         
-        endpoint.xhrGet({
-            serviceUrl : path,
-            handleAs : "json",
-            loginUi : "dialog",
-            preventCache : true,
-            load: function(response) {
+        endpoint.request(path, { handleAs : "json", preventCache : true }).then(
+            function(response) {
                 personObject = response.entry;
                 personObject.id = response.entry.id.replace('urn:lsid:lconn.ibm.com:profiles.person:', '');
                 if(onSuccess) {
                     onSuccess(personObject);
                 }
             },
-            error: function(error){
+            function(error){
                 personObject = null;
                 if(onError) {
                     onError(error);
                 }
             }
-      });
+        );
     };
 
     var getReportingChain = function(onSuccess, onError) {
@@ -52,23 +50,21 @@ define(["sbt/declare", "sbt/Endpoint", "sbt/json", "sbt/xml", "sbt/xpath", "sbt/
             path = oauthReportingChain;
         }
         path += personObject.id;
-        
-        endpoint.xhrGet({
-            serviceUrl : path,
-            loginUi : "dialog",
-            load: function(response) {
-                reportingChain = xml.parse(response);;
+
+        endpoint.request(path).then(
+            function(response) {
+            	reportingChain = xml.parse(response);
                 if(onSuccess) {
-                    onSuccess(response);
+                    onSuccess(reportingChain);
                 }
             },
-            error: function(error){
+            function(error){
                 reportingChain = null;
                 if(onError) {
                     onError(error);
                 }
             }
-      });
+        );
     };
 
     return {

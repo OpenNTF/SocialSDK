@@ -1,14 +1,19 @@
 require(["sbt/dom", "sbt/config"], function(dom) {
-    var ep = sbt.Endpoints['connections'];
-    ep.xhrGet({
-        serviceUrl : "/dogear/atom",
-        handleAs : "text",
-        load : function(response) {
-            dom.byId("content").appendChild(dom.createTextNode(response));
+    var endpoint = sbt.Endpoints['connections'];
+    
+    var url = "/dogear/atom";
+    
+    var options = { 
+        method : "GET", 
+        handleAs : "text"
+    };
+    
+    endpoint.request(url, options).then(
+    	function(response) {
+            dom.setText("content", response);
         },
-        error : function(error) {
-            dom.byId("content").appendChild(
-                    dom.createTextNode("Error: " + error));
+        function(error){
+            dom.setText("content", error);
         }
-    });
+    );
 });

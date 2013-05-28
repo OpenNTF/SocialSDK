@@ -77,6 +77,14 @@ define(["../declare","../Endpoint", "../lang", "../base/core", "../xml", "../xpa
             }
         },
         
+        /**
+         * @method getEndpoint
+         * @returns
+         */
+        getEndpoint: function() {
+        	return this._endpoint;
+        },
+        
         /*
          * Returns defaultValue if and only if *item* does not have a value for *attribute*.
          */
@@ -340,7 +348,7 @@ define(["../declare","../Endpoint", "../lang", "../base/core", "../xml", "../xpa
         },
 
         _createItems: function(document) {
-            var nodes = xpath.selectNodes(document, this.atom.entry, this.namespaces);
+            var nodes = xpath.selectNodes(document, this.atom.entries, this.namespaces);
             var items = [];
             for (var i=0; i<nodes.length; i++) {
                 items.push(this._createItem(nodes[i]));

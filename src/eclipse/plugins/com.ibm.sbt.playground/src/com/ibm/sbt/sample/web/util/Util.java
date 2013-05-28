@@ -200,10 +200,12 @@ public class Util {
         String[] result;
         if (_styleMap.containsKey(themeId)) {
             result = _styleMap.get(themeId);
-            result = addBaseUrls(baseUrl, result);
+            if(StringUtil.equals(themeId, "oneui"))
+                result = addBaseUrls(baseUrl, result);
         } else if (_styleMap.containsKey(jsLibId + themeId)) {
             result =  _styleMap.get(jsLibId + themeId);
-            result = addBaseUrls(baseUrl, result);
+            if(StringUtil.equals(themeId, "oneui"))
+                result = addBaseUrls(baseUrl, result);
         } else {
             result = new String[0];
         }

@@ -134,7 +134,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * 
          * Supports: asc, email, ps, search, since, sortField, tag, userid
          */
-        AtomCommunitiesAll : "/communities/service/atom/{authType}/communities/all",
+        AtomCommunitiesAll : "/communities/service/atom/communities/all",
 
         /**
          * A feed of communities of which the authenticated user is a member.
@@ -143,7 +143,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * 
          * Supports: asc, email, ps, search, since, sortField, tag, userid
          */
-        AtomCommunitiesMy : "/communities/service/atom/{authType}/communities/my",
+        AtomCommunitiesMy : "/communities/service/atom/communities/my",
         
         /**
          * A feed of invitations.
@@ -152,7 +152,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * 
          * Supports: asc, ps, search, since, sortField
          */
-        AtomCommunityInvitesMy : "/communities/service/atom/{authType}/community/invites/my",
+        AtomCommunityInvitesMy : "/communities/service/atom/community/invites/my",
         
         /**
          * A feed of subcommunities.
@@ -161,7 +161,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * 
          * Supports: asc, page, ps, since, sortBy, sortOrder, sortField
          */
-        AtomCommunitySubCommunities : "communities/service/atom/{authType}/community/subcommunities",
+        AtomCommunitySubCommunities : "communities/service/atom/community/subcommunities",
             
         /**
          * A feed of members.
@@ -170,12 +170,12 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * 
          * Supports: asc, email, page, ps, role, since, sortField, userid
          */
-        AtomCommunityMembers : "communities/service/atom/{authType}/community/members",
+        AtomCommunityMembers : "communities/service/atom/community/members",
         
         /**
          * A community entry.
          */
-        AtomCommunityInstance : "communities/service/atom/{authType}/community/instance"
+        AtomCommunityInstance : "communities/service/atom/community/instance"
 
     }, conn);
 });

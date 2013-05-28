@@ -318,8 +318,8 @@ var Endpoint = declare(null, {
 	 */
 	authenticate : function(args) {
 		var promise = new Promise();
+		args = args || {};
 		if (args.forceAuthentication || !this.isAuthenticated) {
-			args = args || {};
 			var options = {
 				dialogLoginPage : this.loginDialogPage,
 				loginPage : this.loginPage,
@@ -328,7 +328,7 @@ var Endpoint = declare(null, {
 				proxyPath : this.proxyPath,
 				loginUi : args.loginUi || this.loginUi,
 				callback: function(response) {
-					promise.fullFilled(response);
+					promise.fulfilled(response);
 				},
 				cancel: function(response) {
 					promise.rejected(response);
@@ -336,7 +336,7 @@ var Endpoint = declare(null, {
 			};
 			this.authenticator.authenticate(options);
 		} else {
-			promise.fullFilled(true);
+			promise.fulfilled(true);
 		}
 		return promise;
 	},
@@ -358,11 +358,11 @@ var Endpoint = declare(null, {
 			url : actionURL,
 			load : function(response) {
 				self.isAuthenticated = false;
-				promise.fullFilled(response);
+				promise.fulfilled(response);
 			},
 			error : function(response) {
 				self.isAuthenticated = false;
-				promise.rejected(rejected);
+				promise.rejected(response);
 			}
 		}, true);
 		return promise;
@@ -385,7 +385,7 @@ var Endpoint = declare(null, {
 			url : actionURL,
 			load : function(response) {
 				self.isAuthenticated = true;
-				promise.fullFilled(response);
+				promise.fulfilled(response);
 			},
 			error : function(response) {
 				promise.rejected(response);
@@ -413,7 +413,7 @@ var Endpoint = declare(null, {
 			url : actionURL,
 			load : function(response) {
 				self.isAuthenticated = false;
-				promise.fullFilled(response);
+				promise.fulfilled(response);
 			},
 			error : function(response) {
 				promise.rejected(response);

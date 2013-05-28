@@ -19,13 +19,6 @@
  * 
  * @module sbt.stringUtil
  */
-
-/**
- * Implements String helpers.
- * 
- * @class stringUtil
- * @static
- */
 define(['./xml'], function(xml) {
 
 	var _regex = new RegExp("{-?[0-9]+}", "g");

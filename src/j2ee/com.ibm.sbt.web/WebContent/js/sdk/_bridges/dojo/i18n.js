@@ -16,7 +16,6 @@
 
 /**
  * Social Business Toolkit SDK.
- * @module i18n
  */
 define([],function() {
     dojo.require("dojo.i18n");

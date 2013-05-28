@@ -25,9 +25,9 @@ define([ "../../declare", "../../controls/grid/GridRenderer",
         function(declare, GridRenderer, GridPager, GridSorter, SortAnchor, nls) {
 
     /**
-     * @module sbt.controls.grid.connections.ConnectionsGridRenderer
+     * @module sbt.connections.controls.ConnectionsGridRenderer
      * @class ConnectionsGridRenderer
-     * @namespace sbt.controls.grid.connections
+     * @namespace sbt.connections.controls
      */
     var ConnectionsGridRenderer = declare(GridRenderer, {
     	
@@ -58,7 +58,7 @@ define([ "../../declare", "../../controls/grid/GridRenderer",
 
         /**
          * Merge this class with the GridRenderer Class
-         * @method - constructor
+         * @method constructor
          * @param args
          */
         constructor : function(args) {

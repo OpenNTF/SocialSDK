@@ -19,14 +19,14 @@
  */
 define(["sbt/widget/_TemplatedWidget",
         "dojo/_base/lang",
-        "sbt/controls/vcard/connections/SemanticTagService",
-        "sbt/text!sbt/controls/vcard/connections/templates/CommunityVCard.html"], 
+        "sbt/connections/controls/vcard/SemanticTagService",
+        "sbt/text!sbt/connections/controls/vcard/templates/CommunityVCard.html"], 
         function(_TemplatedWidget, lang, SemanticTagService, template) {
 
     /**
      * @class sbt.controls.CommunityVCard
      */
-    dojo.declare("sbt.controls.vcard.connections.CommunityVCard", [ _TemplatedWidget ], {
+    dojo.declare("sbt.connections.controls.vcard.CommunityVCard", [ _TemplatedWidget ], {
 
         /**
          * The html template of the vcard.
@@ -73,5 +73,5 @@ define(["sbt/widget/_TemplatedWidget",
         
     });
     
-    return sbt.controls.vcard.connections.CommunityVCard;
+    return sbt.connections.controls.vcard.CommunityVCard;
 });

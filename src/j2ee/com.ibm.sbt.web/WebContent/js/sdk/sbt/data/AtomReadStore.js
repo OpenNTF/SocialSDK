@@ -15,7 +15,7 @@
  */
 
 /**
- * 
+ * @module sbt.data.AtomReadStore
  */
 define(["../declare","../Endpoint", "../lang", "../base/core", "../xml", "../xpath","dojox/html/entities"], function(declare, Endpoint, lang, core, xml, xpath, entities) {
     
@@ -25,7 +25,6 @@ define(["../declare","../Endpoint", "../lang", "../base/core", "../xml", "../xpa
      * 
      * @class AtomReadStore
      * @namespace sbt.data
-     * @module sbt.data.AtomReadStore
      */
     var AtomReadStore = declare(null, {
         // private

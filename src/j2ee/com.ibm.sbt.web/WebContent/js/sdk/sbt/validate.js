@@ -18,12 +18,6 @@
  * Social Business Toolkit SDK - JS Validation Utilities
  * @module sbt.validate
  */
-
-/**
- * Implements logging helpers.
- * @class validate
- * @static
- */
 define([ "./log", "./stringUtil", "sbt/i18n!sbt/nls/validate","./util" ],
 		function(log, stringUtil, nls, util) {
 			var errorCode = 400;

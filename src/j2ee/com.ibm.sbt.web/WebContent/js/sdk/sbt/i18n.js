@@ -16,7 +16,7 @@
 
 /**
  * Social Business Toolkit SDK.
- * @module i18n
+ * @module sbt.i18n
  */
 define(['./_bridge/i18n'],function(i18n) {
     var nls = {

@@ -45,6 +45,9 @@ define([ "../declare", "../lang", "../log", "../stringUtil", "../Cache", "../End
          */
         _cache : null,
         
+        /*
+         * Regular expression used to remove // from url's
+         */
         _regExp : new RegExp("/{2}"),
 
         /**
@@ -69,7 +72,7 @@ define([ "../declare", "../lang", "../log", "../stringUtil", "../Cache", "../End
         },
 
         /**
-         * 
+         * Construct a url using the specified parameters 
          * @method constructUrl
          * @param url
          * @param params

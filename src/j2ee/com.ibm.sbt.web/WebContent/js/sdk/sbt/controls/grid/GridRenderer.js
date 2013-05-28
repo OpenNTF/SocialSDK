@@ -35,9 +35,10 @@ define([ "../../declare", "../../dom", "../../lang", "dojo/string", "../../widge
         loadingClass: null,
         loadingImgClass: null,
         
-        /**Constructor function
+        /**
+         * Constructor function
          * @method - constructor
-         *  */
+         */
         constructor: function(args) {
            lang.mixin(this, args);
         },
@@ -70,7 +71,7 @@ define([ "../../declare", "../../dom", "../../lang", "dojo/string", "../../widge
         },
         
         /**
-         * checks if a pagerTemplate exists ,if so, the HTML template is converted to
+         * Checks if a pagerTemplate exists ,if so, the HTML template is converted to
          * a DOM node, and attached to the body.
          * @method - renderPager
          * @param grid - the grid
@@ -92,6 +93,7 @@ define([ "../../declare", "../../dom", "../../lang", "dojo/string", "../../widge
                 this._doAttachEvents(grid, el, data);
             }
         },
+        
         /**
          * Converts an HTML sortTemplate to a DOM node and attaches it 
          * @method - renderSorter
@@ -159,11 +161,12 @@ define([ "../../declare", "../../dom", "../../lang", "dojo/string", "../../widge
            }, div, "first");
         },
         
-        /**Creates a Div, with a different CSS class, to display a grid that has no results
+        /**
+         * Creates a Div, with a different CSS class, to display a grid that has no results
          * @method - renderEmpty
          * @param - grid - The Grid
          * @param - el - The Current Element
-         * */
+         */
         renderEmpty: function(grid, el) {
            while (el.childNodes[0]) {
                this._destroy(el.childNodes[0]);
@@ -194,13 +197,17 @@ define([ "../../declare", "../../dom", "../../lang", "dojo/string", "../../widge
             }, el, "only");
         },
         
+        /**
+         * @method getSortInfo
+         */
         getSortInfo: function() {
         },       
         
-        /**Returns the paging results,  - How many pages of results there are
+        /**
+         * Returns the paging results,  - How many pages of results there are
          * @method - pagingResults
          * @return - A String for paging - for example "0 - 5 Of 5"
-         * */
+         */
         pagingResults : function(grid,renderer,items,data) {
             return string.substitute(renderer.nls.pagingResults, data);
         },
@@ -209,7 +216,7 @@ define([ "../../declare", "../../dom", "../../lang", "dojo/string", "../../widge
          * to go back a page, this function hides the back link
          * @method - hidePreviousLink
          * @return - A String used as a CSS style 
-         * */
+         */
         hidePreviousLink : function(grid,renderer,items,data) {
             return (data.start > 1) ? "" : "display: none;";
         },
@@ -217,7 +224,7 @@ define([ "../../declare", "../../dom", "../../lang", "dojo/string", "../../widge
         /**Hides the back page label
          * @method - hidePreviousLabel
          * @return - A String used as a CSS style
-         * */
+         */
         hidePreviousLabel : function(grid,renderer,items,data) {
             return (data.start == 0) ? "" : "display: none;";
         },
@@ -226,23 +233,35 @@ define([ "../../declare", "../../dom", "../../lang", "dojo/string", "../../widge
          * to the next page, this function hides the next link
          * @method - hideNextLink
          * @return - A String used as CSS style
-         * */
+         */
         hideNextLink : function(grid,renderer,items,data) {
             return (data.start + data.count < data.totalCount) ? "" : "display: none;";
         },
         
-        /**If there is only one page of results the user cannot move forward 
+        /**
+         * If there is only one page of results the user cannot move forward 
          * to the next page, this function hides the next label
          * @method - hideNextLabel
          * @return - A String used as CSS style
-         * */
+         */
         hideNextLabel : function(grid,renderer,items,data) {
             return (data.start + data.count >= data.totalCount) ? "" : "display: none;";
         },
 
+        /**
+         * @method updateSort
+         * @param el
+         */
         updateSort : function(el) {
         },
 
+        /**
+         * @method renderSort
+         * @param el
+         * @param sort
+         * @param i
+         * @param sorts
+         */
         renderSort : function(el,sort,i,sorts) {
         },
         
@@ -267,9 +286,18 @@ define([ "../../declare", "../../dom", "../../lang", "dojo/string", "../../widge
             }
         },
 
+        /**
+         * @method sortItemClass
+         * @param grid
+         * @param item
+         * @param i
+         * @param items
+         * @returns
+         */
         sortItemClass : function(grid,item,i,items) {
             return (i === 0 ? this.firstClass : "");
         },
+        
         /**
          * Sets the CSS class for the sort anchor which is currently being used
          * Also sets CSS classes for whether the results are ascending or descending

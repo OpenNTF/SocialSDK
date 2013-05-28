@@ -90,8 +90,8 @@ define([ './declare', 'dojo/_base/xhr', 'dojox/xml/parser', '../util', '../Promi
                     promise.rejected(error);
                     promise.response.rejected(error);
                 } else {
-                    promise.fullFilled(response);
-                    promise.response.fullFilled(self.createResponse(url, options, response, ioargs));
+                    promise.fulfilled(response);
+                    promise.response.fulfilled(self.createResponse(url, options, response, ioargs));
                 }
             };
             

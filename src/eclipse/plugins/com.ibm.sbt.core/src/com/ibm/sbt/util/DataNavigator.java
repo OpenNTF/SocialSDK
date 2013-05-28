@@ -313,7 +313,7 @@ public abstract class DataNavigator implements Cloneable /*extends DataObject*/ 
                 if(!result.contains(prop)) {
                     result.add(prop);
                 }
-            } else if(factory.isArray(prop)) {
+            } else if(prop!=null && factory.isArray(prop)) { // Until commons fixed
                 for( Iterator<Object> it=factory.iterateArrayValues(prop); it.hasNext(); ) {
                     Object val = it.next();
                     if(factory.isObject(val) && !result.contains(val)) {
@@ -330,7 +330,7 @@ public abstract class DataNavigator implements Cloneable /*extends DataObject*/ 
                 Object o = factory.getProperty(parent, it.next());
                 if(factory.isObject(o)) {
                     extractChildren(result, o, name, true);
-                } else if(factory.isArray(o)) {
+                } else if(o!=null && factory.isArray(o)) { // Until commons fixed
                     for( Iterator<Object> it2=factory.iterateArrayValues(o); it2.hasNext(); ) {
                         Object val = it2.next();
                         extractChildren(result, val, name, true);
@@ -365,7 +365,7 @@ public abstract class DataNavigator implements Cloneable /*extends DataObject*/ 
                 Object o = factory.getProperty(parent, it.next());
                 if(factory.isObject(o)) {
                     _extractValues(result, o, name, type, true);
-                } else if(factory.isArray(o)) {
+                } else if(o!=null && factory.isArray(o)) { // Until commons fixed
                     for( Iterator<Object> it2=factory.iterateArrayValues(o); it2.hasNext(); ) {
                         Object val = it2.next();
                         _extractValuesGlobal(result, val, name, type);
@@ -380,7 +380,7 @@ public abstract class DataNavigator implements Cloneable /*extends DataObject*/ 
                 result.add(convertTo(factory.getNumber(value), type));
             } else if(factory.isBoolean(value)) {
                 result.add(convertTo(factory.getBoolean(value), type));
-            } else if(factory.isArray(value)) {
+            } else if(value!=null && factory.isArray(value)) { // Until commons fixed
                 for( Iterator<Object> it=factory.iterateArrayValues(value); it.hasNext(); ) {
                     Object val = it.next();
                     _addValues(result, val, type);

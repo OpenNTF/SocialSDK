@@ -18,16 +18,12 @@
  * Social Business Toolkit SDK - Logging Utilities
  * @module sbt.log
  */
-
-/**
- * Implements logging helpers.
- * @class log
- * @static
- */
 define(['./stringUtil'], function(stringUtil) {
+
 	var loggingEnabled = function isLoggingEnabled(){
 		return sbt.Properties["js.logging.enabled"] ? sbt.Properties["js.logging.enabled"].toLowerCase() == "true" : true;
 	};
+
 	var Level = {
 		DEBUG : 1,
 		INFO : 2,

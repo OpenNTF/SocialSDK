@@ -16,8 +16,6 @@
 
 /**
  * Social Business Toolkit SDK.
- * 
- * @module text
  */
 define([], function() {
     return {

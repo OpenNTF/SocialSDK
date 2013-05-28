@@ -15,7 +15,7 @@
  */
 
 /**
- * 
+ * @module sbt.connections.controls.communities.CommunityGridRenderer
  */
 define(["../../../declare", "../../../connections/controls/ConnectionsGridRenderer",
         "dojo/string", "../../../i18n", "../../../lang",
@@ -25,19 +25,24 @@ define(["../../../declare", "../../../connections/controls/ConnectionsGridRender
         function(declare, ConnectionsGridRenderer, string, i18n, lang, CommunityRow, TagAnchor, nls) {
 
     /**
-     * @module sbt.controls.grid.connections.CommunityGridRenderer
      * @class CommunityGridRenderer
-     * @namespace sbt.controls.grid.connections
+     * @namespace sbt.connections.controls.communities
      */
     var CommunityGridRenderer = declare(ConnectionsGridRenderer, {
     	
-    	 /**Strings used in the grid*/
+    	 /**
+    	  * Strings used in the grid
+    	  */
          _nls: nls,
          
-         /**The HTML template to be used for this grid*/
+         /**
+          * The HTML template to be used for this grid
+          */
          template: CommunityRow,
          
-         /**The HTML template for tag anchors*/
+         /**
+          * The HTML template for tag anchors
+          */
          tagAnchorTemplate: TagAnchor,
         
          /**
@@ -48,11 +53,11 @@ define(["../../../declare", "../../../connections/controls/ConnectionsGridRender
          
          /**
           * Sets the class for the Current grid row
-          * @param grid - The Grid Element
-          * @param item - An Object containing all of the data for the current row
-          * @param i - The number of the current grid row
-          * @param items - an object array containing the data for all of the grid rows
-          * @returns - A CSS Class
+          * @param grid The Grid Element
+          * @param item An Object containing all of the data for the current row
+          * @param i The number of the current grid row
+          * @param items an object array containing the data for all of the grid rows
+          * @returns A CSS Class
           */
          rowClass: function(grid, item, i, items) {
              return (i === 0 ? "placeRow lotusFirst" : "placeRow");
@@ -60,10 +65,10 @@ define(["../../../declare", "../../../connections/controls/ConnectionsGridRender
          
          /**
           * Handles Displaying a Tooltip for an item
-          * @param grid - The grid Element
-          * @param item - An Object containing all of the data for the current row
-          * @param i - the number of the current grid row
-          * @param items - an object array containing the data for all of the grid rows
+          * @param grid The grid Element
+          * @param item An Object containing all of the data for the current row
+          * @param i the number of the current grid row
+          * @param items an object array containing the data for all of the grid rows
           * @returns A String, with the text to be displayed in the tooltip
           */
          tooltip: function(grid, item, i, items) {
@@ -79,10 +84,10 @@ define(["../../../declare", "../../../connections/controls/ConnectionsGridRender
          
          /**
           * Returns the number of members for a community
-          * @param grid - The Grid Element
-          * @param item - An Object containing all of the data for the current row
-          * @param i - the Number of the current grid
-          * @param items - an object array containing the data for all of the grid rows
+          * @param grid The Grid Element
+          * @param item An Object containing all of the data for the current row
+          * @param i the Number of the current grid
+          * @param items an object array containing the data for all of the grid rows
           * @returns A String with the number of members in a community
           */
          numOfMembers: function(grid, item, i, items) {
@@ -96,10 +101,10 @@ define(["../../../declare", "../../../connections/controls/ConnectionsGridRender
          
          /**
           * Gets the last updated date for a community
-          * @param grid - The Grid Element
-          * @param item - An Object containing all of the data for the current row
-          * @param i - the number of the current grid row
-          * @param items - an object array containing the data for all of the grid rows
+          * @param grid The Grid Element
+          * @param item An Object containing all of the data for the current row
+          * @param i the number of the current grid row
+          * @param items an object array containing the data for all of the grid rows
           * @returns The date when the community was last updates
           */
          updatedDate: function(grid, item, i, items) {
@@ -108,10 +113,10 @@ define(["../../../declare", "../../../connections/controls/ConnectionsGridRender
          
          /**
           * Displays the tags for a community
-          * @param grid - The Grid Element
-          * @param item - An Object containing all of the data for the current row
-          * @param i - The number of the current row
-          * @param items -  an object array containing the data for all of the grid rows
+          * @param grid The Grid Element
+          * @param item An Object containing all of the data for the current row
+          * @param i The number of the current row
+          * @param items  an object array containing the data for all of the grid rows
           * @returns {String}
           */
          displayTags: function(grid, item, i, items) {
@@ -125,10 +130,10 @@ define(["../../../declare", "../../../connections/controls/ConnectionsGridRender
          
          /**
           * Get the tags for a community
-          * @param grid - The Grid Element
-          * @param item - An Object containing all of the data for the current row
-          * @param i - The number of the current row
-          * @param items -  an object array containing the data for all of the grid rows
+          * @param grid The Grid Element
+          * @param item An Object containing all of the data for the current row
+          * @param i The number of the current row
+          * @param items  an object array containing the data for all of the grid rows
           * @returns an array of strings, that are tags for a community
           */
          tagsLabel: function(grid, item, i, items) {
@@ -143,10 +148,10 @@ define(["../../../declare", "../../../connections/controls/ConnectionsGridRender
          /**
           * Substitutes tag labels(Strings) from the nls file into the tag
           * Anchor template which creates a tag links, and displays these tags on the page 
-          * @param grid - The Grid Element
-          * @param item - An Object containing all of the data for the current row
-          * @param i - The number of the current row
-          * @param items -  an object array containing the data for all of the grid rows
+          * @param grid The Grid Element
+          * @param item An Object containing all of the data for the current row
+          * @param i The number of the current row
+          * @param items  an object array containing the data for all of the grid rows
           * @returns {String}
           */
          tagsAnchors: function(grid, item, i, items) {

@@ -15,7 +15,7 @@
  */
 
 /**
- * 
+ * @module sbt.connections.controls.communities.CommunityGrid
  */
 define([ "../../../declare", 
          "../../../controls/grid/Grid", 
@@ -29,8 +29,7 @@ define([ "../../../declare",
 
     /**
      * @class  CommunityGrid
-     * @namespace  sbt.controls.grid.connections
-     * @module sbt.controls.grid.connections.CommunityGrid
+     * @namespace  sbt.connections.controls.communities
      */
     var CommunityGrid = declare(Grid, {
     	

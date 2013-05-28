@@ -19,7 +19,7 @@
  * 
  * @module sbt.connections.ProfileService
  */
-define([ "sbt/_bridge/declare", "sbt/lang", "sbt/config", "sbt/stringUtil", "./ProfileConstants", "../base/BaseService", "../base/BaseEntity", "../base/XmlDataHandler", "../base/VCardDataHandler", "sbt/Endpoint", "sbt/Cache" ], function(
+define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConstants", "../base/BaseService", "../base/BaseEntity", "../base/XmlDataHandler", "../base/VCardDataHandler", "../Endpoint", "../Cache" ], function(
         declare,lang,config,stringUtil,consts,BaseService,BaseEntity,XmlDataHandler, VCardDataHandler, Endpoint, Cache) {
 
 	var updateProfileXmlTemplate = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns:app=\"http://www.w3.org/2007/app\" xmlns:thr=\"http://purl.org/syndication/thread/1.0\" xmlns:fh=\"http://purl.org/syndication/history/1.0\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\" xmlns:opensearch=\"http://a9.com/-/spec/opensearch/1.1/\" xmlns=\"http://www.w3.org/2005/Atom\"><category term=\"profile\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category><content type=\"text\">\nBEGIN:VCARD\nVERSION:2.1\n${jobTitle}${address}${telephoneNumber}${building}${floor}END:VCARD\n</content></entry>";

@@ -102,11 +102,6 @@ public abstract class OAuthHandler {
 		this.version = version;
 	}
 
-	/*
-	 * public ApiRequest getApiRequest() { return apiRequest; } public void setApiRequest(ApiRequest
-	 * apiRequest) { this.apiRequest = apiRequest; }
-	 */
-
 	/**
 	 * Looks for a token name and returns it's value.
 	 * 

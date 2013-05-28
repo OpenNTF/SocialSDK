@@ -20,7 +20,7 @@
  * @module sbt.connections.FileService
  */
 
-define([ "sbt/_bridge/declare", "sbt/lang", "sbt/stringUtil", "sbt/Endpoint", "sbt/Promise", "./FileConstants", "../base/BaseService", "../base/BaseEntity", "../base/XmlDataHandler", "sbt/xml" ],
+define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", "./FileConstants", "../base/BaseService", "../base/BaseEntity", "../base/XmlDataHandler", "../xml" ],
 		function(declare, lang, stringUtil, Endpoint, Promise, consts, BaseService, BaseEntity, XmlDataHandler, xml) {
 
 			/**

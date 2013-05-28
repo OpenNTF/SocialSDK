@@ -19,7 +19,7 @@
  * 
  * @module sbt.connections.ActivityStreamService
  */
-define([ "sbt/_bridge/declare", "sbt/lang", "sbt/stringUtil", "sbt/Endpoint", "sbt/Promise", "./ActivityStreamConstants", "../base/BaseService","../base/BaseEntity",  "../base/DataHandler", 'sbt/json'], 
+define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", "./ActivityStreamConstants", "../base/BaseService","../base/BaseEntity",  "../base/DataHandler", 'sbt/json'], 
 		function(declare,lang,stringUtil,Endpoint,Promise,consts,BaseService, BaseEntity,DataHandler, json) {
 
 	/**

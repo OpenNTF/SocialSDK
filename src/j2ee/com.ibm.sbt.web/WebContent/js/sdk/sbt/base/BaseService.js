@@ -130,7 +130,7 @@ define([ "../declare", "../lang", "../log", "../stringUtil", "../Cache", "../End
                         entities.push(entity);
                     }
                     promise.summary = feedHandler.getSummary();
-                    promise.fullFilled(entities);
+                    promise.fulfilled(entities);
                 },
                 function(error) {
                     promise.rejected(error);
@@ -157,7 +157,7 @@ define([ "../declare", "../lang", "../log", "../stringUtil", "../Cache", "../End
             var promise = new Promise();
             var data = this.getFromCache(entityId);
             if (data) {
-                promise.fullFilled(data);
+                promise.fulfilled(data);
                 return promise;
             }
 
@@ -170,7 +170,7 @@ define([ "../declare", "../lang", "../log", "../stringUtil", "../Cache", "../End
                     if (self._cache && entityId) {
                         self.fullFillOrRejectPromises.apply(self, [ entityId, entity, response ]);
                     } else {
-                        promise.fullFilled(entity);
+                        promise.fulfilled(entity);
                     }
                 },
                 function(error) {
@@ -207,7 +207,7 @@ define([ "../declare", "../lang", "../log", "../stringUtil", "../Cache", "../End
                             function(response) {
                                 // entity promise is fullfilled
                                 self.addToCache(response);
-                                promise.fullFilled(response);
+                                promise.fulfilled(response);
                             },
                             function(error) {
                                 promise.rejected(error);
@@ -215,7 +215,7 @@ define([ "../declare", "../lang", "../log", "../stringUtil", "../Cache", "../End
                         );
                     } else {
                         self.addToCache(entity);
-                        promise.fullFilled(entity);
+                        promise.fulfilled(entity);
                     }
                 },
                 function(error) {
@@ -245,7 +245,7 @@ define([ "../declare", "../lang", "../log", "../stringUtil", "../Cache", "../End
             this.endpoint.request(url,options,entityId,promise).response.then(
                 function(response) {
                     promise.response = response;
-                    promise.fullFilled(entityId);
+                    promise.fulfilled(entityId);
                 },
                 function(error) {
                     promise.rejected(error);
@@ -319,7 +319,7 @@ define([ "../declare", "../lang", "../log", "../stringUtil", "../Cache", "../End
                     if (data instanceof Error) {
                         promise.rejected(data);
                     } else {
-                        promise.fullFilled(data);
+                        promise.fulfilled(data);
                     }
                 } catch (error) {
                     log.debug("fullFillOrReject: " + error.message);

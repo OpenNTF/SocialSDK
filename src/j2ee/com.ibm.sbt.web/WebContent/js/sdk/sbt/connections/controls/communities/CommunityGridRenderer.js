@@ -71,6 +71,12 @@ define(["../../../declare", "../../../connections/controls/ConnectionsGridRender
                  return grid.communityAction.getTooltip(item);
              }
          },
+         
+         communityImage: function(grid, item, i, items) {
+        	 var logoUrl = item.getValue("logoUrl");
+             return grid.encodeImageUrl(logoUrl);
+         },
+         
          /**
           * Returns the number of members for a community
           * @param grid - The Grid Element
@@ -116,6 +122,7 @@ define(["../../../declare", "../../../connections/controls/ConnectionsGridRender
                  return "";
              }
          },
+         
          /**
           * Get the tags for a community
           * @param grid - The Grid Element

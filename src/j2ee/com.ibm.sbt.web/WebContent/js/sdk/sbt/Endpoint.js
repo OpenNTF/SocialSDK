@@ -187,8 +187,8 @@ var Endpoint = declare(null, {
         var self = this;
         this.transport.request(qurl, options).response.then(
             function(response) {
-                promise.fullFilled(response.data);
-                promise.response.fullFilled(response);
+                promise.fulfilled(response.data);
+                promise.response.fulfilled(response);
             }, function(error) {
             	if(!error.message){
             		error.message = self.getErrorMessage(error.cause);
@@ -482,7 +482,7 @@ var Endpoint = declare(null, {
             callback: function() {
                 self.request(url, options).then(
                     function(response) {
-                        promise.fullFilled(response);
+                        promise.fulfilled(response);
                     }, function(error) {
                         promise.rejected(error);
                     }

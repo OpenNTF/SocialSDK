@@ -119,7 +119,7 @@ define([ "../declare", "../lang", "../log", "../stringUtil", "../Cache", "../End
             var self = this;
             var promise = new Promise();
             promise.args = args;
-            this.xhrGet(url,options,null,promise).response.then(
+            this.request(url,options,null,promise).response.then(
                 function(response) {
                     promise.response = response;
                     var feedHandler = callbacks.createEntities.apply(self, [ self, response.data, response ]);
@@ -163,7 +163,7 @@ define([ "../declare", "../lang", "../log", "../stringUtil", "../Cache", "../End
 
             var self = this;
             promise.args = args;
-            this.xhrGet(url,options,entityId,promise).response.then(
+            this.request(url,options,entityId,promise).response.then(
                 function(response) {
                     promise.response = response;
                     var entity = callbacks.createEntity.apply(self, [ self, response.data, response ]);
@@ -255,15 +255,15 @@ define([ "../declare", "../lang", "../log", "../stringUtil", "../Cache", "../End
         },
         
         /**
-         * Perform an xhrGet with cache support
+         * Perform an XML HTTP Request with cache support
          * 
-         * @method xhrGet
+         * @method request
          * @param url
          * @param options
          * @param entityId
          * @param promise
          */
-        xhrGet : function(url,options,entityId,promise) {
+        request : function(url,options,entityId,promise) {
             if (this._cache && entityId) {
                 this.pushPromise(entityId, promise);
             }

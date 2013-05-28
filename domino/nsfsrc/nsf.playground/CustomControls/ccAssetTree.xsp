@@ -59,7 +59,7 @@ return true;]]></xp:this.onkeypress>
 		case "xPagesSnippet": 	return xpagesSnippetBean.getSnippetsAsJson(); 
 		case "api": 			return apiBean.getSnippetsAsJson();
 	} return "";
-	};	var assetsStore = new dojo.data.ItemFileReadStore({data:{identifier:'id',label:'name',items:assetsData}});
+	};	var assetsStore = new dojo.data.ItemFileReadStore({data:{identifier:'id',label:'name',items:assetsData}});
 	var assetsModel = new dijit.tree.TreeStoreModel({		store: assetsStore	});
 	var navTree = new dijit.Tree({
 		model: assetsModel, 

@@ -3,13 +3,12 @@ require(['sbt/Endpoint',"sbt/dom","sbt/config"], function(Endpoint,dom,config) {
 	var ep = Endpoint.find("connections");
 	config.Properties["loginUi"] = "popup";
 	config.Properties["loginPage"] = "/sbt/authenticator/templates/QSlogin.html";
-	ep.authenticate({
-		forceAuthentication: true,
-		load: function(response){
+	ep.authenticate({ forceAuthentication: true }).then(
+		function(response){
 			dom.setText("content","You successfully logged in to connections");	
 		},
-		cancel: function(){
+		function(){
 			dom.setText("content","You are not logged in to connections");
 		}
-	});
+	);
 });

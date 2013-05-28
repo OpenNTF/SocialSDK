@@ -15,7 +15,7 @@
  */
 
 /**
- * Social Business Toolkit SDK - Utilities script
+ * @module sbt.util
  */
 define(['./lang','sbt/i18n!sbt/nls/util','./log'],function(lang, nls, log) {
 	var errorCode = 400;	

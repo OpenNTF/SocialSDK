@@ -16,7 +16,6 @@
 
 /**
  * Social Business Toolkit SDK.
- * @module i18n
  */
 define(['dojo/i18n', 'dojo/date/locale'],function(i18n, dateLocale) {
 	    var load = function(id, require, callback){	    	

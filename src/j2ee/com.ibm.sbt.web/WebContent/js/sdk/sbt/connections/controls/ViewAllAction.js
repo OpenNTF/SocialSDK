@@ -15,15 +15,14 @@
  */
 
 /**
- * 
+ * @module sbt.connections.controls.ViewAllAction
  */
 define([ "../../declare", "../../controls/grid/GridAction", "dojo/string" ], 
         function(declare, GridAction, string) {
 
     /**
-     * @class - ViewAllAction
-     * @namespace - sbt.controls.grid.connections
-     * @module sbt.controls.grid.connections.ViewAllAction
+     * @class sbt.connections.controls.ViewAllAction
+     * @namespace sbt.connections.controls
      */
     var ViewAllAction = declare(GridAction, {
         

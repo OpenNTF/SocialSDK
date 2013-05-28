@@ -20,7 +20,7 @@
  * 
  * @module sbt.base.DataHandler
  */
-define([ "sbt/_bridge/declare", "sbt/lang", "sbt/stringUtil", "sbt/xml", "sbt/xpath", "./DataHandler" ], function(declare,lang,stringUtil,xml,xpath,
+define([ "../declare", "../lang", "../stringUtil", "../xml", "../xpath", "./DataHandler" ], function(declare,lang,stringUtil,xml,xpath,
         DataHandler) {
 
     /**

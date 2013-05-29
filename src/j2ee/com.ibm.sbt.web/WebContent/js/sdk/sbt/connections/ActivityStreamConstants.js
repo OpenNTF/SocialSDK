@@ -33,7 +33,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
 			SELF : "@self",
 			INVOLVED : "@involved",
 			NOTESFORME : "@notesforme",
-			NOTESFROMME : "@notesforme",
+			NOTESFROMME : "@notesfromme",
 			RESPONSES : "@responses",
 			ACTIONS : "@actions",
 			SAVED : "@saved"

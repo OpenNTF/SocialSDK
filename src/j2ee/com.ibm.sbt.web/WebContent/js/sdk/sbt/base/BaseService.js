@@ -22,7 +22,9 @@
  */
 define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cache", "../Endpoint", "../Promise" ], 
     function(config, declare,lang,log,stringUtil,Cache,Endpoint,Promise) {
-
+	// TODO sbt/config is required here to solve module loading
+	// issues with jquery until we remove the global sbt object
+	
     var BadRequest = 400;
     
     var requests = {};

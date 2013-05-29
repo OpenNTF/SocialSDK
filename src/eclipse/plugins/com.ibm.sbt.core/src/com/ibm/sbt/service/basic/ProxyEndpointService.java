@@ -26,6 +26,7 @@ import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.RuntimeConstants;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.service.core.handlers.ProxyHandler;
+import com.ibm.sbt.service.debug.ProxyDebugUtil;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
@@ -75,9 +76,13 @@ public class ProxyEndpointService extends ProxyService {
     @Override
 	protected DefaultHttpClient getClient(HttpServletRequest request, int timeout) {
         DefaultHttpClient httpClient = super.getClient(request, timeout);
-        if(endpoint!=null && endpoint.isForceTrustSSLCertificate()) {
-            if(requestURI!=null) {
-                return SSLUtil.wrapHttpClient(httpClient);
+        if(endpoint!=null) {
+            if(endpoint.isForceTrustSSLCertificate() && requestURI!=null) {
+            	httpClient = SSLUtil.wrapHttpClient(httpClient);
+            }
+            String httpProxy = getHttpProxy(endpoint);
+            if(StringUtil.isNotEmpty(httpProxy)) {
+            	httpClient = ProxyDebugUtil.wrapHttpClient(httpClient, httpProxy);
             }
         }
         return httpClient;
@@ -157,10 +162,12 @@ public class ProxyEndpointService extends ProxyService {
                 String endpointUrl = endpoint.getUrl();
 				if (pathInfo.substring(startProxyUrl+1).startsWith("http")) {
 				    url = pathInfo.substring(startProxyUrl+1).replaceFirst("\\/", "://");
+				    /*
 	                if (!url.startsWith(endpointUrl)) {
 	                    throw new ServletException(StringUtil.format(
 	                            "The proxied url does not correspond to the endpoint {0}", endPointName));
 	                }
+	                */
 				} else {
 				    url = endpointUrl + pathInfo.substring(startProxyUrl);
 				}
@@ -211,6 +218,16 @@ public class ProxyEndpointService extends ProxyService {
 		}
 		return queryargs;
 	}
-
+    
+    /*
+     * Return the HttpProxy value if configured
+     */
+    private String getHttpProxy(Endpoint endpoint) {
+    	String httpProxy = endpoint.getHttpProxy();
+		if (StringUtil.isEmpty(httpProxy)) {
+			httpProxy = Context.get().getProperty("sbt.httpProxy");
+		}
+		return httpProxy;
+    }
     
 }

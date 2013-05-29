@@ -502,7 +502,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 				 * 
 				 * @method load
 				 * @param {Object} [args] Argument object
-				 * @param {Boolean} [isPublic=false] Flag to indicate whether to load public file which does not require authentication
+				 * @param {Boolean} [isPublic] Optinal flag to indicate whether to load public file which does not require authentication
 				 */
 				load : function(args, isPublic) {
 					// detect a bad request by validating required arguments
@@ -559,7 +559,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 				 * Adds a comment to the file.
 				 * 
 				 * @method addComment
-				 * @param {String} [args.comment] the comment to be added
+				 * @param {String} comment the comment to be added
 				 * @param {Object} [args] Argument object. Object representing various parameters that can be passed. The parameters must be exactly as they are supported by IBM Connections like ps,
 				 * sortBy etc.
 				 */
@@ -732,7 +732,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 
 				/**
 				 * Returns a File instance from File or JSON or String. Throws an error if the argument was neither.
-				 * @param {Object} [fileOrJsonOrString] the file Object or json String for File
+				 * @param {Object} fileOrJsonOrString The file Object or json String for File
 				 */
 				newFile : function(fileOrJsonOrString) {
 					if (fileOrJsonOrString instanceof File) {
@@ -753,7 +753,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 				/**
 				 * Loads File with the ID passed
 				 * @method getFile
-				 * @param {String} File ID
+				 * @param {String} FileId the Id of the file to be loaded
 				 * @param {Object} [args] Argument object
 				 */
 				getFile : function(fileId, args) {
@@ -933,9 +933,9 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 				 * Adds a comment to the specified file.
 				 * 
 				 * @method addCommentToFile
-				 * @param {String} [userId=null] the userId for the author
-				 * @param {String} [fileId] the ID of the file
-				 * @param {String} [args.comment] the comment to be added
+				 * @param {String} [userId] the userId for the author
+				 * @param {String} fileId the ID of the file
+				 * @param {String} comment the comment to be added
 				 * @param {Object} [args] Argument object. Object representing various parameters that can be passed. The parameters must be exactly as they are supported by IBM Connections like ps,
 				 * sortBy etc.
 				 */
@@ -974,7 +974,8 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 				 * Adds a comment to the specified file of logged in user.
 				 * 
 				 * @method addCommentToMyFile
-				 * @param {String} [args.comment] the comment to be added
+				 * @param {String} fileId the ID of the file
+				 * @param {String} comment the comment to be added
 				 * @param {Object} [args] Argument object. Object representing various parameters that can be passed. The parameters must be exactly as they are supported by IBM Connections like ps,
 				 * sortBy etc.
 				 */
@@ -985,7 +986,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 				/**
 				 * Update the Atom document representation of the metadata for a file from logged in user's library.
 				 * @method updateFileMetadata
-				 * @param {Object} [fileOrJson] file or json representing the file to be updated
+				 * @param {Object} fileOrJson file or json representing the file to be updated
 				 * @param {Object} [args] Argument object. Object representing various parameters that can be passed. The parameters must be exactly as they are supported by IBM Connections like ps,
 				 * sortBy etc.
 				 */
@@ -1014,7 +1015,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 				/**
 				 * Pin a file, by sending a POST request to the myfavorites feed.
 				 * @method pinFile
-				 * @param {String} [fileId] ID of file which needs to be unpinned
+				 * @param {String} fileId ID of file which needs to be pinned
 				 * @param {Object} [args] Argument object.
 				 */
 				pinFile : function(fileId, args) {
@@ -1049,7 +1050,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 				/**
 				 * Unpin a file, by sending a DELETE request to the myfavorites feed.
 				 * @method unpinFile
-				 * @param {String} [fileId] ID of file which needs to be pinned
+				 * @param {String} fileId ID of file which needs to be unpinned
 				 * @param {Object} [args] Argument object.
 				 */
 				unpinFile : function(fileId, args) {
@@ -1081,10 +1082,9 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 				 * You cannot add a file from your local directory to a folder; the file must already have been uploaded to the Files application. To add a file to a folder you must be an editor of
 				 * the folder.
 				 * 
-				 * @method addFilesToFolder
-				 * @param {Object} [args] Argument object
-				 * @param {String} [folderId] the Id of the folder
-				 * @param {List} [fileIds] list of file Ids to be added to the folder
+				 * @method addFilesToFolder		
+				 * @param {String} folderId the Id of the folder
+				 * @param {List} fileIds list of file Ids to be added to the folder
 				 * @param {Object} [args] Argument object.
 				 */
 				addFilesToFolder : function(fileIds, folderId, args) {
@@ -1170,7 +1170,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 				/**
 				 * Lock a file
 				 * @method lockFile
-				 * @param {String} fileId Id of the file which needs to be deleted
+				 * @param {String} fileId Id of the file which needs to be locked
 				 * @param {Object} [args] Argument object
 				 */
 				lockFile : function(fileId, args) {

@@ -24,13 +24,14 @@
 define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscriber","../Jsonpath","../Endpoint", "../base/BaseService", "../base/JsonDataHandler", "./ProfileConstants", "../base/BaseEntity"],
 		function(declare, lang, Config, StringUtil, Cache, Subscriber, JsonPath, Endpoint, BaseService, JsonDataHandler, Consts, BaseEntity) {
 	/**
-     * Profile class.
+     * Profile class representing the Smartcloud User Profile.
      * 
      * @class Profile
      * @namespace sbt.smartcloud
      */
 	var Profile = declare(BaseEntity, {
 		/**
+		 * Profile Class Constructor
          * 
          * @constructor
          * @param args
@@ -85,7 +86,6 @@ define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscr
 		
 		/**
 		Returns the id of the User
-		
 		@method getId
 		@return {String} id of the User	
 		**/
@@ -179,7 +179,7 @@ define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscr
 			return this.getAsString("orgId"); 
 		},
 		/**
-		Get "About Me" / description of the profile
+		Get "About Me"/description of the profile
 		@method getAbout
 		@return {String} description of the profile
 		**/
@@ -351,7 +351,7 @@ define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscr
         },
         
         /**
-         * Get logged in user's Contacts
+         * Get logged in user's Contacts considering the startIndex and count as provided by the user
          * 
          * @method getMyContactsByIndex
          * @param startIndex

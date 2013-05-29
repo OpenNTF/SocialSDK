@@ -41,7 +41,7 @@
 		<managed-bean-scope>application</managed-bean-scope>
 		<managed-property>
 			<property-name>endpoints</property-name>
-			<value>smartcloudBasic:connections,smartcloud</value>
+			<value>smartcloud:connections,smartcloud</value>
 		</managed-property>
 		<managed-property>
 			<property-name>properties</property-name>
@@ -185,6 +185,10 @@
 		<managed-bean-class>com.ibm.sbt.services.endpoints.SmartCloudOAuthEndpoint</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 		<!-- Endpoint URL -->
+		<managed-property>
+			<property-name>httpProxy</property-name>
+			<value>127.0.0.1:8888</value>
+		</managed-property>
 		<managed-property>
 			<property-name>url</property-name>
 			<value>%{smartcloud.url}</value>

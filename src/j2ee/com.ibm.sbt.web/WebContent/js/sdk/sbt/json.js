@@ -15,18 +15,16 @@
  */
 
 /**
- * JSON utilities module
- * @module sbt.json
- */
-
-/**
  * Implements some JSON helpers.  Will uses the browser version
  * if available else it will delegate to the Javascript library being used.
- * @class json
- * @static
- **/
-
+ * 
+ * @module sbt.json
+ */
 define(['./_bridge/json', './_bridge/lang', './log', './stringUtil'], function(jsonLib, lang, log, stringUtil) {
+	
+	/**
+	 * @static
+	 */
     return {
         /**
          * Parses a String of JSON and returns a JSON Object.
@@ -51,6 +49,11 @@ define(['./_bridge/json', './_bridge/lang', './log', './stringUtil'], function(j
             return jsonImpl.stringify(jsonObj);
         },
         
+        /**
+         * @method jsonBeanStringify
+         * @param theObj
+         * @returns
+         */
         jsonBeanStringify: function(theObj) {
             if (lang.isArray(theObj)) {
                 var jsonObjs = "[";
@@ -67,6 +70,11 @@ define(['./_bridge/json', './_bridge/lang', './log', './stringUtil'], function(j
             }
         },
         
+        /**
+         * @method jsonBean
+         * @param theObj
+         * @returns
+         */
         jsonBean: function(theObj) {
             if (lang.isArray(theObj)) {
                 var jsonObjs = [];
@@ -78,6 +86,8 @@ define(['./_bridge/json', './_bridge/lang', './log', './stringUtil'], function(j
                 return this._jsonBean(theObj);
             }
         },
+        
+        // Internals
         
         _jsonBeanStringify: function(theObj) {
             var jsonObj = this.jsonBean(theObj);
@@ -116,9 +126,11 @@ define(['./_bridge/json', './_bridge/lang', './log', './stringUtil'], function(j
             }
             return jsonObj;
         },
+        
         _notReserved: function(property) {
         	return property!=='isInstanceOf' && property!=='getInherited';
-        },        
+        },
+        
         _getObjectValue: function(theObj, property, seen) {
         	var self = this;
             if (lang.isFunction(theObj[property])) {

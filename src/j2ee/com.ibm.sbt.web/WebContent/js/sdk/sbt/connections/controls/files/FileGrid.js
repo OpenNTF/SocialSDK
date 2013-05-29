@@ -22,7 +22,7 @@ define([ "../../../declare",
          "../../../connections/controls/files/FileGridRenderer", 
          "../../../connections/controls/files/FileAction",
          "../../../config",  
-         "../../../controls/vcard/connections/SemanticTagService", 
+         "../../../connections/controls/vcard/SemanticTagService", 
          "dojo/string", 
          "../../../store/parameter",
          "../../../connections/FileService",
@@ -150,8 +150,8 @@ define([ "../../../declare",
 	
     /**
      * @class FileGrid
-     * @namespace sbt.controls.grid.connections
-     * @module sbt.controls.grid.connections.FileGrid
+     * @namespace sbt.connections.controls.files
+     * @module sbt.connections.controls.files.FileGrid
      */
    var FileGrid =  declare(Grid, {
 
@@ -275,9 +275,20 @@ define([ "../../../declare",
 
         },
         
-        /**Constructor function
-         * @method - constructor
-         * */
+        /**
+         * The default grid, if no options are selected
+         */
+        defaultOption: "publicFiles",
+        
+        /**
+         * FileAction defines the default actions for files, which can be overridden 
+         */
+        fileAction: new FileAction(),
+        	
+        /**
+         * Constructor function
+         * @method constructor
+         */
         constructor: function(args){
 
         	this.fileService = new FileService(this.endpointName || "connections");
@@ -351,16 +362,8 @@ define([ "../../../declare",
         },
         
         /**
-         * The default grid, if no options are selected
-         */
-        defaultOption: "publicFiles",
-        
-        /**FileAction defines the default actions for files, which can be overridden */
-        fileAction: new FileAction(),
-        	
-        /**
          * Creates a new AtomStore
-         * @method - createDefaultStore
+         * @method createDefaultStore
          * @param args -Store args, PArameters for the Atom store, such as URL, and Attributes
          * @returns
          */
@@ -372,7 +375,7 @@ define([ "../../../declare",
         
         /**
          * Instantiates a FileGridRenderer
-         * @method - createDefaultRenderer
+         * @method createDefaultRenderer
          * @param args
          * @returns {FileGridRenderer}
          */
@@ -383,7 +386,7 @@ define([ "../../../declare",
         /**
          * Called after the grid is created
          * The semanticTagService is loaded, which is responsible for displaying business card functionality.
-         * @method - postCreate
+         * @method postCreate
          */
         postCreate: function() {        	
         	this.inherited(arguments);
@@ -392,7 +395,7 @@ define([ "../../../declare",
         
         /**
          * Event handler for onClick events
-         * @method - handleClick
+         * @method handleClick
          * @param el The element that fired the event
          * @param data The data associated with this table row
          * @param ev The event, onclick
@@ -405,7 +408,7 @@ define([ "../../../declare",
             }
         },
         /**
-         * @method - getSortInfo
+         * @method getSortInfo
          * @returns A List of Strings,that describe how the grid can be sorted
          */        
         getSortInfo: function() {
@@ -472,7 +475,7 @@ define([ "../../../declare",
         
         /**
          * Sort the grid rows by the amount of comments a file has.
-         * @method - sortByComments
+         * @method sortByComments
          * @param el The element that fired the event
          * @param data The data associated with this table row
          * @param ev The event, onclick
@@ -517,13 +520,13 @@ define([ "../../../declare",
        
         /**
          * Event handler to show and hide the more options in the files grid
-         * @method - showMore
+         * @method showMore
          * @param el The element that fired the event
          * @param data The data associated with this table row
          * @param ev The event, onclick
          */
         showMore: function(el, data, ev){
-        	/**TODO - to be implemented in iteration 9 */	
+        	/**TODO to be implemented in iteration 9 */	
         },
         
         /**

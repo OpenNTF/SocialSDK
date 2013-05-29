@@ -46,7 +46,7 @@ define(["./declare","./log"], function(declare,log) {
                 if (response instanceof Error) {
                     this.rejected(response);
                 } else {
-                    this.fullFilled(response);
+                    this.fulfilled(response);
                 }
             } else {
                 this._callbacks = [];
@@ -115,9 +115,9 @@ define(["./declare","./log"], function(declare,log) {
         },
 
         /*
-         * Called if the promise has been fullfilled
+         * Called if the promise has been fulfilled
          */
-        fullFilled : function(data) {
+        fulfilled : function(data) {
             if (this._isCancelled) {
                 return;
             }

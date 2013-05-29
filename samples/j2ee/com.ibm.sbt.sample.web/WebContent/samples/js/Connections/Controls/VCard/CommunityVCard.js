@@ -1,4 +1,4 @@
-require(["sbt/dom", "sbt/controls/vcard/connections/CommunityVCard"], function(dom, CommunityVCard) {
+require(["sbt/dom", "sbt/connections/controls/vcard/CommunityVCard"], function(dom, CommunityVCard) {
     var communityCard = new CommunityVCard({
         name : "",
         uuid : "%{sample.communityId}",

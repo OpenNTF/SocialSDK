@@ -22,8 +22,8 @@ define([ "../../../declare", "../../../controls/grid/GridAction", "dojo/string" 
 
     /**
      * @class ProfileAction
-     * @namespace sbt.controls.grid.connections
-     * @module sbt.controls.grid.connections.ProfileAction
+     * @namespace sbt.connections.controls.profiles
+     * @module sbt.connections.controls.profiles.ProfileAction
      */
     var ProfileAction = declare(GridAction, {
         
@@ -33,7 +33,7 @@ define([ "../../../declare", "../../../controls/grid/GridAction", "dojo/string" 
         },
         
         /**ProfileAction Constructor function
-         * @method - constructor
+         * @method constructor
          * */
         constructor: function() {
         },
@@ -42,8 +42,8 @@ define([ "../../../declare", "../../../controls/grid/GridAction", "dojo/string" 
          * Handles displaying a tooltip for an item
          * For profiles, the tooltip by default will be a business card
          * So nothing is done in this function
-         * @method - getTooltip
-         * @param item - The element that will use the tooltip
+         * @method getTooltip
+         * @param item The element that will use the tooltip
          */
         getTooltip: function(item) {
         	
@@ -56,10 +56,10 @@ define([ "../../../declare", "../../../controls/grid/GridAction", "dojo/string" 
          * The execute function is called from the handle click function
          * For Profiles by default the business card functionality is used
          * which works from the Semantic tag service so nothing is done here.
-         * @method - execute
-         * @param item - The item which fired the event
+         * @method execute
+         * @param item The item which fired the event
          * @param opts
-         * @param event - The event
+         * @param event The event
          */
         execute: function(item, opts, event) {
         

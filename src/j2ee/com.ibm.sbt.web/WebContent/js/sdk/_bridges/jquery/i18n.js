@@ -16,7 +16,6 @@
 
 /**
  * Social Business Toolkit SDK.
- * @module i18n
  */
 define(['requirejs/i18n'],function(i18n) {
     return {

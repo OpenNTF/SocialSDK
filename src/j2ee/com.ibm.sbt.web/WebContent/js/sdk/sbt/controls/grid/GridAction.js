@@ -15,28 +15,28 @@
  */
 
 /**
- * 
+ *  @module sbt.controls.grid.GridAction
  */
 define(["../../declare"], function(declare) {
 
     /**
-     * @module sbt.controls.grid.GridAction
+     * @class sbt.controls.grid.GridAction
+     * @namespace sbt.controls.grid
      */
     var GridAction = declare(null, {
          
     	 /**
     	  * Grid Action Constructor function
-    	  * @class GridAction
-    	  * @namespace grid
+    	  * @constructor
     	  */
          constructor: function() {
          },
          
          /**
           * Gets the string to be displayed as an elements tooltip
-          * @method - getTooltip
-          * @param item - the HTML element 
-          * @returns {String} - contains the text for the tooltip
+          * @method getTooltip
+          * @param item the HTML element 
+          * @returns {String} contains the text for the tooltip
           */
          getTooltip: function(item) {
             return "sbt.controls.GridAction No tooltip specified";
@@ -44,10 +44,10 @@ define(["../../declare"], function(declare) {
          
          /** 
           * Default action for the grid
-          * @method - execute
-          * @param item - The element that fired the event
+          * @method execute
+          * @param item The element that fired the event
           * @param opts
-          * @param event - the Event, for example onClick
+          * @param event the Event, for example onClick
           */
          execute: function(item, opts, event) {
             dojo.stopEvent(event);

@@ -16,6 +16,8 @@
 
 /**
  * Social Business Toolkit SDK - declare() function.
+ * 
+ * @module sbt.declare
  */
 define(['./_bridge/declare'],function(declare) {
 	return declare;

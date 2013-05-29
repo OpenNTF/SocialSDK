@@ -45,6 +45,9 @@ define([ "../declare", "../lang", "../log", "../stringUtil", "../Cache", "../End
          */
         _cache : null,
         
+        /*
+         * Regular expression used to remove // from url's
+         */
         _regExp : new RegExp("/{2}"),
 
         /**
@@ -69,7 +72,7 @@ define([ "../declare", "../lang", "../log", "../stringUtil", "../Cache", "../End
         },
 
         /**
-         * 
+         * Construct a url using the specified parameters 
          * @method constructUrl
          * @param url
          * @param params
@@ -116,7 +119,7 @@ define([ "../declare", "../lang", "../log", "../stringUtil", "../Cache", "../End
             var self = this;
             var promise = new Promise();
             promise.args = args;
-            this.xhrGet(url,options,null,promise).response.then(
+            this.request(url,options,null,promise).response.then(
                 function(response) {
                     promise.response = response;
                     var feedHandler = callbacks.createEntities.apply(self, [ self, response.data, response ]);
@@ -127,7 +130,7 @@ define([ "../declare", "../lang", "../log", "../stringUtil", "../Cache", "../End
                         entities.push(entity);
                     }
                     promise.summary = feedHandler.getSummary();
-                    promise.fullFilled(entities);
+                    promise.fulfilled(entities);
                 },
                 function(error) {
                     promise.rejected(error);
@@ -154,20 +157,20 @@ define([ "../declare", "../lang", "../log", "../stringUtil", "../Cache", "../End
             var promise = new Promise();
             var data = this.getFromCache(entityId);
             if (data) {
-                promise.fullFilled(data);
+                promise.fulfilled(data);
                 return promise;
             }
 
             var self = this;
             promise.args = args;
-            this.xhrGet(url,options,entityId,promise).response.then(
+            this.request(url,options,entityId,promise).response.then(
                 function(response) {
                     promise.response = response;
                     var entity = callbacks.createEntity.apply(self, [ self, response.data, response ]);
                     if (self._cache && entityId) {
                         self.fullFillOrRejectPromises.apply(self, [ entityId, entity, response ]);
                     } else {
-                        promise.fullFilled(entity);
+                        promise.fulfilled(entity);
                     }
                 },
                 function(error) {
@@ -204,7 +207,7 @@ define([ "../declare", "../lang", "../log", "../stringUtil", "../Cache", "../End
                             function(response) {
                                 // entity promise is fullfilled
                                 self.addToCache(response);
-                                promise.fullFilled(response);
+                                promise.fulfilled(response);
                             },
                             function(error) {
                                 promise.rejected(error);
@@ -212,7 +215,7 @@ define([ "../declare", "../lang", "../log", "../stringUtil", "../Cache", "../End
                         );
                     } else {
                         self.addToCache(entity);
-                        promise.fullFilled(entity);
+                        promise.fulfilled(entity);
                     }
                 },
                 function(error) {
@@ -242,7 +245,7 @@ define([ "../declare", "../lang", "../log", "../stringUtil", "../Cache", "../End
             this.endpoint.request(url,options,entityId,promise).response.then(
                 function(response) {
                     promise.response = response;
-                    promise.fullFilled(entityId);
+                    promise.fulfilled(entityId);
                 },
                 function(error) {
                     promise.rejected(error);
@@ -252,15 +255,15 @@ define([ "../declare", "../lang", "../log", "../stringUtil", "../Cache", "../End
         },
         
         /**
-         * Perform an xhrGet with cache support
+         * Perform an XML HTTP Request with cache support
          * 
-         * @method xhrGet
+         * @method request
          * @param url
          * @param options
          * @param entityId
          * @param promise
          */
-        xhrGet : function(url,options,entityId,promise) {
+        request : function(url,options,entityId,promise) {
             if (this._cache && entityId) {
                 this.pushPromise(entityId, promise);
             }
@@ -316,7 +319,7 @@ define([ "../declare", "../lang", "../log", "../stringUtil", "../Cache", "../End
                     if (data instanceof Error) {
                         promise.rejected(data);
                     } else {
-                        promise.fullFilled(data);
+                        promise.fulfilled(data);
                     }
                 } catch (error) {
                     log.debug("fullFillOrReject: " + error.message);

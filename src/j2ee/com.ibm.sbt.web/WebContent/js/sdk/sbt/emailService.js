@@ -13,16 +13,11 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-/**
- * Email Service module
- * @module sbt.emailService
- */
 
 /**
  * Provides functionality to send emails.
- * @class Email
- * @static
  * 
+ * @module sbt.emailService
  */
 define(['./declare', './lang', './config', './_bridge/Transport', './json'], function(declare, lang, config, Transport, sbtJson) {
     var transport = new Transport();

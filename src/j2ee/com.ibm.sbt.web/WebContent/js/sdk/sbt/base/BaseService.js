@@ -20,8 +20,8 @@
  * @module sbt.base.BaseService
  * @author Carlos Manias
  */
-define([ "../declare", "../lang", "../log", "../stringUtil", "../Cache", "../Endpoint", "../Promise" ], 
-    function(declare,lang,log,stringUtil,Cache,Endpoint,Promise) {
+define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cache", "../Endpoint", "../Promise" ], 
+    function(config, declare,lang,log,stringUtil,Cache,Endpoint,Promise) {
 
     var BadRequest = 400;
     

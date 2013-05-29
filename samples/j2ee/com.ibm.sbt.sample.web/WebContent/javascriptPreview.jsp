@@ -62,9 +62,9 @@
           html = request.getParameter("htmlData");
           js = request.getParameter("jsData");
           css = request.getParameter("cssData");
-          debug = Boolean.parseBoolean(request.getParameter("debug"));
           loadDojo = Boolean.parseBoolean(request.getParameter("loadDojo"));
       }
+      debug = Boolean.parseBoolean(request.getParameter("debug"));
   %>
   <head>
     <meta charset="utf-8">

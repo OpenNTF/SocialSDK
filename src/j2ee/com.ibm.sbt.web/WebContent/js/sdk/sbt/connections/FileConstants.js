@@ -124,9 +124,12 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
 		/**
 		 * Get a Feed for a File 
 		 */
-		AtomFileInstance : "files/{authType}/api/myuserlibrary/document/{documentId}/entry",
+		AtomFileInstance : "files/basic/api/myuserlibrary/document/{documentId}/entry",
 		
-		AtomFileInstancePublic : "files/{authType}/anonymous/api/myuserlibrary/document/{documentId}/entry",
+		/**
+		 * 
+		 */
+		AtomFileInstancePublic : "files/basic/anonymous/api/myuserlibrary/document/{documentId}/entry",
 
         /**
          * A feed of files of which the authenticated user owns.
@@ -134,7 +137,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * Get the My Files feed to see a list of the files which the authenticated owns. 
          * Supports: acls , includePath , includeQuota , includeTags , page , ps , shared , sI , since , sortBy , sortOrder , tag , visibility
          */
-        AtomFilesMy : "/files/{authType}/api/myuserlibrary/feed",
+        AtomFilesMy : "/files/basic/api/myuserlibrary/feed",
         
         /**
          * A feed of files with are shared by or with the authenticated user.
@@ -142,42 +145,42 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * Get the My Files feed to see a list of the files which the authenticated owns. 
          * Supports: direction (default inbound : with me, outbound : by me),  acls , includePath , includeQuota , includeTags , page , ps , shared , sI , since , sortBy , sortOrder , tag , visibility
          */
-        AtomFilesShared : "/files/{authType}/api/documents/shared/feed",
+        AtomFilesShared : "/files/basic/api/documents/shared/feed",
         
         /**
          * Get a feed that lists all public files.
          *         
          * Supports: acls , includePath , includeQuota , includeTags , page , ps , shared , sI , since , sortBy , sortOrder , tag , visibility
          */
-        AtomFilesPublic : "/files/{authType}/anonymous/api/documents/feed?visibility=public",
+        AtomFilesPublic : "/files/basic/anonymous/api/documents/feed?visibility=public",
         
         /**
          * Get a feed that lists all public files.
          *         
          * Supports: access(editor or manager), creator, page, ps, shared, sharedWithMe, sI, sortBy, sortOrder, title, visibility 
          */
-        AtomFoldersMy : "/files/{authType}/api/collections/feed",
+        AtomFoldersMy : "/files/basic/api/collections/feed",
         
         /**
          * A feed of comments associated with all public files. Do not authenticate this request.
          *         
          * Supports: acls, category  Note: This parameter is required., commentId, identifier, page, ps, sI, sortBy, sortOrder  
          */
-        AtomFileCommentsPublic : "/files/{authType}/anonymous/api/userlibrary/{userid}/document/{documentId}/feed?category=comment",
+        AtomFileCommentsPublic : "/files/basic/anonymous/api/userlibrary/{userid}/document/{documentId}/feed?category=comment",
         
         /**
          * A feed of comments associated with files to which you have access. You must authenticate this request. 
          *         
          * Supports: acls, category  Note: This parameter is required., commentId, identifier, page, ps, sI, sortBy, sortOrder  
          */
-        AtomFileCommentsMy : "/files/{authType}/api/userlibrary/{userid}/document/{documentId}/feed?category=comment",
+        AtomFileCommentsMy : "/files/basic/api/userlibrary/{userid}/document/{documentId}/feed?category=comment",
         
         /**
          * Adds a comment to the specified file.
          * 
          * Supports : identifier - Indicates how the document is identified in the {document-id} variable segment of the web address. By default, look up is performed with the expectation that the URL contains the value from the <td:uuid> element of a File Atom entry. Specify "label" if the URL instead contains the value from the <td:label> element of a File Atom entry. 
          */
-        AtomAddCommentToFile : "/files/{authType}/api/userlibrary/{userid}/document/{documentId}/feed",
+        AtomAddCommentToFile : "/files/basic/api/userlibrary/{userid}/document/{documentId}/feed",
         
         /**
          * Adds a comment to the specified file for logged in user.
@@ -193,33 +196,34 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * propagate	Indicates if users that are shared with can share this document. The default value is true.
          * sendEmail	Indicates if an email notification is sent when sharing with the specified user. The default value is true.
          */
-        AtomUpdateFileMetadata : "/files/{authType}/api/myuserlibrary/document/{documentId}/entry",
+        AtomUpdateFileMetadata : "/files/basic/api/myuserlibrary/document/{documentId}/entry",
         
         /**
-         * Get pinned files from my myfavorites feed.
+         * Get pinned files from my my favorites feed.
          * 
          */
-        AtomFilesMyPinned : "/files/{authType}/api/myfavorites/documents/feed",
+        AtomFilesMyPinned : "/files/basic/api/myfavorites/documents/feed",
         
         /**
-         * Add a file to myfavorites feed of logged in user
+         * Add a file to my favorites feed of logged in user
          * 
          */
-        AtomPinFile : "/files/{authType}/api/myfavorites/documents/feed",
+        AtomPinFile : "/files/basic/api/myfavorites/documents/feed",
         
         /**
          * Add file of list of files to folder
          */
-        AtomAddFilesToFolder : "/files/{authType}/api/collection/{collectionId}/feed",
+        AtomAddFilesToFolder : "/files/basic/api/collection/{collectionId}/feed",
         
         /**
          * Delete a file and the Atom document representation of its associated metadata from logged in user's collection.
          */
-        AtomDeleteFile :  "files/{authType}/api/myuserlibrary/document/{documentId}/entry",
+        AtomDeleteFile :  "files/basic/api/myuserlibrary/document/{documentId}/entry",
         
         /**
          * Lock or unlock a file
          */
-        AtomLockUnlockFile : "/files/{authType}/api/document/{documentId}/lock"
+        AtomLockUnlockFile : "/files/basic/api/document/{documentId}/lock"
+        	
     }, conn);
 });

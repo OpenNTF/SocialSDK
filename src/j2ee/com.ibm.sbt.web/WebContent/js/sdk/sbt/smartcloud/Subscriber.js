@@ -16,11 +16,12 @@
 /**
  * Social Business Toolkit SDK.
  * 
- * @author Vimal Dhupar Definition of a Subscriber Helper for getting the
- *         Subscriber ID for a SmartCloud User.
+ * @author Vimal Dhupar 
+ * Definition of a Subscriber Helper for getting the Subscriber ID for a SmartCloud User.
  */
 define([ "../declare", "../Endpoint" ], function(declare, Endpoint) {
 	/**
+	 * Subscriber Helper Class for getting the Subscriber ID for a SmartCloud User.
 	 * @class Subscriber
 	 * @namespace sbt.smartcloud
 	 */
@@ -40,6 +41,7 @@ define([ "../declare", "../Endpoint" ], function(declare, Endpoint) {
 		},
 		
 		/**
+		 * Load method is responsible for making the network call to fetch the user identity
 		 * @method load
 		 * @param callback
 		 */
@@ -60,6 +62,7 @@ define([ "../declare", "../Endpoint" ], function(declare, Endpoint) {
 		},
 		
 		/**
+		 * Method to get the Subscriber Id of the user.
 		 * @method getSubscriberId
 		 * @param response
 		 * @returns

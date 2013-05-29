@@ -52,7 +52,7 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
          * 
          * @method getUserid
          * @return {String} id of the profile
-         * @deprecated
+         * 
          */
         getUserid : function() {
             return this.getAsString("userid");
@@ -63,7 +63,7 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
          * 
          * @method getName
          * @return {String} name of the profile
-         * @deprecated
+         * 
          */
         getName : function() {
             return this.getAsString("name");
@@ -83,7 +83,7 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
          * Get groupware mail of the profile
          * 
          * @method getGroupwareMail
-         * @return {String} email groupware mail of the profile
+         * @return {String} groupware mail of the profile
          */
         getGroupwareMail : function() {
             return this.getAsString("groupwareMail");
@@ -132,7 +132,7 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
          * Get telephone number of the profile
          * 
          * @method getTelephoneNumber
-         * @return {Object} Phone number object of the profile
+         * @return {String} Phone number of the profile
          */
         getTelephoneNumber : function() {
             return this.getAsString("telephoneNumber");
@@ -190,8 +190,7 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
          * Set work phone number of the profile in the field object
          * 
          * @method setTelephoneNumber
-         * @param {String}
-         *            work phone number of the profile
+         * @param {String} telephoneNumber work phone number of the profile
          */
         setTelephoneNumber : function(telephoneNumber) {
             this.setAsString("telephoneNumber", telephoneNumber);
@@ -201,8 +200,7 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
          * Set building of the profile in the field object
          * 
          * @method setBuilding
-         * @param {String}
-         *            building name of the profile
+         * @param {String} building building name of the profile
          */
         setBuilding : function(building) {
             this.setAsString("building", building);
@@ -212,8 +210,7 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
          * Set floor number of the profile in the field object
          * 
          * @method setFloor
-         * @param {String}
-         *            floor number of the profile
+         * @param {String} floor floor number of the profile
          */
         setFloor : function(floor) {
             this.setAsString("floor", floor);
@@ -223,8 +220,7 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
          * Set job title of the profile in the field object
          * 
          * @method setJobTitle
-         * @param {String}
-         *            job title of the profile
+         * @param {String} title job title of the profile
          */
         setJobTitle : function(title) {
             this.setAsString("jobTitle", title);
@@ -235,8 +231,7 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
          * profile photo in the field object
          * 
          * @method setPhotoLocation
-         * @param {String}
-         *            location of the file input element
+         * @param {String} imgLoc location of the file input element
          */
         setPhotoLocation : function(imgLoc) {
             this.setAsString("imageLocation", imgLoc);
@@ -245,9 +240,8 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
         /**
          * Set the address of the profile in the field object
          * 
-         * @method setPhotoLocation
-         * @param {Object}
-         *            Address object of the profile.
+         * @method setAddress
+         * @param {Object} address Address object of the profile.
          */
         setAddress : function(address) {
             this.setAsObject(address);
@@ -259,8 +253,9 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
          * profile entry document in the profile object.
          * 
          * @method load
-         * @param {Object}
-         *            [args] Argument object
+         * @param {Object} [args] Object representing various query parameters
+         *            that can be passed. The parameters must be exactly as they are
+         *            supported by IBM Connections.
          * 
          */
         load : function(args) {        	
@@ -301,18 +296,20 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
          * Updates the profile of a user.
          * 
          * @method update
-         * @param {Object}
-         *            args Argument object
+         * @param {Object} [args] Object representing various query parameters
+         *            that can be passed. The parameters must be exactly as they are
+         *            supported by IBM Connections.
          */
         update : function(args) {
         	return this.service.updateProfile(this, args);
         },
         /**
-         * Get collegues of the profile.
+         * Get colleagues of the profile.
          * 
          * @method getColleagues
-         * @param {Object}
-         *            args Argument object
+         * @param {Object} [args] Object representing various query parameters
+         *            that can be passed. The parameters must be exactly as they are
+         *            supported by IBM Connections.
          */
         getColleagues : function(args){
         	return this.service.getColleagues(this, args);
@@ -415,8 +412,7 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
         * Create a Profile object with the specified data.
         * 
         * @method newProfile
-        * @param {Object}
-        *            args Object containing the fields for the 
+        * @param {Object} args Object containing the fields for the 
         *            new Profile 
         */
         
@@ -428,10 +424,10 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
          * Get the profile of a user.
          * 
          * @method getProfile
-         * @param {String}
-         *            userIdOrEmail Userid or email of the profile
-         * @param {Object}
-         *            args Argument object
+         * @param {String} userIdOrEmail Userid or email of the profile
+         * @param {Object} [args] Object representing various query parameters
+         *            that can be passed. The parameters must be exactly as they are
+         *            supported by IBM Connections.
          */
         getProfile : function(userIdOrEmail, args) {           
         	var profile = this._toProfile(userIdOrEmail);
@@ -447,10 +443,10 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
          * Update an existing profile
          * 
          * @method updateProfile
-         * @param {Object}
-         *            profileOrJson Profile object or Json
-         * @param {Object}
-         *            [args] Argument object
+         * @param {Object} profileOrJson Profile object to be updated
+         * @param {Object} [args] Object representing various query parameters
+         *            that can be passed. The parameters must be exactly as they are
+         *            supported by IBM Connections.
          */
         updateProfile : function(profileOrJson,args) {
             var profile = this._toProfile(profileOrJson);
@@ -483,10 +479,10 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
          * Get the colleagues for the specified profile
          * 
          * @method getColleagues
-         * @param {String}
-         *            profileOrId
-         * @param {Object}
-         *            args
+         * @param {Object/String} profileOrId profile object representing the profile or user/email of the profile
+         * @param {Object} args Object representing various query parameters
+         *            that can be passed. The parameters must be exactly as they are
+         *            supported by IBM Connections.
          */
         getColleagues : function(profileOrId, args) {
             // detect a bad request by validating required arguments

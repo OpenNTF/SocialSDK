@@ -31,13 +31,13 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
     var ProfileAdminService = declare(ProfileService , {
     	
         /**
-         * Create a profile
+         * Create a new profile
          * 
          * @method createProfile
-         * @param {Object}
-         *            profileOrJson Profile object or Json
-         * @param {Object}
-         *            [args] Argument object
+         * @param {Object} profileOrJson Profile object or json representing the profile to be created.
+         * @param {Object} [args] Object representing various query parameters
+         *            that can be passed. The parameters must be exactly as they are
+         *            supported by IBM Connections.
          */
         createProfile : function(profileOrJson,args) {
             var profile = this._toProfile(profileOrJson);
@@ -70,10 +70,10 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
          * Delete an existing profile
          * 
          * @method deleteProfile
-         * @param {Object}
-         *            profileId userid or email of the profile
-         * @param {Object}
-         *            [args] Argument object
+         * @param {Object} profileId userid or email of the profile
+         * @param {Object}[args] Object representing various query parameters
+         *            that can be passed. The parameters must be exactly as they are
+         *            supported by IBM Connections.
          */
         deleteProfile : function(profileId,args) {
         	var promise = this._validateProfileId(profileId);

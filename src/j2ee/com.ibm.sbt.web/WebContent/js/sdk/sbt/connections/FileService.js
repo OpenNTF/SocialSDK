@@ -502,6 +502,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 				 * 
 				 * @method load
 				 * @param {Object} [args] Argument object
+				 * @param {Boolean} [isPublic=false] Flag to indicate whether to load public file which does not require authentication
 				 */
 				load : function(args, isPublic) {
 					// detect a bad request by validating required arguments
@@ -553,6 +554,66 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 					if (this.getId()) {
 						return this.service.updateFileMetadata(this, args);
 					}
+				},
+				/**
+				 * Adds a comment to the file.
+				 * 
+				 * @method addComment
+				 * @param {String} [args.comment] the comment to be added
+				 * @param {Object} [args] Argument object. Object representing various parameters that can be passed. The parameters must be exactly as they are supported by IBM Connections like ps,
+				 * sortBy etc.
+				 */
+				addComment : function(comment, args) {
+					return this.service.addCommentToFile(this.getAuthor().authorUserId, this.getId(), comment, args);
+				},
+				/**
+				 * Pin th file, by sending a POST request to the myfavorites feed.
+				 * @method pin				
+				 * @param {Object} [args] Argument object.
+				 */
+				pin : function(args){
+					return this.service.pinFile(this.getId(), args);
+				},
+				/**
+				 * Unpin the file, by sending a DELETE request to the myfavorites feed.
+				 * @method unPin				
+				 * @param {Object} [args] Argument object.
+				 */
+				unpin : function(args){
+					return this.service.unpinFile(this.getId(), args);
+				},
+				/**
+				 * Lock the file
+				 * @method lock				
+				 * @param {Object} [args] Argument object
+				 */
+				lock : function(args) {
+					return this.service.lockFile(this.getId(), args);
+				},
+				/**
+				 * UnLock the file
+				 * @method unlock				
+				 * @param {Object} [args] Argument object
+				 */
+				unlock : function(args) {
+					return this.service.unlockFile(this.getId(), args);
+				},
+				/**
+				 * Deletes the file.
+				 * @method remove				 
+				 * @param {Object} [args] Argument object
+				 */
+				remove : function(args) {
+					return this.service.deleteFile(this.getId(), args);
+				},
+				/**
+				 * Update the Atom document representation of the metadata for the file
+				 * @method update	
+				 * @param {Object} [args] Argument object. Object representing various parameters that can be passed. The parameters must be exactly as they are supported by IBM Connections like ps,
+				 * sortBy etc.
+				 */
+				update : function(args) {
+					return this.service.updateFileMetadata(this, args);
 				}
 
 			});
@@ -872,6 +933,8 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 				 * Adds a comment to the specified file.
 				 * 
 				 * @method addCommentToFile
+				 * @param {String} [userId=null] the userId for the author
+				 * @param {String} [fileId] the ID of the file
 				 * @param {String} [args.comment] the comment to be added
 				 * @param {Object} [args] Argument object. Object representing various parameters that can be passed. The parameters must be exactly as they are supported by IBM Connections like ps,
 				 * sortBy etc.
@@ -922,11 +985,17 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 				/**
 				 * Update the Atom document representation of the metadata for a file from logged in user's library.
 				 * @method updateFileMetadata
-				 * @param {Object} [file] file to be updated
+				 * @param {Object} [fileOrJson] file or json representing the file to be updated
 				 * @param {Object} [args] Argument object. Object representing various parameters that can be passed. The parameters must be exactly as they are supported by IBM Connections like ps,
 				 * sortBy etc.
 				 */
 				updateFileMetadata : function(fileOrJson, args) {
+					
+					var promise = this.validateField("fileOrJson", fileOrJson);
+					if (promise) {
+						return promise;
+					}
+					
 					var file = this.newFile(fileOrJson);
 					var options = {
 						method : "PUT",
@@ -945,11 +1014,15 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 				/**
 				 * Pin a file, by sending a POST request to the myfavorites feed.
 				 * @method pinFile
-				 * @param {String} [fileId] ID of file which needs to be pinned
+				 * @param {String} [fileId] ID of file which needs to be unpinned
 				 * @param {Object} [args] Argument object.
 				 */
 				pinFile : function(fileId, args) {
 
+					var promise = this.validateField("fileId", fileId);
+					if (promise) {
+						return promise;
+					}
 					var parameters = args ? lang.mixin({}, args) : {};
 					parameters["itemId"] = fileId;
 
@@ -1128,7 +1201,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 				/**
 				 * unlock a file
 				 * @method lockFile
-				 * @param {String} fileId Id of the file which needs to be deleted
+				 * @param {String} fileId Id of the file which needs to be unlocked
 				 * @param {Object} [args] Argument object
 				 */
 				unlockFile : function(fileId, args) {

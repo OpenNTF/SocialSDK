@@ -324,7 +324,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
          *            supported by IBM Connections like count, query etc.
 		**/
         getNotificationsForMe : function(args) {
-			return this.getStream(consts.ASUser.ME, consts.ASGroup.NOTESFORME, consts.ASApplication.ALL, args);
+			return this.getStream(consts.ASUser.ME, consts.ASGroup.RESPONSES, consts.ASApplication.ALL, args);
         },
         
 		/**

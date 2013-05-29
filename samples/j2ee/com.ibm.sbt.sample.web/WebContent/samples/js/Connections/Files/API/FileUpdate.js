@@ -2,8 +2,8 @@ require([ "sbt/connections/FileService", "sbt/dom", "sbt/json" ], function(FileS
 
 	var fileService = new FileService();
 	fileService.getFile("%{sample.fileId}").then(function(file) {
-		file.setLabel("Updated Label");
-		file.setSummary("Updated Summary");
+		file.setLabel("New Label"+(new Date()).getTime());
+		file.setSummary("New Summary");
 		file.setVisibility("public");
 		file.update().then(function(file) {
 			dom.setText("json", json.jsonBeanStringify(file));

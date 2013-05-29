@@ -18,16 +18,25 @@ import com.ibm.commons.util.StringUtil;
 public class ProxyDebugUtil {
 	
 //	private static final String DEFAULT_HOST = "127.0.0.1";
-//	private static final int DEFAULT_PORT = 8888;
+	private static final int DEFAULT_PORT = 8888;
 	
 	public static DefaultHttpClient wrapHttpClient(DefaultHttpClient client,String httpProxy){
-		
-		if(StringUtil.isEmpty(httpProxy))
+		if(StringUtil.isEmpty(httpProxy)) {
 			return client;
+		}
 		
-		StringTokenizer proxydetails = new StringTokenizer(httpProxy,":");
-		String host = proxydetails.nextToken();
-		int port = Integer.parseInt(proxydetails.nextToken());
+		String[] parts = StringUtil.splitString(httpProxy, ':');
+		String host = parts[0];
+		int port = DEFAULT_PORT;
+		if (parts.length > 1) {
+			try {
+				port =  Integer.parseInt(parts[1]);
+			} catch (NumberFormatException nfe) {
+				// TODO add logging
+				return client;
+			}
+		}
+		
 		return wrapHttpClient(client,host,port);
 		
 	}
@@ -36,7 +45,6 @@ public class ProxyDebugUtil {
 		HttpHost proxy = new HttpHost(hostname, port);
 		client.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
 		return client;
-		
 	}
 
 }

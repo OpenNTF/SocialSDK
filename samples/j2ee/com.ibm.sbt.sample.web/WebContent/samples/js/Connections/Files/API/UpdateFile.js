@@ -4,8 +4,8 @@ require([ "sbt/connections/FileService", "sbt/dom", "sbt/json" ], function(FileS
 
 	fileService.updateFileMetadata({
 		id : "%{sample.fileId}",
-		label : "Updated Label",
-		summary : "Updated Summary",
+		label : "New Label"+(new Date()).getTime(),
+		summary : "New Summary",
 		visibility : "public"
 	}).then(function(file) {
 		dom.setText("json", json.jsonBeanStringify(file));

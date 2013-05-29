@@ -13,8 +13,11 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
+
 /**
- * Social Business Toolkit SDK. Definition of constants for CommunityService.
+ * Social Business Toolkit SDK. Definition of constants for IBM Connections.
+ * 
+ * @module sbt.connections.ConnectionsConstants
  */
 define([], function() {
 

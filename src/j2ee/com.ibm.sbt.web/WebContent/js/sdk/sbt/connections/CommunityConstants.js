@@ -13,8 +13,11 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
+
 /**
  * Social Business Toolkit SDK. Definition of constants for CommunityService.
+ * 
+ * @module sbt.connections.CommunityConstants
  */
 define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
 
@@ -22,36 +25,64 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         
         /**
          * Public community
+         * 
+         * @property Public
+         * @type String
+         * @for sbt.connections.Community
          */
         Public : "public",
 
         /**
          * Moderated community
+         * 
+         * @property Moderated
+         * @type String
+         * @for sbt.connections.Community
          */
         Moderated : "publicInviteOnly",
 
         /**
          * Restricted community
+         * 
+         * @property Restricted
+         * @type String
+         * @for sbt.connections.Community
          */
         Restricted : "private",
 
         /**
          * Community owner
+         * 
+         * @property Owner
+         * @type String
+         * @for sbt.connections.Member
          */
         Owner : "owner",
         
         /**
          * Community member
+         * 
+         * @property Member
+         * @type String
+         * @for sbt.connections.Member
          */
         Member : "member",
         
         /**
          * XPath expressions used when parsing a Connections Communities ATOM feed
+         * 
+         * @property CommunityFeedXPath
+         * @type Object
+         * @for sbt.connections.CommunityService
          */
         CommunityFeedXPath : conn.ConnectionsFeedXPath,
 
         /**
          * XPath expressions to be used when reading a Community Entry
+         * 
+         * @property CommunityXPath
+         * @type Object
+         * @for sbt.connections.CommunityService
          */
         CommunityXPath : {
             // used by getEntityData
@@ -82,6 +113,10 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         
         /**
          * XPath expressions to be used when reading a Community Member Entry
+         * 
+         * @property MemberXPath
+         * @type Object
+         * @for sbt.connections.CommunityService
          */
         MemberXPath : {
             // used by getEntityData
@@ -97,6 +132,10 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
 
         /**
          * XPath expressions to be used when reading a Community Invite Entry
+         * 
+         * @property InviteXPath
+         * @type Object
+         * @for sbt.connections.CommunityService
          */
         InviteXPath : {
             // used by getEntityData
@@ -133,6 +172,10 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * Get the All Communities feed to see a list of all public communities to which the authenticated user has access or pass in parameters to search for communities that match a specific criteria.
          * 
          * Supports: asc, email, ps, search, since, sortField, tag, userid
+         * 
+         * @property AtomCommunitiesAll
+         * @type String
+         * @for sbt.connections.CommunityService
          */
         AtomCommunitiesAll : "/communities/service/atom/communities/all",
 
@@ -142,6 +185,10 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * Get the My Communities feed to see a list of the communities to which the authenticated user is a member or pass in parameters to search for a subset of those communities that match a specific criteria.
          * 
          * Supports: asc, email, ps, search, since, sortField, tag, userid
+         * 
+         * @property AtomCommunitiesMy
+         * @type String
+         * @for sbt.connections.CommunityService
          */
         AtomCommunitiesMy : "/communities/service/atom/communities/my",
         
@@ -151,6 +198,10 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * Get a list of the outstanding community invitations of the currently authenticated user or provide parameters to search for a subset of those invitations.
          * 
          * Supports: asc, ps, search, since, sortField
+         * 
+         * @property AtomCommunityInvitesMy
+         * @type String
+         * @for sbt.connections.CommunityService
          */
         AtomCommunityInvitesMy : "/communities/service/atom/community/invites/my",
         
@@ -160,6 +211,10 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * Get a list of subcommunities associated with a community.
          * 
          * Supports: asc, page, ps, since, sortBy, sortOrder, sortField
+         * 
+         * @property AtomCommunitySubCommunities
+         * @type String
+         * @for sbt.connections.CommunityService
          */
         AtomCommunitySubCommunities : "communities/service/atom/community/subcommunities",
             
@@ -169,11 +224,19 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * Retrieve the members feed to view a list of the members who belong to a given community.
          * 
          * Supports: asc, email, page, ps, role, since, sortField, userid
+         * 
+         * @property AtomCommunityMembers
+         * @type String
+         * @for sbt.connections.CommunityService
          */
         AtomCommunityMembers : "communities/service/atom/community/members",
         
         /**
          * A community entry.
+         * 
+         * @property AtomCommunityInstance
+         * @type String
+         * @for sbt.connections.CommunityService
          */
         AtomCommunityInstance : "communities/service/atom/community/instance"
 

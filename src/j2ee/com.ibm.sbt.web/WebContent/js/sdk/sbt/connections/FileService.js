@@ -539,7 +539,6 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 					}
 
 					url = this.service.constructUrl(url, null, {
-						"authType" : this.service.endpoint.authType,
 						"documentId" : fileUuid
 					});
 					return this.service.getEntity(url, options, fileUuid, callbacks, args);
@@ -778,11 +777,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 						query : args || {}
 					};
 
-					var url = this.constructUrl(consts.AtomFilesMy, null, {
-						authType : this.endpoint.authType
-					});
-
-					return this.getEntities(url, options, this.getFileFeedCallbacks(), args);
+					return this.getEntities(consts.AtomFilesMy, options, this.getFileFeedCallbacks(), args);
 				},
 				/**
 				 * Get files shared with logged in user from IBM Connections
@@ -802,10 +797,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 						}, args ? args : {})
 					};
 
-					var url = this.constructUrl(consts.AtomFilesShared, null, {
-						authType : this.endpoint.authType
-					});
-					return this.getEntities(url, options, this.getFileFeedCallbacks(), args);
+					return this.getEntities(consts.AtomFilesShared, options, this.getFileFeedCallbacks(), args);
 				},
 				/**
 				 * Get files shared by the logged in user from IBM Connections
@@ -825,10 +817,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 						}, args ? args : {})
 					};
 
-					var url = this.constructUrl(consts.AtomFilesShared, null, {
-						authType : this.endpoint.authType
-					});
-					return this.getEntities(url, options, this.getFileFeedCallbacks(), args);
+					return this.getEntities(consts.AtomFilesShared, options, this.getFileFeedCallbacks(), args);
 				},
 				/**
 				 * Get public files from IBM Connections
@@ -845,10 +834,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 						query : args || {}
 					};
 
-					var url = this.constructUrl(consts.AtomFilesPublic, null, {
-						authType : this.endpoint.authType
-					});
-					return this.getEntities(url, options, this.getFileFeedCallbacks(), args);
+					return this.getEntities(consts.AtomFilesPublic, options, this.getFileFeedCallbacks(), args);
 				},
 				/**
 				 * Get my folders from IBM Connections
@@ -864,10 +850,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 						query : args || {}
 					};
 
-					var url = this.constructUrl(consts.AtomFoldersMy, null, {
-						authType : this.endpoint.authType
-					});
-					return this.getEntities(url, options, this.getFileFeedCallbacks(), args);
+					return this.getEntities(consts.AtomFoldersMy, options, this.getFileFeedCallbacks(), args);
 				},
 				/**
 				 * A feed of comments associated with files to which you have access. You must authenticate this request.
@@ -892,9 +875,8 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 					};
 
 					var url = this.constructUrl(consts.AtomFileCommentsMy, null, {
-						authType : this.endpoint.authType,
 						userid : userId,
-						"documentId" : fileId
+						documentId : fileId
 					});
 					return this.getEntities(url, options, this.getCommentFeedCallbacks(), args);
 				},
@@ -922,7 +904,6 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 					};
 
 					var url = this.constructUrl(consts.AtomAddCommentToFile, null, {
-						authType : this.endpoint.authType,
 						userid : userId,
 						documentId : fileId
 					});
@@ -957,12 +938,10 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 
 					if (!userId) {
 						url = this.constructUrl(consts.AtomAddCommentToMyFile, null, {
-							authType : this.endpoint.authType,
 							documentId : fileId
 						});
 					} else {
 						url = this.constructUrl(consts.AtomAddCommentToFile, null, {
-							authType : this.endpoint.authType,
 							userid : userId,
 							documentId : fileId
 						});
@@ -1006,7 +985,6 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 					};
 
 					var url = this.constructUrl(consts.AtomUpdateFileMetadata, null, {
-						authType : this.endpoint.authType,
 						documentId : file.getId()
 					});
 					return this.updateEntity(url, options, this.getFileFeedCallbacks(), args);
@@ -1033,9 +1011,6 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 							"X-Update-Nonce" : "{X-Update-Nonce}"
 						}
 					};
-					var url = this.constructUrl(consts.AtomPinFile, parameters, {
-						authType : this.endpoint.authType
-					});
 
 					var callbacks = {
 						createEntity : function(service, data, response) {
@@ -1043,7 +1018,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 						}
 					};
 
-					return this.updateEntity(url, options, callbacks, args);
+					return this.updateEntity(consts.AtomPinFile, options, callbacks, args);
 
 				},
 
@@ -1068,11 +1043,8 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 							"X-Update-Nonce" : "{X-Update-Nonce}"
 						}
 					};
-					var url = this.constructUrl(consts.AtomPinFile, parameters, {
-						authType : this.endpoint.authType
-					});
 
-					return this.deleteEntity(url, options, fileId, args);
+					return this.deleteEntity(consts.AtomPinFile, options, fileId, args);
 
 				},
 
@@ -1101,7 +1073,6 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 						}
 					};
 					var url = this.constructUrl(consts.AtomAddFilesToFolder, null, {
-						authType : this.endpoint.authType,
 						collectionId : folderId
 					});
 
@@ -1134,10 +1105,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 						query : args || {}
 					};
 
-					var url = this.constructUrl(consts.AtomFilesMyPinned, null, {
-						authType : this.endpoint.authType,
-					});
-					return this.getEntities(url, options, this.getFileFeedCallbacks(), args);
+					return this.getEntities(consts.AtomFilesMyPinned, options, this.getFileFeedCallbacks(), args);
 				},
 
 				/**
@@ -1160,7 +1128,6 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 						}
 					};
 					var url = this.constructUrl(consts.AtomDeleteFile, null, {
-						authType : this.endpoint.authType,
 						documentId : fileId
 					});
 
@@ -1185,7 +1152,6 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 						query : args || {}
 					};
 					var url = this.constructUrl(consts.AtomLockUnlockFile, parameters, {
-						authType : this.endpoint.authType,
 						documentId : fileId
 					});
 
@@ -1216,7 +1182,6 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 						query : args || {}
 					};
 					var url = this.constructUrl(consts.AtomLockUnlockFile, parameters, {
-						authType : this.endpoint.authType,
 						documentId : fileId
 					});
 

@@ -20,14 +20,18 @@
  */
 
 /**
- * This class encapsulates an actual endpoint, with its URL, proxy and its authentication
- * mechanism.
- * @class Endpoint
+ * Endpoint which defines a connection to a back-end server.
  * 
+ * @module sbt.Endpoint
  */
 define(['./declare','./lang','./ErrorTransport','./Promise','./pathUtil','./compat','./log', './stringUtil', 'sbt/i18n!sbt/nls/Endpoint', './xml'],
 function(declare,lang,ErrorTransport,Promise,pathUtil,compat,log,stringUtil,nls,xml) {
 
+/**
+ * This class encapsulates an actual endpoint, with its URL, proxy and its authentication mechanism.
+ * 
+ * @class sbt.Endpoint
+ */
 var Endpoint = declare(null, {
 	
 	/**
@@ -35,63 +39,63 @@ var Endpoint = declare(null, {
 	 * @property baseUrl
 	 * @type String
 	 */
-	baseUrl: 		null,
+	baseUrl: null,
 	
 	/**
 	 * Proxy to be used
 	 * @property proxy
 	 * @type String 
 	 */
-	proxy:			null,
+	proxy: null,
 	
 	/**
 	 * Path to be added to the proxy url, if any
 	 * @property proxyPath
 	 * @type String 
 	 */
-	proxyPath:		null,
+	proxyPath: null,
 	
 	/**
 	 * Transport to be used
 	 * @property transport
 	 * @type String
 	 */
-	transport:		null,
+	transport: null,
 	
 	/**
 	 * Authenticator to be used
 	 * @property authenticator
 	 * @type String
 	 */
-	authenticator:	null,
+	authenticator: null,
 	
 	/**
 	 * Auth Type to be used
 	 * @property authType
 	 * @type String
 	 */
-	authType:	null,
+	authType: null,
 	
 	/**
 	 * UI Login mode: mainWindow, dialog or popup
 	 * @property loginUi
 	 * @type String
 	 */
-	loginUi:		"",
+	loginUi: "",
 	
 	/**
 	 * Page for login form for mainWindow and popup
 	 * @property loginPage
 	 * @type String
 	 */
-	loginPage:      null,
+	loginPage: null,
 	
 	/**
 	 * Page for login form for dialog
 	 * @property dialogLoginPage
 	 * @type String
 	 */
-	dialogLoginPage:null,
+	dialogLoginPage: null,
 	
 	/**
 	 * Whether auth dialog should come up automatically or not. In case of not 401 would be propagated to user.
@@ -118,8 +122,7 @@ var Endpoint = declare(null, {
 	 * Simple constructor that mixes in its parameters as object properties
 	 * @constructor
 	 * @param {Array} args
-	 */
-	
+	 */	
 	constructor: function(args) {
 		lang.mixin(this, args || {});	
 	},
@@ -174,14 +177,21 @@ var Endpoint = declare(null, {
             }
         }
         
+        if (!options) {
+        	options = { 
+        	   	method : "GET", 
+        	   	handleAs : "text"
+        	};
+        }
+        
         var promise = new Promise();
         promise.response = new Promise();
         
         var self = this;
         this.transport.request(qurl, options).response.then(
             function(response) {
-                promise.fullFilled(response.data);
-                promise.response.fullFilled(response);
+                promise.fulfilled(response.data);
+                promise.response.fulfilled(response);
             }, function(error) {
             	if(!error.message){
             		error.message = self.getErrorMessage(error.cause);
@@ -197,7 +207,7 @@ var Endpoint = declare(null, {
         return promise;
     },
 	
-	/**
+	/*
 	 * Sends a request using XMLHttpRequest with the given URL and options.
 	 * 
 	 * @method xhr
@@ -265,7 +275,7 @@ var Endpoint = declare(null, {
 		this.transport.xhr(method, _args, hasBody);
 	},
 	
-	/**
+	/*
 	 * @method xhrGet
 	 * @param args
 	 */
@@ -273,7 +283,7 @@ var Endpoint = declare(null, {
 		this.xhr("GET",args);
 	},
 	
-	/**
+	/*
 	 * @method xhrPost
 	 * @param args
 	 */
@@ -281,7 +291,7 @@ var Endpoint = declare(null, {
 		this.xhr("POST", args, true); 
 	},
 	
-	/**
+	/*
 	 * @method xhrPut
 	 * @param args
 	 */
@@ -289,7 +299,7 @@ var Endpoint = declare(null, {
 		this.xhr("PUT", args, true);
 	},
 	
-	/**
+	/*
 	 * @method xhrDelete
 	 * @param args
 	 */
@@ -298,49 +308,50 @@ var Endpoint = declare(null, {
 	},
 	
 	/**
-	 authenticate to an endpoint
-	 
-	 @method authenticate
-	 @param {Object} [args]  Argument object
-			@param {boolean} [args.forceAuthentication] Whether authentication is to be forced in case user is already authenticated.
-			@param {String} [args.loginUi] LoginUi to be used for authentication. possible values are: 'popup', 'dialog' and 'mainWindow'
-			@param {String} [args.loginPage] login page to be used for authentication. this property should be used in case default
-			login page is to be overridden. This only applies to 'popup' and 'mainWindow' loginUi
-			@param {String} [args.dialogLoginPage] dialog login page to be used for authentication. this property should be used in
-			case default dialog login page is to be overridden. This only applies to 'dialog' loginUi.
-			@param {Function} [args.load] This is the function which authenticate invokes when the authentication is successful.
-			@param {Function} [args.cancel] This is the function which authenticate invokes when cancel button of authenticator is clicked.
+	 * authenticate to an endpoint
+	 *
+	 * @method authenticate
+	 * @param {Object} [args]  Argument object
+	 *		@param {boolean} [args.forceAuthentication] Whether authentication is to be forced in case user is already authenticated.
+	 *		@param {String} [args.loginUi] LoginUi to be used for authentication. possible values are: 'popup', 'dialog' and 'mainWindow'
+	 *		@param {String} [args.loginPage] login page to be used for authentication. this property should be used in case default
+	 *		login page is to be overridden. This only applies to 'popup' and 'mainWindow' loginUi
+	 *		@param {String} [args.dialogLoginPage] dialog login page to be used for authentication. this property should be used in
+	 *		case default dialog login page is to be overridden. This only applies to 'dialog' loginUi.
 	 */
 	authenticate : function(args) {
+		var promise = new Promise();
 		args = args || {};
-		var options = {
-			dialogLoginPage : this.loginDialogPage,
-			loginPage : this.loginPage,
-			transport : this.transport,
-			proxy : this.proxy,
-			proxyPath : this.proxyPath,
-			loginUi : args.loginUi || this.loginUi,
-			callback: args.load,
-			cancel: args.cancel
-		};
-		if(args.forceAuthentication || !this.isAuthenticated) {
+		if (args.forceAuthentication || !this.isAuthenticated) {
+			var options = {
+				dialogLoginPage : this.loginDialogPage,
+				loginPage : this.loginPage,
+				transport : this.transport,
+				proxy : this.proxy,
+				proxyPath : this.proxyPath,
+				loginUi : args.loginUi || this.loginUi,
+				callback: function(response) {
+					promise.fulfilled(response);
+				},
+				cancel: function(response) {
+					promise.rejected(response);
+				}
+			};
 			this.authenticator.authenticate(options);
-		}else{//call load if authentication is not required.
-			if (args.load) {
-				args.load();
-			}
+		} else {
+			promise.fulfilled(true);
 		}
+		return promise;
 	},
 	
 	/**
-	 logout from an endpoint
-	 
-	 @method logout
-	 @param {Object} [args]  Argument object
-			@param {Function} [args.load] This is the function which authenticate invokes when the logout is successful.
-			@param {Function} [args.error] This is the function which authenticate invokes when the logout is unsuccessful.
+	 * Logout from an endpoint
+	 *
+	 * @method logout
+	 * @param {Object} [args]  Argument object
 	 */
 	logout : function(args) {
+		var promise = new Promise();
 		args = args || {};
 		var self = this;
 		var proxy = this.proxy.proxyUrl;
@@ -348,41 +359,42 @@ var Endpoint = declare(null, {
 		this.transport.xhr('POST',{
 			handleAs : "json",
 			url : actionURL,
-			handle : function(response) {
-				sbt.Endpoints[self.proxyPath].isAuthenticated = false;
-				if (args.load && response.success) {
-					args.load(response);
-				} else if (args.error && !response.success) {
-					args.error(response);
-				}
+			load : function(response) {
+				self.isAuthenticated = false;
+				promise.fulfilled(response);
+			},
+			error : function(response) {
+				self.isAuthenticated = false;
+				promise.rejected(response);
 			}
 		}, true);
+		return promise;
 	},
 	
 	/**
-	 Find whether endpoint is authenticated or not.
-	 
-	 @method isAuthenticated
-	 @param {Object} [args]  Argument object
-			@param {Function} [args.load] This is the function which isAuthenticated invokes when authentication information is retrieved.
-			@param {Function} [args.error] This is the function which isAuthenticated invokes if an error occurs.
-			result property in response object returns true/false depending on whether endpoint is authenticated or not.
-	*/
+	 * Find whether endpoint is authenticated or not.
+	 *
+	 * @method isAuthenticated
+	 * @param {Object} [args]  Argument object
+	 */
 	isAuthenticated : function(args) {
+		var promise = new Promise();
 		args = args || {};
+		var self = this;
 		var proxy = this.proxy.proxyUrl;
 		var actionURL = proxy.substring(0, proxy.lastIndexOf("/")) + "/authHandler/" + this.proxyPath + "/isAuth";
 		this.transport.xhr('POST',{
 			handleAs : "json",
 			url : actionURL,
-			handle : function(response) {
-				if (args.load) {
-					args.load(response);
-				} else if (args.error) {
-					args.error(response);
-				}
+			load : function(response) {
+				self.isAuthenticated = true;
+				promise.fulfilled(response);
+			},
+			error : function(response) {
+				promise.rejected(response);
 			}
 		}, true);
+		return promise;
 	},
 	
 	/**
@@ -402,12 +414,12 @@ var Endpoint = declare(null, {
 		this.transport.xhr('POST',{
 			handleAs : "json",
 			url : actionURL,
-			handle : function(response) {
-				if (args.load) {
-					args.load(response);
-				} else if (args.error) {
-					args.error(response);
-				}
+			load : function(response) {
+				self.isAuthenticated = false;
+				promise.fulfilled(response);
+			},
+			error : function(response) {
+				promise.rejected(response);
 			}
 		}, true);
 	},
@@ -473,7 +485,7 @@ var Endpoint = declare(null, {
             callback: function() {
                 self.request(url, options).then(
                     function(response) {
-                        promise.fullFilled(response);
+                        promise.fulfilled(response);
                     }, function(error) {
                         promise.rejected(error);
                     }

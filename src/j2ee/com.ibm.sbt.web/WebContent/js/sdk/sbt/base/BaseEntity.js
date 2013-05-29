@@ -18,7 +18,6 @@
  * Javascript Base APIs for IBM Connections
  * 
  * @module sbt.base.BaseService
- * @author Carlos Manias
  */
 define([ "../declare", "../lang", "../log", "../stringUtil" ], 
     function(declare,lang,log,stringUtil) {

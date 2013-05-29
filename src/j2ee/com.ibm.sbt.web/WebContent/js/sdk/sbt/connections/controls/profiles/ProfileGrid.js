@@ -21,7 +21,7 @@ define([ "../../../declare",
 		 "../../../controls/grid/Grid", 
 		 "../../../connections/controls/profiles/ProfileGridRenderer", 
 		 "../../../connections/controls/profiles/ProfileAction", 
-		 "../../../controls/vcard/connections/SemanticTagService", 
+		 "../../../connections/controls/vcard/SemanticTagService", 
 		 "../../../config",
 		 "../../../store/parameter",
 		 "../../../connections/ProfileConstants"], 
@@ -73,8 +73,8 @@ define([ "../../../declare",
 
     /**
      * @class ProfileGrid
-     * @namespace sbt.controls.grid.connections
-     * @module sbt.controls.grid.connections.ProfileGrid
+     * @namespace sbt.connections.controls.profiles
+     * @module sbt.connections.controls.profiles.ProfileGrid
      */
     var ProfileGrid = declare(Grid, {
     	
@@ -159,7 +159,7 @@ define([ "../../../declare",
         defaultOption: "colleagues",
         
         /**Constructor function
-         * @method - constructor
+         * @method constructor
          * */
         constructor: function(args){
         	
@@ -189,8 +189,8 @@ define([ "../../../declare",
         
         /**
          * Creates an instance of an AtomStore
-         * @method - createDefaultStore
-         * @param args - will contain the url and attributes for the atom store.
+         * @method createDefaultStore
+         * @param args will contain the url and attributes for the atom store.
          * @returns The createDefaultStore method of the superclass, which will return an
          * instance of the AtomStore.
          */
@@ -209,7 +209,7 @@ define([ "../../../declare",
          * The function will call the super classes post create
          * then load the semantic tag service. The semantic tag service
          * is Javascript for creating business card functionality.
-         * @method - postCreate
+         * @method postCreate
          */
         postCreate: function() {        	
         	this.inherited(arguments);
@@ -220,8 +220,8 @@ define([ "../../../declare",
         /**
          * Creates a renderer for the grid.The renderer is responsible for 
          * loading the grid's HTML content.
-         * @method - createDefaultRenderer
-         * @param - args - sets the template the renderer will use, by checking args.type, but for
+         * @method createDefaultRenderer
+         * @param args sets the template the renderer will use, by checking args.type, but for
          * profile grids this will always be "profile"
          * @returns an instance of a  profile gird renderer.
          */
@@ -233,10 +233,10 @@ define([ "../../../declare",
          * In the grid HTML an element can have an event attached 
          * using dojo-attach-event="onClick: handleClick".
          * This method is the handler for the onclick event.
-         * @method - handleClick
-         * @param el - the element that fired the event
-         * @param data - all of the items from the current row of the grid. 
-         * @param ev - the event 
+         * @method handleClick
+         * @param el the element that fired the event
+         * @param data all of the items from the current row of the grid. 
+         * @param ev the event 
          */
         handleClick: function(el, data, ev) {
             if (this.profileAction) {
@@ -248,7 +248,7 @@ define([ "../../../declare",
         },
         
         /**
-         * @method - getSortInfo
+         * @method getSortInfo
          * @returns A list of strings that describe how the grid can be sorted
          * for profile grids these strings are "Display Name" and "Recent"
          */

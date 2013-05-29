@@ -15,14 +15,14 @@
  */
 
 /**
- * 
+ * @module sbt.store.AtomStore
  */
 define(["../declare","../lang", "../base/core", "../xml", "../xpath", "../Endpoint", "../itemFactory",
         "dojo/_base/Deferred", "dojo/promise/Promise", "dojo/store/util/QueryResults", "dojox/html/entities"], 
         function(declare,lang, core, xml, xpath, Endpoint, itemFactory, Deferred, Promise, QueryResults, entities) {
   
     /**
-     * @module sbt.store.AtomStore
+     * @class sbt.store.AtomStore
      */
     var AtomStorePromise = declare(Promise, {
         // private
@@ -177,7 +177,7 @@ define(["../declare","../lang", "../base/core", "../xml", "../xpath", "../Endpoi
                             self._options.onComplete.call(self._options.scope || self, self.items, self._options);
                         }
                         // invoke callbacks
-                        self._fullFilled(self.totalResults);
+                        self._fulfilled(self.totalResults);
                     } catch (error) {
                         self._rejected(error);
                     }
@@ -226,7 +226,7 @@ define(["../declare","../lang", "../base/core", "../xml", "../xpath", "../Endpoi
         },
 
         _createItems: function(document) {
-            var nodes = xpath.selectNodes(document, this.atom.entry, this.namespaces);
+            var nodes = xpath.selectNodes(document, this.atom.entries, this.namespaces);
             var items = [];
             for (var i=0; i<nodes.length; i++) {
                 items.push(this._createItem(nodes[i]));
@@ -292,7 +292,7 @@ define(["../declare","../lang", "../base/core", "../xml", "../xpath", "../Endpoi
             return result;
         },
         
-        _fullFilled : function(totalCount) {
+        _fulfilled : function(totalCount) {
             if (this._isCancelled) {
                 return;
             }
@@ -345,7 +345,16 @@ define(["../declare","../lang", "../base/core", "../xml", "../xpath", "../Endpoi
         },
         
         /**
+         * @method getEndpoint
+         * @returns
+         */
+        getEndpoint: function() {
+        	return Endpoint.find(this._args.endpoint || "connections");
+        },
+        
+        /**
          * Retrieves an object by its identity
+         * @method get
          * @param id
          */
         get: function(id) {
@@ -354,6 +363,7 @@ define(["../declare","../lang", "../base/core", "../xml", "../xpath", "../Endpoi
 
         /**
          * Returns an object's identity
+         * @method getIdentity
          * @param object
          */
         getIdentity: function(object) {
@@ -362,6 +372,7 @@ define(["../declare","../lang", "../base/core", "../xml", "../xpath", "../Endpoi
         
         /**
          * Queries the store for objects. This does not alter the store, but returns a set of data from the store.
+         * @method query
          * @param query
          * @param options
          */

@@ -17,8 +17,6 @@
 /**
  * Social Business Toolkit SDK. Implementation of a transport using the
  * dojo/request API.
- * 
- * @module sbt._bridge.RequestTransport
  */
 define([ "dojo/_base/declare", "dojo/_base/lang", "dojo/request", "../util" ], function(declare,lang,request,util) {
     return declare(null, {

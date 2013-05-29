@@ -15,7 +15,7 @@
  */
 
 /**
- * Social Business Toolkit SDK - ready() function.
+ * @module sbt.ready
  */
 define(['./_bridge/ready'],function(ready) {
 	return ready;

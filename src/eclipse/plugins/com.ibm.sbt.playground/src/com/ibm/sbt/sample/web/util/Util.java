@@ -69,10 +69,10 @@ public class Util {
     
     public static String[] ONE_UI_STYLES = { 
         // "/sbt.oneui303/css/base/core.css", // this theme doesn't seem to be used in connections.
-    	Context.get().getProperty("connections.url") + "/connections/resources/web/_style?include=com.ibm.lconn.core.styles.oneui3/base/package3.css",
-    	Context.get().getProperty("connections.url") + "/connections/resources/web/_style?include=com.ibm.lconn.core.styles.oneui3/sprites.css",
-        Context.get().getProperty("connections.url") + "/connections/resources/web/_lconntheme/default.css?version=oneui3&rtl=false",
-        Context.get().getProperty("connections.url") + "/connections/resources/web/_lconnappstyles/default/search.css?version=oneui3&rtl=false"
+        "/connections/resources/web/_style?include=com.ibm.lconn.core.styles.oneui3/base/package3.css",
+        "/connections/resources/web/_style?include=com.ibm.lconn.core.styles.oneui3/sprites.css",
+        "/connections/resources/web/_lconntheme/default.css?version=oneui3&rtl=false",
+        "/connections/resources/web/_lconnappstyles/default/search.css?version=oneui3&rtl=false"
     };
 
     private static Map<String, String[]> _styleMap = new HashMap<String, String[]>();
@@ -191,14 +191,41 @@ public class Util {
         }
         
         String jsLibId = getJsLibId(request);
+        String environment = request.getParameter("env");
+        String baseUrl = Context.get().getProperty("connections.url");
+                 
+        if(StringUtil.equals(environment,"smartcloudEnvironment"))
+            baseUrl = Context.get().getProperty("smartcloud.url");
         
+        String[] result;
         if (_styleMap.containsKey(themeId)) {
-            return _styleMap.get(themeId);
+            result = _styleMap.get(themeId);
+            if(StringUtil.equals(themeId, "oneui"))
+                result = addBaseUrls(baseUrl, result);
         } else if (_styleMap.containsKey(jsLibId + themeId)) {
-            return _styleMap.get(jsLibId + themeId);
+            result =  _styleMap.get(jsLibId + themeId);
+            if(StringUtil.equals(themeId, "oneui"))
+                result = addBaseUrls(baseUrl, result);
         } else {
-            return new String[0];
+            result = new String[0];
         }
+        
+        return result;
+    }
+    
+    /**
+    * Returns the paths array where every String has been replaced by the same String with baseUrl in front.
+    * @param base
+    * @param paths
+    * @return
+    */
+    private static String[] addBaseUrls(String baseUrl, String[] paths){
+        String[] result = new String[paths.length];
+        for (int i = 0; i < paths.length; i++){
+            result[i] = baseUrl + paths[i];
+        }
+    
+        return result;
     }
     
     public static String getBodyClass(HttpServletRequest request, String themeId) {

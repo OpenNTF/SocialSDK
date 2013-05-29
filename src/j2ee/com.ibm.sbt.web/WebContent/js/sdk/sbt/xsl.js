@@ -16,6 +16,10 @@
  * Social Business Toolkit SDK - XSL utilities.
  * Borrowed from the Connections source code, for now
  */
+
+/**
+ * @module sbt.xsl
+ */
 define(['./Cache','./xml','./lang'],function(cache,sbtml,lang) {
 	return {
 	

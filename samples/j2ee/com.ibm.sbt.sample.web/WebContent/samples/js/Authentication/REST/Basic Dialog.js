@@ -1,15 +1,20 @@
 require(["sbt/Endpoint", "sbt/dom"], function(Endpoint, dom) {
     var endpoint = Endpoint.find("connections");
-    endpoint.xhrGet({
-        serviceUrl : "/connections/opensocial/basic/rest/people/@me/",
-        handleAs : "json",
-        loginUi : "dialog",
-        preventCache : true,
-        load: function(response) {
+    
+    var url = "/connections/opensocial/basic/rest/people/@me/";
+    
+    var options = { 
+    	method : "GET", 
+    	handleAs : "json",
+    	preventCache : true 
+    };
+    
+    endpoint.request(url, options).then(
+    	function(response) {
             dom.setText("content", "Successfully logged in");
         },
-        error: function(error){
+        function(error){
             dom.setText("content", "Failed log in");
         }
-  });
+    );
 });

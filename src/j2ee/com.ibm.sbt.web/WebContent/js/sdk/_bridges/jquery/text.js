@@ -16,8 +16,6 @@
 
 /**
  * Social Business Toolkit SDK.
- * 
- * @module text
  */
 define([ "requirejs/text" ], function(text) {
     return {

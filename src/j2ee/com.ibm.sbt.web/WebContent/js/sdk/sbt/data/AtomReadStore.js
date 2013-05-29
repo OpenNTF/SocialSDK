@@ -15,7 +15,7 @@
  */
 
 /**
- * 
+ * @module sbt.data.AtomReadStore
  */
 define(["../declare","../Endpoint", "../lang", "../base/core", "../xml", "../xpath","dojox/html/entities"], function(declare, Endpoint, lang, core, xml, xpath, entities) {
     
@@ -25,7 +25,6 @@ define(["../declare","../Endpoint", "../lang", "../base/core", "../xml", "../xpa
      * 
      * @class AtomReadStore
      * @namespace sbt.data
-     * @module sbt.data.AtomReadStore
      */
     var AtomReadStore = declare(null, {
         // private
@@ -75,6 +74,14 @@ define(["../declare","../Endpoint", "../lang", "../base/core", "../xml", "../xpa
             if(!this.url) {
                 throw new Error("sbt.data.AtomReadStore: A service URL must be specified when creating the data store");
             }
+        },
+        
+        /**
+         * @method getEndpoint
+         * @returns
+         */
+        getEndpoint: function() {
+        	return this._endpoint;
         },
         
         /*
@@ -340,7 +347,7 @@ define(["../declare","../Endpoint", "../lang", "../base/core", "../xml", "../xpa
         },
 
         _createItems: function(document) {
-            var nodes = xpath.selectNodes(document, this.atom.entry, this.namespaces);
+            var nodes = xpath.selectNodes(document, this.atom.entries, this.namespaces);
             var items = [];
             for (var i=0; i<nodes.length; i++) {
                 items.push(this._createItem(nodes[i]));

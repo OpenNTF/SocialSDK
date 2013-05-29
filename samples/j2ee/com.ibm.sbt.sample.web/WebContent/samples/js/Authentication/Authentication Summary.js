@@ -38,14 +38,15 @@ require(["sbt/dom", "sbt/Endpoint", "sbt/config"], function(dom, Endpoint, confi
 			loginButton.style.display = "none";
 			dom.setText("td2"+endpointName, "Logged in");
 			logoutButton.onclick= function (){
-				Endpoint.find(this.name).logout({           // Calling logout. (this.name has endpoint name)
-					load: function(logoutResult){
+				// Calling logout. (this.name has endpoint name)
+				Endpoint.find(this.name).logout().then(
+					function(logoutResult){
 						document.location.reload();
 					},
-					error: function(logoutResult){
+					function(logoutResult){
 						dom.setText("td2"+endpointName, "Logged in - failed to logout");
 					}
-				}); 
+				); 
 			};
 		}else{
 			logoutButton.style.display = "none";

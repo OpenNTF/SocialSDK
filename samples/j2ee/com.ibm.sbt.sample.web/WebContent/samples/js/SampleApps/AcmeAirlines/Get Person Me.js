@@ -14,25 +14,21 @@ require(["sbt/Endpoint", "sbt/json", "sbt/dom"],
             path = oauthPeopleMe;
         }
         
-        endpoint.xhrGet({
-            serviceUrl : path,
-            handleAs : "json",
-            loginUi : "popup",
-            preventCache : true,
-            load: function(response) {
+        endpoint.request(path, { handleAs : "json", preventCache : true }).then(
+            function(response) {
                 personObject = response.entry;
                 personObject.id = response.entry.id.replace('urn:lsid:lconn.ibm.com:profiles.person:', '');
                 if(onSuccess) {
                     onSuccess(personObject);
                 }
             },
-            error: function(error){
+            function(error){
                 personObject = null;
                 if(onError) {
                     onError(error);
                 }
             }
-      });
+        );
     };
 
     // demonstrate calling the method

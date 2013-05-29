@@ -17,13 +17,15 @@
 /**
  * Social Business Toolkit SDK. 
  * Definition of a proxy re-writer.
+ * 
+ * @module sbt.Proxy
  */
 define(['./declare','./lang','./pathUtil'],function(declare,lang,pathUtil) {
 
     /**
      * Definition of the proxy module
      * 
-     * @module sbt.Proxy
+     * @class sbt.Proxy
      * 
      */
     var Proxy = declare(null, {

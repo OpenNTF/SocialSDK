@@ -19,14 +19,14 @@
  */
 define(["sbt/widget/_TemplatedWidget", 
         "sbt/lang",
-        "sbt/controls/vcard/connections/SemanticTagService",
-        "sbt/text!sbt/controls/vcard/connections/templates/ProfileVCard.html"], 
+        "sbt/connections/controls/vcard/SemanticTagService",
+        "sbt/text!sbt/connections/controls/vcard/templates/ProfileVCard.html"], 
         function(_TemplatedWidget, lang, SemanticTagService, template) {
 
     /**
      * @class sbt.controls.vcard.connections.ProfileVCard
      */
-    dojo.declare("sbt.controls.vcard.connections.ProfileVCard", [ _TemplatedWidget ], {
+    dojo.declare("sbt.connections.controls.vcard.ProfileVCard", [ _TemplatedWidget ], {
 
         /**
          * The html template of the vcard.
@@ -111,5 +111,5 @@ define(["sbt/widget/_TemplatedWidget",
         
     });
     
-    return sbt.controls.vcard.connections.ProfileVCard;
+    return sbt.connections.controls.vcard.ProfileVCard;
 });

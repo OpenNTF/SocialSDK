@@ -18,22 +18,20 @@ require(["sbt/Endpoint", "sbt/json", "sbt/dom", "sbt/xml", "sbt/xpath", "sbt/con
         }
         path += "%{sample.id1}";
         
-        endpoint.xhrGet({
-            serviceUrl : path,
-            loginUi : "dialog",
-            load: function(response) {
-                reportingChain = xml.parse(response);
+        endpoint.request(path).then(
+            function(response) {
+            	reportingChain = xml.parse(response);
                 if(onSuccess) {
                     onSuccess(reportingChain);
                 }
             },
-            error: function(error){
+            function(error){
                 reportingChain = null;
                 if(onError) {
                     onError(error);
                 }
             }
-      });
+        );
     };
 
     getApproverEmail = function() {

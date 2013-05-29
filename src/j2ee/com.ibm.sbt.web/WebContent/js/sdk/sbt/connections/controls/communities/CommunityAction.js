@@ -15,15 +15,15 @@
  */
 
 /**
- * 
+ * @module sbt.connections.controls.communities.CommunityAction
  */
 define([ "../../../declare", "../../../controls/grid/GridAction", "dojo/string" ], 
         function(declare, GridAction, string) {
 
     /**
-     * @module sbt.controls.grid.connections.CommunityAction
+     * 
      * @class CommunityAction
-     * @namespace sbt.controls.grid.connections
+     * @namespace sbt.connections.controls.communities
      */
     var CommunityAction = declare(GridAction, {
         
@@ -39,9 +39,9 @@ define([ "../../../declare", "../../../controls/grid/GridAction", "dojo/string" 
         },
         
         /**
-         * @method - getTooltip
-         * @param item - The element that the tooltip will display for
-         * @returns - A String to be displayed in an elements tooltip 
+         * @method getTooltip
+         * @param item The element that the tooltip will display for
+         * @returns A String to be displayed in an elements tooltip 
          */
         getTooltip: function(item) {
            return string.substitute(this.nls.tooltip, { title : item.getValue("title") });

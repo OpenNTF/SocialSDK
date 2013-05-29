@@ -16,6 +16,8 @@
 
 /**
  * Social Business Toolkit SDK - Compatibility with older browsers
+ * 
+ *  @module sbt.compat
  */
 define([],function() {
 	if (!Array.prototype.indexOf){

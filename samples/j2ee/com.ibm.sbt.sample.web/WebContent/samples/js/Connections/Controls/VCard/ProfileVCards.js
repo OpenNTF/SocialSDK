@@ -1,4 +1,4 @@
-require(["sbt/dom", "sbt/controls/vcard/connections/ProfileVCard"], function(dom, ProfileVCard) {
+require(["sbt/dom", "sbt/connections/controls/vcard/ProfileVCard"], function(dom, ProfileVCard) {
     var profileCard1 = new ProfileVCard({ userName : "%{sample.displayName1}", userId : "%{sample.id1}" });
     dom.byId("vcardDiv1").appendChild(profileCard1.domNode);
 

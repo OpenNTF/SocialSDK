@@ -17,36 +17,66 @@
 /**
  * 
  */
-define([ "../../declare", "../../lang", "../../itemFactory", "../../widget/grid/_Grid"], 
-        function(declare, lang, itemFactory, _Grid) {
+define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil", "../../widget/grid/_Grid"], 
+        function(declare, lang, itemFactory, stringUtil, _Grid) {
 
     /**
      * @class grid
      * @namespace sbt.controls.grid
      * @module sbt.controls.grid.Grid
      */
-    var Grid = declare([_Grid], {
+    var Grid = declare([ _Grid ], {
 
-        _strings: {},
-        _storeArgs: null,
-        
+    	/**
+    	 * Data associated with this Grid
+    	 */
         data: null,
         
-        /**The renderer associated with the grid*/
+        /**
+         * The renderer associated with the grid
+         */
         renderer: null,
-        /**Encode all of the data coming from the connections server 
-         * As HTML entities, to prevent XSS attacks*/
+        
+        /**
+         * Encode all of the data coming from the connections server 
+         * as HTML entities, to prevent XSS attacks
+         */
         encodeHtml: true,
-        /**The number of grid rows displayed per page*/
+        
+        /**
+         * The number of grid rows displayed per page
+         */
         pageSize: 5,
-        /**Flag to hide the pager*/
+        
+        /**
+         * Flag to hide the pager
+         */
         hidePager: false,
-        /**Flag to hide the sorter*/
+        
+        /**
+         * Flag to hide the sorter
+         */
         hideSorter: false,
-        /**FilterTag, is used for sorting and paging, as to only sort as filtered set of results*/
+        
+        /**
+         * FilterTag, is used for sorting and paging, as to only sort as filtered set of results
+         */
         filterTag: "",
-        /**Selected rows are the rows of the grid that have been selected by checking a check box */
+        
+        /**
+         * Selected rows are the rows of the grid that have been selected by checking a check box 
+         */
         selectedRows: null,
+        
+        _strings: {},
+
+        _storeArgs: null,
+
+        /*
+         * Regular expression used to remove // from url's
+         */
+        _regExp : new RegExp("/{2}"),
+
         
         /**
          * Constructor method for the grid.
@@ -55,7 +85,6 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../widget/grid/
          * @param args
          */
         constructor: function(args) {
-        
             lang.mixin(this, args);
             
             this.selectedRows = [];
@@ -150,9 +179,9 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../widget/grid/
                this.renderer.render(this, this.gridNode, this.data.items, this.data);
                this.onUpdate(this.data);
            } else if (this.store) {
-        	   if(this._activeSortAnchor && this._activeSortIsDesc !== undefined){
-        		   this._doQuery(this.store, { start : 0, count : this.pageSize,sort: [{ attribute: this._activeSortAnchor.sortParameter, descending :this._activeSortIsDesc }] });   
-        	   }else{
+        	   if (this._activeSortAnchor && this._activeSortIsDesc !== undefined) {
+        		   this._doQuery(this.store, { start : 0, count : this.pageSize, sort: [{ attribute : this._activeSortAnchor.sortParameter, descending : this._activeSortIsDesc }] });   
+        	   } else {
         		   this._doQuery(this.store, { start : 0, count : this.pageSize });
         	   }
                
@@ -162,9 +191,16 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../widget/grid/
            }
         },
 
+        /**
+         * @method onUpdate
+         * @param data
+         */
         onUpdate: function(data) {
         },
         
+        /**
+         * @method getSortInfo
+         */
         getSortInfo: function() {
         },
         
@@ -243,30 +279,32 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../widget/grid/
             }
         },
         
-        /**Called when the user clicks a checkbox 
+        /**
+         * Called when the user clicks a checkbox 
          * The row gets added or removed to an array, 
          * to retrieve the array call getSelected
-         * @method handleCheckBox*/
-        handleCheckBox: function (el, data, ev){
-        	
-        if(el.checked){
-        	this.selectedRows.push(data);
-        }else if(!el.checked){
-        	var rows = this.getSelected();
-        	for(var i=0;i<rows.length;i++){
-        		if(rows[i].data == data){
-        			//selected row
-        			this.selectedRows.splice(i,1);
+         * @method handleCheckBox
+         */
+        handleCheckBox: function (el, data, ev){       	
+        	if (el.checked) {
+        		this.selectedRows.push(data);
+        	} else if (!el.checked) {
+        		var rows = this.getSelected();
+        		for(var i=0;i<rows.length;i++){
+        			if(rows[i].data == data){
+        				//selected row
+        				this.selectedRows.splice(i,1);
+        			}
         		}
         	}
-        }
-         
-        	
         },
-        /**If the grid rows have checkboxes , get a list of the rows which are currently selected
+        
+        /**
+         * If the grid rows have checkboxes , get a list of the rows which are currently selected
          * (That have a checked checkbox)
          * @method - getSelected
-         * */
+         * 
+         */
         getSelected: function() {
             var items = [];
             if (this.selectedRows) {
@@ -304,7 +342,7 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../widget/grid/
          * The args like email are not available at the start. So try to see if the user can be inserted to the start of some asrray before it goes to get the different profiles.
          * @param e
          */
-        insertItem: function(document, index){
+        insertItem: function(document, index) {
             if(!this.data){
                 console.log("Data is not yet present, adding to beginning.");
                 this.data = { items: [], start: 0, end: 0, count: 0, totalCount: 0 };
@@ -315,6 +353,19 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../widget/grid/
             this.data.items.splice(index, 0, items[0]); 
             this.data.totalCount = this.data.items.length;
             this.data.end = this.data.count = this.data.totalCount;
+        },
+        
+        /**
+         * @method encodeImageUrl
+         * @param url
+         */
+        encodeImageUrl: function(url) {
+        	var ep = this.store.getEndpoint();
+        	if (ep.authType == "oauth") {
+        		return ep.proxy.rewriteUrl(ep.baseUrl, url, ep.proxyPath);
+        	} else {
+        		return url;
+        	}
         },
         
         // Internals
@@ -343,8 +394,48 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../widget/grid/
 
         },
         
+        /**
+         * Construct a url using the specified parameters 
+         * @method constructUrl
+         * @param url
+         * @param params
+         * @param urlParams
+         * @returns
+         */
+        constructUrl : function(url,params,urlParams) {
+            if (!url) {
+                throw new Error("Grid.constructUrl: Invalid argument, url is undefined or null.");
+            }
+            if (urlParams) {
+                url = stringUtil.replace(url, urlParams);
+                
+                if (url.indexOf("//") != -1) {
+                	// handle empty values
+                	url = url.replace(this._regExp, "/");
+                }
+            }
+            if (params) {
+                for (param in params) {
+                    if (url.indexOf("?") == -1) {
+                        url += "?";
+                    } else if (url.indexOf("&") != (url.length - 1)) {
+                        url += "&";
+                    }
+                    var value = encodeURIComponent(params[param]);
+                    if (value) {
+                        url += param + "=" + value;
+                    }
+                }
+            }
+            return url;
+        },
+
+        // Internals
+        
+        /*
+         * 
+         */
         _filter: function(args, data){
-        	
         	var options = {
         			start: 0, count: this.pageSize,
                     sort: [{ attribute: this._activeSortAnchor.sortParameter  }],
@@ -358,14 +449,15 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../widget/grid/
         	}
 
             this._doQuery(this.store, options,query);
-        	
         },
         
-
+        /*
+         * 
+         */
         _updateWithError: function(e) {
         	console.error(e.message);
-        	e = "There Was An Error Communicating With The Server";
-           this.renderer.renderError(this, this.gridNode, e);
+        	e = "There was an error communicating with the server";
+            this.renderer.renderError(this, this.gridNode, e);
         }
 
     });

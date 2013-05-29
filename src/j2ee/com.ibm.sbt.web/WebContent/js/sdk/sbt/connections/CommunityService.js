@@ -15,7 +15,7 @@
  */
 
 /**
- * JavaScript API for IBM Connections Community Service.
+ * The Communities API allows application programs to retrieve community information, subscribe to community updates, and create or modify communities.
  * 
  * @module sbt.connections.CommunityService
  */
@@ -45,7 +45,8 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
     });
     
     /**
-     * Community class.
+     * Community class represents an entry for a Community feed returned by the
+     * Connections REST API.
      * 
      * @class Community
      * @namespace sbt.connections
@@ -53,6 +54,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
     var Community = declare(BaseEntity, {
 
         /**
+         * Construct a Community entity.
          * 
          * @constructor
          * @param args
@@ -76,8 +78,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
          * Sets id of IBM Connections community.
          * 
          * @method setCommunityUuid
-         * @param {String}
-         *            communityUuid Id of the community
+         * @param {String} communityUuid Id of the community
          */
         setCommunityUuid : function(communityUuid) {
             return this.setAsString("communityUuid", communityUuid);
@@ -98,8 +99,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
          * Sets title of IBM Connections community.
          * 
          * @method setTitle
-         * @param {String}
-         *            title Title of the community
+         * @param {String} title Title of the community
          */
         setTitle : function(title) {
             return this.setAsString("title", title);
@@ -120,8 +120,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
          * Set the community type of the IBM Connections community.
          * 
          * @method setCommunityType
-         * @param {String}
-         *            Type of the Community
+         * @param {String} Type of the Community
          */
         setCommunityType : function(communityType) {
             return this.setAsString("communityType", communityType);
@@ -142,8 +141,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
          * Set the community theme of the IBM Connections community.
          * 
          * @method setCommunityTheme
-         * @param {String}
-         *            Theme of the Community
+         * @param {String} Theme of the Community
          */
         setCommunityTheme : function(communityTheme) {
             return this.setAsString("communityTheme", communityTheme);
@@ -164,8 +162,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
          * Sets description of IBM Connections community.
          * 
          * @method setContent
-         * @param {String}
-         *            content Description of the community
+         * @param {String} content Description of the community
          */
         setContent : function(content) {
             return this.setAsString("content", content);
@@ -186,8 +183,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
          * Set new tags to be associated with this IBM Connections community.
          * 
          * @method setTags
-         * @param {Object}
-         *            Array of tags to be added to the community
+         * @param {Object} Array of tags to be added to the community
          */
 
         setTags : function(tags) {
@@ -284,11 +280,10 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
          * Get sub communities of a community.
          * 
          * @method getSubCommunities
-         * @param {Object}
-         *            [args] Object representing various parameters
-         *            that can be passed to get a feed of members of a
-         *            community. The parameters must be exactly as they are
-         *            supported by IBM Connections like ps, sortBy etc.
+         * @param {Object} [args] Object representing various parameters
+         * that can be passed to get a feed of members of a
+         * community. The parameters must be exactly as they are
+         * supported by IBM Connections like ps, sortBy etc.
          */
         getSubCommunities : function(args) {
             return this.service.getSubCommunities(this.getCommunityUuid(), args);
@@ -298,11 +293,10 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
          * Get members of this community.
          * 
          * @method getMembers
-         * @param {Object}
-         *            [args] Object representing various parameters
-         *            that can be passed to get a feed of members of a
-         *            community. The parameters must be exactly as they are
-         *            supported by IBM Connections like ps, sortBy etc.
+         * @param {Object} [args] Object representing various parameters
+         * that can be passed to get a feed of members of a
+         * community. The parameters must be exactly as they are
+         * supported by IBM Connections like ps, sortBy etc.
          */
         getMembers : function(args) {
             return this.service.getMembers(this.getCommunityUuid(), args);
@@ -312,16 +306,10 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
          * Add member to a community
          * 
          * @method addMember
-         * @param {Object}
-         *            [args] Argument object
-         * @param {Object}
-         *            [args.member] Object representing the member to be added
-         * @param {String}
-         *            [args.email] Object representing the email of the memeber
-         *            to be added
-         * @param {String}
-         *            [args.id] String representing the id of the member to be
-         *            added
+         * @param {Object} [args] Argument object
+         * @param {Object} [args.member] Object representing the member to be added
+         * @param {String} [args.email] Object representing the email of the memeber to be added
+         * @param {String} [args.id] String representing the id of the member to be added
          */
         addMember : function(member,args) {
             return this.service.addMember(this.getCommunityUuid(), member, args);
@@ -331,11 +319,8 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
          * Remove member of a community
          * 
          * @method removeMember
-         * @param {String/Object}
-         *            member id of the member or member object (of the member to
-         *            be removed)
-         * @param {Object}
-         *            [args] Argument object
+         * @param {String/Object} Member id of the member or member object (of the member to be removed)
+         * @param {Object} [args] Argument object
          */
         removeMember : function(member,args) {
             return this.service.removeMember(this.getCommunityUuid(), member, args);
@@ -346,10 +331,9 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
          * member of the community. By default, a network call is made to load the atom entry
          * document in the member object.
          * 
-         * @method load
+         * @method getMember
          * @param {String} member id of the member.
-         * @param {Object}
-         *            [args] Argument object
+         * @param {Object} [args] Argument object
          */
         getMember : function(memberId, args) {
         	return this.service.getMember(this.getCommunityUuid(), memberId, args);
@@ -361,8 +345,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
          * document in the community object.
          * 
          * @method load
-         * @param {Object}
-         *            [args] Argument object
+         * @param {Object} [args] Argument object
          */
         load : function(args) {
             // detect a bad request by validating required arguments
@@ -400,8 +383,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
          * Remove this community
          * 
          * @method remove
-         * @param {Object}
-         *            [args] Argument object
+         * @param {Object} [args] Argument object
          */
         remove : function(args) {
             return this.service.deleteCommunity(this.getCommunityUuid(), args);
@@ -411,8 +393,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
          * Update this community
          * 
          * @method remove
-         * @param {Object}
-         *            [args] Argument object
+         * @param {Object} [args] Argument object
          */
         update : function(args) {
             return this.service.updateCommunity(this, args);
@@ -422,8 +403,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
          * Save this community
          * 
          * @method remove
-         * @param {Object}
-         *            [args] Argument object
+         * @param {Object} [args] Argument object
          */
         save : function(args) {
             if (this.getCommunityUuid()) {
@@ -436,7 +416,8 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
     });
 
     /**
-     * Member class.
+     * Member class represents an entry for a Member feed returned by the
+     * Connections REST API.
      * 
      * @class Member
      * @namespace sbt.connections
@@ -449,7 +430,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
         communityUuid : null,
 
         /**
-         * Constructor for Member
+         * Constructor for Member entity
          * 
          * @constructor
          * @param args
@@ -485,8 +466,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
          * Set the community member name.
          * 
          * @method setName
-         * @param {String}
-         *            Community member name
+         * @param {String} Community member name
          */
 
         setName : function(name) {
@@ -549,8 +529,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
          * Sets role of a community member
          * 
          * @method setRole
-         * @param {String}
-         *            role Role of the community member.
+         * @param {String} role Role of the community member.
          */
         setRole : function(role) {
             return this.setAsString("role", role);
@@ -562,8 +541,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
          * document in the member object.
          * 
          * @method load
-         * @param {Object}
-         *            [args] Argument object
+         * @param {Object} [args] Argument object
          */
         load : function(args) {
             // detect a bad request by validating required arguments
@@ -608,8 +586,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
          * Remove this member from the community
          * 
          * @method remove
-         * @param {Object}
-         *            [args] Argument object
+         * @param {Object} [args] Argument object
          */
         remove : function(args) {
         	var memberId = this.getUserid() || this.getEmail();
@@ -619,7 +596,8 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
     });
 
     /**
-     * Invite class.
+     * Invite class represents an entry for a Invite feed returned by the
+     * Connections REST API.
      * 
      * @class Invite
      * @namespace sbt.connections
@@ -666,8 +644,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
          * Set the community invite title.
          * 
          * @method setTitle
-         * @param {String}
-         *            Community invite title
+         * @param {String} Community invite title
          */
 
         setTitle : function(name) {
@@ -856,12 +833,16 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
         },
         
         /**
-         * Get public communities from IBM Connections
+         * Get the All Communities feed to see a list of all public communities to which the 
+         * authenticated user has access or pass in parameters to search for communities that 
+         * match a specific criteria.
          * 
          * @method getPublicCommunities
          * 
-         * @param {Object}
-         *            [args]
+         * @param {Object} [args] Object representing various parameters
+         * that can be passed to get a feed of my communities. The
+         * parameters must be exactly as they are supported by IBM
+         * Connections like ps, sortBy etc.
          */
         getPublicCommunities : function(args) {
             var options = {
@@ -874,15 +855,15 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
         },
 
         /**
-         * Get my communities from IBM Connections
+         * Get the My Communities feed to see a list of the communities to which the 
+         * authenticated user is a member or pass in parameters to search for a subset 
+         * of those communities that match a specific criteria.
          * 
          * @method getMyCommunities
-         * @param {Object}
-         *            [args] Argument object
-         *            [args.parameters] Object representing various parameters
-         *            that can be passed to get a feed of my communities. The
-         *            parameters must be exactly as they are supported by IBM
-         *            Connections like ps, sortBy etc.
+         * @param {Object} [args] Object representing various parameters
+         * that can be passed to get a feed of my communities. The
+         * parameters must be exactly as they are supported by IBM
+         * Connections like ps, sortBy etc.
          */
         getMyCommunities : function(args) {
             var options = {
@@ -895,15 +876,14 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
         },
 
         /**
-         * Get members of a community.
+         * Retrieve the members feed to view a list of the members who belong 
+         * to a given community.
          * 
          * @method getMembers
-         * @param {Object}
-         *            [args] Argument object
-         *            [args.parameters] Object representing various parameters
-         *            that can be passed to get a feed of members of a
-         *            community. The parameters must be exactly as they are
-         *            supported by IBM Connections like ps, sortBy etc.
+         * @param {Object} [args] Object representing various parameters
+         * that can be passed to get a feed of members of a
+         * community. The parameters must be exactly as they are
+         * supported by IBM Connections like ps, sortBy etc.
          */
         getMembers : function(communityUuid,args) {
             var promise = this._validateCommunityUuid(communityUuid);
@@ -925,15 +905,13 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
         },
 
         /**
-         * Get member of a community.
+         * Retrieve the member entry to view a member who belongs to a given community.
          * 
          * @method getMembers
-         * @param {Object}
-         *            [args] Argument object
-         *            [args.parameters] Object representing various parameters
-         *            that can be passed to get a feed of members of a
-         *            community. The parameters must be exactly as they are
-         *            supported by IBM Connections like ps, sortBy etc.
+         * @param {Object} [args] Object representing various parameters
+         * that can be passed to get a feed of members of a
+         * community. The parameters must be exactly as they are
+         * supported by IBM Connections like ps, sortBy etc.
          */
         getMember : function(communityUuid,memberId,args) {
             var member = new Member({
@@ -951,14 +929,14 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
         },
 
         /**
-         * Get my community invitations.
+         * Get a list of the outstanding community invitations of the currently authenticated 
+         * user or provide parameters to search for a subset of those invitations.
          * 
          * @method getMyInvites
-         * @param {Object}
-         *            [args] Object representing various parameters
-         *            that can be passed to get a feed of members of a
-         *            community. The parameters must be exactly as they are
-         *            supported by IBM Connections like ps, sortBy etc.
+         * @param {Object} [args] Object representing various parameters
+         * that can be passed to get a feed of members of a
+         * community. The parameters must be exactly as they are
+         * supported by IBM Connections like ps, sortBy etc.
          */
         getMyInvites : function(args) {
             var options = {
@@ -971,14 +949,13 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
         },
 
         /**
-         * Get sub communities of a community.
+         * Get a list of subcommunities associated with a community.
          * 
          * @method getSubCommunities
-         * @param {Object}
-         *            [args] Object representing various parameters
-         *            that can be passed to get a feed of members of a
-         *            community. The parameters must be exactly as they are
-         *            supported by IBM Connections like ps, sortBy etc.
+         * @param {Object} [args] Object representing various parameters
+         * that can be passed to get a feed of members of a
+         * community. The parameters must be exactly as they are
+         * supported by IBM Connections like ps, sortBy etc.
          */
         getSubCommunities : function(communityUuid,args) {
             var promise = this._validateCommunityUuid(communityUuid, args);
@@ -1002,9 +979,8 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
          * Create a Community object with the specified data.
          * 
          * @method newCommunity
-         * @param {Object}
-         *            args Object containing the fields for the 
-         *            new Community 
+         * @param {Object} args Object containing the fields for the 
+         * new Community 
          */
         newCommunity : function(args) {
             return this._toCommunity(args);
@@ -1014,9 +990,8 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
          * Create a Member object with the specified data.
          * 
          * @method newMember
-         * @param {Object}
-         *            args Object containing the fields for the 
-         *            new Member 
+         * @param {Object} args Object containing the fields for the 
+         * new Member 
          */
         newMember : function(args) {
             return this._toMember(args);
@@ -1026,24 +1001,22 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
          * Create a Invite object with the specified data.
          * 
          * @method newInvite
-         * @param {String}
-         *            communityUuid
-         * @param {Object}
-         *            args Object containing the fields for the 
-         *            new Invite 
+         * @param {String} communityUuid
+         * @param {Object} args Object containing the fields for the 
+         * new Invite 
          */
         newInvite : function(communityUuid,args) {
             return this._toInvite(communityUuid,args);
         },
         
         /**
-         * Get community object associated with a community identifier.
+         * Retrieve a community entry, use the edit link for the community entry 
+         * which can be found in the my communities feed.
          * 
          * @method getCommunity
          * @param {String } communityUuid
-         * @param {Object}
-         *            args Object containing the query arguments to be 
-         *            sent (defined in IBM Connections Communities REST API) 
+         * @param {Object} args Object containing the query arguments to be 
+         * sent (defined in IBM Connections Communities REST API) 
          */
         getCommunity : function(communityUuid, args) {
             var community = new Community({
@@ -1054,14 +1027,12 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
         },
 
         /**
-         * Create a new community
+         * Create a community by sending an Atom entry document containing the 
+         * new community to the My Communities resource.
          * 
          * @method createCommunity
-         * @param {Object}
-         *            community Community object which denotes the community to
-         *            be created.
-         * @param {Object}
-         *            [args] Argument object
+         * @param {Object} community Community object which denotes the community to be created.
+         * @param {Object} [args] Argument object
          */
         createCommunity : function(communityOrJson,args) {
             var community = this._toCommunity(communityOrJson);
@@ -1088,13 +1059,16 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
         },
 
         /**
-         * Update an existing community
+         * Update a community by sending a replacement community entry document in Atom format 
+         * to the existing community's edit web address.
+         * All existing community entry information will be replaced with the new data. To avoid 
+         * deleting all existing data, retrieve any data you want to retain first, and send it back 
+         * with this request. For example, if you want to add a new tag to a community entry, retrieve 
+         * the existing tags, and send them all back with the new tag in the update request.
          * 
          * @method updateCommunity
-         * @param {Object}
-         *            community Community object
-         * @param {Object}
-         *            [args] Argument object
+         * @param {Object} community Community object
+         * @param {Object} [args] Argument object
          */
         updateCommunity : function(communityOrJson,args) {
             var community = this._toCommunity(communityOrJson);
@@ -1124,14 +1098,12 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
         },
 
         /**
-         * Delete an existing community
+         * Delete a community, use the HTTP DELETE method.
+         * Only the owner of a community can delete it. Deleted communities cannot be restored
          * 
          * @method deleteCommunity
-         * @param {String/Object}
-         *            community id of the community or the community object (of
-         *            the community to be deleted)
-         * @param {Object}
-         *            [args] Argument object
+         * @param {String/Object} community id of the community or the community object (of the community to be deleted)
+         * @param {Object} [args] Argument object
          */
         deleteCommunity : function(communityUuid,args) {
             var promise = this._validateCommunityUuid(communityUuid);
@@ -1156,13 +1128,9 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
          * Add member to a community
          * 
          * @method addMember
-         * @param {String/Object}
-         *            community id of the community or the community object.
-         * @param {Object}
-         *            member member object representing the member of the
-         *            community to be added
-         * @param {Object}
-         *            [args] Argument object
+         * @param {String/Object} community id of the community or the community object.
+         * @param {Object} member member object representing the member of the community to be added
+         * @param {Object} [args] Argument object
          */
         addMember : function(communityUuid,memberOrId,args) {
             var promise = this._validateCommunityUuid(communityUuid);
@@ -1200,13 +1168,9 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
          * Remove member of a community
          * 
          * @method
-         * @param {String/Object}
-         *            community id of the community or the community object.
-         * @param {String/Object}
-         *            member id of the member or member object (of the member to
-         *            be removed)
-         * @param {Object}
-         *            [args] Argument object
+         * @param {String/Object} community id of the community or the community object.
+         * @param {String/Object} member id of the member or member object (of the member to be removed)
+         * @param {Object} [args] Argument object
          */
         removeMember : function(communityUuid,memberOrId,args) {
             var promise = this._validateCommunityUuid(communityUuid);

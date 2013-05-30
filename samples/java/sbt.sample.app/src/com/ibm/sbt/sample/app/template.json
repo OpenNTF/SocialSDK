@@ -28,12 +28,10 @@
         displayName : "%{target.displayName}",
         url : "%{homePageUrl}"
     },
-    openSocial : {
-        deliverTo : [{
-            objectType : "person",
-            id : "%{approverId}"
-        }]
-    },
+    to : [{
+        objectType : "person",
+        id : "%{approverId}"
+    }],
     connections : {
         rollupid : "%{id}",
         actionable: "true"

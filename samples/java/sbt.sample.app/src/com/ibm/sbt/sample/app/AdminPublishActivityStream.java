@@ -52,6 +52,28 @@ public class AdminPublishActivityStream {
 	
 	private static final String  APPLICATION_JSON  = "application/json";
 	
+	private RuntimeFactory runtimeFactory;
+	private Context context;
+	private Application application;
+	private BasicEndpoint endpoint;
+	private ActivityStreamService _service;
+    
+    public void init() throws AuthenticationException{
+        runtimeFactory = new RuntimeFactoryStandalone();
+        application = runtimeFactory.initApplication(null);
+        context = Context.init(application, null, null);
+        _service = new ActivityStreamService();
+        endpoint = (BasicEndpoint)EndpointFactory.getEndpoint(ActivityStreamService.DEFAULT_ENDPOINT_NAME);
+        endpoint.login("admin", "***REMOVED***", true);
+    }
+    
+    public void destroy(){
+        if (context != null)
+            Context.destroy(context);
+        if (application != null)
+            Application.destroy(application);
+    }
+    
 	/*
 	 * Reads template file
 	 */
@@ -75,7 +97,6 @@ public class AdminPublishActivityStream {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			try {
@@ -100,36 +121,45 @@ public class AdminPublishActivityStream {
 		return templateObj;
 	}
 	
+	public JsonJavaObject postToStream(JsonJavaObject template) throws SBTServiceException {
+        JsonJavaObject returnedData = null;
+        Map<String, String> header = new HashMap<String, String>();
+        header.put("Content-Type", APPLICATION_JSON);
+        returnedData = _service.postEntry(template, header);
+        
+        return returnedData;
+    }
+	
+	public JsonJavaObject postToStream(String template) throws JsonException, AuthenticationException, SBTServiceException{
+        JsonJavaObject data = (JsonJavaObject)JsonParser.fromJson(JsonJavaFactory.instanceEx, template);
+        return postToStream(data);
+	}
+	
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		if (args.length >=2) {
-			AdminPublishActivityStream paas = new AdminPublishActivityStream();
-			RuntimeFactory runtimeFactory = new RuntimeFactoryStandalone();
-			Application application = runtimeFactory.initApplication(null);
-			Context context = Context.init(application, null, null);
-			BasicEndpoint endpoint = (BasicEndpoint)EndpointFactory.getEndpoint(ActivityStreamService.DEFAULT_ENDPOINT_NAME);
-			try {
-				JsonJavaObject data = paas.mergeData(args[0], args[1]);
-				endpoint.login("admin", "***REMOVED***", true);
-				ActivityStreamService _service = new ActivityStreamService();
-		        Map<String, String> header = new HashMap<String, String>();
-				header.put("Content-Type", APPLICATION_JSON);
-				_service.postEntry(data, header);
-			} catch (AuthenticationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SBTServiceException e) {
-				e.printStackTrace();
-			} catch (JsonException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			Context.destroy(context);
-			Application.destroy(application);
-		} else {
-			System.out.println("Usage: PublishAnyActivityStream templateFilePath dataFilePath");
+		if (args.length >= 2) {
+		    AdminPublishActivityStream paas = new AdminPublishActivityStream();
+		    JsonJavaObject template;
+            try {
+                paas.init();
+                template = paas.mergeData(args[0], args[1]);
+                JsonJavaObject streamEntry = paas.postToStream(template);
+                if(streamEntry != null)
+                    System.out.println("Success, posted ActivityStream entry: " + streamEntry.toString());
+            } catch (JsonException e) {
+                e.printStackTrace();
+            } catch (AuthenticationException e) {
+                e.printStackTrace();
+            } catch (SBTServiceException e) {
+                e.printStackTrace();
+            } finally{
+                paas.destroy();
+            }
 		}
+		else {
+            System.out.println("Usage: PublishAnyActivityStream templateFilePath dataFilePath");
+        }
 	}
 }

@@ -2,7 +2,7 @@ require(["sbt/connections/FileService", "sbt/dom","sbt/json"],
     function(FileService,dom,json) {       
 
         var fileService = new FileService();
-    	fileService.getFilesSharedByMe().then(
+    	fileService.getFilesSharedWithMe().then(
             function(files) {
             	dom.setText("json", json.jsonBeanStringify(files));
             },

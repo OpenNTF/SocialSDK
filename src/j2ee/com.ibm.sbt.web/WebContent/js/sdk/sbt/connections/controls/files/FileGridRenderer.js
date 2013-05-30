@@ -18,14 +18,15 @@
  * 
  */
 define(["../../../declare",
-        "../../../connections/controls/ConnectionsGridRenderer",
-        "dojo/string", "../../../i18n",
+        "../../../stringUtil", 
+        "../../../i18n",
+        "../ConnectionsGridRenderer",
         "../../../i18n!sbt/connections/controls/files/nls/FileGridRenderer",
         "../../../text!sbt/connections/controls/files/templates/FileRow.html",
         "../../../text!sbt/connections/controls/files/templates/RecycledFileRow.html",
         "../../../text!sbt/connections/controls/files/templates/FolderRow.html", 
         "../../../text!sbt/connections/controls/files/templates/CommentRow.html"], 
-        function(declare, ConnectionsGridRenderer, string, i18n, nls, fileTemplate, recycledFileTemplate, folderTemplate, commentTemplate) {
+        function(declare, stringUtil, i18n, ConnectionsGridRenderer, nls, fileTemplate, recycledFileTemplate, folderTemplate, commentTemplate) {
     
     /**
      * @class FileGridRenderer
@@ -212,7 +213,7 @@ define(["../../../declare",
             } else if (item.getValue('recommendationCount') == 1) {
                 return this._nls.oneLike;
             } else {
-                return string.substitute(this._nls.nLikes, item);
+                return stringUtil.replace(this._nls.nLikes, item);
             }
         },
         

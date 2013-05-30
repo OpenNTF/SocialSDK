@@ -18,7 +18,7 @@
  * 
  */
 define(["../../../declare",
-        "../../../connections/controls/ConnectionsGridRenderer",
+        "../ConnectionsGridRenderer",
         "../../../i18n!sbt/connections/controls/profiles/nls/ProfileGridRenderer",
         "../../../text!sbt/connections/controls/profiles/templates/ProfileRow.html",
         "../../../text!sbt/connections/controls/profiles/templates/SharedConnectionsRow.html",

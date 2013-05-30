@@ -16,11 +16,12 @@
 
 /**
  * 
+ * @module sbt.connections.controls.profiles.ProfileGrid
  */
 define([ "../../../declare", 
 		 "../../../controls/grid/Grid", 
-		 "./ProfileGridRenderer", 
-		 "./ProfileAction", 
+		 "../../../connections/controls/profiles/ProfileGridRenderer", 
+		 "../../../connections/controls/profiles/ProfileAction", 
 		 "../../../connections/controls/vcard/SemanticTagService", 
 		 "../../../config",
 		 "../../../store/parameter",
@@ -74,7 +75,6 @@ define([ "../../../declare",
     /**
      * @class ProfileGrid
      * @namespace sbt.connections.controls.profiles
-     * @module sbt.connections.controls.profiles.ProfileGrid
      */
     var ProfileGrid = declare(Grid, {
     	
@@ -241,7 +241,7 @@ define([ "../../../declare",
         handleClick: function(el, data, ev) {
             if (this.profileAction) {
             	console.log(data);
-                this._stopEvent(ev);
+                dojo.stopEvent(ev);
                 
                 this.profileAction.execute(data, { grid : this.grid }, ev);
             }

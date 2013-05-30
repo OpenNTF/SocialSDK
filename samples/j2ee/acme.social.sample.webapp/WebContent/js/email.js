@@ -36,13 +36,10 @@ define(["sbt/declare", "sbt/Endpoint", "sbt/emailService"],
                         ]
                 };
             
-            emailService.send(email, {
-                error: function(response) {
-                    alert(response);
-                },
-                load : function(response) {
-                    console.log(response);
-                }
+            emailService.send(email).then(function(response) {
+                console.log(response);
+            }, function(response) {
+                alert(response.cause.message);
             });
         },
         

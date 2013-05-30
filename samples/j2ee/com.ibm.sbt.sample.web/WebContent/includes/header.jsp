@@ -55,7 +55,7 @@ function reload(url) {
 			%>
 			</select>
          </form>
-         <!-- 
+         
          <form class="navbar-form pull-right" style="<%=formStyle%>">
          	<span style="vertical-align:middle">Environment: </span>
          	<select id="envChange">
@@ -73,7 +73,6 @@ function reload(url) {
 			%>
 			</select>
          </form>
-          -->
        </div>
      </div>
    </div>

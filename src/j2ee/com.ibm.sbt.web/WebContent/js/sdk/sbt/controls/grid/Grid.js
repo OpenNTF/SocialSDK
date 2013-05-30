@@ -257,25 +257,26 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
             	//if there is sorting available
             	if(this._activeSortAnchor){
 	            	var options = { 
-	                    	start : 0, count : this.pageSize ,
-	                    	sort: [{ attribute: this._activeSortAnchor.sortParameter }]
+	                    start : 0, count : this.pageSize ,
+	                    sort: [{ attribute: this._activeSortAnchor.sortParameter }]
 	                };
 	            	if(this._activeSortAnchor !== undefined){
-	               	 options.sort[0].descending = this._activeSortIsDesc;
+	               	   options.sort[0].descending = this._activeSortIsDesc;
 	                }
-            	}else {
+            	} else {
             		var options = { 
-	                    	start : 0, count : this.pageSize 
+	                    start : 0, count : this.pageSize 
 	                };
             	}
-             if (this.data) {
-                 options.start = this.data.start + options.count;
-             }
-             
-             if(this.filterTag != "" && this.filterTag != null){
-            	 options.tag = this.filterTag;
-             }
-             this._doQuery(this.store, options);
+                if (this.data) {
+                    options.start = this.data.start + options.count;
+                    options.count = this.pageSize;
+                    options.total = this.data.totalCount;
+                }
+                if(this.filterTag != "" && this.filterTag != null){
+            	    options.tag = this.filterTag;
+                }
+                this._doQuery(this.store, options);
             }
         },
         

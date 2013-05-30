@@ -1,0 +1,783 @@
+<?xml version="1.0" encoding="UTF-8"?><response xmlns="http://ns.opensocial.org/2008/opensocial">
+  <startIndex>0</startIndex>
+  <totalResults>13</totalResults>
+  <itemsPerPage>13</itemsPerPage>
+  <isFiltered>false</isFiltered>
+  <isSorted>false</isSorted>
+  <isUpdatedSince>false</isUpdatedSince>
+  <entry>
+    <person>
+      <address></address>
+      <companyId>205433</companyId>
+      <connectedToId>0</connectedToId>
+      <displayName>Miss Vimal</displayName>
+      <emailAddress></emailAddress>
+      <id>na.collabserv.com:contact:992064</id>
+      <jobtitle>Software Engineer</jobtitle>
+      <org>
+        <name>lotuslive</name>
+      </org>
+      <orgs>
+        <ListField>
+          <type>Source</type>
+          <value>CONTACTS</value>
+        </ListField>
+        <ListField>
+          <type>Org</type>
+          <value>lotuslive</value>
+        </ListField>
+      </orgs>
+      <profileUrl>https://apps.na.collabserv.com/contacts/contacts/view/992064</profileUrl>
+      <type>CONTACT</type>
+      <updated serialization="custom">
+        <java.util.Date>
+          <java.lang.Long>1368720664000</java.lang.Long>
+        </java.util.Date>
+      </updated>
+      <website></website>
+      <websites/>
+    </person>
+  </entry>
+  <entry>
+    <person>
+      <address></address>
+      <companyId>200461</companyId>
+      <connectedToId>0</connectedToId>
+      <displayName>Anthony Anthony Newton Mr</displayName>
+      <emailAddress></emailAddress>
+      <id>na.collabserv.com:contact:964198</id>
+      <jobtitle></jobtitle>
+      <org>
+        <name>Renovations</name>
+      </org>
+      <orgs>
+        <ListField>
+          <type>Source</type>
+          <value>CONTACTS</value>
+        </ListField>
+        <ListField>
+          <type>Org</type>
+          <value>Renovations</value>
+        </ListField>
+      </orgs>
+      <profileUrl>https://apps.na.collabserv.com/contacts/contacts/view/964198</profileUrl>
+      <type>CONTACT</type>
+      <updated serialization="custom">
+        <java.util.Date>
+          <java.lang.Long>1363866394000</java.lang.Long>
+        </java.util.Date>
+      </updated>
+      <website></website>
+      <websites/>
+    </person>
+  </entry>
+  <entry>
+    <person>
+      <address></address>
+      <companyId>200893</companyId>
+      <connectedToId>0</connectedToId>
+      <displayName>TestContact Shade Testy Mr</displayName>
+      <emailAddress></emailAddress>
+      <id>na.collabserv.com:contact:966779</id>
+      <jobtitle>CEO</jobtitle>
+      <org>
+        <name>renovations Test Academy</name>
+      </org>
+      <orgs>
+        <ListField>
+          <type>Source</type>
+          <value>CONTACTS</value>
+        </ListField>
+        <ListField>
+          <type>Org</type>
+          <value>renovations Test Academy</value>
+        </ListField>
+      </orgs>
+      <profileUrl>https://apps.na.collabserv.com/contacts/contacts/view/966779</profileUrl>
+      <type>CONTACT</type>
+      <updated serialization="custom">
+        <java.util.Date>
+          <java.lang.Long>1364306683000</java.lang.Long>
+        </java.util.Date>
+      </updated>
+      <website></website>
+      <websites/>
+    </person>
+  </entry>
+  <entry>
+    <person>
+      <address>12 BSL, WK tower, NJ</address>
+      <addresses>
+        <type>Source</type>
+      </addresses>
+      <addresses>
+        <address>12 BSL, WK tower, NJ</address>
+        <title>Primary Address</title>
+      </addresses>
+      <companyId>206004</companyId>
+      <connectedToId>20548027</connectedToId>
+      <displayName>Alan Goodwin</displayName>
+      <emailAddress>alangoodwin@try.lotuslive.com</emailAddress>
+      <emails>
+        <type>Source</type>
+        <value>CONTACTS</value>
+      </emails>
+      <emails>
+        <email>alangoodwin@try.lotuslive.com</email>
+        <title>Primary Email</title>
+      </emails>
+      <id>na.collabserv.com:contact:966797</id>
+      <ims>
+        <type>Source</type>
+        <value>PROFILES</value>
+      </ims>
+      <jobtitle>Technical Sales Manager, WorldWide Team.</jobtitle>
+      <org>
+        <name>IBM Test - SDK Renovations</name>
+      </org>
+      <orgs>
+        <ListField>
+          <type>Source</type>
+          <value>CONTACTS</value>
+        </ListField>
+        <ListField>
+          <type>Org</type>
+          <value>IBM Test - SDK Renovations</value>
+        </ListField>
+      </orgs>
+      <phoneNumbers>
+        <type>Source</type>
+        <value>CONTACTS</value>
+      </phoneNumbers>
+      <phoneNumbers>
+        <phone>440-998-1234</phone>
+        <title>Primary Telephone</title>
+      </phoneNumbers>
+      <phoneNumbers>
+        <phone>+3388721928</phone>
+        <title>MobilePhone</title>
+      </phoneNumbers>
+      <photos>
+        <type>Source</type>
+        <value>PROFILES</value>
+      </photos>
+      <photos>
+        <type>Photo</type>
+        <value>20548027__1354513972.jpg</value>
+      </photos>
+      <profileUrl>https://apps.na.collabserv.com/contacts/contacts/view/966797</profileUrl>
+      <type>FRIEND</type>
+      <updated serialization="custom">
+        <java.util.Date>
+          <java.lang.Long>1364308078000</java.lang.Long>
+        </java.util.Date>
+      </updated>
+      <websites>
+        <url>
+          <type>Source</type>
+          <value>PROFILES</value>
+        </url>
+        <url>
+          <title>Website</title>
+          <website></website>
+        </url>
+        <url>
+          <title>Website</title>
+          <website></website>
+        </url>
+        <url>
+          <title>Website</title>
+          <website></website>
+        </url>
+        <url>
+          <website>https://www.ibm.com/developerworks/mydeveloperworks/groups/service/html/communityview?communityUuid=0f357879-ccee-4927-98c1-7bb88d5dc81f</website>
+        </url>
+      </websites>
+    </person>
+  </entry>
+  <entry>
+    <person>
+      <addresses>
+        <type>Source</type>
+      </addresses>
+      <companyId>0</companyId>
+      <connectedToId>20548026</connectedToId>
+      <displayName>Bhavesh Shah</displayName>
+      <emailAddress>bhaveshshah@try.lotuslive.com</emailAddress>
+      <emails>
+        <type>Source</type>
+        <value>CONTACTS</value>
+      </emails>
+      <emails>
+        <email>bhaveshshah@try.lotuslive.com</email>
+        <title>Primary Email</title>
+      </emails>
+      <id>na.collabserv.com:contact:966798</id>
+      <ims>
+        <type>Source</type>
+        <value>PROFILES</value>
+      </ims>
+      <jobtitle></jobtitle>
+      <orgs>
+        <ListField>
+          <type>Source</type>
+          <value>PROFILES</value>
+        </ListField>
+        <ListField>
+          <type>Org</type>
+          <value>IBM Test - SDK Renovations</value>
+        </ListField>
+      </orgs>
+      <phoneNumbers>
+        <type>Source</type>
+        <value>PROFILES</value>
+      </phoneNumbers>
+      <photos>
+        <type>Source</type>
+        <value>PROFILES</value>
+      </photos>
+      <profileUrl>https://apps.na.collabserv.com/contacts/contacts/view/966798</profileUrl>
+      <type>CONTACT</type>
+      <updated serialization="custom">
+        <java.util.Date>
+          <java.lang.Long>1364308081000</java.lang.Long>
+        </java.util.Date>
+      </updated>
+      <websites>
+        <url>
+          <type>Source</type>
+          <value>PROFILES</value>
+        </url>
+      </websites>
+    </person>
+  </entry>
+  <entry>
+    <person>
+      <address>Street Number 4, Westford, United States</address>
+      <addresses>
+        <type>Source</type>
+      </addresses>
+      <addresses>
+        <address>Street Number 4, Westford, United States</address>
+        <title>Primary Address</title>
+      </addresses>
+      <companyId>0</companyId>
+      <connectedToId>20548041</connectedToId>
+      <displayName>Edgar Burnett</displayName>
+      <emailAddress>edgarburnett@try.lotuslive.com</emailAddress>
+      <emails>
+        <type>Source</type>
+        <value>CONTACTS</value>
+      </emails>
+      <emails>
+        <email>edgarburnett@try.lotuslive.com</email>
+        <title>Primary Email</title>
+      </emails>
+      <id>na.collabserv.com:contact:966799</id>
+      <ims>
+        <type>Source</type>
+        <value>PROFILES</value>
+      </ims>
+      <jobtitle>Technical Architect</jobtitle>
+      <orgs>
+        <ListField>
+          <type>Source</type>
+          <value>PROFILES</value>
+        </ListField>
+        <ListField>
+          <type>Org</type>
+          <value>IBM Test - SDK Renovations</value>
+        </ListField>
+      </orgs>
+      <phoneNumbers>
+        <type>Source</type>
+        <value>CONTACTS</value>
+      </phoneNumbers>
+      <phoneNumbers>
+        <phone>0234-234534</phone>
+        <title>Primary Telephone</title>
+      </phoneNumbers>
+      <photos>
+        <type>Source</type>
+        <value>PROFILES</value>
+      </photos>
+      <photos>
+        <type>Photo</type>
+        <value>20548041__1354707649.jpg</value>
+      </photos>
+      <profileUrl>https://apps.na.collabserv.com/contacts/contacts/view/966799</profileUrl>
+      <type>CONTACT</type>
+      <updated serialization="custom">
+        <java.util.Date>
+          <java.lang.Long>1364308083000</java.lang.Long>
+        </java.util.Date>
+      </updated>
+      <websites>
+        <url>
+          <type>Source</type>
+          <value>PROFILES</value>
+        </url>
+        <url>
+          <title>Website</title>
+          <website></website>
+        </url>
+        <url>
+          <title>Website</title>
+          <website></website>
+        </url>
+        <url>
+          <title>Website</title>
+          <website></website>
+        </url>
+      </websites>
+    </person>
+  </entry>
+  <entry>
+    <person>
+      <addresses>
+        <type>Source</type>
+      </addresses>
+      <companyId>0</companyId>
+      <connectedToId>20180530</connectedToId>
+      <displayName>Philippe Riand</displayName>
+      <emailAddress>phil@riand.com</emailAddress>
+      <emails>
+        <type>Source</type>
+        <value>CONTACTS</value>
+      </emails>
+      <emails>
+        <email>phil@riand.com</email>
+        <title>Primary Email</title>
+      </emails>
+      <id>na.collabserv.com:contact:966800</id>
+      <ims>
+        <type>Source</type>
+        <value>PROFILES</value>
+      </ims>
+      <jobtitle></jobtitle>
+      <orgs>
+        <ListField>
+          <type>Source</type>
+          <value>PROFILES</value>
+        </ListField>
+        <ListField>
+          <type>Org</type>
+          <value>IBM Test - SDK Renovations</value>
+        </ListField>
+      </orgs>
+      <phoneNumbers>
+        <type>Source</type>
+        <value>PROFILES</value>
+      </phoneNumbers>
+      <photos>
+        <type>Source</type>
+        <value>PROFILES</value>
+      </photos>
+      <profileUrl>https://apps.na.collabserv.com/contacts/contacts/view/966800</profileUrl>
+      <type>CONTACT</type>
+      <updated serialization="custom">
+        <java.util.Date>
+          <java.lang.Long>1364308084000</java.lang.Long>
+        </java.util.Date>
+      </updated>
+      <websites>
+        <url>
+          <type>Source</type>
+          <value>PROFILES</value>
+        </url>
+      </websites>
+    </person>
+  </entry>
+  <entry>
+    <person>
+      <country>US</country>
+      <displayName>Bhavesh Shah</displayName>
+      <emailAddress>bhaveshshah@try.lotuslive.com</emailAddress>
+      <emails>
+        <type>Source</type>
+        <value>PROFILES</value>
+      </emails>
+      <emails>
+        <email>bhaveshshah@try.lotuslive.com</email>
+        <title>Primary Email</title>
+      </emails>
+      <fullName>Bhavesh Shah</fullName>
+      <id>na.collabserv.com:user:20548026</id>
+      <ims>
+        <type>Source</type>
+        <value>PROFILES</value>
+      </ims>
+      <org>
+        <name>IBM Test - SDK Renovations</name>
+      </org>
+      <orgId>20542369</orgId>
+      <photos>
+        <type>Source</type>
+        <value>PROFILES</value>
+      </photos>
+      <profileUrl>https://apps.na.collabserv.com/contacts/profiles/view/20548026</profileUrl>
+      <type>COWORKER</type>
+      <websites/>
+    </person>
+  </entry>
+  <entry>
+    <person>
+      <country>US</country>
+      <displayName>Philippe Riand</displayName>
+      <emailAddress>phil@riand.com</emailAddress>
+      <emails>
+        <type>Source</type>
+        <value>PROFILES</value>
+      </emails>
+      <emails>
+        <email>phil@riand.com</email>
+        <title>Primary Email</title>
+      </emails>
+      <fullName>Philippe Riand</fullName>
+      <id>na.collabserv.com:user:20180530</id>
+      <ims>
+        <type>Source</type>
+        <value>PROFILES</value>
+      </ims>
+      <org>
+        <name>IBM Test - SDK Renovations</name>
+      </org>
+      <orgId>20542369</orgId>
+      <photos>
+        <type>Source</type>
+        <value>PROFILES</value>
+      </photos>
+      <profileUrl>https://apps.na.collabserv.com/contacts/profiles/view/20180530</profileUrl>
+      <type>COWORKER</type>
+      <websites/>
+    </person>
+  </entry>
+  <entry>
+    <person>
+      <aboutMe>I am Shane Sloan. This is About Me.</aboutMe>
+      <address>EFG Building</address>
+      <addresses>
+        <type>Source</type>
+      </addresses>
+      <addresses>
+        <address>3rd Floor</address>
+        <title>Address</title>
+      </addresses>
+      <addresses>
+        <address></address>
+        <title>Address</title>
+      </addresses>
+      <addresses>
+        <address></address>
+        <title>Address</title>
+      </addresses>
+      <addresses>
+        <address>EFG Building</address>
+        <title>Primary Address</title>
+      </addresses>
+      <country>US</country>
+      <displayName>Shane Sloan</displayName>
+      <emailAddress>shanesloan@try.lotuslive.com</emailAddress>
+      <emails>
+        <type>Source</type>
+        <value>PROFILES</value>
+      </emails>
+      <emails>
+        <email>shanesloan@try.lotuslive.com</email>
+        <title>Primary Email</title>
+      </emails>
+      <fullName>Shane Sloan</fullName>
+      <id>na.collabserv.com:user:20548038</id>
+      <ims>
+        <type>Source</type>
+        <value>PROFILES</value>
+      </ims>
+      <jobtitle>Software Engineer</jobtitle>
+      <mobilephone>832423989832</mobilephone>
+      <org>
+        <name>IBM Test - SDK Renovations</name>
+      </org>
+      <orgId>20542369</orgId>
+      <phoneNumbers>
+        <type>Source</type>
+        <value>PROFILES</value>
+      </phoneNumbers>
+      <phoneNumbers>
+        <phone></phone>
+        <title>Telephone</title>
+      </phoneNumbers>
+      <phoneNumbers>
+        <phone></phone>
+        <title>Telephone</title>
+      </phoneNumbers>
+      <phoneNumbers>
+        <phone></phone>
+        <title>Telephone</title>
+      </phoneNumbers>
+      <phoneNumbers>
+        <phone>2132932484</phone>
+        <title>Primary Telephone</title>
+      </phoneNumbers>
+      <phoneNumbers>
+        <phone>832423989832</phone>
+        <title>MobilePhone</title>
+      </phoneNumbers>
+      <photo>20548038__1354707587.jpg</photo>
+      <photos>
+        <type>Source</type>
+        <value>PROFILES</value>
+      </photos>
+      <photos>
+        <type>Photo</type>
+        <value>20548038__1354707587.jpg</value>
+      </photos>
+      <profileUrl>https://apps.na.collabserv.com/contacts/profiles/view/20548038</profileUrl>
+      <telephone>2132932484</telephone>
+      <type>COWORKER</type>
+      <websites>
+        <url>
+          <type>Source</type>
+          <value>PROFILES</value>
+        </url>
+        <url>
+          <title>Website</title>
+          <website></website>
+        </url>
+        <url>
+          <title>Website</title>
+          <website></website>
+        </url>
+        <url>
+          <title>Website</title>
+          <website></website>
+        </url>
+      </websites>
+    </person>
+  </entry>
+  <entry>
+    <person>
+      <aboutMe>I work as a technical architect.</aboutMe>
+      <address>Street Number 4, Westford, United States</address>
+      <addresses>
+        <type>Source</type>
+      </addresses>
+      <addresses>
+        <address></address>
+        <title>Address</title>
+      </addresses>
+      <addresses>
+        <address></address>
+        <title>Address</title>
+      </addresses>
+      <addresses>
+        <address></address>
+        <title>Address</title>
+      </addresses>
+      <addresses>
+        <address>Street Number 4, Westford, United States</address>
+        <title>Primary Address</title>
+      </addresses>
+      <country>US</country>
+      <displayName>Edgar Burnett</displayName>
+      <emailAddress>edgarburnett@try.lotuslive.com</emailAddress>
+      <emails>
+        <type>Source</type>
+        <value>PROFILES</value>
+      </emails>
+      <emails>
+        <email>edgarburnett@try.lotuslive.com</email>
+        <title>Primary Email</title>
+      </emails>
+      <fullName>Edgar Burnett</fullName>
+      <id>na.collabserv.com:user:20548041</id>
+      <ims>
+        <type>Source</type>
+        <value>PROFILES</value>
+      </ims>
+      <jobtitle>Technical Architect</jobtitle>
+      <org>
+        <name>IBM Test - SDK Renovations</name>
+      </org>
+      <orgId>20542369</orgId>
+      <phoneNumbers>
+        <type>Source</type>
+        <value>PROFILES</value>
+      </phoneNumbers>
+      <phoneNumbers>
+        <phone></phone>
+        <title>Telephone</title>
+      </phoneNumbers>
+      <phoneNumbers>
+        <phone></phone>
+        <title>Telephone</title>
+      </phoneNumbers>
+      <phoneNumbers>
+        <phone></phone>
+        <title>Telephone</title>
+      </phoneNumbers>
+      <phoneNumbers>
+        <phone>0234-234534</phone>
+        <title>Primary Telephone</title>
+      </phoneNumbers>
+      <photo>20548041__1354707649.jpg</photo>
+      <photos>
+        <type>Source</type>
+        <value>PROFILES</value>
+      </photos>
+      <photos>
+        <type>Photo</type>
+        <value>20548041__1354707649.jpg</value>
+      </photos>
+      <profileUrl>https://apps.na.collabserv.com/contacts/profiles/view/20548041</profileUrl>
+      <telephone>0234-234534</telephone>
+      <type>COWORKER</type>
+      <websites>
+        <url>
+          <type>Source</type>
+          <value>PROFILES</value>
+        </url>
+        <url>
+          <title>Website</title>
+          <website></website>
+        </url>
+        <url>
+          <title>Website</title>
+          <website></website>
+        </url>
+        <url>
+          <title>Website</title>
+          <website></website>
+        </url>
+      </websites>
+    </person>
+  </entry>
+  <entry>
+    <person>
+      <aboutMe>I have worked on WPS, WAS fpr 4 years and now working with Social colaboration</aboutMe>
+      <address>32, 2nd street</address>
+      <addresses>
+        <type>Source</type>
+      </addresses>
+      <addresses>
+        <address>NY</address>
+        <title>Address</title>
+      </addresses>
+      <addresses>
+        <address></address>
+        <title>Address</title>
+      </addresses>
+      <addresses>
+        <address></address>
+        <title>Address</title>
+      </addresses>
+      <addresses>
+        <address>32, 2nd street</address>
+        <title>Primary Address</title>
+      </addresses>
+      <country>US</country>
+      <displayName>Shankar Vakil</displayName>
+      <emailAddress>shankarvakil@try.lotuslive.com</emailAddress>
+      <emails>
+        <type>Source</type>
+        <value>PROFILES</value>
+      </emails>
+      <emails>
+        <email>shankarvakil@try.lotuslive.com</email>
+        <title>Primary Email</title>
+      </emails>
+      <fullName>Shankar Vakil</fullName>
+      <id>na.collabserv.com:user:20548043</id>
+      <ims>
+        <type>Source</type>
+        <value>PROFILES</value>
+      </ims>
+      <jobtitle>Senior Software Engineer</jobtitle>
+      <org>
+        <name>IBM Test - SDK Renovations</name>
+      </org>
+      <orgId>20542369</orgId>
+      <phoneNumbers>
+        <type>Source</type>
+        <value>PROFILES</value>
+      </phoneNumbers>
+      <phoneNumbers>
+        <phone>9443823824</phone>
+        <title>Mobile</title>
+      </phoneNumbers>
+      <phoneNumbers>
+        <phone></phone>
+        <title>Telephone</title>
+      </phoneNumbers>
+      <phoneNumbers>
+        <phone></phone>
+        <title>Telephone</title>
+      </phoneNumbers>
+      <phoneNumbers>
+        <phone>1432 324223423</phone>
+        <title>Primary Telephone</title>
+      </phoneNumbers>
+      <photo>20548043__1354598295.jpg</photo>
+      <photos>
+        <type>Source</type>
+        <value>PROFILES</value>
+      </photos>
+      <photos>
+        <type>Photo</type>
+        <value>20548043__1354598295.jpg</value>
+      </photos>
+      <profileUrl>https://apps.na.collabserv.com/contacts/profiles/view/20548043</profileUrl>
+      <telephone>1432 324223423</telephone>
+      <type>COWORKER</type>
+      <websites>
+        <url>
+          <type>Source</type>
+          <value>PROFILES</value>
+        </url>
+        <url>
+          <title>Website</title>
+          <website></website>
+        </url>
+        <url>
+          <title>Website</title>
+          <website></website>
+        </url>
+        <url>
+          <title>Website</title>
+          <website></website>
+        </url>
+      </websites>
+    </person>
+  </entry>
+  <entry>
+    <person>
+      <country>US</country>
+      <displayName>Sdk Administrator</displayName>
+      <emailAddress>sdkadmin@try.lotuslive.com</emailAddress>
+      <emails>
+        <type>Source</type>
+        <value>PROFILES</value>
+      </emails>
+      <emails>
+        <email>sdkadmin@try.lotuslive.com</email>
+        <title>Primary Email</title>
+      </emails>
+      <fullName>Sdk Administrator</fullName>
+      <id>na.collabserv.com:user:20545390</id>
+      <ims>
+        <type>Source</type>
+        <value>PROFILES</value>
+      </ims>
+      <org>
+        <name>IBM Test - SDK Renovations</name>
+      </org>
+      <orgId>20542369</orgId>
+      <photos>
+        <type>Source</type>
+        <value>PROFILES</value>
+      </photos>
+      <profileUrl>https://apps.na.collabserv.com/contacts/profiles/view/20545390</profileUrl>
+      <type>COWORKER</type>
+      <websites/>
+    </person>
+  </entry>
+</response>

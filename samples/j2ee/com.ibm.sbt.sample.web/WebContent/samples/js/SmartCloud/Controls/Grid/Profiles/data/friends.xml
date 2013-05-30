@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<response xmlns="http://ns.opensocial.org/2008/opensocial">
+  <startIndex>0</startIndex>
+  <totalResults>1</totalResults>
+  <itemsPerPage>1</itemsPerPage>
+  <isFiltered>false</isFiltered>
+  <isSorted>false</isSorted>
+  <isUpdatedSince>false</isUpdatedSince>
+  <entry>
+    <person>
+      <address>12 BSL, WK tower, NJ</address>
+      <addresses>
+        <type>Source</type>
+      </addresses>
+      <addresses>
+        <address>12 BSL, WK tower, NJ</address>
+        <title>Primary Address</title>
+      </addresses>
+      <companyId>206004</companyId>
+      <connectedToId>20548027</connectedToId>
+      <displayName>Alan Goodwin</displayName>
+      <emailAddress>alangoodwin@try.lotuslive.com</emailAddress>
+      <emails>
+        <type>Source</type>
+        <value>CONTACTS</value>
+      </emails>
+      <emails>
+        <email>alangoodwin@try.lotuslive.com</email>
+        <title>Primary Email</title>
+      </emails>
+      <id>na.collabserv.com:contact:966797</id>
+      <ims>
+        <type>Source</type>
+        <value>PROFILES</value>
+      </ims>
+      <jobtitle>Technical Sales Manager, WorldWide Team.</jobtitle>
+      <org>
+        <name>IBM Test - SDK Renovations</name>
+      </org>
+      <orgs>
+        <ListField>
+          <type>Source</type>
+          <value>CONTACTS</value>
+        </ListField>
+        <ListField>
+          <type>Org</type>
+          <value>IBM Test - SDK Renovations</value>
+        </ListField>
+      </orgs>
+      <phoneNumbers>
+        <type>Source</type>
+        <value>CONTACTS</value>
+      </phoneNumbers>
+      <phoneNumbers>
+        <phone>440-998-1234</phone>
+        <title>Primary Telephone</title>
+      </phoneNumbers>
+      <phoneNumbers>
+        <phone>+3388721928</phone>
+        <title>MobilePhone</title>
+      </phoneNumbers>
+      <photos>
+        <type>Source</type>
+        <value>PROFILES</value>
+      </photos>
+      <photos>
+        <type>Photo</type>
+        <value>20548027__1354513972.jpg</value>
+      </photos>
+      <profileUrl>https://apps.na.collabserv.com/contacts/contacts/view/966797</profileUrl>
+      <type>FRIEND</type>
+      <updated serialization="custom">
+        <java.util.Date>
+          <java.lang.Long>1364308078000</java.lang.Long>
+        </java.util.Date>
+      </updated>
+      <websites>
+        <url>
+          <type>Source</type>
+          <value>PROFILES</value>
+        </url>
+        <url>
+          <title>Website</title>
+          <website></website>
+        </url>
+        <url>
+          <title>Website</title>
+          <website></website>
+        </url>
+        <url>
+          <title>Website</title>
+          <website></website>
+        </url>
+        <url>
+          <website>https://www.ibm.com/developerworks/mydeveloperworks/groups/service/html/communityview?communityUuid=0f357879-ccee-4927-98c1-7bb88d5dc81f</website>
+        </url>
+      </websites>
+    </person>
+  </entry>
+</response>

@@ -23,8 +23,11 @@ import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.RuntimeFactory;
 import com.ibm.commons.runtime.impl.app.RuntimeFactoryStandalone;
 import com.ibm.commons.xml.DOMUtil;
+import com.ibm.commons.xml.XMLException;
+import com.ibm.sbt.security.authentication.AuthenticationException;
 import com.ibm.sbt.services.client.ClientService;
-import com.ibm.sbt.services.endpoints.Endpoint;
+import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.endpoints.BasicEndpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
 
 /**
@@ -33,27 +36,54 @@ import com.ibm.sbt.services.endpoints.EndpointFactory;
  */
 public class GetProfileXml {
 
+    private RuntimeFactory runtimeFactory;
+    private Context context;
+    private Application application;
+    private BasicEndpoint endpoint;
+    
+    public void init() throws AuthenticationException{
+        runtimeFactory = new RuntimeFactoryStandalone();
+        application = runtimeFactory.initApplication(null);
+        context = Context.init(application, null, null);
+        endpoint = (BasicEndpoint)EndpointFactory.getEndpoint("connections");
+    }
+    
+    public void destroy(){
+        if (context != null)
+            Context.destroy(context);
+        if (application != null)
+            Application.destroy(application);
+    }
+    
+    public String getProfileXml() throws ClientServicesException, XMLException{
+        String profileUrl = "profiles/atom/profile.do";
+        Map<String, String> parameters = new HashMap<String, String>();
+        parameters.put("email", "FrankAdams@renovations.com");
+        Object result = endpoint.xhrGet(profileUrl, parameters, ClientService.FORMAT_XML);
+        String xml = DOMUtil.getXMLString((Node)result);
+        return xml;
+    }
+    
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		RuntimeFactory runtimeFactory = new RuntimeFactoryStandalone();
-		Application application = runtimeFactory.initApplication(null);
-		Context context = Context.init(application, null, null);
+	    GetProfileXml app = new GetProfileXml();
+	    try {
+            app.init();
+            String xml = app.getProfileXml();
+            System.out.println(xml);
+        } catch (AuthenticationException e) {
+            e.printStackTrace();
+        } catch (ClientServicesException e) {
+            e.printStackTrace();
+        } catch (XMLException e) {
+            e.printStackTrace();
+        } finally {
+            app.destroy();
+        }
+		
 
-		try {
-			Endpoint endpoint = EndpointFactory.getEndpoint("connections");
-			String profileUrl = "profiles/atom/profile.do";
-			Map<String, String> parameters = new HashMap<String, String>();
-			parameters.put("email", "FrankAdams@renovations.com");
-			Object result = endpoint.xhrGet(profileUrl, parameters, ClientService.FORMAT_XML);
-			String xml = DOMUtil.getXMLString((Node)result);
-			System.out.println(xml);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		Context.destroy(context);
-		Application.destroy(application);
+		
 	}
 }

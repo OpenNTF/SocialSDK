@@ -17,8 +17,8 @@
 /**
  * @module sbt.connections.controls.ViewAllAction
  */
-define([ "../../declare", "../../controls/grid/GridAction", "dojo/string" ], 
-        function(declare, GridAction, string) {
+define([ "../../declare", "../../controls/grid/GridAction" ], 
+        function(declare, GridAction) {
 
     /**
      * @class sbt.connections.controls.ViewAllAction

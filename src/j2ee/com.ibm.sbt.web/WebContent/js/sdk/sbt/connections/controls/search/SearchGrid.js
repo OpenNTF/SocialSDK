@@ -17,14 +17,13 @@
 /**
  * 
  */
-define([ "sbt/declare", 
-         "sbt/controls/grid/Grid", 
-         "sbt/controls/grid/connections/SearchGridRenderer", 
-         "sbt/store/AtomStore", 
-         "sbt/config", 
-         "dojo/string", 
-         "sbt/connections/SearchConstants"], 
-        function(declare, Grid, SearchGridRenderer, AtomStore, sbt, string, SearchConstants) {
+define([ "../../../declare", 
+         "../../../config", 
+         "../../../controls/grid/Grid", 
+         "./SearchGridRenderer", 
+         "../../../store/AtomStore", 
+         "../../SearchConstants"], 
+        function(declare, sbt, Grid, SearchGridRenderer, AtomStore, SearchConstants) {
 
 	// TODO use values from constants and handle authType
 	var searchUrls = {

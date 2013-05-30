@@ -16,62 +16,48 @@
 
 /**
  * 
- * @module sbt.connections.controls.profiles.ProfileGrid
+ * @module sbt.smartcloud.controls.profiles.ProfileGrid
  */
 define([ "../../../declare", 
-		 "../../../controls/grid/Grid", 
-		 "../../../connections/controls/profiles/ProfileGridRenderer", 
-		 "../../../connections/controls/profiles/ProfileAction", 
-		 "../../../connections/controls/vcard/SemanticTagService", 
 		 "../../../config",
+		 "../../../controls/grid/Grid", 
+		 "./ProfileGridRenderer", 
+		 "./ProfileAction", 
 		 "../../../store/parameter",
-		 "../../../connections/ProfileConstants"], 
-        function(declare, Grid, ProfileGridRenderer, ProfileAction, SemanticTagService, sbt, parameter) {
+		 "../../ProfileConstants"], 
+    function(declare, sbt, Grid, ProfileGridRenderer, ProfileAction, parameter, ProfileConstants) {
 
-	// TODO use values from constants and handle authType
-	var profileUrls = {
-	    profile : "/profiles/atom/profile.do", 
-        reportingChain : "/profiles/atom/reportingChain.do?outputType=profile&format=full", 
-        colleagues: "/profiles/atom/connections.do?connectionType=colleague&outputType=profile&format=full" , 
-        peopleManaged: "/profiles/atom/peopleManaged.do",
-        statusUpdates: "/profiles/atom/mv/theboard/entries.do?outputType=profile&format=full",
-        connectionsInCommon: "/profiles/atom/connectionsInCommon.do?connectionType=colleague&outputType=profile&format=full"
+	var ProfileXPath = {
+        id : "o:person/o:id",
+	 	entry : "/o:response/o:entry",
+		uid : "o:person/o:id",
+		name : "o:person/o:displayName",
+		email : "o:person/o:emailAddress",
+		title : "o:person/o:jobtitle",
+		profileUrl : "o:person/o:profileUrl",
+		orgName : "o:person/o:org/o:name",
+		address : "o:person/o:address",
+		phoneNumbers : "o:person/o:phoneNumbers/o:phone",
+		photos : "o:person/o:photos/o:value"
 	};
 	
-	var xpath_profile = {
-        "id":               "a:id",
-	 	"entry":			"/a:feed/a:entry",
-		"uid":				"a:contributor/snx:userid",
-		"name":				"a:contributor/a:name",
-		"email":            "a:contributor/a:email",
-		"title":            "a:title",
-		"statusUpdate":     "a:title[@type='text']",
-		"statusLastUpdate": "a:updated",
-		"altEmail":         "a:content/h:div/h:span/h:div[@class='x-groupwareMail']",
-		"photo":			"a:link[@rel='http://www.ibm.com/xmlns/prod/sn/image']/@href",			
-		"jobTitle":			"a:content/h:div/h:span/h:div[@class='title']",
-		"organizationUnit":	"a:content/h:div/h:span/h:div[@class='org']/h:span[@class='organization-unit']",
-		"fnUrl":			"a:content/h:div/h:span/h:div/h:a[@class='fn url']/@href",			
-		"telephoneNumber":	"a:content/h:div/h:span/h:div[@class='tel']/h:span[@class='value']",			
-		"bldgId":			"a:content/h:div/h:span/h:div/h:span[@class='x-building']",			
-		"floor":			"a:content/h:div/h:span/h:div/h:span[@class='x-floor']",
-		"streetAddress":	"a:content/h:div/h:span/h:div/h:div[@class='street-address']",
-		"extendedAddress":	"a:content/h:div/h:span/h:div/h:div[@class='extended-address x-streetAddress2']",
-		"locality":			"a:content/h:div/h:span/h:div/h:span[@class='locality']",
-		"postalCode":		"a:content/h:div/h:span/h:div/h:span[@class='postal-code']",
-		"region":			"a:content/h:div/h:span/h:div/h:span[@class='region']",
-		"countryName":		"a:content/h:div/h:span/h:div/h:div[@class='country-name']",			
-		"soundUrl":			"a:content/h:div/h:span/h:div/h:a[@class='sound url']/@href",	
-		"summary":			"a:summary",
-		"groupwareMail":	"a:content/h:div/h:span/h:div[@class='x-groupwareMail']",				
-		"networkProfileId":	"snx:connection/a:contributor[@snx:rel='http://www.ibm.com/xmlns/prod/sn/connection/target']/snx:userid",
-		"networkProfileName":	"snx:connection/a:contributor[@snx:rel='http://www.ibm.com/xmlns/prod/sn/connection/target']/a:name",
-		"networkProfileEmail":	"snx:connection/a:contributor[@snx:rel='http://www.ibm.com/xmlns/prod/sn/connection/target']/a:email",
-        "totalResults"      :"/a:feed/opensearch:totalResults",
-        "startIndex"        :"/a:feed/opensearch:startIndex",
-        "itemsPerPage"      :"/a:feed/opensearch:itemsPerPage"
+	var FeedXPath = {
+        "entry" : "/o:response/o:entry",
+        "entries" : "/o:response/o:entry",
+        "totalResults" : "/o:response/o:totalResults",
+        "startIndex" : "/o:response/o:startIndex",
+        "itemsPerPage" : "/o:response/o:itemsPerPage"
 	};
-
+	
+	var Namespaces = {
+		o : "http://ns.opensocial.org/2008/opensocial"
+	};
+	
+	var ParamSchema = {
+        startIndex : parameter.zeroBasedInteger("startIndex"),
+        pageSize : parameter.oneBasedInteger("count")
+    };
+	
     /**
      * @class ProfileGrid
      * @namespace sbt.connections.controls.profiles
@@ -85,64 +71,30 @@ define([ "../../../declare",
     	 * the atom store and grid renderer.
     	 */
         options : {
-            "reportingChain" : {
+            "contacts" : {
                 storeArgs : {
-                    url : profileUrls.reportingChain,
-                    attributes : xpath_profile,
-                    paramSchema: parameter.profiles.all
+                    url : ProfileConstants.GetMyContacts,
+                    attributes : ProfileXPath,
+                    paramSchema : ParamSchema,
+                    feedXPath : FeedXPath,
+                    namespaces : Namespaces
                 },
                 rendererArgs : {
-                    type : "profile"
+                    type : "contacts"
                 }
             },
-            "profile" : {
-                storeArgs : {
-                    url : profileUrls.profile,
-                    attributes : xpath_profile,
-                    paramSchema: parameter.profiles.all
-                },
-                rendererArgs : {
-                    type : "profile"
-                }
-            },
-            "colleagues" : {
-                storeArgs : {
-                     url : profileUrls.colleagues,
-                    attributes : xpath_profile,
-                    paramSchema: parameter.profiles.all
-                },
-                rendererArgs : {
-                    type : "profile"
-                }
-            },
-            "peopleManaged" : {
-                storeArgs : {
-                    url : profileUrls.peopleManaged,
-                    attributes : xpath_profile,
-                    paramSchema: parameter.profiles.all
-                },
-                rendererArgs : {
-                    type : "profile"
-                }
-            },
-            "connectionsInCommon" : {
-                storeArgs : {
-                    url : profileUrls.connectionsInCommon,
-                    attributes : xpath_profile,
-                    paramSchema: parameter.profiles.all
-                },
-                rendererArgs : {
-                    type : "profile"
-                }
-            },
-            "dynamic" : {
-                storeArgs : {
-                    attributes : xpath_profile
-                },
-                rendererArgs : {
-                    type : "profile"
-                }
-            }
+        	"friends" : {
+	            storeArgs : {
+	                url : ProfileConstants.GetMyConnections,
+	                attributes : ProfileXPath,
+	                paramSchema : ParamSchema,
+	                feedXPath : FeedXPath,
+	                namespaces : Namespaces
+	            },
+	            rendererArgs : {
+	                type : "friends"
+	            }
+	        }
         },
         
         /**
@@ -156,36 +108,13 @@ define([ "../../../declare",
          * This is the default grid that will be created if no 
          * arguments are given.
          */
-        defaultOption: "colleagues",
+        defaultOption: "contacts",
         
         /**Constructor function
          * @method constructor
          * */
         constructor: function(args){
-        	
-        	if(args.type == "peopleManaged" || args.type == "reportingChain" || args.type == "profile"){
-        		this.hideSorter = true;
-        	}
-        	
-            var nls = this.renderer.nls;
-            this._sortInfo = {
-                displayName: { 
-                    title: nls.displayName, 
-                    sortMethod: "sortByDisplayName",
-                    sortParameter: "displayName" 
-                },
-                recent: {
-                	title: nls.recent, 
-                    sortMethod: "sortByRecent",
-                    sortParameter: "recent"   
-                }
-               
-            };
-
-            this._activeSortAnchor = this._sortInfo.recent;
-            this._activeSortIsDesc = false;
         },
-        
         
         /**
          * Creates an instance of an AtomStore
@@ -199,8 +128,6 @@ define([ "../../../declare",
                 return null;
             }
             
-            args.url = this._buildUrl(args.url);
-
             return this.inherited(arguments);
         },
         
@@ -213,8 +140,6 @@ define([ "../../../declare",
          */
         postCreate: function() {        	
         	this.inherited(arguments);
-        	
-        	SemanticTagService.loadSemanticTagService();
         },
         
         /**
@@ -245,52 +170,22 @@ define([ "../../../declare",
                 
                 this.profileAction.execute(data, { grid : this.grid }, ev);
             }
-        },
-        
-        /**
-         * @method getSortInfo
-         * @returns A list of strings that describe how the grid can be sorted
-         * for profile grids these strings are "Display Name" and "Recent"
-         */
-        getSortInfo: function() {
-        	return {
-                active: {
-                    anchor: this._activeSortAnchor,
-                    isDesc: this._activeSortIsDesc
-                },
-                list: [this._sortInfo.displayName, this._sortInfo.recent]
-            };
-        },
-                
-        sortByDisplayName: function(el, data, ev){
-        	this._sort("displayName", true, el, data, ev);
-        },
-
-        sortByRecent: function(el, data, ev){
-        	this._sort("recent", true, el, data, ev);
-        },
+        },        
 
         // Internals
-        _buildUrl: function(url) {
-            if (url.indexOf("?") < 0) {
-                url += "?";
-            } else {
-                url += "&";
-            }
-            
-            if (this.email) {
-                url += "email=" + this.email;
-            } else if (this.email1 && this.email2) {
-                url += "email=" + this.email1 + "," + this.email2;
-            } else if (this.userid) {
-                url += "userid=" + this.userid;
-            } else if (this.userid1 && this.userid2) {
-                url += "userid=" + this.userid1 + "," + this.userid2;
-            }
-
-            return url;
-        }
-
+        
+        /*
+         * Override to change count if needed
+         */
+        _doQuery: function(store, options) {
+        	// OpenSocial API doesn't like requests for more than is available
+        	if (options && options.total) {
+        		options.count = Math.min(options.count, options.total - options.start);
+        	}
+        	
+        	this.inherited(arguments);
+        },
+        
     });
 
     return ProfileGrid;

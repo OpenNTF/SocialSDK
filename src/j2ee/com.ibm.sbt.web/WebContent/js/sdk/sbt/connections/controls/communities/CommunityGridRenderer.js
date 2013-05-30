@@ -77,6 +77,14 @@ define(["../../../declare", "../../../stringUtil", "../../../i18n", "../../../la
              }
          },
          
+         /**
+          * Handles encoding the image url
+          * @param grid The grid Element
+          * @param item An Object containing all of the data for the current row
+          * @param i the number of the current grid row
+          * @param items an object array containing the data for all of the grid rows
+          * @returns The image url
+          */
          communityImage: function(grid, item, i, items) {
         	 var logoUrl = item.getValue("logoUrl");
              return grid.encodeImageUrl(logoUrl);

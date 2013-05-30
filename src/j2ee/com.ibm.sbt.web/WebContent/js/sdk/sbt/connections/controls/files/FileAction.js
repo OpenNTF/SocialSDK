@@ -17,8 +17,8 @@
 /**
  * 
  */
-define([ "../../../declare", "../../../controls/grid/GridAction", "dojo/string" ], 
-        function(declare, GridAction, string) {
+define([ "../../../declare", "../../../stringUtil", "../../../controls/grid/GridAction" ], 
+        function(declare, stringUtil, GridAction) {
 
     /**
      * @class FileAction
@@ -44,7 +44,7 @@ define([ "../../../declare", "../../../controls/grid/GridAction", "dojo/string" 
          * @return A String, with the text to be displayed in the elements tooltip
          * */
         getTooltip: function(item) {
-        	return string.substitute(this.nls.tooltip, { title : item.getValue("title") });
+        	return stringUtil.replace(this.nls.tooltip, { title : item.getValue("title") });
         },
         
         /**
@@ -56,7 +56,7 @@ define([ "../../../declare", "../../../controls/grid/GridAction", "dojo/string" 
          * @param event the event
          */
         execute: function(item, opts, event) {
-          window.open(item.getValue("fileUrl"));
+        	window.open(item.getValue("fileUrl"));
         }
 
     });

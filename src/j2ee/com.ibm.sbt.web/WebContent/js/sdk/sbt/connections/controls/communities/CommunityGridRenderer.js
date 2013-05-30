@@ -17,12 +17,12 @@
 /**
  * @module sbt.connections.controls.communities.CommunityGridRenderer
  */
-define(["../../../declare", "../../../connections/controls/ConnectionsGridRenderer",
-        "dojo/string", "../../../i18n", "../../../lang",
+define(["../../../declare", "../../../stringUtil", "../../../i18n", "../../../lang",
+        "../../../connections/controls/ConnectionsGridRenderer",
         "../../../text!sbt/connections/controls/communities/templates/CommunityRow.html",
         "../../../text!sbt/connections/controls/communities/templates/TagAnchor.html",
         "../../../i18n!sbt/connections/controls/communities/nls/CommunityGridRenderer"], 
-        function(declare, ConnectionsGridRenderer, string, i18n, lang, CommunityRow, TagAnchor, nls) {
+        function(declare, stringUtil, i18n, lang, ConnectionsGridRenderer, CommunityRow, TagAnchor, nls) {
 
     /**
      * @class CommunityGridRenderer
@@ -95,7 +95,7 @@ define(["../../../declare", "../../../connections/controls/ConnectionsGridRender
              if (memberCount == 1) {
                  return this.nls.person;
              } else {
-                 return string.substitute(this.nls.people, { "memberCount" : memberCount });
+                 return stringUtil.replace(this.nls.people, { "memberCount" : memberCount });
              }
          },
          

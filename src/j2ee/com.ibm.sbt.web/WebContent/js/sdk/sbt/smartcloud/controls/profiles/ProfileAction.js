@@ -17,8 +17,8 @@
 /**
  * 
  */
-define([ "../../../declare", "../../../controls/grid/GridAction" ], 
-        function(declare, GridAction) {
+define([ "../../../declare", "../../../controls/grid/GridAction", "dojo/string" ], 
+        function(declare, GridAction, string) {
 
     /**
      * @class ProfileAction

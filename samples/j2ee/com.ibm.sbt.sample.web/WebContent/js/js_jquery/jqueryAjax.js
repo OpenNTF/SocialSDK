@@ -11,10 +11,12 @@
 
     }
 
-    function ajaxRefresh(snippet, jsLibId, themeId){
+    function ajaxRefresh(snippet, jsLibId, env, themeId){
         // refresh snippet with js_snippet.jsp
         var parameters = "?snippet=" + snippet + "&jsLibId=" + jsLibId;
-        if(themeId!=null && themeId!="")
+        if(env != null && env != "")
+            parameters = parameters + "&env=" + env;
+        if(themeId != null && themeId != "")
             parameters = parameters + "&themeId=" + themeId;
         var snippetQuery = snippetPage + parameters;
         $("#snippetContainer").load(snippetQuery);
@@ -35,7 +37,7 @@
         var js = jsDiv.firstChild && jsDiv.firstChild.CodeMirror ? jsDiv.firstChild.CodeMirror.getValue() : jsDiv.textContent;
         var css = cssDiv.firstChild && cssDiv.firstChild.CodeMirror ? cssDiv.firstChild.CodeMirror.getValue() : cssDiv.textContent;
 
-        $.post(previewPage, { snippet: getSnippet(), htmlData: html, jsData: js, cssData: css, debug: debug, jsLibId:getJsLibId(), themeId: getThemeId()}, function(data) {
+        $.post(previewPage, { snippet: getSnippet(), htmlData: html, jsData: js, cssData: css, debug: debug, jsLibId:getJsLibId(), env: getEnv(),  themeId: getThemeId()}, function(data) {
                 var wrapper = $(".iframeWrapper");
                 wrapper.find(frame).remove();
                 var $frame = $('<iframe id="previewFrame" src=""  width="100%" height="100%" style="border-style:none;"></iframe>');
@@ -84,6 +86,17 @@
     function setJsLibIdFromUrl(url){
         setJsLibId(getUrlParameter(url, "jsLibId"));
     }
+    
+    function setEnv(env){
+        if(env)
+            $("body").data("env", env);
+        else
+            $("body").data("env", "defaultEnvironment");
+    }
+
+    function setEnvFromUrl(url){
+        setEnv(getUrlParameter(url, "env"));
+    }
 
     function setThemeId(themeId){
         $("body").data("themeId", themeId);
@@ -104,6 +117,10 @@
     function getJsLibId(){
         return $("body").data("jsLibId");
     }
+    
+    function getEnv(){
+        return $("body").data("env");
+    }
 
     $.fn.makeActive = function(){
         $(this).siblings().removeClass('active');
@@ -113,6 +130,7 @@
     $(document).ready(function(){
         setSnippetFromUrl(window.location.href);
         setJsLibIdFromUrl(window.location.href);
+        setEnvFromUrl(window.location.href);
         setThemeIdFromUrl(window.location.href);
 
         $("#runButton").click(function(e){
@@ -132,8 +150,8 @@
 
             setSnippet(snippet);
             var theme = getThemeId();
-            var jsLibId = getJsLibId() != null ? getJsLibId() : getUrlParameter(url, "jsLibId");
-            ajaxRefresh(snippet, jsLibId, theme);
+            var jsLibId = getJsLibId() != null ? getJsLibId() : getUrlParameter(window.location.href, "jsLibId");
+            ajaxRefresh(snippet, jsLibId, getEnv(), theme);
         };
         
         var setLeafBehaviour = function(){
@@ -150,12 +168,17 @@
         });
         
         setLeafBehaviour();
-        
+        $("#envChange").change(function(e){
+            e.preventDefault();
+            var env = getUrlParameter($("#envChange option:selected").attr("value"), "env");
+            setEnv(env);
+            ajaxRefresh(getSnippet(), getJsLibId(), getEnv(), getThemeId());
+        });
         $("#libChange").change(function(e){
             e.preventDefault();
             var jsLibId = getUrlParameter($("#libChange option:selected").attr("value"), "jsLibId");
             setJsLibId(jsLibId);
-            ajaxRefresh(getSnippet(), getJsLibId(), getThemeId());
+            ajaxRefresh(getSnippet(), getJsLibId(), getEnv(), getThemeId());
         });
         var cssObj = {
                 'max-height' : document.body.scrollHeight,

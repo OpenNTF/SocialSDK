@@ -63,65 +63,65 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 
     	data:		null, 
     	
-    	/**
-		Get published date of activity stream entry
-		@method getPublishedDate
-		@return {String} published date of activity stream entry
-		**/
+        /**
+         * Get published date of activity stream entry
+         * 
+         * @method getPublishedDate
+         */
     	getPublishedDate: function(){
 			return this.dataHandler.data.published;
 		},
-    	
-		/**
-		Get plain title of the activity stream entry. this represents the action that was done by actor.
-		@method getPlainTitle
-		@return {String} plain title of the activity stream entry
-		**/
+
+		 /**
+         * Get plain title of the activity stream entry. this represents the action that was done by actor
+         * 
+         * @method getPlainTitle
+         */
     	getPlainTitle: function(){
 			return this.dataHandler.data.connections.plainTitle;
 		},
-    	
-		/**
-		Get actor name of the activity stream entry
-		@method getActorDisplayName
-		@return {String} display name of the activity stream actor
-		**/
+
+		 /**
+         * Get actor name of the activity stream entry
+         * 
+         * @method getActorDisplayName
+         */
     	getActorDisplayName: function(){
 			return this.dataHandler.data.actor.displayName;
 		},
 		
-		/**
-		Get full actor object of the activity stream entry. Object holds all properties of actor.
-		Here is an example of an actor object:
-		{
-			connections:{
-				state:"active"
-			},
-			objectType:"person",
-			id:"urn:lsid:lconn.ibm.com:profiles.person:0EE5A7FA-3434-9A59-4825-7A7000278DAA",
-			displayName:"Frank Adams"
-		},
-		@method getActor
-		@return {String} actor object
-		**/
+		 /**
+         * Get full actor object of the activity stream entry. Object holds all properties of actor.
+				Here is an example of an actor object:
+				{
+					connections:{
+						state:"active"
+					},
+					objectType:"person",
+					id:"urn:lsid:lconn.ibm.com:profiles.person:0EE5A7FA-3434-9A59-4825-7A7000278DAA",
+					displayName:"Frank Adams"
+				}
+         * 
+         * @method getActor
+         */
     	getActor: function(){
 			return this.dataHandler.data.actor;
 		},
-		
-		/**
-		Get verb of activity stream entry, verb represents the type of action that was done
-		@method getVerb
-		@return {String} verb of activity stream entry
-		**/
+
+		 /**
+         * Get verb of activity stream entry, verb represents the type of action that was done
+         * 
+         * @method getVerb
+         */
     	getVerb: function(){
 			return this.dataHandler.data.verb;
 		},
-		
-		/**
-		Get id of activity stream entry
-		@method getId
-		@return {String} id of activity stream entry
-		**/
+
+		 /**
+         * Get id of activity stream entry
+         * 
+         * @method getId
+         */
     	getId: function(){
 			return this.dataHandler.data.id;
 		},
@@ -182,28 +182,23 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
         getActivityStreamCallbacks: function() {
             return getActivityStreamServiceCallbacks;
         },
-
+        
         /**
          * Get activity stream for given user, group and application type
          * 
          * @method getStream
-         * * @param {String}
-         * 			  userType user type for which activity stream is to be obtained.
+         * @param {String} userType user type for which activity stream is to be obtained.
          * 			  If null is passed for userType, then '@public' will be used as 
-         * 			  default 
-         * * @param {String}
-         * 			  groupType group type for which activity stream is to be obtained
+         * 			  default
+         * @param {String} groupType group type for which activity stream is to be obtained
          * 			  If null is passed for userType, then '@all' will be used as 
-         * 			  default 
-         * * @param {String}
-         * 			  application type for which activity stream is to be obtained
+         * 			  default
+         * @param {String} applicationType application type for which activity stream is to be obtained
          *            If null is passed for userType, then '@all' will be used as 
-         * 			  default 
-         * @param {Object}
-         *            [args] Object representing various parameters
-         *            that can be passed to get an activity stream. 
-         *            The parameters must be exactly as they are
-         *            supported by IBM Connections like count, query etc.
+         * 			  default
+         * @param {Object} args Object representing various query parameters
+         *            that can be passed. The parameters must be exactly as they are
+         *            supported by IBM Connections.
          */
         getStream : function(userType, groupType, applicationType, args) {
         	var _userType = userType || consts.ASUser.PUBLIC; //Default is public updates
@@ -221,70 +216,64 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
             return this.getEntities(url, options, this.getActivityStreamCallbacks(), args);
         },
         
-		/**
-		Get My Status Updates.
-		
-		@method getMyStatusUpdates
-		@param {Object} [args] Object representing various parameters
-         *            that can be passed to get an activity stream. 
-         *            The parameters must be exactly as they are
-         *            supported by IBM Connections like count, query etc.
-		**/
+        /**
+         * Get my status updates.
+         * 
+         * @method getMyStatusUpdates
+         * @param {Object} args Object representing various query parameters
+         *            that can be passed. The parameters must be exactly as they are
+         *            supported by IBM Connections.
+         */
         getMyStatusUpdates : function(args) {
 			return this.getStream(consts.ASUser.ME, consts.ASGroup.ALL, consts.ASApplication.STATUS, args);
         },
-        
-		/**
-		Get Updates From My Network.
-		
-		@method getUpdatesFromMyNetwork
-		@param {Object} [args] Object representing various parameters
-         *            that can be passed to get an activity stream. 
-         *            The parameters must be exactly as they are
-         *            supported by IBM Connections like count, query etc.
-		**/
+
+        /**
+         * Get Updates from My Network
+         * 
+         * @method getUpdatesFromMyNetwork
+         * @param {Object} args Object representing various query parameters
+         *            that can be passed. The parameters must be exactly as they are
+         *            supported by IBM Connections.
+         */
         getUpdatesFromMyNetwork : function(args) {
 			return this.getStream(consts.ASUser.ME, consts.ASGroup.FRIENDS, consts.ASApplication.ALL, args);
         },
-        
-		/**
-		Get Updates From People I Follow.
-		
-		@method getUpdatesFromPeopleIFollow
-		@param {Object} [args] Object representing various parameters
-         *            that can be passed to get an activity stream. 
-         *            The parameters must be exactly as they are
-         *            supported by IBM Connections like count, query etc.
-		**/
+
+        /**
+         * Get Updates from People I Follow
+         * 
+         * @method getUpdatesFromPeopleIFollow
+         * @param {Object} args Object representing various query parameters
+         *            that can be passed. The parameters must be exactly as they are
+         *            supported by IBM Connections.
+         */
         getUpdatesFromPeopleIFollow : function(args) {
 			return this.getStream(consts.ASUser.ME, consts.ASGroup.FOLLOWING, consts.ASApplication.PEOPLE, args);
         },
-        
-		/**
-		Get Updates From Communities I Follow.
-		
-		@method getUpdatesFromCommunitiesIFollow
-		@param {Object} [args] Object representing various parameters
-         *            that can be passed to get an activity stream. 
-         *            The parameters must be exactly as they are
-         *            supported by IBM Connections like count, query etc.
-		**/
+
+        /**
+         * Get Updates from Communities I Follow
+         * 
+         * @method getUpdatesFromCommunitiesIFollow
+         * @param {Object} args Object representing various query parameters
+         *            that can be passed. The parameters must be exactly as they are
+         *            supported by IBM Connections.
+         */
         getUpdatesFromCommunitiesIFollow : function(args) {
 			return this.getStream(consts.ASUser.ME, consts.ASGroup.ALL, consts.ASApplication.COMMUNITIES, args);
         },
-        
-		/**
-		Get Updates From A Community.
-		
-		@method getUpdatesFromACommunity
-		
-		@param {String} communityID Community id for which activity Stream
-					  is to be obtained
-		@param {Object} [args] Object representing various parameters
-         *            that can be passed to get an activity stream. 
-         *            The parameters must be exactly as they are
-         *            supported by IBM Connections like count, query etc.
-		**/
+
+        /**
+         * Get Updates from a Community
+         * 
+         * @method getUpdatesFromACommunity
+         * @param {String} communityID Community id Community id for which activity Stream
+		 *			  is to be obtained
+         * @param {Object} args Object representing various query parameters
+         *            that can be passed. The parameters must be exactly as they are
+         *            supported by IBM Connections.
+         */
         getUpdatesFromACommunity : function(communityID, args) {
         	var promise = this._validateCommunityUuid(communityID);
             if (promise) {
@@ -293,18 +282,16 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 			return this.getStream(consts.ASUser.COMMUNITY+communityID, consts.ASGroup.ALL, consts.ASApplication.ALL, args);
         },
         
-		/**
-		Get Updates from a single user
-		
-		@method getUpdatesFromUser
-		
-		@param {String} user id for which activity Stream
-			  		  is to be obtained
-		@param {Object} [args] Object representing various parameters
-         *            that can be passed to get an activity stream. 
-         *            The parameters must be exactly as they are
-         *            supported by IBM Connections like count, query etc.
-		**/
+        /**
+         * Get Updates from a User
+         * 
+         * @method getUpdatesFromUser
+         * @param {String} userId User id for which activity Stream
+		 *	  		  is to be obtained
+         * @param {Object} args Object representing various query parameters
+         *            that can be passed. The parameters must be exactly as they are
+         *            supported by IBM Connections.
+         */
         getUpdatesFromAUser : function(userId, args) {
         	var promise = this._validateUserId(userId);
             if (promise) {
@@ -313,98 +300,72 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 			return this.getStream(userId, consts.ASGroup.INVOLVED, consts.ASApplication.ALL, args);
         },
         
-		/**
-		Get Notifications For Me.
-		
-		@method getNotificationsForMe
-		
-		@param {Object} [args] Object representing various parameters
-         *            that can be passed to get an activity stream. 
-         *            The parameters must be exactly as they are
-         *            supported by IBM Connections like count, query etc.
-		**/
+        /**
+         * Get Notifications for Me
+         * 
+         * @method getNotificationsForMe
+         * @param {Object} args Object representing various query parameters
+         *            that can be passed. The parameters must be exactly as they are
+         *            supported by IBM Connections.
+         */
         getNotificationsForMe : function(args) {
 			return this.getStream(consts.ASUser.ME, consts.ASGroup.RESPONSES, consts.ASApplication.ALL, args);
         },
         
-		/**
-		Get Notifications From Me.
-		
-		@method getNotificationsFromMe
-		@param {Object} [args] Object representing various parameters
-         *            that can be passed to get an activity stream. 
-         *            The parameters must be exactly as they are
-         *            supported by IBM Connections like count, query etc.
-		**/
+        /**
+         * Get Notifications from Me
+         * 
+         * @method getNotificationsFromMe
+         * @param {Object} args Object representing various query parameters
+         *            that can be passed. The parameters must be exactly as they are
+         *            supported by IBM Connections.
+         */
         getNotificationsFromMe : function(args) {
 			return this.getStream(consts.ASUser.ME, consts.ASGroup.NOTESFROMME, consts.ASApplication.ALL, args);
         },
         
-		/**
-		Get Responses To My Content.
-		
-		@method getResponsesToMyContent
-		@param {Object} [args] Object representing various parameters
-         *            that can be passed to get an activity stream. 
-         *            The parameters must be exactly as they are
-         *            supported by IBM Connections like count, query etc.
-		**/
+        /**
+         * Get Responses to My Content
+         * 
+         * @method getResponsesToMyContent
+         * @param {Object} args Object representing various query parameters
+         *            that can be passed. The parameters must be exactly as they are
+         *            supported by IBM Connections.
+         */
         getResponsesToMyContent : function(args) {
 			return this.getStream(consts.ASUser.ME, consts.ASGroup.RESPONSES, consts.ASApplication.ALL, args);
         },
-        
-		/**
-		Get My Actionable View.
-		
-		@method getMyActionableView
-		@param {Object} [args] Object representing various parameters
-         *            that can be passed to get an activity stream. 
-         *            The parameters must be exactly as they are
-         *            supported by IBM Connections like count, query etc.
-		**/
+
+        /**
+         * Get Actions pending on me
+         * 
+         * @method getMyActionableView
+         * @param {Object} args Object representing various query parameters
+         *            that can be passed. The parameters must be exactly as they are
+         *            supported by IBM Connections.
+         */
         getMyActionableView : function(args) {
 			return this.getStream(consts.ASUser.ME, consts.ASGroup.ACTIONS, consts.ASApplication.ALL, args);
         },
         
-		/**
-		Get My Saved View.
-		
-		@method getMySavedView
-		@param {Object} [args] Object representing various parameters
-         *            that can be passed to get an activity stream. 
-         *            The parameters must be exactly as they are
-         *            supported by IBM Connections like count, query etc.
-		**/
+        /**
+         * Get Updates Saved by me
+         * 
+         * @method getMySavedView
+         * @param {Object} args Object representing various query parameters
+         *            that can be passed. The parameters must be exactly as they are
+         *            supported by IBM Connections.
+         */
         getMySavedView : function(args) {
 			return this.getStream(consts.ASUser.ME, consts.ASGroup.SAVED, consts.ASApplication.ALL, args);
         },
         
-		/**
-		search activity stream by query.
-		
-		@method searchByQuery
-		
-		 * * @param {String}
-         * 			  query string for which activity stream search is to be done.
-         * 			  If null is passed for userType, then '@public' will be used as 
-         * 			  default 
-		 * * @param {String}
-         * 			  userType user type for which activity stream search is to be done.
-         * 			  If null is passed for userType, then '@public' will be used as 
-         * 			  default 
-         * * @param {String}
-         * 			  groupType group type for which activity stream search is to be done
-         * 			  If null is passed for userType, then '@all' will be used as 
-         * 			  default 
-         * * @param {String}
-         * 			  application type for which activity stream search is to be done
-         *            If null is passed for userType, then '@all' will be used as 
-         * 			  default 
-		 * * @param {Object} [args] Object representing various parameters
-         *            that can be passed to get an activity stream. 
-         *            The parameters must be exactly as they are
-         *            supported by IBM Connections like count, query etc.
-		**/
+        /**
+         * Get searched view by query
+         * 
+         * @method searchByQuery
+         * @param {String} query string for which activity stream search is to be done.
+         */
         searchByQuery : function(searchString) {
         	var promise = this._validateSearchQuery(searchString);
             if (promise) {
@@ -416,14 +377,14 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 			return this.getStream(null, null, null, args);
         },
         
-		 /**
-		 search activity stream by filters.
-		 
-		 @method searchByFilters
-		 
-		 * * @param {String} filters array of filter objects for which activity stream search is to be done. here is a sample array of two filters:
+        /**
+         * Get searched view by filters
+         * 
+         * @method searchByFilters
+         * @param {String} filters Filters can be passed to this method to get as activity stream
+         * 		   filtered by them. here is a sample string of two filters:
 		 *         "[{'type':'tag','values':['"+tags+"']},{'type':'tag','values':['test',"mobile"]}]"
-		**/
+         */
         searchByFilters : function(filters) {
         	var promise = this._validateSearchFilters(filters);
             if (promise) {
@@ -434,17 +395,13 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 			return this.getStream(null, null, null, args);
         },
         
-		/**
-		search activity stream by tags.
-		
-		@method searchByTags
-		
-		 * * @param {String}
-         * 			  tags string containing tags separated by commas for which activity 
+        /**
+         * Get searched view by tags
+         * 
+         * @method searchByTags
+         * @param {String} tags string containing tags separated by commas for which activity 
          * 			  stream search is to be done.
-         * 			  If null is passed for userType, then '@public' will be used as 
-         * 			  default 
-		**/
+         */
         searchByTags : function(tags) {
         	var promise = this._validateSearchTags(tags);
             if (promise) {
@@ -454,27 +411,22 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
         	args.filters = "[{'type':'tag','values':['"+tags+"']}]";
 			return this.getStream(null, null, null, args);
         },
-        
+
         /**
          * post an Activity Stream entry
          * 
          * @method postEntry
-         * * @param {String}
-         * 			  userType user type for which activity stream is to be posted
-         *            If null is passed for userType, then '@public' will be used as 
-         * 			  default 
-         * * @param {String}
-         * 			  groupType group type for which activity stream is to be posted
+         * @param {String} userType user type for which activity stream is to be posted
+         *            If null is passed for userType, then '@me' will be used as 
+         * 			  default
+         * @param {String} groupType group type for which activity stream is to be posted
          *            If null is passed for userType, then '@all' will be used as 
-         * 			  default 
-         * * @param {String}
-         * 			  application type for which activity stream is to be posted
+         * 			  default
+         * @param {String} application type for which activity stream is to be posted
          *            If null is passed for userType, then '@all' will be used as 
-         * 			  default 
-         * @param {Object}
-         *            [args]Object representing various parameters
-         *            that can be passed to post an activity stream. 
-         *            The parameters must be exactly as they are
+         * 			  default
+         * @param {Object} args Object representing various query parameters
+         *            that can be passed. The parameters must be exactly as they are
          *            supported by IBM Connections.
          */
         postEntry : function(postData, userType, groupType, applicationType, args) {

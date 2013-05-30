@@ -112,28 +112,17 @@ define(['./declare', './lang', './config', './_bridge/Transport', './json'], fun
          *  
          *     email.send(emails, {load: loadCallback, error: errorCallback, handle: handleCallback});
          */
-        send : function(emails, callbacks) {
-            transport.xhr('POST', {
-                url: config.Properties.serviceUrl + '/mailer',
-                postData: sbtJson.stringify(emails),
+        send : function(emails) {
+            var postUrl = config.Properties.serviceUrl + '/mailer';
+            
+            var options = {
+                method: "POST",
+                data: sbtJson.stringify(emails),
                 headers: {"Content-Type" : "application/json"},
-                handleAs: "json",
-                handle: function(response) {
-                    if(callbacks && callbacks['handle']) {
-                        callbacks['handle'](response);
-                    }
-                },
-                error: function(response) {
-                    if(callbacks && callbacks['error']) {
-                        callbacks['error'](response);
-                    }
-                },
-                load: function(response) {
-                    if(callbacks && callbacks['load']) {
-                        callbacks['load'](response);
-                    }
-                }
-            }, true);
+                handleAs: "json"
+            };
+            
+            return transport.request(postUrl, options);
         }
     };
 });

@@ -18,9 +18,9 @@
  * 
  */
 define([ "../../../declare", "../../../Endpoint", "../../../xml", "../../../xpath", "../../../connections/ConnectionsConstants",
-         "../../../connections/controls/profiles/ProfileGrid", 
-         "../../../connections/controls/profiles/ColleagueGridRenderer", 
-         "../../../connections/controls/ViewAllAction" ], 
+         "./ProfileGrid", 
+         "./ColleagueGridRenderer", 
+         "../ViewAllAction" ], 
         function(declare, Endpoint, xml, xpath, conn, ProfileGrid, ColleagueGridRenderer, ViewAllAction) {
 
     /**
@@ -137,7 +137,7 @@ define([ "../../../declare", "../../../Endpoint", "../../../xml", "../../../xpat
         handleViewAll: function(el, data, ev) {
             if (this.viewAllAction) {
                 console.log(data);
-                dojo.stopEvent(ev); // TODO add this to the bridge. dojo/_base/event
+                this._stopEvent(ev);
                 
                 this.viewAllAction.execute(data, { grid : this.grid }, ev);
             }

@@ -17,8 +17,8 @@
 /**
  * @module sbt.connections.controls.communities.CommunityAction
  */
-define([ "../../../declare", "../../../controls/grid/GridAction", "dojo/string" ], 
-        function(declare, GridAction, string) {
+define([ "../../../declare", "../../../controls/grid/GridAction", "../../../stringUtil" ], 
+        function(declare, GridAction, stringUtil) {
 
     /**
      * 
@@ -44,7 +44,7 @@ define([ "../../../declare", "../../../controls/grid/GridAction", "dojo/string" 
          * @returns A String to be displayed in an elements tooltip 
          */
         getTooltip: function(item) {
-           return string.substitute(this.nls.tooltip, { title : item.getValue("title") });
+           return stringUtil.replace(this.nls.tooltip, { title : item.getValue("title") });
         },
         
         /**

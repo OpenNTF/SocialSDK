@@ -18,18 +18,18 @@
  * 
  */
 define([ "../../../declare",
-         "../../../controls/grid/Grid", 
-         "../../../connections/controls/files/FileGridRenderer", 
-         "../../../connections/controls/files/FileAction",
-         "../../../config",  
-         "../../../connections/controls/vcard/SemanticTagService", 
-         "dojo/string", 
-         "../../../store/parameter",
-         "../../../connections/FileService",
          "../../../lang",
          "../../../dom",
+         "../../../stringUtil",
+         "../../../config",  
+         "../../../store/parameter",
+         "../../../controls/grid/Grid", 
+         "./FileGridRenderer", 
+         "./FileAction",
+         "../../../connections/controls/vcard/SemanticTagService", 
+         "../../../connections/FileService",
          "../../../connections/FileConstants"], 
-        function(declare, Grid, FileGridRenderer, FileAction, sbt, SemanticTagService, string, parameter, FileService, lang, domClass) {
+        function(declare, lang, dom, stringUtil, sbt, parameter, Grid, FileGridRenderer, FileAction, SemanticTagService, FileService, FileConstants) {
 
 	// TODO use values from constants and handle authType
 	var fileUrls = {
@@ -42,7 +42,7 @@ define([ "../../../declare",
         library : "/files/basic/api/myuserlibrary/feed",
         shares : "/files/basic/api/documents/shared/feed", // only lists files shared with you.
         recycledFiles : "/files/basic/api/myuserlibrary/view/recyclebin/feed",
-        fileComments : "/files/basic/api/userlibrary/${userId}/document/${fileId}/feed?category=comment",
+        fileComments : "/files/basic/api/userlibrary/{userId}/document/{fileId}/feed?category=comment",
         fileShares : "/files/basic/api/documents/shared/feed"
 	};
 	var xpath_files = {
@@ -402,7 +402,7 @@ define([ "../../../declare",
          */
         handleClick: function(el, data, ev) {
             if (this.fileAction) {
-                dojo.stopEvent(ev);
+                this._stopEvent(ev);
                 
                 this.fileAction.execute(data, { grid : this.grid }, ev);
             }
@@ -625,7 +625,7 @@ define([ "../../../declare",
         },
         // Internals
         _buildUrl: function(url) {
-            url = string.substitute(url, this);
+            url = stringUtil.replace(url, this);
             
             if (this.direction) {
                 url += "?direction=" + this.direction;

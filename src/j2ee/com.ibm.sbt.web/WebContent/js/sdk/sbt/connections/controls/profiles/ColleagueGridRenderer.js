@@ -17,13 +17,13 @@
 /**
  * 
  */
-define(["../../../declare", "dojo/string",
-        "../../../connections/controls/ConnectionsGridRenderer",
+define(["../../../declare", "../../../stringUtil",
+        "../ConnectionsGridRenderer",
         "../../../i18n!sbt/connections/controls/profiles/nls/ColleagueGridRenderer",
         "../../../text!sbt/connections/controls/profiles/templates/ColleagueItem.html",
         "../../../text!sbt/connections/controls/profiles/templates/ViewAll.html",
         "../../../text!sbt/connections/controls/profiles/templates/ColleagueItemFull.html"], 
-        function(declare, string, ConnectionsGridRenderer, nls, colleagueItemTemplate, viewAllTemplate, colleagueItemFullTemplate) {
+        function(declare, stringUtil, ConnectionsGridRenderer, nls, colleagueItemTemplate, viewAllTemplate, colleagueItemFullTemplate) {
 		
     /**
      * @class ColleagueGridRenderer
@@ -89,7 +89,7 @@ define(["../../../declare", "dojo/string",
               var sub = {
                   totalCount: peopleCount
               };
-              return string.substitute(nls.viewAll, sub);
+              return stringUtil.replace(nls.viewAll, sub);
           }
     });   
     return ColleagueGridRenderer;

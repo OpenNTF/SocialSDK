@@ -57,7 +57,8 @@ public class Util {
     public static String[][] ENVIRONMENTS = new String[][] {
         // title, id
         { "Default", "defaultEnvironment" },
-        { "SmartCloud Only", "smartCloud" }
+        { "SmartCloud", "smartcloudEnvironment" },
+        { "Open Social", "openSocial"}
     };
     
     public static String[] BOOTSTRAP_STYLES = {   

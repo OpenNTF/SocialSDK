@@ -1,0 +1,22 @@
+<tr class="${rowClass}">
+	<td style="width: 25px" class=lotusFirstCell>
+		<div><input id="${uid}" value=${uid} type=checkbox data-dojo-attach-event="onclick: handleCheckBox" aria-label="${name}"></input></div>
+	</td>
+	<td style="width: 70px">
+		<div><img alt="${name}" src="${photo}" width=55 height=55></img></div>
+	</td>
+	<td>
+		<div>
+			<span class=vcard>
+				<span style="display: none" class=x-lconn-userid>${uid}</span>
+				<h4><a class="fn url lotusPerson hasHover" aria-describedby=semtagmenu href="#" icBizCard_ref="1" icBizCard_idx="2">${name}</a></h4>
+			</span>
+			<div></div>
+		</div>
+	</td>
+	<td class=lotusLastCell>
+		<div>
+			<div>Telephone:&nbsp;${telephone}</div>
+			<div>Email:&nbsp;<strong><a href="mailto:${email}">${email}</a></strong></div></div>
+	</td>
+</tr>

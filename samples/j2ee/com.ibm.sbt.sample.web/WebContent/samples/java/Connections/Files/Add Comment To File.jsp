@@ -44,7 +44,7 @@
 	        List<FileEntry> fileEntries = fileService.getMyFiles();
 	        FileEntry fileEntry = fileEntries.get(0);
 	        Map<String, String> params = new HashMap<String, String>(); 
-	        CommentEntry commentEntry = fileService.addCommentToFile(fileEntry, params, "Comment added by Add Comment To File java sample");
+	        CommentEntry commentEntry = fileService.addCommentToFile(fileEntry, params, "Comment added by Add Comment To File java sample at " + System.currentTimeMillis());
 	        if (commentEntry != null) {
 	        	String commentId = commentEntry.getCommentId();
 	            out.println("Comment Id : " + commentId + "<br/>");

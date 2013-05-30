@@ -33,12 +33,19 @@ define(["../stringUtil", "../Endpoint"], function(stringUtil, Endpoint) {
             return param.key + "=" + v;
         },
         
-        positiveInteger: function(param, val) {
+        oneBasedInteger: function(param, val) {
             var v = Math.floor(val);
             if(v < 1) {
                 v = 1;
             }
-            
+            return param.key + "=" + v;
+        },
+        
+        zeroBaseInteger: function(param, val) {
+            var v = Math.floor(val);
+            if(v < 0) {
+                v = 0;
+            }
             return param.key + "=" + v;
         },
         
@@ -59,8 +66,6 @@ define(["../stringUtil", "../Endpoint"], function(stringUtil, Endpoint) {
             return formatFunc(self, val);
         };
     };
-    
-    
     
     // TODO we must use the endpoint being used by the grid
     var endpoint; 
@@ -136,27 +141,45 @@ define(["../stringUtil", "../Endpoint"], function(stringUtil, Endpoint) {
     return {
         communities: {
             all: {
-                pageNumber: new Parameter({ key: "page", format: Formatter.positiveInteger }),
-                pageSize: new Parameter({ key: "ps", format: Formatter.positiveInteger }),
+                pageNumber: new Parameter({ key: "page", format: Formatter.oneBasedInteger }),
+                pageSize: new Parameter({ key: "ps", format: Formatter.oneBasedInteger }),
                 sortBy: new Parameter({ key: "sortField", format: Formatter.sortField(sortVals.communities.all) }),
                 sortOrder: new Parameter({ key: "asc", format: Formatter.ascSortOrderBoolean })
             }
         },
         files:{
         	all:{
-	        	pageNumber: new Parameter({ key: "page", format: Formatter.positiveInteger }),
-	            pageSize: new Parameter({ key: "pageSize", format: Formatter.positiveInteger }),
+	        	pageNumber: new Parameter({ key: "page", format: Formatter.oneBasedInteger }),
+	            pageSize: new Parameter({ key: "pageSize", format: Formatter.oneBasedInteger }),
 	            sortBy: new Parameter({ key: "sortBy", format: Formatter.sortField(sortVals.files.all) }),
 	            sortOrder: new Parameter({ key: "sortOrder", format: Formatter.fileSortOrder })
         	}
         },
         profiles:{
         	all:{
-	        	pageNumber: new Parameter({ key: "page", format: Formatter.positiveInteger }),
-	            pageSize: new Parameter({ key: "ps", format: Formatter.positiveInteger }),
+	        	pageNumber: new Parameter({ key: "page", format: Formatter.oneBasedInteger }),
+	            pageSize: new Parameter({ key: "ps", format: Formatter.oneBasedInteger }),
 	            sortBy: new Parameter({ key: "sortBy", format: Formatter.sortField(sortVals.profiles.all) }),
 	            sortOrder: new Parameter({ key: "sortOrder", format: Formatter.fileSortOrder })
         	}
+        },
+        
+        /**
+         * 
+         * @param key
+         * @returns
+         */
+        zeroBasedInteger :  function(key) {
+        	return new Parameter({ key: key, format: Formatter.zeroBasedInteger });
+        },
+        
+        /**
+         * 
+         * @param key
+         * @returns
+         */
+        oneBasedInteger :  function(key) {
+        	return new Parameter({ key: key, format: Formatter.oneBasedInteger });
         }
     };
 });

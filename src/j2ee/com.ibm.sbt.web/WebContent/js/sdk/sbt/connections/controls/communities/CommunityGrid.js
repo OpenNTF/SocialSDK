@@ -125,7 +125,7 @@ define([ "../../../declare",
          */
         handleClick: function(el, data, ev) {
             if (this.communityAction) {
-                dojo.stopEvent(ev);
+            	this._stopEvent(ev);
                 
                 this.communityAction.execute(data, { grid : this.grid }, ev);
             }

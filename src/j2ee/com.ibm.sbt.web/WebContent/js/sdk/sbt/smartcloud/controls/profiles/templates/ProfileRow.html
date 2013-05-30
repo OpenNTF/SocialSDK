@@ -1,0 +1,28 @@
+<tr class="${rowClass}">
+	<td style="width: 25px" class="lotusFirstCell">
+		<div>
+			<input id="${uid}" name="${uid}" value="${uid}" data-dojo-attach-event="onclick: handleCheckBox" type="checkbox" aria-label="${name}"></input>
+		</div>
+	</td>
+	<td style="width: 70px">
+		<div><img alt="${name}" src="${photo}" width="55" height="55"></img></div>
+	</td>
+	<td>
+		<div>
+			<h4>
+				<span class="vcard" dojoAttachPoint="vcardNode">
+  					<a aria-label="${nls.ariaVcard}" href="javascript:void(0);" title="${tooltip}" data-dojo-attach-event="onclick: handleClick" class="fn url">${name}</a>
+		  			<span data-dojo-attach-point="idNode" class="x-lconn-userid" style="display: none;">${uid}</span>
+  				</span>
+  			</h4>
+			<div></div>
+		</div>
+	</td>
+	<td class=lotusLastCell>
+		<div>
+			<div>${nls.telephone}&nbsp;${telephone}</div>
+			<div>${nls.email}:&nbsp;<strong><a alt="${nls.clickToEmail}" href="mailto:${email}">${email}</a></strong></div>
+			<div>${nls.altEmail}:&nbsp;<strong><a alt="${nls.clickToEmail}" href="mailto:${altEmail}">${altEmail}</a></strong></div>
+		</div>
+	</td>
+</tr>

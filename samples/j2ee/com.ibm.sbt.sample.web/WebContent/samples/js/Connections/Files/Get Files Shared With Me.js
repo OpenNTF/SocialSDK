@@ -13,7 +13,7 @@ require(["sbt/connections/FileService", "sbt/dom"],
         };
 
         var fileService = new FileService();
-    	fileService.getFilesSharedByMe().then(
+    	fileService.getFilesSharedWithMe().then(
             function(files) {
                 if (files.length == 0) {
                     text = "No Files are currently shared by you.";

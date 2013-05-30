@@ -15,15 +15,14 @@
  */
 
 /**
- * 
+ * @module sbt.smartcloud.controls.profiles.ProfileAction 
  */
 define([ "../../../declare", "../../../controls/grid/GridAction", "dojo/string" ], 
         function(declare, GridAction, string) {
 
     /**
      * @class ProfileAction
-     * @namespace sbt.connections.controls.profiles
-     * @module sbt.connections.controls.profiles.ProfileAction
+     * @namespace sbt.smartcloud.controls.profiles
      */
     var ProfileAction = declare(GridAction, {
         

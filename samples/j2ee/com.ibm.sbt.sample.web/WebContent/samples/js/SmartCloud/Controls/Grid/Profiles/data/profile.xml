@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<response xmlns="http://ns.opensocial.org/2008/opensocial">
+	<person xmlns="http://ns.opensocial.org/2008/opensocial">
+		<aboutMe>Sales Executive IBM Collaboration Software</aboutMe>
+		<address>Mountain View</address>
+		<addresses>
+			<type>Source</type>
+		</addresses>
+		<addresses>
+			<address></address>
+			<title>Address</title>
+		</addresses>
+		<addresses>
+			<address></address>
+			<title>Address</title>
+		</addresses>
+		<addresses>
+			<address></address>
+			<title>Address</title>
+		</addresses>
+		<addresses>
+			<address>Mountain View</address>
+			<title>Primary Address</title>
+		</addresses>
+		<country>US</country>
+		<displayName>Frank Adams</displayName>
+		<emailAddress>frankadams@try.lotuslive.com</emailAddress>
+		<emails>
+			<type>Source</type>
+			<value>PROFILES</value>
+		</emails>
+		<emails>
+			<email>frankadams@try.lotuslive.com</email>
+			<title>Primary Email</title>
+		</emails>
+		<fullName>Frank Adams</fullName>
+		<id>na.collabserv.com:user:20547574</id>
+		<ims>
+			<type>Source</type>
+			<value>PROFILES</value>
+		</ims>
+		<jobtitle>Sales Executive</jobtitle>
+		<mobilephone>+3300119966</mobilephone>
+		<org>
+			<name>IBM Test - SDK Renovations</name>
+		</org>
+		<orgId>20542369</orgId>
+		<phoneNumbers>
+			<type>Source</type>
+			<value>PROFILES</value>
+		</phoneNumbers>
+		<phoneNumbers>
+			<phone>456-098-3785</phone>
+			<title>Work </title>
+		</phoneNumbers>
+		<phoneNumbers>
+			<phone>456-098-3786</phone>
+			<title>Residence 1</title>
+		</phoneNumbers>
+		<phoneNumbers>
+			<phone>456-098-3787</phone>
+			<title>Residence 2</title>
+		</phoneNumbers>
+		<phoneNumbers>
+			<phone>456-098-3784</phone>
+			<title>Primary Telephone</title>
+		</phoneNumbers>
+		<phoneNumbers>
+			<phone>+3300119966</phone>
+			<title>MobilePhone</title>
+		</phoneNumbers>
+		<photo>20547574__1354512034.jpg</photo>
+		<photos>
+			<type>Source</type>
+			<value>PROFILES</value>
+		</photos>
+		<photos>
+			<type>Photo</type>
+			<value>20547574__1354512034.jpg</value>
+		</photos>
+		<profileUrl>https://apps.na.collabserv.com/contacts/profiles/view/20547574
+		</profileUrl>
+		<telephone>456-098-3784</telephone>
+		<website>https://www.ibm.com/developerworks/mydeveloperworks/groups/service/html/communityview?communityUuid=0f357879-ccee-4927-98c1-7bb88d5dc81f
+		</website>
+		<websites>
+			<url>
+				<type>Source</type>
+				<value>PROFILES</value>
+			</url>
+			<url>
+				<title>Website</title>
+				<website></website>
+			</url>
+			<url>
+				<title>Website</title>
+				<website></website>
+			</url>
+			<url>
+				<title>Website</title>
+				<website></website>
+			</url>
+			<url>
+				<website>https://www.ibm.com/developerworks/mydeveloperworks/groups/service/html/communityview?communityUuid=0f357879-ccee-4927-98c1-7bb88d5dc81f
+				</website>
+			</url>
+		</websites>
+	</person>
+</response>

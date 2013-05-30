@@ -31,14 +31,14 @@ require([ "sbt/Endpoint", "sbt/emailService", "sbt/json", "sbt/dom"],
                     ]
             };
         
-        emailService.send(email, {
-            error: function(error) {
-                dom.setText("json", json.jsonBeanStringify(error));
-            },
-            load : function(response) {
+        emailService.send(email).then(
+            function(response) {
                 dom.setText("json", json.jsonBeanStringify(response));
+            },
+            function(error) {
+                dom.setText("json", json.jsonBeanStringify(error));
             }
-        });
+        );
     };
     
     /**

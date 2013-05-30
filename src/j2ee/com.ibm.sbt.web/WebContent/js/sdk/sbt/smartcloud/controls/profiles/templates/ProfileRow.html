@@ -1,28 +1,44 @@
 <tr class="${rowClass}">
-	<td style="width: 25px" class="lotusFirstCell">
+	<td align="center" style="width: 40px; padding-top: 5px;">
+		<input id="${uid}" name="${uid}" value="${uid}" data-dojo-attach-event="onclick: handleCheckBox" type="checkbox" aria-label="${name}"></input>
+	</td>
+	<td style="width: 70px" class="lotusFirstCell">
+		<img width="55" height="55" src="${photoUrl}" alt="" class="photo">
+	</td>
+	<td style="width: 40%">
+		<h1>
+			<span class="vcard lotusBreakWord"> 
+				<span class="fn" semtag_refcnt="1" semtag_live_id="1" semtag_hover_idx="1" id="semtag_live_1">
+					<a href="${profileUrl}"  id="">${name}</a>
+				</span>
+				<!-- 
+				<a class="menu_drop_icon" href="javascript:void()" title="Business card for ${name}">
+					<span class="lotusAltText">▼</span>
+				</a> 
+				<span style="display: none;" class="uid">${uid}</span>
+				 -->
+			</span>
+		</h1>
 		<div>
-			<input id="${uid}" name="${uid}" value="${uid}" data-dojo-attach-event="onclick: handleCheckBox" type="checkbox" aria-label="${name}"></input>
+			<div class="llnowrap">
+				<span>${title}</span>
+				<a href="/contacts/orgprofiles/partnerPage/${uid}">${orgName}</a>
+			</div>
+			<div class="lotusBreakWord">${address}</div>
 		</div>
 	</td>
-	<td style="width: 70px">
-		<div><img alt="${name}" src="${photo}" width="55" height="55"></img></div>
+	<td style="width: 30%" class="llCntConnection">
+		<span class="lotusConfirm lotusMeta connections llConnectionStatus">
+			<strong>Network Contact</strong>
+		</span>
 	</td>
-	<td>
+	<td style="width: 30%" class="lotusLastCell">
 		<div>
-			<h4>
-				<span class="vcard" dojoAttachPoint="vcardNode">
-  					<a aria-label="${nls.ariaVcard}" href="javascript:void(0);" title="${tooltip}" data-dojo-attach-event="onclick: handleClick" class="fn url">${name}</a>
-		  			<span data-dojo-attach-point="idNode" class="x-lconn-userid" style="display: none;">${uid}</span>
-  				</span>
-  			</h4>
-			<div></div>
+			<label>Primary telephone</label> <strong>${primaryTelephone}</strong>
 		</div>
-	</td>
-	<td class=lotusLastCell>
 		<div>
-			<div>${nls.telephone}&nbsp;${telephone}</div>
-			<div>${nls.email}:&nbsp;<strong><a alt="${nls.clickToEmail}" href="mailto:${email}">${email}</a></strong></div>
-			<div>${nls.altEmail}:&nbsp;<strong><a alt="${nls.clickToEmail}" href="mailto:${altEmail}">${altEmail}</a></strong></div>
+			<label>Primary email</label> 
+			<strong><a href="mailto:${email}">${email}</a></strong>
 		</div>
 	</td>
 </tr>

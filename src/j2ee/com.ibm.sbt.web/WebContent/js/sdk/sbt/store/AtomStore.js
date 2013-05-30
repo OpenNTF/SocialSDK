@@ -62,20 +62,29 @@ define(["../declare","../lang", "../base/core", "../xml", "../xpath", "../Endpoi
                 this.attributes = args.attributes || this.attributes;
                 this.atom = args.feedXPath || this.atom;
                 this.namespaces = args.namespaces || this.namespaces;
-                this.sendQuery = (args.sendQuery || args.sendquery || this.sendQuery);
+                this.sendQuery = args.hasOwnProperty("sendQuery") ? args.sendQuery : this.sendQuery;
                 this.unescapeHTML = args.unescapeHTML || this.unescapeHTML;
                 this.paramSchema = args.paramSchema || this.paramSchema;
             }
             
-            // normalise the request arguments for use with endpoint
-            var page = Math.floor(options.start / options.count) + 1;
-            query.pageNumber = query.pageNumber || page;
-            query.pageSize = query.pageSize || options.count;
+            // add paging information to the query
+            if (this.paramSchema.pageNumber) {
+            	var page = Math.floor(options.start / options.count) + 1;
+            	query.pageNumber = query.pageNumber || page;
+            }
+            if (this.paramSchema.startIndex) {
+            	query.startIndex = query.startIndex || options.start;
+            }
+            if (this.paramSchema.pageSize) {
+            	query.pageSize = query.pageSize || options.count;
+            }
+            
+            // add the sorting information to the query
             if(options.sort && options.sort[0]) {
                 if(options.sort[0].attribute) {
                     query.sortBy = options.sort[0].attribute;
                 }
-                
+
                 if(options.sort[0].descending === true) {
                     query.sortOrder = "desc";
                 }
@@ -188,6 +197,9 @@ define(["../declare","../lang", "../base/core", "../xml", "../xpath", "../Endpoi
             });
         },
         
+        /*
+         * Create the service url and include query params
+         */
         _getServiceUrl: function(query) {
             if (!this.sendQuery) {
                 return this.url;
@@ -196,34 +208,42 @@ define(["../declare","../lang", "../base/core", "../xml", "../xpath", "../Endpoi
                 return this.url;
             }
             if (lang.isString(query)) {
-                return this.url + query;
+            	return this.url + (~this.url.indexOf('?') ? '&' : '?') + query;
             }
             
-            var queryString = "";
+            var pairs = [];
             var paramSchema = this.paramSchema;
             for(var key in query) {
-                if(key in paramSchema) {
+                if (key in paramSchema) {
                     var val = paramSchema[key].format(query[key]);
-                    if(val) {
-                        queryString += val + "&";
+                    if (val) {
+                    	pairs.push(val);
                     }
-                }
-                else {
-                    queryString += (key + "=" + query[key] + "&");
+                } else {
+                	pairs.push(encodeURIComponent(key) + "=" + encodeURIComponent(query[key]));
                 }
             }
-
-            if (!queryString) {
+            if (pairs.length == 0) {
                 return this.url;
             }
-            var serviceUrl = this.url;
-            if (serviceUrl.indexOf("?") < 0){
-                serviceUrl += "?";
-            } else {
-                serviceUrl += "&";
-            }
-            return serviceUrl + queryString;
+            
+            return this.url + (~this.url.indexOf('?') ? '&' : '?') + pairs.join("&");
         },
+        
+        /*
+         * Create a query string from an object
+         */
+        _createQuery: function(queryMap) {
+            if (!queryMap) {
+                return null;
+            }
+            var pairs = [];
+            for(var name in queryMap){
+                var value = queryMap[name];
+                pairs.push(encodeURIComponent(name) + "=" + encodeURIComponent(value));
+            }
+            return pairs.join("&");
+        },        
 
         _createItems: function(document) {
             var nodes = xpath.selectNodes(document, this.atom.entries, this.namespaces);

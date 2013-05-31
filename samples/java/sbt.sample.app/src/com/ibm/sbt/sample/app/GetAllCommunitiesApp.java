@@ -17,12 +17,10 @@ package com.ibm.sbt.sample.app;
 
 import java.util.Collection;
 import java.util.Iterator;
-
 import com.ibm.commons.runtime.Application;
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.RuntimeFactory;
 import com.ibm.commons.runtime.impl.app.RuntimeFactoryStandalone;
-import com.ibm.sbt.security.authentication.AuthenticationException;
 import com.ibm.sbt.services.client.connections.communities.Community;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
 import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
@@ -31,7 +29,7 @@ import com.ibm.sbt.services.endpoints.BasicEndpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
 
 /**
- * @author mwallace
+ * @author mwallace, Francis
  * @date 11 April 2013
  */
 public class GetAllCommunitiesApp {
@@ -42,15 +40,57 @@ public class GetAllCommunitiesApp {
     private BasicEndpoint endpoint;
     private CommunityService communityService;
     
-    public void init() throws AuthenticationException{
+    /**
+     * Default constructor. Initialises the Context, the CommunityService, and the default CommunityService endpoint.
+     * 
+     * Be sure to call the destroy() method in this class if you don't intend to keep the initialised Context around.
+     */
+    public GetAllCommunitiesApp(){
+        this(CommunityService.DEFAULT_ENDPOINT_NAME, true);
+    }
+    
+    /**
+     * 
+     * @param endpointName The name of the endpoint to use.
+     * @param initEnvironment - True if you want a Context initialised, false if there is one already. destroy() should be called when finished using this class if a context is initialised here. 
+     */
+    public GetAllCommunitiesApp(String endpointName, boolean initEnvironment) {
+        if(initEnvironment)
+            this.initEnvironment();
+        
+        this.communityService = new CommunityService();
+        this.setEndpoint((BasicEndpoint)EndpointFactory.getEndpoint(endpointName));
+    }
+    
+    /**
+     * 
+     * @return The endpoint used in this class.
+     */
+    public BasicEndpoint getEndpoint(){
+        return this.endpoint;
+    }
+    
+    /**
+     * 
+     * @param endpoint The endpoint you want this class to use.
+     */
+    public void setEndpoint(BasicEndpoint endpoint){
+        this.endpoint = endpoint;
+        this.communityService.setEndpoint(this.endpoint);
+    }
+
+    /**
+     * Initialise the Context, needed for Services and Endpoints.
+     */
+    public void initEnvironment() {
         runtimeFactory = new RuntimeFactoryStandalone();
         application = runtimeFactory.initApplication(null);
         context = Context.init(application, null, null);
-        communityService = new CommunityService();
-        endpoint = (BasicEndpoint)EndpointFactory.getEndpoint(CommunityService.DEFAULT_ENDPOINT_NAME);
-        endpoint.login("admin", "passw0rd", true);
     }
     
+    /**
+     * Destroy the Context.
+     */
     public void destroy(){
         if (context != null)
             Context.destroy(context);
@@ -58,22 +98,34 @@ public class GetAllCommunitiesApp {
             Application.destroy(application);
     }
     
+    /**
+     * Get a list of public communities.
+     * @return Collection of public communities
+     * @throws CommunityServiceException
+     */
     public Collection<Community> getPublicCommunities() throws CommunityServiceException{
         return communityService.getPublicCommunities();
     }
     
+    /**
+     * Get the members of a specified Community.
+     * @param community
+     * @return The members of the community.
+     * @throws CommunityServiceException
+     */
     public Member[] getCommunityMembers(Community community) throws CommunityServiceException{
         return communityService.getMembers(community);
     }
     
 	/**
+	 * Demo.
+	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
 	    GetAllCommunitiesApp app = new GetAllCommunitiesApp();
 		
 	    try {
-            app.init();
             Collection<Community> communities = app.getPublicCommunities();
             for (Iterator<Community> iter = communities.iterator(); iter.hasNext(); ) {
                 Community community = iter.next();
@@ -83,8 +135,6 @@ public class GetAllCommunitiesApp {
                     System.out.println("    " + members[i].getEmail());
                 }
             }
-        } catch (AuthenticationException e) {
-            e.printStackTrace();
         } catch (CommunityServiceException e) {
             e.printStackTrace();
         } finally {

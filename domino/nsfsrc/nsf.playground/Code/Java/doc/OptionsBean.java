@@ -1,11 +1,9 @@
 package doc;
 
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
 
 import com.ibm.commons.util.PathUtil;
 import com.ibm.commons.util.StringUtil;
-import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.ibm.xsp.util.FacesUtil;
 
 

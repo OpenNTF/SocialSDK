@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="85257AA80077A28B" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="6b6" sequence="75" unid="E8211E3CA7A23DB885257B7C006D3954">
+<created><datetime dst="true">20130531T155301,00-04</datetime></created>
+<modified><datetime dst="true">20130531T172127,70-04</datetime></modified>
+<revised><datetime dst="true">20130531T172127,69-04</datetime></revised>
+<lastaccessed><datetime dst="true">20130531T172127,70-04</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20130531T155301,01-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></updatedby>
+<wassignedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></wassignedby>
+<item name="$Flags"><text>gC~4;</text></item>
+<item name="$TITLE" sign="true"><text>ccSmartCloudTestNavBar.xsp</text></item>
+
+
+
+
+
+<item name="$FileNames" sign="true"><text>ccSmartCloudTestNavBar.xsp</text></item>
+<item name="$DesignerVersion"><text>8.5</text></item>
+
+
+
+</note>

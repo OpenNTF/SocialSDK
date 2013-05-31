@@ -11,6 +11,16 @@ if(compositeData.wholePage)view.setStyle("overflow: hidden");}]]></xp:this.after
 	<xc:SSLWarning loaded="${javascript:optionsBean.checkSSLWarning()}"></xc:SSLWarning>
 	<xe:applicationLayout id="appLayout">
 		<xe:this.facets>
+			<xp:span xp:key="MastHeader">
+				<xe:dynamicContent id="dynamicContent1"
+					defaultFacet="#{javascript:optionsBean.getBanner()}">
+					<xe:this.facets>
+						<xc:ccSmartCloudTestNavBar
+							xp:key="SmartCloudTest">
+						</xc:ccSmartCloudTestNavBar>
+					</xe:this.facets>
+				</xe:dynamicContent>
+			</xp:span>
 			<xp:callback xp:key="LeftColumn" facetName="LeftColumn"
 				id="callback1">
 			</xp:callback>
@@ -28,8 +38,7 @@ if(compositeData.wholePage)view.setStyle("overflow: hidden");}]]></xp:this.after
 				defaultNavigationPath="${javascript:compositeData.defaultNavigationPath}"
 				productLogoHeight="29px" productLogoWidth="77px"
 				placeBarName="#{javascript:compositeData.title}"
-				productLogoStyle="margin-left:-15px" mastHeader="true"
-				footer="false">
+				productLogoStyle="margin-left:-15px" footer="false">
 				<xe:this.bannerApplicationLinks>
 					<xe:basicLeafNode label="Home" selected="true"
 						href="/">
@@ -89,6 +98,8 @@ if(compositeData.wholePage)view.setStyle("overflow: hidden");}]]></xp:this.after
 						page="/Explorer.xsp" selection="/Explorer">
 					</xe:pageTreeNode>
 				</xe:this.titleBarTabs>
+				<xe:this.banner><![CDATA[#{javascript:!optionsBean.getBanner()}]]></xe:this.banner>
+				<xe:this.mastHeader><![CDATA[#{javascript:optionsBean.getBanner()}]]></xe:this.mastHeader>
 			</xe:applicationConfiguration>
 		</xe:this.configuration>
 		<xp:callback></xp:callback>

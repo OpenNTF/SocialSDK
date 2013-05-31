@@ -83,7 +83,7 @@ if(doc) {	o = {		status:			"ok",		id:				snippetId,		unid:			doc.getUniversa
 			</xe:this.methods>
 		</xe:jsonRpcService>
 		<xc:ccLayout navigationPath="/JavaScriptSnippets"
-			title="IBM Social Business Toolkit - JavaScript Snippets" wholePage="true">
+			title="#{javascript:optionsBean.getApplicationTitle('JavaScript Snippets')}" wholePage="true">
 			<xp:this.facets>
 				<xp:panel id="PlaceBarActions"
 					xp:key="PlaceBarActions">

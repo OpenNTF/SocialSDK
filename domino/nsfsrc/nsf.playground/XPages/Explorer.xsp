@@ -54,7 +54,7 @@ function prepend(h,f) {
 	<xc:ccMainPageResources></xc:ccMainPageResources>
 
 	<xc:ccLayout navigationPath="/Explorer"
-		title="IBM Social Business Toolkit - API Explorer" wholePage="true">
+		title="#{javascript:optionsBean.getApplicationTitle('API Explorer')}" wholePage="true">
 		<xp:this.facets>
 			<xp:panel id="PlaceBarActions" xp:key="PlaceBarActions">
 				<xc:ccEnvironmentComboBox fullRefresh="true"></xc:ccEnvironmentComboBox>

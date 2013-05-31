@@ -43,9 +43,11 @@ import com.ibm.sbt.services.endpoints.EndpointFactory;
 
 /**
  * This class demonstrates how to publish to any user's ActivityStream
- * from a standalone class
+ * from a standalone class.
  * 
- * @author Carlos Manias
+ * It accomplishes this using the "to:" field in the template, which specifies users to forward the post to. Admin privileges allow forwarding to any user.
+ * 
+ * @author Carlos Manias, Francis Moloney
  * @date 13 May 2013
  */
 public class AdminPublishActivityStream {
@@ -58,10 +60,21 @@ public class AdminPublishActivityStream {
     private BasicEndpoint endpoint;
     private ActivityStreamService _service;
     
+    /**
+     * Default constructor. Initialises the Context, the ActivityStreamService, and the default ActivityStreamService endpoint.
+     * 
+     * Be sure to call the destroy() method in this class if you don't intend to keep the initialised Context around.
+     */
     public AdminPublishActivityStream(){
         this(ActivityStreamService.DEFAULT_ENDPOINT_NAME, true);
     }
     
+    /**
+     * 
+     * @param endpointName The name of the endpoint to use.
+     * @param initEnvironment - True if you want a Context initialised, false if there is one already. destroy() should be called when finished using this class if a context is initialised here. 
+     * 
+     */
     public AdminPublishActivityStream(String endpointName, boolean initEnvironment){
         if(initEnvironment)
             this.initEnvironment();
@@ -70,21 +83,35 @@ public class AdminPublishActivityStream {
         this.setEndpoint((BasicEndpoint)EndpointFactory.getEndpoint(endpointName));
     }
     
+    /**
+     * 
+     * @return The endpoint used in this class.
+     */
     public BasicEndpoint getEndpoint(){
         return this.endpoint;
     }
     
+    /**
+     * 
+     * @param endpoint The endpoint you want this class to use.
+     */
     public void setEndpoint(BasicEndpoint endpoint){
         this.endpoint = endpoint;
         this._service.setEndpoint(endpoint);
     }
     
+    /**
+     * Initialise the Context, needed for Services and Endpoints.
+     */
     public void initEnvironment() {
         runtimeFactory = new RuntimeFactoryStandalone();
         application = runtimeFactory.initApplication(null);
         context = Context.init(application, null, null);
     }
     
+    /**
+     * Destroy the Context.
+     */
     public void destroy(){
         if (context != null)
             Context.destroy(context);
@@ -92,6 +119,13 @@ public class AdminPublishActivityStream {
             Application.destroy(application);
     }
     
+    /**
+     * Post the json template to the user's stream. User specified by the endpoint's login.
+     * 
+     * @param template The JSON template
+     * @return
+     * @throws SBTServiceException
+     */
     public JsonJavaObject postToStream(JsonJavaObject template) throws SBTServiceException {
         if(_service == null){
             _service = new ActivityStreamService();
@@ -105,12 +139,21 @@ public class AdminPublishActivityStream {
         return returnedData;
     }
     
+    /**
+     * 
+     * @param template
+     * @return
+     * @throws JsonException
+     * @throws AuthenticationException
+     * @throws SBTServiceException
+     */
     public JsonJavaObject postToStream(String template) throws JsonException, AuthenticationException, SBTServiceException{
         JsonJavaObject data = (JsonJavaObject)JsonParser.fromJson(JsonJavaFactory.instanceEx, template);
         return postToStream(data);
     }
     
     /**
+     * Demo.
      * @param args
      */
     public static void main(String[] args) {
@@ -139,7 +182,7 @@ public class AdminPublishActivityStream {
     }
     
     /*
-     * Reads template file
+     * Reads template file. Used when creating the template for the main method sample.
      */
     private String readFile(String filePath) {
         BufferedReader br = null;

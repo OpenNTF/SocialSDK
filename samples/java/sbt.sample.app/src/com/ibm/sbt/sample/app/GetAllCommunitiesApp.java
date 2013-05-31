@@ -17,12 +17,10 @@ package com.ibm.sbt.sample.app;
 
 import java.util.Collection;
 import java.util.Iterator;
-
 import com.ibm.commons.runtime.Application;
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.RuntimeFactory;
 import com.ibm.commons.runtime.impl.app.RuntimeFactoryStandalone;
-import com.ibm.sbt.security.authentication.AuthenticationException;
 import com.ibm.sbt.services.client.connections.communities.Community;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
 import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
@@ -42,13 +40,31 @@ public class GetAllCommunitiesApp {
     private BasicEndpoint endpoint;
     private CommunityService communityService;
     
-    public void init() throws AuthenticationException{
+    public GetAllCommunitiesApp(){
+        this(CommunityService.DEFAULT_ENDPOINT_NAME, true);
+    }
+    public GetAllCommunitiesApp(String endpointName, boolean initEnvironment) {
+        if(initEnvironment)
+            this.initEnvironment();
+        
+        this.communityService = new CommunityService();
+        this.setEndpoint((BasicEndpoint)EndpointFactory.getEndpoint(endpointName));
+    }
+    
+    public BasicEndpoint getEndpoint(){
+        return this.endpoint;
+    }
+    
+    public void setEndpoint(BasicEndpoint endpoint){
+        this.endpoint = endpoint;
+        this.communityService.setEndpoint(this.endpoint);
+    }
+
+    //TODO maybe have the endpoint made in the constructor and getter / setters.
+    public void initEnvironment() {
         runtimeFactory = new RuntimeFactoryStandalone();
         application = runtimeFactory.initApplication(null);
         context = Context.init(application, null, null);
-        communityService = new CommunityService();
-        endpoint = (BasicEndpoint)EndpointFactory.getEndpoint(CommunityService.DEFAULT_ENDPOINT_NAME);
-        endpoint.login("admin", "passw0rd", true);
     }
     
     public void destroy(){
@@ -73,7 +89,6 @@ public class GetAllCommunitiesApp {
 	    GetAllCommunitiesApp app = new GetAllCommunitiesApp();
 		
 	    try {
-            app.init();
             Collection<Community> communities = app.getPublicCommunities();
             for (Iterator<Community> iter = communities.iterator(); iter.hasNext(); ) {
                 Community community = iter.next();
@@ -83,8 +98,6 @@ public class GetAllCommunitiesApp {
                     System.out.println("    " + members[i].getEmail());
                 }
             }
-        } catch (AuthenticationException e) {
-            e.printStackTrace();
         } catch (CommunityServiceException e) {
             e.printStackTrace();
         } finally {

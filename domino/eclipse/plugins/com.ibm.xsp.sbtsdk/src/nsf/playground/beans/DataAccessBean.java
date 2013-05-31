@@ -170,11 +170,16 @@ public abstract class DataAccessBean {
 		}
 		
 		// Playground specific data
+		env.setEndpoint_Connections(d.getItemValueString("Endpoint_Connections"));
+		env.setEndpoint_Smartcloud(d.getItemValueString("Endpoint_Smartcloud"));
+		env.setEndpoint_Domino(d.getItemValueString("Endpoint_Domino"));
+		
 		env.setCon_URL(d.getItemValueString("Con_URL"));
 		env.setCon_OA2_ConsumerKey(d.getItemValueString("Con_OA2_ConsumerKey"));
 		env.setCon_OA2_ConsumerSecret(d.getItemValueString("Con_OA2_ConsumerSecret"));
 		env.setCon_OA2_AuthorizationURL(d.getItemValueString("Con_OA2_AuthorizationURL"));
 		env.setCon_OA2_AccessTokenURL(d.getItemValueString("Con_OA2_AccessTokenURL"));
+		
 		env.setSma_URL(d.getItemValueString("Sma_URL"));
 		env.setSma_OA_ConsumerKey(d.getItemValueString("Sma_OA_ConsumerKey"));
 		env.setSma_OA_ConsumerSecret(d.getItemValueString("Sma_OA_ConsumerSecret"));
@@ -199,6 +204,10 @@ public abstract class DataAccessBean {
 		d.replaceItemValue("Properties",env.getProperties());
 
 		// Playground specific data
+		d.replaceItemValue("Endpoint_Connections",env.getEndpoint_Connections());
+		d.replaceItemValue("Endpoint_Smartcloud",env.getEndpoint_Smartcloud());
+		d.replaceItemValue("Endpoint_Domino",env.getEndpoint_Domino());
+
 		d.replaceItemValue("Con_URL",env.getCon_URL());
 		d.replaceItemValue("Con_OA2_ConsumerKey",env.getCon_OA2_ConsumerKey());
 		d.replaceItemValue("Con_OA2_ConsumerSecret",env.getCon_OA2_ConsumerSecret());

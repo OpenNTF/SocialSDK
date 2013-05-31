@@ -10,6 +10,17 @@
 		<groupId>com.ibm.sbt.sample</groupId>
 		<artifactId>sample.parent</artifactId>
 		    <version>1.0.0</version>
-    <relativePath>../../../../build/domino</relativePath>
+    <relativePath>../../../build/sample</relativePath>
   </parent>
+  <build>
+  <plugins>
+    <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-packaging-plugin</artifactId>
+        <version>${tycho-version}</version>
+        
+    </plugin>
+  </plugins>
+
+  </build>
 </project>

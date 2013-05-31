@@ -1,5 +1,6 @@
 package nsf.playground.environments;
 
+import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.jslibrary.SBTEnvironment;
 import com.ibm.sbt.services.endpoints.ConnectionsBasicEndpoint;
 import com.ibm.sbt.services.endpoints.ConnectionsOAuth2Endpoint;
@@ -20,6 +21,10 @@ public class PlaygroundEnvironment extends SBTEnvironment {
 
 	private String noteID;
 	private String description;
+	
+	private String endpoint_Connections;
+	private String endpoint_Smartcloud;
+	private String endpoint_Domino;
 	
 	// Connections
 	private String con_URL;
@@ -84,6 +89,30 @@ public class PlaygroundEnvironment extends SBTEnvironment {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getEndpoint_Connections() {
+		return endpoint_Connections;
+	}
+
+	public void setEndpoint_Connections(String endpoint_Connections) {
+		this.endpoint_Connections=endpoint_Connections;
+	}
+
+	public String getEndpoint_Smartcloud() {
+		return endpoint_Smartcloud;
+	}
+
+	public void setEndpoint_Smartcloud(String endpoint_Smartcloud) {
+		this.endpoint_Smartcloud=endpoint_Smartcloud;
+	}
+
+	public String getEndpoint_Domino() {
+		return endpoint_Domino;
+	}
+
+	public void setEndpoint_Domino(String endpoint_Domino) {
+		this.endpoint_Domino=endpoint_Domino;
 	}
 
 	public String getCon_URL() {
@@ -221,6 +250,21 @@ public class PlaygroundEnvironment extends SBTEnvironment {
 
 	public void prepareEndpoints() {
 		FacesContextEx context = FacesContextEx.getCurrentInstance();
+		
+		// Set the properties for the default endpoints
+		String endpointConnections = getEndpoint_Connections();
+		if(StringUtil.isEmpty(endpointConnections)) {endpointConnections = "connections";}
+		context.setSessionProperty("sbt.endpoint.connections", endpointConnections);
+		
+		String endpointSmartcloud = getEndpoint_Smartcloud();
+		if(StringUtil.isEmpty(endpointSmartcloud)) {endpointSmartcloud = "smartcloud";}
+		context.setSessionProperty("sbt.endpoint.smartcloud", endpointSmartcloud);
+		
+		String endpointDomino = getEndpoint_Domino();
+		if(StringUtil.isEmpty(endpointDomino)) {endpointDomino = "domino";}
+		context.setSessionProperty("sbt.endpoint.domino", endpointDomino);
+		
+		
 		// Override the beans with the environment definition
 		{
 			ConnectionsBasicEndpoint ep = (ConnectionsBasicEndpoint)ManagedBeanUtil.getBean(context, "connections");

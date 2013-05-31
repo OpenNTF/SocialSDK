@@ -3,67 +3,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>sbt.sample.app</artifactId>
-	<packaging>jar</packaging>
+  <packaging>eclipse-plugin</packaging>
+
 
 	<parent>
 		<groupId>com.ibm.sbt.sample</groupId>
 		<artifactId>sample.parent</artifactId>
-		<version>1.0.0</version>
-		<relativePath>../../../build/sample</relativePath>
-	</parent>
-
-	<dependencies>
-		<dependency>
-			<groupId>com.ibm.sbt.sdk</groupId>
-			<artifactId>com.ibm.commons</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.ibm.sbt.sdk</groupId>
-			<artifactId>com.ibm.commons.xml</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.ibm.sbt.sdk</groupId>
-			<artifactId>com.ibm.commons.runtime</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.ibm.sbt.sdk</groupId>
-			<artifactId>com.ibm.sbt.core</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-logging</groupId>
-			<artifactId>commons-logging</artifactId>
-			<version>1.1.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-			<version>4.2.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpcore</artifactId>
-			<version>4.2.1</version>
-		</dependency>
-	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<configuration>
-					<archive>
-						<manifest>
-							<addClasspath>true</addClasspath>
-							<mainClass>com.ibm.sbt.sample.app.SampleApp</mainClass>
-						</manifest>
-					</archive>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+		    <version>1.0.0</version>
+    <relativePath>../../../../build/domino</relativePath>
+  </parent>
 </project>

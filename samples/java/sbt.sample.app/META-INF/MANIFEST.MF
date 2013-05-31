@@ -2,5 +2,9 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: App
 Bundle-SymbolicName: sbt.sample.app
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 1.0.0
 Export-Package: com.ibm.sbt.sample.app
+Require-Bundle: com.ibm.commons,
+ com.ibm.commons.runtime,
+ com.ibm.commons.xml,
+ com.ibm.sbt.core

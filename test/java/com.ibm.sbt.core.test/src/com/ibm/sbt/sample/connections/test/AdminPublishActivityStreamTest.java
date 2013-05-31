@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 import java.util.Scanner;
+import org.junit.Ignore;
 import org.junit.Test;
 import com.ibm.commons.runtime.util.ParameterProcessor;
 import com.ibm.commons.util.io.json.JsonException;
@@ -36,6 +37,7 @@ import com.ibm.sbt.services.BaseUnitTest;
  *
  */
 public class AdminPublishActivityStreamTest extends BaseUnitTest {
+    @Ignore
     @Test
     public void testPost() throws Exception {
         AdminPublishActivityStream apas = new AdminPublishActivityStream("connections", false);

@@ -91,13 +91,42 @@ dataAccess.copyEnvironment(document1,v);
 				cols="80" rows="5">
 			</xp:inputTextarea>
 		</xe:formRow>
-<!-- 		
-		<xe:formRow id="formRow13" labelPosition="none">
-			<xp:div></xp:div>
+		<xe:formRow loaded="${javascript:userBean.canCreateDocs || compositeData.editbean}" id="formRow27" label="Connection Default">
+			<xp:comboBox id="comboBox2"
+				value="#{document1.Endpoint_Connections}">
+				<xp:selectItem itemLabel="On-Premises - Basic Auth"
+					itemValue="connections">
+				</xp:selectItem>
+				<xp:selectItem itemLabel="On-Premises - OAuth 2.0"
+					itemValue="connectionsOA2">
+				</xp:selectItem>
+				<xp:selectItem itemLabel="SmartCloud - OAuth 1.0a"
+					itemValue="smartcloud">
+				</xp:selectItem>
+				<xp:selectItem itemLabel="SmartCloud - OAuth 2.0" 
+					itemValue="smartcloudOA2">
+				</xp:selectItem>
+			</xp:comboBox>
 		</xe:formRow>
- -->		
+		<xe:formRow loaded="${javascript:userBean.canCreateDocs || compositeData.editbean}" id="formRow30" label="Smartcloud Default:">
+			<xp:comboBox id="comboBox3"
+				value="#{document1.Endpoint_Smartcloud}">
+				<xp:selectItem itemLabel="Smartcloud - OAuth 1.0a"
+					itemValue="smartcloud">
+				</xp:selectItem>
+				<xp:selectItem itemLabel="Smartcloud - OAuth 2.0" itemValue="smartcloudOA2"></xp:selectItem>
+			</xp:comboBox>
+		</xe:formRow>
+		<xe:formRow loaded="${javascript:userBean.canCreateDocs || compositeData.editbean}" id="formRow31" label="Domino Default:">
+			<xp:comboBox id="comboBox4"
+				value="#{document1.Endpoint_Domino}">
+				<xp:selectItem itemLabel="Domino - Basic Auth"
+					itemValue="domino">
+				</xp:selectItem>
+			</xp:comboBox>
+		</xe:formRow>
 		<xe:formRow id="formRow4" labelPosition="none">
-			<xp:section id="section1" header="Connections" initClosed="true" loaded="${javascript:userBean.canCreateDocs || compositeData.editbean}">
+			<xp:section id="section1" header="Connections Server" initClosed="true" loaded="${javascript:userBean.canCreateDocs || compositeData.editbean}">
 				<xe:formTable labelWidth="12em">
 					<xe:formRow id="formRow3" label="URL:">
 						<xp:inputText id="inputText2"
@@ -134,7 +163,7 @@ dataAccess.copyEnvironment(document1,v);
 					</xe:formRow>
 				</xe:formTable>
 			</xp:section>
-			<xp:section id="section2" header="Smartcloud" initClosed="true" loaded="${javascript:userBean.canCreateDocs || compositeData.editbean}">
+			<xp:section id="section2" header="Smartcloud Server" initClosed="true" loaded="${javascript:userBean.canCreateDocs || compositeData.editbean}">
 				<xe:formTable labelWidth="12em">
 					<xe:formRow id="formRow6" label="URL:">
 						<xp:inputText id="inputText3"
@@ -204,7 +233,7 @@ dataAccess.copyEnvironment(document1,v);
 					</xe:formRow>
 				</xe:formTable>
 			</xp:section>
-			<xp:section id="section3" header="Domino"
+			<xp:section id="section3" header="Domino Server"
 				initClosed="true">
 				<xe:formTable>
 					<xe:formRow id="formRow7" label="URL:">

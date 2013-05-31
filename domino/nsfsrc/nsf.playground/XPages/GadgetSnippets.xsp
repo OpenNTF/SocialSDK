@@ -8,7 +8,7 @@
 
 	<xp:form>
 		<xc:ccLayout navigationPath="/GadgetSnippets"
-			title="IBM Social Business Toolkit - OpenSocial Gadgets" wholePage="true">
+			title="#{javascript:optionsBean.getApplicationTitle('OpenSocial Gadgets')}" wholePage="true">
 			not yet implemented
 		</xc:ccLayout>
 	</xp:form>

@@ -3,7 +3,7 @@
 	xmlns:xe="http://www.ibm.com/xsp/coreex"
 	xmlns:xc="http://www.ibm.com/xsp/custom" dojoTheme="true">
 
-	<xp:this.afterPageLoad><![CDATA[#{javascript:view.setPageTitle("IBM Social Business Toolkit - Playground")
+	<xp:this.afterPageLoad><![CDATA[#{javascript:view.setPageTitle(optionsBean.getApplicationTitle("Playground"))
 if(compositeData.wholePage)view.setStyle("overflow: hidden");}]]></xp:this.afterPageLoad>
 
 	<xe:keepSessionAlive id="keepSessionAlive1"></xe:keepSessionAlive>

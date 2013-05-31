@@ -42,7 +42,7 @@ public abstract class OptionsBean {
 		this.apacheLicense = getEnvironmentBoolean("ApacheLicense");
 		this.environments = getEnvironmentString("Environments");
 
-		this.applicationTitle = getEnvironmentString("AppTitle","IBM Social Business Toolkit");
+		this.applicationTitle = getEnvironmentString("AppTitle","IBM Social Business Toolkit XXX");
 		this.applicationLogo = getEnvironmentString("AppLogo");
 	}
 	
@@ -147,6 +147,12 @@ public abstract class OptionsBean {
 
 	public String getApplicationTitle() {
 		return applicationTitle;
+	}
+	public String getApplicationTitle(String subTitle) {
+		if(StringUtil.isNotEmpty(subTitle)) {
+			return getApplicationTitle() + " - " + subTitle;
+		}
+		return getApplicationTitle();
 	}
 	public void setApplicationTitle(String applicationTitle) {
 		this.applicationTitle=applicationTitle;

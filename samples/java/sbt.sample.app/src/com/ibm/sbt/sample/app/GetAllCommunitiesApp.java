@@ -29,7 +29,7 @@ import com.ibm.sbt.services.endpoints.BasicEndpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
 
 /**
- * @author mwallace
+ * @author mwallace, Francis
  * @date 11 April 2013
  */
 public class GetAllCommunitiesApp {
@@ -40,9 +40,20 @@ public class GetAllCommunitiesApp {
     private BasicEndpoint endpoint;
     private CommunityService communityService;
     
+    /**
+     * Default constructor. Initialises the Context, the CommunityService, and the default CommunityService endpoint.
+     * 
+     * Be sure to call the destroy() method in this class if you don't intend to keep the initialised Context around.
+     */
     public GetAllCommunitiesApp(){
         this(CommunityService.DEFAULT_ENDPOINT_NAME, true);
     }
+    
+    /**
+     * 
+     * @param endpointName The name of the endpoint to use.
+     * @param initEnvironment - True if you want a Context initialised, false if there is one already. destroy() should be called when finished using this class if a context is initialised here. 
+     */
     public GetAllCommunitiesApp(String endpointName, boolean initEnvironment) {
         if(initEnvironment)
             this.initEnvironment();
@@ -51,22 +62,35 @@ public class GetAllCommunitiesApp {
         this.setEndpoint((BasicEndpoint)EndpointFactory.getEndpoint(endpointName));
     }
     
+    /**
+     * 
+     * @return The endpoint used in this class.
+     */
     public BasicEndpoint getEndpoint(){
         return this.endpoint;
     }
     
+    /**
+     * 
+     * @param endpoint The endpoint you want this class to use.
+     */
     public void setEndpoint(BasicEndpoint endpoint){
         this.endpoint = endpoint;
         this.communityService.setEndpoint(this.endpoint);
     }
 
-    //TODO maybe have the endpoint made in the constructor and getter / setters.
+    /**
+     * Initialise the Context, needed for Services and Endpoints.
+     */
     public void initEnvironment() {
         runtimeFactory = new RuntimeFactoryStandalone();
         application = runtimeFactory.initApplication(null);
         context = Context.init(application, null, null);
     }
     
+    /**
+     * Destroy the Context.
+     */
     public void destroy(){
         if (context != null)
             Context.destroy(context);
@@ -74,15 +98,28 @@ public class GetAllCommunitiesApp {
             Application.destroy(application);
     }
     
+    /**
+     * Get a list of public communities.
+     * @return Collection of public communities
+     * @throws CommunityServiceException
+     */
     public Collection<Community> getPublicCommunities() throws CommunityServiceException{
         return communityService.getPublicCommunities();
     }
     
+    /**
+     * Get the members of a specified Community.
+     * @param community
+     * @return The members of the community.
+     * @throws CommunityServiceException
+     */
     public Member[] getCommunityMembers(Community community) throws CommunityServiceException{
         return communityService.getMembers(community);
     }
     
 	/**
+	 * Demo.
+	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {

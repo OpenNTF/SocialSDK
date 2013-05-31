@@ -233,7 +233,8 @@ if(doc) {
 								<xp:selectItems>
 									<xp:this.value><![CDATA[#{javascript:snippetBean.getJavaScriptLibraries()}]]></xp:this.value>
 								</xp:selectItems>
-							</xp:comboBox></xe:djBorderPane>
+							</xp:comboBox>
+						</xe:djBorderPane>
 						<xe:djBorderPane region="center"
 							style="border: 1px solid #AAAAAA;">
 							<xp:div style="height: 100%">

@@ -93,7 +93,7 @@ return o;]]></xe:this.script>
 			</xe:this.methods>
 		</xe:jsonRpcService>
 		<xc:ccLayout navigationPath="/XPagesSnippets"
-			title="IBM Social Business Toolkit - XPages Snippets" wholePage="true">
+			title="#{javascript:optionsBean.getApplicationTitle('XPages Snippets')}" wholePage="true">
 			<xp:this.facets>
 				<xp:panel id="PlaceBarActions"
 					xp:key="PlaceBarActions">

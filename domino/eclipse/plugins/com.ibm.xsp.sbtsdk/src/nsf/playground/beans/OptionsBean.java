@@ -29,7 +29,9 @@ public abstract class OptionsBean {
 	private boolean explorerEnabled;
 	private boolean apacheLicense;
 	private String environments;
+	private String servers;
 	
+	private String banner;
 	private String applicationTitle;
 	private String applicationLogo;
 	
@@ -41,16 +43,22 @@ public abstract class OptionsBean {
 		this.explorerEnabled = getEnvironmentBoolean("APIExplorer");
 		this.apacheLicense = getEnvironmentBoolean("ApacheLicense");
 		this.environments = getEnvironmentString("Environments");
+		this.servers = getEnvironmentString("Servers","connections,smartcloud,domino");
 
+		this.banner = getEnvironmentString("Banner");
 		this.applicationTitle = getEnvironmentString("AppTitle","IBM Social Business Toolkit");
 		this.applicationLogo = getEnvironmentString("AppLogo");
+	}
+	
+	public String getNotesIniPrefix() {
+		return "Playground_";
 	}
 	
 	protected String getEnvironmentString(String propName) {
 		return getEnvironmentString(propName, null);
 	}
 	protected String getEnvironmentString(String propName, String defaultValue) {
-		String name = "Playground_"+propName;
+		String name = getNotesIniPrefix()+propName;
 		String value = DominoUtils.getEnvironmentString(name);
 		if(StringUtil.isEmpty(value)) {
 			return defaultValue;
@@ -145,6 +153,16 @@ public abstract class OptionsBean {
 		this.environments=environments;
 	}
 
+	public String getServers() {
+		return servers;
+	}
+	public void setServers(String servers) {
+		this.servers=servers;
+	}
+	public boolean hasServer(String serverName) {
+		return servers!=null && servers.contains(serverName);
+	}
+
 	public String getApplicationTitle() {
 		return applicationTitle;
 	}
@@ -164,5 +182,11 @@ public abstract class OptionsBean {
 	public void setApplicationLogo(String applicationLogo) {
 		this.applicationLogo=applicationLogo;
 	}
-	
+
+	public String getBanner() {
+		return banner;
+	}
+	public void setBanner(String banner) {
+		this.banner=banner;
+	}
 }

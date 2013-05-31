@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:this.afterPageLoad><![CDATA[#{javascript:view.putViewProperty("xsp.theme","oneui2.1");
+//view.setStyleClass(view.getStyleClass()+" scloud3")}]]></xp:this.afterPageLoad>
+	<!-- 
+	<div styleClass="scloud3">
+		<div id="smartcloudExt"></div>
+	</div>
+-->	
+ 	<script
+		src="https://apps.na.collabservtest.lotus.com/navbar/banner/smartcloudExt?oneui=2">
+	</script>
+	<link rel="stylesheet"
+		href="https://apps.na.collabservtest.lotus.com/theming/theme/css/2"
+		type="text/css" />
+		
+</xp:view>

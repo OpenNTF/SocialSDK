@@ -42,7 +42,7 @@ public abstract class OptionsBean {
 		this.apacheLicense = getEnvironmentBoolean("ApacheLicense");
 		this.environments = getEnvironmentString("Environments");
 
-		this.applicationTitle = getEnvironmentString("AppTitle","IBM Social Business Toolkit XXX");
+		this.applicationTitle = getEnvironmentString("AppTitle","IBM Social Business Toolkit");
 		this.applicationLogo = getEnvironmentString("AppLogo");
 	}
 	

@@ -24,7 +24,6 @@ import com.ibm.commons.runtime.RuntimeFactory;
 import com.ibm.commons.runtime.impl.app.RuntimeFactoryStandalone;
 import com.ibm.commons.xml.DOMUtil;
 import com.ibm.commons.xml.XMLException;
-import com.ibm.sbt.security.authentication.AuthenticationException;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.endpoints.BasicEndpoint;
@@ -41,11 +40,28 @@ public class GetProfileXml {
     private Application application;
     private BasicEndpoint endpoint;
     
-    public void init() throws AuthenticationException{
+    public GetProfileXml() {
+        this("connections", true);
+    }
+    
+    public GetProfileXml(String endpointName, boolean initEnvironment){
+        if(initEnvironment)
+            this.initEnvironment();
+        this.setEndpoint((BasicEndpoint)EndpointFactory.getEndpoint(endpointName));
+    }
+    
+    public BasicEndpoint getEndpoint(){
+        return this.endpoint;
+    }
+    
+    public void setEndpoint(BasicEndpoint endpoint){
+        this.endpoint = endpoint;
+    }
+    
+    public void initEnvironment(){
         runtimeFactory = new RuntimeFactoryStandalone();
         application = runtimeFactory.initApplication(null);
         context = Context.init(application, null, null);
-        endpoint = (BasicEndpoint)EndpointFactory.getEndpoint("connections");
     }
     
     public void destroy(){
@@ -70,11 +86,8 @@ public class GetProfileXml {
 	public static void main(String[] args) {
 	    GetProfileXml app = new GetProfileXml();
 	    try {
-            app.init();
             String xml = app.getProfileXml();
             System.out.println(xml);
-        } catch (AuthenticationException e) {
-            e.printStackTrace();
         } catch (ClientServicesException e) {
             e.printStackTrace();
         } catch (XMLException e) {

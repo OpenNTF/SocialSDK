@@ -49,22 +49,40 @@ import com.ibm.sbt.services.endpoints.EndpointFactory;
  * @date 13 May 2013
  */
 public class AdminPublishActivityStream {
-	
-	private static final String  APPLICATION_JSON  = "application/json";
-	
-	private RuntimeFactory runtimeFactory;
-	private Context context;
-	private Application application;
-	private BasicEndpoint endpoint;
-	private ActivityStreamService _service;
     
-    public void init() throws AuthenticationException{
+    private static final String  APPLICATION_JSON  = "application/json";
+    
+    private RuntimeFactory runtimeFactory;
+    private Context context;
+    private Application application;
+    private BasicEndpoint endpoint;
+    private ActivityStreamService _service;
+    
+    public AdminPublishActivityStream(){
+        this(ActivityStreamService.DEFAULT_ENDPOINT_NAME, true);
+    }
+    
+    public AdminPublishActivityStream(String endpointName, boolean initEnvironment){
+        if(initEnvironment)
+            this.initEnvironment();
+        
+        this._service = new ActivityStreamService();
+        this.setEndpoint((BasicEndpoint)EndpointFactory.getEndpoint(endpointName));
+    }
+    
+    public BasicEndpoint getEndpoint(){
+        return this.endpoint;
+    }
+    
+    public void setEndpoint(BasicEndpoint endpoint){
+        this.endpoint = endpoint;
+        this._service.setEndpoint(endpoint);
+    }
+    
+    public void initEnvironment() {
         runtimeFactory = new RuntimeFactoryStandalone();
         application = runtimeFactory.initApplication(null);
         context = Context.init(application, null, null);
-        _service = new ActivityStreamService();
-        endpoint = (BasicEndpoint)EndpointFactory.getEndpoint(ActivityStreamService.DEFAULT_ENDPOINT_NAME);
-        endpoint.login("admin", "***REMOVED***", true);
     }
     
     public void destroy(){
@@ -74,54 +92,11 @@ public class AdminPublishActivityStream {
             Application.destroy(application);
     }
     
-	/*
-	 * Reads template file
-	 */
-	private String readFile(String filePath) {
-		BufferedReader br = null;
-		StringBuilder sb = new StringBuilder();
-		try {
-			String sCurrentLine;
-			
-			URL path = getClass().getResource(filePath);
-			if(path!=null) {
-				File f;
-				f = new File(path.toURI());
-				br = new BufferedReader(new FileReader(f));
-				while ((sCurrentLine = br.readLine()) != null) {
-					sb.append(sCurrentLine);
-				}
-			} else {
-				throw new FileNotFoundException();
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (br != null) br.close();
-			} catch (IOException ex) {
-				ex.printStackTrace();
-			}
-		}
-		return sb.toString();
-	}
-	
-	/*
-	 * Merges template with data
-	 */
-	private JsonJavaObject mergeData(String templatePath, String propertiesPath) throws JsonException{
-		String template = readFile(templatePath);
-		FileResourcePropertiesFactory frpf = new FileResourcePropertiesFactory();
-		Properties props = frpf.readFactoriesFromFile(propertiesPath);
-		template = ParameterProcessor.process(template, props);
-		
-		JsonJavaObject templateObj = (JsonJavaObject)JsonParser.fromJson(JsonJavaFactory.instanceEx, template);
-		return templateObj;
-	}
-	
-	public JsonJavaObject postToStream(JsonJavaObject template) throws SBTServiceException {
+    public JsonJavaObject postToStream(JsonJavaObject template) throws SBTServiceException {
+        if(_service == null){
+            _service = new ActivityStreamService();
+            _service.setEndpoint(this.endpoint);
+        }
         JsonJavaObject returnedData = null;
         Map<String, String> header = new HashMap<String, String>();
         header.put("Content-Type", APPLICATION_JSON);
@@ -129,21 +104,21 @@ public class AdminPublishActivityStream {
         
         return returnedData;
     }
-	
-	public JsonJavaObject postToStream(String template) throws JsonException, AuthenticationException, SBTServiceException{
+    
+    public JsonJavaObject postToStream(String template) throws JsonException, AuthenticationException, SBTServiceException{
         JsonJavaObject data = (JsonJavaObject)JsonParser.fromJson(JsonJavaFactory.instanceEx, template);
         return postToStream(data);
-	}
-	
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		if (args.length >= 2) {
-		    AdminPublishActivityStream paas = new AdminPublishActivityStream();
-		    JsonJavaObject template;
+    }
+    
+    /**
+     * @param args
+     */
+    public static void main(String[] args) {
+        if (args.length >= 2) {
+            AdminPublishActivityStream paas = new AdminPublishActivityStream();
+            JsonJavaObject template;
             try {
-                paas.init();
+                paas.getEndpoint().login("admin", "***REMOVED***");
                 template = paas.mergeData(args[0], args[1]);
                 JsonJavaObject streamEntry = paas.postToStream(template);
                 if(streamEntry != null)
@@ -157,9 +132,56 @@ public class AdminPublishActivityStream {
             } finally{
                 paas.destroy();
             }
-		}
-		else {
+        }
+        else {
             System.out.println("Usage: PublishAnyActivityStream templateFilePath dataFilePath");
         }
-	}
+    }
+    
+    /*
+     * Reads template file
+     */
+    private String readFile(String filePath) {
+        BufferedReader br = null;
+        StringBuilder sb = new StringBuilder();
+        try {
+            String sCurrentLine;
+            
+            URL path = getClass().getResource(filePath);
+            if(path!=null) {
+                File f;
+                f = new File(path.toURI());
+                br = new BufferedReader(new FileReader(f));
+                while ((sCurrentLine = br.readLine()) != null) {
+                    sb.append(sCurrentLine);
+                }
+            } else {
+                throw new FileNotFoundException();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (br != null) br.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return sb.toString();
+    }
+    
+    /*
+     * Merges template with data
+     */
+    private JsonJavaObject mergeData(String templatePath, String propertiesPath) throws JsonException{
+        String template = readFile(templatePath);
+        FileResourcePropertiesFactory frpf = new FileResourcePropertiesFactory();
+        Properties props = frpf.readFactoriesFromFile(propertiesPath);
+        template = ParameterProcessor.process(template, props);
+        
+        JsonJavaObject templateObj = (JsonJavaObject)JsonParser.fromJson(JsonJavaFactory.instanceEx, template);
+        return templateObj;
+    }
 }

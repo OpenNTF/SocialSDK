@@ -6,5 +6,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/com.ibm.commons.runtime"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/com.ibm.commons.xml"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/com.ibm.sbt.core"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

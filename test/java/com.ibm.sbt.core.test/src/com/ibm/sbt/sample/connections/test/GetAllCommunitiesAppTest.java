@@ -2,6 +2,7 @@ package com.ibm.sbt.sample.connections.test;
 
 import static org.junit.Assert.assertNotNull;
 import java.util.Collection;
+import org.junit.Ignore;
 import org.junit.Test;
 import com.ibm.sbt.sample.app.GetAllCommunitiesApp;
 import com.ibm.sbt.services.BaseUnitTest;
@@ -28,7 +29,7 @@ import com.ibm.sbt.services.client.connections.communities.Member;
  * @date 30 May 2013
  */
 public class GetAllCommunitiesAppTest extends BaseUnitTest {
-    
+    @Ignore
     @Test
     public void testCommunitiesService() throws Exception {
         GetAllCommunitiesApp app = new GetAllCommunitiesApp("connections", false);

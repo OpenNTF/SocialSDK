@@ -1003,7 +1003,8 @@ public class FileService extends BaseService {
 		String category = Categories.PINNED.getCategory();
 		String view = Views.FILES.getViews();
 		String resultType = ResultType.FEED.getResultType();
-		String requestUri = constructUrl(BaseUrl.FILES.getBaseUrl(), accessType, category, view, null, null,
+		String requestUri = "/files/basic/api/myfavorites/documents/feed";//
+		constructUrl(BaseUrl.FILES.getBaseUrl(), accessType, category, view, null, null,				
 				resultType);
 		List<Object> resultantObjects = executeGet(requestUri, params, ClientService.FORMAT_XML,
 				FileEntry.class);

@@ -223,7 +223,8 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         /**
          * Lock or unlock a file
          */
-        AtomLockUnlockFile : "/files/basic/api/document/{documentId}/lock"
-        	
+        AtomLockUnlockFile : "/files/basic/api/document/{documentId}/lock",
+        
+       
     }, conn);
 });

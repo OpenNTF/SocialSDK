@@ -1,0 +1,33 @@
+<div id="error" style="display:none;" class="alert alert-error"></div>
+<div id="success" style="" class="alert alert-success"></div>
+
+<br/>
+<input type="file" id="your-files"></input>
+<button class="btn btn-primary" id="uploadBtn" onclick="upload()">Upload File</button>	 
+<p>
+	<div class="form-horizontal">
+    <legend>File Details</legend>
+     <div class="control-group">
+    	<label class="control-label">File Id:</label>
+        <div class="controls">
+            <input id="fileId" type="text" placeholder="File Id" style="width:400px" disabled="disabled"></input>
+        </div>
+        <div style="height:4px"></div>
+        <label class="control-label">Label:</label>
+        <div class="controls">
+            <input id="label" type="text" placeholder="Label" style="width:400px" disabled="disabled"></input>
+        </div>
+        <div style="height:4px"></div>
+        <label class="control-label">Summary:</label>
+        <div class="controls">
+            <input id="summary" type="text" placeholder="Summary" style="width:400px" disabled="disabled"></input>
+        </div>
+        <div style="height:4px"></div>
+        <label class="control-label">Visibility:</label>
+        <div class="controls">
+            <input id="visibility" type="text" placeholder="visibility" style="width:400px" disabled="disabled"></input>
+        </div>
+        <div style="height:8px"></div>
+        
+        <div id="note" class="alert alert-error">Note: This Sample will not work on browsers which do not support HTML 5 File API and on Websphere or Portal Servers.</div>
+</p>

@@ -26,6 +26,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.ibm.commons.runtime.Application;
 import com.ibm.sbt.service.basic.ProxyEndpointService;
+import com.ibm.sbt.service.basic.ProxyService;
+import com.ibm.sbt.service.ext.DefaultProxyEndpointServiceProvider;
 import com.ibm.sbt.service.ext.ProxyEndpointServiceProvider;
 
 /**
@@ -47,11 +49,13 @@ public class FileHandler extends AbstractServiceHandler {
 	public void service(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
 
 		ProxyEndpointService proxyEndpointService = null;
+		// /files/<<endpointName>>/<<serviceType>>?param1=value1&parm2=value2
 		String pathinfo = request.getPathInfo().substring(request.getPathInfo().indexOf("/files")); 
 		String[] pathTokens = pathinfo.split("/");		
 		if (pathTokens.length > 4) {
 			String serviceType = pathTokens[3];
 			Application application = Application.get();
+			// ProxyEndpointServiceProvider.PROXY_SERVICE_TYPE is the extension ID
 			List<Object> proxyServiceProviders = application.findServices(ProxyEndpointServiceProvider.PROXY_SERVICE_TYPE);
 			if(proxyServiceProviders != null && !proxyServiceProviders.isEmpty()){
 				for(Object o : proxyServiceProviders){
@@ -61,14 +65,18 @@ public class FileHandler extends AbstractServiceHandler {
 						break;
 					}
 				}
-			}			
+			}
+			else {
+				DefaultProxyEndpointServiceProvider proxyEndpointServiceProvider = new DefaultProxyEndpointServiceProvider();
+				proxyEndpointService = proxyEndpointServiceProvider.createProxyEndpointService(serviceType);
+			}
 		}
 		if(proxyEndpointService != null){
 			proxyEndpointService.service(request, response);
 		}
 		else{
 			logger.log(Level.SEVERE, "ProxyEndpoint Service could not be retrieved for PathInfo {0}", pathinfo);
-			 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ProxyEndpoint Service could not be retrieved");
+			ProxyService.writeErrorResponse(HttpServletResponse.SC_BAD_REQUEST, "ProxyEndpoint Service could not be retrieved", new String[] {}, new String[] {}, response, request);			
 		}
 	}
 }

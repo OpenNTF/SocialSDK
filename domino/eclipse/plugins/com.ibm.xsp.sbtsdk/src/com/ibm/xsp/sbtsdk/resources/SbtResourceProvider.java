@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.ibm.sbt.web.SbtWebActivator;
 import com.ibm.xsp.extlib.plugin.DominoPluginActivator;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
+import com.ibm.xsp.sbtsdk.Activator;
 import com.ibm.xsp.webapp.FacesResourceServlet;
 import com.ibm.xsp.webapp.resources.BundleResourceProvider;
 
@@ -45,6 +46,9 @@ public class SbtResourceProvider extends BundleResourceProvider {
 
     @Override
     protected URL getResourceURL(HttpServletRequest request, String name) {
+        if(name.startsWith("bootstrap/")) {
+        	return ExtLibUtil.getResourceURL(Activator.instance.getBundle(), "resources/"+name);
+        }
         if(name.startsWith("js/sdk/_bridge/")) {
             if(ExtLibUtil.isXPages853()) {
                 name = "js/sdk/_bridges/dojo/"+name.substring("js/sdk/_bridge/".length());

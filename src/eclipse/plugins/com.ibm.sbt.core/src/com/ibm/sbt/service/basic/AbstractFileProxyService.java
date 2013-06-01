@@ -30,37 +30,43 @@ import com.ibm.sbt.services.client.ClientService.Handler;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
+import com.ibm.sbt.services.util.AuthUtil;
 import com.ibm.sbt.services.util.SSLUtil;
 
-/**
+/** 
  * 
  * @author Vineet Kanwal
  *
  */
 public abstract class AbstractFileProxyService extends ProxyEndpointService {
-	protected String uploadUrl;
 
+	protected String fileNameOrId = null;
+	
+	private long length;
+	
+	protected String libraryId = null;
+
+	protected abstract String getRequestURI(String smethod, String authType, Map<String, String[]> params) throws ServletException;
+
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void initProxy(HttpServletRequest request, HttpServletResponse response) throws ServletException {
-		String pathinfo = request.getPathInfo().substring(request.getPathInfo().indexOf("/files")); 
+		String pathinfo = request.getPathInfo().substring(request.getPathInfo().indexOf("/files"));
 		String[] pathTokens = pathinfo.split("/");
-		if (pathTokens.length > 3) {
+		if (pathTokens.length >= 5) {
 			String endPointName = pathTokens[2];
 			this.endpoint = (Endpoint) EndpointFactory.getEndpoint(endPointName);
 			if (!endpoint.isAllowClientAccess()) {
 				throw new ServletException(StringUtil.format("Client access forbidden for the specified endpoint {0}", endPointName));
 			}
-			int start = pathinfo.indexOf(pathTokens[4] + "/" + pathTokens[5]) - 1;
-			requestURI = pathinfo.substring(start);
+			fileNameOrId = pathTokens[4];
+			if(pathTokens.length == 6){
+				libraryId = pathTokens[5];
+			}
+			requestURI = getRequestURI(request.getMethod(), AuthUtil.INSTANCE.getAuthValue(endpoint), request.getParameterMap());			
 			return;
 		}
-		StringBuffer b = request.getRequestURL();
-		String q = request.getQueryString();
-		if (StringUtil.isNotEmpty(q)) {
-			b.append('?');
-			b.append(q);
-		}
-		throw new ServletException(StringUtil.format("Invalid url {0}", b.toString()));
+		throw new ServletException(StringUtil.format("Invalid url {0}", pathinfo));
 	}
 
 	@Override
@@ -69,39 +75,27 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 		OutputStream out = null;
 		try {
 			initProxy(request, response);
-
 			String smethod = request.getMethod();
 			DefaultHttpClient client = getClient(request, getSocketReadTimeout());
 			URI url = getRequestURI(request);
 			HttpRequestBase method = createMethod(smethod, url, request);
-
 			if (prepareForwardingMethod(method, request, client)) {
+				if (smethod.equalsIgnoreCase("POST")) {
+					@SuppressWarnings("unchecked")
+					Map<String, String[]> params = request.getParameterMap() != null ? request.getParameterMap() : new HashMap<String, String[]>();
+					if (fileNameOrId == null) {
+						writeErrorResponse(HttpServletResponse.SC_BAD_REQUEST, "File Name not provided.", new String[] {}, new String[] {}, response, request);
+						return;
+					}
+					File file = convertInputStreamToFile(request.getInputStream());
+					Content content = getFileContent(file, length, fileNameOrId);
+					Map<String, String> headers = createHeaders();
+					// this.endpoint.getClientService().post(uploadUrl, params, headers, content, ClientService.FORMAT_XML);
+					xhr(request, response, url.getPath(), params, headers, content, ClientService.FORMAT_XML);
+				} else if (smethod.equalsIgnoreCase("GET")) {
+					xhr(request, response, requestURI, new HashMap<String, String[]>(), new HashMap<String, String>(), null, ClientService.FORMAT_INPUTSTREAM);
 
-				String name = request.getHeader("Slug").substring(request.getHeader("Slug").lastIndexOf("\\") + 1);
-
-				@SuppressWarnings("unchecked")
-				Map<String, String[]> params = request.getParameterMap() != null ? request.getParameterMap() : new HashMap<String, String[]>();
-
-				File file = new File(name);
-				out = new FileOutputStream(file);
-
-				long length = 0;
-				byte[] bytes = new byte[1024];
-				int read = 0;
-				while ((read = inputStream.read(bytes)) != -1) {
-					length += read;
-					out.write(bytes, 0, read);
-					out.flush();
 				}
-
-				inputStream.close();
-				out.close();
-
-				Content content = getFileContent(file, length, name);
-
-				Map<String, String> headers = new HashMap<String, String>();
-				// this.endpoint.getClientService().post(uploadUrl, params, headers, content, ClientService.FORMAT_XML);
-				xhr(request, response, url.getPath(), params, headers, content, ClientService.FORMAT_XML);
 			}
 		} catch (Exception e) {
 			if (e instanceof ClientServicesException) {
@@ -117,8 +111,36 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 				out.close();
 			}
 		}
-
 	}
+	
+	private File convertInputStreamToFile(InputStream inputStream) throws IOException {
+		File file = null;
+		OutputStream out = null;
+		try {
+			file = new File(fileNameOrId);
+			out = new FileOutputStream(file);
+			byte[] bytes = new byte[1024];
+			int read = 0;
+			while ((read = inputStream.read(bytes)) != -1) {
+				length += read;
+				out.write(bytes, 0, read);
+				out.flush();
+			}
+			inputStream.close();
+			out.close();
+			return file;
+		} catch (IOException e) {
+			throw e;
+		} finally {
+			inputStream.close();
+			if (out != null) {
+				out.close();
+			}
+		}
+	}
+
+
+	protected abstract Map<String, String> createHeaders();
 
 	protected abstract Content getFileContent(File file, long length, String name);
 
@@ -160,7 +182,6 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 				}
 			}
 		}
-
 		return b.toString();
 	}
 
@@ -169,21 +190,17 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 			ServletException, URISyntaxException {
 
 		Args args = new Args();
-		args.setServiceUrl(serviceUrl);
-		// args.setParameters(parameters);
+		args.setServiceUrl(serviceUrl);		
 		args.setHandler(format);
 		args.setHeaders(headers);
 
 		String smethod = request.getMethod();
-
 		HttpRequestBase method = createMethod(smethod, new URI(composeRequestUrl(args, parameters)), request);
-
 		DefaultHttpClient httpClient = new DefaultHttpClient();
 		if (endpoint.isForceTrustSSLCertificate()) {
 			httpClient = SSLUtil.wrapHttpClient(httpClient);
 		}
 		endpoint.initialize(httpClient);
-
 		for (Map.Entry<String, String> e : args.getHeaders().entrySet()) {
 			String headerName = e.getKey();
 			String headerValue = e.getValue();
@@ -192,11 +209,7 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 		if (content != null) {
 			content.initRequestContent(httpClient, method, args);
 		}
-
 		HttpResponse clientResponse = httpClient.execute(method);
-
 		prepareResponse(method, request, response, clientResponse, true);
-
 	}
-
 }

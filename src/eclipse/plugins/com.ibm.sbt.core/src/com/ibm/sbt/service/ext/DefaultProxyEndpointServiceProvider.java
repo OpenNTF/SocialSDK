@@ -5,7 +5,6 @@ import java.util.Map;
 
 import com.ibm.sbt.service.basic.ConnectionsFileProxyService;
 import com.ibm.sbt.service.basic.ProxyEndpointService;
-import com.ibm.sbt.service.basic.SmartCloudFileProxyService;
 
 /**
  * 
@@ -18,8 +17,7 @@ public class DefaultProxyEndpointServiceProvider extends ProxyEndpointServicePro
 
 	public DefaultProxyEndpointServiceProvider() {
 		super();
-		fileProxyMap.put("connections", new ConnectionsFileProxyService());
-		fileProxyMap.put("smartcloud", new SmartCloudFileProxyService());
+		fileProxyMap.put("connections", new ConnectionsFileProxyService());		
 	}
 
 	@Override

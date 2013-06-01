@@ -2,7 +2,7 @@ function upload() {
 	require([ 'sbt/connections/FileService', 'sbt/dom' ], function(FileService, dom) {
 		dom.byId("loading").style.visibility = "visible";
 		dom.setText('status', '');
-		var fileService = new FileService({endpoint : "smartcloud"});
+		var fileService = new FileService();
 		// "your-files" is the ID of the HTML5 File Control. Refer to Upload File.html
 		fileService.uploadFile("your-files", {
 			// additional paramertes to add file metadata			

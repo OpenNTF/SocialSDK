@@ -20,8 +20,8 @@
  * @module sbt.connections.FileService
  */
 
-define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", "./FileConstants", "../base/BaseService", "../base/BaseEntity", "../base/XmlDataHandler", "../xml" ],
-		function(declare, lang, stringUtil, Endpoint, Promise, consts, BaseService, BaseEntity, XmlDataHandler, xml) {
+define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", "./FileConstants", "../base/BaseService", "../base/BaseEntity", "../base/XmlDataHandler", "../config", "../util","../xml" ],
+		function(declare, lang, stringUtil, Endpoint, Promise, consts, BaseService, BaseEntity, XmlDataHandler, cfg, util, xml) {
 
 			/**
 			 * Comment class associated with a file comment.
@@ -567,23 +567,23 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 				},
 				/**
 				 * Pin th file, by sending a POST request to the myfavorites feed.
-				 * @method pin				
+				 * @method pin
 				 * @param {Object} [args] Argument object.
 				 */
-				pin : function(args){
+				pin : function(args) {
 					return this.service.pinFile(this.getId(), args);
 				},
 				/**
 				 * Unpin the file, by sending a DELETE request to the myfavorites feed.
-				 * @method unPin				
+				 * @method unPin
 				 * @param {Object} [args] Argument object.
 				 */
-				unpin : function(args){
+				unpin : function(args) {
 					return this.service.unpinFile(this.getId(), args);
 				},
 				/**
 				 * Lock the file
-				 * @method lock				
+				 * @method lock
 				 * @param {Object} [args] Argument object
 				 */
 				lock : function(args) {
@@ -591,7 +591,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 				},
 				/**
 				 * UnLock the file
-				 * @method unlock				
+				 * @method unlock
 				 * @param {Object} [args] Argument object
 				 */
 				unlock : function(args) {
@@ -599,7 +599,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 				},
 				/**
 				 * Deletes the file.
-				 * @method remove				 
+				 * @method remove
 				 * @param {Object} [args] Argument object
 				 */
 				remove : function(args) {
@@ -607,7 +607,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 				},
 				/**
 				 * Update the Atom document representation of the metadata for the file
-				 * @method update	
+				 * @method update
 				 * @param {Object} [args] Argument object. Object representing various parameters that can be passed. The parameters must be exactly as they are supported by IBM Connections like ps,
 				 * sortBy etc.
 				 */
@@ -695,6 +695,8 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 			 */
 			var FileService = declare(BaseService, {
 
+				endpointName : null,
+
 				/**
 				 * Constructor for FileService
 				 * 
@@ -702,8 +704,9 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 				 * @param args
 				 */
 				constructor : function(args) {
-					if (!this.endpoint) {
-						this.endpoint = Endpoint.find(args ? (args.endpoint ? args.endpoint : this.getDefaultEndpointName()) : this.getDefaultEndpointName());
+					this.endpointName = args ? (args.endpoint ? args.endpoint : this.getDefaultEndpointName()) : this.getDefaultEndpointName();
+					if (!this.endpoint) {						
+						this.endpoint = Endpoint.find(this.endpointName);
 					}
 				},
 
@@ -714,7 +717,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 				getDefaultEndpointName : function() {
 					return "connections";
 				},
-				
+
 				/**
 				 * Callbacks used when reading a feed that contains File entries.
 				 */
@@ -970,12 +973,12 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 				 * sortBy etc.
 				 */
 				updateFileMetadata : function(fileOrJson, args) {
-					
+
 					var promise = this.validateField("fileOrJson", fileOrJson);
 					if (promise) {
 						return promise;
 					}
-					
+
 					var file = this.newFile(fileOrJson);
 					var options = {
 						method : "PUT",
@@ -1054,7 +1057,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 				 * You cannot add a file from your local directory to a folder; the file must already have been uploaded to the Files application. To add a file to a folder you must be an editor of
 				 * the folder.
 				 * 
-				 * @method addFilesToFolder		
+				 * @method addFilesToFolder
 				 * @param {String} folderId the Id of the folder
 				 * @param {List} fileIds list of file Ids to be added to the folder
 				 * @param {Object} [args] Argument object.
@@ -1194,6 +1197,115 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 					return this.updateEntity(url, options, callbacks, args);
 				},
 
+				/**
+				 * Uploads a new file for logged in user.
+				 * @method uploadFile
+				 * @param {Object} [args] Argument object
+				 * @param {Objecr} [args.fileControlId] The Id of html control
+				 * @param {Object} [args.fileControl] The html control
+				 * @param {Function} [args.load] The callback function will invoke when the file is uploaded successfully. The function expects one parameter, the status of upload.
+				 * @param {Function} [args.error] Sometimes the upload calls fails due to bad request (400 error). The error parameter is a callback function that is only invoked when an error occurs.
+				 * This allows to write logic when an error occurs. The parameter passed to the error function is a JavaScript Error object indicating what the failure was. From the error object. one
+				 * can access the javascript library error object, the status code and the error message.
+				 * @param {Function} [args.handle] This callback function is called regardless of whether the call to upload the file completes or fails. The parameter passed to this callback is the
+				 * FileEntry object (or error object). From the error object. one can get access to the javascript library error object, the status code and the error message.
+				 * @param {Object} [args.parameters] The additional parameters
+				 */
+				uploadFile : function(fileControlOrId, args) {
+					if(!fileControlOrId){
+						util.notifyError({message: "fileControlOrId is not provided"}, args);
+						return;
+					}
+					if (!window.FileReader)
+			        {
+						util.notifyError({message: "HTML 5 File Control is not supported by the Browser."}, args);
+						return;
+			        }			       
+					var files = null;
+					var filePath = null;
+					if (typeof fileControlOrId == "string") {
+						var fileControl = document.getElementById(fileControlOrId);
+						filePath = fileControl.value;
+						files = fileControl.files;
+					} else if (typeof fileControlOrId == "object") {
+						filePath = fileControlOrId.value;
+						files = fileControlOrId.files;
+					} else {
+						util.notifyError("File Control or ID is required", args);
+					}
+					var index = filePath.lastIndexOf("\\");
+					if (index == -1) {
+						index = filePath.lastIndexOf("/");
+					}
+
+					var reader = new FileReader();
+					var self = this;
+					reader.onload = function(event) {
+						var binaryContent = event.target.result;
+
+						var index = filePath.lastIndexOf("\\");
+						if (index == -1) {
+							index = filePath.lastIndexOf("/");
+						}
+						var fileName = filePath.substring(index + 1);
+						self.uploadFileBinary(binaryContent, fileName, args);
+					};
+					reader.onerror = function(error) {
+						util.notifyError(error, args);
+					};
+					reader.readAsBinaryString(files[0]);
+				},
+
+				/**
+				 * Uploads a new file for logged in user.
+				 * @method uploadFile
+				 * @param {Object} [binaryContent] The binary content of the file
+				 * @param {Object} [args] Argument object
+				 * @param {Function} [args.load] The callback function will invoke when the file is uploaded successfully. The function expects one parameter, the status of upload.
+				 * @param {Function} [args.error] Sometimes the upload calls fails due to bad request (400 error). The error parameter is a callback function that is only invoked when an error occurs.
+				 * This allows to write logic when an error occurs. The parameter passed to the error function is a JavaScript Error object indicating what the failure was. From the error object. one
+				 * can access the javascript library error object, the status code and the error message.
+				 * @param {Function} [args.handle] This callback function is called regardless of whether the call to upload the file completes or fails. The parameter passed to this callback is the
+				 * FileEntry object (or error object). From the error object. one can get access to the javascript library error object, the status code and the error message.
+				 * @param {String} [args.fileName] The file name
+				 * @param {Object} [args.parameters] The additional parameters
+				 */
+				uploadFileBinary : function(binaryContent, fileName, args) {
+
+					if(!binaryContent){
+						util.notifyError({message: "Binary Content is not provided"}, args);
+						return;
+					}
+					if(!fileName){
+						util.notifyError({message: "FileName is not provided"}, args);
+						return;
+					}
+					// /files/smartcloud/connections/fileName
+					url = this.constructUrl(cfg.Properties.serviceUrl + "/files/" + this.endpointName + "/" + "connections" + "/" + fileName, args && args.parameters ? args.parameters : {});
+					var headers = {};
+					headers["Slug"] = fileName;
+					var self = this;
+					this.endpoint.xhrPost({
+						url : url,
+						postData : binaryContent,
+						headers : headers,
+						load : function(data) {
+							var file = self.getFileFeedCallbacks().createEntity(this, data);
+							if (args) {
+								if (args.load)
+									args.load(file);
+								else if (args.handle)
+									args.handle(file);
+							} else {
+								log.error("Callbacks not defined. Return Value={0}", param);
+							}
+						},
+						error : function(error) {
+							util.notifyError(error, args);
+						}
+					});
+				},
+				
 				_constructPayloadForComment : function(isDelete, comment) {
 					var payload = "<entry xmlns=\"http://www.w3.org/2005/Atom\">";
 					payload += "<category term=\"comment\" label=\"comment\" scheme=\"tag:ibm.com,2006:td/type\"/>";

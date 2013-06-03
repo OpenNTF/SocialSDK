@@ -864,8 +864,8 @@ public class ActivityStreamEntry {
 	public static Attachment fetchAttachment(DataNavigator object) {
 		Attachment attachment = new Attachment();
 		DataNavigator SUAttachments = object.get("attachments");
-		DataNavigator SUAttachment = SUAttachments.get(0);
-		// Fix for defect
+		DataNavigator SUAttachment = SUAttachments.get(0); 
+		// Fix for defect parsing attachments
 		if(StringUtil.isEmpty(SUAttachment.stringValue("id"))){
 			return null;
 		}

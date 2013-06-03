@@ -239,8 +239,16 @@ var Endpoint = declare(null, {
 				if(!error.message){
 					error.message = self.getErrorMessage(error.cause);
 				} 
-				// check for if authentication is required				
-				if (error.code == 401 || error.code == self.authenticationErrorCode) {
+				var isForbiddenErrorButAuthenticated = false;
+				// check for if authentication is required
+				if(error.code == 403 && self.authenticationErrorCode == 403){ 
+					// case where 403 is configured to be treated similar to 401 (unAuthorized)
+		        	// checking if we are getting 403 inspite of being already authenticated (eg. Get Public Files/Folders API on Smartcloud
+		        	if(self.isAuthenticated){
+		        		isForbiddenErrorButAuthenticated = true;
+		        	}
+		        }
+				if (error.code == 401 || (!isForbiddenErrorButAuthenticated && error.code == self.authenticationErrorCode)) {
 					var autoAuthenticate =  _args.autoAuthenticate || self.autoAuthenticate || sbt.Properties["autoAuthenticate"];
 					if(autoAuthenticate == undefined){
 						autoAuthenticate = true;
@@ -508,6 +516,12 @@ var Endpoint = declare(null, {
      */
     _isAuthRequired : function(error, options) {
         var status = error.response.status || null;
+        if(status == 403){
+        	// checking if we are getting 403 inspite of being already authenticated (eg. Get Public Files/Folders API on Smartcloud
+        	if(this.isAuthenticated){
+        		return false;
+        	}
+        }
         var isAuthErr = status == 401 || status == this.authenticationErrorCode;
         
         var isAutoAuth =  options.autoAuthenticate || this.autoAuthenticate || sbt.Properties["autoAuthenticate"];

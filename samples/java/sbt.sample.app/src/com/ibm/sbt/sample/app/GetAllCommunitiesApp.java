@@ -46,7 +46,7 @@ public class GetAllCommunitiesApp {
      * Be sure to call the destroy() method in this class if you don't intend to keep the initialised Context around.
      */
     public GetAllCommunitiesApp(){
-        this(CommunityService.DEFAULT_ENDPOINT_NAME, true);
+        this(CommunityService.getDefaultEndpoint(), true);
     }
     
     /**

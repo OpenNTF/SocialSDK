@@ -81,7 +81,7 @@ public class FileService extends BaseService {
 	 */
 	public FileService() {
 		super();
-		this.endpoint = EndpointFactory.getEndpoint(DEFAULT_ENDPOINT_NAME);
+		this.endpoint = EndpointFactory.getEndpoint(FileService.getDefaultEndpoint());
 	}
 
 	/**

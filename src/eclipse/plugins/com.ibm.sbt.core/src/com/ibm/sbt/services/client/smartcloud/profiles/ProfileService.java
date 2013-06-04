@@ -57,7 +57,7 @@ public class ProfileService extends BaseService {
 	 */
 	public ProfileService() {
 		super();
-		this.endpoint = EndpointFactory.getEndpoint(DEFAULT_ENDPOINT_NAME);
+		this.endpoint = EndpointFactory.getEndpoint(ProfileService.getDefaultEndpoint());
 	}
 
 	/**

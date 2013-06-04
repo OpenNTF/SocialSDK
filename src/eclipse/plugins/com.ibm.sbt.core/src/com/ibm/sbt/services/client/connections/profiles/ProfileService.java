@@ -68,7 +68,7 @@ public class ProfileService extends BaseService {
 	 * Constructor Creates ProfileService Object with default endpoint and default cache size
 	 */
 	public ProfileService() {
-		this(DEFAULT_ENDPOINT_NAME, DEFAULT_CACHE_SIZE);
+		this(ProfileService.getDefaultEndpoint(), DEFAULT_CACHE_SIZE);
 		initializeCache(DEFAULT_CACHE_SIZE);
 	}
 

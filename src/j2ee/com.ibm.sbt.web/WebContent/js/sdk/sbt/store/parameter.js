@@ -17,7 +17,7 @@
 /**
  * 
  */
-define(["../stringUtil", "../Endpoint"], function(stringUtil, Endpoint) {
+define(["../stringUtil", "../config", "../Endpoint"], function(stringUtil, config, Endpoint) {
     var Formatter = {
         defaultFormat: function(param, val) {
             return param.key + "=" + val;
@@ -72,7 +72,7 @@ define(["../stringUtil", "../Endpoint"], function(stringUtil, Endpoint) {
     var isV4OrHigher = true;
     
     var setEndpoint = function(args){
-    	endpoint = Endpoint.find(args.endpoint || "connections");
+    	endpoint = Endpoint.find(args.endpoint || config.defaultEndpoint || "connections");
 	    if (endpoint.apiVersion) {
 	        var parts = endpoint.apiVersion.split(".");
 	        isV4OrHigher = !(parts.length > 1 && parts[0] < 4);

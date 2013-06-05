@@ -16,6 +16,7 @@ if (requestUrl.indexOf("javascript.jsp") != -1) {
 	homeClass = "active";
 	formStyle = "visibility:hidden";
 }
+boolean smartcloudEnv = request.getParameter("env") != null && request.getParameter("env").equals("smartcloudEnvironment") ? true : false;
 %>
 <!-- header start -->  
 <script type="text/javascript">
@@ -23,7 +24,12 @@ function reload(url) {
 	window.location.href = url;
 }
 </script>
-   <div class="navbar <%if(!smartcloud){%>navbar-fixed-top<%}%>">
+   <%if(smartcloudEnv){ %>
+    <div id="smartcloudNavContainer" class="lotusui30 lotusui30_fonts scloud3" style="font-size:12px">
+      <script src="https://apps.na.collabservtest.lotus.com/manage/navbar/banner/smartcloudExt?oneui=3"></script>
+    </div>
+    <%}%>
+   <div class="navbar <%if(!smartcloudEnv){%>navbar-fixed-top<%}%>">
      <div class="navbar-inner">
        <div class="container-fluid">
          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -34,9 +40,9 @@ function reload(url) {
          <a class="brand" href="#">Social Business Toolkit - Samples</a>
          <div class="nav-collapse collapse">
            <ul class="nav">
-              <li class="<%=homeClass%>"><a href="home.jsp">Home</a></li>
-              <li class="<%=jsClass%>"><a href="javascript.jsp">JavaScript</a></li>
-	          <li class="<%=javaClass%>"><a href="java.jsp">Java</a></li>
+              <li class="<%=homeClass%>"><a href="home.jsp<%if(smartcloudEnv){ %>?env=smartcloudEnvironment<%}%>">Home</a></li>
+              <li class="<%=jsClass%>"><a href="javascript.jsp<%if(smartcloudEnv){ %>?env=smartcloudEnvironment<%}%>">JavaScript</a></li>
+	          <li class="<%=javaClass%>"><a href="java.jsp<%if(smartcloudEnv){ %>?env=smartcloudEnvironment<%}%>">Java</a></li>
          </ul>
          <form class="navbar-form pull-right" style="<%=formStyle%>">
          	<span style="vertical-align:middle">JavaScript Library: </span>

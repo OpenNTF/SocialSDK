@@ -872,7 +872,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Endpoint", "
             var options = {
                 method : "GET",
                 handleAs : "text",
-                request : args || {}
+                query : args || {}
             };
             
             return this.getEntities(consts.AtomCommunitiesMy, options, this.getCommunityFeedCallbacks(), args);

@@ -33,11 +33,7 @@
     <link href="/sbt.bootstrap211/bootstrap/css/bootstrap-responsive.css" rel="stylesheet"></link>
   </head>
 
-  <body class="claro lotusui30 lotusui30_body lotusui30_fonts scloud3">
-  <%if(smartcloud){%>
-    <script src="https://apps.na.collabservtest.lotus.com/navbar/banner/smartcloudExt?oneui=3"></script>
-  <%}%>
-  
+  <body class="claro <%if(smartcloud){%>lotusui30_body<%}%>">
   <%@include file="includes/header.jsp" %>  
 
     <!-- main content starts -->

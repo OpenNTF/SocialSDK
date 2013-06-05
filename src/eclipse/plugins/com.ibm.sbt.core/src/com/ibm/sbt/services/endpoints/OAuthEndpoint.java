@@ -256,7 +256,10 @@ public class OAuthEndpoint extends AbstractEndpoint {
 					// Using UrlUtil's getParamsMap for creating the ParamsMap from the query String Request Uri.
 					Map<String, String> mapOfParams = UrlUtil.getParamsMap(requestUri);
 					try {
-						requestUri = requestUri.substring(0, requestUri.indexOf("?"));
+						
+						if(StringUtil.isNotEmpty(requestUri) && requestUri.contains("?")){
+							requestUri = requestUri.substring(0, requestUri.indexOf("?"));
+						}
 						requestUri = PathUtil.concat(baseUrl, requestUri, '/');
 	
 						// creating authorization header

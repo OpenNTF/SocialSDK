@@ -19,6 +19,7 @@ package com.ibm.sbt.services.client.activitystreams.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.SBTServiceException;
 import com.ibm.sbt.services.client.activitystreams.ASApplication;
 import com.ibm.sbt.services.client.activitystreams.ASGroup;
@@ -785,7 +786,7 @@ public class ActivityStreamEntry {
 		DataNavigator embed = opensocial.get("embed");
 		DataNavigator context = embed.get("context");
 		DataNavigator object = parent.get("object");
-
+		DataNavigator target = parent.get("target");
 		// Parent ( Root )
 		entryObj.setPublished(parent.stringValue("published"));
 		entryObj.setUrl(parent.stringValue("url"));
@@ -794,7 +795,6 @@ public class ActivityStreamEntry {
 		entryObj.setUpdated(parent.stringValue("updated"));
 		entryObj.setId(parent.stringValue("id"));
 		try {
-			DataNavigator target = parent.get("target");
 			if (null != target) {
 				String objecttype = target.stringValue("objectType");
 				if (null != objecttype && objecttype.equalsIgnoreCase("community")) {
@@ -848,7 +848,7 @@ public class ActivityStreamEntry {
 		Attachment attachment = fetchAttachment(object); // fetch attachments
 		entryObj.setAttachment(attachment);
 		if (entryObj.getNumComments() > 0) { // fetch comments
-			entryObj.setReplies(fetchComments(object, entryObj.getNumComments()));
+			entryObj.setReplies(fetchComments(target, entryObj.getNumComments()));
 		}
 		return entryObj;
 
@@ -897,6 +897,9 @@ public class ActivityStreamEntry {
 			ActivityStreamEntry commentEntry = new ActivityStreamEntry();
 			Actor actor = new Actor();
 			DataNavigator reply = replies.get(i);
+			if(StringUtil.isEmpty(reply.stringValue("id"))){
+				break;
+			}
 			String comment = reply.stringValue("content");
 			String updated = reply.stringValue("updated");
 			String id = reply.stringValue("id");

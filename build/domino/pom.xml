@@ -19,8 +19,8 @@
     <module>../../domino/eclipse/plugins/com.ibm.sbt.web</module>
     <module>../../domino/eclipse/plugins/com.ibm.sbt.core</module>
     <module>../../domino/eclipse/plugins/com.ibm.sbt.playground</module>
-	<module>../../domino/eclipse/plugins/com.ibm.xsp.sbtsdk</module>
-
+    <module>../../domino/eclipse/plugins/com.ibm.xsp.sbtsdk</module>
+    <module>../../domino/eclipse/plugins/com.ibm.xsp.extlibx.sbt</module>
     <!-- eclipse feature projects -->
     <module>../../domino/eclipse/features/com.ibm.sbt.domino.feature</module>
     <!-- eclipse update sites -->

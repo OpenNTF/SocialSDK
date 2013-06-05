@@ -162,7 +162,8 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
 		},
 		ActivityStreamUrls: {
 			activityStreamBaseUrl : "/connections/opensocial/",
-			activityStreamRestUrl : "/rest/activitystreams/"
+			activityStreamRestUrl : "/rest/activitystreams/",
+			activityStreamUBlogRestUrl : "/rest/ublog/"
 		},
 		errorMessages:{
 			args_object	: "argument passed to get stream should be an Object",

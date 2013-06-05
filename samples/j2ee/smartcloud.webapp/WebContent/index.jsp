@@ -12,12 +12,12 @@
 <%
 %>
 
-<link rel="stylesheet" href="<%=Util.getThemeUrl(request)%>" type="text/css" />
+<link rel="stylesheet" href="<%=Util.getThemeUrl()%>" type="text/css" />
 </head>
 
 <body class="lotusui30_body">
 <div class="lotusui30 lotusui30_fonts scloud3">
-	<script type="text/javascript" src="<%=Util.getNavBarUrl(request)%>"></script>
+	<script type="text/javascript" src="<%=Util.getNavBarUrl()%>"></script>
 </div>
 
 <div>

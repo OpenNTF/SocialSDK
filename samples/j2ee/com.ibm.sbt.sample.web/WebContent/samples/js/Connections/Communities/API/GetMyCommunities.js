@@ -4,9 +4,9 @@ require([ "sbt/dom", "sbt/json", "sbt/connections/CommunityService" ], function(
                 asc : true,
                 email : "%{sample.email1}",
                 page : 1,
-                ps : 2,
-                since : "2009-01-04T20:32:31.171Z",
-                sortField  : "lastmod" // | name | count,
+                ps : 2
+                //since : "2009-01-04T20:32:31.171Z",
+                //sortField  : "lastmod" | "name" | "count",
                 // search : "",
                 // tag : "tag1",
                 // userid : "%{sample.userid1}"

@@ -25,6 +25,7 @@ import com.ibm.sbt.services.client.activitystreams.ASApplication;
 import com.ibm.sbt.services.client.activitystreams.ASGroup;
 import com.ibm.sbt.services.client.activitystreams.ASUser;
 import com.ibm.sbt.util.DataNavigator;
+import com.ibm.commons.util.StringUtil;
 
 /**
  * ActivityStreamEntry, model class for persisting individual Entries from Activity Stream
@@ -846,7 +847,13 @@ public class ActivityStreamEntry {
 		entryObj.setTags(context.stringValue("tags"));
 		entryObj.setItemUrl(context.stringValue("itemUrl"));
 		Attachment attachment = fetchAttachment(object); // fetch attachments
-		entryObj.setAttachment(attachment);
+		
+		if(attachment!=null){
+			entryObj.setContainAttachment(true);
+			entryObj.setAttachment(attachment); 
+		}
+		
+		
 		if (entryObj.getNumComments() > 0) { // fetch comments
 			entryObj.setReplies(fetchComments(target, entryObj.getNumComments()));
 		}
@@ -857,7 +864,11 @@ public class ActivityStreamEntry {
 	public static Attachment fetchAttachment(DataNavigator object) {
 		Attachment attachment = new Attachment();
 		DataNavigator SUAttachments = object.get("attachments");
-		DataNavigator SUAttachment = SUAttachments.get(0);
+		DataNavigator SUAttachment = SUAttachments.get(0); 
+		// Fix for defect parsing attachments
+		if(StringUtil.isEmpty(SUAttachment.stringValue("id"))){
+			return null;
+		}
 		attachment.setSummary(SUAttachment.stringValue("summary"));
 		attachment.setId(SUAttachment.stringValue("id"));
 		attachment.setDisplayName(SUAttachment.stringValue("displayName"));

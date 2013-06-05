@@ -69,6 +69,8 @@
         <include>com.ibm.sbt.sample:acme.social.sample.dataapp</include>
         <include>com.ibm.sbt.sample:acme.social.sample.webapp</include>
         <include>com.ibm.sbt.sample:acme.sample.webapp</include>
+        <include>com.ibm.sbt.sample:helloworld.webapp</include>
+        <include>com.ibm.sbt.sample:smartcloud.webapp</include>
     </includes>
       <binaries>
         <outputDirectory>sbtsdk/samples/war</outputDirectory>

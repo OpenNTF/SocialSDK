@@ -19,11 +19,13 @@ package com.ibm.sbt.services.client.activitystreams.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.SBTServiceException;
 import com.ibm.sbt.services.client.activitystreams.ASApplication;
 import com.ibm.sbt.services.client.activitystreams.ASGroup;
 import com.ibm.sbt.services.client.activitystreams.ASUser;
 import com.ibm.sbt.util.DataNavigator;
+import com.ibm.commons.util.StringUtil;
 
 /**
  * ActivityStreamEntry, model class for persisting individual Entries from Activity Stream
@@ -785,7 +787,7 @@ public class ActivityStreamEntry {
 		DataNavigator embed = opensocial.get("embed");
 		DataNavigator context = embed.get("context");
 		DataNavigator object = parent.get("object");
-
+		DataNavigator target = parent.get("target");
 		// Parent ( Root )
 		entryObj.setPublished(parent.stringValue("published"));
 		entryObj.setUrl(parent.stringValue("url"));
@@ -794,7 +796,6 @@ public class ActivityStreamEntry {
 		entryObj.setUpdated(parent.stringValue("updated"));
 		entryObj.setId(parent.stringValue("id"));
 		try {
-			DataNavigator target = parent.get("target");
 			if (null != target) {
 				String objecttype = target.stringValue("objectType");
 				if (null != objecttype && objecttype.equalsIgnoreCase("community")) {
@@ -846,9 +847,15 @@ public class ActivityStreamEntry {
 		entryObj.setTags(context.stringValue("tags"));
 		entryObj.setItemUrl(context.stringValue("itemUrl"));
 		Attachment attachment = fetchAttachment(object); // fetch attachments
-		entryObj.setAttachment(attachment);
+		
+		if(attachment!=null){
+			entryObj.setContainAttachment(true);
+			entryObj.setAttachment(attachment); 
+		}
+		
+		
 		if (entryObj.getNumComments() > 0) { // fetch comments
-			entryObj.setReplies(fetchComments(object, entryObj.getNumComments()));
+			entryObj.setReplies(fetchComments(target, entryObj.getNumComments()));
 		}
 		return entryObj;
 
@@ -857,7 +864,11 @@ public class ActivityStreamEntry {
 	public static Attachment fetchAttachment(DataNavigator object) {
 		Attachment attachment = new Attachment();
 		DataNavigator SUAttachments = object.get("attachments");
-		DataNavigator SUAttachment = SUAttachments.get(0);
+		DataNavigator SUAttachment = SUAttachments.get(0); 
+		// Fix for defect parsing attachments
+		if(StringUtil.isEmpty(SUAttachment.stringValue("id"))){
+			return null;
+		}
 		attachment.setSummary(SUAttachment.stringValue("summary"));
 		attachment.setId(SUAttachment.stringValue("id"));
 		attachment.setDisplayName(SUAttachment.stringValue("displayName"));
@@ -897,6 +908,9 @@ public class ActivityStreamEntry {
 			ActivityStreamEntry commentEntry = new ActivityStreamEntry();
 			Actor actor = new Actor();
 			DataNavigator reply = replies.get(i);
+			if(StringUtil.isEmpty(reply.stringValue("id"))){
+				break;
+			}
 			String comment = reply.stringValue("content");
 			String updated = reply.stringValue("updated");
 			String id = reply.stringValue("id");

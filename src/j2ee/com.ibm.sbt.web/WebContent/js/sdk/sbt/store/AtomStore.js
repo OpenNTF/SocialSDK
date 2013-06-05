@@ -48,11 +48,13 @@ define(["../declare","../config","../lang", "../base/core", "../xml", "../xpath"
         namespaces : core.namespaces,
         paramSchema: {},
         
-        /*
+        /**
          * Constructor for the AtomStore promise.
+         * @param args requires
+         * 	endpoint: the endpoint to be used
          */
         constructor: function(args, query, options) {
-            this._endpoint = Endpoint.find(args.endpoint || "connections");
+            this._endpoint = Endpoint.find(args.endpoint);
             this._options = options;
             this._callbacks = [];
             this._errbacks = [];

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+  <%boolean smartcloud = request.getParameter("env") != null && request.getParameter("env").equals("smartcloudEnvironment") ? true : false; %>
     <meta charset="utf-8">
     <title>Social Business Toolkit - Samples</title>
     <link href="images/sbt.png" rel="shortcut icon">
@@ -8,9 +9,12 @@
     <link href="/sbt.bootstrap211/bootstrap/css/bootstrap.css" rel="stylesheet"></link>
     <link href="css/stickyfooter.css" rel="stylesheet"></link>
     <link href="/sbt.bootstrap211/bootstrap/css/bootstrap-responsive.css" rel="stylesheet"></link>
+    <%if(smartcloud){ %>
+      <link rel="stylesheet" href="https://apps.na.collabservtest.lotus.com/theming/theme/css/3" type="text/css" /> 
+    <%} %>
   </head>
 
-  <body>
+  <body class="<%if(smartcloud){ %>lotusui30_body<%}%>">
 	<%@include file="includes/header.jsp" %>  
     
     <div id="wrap">

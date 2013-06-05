@@ -449,6 +449,48 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
             return this.updateEntity(url, options, callbacks, args);
         },
         
+        /**
+         * post an Activity Stream microblog entry
+         * 
+         * @method postMicroblogEntry
+         * * @param {String}
+         * 			  userType user type for which activity stream is to be posted
+         *            If null is passed for userType, then '@public' will be used as 
+         * 			  default 
+         * * @param {String}
+         * 			  groupType group type for which activity stream is to be posted
+         *            If null is passed for userType, then '@all' will be used as 
+         * 			  default 
+         * * @param {String}
+         * 			  application type for which activity stream is to be posted
+         *            If null is passed for userType, then '@all' will be used as 
+         * 			  default 
+         *  @param {Object}
+         *            [args]Object representing various parameters
+         *            that can be passed to post an activity stream. 
+         *            The parameters must be exactly as they are
+         *            supported by IBM Connections.
+         */
+        postMicroblogEntry : function(postData, userType, groupType, applicationType, args) {
+        	var _userType = userType || consts.ASUser.ME; //Default is public updates
+			var _groupType = groupType || consts.ASGroup.ALL; // Default is all groups
+			var _applicationType = applicationType || ""; // Default is all Applications
+			var url = consts.ActivityStreamUrls.activityStreamBaseUrl+this.endpoint.authType+consts.ActivityStreamUrls.activityStreamUBlogRestUrl+_userType+"/"+_groupType+"/"+_applicationType;
+			var headers = {"Content-Type" : "application/json"};
+	   	    var options = {
+	            method : "POST",
+	            query : args || {},
+	            handleAs : "json",
+	            headers : headers,
+	            data : json.stringify(postData)
+	        };
+            var callbacks = {};
+            callbacks.createEntity = function(service,data,response) {
+                return data;
+            };	                
+            return this.updateEntity(url, options, callbacks, args);
+        },
+        
         /*
          * Validate a community UUID, and return a Promise if invalid.
          */

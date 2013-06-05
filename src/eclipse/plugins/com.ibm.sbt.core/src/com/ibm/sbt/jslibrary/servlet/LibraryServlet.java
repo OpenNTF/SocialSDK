@@ -237,16 +237,17 @@ public class LibraryServlet extends BaseToolkitServlet {
         synchronized (createEnvironmentLock) {
             // create a default environment if needed
             if (_defaultParams.getEnvironment() == null) {
-                SBTEnvironment environment = (SBTEnvironment) context.getBean(DEFAULT_ENVIRONMENT);
+                Application application = context.getApplication();
+                String environmentName = getAppParameter(application, PARAM_ENVIRONMENT, DEFAULT_ENVIRONMENT);
+                SBTEnvironment environment = (SBTEnvironment) context.getBean(environmentName);
                 if (environment == null) {
                     ServletConfig config = getServletConfig();
-                    Application application = context.getApplication();
                     String defaultEndpoints = getAppParameter(application, PARAM_ENDPOINTS, DEFAULT_ENDPOINTS);
                     String endpoints = getInitParameter(config, PARAM_ENDPOINTS, defaultEndpoints);
                     String defaultClientProps = getAppParameter(application, PARAM_CLIENT_PROPERTIES, DEFAULT_CLIENT_PROPERTIES);
                     String clientProps = getInitParameter(config, PARAM_CLIENT_PROPERTIES, defaultClientProps);
 
-                    String environmentName = getInitParameter(config, PARAM_ENVIRONMENT, DEFAULT_ENVIRONMENT);
+                    environmentName = getInitParameter(config, PARAM_ENVIRONMENT, DEFAULT_ENVIRONMENT);
                     environment = new SBTEnvironment();
                     environment.setName(environmentName);
                     environment.setEndpoints(endpoints);

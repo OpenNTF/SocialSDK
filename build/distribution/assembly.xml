@@ -332,7 +332,7 @@
       <exclude>**/.gitignore</exclude>
     </excludes>
     <includes>
-      <include>**/*.*</include>
+      <include>**/*</include>
     </includes>
   </fileSet>
   </fileSets>

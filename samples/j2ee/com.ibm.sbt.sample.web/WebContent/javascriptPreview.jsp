@@ -10,9 +10,11 @@
 <%@page import="com.ibm.commons.runtime.util.ParameterProcessor.ParameterProvider"%>
 <%@page import="com.ibm.sbt.sample.web.util.SnippetFactory"%>
 <%@page import="com.ibm.sbt.sample.web.util.Util"%>
+<%@page import="com.ibm.commons.runtime.Context"%>
 <!DOCTYPE html>
 <html lang="en" style="height: 100%;">
   <%
+      String defaultEndpoint = Context.get().getProperty("endpoint.default");
       String snippetName = request.getParameter("snippet");
       String html = null;
       String js = null;
@@ -68,6 +70,7 @@
   %>
   <head>
     <meta charset="utf-8">
+    <meta name="defaultEndpoint" content="<%=defaultEndpoint%>">
     <title>Social Business Toolkit - JavaScript Preview</title>
     <link href="images/sbt.png" rel="shortcut icon">
     <%

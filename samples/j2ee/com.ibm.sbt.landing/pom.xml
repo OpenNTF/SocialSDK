@@ -10,7 +10,9 @@
     <version>1.0.0</version>
     <relativePath>../../../build/sample</relativePath>
   </parent>
-
+  <properties>
+    <project.target.directory>${build.target}</project.target.directory>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>javax</groupId>
@@ -19,4 +21,33 @@
       <scope>provided</scope>
     </dependency>
   </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.7</version>
+        <executions>
+          <execution>
+            <phase>prepare-package</phase>
+            <configuration>
+              <target name="default">
+
+                <echo
+                  message="copying to ${project.target.directory}/com.ibm.sbt.sample/com.ibm.sbt.landing/com.ibm.sbt.landing" />
+                <echo message="copying from ${project.target.directory}/doc" />
+                <copy
+                  todir="${project.target.directory}/com.ibm.sbt.sample/com.ibm.sbt.landing/com.ibm.sbt.landing">
+                  <fileset dir="${project.target.directory}/doc" />
+                </copy>
+              </target>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>

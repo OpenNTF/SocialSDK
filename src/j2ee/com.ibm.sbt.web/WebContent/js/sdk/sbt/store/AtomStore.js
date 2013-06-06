@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -17,9 +17,9 @@
 /**
  * @module sbt.store.AtomStore
  */
-define(["../declare","../lang", "../base/core", "../xml", "../xpath", "../Endpoint", "../itemFactory",
+define(["../declare","../config","../lang", "../base/core", "../xml", "../xpath", "../Endpoint", "../itemFactory",
         "dojo/_base/Deferred", "dojo/promise/Promise", "dojo/store/util/QueryResults", "dojox/html/entities"], 
-        function(declare,lang, core, xml, xpath, Endpoint, itemFactory, Deferred, Promise, QueryResults, entities) {
+        function(declare,config,lang, core, xml, xpath, Endpoint, itemFactory, Deferred, Promise, QueryResults, entities) {
   
     /**
      * @class sbt.store.AtomStore
@@ -48,8 +48,10 @@ define(["../declare","../lang", "../base/core", "../xml", "../xpath", "../Endpoi
         namespaces : core.namespaces,
         paramSchema: {},
         
-        /*
+        /**
          * Constructor for the AtomStore promise.
+         * @param args requires
+         * 	endpoint: the endpoint to be used
          */
         constructor: function(args, query, options) {
             this._endpoint = Endpoint.find(args.endpoint || "connections");

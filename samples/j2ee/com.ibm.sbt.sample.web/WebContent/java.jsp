@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+  <% 
+  String environment = Context.get().getProperty("environment");
+  String envParam = request.getParameter("env");
+  boolean smartcloud = false;
+  if(StringUtil.isEmpty(envParam))
+      smartcloud = environment != null && environment.equals("smartcloudEnvironment") ? true : false;
+  else
+      smartcloud = envParam.equals("smartcloudEnvironment") ? true : false;
+    %>
     <meta charset="utf-8">
     <title>Social Business Toolkit - Java Samples</title>
     <link href="images/sbt.png" rel="shortcut icon">
@@ -14,6 +23,9 @@
     <script src="libs/codemirror/mode/htmlembedded/htmlembedded.js"></script>
     <script src="libs/codemirror/lib/util/formatting.js"></script>
     <link href="/sbt.bootstrap211/bootstrap/css/bootstrap.css" rel="stylesheet"></link>
+    <%if(smartcloud){ %>
+      <link rel="stylesheet" href="https://apps.na.collabservtest.lotus.com/theming/theme/css/3" type="text/css" /> 
+    <%} %>
     <style type="text/css">
       body {
         padding-top: 60px;
@@ -27,7 +39,7 @@
     <script src="/sbt.dojo180/dojo/dojo.js"></script>
   </head>
 
-  <body class="claro">
+  <body class="claro <%if(smartcloud){ %>lotusui30_body<%}%>">
     <%@include file="includes/header.jsp" %>  
     
     <!-- main content starts -->

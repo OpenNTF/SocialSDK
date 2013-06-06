@@ -53,6 +53,7 @@ define(["../declare","../Endpoint", "../lang", "../base/core", "../xml", "../xpa
          *   url: The url to a service or an XML document that represents the store 
          *   unescapeHTML: A boolean to specify whether or not to unescape HTML text 
          *   sendQuery: A boolean indicate to add a query string to the service URL  
+         *   endpoint: the endpoint to be used
          */
         constructor: function(args) {
             this._endpoint = Endpoint.find(args.endpoint || "connections");

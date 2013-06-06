@@ -715,7 +715,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 				 * @returns {String}
 				 */
 				getDefaultEndpointName : function() {
-					return "connections";
+                    return "connections";
 				},
 
 				/**

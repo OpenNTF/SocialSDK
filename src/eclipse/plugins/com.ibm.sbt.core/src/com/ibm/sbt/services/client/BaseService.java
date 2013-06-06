@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import com.ibm.commons.runtime.Context;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonObject;
 import com.ibm.sbt.services.client.ClientService.Handler;
@@ -34,7 +35,7 @@ import com.ibm.sbt.services.util.extractor.field.DataExtractor;
 public abstract class BaseService {
 
 	public static final int						DEFAULT_CACHE_SIZE		= 0;
-	public static final String					DEFAULT_ENDPOINT_NAME	= "connections";
+    public static final String                  DEFAULT_ENDPOINT_NAME   = "connections";
 	private static final String					sourceClass				= BaseService.class.getName();
 	private static final Logger					logger					= Logger.getLogger(sourceClass);
 	protected static HashMap<String, Object>	cache					= new HashMap<String, Object>();

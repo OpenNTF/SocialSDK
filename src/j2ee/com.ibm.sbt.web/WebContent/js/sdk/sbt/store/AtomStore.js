@@ -371,7 +371,7 @@ define(["../declare","../config","../lang", "../base/core", "../xml", "../xpath"
          * @returns
          */
         getEndpoint: function() {
-        	return Endpoint.find(this._args.endpoint || config.defaultEndpoint || "connections");
+        	return Endpoint.find(this._args.endpoint || "connections");
         },
         
         /**

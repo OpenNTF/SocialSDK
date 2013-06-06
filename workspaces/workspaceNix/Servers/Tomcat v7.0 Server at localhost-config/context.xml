@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
   Licensed to the Apache Software Foundation (ASF) under one or more
   contributor license agreements.  See the NOTICE file distributed with
@@ -14,9 +14,7 @@
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
   limitations under the License.
--->
-<!-- The contents of this file will be loaded for each web application -->
-<Context>
+--><!-- The contents of this file will be loaded for each web application --><Context>
 
     <!-- Default set of monitored resources -->
     <WatchedResource>WEB-INF/web.xml</WatchedResource>
@@ -43,11 +41,9 @@
 
     <!-- Configures the location of a sbt.proeprties file which 
          contains the configuration proeprties for use with the Social Business Toolkit -->
-    <Resource name="url/ibmsbt-sbtproperties" auth="Container" type="java.net.URL" 
-		factory="com.ibm.commons.runtime.naming.UrlFactory" url="sbt.properties" />
+    <Resource auth="Container" factory="com.ibm.commons.runtime.naming.UrlFactory" name="url/ibmsbt-sbtproperties" type="java.net.URL" url="sbt.properties"/>
 
     <!-- Configures the mail session for the SDK, by default this uses the IBM Developer QuickStart Image -->
-    <Resource name="mail/ibmsbt-session" type="javax.mail.Session" auth="Container" mail.smtp.host="qs.renovations.com"
-    mail.smtp.auth="true" mail.user="admin" password="***REMOVED***" mail.from="admin@renovations.com" mail.debug="false"/>
+    <Resource auth="Container" mail.debug="false" mail.from="admin@renovations.com" mail.smtp.auth="true" mail.smtp.host="qs.renovations.com" mail.user="admin" name="mail/ibmsbt-session" password="***REMOVED***" type="javax.mail.Session"/>
 
 </Context>

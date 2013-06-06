@@ -1,3 +1,4 @@
+<%@page import="com.ibm.sbt.smartcloud.Util"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 
@@ -8,12 +9,15 @@
 <script type="text/javascript" src="/sbt.dojo180/dojo/dojo.js" djConfig="parseOnLoad: true"></script>
 <script type="text/javascript" src="/smartcloud.webapp/library?lib=dojo&ver=1.8.0"></script>
 
-<link rel="stylesheet" href="https://apps.na.collabservtest.lotus.com/theming/theme/css/3" type="text/css" />
+<%
+%>
+
+<link rel="stylesheet" href="<%=Util.getThemeUrl()%>" type="text/css" />
 </head>
 
 <body class="lotusui30_body">
 <div class="lotusui30 lotusui30_fonts scloud3">
-	<script type="text/javascript" src="https://apps.na.collabservtest.lotus.com/manage/navbar/banner/smartcloudExt?oneui=3"></script>
+	<script type="text/javascript" src="<%=Util.getNavBarUrl()%>"></script>
 </div>
 
 <div>

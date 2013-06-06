@@ -53,6 +53,8 @@ import com.ibm.sbt.services.endpoints.EndpointFactory;
 public class AdminPublishActivityStream {
     
     private static final String  APPLICATION_JSON  = "application/json";
+
+    private static final String DEFAULT_ENDPOINT = "connections";
     
     private RuntimeFactory runtimeFactory;
     private Context context;
@@ -66,7 +68,7 @@ public class AdminPublishActivityStream {
      * Be sure to call the destroy() method in this class if you don't intend to keep the initialised Context around.
      */
     public AdminPublishActivityStream(){
-        this(ActivityStreamService.getDefaultEndpoint(), true);
+        this(DEFAULT_ENDPOINT, true);
     }
     
     /**

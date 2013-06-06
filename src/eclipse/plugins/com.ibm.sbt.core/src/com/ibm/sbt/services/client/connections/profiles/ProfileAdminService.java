@@ -28,7 +28,7 @@ public class ProfileAdminService extends ProfileService {
 	 * Constructor Creates ProfileAdminService Object with default endpoint and default cache size
 	 */
 	public ProfileAdminService() {
-		this(ProfileAdminService.getDefaultEndpoint(), DEFAULT_CACHE_SIZE);
+		this(DEFAULT_ENDPOINT, DEFAULT_CACHE_SIZE);
     }
 	
 	/**

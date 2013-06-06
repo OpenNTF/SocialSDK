@@ -291,7 +291,7 @@ define([ "../../../declare",
          */
         constructor: function(args){
 
-        	this.fileService = new FileService("connections");
+        	this.fileService = new FileService(this.endpointName || "connections");
         	
         	/**gridSortType is used to determine what sorting anchors should be used,
         	 * for example folders have different sort anchors than files, file comments have no anchors etc*/

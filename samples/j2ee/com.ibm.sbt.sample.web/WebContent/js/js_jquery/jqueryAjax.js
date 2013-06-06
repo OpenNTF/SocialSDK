@@ -90,8 +90,6 @@
     function setEnv(env){
         if(env)
             $("body").data("env", env);
-        else
-            $("body").data("env", "defaultEnvironment");
     }
 
     function setEnvFromUrl(url){

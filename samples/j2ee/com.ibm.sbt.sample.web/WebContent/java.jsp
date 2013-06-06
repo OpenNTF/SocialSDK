@@ -1,7 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <%boolean smartcloud = request.getParameter("env") != null && request.getParameter("env").equals("smartcloudEnvironment") ? true : false; %>
+  <% Context ctx = Context.get();
+  String defaultEndpoint = ctx.getProperty("endpoint.default");
+  String environment = ctx.getProperty("environment");
+  String envParam = request.getParameter("env");
+  boolean smartcloud = false;
+  if(StringUtil.isEmpty(envParam))
+      smartcloud = environment != null && environment.equals("smartcloudEnvironment") ? true : false;
+  else
+      smartcloud = envParam.equals("smartcloudEnvironment") ? true : false;
+    %>
     <meta charset="utf-8">
     <title>Social Business Toolkit - Java Samples</title>
     <link href="images/sbt.png" rel="shortcut icon">

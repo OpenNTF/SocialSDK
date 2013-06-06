@@ -56,7 +56,7 @@ define(["../declare","../Endpoint", "../lang", "../base/core", "../xml", "../xpa
          *   endpoint: the endpoint to be used
          */
         constructor: function(args) {
-            this._endpoint = Endpoint.find(args.endpoint || config.defaultEndpoint || "connections");
+            this._endpoint = Endpoint.find(args.endpoint || "connections");
 
             if (args) {
                 this.url = args.url;

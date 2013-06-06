@@ -3,9 +3,7 @@
 <html lang="en">
   <head>
   <% 
-  Context ctx = Context.get();
-  String defaultEndpoint = ctx.getProperty("endpoint.default");
-  String environment = ctx.getProperty("environment");
+  String environment = Context.get().getProperty("environment");
   String envParam = request.getParameter("env");
   boolean smartcloud = false;
   if(StringUtil.isEmpty(envParam))

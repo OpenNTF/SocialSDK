@@ -192,11 +192,15 @@ public class Util {
         }
         
         String jsLibId = getJsLibId(request);
+        
         String environment = request.getParameter("env");
-        String baseUrl = Context.get().getProperty("connections.url");
-                 
-        if(StringUtil.equals(environment,"smartcloudEnvironment"))
-            baseUrl = Context.get().getProperty("smartcloud.url");
+        if(StringUtil.isEmpty(environment))
+            environment = Context.get().getProperty("environment");
+        
+        String endpointName = Context.get().getProperty("endpoint.default");
+        if(StringUtil.isEmpty(endpointName))
+            endpointName = "connections";
+        String baseUrl = Context.get().getProperty(endpointName + ".url");
         
         String[] result;
         if (_styleMap.containsKey(themeId)) {

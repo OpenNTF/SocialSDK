@@ -80,7 +80,6 @@ abstract public class AbstractLibrary {
 	public static final String		PROP_LOGIN_PAGE					= "loginPage";
 	public static final String		PROP_LOGIN_DIALOG_PAGE			= "loginDialogPage";
 	public static final String		PROP_LOGIN_UI					= "loginUi";
-	public static final String      DEFAULT_ENDPOINT                = "defaultEndpoint";
 	public static final String		PROP_AUTO_AUTHENTICATE			= "autoAuthenticate";
 	public static final String		IS_AUTHENTICATED				= "isAuthenticated";
 	public static final String		PROP_AUTHENTICATION_ERROR_CODE	= "authenticationErrorCode";
@@ -285,7 +284,6 @@ abstract public class AbstractLibrary {
 		jsonProperties.putJsonProperty(PROP_TOOLKIT_URL, request.getToolkitJsUrl());
 		jsonProperties.putJsonProperty(PROP_SERVICE_URL, request.getServiceUrl());
 		jsonProperties.putJsonProperty(PROP_LIBRARY_URL, request.getLibraryUrl());
-		jsonProperties.putJsonProperty(DEFAULT_ENDPOINT, context.getProperty("endpoint.default"));
 
 		// add the requested properties
 		Property[] properties = request.getEnvironment().getPropertiesArray();

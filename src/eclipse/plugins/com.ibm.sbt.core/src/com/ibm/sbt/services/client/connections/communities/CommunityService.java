@@ -42,7 +42,7 @@ public class CommunityService extends BaseService {
 	 * Constructor Creates CommunityService Object with default endpoint and default cache size
 	 */
 	public CommunityService() {
-		this(DEFAULT_ENDPOINT, DEFAULT_CACHE_SIZE);
+		this(DEFAULT_ENDPOINT_NAME, DEFAULT_CACHE_SIZE);
 	}
 
 	/**

@@ -35,7 +35,7 @@ import com.ibm.sbt.services.util.extractor.field.DataExtractor;
 public abstract class BaseService {
 
 	public static final int						DEFAULT_CACHE_SIZE		= 0;
-    public static final String                  DEFAULT_ENDPOINT        = "connections";
+    public static final String                  DEFAULT_ENDPOINT_NAME   = "connections";
 	private static final String					sourceClass				= BaseService.class.getName();
 	private static final Logger					logger					= Logger.getLogger(sourceClass);
 	protected static HashMap<String, Object>	cache					= new HashMap<String, Object>();
@@ -47,7 +47,7 @@ public abstract class BaseService {
 	 * Constructor
 	 */
 	public BaseService() {
-		this(DEFAULT_ENDPOINT, DEFAULT_CACHE_SIZE);
+		this(DEFAULT_ENDPOINT_NAME, DEFAULT_CACHE_SIZE);
 	}
 
 	/**
@@ -67,7 +67,7 @@ public abstract class BaseService {
 	 */
 	public BaseService(String endpointName, int cacheSize) {
 		if (StringUtil.isEmpty(endpointName)) {
-			endpointName = DEFAULT_ENDPOINT;
+			endpointName = DEFAULT_ENDPOINT_NAME;
 		}
 		this.endpoint = EndpointFactory.getEndpoint(endpointName);
 		this.cacheSize = cacheSize;
@@ -83,7 +83,7 @@ public abstract class BaseService {
 	public BaseService(String endpointName, int cacheSize, String format) {
 		setHandler(format);
 		if (StringUtil.isEmpty(endpointName)) {
-			endpointName = DEFAULT_ENDPOINT;
+			endpointName = DEFAULT_ENDPOINT_NAME;
 		}
 		this.endpoint = EndpointFactory.getEndpoint(endpointName);
 		this.cacheSize = cacheSize;

@@ -197,9 +197,7 @@ public class Util {
         if(StringUtil.isEmpty(environment))
             environment = Context.get().getProperty("environment");
         
-        String endpointName = Context.get().getProperty("endpoint.default");
-        if(StringUtil.isEmpty(endpointName))
-            endpointName = "connections";
+        String endpointName = "connections";
         String baseUrl = Context.get().getProperty(endpointName + ".url");
         
         String[] result;

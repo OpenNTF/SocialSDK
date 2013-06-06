@@ -184,7 +184,7 @@ define(["../../../declare", "../../../stringUtil", "../../../i18n", "../../../la
          
          _substitute : function(template, item) {
              var self = this;
-             return string.substitute(template, item, function(value, key) {
+             return stringUtil.transform(template, item, function(value, key) {
                  if (typeof value == "undefined") {
                      // check the renderer for the property
                      value = this._getObject(key, false, self);

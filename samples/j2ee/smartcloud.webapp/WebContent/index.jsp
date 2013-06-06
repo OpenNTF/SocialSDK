@@ -6,16 +6,17 @@
 <title>Smart Cloud Sample</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
+<!-- Using Dojo as the underlying toolkit in this sample but it could also be JQuery -->
 <script type="text/javascript" src="/sbt.dojo180/dojo/dojo.js" djConfig="parseOnLoad: true"></script>
+<!-- Configure the SDK JavaScript library and notify that Dojo v1.8.0 is being used -->
 <script type="text/javascript" src="/smartcloud.webapp/library?lib=dojo&ver=1.8.0"></script>
 
-<%
-%>
-
+<!-- This add's the CSS required for the Smart Cloud navigation bar -->
 <link rel="stylesheet" href="<%=Util.getThemeUrl()%>" type="text/css" />
 </head>
 
 <body class="lotusui30_body">
+<!-- Include the Smart Cloud navigation bar -->
 <div class="lotusui30 lotusui30_fonts scloud3">
 	<script type="text/javascript" src="<%=Util.getNavBarUrl()%>"></script>
 </div>
@@ -38,6 +39,7 @@
 	</div>
 </div>
 
+<!-- Get the local users subscriber id and use this to retrieve and display their profile -->
 <script type="text/javascript">
 require([ "sbt/smartcloud/ProfileService", "sbt/dom", "sbt/Endpoint" ], function(ProfileService, dom, Endpoint) {
 

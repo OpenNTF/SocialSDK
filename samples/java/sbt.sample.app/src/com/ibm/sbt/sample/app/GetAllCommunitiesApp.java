@@ -21,6 +21,7 @@ import com.ibm.commons.runtime.Application;
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.RuntimeFactory;
 import com.ibm.commons.runtime.impl.app.RuntimeFactoryStandalone;
+import com.ibm.sbt.services.client.BaseService;
 import com.ibm.sbt.services.client.connections.communities.Community;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
 import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
@@ -46,7 +47,7 @@ public class GetAllCommunitiesApp {
      * Be sure to call the destroy() method in this class if you don't intend to keep the initialised Context around.
      */
     public GetAllCommunitiesApp(){
-        this(CommunityService.DEFAULT_ENDPOINT_NAME, true);
+        this(BaseService.DEFAULT_ENDPOINT_NAME, true);
     }
     
     /**

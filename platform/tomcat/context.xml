@@ -41,7 +41,7 @@
 		factory="com.ibm.commons.runtime.naming.UrlFactory" url="faces-config.xml" />
 	-->
 
-    <!-- Configures the location of a sbt.proeprties file which 
+    <!-- Configures the location of a sbt.properties file which 
          contains the configuration proeprties for use with the Social Business Toolkit -->
     <Resource name="url/ibmsbt-sbtproperties" auth="Container" type="java.net.URL" 
 		factory="com.ibm.commons.runtime.naming.UrlFactory" url="sbt.properties" />

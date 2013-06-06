@@ -2,7 +2,6 @@ require([ "sbt/dom", "sbt/json", "sbt/connections/CommunityService" ], function(
         var communityService = new CommunityService();
         var promise = communityService.getMyCommunities({
                 asc : true,
-                email : "%{sample.email1}",
                 page : 1,
                 ps : 2
                 //since : "2009-01-04T20:32:31.171Z",

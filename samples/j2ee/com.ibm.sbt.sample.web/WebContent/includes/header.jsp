@@ -1,10 +1,20 @@
 <%@page import="java.net.URLEncoder"%>
 <%@page import="com.ibm.sbt.sample.web.util.Util"%>
+<%@page import="com.ibm.commons.runtime.Context"%>
+<%@page import="com.ibm.commons.util.StringUtil"%>
 <%
 String homeClass = "";
 String jsClass = "";
 String javaClass = "";
 String formStyle = "";
+
+String headEnvironment = Context.get().getProperty("environment");
+String headEnvParam = request.getParameter("env");
+boolean headSmartcloud = false;
+if(StringUtil.isEmpty(headEnvParam))
+    headSmartcloud = headEnvironment != null && headEnvironment.equals("smartcloudEnvironment") ? true : false;
+else
+    headSmartcloud = headEnvParam.equals("smartcloudEnvironment") ? true : false;
 
 String requestUrl = request.getRequestURL().toString();
 if (requestUrl.indexOf("javascript.jsp") != -1) {
@@ -23,12 +33,12 @@ function reload(url) {
   window.location.href = url;
 }
 </script>
-   <%if(smartcloud){ %>
+   <%if(headSmartcloud){ %>
     <div id="smartcloudNavContainer" class="lotusui30 lotusui30_fonts scloud3" style="font-size:12px">
       <script src="https://apps.na.collabservtest.lotus.com/manage/navbar/banner/smartcloudExt?oneui=3"></script>
     </div>
     <%}%>
-   <div class="navbar <%if(!smartcloud){%>navbar-fixed-top<%}%>">
+   <div class="navbar <%if(!headSmartcloud){%>navbar-fixed-top<%}%>">
      <div class="navbar-inner">
        <div class="container-fluid">
          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -39,9 +49,9 @@ function reload(url) {
          <a class="brand" href="#">Social Business Toolkit - Samples</a>
          <div class="nav-collapse collapse">
            <ul class="nav">
-              <li class="<%=homeClass%>"><a href="home.jsp<%if(smartcloud){ %>?env=smartcloudEnvironment<%}%>">Home</a></li>
-              <li class="<%=jsClass%>"><a href="javascript.jsp<%if(smartcloud){ %>?env=smartcloudEnvironment<%}%>">JavaScript</a></li>
-            <li class="<%=javaClass%>"><a href="java.jsp<%if(smartcloud){ %>?env=smartcloudEnvironment<%}%>">Java</a></li>
+              <li class="<%=homeClass%>"><a href="home.jsp<%if(headSmartcloud){ %>?env=smartcloudEnvironment<%}%>">Home</a></li>
+              <li class="<%=jsClass%>"><a href="javascript.jsp<%if(headSmartcloud){ %>?env=smartcloudEnvironment<%}%>">JavaScript</a></li>
+            <li class="<%=javaClass%>"><a href="java.jsp<%if(headSmartcloud){ %>?env=smartcloudEnvironment<%}%>">Java</a></li>
          </ul>
          <form class="navbar-form pull-right" style="<%=formStyle%>">
           <span style="vertical-align:middle">JavaScript Library: </span>

@@ -88,7 +88,7 @@ public class ActivityStreamService extends BaseService {
 	 */
 	public ActivityStreamService() {
 		super();
-		this.endpoint = EndpointFactory.getEndpoint(ActivityStreamService.getDefaultEndpoint());
+		this.endpoint = EndpointFactory.getEndpoint(BaseService.DEFAULT_ENDPOINT);
 	}
 
 	/**

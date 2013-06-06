@@ -17,12 +17,12 @@
 /**
  * @module sbt.connections.controls.communities.CommunityGridRenderer
  */
-define(["../../../declare", "../../../stringUtil", "../../../i18n", "../../../lang",
+define(["../../../declare", "dojo/string", "../../../stringUtil", "../../../i18n", "../../../lang",
         "../../../connections/controls/ConnectionsGridRenderer",
         "../../../text!sbt/connections/controls/communities/templates/CommunityRow.html",
         "../../../text!sbt/connections/controls/communities/templates/TagAnchor.html",
         "../../../i18n!sbt/connections/controls/communities/nls/CommunityGridRenderer"], 
-        function(declare, stringUtil, i18n, lang, ConnectionsGridRenderer, CommunityRow, TagAnchor, nls) {
+        function(declare, string, stringUtil, i18n, lang, ConnectionsGridRenderer, CommunityRow, TagAnchor, nls) {
 
     /**
      * @class CommunityGridRenderer

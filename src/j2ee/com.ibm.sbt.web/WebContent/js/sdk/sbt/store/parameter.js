@@ -72,7 +72,7 @@ define(["../stringUtil", "../config", "../Endpoint"], function(stringUtil, confi
     var isV4OrHigher = true;
     
     var setEndpoint = function(args){
-    	endpoint = Endpoint.find(args.endpoint || config.defaultEndpoint || "connections");
+    	endpoint = Endpoint.find(args.endpoint || "connections");
 	    if (endpoint.apiVersion) {
 	        var parts = endpoint.apiVersion.split(".");
 	        isV4OrHigher = !(parts.length > 1 && parts[0] < 4);

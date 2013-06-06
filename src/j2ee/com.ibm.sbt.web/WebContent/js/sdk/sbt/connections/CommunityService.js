@@ -829,10 +829,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Endpoint", "
          * @returns {String}
          */
         getDefaultEndpointName: function() {
-            if(config.defaultEndpoint)
-                return config.defaultEndpoint;
-            else
-                return "connections";
+            return "connections";
         },
         
         /**

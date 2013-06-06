@@ -35,6 +35,7 @@ import com.ibm.sbt.services.util.extractor.field.DataExtractor;
 public abstract class BaseService {
 
 	public static final int						DEFAULT_CACHE_SIZE		= 0;
+    public static final String                  DEFAULT_ENDPOINT        = "connections";
 	private static final String					sourceClass				= BaseService.class.getName();
 	private static final Logger					logger					= Logger.getLogger(sourceClass);
 	protected static HashMap<String, Object>	cache					= new HashMap<String, Object>();
@@ -46,17 +47,8 @@ public abstract class BaseService {
 	 * Constructor
 	 */
 	public BaseService() {
-		this(getDefaultEndpoint(), DEFAULT_CACHE_SIZE);
+		this(DEFAULT_ENDPOINT, DEFAULT_CACHE_SIZE);
 	}
-
-    public static String getDefaultEndpoint() {
-        String endpointName = Context.get().getProperty("endpoint.default");
-	    if (StringUtil.isEmpty(endpointName)) {
-	        logger.config("Using default endpoint of connections, please set up endpoint.default property");
-	        endpointName = "connections";
-	    }
-        return endpointName;
-    }
 
 	/**
 	 * Constructor
@@ -75,7 +67,7 @@ public abstract class BaseService {
 	 */
 	public BaseService(String endpointName, int cacheSize) {
 		if (StringUtil.isEmpty(endpointName)) {
-			endpointName = getDefaultEndpoint();
+			endpointName = DEFAULT_ENDPOINT;
 		}
 		this.endpoint = EndpointFactory.getEndpoint(endpointName);
 		this.cacheSize = cacheSize;
@@ -91,7 +83,7 @@ public abstract class BaseService {
 	public BaseService(String endpointName, int cacheSize, String format) {
 		setHandler(format);
 		if (StringUtil.isEmpty(endpointName)) {
-			endpointName = getDefaultEndpoint();
+			endpointName = DEFAULT_ENDPOINT;
 		}
 		this.endpoint = EndpointFactory.getEndpoint(endpointName);
 		this.cacheSize = cacheSize;

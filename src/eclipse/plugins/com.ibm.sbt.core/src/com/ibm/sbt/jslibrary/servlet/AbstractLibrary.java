@@ -279,7 +279,6 @@ abstract public class AbstractLibrary {
 		}
 
 		JsonObject jsonProperties = new JsonJavaObject();
-		Context context = Context.get();
 		// add the built-in properties
 		jsonProperties.putJsonProperty(PROP_TOOLKIT_URL, request.getToolkitJsUrl());
 		jsonProperties.putJsonProperty(PROP_SERVICE_URL, request.getServiceUrl());
@@ -288,6 +287,7 @@ abstract public class AbstractLibrary {
 		// add the requested properties
 		Property[] properties = request.getEnvironment().getPropertiesArray();
 		if (properties != null) {
+		    Context context = Context.get();
 			for (Property property : properties) {
 				String value = property.getValue();
 				if (StringUtil.isEmpty(value)) {

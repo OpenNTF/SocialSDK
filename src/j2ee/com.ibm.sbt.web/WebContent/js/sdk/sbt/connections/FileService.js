@@ -715,10 +715,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 				 * @returns {String}
 				 */
 				getDefaultEndpointName : function() {
-				    if(config.defaultEndpoint)
-		                return config.defaultEndpoint;
-		            else
-		                return "connections";
+                    return "connections";
 				},
 
 				/**

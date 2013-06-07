@@ -122,7 +122,7 @@ public class LibraryServlet extends BaseToolkitServlet {
     static final String DEFAULT_SERVICE_URL = "%local_application%/service"; //$NON-NLS-1$
     static final String DEFAULT_LIBRARY_URL = "%local_application%/library";
     static final String DEFAULT_IFRAME_PATH = "/xhr/IFrameContent.html"; //$NON-NLS-1$
-    static final String DEFAULT_ENDPOINTS = "connections,smartcloud,domino,sametime"; //$NON-NLS-1$
+    static final String DEFAULT_ENDPOINTS = "connections,smartcloud,twitter,domino,sametime,dropbox"; //$NON-NLS-1$
     static final String DEFAULT_CLIENT_PROPERTIES = null; //$NON-NLS-1$
     static final String DEFAULT_ENVIRONMENT = "defaultEnvironment"; //$NON-NLS-1$
 
@@ -237,17 +237,16 @@ public class LibraryServlet extends BaseToolkitServlet {
         synchronized (createEnvironmentLock) {
             // create a default environment if needed
             if (_defaultParams.getEnvironment() == null) {
-                Application application = context.getApplication();
-                String environmentName = getAppParameter(application, PARAM_ENVIRONMENT, DEFAULT_ENVIRONMENT);
-                SBTEnvironment environment = (SBTEnvironment) context.getBean(environmentName);
+                SBTEnvironment environment = (SBTEnvironment) context.getBean(DEFAULT_ENVIRONMENT);
                 if (environment == null) {
                     ServletConfig config = getServletConfig();
+                    Application application = context.getApplication();
                     String defaultEndpoints = getAppParameter(application, PARAM_ENDPOINTS, DEFAULT_ENDPOINTS);
                     String endpoints = getInitParameter(config, PARAM_ENDPOINTS, defaultEndpoints);
                     String defaultClientProps = getAppParameter(application, PARAM_CLIENT_PROPERTIES, DEFAULT_CLIENT_PROPERTIES);
                     String clientProps = getInitParameter(config, PARAM_CLIENT_PROPERTIES, defaultClientProps);
 
-                    environmentName = getInitParameter(config, PARAM_ENVIRONMENT, DEFAULT_ENVIRONMENT);
+                    String environmentName = getInitParameter(config, PARAM_ENVIRONMENT, DEFAULT_ENVIRONMENT);
                     environment = new SBTEnvironment();
                     environment.setName(environmentName);
                     environment.setEndpoints(endpoints);

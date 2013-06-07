@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex" xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xc:OneUILayout navigationPath="/Generic/Stackoverflow" title="Stackoverflow" connection="stackoverflow">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftGeneric></xc:LeftGeneric>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:panel>
+			<xe:this.data>
+				<xe:restJsonData var='rest' endpoint="stackoverflow" serviceUrl="/2.0/questions" paramCount="pagesize"
+					paramFirst="page" paramFirstType="page1" splitPath="items">
+					<xe:this.urlParameters>
+						<xe:urlParameter name="site" value="stackoverflow">
+						</xe:urlParameter>
+						<xe:urlParameter name="order" value="desc">
+						</xe:urlParameter>
+						<xe:urlParameter name="sort" value="activity">
+						</xe:urlParameter>
+					</xe:this.urlParameters>
+				</xe:restJsonData>
+			</xe:this.data>
+			<xp:repeat id="repeat1" rows="10" value="#{rest}" var="entry">
+				Question:&#160;
+				<xp:text escape="true" id="computedField1" value="#{entry.title}"></xp:text>
+				<xp:br></xp:br>
+			</xp:repeat>
+		</xp:panel>
+	</xc:OneUILayout>
+</xp:view>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="85257876005A0DD2" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="3aa" sequence="78" unid="C88F18D8F57BF42E852579080078FD27">
+<created><datetime dst="true">20110911T180131,27-04</datetime></created>
+<modified><datetime dst="true">20111005T103555,75-04</datetime></modified>
+<revised><datetime dst="true">20111005T103555,74-04</datetime></revised>
+<lastaccessed><datetime dst="true">20111005T103555,75-04</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20110911T180131,28-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></updatedby>
+<item name="$Flags"><text>34567Cg~[</text></item>
+<item name="$TITLE"><text>demo/IdentityProvider.java</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+
+<item name="$FileNames" sign="true"><text>demo/IdentityProvider.java</text></item>
+</note>

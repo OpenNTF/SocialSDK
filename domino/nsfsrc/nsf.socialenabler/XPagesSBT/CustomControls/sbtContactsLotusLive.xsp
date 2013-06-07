@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:this.data>
+		<xe:objectData var="objectData1">
+			<xe:this.createObject><![CDATA[#{javascript:var profileService = new com.ibm.sbt.services.client.smartcloud.profiles.ProfileService("lotuslive");
+var result= profileService.getProfile().getData();
+return parseLotusLiveContacts(result);
+
+
+}]]></xe:this.createObject>
+		</xe:objectData>
+	</xp:this.data>
+
+	<xp:this.resources>
+		<xp:script src="/Utils.jss" clientSide="false"></xp:script>
+	</xp:this.resources>
+	<xp:this.beforePageLoad><![CDATA[#{javascript:var ep = @Endpoint("lotuslive");
+if(!ep.isAuthenticated()){
+	ep.authenticate(true);
+}}]]></xp:this.beforePageLoad>
+	<xp:table>
+		<xp:tr id="tr2" style="height:80.0px" valign="bottom">
+			<xp:td id="td2"></xp:td>
+			<xp:td>
+				<xp:text escape="true" id="computedField3" value="Name"
+					style="font-weight:bold;font-size:11pt">
+				</xp:text>
+			</xp:td>
+			<xp:td>
+				<xp:text escape="true" id="computedField4"
+					value="E-mail" style="font-size:11pt;font-weight:bold">
+				</xp:text>
+			</xp:td>
+			<xp:td>
+				<xp:pager style="align:left;padding-bottom:10.0px"
+					layout="Previous Group Next" partialRefresh="true" id="pager1"
+					for="repeat1">
+				</xp:pager>
+			</xp:td>
+		</xp:tr>
+		<xp:repeat id="repeat1" rows="10" var="arrays"
+			value="#{objectData1}">
+
+			<xp:tr id="tr1" style="height:80.0px" valign="top">
+				<xp:td
+					style="padding-right:30.0px;padding-top:5.0px;padding-bottom:5.0px"
+					id="td1">
+					<xp:image id="image1"
+						style="height:75.0px;width:75.0px" url="#{arrays.photo}">
+
+					</xp:image>
+				</xp:td>
+				<xp:td
+					style="padding-right:20.0px;padding-top:5.0px;padding-bottom:5.0px">
+					<xp:text escape="true" id="computedField1"
+						value="#{arrays.name}">
+					</xp:text>
+				</xp:td>
+				<xp:td style="padding-right:30.0px">
+					<xp:text escape="true" id="computedField2"
+						value="#{arrays.email}">
+					</xp:text>
+				</xp:td>
+				<xp:td>
+					<xp:link escape="true" text="Open" id="link1"
+						value="#{arrays.profile}" target="_blank"
+						style="align:right;background-position:center right">
+					</xp:link>
+				</xp:td>
+			</xp:tr>
+		</xp:repeat>
+	</xp:table>
+
+</xp:view>

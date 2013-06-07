@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<!-- @Author - Dan O'Connor -->
+	<!-- Log In Button -->
+	<xp:this.data>
+		<xe:fileServiceData var="fileServiceData1">
+			<xe:this.serviceType>
+				<xe:connectionsFileData></xe:connectionsFileData>
+			</xe:this.serviceType>
+
+		</xe:fileServiceData>
+	</xp:this.data>
+	<xp:this.beforePageLoad><![CDATA[#{javascript:if(!@Endpoint("connections").isAuthenticated()) {
+	@Endpoint("connections").authenticate(true);
+}}]]>
+	</xp:this.beforePageLoad>
+	<xe:djContentPane id="djContentPane1"
+		partialRefresh="#{javascript:compositeData.ajaxUpdate}" style="overflow-x:hidden; overflow-y:hidden">
+		<xp:table id="filesListFormattingTable">
+			<!-- Row1 -->
+			<xp:tr>
+				<xp:td>
+					<xp:button value=" Upload" id="button6">
+						<xp:eventHandler event="onclick" submit="false">
+							<xp:this.script><![CDATA[XSP.openDialog("#{id:dialog1}");]]></xp:this.script>
+						</xp:eventHandler>
+					</xp:button>
+					<xp:button value=" New Folder" id="button4"
+						rendered="#{javascript:fileServiceData1.useFolders();}">
+						<xp:eventHandler event="onclick" submit="false">
+							<xp:this.script>
+							<![CDATA[XSP.openDialog('#{id:folderDialog}')]]>
+							</xp:this.script>
+						</xp:eventHandler>
+					</xp:button>
+					<xp:button value=" Delete Selected Documents" id="button2">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="partial" refreshId="filesListFormattingTable">
+							<xp:this.action>
+								<xp:actionGroup>
+									<xp:deleteSelectedDocuments view="viewPanel1"
+										message="Delete selected?">
+									</xp:deleteSelectedDocuments>
+									<xp:executeScript>
+										<xp:this.script>
+										<![CDATA[#{javascript:fileServiceData1.refresh();
+										}]]>
+										</xp:this.script>
+									</xp:executeScript>
+								</xp:actionGroup>
+							</xp:this.action>
+						</xp:eventHandler>
+					</xp:button>
+				</xp:td>
+				<xp:td>
+				</xp:td>
+			</xp:tr>
+			<xp:tr>
+				<xp:td colspan="2">
+					<xp:viewPanel rows="200" id="viewPanel1" var="entry"
+						value="#{javascript:fileServiceData1}" partialRefresh="true">
+						<xp:this.facets>
+							<xp:pager partialRefresh="true" layout="Previous Group Next"
+								xp:key="headerPager" id="pager1">
+							</xp:pager>
+						</xp:this.facets>
+						<xp:this.rendered>
+						<![CDATA[#{javascript:@Endpoint('connections').isAuthenticated();
+            			}]]>
+						</xp:this.rendered>
+						<xp:viewColumn columnName="icon" id="viewColumn10"
+							rendered="true" showCheckbox="true">
+							<xp:viewColumnHeader value=""
+								id="viewColumnHeader10">
+							</xp:viewColumnHeader>
+							<xp:this.iconSrc>
+							<![CDATA[#{javascript:return entry.getIcon();
+            				}]]>
+							</xp:this.iconSrc>
+						</xp:viewColumn>
+						<xp:viewColumn id="viewColumn1" displayAs="hidden">
+							<xp:viewColumnHeader value="Title"
+								id="viewColumnHeader9">
+							</xp:viewColumnHeader>
+							<xe:switchFacet id="switchFacet1" defaultFacet="else">
+								<xe:this.selectedFacet>
+								<![CDATA[#{javascript:
+											if(entry.isDirectory()) 
+												return "yes";
+											else 
+												return "no";
+               					}]]>
+								</xe:this.selectedFacet>
+
+								<xp:this.facets>
+									<xp:link xp:key="yes" escape="true"
+										text="#{javascript:entry.getTitle()}" id="link1">
+										<xp:eventHandler event="onclick" submit="true"
+											refreshMode="partial" refreshId="filesListFormattingTable">
+											<xp:this.action>
+											<![CDATA[#{javascript: 
+														fileServiceData1.setCurrentDirectory(entry.getPath());
+														fileServiceData1.refresh();
+                        					}]]>
+											</xp:this.action>
+										</xp:eventHandler>
+									</xp:link>
+									<xp:link xp:key="no" escape="true"
+										text="#{javascript:entry.getTitle()}" id="link2"
+										value="#{javascript:entry.getProxyURL();}">
+									</xp:link>
+								</xp:this.facets>
+							</xe:switchFacet>
+						</xp:viewColumn>
+						<xp:viewColumn columnName="description" id="viewColumn6">
+							<xp:viewColumnHeader value="Description"
+								id="viewColumnHeader6">
+							</xp:viewColumnHeader>
+						</xp:viewColumn>
+						<xp:viewColumn columnName="size" id="viewColumn2">
+							<xp:viewColumnHeader value="Size"
+								id="viewColumnHeader2">
+							</xp:viewColumnHeader>
+						</xp:viewColumn>
+						<xp:viewColumn columnName="version" id="viewColumn4"
+							style="text-align:center">
+							<xp:viewColumnHeader value="Version"
+								id="viewColumnHeader4">
+							</xp:viewColumnHeader>
+						</xp:viewColumn>
+						<xp:viewColumn columnName="updated" id="viewColumn3">
+							<xp:viewColumnHeader value="Updated"
+								id="viewColumnHeader3">
+							</xp:viewColumnHeader>
+						</xp:viewColumn>
+						<xp:viewColumn columnName="authorName" id="viewColumn7">
+							<xp:viewColumnHeader value="Author"
+								id="viewColumnHeader7">
+							</xp:viewColumnHeader>
+						</xp:viewColumn>
+						<xp:viewColumn columnName="visibility" id="viewColumn8">
+							<xp:viewColumnHeader value="Visibility"
+								id="viewColumnHeader8">
+							</xp:viewColumnHeader>
+						</xp:viewColumn>
+					</xp:viewPanel>
+				</xp:td>
+			</xp:tr>
+			<xp:tr>
+				<xp:td colspan="2">
+					<xe:dialog id="dialog1" title="Enter values">
+						<xe:this.dojoAttributes>
+							<xp:dojoAttribute name="iframePost" value="true"></xp:dojoAttribute>
+						</xe:this.dojoAttributes>
+						<xp:panel style='padding: 10px'>
+							<xp:table>
+								<xp:tr>
+									<xp:td>File upload</xp:td>
+									<xp:td>
+										<xp:fileUpload id="fileUpload3"
+											value="#{fileServiceData1.uploadedFile}" required="true">
+										</xp:fileUpload>
+									</xp:td>
+								</xp:tr>
+								<xp:tr>
+									<xp:td>Description</xp:td>
+									<xp:td>
+										<xp:inputText id="inputText1"
+											value="#{requestScope.connFileDescription}">
+										</xp:inputText>
+									</xp:td>
+								</xp:tr>
+							</xp:table>
+						</xp:panel>
+						<xe:dialogButtonBar>
+							<xp:button value="OK" id="button5" styleClass="lotusFormButton">
+								<xp:eventHandler event="onclick" submit="true"
+									refreshMode="complete" immediate="false" save="true">
+									<xp:this.action><![CDATA[#{javascript:getComponent('dialog1').hide('filesListFormattingTable')}]]></xp:this.action>
+								</xp:eventHandler>
+							</xp:button>
+							<xp:link id="link4" text="Cancel" styleClass="lotusAction">
+								<xp:eventHandler event="onclick" submit="false">
+									<xp:this.script><![CDATA[XSP.closeDialog('#{id:dialog1}')]]></xp:this.script>
+								</xp:eventHandler>
+							</xp:link>
+						</xe:dialogButtonBar>
+					</xe:dialog>
+					<xe:dialog id="folderDialog" title="New Folder">
+						<xp:panel style='padding: 10px'>
+							<xe:formTable id="formTable1" labelWidth="20%">
+
+								<xe:formRow id="formRow1" label="Folder Name">
+									<xp:inputText id="inputText5"></xp:inputText>
+								</xe:formRow>
+
+							</xe:formTable>
+						</xp:panel>
+						<xe:dialogButtonBar>
+							<xp:button value="OK" id="button15" styleClass="lotusFormButton">
+								<xp:eventHandler event="onclick" submit="true"
+									refreshMode="partial" refreshId="filesListFormattingTable">
+									<xp:this.action>
+									<![CDATA[#{javascript:
+												var folderName = getComponent("inputText5").getValue();
+												if(folderName != "")
+												{	folderName = fileServiceData1.getCurrentDirectory() + "/" + folderName;
+												    fileServiceData1.createFolder(folderName);
+													var c = getComponent("folderDialog");
+												    c.hide();
+												}
+												   fileServiceData1.refresh();
+                  					}]]>
+									</xp:this.action>
+								</xp:eventHandler>
+							</xp:button>
+							<xp:link id="button17" text="Cancel" styleClass="lotusAction">
+								<xp:eventHandler event="onclick" submit="true"
+									immediate="true">
+									<xp:this.action>
+										<xp:actionGroup>
+											<xp:executeScript>
+												<xp:this.script>
+												<![CDATA[#{javascript:
+															var c = getComponent("folderDialog");
+															c.hide();
+                              					}]]>
+												</xp:this.script>
+											</xp:executeScript>
+										</xp:actionGroup>
+									</xp:this.action>
+								</xp:eventHandler>
+							</xp:link>
+						</xe:dialogButtonBar>
+					</xe:dialog>
+					<!-- END New Folder Button & Pop-up -->
+				</xp:td>
+			</xp:tr>
+		</xp:table>
+	</xe:djContentPane>
+</xp:view>

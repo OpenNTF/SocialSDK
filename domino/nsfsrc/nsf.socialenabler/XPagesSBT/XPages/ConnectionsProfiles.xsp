@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xp:this.resources>
+		<xp:dojoModule name="extlib.dijit.Loading"></xp:dojoModule>
+	</xp:this.resources>
+	<xc:OneUILayout navigationPath="/Connections/Profiles"
+		title="Connections Profiles" connection="connections">
+		<xc:WarningConnectionsVersion></xc:WarningConnectionsVersion>
+		<xc:BasicAuthenticationPanel endpoint="connections"></xc:BasicAuthenticationPanel>
+		<xp:br/><xp:br/>
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftConnections></xc:LeftConnections>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:button id="button1">
+			<xp:this.value><![CDATA[#{javascript:var u = @Endpoint("connections").getUserIdentity()
+if(u) {
+	return "Read the profiles entry of '"+u+"'"
+} else {
+	return "Authenticate to Connections"
+}}]]></xp:this.value>
+			<xp:eventHandler event="onclick" submit="true"
+				refreshMode="complete">
+				<xp:this.action><![CDATA[#{javascript:try {
+	if(!@Endpoint("connections").isAuthenticated()) {
+		@Endpoint("connections").authenticate(true);
+	}
+	var u = @Endpoint("connections").getUserIdentity()
+	if(u) {
+		var p = {userid:userBean.lcId}
+		var svc = new sbt.ConnectionsService("/profiles/atom/profile.do")
+		var msg = svc.get(p,"xml");
+		viewScope.text = msg.getXMLString(false)
+	}
+} catch(e) {
+	viewScope.text = I18n.format("\nException thrown\n\n{0}",e.toString())
+}}]]></xp:this.action>
+			</xp:eventHandler>
+		</xp:button>
+		<br />
+		<pre>
+			<xp:text escape="true" id="computedField1" value="#{viewScope.text}"
+				style="font-family:Courier;">
+			</xp:text>
+		</pre>
+		<br />
+	</xc:OneUILayout>
+</xp:view>
+

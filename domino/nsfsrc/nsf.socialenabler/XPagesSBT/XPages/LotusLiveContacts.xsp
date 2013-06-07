@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xc:OneUILayout navigationPath="/LotusLive/Contacts"
+		title="LotusLive Contacts">
+		<xc:sbtContactsLotusLive></xc:sbtContactsLotusLive>
+		<xp:this.facets>
+			<xc:LeftLotusLive xp:key="LeftColumn"></xc:LeftLotusLive>
+		</xp:this.facets>
+	</xc:OneUILayout></xp:view>

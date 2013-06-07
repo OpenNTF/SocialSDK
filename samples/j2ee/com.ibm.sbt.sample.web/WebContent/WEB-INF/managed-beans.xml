@@ -8,7 +8,7 @@
 	</managed-bean>
 
 	<!--  
-		Password store for OAuth / SmartCloud 
+		Password store for OAuth / SmartCloud
 	-->
 	<managed-bean>
 		<managed-bean-name>SmartCloudStore</managed-bean-name>

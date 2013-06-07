@@ -380,8 +380,7 @@
 			<property-name>url</property-name>
 			<value>http://projects.openntf.org</value>
 		</managed-property>
-		<managed-property>
-		<!--
+		<!-- <managed-property>
 			<property-name>passwordStore</property-name>
 			<value>PwdStore</value>
 		</managed-property>

@@ -34,10 +34,7 @@ define(["../../../declare", "../../../stringUtil",
 
          _nls: nls,
          
-         hideViewAll: false,
-         
          containerClass: "lotusChunk",
-         spacerClass: "lotusClear",
          
          template: colleagueItemTemplate,
          viewAllTemplate: viewAllTemplate,
@@ -64,13 +61,11 @@ define(["../../../declare", "../../../stringUtil",
           },
 
           renderContainer: function(grid, el, items, data) {          
-              var div = this._create("div", {}, el);
-              this._create("div", { "class": this.containerClass }, div);
-              return div;
+              return this._create("div", { "class": this.containerClass }, el);
           },
           
           renderViewAll: function(grid, el, items, data) {          
-              if (this.viewAllTemplate && !this.hideViewAll) {
+              if (this.viewAllTemplate && !grid.hideViewAll) {
                   var node;
                   if (this._isString(this.viewAllTemplate)) {
                       var domStr = this._substituteItems(this.viewAllTemplate, grid, this, items, data);

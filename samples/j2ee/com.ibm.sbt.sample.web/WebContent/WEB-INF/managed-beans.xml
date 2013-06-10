@@ -517,5 +517,65 @@
 			<value>%{twitter.appId}</value>
 		</managed-property>
 	</managed-bean>
+	
+		<!-- Dropbox -->
+	<managed-bean>
+		<managed-bean-name>DropboxStore</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.security.authentication.oauth.consumer.store.MemoryTokenStore</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+	<!-- Dropbox oauth endpoint -->
+	<managed-bean>
+		<managed-bean-name>dropbox</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.services.endpoints.OAuthEndpoint</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+		<!-- Endpoint URL -->
+		<managed-property>
+			<property-name>url</property-name>
+			<value>%{dropbox.url=https://api.dropbox.com}</value>
+		</managed-property>
+
+		<!-- Trust the connection -->
+		<managed-property>
+			<property-name>forceTrustSSLCertificate</property-name>
+			<value>true</value>
+		</managed-property>
+		<managed-property>
+			<property-name>consumerKey</property-name>
+			<value>%{dropbox.consumerKey}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>consumerSecret</property-name>
+			<value>%{dropbox.consumerSecret}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>requestTokenURL</property-name>
+			<value>%{dropbox.requestTokenURL=https://api.dropbox.com/1/oauth/request_token}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>authorizationURL</property-name>
+			<value>%{dropbox.authorizeURL=https://www.dropbox.com/1/oauth/authorize}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>accessTokenURL</property-name>
+			<value>%{dropbox.accessTokenURL=https://api.dropbox.com/1/oauth/access_token}</value>
+		</managed-property>		
+		<managed-property>
+			<property-name>signatureMethod</property-name>
+			<value>PLAINTEXT</value>
+		</managed-property>
+		<managed-property>
+			<property-name>tokenStore</property-name>
+			<value>DropboxStore</value>
+		</managed-property>
+		<managed-property>
+			<property-name>serviceName</property-name>
+			<value>Dropbox</value>
+		</managed-property>
+		<managed-property>
+			<property-name>appId</property-name>
+			<value>%{dropbox.appId}</value>
+		</managed-property>
+	</managed-bean>
   
 </faces-config>

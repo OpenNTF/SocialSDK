@@ -122,7 +122,7 @@ public class LibraryServlet extends BaseToolkitServlet {
     static final String DEFAULT_SERVICE_URL = "%local_application%/service"; //$NON-NLS-1$
     static final String DEFAULT_LIBRARY_URL = "%local_application%/library";
     static final String DEFAULT_IFRAME_PATH = "/xhr/IFrameContent.html"; //$NON-NLS-1$
-    static final String DEFAULT_ENDPOINTS = "connections,smartcloud,domino,sametime,dropbox"; //$NON-NLS-1$
+    static final String DEFAULT_ENDPOINTS = "connections,smartcloud,domino,sametime"; //$NON-NLS-1$
     static final String DEFAULT_CLIENT_PROPERTIES = null; //$NON-NLS-1$
     static final String DEFAULT_ENVIRONMENT = "defaultEnvironment"; //$NON-NLS-1$
 

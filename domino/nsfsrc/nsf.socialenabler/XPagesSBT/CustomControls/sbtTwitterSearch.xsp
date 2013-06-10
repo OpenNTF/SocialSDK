@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<!--  Dan O'Connor -->
+	<!-- Tony McGuckin, IBM -->
+	<xp:this.beforePageLoad>
+		<![CDATA[#{javascript:if(!@Endpoint("twitter").isAuthenticated()) {
+			@Endpoint("twitter").authenticate(true);
+		}}]]>
+	</xp:this.beforePageLoad>
+	<xe:djContentPane id="djContentPane1"
+		partialRefresh="#{javascript:compositeData.ajaxUpdate}" style="overflow-x:hidden; overflow-y:hidden">
+		<xp:table id="filesListFormattingTable">
+			<xp:tr>
+				<xp:td></xp:td>
+			</xp:tr>
+			<xp:tr>
+				<xp:td>					
+					<xe:dataView id="dvTweets" var="tweet"
+						columnTitles="false" rows="10" partialRefresh="true"
+						partialExecute="true" style="width:100%" collapsibleDetail="true"
+						detailsOnClient="true">
+						<xp:this.data>
+							<xe:twitterData var="twitterData1"
+								endpoint="twitter" scope="view" timeout="60" hashTag="xpages">
+							</xe:twitterData>
+						</xp:this.data>
+						<xe:this.summaryColumn>
+							<xe:viewSummaryColumn columnName="author"
+								href="#{javascript:tweet.authorLink}">
+							</xe:viewSummaryColumn>
+						</xe:this.summaryColumn>
+						<xe:this.iconColumn>
+							<xe:viewIconColumn>
+								<xe:this.icons>
+									<xe:iconEntry
+										style="height:35px;width:35px;border-radius:5px;" alt=""
+										title="">
+										<xe:this.url>
+											<![CDATA[#{javascript:tweet.image;}]]>
+										</xe:this.url>
+									</xe:iconEntry>
+								</xe:this.icons>
+							</xe:viewIconColumn>
+						</xe:this.iconColumn>
+						<xp:this.facets>
+							<xe:pagerAddRows id="pagerAddRows1"
+								xp:key="pagerBottom">
+							</xe:pagerAddRows>
+							<xp:panel xp:key="summary" id="panel1"
+								style="display:inline-block">
+								<xp:link id="link1"
+									style="text-decoration:none;font-weight:bold;"
+									text="#{tweet.author}" target="_blank">
+									<xp:this.value>
+										<![CDATA[#{javascript:tweet.authorLink}]]>
+									</xp:this.value>
+								</xp:link>
+								<xp:br></xp:br>
+								<xp:text id="computedField1"
+									escape="false" contentType="twitterContent">
+									<xp:this.value>
+										<![CDATA[#{javascript:tweet.title}]]>
+									</xp:this.value>
+								</xp:text>
+							</xp:panel>
+							<xp:div xp:key="detail" id="dvAbstract1">
+								<xp:text id="computedField2"
+									escape="false" contentType="twitterContent">
+									<xp:this.value>
+										<![CDATA[#{javascript:tweet.publishedDate}]]>
+									</xp:this.value>
+								</xp:text>
+								<xp:div
+									style="clear:both;padding:2px">
+								</xp:div>
+								<xp:link id="link2"
+									style="text-decoration:none;" text="Retweet" target="_blank">
+									<xp:this.value>
+										<![CDATA[#{javascript:}]]>
+									</xp:this.value>
+								</xp:link>
+								<xp:label value=" | " id="label1"></xp:label>
+								<xp:link id="link3"
+									style="text-decoration:none;" text="Reply" target="_blank">
+									<xp:this.value>
+										<![CDATA[#{javascript:}]]>
+									</xp:this.value>
+								</xp:link>
+								<xp:label value=" | " id="label2"></xp:label>
+								<xp:link id="link5"
+									style="text-decoration:none;" text="Open" target="_blank">
+									<xp:this.value>
+										<![CDATA[#{javascript:tweet.tweetLink}]]>
+									</xp:this.value>
+								</xp:link>
+							</xp:div>
+						</xp:this.facets>
+					</xe:dataView>
+				</xp:td>
+			</xp:tr>
+		</xp:table>
+	</xe:djContentPane>
+</xp:view>

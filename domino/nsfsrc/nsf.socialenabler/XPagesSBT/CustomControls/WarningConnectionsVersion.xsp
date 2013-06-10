@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+
+	<xp:panel loaded="false">
+		<xp:label value="Note: " id="label1" style="font-weight:bold"></xp:label>
+		<xp:label
+			value="This functionality requires IBM Connections 3.0.1 and above, with the right fixes applied"
+			id="label2">
+		</xp:label>
+		<br></br>
+		<br></br>
+	</xp:panel>
+
+</xp:view>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+   
+   <extension point="com.ibm.commons.Extension">
+         <service type="com.ibm.xsp.extlib.social.PersonDataProvider" class="com.ibm.xsp.extlib.sbt.user.LotusLivePeopleDataProvider" />
+   </extension>
+   
+   <extension point="com.ibm.commons.Extension">
+         <service type="com.ibm.xsp.extlib.social.PersonDataProvider" class="com.ibm.xsp.extlib.sbt.connections.social.ProfilesBeanDataProvider" />
+   </extension>
+
+   <extension point="com.ibm.commons.Extension">
+         <service type="com.ibm.xsp.renderkit.ContentTypeRenderer" class="com.ibm.xsp.extlib.sbt.connections.contenttype.VCard" />
+   </extension>
+
+   <extension point="com.ibm.commons.Extension">
+         <service type="com.ibm.xsp.renderkit.ContentTypeRenderer" class="com.ibm.xsp.extlib.sbt.sametime.LiveName" />
+   </extension>
+
+   <extension point="com.ibm.commons.Extension">
+         <service type="com.ibm.designer.runtime.extensions.JavaScriptProvider" class="com.ibm.xsp.extlib.sbt.javascript.SBTFunctionsProviders" />
+   </extension>
+   <extension
+         point="com.ibm.commons.Extension">
+      <service type="com.ibm.xsp.renderkit.ContentTypeRenderer" class="com.ibm.xsp.extlib.sbt.twitter.TwitterContentType" />
+   </extension>
+   <extension
+         point="com.ibm.commons.Extension">
+      <service
+            class="com.ibm.xsp.extlib.sbt.files.proxy.provider.XSPProxyEndpointProvider"
+            type="com.ibm.sbt.service.proxyendpointservice.provider">
+      </service>
+   </extension>
+   <!--
+   <extension point="com.ibm.commons.Extension">
+      <service type="com.ibm.xsp.adapter.servletFactory" class="com.ibm.xsp.extlib.sbt.files.proxy.ExtLibxServletFactory" />
+</extension> 
+-->
+  
+</plugin>

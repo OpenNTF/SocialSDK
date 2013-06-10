@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xp:this.data>
+		<xe:objectData var="objectData1">
+			<xe:this.createObject><![CDATA[#{javascript:var profileService = new com.ibm.sbt.services.client.smartcloud.profiles.ProfileService("lotuslive");
+var result= profileService.getProfile().getData();
+return parseLotusLiveProfile(result);
+
+}]]></xe:this.createObject>
+		</xe:objectData>
+	</xp:this.data>
+	<xp:this.resources>
+		<xp:script src="/Utils.jss" clientSide="false"></xp:script>
+	</xp:this.resources>
+	<xp:this.beforePageLoad><![CDATA[#{javascript:var ep = @Endpoint("lotuslive");
+if(!ep.isAuthenticated()){
+	ep.authenticate(true);
+}}]]></xp:this.beforePageLoad>
+	<xp:table>
+		<xp:tr>
+			<xp:td colspan="2">
+				<xp:text escape="true" id="computedField6"
+					style="font-weight:bold;font-size:12pt"
+					value="#{objectData1.myname}">
+				</xp:text>
+				  
+				<xp:span style="font-size:12pt;font-weight:bold">
+					(
+				</xp:span>
+				<xp:link escape="true" text="Profile" id="link1"
+					value="#{objectData1.url}" target="_blank"
+					style="font-size:12pt;font-weight:bold">
+				</xp:link>
+				<xp:span style="font-size:12pt;font-weight:bold">
+					)
+				</xp:span>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td colspan="2" align="left">
+				<xp:image url="#{objectData1.image}" id="image1"
+					style="border-style:solid;border-width:thin">
+				</xp:image>
+			</xp:td>
+
+		</xp:tr>
+		<xp:tr>
+			<xp:td
+				style="padding-right:45.0px;padding-top:5.0px;padding-bottom:5.0px">
+				Country:
+			</xp:td>
+			<xp:td>
+				<xp:text escape="true" id="computedField1"
+					value="#{objectData1.country}">
+				</xp:text>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td
+				style="padding-right:45.0px;padding-top:5.0px;padding-bottom:5.0px">
+				<hr />
+				Telephone:
+			</xp:td>
+			<xp:td>
+				<hr />
+				<xp:text escape="true" id="computedField2"
+					value="#{objectData1.phone}">
+				</xp:text>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td
+				style="padding-right:45.0px;padding-top:5.0px;padding-bottom:5.0px">
+				<hr />
+				Address:
+			</xp:td>
+			<xp:td>
+				<hr />
+				<xp:text escape="true" id="computedField3"
+					value="#{objectData1.address}">
+				</xp:text>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td
+				style="padding-right:45.0px;padding-top:5.0px;padding-bottom:5.0px">
+				<hr />
+				E-mail
+			</xp:td>
+			<xp:td>
+				<hr />
+				<xp:link escape="true" text="#{objectData1.email}"
+					id="link2">
+					<xp:this.value><![CDATA[#{javascript:return "mailto://" + viewScope.email;}]]></xp:this.value>
+				</xp:link>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td
+				style="padding-right:45.0px;padding-top:5.0px;padding-bottom:5.0px">
+				<hr />
+				About Me:
+			</xp:td>
+			<xp:td>
+				<hr />
+				<xp:text escape="true" id="computedField5"
+					value="#{objectData1.aboutMe}"
+					style="color:rgb(125,125,125);font-weight:bold">
+				</xp:text>
+			</xp:td>
+		</xp:tr>
+	</xp:table>
+</xp:view>

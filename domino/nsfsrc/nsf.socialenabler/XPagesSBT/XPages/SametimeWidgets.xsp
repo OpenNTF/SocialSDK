@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xc:OneUILayout navigationPath="/Sametime/Widgets" title="Sametime Widgets" connection="sametime">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftSametime></xc:LeftSametime>
+			</xp:panel>
+		</xp:this.facets>	
+	
+		<xe:sametimeClient id="sametimeClient1" autoLogin="true"
+			autoTunnelURI="true"
+			clientScriptFile="widgets">
+		</xe:sametimeClient>
+		Sametime WebClient:
+		<xp:br/>
+		<xe:sametimeWidget id="sametimeWidget1" dojoType="sametime.WebClient"></xe:sametimeWidget>
+	</xc:OneUILayout>
+</xp:view>
+

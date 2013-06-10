@@ -518,17 +518,20 @@
 		</managed-property>
 	</managed-bean>
 	
-		<!-- Dropbox -->
+	<!-- Dropbox -->
+	
+	<!-- Dropbox Store-->
 	<managed-bean>
 		<managed-bean-name>DropboxStore</managed-bean-name>
 		<managed-bean-class>com.ibm.sbt.security.authentication.oauth.consumer.store.MemoryTokenStore</managed-bean-class>
 		<managed-bean-scope>application</managed-bean-scope>
 	</managed-bean>
+	
 	<!-- Dropbox oauth endpoint -->
 	<managed-bean>
 		<managed-bean-name>dropbox</managed-bean-name>
 		<managed-bean-class>com.ibm.sbt.services.endpoints.OAuthEndpoint</managed-bean-class>
-		<managed-bean-scope>application</managed-bean-scope>
+		<managed-bean-scope>session</managed-bean-scope>
 		<!-- Endpoint URL -->
 		<managed-property>
 			<property-name>url</property-name>

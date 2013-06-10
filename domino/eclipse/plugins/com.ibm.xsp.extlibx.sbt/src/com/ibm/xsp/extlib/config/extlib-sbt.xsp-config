@@ -1,0 +1,867 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- Â© Copyright IBM Corp. 2010, 2012                                    -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     -->
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        -->
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<faces-config>
+
+	<faces-config-extension>
+		<namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+		<default-prefix>xe</default-prefix>
+	</faces-config-extension>
+	
+	<group>
+	   <group-type>com.ibm.xsp.extlib.group.sbt.endpoint</group-type>
+        <property>
+            <!-- "faces-config" should not be translated - it is a file format. -->
+            <description>The name from the managed (endpoint) bean defined in the faces-config file. When not present the default bean name for this control will be used.</description>
+            <display-name>Endpoint Name</display-name>
+            <property-name>endpoint</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <!-- TODO what is this - the description implies that it is a managed bean name -->
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <group-extension>
+            <designer-extension>
+                <tags>
+                    group-in-control
+                </tags>
+            </designer-extension>
+        </group-extension>
+	</group>
+    <group>
+       <group-type>com.ibm.xsp.extlib.group.sbt.endpoint_dataSource</group-type>
+        <property>
+            <description>Name of the endpoint to use. The data source calls the the Endpoint factory to retrieve the actual bean. More than that, some data sources, like the Connections one, use an automatic default value when this property is absent.</description>
+            <display-name>Endpoint Name</display-name>
+            <property-name>endpoint</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <!-- TODO what is this - the description implies that it is a managed bean name -->
+            </property-extension>
+        </property>
+        <group-extension>
+            <designer-extension>
+                <tags>
+                    group-in-complex
+                </tags>
+            </designer-extension>
+        </group-extension>
+    </group>
+
+	<complex-type>
+		<description>Base class for a REST services data source</description>
+		<display-name>REST Data Source</display-name>
+		<complex-id>com.ibm.xsp.extlib.sbt.model.RestDataSource</complex-id>
+		<complex-class>com.ibm.xsp.extlib.sbt.model.RestDataSource</complex-class>
+		
+		<group-type-ref>com.ibm.xsp.extlib.group.sbt.endpoint_dataSource</group-type-ref>
+		
+		<property>
+			<description>Relative URL to the service, not including the server part of the URL</description>
+			<display-name>Service URL</display-name>
+			<property-name>serviceUrl</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+			     <!-- TODO consider renaming - if it is relative then it is not a URL, it is a path -->
+				<designer-extension>
+					<tags>
+					   todo
+					</tags>
+				</designer-extension>
+			</property-extension>
+		</property>
+      	<property>
+        	<description>List of parameters to add the URL</description>
+        	<display-name>URL Parameters</display-name>
+        	<property-name>urlParameters</property-name>
+            <property-class>java.util.List</property-class>
+        	<property-extension>
+                <allow-run-time-binding>false</allow-run-time-binding>
+          		<collection-property>true</collection-property>
+          		<property-item-class>com.ibm.xsp.extlib.sbt.model.UrlParameter</property-item-class>
+            	<property-add-method>addUrlParameter</property-add-method>
+				<designer-extension>
+                </designer-extension>
+        	</property-extension>
+      	</property>
+		
+		<complex-extension>
+			<base-complex-id>com.ibm.xsp.extlib.model.DataAccessorBlockSource</base-complex-id>
+			<designer-extension>
+			</designer-extension>
+		</complex-extension>
+	</complex-type>
+
+  	<complex-type>
+    	<description>Parameter that is added to the URL used by a REST service connection</description>
+    	<display-name>URL Parameter</display-name>
+    	<complex-id>com.ibm.xsp.extlib.sbt.model.UrlParameter</complex-id>
+    	<complex-class>com.ibm.xsp.extlib.sbt.model.UrlParameter</complex-class>
+    	<property>
+            <!-- "=" should not be translated -->
+      		<description>The name of the parameter, to appear before the = symbol.</description>
+      		<display-name>Name</display-name>
+      		<property-name>name</property-name>
+      		<property-class>java.lang.String</property-class>
+      		<property-extension>
+        		<required>true</required>
+      		</property-extension>
+    	</property>
+    	<property>
+            <!-- "=" should not be translated -->
+      		<description>The value of the parameter, to appear after the = symbol.</description>
+      		<display-name>Parameter Value</display-name>
+      		<property-name>value</property-name>
+      		<property-class>java.lang.String</property-class>
+      		<property-extension>
+                <!-- TODO change type to Object -->
+                <designer-extension>
+                    <tags>
+                        todo
+                    </tags>
+                </designer-extension>
+      		</property-extension>
+    	</property>
+    	<complex-extension>
+      		<tag-name>urlParameter</tag-name>
+    	</complex-extension>
+  	</complex-type>
+	
+    <complex-type>
+        <description>Generic data source that serves as a base class for JSON &amp; XML content</description>
+        <display-name>Base Generic REST Data Source</display-name>
+        <complex-id>com.ibm.xsp.extlib.sbt.generic.GenericRestDataSource</complex-id>
+        <complex-class>com.ibm.xsp.extlib.sbt.generic.GenericRestDataSource</complex-class>
+
+        <property>
+            <!-- # "XPath" should not be translated. An XPath is some text in the XPath technical language, like /issues/issue or para[@type="warning"] -->
+            <description>Defines the XPath used to split the service result document into rows suitable for a view</description>
+            <display-name>Record Split Path</display-name>
+            <property-name>splitPath</property-name>
+            <property-class>java.lang.String</property-class>
+        </property>
+        <property>
+            <description>Defines the XPath used to extract the total count of the service</description>
+            <display-name>Total Count Path</display-name>
+            <property-name>totalCountPath</property-name>
+            <property-class>java.lang.String</property-class>
+        </property>
+        <property>
+            <description>Defines the name of the URL parameter to use for pointing to the first element being requested to the service</description>
+            <display-name>Name of the First Parameter</display-name>
+            <property-name>paramFirst</property-name>
+            <property-class>java.lang.String</property-class>
+        </property>
+        <property>
+            <description>Indicates how the first element of the service is defined (according to the record number, or page number, etc.). Defaults to record number starting at number 0.</description>
+            <display-name>Type of the First Parameter</display-name>
+            <property-name>paramFirstType</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        first0
+                        first1
+                        page0
+                        page1
+                    </editor-parameter>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Defines the name of the URL parameter to use for defining the number of records being requested to the service</description>
+            <display-name>Name of the Count Parameter</display-name>
+            <property-name>paramCount</property-name>
+            <property-class>java.lang.String</property-class>
+        </property>
+        
+        <complex-extension>
+            <base-complex-id>com.ibm.xsp.extlib.sbt.model.RestDataSource</base-complex-id>
+            <designer-extension>
+            </designer-extension>
+        </complex-extension>
+    </complex-type>
+
+    <complex-type>
+        <description>Generic data source used to access JSON REST services</description>
+        <display-name>Generic JSON Service Data Source</display-name>
+        <complex-id>com.ibm.xsp.extlib.sbt.generic.GenericRestJsonDataSource</complex-id>
+        <complex-class>com.ibm.xsp.extlib.sbt.generic.GenericRestJsonDataSource</complex-class>
+        
+        <complex-extension>
+            <tag-name>restJsonData</tag-name>
+            <base-complex-id>com.ibm.xsp.extlib.sbt.generic.GenericRestDataSource</base-complex-id>
+            <designer-extension>
+            </designer-extension>
+        </complex-extension>
+    </complex-type>
+
+    <complex-type>
+        <description>Generic data source used to access XML REST services</description>
+        <display-name>Generic XML Service Data Source</display-name>
+        <complex-id>com.ibm.xsp.extlib.sbt.generic.GenericRestXmlDataSource</complex-id>
+        <complex-class>com.ibm.xsp.extlib.sbt.generic.GenericRestXmlDataSource</complex-class>
+        <property>
+            <description>List of namespaces used to evaluate the XPath expressions.</description>
+            <display-name>Namespace URI List</display-name>
+            <property-name>namespaceUris</property-name>
+            <property-class>java.util.List</property-class>
+            <property-extension>
+                <allow-run-time-binding>false</allow-run-time-binding>
+                <collection-property>true</collection-property>
+                <property-item-class>com.ibm.xsp.extlib.sbt.generic.GenericRestXmlNamespaceUri</property-item-class>
+                <property-add-method>addNamespaceUri</property-add-method>
+                <designer-extension>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <complex-extension>
+            <tag-name>restXmlData</tag-name>
+            <base-complex-id>com.ibm.xsp.extlib.sbt.generic.GenericRestDataSource</base-complex-id>
+            <designer-extension>
+            </designer-extension>
+        </complex-extension>
+    </complex-type>
+	<complex-type>
+        <description>Defines a namespace used by the XPath engine of an XML REST data source.</description>
+        <display-name>XML Namespace</display-name>
+        <complex-id>com.ibm.xsp.extlib.sbt.generic.GenericRestXmlNamespaceUri</complex-id>
+        <complex-class>com.ibm.xsp.extlib.sbt.generic.GenericRestXmlNamespaceUri</complex-class>
+        <property>
+            <description>Specifies the prefix of the namespace</description>
+            <display-name>Prefix</display-name>
+            <property-name>prefix</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <required>true</required>
+            </property-extension>
+        </property>
+        <property>
+            <description>Specifies the URI of the namespace</description>
+            <display-name>URI</display-name>
+            <property-name>uri</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <required>true</required>
+            </property-extension>
+        </property>
+        <complex-extension>
+            <tag-name>restXmlDataNS</tag-name>
+        </complex-extension>
+    </complex-type>
+	
+	<complex-type>
+	    <!--  TODO what kind of ActivityStream - web search is inconclusive - is it
+	    an OpenSocial activity, Shindig, Facebook, Lotus Connections? -->
+		<description>Reads an activity or activities from an ActivityStreams server</description>
+		<display-name>Activity Streams</display-name>
+		<complex-id>com.ibm.xsp.extlib.sbt.activitystreams.ActivityStreamDataSource</complex-id>
+		<complex-class>com.ibm.xsp.extlib.sbt.activitystreams.ActivityStreamDataSource</complex-class>
+		
+		<property>
+            <!-- # "@me" should not be translated-->
+			<description>Specify the user whose activity events are being retrieved (defaults to "@me", meaning the current user)</description>
+			<display-name>User ID</display-name>
+			<property-name>userId</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+			    <!-- TODO can this be specified in the Notes name format - need to tell if so or if not. -->
+				<designer-extension>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        @me
+                        @viewer
+                        @owner
+                        @public
+                        &lt;user-id&gt;
+                    </editor-parameter>
+                    <!-- This is not a control id refence, it's a user ID or predefined pseudo-id -->
+                    <tags>
+                        not-control-id-reference
+                    </tags>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+            <!-- # "@all" should not be translated-->
+			<description>Specify the group of people for whom you would like to retrieve events (defaults to "@all", meaning all people)</description>
+			<display-name>Group ID</display-name>
+			<property-name>groupId</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        @all
+                        @self
+                        @friends
+                    </editor-parameter>
+                    <!-- This is not a control id refence, it's a group ID or predefined pseudo-id -->
+                    <tags>
+                        not-control-id-reference
+                    </tags>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+            <!-- # "@all" should not be translated-->
+			<description>Filter the events based on an application ID (defaults to "@all", meaning events from all applications are shown.)</description>
+			<display-name>Application ID</display-name>
+			<property-name>appId</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        @all
+                        tags
+                        communities
+                        responses
+                        saved
+                    </editor-parameter>
+                    <!-- This is not a control id refence, it's an application ID or predefined pseudo-id -->
+                    <tags>
+                        not-control-id-reference
+                    </tags>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<description>Specify the ID of an activity or a set of activities that will be shown</description>
+			<display-name>Activity ID</display-name>
+			<property-name>activityId</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<!-- This is not a control id refence, it's an activity ID -->
+					<tags>
+						not-control-id-reference
+					</tags>
+				</designer-extension>
+			</property-extension>
+		</property>
+
+        <property>
+            <description>Select only events since the specified date. The date can be expressed as a date object, number (milliseconds since 1970-01-01), a Date object or a Text (which is passed as it is in the URL)</description>
+            <display-name>Updated Since</display-name>
+            <property-name>updatedSince</property-name>
+            <property-class>java.lang.Object</property-class>
+            <property-extension>
+                <!-- TODO maybe specify the All Properties picker/editor
+                normally used for a java.util.Date - verify that
+                that string format will work with this type of server -->
+                <designer-extension>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Defines the format, as XML-Atom or JSON (default to JSON)</description>
+            <display-name>Format</display-name>
+            <property-name>format</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        json
+                        atom
+                    </editor-parameter>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Defines the sort order of the retrieved result set</description>
+            <display-name>Sort Order</display-name>
+            <property-name>sortOrder</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <!-- TODO investigate the default - Domino defaults to unsorted - does this? -->
+                    <!-- TODO what "column" are they sorted by? does it always sort 
+                    by modified date or relevance or what? -->
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        ascending
+                        descending
+                    </editor-parameter>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Defines the field to filter by</description>
+            <display-name>Filter By</display-name>
+            <property-name>filterBy</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <!-- TODO provide a list of suggestions -->
+                <designer-extension>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Defines the filter operator</description>
+            <display-name>Filter Operator</display-name>
+            <property-name>filterOp</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <!-- TODO what are the list of available operators? 
+                maybe "startsWith" "contains" "equals" "equalsCaseSensitive"? -->
+                <!-- TODO is the diplay-name bad english - should it be Filter Operation instead?-->
+                <designer-extension>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Defines the filter value</description>
+            <display-name>Filter Value</display-name>
+            <property-name>filterValue</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <!-- TODO should probably change this to Object,
+                if allowing filter by Dates, ints, etc. -->
+                <designer-extension>
+                    <tags>
+                        todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+		
+		<complex-extension>
+			<tag-name>activityStreamsData</tag-name>
+			<base-complex-id>com.ibm.xsp.extlib.sbt.model.RestDataSource</base-complex-id>
+			<designer-extension>
+			</designer-extension>
+		</complex-extension>
+	</complex-type>
+	
+	<complex-type>
+		<description>Connects to Lotus Connections ATOM based services</description>
+		<display-name>Connections Services</display-name>
+		<complex-id>com.ibm.xsp.extlib.sbt.connections.ConnectionDataSource</complex-id>
+		<complex-class>com.ibm.xsp.extlib.sbt.connections.ConnectionDataSource</complex-class>
+		
+		<complex-extension>
+			<tag-name>connectionsData</tag-name>
+			<base-complex-id>com.ibm.xsp.extlib.sbt.model.RestDataSource</base-complex-id>
+			<designer-extension>
+			     <!-- TODO move this to the extlib-sbt-connections file. -->
+			     <tags>
+			         todo
+			     </tags>
+			</designer-extension>
+		</complex-extension>
+	</complex-type>
+
+	<component>
+        <description>Facebook Like Button</description>
+        <display-name>Like Button</display-name>
+        <component-type>com.ibm.xsp.extlib.sbt.facebook.like</component-type>
+        <component-class>com.ibm.xsp.extlib.component.facebook.UILike</component-class>
+
+        <property>
+      		<description>The HREF to be liked.</description>
+      		<display-name>href</display-name>
+      		<property-name>href</property-name>
+      		<property-class>java.lang.String</property-class>
+      		<property-extension>
+        		<designer-extension>
+          			<category>basics</category>
+        		</designer-extension>
+      		</property-extension>
+    	</property>
+
+        <property>
+      		<description>Whether or not to show a send button (true or false).</description>
+      		<display-name>send</display-name>
+      		<property-name>send</property-name>
+      		<property-class>java.lang.String</property-class>
+      		<property-extension>
+      		    <!-- TODO change type to boolean, and ensure the default in the getter is correct -->
+        		<designer-extension>
+          			<category>basics</category>
+        		</designer-extension>
+      		</property-extension>
+    	</property>
+
+        <property>
+      		<description>Whether or not to show faces (true of false). Correspond to the show_faces Facebook property.</description>
+      		<display-name>showFaces</display-name>
+      		<property-name>showFaces</property-name>
+      		<property-class>java.lang.String</property-class>
+      		<property-extension>
+      		    <!-- TODO does the like button show someone's head/face? -->
+                <!-- TODO change type to boolean, and ensure the default in the getter is correct -->
+                <!--  TODO this is used in multiple controls, extract to a group -->
+        		<designer-extension>
+          			<category>basics</category>
+        		</designer-extension>
+      		</property-extension>
+    	</property>
+    	
+    	<property>
+      		<description>The width of the button.</description>
+      		<display-name>width</display-name>
+      		<property-name>width</property-name>
+      		<property-class>java.lang.String</property-class>
+      		<property-extension>
+                <!-- TODO change type to int? or is it a CSS width like "30px" -->
+                <!--  TODO this is used in multiple controls, extract to a group -->
+        		<designer-extension>
+          			<category>basics</category>
+        		</designer-extension>
+      		</property-extension>
+    	</property>
+    	       
+		<component-extension>
+            <base-component-type>javax.faces.Component</base-component-type>
+			<component-family>com.ibm.xsp.extlib.facebook.like</component-family>
+			<renderer-type>com.ibm.xsp.extlib.facebook.like</renderer-type>
+			<tag-name>facebookLikeButton</tag-name>
+      		<designer-extension>
+        		<in-palette>true</in-palette>
+        		<category>Facebook</category>
+        		<!-- TODO should this have an onClick event? -->
+                 <!-- TODO split out a separate extlib-sbt-facebook file for the facebook controls -->
+        		<tags>
+        		  todo
+        		</tags>
+      		</designer-extension>
+		</component-extension>   
+    </component>
+
+	<component>
+        <description>Facebook JavaScript SDK. This control is required for all other Facebook controls.</description>
+        <display-name>Facebook Client</display-name>
+        <component-type>com.ibm.xsp.extlib.sbt.facebook.sdk</component-type>
+        <component-class>com.ibm.xsp.extlib.component.facebook.UIFacebookClient</component-class>
+
+        <group-type-ref>com.ibm.xsp.extlib.group.sbt.endpoint</group-type-ref>
+       
+		<component-extension>
+            <base-component-type>javax.faces.Component</base-component-type>
+			<component-family>com.ibm.xsp.extlib.facebook.sdk</component-family>
+			<renderer-type>com.ibm.xsp.extlib.facebook.sdk</renderer-type>
+			<tag-name>facebookClient</tag-name>
+      		<designer-extension>
+        		<in-palette>true</in-palette>
+        		<category>Facebook</category>
+      		</designer-extension>
+		</component-extension>   
+    </component>
+    
+    <component>
+        <description>Facebook Login Button.</description>
+        <display-name>Login Button</display-name>
+        <component-type>com.ibm.xsp.extlib.sbt.facebook.login</component-type>
+        <component-class>com.ibm.xsp.extlib.component.facebook.UILogin</component-class>
+
+       <property>
+      		<description>A comma separated list of extended permissions.</description>
+      		<display-name>perms</display-name>
+      		<property-name>perms</property-name>
+      		<property-class>java.lang.String</property-class>
+      		<property-extension>
+      		    <!-- TODO consider changing to a list of complex-types -->
+      		    <!-- TODO provide combo editor/All Properties picker, listing the possible
+      		    permissions, and ask the Designer team if there's a multi-select picker. -->
+        		<designer-extension>
+          			<category>basics</category>
+        		</designer-extension>
+      		</property-extension>
+    	</property>
+    	
+        <property>
+      		<description>The maximum number of rows of profile pictures to display. Correspond to the max-rows Facebook property. Default value: 1.</description>
+      		<display-name>Max Rows</display-name>
+      		<property-name>maxRows</property-name>
+      		<property-class>java.lang.String</property-class>
+      		<property-extension>
+      		    <!-- TODO change type from String to int -->
+        		<designer-extension>
+          			<category>basics</category>
+          			<tags>
+          			   todo
+          			</tags>
+        		</designer-extension>
+      		</property-extension>
+    	</property>    	
+    	
+    	<property>
+      		<description>Whether or not to show faces (true of false). Correspond to the show_faces Facebook property.</description>
+      		<display-name>Show Faces</display-name>
+      		<property-name>showFaces</property-name>
+      		<property-class>java.lang.String</property-class>
+      		<property-extension>
+                <!-- TODO rename -->
+                <!-- TODO change type from String to boolean and investigate default-->
+        		<designer-extension>
+          			<category>basics</category>
+                    <tags>
+                       todo
+                    </tags>
+        		</designer-extension>
+      		</property-extension>
+    	</property>
+    	
+    	<property>
+      		<description>The width of the button.</description>
+      		<display-name>width</display-name>
+      		<property-name>width</property-name>
+      		<property-class>java.lang.String</property-class>
+      		<property-extension>
+      		    <!-- TODO is this a CSS width like "30px" or an int?
+      		    maybe should change type to property-class>int< -->
+        		<designer-extension>
+          			<category>basics</category>
+        		</designer-extension>
+      		</property-extension>
+    	</property>
+    	       
+		<component-extension>
+            <base-component-type>javax.faces.Component</base-component-type>
+			<component-family>com.ibm.xsp.extlib.facebook.login</component-family>
+			<renderer-type>com.ibm.xsp.extlib.facebook.login</renderer-type>
+			<tag-name>facebookLoginButton</tag-name>
+      		<designer-extension>
+        		<in-palette>true</in-palette>
+        		<category>Facebook</category>
+      		</designer-extension>
+		</component-extension>   
+    </component>
+    
+    <component>
+        <description>Facebook Comments Plugin.</description>
+        <display-name>Comments Plugin</display-name>
+        <component-type>com.ibm.xsp.extlib.sbt.facebook.comments</component-type>
+        <component-class>com.ibm.xsp.extlib.component.facebook.UIComments</component-class>
+						 
+       <property>
+      		<description>The HREF to be commented on.</description>
+      		<display-name>href</display-name>
+      		<property-name>href</property-name>
+      		<property-class>java.lang.String</property-class>
+      		<property-extension>
+        		<designer-extension>
+          			<category>basics</category>
+        		</designer-extension>
+      		</property-extension>
+    	</property>
+    	
+    	<property>
+      		<description>The number of comments to show by default. Correspond to the num_posts Facebook property. Default: 10.</description>
+      		<display-name>numPosts</display-name>
+      		<property-name>numPosts</property-name>
+      		<property-class>java.lang.String</property-class>
+      		<property-extension>
+                <!-- TODO change type to int, and make getter default 10, same as indicated in here -->
+        		<designer-extension>
+          			<category>basics</category>
+        		</designer-extension>
+      		</property-extension>
+    	</property>
+    	
+    	<property>
+    	    <!-- # "light" and "dark" in quotes should not be translated -->
+      		<description>The color scheme used for the plugin, to ensure it contrasts with the background color of the page. Options: "light" for light colored backgrounds, and "dark" for darker colored backgrounds.</description>
+      		<display-name>Color Scheme</display-name>
+      		<property-name>colorscheme</property-name>
+      		<property-class>java.lang.String</property-class>
+      		<property-extension>
+        		<designer-extension>
+        		    <!-- TODO test both these color schemes for accessibility 
+        		    with Windows High Contrast Mode - need to ensure they are both 
+        		    tested and compliant, not just the default one. -->
+          			<category>basics</category>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        light
+                        dark
+                    </editor-parameter>
+        		</designer-extension>
+      		</property-extension>
+    	</property>   
+    	
+   		<property>
+      		<description>The width of the button.</description>
+      		<display-name>width</display-name>
+      		<property-name>width</property-name>
+      		<property-class>java.lang.String</property-class>
+      		<property-extension>
+      		    <!-- TODO this isn't a button, it is a comments control. Is the description wrong? -->
+                <!-- TODO change type to int? or is it a CSS width like "30px" -->
+        		<designer-extension>
+          			<category>basics</category>
+        		</designer-extension>
+      		</property-extension>
+    	</property>    	 	       
+    	       
+		<component-extension>
+            <base-component-type>javax.faces.Component</base-component-type>
+			<component-family>com.ibm.xsp.extlib.facebook.comments</component-family>
+			<renderer-type>com.ibm.xsp.extlib.facebook.comments</renderer-type>
+			<tag-name>facebookComments</tag-name>
+      		<designer-extension>
+        		<in-palette>true</in-palette>
+        		<category>Facebook</category>
+      		</designer-extension>
+		</component-extension>   
+    </component>
+    
+<!--Twitter Data Source-->
+    <complex-type>
+        <description>Twitter Data Source</description>
+        <display-name>Twitter Data Source</display-name>
+        <complex-id>com.ibm.xsp.extlib.sbt.twitter.TwitterDataSource</complex-id>
+        <complex-class>com.ibm.xsp.extlib.sbt.twitter.TwitterDataSource</complex-class>
+
+        <property>
+            <description>Hash tag to filter results</description>
+            <display-name>Hash Tag</display-name>
+            <property-name>hashTag</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Determines the type of information we want twitter to return to us</description>
+            <display-name>Feed type</display-name>
+            <property-name>feedType</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                        <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                        <editor-parameter>
+                            timeLine
+                            publicTimeLine
+                            mentions
+                            rtByMe
+                            rtToMe
+                            rtOfMe
+                        </editor-parameter>
+                  </designer-extension>
+            </property-extension>
+        </property>
+        <complex-extension>
+            <tag-name>twitterData</tag-name>
+            <base-complex-id>com.ibm.xsp.extlib.sbt.model.RestDataSource</base-complex-id>
+            <designer-extension>
+            </designer-extension>
+        </complex-extension>
+    </complex-type>
+
+
+<!--  
+    File Services
+-->
+    
+    <complex-type>
+        <description>Abstract File store data source</description>
+        <display-name>File Store Data Source</display-name>
+        <complex-id>com.ibm.xsp.extlib.sbt.files.FileServiceData</complex-id>
+        <complex-class>com.ibm.xsp.extlib.sbt.files.FileServiceData</complex-class>
+
+        <property>
+            <description>File Service Type</description>
+            <display-name>Service Type</display-name>
+            <property-name>serviceType</property-name>
+            <property-class>com.ibm.xsp.extlib.sbt.files.IFileType</property-class>
+            <property-extension>
+                <allow-run-time-binding>false</allow-run-time-binding>
+                <designer-extension>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>File Service Root Folder</description>
+            <display-name>Root Folder</display-name>
+            <property-name>rootFolder</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <!--  getter did not invoke ValueBinding -->
+                <designer-extension>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <complex-extension>
+            <tag-name>fileServiceData</tag-name>
+            <base-complex-id>com.ibm.xsp.extlib.sbt.model.RestDataSource</base-complex-id>
+            <designer-extension>
+            </designer-extension>
+        </complex-extension>
+    </complex-type>
+
+    <complex-type>
+        <description>A file service gives access to file download or upload.</description>
+        <display-name>File Service</display-name>
+        <complex-id>com.ibm.xsp.extlib.sbt.files.IFileType</complex-id>
+        <complex-class>com.ibm.xsp.extlib.sbt.files.IFileType</complex-class>
+        <complex-extension>
+        </complex-extension>
+    </complex-type>
+
+    <complex-type>
+        <description>File Service for LotusLive</description>
+        <display-name>LotusLive File Service</display-name>
+        <complex-id>com.ibm.xsp.extlib.sbt.files.type.LotusLiveFiles</complex-id>
+        <complex-class>com.ibm.xsp.extlib.sbt.files.type.LotusLiveFiles</complex-class>
+        
+        <complex-extension>
+            <tag-name>lotusLiveFileData</tag-name>
+            <base-complex-id>com.ibm.xsp.extlib.sbt.files.IFileType</base-complex-id>
+            <designer-extension>
+            </designer-extension>
+        </complex-extension>
+    </complex-type>
+
+    <complex-type>
+        <description>Access to the Dropbox file service.</description>
+        <display-name>Dropbox File Service</display-name>
+        <complex-id>com.ibm.xsp.extlib.sbt.files.type.DropboxFiles</complex-id>
+        <complex-class>com.ibm.xsp.extlib.sbt.files.type.DropboxFiles</complex-class>
+        
+        <complex-extension>
+            <tag-name>dropboxFileData</tag-name>
+            <base-complex-id>com.ibm.xsp.extlib.sbt.files.IFileType</base-complex-id>
+            <designer-extension>
+            </designer-extension>
+        </complex-extension>
+    </complex-type>
+    
+    <complex-type>
+        <description>Access to the Connections file service.</description>
+        <display-name>Connections File Service</display-name>
+        <complex-id>com.ibm.xsp.extlib.sbt.files.type.ConnectionsFiles</complex-id>
+        <complex-class>com.ibm.xsp.extlib.sbt.files.type.ConnectionsFiles</complex-class>
+        
+        <complex-extension>
+            <tag-name>connectionsFileData</tag-name>
+            <base-complex-id>com.ibm.xsp.extlib.sbt.files.IFileType</base-complex-id>
+            <designer-extension>
+            </designer-extension>
+        </complex-extension>
+    </complex-type>
+        
+</faces-config>

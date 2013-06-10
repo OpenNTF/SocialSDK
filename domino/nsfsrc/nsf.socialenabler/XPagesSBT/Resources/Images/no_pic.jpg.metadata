@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="4.0" replicaid="852579BD000549ED" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="2da" sequence="1" unid="CB3550D69ADC8D60852579BD0059E315">
+<created><datetime>20120310T112148,37-05</datetime></created>
+<modified><datetime>20120310T112148,42-05</datetime></modified>
+<revised><datetime>20120310T112148,41-05</datetime></revised>
+<lastaccessed><datetime>20120310T112148,42-05</datetime></lastaccessed>
+<addedtofile><datetime>20120310T112148,42-05</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=admin admin/O=gaa</name></updatedby>
+<wassignedby><name>CN=admin admin/O=gaa</name></wassignedby>
+<item name="$TITLE"><text>no_pic.jpg</text></item>
+<item name="$Flags"><text>34CiQ</text></item>
+<item name="$FlagsExt"><text>D</text></item>
+<item name="$ImagesWide" sign="true"><number>1</number></item>
+<item name="$ImagesHigh" sign="true"><number>1</number></item>
+<item name="$ImagesColorize" sign="true"><number>0</number></item>
+
+
+<item name="$MimeType" sign="true"><text>image/jpeg</text></item>
+<item name="$FileModDT" sign="true"><datetime>20120310T112138,76-05</datetime></item>
+<item name="$ImageNames" sign="true"><text>no_pic.jpg</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item></note>

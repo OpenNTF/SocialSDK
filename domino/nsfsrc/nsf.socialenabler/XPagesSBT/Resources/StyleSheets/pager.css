@@ -1,0 +1,57 @@
+.navbutton1{
+background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#b1b5bb), to(#6b737e));
+font-family:Arial;
+font-size:8pt;
+color:#fff;
+-webkit-border-top-left-radius:7px;
+-webkit-border-bottom-left-radius:7px;
+border-color:#4c4e50 #4c4e50 #4c4e50  #4c4e50 ;
+border-style:solid;
+border-width:1px;
+border-right-style:none;
+font-weight: Bold;
+text-shadow: rgba(0, 0, 0, 0.496094) 0px -1px 0px;
+padding:3px;
+padding-left:5px;
+padding-right:5px;
+ }
+ 
+ .navbutton2{
+background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#b1b5bb), to(#6b737e));
+font-family:Arial;
+font-size:8pt;
+color:#fff;
+border-color:#4c4e50 #4c4e50 #4c4e50  #4c4e50 ;
+border-style:solid;
+border-width:1px;
+border-right-style:none;
+font-weight: Bold;
+text-shadow: rgba(0, 0, 0, 0.496094) 0px -1px 0px;
+padding:3px;
+ }
+ 
+ .navbutton3{
+background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#b1b5bb), to(#6b737e));
+font-family:Arial;
+font-size:8pt;
+color:#fff;
+-webkit-border-top-right-radius:7px;
+-webkit-border-bottom-right-radius:7px;
+border-color:#4c4e50 #4c4e50 #4c4e50  #4c4e50 ;
+border-style:solid;
+border-width:1px;
+text-shadow: rgba(0, 0, 0, 0.496094) 0px -1px 0px;
+font-weight: Bold; 
+padding:3px;
+padding-left:5px;
+padding-right:5px;
+ }
+.navbutton2 a:link{
+ color:#ffffff;
+ }
+.navbutton3 a:link{
+ color:#ffffff;
+ }
+ 
+.navbutton1 a:link{
+ color:#ffffff;}

@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xp:this.resources>
+		<xp:dojoModule name="extlib.dijit.ExtLib"></xp:dojoModule>
+		<xp:dojoModule name="extlib.dijit.Loading"></xp:dojoModule>
+	</xp:this.resources>
+	
+	<xc:OneUILayout navigationPath="/SBT/ActivityStreamsAPI" title="Social Business Toolkit Activity Streams API" connection="as">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftSBT></xc:LeftSBT>
+			</xp:panel>
+		</xp:this.facets>
+	
+		<xp:panel>
+			<xc:WarningSBTUsage></xc:WarningSBTUsage>
+			<xp:this.data>
+				<xe:objectData var="objectData1">
+					<xe:this.createObject><![CDATA[#{javascript:return {
+    "root":"/vulcan/shindig/rest/activitystreams",						
+    "method":"get",
+    "params": {
+    	"format":"json",						
+    	"userId":"@me",						
+    	"groupId":"@all",						
+    	"appId":"@all",						
+    	"activityId":"",						
+    	"startIndex":0,						
+    	"count":5						
+    },						
+    "content":"",						
+    "result":""						
+}
+}]]></xe:this.createObject>
+				</xe:objectData>
+			</xp:this.data>
+			<xe:formTable id="formTable1"
+				formDescription="Enter here the data for the user token"
+				labelWidth="200px" formTitle="Activity Streams">
+				<xe:formRow id="formRow1" label="Server Url:">
+					<xp:text escape="true" id="computedField2"
+						value="#{javascript:@Endpoint('as').getUrl()}">
+					</xp:text>
+				</xe:formRow>
+				<xe:formRow id="formRow10" label="Context Root:">
+					<xp:inputText id="inputText4"
+						value="#{objectData1.root}" size="60">
+					</xp:inputText>
+				</xe:formRow>
+				<xe:formRow id="formRow2" label="Http Method:">
+					<xp:comboBox id="comboBox1"
+						value="#{objectData1.params.method}">
+						<xp:selectItem itemLabel="Get"
+							itemValue="get">
+						</xp:selectItem>
+						<xp:selectItem itemLabel="Post"
+							itemValue="post">
+						</xp:selectItem>
+						<xp:eventHandler event="onchange" submit="true"
+							refreshMode="partial" refreshId="formTable1">
+						</xp:eventHandler>
+					</xp:comboBox>
+				</xe:formRow>
+				<xe:formRow id="formRow3" label="Return Format:">
+					<xp:comboBox id="comboBox2"
+						value="#{objectData1.params.format}">
+						<xp:selectItem itemLabel="Json"
+							itemValue="json">
+						</xp:selectItem>
+						<xp:selectItem itemLabel="Atom"
+							itemValue="atom">
+						</xp:selectItem>
+					</xp:comboBox>
+				</xe:formRow>
+				<xe:formRow id="formRow4" label="User Id">
+					<xp:comboBox id="comboBox3"
+						value="#{objectData1.params.userId}">
+						<xp:selectItem itemLabel="@me"
+							itemValue="@me">
+						</xp:selectItem>
+						<xp:selectItem itemLabel="@owner"
+							itemValue="@owner">
+						</xp:selectItem>
+						<xp:selectItem itemLabel="@viewer"
+							itemValue="@viewer">
+						</xp:selectItem>
+					</xp:comboBox>
+				</xe:formRow>
+				<xe:formRow id="formRow5" label="Group Id:">
+					<xp:comboBox id="comboBox4"
+						value="#{objectData1.params.groupId}">
+						<xp:selectItem itemLabel="@all"
+							itemValue="@all">
+						</xp:selectItem>
+						<xp:selectItem itemLabel="@self"
+							itemValue="@self">
+						</xp:selectItem>
+						<xp:selectItem itemLabel="@friends"
+							itemValue="@friends">
+						</xp:selectItem>
+					</xp:comboBox>
+				</xe:formRow>
+				<xe:formRow id="formRow6" label="Application Id:">
+					<xp:inputText id="inputText2"
+						value="#{objectData1.params.appId}" size="60">
+					</xp:inputText>
+				</xe:formRow>
+				<xe:formRow id="formRow11" label="Activity Id">
+					<xp:inputText id="inputText1"
+						value="#{objectData1.params.activityId}" size="60">
+					</xp:inputText>
+				</xe:formRow>
+				<xe:formRow id="formRow12" label="Start Index:">
+					<xp:inputText id="inputText5"
+						value="#{objectData1.params.startIndex}">
+						<xp:this.converter>
+							<xp:convertNumber type="number"
+								integerOnly="true">
+							</xp:convertNumber>
+						</xp:this.converter>
+					</xp:inputText>
+				</xe:formRow>
+				<xe:formRow id="formRow13" label="Count:">
+					<xp:inputText id="inputText6"
+						value="#{objectData1.params.count}">
+						<xp:this.converter>
+							<xp:convertNumber type="number"
+								integerOnly="true">
+							</xp:convertNumber>
+						</xp:this.converter>
+					</xp:inputText>
+				</xe:formRow>
+				<xe:formRow id="formRow7" label="Content:"
+					style="font-family:Courier New">
+					<xe:this.rendered><![CDATA[#{javascript:objectData1.httpMethod=="post"}]]></xe:this.rendered>
+					<xp:inputTextarea id="inputText3"
+						value="#{objectData1.content}" cols="120" rows="12">
+					</xp:inputTextarea>
+				</xe:formRow>
+				<xe:formRow id="formRow8">
+					<xp:button value="Execute" id="button1">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="partial" refreshId="formTable1">
+							<xp:this.action><![CDATA[#{javascript:var start = java.lang.System.currentTimeMillis(); 
+var svc = new sbt.ActivityStreamsService(@Endpoint('as'),objectData1.root)
+var msg = svc.execRequest(objectData1.method,objectData1.params,objectData1.content,"text");
+objectData1.result = msg
+var end = java.lang.System.currentTimeMillis(); 
+objectData1.time = (end-start).toString() + "ms"}]]></xp:this.action>
+							<xp:this.onStart><![CDATA[XSP.startAjaxLoading()]]></xp:this.onStart>
+							<xp:this.onComplete><![CDATA[XSP.endAjaxLoading()]]></xp:this.onComplete>
+							<xp:this.onError><![CDATA[XSP.endAjaxLoading()]]></xp:this.onError>
+						</xp:eventHandler>
+					</xp:button>
+					<xp:text escape="true" id="time"
+						value="#{javascript:objectData1.time}">
+					</xp:text>
+				</xe:formRow>
+				<xe:formRow id="formRow9" label="Result:"
+					style="font-family:Courier New">
+					<xp:tabbedPanel id="tabbedPanel1"
+						partialRefresh="true" partialExecute="true">
+						<xp:tabPanel label="Raw" id="tabPanel1">
+							<xp:text escape="true" id="computedField1"
+								value="#{objectData1.result}" style="font-family:Courier New">
+							</xp:text>
+						</xp:tabPanel>
+						<xp:tabPanel label="Formatted JSON"
+							id="tabPanel3">
+							<xp:div style="white-space: pre-wrap">
+								<xp:text escape="true"
+									id="computedField3" style="font-family:Courier New">
+									<xp:this.value><![CDATA[#{javascript:try {
+	var s = objectData1.result;
+	if(s) {
+		return toJson(fromJson(objectData1.result),false);
+	}
+	return "";
+} catch(e) {
+	return "Invalid JSON content";
+}}]]></xp:this.value>
+								</xp:text>
+							</xp:div>
+						</xp:tabPanel>
+						<xp:tabPanel label="Formatted XML"
+							id="tabPanel2">
+							<xp:div style="white-space: pre-wrap">
+								<xp:text escape="true"
+									id="computedField4" style="font-family:Courier New">
+									<xp:this.value><![CDATA[#{javascript:try {
+	var s = objectData1.result;
+	if(s) {
+		var doc = DOMUtil.createDocument();
+		doc.setXMLString(s);
+		return doc.getXMLString(false);
+	}
+	return "";
+} catch(e) {
+	return "Invalid XML content";
+}}]]></xp:this.value>
+								</xp:text>
+							</xp:div>
+						</xp:tabPanel>
+					</xp:tabbedPanel>
+				</xe:formRow>
+			</xe:formTable>
+		</xp:panel>
+	</xc:OneUILayout>
+</xp:view>
+

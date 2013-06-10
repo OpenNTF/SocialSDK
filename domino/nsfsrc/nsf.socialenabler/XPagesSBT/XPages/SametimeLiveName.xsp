@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xc:OneUILayout navigationPath="/Sametime/LiveName" title="Sametime LiveName" connection="sametime">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftSametime></xc:LeftSametime>
+			</xp:panel>
+		</xp:this.facets>	
+		
+		<xe:sametimeClient id="sametimeClient1" autoLogin="true"
+			clientScriptFile="livename" autoTunnelURI="true">
+		</xe:sametimeClient>
+		<xc:BasicAuthenticationPanel endpoint="sametime"></xc:BasicAuthenticationPanel>
+		
+		<xp:br />
+		<xp:br />
+		Login Section:
+		<xc:sbtLoginSection id="sbtLoginSection1"
+			sectionTitle="Login To Sametime" endpoint="sametime"
+			label="Login To Sametime">
+		</xc:sbtLoginSection>
+		<xp:br />
+		Login Dialog:
+		<xc:sbtLoginDialog id="loginDialog"
+			dialogTitle="Login To Sametime" endpoint="sametime"
+			label="Login To Sametime">
+		</xc:sbtLoginDialog>
+		<xp:br />
+		Sametime logged as:
+		<xp:text escape="true" id="computedField4" value="#{sametime.user}">
+		</xp:text>
+		<xp:br />
+		<xp:br />
+		Here is an example with only the id:
+		<xp:text escape="true" id="computedField1"
+			contentType="xs:st.livename">
+			<xp:this.value><![CDATA[#{javascript:@Endpoint("sametime").getUserIdentity()}]]></xp:this.value>
+		</xp:text>
+		<xp:br />
+		Here is an example with the id and an empty display name:
+		<xp:text escape="true" id="computedField2"
+			contentType="xs:st.livename">
+			<xp:this.value><![CDATA[#{javascript:@Endpoint("sametime").getUserIdentity()+"|"}]]></xp:this.value>
+		</xp:text>
+		<xp:br />
+		Here is an example with the id and a display name set:
+		<xp:text escape="true" id="computedField3"
+			contentType="xs:st.livename">
+			<xp:this.value><![CDATA[#{javascript:@Endpoint("sametime").getUserIdentity()+"|[user display name]"}]]></xp:this.value>
+		</xp:text>
+		<xp:br />
+		<xp:br />
+		Here is an example using a sametime widget:
+		<xe:sametimeWidget id="sametimeWidget1" dojoType="sametime.LiveName">
+			<xe:this.dojoAttributes>
+				<xp:dojoAttribute name="userId">
+					<xp:this.value><![CDATA[#{javascript:@Endpoint("sametime").getUserIdentity()}]]></xp:this.value>
+				</xp:dojoAttribute>
+			</xe:this.dojoAttributes>
+		</xe:sametimeWidget>
+	</xc:OneUILayout>
+</xp:view>
+

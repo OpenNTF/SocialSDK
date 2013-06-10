@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="85257876005A0DD2" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="3ee" sequence="7" unid="4F9226F3EB96A2578525791700019D46">
+<created><datetime dst="true">20110925T201737,98-04</datetime></created>
+<modified><datetime dst="true">20111007T092032,61-04</datetime></modified>
+<revised><datetime dst="true">20111007T092032,60-04</datetime></revised>
+<lastaccessed><datetime dst="true">20111007T092032,61-04</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20110925T201738,69-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></updatedby>
+<wassignedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></wassignedby>
+<item name="$Flags"><text>gC~4K</text></item>
+<item name="$TITLE" sign="true"><text>SBTActivityStreamsJson.xsp</text></item>
+
+
+<item name="$FileNames" sign="true"><text>SBTActivityStreamsJson.xsp</text></item>
+<item name="$DesignerVersion"><text>8.5.1</text></item>
+
+
+
+
+</note>

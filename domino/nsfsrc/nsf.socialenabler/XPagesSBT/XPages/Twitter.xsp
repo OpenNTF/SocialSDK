@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xc:OneUILayout title="Twitter" navigationPath="/Twitter/Tweets" connection="twitter">
+		<xp:this.facets>
+			<xc:LeftTwitter xp:key="LeftColumn"></xc:LeftTwitter>
+		</xp:this.facets>
+		<xc:sbtTwitter ajaxUpdate="true"></xc:sbtTwitter>
+	</xc:OneUILayout>
+</xp:view>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xc:OneUILayout navigationPath="/Connections/CommunitiesVCard" title="Connections Communities VCard" connection="connections">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftConnections></xc:LeftConnections>
+			</xp:panel>
+		</xp:this.facets>	
+		<xc:WarningConnectionsVersion></xc:WarningConnectionsVersion>
+		<xe:connectionsClient id="connectionsClient1"
+			communitiesBusinessCard="true">
+		</xe:connectionsClient>
+		The SBT plug-in provides a simple, secure, proxy server that can be enabled for the Connections services.
+		For this, be sure that you have the proxyEnabled property set to true in the Endpoint.<xp:br/>
+		You can also use the Domino proxy server as explained here:&#160;
+		<xp:link escape="true" text="Connections wiki" id="link1"
+			value="http://www-10.lotus.com/ldd/lcwiki.nsf/dx/Configuring_the_Communities_business_card_on_a_Domino_server_lc3">
+		</xp:link>
+		<xp:br />
+		<xp:br />
+		Click on a community in the view bellow:
+		<xp:table>
+			<xp:tr>
+				<xp:td valign='top'>
+					<xp:viewPanel rows="15" id="viewPanel1" value="connectionsAtom1"
+						var="entry">
+						<xp:this.facets>
+							<xp:pager partialRefresh="true" layout="Previous Group Next"
+								xp:key="headerPager" id="pager1">
+							</xp:pager>
+						</xp:this.facets>
+						<xe:this.data>
+							<xe:connectionsData var="connectionsAtom1"
+								serviceUrl="/communities/service/atom/communities/all"
+								maxBlockCount="3">
+							</xe:connectionsData>
+						</xe:this.data>
+						<xp:viewColumn columnName="Title" id="viewColumn1"
+							displayAs="link" value="#{xpath:entry:title}">
+							<xp:viewColumnHeader value="Community"
+								id="viewColumnHeader1">
+							</xp:viewColumnHeader>
+							<xp:eventHandler event="onclick"
+								submit="true" refreshMode="complete">
+								<xp:this.action><![CDATA[#{javascript:var id = entry.getStringValue("id")
+viewScope.cUuid = id.substring(id.indexOf("communityUuid=")+14)
+viewScope.cTitle = entry.getStringValue("title")
+}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:viewColumn>
+					</xp:viewPanel>
+				</xp:td>
+				<xp:td valign='top'>
+					<xp:panel id='widget' rendered="#{javascript:viewScope.cUuid}">
+						<xp:table>
+							<xp:tr>
+								<xp:td>
+								Community Title:
+								</xp:td>
+								<xp:td>
+									<xp:text escape="true"
+										id="computedField1" value="#{viewScope.cTitle}">
+									</xp:text>
+								</xp:td>
+							</xp:tr>
+							<xp:tr>
+								<xp:td>
+								Community UUID:
+								</xp:td>
+								<xp:td>
+									<xp:text escape="true"
+										id="computedField2" value="#{viewScope.cUuid}">
+									</xp:text>
+								</xp:td>
+							</xp:tr>
+						</xp:table>
+						<xe:connectionsWidget id="connectionsWidget1"
+							dojoType="extlib.dijit.CommunitiesVCard">
+							<xe:this.dojoAttributes>
+								<xp:dojoAttribute name="name"
+									value="#{javascript:viewScope.cTitle}">
+								</xp:dojoAttribute>
+								<xp:dojoAttribute name="uuid"
+									value="#{javascript:viewScope.cUuid}">
+								</xp:dojoAttribute>
+								<xp:dojoAttribute name="selectedWidgetId"
+									value="">
+								</xp:dojoAttribute>
+							</xe:this.dojoAttributes>
+						</xe:connectionsWidget>
+					</xp:panel>
+				</xp:td>
+			</xp:tr>
+		</xp:table>
+	</xc:OneUILayout>
+</xp:view>

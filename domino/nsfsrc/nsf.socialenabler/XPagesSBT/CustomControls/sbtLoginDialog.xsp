@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xp:link escape="true" id="link1">
+		<xp:this.text><![CDATA[#{javascript:return compositeData.label||"Login"}]]></xp:this.text>
+		<xp:eventHandler event="onclick" submit="false">
+			<xp:this.script><![CDATA[XSP.openDialog("#{id:dialog1}");]]></xp:this.script>
+		</xp:eventHandler>
+	</xp:link>
+	<xe:dialog id="dialog1" xp:key="key_1">
+		<xe:this.title><![CDATA[#{javascript:return compositeData.dialogTitle||"Login Dialog"}]]></xe:this.title>
+		<xp:div styleClass="lotusLogin lotusLoginForm">
+			<xp:div styleClass="lotusLoginContent">
+				<xp:div>
+					<xc:sbtLoginPanel loginButton="false"
+						endpoint="#{javascript:compositeData.endpoint}">
+					</xc:sbtLoginPanel>
+				</xp:div>
+			</xp:div>
+		</xp:div>
+		<xe:dialogButtonBar>
+			<xp:button value="Login" id="button15" styleClass="lotusFormButton">
+				<xp:eventHandler event="onclick" submit="true">
+					<xp:this.action><![CDATA[#{javascript:var u = getComponent('userInput').getValue()
+var p = getComponent('passwordInput').getValue()
+if(@Endpoint(compositeData.endpoint).login(u,p)) {
+	context.reloadPage();
+}}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:link id="button17" text="Cancel" styleClass="lotusAction">
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script><![CDATA[XSP.closeDialog('#{id:dialog1}')]]></xp:this.script>
+				</xp:eventHandler>
+			</xp:link>
+		</xe:dialogButtonBar>
+	</xe:dialog>
+</xp:view>

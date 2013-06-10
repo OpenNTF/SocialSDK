@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config>
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/custom</namespace-uri>
+    <default-prefix>xc</default-prefix>
+  </faces-config-extension>
+  <composite-component>
+    <component-type>OneUILayout</component-type>
+    <composite-name>OneUILayout</composite-name>
+    <composite-file>/OneUILayout.xsp</composite-file>
+    <composite-extension>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#xd;
+&lt;xp:view style="border:none" xmlns:xp="http://www.ibm.com/xsp/core"&gt;&#xd;
+    &lt;xp:div style="background-color:#F9F7F7; padding:2px; border:1px solid #C0C7CD"&gt;&#xd;
+        &lt;xp:table style="width: 98%"&gt;&#xd;
+            &lt;xp:tr&gt;&#xd;
+                &lt;xp:td style="border-width:1px;border-color:rgb(192,192,192);border-style:solid" colspan="3"&gt;&#xd;
+                    &lt;xp:table width="100%"&gt;&#xd;
+                        &lt;xp:tr&gt;&#xd;
+                            &lt;xp:td style="border:none"&gt;&#xd;
+                                &lt;xp:table style="border:none"&gt;&#xd;
+                                    &lt;xp:tr&gt;&#xd;
+                                        &lt;xp:td style="border:none"&gt;&#xd;
+                                            &lt;xp:span style="color:#797979;font-weight:bold;font-family:Arial;font-size:12pt"&gt;&#xd;
+                                                &lt;xp:label &#xd;
+                                                  value="&lt;%=&#xd;
+                                                     this.navigationPath?this.navigationPath:'[titleBarTabs]'&#xd;
+                                                  %&gt;"&gt;&lt;/xp:label&gt;&#xd;
+                                            &lt;/xp:span&gt;&#xd;
+                                        &lt;/xp:td&gt;&#xd;
+                                    &lt;/xp:tr&gt;&#xd;
+                                &lt;/xp:table&gt;&#xd;
+                            &lt;/xp:td&gt;&#xd;
+                        &lt;/xp:tr&gt;&#xd;
+                    &lt;/xp:table&gt;&#xd;
+                &lt;/xp:td&gt;&#xd;
+            &lt;/xp:tr&gt;&#xd;
+            &lt;xp:tr&gt;&#xd;
+                &lt;xp:td&#xd;
+                    style="border-color:rgb(192,192,192);border-style:solid;border-width:1px;width:123px;padding-bottom:65px;background-color:rgb(255,255,255)"&#xd;
+                    valign="top"&gt;&#xd;
+                    &lt;xp:callback id="LeftColumn" facetName="LeftColumn" /&gt;&#xd;
+                &lt;/xp:td&gt;&#xd;
+                &lt;xp:td valign="top"&#xd;
+                    style="border-color:rgb(192,192,192);border-style:solid;border-width:1px;background-color:rgb(255,255,255)"&gt;&#xd;
+                    &lt;xp:callback id="callback1" /&gt;&#xd;
+                &lt;/xp:td&gt;&#xd;
+                &lt;xp:td&#xd;
+                    style="border-color:rgb(192,192,192);border-style:solid;border-width:1px;width:123px;background-color:rgb(255,255,255)"&#xd;
+                    valign="top"&gt;&#xd;
+                    &lt;xp:callback id="RightColumn"&#xd;
+                        facetName="RightColumn"&gt;&#xd;
+                    &lt;/xp:callback&gt;&#xd;
+                &lt;/xp:td&gt;&#xd;
+            &lt;/xp:tr&gt;&#xd;
+        &lt;/xp:table&gt;&#xd;
+    &lt;/xp:div&gt;&#xd;
+&lt;/xp:view&gt;&#xd;
+</render-markup>
+      </designer-extension>
+    </composite-extension>
+    <property>
+      <property-name>navigationPath</property-name>
+      <property-class>string</property-class>
+    </property>
+    <property>
+      <property-name>defaultNavigationPath</property-name>
+      <property-class>string</property-class>
+    </property>
+    <property>
+      <property-name>title</property-name>
+      <property-class>string</property-class>
+    </property>
+    <property>
+      <property-name>connection</property-name>
+      <property-class>string</property-class>
+    </property>
+  </composite-component>
+</faces-config>

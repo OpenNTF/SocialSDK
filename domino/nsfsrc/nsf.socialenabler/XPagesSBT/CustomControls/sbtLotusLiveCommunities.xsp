@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.ibm.com/xsp/core xsdxp://localhost/xsp~core.xsd
+http://www.ibm.com/xsp/coreex xsdxp://localhost/xsp~coreex.xsd"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+
+	<xp:this.beforePageLoad><![CDATA[#{javascript:var ep = @Endpoint("lotuslive");
+if(!ep.isAuthenticated()){
+		ep.authenticate(true);
+	}
+var svc = new sbt.LotusLiveCommunitiesService(ep);
+var doc = svc.get(null, "xml");
+viewScope.arrays = parseLotusLiveCommunities(doc);
+}]]></xp:this.beforePageLoad>
+
+	<xp:this.resources>
+		<xp:script src="/Communities.jss" clientSide="false"></xp:script>
+	</xp:this.resources>
+
+	<xe:dataView id="communities" var="arrays" value="#{viewScope.arrays}"
+						columnTitles="true" rows="10" partialRefresh="true"
+						partialExecute="true" style="width:100%" collapsibleDetail="true"
+						detailsOnClient="true">
+						
+						<xe:this.summaryColumn>
+							<xe:viewSummaryColumn columnName="Name"
+								href="#{javascript:arrays.title}">
+							</xe:viewSummaryColumn>
+						</xe:this.summaryColumn>
+						
+						<xp:this.facets>
+							<xe:pagerAddRows id="pagerAddRows1"
+								xp:key="pagerBottom">
+							</xe:pagerAddRows>
+							<xp:panel xp:key="summary" id="panel1"
+								style="display:inline-block">
+
+								<xp:text id="computedField2"
+									escape="false" style="padding-right:20.0px">
+									<xp:this.value>
+										<![CDATA[#{javascript:return arrays.title}]]>
+									</xp:this.value>
+								</xp:text>
+								<xp:text id="computedField3"
+									escape="false"
+									style="padding-right:40.0px;color:rgb(0,64,128)">
+									<xp:this.value>
+										<![CDATA[#{javascript:return "[owner: " + arrays.owner + "]"}]]>
+									</xp:this.value>
+								</xp:text>
+							</xp:panel>
+							<xp:div xp:key="detail" id="dvAbstract1">
+								<xp:text id="computedField1"
+									escape="false">
+									<xp:this.value>
+										<![CDATA[#{javascript:arrays.descr}]]>
+									</xp:this.value>
+								</xp:text>
+								<xp:br/><xp:br/>
+								<xp:link id="link1"
+									style="text-decoration:none;font-weight:bold;"
+									text="Link" target="_blank">
+									<xp:this.value>
+										<![CDATA[#{javascript:arrays.link}]]>
+									</xp:this.value>
+								</xp:link>
+							</xp:div>
+						</xp:this.facets>
+					</xe:dataView>
+</xp:view>

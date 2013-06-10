@@ -78,7 +78,8 @@ define(["../declare", "../lang", "../json", "./DataHandler", "../Jsonpath", "../
          * @returns
          */
         getAsNumber : function(property) {
-            return null;            
+        	var text = this.getAsArray(property);
+        	return text.length;
         },
 
         /**
@@ -86,7 +87,15 @@ define(["../declare", "../lang", "../json", "./DataHandler", "../Jsonpath", "../
          * @returns
          */
         getAsDate : function(property) {
-            return null;            
+        	this._validateProperty(property, "getAsDate");
+        	if (this._values) {
+                if (!this._values.hasOwnProperty(property)) {
+                    this._values[property] = this._getDate(property); 
+                }
+                return this._values[property];
+            } else {
+                return _getDate(property);
+            }
         },
 
         /**
@@ -94,7 +103,15 @@ define(["../declare", "../lang", "../json", "./DataHandler", "../Jsonpath", "../
          * @returns
          */
         getAsBoolean : function(property) {
-            return null;            
+        	this._validateProperty(property, "getAsBoolean");
+        	if (this._values) {
+                if (!this._values.hasOwnProperty(property)) {
+                    this._values[property] = this._getBoolean(property); 
+                }
+                return this._values[property];
+            } else {
+                return _getBoolean(property);
+            }                    
         },
 
         /**
@@ -136,9 +153,9 @@ define(["../declare", "../lang", "../json", "./DataHandler", "../Jsonpath", "../
         getSummary : function() {
         	if (!this._summary && this.data.totalResults) {
                 this._summary = {
-                    totalResults : this._get("totalResults"),
-                    startIndex : this._get("startIndex"),
-                    itemsPerPage : this._get("itemsPerPage")
+                    totalResults : this._get("totalResults")[0],
+                    startIndex : this._get("startIndex")[0],
+                    itemsPerPage : this._get("itemsPerPage")[0]
                 };
             }
             return this._summary;
@@ -150,7 +167,18 @@ define(["../declare", "../lang", "../json", "./DataHandler", "../Jsonpath", "../
          */
         getEntitiesDataArray : function() {
         	var entityJPath = this._getJPath("entry");
-        	return this._get(entityJPath);
+        	var resultingArray = this._get(entityJPath);
+        	return resultingArray[0];
+        },
+        
+        _getDate : function(property) {
+        	var text = this._get(property);
+        	return text ? new Date(text) : null;
+        },
+        
+        _getBoolean : function(property) {
+        	var text = this._get(property);
+        	return text ? true : false;
         },
         
         /**

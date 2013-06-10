@@ -98,7 +98,6 @@ define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscr
 		@return {String} display name of the User	
 		**/
 		getDisplayName: function () {
-			this.dataHandler.getEntitiesDataArray();
 			return this.getAsString("displayName");
 		},
 		/**

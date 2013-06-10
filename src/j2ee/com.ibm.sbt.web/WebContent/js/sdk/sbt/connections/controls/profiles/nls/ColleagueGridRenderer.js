@@ -17,7 +17,7 @@
 // NLS_CHARSET=UTF-8
 define({
   root: {
-	  viewAll : "View All (${totalCount})",
+	  viewAll : "View All ({totalCount})",
 	  empty : "No colleagues in the list.",
 	  people: " people",
 	  person: " person"

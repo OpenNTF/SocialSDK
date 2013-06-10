@@ -18,9 +18,7 @@
  * 
  */
 define([ "../../../declare", "../../../Endpoint", "../../../xml", "../../../xpath", "../../../connections/ConnectionsConstants",
-         "./ProfileGrid", 
-         "./ColleagueGridRenderer", 
-         "../ViewAllAction" ], 
+         "./ProfileGrid", "./ColleagueGridRenderer", "../ViewAllAction" ], 
         function(declare, Endpoint, xml, xpath, conn, ProfileGrid, ColleagueGridRenderer, ViewAllAction) {
 
     /**

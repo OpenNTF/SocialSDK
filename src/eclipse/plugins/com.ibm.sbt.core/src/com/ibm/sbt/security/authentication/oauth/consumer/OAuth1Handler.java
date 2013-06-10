@@ -198,8 +198,11 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 					.append(URLEncoder.encode(oaProvider.getConsumerKey(), "UTF-8")).append('&');
 			url.append(Configuration.OAUTH_TOKEN).append('=')
 					.append(URLEncoder.encode(requestToken, "UTF-8")).append('&');
-			url.append(Configuration.OAUTH_VERIFIER).append('=')
+			// services like dropbox do not use verifier code, adding a check
+			if(verifierCode!=null){
+				url.append(Configuration.OAUTH_VERIFIER).append('=')
 					.append(URLEncoder.encode(verifierCode, "UTF-8")).append('&');
+			}
 			url.append(Configuration.SIGNATURE)
 					.append('=')
 					.append(URLEncoder.encode(

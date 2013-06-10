@@ -78,8 +78,15 @@ define(["../declare", "../lang", "../json", "./DataHandler", "../Jsonpath", "../
          * @returns
          */
         getAsNumber : function(property) {
-        	var text = this.getAsArray(property);
-        	return text.length;
+        	this._validateProperty(property, "getAsNumber");
+        	if (this._values) {
+                if (!this._values.hasOwnProperty(property)) {
+                    this._values[property] = this._getNumber(property); 
+                }
+                return this._values[property];
+            } else {
+                return _getNumber(property);
+            }
         },
 
         /**
@@ -119,7 +126,7 @@ define(["../declare", "../lang", "../json", "./DataHandler", "../Jsonpath", "../
          * @returns
          */
         getAsArray : function(property) {
-        	this._validateProperty(property, "getAsString");
+        	this._validateProperty(property, "getAsArray");
         	if (this._values) {
                 if (!this._values.hasOwnProperty(property)) {
                     this._values[property] = this._get(property);
@@ -151,11 +158,11 @@ define(["../declare", "../lang", "../json", "./DataHandler", "../Jsonpath", "../
          * @returns
          */
         getSummary : function() {
-        	if (!this._summary && this.data.totalResults) {
+        	if (!this._summary && this._get("totalResults")[0]) {
                 this._summary = {
-                    totalResults : this._get("totalResults")[0],
-                    startIndex : this._get("startIndex")[0],
-                    itemsPerPage : this._get("itemsPerPage")[0]
+                	totalResults : this.getAsNumber("totalResults"),
+                	startIndex : this.getAsNumber("startIndex"),
+                	itemsPerPage : this.getAsNumber("itemsPerPage")
                 };
             }
             return this._summary;
@@ -172,13 +179,21 @@ define(["../declare", "../lang", "../json", "./DataHandler", "../Jsonpath", "../
         },
         
         _getDate : function(property) {
-        	var text = this._get(property);
+        	var text = this._get(property)[0];
         	return text ? new Date(text) : null;
         },
         
         _getBoolean : function(property) {
-        	var text = this._get(property);
+        	var text = this._get(property)[0];
         	return text ? true : false;
+        },
+        
+        _getNumber : function(property) {
+        	var text = this._get(property)[0];
+        	if(lang.isArray(text)) {
+        		return text.length;
+        	}
+       		return text;
         },
         
         /**

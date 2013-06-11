@@ -19,8 +19,8 @@ define({
   root: {
 	  viewAll : "View All ({totalCount})",
 	  empty : "No colleagues in the list.",
-	  people: " people",
-	  person: " person"
+	  people: "{totalCount} people",
+	  person: "{totalCount} person"
   }
 });
 

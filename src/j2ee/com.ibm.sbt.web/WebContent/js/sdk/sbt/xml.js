@@ -75,6 +75,9 @@ define(['./lang'], function(lang) {
 		    if (lang.isArray(string)) {
 		        string = string.join();
 		    }
+		    if (!lang.isString(string)) {
+		        string = string.toString();
+		    }
 			return string.replace(/([\&"<>])/g, function(str, item) {
 				return xml_to_encoded[item];
 			});

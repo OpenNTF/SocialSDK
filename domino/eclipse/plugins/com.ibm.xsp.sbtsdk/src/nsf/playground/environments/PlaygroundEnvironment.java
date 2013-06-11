@@ -1,7 +1,10 @@
 package nsf.playground.environments;
 
+import nsf.playground.beans.OptionsBean;
+
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.jslibrary.SBTEnvironment;
+import com.ibm.sbt.services.endpoints.BasicEndpoint;
 import com.ibm.sbt.services.endpoints.ConnectionsBasicEndpoint;
 import com.ibm.sbt.services.endpoints.ConnectionsOAuth2Endpoint;
 import com.ibm.sbt.services.endpoints.DominoBasicEndpoint;
@@ -54,6 +57,7 @@ public class PlaygroundEnvironment extends SBTEnvironment {
 	// Twitter
 	private String twitter_OA_ConsumerKey;
 	private String twitter_OA_ConsumerSecret;
+
 	
 	public PlaygroundEnvironment() {
 		this(null,null);
@@ -64,16 +68,19 @@ public class PlaygroundEnvironment extends SBTEnvironment {
 	}
 	
 	public PlaygroundEnvironment(String name, Property[] properties) {
-		super(name, 
-			  new SBTEnvironment.Endpoint[] {
-				new SBTEnvironment.Endpoint("connections",null), 
-				new SBTEnvironment.Endpoint("connectionsOA2",null), 
-				new SBTEnvironment.Endpoint("smartcloud",null), 
-				new SBTEnvironment.Endpoint("smartcloudOA2",null), 
-				new SBTEnvironment.Endpoint("sametime",null), 
-				new SBTEnvironment.Endpoint("domino",null), 
-			  },
+		super(name,
+			  createEndpoints(),
 			  properties);
+	}
+	
+	private static SBTEnvironment.Endpoint[] createEndpoints() {
+		String endpoints = OptionsBean.get().getEndpoints();
+		String[] sp = StringUtil.splitString(endpoints, ',', true);
+		SBTEnvironment.Endpoint[] result = new SBTEnvironment.Endpoint[sp.length]; 
+		for(int i=0; i<sp.length; i++) {
+			result[i] = new SBTEnvironment.Endpoint(sp[i],null); 
+		}
+		return result;
 	}
 
 	
@@ -264,6 +271,7 @@ public class PlaygroundEnvironment extends SBTEnvironment {
 		if(StringUtil.isEmpty(endpointDomino)) {endpointDomino = "domino";}
 		context.setSessionProperty("sbt.endpoint.domino", endpointDomino);
 		
+		BasicEndpoint ep2 = (BasicEndpoint)ManagedBeanUtil.getBean(context, "watson");
 		
 		// Override the beans with the environment definition
 		{

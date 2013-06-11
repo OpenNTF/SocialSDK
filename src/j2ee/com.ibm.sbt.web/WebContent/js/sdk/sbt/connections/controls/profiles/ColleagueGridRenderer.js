@@ -80,11 +80,9 @@ define(["../../../declare", "../../../stringUtil",
           },
           
           viewAllTitle: function(grid, renderer, items, data) {
-              var peopleCount = data.count !== 1 ? data.count + nls.people : data.count + nls.person;
-              var sub = {
-                  totalCount: peopleCount
-              };
-              return stringUtil.replace(nls.viewAll, sub);
+              var str = (data.totalCount == 1) ? nls.person : nls.people;
+              var totalCount = stringUtil.replace(str, { totalCount : data.totalCount });
+              return stringUtil.replace(nls.viewAll, { totalCount : totalCount });
           }
     });   
     return ColleagueGridRenderer;

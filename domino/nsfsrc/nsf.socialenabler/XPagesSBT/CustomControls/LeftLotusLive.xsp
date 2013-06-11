@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xe:navigator id="outline">
+		<xe:this.treeNodes>
+			<xe:pageTreeNode page="LotusLiveFiles"
+				label="Files" selection="/LotusLive/Files">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="LotusLiveProfiles"
+				label="My Profile" selection="/LotusLive/Profiles">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="LotusLiveContacts"
+				label="My Contacts" selection="/LotusLive/Contacts">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="LotusLiveOAuth"
+				label="OAuth Dance" selection="/LotusLive/OAuthDance">
+			</xe:pageTreeNode>
+		</xe:this.treeNodes>
+	</xe:navigator>
+</xp:view>

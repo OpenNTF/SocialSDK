@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xc:OneUILayout navigationPath="/Connections/ProfilesVCard"
+		title="Connections Profiles VCard" connection="connections">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftConnections></xc:LeftConnections>
+			</xp:panel>
+		</xp:this.facets>
+		<xc:WarningConnectionsVersion></xc:WarningConnectionsVersion>
+		<xe:connectionsClient id="connectionsClient1"
+			profilesBusinessCard="true">
+		</xe:connectionsClient>
+		<xp:button id="button1">
+			<xp:this.value><![CDATA[#{javascript:var u = @Endpoint("connections").getUserIdentity()
+if(u) {
+	return "Get the VCard of '"+u+"'"
+} else {
+	return "Authenticate to Connections"
+}}]]></xp:this.value>
+			<xp:eventHandler event="onclick" submit="true"
+				refreshMode="complete">
+				<xp:this.action><![CDATA[#{javascript:if(!@Endpoint("connections").isAuthenticated()) {
+	@Endpoint("connections").authenticate(true);
+}
+}]]></xp:this.action>
+			</xp:eventHandler>
+		</xp:button>
+		<xp:br />
+		<xp:br />
+		<xp:span style="font-weight:bold;font-size:14pt">
+			Use content type
+		</xp:span>
+		<xp:br />
+		<xp:span style="font-weight:bold">By user id</xp:span>
+		<xp:br />
+		VCard:
+		<xp:text escape="true" id="computedField3" contentType="xs:lc.vcard"
+			value="#{javascript:return userBean.lcId+'|'+userBean.lcName}">
+		</xp:text>
+		<xp:br />
+		VCard inline:
+		<xp:text escape="true" id="computedField1" contentType="xs:lc.vcardi"
+			value="#{javascript:return userBean.lcId+'|'+userBean.lcName}">
+		</xp:text>
+		<xp:br />
+		<xp:br />
+		<xp:span style="font-weight:bold">By email address</xp:span>
+		<xp:br />
+		<xp:span>Note that this is require the Connections server to
+			enable email search</xp:span>
+		<xp:br />
+		VCard:
+		<xp:text escape="true" id="computedField5" contentType="xs:lc.vcard"
+			value="#{javascript:return userBean.email+'|'+userBean.lcName}">
+		</xp:text>
+		<xp:br />
+		VCard inline:
+		<xp:text escape="true" id="computedField6" contentType="xs:lc.vcardi"
+			value="#{javascript:return userBean.email+'|'+userBean.lcName}">
+		</xp:text>
+		<xp:br />
+		<xp:br />
+		<xp:span style="font-weight:bold;font-size:14pt">Use widgets</xp:span>
+		<xp:br />
+		<xp:span style="font-weight:bold">By user id</xp:span>
+		<xp:br />
+		<xe:connectionsWidget id="connectionsWidget1"
+			dojoType="extlib.dijit.ProfilesVCard">
+			<xe:this.dojoAttributes>
+				<xp:dojoAttribute name="userName"
+					value="#{javascript:return userBean.lcName}">
+				</xp:dojoAttribute>
+				<xp:dojoAttribute name="userId"
+					value="#{javascript:return userBean.lcId}">
+				</xp:dojoAttribute>
+			</xe:this.dojoAttributes>
+		</xe:connectionsWidget>
+		<xp:br />
+		<xp:span style="font-weight:bold">By email address</xp:span>
+		<xe:connectionsWidget id="connectionsWidget2"
+			dojoType="extlib.dijit.ProfilesVCardInline">
+			<xe:this.dojoAttributes>
+				<xp:dojoAttribute name="userName"
+					value="#{javascript:return userBean.lcName}">
+				</xp:dojoAttribute>
+				<xp:dojoAttribute name="userId"
+					value="#{javascript:return userBean.email}">
+				</xp:dojoAttribute>
+			</xe:this.dojoAttributes>
+		</xe:connectionsWidget>
+
+	</xc:OneUILayout>
+</xp:view>

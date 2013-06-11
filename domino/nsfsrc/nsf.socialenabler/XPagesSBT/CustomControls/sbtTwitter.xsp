@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.ibm.com/xsp/coreex xsdxp://localhost/xsp~coreex.xsd">
+	<!--  Dan O'Connor -->
+	<!-- Tony McGuckin, IBM -->
+	<xp:this.beforePageLoad><![CDATA[#{javascript:if(!@Endpoint("twitter").isAuthenticated()) {
+	@Endpoint("twitter").authenticate(true);
+}
+viewScope.feedType = 'timeLine'}]]>
+	</xp:this.beforePageLoad>
+	<xp:comboBox id="comboBox1" value="#{viewScope.feedType}">
+		<xp:selectItem itemLabel="My Timeline" itemValue="timeLine">
+		</xp:selectItem>
+		<xp:selectItem itemLabel="Mentions" itemValue="mentions">
+		</xp:selectItem>
+		<xp:selectItem itemLabel="Retweeted by me" itemValue="rtByMe">
+		</xp:selectItem>
+		<xp:selectItem itemLabel="Retweeted to me" itemValue="rtToMe">
+		</xp:selectItem>
+		<xp:selectItem itemLabel="Retweet of me" itemValue="rtOfMe">
+		</xp:selectItem>
+		<xp:selectItem itemLabel="Public Timeline"
+			itemValue="publicTimeLine">
+		</xp:selectItem>
+		<xp:eventHandler event="onchange" submit="true"
+			refreshMode="complete">
+			<xp:this.action><![CDATA[#{javascript:getComponent('dvTweets').getData().refresh();}]]></xp:this.action>
+		</xp:eventHandler>
+	</xp:comboBox>
+	<xe:djContentPane id="djContentPane1"
+		partialRefresh="#{javascript:compositeData.ajaxUpdate}"
+		style="overflow-x:hidden; overflow-y:hidden">
+		<xp:table id="filesListFormattingTable">
+			<xp:tr>
+				<xp:td></xp:td>
+			</xp:tr>
+			<xp:tr>
+				<xp:td>
+					<xe:dataView id="dvTweets" var="tweet"
+						columnTitles="false" rows="8" partialRefresh="true"
+						partialExecute="true" style="width:100%" expandedDetail="true">
+						<xp:this.data>
+							<xe:twitterData var="twitterData1"
+								endpoint="twitter" scope="view" timeout="60"
+								feedType="#{javascript:viewScope.feedType}">
+							</xe:twitterData>
+						</xp:this.data>
+						<xe:this.summaryColumn>
+							<xe:viewSummaryColumn columnName="author"></xe:viewSummaryColumn>
+						</xe:this.summaryColumn>
+						<xp:this.facets>
+							<xe:pagerAddRows id="pagerAddRows1"
+								xp:key="pagerBottom">
+							</xe:pagerAddRows>
+							<xp:panel xp:key="summary" id="panel1"
+								style="display:inline-block">
+								<xp:link id="link1"
+									style="text-decoration:none;font-weight:bold;"
+									text="#{tweet.author}">
+								</xp:link>
+							</xp:panel>
+							<xp:div xp:key="detail" id="dvAbstract1">
+								<xp:text id="computedField2"
+									escape="false" contentType="twitterContent">
+									<xp:this.value>
+										<![CDATA[#{javascript:tweet.title}]]>
+									</xp:this.value>
+								</xp:text>
+								<xp:div
+									style="clear:both;padding:2px">
+								</xp:div>
+								<xp:link id="link2"
+									style="text-decoration:none;" text="Retweet">
+								</xp:link>
+								<xp:label value=" | " id="label1"></xp:label>
+								<xp:link id="link3"
+									style="text-decoration:none;" text="Reply">
+								</xp:link>
+								<xp:label value=" | " id="label2"></xp:label>
+								<xp:link id="link5"
+									style="text-decoration:none;" text="Open">
+								</xp:link>
+							</xp:div>
+						</xp:this.facets>
+					</xe:dataView>
+				</xp:td>
+			</xp:tr>
+		</xp:table>
+	</xe:djContentPane>
+</xp:view>

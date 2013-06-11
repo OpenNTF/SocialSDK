@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xc:OneUILayout navigationPath="/Dropbox/OAuthDance"
+		title="Dropbox OAuth Dance" connection="dropbox">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftDropbox></xc:LeftDropbox>
+			</xp:panel>
+		</xp:this.facets>
+
+		Here the current service currently accessed:
+		<xe:dumpObject id="dumpObject1" value="#{javascript:@Endpoint('dropbox')}"
+			useBeanProperties="true" title="Dropbox Service">
+		</xe:dumpObject>
+		<xp:button value="Get an OAuth token" id="button1">
+			<xp:eventHandler event="onclick" submit="true"
+				refreshMode="complete">
+				<xp:this.action>
+               <![CDATA[#{javascript:
+viewScope.text = null
+@Endpoint('dropbox').getOAuthProvider().acquireToken(true) 
+               }]]>
+				</xp:this.action>
+			</xp:eventHandler>
+		</xp:button>
+		<xp:button value="Delete OAuth token" id="button5">
+			<xp:eventHandler event="onclick" submit="true"
+				refreshMode="complete">
+				<xp:this.action><![CDATA[#{javascript:viewScope.text = null
+@Endpoint('dropbox').getOAuthProvider().deleteToken()
+}]]></xp:this.action>
+			</xp:eventHandler>
+		</xp:button>
+		<xp:button value="Force Renew OAuth token" id="button3">
+			<xp:eventHandler event="onclick" submit="true"
+				refreshMode="complete">
+				<xp:this.action>
+               <![CDATA[#{javascript:
+viewScope.text = null
+@Endpoint('dropbox').getOAuthProvider().renewToken()
+               }]]>
+				</xp:this.action>
+			</xp:eventHandler>
+		</xp:button>
+		<xe:dumpObject id="dumpObject2" useBeanProperties="true"
+			value="#{javascript:dropbox.getOAuthProvider().acquireToken()}"
+			title="OAuth Token">
+		</xe:dumpObject>
+
+		<xp:button value="Call the Dropbox service" id="button4">
+			<xp:eventHandler event="onclick" submit="true"
+				refreshMode="complete">
+				<xp:this.action>
+               <![CDATA[#{javascript:
+if(!dropbox.getOAuthProvider().acquireToken()) 
+{  viewScope.text = "Please, acquire a token before calling the service"
+   return; 
+}        
+var svc = new sbt.DropboxService(dropbox,"1/account/info/")
+
+var account_info = svc.get(null,"json");
+
+var user = account_info.email;
+
+viewScope.text = user
+               }]]>
+				</xp:this.action>
+			</xp:eventHandler>
+		</xp:button>
+		<br />
+
+		<br />
+		<br />
+
+		<xp:text escape="false" id="computedField1" value="#{viewScope.text}">
+		</xp:text>
+	</xc:OneUILayout>
+</xp:view>

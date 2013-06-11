@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:table>
+		<xp:this.rendered><![CDATA[#{javascript:compositeData.endpoint}]]></xp:this.rendered>
+		<xp:panel tagName="p" styleClass="lotusFormField">
+			<xp:label value="User Name:" id="label1" for="userInput"></xp:label>
+			<xp:inputText id="userInput" size="30" style="margin-left:4.0px"></xp:inputText>
+		</xp:panel>
+		<xp:panel tagName="p" styleClass="lotusFormField">
+			<xp:label value="Password:" id="label2"
+				for="passwordInput">
+			</xp:label>
+			<xp:inputText id="passwordInput" password="true" size="30"
+				style="margin-left:12.0px">
+			</xp:inputText>
+		</xp:panel>
+		<br></br>
+		<xp:panel tagName="p" styleClass="lotusFormField">
+			<xp:checkBox
+				text="Save my credentials and keep me signed in across sessions" id="ckKeep"
+				style="font-weight:normal">
+			</xp:checkBox>
+		</xp:panel>
+		<br></br>
+		<xp:div rendered="#{javascript:compositeData.loginButton}"
+			styleClass="lotusBtnContainer">
+			<xp:button value="Login" id="button1" styleClass="lotusFormButton">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="complete">
+					<xp:this.action><![CDATA[#{javascript:var ep = @Endpoint(compositeData.endpoint)
+var u = getComponent("userInput").getValue();
+if(u) {
+	var p = getComponent("passwordInput").getValue();
+	var k = getComponent("ckKeep").isChecked();
+	if(ep.login(u,p,k)) {
+		ep.redirect()
+	} else {
+		@ErrorMessage("Invalid user/password")	
+	}
+}
+}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+			<br></br><br></br>
+		</xp:div>
+		<xp:link escape="true" text="Clear my credentials from the store"
+			id="link1">
+			<xp:eventHandler event="onclick" submit="true"
+				refreshMode="complete">
+				<xp:this.action><![CDATA[#{javascript:var ep = @Endpoint(compositeData.endpoint)
+ep.clearFromStore();
+@InfoMessage("Credentials cleared from store")}]]></xp:this.action>
+			</xp:eventHandler>
+		</xp:link>
+		<xp:messages id="messages1"></xp:messages>
+	</xp:table>
+</xp:view>

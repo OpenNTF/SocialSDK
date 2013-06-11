@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xe:navigator id="outline">
+		<xe:this.treeNodes>
+			<xe:pageTreeNode page="ConnectionsProfiles"
+				label="Profiles" selection="/Connections/Profiles">
+			</xe:pageTreeNode>
+            <xe:pageTreeNode page="ConnectionsCommunities"
+                label="Communities" selection="/Connections/Communities">
+             </xe:pageTreeNode>
+             <xe:pageTreeNode page="ConnectionsActivities"
+                label="Activities" selection="/Connections/Activities">
+             </xe:pageTreeNode>
+             <xe:pageTreeNode page="ConnectionsProfilesVCard"
+                label="Profiles VCard" selection="/Connections/ProfilesVCard">
+             </xe:pageTreeNode>
+             <xe:pageTreeNode page="ConnectionsCommunitiesVCard"
+                label="Communities VCard" selection="/Connections/CommunitiesVCard">
+             </xe:pageTreeNode>
+             <xe:pageTreeNode page="ConnectionsFiles"
+                label="Files" selection="/Connections/Files">
+             </xe:pageTreeNode>					
+		</xe:this.treeNodes>
+	</xe:navigator>
+</xp:view>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xc:OneUILayout navigationPath="/Util/UserBean" title="User Bean">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftUtilities></xc:LeftUtilities>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:button value="Clear Cache" id="button1">
+			<xp:eventHandler event="onclick" submit="true"
+				refreshMode="complete">
+				<xp:this.action><![CDATA[#{javascript:peopleBean.clearCache()}]]></xp:this.action>
+			</xp:eventHandler></xp:button>
+		<xe:dumpObject id="dumpObject1" value="#{userBean}"></xe:dumpObject>
+		</xc:OneUILayout>
+</xp:view>
+

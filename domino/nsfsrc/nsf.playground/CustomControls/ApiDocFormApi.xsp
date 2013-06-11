@@ -50,7 +50,7 @@
 			<xe:valuePicker id="valuePicker1" for="djextListTextBox4"
 				dojoType="extlib.dijit.PickerCheckbox" pickerText="Set">
 				<xe:this.dataProvider>
-					<xe:simpleValuePicker valueList="Connections,SmartCloud,Domino,WCM"
+					<xe:simpleValuePicker valueList="#{javascript:docBean.getProducts()}"
 						valueListSeparator=",">
 					</xe:simpleValuePicker>
 				</xe:this.dataProvider>

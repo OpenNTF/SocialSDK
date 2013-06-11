@@ -36,5 +36,7 @@ Export-Package: com.ibm.xsp.sbtsdk,
  nsf.playground.environments,
  nsf.playground.jobs,
  nsf.playground.jsp,
+ nsf.playground.library,
  nsf.playground.playground,
+ nsf.playground.servlets,
  nsf.playground.snippets

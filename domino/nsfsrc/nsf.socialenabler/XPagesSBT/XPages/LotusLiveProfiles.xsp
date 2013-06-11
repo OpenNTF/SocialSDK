@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.ibm.com/xsp/core xsdxp://localhost/xsp~core.xsd
+http://www.ibm.com/xsp/custom xsdxp://localhost/xsp~custom.xsd"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xc:OneUILayout navigationPath="/LotusLive/Profiles"
+		title="LotusLive Profiles">
+		<xc:sbtProfileLotusLive></xc:sbtProfileLotusLive>
+		<xp:this.facets>
+			<xc:LeftLotusLive xp:key="LeftColumn"></xc:LeftLotusLive>
+		</xp:this.facets>
+	</xc:OneUILayout></xp:view>

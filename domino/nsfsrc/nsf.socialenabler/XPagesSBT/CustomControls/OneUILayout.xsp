@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:this.afterPageLoad><![CDATA[#{javascript:if(!view.getPageTitle()) {
+	var t = I18n.format("SBT Demo: {0} [{1}]",
+		@RightBack(@Left(context.getUrl(), '.xsp'), '/'),
+		@Name('[CN]', database.getServer())
+	)
+	view.setPageTitle(t)
+}}]]></xp:this.afterPageLoad>
+   <xe:keepSessionAlive id="keepSessionAlive1"></xe:keepSessionAlive>
+
+   <style>
+.lotusui .lotusAccess {
+    width: auto;
+}
+   </style>
+
+   <xe:applicationLayout id="oneUILayout1">
+      <xe:this.facets>
+		<xp:callback xp:key="LeftColumn" facetName="LeftColumn"
+				id="callback1"></xp:callback>
+         <xp:callback xp:key="RightColumn" facetName="RightColumn"
+            id="callback2"></xp:callback>
+      </xe:this.facets>
+
+      <xe:this.configuration>
+         <xe:applicationConfiguration legalLogoAlt="IBM Corp."
+         	productLogo="XPages_Logo.png"
+         	navigationPath="${javascript:compositeData.navigationPath}"
+         	defaultNavigationPath="${javascript:compositeData.defaultNavigationPath}"
+         	productLogoHeight="31px" productLogoWidth="149px"
+         	legalText="(c) 2011 IBM Corp." titleBar="true">
+         	<xe:this.bannerApplicationLinks>
+         		<xe:basicLeafNode label="Home" selected="true"
+         			href="/">
+         		</xe:basicLeafNode>
+         		<xe:basicLeafNode label="Extension Library"
+         			href="http://extlib.openntf.org">
+         		</xe:basicLeafNode>
+         		<xe:basicLeafNode label="Social Enabler"
+         			href="http://socialenabler.openntf.org">
+         		</xe:basicLeafNode>
+         		<xe:basicLeafNode label="XPages.info"
+         			href="http://xpages.info">
+         		</xe:basicLeafNode>
+         		<xe:basicLeafNode label="Development Contest"
+         			href="http://contest.openntf.org">
+         		</xe:basicLeafNode>
+         		<xe:basicLeafNode label="IBM XPages Wiki"
+         			href="http://www-10.lotus.com/ldd/ddwiki.nsf">
+         		</xe:basicLeafNode>
+         	</xe:this.bannerApplicationLinks>
+         	<xe:this.bannerUtilityLinks>
+         		<xe:userTreeNode></xe:userTreeNode>
+         		<xe:loginTreeNode></xe:loginTreeNode>
+         	</xe:this.bannerUtilityLinks>
+
+         	<xe:this.titleBarTabs>
+         		<xe:pageTreeNode page="ConnectionsProfiles"
+         			label="IBM Connections" selection="/Connections/.*">
+         		</xe:pageTreeNode>
+         		<xe:pageTreeNode page="SametimeLiveName"
+         			label="IBM Sametime" selection="/Sametime/.*">
+         		</xe:pageTreeNode>
+         		<xe:pageTreeNode page="SBTActivityStreamsJson"
+         			label="IBM Social Business Toolkit" selection="/SBT/.*">
+         		</xe:pageTreeNode>
+         		<xe:pageTreeNode page="LotusLiveFiles"
+         			label="LotusLive" selection="/LotusLive/.*">
+         		</xe:pageTreeNode>
+         		<xe:pageTreeNode page="DropboxFiles" label="Dropbox"
+         			selection="/Dropbox/.*">
+         		</xe:pageTreeNode>
+         		<xe:pageTreeNode page="FacebookPlugins"
+         			label="Facebook" selection="/Facebook/.*">
+         		</xe:pageTreeNode>
+         		<xe:pageTreeNode label="Twitter" page="/Twitter.xsp"
+         			selected="/Twitter/.*">
+         		</xe:pageTreeNode>
+         		<xe:pageTreeNode label="Generic Services" page="/GenericStackoverflow.xsp"
+         			selected="/Generic/.*">
+         		</xe:pageTreeNode>
+         		<xe:pageTreeNode page="UtilUserBean" label="Utilities"
+         			selection="/Util/.*">
+         		</xe:pageTreeNode>
+         	</xe:this.titleBarTabs>
+         	<xe:this.placeBarName><![CDATA[${javascript:var s = "XPages Social Enabler"
+if(compositeData.title) {
+	s += " - " + compositeData.title
+	if(compositeData.connection) {
+		var ep = @Endpoint(compositeData.connection)
+		if(!ep) {
+			// Should not happen...
+			s += I18n.format("Invalid endpoint '{0}'",compositeData.connection)
+		} else {
+			s += I18n.format(", endpoint '{0}'",@Endpoint(compositeData.connection,1));
+			var lbl = ep.getLabel()
+			if(lbl) s += " ("+lbl+")"
+		}
+	}
+}
+return s;}]]></xe:this.placeBarName>
+         </xe:applicationConfiguration>
+      </xe:this.configuration>
+      <xp:callback id="OneUIMainAreaCallback"></xp:callback>
+   </xe:applicationLayout>
+</xp:view>

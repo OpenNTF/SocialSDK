@@ -16,6 +16,7 @@ Export-Package: com.ibm.sbt.playground.assets,
  com.ibm.sbt.playground.assets.opensocial,
  com.ibm.sbt.playground.assets.xpages,
  com.ibm.sbt.playground.dojo,
+ com.ibm.sbt.playground.extension,
  com.ibm.sbt.playground.git,
  com.ibm.sbt.playground.vfs,
  com.ibm.sbt.sample.web.util

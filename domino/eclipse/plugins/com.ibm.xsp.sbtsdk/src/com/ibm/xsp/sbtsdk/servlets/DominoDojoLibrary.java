@@ -15,7 +15,9 @@
  */
 package com.ibm.xsp.sbtsdk.servlets;
 
+import com.ibm.commons.util.PathUtil;
 import com.ibm.sbt.jslibrary.servlet.DojoLibrary;
+import com.ibm.sbt.jslibrary.servlet.LibraryRequest;
 
 /**
  * Dojo domino specific library.
@@ -31,7 +33,35 @@ public class DominoDojoLibrary extends DojoLibrary {
 		super(NAME,"1.4","1.9.9");
 	}
 
-//	protected String[][] getRegisterModules() {
-//		return REGISTER_MODULES_AMD;
-//	}	
+	@Override
+	protected String[][] getRegisterExtModules(LibraryRequest request) {
+		String[][] s = super.getRegisterExtModules(request);
+		return addExtraModules(s);
+	}
+	
+	@Override
+	protected String[][] getRegisterExtModulesAmd(LibraryRequest request) {
+		String[][] s = super.getRegisterExtModulesAmd(request);
+		return addExtraModules(s);
+	}
+	
+	protected String[][] addExtraModules(String[][] s) {
+		if(true) {
+			String[][] ns = new String[s.length+1][];
+			System.arraycopy(s, 0, ns, 0, s.length);
+			return new String[][] {
+				{"com/ibm/watson", "/.watson/com/ibm/watson"}
+			};
+		}
+		return s;
+	}
+	
+	protected String getModuleUrl(LibraryRequest request, String modulePath, ModuleType type) {
+		if(type==ModuleType.SBTX_MODULE && modulePath.startsWith("/.watson/")) {
+			String jsUrl = "https://priand64.swg.usma.ibm.com/xsp/.ibmxspres/";
+			return PathUtil.concat(jsUrl, modulePath, '/');
+		}
+		return super.getModuleUrl(request, modulePath, type);
+	}
+	
 }

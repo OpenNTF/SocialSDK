@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Playground related classes
 Bundle-SymbolicName: com.ibm.sbt.playground
-Bundle-Version: 1.0.0
+Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: IBM
 Require-Bundle: com.ibm.commons,
  com.ibm.commons.xml,

@@ -180,7 +180,12 @@ define(["../declare", "../lang", "../json", "./DataHandler", "../Jsonpath", "../
         
         _getDate : function(property) {
         	var text = this._get(property)[0];
-        	return text ? new Date(text) : null;
+        	if(text instanceof Date) {
+        		return text;
+        	}
+        	else {
+        		return new Date(text);
+        	}
         },
         
         _getBoolean : function(property) {
@@ -190,10 +195,14 @@ define(["../declare", "../lang", "../json", "./DataHandler", "../Jsonpath", "../
         
         _getNumber : function(property) {
         	var text = this._get(property)[0];
-        	if(lang.isArray(text)) {
+        	// if it is a Number
+        	if(typeof text === 'number')
+        		return text;
+        	//if its an array, we return the length of the array
+        	else if(lang.isArray(text))
         		return text.length;
-        	}
-       		return text;
+        	//if its a string or any other data type, we convert to number and return. Invalid data would throw an error here.
+        	else return Number(text);
         },
         
         /**

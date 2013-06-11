@@ -18,9 +18,7 @@
  * 
  */
 define([ "../../../declare", "../../../Endpoint", "../../../xml", "../../../xpath", "../../../connections/ConnectionsConstants",
-         "./ProfileGrid", 
-         "./ColleagueGridRenderer", 
-         "../ViewAllAction" ], 
+         "./ProfileGrid", "./ColleagueGridRenderer", "../ViewAllAction" ], 
         function(declare, Endpoint, xml, xpath, conn, ProfileGrid, ColleagueGridRenderer, ViewAllAction) {
 
     /**
@@ -29,7 +27,13 @@ define([ "../../../declare", "../../../Endpoint", "../../../xml", "../../../xpat
      * @module sbt.connections.controls.profiles.ColleagueGrid
      */
 	var ColleagueGrid = declare(ProfileGrid, {
-    	
+
+		/**
+		 * Flag used to display the View All link, set
+		 * to true to hide this link
+		 */
+        hideViewAll: false,
+        
         /**
          * A view all action, defines default behaviour for when 
          * View All link is selected

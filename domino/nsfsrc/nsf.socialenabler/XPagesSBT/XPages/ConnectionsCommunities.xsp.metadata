@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="85257876005A0DD2" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="40a" sequence="6" unid="C4EED100302ED70A8525791700019D85">
+<created><datetime dst="true">20110925T201738,61-04</datetime></created>
+<modified><datetime dst="true">20111005T143143,58-04</datetime></modified>
+<revised><datetime dst="true">20111005T143143,57-04</datetime></revised>
+<lastaccessed><datetime dst="true">20111005T143143,58-04</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20110925T201739,11-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></updatedby>
+<wassignedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></wassignedby>
+<item name="$Flags"><text>gC~4K</text></item>
+<item name="$TITLE" sign="true"><text>ConnectionsCommunities.xsp</text></item>
+<item name="$DesignerVersion"><text>8.5.1</text></item>
+
+
+
+
+
+
+
+<item name="$FileNames" sign="true"><text>ConnectionsCommunities.xsp</text></item></note>

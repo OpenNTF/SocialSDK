@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.io.StringReader;
+import java.util.List;
 import java.util.Properties;
 
 import javax.servlet.ServletException;
@@ -12,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import nsf.playground.beans.DataAccessBean;
 import nsf.playground.environments.PlaygroundEnvironment;
+import nsf.playground.servlets.PlaygroundToolkitServletFactory;
 
-import com.ibm.commons.runtime.RuntimeConstants;
 import com.ibm.commons.runtime.util.ParameterProcessor;
 import com.ibm.commons.runtime.util.UrlUtil;
 import com.ibm.commons.util.PathUtil;
@@ -22,6 +23,8 @@ import com.ibm.commons.util.io.ReaderInputStream;
 import com.ibm.commons.util.io.json.JsonJavaFactory;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.commons.util.io.json.JsonParser;
+import com.ibm.sbt.playground.extension.JavaScriptPreviewExtension;
+import com.ibm.sbt.playground.extension.PlaygroundExtensionFactory;
 import com.ibm.xsp.context.DojoLibrary;
 import com.ibm.xsp.context.DojoLibraryFactory;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
@@ -29,6 +32,35 @@ import com.ibm.xsp.sbtsdk.servlets.JavaScriptLibraries;
 
 
 public class PreviewJavaScriptHandler extends PreviewHandler {
+	
+	protected static class DominoPlaygroundContext extends JavaScriptPreviewExtension.Context {
+		
+		private PlaygroundEnvironment environment;
+		private Properties properties;
+		private JavaScriptLibraries.JSLibrary jsLibrary;
+		
+		protected DominoPlaygroundContext(PlaygroundEnvironment environment, Properties properties, JavaScriptLibraries.JSLibrary jsLibrary) {
+			this.environment = environment;
+			this.properties = properties; 
+			this.jsLibrary = jsLibrary;
+		}
+		@Override
+		public PlaygroundEnvironment getEnvironment() {
+			return environment;
+		}
+		@Override
+		public Properties getProperties() {
+			return properties;
+		}
+		@Override
+		public String getJavaScriptLibrary() {
+			return jsLibrary.getLibType().toString();
+		}
+		@Override
+		public String getJavaScriptLibraryVersion() {
+			return jsLibrary.getLibVersion();
+		}
+	}
 	
 	private static final String LAST_REQUEST = "javascriptsnippet.lastrequest"; 
 
@@ -107,6 +139,10 @@ public class PreviewJavaScriptHandler extends PreviewHandler {
 			jsLibraryPath = getDefautLibraryPath(serverUrl);
 		}
 		
+		DominoPlaygroundContext pgContext = new DominoPlaygroundContext(env, properties, jsLib);
+		List<JavaScriptPreviewExtension> pgExtensions = (List<JavaScriptPreviewExtension>)(List)PlaygroundExtensionFactory.getExtensions(JavaScriptPreviewExtension.class);
+		
+		
 //		Map m = req.getParameterMap();
 //		for(Object k: m.keySet()) {
 //			Object v = m.get(k);
@@ -124,6 +160,11 @@ public class PreviewJavaScriptHandler extends PreviewHandler {
 		
 		pw.println("<head>");
 		pw.println("  <title>Social Business Playground</title>");
+		
+		// Extension: head starts
+		for(int i=0; i<pgExtensions.size(); i++) {
+			pgExtensions.get(i).headerStart(pgContext,pw);
+		}
 		
 		boolean isDojo = jsLib.getLibType()==JavaScriptLibraries.LibType.DOJO;
 		if(StringUtil.equals(theme, "bootstrap")) {
@@ -282,14 +323,26 @@ public class PreviewJavaScriptHandler extends PreviewHandler {
 		if(debug) {
 			pw.println("  <script type=\"text/javascript\" src=\"/xsp/.ibmxspres/.extlib/firebug/js/firebug-lite.js\"></script>\n");
 		}
+
+		// Extension: head ends
+		for(int i=0; i<pgExtensions.size(); i++) {
+			pgExtensions.get(i).headerEnd(pgContext,pw);
+		}
 		
 		pw.println("</head>");
 		pw.print("<body");
 		if(StringUtil.isNotEmpty(bodyTheme)) {
 			pw.print(" class=\"");
 			pw.print(bodyTheme);
+			pw.println("\"");
 		}
-		pw.println("\">");
+		pw.println(">");
+
+		// Extension: body starts
+		for(int i=0; i<pgExtensions.size(); i++) {
+			pgExtensions.get(i).bodyStart(pgContext,pw);
+		}
+
 		pw.println(html);
 		if(StringUtil.isNotEmpty(js)) {
 			String s =   "<script>\n"
@@ -300,7 +353,13 @@ public class PreviewJavaScriptHandler extends PreviewHandler {
 						+"}\n"
 						+"</script>\n";
 			pw.println(s);
+		}		
+
+		// Extension: body ends
+		for(int i=0; i<pgExtensions.size(); i++) {
+			pgExtensions.get(i).bodyEnd(pgContext,pw);
 		}
+		
 		pw.println("</body>");
 		pw.println("</html>");
 		
@@ -344,6 +403,7 @@ public class PreviewJavaScriptHandler extends PreviewHandler {
 	}
 	
 	private String composeToolkitUrl(String databaseUrl) {
-		return PathUtil.concat(databaseUrl,RuntimeConstants.get().getConstant(RuntimeConstants.LIBRARY_BASEURL),'/');
+		//return PathUtil.concat(databaseUrl,RuntimeConstants.get().getConstant(RuntimeConstants.LIBRARY_BASEURL),'/');
+		return PathUtil.concat(databaseUrl,"xsp"+PlaygroundToolkitServletFactory.LIBRARY_PATHINFO,'/');
 	}
 }

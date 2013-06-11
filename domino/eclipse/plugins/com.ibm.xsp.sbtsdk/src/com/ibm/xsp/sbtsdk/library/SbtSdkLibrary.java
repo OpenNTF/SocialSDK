@@ -20,7 +20,7 @@ import com.ibm.xsp.library.AbstractXspLibrary;
 
 
 /**
- * Bazaar XPages Library
+ * SBT SDK XPages Library
  */
 public class SbtSdkLibrary extends AbstractXspLibrary {
 

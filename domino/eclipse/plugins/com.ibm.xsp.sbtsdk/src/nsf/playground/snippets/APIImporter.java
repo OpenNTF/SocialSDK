@@ -29,7 +29,6 @@ import com.ibm.sbt.playground.assets.apis.APINodeFactory;
 import com.ibm.sbt.playground.vfs.VFSFile;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.RestClient;
-import com.ibm.xsp.FacesExceptionEx;
 
 /**
  * Class for importing API Descriptions.
@@ -145,13 +144,12 @@ public class APIImporter extends AssetImporter {
 		Properties properties = new Properties();
 		// For now, hard coded
 		if(StringUtil.equalsIgnoreCase(product,"domino")) {
-			properties.put("endpoint", "domino");
 			properties.put("basedocurl", "http://www-10.lotus.com/ldd/ddwiki.nsf");
-		} else if(StringUtil.equalsIgnoreCase(product,"smartcloud")) {
-			properties.put("endpoint", "smartcloud");
-		} else {
-			properties.put("endpoint", "connections");
 		}
+//		if(StringUtil.equalsIgnoreCase(product,"smartcloud")) {
+//			product = "connections";
+//		}
+		properties.put("endpoint", product.toLowerCase());
 		StringWriter sw = new StringWriter();
 		properties.store(sw, null);
 		return sw.toString();

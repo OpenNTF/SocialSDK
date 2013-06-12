@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Web
 Bundle-SymbolicName: com.ibm.sbt.web;singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 1.0.0.qualifier
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: com.ibm.sbt.web.SbtWebActivator
 Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0"

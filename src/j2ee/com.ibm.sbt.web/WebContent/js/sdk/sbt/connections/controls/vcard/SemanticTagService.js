@@ -75,6 +75,7 @@ define([ "sbt/Endpoint" ], function(Endpoint) {
         }
 
         var serviceUrl = "/profiles/ibm_semanticTagServlet/javascript/semanticTagService.js?inclDojo=" + inclDojo;
+        dojo.config.proxy = endpoint.proxy.proxyUrl + "/" + endpoint.proxyPath;
         var locale = dojo.config.locale || "en"; 
         endpoint.xhrGet({
             serviceUrl : serviceUrl,
@@ -85,7 +86,9 @@ define([ "sbt/Endpoint" ], function(Endpoint) {
             load : function(response) {
                 SemTagSvcConfig.loading = false;
                 try {
-                    eval(response);
+                    var re = new RegExp(endpoint.baseUrl, "g");
+                    var _response = response.replace(re, dojo.config.proxy);
+                    eval(_response);
                     SemTagSvcConfig.loaded = true;
                 } catch (error) {
                     SemTagSvcConfig.error = error;

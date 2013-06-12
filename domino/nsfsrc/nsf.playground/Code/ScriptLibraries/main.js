@@ -32,7 +32,7 @@ function resize() {
 			return h;
 		}
 		var h = windowHeight();
-		var hd = eltHeight(".lotusBanner")+eltHeight(".lotusTitleBar2")+eltHeight(".lotusTitleBar")+eltHeight(".lotusPlaceBar");
+		var hd = eltHeight("#nav_bar_include")+eltHeight(".lotusBanner")+eltHeight(".lotusTitleBar2")+eltHeight(".lotusTitleBar")+eltHeight(".lotusPlaceBar");
 		var ft = eltHeight(".lotusFooter")+eltHeight(".lotusLegal");
 		dojo.query(".lotusMain").style("height",(h-hd-ft)+"px");
 		//console.log("h="+h+", hd="+hd+", ft="+ft+", result="+(h-hd-ft-25))

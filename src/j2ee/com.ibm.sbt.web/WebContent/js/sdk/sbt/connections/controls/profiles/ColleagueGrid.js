@@ -17,10 +17,9 @@
 /**
  * 
  */
-define([ "../../../declare", "../../../Endpoint", "../../../xml", "../../../xpath", "../../../stringUtil", 
-         "../../../connections/ConnectionsConstants",
+define([ "../../../declare", "../../../Endpoint", "../../../xml", "../../../xpath", "../../../connections/ConnectionsConstants",
          "./ProfileGrid", "./ColleagueGridRenderer", "../ViewAllAction" ], 
-        function(declare, Endpoint, xml, xpath, stringUtil, conn, ProfileGrid, ColleagueGridRenderer, ViewAllAction) {
+        function(declare, Endpoint, xml, xpath, conn, ProfileGrid, ColleagueGridRenderer, ViewAllAction) {
 
     /**
      * @class ColleagueGrid
@@ -70,20 +69,18 @@ define([ "../../../declare", "../../../Endpoint", "../../../xml", "../../../xpat
         addColleagues: function() {
             var targets = arguments.targetEmails || arguments.targetUserids || this.targetEmails || this.targetUserids;
             var id = arguments.email || arguments.userid || this.email || this.userid;
-            if (!id || (!targets || targets.length == 0)) {
+            if (!targets || !id) {
+                this.renderer.renderEmpty(this, this.gridNode);
                 return;
             }
             var endpoint = Endpoint.find(this.endpoint || "connections");
-            var baseUrl = "/profiles/atom/connection.do?connectionType=colleague";
-            if (this._isEmail(id)) {
-                baseUrl += "&sourceEmail=" + encodeURIComponent(id);
+            var baseUrl = null;
+            if (this.targetEmails) {
+                baseUrl = "/profiles/atom/connection.do?connectionType=colleague&sourceEmail=" + 
+                              encodeURIComponent(this.email) + "&targetEmail=";
             } else {
-            	baseUrl += "&sourceUserid=" + encodeURIComponent(id);
-            }
-            if (arguments.targetEmails || this.targetEmails) {
-                baseUrl += "&targetEmail=";
-            } else {
-                baseUrl += "&targetUserid=";
+                baseUrl = "/profiles/atom/connection.do?connectionType=colleague&sourceUserid=" + 
+                              encodeURIComponent(this.userid) + "&targetUserid=";
             }
             var self = this;
             for (var i=0; i<targets.length; i++) {
@@ -96,10 +93,8 @@ define([ "../../../declare", "../../../Endpoint", "../../../xml", "../../../xpat
                         handleAs: "text",
                         load: function(response) {
                             var document = xml.parse(response);
-                            var email = self._getColleagueEmail(document, id);
-                            if (email) {
-                            	self.addProfile(endpoint, email);
-                            }
+                            var email = xpath.selectText(document, "/a:entry/a:contributor/a:email", conn.Namespaces);
+                            self.addProfile(endpoint, email);
                         },
                         error: function(error) {
                             // can ignore this, means user is not a colleague
@@ -109,19 +104,13 @@ define([ "../../../declare", "../../../Endpoint", "../../../xml", "../../../xpat
             }
         },
         
-        /**
-         * @method addProfile
-         * @param endpoint
-         * @param id
-         * @param index
-         */
         addProfile: function(endpoint, id, index) {
             if (!index) {
                 index = 0;
             }
             var self = this;
             var content = {};
-            if (this._isEmail(id)) {
+            if (id.indexOf('@')>=0) {
                 content.email = id;
             } else {
                 content.userid = id;
@@ -159,33 +148,7 @@ define([ "../../../declare", "../../../Endpoint", "../../../xml", "../../../xpat
         },
         
         _constructTargetUrl: function() {
-        },
-        
-        _getColleagueEmail: function(doc, id) {
-        	var userids = this._selectArray(doc, "/a:entry/snx:connection/a:contributor/snx:userid");
-        	var emails = this._selectArray(doc, "/a:entry/snx:connection/a:contributor/a:email");
-        	if (this._isEmail(id) && emails.indexOf(id) >= 0 && emails.length > 1) {
-        		var index = (emails.indexOf(id) == 0) ? 1 : 0;
-                return emails[index];
-            } else if(userids.indexOf(id) >= 0 && userids.length > 1) {
-        		var index = (userids.indexOf(id) == 0) ? 1 : 0;
-                return userids[index];
-            }
-        },
-        
-        _selectArray : function(doc, expr) {
-            var nodes = xpath.selectNodes(doc, expr, conn.Namespaces);
-            var ret = [];
-            if (nodes) {
-                for ( var i = 0; i < nodes.length; i++) {
-                    ret.push(stringUtil.trim(nodes[i].text || nodes[i].textContent));
-                }
-            }
-            return ret;
-        },
-        
-        _isEmail: function(id) {
-        	return id && id.indexOf('@') >= 0;
+            
         }
         
     });

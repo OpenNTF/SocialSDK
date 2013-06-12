@@ -133,7 +133,7 @@ public abstract class DataAccessBean {
 			
 			this.envNames = allEnvs.toArray(new String[allEnvs.size()]);
 		} catch(NotesException ex) {
-			ex.printStackTrace();
+			throw new IOException(ex);
 		}
 	}
 	

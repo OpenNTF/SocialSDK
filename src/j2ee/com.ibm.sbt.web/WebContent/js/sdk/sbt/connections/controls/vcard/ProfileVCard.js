@@ -17,16 +17,18 @@
 /**
  * 
  */
-define(["sbt/widget/_TemplatedWidget", 
-        "sbt/lang",
-        "sbt/connections/controls/vcard/SemanticTagService",
-        "sbt/text!sbt/connections/controls/vcard/templates/ProfileVCard.html"], 
-        function(_TemplatedWidget, lang, SemanticTagService, template) {
+define(["../../../declare",
+        "../../../dom",
+        "../../../widget/_TemplatedWidget", 
+        "../../../lang",
+        "../../../connections/controls/vcard/SemanticTagService",
+        "../../../text!sbt/connections/controls/vcard/templates/ProfileVCard.html"], 
+        function(declare, dom, _TemplatedWidget, lang, SemanticTagService, template) {
 
     /**
      * @class sbt.controls.vcard.connections.ProfileVCard
      */
-    dojo.declare("sbt.connections.controls.vcard.ProfileVCard", [ _TemplatedWidget ], {
+    declare("sbt.connections.controls.vcard.ProfileVCard", [ _TemplatedWidget ], {
 
         /**
          * The html template of the vcard.
@@ -81,14 +83,14 @@ define(["sbt/widget/_TemplatedWidget",
          * @param args
          */
         constructor: function(args) {
-        	dojo.mixin(args);
+        	lang.mixin(args);
         },
         
         /**
          * @method postCreate
          */
         postCreate: function() {
-        	dojo.attr(this.idNode, "class", (this.userId.indexOf("@") >= 0)  ? "email" : "x-lconn-userid");
+        	dom.setAttr(this.idNode, "class", (this.userId.indexOf("@") >= 0)  ? "email" : "x-lconn-userid");
         	
         	this.inherited(arguments);
         	

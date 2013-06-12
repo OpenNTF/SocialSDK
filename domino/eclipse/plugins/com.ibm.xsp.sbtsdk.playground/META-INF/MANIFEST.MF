@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Domino Playground
+Bundle-SymbolicName: com.ibm.xsp.sbtsdk.playground
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: IBM

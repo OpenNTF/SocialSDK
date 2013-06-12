@@ -118,6 +118,12 @@
 			compress="true"/>
 	        <delete dir="${project.target.directory}/com.ibm.sbt.domino/com.ibm.sbt.domino.updatesite/site.zip"/>
 
+          <!-- Create Update Site -->
+          <zip basedir="${project.target.directory}/com.ibm.sbt.domino/com.ibm.sbt.domino.playground.updatesite/site" 
+          destfile="${project.target.directory}/com.ibm.sbt.domino/com.ibm.sbt.domino.playground.updatesite/com.ibm.sbt.domino.playground.updatesite.zip" 
+          compress="true"/>
+          <delete dir="${project.target.directory}/com.ibm.sbt.domino/com.ibm.sbt.domino.playground.updatesite/site.zip"/>
+
 	        <!-- Create a version file -->
 	        <echo file="${project.target.directory}/doc/version.txt">version: ${project.version}.${buildLabel}</echo>
 

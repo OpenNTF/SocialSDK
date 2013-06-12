@@ -22,8 +22,7 @@ define(['require', 'dojo/_base/declare', 'dojo/query', 'acme/widgets/FlightRowWi
                             try {
                             var grid = new ColleagueGrid({
                                 type: "dynamic",
-                                hideViewAll: true,
-                                rendererArgs: { template: templateUtils.getTemplateString("#flightColleagues") },
+                                rendererArgs: { hideViewAll: true, template: templateUtils.getTemplateString("#flightColleagues") },
                                 email: login.getUserEmail(),
                                 targetEmails: users
                             });

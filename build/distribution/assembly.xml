@@ -306,6 +306,13 @@
         <include>com.ibm.sbt.domino.updatesite.zip</include>
       </includes>
     </fileSet>
+      <fileSet>
+    <directory>${build.target}/com.ibm.sbt.domino/com.ibm.sbt.domino.playground.updatesite</directory>
+      <outputDirectory>sbtsdk/redist/domino</outputDirectory>
+      <includes>
+        <include>com.ibm.sbt.domino.playground.updatesite.zip</include>
+      </includes>
+    </fileSet>
 	<!--
     <fileSet>
       <directory>../../test/j2ee</directory>

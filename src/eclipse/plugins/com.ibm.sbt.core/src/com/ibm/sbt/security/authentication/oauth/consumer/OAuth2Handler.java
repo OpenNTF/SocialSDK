@@ -52,7 +52,7 @@ import com.ibm.commons.util.profiler.ProfilerAggregator;
 import com.ibm.commons.util.profiler.ProfilerType;
 import com.ibm.sbt.core.configuration.Configuration;
 import com.ibm.sbt.security.authentication.oauth.OAuthException;
-import com.ibm.sbt.security.authentication.oauth.consumer.oauth_10a.servlet.OA2Callback;
+import com.ibm.sbt.security.authentication.oauth.consumer.servlet.OA2Callback;
 import com.ibm.sbt.security.authentication.oauth.consumer.store.OATokenStoreFactory;
 import com.ibm.sbt.security.authentication.oauth.consumer.store.TokenStore;
 import com.ibm.sbt.service.util.ServiceUtil;

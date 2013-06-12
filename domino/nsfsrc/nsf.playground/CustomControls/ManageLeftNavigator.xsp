@@ -62,6 +62,8 @@
 				<xe:pageTreeNode page="ManageAPIsByAuthor" label="APIs By Author"
 					selection="/Manage/APIsByAuthor">
 				</xe:pageTreeNode>
+				<xe:pageTreeNode page="ApiDocumentation" label="Edit API Documentation">
+				</xe:pageTreeNode>
 				<xe:pageTreeNode page="ManageImportAPIs" label="Import API Descriptions"
 					selection="/Manage/ImportAPIs">
 				</xe:pageTreeNode>

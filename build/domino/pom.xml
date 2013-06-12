@@ -20,10 +20,13 @@
     <module>../../domino/eclipse/plugins/com.ibm.sbt.core</module>
     <module>../../domino/eclipse/plugins/com.ibm.sbt.playground</module>
     <module>../../domino/eclipse/plugins/com.ibm.xsp.sbtsdk</module>
+    <module>../../domino/eclipse/plugins/com.ibm.xsp.sbtsdk.playground</module>
     <module>../../domino/eclipse/plugins/com.ibm.xsp.extlibx.sbt</module>
     <!-- eclipse feature projects -->
     <module>../../domino/eclipse/features/com.ibm.sbt.domino.feature</module>
+    <module>../../domino/eclipse/features/com.ibm.sbt.domino.playground.feature</module>
     <!-- eclipse update sites -->
     <module>../../domino/eclipse/updatesites/com.ibm.sbt.domino.updatesite</module>
+    <module>../../domino/eclipse/updatesites/com.ibm.sbt.domino.playground.updatesite</module>
   </modules>
 </project>

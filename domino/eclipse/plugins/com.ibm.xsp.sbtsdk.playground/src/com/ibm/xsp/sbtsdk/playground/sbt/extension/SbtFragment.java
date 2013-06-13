@@ -14,9 +14,9 @@
  * permissions and limitations under the License.
  */
 
-package com.ibm.xsp.sbtsdk.playground.sbt.fragment;
+package com.ibm.xsp.sbtsdk.playground.sbt.extension;
 
-import nsf.playground.library.PlaygroundFragment;
+import nsf.playground.extension.PlaygroundFragment;
 
 
 /**

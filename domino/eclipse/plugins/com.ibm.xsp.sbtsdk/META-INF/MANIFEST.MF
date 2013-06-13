@@ -31,12 +31,4 @@ Export-Package: com.ibm.xsp.sbtsdk,
  com.ibm.xsp.sbtsdk.runtime,
  com.ibm.xsp.sbtsdk.services.mail,
  com.ibm.xsp.sbtsdk.servlets,
- com.ibm.xsp.sbtsdk.util,
- nsf.playground.beans,
- nsf.playground.environments,
- nsf.playground.jobs,
- nsf.playground.jsp,
- nsf.playground.library,
- nsf.playground.playground,
- nsf.playground.servlets,
- nsf.playground.snippets
+ com.ibm.xsp.sbtsdk.util

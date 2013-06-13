@@ -60,13 +60,4 @@
          <service type="com.ibm.sbt.core.mimeemailfactory" class="com.ibm.xsp.sbtsdk.services.mail.DominoMimeEmailFactory" />
    	</extension>
 
-
-	<!--
-		PLAYGROUND SPECIFIC
-	-->
-
-   	<extension point="com.ibm.commons.Extension">
-         <service type="com.ibm.xsp.Library" class="nsf.playground.library.PlaygroundLibrary" />
-   	</extension>
-
 </plugin>

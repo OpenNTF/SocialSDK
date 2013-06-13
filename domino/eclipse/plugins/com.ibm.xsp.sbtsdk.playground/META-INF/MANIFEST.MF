@@ -3,6 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Domino Playground
 Bundle-SymbolicName: com.ibm.xsp.sbtsdk.playground;singleton:=true
 Bundle-Version: 1.0.0.qualifier
+Eclipse-ExtensibleAPI: true 
 Bundle-Vendor: IBM
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.equinox.http.registry,
@@ -25,9 +26,10 @@ Require-Bundle: org.eclipse.core.runtime,
  com.ibm.pvc.servlet.jsp;bundle-version="2.1.0",
  com.ibm.xsp.sbtsdk;bundle-version="1.0.0"
 Export-Package: com.ibm.xsp.sbtsdk.playground.sbt,
- com.ibm.xsp.sbtsdk.playground.sbt.fragment,
+ com.ibm.xsp.sbtsdk.playground.sbt.extension,
  nsf.playground.beans,
  nsf.playground.environments,
+ nsf.playground.extension,
  nsf.playground.jobs,
  nsf.playground.json,
  nsf.playground.jsp,
@@ -35,3 +37,4 @@ Export-Package: com.ibm.xsp.sbtsdk.playground.sbt,
  nsf.playground.playground,
  nsf.playground.servlets,
  nsf.playground.snippets
+Bundle-ActivationPolicy: lazy

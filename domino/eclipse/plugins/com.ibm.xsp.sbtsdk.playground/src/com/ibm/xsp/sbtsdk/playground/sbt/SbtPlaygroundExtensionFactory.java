@@ -15,10 +15,14 @@
  */
 package com.ibm.xsp.sbtsdk.playground.sbt;
 
-import nsf.playground.library.PlaygroundFragment;
+import nsf.playground.extension.Endpoints;
+import nsf.playground.extension.ImportOptions;
+import nsf.playground.extension.PlaygroundFragment;
 
 import com.ibm.sbt.playground.extension.PlaygroundExtensionFactory;
-import com.ibm.xsp.sbtsdk.playground.sbt.fragment.SbtFragment;
+import com.ibm.xsp.sbtsdk.playground.sbt.extension.SbtEndpoints;
+import com.ibm.xsp.sbtsdk.playground.sbt.extension.SbtFragment;
+import com.ibm.xsp.sbtsdk.playground.sbt.extension.SbtImportOptions;
 
 
 /**
@@ -34,6 +38,12 @@ public class SbtPlaygroundExtensionFactory extends PlaygroundExtensionFactory {
 	public Object getExtension(Class<?> clazz) {
 		if(clazz==PlaygroundFragment.class) {
 			return SbtFragment.instance;
+		}
+		if(clazz==ImportOptions.class) {
+			return SbtImportOptions.instance;
+		}
+		if(clazz==Endpoints.class) {
+			return SbtEndpoints.instance;
 		}
 		return null;
 	}

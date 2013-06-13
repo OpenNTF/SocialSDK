@@ -17,14 +17,29 @@
 package com.ibm.xsp.sbtsdk.servlets;
 
 import com.ibm.commons.runtime.RuntimeConstants;
+import com.ibm.commons.util.StringUtil;
+import com.ibm.designer.runtime.Application;
 import com.ibm.xsp.extlib.servlet.ServletFactory;
 
 /**
  * Service factory for the proxy servlet.
+ * 
+ * The actual service to create can be parameterized using a property, defined in the database.
  */
 public class ProxyServletFactory extends ServletFactory {
+	
+	private static String findServletClassName() {
+		Application app = Application.getRuntimeApplicationObject();
+		if(app!=null) {
+			String s = app.getProperty("sbt.servlet.services");
+			if(StringUtil.isNotEmpty(s)) {
+				return s;
+			}
+		}
+		return ToolkitServlet.class.getName();
+	}
 
 	public ProxyServletFactory() {
-		super(RuntimeConstants.AbstractNotesDominoConstants.SERVICE_PATHINFO,DominoServiceServlet.class.getName(),"SBT Proxy Servlet");
+		super(RuntimeConstants.AbstractNotesDominoConstants.SERVICE_PATHINFO,findServletClassName(),"SBT Proxy Servlet");
 	}
  }

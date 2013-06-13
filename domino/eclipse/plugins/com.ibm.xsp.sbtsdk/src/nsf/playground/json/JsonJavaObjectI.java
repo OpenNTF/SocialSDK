@@ -32,9 +32,23 @@ import com.ibm.commons.util.io.json.JsonJavaObject;
  */
 public class JsonJavaObjectI extends JsonJavaObject {
 
+    public static final JsonJavaFactory instanceExI = JsonJavaFactory.instanceEx2;
+	public JsonJavaObjectI() {
+	}
+
+	@SuppressWarnings("unchecked")
+	public JsonJavaObjectI(Map<String,Object> props) {
+		putAll(props);
+	}
+
+	public JsonJavaObjectI(Object...properties) {
+		super(properties);
+	}
+	
 	/**
 	 * Singleton instance using a case insentive JavaObject.
 	 */
+/*    
     public static final JsonJavaFactory instanceExI = new JsonJavaFactory() {
         public Object createObject(Object parent, String propertyName) {
             return new JsonJavaObjectI();
@@ -49,7 +63,7 @@ public class JsonJavaObjectI extends JsonJavaObject {
             return new JsonJavaArray(values);
         }
     };
-	
+
 	private static final long serialVersionUID = 1L;
 	
 	public JsonJavaObjectI() {
@@ -112,4 +126,5 @@ public class JsonJavaObjectI extends JsonJavaObject {
 	private static String convertKey(String o) {
 		return ((String)o).toLowerCase();
 	}
+*/	
 }

@@ -14,29 +14,31 @@
  * permissions and limitations under the License.
  */
 
-package nsf.playground.library;
+package com.ibm.xsp.sbtsdk.playground.sbt.fragment;
+
+import nsf.playground.library.PlaygroundFragment;
 
 
 /**
- * Playground library fragment.
  * 
- * @author priand
  */
-public abstract class PlaygroundFragment {
+public class SbtFragment extends PlaygroundFragment {
+    
+	public static final SbtFragment instance = new SbtFragment();
 	
-	public String[] getXspConfigFiles(String[] files) {
-		return files;
-	}
-	
-	public String[] getFacesConfigFiles(String[] files) {
-		return files;
-	}
-	
-    public static String[] concat(String[] s1, String[] s2) {
-    	String[] s = new String[s1.length+s2.length];
-    	System.arraycopy(s1, 0, s, 0, s1.length);
-    	System.arraycopy(s2, 0, s, s1.length, s2.length);
-    	return s;
+    public SbtFragment() {
     }
-	
+
+    @Override
+    public String[] getXspConfigFiles(String[] files) {
+        return concat(files, new String[] {
+        });
+    }
+    
+    @Override
+    public String[] getFacesConfigFiles(String[] files) {
+        return concat(files, new String[] {
+       		"/com/ibm/xsp/sbtsdk/playground/sbt/config/playground-faces-config.xml"
+        });
+    }
 }

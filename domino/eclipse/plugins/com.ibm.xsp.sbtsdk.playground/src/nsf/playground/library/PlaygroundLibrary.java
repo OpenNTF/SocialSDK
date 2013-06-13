@@ -16,11 +16,10 @@
 
 package nsf.playground.library;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import com.ibm.commons.extension.ExtensionManager;
+import com.ibm.sbt.playground.extension.PlaygroundExtensionFactory;
 import com.ibm.xsp.library.AbstractXspLibrary;
 
 
@@ -79,20 +78,14 @@ public class PlaygroundLibrary extends AbstractXspLibrary {
     }
     
     private List<PlaygroundFragment> getPlaygroundFragments() {
+    	// We cannot use the application yet as it is not initialized...
+        //return (List<PlaygroundFragment>)PlaygroundExtensionFactory.getExtensions(PlaygroundFragment.class);
     	if(fragments==null) {
-            List<PlaygroundFragment> frags = ExtensionManager.findServices(null,
-            		PlaygroundFragment.class.getClassLoader(),
-                    PlaygroundFragment.EXTENSION_NAME, 
-                    PlaygroundFragment.class);
-            Collections.sort(frags, new Comparator<PlaygroundFragment>() {
-                @Override
-				public int compare(PlaygroundFragment o1, PlaygroundFragment o2) {
-                    String className1 = null == o1? "null":o1.getClass().getName(); //$NON-NLS-1$
-                    String className2 = null == o2? "null":o2.getClass().getName(); //$NON-NLS-1$
-                    return className1.compareTo(className2);
-                }
-            });
-            fragments = frags;
+    		List<PlaygroundExtensionFactory> factories = ExtensionManager.findServices(null,
+    			PlaygroundExtensionFactory.class.getClassLoader(),
+        		PlaygroundExtensionFactory.PLAYGROUND_EXTENSION, 
+        		PlaygroundExtensionFactory.class);
+    		return PlaygroundExtensionFactory.getExtensions(factories, PlaygroundFragment.class);
     	}
 		return fragments;
 	}

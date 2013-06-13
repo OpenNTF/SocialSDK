@@ -6,4 +6,10 @@
          <service type="com.ibm.xsp.Library" class="nsf.playground.library.PlaygroundLibrary" />
    	</extension>
 
+    <extension point="com.ibm.commons.Extension">
+         <service
+         	type="com.ibm.sbt.playground.extension"
+         	class="com.ibm.xsp.sbtsdk.playground.sbt.SbtPlaygroundExtensionFactory" />
+    </extension>
+
 </plugin>

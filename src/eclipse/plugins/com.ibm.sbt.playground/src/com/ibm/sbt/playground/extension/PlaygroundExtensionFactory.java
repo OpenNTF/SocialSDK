@@ -16,6 +16,7 @@
 package com.ibm.sbt.playground.extension;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.ibm.commons.runtime.Application;
@@ -37,13 +38,23 @@ public class PlaygroundExtensionFactory {
 		return (List<PlaygroundExtensionFactory>)(List)app.findServices(PLAYGROUND_EXTENSION);
 	}
 
-	public static List<Object> getExtensions(Class<?> clazz) {
-		ArrayList<Object> extensions = new ArrayList<Object>();
+	public static<T> List<T> getExtensions(Class<T> clazz) {
 		List<PlaygroundExtensionFactory> factories = getFactories();
-		for(PlaygroundExtensionFactory f: factories) {
-			extensions.add((Object)f.getExtension(clazz));
+		return getExtensions(factories, clazz);
+	}
+	@SuppressWarnings("unchecked")
+	public static<T> List<T> getExtensions(List<PlaygroundExtensionFactory> factories, Class<T> clazz) {
+		ArrayList<T> extensions = new ArrayList<T>();
+		if(factories!=null) {
+			for(PlaygroundExtensionFactory f: factories) {
+				T ext = (T)f.getExtension(clazz);
+				if(ext!=null) {
+					extensions.add(ext);
+				}
+			}
+			return extensions;
 		}
-		return extensions;
+		return Collections.emptyList();
 	}
 	
 	public PlaygroundExtensionFactory() {

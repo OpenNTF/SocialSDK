@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-package com.ibm.sbt.security.authentication.oauth.consumer.oauth_10a.servlet;
+package com.ibm.sbt.security.authentication.oauth.consumer.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;

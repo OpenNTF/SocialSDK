@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- © Copyright IBM Corp. 2010                                          -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     --> 
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   --> 
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        --> 
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<faces-config>
+
+  <!--  SmartCloud OAuth 1.0 -->
+  <managed-bean>
+    <managed-bean-name>smartcloud</managed-bean-name>
+    <managed-bean-class>
+			com.ibm.sbt.services.endpoints.SmartCloudOAuthEndpoint
+		</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+    <!-- Trust the connection -->
+    <managed-property>
+      <property-name>forceTrustSSLCertificate
+			</property-name>
+      <value>true</value>
+    </managed-property>
+    <managed-property>
+      <property-name>signatureMethod</property-name>
+      <!-- <value>HMAC-SHA1</value> -->
+      <value>PLAINTEXT</value>
+    </managed-property>
+    <!-- Access to the token store -->
+    <managed-property>
+      <property-name>serviceName</property-name>
+      <value>smartcloud</value>
+    </managed-property>
+    <managed-property>
+      <property-name>appId</property-name>
+      <value>SBTPlayground</value>
+    </managed-property>
+  </managed-bean>
+  
+  <!--  SmartCloud OAuth 2.0 -->
+  <managed-bean>
+    <managed-bean-name>smartcloudOA2</managed-bean-name>
+    <managed-bean-class>
+			com.ibm.sbt.services.endpoints.SmartCloudOAuth2Endpoint
+		</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+    <!-- Trust the connection -->
+    <managed-property>
+      <property-name>forceTrustSSLCertificate
+			</property-name>
+      <value>true</value>
+    </managed-property>
+    <!-- Access to the token store -->
+    <managed-property>
+      <property-name>serviceName</property-name>
+      <value>smartcloudOA2</value>
+    </managed-property>
+    <managed-property>
+      <property-name>appId</property-name>
+      <value>SBTPlayground</value>
+    </managed-property>
+  </managed-bean>
+  
+  <!-- Connections -->
+  <managed-bean>
+    <managed-bean-name>connections</managed-bean-name>
+    <managed-bean-class>
+			com.ibm.sbt.services.endpoints.ConnectionsBasicEndpoint
+		</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+    <managed-property>
+      <property-name>authenticationService
+			</property-name>
+      <value>communities/service/atom/communities/my
+			</value>
+    </managed-property>
+    <managed-property>
+      <property-name>authenticationPage</property-name>
+      <value>/xsp/.ibmxspres/.sbtsdk/loginForm.html?endpoint=connections
+			</value>
+    </managed-property>
+    <!-- Trust the connection -->
+    <managed-property>
+      <property-name>forceTrustSSLCertificate
+			</property-name>
+      <value>true</value>
+    </managed-property>
+  </managed-bean>
+  
+  <!-- Connections OAuth 2.0 -->
+  <managed-bean>
+    <managed-bean-name>connectionsOA2</managed-bean-name>
+    <managed-bean-class>
+			com.ibm.sbt.services.endpoints.ConnectionsOAuth2Endpoint
+		</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+    <!-- Trust the connection -->
+    <managed-property>
+      <property-name>forceTrustSSLCertificate
+			</property-name>
+      <value>true</value>
+    </managed-property>
+    <!-- Access to the token store -->
+    <managed-property>
+      <property-name>serviceName</property-name>
+      <value>connectionsOA2</value>
+    </managed-property>
+    <managed-property>
+      <property-name>appId</property-name>
+      <value>SBTPlayground</value>
+    </managed-property>
+  </managed-bean>
+  
+  <!-- Domino -->
+  <managed-bean>
+    <managed-bean-name>domino</managed-bean-name>
+    <managed-bean-class>
+			com.ibm.sbt.services.endpoints.DominoBasicEndpoint
+		</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+    <!-- Trust the connection -->
+    <managed-property>
+      <property-name>forceTrustSSLCertificate
+			</property-name>
+      <value>true</value>
+    </managed-property>
+    <managed-property>
+      <property-name>user
+			</property-name>
+      <value>fadams</value>
+    </managed-property>
+    <managed-property>
+      <property-name>password
+			</property-name>
+      <value>passw0rd</value>
+    </managed-property>
+  </managed-bean>
+  
+  <!-- Twitter -->
+  <managed-bean>
+    <managed-bean-name>twitter</managed-bean-name>
+    <managed-bean-class>com.ibm.sbt.services.endpoints.OAuthEndpoint
+		</managed-bean-class>
+    <managed-bean-scope>application</managed-bean-scope>
+    <!-- Endpoint URL -->
+    <managed-property>
+      <property-name>url</property-name>
+      <value>https://api.twitter.com</value>
+    </managed-property>
+    <!-- Trust the connection -->
+    <managed-property>
+      <property-name>forceTrustSSLCertificate
+			</property-name>
+      <value>true</value>
+    </managed-property>
+    <!--
+			Access Token obtained from the Twitter Application. This is required
+			for authorizing the API calls
+		-->
+    <!--
+			<managed-property> <property-name>applicationAccessToken
+			</property-name> <value>%{twitter.applicationAccessToken} </value>
+			</managed-property>
+		-->
+    <managed-property>
+      <property-name>requestTokenURL</property-name>
+      <value>https://api.twitter.com/oauth/request_token
+			</value>
+    </managed-property>
+    <managed-property>
+      <property-name>authorizationURL</property-name>
+      <value>https://api.twitter.com/oauth/authorize
+			</value>
+    </managed-property>
+    <managed-property>
+      <property-name>accessTokenURL</property-name>
+      <value>https://api.twitter.com/oauth/access_token
+			</value>
+    </managed-property>
+    <managed-property>
+      <property-name>signatureMethod</property-name>
+      <value>HMAC-SHA1</value>
+    </managed-property>
+    <!-- Access to the token store -->
+    <managed-property>
+      <property-name>serviceName</property-name>
+      <value>Twitter</value>
+    </managed-property>
+    <managed-property>
+      <property-name>appId</property-name>
+      <value>XPagesSBT</value>
+    </managed-property>
+  </managed-bean>
+
+</faces-config>

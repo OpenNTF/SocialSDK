@@ -1,23 +1,5 @@
 {
 	"airports" : [{
-		"city": "Dublin",
-		"state": "Dublin",
-		"code" : "DUB"
-		
-	},
-	{
-		"city": "London/Heathrow",
-		"state": "London",
-		"code" : "LHR"
-		
-	},
-	{
-		"city": "London/Gatwick",
-		"state": "London",
-		"code" : "LGW"
-		
-	},
-	{
 		"city": "Atlanta",
 		"state": "Georgia",
 		"code" : "ATL"

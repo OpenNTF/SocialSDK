@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import nsf.playground.beans.DataAccessBean;
 import nsf.playground.environments.PlaygroundEnvironment;
-import nsf.playground.servlets.PlaygroundToolkitServletFactory;
 
+import com.ibm.commons.runtime.RuntimeConstants;
 import com.ibm.commons.runtime.util.ParameterProcessor;
 import com.ibm.commons.runtime.util.UrlUtil;
 import com.ibm.commons.util.PathUtil;
@@ -403,7 +403,7 @@ public class PreviewJavaScriptHandler extends PreviewHandler {
 	}
 	
 	private String composeToolkitUrl(String databaseUrl) {
-		//return PathUtil.concat(databaseUrl,RuntimeConstants.get().getConstant(RuntimeConstants.LIBRARY_BASEURL),'/');
-		return PathUtil.concat(databaseUrl,"xsp"+PlaygroundToolkitServletFactory.LIBRARY_PATHINFO,'/');
+		return PathUtil.concat(databaseUrl,RuntimeConstants.get().getConstant(RuntimeConstants.LIBRARY_BASEURL),'/');
+		//return PathUtil.concat(databaseUrl,"xsp"+PlaygroundToolkitServletFactory.LIBRARY_PATHINFO,'/');
 	}
 }

@@ -24,7 +24,7 @@ define([ "../../../declare", "../../../Endpoint", "dojo/_base/config"], function
      * 
      * @class sbt.controls.vcard.connections.SemanticTagService
      */
-    var SemanticTagService = declare("sbt.connections.controls.vcard.SemanticTagService", null, {
+    var SemanticTagService = declare(null, {
     });
 
     /**
@@ -76,7 +76,8 @@ define([ "../../../declare", "../../../Endpoint", "dojo/_base/config"], function
         }
 
         var serviceUrl = "/profiles/ibm_semanticTagServlet/javascript/semanticTagService.js?inclDojo=" + inclDojo;
-        window.SemTagSvcConfig = SemTagSvcConfig;
+        
+        dojoConfig.proxy = proxy;
         var locale = dojoConfig.locale || "en"; 
         endpoint.xhrGet({
             serviceUrl : serviceUrl,

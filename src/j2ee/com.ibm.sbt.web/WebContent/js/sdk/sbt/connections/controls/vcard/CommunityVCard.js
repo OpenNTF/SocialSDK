@@ -28,7 +28,7 @@ define(["../../../declare",
     /**
      * @class sbt.controls.CommunityVCard
      */
-    declare("sbt.connections.controls.vcard.CommunityVCard", [ _TemplatedWidget ], {
+    var communityVCard = declare([ _TemplatedWidget ], {
 
         /**
          * The html template of the vcard.
@@ -75,5 +75,5 @@ define(["../../../declare",
         
     });
     
-    return sbt.connections.controls.vcard.CommunityVCard;
+    return communityVCard;
 });

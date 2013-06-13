@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2010
+ * © Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -13,30 +13,28 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
+package com.ibm.xsp.sbtsdk.playground.sbt;
 
-package nsf.playground.library;
+import nsf.playground.library.PlaygroundFragment;
+
+import com.ibm.sbt.playground.extension.PlaygroundExtensionFactory;
+import com.ibm.xsp.sbtsdk.playground.sbt.fragment.SbtFragment;
 
 
 /**
- * Playground library fragment.
+ * Playground extension factory for the Social Business APIs.
  * 
  * @author priand
  */
-public abstract class PlaygroundFragment {
+public class SbtPlaygroundExtensionFactory extends PlaygroundExtensionFactory {
 	
-	public String[] getXspConfigFiles(String[] files) {
-		return files;
+	public SbtPlaygroundExtensionFactory() {
 	}
-	
-	public String[] getFacesConfigFiles(String[] files) {
-		return files;
+
+	public Object getExtension(Class<?> clazz) {
+		if(clazz==PlaygroundFragment.class) {
+			return SbtFragment.instance;
+		}
+		return null;
 	}
-	
-    public static String[] concat(String[] s1, String[] s2) {
-    	String[] s = new String[s1.length+s2.length];
-    	System.arraycopy(s1, 0, s, 0, s1.length);
-    	System.arraycopy(s2, 0, s, s1.length, s2.length);
-    	return s;
-    }
-	
 }

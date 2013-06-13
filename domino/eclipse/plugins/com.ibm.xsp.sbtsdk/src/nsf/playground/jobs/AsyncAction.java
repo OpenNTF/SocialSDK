@@ -90,7 +90,7 @@ public abstract class AsyncAction {
 	public static synchronized boolean cancel(String actionId) {
 		AsyncAction action = getActions().get(actionId);
 		if(action!=null) {
-			action.cancel = true;
+			action.cancelAction();
 			return true;
 		}
 		return false;
@@ -118,7 +118,7 @@ public abstract class AsyncAction {
             protected IStatus run(Session session) throws NotesException {
                 //testSecurity("c:\\threadexec2.txt");
             	action.running = true;
-            	action.cancel = false;
+            	action.cancelled = false;
             	action.runCount++;
             	try {
                 	action.run(session,parameters);
@@ -148,13 +148,12 @@ public abstract class AsyncAction {
 					o.put("exists", FBSBoolean.TRUE);
 					o.put("running", FBSUtility.wrap(action.isRunning()));
 					o.put("runCount", FBSUtility.wrap(action.getRunCount()));
-					o.put("newStatus", FBSUtility.wrap(action.newStatus));
+					o.put("statusTs", FBSUtility.wrap(action.getStatusTs()));
 					o.put("cancelled", FBSUtility.wrap(action.isCancelled()));
 					o.put("label", FBSUtility.wrap(action.getActionLabel()));
 					o.put("taskLabel", FBSUtility.wrap(action.getTaskLabel()));
 					o.put("taskCompletion", FBSUtility.wrap(action.getTaskCompletion()));
 					o.put("fullCompletion", FBSUtility.wrap(action.getTotalCompletion()));
-					action.newStatus = false;
 					return o;
 				}
 			} else {
@@ -163,7 +162,7 @@ public abstract class AsyncAction {
 				o.put("running", FBSBoolean.FALSE);
 				o.put("runCount", FBSNumber.Zero);
 				o.put("cancelled", FBSBoolean.FALSE);
-				o.put("newStatus", FBSBoolean.FALSE);
+				o.put("statusTs", FBSNumber.Zero);
 				o.put("label", FBSString.emptyString);
 				o.put("taskLabel", FBSString.emptyString);
 				o.put("taskCompletion", FBSNumber.Zero);
@@ -196,12 +195,12 @@ public abstract class AsyncAction {
 	};
 	
 	private boolean running;
-	private boolean cancel;
+	private boolean cancelled;
     private String task;
 	private int taskCompletion;
 	private int completion;
 	private int runCount;
-	private boolean newStatus;
+	private long statusTs;
 	
 	public AsyncAction() {
 	}
@@ -209,7 +208,17 @@ public abstract class AsyncAction {
 		return running;
 	}
 	public boolean isCancelled() {
-		return cancel;
+		return cancelled;
+	}
+	public long getStatusTs() {
+		return statusTs;
+	}
+	public void cancelAction() {
+		this.cancelled = true;
+		this.completion = 100;
+		this.taskCompletion = 0;	
+		this.task = "Action cancelled by user";
+		this.statusTs = System.currentTimeMillis();
 	}
 	public String getTaskLabel() {
 		return task;
@@ -224,24 +233,32 @@ public abstract class AsyncAction {
 		return runCount;
 	}
 	public synchronized void updateTask(String msg, Object...params) {
-		this.task = StringUtil.format(msg,params);
-		this.taskCompletion = 0;	
-		this.newStatus = true;
+		if(!cancelled) {
+			this.task = StringUtil.format(msg,params);
+			this.taskCompletion = 0;	
+			this.statusTs = System.currentTimeMillis();
+		}
 	}
 	public synchronized void updateCompletion(int task, int completion) {
-		this.taskCompletion = task;
-		this.completion = completion;
-		this.newStatus = true;
+		if(!cancelled) {
+			this.taskCompletion = task;
+			this.completion = completion;
+			this.statusTs = System.currentTimeMillis();
+		}
 	}
 	public synchronized void updateException(Throwable t) {
 		this.task = t.getMessage();
+		this.completion = 100;
 		this.taskCompletion = 0;	
-		this.newStatus = true;
+		this.cancelled = true;
+		this.statusTs = System.currentTimeMillis();
 	}
 	public synchronized void updateException(Throwable t, String msg, Object...params) {
 		this.task = StringUtil.format(msg,params)+"\n"+t.getMessage();
+		this.completion = 100;
 		this.taskCompletion = 0;	
-		this.newStatus = true;
+		this.cancelled = true;
+		this.statusTs = System.currentTimeMillis();
 	}
 
     // Helpers...

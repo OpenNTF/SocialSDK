@@ -78,7 +78,15 @@ define(["../declare", "../lang", "../json", "./DataHandler", "../Jsonpath", "../
          * @returns
          */
         getAsNumber : function(property) {
-            return null;            
+        	this._validateProperty(property, "getAsNumber");
+        	if (this._values) {
+                if (!this._values.hasOwnProperty(property)) {
+                    this._values[property] = this._getNumber(property); 
+                }
+                return this._values[property];
+            } else {
+                return _getNumber(property);
+            }
         },
 
         /**
@@ -86,7 +94,15 @@ define(["../declare", "../lang", "../json", "./DataHandler", "../Jsonpath", "../
          * @returns
          */
         getAsDate : function(property) {
-            return null;            
+        	this._validateProperty(property, "getAsDate");
+        	if (this._values) {
+                if (!this._values.hasOwnProperty(property)) {
+                    this._values[property] = this._getDate(property); 
+                }
+                return this._values[property];
+            } else {
+                return _getDate(property);
+            }
         },
 
         /**
@@ -94,7 +110,15 @@ define(["../declare", "../lang", "../json", "./DataHandler", "../Jsonpath", "../
          * @returns
          */
         getAsBoolean : function(property) {
-            return null;            
+        	this._validateProperty(property, "getAsBoolean");
+        	if (this._values) {
+                if (!this._values.hasOwnProperty(property)) {
+                    this._values[property] = this._getBoolean(property); 
+                }
+                return this._values[property];
+            } else {
+                return _getBoolean(property);
+            }                    
         },
 
         /**
@@ -102,7 +126,7 @@ define(["../declare", "../lang", "../json", "./DataHandler", "../Jsonpath", "../
          * @returns
          */
         getAsArray : function(property) {
-        	this._validateProperty(property, "getAsString");
+        	this._validateProperty(property, "getAsArray");
         	if (this._values) {
                 if (!this._values.hasOwnProperty(property)) {
                     this._values[property] = this._get(property);
@@ -134,11 +158,11 @@ define(["../declare", "../lang", "../json", "./DataHandler", "../Jsonpath", "../
          * @returns
          */
         getSummary : function() {
-        	if (!this._summary && this.data.totalResults) {
+        	if (!this._summary && this._get("totalResults")[0]) {
                 this._summary = {
-                    totalResults : this._get("totalResults"),
-                    startIndex : this._get("startIndex"),
-                    itemsPerPage : this._get("itemsPerPage")
+                	totalResults : this.getAsNumber("totalResults"),
+                	startIndex : this.getAsNumber("startIndex"),
+                	itemsPerPage : this.getAsNumber("itemsPerPage")
                 };
             }
             return this._summary;
@@ -150,7 +174,35 @@ define(["../declare", "../lang", "../json", "./DataHandler", "../Jsonpath", "../
          */
         getEntitiesDataArray : function() {
         	var entityJPath = this._getJPath("entry");
-        	return this._get(entityJPath);
+        	var resultingArray = this._get(entityJPath);
+        	return resultingArray[0];
+        },
+        
+        _getDate : function(property) {
+        	var text = this._get(property)[0];
+        	if(text instanceof Date) {
+        		return text;
+        	}
+        	else {
+        		return new Date(text);
+        	}
+        },
+        
+        _getBoolean : function(property) {
+        	var text = this._get(property)[0];
+        	return text ? true : false;
+        },
+        
+        _getNumber : function(property) {
+        	var text = this._get(property)[0];
+        	// if it is a Number
+        	if(typeof text === 'number')
+        		return text;
+        	//if its an array, we return the length of the array
+        	else if(lang.isArray(text))
+        		return text.length;
+        	//if its a string or any other data type, we convert to number and return. Invalid data would throw an error here.
+        	else return Number(text);
         },
         
         /**

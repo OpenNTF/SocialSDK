@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Extended Components Library for XPages - IBM Social Business Toolkit
 Bundle-SymbolicName: com.ibm.xsp.extlibx.sbt;singleton:=true
-Bundle-Version: 9.0.0.v00_01_qualifier
+Bundle-Version: 9.0.0.qualifier
 Bundle-Vendor: IBM
 Export-Package: com.ibm.xsp.extlib.component.connections,
  com.ibm.xsp.extlib.component.facebook,

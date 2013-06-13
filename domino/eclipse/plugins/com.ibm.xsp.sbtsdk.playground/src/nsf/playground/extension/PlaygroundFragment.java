@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-package nsf.playground.library;
+package nsf.playground.extension;
 
 
 /**

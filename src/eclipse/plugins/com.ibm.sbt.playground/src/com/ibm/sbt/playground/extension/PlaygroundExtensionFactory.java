@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.ibm.commons.extension.ExtensionManager;
 import com.ibm.commons.runtime.Application;
 
 
@@ -28,22 +29,29 @@ import com.ibm.commons.runtime.Application;
  * 
  * @author priand
  */
-public class PlaygroundExtensionFactory {
+public abstract class PlaygroundExtensionFactory {
 
 	public static final String PLAYGROUND_EXTENSION = "com.ibm.sbt.playground.extension";
 
+	private static List<PlaygroundExtensionFactory> factories;
+	static {
+		factories = ExtensionManager.findServices(null,
+    			PlaygroundExtensionFactory.class.getClassLoader(),
+        		PlaygroundExtensionFactory.PLAYGROUND_EXTENSION, 
+        		PlaygroundExtensionFactory.class);
+	}
+	
 	@SuppressWarnings("unchecked")
 	public static List<PlaygroundExtensionFactory> getFactories() {
-		Application app = Application.get();
-		return (List<PlaygroundExtensionFactory>)(List)app.findServices(PLAYGROUND_EXTENSION);
+		// We cannot use the application object here because of some ClassLoader issues and security
+		// We only load plug-in based extension in the static initializer
+		//Application app = Application.get();
+		//return (List<PlaygroundExtensionFactory>)(List)app.findServices(PLAYGROUND_EXTENSION);
+		return factories;
 	}
 
-	public static<T> List<T> getExtensions(Class<T> clazz) {
-		List<PlaygroundExtensionFactory> factories = getFactories();
-		return getExtensions(factories, clazz);
-	}
 	@SuppressWarnings("unchecked")
-	public static<T> List<T> getExtensions(List<PlaygroundExtensionFactory> factories, Class<T> clazz) {
+	public static<T> List<T> getExtensions(Class<T> clazz) {
 		ArrayList<T> extensions = new ArrayList<T>();
 		if(factories!=null) {
 			for(PlaygroundExtensionFactory f: factories) {

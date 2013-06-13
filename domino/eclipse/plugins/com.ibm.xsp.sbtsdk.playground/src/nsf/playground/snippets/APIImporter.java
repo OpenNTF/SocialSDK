@@ -11,6 +11,7 @@ import java.util.Properties;
 import lotus.domino.Database;
 import lotus.domino.Document;
 import nsf.playground.beans.APIBean;
+import nsf.playground.extension.ImportOptions;
 import nsf.playground.jobs.AsyncAction;
 import nsf.playground.json.JsonJavaObjectI;
 
@@ -27,6 +28,7 @@ import com.ibm.sbt.playground.assets.Node;
 import com.ibm.sbt.playground.assets.NodeFactory;
 import com.ibm.sbt.playground.assets.apis.APIDescription;
 import com.ibm.sbt.playground.assets.apis.APINodeFactory;
+import com.ibm.sbt.playground.extension.PlaygroundExtensionFactory;
 import com.ibm.sbt.playground.vfs.VFSFile;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.RestClient;
@@ -112,46 +114,37 @@ public class APIImporter extends AssetImporter {
 			importAssetsNSF(client, source, apiDocs, list.get(i),action);
 		}
 
+		List<ImportOptions> options = PlaygroundExtensionFactory.getExtensions(ImportOptions.class);
+		
 		for(Map.Entry<String, APIDocument> ed: apiDocs.entrySet()) {
 			String[] products = ed.getValue().products;
-			//if(products==null || products.length==0) {
-				products = new String[]{"domino"};
-				//continue;
-			//}
-			for(int i=0; i<products.length; i++) {
-				String product = products[i];
-				if(StringUtil.isNotEmpty(product)) {
-					String path = ed.getValue().path;
-					if(StringUtil.indexOfIgnoreCase(product,"domino")>=0) {
-						path = PathUtil.concat("Domino",path,'/');
-					} else if(StringUtil.indexOfIgnoreCase(product,"connections")>=0) {
-						path = PathUtil.concat("Connections",path,'/');
-					} else if(StringUtil.indexOfIgnoreCase(product,"smartcloud")>=0) {
-						path = PathUtil.concat("SmartCloud",path,'/');
-					}
-					String id = Node.encodeUnid(path);
-					String category = trimSeparator(extractCategory(path));
-					String name = trimSeparator(extractName(path));
-					String json = JsonGenerator.toJson(JsonJavaFactory.instanceEx, ed.getValue().content);
-					String properties = createPropertiesAsString(product,path);
-					saveAsset(id, category, name, source.getName(), json, properties);
-				}
-			}
+			String path = adjustPath(options,products,ed.getValue().path);
+			String id = Node.encodeUnid(path);
+			String category = trimSeparator(extractCategory(path));
+			String name = trimSeparator(extractName(path));
+			String json = JsonGenerator.toJson(JsonJavaFactory.instanceEx, ed.getValue().content);
+			String properties = createPropertiesAsString(options,products,path);
+			saveAsset(id, category, name, source.getName(), json, properties);
 		}
 		
 		return apiDocs.size();
 	}
 	
-	private String createPropertiesAsString(String product, String path) throws IOException {
-		Properties properties = new Properties();
-		// For now, hard coded
-		if(StringUtil.equalsIgnoreCase(product,"domino")) {
-			properties.put("basedocurl", "http://www-10.lotus.com/ldd/ddwiki.nsf");
+	private String adjustPath(List<ImportOptions> options, String[] products, String path) throws IOException {
+		for(int i=0; i<options.size(); i++) {
+			String adjustedPath = options.get(i).adjustExplorerPath(products, path);
+			if(StringUtil.isNotEmpty(adjustedPath)) {
+				return adjustedPath;
+			}
 		}
-//		if(StringUtil.equalsIgnoreCase(product,"smartcloud")) {
-//			product = "connections";
-//		}
-		properties.put("endpoint", product.toLowerCase());
+		return path;
+	}
+	private String createPropertiesAsString(List<ImportOptions> options, String[] products, String path) throws IOException {
+		Properties properties = new Properties();
+		
+		for(int i=0; i<options.size(); i++) {
+			options.get(i).createProperties(properties, products, path);
+		}
 		StringWriter sw = new StringWriter();
 		properties.store(sw, null);
 		return sw.toString();

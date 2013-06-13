@@ -34,7 +34,7 @@ import com.ibm.sbt.security.authentication.oauth.consumer.AccessToken;
 import com.ibm.sbt.security.authentication.oauth.consumer.HMACOAuth1Handler;
 import com.ibm.sbt.security.authentication.oauth.consumer.OAProvider;
 import com.ibm.sbt.security.authentication.oauth.consumer.OAuthHandler;
-import com.ibm.sbt.security.authentication.oauth.consumer.oauth_10a.servlet.OAClientAuthentication;
+import com.ibm.sbt.security.authentication.oauth.consumer.servlet.OAClientAuthentication;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.endpoints.js.JSReference;
 import com.ibm.sbt.util.SBTException;

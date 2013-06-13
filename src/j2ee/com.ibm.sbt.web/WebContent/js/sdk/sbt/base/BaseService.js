@@ -208,7 +208,8 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
                         entity.then(
                             function(response) {
                                 // entity promise is fullfilled
-                                self.addToCache(response);
+                               // self.addToCache(response);
+                            	// it is the responsibility of the createEntity callback to clear the cache in this case.
                                 promise.fulfilled(response);
                             },
                             function(error) {
@@ -216,7 +217,12 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
                             }
                         );
                     } else {
-                        self.addToCache(entity);
+                    	if(entity.id){
+                    		self.removeFromCache(entity.id);
+                    	}
+                    	if(entity.id && entity.data){
+                    		self.addToCache(entity.id, entity);
+                    	}
                         promise.fulfilled(entity);
                     }
                 },
@@ -248,6 +254,7 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
                 function(response) {
                     promise.response = response;
                     promise.fulfilled(entityId);
+                    self.removeFromCache(entityId);
                 },
                 function(error) {
                     promise.rejected(error);

@@ -18,7 +18,8 @@ package nsf.playground.library;
 
 import java.util.List;
 
-import com.ibm.commons.extension.ExtensionManager;
+import nsf.playground.extension.PlaygroundFragment;
+
 import com.ibm.sbt.playground.extension.PlaygroundExtensionFactory;
 import com.ibm.xsp.library.AbstractXspLibrary;
 
@@ -28,8 +29,6 @@ import com.ibm.xsp.library.AbstractXspLibrary;
  */
 public class PlaygroundLibrary extends AbstractXspLibrary {
 
-	private List<PlaygroundFragment> fragments;
-	
 	public PlaygroundLibrary() {
 	}
 
@@ -78,15 +77,6 @@ public class PlaygroundLibrary extends AbstractXspLibrary {
     }
     
     private List<PlaygroundFragment> getPlaygroundFragments() {
-    	// We cannot use the application yet as it is not initialized...
-        //return (List<PlaygroundFragment>)PlaygroundExtensionFactory.getExtensions(PlaygroundFragment.class);
-    	if(fragments==null) {
-    		List<PlaygroundExtensionFactory> factories = ExtensionManager.findServices(null,
-    			PlaygroundExtensionFactory.class.getClassLoader(),
-        		PlaygroundExtensionFactory.PLAYGROUND_EXTENSION, 
-        		PlaygroundExtensionFactory.class);
-    		return PlaygroundExtensionFactory.getExtensions(factories, PlaygroundFragment.class);
-    	}
-		return fragments;
+        return (List<PlaygroundFragment>)PlaygroundExtensionFactory.getExtensions(PlaygroundFragment.class);
 	}
 }

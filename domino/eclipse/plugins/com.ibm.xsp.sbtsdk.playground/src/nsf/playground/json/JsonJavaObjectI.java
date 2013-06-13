@@ -27,8 +27,34 @@ import com.ibm.commons.util.io.json.JsonJavaObject;
  */
 public class JsonJavaObjectI extends JsonJavaObject {
 
-    public static final JsonJavaFactory instanceExI = JsonJavaFactory.instanceEx;
-	public JsonJavaObjectI() {
+    public static final JsonJavaFactory instanceExI = new JsonJavaFactory() {
+        public Object createObject(Object parent, String propertyName) {
+            return new JsonJavaObjectI();
+        }
+    };
+    
+    
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // TEMPORARY IMPLEMENTATION UNTIL WE HAVE D9 IN THE BUILD
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    public JsonJavaObjectI() {
+	}
+
+	public Object get(Object key) {
+		return super.get(convertKey((String)key));
+	}
+
+	public Object get(String key) {
+		return super.get(convertKey(key));
+	}
+
+	public Object put(String property, Object value) {
+		return super.put(convertKey(property),value);
+	}
+
+	private static String convertKey(String o) {
+		return ((String)o).toLowerCase();
 	}
 	
 	/**

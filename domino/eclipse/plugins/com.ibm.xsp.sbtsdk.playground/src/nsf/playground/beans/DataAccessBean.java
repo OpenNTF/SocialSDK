@@ -14,9 +14,13 @@ import lotus.domino.View;
 import lotus.domino.ViewEntry;
 import lotus.domino.ViewEntryCollection;
 import nsf.playground.environments.PlaygroundEnvironment;
+import nsf.playground.extension.Endpoints;
+import nsf.playground.extension.Endpoints.Category;
+import nsf.playground.extension.Endpoints.Property;
 
 import com.ibm.commons.util.QuickSort;
 import com.ibm.commons.util.StringUtil;
+import com.ibm.sbt.playground.extension.PlaygroundExtensionFactory;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.ibm.xsp.model.domino.wrapped.DominoDocument;
 import com.ibm.xsp.util.ManagedBeanUtil;
@@ -164,72 +168,49 @@ public abstract class DataAccessBean {
 		env.setName(d.getItemValueString("Name"));
 		env.setDescription(d.getItemValueString("Description"));
 		env.setProperties(d.getItemValueString("Properties"));
+		
 		boolean def = StringUtil.equals(d.getItemValueString("Preferred"),"1");
 		if(def) {
 			preferredEnvironment = env.getName();
 		}
 		
-		// Playground specific data
-		env.setEndpoint_Connections(d.getItemValueString("Endpoint_Connections"));
-		env.setEndpoint_Smartcloud(d.getItemValueString("Endpoint_Smartcloud"));
-		env.setEndpoint_Domino(d.getItemValueString("Endpoint_Domino"));
+		env.getFieldMap().clear();
 		
-		env.setCon_URL(d.getItemValueString("Con_URL"));
-		env.setCon_OA2_ConsumerKey(d.getItemValueString("Con_OA2_ConsumerKey"));
-		env.setCon_OA2_ConsumerSecret(d.getItemValueString("Con_OA2_ConsumerSecret"));
-		env.setCon_OA2_AuthorizationURL(d.getItemValueString("Con_OA2_AuthorizationURL"));
-		env.setCon_OA2_AccessTokenURL(d.getItemValueString("Con_OA2_AccessTokenURL"));
-		
-		env.setSma_URL(d.getItemValueString("Sma_URL"));
-		env.setSma_OA_ConsumerKey(d.getItemValueString("Sma_OA_ConsumerKey"));
-		env.setSma_OA_ConsumerSecret(d.getItemValueString("Sma_OA_ConsumerSecret"));
-		env.setSma_OA_RequestTokenURL(d.getItemValueString("Sma_OA_RequestTokenURL"));
-		env.setSma_OA_AuthorizationURL(d.getItemValueString("Sma_OA_AuthorizationURL"));
-		env.setSma_OA_AccessTokenURL(d.getItemValueString("Sma_OA_AccessTokenURL"));
-		env.setSma_OA2_ConsumerKey(d.getItemValueString("Sma_OA2_ConsumerKey"));
-		env.setSma_OA2_ConsumerSecret(d.getItemValueString("Sma_OA2_ConsumerSecret"));
-		env.setSma_OA2_AuthorizationURL(d.getItemValueString("Sma_OA2_AuthorizationURL"));
-		env.setSma_OA2_AccessTokenURL(d.getItemValueString("Sma_OA2_AccessTokenURL"));
-
-		env.setDom_URL(d.getItemValueString("Dom_URL"));
-
-		env.setSt_URL(d.getItemValueString("St_URL"));
-
-		env.setTwitter_OA_ConsumerKey(d.getItemValueString("Twitter_OA_ConsumerKey"));
-		env.setTwitter_OA_ConsumerSecret(d.getItemValueString("Twitter_OA_ConsumerSecret"));
-		
+		List<Endpoints> envext = PlaygroundExtensionFactory.getExtensions(Endpoints.class);
+		for(int i=0; i<envext.size(); i++) {
+			Category[] cats = envext.get(i).getPropertyList();
+			if(cats!=null) {
+				for(int j=0; j<cats.length; j++) {
+					Property[] props = cats[j].getProperties();
+					if(props!=null) {
+						for(int k=0; k<props.length; k++) {
+							Property p = props[k];
+							env.putField(p.getName(), d.getItemValueString(p.getName()));
+						}
+					}
+				}
+			}
+		}
 		return env;
 	}
 	public PlaygroundEnvironment writeEnvironment(PlaygroundEnvironment env, Document d) throws NotesException, IOException {
 		d.replaceItemValue("Properties",env.getProperties());
 
-		// Playground specific data
-		d.replaceItemValue("Endpoint_Connections",env.getEndpoint_Connections());
-		d.replaceItemValue("Endpoint_Smartcloud",env.getEndpoint_Smartcloud());
-		d.replaceItemValue("Endpoint_Domino",env.getEndpoint_Domino());
-
-		d.replaceItemValue("Con_URL",env.getCon_URL());
-		d.replaceItemValue("Con_OA2_ConsumerKey",env.getCon_OA2_ConsumerKey());
-		d.replaceItemValue("Con_OA2_ConsumerSecret",env.getCon_OA2_ConsumerSecret());
-		d.replaceItemValue("Con_OA2_AuthorizationURL",env.getCon_OA2_AuthorizationURL());
-		d.replaceItemValue("Con_OA2_AccessTokenURL",env.getCon_OA2_AccessTokenURL());
-
-		d.replaceItemValue("Sma_URL",env.getSma_URL());
-		d.replaceItemValue("Sma_OA_ConsumerKey",env.getSma_OA_ConsumerKey());
-		d.replaceItemValue("Sma_OA_ConsumerSecret",env.getSma_OA_ConsumerSecret());
-		d.replaceItemValue("Sma_OA_RequestTokenURL",env.getSma_OA_RequestTokenURL());
-		d.replaceItemValue("Sma_OA_AuthorizationURL",env.getSma_OA_AuthorizationURL());
-		d.replaceItemValue("Sma_OA_AccessTokenURL",env.getSma_OA_AccessTokenURL());
-		d.replaceItemValue("Sma_OA2_ConsumerKey",env.getSma_OA2_ConsumerKey());
-		d.replaceItemValue("Sma_OA2_ConsumerSecret",env.getSma_OA2_ConsumerSecret());
-		d.replaceItemValue("Sma_OA2_AuthorizationURL",env.getSma_OA2_AuthorizationURL());
-		d.replaceItemValue("Sma_OA2_AccessTokenURL",env.getSma_OA2_AccessTokenURL());
-
-		d.replaceItemValue("Dom_URL",env.getDom_URL());
-
-		d.replaceItemValue("Twitter_OA_ConsumerKey",env.getTwitter_OA_ConsumerKey());
-		d.replaceItemValue("Twitter_OA_ConsumerSecret",env.getTwitter_OA_ConsumerSecret());
-		
+		List<Endpoints> envext = PlaygroundExtensionFactory.getExtensions(Endpoints.class);
+		for(int i=0; i<envext.size(); i++) {
+			Category[] cats = envext.get(i).getPropertyList();
+			if(cats!=null) {
+				for(int j=0; j<cats.length; j++) {
+					Property[] props = cats[j].getProperties();
+					if(props!=null) {
+						for(int k=0; k<props.length; k++) {
+							Property p = props[k];
+							d.replaceItemValue(p.getName(),env.getField(p.getName()));
+						}
+					}
+				}
+			}
+		}
 		return env;
 	}
 }

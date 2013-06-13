@@ -12,6 +12,7 @@ import lotus.domino.Database;
 import lotus.domino.Document;
 import nsf.playground.beans.APIBean;
 import nsf.playground.jobs.AsyncAction;
+import nsf.playground.json.JsonJavaObjectI;
 
 import com.ibm.commons.runtime.util.URLEncoding;
 import com.ibm.commons.util.PathUtil;
@@ -113,9 +114,10 @@ public class APIImporter extends AssetImporter {
 
 		for(Map.Entry<String, APIDocument> ed: apiDocs.entrySet()) {
 			String[] products = ed.getValue().products;
-			if(products==null) {
-				continue;
-			}
+			//if(products==null || products.length==0) {
+				products = new String[]{"domino"};
+				//continue;
+			//}
 			for(int i=0; i<products.length; i++) {
 				String product = products[i];
 				if(StringUtil.isNotEmpty(product)) {
@@ -183,20 +185,23 @@ public class APIImporter extends AssetImporter {
 	protected void importAssetsNSF(RestClient client, ImportSource source, Map<String,APIDocument> apiDocs, DocEntry entry, AsyncAction action) throws Exception {
 		JsonJavaObject doc = loadAPIDocument(client, entry);
 		if(doc!=null) {
+			//JsonDump.dumpObject(JsonJavaFactory.instanceEx2, doc);
 			if(action!=null) {
 				action.updateTask("Importing: {0}", doc.get("Title"));
 			}
 			String apiExplorerPath = trimSeparator(doc.getString("APIExplorerPath"));
 			String[] products = StringUtil.splitString(doc.getString("Products"),',');
 			List mt = (List)doc.get("RequestsDetails");
-			for(int i=0; i<mt.size(); i++) {
-				APIDocument apiDoc = apiDocs.get(apiExplorerPath);
-				if(apiDoc==null) {
-					apiDoc = new APIDocument(products,apiExplorerPath);
-					apiDocs.put(apiExplorerPath, apiDoc);
+			if(mt!=null) {
+				for(int i=0; i<mt.size(); i++) {
+					APIDocument apiDoc = apiDocs.get(apiExplorerPath);
+					if(apiDoc==null) {
+						apiDoc = new APIDocument(products,apiExplorerPath);
+						apiDocs.put(apiExplorerPath, apiDoc);
+					}
+					JsonJavaObject je = createAPIEntry(doc, i, action);
+					apiDoc.content.add(je);
 				}
-				JsonJavaObject je = createAPIEntry(doc, i, action);
-				apiDoc.content.add(je);
 			}
 		}
 	}
@@ -270,7 +275,7 @@ public class APIImporter extends AssetImporter {
 	protected JsonJavaObject loadAPIDocument(RestClient client, DocEntry entry) throws IOException {
 		try {
 			String path = URLEncoding.encodeURIString("/api/data/documents/unid/"+entry.unid,"utf-8",0,false);
-			Object json = client.get(path,new RestClient.HandlerJson(JsonJavaFactory.instanceEx));
+			Object json = client.get(path,new RestClient.HandlerJson(JsonJavaObjectI.instanceExI));
 			if(json instanceof JsonJavaObject) {
 				// Parse the fields that have to be parsed, as they are stored as strings
 				JsonJavaObject o = (JsonJavaObject)json;

@@ -1,8 +1,8 @@
 package nsf.playground.snippets;
 
-import nsf.playground.beans.JavaSnippetBean;
 import lotus.domino.Database;
 import lotus.domino.Document;
+import nsf.playground.beans.JavaSnippetBean;
 
 import com.ibm.sbt.playground.assets.AssetNode;
 import com.ibm.sbt.playground.assets.NodeFactory;

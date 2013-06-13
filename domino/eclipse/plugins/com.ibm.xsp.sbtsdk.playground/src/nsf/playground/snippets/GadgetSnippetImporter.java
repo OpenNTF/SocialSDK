@@ -1,9 +1,8 @@
 package nsf.playground.snippets;
 
-import nsf.playground.beans.GadgetSnippetBean;
-import nsf.playground.beans.XPagesSnippetBean;
 import lotus.domino.Database;
 import lotus.domino.Document;
+import nsf.playground.beans.GadgetSnippetBean;
 
 import com.ibm.sbt.playground.assets.AssetNode;
 import com.ibm.sbt.playground.assets.NodeFactory;

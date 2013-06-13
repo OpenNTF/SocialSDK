@@ -28,9 +28,6 @@
    	<extension point="com.ibm.commons.Extension">
          <service type="com.ibm.xsp.adapter.servletFactory" class="com.ibm.xsp.sbtsdk.servlets.ToolkitServletFactory" />
    	</extension>
-   	<extension point="com.ibm.commons.Extension">
-         <service type="com.ibm.xsp.adapter.servletFactory" class="nsf.playground.servlets.PlaygroundToolkitServletFactory" />
-   	</extension>
 
    	<extension point="com.ibm.commons.Extension">
          <service type="com.ibm.sbt.jslibrary" class="com.ibm.xsp.sbtsdk.servlets.DominoDojoLibrary" />

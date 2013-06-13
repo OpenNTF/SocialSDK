@@ -14,11 +14,6 @@
 
 package nsf.playground.json;
 
-import java.util.List;
-import java.util.Map;
-
-import com.ibm.commons.util.io.json.JsonException;
-import com.ibm.commons.util.io.json.JsonJavaArray;
 import com.ibm.commons.util.io.json.JsonJavaFactory;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 
@@ -32,17 +27,8 @@ import com.ibm.commons.util.io.json.JsonJavaObject;
  */
 public class JsonJavaObjectI extends JsonJavaObject {
 
-    public static final JsonJavaFactory instanceExI = JsonJavaFactory.instanceEx2;
+    public static final JsonJavaFactory instanceExI = JsonJavaFactory.instanceEx;
 	public JsonJavaObjectI() {
-	}
-
-	@SuppressWarnings("unchecked")
-	public JsonJavaObjectI(Map<String,Object> props) {
-		putAll(props);
-	}
-
-	public JsonJavaObjectI(Object...properties) {
-		super(properties);
 	}
 	
 	/**

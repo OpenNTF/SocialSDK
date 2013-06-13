@@ -2,7 +2,7 @@
 <feature
       id="com.ibm.sbt.domino.feature"
       label="Domino SBT Feature"
-      version="1.0.0"
+      version="1.0.0.qualifier"
       provider-name="IBM">
 
    <description url="http://www.example.com/description">

@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SBT core Java code
 Bundle-SymbolicName: com.ibm.sbt.core;singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: IBM
 Require-Bundle: com.ibm.commons,
  com.ibm.commons.xml,
@@ -18,8 +18,8 @@ Export-Package: com.ibm.sbt.core.configuration,
  com.ibm.sbt.security.authentication,
  com.ibm.sbt.security.authentication.oauth,
  com.ibm.sbt.security.authentication.oauth.consumer,
- com.ibm.sbt.security.authentication.oauth.consumer.oauth_10a.servlet,
- com.ibm.sbt.security.authentication.oauth.consumer.oauth_10a.util,
+ com.ibm.sbt.security.authentication.oauth.consumer.servlet,
+ com.ibm.sbt.security.authentication.oauth.consumer.util,
  com.ibm.sbt.security.authentication.oauth.consumer.store,
  com.ibm.sbt.security.authentication.password,
  com.ibm.sbt.security.authentication.password.consumer,

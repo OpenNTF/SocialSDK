@@ -11,7 +11,8 @@
     <tycho-version>0.16.0</tycho-version>
     <code.source>1.6</code.source>
     <code.target>1.6</code.target>
-    
+    <forceContextQualifier>${buildLabel}</forceContextQualifier>
+    <unqualifiedVersion>${buildLabel}</unqualifiedVersion>
     <workingDir>${user.dir}/../../</workingDir>
     <build.target>${workingDir}/target</build.target>
     <build.output>${workingDir}/kit</build.output>

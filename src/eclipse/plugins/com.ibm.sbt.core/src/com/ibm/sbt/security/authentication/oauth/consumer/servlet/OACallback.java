@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-package com.ibm.sbt.security.authentication.oauth.consumer.oauth_10a.servlet;
+package com.ibm.sbt.security.authentication.oauth.consumer.servlet;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -24,7 +24,7 @@ import com.ibm.commons.runtime.Context;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.security.authentication.oauth.consumer.AccessToken;
 import com.ibm.sbt.security.authentication.oauth.consumer.OAConstants;
-import com.ibm.sbt.security.authentication.oauth.consumer.oauth_10a.util.OADance;
+import com.ibm.sbt.security.authentication.oauth.consumer.util.OADance;
 import com.ibm.sbt.security.authentication.oauth.consumer.store.TokenStore;
 import com.ibm.sbt.service.core.handlers.AbstractServiceHandler;
 import com.ibm.sbt.services.util.AnonymousCredentialStore;

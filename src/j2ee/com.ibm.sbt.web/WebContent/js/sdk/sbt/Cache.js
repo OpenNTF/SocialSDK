@@ -75,6 +75,7 @@ define(['./declare'],function(declare) {
 				if(k.prev)k.prev.next = k.next; else this.head = k.next;
 				k.next = k.prev = null;
 				delete this._cache[key];
+				this.count -- ;
 			}
 			
 		},

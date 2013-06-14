@@ -1,14 +1,23 @@
 package nsf.playground.beans;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
+
+import nsf.playground.extension.Endpoints;
+import nsf.playground.extension.Endpoints.Category;
+import nsf.playground.extension.Endpoints.Property;
 
 import lotus.domino.Database;
 import lotus.domino.Document;
 import lotus.domino.NotesException;
 import lotus.domino.View;
 
+import com.ibm.commons.Platform;
 import com.ibm.commons.util.StringUtil;
+import com.ibm.sbt.playground.extension.PlaygroundExtensionFactory;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.ibm.xsp.model.domino.DominoUtils;
 import com.ibm.xsp.util.ManagedBeanUtil;
@@ -34,7 +43,6 @@ public abstract class OptionsBean {
 	private boolean explorerEnabled;
 	private boolean apacheLicense;
 	private String environments;
-	private String endpoints;
 	
 	private String banner;
 	private String applicationTitle;
@@ -107,13 +115,6 @@ public abstract class OptionsBean {
 		this.environments=environments;
 	}
 
-	public String getEndpoints() {
-		return endpoints;
-	}
-	public void setEndpoints(String endpoints) {
-		this.endpoints=endpoints;
-	}
-
 	public String getApplicationTitle() {
 		return applicationTitle;
 	}
@@ -143,19 +144,35 @@ public abstract class OptionsBean {
 	
 	
 	//
+	//
+	//
+	public List<Category> getEnvironmentCategories() {
+		ArrayList<Category> result = new ArrayList<Endpoints.Category>();
+		List<Endpoints> envext = PlaygroundExtensionFactory.getExtensions(Endpoints.class);
+		for(int i=0; i<envext.size(); i++) {
+			Category[] cats = envext.get(i).getPropertyList();
+			if(cats!=null) {
+				for(int j=0; j<cats.length; j++) {
+					result.add(cats[j]);
+				}
+			}
+		}
+		return result;
+	}
+	
+	//
 	// Load Options
 	//
 	public void loadOptions() {
 		Document doc = loadOptionsDocument();
 		try {
-			this.javaScriptSnippetsEnabled = true;
+			this.javaScriptSnippetsEnabled = getEnvironmentBoolean(doc,"JavaScriptSnippets");
 			this.javaSnippetsEnabled = getEnvironmentBoolean(doc,"JavaSnippets");
 			this.xpagesSnippetsEnabled = getEnvironmentBoolean(doc,"XPagesSnippets");
 			this.gadgetSnippetsEnabled = getEnvironmentBoolean(doc,"GadgetSnippets");
 			this.explorerEnabled = getEnvironmentBoolean(doc,"APIExplorer");
 			this.apacheLicense = getEnvironmentBoolean(doc,"ApacheLicense");
 			this.environments = getEnvironmentString(doc,"Environments");
-			this.endpoints = getEnvironmentString(doc,"Endpoints","connections,connectionsOA2,smartcloud,smartcloudOA2,sametime,domino");
 	
 			this.banner = getEnvironmentString(doc,"Banner");
 			this.applicationTitle = getEnvironmentString(doc,"AppTitle","IBM Social Business Toolkit");
@@ -167,6 +184,17 @@ public abstract class OptionsBean {
 				}
 			} catch(NotesException ex) {}
 		}
+	}
+	public String getOptionsDocumentId() {
+		try {
+			Document doc = loadOptionsDocument();
+			if(doc!=null) {
+				return doc.getUniversalID();
+			}
+		} catch(NotesException ex) {
+			Platform.getInstance().log(ex);
+		}
+		return null;
 	}
 	protected Document loadOptionsDocument() {
 		try {
@@ -203,6 +231,12 @@ public abstract class OptionsBean {
 	protected boolean getEnvironmentBoolean(Document doc, String propName, boolean defaultValue) {
 		String value = getEnvironmentString(doc, propName, null);
 		if(StringUtil.isNotEmpty(value)) {
+			if(value.equals("true")) {
+				return true;
+			}
+			if(value.equals("false")) {
+				return false;
+			}
 			try {
 				return Integer.parseInt(value.trim())!=0;
 			} catch(NumberFormatException ex) {}

@@ -184,6 +184,8 @@ public class APIImporter extends AssetImporter {
 			}
 			String apiExplorerPath = trimSeparator(doc.getString("APIExplorerPath"));
 			String[] products = StringUtil.splitString(doc.getString("Products"),',');
+			Object mt2 = doc.get("RequestsDetails");
+			String to = mt2!=null ? mt2.getClass().getName() : "<null>";
 			List mt = (List)doc.get("RequestsDetails");
 			if(mt!=null) {
 				for(int i=0; i<mt.size(); i++) {
@@ -201,20 +203,33 @@ public class APIImporter extends AssetImporter {
 	protected JsonJavaObject createAPIEntry(JsonJavaObject e, int method, AsyncAction action) throws Exception {
 		JsonJavaObject je = new JsonJavaObject();
 		String name = (String)e.get("Title");
-		je.putString("name", name);
-		je.putString("description", e.get("Abstract"));
+		put(je,"name", name);
+		put(je,"description", e.get("Abstract"));
 		String unid=Node.encodeUnid(name);
 		if(method>1) {
 			unid = unid + "_" + Integer.toString(method);
 		}
-		je.putString("unid", unid);
+		put(je,"unid", unid);
 		JsonJavaObject rd = (JsonJavaObject)((List)e.get("RequestsDetails")).get(method);
-		je.putString("http_method", rd.get("method") );
-		je.putString("uri", rd.get("uri") );
-		je.putObject("uriParameters", e.get("URLParameters") );
-		je.putObject("queryParameters", e.get("QueryParameters") );
-		je.putObject("headers", e.get("Headers") );
+		if(rd!=null) {
+			put(je,"http_method", rd.get("method") );
+			put(je,"post_content_type", e.get("RequestContentType") );
+			put(je,"post_content", e.get("RequestSample") );
+			put(je,"uri", rd.get("uri") );
+			put(je,"uriParameters", e.get("URLParameters") );
+			put(je,"queryParameters", e.get("QueryParameters") );
+			put(je,"headers", e.get("Headers") );
+		}
 		return je;
+	}
+	protected void put(JsonJavaObject o, String name, Object value) {
+		if(value==null) {
+			return;
+		}
+		if((value instanceof String) && StringUtil.isEmpty((String)value)) {
+			return;
+		}
+		o.put(name, value);
 	}
 
 	private static class APIDocument {
@@ -284,6 +299,9 @@ public class APIImporter extends AssetImporter {
 		}
 	}
 	protected void parse(JsonJavaObject o, String fieldName) throws IOException {
+		// The conversion here is temp until D9
+		fieldName = JsonJavaObjectI.convertKey(fieldName);
+		
 		Object f = o.get(fieldName);
 		if(f instanceof String) {
 			try {
@@ -292,6 +310,8 @@ public class APIImporter extends AssetImporter {
 			} catch(JsonException jex) {
 				o.remove(fieldName);
 			}
+		} else {
+			System.out.println("OK?");
 		}
 	}
 	

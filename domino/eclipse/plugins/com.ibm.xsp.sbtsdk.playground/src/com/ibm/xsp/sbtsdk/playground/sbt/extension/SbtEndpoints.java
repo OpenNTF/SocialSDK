@@ -16,10 +16,7 @@ package com.ibm.xsp.sbtsdk.playground.sbt.extension;
 
 import nsf.playground.environments.PlaygroundEnvironment;
 import nsf.playground.extension.Endpoints;
-import nsf.playground.extension.Endpoints.Property;
 
-import com.ibm.commons.util.StringUtil;
-import com.ibm.sbt.services.endpoints.BasicEndpoint;
 import com.ibm.sbt.services.endpoints.ConnectionsBasicEndpoint;
 import com.ibm.sbt.services.endpoints.ConnectionsOAuth2Endpoint;
 import com.ibm.sbt.services.endpoints.DominoBasicEndpoint;
@@ -40,66 +37,62 @@ public class SbtEndpoints extends Endpoints {
 	public static final SbtEndpoints instance = new SbtEndpoints();
 	
 	private static final Category[] PROPERTIES = new Category[] {
-		new Category("Endpoints", new Property[] {
-				new Property("Endpoint_Connections", "Endpoint_Connections"),
-				new Property("Endpoint_Smartcloud", "Endpoint_Smartcloud"),
-				new Property("Endpoint_Domino", "Endpoint_Domino"),
+		new Category("Connections Server", new Property[] {
+				new Property("Con_URL", "URL"),
+				new Property("Con_OA2_ConsumerKey", "OAuth2 - Consumer Key"),
+				new Property("Con_OA2_ConsumerSecret", "OAuth2 - Consumer Secret"),
+				new Property("Con_OA2_AuthorizationURL", "OAuth2 - Authorization URL"),
+				new Property("Con_OA2_AccessTokenURL", "OAuth2 - Access Token URL"),
 		}),
-		new Category("Connections", new Property[] {
-				new Property("Con_URL", "Con_URL"),
-				new Property("Con_OA2_ConsumerKey", "Con_OA2_ConsumerKey"),
-				new Property("Con_OA2_ConsumerSecret", "Con_OA2_ConsumerSecret"),
-				new Property("Con_OA2_AuthorizationURL", "Con_OA2_AuthorizationURL"),
-				new Property("Con_OA2_AccessTokenURL", "Con_OA2_AccessTokenURL"),
+		new Category("SmartCloud Server", new Property[] {
+				new Property("Sma_URL", "URL"),
+				new Property("Sma_OA_ConsumerKey", "Consumer Key"),
+				new Property("Sma_OA_ConsumerSecret", "OAuth1 - Consumer Secret"),
+				new Property("Sma_OA_RequestTokenURL", "OAuth1 - Request Token URL"),
+				new Property("Sma_OA_AuthorizationURL", "OAuth1 - Authorization URL"),
+				new Property("Sma_OA_AccessTokenURL", "OAuth1 - AccessToken URL"),
+				new Property("Sma_OA2_ConsumerKey", "OAuth2 - Consumer Key"),
+				new Property("Sma_OA2_ConsumerSecret", "OAuth2 - Consumer Secret"),
+				new Property("Sma_OA2_AuthorizationURL", "OAuth2 - Authorization URL"),
+				new Property("Sma_OA2_AccessTokenURL", "OAuth2 - Access Token URL"),
 		}),
-		new Category("SmartCloud", new Property[] {
-				new Property("Sma_URL", "Sma_URL"),
-				new Property("Sma_OA_ConsumerKey", "Sma_OA_ConsumerKey"),
-				new Property("Sma_OA_ConsumerSecret", "Sma_OA_ConsumerSecret"),
-				new Property("Sma_OA_RequestTokenURL", "Sma_OA_RequestTokenURL"),
-				new Property("Sma_OA_AuthorizationURL", "Sma_OA_AuthorizationURL"),
-				new Property("Sma_OA_AccessTokenURL", "Sma_OA_AccessTokenURL"),
-				new Property("Sma_OA2_ConsumerKey", "Sma_OA2_ConsumerKey"),
-				new Property("Sma_OA2_ConsumerSecret", "Sma_OA2_ConsumerSecret"),
-				new Property("Sma_OA2_AuthorizationURL", "Sma_OA2_AuthorizationURL"),
-				new Property("Sma_OA2_AccessTokenURL", "Sma_OA2_AccessTokenURL"),
+		new Category("Domino Server", new Property[] {
+				new Property("Dom_URL", "URL"),
 		}),
-		new Category("Domino", new Property[] {
-				new Property("Dom_URL", "Dom_URL"),
-		}),
+/*		
 		new Category("Sametime", new Property[] {
-				new Property("St_URL", "St_URL"),
+				new Property("St_URL", "URL"),
 		}),
-		new Category("Twitter", new Property[] {
-				new Property("Twitter_OA_ConsumerKey", "Twitter_OA_ConsumerKey"),
-				new Property("Twitter_OA_ConsumerSecret", "Twitter_OA_ConsumerSecret"),
+*/		
+		new Category("Social Networks", new Property[] {
+				//new Property("Twitter_URL", "Twitter URL"),
+				new Property("Twitter_OA_ConsumerKey", "Twitter Consumer Key"),
+				new Property("Twitter_OA_ConsumerSecret", "Twitter Consumer Secret"),
 		}),
 	};
 
     public SbtEndpoints() {
 	}
 
+    @Override
 	public Category[] getPropertyList() {
 		return PROPERTIES;
+	}
+
+	@Override
+	public String getEndpointNames() {
+		return "connections,connectionsOA2,smartcloud,smartcloudOA2,sametime,domino,watson";
 	}
     
     @Override
 	public void prepareEndpoints(PlaygroundEnvironment env) {
-		FacesContextEx context = FacesContextEx.getCurrentInstance();
+    	FacesContextEx context = FacesContextEx.getCurrentInstance();
 		
-		// Set the properties for the default endpoints
-		String endpointConnections = env.getField("Endpoint_Connections");
-		if(StringUtil.isEmpty(endpointConnections)) {endpointConnections = "connections";}
-		context.setSessionProperty("sbt.endpoint.connections", endpointConnections);
-		
-		String endpointSmartcloud = env.getField("Endpoint_Smartcloud");
-		if(StringUtil.isEmpty(endpointSmartcloud)) {endpointSmartcloud = "smartcloud";}
-		context.setSessionProperty("sbt.endpoint.smartcloud", endpointSmartcloud);
-		
-		String endpointDomino = env.getField("Endpoint_Domino");
-		if(StringUtil.isEmpty(endpointDomino)) {endpointDomino = "domino";}
-		context.setSessionProperty("sbt.endpoint.domino", endpointDomino);
-		
+    	pushProperty(context,env,"sbt.endpoint.connections");
+    	pushProperty(context,env,"sbt.endpoint.smartcloud");
+    	pushProperty(context,env,"sbt.endpoint.domino");
+    	pushProperty(context,env,"sbt.endpoint.sametime");
+    	
 		// Override the beans with the environment definition
 		{
 			ConnectionsBasicEndpoint ep = (ConnectionsBasicEndpoint)ManagedBeanUtil.getBean(context, "connections");
@@ -158,5 +151,5 @@ public class SbtEndpoints extends Endpoints {
 				ep.setConsumerSecret(env.getField("Twitter_OA_ConsumerSecret"));
 			}
 		}
-	}
+	}    
 }

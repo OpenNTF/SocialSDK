@@ -273,6 +273,7 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
                         namespaces : consts.Namespaces,
                         xpath : consts.ProfileXPath
                     });
+                    self.id = self.dataHandler.getEntityId();
                     return self;
                 }
             };

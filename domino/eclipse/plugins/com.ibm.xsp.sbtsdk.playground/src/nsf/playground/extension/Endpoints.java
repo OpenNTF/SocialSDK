@@ -40,15 +40,23 @@ public abstract class Endpoints {
 	public static class Property {
 		private String name; 
 		private String label; 
+		private String[] valueList; 
 		public Property(String name, String label) {
+			this(name, label, null);
+		}
+		public Property(String name, String label, String[] valueList) {
 			this.name = name;
 			this.label = label;
+			this.valueList = valueList;
 		}
 		public String getName() {
 			return name;
 		}
 		public String getLabel() {
 			return label;
+		}
+		public String[] getValueList() {
+			return valueList;
 		}
 	}
 

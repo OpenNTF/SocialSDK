@@ -15,54 +15,82 @@
  */
 /**
  * Social Business Toolkit SDK.
- * Definition of constants for ActivityStreamService.
+ * Definition of constants for SearchService.
  */
-define(["../config"],function(sbt) {
-    return {
-        sbtErrorCodes : {
-            badRequest : 400
-        },
+define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
+
+    return lang.mixin(conn, {
         
-        sbtErrorMessages : {
+        /**
+         * XPath expressions used when parsing a Connections Search ATOM feed
+         */
+        SearchFeedXPath : conn.ConnectionsFeedXPath,
+
+        /**
+         * XPath expressions to be used when reading a Profile Entry
+         */
+        SearchXPath : {
+            // used by getEntityData
+            entry : "/a:feed/a:entry",
+            // used by getEntityId
+            uid : "a:contributor/snx:userid",
+            // used by getters
+            id : "a:id",
+            userid : "a:contributor/snx:userid",
+            name : "a:contributor/a:name",
+            email : "a:contributor/a:email",
+            title : "a:title"
         },
+                
+		/**
+         * Search IBM Connections for public information.
+         */
+        publicSearch : "/search/atom/search/results",
         
-        xpath_search : {
-            "id" : "a:id",
-            "title" : "a:title",
-            "summary" : "a:summary",
-            "updated" : "a:updated",
-            "relevance" : "relevance:score",
-            "authorName" : "a:author/a:name",
-            "authorUid" : "a:author/snx:userid",
-            "authorEmail" : "a:author/a:email",
-            "authorState" : "a:author/snx:userState",
-            "type" : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/type']/@term",
-            "application" : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/component']/@term",
-            "applicationCount" : "count(a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/component']/@term)",
-            "primaryComponent" : "a:category[ibmsc:field[@id='primaryComponent']]/@term",
-            "tags" : "a:category[not(@scheme)]/@term",
-            "commentCount" : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/comment']",
-            "resultLink" : "a:link[not(@rel)]/@href",
-            "bookmarkLink" : "ibmsc:field[@id='dogearURL']",
-            "eventStartDate" : "ibmsc:field[@id='eventStartDate']",
-            "authorJobTitle" : "a:content/xhtml:div/xhtml:span/xhtml:div[@class='title']",
-            "authorJobLocation" : "a:content/xhtml:div/xhtml:span/xhtml:div[@class='location']",
-            "authorCount" : "count(a:contributor)",
-            "contributorCount" : "count(a:author)",
-            "tagCount" : "count(a:category[not(@scheme)])",
-            "highlightField" : "ibmsc:field[@id='highlight']",
-            "fileExtension" : "ibmsc:field[@id='fileExtension']",
-            "memberCount" : "snx:membercount",
-            "communityUuid" : "snx:communityUuid",
-            "containerType" : "ibmsc:field[@id='container_type']",
-            "communityParentLink" : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/container' and @type='text/html']/@href",
-            "parentageMetaID" : "ibmsc:field[contains(@id, 'ID')]/@id",
-            "parentageMetaURL" : "ibmsc:field[contains(@id, 'URL')]",
-            "parentageMetaURLID" : "ibmsc:field[contains(@id, 'URL')]/@id",
-            "objectRefDisplayName" : "ibmsc:field[@id='FIELD_OBJECT_REF_DISPLAY_NAME']",
-            "objectRefUrl" : "ibmsc:field[@id='FIELD_OBJECT_REF_URL']",
-            "accessControl" : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/accesscontrolled']/@term",
-            "commentsSummary" : "ibmsc:field[@id='commentsSummary']"
-        }
-    };
+        /**
+         * Search IBM Connections for both public information and private information that you have access to.
+         */
+        mySearch : "/search/atom/mysearch/results",
+
+		/**
+         * Search IBM Connection for public information, and then return the people associated with the results.
+         */
+        peopleSearch : "/search/atom/search/facets/people",
+        
+        /**
+         * Search Lotus Connections for both public information and private information that you have access to, and then return the people associated with the results.
+         */
+        myPeopleSearch : "/search/atom/mysearch/facets/people",
+
+		/**
+         * Search IBM Connection for public information, and then return the tags associated with the results.
+         */
+        tagSearch : "/search/atom/search/facets/tag",
+        
+        /**
+         * Search Lotus Connections for both public information and private information that you have access to, and then return the tags associated with the results.
+         */
+        myTagSearch : "/search/atom/mysearch/facets/tag",
+
+		/**
+         * Search IBM Connection for public information, and then return the dates associated with the results.
+         */
+        dateSearch : "/search/atom/search/facets/date",
+        
+        /**
+         * Search Lotus Connections for both public information and private information that you have access to, and then return the dates associated with the results.
+         */
+        myDateSearch : "/search/atom/mysearch/facets/date",
+
+		/**
+         * Search IBM Connection for public information, and then return the applications associated with the results.
+         */
+        sourceSearch : "/search/atom/search/facets/source",
+        
+        /**
+         * Search Lotus Connections for both public information and private information that you have access to, and then return the applications associated with the results.
+         */
+        mySourceSearch : "/search/atom/mysearch/facets/source"
+
+    });
 });

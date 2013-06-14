@@ -72,8 +72,6 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
             role : "a:content/h:div/h:span/h:div[@class='role']",
             managerUid : "a:content/h:div/h:span/h:div[@class='x-manager-uid']",
             isManager : "a:content/h:div/h:span/h:div[@class='x-is-manager']"
-            
-            
         },
         
         /**
@@ -119,14 +117,14 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          *                    
          **/        
         profileCreateAttributes : {
-				guid : "com.ibm.snx_profiles.base.guid",
-				email : "com.ibm.snx_profiles.base.email",
-				uid : "com.ibm.snx_profiles.base.uid",
-				distinguishedName : "com.ibm.snx_profiles.base.distinguishedName",
-				displayName : "com.ibm.snx_profiles.base.displayName",
-				givenNames : "com.ibm.snx_profiles.base.givenNames",
-				surname : "com.ibm.snx_profiles.base.surname",
-				userState :"com.ibm.snx_profiles.base.userState"
+			guid : "com.ibm.snx_profiles.base.guid",
+			email : "com.ibm.snx_profiles.base.email",
+			uid : "com.ibm.snx_profiles.base.uid",
+			distinguishedName : "com.ibm.snx_profiles.base.distinguishedName",
+			displayName : "com.ibm.snx_profiles.base.displayName",
+			givenNames : "com.ibm.snx_profiles.base.givenNames",
+			surname : "com.ibm.snx_profiles.base.surname",
+			userState :"com.ibm.snx_profiles.base.userState"
 		},
         
 		/**
@@ -143,10 +141,12 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * Retrieve a profiles connections.
          */
         AtomConnectionsDo : "/profiles{authType}/atom/connections.do",
+        
         /**
          * Admin API - create a new profile.
          */
         AdminAtomProfileDo : "/profiles/admin/atom/profiles.do",
+        
         /**
          * Admin API - delete a  profile.
          */

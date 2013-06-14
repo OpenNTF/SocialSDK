@@ -42,7 +42,7 @@ public class PlaygroundLibrary extends AbstractXspLibrary {
 
     @Override
 	public String getPluginId() {
-        return "com.ibm.xsp.sbtsdk"; // $NON-NLS-1$
+        return "com.ibm.xsp.sbtsdk.playground"; // $NON-NLS-1$
     }
     
     @Override

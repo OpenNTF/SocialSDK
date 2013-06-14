@@ -1,10 +1,10 @@
 package nsf.playground.environments;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import nsf.playground.beans.OptionsBean;
 import nsf.playground.extension.Endpoints;
 
 import com.ibm.commons.util.StringUtil;
@@ -61,13 +61,19 @@ public class PlaygroundEnvironment extends SBTEnvironment {
 	}
 	
 	private static SBTEnvironment.Endpoint[] createEndpoints() {
-		String endpoints = OptionsBean.get().getEndpoints();
-		String[] sp = StringUtil.splitString(endpoints, ',', true);
-		SBTEnvironment.Endpoint[] result = new SBTEnvironment.Endpoint[sp.length]; 
-		for(int i=0; i<sp.length; i++) {
-			result[i] = new SBTEnvironment.Endpoint(sp[i],null); 
+		ArrayList<SBTEnvironment.Endpoint> endpoints = new ArrayList<SBTEnvironment.Endpoint>();
+
+		List<Endpoints> envext = PlaygroundExtensionFactory.getExtensions(Endpoints.class);
+		for(int ev=0; ev<envext.size(); ev++) {
+			Endpoints e = envext.get(ev);
+			String[] sp = StringUtil.splitString(e.getEndpointNames(), ',', true);
+			for(int i=0; i<sp.length; i++) {
+				if(StringUtil.isNotEmpty(sp)) {
+					endpoints.add(new SBTEnvironment.Endpoint(sp[i],null));
+				}
+			}
 		}
-		return result;
+		return endpoints.toArray(new SBTEnvironment.Endpoint[endpoints.size()]);
 	}
 
 	

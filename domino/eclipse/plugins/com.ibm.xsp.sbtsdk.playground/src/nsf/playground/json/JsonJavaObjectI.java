@@ -14,6 +14,10 @@
 
 package nsf.playground.json;
 
+import java.util.Iterator;
+
+import com.ibm.commons.util.IteratorWrapper;
+import com.ibm.commons.util.io.json.JsonException;
 import com.ibm.commons.util.io.json.JsonJavaFactory;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 
@@ -30,6 +34,20 @@ public class JsonJavaObjectI extends JsonJavaObject {
     public static final JsonJavaFactory instanceExI = new JsonJavaFactory() {
         public Object createObject(Object parent, String propertyName) {
             return new JsonJavaObjectI();
+        }
+        public Object getProperty(Object parent, String propertyName) throws JsonException {
+        	return super.getProperty(parent, convertKey(propertyName));
+        }
+        public void setProperty(Object parent, String propertyName, Object value) throws JsonException {
+        	super.setProperty(parent, convertKey(propertyName), value);
+        }
+        public Iterator<String> iterateObjectProperties(Object object) throws JsonException {
+        	return new IteratorWrapper<String>(super.iterateObjectProperties(object)) {
+				@Override
+				protected String wrap(Object o) {
+					return convertKey((String)o);
+				}
+			};
         }
     };
     
@@ -54,7 +72,7 @@ public class JsonJavaObjectI extends JsonJavaObject {
 //		//return null;
 //	}
 	
-	private static String convertKey(String o) {
+	public static String convertKey(String o) {
 		return ((String)o).toLowerCase();
 	}
 	

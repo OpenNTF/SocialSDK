@@ -172,10 +172,11 @@ public abstract class AssetImporter {
 
 			FacesContextEx ctx = FacesContextEx.getCurrentInstance();
 			if(ctx!=null) {
-				Platform.getInstance().log(ex);
 				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg, msg);
 				FacesContextEx.getCurrentInstance().addMessage(null, m);
 			}
+
+			Platform.getInstance().log(ex);
 
 			if(action!=null) {
 				action.updateException(ex,msg);

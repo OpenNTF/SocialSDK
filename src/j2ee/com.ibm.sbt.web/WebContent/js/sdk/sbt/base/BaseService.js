@@ -206,9 +206,7 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
                     // request is required to load the associated entity
                     if (entity instanceof Promise) {
                         entity.then(
-                            function(response) {
-                                // entity promise is fullfilled
-                               // self.addToCache(response);
+                            function(response) {                                
                             	// it is the responsibility of the createEntity callback to clear the cache in this case.
                                 promise.fulfilled(response);
                             },

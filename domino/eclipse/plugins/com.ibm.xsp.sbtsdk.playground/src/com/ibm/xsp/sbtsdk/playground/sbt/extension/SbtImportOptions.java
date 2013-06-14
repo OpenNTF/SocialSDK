@@ -62,6 +62,15 @@ public class SbtImportOptions extends ImportOptions {
     public SbtImportOptions() {
 	}
     
+    
+	public String[] getProducts() {
+		return new String[] {
+				"Connections",
+				"SmartCloud",
+				"Domino",
+		};
+	}
+    
     @Override
 	public String adjustExplorerPath(String[] products, String path) throws IOException {
 		Product p = findProduct(products);

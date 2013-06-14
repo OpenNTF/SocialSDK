@@ -25,6 +25,10 @@ public abstract class ImportOptions {
 
     public ImportOptions() {
 	}
+
+    public String[] getProducts() {
+    	return null;
+    }
     
 	public String adjustExplorerPath(String[] products, String path) throws IOException {
 		return null;

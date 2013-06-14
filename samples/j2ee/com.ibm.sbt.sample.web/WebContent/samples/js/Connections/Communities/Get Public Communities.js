@@ -1,16 +1,16 @@
 require(["sbt/connections/CommunityService", "sbt/dom"], 
     function(CommunityService, dom) {
-        var createRow = function(i) {
-            var table = dom.byId("communitiesTable");
-            var tr = document.createElement("tr");
-            table.appendChild(tr);
-            var td = document.createElement("td");
-            td.setAttribute("id", "title"+i);
-            tr.appendChild(td);
-            td = document.createElement("td");
-            td.setAttribute("id", "id"+i);
-            tr.appendChild(td);
-        };
+	    var createRow = function(title, communityUuid) {
+	        var table = dom.byId("communitiesTable");
+	        var tr = document.createElement("tr");
+	        table.appendChild(tr);
+	        var td = document.createElement("td");
+	        td.innerHTML = title;
+	        tr.appendChild(td);
+	        td = document.createElement("td");
+	        td.innerHTML = communityUuid;
+	        tr.appendChild(td);
+	    };
     
     	var communityService = new CommunityService();
     	communityService.getPublicCommunities({ ps: 5 }).then(
@@ -21,9 +21,9 @@ require(["sbt/connections/CommunityService", "sbt/dom"],
                 } else {
                     for(var i=0; i<communities.length; i++){
                         var community = communities[i];
-                        createRow(i);
-                        dom.setText("title"+i, community.getTitle()); 
-                        dom.setText("id"+i, community.getCommunityUuid()); 
+                        var title = community.getTitle(); 
+                        var communityUuid = community.getCommunityUuid(); 
+                        createRow(title, communityUuid);
                     }
                 }
             },

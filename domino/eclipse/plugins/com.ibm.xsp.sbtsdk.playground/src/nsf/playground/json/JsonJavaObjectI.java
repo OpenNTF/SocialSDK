@@ -50,9 +50,10 @@ public class JsonJavaObjectI extends JsonJavaObject {
 	}
 
 	public Object put(String property, Object value) {
-		return super.put(convertKey(property),value);
+		super.put(convertKey(property),value);
+		return null;
 	}
-
+	
 	private static String convertKey(String o) {
 		return ((String)o).toLowerCase();
 	}

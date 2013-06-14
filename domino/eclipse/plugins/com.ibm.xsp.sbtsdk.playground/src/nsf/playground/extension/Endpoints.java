@@ -14,6 +14,9 @@
 
 package nsf.playground.extension;
 
+import com.ibm.commons.util.StringUtil;
+import com.ibm.xsp.context.FacesContextEx;
+
 import nsf.playground.environments.PlaygroundEnvironment;
 
 
@@ -24,14 +27,14 @@ import nsf.playground.environments.PlaygroundEnvironment;
 public abstract class Endpoints {
 	
 	public static class Category {
-		private String name; 
+		private String label; 
 		private Property[] properties; 
-		public Category(String name, Property[] properties) {
-			this.name = name;
+		public Category(String label, Property[] properties) {
+			this.label = label;
 			this.properties = properties;
 		}
-		public String getName() {
-			return name;
+		public String getLabel() {
+			return label;
 		}
 		public Property[] getProperties() {
 			return properties;
@@ -63,10 +66,23 @@ public abstract class Endpoints {
     public Endpoints() {
 	}
     
+	public String getEndpointNames() {
+		return null;
+	}
+    
 	public void prepareEndpoints(PlaygroundEnvironment env) {
 	}
 
 	public Category[] getPropertyList() {
 		return null;
 	}
+	
+	// Helpers
+    protected void pushProperty(FacesContextEx ctx, PlaygroundEnvironment env, String name) {
+    	String p = env.getPropertyValueByName(name);
+    	if(StringUtil.isNotEmpty(p)) {
+    		ctx.setSessionProperty(name, p);
+    	}
+    }
+	
 }

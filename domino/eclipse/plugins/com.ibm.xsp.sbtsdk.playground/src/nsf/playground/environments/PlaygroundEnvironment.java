@@ -33,6 +33,7 @@ public class PlaygroundEnvironment extends SBTEnvironment {
 
 	private String noteID;
 	private String description;
+	private boolean preferred;
 	
 	private FieldMap fields = new FieldMap();
 		
@@ -89,6 +90,13 @@ public class PlaygroundEnvironment extends SBTEnvironment {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	public boolean isPreferred() {
+		return preferred;
+	}
+	public void setPreferred(boolean preferred) {
+		this.preferred = preferred;
 	}
 
 	public void prepareEndpoints() {

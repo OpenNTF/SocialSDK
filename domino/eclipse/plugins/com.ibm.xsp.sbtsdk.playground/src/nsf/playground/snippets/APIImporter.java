@@ -306,7 +306,7 @@ public class APIImporter extends AssetImporter {
 		if(f instanceof String) {
 			try {
 				Object parsed = JsonParser.fromJson(JsonJavaFactory.instanceEx, (String)f);
-				o.put(fieldName,parsed);
+				o.putObject(fieldName,parsed);
 			} catch(JsonException jex) {
 				o.remove(fieldName);
 			}

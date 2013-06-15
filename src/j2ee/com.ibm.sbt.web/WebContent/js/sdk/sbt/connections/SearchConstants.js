@@ -20,6 +20,18 @@
 define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
 
     return lang.mixin(conn, {
+    	
+        /**
+         * Namespaces to be used when reading the Search ATOM feed
+         */
+        Namespaces : {
+            a : "http://www.w3.org/2005/Atom",
+            ibmsc : "http://www.ibm.com/search/content/2010",
+            opensearch : "http://a9.com/-/spec/opensearch/1.1/",
+            relevance : "http://a9.com/-/opensearch/extensions/relevance/1.0/",
+            snx : "http://www.ibm.com/xmlns/prod/sn",
+            spelling : "http://a9.com/-/opensearch/extensions/spelling/1.0/"
+        },
         
         /**
          * XPath expressions used when parsing a Connections Search ATOM feed
@@ -27,19 +39,22 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         SearchFeedXPath : conn.ConnectionsFeedXPath,
 
         /**
-         * XPath expressions to be used when reading a Profile Entry
+         * XPath expressions to be used when reading a search result
          */
-        SearchXPath : {
+        ResultXPath : {
             // used by getEntityData
-            entry : "/a:feed/a:entry",
+            entry : "/a:entry",
             // used by getEntityId
-            uid : "a:contributor/snx:userid",
+            uid : "a:id",
             // used by getters
-            id : "a:id",
-            userid : "a:contributor/snx:userid",
-            name : "a:contributor/a:name",
-            email : "a:contributor/a:email",
-            title : "a:title"
+            title : "a:title",
+            content : "a:content",
+            updated : "a:updated",
+            authorUserid : "a:author/snx:userid",
+            authorName : "a:author/a:name",
+            authorEmail : "a:author/a:email",
+            rank : "snx:rank",
+            score : "relevance:score"
         },
                 
 		/**
@@ -65,12 +80,12 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
 		/**
          * Search IBM Connection for public information, and then return the tags associated with the results.
          */
-        tagSearch : "/search/atom/search/facets/tag",
+        tagsSearch : "/search/atom/search/facets/tags",
         
         /**
          * Search Lotus Connections for both public information and private information that you have access to, and then return the tags associated with the results.
          */
-        myTagSearch : "/search/atom/mysearch/facets/tag",
+        myTagsSearch : "/search/atom/mysearch/facets/tags",
 
 		/**
          * Search IBM Connection for public information, and then return the dates associated with the results.

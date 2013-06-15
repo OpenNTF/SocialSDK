@@ -21,6 +21,7 @@
     <import optional="true" plugin="com.ibm.xsp.extlib"/>
     <import optional="true" plugin="com.ibm.xsp.extlibx.bazaar"/>
     <import optional="true" plugin="com.ibm.xsp.sbtsdk"/>
+    <import optional="true" plugin="com.ibm.xsp.sbtsdk.playground"/>
     <!--AUTOGEN-END-BUILDER: End of automatically generated section-->
   </requires>
 </plugin>

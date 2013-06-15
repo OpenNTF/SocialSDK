@@ -56,7 +56,6 @@ public abstract class DataAccessBean {
 	private boolean cacheFilled;
 	private HashMap<String,PlaygroundEnvironment> environments = new HashMap<String,PlaygroundEnvironment>();
 	private String[] envNames = StringUtil.EMPTY_STRING_ARRAY;
-	private String preferredEnvironment;
 	
 	public DataAccessBean() {
 	}
@@ -66,14 +65,17 @@ public abstract class DataAccessBean {
 			System.out.println("Clear cache");
 		}
 		cacheFilled = false;
-		preferredEnvironment = null;
 		envNames = StringUtil.EMPTY_STRING_ARRAY;
 		environments.clear();
 	}
 	
 	public synchronized String getPreferredEnvironment() throws IOException {
 		updateCache();
-		return preferredEnvironment;
+		PlaygroundEnvironment pref = findPreferredEnvironment();
+		if(pref!=null) {
+			return pref.getName();
+		}
+		return null;
 	}
 	
 	public synchronized String[] getEnvironments() throws IOException {
@@ -83,10 +85,28 @@ public abstract class DataAccessBean {
 
 	public synchronized PlaygroundEnvironment getEnvironment(String name) throws IOException {
 		updateCache();
-		if(StringUtil.isEmpty(name)) {
-			name = preferredEnvironment;
+		if(!StringUtil.isEmpty(name)) {
+			PlaygroundEnvironment e = environments.get(name);
+			if(e!=null) {
+				return e;
+			}
 		}
-		return environments.get(name);
+		return findPreferredEnvironment();
+	}
+
+	public PlaygroundEnvironment findPreferredEnvironment() throws IOException {
+		PlaygroundEnvironment first = null;
+		if(!environments.isEmpty()) {
+			for(PlaygroundEnvironment e: environments.values()) {
+				if(e.isPreferred()) {
+					return e;
+				}
+				if(first==null) {
+					first = e;
+				}
+			}
+		}
+		return first;
 	}
 
 	public PlaygroundEnvironment getCustomEnvironment() {
@@ -171,7 +191,7 @@ public abstract class DataAccessBean {
 		
 		boolean def = StringUtil.equals(d.getItemValueString("Preferred"),"1");
 		if(def) {
-			preferredEnvironment = env.getName();
+			env.setPreferred(true);
 		}
 		
 		env.getFieldMap().clear();

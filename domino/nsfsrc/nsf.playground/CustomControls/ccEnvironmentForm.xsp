@@ -50,7 +50,8 @@ dlg.hide();}]]></xp:this.action>
 					</xp:button>
 				</xp:panel>
 			</xp:panel>
-			<xp:panel xp:key="header" id="panel4" loaded="${javascript:userBean.canCreateDocs}">
+			<xp:panel xp:key="header" id="panel4"
+				loaded="${javascript:userBean.canCreateDocs}">
 				<xp:inputText id="inputText20" style="display:none">
 					<xp:eventHandler event="onchange" submit="true"
 						refreshMode="complete">
@@ -75,203 +76,42 @@ dataAccess.copyEnvironment(document1,v);
 			<xp:inputText id="inputText5" required="true"
 				disableClientSideValidation="true" value="#{document1.Name}" size="80">
 			</xp:inputText>
+			<xp:checkBox text="Preferred Environment" id="checkBox1"
+				value="#{document1.Preferred}" checkedValue="1" uncheckedValue="0">
+			</xp:checkBox>
 		</xe:formRow>
 		<xe:formRow id="formRow1" label="Description:"
 			loaded="${javascript:!compositeData.editbean}">
 			<xp:inputRichText id="inputRichText1" value="#{document1.Description}"></xp:inputRichText>
 		</xe:formRow>
-		<xe:formRow loaded="${javascript:!compositeData.editbean}"
-			id="formRow5">
-			<xp:checkBox text="Preferred Environment" id="checkBox1"
-				value="#{document1.Preferred}" checkedValue="1" uncheckedValue="0">
-			</xp:checkBox>
+
+		<xe:formRow labelPosition="none">
+			<xe:djTabContainer id="djTabContainer1"
+				tabPosition="left-h" doLayout="false">
+				<xe:djTabPane id="djTabPane2" title="Properties">
+					<xp:inputTextarea id="inputTextarea1" value="#{document1.Properties}"
+						cols="100" rows="25" style="font-family:Courier New">
+					</xp:inputTextarea>
+				</xe:djTabPane>
+				<xp:repeat id="repeat3" rows="30" repeatControls="true"
+					value="#{javascript:optionsBean.getEnvironmentCategories()}" var="cat">
+					<xe:djTabPane id="djTabPane1" title="${javascript:cat.getLabel()}">
+						<xe:formTable labelWidth="17em" style="margin-left: 8px">
+							<xp:repeat id="repeat4" rows="30" repeatControls="true"
+								value="#{javascript:cat.getProperties()}" var="prop">
+								<xe:formRow id="formRow13" label="${javascript:prop.getLabel()+':'}">
+									<xp:inputText id="inputText23"
+										disableClientSideValidation="true"
+										value="${javascript:'#{document1.'+prop.getName()+'}'}" size="80">
+									</xp:inputText>
+								</xe:formRow>
+							</xp:repeat>
+						</xe:formTable>
+					</xe:djTabPane>
+				</xp:repeat>
+			</xe:djTabContainer>
 		</xe:formRow>
-		<xe:formRow id="formRow2" label="Properties" loaded="${javascript:userBean.canCreateDocs || compositeData.editbean}">
-			<xp:inputTextarea id="inputTextarea1" value="#{document1.Properties}"
-				cols="80" rows="5">
-			</xp:inputTextarea>
-		</xe:formRow>
-		<xe:formRow loaded="${javascript:userBean.canCreateDocs || compositeData.editbean}" id="formRow27" label="Connection Default">
-			<xp:comboBox id="comboBox2"
-				value="#{document1.Endpoint_Connections}">
-				<xp:selectItem itemLabel="On-Premises - Basic Auth"
-					itemValue="connections">
-				</xp:selectItem>
-				<xp:selectItem itemLabel="On-Premises - OAuth 2.0"
-					itemValue="connectionsOA2">
-				</xp:selectItem>
-				<xp:selectItem itemLabel="SmartCloud - OAuth 1.0a"
-					itemValue="smartcloud">
-				</xp:selectItem>
-				<xp:selectItem itemLabel="SmartCloud - OAuth 2.0" 
-					itemValue="smartcloudOA2">
-				</xp:selectItem>
-			</xp:comboBox>
-		</xe:formRow>
-		<xe:formRow loaded="${javascript:userBean.canCreateDocs || compositeData.editbean}" id="formRow30" label="Smartcloud Default:">
-			<xp:comboBox id="comboBox3"
-				value="#{document1.Endpoint_Smartcloud}">
-				<xp:selectItem itemLabel="Smartcloud - OAuth 1.0a"
-					itemValue="smartcloud">
-				</xp:selectItem>
-				<xp:selectItem itemLabel="Smartcloud - OAuth 2.0" itemValue="smartcloudOA2"></xp:selectItem>
-			</xp:comboBox>
-		</xe:formRow>
-		<xe:formRow loaded="${javascript:userBean.canCreateDocs || compositeData.editbean}" id="formRow31" label="Domino Default:">
-			<xp:comboBox id="comboBox4"
-				value="#{document1.Endpoint_Domino}">
-				<xp:selectItem itemLabel="Domino - Basic Auth"
-					itemValue="domino">
-				</xp:selectItem>
-			</xp:comboBox>
-		</xe:formRow>
-		<xe:formRow id="formRow4" labelPosition="none">
-			<xp:section id="section1" header="Connections Server" initClosed="true" loaded="${javascript:userBean.canCreateDocs || compositeData.editbean}">
-				<xe:formTable labelWidth="12em">
-					<xe:formRow id="formRow3" label="URL:">
-						<xp:inputText id="inputText2"
-							disableClientSideValidation="true" value="#{document1.Con_URL}"
-							size="80">
-						</xp:inputText>
-					</xe:formRow>
-					<xe:formRow id="formRow17">
-						<xp:label value="OAuth 2.0" id="label1"></xp:label>
-					</xe:formRow>
-					<xe:formRow id="formRow10" label="Consumer Key:">
-						<xp:inputText id="inputText7"
-							disableClientSideValidation="true" value="#{document1.Con_OA2_ConsumerKey}"
-							size="80">
-						</xp:inputText>
-					</xe:formRow>
-					<xe:formRow id="formRow26" label="Consumer Secret:">
-						<xp:inputText id="inputText19"
-							disableClientSideValidation="true" value="#{document1.Con_OA2_ConsumerSecret}"
-							size="80">
-						</xp:inputText>
-					</xe:formRow>
-					<xe:formRow id="formRow11" label="Authorization URL:">
-						<xp:inputText id="inputText8"
-							disableClientSideValidation="true"
-							value="#{document1.Con_OA2_AuthorizationURL}" size="80">
-						</xp:inputText>
-					</xe:formRow>
-					<xe:formRow id="formRow12" label="Access Token URL:">
-						<xp:inputText id="inputText9"
-							disableClientSideValidation="true" value="#{document1.Con_OA2_AccessTokenURL}"
-							size="80">
-						</xp:inputText>
-					</xe:formRow>
-				</xe:formTable>
-			</xp:section>
-			<xp:section id="section2" header="Smartcloud Server" initClosed="true" loaded="${javascript:userBean.canCreateDocs || compositeData.editbean}">
-				<xe:formTable labelWidth="12em">
-					<xe:formRow id="formRow6" label="URL:">
-						<xp:inputText id="inputText3"
-							disableClientSideValidation="true" value="#{document1.Sma_URL}"
-							size="80">
-						</xp:inputText>
-					</xe:formRow>
-					<xe:formRow id="formRow18">
-						<xp:label value="OAuth 1.0a" id="label2"></xp:label>
-					</xe:formRow>
-					<xe:formRow id="formRow21" label="Consumer Key">
-						<xp:inputText id="inputText14"
-							disableClientSideValidation="true" value="#{document1.Sma_OA_ConsumerKey}"
-							size="80">
-						</xp:inputText>
-					</xe:formRow>
-					<xe:formRow id="formRow20" label="Consumer Secret:">
-						<xp:inputText id="inputText13"
-							disableClientSideValidation="true" value="#{document1.Sma_OA_ConsumerSecret}"
-							size="80">
-						</xp:inputText>
-					</xe:formRow>
-					<xe:formRow id="formRow22" label="Request Token URL:">
-						<xp:inputText id="inputText15"
-							disableClientSideValidation="true" value="#{document1.Sma_OA_RequestTokenURL}"
-							size="80">
-						</xp:inputText>
-					</xe:formRow>
-					<xe:formRow id="formRow24" label="Authorization URL:">
-						<xp:inputText id="inputText17"
-							disableClientSideValidation="true"
-							value="#{document1.Sma_OA_AuthorizationURL}" size="80">
-						</xp:inputText>
-					</xe:formRow>
-					<xe:formRow id="formRow23" label="Access Token URL:">
-						<xp:inputText id="inputText16"
-							disableClientSideValidation="true" value="#{document1.Sma_OA_AccessTokenURL}"
-							size="80">
-						</xp:inputText>
-					</xe:formRow>
-					<xe:formRow id="formRow19">
-						<xp:label value="OAuth 2.0" id="label3"></xp:label>
-					</xe:formRow>
-					<xe:formRow id="formRow25" label="Client ID:">
-						<xp:inputText id="inputText18"
-							disableClientSideValidation="true" value="#{document1.Sma_OA2_ConsumerKey}"
-							size="80">
-						</xp:inputText>
-					</xe:formRow>
-					<xe:formRow id="formRow14" label="Client Secret:">
-						<xp:inputText id="inputText10"
-							disableClientSideValidation="true" value="#{document1.Sma_OA2_ConsumerSecret}"
-							size="80">
-						</xp:inputText>
-					</xe:formRow>
-					<xe:formRow id="formRow15" label="Authorization URL:">
-						<xp:inputText id="inputText11"
-							disableClientSideValidation="true"
-							value="#{document1.Sma_OA2_AuthorizationURL}" size="80">
-						</xp:inputText>
-					</xe:formRow>
-					<xe:formRow id="formRow16" label="Access Token URL:">
-						<xp:inputText id="inputText12"
-							disableClientSideValidation="true" value="#{document1.Sma_OA2_AccessTokenURL}"
-							size="80">
-						</xp:inputText>
-					</xe:formRow>
-				</xe:formTable>
-			</xp:section>
-			<xp:section id="section3" header="Domino Server"
-				initClosed="true">
-				<xe:formTable>
-					<xe:formRow id="formRow7" label="URL:">
-						<xp:inputText id="inputText4"
-							disableClientSideValidation="true" value="#{document1.Dom_URL}"
-							size="80">
-						</xp:inputText>
-					</xe:formRow>
-				</xe:formTable>
-			</xp:section>
-			<xp:section loaded="false" id="section4" header="Sametime"
-				initClosed="true">
-				<xe:formTable>
-					<xe:formRow id="formRow9" label="URL:">
-						<xp:inputText id="inputText6"
-							disableClientSideValidation="true" value="#{document1.St_URL}"
-							size="80">
-						</xp:inputText>
-					</xe:formRow>
-				</xe:formTable>
-			</xp:section>
-		</xe:formRow>
-			<xp:section id="section5" header="Twitter" initClosed="true" loaded="${javascript:false &amp;&amp; (userBean.canCreateDocs || compositeData.editbean)}">
-				<xe:formTable labelWidth="12em">
-					<xe:formRow id="formRow28" label="Consumer Key:">
-						<xp:inputText id="inputText21"
-							disableClientSideValidation="true" value="#{document1.Twitter_OA_ConsumerKey}"
-							size="80">
-						</xp:inputText>
-					</xe:formRow>
-					<xe:formRow id="formRow29" label="Consumer Secret:">
-						<xp:inputText id="inputText22"
-							disableClientSideValidation="true" value="#{document1.Twitter_OA_ConsumerSecret}"
-							size="80">
-						</xp:inputText>
-					</xe:formRow>
-				</xe:formTable>
-			</xp:section>
+
 	</xe:formTable>
 
 	<xe:dumpObject loaded="false" id="dumpObject1" title="document"

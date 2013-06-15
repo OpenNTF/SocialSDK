@@ -202,7 +202,7 @@ public abstract class OptionsBean {
 			View v = db.getView("GlobalOptions");
 			Document doc = v.getFirstDocument();
 			return doc;
-		} catch(NotesException ex) {
+		} catch(Exception ex) {
 			ex.printStackTrace();
 		}
 		return null;

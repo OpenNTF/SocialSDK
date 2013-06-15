@@ -229,7 +229,7 @@ public class APIImporter extends AssetImporter {
 		if((value instanceof String) && StringUtil.isEmpty((String)value)) {
 			return;
 		}
-		o.put(name, value);
+		o.putObject(name, value);
 	}
 
 	private static class APIDocument {

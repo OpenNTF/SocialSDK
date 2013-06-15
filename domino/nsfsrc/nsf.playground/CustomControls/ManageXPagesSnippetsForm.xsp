@@ -3,7 +3,7 @@
 	xmlns:xe="http://www.ibm.com/xsp/coreex">
 	<xp:this.data>
 		<xp:dominoDocument var="document1" formName="XPagesSnippet">
-			<xp:this.queryNewDocument><![CDATA[#{javascript:document1.replaceItemValue("Author",userBean.commonName)}]]></xp:this.queryNewDocument>
+			<xp:this.postNewDocument><![CDATA[#{javascript:document1.replaceItemValue("Author",userBean.commonName)}]]></xp:this.postNewDocument>
 			<xp:this.querySaveDocument><![CDATA[#{javascript:return xpagesSnippetBean.querySave(document1)}]]></xp:this.querySaveDocument>
 		</xp:dominoDocument>
 	</xp:this.data>
@@ -67,7 +67,7 @@
 		</xe:formRow>
 		<xe:formRow id="formRow5" labelPosition="above">
 			<xe:djTabContainer id="djTabContainer2"
-				style="width: 900px; height: 250px; border: none">
+				style="width: 900px; height: 400px; border: none">
 				<xe:djTabPane id="djTabPane1" title="XPages">
 					<xp:inputTextarea id="inputTextarea1" value="#{document1.XPages}"
 						style="width:99%;height:99%;font-family:Courier New;font-size:10pt">

@@ -1,41 +1,31 @@
-require([ "sbt/Endpoint", "sbt/dom", "sbt/xml", "sbt/xpath", "sbt/connections/ConnectionsConstants" ], 
-	function(Endpoint, dom, xml, xpath, conn) {
+require([ "sbt/connections/SearchService", "sbt/dom" ], 
+	function(SearchService, dom) {
 	
-		var endpoint = Endpoint.find("connections");
-    
-		var options = { 
-			method : "GET", 
-			handleAs : "text",
-			query : {
-				query : ""
-			}
-		};
+		var searchService = new SearchService();
 	
 		dom.byId("searchBtn").onclick = function(ev) {
 			dom.byId("error").style.display = "none";
 			dom.byId("peopleTable").style.display = "none";
+			dom.byId("searching").innerHTML = "Searching...";
 			
 			var topic = dom.byId("topicInput").value;
-			options.query.query = topic;
 			
-			endpoint.request("/search/atom/search/facets/people", options).then(
-				function(response) {
-					var doc = xml.parse(response);
-		            var entries = xpath.selectNodes(doc, "/a:feed/a:entry", conn.Namespaces);
-		            
-		            if (entries.length == 0) {
+			searchService.getPeople(topic).then(
+				function(results) {
+					dom.byId("searching").innerHTML = "";
+		            if (results.length == 0) {
 		            	showError("No people associated with topic: " + topic);
 	                } else {
-	                    for(var i=0; i<entries.length; i++){
-	                        var entry = entries[i];
-	                        var name = xpath.selectText(entry, "a:author/a:name", conn.Namespaces);
-	                        var email = xpath.selectText(entry, "a:author/a:email", conn.Namespaces);
-	                        createRow(name, email);
+	                    for(var i=0; i<results.length; i++){
+	                        var result = results[i];
+	                        var author = result.getAuthor();
+	                        createRow(author);
 	                    }
 	                    dom.byId("peopleTable").style.display = "";
 	                }
 				},
-				function(error){
+				function(error) {
+					dom.byId("searching").innerHTML = "";
 					showError(error.message);
 				}
 			);
@@ -47,15 +37,15 @@ require([ "sbt/Endpoint", "sbt/dom", "sbt/xml", "sbt/xpath", "sbt/connections/Co
 			errorDiv.innerHTML = message;
 		};
 		
-		var createRow = function(name, email) {
+		var createRow = function(author) {
             var table = dom.byId("peopleTable");
             var tr = document.createElement("tr");
             table.appendChild(tr);
             var td = document.createElement("td");
-            td.innerHTML = name;
+            td.innerHTML = author.authorName;
             tr.appendChild(td);
             td = document.createElement("td");
-            td.innerHTML = email;
+            td.innerHTML = author.authorEmail;
             tr.appendChild(td);
         };
 	}

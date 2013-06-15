@@ -1,0 +1,194 @@
+<p>Search IBM Connection for public information, and then return the
+	applications associated with the results and identify how many results
+	were found per application. Search IBM Connections to find all of the
+	content that contains a specific text string in its title, description
+	or content, or contains information tagged with a specific tag term,
+	and then return the people associated with the results.</p>
+<i>Input parameters</i>
+<table width="100%" border="1" class=" domino-table">
+	<tbody>
+		<tr valign="top">
+			<td width="50%"
+				style="font-size: 11pt; font-weight: bold; background-color: lightgrey;"><b>Parameter</b></td>
+			<td width="50%"
+				style="font-size: 11pt; font-weight: bold; background-color: lightgrey;"><b>Description</b></td>
+		</tr>
+
+		<tr valign="top">
+			<td width="50%">component</td>
+			<td width="50%">Limits the search results to include items from
+				a specific application. If you specify multiple applications, this
+				parameter acts as an AND operator. To specify multiple applications,
+				type a comma between each application name. For example, if you
+				specify component=dogear,activities, the results would be limited to
+				all of the activities that have been dogeared or all activity
+				bookmarks that are also dogeared. Options are:
+				<ul type="disc" style="padding-left: 19pt" class="domino-par-list">
+					<li>activities</li>
+
+					<li>blogs</li>
+
+					<li>communities</li>
+
+					<li>dogear</li>
+
+					<li>files</li>
+
+					<li>forums</li>
+
+					<li>profiles</li>
+
+					<li>wikis<br> <br>
+					</li>
+				</ul>
+			</td>
+		</tr>
+
+		<tr valign="top">
+			<td width="50%">components</td>
+			<td width="50%">Limits the search results to include items from
+				a specific application. If you specify multiple applications, this
+				parameter acts as an OR operator. To specify multiple applications,
+				type a comma between each application name. For example, if you
+				specify components=dogear,activities, the results would include all
+				items from Activities or Bookmarks that match the search criteria.
+				Options are:
+				<ul type="disc" style="padding-left: 19pt" class="domino-par-list">
+					<li>activities</li>
+
+					<li>blogs</li>
+
+					<li>communities</li>
+
+					<li>dogear</li>
+
+					<li>files</li>
+
+					<li>forums</li>
+
+					<li>profiles</li>
+
+					<li>wikis<br> <br>
+					</li>
+				</ul>
+			</td>
+		</tr>
+
+		<tr valign="top">
+			<td width="50%">email</td>
+			<td width="50%">Limits the results to only those items
+				associated with the person who has the specified email address. For
+				example, the person could be the author of an activity entry that is
+				returned or a member of the community returned.</td>
+		</tr>
+
+		<tr valign="top">
+			<td width="50%">lang</td>
+			<td width="50%">Specifies a language in which to search for a
+				string. This parameter is optional. When specified, the appropriate
+				dictionary for the specified language is loaded. You can specify any
+				of the following language codes:<br> <b>ar</b>
+			<div style="padding-left: 14pt" class="domino-par--indent">Arabic</div>
+				<b>cs</b>
+			<div style="padding-left: 14pt" class="domino-par--indent">Czech</div>
+				<b>da</b>
+			<div style="padding-left: 14pt" class="domino-par--indent">Danish</div>
+				<b>de</b>
+			<div style="padding-left: 14pt" class="domino-par--indent">German</div>
+				<b>el</b>
+			<div style="padding-left: 14pt" class="domino-par--indent">Greek</div>
+				<b>en</b>
+			<div style="padding-left: 14pt" class="domino-par--indent">English</div>
+				<b>es</b>
+			<div style="padding-left: 14pt" class="domino-par--indent">Spanish</div>
+				<b>fi</b>
+			<div style="padding-left: 14pt" class="domino-par--indent">Finnish</div>
+				<b>fr</b>
+			<div style="padding-left: 14pt" class="domino-par--indent">French</div>
+				<b>it</b>
+			<div style="padding-left: 14pt" class="domino-par--indent">Italian</div>
+				<b>ja</b>
+			<div style="padding-left: 14pt" class="domino-par--indent">Japanese</div>
+				<b>ko</b>
+			<div style="padding-left: 14pt" class="domino-par--indent">Korean</div>
+				<b>nb</b>
+			<div style="padding-left: 14pt" class="domino-par--indent">Norwegian</div>
+				<b>nl</b>
+			<div style="padding-left: 14pt" class="domino-par--indent">Dutch</div>
+				<b>pl</b>
+			<div style="padding-left: 14pt" class="domino-par--indent">Polish</div>
+				<b>pt-BR</b>
+			<div style="padding-left: 14pt" class="domino-par--indent">Brazilian
+					Portuguese</div>
+				<b>pt-PT</b>
+			<div style="padding-left: 14pt" class="domino-par--indent">Iberian
+					Portuguese</div>
+				<b>ru</b>
+			<div style="padding-left: 14pt" class="domino-par--indent">Russian</div>
+				<b>sv</b>
+			<div style="padding-left: 14pt" class="domino-par--indent">Swedish</div>
+				<b>zh</b>
+			<div style="padding-left: 14pt" class="domino-par--indent">
+					Chinese<br>
+				</div>
+				<b>Note: </b>The dictionary for the language specified must be
+				enabled for this parameter to work. See <i>Configuring
+					dictionaries for search</i> for more details.
+			</td>
+		</tr>
+
+		<tr valign="top">
+			<td width="50%">query</td>
+			<td width="50%">Text to search for. Returns a list of results
+				with the specified text in the title, description, or content.
+				Encode the strings. By default, spaces are treated as an AND
+				operator. The following operators are supported:
+				<ul type="disc" style="padding-left: 19pt" class="domino-par-list">
+					<li>AND or &amp;&amp;: Searches for items that contain both
+						words. For example: query=red%20AND%20test returns items that
+						contain both the word red and the word test. AND is the default
+						operator.</li>
+
+					<li>NOT or !: Excludes the word that follows the operator from
+						the search. For example: query=test%20NOT%20red returns items that
+						contain the word test, but not the word red.</li>
+
+					<li>OR: Searches for items that contain either of the words.
+						For example: query=test%20OR%20red</li>
+
+					<li>To search for a phrase, enclose the phrase in quotation
+						marks (" ").</li>
+
+					<li>+: The plus sign indicates that the word must be present
+						in the result. For example: query=+test%20red returns only items
+						that contain the word test and many that also contain red, but
+						none that contain only the word red.</li>
+
+					<li>?: Use a question mark to match individual characters. For
+						example: query=te%3Ft returns items that contain the words test,
+						text, tent, and others that begin with te.</li>
+
+					<li>-: The dash prohibits the return of a given word. This
+						operator is similar to NOT. For example: query=test%20-red returns
+						items that contains the word test, but not the word red.<br>
+						<br>
+					</li>
+				</ul>
+			</td>
+		</tr>
+
+		<tr valign="top">
+			<td width="50%">tag</td>
+			<td width="50%">Tag to search for. Returns a list of results
+				with the specified tag. You can use this parameter multiple times to
+				search for content that is tagged with all of the tag terms.</td>
+		</tr>
+
+		<tr valign="top">
+			<td width="50%">userid</td>
+			<td width="50%">Limits the results to only those items
+				associated with the person who has the specified user ID. This
+				parameter overwrites the email parameter if both are specified.</td>
+		</tr>
+	</tbody>
+</table>

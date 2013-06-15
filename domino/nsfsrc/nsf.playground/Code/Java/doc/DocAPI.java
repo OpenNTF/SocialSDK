@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.faces.application.FacesMessage;
 
+import nsf.playground.extension.ImportOptions;
+
 import lotus.domino.Document;
 import lotus.domino.Item;
 import lotus.domino.MIMEEntity;
@@ -19,6 +21,7 @@ import com.ibm.commons.util.io.json.JsonGenerator;
 import com.ibm.commons.util.io.json.JsonJavaFactory;
 import com.ibm.commons.util.io.json.JsonParser;
 import com.ibm.commons.xml.DOMUtil;
+import com.ibm.sbt.playground.extension.PlaygroundExtensionFactory;
 import com.ibm.xsp.component.UIInputEx;
 import com.ibm.xsp.context.FacesContextEx;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
@@ -41,7 +44,20 @@ public class DocAPI {
 	}
 
 	public String getProducts() throws Exception {
-		return "Connections,SmartCloud,Domino,WCM";
+		List<ImportOptions> opt = PlaygroundExtensionFactory.getExtensions(ImportOptions.class);
+		StringBuilder b = new StringBuilder();
+		for(int i=0; i<opt.size(); i++) {
+			String[] prd = opt.get(i).getProducts();
+			if(prd!=null) {
+				for(int j=0; j<prd.length; j++) {
+					if(b.length()>0) {
+						b.append(',');
+					}
+					b.append(prd[j]);
+				}
+			}
+		}
+		return b.toString();
 	}
 	
 	public void moveUp(String noteID) throws Exception {

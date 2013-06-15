@@ -27,6 +27,7 @@
 	<xp:scriptBlock>
 		<xp:this.value><![CDATA[var pageGlobal = {
 	dynPanel:		'#{id:dynp}',
+	cbEnv:			'#{id:cbEnv}',
 	borderContainer:'#{id:djTabContainer1}'
 }
 dojo.addOnLoad(function() {

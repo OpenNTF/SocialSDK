@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:this.resources>
+		<xp:dojoModule name="extlib.dijit.Picker"></xp:dojoModule>
+		<xp:dojoModule name="extlib.dijit.OneUIPickerList"></xp:dojoModule>
+		<xp:dojoModule name="extlib.dijit.OneUIDialog"></xp:dojoModule>
+		<xp:dojoModule name="ibm.xsp.widget.layout.xspCKEditor"></xp:dojoModule>
+	</xp:this.resources>
+	<xp:this.data>
+		<xp:dominoDocument var="document1" action="editDocument"
+			documentId="#{javascript:optionsBean.getOptionsDocumentId()}"
+			formName="GlobalOptions">
+		</xp:dominoDocument>
+	</xp:this.data>
+	<xc:ccManagePageResources></xc:ccManagePageResources>
+	<xc:ccLayout navigationPath="/Manage/Options">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:ManageLeftNavigator id="ccLeftMenu"></xc:ManageLeftNavigator>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:div>
+			<xe:formTable id="formTable2" formTitle="Playground general Options"
+				formDescription="Enter here the options to customize the Playground">
+				<xp:this.facets>
+					<xp:panel xp:key="footer" id="panel3">
+						<xp:button value="Save" id="button1"
+							loaded="${javascript:userBean.canCreateDocs}">
+							
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete">
+							<xp:this.action><![CDATA[#{javascript:save()
+@InfoMessage("Options saved")
+optionsBean.loadOptions()
+context.reloadPage()}]]></xp:this.action>
+						</xp:eventHandler></xp:button>
+						<xp:button value="Cancel" id="button2">
+							<xp:eventHandler event="onclick"
+								submit="true" refreshMode="complete" immediate="true"
+								save="false">
+								<xp:this.action><![CDATA[#{javascript:@InfoMessage("Changes cancelled")
+context.reloadPage()}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:button>
+					</xp:panel>
+				</xp:this.facets>
+				<xe:formRow id="formRow11">
+				<br/>
+				</xe:formRow>
+				<xe:formRow id="formRow6" label="Application Title:">
+				<xp:inputText id="inputText1"
+					value="#{document1.AppTitle}" size="60">
+				</xp:inputText>
+				</xe:formRow>
+				<xe:formRow id="formRow8" label="Environments:">
+				<xp:inputText id="inputText2"
+					value="#{document1.Environments}" size="60">
+				</xp:inputText>
+				</xe:formRow>
+				<xe:formRow id="formRow1" label="Apache Legal Text:">
+					<xp:comboBox id="comboBox1"
+						value="#{document1.ApacheLicense}">
+						<xp:selectItem itemLabel=""></xp:selectItem>
+						<xp:selectItem itemLabel="true"></xp:selectItem>
+						<xp:selectItem itemLabel="false"></xp:selectItem>
+					</xp:comboBox>
+				</xe:formRow>
+				<xe:formRow id="formRow9">
+				<hr/>
+				</xe:formRow>
+				<xe:formRow id="formRow7" label="JavaScript Snippets:">
+					<xp:comboBox id="comboBox6"
+						value="#{document1.JavaScriptSnippets}">
+						<xp:selectItem itemLabel=""></xp:selectItem>
+						<xp:selectItem itemLabel="true"></xp:selectItem>
+						<xp:selectItem itemLabel="false"></xp:selectItem>
+					</xp:comboBox>
+				</xe:formRow>
+				<xe:formRow id="formRow2" label="Java Snippets:">
+					<xp:comboBox id="comboBox2"
+						value="#{document1.JavaSnippets}">
+						<xp:selectItem itemLabel=""></xp:selectItem>
+						<xp:selectItem itemLabel="true"></xp:selectItem>
+						<xp:selectItem itemLabel="false"></xp:selectItem>
+					</xp:comboBox>
+				</xe:formRow>
+				<xe:formRow id="formRow4" label="Gadget Snippets:">
+					<xp:comboBox id="comboBox4"
+						value="#{document1.GadgetSnippets}">
+						<xp:selectItem itemLabel=""></xp:selectItem>
+						<xp:selectItem itemLabel="true"></xp:selectItem>
+						<xp:selectItem itemLabel="false"></xp:selectItem>
+					</xp:comboBox>
+				</xe:formRow>
+				<xe:formRow id="formRow3" label="XPages Snippets:">
+					<xp:comboBox id="comboBox3"
+						value="#{document1.XPagesSnippets}">
+						<xp:selectItem itemLabel=""></xp:selectItem>
+						<xp:selectItem itemLabel="true"></xp:selectItem>
+						<xp:selectItem itemLabel="false"></xp:selectItem>
+					</xp:comboBox>
+				</xe:formRow>
+				<xe:formRow id="formRow5" label="API Explorer:">
+					<xp:comboBox id="comboBox5"
+						value="#{document1.APIExplorer}">
+						<xp:selectItem itemLabel=""></xp:selectItem>
+						<xp:selectItem itemLabel="true"></xp:selectItem>
+						<xp:selectItem itemLabel="false"></xp:selectItem>
+					</xp:comboBox>
+				</xe:formRow>
+				<xe:formRow id="formRow10">
+				<br/>
+				</xe:formRow>
+			</xe:formTable>
+			<xe:dumpObject loaded="false" id="dumpObject1" title="document"
+				value="#{document1}" />
+		</xp:div>
+	</xc:ccLayout>
+</xp:view>

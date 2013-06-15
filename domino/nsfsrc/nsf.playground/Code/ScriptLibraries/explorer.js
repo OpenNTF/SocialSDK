@@ -57,7 +57,6 @@ function collapseSection(id) {
 }
 
 function executeService(params,details,results,callback) {
-	//require(['dojo','dojo/_base/array','dojo','dojo','dijit','sbt/Endpoint'], function(lang,array,ioQuery,query,registry,Endpoint) {
 	require(['dojo/_base/lang','dojo/_base/array','dojo/io-query','dojo/query','dijit/registry','sbt/Endpoint'], function(lang,array,ioQuery,query,registry,Endpoint) {
 		function paramValue(name) {
 			var n = dojo.query("[data-param=\""+name+"\"]",details);
@@ -138,12 +137,14 @@ function executeService(params,details,results,callback) {
 		if(qs) {
 			uri += (uri.match(/\?/) ? '&' : '?') + encodeURI(qs); 
 		}
-		
+
+		var env = dojo.byId(pageGlobal.cbEnv).value;
+
 		var startTs = Date.now();
 		var args = {
 			serviceUrl : uri,
 			handleAs : "text",
-			headers: {},
+			headers: {"x-env":env},
 			loginUi: "popup",
 	    	load : function(response,ioArgs) {
 	    		updatePanel(results,m+" "+ep.baseUrl+this.serviceUrl,200,"",response,ioArgs,startTs);

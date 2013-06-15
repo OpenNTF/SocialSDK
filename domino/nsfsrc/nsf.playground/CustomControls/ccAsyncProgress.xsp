@@ -16,6 +16,7 @@ return job]]></xe:this.script>
 
 	<xp:scriptBlock id="scriptBlock1">
 		<xp:this.value><![CDATA[
+var _statusTs = -1;		
 function xspAsyncProgressUpdate() {
 	if(!job) {
 		setTimeout(xspAsyncProgressUpdate,50);
@@ -34,20 +35,25 @@ function xspAsyncProgressUpdate() {
 			var label = dojo.byId("#{id:progressStatus}");
 			if(label) XSP.setNodeText(label,result.taskLabel);
 		} else {
-			if(result.newStatus) {
-				dojo.style(divProgress,"display","none");
-				if(result.cancelled) {
-					dojo.style(divOk,"display","none");
-					dojo.style(divCancelled,"display","block");
-					var label = dojo.byId("#{id:cancelStatus}");
-					if(label) XSP.setNodeText(label,result.taskLabel);
-				} else {
-					dojo.style(divOk,"display","block");
-					dojo.style(divCancel,"display","none");
-					var label = dojo.byId("#{id:okStatus}");
-					if(label) XSP.setNodeText(label,result.taskLabel);
-				}				
+			if(result.statusTs!=_statusTs) {
+				console.log(result.statusTs);
+				try {
+			    	_statusTs = result.statusTs; 
+					dojo.style(divProgress,"display","none");
+					if(result.cancelled) {
+						dojo.style(divOk,"display","none");
+						dojo.style(divCancel,"display","block");
+						var label = dojo.byId("#{id:cancelStatus}");
+						if(label) XSP.setNodeText(label,result.taskLabel);
+					} else {
+						dojo.style(divOk,"display","block");
+						dojo.style(divCancel,"display","none");
+						var label = dojo.byId("#{id:okStatus}");
+						if(label) XSP.setNodeText(label,result.taskLabel);
+					}
+				} catch(e) {console.log(e);}				
 			}
+		
 		}
 		setTimeout(xspAsyncProgressUpdate,800);
 	});
@@ -64,8 +70,7 @@ setTimeout(xspAsyncProgressUpdate,50);
 
 	<xp:div id="infoCancel" styleClass="lotusMessage lotusError"
 		style="display:none">
-		<xp:div id="cancelStatus" styleClass="lotusMessageBody">Import Cancelled
-		</xp:div>
+		<xp:div id="cancelStatus" styleClass="lotusMessageBody"></xp:div>
 	</xp:div>
 
 	<xp:div id="infoProgress" styleClass="lotusMessage lotusInfo"

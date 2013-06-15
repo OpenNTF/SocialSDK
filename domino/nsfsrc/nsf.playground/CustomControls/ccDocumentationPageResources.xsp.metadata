@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="85257AA80077A28B" version="9.0" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="6aa" sequence="23" unid="C99405491A09455C85257B7500695D3D">
+<noteinfo noteid="6aa" sequence="35" unid="C99405491A09455C85257B7500695D3D">
 <created><datetime dst="true">20130524T151051,49-04</datetime></created>
-<modified><datetime dst="true">20130524T151158,00-04</datetime></modified>
-<revised><datetime dst="true">20130524T151157,99-04</datetime></revised>
-<lastaccessed><datetime dst="true">20130524T151158,00-04</datetime></lastaccessed>
+<modified><datetime dst="true">20130524T153301,00-04</datetime></modified>
+<revised><datetime dst="true">20130524T153300,99-04</datetime></revised>
+<lastaccessed><datetime dst="true">20130524T153301,00-04</datetime></lastaccessed>
 <addedtofile><datetime dst="true">20130524T151051,50-04</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></updatedby>
+<wassignedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></wassignedby>
 <item name="$Flags"><text>gC~4;</text></item>
-
-
-<item name="$FileNames" sign="true"><text>ccDocumentPageResources.xsp</text></item>
-
-
-
-
 <item name="$TITLE" sign="true"><text>ccDocumentationPageResources.xsp</text></item>
-<item name="$DesignerVersion" sign="true"><text>8.5.3</text></item>
+
+
+
+
+<item name="$FileNames" sign="true"><text>ccDocumentationPageResources.xsp</text></item>
+<item name="$DesignerVersion"><text>8.5</text></item>
+
+
+
+
 </note>

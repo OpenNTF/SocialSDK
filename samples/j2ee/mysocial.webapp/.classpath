@@ -8,5 +8,9 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/com.ibm.commons"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/com.ibm.commons.runtime"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/com.ibm.commons.xml"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/com.ibm.sbt.core"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

@@ -29,12 +29,12 @@
         <p>The Social Business Toolkit SDK is a set of libraries and code samples that you use for connecting to the IBM Social Platform.
         The samples application is a web-based live demonstration of the JavaScript and Java APIs that are exposed by the SDK.
         The sample application contains a large set of code snippets and examples that you can use in your own applications.</p>
-        <p><a class="btn btn-primary btn-large" target="_blank" href="https://www.ibmdw.net/social/">Learn More &raquo;</a></p>
+        <p><a class="btn btn-primary btn-large" target="_blank" href="https://www.ibmdw.net/social/">Learn More</a></p>
+        <div class="container">
+          <img src="images/banner.jpg">
+        </div>
       </div>
       <!-- main content ends -->
-      <div class="container">
-        <img src="images/banner.jpg">
-      </div>
     </div>
 
 	<%@include file="includes/footer.jsp" %>  

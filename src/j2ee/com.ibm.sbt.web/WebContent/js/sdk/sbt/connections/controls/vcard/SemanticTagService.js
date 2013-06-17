@@ -77,8 +77,11 @@ define([ "../../../declare", "../../../Endpoint", "dojo/_base/config"], function
 
         var serviceUrl = "/profiles/ibm_semanticTagServlet/javascript/semanticTagService.js?inclDojo=" + inclDojo;
         
-        dojoConfig.proxy = proxy;
-        var locale = dojoConfig.locale || "en"; 
+        var locale = "en";
+        if (dojoConfig) {
+        	dojoConfig.proxy = proxy;
+        	locale = dojoConfig.locale;
+        }
         endpoint.xhrGet({
             serviceUrl : serviceUrl,
             handleAs : "text",

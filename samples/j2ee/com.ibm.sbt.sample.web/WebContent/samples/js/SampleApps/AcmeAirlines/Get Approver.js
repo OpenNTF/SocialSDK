@@ -1,5 +1,5 @@
-require(["sbt/Endpoint", "sbt/json", "sbt/dom", "sbt/xml", "sbt/xpath", "sbt/connections/ConnectionsConstants"], 
-    function(Endpoint, json, dom, xml, xpath, connections) {
+require(["sbt/config", "sbt/json", "sbt/dom", "sbt/xml", "sbt/xpath", "sbt/connections/ConnectionsConstants"], 
+    function(config, json, dom, xml, xpath, connections) {
 
     var basicReportingChain = "/profiles/atom/reportingChain.do?userid="; 
     var oauthReportingChain = "/profiles/oauth/atom/reportingChain.do?userid="; 
@@ -7,7 +7,7 @@ require(["sbt/Endpoint", "sbt/json", "sbt/dom", "sbt/xml", "sbt/xpath", "sbt/con
     var approverEmailXPath = "/a:feed/a:entry[2]/a:contributor/a:email";
     var approverUserIdXPath = "/a:feed/a:entry[2]/a:contributor/snx:userid";
 
-    var endpoint = Endpoint.find('connections');
+    var endpoint = config.findEndpoint('connections');
     
     var reportingChain = null;
     

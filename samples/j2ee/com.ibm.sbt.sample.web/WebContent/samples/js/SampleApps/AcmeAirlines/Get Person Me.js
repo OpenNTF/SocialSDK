@@ -1,10 +1,10 @@
-require(["sbt/Endpoint", "sbt/json", "sbt/dom"], 
-    function(Endpoint, json, dom) {
+require(["sbt/config", "sbt/json", "sbt/dom"], 
+    function(config, json, dom) {
 
     var basicPeopleMe = '/connections/opensocial/basic/rest/people/@me/';
     var oauthPeopleMe = '/connections/opensocial/oauth/rest/people/@me/';
 
-    var endpoint = Endpoint.find('connections');
+    var endpoint = config.findEndpoint('connections');
     
     var personObject = null;
     

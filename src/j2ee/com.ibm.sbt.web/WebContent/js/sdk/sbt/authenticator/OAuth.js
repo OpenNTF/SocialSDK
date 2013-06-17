@@ -38,7 +38,7 @@ define(['../declare','../lang'], function(declare,lang) {
 		 * Method that authenticates the current user 
 		 */
 		authenticate: function(options) {
-			var mode = options.loginUi || this.loginUi || (sbt.Properties ? sbt.Properties["loginUi"] : null);
+			var mode = options.loginUi || this.loginUi;
 			if(mode=="popup") {
 				return this._authPopup(options);
 			} else if(mode=="dialog") {

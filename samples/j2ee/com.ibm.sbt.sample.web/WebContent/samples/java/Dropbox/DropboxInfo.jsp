@@ -46,8 +46,8 @@
     %>
    	Please authenticate with the Dropbox popup window
     <script>
-    	require(['sbt/Endpoint'], function(Endpoint) {
-    		var ep = Endpoint.find("dropbox");
+    	require(['sbt/config'], function(config) {
+    		var ep = config.findEndpoint("dropbox");
     		ep.authenticate({loginUi: "popup"});
     	});
     </script>

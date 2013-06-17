@@ -20,8 +20,8 @@
  * @module sbt.connections.FileService
  */
 
-define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", "./FileConstants", "../base/BaseService", "../base/BaseEntity", "../base/XmlDataHandler", "../config", "../util","../xml" ],
-		function(declare, lang, stringUtil, Endpoint, Promise, consts, BaseService, BaseEntity, XmlDataHandler, cfg, util, xml) {
+define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstants", "../base/BaseService", "../base/BaseEntity", "../base/XmlDataHandler", "../config", "../util","../xml" ],
+		function(declare, lang, stringUtil, Promise, consts, BaseService, BaseEntity, XmlDataHandler, config, util, xml) {
 
 			/**
 			 * Comment class associated with a file comment.
@@ -706,7 +706,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
 				constructor : function(args) {
 					this.endpointName = args ? (args.endpoint ? args.endpoint : this.getDefaultEndpointName()) : this.getDefaultEndpointName();
 					if (!this.endpoint) {						
-						this.endpoint = Endpoint.find(this.endpointName);
+						this.endpoint = config.findEndpoint(this.endpointName);
 					}
 				},
 

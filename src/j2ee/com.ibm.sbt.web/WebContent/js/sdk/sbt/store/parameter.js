@@ -22,13 +22,19 @@ define(["../stringUtil", "../Endpoint"], function(stringUtil, Endpoint) {
         defaultFormat: function(param, val) {
             return param.key + "=" + val;
         },
+        sortField: function(vals) {
+            return function(param, val) {
+                var v = vals[val] || "";
+                return param.key + "=" + v;
+            };
+        },
         
         ascSortOrderBoolean: function(param, val) {
             var v = (val === "asc") ? true : false;
             return param.key + "=" + v;
         },
         
-        fileSortOrder: function(param,val){
+        sortOrder: function(param,val){
         	var v = (val === "asc") ? "desc" : "asc";
             return param.key + "=" + v;
         },
@@ -48,13 +54,7 @@ define(["../stringUtil", "../Endpoint"], function(stringUtil, Endpoint) {
             }
             return param.key + "=" + v;
         },
-        
-        sortField: function(vals) {
-            return function(param, val) {
-                var v = vals[val] || "";
-                return param.key + "=" + v;
-            };
-        }
+
     };
     
     
@@ -67,102 +67,23 @@ define(["../stringUtil", "../Endpoint"], function(stringUtil, Endpoint) {
         };
     };
     
-    // TODO we must use the endpoint being used by the grid
-    var endpoint; 
-    var isV4OrHigher = true;
-    
-    var setEndpoint = function(args){
-    	endpoint = Endpoint.find(args.endpoint || "connections");
-	    if (endpoint.apiVersion) {
-	        var parts = endpoint.apiVersion.split(".");
-	        isV4OrHigher = !(parts.length > 1 && parts[0] < 4);
-	    }
-    };
-    
-    var sortVals = null;
-    if (isV4OrHigher) {
-	    sortVals = {
-	     communities: {
-	            all: {
-	                date: "modified",
-	                popularity: "count",
-	                name: "title"
-	            }
-	        },
-	        files:{
-	        	all:{
-		        	name: "title",
-		        	updated: "modified",
-		        	downloads: "downloaded",
-		        	comments: "commented",
-		        	likes: "recommended",
-		        	files: "itemCount",
-		        	created: "created",
-		        	modified: "modified"
-	        	}
-	        },
-	        profiles:{
-	        	all:{
-	        		displayName: "displayName",
-	        		recent: "3" //there is nothing in the API doc for sorting by recent, but connections use this parameter  
-	        	}
-	        }
-	    };
-    } else {
-	    sortVals = {
-   	        communities: {
-   	            all: {
-   	                date: "lastmod",
-   	                popularity: "count",
-   	                name: "name"
-   	            }
-   	        },
-   	        files:{
-   	        	all:{
-   		        	name: "title",
-   		        	updated: "modified",
-   		        	downloads: "downloaded",
-   		        	comments: "commented",
-   		        	likes: "recommended",
-   		        	files: "itemCount",
-   		        	created: "created",
-   		        	modified: "modified"
-   	        	}
-   	        },
-   	        profiles:{
-   	        	all:{
-   	        		displayName: "displayName",
-   	        		recent: "3" //there is nothing in the API doc for sorting by recent, but connections use this parameter  
-   	        	}
-   	        }
-   	    };
-    }
-    
+   
     return {
-        communities: {
-            all: {
-                pageNumber: new Parameter({ key: "page", format: Formatter.oneBasedInteger }),
-                pageSize: new Parameter({ key: "ps", format: Formatter.oneBasedInteger }),
-                sortBy: new Parameter({ key: "sortField", format: Formatter.sortField(sortVals.communities.all) }),
-                sortOrder: new Parameter({ key: "asc", format: Formatter.ascSortOrderBoolean })
-            }
-        },
-        files:{
-        	all:{
-	        	pageNumber: new Parameter({ key: "page", format: Formatter.oneBasedInteger }),
-	            pageSize: new Parameter({ key: "pageSize", format: Formatter.oneBasedInteger }),
-	            sortBy: new Parameter({ key: "sortBy", format: Formatter.sortField(sortVals.files.all) }),
-	            sortOrder: new Parameter({ key: "sortOrder", format: Formatter.fileSortOrder })
-        	}
-        },
-        profiles:{
-        	all:{
-	        	pageNumber: new Parameter({ key: "page", format: Formatter.oneBasedInteger }),
-	            pageSize: new Parameter({ key: "ps", format: Formatter.oneBasedInteger }),
-	            sortBy: new Parameter({ key: "sortBy", format: Formatter.sortField(sortVals.profiles.all) }),
-	            sortOrder: new Parameter({ key: "sortOrder", format: Formatter.fileSortOrder })
-        	}
-        },
+    	 defaultFormat: function (key){
+			 return new Parameter({key: key, format: Formatter.defaultFormat}); 
+		 },
+		 
+		 sortField: function(key, sortVals){
+			return new Parameter({key: key, format: Formatter.sortField(sortVals)}); 
+		 },
+		 
+		 sortOrder: function(key){
+			 return new Parameter({key: key, format: Formatter.sortOrder});
+		 },
+		 
+		 booleanSortOrder: function (key){
+			 return new Parameter({key: key, format: Formatter.ascSortOrderBoolean});
+		 },
         
         /**
          * 

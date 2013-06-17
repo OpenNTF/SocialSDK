@@ -24,9 +24,23 @@ define([ "../../../declare",
          "../../../connections/controls/vcard/SemanticTagService",
          "../../../config",
          "../../../connections/CommunityConstants",
-         "../../../store/parameter" ], 
+         "../../../store/parameter"], 
         function(declare, Grid, CommunityGridRenderer, CommunityAction, SemanticTagService, sbt, consts, parameter) {
-
+	
+	var sortVals = {
+			date: "modified",
+            popularity: "count",
+            name: "title"
+	};
+	
+	var ParamSchema = {	
+		pageNumber: parameter.oneBasedInteger("page"),	
+		pageSize: parameter.oneBasedInteger("ps"),
+		sortBy: parameter.sortField("sortField",sortVals),
+		sortOrder: parameter.booleanSortOrder("asc")			
+	};
+	
+	
     /**
      * @class  CommunityGrid
      * @namespace  sbt.connections.controls.communities
@@ -42,7 +56,7 @@ define([ "../../../declare",
                     url : consts.AtomCommunitiesAll,
                     attributes : consts.CommunityXPath,
                     feedXPath : consts.CommunityFeedXPath,
-                    paramSchema : parameter.communities.all
+                    paramSchema : ParamSchema
                 },
                 rendererArgs : null
             },
@@ -51,7 +65,7 @@ define([ "../../../declare",
                     url : consts.AtomCommunitiesMy,
                     attributes : consts.CommunityXPath,
                     feedXPath : consts.CommunityFeedXPath,
-                    paramSchema : parameter.communities.all
+                    paramSchema : ParamSchema
                 },
                 rendererArgs : null
             }

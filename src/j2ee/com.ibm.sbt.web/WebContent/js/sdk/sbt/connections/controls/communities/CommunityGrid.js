@@ -40,7 +40,6 @@ define([ "../../../declare",
 		sortOrder: parameter.booleanSortOrder("asc")			
 	};
 	
-	
     /**
      * @class  CommunityGrid
      * @namespace  sbt.connections.controls.communities

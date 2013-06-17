@@ -35,7 +35,6 @@ require(["sbt/controls/grid/Grid",
 	            popularity: "count",
 	            name: "title"
 		};
-		
 		var ParamSchema = {	
 			pageNumber: parameter.oneBasedInteger("page"),	
 			pageSize: parameter.oneBasedInteger("ps"),

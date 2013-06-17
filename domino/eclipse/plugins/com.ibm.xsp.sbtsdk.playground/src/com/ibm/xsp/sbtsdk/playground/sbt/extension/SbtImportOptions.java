@@ -75,22 +75,22 @@ public class SbtImportOptions extends ImportOptions {
 	public String adjustExplorerPath(String[] products, String path) throws IOException {
 		Product p = findProduct(products);
 		if(p!=Product.UNKNOWN) {
-			// If already imported in the right place, do nothing and return the path
-			if(   path.startsWith("/Domino")
-			   || path.startsWith("/Connections")
-		       || path.startsWith("/Smartcloud")
-				) {
-				return path;
-			}
-			
-			// Else, add the proper prefix
-			switch(p) {
-				case DOMINO:		return PathUtil.concat("/Domino", path, '/'); 
-				case CONNECTIONS:	return PathUtil.concat("/Connections", path, '/'); 
-				case SMARTCLOUD:	return PathUtil.concat("/SmartCloud", path, '/'); 
-			}
-
-			// Should never be here...
+//			// If already imported in the right place, do nothing and return the path
+//			if(   path.startsWith("/Domino")
+//			   || path.startsWith("/Connections")
+//		       || path.startsWith("/Smartcloud")
+//				) {
+//				return path;
+//			}
+//			
+//			// Else, add the proper prefix
+//			switch(p) {
+//				case DOMINO:		return PathUtil.concat("/Domino", path, '/'); 
+//				case CONNECTIONS:	return PathUtil.concat("/Connections", path, '/'); 
+//				case SMARTCLOUD:	return PathUtil.concat("/SmartCloud", path, '/'); 
+//			}
+//
+//			// Should never be here...
 		}
 		return null;
 	}
@@ -99,11 +99,11 @@ public class SbtImportOptions extends ImportOptions {
 	public void createProperties(Properties properties, String[] products, String path) throws IOException {
 		Product p = findProduct(products);
 		if(p==Product.UNKNOWN) {
-			if(path.startsWith("/Domino")) {
+			if(StringUtil.startsWithIgnoreCase(path,"Domino")) {
 				p = Product.DOMINO;
-			} else if(path.startsWith("/Connections")) {
+			} else if(StringUtil.startsWithIgnoreCase(path,"Connections")) {
 				p = Product.CONNECTIONS;
-			} else if(path.startsWith("/SmartCloud")) {
+			} else if(StringUtil.startsWithIgnoreCase(path,"SmartCloud")) {
 				p = Product.SMARTCLOUD;
 			}
 		}

@@ -17,7 +17,7 @@
  * Social Business Toolkit SDK.
  * Definition of an authentication mechanism.
  */
-define(["../declare"],function(declare) {
+define(["../declare", "../lang"],function(declare, lang) {
 /**
  * Proxy basic authentication.
  * 
@@ -27,6 +27,12 @@ return declare(null, {
 	loginUi:		"",
 	loginPage:		"/sbt/authenticator/templates/login.html",
 	dialogLoginPage:"authenticator/templates/loginDialog.html",
+	url: "",
+	
+	constructor: function(args){
+	    lang.mixin(this, args || {});
+	},
+	
 	/**
 	 * Method that authenticate the current user . 
 	 * 
@@ -36,9 +42,9 @@ return declare(null, {
 	 *  Internationalization
 	 */
 	authenticate: function(options) {
-		var mode =  options.loginUi || sbt.Properties["loginUi"] || this.loginUi ;
-		var loginPage = options.loginPage || sbt.Properties["loginPage"] || this.loginPage;
-		var dialogLoginPage = options.dialogLoginPage || sbt.Properties["dialogLoginPage"] || this.dialogLoginPage;
+		var mode =  options.loginUi || this.loginUi ;
+		var loginPage = options.loginPage || this.loginPage;
+		var dialogLoginPage = options.dialogLoginPage || this.dialogLoginPage;
 		if(mode=="popup") {
 			return this._authPopup(options, loginPage);
 		} else if(mode=="dialog") {
@@ -75,7 +81,7 @@ return declare(null, {
 		}
 		var proxy = options.proxy.proxyUrl;
 		var actionURL = proxy.substring(0,proxy.lastIndexOf("/"))+"/basicAuth/"+options.proxyPath+"/JSApp";
-		var url = sbt.Properties["sbtUrl"]+loginPage+'?actionURL='+encodeURIComponent(actionURL)
+		var url = this.url+loginPage+'?actionURL='+encodeURIComponent(actionURL)
 										 +'&redirectURL=empty'
 										 +'&loginUi=popup'
 										 +'&showWrongCredsMessage=false';
@@ -99,7 +105,7 @@ return declare(null, {
 		var proxy = options.proxy.proxyUrl;
 		var actionURL = proxy.substring(0,proxy.lastIndexOf("/"))+"/basicAuth/"+options.proxyPath+"/JSApp";
 		//var proxyServletURL='/sbt/proxy/basicAuth/'+options.proxyPath+"/JSApp";
-		var url = sbt.Properties["sbtUrl"]+loginPage+'?actionURL='+encodeURIComponent(actionURL)
+		var url = this.url+loginPage+'?actionURL='+encodeURIComponent(actionURL)
 							 +'&redirectURL='+encodeURIComponent(document.URL)
 							 +'&loginUi=mainWindow'
 							 +'&showWrongCredsMessage=false';

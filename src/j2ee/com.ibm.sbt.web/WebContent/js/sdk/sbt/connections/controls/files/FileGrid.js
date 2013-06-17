@@ -147,7 +147,6 @@ define([ "../../../declare",
 		"authorUid" : "a:author/snx:userid",
 		"authorEmail" : "a:author/a:email"
 	};
-	
 	var sortVals = {
 			name: "title",
         	updated: "modified",

@@ -36,7 +36,6 @@ define([ "../../../declare",
         statusUpdates: "/profiles/atom/mv/theboard/entries.do?outputType=profile&format=full",
         connectionsInCommon: "/profiles/atom/connectionsInCommon.do?connectionType=colleague&outputType=profile&format=full"
 	};
-	
 	var xpath_profile = {
         "id":               "a:id",
 	 	"entry":			"/a:feed/a:entry",

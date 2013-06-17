@@ -2,7 +2,7 @@
 require(["sbt/dom","sbt/config"], function(dom,config) {
 	var ep = config.findEndpoint("connections");
 	config.Properties["loginUi"] = "dialog";
-	config.Properties["dialogLoginPage"] = "authenticator/templates/QSDialogLogin.html";
+	config.Properties["dialogLoginPage"] = "authenticator/templates/ConnectionsLoginDialog.html";
 	ep.authenticate({ forceAuthentication: true }).then(
 		function(response){
 			dom.setText("content","You successfully logged in to connections");	

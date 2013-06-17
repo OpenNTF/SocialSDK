@@ -17,14 +17,15 @@
 /**
  * 
  */
-define([ "sbt/config" ], function(config) {
+
+define([ "../../../declare", "../../../Endpoint", "dojo/_base/config", "sbt/config"], function(declare, Endpoint, dojoConfig, config) {
 
     /**
      * The class which handles loading of the semantic tag service for connections, this is needed for displaying vcards.
      * 
      * @class sbt.controls.vcard.connections.SemanticTagService
      */
-    var SemanticTagService = dojo.declare("sbt.connections.controls.vcard.SemanticTagService", null, {
+    var SemanticTagService = declare(null, {
     });
 
     /**
@@ -69,13 +70,16 @@ define([ "sbt/config" ], function(config) {
         if (args && args.endpoint) {
             endpoint = args.endpoint;
         }
+        var proxy = endpoint.proxy.proxyUrl + "/" + endpoint.proxyPath;
         if (!SemTagSvcConfig.baseUrl) {
             SemTagSvcConfig.baseUrl = endpoint.baseUrl; 
-            SemTagSvcConfig.proxyURL = endpoint.proxy.proxyUrl;
+            SemTagSvcConfig.proxyURL = proxy;
         }
 
         var serviceUrl = "/profiles/ibm_semanticTagServlet/javascript/semanticTagService.js?inclDojo=" + inclDojo;
-        var locale = dojo.config.locale || "en"; 
+        
+        dojoConfig.proxy = proxy;
+        var locale = dojoConfig.locale || "en"; 
         endpoint.xhrGet({
             serviceUrl : serviceUrl,
             handleAs : "text",
@@ -85,7 +89,9 @@ define([ "sbt/config" ], function(config) {
             load : function(response) {
                 SemTagSvcConfig.loading = false;
                 try {
-                    eval(response);
+                    var re = new RegExp(endpoint.baseUrl, "g");
+                    var _response = response.replace(re, proxy);
+                    eval(_response);
                     SemTagSvcConfig.loaded = true;
                 } catch (error) {
                     SemTagSvcConfig.error = error;

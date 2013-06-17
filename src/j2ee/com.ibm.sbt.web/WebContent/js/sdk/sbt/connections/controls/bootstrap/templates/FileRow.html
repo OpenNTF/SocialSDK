@@ -1,0 +1,36 @@
+<tr class="lotusFirst">
+    <td class="lotusFirstCell" width="32" title="${title}">
+        <input value="${title}" name="${title}" aria-label="${nls.ariaCheckbox}" data-dojo-attach-event="onclick: handleCheckBox" type="checkbox" class="lotusCheckbox">
+    </td>
+    <td class=lotusNowrap>
+        <a title="Download ${title}" href="${downloadUrl}" class="lconnDownloadable lconnDownloadableIcon">
+            <img alt="" src="images/blank.gif" class="lconn-ftype32 lconn-ftype32-${ftype}"><span class="lotusAltText" title="">${_nls.download}</span>
+        </a>
+    </td>
+    <td style="width: 100%;">
+        <h4 class="lotusBreakWord lotusLeft">
+            <a class="entry-title" rel="bookmark" title="${tooltip}" href="" data-dojo-attach-event="onclick: handleClick">${title}</a>    
+        </h4>
+        <div class="lotusMeta lotusClear">
+            <ul class="lotusInlinelist">
+                <li class="lotusFirst" title="">
+                    <span class="vcard" dojoAttachPoint="vcardNode">
+  						<a aria-label="${nls.ariaVcard}" href="javascript:void(0);" class="fn url">${authorName}</a>
+  						<span data-dojo-attach-point="idNode" class="x-lconn-userid" style="display: none;">${authorUid}</span>
+					</span>
+                ${_nls.created} ${createdLabel}
+                </li>
+                <li>
+                    ${hitCount} ${_nls.downloads}
+                </li>
+                <li>
+                    ${commentCount} ${_nls.comments}
+                </li>
+            </ul>
+        </div>
+    </td>
+  
+   
+
+</tr>
+

@@ -1,5 +1,5 @@
-require(["sbt/Endpoint", "sbt/dom", "sbt/config"], function(Endpoint, dom, config) {
-    var endpoint = Endpoint.find("smartcloud");
+require(["sbt/dom", "sbt/config"], function(dom, config) {
+    var endpoint = config.findEndpoint("smartcloud");
     
     config.Properties["loginUi"] = "popup";
 

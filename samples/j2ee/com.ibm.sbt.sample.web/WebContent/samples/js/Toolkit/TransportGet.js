@@ -1,7 +1,7 @@
-require([ "sbt/Endpoint", "sbt/_bridge/Transport", "sbt/lang", "sbt/dom", "sbt/json", "sbt/xml" ], 
-    function(Endpoint,Transport,lang,dom,json,xml) {
+require([ "sbt/config", "sbt/_bridge/Transport", "sbt/lang", "sbt/dom", "sbt/json", "sbt/xml" ], 
+    function(config,Transport,lang,dom,json,xml) {
     
-    var endpoint = Endpoint.find("connections");
+    var endpoint = config.findEndpoint("connections");
     
     var url = "/communities/service/atom/community/instance";
     url = endpoint.proxy.rewriteUrl(endpoint.baseUrl, url, endpoint.proxyPath);

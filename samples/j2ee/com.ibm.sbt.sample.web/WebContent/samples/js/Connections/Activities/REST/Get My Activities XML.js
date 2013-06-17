@@ -1,5 +1,5 @@
-require([ "sbt/config","sbt/Endpoint","sbt/dom" ], function(sbt,Endpoint,dom) {
-	var endpoint = Endpoint.find("connections");
+require([ "sbt/config","sbt/dom" ], function(config,dom) {
+	var endpoint = config.findEndpoint("connections");
     
     var url = "/activities/service/atom2/activities";
     

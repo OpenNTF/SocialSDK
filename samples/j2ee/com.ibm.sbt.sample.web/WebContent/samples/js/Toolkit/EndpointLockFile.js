@@ -1,7 +1,7 @@
-require([ "sbt/connections/ConnectionsConstants", "sbt/Endpoint", "sbt/lang", "sbt/dom", "sbt/json", "sbt/xml", "sbt/xpath" ], 
-    function(conn,Endpoint,lang,dom,json,xml,xpath) {
+require([ "sbt/connections/ConnectionsConstants", "sbt/config", "sbt/lang", "sbt/dom", "sbt/json", "sbt/xml", "sbt/xpath" ], 
+    function(conn,config,lang,dom,json,xml,xpath) {
     
-    var endpoint = Endpoint.find("connections");
+    var endpoint = config.findEndpoint("connections");
     var results = [];
     
     endpoint.request("files/basic/api/myuserlibrary/document/%{sample.fileId}/entry", { method : "GET" }).then(

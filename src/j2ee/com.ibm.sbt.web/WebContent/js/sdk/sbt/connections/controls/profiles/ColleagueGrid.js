@@ -17,10 +17,10 @@
 /**
  * 
  */
-define([ "../../../declare", "../../../Endpoint", "../../../xml", "../../../xpath", "../../../stringUtil", 
+define([ "../../../declare", "../../../config", "../../../xml", "../../../xpath", "../../../stringUtil", 
          "../../../connections/ConnectionsConstants",
          "./ProfileGrid", "./ColleagueGridRenderer", "../ViewAllAction" ], 
-        function(declare, Endpoint, xml, xpath, stringUtil, conn, ProfileGrid, ColleagueGridRenderer, ViewAllAction) {
+        function(declare, config, xml, xpath, stringUtil, conn, ProfileGrid, ColleagueGridRenderer, ViewAllAction) {
 
     /**
      * @class ColleagueGrid
@@ -73,7 +73,7 @@ define([ "../../../declare", "../../../Endpoint", "../../../xml", "../../../xpat
             if (!id || (!targets || targets.length == 0)) {
                 return;
             }
-            var endpoint = Endpoint.find(this.endpoint || "connections");
+            var endpoint = config.findEndpoint(this.endpoint || "connections");
             var baseUrl = "/profiles/atom/connection.do?connectionType=colleague";
             if (this._isEmail(id)) {
                 baseUrl += "&sourceEmail=" + encodeURIComponent(id);

@@ -19,8 +19,8 @@
  * 
  * @module sbt.connections.ProfileService
  */
-define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConstants", "../base/BaseService", "../base/BaseEntity", "../base/XmlDataHandler", "../base/VCardDataHandler", "../Endpoint", "../Cache" ], function(
-        declare,lang,config,stringUtil,consts,BaseService,BaseEntity,XmlDataHandler, VCardDataHandler, Endpoint, Cache) {
+define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConstants", "../base/BaseService", "../base/BaseEntity", "../base/XmlDataHandler", "../base/VCardDataHandler", "../Cache" ], function(
+        declare,lang,config,stringUtil,consts,BaseService,BaseEntity,XmlDataHandler, VCardDataHandler, Cache) {
 
 	var updateProfileXmlTemplate = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns:app=\"http://www.w3.org/2007/app\" xmlns:thr=\"http://purl.org/syndication/thread/1.0\" xmlns:fh=\"http://purl.org/syndication/history/1.0\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\" xmlns:opensearch=\"http://a9.com/-/spec/opensearch/1.1/\" xmlns=\"http://www.w3.org/2005/Atom\"><category term=\"profile\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category><content type=\"text\">\nBEGIN:VCARD\nVERSION:2.1\n${jobTitle}${address}${telephoneNumber}${building}${floor}END:VCARD\n</content></entry>";
     var updateProfileAttributeTemplate = "${attributeName}:${attributeValue}\n";
@@ -393,7 +393,7 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
          */
         constructor : function(args) {
         	if (!this.endpoint) {
-                this.endpoint = Endpoint.find(this.getDefaultEndpointName());
+                this.endpoint = config.findEndpoint(this.getDefaultEndpointName());
             }
         	if(!this._cache){
         		if(config.Properties.ProfileCacheSize || consts.DefaultCacheSize){

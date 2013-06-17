@@ -3,9 +3,9 @@ var profileService = null;
 var profileId = null;
 var profileDisplayName = null;
 
-require([ "sbt/Endpoint", "sbt/connections/ProfileService", "sbt/dom" ], function(Endpoint, ProfileService, dom) {
+require([ "sbt/config", "sbt/connections/ProfileService", "sbt/dom" ], function(config, ProfileService, dom) {
 
-	var endpoint = Endpoint.find("connections");
+	var endpoint = config.findEndpoint("connections");
 	var url = "/connections/opensocial/basic/rest/people/@me/";
 	endpoint.request(url, {
 		handleAs : "json"

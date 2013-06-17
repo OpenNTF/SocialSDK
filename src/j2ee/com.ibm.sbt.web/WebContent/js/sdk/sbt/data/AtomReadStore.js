@@ -17,7 +17,7 @@
 /**
  * @module sbt.data.AtomReadStore
  */
-define(["../declare","../Endpoint", "../lang", "../base/core", "../xml", "../xpath","dojox/html/entities"], function(declare, Endpoint, lang, core, xml, xpath, entities) {
+define(["../declare","../config", "../lang", "../base/core", "../xml", "../xpath","dojox/html/entities"], function(declare, config, lang, core, xml, xpath, entities) {
     
     /**
      * A data store for Atom XML based services or documents.   This store is still under development
@@ -56,7 +56,7 @@ define(["../declare","../Endpoint", "../lang", "../base/core", "../xml", "../xpa
          *   endpoint: the endpoint to be used
          */
         constructor: function(args) {
-            this._endpoint = Endpoint.find(args.endpoint || "connections");
+            this._endpoint = config.findEndpoint(args.endpoint || "connections");
 
             if (args) {
                 this.url = args.url;

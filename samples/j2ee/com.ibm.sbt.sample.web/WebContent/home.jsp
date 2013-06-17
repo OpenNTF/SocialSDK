@@ -4,12 +4,8 @@
   <head>
   <% 
   String environment = Context.get().getProperty("environment");
-  String envParam = request.getParameter("env");
-  boolean smartcloud = false;
-  if(envParam == null)
-      smartcloud = environment != null && environment.equals("smartcloudEnvironment") ? true : false;
-  else
-      smartcloud = envParam.equals("smartcloudEnvironment") ? true : false;
+  boolean smartcloud = environment != null && environment.equals("smartcloudEnvironment") ? true : false;
+  String smartcloudUrl = Context.get().getProperty("smartcloud.url");
   %>
     <meta charset="utf-8">
     <title>Social Business Toolkit - Samples</title>
@@ -19,7 +15,7 @@
     <link href="css/stickyfooter.css" rel="stylesheet"></link>
     <link href="/sbt.bootstrap211/bootstrap/css/bootstrap-responsive.css" rel="stylesheet"></link>
     <%if(smartcloud){ %>
-      <link rel="stylesheet" href="https://apps.na.collabservtest.lotus.com/theming/theme/css/3" type="text/css" /> 
+      <link rel="stylesheet" href="<%=smartcloudUrl%>/theming/theme/css/3" type="text/css" /> 
     <%} %>
   </head>
 
@@ -28,18 +24,17 @@
     
     <div id="wrap">
       <!-- main content starts -->
-      <div class="hero-unit">
+      <div class="hero-unit" style="background-image:url('images/cover-bg.gif');color:white;">
         <h2>Samples Application</h2>
         <p>The Social Business Toolkit SDK is a set of libraries and code samples that you use for connecting to the IBM Social Platform.
         The samples application is a web-based live demonstration of the JavaScript and Java APIs that are exposed by the SDK.
         The sample application contains a large set of code snippets and examples that you can use in your own applications.</p>
-        <p><a class="btn btn-primary btn-large" target="_blank" href="http://bit.ly/ibmsbtcommunity">Learn More &raquo;</a></p>
-      </div>
-      <div class="container">
-        <img src="https://dw1.s81c.com/developerworks/mydeveloperworks/blogs/0f357879-ccee-4927-98c1-7bb88d5dc81f/resource/ssbanner.png" class="img-polaroid">
+        <p><a class="btn btn-primary btn-large" target="_blank" href="https://www.ibmdw.net/social/">Learn More &raquo;</a></p>
       </div>
       <!-- main content ends -->
-      <div id="push"></div>
+      <div class="container">
+        <img src="images/banner.jpg">
+      </div>
     </div>
 
 	<%@include file="includes/footer.jsp" %>  

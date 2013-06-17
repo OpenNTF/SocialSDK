@@ -249,8 +249,8 @@ define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscr
                 this.endpoint = config.findEndpoint(this.getDefaultEndpointName());
             }
             if(!this._cache){
-        		if(Config.Properties.ProfileCacheSize || Consts.DefaultCacheSize){
-        			this._cache = new Cache(Config.Properties.ProfileCacheSize || Consts.DefaultCacheSize);
+        		if(config.Properties.ProfileCacheSize || Consts.DefaultCacheSize){
+        			this._cache = new Cache(config.Properties.ProfileCacheSize || Consts.DefaultCacheSize);
         		}        		
         	}     
         },

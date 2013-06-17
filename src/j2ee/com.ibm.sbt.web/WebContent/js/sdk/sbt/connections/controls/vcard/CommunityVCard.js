@@ -17,16 +17,18 @@
 /**
  * 
  */
-define(["sbt/widget/_TemplatedWidget",
-        "dojo/_base/lang",
-        "sbt/connections/controls/vcard/SemanticTagService",
-        "sbt/text!sbt/connections/controls/vcard/templates/CommunityVCard.html"], 
-        function(_TemplatedWidget, lang, SemanticTagService, template) {
+define(["../../../declare",
+        "../../../dom",
+        "../../../widget/_TemplatedWidget",
+        "../../../lang",
+        "../../../connections/controls/vcard/SemanticTagService",
+        "../../../text!sbt/connections/controls/vcard/templates/CommunityVCard.html"], 
+        function(declare, dom, _TemplatedWidget, lang, SemanticTagService, template) {
 
     /**
      * @class sbt.controls.CommunityVCard
      */
-    dojo.declare("sbt.connections.controls.vcard.CommunityVCard", [ _TemplatedWidget ], {
+    var communityVCard = declare([ _TemplatedWidget ], {
 
         /**
          * The html template of the vcard.
@@ -59,7 +61,7 @@ define(["sbt/widget/_TemplatedWidget",
         constructor: function(args) {
             if(!args.selectedWidgetId)
                 args.selectedWidgetId="";
-        	dojo.mixin(args);
+        	lang.mixin(args);
         },
         
         /**
@@ -73,5 +75,5 @@ define(["sbt/widget/_TemplatedWidget",
         
     });
     
-    return sbt.connections.controls.vcard.CommunityVCard;
+    return communityVCard;
 });

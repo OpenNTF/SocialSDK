@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>My Social WebApp</title>
+	<link href="images/sbt.png" rel="shortcut icon">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	
+	<script type="text/javascript">
+	var djConfig = {
+		async: false,
+    	parseOnLoad: true,
+    	locale: 'en',
+    	paths: {'mysocial':'/mysocial.webapp/js'}
+	};
+	</script>
+
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/dojo/1.8.0/dojo/dojo.js"></script>
+
+	<link rel="stylesheet" type="text/css" title="Style" href="//ajax.googleapis.com/ajax/libs/dojo/1.8.0/dojo/resources/dojo.css">
+	<link rel="stylesheet" type="text/css" title="Style" href="//ajax.googleapis.com/ajax/libs/dojo/1.8.0/dijit/themes/claro/claro.css">
+
+	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+	<style type="text/css">
+	body {
+		padding-top: 60px;
+		padding-bottom: 40px;
+	}
+	</style>
+
+	<script type="text/javascript" src="/mysocial.webapp/library?lib=dojo&ver=1.8.0"></script>
+</head>
+
+<body class="claro">
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> 
+					<span class="icon-bar"></span> 
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</a> 
+				<a class="brand" href="index.html">My Social WebApp</a>
+				<div class="nav-collapse collapse" id="navBar"></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="span8">
+				<div id="myProfileDiv"></div>
+			</div>
+			<div class="span4">
+				<div class="btn-toolbar">
+					<div id="shareMyAppDiv">
+						<button class="btn"><img src="images/sbt.png"/> Share My App</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="span12">
+				<img src="images/banner.jpg"/>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="span12">
+				<h2>Examples built with the Social Business Toolkit SDK</h2>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="span4">
+				<h4>My Colleagues</h4>
+				<div id="myColleaguesDiv"></div>
+			</div>
+			<div class="span4">
+				<h5>My Communities</h5>
+				<div id="myCommunitiesDiv"></div>
+			</div>
+			<div class="span4">
+				<h5>My Files</h5>
+				<div id="myFilesDiv"></div>
+			</div>
+		</div>
+
+		<hr>
+
+		<footer>
+			<p>&copy; My Social Web App 2013</p>
+		</footer>
+	</div>
+
+	<script type="text/template" id="myapp.MyProfileTmpl">
+	<div>
+		<div style="float:left;border:10px solid white;">
+			<div>
+				<img width="128" height="128" src="" id="photo" class="img-polaroid" style="display:none;"></img>
+			</div>
+		</div>
+		<div style="border:10px solid white;">
+			<div>
+				<h4><span id="name">Loading your profile information...</span></h4>
+			</div>
+			<div>
+				<h5><span id="jobTitle"></span></h5>
+			</div>
+			<div>
+				<h5><span id="department"><span></h5>
+			</div>
+		</div>
+	</div>
+	</script>
+
+	<script type="text/template" id="myapp.MyColleaguesTmpl">
+	<div role="presentation" class="span3" style="padding: 0px 5px 4px 0px;">
+        <a href="" title="${tooltip}" data-dojo-attach-event="onclick: handleClick">
+           	<img src="${photo}" width="64" height="64" class="img-polaroid" title="${title}" alt="${title}">
+        </a>
+	</div>
+	</script>
+
+	<script type="text/template" id="myapp.MyCommunitiesTmpl">
+	<tr class="">
+		<td class="">
+			<h6><a href="" target="_self" title="${tooltip}" data-dojo-attach-event="onclick: handleClick">${title}</a></h6>
+		</td>
+	</tr>
+	</script>
+
+	<script type="text/template" id="myapp.MyFilesTmpl">
+	<tr class="">
+		<td class="">
+			<h6><a href="" target="_self" title="${tooltip}" data-dojo-attach-event="onclick: handleClick">${title}</a></h6>
+		</td>
+	</tr>
+	</script>
+
+	<script type="text/javascript">
+	require([ "sbt/dom", "mysocial/widgets/MyProfile", 
+	          "sbt/connections/controls/profiles/ColleagueGrid", 
+	          "sbt/connections/controls/communities/CommunityGrid", 
+	          "sbt/connections/controls/files/FileGrid" ],
+		function(dom, MyProfile, ColleagueGrid, CommunityGrid, FileGrid) {
+			try {
+				var myProfile = new MyProfile();
+				dom.byId("myProfileDiv").appendChild(myProfile.domNode);
+				
+				myProfile.addListener(function(profile) {
+					// show my colleages
+				    createColleagueGrid(dom, profile, ColleagueGrid);
+					
+				    // show my communities
+			        createCommunityGrid(dom, CommunityGrid);
+				    
+			        // show my files
+			        createFileGrid(dom, FileGrid);
+				});
+				
+			} catch (err) {
+				alert(err);
+			}
+		}
+	);
+	
+	function createColleagueGrid(dom, profile, ColleagueGrid) {
+	    var colleagueGrid = new ColleagueGrid({
+	        email: profile.getEmail(),
+	        hideViewAll: false
+	    });
+	    colleagueGrid.renderer.containerClass = "row-fluid";
+	    colleagueGrid.renderer.template =  dom.byId("myapp.MyColleaguesTmpl").innerHTML;
+
+	    // create custom action
+	    colleagueGrid.profileAction = {
+	        getTooltip : function(item) {
+	        	return string.substitute("Display details for ${title}", { title : item.getValue("title") });
+	        },
+
+	        execute : function(item,opts,event) {
+	            var str =
+	                "uid: " + item.getValue("uid") + "\n" +
+	                "title: " + item.getValue("title") + "\n" +
+	                "fnUrl: " + item.getValue("fnUrl");
+	            alert(str);
+	        }
+	    };
+
+	    dom.byId("myColleaguesDiv").appendChild(colleagueGrid.domNode);
+	    colleagueGrid.update();
+	}
+	
+	function createCommunityGrid(dom, CommunityGrid) {
+        var communityGrid = new CommunityGrid({
+            type: "my",
+            hidePager: true,
+            hideSorter: true
+        });
+        communityGrid.renderer.template = dom.byId("myapp.MyCommunitiesTmpl").innerHTML;
+        communityGrid.renderer.tableClass = "table table-striped";
+		
+	    // create custom action
+	    communityGrid.communityAction = {
+	        getTooltip : function(item) {
+	        	return string.substitute("Display details for ${title}", { title : item.getValue("title") });
+	        },
+
+	        execute : function(item,opts,event) {
+	            var str =
+	                "communityUuid: " + item.getValue("communityUuid") + "\n" +
+	                "title: " + item.getValue("title") + "\n" +
+	                "communityUrl: " + item.getValue("communityUrl");
+	            alert(str);
+	        }
+	    };
+
+	    dom.byId("myCommunitiesDiv").appendChild(communityGrid.domNode);
+        communityGrid.update();		
+	}
+	
+	function createFileGrid(dom, FileGrid) {
+        var fileGrid = new FileGrid({
+	         type : "library",
+		     hidePager: true,
+		     hideSorter: true
+	    });
+       fileGrid.renderer.template = dom.byId("myapp.MyFilesTmpl").innerHTML;
+       fileGrid.renderer.tableClass = "table table-striped";
+       
+       // create custom action
+       fileGrid.fileAction = {
+        	getTooltip : function(item) {
+        		return string.substitute("Display details for ${title}", { title : item.getValue("title") });
+        	},
+
+        	execute : function(item,opts,event) {
+	            var str =
+	                "uuid: " + item.getValue("uuid") + "\n" +
+	                "title: " + item.getValue("title") + "\n" +
+	                "downloadUrl: " + item.getValue("downloadUrl");
+	            alert(str);
+        	}
+        };
+
+       
+	   dom.byId("myFilesDiv").appendChild(fileGrid.domNode);
+	   fileGrid.update();
+	}
+	</script>
+
+</body>
+</html>

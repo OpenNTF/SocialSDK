@@ -1,0 +1,37 @@
+<div id="gridDiv"></div>
+<script type="text/template" id="communityRow">
+<tr>
+	
+	<td>
+		<h4>
+			<span dojoAttachPoint="placeLinkNode">
+				<a href="javascript: void(0)" target="_self" title="${tooltip}" dojoAttachPoint="placeTitleLink" data-dojo-attach-event="onclick: handleClick">${title}</a>
+			</span>
+			<span class="" dojoAttachPoint="sourceTypePlaceHolder"></span>
+			<span style="display: none" class= role=presentation dojoAttachPoint="sourceTypeSectionDevider">|</span>
+			<span style="display: none" class="lotusType commType" dojoAttachPoint="restrictedIconNode">
+				<img style="display: inline" class="" title="${nls.restricted}" alt="${nls.restricted}" src="${blankGif}">
+				${nls.restricted} 
+			</span>
+		</h4>
+		<div class="">
+			<span role="list">
+				<span role=listitem dojoAttachPoint="numOfMembersPlaceHolder">${numOfMembers}</span>
+				<span class="" role=presentation dojoAttachPoint="membersSectionDevider">|</span>
+				<span role=listitem dojoAttachPoint="personPlaceHolder">
+					${nls.updatedBy}
+					<a class="fn lotusPerson vcard hasHover" href="javascript: void(0)" icbizcard_ref="1" icbizcard_idx="1">
+						${contributorName}
+						<span style="display: none" class=x-lconn-userid>${contributorUid}</span>
+					</a> 
+				</span>
+				<span class="" role=presentation dojoAttachPoint="authorSectionDevider">|</span>
+				<span role=listitem dojoAttachPoint="lastUpdateNode">${updatedDate}</span>
+		
+			</span>
+		</div>
+	</td>
+</tr>
+
+
+</script>

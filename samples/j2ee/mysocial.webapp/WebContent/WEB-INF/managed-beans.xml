@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<faces-config>
+	<!-- Credential store physical implementation -->
+	<managed-bean>
+		<managed-bean-name>CredStore</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.security.credential.store.MemoryStore</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+
+	<!-- Default Environment -->
+	<managed-bean>
+		<managed-bean-name>defaultEnvironment</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.jslibrary.SBTEnvironment</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+		<managed-property>
+			<property-name>endpoints</property-name>
+			<value>connections</value>
+		</managed-property>
+	</managed-bean>
+	
+	<!-- Connections -->
+	<managed-bean>
+		<managed-bean-name>connections</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.services.endpoints.ConnectionsBasicEndpoint</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>url</property-name>
+			<value>%{connections.url}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>apiVersion</property-name>
+			<value>%{connections.apiVersion}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>credentialStore</property-name>
+			<value>CredStore</value>
+		</managed-property>
+		<managed-property>
+			<property-name>authenticationPage</property-name>
+			<value>/sbt/loginForm.html?endpoint=connections</value>
+		</managed-property>
+		<managed-property>
+			<property-name>authenticationService</property-name>
+			<value>communities/service/atom/communities/my</value>
+		</managed-property>
+		<managed-property>
+			<property-name>forceTrustSSLCertificate</property-name>
+			<value>true</value>
+		</managed-property>
+	</managed-bean>
+  
+</faces-config>

@@ -62,7 +62,7 @@ return declare(null, {
 	        } else if(mode=="dialog") {
 	            dialog(options, dialogLoginPage, config, dialogLoginPage);
 	        } else {
-	            mainWindow(options, loginPage);
+	            mainWindow(options, loginPage, sbtUrl);
 	        }
 	    });
 
@@ -122,7 +122,7 @@ return declare(null, {
 		var proxy = options.proxy.proxyUrl;
 		var actionURL = proxy.substring(0,proxy.lastIndexOf("/"))+"/basicAuth/"+options.proxyPath+"/JSApp";
 		//var proxyServletURL='/sbt/proxy/basicAuth/'+options.proxyPath+"/JSApp";
-		var url = this.url+loginPage+'?actionURL='+encodeURIComponent(actionURL)
+		var url = sbtUrl+loginPage+'?actionURL='+encodeURIComponent(actionURL)
 							 +'&redirectURL='+encodeURIComponent(document.URL)
 							 +'&loginUi=mainWindow'
 							 +'&showWrongCredsMessage=false';

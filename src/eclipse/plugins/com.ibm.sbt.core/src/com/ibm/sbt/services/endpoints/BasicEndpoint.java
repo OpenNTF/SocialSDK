@@ -83,9 +83,9 @@ public class BasicEndpoint extends AbstractEndpoint {
     	Context context = Context.get();
     	
     	reference.getProperties().put("url", sbtUrl);
-    	reference.getProperties().put("loginUi", context.getProperty("loginUi"));
-    	reference.getProperties().put("loginPage", context.getProperty("loginPage"));
-    	reference.getProperties().put("dialogLoginPage", context.getProperty("dialogLoginPage"));
+    	//reference.getProperties().put("loginUi", context.getProperty("loginUi"));
+    	//reference.getProperties().put("loginPage", context.getProperty("loginPage"));
+    	//reference.getProperties().put("dialogLoginPage", context.getProperty("dialogLoginPage"));
     	return reference;
     }
 

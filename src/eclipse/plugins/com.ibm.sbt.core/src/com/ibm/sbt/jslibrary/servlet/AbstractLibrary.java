@@ -351,7 +351,7 @@ abstract public class AbstractLibrary {
 			JsonReference authenticatorRef = createAuthenticatorRef(request, endpoint, endpointName);
 			if (authenticatorRef != null) {
 				jsonEndpoint.putJsonProperty(PROP_AUTHENTICATOR, authenticatorRef);
-				String moduleName = endpoint.getAuthenticator(endpointName).getModuleName();
+				String moduleName = endpoint.getAuthenticator(endpointName, request.getToolkitJsUrl()).getModuleName();
 				jsonEndpoint.putJsonProperty(PROP_MODULE_AUTHENTICATOR, moduleName);
 			}
 
@@ -749,7 +749,7 @@ abstract public class AbstractLibrary {
 	 */
 	protected JsonReference createAuthenticatorRef(LibraryRequest request, Endpoint endpoint,
 			String logicalName) throws LibraryException {
-		JSReference authenticator = endpoint.getAuthenticator(logicalName);
+		JSReference authenticator = endpoint.getAuthenticator(logicalName, request.getToolkitJsUrl());
 		if (authenticator != null) {
 			try {
 				String paramValues = JsonGenerator.toJson(JsonJavaFactory.instanceEx,

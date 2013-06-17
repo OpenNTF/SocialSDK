@@ -208,7 +208,7 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     }
 
     @Override
-    public JSReference getAuthenticator(String endpointName) {
+    public JSReference getAuthenticator(String endpointName, String sbtUrl) {
     	return null;
     }
     

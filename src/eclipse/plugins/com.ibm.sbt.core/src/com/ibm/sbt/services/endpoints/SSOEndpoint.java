@@ -56,8 +56,9 @@ public class SSOEndpoint extends AbstractEndpoint {
     }
 
     @Override
-    public JSReference getAuthenticator(String endpointName) {
+    public JSReference getAuthenticator(String endpointName, String sbtUrl) {
     	JSReference reference = new JSReference("sbt/authenticator/SSO");
+    	reference.getProperties().put("url", sbtUrl);
     	return reference;
     }
     

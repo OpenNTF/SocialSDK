@@ -79,7 +79,7 @@ public class ApplicationEndpoint implements Endpoint {
     }
     
     @Override
-	public JSReference getAuthenticator(String endpointName) {
+	public JSReference getAuthenticator(String endpointName, String sbtUrl) {
     	return null;
     }
     

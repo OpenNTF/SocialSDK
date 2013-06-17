@@ -585,7 +585,7 @@ public class ProxyService {
 				params.add(e);
 			}
 		}
-		o.put("Parameters", params);
+		o.putObject("Parameters", params);
 
 		try {
 			response.setStatus(httpstatus);

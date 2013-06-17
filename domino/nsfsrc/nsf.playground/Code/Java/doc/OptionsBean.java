@@ -43,12 +43,16 @@ public class OptionsBean {
 		String baseUrl = playgroundUrl;
 		if(StringUtil.isEmpty(baseUrl)) {
 			// Get the current server and use a default database name
-			baseUrl = FacesUtil.makeUrlAbsolute(FacesContext.getCurrentInstance(), "/SBTPlayground.nsf");
+			baseUrl = FacesUtil.makeUrlAbsolute(FacesContext.getCurrentInstance(), "/sbtplayground.nsf");
 		}
 		b.append(baseUrl);
 		b.append("/Explorer.xsp");
 		if(StringUtil.isNotEmpty(api)) {
 			b.append("#api=");
+			int pos = api.indexOf('#'); 
+			if(pos>=0) {
+				api = api.substring(0,pos);
+			}
 			b.append(encodeUnid(api));
 		}
 		String url = b.toString(); 
@@ -65,13 +69,22 @@ public class OptionsBean {
 		String baseUrl = playgroundUrl;
 		if(StringUtil.isEmpty(baseUrl)) {
 			// Get the current server and use a default database name
-			baseUrl = FacesUtil.makeUrlAbsolute(FacesContext.getCurrentInstance(), "/SBTPlayground.nsf");
+			baseUrl = FacesUtil.makeUrlAbsolute(FacesContext.getCurrentInstance(), "/sbtplayground.nsf");
+		} else {
+			// Make sure it is absolute
+			baseUrl = FacesUtil.makeUrlAbsolute(FacesContext.getCurrentInstance(), baseUrl);
 		}
 		b.append(baseUrl);
 		b.append("/ExplorerMini.xsp");
 		b.append("?rand=");
 		b.append("123456789");
 		b.append("#api=");
+		
+		int pos = api.indexOf('#'); 
+		if(pos>=0) {
+			api = api.substring(0,pos);
+		}
+/*		
 		if(StringUtil.isNotEmpty(products)) {
 			if(StringUtil.indexOfIgnoreCase(products,"domino")>=0) {
 				api = PathUtil.concat("Domino",api,'/');
@@ -81,6 +94,7 @@ public class OptionsBean {
 				api = PathUtil.concat("SmartCloud",api,'/');
 			}
 		}
+*/		
 		b.append(encodeUnid(api));
 		if(StringUtil.isNotEmpty(title)) {
 			String unid=encodeUnid(title);

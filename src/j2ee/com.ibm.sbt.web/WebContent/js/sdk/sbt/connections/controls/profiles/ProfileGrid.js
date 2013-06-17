@@ -70,7 +70,19 @@ define([ "../../../declare",
         "startIndex"        :"/a:feed/opensearch:startIndex",
         "itemsPerPage"      :"/a:feed/opensearch:itemsPerPage"
 	};
-
+	
+	var sortVals = {
+			displayName: "displayName",
+       		recent: "3" 
+	};
+	
+	var ParamSchema = {
+		pageNumber: parameter.oneBasedInteger("page"),	
+		pageSize: parameter.oneBasedInteger("ps"),
+		sortBy: parameter.sortField("sortBy",sortVals),
+		sortOrder: parameter.sortOrder("sortOrder")						
+	};
+	
     /**
      * @class ProfileGrid
      * @namespace sbt.connections.controls.profiles
@@ -89,7 +101,7 @@ define([ "../../../declare",
                 storeArgs : {
                     url : profileUrls.reportingChain,
                     attributes : xpath_profile,
-                    paramSchema: parameter.profiles.all
+                    paramSchema: ParamSchema
                 },
                 rendererArgs : {
                     type : "profile"
@@ -99,7 +111,7 @@ define([ "../../../declare",
                 storeArgs : {
                     url : profileUrls.profile,
                     attributes : xpath_profile,
-                    paramSchema: parameter.profiles.all
+                    paramSchema: ParamSchema
                 },
                 rendererArgs : {
                     type : "profile"
@@ -109,7 +121,7 @@ define([ "../../../declare",
                 storeArgs : {
                      url : profileUrls.colleagues,
                     attributes : xpath_profile,
-                    paramSchema: parameter.profiles.all
+                    paramSchema: ParamSchema
                 },
                 rendererArgs : {
                     type : "profile"
@@ -119,7 +131,7 @@ define([ "../../../declare",
                 storeArgs : {
                     url : profileUrls.peopleManaged,
                     attributes : xpath_profile,
-                    paramSchema: parameter.profiles.all
+                    paramSchema: ParamSchema
                 },
                 rendererArgs : {
                     type : "profile"
@@ -129,7 +141,7 @@ define([ "../../../declare",
                 storeArgs : {
                     url : profileUrls.connectionsInCommon,
                     attributes : xpath_profile,
-                    paramSchema: parameter.profiles.all
+                    paramSchema: ParamSchema
                 },
                 rendererArgs : {
                     type : "profile"

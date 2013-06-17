@@ -2,7 +2,7 @@
 require(['sbt/Endpoint',"sbt/dom","sbt/config"], function(Endpoint,dom,config) {
 	var ep = Endpoint.find("connections");
 	config.Properties["loginUi"] = "popup";
-	config.Properties["loginPage"] = "/sbt/authenticator/templates/QSlogin.html";
+	config.Properties["loginPage"] = "/sbt/authenticator/templates/ConnectionsLogin.html";
 	ep.authenticate({ forceAuthentication: true }).then(
 		function(response){
 			dom.setText("content","You successfully logged in to connections");	

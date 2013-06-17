@@ -76,22 +76,22 @@ return declare(null, {
 		var proxy = options.proxy.proxyUrl;
 		var actionURL = proxy.substring(0,proxy.lastIndexOf("/"))+"/basicAuth/"+options.proxyPath+"/JSApp";
 		var url = sbt.Properties["sbtUrl"]+loginPage+'?actionURL='+encodeURIComponent(actionURL)
-										 +'&redirectURL=empty'
-										 +'&loginUi=popup'
-										 +'&showWrongCredsMessage=false';
-										 //+'&endPointName='+endPointName;
-		var newWindowWidth = 300;
-		var newWindowLeftAttr = document.body.offsetWidth/2 - newWindowWidth/2;
+			 +'&redirectURL=empty'
+			 +'&loginUi=popup'
+			 +'&showWrongCredsMessage=false';
 		var loginWindow = window.open(url,'Authentication',
-				   'width='+newWindowWidth
-				   +',height=200'
-				   +',left='+newWindowLeftAttr
-				   +',menubar=0'
-				   +',toolbar=0'
-				   +',status=0'
-				   +',location=0'
-				   +',scrollbars=1'
-				   +',resizable=1');
+			 'width='+window.screen.availWidth/2
+			 +',height='+window.screen.availHeight/2
+			 +',left='+window.screen.availWidth/4
+			 +',top='+window.screen.availHeight/4
+			 +',menubar=0'
+			 +',toolbar=0'
+			 +',status=0'
+			 +',location=0'
+			 +',scrollbars=1'
+			 +',resizable=1'
+		);
+		loginWindow.focus();
 		return true;
 	},
 	
@@ -100,9 +100,9 @@ return declare(null, {
 		var actionURL = proxy.substring(0,proxy.lastIndexOf("/"))+"/basicAuth/"+options.proxyPath+"/JSApp";
 		//var proxyServletURL='/sbt/proxy/basicAuth/'+options.proxyPath+"/JSApp";
 		var url = sbt.Properties["sbtUrl"]+loginPage+'?actionURL='+encodeURIComponent(actionURL)
-							 +'&redirectURL='+encodeURIComponent(document.URL)
-							 +'&loginUi=mainWindow'
-							 +'&showWrongCredsMessage=false';
+			 +'&redirectURL='+encodeURIComponent(document.URL)
+			 +'&loginUi=mainWindow'
+			 +'&showWrongCredsMessage=false';
 		var newwindow=window.location.href = url;
 		return true;
 	}

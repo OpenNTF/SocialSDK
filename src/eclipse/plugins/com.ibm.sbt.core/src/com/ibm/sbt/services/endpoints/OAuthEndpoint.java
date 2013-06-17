@@ -193,6 +193,7 @@ public class OAuthEndpoint extends AbstractEndpoint {
 		b.append(endpointName);
 		String url = b.toString();
 		reference.getProperties().put("url", url);
+		reference.getProperties().put("loginUi", ctx.getProperty("loginUi"));
 		return reference;
 	}
 

@@ -46,24 +46,35 @@ return declare(null, {
 	 *  Internationalization
 	 */
 	authenticate: function(options) {
-		var mode =  options.loginUi || this.loginUi ;
-		var loginPage = options.loginPage || this.loginPage;
-		var dialogLoginPage = options.dialogLoginPage || this.dialogLoginPage;
-		if(mode=="popup") {
-			return this._authPopup(options, loginPage);
-		} else if(mode=="dialog") {
-			return this._authDialog(options, dialogLoginPage);
-		} else {
-			return this._authMainWindow(options, loginPage);
-		}
+	    var popup = this._authPopup;
+	    var dialog = this._authDialog;
+	    var mainWindow = this._authMainWindow;
+	    var sbtUrl = this.url;
+	    var defaultLoginPage = this.loginPage;
+	    var defaultLoginUi = this.loginUi;
+	    var defaultDialogLoginPage = this.dialogLoginPage;
+	    require(['sbt/config'], function(config){
+	        var mode =  options.loginUi || config.Properties["loginUi"] || defaultLoginUi;
+	        var loginPage = options.loginPage || config.Properties["loginPage"] || defaultLoginPage;
+	        var dialogLoginPage = options.dialogLoginPage || config.Properties["dialogLoginPage"] || defaultDialogLoginPage;
+	        if(mode=="popup") {
+	            popup(options, loginPage, config, sbtUrl, loginPage);
+	        } else if(mode=="dialog") {
+	            dialog(options, dialogLoginPage, config, dialogLoginPage);
+	        } else {
+	            mainWindow(options, loginPage);
+	        }
+	    });
+
+	    return true;
 	},	
 	
-	_authDialog: function(options, dialogLoginPage) {
-		if(options.cancel){
-			sbt.cancel = options.cancel;
-		}
+	_authDialog: function(options, dialogLoginPage, sbtConfig, dialogLoginPage) {
 		require(["sbt/_bridge/ui/BasicAuth_Dialog", "sbt/i18n!sbt/nls/loginForm", "sbt/dom"], function(dialog, loginForm, dom) {
-			dialog.show(options, dialogLoginPage);
+		    if(options.cancel){
+	            sbtConfig.cancel = options.cancel;
+	        }
+		    dialog.show(options, dialogLoginPage);
 			dom.byId('wrongCredsMessage').innerHTML = loginForm.wrong_creds_message;
 			dom.byId('basicLoginFormUsername').innerHTML = loginForm.username;
 			dom.byId('basicLoginFormPassword').innerHTML = loginForm.password;
@@ -73,39 +84,41 @@ return declare(null, {
 		return true;
 	},
 	
-	_authPopup: function(options, loginPage) {
-		require(["sbt/i18n!sbt/nls/loginForm"], function(loginForm) {
-			globalLoginFormStrings = loginForm;
-		});
-		if(options.callback){
-			sbt.callback = options.callback;
-		}
-		if(options.cancel){
-			sbt.cancel = options.cancel;
-		}
-		var proxy = options.proxy.proxyUrl;
-		var actionURL = proxy.substring(0,proxy.lastIndexOf("/"))+"/basicAuth/"+options.proxyPath+"/JSApp";
-		var url = this.url+loginPage+'?actionURL='+encodeURIComponent(actionURL)
-										 +'&redirectURL=empty'
-										 +'&loginUi=popup'
-										 +'&showWrongCredsMessage=false';
-										 //+'&endPointName='+endPointName;
-		var newWindowWidth = 300;
-		var newWindowLeftAttr = document.body.offsetWidth/2 - newWindowWidth/2;
-		var loginWindow = window.open(url,'Authentication',
-				   'width='+newWindowWidth
-				   +',height=200'
-				   +',left='+newWindowLeftAttr
-				   +',menubar=0'
-				   +',toolbar=0'
-				   +',status=0'
-				   +',location=0'
-				   +',scrollbars=1'
-				   +',resizable=1');
-		return true;
+	_authPopup: function(options, loginPage, sbtConfig, sbtUrl, loginPage) {
+	    require(["sbt/i18n!sbt/nls/loginForm"], function(loginForm) {
+            if(options.callback){
+                sbtConfig.callback = options.callback;
+            }
+            if(options.cancel){
+                sbtConfig.cancel = options.cancel;
+            }
+            globalLoginFormStrings = loginForm;
+            
+            var proxy = options.proxy.proxyUrl;
+            var actionURL = proxy.substring(0,proxy.lastIndexOf("/"))+"/basicAuth/"+options.proxyPath+"/JSApp";
+            var url = sbtUrl+loginPage+'?actionURL='+encodeURIComponent(actionURL)
+                                             +'&redirectURL=empty'
+                                             +'&loginUi=popup'
+                                             +'&showWrongCredsMessage=false';
+                                             //+'&endPointName='+endPointName;
+            var newWindowWidth = 300;
+            var newWindowLeftAttr = document.body.offsetWidth/2 - newWindowWidth/2;
+            var loginWindow = window.open(url,'Authentication',
+                       'width='+newWindowWidth
+                       +',height=200'
+                       +',left='+newWindowLeftAttr
+                       +',menubar=0'
+                       +',toolbar=0'
+                       +',status=0'
+                       +',location=0'
+                       +',scrollbars=1'
+                       +',resizable=1');
+        });
+        
+        return true;
 	},
 	
-	_authMainWindow: function(options, loginPage) {
+	_authMainWindow: function(options, loginPage, sbtUrl) {
 		var proxy = options.proxy.proxyUrl;
 		var actionURL = proxy.substring(0,proxy.lastIndexOf("/"))+"/basicAuth/"+options.proxyPath+"/JSApp";
 		//var proxyServletURL='/sbt/proxy/basicAuth/'+options.proxyPath+"/JSApp";

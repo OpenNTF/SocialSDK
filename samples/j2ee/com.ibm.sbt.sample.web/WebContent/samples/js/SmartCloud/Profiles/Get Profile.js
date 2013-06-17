@@ -1,6 +1,6 @@
-require([ "sbt/smartcloud/ProfileService", "sbt/dom", "sbt/Endpoint" ], function(ProfileService, dom, Endpoint) {
+require([ "sbt/smartcloud/ProfileService", "sbt/dom", "sbt/config" ], function(ProfileService, dom, config) {
 
-	var endpoint = Endpoint.find("smartcloud");
+	var endpoint = config.findEndpoint("smartcloud");
 	var url = "/manage/oauth/getUserIdentity";
 	endpoint.request(url, {
 		handleAs : "json"

@@ -17,9 +17,9 @@
 /**
  * @module sbt.store.AtomStore
  */
-define(["../declare","../config","../lang", "../base/core", "../xml", "../xpath", "../Endpoint", "../itemFactory",
+define(["../declare","../config","../lang", "../base/core", "../xml", "../xpath", "../itemFactory",
         "dojo/_base/Deferred", "dojo/promise/Promise", "dojo/store/util/QueryResults", "dojox/html/entities"], 
-        function(declare,config,lang, core, xml, xpath, Endpoint, itemFactory, Deferred, Promise, QueryResults, entities) {
+        function(declare,config,lang, core, xml, xpath, itemFactory, Deferred, Promise, QueryResults, entities) {
   
     /**
      * @class sbt.store.AtomStore
@@ -54,7 +54,7 @@ define(["../declare","../config","../lang", "../base/core", "../xml", "../xpath"
          * 	endpoint: the endpoint to be used
          */
         constructor: function(args, query, options) {
-            this._endpoint = Endpoint.find(args.endpoint || "connections");
+            this._endpoint = config.findEndpoint(args.endpoint || "connections");
             this._options = options;
             this._callbacks = [];
             this._errbacks = [];
@@ -371,7 +371,7 @@ define(["../declare","../config","../lang", "../base/core", "../xml", "../xpath"
          * @returns
          */
         getEndpoint: function() {
-        	return Endpoint.find(this._args.endpoint || "connections");
+        	return config.findEndpoint(this._args.endpoint || "connections");
         },
         
         /**

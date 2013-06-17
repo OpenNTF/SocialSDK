@@ -1,7 +1,7 @@
-require(["sbt/dom", "sbt/Endpoint", "sbt/config"], function(dom, Endpoint, config) {
+require(["sbt/dom", "sbt/config"], function(dom, config) {
 	var table = dom.byId('authenticationTable');
 	/*creating rows*/
-	var endpoints = sbt.Endpoints;
+	var endpoints = config.Endpoints;
 	for (var endpointName in endpoints) {
 		var tr = document.createElement("tr");
 		table.appendChild(tr);
@@ -33,13 +33,13 @@ require(["sbt/dom", "sbt/Endpoint", "sbt/config"], function(dom, Endpoint, confi
 		td3.appendChild(loginButton);
 		/*creating login logout buttons*/
 		
-		var ep = Endpoint.find(endpointName);
+		var ep = config.findEndpoint(endpointName);
 		if(ep.isAuthenticated){
 			loginButton.style.display = "none";
 			dom.setText("td2"+endpointName, "Logged in");
 			logoutButton.onclick= function (){
 				// Calling logout. (this.name has endpoint name)
-				Endpoint.find(this.name).logout().then(
+				config.findEndpoint(this.name).logout().then(
 					function(logoutResult){
 						document.location.reload();
 					},
@@ -52,7 +52,7 @@ require(["sbt/dom", "sbt/Endpoint", "sbt/config"], function(dom, Endpoint, confi
 			logoutButton.style.display = "none";
 			dom.setText("td2"+endpointName, "Not Logged in");
 			loginButton.onclick= function (){
-				Endpoint.find(this.name).authenticate();    // Calling authenticate. (this.name has endpoint name)
+				config.findEndpoint(this.name).authenticate();    // Calling authenticate. (this.name has endpoint name)
 			};
 		}
 	}

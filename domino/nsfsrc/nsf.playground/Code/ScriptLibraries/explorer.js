@@ -57,7 +57,7 @@ function collapseSection(id) {
 }
 
 function executeService(params,details,results,callback) {
-	require(['dojo/_base/lang','dojo/_base/array','dojo/io-query','dojo/query','dijit/registry','sbt/Endpoint'], function(lang,array,ioQuery,query,registry,Endpoint) {
+	require(['dojo/_base/lang','dojo/_base/array','dojo/io-query','dojo/query','dijit/registry','sbt/config'], function(lang,array,ioQuery,query,registry,config) {
 		function paramValue(name) {
 			var n = dojo.query("[data-param=\""+name+"\"]",details);
 			if(n.length>0) {
@@ -88,7 +88,7 @@ function executeService(params,details,results,callback) {
 			updatePanelError(results,"No endpoint specified in the API description");
 			return;
 		}
-		var ep = Endpoint.find(params['endpoint']);
+		var ep = config.findEndpoint(params['endpoint']);
 		if(!ep) {
 			updatePanelError(results,"Endpoint {0} specified in the API description is invalid",params['endpoint']);
 			return;
@@ -184,8 +184,8 @@ function logoutEndpoint(endpoint) {
 }
 
 function logInOut(endpoint,login) {
-	require(['sbt/Endpoint'], function(Endpoint) {
-		var ep = Endpoint.find(endpoint);
+	require(['sbt/config'], function(config) {
+		var ep = config.findEndpoint(endpoint);
 		if(!ep) {
 			alert("Endpoint "+endpoint+" specified in the API description is invalid");
 			return;

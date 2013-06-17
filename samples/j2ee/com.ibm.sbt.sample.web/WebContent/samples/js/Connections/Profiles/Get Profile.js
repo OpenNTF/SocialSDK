@@ -1,6 +1,6 @@
-require([ "sbt/connections/ProfileService", "sbt/dom", "sbt/Endpoint" ], function(ProfileService, dom, Endpoint) {
+require([ "sbt/connections/ProfileService", "sbt/dom", "sbt/config" ], function(ProfileService, dom, config) {
 
-	var endpoint = Endpoint.find("connections");
+	var endpoint = config.findEndpoint("connections");
 	var url = "/connections/opensocial/basic/rest/people/@me/";
 	endpoint.request(url, {
 		handleAs : "json"

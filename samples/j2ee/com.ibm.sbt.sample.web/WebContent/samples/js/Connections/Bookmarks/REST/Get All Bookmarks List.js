@@ -1,5 +1,5 @@
-require(["sbt/dom","sbt/connections/ConnectionsConstants","sbt/Endpoint","sbt/xml","sbt/xpath"], function(dom,conn,Endpoint,xml,xpath) {
-	var endpoint = Endpoint.find("connections");
+require(["sbt/dom","sbt/connections/ConnectionsConstants","sbt/config","sbt/xml","sbt/xpath"], function(dom,conn,config,xml,xpath) {
+	var endpoint = config.findEndpoint("connections");
     
     var url = "/dogear/atom";
     

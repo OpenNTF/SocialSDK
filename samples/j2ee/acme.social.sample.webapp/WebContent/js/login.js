@@ -2,8 +2,8 @@
  * Helper module for logging in and retrieving the reporting chain for the logged in user.
  * @module
  */
-define(["sbt/declare", "sbt/config", "sbt/Endpoint", "sbt/json", "sbt/xml", "sbt/xpath", "sbt/connections/ConnectionsConstants"], 
-    function(declare, config, endpoint, json, xml, xpath, connections) {
+define(["sbt/declare", "sbt/config", "sbt/json", "sbt/xml", "sbt/xpath", "sbt/connections/ConnectionsConstants"], 
+    function(declare, config, json, xml, xpath, connections) {
 
     var basicPeopleMe = '/connections/opensocial/basic/rest/people/@me/';
     var oauthPeopleMe = '/connections/opensocial/oauth/rest/people/@me/';
@@ -14,7 +14,7 @@ define(["sbt/declare", "sbt/config", "sbt/Endpoint", "sbt/json", "sbt/xml", "sbt
     var approverEmailXPath = "/a:feed/a:entry[2]/a:contributor/a:email";
     var approverUserIdXPath = "/a:feed/a:entry[2]/a:contributor/snx:userid";
 
-    var endpoint = endpoint.find('connections');
+    var endpoint = config.findEndpoint('connections');
     
     var personObject = null;
     var reportingChain = null;

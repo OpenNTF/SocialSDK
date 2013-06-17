@@ -32,9 +32,9 @@
  * 
  * @module sbt.connections.SearchService
  */
-define([ "../declare", "../config", "../lang", "../stringUtil", "../Endpoint", "../Promise", "./SearchConstants", "../base/BaseService",
+define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", "./SearchConstants", "../base/BaseService",
          "../base/BaseEntity", "../base/XmlDataHandler" ], 
-    function(declare,config,lang,stringUtil,Endpoint,Promise,consts,BaseService,BaseEntity,XmlDataHandler) {
+    function(declare,config,lang,stringUtil,Promise,consts,BaseService,BaseEntity,XmlDataHandler) {
 
     /**
      * Result class represents an entry for a result feed returned by the
@@ -204,7 +204,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Endpoint", "
          */
         constructor : function(args) {
             if (!this.endpoint) {
-                this.endpoint = Endpoint.find(this.getDefaultEndpointName());
+                this.endpoint = config.findEndpoint(this.getDefaultEndpointName());
             }
         },
 

@@ -10,9 +10,9 @@
 <body>
 <h3>My Files</h3>
 <script type="text/javascript">
-require(["sbt/connections/FileService","sbt/dom"], 
-	    function(FileService, dom) {
-			sbt.Properties["loginUi"] = "popup";
+require(["sbt/config", "sbt/connections/FileService","sbt/dom"], 
+	    function(config, FileService, dom) {
+			config.Properties["loginUi"] = "popup";
 			var id = "FrankAdams@renovations.com";
 			var fileService = new FileService();
 			fileService.getMyFiles({

@@ -435,7 +435,7 @@ abstract public class AbstractLibrary {
 		indentationLevel++;
 
 		// Create the sbt object
-		indent(sb, indentationLevel).append("window.sbt = {};").append(newLine());
+		indent(sb, indentationLevel).append("var sbt = {};").append(newLine());
 
 		// define the properties
 		Iterator<String> jsonProps = properties.getJsonProperties();
@@ -464,6 +464,31 @@ abstract public class AbstractLibrary {
 				}
 			}
 		}
+		
+		// define the sbt.findEndpoint(endpointName) function
+		indent(sb, indentationLevel).append("sbt.findEndpoint=function(endpointName) {\n");
+		indentationLevel++;
+		indent(sb, indentationLevel).append("if(!this || !this.Endpoints) {\n");
+		indentationLevel++;
+		indent(sb, indentationLevel).append("var nf = !sbt? 'sbt' : 'sbt.Endpoints';\n");
+		indent(sb, indentationLevel).append("throw new Error(nf+' object not defined');\n");
+		indentationLevel--;
+		indent(sb, indentationLevel).append("}\n");
+		indent(sb, indentationLevel).append("if (!this.Endpoints[name]){\n");
+		indentationLevel++;
+		indent(sb, indentationLevel).append("log.error(stringUtil.substitute(endpointNls.cannot_find_endpoint, [name]));\n");
+		indent(sb, indentationLevel).append("var transport = new ErrorTransport(name);\n");
+		indent(sb, indentationLevel).append("this.Endpoints[name] = new Endpoint({\n");
+		indentationLevel++;
+		indent(sb, indentationLevel).append("'transport' : transport,\n");
+		indent(sb, indentationLevel).append("'baseUrl' : ''\n");
+		indentationLevel--;
+		indent(sb, indentationLevel).append("});\n");
+		indentationLevel--;
+		indent(sb, indentationLevel).append("}\n");
+		indent(sb, indentationLevel).append("return this.Endpoints[endpointName];\n");
+		indentationLevel--;
+		indent(sb, indentationLevel).append("};\n");
 
 		// close define invocation
 		indent(sb, indentationLevel).append("return sbt;").append(newLine());

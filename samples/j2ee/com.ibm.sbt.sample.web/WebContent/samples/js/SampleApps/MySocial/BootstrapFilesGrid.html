@@ -1,0 +1,31 @@
+<div id="gridDiv"></div>
+<script type="text/template" id="fileRow">
+<tr class="lotusFirst">
+
+    <td style="width: 100%;">
+        <h4 class="lotusBreakWord lotusLeft">
+            <a class="entry-title" rel="bookmark" title="${tooltip}" href="" data-dojo-attach-event="onclick: handleClick">${title}</a>    
+        </h4>
+        <div class="lotusMeta lotusClear">
+            <ul class="lotusInlinelist">
+                <li class="lotusFirst" title="">
+                    <span class="vcard" dojoAttachPoint="vcardNode">
+  						<a aria-label="${nls.ariaVcard}" href="javascript:void(0);" class="fn url">${authorName}</a>
+  						<span data-dojo-attach-point="idNode" class="x-lconn-userid" style="display: none;">${authorUid}</span>
+					</span>
+                ${_nls.created} ${createdLabel}
+                </li>
+                <li>
+                    ${hitCount} ${_nls.downloads}
+                </li>
+                <li>
+                    ${commentCount} ${_nls.comments}
+                </li>
+            </ul>
+        </div>
+    </td>
+  
+</tr>
+
+</script>
+

@@ -1,34 +1,30 @@
 <form id='ibmsbt.loginActionForm'>
 	<table>
 		<tr>
-			<td colspan=2>
-				Enter Credentials to access Connections on qs.renovations.com
+			<td>
+				Welcome to IBM Connections
 			</td>
 		</tr>
 		<tr>
-			<td colspan=2>
+			<td>
 				<label name='wrongCredsMessage' id='wrongCredsMessage' style='color: red; display: none;'>Wrong Credentials </label>
 			</td>
 		</tr>
 		<tr>
 			<td>
-				<label for='name'>Username: </label>
-			</td>
-			<td>
+				<label for='name'>User name: </label><br>
 				<input type='text' id='username' name='username' />
 			</td>
 		</tr>
 		<tr>
 			<td>
-				<label for='name'>Password: </label>
-			</td>
-			<td>
+				<label for='name'>Password: </label><br>
 				<input type='password' id='password' name='password' />
 			</td>
 		</tr>
 		<tr>
 			<td colspan=2>
-				<input type='button' onClick='sbt.dialog.submitOnClickHandle(this.form)' value='OK'  name='submitBtn' />
+				<input type='button' onClick='sbt.dialog.submitOnClickHandle(this.form)' value='Log In'  name='submitBtn' />
 				<input type='button' onClick='sbt.dialog.hide();if(sbt.cancel){sbt.cancel();}delete sbt.dialog;' value='Cancel' />
 			</td>
 		</tr>

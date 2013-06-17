@@ -28,7 +28,19 @@ require(["sbt/controls/grid/Grid",
 			"contributorName"	:"a:contributor/a:name",
 			"contributorEmail"	:"a:contributor/a:email"				
 		};
-     
+		
+		var sortVals = {
+				date: "modified",
+	            popularity: "count",
+	            name: "title"
+		};
+		
+		var ParamSchema = {	
+			pageNumber: parameter.oneBasedInteger("page"),	
+			pageSize: parameter.oneBasedInteger("ps"),
+			sortBy: parameter.sortField("sortField",sortVals),
+			sortOrder: parameter.booleanSortOrder("asc")			
+		};
 	
         var gridRenderer = new CommunityGridRenderer();
          
@@ -36,7 +48,7 @@ require(["sbt/controls/grid/Grid",
             storeArgs : {
                 url : "/communities/service/atom/communities/all",
                 attributes : xpath_community,
-                paramSchema: parameter.communities.all
+                paramSchema: ParamSchema
             },
             renderer : gridRenderer
         });

@@ -29,6 +29,10 @@ return declare(null, {
 	dialogLoginPage:"authenticator/templates/loginDialog.html",
 	url: "",
 	
+	/**
+	 * Constructor, necessary so that this.url is not empty. 
+	 * It may also mixin loginUi, loginPage or dialogLoginPage if they are present in sbt.properties.
+	 */
 	constructor: function(args){
 	    lang.mixin(this, args || {});
 	},

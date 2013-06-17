@@ -17,7 +17,7 @@
  * Social Business Toolkit SDK.
  * Definition of an authentication mechanism.
  */
-define(["../declare", "../i18n!sbt/authenticator/nls/SSO", "../lang"],function(declare, ssoMessage, lang) {
+define(["../declare", "../lang", "../i18n!sbt/authenticator/nls/SSO"],function(declare, lang, ssoMessage) {
 /**
  * Proxy SSO authentication.
  * 
@@ -34,7 +34,7 @@ return declare(null, {
     authenticate: function(options) {
 		globalSSOMessageStrings = ssoMessage;
 		var popUpURL =  this.message;
-		var url = sbt.Properties["sbtUrl"]+popUpURL;
+		var url = this.url+popUpURL;
 		var newWindowWidth = 300;
 		var newWindowLeftAttr = document.body.offsetWidth/2 - newWindowWidth/2;
 		var loginWindow = window.open(url,'Authentication',

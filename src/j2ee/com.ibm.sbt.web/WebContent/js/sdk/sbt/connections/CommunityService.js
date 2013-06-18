@@ -376,7 +376,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Endpoint", "
                 query : requestArgs
             };
             
-            return this.service.getEntity(consts.AtomCommunityInstance, options, communityUuid, callbacks, args);
+            return this.service.getEntity(consts.AtomCommunityInstance, options, communityUuid, callbacks);
         },
 
         /**
@@ -579,7 +579,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Endpoint", "
                 query : requestArgs
             };
 
-            return this.service.getEntity(consts.AtomCommunityMembers, options, memberId, callbacks, args);
+            return this.service.getEntity(consts.AtomCommunityMembers, options, memberId, callbacks);
         },
         
         /**
@@ -851,7 +851,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Endpoint", "
                 query : args || {}
             };
             
-            return this.getEntities(consts.AtomCommunitiesAll, options, this.getCommunityFeedCallbacks(), args);
+            return this.getEntities(consts.AtomCommunitiesAll, options, this.getCommunityFeedCallbacks());
         },
 
         /**
@@ -872,7 +872,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Endpoint", "
                 query : args || {}
             };
             
-            return this.getEntities(consts.AtomCommunitiesMy, options, this.getCommunityFeedCallbacks(), args);
+            return this.getEntities(consts.AtomCommunitiesMy, options, this.getCommunityFeedCallbacks());
         },
 
         /**
@@ -901,7 +901,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Endpoint", "
             };
             var callbacks = this.getMemberFeedCallbacks(communityUuid);
             
-            return this.getEntities(consts.AtomCommunityMembers, options, callbacks, args);
+            return this.getEntities(consts.AtomCommunityMembers, options, callbacks);
         },
 
         /**
@@ -945,7 +945,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Endpoint", "
                 query : args || {}
             };
             
-            return this.getEntities(consts.AtomCommunityInvitesMy, options, this.getInviteFeedCallbacks(), args);
+            return this.getEntities(consts.AtomCommunityInvitesMy, options, this.getInviteFeedCallbacks());
         },
 
         /**
@@ -972,7 +972,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Endpoint", "
                 query : requestArgs
             };
             
-            return this.getEntities(consts.AtomCommunitySubCommunities, options, this.getCommunityFeedCallbacks(), args);
+            return this.getEntities(consts.AtomCommunitySubCommunities, options, this.getCommunityFeedCallbacks());
         },
 
         /**
@@ -1121,7 +1121,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Endpoint", "
                 handleAs : "text"
             };
             
-            return this.deleteEntity(consts.AtomCommunityInstance, options, communityUuid, args);
+            return this.deleteEntity(consts.AtomCommunityInstance, options, communityUuid);
         },
 
         /**
@@ -1196,7 +1196,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Endpoint", "
                 handleAs : "text"
             };
             
-            return this.deleteEntity(consts.AtomCommunityMembers, options, value, args);
+            return this.deleteEntity(consts.AtomCommunityMembers, options, value);
         },
         
         /*

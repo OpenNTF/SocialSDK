@@ -183,6 +183,11 @@ public class APIImporter extends AssetImporter {
 				action.updateTask("Importing: {0}", doc.get("Title"));
 			}
 			String apiExplorerPath = trimSeparator(doc.getString("APIExplorerPath"));
+			int pos = apiExplorerPath.indexOf('#');
+			if(pos>=0) {
+				apiExplorerPath = apiExplorerPath.substring(0,pos); 
+			}
+			
 			String[] products = StringUtil.splitString(doc.getString("Products"),',');
 			Object mt2 = doc.get("RequestsDetails");
 			String to = mt2!=null ? mt2.getClass().getName() : "<null>";
@@ -215,8 +220,24 @@ public class APIImporter extends AssetImporter {
 			put(je,"http_method", rd.get("method") );
 			put(je,"post_content_type", e.get("RequestContentType") );
 			put(je,"post_content", e.get("RequestSample") );
-			put(je,"uri", rd.get("uri") );
-			put(je,"uriParameters", e.get("URLParameters") );
+			String uri = rd.getString("uri");
+			put(je,"uri",uri);
+			// Make sure that the URI parameters are all in the uri 
+			// Remove the one that are not in the URI
+			if(e.get("URLParameters")!=null) {
+				List p = (List)e.get("URLParameters");
+				List r = new ArrayList();
+				for(int i=0; i<p.size(); i++) {
+					JsonJavaObject o = (JsonJavaObject)p.get(i);
+					String n = o.getString("name");
+					if(uri.contains("{"+n+"}")) {
+						r.add(o);
+					}
+				}
+				if(!r.isEmpty()) {
+					put(je,"uriParameters", r);
+				}
+			}
 			put(je,"queryParameters", e.get("QueryParameters") );
 			put(je,"headers", e.get("Headers") );
 		}
@@ -241,9 +262,6 @@ public class APIImporter extends AssetImporter {
 			this.path = path;
 			this.content = new ArrayList<Object>();
 		}
-		public void add(JsonJavaObject o) {
-			content.add(o);
-		}
 	}
 	
 	private static class DocEntry {
@@ -263,13 +281,16 @@ public class APIImporter extends AssetImporter {
 		ArrayList<DocEntry> list = new ArrayList<APIImporter.DocEntry>();
 		try {
 			String path = URLEncoding.encodeURIString("/api/data/collections/name/AllAPIExplorer","utf-8",0,false);
-			Object json = client.get(path,new RestClient.HandlerJson(JsonJavaFactory.instance));
+			Object json = client.get(path,new RestClient.HandlerJson(JsonJavaObjectI.instanceExI));
 			if(json instanceof List) {
 				for(Object entry: (List)json) {
 					if(entry instanceof Map) {
 						Map m = (Map)entry;
 						String unid = (String)m.get("@unid");
 						String exPath = trimSeparator((String)m.get("APIExplorerPath"));
+						if(exPath.indexOf('#')>=0) {
+							exPath = exPath.substring(0,exPath.indexOf('#'));
+						}
 						String title = (String)m.get("Title");
 						list.add(new DocEntry(unid,exPath,title));
 					}
@@ -311,7 +332,7 @@ public class APIImporter extends AssetImporter {
 				o.remove(fieldName);
 			}
 		} else {
-			System.out.println("OK?");
+			//System.out.println("OK?");
 		}
 	}
 	

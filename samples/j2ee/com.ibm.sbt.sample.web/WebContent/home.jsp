@@ -1,12 +1,7 @@
 <!DOCTYPE html>
-<%@page import="com.ibm.commons.runtime.Context"%>
+<%@page import="com.ibm.sbt.sample.web.util.Util"%>
 <html lang="en">
   <head>
-  <% 
-  String environment = Context.get().getProperty("environment");
-  boolean smartcloud = environment != null && environment.equals("smartcloudEnvironment") ? true : false;
-  String smartcloudUrl = Context.get().getProperty("smartcloud.url");
-  %>
     <meta charset="utf-8">
     <title>Social Business Toolkit - Samples</title>
     <link href="images/sbt.png" rel="shortcut icon">
@@ -14,12 +9,11 @@
     <link href="/sbt.bootstrap211/bootstrap/css/bootstrap.css" rel="stylesheet"></link>
     <link href="css/stickyfooter.css" rel="stylesheet"></link>
     <link href="/sbt.bootstrap211/bootstrap/css/bootstrap-responsive.css" rel="stylesheet"></link>
-    <%if(smartcloud){ %>
-      <link rel="stylesheet" href="<%=smartcloudUrl%>/theming/theme/css/3" type="text/css" /> 
-    <%} %>
+    
+    <%=Util.getHomeTheme(request)%>
   </head>
 
-  <body class="<%if(smartcloud){ %>lotusui30_body<%}%>">
+  <body class="<%=Util.getHomeBodyClass(request)%>">
 	<%@include file="includes/header.jsp" %>  
     
     <div id="wrap">

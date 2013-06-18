@@ -20,6 +20,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.ibm.commons.runtime.Application;
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.util.UrlUtil;
 import com.ibm.commons.util.PathUtil;
@@ -299,6 +300,45 @@ public class Util {
             id = ENVIRONMENTS[0][1];
         }
         return id;
+    }
+    
+    public static String getHomeBodyClass(HttpServletRequest request) {
+    	String showSmartCloudNavbar = getProperty("showSmartCloudNavbar");
+    	if ("true".equalsIgnoreCase(showSmartCloudNavbar)) {
+    		return "lotusui30_body";
+    	}
+    	return "";
+    }
+    
+    public static String getHomeTheme(HttpServletRequest request) {
+    	String showSmartCloudNavbar = getProperty("showSmartCloudNavbar");
+    	if ("true".equalsIgnoreCase(showSmartCloudNavbar)) {
+    		String url = getProperty("smartcloud.url");
+    		return "<link rel=\"stylesheet\" href=\"" + url + "/theming/theme/css/3\" type=\"text/css\" />";
+    	}
+    	return "";
+    }
+    
+    public static String getNavbar(HttpServletRequest request) {
+    	String showSmartCloudNavbar = getProperty("showSmartCloudNavbar");
+    	if ("true".equalsIgnoreCase(showSmartCloudNavbar)) {
+    		String url = getProperty("smartcloud.url");
+    		return "<div class=\"lotusui30 lotusui30_fonts scloud3\" style=\"font-size: 12px\"><script src=\"" + url + "/manage/navbar/banner/smartcloudExt?oneui=3\"></script></div>";
+    	}
+    	return "";
+    }
+    
+    public static boolean isShowNavbar(HttpServletRequest request) {
+    	String showSmartCloudNavbar = getProperty("showSmartCloudNavbar");
+    	return ("true".equalsIgnoreCase(showSmartCloudNavbar));
+    }
+    
+    public static String getProperty(String name) {
+    	String value = Context.get().getProperty(name);
+    	if (value != null) {
+    		return value;
+    	}
+    	return Application.get().getProperty(name);
     }
     
     //

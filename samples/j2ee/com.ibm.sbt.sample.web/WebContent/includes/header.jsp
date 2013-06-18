@@ -8,14 +8,6 @@
 	String javaClass = "";
 	String formStyle = "";
 
-	String headEnvironment = Context.get().getProperty("environment");
-	String headEnvParam = request.getParameter("env");
-	boolean headSmartcloud = false;
-	if (StringUtil.isEmpty(headEnvParam)) {
-		headSmartcloud = headEnvironment != null && headEnvironment.equals("smartcloudEnvironment") ? true : false;
-	} else {
-		headSmartcloud = headEnvParam.equals("smartcloudEnvironment") ? true : false;
-	}
 	String requestUrl = request.getRequestURL().toString();
 	if (requestUrl.indexOf("javascript.jsp") != -1) {
 		jsClass = "active";
@@ -33,18 +25,10 @@
 		window.location.href = url;
 	}
 </script>
-<%
-	if (headSmartcloud) {
-%>
-<div id="smartcloudNavContainer"
-	class="lotusui30 lotusui30_fonts scloud3" style="font-size: 12px">
-	<script
-		src="https://apps.na.collabservtest.lotus.com/manage/navbar/banner/smartcloudExt?oneui=3"></script>
-</div>
-<%
-	}
-%>
-<div class="navbar <%if (!headSmartcloud) {%>navbar-fixed-top<%}%>">
+
+<%=Util.getNavbar(request)%>
+
+<div class="navbar <%if (!Util.isShowNavbar(request)) {%>navbar-fixed-top<%}%>">
 	<div class="navbar-inner">
 		<div class="container-fluid">
 			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> 

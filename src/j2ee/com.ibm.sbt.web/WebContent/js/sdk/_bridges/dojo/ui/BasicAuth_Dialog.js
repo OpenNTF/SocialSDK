@@ -61,11 +61,11 @@ define(["sbt/i18n!sbt/nls/loginForm", "sbt/config"], function(loginForm, config)
 		  }	
 		  config.dialog=d;
 		  //submit
-		  dojo.connect(dojo.byId("submitBtn"), "onclick", function(evt){
+		  dojo.connect(dojo.byId("basicLoginFormOK"), "onclick", function(evt){
 		      config.dialog.submitOnClickHandle(dojo.byId("ibmsbt.loginActionForm"));
 		  });
 		  //cancel
-		  dojo.connect(dojo.byId("cancelBtn"), "onclick", function(evt){
+		  dojo.connect(dojo.byId("basicLoginFormCancel"), "onclick", function(evt){
               config.dialog.hide(dojo.byId("ibmsbt.loginActionForm"));
               if(config.cancel) {
                   config.cancel();

@@ -100,10 +100,11 @@
                 <include>**/*.css</include>
                 <include>**/*.properties</include>
                 <include>**/*.html</include>
-        				<include>**/*.xml</include>
-        				<include>**/*.gif</include>
-        				<include>**/*.jpeg</include>
-        				<include>**/*.png</include>
+   				<include>**/*.xml</include>
+   				<include>**/*.gif</include>
+   				<include>**/*.jpeg</include>
+   				<include>**/*.jpg</include>
+   				<include>**/*.png</include>
               </includes>
             </resource>
           </webResources>        

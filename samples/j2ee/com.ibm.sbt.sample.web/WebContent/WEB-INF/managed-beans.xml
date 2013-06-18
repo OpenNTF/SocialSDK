@@ -8,12 +8,19 @@
 	</managed-bean>
 
 	<!--  
-		Password store for OAuth / SmartCloud 
+		Password store for OAuth / SmartCloud based on DBCredentialStore
 	-->
 	<managed-bean>
-		<managed-bean-name>SmartCloudStore</managed-bean-name>
-		<managed-bean-class>com.ibm.sbt.security.authentication.oauth.consumer.store.MemoryTokenStore</managed-bean-class>
-
+		<managed-bean-name>SmartCloudDBStore</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.security.credential.store.DBCredentialStore</managed-bean-class>
+		<managed-property> 
+			<property-name>jdbcDriverClass</property-name> 
+			<value>org.apache.derby.jdbc.EmbeddedDriver</value> 
+		</managed-property>
+		<managed-property> 
+			<property-name>jndiName</property-name> 
+			<value>jdbc/ibmsbt-dbtokenstore</value> 
+		</managed-property>
 		<managed-bean-scope>application</managed-bean-scope>
 		<!-- Fixed OAuth Application parameters -->
 	</managed-bean>
@@ -235,10 +242,10 @@
 			<!-- <value>HMAC-SHA1</value> -->
 			<value>PLAINTEXT</value>
 		</managed-property>
-		<!-- Access to the token store -->
+		<!-- Access to the credential store -->
 		<managed-property>
-			<property-name>tokenStore</property-name>
-			<value>SmartCloudStore</value>
+			<property-name>credentialStore</property-name>
+			<value>SmartCloudDBStore</value>
 		</managed-property>
 		<managed-property>
 			<property-name>serviceName</property-name>
@@ -293,6 +300,11 @@
 		<managed-property>
 			<property-name>forceTrustSSLCertificate</property-name>
 			<value>true</value>
+		</managed-property>
+		<!-- Access to the credential store -->
+		<managed-property>
+			<property-name>credentialStore</property-name>
+			<value>SmartCloudDBStore</value>
 		</managed-property>
 	</managed-bean>
 	
@@ -451,7 +463,7 @@
   	<!-- Twitter -->
 	<managed-bean>
 		<managed-bean-name>TwitterStore</managed-bean-name>
-		<managed-bean-class>com.ibm.sbt.security.authentication.oauth.consumer.store.MemoryTokenStore</managed-bean-class>
+		<managed-bean-class>com.ibm.sbt.security.credential.store.MemoryStore</managed-bean-class>
 
 		<managed-bean-scope>application</managed-bean-scope>
 		<!-- Fixed OAuth Application parameters -->
@@ -505,7 +517,7 @@
 
 		<!-- Access to the token store -->
 		<managed-property>
-			<property-name>tokenStore</property-name>
+			<property-name>credentialStore</property-name>
 			<value>TwitterStore</value>
 		</managed-property>
 		<managed-property>
@@ -568,7 +580,7 @@
 			<value>PLAINTEXT</value>
 		</managed-property>
 		<managed-property>
-			<property-name>tokenStore</property-name>
+			<property-name>credentialStore</property-name>
 			<value>DropboxStore</value>
 		</managed-property>
 		<managed-property>

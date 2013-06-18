@@ -30,8 +30,8 @@ import com.ibm.commons.util.profiler.ProfilerType;
 import com.ibm.sbt.core.configuration.Configuration;
 import com.ibm.sbt.security.authentication.oauth.consumer.AccessToken;
 import com.ibm.sbt.security.authentication.oauth.consumer.OAuth2Handler;
-import com.ibm.sbt.security.authentication.oauth.consumer.store.OATokenStoreFactory;
-import com.ibm.sbt.security.authentication.oauth.consumer.store.TokenStore;
+import com.ibm.sbt.security.credential.store.CredentialStore;
+import com.ibm.sbt.security.credential.store.CredentialStoreFactory;
 import com.ibm.sbt.service.core.handlers.AbstractServiceHandler;
 import com.ibm.sbt.services.util.AnonymousCredentialStore;
 
@@ -69,9 +69,9 @@ public class OA2Callback extends AbstractServiceHandler {
 			AccessToken token = oAuthHandler.createToken(oAuthHandler.getAppId(),oAuthHandler.getServiceName());
             // Store the new key
         	if(!context.isCurrentUserAnonymous()) {
-        		TokenStore ts = OATokenStoreFactory.getTokenStore(oAuthHandler.getTokenStore());
-        		if(ts!=null) {
-            		ts.saveAccessToken(token);
+        		CredentialStore credStore = CredentialStoreFactory.getCredentialStore(oAuthHandler.getCredentialStore());
+        		if(credStore!=null) {
+        			credStore.store(oAuthHandler.getServiceName(), OAuth2Handler.AT_STORE_TYPE, context.getCurrentUserId(), token);
             	}
             } else {
             	// Store the token for anonymous user

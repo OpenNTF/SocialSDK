@@ -19,7 +19,7 @@
  * 
  * Definition of a dojo based dialog for Basic Auth
  */
-define(["sbt/i18n!sbt/nls/loginForm"], function(loginForm) {
+define(["sbt/i18n!sbt/nls/loginForm", "sbt/config"], function(loginForm, config) {
 	return {
 		show: function(options, dialogLoginPage) {
 		  try{	
@@ -47,7 +47,7 @@ define(["sbt/i18n!sbt/nls/loginForm"], function(loginForm) {
 											return;
 										}
 										d.hide();
-										delete sbt.dialog;
+										delete config.dialog;
 										options.callback();
 								    }
 			            		};
@@ -55,10 +55,23 @@ define(["sbt/i18n!sbt/nls/loginForm"], function(loginForm) {
 			        		}
 			            }
 			        });
+					
 		  }catch(er){
 			  console.log("error in BasicAuth_Dialog "+er);
 		  }	
-		  sbt.dialog=d;
+		  config.dialog=d;
+		  //submit
+		  dojo.connect(dojo.byId("submitBtn"), "onclick", function(evt){
+		      config.dialog.submitOnClickHandle(dojo.byId("ibmsbt.loginActionForm"));
+		  });
+		  //cancel
+		  dojo.connect(dojo.byId("cancelBtn"), "onclick", function(evt){
+              config.dialog.hide(dojo.byId("ibmsbt.loginActionForm"));
+              if(config.cancel) {
+                  config.cancel();
+              }
+              delete config.dialog;
+          });
 	      d.show();
 		}
 	};

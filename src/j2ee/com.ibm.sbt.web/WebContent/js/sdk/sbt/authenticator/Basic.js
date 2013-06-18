@@ -69,7 +69,7 @@ return declare(null, {
 	    return true;
 	},	
 	
-	_authDialog: function(options, dialogLoginPage, sbtConfig, dialogLoginPage) {
+	_authDialog: function(options, dialogLoginPage, sbtConfig) {
 		require(["sbt/_bridge/ui/BasicAuth_Dialog", "sbt/i18n!sbt/nls/loginForm", "sbt/dom"], function(dialog, loginForm, dom) {
 		    if(options.cancel){
 	            sbtConfig.cancel = options.cancel;

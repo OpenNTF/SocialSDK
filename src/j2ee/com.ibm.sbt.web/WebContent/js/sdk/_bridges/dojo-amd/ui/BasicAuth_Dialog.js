@@ -19,10 +19,12 @@
  * 
  * Definition of a dojo based dialog for OAuth 1.0.
  */
-define(['dijit/Dialog',"dojo/cache","sbt/i18n!sbt/nls/loginForm"], function(Dialog, cache, loginForm) {
+define(['dijit/Dialog',"dojo/cache","sbt/i18n!sbt/nls/loginForm", "sbt/config", "dojo/on", "sbt/dom"], function(Dialog, cache, loginForm, config, on, dom) {
 	return {
 		show: function(options, dialogLoginPage) {
 		  try{
+		      
+		    
 			var proxy = options.proxy.proxyUrl;
 			var proxyServletURL = proxy.substring(0,proxy.lastIndexOf("/"))+"/basicAuth/"+options.proxyPath+"/JSApp";
 			var d = new Dialog({
@@ -49,7 +51,7 @@ define(['dijit/Dialog',"dojo/cache","sbt/i18n!sbt/nls/loginForm"], function(Dial
 									}
 								}
 								d.hide();
-								delete sbt.dialog;
+								delete config.dialog;
 								options.callback();
 						    }
 	            		};
@@ -60,7 +62,19 @@ define(['dijit/Dialog',"dojo/cache","sbt/i18n!sbt/nls/loginForm"], function(Dial
 		  }catch(er){
 			  console.log("error in BasicAuth_Dialog "+er);
 		  }	
-		  sbt.dialog=d;
+		  config.dialog=d;
+		  //submit
+          on(dom.byId("submitBtn"), "click", function(evt){
+              config.dialog.submitOnClickHandle(dom.byId("ibmsbt.loginActionForm"));
+          });
+          //cancel
+          on(dojo.byId("cancelBtn"), "click", function(evt){
+              config.dialog.hide(dom.byId("ibmsbt.loginActionForm"));
+              if(config.cancel) {
+                  config.cancel();
+              }
+              delete config.dialog;
+          });
 	      d.show();
 		}
 

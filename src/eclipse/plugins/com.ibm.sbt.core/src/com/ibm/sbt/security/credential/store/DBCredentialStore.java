@@ -1,3 +1,20 @@
+/*
+ * © Copyright IBM Corp. 2013
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); 
+ * you may not use this file except in compliance with the License. 
+ * You may obtain a copy of the License at:
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0 
+ * 
+ * Unless required by applicable law or agreed to in writing, software 
+ * distributed under the License is distributed on an "AS IS" BASIS,  
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 
+ * implied. See the License for the specific language governing 
+ * permissions and limitations under the License.
+ */
+
+
 package com.ibm.sbt.security.credential.store;
 
 import java.sql.Connection;
@@ -12,19 +29,18 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import com.ibm.commons.runtime.Application;
 import com.ibm.commons.util.StringUtil;
-import com.ibm.sbt.security.authentication.oauth.consumer.ConsumerToken;
-import com.ibm.sbt.security.authentication.oauth.consumer.store.TokenStoreEncryptor;
 
 public class DBCredentialStore extends BaseStore{
 	
+	private final String	DEFAULTJNDINAME = "jdbc/ibmsbt-dbtokenstore";
+	private final String	DEFAULTDBTABLE  = "SBTKREP";
+	
 	static final String		sourceClass		= DBCredentialStore.class.getName();
 	static final Logger		logger			= Logger.getLogger(sourceClass);
-	private static boolean	driverLoaded	= false;
+	private static boolean	driverLoaded;
 
-	private String			jdbcDriverClass;
-	private String			defaultJndiName = "jdbc/ibmsbt-dbtokenstore";
-	
 	/*
 	 * Properties to access the underlying db repository.
 	 * If jdbc url is provided application will use that, otherwise jndi
@@ -32,6 +48,8 @@ public class DBCredentialStore extends BaseStore{
 	 */
 	private String			jdbcUrl;
 	private String			jndiName;
+	private String			tableName;
+	private String			jdbcDriverClass;
 	
 
 	@Override
@@ -47,7 +65,7 @@ public class DBCredentialStore extends BaseStore{
 			String user, Object credentials)
 			throws CredentialStoreException {
 		
-		storeinDB(service,type,user,credentials);
+		storeInDB(service,type,user,credentials);
 		
 	}
 
@@ -63,24 +81,29 @@ public class DBCredentialStore extends BaseStore{
 	 * Fetch the consumer token from DB
 	 */
 	private Object getFromDB(String serviceName, String type, String user) throws CredentialStoreException {
-		Object token = null;
 		String application = findApplicationName();
+		if(StringUtil.isEmpty(user)){ // User id could be empty for consumer tokens
+			// Derive value of user from concatenation of serviceName and application
+			user = serviceName+application;
+		}
 		try {
 			Connection connection = getConnection();
 			try {
 				PreparedStatement stmt = connection
-					.prepareStatement("SELECT CREDENTIALTOKEN FROM SBTKREP WHERE APPID = ? AND SERVICENAME = ? and TYPE = ? AND USERID = ?");
+					.prepareStatement("SELECT CREDENTIALTOKEN FROM "+getTableName()+" WHERE APPID = ? AND SERVICENAME = ? and TYPE = ? AND USERID = ?");
 				try {
+				
 					stmt.setString(1, application);
 					stmt.setString(2, serviceName);
 					stmt.setString(3, type);
 					stmt.setString(4, user);
 					
 					ResultSet rs = stmt.executeQuery();
-					rs.next();
 					try {
-						byte[] buf = rs.getBytes(1);
-						token = deSerialize(buf);
+						if(rs.next()){
+							byte[] buf = rs.getBytes(1);
+							return(deSerialize(buf));
+						}
 					} finally {
 						rs.close();
 					}
@@ -90,12 +113,11 @@ public class DBCredentialStore extends BaseStore{
 			} finally {
 				connection.close();
 			}
-			return (Object) token;
-
 		} catch (SQLException e) {
 			logger.log(Level.SEVERE, "getAppToken : ", e);
 			throw new CredentialStoreException(e, "DBCredentialStore.java : getAppToken caused a SQLException");
 		}
+		return null;
 	}
 	
 	
@@ -103,12 +125,15 @@ public class DBCredentialStore extends BaseStore{
 	/*
 	 * Insert app token
 	 */
-	private void storeinDB(String serviceName, String type, String user, Object token) throws CredentialStoreException {
+	private void storeInDB(String serviceName, String type, String user, Object token) throws CredentialStoreException {
 		try {
 			Connection connection = getConnection();
-			String application = findApplicationName();
 			try {
-				PreparedStatement ps = connection.prepareStatement("INSERT INTO SBTKREP VALUES (?, ?, ?, ?, ?)");
+				String application = findApplicationName();
+				if(StringUtil.isEmpty(user)){
+					user = serviceName+application;
+				}
+				PreparedStatement ps = connection.prepareStatement("INSERT INTO "+getTableName()+" VALUES (?, ?, ?, ?, ?)");
 				try {
 					byte[] apptoken = serialize(token);
 					ps.setString(1, application);
@@ -137,16 +162,20 @@ public class DBCredentialStore extends BaseStore{
 	private void removeFromDB(String serviceName, String type, String userId) throws CredentialStoreException {
 		try {
 			Connection connection = getConnection();
-			String application = findApplicationName();
 			try {
+				String application = findApplicationName();
+				if(StringUtil.isEmpty(userId)){
+					userId = serviceName+application;
+				}
 				PreparedStatement ps = connection
-					.prepareStatement("DELETE FROM SBTKREP WHERE APPID = ? AND SERVICENAME = ? AND USERID = ? AND TYPE = ?");
+					.prepareStatement("DELETE FROM "+getTableName()+" WHERE APPID = ? AND SERVICENAME = ? AND USERID = ? AND TYPE = ?");
 				try {
 					ps.setString(1, application);
 					ps.setString(2, serviceName);
 					ps.setString(3, userId);
 					ps.setString(4, type);
-					ps.execute();
+					
+					ps.executeUpdate();
 				} finally {
 					ps.close();
 				}
@@ -164,18 +193,27 @@ public class DBCredentialStore extends BaseStore{
 	/*
 	 * Load the DB Drivers
 	 */
-	private void loadDBDriver() throws CredentialStoreException {
+	private synchronized void loadDBDriver() throws CredentialStoreException {
 		if (driverLoaded) {
 			return;
 		}
 		String driver = getJdbcDriverClass();
-		try {
-			Class.forName(driver).newInstance(); // Load driver
-		} catch (Exception ex) {
-			logger.log(Level.SEVERE, "loadDBDriver : Could not load driver for class" + driver, ex);
-			throw new CredentialStoreException(ex,"DBCredentialStore.java : loadDBDriver Could not load driver for class" + driver );
+		if(StringUtil.isNotEmpty(driver)){
+			try {
+				if(Application.getUnchecked()!=null){
+					Application.getUnchecked().getClassLoader().loadClass(driver); //Class.forname does not work on OSGI
+				}else{
+					Class.forName(driver).newInstance(); // Load driver
+				}
+			driverLoaded = true;
+			} catch (Exception ex) {
+				logger.log(Level.SEVERE, "loadDBDriver : Could not load driver for class" + driver, ex);
+				throw new CredentialStoreException(ex,"DBCredentialStore.java : loadDBDriver Could not load driver for class" + driver );
+			}
+		}else{
+			logger.log(Level.SEVERE, "loadDBDriver : Could not find driver details");
+			throw new CredentialStoreException(new Exception("DBCredentialStore.java : loadDBDriver Driver not found"));
 		}
-		driverLoaded = true;
 	}
 	
 	/*
@@ -183,19 +221,18 @@ public class DBCredentialStore extends BaseStore{
 	 */
 	
 	private Connection getConnection() throws CredentialStoreException{
-		loadDBDriver();
 		if(StringUtil.isNotEmpty(getJdbcUrl())){
-			Connection conn;
 			try {
-				conn = DriverManager.getConnection(getJdbcUrl());
-				return conn;
+				loadDBDriver();
+				return DriverManager.getConnection(getJdbcUrl());
 			} catch (Exception e) {
 				logger.log(Level.SEVERE, "DBTokenStore.java : getConnection() : ", e);
-				throw new CredentialStoreException(e,"DBCredentialStore.java : getConnection() caused exeption" );
+				throw new CredentialStoreException(e,"Problem occured in getting connection using JDBC" );
 			}
-		}else{
+		}else {
 			return getConnectionUsingJNDI();
 		}
+		
 	}
 	
 	
@@ -203,22 +240,19 @@ public class DBCredentialStore extends BaseStore{
 	 * Read the database settings from JNDI
 	 */
 	private Connection getConnectionUsingJNDI() throws CredentialStoreException {
-		
 		try {
-			Connection conn;
 			String jndikey = getJndiName();
 			InitialContext initCtx = new InitialContext();
 			Context envCtx = (Context) initCtx.lookup("java:comp/env");
 			if(StringUtil.isEmpty(getJndiName())){
 				logger.log(Level.INFO, "DBTokenStore.java : getConnectionUsingJNDI : JNDI Key was blank in bean using the default");
-				jndikey = defaultJndiName;
+				jndikey = DEFAULTJNDINAME;
 			}
 			DataSource ds = (DataSource) envCtx.lookup(jndikey);
-			conn = ds.getConnection();
-			return conn;
+			return(ds.getConnection());
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, "DBTokenStore.java : getConnectionUsingJNDI : ", e);
-			throw new CredentialStoreException(e,"DBCredentialStore.java : getConnectionUsingJNDI caused exeption" );
+			throw new CredentialStoreException(e,"Problem occured in getting connection using JNDI" );
 		}
 	}
 	
@@ -245,5 +279,17 @@ public class DBCredentialStore extends BaseStore{
 	public void setJdbcUrl(String jdbcUrl) {
 		this.jdbcUrl = jdbcUrl;
 	}
+	
+	public String getTableName() {
+		if(StringUtil.isEmpty(tableName)){
+			tableName = DEFAULTDBTABLE;
+		}
+		return tableName;
+	}
+
+	public void setTableName(String tableName) {
+		this.tableName = tableName;
+	}
+	
 	
 }

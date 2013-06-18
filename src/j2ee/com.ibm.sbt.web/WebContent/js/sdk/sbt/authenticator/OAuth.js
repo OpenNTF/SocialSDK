@@ -38,36 +38,42 @@ define(['../declare','../lang'], function(declare,lang) {
 		 * Method that authenticates the current user 
 		 */
 		authenticate: function(options) {
-			var mode = options.loginUi || this.loginUi;
-			if(mode=="popup") {
-				return this._authPopup(options);
-			} else if(mode=="dialog") {
-				return this._authDialog(options);
-			} else {
-				return this._authMainWindow(options);
-			}
+		    var popup = this._authPopup;
+		    var authDialog = this._authDialog;
+		    var authMainWindow = this._authMainWindow;
+		    var sbtUrl = this.url;
+			require(["sbt/config"], function(config){
+			    var mode = options.loginUi || config.Properties["loginUi"] || this.loginUi;
+	            if(mode=="popup") {
+	                return popup(options, sbtUrl);
+	            } else if(mode=="dialog") {
+	                return authDialog(options, sbtUrl);
+	            } else {
+	                return authMainWindow(options, sbtUrl);
+	            }
+			});
 		},
 		
-		_authMainWindow: function(options) {
-			var url = this.url + "?oaredirect="+encodeURIComponent(window.location.href);
+		_authMainWindow: function(options, sbtUrl) {
+			var url = sbtUrl + "?oaredirect="+encodeURIComponent(window.location.href);
 			newwindow=window.location.href = url;
 			return true;
 			
 		},
 		
-		_authPopup: function(options) {
-			sbt.callback = options.callback;
-			var url = this.url + "?loginUi=popup";
-			newwindow=window.open(url,'Authentication','height=700,width=650');
-			return true;
-			
+		_authPopup: function(options, sbtUrl) {
+		    require(["sbt/config"], function(config){
+		        config.callback = options.callback;
+	            var url = sbtUrl + "?loginUi=popup";
+	            newwindow=window.open(url,'Authentication','height=700,width=650');
+	            return true;
+		    });
 		},
 		
-		_authDialog: function(options) {
-			var self=this;
+		_authDialog: function(options, sbtUrl) {
 			require(["sbt/_bridge/ui/OAuth10_Dialog"], function(dialog) {
 				// TODO: should run the dance when done...
-				dialog.show(self.url);
+				dialog.show(sbtUrl);
 			});
 			return true;
 		}

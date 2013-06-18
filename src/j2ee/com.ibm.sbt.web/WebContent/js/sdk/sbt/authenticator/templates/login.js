@@ -38,19 +38,22 @@ function submitOnClick(contentForm) {
 }
 
 function cancelOnClick() {
-    var agrsMap = getArgsMap();// get map of query string arguments
-    var redirectURL = decodeURIComponent(agrsMap.redirectURL);
-    var loginUi = decodeURIComponent(agrsMap.loginUi);
-    if (loginUi == "popup") {
-    	if(window.opener.sbt.cancel){
-        	window.opener.sbt.cancel();
-            delete window.opener.sbt.cancel;
+    require(["sbt/config"], function(config){
+        var agrsMap = getArgsMap();// get map of query string arguments
+        var redirectURL = decodeURIComponent(agrsMap.redirectURL);
+        var loginUi = decodeURIComponent(agrsMap.loginUi);
+        if (loginUi == "popup") {
+            if(config.cancel){
+                config.cancel();
+                delete config.cancel;
+            }
+            delete config.callback;
+            window.close();
+        } else {
+            window.location.href = redirectURL;
         }
-        delete window.opener.sbt.callback;
-        window.close();
-    } else {
-        window.location.href = redirectURL;
-    }
+    });
+    
 }
 
 function onLoginPageLoad() {

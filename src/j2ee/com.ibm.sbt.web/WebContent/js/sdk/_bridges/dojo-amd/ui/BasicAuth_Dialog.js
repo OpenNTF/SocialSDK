@@ -64,11 +64,11 @@ define(['dijit/Dialog',"dojo/cache","sbt/i18n!sbt/nls/loginForm", "sbt/config", 
 		  }	
 		  config.dialog=d;
 		  //submit
-          on(dom.byId("submitBtn"), "click", function(evt){
+          on(dom.byId("basicLoginFormOK"), "click", function(evt){
               config.dialog.submitOnClickHandle(dom.byId("ibmsbt.loginActionForm"));
           });
           //cancel
-          on(dojo.byId("cancelBtn"), "click", function(evt){
+          on(dojo.byId("basicLoginFormCancel"), "click", function(evt){
               config.dialog.hide(dom.byId("ibmsbt.loginActionForm"));
               if(config.cancel) {
                   config.cancel();

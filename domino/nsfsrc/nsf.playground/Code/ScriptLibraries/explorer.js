@@ -138,7 +138,7 @@ function executeService(params,details,results,callback) {
 			uri += (uri.match(/\?/) ? '&' : '?') + encodeURI(qs); 
 		}
 
-		var env = dojo.byId(pageGlobal.cbEnv).value;
+		var env = (pageGlobal && pageGlobal.cbEnv) ? dojo.byId(pageGlobal.cbEnv).value : "";
 
 		var startTs = Date.now();
 		var args = {

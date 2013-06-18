@@ -1,7 +1,6 @@
 <div id="gridDiv"></div>
 <script type="text/template" id="communityRow">
 <tr>
-	
 	<td>
 		<h4>
 			<span dojoAttachPoint="placeLinkNode">
@@ -9,7 +8,7 @@
 			</span>
 			<span class="" dojoAttachPoint="sourceTypePlaceHolder"></span>
 			<span style="display: none" class= role=presentation dojoAttachPoint="sourceTypeSectionDevider">|</span>
-			<span style="display: none" class="lotusType commType" dojoAttachPoint="restrictedIconNode">
+			<span style="display: none" class="" dojoAttachPoint="restrictedIconNode">
 				<img style="display: inline" class="" title="${nls.restricted}" alt="${nls.restricted}" src="${blankGif}">
 				${nls.restricted} 
 			</span>
@@ -20,9 +19,8 @@
 				<span class="" role=presentation dojoAttachPoint="membersSectionDevider">|</span>
 				<span role=listitem dojoAttachPoint="personPlaceHolder">
 					${nls.updatedBy}
-					<a class="fn lotusPerson vcard hasHover" href="javascript: void(0)" icbizcard_ref="1" icbizcard_idx="1">
+					<a href="">
 						${contributorName}
-						<span style="display: none" class=x-lconn-userid>${contributorUid}</span>
 					</a> 
 				</span>
 				<span class="" role=presentation dojoAttachPoint="authorSectionDevider">|</span>
@@ -32,6 +30,4 @@
 		</div>
 	</td>
 </tr>
-
-
 </script>

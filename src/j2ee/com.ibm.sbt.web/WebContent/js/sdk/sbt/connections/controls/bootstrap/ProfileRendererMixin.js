@@ -22,7 +22,7 @@ define(["../../../lang", "../../../controls/grid/bootstrap/GridRendererMixin",
         function(lang, GridRendererMixin, ProfileRow) {
 
     /**
-     * @module sbt.controls.grid.bootstrap.CommunityRendererMixin
+     * @module sbt.controls.grid.bootstrap.ProfileRendererMixin
      */
     return lang.mixin(GridRendererMixin, { template : ProfileRow });
     

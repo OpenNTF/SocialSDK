@@ -1,22 +1,14 @@
 <div id="gridDiv"></div>
 <script type="text/template" id="profileRow">
 
-<tr class="${rowClass}">
-
-	<td style="width: 70px">
+<tr>
+	<td width="55">
 		<div><img alt="${name}" src="${photo}" width="55" height="55"></img></div>
 	</td>
 	<td>
 		<div>
-			<h4>
-				<span class="vcard" dojoAttachPoint="vcardNode">
-  					<a aria-label="${nls.ariaVcard}" href="javascript:void(0);" title="${tooltip}" data-dojo-attach-event="onclick: handleClick" class="fn url">${name}</a>
-		  			<span data-dojo-attach-point="idNode" class="x-lconn-userid" style="display: none;">${uid}</span>
-  				</span>
-  			</h4>
-			<div></div>
+  			<a aria-label="${nls.ariaVcard}" href="javascript:void(0);" title="${tooltip}" data-dojo-attach-event="onclick: handleClick" class="fn url">${name}</a>
 		</div>
 	</td>
-
 </tr>
 </script>

@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <artifactId>acme.social.sample</artifactId>
   <packaging>ear</packaging>
@@ -18,26 +19,31 @@
         <version>2.8</version>
         <configuration>
           <modules>
-             <webModule>
-               <groupId>com.ibm.sbt.sample</groupId>
-               <artifactId>acme.social.sample.dataapp</artifactId>
-               <contextRoot>/acme.social.sample.dataapp</contextRoot>
-             </webModule>
-             <webModule>
-               <groupId>com.ibm.sbt.sample</groupId>
-               <artifactId>acme.social.sample.dataapp</artifactId>
-               <contextRoot>/acme.social.sample.dataapp</contextRoot>
-             </webModule>
-             <webModule>
-               <groupId>com.ibm.sbt.sdk</groupId>
-               <artifactId>sbt</artifactId>
-               <contextRoot>/sbt</contextRoot>
-             </webModule>
-             <webModule>
-               <groupId>com.ibm.sbt.sdk</groupId>
-               <artifactId>sbt.dojo180</artifactId>
-               <contextRoot>/sbt.dojo180</contextRoot>
-             </webModule>
+            <webModule>
+              <groupId>com.ibm.sbt.sample</groupId>
+              <artifactId>acme.social.sample.dataapp</artifactId>
+              <contextRoot>/acme.social.sample.dataapp</contextRoot>
+            </webModule>
+            <webModule>
+              <groupId>com.ibm.sbt.sample</groupId>
+              <artifactId>acme.social.sample.webapp</artifactId>
+              <contextRoot>/acme.social.sample.webapp</contextRoot>
+            </webModule>
+            <webModule>
+              <groupId>com.ibm.sbt.sample</groupId>
+              <artifactId>acme.sample.webapp</artifactId>
+              <contextRoot>/acme.sample.webapp</contextRoot>
+            </webModule>
+            <webModule>
+              <groupId>com.ibm.sbt.sdk</groupId>
+              <artifactId>sbt</artifactId>
+              <contextRoot>/sbt</contextRoot>
+            </webModule>
+            <webModule>
+              <groupId>com.ibm.sbt.sdk</groupId>
+              <artifactId>sbt.dojo180</artifactId>
+              <contextRoot>/sbt.dojo180</contextRoot>
+            </webModule>
           </modules>
           <generateApplicationXml>true</generateApplicationXml>
         </configuration>
@@ -46,29 +52,35 @@
   </build>
 
   <dependencies>
-  	<dependency>
-  		<groupId>com.ibm.sbt.sdk</groupId>
-  		<artifactId>sbt.dojo180</artifactId>
-  		<version>1.0.0</version>
-  		<type>war</type>
-  	</dependency>
-  	<dependency>
-  		<groupId>com.ibm.sbt.sdk</groupId>
-  		<artifactId>sbt</artifactId>
-  		<version>1.0.0-SNAPSHOT</version>
-  		<type>war</type>
-  	</dependency>
-  	<dependency>
-  		<groupId>com.ibm.sbt.sample</groupId>
-  		<artifactId>acme.social.sample.dataapp</artifactId>
-  		<version>1.0.0</version>
-  		<type>war</type>
-  	</dependency>
-  	<dependency>
-  		<groupId>com.ibm.sbt.sample</groupId>
-  		<artifactId>acme.social.sample.webapp</artifactId>
-  		<version>1.0.0</version>
-  		<type>war</type>
-  	</dependency>
+    <dependency>
+      <groupId>com.ibm.sbt.sdk</groupId>
+      <artifactId>sbt.dojo180</artifactId>
+      <version>1.0.0</version>
+      <type>war</type>
+    </dependency>
+    <dependency>
+      <groupId>com.ibm.sbt.sdk</groupId>
+      <artifactId>sbt</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+      <type>war</type>
+    </dependency>
+    <dependency>
+      <groupId>com.ibm.sbt.sample</groupId>
+      <artifactId>acme.social.sample.dataapp</artifactId>
+      <version>1.0.0</version>
+      <type>war</type>
+    </dependency>
+    <dependency>
+      <groupId>com.ibm.sbt.sample</groupId>
+      <artifactId>acme.sample.webapp</artifactId>
+      <version>1.0.0</version>
+      <type>war</type>
+    </dependency>
+    <dependency>
+      <groupId>com.ibm.sbt.sample</groupId>
+      <artifactId>acme.social.sample.webapp</artifactId>
+      <version>1.0.0</version>
+      <type>war</type>
+    </dependency>
   </dependencies>
 </project>

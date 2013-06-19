@@ -54,11 +54,11 @@ return declare(null, {
 		}
 		require(["sbt/_bridge/ui/BasicAuth_Dialog", "sbt/i18n!sbt/nls/loginForm", "sbt/dom"], function(dialog, loginForm, dom) {
 			dialog.show(options, dialogLoginPage);
-			dom.byId('wrongCredsMessage').innerHTML = loginForm.wrong_creds_message;
-			dom.byId('basicLoginFormUsername').innerHTML = loginForm.username;
-			dom.byId('basicLoginFormPassword').innerHTML = loginForm.password;
-			dom.byId('basicLoginFormOK').value = loginForm.login_ok;
-			dom.byId('basicLoginFormCancel').value = loginForm.login_cancel;
+			dom.setText('wrongCredsMessage', loginForm.wrong_creds_message);
+			dom.setText('basicLoginFormUsername', loginForm.username);
+			dom.setText('basicLoginFormPassword', loginForm.password);
+			dom.setAttr(dom.byId('basicLoginFormOK'), "value", loginForm.login_ok);
+			dom.setAttr(dom.byId('basicLoginFormCancel'), "value", loginForm.login_cancel);
 		});
 		return true;
 	},

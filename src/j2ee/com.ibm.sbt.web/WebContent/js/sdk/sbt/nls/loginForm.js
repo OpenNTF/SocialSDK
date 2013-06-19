@@ -21,7 +21,7 @@
 
 define({
   root: ({	 
-	  username:"Username :",
+	  username:"User name :",
 	  password:"Password :",
 	  authentication_dialog_title: "Authentication",
 	  login_ok: "Log in",

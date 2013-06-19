@@ -287,7 +287,7 @@ define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscr
             };
             var entityId = idObject.userid;
             var url = this.constructUrl(Consts.GetProfileByGUID, {}, {idToBeReplaced : entityId});
-            return this.getEntity(url, options, entityId, this.getProfileCallbacks(), args);
+            return this.getEntity(url, options, entityId, this.getProfileCallbacks());
         },
 
         /**
@@ -314,7 +314,7 @@ define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscr
             };
             var entityId = idObject.userid;
             var url = this.constructUrl(Consts.GetContactByGUID, {}, {idToBeReplaced : entityId});
-            return this.getEntity(url, options, entityId, this.getProfileCallbacks(), args);
+            return this.getEntity(url, options, entityId, this.getProfileCallbacks());
         },
         
         /**
@@ -330,7 +330,7 @@ define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscr
                 handleAs : "json",
                  query : args || {format:"json"}
         	};
-            return this.getEntities(Consts.GetMyConnections, options, this.getProfileFeedCallbacks(), args);
+            return this.getEntities(Consts.GetMyConnections, options, this.getProfileFeedCallbacks());
         },
         
         /**
@@ -346,7 +346,7 @@ define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscr
                     handleAs : "json",
                     query : args || {format:"json"}
         	};
-        	return this.getEntities(Consts.GetMyContacts, options, this.getProfileFeedCallbacks(), args);
+        	return this.getEntities(Consts.GetMyContacts, options, this.getProfileFeedCallbacks());
         },
         
         /**
@@ -365,7 +365,7 @@ define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscr
                     handleAs : "json",
                     query : lang.mixin(requestArgs , args || {format:"json"}) 
         	};
-        	return this.getEntities(Consts.GetMyContacts, options, this.getProfileFeedCallbacks(), args);
+        	return this.getEntities(Consts.GetMyContacts, options, this.getProfileFeedCallbacks());
         },
         
         /**

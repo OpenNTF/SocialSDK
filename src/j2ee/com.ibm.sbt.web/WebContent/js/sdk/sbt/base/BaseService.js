@@ -59,7 +59,7 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
          * was created here and if not set the default endpoint.
          * 
          * @constructor
-         * @param {Object} args Arguments for this entity.
+         * @param {Object} args Arguments for this service.
          */
         constructor : function(args) {
             // create an endpoint if name was specified
@@ -75,11 +75,12 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
 
         /**
          * Construct a url using the specified parameters 
+         * 
          * @method constructUrl
-         * @param url
-         * @param params
-         * @param urlParams
-         * @returns
+         * @param url Base part of the URL to construct
+         * @param params Params to be encoded in the URL
+         * @param urlParams Params to be encoded in the URL query
+         * @returns The constructed URL
          */
         constructUrl : function(url,params,urlParams) {
             if (!url) {
@@ -110,17 +111,17 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
         },
         
         /**
+         * Get a collection of entities.
          * 
          * @method getEntities
-         * @param url
-         * @param options
-         * @param callbacks
-         * @param request
+         * @param url The URL to get the entities.
+         * @param options Optional. Options for the request.
+         * @param callbacks Callbacks used to parse the response and create the entities.
+         * @returns {sbt/Promise}
          */
-        getEntities : function(url,options,callbacks,args) {
+        getEntities : function(url,options,callbacks) {
             var self = this;
             var promise = new Promise();
-            promise.args = args;
             this.request(url,options,null,promise).response.then(
                 function(response) {
                     promise.response = response;
@@ -142,15 +143,16 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
         },
 
         /**
+         * Get a single entity.
          * 
          * @method getEntity
-         * @param url
-         * @param options
-         * @param callbacks
-         * @param request
+         * @param url The URL to get the entity.
+         * @param options Options for the request.
+         * @param callbacks Callbacks used to parse the response and create the entity.
+         * @returns {sbt/Promise}
          */
-        getEntity : function(url,options,entityId,callbacks,args) {
-            var promise = this._validateEntityId(entityId, args);
+        getEntity : function(url,options,entityId,callbacks) {
+            var promise = this._validateEntityId(entityId);
             if (promise) {
                 return promise;
             }
@@ -164,7 +166,6 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
             }
 
             var self = this;
-            promise.args = args;
             this.request(url,options,entityId,promise).response.then(
                 function(response) {
                     promise.response = response;
@@ -187,17 +188,17 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
         },
         
         /**
+         * Update the specified entity.
          * 
          * @method updateEntity
-         * @param url
-         * @param options
-         * @param callbacks
-         * @param request
+         * @param url The URL to update the entity.
+         * @param options Options for the request.
+         * @param callbacks Callbacks used to parse the response.
+         * @param sbt/Promise
          */
-        updateEntity : function(url, options, callbacks, args) {
+        updateEntity : function(url, options, callbacks) {
             var self = this;
             var promise = new Promise();
-            promise.args = args;
             this.endpoint.request(url,options,null,promise).response.then(
                 function(response) {
                     promise.response = response;
@@ -232,22 +233,22 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
         },
 
         /**
+         * Delete the specified entity.
          * 
          * @method deleteEntity
-         * @param url
-         * @param options
-         * @param callbacks
-         * @param request
+         * @param url The URL to delete the entity.
+         * @param options Options for the request.
+         * @param entityId Id of the entity to delete.
+         * @param sbt/Promise
          */
-        deleteEntity : function(url,options,entityId,args) {
-            var promise = this._validateEntityId(entityId, args);
+        deleteEntity : function(url,options,entityId) {
+            var promise = this._validateEntityId(entityId);
             if (promise) {
                 return promise;
             }
 
             var self = this;
             var promise = new Promise();
-            promise.args = args;
             this.endpoint.request(url,options,entityId,promise).response.then(
                 function(response) {
                     promise.response = response;
@@ -262,13 +263,14 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
         },
         
         /**
-         * Perform an XML HTTP Request with cache support
+         * Perform an XML HTTP Request with cache support.
          * 
          * @method request
-         * @param url
-         * @param options
-         * @param entityId
-         * @param promise
+         * @param url URL to request
+         * @param options Options for the request.
+         * @param entityId Id of the rntity associated with the request.
+         * @param promise Promise being returned
+         * @param sbt/Promise
          */
         request : function(url,options,entityId,promise) {
             if (this._cache && entityId) {
@@ -278,11 +280,11 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
         },
 
         /**
-         * Push set of promise onto stack for specified request id
+         * Push set of promise onto stack for specified request id.
          * 
-         * @method
-         * @param
-         * @param
+         * @method pushPromise
+         * @param id Id of the request.
+         * @param promise Promise to push.
          */
         pushPromise : function(id,promise) {
             log.debug("pushPromise, id : {0}, promise : {1}", id, promise);
@@ -293,11 +295,12 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
         },
 
         /**
-         * Notify set of promises and pop from stack for specified request id
+         * Notify set of promises and pop from stack for specified request id.
          * 
-         * @method
-         * @param
-         * @param
+         * @method fullFillOrRejectPromises
+         * @param id
+         * @param data
+         * @param response
          */
         fullFillOrRejectPromises : function(id,data,response) {
             log.debug("fullFillOrRejectPromises, id : {0}, data : {1}, response : {2}", id, data, response);
@@ -313,11 +316,12 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
         },
 
         /**
-         * Fullfill or reject specified promise
+         * Fullfill or reject specified promise.
          * 
-         * @method
-         * @param
-         * @param
+         * @method fullFillOrReject
+         * @param promise
+         * @param data
+         * @param response
          */
         fullFillOrReject : function(promise,data,response) {
             if (promise) {
@@ -335,8 +339,9 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
         },
 
         /**
-         * Add the specified data into the cache
+         * Add the specified data into the cache.
          * 
+         * @method addToCache
          * @param id
          * @param data
          */
@@ -347,8 +352,9 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
         },
         
         /**
-         * Remove the cached data for the specified id
+         * Remove the cached data for the specified id.
          * 
+         * @method removeFromCache
          * @param id
          */
         removeFromCache : function(id) {
@@ -358,8 +364,9 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
         },
                 
         /**
-         * Get the cached data for the specified id
+         * Get the cached data for the specified id.
          * 
+         * @method getFromCache
          * @param id
          */
         getFromCache : function(id) {
@@ -369,6 +376,8 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
         },
                 
         /**
+         * Create a bad request Error.
+         * 
          * @method createBadRequestError
          * @param message
          * @returns {Error}
@@ -381,31 +390,34 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
         },
         
         /**
+         * Create a bad request Promise.
+         * 
          * @method createBadRequestPromise
          * @param message
-         * @returns {Promise}
+         * @returns {sbt/Promise}
          */
         createBadRequestPromise : function(message) {
             return new Promise(this.createBadRequestError(message));
         },
         
         /**
-         * Return true if the specified id is an email 
+         * Return true if the specified id is an email.
          * 
          * @method isEmail
          * @param id
-         * @returns
+         * @returns {Boolean}
          */
         isEmail : function(id) {
             return id && id.indexOf('@') >= 0;
         },
         
         /**
+         * Extract the Location parameter from a URL.
          * 
          * @method getLocationParameter
          * @param ioArgs
          * @param name
-         * @returns
+         * @returns {String}
          */
         getLocationParameter: function (response, name) {
             var location = response.getHeader("Location") || undefined;
@@ -415,6 +427,7 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
         },
         
         /**
+         * Extract the specified parameter from a URL.
          * 
          * @mehtod getUrlParameter
          * @param url
@@ -427,6 +440,9 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
         
         /**
          * Validate a string field, and return a Promise if invalid.
+         * 
+         * @param fieldName
+         * @param fieldValue
          */
         validateField : function(fieldName, fieldValue) {
             if (!fieldValue) {
@@ -438,6 +454,8 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
         
         /**
          * Validate a map of fields, and return a Promise for first invalid field found.
+         * 
+         * @param fieldMap
          */
         validateFields : function(fieldMap) {
             for(var name in fieldMap){
@@ -452,7 +470,7 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
         /*
          * Validate the entityId and if invalid notify callbacks
          */
-        _validateEntityId : function(entityId, args) {
+        _validateEntityId : function(entityId) {
             if (!entityId || !lang.isString(entityId)) {
                 var message = "Invalid argument {0}, expected valid entity identifier.";
                 message = stringUtil.substitute(message, [ entityId || "'undefined'" ]);

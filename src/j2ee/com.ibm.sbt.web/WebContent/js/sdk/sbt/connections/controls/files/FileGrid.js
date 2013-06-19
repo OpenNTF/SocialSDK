@@ -147,6 +147,23 @@ define([ "../../../declare",
 		"authorUid" : "a:author/snx:userid",
 		"authorEmail" : "a:author/a:email"
 	};
+	var sortVals = {
+			name: "title",
+        	updated: "modified",
+        	downloads: "downloaded",
+        	comments: "commented",
+        	likes: "recommended",
+        	files: "itemCount",
+        	created: "created",
+        	modified: "modified"
+	};
+	
+	var ParamSchema = {
+		pageNumber: parameter.oneBasedInteger("page"),	
+		pageSize: parameter.oneBasedInteger("ps"),
+		sortBy: parameter.sortField("sortBy",sortVals),
+		sortOrder: parameter.sortOrder("sortOrder")				
+	};
 	
     /**
      * @class FileGrid
@@ -166,7 +183,7 @@ define([ "../../../declare",
                 storeArgs : {
                     url : fileUrls.library,
                     attributes : xpath_files,
-                    paramSchema: parameter.files.all
+                    paramSchema: ParamSchema
                 },
                 rendererArgs : {
                     type : "file"
@@ -176,7 +193,7 @@ define([ "../../../declare",
                 storeArgs : {
                     url : fileUrls.publicFiles,
                     attributes : xpath_files,
-                    paramSchema: parameter.files.all
+                    paramSchema: ParamSchema
                 },
                 rendererArgs : {
                     type : "file"
@@ -186,7 +203,7 @@ define([ "../../../declare",
                 storeArgs : {
                     url : fileUrls.pinnedFiles,
                     attributes : xpath_files,
-                    paramSchema: parameter.files.all
+                    paramSchema: ParamSchema
                 },
                 rendererArgs : {
                     type : "file"
@@ -196,7 +213,7 @@ define([ "../../../declare",
                 storeArgs : {
                     url : fileUrls.folders,
                     attributes : xpath_folders,
-                    paramSchema: parameter.files.all
+                    paramSchema: ParamSchema
                 },
                 rendererArgs : {
                     type : "folder"
@@ -206,7 +223,7 @@ define([ "../../../declare",
                 storeArgs : {
                     url : fileUrls.publicFolders,
                     attributes : xpath_folders,
-                    paramSchema: parameter.files.all
+                    paramSchema: ParamSchema
                 },
                 rendererArgs : {
                     type : "folder"
@@ -216,7 +233,7 @@ define([ "../../../declare",
                 storeArgs : {
                     url : fileUrls.pinnedFolders,
                     attributes : xpath_folders,
-                    paramSchema: parameter.files.all
+                    paramSchema: ParamSchema
                 },
                 rendererArgs : {
                     type : "folder"
@@ -226,7 +243,7 @@ define([ "../../../declare",
                 storeArgs : {
                     url : fileUrls.activeFolders,
                     attributes : xpath_folders,
-                    paramSchema: parameter.files.all
+                    paramSchema: ParamSchema
                 },
                 rendererArgs : {
                     type : "folder"
@@ -236,7 +253,7 @@ define([ "../../../declare",
                 storeArgs : {
                     url : fileUrls.shares,
                     attributes : xpath_files,
-                    paramSchema: parameter.files.all
+                    paramSchema: ParamSchema
                 },
                 rendererArgs : {
                     type : "file"
@@ -246,7 +263,7 @@ define([ "../../../declare",
                 storeArgs : {
                     url : fileUrls.recycledFiles,
                     attributes : xpath_files,
-                    paramSchema: parameter.files.all
+                    paramSchema: ParamSchema
                 },
                 rendererArgs : {
                     type : "recycledFile"
@@ -256,7 +273,7 @@ define([ "../../../declare",
                 storeArgs : {
                     url : fileUrls.fileComments,
                     attributes : xpath_comments,
-                    paramSchema: parameter.files.all
+                    paramSchema: ParamSchema
                 },
                 rendererArgs : {
                     type : "comment"
@@ -266,7 +283,7 @@ define([ "../../../declare",
                 storeArgs : {
                     url : fileUrls.fileShares,
                     attributes : xpath_files,
-                    paramSchema: parameter.files.all
+                    paramSchema: ParamSchema
                 },
                 rendererArgs : {
                     type : "file"

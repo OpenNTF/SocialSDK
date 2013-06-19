@@ -35,5 +35,10 @@ public class SBTServiceException extends AbstractException {
 	protected SBTServiceException(Throwable nextException, String message) {
 		super(nextException, message);
 	}
+	
+	protected SBTServiceException(Throwable nextException, String message, Object...params) {
+		super(nextException, message, params);
+	}
+	
 
 }

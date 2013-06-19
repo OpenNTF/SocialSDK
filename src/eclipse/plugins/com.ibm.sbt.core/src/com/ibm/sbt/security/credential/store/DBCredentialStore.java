@@ -51,6 +51,11 @@ public class DBCredentialStore extends BaseStore{
 	private String			tableName;
 	private String			jdbcDriverClass;
 	
+	
+	public DBCredentialStore() {
+		tableName = DEFAULTDBTABLE;
+	}
+	
 
 	@Override
 	public Object load(String service, String type,
@@ -82,9 +87,8 @@ public class DBCredentialStore extends BaseStore{
 	 */
 	private Object getFromDB(String serviceName, String type, String user) throws CredentialStoreException {
 		String application = findApplicationName();
-		if(StringUtil.isEmpty(user)){ // User id could be empty for consumer tokens
-			// Derive value of user from concatenation of serviceName and application
-			user = serviceName+application;
+		if(StringUtil.isEmpty(user)){ // User id could be null for consumer tokens
+			user = "";
 		}
 		try {
 			Connection connection = getConnection();
@@ -131,7 +135,7 @@ public class DBCredentialStore extends BaseStore{
 			try {
 				String application = findApplicationName();
 				if(StringUtil.isEmpty(user)){
-					user = serviceName+application;
+					user = "";
 				}
 				PreparedStatement ps = connection.prepareStatement("INSERT INTO "+getTableName()+" VALUES (?, ?, ?, ?, ?)");
 				try {
@@ -165,7 +169,7 @@ public class DBCredentialStore extends BaseStore{
 			try {
 				String application = findApplicationName();
 				if(StringUtil.isEmpty(userId)){
-					userId = serviceName+application;
+					userId = "";
 				}
 				PreparedStatement ps = connection
 					.prepareStatement("DELETE FROM "+getTableName()+" WHERE APPID = ? AND SERVICENAME = ? AND USERID = ? AND TYPE = ?");
@@ -281,9 +285,6 @@ public class DBCredentialStore extends BaseStore{
 	}
 	
 	public String getTableName() {
-		if(StringUtil.isEmpty(tableName)){
-			tableName = DEFAULTDBTABLE;
-		}
 		return tableName;
 	}
 

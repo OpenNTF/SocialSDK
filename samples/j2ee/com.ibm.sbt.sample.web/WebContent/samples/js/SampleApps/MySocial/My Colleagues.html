@@ -1,0 +1,48 @@
+<div style="margin-bottom:0.5em;"><span style="font-weight:bold;">My Colleagues</span></div>
+<div id="gridDiv"></div>
+<script type="text/template" id="profileRow">
+
+<tr>
+	<td width="55">
+		<div><img alt="${name}" src="${photo}" width="55" height="55"></img></div>
+	</td>
+	<td>
+		<div>
+  			<a aria-label="${nls.ariaVcard}" href="javascript:void(0);" title="${tooltip}" data-dojo-attach-event="onclick: handleClick" >${name}</a>
+		</div>
+	</td>
+</tr>
+</script>
+
+
+<script type="text/template" id="sortingTemplate" >
+<div style="margin-top:1em; margin-bottom:1em;">
+	<span style="font-weight:normal;">${nls.sortBy}</span>
+		${sortAnchors}
+	<br />
+</div>
+</script>
+
+<script type="text/template" id="sortAnchorTemplate">
+	<a href="javascript:" data-dojo-attach-event="onclick: ${sortMethod}"> ${title} |</a>
+</script>
+
+<script type="text/template" id="pagerTemplate">
+
+<div style="style="margin-top:1em;" "dojoAttachPoint="pagingHeader">
+	
+		<span>Page: ${pagingResults} |</span>
+			
+		<a style="${hidePreviousLink}" title="${nls.previousPage}" href="javascript: void(0)" data-dojo-attach-event="onclick: prevPage">${nls.previous}</a>
+		<span style="${hidePreviousLabel}">${nls.previous}</span>
+
+		<a style="${hideNextLink}" title="${nls.nextPage}" href="javascript: void(0)" data-dojo-attach-event="onclick: nextPage">${nls.next}</a>
+		<span style="${hideNextLabel}">${nls.next}</span>
+		
+
+	<div>
+		<div dojoAttachPoint="catCenterPagingTop"></div>
+	</div>
+</div>
+
+</script>

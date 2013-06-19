@@ -3,19 +3,19 @@ require(["sbt/connections/ActivityStreamService", "sbt/connections/ActivityStrea
     	var activityStreamService = new ActivityStreamService();
     	var postData = { //creating post data
     			actor:{
-    				id:"@me"
+    				id: "@me"
     			},
-    			object:{
-    				id:"objectid",
-    				displayName:"IBM software universe event"
+    			object: {
+    				id: "objectid",
+    				displayName: " a test post to activity stream "+new Date().getTime()
     			},
-    			verb:"invite"
+    			verb: ASConstants.Verb.POST
     		};
     	var promise = activityStreamService.postEntry(
     		postData,
-			"@me",
-			"@all",
-			"@all"
+    		ASConstants.ASUser.ME,
+    		ASConstants.ASGroup.ALL,
+    		ASConstants.ASApplication.ALL
     	);
     	promise.then(
             function(newEntry){

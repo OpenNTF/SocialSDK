@@ -33,7 +33,7 @@ public class MockOAuthEndpoint extends OAuthEndpoint {
 		setAuthorizationURL("https://apps.lotuslive.com/manage/oauth/authorizeToken");
 		setAccessTokenURL("https://apps.lotuslive.com/manage/oauth/getAccessToken");
 		setSignatureMethod("PLAINTEXT");
-		setTokenStore("SmartCloudStore");
+		setCredentialStore("SmartCloudStore");
 		setServiceName("serviceName");
 		setConsumerKey("consumer_key");
 		setConsumerSecret("consumer_secret");

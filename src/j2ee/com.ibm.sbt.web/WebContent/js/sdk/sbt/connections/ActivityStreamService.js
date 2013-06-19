@@ -416,6 +416,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
          * post an Activity Stream entry
          * 
          * @method postEntry
+         * @param {Object} postData a json object representing data to be posted
          * @param {String} userType user type for which activity stream is to be posted
          *            If null is passed for userType, then '@me' will be used as 
          * 			  default

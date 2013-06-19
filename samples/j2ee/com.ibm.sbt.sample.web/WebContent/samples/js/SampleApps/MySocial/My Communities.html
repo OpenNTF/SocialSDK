@@ -1,0 +1,42 @@
+<script type="text/template" id="MyCommunitiesTmpl">
+<tr class="">
+	<td class="">
+		<h6><a href="" target="_self" title="${tooltip}" data-dojo-attach-event="onclick: handleClick">${title}</a></h6>
+	</td>
+</tr>
+</script>
+
+<script type="text/template" id="sortingTemplate" >
+<div style="margin-top:1em; margin-bottom:1em;">
+	<span style="font-weight:normal;">${nls.sortBy}</span>
+		${sortAnchors}
+	<br />
+</div>
+</script>
+
+<script type="text/template" id="sortAnchorTemplate">
+	<a href="javascript:" data-dojo-attach-event="onclick: ${sortMethod}"> ${title} |</a>
+</script>
+
+<script type="text/template" id="pagerTemplate">
+
+<div style="style="margin-top:1em;" "dojoAttachPoint="pagingHeader">
+	
+		<span>Page: ${pagingResults} |</span>
+			
+		<a style="${hidePreviousLink}" title="${nls.previousPage}" href="javascript: void(0)" data-dojo-attach-event="onclick: prevPage">${nls.previous}</a>
+		<span style="${hidePreviousLabel}">${nls.previous}</span>
+
+		<a style="${hideNextLink}" title="${nls.nextPage}" href="javascript: void(0)" data-dojo-attach-event="onclick: nextPage">${nls.next}</a>
+		<span style="${hideNextLabel}">${nls.next}</span>
+		
+
+	<div>
+		<div dojoAttachPoint="catCenterPagingTop"></div>
+	</div>
+</div>
+
+</script>
+
+<div style="margin-bottom:0.5em;"><span style="font-weight:bold;">My Communities</span></div>
+<div id="myCommunitiesDiv"></div>

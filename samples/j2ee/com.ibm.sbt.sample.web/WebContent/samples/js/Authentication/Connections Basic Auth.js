@@ -1,5 +1,5 @@
-require(['sbt/Endpoint',"sbt/dom","sbt/config"], function(Endpoint,dom,config) {
-	var ep = Endpoint.find("connections");
+require(["sbt/dom","sbt/config"], function(dom,config) {
+	var ep = config.findEndpoint("connections");
 	if(ep.isAuthenticated){
 		dom.setText("connectionsLoginStatus","You are authenticated");
 		dom.byId("connectionsLogin").style.display = "none";
@@ -12,9 +12,9 @@ require(['sbt/Endpoint',"sbt/dom","sbt/config"], function(Endpoint,dom,config) {
 });
 
 function login(loginUi) {
-	require(['sbt/Endpoint',"sbt/dom","sbt/config"], function(Endpoint,dom,config) {
+	require(["sbt/dom","sbt/config"], function(dom,config) {
 		config.Properties["loginUi"] = loginUi;
-		Endpoint.find("connections").authenticate().then(
+		config.findEndpoint("connections").authenticate().then(
 			function(response){
 				dom.setText("connectionsLoginStatus","You are authenticated");
 				dom.byId("connectionsLogin").style.display = "none";
@@ -28,8 +28,8 @@ function login(loginUi) {
 }
 
 function logout() {
-	require(['sbt/Endpoint',"sbt/dom"], function(Endpoint,dom) {
-		Endpoint.find("connections").logout().then(
+	require(['sbt/config',"sbt/dom"], function(config,dom) {
+		config.findEndpoint("connections").logout().then(
 			function(response){
 				dom.setText("connectionsLoginStatus","You are not authenticated");
 				dom.byId("connectionsLogin").style.display = "inline";

@@ -186,7 +186,7 @@ public class OAuth2Endpoint extends AbstractEndpoint {
 	}
 
 	@Override
-	public JSReference getAuthenticator(String endpointName) {
+	public JSReference getAuthenticator(String endpointName, String sbtUrl) {
 		Context ctx = Context.get();
 		JSReference reference = new JSReference("sbt/authenticator/OAuth");
 		StringBuilder b = new StringBuilder();

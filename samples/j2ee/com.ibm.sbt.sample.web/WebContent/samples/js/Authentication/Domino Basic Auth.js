@@ -1,5 +1,5 @@
-require(['sbt/Endpoint',"sbt/dom","sbt/config"], function(Endpoint,dom,config) {
-	var ep = Endpoint.find("domino");
+require(["sbt/dom","sbt/config"], function(dom,config) {
+	var ep = config.findEndpoint("domino");
 	if(ep.isAuthenticated){
 		dom.setText("dominoLoginStatus","You are authenticated");
 		dom.byId("dominoLogin").style.display = "none";
@@ -12,9 +12,9 @@ require(['sbt/Endpoint',"sbt/dom","sbt/config"], function(Endpoint,dom,config) {
 });
 
 function login(loginUi) {
-	require(['sbt/Endpoint',"sbt/dom","sbt/config"], function(Endpoint,dom,config) {
+	require(["sbt/dom","sbt/config"], function(dom,config) {
 		config.Properties["loginUi"] = loginUi;
-		Endpoint.find("domino").authenticate().then(
+		config.findEndpoint("domino").authenticate().then(
 			function(response){
 				dom.setText("dominoLoginStatus","You are authenticated");
 				dom.byId("dominoLogin").style.display = "none";
@@ -28,8 +28,8 @@ function login(loginUi) {
 }
 
 function logout() {
-	require(['sbt/Endpoint',"sbt/dom"], function(Endpoint,dom) {
-		Endpoint.find("domino").logout().then(
+	require(['sbt/config',"sbt/dom"], function(config,dom) {
+		config.findEndpoint("domino").logout().then(
 			function(response){
 				dom.setText("dominoLoginStatus","You are not authenticated");
 				dom.byId("dominoLogin").style.display = "inline";

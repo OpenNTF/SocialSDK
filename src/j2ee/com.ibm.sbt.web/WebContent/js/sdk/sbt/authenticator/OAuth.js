@@ -18,7 +18,7 @@
  * Social Business Toolkit SDK.
  * Definition of the authentication mechanism for OAuth 1.0.
  */
-define(['../declare','../lang'], function(declare,lang) {
+define(['../declare','../lang', '../util'], function(declare, lang, util) {
 
 	/**
 	 * OAuth 1.0 authentication.
@@ -38,18 +38,15 @@ define(['../declare','../lang'], function(declare,lang) {
 		 * Method that authenticates the current user 
 		 */
 		authenticate: function(options) {
-		    var popup = this._authPopup;
-		    var authDialog = this._authDialog;
-		    var authMainWindow = this._authMainWindow;
-		    var sbtUrl = this.url;
+		    var self = this;
 			require(["sbt/config"], function(config){
 			    var mode = options.loginUi || config.Properties["loginUi"] || this.loginUi;
 	            if(mode=="popup") {
-	                return popup(options, sbtUrl);
+	                return self._authPopup(options, self.url);
 	            } else if(mode=="dialog") {
-	                return authDialog(options, sbtUrl);
+	                return self._authDialog(options, self.url);
 	            } else {
-	                return authMainWindow(options, sbtUrl);
+	                return self._authMainWindow(options, self.url);
 	            }
 			});
 		},
@@ -65,7 +62,13 @@ define(['../declare','../lang'], function(declare,lang) {
 		    require(["sbt/config"], function(config){
 		        config.callback = options.callback;
 	            var url = sbtUrl + "?loginUi=popup";
-	            newwindow=window.open(url,'Authentication','height=700,width=650');
+	            
+	            var windowQueryMap = {
+                    height: 700,
+                    width: 650
+	            };
+	            var windowQuery = util._createQuery(windowQueryMap, ",");
+	            newwindow=window.open(url,'Authentication',windowQuery);
 	            return true;
 		    });
 		},

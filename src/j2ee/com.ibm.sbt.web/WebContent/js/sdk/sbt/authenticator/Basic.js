@@ -17,7 +17,7 @@
  * Social Business Toolkit SDK.
  * Definition of an authentication mechanism.
  */
-define(["../declare", "../lang"],function(declare, lang) {
+define(["../declare", "../lang", "..util"],function(declare, lang, util) {
 /**
  * Proxy basic authentication.
  * 
@@ -46,23 +46,17 @@ return declare(null, {
 	 *  Internationalization
 	 */
 	authenticate: function(options) {
-	    var popup = this._authPopup;
-	    var dialog = this._authDialog;
-	    var mainWindow = this._authMainWindow;
-	    var sbtUrl = this.url;
-	    var defaultLoginPage = this.loginPage;
-	    var defaultLoginUi = this.loginUi;
-	    var defaultDialogLoginPage = this.dialogLoginPage;
+	    var self = this;
 	    require(['sbt/config'], function(config){
-	        var mode =  options.loginUi || config.Properties["loginUi"] || defaultLoginUi;
-	        var loginPage = options.loginPage || config.Properties["loginPage"] || defaultLoginPage;
-	        var dialogLoginPage = options.dialogLoginPage || config.Properties["dialogLoginPage"] || defaultDialogLoginPage;
+	        var mode =  options.loginUi || config.Properties["loginUi"] || self.loginUi;
+	        var loginPage = options.loginPage || config.Properties["loginPage"] || self.loginPage;
+	        var dialogLoginPage = options.dialogLoginPage || config.Properties["dialogLoginPage"] || self.dialogLoginPage;
 	        if(mode=="popup") {
-	            popup(options, loginPage, config, sbtUrl, loginPage);
+	            self._authPopup(options, loginPage, config, self.url, loginPage);
 	        } else if(mode=="dialog") {
-	            dialog(options, dialogLoginPage, config, dialogLoginPage);
+	            self._authDialog(options, dialogLoginPage, config, dialogLoginPage);
 	        } else {
-	            mainWindow(options, loginPage, sbtUrl);
+	            self._authMainWindow(options, loginPage, self.url);
 	        }
 	    });
 
@@ -86,6 +80,7 @@ return declare(null, {
 	},
 	
 	_authPopup: function(options, loginPage, sbtConfig, sbtUrl, loginPage) {
+	    var self = this;
 	    require(["sbt/i18n!sbt/nls/loginForm"], function(loginForm) {
             if(options.callback){
                 sbtConfig.callback = options.callback;
@@ -97,23 +92,31 @@ return declare(null, {
             
             var proxy = options.proxy.proxyUrl;
             var actionURL = proxy.substring(0,proxy.lastIndexOf("/"))+"/basicAuth/"+options.proxyPath+"/JSApp";
-            var url = sbtUrl+loginPage+'?actionURL='+encodeURIComponent(actionURL)
-                                             +'&redirectURL=empty'
-                                             +'&loginUi=popup'
-                                             +'&showWrongCredsMessage=false';
-                                             //+'&endPointName='+endPointName;
-            var newWindowWidth = 300;
-            var newWindowLeftAttr = document.body.offsetWidth/2 - newWindowWidth/2;
-            var loginWindow = window.open(url,'Authentication',
-                       'width='+newWindowWidth
-                       +',height=200'
-                       +',left='+newWindowLeftAttr
-                       +',menubar=0'
-                       +',toolbar=0'
-                       +',status=0'
-                       +',location=0'
-                       +',scrollbars=1'
-                       +',resizable=1');
+            
+            var urlParamsMap = {
+                actionURL: actionURL,
+                redirectURL: 'empty',
+                loginUi: 'popup',
+                showWrongCredsMessage: 'false'
+            };
+            var urlParams = util._createQuery(urlParamsMap, "&");
+            var url = sbtUrl+loginPage + '?' + urlParams;
+                                             
+            var windowParamsMap = {
+                width: window.screen.availWidth / 2,
+                height: window.screen.availHeight / 2,
+                left: window.screen.availWidth / 4,
+                top: window.screen.availHeight / 4,
+                menubar: 0,
+                toolbar: 0,
+                status: 0,
+                location: 0,
+                scrollbars: 1,
+                resizable: 1
+            };
+            var windowParams = util._createQuery(windowParamsMap, ",");
+            var loginWindow = window.open(url,'Authentication', windowParams);
+            loginWindow.focus();
         });
         
         return true;
@@ -122,15 +125,20 @@ return declare(null, {
 	_authMainWindow: function(options, loginPage, sbtUrl) {
 		var proxy = options.proxy.proxyUrl;
 		var actionURL = proxy.substring(0,proxy.lastIndexOf("/"))+"/basicAuth/"+options.proxyPath+"/JSApp";
-		//var proxyServletURL='/sbt/proxy/basicAuth/'+options.proxyPath+"/JSApp";
-		var url = sbtUrl+loginPage+'?actionURL='+encodeURIComponent(actionURL)
-							 +'&redirectURL='+encodeURIComponent(document.URL)
-							 +'&loginUi=mainWindow'
-							 +'&showWrongCredsMessage=false';
-		var newwindow=window.location.href = url;
+		var urlParamsMap = {
+            actionURL: actionURL,
+            redirectURL: document.URL,
+            loginUi: 'mainWindow',
+            showWrongCredsMessage: 'false'
+        };
+		
+        var urlParams = util._createQuery(urlParamsMap, "&");
+		var url = sbtUrl+loginPage + '?' + urlParams;
+		window.location.href = url;
+		
 		return true;
 	}
-
+	
 }
 );
 });

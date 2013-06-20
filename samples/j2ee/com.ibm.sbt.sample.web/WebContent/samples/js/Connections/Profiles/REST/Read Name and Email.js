@@ -1,5 +1,5 @@
-require([ "sbt/connections/ConnectionsConstants", "sbt/dom", "sbt/xml", "sbt/xpath", "sbt/Endpoint" ], function(conn, dom, xml, xpath, Endpoint) {
-    var endpoint = Endpoint.find("connections");
+require([ "sbt/connections/ConnectionsConstants", "sbt/dom", "sbt/xml", "sbt/xpath", "sbt/config" ], function(conn, dom, xml, xpath, config) {
+    var endpoint = config.findEndpoint("connections");
     
     var options = { 
         method : "GET", 

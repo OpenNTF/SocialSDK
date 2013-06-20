@@ -43,8 +43,8 @@
 			<script src="/sbt.dojo180/dojo/dojo.js.uncompressed.js"></script>
 			<script src="/sbt.sample.web/library?lib=dojo&ver=1.8.0"></script>				
 			<script>
-				require(['sbt/Endpoint'], function(Endpoint) {
-					var ep = Endpoint.find("<%=epName%>");
+				require(['sbt/config'], function(config) {
+					var ep = config.findEndpoint("<%=epName%>");
 					ep.authenticate({
 						loginUi: "popup",
 						load: function() {

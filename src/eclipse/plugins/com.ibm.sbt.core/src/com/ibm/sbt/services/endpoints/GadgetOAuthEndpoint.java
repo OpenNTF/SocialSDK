@@ -49,7 +49,7 @@ public class GadgetOAuthEndpoint extends AbstractEndpoint {
 	 * @see com.ibm.sbt.services.endpoints.AbstractEndpoint#getAuthenticator(java.lang.String)
 	 */
 	@Override
-	public JSReference getAuthenticator(String endpointName) {
+	public JSReference getAuthenticator(String endpointName, String sbtUrl) {
 		JSReference reference = new JSReference("sbt/authenticator/GadgetOAuth");
 		return reference;
 	}

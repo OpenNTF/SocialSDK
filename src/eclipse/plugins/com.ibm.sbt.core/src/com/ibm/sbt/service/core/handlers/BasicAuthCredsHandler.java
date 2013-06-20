@@ -147,16 +147,18 @@ public class BasicAuthCredsHandler extends AbstractServiceHandler {
 	    			}
 				} else if(mode.equalsIgnoreCase(MODE_POPUP)) {//Popup Mode
 	    			pw.println("  if (window.opener && !window.opener.closed) {");
+	    			pw.println("window.opener.require(['sbt/config'], function(config){");
 	    			if(authentication.equals(AUTH_DECLINED)){
 	    				pw.println("window.location.href = '"+redirectToLogin+"&redirectURL=empty&loginUi="+mode+"&showWrongCredsMessage=true'");
 	    			}else if(authentication.equals(AUTH_ACCEPTED)){
-	    				pw.println("window.opener.sbt.Endpoints['"+endpointName+"'].isAuthenticated = false;");
-	    				pw.println("if(window.opener.sbt.callback){");
-	    				pw.println("window.opener.sbt.callback();");
-	    				pw.println("delete window.opener.sbt.callback;");
+	    			    pw.println("config.findEndpoint('"+endpointName+"').isAuthenticated = false;");
+	    			    pw.println("if(config.callback){");
+	    			    pw.println("config.callback();");
+	    			    pw.println("delete config.callback;");
 	    				pw.println("}");
 	    				pw.println("window.close();");
 	    			}
+	    			pw.println("});");
 	    			pw.println("}");
 				}
 	    		

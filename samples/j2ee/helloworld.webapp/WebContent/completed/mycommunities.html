@@ -10,9 +10,9 @@
 <body>
 	<h3>My Communities</h3>
 	<script type="text/javascript">
-	require(["sbt/connections/CommunityService","sbt/dom"],
-		function(CommunityService, dom) {
-			sbt.Properties["loginUi"] = "popup";
+	require(["sbt/config", "sbt/connections/CommunityService","sbt/dom"],
+		function(config, CommunityService, dom) {
+			config.Properties["loginUi"] = "popup";
 			var id = "FrankAdams@renovations.com";
 			var communityService = new CommunityService();
 			communityService.getMyCommunities({		

@@ -17,7 +17,7 @@
 /**
  * 
  */
-define([ "../../../declare", "../../../Endpoint", "dojo/_base/config"], function(declare, Endpoint, dojoConfig) {
+define([ "../../../declare", "../../../Endpoint"], function(declare, Endpoint) {
 
     /**
      * The class which handles loading of the semantic tag service for connections, this is needed for displaying vcards.
@@ -78,10 +78,9 @@ define([ "../../../declare", "../../../Endpoint", "dojo/_base/config"], function
         var serviceUrl = "/profiles/ibm_semanticTagServlet/javascript/semanticTagService.js?inclDojo=" + inclDojo;
         
         var locale = "en";
-        if (dojoConfig) {
-        	dojoConfig.proxy = proxy;
-        	locale = dojoConfig.locale;
-        }
+        
+        locale = dojo.config.locale;
+        dojo.config.proxy = proxy;
         endpoint.xhrGet({
             serviceUrl : serviceUrl,
             handleAs : "text",

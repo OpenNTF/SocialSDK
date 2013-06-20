@@ -67,7 +67,7 @@ define(['../declare','../lang', '../util'], function(declare, lang, util) {
                     height: window.screen.availHeight / 2,
                     width: window.screen.availWidth / 3
 	            };
-	            var windowQuery = util._createQuery(windowQueryMap, ",");
+	            var windowQuery = util.createQuery(windowQueryMap, ",");
 	            newwindow=window.open(url,'Authentication',windowQuery);
 	            return true;
 		    });

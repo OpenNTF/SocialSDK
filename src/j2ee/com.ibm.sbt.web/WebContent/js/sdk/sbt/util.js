@@ -112,7 +112,7 @@ define(['./lang','sbt/i18n!sbt/nls/util','./log'],function(lang, nls, log) {
             return headers;
         },
 		
-		_createQuery: function(queryMap, delimeter){
+		createQuery: function(queryMap, delimeter){
 	        if(!queryMap){
 	            return null;
 	        }

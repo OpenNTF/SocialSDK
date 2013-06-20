@@ -110,6 +110,34 @@ define(['./lang','sbt/i18n!sbt/nls/util','./log'],function(lang, nls, log) {
                 console.log(ex);
             }
             return headers;
-        }
+        },
+        
+        /**
+         * Takes an object mapping query names to values, and formats them into a query string separated by the delimiter.
+         * e.g.
+         * createQuery({height: 100, width: 200}, ",")
+         * 
+         * returns "height=100,width=200"
+         * 
+         * @method createQuery
+         * 
+         * @param {Object} queryMap An object mapping query names to values, e.g. {height:100,width:200...}
+         * @param {String} delimiter The string to delimit the queries
+         */
+		createQuery: function(queryMap, delimiter){
+	        if(!queryMap){
+	            return null;
+	        }
+	        var delim = delimiter;
+	        if(!delim){
+	            delim = ",";
+	        }
+	        var pairs = [];
+	        for(var name in queryMap){
+	            var value = queryMap[name];
+	            pairs.push(encodeURIComponent(name) + "=" + encodeURIComponent(value));
+	        }
+	        return pairs.join(delim);
+	    }
 	};
 });

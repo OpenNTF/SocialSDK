@@ -64,8 +64,8 @@ define(['../declare','../lang', '../util'], function(declare, lang, util) {
 	            var url = sbtUrl + "?loginUi=popup";
 	            
 	            var windowQueryMap = {
-                    height: 700,
-                    width: 650
+                    height: window.screen.availHeight / 2,
+                    width: window.screen.availWidth / 3
 	            };
 	            var windowQuery = util._createQuery(windowQueryMap, ",");
 	            newwindow=window.open(url,'Authentication',windowQuery);

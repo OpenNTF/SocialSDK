@@ -17,7 +17,7 @@
  * Social Business Toolkit SDK.
  * Definition of an authentication mechanism.
  */
-define(["../declare", "../lang", "..util"],function(declare, lang, util) {
+define(["../declare", "../lang", "../util"],function(declare, lang, util) {
 /**
  * Proxy basic authentication.
  * 

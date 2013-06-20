@@ -2,8 +2,8 @@
  * Helper module for interacting with the acme airlines REST APIs.
  * @module
  */
-define(["sbt/_bridge/declare", "sbt/Endpoint", "sbt/json"], function(declare, endpoint, json) {
-    var acmeAirEndpoint = endpoint.find('acmeAir');
+define(["sbt/_bridge/declare", "sbt/config", "sbt/json"], function(declare, config, json) {
+    var acmeAirEndpoint = config.findEndpoint('acmeAir');
     var acmeGet = function(service, loadCallback, errorCallback) {
         acmeAirEndpoint.xhrGet({
             serviceUrl : service,

@@ -2,15 +2,15 @@
  * Widget for an individual flight row.
  */
 define(['require', 'dojo/_base/declare', 'dijit/_WidgetBase', 'dijit/_TemplatedMixin', 'dojo/_base/array',
-        'acme/templateUtils', 'sbt/Endpoint', 'dojo/query', 'acme/flights', 'dojo/NodeList-manipulate', 'dojo/NodeList-dom', 'dojo/ready', 'dojo/domReady!' ],
-        function(require, declare, WidgetBase, TemplatedMixin, arrayUtil,  templateUtils, endpoint, query, flights) {
+        'acme/templateUtils', 'sbt/config', 'dojo/query', 'acme/flights', 'dojo/NodeList-manipulate', 'dojo/NodeList-dom', 'dojo/ready', 'dojo/domReady!' ],
+        function(require, declare, WidgetBase, TemplatedMixin, arrayUtil,  templateUtils, config, query, flights) {
             return declare('FlightRowWidget', [ WidgetBase, TemplatedMixin ], {
                 
                 //Template defined in the DOM for this widget
                 templateString : templateUtils.getTemplateString('#flightRow'),
                 
                 //Acme data service endpoint
-                acmeEndpoint : endpoint.find('acmeAir'),
+                acmeEndpoint : config.findEndpoint('acmeAir'),
                 
                 postCreate : function() {
                     var self = this;

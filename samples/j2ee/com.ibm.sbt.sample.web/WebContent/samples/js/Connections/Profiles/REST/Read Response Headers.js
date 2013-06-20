@@ -1,5 +1,5 @@
-require([ "sbt/dom", "sbt/Endpoint", "sbt/config" ], function(dom, Endpoint) {
-    var endpoint = Endpoint.find("connections");
+require([ "sbt/dom", "sbt/config" ], function(dom, config) {
+    var endpoint = config.findEndpoint("connections");
     
 
     var options = { 

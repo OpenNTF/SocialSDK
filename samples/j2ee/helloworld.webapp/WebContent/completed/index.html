@@ -10,8 +10,8 @@
 <body>
 <h3>Hello Social World</h3>
 <script type="text/javascript">
-require(["sbt/connections/ProfileService","sbt/connections/CommunityService","sbt/Endpoint","sbt/dom","sbt/xpath","sbt/xml","sbt/connections/core"], 
-	    function(ProfileService, CommunityService, Endpoint, dom, xpath, xml, core) {
+require(["sbt/connections/ProfileService","sbt/connections/CommunityService","sbt/config","sbt/dom","sbt/xpath","sbt/xml","sbt/connections/core"], 
+	    function(ProfileService, CommunityService, config, dom, xpath, xml, core) {
 		var id = "FrankAdams@renovations.com";
 		var profileService = new ProfileService();
 		profileService.getProfile({
@@ -35,7 +35,7 @@ require(["sbt/connections/ProfileService","sbt/connections/CommunityService","sb
 				}
 			}		
 		});
-	  	var endpoint = Endpoint.find("connections");
+	  	var endpoint = config.findEndpoint("connections");
 	  	endpoint.xhrGet({
         	serviceUrl:	"/profiles/atom/connections.do",
         	content: {

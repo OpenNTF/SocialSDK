@@ -41,9 +41,9 @@
 
 <!-- Get the local users subscriber id and use this to retrieve and display their profile -->
 <script type="text/javascript">
-require([ "sbt/smartcloud/ProfileService", "sbt/dom", "sbt/Endpoint" ], function(ProfileService, dom, Endpoint) {
+require([ "sbt/smartcloud/ProfileService", "sbt/dom", "sbt/config" ], function(ProfileService, dom, config) {
 
-	var endpoint = Endpoint.find("smartcloud");
+	var endpoint = config.findEndpoint("smartcloud");
 	var url = "/manage/oauth/getUserIdentity";
 	var options = { handleAs : "json" };
 	endpoint.request(url, options).then(

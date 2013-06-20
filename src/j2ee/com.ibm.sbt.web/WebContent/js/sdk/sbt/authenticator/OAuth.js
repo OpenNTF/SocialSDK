@@ -18,7 +18,7 @@
  * Social Business Toolkit SDK.
  * Definition of the authentication mechanism for OAuth 1.0.
  */
-define(['../declare','../lang'], function(declare,lang) {
+define(['../declare','../lang', '../util'], function(declare, lang, util) {
 
 	/**
 	 * OAuth 1.0 authentication.
@@ -38,36 +38,45 @@ define(['../declare','../lang'], function(declare,lang) {
 		 * Method that authenticates the current user 
 		 */
 		authenticate: function(options) {
-			var mode = options.loginUi || this.loginUi || (sbt.Properties ? sbt.Properties["loginUi"] : null);
-			if(mode=="popup") {
-				return this._authPopup(options);
-			} else if(mode=="dialog") {
-				return this._authDialog(options);
-			} else {
-				return this._authMainWindow(options);
-			}
+		    var self = this;
+			require(["sbt/config"], function(config){
+			    var mode = options.loginUi || config.Properties["loginUi"] || this.loginUi;
+	            if(mode=="popup") {
+	                return self._authPopup(options, self.url);
+	            } else if(mode=="dialog") {
+	                return self._authDialog(options, self.url);
+	            } else {
+	                return self._authMainWindow(options, self.url);
+	            }
+			});
 		},
 		
-		_authMainWindow: function(options) {
-			var url = this.url + "?oaredirect="+encodeURIComponent(window.location.href);
+		_authMainWindow: function(options, sbtUrl) {
+			var url = sbtUrl + "?oaredirect="+encodeURIComponent(window.location.href);
 			newwindow=window.location.href = url;
 			return true;
 			
 		},
 		
-		_authPopup: function(options) {
-			sbt.callback = options.callback;
-			var url = this.url + "?loginUi=popup";
-			newwindow=window.open(url,'Authentication','height=700,width=650');
-			return true;
-			
+		_authPopup: function(options, sbtUrl) {
+		    require(["sbt/config"], function(config){
+		        config.callback = options.callback;
+	            var url = sbtUrl + "?loginUi=popup";
+	            
+	            var windowQueryMap = {
+                    height: window.screen.availHeight / 2,
+                    width: window.screen.availWidth / 3
+	            };
+	            var windowQuery = util.createQuery(windowQueryMap, ",");
+	            newwindow=window.open(url,'Authentication',windowQuery);
+	            return true;
+		    });
 		},
 		
-		_authDialog: function(options) {
-			var self=this;
+		_authDialog: function(options, sbtUrl) {
 			require(["sbt/_bridge/ui/OAuth10_Dialog"], function(dialog) {
 				// TODO: should run the dance when done...
-				dialog.show(self.url);
+				dialog.show(sbtUrl);
 			});
 			return true;
 		}

@@ -110,6 +110,22 @@ define(['./lang','sbt/i18n!sbt/nls/util','./log'],function(lang, nls, log) {
                 console.log(ex);
             }
             return headers;
-        }
+        },
+		
+		_createQuery: function(queryMap, delimeter){
+	        if(!queryMap){
+	            return null;
+	        }
+	        var delim = delimeter;
+	        if(!delim){
+	            delim = ",";
+	        }
+	        var pairs = [];
+	        for(var name in queryMap){
+	            var value = queryMap[name];
+	            pairs.push(encodeURIComponent(name) + "=" + encodeURIComponent(value));
+	        }
+	        return pairs.join(delim);
+	    }
 	};
 });

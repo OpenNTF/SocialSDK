@@ -99,7 +99,7 @@ return declare(null, {
                 loginUi: 'popup',
                 showWrongCredsMessage: 'false'
             };
-            var urlParams = util._createQuery(urlParamsMap, "&");
+            var urlParams = util.createQuery(urlParamsMap, "&");
             var url = sbtUrl+loginPage + '?' + urlParams;
                                              
             var windowParamsMap = {
@@ -114,7 +114,7 @@ return declare(null, {
                 scrollbars: 1,
                 resizable: 1
             };
-            var windowParams = util._createQuery(windowParamsMap, ",");
+            var windowParams = util.createQuery(windowParamsMap, ",");
             var loginWindow = window.open(url,'Authentication', windowParams);
             loginWindow.focus();
         });
@@ -132,7 +132,7 @@ return declare(null, {
             showWrongCredsMessage: 'false'
         };
 		
-        var urlParams = util._createQuery(urlParamsMap, "&");
+        var urlParams = util.createQuery(urlParamsMap, "&");
 		var url = sbtUrl+loginPage + '?' + urlParams;
 		window.location.href = url;
 		

@@ -21,8 +21,8 @@
  *	@module sbt.smartcloud.ProfileService
 **/
 
-define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscriber","../Jsonpath","../Endpoint", "../base/BaseService", "../base/JsonDataHandler", "./ProfileConstants", "../base/BaseEntity"],
-		function(declare, lang, Config, StringUtil, Cache, Subscriber, JsonPath, Endpoint, BaseService, JsonDataHandler, Consts, BaseEntity) {
+define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscriber","../Jsonpath","../base/BaseService", "../base/JsonDataHandler", "./ProfileConstants", "../base/BaseEntity"],
+		function(declare, lang, config, StringUtil, Cache, Subscriber, JsonPath, BaseService, JsonDataHandler, Consts, BaseEntity) {
 	/**
      * Profile class representing the Smartcloud User Profile.
      * 
@@ -246,11 +246,11 @@ define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscr
          */
 		constructor : function(args) {
             if (!this.endpoint) {
-                this.endpoint = Endpoint.find(this.getDefaultEndpointName());
+                this.endpoint = config.findEndpoint(this.getDefaultEndpointName());
             }
             if(!this._cache){
-        		if(Config.Properties.ProfileCacheSize || Consts.DefaultCacheSize){
-        			this._cache = new Cache(Config.Properties.ProfileCacheSize || Consts.DefaultCacheSize);
+        		if(config.Properties.ProfileCacheSize || Consts.DefaultCacheSize){
+        			this._cache = new Cache(config.Properties.ProfileCacheSize || Consts.DefaultCacheSize);
         		}        		
         	}     
         },
@@ -287,7 +287,7 @@ define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscr
             };
             var entityId = idObject.userid;
             var url = this.constructUrl(Consts.GetProfileByGUID, {}, {idToBeReplaced : entityId});
-            return this.getEntity(url, options, entityId, this.getProfileCallbacks(), args);
+            return this.getEntity(url, options, entityId, this.getProfileCallbacks());
         },
 
         /**
@@ -314,7 +314,7 @@ define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscr
             };
             var entityId = idObject.userid;
             var url = this.constructUrl(Consts.GetContactByGUID, {}, {idToBeReplaced : entityId});
-            return this.getEntity(url, options, entityId, this.getProfileCallbacks(), args);
+            return this.getEntity(url, options, entityId, this.getProfileCallbacks());
         },
         
         /**
@@ -330,7 +330,7 @@ define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscr
                 handleAs : "json",
                  query : args || {format:"json"}
         	};
-            return this.getEntities(Consts.GetMyConnections, options, this.getProfileFeedCallbacks(), args);
+            return this.getEntities(Consts.GetMyConnections, options, this.getProfileFeedCallbacks());
         },
         
         /**
@@ -346,7 +346,7 @@ define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscr
                     handleAs : "json",
                     query : args || {format:"json"}
         	};
-        	return this.getEntities(Consts.GetMyContacts, options, this.getProfileFeedCallbacks(), args);
+        	return this.getEntities(Consts.GetMyContacts, options, this.getProfileFeedCallbacks());
         },
         
         /**
@@ -365,7 +365,7 @@ define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscr
                     handleAs : "json",
                     query : lang.mixin(requestArgs , args || {format:"json"}) 
         	};
-        	return this.getEntities(Consts.GetMyContacts, options, this.getProfileFeedCallbacks(), args);
+        	return this.getEntities(Consts.GetMyContacts, options, this.getProfileFeedCallbacks());
         },
         
         /**

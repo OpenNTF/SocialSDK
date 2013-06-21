@@ -19,7 +19,7 @@
  * 
  * Definition of a jQuery UI based dialog for OAuth 1.0.
  */
-define(['jquery/ui'], function() {
+define(["sbt/config", 'jquery/ui'], function(config) {
 	
 	return {
 		submitOnClickHandle: function(contentForm, options) {
@@ -55,8 +55,8 @@ define(['jquery/ui'], function() {
 								return;
 							};
 						}
-						sbt.dialog.dialog("close");
-						sbt.dialog.dialog("destroy");
+						config.dialog.dialog("close");
+						config.dialog.dialog("destroy");
 						options.callback();
 				    }
 	    		};
@@ -66,7 +66,7 @@ define(['jquery/ui'], function() {
 		show: function(options, dialogLoginPage) {
 		  try{
 			var self = this;
-			require(['requirejs/text!sbt/'+dialogLoginPage],function(loginPage){
+			require(['sbt/config', 'requirejs/text!sbt/'+dialogLoginPage],function(config, loginPage){
 				var _title = "Authentication";
 				var _isModal = false;
 				var _width = 350;
@@ -75,7 +75,7 @@ define(['jquery/ui'], function() {
 				var _resizeable = true;
 				var _draggable = true;
 				
-	            var d = sbt.dialog = jQuery(loginPage).dialog({
+	            var d = config.dialog = jQuery(loginPage).dialog({
 					title : _title,
 					modal: _isModal,
 					width: _width,
@@ -118,8 +118,8 @@ define(['jquery/ui'], function() {
 	            		if (text == "Cancel"){
 	            			thisButton.click(
 	            				function() {
-	            					sbt.dialog.dialog("close");
-	        						sbt.dialog.dialog("destroy");
+	            					config.dialog.dialog("close");
+	        						config.dialog.dialog("destroy");
 	            				}
 	            			);
 	            		}

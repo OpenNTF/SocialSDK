@@ -2,11 +2,12 @@ require([ "sbt/dom", "sbt/connections/controls/communities/CommunityGrid" ],
 	function(dom, CommunityGrid) {
 		try {
 	        var communityGrid = new CommunityGrid({
-	            type: "my",
-	            hidePager: true,
-	            hideSorter: true
+	            type: "my"
 	        });
 	        communityGrid.renderer.template = dom.byId("MyCommunitiesTmpl").innerHTML;
+	        communityGrid.renderer.pagerTemplate = dom.byId("pagerTemplate").innerHTML;
+	        communityGrid.renderer.sortTemplate = dom.byId("sortingTemplate").innerHTML;
+	        communityGrid.renderer.sortAnchor = dom.byId("sortAnchorTemplate").innerHTML;
 	        communityGrid.renderer.tableClass = "table table-striped";
 			
 		    // create custom action

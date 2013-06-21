@@ -17,7 +17,8 @@
 /**
  * 
  */
-define([ "../../../declare", "../../../Endpoint", "dojo/_base/config"], function(declare, Endpoint, dojoConfig) {
+
+define([ "../../../declare", "../../../Endpoint", "dojo/_base/config", "sbt/config"], function(declare, Endpoint, dojoConfig, config) {
 
     /**
      * The class which handles loading of the semantic tag service for connections, this is needed for displaying vcards.
@@ -65,7 +66,7 @@ define([ "../../../declare", "../../../Endpoint", "dojo/_base/config"], function
             inclDojo = args.inclDojo;
         }
         
-        var endpoint = Endpoint.find("connections");
+        var endpoint = config.findEndpoint("connections");
         if (args && args.endpoint) {
             endpoint = args.endpoint;
         }

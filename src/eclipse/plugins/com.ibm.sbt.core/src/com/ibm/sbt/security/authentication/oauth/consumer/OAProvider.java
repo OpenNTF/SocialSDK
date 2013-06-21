@@ -19,8 +19,13 @@ package com.ibm.sbt.security.authentication.oauth.consumer;
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.URISyntaxException;
+import java.sql.SQLException;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.servlet.http.HttpServletRequest;
+
 import com.ibm.commons.Platform;
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.util.UrlUtil;
@@ -31,10 +36,11 @@ import com.ibm.commons.util.profiler.ProfilerAggregator;
 import com.ibm.commons.util.profiler.ProfilerType;
 import com.ibm.sbt.core.configuration.Configuration;
 import com.ibm.sbt.security.authentication.oauth.OAuthException;
+import com.ibm.sbt.security.credential.store.CredentialStore;
+import com.ibm.sbt.security.credential.store.CredentialStoreException;
+import com.ibm.sbt.security.credential.store.CredentialStoreFactory;
 import com.ibm.sbt.security.authentication.oauth.consumer.servlet.OACallback;
 import com.ibm.sbt.security.authentication.oauth.consumer.util.OADance;
-import com.ibm.sbt.security.authentication.oauth.consumer.store.OATokenStoreFactory;
-import com.ibm.sbt.security.authentication.oauth.consumer.store.TokenStore;
 import com.ibm.sbt.service.util.ServiceUtil;
 import com.ibm.sbt.services.util.AnonymousCredentialStore;
 import com.ibm.sbt.util.SBTException;
@@ -42,64 +48,71 @@ import com.ibm.sbt.util.SBTException;
 /**
  * Encapsulate an OAuth service.
  * <p>
- * This holds both the application identifier and the URL to reach the service. Not that it does not hold the
- * token specific to a user.<br>
- * Such a service should be added as a bean, which can be application specific or shared between all the
- * applications.
+ * This holds both the application identifier and the URL to reach the service.
+ * Not that it does not hold the token specific to a user.<br>
+ * Such a service should be added as a bean, which can be application specific
+ * or shared between all the applications.
  * </p>
  * 
  * @author Philippe Riand /////// TEMP //////// Sample values for Greenhouse
- *         (https://greenhouse.lotus.com/vulcan/security/provider/register.jsp?serviceProvider=vulcanToolkit)
- *         consumerKey: eecaba0d-136c-4677-a614-0b41612a2430 consumerSecret:
+ *         (https://greenhouse.lotus.com/vulcan/security/provider/register.jsp?
+ *         serviceProvider=vulcanToolkit) consumerKey:
+ *         eecaba0d-136c-4677-a614-0b41612a2430 consumerSecret:
  *         IaL348_VDilHbgWSKm5Z64gvI0AIPWwObY0aVh1xKUx7m7VMrH65nnlxXfSU0vRzGqIjg8lHgP8etdlp8DuHGA
- *         requestTokenURL: https://greenhouse.lotus.com:443/vulcan/security/provider/requestToken
- *         authorizationURL: https://greenhouse.lotus.com:443/vulcan/security/provider/accessToken
- *         accessTokenURL: https://greenhouse.lotus.com:443/vulcan/security/provider/authorize
+ *         requestTokenURL:
+ *         https://greenhouse.lotus.com:443/vulcan/security/provider
+ *         /requestToken authorizationURL:
+ *         https://greenhouse.lotus.com:443/vulcan/security/provider/accessToken
+ *         accessTokenURL:
+ *         https://greenhouse.lotus.com:443/vulcan/security/provider/authorize
  */
 public class OAProvider implements Serializable {
 
-	private static final ProfilerType	profilerLoadTokenStore	= new ProfilerType(
-																		"OAuth: Load a token from the store");		//$NON-NLS-1$
-	private static final ProfilerType	profilerAcquireToken	= new ProfilerType(
-																		"OAuth: Acquire a token from the service"); //$NON-NLS-1$
-	private static final ProfilerType	profilerRenewToken		= new ProfilerType(
-																		"OAuth: Renew a token from the provider");	//$NON-NLS-1$
-	private static final ProfilerType	profilerDeleteToken		= new ProfilerType(
-																		"OAuth: Delete a token from the store");	//$NON-NLS-1$
+	private static final ProfilerType profilerLoadCredentialStore = new ProfilerType("OAuth: Load a token from the store"); //$NON-NLS-1$
+	private static final ProfilerType profilerAcquireToken = new ProfilerType("OAuth: Acquire a token from the service"); //$NON-NLS-1$
+	private static final ProfilerType profilerRenewToken = new ProfilerType("OAuth: Renew a token from the provider"); //$NON-NLS-1$
+	private static final ProfilerType profilerDeleteToken = new ProfilerType("OAuth: Delete a token from the store"); //$NON-NLS-1$
 
-	public static final int				EXPIRE_THRESHOLD		= 60;												// 60sec
-																													// =
-																													// 1min
-	private static final long			serialVersionUID		= 1L;
+	public static final int EXPIRE_THRESHOLD = 60; // 60sec = 1min
+	// Store Type used to store the Tokens in the Credential Store
+	public static final String AT_STORE_TYPE = "OAUTH1_ACCESS_TOKEN_STORE";
+	public static final String CT_STORE_TYPE = "OAUTH1_CONSUMER_TOKEN_STORE";
+	
+	// for logging
+	private static final String sourceClass = OAProvider.class.getName();
+	private static final Logger logger = Logger.getLogger(sourceClass);
 
-	private boolean						storeRead;
-	private int							expireThreshold;
+	private static final long serialVersionUID = 1L;
 
-	private String						appId;
-	private String						serviceName;
-	private String						tokenStore;
+	private boolean storeRead;
+	private int expireThreshold;
 
-	private String						consumerKey;
-	private String						consumerSecret;
-	private String						requestTokenURL;
-	private String						authorizationURL;
-	private String						accessTokenURL;
-	private String						signatureMethod;
-	private boolean						forceTrustSSLCertificate;
-	public String						applicationAccessToken;
+	private String appId;
+	private String serviceName;
+	private String credentialStore;
 
-	public OAuthHandler					oauthHandler			= new OAuth1Handler();
+	private String consumerKey;
+	private String consumerSecret;
+	private String requestTokenURL;
+	private String authorizationURL;
+	private String accessTokenURL;
+	private String signatureMethod;
+	private boolean forceTrustSSLCertificate;
+	public String applicationAccessToken;
+
+	
+	public OAuthHandler oauthHandler = new OAuth1Handler();
 
 	public OAProvider() {
 		this.expireThreshold = EXPIRE_THRESHOLD;
 	}
 
-	public String getTokenStore() {
-		return tokenStore;
+	public String getCredentialStore() {
+		return credentialStore;
 	}
 
-	public void setTokenStore(String tokenStore) {
-		this.tokenStore = tokenStore;
+	public void setCredentialStore(String credentialStore) {
+		this.credentialStore = credentialStore;
 	}
 
 	public String getAppId() {
@@ -205,30 +218,34 @@ public class OAProvider implements Serializable {
 
 	private void readConsumerToken() throws OAuthException {
 		if (!storeRead) {
-			TokenStore factory = OATokenStoreFactory.getTokenStore(getTokenStore());
-			if (factory != null) {
-				ConsumerToken consumerToken = factory.loadConsumerToken(getAppId(), getServiceName());
-				if (consumerToken != null) {
-					storeRead = true;
-					if (StringUtil.isNotEmpty(consumerToken.getConsumerKey())) {
-						setConsumerKey(consumerToken.getConsumerKey());
-					}
-					if (StringUtil.isNotEmpty(consumerToken.getConsumerSecret())) {
-						setConsumerSecret(consumerToken.getConsumerSecret());
-					}
-					if (StringUtil.isNotEmpty(consumerToken.getRequestTokenUri())) {
-						setRequestTokenURL(consumerToken.getRequestTokenUri());
-					}
-					if (StringUtil.isNotEmpty(consumerToken.getAuthorizationUri())) {
-						setAuthorizationURL(consumerToken.getAuthorizationUri());
-					}
-					if (StringUtil.isNotEmpty(consumerToken.getAccessTokenUri())) {
-						setAccessTokenURL(consumerToken.getAccessTokenUri());
-					}
-					if (StringUtil.isNotEmpty(consumerToken.getSignatureMethod())) {
-						setSignatureMethod(consumerToken.getSignatureMethod());
+			try {
+				CredentialStore factory = CredentialStoreFactory.getCredentialStore(getCredentialStore());
+				if (factory != null) {
+					ConsumerToken consumerToken = (ConsumerToken) factory.load(getServiceName(), CT_STORE_TYPE, null);
+					if (consumerToken != null) {
+						storeRead = true;
+						if (StringUtil.isNotEmpty(consumerToken.getConsumerKey())) {
+							setConsumerKey(consumerToken.getConsumerKey());
+						}
+						if (StringUtil.isNotEmpty(consumerToken.getConsumerSecret())) {
+							setConsumerSecret(consumerToken.getConsumerSecret());
+						}
+						if (StringUtil.isNotEmpty(consumerToken.getRequestTokenUri())) {
+							setRequestTokenURL(consumerToken.getRequestTokenUri());
+						}
+						if (StringUtil.isNotEmpty(consumerToken.getAuthorizationUri())) {
+							setAuthorizationURL(consumerToken.getAuthorizationUri());
+						}
+						if (StringUtil.isNotEmpty(consumerToken.getAccessTokenUri())) {
+							setAccessTokenURL(consumerToken.getAccessTokenUri());
+						}
+						if (StringUtil.isNotEmpty(consumerToken.getSignatureMethod())) {
+							setSignatureMethod(consumerToken.getSignatureMethod());
+						}
 					}
 				}
+			} catch (CredentialStoreException cse) {
+					throw new OAuthException(cse, cse.getMessage());
 			}
 		}
 	}
@@ -242,7 +259,8 @@ public class OAProvider implements Serializable {
 	}
 
 	public boolean isTokenExpired(AccessToken token) throws OAuthException {
-		// We do not automatically renew/acquire it - we just get it from the store
+		// We do not automatically renew/acquire it - we just get it from the
+		// store
 		if (token == null) {
 			token = _findTokenFromStore(Context.get(), null);
 			if (token == null) {
@@ -257,7 +275,8 @@ public class OAProvider implements Serializable {
 	}
 
 	public boolean shouldRenewToken(AccessToken token) throws OAuthException {
-		// We do not automatically renew/acquire it - we just get it from the store
+		// We do not automatically renew/acquire it - we just get it from the
+		// store
 		if (token == null) {
 			token = _findTokenFromStore(Context.get(), null);
 			if (token == null) {
@@ -315,6 +334,8 @@ public class OAProvider implements Serializable {
 
 		// Ok, we should then play the OAuth dance if requested
 		if (login) {
+			// Here if we are forced to start an OAuth dance, we clear the Store from any existing tokens for this application and fetch new tokens.
+			deleteToken();
 			OADance oauth = createOAuthDance(context, userId);
 			try {
 				// This sends a signal
@@ -352,8 +373,6 @@ public class OAProvider implements Serializable {
 		String callback = getCallbackUrl(context);
 		String initialPage = getApplicationPage(context);
 
-		// OAuthHandler oauthHandler = new OAuth1Handler();
-
 		// Store the Oauth handler in session object
 		context.getSessionMap().put(Configuration.OAUTH_HANDLER, oauthHandler);
 		context.getSessionMap().put("oaProvider", this);
@@ -362,7 +381,7 @@ public class OAProvider implements Serializable {
 
 	protected AccessToken findTokenFromStore(Context context, String userId) throws OAuthException {
 		if (Profiler.isEnabled()) {
-			ProfilerAggregator agg = Profiler.startProfileBlock(profilerLoadTokenStore, "");
+			ProfilerAggregator agg = Profiler.startProfileBlock(profilerLoadCredentialStore, "");
 			long ts = Profiler.getCurrentTime();
 			try {
 				return _findTokenFromStore(context, userId);
@@ -384,21 +403,29 @@ public class OAProvider implements Serializable {
 				return null;
 			}
 		}
-		TokenStore ts = OATokenStoreFactory.getTokenStore(getTokenStore());
-		if (ts != null) {
-			// Find the token for this user
-			AccessToken tk = ts.loadAccessToken(getAppId(), getServiceName(), getConsumerKey(), userId);
-			if (tk != null) {
-				return tk;
+		try {
+			CredentialStore credStore = CredentialStoreFactory.getCredentialStore(getCredentialStore());
+			if (credStore != null) {
+				// Find the token for this user
+	            AccessToken token = (AccessToken) credStore.load(getServiceName(), AT_STORE_TYPE, userId);
+	            if(token!=null) {
+	                return token;
+	            }
 			}
+		} catch (CredentialStoreException cse) {
+				throw new OAuthException(cse, "Error finding credentials from the store");
 		}
-
 		return null;
 	}
 
-	public TokenStore findTokenStore() throws OAuthException {
-		TokenStore ts = OATokenStoreFactory.getTokenStore(getTokenStore());
-		return ts;
+	public CredentialStore findCredentialStore() throws OAuthException {
+		CredentialStore credStore = null;
+		try {
+			credStore = CredentialStoreFactory.getCredentialStore(getCredentialStore());
+		} catch (CredentialStoreException cse) {
+			throw new OAuthException(cse, "Error finding credentials from the store");
+		}
+		return credStore;
 	}
 
 	// ==========================================================
@@ -438,9 +465,17 @@ public class OAProvider implements Serializable {
 
 			token = createToken(getAppId(), getServiceName(), oAuthHandler, token.getUserId());
 			if (!Context.get().isCurrentUserAnonymous()) {
-				TokenStore ts = findTokenStore();
-				if (ts != null) {
-					ts.saveAccessToken(token);
+				CredentialStore credStore = findCredentialStore();
+				if (credStore != null) {
+					try {
+					credStore.store(getServiceName(), AT_STORE_TYPE, context.getCurrentUserId(), token);
+					} catch(CredentialStoreException cse)
+					{
+						// if the token is already present, and was expired due to which we have fetched a new 
+						// token, then we remove the token from the store first and then add this new token.
+						deleteToken();
+						credStore.store(getServiceName(), AT_STORE_TYPE, context.getCurrentUserId(), token);
+					}
 				}
 			} else {
 				AnonymousCredentialStore.storeCredentials(Context.get(), token, getAppId(), getServiceName());
@@ -455,9 +490,10 @@ public class OAProvider implements Serializable {
 			Platform.getInstance().log(e);
 			acquireToken(true, true);
 			return null;
+		} catch (CredentialStoreException cse) {
+			throw new OAuthException(cse, "Error trying to renew Token.");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new OAuthException(e);
 		}
 		return token;
 	}
@@ -494,10 +530,14 @@ public class OAProvider implements Serializable {
 		if (StringUtil.equals(userId, "anonymous")) {
 			AnonymousCredentialStore.deleteCredentials(context, getAppId(), getServiceName());
 		} else {
-			TokenStore ts = OATokenStoreFactory.getTokenStore(getTokenStore());
-			if (ts != null) {
-				// Find the token for this user
-				ts.deleteAccessToken(getAppId(), getServiceName(), getConsumerKey(), null, null, userId);
+			try {
+				CredentialStore credStore = CredentialStoreFactory.getCredentialStore(getCredentialStore());
+				if (credStore != null) {
+					// Find the token for this user
+					credStore.remove(getServiceName(), AT_STORE_TYPE, context.getCurrentUserId());
+				}
+			} catch (CredentialStoreException cse) {
+				throw new OAuthException(cse, "Error trying to delete Token.");
 			}
 		}
 	}

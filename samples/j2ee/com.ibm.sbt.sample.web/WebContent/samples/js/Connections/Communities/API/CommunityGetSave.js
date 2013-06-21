@@ -1,6 +1,6 @@
-require(["sbt/dom", "sbt/json", "sbt/Endpoint", "sbt/connections/CommunityService"], function(dom,json,Endpoint,CommunityService) {
+require(["sbt/dom", "sbt/json", "sbt/config", "sbt/connections/CommunityService"], function(dom,json,config,CommunityService) {
     try {
-        var endpoint = Endpoint.find("connections");
+        var endpoint = config.findEndpoint("connections");
         endpoint.authenticate();
         
         var communityService = new CommunityService();

@@ -78,8 +78,10 @@ public class BasicEndpoint extends AbstractEndpoint {
     }
 
     @Override
-    public JSReference getAuthenticator(String endpointName) {
+    public JSReference getAuthenticator(String endpointName, String sbtUrl) {
     	JSReference reference = new JSReference("sbt/authenticator/Basic");
+    	reference.getProperties().put("url", sbtUrl);
+    	
     	return reference;
     }
 

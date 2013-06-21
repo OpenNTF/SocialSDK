@@ -86,7 +86,7 @@ public class OACallback extends AbstractServiceHandler {
 				if (cs != null) {
 					// But we store it uniquely if the current user is not
 					// anonymous
-					cs.store(dance.getServiceName(), OAProvider.AT_STORE_TYPE,
+					cs.store(dance.getServiceName(), OAProvider.ACCESS_TOKEN_STORE_TYPE,
 							context.getCurrentUserId(), tk);
 				}
 			} else {

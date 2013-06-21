@@ -13,13 +13,21 @@
 	<managed-bean>
 		<managed-bean-name>SmartCloudDBStore</managed-bean-name>
 		<managed-bean-class>com.ibm.sbt.security.credential.store.DBCredentialStore</managed-bean-class>
-		<managed-property> 
+		<!--  
+			Managed Property jdbcDriverClass is required to provide the driver class name, when jndi is not being used.
+			The Property can be provided in a way, mentioned below.
+		-->
+		<!-- <managed-property> 
 			<property-name>jdbcDriverClass</property-name> 
 			<value>org.apache.derby.jdbc.EmbeddedDriver</value> 
-		</managed-property>
+		</managed-property> -->
 		<managed-property> 
 			<property-name>jndiName</property-name> 
 			<value>jdbc/ibmsbt-dbtokenstore</value> 
+		</managed-property>
+		<managed-property> 
+			<property-name>tableName</property-name> 
+			<value>SBTKREP</value> 
 		</managed-property>
 		<managed-bean-scope>application</managed-bean-scope>
 		<!-- Fixed OAuth Application parameters -->

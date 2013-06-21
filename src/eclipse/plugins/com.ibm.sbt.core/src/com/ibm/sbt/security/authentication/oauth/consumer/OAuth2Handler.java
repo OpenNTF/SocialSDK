@@ -20,9 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.net.URI;
 import java.net.URLEncoder;
-import java.sql.SQLException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -86,8 +84,8 @@ public class OAuth2Handler extends OAuthHandler {
 	private boolean forceTrustSSLCertificate;
 	
 	// Type used to store the credentials
-	public static final String AT_STORE_TYPE = "OAUTH2_ACCESS_TOKEN_STORE";
-	public static final String CT_STORE_TYPE = "OAUTH2_CONSUMER_TOKEN_STORE";
+	public static final String ACCESS_TOKEN_STORE_TYPE = "OAUTH2_ACCESS_TOKEN_STORE";
+	public static final String CONSUMER_TOKEN_STORE_TYPE = "OAUTH2_CONSUMER_TOKEN_STORE";
 	
 	// Persistence store code
 	private boolean storeRead;
@@ -426,7 +424,7 @@ public class OAuth2Handler extends OAuthHandler {
         	try {
 	        	CredentialStore factory = CredentialStoreFactory.getCredentialStore(getCredentialStore());
 	            if(factory!=null) {
-	            	ConsumerToken consumerToken = (ConsumerToken) factory.load(getServiceName(), CT_STORE_TYPE, null);
+	            	ConsumerToken consumerToken = (ConsumerToken) factory.load(getServiceName(), CONSUMER_TOKEN_STORE_TYPE, null);
 	                if(consumerToken!=null) {
 	                	storeRead = true;
 	                    if(StringUtil.isNotEmpty(consumerToken.getConsumerKey())) {
@@ -569,7 +567,7 @@ public class OAuth2Handler extends OAuthHandler {
 	        CredentialStore credStore = CredentialStoreFactory.getCredentialStore(getCredentialStore());
 	        if(credStore!=null) {
 	            // Find the token for this user
-	            AccessToken token = (AccessToken) credStore.load(getServiceName(), AT_STORE_TYPE, userId);
+	            AccessToken token = (AccessToken) credStore.load(getServiceName(), ACCESS_TOKEN_STORE_TYPE, userId);
 	            if(token!=null) {
 	                return token;
 	            }
@@ -617,7 +615,7 @@ public class OAuth2Handler extends OAuthHandler {
      	        CredentialStore credStore = CredentialStoreFactory.getCredentialStore(getCredentialStore());
      	        if(credStore!=null) {
      	        	// Find the token for this user
-     	        	credStore.remove(getServiceName(), AT_STORE_TYPE, context.getCurrentUserId());
+     	        	credStore.remove(getServiceName(), ACCESS_TOKEN_STORE_TYPE, context.getCurrentUserId());
      	        }
         	 } catch (CredentialStoreException cse) {
  				throw new OAuthException(cse, "Error trying to delete Token.");
@@ -704,14 +702,10 @@ public class OAuth2Handler extends OAuthHandler {
 			        	if(!context.isCurrentUserAnonymous()) {
 			        		CredentialStore credStore = findCredentialStore();
 			        		if (credStore != null) {
-								try {
-								credStore.store(getServiceName(), AT_STORE_TYPE, context.getCurrentUserId(), token);
-								} catch(CredentialStoreException cse) {
-									// if the token is already present, and was expired due to which we have fetched a new 
-									// token, then we remove the token from the store first and then add this new token.
-									deleteToken();
-									credStore.store(getServiceName(), AT_STORE_TYPE, context.getCurrentUserId(), token);
-								}
+								// if the token is already present, and was expired due to which we have fetched a new 
+								// token, then we remove the token from the store first and then add this new token.
+								deleteToken();
+								credStore.store(getServiceName(), ACCESS_TOKEN_STORE_TYPE, context.getCurrentUserId(), token);
 							}
 			            } else {
 			            	AnonymousCredentialStore.storeCredentials(context, token, getAppId(), getServiceName()); // Store the token for anonymous user

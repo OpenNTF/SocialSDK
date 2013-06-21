@@ -75,8 +75,8 @@ public class OAProvider implements Serializable {
 
 	public static final int EXPIRE_THRESHOLD = 60; // 60sec = 1min
 	// Store Type used to store the Tokens in the Credential Store
-	public static final String AT_STORE_TYPE = "OAUTH1_ACCESS_TOKEN_STORE";
-	public static final String CT_STORE_TYPE = "OAUTH1_CONSUMER_TOKEN_STORE";
+	public static final String ACCESS_TOKEN_STORE_TYPE = "OAUTH1_ACCESS_TOKEN_STORE";
+	public static final String CONSUMER_TOKEN_STORE_TYPE = "OAUTH1_CONSUMER_TOKEN_STORE";
 	
 	// for logging
 	private static final String sourceClass = OAProvider.class.getName();
@@ -221,7 +221,7 @@ public class OAProvider implements Serializable {
 			try {
 				CredentialStore factory = CredentialStoreFactory.getCredentialStore(getCredentialStore());
 				if (factory != null) {
-					ConsumerToken consumerToken = (ConsumerToken) factory.load(getServiceName(), CT_STORE_TYPE, null);
+					ConsumerToken consumerToken = (ConsumerToken) factory.load(getServiceName(), CONSUMER_TOKEN_STORE_TYPE, null);
 					if (consumerToken != null) {
 						storeRead = true;
 						if (StringUtil.isNotEmpty(consumerToken.getConsumerKey())) {
@@ -407,7 +407,7 @@ public class OAProvider implements Serializable {
 			CredentialStore credStore = CredentialStoreFactory.getCredentialStore(getCredentialStore());
 			if (credStore != null) {
 				// Find the token for this user
-	            AccessToken token = (AccessToken) credStore.load(getServiceName(), AT_STORE_TYPE, userId);
+	            AccessToken token = (AccessToken) credStore.load(getServiceName(), ACCESS_TOKEN_STORE_TYPE, userId);
 	            if(token!=null) {
 	                return token;
 	            }
@@ -468,13 +468,12 @@ public class OAProvider implements Serializable {
 				CredentialStore credStore = findCredentialStore();
 				if (credStore != null) {
 					try {
-					credStore.store(getServiceName(), AT_STORE_TYPE, context.getCurrentUserId(), token);
-					} catch(CredentialStoreException cse)
-					{
 						// if the token is already present, and was expired due to which we have fetched a new 
 						// token, then we remove the token from the store first and then add this new token.
 						deleteToken();
-						credStore.store(getServiceName(), AT_STORE_TYPE, context.getCurrentUserId(), token);
+						credStore.store(getServiceName(), ACCESS_TOKEN_STORE_TYPE, context.getCurrentUserId(), token);
+					} catch (CredentialStoreException cse) {
+						throw new OAuthException(cse);
 					}
 				}
 			} else {
@@ -534,7 +533,7 @@ public class OAProvider implements Serializable {
 				CredentialStore credStore = CredentialStoreFactory.getCredentialStore(getCredentialStore());
 				if (credStore != null) {
 					// Find the token for this user
-					credStore.remove(getServiceName(), AT_STORE_TYPE, context.getCurrentUserId());
+					credStore.remove(getServiceName(), ACCESS_TOKEN_STORE_TYPE, context.getCurrentUserId());
 				}
 			} catch (CredentialStoreException cse) {
 				throw new OAuthException(cse, "Error trying to delete Token.");

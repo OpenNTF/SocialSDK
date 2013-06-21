@@ -71,7 +71,7 @@ public class OA2Callback extends AbstractServiceHandler {
         	if(!context.isCurrentUserAnonymous()) {
         		CredentialStore credStore = CredentialStoreFactory.getCredentialStore(oAuthHandler.getCredentialStore());
         		if(credStore!=null) {
-        			credStore.store(oAuthHandler.getServiceName(), OAuth2Handler.AT_STORE_TYPE, context.getCurrentUserId(), token);
+        			credStore.store(oAuthHandler.getServiceName(), OAuth2Handler.ACCESS_TOKEN_STORE_TYPE, context.getCurrentUserId(), token);
             	}
             } else {
             	// Store the token for anonymous user

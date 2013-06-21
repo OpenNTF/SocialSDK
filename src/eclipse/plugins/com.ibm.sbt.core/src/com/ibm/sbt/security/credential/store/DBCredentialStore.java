@@ -34,8 +34,8 @@ import com.ibm.commons.util.StringUtil;
 
 public class DBCredentialStore extends BaseStore{
 	
-	private final String	DEFAULTJNDINAME = "jdbc/ibmsbt-dbtokenstore";
-	private final String	DEFAULTDBTABLE  = "SBTKREP";
+	private final String	DEFAULT_JNDINAME = "jdbc/ibmsbt-dbtokenstore";
+	private final String	DEFAULT_DB_TABLE  = "SBTKREP";
 	
 	static final String		sourceClass		= DBCredentialStore.class.getName();
 	static final Logger		logger			= Logger.getLogger(sourceClass);
@@ -53,7 +53,7 @@ public class DBCredentialStore extends BaseStore{
 	
 	
 	public DBCredentialStore() {
-		tableName = DEFAULTDBTABLE;
+		tableName = DEFAULT_DB_TABLE;
 	}
 	
 
@@ -211,6 +211,7 @@ public class DBCredentialStore extends BaseStore{
 				}
 			driverLoaded = true;
 			} catch (Exception ex) {
+				driverLoaded = false;
 				logger.log(Level.SEVERE, "loadDBDriver : Could not load driver for class" + driver, ex);
 				throw new CredentialStoreException(ex,"DBCredentialStore.java : loadDBDriver Could not load driver for class" + driver );
 			}
@@ -250,10 +251,10 @@ public class DBCredentialStore extends BaseStore{
 			Context envCtx = (Context) initCtx.lookup("java:comp/env");
 			if(StringUtil.isEmpty(getJndiName())){
 				logger.log(Level.INFO, "DBTokenStore.java : getConnectionUsingJNDI : JNDI Key was blank in bean using the default");
-				jndikey = DEFAULTJNDINAME;
+				jndikey = DEFAULT_JNDINAME;
 			}
 			DataSource ds = (DataSource) envCtx.lookup(jndikey);
-			return(ds.getConnection());
+			return ds.getConnection();
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, "DBTokenStore.java : getConnectionUsingJNDI : ", e);
 			throw new CredentialStoreException(e,"Problem occured in getting connection using JNDI" );

@@ -20,8 +20,8 @@
  * @module sbt.base.BaseService
  * @author Carlos Manias
  */
-define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cache", "../Endpoint", "../Promise" ], 
-    function(config, declare,lang,log,stringUtil,Cache,Endpoint,Promise) {
+define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cache", "../Promise" ], 
+    function(config, declare,lang,log,stringUtil,Cache,Promise) {
 	// TODO sbt/config is required here to solve module loading
 	// issues with jquery until we remove the global sbt object
 	
@@ -64,7 +64,7 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
         constructor : function(args) {
             // create an endpoint if name was specified
             if (args && args.endpoint) {
-                this.endpoint = Endpoint.find(args.endpoint);
+                this.endpoint = config.findEndpoint(args.endpoint);
             }
 
             // optionally create a cache

@@ -1,5 +1,5 @@
-require([ "sbt/Endpoint", "sbt/lang", "sbt/dom", "sbt/json", "sbt/xml" ], 
-    function(Endpoint,lang,dom,json,xml) {
+require([ "sbt/config", "sbt/lang", "sbt/dom", "sbt/json", "sbt/xml" ], 
+    function(config,lang,dom,json,xml) {
     
     var options = { 
         method : "DELETE", 
@@ -8,7 +8,7 @@ require([ "sbt/Endpoint", "sbt/lang", "sbt/dom", "sbt/json", "sbt/xml" ],
         }
     };
     
-    var endpoint = Endpoint.find("connections");
+    var endpoint = config.findEndpoint("connections");
     var promise = endpoint.request("/communities/service/atom/community/instance", options);
     
     var results = [];

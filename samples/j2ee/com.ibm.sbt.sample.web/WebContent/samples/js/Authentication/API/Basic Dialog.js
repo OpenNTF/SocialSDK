@@ -1,5 +1,5 @@
-require(["sbt/Endpoint", "sbt/dom", "sbt/config"], function(Endpoint, dom, config) {
-    var endpoint = Endpoint.find("connections");
+require(["sbt/dom", "sbt/config"], function(dom, config) {
+    var endpoint = config.findEndpoint("connections");
     
     config.Properties["loginUi"] = "dialog";
     

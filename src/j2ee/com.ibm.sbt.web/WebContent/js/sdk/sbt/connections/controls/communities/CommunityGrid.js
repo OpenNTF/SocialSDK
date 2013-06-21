@@ -24,9 +24,22 @@ define([ "../../../declare",
          "../../../connections/controls/vcard/SemanticTagService",
          "../../../config",
          "../../../connections/CommunityConstants",
-         "../../../store/parameter" ], 
+         "../../../store/parameter"], 
         function(declare, Grid, CommunityGridRenderer, CommunityAction, SemanticTagService, sbt, consts, parameter) {
-
+	
+	var sortVals = {
+			date: "modified",
+            popularity: "count",
+            name: "title"
+	};
+	
+	var ParamSchema = {	
+		pageNumber: parameter.oneBasedInteger("page"),	
+		pageSize: parameter.oneBasedInteger("ps"),
+		sortBy: parameter.sortField("sortField",sortVals),
+		sortOrder: parameter.booleanSortOrder("asc")			
+	};
+	
     /**
      * @class  CommunityGrid
      * @namespace  sbt.connections.controls.communities
@@ -35,6 +48,8 @@ define([ "../../../declare",
     	
     	/**
     	 * Options are for which type of community grid is to be created
+    	 * public will show public communities and my will show communities
+    	 * the specified user is a member or owner of. 
     	 */
         options : {
             "public" : {
@@ -42,7 +57,7 @@ define([ "../../../declare",
                     url : consts.AtomCommunitiesAll,
                     attributes : consts.CommunityXPath,
                     feedXPath : consts.CommunityFeedXPath,
-                    paramSchema : parameter.communities.all
+                    paramSchema : ParamSchema
                 },
                 rendererArgs : null
             },
@@ -51,14 +66,16 @@ define([ "../../../declare",
                     url : consts.AtomCommunitiesMy,
                     attributes : consts.CommunityXPath,
                     feedXPath : consts.CommunityFeedXPath,
-                    paramSchema : parameter.communities.all
+                    paramSchema : ParamSchema
                 },
                 rendererArgs : null
             }
         },
         
         /**
-         * Default CommunityAction will open the Community.
+         * set the grids action to be an instance of CommunityAction
+         * This means an event will be provided for when the user moves the mouse over the 
+         * community name or clicks on  a community.
          */
         communityAction: new CommunityAction(),
         
@@ -72,7 +89,12 @@ define([ "../../../declare",
          * @method constructor
          */
         constructor: function(args) {
+        	
             var nls = this.renderer.nls;
+            
+            /**
+             * Set the sorting information
+             */
             this._sortInfo = {
                 date: { 
                     title: nls.date, 
@@ -107,7 +129,7 @@ define([ "../../../declare",
         /**
          * Function is called after the grid is created,
          * Here we call the superclass postCreate and then load the 
-         * Semantic tag service, which if for business cared functionality
+         * Semantic tag service, which will handle business card functionality
          * @method postCreate
          */
         postCreate: function() {        	
@@ -118,9 +140,10 @@ define([ "../../../declare",
         
         /**
          * Event handler for onClick Events
+         * Stops the default onClick event and calls the CommunityAction execute function
          * @method handleClick
          * @param el The element that fired the event
-         * @param data the data associated with the element
+         * @param data the data associated with the row
          * @param ev the event
          */
         handleClick: function(el, data, ev) {

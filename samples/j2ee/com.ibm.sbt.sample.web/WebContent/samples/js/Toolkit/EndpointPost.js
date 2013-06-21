@@ -1,5 +1,5 @@
-require([ "sbt/Endpoint", "sbt/lang", "sbt/dom", "sbt/json", "sbt/xml", "sbt/stringUtil" ], 
-    function(Endpoint,lang,dom,json,xml,stringUtil) {
+require([ "sbt/config", "sbt/lang", "sbt/dom", "sbt/json", "sbt/xml", "sbt/stringUtil" ], 
+    function(config,lang,dom,json,xml,stringUtil) {
     
     var now = new Date();
     var title = "EndpointPost Test " + now.getTime();
@@ -22,7 +22,7 @@ require([ "sbt/Endpoint", "sbt/lang", "sbt/dom", "sbt/json", "sbt/xml", "sbt/str
         data : postData
     };
     
-    var endpoint = Endpoint.find("connections");
+    var endpoint = config.findEndpoint("connections");
     var promise = endpoint.request("/communities/service/atom/communities/my", options);
     
     var results = [];

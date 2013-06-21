@@ -168,7 +168,15 @@ public class OAuth2Endpoint extends AbstractEndpoint {
 		return oAuthHandler.getConsumerSecret();
 	}
 	
+	@Override
+	public String getCredentialStore() {
+		return oAuthHandler.getCredentialStore();
+	}
 
+	@Override
+	public void setCredentialStore(String credentialStore) {
+		oAuthHandler.setCredentialStore(credentialStore);
+	}
 
 	@Override
 	public String getAuthType() {
@@ -213,4 +221,5 @@ public class OAuth2Endpoint extends AbstractEndpoint {
 		this.oAuthHandler = handler;
 	}
 
+	
 }

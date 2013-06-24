@@ -1,6 +1,7 @@
 require(["sbt/dom", "sbt/connections/controls/search/SearchGrid"], function(dom, SearchGrid) {
         var grid = new SearchGrid({
-             type : "all",
+             type: "all",
+             app : "all",
              query : "test"
         });
 

@@ -17,29 +17,30 @@
 /**
  * 
  */
-define(["sbt/declare",
-        "sbt/controls/grid/connections/ConnectionsGridRenderer",
-        "dojo/_base/lang", "dojo/string", "sbt/i18n",
-        "dojo/i18n!sbt/controls/grid/connections/search/nls/SearchGridRenderer",
-        "dojo/text!sbt/controls/grid/connections/search/templates/BookmarkBody.html",
-        "dojo/text!sbt/controls/grid/connections/search/templates/CalendarBody.html",
-        "dojo/text!sbt/controls/grid/connections/search/templates/CommunityBody.html",
-        "dojo/text!sbt/controls/grid/connections/search/templates/DefaultBody.html",
-        "dojo/text!sbt/controls/grid/connections/search/templates/DefaultHeader.html",
-        "dojo/text!sbt/controls/grid/connections/search/templates/DefaultSummary.html",
-        "dojo/text!sbt/controls/grid/connections/search/templates/ProfileBody.html",
-        "dojo/text!sbt/controls/grid/connections/search/templates/ProfileHeader.html",
-        "dojo/text!sbt/controls/grid/connections/search/templates/PersonCard.html",
-        "dojo/text!sbt/controls/grid/connections/search/templates/StatusUpdateExtraHeader.html",
-        "dojo/text!sbt/controls/grid/connections/search/templates/StatusUpdateHeader.html",
-        "dojo/text!sbt/controls/grid/connections/search/templates/a.html",
-        "dojo/text!sbt/controls/grid/connections/search/templates/tr.html",
-        "dojo/text!sbt/controls/grid/connections/search/templates/li.html",
-        "dojo/text!sbt/controls/grid/connections/search/templates/ul.html",
-        "dojo/text!sbt/controls/grid/connections/search/templates/span.html",
-        "dojo/text!sbt/controls/grid/connections/search/templates/img.html",
-        "dojo/text!sbt/controls/grid/connections/search/templates/em.html"],
-        function(declare, ConnectionsGridRenderer, lang, string, i18n, nls, bookmarkBodyTemplate, calendarBodyTemplate, communityBodyTemplate, defaultBodyTemplate, defaultHeaderTemplate, defaultSummaryTemplate, profileBodyTemplate, profileHeaderTemplate, personCardTemplate, statusUpdateExtraHeaderTemplate, statusUpdateHeaderTemplate, aElement, trElement, liElement, ulElement, spanElement, imgElement, emElement) {
+define(["../../../declare",
+        "../ConnectionsGridRenderer",
+        "../../../lang", "../../../stringUtil", "../../../i18n",
+        "../../../i18n!sbt/connections/controls/search/nls/SearchGridRenderer",
+        "../../../text!sbt/connections/controls/search/templates/BookmarkBody.html",
+        "../../../text!sbt/connections/controls/search/templates/CalendarBody.html",
+        "../../../text!sbt/connections/controls/search/templates/CommunityBody.html",
+        "../../../text!sbt/connections/controls/search/templates/DefaultBody.html",
+        "../../../text!sbt/connections/controls/search/templates/DefaultHeader.html",
+        "../../../text!sbt/connections/controls/search/templates/DefaultSummary.html",
+        "../../../text!sbt/connections/controls/search/templates/ProfileBody.html",
+        "../../../text!sbt/connections/controls/search/templates/ProfileHeader.html",
+        "../../../text!sbt/connections/controls/search/templates/PersonCard.html",
+        "../../../text!sbt/connections/controls/search/templates/StatusUpdateExtraHeader.html",
+        "../../../text!sbt/connections/controls/search/templates/StatusUpdateHeader.html",
+        "../../../text!sbt/connections/controls/search/templates/a.html",
+        "../../../text!sbt/connections/controls/search/templates/td.html",
+        "../../../text!sbt/connections/controls/search/templates/tr.html",
+        "../../../text!sbt/connections/controls/search/templates/li.html",
+        "../../../text!sbt/connections/controls/search/templates/ul.html",
+        "../../../text!sbt/connections/controls/search/templates/span.html",
+        "../../../text!sbt/connections/controls/search/templates/img.html",
+        "../../../text!sbt/connections/controls/search/templates/em.html"],
+        function(declare, ConnectionsGridRenderer, lang, stringUtil, i18n, nls, bookmarkBodyTemplate, calendarBodyTemplate, communityBodyTemplate, defaultBodyTemplate, defaultHeaderTemplate, defaultSummaryTemplate, profileBodyTemplate, profileHeaderTemplate, personCardTemplate, statusUpdateExtraHeaderTemplate, statusUpdateHeaderTemplate, aElement, tdElement, trElement, liElement, ulElement, spanElement, imgElement, emElement) {
 
     /**
      * @class SearchGridRenderer
@@ -80,8 +81,10 @@ define(["sbt/declare",
             args.altAttr = args.altAttr ? 'alt="' + args.altAttr + '"' : "";
             args.srcAttr = args.srcAttr ? 'src="' + args.srcAttr + '"' : "";
             args.titleAttr = args.titleAttr ? 'title="' + args.titleAttr + '"' : "";
+            args.widthAttr = args.widthAttr ? 'width="' + args.widthAttr + '"' : "";
+            args.heightAttr = args.heightAttr ? 'height="' + args.heightAttr + '"' : "";
             
-            return string.substitute(html, args);
+            return stringUtil.transform(html, args);
         },
         
         resultTypes: {
@@ -323,7 +326,6 @@ define(["sbt/declare",
         },
         
         parentageMeta: function(grid, item, i, items){
-            //TODO When search index is updated test that this works with all types of search result. May need to move the span tag into here instead of leaving it in the template. Last switch entry is possibly incorrect.
             switch(item.parentageMetaURLID){
             case 'blogURL':
                 var aHref = item.parentageMetaURL;
@@ -478,7 +480,7 @@ define(["sbt/declare",
                     content: spanContent
                  });
             case resultTypes.statusUpdates:
-                spanContent = this._nls.statusUpdate;
+                spanContent = this._nls.fromAStatusUpdate;
                 return this.buildElement(spanElement, {
                     classAttr: "lotusMeta",
                     content: spanContent
@@ -646,7 +648,7 @@ define(["sbt/declare",
         
         bodyCommentCountLi: function(grid, item, i, items){
             if(item.commentCount >= 1){
-                var liContent = item.commentCount === 1 ? this._nls.oneComment : item.commentCount + this._nls.comments;
+                var liContent = item.commentCount == 1 ? this._nls.oneComment : item.commentCount + " " + this._nls.comments;
                 return this.buildElement(liElement, {
                     classAttr: "comments",
                     roleAttr: "listitem",
@@ -853,7 +855,6 @@ define(["sbt/declare",
         
         getRowContent: function(resultType){
             var resultTypes = this.resultTypes;
-            //TODO Update search index and test all of these work!!!!
             switch(resultType){
             case resultTypes.activities:
                 return defaultHeaderTemplate + defaultBodyTemplate + defaultSummaryTemplate;
@@ -872,7 +873,7 @@ define(["sbt/declare",
             case resultTypes.profiles:
                 return profileHeaderTemplate + profileBodyTemplate + defaultSummaryTemplate;
             case resultTypes.statusUpdates: 
-                return statusUpdateExtraHeaderTemplate + statusUpdateHeaderTemplate + defaultBodyTemplate + statusUpdateSummaryTemplate;
+                return statusUpdateHeaderTemplate + defaultBodyTemplate + defaultSummaryTemplate;
             case resultTypes.wikis: 
                 return defaultHeaderTemplate + defaultBodyTemplate + defaultSummaryTemplate;
             default: return defaultHeaderTemplate + defaultBodyTemplate + defaultSummaryTemplate;
@@ -886,22 +887,35 @@ define(["sbt/declare",
          * @returns
          */
         getTemplate: function(item, i){
-            //var content = profileHeaderTemplate + profileBodyTemplate + defaultSummaryTemplate;
             this.resultType = this.getResultType(item);
-            var content = this.getRowContent(this.resultType);
-            
+            var tdContent = this.getRowContent(this.resultType);
             
             // Build tr, adding attributes and content.
             var trClass = undefined;
             if(i===0)
                 trClass = "lotusFirst";
-            var trColspan = undefined;
+            var tdColspan = undefined;
             if(true)
-                trColspan = "2";
+                tdColspan = "2";
+            var trContent = this.buildElement(tdElement, {
+                content: tdContent,
+                colspanAttr: tdColspan
+            });
+            
+            if(this.resultType === this.resultTypes.statusUpdates){
+                var statusUpdateExtraHeader = this.buildElement(tdElement, {
+                    content: statusUpdateExtraHeaderTemplate,
+                    widthAttr: "65",
+                    heightAttr: "55",
+                    classAttr: "lotusFirstCell"
+                });
+
+                trContent = statusUpdateExtraHeader + trContent;
+            }
+            
             return this.buildElement(trElement, {
-                content: content,
+                content: trContent,
                 classAttr: trClass,
-                colspanAttr: trColspan
             });
         },
         

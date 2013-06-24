@@ -21,8 +21,9 @@ define([ "../../../declare",
          "../../../config", 
          "../../../controls/grid/Grid", 
          "./SearchGridRenderer", 
-         "../../../store/AtomStore" ], 
-        function(declare, sbt, Grid, SearchGridRenderer, AtomStore) {
+         "../../../store/AtomStore",
+         "../../../store/parameter"], 
+        function(declare, sbt, Grid, SearchGridRenderer, AtomStore, parameter) {
 
 	// TODO use values from constants and handle authType
 	var searchUrls = {
@@ -70,19 +71,32 @@ define([ "../../../declare",
         "accessControl" : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/accesscontrolled']/@term",
         "commentsSummary" : "ibmsc:field[@id='commentsSummary']"
     };
+    
+    var sortVals = {
+        relevance: "",
+        date: "date"
+    };
+    
+    var ParamSchema = {
+        pageNumber: parameter.oneBasedInteger("page"),  
+        pageSize: parameter.oneBasedInteger("ps"),
+        sortBy: parameter.sortField("sortKey",sortVals),
+        sortOrder: parameter.sortOrder("sortOrder") 
+    };
 	
     /**
      * @class SearchGrid
      * @namespace sbt.connections.controls.search
      * @module sbt.connections.controls.search
      */
-    declare(Grid, {
+    var searchGrid = declare(Grid, {
 
         options : {
             "all" : {
                 storeArgs : {
                     url : searchUrls.searchAll,
-                    attributes : xpathMap
+                    attributes : xpathMap,
+                    paramSchema: ParamSchema
                 },
                 rendererArgs : {
                     type : "all"
@@ -92,7 +106,8 @@ define([ "../../../declare",
             "people" : {
                 storeArgs : {
                     url : searchUrls.searchPeople,
-                    attributes : xpathMap
+                    attributes : xpathMap,
+                    paramSchema: ParamSchema
                 },
                 rendererArgs : {
                     type : "people"
@@ -112,7 +127,8 @@ define([ "../../../declare",
             "apps" : {
                 storeArgs : {
                     url : searchUrls.searchApps,
-                    attributes : xpathMap
+                    attributes : xpathMap,
+                    paramSchema: ParamSchema
                 },
                 rendererArgs : {
                     type : "apps"
@@ -121,6 +137,27 @@ define([ "../../../declare",
         },
 
         defaultOption : "all",
+        
+        constructor: function() {
+            var nls = this.renderer.nls;
+            
+            this._sortInfo = {
+                relevance: { 
+                    title: nls.sortByRelevance, 
+                    sortMethod: "sortByRelevance",
+                    sortParameter: "relevance" 
+                },
+                date: {
+                    title: nls.sortByDate, 
+                    sortMethod: "sortByDate",
+                    sortParameter: "date"   
+                }
+               
+            };
+
+            this._activeSortAnchor = this._sortInfo.relevance;
+            this._activeSortIsDesc = true;
+        },
 
         createDefaultStore : function(args) {
             args.url = this._buildUrl(args.url);
@@ -132,24 +169,55 @@ define([ "../../../declare",
             return new SearchGridRenderer(args);
         },
         
+        /**
+         * @method getSortInfo
+         * @returns A list of strings that describe how the grid can be sorted
+         * for profile grids these strings are "Display Name" and "Recent"
+         */
         getSortInfo: function() {
-            return { 
-                list: [{title: this.renderer.nls.name},
-                       {title: this.renderer.nls.updated},
-                       {title: this.renderer.nls.downloads},
-                       {title: this.renderer.nls.comments},
-                       {title: this.renderer.nls.likes}]
+            return {
+                active: {
+                    anchor: this._activeSortAnchor,
+                    isDesc: this._activeSortIsDesc
+                },
+                list: [this._sortInfo.relevance, this._sortInfo.date]
             };
+        },
+        
+        sortByRelevance: function(el, data, ev){
+            this._sort("relevance", true, el, data, ev);
+        },
+
+        /**
+         * Sort the grid rows by last modified date
+         * @method sortByLastModified
+         * @param el The element that was clicked, typically a "sort by" button
+         * @param data the data associated with the element
+         * @param ev the event
+         */
+        sortByDate: function(el, data, ev) {
+            this._sort("date", true, el, data, ev);
         },
         
         // Internals
         _buildUrl: function(url) {
-            if(this.query)
+            if(this.query){
                 url += "?query=" + this.query;
+                var type = this.type;
+                if(type !== undefined){
+                    if(type.indexOf("bookmark") === 0 || type.indexOf("dogear") == 0)
+                        url += "&component=dogear";
+                    else if(type.indexOf("status") === 0)
+                        url += "&component=status_updates";
+                    else if(type !== "all")
+                        url += "&component=" + this.type;
+                }
+
+            }
             return url;
         }
 
     });
 
-    return sbt.controls.grid.connections.SearchGrid;
+    return searchGrid;
 });

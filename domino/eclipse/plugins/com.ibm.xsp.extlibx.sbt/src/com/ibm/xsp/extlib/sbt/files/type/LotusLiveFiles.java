@@ -16,6 +16,8 @@
 package com.ibm.xsp.extlib.sbt.files.type;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -43,6 +45,10 @@ import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientService.HandlerJson;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.ClientService.HandlerXml;
+import com.ibm.sbt.services.client.connections.files.exception.FileServiceException;
+import com.ibm.sbt.services.client.connections.files.model.FileRequestParams;
+import com.ibm.sbt.services.client.connections.files.model.Headers;
+import com.ibm.sbt.services.client.smartcloud.files.FileService;
 import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
 import com.ibm.sbt.util.DataNavigator;
@@ -67,7 +73,7 @@ public class LotusLiveFiles extends AbstractType {
 
     public static final String LOTUS_LIVE_SUBSCRIBER_ID = "lotusLiveSubscriberId";
     public static final String SERVICE_URL              = "files/basic/cmis/repository";
-    public static final String TYPE                     = "lotuslive";
+    public static final String TYPE                     = "smartcloud";
 
     public LotusLiveFiles() {
         super();
@@ -81,7 +87,7 @@ public class LotusLiveFiles extends AbstractType {
     private void authenticate(RestDataBlockAccessor accessor) throws ClientServicesException {
         String endpoint = accessor.getEndpoint();
         if (StringUtil.isEmpty(endpoint)) {
-            endpoint = EndpointFactory.SERVER_LOTUSLIVE;
+            endpoint = EndpointFactory.SERVER_SMARTCLOUD;
         }
         Endpoint ep = EndpointFactory.getEndpoint(endpoint);
         if (ep != null) {
@@ -164,7 +170,7 @@ public class LotusLiveFiles extends AbstractType {
      */
     @Override
     public String getDefaultEndpoint() {
-        return EndpointFactory.getEndpointName(EndpointFactory.SERVER_LOTUSLIVE);
+        return EndpointFactory.getEndpointName(EndpointFactory.SERVER_SMARTCLOUD);
     }
 
     protected String getRepositoryID() {
@@ -326,12 +332,39 @@ public class LotusLiveFiles extends AbstractType {
             if (authBean != null && !authBean.isAuthenticated()) {
                 authBean.authenticate(false);
             }
-            LotusLiveService svc = (LotusLiveService) createClientService(authBean, SERVICE_URL);
-            svc.setMimeForUpload(MIME.getMIMETypeFromExtension(ext));
+            
+            //LotusLiveService svc = (LotusLiveService) createClientService(authBean, SERVICE_URL);
+            
+            //svc.setMimeForUpload(MIME.getMIMETypeFromExtension(ext));
             //svc.execRequest("post", params, serverFile, null);
             //TODO-Padraic review
-            HandlerJson json= new HandlerJson();
-            svc.post(SERVICE_URL, params, null, json);
+            //HandlerJson json= new HandlerJson();
+            //svc.post(SERVICE_URL, params, null, json);
+            
+            InputStream is = null;
+    		
+    	    try {
+    	        is = new FileInputStream(serverFile);
+
+    	    
+    		FileService svc= new FileService();
+    		svc.uploadFile(is, name, serverFile.length());
+    		 
+    	    } catch (com.ibm.sbt.services.client.smartcloud.files.FileServiceException e) {
+    	        e.printStackTrace();
+    	    } catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+    		finally {
+    			if(is != null)
+    				try {
+    					is.close();
+    				} catch (IOException e) {
+    					e.printStackTrace();
+    				}
+    		}
             
         } catch (ClientServicesException e) {
             throw new FacesExceptionEx(e);

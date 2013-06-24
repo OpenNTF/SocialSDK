@@ -28,6 +28,8 @@ define({
       nextPage : "Next Page",
       pagingResults : "${start} - ${count} of ${totalCount}",
       updatedBy : "Updated by",
+      sortByRelevance : "Relevance",
+      sortByDate: "Date",
       
       
       /**
@@ -128,6 +130,7 @@ define({
        */
       statusUpdate: "Status Update: ",
       statusUpdates: "Status updates",
+      fromAStatusUpdate: "Status Update",
       
       /**
        * Wiki-Related

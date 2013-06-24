@@ -58,9 +58,9 @@ define([ "../../declare", "../../controls/grid/GridAction" ],
          * @param event - The event
          */
         execute: function(item, opts, event) {
-            opts.renderer.hideViewAll = true;
-            opts.renderer.template = opts.renderer.fullTemplate;
-            opts.renderer.render(opts.grid, opts.el, opts.items, opts.data);
+            opts.grid.renderer.hideViewAll = true;
+            opts.grid.renderer.template = opts.grid.renderer.fullTemplate;
+            opts.grid.renderer.render(opts.grid, opts.grid.gridNode, item.items, item);
             console.log("clicked the view all link");
         }
 

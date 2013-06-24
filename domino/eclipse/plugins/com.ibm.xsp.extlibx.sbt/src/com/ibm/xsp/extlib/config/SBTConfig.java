@@ -11,7 +11,7 @@ import com.ibm.xsp.extlib.sbt.files.proxy.FileHandler;
  * @author Andrejus Chaliapinas
  *
  */
-public class SBTConfig extends ExtlibPluginConfig {
+public class SBTConfig {
 	public SBTConfig() {
 	    // Install the proxy handler for files
 	    ProxyHandlerFactory.get().registerHandler(FileHandler.URL_PATH, FileHandler.class);
@@ -23,7 +23,6 @@ public class SBTConfig extends ExtlibPluginConfig {
 	// 	Compose the lists of extra config files 
 	// ===============================================================
 	
-	@Override
 	public String[] getXspConfigFiles(String[] files) {
 		return concat(files, new String[] {
 				"com/ibm/xsp/extlib/config/extlib-sbt.xsp-config", // $NON-NLS-1$
@@ -33,7 +32,6 @@ public class SBTConfig extends ExtlibPluginConfig {
 		});
 	}
 
-	@Override
 	public String[] getFacesConfigFiles(String[] files) {
 		return concat(files, new String[] {
 				"com/ibm/xsp/extlib/config/extlib-sbt-faces-config.xml", // $NON-NLS-1$
@@ -41,4 +39,12 @@ public class SBTConfig extends ExtlibPluginConfig {
                 "com/ibm/xsp/extlib/config/extlib-sbt-connections-faces-config.xml", // $NON-NLS-1$
 		});
 	}
+	
+
+    public String[] concat(String[] s1, String[] s2) {
+    	String[] s = new String[s1.length+s2.length];
+    	System.arraycopy(s1, 0, s, 0, s1.length);
+    	System.arraycopy(s2, 0, s, s1.length, s2.length);
+    	return s;
+    }
 }

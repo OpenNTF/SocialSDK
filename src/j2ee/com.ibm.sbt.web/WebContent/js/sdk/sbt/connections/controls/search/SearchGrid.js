@@ -57,6 +57,17 @@ define([ "../../../declare",
                 }
             },
             
+            "public" : {
+                storeArgs : {
+                    url : consts.publicSearch,
+                    attributes : consts.SearchXPath,
+                    paramSchema: ParamSchema
+                },
+                rendererArgs : {
+                    type : "all"
+                }
+            },
+            
             "people" : {
                 storeArgs : {
                     url : consts.searchPeople,
@@ -157,14 +168,14 @@ define([ "../../../declare",
         _buildUrl: function(url) {
             if(this.query){
                 url += "?query=" + this.query;
-                var type = this.type;
-                if(type !== undefined){
-                    if(type.indexOf("bookmark") === 0 || type.indexOf("dogear") == 0)
+                var app = this.app;
+                if(app !== undefined){
+                    if(app.indexOf("bookmark") === 0 || app.indexOf("dogear") == 0)
                         url += "&component=dogear";
-                    else if(type.indexOf("status") === 0)
+                    else if(app.indexOf("status") === 0)
                         url += "&component=status_updates";
-                    else if(type !== "all")
-                        url += "&component=" + this.type;
+                    else if(app !== "all")
+                        url += "&component=" + this.app;
                 }
 
             }

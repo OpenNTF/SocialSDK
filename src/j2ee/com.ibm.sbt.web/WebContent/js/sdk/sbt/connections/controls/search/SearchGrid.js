@@ -22,56 +22,10 @@ define([ "../../../declare",
          "../../../controls/grid/Grid", 
          "./SearchGridRenderer", 
          "../../../store/AtomStore",
-         "../../../store/parameter"], 
-        function(declare, sbt, Grid, SearchGridRenderer, AtomStore, parameter) {
+         "../../../store/parameter",
+         "../../../connections/SearchConstants"], 
+        function(declare, sbt, Grid, SearchGridRenderer, AtomStore, parameter, consts) {
 
-	// TODO use values from constants and handle authType
-	var searchUrls = {
-	    searchPeople: "/search/atom/search/facets/people",
-        searchTags: "/search/atom/search/facets/tags",
-        searchApps: "/search/atom/search/facets/source",
-        searchAll: "/search/atom/mysearch/results"
-	};
-	
-    var xpathMap = {
-        "id" : "a:id",
-        "title" : "a:title",
-        "summary" : "a:summary",
-        "updated" : "a:updated",
-        "relevance" : "relevance:score",
-        "authorName" : "a:author/a:name",
-        "authorUid" : "a:author/snx:userid",
-        "authorEmail" : "a:author/a:email",
-        "authorState" : "a:author/snx:userState",
-        "type" : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/type']/@term",
-        "application" : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/component']/@term",
-        "applicationCount" : "count(a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/component']/@term)",
-        "primaryComponent" : "a:category[ibmsc:field[@id='primaryComponent']]/@term",
-        "tags" : "a:category[not(@scheme)]/@term",
-        "commentCount" : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/comment']",
-        "resultLink" : "a:link[not(@rel)]/@href",
-        "bookmarkLink" : "ibmsc:field[@id='dogearURL']",
-        "eventStartDate" : "ibmsc:field[@id='eventStartDate']",
-        "authorJobTitle" : "a:content/xhtml:div/xhtml:span/xhtml:div[@class='title']",
-        "authorJobLocation" : "a:content/xhtml:div/xhtml:span/xhtml:div[@class='location']",
-        "authorCount" : "count(a:contributor)",
-        "contributorCount" : "count(a:author)",
-        "tagCount" : "count(a:category[not(@scheme)])",
-        "highlightField" : "ibmsc:field[@id='highlight']",
-        "fileExtension" : "ibmsc:field[@id='fileExtension']",
-        "memberCount" : "snx:membercount",
-        "communityUuid" : "snx:communityUuid",
-        "containerType" : "ibmsc:field[@id='container_type']",
-        "communityParentLink" : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/container' and @type='text/html']/@href",
-        "parentageMetaID" : "ibmsc:field[contains(@id, 'ID')]/@id",
-        "parentageMetaURL" : "ibmsc:field[contains(@id, 'URL')]",
-        "parentageMetaURLID" : "ibmsc:field[contains(@id, 'URL')]/@id",
-        "objectRefDisplayName" : "ibmsc:field[@id='FIELD_OBJECT_REF_DISPLAY_NAME']",
-        "objectRefUrl" : "ibmsc:field[@id='FIELD_OBJECT_REF_URL']",
-        "accessControl" : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/accesscontrolled']/@term",
-        "commentsSummary" : "ibmsc:field[@id='commentsSummary']"
-    };
-    
     var sortVals = {
         relevance: "",
         date: "date"
@@ -94,8 +48,8 @@ define([ "../../../declare",
         options : {
             "all" : {
                 storeArgs : {
-                    url : searchUrls.searchAll,
-                    attributes : xpathMap,
+                    url : consts.mySearch,
+                    attributes : consts.SearchXPath,
                     paramSchema: ParamSchema
                 },
                 rendererArgs : {
@@ -105,8 +59,8 @@ define([ "../../../declare",
             
             "people" : {
                 storeArgs : {
-                    url : searchUrls.searchPeople,
-                    attributes : xpathMap,
+                    url : consts.searchPeople,
+                    attributes : consts.SearchXPath,
                     paramSchema: ParamSchema
                 },
                 rendererArgs : {
@@ -116,8 +70,8 @@ define([ "../../../declare",
             
             "tags" : {
                 storeArgs : {
-                    url : searchUrls.searchTags,
-                    attributes : xpathMap
+                    url : consts.tagsSearch,
+                    attributes : consts.SearchXPath
                 },
                 rendererArgs : {
                     type : "tags"
@@ -126,8 +80,8 @@ define([ "../../../declare",
             
             "apps" : {
                 storeArgs : {
-                    url : searchUrls.searchApps,
-                    attributes : xpathMap,
+                    url : consts.sourceSearch,
+                    attributes : consts.SearchXPath,
                     paramSchema: ParamSchema
                 },
                 rendererArgs : {

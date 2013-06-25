@@ -264,7 +264,7 @@ define(["../declare","../config","../lang", "../base/core", "../xml", "../xpath"
             var item = { 
                 element : element,
                 getValue : function(attrib) { 
-                	var result = {};
+                	var result = [];
                 	 if(typeof this[attrib] == "object"){
                      	for(var i=0;i<this[attrib].length; i++){
                      		result[i] = entities.encode(this[attrib][i]);

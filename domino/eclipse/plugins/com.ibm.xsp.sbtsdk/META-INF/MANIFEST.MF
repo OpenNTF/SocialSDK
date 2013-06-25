@@ -23,7 +23,8 @@ Require-Bundle: org.eclipse.core.runtime,
  com.ibm.sbt.playground;bundle-version="1.0.0";visibility:=reexport,
  com.ibm.xsp.extlib;bundle-version="8.5.3",
  com.ibm.sbt.web;bundle-version="1.0.0",
- com.ibm.pvc.servlet.jsp;bundle-version="2.1.0"
+ com.ibm.pvc.servlet.jsp;bundle-version="2.1.0",
+ com.ibm.xsp.extlibx.sbt;bundle-version="9.0.0";visibility:=reexport
 Bundle-ActivationPolicy: lazy
 Export-Package: com.ibm.xsp.sbtsdk,
  com.ibm.xsp.sbtsdk.library,

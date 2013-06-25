@@ -21,7 +21,11 @@ import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ibm.commons.runtime.Context;
 import com.ibm.commons.util.StringUtil;
+import com.ibm.sbt.core.configuration.Configuration;
+import com.ibm.sbt.security.authentication.oauth.consumer.OAuthHandler;
 import com.ibm.sbt.service.core.handlers.AbstractServiceHandler;
 import com.ibm.sbt.service.core.servlet.ServiceServlet;
 import com.ibm.sbt.services.client.ClientServicesException;
@@ -68,10 +72,17 @@ public class OAClientAuthentication extends AbstractServiceHandler {
 		try {
 			// If the endpoint is not authenticated, then authenticate
 			// else redirect the main page
-			if (!ep.isAuthenticationValid()) {
-				ep.authenticate(true);
+			OAuthHandler handler = (OAuthHandler) Context.get().getSessionMap().get(Configuration.OAUTH_HANDLER);
+			
+			if (ep.isAuthenticationValid()) {
+				if(handler != null) {
+					generateCloseScript(req, resp);
+				}
+				else {
+					ep.authenticate(true);
+				}
 			} else {
-				generateCloseScript(req, resp);
+				ep.authenticate(true);
 			}
 		} catch (ClientServicesException ex) {
 			throw new ServletException(ex);
@@ -99,11 +110,13 @@ public class OAClientAuthentication extends AbstractServiceHandler {
 				pw.println("  window.location.href = '" + redirect + "';");
 			} else if (mode.equalsIgnoreCase(MODE_POPUP)) {
 				pw.println("  if (window.opener && !window.opener.closed) {");
+				pw.println("window.opener.require(['sbt/config'], function(config){");
 				pw.println("    window.opener.location.reload();"); 
-					pw.println("  if (window.opener.sbt.callback) {");
-						pw.println("window.opener.sbt.callback();");
-						pw.println("delete window.opener.sbt.callback;");
+					pw.println("  if (config.callback) {");
+						pw.println("config.callback();");
+						pw.println("delete config.callback;");
 					pw.println("  }");
+				pw.println("});");
 				pw.println("  }");
 				pw.println("  window.close();");
 			} else if (mode.equalsIgnoreCase(MODE_DIALOG)) {

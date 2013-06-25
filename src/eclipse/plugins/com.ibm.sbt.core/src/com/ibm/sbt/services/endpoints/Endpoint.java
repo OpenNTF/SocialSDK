@@ -71,7 +71,7 @@ public interface Endpoint {
     /**
      * Get the client authenticator to use, if any.
      */
-    public JSReference getAuthenticator(String endpointName);
+    public JSReference getAuthenticator(String endpointName, String sbtUrl);
     
     /**
      * Get the client transport using moduleId

@@ -2,8 +2,8 @@
  * Helper module for send an embedded experience email.
  * @module
  */
-define(["sbt/declare", "sbt/Endpoint", "sbt/emailService"], 
-    function(declare, Endpoint, emailService) {
+define(["sbt/declare", "sbt/config", "sbt/emailService"], 
+    function(declare, config, emailService) {
 
     return {
         /**
@@ -48,7 +48,7 @@ define(["sbt/declare", "sbt/Endpoint", "sbt/emailService"],
          * @return {String} The home page URL of the Acme Airlines app.
          */
         getHomePageUrl : function() {
-            var endpoint = Endpoint.find('acmeAir');
+            var endpoint = config.findEndpoint('acmeAir');
             var baseUrl = endpoint.baseUrl;
             var path = require.toUrl('acmesocial');
             path = path.substring(0, path.lastIndexOf('/')+1);

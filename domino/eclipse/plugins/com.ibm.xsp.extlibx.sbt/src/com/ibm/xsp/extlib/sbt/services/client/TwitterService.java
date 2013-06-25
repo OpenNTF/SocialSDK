@@ -68,7 +68,7 @@ public class TwitterService extends ClientService {
            if(args.getParameters().containsKey("q")){
                //If we detect that we are trying to do a switter search then we need to modify the url
                //In this case we ignore the URL defined in the endpoint (api.twitter.com) and go with search.twitter.com
-              			return "https://search.twitter.com/search.atom";
+              			return "https://api.twitter.com/1.1/search/tweets.json";
            }
        }
 		return super.getUrlPath(args);

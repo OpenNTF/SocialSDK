@@ -249,7 +249,7 @@ var Endpoint = declare(null, {
 		        	}
 		        }
 				if (error.code == 401 || (!isForbiddenErrorButAuthenticated && error.code == self.authenticationErrorCode)) {
-					var autoAuthenticate =  _args.autoAuthenticate || self.autoAuthenticate || sbt.Properties["autoAuthenticate"];
+					var autoAuthenticate =  _args.autoAuthenticate || self.autoAuthenticate;
 					if(autoAuthenticate == undefined){
 						autoAuthenticate = true;
 					}
@@ -524,7 +524,7 @@ var Endpoint = declare(null, {
         }
         var isAuthErr = status == 401 || status == this.authenticationErrorCode;
         
-        var isAutoAuth =  options.autoAuthenticate || this.autoAuthenticate || sbt.Properties["autoAuthenticate"];
+        var isAutoAuth =  options.autoAuthenticate || this.autoAuthenticate;
         if (isAutoAuth == undefined){
             isAutoAuth = true;
         } 
@@ -551,31 +551,6 @@ var Endpoint = declare(null, {
     }
 	
 });
-
-
-/**
- * Find the specified Endpoint and return it. If the named Endpoint is
- * not available then an Endpoint is created with an error transport and
- * this is returned.
- * 
- * @method find
- * @param name
- */
-Endpoint.find = function(name){
-	if (!sbt || !sbt.Endpoints) {
-		var nf = !sbt? "sbt" : "sbt.Endpoints";
-		throw new Error(nf+" object not defined");
-	}
-    if (!sbt.Endpoints[name]){
-        log.error(stringUtil.substitute(nls.cannot_find_endpoint, [name]));
-        var transport = new ErrorTransport(name);
-        sbt.Endpoints[name] = new Endpoint({
-            "transport" : transport,
-            "baseUrl"   : ""
-        });
-    }
-    return sbt.Endpoints[name];
-};
 
 return Endpoint;
 });

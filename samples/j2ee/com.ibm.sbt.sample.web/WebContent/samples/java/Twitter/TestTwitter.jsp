@@ -18,13 +18,7 @@
 <script type="text/javascript" src="/sbt.dojo180/dojo/dojo.js.uncompressed.js"></script>
 <script type="text/javascript" src="/sbt.sample.web/library?lib=dojo&ver=1.8.0"></script></head>
 <body>
-	<%-- <%
-		Endpoint ep = EndpointFactory.getEndpoint("twitter");
-		if(!ep.isAuthenticationValid()) {
-			ep.authenticate(true);
-    		return;
-    	}
-	 %> --%>
+
 	 <%
 		Endpoint ep = EndpointFactory.getEndpoint("twitter");
 		if(!ep.isAuthenticationValid()) {

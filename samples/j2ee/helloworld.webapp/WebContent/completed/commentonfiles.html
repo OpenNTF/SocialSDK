@@ -10,9 +10,9 @@
 <body>
 <h3>My Files</h3>
 <script type="text/javascript">
-require(["sbt/connections/ProfileService", "sbt/connections/FileService","sbt/dom"], 
-	    function(ProfileService,FileService, dom) {
-			sbt.Properties["loginUi"] = "popup";
+require(["sbt/config", "sbt/connections/ProfileService", "sbt/connections/FileService","sbt/dom"], 
+	    function(configProfileService,FileService, dom) {
+			config.Properties["loginUi"] = "popup";
 			var id = "FrankAdams@renovations.com";
 			var profileService = new ProfileService();
 			profileService.getProfile({

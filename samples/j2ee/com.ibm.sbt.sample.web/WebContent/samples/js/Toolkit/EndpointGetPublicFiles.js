@@ -1,7 +1,7 @@
-require([ "sbt/Endpoint", "sbt/lang", "sbt/dom", "sbt/json", "sbt/xml" ], 
-    function(Endpoint,lang,dom,json,xml) {
+require([ "sbt/config", "sbt/lang", "sbt/dom", "sbt/json", "sbt/xml" ], 
+    function(config,lang,dom,json,xml) {
     
-    var endpoint = Endpoint.find("connections");
+    var endpoint = config.findEndpoint("connections");
     var results = [];
     
     var cnUrl = "/files/basic/anonymous/api/documents/feed?visibility=public";

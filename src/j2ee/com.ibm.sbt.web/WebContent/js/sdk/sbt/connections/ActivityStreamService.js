@@ -19,8 +19,8 @@
  * 
  * @module sbt.connections.ActivityStreamService
  */
-define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", "./ActivityStreamConstants", "../base/BaseService","../base/BaseEntity",  "../base/DataHandler", 'sbt/json'], 
-		function(declare,lang,stringUtil,Endpoint,Promise,consts,BaseService, BaseEntity,DataHandler, json) {
+define([ "../declare", "../lang", "../stringUtil", "../config", "../Promise", "./ActivityStreamConstants", "../base/BaseService","../base/BaseEntity",  "../base/DataHandler", 'sbt/json'], 
+		function(declare,lang,stringUtil,config,Promise,consts,BaseService, BaseEntity,DataHandler, json) {
 
 	/**
      * JsonDataHandler class
@@ -164,7 +164,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Endpoint", "../Promise", 
          */
         constructor : function(args) {
             if (!this.endpoint) {
-                this.endpoint = Endpoint.find(this.getDefaultEndpointName());
+                this.endpoint = config.findEndpoint(this.getDefaultEndpointName());
             }
         },
 

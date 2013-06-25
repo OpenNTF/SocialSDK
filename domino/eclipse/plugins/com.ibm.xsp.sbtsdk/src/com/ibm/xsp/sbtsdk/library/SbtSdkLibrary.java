@@ -16,6 +16,7 @@
 
 package com.ibm.xsp.sbtsdk.library;
 
+import com.ibm.xsp.extlib.config.SBTConfig;
 import com.ibm.xsp.library.AbstractXspLibrary;
 
 
@@ -46,22 +47,27 @@ public class SbtSdkLibrary extends AbstractXspLibrary {
             "com.ibm.xsp.core.library",     // $NON-NLS-1$
             "com.ibm.xsp.extsn.library",    // $NON-NLS-1$
             "com.ibm.xsp.domino.library",   // $NON-NLS-1$
+            "com.ibm.xsp.extlib.library",   // $NON-NLS-1$            
         };
     }
     
     @Override
 	public String[] getXspConfigFiles() {
+    	SBTConfig config = new SBTConfig();
         String[] files = new String[] {
                 "com/ibm/xsp/sbtsdk/config/sbtsdk.xsp-config", // $NON-NLS-1$
             };
+        files=config.getXspConfigFiles(files);
         return files;
     }
     
     @Override
 	public String[] getFacesConfigFiles() {
+    	SBTConfig config = new SBTConfig();
         String[] files = new String[] {
                 "com/ibm/xsp/sbtsdk/config/sbtsdk-faces-config.xml", // $NON-NLS-1$
             };
+        files=config.getFacesConfigFiles(files);
         return files;
     }
 }

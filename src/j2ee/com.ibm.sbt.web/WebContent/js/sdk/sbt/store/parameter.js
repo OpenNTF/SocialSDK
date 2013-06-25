@@ -17,7 +17,7 @@
 /**
  * 
  */
-define(["../stringUtil", "../config", "../Endpoint"], function(stringUtil, config, Endpoint) {
+define(["../stringUtil", "../config"], function(stringUtil, config) {
     var Formatter = {
         defaultFormat: function(param, val) {
             return param.key + "=" + val;

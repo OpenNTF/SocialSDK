@@ -1,5 +1,5 @@
-require(['sbt/Endpoint',"sbt/dom","sbt/config"], function(Endpoint,dom,config) {
-	var ep = Endpoint.find("smartcloud");
+require(["sbt/dom","sbt/config"], function(dom,config) {
+	var ep = config.findEndpoint("smartcloud");
 	if(ep.isAuthenticated){
 		dom.setText("OAuth1LoginStatus","You are authenticated");
 		dom.byId("OAuth1Login").style.display = "none";
@@ -12,9 +12,9 @@ require(['sbt/Endpoint',"sbt/dom","sbt/config"], function(Endpoint,dom,config) {
 });
 
 function login(loginUi) {
-	require(['sbt/Endpoint',"sbt/dom","sbt/config"], function(Endpoint,dom,config) {
+	require(["sbt/dom","sbt/config"], function(dom,config) {
 		config.Properties["loginUi"] = loginUi;
-		Endpoint.find("smartcloud").authenticate().then(
+		config.findEndpoint("smartcloud").authenticate().then(
 			function(response){
 				dom.setText("OAuth1LoginStatus","You are authenticated");
 				dom.byId("OAuth1Login").style.display = "none";
@@ -28,8 +28,8 @@ function login(loginUi) {
 }
 
 function logout() {
-	require(['sbt/Endpoint',"sbt/dom"], function(Endpoint,dom) {
-		Endpoint.find("smartcloud").logout().then(
+	require(['sbt/config',"sbt/dom"], function(config,dom) {
+		config.findEndpoint("smartcloud").logout().then(
 			function(response){
 				dom.setText("OAuth1LoginStatus","You are not authenticated");
 				dom.byId("OAuth1Login").style.display = "inline";

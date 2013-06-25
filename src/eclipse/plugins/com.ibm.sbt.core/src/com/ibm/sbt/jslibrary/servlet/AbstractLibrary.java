@@ -351,7 +351,7 @@ abstract public class AbstractLibrary {
 			JsonReference authenticatorRef = createAuthenticatorRef(request, endpoint, endpointName);
 			if (authenticatorRef != null) {
 				jsonEndpoint.putJsonProperty(PROP_AUTHENTICATOR, authenticatorRef);
-				String moduleName = endpoint.getAuthenticator(endpointName).getModuleName();
+				String moduleName = endpoint.getAuthenticator(endpointName, request.getToolkitJsUrl()).getModuleName();
 				jsonEndpoint.putJsonProperty(PROP_MODULE_AUTHENTICATOR, moduleName);
 			}
 
@@ -435,7 +435,7 @@ abstract public class AbstractLibrary {
 		indentationLevel++;
 
 		// Create the sbt object
-		indent(sb, indentationLevel).append("window.sbt = {};").append(newLine());
+		indent(sb, indentationLevel).append("var sbt = {};").append(newLine());
 
 		// define the properties
 		Iterator<String> jsonProps = properties.getJsonProperties();
@@ -464,6 +464,13 @@ abstract public class AbstractLibrary {
 				}
 			}
 		}
+		
+		// define the sbt.findEndpoint(endpointName) function
+		indent(sb, indentationLevel).append("sbt.findEndpoint=function(endpointName) {\n");
+		indentationLevel++;
+		indent(sb, indentationLevel).append("return this.Endpoints[endpointName];\n");
+		indentationLevel--;
+		indent(sb, indentationLevel).append("};\n");
 
 		// close define invocation
 		indent(sb, indentationLevel).append("return sbt;").append(newLine());
@@ -749,7 +756,7 @@ abstract public class AbstractLibrary {
 	 */
 	protected JsonReference createAuthenticatorRef(LibraryRequest request, Endpoint endpoint,
 			String logicalName) throws LibraryException {
-		JSReference authenticator = endpoint.getAuthenticator(logicalName);
+		JSReference authenticator = endpoint.getAuthenticator(logicalName, request.getToolkitJsUrl());
 		if (authenticator != null) {
 			try {
 				String paramValues = JsonGenerator.toJson(JsonJavaFactory.instanceEx,

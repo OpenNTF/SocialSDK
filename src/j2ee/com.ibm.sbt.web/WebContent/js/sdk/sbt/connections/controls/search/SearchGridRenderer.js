@@ -281,7 +281,7 @@ define(["../../../declare",
          */
         resultSummary: function(grid, item, i, items){
             var summary = item.getValue("summary");
-            if(summary.length!=0){
+            if(summary.length!==0){
                 var statusUpdateUl = "";
                 if(this.resultType === this.resultTypes.statusUpdates){
                     var statusUpdateLi = this.buildElement(liElement, {
@@ -295,8 +295,9 @@ define(["../../../declare",
                         content: statusUpdateLi
                     });
                 }
-                summary = summary.replace("&lt;b&gt;", "<b>"); // replace the encoded <b> tags...
-                summary = summary.replace("&lt;/b&gt;", "</b>");
+                summary = summary.replace(/&lt;b&gt;/g, "<b>"); // replace the encoded <b> tags...
+                summary = summary.replace(/&lt;\/b&gt;/g, "</b>");
+                
                 var summarySpan = this.buildElement(spanElement, {
                     classAttr: "lotusMeta lconnSearchHighlight",
                     content: summary
@@ -330,8 +331,10 @@ define(["../../../declare",
         
         formattedTitle: function(grid, item, i, items){
             var title = item.getValue("title");
-            title = title.replace("&lt;b&gt;", "<b>"); // replace the encoded <b> tags...
-            title = title.replace("&lt;/b&gt;", "</b>");
+            if(title.length !== 0){
+                title = title.replace(/&lt;b&gt;/g, "<b>"); // replace the encoded <b> tags...
+                title = title.replace(/&lt;\/b&gt;/g, "</b>");
+            }
             
             return title;
         },
@@ -674,7 +677,7 @@ define(["../../../declare",
         
         objectReferenceLi: function(grid, item, i, items){
             if(item.getValue("objectRefDisplayName").length != 0 && item.getValue("objectRefUrl").length != 0){
-                var liContent = this.buildelement(aElement, {
+                var liContent = this.buildElement(aElement, {
                     hrefAttr: item.getValue("objectRefUrl"),
                     content: item.getValue("objectRefDisplayName")
                 });

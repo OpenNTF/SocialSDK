@@ -21,10 +21,9 @@ define([ "../../../declare",
          "../../../config", 
          "../../../controls/grid/Grid", 
          "./SearchGridRenderer", 
-         "../../../store/AtomStore",
          "../../../store/parameter",
          "../../../connections/SearchConstants"], 
-        function(declare, sbt, Grid, SearchGridRenderer, AtomStore, parameter, consts) {
+        function(declare, sbt, Grid, SearchGridRenderer, parameter, consts) {
 
     var sortVals = {
         relevance: "",
@@ -127,7 +126,7 @@ define([ "../../../declare",
         createDefaultStore : function(args) {
             args.url = this._buildUrl(args.url);
             
-            return new AtomStore(args);
+            return this.inherited(arguments);
         },
 
         createDefaultRenderer : function(args) {

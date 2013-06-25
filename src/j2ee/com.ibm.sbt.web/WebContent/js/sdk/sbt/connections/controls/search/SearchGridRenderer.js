@@ -47,7 +47,7 @@ define(["../../../declare",
      * @module sbt.controls.grid.connections.SearchGridRenderer
      * @namespace sbt.controls.grid.connections
      */
-    declare("sbt.controls.grid.connections.SearchGridRenderer", ConnectionsGridRenderer, {
+    var searchGridRenderer = declare(ConnectionsGridRenderer, {
 
         _nls: nls,
         
@@ -956,7 +956,7 @@ define(["../../../declare",
             
         },
         
-        emptyClass: "lconnEmpty",
+        emptyClass: "lconnEmpty lotusui",
         
         //TODO Handle empty grid. Should override renderEmpty?
         
@@ -966,7 +966,32 @@ define(["../../../declare",
             this.inherited(arguments);
         },
         
+        /**
+         * Creates a Div, with a different CSS class, to display a grid that has no results
+         * @method - renderEmpty
+         * @param - grid - The Grid
+         * @param - el - The Current Element
+         */
+        renderEmpty: function(grid, el) {
+           while (el.childNodes[0]) {
+               this._destroy(el.childNodes[0]);
+           }
+           var lotusUiDiv = this._create("div", { // here purely so a parent of the empty div has the lotusui class...
+             "class": "lotusui lconnSearchResults",
+             innerHTML: ""
+           }, el);
+           var lotusEmptyDiv = this._create("div", {
+               "class": this.emptyClass,
+               innerHTML: "",
+               "aria-relevant": "all",
+               "aria-live": "assertive"
+             }, lotusUiDiv);
+           this._create("span", {
+               innerHTML: this._nls.empty,
+             }, lotusEmptyDiv);
+        },
+        
         tableClass: "lotusTable lconnSearchResults"
     });    
-    return sbt.controls.grid.connections.SearchGridRenderer;
+    return searchGridRenderer;
 });

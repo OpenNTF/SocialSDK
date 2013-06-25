@@ -2,6 +2,6 @@
     <wb-module deploy-name="com.ibm.sbt.jquery182">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <property name="java-output-path" value="/com.ibm.sbt.jquery182/WebContent/WEB-INF/classes"/>
-        <property name="context-root" value="sbt.jquery180"/>
+        <property name="context-root" value="sbt.jquery182"/>
     </wb-module>
 </project-modules>

@@ -58,7 +58,7 @@ public class TwitterDataSource extends RestObjectDataSource {
          *
          */
     public static class TwitterDataBlockAccessor extends RestDataBlockAccessor {
-        private static final String VERSION = "1";
+        private static final String VERSION = "1.1";
         private static final String FORMAT = "json";
         private static final String TWTR_MENTIONS = VERSION + "/statuses/mentions." + FORMAT;
         private static final String TWTR_RT_BY_ME = VERSION + "/statuses/retweeted_by_me." + FORMAT;
@@ -142,65 +142,81 @@ public class TwitterDataSource extends RestObjectDataSource {
                 else{
                     //TODO change this to JSON to be consistent
                     //http://search.twitter.com/search.json?q=%40twitterapi
-                    ClientService svc = createClientService(provider, "search.atom");
+                    ClientService svc = createClientService(provider, "search.json");
                     if(hashTag.indexOf('#') != 0){
                         hashTag = "#" + hashTag;
                     }
                     params.put("q", hashTag);
                     
                     //TODO - Padraic
-                    HandlerXml xml= new HandlerXml();
-                    Object doc = svc.get(null,params, xml);
-                    XmlNavigator navigator = new XmlNavigator((Document)doc);
-                    DataNavigator dn = navigator.get("feed/entry");
+                    HandlerJson json= new HandlerJson();
+                    ArrayList collection = (ArrayList)svc.get(null,params, json);
+                    //JsonNavigator navigator = new JsonNavigator((Document)doc);
+                   //DataNavigator dn = navigator.get("feed/entry");
                     
-                    Date date = null;
-                    DateFormat dateFormat = DateFormat.getDateTimeInstance();
                     
-                    for(int i = 0; i < dn.getCount(); i++){
-                        TwitterEntry entry = new TwitterEntry();
-                        DataNavigator entryNav = dn.get(i);
-                        
-                        String title = entryNav.stringValue("title");
-                        entry.setTitle(title);
-                        
-                        String content = entryNav.stringValue("content");
-                        entry.setContent(content);
-                        
-                        String author = entryNav.stringValue("author/name");
-                        entry.setAuthor(author);
-                        
-                        String authorLink = entryNav.stringValue("author/uri");
-                        entry.setAuthorLink(authorLink);
-                        
-                        String publishedDate = entryNav.stringValue("published");
-                        entry.setPublishedDate(publishedDate);
-                        
-                        String updatedDate = entryNav.stringValue("updated");
-                        entry.setUpdatedDate(updatedDate);
-                        
-                        // 2 links available:
-                        // we determine the difference based on the rel attribute...
-                        //DataNavigator linkNav = entryNav.get("link[@rel='image']/@href");
-                        DataNavigator linkNav = entryNav.get("link"); //$NON-NLS-1$
-                        String image = null;
-                        String tweetLink = null;
-                        if(null != linkNav){
-                            linkNav = linkNav.selectEq("@rel", "image"); //$NON-NLS-1$ //$NON-NLS-2$
-                            if(null != linkNav){
-                                image = linkNav.stringValue("@href"); //$NON-NLS-1$
-                            }
-                            linkNav = entryNav.get("link");
-                            linkNav = linkNav.selectEq("@rel", "alternate"); //$NON-NLS-1$ //$NON-NLS-2$
-                            if(null != linkNav){
-                                tweetLink = linkNav.stringValue("@href"); //$NON-NLS-1$
+                    if(collection != null){
+                        int vc = collection.size();
+                        for(int i = 0; i < vc; i++) {
+                            Object o = collection.get(i);
+                            if(o != null){
+                                JsonNavigator nav = new JsonNavigator(o);
+                                TwitterEntry entry = new TwitterEntry();
+                                //entry.setTweetContent(nav.stringValue("text"));
+                                entry.setTitle(nav.stringValue("text"));
+                                entry.setAuthor(nav.get("user").stringValue("name"));
+                                entries.add(entry);
                             }
                         }
-                        entry.setImage(image);
-                        entry.setTweetLink(tweetLink);
-                        
-                        entries.add(entry);
                     }
+                    
+//                    Date date = null;
+//                    DateFormat dateFormat = DateFormat.getDateTimeInstance();
+//                    
+//                    for(int i = 0; i < dn.getCount(); i++){
+//                        TwitterEntry entry = new TwitterEntry();
+//                        DataNavigator entryNav = dn.get(i);
+//                        
+//                        String title = entryNav.stringValue("title");
+//                        entry.setTitle(title);
+//                        
+//                        String content = entryNav.stringValue("content");
+//                        entry.setContent(content);
+//                        
+//                        String author = entryNav.stringValue("author/name");
+//                        entry.setAuthor(author);
+//                        
+//                        String authorLink = entryNav.stringValue("author/uri");
+//                        entry.setAuthorLink(authorLink);
+//                        
+//                        String publishedDate = entryNav.stringValue("published");
+//                        entry.setPublishedDate(publishedDate);
+//                        
+//                        String updatedDate = entryNav.stringValue("updated");
+//                        entry.setUpdatedDate(updatedDate);
+//                        
+//                        // 2 links available:
+//                        // we determine the difference based on the rel attribute...
+//                        //DataNavigator linkNav = entryNav.get("link[@rel='image']/@href");
+//                        DataNavigator linkNav = entryNav.get("link"); //$NON-NLS-1$
+//                        String image = null;
+//                        String tweetLink = null;
+//                        if(null != linkNav){
+//                            linkNav = linkNav.selectEq("@rel", "image"); //$NON-NLS-1$ //$NON-NLS-2$
+//                            if(null != linkNav){
+//                                image = linkNav.stringValue("@href"); //$NON-NLS-1$
+//                            }
+//                            linkNav = entryNav.get("link");
+//                            linkNav = linkNav.selectEq("@rel", "alternate"); //$NON-NLS-1$ //$NON-NLS-2$
+//                            if(null != linkNav){
+//                                tweetLink = linkNav.stringValue("@href"); //$NON-NLS-1$
+//                            }
+//                        }
+//                        entry.setImage(image);
+//                        entry.setTweetLink(tweetLink);
+//                        
+//                        entries.add(entry);
+//                    }
                 }
                 TwitterEntry[] data = entries.toArray(new TwitterEntry[0]);
                 return new ArrayBlock(index, data);

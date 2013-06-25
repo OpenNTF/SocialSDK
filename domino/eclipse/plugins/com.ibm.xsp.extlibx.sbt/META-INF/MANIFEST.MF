@@ -50,7 +50,6 @@ Require-Bundle: org.eclipse.core.runtime,
  com.ibm.commons,
  com.ibm.notes.java.api,
  com.ibm.jscript,
- com.ibm.domino.oauth,
  com.ibm.xsp.core,
  com.ibm.xsp.extsn,
  com.ibm.designer.runtime,
@@ -61,6 +60,5 @@ Require-Bundle: org.eclipse.core.runtime,
  com.ibm.sbt.core;bundle-version="1.0.0",
  com.ibm.commons.runtime;bundle-version="1.0.0",
  com.ibm.sbt.libs;bundle-version="1.0.0"
- 
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: com.ibm.xsp.extlib.plugin.SBTPluginActivator

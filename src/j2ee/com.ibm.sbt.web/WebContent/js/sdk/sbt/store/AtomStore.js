@@ -264,26 +264,26 @@ define(["../declare","../config","../lang", "../base/core", "../xml", "../xpath"
             var item = { 
                 element : element,
                 getValue : function(attrib) { 
-                	
+                	var result = {};
                 	 if(typeof this[attrib] == "object"){
                      	for(var i=0;i<this[attrib].length; i++){
-                     		this[attrib][i] = entities.encode(this[attrib][i]);
+                     		result[i] = entities.encode(this[attrib][i]);
                      	}
                      }
                      else{
-                    	 this[attrib] = entities.encode(this[attrib]);
+                    	 result = entities.encode(this[attrib]);
                      }
                 	
-                	return this[attrib]; 
+                	return result; 
                 }
             };
             for (var i=0; i<attribs.length; i++) {
                 var attrib = attribs[i];
                 var access = this.attributes[attrib];
                 if (lang.isFunction(access)) {
-                    item[attrib] = access(this, item); //element as an arg seems neater, but item has element in it 
+                    item[attrib] = access(this, item);
                 } else if (access.match(xpathCountFunction)){
-                    item[attrib] = xpath.selectNumber(element, access, this.namespaces);
+                    item[attrib] = xpath.selectNumber(element, access, this.namespaces)+"";
                 } else {
                     var nodes = xpath.selectNodes(element, access, this.namespaces);
                     if (nodes && nodes.length == 1) {

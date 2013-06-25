@@ -15,17 +15,28 @@
 	<title>Twitter Sample</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
+<script type="text/javascript" src="/sbt.dojo180/dojo/dojo.js.uncompressed.js"></script>
+<script type="text/javascript" src="/sbt.sample.web/library?lib=dojo&ver=1.8.0"></script></head>
 <body>
-	<%
+
+	 <%
 		Endpoint ep = EndpointFactory.getEndpoint("twitter");
 		if(!ep.isAuthenticationValid()) {
-			ep.authenticate(true);
-    		return;
+    %>
+   	Please authenticate with the Twitter popup window
+    <script>
+    	require(['sbt/config'], function(config) {
+    		var ep = config.findEndpoint("twitter");
+    		ep.authenticate({loginUi: "popup"});
+    	});
+    </script>
+	<%
+    		return; 
     	}
 	 %>
 	 	
 	<%
-		String twitterUrl = "1/followers/ids.json";
+		String twitterUrl = "1.1/followers/ids.json";
      	Map<String, String> params = new HashMap<String,String>();
        	params.put("page", "1"); 
         params.put("count", "3"); 

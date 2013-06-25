@@ -111,7 +111,8 @@ define(["../../../declare",
          * @returns An li containing a list of tags.
          */
         tagsList: function(grid, item, i, items){
-            var tagCount = item.tagCount;
+            var tagCount = item.getValue("tagCount");
+            tagCount = parseInt(tagCount);
             if(tagCount === 0)
                 return "";
             
@@ -121,7 +122,7 @@ define(["../../../declare",
             var ulStyle = "display:inline";
             var ulContent = "";
             
-            var tags = item.tags;
+            var tags = item.getValue("tags");
             
             var i;
             for(i = 0; i < tagCount && i < 3; i++){
@@ -135,7 +136,7 @@ define(["../../../declare",
                 var aOnClick = "onclick=\"searchObject.performTagFilter('" + tags[i] + "');\"";
                 var aAlt = currentTag;
                 
-                if(item.highlightField)
+                if(item.getValue("highlightField"))
                     var aClass = currentTag;
                 else 
                     aClass = undefined;
@@ -187,7 +188,8 @@ define(["../../../declare",
          * @returns {String}
          */
         summaryIcon: function(grid, item, i, items){
-            var summaryImageClass = "lconn-ftype16 lconn-ftype16-" + item.fileExtension, summaryImageSrc = "", summaryImageAlt = "", summaryImageTitle = "", summaryImageRole = "";
+            var fileExtension = item.getValue("fileExtension");
+            var summaryImageClass = "lconn-ftype16 lconn-ftype16-" + fileExtension, summaryImageSrc = "", summaryImageAlt = "", summaryImageTitle = "", summaryImageRole = "";
             switch(this.resultType){
             case this.resultTypes.activities:
                 summaryImageClass = "lconnSprite lconnSprite-iconActivities16";
@@ -225,7 +227,7 @@ define(["../../../declare",
                 summaryImageRole = "presentation";
                 break;    
             case this.resultTypes.files:
-                summaryImageClass = item.fileExtension ? summaryImageClass : "lconnSprite lconnSprite-iconFiles16";
+                summaryImageClass = fileExtension ? summaryImageClass : "lconnSprite lconnSprite-iconFiles16";
                 summaryImageSrc = "images/blank.gif";
                 summaryImageAlt = this._nls.files;
                 summaryImageTitle = this._nls.files;
@@ -253,13 +255,12 @@ define(["../../../declare",
                 summaryImageRole = "presentation";
                 break;
             case this.resultTypes.wikis:
-                summaryImageClass = item.fileExtension.length !== 0 ? summaryImageClass : "lconnSprite lconnSprite-iconWikis16";
+                summaryImageClass = fileExtension.length !== 0 ? summaryImageClass : "lconnSprite lconnSprite-iconWikis16";
                 summaryImageSrc = "images/blank.gif";
                 summaryImageAlt = this._nls.wikis;
                 summaryImageTitle = this._nls.wikis;
                 summaryImageRole = "presentation";
                 break;
-                
             }
             return this.buildElement(imgElement, {
                 classAttr: summaryImageClass,
@@ -279,7 +280,8 @@ define(["../../../declare",
          * @returns
          */
         resultSummary: function(grid, item, i, items){
-            if(item.summary.length!=0){
+            var summary = item.getValue("summary");
+            if(summary.length!=0){
                 var statusUpdateUl = "";
                 if(this.resultType === this.resultTypes.statusUpdates){
                     var statusUpdateLi = this.buildElement(liElement, {
@@ -293,10 +295,11 @@ define(["../../../declare",
                         content: statusUpdateLi
                     });
                 }
-                    
+                summary = summary.replace("&lt;b&gt;", "<b>"); // replace the encoded <b> tags...
+                summary = summary.replace("&lt;/b&gt;", "</b>");
                 var summarySpan = this.buildElement(spanElement, {
                     classAttr: "lotusMeta lconnSearchHighlight",
-                    content: item.summary
+                    content: summary
                 });
                 
                 return statusUpdateUl + "\n" + summarySpan + "\n";
@@ -311,10 +314,10 @@ define(["../../../declare",
         },
         
         resultComment: function(grid, item, i, items){
-            if(item.commentsSummary.length > 0 && this.resultType != this.resultTypes.statusUpdates){
+            if(item.getValue("commentsSummary").length > 0 && this.resultType != this.resultTypes.statusUpdates){
                 var divSpan = this.buildElement(spanElement, {
                     classAttr: "lotusMeta lconnSearchHighlight",
-                    content: this._nls.comment + item.commentSummary
+                    content: this._nls.comment + item.getValue("commentSummary")
                 });
                 return this.buildElement(divElement, {
                     styleAttr: "clear:both;",
@@ -325,10 +328,18 @@ define(["../../../declare",
             }
         },
         
+        formattedTitle: function(grid, item, i, items){
+            var title = item.getValue("title");
+            title = title.replace("&lt;b&gt;", "<b>"); // replace the encoded <b> tags...
+            title = title.replace("&lt;/b&gt;", "</b>");
+            
+            return title;
+        },
+        
         parentageMeta: function(grid, item, i, items){
-            switch(item.parentageMetaURLID){
+            switch(item.getValue("parentageMetaURLID")){
             case 'blogURL':
-                var aHref = item.parentageMetaURL;
+                var aHref = item.getValue("parentageMetaURL");
                 var aContent = "";
                 if(this.componentcontains(item, "blogs:ideationblogs:idea"))
                     aContent = this._nls.fromAnIdeationBlog;
@@ -340,25 +351,25 @@ define(["../../../declare",
                 }) + " > ";
             case 'forumURL':
                 return this.buildElement(aElement, {
-                    hrefAttr: "item.parentageMetaURL",
+                    hrefAttr: item.getValue("parentageMetaURL"),
                     content: this._nls.fromAForum
                 }) + " > ";
             case 'wikiURL':
                 return this.buildElement(aElement, {
-                    hrefAttr: "item.parentageMetaURL",
+                    hrefAttr: item.getValue("parentageMetaURL"),
                     content: this._nls.fromAWiki
                 }) + " > ";
             case 'activityURL':
-                if(item.primaryComponent.indexOf("activities") === 0 || item.primaryComponent.indexOf("communities:activities") === 0){
-                    if(item.primaryComponent === "activities:bookmark" || item.primaryComponent === "communities:activities:bookmark" || this.componentContains("activities:section") || this.componentContains("activities:task") || this.componentContains("activities:entry")){
+                if(item.getValue("primaryComponent").indexOf("activities") === 0 || item.getValue("primaryComponent").indexOf("communities:activities") === 0){
+                    if(item.getValue("primaryComponent") === "activities:bookmark" || item.getValue("primaryComponent") === "communities:activities:bookmark" || this.componentContains("activities:section") || this.componentContains("activities:task") || this.componentContains("activities:entry")){
                         return this.buildElement(aElement, {
-                            hrefAttr: "item.parentageMetaURL",
+                            hrefAttr: item.getValue("parentageMetaURL"),
                             content: this._nls.fromAnActivity
                         }) + " > ";
                     }
-                    if(item.parentageMetaID === "activityEntryURL" || item.primaryComponent === "activities:bookmark"){
+                    if(item.getValue("parentageMetaID") === "activityEntryURL" || item.getValue("primaryComponent") === "activities:bookmark"){
                         return this.buildElement(aElement, {
-                            hrefAttr: "item.parentageMetaURL",
+                            hrefAttr: item.getValue("parentageMetaURL"),
                             content: this._nls.entry
                         }) + " > ";
                     }
@@ -369,9 +380,9 @@ define(["../../../declare",
         },
         
         communityParent: function(grid, item, i, items){
-            if(item.communityUuid.length!=0 && item.containerType != "stand-alone" && item.primaryComponent != "communities:entry" && item.primaryComponent.indexOf("communities") === 0){
+            if(item.getValue("communityUuid").length!=0 && item.getValue("containerType") != "stand-alone" && item.getValue("primaryComponent") != "communities:entry" && item.getValue("primaryComponent").indexOf("communities") === 0){
                 return this.buildElement(aElement, {
-                    hrefAttr: item.communityParentLink,
+                    hrefAttr: item.getValue("communityParentLink"),
                     content: this._nls.fromACommunity
                 }) + " > ";
             }
@@ -507,11 +518,11 @@ define(["../../../declare",
          * @param appString
          */
         componentContains: function(item, appString){
-            if(item.primaryComponent === appString)
+            if(item.getValue("primaryComponent") === appString)
                 return true;
             
-            for(var key in item.application){
-                var app = item.application[key];
+            for(var key in item.getValue("application")){
+                var app = item.getValue("application")[key];
                 if(app === appString){
                     return true;
                 }
@@ -528,7 +539,7 @@ define(["../../../declare",
                     roleAttr: "listitem"
                 });
             }
-            var liMembersContent = item.memberCount + " " + this._nls.members;
+            var liMembersContent = item.getValue("memberCount") + " " + this._nls.members;
             
             var liMembers = this.buildElement(liElement, {
                 content: liMembersContent,
@@ -547,32 +558,35 @@ define(["../../../declare",
         bodyCalendarLis: function(grid, item, i, items){
             var allDayEventLi = "", repeatingEventLi = "", locationLi = "";
             
-            if(item.allDayEvent ==="true")
+            if(item.getValue("allDayEvent") ==="true")
                 allDayEventLi = this.buildElement(liElement,{
                     roleAttr: "listitem",
                     content: this._nls.eventIsAllDay
                 });
             
-            if(item.repeatingEvent ==="true")
+            if(item.getValue("repeatingEvent") ==="true")
                 allDayEventLi = this.buildElement(liElement,{
                     roleAttr: "listitem",
                     content: this._nls.eventRepeats
                 });
             
-            if(item.location.length > 1)
+            if(item.getValue("location.length") > 1)
                 allDayEventLi = this.buildElement(liElement,{
                     roleAttr: "listitem",
-                    content: item.location
+                    content: item.getValue("location")
                 });
             
             return allDayEventLi + "\n" + repeatingEventLi + "\n" + locationLi + "\n";
         },
         
         bodyBookmarkLiContent : function(grid, item, i, items){
-            if(item.bookmarkLink.length > 0 && (item.contributorCount + item.authorcount) > 1){
+            var contributorCount = parseInt(item.getValue("contributorCount"));
+            var authorCount = parseInt(item.getValue("authorcount"));
+            
+            if(item.getValue("bookmarkLink").length > 0 && (contributorCount + authorCount) > 1){
                 var spanA = this.buildElement(aElement, {
-                    hrefAttr: item.bookmarkLink,
-                    content: (item.contributorCount + item.authorCount) + this._nls.people
+                    hrefAttr: item.getValue("bookmarkLink"),
+                    content: contributorCount + authorCount + this._nls.people
                 });
                 return this.buildElement(spanElement, {
                     content: spanA
@@ -593,7 +607,7 @@ define(["../../../declare",
          * @returns {String}
          */
         cardClass: function(grid, item, i, items){
-            if(item.authorState != 'active')
+            if(item.getValue("authorState") != 'active')
                 return "lotusPersonInactive";
             else
                 return "vcard";
@@ -609,9 +623,9 @@ define(["../../../declare",
          * @returns
          */
         profileBodyJobTitle: function(grid, item, i, items){
-            if(item.authorJobTitle && item.authorJobTitle.length != 0)
+            if(item.getValue("authorJobTitle") && item.getValue("authorJobTitle").length != 0)
                 return this.buildElement(liElement, {
-                    content: item.authorJobTitle+"&nbsp;",
+                    content: item.getValue("authorJobTitle")+"&nbsp;",
                     classAttr: "lotusFirst",
                     roleAttr: "listitem"
                 });
@@ -625,7 +639,7 @@ define(["../../../declare",
          * @returns {String}
          */
         bodyPersonCardLi: function(grid, item, i, items){
-            if(item.authorName.length != 0){
+            if(item.getValue("authorName").length != 0){
                 return this.buildElement(liElement, {
                     content: this._substituteItem(personCardTemplate, grid, item, i, items),
                     roleAttr: "listitem",
@@ -638,7 +652,7 @@ define(["../../../declare",
         
         bodyUpdatedLi: function(grid, item, i, items){
             var liClass = "searchDateClass";
-            if(item.authorName.length==0)
+            if(item.getValue("authorName").length==0)
                 liClass+= " lotusFirst";
             return this.buildElement(liElement, {
                 classAttr: liClass,
@@ -647,8 +661,9 @@ define(["../../../declare",
         },
         
         bodyCommentCountLi: function(grid, item, i, items){
-            if(item.commentCount >= 1){
-                var liContent = item.commentCount == 1 ? this._nls.oneComment : item.commentCount + " " + this._nls.comments;
+            var commentcount = parseInt(item.getValue("commentCount"));
+            if(commentcount >= 1){
+                var liContent = commentcount === 1 ? this._nls.oneComment : commentcount + " " + this._nls.comments;
                 return this.buildElement(liElement, {
                     classAttr: "comments",
                     roleAttr: "listitem",
@@ -658,10 +673,10 @@ define(["../../../declare",
         },
         
         objectReferenceLi: function(grid, item, i, items){
-            if(item.objectRefDisplayName.length != 0 && item.objectRefUrl.length != 0){
+            if(item.getValue("objectRefDisplayName").length != 0 && item.getValue("objectRefUrl").length != 0){
                 var liContent = this.buildelement(aElement, {
-                    hrefAttr: item.objectRefUrl,
-                    content: item.objectRefDisplayName
+                    hrefAttr: item.getValue("objectRefUrl"),
+                    content: item.getValue("objectRefDisplayName")
                 });
                 
                 return this.buildElement(liElement, {
@@ -672,7 +687,8 @@ define(["../../../declare",
         },
         
         bodyBookmarkLi: function(grid, item, i, items){
-            if(((this.application=='dogear' && item.applicationCount > 1) || (this.application=='activities:bookmark' && item.applicationCount > 2) || (this.application=='communities:bookmark' && item.applicationCount > 2) ) && item.accessControl=='public'){
+            var applicationCount = parseInt(item.getValue("applicationCount"));
+            if(((this.application=='dogear' && applicationCount > 1) || (this.application=='activities:bookmark' && applicationCount > 2) || (this.application=='communities:bookmark' && applicationCount > 2) ) && item.getValue("accessControl")=='public'){
                 var aImg = this.buildElement(imgElement, {
                     classAttr: "lconnSprite lconnSprite-iconHelp16",
                     srcAttr: "images/blank.gif",
@@ -783,7 +799,7 @@ define(["../../../declare",
         },
         
         summaryClass: function(grid, item, i, items){
-            if(item.authorState === "inactive")
+            if(item.getValue("authorState") === "inactive")
                 return "lotusDim";
             else
                 return "lconnSearchComponentCategory";
@@ -791,19 +807,19 @@ define(["../../../declare",
         
 
         summaryStyle: function(grid, item, i, items){
-            if(item.authorState === "inactive")
+            if(item.getValue("authorState") === "inactive")
                 return "filter: alpha(opacity = 50)";
             else
                 return "";
         },
         
         getApplication: function(item){
-            if(typeof item.application === "string"){
-                return item.application;
+            if(typeof item.getValue("application") === "string"){
+                return item.getValue("application");
             }
             else{
-                for(var key in item.application){
-                    var app = item.application[key];
+                for(var key in item.getValue("application")){
+                    var app = item.getValue("application")[key];
                     if(app.indexOf(":") ===-1){
                         return app;
                     }
@@ -812,7 +828,7 @@ define(["../../../declare",
         },
         
         getResultType: function(item){
-            var primaryComponent = item.primaryComponent;
+            var primaryComponent = item.getValue("primaryComponent");
             var resultTypes = this.resultTypes;
             
             this.application = this.getApplication(item);

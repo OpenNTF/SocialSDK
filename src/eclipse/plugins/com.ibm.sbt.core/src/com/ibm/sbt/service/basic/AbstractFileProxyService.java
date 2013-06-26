@@ -10,12 +10,19 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpRequestBase;
@@ -33,37 +40,39 @@ import com.ibm.sbt.services.endpoints.EndpointFactory;
 import com.ibm.sbt.services.util.AuthUtil;
 import com.ibm.sbt.services.util.SSLUtil;
 
-/** 
- * 
- * @author Vineet Kanwal
- *
- */
+/** @author Vineet Kanwal **/
 public abstract class AbstractFileProxyService extends ProxyEndpointService {
 
 	protected String fileNameOrId = null;
-	
-	private long length;
-	
+
+	private Long length = 0L;
+
 	protected String libraryId = null;
 
 	protected abstract String getRequestURI(String smethod, String authType, Map<String, String[]> params) throws ServletException;
 
-	@SuppressWarnings("unchecked")
 	@Override
 	protected void initProxy(HttpServletRequest request, HttpServletResponse response) throws ServletException {
+		// TODO can this be moved to parametrers
 		String pathinfo = request.getPathInfo().substring(request.getPathInfo().indexOf("/files"));
 		String[] pathTokens = pathinfo.split("/");
 		if (pathTokens.length >= 5) {
+			// /files/<<endpointName>>/serviceTpe/fileName
 			String endPointName = pathTokens[2];
 			this.endpoint = (Endpoint) EndpointFactory.getEndpoint(endPointName);
 			if (!endpoint.isAllowClientAccess()) {
 				throw new ServletException(StringUtil.format("Client access forbidden for the specified endpoint {0}", endPointName));
 			}
-			fileNameOrId = pathTokens[4];
-			if(pathTokens.length == 6){
+			fileNameOrId = pathTokens[4];			
+			if (fileNameOrId == null) {
+				writeErrorResponse(HttpServletResponse.SC_BAD_REQUEST, "File Name not provided.", new String[] {}, new String[] {}, response,
+						request);
+				return;
+			}
+			if (pathTokens.length == 6) {
 				libraryId = pathTokens[5];
 			}
-			requestURI = getRequestURI(request.getMethod(), AuthUtil.INSTANCE.getAuthValue(endpoint), request.getParameterMap());			
+			requestURI = getRequestURI(request.getMethod(), AuthUtil.INSTANCE.getAuthValue(endpoint), request.getParameterMap());
 			return;
 		}
 		throw new ServletException(StringUtil.format("Invalid url {0}", pathinfo));
@@ -81,17 +90,26 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 			HttpRequestBase method = createMethod(smethod, url, request);
 			if (prepareForwardingMethod(method, request, client)) {
 				if (smethod.equalsIgnoreCase("POST")) {
+					FileItemFactory factory = new DiskFileItemFactory();
+					// Create a new file upload handler
+					ServletFileUpload upload = new ServletFileUpload(factory);
+					// Parse the request
 					@SuppressWarnings("unchecked")
-					Map<String, String[]> params = request.getParameterMap() != null ? request.getParameterMap() : new HashMap<String, String[]>();
-					if (fileNameOrId == null) {
-						writeErrorResponse(HttpServletResponse.SC_BAD_REQUEST, "File Name not provided.", new String[] {}, new String[] {}, response, request);
+					List<FileItem> fileItems = upload.parseRequest(request);
+					if (fileItems.size() == 0) {
+						writeErrorResponse(HttpServletResponse.SC_BAD_REQUEST, "No File Item found in Mulpart Form data", new String[] {}, new String[] {},
+								response, request);
 						return;
 					}
-					File file = convertInputStreamToFile(request.getInputStream());
-					Content content = getFileContent(file, length, fileNameOrId);
-					Map<String, String> headers = createHeaders();
-					// this.endpoint.getClientService().post(uploadUrl, params, headers, content, ClientService.FORMAT_XML);
-					xhr(request, response, url.getPath(), params, headers, content, ClientService.FORMAT_XML);
+					for (FileItem uploadedFile : fileItems) {						
+						InputStream uploadedFileContent = uploadedFile.getInputStream();
+						File file = convertInputStreamToFile(uploadedFileContent, uploadedFile.getSize());						
+						Map<String, String[]> params = request.getParameterMap() != null ? request.getParameterMap() : new HashMap<String, String[]>();						
+						Content content = getFileContent(file, length, fileNameOrId);
+						Map<String, String> headers = createHeaders();
+						
+						xhr(request, response, url.getPath(), params, headers, content, getFormat());
+					}
 				} else if (smethod.equalsIgnoreCase("GET")) {
 					xhr(request, response, requestURI, new HashMap<String, String[]>(), new HashMap<String, String>(), null, ClientService.FORMAT_INPUTSTREAM);
 
@@ -112,18 +130,21 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 			}
 		}
 	}
-	
-	private File convertInputStreamToFile(InputStream inputStream) throws IOException {
-		File file = null;
+
+	protected abstract Handler getFormat();
+
+	private File convertInputStreamToFile(InputStream inputStream, Long size) throws IOException {
+		
 		OutputStream out = null;
 		try {
-			file = new File(fileNameOrId);
+			File file = new File(fileNameOrId); // TODO check with Phil to avoid conflict in name
 			out = new FileOutputStream(file);
-			byte[] bytes = new byte[1024];
+			int bufferSize = size.intValue() < 8192 ? size.intValue() : 8192;
+			byte[] bytes = new byte[bufferSize]; 
 			int read = 0;
 			while ((read = inputStream.read(bytes)) != -1) {
 				length += read;
-				out.write(bytes, 0, read);
+				out.write(Base64.decodeBase64(bytes));
 				out.flush();
 			}
 			inputStream.close();
@@ -138,7 +159,6 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 			}
 		}
 	}
-
 
 	protected abstract Map<String, String> createHeaders();
 
@@ -190,7 +210,7 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 			ServletException, URISyntaxException {
 
 		Args args = new Args();
-		args.setServiceUrl(serviceUrl);		
+		args.setServiceUrl(serviceUrl);
 		args.setHandler(format);
 		args.setHeaders(headers);
 

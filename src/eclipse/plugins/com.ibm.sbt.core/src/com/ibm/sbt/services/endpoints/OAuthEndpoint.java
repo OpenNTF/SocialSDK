@@ -258,9 +258,6 @@ public class OAuthEndpoint extends AbstractEndpoint {
 		@Override
 		public void process(HttpRequest request, HttpContext context) throws HttpException, IOException {
 
-//			Context contextForHandler = Context.get();
-//			OAuthHandler oaHandler = (OAuthHandler) contextForHandler.getSessionMap().get(Configuration.OAUTH1_HANDLER);
-//			contextForHandler.getSessionMap().get("oaProvider");
 			String authorizationheader = null;
 			if (oaHandler != null) {
 				if (oaHandler.getClass().equals(HMACOAuth1Handler.class)) {

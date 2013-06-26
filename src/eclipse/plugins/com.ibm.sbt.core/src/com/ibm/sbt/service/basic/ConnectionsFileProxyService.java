@@ -17,7 +17,7 @@ import com.ibm.sbt.services.client.ClientService.ContentFile;
  */
 public class ConnectionsFileProxyService extends AbstractFileProxyService {
 
-	private static final String UPLOAD_URL = "/files/{0}/api/myuserlibrary/feed";
+	private static final String UPLOAD_URL = "/files/basic/api/myuserlibrary/feed"; // TODO set as property on endpoint
 	private static final String DOWNLOAD_URL = "/files/basic/api/library/{0}/document/{1}/media";
 	
 	@Override
@@ -28,7 +28,7 @@ public class ConnectionsFileProxyService extends AbstractFileProxyService {
 	@Override
 	protected String getRequestURI(String method, String authType, Map<String, String[]> params) throws ServletException{
 		if("POST".equalsIgnoreCase(method)){
-			return StringUtil.format(UPLOAD_URL, authType);
+			return UPLOAD_URL;
 		}
 		else if("GET".equalsIgnoreCase(method)){
 			if (fileNameOrId == null) {
@@ -37,7 +37,7 @@ public class ConnectionsFileProxyService extends AbstractFileProxyService {
 			if (libraryId == null) {
 				throw new ServletException("Library ID is required in URL for download");
 			}
-			return StringUtil.format(DOWNLOAD_URL, fileNameOrId, libraryId);
+			return StringUtil.format(DOWNLOAD_URL, libraryId, fileNameOrId);
 		}
 		return null;
 	}

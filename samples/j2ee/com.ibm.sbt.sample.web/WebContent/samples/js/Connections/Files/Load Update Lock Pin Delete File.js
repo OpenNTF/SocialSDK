@@ -4,13 +4,15 @@ var isPinned = false;
 
 require([ "sbt/connections/FileService", "sbt/dom" ], function(FileService, dom) {
 	var fileService = new FileService();
-	fileService.getMyFiles().then(function(files) {
+	fileService.getMyFiles({
+		ps : 1
+	}).then(function(files) {
 		if (files.length == 0) {
-			handleError(dom, "You are not an owner of any files.");			
+			handleError(dom, "You are not an owner of any files.");
 		} else {
 			var file = files[0];
-			dom.byId("fileId").value = file.getId();			
-			if(file.getLock() == "HARD"){
+			dom.byId("fileId").value = file.getId();
+			if (file.getLock() == "HARD") {
 				dom.byId("lockUnlock").innerHTML = "Unlock";
 			}
 			handleLoggedIn(FileService, dom);
@@ -28,10 +30,10 @@ function loadFile(fileService, dom) {
 			handleError(dom, error);
 		});
 	} else {
-		fileService.getMyCommunities({
+		fileService.getMyFiles({
 			ps : 1
-		}).then(function(communities) {
-			var file = (!communities || communities.length == 0) ? null : communities[0];
+		}).then(function(files) {
+			var file = (!files || files.length == 0) ? null : files[0];
 			handleFileLoaded(file, dom);
 		}, function(error) {
 			handleError(dom, error);
@@ -39,7 +41,20 @@ function loadFile(fileService, dom) {
 	}
 }
 
-function lockFile(fileService, id, dom){
+/*function downloadFile(fileService, dom) {
+	if (currentFile) {
+		fileService.downloadFile(currentFile.getId(), currentFile.getLibraryId(), currentFile.getLabel(), {
+			load : function() {
+				displayMessage(dom, "Successfully Downloaded file: " + currentFile.getId());
+			},
+			error : function(error) {
+				handleError(dom, error);
+			}
+		});
+	}
+}*/
+
+function lockFile(fileService, id, dom) {
 	fileService.lockFile(id).then(function(status) {
 		dom.byId("lockUnlock").innerHTML = "Unlock";
 		displayMessage(dom, "Successfully Locked file: " + id);
@@ -49,7 +64,7 @@ function lockFile(fileService, id, dom){
 	});
 }
 
-function unlockFile(fileService, id, dom){
+function unlockFile(fileService, id, dom) {
 	fileService.unlockFile(id).then(function(status) {
 		dom.byId("lockUnlock").innerHTML = "Lock";
 		displayMessage(dom, "Successfully Unlocked file: " + id);
@@ -59,7 +74,7 @@ function unlockFile(fileService, id, dom){
 	});
 }
 
-function pinFile(fileService, id, dom){
+function pinFile(fileService, id, dom) {
 	fileService.pinFile(id).then(function(status) {
 		dom.byId("pinUnPin").innerHTML = "UnPin";
 		displayMessage(dom, "Successfully Pinned file: " + id);
@@ -69,8 +84,8 @@ function pinFile(fileService, id, dom){
 	});
 }
 
-function unPinFile(fileService, id, dom){
-	fileService.removePinFromFile(id).then(function(status) {
+function unPinFile(fileService, id, dom) {
+	fileService.unpinFile(id).then(function(status) {
 		dom.byId("pinUnPin").innerHTML = "Pin";
 		displayMessage(dom, "Successfully removed pin from file: " + id);
 		isPinned = false;
@@ -79,12 +94,12 @@ function unPinFile(fileService, id, dom){
 	});
 }
 
-function deleteFile(fileService, id, dom){
+function deleteFile(fileService, id, dom) {
 	fileService.deleteFile(id).then(function(status) {
 		dom.byId("fileId").value = "";
 		dom.byId("label").value = "";
 		dom.byId("summary").value = "";
-		dom.byId("visibility").value = "";		
+		dom.byId("visibility").value = "";
 		displayMessage(dom, "Deleted file: " + id);
 		currentFile = null;
 	}, function(error) {
@@ -142,49 +157,49 @@ function addOnClickHandlers(fileService, dom) {
 		loadFile(fileService, dom);
 	};
 
+	/*dom.byId("download").onclick = function(evt) {
+		if (currentFile) {
+			downloadFile(fileService, dom);
+		}
+	};*/
+
 	dom.byId("updateBtn").onclick = function(evt) {
-		var id = dom.byId("fileId");
 		if (currentFile) {
 			var label = dom.byId("label");
 			var summary = dom.byId("summary");
 			var visibility = dom.byId("visibility");
 			updateFile(fileService, currentFile, label.value, summary.value, visibility.value, dom);
 		}
-		;
 	};
-	
+
 	dom.byId("lockUnlock").onclick = function(evt) {
 		var id = dom.byId("fileId").value;
-		if (currentFile) {			
-			if(currentFile.getLock() == "HARD" || isLocked) {
+		if (currentFile) {
+			if (currentFile.getLock() == "HARD" || isLocked) {
 				unlockFile(fileService, id, dom);
-			}
-			else {
+			} else {
 				lockFile(fileService, id, dom);
-			}			
+			}
 		}
-		;
 	};
-	
+
 	dom.byId("pinUnPin").onclick = function(evt) {
 		var id = dom.byId("fileId").value;
-		if (currentFile) {			
-			if(isPinned) {
+		if (currentFile) {
+			if (isPinned) {
 				unPinFile(fileService, id, dom);
-			}
-			else {
+			} else {
 				pinFile(fileService, id, dom);
-			}			
+			}
 		}
-		;
 	};
-	
+
 	dom.byId("delete").onclick = function(evt) {
 		var id = dom.byId("fileId").value;
-		if (currentFile) {			
+		if (currentFile) {
 			deleteFile(fileService, id, dom);
 		}
-		;
+
 	};
 }
 

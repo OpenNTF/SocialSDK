@@ -1,27 +1,45 @@
-function upload() {
-	require([ 'sbt/connections/FileService', 'sbt/dom' ], function(FileService, dom) {
-		dom.byId("loading").style.visibility = "visible";
-		dom.setText('status', '');
-		var fileService = new FileService();
-		// "your-files" is the ID of the HTML5 File Control. Refer to Upload File.html
-		fileService.uploadFile("your-files", {
-			// additional paramertes to add file metadata			
-			parameters : {
-				visibility : "public"
-			},
-			load : function(file) {
-				displayMessage(dom, "File with ID " + file.getId() + " uploaded successfuly");
-				dom.byId("fileId").value = file.getId();
-				dom.byId("label").value = file.getLabel();
-				dom.byId("summary").value = file.getSummary();
-				dom.byId("visibility").value = file.getVisibility();				
-				dom.byId("loading").style.visibility = "hidden";
-			},
-			error : function(error) {
-				handleError(dom, error);
-				dom.byId("loading").style.visibility = "hidden";
-			}
-		});
+require([ "sbt/connections/FileService", "sbt/dom" ], function(FileService, dom) {
+	var fileService = new FileService();
+	// To make sure authentication happens before upload 
+	fileService.endpoint.authenticate().then(function() {
+		handleLoggedIn(fileService, dom);
+	});
+});
+
+function addOnClickHandlers(fileService, dom) {
+
+	dom.byId("uploadBtn").onclick = function(evt) {
+		uploadFile(fileService, dom);
+	};
+}
+
+function handleLoggedIn(fileService, dom) {
+	addOnClickHandlers(fileService, dom);
+}
+
+function uploadFile(fileService, dom) {
+
+	dom.byId("loading").style.visibility = "visible";
+	dom.setText('status', '');
+
+	// "your-files" is the ID of the HTML5 File Control. Refer to Upload File.html
+	fileService.uploadFile("your-files", {
+		// additional paramertes to add file metadata			
+		parameters : {
+			visibility : "public"
+		},
+		load : function(file) {
+			displayMessage(dom, "File with ID " + file.getId() + " uploaded successfuly");
+			dom.byId("fileId").value = file.getId();
+			dom.byId("label").value = file.getLabel();
+			dom.byId("summary").value = file.getSummary();
+			dom.byId("visibility").value = file.getVisibility();
+			dom.byId("loading").style.visibility = "hidden";
+		},
+		error : function(error) {
+			handleError(dom, error);
+			dom.byId("loading").style.visibility = "hidden";
+		}
 	});
 }
 

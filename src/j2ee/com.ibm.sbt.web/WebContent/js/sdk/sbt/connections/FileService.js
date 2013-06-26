@@ -541,7 +541,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 					url = this.service.constructUrl(url, null, {
 						"documentId" : fileUuid
 					});
-					return this.service.getEntity(url, options, fileUuid, callbacks, args);
+					return this.service.getEntity(url, options, fileUuid, callbacks);
 				},
 				/**
 				 * Save this file
@@ -693,9 +693,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 			 * @class FileService
 			 * @namespace sbt.connections
 			 */
-			var FileService = declare(BaseService, {
-
-				endpointName : null,
+			var FileService = declare(BaseService, {				
 
 				/**
 				 * Constructor for FileService
@@ -704,9 +702,9 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 				 * @param args
 				 */
 				constructor : function(args) {
-					this.endpointName = args ? (args.endpoint ? args.endpoint : this.getDefaultEndpointName()) : this.getDefaultEndpointName();
+					var endpointName = args ? (args.endpoint ? args.endpoint : this.getDefaultEndpointName()) : this.getDefaultEndpointName();
 					if (!this.endpoint) {						
-						this.endpoint = config.findEndpoint(this.endpointName);
+						this.endpoint = config.findEndpoint(endpointName);
 					}
 				},
 
@@ -780,7 +778,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 						query : args || {}
 					};
 
-					return this.getEntities(consts.AtomFilesMy, options, this.getFileFeedCallbacks(), args);
+					return this.getEntities(consts.AtomFilesMy, options, this.getFileFeedCallbacks());
 				},
 				/**
 				 * Get files shared with logged in user from IBM Connections
@@ -800,7 +798,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 						}, args ? args : {})
 					};
 
-					return this.getEntities(consts.AtomFilesShared, options, this.getFileFeedCallbacks(), args);
+					return this.getEntities(consts.AtomFilesShared, options, this.getFileFeedCallbacks());
 				},
 				/**
 				 * Get files shared by the logged in user from IBM Connections
@@ -820,7 +818,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 						}, args ? args : {})
 					};
 
-					return this.getEntities(consts.AtomFilesShared, options, this.getFileFeedCallbacks(), args);
+					return this.getEntities(consts.AtomFilesShared, options, this.getFileFeedCallbacks());
 				},
 				/**
 				 * Get public files from IBM Connections
@@ -837,7 +835,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 						query : args || {}
 					};
 
-					return this.getEntities(consts.AtomFilesPublic, options, this.getFileFeedCallbacks(), args);
+					return this.getEntities(consts.AtomFilesPublic, options, this.getFileFeedCallbacks());
 				},
 				/**
 				 * Get my folders from IBM Connections
@@ -853,7 +851,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 						query : args || {}
 					};
 
-					return this.getEntities(consts.AtomFoldersMy, options, this.getFileFeedCallbacks(), args);
+					return this.getEntities(consts.AtomFoldersMy, options, this.getFileFeedCallbacks());
 				},
 				/**
 				 * A feed of comments associated with files to which you have access. You must authenticate this request.
@@ -881,7 +879,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 						userid : userId,
 						documentId : fileId
 					});
-					return this.getEntities(url, options, this.getCommentFeedCallbacks(), args);
+					return this.getEntities(url, options, this.getCommentFeedCallbacks());
 				},
 				/**
 				 * A feed of comments associated with all public files. Do not authenticate this request.
@@ -906,11 +904,11 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 						query : args || {}
 					};
 
-					var url = this.constructUrl(consts.AtomAddCommentToFile, null, {
+					var url = this.constructUrl(consts.AtomFileCommentsPublic, null, {
 						userid : userId,
 						documentId : fileId
 					});
-					return this.getEntities(url, options, this.getCommentFeedCallbacks(), args);
+					return this.getEntities(url, options, this.getCommentFeedCallbacks());
 				},
 
 				/**
@@ -949,7 +947,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 							documentId : fileId
 						});
 					}
-					return this.updateEntity(url, options, this.getCommentFeedCallbacks(), args);
+					return this.updateEntity(url, options, this.getCommentFeedCallbacks());
 				},
 
 				/**
@@ -990,7 +988,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 					var url = this.constructUrl(consts.AtomUpdateFileMetadata, null, {
 						documentId : file.getId()
 					});
-					return this.updateEntity(url, options, this.getFileFeedCallbacks(), args);
+					return this.updateEntity(url, options, this.getFileFeedCallbacks());
 				},
 
 				/**
@@ -1021,7 +1019,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 						}
 					};
 
-					return this.updateEntity(consts.AtomPinFile, options, callbacks, args);
+					return this.updateEntity(consts.AtomPinFile, options, callbacks);
 
 				},
 
@@ -1047,7 +1045,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 						}
 					};
 
-					return this.deleteEntity(consts.AtomPinFile, options, fileId, args);
+					return this.deleteEntity(consts.AtomPinFile, options, fileId);
 
 				},
 
@@ -1091,7 +1089,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 						}
 					};
 
-					return this.updateEntity(url, options, callbacks, args);
+					return this.updateEntity(url, options, callbacks);
 
 				},
 
@@ -1108,7 +1106,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 						query : args || {}
 					};
 
-					return this.getEntities(consts.AtomFilesMyPinned, options, this.getFileFeedCallbacks(), args);
+					return this.getEntities(consts.AtomFilesMyPinned, options, this.getFileFeedCallbacks());
 				},
 
 				/**
@@ -1134,7 +1132,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 						documentId : fileId
 					});
 
-					return this.deleteEntity(url, options, fileId, args);
+					return this.deleteEntity(url, options, fileId);
 				},
 
 				/**
@@ -1204,23 +1202,26 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 				 * @param {Objecr} [args.fileControlId] The Id of html control
 				 * @param {Object} [args.fileControl] The html control
 				 * @param {Function} [args.load] The callback function will invoke when the file is uploaded successfully. The function expects one parameter, the status of upload.
-				 * @param {Function} [args.error] Sometimes the upload calls fails due to bad request (400 error). The error parameter is a callback function that is only invoked when an error occurs.
-				 * This allows to write logic when an error occurs. The parameter passed to the error function is a JavaScript Error object indicating what the failure was. From the error object. one
-				 * can access the javascript library error object, the status code and the error message.
-				 * @param {Function} [args.handle] This callback function is called regardless of whether the call to upload the file completes or fails. The parameter passed to this callback is the
-				 * FileEntry object (or error object). From the error object. one can get access to the javascript library error object, the status code and the error message.
+				 * @param {Function} [args.error] Sometimes the upload calls fails due to bad request (400 error). The error parameter is a callback function that is only invoked when an error occurs. This
+				 * allows to write logic when an error occurs. The parameter passed to the error function is a JavaScript Error object indicating what the failure was. From the error object. one can access
+				 * the javascript library error object, the status code and the error message.
+				 * @param {Function} [args.handle] This callback function is called regardless of whether the call to upload the file completes or fails. The parameter passed to this callback is the FileEntry
+				 * object (or error object). From the error object. one can get access to the javascript library error object, the status code and the error message.
 				 * @param {Object} [args.parameters] The additional parameters
 				 */
 				uploadFile : function(fileControlOrId, args) {
-					if(!fileControlOrId){
-						util.notifyError({message: "fileControlOrId is not provided"}, args);
+					if (!fileControlOrId) {
+						util.notifyError({
+							message : "fileControlOrId is not provided"
+						}, args);
 						return;
 					}
-					if (!window.FileReader)
-			        {
-						util.notifyError({message: "HTML 5 File Control is not supported by the Browser."}, args);
+					if (!window.FileReader) {
+						util.notifyError({
+							message : "HTML 5 File Control is not supported by the Browser."
+						}, args);
 						return;
-			        }			       
+					}
 					var files = null;
 					var filePath = null;
 					if (typeof fileControlOrId == "string") {
@@ -1240,50 +1241,73 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 
 					var reader = new FileReader();
 					var self = this;
+					var fileObject = files[0];
 					reader.onload = function(event) {
-						var binaryContent = event.target.result;
-
 						var index = filePath.lastIndexOf("\\");
 						if (index == -1) {
 							index = filePath.lastIndexOf("/");
 						}
 						var fileName = filePath.substring(index + 1);
-						self.uploadFileBinary(binaryContent, fileName, args);
+
+						var dashes = '--';
+						var boundary = 'sdkfileupload' + (new Date()); 
+						var crlf = "\r\n";
+
+						var filetype;
+
+						//Post with the correct MIME type (If the OS can identify one)
+						if (fileObject.type == '') {
+							filetype = 'application/octet-stream';
+						} else {
+							filetype = fileObject.type;
+						}						
+						var data = dashes + boundary + crlf + "Content-Disposition: form-data;" + "name=\"file\";" + "filename=\"" + unescape(encodeURIComponent(fileName)) + "\"" + crlf + "Content-Type: "
+								+ filetype + crlf + crlf + event.target.result.replace("data:" + filetype + ";base64,", "") + crlf + dashes + boundary + dashes;
+
+						self.uploadFileBinary(data, fileName, boundary, args);
+
 					};
 					reader.onerror = function(error) {
 						util.notifyError(error, args);
 					};
-					reader.readAsBinaryString(files[0]);
+					reader.readAsDataURL(fileObject);
 				},
 
 				/**
 				 * Uploads a new file for logged in user.
 				 * @method uploadFile
-				 * @param {Object} [binaryContent] The binary content of the file
+				 * @param {Object} binaryContent The binary content of the file
+				 * @param {String} filename The name of the file
+				 * @param {String} boundary The boundary of multipart form data
 				 * @param {Object} [args] Argument object
 				 * @param {Function} [args.load] The callback function will invoke when the file is uploaded successfully. The function expects one parameter, the status of upload.
-				 * @param {Function} [args.error] Sometimes the upload calls fails due to bad request (400 error). The error parameter is a callback function that is only invoked when an error occurs.
-				 * This allows to write logic when an error occurs. The parameter passed to the error function is a JavaScript Error object indicating what the failure was. From the error object. one
-				 * can access the javascript library error object, the status code and the error message.
-				 * @param {Function} [args.handle] This callback function is called regardless of whether the call to upload the file completes or fails. The parameter passed to this callback is the
-				 * FileEntry object (or error object). From the error object. one can get access to the javascript library error object, the status code and the error message.
+				 * @param {Function} [args.error] Sometimes the upload calls fails due to bad request (400 error). The error parameter is a callback function that is only invoked when an error occurs. This
+				 * allows to write logic when an error occurs. The parameter passed to the error function is a JavaScript Error object indicating what the failure was. From the error object. one can access
+				 * the javascript library error object, the status code and the error message.
+				 * @param {Function} [args.handle] This callback function is called regardless of whether the call to upload the file completes or fails. The parameter passed to this callback is the FileEntry
+				 * object (or error object). From the error object. one can get access to the javascript library error object, the status code and the error message.
 				 * @param {String} [args.fileName] The file name
 				 * @param {Object} [args.parameters] The additional parameters
 				 */
-				uploadFileBinary : function(binaryContent, fileName, args) {
+				uploadFileBinary : function(binaryContent, fileName, boundary, args) {
 
-					if(!binaryContent){
-						util.notifyError({message: "Binary Content is not provided"}, args);
+					if (!binaryContent) {
+						util.notifyError({
+							message : "Binary Content is not provided"
+						}, args);
 						return;
 					}
-					if(!fileName){
-						util.notifyError({message: "FileName is not provided"}, args);
+					if (!fileName) {
+						util.notifyError({
+							message : "FileName is not provided"
+						}, args);
 						return;
 					}
-					// /files/smartcloud/connections/fileName
-					url = this.constructUrl(cfg.Properties.serviceUrl + "/files/" + this.endpointName + "/" + "connections" + "/" + fileName, args && args.parameters ? args.parameters : {});
-					var headers = {};
-					headers["Slug"] = fileName;
+					// /files/<<endpointName>>/<<serviceType>>/fileName eg. /files/smartcloud/connections/fileName?args
+					url = this.constructUrl(config.Properties.serviceUrl + "/files/" + this.endpoint.proxyPath + "/" + "connections" + "/" + encodeURIComponent(fileName), args && args.parameters ? args.parameters : {});
+					var headers = {
+						"Content-Type" : "multipart/form-data;boundary=" + boundary
+					};
 					var self = this;
 					this.endpoint.xhrPost({
 						url : url,
@@ -1337,7 +1361,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 
 					payload += "</entry>";
 					return payload;
-				}
+				}				
 
 			});
 			return FileService;

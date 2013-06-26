@@ -49,7 +49,7 @@ public class FileHandler extends AbstractServiceHandler {
 	public void service(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
 
 		ProxyEndpointService proxyEndpointService = null;
-		// /files/<<endpointName>>/<<serviceType>>?param1=value1&parm2=value2
+		// /files/<<endpointName>>/<<serviceType>>/fileName?args
 		String pathinfo = request.getPathInfo().substring(request.getPathInfo().indexOf("/files")); 
 		String[] pathTokens = pathinfo.split("/");		
 		if (pathTokens.length > 4) {

@@ -136,7 +136,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @return {Number} Member count for the Community
          */
         getScore : function() {
-            return this.getAsNumber("score");
+            return this.getAsNumber("relevance");
         },
 
         /**
@@ -179,7 +179,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 service : service,
                 data : data,
                 namespaces : consts.Namespaces,
-                xpath : consts.ResultXPath
+                xpath : consts.SearchXPath
             });
             return new Result({
                 service : service,

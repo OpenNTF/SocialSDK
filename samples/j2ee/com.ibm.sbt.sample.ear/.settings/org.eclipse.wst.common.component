@@ -17,8 +17,8 @@
             <dependent-object>Module_1366299437786</dependent-object>
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="com.ibm.sbt.jquery180.war" deploy-path="/" handle="module:/resource/com.ibm.sbt.jquery180/com.ibm.sbt.jquery180">
-            <dependent-object>Module_1366299568328</dependent-object>
+        <dependent-module archiveName="com.ibm.sbt.jquery182.war" deploy-path="/" handle="module:/resource/com.ibm.sbt.jquery182/com.ibm.sbt.jquery182">
+            <dependent-object>Module_1371736485342</dependent-object>
             <dependency-type>uses</dependency-type>
         </dependent-module>
     </wb-module>

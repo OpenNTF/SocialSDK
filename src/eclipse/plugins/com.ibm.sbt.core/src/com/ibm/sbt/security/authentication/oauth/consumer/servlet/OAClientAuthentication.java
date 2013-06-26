@@ -72,17 +72,12 @@ public class OAClientAuthentication extends AbstractServiceHandler {
 		try {
 			// If the endpoint is not authenticated, then authenticate
 			// else redirect the main page
-			OAuthHandler handler = (OAuthHandler) Context.get().getSessionMap().get(Configuration.OAUTH_HANDLER);
+//			OAuthHandler handler = (OAuthHandler) Context.get().getSessionMap().get(Configuration.OAUTH1_HANDLER);
 			
-			if (ep.isAuthenticationValid()) {
-				if(handler != null) {
-					generateCloseScript(req, resp);
-				}
-				else {
-					ep.authenticate(true);
-				}
-			} else {
+			if (!ep.isAuthenticationValid()) {
 				ep.authenticate(true);
+			} else {
+				generateCloseScript(req, resp);
 			}
 		} catch (ClientServicesException ex) {
 			throw new ServletException(ex);

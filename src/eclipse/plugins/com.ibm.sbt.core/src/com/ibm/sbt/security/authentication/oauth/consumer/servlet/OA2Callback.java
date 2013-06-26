@@ -52,7 +52,7 @@ public class OA2Callback extends AbstractServiceHandler {
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
 	 	Context context = Context.get();
-		OAuth2Handler oAuthHandler = (OAuth2Handler)context.getSessionMap().get(Configuration.OAUTH_HANDLER);
+		OAuth2Handler oAuthHandler = (OAuth2Handler)context.getSessionMap().get(Configuration.OAUTH2_HANDLER);
 		if (oAuthHandler == null) {
 		    // this can happen if you access the application using a different hostname
 		    // to the one registered as the OAuth2.0 redirect URI

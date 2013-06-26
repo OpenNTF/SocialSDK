@@ -28,11 +28,11 @@
      <context-root>sbt.dojo180</context-root>
    </web>
  </module>
- <module id="Module_1366299568328">
-   <web>
-     <web-uri>com.ibm.sbt.jquery180.war</web-uri>
-     <context-root>sbt.jquery180</context-root>
-   </web>
+ <module id="Module_1371736485342">
+ 	<web>
+ 		<web-uri>com.ibm.sbt.jquery182.war</web-uri>
+ 		<context-root>sbt.jquery182</context-root>
+ 	</web>
  </module>
 
 

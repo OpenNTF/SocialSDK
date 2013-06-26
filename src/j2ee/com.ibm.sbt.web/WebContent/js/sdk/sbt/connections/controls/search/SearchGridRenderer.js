@@ -17,36 +17,37 @@
 /**
  * 
  */
-define(["sbt/declare",
-        "sbt/controls/grid/connections/ConnectionsGridRenderer",
-        "dojo/_base/lang", "dojo/string", "sbt/i18n",
-        "dojo/i18n!sbt/controls/grid/connections/search/nls/SearchGridRenderer",
-        "dojo/text!sbt/controls/grid/connections/search/templates/BookmarkBody.html",
-        "dojo/text!sbt/controls/grid/connections/search/templates/CalendarBody.html",
-        "dojo/text!sbt/controls/grid/connections/search/templates/CommunityBody.html",
-        "dojo/text!sbt/controls/grid/connections/search/templates/DefaultBody.html",
-        "dojo/text!sbt/controls/grid/connections/search/templates/DefaultHeader.html",
-        "dojo/text!sbt/controls/grid/connections/search/templates/DefaultSummary.html",
-        "dojo/text!sbt/controls/grid/connections/search/templates/ProfileBody.html",
-        "dojo/text!sbt/controls/grid/connections/search/templates/ProfileHeader.html",
-        "dojo/text!sbt/controls/grid/connections/search/templates/PersonCard.html",
-        "dojo/text!sbt/controls/grid/connections/search/templates/StatusUpdateExtraHeader.html",
-        "dojo/text!sbt/controls/grid/connections/search/templates/StatusUpdateHeader.html",
-        "dojo/text!sbt/controls/grid/connections/search/templates/a.html",
-        "dojo/text!sbt/controls/grid/connections/search/templates/tr.html",
-        "dojo/text!sbt/controls/grid/connections/search/templates/li.html",
-        "dojo/text!sbt/controls/grid/connections/search/templates/ul.html",
-        "dojo/text!sbt/controls/grid/connections/search/templates/span.html",
-        "dojo/text!sbt/controls/grid/connections/search/templates/img.html",
-        "dojo/text!sbt/controls/grid/connections/search/templates/em.html"],
-        function(declare, ConnectionsGridRenderer, lang, string, i18n, nls, bookmarkBodyTemplate, calendarBodyTemplate, communityBodyTemplate, defaultBodyTemplate, defaultHeaderTemplate, defaultSummaryTemplate, profileBodyTemplate, profileHeaderTemplate, personCardTemplate, statusUpdateExtraHeaderTemplate, statusUpdateHeaderTemplate, aElement, trElement, liElement, ulElement, spanElement, imgElement, emElement) {
+define(["../../../declare",
+        "../ConnectionsGridRenderer",
+        "../../../lang", "../../../stringUtil", "../../../i18n",
+        "../../../i18n!sbt/connections/controls/search/nls/SearchGridRenderer",
+        "../../../text!sbt/connections/controls/search/templates/BookmarkBody.html",
+        "../../../text!sbt/connections/controls/search/templates/CalendarBody.html",
+        "../../../text!sbt/connections/controls/search/templates/CommunityBody.html",
+        "../../../text!sbt/connections/controls/search/templates/DefaultBody.html",
+        "../../../text!sbt/connections/controls/search/templates/DefaultHeader.html",
+        "../../../text!sbt/connections/controls/search/templates/DefaultSummary.html",
+        "../../../text!sbt/connections/controls/search/templates/ProfileBody.html",
+        "../../../text!sbt/connections/controls/search/templates/ProfileHeader.html",
+        "../../../text!sbt/connections/controls/search/templates/PersonCard.html",
+        "../../../text!sbt/connections/controls/search/templates/StatusUpdateExtraHeader.html",
+        "../../../text!sbt/connections/controls/search/templates/StatusUpdateHeader.html",
+        "../../../text!sbt/connections/controls/search/templates/a.html",
+        "../../../text!sbt/connections/controls/search/templates/td.html",
+        "../../../text!sbt/connections/controls/search/templates/tr.html",
+        "../../../text!sbt/connections/controls/search/templates/li.html",
+        "../../../text!sbt/connections/controls/search/templates/ul.html",
+        "../../../text!sbt/connections/controls/search/templates/span.html",
+        "../../../text!sbt/connections/controls/search/templates/img.html",
+        "../../../text!sbt/connections/controls/search/templates/em.html"],
+        function(declare, ConnectionsGridRenderer, lang, stringUtil, i18n, nls, bookmarkBodyTemplate, calendarBodyTemplate, communityBodyTemplate, defaultBodyTemplate, defaultHeaderTemplate, defaultSummaryTemplate, profileBodyTemplate, profileHeaderTemplate, personCardTemplate, statusUpdateExtraHeaderTemplate, statusUpdateHeaderTemplate, aElement, tdElement, trElement, liElement, ulElement, spanElement, imgElement, emElement) {
 
     /**
      * @class SearchGridRenderer
      * @module sbt.controls.grid.connections.SearchGridRenderer
      * @namespace sbt.controls.grid.connections
      */
-    declare("sbt.controls.grid.connections.SearchGridRenderer", ConnectionsGridRenderer, {
+    var searchGridRenderer = declare(ConnectionsGridRenderer, {
 
         _nls: nls,
         
@@ -80,8 +81,10 @@ define(["sbt/declare",
             args.altAttr = args.altAttr ? 'alt="' + args.altAttr + '"' : "";
             args.srcAttr = args.srcAttr ? 'src="' + args.srcAttr + '"' : "";
             args.titleAttr = args.titleAttr ? 'title="' + args.titleAttr + '"' : "";
+            args.widthAttr = args.widthAttr ? 'width="' + args.widthAttr + '"' : "";
+            args.heightAttr = args.heightAttr ? 'height="' + args.heightAttr + '"' : "";
             
-            return string.substitute(html, args);
+            return stringUtil.transform(html, args);
         },
         
         resultTypes: {
@@ -108,7 +111,8 @@ define(["sbt/declare",
          * @returns An li containing a list of tags.
          */
         tagsList: function(grid, item, i, items){
-            var tagCount = item.tagCount;
+            var tagCount = item.getValue("tagCount");
+            tagCount = parseInt(tagCount);
             if(tagCount === 0)
                 return "";
             
@@ -118,7 +122,7 @@ define(["sbt/declare",
             var ulStyle = "display:inline";
             var ulContent = "";
             
-            var tags = item.tags;
+            var tags = item.getValue("tags");
             
             var i;
             for(i = 0; i < tagCount && i < 3; i++){
@@ -132,7 +136,7 @@ define(["sbt/declare",
                 var aOnClick = "onclick=\"searchObject.performTagFilter('" + tags[i] + "');\"";
                 var aAlt = currentTag;
                 
-                if(item.highlightField)
+                if(item.getValue("highlightField"))
                     var aClass = currentTag;
                 else 
                     aClass = undefined;
@@ -184,7 +188,8 @@ define(["sbt/declare",
          * @returns {String}
          */
         summaryIcon: function(grid, item, i, items){
-            var summaryImageClass = "lconn-ftype16 lconn-ftype16-" + item.fileExtension, summaryImageSrc = "", summaryImageAlt = "", summaryImageTitle = "", summaryImageRole = "";
+            var fileExtension = item.getValue("fileExtension");
+            var summaryImageClass = "lconn-ftype16 lconn-ftype16-" + fileExtension, summaryImageSrc = "", summaryImageAlt = "", summaryImageTitle = "", summaryImageRole = "";
             switch(this.resultType){
             case this.resultTypes.activities:
                 summaryImageClass = "lconnSprite lconnSprite-iconActivities16";
@@ -222,7 +227,7 @@ define(["sbt/declare",
                 summaryImageRole = "presentation";
                 break;    
             case this.resultTypes.files:
-                summaryImageClass = item.fileExtension ? summaryImageClass : "lconnSprite lconnSprite-iconFiles16";
+                summaryImageClass = fileExtension ? summaryImageClass : "lconnSprite lconnSprite-iconFiles16";
                 summaryImageSrc = "images/blank.gif";
                 summaryImageAlt = this._nls.files;
                 summaryImageTitle = this._nls.files;
@@ -250,13 +255,12 @@ define(["sbt/declare",
                 summaryImageRole = "presentation";
                 break;
             case this.resultTypes.wikis:
-                summaryImageClass = item.fileExtension.length !== 0 ? summaryImageClass : "lconnSprite lconnSprite-iconWikis16";
+                summaryImageClass = fileExtension.length !== 0 ? summaryImageClass : "lconnSprite lconnSprite-iconWikis16";
                 summaryImageSrc = "images/blank.gif";
                 summaryImageAlt = this._nls.wikis;
                 summaryImageTitle = this._nls.wikis;
                 summaryImageRole = "presentation";
                 break;
-                
             }
             return this.buildElement(imgElement, {
                 classAttr: summaryImageClass,
@@ -276,7 +280,8 @@ define(["sbt/declare",
          * @returns
          */
         resultSummary: function(grid, item, i, items){
-            if(item.summary.length!=0){
+            var summary = item.getValue("summary");
+            if(summary.length!==0){
                 var statusUpdateUl = "";
                 if(this.resultType === this.resultTypes.statusUpdates){
                     var statusUpdateLi = this.buildElement(liElement, {
@@ -290,10 +295,12 @@ define(["sbt/declare",
                         content: statusUpdateLi
                     });
                 }
-                    
+                summary = summary.replace(/&lt;b&gt;/g, "<b>"); // replace the encoded <b> tags...
+                summary = summary.replace(/&lt;\/b&gt;/g, "</b>");
+                
                 var summarySpan = this.buildElement(spanElement, {
                     classAttr: "lotusMeta lconnSearchHighlight",
-                    content: item.summary
+                    content: summary
                 });
                 
                 return statusUpdateUl + "\n" + summarySpan + "\n";
@@ -308,10 +315,10 @@ define(["sbt/declare",
         },
         
         resultComment: function(grid, item, i, items){
-            if(item.commentsSummary.length > 0 && this.resultType != this.resultTypes.statusUpdates){
+            if(item.getValue("commentsSummary").length > 0 && this.resultType != this.resultTypes.statusUpdates){
                 var divSpan = this.buildElement(spanElement, {
                     classAttr: "lotusMeta lconnSearchHighlight",
-                    content: this._nls.comment + item.commentSummary
+                    content: this._nls.comment + item.getValue("commentSummary")
                 });
                 return this.buildElement(divElement, {
                     styleAttr: "clear:both;",
@@ -322,11 +329,20 @@ define(["sbt/declare",
             }
         },
         
+        formattedTitle: function(grid, item, i, items){
+            var title = item.getValue("title");
+            if(title.length !== 0){
+                title = title.replace(/&lt;b&gt;/g, "<b>"); // replace the encoded <b> tags...
+                title = title.replace(/&lt;\/b&gt;/g, "</b>");
+            }
+            
+            return title;
+        },
+        
         parentageMeta: function(grid, item, i, items){
-            //TODO When search index is updated test that this works with all types of search result. May need to move the span tag into here instead of leaving it in the template. Last switch entry is possibly incorrect.
-            switch(item.parentageMetaURLID){
+            switch(item.getValue("parentageMetaURLID")){
             case 'blogURL':
-                var aHref = item.parentageMetaURL;
+                var aHref = item.getValue("parentageMetaURL");
                 var aContent = "";
                 if(this.componentcontains(item, "blogs:ideationblogs:idea"))
                     aContent = this._nls.fromAnIdeationBlog;
@@ -338,25 +354,25 @@ define(["sbt/declare",
                 }) + " > ";
             case 'forumURL':
                 return this.buildElement(aElement, {
-                    hrefAttr: "item.parentageMetaURL",
+                    hrefAttr: item.getValue("parentageMetaURL"),
                     content: this._nls.fromAForum
                 }) + " > ";
             case 'wikiURL':
                 return this.buildElement(aElement, {
-                    hrefAttr: "item.parentageMetaURL",
+                    hrefAttr: item.getValue("parentageMetaURL"),
                     content: this._nls.fromAWiki
                 }) + " > ";
             case 'activityURL':
-                if(item.primaryComponent.indexOf("activities") === 0 || item.primaryComponent.indexOf("communities:activities") === 0){
-                    if(item.primaryComponent === "activities:bookmark" || item.primaryComponent === "communities:activities:bookmark" || this.componentContains("activities:section") || this.componentContains("activities:task") || this.componentContains("activities:entry")){
+                if(item.getValue("primaryComponent").indexOf("activities") === 0 || item.getValue("primaryComponent").indexOf("communities:activities") === 0){
+                    if(item.getValue("primaryComponent") === "activities:bookmark" || item.getValue("primaryComponent") === "communities:activities:bookmark" || this.componentContains("activities:section") || this.componentContains("activities:task") || this.componentContains("activities:entry")){
                         return this.buildElement(aElement, {
-                            hrefAttr: "item.parentageMetaURL",
+                            hrefAttr: item.getValue("parentageMetaURL"),
                             content: this._nls.fromAnActivity
                         }) + " > ";
                     }
-                    if(item.parentageMetaID === "activityEntryURL" || item.primaryComponent === "activities:bookmark"){
+                    if(item.getValue("parentageMetaID") === "activityEntryURL" || item.getValue("primaryComponent") === "activities:bookmark"){
                         return this.buildElement(aElement, {
-                            hrefAttr: "item.parentageMetaURL",
+                            hrefAttr: item.getValue("parentageMetaURL"),
                             content: this._nls.entry
                         }) + " > ";
                     }
@@ -367,9 +383,9 @@ define(["sbt/declare",
         },
         
         communityParent: function(grid, item, i, items){
-            if(item.communityUuid.length!=0 && item.containerType != "stand-alone" && item.primaryComponent != "communities:entry" && item.primaryComponent.indexOf("communities") === 0){
+            if(item.getValue("communityUuid").length!=0 && item.getValue("containerType") != "stand-alone" && item.getValue("primaryComponent") != "communities:entry" && item.getValue("primaryComponent").indexOf("communities") === 0){
                 return this.buildElement(aElement, {
-                    hrefAttr: item.communityParentLink,
+                    hrefAttr: item.getValue("communityParentLink"),
                     content: this._nls.fromACommunity
                 }) + " > ";
             }
@@ -478,7 +494,7 @@ define(["sbt/declare",
                     content: spanContent
                  });
             case resultTypes.statusUpdates:
-                spanContent = this._nls.statusUpdate;
+                spanContent = this._nls.fromAStatusUpdate;
                 return this.buildElement(spanElement, {
                     classAttr: "lotusMeta",
                     content: spanContent
@@ -505,11 +521,11 @@ define(["sbt/declare",
          * @param appString
          */
         componentContains: function(item, appString){
-            if(item.primaryComponent === appString)
+            if(item.getValue("primaryComponent") === appString)
                 return true;
             
-            for(var key in item.application){
-                var app = item.application[key];
+            for(var key in item.getValue("application")){
+                var app = item.getValue("application")[key];
                 if(app === appString){
                     return true;
                 }
@@ -526,7 +542,7 @@ define(["sbt/declare",
                     roleAttr: "listitem"
                 });
             }
-            var liMembersContent = item.memberCount + " " + this._nls.members;
+            var liMembersContent = item.getValue("memberCount") + " " + this._nls.members;
             
             var liMembers = this.buildElement(liElement, {
                 content: liMembersContent,
@@ -545,32 +561,35 @@ define(["sbt/declare",
         bodyCalendarLis: function(grid, item, i, items){
             var allDayEventLi = "", repeatingEventLi = "", locationLi = "";
             
-            if(item.allDayEvent ==="true")
+            if(item.getValue("allDayEvent") ==="true")
                 allDayEventLi = this.buildElement(liElement,{
                     roleAttr: "listitem",
                     content: this._nls.eventIsAllDay
                 });
             
-            if(item.repeatingEvent ==="true")
+            if(item.getValue("repeatingEvent") ==="true")
                 allDayEventLi = this.buildElement(liElement,{
                     roleAttr: "listitem",
                     content: this._nls.eventRepeats
                 });
             
-            if(item.location.length > 1)
+            if(item.getValue("location.length") > 1)
                 allDayEventLi = this.buildElement(liElement,{
                     roleAttr: "listitem",
-                    content: item.location
+                    content: item.getValue("location")
                 });
             
             return allDayEventLi + "\n" + repeatingEventLi + "\n" + locationLi + "\n";
         },
         
         bodyBookmarkLiContent : function(grid, item, i, items){
-            if(item.bookmarkLink.length > 0 && (item.contributorCount + item.authorcount) > 1){
+            var contributorCount = parseInt(item.getValue("contributorCount"));
+            var authorCount = parseInt(item.getValue("authorcount"));
+            
+            if(item.getValue("bookmarkLink").length > 0 && (contributorCount + authorCount) > 1){
                 var spanA = this.buildElement(aElement, {
-                    hrefAttr: item.bookmarkLink,
-                    content: (item.contributorCount + item.authorCount) + this._nls.people
+                    hrefAttr: item.getValue("bookmarkLink"),
+                    content: contributorCount + authorCount + this._nls.people
                 });
                 return this.buildElement(spanElement, {
                     content: spanA
@@ -591,7 +610,7 @@ define(["sbt/declare",
          * @returns {String}
          */
         cardClass: function(grid, item, i, items){
-            if(item.authorState != 'active')
+            if(item.getValue("authorState") != 'active')
                 return "lotusPersonInactive";
             else
                 return "vcard";
@@ -607,9 +626,9 @@ define(["sbt/declare",
          * @returns
          */
         profileBodyJobTitle: function(grid, item, i, items){
-            if(item.authorJobTitle && item.authorJobTitle.length != 0)
+            if(item.getValue("authorJobTitle") && item.getValue("authorJobTitle").length != 0)
                 return this.buildElement(liElement, {
-                    content: item.authorJobTitle+"&nbsp;",
+                    content: item.getValue("authorJobTitle")+"&nbsp;",
                     classAttr: "lotusFirst",
                     roleAttr: "listitem"
                 });
@@ -623,7 +642,7 @@ define(["sbt/declare",
          * @returns {String}
          */
         bodyPersonCardLi: function(grid, item, i, items){
-            if(item.authorName.length != 0){
+            if(item.getValue("authorName").length != 0){
                 return this.buildElement(liElement, {
                     content: this._substituteItem(personCardTemplate, grid, item, i, items),
                     roleAttr: "listitem",
@@ -636,7 +655,7 @@ define(["sbt/declare",
         
         bodyUpdatedLi: function(grid, item, i, items){
             var liClass = "searchDateClass";
-            if(item.authorName.length==0)
+            if(item.getValue("authorName").length==0)
                 liClass+= " lotusFirst";
             return this.buildElement(liElement, {
                 classAttr: liClass,
@@ -645,8 +664,9 @@ define(["sbt/declare",
         },
         
         bodyCommentCountLi: function(grid, item, i, items){
-            if(item.commentCount >= 1){
-                var liContent = item.commentCount === 1 ? this._nls.oneComment : item.commentCount + this._nls.comments;
+            var commentcount = parseInt(item.getValue("commentCount"));
+            if(commentcount >= 1){
+                var liContent = commentcount === 1 ? this._nls.oneComment : commentcount + " " + this._nls.comments;
                 return this.buildElement(liElement, {
                     classAttr: "comments",
                     roleAttr: "listitem",
@@ -656,10 +676,10 @@ define(["sbt/declare",
         },
         
         objectReferenceLi: function(grid, item, i, items){
-            if(item.objectRefDisplayName.length != 0 && item.objectRefUrl.length != 0){
-                var liContent = this.buildelement(aElement, {
-                    hrefAttr: item.objectRefUrl,
-                    content: item.objectRefDisplayName
+            if(item.getValue("objectRefDisplayName").length != 0 && item.getValue("objectRefUrl").length != 0){
+                var liContent = this.buildElement(aElement, {
+                    hrefAttr: item.getValue("objectRefUrl"),
+                    content: item.getValue("objectRefDisplayName")
                 });
                 
                 return this.buildElement(liElement, {
@@ -670,7 +690,8 @@ define(["sbt/declare",
         },
         
         bodyBookmarkLi: function(grid, item, i, items){
-            if(((this.application=='dogear' && item.applicationCount > 1) || (this.application=='activities:bookmark' && item.applicationCount > 2) || (this.application=='communities:bookmark' && item.applicationCount > 2) ) && item.accessControl=='public'){
+            var applicationCount = parseInt(item.getValue("applicationCount"));
+            if(((this.application=='dogear' && applicationCount > 1) || (this.application=='activities:bookmark' && applicationCount > 2) || (this.application=='communities:bookmark' && applicationCount > 2) ) && item.getValue("accessControl")=='public'){
                 var aImg = this.buildElement(imgElement, {
                     classAttr: "lconnSprite lconnSprite-iconHelp16",
                     srcAttr: "images/blank.gif",
@@ -781,7 +802,7 @@ define(["sbt/declare",
         },
         
         summaryClass: function(grid, item, i, items){
-            if(item.authorState === "inactive")
+            if(item.getValue("authorState") === "inactive")
                 return "lotusDim";
             else
                 return "lconnSearchComponentCategory";
@@ -789,19 +810,19 @@ define(["sbt/declare",
         
 
         summaryStyle: function(grid, item, i, items){
-            if(item.authorState === "inactive")
+            if(item.getValue("authorState") === "inactive")
                 return "filter: alpha(opacity = 50)";
             else
                 return "";
         },
         
         getApplication: function(item){
-            if(typeof item.application === "string"){
-                return item.application;
+            if(typeof item.getValue("application") === "string"){
+                return item.getValue("application");
             }
             else{
-                for(var key in item.application){
-                    var app = item.application[key];
+                for(var key in item.getValue("application")){
+                    var app = item.getValue("application")[key];
                     if(app.indexOf(":") ===-1){
                         return app;
                     }
@@ -810,7 +831,7 @@ define(["sbt/declare",
         },
         
         getResultType: function(item){
-            var primaryComponent = item.primaryComponent;
+            var primaryComponent = item.getValue("primaryComponent");
             var resultTypes = this.resultTypes;
             
             this.application = this.getApplication(item);
@@ -853,7 +874,6 @@ define(["sbt/declare",
         
         getRowContent: function(resultType){
             var resultTypes = this.resultTypes;
-            //TODO Update search index and test all of these work!!!!
             switch(resultType){
             case resultTypes.activities:
                 return defaultHeaderTemplate + defaultBodyTemplate + defaultSummaryTemplate;
@@ -872,7 +892,7 @@ define(["sbt/declare",
             case resultTypes.profiles:
                 return profileHeaderTemplate + profileBodyTemplate + defaultSummaryTemplate;
             case resultTypes.statusUpdates: 
-                return statusUpdateExtraHeaderTemplate + statusUpdateHeaderTemplate + defaultBodyTemplate + statusUpdateSummaryTemplate;
+                return statusUpdateHeaderTemplate + defaultBodyTemplate + defaultSummaryTemplate;
             case resultTypes.wikis: 
                 return defaultHeaderTemplate + defaultBodyTemplate + defaultSummaryTemplate;
             default: return defaultHeaderTemplate + defaultBodyTemplate + defaultSummaryTemplate;
@@ -886,22 +906,35 @@ define(["sbt/declare",
          * @returns
          */
         getTemplate: function(item, i){
-            //var content = profileHeaderTemplate + profileBodyTemplate + defaultSummaryTemplate;
             this.resultType = this.getResultType(item);
-            var content = this.getRowContent(this.resultType);
-            
+            var tdContent = this.getRowContent(this.resultType);
             
             // Build tr, adding attributes and content.
             var trClass = undefined;
             if(i===0)
                 trClass = "lotusFirst";
-            var trColspan = undefined;
+            var tdColspan = undefined;
             if(true)
-                trColspan = "2";
+                tdColspan = "2";
+            var trContent = this.buildElement(tdElement, {
+                content: tdContent,
+                colspanAttr: tdColspan
+            });
+            
+            if(this.resultType === this.resultTypes.statusUpdates){
+                var statusUpdateExtraHeader = this.buildElement(tdElement, {
+                    content: statusUpdateExtraHeaderTemplate,
+                    widthAttr: "65",
+                    heightAttr: "55",
+                    classAttr: "lotusFirstCell"
+                });
+
+                trContent = statusUpdateExtraHeader + trContent;
+            }
+            
             return this.buildElement(trElement, {
-                content: content,
+                content: trContent,
                 classAttr: trClass,
-                colspanAttr: trColspan
             });
         },
         
@@ -923,7 +956,7 @@ define(["sbt/declare",
             
         },
         
-        emptyClass: "lconnEmpty",
+        emptyClass: "lconnEmpty lotusui",
         
         //TODO Handle empty grid. Should override renderEmpty?
         
@@ -933,7 +966,32 @@ define(["sbt/declare",
             this.inherited(arguments);
         },
         
+        /**
+         * Creates a Div, with a different CSS class, to display a grid that has no results
+         * @method - renderEmpty
+         * @param - grid - The Grid
+         * @param - el - The Current Element
+         */
+        renderEmpty: function(grid, el) {
+           while (el.childNodes[0]) {
+               this._destroy(el.childNodes[0]);
+           }
+           var lotusUiDiv = this._create("div", { // here purely so a parent of the empty div has the lotusui class...
+             "class": "lotusui lconnSearchResults",
+             innerHTML: ""
+           }, el);
+           var lotusEmptyDiv = this._create("div", {
+               "class": this.emptyClass,
+               innerHTML: "",
+               "aria-relevant": "all",
+               "aria-live": "assertive"
+             }, lotusUiDiv);
+           this._create("span", {
+               innerHTML: this._nls.empty,
+             }, lotusEmptyDiv);
+        },
+        
         tableClass: "lotusTable lconnSearchResults"
     });    
-    return sbt.controls.grid.connections.SearchGridRenderer;
+    return searchGridRenderer;
 });

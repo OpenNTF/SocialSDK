@@ -89,6 +89,7 @@ define(["../declare","../config", "../lang", "../base/core", "../xml", "../xpath
          * Returns defaultValue if and only if *item* does not have a value for *attribute*.
          */
         getValue: function(item, attribute, defaultValue) {
+            var xpathCountFunction = /^count\(.*\)$/;
             this._assertIsItem(item);
             this._assertIsAttribute(attribute);
             
@@ -96,6 +97,8 @@ define(["../declare","../config", "../lang", "../base/core", "../xml", "../xpath
                 var access = this.attributes[attribute];
                 if (lang.isFunction(access)) {
                     item._attribs[attribute] = access(item, attribute);
+                }else if (access.match(xpathCountFunction)){
+                    item._attribs[attribute] = xpath.selectNumber(item.element, this.attributes[attribute], this.namespaces)+"";
                 } else {
                     var nodes = xpath.selectNodes(item.element, this.attributes[attribute], this.namespaces);
                     if (nodes && nodes.length == 1) {

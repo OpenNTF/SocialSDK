@@ -50,7 +50,8 @@ public class Configuration {
 	public static final String	OAUTH_ERROR					= "oauth_error";
 	public static final String	OAUTH_DENIED				= "oauth_denied";
 
-	public static final String	OAUTH_HANDLER				= "OAuthHandlerObject";
+	public static final String	OAUTH1_HANDLER				= "OAuth1HandlerObject";
+	public static final String	OAUTH2_HANDLER				= "OAuth2HandlerObject";
 	public static final String	API_REQUEST					= "ApiRequestObject";
 	public static final String	API_REQUEST_REDO			= "showPageWithApiResults";
 

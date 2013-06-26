@@ -53,12 +53,14 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 	private String						expiresIn;
 	private String						authorizationExpiresIn;
 	private String						oauth_session_handle;
+	private OAProvider					provider;
 
 	// for logging
 	private static final String			sourceClass		= OAuth1Handler.class.getName();
 	private static final Logger			logger			= Logger.getLogger(sourceClass);
 
-	public OAuth1Handler() {
+	public OAuth1Handler(OAProvider provider) {
+		this.provider = provider;
 	}
 
 	public String getExpiresIn() {
@@ -380,8 +382,7 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 	}
 
 	public OAProvider getOAProvider() {
-		Context context = Context.get();
-		return (OAProvider) context.getSessionMap().get("oaProvider");
+		return provider;
 	}
 
 	@Override

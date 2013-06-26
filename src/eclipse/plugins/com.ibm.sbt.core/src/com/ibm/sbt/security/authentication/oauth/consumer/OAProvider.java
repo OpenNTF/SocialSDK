@@ -459,7 +459,6 @@ public class OAProvider implements Serializable {
 			}
 		}
 		Context context = Context.get();
-//		OAuth1Handler oAuthHandler = (OAuth1Handler) context.getSessionMap().get(Configuration.OAUTH1_HANDLER);
 		try {
 			((OAuth1Handler) getOauthHandler()).getAccessTokenFromServer();
 

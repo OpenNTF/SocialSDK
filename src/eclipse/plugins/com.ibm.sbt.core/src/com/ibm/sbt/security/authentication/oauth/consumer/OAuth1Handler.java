@@ -382,8 +382,6 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 	}
 
 	public OAProvider getOAProvider() {
-		/*Context context = Context.get();
-		return (OAProvider) context.getSessionMap().get("oaProvider");*/
 		return provider;
 	}
 

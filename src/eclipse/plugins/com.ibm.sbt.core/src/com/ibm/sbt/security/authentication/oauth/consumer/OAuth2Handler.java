@@ -743,7 +743,7 @@ public class OAuth2Handler extends OAuthHandler {
 	 *  3. OA2Callback would try to fetch the access and refresh tokens.
 	 *  4. Interceptor from endpoint then takes care of inserting the required security headers 
 	 */
-	public void performOAuth2Dance(){
+	public synchronized void performOAuth2Dance(){
 		
 		setApplicationPage();
 		Context context = Context.get();
@@ -758,7 +758,7 @@ public class OAuth2Handler extends OAuthHandler {
 		setUserid(Context.get().getCurrentUserId());
 		
 		// Store the Oauth handler in session object
-		context.getSessionMap().put(Configuration.OAUTH_HANDLER, this);
+		context.getSessionMap().put(Configuration.OAUTH2_HANDLER, this);
 		
 		Object resp = Context.get().getHttpResponse();
 		try {

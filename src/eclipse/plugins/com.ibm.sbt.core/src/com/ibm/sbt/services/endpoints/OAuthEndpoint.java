@@ -233,9 +233,9 @@ public class OAuthEndpoint extends AbstractEndpoint {
 	public void initialize(DefaultHttpClient httpClient) throws ClientServicesException {
 		try {
 			AccessToken token = oaProvider.acquireToken(false);
-			OAuthHandler oaHandler = (OAuthHandler) Context.get().getSessionMap().get(Configuration.OAUTH_HANDLER);
+			OAuthHandler oaHandler = oaProvider.getOauthHandler();
 			if ((token != null) && (oaHandler != null)) {
-				HttpRequestInterceptor oauthInterceptor = new OAuthInterceptor(token, super.getUrl());
+				HttpRequestInterceptor oauthInterceptor = new OAuthInterceptor(token, super.getUrl(),oaHandler);
 				httpClient.addRequestInterceptor(oauthInterceptor, 0);
 			}
 		} catch (OAuthException ex) {
@@ -247,18 +247,17 @@ public class OAuthEndpoint extends AbstractEndpoint {
 
 		private final AccessToken token;
 		private final String baseUrl;
+		private final OAuthHandler oaHandler;
 
-		public OAuthInterceptor(AccessToken token, String baseUrl) {
+		public OAuthInterceptor(AccessToken token, String baseUrl, OAuthHandler oaHandler) {
 			this.token = token;
 			this.baseUrl = baseUrl;
+			this.oaHandler = oaHandler;
 		}
 
 		@Override
 		public void process(HttpRequest request, HttpContext context) throws HttpException, IOException {
 
-			Context contextForHandler = Context.get();
-			OAuthHandler oaHandler = (OAuthHandler) contextForHandler.getSessionMap().get(Configuration.OAUTH_HANDLER);
-			contextForHandler.getSessionMap().get("oaProvider");
 			String authorizationheader = null;
 			if (oaHandler != null) {
 				if (oaHandler.getClass().equals(HMACOAuth1Handler.class)) {

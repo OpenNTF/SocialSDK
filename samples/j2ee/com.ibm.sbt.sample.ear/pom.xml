@@ -41,8 +41,8 @@
             </webModule>
             <webModule>
               <groupId>com.ibm.sbt.sdk</groupId>
-              <artifactId>sbt.jquery180</artifactId>
-              <contextRoot>/sbt.jquery180</contextRoot>
+              <artifactId>sbt.jquery182</artifactId>
+              <contextRoot>/sbt.jquery182</contextRoot>
             </webModule>
           </modules>
           <generateApplicationXml>true</generateApplicationXml>
@@ -78,7 +78,7 @@
     </dependency>
     <dependency>
       <groupId>com.ibm.sbt.sdk</groupId>
-      <artifactId>sbt.jquery180</artifactId>
+      <artifactId>sbt.jquery182</artifactId>
       <version>1.0.0</version>
       <type>war</type>
     </dependency>

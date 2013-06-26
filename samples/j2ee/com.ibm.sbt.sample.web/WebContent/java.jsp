@@ -58,7 +58,6 @@
     </div>
 
     <script src="/sbt.jquery182/js/jquery-1.8.2.min.js"></script>
-    <!-- <script src="/sbtx.jqueryui1823/js/jquery-ui-1.8.23.custom.min.js"></script> -->
     <script src="js/java_jquery/jqueryNavbar.js"></script>
     <script src="js/java_jquery/jqueryAjax.js"></script>
   </body>

@@ -101,7 +101,7 @@ public class OAProvider implements Serializable {
 	public String applicationAccessToken;
 
 	
-	public OAuthHandler oauthHandler = new OAuth1Handler();
+	public OAuthHandler oauthHandler = new OAuth1Handler(this);
 
 	public OAProvider() {
 		this.expireThreshold = EXPIRE_THRESHOLD;
@@ -188,7 +188,7 @@ public class OAProvider implements Serializable {
 
 		// If HMAC is used, change the handler
 		if (StringUtil.equalsIgnoreCase(Configuration.HMAC_SIGNATURE, signatureMethod)) {
-			this.setOauthHandler(new HMACOAuth1Handler());
+			this.setOauthHandler(new HMACOAuth1Handler(this));
 		}
 	}
 
@@ -374,7 +374,7 @@ public class OAProvider implements Serializable {
 		String initialPage = getApplicationPage(context);
 
 		// Store the Oauth handler in session object
-		context.getSessionMap().put(Configuration.OAUTH_HANDLER, oauthHandler);
+		context.getSessionMap().put(Configuration.OAUTH1_HANDLER, oauthHandler);
 		context.getSessionMap().put("oaProvider", this);
 		return new OADance(this, getAppId(), getServiceName(), userId, callback, initialPage);
 	}
@@ -459,11 +459,10 @@ public class OAProvider implements Serializable {
 			}
 		}
 		Context context = Context.get();
-		OAuth1Handler oAuthHandler = (OAuth1Handler) context.getSessionMap().get(Configuration.OAUTH_HANDLER);
 		try {
-			oAuthHandler.getAccessTokenFromServer();
+			((OAuth1Handler) getOauthHandler()).getAccessTokenFromServer();
 
-			token = createToken(getAppId(), getServiceName(), oAuthHandler, token.getUserId());
+			token = createToken(getAppId(), getServiceName(), (OAuth1Handler) getOauthHandler(), token.getUserId());
 			if (!Context.get().isCurrentUserAnonymous()) {
 				CredentialStore credStore = findCredentialStore();
 				if (credStore != null) {

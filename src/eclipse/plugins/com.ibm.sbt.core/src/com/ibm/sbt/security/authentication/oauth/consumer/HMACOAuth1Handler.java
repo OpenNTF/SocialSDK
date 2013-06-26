@@ -44,6 +44,9 @@ import com.ibm.sbt.services.util.SSLUtil;
 
 public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 
+	public HMACOAuth1Handler(OAProvider provider) {
+		super(provider);
+	}
 	private static final long	serialVersionUID	= 1L;
 
 	/*

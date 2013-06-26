@@ -76,7 +76,7 @@ public class OADance implements Serializable {
 		this.applicationPage = applicationPage;
 		this.callback = callback;
 		this.signatureMethod = service.getSignatureMethod();
-		this.oauthHandler = (OAuth1Handler) service.getOauthHandler();//(OAuth1Handler) Context.get().getSessionMap().get(Configuration.OAUTH1_HANDLER);
+		this.oauthHandler = (OAuth1Handler) service.getOauthHandler();
 		this.oaProvider = service;
 	}
 

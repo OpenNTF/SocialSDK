@@ -103,13 +103,12 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 					}
 					for (FileItem uploadedFile : fileItems) {						
 						InputStream uploadedFileContent = uploadedFile.getInputStream();
-						File file = convertInputStreamToFile(uploadedFileContent, uploadedFile.getSize());
-						@SuppressWarnings("unchecked")
+						File file = convertInputStreamToFile(uploadedFileContent, uploadedFile.getSize());						
 						Map<String, String[]> params = request.getParameterMap() != null ? request.getParameterMap() : new HashMap<String, String[]>();						
 						Content content = getFileContent(file, length, fileNameOrId);
 						Map<String, String> headers = createHeaders();
 						
-						xhr(request, response, url.getPath(), params, headers, content, ClientService.FORMAT_XML);
+						xhr(request, response, url.getPath(), params, headers, content, getFormat());
 					}
 				} else if (smethod.equalsIgnoreCase("GET")) {
 					xhr(request, response, requestURI, new HashMap<String, String[]>(), new HashMap<String, String>(), null, ClientService.FORMAT_INPUTSTREAM);
@@ -132,13 +131,16 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 		}
 	}
 
+	protected abstract Handler getFormat();
+
 	private File convertInputStreamToFile(InputStream inputStream, Long size) throws IOException {
 		
 		OutputStream out = null;
 		try {
 			File file = new File(fileNameOrId); // TODO check with Phil to avoid conflict in name
 			out = new FileOutputStream(file);
-			byte[] bytes = new byte[size.intValue()]; 
+			int bufferSize = size.intValue() < 8192 ? size.intValue() : 8192;
+			byte[] bytes = new byte[bufferSize]; 
 			int read = 0;
 			while ((read = inputStream.read(bytes)) != -1) {
 				length += read;

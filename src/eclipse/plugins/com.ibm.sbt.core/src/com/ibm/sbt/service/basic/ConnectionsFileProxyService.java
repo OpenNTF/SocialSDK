@@ -7,8 +7,10 @@ import java.util.Map;
 import javax.servlet.ServletException;
 
 import com.ibm.commons.util.StringUtil;
+import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientService.Content;
 import com.ibm.sbt.services.client.ClientService.ContentFile;
+import com.ibm.sbt.services.client.ClientService.Handler;
 
 /**
  * 
@@ -47,6 +49,11 @@ public class ConnectionsFileProxyService extends AbstractFileProxyService {
 		Map<String, String> headers = new HashMap<String, String>();
 		headers.put("Slug", fileNameOrId);
 		return headers;
+	}
+
+	@Override
+	protected Handler getFormat() {		
+		return ClientService.FORMAT_XML;
 	}
 
 }

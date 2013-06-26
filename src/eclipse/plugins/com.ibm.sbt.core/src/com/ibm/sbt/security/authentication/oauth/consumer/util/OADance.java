@@ -76,8 +76,7 @@ public class OADance implements Serializable {
 		this.applicationPage = applicationPage;
 		this.callback = callback;
 		this.signatureMethod = service.getSignatureMethod();
-		this.oauthHandler = (OAuth1Handler) Context.get().getSessionMap()
-				.get(Configuration.OAUTH_HANDLER);
+		this.oauthHandler = (OAuth1Handler) service.getOauthHandler();//(OAuth1Handler) Context.get().getSessionMap().get(Configuration.OAUTH1_HANDLER);
 		this.oaProvider = service;
 	}
 
@@ -116,7 +115,7 @@ public class OADance implements Serializable {
 	 * Request a temporary token for the application and redirect to a callback
 	 * page.
 	 */
-	public void perform3LegsDance(Context context) throws OAuthException {
+	public synchronized void perform3LegsDance(Context context) throws OAuthException {
 		if (Profiler.isEnabled()) {
 			ProfilerAggregator agg = Profiler.startProfileBlock(
 					profilerReadTempToken, "");

@@ -491,11 +491,13 @@ var Endpoint = declare(null, {
             proxyPath: this.proxyPath,
             loginUi: options.loginUi || this.loginUi,
             callback: function() {
-                self.request(url, options).then(
+                self.request(url, options).response.then(
                     function(response) {
-                        promise.fulfilled(response);
+                        promise.fulfilled(response.data);
+                        promise.response.fulfilled(response);
                     }, function(error) {
                         promise.rejected(error);
+                        promise.response.rejected(error);
                     }
                 );
             },
@@ -505,6 +507,7 @@ var Endpoint = declare(null, {
                 error.message = "Authentication is required and has failed or has not yet been provided.";
                 error.code = 401;
                 promise.rejected(error);
+                promise.response.rejected(error);
             }
         };
         

@@ -274,11 +274,17 @@ public class BasicEndpoint extends AbstractEndpoint {
         Context context = Context.get();
 
         String nextPage = (String)context.getSessionMap().get(REDIRECT_PAGE_KEY);
+        if(StringUtil.isEmpty(nextPage))
+        	nextPage=((HttpServletRequest)context.getHttpRequest()).getParameter("redirectURL");
         if(StringUtil.isNotEmpty(nextPage)) {
         	// TODO
 //            context.getExternalContext().getSessionMap().remove(REDIRECT_PAGE_KEY);
 //            XSPContext ctx = XSPContext.getXSPContext(FacesContext.getCurrentInstance());
-//            ctx.redirectToPage(nextPage, true);
+           try {
+			context.sendRedirect(nextPage);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
         }
     }
     

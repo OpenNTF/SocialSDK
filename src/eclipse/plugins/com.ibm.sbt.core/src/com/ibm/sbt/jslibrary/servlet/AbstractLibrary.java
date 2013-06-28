@@ -83,6 +83,7 @@ abstract public class AbstractLibrary {
 	public static final String		PROP_AUTO_AUTHENTICATE			= "autoAuthenticate";
 	public static final String		IS_AUTHENTICATED				= "isAuthenticated";
 	public static final String		PROP_AUTHENTICATION_ERROR_CODE	= "authenticationErrorCode";
+	public static final String		PROP_ENDPOINT_ALIAS	            = "name";
 
 	public static final String		PROP_MODULE_PREFIX				= "_module";
 	public static final String		PROP_MODULE_AUTHENTICATOR		= "_moduleAuthenticator";
@@ -326,7 +327,7 @@ abstract public class AbstractLibrary {
 			if (StringUtil.isNotEmpty(apiVersion)) {
 				jsonEndpoint.putJsonProperty(PROP_API_VERSION, apiVersion);
 			}
-
+			jsonEndpoint.putJsonProperty(PROP_ENDPOINT_ALIAS, endpointAlias);
 			// set the endpoint url
 			jsonEndpoint.putJsonProperty(PROP_BASE_URL, endpoint.getUrl());
 			try {

@@ -89,6 +89,7 @@ return declare(null, {
                 sbtConfig.cancel = options.cancel;
             }
             globalLoginFormStrings = loginForm;
+            globalEndpointAlias = options.name;
             
             var proxy = options.proxy.proxyUrl;
             var actionURL = proxy.substring(0,proxy.lastIndexOf("/"))+"/basicAuth/"+options.proxyPath+"/JSApp";

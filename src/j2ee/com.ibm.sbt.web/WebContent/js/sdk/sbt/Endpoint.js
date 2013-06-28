@@ -262,6 +262,7 @@ var Endpoint = declare(null, {
 								proxy: self.proxy,
 								proxyPath: self.proxyPath,
 								loginUi: _args.loginUi || self.loginUi,
+								name: self.name,
 								callback: function() {
 									self.xhr(method,args,hasBody);
 								}
@@ -338,6 +339,7 @@ var Endpoint = declare(null, {
 				proxy : this.proxy,
 				proxyPath : this.proxyPath,
 				loginUi : args.loginUi || this.loginUi,
+				name: this.name,
 				callback: function(response) {
 					promise.fulfilled(response);
 				},
@@ -490,6 +492,7 @@ var Endpoint = declare(null, {
             proxy: this.proxy,
             proxyPath: this.proxyPath,
             loginUi: options.loginUi || this.loginUi,
+            name: this.name,
             callback: function() {
                 self.request(url, options).response.then(
                     function(response) {

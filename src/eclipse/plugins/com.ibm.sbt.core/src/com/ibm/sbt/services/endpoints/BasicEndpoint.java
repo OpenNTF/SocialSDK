@@ -270,22 +270,23 @@ public class BasicEndpoint extends AbstractEndpoint {
         clearFromStore();
     }
     
-    public void redirect() throws PasswordException {
+    public void redirect()throws ClientServicesException{
         Context context = Context.get();
 
         String nextPage = (String)context.getSessionMap().get(REDIRECT_PAGE_KEY);
         if(StringUtil.isEmpty(nextPage))
         	nextPage=((HttpServletRequest)context.getHttpRequest()).getParameter("redirectURL");
-        if(StringUtil.isNotEmpty(nextPage)) {
-        	// TODO
-//            context.getExternalContext().getSessionMap().remove(REDIRECT_PAGE_KEY);
-//            XSPContext ctx = XSPContext.getXSPContext(FacesContext.getCurrentInstance());
-           try {
-			context.sendRedirect(nextPage);
-		} catch (IOException e) {
-			e.printStackTrace();
+		if (StringUtil.isNotEmpty(nextPage)) {
+			// TODO
+			// context.getExternalContext().getSessionMap().remove(REDIRECT_PAGE_KEY);
+			// XSPContext ctx =
+			// XSPContext.getXSPContext(FacesContext.getCurrentInstance());
+			try {
+				context.sendRedirect(nextPage);
+			} catch (IOException e) {
+				throw new ClientServicesException(e,"Error redirecting to the following URL"+nextPage);
+			}
 		}
-        }
     }
     
     @Override

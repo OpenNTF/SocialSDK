@@ -150,9 +150,7 @@
 	       <fail unless="javadoc.index" message="No javadoc generated" /> -->
 	       <available  property="jsdoc.index" file="${project.target.directory}/doc/jsdoc/index.html" />
 	       <fail unless="jsdoc.index" message="No jsdoc generated" />
-	       <available  property="surefire.report" file="${project.target.directory}/com.ibm.sbt.test/com.ibm.sbt.core.test/site/surefire-report.html" />
-	       <fail unless="surefire.report" message="No javadoc generated" />
-								
+
 	       <available  property="version.info" file="${project.target.directory}/doc/version.txt" />
 	       <available  property="changes.info" file="${project.target.directory}/doc/changelog.txt" />
 	       <available  property="weekly.info" file="${project.target.directory}/doc/weekly.txt" />

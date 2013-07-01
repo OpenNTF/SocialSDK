@@ -94,7 +94,7 @@
 								</xp:this.attrs>
 								<xp:this.dojoAttributes>
 									<xp:dojoAttribute name="required"
-										value="#{javascript:(p.optional!=true).toString()}">
+										value="#{javascript:(p.optional!='true').toString()}">
 									</xp:dojoAttribute>
 									<xp:dojoAttribute name="regExp"
 										value="#{javascript:p.regexp}">
@@ -111,7 +111,7 @@
 								</xp:this.attrs>
 								<xp:this.dojoAttributes>
 									<xp:dojoAttribute name="required"
-										value="#{javascript:(p.optional!=true).toString()}">
+										value="#{javascript:(p.optional!='true').toString()}">
 									</xp:dojoAttribute>
 								</xp:this.dojoAttributes>
 							</xp:inputText>
@@ -126,7 +126,7 @@
 								</xp:this.attrs>
 								<xp:this.dojoAttributes>
 									<xp:dojoAttribute name="required"
-										value="#{javascript:(p.optional!=true).toString()}">
+										value="#{javascript:(p.optional!='true').toString()}">
 									</xp:dojoAttribute>
 								</xp:this.dojoAttributes>
 							</xp:inputTextarea>
@@ -172,7 +172,7 @@
 					</xe:switchFacet>
 				</xp:column>
 				<xp:column id="column5" styleClass="paramCol3">
-					<xp:span rendered="#{p.optional!=true}">*</xp:span>
+					<xp:span rendered="#{p.optional!='true'}">*</xp:span>
 				</xp:column>
 				<xp:column id="column3" styleClass="paramCol4">
 					<xp:text escape="true" id="computedField4"

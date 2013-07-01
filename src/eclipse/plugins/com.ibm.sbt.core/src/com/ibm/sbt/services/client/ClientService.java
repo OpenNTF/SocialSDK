@@ -69,6 +69,7 @@ import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
 import com.ibm.sbt.services.util.SSLUtil;
 import com.ibm.sbt.util.SBTException;
+import com.ibm.commons.runtime.util.UrlUtil;
 
 /**
  * Base class for a REST service client.
@@ -947,12 +948,20 @@ public abstract class ClientService {
 	protected String composeRequestUrl(Args args) throws ClientServicesException {
 		// Compose the URL
 		StringBuilder b = new StringBuilder(256);
-		String url = getUrlPath(args);
-		if (url.charAt(url.length() - 1) == '/') {
-			url = url.substring(0, url.length() - 1);
+		String url = "";
+		
+		if(!(UrlUtil.isAbsoluteUrl(args.getServiceUrl()))){ // check if url supplied is absolute
+			url = getUrlPath(args);
+			if (url.charAt(url.length() - 1) == '/') {
+				url = url.substring(0, url.length() - 1);
+			}
+			b.append(url);
+			addUrlParts(b, args);
+		}else{
+			// Calling app has provided the complete url, do not do url manipulation in clientservice
+			b.append(args.getServiceUrl()); 
 		}
-		b.append(url);
-		addUrlParts(b, args);
+		
 		addUrlParameters(b, args);
 		return b.toString();
 	}

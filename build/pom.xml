@@ -21,11 +21,6 @@
 
   <repositories>
     <repository>
-      <id>juno</id>
-      <layout>p2</layout>
-      <url>http://download.eclipse.org/releases/juno</url>
-    </repository>
-    <repository>
       <id>notes853GSA</id>
       <layout>p2</layout>
       <url>http://dubgsa.ibm.com/gsa/dubgsa/home/m/w/mwdu1054/web/public/repository/p2</url>

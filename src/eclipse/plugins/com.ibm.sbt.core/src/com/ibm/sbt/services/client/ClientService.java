@@ -948,10 +948,9 @@ public abstract class ClientService {
 	protected String composeRequestUrl(Args args) throws ClientServicesException {
 		// Compose the URL
 		StringBuilder b = new StringBuilder(256);
-		String url = "";
 		
 		if(!(UrlUtil.isAbsoluteUrl(args.getServiceUrl()))){ // check if url supplied is absolute
-			url = getUrlPath(args);
+			String url = getUrlPath(args);
 			if (url.charAt(url.length() - 1) == '/') {
 				url = url.substring(0, url.length() - 1);
 			}

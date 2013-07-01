@@ -51,6 +51,9 @@ public abstract class PlaygroundExtensionFactory {
 		return factories;
 	}
 
+	public static<T> List<T> getExtensions(Class<T> clazz) {
+		return getExtensions(clazz,null);
+	}
 	@SuppressWarnings("unchecked")
 	public static<T> List<T> getExtensions(Class<T> clazz, String[] platforms) {
 		ArrayList<T> extensions = new ArrayList<T>();

@@ -142,7 +142,8 @@ public class PreviewJavaScriptHandler extends PreviewHandler {
 		}
 		
 		DominoPlaygroundContext pgContext = new DominoPlaygroundContext(env, properties, jsLib);
-		List<JavaScriptPreviewExtension> pgExtensions = (List<JavaScriptPreviewExtension>)(List)PlaygroundExtensionFactory.getExtensions(JavaScriptPreviewExtension.class);
+		String[] platforms = null; // For now...
+		List<JavaScriptPreviewExtension> pgExtensions = (List<JavaScriptPreviewExtension>)(List)PlaygroundExtensionFactory.getExtensions(JavaScriptPreviewExtension.class,platforms);
 		
 		
 //		Map m = req.getParameterMap();
@@ -336,7 +337,7 @@ public class PreviewJavaScriptHandler extends PreviewHandler {
 		if(StringUtil.isNotEmpty(bodyTheme)) {
 			pw.print(" class=\"");
 			pw.print(bodyTheme);
-			pw.println("\"");
+			pw.print("\"");
 		}
 		pw.println(">");
 

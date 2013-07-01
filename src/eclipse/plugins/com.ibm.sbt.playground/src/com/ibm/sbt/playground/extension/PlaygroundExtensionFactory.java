@@ -21,6 +21,7 @@ import java.util.List;
 
 import com.ibm.commons.extension.ExtensionManager;
 import com.ibm.commons.runtime.Application;
+import com.ibm.sbt.jslibrary.SBTEnvironment;
 
 
 
@@ -51,7 +52,7 @@ public abstract class PlaygroundExtensionFactory {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static<T> List<T> getExtensions(Class<T> clazz) {
+	public static<T> List<T> getExtensions(Class<T> clazz, String[] platforms) {
 		ArrayList<T> extensions = new ArrayList<T>();
 		if(factories!=null) {
 			for(PlaygroundExtensionFactory f: factories) {
@@ -66,6 +67,10 @@ public abstract class PlaygroundExtensionFactory {
 	}
 	
 	public PlaygroundExtensionFactory() {
+	}
+	
+	public boolean isValidPlatform(String[] platforms) {
+		return true;
 	}
 	
 	public Object getExtension(Class<?> clazz) {

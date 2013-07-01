@@ -1,8 +1,7 @@
 <script type="text/template" id="MyCommunitiesTmpl">
-<tr class="">
-	<td class="">
-		<h6><a href="" target="_self" title="${tooltip}" data-dojo-attach-event="onclick: handleClick">${title}</a></h6>
-	</td>
+<li style="border-top: 1px solid #EEEEEE;">
+		<a href="" style="color: #000000;line-height:3em;font-size:18px;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif" target="_self" title="${tooltip}" data-dojo-attach-event="onclick: handleClick">${title}</a>
+</li>
 </tr>
 </script>
 
@@ -38,5 +37,12 @@
 
 </script>
 
-<div style="margin-bottom:0.5em;"><span style="font-weight:bold;">My Communities</span></div>
+<div style="margin-bottom:0.5em;">	
+	<h3 style='color:#AAAAAA;font-size: 1rem; 
+		text-transform: uppercase;
+		font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,sans-serif;
+		font-weight:200;'>
+		My Communities
+	</h3>
+</div>
 <div id="myCommunitiesDiv"></div>

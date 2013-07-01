@@ -1,17 +1,18 @@
-<div style="margin-bottom:0.5em;"><span style="font-weight:bold;">My Colleagues</span></div>
+<div style="margin-bottom:0.5em;">
+	<h3 style='color:#AAAAAA;font-size: 1rem; 
+		text-transform: uppercase;
+		font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,sans-serif;
+		font-weight:200;'>
+		My Network
+	</h3>
+</div>
 <div id="gridDiv"></div>
 <script type="text/template" id="profileRow">
-
-<tr>
-	<td width="55">
-		<div><img alt="${name}" src="${photo}" width="55" height="55"></img></div>
-	</td>
-	<td>
-		<div>
-  			<a aria-label="${nls.ariaVcard}" href="javascript:void(0);" title="${tooltip}" data-dojo-attach-event="onclick: handleClick" >${name}</a>
-		</div>
-	</td>
-</tr>
+<li style="display:inline;">
+		<a href="" data-dojo-attach-event="onclick: handleClick">
+		<img style="border:3px solid #CCCCCC; border-radius: 50% 50% 50% 50%; height:65px; width:65px; margin: 5px;" alt="${name}" src="${photo}"></img>
+		</a>
+</li>
 </script>
 
 
@@ -46,3 +47,4 @@
 </div>
 
 </script>
+

@@ -1,0 +1,172 @@
+body {
+  font-size: 18px;
+}
+h1, h2, h3, h4 {
+  font-weight: 200;
+  font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+a {
+  color:#16abda
+}
+
+a:hover, a:focus {
+  color:#0f7495;
+}
+
+body.loggedout .hidden-loggedin {
+  display: block;
+}
+body.loggedout .hidden-loggedout {
+  display: none;
+}
+body.loggedin .hidden-loggedin {
+  display: none;
+}
+body.loggedin .hidden-loggedout {
+  display: block;
+}
+.navbar {
+  margin-bottom: 0;
+
+}
+@media (max-width: 767px){
+  .navbar {
+    margin: 0 -20px;
+  }
+}
+.navbar-inner {
+  border-radius: 0;
+}
+
+.list {
+  margin: 0;
+  list-style: none;
+}
+.list li{
+  height: 3em;
+  line-height: 3em;
+  border-top: 1px solid #eee;
+  overflow: hidden;
+}
+.list li:last-of-type{
+  border-bottom: 1px solid #eee;
+}
+.list a , .list a:visited, .list a:active {
+  color: #000;
+  display: block;
+  width: 100%;
+  padding-left: 5px;
+}
+.list a:hover , .list:active {
+  text-decoration: none;
+  background-color: #eee;
+}
+/*.login-btn {
+  background: #049cdb url(leadspace-bg.gif) repeat;
+  padding: 40px 20px;
+  text-align: center;
+}*/
+@media (max-width: 767px){
+  .login-btn {
+    margin: 0 -20px;
+
+  }
+}
+.leadspace {
+  box-shadow: 0 -30px 20px -15px #002A49 inset;
+  background: #003f6d url(leadspace-bg.gif) repeat;
+  color: #fff;
+  padding: 60px 20px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+@media (max-width: 767px){
+  .leadspace {
+    margin-left: -20px;
+    margin-right: -20px;
+  }
+}
+.intro h2 {
+  color:#e33915;
+  text-align: center;
+}
+.intro p {
+  line-height: 1.5em;
+}
+.greeting {
+  width: 280px;
+  text-align: left;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+.greeting > p {
+  font-size: 1.2rem;
+  line-height : 1.5em;
+  margin-left: 120px;
+}
+
+@media (min-width: 768px){
+  .greeting {
+    width: 710px;
+  }
+  .greeting > p {
+    font-size: 2rem;
+    line-height : 1.5em;
+  }  
+}
+
+
+.greeting img {
+  float:left;
+  border-radius: 50%;
+  border: 3px solid #ccc;
+  margin-right: 20px;
+  width:80px;
+  height: 80px;
+}
+.examples {
+  padding-bottom: 20px;
+}
+.examples h2 {
+  color:#e33915;
+  text-align: center;
+}
+.examples h3 {
+  color: #aaa;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+.examples h3 > a {
+  color: inherit;
+}
+.network {
+  list-style: none;
+  margin:0;
+}
+.network li{
+
+  float:left;
+}
+.network li:last-of-type {
+  float:none;
+}
+.network li img{
+  border-radius: 50%;
+  border: 3px solid #ccc;
+  width: 65px;
+  height: 65px;
+  margin:5px;
+}
+
+.communities {
+
+}
+.communities li {
+
+}
+.files {
+
+
+}

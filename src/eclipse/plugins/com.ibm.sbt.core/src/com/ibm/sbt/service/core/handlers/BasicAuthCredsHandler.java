@@ -46,6 +46,7 @@ public class BasicAuthCredsHandler extends AbstractServiceHandler {
     public static final String PASSWORD					= "password";
     public static final String LOGIN_UI					= "loginUi";
     public static final String REDIRECT_URL				= "redirectURL";
+    public static final String ENDPOINT_ALIAS           = "endpointAlias";
     public static final String REDIRECT_URL_TO_LOGIN	= "redirectURLToLogin";
     public static final String ENDPOINT_NAME			= "endPointName";
     public static final String JS_APP					= "JSApp";
@@ -139,6 +140,7 @@ public class BasicAuthCredsHandler extends AbstractServiceHandler {
 	    		pw.println("<script>");
 				if(StringUtil.isEmpty(mode) || mode.equalsIgnoreCase(MODE_MAINWINDOW)) {//MainWindow mode
 					String redirectURL = URLDecoder.decode(req.getParameter(REDIRECT_URL),"utf-8");
+					
 					if(authentication.equals(AUTH_DECLINED)){
 	    				pw.println("window.location.href = '"+redirectToLogin+"&redirectURL="+redirectURL+"&loginUi="+mode+"&showWrongCredsMessage=true'");
 	    			}else if(authentication.equals(AUTH_ACCEPTED)){
@@ -150,7 +152,8 @@ public class BasicAuthCredsHandler extends AbstractServiceHandler {
 	    			if(authentication.equals(AUTH_DECLINED)){
 	    				pw.println("window.location.href = '"+redirectToLogin+"&redirectURL=empty&loginUi="+mode+"&showWrongCredsMessage=true'");
 	    			}else if(authentication.equals(AUTH_ACCEPTED)){
-	    			    pw.println("config.findEndpoint(window.opener.globalEndpointAlias).isAuthenticated = true;");
+	    			    String endpointAlias = URLDecoder.decode(req.getParameter(ENDPOINT_ALIAS),"utf-8");
+	    			    pw.println("config.findEndpoint('"+ endpointAlias + "').isAuthenticated = true;");
 	    			    pw.println("if(config.callback){");
 	    			    pw.println("config.callback();");
 	    			    pw.println("delete config.callback;");

@@ -19,7 +19,10 @@
              </xe:pageTreeNode>
              <xe:pageTreeNode page="ConnectionsFiles"
                 label="Files" selection="/Connections/Files">
-             </xe:pageTreeNode>					
+             </xe:pageTreeNode>				
+             <xe:pageTreeNode page="ConnectionsActivityStream"
+                label="Activity Stream" selection="/Connections/ConnectionsActivityStream"	>
+             </xe:pageTreeNode>		
 		</xe:this.treeNodes>
 	</xe:navigator>
 </xp:view>

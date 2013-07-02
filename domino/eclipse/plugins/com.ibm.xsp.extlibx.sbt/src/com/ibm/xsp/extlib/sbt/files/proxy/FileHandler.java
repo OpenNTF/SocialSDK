@@ -26,7 +26,7 @@ import com.ibm.xsp.extlib.proxy.handlers.AbstractProxyHandler;
 import com.ibm.xsp.extlib.sbt.files.IFileType;
 import com.ibm.xsp.extlib.sbt.files.type.ConnectionsFiles;
 import com.ibm.xsp.extlib.sbt.files.type.DropboxFiles;
-import com.ibm.xsp.extlib.sbt.files.type.LotusLiveFiles;
+import com.ibm.xsp.extlib.sbt.files.type.SmartCloudFiles;
 
 /**
  * FileProxy Handler.
@@ -53,8 +53,8 @@ public class FileHandler extends AbstractProxyHandler {
     }
     
     protected IFileType loadFileType(String type) {
-        if(type.equals(LotusLiveFiles.TYPE)) {
-            return new LotusLiveFiles();
+        if(type.equals(SmartCloudFiles.TYPE)) {
+            return new SmartCloudFiles();
         }
         if(type.equals(DropboxFiles.TYPE)) {
             return new DropboxFiles();

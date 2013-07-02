@@ -1,35 +1,28 @@
 require([ "sbt/dom", "sbt/connections/controls/communities/CommunityGrid" ],
 	function(dom, CommunityGrid) {
-		try {
+	
 	        var communityGrid = new CommunityGrid({
-	            type: "my"
+	            type: "my",
+	            hidePager: true,
+	            hideSorter:true
 	        });
 	        communityGrid.renderer.template = dom.byId("MyCommunitiesTmpl").innerHTML;
-	        communityGrid.renderer.pagerTemplate = dom.byId("pagerTemplate").innerHTML;
-	        communityGrid.renderer.sortTemplate = dom.byId("sortingTemplate").innerHTML;
-	        communityGrid.renderer.sortAnchor = dom.byId("sortAnchorTemplate").innerHTML;
-	        communityGrid.renderer.tableClass = "table table-striped";
 			
-		    // create custom action
-		    communityGrid.communityAction = {
-		        getTooltip : function(item) {
-		        	return string.substitute("Display details for ${title}", 
-		        			{ title : item.getValue("title") });
-		        },
-
-		        execute : function(item,opts,event) {
-		            var str =
-		                "communityUuid: " + item.getValue("communityUuid") + "\n" +
-		                "title: " + item.getValue("title") + "\n" +
-		                "communityUrl: " + item.getValue("communityUrl");
-		            alert(str);
-		        }
-		    };
-
+	        communityGrid.renderer.renderTable =  function(grid, el, items, data){
+	        	var div = this._create("div",{"class":"span3"}, el );
+	        	
+	        	var headingDiv = this._create("div", {"class":"examples"},div);
+	        	var h3 = this._create("h3", {
+	        		"class":"h3",
+	        		innerHTML: '<a href="">My Communities</a>'
+	        	}, headingDiv);
+	        	
+	        	var ul = this._create("ul", {"class":"files list"},div);
+	            return ul;	
+	        };
+	        
 		    dom.byId("myCommunitiesDiv").appendChild(communityGrid.domNode);
 	        communityGrid.update();		
-		} catch (err) {
-			alert(err);
-		}
+
 	}
 );

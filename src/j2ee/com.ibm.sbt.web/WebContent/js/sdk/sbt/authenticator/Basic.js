@@ -52,9 +52,9 @@ return declare(null, {
 	        var loginPage = options.loginPage || config.Properties["loginPage"] || self.loginPage;
 	        var dialogLoginPage = options.dialogLoginPage || config.Properties["dialogLoginPage"] || self.dialogLoginPage;
 	        if(mode=="popup") {
-	            self._authPopup(options, loginPage, config, self.url, loginPage);
+	            self._authPopup(options, loginPage, config, self.url);
 	        } else if(mode=="dialog") {
-	            self._authDialog(options, dialogLoginPage, config, dialogLoginPage);
+	            self._authDialog(options, dialogLoginPage, config);
 	        } else {
 	            self._authMainWindow(options, loginPage, self.url);
 	        }
@@ -79,7 +79,7 @@ return declare(null, {
 		return true;
 	},
 	
-	_authPopup: function(options, loginPage, sbtConfig, sbtUrl, loginPage) {
+	_authPopup: function(options, loginPage, sbtConfig, sbtUrl) {
 	    var self = this;
 	    require(["sbt/i18n!sbt/nls/loginForm"], function(loginForm) {
             if(options.callback){

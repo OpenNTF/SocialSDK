@@ -2,7 +2,7 @@
 <plugin>
    
    <extension point="com.ibm.commons.Extension">
-         <service type="com.ibm.xsp.extlib.social.PersonDataProvider" class="com.ibm.xsp.extlib.sbt.user.LotusLivePeopleDataProvider" />
+         <service type="com.ibm.xsp.extlib.social.PersonDataProvider" class="com.ibm.xsp.extlib.sbt.user.SmartCloudPeopleDataProvider" />
    </extension>
    
    <extension point="com.ibm.commons.Extension">

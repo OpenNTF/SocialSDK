@@ -18,9 +18,9 @@ function submitOnClick(contentForm) {
         document.getElementById("wrongCredsMessage").style.display = "block";
         return;
     }
-    var agrsMap = getArgsMap();// get map of query string arguments
-    var actionURL = decodeURIComponent(agrsMap.actionURL);
-    var loginUi = decodeURIComponent(agrsMap.loginUi);
+    var argsMap = getArgsMap();// get map of query string arguments
+    var actionURL = decodeURIComponent(argsMap.actionURL);
+    var loginUi = decodeURIComponent(argsMap.loginUi);
     if (loginUi.length == 0) {
         loginUi = "mainWindow";
     }
@@ -28,7 +28,7 @@ function submitOnClick(contentForm) {
         contentForm.action = actionURL + "?loginUi=popup&redirectURLToLogin="
                 + encodeURIComponent(document.URL);
     } else if (loginUi == "mainWindow") {
-        var redirectURL = agrsMap.redirectURL;
+        var redirectURL = argsMap.redirectURL;
         contentForm.action = actionURL
                 + "?loginUi=mainWindow&redirectURLToLogin="
                 + encodeURIComponent(document.URL) + "&redirectURL="
@@ -39,9 +39,9 @@ function submitOnClick(contentForm) {
 
 function cancelOnClick() {
     require(["sbt/config"], function(config){
-        var agrsMap = getArgsMap();// get map of query string arguments
-        var redirectURL = decodeURIComponent(agrsMap.redirectURL);
-        var loginUi = decodeURIComponent(agrsMap.loginUi);
+        var argsMap = getArgsMap();// get map of query string arguments
+        var redirectURL = decodeURIComponent(argsMapMap.redirectURL);
+        var loginUi = decodeURIComponent(argsMap.loginUi);
         if (loginUi == "popup") {
             if(config.cancel){
                 config.cancel();
@@ -57,8 +57,8 @@ function cancelOnClick() {
 }
 
 function onLoginPageLoad() {
-    var agrsMap = getArgsMap();// get map of query string arguments
-    var showWrongCredsMessage = agrsMap.showWrongCredsMessage;
+    var argsMap = getArgsMap();// get map of query string arguments
+    var showWrongCredsMessage = argsMap.showWrongCredsMessage;
     if (showWrongCredsMessage == "true") {
         document.getElementById("wrongCredsMessage").style.display = "block";
     }
@@ -87,12 +87,13 @@ function getArgsMap() {
         var qString = location.search.substring(1);// getting query string args
         var qStringParams = qString.split("&");// getting array of all query
                                                 // string arg key value pairs
-        var agrsMap = {};
+        var argsMap = {};
+        var i;
         for (i = 0; i < qStringParams.length; i++) {
             var argArray = qStringParams[i].split("=");
-            agrsMap[argArray[0]] = argArray[1];
+            argsMap[argArray[0]] = argArray[1];
         }
-        return agrsMap;
+        return argsMap;
     } catch (err) {
         console.log("Error making agrs map in login.js " + err);
     }

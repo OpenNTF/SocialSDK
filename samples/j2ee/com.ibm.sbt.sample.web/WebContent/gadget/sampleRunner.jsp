@@ -59,7 +59,7 @@ if (snippet != null) {
       // Set title (if supported by container)
       gadgets.window.setTitle('Social Business Toolkit Sample - <%=name%>');
     </script>
-    <link href="/sbt.bootstrap211/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="/sbt.bootstrap211/bootstrap/css/bootstrap-sbt.css" rel="stylesheet">
     <link href="/sbt.bootstrap211/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
  	<script type="text/javascript" src="/sbt.dojo180/dojo/dojo.js" djConfig="parseOnLoad: true"></script>
 	<%

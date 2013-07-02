@@ -26,34 +26,26 @@ function submitOnClick(contentForm) {
     }
     if (loginUi == "popup") {
         contentForm.action = actionURL + "?loginUi=popup&redirectURLToLogin="
-                + encodeURIComponent(document.URL);
+                + encodeURIComponent(document.URL)+"&endpointAlias="+window.globalEndpointAlias;
     } else if (loginUi == "mainWindow") {
         var redirectURL = argsMap.redirectURL;
         contentForm.action = actionURL
                 + "?loginUi=mainWindow&redirectURLToLogin="
                 + encodeURIComponent(document.URL) + "&redirectURL="
-                + encodeURIComponent(redirectURL);
+                + encodeURIComponent(redirectURL)+"&endpointAlias="+window.globalEndpointAlias;
     }
     contentForm.submit();
 }
 
 function cancelOnClick() {
-    require(["sbt/config"], function(config){
-        var argsMap = getArgsMap();// get map of query string arguments
-        var redirectURL = decodeURIComponent(argsMapMap.redirectURL);
-        var loginUi = decodeURIComponent(argsMap.loginUi);
-        if (loginUi == "popup") {
-            if(config.cancel){
-                config.cancel();
-                delete config.cancel;
-            }
-            delete config.callback;
-            window.close();
-        } else {
-            window.location.href = redirectURL;
-        }
-    });
-    
+    var argsMap = getArgsMap();// get map of query string arguments
+    var redirectURL = decodeURIComponent(argsMap.redirectURL);
+    var loginUi = decodeURIComponent(argsMap.loginUi);
+    if (loginUi == "popup") {
+        window.close();
+    } else {
+        window.location.href = redirectURL;
+    }
 }
 
 function onLoginPageLoad() {
@@ -62,8 +54,8 @@ function onLoginPageLoad() {
     if (showWrongCredsMessage == "true") {
         document.getElementById("wrongCredsMessage").style.display = "block";
     }
-    if(opener && opener.globalLoginFormStrings){
-        var loginForm = opener.globalLoginFormStrings;
+    if(window.globalLoginFormStrings){
+        var loginForm = window.globalLoginFormStrings;
     	document.getElementById('wrongCredsMessage').innerHTML = loginForm.wrong_creds_message;
     	document.getElementById('basicLoginFormUsername').innerHTML = loginForm.username;
     	document.getElementById('basicLoginFormPassword').innerHTML = loginForm.password;

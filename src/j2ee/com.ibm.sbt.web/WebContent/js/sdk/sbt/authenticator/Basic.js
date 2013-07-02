@@ -80,20 +80,15 @@ return declare(null, {
 	},
 	
 	_authPopup: function(options, loginPage, sbtConfig, sbtUrl) {
-	    var self = this;
 	    require(["sbt/i18n!sbt/nls/loginForm"], function(loginForm) {
+            var proxy = options.proxy.proxyUrl;
+            var actionURL = proxy.substring(0,proxy.lastIndexOf("/"))+"/basicAuth/"+options.proxyPath+"/JSApp";
             if(options.callback){
                 sbtConfig.callback = options.callback;
             }
             if(options.cancel){
                 sbtConfig.cancel = options.cancel;
             }
-            globalLoginFormStrings = loginForm;
-            globalEndpointAlias = options.name;
-            
-            var proxy = options.proxy.proxyUrl;
-            var actionURL = proxy.substring(0,proxy.lastIndexOf("/"))+"/basicAuth/"+options.proxyPath+"/JSApp";
-            
             var urlParamsMap = {
                 actionURL: actionURL,
                 redirectURL: 'empty',
@@ -117,6 +112,9 @@ return declare(null, {
             };
             var windowParams = util.createQuery(windowParamsMap, ",");
             var loginWindow = window.open(url,'Authentication', windowParams);
+            
+            loginWindow.globalLoginFormStrings = loginForm;
+            loginWindow.globalEndpointAlias = options.name;
             loginWindow.focus();
         });
         

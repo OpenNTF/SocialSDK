@@ -78,6 +78,6 @@ public class PlaygroundLibrary extends AbstractXspLibrary {
     
     private List<PlaygroundFragment> getPlaygroundFragments() {
     	// Get the fragments for all the platforms
-        return (List<PlaygroundFragment>)PlaygroundExtensionFactory.getExtensions(PlaygroundFragment.class,null);
+        return (List<PlaygroundFragment>)PlaygroundExtensionFactory.getExtensions(PlaygroundFragment.class);
 	}
 }

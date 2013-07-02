@@ -42,6 +42,10 @@ function cancelOnClick() {
     var redirectURL = decodeURIComponent(argsMap.redirectURL);
     var loginUi = decodeURIComponent(argsMap.loginUi);
     if (loginUi == "popup") {
+        if(window.cancel){
+            window.cancel();
+            delete window.cancel;
+        }
         window.close();
     } else {
         window.location.href = redirectURL;

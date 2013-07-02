@@ -823,13 +823,13 @@
     </complex-type>
 
     <complex-type>
-        <description>File Service for LotusLive</description>
-        <display-name>LotusLive File Service</display-name>
-        <complex-id>com.ibm.xsp.extlib.sbt.files.type.LotusLiveFiles</complex-id>
-        <complex-class>com.ibm.xsp.extlib.sbt.files.type.LotusLiveFiles</complex-class>
+        <description>File Service for SmartCloud</description>
+        <display-name>SmartCloud File Service</display-name>
+        <complex-id>com.ibm.xsp.extlib.sbt.files.type.SmartCloudFiles</complex-id>
+        <complex-class>com.ibm.xsp.extlib.sbt.files.type.SmartCloudFiles</complex-class>
         
         <complex-extension>
-            <tag-name>lotusLiveFileData</tag-name>
+            <tag-name>smartCloudFileData</tag-name>
             <base-complex-id>com.ibm.xsp.extlib.sbt.files.IFileType</base-complex-id>
             <designer-extension>
             </designer-extension>

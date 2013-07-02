@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xp:this.resources>
+		<xp:dojoModule name="extlib.dijit.ExtLib"></xp:dojoModule>
+		<xp:dojoModule name="extlib.dijit.Loading"></xp:dojoModule>
+	</xp:this.resources>
+	<xc:OneUILayout navigationPath="/Connections/ConnectionsActivityStream" title="Activity Streams" connection="connections">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftConnections></xc:LeftConnections>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:panel id="mainPanel">
+			<xp:tabbedPanel id="tabbedPanel1">
+				<xp:tabPanel id="tabPanel1">
+					<xp:this.label><![CDATA[#{javascript:return "Home Activity Stream View"}]]></xp:this.label>
+					<xe:djContentPane id="djContentPane1"
+						partialRefresh="true">
+						<xp:table style="width:350px">
+							<xp:tr>
+								<xp:td style="font-weight:bold">
+									Updates:
+
+								</xp:td>
+								<xp:td
+									style="width:100px;font-weight:bold">
+									Number of Likes
+								</xp:td>
+							</xp:tr>
+						</xp:table>
+						<xp:repeat id="repeat1" rows="30"
+							var="update">
+							<xp:this.value>
+	<![CDATA[#{javascript:
+	var svc = new com.ibm.sbt.services.client.activitystreams.ActivityStreamService();
+	return svc.getUpdatesFromMyBoard();
+}]]></xp:this.value>
+							<xp:div>
+								<xp:table style="width:350px">
+									<xp:tr>
+										<xp:td>
+											<xp:text escape="true"
+												id="computedField1"
+												value="#{javascript:update.getSummary()}">
+											</xp:text>
+										</xp:td>
+										<xp:td style="width:100px">
+											<xp:text escape="true"
+												id="computedField2"
+												value="#{javascript:Math.round(update.getNumLikes()); }">
+											</xp:text>
+										</xp:td>
+									</xp:tr>
+								</xp:table>
+
+
+
+							</xp:div>
+						</xp:repeat>
+
+					</xe:djContentPane>
+				</xp:tabPanel>
+			<xp:tabPanel id="tabPanel2">
+					<xp:this.label><![CDATA[#{javascript:return "Post an update to my Activity Stream"}]]></xp:this.label>
+					<xe:djContentPane id="djContentPane2"
+						partialRefresh="true">
+						</xe:djContentPane>
+											<xp:button value="Send update to my activity stream" id="button2">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete">
+							<xp:this.action><![CDATA[#{javascript:var svc = new com.ibm.sbt.services.client.activitystreams.ActivityStreamService();
+			var postPayload = new com.ibm.commons.util.io.json.JsonJavaObject();
+			var actor =new com.ibm.commons.util.io.json.JsonJavaObject();
+			var object =new com.ibm.commons.util.io.json.JsonJavaObject();
+			actor.put("id", "@self");
+			object.put("summary", "Padraic Edwards and Martin Donnelly will present a Webinar on XPages and SBT on July 10th.");
+			object.put("objectType", getComponent("comboBox1").getValue());
+			var randomGen = java.util.Random(19580427);
+			var randomNum = randomGen.nextInt();
+			object.put("id", randomNum);
+			var editFieldValue = getComponent("inputTextarea1").getValue();
+			object.put("displayName", "Attend to the XPages SBT Webinar");
+			object.put("url", "http://www.ibm.com");
+	
+			postPayload.put("actor", actor);
+			postPayload.put("verb", getComponent("comboBox1").getValue());
+			postPayload.put("title", "XPages Webinar on July 10th");
+			
+			if(editFieldValue != null)
+				postPayload.put("content", editFieldValue);
+			else
+				postPayload.put("content", "XPages Webinar on July 10th");
+			postPayload.put("updated", new java.util.Date().getTime());
+			postPayload.put("object", object);
+
+			var header = new java.util.HashMap();
+			header.put("Content-Type", "application/json");
+			entry= svc.postEntry(postPayload, header);
+			var entryId = entry.getJsonObject("entry").getString("id");
+			getComponent("computedField3").setValue(entryId);
+
+    	}]]></xp:this.action>
+						</xp:eventHandler></xp:button>
+											<xp:comboBox
+												id="comboBox1">
+												<xp:selectItem
+													itemLabel="Post" itemValue="Post">
+												</xp:selectItem>
+												<xp:selectItem
+													itemLabel="Invite" itemValue="Invite">
+												</xp:selectItem>
+												<xp:selectItem
+													itemLabel="Comment" itemValue="Comment">
+												</xp:selectItem>
+												<xp:selectItem
+													itemLabel="Note" itemValue="Note">
+												</xp:selectItem>
+											</xp:comboBox>
+											<xp:br></xp:br>
+						<xp:br></xp:br>
+						<xp:label value="Content" id="label2"></xp:label><xp:br></xp:br>
+						<xp:inputTextarea
+												id="inputTextarea1">
+											</xp:inputTextarea>
+											<xp:br></xp:br>
+											<xp:br></xp:br>
+											<xp:label value="Unique Activity Id: "
+												id="label1">
+											</xp:label>
+											<xp:text escape="true"
+												id="computedField3">
+											</xp:text>
+			</xp:tabPanel>
+			</xp:tabbedPanel>
+		</xp:panel>
+	</xc:OneUILayout>
+</xp:view>
+

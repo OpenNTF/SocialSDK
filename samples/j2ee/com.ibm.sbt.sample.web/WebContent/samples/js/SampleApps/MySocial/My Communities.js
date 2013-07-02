@@ -9,8 +9,15 @@ require([ "sbt/dom", "sbt/connections/controls/communities/CommunityGrid" ],
 	        communityGrid.renderer.template = dom.byId("MyCommunitiesTmpl").innerHTML;
 			
 	        communityGrid.renderer.renderTable =  function(grid, el, items, data){
-	        	var div = this._create("div",{style:"width:300px; height:200px;"}, el );
-	        	var ul = this._create("ul", {style:"list-style:none outside none;margin: 0;"},div);
+	        	var div = this._create("div",{"class":"span3"}, el );
+	        	
+	        	var headingDiv = this._create("div", {"class":"examples"},div);
+	        	var h3 = this._create("h3", {
+	        		"class":"h3",
+	        		innerHTML: '<a href="">My Communities</a>'
+	        	}, headingDiv);
+	        	
+	        	var ul = this._create("ul", {"class":"files list"},div);
 	            return ul;	
 	        };
 	        

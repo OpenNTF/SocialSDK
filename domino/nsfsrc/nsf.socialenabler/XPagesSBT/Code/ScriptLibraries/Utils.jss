@@ -1,4 +1,4 @@
-function parseLotusLiveProfile(json){
+function parseSmartCloudProfile(json){
 	var nav = new sbt.JsonNavigator(json);
 	var entry = nav.get("entry");
 	var url = entry.stringValue("profileUrl");
@@ -12,7 +12,7 @@ function parseLotusLiveProfile(json){
     photo = photo.selectEq("type", "Photo");
     photo = photo.stringValue("value");
     if(photo != null){
-    	photo = "https://apps.lotuslive.com/contacts/img/photos/" + photo;
+    	photo = "https://apps.na.collabserv.com/contacts/img/photos/" + photo;
     }
     else{
     	photo = "/no_pic.jpg";
@@ -37,7 +37,7 @@ function parseLotusLiveProfile(json){
 		"country" : country
 	}
 }
-function parseLotusLiveContacts(json){
+function parseSmartCloudContacts(json){
 	var navigator  = new sbt.JsonNavigator(json).get("entry");
     
     if(navigator != null){
@@ -47,7 +47,7 @@ function parseLotusLiveContacts(json){
             var photo = nav.get("photos").selectEq("type", "Photo");
             photo = photo.stringValue("value");
             if(photo != null && photo != "PROFILES"){
-            	photo = "https://apps.lotuslive.com/contacts/img/photos/" + photo;
+            	photo = "https://apps.na.collabserv.com/contacts/img/photos/" + photo;
             }
             else{
             	photo = "/no_pic.jpg";

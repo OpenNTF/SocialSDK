@@ -7,9 +7,9 @@
 			<xe:pageTreeNode page="GenericStackoverflow" label="Stackoverflow"
 				selection="/Generic/Stackoverflow">
 			</xe:pageTreeNode>
-			<xe:pageTreeNode page="GenericRedmine" label="Redmine"
-				selection="/Generic/Redmine">
-			</xe:pageTreeNode>
+<!--			<xe:pageTreeNode page="GenericRedmine" label="Redmine"-->
+<!--				selection="/Generic/Redmine">-->
+<!--			</xe:pageTreeNode>-->
 		</xe:this.treeNodes>
 	</xe:navigator>
 </xp:view>

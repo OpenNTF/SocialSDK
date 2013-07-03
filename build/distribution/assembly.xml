@@ -300,6 +300,14 @@
       </includes>
     </fileSet>
     <fileSet>
+      <directory>../../domino/nsf/socialenabler</directory>
+      <outputDirectory>sbtsdk/redist/domino</outputDirectory>
+      <includes>
+        <include>*.*</include>
+      </includes>
+    </fileSet>
+
+    <fileSet>
 	  <directory>${build.target}/com.ibm.sbt.domino/com.ibm.sbt.domino.updatesite</directory>
       <outputDirectory>sbtsdk/redist/domino</outputDirectory>
       <includes>

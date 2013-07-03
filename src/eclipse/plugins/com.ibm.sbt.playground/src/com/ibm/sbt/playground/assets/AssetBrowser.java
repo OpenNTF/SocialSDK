@@ -16,11 +16,14 @@
 package com.ibm.sbt.playground.assets;
 
 import java.io.IOException;
+import java.io.StringReader;
 import java.util.HashSet;
+import java.util.Properties;
 import java.util.Set;
-
 import com.ibm.commons.util.QuickSort;
 import com.ibm.commons.util.StringUtil;
+import com.ibm.commons.util.io.ReaderInputStream;
+import com.ibm.sbt.jslibrary.SBTEnvironment;
 import com.ibm.sbt.playground.vfs.VFSFile;
 
 public class AssetBrowser {
@@ -33,13 +36,22 @@ public class AssetBrowser {
 	private VFSFile rootDirectory;
 	private NodeFactory factory;
 	private String[] extensions;
+	private SBTEnvironment.Endpoint[] endpoints;
+	private String jsLibId;
 	
 	public AssetBrowser(VFSFile rootDirectory, NodeFactory factory) {
 		this.rootDirectory = rootDirectory;
 		this.factory = factory;
 		this.extensions = factory.getAssetExtensions();
 	}
-
+	
+	public AssetBrowser(VFSFile rootDirectory, NodeFactory factory, SBTEnvironment.Endpoint[] endpoints, String jslibId) {
+        this.rootDirectory = rootDirectory;
+        this.factory = factory;
+        this.extensions = factory.getAssetExtensions();
+        this.endpoints = endpoints;
+        this.jsLibId = jslibId;
+    }
 	
 	public RootNode readAssets() throws IOException {
 		return readAssets(new RootNode(),null);
@@ -66,8 +78,10 @@ public class AssetBrowser {
 		for(VFSFile s: children) {
 			if(s.isFolder()) {
 				CategoryNode cn = factory.createCategoryNode(node, s.getName());
-				node.getChildren().add(cn);
-				browseDirectory(s,cn,cb);
+				if(includeNode(cn.readGlobalProperties(s.getVFS()))){
+				    node.getChildren().add(cn);
+				    browseDirectory(s,cn,cb);
+				}
 			} else if(s.isFile()) {
 				String ext = getExtension(s.getName(), extensions);
 				if(ext!=null) {
@@ -93,7 +107,61 @@ public class AssetBrowser {
 			
 		}).sort();
 	}
-	protected boolean isExtension(String ext) {
+
+	/*
+	 * Decide whether a node should be included in the tree.
+	 * @param properties
+	 * @return True if this node is to be included, false if it should not be included in the tree.
+	 */
+    private boolean includeNode(String properties) {
+        if(this.endpoints == null){
+            return false;
+        }
+        ReaderInputStream is = new ReaderInputStream(new StringReader(properties));
+        Properties p = new Properties();
+        try {
+            p.load(is);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        String sampleEndpoints = p.getProperty(CategoryNode.ENDPOINT_PROPERTY_KEY);
+        String sampleJsLibs = p.getProperty(CategoryNode.JS_LIB_ID_PROPERTY_KEY);
+        if(StringUtil.isEmpty(sampleEndpoints) && StringUtil.isEmpty(sampleJsLibs))
+            return true; // no requirements specified, include it.
+        else{
+            if(StringUtil.isEmpty(sampleEndpoints))    
+                return jsLibMatches(sampleJsLibs);
+            else if(StringUtil.isEmpty(sampleJsLibs))
+                return endpointMatches(sampleEndpoints);
+            else
+                return endpointMatches(sampleEndpoints) && jsLibMatches(sampleJsLibs);
+        }
+        
+    }
+    
+    private boolean jsLibMatches(String sampleJsLibs){
+        String sampleJsLibArray[] = sampleJsLibs.split(",");
+        for(String sampleJsLib : sampleJsLibArray){
+            if(this.jsLibId.contains(sampleJsLib))
+                return true;
+        }
+        return false;
+    }
+    
+    private boolean endpointMatches(String sampleEndpoints){
+        String[] sampleEndpointsArray = sampleEndpoints.split(",");
+        for(String sampleEndpoint : sampleEndpointsArray){
+            for(SBTEnvironment.Endpoint envEndpoint : this.endpoints){
+                if(StringUtil.equals(sampleEndpoint, envEndpoint.getName())){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    protected boolean isExtension(String ext) {
 		if(extensions!=null) {
 			for(int i=0; i<extensions.length; i++) {
 				if(extensions[i].equals(ext)) {

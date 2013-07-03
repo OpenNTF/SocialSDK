@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
 	xmlns:xc="http://www.ibm.com/xsp/custom">
-	<xc:OneUILayout navigationPath="/Connections/Files" title="Connections Files" connection="greenhouseBasic">
+	<xc:OneUILayout navigationPath="/Connections/Files" title="Connections Files" connection="connections">
 		<xp:this.facets>
 			<xp:panel xp:key="LeftColumn" id="panel4">
 				<xc:LeftConnections></xc:LeftConnections>

@@ -50,10 +50,7 @@ define(["sbt/declare", "sbt/config", "sbt/connections/controls/astream/_XhrHandl
             
             dojo.config.locale="en";
             this.registerModulePaths();
-            if(args.xhrHandler)
-                this.xhrHandler = args.xhrHandler;
-            else
-                this.requireXhr(args.endpoint);
+            this.xhrHandler = args.xhrHandler || this.requireXhr(args.endpoint);
         },
         
         /*
@@ -75,7 +72,7 @@ define(["sbt/declare", "sbt/config", "sbt/connections/controls/astream/_XhrHandl
          */
         requireXhr: function(endpointName){
             var _endpointName = endpointName || "connections";
-            this.xhrHandler = new _XhrHandler(_endpointName);
+            return new _XhrHandler(_endpointName);
         }
         
     });

@@ -31,7 +31,7 @@ define(["sbt/declare", "sbt/config", "com.ibm.social.as.gadget.ActivityStreamCon
         
         getUrlSegment: function(url, segment) {
             // regexp (?:(scheme):)? // (domain) (?:(port):)? (path)? (?: \? (query_string))? (?: # (fragment))?
-            var urlRegExp = /^(?:([A-Za-z]+):)?\/\/([0-9.\-A-Za-z]+)(?::(\d+))?([A-Za-z.0-9\-_\/]*)?(?:\?([A-Za-z0-9\-_]*))?(?:#(.*))?$/;
+            var urlRegExp = /^(?:([A-z]+):)?\/\/([\w.-]+)(?::(\d{0,5}))?([\w.\/-]*)?(?:\?([\w-]*))?(?:#(.*))?$/;
             var urlSegments = {
                 'url': 0,
                 'scheme': 1,
@@ -189,11 +189,6 @@ define(["sbt/declare", "sbt/config", "com.ibm.social.as.gadget.ActivityStreamCon
          */
         buildSbtConfigFromFeed: function(args){
             var cfgPromise = new lconn.core.util.LCDeferred();
-            window.netJazzAjaxConfig = {
-                base: config.Properties.serviceUrl + "connections/resources", 
-                skipStyles: true, 
-                params: "etag=20120919.054848&lang=en&country=US"
-            };//TODO generate etag?
             
             var cfg = {
                 defaultUrlTemplate : args.feedUrl,

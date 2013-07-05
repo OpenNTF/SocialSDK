@@ -13,7 +13,7 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-define(["sbt/declare", "sbt/lang", "sbt/dom", "sbt/connections/controls/_ConnectionsWidget", "sbt/connections/controls/astream/_SbtAsConfigUtil", "sbt/connections/controls/sharebox/_InputForm"], function(declare, lang, dom, _ConnectionsWidget, _SbtAsConfigUtil, _InputForm){
+define(["../../../declare", "../../../lang", "../../../dom", "../../../connections/controls/_ConnectionsWidget", "../../../connections/controls/astream/_SbtAsConfigUtil", "../../../connections/controls/sharebox/_InputForm"], function(declare, lang, dom, _ConnectionsWidget, _SbtAsConfigUtil, _InputForm){
     /**
      * Wrapper for the connections ActivityStream Dijit.
      * 

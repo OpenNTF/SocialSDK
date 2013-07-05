@@ -5,7 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -18,12 +17,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpRequestBase;
@@ -51,8 +48,7 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 	protected String libraryId = null;
 
 	protected abstract String getRequestURI(String smethod, String authType, Map<String, String[]> params) throws ServletException;
-
-	@SuppressWarnings("unchecked")
+	
 	@Override
 	protected void initProxy(HttpServletRequest request, HttpServletResponse response) throws ServletException {
 		// TODO can this be moved to parametrers
@@ -106,8 +102,7 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 					}
 					for (FileItem uploadedFile : fileItems) {						
 						InputStream uploadedFileContent = uploadedFile.getInputStream();
-						File file = convertInputStreamToFile(uploadedFileContent, uploadedFile.getSize());						
-						@SuppressWarnings("unchecked")
+						File file = convertInputStreamToFile(uploadedFileContent, uploadedFile.getSize());												
 						Map<String, String[]> params = request.getParameterMap() != null ? request.getParameterMap() : new HashMap<String, String[]>();						
 						Content content = getFileContent(file, length, fileNameOrId);
 						Map<String, String> headers = createHeaders();
@@ -147,14 +142,12 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 			byte[] bytes = new byte[bufferSize]; 
 			int read = 0;
 			while ((read = inputStream.read(bytes)) != -1) {
-				length += read;
-				//out.write(Base64.decodeBase64(bytes));
+				length += read;				
 				out.write(bytes);
 				out.flush();
 			}
 			inputStream.close();
-			out.close();
-			file.createNewFile();
+			out.close();			
 			return file;
 		} catch (IOException e) {
 			throw e;

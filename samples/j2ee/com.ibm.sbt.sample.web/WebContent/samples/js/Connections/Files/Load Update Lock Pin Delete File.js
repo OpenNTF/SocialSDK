@@ -41,18 +41,11 @@ function loadFile(fileService, dom) {
 	}
 }
 
-/*function downloadFile(fileService, dom) {
+function downloadFile(fileService, dom) {
 	if (currentFile) {
-		fileService.downloadFile(currentFile.getId(), currentFile.getLibraryId(), currentFile.getLabel(), {
-			load : function() {
-				displayMessage(dom, "Successfully Downloaded file: " + currentFile.getId());
-			},
-			error : function(error) {
-				handleError(dom, error);
-			}
-		});
+		fileService.downloadFile(currentFile.getId(), currentFile.getLibraryId());
 	}
-}*/
+}
 
 function lockFile(fileService, id, dom) {
 	fileService.lockFile(id).then(function(status) {
@@ -157,11 +150,11 @@ function addOnClickHandlers(fileService, dom) {
 		loadFile(fileService, dom);
 	};
 
-	/*dom.byId("download").onclick = function(evt) {
+	dom.byId("download").onclick = function(evt) {
 		if (currentFile) {
 			downloadFile(fileService, dom);
 		}
-	};*/
+	};
 
 	dom.byId("updateBtn").onclick = function(evt) {
 		if (currentFile) {

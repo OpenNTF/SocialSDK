@@ -25,21 +25,17 @@ function uploadFile(fileService, dom) {
 	// "your-files" is the ID of the HTML5 File Control. Refer to Upload File.html
 	fileService.uploadFile("your-files", {
 		// additional paramertes to add file metadata			
-		parameters : {
-			visibility : "public"
-		},
-		load : function(file) {
-			displayMessage(dom, "File with ID " + file.getId() + " uploaded successfuly");
-			dom.byId("fileId").value = file.getId();
-			dom.byId("label").value = file.getLabel();
-			dom.byId("summary").value = file.getSummary();
-			dom.byId("visibility").value = file.getVisibility();
-			dom.byId("loading").style.visibility = "hidden";
-		},
-		error : function(error) {
-			handleError(dom, error);
-			dom.byId("loading").style.visibility = "hidden";
-		}
+		visibility : "public"
+	}).then(function(file) {
+		displayMessage(dom, "File with ID " + file.getId() + " uploaded successfuly");
+		dom.byId("fileId").value = file.getId();
+		dom.byId("label").value = file.getLabel();
+		dom.byId("summary").value = file.getSummary();
+		dom.byId("visibility").value = file.getVisibility();
+		dom.byId("loading").style.visibility = "hidden";
+	}, function(error) {
+		handleError(dom, error);
+		dom.byId("loading").style.visibility = "hidden";
 	});
 }
 

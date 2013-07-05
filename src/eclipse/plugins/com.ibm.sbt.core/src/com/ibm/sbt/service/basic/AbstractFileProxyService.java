@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -51,6 +52,7 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 
 	protected abstract String getRequestURI(String smethod, String authType, Map<String, String[]> params) throws ServletException;
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void initProxy(HttpServletRequest request, HttpServletResponse response) throws ServletException {
 		// TODO can this be moved to parametrers
@@ -81,6 +83,7 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 	@Override
 	public void serviceProxy(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		InputStream inputStream = request.getInputStream();
+		request.getHeaderNames(); //("Content-Type");
 		OutputStream out = null;
 		try {
 			initProxy(request, response);
@@ -104,13 +107,14 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 					for (FileItem uploadedFile : fileItems) {						
 						InputStream uploadedFileContent = uploadedFile.getInputStream();
 						File file = convertInputStreamToFile(uploadedFileContent, uploadedFile.getSize());						
+						@SuppressWarnings("unchecked")
 						Map<String, String[]> params = request.getParameterMap() != null ? request.getParameterMap() : new HashMap<String, String[]>();						
 						Content content = getFileContent(file, length, fileNameOrId);
 						Map<String, String> headers = createHeaders();
 						
 						xhr(request, response, url.getPath(), params, headers, content, getFormat());
 					}
-				} else if (smethod.equalsIgnoreCase("GET")) {
+				} else if (smethod.equalsIgnoreCase("GET")) {					
 					xhr(request, response, requestURI, new HashMap<String, String[]>(), new HashMap<String, String>(), null, ClientService.FORMAT_INPUTSTREAM);
 
 				}
@@ -144,11 +148,13 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 			int read = 0;
 			while ((read = inputStream.read(bytes)) != -1) {
 				length += read;
-				out.write(Base64.decodeBase64(bytes));
+				//out.write(Base64.decodeBase64(bytes));
+				out.write(bytes);
 				out.flush();
 			}
 			inputStream.close();
 			out.close();
+			file.createNewFile();
 			return file;
 		} catch (IOException e) {
 			throw e;
@@ -208,7 +214,6 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 	private void xhr(HttpServletRequest request, HttpServletResponse response, String serviceUrl, Map<String, String[]> parameters,
 			Map<String, String> headers, Content content, Handler format) throws ClientServicesException, ClientProtocolException, IOException,
 			ServletException, URISyntaxException {
-
 		Args args = new Args();
 		args.setServiceUrl(serviceUrl);
 		args.setHandler(format);
@@ -229,7 +234,12 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 		if (content != null) {
 			content.initRequestContent(httpClient, method, args);
 		}
-		HttpResponse clientResponse = httpClient.execute(method);
-		prepareResponse(method, request, response, clientResponse, true);
+		HttpResponse clientResponse = httpClient.execute(method);			
+		if ("get".equalsIgnoreCase(smethod) && (clientResponse.getStatusLine().getStatusCode() == HttpServletResponse.SC_UNAUTHORIZED)
+				|| (endpoint != null && endpoint.getAuthenticationErrorCode() == clientResponse.getStatusLine()
+						.getStatusCode())) {
+			this.endpoint.getClientService().forceAuthentication(args);
+		}
+		prepareResponse(method, request, response, clientResponse, true);	
 	}
 }

@@ -18,52 +18,48 @@ function submitOnClick(contentForm) {
         document.getElementById("wrongCredsMessage").style.display = "block";
         return;
     }
-    var agrsMap = getArgsMap();// get map of query string arguments
-    var actionURL = decodeURIComponent(agrsMap.actionURL);
-    var loginUi = decodeURIComponent(agrsMap.loginUi);
+    var argsMap = getArgsMap();// get map of query string arguments
+    var actionURL = decodeURIComponent(argsMap.actionURL);
+    var loginUi = decodeURIComponent(argsMap.loginUi);
     if (loginUi.length == 0) {
         loginUi = "mainWindow";
     }
     if (loginUi == "popup") {
         contentForm.action = actionURL + "?loginUi=popup&redirectURLToLogin="
-                + encodeURIComponent(document.URL);
+                + encodeURIComponent(document.URL)+"&endpointAlias="+window.globalEndpointAlias;
     } else if (loginUi == "mainWindow") {
-        var redirectURL = agrsMap.redirectURL;
+        var redirectURL = argsMap.redirectURL;
         contentForm.action = actionURL
                 + "?loginUi=mainWindow&redirectURLToLogin="
                 + encodeURIComponent(document.URL) + "&redirectURL="
-                + encodeURIComponent(redirectURL);
+                + encodeURIComponent(redirectURL)+"&endpointAlias="+window.globalEndpointAlias;
     }
     contentForm.submit();
 }
 
 function cancelOnClick() {
-    require(["sbt/config"], function(config){
-        var agrsMap = getArgsMap();// get map of query string arguments
-        var redirectURL = decodeURIComponent(agrsMap.redirectURL);
-        var loginUi = decodeURIComponent(agrsMap.loginUi);
-        if (loginUi == "popup") {
-            if(config.cancel){
-                config.cancel();
-                delete config.cancel;
-            }
-            delete config.callback;
-            window.close();
-        } else {
-            window.location.href = redirectURL;
+    var argsMap = getArgsMap();// get map of query string arguments
+    var redirectURL = decodeURIComponent(argsMap.redirectURL);
+    var loginUi = decodeURIComponent(argsMap.loginUi);
+    if (loginUi == "popup") {
+        if(window.cancel){
+            window.cancel();
+            delete window.cancel;
         }
-    });
-    
+        window.close();
+    } else {
+        window.location.href = redirectURL;
+    }
 }
 
 function onLoginPageLoad() {
-    var agrsMap = getArgsMap();// get map of query string arguments
-    var showWrongCredsMessage = agrsMap.showWrongCredsMessage;
+    var argsMap = getArgsMap();// get map of query string arguments
+    var showWrongCredsMessage = argsMap.showWrongCredsMessage;
     if (showWrongCredsMessage == "true") {
         document.getElementById("wrongCredsMessage").style.display = "block";
     }
-    if(opener && opener.globalLoginFormStrings){
-        var loginForm = opener.globalLoginFormStrings;
+    if(window.globalLoginFormStrings){
+        var loginForm = window.globalLoginFormStrings;
     	document.getElementById('wrongCredsMessage').innerHTML = loginForm.wrong_creds_message;
     	document.getElementById('basicLoginFormUsername').innerHTML = loginForm.username;
     	document.getElementById('basicLoginFormPassword').innerHTML = loginForm.password;
@@ -87,12 +83,13 @@ function getArgsMap() {
         var qString = location.search.substring(1);// getting query string args
         var qStringParams = qString.split("&");// getting array of all query
                                                 // string arg key value pairs
-        var agrsMap = {};
+        var argsMap = {};
+        var i;
         for (i = 0; i < qStringParams.length; i++) {
             var argArray = qStringParams[i].split("=");
-            agrsMap[argArray[0]] = argArray[1];
+            argsMap[argArray[0]] = argArray[1];
         }
-        return agrsMap;
+        return argsMap;
     } catch (err) {
         console.log("Error making agrs map in login.js " + err);
     }

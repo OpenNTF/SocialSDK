@@ -16,7 +16,9 @@
 package sbt;
 
 import com.ibm.commons.util.io.json.JsonFactory;
+import com.ibm.jscript.types.FBSValue;
 import com.ibm.sbt.util.DataNavigator;
+import com.ibm.xsp.extlib.util.JSJson;
 
 /**
  * Helper to navigate through a Json object.
@@ -30,4 +32,12 @@ public class JsonNavigator extends DataNavigator.Json {
     public JsonNavigator(Object root) {
         super(root);
     }
+    
+    @Override
+	protected JsonFactory findFactory(Object root) {
+		if (root instanceof FBSValue) {
+			return JSJson.factory;
+		}
+		return super.findFactory(root);
+	}
 }

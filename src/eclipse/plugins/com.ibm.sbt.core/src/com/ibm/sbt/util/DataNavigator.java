@@ -254,9 +254,12 @@ public abstract class DataNavigator implements Cloneable /*extends DataObject*/ 
                 this.currentNodes = Collections.emptyList();
             }
             if(factory==null) {
-                factory = JsonJavaFactory.instanceEx;
+                factory=findFactory(root);
             }
             this.factory = factory;
+        }
+        protected JsonFactory findFactory(Object root){
+        	return JsonJavaFactory.instanceEx;
         }
         protected Json(Json copy, List<Object> nodes) {
             this.root = copy.root;

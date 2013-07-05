@@ -62,11 +62,8 @@
          		<xe:pageTreeNode page="SametimeLiveName"
          			label="IBM Sametime" selection="/Sametime/.*">
          		</xe:pageTreeNode>
-         		<xe:pageTreeNode page="SBTActivityStreamsJson"
-         			label="IBM Social Business Toolkit" selection="/SBT/.*">
-         		</xe:pageTreeNode>
-         		<xe:pageTreeNode page="LotusLiveFiles"
-         			label="LotusLive" selection="/LotusLive/.*">
+         		<xe:pageTreeNode page="SmartCloudFiles"
+         			label="IBM SmartCloud" selection="/SmartCloud/.*">
          		</xe:pageTreeNode>
          		<xe:pageTreeNode page="DropboxFiles" label="Dropbox"
          			selection="/Dropbox/.*">

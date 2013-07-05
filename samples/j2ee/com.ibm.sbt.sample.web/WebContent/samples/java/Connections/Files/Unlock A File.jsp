@@ -14,6 +14,7 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@page import="java.util.List"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.FileService"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
@@ -31,11 +32,13 @@
 <body>	
 	<%
 	try {
-				FileService service = new FileService();
-				String fileId =  Context.get().getProperty("sample.fileId");
+				FileService fileService = new FileService();
+        		List<FileEntry> fileEntries = fileService.getMyFiles();
+        		FileEntry fileEntry = fileEntries.get(0);
+				String fileId = fileEntry.getFileId();
 				out.println("<b> UnLocking File</b>" + fileId); 	
-				service.unlock(fileId);
-				out.println("<br> File UnLock Status : " + service.FileStatus ); 
+				fileService.unlock(fileId);
+				out.println("<br> File UnLock Status : " + fileService.FileStatus ); 
 		}catch (Throwable e) {
 			out.println("<pre>");
 			out.println(e.getMessage());

@@ -16,8 +16,8 @@
 /**
  * 
  */
-define(["sbt/declare", "sbt/config", "sbt/widget/_TemplatedWidget", "sbt/stringUtil", "sbt/json", 
-        "sbt/text!sbt/connections/controls/templates/WidgetFrame.html", "sbt/i18n!sbt/connections/controls/nls/WidgetWrapper" ], 
+define(["../../declare", "../../config", "../../widget/_TemplatedWidget", "../../stringUtil", "../../json", 
+        "../../text!sbt/connections/controls/templates/WidgetFrame.html", "../../i18n!sbt/connections/controls/nls/WidgetWrapper" ], 
         function(declare, config, _TemplatedWidget, stringUtil, JSON, frameTemplate, nls) {
 
     /**

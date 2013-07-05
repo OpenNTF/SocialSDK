@@ -13,7 +13,7 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-define(["sbt/declare", "sbt/config", "sbt/connections/controls/astream/_XhrHandler", "dijit/_Widget"], function(declare, config, _XhrHandler){
+define(["../../declare", "../../config", "../../connections/controls/astream/_XhrHandler", "dijit/_Widget"], function(declare, config, _XhrHandler){
     
     /*
      * Base class for common functionality of all connections widgets.

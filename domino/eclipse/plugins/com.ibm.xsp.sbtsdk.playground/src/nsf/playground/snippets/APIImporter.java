@@ -114,7 +114,8 @@ public class APIImporter extends AssetImporter {
 			importAssetsNSF(client, source, apiDocs, list.get(i),action);
 		}
 
-		List<ImportOptions> options = PlaygroundExtensionFactory.getExtensions(ImportOptions.class);
+		// Get the import options for all the platforms
+		List<ImportOptions> options = PlaygroundExtensionFactory.getExtensions(ImportOptions.class,null);
 		
 		for(Map.Entry<String, APIDocument> ed: apiDocs.entrySet()) {
 			String[] products = ed.getValue().products;
@@ -189,8 +190,6 @@ public class APIImporter extends AssetImporter {
 			}
 			
 			String[] products = StringUtil.splitString(doc.getString("Products"),',');
-			Object mt2 = doc.get("RequestsDetails");
-			String to = mt2!=null ? mt2.getClass().getName() : "<null>";
 			List mt = (List)doc.get("RequestsDetails");
 			if(mt!=null) {
 				for(int i=0; i<mt.size(); i++) {

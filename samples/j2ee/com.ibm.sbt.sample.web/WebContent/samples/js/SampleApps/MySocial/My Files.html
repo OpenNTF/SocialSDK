@@ -1,28 +1,9 @@
-<div style="margin-bottom:0.5em;"><span style="font-weight:bold;">My Files</span></div>
 <div id="gridDiv"></div>
 
 <script type="text/template" id="fileRow">
-<tr>
-    <td style="width: 100%;">
-        <h4>
-            <a title="${tooltip}" href="" data-dojo-attach-event="onclick: handleClick">${title}</a>    
-        </h4>
-        <div>
-            <ul>
-                <li>
-                    ${authorName}
-                ${_nls.created} ${createdLabel}
-                </li>
-                <li>
-                    ${hitCount} ${_nls.downloads}
-                </li>
-                <li>
-                    ${commentCount} ${_nls.comments}
-                </li>
-            </ul>
-        </div>
-    </td>
-</tr>
+<li style="border-top: 1px solid #EEEEEE;">       
+    <a title="${tooltip}" style="color: #000000;line-height:3em;font-size:18px;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif" href="" data-dojo-attach-event="onclick: handleClick">${title}</a>   
+</li>        
 </script>
 
 

@@ -170,7 +170,7 @@ public abstract class ClientService {
 		return "";
 	}
 
-	public void forceAuthentication(Args args) throws ClientServicesException {
+	protected void forceAuthentication(Args args) throws ClientServicesException {
 		if (endpoint != null) {
 			endpoint.authenticate(true);
 		} else {

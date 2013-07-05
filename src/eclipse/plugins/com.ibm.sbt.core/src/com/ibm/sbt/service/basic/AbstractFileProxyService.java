@@ -26,6 +26,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import com.ibm.commons.runtime.NoAccessSignal;
 import com.ibm.commons.util.PathUtil;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.ClientService;
@@ -203,6 +204,28 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 		}
 		return b.toString();
 	}
+	
+	protected void forceAuthentication(Args args) throws ClientServicesException {
+		if (endpoint != null) {
+			endpoint.authenticate(true);
+		} else {
+			throw new NoAccessSignal(StringUtil.format("Authorization needed for service {0}",
+					getUrlPath(args)));
+		}
+	}
+	
+	protected String getBaseUrl() {
+		if (endpoint != null) {
+			return endpoint.getUrl();
+		}
+		return null;
+	}
+	
+	protected String getUrlPath(Args args) {
+		String baseUrl = getBaseUrl();
+		String serviceUrl = args.getServiceUrl();
+		return PathUtil.concat(baseUrl, serviceUrl, '/');
+	}
 
 	private void xhr(HttpServletRequest request, HttpServletResponse response, String serviceUrl, Map<String, String[]> parameters,
 			Map<String, String> headers, Content content, Handler format) throws ClientServicesException, ClientProtocolException, IOException,
@@ -231,7 +254,7 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 		if ("get".equalsIgnoreCase(smethod) && (clientResponse.getStatusLine().getStatusCode() == HttpServletResponse.SC_UNAUTHORIZED)
 				|| (endpoint != null && endpoint.getAuthenticationErrorCode() == clientResponse.getStatusLine()
 						.getStatusCode())) {
-			this.endpoint.getClientService().forceAuthentication(args);
+			forceAuthentication(args);
 		}
 		prepareResponse(method, request, response, clientResponse, true);	
 	}

@@ -50,7 +50,7 @@ public class AuthenticationService extends ClientService {
     }
 
     @Override
-    public void forceAuthentication(Args args) throws ClientServicesException {
+    protected void forceAuthentication(Args args) throws ClientServicesException {
         // ok, we are not authenticated...
         this.validAuthentication = false;
     }

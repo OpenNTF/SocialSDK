@@ -1,4 +1,4 @@
-function parseLotusLiveCommunities(xml){
+function parseSmartCloudCommunities(xml){
 	var navigator  = new sbt.XmlNavigator(xml).get("feed/entry");
     
     if(navigator != null){

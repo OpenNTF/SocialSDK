@@ -33,7 +33,7 @@ public class PlaygroundEnvironment extends SBTEnvironment {
 
 	private String noteID;
 	private String description;
-	private boolean preferred;
+	private boolean preferred;	
 	
 	private FieldMap fields = new FieldMap();
 		
@@ -47,8 +47,13 @@ public class PlaygroundEnvironment extends SBTEnvironment {
 	
 	public PlaygroundEnvironment(String name, Property[] properties) {
 		super(name,
-			  createEndpoints(),
+			  null,
 			  properties);
+		setEndpointsArray(createEndpoints());
+	}
+	
+	public String[] getPlatforms() {
+		return null;
 	}
 	
 	public Map<String,String> getFieldMap() {
@@ -61,10 +66,10 @@ public class PlaygroundEnvironment extends SBTEnvironment {
 		fields.put(name,value);
 	}
 	
-	private static SBTEnvironment.Endpoint[] createEndpoints() {
+	private SBTEnvironment.Endpoint[] createEndpoints() {
 		ArrayList<SBTEnvironment.Endpoint> endpoints = new ArrayList<SBTEnvironment.Endpoint>();
 
-		List<Endpoints> envext = PlaygroundExtensionFactory.getExtensions(Endpoints.class);
+		List<Endpoints> envext = PlaygroundExtensionFactory.getExtensions(Endpoints.class,getPlatforms());
 		for(int ev=0; ev<envext.size(); ev++) {
 			Endpoints e = envext.get(ev);
 			String[] sp = StringUtil.splitString(e.getEndpointNames(), ',', true);
@@ -100,7 +105,7 @@ public class PlaygroundEnvironment extends SBTEnvironment {
 	}
 
 	public void prepareEndpoints() {
-		List<Endpoints> endpoints = PlaygroundExtensionFactory.getExtensions(Endpoints.class);
+		List<Endpoints> endpoints = PlaygroundExtensionFactory.getExtensions(Endpoints.class,getPlatforms());
 		for(int i=0; i<endpoints.size(); i++) {
 			endpoints.get(i).prepareEndpoints(this);
 		}

@@ -52,9 +52,9 @@ return declare(null, {
 	        var loginPage = options.loginPage || config.Properties["loginPage"] || self.loginPage;
 	        var dialogLoginPage = options.dialogLoginPage || config.Properties["dialogLoginPage"] || self.dialogLoginPage;
 	        if(mode=="popup") {
-	            self._authPopup(options, loginPage, config, self.url, loginPage);
+	            self._authPopup(options, loginPage, config, self.url);
 	        } else if(mode=="dialog") {
-	            self._authDialog(options, dialogLoginPage, config, dialogLoginPage);
+	            self._authDialog(options, dialogLoginPage, config);
 	        } else {
 	            self._authMainWindow(options, loginPage, self.url);
 	        }
@@ -79,21 +79,10 @@ return declare(null, {
 		return true;
 	},
 	
-	_authPopup: function(options, loginPage, sbtConfig, sbtUrl, loginPage) {
-	    var self = this;
+	_authPopup: function(options, loginPage, sbtConfig, sbtUrl) {
 	    require(["sbt/i18n!sbt/nls/loginForm"], function(loginForm) {
-            if(options.callback){
-                sbtConfig.callback = options.callback;
-            }
-            if(options.cancel){
-                sbtConfig.cancel = options.cancel;
-            }
-            globalLoginFormStrings = loginForm;
-            globalEndpointAlias = options.name;
-            
             var proxy = options.proxy.proxyUrl;
             var actionURL = proxy.substring(0,proxy.lastIndexOf("/"))+"/basicAuth/"+options.proxyPath+"/JSApp";
-            
             var urlParamsMap = {
                 actionURL: actionURL,
                 redirectURL: 'empty',
@@ -117,6 +106,16 @@ return declare(null, {
             };
             var windowParams = util.createQuery(windowParamsMap, ",");
             var loginWindow = window.open(url,'Authentication', windowParams);
+            if(options.callback){
+                sbtConfig.callback = options.callback;
+                loginWindow.callback = options.callback;
+            }
+            if(options.cancel){
+                sbtConfig.cancel = options.cancel;
+                loginWindow.cancel = options.cancel;
+            }
+            loginWindow.globalLoginFormStrings = loginForm;
+            loginWindow.globalEndpointAlias = options.name;
             loginWindow.focus();
         });
         

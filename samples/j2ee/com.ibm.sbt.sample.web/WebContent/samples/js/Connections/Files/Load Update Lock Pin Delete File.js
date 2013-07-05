@@ -41,12 +41,6 @@ function loadFile(fileService, dom) {
 	}
 }
 
-function downloadFile(fileService, dom) {
-	if (currentFile) {
-		fileService.downloadFile(currentFile.getId(), currentFile.getLibraryId());
-	}
-}
-
 function lockFile(fileService, id, dom) {
 	fileService.lockFile(id).then(function(status) {
 		dom.byId("lockUnlock").innerHTML = "Unlock";
@@ -152,7 +146,7 @@ function addOnClickHandlers(fileService, dom) {
 
 	dom.byId("download").onclick = function(evt) {
 		if (currentFile) {
-			downloadFile(fileService, dom);
+			fileService.downloadFile(currentFile.getId(), currentFile.getLibraryId());
 		}
 	};
 

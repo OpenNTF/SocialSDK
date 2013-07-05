@@ -17,8 +17,8 @@
  * 
  */
 define(["sbt/declare", "sbt/config", "sbt/widget/_TemplatedWidget", "sbt/stringUtil", "sbt/json", 
-        "sbt/text!sbt/connections/controls/templates/WidgetFrame.html"], 
-        function(declare, config, _TemplatedWidget, stringUtil, JSON, frameTemplate) {
+        "sbt/text!sbt/connections/controls/templates/WidgetFrame.html", "sbt/i18n!sbt/connections/controls/nls/WidgetWrapper" ], 
+        function(declare, config, _TemplatedWidget, stringUtil, JSON, frameTemplate, nls) {
 
     /**
      * Base class for wrapped widgets. 
@@ -119,8 +119,7 @@ define(["sbt/declare", "sbt/config", "sbt/widget/_TemplatedWidget", "sbt/stringU
                     });
                 }
                 else{
-                    //TODO See if this should be in an nls file.
-                    this.defaultTemplate = "No DefaultTemplate specified.";
+                    this.defaultTemplate = nls.root.defaultTemplate;
                 }
                 
                 iframe.open();

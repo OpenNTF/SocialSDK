@@ -29,7 +29,7 @@
 <%@page import="com.ibm.sbt.playground.assets.CategoryNode"%>
 <%@page import="com.ibm.sbt.sample.web.util.SnippetFactory"%>
 <%
-RootNode rootNode = SnippetFactory.getJsSnippets(application);
+RootNode rootNode = SnippetFactory.getJsSnippets(application, request);
 String snippetName = request.getParameter("snippet");
 JSSnippet snippet = (JSSnippet)rootNode.loadAsset(SnippetFactory.getJsRootFile(application), snippetName);
 String[] labels = snippet.getLabels();

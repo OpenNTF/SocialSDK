@@ -141,6 +141,8 @@ public class AssetBrowser {
     }
     
     private boolean jsLibMatches(String sampleJsLibs){
+        if(this.jsLibId == null)
+            return true; // no jsLibId specified in request url, include all samples.
         String sampleJsLibArray[] = sampleJsLibs.split(",");
         for(String sampleJsLib : sampleJsLibArray){
             if(this.jsLibId.contains(sampleJsLib))
@@ -150,6 +152,8 @@ public class AssetBrowser {
     }
     
     private boolean endpointMatches(String sampleEndpoints){
+        if(this.endpoints == null)
+            return true; // no endpoints in context for some reason, include samples.
         String[] sampleEndpointsArray = sampleEndpoints.split(",");
         for(String sampleEndpoint : sampleEndpointsArray){
             for(SBTEnvironment.Endpoint envEndpoint : this.endpoints){

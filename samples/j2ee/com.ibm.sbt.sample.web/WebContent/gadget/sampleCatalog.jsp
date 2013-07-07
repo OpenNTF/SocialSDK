@@ -56,7 +56,7 @@
 	<div class="well sidebar-nav">
 		<ul class="nav nav-list">
 		<%
-		RootNode rootNode = SnippetFactory.getJsSnippets(application);
+		RootNode rootNode = SnippetFactory.getJsSnippets(application, request);
 		List<Node> children = rootNode.getAllChildrenFlat();
 		for (int i=0; i<children.size(); i++) {
 			Node node = children.get(i);

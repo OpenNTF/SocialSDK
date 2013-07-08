@@ -21,7 +21,12 @@ require(["sbt/connections/FileService", "sbt/dom"],
                     for(var i=0; i<files.length; i++){
                         var file = files[i];
                         createRow(i);
-                        dom.setText("title"+i, file.getTitle()); 
+                        var aElement = document.createElement("a");
+            			aElement.setAttribute("id", "a" + i);
+            			aElement.setAttribute("href", file.getDownloadUrl());			            			                       
+            			var title = document.getElementById("title"+i);
+            			title.appendChild(aElement);
+            			dom.setText("a" + i, file.getTitle());
                         dom.setText("id"+i, file.getId()); 
                     }
                 }

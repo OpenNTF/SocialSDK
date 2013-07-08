@@ -41,19 +41,6 @@ function loadFile(fileService, dom) {
 	}
 }
 
-/*function downloadFile(fileService, dom) {
-	if (currentFile) {
-		fileService.downloadFile(currentFile.getId(), currentFile.getLibraryId(), currentFile.getLabel(), {
-			load : function() {
-				displayMessage(dom, "Successfully Downloaded file: " + currentFile.getId());
-			},
-			error : function(error) {
-				handleError(dom, error);
-			}
-		});
-	}
-}*/
-
 function lockFile(fileService, id, dom) {
 	fileService.lockFile(id).then(function(status) {
 		dom.byId("lockUnlock").innerHTML = "Unlock";
@@ -81,6 +68,8 @@ function pinFile(fileService, id, dom) {
 		isPinned = true;
 	}, function(error) {
 		handleError(dom, error);
+		dom.byId("pinUnPin").innerHTML = "UnPin";
+		isPinned = true;
 	});
 }
 
@@ -91,6 +80,8 @@ function unPinFile(fileService, id, dom) {
 		isPinned = false;
 	}, function(error) {
 		handleError(dom, error);
+		dom.byId("pinUnPin").innerHTML = "Pin";
+		isPinned = false;
 	});
 }
 
@@ -157,11 +148,11 @@ function addOnClickHandlers(fileService, dom) {
 		loadFile(fileService, dom);
 	};
 
-	/*dom.byId("download").onclick = function(evt) {
+	dom.byId("download").onclick = function(evt) {
 		if (currentFile) {
-			downloadFile(fileService, dom);
+			fileService.downloadFile(currentFile.getId(), currentFile.getLibraryId());
 		}
-	};*/
+	};
 
 	dom.byId("updateBtn").onclick = function(evt) {
 		if (currentFile) {

@@ -50,11 +50,11 @@
   		gadgets.Hub.publish("com.ibm.sbt.sample.url", uuid);
 	}
     </script>
-    <link href="/sbt.bootstrap211/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="/sbt.bootstrap211/bootstrap/css/bootstrap-sbt.css" rel="stylesheet">
     <link href="/sbt.bootstrap211/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 	<div class="well sidebar-nav">
 		<ul class="nav nav-list">
-		<%RootNode rootNode = SnippetFactory.getJsSnippets(application);
+		<%RootNode rootNode = SnippetFactory.getJsSnippets(application, request);
 		List<Node> children = rootNode.getAllChildrenFlat();
 		for (int i=0; i<children.size(); i++) {
 			Node node = children.get(i);

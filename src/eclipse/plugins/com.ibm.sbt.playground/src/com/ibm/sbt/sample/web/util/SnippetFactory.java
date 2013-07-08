@@ -17,19 +17,18 @@ package com.ibm.sbt.sample.web.util;
 
 import java.io.IOException;
 import java.util.Properties;
-
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.w3c.dom.Document;
-
+import com.ibm.commons.runtime.Context;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.DOMUtil;
 import com.ibm.commons.xml.XResult;
+import com.ibm.sbt.jslibrary.SBTEnvironment;
 import com.ibm.sbt.playground.assets.Asset;
 import com.ibm.sbt.playground.assets.AssetBrowser;
 import com.ibm.sbt.playground.assets.NodeFactory;
@@ -72,8 +71,8 @@ public class SnippetFactory {
 	 * @param context
 	 * @return RootNode of the local JSSnippets.
 	 */
-	public static RootNode getJsSnippets(ServletContext context){
-		return getSnippets(context, new JSSnippetNodeFactory(), jsRootPath);
+	public static RootNode getJsSnippets(ServletContext context, HttpServletRequest request){
+		return getSnippets(context, new JSSnippetNodeFactory(), jsRootPath, request);
 	}
 	
 	/**
@@ -84,10 +83,10 @@ public class SnippetFactory {
 	 * @return JSSnippets in JSON format. 
 	 */
 	public static String getJsSnippetsAsJson(ServletContext context, HttpServletRequest request) {
-	    RootNode root = getJsSnippets(context);
+	    RootNode root = getJsSnippets(context, request);
 	    String json = root.getAsJson();
 	    String jsonEx = readRemoteJson(context, request);
-	    if (StringUtil.isNotEmpty(jsonEx)) {
+	    if (StringUtil.isNotEmpty(jsonEx)&&jsonEx.contains("children")) {
 	        jsonEx = jsonEx.substring("[{\"id\":\"_root\",\"name\":\"_root\",\"children\":[".length());
 	        json = json.substring(0, json.length()-3) + "," + jsonEx;
 	    }
@@ -113,8 +112,8 @@ public class SnippetFactory {
 	 * @param context
 	 * @return RootNode of the local JavaSnippets.
 	 */
-	public static RootNode getJavaSnippets(ServletContext context){
-		return getSnippets(context, new JavaSnippetNodeFactory(), javaRootPath);
+	public static RootNode getJavaSnippets(ServletContext context, HttpServletRequest request){
+		return getSnippets(context, new JavaSnippetNodeFactory(), javaRootPath, request);
 	}
 	
 	/**
@@ -149,7 +148,7 @@ public class SnippetFactory {
 	 */
 	private static Asset getAsset(ServletContext context, HttpServletRequest request, String assetName, NodeFactory nodeFactory, String rootPath){
 		try {
-	        RootNode root = getSnippets(context, nodeFactory, rootPath);
+	        RootNode root = getSnippets(context, nodeFactory, rootPath, request);
 	        return root.loadAsset(getRootFile(context, rootPath), assetName);
 	    } catch (IOException ioe) {
 	        return null;
@@ -176,11 +175,11 @@ public class SnippetFactory {
 	 * @param path The path to the root of the snippets to be retrieved.
 	 * @return RootNode of the Snippets.
 	 */
-	private static RootNode getSnippets(ServletContext context, NodeFactory nodeFactory, String path){
+	private static RootNode getSnippets(ServletContext context, NodeFactory nodeFactory, String path, HttpServletRequest request){
 		RootNode root;
 		try {
 			VFSFile file = getRootFile(context, path);
-			root = readAssets(context, file, nodeFactory);
+			root = readAssets(context, file, nodeFactory, request);
 		} catch(IOException ex) {
 			root = new RootNode();
 		}
@@ -196,9 +195,36 @@ public class SnippetFactory {
 	 * @return RootNode of snippets, which allows search and manipulation of snippets.
 	 * @throws IOException
 	 */
-	private static RootNode readAssets(ServletContext context, VFSFile file, NodeFactory nodeFactory) throws IOException{
-		AssetBrowser imp = new AssetBrowser(file, nodeFactory);
+	private static RootNode readAssets(ServletContext context, VFSFile file, NodeFactory nodeFactory, HttpServletRequest request) throws IOException{
+	    AssetBrowser imp = new AssetBrowser(file, nodeFactory, getEndpoints(request), getJsLibId(request));
+	    
 		return (RootNode)imp.readAssets(new RootNode(), null);
+	}
+	
+	private static SBTEnvironment.Endpoint[] getEndpoints(HttpServletRequest request){
+	    Context context = Context.get();
+	    String environment = "defaultEnvironment";
+	    if(request.getParameter("env") != null){
+	        environment = request.getParameter("env");
+	    }
+	    else if (context.getProperty("environment") != null){
+	        environment = context.getProperty("environment");
+	    }
+	    Object obj = context.getBean(environment);
+	    if(obj != null){
+	        SBTEnvironment bean = (SBTEnvironment) obj;
+	        return bean.getEndpointsArray();
+	    }
+	    else {
+	        return null;
+	    }
+	}
+	
+	private static String getJsLibId(HttpServletRequest request){
+	    if(request.getParameter("jsLibId") != null)
+	        return request.getParameter("jsLibId");
+	    else
+	        return null;
 	}
 
 	private static String readRemoteJson(ServletContext context, HttpServletRequest request) {

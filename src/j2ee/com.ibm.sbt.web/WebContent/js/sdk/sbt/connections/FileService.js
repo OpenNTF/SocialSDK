@@ -37,7 +37,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		 * @rturns {String} File Id
 		 */
 		getId : function() {
-			return this.id ? this.id : this.getAsString("uid");
+			return this.id || this.getAsString("uid");
 		},
 		/**
 		 * Returns Comment Title
@@ -143,7 +143,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		 * @returns {String} file Id
 		 */
 		getId : function() {
-			return this.id ? this.id : this._fields.id ? this._fields.id : this.getAsString("uid");
+			return this.id || this._fields.id || this.getAsString("uid");
 		},
 		/**
 		 * Returns the label
@@ -1011,14 +1011,15 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 			if (promise) {
 				return promise;
 			}
-			//var parameters = args ? lang.mixin({}, args) : {};
-			//parameters["itemId"] = fileId;
+			var parameters = args ? lang.mixin({}, args) : {};
+			parameters["itemId"] = fileId;
 
 			var options = {
 				method : "POST",
 				headers : {
 					"X-Update-Nonce" : "{X-Update-Nonce}"
-				}
+				},
+				query : parameters
 			};
 
 			var callbacks = {
@@ -1041,16 +1042,17 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 			var promise = this.validateField("fileId", fileId);
 			if (promise) {
 				return promise;
-			}
-
-			//var parameters = args ? lang.mixin({}, args) : {};
-			//parameters["itemId"] = fileId;
+			}		
+			
+			var parameters = args ? lang.mixin({}, args) : {};
+			parameters["itemId"] = fileId;
 
 			var options = {
 				method : "DELETE",
 				headers : {
 					"X-Update-Nonce" : "{X-Update-Nonce}"
-				}
+				},
+				query : parameters
 			};
 
 			return this.deleteEntity(consts.AtomPinFile, options, fileId);

@@ -68,6 +68,8 @@ function pinFile(fileService, id, dom) {
 		isPinned = true;
 	}, function(error) {
 		handleError(dom, error);
+		dom.byId("pinUnPin").innerHTML = "UnPin";
+		isPinned = true;
 	});
 }
 
@@ -78,6 +80,8 @@ function unPinFile(fileService, id, dom) {
 		isPinned = false;
 	}, function(error) {
 		handleError(dom, error);
+		dom.byId("pinUnPin").innerHTML = "Pin";
+		isPinned = false;
 	});
 }
 

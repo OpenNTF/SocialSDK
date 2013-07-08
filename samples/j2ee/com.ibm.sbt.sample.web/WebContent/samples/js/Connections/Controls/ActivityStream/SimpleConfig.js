@@ -1,7 +1,7 @@
 require(["sbt/dom", "sbt/config", "sbt/connections/controls/astream/ActivityStreamWrapper"], function(dom, config, ActivityStreamWrapper) {
     config.Properties["loginUi"] = "popup";
     var asConfig = {
-            urlTemplate : "/connections/opensocial/rest/activitystreams/@me/@all/${appId}",
+            urlTemplate : "/connections/opensocial/rest/activitystreams/@me/@involved/${appId}",
             defaultUrlTemplateValues : {
                 userId : "@me",
                 groupId : "@all",
@@ -19,11 +19,11 @@ require(["sbt/dom", "sbt/config", "sbt/connections/controls/astream/ActivityStre
                                 },
                                 label : "All Types"
                             },
-                            blogs : {
+                            communities : {
                                 params : {
-                                    appId : "blogs",
+                                    appId : "communities",
                                 },
-                                label : "Blogs"
+                                label : "Communities"
                             },
                             profiles : {
                                 params : {

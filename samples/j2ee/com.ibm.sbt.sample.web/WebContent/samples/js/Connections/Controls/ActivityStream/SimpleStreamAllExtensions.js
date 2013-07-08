@@ -4,7 +4,6 @@ require(["sbt/dom", "sbt/config", "sbt/connections/controls/astream/ActivityStre
         feedUrl: "/basic/rest/activitystreams/@public/@all/@all?rollup=true",
         activityStreamNode: "activityStream",
         shareBoxNode : "inputForm",
-        sideNavNode : "sideNav",
         extensions: {
             commenting: true,
             saving: true,

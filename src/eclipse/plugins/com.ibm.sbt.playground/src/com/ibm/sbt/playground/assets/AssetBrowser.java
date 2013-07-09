@@ -45,12 +45,12 @@ public class AssetBrowser {
 		this.extensions = factory.getAssetExtensions();
 	}
 	
-	public AssetBrowser(VFSFile rootDirectory, NodeFactory factory, SBTEnvironment.Endpoint[] endpoints, String jslibId) {
+	public AssetBrowser(VFSFile rootDirectory, NodeFactory factory, SBTEnvironment.Endpoint[] endpoints, String jsLibId) {
         this.rootDirectory = rootDirectory;
         this.factory = factory;
         this.extensions = factory.getAssetExtensions();
         this.endpoints = endpoints;
-        this.jsLibId = jslibId;
+        this.jsLibId = jsLibId;
     }
 	
 	public RootNode readAssets() throws IOException {

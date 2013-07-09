@@ -173,7 +173,9 @@
                 setLeafBehaviour();
             });
         };
-        
+        $("#treeOutline").ajaxComplete(function(){
+            setNewLeafNodeListener();
+        });
         setLeafBehaviour();
         setNewLeafNodeListener();
         $("#envChange").change(function(e){
@@ -182,16 +184,17 @@
             setEnv(env);
             ajaxRefresh(getSnippet(), getJsLibId(), getEnv(), getThemeId(), function(parameters){
                 var outlineQuery = outlinePage + parameters;
-                $("#treeOutline").load(outlineQuery).ajaxComplete(function(){
-                    setNewLeafNodeListener();
-                });
+                $("#treeOutline").load(outlineQuery);
             });
         });
         $("#libChange").change(function(e){
             e.preventDefault();
             var jsLibId = getUrlParameter($("#libChange option:selected").attr("value"), "jsLibId");
             setJsLibId(jsLibId);
-            ajaxRefresh(getSnippet(), getJsLibId(), getEnv(), getThemeId());
+            ajaxRefresh(getSnippet(), getJsLibId(), getEnv(), getThemeId(), function(parameters){
+                var outlineQuery = outlinePage + parameters;
+                $("#treeOutline").load(outlineQuery);
+            });
         });
         var cssObj = {
                 'max-height' : document.body.scrollHeight,

@@ -20,7 +20,8 @@
  * @module sbt.connections.FileService
  */
 
-define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstants", "../base/BaseService", "../base/BaseEntity", "../base/XmlDataHandler", "../config", "../util", "../xml"], function(declare, lang, stringUtil, Promise, consts, BaseService, BaseEntity, XmlDataHandler, config, util, xml) {
+define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstants", "../base/BaseService", "../base/BaseEntity", "../base/XmlDataHandler", "../config", "../util", "../xml"
+	   ], function(declare, lang, stringUtil, Promise, consts, BaseService, BaseEntity, XmlDataHandler, config, util, xml) {
 
 	/**
 	 * Comment class associated with a file comment.
@@ -1235,7 +1236,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 			var file = files[0];
 			var data = new FormData();
 			data.append("file", file);
-			return this.uploadFileBinary(data, file.name,  "POST", args);
+			return this.uploadFileBinary(data, file.name, args);
 		},
 
 		/**
@@ -1245,7 +1246,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		 * @param {String} filename The name of the file
 		 * @param {Object} [args] The additional parameters for upload
 		 */
-		uploadFileBinary : function(binaryContent, fileName, method, args) {
+		uploadFileBinary : function(binaryContent, fileName, args) {
 
 			var promise = this.validateField("Binary Content", binaryContent);
 			if (promise) {
@@ -1262,47 +1263,18 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 				"Content-Type" : false
 			};
 			var options = {
-				method : method,
+				method : "POST",
 				headers : headers,
 				query : args || {},
 				data : binaryContent
 			};
 
 			return this.updateEntity(url, options, this.getFileFeedCallbacks());
-		},
-		
-		/**
-		 * updates an existing file for logged in user.
-		 * @method updateFile
-		 * @param {Object} fileControlOrId The Id of html control or the html control
-		 * @param {Object} [args] The additional parameters for updating file metadata
-		 */
-		updateFile : function(fileControlOrId, args) {
-
-			var promise = this.validateField("File Control Or Id", fileControlOrId);
-			if (promise) {
-				return promise;
-			}
-			if (!window.File) {
-				var message = "HTML 5 File API is not supported by the Browser.";
-				return this.createBadRequestPromise(message);
-			}
-			var files = null;
-			if (typeof fileControlOrId == "string") {
-				var fileControl = document.getElementById(fileControlOrId);
-				filePath = fileControl.value;
-				files = fileControl.files;
-			} else if (typeof fileControlOrId == "object") {
-				filePath = fileControlOrId.value;
-				files = fileControlOrId.files;
-			} else {
-				return this.createBadRequestPromise("File Control or ID is required");
-			}
-
-			var file = files[0];
-			var data = new FormData();
-			data.append("file", file);
-			return this.uploadFileBinary(data, file.name, "PUT", args);
+			/*
+			 * this.endpoint.xhrPost({ url : url, postData : binaryContent, headers : headers, load : function(data) { var file = self.getFileFeedCallbacks().createEntity(this, data); if (args) { if
+			 * (args.load) args.load(file); else if (args.handle) args.handle(file); } else { log.error("Callbacks not defined. Return Value={0}", param); } }, error : function(error) {
+			 * util.notifyError(error, args); } });
+			 */
 		},
 
 		/**

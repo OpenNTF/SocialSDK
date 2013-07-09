@@ -10,6 +10,8 @@
 <%@page import="com.ibm.commons.runtime.util.ParameterProcessor.ParameterProvider"%>
 <%@page import="com.ibm.sbt.sample.web.util.SnippetFactory"%>
 <%@page import="com.ibm.sbt.sample.web.util.Util"%>
+<%@page import="java.net.URLEncoder"%>
+
 <!DOCTYPE html>
 <html lang="en" style="height: 100%;">
   <%
@@ -20,7 +22,12 @@
       String theme = request.getParameter("themeId");
       boolean debug = false;
       boolean loadDojo = true;
-      
+      final HttpServletRequest finalRequest = request;
+      ParameterProvider parameterProvider = ParameterProcessor.getDefaultProvider(new ParameterProvider() {
+          public String getParameter(String name) {
+              return finalRequest.getParameter(name);
+          }
+      });
       // doGet
       if(request.getMethod().equals("GET")){
           JSSnippet snippet = (JSSnippet)SnippetFactory.getJsSnippet(application, request, snippetName);
@@ -35,20 +42,24 @@
                   theme = snippet.getTheme();
           
               // replace substitution variables
-          	  final HttpServletRequest finalRequest = request;
+              boolean allParamsFound = true;
+              List<String> parameters = ParameterProcessor.getParametersQueryString(js + html);
+              String queryParams = "";
+              for(String param : parameters){
+                  String match = parameterProvider.getParameter(param);
+                  queryParams+=param+"="+match+"&";
+                  if(match == null)
+                      allParamsFound=false;
+              }
+              if(!allParamsFound){
+                  String callbackUrl = URLEncoder.encode(request.getRequestURI()+"?" + request.getQueryString(), "UTF-8");
+                  response.sendRedirect("paramsForm.jsp?callback=" + callbackUrl + "&" + queryParams);
+              }
               if (StringUtil.isNotEmpty(js)) {
-          		js = ParameterProcessor.process(js, new ParameterProvider() {
-          			public String getParameter(String name) {
-          				return finalRequest.getParameter(name);
-          			}
-          		}, true);
+          		js = ParameterProcessor.process(js, parameterProvider);
               }
               if (StringUtil.isNotEmpty(html)) {
-          		html = ParameterProcessor.process(html, new ParameterProvider() {
-          			public String getParameter(String name) {
-          				return finalRequest.getParameter(name);
-          			}
-          		}, true);
+          		html = ParameterProcessor.process(html, parameterProvider);
               }
           }
       } 
@@ -61,6 +72,12 @@
           }
           html = request.getParameter("htmlData");
           js = request.getParameter("jsData");
+          if (StringUtil.isNotEmpty(js)) {
+              js = ParameterProcessor.process(js, parameterProvider);
+          }
+          if (StringUtil.isNotEmpty(html)) {
+              html = ParameterProcessor.process(html, parameterProvider);
+          }
           css = request.getParameter("cssData");
           loadDojo = Boolean.parseBoolean(request.getParameter("loadDojo"));
       }

@@ -20,8 +20,8 @@
  * @module sbt.connections.FileService
  */
 
-define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstants", "../base/BaseService", "../base/BaseEntity", "../base/XmlDataHandler", "../config", "../util", "../xml",
-		"../formdata" ], function(declare, lang, stringUtil, Promise, consts, BaseService, BaseEntity, XmlDataHandler, config, util, xml) {
+define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstants", "../base/BaseService", "../base/BaseEntity", "../base/XmlDataHandler", "../config", "../util", "../xml"
+	   ], function(declare, lang, stringUtil, Promise, consts, BaseService, BaseEntity, XmlDataHandler, config, util, xml) {
 
 	/**
 	 * Comment class associated with a file comment.
@@ -1217,7 +1217,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 			if (promise) {
 				return promise;
 			}
-			if (!window.File) {
+			if (!window.File || !window.FormData) {
 				var message = "HTML 5 File API is not supported by the Browser.";
 				return this.createBadRequestPromise(message);
 			}
@@ -1230,7 +1230,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 				filePath = fileControlOrId.value;
 				files = fileControlOrId.files;
 			} else {
-				util.notifyError("File Control or ID is required", args);
+				return this.createBadRequestPromise("File Control or ID is required");
 			}
 
 			var file = files[0];

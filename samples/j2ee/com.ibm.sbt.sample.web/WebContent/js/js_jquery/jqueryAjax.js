@@ -175,6 +175,7 @@
         };
         
         setLeafBehaviour();
+        setNewLeafNodeListener();
         $("#envChange").change(function(e){
             e.preventDefault();
             var env = getUrlParameter($("#envChange option:selected").attr("value"), "env");

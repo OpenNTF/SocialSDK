@@ -325,6 +325,7 @@ public class OAProvider implements Serializable {
 					.loadCredentials(context, getAppId(), getServiceName()) : findTokenFromStore(context,
 					userId);
 			if (tk != null) {
+				setAccessToken(tk);
 				if (shouldRenewToken(tk)) {
 					return renewToken(tk);
 				}
@@ -416,6 +417,12 @@ public class OAProvider implements Serializable {
 				throw new OAuthException(cse, "Error finding credentials from the store");
 		}
 		return null;
+	}
+
+	private void setAccessToken(AccessToken token) {
+		//Setting the access token and access token secret in Handler, when token is fetched from the store. 
+		((OAuth1Handler)oauthHandler).setAccessToken(token.getAccessToken());
+		((OAuth1Handler)oauthHandler).setAccessTokenSecret(token.getTokenSecret());
 	}
 
 	public CredentialStore findCredentialStore() throws OAuthException {

@@ -15,7 +15,8 @@ require([ "sbt/connections/FileService", "sbt/dom" ], function(FileService, dom)
 			if (file.getLock() == "HARD") {
 				dom.byId("lockUnlock").innerHTML = "Unlock";
 			}
-			handleLoggedIn(FileService, dom);
+			handleFileLoaded(file, dom);
+			handleLoggedIn(fileService, dom);
 		}
 	});
 });
@@ -110,13 +111,8 @@ function updateFile(fileService, file, label, summary, visibility, dom) {
 	displayMessage(dom, "Please wait... Updating file: " + file.getId());
 }
 
-function handleLoggedIn(FileService, dom) {
-	var fileService = new FileService();
-	loadFile(fileService, dom);
-
-	addOnClickHandlers(fileService, dom);
-
-	displayMessage(dom, "Please wait... Loading your file");
+function handleLoggedIn(fileService, dom) {	
+	addOnClickHandlers(fileService, dom);	
 }
 
 function handleFileLoaded(file, dom) {

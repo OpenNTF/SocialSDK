@@ -17,38 +17,40 @@
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
-<%@page import="java.util.Collection"%>
-<%@page
-	import="com.ibm.sbt.services.client.connections.communities.Community"%>
-<%@page
-	import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
+<%@page import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
+<%@page import="com.ibm.sbt.services.client.connections.communities.Community"%>
+<%@page import="com.ibm.sbt.services.client.connections.communities.CommunityList"%>
+<%@page import="java.util.*"%>
+
+				
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	
 <html>
 <head>
-<title>SBT JAVA Sample - Get All Communities</title>
+<title>SBT JAVA Sample - Get Community by ID</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
 <body>
-	<h4>Public Communities</h4>
+	<h4>Get Public Communities </h4>
 	<div id="content">
 	<%
 		try {
-			CommunityService communityService = new CommunityService();
-			Collection<Community> communities = communityService.getPublicCommunities();
-			if (communities.size() > 0) {
-				for (Community community : communities) {
+			
+			CommunityService svc = new CommunityService();
+			CommunityList communities = svc.getPublicCommunities();
+			
+			out.println("<br>Listing public communities , Total communities found : "+communities.getTotalResults());
+			out.println("<br>");
+			for (Community community : communities) {
 					out.println("<b>Name : </b> " + community.getTitle());
 					out.println("<br>");
-				}
-			} else {
-				out.println("No result");
 			}
 		} catch (Throwable e) {
 			out.println("<pre>");
-			out.println(e.getMessage());
-			out.println("</pre>");
+			out.println("Problem Occurred while fetching public communities: " + e.getMessage());
+			
 		}
 	%>
 	</div>

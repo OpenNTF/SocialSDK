@@ -166,7 +166,7 @@ public class DropboxFiles extends AbstractType {
     public List<FileEntry> readFileEntries(ClientService svc, RestDataBlockAccessor accessor, Map<String, String> params) throws ClientServicesException {
         
     	HandlerJson json= new HandlerJson();  	
-    	Object jsonObject = (Object) svc.get(getServiceUrl(),params, json);
+    	Object jsonObject = (Object) svc.get(getServiceUrl(),params, json).getData();
         ArrayList<FileEntry> entries = new ArrayList<FileEntry>();
         String epName = accessor.findEndpointName();
         JsonNavigator navigator = new JsonNavigator(jsonObject);
@@ -236,7 +236,7 @@ public class DropboxFiles extends AbstractType {
             HandlerInputStream handler = new HandlerInputStream();
             Object file;
             try {
-                file =  svc.get(href,handler);
+                file =  svc.get(href,handler).getData();
             } catch (ClientServicesException e) {
                 throw new FacesExceptionEx(e, "Failed to execute proxy request");
             }

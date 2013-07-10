@@ -37,7 +37,7 @@ import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.commons.util.io.json.JsonParser;
 import com.ibm.sbt.security.authentication.AuthenticationException;
 import com.ibm.sbt.services.client.SBTServiceException;
-import com.ibm.sbt.services.client.activitystreams.ActivityStreamService;
+import com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamService;
 import com.ibm.sbt.services.endpoints.BasicEndpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
 
@@ -128,15 +128,12 @@ public class AdminPublishActivityStream {
      * @return
      * @throws SBTServiceException
      */
-    public JsonJavaObject postToStream(JsonJavaObject template) throws SBTServiceException {
+    public String postToStream(JsonJavaObject template) throws SBTServiceException {
         if(_service == null){
             _service = new ActivityStreamService();
             _service.setEndpoint(this.endpoint);
         }
-        JsonJavaObject returnedData = null;
-        Map<String, String> header = new HashMap<String, String>();
-        header.put("Content-Type", APPLICATION_JSON);
-        returnedData = _service.postEntry(template, header);
+        String returnedData = _service.postEntry(template);
         
         return returnedData;
     }
@@ -149,7 +146,7 @@ public class AdminPublishActivityStream {
      * @throws AuthenticationException
      * @throws SBTServiceException
      */
-    public JsonJavaObject postToStream(String template) throws JsonException, AuthenticationException, SBTServiceException{
+    public String postToStream(String template) throws JsonException, AuthenticationException, SBTServiceException{
         JsonJavaObject data = (JsonJavaObject)JsonParser.fromJson(JsonJavaFactory.instanceEx, template);
         return postToStream(data);
     }
@@ -165,9 +162,9 @@ public class AdminPublishActivityStream {
             try {
                 paas.getEndpoint().login("admin", "passw0rd");
                 template = paas.mergeData(args[0], args[1]);
-                JsonJavaObject streamEntry = paas.postToStream(template);
+                String streamEntry = paas.postToStream(template);
                 if(streamEntry != null)
-                    System.out.println("Success, posted ActivityStream entry: " + streamEntry.toString());
+                    System.out.println("Success, posted ActivityStream entry: " + streamEntry);
             } catch (JsonException e) {
                 e.printStackTrace();
             } catch (AuthenticationException e) {

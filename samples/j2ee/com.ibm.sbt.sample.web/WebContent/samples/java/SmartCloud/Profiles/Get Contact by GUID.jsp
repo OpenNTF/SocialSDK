@@ -14,11 +14,11 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@page import="com.ibm.sbt.services.client.smartcloud.profiles.Profile"%>
+<%@page import="com.ibm.sbt.services.client.smartcloud.profiles.ProfileService"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
 <%@page import="java.io.PrintWriter"%>
-<%@page import="com.ibm.sbt.services.client.smartcloud.profiles.ProfileService"%>
-<%@page import="com.ibm.sbt.services.client.smartcloud.profiles.Profile"%>
 <%@page
 	language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -37,7 +37,11 @@
 				Profile profile = service.getContactByGUID(contactGUID);
 				if(profile != null)
 				{
-					out.println("<B> Contact's Name : 	</B>" + profile.getDisplayName());
+					out.println("<B>Contact Details </B> ");
+					out.println("<br>");
+					out.println("<B> Name : 	</B>" + profile.getDisplayName());
+					out.println("<br>");
+					out.println("<B> Id : 	</B>" + profile.getId());
 				}
 				else
 				{

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -16,34 +16,33 @@
 
 package com.ibm.sbt.services.client.connections.profiles;
 
-import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-
 import java.net.URLEncoder;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
 import com.ibm.commons.util.StringUtil;
-import com.ibm.commons.xml.DOMUtil;
-import com.ibm.commons.xml.XMLException;
-import com.ibm.sbt.services.client.BaseService;
-import com.ibm.sbt.services.client.ClientService;
+import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.ClientServicesException;
-import com.ibm.sbt.services.client.ClientService.Handler;
-import com.ibm.sbt.services.client.connections.profiles.exception.ProfileServiceException;
+import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.ConnectionsConstants;
+import com.ibm.sbt.services.client.base.transformers.TransformerException;
+import com.ibm.sbt.services.client.connections.profiles.feedhandlers.ConnectionEntryFeedHandler;
+import com.ibm.sbt.services.client.connections.profiles.feedhandlers.ProfileFeedHandler;
+import com.ibm.sbt.services.client.connections.profiles.transformers.ConnectionEntryTransformer;
+import com.ibm.sbt.services.client.connections.profiles.transformers.ProfileTransformer;
 import com.ibm.sbt.services.client.connections.profiles.utils.Messages;
+import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
+import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.util.AuthUtil;
-
 /**
  * ProfileService can be used to perform operations related to Profiles. 
  * 
  * @Represents Connections ProfileService
  * @author Swati Singh
+ * @author Carlos Manias
  * <pre>
  * Sample Usage
  * {@code
@@ -54,22 +53,23 @@ import com.ibm.sbt.services.util.AuthUtil;
  */
 public class ProfileService extends BaseService {
 
-	static final String						sourceClass		= ProfileService.class.getName();
-	static final Logger						logger			= Logger.getLogger(sourceClass);
-	private static final String				seperator		= "/";
-	private LRUCache lruCache;
-	
+
+	private static final String				seperator				= "/";
+
 	/**
 	 * Used in constructing REST APIs
 	 */
 	public static final String				ProfileBaseUrl	= "profiles";
+
+
+	private final ProfileFeedHandler profileFeedHandler = new ProfileFeedHandler(this);
+	private final ConnectionEntryFeedHandler connectionEntryFeedHandler = new ConnectionEntryFeedHandler(this);
 
 	/**
 	 * Constructor Creates ProfileService Object with default endpoint and default cache size
 	 */
 	public ProfileService() {
 		this(DEFAULT_ENDPOINT_NAME, DEFAULT_CACHE_SIZE);
-		initializeCache(DEFAULT_CACHE_SIZE);
 	}
 
 	/**
@@ -81,7 +81,6 @@ public class ProfileService extends BaseService {
 
 	public ProfileService(String endpoint) {
 		this(endpoint, DEFAULT_CACHE_SIZE);
-		initializeCache(DEFAULT_CACHE_SIZE);
 	}
 
 	/**
@@ -94,73 +93,8 @@ public class ProfileService extends BaseService {
 
 	public ProfileService(String endpoint, int cacheSize) {
 		super(endpoint, cacheSize);
-		initializeCache(cacheSize);
-	}
-	/**
-	 * Initializes the LRU cache with given size. 
-	 * 
-	 * @param cacheSize
-	 */
-	
-	private void initializeCache(int cacheSize){
-		lruCache = new LRUCache(cacheSize);
-	}
-
-	/**
-	 * Returns profile's of multiple user's. 
-	 * 
-	 * @param userIds
-	 * @return Profile[]
-	 * @throws ProfileServiceException
-	 */
-	private Profile[] getProfiles(String[] userIds) throws ProfileServiceException{
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "getProfiles", userIds);
-		}
-		Profile[] profiles = new Profile[userIds.length];
-		int i = 0;
-		if (userIds != null) {
-			for (String userId : userIds) {
-				if (userId != null) {
-					profiles[i] = getProfile(userId);
-					i++;
-				} else // elementary NP handling. Setting the profile null;
-				{
-					profiles[i] = null;
-					i++;
-				}
-			}
-		}
-		if (logger.isLoggable(Level.FINEST)) {
-			String log = "call to retrive profiles successful";
-			if (profiles != null) {
-				for (Profile profile : profiles) {
-					if (null == profile) {
-						log = "Empty response from server for one of the requested profiles";
-						break;
-					}
-				}
-				log = "";
-			}
-			logger.exiting(sourceClass, "getProfiles", log);
-		}
-		return profiles;
 	}
 	
-	/**
-	 * Wrapper method to get profile of a user
-	 * <p>
-	 * fetches profile content from server and populates the data member of {@link Profile} with the fetched content 
-	 *
-	 * @param userId
-	 *			   unique identifier of User , it can either be email or id
-	 * @return Profile
-	 * @throws ProfileServiceException
-	 */
-	public Profile getProfile(String userId) throws ProfileServiceException{
-		return getProfile(userId, true);
-	}
-
 	/**
 	 * Wrapper method to get profile of a user, it makes the network call to fetch the Profile's of a user based on load parameter
 	 * being true/false.
@@ -172,117 +106,200 @@ public class ProfileService extends BaseService {
 	 * @return Profile
 	 * @throws ProfileServiceException
 	 */
-	public Profile getProfile(String userId, boolean loaded) throws ProfileServiceException {
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "getProfile", new Object[] { userId, loaded });
-		}
-		if (StringUtil.isEmpty(userId)) {
-			throw new IllegalArgumentException(Messages.InvalidArgument_1);
-		}
-		Profile profile = new Profile(this, userId);
-		if (loaded) {
-			load(profile);
-		}
-		if (logger.isLoggable(Level.FINEST)) {
-			String log = "";
-			if (profile.getId() != null) {
-				log = Messages.GetProfileInfo_1;
-			} else {
-				log = Messages.GetProfileInfo_2;
-			}
-			logger.exiting(sourceClass, "getProfile", log);
-		}
+
+
+	public Profile newProfile(String id) throws ProfileServiceException {
+		Profile profile = getProfile(id);
 		return profile;
 	}
+
+	public Profile newProfile() throws ProfileServiceException {
+		Profile profile = new Profile(this, "");
+		return profile;
+	}
+
+	public Profile newProfile(Node data) {
+		XPathExpression expr = (data instanceof Document) ? (XPathExpression)ProfileXPath.entry.getPath() : null;
+		XmlDataHandler handler = new XmlDataHandler(data, ConnectionsConstants.nameSpaceCtx, expr);
+		Profile profile = new Profile(this, handler);
+		return profile;
+	}
+
+	public ConnectionEntry newConnectionEntry() throws ProfileServiceException {
+		ConnectionEntry connectionEntry = new ConnectionEntry(this, null);
+		return connectionEntry;
+	}
+
+	public ConnectionEntry newConnectionEntry(Node data) {
+		XPathExpression expr = (data instanceof Document) ? (XPathExpression)ConnectionEntryXPath.entry.getPath() : null;
+		XmlDataHandler handler = new XmlDataHandler(data, ConnectionsConstants.nameSpaceCtx, expr);
+		ConnectionEntry connectionEntry = new ConnectionEntry(this, handler);
+		return connectionEntry;
+	}
+
+	public Profile getProfile(String id) throws ProfileServiceException{
+		return getProfile(id, null);
+	}
+
+	public Profile getProfile(String id, Map<String, String> parameters) throws ProfileServiceException{
+		// TODO: Do a cache lookup first. If cache miss, make a network call to get profile
+
+		if (StringUtil.isEmpty(id)){
+			throw new ProfileServiceException(null, Messages.InvalidArgument_1);
+		}
+		Profile profile;
+		if(parameters == null){
+			parameters = new HashMap<String, String>();
+		}
+		setIdParameter(parameters, id);
+		String url = resolveProfileUrl(ProfileAPI.NONADMIN.getProfileEntityType(),ProfileType.GETPROFILE.getProfileType());
+
+		try {
+			profile = (Profile)getEntity(url, parameters, profileFeedHandler);
+		} catch (ClientServicesException e) {
+			throw new ProfileServiceException(e, Messages.ProfileException, id);
+		} catch (IOException e) {
+			throw new ProfileServiceException(e, Messages.ProfileException, id);
+		}
+
+		return profile;
+	}
+
 	/**
 	 * Wrapper method to search profiles based on different parameters
 	 * 
 	 * @param parameters 
 	 * 				  list of query string parameters to pass to API
-	 * @return Collection<Profile>
+	 * @return list of searched Profiles
 	 */
-	public Collection<Profile> searchProfiles( Map<String, String> parameters){
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "searchProfiles", parameters);
-		}
-		Document data = null;
-		Collection<Profile> profiles = null;
+	public ProfileList searchProfiles( Map<String, String> parameters) throws ProfileServiceException {
 		if (null == parameters) {
 			parameters = new HashMap<String, String>();
 		}
+		String url = resolveProfileUrl(ProfileAPI.NONADMIN.getProfileEntityType(),
+				ProfileType.SEARCH.getProfileType());
+
+		ProfileList profiles = null;
 		try {
-			String url = resolveProfileUrl(ProfileEntity.NONADMIN.getProfileEntityType(),
-					ProfileType.SEARCH.getProfileType());
-			data = (Document)getClientService().get(url, parameters);
-			profiles = Converter.returnProfileEntries(this, data);
+			profiles = (ProfileList) getEntities(url, parameters, profileFeedHandler);
 		} catch (ClientServicesException e) {
-			if (logger.isLoggable(Level.SEVERE)) {
-				logger.log(Level.SEVERE, Messages.ProfileServiceException_1 + "searchProfiles()", e);
-			}
+			throw new ProfileServiceException(e, Messages.SearchException);
+		} catch (IOException e) {
+			throw new ProfileServiceException(e, Messages.SearchException);
 		}
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.exiting(sourceClass, "getColleagues");
-		}
+
 		return profiles;
 	}
 
 	/**
 	 * Wrapper method to get user's colleagues
 	 * 
-	 * @param profile
-	 * 				profile of the user whose contacts are to be returned
-	 * @return Profiles of User's colleagues 
+	 * @param id 
+	 * 		   unique identifier of the user whose colleagues are required, it can be email or userID
+	 * @return list of User's colleagues profiles
 	 * @throws ProfileServiceException
 	 */
-	public Profile[] getColleagues(Profile profile) throws ProfileServiceException{
-		return getColleagues(profile,null);
+	public ProfileList getColleagues(String id) throws ProfileServiceException{
+		return getColleagues(id,null);
 	}
-	
+
 	/**
 	 * Wrapper method to get user's colleagues
 	 * 
-	 * @param profile
-	 * 				profile of the user whose contacts are to be returned
+	 * @param id 
+	 * 		   unique identifier of the user whose colleagues are required, it can be email or userID
 	 * @param parameters 
 	 * 				list of query string parameters to pass to API
 	 * @return Profiles of User's colleagues  
 	 * @throws ProfileServiceException
 	 */
-	public Profile[] getColleagues(Profile profile, Map<String, String> parameters)
+	public ProfileList getColleagues(String id, Map<String, String> parameters)
 	throws ProfileServiceException{
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "getColleagues", parameters);
-		}
-		if (profile == null) {
-			throw new IllegalArgumentException(StringUtil.format("A null profile was passed"));
-		}
-		Document data = null;
-		Profile[] colleagues = null;
-		if(parameters == null)
-			parameters = new HashMap<String, String>();
-		String url = resolveProfileUrl(ProfileEntity.NONADMIN.getProfileEntityType(),
-				ProfileType.CONNECTIONS.getProfileType());
-		if (isEmail(profile.getReqId())) {
-			parameters.put(ProfileRequestParams.EMAIL, profile.getReqId());
-		} else {
-			parameters.put(ProfileRequestParams.USERID, profile.getReqId());
+
+		if (StringUtil.isEmpty(id)){
+			throw new ProfileServiceException(null, Messages.InvalidArgument_1);
 		}
 
-		if(parameters.get("connectionType") != null)// this is to remove any other values put in by sample user in following
-			parameters.remove("connectionType");	// mandatory parameters
-		if(parameters.get("outputType") != null)
-			parameters.remove("outputType");
+		if(parameters == null)
+			parameters = new HashMap<String, String>();
+		String url = resolveProfileUrl(ProfileAPI.NONADMIN.getProfileEntityType(),
+				ProfileType.CONNECTIONS.getProfileType());
+		setIdParameter(parameters, id);
 		parameters.put("connectionType","colleague");
 		parameters.put("outputType","profile");
 
-		data = executeGet(url, parameters, ClientService.FORMAT_XML);
-		colleagues = Converter.convertToProfiles(this, data);
-
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.exiting(sourceClass, "getColleagues");
+		ProfileList profiles = null;
+		try {
+			profiles = (ProfileList) getEntities(url, parameters, profileFeedHandler);
+		} catch (ClientServicesException e) {
+			throw new ProfileServiceException(e, Messages.ColleaguesException, id);
+		} catch (IOException e) {
+			throw new ProfileServiceException(e, Messages.ColleaguesException, id);
 		}
-		return colleagues;
 
+		return profiles;
+	}
+
+	/**
+	 * Wrapper method to get connection entries of user's colleagues
+	 * 
+	 * @param id 
+	 * 		   unique identifier of the user whose colleagues are required, it can be email or userID
+	 * @return list of user's colleagues connection entries 
+	 * @throws ProfileServiceException
+	 */
+	public ConnectionEntryList getColleaguesConnectionEntries(String id) throws ProfileServiceException{
+		return getColleaguesConnectionEntries(id,null);
+	}
+
+	/**
+	 * Wrapper method to get connection entries of user's colleagues
+	 * 
+	 * @param id 
+	 * 		   unique identifier of the user whose colleagues are required, it can be email or userID
+	 * @param parameters 
+	 * 				list of query string parameters to pass to API
+	 * @return list of user's colleagues connection entries   
+	 * @throws ProfileServiceException
+	 */
+	public ConnectionEntryList getColleaguesConnectionEntries(String id, Map<String, String> parameters)
+	throws ProfileServiceException{
+		if (StringUtil.isEmpty(id)){
+			throw new ProfileServiceException(null, Messages.InvalidArgument_1);
+		}
+
+		if(parameters == null)
+			parameters = new HashMap<String, String>();
+		String url = resolveProfileUrl(ProfileAPI.NONADMIN.getProfileEntityType(),
+				ProfileType.CONNECTIONS.getProfileType());
+		setIdParameter(parameters, id);
+		parameters.put("connectionType","colleague");
+		parameters.put("outputType","connection");
+
+		ConnectionEntryList connectionEntries = null;
+		try {
+			connectionEntries = (ConnectionEntryList) getEntities(url, parameters, connectionEntryFeedHandler);
+		} catch (ClientServicesException e) {
+			throw new ProfileServiceException(e, Messages.ColleaguesException, id);
+		} catch (IOException e) {
+			throw new ProfileServiceException(e, Messages.ColleaguesException, id);
+		}
+
+		return connectionEntries;
+	}
+
+	/**
+	 * Wrapper method to get check if two users are colleagues
+	 * 
+	 * @param sourceId 
+	 * 				 userid or email of first user
+	 * @param targetId 
+	 * 				 userid or email of second user
+	 * @return ConnectionEntry 
+	 * @throws ProfileServiceException
+	 */
+	public ConnectionEntry checkColleague(String sourceId, String targetId) throws ProfileServiceException{
+		return checkColleague(sourceId, targetId, null);
 	}
 	/**
 	 * Wrapper method to get check if two users are colleagues
@@ -296,542 +313,582 @@ public class ProfileService extends BaseService {
 	 * @return ConnectionEntry 
 	 * @throws ProfileServiceException
 	 */
-	private ConnectionEntry checkColleague(String sourceId, String targetId, Map<String, String> parameters) throws ProfileServiceException{
-		
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "checkColleague");
-		}
+	public ConnectionEntry checkColleague(String sourceId, String targetId, Map<String, String> parameters) throws ProfileServiceException{
+
 		if (StringUtil.isEmpty(sourceId)) {
-			throw new IllegalArgumentException(Messages.InvalidArgument_4);
+			throw new ProfileServiceException(null, Messages.InvalidArgument_4);
 		}
 		if (StringUtil.isEmpty(targetId)) {
-			throw new IllegalArgumentException(Messages.InvalidArgument_5);
+			throw new ProfileServiceException(null, Messages.InvalidArgument_5);
 		}
-		Document data = null;
 		if(parameters == null){
 			parameters = new HashMap<String, String>();
 		}
-		String url = resolveProfileUrl(ProfileEntity.NONADMIN.getProfileEntityType(),
+		String url = resolveProfileUrl(ProfileAPI.NONADMIN.getProfileEntityType(),
 				ProfileType.CONNECTION.getProfileType());
 		if (isEmail(sourceId)) {
-			parameters.put(ProfileRequestParams.SOURCEEMAIL, sourceId);
+			parameters.put(ProfilesConstants.SOURCEEMAIL, sourceId);
 		} else {
-			parameters.put(ProfileRequestParams.SOURCEUSERID, sourceId);
+			parameters.put(ProfilesConstants.SOURCEUSERID, sourceId);
 		}
 		if (isEmail(targetId)) {
-			parameters.put(ProfileRequestParams.TARGETEMAIL, targetId);
+			parameters.put(ProfilesConstants.TARGETEMAIL, targetId);
 		} else {
-			parameters.put(ProfileRequestParams.TARGETUSERID, targetId);
+			parameters.put(ProfilesConstants.TARGETUSERID, targetId);
 		}
 		parameters.put("connectionType","colleague");
 
-		data = executeGet(url, parameters, ClientService.FORMAT_XML);
-		ConnectionEntry connection = Converter.returnConnectionEntries(data, "connectionEntry").iterator().next();
-
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.exiting(sourceClass, "getColleagues");
+		ConnectionEntry connectionEntry;
+		try {
+			connectionEntry = (ConnectionEntry)getEntity(url, parameters, connectionEntryFeedHandler);
+		} catch (ClientServicesException e) {
+			throw new ProfileServiceException(e, Messages.CheckColleaguesException);
+		} catch (IOException e) {
+			throw new ProfileServiceException(e, Messages.CheckColleaguesException);
 		}
-		return connection;
-		
+
+		return connectionEntry;
+
 	}
-	
+
 	/**
-	 * Wrapper method to get  common colleagues of two users
+	 * Wrapper method to get profiles of colleagues shared by two users
 	 * 
 	 * @param sourceId 
 	 * 				 userid or email of first user
 	 * @param targetId 
 	 * 				 userid or email of second user
-	 * @return Collection<ConnectionEntry>
+	 * @return list of common colleagues profiles
 	 * @throws ProfileServiceException
 	 */
-	private Collection<ConnectionEntry> getColleaguesInCommon(String sourceId, String targetId,  Map<String, String> parameters) throws ProfileServiceException{
-		
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "checkColleague");
-		}
+	public ProfileList getCommonColleaguesProfiles(String sourceId, String targetId) throws ProfileServiceException{
+		return getCommonColleaguesProfiles(sourceId, targetId, null);
+	}
+
+	/**
+	 * Wrapper method to get profiles of colleagues shared by two users
+	 * 
+	 * @param sourceId 
+	 * 				 userid or email of first user
+	 * @param targetId 
+	 * 				 userid or email of second user
+	 * @return list of common colleagues profiles
+	 * @throws ProfileServiceException
+	 */
+	public ProfileList getCommonColleaguesProfiles(String sourceId, String targetId,  Map<String, String> parameters) throws ProfileServiceException{
+
 		if (StringUtil.isEmpty(sourceId)) {
-			throw new IllegalArgumentException(Messages.InvalidArgument_4);
+			throw new ProfileServiceException(null, Messages.InvalidArgument_4);
 		}
 		if (StringUtil.isEmpty(targetId)) {
-			throw new IllegalArgumentException(Messages.InvalidArgument_5);
+			throw new ProfileServiceException(null, Messages.InvalidArgument_5);
 		}
-		Document data = null;
 		if(parameters == null){
 			parameters = new HashMap<String, String>();
 		}
-		String url = resolveProfileUrl(ProfileEntity.NONADMIN.getProfileEntityType(),
+		String url = resolveProfileUrl(ProfileAPI.NONADMIN.getProfileEntityType(),
 				ProfileType.CONNECTIONS_IN_COMMON.getProfileType());
 		if (isEmail(sourceId)) {
 			StringBuilder value =  new StringBuilder(sourceId);
 			value = value.append(",").append(targetId);
-			parameters.put(ProfileRequestParams.EMAIL, value.toString());
+			parameters.put(ProfilesConstants.EMAIL, value.toString());
 		} else {
 
 			StringBuilder value =  new StringBuilder(sourceId);
 			value = value.append(",").append(targetId);
-			parameters.put(ProfileRequestParams.USERID, value.toString());
+			parameters.put(ProfilesConstants.USERID, value.toString());
 		}
 		parameters.put("connectionType","colleague");
+		parameters.put("outputType","profile");
 
-		data = executeGet(url, parameters, ClientService.FORMAT_XML);
-		Collection<ConnectionEntry> colleaguesInCommon = Converter.returnConnectionEntries(data, "connectionEntry");
-
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.exiting(sourceClass, "getColleagues");
+		ProfileList profiles = null;
+		try {
+			profiles = (ProfileList) getEntities(url, parameters, profileFeedHandler);
+		} catch (ClientServicesException e) {
+			throw new ProfileServiceException(e, Messages.CommonColleaguesException, sourceId, targetId );
+		} catch (IOException e) {
+			throw new ProfileServiceException(e, Messages.CommonColleaguesException, sourceId, targetId);
 		}
-		return colleaguesInCommon;
-		
+
+		return profiles;
+	}
+
+	/**
+	 * Wrapper method to get connection entries of colleagues shared by two users
+	 * 
+	 * @param sourceId 
+	 * 				 userid or email of first user
+	 * @param targetId 
+	 * 				 userid or email of second user
+	 * @return list of common colleagues connection entries
+	 * @throws ProfileServiceException
+	 */
+	public ConnectionEntryList getCommonColleaguesConnectionEntries(String sourceId, String targetId) throws ProfileServiceException{
+		return getCommonColleaguesConnectionEntries(sourceId, targetId, null);
+	}
+	/**
+	 * Wrapper method to get connection entries of colleagues shared by two users
+	 * 
+	 * @param sourceId 
+	 * 				 userid or email of first user
+	 * @param targetId 
+	 * 				 userid or email of second user
+	 * @return list of common colleagues connection entries
+	 * @throws ProfileServiceException
+	 */
+	public ConnectionEntryList getCommonColleaguesConnectionEntries(String sourceId, String targetId,  Map<String, String> parameters) throws ProfileServiceException{
+
+		if (StringUtil.isEmpty(sourceId)) {
+			throw new ProfileServiceException(null, Messages.InvalidArgument_4);
+		}
+		if (StringUtil.isEmpty(targetId)) {
+			throw new ProfileServiceException(null, Messages.InvalidArgument_5);
+		}
+		if(parameters == null){
+			parameters = new HashMap<String, String>();
+		}
+		String url = resolveProfileUrl(ProfileAPI.NONADMIN.getProfileEntityType(),
+				ProfileType.CONNECTIONS_IN_COMMON.getProfileType());
+		if (isEmail(sourceId)) {
+			StringBuilder value =  new StringBuilder(sourceId);
+			value = value.append(",").append(targetId);
+			parameters.put(ProfilesConstants.EMAIL, value.toString());
+		} else {
+
+			StringBuilder value =  new StringBuilder(sourceId);
+			value = value.append(",").append(targetId);
+			parameters.put(ProfilesConstants.USERID, value.toString());
+		}
+		parameters.put("connectionType","colleague");
+		parameters.put("outputType","connection");
+
+		ConnectionEntryList connectionEntries = null;
+		try {
+			connectionEntries = (ConnectionEntryList) getEntities(url, parameters, connectionEntryFeedHandler);
+		} catch (ClientServicesException e) {
+			throw new ProfileServiceException(e, Messages.CommonColleaguesException, sourceId, targetId);
+		} catch (IOException e) {
+			throw new ProfileServiceException(e, Messages.CommonColleaguesException, sourceId, targetId);
+		}
+
+		return connectionEntries;
 	}
 
 	/**
 	 * Wrapper method to get a user's report to chain
 	 * 
 	 * @param id 
-	 * 		   unique identifier of the user whose direct reports are needed, it can be email or userID
+	 * 		   unique identifier of the user whose report to chain is required, it can be email or userID
+	 * @return List of Profiles 
+	 * @throws ProfileServiceException
+	 */
+	public ProfileList getReportToChain(String id) throws ProfileServiceException{
+		return getReportToChain(id,null);
+	}
+	/**
+	 * Wrapper method to get a user's report to chain
+	 * 
+	 * @param id 
+	 * 		   unique identifier of the user whose report to chain is required, it can be email or userID
 	 * @param parameters 
 	 * 				list of query string parameters to pass to API
 	 * @return List of Profiles
 	 * @throws ProfileServiceException	
 	 */
-	public Collection<Profile> getReportToChain (String id, Map<String, String> parameters)throws ProfileServiceException{
-		
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "getReportToChain", parameters);
+	public ProfileList getReportToChain (String id, Map<String, String> parameters)throws ProfileServiceException{
+
+		if (StringUtil.isEmpty(id)) {
+			throw new ProfileServiceException(null, Messages.InvalidArgument_1);
 		}
 		if(parameters == null)
 			parameters = new HashMap<String, String>();
-		String url = resolveProfileUrl(ProfileEntity.NONADMIN.getProfileEntityType(),
+		setIdParameter(parameters, id);
+		String url = resolveProfileUrl(ProfileAPI.NONADMIN.getProfileEntityType(),
 				ProfileType.REPORTINGCHAIN.getProfileType());
-		
-		Document data = executeGet(url, parameters, ClientService.FORMAT_XML);
-		Collection<Profile> reportingChain = Converter.returnProfileEntries(this, data);
 
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.exiting(sourceClass, "getReportToChain");
+		ProfileList profiles = null;
+		try {
+			profiles = (ProfileList) getEntities(url, parameters, profileFeedHandler);
+		} catch (ClientServicesException e) {
+			throw new ProfileServiceException(e, Messages.ReportingChainException, id);
+		} catch (IOException e) {
+			throw new ProfileServiceException(e, Messages.ReportingChainException, id);
 		}
-		return reportingChain;
-		
+
+		return profiles;
+
 	}
-	
+
+	/**
+	 * Wrapper method to get a person's direct reports
+	 * 
+	 * @param id 
+	 * 		   unique identifier of the user whose direct reports are required, it can be email or userID
+	 * @return List of Profiles 
+	 * @throws ProfileServiceException
+	 */
+	public ProfileList getDirectReports(String id) throws ProfileServiceException{
+		return getReportToChain(id,null);
+	}
 	/**
 	 * Wrapper method to get a person's direct reports
 	 * 
 	 * @param id
-	 * 		   unique identifier of the user whose direct reports are needed, it can be email or userID
+	 * 		   unique identifier of the user whose direct reports are required, it can be email or userID
 	 * @param parameters
 	 * 		   list of query string parameters to pass to API
 	 * @return List of Profiles
 	 * @throws ProfileServiceException
 	 * 
 	 */
-	public Collection<Profile> getDirectReports(String id, Map<String, String> parameters)throws ProfileServiceException{
-		
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "getDirectReports", parameters);
+	public ProfileList getDirectReports(String id, Map<String, String> parameters)throws ProfileServiceException{
+
+		if (StringUtil.isEmpty(id)) {
+			throw new ProfileServiceException(null, Messages.InvalidArgument_1);
 		}
 		if(parameters == null)
 			parameters = new HashMap<String, String>();
-
-		String url = resolveProfileUrl(ProfileEntity.NONADMIN.getProfileEntityType(),
+		setIdParameter(parameters, id);
+		String url = resolveProfileUrl(ProfileAPI.NONADMIN.getProfileEntityType(),
 				ProfileType.DIRECTREPORTS.getProfileType());
-	
-		Document data = executeGet(url, parameters, ClientService.FORMAT_XML);
-		Collection<Profile> reportingChain = Converter.returnProfileEntries(this, data);
 
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.exiting(sourceClass, "getDirectReports");
+		ProfileList profiles = null;
+		try {
+			profiles = (ProfileList) getEntities(url, parameters, profileFeedHandler);
+		} catch (ClientServicesException e) {
+			throw new ProfileServiceException(e, Messages.DirectReportsException, id);
+		} catch (IOException e) {
+			throw new ProfileServiceException(e, Messages.DirectReportsException, id);
 		}
-		return reportingChain;
-		
+		return profiles;
+	}
+
+	/**
+	 * Wrapper method to get a list of Connections based on status
+	 * 
+	 * @param id
+	 * 			unique identifier of the user , it can be email or userID
+	 * @param status
+	 * 				Specifies the status of the invitation
+	 * @return List of Connections based on status 
+	 * @throws ProfileServiceException
+	 */
+	public ConnectionEntryList getConnectionsColleagueEntriesByStatus(String id, String status) throws ProfileServiceException{
+		return getConnectionsColleagueEntriesByStatus(id, status,null);
 	}
 	/**
-	 * Wrapper method to get a list of pending invites for a user 
+	 * Wrapper method to get a list of Connections based on status
 	 * 
+	 * @param id
+	 * 			unique identifier of the user , it can be email or userID 
+	 * @param status
+	 * 				Specifies the status of the invitation
 	 * @param parameters
 	 * 				  list of query string parameters to pass to API
-	 * @return Collection<ConnectionEntry>
+	 * @return List of Connections based on status 
 	 * @throws ProfileServiceException
 	 * 
 	 */
-	private Collection<ConnectionEntry> getMyInvites(Map<String, String> parameters)throws ProfileServiceException{
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "getMyInvites", parameters);
-		}
+	public ConnectionEntryList getConnectionsColleagueEntriesByStatus(String id, String status, Map<String, String> parameters)throws ProfileServiceException{
 
-		Document data = null;
-		Collection<ConnectionEntry> invites = null;
-		String url = resolveProfileUrl(ProfileEntity.NONADMIN.getProfileEntityType(),
+		if (StringUtil.isEmpty(id)) {
+			throw new ProfileServiceException(null, Messages.InvalidArgument_1);
+		}
+		String url = resolveProfileUrl(ProfileAPI.NONADMIN.getProfileEntityType(),
 				ProfileType.CONNECTIONS.getProfileType());
-		data = executeGet(url, parameters, ClientService.FORMAT_XML);
-		if(parameters.containsKey("outputType")){
-			if(parameters.get("outputType").equalsIgnoreCase("profile")){
-				invites = Converter.returnConnectionEntries(data, "profile");
-			}
-			else 
-				invites = Converter.returnConnectionEntries(data, "connection");
+		if(parameters == null)
+			parameters = new HashMap<String, String>();
+		parameters.put("connectionType", "colleague");
+		parameters.put("outputType","connection");
+		parameters.put("status",status);
+		setIdParameter(parameters, id);
+
+		ConnectionEntryList connectionEntries = null;
+		try {
+			connectionEntries = (ConnectionEntryList) getEntities(url, parameters, connectionEntryFeedHandler);
+		} catch (ClientServicesException e) {
+			throw new ProfileServiceException(e, Messages.ConnectionsByStatusException, id);
+		} catch (IOException e) {
+			throw new ProfileServiceException(e, Messages.ConnectionsByStatusException, id);
 		}
-		else{
-			invites = Converter.returnConnectionEntries(data, "connection");
-		}
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.exiting(sourceClass, "getMyInvites");
-		}
-		return invites;
+		return connectionEntries;
 	}
-	
+	/**
+	 * Wrapper method to get a list of Connections based on status
+	 * 
+	 * @param id
+	 * 			unique identifier of the user to whom the invite is to be sent, it can be email or userID 
+	 * @param status
+	 * 				Specifies the status of the invitation
+	 * @return List of profiles
+	 * @throws ProfileServiceException
+	 */
+	public ProfileList getConnectionsProfileEntriesByStatus(String id, String status) throws ProfileServiceException{
+		return getConnectionsProfileEntriesByStatus(id, status, null);
+	}
+	/**
+	 * Wrapper method to get a list of Connections based on status 
+	 * 
+	 * @param id
+	 * 			unique identifier of the user , it can be email or userID
+	 * @param status
+	 * 				Specifies the status of the invitation
+	 * @param parameters
+	 * 				  list of query string parameters to pass to API
+	 * @return List of profiles
+	 * @throws ProfileServiceException
+	 * 
+	 */
+	public ProfileList getConnectionsProfileEntriesByStatus(String id, String status, Map<String, String> parameters)throws ProfileServiceException{
+
+		if (StringUtil.isEmpty(id)) {
+			throw new ProfileServiceException(null, Messages.InvalidArgument_1);
+		}
+		String url = resolveProfileUrl(ProfileAPI.NONADMIN.getProfileEntityType(),
+				ProfileType.CONNECTIONS.getProfileType());
+		if(parameters == null)
+			parameters = new HashMap<String, String>();
+		parameters.put("connectionType", "colleague");
+		parameters.put("outputType","connection");
+		parameters.put("status",status);
+		setIdParameter(parameters, id);
+
+		ProfileList profiles = null;
+		try {
+			profiles = (ProfileList) getEntities(url, parameters, profileFeedHandler);
+		} catch (ClientServicesException e) {
+			throw new ProfileServiceException(e, Messages.ConnectionsByStatusException, id);
+		} catch (IOException e) {
+			throw new ProfileServiceException(e, Messages.ConnectionsByStatusException, id);
+		}
+		return profiles;
+	}
 	/**
 	 * Wrapper method to send Invite to a user to become colleague
 	 * <p>
 	 * a default Invite message is used while sending the invite
 	 *  
-	 * @param profile 
-	 * 			   profile of the user to whom the invite is to be sent
-	 * @return value is true if invite is sent successfully else value is false
+	 * @param id
+	 * 		   unique identifier of the user to whom the invite is to be sent, it can be email or userID
 	 * @throws ProfileServiceException
 	 */
-	public boolean sendInvite(Profile profile)throws ProfileServiceException{
+	public void sendInvite(String id)throws ProfileServiceException{
 		String defaultInviteMsg = Messages.SendInviteMsg;
-		return sendInvite(profile, defaultInviteMsg);
-		
+		sendInvite(id, defaultInviteMsg);
+
 	}
-	
+
 	/**
 	 * Wrapper method to send Invite to a user to become colleague
 	 * 
-	 * @param profile 
-	 *				profile of the user to whom the invite is to be sent
+	 * @param id
+	 * 		   unique identifier of the user to whom the invite is to be sent, it can be email or userID
 	 * @param inviteMsg 
 	 * 				Invite message to the other user
 	 * @return value is true if invite is sent successfully else value is false
 	 * @throws ProfileServiceException
 	 */
-	public boolean sendInvite(Profile profile, String inviteMsg)throws ProfileServiceException{
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "getColleagues", inviteMsg);
+	public void sendInvite(String id, String inviteMsg)throws ProfileServiceException{
+		if (StringUtil.isEmpty(id)) {
+			throw new ProfileServiceException(null, Messages.InvalidArgument_1);
 		}
-		if (profile == null) {
-			throw new IllegalArgumentException(StringUtil.format("A null profile was passed"));
+
+		try {
+			Map<String, String> parameters = new HashMap<String, String>();
+			String url = resolveProfileUrl(ProfileAPI.NONADMIN.getProfileEntityType(),
+					ProfileType.CONNECTIONS.getProfileType());
+			setIdParameter(parameters, id);
+			parameters.put("connectionType","colleague");
+			Object payload = constructSendInviteRequestBody(inviteMsg);
+			super.createData(url, parameters, payload);
+		} catch (ClientServicesException e) {
+			throw new ProfileServiceException(e, Messages.SendInviteException);
+		} catch (TransformerException e) {
+			throw new ProfileServiceException(e, Messages.SendInvitePayloadException);
+		} catch (IOException e) {
+			throw new ProfileServiceException(e, Messages.SendInviteException);
 		}
-		Map<String, String> parameters = new HashMap<String, String>();
-		String url = resolveProfileUrl(ProfileEntity.NONADMIN.getProfileEntityType(),
-				ProfileType.CONNECTIONS.getProfileType());
-		if (isEmail(profile.getReqId())) {
-			parameters.put(ProfileRequestParams.EMAIL,profile.getReqId());
-		} else {
-			parameters.put(ProfileRequestParams.USERID, profile.getReqId());
-		}
-		parameters.put("connectionType","colleague");
-		XMLProfilesPayloadBuilder builder = XMLProfilesPayloadBuilder.INSTANCE;
-		Object content = builder.generateInviteRequestPayload(inviteMsg);
-		//getClientService().post(url, parameters, content);
-		boolean result = executePost(url, parameters, null, content, null);
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.exiting(sourceClass, "getColleagues");
-		}
-		return result;
 
 	}
+
 
 	/**
 	 * Wrapper method to accept a Invite 
 	 * 
-	 * @param connectionId 
-	 * 					 unique id of the connection 
-	 * @param title 
-	 * 			 message to the other user
-	 * @param content
-	 * 			message to the other user
-	 * @return if invite is accepted then return true 
+	 * @param ConnectionEntry 
 	 * @throws ProfileServiceException
 	 * 
 	 */
-	public boolean acceptInvite(String connectionId, String title, String content)throws ProfileServiceException{
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "acceptInvite", connectionId);
+	public void acceptInvite(ConnectionEntry connection)throws ProfileServiceException{
+
+		if (connection == null) {
+			throw new ProfileServiceException(null, Messages.InvalidArgument_6);
 		}
-		
-		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put(ProfileRequestParams.CONNECTIONID, connectionId);
-		String url = resolveProfileUrl(ProfileEntity.NONADMIN.getProfileEntityType(),
-				ProfileType.CONNECTION.getProfileType());
-		
-		XMLProfilesPayloadBuilder builder = XMLProfilesPayloadBuilder.INSTANCE;
-		Object payload = builder.generateAcceptInvitePayload(connectionId, title, content);
-		boolean	result = executePut(url, parameters, null, payload, null);
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.exiting(sourceClass, "acceptInvite");
+		try {
+			Map<String, String> parameters = new HashMap<String, String>();
+			parameters.put(ProfilesConstants.CONNECTIONID, connection.getConnectionId());
+			String url = resolveProfileUrl(ProfileAPI.NONADMIN.getProfileEntityType(),
+					ProfileType.CONNECTION.getProfileType());
+			Object payload = constructAcceptInviteRequestBody(connection, "accepted");
+
+			super.updateData(url, parameters,payload, connection.getConnectionId());
+		} catch (ClientServicesException e) {
+			throw new ProfileServiceException(e, Messages.AcceptInviteException, connection.getConnectionId());
+		} catch (TransformerException e) {
+			throw new ProfileServiceException(e, Messages.AcceptInvitePayloadException);
+		} catch (IOException e) {
+			throw new ProfileServiceException(e, Messages.AcceptInviteException, connection.getConnectionId());
 		}
-		return result;
 	}
-	
+
 	/**
 	 * Wrapper method is used to delete/ignore a Invite 
 	 * 
 	 * @param connectionId 
 	 * 					unique id of the connection
-	 * @return returns true if invite is deleted successfully 
 	 * @throws ProfileServiceException
 	 */
-	public boolean deleteInvite(String connectionId)throws ProfileServiceException{
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "deleteInvite", connectionId);
+	public void deleteInvite(String connectionId)throws ProfileServiceException{
+
+		if (StringUtil.isEmpty(connectionId)) {
+			throw new ProfileServiceException(null, Messages.InvalidArgument_2);
 		}
-		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put(ProfileRequestParams.CONNECTIONID, connectionId);
-		String url = resolveProfileUrl(ProfileEntity.NONADMIN.getProfileEntityType(),
-				ProfileType.CONNECTION.getProfileType());
-		boolean result = executeDelete(url, parameters);
-		
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.exiting(sourceClass, "deleteInvite");
+
+		try {
+			Map<String, String> parameters = new HashMap<String, String>();
+			parameters.put(ProfilesConstants.CONNECTIONID, connectionId);
+			String url = resolveProfileUrl(ProfileAPI.NONADMIN.getProfileEntityType(),
+					ProfileType.CONNECTION.getProfileType());
+			super.deleteData(url, parameters, connectionId);
+		} catch (ClientServicesException e) {
+			throw new ProfileServiceException(e, Messages.DeleteInviteException, connectionId);
+		} catch (IOException e) {
+			throw new ProfileServiceException(e, Messages.DeleteInviteException, connectionId);
 		}
-		return result;
 	}
-	
+
 	/**
 	 * Wrapper method to update a User's profile photo
 	 * 
 	 * @param Profile
-	 * @return returns true, if profile photo is updated
 	 * @throws ProfileServiceException
 	 */
-	public boolean updateProfilePhoto(Profile profile) throws ProfileServiceException{
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "updatePhoto", profile.toString());
-		}
-		if (profile == null) {
-			throw new IllegalArgumentException(Messages.InvalidArgument_3);
-		}
-		boolean returnVal = false;
+	public void updateProfilePhoto(Profile profile) throws ProfileServiceException{
 
-		Map<String, String> parameters = new HashMap<String, String>();
-		if (isEmail(profile.getReqId())) {
-			parameters.put(ProfileRequestParams.EMAIL, profile.getReqId());
-		} else {
-			parameters.put(ProfileRequestParams.USERID, profile.getReqId());
+		if (profile == null) {
+			throw new ProfileServiceException(null, Messages.InvalidArgument_3);
 		}
-		String filePath = profile.getFieldsMap().get("imageLocation");
-		if(!StringUtil.isEmpty(filePath)){
-			File file;
-			try{
-				file = new File(filePath);
-			}catch(Exception e){
-				logger.log(Level.SEVERE, Messages.ProfileInfo_9 + "updateProfilePhoto()", e);
-				throw new ProfileServiceException(e);
-			}
+
+		try {
+			Map<String, String> parameters = new HashMap<String, String>();
+			setIdParameter(parameters, profile.getUserid());
+
+			String filePath = profile.getFieldsMap().get("imageLocation").toString();
+			java.io.File file = new java.io.File(filePath);
 			String name = filePath.substring(filePath.lastIndexOf('\\') + 1);
-	
+
 			int dot = name.lastIndexOf('.');
 			String ext = null;
 			if (dot > -1) {
 				ext = name.substring(dot + 1); // add one for the dot!
 			}
-			if (StringUtil.isEmpty(ext)) {
-				try {
-					throw new Exception(Messages.UpdateProfileInfo_1);
-				} catch (Exception e) {
-					returnVal = false;
+			if (!StringUtil.isEmpty(ext)) {
+				Map<String, String> headers = new HashMap<String, String>();
+				if (ext.equalsIgnoreCase("jpg")) {
+					headers.put(ProfilesConstants.REQ_HEADER_CONTENT_TYPE_PARAM, "image/jpeg");	// content-type should be image/jpeg for file extension - jpeg/jpg
+				} else {
+					headers.put(ProfilesConstants.REQ_HEADER_CONTENT_TYPE_PARAM, "image/" + ext);
 				}
+				String url = resolveProfileUrl(ProfileAPI.NONADMIN.getProfileEntityType(),
+						ProfileType.UPDATEPROFILEPHOTO.getProfileType());
+				getClientService().put(url, parameters, headers, file, ClientService.FORMAT_NULL);
 			}
-			Map<String, String> headers = new HashMap<String, String>();
-			if (ext.equalsIgnoreCase("jpg")) {
-				headers.put(Headers.ContentType, "image/jpeg");	// content-type should be image/jpeg for file extension - jpeg/jpg
-			} else {
-				headers.put(Headers.ContentType, "image/" + ext);
-			}
-			String url = resolveProfileUrl(ProfileEntity.NONADMIN.getProfileEntityType(),
-					ProfileType.UPDATEPROFILEPHOTO.getProfileType());
-			returnVal = executePut(url, parameters, headers, file, ClientService.FORMAT_NULL);
-	
-			profile.clearFieldsMap();
-			removeProfileDataFromCache(profile.getReqId());
+		} catch (ClientServicesException e) {
+			throw new ProfileServiceException(e, Messages.UpdateProfilePhotoException);
 		}
-				
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.exiting(sourceClass, "updatePhoto" + returnVal);
-		}
-		return returnVal;
+		profile.clearFieldsMap();
+
 	}
 
 	/**
 	 * Wrapper method to update a User's profile
 	 * 
 	 * @param Profile
-	 * @return returns true if profile is updated successfully
 	 * @throws ProfileServiceException
 	 */
-	public boolean updateProfile(Profile profile) throws ProfileServiceException{
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "update", profile);
-		}
+	public void updateProfile(Profile profile) throws ProfileServiceException{
+
 		if (profile == null) {
-			throw new IllegalArgumentException(Messages.InvalidArgument_3);
+			throw new ProfileServiceException(null, Messages.InvalidArgument_3);
 		}
-		boolean result = true;
-
-		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put(ProfileRequestParams.OUTPUT, "vcard");
-		parameters.put(ProfileRequestParams.FORMAT, "full");
-		Map<String, String> headers = new HashMap<String, String>();
-		headers.put(Headers.ContentType, Headers.ATOM);
-		if (isEmail(profile.getReqId())) {
-			parameters.put(ProfileRequestParams.EMAIL, profile.getReqId());
-		} else {
-			parameters.put(ProfileRequestParams.USERID, profile.getReqId());
-		}
-		Object updateProfilePayload = profile.constructUpdateRequestBody();
-		String url = resolveProfileUrl(ProfileEntity.NONADMIN.getProfileEntityType(),
-				ProfileType.UPDATEPROFILE.getProfileType());
-		result = executePut(url, parameters, headers, updateProfilePayload, ClientService.FORMAT_NULL);
-		profile.clearFieldsMap();
-		removeProfileDataFromCache(profile.getReqId());
-
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.exiting(sourceClass, "update");
-		}
-
-		return result;
-	}
-
-	/**
-	 * Method to remove the user profile from cache.
-	 * 
-	 * @param userId
-	 */
-	protected void removeProfileDataFromCache(String userId) throws ProfileServiceException{
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "removeProfileDataFromCache", userId);
-		}
-		if (isEmail(userId)) {
-			String key;
-			Set<String> keys = lruCache.getKeySet();
-			Iterator<String> itr = keys.iterator();
-			while (itr.hasNext()) {
-				key = itr.next();
-				Document data = lruCache.get(key);
-				// check if email in profile object is same as input userId
-				String email = "";
-				try {
-					email = DOMUtil.value(data, Profile.xpathMap.get("email"));
-				} catch (XMLException e) {
-					continue;
-				}
-
-				// cache hit
-				if (StringUtil.equalsIgnoreCase(email, userId)) {
-					lruCache.remove(key);
-				}
-			}
-			// Cache miss
-
-		} else {
-			lruCache.remove(userId);
-		}
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.exiting(sourceClass, "removeProfileDataFromCache");
-		}
-
-	}
-
-	/*
-	 * Method responsible for loading the profile.
-	 * 
-	 * @param profile
-	 */
-	protected void load(Profile profile) throws ProfileServiceException{
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "load", profile);
-		}
-		// Do a cache lookup first. If cache miss, make a network call to get
-		// Profile
-		
-		Document data = getProfileDataFromCache(profile.getReqId());
-		if (data != null) {
-			profile.setData(data);
-		} else {
-
+		try {
 			Map<String, String> parameters = new HashMap<String, String>();
-			if (isEmail(profile.getReqId())) {
-				parameters.put("email", profile.getReqId());
-			} else {
-				parameters.put("userid", profile.getReqId());
-			}
-			String url = resolveProfileUrl(ProfileEntity.NONADMIN.getProfileEntityType(),
-					ProfileType.GETPROFILE.getProfileType());
-			Object result = executeGet(url, parameters, ClientService.FORMAT_XML);
-
-			if (result != null) {
-				profile.setData((Document) result);
-				addProfileDataToCache(profile.getUniqueId(), (Document) result);
-			} else {
-				profile.setData(null);
-			}
-
-			if (logger.isLoggable(Level.FINEST)) {
-				logger.exiting(sourceClass, "load");
-			}
-		}
-	}
-
-	/*
-	 * Method to check if the Profile is cached. Calls findInCache to find for the profile in Cache.
-	 * 
-	 * @param userId
-	 * @return Document
-	 */
-	private Document getProfileDataFromCache(String userId) {
-		// this should return just the content ..xmldoc
-		// should a have a common caching framework for all services
-		Document data = null;
-		if (isEmail(userId)) {
-			data = findInCache(userId);
-		} else {
-			if(lruCache.hasKey(userId)){
-				data = lruCache.get(userId);
-			}
-		}
-		return data;
-	}
-
-	/*
-	 * addProfileDataToCache() Method to cache the Profile of the User.
-	 * 
-	 * @param userId
-	 * @param content
-	 */
-	private void addProfileDataToCache(String userId, Document content) {
-	
-		lruCache.put(userId, content);
-	}
-
-	/*
-	 * Method to search the cache
-	 * 
-	 * @param userId
-	 * @return Document
-	 */
-	private Document findInCache(String userId) {
-		String key;
-		Set<String> keys = lruCache.getKeySet();
-		Iterator<String> itr = keys.iterator();
-		while (itr.hasNext()) {
-			key = itr.next();
-			Document data = lruCache.get(key);
-			// check if email in profile object is same as input userId
-			String email = "";
+			parameters.put(ProfilesConstants.OUTPUT, "vcard");
+			parameters.put(ProfilesConstants.FORMAT, "full");
+			setIdParameter(parameters, profile.getUserid());
+			Object updateProfilePayload;
 			try {
-				email = DOMUtil.value(data, Profile.xpathMap.get("email"), Profile.nameSpaceCtx);
-			} catch (XMLException e) {
-				continue;
+				updateProfilePayload = constructUpdateRequestBody(profile);
+			} catch (TransformerException e) {
+				throw new ProfileServiceException(e);
 			}
-			// cache hit
-			if (StringUtil.equalsIgnoreCase(email, userId)) {
-				return data;
-			}
+			String updateUrl = resolveProfileUrl(ProfileAPI.NONADMIN.getProfileEntityType(),
+					ProfileType.UPDATEPROFILE.getProfileType());
+			super.updateData(updateUrl, parameters,updateProfilePayload, getUniqueIdentifier(profile.getAsString("uid")));
+			profile.clearFieldsMap();
+		} catch (ClientServicesException e) {
+			throw new ProfileServiceException(e, Messages.UpdateProfileException);
+		} catch (IOException e) {
+			throw new ProfileServiceException(e, Messages.UpdateProfileException);
 		}
-		// Cache miss
-		return null;
+
+	}
+
+	/*
+	 * This method is used by ProfileService wrapper methods to construct request body for Add operations
+	 * @return Object
+	 */
+	protected Object constructCreateRequestBody(Profile profile) throws TransformerException {
+		ProfileTransformer transformer = new ProfileTransformer(profile);
+		String xml = transformer.createTransform(profile.getFieldsMap());
+		return xml;	
+	}
+
+	/*
+	 * This method is used by ProfileService wrapper methods to construct request body for Update operations
+	 * @return Object
+	 */
+	protected Object constructUpdateRequestBody(Profile profile) throws TransformerException {
+		ProfileTransformer transformer = new ProfileTransformer(profile);
+		String xml = transformer.updateTransform(profile.getFieldsMap());
+		return xml;	
+	}
+
+	/*
+	 * This method is used by ProfileService wrapper methods to construct request body for Add operations
+	 * @return Object
+	 */
+	protected Object constructAcceptInviteRequestBody(ConnectionEntry connectionEntry, String action) throws TransformerException {
+		ConnectionEntryTransformer transformer = new ConnectionEntryTransformer(connectionEntry);
+		String xml = "";
+		if(!StringUtil.isEmpty(action)){
+			xml = transformer.updateTransform(action, connectionEntry.getFieldsMap());
+		}
+
+		return xml;	
+	}
+
+	/*
+	 * This method is used by ProfileService wrapper methods to construct request body for Add operations
+	 * @return Object
+	 * @throws ProfileServiceException 
+	 */
+	protected Object constructSendInviteRequestBody(String inviteMsg) throws TransformerException, ProfileServiceException {
+		ConnectionEntry connectionEntry = this.newConnectionEntry();
+		connectionEntry.setContent(inviteMsg);
+		ConnectionEntryTransformer transformer = new ConnectionEntryTransformer(connectionEntry);
+		String xml = transformer.createTransform(connectionEntry.getFieldsMap());
+		return xml;	
 	}
 
 	/*
@@ -845,9 +902,9 @@ public class ProfileService extends BaseService {
 	protected String resolveProfileUrl(String profileEntity, String profileType) {
 		return resolveProfileUrl(profileEntity, profileType, null);
 	}
-	
+
 	/*
-	 * Method responsible for generating appropriate REST URLs
+	 * Method responsible for generating appropriate REST URL
 	 * 
 	 * @param ProfileEntity ( Ref Class : ProfileEntity )
 	 * @param ProfileType ( Ref Class : ProfileType )
@@ -855,28 +912,25 @@ public class ProfileService extends BaseService {
 	 * @return String
 	 */
 	protected String resolveProfileUrl(String profileEntity, String profileType, Map<String, String> params) {
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "resolveCommunityUrl", profileEntity + profileType);
-		}
 
 		StringBuilder proBaseUrl = new StringBuilder(ProfileBaseUrl);
 		if (StringUtil.isEmpty(profileEntity)) {
-			profileEntity = ProfileEntity.NONADMIN.getProfileEntityType(); // Default
-																			// Entity
-																			// Type
+			profileEntity = ProfileAPI.NONADMIN.getProfileEntityType(); // Default
+			// Entity
+			// Type
 		}
 		if (StringUtil.isEmpty(profileType)) {
 			profileType = ProfileType.GETPROFILE.getProfileType(); // Default
-																	// Profile
-																	// Type
+			// Profile
+			// Type
 		}
 		if (AuthUtil.INSTANCE.getAuthValue(endpoint).equalsIgnoreCase("oauth")) {
-			if (profileEntity.equalsIgnoreCase(ProfileEntity.NONADMIN.getProfileEntityType())) {
+			if (profileEntity.equalsIgnoreCase(ProfileAPI.NONADMIN.getProfileEntityType())) {
 				proBaseUrl.append(seperator).append("oauth");
 			}
 		}
 		if (profileEntity.equalsIgnoreCase("")) {// if it is non admin API then
-													// no need to append anythin
+			// no need to append anythin
 			proBaseUrl.append(seperator).append(profileType);
 		} else {
 			proBaseUrl.append(profileEntity).append(seperator).append(profileType);
@@ -902,129 +956,7 @@ public class ProfileService extends BaseService {
 			}
 		}
 
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.log(Level.FINEST, Messages.ProfileInfo_7 + proBaseUrl.toString());
-		}
 		return proBaseUrl.toString();
-	}
-	
-	/**
-	 * Method to execute GET Request 
-	 * 
-	 * @param uri
-	 *           api to be executed.
-	 * @param params
-	 *           Map of Parameters See {@link ProfileRequestParams} for possible values.
-	 * @return Document          
-	 * @throws ProfileServiceException
-	 */
-	public Document executeGet(String uri, Map<String, String> params, Handler format)
-	throws ProfileServiceException{
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.exiting(sourceClass, "executeGet", new Object[] { uri, params });
-		}
-		Document data = null;
-		try {
-			data = (Document) getClientService().get(uri, params);
-		} catch (ClientServicesException e) {
-			if (logger.isLoggable(Level.SEVERE)) {
-				logger.log(Level.SEVERE, Messages.ProfileServiceException_1 + "executeGet()", e);
-			}
-			throw new ProfileServiceException(e);
-		}
-		if (data == null) {
-			return null;
-		}
-		return data;
-	}
-
-	/**
-	 * Method to execute DELETE Request
-	 * 
-	 * @param uri
-	 *           api to be executed.
-	 * @param params
-	 *            Map of Parameters. See {@link ProfileRequestParams} for possible values.
-	 * @return returns true if request is successful	
-	 * @throws ProfileServiceException
-	 */
-	public boolean executeDelete(String uri, Map<String, String> params)
-	throws ProfileServiceException{
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.exiting(sourceClass, "executeDelete", new Object[] { uri, params });
-		}
-		boolean result = true;
-		try {
-			getClientService().delete(uri, params);
-		} catch (ClientServicesException e) {
-			result = false;
-			if (logger.isLoggable(Level.SEVERE)) {
-				logger.log(Level.SEVERE, Messages.ProfileServiceException_1 + "executeDelete()", e);
-			}
-			throw new ProfileServiceException(e);
-		}
-		
-		return result;
-	}
-	
-	/**
-	 * Method to execute PUT Request
-	 * 
-	 * @param requestUri
-	 *            	  api to be executed.
-	 * @param params
-	 *            Map of Parameters. See {@link ProfileRequestParams} for possible values.
-	 * @param headers
-	 *            Map of Headers. See {@link Headers} for possible values.
-	 * @param payload
-	 *            Document which is passed directly as requestBody to the execute request.
-	 * @return returns true if request is successful
-	 * @throws ProfileServiceException
-	 */
-	public boolean executePut(String requestUri, Map<String, String> parameters,
-			Map<String, String> headers, Object payload, Handler format) throws ProfileServiceException {
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "executePut");
-		}
-		boolean success = true;
-		try {
-			getClientService().put(requestUri, parameters, headers, payload, format);
-		} catch (ClientServicesException e) {
-			success = false;
-			logger.log(Level.SEVERE, Messages.ProfileServiceException_1 + "executePut()", e);
-			throw new ProfileServiceException(e);
-		}
-		return success;
-	}
-	
-	/**
-	 * Method to execute POST Request
-	 * 
-	 * @param requestUri
-	 *               api to be executed.
-	 * @param params
-	 *             Map of Parameters. See {@link ProfileRequestParams} for possible values.
-	 * @param headers
-	 *             Map of Headers. See {@link Headers} for possible values.
-	 * @param payload
-	 *             Document which is passed directly as requestBody to the execute request. 
-	 * @return returns true if request is successful
-	 * @throws ProfileServiceException
-	 */
-	public boolean executePost(String requestUri, Map<String, String> parameters,
-			Map<String, String> headers, Object payload, Handler format) throws ProfileServiceException {
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "executePut");
-		}
-		boolean success = true;
-		try {
-			getClientService().post(requestUri, parameters, headers, payload, format);
-		} catch (ClientServicesException e) {
-			success = false;
-			logger.log(Level.SEVERE, Messages.ProfileServiceException_1 + "executePost()", e);
-			throw new ProfileServiceException(e);
-		}
-		return success;
 	}
 
 	/*
@@ -1041,5 +973,22 @@ public class ProfileService extends BaseService {
 		}
 		return userId.contains("@");
 	}
+
+	protected void setIdParameter(Map<String, String>parameters, String id){
+		if (isEmail(id)) {
+			parameters.put(ProfilesConstants.EMAIL, id);
+		} else {
+			parameters.put(ProfilesConstants.USERID, id);
+		}
+	}
+
+	protected String getUniqueIdentifier(String id){
+		if (isEmail(id)) {
+			return ProfilesConstants.EMAIL;
+		} else {
+			return ProfilesConstants.USERID;
+		}
+	}
+
 
 }

@@ -17,31 +17,12 @@
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@page import="java.io.PrintWriter"%>
-<%@page
-	import="com.ibm.sbt.services.client.activitystreams.ActivityStreamService"%>
-<%@page
-	import="com.ibm.sbt.services.client.activitystreams.model.ActivityStreamEntry"%>
-
-
-<%@page import="com.ibm.sbt.services.endpoints.Endpoint"%>
-<%@page import="com.ibm.sbt.services.endpoints.EndpointFactory"%>
-<%@page import="com.ibm.sbt.services.client.ClientService"%>
-<%@page import="com.ibm.commons.runtime.Application"%>
-<%@page import="com.ibm.commons.runtime.Context"%>
-<%@ page
-	import="com.ibm.sbt.services.client.connections.ConnectionsService"%>
+<%@page import="com.ibm.sbt.services.client.connections.activitystreams.model.Reply"%>
+<%@page import="com.ibm.sbt.services.client.connections.activitystreams.model.ActivityStreamEntity"%>
+<%@page import="com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamEntityList"%>
+<%@page import="com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamService"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Iterator"%>
-<%@ page import="com.ibm.sbt.services.client.activitystreams.*"%>
-<%@page import="java.util.Map"%>
-<%@page import="java.util.HashMap"%>
-<%@page import="com.ibm.commons.xml.DOMUtil"%>
-<%@page import="org.w3c.dom.Document"%>
-<%@page import="org.w3c.dom.Node"%>
-<%@page import="org.w3c.dom.Node"%>
-<%@page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-
 <html>
 
 <head>
@@ -55,13 +36,13 @@
 	<%
 		try {
 			ActivityStreamService _service = new ActivityStreamService();
-			List<ActivityStreamEntry> _entries = (List) _service.searchForQuery("attachments"); //search term is connections
+			ActivityStreamEntityList _entries = _service.searchByQuery("attachments"); //search term is connections
 
 			if (_entries.size() <= 0)
 				out.println("No updates to be displayed");
 
 			for (Iterator iterator = _entries.iterator(); iterator.hasNext();) {
-				ActivityStreamEntry entry = (ActivityStreamEntry) iterator.next();
+				ActivityStreamEntity entry = (ActivityStreamEntity) iterator.next();
 				out.println(entry.getActor().getName() + " : " + entry.getEventTitle());
 				out.println("<br>");
 				out.println(entry.getPublished());

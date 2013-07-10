@@ -29,11 +29,17 @@
 <body>
 	<div id="content">
 	<%
-		String userId = Context.get().getProperty("sample.id1");
-		ProfileService connProfSvc = new ProfileService();
-		Profile profile = connProfSvc.getProfile(userId);
-		if(profile.getId()!=null){
-			out.println(profile.getDisplayName());
+		try {
+			String userId = Context.get().getProperty("sample.id1");
+			ProfileService connProfSvc = new ProfileService();
+			Profile profile = connProfSvc.getProfile(userId);
+			if(profile.getUserid()!=null){
+				out.println(profile.getDisplayName());
+			}
+		} catch (Throwable e) {
+			out.println("<pre>");
+			out.println(e.getMessage());
+			out.println("</pre>");
 		}
 	%>
 	</div>

@@ -1,24 +1,48 @@
+/*
+ * © Copyright IBM Corp. 2013
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); 
+ * you may not use this file except in compliance with the License. 
+ * You may obtain a copy of the License at:
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0 
+ * 
+ * Unless required by applicable law or agreed to in writing, software 
+ * distributed under the License is distributed on an "AS IS" BASIS, 
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 
+ * implied. See the License for the specific language governing 
+ * permissions and limitations under the License.
+ */
 package com.ibm.sbt.services.client.connections.communities;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.Collection;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.w3c.dom.Document;
+import org.apache.http.Header;
 import com.ibm.commons.util.StringUtil;
-import com.ibm.sbt.services.client.BaseService;
-import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
-import com.ibm.sbt.services.client.connections.communities.utils.Messages;
+import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.ConnectionsConstants;
+import com.ibm.sbt.services.client.base.transformers.TransformerException;
+import com.ibm.sbt.services.client.base.util.EntityUtil;
+import com.ibm.sbt.services.client.connections.communities.feedhandlers.BookmarkFeedHandler;
+import com.ibm.sbt.services.client.connections.communities.feedhandlers.CommunityFeedHandler;
+import com.ibm.sbt.services.client.connections.communities.feedhandlers.ForumTopicFeedHandler;
+import com.ibm.sbt.services.client.connections.communities.feedhandlers.InviteFeedHandler;
+import com.ibm.sbt.services.client.connections.communities.feedhandlers.MemberFeedHandler;
+import com.ibm.sbt.services.client.connections.communities.tranformers.CommunityMemberTransformer;
+import com.ibm.sbt.services.client.connections.communities.util.Messages;
+import com.ibm.sbt.services.client.Response;
+import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.util.AuthUtil;
+
 /**
  * CommunityService can be used to perform Community Related operations.
  * 
  * @Represents Connections Community Service
  * @author Swati Singh
+ * @author Manish Kataria
+ * @author Carlos Manias
  * <pre>
  * Sample Usage
  * {@code
@@ -29,10 +53,12 @@ import com.ibm.sbt.services.util.AuthUtil;
  */
 
 public class CommunityService extends BaseService {
-	static final String			sourceClass			= CommunityService.class.getName();
-	static final Logger			logger				= Logger.getLogger(sourceClass);
-	private static final String	seperator			= "/";
-	
+	private static final String COMMUNITY_UNIQUE_IDENTIFIER = "communityUuid";
+	private final CommunityFeedHandler communityFeedHandler = new CommunityFeedHandler(this);
+	private final MemberFeedHandler memberFeedHandler = new MemberFeedHandler(this);
+	private final BookmarkFeedHandler bookmarkFeedHandler = new BookmarkFeedHandler(this);
+	private final ForumTopicFeedHandler forumTopicFeedHandler = new ForumTopicFeedHandler(this);
+	private final InviteFeedHandler inviteFeedHandler = new InviteFeedHandler(this);
 	/**
 	 * Used in constructing REST APIs
 	 */
@@ -67,6 +93,41 @@ public class CommunityService extends BaseService {
 	}
 
 	/**
+	 * This method returns the public communities
+	 * 
+	 * @return
+	 * @throws CommunityServiceException
+	 */
+	public CommunityList getPublicCommunities() throws CommunityServiceException {
+		return getPublicCommunities(null);
+	}
+	
+	/**
+	 * This method returns the public communities
+	 * 
+	 * @param parameters
+	 * @return
+	 * @throws CommunityServiceException
+	 */
+	public CommunityList getPublicCommunities(Map<String, String> parameters) throws CommunityServiceException {
+		String requestUrl = resolveCommunityUrl(CommunityEntity.COMMUNITIES.getCommunityEntityType(),CommunityType.ALL.getCommunityType()); 
+		
+		CommunityList communities = null;
+		if(null == parameters){
+			parameters = new HashMap<String, String>();
+		}
+		try {
+			communities = (CommunityList) getEntities(requestUrl, parameters, communityFeedHandler);
+		} catch (ClientServicesException e) {
+			throw new CommunityServiceException(e, Messages.PublicCommunitiesException);
+		} catch (IOException e) {
+			throw new CommunityServiceException(e, Messages.PublicCommunitiesException);
+		}
+		
+		return communities;
+	}
+	
+	/**
 	 * Wrapper method to get a Community
 	 * <p>
 	 * fetches community content from server and populates the data member of {@link Community} with the fetched content 
@@ -77,351 +138,289 @@ public class CommunityService extends BaseService {
 	 * @throws CommunityServiceException
 	 */
 	public Community getCommunity(String communityUuid) throws CommunityServiceException {
-		return getCommunity(communityUuid, true);
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
+		String url = resolveCommunityUrl(CommunityEntity.COMMUNITY.getCommunityEntityType(),
+				CommunityType.INSTANCE.getCommunityType());
+		Community community;
+		try {
+			community = (Community)getEntity(url, parameters, communityFeedHandler);
+		} catch (ClientServicesException e) {
+			throw new CommunityServiceException(e, Messages.CommunityException, communityUuid);
+		} catch (Exception e) {
+			throw new CommunityServiceException(e, Messages.CommunityException, communityUuid);
+		}
+		
+		return community;
+	}
+	
+	public Community newCommunity() throws CommunityServiceException {
+		return new Community(this, "");
+	}
+	
+	public Community newCommunity(String communityUuid) throws CommunityServiceException {
+		return new Community(this, communityUuid);
 	}
 	
 	/**
-	 * Wrapper method to get a empty Community object
-	 *
-	 * @param loadIt
-	 * @return Community
-	 * @throws CommunityServiceException
-	 */
-	public Community getCommunity(boolean loadIt) throws CommunityServiceException {
-		return getCommunity("", loadIt);
-	}
-
-	/**
-	 * Wrapper method to get a Community, it makes network call to fetch the community based on load parameter
-	 * being true/false.
-	 *
+	 * This method returns the Communities of which the user is a member or owner.
+	 * 
 	 * @param communityUuid
-	 *			    id of community
-	 * @param loadIt
-	 * 				if true, fetches community content from server and populates the data member of {@link Community} with the fetched content
-	 * @return A Community
+	 * @return MemberList
 	 * @throws CommunityServiceException
 	 */
-	public Community getCommunity(String communityUuid, boolean loadIt) throws CommunityServiceException {
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "getCommunity", new Object[] { communityUuid, loadIt });
+	public MemberList getMembers(String communityUuid) throws CommunityServiceException {
+		return getMembers(communityUuid, null);
+	}
+	
+	/** Wrapper method to get list of the members of a community
+	 * 
+	 * @param communityUuid
+	 * @param query parameters
+	 * @return MemberList
+	 * @throws CommunityServiceException
+	 */
+	public MemberList getMembers(String communityUuid, Map<String, String> parameters) throws CommunityServiceException {
+		if (StringUtil.isEmpty(communityUuid)){
+			throw new CommunityServiceException(null, Messages.NullCommunityIdException);
 		}
-//		if (StringUtil.isEmpty(communityUuid)) {
-//			throw new IllegalArgumentException("communityUuid passed was null");
-//		}
-		Community community = new Community(communityUuid);
-		if (loadIt) {
-			load(community);
+		if(null == parameters){
+			parameters = new HashMap<String, String>();
 		}
-
-		if (logger.isLoggable(Level.FINEST)) {
-			String log = "";
-			if (community.getCommunityUuid() != null) {
-				log = Messages.CommunityInfo_10;
-			} else {
-				log = Messages.CommunityInfo_9;
-			}
-			logger.exiting(sourceClass, log);
+		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
+		
+		String requestUrl = resolveCommunityUrl(CommunityEntity.COMMUNITY.getCommunityEntityType(),
+				CommunityType.MEMBERS.getCommunityType());
+		
+		MemberList members = null;
+		try {
+			members = (MemberList) getEntities(requestUrl, parameters, memberFeedHandler);
+		} catch (ClientServicesException e) {
+			throw new CommunityServiceException(e, Messages.CommunityMembersException, communityUuid);
+		} catch (IOException e) {
+			throw new CommunityServiceException(e, Messages.CommunityMembersException, communityUuid);
 		}
-		return community;
+		
+		return members;
 	}
 
 	/**
-	 * Wrapper method to get Public Communities
+	 * This method returns the Communities of which the user is a member or owner.
 	 * 
-	 * @return A list of public communities
+	 * @return
 	 * @throws CommunityServiceException
 	 */
-	public Collection<Community> getPublicCommunities()
-	throws CommunityServiceException{
-		return getPublicCommunities(null);
+	public CommunityList getMyCommunities() throws CommunityServiceException {
+		return getMyCommunities(null);
 	}
-
-	/**
-	 * Wrapper method to get public Communities filtered by query parameters
-	 * 
-	 * @param parameters 
-	 * 				list of query string parameters to pass to API
-	 * @return A list of public communities>
-	 * @throws CommunityServiceException
-	 */
-	public Collection<Community> getPublicCommunities(Map<String, String> parameters)
-	throws CommunityServiceException {
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "getPublicCommunities", parameters);
-		}
-		Document data = executeGet(
-				resolveCommunityUrl(CommunityEntity.COMMUNITIES.getCommunityEntityType(),
-						CommunityType.ALL.getCommunityType()), parameters);
-		Collection<Community> communities = Converter.returnCommunities(this, data);
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.exiting(sourceClass, "getPublicCommunities", communities.toString());
-		}
-		if (logger.isLoggable(Level.FINEST)) {
-			String log = "";
-			if (communities != null) {
-				log = Integer.toString(communities.size());
-			} else {
-				log = Messages.CommunityInfo_9;
-			}
-			logger.exiting(sourceClass, "getPublicCommunities", log);
-		}
-		return communities;
-	}
-
 	/**
 	 * Wrapper method to get Communities of which the user is a member or owner.
 	 * 
 	 * @return A list of communities of which the user is a member or owner
 	 * @throws CommunityServiceException
 	 */
-	public Collection<Community> getMyCommunities() throws CommunityServiceException {
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "getMyCommunities");
+	public CommunityList getMyCommunities(Map<String, String> parameters) throws CommunityServiceException {
+		String requestUrl = resolveCommunityUrl(CommunityEntity.COMMUNITIES.getCommunityEntityType(), CommunityType.MY.getCommunityType());
+			
+		CommunityList communities = null;
+		if(null == parameters){
+			 parameters = new HashMap<String, String>();
 		}
-		Map<String, String> parameters = new HashMap<String, String>();
-		Document data = executeGet(
-				resolveCommunityUrl(CommunityEntity.COMMUNITIES.getCommunityEntityType(),
-						CommunityType.MY.getCommunityType()), parameters);
-		Collection<Community> communities = Converter.returnCommunities(this, data);
-		if (logger.isLoggable(Level.FINEST)) {
-			String log = "";
-			if (communities != null) {
-				log = Integer.toString(communities.size());
-			} else {
-				log = Messages.CommunityInfo_9;
-			}
-			logger.exiting(sourceClass, "getMyCommunities", log);
+		try {
+			communities = (CommunityList) getEntities(requestUrl, parameters, communityFeedHandler);
+		} catch (ClientServicesException e) {
+			throw new CommunityServiceException(e, Messages.MyCommunitiesException);
+		} catch (IOException e) {
+			throw new CommunityServiceException(e, Messages.MyCommunitiesException);
 		}
+		
 		return communities;
 	}
-
+	
+	public CommunityList getSubCommunities(String communityUuid) throws CommunityServiceException {
+		return getSubCommunities(communityUuid,	null);
+	}
+	
 	/**
 	 * Wrapper method to get SubCommunities of a community
 	 * 
-	 * @param community 
-	 * 				 community for which SubCommunities are to be fetched
+	 * @param communityUuid 
+	 * 				 community Id of which SubCommunities are to be fetched
 	 * @return A list of communities
 	 * @throws CommunityServiceException
 	 */
-	public Collection<Community> getSubCommunities(Community community) throws CommunityServiceException {
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "getSubCommunities", community);
+	public CommunityList getSubCommunities(String communityUuid, Map<String, String> parameters) throws CommunityServiceException {
+		
+		if (StringUtil.isEmpty(communityUuid)){
+			throw new CommunityServiceException(null, Messages.NullCommunityIdException);
 		}
-		if (null == community){
-			throw new IllegalArgumentException(Messages.InvalidArgument_1);
+		if(null == parameters){
+			parameters = new HashMap<String, String>();
 		}
-		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put("communityUuid", community.getCommunityUuid());
-		Document data = executeGet(
-				resolveCommunityUrl(CommunityEntity.COMMUNITY.getCommunityEntityType(),
-						CommunityType.SUBCOMMUNITIES.getCommunityType()), parameters);
-		Collection<Community> communities = Converter.returnCommunities(this, data);
-		if (logger.isLoggable(Level.FINEST)) {
-			String log = "";
-			if (communities != null) {
-				log = Integer.toString(communities.size());
-			} else {
-				log = Messages.CommunityInfo_9;
-			}
-			logger.exiting(sourceClass, "getSubCommunities", log);
+		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
+	
+		String requestUrl = resolveCommunityUrl(CommunityEntity.COMMUNITY.getCommunityEntityType(),	CommunityType.SUBCOMMUNITIES.getCommunityType());
+		
+		CommunityList communities = null;
+		try {
+			communities = (CommunityList) getEntities(requestUrl, parameters, communityFeedHandler);
+		} catch (ClientServicesException e) {
+			throw new CommunityServiceException(e, Messages.SubCommunitiesException, communityUuid);
+		} catch (IOException e) {
+			throw new CommunityServiceException(e, Messages.SubCommunitiesException, communityUuid);
 		}
+		
 		return communities;
 	}
 
-	/**
-	 * Wrapper method to get members for a community.
-	 * 
-	 * @param community 
-	 * 				 community for which members are to be fetched
-	 * @return Members of the given Community
-	 * @throws CommunityServiceException
-	 */
-	public Member[] getMembers(Community community) throws CommunityServiceException {
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "getMembers", community);
-		}
-		if (null == community){
-			throw new IllegalArgumentException(Messages.InvalidArgument_1);
-		}
-		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put("communityUuid", community.getCommunityUuid());
-		Document data = executeGet(
-				resolveCommunityUrl(CommunityEntity.COMMUNITY.getCommunityEntityType(),
-						CommunityType.MEMBERS.getCommunityType()), parameters);
-		Member[] members = Converter.returnMembers(this, data);
-		if (logger.isLoggable(Level.FINEST)) {
-			String log = "";
-			if (members != null) {
-				log = Integer.toString(members.length);
-			} else {
-				log = Messages.CommunityInfo_9;
-			}
-			logger.exiting(sourceClass, "getMembers", log);
-		}
-		return members;
-	}
 
+	public BookmarkList getBookmarks(String communityUuid) throws CommunityServiceException {
+		return getBookmarks(communityUuid,	null);
+	}
 	/**
 	 * Wrapper method to get bookmarks for a community.
-	 * 
-	 * @param community
-	 * 				community for which bookmarks are to be fetched
+	 *
+	 * @param communityUuid 
+	 * 				 community Id of which bookmarks are to be fetched
 	 * @return Bookmarks of the given Community
 	 * @throws CommunityServiceException
 	 */
-	public Bookmark[] getBookmarks(Community community) throws CommunityServiceException {
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "getBookmarks", community);
+	public BookmarkList getBookmarks(String communityUuid, Map<String, String> parameters) throws CommunityServiceException {
+	
+		if (StringUtil.isEmpty(communityUuid)){
+			throw new CommunityServiceException(null, Messages.NullCommunityIdException);
 		}
-		if (null == community){
-			throw new IllegalArgumentException(Messages.InvalidArgument_1);
+		if(null == parameters){
+			parameters = new HashMap<String, String>();
 		}
-		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put("communityUuid", community.getCommunityUuid());
-		Document data = executeGet(
-				resolveCommunityUrl(CommunityEntity.COMMUNITY.getCommunityEntityType(),
-						CommunityType.BOOKMARKS.getCommunityType()), parameters);
-		Bookmark[] bookmarks = Converter.returnBookmarks(this, data);
-		if (logger.isLoggable(Level.FINEST)) {
-			String log = "";
-			if (bookmarks != null) {
-				log = Integer.toString(bookmarks.length);
-			} else {
-				log = Messages.CommunityInfo_9;
-			}
-			logger.exiting(sourceClass, "getBookmarks", log);
+		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
+		String requestUrl = resolveCommunityUrl(CommunityEntity.COMMUNITY.getCommunityEntityType(),
+				CommunityType.BOOKMARKS.getCommunityType());
+		
+		BookmarkList bookmarks = null;
+		try {
+			bookmarks = (BookmarkList) getEntities(requestUrl, parameters, bookmarkFeedHandler);
+		} catch (ClientServicesException e) {
+			throw new CommunityServiceException(e, Messages.CommunityBookmarksException, communityUuid);
+		} catch (IOException e) {
+			throw new CommunityServiceException(e, Messages.CommunityBookmarksException, communityUuid);
 		}
+		
 		return bookmarks;
 
 	}
 
+	public ForumTopicList getForumTopics(String communityUuid) throws CommunityServiceException {
+		return getForumTopics(communityUuid, null);
+	}
 	/**
 	 * Wrapper method to get forum topics of a community .
 	 * 
-	 * @param community
-	 * 				community for which forum topics are to be fetched
+	 * @param communityUuid 
+	 * 				 community Id of which forum topics are to be fetched
 	 * @return Forum topics of the given Community 
 	 * @throws CommunityServiceException
 	 */
-	public ForumTopic[] getForumTopics(Community community) throws CommunityServiceException {
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "getForumTopics", community);
+	public ForumTopicList getForumTopics(String communityUuid, Map<String, String> parameters) throws CommunityServiceException {
+		
+		if (StringUtil.isEmpty(communityUuid)){
+			throw new CommunityServiceException(null, Messages.NullCommunityIdException);
 		}
-		if (null == community){
-			throw new IllegalArgumentException(Messages.InvalidArgument_1);
+		if(null == parameters){
+			parameters = new HashMap<String, String>();
+		}		
+		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
+		String requestUrl = resolveCommunityUrl(CommunityEntity.COMMUNITY.getCommunityEntityType(),	CommunityType.FORUMTOPICS.getCommunityType());
+		
+		ForumTopicList forumTopics = null;
+		try {
+			forumTopics = (ForumTopicList) getEntities(requestUrl, parameters, forumTopicFeedHandler);
+		}catch (ClientServicesException e) {
+			throw new CommunityServiceException(e, Messages.CommunityForumTopicsException, communityUuid);
+		} catch (IOException e) {
+			throw new CommunityServiceException(e, Messages.CommunityForumTopicsException, communityUuid);
 		}
-		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put("communityUuid", community.getCommunityUuid());
-		Document data = executeGet(
-				resolveCommunityUrl(CommunityEntity.COMMUNITY.getCommunityEntityType(),
-						CommunityType.FORUMTOPICS.getCommunityType()), parameters);
-		ForumTopic[] forumTopics = Converter.returnForumTopics(this, data);
-		if (logger.isLoggable(Level.FINEST)) {
-			String log = "";
-			if (forumTopics != null) {
-				log = Integer.toString(forumTopics.length);
-			} else {
-				log = Messages.CommunityInfo_9;
-			}
-			logger.exiting(sourceClass, "getForumTopics", log);
-		}
+		
 		return forumTopics;
 	}
-
-	/**
-	 * Method to execute GET Request
-	 * 
-	 * @param uri
-	 *           api to be executed.
-	 * @param params
-	 *           Map of Parameters. See {@link CommunityParams} for possible values.
-	 * @return Document          
-	 * @throws CommunityServiceException
-	 */
-	protected Document executeGet(String uri, Map<String, String> params)
-	throws CommunityServiceException{
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.exiting(sourceClass, "executeGet", new Object[] { uri, params });
-		}
-		Document data = null;
+	
+	public InviteList getMyInvites() throws CommunityServiceException {
+		return getMyInvites(null);
+	}
+	 /**
+     * Get a list of the outstanding community invitations of the currently authenticated 
+     * user or provide parameters to search for a subset of those invitations.
+     * 
+     * @method getMyInvites
+     * @param parameters
+     * 				 Various parameters that can be passed to get a feed of members of a community. 
+     * 				 The parameters must be exactly as they are supported by IBM Connections like ps, sortBy etc.
+     * @return pending invites for the authenticated user
+     */
+	public InviteList getMyInvites(Map<String, String> parameters) throws CommunityServiceException {
+		
+		if(null == parameters){
+			parameters = new HashMap<String, String>();
+		}		
+		String requestUrl = resolveCommunityUrl(CommunityEntity.COMMUNITY.getCommunityEntityType(),	CommunityType.INVITES.getCommunityType());
+		InviteList invites = null;
 		try {
-			data = (Document) getClientService().get(uri, params);
-		} catch (ClientServicesException e) {
-			if (logger.isLoggable(Level.SEVERE)) {
-				logger.log(Level.SEVERE, Messages.CommunityServiceException_1 + "executeGet()", e);
-			}
-			throw new CommunityServiceException(e);
+			invites = (InviteList) getEntities(requestUrl, parameters, inviteFeedHandler);
+		}catch (ClientServicesException e) {
+			throw new CommunityServiceException(e, Messages.CommunityInvitationsException);
+		} catch (IOException e) {
+			throw new CommunityServiceException(e, Messages.CommunityInvitationsException);
 		}
-		if (data == null) {
-			return null;
-		}
-		return data;
+		
+		return invites;
 	}
 
-	/**
-	 * Wrapper method to create a community,User should be authenticated to call this method
-	 * <p>
-	 * The data member of {@link Community} is populated with the created Community content
-	 * 
-	 * @param community
-	 * @param loadIt
-	 * 			if true populates the data member of {@link Community} with the created Community content
-	 * @return The created Community
-	 * @throws CommunityServiceException
-	 */	
-	public Community createCommunity(Community community) throws CommunityServiceException {
-		return createCommunity(community, true);
-	}
 	/**
 	 * Wrapper method to create a community
 	 * <p>
 	 * User should be authenticated to call this method
 	 * 
-	 * @param community
-	 * @param loadIt
-	 * 			if true populates the data member of {@link Community} with the created Community content
-	 * @return The created Community
+	 * In response to successful creation of a community server does not return the id in response payload.
+	 * In headers Location has the id to newly created community, we use this to return the communityid.
+	 * Location: https://server/communities/service/atom/community/instance?communityUuid=c93bfb43-0bf2-4125-a8a4-7acd4
+	 * 
+	 * @param Community
+	 * @return String
+	 * 			communityid of newly created Community
 	 * @throws CommunityServiceException
 	 */
-	public Community createCommunity(Community community, boolean loadIt) throws CommunityServiceException {
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "createCommunity", community);
-		}
-		if (null == community) {
-			throw new IllegalArgumentException(Messages.InvalidArgument_1);
+	public String createCommunity(Community community) throws CommunityServiceException {
+		if (null == community){
+			throw new CommunityServiceException(null, Messages.NullCommunityObjectException);
 		}
 
 		try {
-			Object createPayload = community.constructCreateRequestBody();
-			
-			String newCommunityUrl  = (String)getClientService().post(
-					resolveCommunityUrl(CommunityEntity.COMMUNITIES.getCommunityEntityType(),
-							CommunityType.MY.getCommunityType()),null, createPayload, ClientService.FORMAT_CONNECTIONS_OUTPUT);
-		
-			String communityId = newCommunityUrl.substring(newCommunityUrl.indexOf("communityUuid=") + "communityUuid=".length());
-			
-			if (loadIt) {
-				community = new Community(communityId);
-				load(community);
+			Object communityPayload;
+			try {
+				communityPayload =  community.constructCreateRequestBody();
+			} catch (TransformerException e) {
+				throw new CommunityServiceException(e, Messages.CreateCommunityPayloadException);
 			}
-			else{
-				community.setCommunityUuid(communityId);
-			}
+			String communityPostUrl = resolveCommunityUrl(CommunityEntity.COMMUNITIES.getCommunityEntityType(),CommunityType.MY.getCommunityType());
+			Response requestData = createData(communityPostUrl, null, communityPayload,ClientService.FORMAT_CONNECTIONS_OUTPUT);
+			community.clearFieldsMap();
+			return extractCommunityIdFromHeaders(requestData);
 		} catch (ClientServicesException e) {
-			if (e.getResponseStatusCode() == ClientServicesException.CONFLICT) {
-				throw new DuplicateCommunityException(e, StringUtil.format(
-						Messages.CommunityInfo_8, community.getTitle()));
-			}
-			if (logger.isLoggable(Level.SEVERE)) {
-				logger.log(Level.SEVERE, Messages.CommunityInfo_7, e);
-			}
-			throw new CommunityServiceException(e);
+			throw new CommunityServiceException(e, Messages.CreateCommunityException);
+		} catch (IOException e) {
+			throw new CommunityServiceException(e, Messages.CreateCommunityException);
 		}
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.exiting(sourceClass, "createCommunity", community.toString());
+	}
+	
+	private String extractCommunityIdFromHeaders(Response requestData){
+		Header[] headers = requestData.getResponse().getAllHeaders();
+		String urlLocation = "";
+		for (Header header: headers){
+			if (header.getName().equalsIgnoreCase("Location")) {
+				urlLocation = header.getValue();
+			}
 		}
-		return community;
+		return urlLocation.substring(urlLocation.indexOf(COMMUNITY_UNIQUE_IDENTIFIER+"=") + (COMMUNITY_UNIQUE_IDENTIFIER+"=").length());
 	}
 
 	/**
@@ -431,38 +430,41 @@ public class CommunityService extends BaseService {
 	 * 
 	 * @param community
 	 * 				community which is to be updated
-	 * @return value is true if community is updated successfully else value is false
 	 * @throws CommunityServiceException
 	 */
-	public boolean updateCommunity(Community community) throws CommunityServiceException {
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "updateCommunity", community);
-		}
-		boolean returnVal = true;
-		if (null == community){
-			throw new IllegalArgumentException(Messages.InvalidArgument_1);
-		}
-
-		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put("communityUuid", community.getCommunityUuid());
+	public void updateCommunity(Community community) throws CommunityServiceException {
 		try {
-			Object createPayload = community.constructCreateRequestBody();
-			getClientService().put(
-					resolveCommunityUrl(CommunityEntity.COMMUNITY.getCommunityEntityType(),
-							CommunityType.INSTANCE.getCommunityType()), parameters, createPayload,
-					ClientService.FORMAT_XML);
-		} catch (ClientServicesException e) {
-			returnVal = false;
-			if (logger.isLoggable(Level.SEVERE)) {
-				logger.log(Level.SEVERE, Messages.CommunityInfo_6, e);
+			Map<String, String> parameters = new HashMap<String, String>();
+			parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, community.getCommunityUuid());
+			String updateUrl = resolveCommunityUrl(CommunityEntity.COMMUNITY.getCommunityEntityType(),	CommunityType.INSTANCE.getCommunityType());
+			Object communityPayload;
+			try {
+				communityPayload = community.constructCreateRequestBody();
+			} catch (TransformerException e) {
+				throw new CommunityServiceException(e, Messages.CreateCommunityPayloadException);
 			}
-			throw new CommunityServiceException(e);
+			super.updateData(updateUrl, parameters,communityPayload, COMMUNITY_UNIQUE_IDENTIFIER);
+			community.clearFieldsMap();
+		} catch (ClientServicesException e) {
+			throw new CommunityServiceException(e, Messages.UpdateCommunityException);
+		} catch (IOException e) {
+			throw new CommunityServiceException(e, Messages.UpdateCommunityException);
 		}
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.exiting(sourceClass, "updateCommunity", returnVal);
-		}
-		community.clearFieldsMap();
-		return returnVal;
+	}
+	/**
+	 * Wrapper method to add member to a community.
+	 * <p> 
+	 * User should be logged in as a owner of the community to call this method
+	 * Role of the newly added member defaults to "Member"
+	 * 
+	 * @param communityUuid 
+	 * 				 Id of Community to which the member needs to be added
+	 * @param memberId
+	 * 				 Id of Member which is to be added
+	 * @throws CommunityServiceException
+	 */
+	public void addMember(String communityUuid, String memberId) throws CommunityServiceException {
+		addMember(communityUuid,memberId,"");
 	}
 
 	/**
@@ -470,42 +472,44 @@ public class CommunityService extends BaseService {
 	 * <p> 
 	 * User should be logged in as a owner of the community to call this method
 	 * 
-	 * @param community 
-	 * 				 community to which the member needs to be added
-	 * @param member
-	 * 				 member which is to be added
-	 * @return value is true if member is added successfully to the community else value is false
+	 * @param communityUuid 
+	 * 				 Id of Community to which the member needs to be added
+	 * @param memberId
+	 * 				 Id of Member which is to be added
+	 * @role
+	 * 				 Role of newly added member in Community ("eg : owner")
 	 * @throws CommunityServiceException
 	 */
-	public boolean addMember(Community community, Member member) throws CommunityServiceException {
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "AddCommunityMember", new Object[] { community, member });
+	public void addMember(String communityUuid, String memberId, String role) throws CommunityServiceException {
+		if (StringUtil.isEmpty(communityUuid)||StringUtil.isEmpty(memberId)){
+			throw new CommunityServiceException(null, Messages.NullCommunityIdUserIdOrRoleException);
 		}
-		boolean returnVal = true;
-		if (null == community){
-			throw new IllegalArgumentException(Messages.InvalidArgument_1);
+		
+		if(StringUtil.isEmpty(role)){
+			role = "member"; //default role is member
 		}
 
 		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put("communityUuid", community.getCommunityUuid());
+		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
+		
+		Map<String, Object> fields = new HashMap<String, Object>();
+		fields.put("id", memberId);
+		fields.put("role", role);
+		Object communityPayload;
 		try {
-			Object createPayload = member.createMemberEntry();
-			getClientService().post(
-					resolveCommunityUrl(CommunityEntity.COMMUNITY.getCommunityEntityType(),
-							CommunityType.MEMBERS.getCommunityType()), parameters, createPayload,
-					ClientService.FORMAT_NULL);
-
+			communityPayload = new CommunityMemberTransformer().transform(fields);
+		} catch (TransformerException e) {
+			throw new CommunityServiceException(e, Messages.CreateCommunityPayloadException);
+		}
+		
+		String communityUpdateMembertUrl = resolveCommunityUrl(CommunityEntity.COMMUNITY.getCommunityEntityType(),CommunityType.MEMBERS.getCommunityType());
+		try {
+			super.createData(communityUpdateMembertUrl, parameters, communityPayload);
 		} catch (ClientServicesException e) {
-			returnVal = false;
-			if (logger.isLoggable(Level.SEVERE)) {
-				logger.log(Level.SEVERE, Messages.CommunityInfo_5, e);
-			}
-			throw new CommunityServiceException(e);
+			throw new CommunityServiceException(e, Messages.AddMemberException, memberId, role, communityUuid);
+		} catch (IOException e) {
+			throw new CommunityServiceException(e, Messages.AddMemberException, memberId, role, communityUuid);
 		}
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.exiting(sourceClass, "AddCommunityMember", returnVal);
-		}
-		return returnVal;
 	}
 
 	/**
@@ -514,47 +518,32 @@ public class CommunityService extends BaseService {
 	 * User should be logged in as a owner of the community to call this method
 	 * 
 	 * @param community 
-	 * 				 community to which the member is to be removed
-	 * @param member
-	 * 				 member which is to be removed
-	 * @return value is true if member is removed successfully else value is false
+	 * 				 Id of Community from which the member is to be removed
+	 * @param memberId
+	 * 				 Id of Member who is to be removed
 	 * @throws CommunityServiceException
 	 */
-	public boolean removeMember(Community community, Member member) throws CommunityServiceException { 
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "removeMember", new Object[] { community, member });
+	public void removeMember(String communityUuid, String memberId) throws CommunityServiceException { 
+		if (StringUtil.isEmpty(communityUuid)||StringUtil.isEmpty(memberId)){
+			throw new CommunityServiceException(null, Messages.NullCommunityIdOrUserIdException);
 		}
-		boolean returnVal = true;
-		if (null == community){
-			throw new IllegalArgumentException(Messages.InvalidArgument_1);
-		}
-
+		
 		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put("communityUuid", community.getCommunityUuid());
-
-		if (isEmail(member.getId())) {
-			parameters.put("email", member.getId());
-		} else {
-			parameters.put("userid", member.getId());
+		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
+		if(EntityUtil.isEmail(memberId)){
+			parameters.put("email", memberId);
+		}else{
+			parameters.put("userid", memberId);
 		}
-		parameters.put("communityUuid", community.getCommunityUuid());
-
+		
 		try {
-			getClientService().delete(
-					resolveCommunityUrl(CommunityEntity.COMMUNITY.getCommunityEntityType(),
-							CommunityType.MEMBERS.getCommunityType()), parameters);
+			String deleteCommunityUrl = resolveCommunityUrl(CommunityEntity.COMMUNITY.getCommunityEntityType(),CommunityType.MEMBERS.getCommunityType());
+			super.deleteData(deleteCommunityUrl, parameters, COMMUNITY_UNIQUE_IDENTIFIER);
 		} catch (ClientServicesException e) {
-			returnVal = false;
-			if (logger.isLoggable(Level.SEVERE)) {
-				logger.log(Level.SEVERE, Messages.CommunityInfo_4, e);
-			}
-			throw new CommunityServiceException(e);
-
+			throw new CommunityServiceException(e, Messages.RemoveMemberException, memberId, communityUuid);
+		} catch (IOException e) {
+			throw new CommunityServiceException(e, Messages.RemoveMemberException, memberId, communityUuid);
 		}
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.exiting(sourceClass, "removeMember", returnVal);
-		}
-		return returnVal;
 	}
 
 	/**
@@ -562,68 +551,28 @@ public class CommunityService extends BaseService {
 	 * <p>
 	 * User should be logged in as a owner of the community to call this method.
 	 * 
-	 * @param community
-	 * 				community which is to be deleted
-	 * @return value is true, if community is deleted successfully, else false is returned 
+	 * @param String
+	 * 				communityUuid which is to be deleted
 	 * @throws CommunityServiceException
 	 */
-	public boolean deleteCommunity(Community community) throws CommunityServiceException {
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "deleteCommunity", community);
-		}
-		boolean returnVal = true;
-		if (null == community){
-			throw new IllegalArgumentException(Messages.InvalidArgument_1);
+	public void deleteCommunity(String communityUuid) throws CommunityServiceException {
+		if (StringUtil.isEmpty(communityUuid)){
+			throw new CommunityServiceException(null, Messages.NullCommunityIdException);
 		}
 
-		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put("communityUuid", community.getCommunityUuid());
 		try {
-			getClientService().delete(
-					resolveCommunityUrl(CommunityEntity.COMMUNITY.getCommunityEntityType(),
-							CommunityType.INSTANCE.getCommunityType()), parameters);
+			Map<String, String> parameters = new HashMap<String, String>();
+			parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
+			String deleteCommunityUrl = resolveCommunityUrl(CommunityEntity.COMMUNITY.getCommunityEntityType(),	CommunityType.INSTANCE.getCommunityType());
+			super.deleteData(deleteCommunityUrl, parameters, COMMUNITY_UNIQUE_IDENTIFIER);
 		} catch (ClientServicesException e) {
-			returnVal = false;
-			if (logger.isLoggable(Level.SEVERE)) {
-				logger.log(Level.SEVERE, Messages.CommunityInfo_3, e);
-			}
-			throw new CommunityServiceException(e);
-		}
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.exiting(sourceClass, "deleteCommunity", returnVal);
-		}
-		return returnVal;
+			throw new CommunityServiceException(e, Messages.DeleteCommunityException, communityUuid);
+		} catch (IOException e) {
+			throw new CommunityServiceException(e, Messages.DeleteCommunityException, communityUuid);
+		}		
+		
 	}
 	
-	/*
-	 * Method to fetch the community content from server and populates the data member of {@link Community}.
-	 * 
-	 * @param community
-	 * @throws CommunityServiceException
-	 */
-	protected void load(Community community) throws CommunityServiceException {
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "load");
-		}
-
-		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put("communityUuid", community.getCommunityUuid());
-		Object result = null;
-		try {
-			String url = resolveCommunityUrl(CommunityEntity.COMMUNITY.getCommunityEntityType(),
-					CommunityType.INSTANCE.getCommunityType());
-			result = getClientService().get(url, parameters, ClientService.FORMAT_XML);
-		} catch (ClientServicesException e) {
-			logger.log(Level.SEVERE, Messages.CommunityServiceException_1 + "load()", e);
-			throw new CommunityServiceException(e);
-		}
-		community.setData((Document) result);
-
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.exiting(sourceClass, "load");
-		}
-	}
-
 	/*
 	 * Method to generate appropriate REST URLs
 	 * 
@@ -642,10 +591,6 @@ public class CommunityService extends BaseService {
 	 * @param params : ( Ref Class : CommunityParams )
 	 */
 	protected String resolveCommunityUrl(String communityEntity, String communityType, Map<String, String> params) {
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "resolveCommunityUrl", communityEntity + communityType);
-		}
-
 		StringBuilder comBaseUrl = new StringBuilder(CommunityBaseUrl);
 		if (StringUtil.isEmpty(communityEntity)) {
 			communityEntity = CommunityEntity.COMMUNITIES.getCommunityEntityType(); // Default Entity Type
@@ -654,47 +599,30 @@ public class CommunityService extends BaseService {
 			communityType = CommunityType.ALL.getCommunityType(); // Default Community Type
 		}
 
-		if (AuthUtil.INSTANCE.getAuthValue(endpoint).equalsIgnoreCase("oauth")) {
-			comBaseUrl.append(seperator).append("oauth");
+		if (AuthUtil.INSTANCE.getAuthValue(endpoint).equalsIgnoreCase(ConnectionsConstants.OAUTH)) {
+			comBaseUrl.append(ConnectionsConstants.SEPARATOR).append(ConnectionsConstants.OAUTH);
 		}
 
-		comBaseUrl.append(seperator).append(communityEntity).append(seperator).append(communityType);
+		comBaseUrl.append(ConnectionsConstants.SEPARATOR).append(communityEntity).append(ConnectionsConstants.SEPARATOR).append(communityType);
 
 		// Add required parameters
-		if (null != params) {
-			if (params.size() > 0) {
-				comBaseUrl.append("?");
-				boolean setSeperator = false;
-				for (Map.Entry<String, String> param : params.entrySet()) {
-					if (setSeperator) {
-						comBaseUrl.append("&");
-					}
-					String paramvalue = "";
-					try {
-						paramvalue = URLEncoder.encode(param.getValue(), "UTF-8");
-					} catch (UnsupportedEncodingException e) {}
-					comBaseUrl.append(param.getKey() + "=" + paramvalue);
-					setSeperator = true;
+		if (null != params && params.size() > 0) {
+			comBaseUrl.append(ConnectionsConstants.INIT_URL_PARAM);
+			boolean setSeparator = false;
+			for (Map.Entry<String, String> param : params.entrySet()) {
+				String key = param.getKey();
+				if (StringUtil.isEmpty(key)) continue;
+				String value = EntityUtil.encodeURLParam(param.getValue());
+				if (StringUtil.isEmpty(value)) continue;
+				if (setSeparator) {
+					comBaseUrl.append(ConnectionsConstants.URL_PARAM);
+				} else {
+					setSeparator = true;
 				}
+				comBaseUrl.append(key).append(ConnectionsConstants.EQUALS).append(value);
 			}
 		}
 
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.log(Level.FINEST, Messages.CommunityInfo_2 + comBaseUrl.toString());
-		}
-
 		return comBaseUrl.toString();
-	}
-
-	/*
-	 * Method to check if the id is userid or email 
-	 * <p>
-	 * Current check is based on finding @ in the id.
-	 * 
-	 * @param id
-	 * @return boolean
-	 */
-	private boolean isEmail(String id) {
-		return id.contains("@");
 	}
 }

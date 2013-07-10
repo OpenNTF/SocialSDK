@@ -32,6 +32,7 @@ import com.ibm.sbt.services.client.ClientService.Args;
 import com.ibm.sbt.services.client.ClientService.Handler;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.GenericService;
+import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.endpoints.js.JSReference;
 import com.ibm.sbt.util.SBTException;
 
@@ -270,7 +271,7 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     // Client service access
     //
     @Override
-	public Object xhr(String method, ClientService.Args args, Object content) throws ClientServicesException {
+	public Response xhr(String method, ClientService.Args args, Object content) throws ClientServicesException {
     	ClientService srv = getClientService();
     	return srv.xhr(method,args,content);
     }
@@ -305,70 +306,70 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     }
 
     @Override
-	public Object xhrGet(String serviceUrl) throws ClientServicesException {
+	public Response xhrGet(String serviceUrl) throws ClientServicesException {
     	return getClientService().get(serviceUrl);
     }
     @Override
-	public Object xhrGet(String serviceUrl, Map<String, String> parameters) throws ClientServicesException {
+	public Response xhrGet(String serviceUrl, Map<String, String> parameters) throws ClientServicesException {
     	return getClientService().get(serviceUrl, parameters);
     }
     @Override
-	public Object xhrGet(String serviceUrl, Map<String, String> parameters, Handler format) throws ClientServicesException {
+	public Response xhrGet(String serviceUrl, Map<String, String> parameters, Handler format) throws ClientServicesException {
     	return getClientService().get(serviceUrl, parameters, format);
     }
     @Override
-    public Object xhrGet(Args args) throws ClientServicesException {
+    public Response xhrGet(Args args) throws ClientServicesException {
     	return getClientService().get(args);
     }
     
     @Override
-	public Object xhrPost(String serviceUrl, Object content) throws ClientServicesException {
+	public Response xhrPost(String serviceUrl, Object content) throws ClientServicesException {
     	return getClientService().post(serviceUrl, content);
     }
     @Override
-	public Object xhrPost(String serviceUrl, Map<String, String> parameters, Object content) throws ClientServicesException {
+	public Response xhrPost(String serviceUrl, Map<String, String> parameters, Object content) throws ClientServicesException {
     	return getClientService().post(serviceUrl, parameters, content);
     }
     @Override
-	public Object xhrPost(String serviceUrl, Map<String, String> parameters, Object content, Handler format) throws ClientServicesException {
+	public Response xhrPost(String serviceUrl, Map<String, String> parameters, Object content, Handler format) throws ClientServicesException {
     	return getClientService().post(serviceUrl, parameters, content, format);
     }
     @Override
-    public Object xhrPost(Args args, Object content) throws ClientServicesException {
+    public Response xhrPost(Args args, Object content) throws ClientServicesException {
     	return getClientService().post(args, content);
     }
 
     @Override
-	public Object xhrPut(String serviceUrl, Object content) throws ClientServicesException {
+	public Response xhrPut(String serviceUrl, Object content) throws ClientServicesException {
     	return getClientService().put(serviceUrl, content);
     }
     @Override
-	public Object xhrPut(String serviceUrl, Map<String, String> parameters, Object content) throws ClientServicesException {
+	public Response xhrPut(String serviceUrl, Map<String, String> parameters, Object content) throws ClientServicesException {
     	return getClientService().put(serviceUrl, parameters, content);
     }
     @Override
-	public Object xhrPut(String serviceUrl, Map<String, String> parameters, Object content, Handler format) throws ClientServicesException {
+	public Response xhrPut(String serviceUrl, Map<String, String> parameters, Object content, Handler format) throws ClientServicesException {
     	return getClientService().put(serviceUrl, parameters, content, format);
     }
     @Override
-    public Object xhrPut(Args args, Object content) throws ClientServicesException {
+    public Response xhrPut(Args args, Object content) throws ClientServicesException {
     	return getClientService().put(args, content);
     }
 
     @Override
-	public Object xhrDelete(String serviceUrl) throws ClientServicesException {
+	public Response xhrDelete(String serviceUrl) throws ClientServicesException {
     	return getClientService().delete(serviceUrl);
     }
     @Override
-	public Object xhrDelete(String serviceUrl, Map<String, String> parameters) throws ClientServicesException {
+	public Response xhrDelete(String serviceUrl, Map<String, String> parameters) throws ClientServicesException {
     	return getClientService().delete(serviceUrl, parameters);
     }
     @Override
-	public Object xhrDelete(String serviceUrl, Map<String, String> parameters, Handler format) throws ClientServicesException {
+	public Response xhrDelete(String serviceUrl, Map<String, String> parameters, Handler format) throws ClientServicesException {
     	return getClientService().delete(serviceUrl, parameters, format);
     }
     @Override
-    public Object xhrDelete(Args args) throws ClientServicesException {
+    public Response xhrDelete(Args args) throws ClientServicesException {
     	return getClientService().delete(args);
     }
     @Override

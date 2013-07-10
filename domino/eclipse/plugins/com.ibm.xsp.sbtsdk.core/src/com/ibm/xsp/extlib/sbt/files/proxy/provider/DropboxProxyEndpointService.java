@@ -60,7 +60,7 @@ public class DropboxProxyEndpointService extends ProxyEndpointService {
             BasicHttpResponse httpResp = null;
             Args args = new Args();
             try {
-                httpResp = (BasicHttpResponse) svc.get(args);
+                httpResp = (BasicHttpResponse) svc.get(args).getData();
             } catch (ClientServicesException e) {
                 throw new FacesExceptionEx(e, "Failed to execute proxy request");
             }

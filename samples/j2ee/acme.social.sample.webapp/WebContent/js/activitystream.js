@@ -2,8 +2,8 @@
  * Helper module for posting to the activity stream.
  * @module
  */
-define(["sbt/declare", "sbt/Endpoint", "sbt/connections/ActivityStreamService"], 
-    function(declare, Endpoint, ActivityStreamService) {
+define(["sbt/declare", "sbt/Endpoint", "sbt/connections/ActivityStreamService", "sbt/config"], 
+    function(declare, Endpoint, ActivityStreamService, config) {
 
     return {
         /**

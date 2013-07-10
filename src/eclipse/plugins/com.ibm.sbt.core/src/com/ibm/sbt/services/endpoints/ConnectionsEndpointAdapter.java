@@ -199,7 +199,7 @@ class ConnectionsEndpointAdapter {
             // return the cached value
             return nonce.toString();
         } else {
-            InputStream response = (InputStream)endpoint.xhrGet("files/basic/api/nonce");
+            InputStream response = (InputStream)endpoint.xhrGet("files/basic/api/nonce").getData();
             nonce = StreamUtil.readString(response);
             
             // cache the value

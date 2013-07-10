@@ -1,231 +1,141 @@
+/*
+ * © Copyright IBM Corp. 2013
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); 
+ * you may not use this file except in compliance with the License. 
+ * You may obtain a copy of the License at:
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0 
+ * 
+ * Unless required by applicable law or agreed to in writing, software 
+ * distributed under the License is distributed on an "AS IS" BASIS, 
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 
+ * implied. See the License for the specific language governing 
+ * permissions and limitations under the License.
+ */
 package com.ibm.sbt.services.client.connections.communities;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-
-import org.w3c.dom.Document;
-
-import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.DOMUtil;
-import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.XMLException;
-import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
+import com.ibm.sbt.services.client.base.BaseEntity;
+import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 
-public class Member {
-
-	static final Map<String, String> xpath_community_Members;
-	private HashMap<String, String> fieldsMap = new HashMap<String, String>(); //this holds the values which dev sets while creating/ updating profile
-
-	private CommunityService communityService; // Service reference
-
-	static {
-		xpath_community_Members = new HashMap<String, String>();
-		String[][] pairs = {
-				{"entry",				"/a:feed/a:entry"},
-				{"id",					"/a:entry/a:contributor/snx:userid"},
-				{"name",				"/a:entry/a:contributor/a:name"},
-				{"email",				"/a:entry/a:contributor/a:email"},
-				{"role",				"/a:entry/snx:role"}
-		};
-		for (String[] pair : pairs) {
-			xpath_community_Members.put(pair[0], pair[1]);
-		}
-	}
-
-	static com.ibm.commons.xml.NamespaceContext nameSpaceCtx = new NamespaceContext() {
-
-		@Override
-		public String getNamespaceURI(String prefix) {
-			String uri;
-			if(prefix.equals("h"))
-				uri = "http://www.w3.org/1999/xhtml";
-			else if(prefix.equals("a"))
-				uri = "http://www.w3.org/2005/Atom";
-			else if(prefix.equals("snx"))
-				uri = "http://www.ibm.com/xmlns/prod/sn";
-
-			else 
-				uri = null;
-			return uri;
-		}
-
-		// Dummy implementation - not used!
-		@Override
-		public Iterator<String> getPrefixes(String val) {
-			return null;
-		}
-
-		// Dummy implemenation - not used!
-		@Override
-		public String getPrefix(String uri) {
-			return null;
-		}
-
-		@Override
-		public Iterator<String> getPrefixes() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-	};
-
-
-
-	private Document data;
-	private String id; // this can be userId or email. 
-	private String name;
-	private String email;
+/**
+ * This class represents a Connections Community Member entity
+ * 
+ * @Represents Connections Community Member
+ * @author Manish Kataria
+ * @author Carlos Manias
+ */
+public class Member extends BaseEntity {
 	
-	static public final String MEMBER = "member"; //$NON-NLS-1$
-	static public final String OWNER = "owner"; //$NON-NLS-1$
-
-	public Member(CommunityService communityService, String id) {
-		this.communityService = communityService;
-		this.id = id;
-	}
-
+	/**
+	 * Constructor
+	 * 
+	 * @param communityService
+	 * @param id
+	 * @param name
+	 * @param email
+	 */
 	public Member(CommunityService communityService, String id, String name, String email) {
-		this.communityService = communityService;
-		this.id = id;
-		this.name = name;
-		this.email = email;
-	}
-	public Object getData() {
-		return data;
-	}
-
-	public void setData(Document data) {
-		this.data = data;
-	}
-
-	public static com.ibm.commons.xml.NamespaceContext getNameSpaceCtx() {
-		return nameSpaceCtx;
-	}
-
-	public void setNameSpaceCtx(com.ibm.commons.xml.NamespaceContext nameSpaceCtx) {
-		this.nameSpaceCtx = nameSpaceCtx;
-	}
-
-	public HashMap<String, String> getFieldsMap() {
-		return fieldsMap;
-	}
-
-	public String getId() {
-		String id = fieldsMap.get("id");
-    	if(id!= null)
-    		return id;
-    	else{
-    		if(this.id == null){    		
-    			this.id =  get("id");
-    		}
-    		return this.id;
-    	}
-	}
-
-	public String getName() {
-		String name = fieldsMap.get("name");
-    	if(name!= null)
-    		return name;
-    	else{
-    		if(this.name == null){    		
-    			this.name =  get("name");
-    		}
-    		return this.name;
-    	}
-	}
-
-	public String getEmail() {
-		String email = fieldsMap.get("email");
-    	if(email!= null)
-    		return email;
-    	else{
-    		if(this.email == null){    		
-    			this.email =  get("email");
-    		}
-    		return this.email;
-    	}
-	}
-	public void setName(String name) {
-		fieldsMap.put("name",name);
-	}
-
-	public void setId(String id) {
-		this.id = id;
+		setService(communityService);
+		setUserid(id);
+		setName(name);
+		setEmail(email);
 	}
 	
+	/**
+	 * Constructor
+	 * 
+	 * @param svc
+	 * @param handler
+	 */
+	public Member(CommunityService svc, DataHandler<?> handler){
+		super(svc,handler);
+	}
+
+	/**
+	 * 
+	 * @return id
+	 */
+	public String getUserid() {
+		return getAsString(MemberXPath.userid);
+	}
+
+	/**
+	 * 
+	 * @return name
+	 */
+	public String getName() {
+		return getAsString(MemberXPath.name);
+	}
+
+	/**
+	 * 
+	 * @return email
+	 */
+	public String getEmail() {
+		return getAsString(MemberXPath.email);
+	}
+	
+	/**
+	 * @set name
+	 */
+	public void setName(String name) {
+		fields.put(MemberXPath.name.name(),name);
+	}
+
+	/**
+	 * 
+	 * @set id
+	 */
+	public void setUserid(String id) {
+		fields.put(MemberXPath.userid.name(),id);
+	}
+	
+	/**
+	 * 
+	 * @set email
+	 */
+	public void setEmail(String email) {
+		fields.put(MemberXPath.email.name(),email);
+	}
+	
+	/**
+	 * 
+	 * @return role
+	 */
 	public String getRole() {
-		String role = fieldsMap.get("role");
-		return role;
+		return getAsString(MemberXPath.role);
 	}
+	
+	/**
+	 * @set role
+	 */
 	public void setRole(String role){
-		fieldsMap.put("role",role);
+		fields.put(MemberXPath.role.name(),role);
 	}
-
-	/**
-	 * @return value for specified field. Field names follow IBM Connections naming convention
-	 */
-	public String get(String fieldName)
-	{
-		String xpQuery = getXPathQuery(fieldName);
-		return getFieldUsingXPath(xpQuery);
-	}
-
-	/**
-	 * @return xpath query for specified field. Field names follow IBM Connections naming convention
-	 */
-	public String getXPathQuery(String fieldName)
-	{	
-		return xpath_community_Members.get(fieldName);
-	}
-
-	/**
-	 * @return Execute xpath query on Profile XML
-	 */
-	public String getFieldUsingXPath(String xpathQuery)
-	{
-		try {
-			return DOMUtil.value(this.data, xpathQuery, nameSpaceCtx);
-		} catch (XMLException e) {
-			return null;
-		}	
-	}
-
-	protected String createMemberEntry() throws ClientServicesException {
-
-		String body = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:app=\"http://www.w3.org/2007/app\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\">";
-		body += "<contributor>";
-		if(isEmail(getId())){
-			body += "<email>" + getId() + "</email>";
-		}
-		else{
-			body += "<snx:userid>" + getId() + "</snx:userid>";
-		}
-
-		body += "</contributor>";
-		if(getRole() != null){
-			body += "<snx:role component=\"http://www.ibm.com/xmlns/prod/sn/communities\">" + getRole() + "</snx:role>";
-		}
-		body += "</entry>";
 		
-		return body;
+	@Override
+	public CommunityService getService(){
+		return (CommunityService)super.getService();
 	}
-
+	
+	@Override
+	public XmlDataHandler getDataHandler(){
+		return (XmlDataHandler)super.getDataHandler();
+	}
+	
 	@Override
 	public String toString()
 	{
 		try {
-			return DOMUtil.getXMLString(data);
+			return DOMUtil.getXMLString(getDataHandler().getData());
 		} catch (XMLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return "";
 		}
 	}
 
-	private boolean isEmail(String userId)
-	{
-		if (StringUtil.isEmpty(userId))
-			return false;
-		return userId.contains("@");
-	}
 }

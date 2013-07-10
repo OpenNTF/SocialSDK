@@ -22,9 +22,16 @@ package com.ibm.sbt.services.client.connections.files.model;
  * 
  * @author Vimal Dhupar
  */
-public class FileRequestPayload {
-	public static final String	VISIBILITY	= "visibility";
-	public static final String	SUMMARY		= "summary";
-	public static final String	LABEL		= "label";
-	public static final String	COMMENT		= "comment";
+public enum FileRequestPayload {
+	VISIBILITY("visibility"), SUMMARY("summary"), LABEL("label"), COMMENT("comment");
+
+	String	fileRequestPayload;
+
+	private FileRequestPayload(String payload) {
+		this.fileRequestPayload = payload;
+	}
+
+	public String getFileRequestPayload() {
+		return fileRequestPayload;
+	}
 }

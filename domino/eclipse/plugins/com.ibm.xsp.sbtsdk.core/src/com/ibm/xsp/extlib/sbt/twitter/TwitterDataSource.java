@@ -122,7 +122,7 @@ public class TwitterDataSource extends RestObjectDataSource {
                     ClientService svc = createClientService(provider, getServiceUrl());
                    
                     HandlerJson json  = new HandlerJson();
-                    ArrayList collection = (ArrayList)svc.get(statusUrl, json);
+                    ArrayList collection = (ArrayList)svc.get(statusUrl, json).getData();
                     
                     if(collection != null){
                         int vc = collection.size();
@@ -150,7 +150,7 @@ public class TwitterDataSource extends RestObjectDataSource {
                     
                     //TODO - Padraic
                     HandlerJson json= new HandlerJson();
-                    ArrayList collection = (ArrayList)svc.get(null,params, json);
+                    ArrayList collection = (ArrayList)svc.get(null,params, json).getData();
                     //JsonNavigator navigator = new JsonNavigator((Document)doc);
                    //DataNavigator dn = navigator.get("feed/entry");
                     

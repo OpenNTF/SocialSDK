@@ -24,7 +24,7 @@ package com.ibm.sbt.services.client.connections.files;
 public enum Filters {
 
 	ADDEDTO("/addedto"), SHARE("/share"), SHARED("/shared"), MYSHARES("/myshares"), COMMENT("comment"), NULL(
-			"");
+			""), ACTIONS("/actions");
 
 	String	filters;
 

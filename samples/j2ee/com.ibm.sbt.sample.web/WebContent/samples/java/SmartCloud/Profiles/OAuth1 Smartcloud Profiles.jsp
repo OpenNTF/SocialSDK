@@ -14,6 +14,8 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@page import="com.ibm.sbt.services.client.smartcloud.profiles.Profile"%>
+<%@page import="com.ibm.sbt.services.client.smartcloud.profiles.ProfileService"%>
 <%@page import="com.ibm.sbt.services.endpoints.Endpoint"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.HashMap"%>
@@ -22,8 +24,6 @@
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
 <%@page import="java.io.PrintWriter"%>
-<%@page import="com.ibm.sbt.services.client.smartcloud.profiles.ProfileService"%>
-<%@page import="com.ibm.sbt.services.client.smartcloud.profiles.Profile"%>
 <%@page
 	language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -38,7 +38,7 @@
 	<%
 		try {		
 				ProfileService service = new ProfileService("smartcloud"); //If no endpoint is specified, it uses default end point i.e connections
-				Profile profile = service.getProfile();
+				Profile profile = service.getMyProfile();
 				if(profile != null) 
 				{
 					out.println("<B>Profile </B> ");

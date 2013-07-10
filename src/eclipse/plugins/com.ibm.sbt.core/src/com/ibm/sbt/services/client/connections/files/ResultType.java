@@ -23,7 +23,7 @@ package com.ibm.sbt.services.client.connections.files;
  */
 public enum ResultType {
 	FEED("/feed"), MEDIA("/media"), ENTRY("/entry"), REPORTS("/reports"), NONCE("/nonce"), LOCK("/lock"), NULL(
-			"");
+			""), INTROSPECTION("/introspection"), ATOMSVC("/atomsvc");
 
 	String	resultType;
 

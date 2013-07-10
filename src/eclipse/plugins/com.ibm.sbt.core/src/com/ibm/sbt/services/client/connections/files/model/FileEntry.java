@@ -15,24 +15,19 @@
  */
 package com.ibm.sbt.services.client.connections.files.model;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
 import com.ibm.commons.util.StringUtil;
-import com.ibm.commons.xml.DOMUtil;
-import com.ibm.commons.xml.XMLException;
-import com.ibm.sbt.services.client.connections.files.utils.ContentMapFiles;
-import com.ibm.sbt.services.client.connections.files.utils.Messages;
-import com.ibm.sbt.services.client.connections.files.utils.NamespacesConnections;
+import com.ibm.sbt.services.client.base.BaseEntity;
+import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
+import com.ibm.sbt.services.client.connections.files.FileEntryXPath;
+import com.ibm.sbt.services.client.connections.files.FileService;
 
 /**
  * @Represents Connections File
  * @author Vimal Dhupar
  */
-public class FileEntry {
-	private Document		data;											// Document object which stores
-																			// the response feed obtained from
-																			// Server.
+public class FileEntry extends BaseEntity {
 	private String			fileId;										// this is the Document Id
 	private String			creatorId;
 	private String			label;
@@ -41,71 +36,32 @@ public class FileEntry {
 	private String			category;
 	private String			totalResults;
 	private CommentEntry	commentEntry;
-	private PersonEntry		personEntry;
+	private AuthorEntry		authorEntry;
+	private ModifierEntry	modifierEntry;
 	private String			title;
 
-	static final String		sourceClass	= FileEntry.class.getName();
-	static final Logger		logger		= Logger.getLogger(sourceClass);
-
 	public FileEntry() {
-		commentEntry = new CommentEntry();
-		personEntry = new PersonEntry();
+		this(null,null);
 	}
 
 	public FileEntry(String fileId) {
 		this.fileId = fileId;
 		commentEntry = new CommentEntry();
-		personEntry = new PersonEntry();
+		//personEntry = new PersonEntry();
 	}
 
-	/**
-	 * get
-	 * 
-	 * @param fieldName
-	 * @return String
-	 */
-	private String get(String fieldName) {
-		String xpQuery = getXPathQuery(fieldName);
-		return getFieldUsingXPath(xpQuery);
-	}
-
-	/**
-	 * getXPathQuery
-	 * 
-	 * @return xpath query for specified field. Field names follow IBM Connections naming convention
-	 */
-	private String getXPathQuery(String fieldName) {
-		return ContentMapFiles.xpathMap.get(fieldName);
-	}
-
-	/**
-	 * getFieldUsingXPath
-	 * <p>
-	 * Execute xpath query on Profile XML
-	 * 
-	 * @return String
-	 */
-	private String getFieldUsingXPath(String xpathQuery) {
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "getFieldUsingXPath");
-		}
-		String result = null;
-		try {
-			result = DOMUtil.value(this.data, xpathQuery, NamespacesConnections.nameSpaceCtx);
-		} catch (XMLException e) {
-			logger.log(Level.SEVERE, Messages.FileError_1 + "getFieldUsingXPath");
-		}
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.exiting(sourceClass, "getFieldUsingXPath");
-		}
-		return result;
-	}
-
+    public FileEntry(FileService svc, DataHandler<?> dh) {
+        super(svc, dh);
+        commentEntry = new CommentEntry();
+        authorEntry = new AuthorEntry(getService(), this.dataHandler);
+        modifierEntry = new ModifierEntry(getService(), this.dataHandler);
+    }
+    
 	public String getFileId() {
 		if (!StringUtil.isEmpty(fileId)) {
 			return fileId;
 		}
-		return get("uuidFromEntry");
+		return getAsString(FileEntryXPath.UuidFromEntry);
 	}
 
 	public void setFileId(String fileId) {
@@ -116,7 +72,7 @@ public class FileEntry {
 		if (!StringUtil.isEmpty(label)) {
 			return label;
 		}
-		return get("labelFromEntry");
+		return getAsString(FileEntryXPath.LabelFromEntry);
 	}
 
 	public void setLabel(String label) {
@@ -127,7 +83,7 @@ public class FileEntry {
 		if (!StringUtil.isEmpty(lock)) {
 			return lock;
 		}
-		return get("lockFromEntry");
+		return getAsString(FileEntryXPath.LockFromEntry);
 	}
 
 	public void setLock(String lock) {
@@ -138,7 +94,7 @@ public class FileEntry {
 		if (!StringUtil.isEmpty(title)) {
 			return title;
 		}
-		return get("titleFromEntry");
+		return getAsString(FileEntryXPath.TitleFromEntry);
 	}
 
 	public void setTitle(String title) {
@@ -149,7 +105,7 @@ public class FileEntry {
 		if (!StringUtil.isEmpty(libraryType)) {
 			return libraryType;
 		}
-		return get("libraryTypeFromEntry");
+		return getAsString(FileEntryXPath.LibraryTypeFromEntry);
 	}
 
 	public void setLibraryType(String libraryType) {
@@ -170,23 +126,23 @@ public class FileEntry {
 		if (!StringUtil.isEmpty(category)) {
 			return category;
 		}
-		return get("categoryFromEntry");
+		return getAsString(FileEntryXPath.CategoryFromEntry);
 	}
 
 	public void setCategory(String category) {
 		this.category = category;
 	}
 
-	private Object getData() {
-		return data;
+	private Node getData() {
+		return (Node)dataHandler.getData();
 	}
 
 	public void setData(Document data) {
-		this.data = data;
+		dataHandler.setData(data);
 	}
 
 	public String getDownloadLink() {
-		return get("downLinkFromEntry");
+		return getAsString(FileEntryXPath.DownLinkFromEntry);
 	}
 
 	public CommentEntry getCommentEntry() {
@@ -197,19 +153,19 @@ public class FileEntry {
 		this.commentEntry = commentEntry;
 	}
 
-	public PersonEntry getAuthorEntry() {
-		return personEntry.getAuthorEntry();
+	public AuthorEntry getAuthorEntry() {
+		return authorEntry;
 	}
 
-	private void setAuthorEntry(PersonEntry authorEntry) {
-		this.personEntry = authorEntry;
+	private void setAuthorEntry(AuthorEntry authorEntry) {
+		this.authorEntry = authorEntry;
 	}
 
 	public String getTotalResults() {
 		if (!StringUtil.isEmpty(totalResults)) {
 			return totalResults;
 		}
-		return get("totalResults");
+		return getAsString(FileEntryXPath.TotalResults);
 	}
 
 	private void setTotalResults(String totalResults) {
@@ -220,26 +176,21 @@ public class FileEntry {
 	 * createResultFileWithData
 	 * <p>
 	 * method to create the FileEntry object for the response feed
-	 * 
+	 * requires a document having a entry as the root node
 	 * @param result
 	 * @return FileEntry
 	 */
 	public static Object createResultFileWithData(Document result, Class objectType) {
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "createResultFileWithData");
-		}
 		FileEntry file = new FileEntry();
 		file.setData(result);
-		if (file.get("categoryFromEntry").equals("comment")) {
+		if (file.getAsString(FileEntryXPath.CategoryFromEntry).equals("comment")) {
 			file.commentEntry.setData(result);
 		}
-		file.personEntry.setData(result);
+		file.getAuthorEntry().setData(result);
 
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.exiting(sourceClass, "createResultFileWithData");
-		}
-
-		if (objectType.equals(CommentEntry.class)) {
+		if (objectType == null) {
+			return file.getData();
+		} else if (objectType.equals(CommentEntry.class)) {
 			return file.getCommentEntry();
 		} else if (objectType.equals(PersonEntry.class)) {
 			return file.getAuthorEntry();
@@ -249,50 +200,51 @@ public class FileEntry {
 
 	// ONLY GETTERS FOR SOME OF THE FIELDS IN RESPONSE FEED
 	public String getPublished() {
-		return get("publishedFromEntry");
+		return getAsString(FileEntryXPath.PublishedFromEntry);
 	}
 
 	public String getUpdated() {
-		return get("updatedFromEntry");
+		return getAsString(FileEntryXPath.UpdatedFromEntry);
 	}
 
 	public String getCreated() {
-		return get("createdFromEntry");
+		return getAsString(FileEntryXPath.CreatedFromEntry);
 	}
 
 	public String getModified() {
-		return get("modifiedFromEntry");
+		return getAsString(FileEntryXPath.ModifiedFromEntry);
 	}
 
 	public String getLastAccessed() {
-		return get("lastAccessedFromEntry");
+		return getAsString(FileEntryXPath.LastAccessedFromEntry);
 	}
 
 	public PersonEntry getModifier() {
-		return personEntry.getModifierEntry();
+		return modifierEntry;
 	}
 
 	public String getVisibility() {
-		return get("visibilityFromEntry");
+		return getAsString(FileEntryXPath.VisibilityFromEntry
+);
 	}
 
 	public String getLibraryId() {
-		return get("libraryIdFromEntry");
+		return getAsString(FileEntryXPath.LibraryIdFromEntry);
 	}
 
 	public String getVersionLabel() {
-		return get("versionLabelFromEntry");
+		return getAsString(FileEntryXPath.VersionLabelFromEntry);
 	}
 
 	public String getPropogation() {
-		return get("propagationFromEntry");
+		return getAsString(FileEntryXPath.PropagationFromEntry);
 	}
 
 	public String getTotalMediaSize() {
-		return get("totalMediaSizeFromEntry");
+		return getAsString(FileEntryXPath.TotalMediaSizeFromEntry);
 	}
 
 	public String getObjectTypeId() {
-		return get("objectTypeIdFromEntry");
+		return getAsString(FileEntryXPath.ObjectTypeIdFromEntry);
 	}
 }

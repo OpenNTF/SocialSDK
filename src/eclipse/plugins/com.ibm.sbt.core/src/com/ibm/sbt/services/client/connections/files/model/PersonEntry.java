@@ -20,136 +20,23 @@ package com.ibm.sbt.services.client.connections.files.model;
  * 
  * @author Vimal Dhupar
  */
-import org.w3c.dom.Document;
-import com.ibm.commons.util.StringUtil;
-import com.ibm.commons.xml.DOMUtil;
-import com.ibm.commons.xml.XMLException;
-import com.ibm.sbt.services.client.connections.files.utils.ContentMapFiles;
-import com.ibm.sbt.services.client.connections.files.utils.NamespacesConnections;
+import org.w3c.dom.Node;
 
-public class PersonEntry {
-	private String		name;
-	private String		email;
-	private String		userState;
-	private String		userUuid;
-	private Document	data;
+import com.ibm.sbt.services.client.base.BaseEntity;
+import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 
-	public Document getData() {
-		return data;
+public class PersonEntry extends BaseEntity {
+	
+	public PersonEntry(BaseService svc, DataHandler<?> dataHandler) {
+		super(svc, dataHandler);
+	}
+	
+	public Node getData() {
+		return (Node)dataHandler.getData();
 	}
 
-	public void setData(Document data) {
-		this.data = data;
-	}
-
-	private String getUserUuid(String xPathIdentifier) {
-		if (!StringUtil.isEmpty(userUuid)) {
-			return userUuid;
-		}
-		return get(xPathIdentifier);
-	}
-
-	private void setUserUuid(String userUuId) {
-		this.userUuid = userUuId;
-	}
-
-	private String getName(String xPathIdentifier) {
-		if (!StringUtil.isEmpty(name)) {
-			return name;
-		}
-		return get(xPathIdentifier);
-	}
-
-	private void setName(String name) {
-		this.name = name;
-	}
-
-	private String getEmail(String xPathIdentifier) {
-		if (!StringUtil.isEmpty(email)) {
-			return email;
-		}
-		return get(xPathIdentifier);
-	}
-
-	private void setEmail(String email) {
-		this.email = email;
-	}
-
-	private String getUserState(String xPathIdentifier) {
-		if (!StringUtil.isEmpty(userState)) {
-			return userState;
-		}
-		return get(xPathIdentifier);
-	}
-
-	private void setUserState(String userState) {
-		this.userState = userState;
-	}
-
-	public PersonEntry getAuthorEntry() {
-		setEmail(getEmail("emailFromEntry"));
-		setName(getName("nameOfUserFromEntry"));
-		setUserState(getUserState("userStateFromEntry"));
-		setUserUuid(getUserUuid("userUuidFromEntry"));
-		return this;
-	}
-
-	public PersonEntry getModifierEntry() {
-		setEmail(getEmail("emailModifier"));
-		setName(getName("nameModifier"));
-		setUserState(getUserState("userStateModifier"));
-		setUserUuid(getUserUuid("userUuidModifier"));
-		return this;
-	}
-
-	public String getEmail() {
-		return this.email;
-	}
-
-	public String getName() {
-		return this.name;
-	}
-
-	public String getUserState() {
-		return this.userState;
-	}
-
-	public String getUserUuid() {
-		return this.userUuid;
-	}
-
-	/**
-	 * get
-	 * 
-	 * @param fieldName
-	 * @return
-	 */
-	private String get(String fieldName) {
-		String xpQuery = getXPathQuery(fieldName);
-		return getFieldUsingXPath(xpQuery);
-	}
-
-	/**
-	 * getXPathQuery
-	 * 
-	 * @return xpath query for specified field. Field names follow IBM Connections naming convention
-	 */
-	private String getXPathQuery(String fieldName) {
-		return ContentMapFiles.xpathMap.get(fieldName);
-	}
-
-	/**
-	 * getFieldUsingXPath
-	 * 
-	 * @return Execute xpath query on Profile XML
-	 */
-	private String getFieldUsingXPath(String xpathQuery) {
-		String result = null;
-		try {
-			result = DOMUtil.value(this.data, xpathQuery, NamespacesConnections.nameSpaceCtx);
-		} catch (XMLException e) {
-			// System.err.println("Error in getFieldUsingXPath .. xpathQuery is : " + xpathQuery);
-		}
-		return result;
+	public void setData(Node data) {
+		dataHandler.setData(data);
 	}
 }

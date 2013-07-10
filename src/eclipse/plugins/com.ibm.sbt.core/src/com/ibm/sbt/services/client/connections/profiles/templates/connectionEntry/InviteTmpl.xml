@@ -1,0 +1,8 @@
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:snx="http://www.ibm.com/xmlns/prod/sn">
+${getId}
+${getTitle}
+<category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="connection"/>
+<category scheme="http://www.ibm.com/xmlns/prod/sn/connection/type" term="colleague"/>
+${getStatus}
+${getContent}
+</entry>

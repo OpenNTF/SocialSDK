@@ -22,6 +22,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.ibm.sbt.security.authentication.AuthenticationException;
 import com.ibm.sbt.services.client.ClientService;
+import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.ClientService.Args;
 import com.ibm.sbt.services.client.ClientService.Handler;
 import com.ibm.sbt.services.client.ClientServicesException;
@@ -200,7 +201,7 @@ public interface Endpoint {
      * @return
      * @throws ClientServicesException
      */
-    public Object xhr(String method, ClientService.Args args, Object content) throws ClientServicesException;
+    public Response xhr(String method, ClientService.Args args, Object content) throws ClientServicesException;
     
     /**
      * 
@@ -208,7 +209,7 @@ public interface Endpoint {
      * @return
      * @throws ClientServicesException
      */
-    public Object xhrGet(String serviceUrl) throws ClientServicesException;
+    public Response xhrGet(String serviceUrl) throws ClientServicesException;
     
     /**
      * 
@@ -217,7 +218,7 @@ public interface Endpoint {
      * @return
      * @throws ClientServicesException
      */
-    public Object xhrGet(String serviceUrl, Map<String, String> parameters) throws ClientServicesException;
+    public Response xhrGet(String serviceUrl, Map<String, String> parameters) throws ClientServicesException;
     
     /**
      * 
@@ -227,7 +228,7 @@ public interface Endpoint {
      * @return
      * @throws ClientServicesException
      */
-    public Object xhrGet(String serviceUrl, Map<String, String> parameters, Handler format) throws ClientServicesException;
+    public Response xhrGet(String serviceUrl, Map<String, String> parameters, Handler format) throws ClientServicesException;
     
     /**
      * 
@@ -235,7 +236,7 @@ public interface Endpoint {
      * @return
      * @throws ClientServicesException
      */
-    public Object xhrGet(Args args) throws ClientServicesException;
+    public Response xhrGet(Args args) throws ClientServicesException;
     
     /**
      * 
@@ -244,7 +245,7 @@ public interface Endpoint {
      * @return
      * @throws ClientServicesException
      */
-    public Object xhrPost(String serviceUrl, Object content) throws ClientServicesException;
+    public Response xhrPost(String serviceUrl, Object content) throws ClientServicesException;
     
     /**
      * 
@@ -254,7 +255,7 @@ public interface Endpoint {
      * @return
      * @throws ClientServicesException
      */
-    public Object xhrPost(String serviceUrl, Map<String, String> parameters, Object content) throws ClientServicesException;
+    public Response xhrPost(String serviceUrl, Map<String, String> parameters, Object content) throws ClientServicesException;
     
     /**
      * 
@@ -265,7 +266,7 @@ public interface Endpoint {
      * @return
      * @throws ClientServicesException
      */
-    public Object xhrPost(String serviceUrl, Map<String, String> parameters, Object content, Handler format) throws ClientServicesException;
+    public Response xhrPost(String serviceUrl, Map<String, String> parameters, Object content, Handler format) throws ClientServicesException;
     
     /**
      * 
@@ -274,7 +275,7 @@ public interface Endpoint {
      * @return
      * @throws ClientServicesException
      */
-    public Object xhrPost(Args args, Object content) throws ClientServicesException;
+    public Response xhrPost(Args args, Object content) throws ClientServicesException;
 
     /**
      * 
@@ -283,7 +284,7 @@ public interface Endpoint {
      * @return
      * @throws ClientServicesException
      */
-    public Object xhrPut(String serviceUrl, Object content) throws ClientServicesException;
+    public Response xhrPut(String serviceUrl, Object content) throws ClientServicesException;
     
     /**
      * 
@@ -293,7 +294,7 @@ public interface Endpoint {
      * @return
      * @throws ClientServicesException
      */
-    public Object xhrPut(String serviceUrl, Map<String, String> parameters, Object content) throws ClientServicesException;
+    public Response xhrPut(String serviceUrl, Map<String, String> parameters, Object content) throws ClientServicesException;
     
     /**
      * 
@@ -304,7 +305,7 @@ public interface Endpoint {
      * @return
      * @throws ClientServicesException
      */
-    public Object xhrPut(String serviceUrl, Map<String, String> parameters, Object content, Handler format) throws ClientServicesException;
+    public Response xhrPut(String serviceUrl, Map<String, String> parameters, Object content, Handler format) throws ClientServicesException;
     
     /**
      * 
@@ -313,7 +314,7 @@ public interface Endpoint {
      * @return
      * @throws ClientServicesException
      */
-    public Object xhrPut(Args args, Object content) throws ClientServicesException;
+    public Response xhrPut(Args args, Object content) throws ClientServicesException;
 
     /**
      * 
@@ -321,7 +322,7 @@ public interface Endpoint {
      * @return
      * @throws ClientServicesException
      */
-    public Object xhrDelete(String serviceUrl) throws ClientServicesException;
+    public Response xhrDelete(String serviceUrl) throws ClientServicesException;
     
     /**
      * 
@@ -330,7 +331,7 @@ public interface Endpoint {
      * @return
      * @throws ClientServicesException
      */
-    public Object xhrDelete(String serviceUrl, Map<String, String> parameters) throws ClientServicesException;
+    public Response xhrDelete(String serviceUrl, Map<String, String> parameters) throws ClientServicesException;
     
     /**
      * 
@@ -340,7 +341,7 @@ public interface Endpoint {
      * @return
      * @throws ClientServicesException
      */
-    public Object xhrDelete(String serviceUrl, Map<String, String> parameters, Handler format) throws ClientServicesException;
+    public Response xhrDelete(String serviceUrl, Map<String, String> parameters, Handler format) throws ClientServicesException;
     
     /**
      * 
@@ -348,7 +349,7 @@ public interface Endpoint {
      * @return
      * @throws ClientServicesException
      */
-    public Object xhrDelete(Args args) throws ClientServicesException;
+    public Response xhrDelete(Args args) throws ClientServicesException;
     
     /**
      * 

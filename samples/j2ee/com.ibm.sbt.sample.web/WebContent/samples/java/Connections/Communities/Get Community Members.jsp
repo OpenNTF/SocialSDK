@@ -15,45 +15,47 @@
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@page import="java.io.PrintWriter"%>
-<%@page import="java.util.Collection"%>
-<%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
-<%@page
-	import="com.ibm.sbt.services.client.connections.communities.Community"%>
-<%@page
-	import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
-<%@page
-	import="com.ibm.sbt.services.client.connections.communities.Member"%>
+<%@page import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
+<%@page import="com.ibm.sbt.services.client.connections.communities.Community"%>
+<%@page import="com.ibm.sbt.services.client.connections.communities.CommunityList"%>
+<%@page import="com.ibm.sbt.services.client.connections.communities.MemberList"%>
+<%@page import="com.ibm.sbt.services.client.connections.communities.Member"%>
+
+<%@page import="java.util.*"%>
+
+				
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	
 <html>
 <head>
-<title>SBT JAVA Sample - Get Community Members</title>
+<title>SBT JAVA Sample - Get Community by ID</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
 <body>
-	<h4>Community Members</h4>
+	<h4>Get Community members </h4>
 	<div id="content">
 	<%
-	try {
-		CommunityService communityService = new CommunityService();
-		Collection<Community> communities = communityService.getPublicCommunities();
-		Community community = communities.iterator().next();
-		Member[] members = communityService.getMembers(community);
-		if (members.length > 0) {
-			for (int i = 0; i < members.length; i++) {
-				out.println("<b>Name : </b> " + members[i].getName());
+		try {
+			CommunityService communityService = new CommunityService();
+			CommunityList communities = communityService.getPublicCommunities();
+			Community community = communities.iterator().next();
+		
+			MemberList members = communityService.getMembers(community.getCommunityUuid());
+			
+			out.println("<br>Listing Members of a Community <br>");
+			for (Member member : members) {
+				out.println("<b>member Name : </b> " + member.getName() +" ("+ member.getRole()+")");
 				out.println("<br>");
 			}
-		} else {
-			out.println("No result");
+			
+		} catch (Throwable e) {
+			out.println("<pre>");
+			out.println("Problem Occurred while fetching members of a community: " + e.getMessage());
+			
 		}
-	} catch (Throwable e) {
-		out.println("<pre>");
-		out.println(e.getMessage());
-		out.println("</pre>");
-	}
 	%>
 	</div>
 </body>

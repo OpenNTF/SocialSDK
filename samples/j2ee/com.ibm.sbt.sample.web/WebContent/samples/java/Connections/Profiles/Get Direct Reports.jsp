@@ -21,9 +21,11 @@
 <%@page import="java.io.PrintWriter"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.HashMap"%>
-<%@page import="java.util.Collection"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.Iterator"%>
 <%@page import="com.ibm.sbt.services.client.connections.profiles.ProfileService"%>
 <%@page import="com.ibm.sbt.services.client.connections.profiles.Profile"%>
+<%@page import="com.ibm.sbt.services.client.connections.profiles.ProfileList"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"	pageEncoding="ISO-8859-1"%>
 <html>
 <head>
@@ -37,16 +39,15 @@
 		ProfileService connProfSvc = new ProfileService();
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("userid", userId);
-		Collection<Profile> profiles = connProfSvc.getDirectReports(userId,params);
-		if (profiles.size() > 0) {
-				out.println("<b> Direct Reportees </b>");
-				out.println("<br>");
-				for (Profile profile : profiles) {
+		ProfileList profiles = connProfSvc.getDirectReports(userId,params);
+		if(profiles != null && ! profiles.isEmpty()) {
+			for (Iterator iterator = profiles.iterator(); iterator.hasNext();) {
+				Profile profile = (Profile)iterator.next();
 					out.println("<b>Name : </b> " + profile.getDisplayName());
 					out.println("<br>");
 				}
 		} else {
-				out.println("No result");
+				out.println("No result"); 
 			}
 	} catch (Throwable e) {
 			out.println("<pre>");

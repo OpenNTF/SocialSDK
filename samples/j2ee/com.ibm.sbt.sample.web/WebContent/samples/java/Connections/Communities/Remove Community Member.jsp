@@ -18,12 +18,8 @@
 <%@page import="java.util.Collection"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
-<%@page
-	import="com.ibm.sbt.services.client.connections.communities.Community"%>
-<%@page
-	import="com.ibm.sbt.services.client.connections.communities.Member"%>
-<%@page
-	import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
+<%@page import="com.ibm.sbt.services.client.connections.communities.Community"%>
+<%@page import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
 <%@page import="java.util.HashMap"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -41,11 +37,11 @@
 		CommunityService communityService = new CommunityService();
 		Collection<Community> communities = communityService.getPublicCommunities();
 		Community community = communities.iterator().next();
-		String id = Context.get().getProperty("sample.id1");
-		Member member = new Member(communityService, id);
-		out.println("<b> Member Removed :</b>");
+		String memberId = Context.get().getProperty("sample.id2");
+		communityService.removeMember(community.getCommunityUuid(), memberId);
+		
+		out.println("<b> Member Removed : "+memberId+" from community "+community.getCommunityUuid());
 		out.println("<br>");
-		out.println(communityService.removeMember(community, member));
 	} catch (Throwable e) {
 		out.println("<pre>");
 		out.println(e.getMessage());

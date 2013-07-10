@@ -16,9 +16,10 @@
  */ -->
  
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@page import="com.ibm.sbt.services.client.connections.activitystreams.model.ActivityStreamEntity"%>
+<%@page import="com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamEntityList"%>
+<%@page import="com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamService"%>
 <%@page import="java.io.PrintWriter"%>
-<%@page import="com.ibm.sbt.services.client.activitystreams.ActivityStreamService"%>
-<%@page import="com.ibm.sbt.services.client.activitystreams.model.ActivityStreamEntry"%>
 <%@page import="com.ibm.sbt.services.endpoints.Endpoint"%>
 <%@page import="com.ibm.sbt.services.endpoints.EndpointFactory"%>
 <%@page import="com.ibm.sbt.services.client.ClientService"%>
@@ -27,7 +28,6 @@
 <%@ page import="com.ibm.sbt.services.client.connections.ConnectionsService" %>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Iterator"%>
-<%@ page import="com.ibm.sbt.services.client.activitystreams.*" %>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="com.ibm.commons.xml.DOMUtil"%>
@@ -65,13 +65,12 @@
 	 	<%
 	 	try {
 			ActivityStreamService _service = new ActivityStreamService("connectionsOA2");
-			List<ActivityStreamEntry> _entries = (List)_service.getUpdatesFromMyNetwork();
+			ActivityStreamEntityList _entries = _service.getUpdatesFromMyNetwork();
 			if(_entries == null || _entries.isEmpty()) {
 				out.println("No updates");
 			}
 			else {
-				for (Iterator iterator = _entries.iterator(); iterator.hasNext();) {
-					ActivityStreamEntry entry = (ActivityStreamEntry) iterator.next();
+				for (ActivityStreamEntity entry : _entries) {
 					out.println(entry.getActor().getName()+" : "+entry.getEventTitle());
 					out.println("<br>");
 					out.println(entry.getPublished());

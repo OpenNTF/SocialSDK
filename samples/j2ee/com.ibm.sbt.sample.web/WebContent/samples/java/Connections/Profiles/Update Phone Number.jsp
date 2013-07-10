@@ -29,15 +29,21 @@
 <body>
 	<div id="content">
 	<%
-			
+	try {
+				
 		String userId =  Context.get().getProperty("sample.id1");
 		ProfileService connProfSvc = new ProfileService();
 		Profile profile = connProfSvc.getProfile(userId);
-		if(profile.getId()!=null){
-			profile.setPhoneNumber("55555555");
+		if(profile.getUserid()!=null){
+			profile.setPhoneNumber("6666669");
 			connProfSvc.updateProfile(profile);
 			profile = connProfSvc.getProfile(userId);
 			out.println("Updated telephone number: "+ profile.getPhoneNumber());
+		}
+	} catch (Throwable e) {
+			out.println("<pre>");
+			out.println(e.getMessage());
+			out.println("</pre>");
 		}		
 	%>
 	</div>

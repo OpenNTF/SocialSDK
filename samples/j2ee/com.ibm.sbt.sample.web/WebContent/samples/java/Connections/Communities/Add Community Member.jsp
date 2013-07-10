@@ -17,8 +17,7 @@
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
-<%@page import="com.ibm.sbt.services.client.connections.communities.Community"%> 
-<%@page import="com.ibm.sbt.services.client.connections.communities.Member"%>
+<%@page import="com.ibm.sbt.services.client.connections.communities.Community"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Collection"%>
@@ -40,8 +39,8 @@
 		Collection<Community> communities = communityService.getPublicCommunities();
 		Community community = communities.iterator().next();
 		String id = Context.get().getProperty("sample.id2");
-		Member member = new Member(communityService,id);
-		out.println(communityService.addMember(community,member));
+		communityService.addMember(community.getCommunityUuid(),id,"");
+		out.println("user : "+id+" added to community "+community.getCommunityUuid());
 	} catch (Throwable e) {
 		out.println("<pre>");
 		out.println(e.getMessage());

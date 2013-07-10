@@ -16,12 +16,12 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@page import="java.util.Collection"%>
 <%@page import="java.io.PrintWriter"%>
-<%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
-<%@page import="com.ibm.sbt.services.client.connections.communities.Community"%> 
+<%@page import="com.ibm.sbt.services.client.connections.communities.Community"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 <%@page 
 	language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -40,13 +40,15 @@
 		Collection<Community> communities = communityService.getPublicCommunities();
 		Community community = communities.iterator().next();
 		community.setTitle("Test Community" + System.currentTimeMillis());
-		community.setContent("Test Community updated by Update Community Java sample");
-		ArrayList<String> tags = new ArrayList<String>();
-		tags.add("tag1"); 
-		tags.add("tag2"); 
-		tags.add("tag3");
+		community.setContent("Test Community updated by Update Community Java snippet");
+		community.setCommunityType("public");
+		List<String> tags = new ArrayList<String>();
+		tags.add("demotag");
 		community.setTags(tags);
 		communityService.updateCommunity(community);
+		
+		out.println("Community updated is: " + community.getCommunityUuid());
+		
 		community = communityService.getCommunity(community.getCommunityUuid());
 		 
 		out.println("Community Tags:");
@@ -56,7 +58,7 @@
 			out.println(tags.get(i));
 			out.println("<br>");
 		}
-	} catch (Throwable e) {
+	} catch (Exception e) {
 		out.println("<pre>");
 		out.println(e.getMessage());
 		out.println("</pre>");

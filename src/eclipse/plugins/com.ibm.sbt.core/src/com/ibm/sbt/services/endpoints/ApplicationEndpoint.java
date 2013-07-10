@@ -30,6 +30,7 @@ import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientService.Args;
 import com.ibm.sbt.services.client.ClientService.Handler;
 import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.endpoints.js.JSReference;
 import com.ibm.sbt.util.SBTException;
 
@@ -173,71 +174,71 @@ public class ApplicationEndpoint implements Endpoint {
     }
        
     @Override
-	public Object xhr(String method, ClientService.Args args, Object content) throws ClientServicesException {
+	public Response xhr(String method, ClientService.Args args, Object content) throws ClientServicesException {
     	throw newNotApplicableException();
     }
     @Override
-	public Object xhrGet(String serviceUrl) throws ClientServicesException {
+	public Response xhrGet(String serviceUrl) throws ClientServicesException {
     	throw newNotApplicableException();
     }
     @Override
-	public Object xhrGet(String serviceUrl, Map<String, String> parameters) throws ClientServicesException {
+	public Response xhrGet(String serviceUrl, Map<String, String> parameters) throws ClientServicesException {
     	throw newNotApplicableException();
     }
     @Override
-	public Object xhrGet(String serviceUrl, Map<String, String> parameters, Handler format) throws ClientServicesException {
+	public Response xhrGet(String serviceUrl, Map<String, String> parameters, Handler format) throws ClientServicesException {
     	throw newNotApplicableException();
     }
     @Override
-	public Object xhrGet(Args args) throws ClientServicesException {
+	public Response xhrGet(Args args) throws ClientServicesException {
     	throw newNotApplicableException();
     }
     @Override
-	public Object xhrPost(String serviceUrl, Object content) throws ClientServicesException {
+	public Response xhrPost(String serviceUrl, Object content) throws ClientServicesException {
     	throw newNotApplicableException();
     }
     @Override
-	public Object xhrPost(String serviceUrl, Map<String, String> parameters, Object content) throws ClientServicesException {
+	public Response xhrPost(String serviceUrl, Map<String, String> parameters, Object content) throws ClientServicesException {
     	throw newNotApplicableException();
     }
     @Override
-	public Object xhrPost(String serviceUrl, Map<String, String> parameters, Object content, Handler format) throws ClientServicesException {
+	public Response xhrPost(String serviceUrl, Map<String, String> parameters, Object content, Handler format) throws ClientServicesException {
     	throw newNotApplicableException();
     }
     @Override
-	public Object xhrPost(Args args, Object content) throws ClientServicesException {
+	public Response xhrPost(Args args, Object content) throws ClientServicesException {
     	throw newNotApplicableException();
     }
     @Override
-	public Object xhrPut(String serviceUrl, Object content) throws ClientServicesException {
+	public Response xhrPut(String serviceUrl, Object content) throws ClientServicesException {
     	throw newNotApplicableException();
     }
     @Override
-	public Object xhrPut(String serviceUrl, Map<String, String> parameters, Object content) throws ClientServicesException {
+	public Response xhrPut(String serviceUrl, Map<String, String> parameters, Object content) throws ClientServicesException {
     	throw newNotApplicableException();
     }
     @Override
-	public Object xhrPut(String serviceUrl, Map<String, String> parameters, Object content, Handler format) throws ClientServicesException {
+	public Response xhrPut(String serviceUrl, Map<String, String> parameters, Object content, Handler format) throws ClientServicesException {
     	throw newNotApplicableException();
     }
     @Override
-	public Object xhrPut(Args args, Object content) throws ClientServicesException {
+	public Response xhrPut(Args args, Object content) throws ClientServicesException {
     	throw newNotApplicableException();
     }
     @Override
-	public Object xhrDelete(String serviceUrl) throws ClientServicesException {
+	public Response xhrDelete(String serviceUrl) throws ClientServicesException {
     	throw newNotApplicableException();
     }
     @Override
-	public Object xhrDelete(String serviceUrl, Map<String, String> parameters) throws ClientServicesException {
+	public Response xhrDelete(String serviceUrl, Map<String, String> parameters) throws ClientServicesException {
     	throw newNotApplicableException();
     }
     @Override
-	public Object xhrDelete(String serviceUrl, Map<String, String> parameters, Handler format) throws ClientServicesException {
+	public Response xhrDelete(String serviceUrl, Map<String, String> parameters, Handler format) throws ClientServicesException {
     	throw newNotApplicableException();
     }
     @Override
-	public Object xhrDelete(Args args) throws ClientServicesException {
+	public Response xhrDelete(Args args) throws ClientServicesException {
     	throw newNotApplicableException();
     }
     @Override

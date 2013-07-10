@@ -1,11 +1,13 @@
 package com.ibm.sbt.services.client.connections.profiles;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import com.ibm.sbt.services.client.ClientService;
-import com.ibm.sbt.services.client.connections.profiles.exception.ProfileServiceException;
+import com.ibm.commons.util.StringUtil;
+import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.profiles.utils.Messages;
+import com.ibm.sbt.services.client.ClientService;
 
 /**
  * ProfileAdminService can be used to perform Admin operations related to Connection Profiles. 
@@ -57,37 +59,28 @@ public class ProfileAdminService extends ProfileService {
 	 * <p>
 	 * User should be logged in as a administrator to call this method
 	 * 
-	 * @param userId
+	 * @param id
 	 * 			unique identifier of user whose profile is to be deleted, it can either be a email or userid
-	 * @return boolean
-	 * 				returns true if profile is deleted succesfully
 	 * @throws ProfileServiceException 
 	 */
-	public boolean deleteProfile(Profile profile) throws ProfileServiceException
+	public void deleteProfile(String id) throws ProfileServiceException
 	{	
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "deleteProfile", profile);
-		}
-		if (profile == null) {
-			throw new IllegalArgumentException(Messages.InvalidArgument_3);
-		}
 		
-		Map<String, String> parameters = new HashMap<String, String>();
-
-		if (isEmail(profile.getReqId())) {
-			parameters.put("email", profile.getReqId());
-		} else {
-			parameters.put("userid", profile.getReqId());
+		if (StringUtil.isEmpty(id)) {
+			throw new ProfileServiceException(null, Messages.InvalidArgument_1);
 		}
-		boolean result = executeDelete(resolveProfileUrl(ProfileEntity.ADMIN.getProfileEntityType(), ProfileType.DELETEPROFILE.getProfileType()),
-				parameters);
-
-		removeProfileDataFromCache(profile.getReqId());
-
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.exiting(sourceClass, "deleteProfile", result);
+		try{
+			Map<String, String> parameters = new HashMap<String, String>();
+			setIdParameter(parameters,id );
+			String deleteUrl = resolveProfileUrl(ProfileAPI.ADMIN.getProfileEntityType(), ProfileType.DELETEPROFILE.getProfileType());
+			super.deleteData(deleteUrl, parameters, getUniqueIdentifier(id));
 		}
-		return result;
+		catch(ClientServicesException e){
+			throw new ProfileServiceException(e, Messages.DeleteProfileException, id);
+		} catch (IOException e) {
+			throw new ProfileServiceException(e, Messages.DeleteProfileException, id);
+		}
+
 	}
 
 	/**
@@ -96,36 +89,29 @@ public class ProfileAdminService extends ProfileService {
 	 * User should be logged in as a administrator to call this method
 	 * 
 	 * @param Profile
-	 * @return boolean
-	 * 				value is true if profile is create successfully
 	 * @throws ProfileServiceException 
 	 */
-	public boolean createProfile(Profile profile) throws ProfileServiceException 
+	public void createProfile(Profile profile) throws ProfileServiceException 
 	{
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "create", profile);
-		}
+		
 		if (profile == null) {
-			throw new IllegalArgumentException(Messages.InvalidArgument_3);
+			throw new ProfileServiceException(null, Messages.InvalidArgument_3);
 		}		
-		Map<String, String> parameters = new HashMap<String,String>();
-		Map<String, String> headers = new HashMap<String,String>();
-		headers.put(Headers.ContentType,Headers.ATOM);
+		try {
+			Map<String, String> parameters = new HashMap<String,String>();
+			setIdParameter(parameters, profile.getAsString("email"));
+			Object createPayload = constructCreateRequestBody(profile);
+			
+			String createUrl = resolveProfileUrl(ProfileAPI.ADMIN.getProfileEntityType(),ProfileType.ADDPROFILE.getProfileType());
+			super.createData(createUrl, parameters, createPayload, ClientService.FORMAT_CONNECTIONS_OUTPUT);
+		}catch(ClientServicesException e) {
+			throw new ProfileServiceException(e, Messages.CreateProfileException);
+		}catch (TransformerException e) {
+			throw new ProfileServiceException(e, Messages.CreateProfilePayloadException);
+		} catch (IOException e) {
+			throw new ProfileServiceException(e, Messages.CreateProfileException);
+		}
 
-		if(isEmail(profile.getReqId())){
-			parameters.put(ProfileRequestParams.EMAIL,profile.getReqId());
-		}
-		else{
-			parameters.put(ProfileRequestParams.USERID,profile.getReqId()); 
-		}
-		Object createPayload = profile.constructCreateRequestBody();
-		boolean returnVal = executePost(resolveProfileUrl(ProfileEntity.ADMIN.getProfileEntityType(),ProfileType.ADDPROFILE.getProfileType()),
-				parameters, headers, createPayload, ClientService.FORMAT_NULL);
-
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.exiting(sourceClass, "create");
-		}
-		return returnVal;
 	}
 
 }

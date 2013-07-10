@@ -195,7 +195,7 @@ public class ConnectionsFiles extends AbstractType {
         if (svc != null) {
             
         	HandlerXml xml = new HandlerXml();
-        	Object result = svc.get("/files/basic/api/introspection",params, xml);
+        	Object result = svc.get("/files/basic/api/introspection",params, xml).getData();
             
             if (result instanceof Document) {
                 XmlNavigator workspacesNavigator = new XmlNavigator((Document) result);
@@ -207,7 +207,7 @@ public class ConnectionsFiles extends AbstractType {
                         href = href.substring(href.indexOf(start) + start.length());
                     }
                     ClientService filesService = createClientService(svc.getEndpoint(), href);
-                    result = filesService.get(href, ClientService.FORMAT_XML);
+                    result = filesService.get(href, ClientService.FORMAT_XML).getData();
                     if (result instanceof Document) {
                         Document entriesDocument = (Document) result;
                         XmlNavigator entriesNavigator = new XmlNavigator(entriesDocument);
@@ -291,7 +291,7 @@ public class ConnectionsFiles extends AbstractType {
             Object file = null;
 
             try {
-            	file = svc.get(serviceUrl,inputStream);
+            	file = svc.get(serviceUrl,inputStream).getData();
 
             } catch (ClientServicesException e) {
                 throw new FacesExceptionEx(e, "Failed to perform proxy request");

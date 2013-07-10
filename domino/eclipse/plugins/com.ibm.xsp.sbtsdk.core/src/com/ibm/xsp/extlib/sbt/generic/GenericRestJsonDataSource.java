@@ -118,7 +118,7 @@ public class GenericRestJsonDataSource extends GenericRestDataSource {
                 //IValue collection = (IValue)JsonParser.fromJson(JSJson.factory,text);
                 Object[] data = null; 
                 HandlerJson json= new HandlerJson();
-                JsonJavaObject result = (JsonJavaObject)svc.get(getServiceUrl(),parameters,json);
+                JsonJavaObject result = (JsonJavaObject)svc.get(getServiceUrl(),parameters,json).getData();
                 if(result!=null) {
                     if(StringUtil.isNotEmpty(splitPath)) {
                         JsonNavigator nav = new JsonNavigator(result);

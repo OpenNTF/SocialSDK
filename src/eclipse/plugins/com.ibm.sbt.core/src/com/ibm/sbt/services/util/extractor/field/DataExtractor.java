@@ -18,8 +18,6 @@ package com.ibm.sbt.services.util.extractor.field;
 
 import java.util.List;
 import java.util.Set;
-import com.ibm.sbt.services.client.BaseService;
-import com.ibm.sbt.services.client.smartcloud.files.FileEntry;
 
 /**
  * The DataExtractor encapsulates every access to the backing data of a specific entity Access is performed

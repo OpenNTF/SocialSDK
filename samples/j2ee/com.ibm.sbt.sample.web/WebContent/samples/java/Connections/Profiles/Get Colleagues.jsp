@@ -21,8 +21,11 @@
 <%@page import="java.io.PrintWriter"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.HashMap"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.Iterator"%>
 <%@page import="com.ibm.sbt.services.client.connections.profiles.ProfileService"%>
 <%@page import="com.ibm.sbt.services.client.connections.profiles.Profile"%>
+<%@page import="com.ibm.sbt.services.client.connections.profiles.ProfileList"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"	pageEncoding="ISO-8859-1"%>
 <html>
 <head>
@@ -35,13 +38,11 @@
 	try {
 		String userId = Context.get().getProperty("sample.userId1");
 		ProfileService connProfSvc = new ProfileService();
-		Profile profile = connProfSvc.getProfile(userId);
-		Profile[] profiles = connProfSvc.getColleagues(profile);
-		if (profiles.length > 0) {
-				out.println("<b> User's colleagues </b>");
-				out.println("<br>");
-				for (int i = 0; i < profiles.length; i++) {
-					out.println("<b>Name : </b> " + profiles[i].getDisplayName());
+		ProfileList profiles = connProfSvc.getColleagues(userId);
+		if(profiles != null && ! profiles.isEmpty()) {
+			for (Iterator iterator = profiles.iterator(); iterator.hasNext();) {
+					Profile profile = (Profile)iterator.next();
+					out.println("<b>Name : </b> " + profile.getDisplayName());
 					out.println("<br>");
 				}
 			} else {

@@ -21,13 +21,14 @@ import com.ibm.commons.runtime.Application;
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.RuntimeFactory;
 import com.ibm.commons.runtime.impl.app.RuntimeFactoryStandalone;
-import com.ibm.sbt.services.client.BaseService;
 import com.ibm.sbt.services.client.connections.communities.Community;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
 import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
 import com.ibm.sbt.services.client.connections.communities.Member;
+import com.ibm.sbt.services.client.connections.communities.MemberList;
 import com.ibm.sbt.services.endpoints.BasicEndpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
+import com.ibm.sbt.services.client.base.BaseService;
 
 /**
  * @author mwallace, Francis
@@ -114,8 +115,8 @@ public class GetAllCommunitiesApp {
      * @return The members of the community.
      * @throws CommunityServiceException
      */
-    public Member[] getCommunityMembers(Community community) throws CommunityServiceException{
-        return communityService.getMembers(community);
+    public MemberList getCommunityMembers(Community community) throws CommunityServiceException{
+        return communityService.getMembers(community.getCommunityUuid());
     }
     
 	/**
@@ -130,10 +131,10 @@ public class GetAllCommunitiesApp {
             Collection<Community> communities = app.getPublicCommunities();
             for (Iterator<Community> iter = communities.iterator(); iter.hasNext(); ) {
                 Community community = iter.next();
-                Member[] members = app.getCommunityMembers(community);
+                MemberList members = app.getCommunityMembers(community);
                 System.out.println(community.getTitle());
-                for (int i=0; i<members.length; i++) {
-                    System.out.println("    " + members[i].getEmail());
+                for (int i=0; i<members.getTotalResults(); i++) {
+                    System.out.println("    " + members.get(i).getEmail());
                 }
             }
         } catch (CommunityServiceException e) {

@@ -197,7 +197,7 @@ public class SmartCloudFiles extends AbstractType {
             throws ClientServicesException {
         authenticate(accessor);
         HandlerXml xml = new HandlerXml();
-        Document document = (Document) svc.get("files/basic/cmis/repository",params,xml);
+        Document document = (Document) svc.get("files/basic/cmis/repository",params,xml).getData();
 
         ArrayList<FileEntry> entries = new ArrayList<FileEntry>();
         // Extract the content from the ATOM feed...
@@ -282,7 +282,7 @@ public class SmartCloudFiles extends AbstractType {
             Object file;
             //https://apps.na.collabserv.com/files/app/file/c72336bf-bb61-44f6-9712-5ee657ef17cc
             try {
-                file =  svc.get("files/apps/file/"+fileId);
+                file =  svc.get("files/apps/file/"+fileId).getData();
                 
             } catch (ClientServicesException e) {
                 throw new FacesExceptionEx(e, "Failed to perform proxy request");

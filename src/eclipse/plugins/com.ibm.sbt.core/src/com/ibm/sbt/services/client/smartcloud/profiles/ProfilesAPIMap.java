@@ -21,12 +21,12 @@ package com.ibm.sbt.services.client.smartcloud.profiles;
  * @author Vimal Dhupar
  */
 public enum ProfilesAPIMap {
-	GETPROFILE("/lotuslive-shindig-server/social/rest/people/@me/@self"), GETUSERIDENTITY(
-			"/manage/oauth/getUserIdentity"), GETCONTACTBYCONTACTGUID(
-			"/lotuslive-shindig-server/social/rest/people/lotuslive:contact:p!{idToBeReplaced}/@self"), GETPROFILEUSINGUSERGUID(
-			"/lotuslive-shindig-server/social/rest/people/lotuslive:user:p!{idToBeReplaced}/@self"), GETMYCONTACTS(
-			"/lotuslive-shindig-server/social/rest/people/@me/@all"), GETMYCONNECTIONS(
-			"/lotuslive-shindig-server/social/rest/people/@me/@friends");
+	GETPROFILE("/lotuslive-shindig-server/social/rest/people/@me/@self"), 
+	GETUSERIDENTITY("/manage/oauth/getUserIdentity"), 
+	GETCONTACTBYCONTACTGUID("/lotuslive-shindig-server/social/rest/people/lotuslive:contact:p!{idToBeReplaced}/@self"), 
+	GETPROFILEUSINGUSERGUID("/lotuslive-shindig-server/social/rest/people/lotuslive:user:p!{idToBeReplaced}/@self"), 
+	GETMYCONTACTS("/lotuslive-shindig-server/social/rest/people/@me/@all"), 
+	GETMYCONNECTIONS("/lotuslive-shindig-server/social/rest/people/@me/@friends");
 
 	private final String	url;
 
@@ -44,10 +44,5 @@ public enum ProfilesAPIMap {
 		} else {
 			return url;
 		}
-	}
-
-	@Override
-	public String toString() {
-		return this.url;
 	}
 }

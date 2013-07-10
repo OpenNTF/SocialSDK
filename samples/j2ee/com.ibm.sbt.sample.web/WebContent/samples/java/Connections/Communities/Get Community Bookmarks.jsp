@@ -18,12 +18,10 @@
 <%@page import="java.util.Collection"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
-<%@page
-	import="com.ibm.sbt.services.client.connections.communities.Community"%>
-<%@page
-	import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
-<%@page
-	import="com.ibm.sbt.services.client.connections.communities.Bookmark"%>
+<%@page	import="com.ibm.sbt.services.client.connections.communities.Community"%>
+<%@page import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
+<%@page import="com.ibm.sbt.services.client.connections.communities.Bookmark"%>
+<%@page	import="com.ibm.sbt.services.client.connections.communities.BookmarkList"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <html>
@@ -37,18 +35,18 @@
 	<div id="content">
 	<%
 		try {
-			CommunityService communityService = new CommunityService();
-			Collection<Community> communities = communityService.getPublicCommunities();
-			Community community = communities.iterator().next();
-			Bookmark[] bookmarks = communityService.getBookmarks(community);
-			if (bookmarks.length > 0) {
-				for (int i = 0; i < bookmarks.length; i++) {
-					out.println("<b>Title : </b> " + bookmarks[i].getTitle());
+			String communityUuid = Context.get().getProperty("sample.communityId");
+			CommunityService svc = new CommunityService();
+			BookmarkList bookmarks = svc.getBookmarks(communityUuid);
+			if(bookmarks.getTotalResults() > 0 ){
+				out.println("<br>Listing Bookmarks of a Community <br>");
+				for (Bookmark bookmark : bookmarks) {
+					out.println("<b>Bookmarks Title : </b> " + bookmark.getTitle());
 					out.println("<br>");
 				}
-			} else {
-				out.println("No result");
 			}
+			else
+				out.println("No Bookmarks found for this Community");			
 		} catch (Throwable e) {
 			out.println("<pre>");
 			out.println(e.getMessage());

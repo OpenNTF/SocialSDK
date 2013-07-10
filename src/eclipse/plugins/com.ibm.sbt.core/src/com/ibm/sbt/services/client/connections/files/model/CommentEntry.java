@@ -15,39 +15,41 @@
  */
 package com.ibm.sbt.services.client.connections.files.model;
 
-import org.w3c.dom.Document;
+import org.w3c.dom.Node;
 import com.ibm.commons.util.StringUtil;
-import com.ibm.commons.xml.DOMUtil;
-import com.ibm.commons.xml.XMLException;
-import com.ibm.sbt.services.client.connections.files.utils.ContentMapFiles;
-import com.ibm.sbt.services.client.connections.files.utils.NamespacesConnections;
+import com.ibm.sbt.services.client.base.BaseEntity;
+import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
+import com.ibm.sbt.services.client.connections.files.FileEntryXPath;
+import com.ibm.sbt.services.client.connections.files.FileService;
 
 /**
  * Comment Entry Class - representing a Comment Entry of the File.
  * 
  * @author Vimal Dhupar
  */
-public class CommentEntry {
+public class CommentEntry extends BaseEntity {
 	private String		commentId;
 	private String		comment;
-	private Document	data;
 
 	public CommentEntry() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public CommentEntry(String id) {
 		this.commentId = id;
 	}
-
+	
+	public CommentEntry(FileService svc, DataHandler<?> dh) {
+        super(svc, dh);
+    }
+	
 	public String getCommentId() {
 		if (!StringUtil.isEmpty(commentId)) {
 			return commentId;
 		}
-		if (!get("categoryFromEntry").equals("comment")) {
+		if (!getAsString(FileEntryXPath.CategoryFromEntry).equals("comment")) {
 			return null;
 		}
-		return get("uuidFromEntry");
+		return getAsString(FileEntryXPath.UuidFromEntry);
 	}
 
 	private void setCommentId(String commentId) {
@@ -58,64 +60,27 @@ public class CommentEntry {
 		if (!StringUtil.isEmpty(comment)) {
 			return comment;
 		}
-		if (!get("categoryFromEntry").equals("comment")) {
+		if (!getAsString(FileEntryXPath.CategoryFromEntry).equals("comment")) {
 			return null;
 		}
-		return get("commentFromEntry");
+		return getAsString(FileEntryXPath.CommentFromEntry);
 	}
 
 	private void setComment(String comment) {
 		this.comment = comment;
 	}
 
-	public Document getData() {
-		return data;
+	public Node getData() {
+		return (Node)dataHandler.getData();
 	}
 
-	public void setData(Document data) {
-		this.data = data;
+	public void setData(Node data) {
+		dataHandler.setData(data);
 	}
 
 	public CommentEntry getCommentEntry() {
 		setComment(getComment());
 		setCommentId(getCommentId());
 		return this;
-	}
-
-	/**
-	 * get
-	 * 
-	 * @param fieldName
-	 * @return String
-	 */
-	private String get(String fieldName) {
-		String xpQuery = getXPathQuery(fieldName);
-		return getFieldUsingXPath(xpQuery);
-	}
-
-	/**
-	 * getXPathQuery
-	 * 
-	 * @return xpath query for specified field. Field names follow IBM Connections naming convention
-	 */
-	private String getXPathQuery(String fieldName) {
-		return ContentMapFiles.xpathMap.get(fieldName);
-	}
-
-	/**
-	 * getFieldUsingXPath
-	 * <p>
-	 * Execute xpath query on Profile XML
-	 * 
-	 * @return String
-	 */
-	private String getFieldUsingXPath(String xpathQuery) {
-		String result = null;
-		try {
-			result = DOMUtil.value(this.data, xpathQuery, NamespacesConnections.nameSpaceCtx);
-		} catch (XMLException e) {
-			// System.err.println("Error in getFieldUsingXPath .. xpathQuery is : " + xpathQuery);
-		}
-		return result;
 	}
 }

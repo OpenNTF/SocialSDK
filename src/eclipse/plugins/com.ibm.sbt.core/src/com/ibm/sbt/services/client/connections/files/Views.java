@@ -23,7 +23,7 @@ package com.ibm.sbt.services.client.connections.files;
  */
 public enum Views {
 
-	FILES("/documents"), FOLDERS("/collections"), RECYCLEBIN("/view/recyclebin");
+	FILES("/documents"), FOLDERS("/collections"), RECYCLEBIN("/view/recyclebin"), COMMENTS("/comments");
 
 	String	views;
 

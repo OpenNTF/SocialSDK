@@ -136,7 +136,7 @@ public class GenericRestXmlDataSource extends GenericRestDataSource {
             	ClientService svc = createService(findEndpointBean(),getServiceUrl());
                 Map<String,String> parameters = getParameters(index, blockSize);
                 HandlerXml xml = new HandlerXml();
-                Document doc = (Document)svc.get(getServiceUrl(),parameters, xml);
+                Document doc = (Document)svc.get(getServiceUrl(),parameters, xml).getData();
                 return new XmlBlock(index,doc);
             } catch(Exception ex) {
                 throw new FacesExceptionEx(ex,"Error while reading the XML service entries");

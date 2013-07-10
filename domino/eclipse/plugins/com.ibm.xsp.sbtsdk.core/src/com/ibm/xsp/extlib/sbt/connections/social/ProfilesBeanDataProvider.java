@@ -251,7 +251,7 @@ public class ProfilesBeanDataProvider extends AbstractPeopleDataProvider {
 //                        ConnectionsService svc = new ConnectionsService(ep,"/profiles/atom/profileService.do");
                     	ConnectionsService svc = new ConnectionsService(ep);
                     	HandlerXml xml = new HandlerXml();
-                        Document doc = (Document)svc.get("/profiles/atom/profileService.do",xml);
+                        Document doc = (Document)svc.get("/profiles/atom/profileService.do",xml).getData();
                         XmlNavigator nav = new XmlNavigator(doc);
                         lcid = nav.get("service/workspace/collection/userid").stringValue(".");
                         privateData = true;
@@ -272,7 +272,7 @@ public class ProfilesBeanDataProvider extends AbstractPeopleDataProvider {
                     String key = lcid.indexOf('@')>=0 ? "email" : "userid"; 
                     Map<String, String> p = Collections.singletonMap(key, lcid); 
                     HandlerXml xml = new HandlerXml();
-                    Document doc = (Document)svc.get("/profiles/atom/profile.do",p,xml);
+                    Document doc = (Document)svc.get("/profiles/atom/profile.do",p,xml).getData();
                     XmlNavigator nav = new XmlNavigator(doc);
                     ProfilesData data = new ProfilesData();
                     DataNavigator entry = nav.get("feed/entry/content/div/span/div");

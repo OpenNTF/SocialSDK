@@ -82,7 +82,7 @@ public class ConnectionDataSource extends RestDataSource {
                 Map<String,String> parameters = getParameters(index, blockSize);
                 
                 HandlerXml handler = new HandlerXml();
-                Document doc = (Document)svc.get(getServiceUrl(),parameters, handler);
+                Document doc = (Document)svc.get(getServiceUrl(),parameters, handler).getData();
                 
                 return new XmlBlock(index,doc);
             } catch(Exception ex) {

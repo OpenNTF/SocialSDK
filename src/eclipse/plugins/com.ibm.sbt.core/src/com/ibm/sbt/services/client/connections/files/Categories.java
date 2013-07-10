@@ -25,7 +25,8 @@ package com.ibm.sbt.services.client.connections.files;
  */
 public enum Categories {
 
-	PINNED("/myfavorites"), MYLIBRARY("/myuserlibrary");
+	PINNED("/myfavorites"), MYLIBRARY("/myuserlibrary"), MODERATION("/moderation"), APPROVAL("/approval"), REVIEW(
+			"/review"), SHARES("/shares");
 	String	category;
 
 	private Categories(String category) {

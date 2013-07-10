@@ -16,31 +16,20 @@
  */ -->
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<%@page import="java.util.Date"%>
+<%@page import="com.ibm.sbt.services.client.connections.activitystreams.ASVerb"%>
+<%@page import="com.ibm.commons.util.io.json.JsonJavaObject"%>
+<%@page import="com.ibm.sbt.services.client.connections.activitystreams.templates.ASDataPopulator"%>
 <%@page import="java.io.PrintWriter"%>
-<%@page
-	import="com.ibm.sbt.services.client.activitystreams.ActivityStreamService"%>
-<%@page
-	import="com.ibm.sbt.services.client.activitystreams.model.ActivityStreamEntry"%>
-
-
-<%@page import="com.ibm.sbt.services.endpoints.Endpoint"%>
-<%@page import="com.ibm.sbt.services.endpoints.EndpointFactory"%>
-<%@page import="com.ibm.sbt.services.client.ClientService"%>
-<%@page import="com.ibm.commons.runtime.Application"%>
-<%@page import="com.ibm.commons.runtime.Context"%>
-<%@ page
-	import="com.ibm.sbt.services.client.connections.ConnectionsService"%>
+<%@page import="com.ibm.sbt.services.client.connections.activitystreams.model.Reply"%>
+<%@page import="com.ibm.sbt.services.client.connections.activitystreams.model.ActivityStreamEntity"%>
+<%@page import="com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamEntityList"%>
+<%@page import="com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamService"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Iterator"%>
-<%@ page import="com.ibm.sbt.services.client.activitystreams.*"%>
-<%@page import="java.util.Map"%>
-<%@page import="java.util.HashMap"%>
-<%@page import="com.ibm.commons.xml.DOMUtil"%>
-<%@page import="org.w3c.dom.Document"%>
-<%@page import="org.w3c.dom.Node"%>
-<%@page import="org.w3c.dom.Node"%>
-<%@page import="com.ibm.commons.util.io.json.JsonJavaObject"%>
-<%@page import="java.util.Date"%>
+
+
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
@@ -48,7 +37,7 @@
 <html>
 
 <head>
-<title>SBT JAVA Sample - AS</title>
+<title>SBTX JAVA Sample - AS</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
@@ -75,12 +64,8 @@
 			postPayload.put("content", "post");
 			postPayload.put("updated", new Date().getTime());
 			postPayload.put("object", object);
-			Map<String, String> header = new HashMap<String, String>();
-			header.put("Content-Type", "application/json");
-	
 			ActivityStreamService _service = new ActivityStreamService();
-			JsonJavaObject entry = _service.postEntry(postPayload, header);
-			String entryId = entry.getJsonObject("entry").getString("id");
+			String entryId = _service.postEntry(postPayload);
 			out.println("Created entry:" + entryId);
 		} catch (Throwable e) {
 			out.println("<pre>");

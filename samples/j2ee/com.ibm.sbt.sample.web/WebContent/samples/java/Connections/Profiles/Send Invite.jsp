@@ -29,18 +29,18 @@
 <body>
 	<div id="content">
 	<%
-			
+	try{
 		String userId = Context.get().getProperty("sample.id1");
 		ProfileService connProfSvc = new ProfileService();
 		Profile profile = connProfSvc.getProfile(userId);
-		boolean success = connProfSvc.sendInvite(profile);  
-		if(success){
-			out.println("Invite sent");
+		connProfSvc.sendInvite("BettyHeinz@renovations.com", "plz join my nw"); 
+		out.println("Invite sent");
+	}
+	catch (Throwable e) {
+			out.println("<pre>");
+			out.println(e.getMessage());
+			out.println("</pre>");
 		}
-		else{
-			out.println("error in sending invite");
-		}
-				
 	%>
 	</div>
 </body>

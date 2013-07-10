@@ -86,7 +86,7 @@ public class SmartCloudPeopleDataProvider extends AbstractPeopleDataProvider {
 //                    
 			    //TODO - Padraic
 			 	HandlerJson json= new HandlerJson();
-			 	Object result = service.get("/manage/oauth/getUserIdentity", json);
+			 	Object result = service.get("/manage/oauth/getUserIdentity", json).getData();
 			    if(result instanceof FBSValue){
 			        JsonNavigator jsonUtil = new JsonNavigator(result);
 			        PeopleData data = new PeopleData();

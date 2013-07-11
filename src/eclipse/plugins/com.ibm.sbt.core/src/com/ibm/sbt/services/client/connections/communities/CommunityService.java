@@ -538,7 +538,7 @@ public class CommunityService extends BaseService {
 		try {
 			Response response = super.createData(communityUpdateMembertUrl, parameters, communityPayload);
 			int statusCode = response.getResponse().getStatusLine().getStatusCode();
-			return statusCode == HttpServletResponse.SC_OK;
+			return statusCode == HttpServletResponse.SC_CREATED;
 		} catch (ClientServicesException e) {
 			throw new CommunityServiceException(e, Messages.AddMemberException, memberId, role, communityUuid);
 		} catch (IOException e) {

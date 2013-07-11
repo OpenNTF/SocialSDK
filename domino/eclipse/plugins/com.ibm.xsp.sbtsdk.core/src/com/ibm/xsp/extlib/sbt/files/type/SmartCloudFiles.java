@@ -45,10 +45,10 @@ import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientService.HandlerJson;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.ClientService.HandlerXml;
-import com.ibm.sbt.services.client.connections.files.exception.FileServiceException;
+import com.ibm.sbt.services.client.connections.files.FileService;
+import com.ibm.sbt.services.client.connections.files.FileServiceException;
 import com.ibm.sbt.services.client.connections.files.model.FileRequestParams;
 import com.ibm.sbt.services.client.connections.files.model.Headers;
-import com.ibm.sbt.services.client.smartcloud.files.FileService;
 import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
 import com.ibm.sbt.util.DataNavigator;
@@ -340,9 +340,9 @@ public class SmartCloudFiles extends AbstractType {
 
     	    
     		FileService svc= new FileService();
-    		svc.uploadFile(is, name, serverFile.length());
+    		svc.upload(is, name, serverFile.length(), null);
     		 
-    	    } catch (com.ibm.sbt.services.client.smartcloud.files.FileServiceException e) {
+    	    } catch (FileServiceException e) {
     	        e.printStackTrace();
     	    } catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block

@@ -51,6 +51,8 @@ public class XPagesSnippetImporter extends AssetImporter {
 			setItemValue(doc,"Tags", snippet.getProperty("tags"));
 			setItemValue(doc,"ImportSource", source.getName());
 			setItemValueRichText(doc,"XPages", snippet.getXsp());
+			snippet.getProperties().remove("endpoints");
+			snippet.getProperties().remove("description");
 			setItemValueRichText(doc,"Properties", snippet.getPropertiesAsString());
 			setItemValueRichText(doc,"Documentation", snippet.getDocHtml());
 			

@@ -18,7 +18,11 @@ package com.ibm.sbt.services.client.connections.communities;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.http.Header;
+
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.BaseService;
@@ -160,6 +164,17 @@ public class CommunityService extends BaseService {
 	
 	public Community newCommunity(String communityUuid) throws CommunityServiceException {
 		return new Community(this, communityUuid);
+	}
+	
+	/**
+	 * This method returns the Communities of which the user is a member or owner.
+	 * 
+	 * @param community
+	 * @return MemberList
+	 * @throws CommunityServiceException
+	 */
+	public MemberList getMembers(Community community) throws CommunityServiceException {
+		return getMembers(community.getCommunityUuid(), null);
 	}
 	
 	/**
@@ -451,6 +466,23 @@ public class CommunityService extends BaseService {
 			throw new CommunityServiceException(e, Messages.UpdateCommunityException);
 		}
 	}
+	
+	/**
+	 * Wrapper method to add member to a community.
+	 * <p> 
+	 * User should be logged in as a owner of the community to call this method
+	 * Role of the newly added member defaults to "Member"
+	 * 
+	 * @param community
+	 * 				 Community to which the member needs to be added
+	 * @param member
+	 * 				 Member which is to be added
+	 * @throws CommunityServiceException
+	 */
+	public boolean addMember(Community community, Member member) throws CommunityServiceException {
+		return addMember(community.getCommunityUuid(), member.getUserid(), member.getRole());
+	}
+
 	/**
 	 * Wrapper method to add member to a community.
 	 * <p> 
@@ -463,8 +495,8 @@ public class CommunityService extends BaseService {
 	 * 				 Id of Member which is to be added
 	 * @throws CommunityServiceException
 	 */
-	public void addMember(String communityUuid, String memberId) throws CommunityServiceException {
-		addMember(communityUuid,memberId,"");
+	public boolean addMember(String communityUuid, String memberId) throws CommunityServiceException {
+		return addMember(communityUuid,memberId,null);
 	}
 
 	/**
@@ -480,7 +512,7 @@ public class CommunityService extends BaseService {
 	 * 				 Role of newly added member in Community ("eg : owner")
 	 * @throws CommunityServiceException
 	 */
-	public void addMember(String communityUuid, String memberId, String role) throws CommunityServiceException {
+	public boolean addMember(String communityUuid, String memberId, String role) throws CommunityServiceException {
 		if (StringUtil.isEmpty(communityUuid)||StringUtil.isEmpty(memberId)){
 			throw new CommunityServiceException(null, Messages.NullCommunityIdUserIdOrRoleException);
 		}
@@ -504,7 +536,9 @@ public class CommunityService extends BaseService {
 		
 		String communityUpdateMembertUrl = resolveCommunityUrl(CommunityEntity.COMMUNITY.getCommunityEntityType(),CommunityType.MEMBERS.getCommunityType());
 		try {
-			super.createData(communityUpdateMembertUrl, parameters, communityPayload);
+			Response response = super.createData(communityUpdateMembertUrl, parameters, communityPayload);
+			int statusCode = response.getResponse().getStatusLine().getStatusCode();
+			return statusCode == HttpServletResponse.SC_OK;
 		} catch (ClientServicesException e) {
 			throw new CommunityServiceException(e, Messages.AddMemberException, memberId, role, communityUuid);
 		} catch (IOException e) {
@@ -546,6 +580,19 @@ public class CommunityService extends BaseService {
 		}
 	}
 
+	/**
+	 * Wrapper method to delete a community
+	 * <p>
+	 * User should be logged in as a owner of the community to call this method.
+	 * 
+	 * @param String
+	 * 				community which is to be deleted
+	 * @throws CommunityServiceException
+	 */
+	public void deleteCommunity(Community community) throws CommunityServiceException {
+		deleteCommunity(community.getCommunityUuid());
+	}
+	
 	/**
 	 * Wrapper method to delete a community
 	 * <p>

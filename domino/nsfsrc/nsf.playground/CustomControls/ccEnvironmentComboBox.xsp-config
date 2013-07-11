@@ -13,9 +13,5 @@
         <in-palette>true</in-palette>
       </designer-extension>
     </composite-extension>
-    <property>
-      <property-name>fullRefresh</property-name>
-      <property-class>boolean</property-class>
-    </property>
   </composite-component>
 </faces-config>

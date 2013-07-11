@@ -35,9 +35,11 @@
 	<div id="content">
 	<%
 		try {
-			String communityUuid = Context.get().getProperty("sample.communityId");
-			CommunityService svc = new CommunityService();
-			ForumTopicList forumTopics = svc.getForumTopics(communityUuid);
+			CommunityService communityService = new CommunityService();
+			Collection<Community> communities = communityService.getPublicCommunities();
+			Community community = communities.iterator().next();
+			
+			ForumTopicList forumTopics = communityService.getForumTopics(community.getCommunityUuid());
 			if(forumTopics.getTotalResults() > 0 ){
 				out.println("<br>Listing forum topics of a Community <br>");
 				for (ForumTopic forumTopic : forumTopics) {

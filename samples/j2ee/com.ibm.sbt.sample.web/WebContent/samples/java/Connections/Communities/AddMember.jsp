@@ -26,12 +26,12 @@
 	pageEncoding="ISO-8859-1"%>
 <html>
 <head>
-	<title>SBT JAVA Sample - Add Community Member</title>
+	<title>SBT JAVA Sample - Add Member</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
 <body>	
-	<h4>Add Community Member</h4>
+	<h4>Add Member</h4>
 	<div id="content">
 	<%
 	try {
@@ -41,6 +41,8 @@
 		String id = Context.get().getProperty("sample.id2");
 		communityService.addMember(community.getCommunityUuid(),id,"");
 		out.println("user : "+id+" added to community "+community.getCommunityUuid());
+		
+		
 	} catch (Throwable e) {
 		out.println("<pre>");
 		out.println(e.getMessage());

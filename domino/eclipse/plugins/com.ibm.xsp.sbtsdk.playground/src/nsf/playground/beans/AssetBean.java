@@ -57,7 +57,8 @@ public abstract class AssetBean {
 		JsonTreeRenderer r = new JsonTreeRenderer();
 		return r.generateAsStringHier(root,true);
 	}
-	private RootNode readSnippetsNodes() throws NotesException {
+	protected RootNode readSnippetsNodes() throws NotesException {
+		//PlaygroundEnvironment env = DataAccessBean.get().findCurrentEnvironment();
 		Database db = ExtLibUtil.getCurrentDatabase();
 		View v = db.getView("AllSnippetsFlat");
 		try {
@@ -69,14 +70,21 @@ public abstract class AssetBean {
 				for(ViewEntry e=col.getFirstEntry(); e!=null; e=col.getNextEntry()) {
 					Vector<?> values = e.getColumnValues();
 					String notesUnid = e.getUniversalID();
-					String type = (String)values.get(0);
+					// 2 type
 					String cat = (String)values.get(1);
 					String name = (String)values.get(2);
 					String jspUrl = (String)values.get(3);
-					CategoryNode c = findCategory(root, cat);
-					AssetNode node = createAssetNode(notesUnid,c,name,cat,jspUrl);
-					node.setTooltip((String)values.get(6));
-					c.getChildren().add(node);
+					// 4 ImportSource
+					// 5 CreateDate
+					// 6 Description
+					String filterEndpoints = (String)values.get(7);
+					String filterLibraries = (String)values.get(8);
+					if(acceptAsset(e, filterEndpoints, filterLibraries)) {
+						CategoryNode c = findCategory(root, cat);
+						AssetNode node = createAssetNode(notesUnid,c,name,cat,jspUrl);
+						node.setTooltip((String)values.get(6));
+						c.getChildren().add(node);
+					}
 				}
 			} else { 
 				v.setAutoUpdate(false);
@@ -85,20 +93,30 @@ public abstract class AssetBean {
 				for(ViewEntry e=nav.getFirst(); e!=null; e=nav.getNext()) {
 					Vector<?> values = e.getColumnValues();
 					String notesUnid = e.getUniversalID();
-					String type = (String)values.get(0);
+					// 2 type
 					String cat = (String)values.get(1);
 					String name = (String)values.get(2);
 					String assetId = (String)values.get(3);
-					CategoryNode c = findCategory(root, cat);
-					AssetNode node = createAssetNode(notesUnid,c,name,cat,findUniqueUrl(c,notesUnid,assetId));
-					node.setTooltip((String)values.get(6));
-					c.getChildren().add(node);
+					// 4 ImportSource
+					// 5 CreateDate
+					// 6 Description
+					String filterEndpoints = (String)values.get(7);
+					String filterLibraries = (String)values.get(8);
+					if(acceptAsset(e, filterEndpoints, filterLibraries)) {
+						CategoryNode c = findCategory(root, cat);
+						AssetNode node = createAssetNode(notesUnid,c,name,cat,findUniqueUrl(c,notesUnid,assetId));
+						node.setTooltip((String)values.get(6));
+						c.getChildren().add(node);
+					}
 				}
 			}
 			return root;
 		} finally {
 			v.recycle();
 		}
+	}
+	protected boolean acceptAsset(ViewEntry e, String filterEndpoints, String filterLibraries) {
+		return true;
 	}
 	private String findUniqueUrl(CategoryNode cat, String unid, String assetId) {
 		List<Node> children = cat.getChildren();

@@ -47,6 +47,7 @@ public class JavaSnippetImporter extends AssetImporter {
 			setItemValue(doc,"Category", node.getCategory());
 			setItemValue(doc,"Name", node.getName());
 			setItemValue(doc,"Description", snippet.getProperty("description"));
+			setItemValue(doc,"FilterEndpoints", snippet.getProperty("endpoints"));
 			setItemValue(doc,"Tags", snippet.getProperty("tags"));
 			setItemValue(doc,"ImportSource", source.getName());
 			setItemValueRichText(doc,"Jsp", snippet.getJsp());

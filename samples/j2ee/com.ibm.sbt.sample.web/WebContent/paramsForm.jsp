@@ -6,6 +6,7 @@
 
 <html>
 <head>
+<link href="/sbt.bootstrap211/bootstrap/css/bootstrap-sbt.css" rel="stylesheet"></link>
 </head>
 
 <body>
@@ -47,7 +48,7 @@
   }
 %>
 </fieldset>
-<input type="submit" value="Submit">
+<input class="btn" type="submit" value="Submit">
 </form>
 </body>
 </html>

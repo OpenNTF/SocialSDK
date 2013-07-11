@@ -45,23 +45,23 @@ public class Attachment {
 	
 	public Attachment(DataHandler<?> dataHandler){
 		JsonJavaObject attachmentObject = (JsonJavaObject) (dataHandler.getEntries(ASJsonPath.Attachments.getPath())).get(0);
-		setSummary(attachmentObject.getAsString(ASJsonPath.AttachmentSummary.getPath()));
-		setId(attachmentObject.getAsString(ASJsonPath.AttachmentId.getPath()));
-		setDisplayName(attachmentObject.getAsString(ASJsonPath.AttachmentDisplayName.getPath()));
-		setPublished(attachmentObject.getAsString(ASJsonPath.AttachmentPublished.getPath()));
-		setUrl(attachmentObject.getAsString(ASJsonPath.AttachmentUrl.getPath()));
+		setSummary(attachmentObject.getString(ASJsonPath.AttachmentSummary.getPath()));
+		setId(attachmentObject.getString(ASJsonPath.AttachmentId.getPath()));
+		setDisplayName(attachmentObject.getString(ASJsonPath.AttachmentDisplayName.getPath()));
+		setPublished(attachmentObject.getString(ASJsonPath.AttachmentPublished.getPath()));
+		setUrl(attachmentObject.getString(ASJsonPath.AttachmentUrl.getPath()));
 //		setAuthor(new Actor(dataHandler));
-		JsonJavaObject imageObject = attachmentObject.getAsObject(ASJsonPath.AttachmentImage.getPath());
-		if(StringUtil.isNotEmpty(imageObject.getAsString(ASJsonPath.AttachmentImageUrl.getPath()))){
+		JsonJavaObject imageObject = attachmentObject.getJsonObject(ASJsonPath.AttachmentImage.getPath());
+		if(StringUtil.isNotEmpty(imageObject.getString(ASJsonPath.AttachmentImageUrl.getPath()))){
 			setIsImage(true);
 			setImage(new Image(dataHandler));
 		}
 		
 		JsonJavaObject authorObject = attachmentObject.getJsonObject(ASJsonPath.AttachmentActor.getPath());
-		setAuthorId(authorObject.getAsString(ASJsonPath.AttachmentActorId.getPath()));
-		setAuthorName(authorObject.getAsString(ASJsonPath.AttachmentActorName.getPath()));
-		setAuthorType(authorObject.getAsString(ASJsonPath.ReplyAuthorObjectType.getPath()));
-		setAuthorUrl(authorObject.getAsString(ASJsonPath.AttachmentActorUrl.getPath()));
+		setAuthorId(authorObject.getString(ASJsonPath.AttachmentActorId.getPath()));
+		setAuthorName(authorObject.getString(ASJsonPath.AttachmentActorName.getPath()));
+		setAuthorType(authorObject.getString(ASJsonPath.ReplyAuthorObjectType.getPath()));
+		setAuthorUrl(authorObject.getString(ASJsonPath.AttachmentActorUrl.getPath()));
 	}
 
 	public Image getImage() {

@@ -20,6 +20,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import com.ibm.commons.util.io.json.JsonJavaObject;
@@ -57,7 +58,7 @@ public class JsonDataHandler implements DataHandler<JsonJavaObject>{
 	 */
 	@Override
 	public String getAsString(String path) {
-		return path.indexOf("/")==-1?data.getAsString(path):getNestedField(path);
+		return path.indexOf("/")==-1?data.getString(path):getNestedField(path);
 	}
 	
 	/*
@@ -70,15 +71,23 @@ public class JsonDataHandler implements DataHandler<JsonJavaObject>{
 		JsonJavaObject currentObject = data;
 		int index = 0;
 		for (String part : pathParts){
-			if (!currentObject.containsKey(part)) break;
+			if (!containsKey(currentObject,part)) break;
 			if (index<pathParts.length-1) {
-				currentObject = currentObject.getAsObject(part);
+				currentObject = currentObject.getJsonObject(part);
 			} else {
-				value = currentObject.getAsString(part);
+				value = currentObject.getString(part);
 			}
 			index++;
 		}
 		return value;
+	}
+	
+	public boolean containsKey(JsonJavaObject j, String key) {
+	    Iterator<String> i = j.getProperties();
+	    while(i.hasNext()) {
+	        if(i.next().matches(key))return true;
+	    }
+	    return false;
 	}
 	
 	private Object getNestedObject(String path){
@@ -86,9 +95,9 @@ public class JsonDataHandler implements DataHandler<JsonJavaObject>{
 		JsonJavaObject currentObject = data;
 		int index = 0;
 		for (String part : pathParts){
-			if (!currentObject.containsKey(part)) break;
+			if (!containsKey(currentObject, part)) break;
 			if (index<pathParts.length-1) {
-				currentObject = currentObject.getAsObject(part);
+				currentObject = currentObject.getJsonObject(part);
 			}
 			index++;
 		}
@@ -102,7 +111,7 @@ public class JsonDataHandler implements DataHandler<JsonJavaObject>{
 
 	@Override
 	public JsonJavaObject getEntry(String path) {
-		return data.getAsObject(path);
+		return data.getJsonObject(path);
 	}
 	
 	/**
@@ -142,15 +151,15 @@ public class JsonDataHandler implements DataHandler<JsonJavaObject>{
 		if(path.contains("/")){
 			JsonJavaObject object = (JsonJavaObject) getNestedObject(path);
 			String pathinfo = path.substring(path.lastIndexOf("/")+1,path.length());
-			if(object.containsKey(pathinfo)){
-				for (Object obj : object.getAsList(pathinfo)) {
+			if(containsKey(object,pathinfo)){
+				for (Object obj : (List)object.get(pathinfo)) {
 					jsonList.add((JsonJavaObject)obj);
 				}
 			}else{
 				return null;
 			}
 		}else{
-			for (Object obj : data.getAsList(path)) {
+			for (Object obj : (List)data.get(path)) {
 				jsonList.add((JsonJavaObject)obj);
 			}
 		}
@@ -260,7 +269,7 @@ public class JsonDataHandler implements DataHandler<JsonJavaObject>{
      */
 	@Override
 	public float getAsFloat(FieldEntry field) {
-		return (float)data.getAsDouble((String)field.getPath());
+		return (float)data.getDouble((String)field.getPath());
 	}
 
     /**
@@ -269,7 +278,7 @@ public class JsonDataHandler implements DataHandler<JsonJavaObject>{
      */
 	@Override
 	public float getAsFloat(String fieldName) {
-		return (float)data.getAsDouble(fieldName);
+		return (float)data.getDouble(fieldName);
 	}
 
     /**
@@ -278,7 +287,7 @@ public class JsonDataHandler implements DataHandler<JsonJavaObject>{
      */
 	@Override
 	public boolean getAsBoolean(FieldEntry field) {
-		return data.getAsBoolean(data, (String)field.getPath());
+		return data.getBoolean((String)field.getPath());
 	}
 
     /**
@@ -287,6 +296,6 @@ public class JsonDataHandler implements DataHandler<JsonJavaObject>{
      */
 	@Override
 	public boolean getAsBoolean(String fieldName) {
-		return data.getAsBoolean(data, fieldName);
+		return data.getBoolean(fieldName);
 	}
 }

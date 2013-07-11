@@ -30,6 +30,9 @@ import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
  */
 public class Member extends BaseEntity {
 	
+	static public final String MEMBER = "member"; //$NON-NLS-1$
+	static public final String OWNER = "owner"; //$NON-NLS-1$
+	
 	/**
 	 * Constructor
 	 * 

@@ -340,6 +340,7 @@ public class Community extends BaseEntity {
 	private String createCommunityRequestPayload() throws TransformerException {
 		CommunityTransformer transformer = new CommunityTransformer(this);
 		String xml = transformer.transform(fields);
+		System.out.println("xml "+xml);
 		return xml;		
 	}
 	

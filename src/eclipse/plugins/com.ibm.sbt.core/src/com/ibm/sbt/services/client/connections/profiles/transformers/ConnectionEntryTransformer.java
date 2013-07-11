@@ -32,7 +32,7 @@ import com.ibm.sbt.services.client.connections.profiles.ConnectionEntry;
 public class ConnectionEntryTransformer  extends AbstractBaseTransformer {
 
 	private ConnectionEntry connectionEntry;
-	private String	sourcepath = "/com/ibm/sbtx/java/apis/connections/profiles/templates/connectionEntry/";
+	private String	sourcepath = "/com/ibm/sbt/services/client/connections/profiles/templates/connectionEntry/";
 	private String  inviteTmplFile = "InviteTmpl.xml"; 
 	private String status = "pending";
 

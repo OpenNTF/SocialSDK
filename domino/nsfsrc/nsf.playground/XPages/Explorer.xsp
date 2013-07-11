@@ -58,7 +58,7 @@ function prepend(h,f) {
 		title="#{javascript:optionsBean.getApplicationTitle('API Explorer')}" wholePage="true">
 		<xp:this.facets>
 			<xp:panel id="PlaceBarActions" xp:key="PlaceBarActions">
-				<xc:ccEnvironmentComboBox fullRefresh="true"></xc:ccEnvironmentComboBox>
+				<xc:ccEnvironmentComboBox></xc:ccEnvironmentComboBox>
 			</xp:panel>
 		</xp:this.facets>
 		<xe:djBorderContainer id="djTabContainer1"

@@ -32,7 +32,7 @@ import com.ibm.sbt.services.client.connections.communities.Community;
 
 public class CommunityTransformer extends AbstractBaseTransformer {
 	private Community community;
-	private String	sourcepath = "/com/ibm/sbtx/java/apis/communities/templates/";
+	private String	sourcepath = "/com/ibm/sbt/services/client/connections/communities/templates/";
 	
 	/*
 	 * Tranformer needs instance of community 

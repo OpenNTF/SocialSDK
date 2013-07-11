@@ -19,9 +19,9 @@
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
 <%@page	import="com.ibm.sbt.services.client.connections.communities.Community"%>
-<%@page import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
-<%@page import="com.ibm.sbt.services.client.connections.communities.Bookmark"%>
-<%@page	import="com.ibm.sbt.services.client.connections.communities.BookmarkList"%>
+<%@page	import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
+<%@page	import="com.ibm.sbt.services.client.connections.communities.ForumTopic"%>
+<%@page	import="com.ibm.sbt.services.client.connections.communities.ForumTopicList"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <html>
@@ -31,22 +31,24 @@
 </head>
 
 <body>
-	<h4>Community Bookmarks</h4>
+	<h4>Community Forum Topics</h4>
 	<div id="content">
 	<%
 		try {
-			String communityUuid = Context.get().getProperty("sample.communityId");
-			CommunityService svc = new CommunityService();
-			BookmarkList bookmarks = svc.getBookmarks(communityUuid);
-			if(bookmarks.getTotalResults() > 0 ){
-				out.println("<br>Listing Bookmarks of a Community <br>");
-				for (Bookmark bookmark : bookmarks) {
-					out.println("<b>Bookmarks Title : </b> " + bookmark.getTitle());
+			CommunityService communityService = new CommunityService();
+			Collection<Community> communities = communityService.getPublicCommunities();
+			Community community = communities.iterator().next();
+			
+			ForumTopicList forumTopics = communityService.getForumTopics(community.getCommunityUuid());
+			if(forumTopics.getTotalResults() > 0 ){
+				out.println("<br>Listing forum topics of a Community <br>");
+				for (ForumTopic forumTopic : forumTopics) {
+					out.println("<b>Forum Topic Title : </b> " + forumTopic.getTitle());
 					out.println("<br>");
 				}
 			}
 			else
-				out.println("No Bookmarks found for this Community");			
+				out.println("Problem Occurred while fetching forumTopics for this community");
 		} catch (Throwable e) {
 			out.println("<pre>");
 			out.println(e.getMessage());

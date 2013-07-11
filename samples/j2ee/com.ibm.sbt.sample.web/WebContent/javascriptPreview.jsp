@@ -69,6 +69,14 @@
   <head>
     <meta charset="utf-8">
     <title>Social Business Toolkit - JavaScript Preview</title>
+    <script type="text/javascript">
+      window.onerror = function(msg, url, linenumber) {
+    	var d =  document.createElement('div');
+    	d.innerHTML += 'Unhandled error: '+msg+'\n in page: '+url+'\nat: '+linenumber;
+    	document.getElementById('_jsErrors').appendChild(d);
+		return true;
+      }
+	</script>
     <link href="images/sbt.png" rel="shortcut icon">
     <%
     String[] styleHrefs = Util.getStyles(request, theme);
@@ -91,6 +99,8 @@
     <div id="content"></div>
     <div id="loading" style="visibility: hidden;">
         <img src="/sbt.sample.web/images/progressIndicator.gif">
+    </div>
+    <div id="_jsErrors">
     </div>
     <%
     if (StringUtil.isNotEmpty(css)) {

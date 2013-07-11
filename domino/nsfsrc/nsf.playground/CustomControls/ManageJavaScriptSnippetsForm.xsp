@@ -2,7 +2,8 @@
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
 	xmlns:xe="http://www.ibm.com/xsp/coreex">
 	<xp:this.data>
-		<xp:dominoDocument var="document1" formName="JavaSnippet">
+		<xp:dominoDocument var="document1"
+			formName="JavaScriptSnippet">
 			<xp:this.postNewDocument><![CDATA[#{javascript:document1.replaceItemValue("Author",userBean.commonName)}]]></xp:this.postNewDocument>
 			<xp:this.querySaveDocument><![CDATA[#{javascript:return snippetBean.querySave(document1)}]]></xp:this.querySaveDocument>
 		</xp:dominoDocument>
@@ -64,6 +65,16 @@
 				disableClientSideValidation="true" value="#{document1.Description}"
 				cols="120" rows="5">
 			</xp:inputTextarea>
+		</xe:formRow>
+		<xe:formRow id="formRow2" label="Endpoints Filter:">
+			<xp:inputText id="inputText4"
+				disableClientSideValidation="true" value="#{document1.FilterEndpoints}" size="80">
+			</xp:inputText>
+		</xe:formRow>
+		<xe:formRow id="formRow6" label="Libraries Filter:">
+			<xp:inputText id="inputText8"
+				disableClientSideValidation="true" value="#{document1.FilterLibraries}" size="80">
+			</xp:inputText>
 		</xe:formRow>
 		<xe:formRow id="formRow5" labelPosition="above">
 			<xe:djTabContainer id="djTabContainer2"

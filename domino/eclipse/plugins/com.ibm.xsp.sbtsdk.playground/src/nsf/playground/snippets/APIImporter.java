@@ -115,7 +115,7 @@ public class APIImporter extends AssetImporter {
 		}
 
 		// Get the import options for all the platforms
-		List<ImportOptions> options = PlaygroundExtensionFactory.getExtensions(ImportOptions.class,null);
+		List<ImportOptions> options = PlaygroundExtensionFactory.getExtensions(ImportOptions.class);
 		
 		for(Map.Entry<String, APIDocument> ed: apiDocs.entrySet()) {
 			String[] products = ed.getValue().products;

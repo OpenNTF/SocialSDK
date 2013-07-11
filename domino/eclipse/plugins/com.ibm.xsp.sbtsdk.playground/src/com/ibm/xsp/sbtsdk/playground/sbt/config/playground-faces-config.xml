@@ -20,7 +20,7 @@
 
   <!--  SmartCloud OAuth 1.0 -->
   <managed-bean>
-    <managed-bean-name>smartcloud</managed-bean-name>
+    <managed-bean-name>smartcloudOA</managed-bean-name>
     <managed-bean-class>
 			com.ibm.sbt.services.endpoints.SmartCloudOAuthEndpoint
 		</managed-bean-class>
@@ -73,7 +73,7 @@
   
   <!-- Connections -->
   <managed-bean>
-    <managed-bean-name>connections</managed-bean-name>
+    <managed-bean-name>connectionsBasic</managed-bean-name>
     <managed-bean-class>
 			com.ibm.sbt.services.endpoints.ConnectionsBasicEndpoint
 		</managed-bean-class>
@@ -123,7 +123,7 @@
   
   <!-- Domino -->
   <managed-bean>
-    <managed-bean-name>domino</managed-bean-name>
+    <managed-bean-name>dominoBasic</managed-bean-name>
     <managed-bean-class>
 			com.ibm.sbt.services.endpoints.DominoBasicEndpoint
 		</managed-bean-class>

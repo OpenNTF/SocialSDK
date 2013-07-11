@@ -76,7 +76,6 @@ public class FileService extends BaseService {
     static final String sourceClass = FileService.class.getName();
     static final Logger logger      = Logger.getLogger(sourceClass);
 
-    Endpoint            endpoint;
 
     /**
      * Default Constructor - 0 argument constructor Calls the Constructor of BaseService Class.
@@ -242,6 +241,10 @@ public class FileService extends BaseService {
             }
             throw new FileServiceException(e, Messages.MesssageExceptionInFlaggingFile);
         }
+    }
+
+    public CommentEntry addCommentToFile(FileEntry fe, String comment, Map<String, String> parameters) throws FileServiceException {
+        return addCommentToFile(fe.getFileId(), comment, fe.getAuthorEntry().getUserUuid(), parameters);
     }
 
 

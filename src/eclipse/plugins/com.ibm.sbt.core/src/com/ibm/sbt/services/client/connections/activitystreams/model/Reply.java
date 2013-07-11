@@ -85,13 +85,13 @@ public class Reply {
 		if(replies!=null){
 			for (JsonJavaObject reply: replies) {
 				Reply replyObj = new Reply();
-				replyObj.setContent(reply.getAsString(ASJsonPath.ReplyContent.getPath()));
-				replyObj.setReplyId(reply.getAsString(ASJsonPath.ReplyId.getPath()));
-				replyObj.setUpdated(reply.getAsString(ASJsonPath.ReplyUpdated.getPath()));
+				replyObj.setContent(reply.getString(ASJsonPath.ReplyContent.getPath()));
+				replyObj.setReplyId(reply.getString(ASJsonPath.ReplyId.getPath()));
+				replyObj.setUpdated(reply.getString(ASJsonPath.ReplyUpdated.getPath()));
 				JsonJavaObject authorObject = reply.getJsonObject(ASJsonPath.ReplyAuthor.getPath());
-				replyObj.setAuthorId(authorObject.getAsString(ASJsonPath.ReplyAuthorId.getPath()));
-				replyObj.setAuthorName(authorObject.getAsString(ASJsonPath.ReplyAuthorName.getPath()));
-				replyObj.setAuthorObjectType(authorObject.getAsString(ASJsonPath.ReplyAuthorObjectType.getPath()));
+				replyObj.setAuthorId(authorObject.getString(ASJsonPath.ReplyAuthorId.getPath()));
+				replyObj.setAuthorName(authorObject.getString(ASJsonPath.ReplyAuthorName.getPath()));
+				replyObj.setAuthorObjectType(authorObject.getString(ASJsonPath.ReplyAuthorObjectType.getPath()));
 				
 				replyList.add(replyObj);
 			}

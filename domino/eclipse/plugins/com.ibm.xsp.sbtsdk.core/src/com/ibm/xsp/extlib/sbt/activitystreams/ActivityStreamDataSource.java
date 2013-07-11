@@ -34,7 +34,7 @@ import com.ibm.commons.xml.util.XMIConverter;
 import com.ibm.jscript.IValue;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientService.HandlerJson;
-import com.ibm.sbt.services.client.activitystreams.ActivityStreamService;
+import com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamService;
 import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.util.DataNavigator;
 import com.ibm.sbt.util.XmlNavigator;
@@ -117,7 +117,7 @@ public class ActivityStreamDataSource extends RestDataSource {
                 Map<String,String> parameters = getParameters(index, blockSize);
 
                 //TODO Padraic Is this correct?
-                DataNavigator.Json nav = new DataNavigator.Json(svc.getAllUpdatesStream(parameters)); // this.data has the response feed.
+                DataNavigator.Json nav = new DataNavigator.Json(svc.getAllUpdates(parameters)); // this.data has the response feed.
     			DataNavigator entry = nav.get("list");
                 
                 Object[] data = new Object[entry.getCount()];

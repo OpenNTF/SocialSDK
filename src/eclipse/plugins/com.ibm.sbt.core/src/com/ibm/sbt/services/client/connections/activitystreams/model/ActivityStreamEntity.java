@@ -119,7 +119,7 @@ public class ActivityStreamEntity extends BaseEntity{
 			return false;
 		}
 		
-		String attachmentId = attachmentObject.getAsString(ASJsonPath.AttachmentId.getPath());
+		String attachmentId = attachmentObject.getString(ASJsonPath.AttachmentId.getPath());
 		if(StringUtil.isEmpty(attachmentId)){
 			containAttachment = false;
 		}else{

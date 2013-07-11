@@ -35,7 +35,7 @@
 		ProfileService connProfSvc = new ProfileService();
 		Profile profile = connProfSvc.getProfile(userId);
 		if(profile.getUserid()!=null){
-			profile.setPhoneNumber("6666669");
+			profile.setPhoneNumber("7777779");
 			connProfSvc.updateProfile(profile);
 			profile = connProfSvc.getProfile(userId);
 			out.println("Updated telephone number: "+ profile.getPhoneNumber());

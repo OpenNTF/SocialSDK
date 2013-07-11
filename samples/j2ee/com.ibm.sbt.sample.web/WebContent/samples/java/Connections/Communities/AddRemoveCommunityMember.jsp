@@ -41,6 +41,9 @@
 		String id = Context.get().getProperty("sample.id2");
 		communityService.addMember(community.getCommunityUuid(),id,"");
 		out.println("user : "+id+" added to community "+community.getCommunityUuid());
+		communityService.removeMember(community.getCommunityUuid(), id);
+		out.println("<b> Member Removed : "+id+" from community "+community.getCommunityUuid());
+		
 	} catch (Throwable e) {
 		out.println("<pre>");
 		out.println(e.getMessage());

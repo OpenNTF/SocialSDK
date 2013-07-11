@@ -18,35 +18,42 @@
 <%@page import="java.util.Collection"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
-<%@page import="com.ibm.sbt.services.client.connections.communities.Community"%>
+<%@page	import="com.ibm.sbt.services.client.connections.communities.Community"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
-<%@page import="java.util.HashMap"%>
+<%@page import="com.ibm.sbt.services.client.connections.communities.Bookmark"%>
+<%@page	import="com.ibm.sbt.services.client.connections.communities.BookmarkList"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <html>
 <head>
-<title>SBT JAVA Sample - Remove Community Member</title>
+<title>SBT JAVA Sample - Get Community by ID</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
 <body>
-	<h4>Remove Community Member</h4>
+	<h4>Community Bookmarks</h4>
 	<div id="content">
 	<%
-	try {
-		CommunityService communityService = new CommunityService();
-		Collection<Community> communities = communityService.getPublicCommunities();
-		Community community = communities.iterator().next();
-		String memberId = Context.get().getProperty("sample.id2");
-		communityService.removeMember(community.getCommunityUuid(), memberId);
-		
-		out.println("<b> Member Removed : "+memberId+" from community "+community.getCommunityUuid());
-		out.println("<br>");
-	} catch (Throwable e) {
-		out.println("<pre>");
-		out.println(e.getMessage());
-		out.println("</pre>");
-	}
+		try {
+			CommunityService communityService = new CommunityService();
+			Collection<Community> communities = communityService.getPublicCommunities();
+			Community community = communities.iterator().next();
+			
+			BookmarkList bookmarks = communityService.getBookmarks(community.getCommunityUuid());
+			if(bookmarks.getTotalResults() > 0 ){
+				out.println("<br>Listing Bookmarks of a Community <br>");
+				for (Bookmark bookmark : bookmarks) {
+					out.println("<b>Bookmarks Title : </b> " + bookmark.getTitle());
+					out.println("<br>");
+				}
+			}
+			else
+				out.println("No Bookmarks found for this Community");			
+		} catch (Throwable e) {
+			out.println("<pre>");
+			out.println(e.getMessage());
+			out.println("</pre>");
+		}
 	%>
 	</div>
 </body>

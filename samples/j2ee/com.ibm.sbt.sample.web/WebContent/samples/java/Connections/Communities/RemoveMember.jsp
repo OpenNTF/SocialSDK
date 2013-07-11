@@ -15,38 +15,38 @@
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@page import="java.io.PrintWriter"%>
-<%@page import="java.util.Collection"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.Community"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
 <%@page import="java.util.HashMap"%>
-<%@page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@page import="java.util.Collection"%>
+<%@page 
+	language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <html>
 <head>
-<title>SBT JAVA Sample - Remove Community Member</title>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>SBT JAVA Sample - Remove Member</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
-<body>
-	<h4>Remove Community Member</h4>
+<body>	
+	<h4>Remove Member</h4>
 	<div id="content">
 	<%
 	try {
 		CommunityService communityService = new CommunityService();
 		Collection<Community> communities = communityService.getPublicCommunities();
 		Community community = communities.iterator().next();
-		String memberId = Context.get().getProperty("sample.id2");
-		communityService.removeMember(community.getCommunityUuid(), memberId);
+		String id = Context.get().getProperty("sample.id2");
+		communityService.removeMember(community.getCommunityUuid(), id);
+		out.println("<b> Member Removed : "+id+" from community "+community.getCommunityUuid());
 		
-		out.println("<b> Member Removed : "+memberId+" from community "+community.getCommunityUuid());
-		out.println("<br>");
 	} catch (Throwable e) {
 		out.println("<pre>");
 		out.println(e.getMessage());
 		out.println("</pre>");
-	}
+	}			
 	%>
 	</div>
 </body>

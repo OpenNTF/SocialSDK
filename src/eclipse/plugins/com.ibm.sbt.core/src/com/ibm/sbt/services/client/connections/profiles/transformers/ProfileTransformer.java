@@ -33,7 +33,7 @@ import com.ibm.sbt.services.client.connections.profiles.ProfilesConstants;
 public class ProfileTransformer  extends AbstractBaseTransformer {
 
 	private Profile profile;
-	private String	sourcepath = "/com/ibm/sbtx/java/apis/connections/profiles/templates/profileEntry/";
+	private String	sourcepath = "/com/ibm/sbt/services/client/connections/profiles/templates/profileEntry/";
 	private String  requestType;
 	private String  tmplFile; 
 	private String  attributeTmplFile;

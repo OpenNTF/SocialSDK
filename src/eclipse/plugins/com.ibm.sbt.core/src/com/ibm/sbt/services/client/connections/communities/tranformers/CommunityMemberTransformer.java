@@ -30,7 +30,7 @@ import com.ibm.sbt.services.client.base.util.EntityUtil;
  */
 
 public class CommunityMemberTransformer extends AbstractBaseTransformer {
-	private String	sourcepath = "/com/ibm/sbtx/java/apis/communities/templates/";
+	private String	sourcepath = "/com/ibm/sbt/services/client/connections/communities/templates/";
 
 	@Override
 	public String transform(Map<String, Object> fieldmap) throws TransformerException {

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import nsf.playground.beans.DataAccessBean;
 import nsf.playground.extension.Endpoints;
 
 import com.ibm.commons.util.StringUtil;
@@ -17,6 +18,20 @@ import com.ibm.sbt.playground.extension.PlaygroundExtensionFactory;
  *
  */
 public class PlaygroundEnvironment extends SBTEnvironment {
+	
+	public static PlaygroundEnvironment getCurrentEnvironment() {
+		return getCurrentEnvironment(null);
+	}
+	public static PlaygroundEnvironment getCurrentEnvironment(String envName) {
+		return DataAccessBean.get().getCurrentEnvironment(envName);
+	}
+
+	public static String getCurrentEnvironmentName() {
+		return getCurrentEnvironmentName(null);
+	}
+	public static String getCurrentEnvironmentName(String envName) {
+		return getCurrentEnvironment(envName).getName();
+	}
 	
 	private static final class FieldMap extends HashMap<String, String> {
 		private static final long serialVersionUID=1L;

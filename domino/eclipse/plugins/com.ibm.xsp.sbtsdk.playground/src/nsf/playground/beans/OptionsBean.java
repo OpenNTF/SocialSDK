@@ -148,7 +148,7 @@ public abstract class OptionsBean {
 	//
 	public List<Category> getEnvironmentCategories() {
 		ArrayList<Category> result = new ArrayList<Endpoints.Category>();
-		List<Endpoints> envext = PlaygroundExtensionFactory.getExtensions(Endpoints.class,null); // Get the categories for all the platforms
+		List<Endpoints> envext = PlaygroundExtensionFactory.getExtensions(Endpoints.class); // Get the categories for all the platforms
 		for(int i=0; i<envext.size(); i++) {
 			Category[] cats = envext.get(i).getPropertyList();
 			if(cats!=null) {

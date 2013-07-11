@@ -26,12 +26,12 @@
 	pageEncoding="ISO-8859-1"%>
 <html>
 <head>
-	<title>SBT JAVA Sample - Remove Community Member</title>
+	<title>SBT JAVA Sample - Remove Member</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
 <body>	
-	<h4>Add Community Member</h4>
+	<h4>Remove Member</h4>
 	<div id="content">
 	<%
 	try {

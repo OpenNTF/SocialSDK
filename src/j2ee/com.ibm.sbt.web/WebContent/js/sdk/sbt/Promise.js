@@ -30,9 +30,9 @@ define(["./declare","./log"], function(declare,log) {
 	var Promise = declare(null, {	
 		
         // private
-        _isRejected : false,
-        _isFulfilled : false,
-        _isCancelled : false,
+        _rejected : false,
+        _fulfilled : false,
+        _canceled : false,
         _callbacks : null,
         _errbacks : null,
         response : null,
@@ -58,13 +58,13 @@ define(["./declare","./log"], function(declare,log) {
          * Add new callbacks to the promise.
          */
         then: function(callback, errback) {
-            if (this._isFulfilled) {
+            if (this._fulfilled) {
                 if (callback) {
                     callback(this.data);
                 }
                 return;
             }
-            if (this._isRejected) {
+            if (this._rejected) {
                 if (errback) {
                     errback(this.error);
                 }
@@ -83,46 +83,46 @@ define(["./declare","./log"], function(declare,log) {
          * Inform the deferred it may cancel its asynchronous operation.
          */
         cancel: function(reason, strict) {
-            this._isCancelled = true;
+            this._canceled = true;
         },
 
         /*
          * Checks whether the promise has been resolved.
          */
         isResolved: function() {
-            return this._isRejected || this._isFulfilled;
+            return this._rejected || this._fulfilled;
         },
 
         /*
          * Checks whether the promise has been rejected.
          */
         isRejected: function() {
-            return this._isRejected;
+            return this._rejected;
         },
 
         /*
          * Checks whether the promise has been resolved or rejected.
          */
         isFulfilled: function() {
-            return this._isFulfilled;
+            return this._fulfilled;
         },
 
         /*
          * Checks whether the promise has been canceled.
          */
         isCanceled: function() {
-            return this._isCancelled;
+            return this._canceled;
         },
 
         /*
          * Called if the promise has been fulfilled
          */
         fulfilled : function(data) {
-            if (this._isCancelled) {
+            if (this._canceled) {
                 return;
             }
             
-            this._isFulfilled = true;
+            this._fulfilled = true;
             this.data = data;
             
             if (this._callbacks) {
@@ -141,11 +141,11 @@ define(["./declare","./log"], function(declare,log) {
          * Call if the promise has been rejected
          */
         rejected : function(error) {
-            if (this._isCancelled) {
+            if (this._canceled) {
                 return;
             }
             
-            this._isRejected = true;
+            this._rejected = true;
             this.error = error;
             
             if (this._errbacks) {

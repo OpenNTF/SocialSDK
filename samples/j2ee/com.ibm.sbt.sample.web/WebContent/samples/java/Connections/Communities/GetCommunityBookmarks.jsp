@@ -35,9 +35,11 @@
 	<div id="content">
 	<%
 		try {
-			String communityUuid = Context.get().getProperty("sample.communityId");
-			CommunityService svc = new CommunityService();
-			BookmarkList bookmarks = svc.getBookmarks(communityUuid);
+			CommunityService communityService = new CommunityService();
+			Collection<Community> communities = communityService.getPublicCommunities();
+			Community community = communities.iterator().next();
+			
+			BookmarkList bookmarks = communityService.getBookmarks(community.getCommunityUuid());
 			if(bookmarks.getTotalResults() > 0 ){
 				out.println("<br>Listing Bookmarks of a Community <br>");
 				for (Bookmark bookmark : bookmarks) {

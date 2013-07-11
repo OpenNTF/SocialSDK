@@ -35,13 +35,14 @@
 	<div id="content">
 	<%
 		try {
-			String communityUuid = Context.get().getProperty("sample.communityId");
-			CommunityService svc = new CommunityService();
-			CommunityList subCommunities = svc.getSubCommunities(communityUuid);
+			CommunityService communityService = new CommunityService();
+			Collection<Community> communities = communityService.getPublicCommunities();
+			Community community = communities.iterator().next();
+			CommunityList subCommunities = communityService.getSubCommunities(community.getCommunityUuid());
 			if(subCommunities.getTotalResults() > 0 ){
 				out.println("<br>Listing sub communities of a Community <br>");
-				for (Community community : subCommunities) {
-					out.println("<b>Community Title : </b> " + community.getTitle());
+				for (Community subCommunity : subCommunities) {
+					out.println("<b>Community Title : </b> " + subCommunity.getTitle());
 					out.println("<br>");
 				}
 			}

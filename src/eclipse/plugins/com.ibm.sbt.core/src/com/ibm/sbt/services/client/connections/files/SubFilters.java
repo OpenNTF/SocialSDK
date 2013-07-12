@@ -27,15 +27,21 @@ import com.ibm.commons.util.StringUtil;
  */
 public class SubFilters {
 
-	public static String	DOCUMENT	= "/document";
+	public static String	FILE		= "/document";
+	public static String	DOCUMENTS	= "/documents";
 	public static String	COMMENT		= "/comment";
 	public static String	COLLECTION	= "/collection";
 	public static String	LIBRARY		= "/userlibrary";
+	public static String	RECYCLEBIN	= "/view/recyclebin";
+	public static String	VERSION		= "/version";
 
 	private String			userId;
-	private String			documentId;
+	private String			fileId;
+	private String			documentsId;
 	private String			commentId;
 	private String			collectionId;
+	private String			recycleBinDocumentId;
+	private String			versionId;
 
 	public SubFilters() {
 	}
@@ -48,12 +54,20 @@ public class SubFilters {
 		this.userId = userId;
 	}
 
-	public String getDocumentId() {
-		return documentId;
+	public String getFileId() {
+		return fileId;
 	}
 
-	public void setDocumentId(String documentId) {
-		this.documentId = documentId;
+	public void setFileId(String documentId) {
+		this.fileId = documentId;
+	}
+
+	public String getVersionId() {
+		return versionId;
+	}
+
+	public void setVersionId(String versionId) {
+		this.versionId = versionId;
 	}
 
 	public String getCommentId() {
@@ -72,8 +86,24 @@ public class SubFilters {
 		this.collectionId = collection_id;
 	}
 
+	public String getRecycleBinDocumentId() {
+		return recycleBinDocumentId;
+	}
+
+	public void setRecycleBinDocumentId(String recycleBinDocumentId) {
+		this.recycleBinDocumentId = recycleBinDocumentId;
+	}
+
+	public String getDocumentsId() {
+		return documentsId;
+	}
+
+	public void setDocumentsId(String documentsId) {
+		this.documentsId = documentsId;
+	}
+
 	public boolean isEmpty() {
-		if (StringUtil.isEmpty(userId) && StringUtil.isEmpty(documentId) && StringUtil.isEmpty(commentId)
+		if (StringUtil.isEmpty(userId) && StringUtil.isEmpty(fileId) && StringUtil.isEmpty(commentId)
 				&& StringUtil.isEmpty(collectionId)) {
 			return true;
 		}

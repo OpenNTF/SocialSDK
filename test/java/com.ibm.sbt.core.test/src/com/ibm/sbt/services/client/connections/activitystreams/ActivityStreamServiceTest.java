@@ -24,17 +24,12 @@ package com.ibm.sbt.services.client.connections.activitystreams;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import org.junit.Ignore;
 import org.junit.Test;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.services.BaseUnitTest;
 import com.ibm.sbt.services.client.SBTServiceException;
-import com.ibm.sbt.services.client.activitystreams.ASVerb;
-import com.ibm.sbt.services.client.activitystreams.ActivityStreamService;
-import com.ibm.sbt.services.client.activitystreams.model.ActivityStreamEntry;
+import com.ibm.sbt.services.client.connections.activitystreams.model.ActivityStreamEntity;
 
 public class ActivityStreamServiceTest extends BaseUnitTest {
 
@@ -44,10 +39,10 @@ public class ActivityStreamServiceTest extends BaseUnitTest {
 		try {
 			ActivityStreamService service = new ActivityStreamService();
 			authenticateEndpoint(service.getEndpoint(), "***REMOVED***", "***REMOVED***");
-			List<ActivityStreamEntry> updates = service
+			ActivityStreamEntityList updates = service
 					.getUpdatesFromUser("0EE5A7FA-3434-9A59-4825-7A7000278DAA");
 
-			for (ActivityStreamEntry asentry : updates) {
+			for (ActivityStreamEntity asentry : updates) {
 				System.err.println("asentry.getActor() " + asentry.getActor().getName());
 				assertEquals(asentry.getActor().getName(), "Frank Adams");
 			}
@@ -62,12 +57,12 @@ public class ActivityStreamServiceTest extends BaseUnitTest {
 		try {
 			ActivityStreamService service = new ActivityStreamService();
 			authenticateEndpoint(service.getEndpoint(), "***REMOVED***", "***REMOVED***");
-			List<ActivityStreamEntry> updates = service
+			ActivityStreamEntityList updates = service
 					.getUpdatesFromCommunity("b4f12458-3cc2-49d2-9cf3-08d3fcbd81d5");
 
 			System.err.println("number of updates from community : " + updates.size());
 
-			for (ActivityStreamEntry asentry : updates) {
+			for (ActivityStreamEntity asentry : updates) {
 				if (null != asentry.getCommunity()) { // Updates can also come in from news service, ignore
 														// those
 					System.err.println("communityid " + asentry.getCommunity().getCommunityName());
@@ -104,16 +99,14 @@ public class ActivityStreamServiceTest extends BaseUnitTest {
 			postPayload.put("updated", new Date().getTime());
 			postPayload.put("object", object);
 			System.err.println(postPayload.toString());
-			Map<String, String> header = new HashMap<String, String>();
-			header.put("Content-Type", "application/json");
 
 			ActivityStreamService service = new ActivityStreamService();
 			authenticateEndpoint(service.getEndpoint(), "***REMOVED***", "***REMOVED***");
-			service.postEntry(postPayload, header);
+			service.postEntry(postPayload);
 
-			List<ActivityStreamEntry> updates = service.getAllUpdatesStream();
+			ActivityStreamEntityList updates = service.getAllUpdates();
 			System.err.println("updates found " + updates.size());
-			for (ActivityStreamEntry update : updates) {
+			for (ActivityStreamEntity update : updates) {
 				System.err.println("update.getEventTitle()" + update.getEventTitle());
 				System.err.println("tobeposted" + tobeposted);
 
@@ -133,9 +126,9 @@ public class ActivityStreamServiceTest extends BaseUnitTest {
 			String searchfortag = "test";
 			ActivityStreamService service = new ActivityStreamService();
 			authenticateEndpoint(service.getEndpoint(), "***REMOVED***", "***REMOVED***");
-			List<ActivityStreamEntry> updates = service.searchForTags(searchfortag);
+			ActivityStreamEntityList updates = service.searchByTags(searchfortag);
 
-			for (ActivityStreamEntry asentry : updates) {
+			for (ActivityStreamEntity asentry : updates) {
 				System.err.println("asentry.getEventTitle() " + asentry.getPlainTitle());
 				assertTrue(asentry.getEventTitle().contains("#" + searchfortag));
 			}

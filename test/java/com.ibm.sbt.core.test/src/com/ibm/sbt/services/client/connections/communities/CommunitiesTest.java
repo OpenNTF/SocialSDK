@@ -2,11 +2,7 @@ package com.ibm.sbt.services.client.connections.communities;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import lib.TestEndpoint;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -15,9 +11,13 @@ import com.ibm.commons.xml.DOMUtil;
 import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.XMLException;
 import com.ibm.commons.xml.xpath.XPathExpression;
-import com.ibm.sbt.services.client.ClientService.Args;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.util.extractor.field.XMLFieldExtractor;
+import com.ibm.sbt.services.client.connections.communities.Community;
+import com.ibm.sbt.services.client.connections.communities.CommunityList;
+import com.ibm.sbt.services.client.connections.communities.CommunityService;
+import com.ibm.sbt.services.client.Response;
+import com.ibm.sbt.services.client.ClientService.Args;
 
 /**
  * Tests for the java connections Communities API a test class provides its own tests extending the test
@@ -31,7 +31,6 @@ public class CommunitiesTest extends TestEndpoint {
 	protected static final String	TEST_COMMUNITY_DESCRIPTION	= "Test Community Description";
 	protected static final String	NEW_COMMUNITY				= "New Community";
 
-	@Ignore
 	@Test
 	public void testLoad() throws Exception {
 
@@ -40,7 +39,7 @@ public class CommunitiesTest extends TestEndpoint {
 
 		CommunityService svc = new CommunityService();
 
-		Collection<Community> communities = svc.getPublicCommunities();
+		CommunityList communities = svc.getPublicCommunities();
 		// some sample assertion, a proper test would be much more detailed than this
 		for (Community community : communities) {
 			assertNotNull(community.getTitle());
@@ -54,24 +53,25 @@ public class CommunitiesTest extends TestEndpoint {
 	public void testCreate() throws Exception {
 
 		CommunityService svc = new CommunityService();
-		Community comm = new Community();
+		Community comm = new Community(svc, "");
 
 		// using static constants allow to make assertions about them within the test client
 		comm.setTitle(NEW_COMMUNITY);
 		comm.setContent(TEST_COMMUNITY_DESCRIPTION);
 
-		comm = svc.createCommunity(comm, true);
-		assertEquals("NEW_COMMUNITY", comm.getTitle());
-		assertEquals("TEST_COMMUNITY_DESCRIPTION", comm.getContent());
+		String communityId = svc.createCommunity(comm);
+		Community comm2 = svc.getCommunity(communityId);
+		assertEquals("NEW_COMMUNITY", comm2.getTitle());
+		assertEquals("TEST_COMMUNITY_DESCRIPTION", comm2.getContent());
 	}
 
-	@Ignore
 	@Test
 	public void testCommunity() {
 		// we can also add other tests within the same class; this was added after
 		// a problem with createCommunity() to actually perform a specific test over
 		// the problematic step narrowing the case
-		Community comm = new Community();
+		CommunityService svc = new CommunityService();
+		Community comm = new Community(svc, "");
 		comm.setTitle("Test");
 		assertEquals("Test", comm.getTitle());
 	}
@@ -81,12 +81,12 @@ public class CommunitiesTest extends TestEndpoint {
 	 * its own test data
 	 */
 	@Override
-	protected Object testRequest(String method, Args args, Object content) throws ClientServicesException {
+	protected Response testRequest(String method, Args args, Object content) throws ClientServicesException {
 
 		// used by testLoad()
 		if (method.equals("get") && args.getServiceUrl().equals("communities/service/atom/communities/all")) {
 			try {
-				return DOMUtil.createDocument(this.getClass().getResourceAsStream("allCommunities.xml"));
+				return new Response(DOMUtil.createDocument(this.getClass().getResourceAsStream("allCommunities.xml")));
 			} catch (XMLException e) {
 				throw new ClientServicesException(e);
 			}
@@ -110,7 +110,7 @@ public class CommunitiesTest extends TestEndpoint {
 			}
 
 			// TODO: use the standard response we would get
-			return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
+			return new Response("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 
 		}
 

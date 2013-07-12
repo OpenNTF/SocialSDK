@@ -7,6 +7,7 @@ import com.ibm.commons.runtime.Context;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientService.Args;
 import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.endpoints.BasicEndpoint;
 
 /**
@@ -56,8 +57,8 @@ public abstract class TestEndpoint extends BasicEndpoint {
 		final TestEndpoint testEndpoint = this;
 		return new ClientService() {
 			@Override
-			public Object xhr(String method, Args args, Object content) throws ClientServicesException {
-				Object ret = testEndpoint.testRequest(method, args, content);
+			public Response xhr(String method, Args args, Object content) throws ClientServicesException {
+				Response ret = testEndpoint.testRequest(method, args, content);
 				if (ret == null) {
 					throw new ClientServicesException(new IllegalArgumentException(
 							"Testing service only, please implement " + method + " at "
@@ -69,6 +70,6 @@ public abstract class TestEndpoint extends BasicEndpoint {
 		};
 	}
 
-	protected abstract Object testRequest(String method, Args args, Object content)
+	protected abstract Response testRequest(String method, Args args, Object content)
 			throws ClientServicesException;
 }

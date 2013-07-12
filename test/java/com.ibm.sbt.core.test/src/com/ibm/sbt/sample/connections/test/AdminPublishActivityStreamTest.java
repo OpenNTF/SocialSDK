@@ -51,7 +51,7 @@ public class AdminPublishActivityStreamTest extends BaseUnitTest {
         Scanner s = new Scanner(templateStream).useDelimiter("\\A");
         String template = s.hasNext() ? s.next() : "";
         
-        JsonJavaObject streamEntry = apas.postToStream(mergeData(template, props));
+        String streamEntry = apas.postToStream(mergeData(template, props));
         
         assertNotNull("Expected to retrieve a non-null response after post to server", streamEntry);
     }

@@ -23,6 +23,7 @@ import com.ibm.sbt.services.client.connections.communities.Member;
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
+import com.ibm.sbt.services.client.connections.communities.MemberList;
 
 /**
  * @author Francis 
@@ -39,7 +40,7 @@ public class GetAllCommunitiesAppTest extends BaseUnitTest {
         assertNotNull("Expected getPublicCommunities() not to be null", communities);
         
         for (Community community : communities){
-            Member[] members = app.getCommunityMembers(community);
+            MemberList members = app.getCommunityMembers(community);
             assertNotNull("Expected getCommunityMembers to not be null", members);
         }
             

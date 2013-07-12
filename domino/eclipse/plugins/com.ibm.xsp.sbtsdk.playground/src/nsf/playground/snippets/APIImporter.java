@@ -115,7 +115,7 @@ public class APIImporter extends AssetImporter {
 		}
 
 		// Get the import options for all the platforms
-		List<ImportOptions> options = PlaygroundExtensionFactory.getExtensions(ImportOptions.class,null);
+		List<ImportOptions> options = PlaygroundExtensionFactory.getExtensions(ImportOptions.class);
 		
 		for(Map.Entry<String, APIDocument> ed: apiDocs.entrySet()) {
 			String[] products = ed.getValue().products;
@@ -280,7 +280,7 @@ public class APIImporter extends AssetImporter {
 		ArrayList<DocEntry> list = new ArrayList<APIImporter.DocEntry>();
 		try {
 			String path = URLEncoding.encodeURIString("/api/data/collections/name/AllAPIExplorer","utf-8",0,false);
-			Object json = client.get(path,new RestClient.HandlerJson(JsonJavaObjectI.instanceExI));
+			Object json = client.get(path,new RestClient.HandlerJson(JsonJavaObjectI.instanceExI)).getData();
 			if(json instanceof List) {
 				for(Object entry: (List)json) {
 					if(entry instanceof Map) {
@@ -303,7 +303,7 @@ public class APIImporter extends AssetImporter {
 	protected JsonJavaObject loadAPIDocument(RestClient client, DocEntry entry) throws IOException {
 		try {
 			String path = URLEncoding.encodeURIString("/api/data/documents/unid/"+entry.unid,"utf-8",0,false);
-			Object json = client.get(path,new RestClient.HandlerJson(JsonJavaObjectI.instanceExI));
+			Object json = client.get(path,new RestClient.HandlerJson(JsonJavaObjectI.instanceExI)).getData();
 			if(json instanceof JsonJavaObject) {
 				// Parse the fields that have to be parsed, as they are stored as strings
 				JsonJavaObject o = (JsonJavaObject)json;

@@ -284,7 +284,7 @@ public abstract class ClientService {
 				HttpEntity entity) throws ClientServicesException {
 			String contentType = getContentType();
 			if (StringUtil.isNotEmpty(contentType)) {
-				httpRequestBase.setHeader("Content-type", contentType);
+				httpRequestBase.setHeader("Content-Type", contentType);
 			}
 			((HttpEntityEnclosingRequestBase) httpRequestBase).setEntity(entity);
 		}
@@ -408,7 +408,7 @@ public abstract class ClientService {
 		protected void setEntity(HttpClient httpClient, HttpRequestBase httpRequestBase, Args args,
 				HttpEntity entity) throws ClientServicesException {
 			httpRequestBase.setHeader("slug", name);
-			httpRequestBase.setHeader("Content-type", getContentType());
+			httpRequestBase.setHeader("Content-Type", getContentType());
 			super.setEntity(httpClient, httpRequestBase, args, entity);
 		}
 	}
@@ -472,7 +472,7 @@ public abstract class ClientService {
 			if (name != null) {
 				httpRequestBase.setHeader("slug", name);
 			}
-			httpRequestBase.setHeader("Content-type", getContentType());
+			httpRequestBase.setHeader("Content-Type", getContentType());
 			super.setEntity(httpClient, httpRequestBase, args, entity);
 		}
 
@@ -680,24 +680,24 @@ public abstract class ClientService {
 	// GET
 	// =================================================================
 
-	public final Object get(String serviceUrl) throws ClientServicesException {
+	public final Response get(String serviceUrl) throws ClientServicesException { 
 		return get(serviceUrl, null, null);
 	}
 
-	public final Object get(String serviceUrl, Map<String, String> parameters) throws ClientServicesException {
+	public final Response get(String serviceUrl, Map<String, String> parameters) throws ClientServicesException {
 		return get(serviceUrl, parameters, null);
 	}
 
-	public final Object get(String serviceUrl, Handler format) throws ClientServicesException {
+	public final Response get(String serviceUrl, Handler format) throws ClientServicesException {
 		return get(serviceUrl, null, format);
 	}
 
-	public final Object get(String serviceUrl, Map<String, String> parameters, Handler format)
+	public final Response get(String serviceUrl, Map<String, String> parameters, Handler format)
 			throws ClientServicesException {
 		return get(serviceUrl, parameters, null, format);
 	}
 
-	public final Object get(String serviceUrl, Map<String, String> parameters, Map<String, String> headers,
+	public final Response get(String serviceUrl, Map<String, String> parameters, Map<String, String> headers,
 			Handler format) throws ClientServicesException {
 		Args args = createArgs(serviceUrl, parameters);
 		if (headers != null) {
@@ -707,7 +707,7 @@ public abstract class ClientService {
 		return get(args);
 	}
 
-	public final Object get(Args args) throws ClientServicesException {
+	public final Response get(Args args) throws ClientServicesException {
 		return xhr(METHOD_GET, args, null);
 	}
 
@@ -715,23 +715,23 @@ public abstract class ClientService {
 	// POST
 	// =================================================================
 
-	public final Object post(String serviceUrl, Object content) throws ClientServicesException {
+	public final Response post(String serviceUrl, Object content) throws ClientServicesException {
 		return post(serviceUrl, null, content, null);
 	}
 
-	public final Object post(String serviceUrl, Map<String, String> parameters, Object content)
+	public final Response post(String serviceUrl, Map<String, String> parameters, Object content)
 			throws ClientServicesException {
 		return post(serviceUrl, parameters, content, null);
 	}
 
-	public final Object post(String serviceUrl, Map<String, String> parameters, Object content, Handler format)
+	public final Response post(String serviceUrl, Map<String, String> parameters, Object content, Handler format)
 			throws ClientServicesException {
 		Args args = createArgs(serviceUrl, parameters);
 		args.setHandler(format);
 		return post(args, content);
 	}
 
-	public final Object post(String serviceUrl, Map<String, String> parameters, Map<String, String> headers,
+	public final Response post(String serviceUrl, Map<String, String> parameters, Map<String, String> headers,
 			Object content, Handler format) throws ClientServicesException {
 		Args args = createArgs(serviceUrl, parameters);
 		args.setHandler(format);
@@ -739,7 +739,7 @@ public abstract class ClientService {
 		return post(args, content);
 	}
 
-	public final Object post(Args args, Object content) throws ClientServicesException {
+	public final Response post(Args args, Object content) throws ClientServicesException {
 		return xhr(METHOD_POST, args, content);
 	}
 
@@ -747,23 +747,23 @@ public abstract class ClientService {
 	// PUT
 	// =================================================================
 
-	public final Object put(String serviceUrl, Object content) throws ClientServicesException {
+	public final Response put(String serviceUrl, Object content) throws ClientServicesException {
 		return put(serviceUrl, null, content, null);
 	}
 
-	public final Object put(String serviceUrl, Map<String, String> parameters, Object content)
+	public final Response put(String serviceUrl, Map<String, String> parameters, Object content)
 			throws ClientServicesException {
 		return put(serviceUrl, parameters, content, null);
 	}
 
-	public final Object put(String serviceUrl, Map<String, String> parameters, Object content, Handler format)
+	public final Response put(String serviceUrl, Map<String, String> parameters, Object content, Handler format)
 			throws ClientServicesException {
 		Args args = createArgs(serviceUrl, parameters);
 		args.setHandler(format);
 		return put(args, content);
 	}
 
-	public final Object put(String serviceUrl, Map<String, String> parameters, Map<String, String> headers,
+	public final Response put(String serviceUrl, Map<String, String> parameters, Map<String, String> headers,
 			Object content, Handler format) throws ClientServicesException {
 		Args args = createArgs(serviceUrl, parameters);
 		args.setHandler(format);
@@ -771,7 +771,7 @@ public abstract class ClientService {
 		return put(args, content);
 	}
 
-	public final Object put(Args args, Object content) throws ClientServicesException {
+	public final Response put(Args args, Object content) throws ClientServicesException {
 		return xhr(METHOD_PUT, args, content);
 	}
 
@@ -779,23 +779,31 @@ public abstract class ClientService {
 	// DELETE
 	// =================================================================
 
-	public final Object delete(String serviceUrl) throws ClientServicesException {
+	public final Response delete(String serviceUrl) throws ClientServicesException {
 		return delete(serviceUrl, null, null);
 	}
 
-	public final Object delete(String serviceUrl, Map<String, String> parameters)
+	public final Response delete(String serviceUrl, Map<String, String> parameters)
 			throws ClientServicesException {
 		return delete(serviceUrl, parameters, null);
 	}
 
-	public final Object delete(String serviceUrl, Map<String, String> parameters, Handler format)
+	public final Response delete(String serviceUrl, Map<String, String> parameters, Handler format)
 			throws ClientServicesException {
 		Args args = createArgs(serviceUrl, parameters);
 		args.setHandler(format);
 		return delete(args);
 	}
+    public final Response delete(String serviceUrl, Map<String, String> parameters, Map<String, String> headers,
+            Handler format) throws ClientServicesException {
+        Args args = createArgs(serviceUrl, parameters);
+        args.setHandler(format);
+        args.setHeaders(headers);
+        return delete(args);        
+    }
 
-	public final Object delete(Args args) throws ClientServicesException {
+
+	public final Response delete(Args args) throws ClientServicesException {
 		return xhr(METHOD_DELETE, args, null);
 	}
 
@@ -803,7 +811,7 @@ public abstract class ClientService {
 	// Actual request execution
 	// =================================================================
 
-	public Object xhr(String method, Args args, Object content) throws ClientServicesException {
+	public Response xhr(String method, Args args, Object content) throws ClientServicesException {
 
 		checkAuthentication(args);
 		checkUrl(args);
@@ -826,7 +834,7 @@ public abstract class ClientService {
 		}
 	}
 
-	protected Object execRequest(HttpRequestBase httpRequestBase, Args args, Object content)
+	protected Response execRequest(HttpRequestBase httpRequestBase, Args args, Object content)
 			throws ClientServicesException {
 
 		if (Profiler.isEnabled()) {
@@ -854,7 +862,7 @@ public abstract class ClientService {
 	 *            the args (such as url params) that have been pushed through by the calling service
 	 * @return true if the client wants the super class to take care of processing the content
 	 */
-	protected Object _xhr(HttpRequestBase httpRequestBase, Args args, Object content)
+	protected Response _xhr(HttpRequestBase httpRequestBase, Args args, Object content)
 			throws ClientServicesException {
 		DefaultHttpClient httpClient = createHttpClient(httpRequestBase, args);
 		initialize(httpClient);
@@ -912,7 +920,7 @@ public abstract class ClientService {
 		}
 	}
 
-	protected Object processResponse(HttpClient httpClient, HttpRequestBase httpRequestBase,
+	protected Response processResponse(HttpClient httpClient, HttpRequestBase httpRequestBase,
 			HttpResponse response, Args args) throws ClientServicesException {
 		if (!checkStatus(response.getStatusLine().getStatusCode())) {
 			if (SbtCoreLogger.SBT.isErrorEnabled()) {
@@ -931,7 +939,8 @@ public abstract class ClientService {
 			forceAuthentication(args);
 			return null;
 		}
-		return _parseResult(httpRequestBase, response, args.handler);
+		Handler format = _parseResult(httpRequestBase, response, args.handler);
+		return new Response(httpClient, response, httpRequestBase, args, format);
 	}
 
 	private boolean checkStatus(int statusCode) {
@@ -1036,12 +1045,12 @@ public abstract class ClientService {
 		return FORMAT_INPUTSTREAM;
 	}
 
-	protected Object _parseResult(HttpRequestBase request, HttpResponse response, Handler format)
+	protected Handler _parseResult(HttpRequestBase request, HttpResponse response, Handler format)
 			throws ClientServicesException {
 		try {
 			int statusCode = response.getStatusLine().getStatusCode();
 			if (response.getStatusLine().getStatusCode() == HttpServletResponse.SC_INTERNAL_SERVER_ERROR) {
-				return generateResultError500(statusCode, request, response);
+				generateResultError500(statusCode, request, response);
 			}
 
 			HttpEntity entity = response.getEntity();
@@ -1058,17 +1067,17 @@ public abstract class ClientService {
 																												// for
 																												// successful
 																												// deletion.
-				return generateResultError(statusCode, request, response, entity);
+				generateResultError(statusCode, request, response, entity);
 			}
 
 			// SBT doesn't have a JS interpreter...
 			if (format != null) {
-				return format.parseContent(request, response, entity);
+				return format;
 			}
 			// else if (StringUtil.equals(format, FORMAT_CONNECTIONS_OUTPUT)) {
 			// return readLocationHeaderAsString(httpRequestBase, response, entity);
 			// }
-			return response;
+			return new HandlerRaw();
 		} catch (Exception ex) {
 			if (ex instanceof ClientServicesException) {
 				throw (ClientServicesException) ex;
@@ -1077,7 +1086,7 @@ public abstract class ClientService {
 		}
 	}
 
-	protected Object generateResultError500(int statusCode, HttpRequestBase request, HttpResponse response)
+	protected void generateResultError500(int statusCode, HttpRequestBase request, HttpResponse response)
 			throws ClientServicesException {
 		// PHIL:
 		// Why SBT exception and not ClientService
@@ -1087,7 +1096,7 @@ public abstract class ClientService {
 						.getReasonPhrase());
 	}
 
-	protected Object generateResultError(int statusCode, HttpRequestBase request, HttpResponse response,
+	protected void generateResultError(int statusCode, HttpRequestBase request, HttpResponse response,
 			HttpEntity entity) throws ClientServicesException {
 		throw new ClientServicesException(response, request);
 	}

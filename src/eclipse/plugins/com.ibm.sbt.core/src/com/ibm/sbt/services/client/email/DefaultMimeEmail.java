@@ -17,7 +17,6 @@ import javax.naming.NameNotFoundException;
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonObject;
-import com.ibm.sbt.services.client.smartcloud.files.FileService;
 
 /**
  * A default implementation of MimeEmail.

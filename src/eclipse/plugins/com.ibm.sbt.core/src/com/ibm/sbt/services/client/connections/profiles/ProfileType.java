@@ -36,6 +36,7 @@ public enum ProfileType {
 	MESSAGES_ALL("atom/mv/theboard/entries/all.do"),
 	MESSAGE_BOARD_ENTRIES("atom/mv/theboard/entries.do"),
 	MESSAGE_BOARD_COMMENTS("atom/mv/theboard/comments.do"),
+	TAGS("atom/profileTags.do"),
 	MESSAGES_COLLEAGUES("atom/mv/theboard/entries/related.do");
 	
 	private String proType;

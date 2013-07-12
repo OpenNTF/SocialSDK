@@ -68,7 +68,7 @@ public abstract class DataAccessBean {
 		envNames = StringUtil.EMPTY_STRING_ARRAY;
 		environments.clear();
 	}
-	
+
 	public synchronized String getPreferredEnvironment() throws IOException {
 		updateCache();
 		PlaygroundEnvironment pref = findPreferredEnvironment();
@@ -92,6 +92,26 @@ public abstract class DataAccessBean {
 			}
 		}
 		return findPreferredEnvironment();
+	}
+
+	
+	public PlaygroundEnvironment getCurrentEnvironment(String envName) {
+		try {
+			if(StringUtil.isEmpty(envName)) {
+				FacesContext ctx = FacesContext.getCurrentInstance();
+				if(ctx!=null) {
+					envName = (String)ctx.getExternalContext().getSessionMap().get("environment");
+				}
+			}
+			if(StringUtil.isNotEmpty(envName)) {
+				PlaygroundEnvironment e = environments.get(envName);
+				if(e!=null) {
+					return e;
+				}
+			}
+			return findPreferredEnvironment();
+		} catch(IOException e) {}
+		return null;
 	}
 
 	public PlaygroundEnvironment findPreferredEnvironment() throws IOException {

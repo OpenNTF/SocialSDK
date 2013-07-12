@@ -15,16 +15,7 @@
  */
 package com.ibm.xsp.extlib.sbt.services.client;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpRequestBase;
-
-import com.ibm.commons.util.StringUtil;
-import com.ibm.sbt.services.client.BaseService;
 import com.ibm.sbt.services.client.ClientService;
-import com.ibm.sbt.services.client.ClientService.Args;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.endpoints.Endpoint;
 

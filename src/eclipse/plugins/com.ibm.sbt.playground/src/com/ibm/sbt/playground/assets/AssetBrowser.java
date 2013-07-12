@@ -153,10 +153,10 @@ public class AssetBrowser {
             return true; // no jsLibId specified in request url, include all samples.
         String sampleJsLibArray[] = sampleJsLibs.split(",");
         for(String sampleJsLib : sampleJsLibArray){
-            if(!this.jsLibId.contains(sampleJsLib))
-                return false;
+            if(this.jsLibId.contains(sampleJsLib))
+                return true;
         }
-        return true;
+        return false;
     }
     
     private boolean endpointMatches(String sampleEndpoints){
@@ -164,15 +164,20 @@ public class AssetBrowser {
             return true; // no endpoints in context for some reason, include samples.
         String[] sampleEndpointsArray = sampleEndpoints.split(",");
         for(String sampleEndpoint : sampleEndpointsArray){
-            for(SBTEnvironment.Endpoint envEndpoint : this.endpoints){
-                if(!StringUtil.equals(sampleEndpoint, envEndpoint.getName())){
-                    return false;
-                }
-            }
+            if(!endpointsArrayContains(sampleEndpoint))
+                return false;
         }
         return true;
     }
-
+    
+    private boolean endpointsArrayContains(String endpointName){
+        for(SBTEnvironment.Endpoint envEndpoint : this.endpoints){
+            if(StringUtil.equals(envEndpoint.getName(), endpointName))
+                return true;
+        }
+        return false;
+    }
+    
     protected boolean isExtension(String ext) {
 		if(extensions!=null) {
 			for(int i=0; i<extensions.length; i++) {

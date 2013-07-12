@@ -28,7 +28,6 @@ import com.ibm.sbt.core.configuration.Configuration;
 import com.ibm.sbt.security.authentication.oauth.consumer.AccessToken;
 import com.ibm.sbt.security.authentication.oauth.consumer.OAConstants;
 import com.ibm.sbt.security.authentication.oauth.consumer.OAuth1Handler;
-import com.ibm.sbt.security.authentication.oauth.consumer.OAuth2Handler;
 import com.ibm.sbt.security.credential.store.CredentialStore;
 import com.ibm.sbt.security.credential.store.CredentialStoreFactory;
 import com.ibm.sbt.service.core.handlers.AbstractServiceHandler;
@@ -37,10 +36,11 @@ import com.ibm.sbt.services.util.AnonymousCredentialStore;
 /**
  * OAuth servlet.
  * <p>
- * This servlet gets the oauth verifier back from the oauth provider
+ * This servlet gets the oauth verifier back from the oauth handler
  * </p>
  * 
  * @author Philippe Riand
+ * @author Vimal Dhupar
  */
 public class OACallback extends AbstractServiceHandler {
 
@@ -65,7 +65,6 @@ public class OACallback extends AbstractServiceHandler {
 		Context context = Context.get();
 
 		// Find the OAuth dance object being used
-//		OADance dance = readDance(context);
 		OAuth1Handler oAuthHandler = (OAuth1Handler)context.getSessionMap().get(Configuration.OAUTH1_HANDLER);
 		if (oAuthHandler == null) {
 			throw new ServletException(
@@ -89,8 +88,7 @@ public class OACallback extends AbstractServiceHandler {
 			if (!context.isCurrentUserAnonymous()) {
 				CredentialStore cs = CredentialStoreFactory.getCredentialStore(oAuthHandler.getCredentialStore());
 				if (cs != null) {
-					// But we store it uniquely if the current user is not
-					// anonymous
+					// But we store it uniquely if the current user is not anonymous
 					cs.store(oAuthHandler.getServiceName(), OAuth1Handler.ACCESS_TOKEN_STORE_TYPE, context.getCurrentUserId(), tk);
 				}
 			} else {
@@ -107,16 +105,4 @@ public class OACallback extends AbstractServiceHandler {
 			throw new ServletException(e);
 		}
 	}
-
-//	protected OADance readDance(Context context) throws ServletException {
-//		OADance dance = (OADance) context.getSessionMap().get(
-//				OADance.OAUTHDANCE_KEY);
-//		if (dance == null) {
-//			// should not happen
-//			throw new ServletException("Missing OAuth context");
-//		}
-//		context.getSessionMap().remove(OADance.OAUTHDANCE_KEY);
-//
-//		return dance;
-//	}
 }

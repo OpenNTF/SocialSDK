@@ -22,8 +22,6 @@ import java.net.URISyntaxException;
 import java.net.URLEncoder;
 import java.security.SecureRandom;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -61,12 +59,6 @@ import com.ibm.sbt.util.SBTException;
 public class OAuth1Handler extends OAuthHandler implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-
-	private static final int			BYTE_ARRAY_SIZE	= ((23 * 5) / 8) + 1;
-	private static final SecureRandom	SECURE_RANDOM	= new SecureRandom();
-	public static final int EXPIRE_THRESHOLD = 60; // 60sec = 1min
-	public static final String OAUTHDANCE_KEY = "sbt.oauth.dance";
-	
 	private static final ProfilerType profilerLoadCredentialStore = new ProfilerType("OAuth: Load a token from the store"); //$NON-NLS-1$
 	private static final ProfilerType profilerAcquireToken = new ProfilerType("OAuth: Acquire a token from the service"); //$NON-NLS-1$
 	private static final ProfilerType profilerRenewToken = new ProfilerType("OAuth: Renew a token from the provider"); //$NON-NLS-1$
@@ -74,40 +66,37 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 	private static final ProfilerType profilerReadTempToken = new ProfilerType("OAuth: Acquire a temporary token from the provider"); //$NON-NLS-1$
 	private static final ProfilerType profilerReadToken = new ProfilerType("OAuth: Read a token with verifier from the provider"); //$NON-NLS-1$
 
-	protected String					OAuthCallbackConfirmed;
-	protected String					requestToken;
-	private String						requestTokenSecret;
-	protected String					verifierCode;
-	private String						accessTokenSecret;
-	private String						accessToken;
-	private String						expiresIn;
-	private String						authorizationExpiresIn;
-	private String						oauth_session_handle;
-	private int 						expireThreshold;
-	private String 						applicationPage;
-	private boolean storeRead;
-	public static final String ACCESS_TOKEN_STORE_TYPE = "OAUTH1_ACCESS_TOKEN_STORE";
-	public static final String CONSUMER_TOKEN_STORE_TYPE = "OAUTH1_CONSUMER_TOKEN_STORE";
-	private String appId;
-	private String serviceName;
-	private String credentialStore;
-
-	private String consumerKey;
-	private String consumerSecret;
-	private String requestTokenURL;
-	private String authorizationURL;
-	private String accessTokenURL;
-	private String signatureMethod;
-	private boolean forceTrustSSLCertificate;
-	public String applicationAccessToken;
-
-
-	// for logging
-	private static final String			sourceClass		= OAuth1Handler.class.getName();
-	private static final Logger			logger			= Logger.getLogger(sourceClass);
+	private static final int 				BYTE_ARRAY_SIZE				= ((23 * 5) / 8) + 1;
+	private static final SecureRandom		SECURE_RANDOM				= new SecureRandom();
+	public static final int 				EXPIRE_THRESHOLD 			= 60; // 60sec = 1min
+	public static final String 				ACCESS_TOKEN_STORE_TYPE 	= "OAUTH1_ACCESS_TOKEN_STORE";
+	public static final String 				CONSUMER_TOKEN_STORE_TYPE 	= "OAUTH1_CONSUMER_TOKEN_STORE";
+	
+	protected String		OAuthCallbackConfirmed;
+	protected String		requestToken;
+	private String			requestTokenSecret;
+	protected String		verifierCode;
+	private String			accessTokenSecret;
+	private String			accessToken;
+	private String			expiresIn;
+	private String			authorizationExpiresIn;
+	private String			oauth_session_handle;
+	private int 			expireThreshold;
+	private String 			applicationPage;
+	private boolean 		storeRead;
+	private String 			appId;
+	private String 			serviceName;
+	private String 			credentialStore;
+	private String 			consumerKey;
+	private String 			consumerSecret;
+	private String 			requestTokenURL;
+	private String 			authorizationURL;
+	private String 			accessTokenURL;
+	private String 			signatureMethod;
+	private boolean			forceTrustSSLCertificate;
+	public String 			applicationAccessToken;
 
 	public OAuth1Handler() {
-		//		this.provider = provider;
 		this.expireThreshold = EXPIRE_THRESHOLD;
 	}
 
@@ -145,16 +134,11 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 	 * @throws Exception
 	 */
 	public void getRequestTokenFromServer() throws Exception {
-//		if (logger.isLoggable(Level.FINEST)) {
-//			logger.entering(sourceClass, "getRequestTokenFromServer", new Object[] {});
-//		}
-
 		HttpGet method = null;
 		int responseCode = HttpStatus.SC_OK;
 		String responseBody = null;
 		InputStream content = null;
 		Context context = Context.get();
-//		OAProvider oaProvider = getOAProvider();
 		try {
 			HttpClient client = new DefaultHttpClient();
 			if (getForceTrustSSLCertificate()) {
@@ -178,9 +162,6 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 			url.append(Configuration.CALLBACK).append('=')
 			.append(URLEncoder.encode(getCallbackUrl(context), "UTF-8"));
 			method = new HttpGet(url.toString());
-			if (logger.isLoggable(Level.FINEST)) {
-				logger.log(Level.FINEST, "OAuth1.0 making network call to get Request Token from Server", url);
-			}
 
 			HttpResponse httpResponse = client.execute(method);
 			responseCode = httpResponse.getStatusLine().getStatusCode();
@@ -215,12 +196,7 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 			setRequestToken(getTokenValue(responseBody, Configuration.OAUTH_TOKEN));
 			setRequestTokenSecret(getTokenValue(responseBody, Configuration.OAUTH_TOKEN_SECRET));
 			getTokenValue(responseBody, Configuration.OAUTH1_ISSUEDON);
-			// Date issuedOn = new Date(Long.valueOf(issuedOnDate));
 			setExpiresIn(getTokenValue(responseBody, Configuration.OAUTH1_EXPIRESIN));
-		}
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.exiting(sourceClass, "getRequestTokenFromServer", new Object[] { getRequestToken(),
-					getRequestTokenSecret(), responseBody, responseCode });
 		}
 	}
 
@@ -229,14 +205,9 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 	 * @see com.ibm.sbt.security.authentication.oauth.consumer.OAuthHandler#getAccessTokenFromServer()
 	 */
 	public void getAccessTokenFromServer() throws Exception {
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "getAccessTokenFromServer", new Object[] {});
-		}
-
 		HttpGet method = null;
 		int responseCode = HttpStatus.SC_OK;
 		String responseBody = null;
-//		OAProvider oaProvider = getOAProvider();
 		try {
 			HttpClient client = new DefaultHttpClient();
 			if (getForceTrustSSLCertificate()) {
@@ -267,10 +238,6 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 			url.append(Configuration.VERSION).append('=')
 			.append(URLEncoder.encode(Configuration.OAUTH_VERSION1, "UTF-8"));
 			method = new HttpGet(url.toString());
-
-			if (logger.isLoggable(Level.FINEST)) {
-				logger.log(Level.FINEST, "OAuth1.0 making network call to get Access Token from Server", url);
-			}
 
 			HttpResponse httpResponse = client.execute(method);
 			responseCode = httpResponse.getStatusLine().getStatusCode();
@@ -308,21 +275,11 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 			setAccessToken(getTokenValue(responseBody, Configuration.OAUTH_TOKEN));
 			setAccessTokenSecret(getTokenValue(responseBody, Configuration.OAUTH_TOKEN_SECRET));
 			getTokenValue(responseBody, Configuration.OAUTH1_ISSUEDON);
-			// Date issuedOn = new Date(Long.valueOf(issuedOnDate));
 			setExpiresIn(getTokenValue(responseBody, Configuration.OAUTH1_EXPIRESIN));
-			// setOauth_session_handle(getTokenValue(responseBody, Configuration.))
-		}
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.exiting(sourceClass, "getAccessTokenFromServer", new Object[] { getAccessToken(),
-					getAccessTokenSecret(), responseBody, responseCode });
 		}
 	}
 
 	public String getAccessTokenURL() {
-//		if (logger.isLoggable(Level.FINEST)) {
-//			logger.entering(sourceClass, "getAccessTokenURL", new Object[] {});
-//		}
-//		OAProvider oap = getOAProvider();
 		if (getServerUrl() != null) {
 			return getServerUrl() + accessTokenURL;
 		} else {
@@ -331,10 +288,6 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 	}
 
 	public String getRequestTokenURL() {
-//		if (logger.isLoggable(Level.FINEST)) {
-//			logger.entering(sourceClass, "getRequestTokenURL", new Object[] {});
-//		}
-//		OAProvider oap = getOAProvider();
 		if (getServerUrl() != null) {
 			return getServerUrl() + requestTokenURL;
 		} else {
@@ -365,9 +318,6 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 	 */
 	@Override
 	public String createAuthorizationHeader() {
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "createAuthorizationHeader", new Object[] {});
-		}
 		StringBuilder authHdr = new StringBuilder(1024);
 		authHdr.append("OAuth ");
 		authHdr.append(Configuration.CONSUMER_KEY).append("=\"").append(percentEncode(getConsumerKey())).append("\",");
@@ -427,10 +377,6 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 	public void setOauth_session_handle(String oauth_session_handle) {
 		this.oauth_session_handle = oauth_session_handle;
 	}
-
-//	public OAProvider getOAProvider() {
-//		return provider;
-//	}
 
 	@Override
 	public String getAccessToken() {
@@ -541,10 +487,6 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 
 	public void setSignatureMethod(String signatureMethod) {
 		this.signatureMethod = signatureMethod;
-//		// If HMAC is used, change the handler
-//		if (StringUtil.equalsIgnoreCase(Configuration.HMAC_SIGNATURE, signatureMethod)) {
-//			this.setOauthHandler(new HMACOAuth1Handler(this));
-//		}
 	}
 
 	public int getExpireThreshold() {
@@ -692,12 +634,10 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 		if (login) {
 			// Here if we are forced to start an OAuth dance, we clear the Store from any existing tokens for this application and fetch new tokens.
 			deleteToken();
-			//			OADance oauth = createOAuthDance(context, userId);
+			setApplicationPage(getApplicationPage(context));
+			context.getSessionMap().put(Configuration.OAUTH1_HANDLER, this);
 			try {
 				// This sends a signal
-				setApplicationPage(getApplicationPage(context));
-				
-				context.getSessionMap().put(Configuration.OAUTH1_HANDLER, this);
 				perform3LegsDance(context);
 			} catch (Exception ex) {
 				throw new SBTException(ex, "Error while acquiring OAuth token");
@@ -730,9 +670,6 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 			// Call the OAuth1Handler's method to get the Request token by
 			// making network call.
 			getRequestTokenFromServer();
-
-			// Store the OAuthDance
-			context.getSessionMap().put(OAUTHDANCE_KEY, this);
 
 			String redirectUrl = getAuthorizationURL() + "?" + OAConstants.OAUTH_TOKEN + "=" + getRequestToken();
 			// tbd: is there a better way to handle this DropboxFiles specific parameter?
@@ -785,60 +722,60 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 		boolean shortKey = false;
 		boolean shortSecret = false;
 		Context context = Context.get();
-//		if (oaProvider != null) {
-			callback = getCallbackUrl(context);
-			secret = getConsumerSecret();
-			if (StringUtil.isNotEmpty(secret)) {
-				int pre = 0;
-				if (secret.length() > 12) {
-					pre = 4;
-				} else if (secret.length() > 9) {
-					pre = 3;
+		//		if (oaProvider != null) {
+		callback = getCallbackUrl(context);
+		secret = getConsumerSecret();
+		if (StringUtil.isNotEmpty(secret)) {
+			int pre = 0;
+			if (secret.length() > 12) {
+				pre = 4;
+			} else if (secret.length() > 9) {
+				pre = 3;
+			} else {
+				shortSecret = true;
+				if (secret.length() > 6) {
+					pre = 2;
 				} else {
-					shortSecret = true;
-					if (secret.length() > 6) {
-						pre = 2;
-					} else {
-						secret = StringUtil
-						.format("secret is too short to display, {0} characters long",
-								secret.length());
-					}
-				}
-				if (pre >= 2) {
-					String tmp = secret.substring(0, pre);
-					tmp = tmp + "....";
-					tmp = tmp + secret.substring(secret.length() - pre);
-					secret = tmp;
+					secret = StringUtil
+					.format("secret is too short to display, {0} characters long",
+							secret.length());
 				}
 			}
-			key = getConsumerKey();
-			if (StringUtil.isNotEmpty(key)) {
-				int pre = 0;
-				if (key.length() > 12) {
-					pre = 4;
-				} else if (key.length() > 9) {
-					pre = 3;
+			if (pre >= 2) {
+				String tmp = secret.substring(0, pre);
+				tmp = tmp + "....";
+				tmp = tmp + secret.substring(secret.length() - pre);
+				secret = tmp;
+			}
+		}
+		key = getConsumerKey();
+		if (StringUtil.isNotEmpty(key)) {
+			int pre = 0;
+			if (key.length() > 12) {
+				pre = 4;
+			} else if (key.length() > 9) {
+				pre = 3;
+			} else {
+				shortKey = true;
+				if (key.length() > 6) {
+					pre = 2;
 				} else {
-					shortKey = true;
-					if (key.length() > 6) {
-						pre = 2;
-					} else {
-						key = StringUtil
-						.format("key is too short to display, {0} characters long",
-								key.length());
-					}
-				}
-				if (pre >= 2) {
-					String tmp = key.substring(0, pre);
-					tmp = tmp + "....";
-					tmp = tmp + key.substring(key.length() - pre);
-					key = tmp;
+					key = StringUtil
+					.format("key is too short to display, {0} characters long",
+							key.length());
 				}
 			}
-			requestUrl = getRequestTokenURL();
-			authorizeUrl = getAuthorizationURL();
-			accessUrl = getAccessTokenURL();
-//		}
+			if (pre >= 2) {
+				String tmp = key.substring(0, pre);
+				tmp = tmp + "....";
+				tmp = tmp + key.substring(key.length() - pre);
+				key = tmp;
+			}
+		}
+		requestUrl = getRequestTokenURL();
+		authorizeUrl = getAuthorizationURL();
+		accessUrl = getAccessTokenURL();
+		//		}
 
 		String formattedString = StringUtil
 		.format(" requestUrl:{0}, authorizeUrl: {1}, accessUrl: {2}, callback: {3}, truncated key:{4}, truncated secret:{5}.",
@@ -1112,7 +1049,7 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 	 * Read the OAuth token from the verifier.
 	 */
 	public AccessToken readToken(String token, String verifier)
-			throws OAuthException {
+	throws OAuthException {
 		if (Profiler.isEnabled()) {
 			ProfilerAggregator agg = Profiler.startProfileBlock(
 					profilerReadToken, "");
@@ -1127,9 +1064,9 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 		}
 	}
 	protected AccessToken _readToken(String token, String verifier)
-			throws OAuthException {
+	throws OAuthException {
 		// first we set the Verifier which will be used to get the Access Token
-//		setVerifierCode(verifier);
+		//		setVerifierCode(verifier);
 		try {
 			getAccessTokenFromServer();
 		} catch (IOException e) {
@@ -1144,7 +1081,7 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 
 		return createToken(getAppId(), getServiceName(), this, getUserId());
 	}
-	
+
 	private String getUserId() {
 		Context context = Context.get();
 		return context.getCurrentUserId();

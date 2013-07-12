@@ -24,11 +24,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.util.StringUtil;
+import com.ibm.sbt.core.configuration.Configuration;
 import com.ibm.sbt.security.authentication.oauth.consumer.AccessToken;
 import com.ibm.sbt.security.authentication.oauth.consumer.OAConstants;
-import com.ibm.sbt.security.authentication.oauth.consumer.OAProvider;
-import com.ibm.sbt.security.authentication.oauth.consumer.util.OADance;
+import com.ibm.sbt.security.authentication.oauth.consumer.OAuth1Handler;
+import com.ibm.sbt.security.authentication.oauth.consumer.OAuth2Handler;
 import com.ibm.sbt.security.credential.store.CredentialStore;
+import com.ibm.sbt.security.credential.store.CredentialStoreFactory;
 import com.ibm.sbt.service.core.handlers.AbstractServiceHandler;
 import com.ibm.sbt.services.util.AnonymousCredentialStore;
 
@@ -63,39 +65,41 @@ public class OACallback extends AbstractServiceHandler {
 		Context context = Context.get();
 
 		// Find the OAuth dance object being used
-		OADance dance = readDance(context);
-		if (dance == null) {
+//		OADance dance = readDance(context);
+		OAuth1Handler oAuthHandler = (OAuth1Handler)context.getSessionMap().get(Configuration.OAUTH1_HANDLER);
+		if (oAuthHandler == null) {
 			throw new ServletException(
 					"Internal Error: Cannot find the OAuth object back from the request");
 		}
 
 		// Read the oauth parameters
 		try {
-			String oauth_token = (String) context.getRequestParameterMap().get(
-					OAConstants.OAUTH_TOKEN);
-			String oauth_verifier = (String) context.getRequestParameterMap()
-					.get(OAConstants.OAUTH_VERIFIER);
-			AccessToken tk = dance.readToken(oauth_token, oauth_verifier);
+			String oauth_token = (String) context.getRequestParameterMap().get(OAConstants.OAUTH_TOKEN);
+			String oauth_verifier = (String) context.getRequestParameterMap().get(OAConstants.OAUTH_VERIFIER);
+			
+			oAuthHandler.setAccessToken(oauth_token);
+			oAuthHandler.setVerifierCode(oauth_verifier);
+			
+			AccessToken tk = oAuthHandler.readToken(oauth_token, oauth_verifier);
 			if (tk == null) {
 				// should not happen
 				throw new ServletException("Missing OAuth token");
 			}
 			// Store the new key
 			if (!context.isCurrentUserAnonymous()) {
-				CredentialStore cs = dance.getCredentialStore();
+				CredentialStore cs = CredentialStoreFactory.getCredentialStore(oAuthHandler.getCredentialStore());
 				if (cs != null) {
 					// But we store it uniquely if the current user is not
 					// anonymous
-					cs.store(dance.getServiceName(), OAProvider.ACCESS_TOKEN_STORE_TYPE,
-							context.getCurrentUserId(), tk);
+					cs.store(oAuthHandler.getServiceName(), OAuth1Handler.ACCESS_TOKEN_STORE_TYPE, context.getCurrentUserId(), tk);
 				}
 			} else {
 				AnonymousCredentialStore.storeCredentials(context, tk,
-						dance.getAppId(), dance.getServiceName());
+						oAuthHandler.getAppId(), oAuthHandler.getServiceName());
 			}
 
 			// redirect to the initial page
-			String applicationPage = dance.getApplicationPage();
+			String applicationPage = oAuthHandler.getApplicationPage();
 			if (StringUtil.isNotEmpty(applicationPage)) {
 				context.sendRedirect(applicationPage);
 			}
@@ -104,15 +108,15 @@ public class OACallback extends AbstractServiceHandler {
 		}
 	}
 
-	protected OADance readDance(Context context) throws ServletException {
-		OADance dance = (OADance) context.getSessionMap().get(
-				OADance.OAUTHDANCE_KEY);
-		if (dance == null) {
-			// should not happen
-			throw new ServletException("Missing OAuth context");
-		}
-		context.getSessionMap().remove(OADance.OAUTHDANCE_KEY);
-
-		return dance;
-	}
+//	protected OADance readDance(Context context) throws ServletException {
+//		OADance dance = (OADance) context.getSessionMap().get(
+//				OADance.OAUTHDANCE_KEY);
+//		if (dance == null) {
+//			// should not happen
+//			throw new ServletException("Missing OAuth context");
+//		}
+//		context.getSessionMap().remove(OADance.OAUTHDANCE_KEY);
+//
+//		return dance;
+//	}
 }

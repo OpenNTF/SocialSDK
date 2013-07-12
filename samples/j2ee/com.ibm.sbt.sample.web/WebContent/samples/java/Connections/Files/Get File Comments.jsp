@@ -14,17 +14,18 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<%@page import="com.ibm.sbt.services.client.connections.files.model.FileRequestParams"%>
-<%@page import="java.util.HashMap"%>
+<%@page import="com.ibm.sbt.services.client.connections.files.CommentEntryList"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.FileService"%>
+<%@page import="com.ibm.sbt.services.client.connections.files.model.CommentEntry"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.model.FileEntry"%>
+<%@page import="com.ibm.sbt.services.client.connections.files.FileEntryList"%>
+<%@page import="java.util.HashMap"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
-<%@page import="com.ibm.sbt.services.client.connections.files.model.*"%>
 
 <%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <html>
@@ -39,9 +40,9 @@
 	<%
     try {
         FileService fileService = new FileService();
-        List<FileEntry> fileEntries = fileService.getMyFiles();
+        FileEntryList fileEntries = fileService.getMyFiles();
         FileEntry fileEntry = fileEntries.get(0);
-        List<CommentEntry> commentEntries = fileService.getFilesComments(fileEntry, null);
+        CommentEntryList commentEntries = fileService.getAllFileComments(fileEntry.getFileId(), null);
         if (commentEntries != null && !commentEntries.isEmpty()) {
             for (CommentEntry commentEntry : commentEntries) {
                 out.println("Comment Id	: " + commentEntry.getCommentId() + " , ");

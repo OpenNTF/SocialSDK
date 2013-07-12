@@ -18,18 +18,15 @@ package com.ibm.sbt.services.client.connections.files;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
+
 import com.ibm.sbt.services.BaseUnitTest;
-import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.connections.files.model.CommentEntry;
 import com.ibm.sbt.services.client.connections.files.model.FileEntry;
 import com.ibm.sbt.services.client.connections.files.model.FileRequestParams;
@@ -37,47 +34,47 @@ import com.ibm.sbt.services.client.connections.files.model.FileRequestPayload;
 
 public class FileServiceTest extends BaseUnitTest {
 
-	public final static String	TEST_FILEID				= "7afe3eae-f64e-43ba-8a2f-16be74500c20";
 	public final static String	TEST_USERID				= "0EE5A7FA-3434-9A59-4825-7A7000278DAA";
 	public final static String	TEST_SHAREWITHUSERID	= "0EE5A7FA-3434-9A59-4825-7A7000278DAA";
-	public final static String	TEST_DELETEFILEID		= "1c19e88c-879d-404d-a832-ec1d16e8ac4c";
-	public final static String	TEST_COLLECTIONID		= "c34360ff-173d-4911-8d8d-243f9bd49830";
 	public final static String	TEST_CONTENT			= "This is a sample Content in the Test File. "
 																+ "Used mainly for Testing the Upload functionality of the FileService Connections API."
 																+ "Test Input : ddsfafw4t547£%*£^U£^JUL&><\03242";
 	public final static String	TEST_NAME				= "FS_TestUpload.txt";
+	public final static String USERNAME = "fadams";
+	public final static String PASSWORD = "passw0rd";
 
-	@Ignore
 	@Test
 	public void testReadFile() throws Exception {
-		FileService svc = new FileService();
-		authenticateEndpoint(svc.getEndpoint(), "fadams", "passw0rd");
-		FileEntry entry = svc.getFile(TEST_FILEID, true);
+		FileService fileService = new FileService();
+		authenticateEndpoint(fileService.getEndpoint(), USERNAME, PASSWORD);
+		FileEntryList listOfFiles = fileService.getMyFiles();
+		String testFileId = listOfFiles.get(0).getFileId();
+		FileEntry entry = fileService.getFile(testFileId, true);
 		assertEquals(entry.getCategory(), "document");
-		assertEquals(entry.getFileId(), TEST_FILEID);
+		assertEquals(entry.getFileId(), testFileId);
 	}
 
-	@Ignore
-	@Test
-	public void testReadFileWithLoadFalse() throws Exception {
-		FileService svc = new FileService();
-		FileEntry entry = svc.getFile(TEST_FILEID, false);
-		Assert.assertNull(entry.getCategory());
-	}
+//	@Test
+//	public void testReadFileWithLoadFalse() throws Exception {
+//		FileService fileService = new FileService();
+//		authenticateEndpoint(fileService.getEndpoint(), USERNAME, PASSWORD);
+//		FileEntryList listOfFiles = fileService.getMyFiles();
+//		String testFileId = listOfFiles.get(0).getFileId();
+//		FileEntry entry = fileService.getFile(testFileId, false);
+//		Assert.assertNull(entry.getCategory());
+//	}
 
-	@Ignore
-	@Test
-	public void testReadFileWithNullFileId() throws IOException, Exception {
-		FileService svc = new FileService();
-		FileEntry entry = svc.getFile(null, true);
-		Assert.assertNull(entry);
-	}
+//	@Test
+//	public void testReadFileWithNullFileId() throws IOException, Exception {
+//		FileService fileService = new FileService();
+//		FileEntry entry = fileService.getFile(null, true);
+//		Assert.assertNull(entry);
+//	}
 
-	@Ignore
 	@Test
 	public void testGetMyFiles() throws Exception {
 		FileService fileService = new FileService();
-		authenticateEndpoint(fileService.getEndpoint(), "fadams", "passw0rd");
+		authenticateEndpoint(fileService.getEndpoint(), USERNAME, PASSWORD);
 		List<FileEntry> fileEntries = fileService.getMyFiles();
 		if (fileEntries != null && !fileEntries.isEmpty()) {
 			for (FileEntry fEntry : fileEntries) {
@@ -87,11 +84,10 @@ public class FileServiceTest extends BaseUnitTest {
 		}
 	}
 
-	@Ignore
 	@Test
 	public void testGetFilesSharedWithMe() throws Exception {
 		FileService fileService = new FileService();
-		authenticateEndpoint(fileService.getEndpoint(), "fadams", "passw0rd");
+		authenticateEndpoint(fileService.getEndpoint(), USERNAME, PASSWORD);
 		List<FileEntry> fileEntries = fileService.getFilesSharedWithMe();
 		if (fileEntries != null && !fileEntries.isEmpty()) {
 			for (FileEntry fEntry : fileEntries) {
@@ -101,11 +97,10 @@ public class FileServiceTest extends BaseUnitTest {
 		}
 	}
 
-	@Ignore
 	@Test
 	public void testGetFilesSharedByMe() throws Exception {
 		FileService fileService = new FileService();
-		authenticateEndpoint(fileService.getEndpoint(), "fadams", "passw0rd");
+		authenticateEndpoint(fileService.getEndpoint(), USERNAME, PASSWORD);
 		List<FileEntry> fileEntries = fileService.getFilesSharedByMe();
 		if (fileEntries != null && !fileEntries.isEmpty()) {
 			for (FileEntry fEntry : fileEntries) {
@@ -115,11 +110,10 @@ public class FileServiceTest extends BaseUnitTest {
 		}
 	}
 
-	@Ignore
 	@Test
 	public void testGetPublicFiles() throws Exception {
 		FileService fileService = new FileService();
-		authenticateEndpoint(fileService.getEndpoint(), "fadams", "passw0rd");
+		authenticateEndpoint(fileService.getEndpoint(), USERNAME, PASSWORD);
 		List<FileEntry> fileEntries = fileService.getPublicFiles(null);
 		if (fileEntries != null && !fileEntries.isEmpty()) {
 			for (FileEntry fEntry : fileEntries) {
@@ -128,11 +122,10 @@ public class FileServiceTest extends BaseUnitTest {
 		}
 	}
 
-	@Ignore
 	@Test
 	public void testGetPinnedFiles() throws Exception {
 		FileService fileService = new FileService();
-		authenticateEndpoint(fileService.getEndpoint(), "fadams", "passw0rd");
+		authenticateEndpoint(fileService.getEndpoint(), USERNAME, PASSWORD);
 		List<FileEntry> fileEntries = fileService.getPinnedFiles(null);
 		if (fileEntries != null && !fileEntries.isEmpty()) {
 			for (FileEntry fEntry : fileEntries) {
@@ -141,11 +134,10 @@ public class FileServiceTest extends BaseUnitTest {
 		}
 	}
 
-	@Ignore
 	@Test
 	public void testGetMyFolders() throws Exception {
 		FileService fileService = new FileService();
-		authenticateEndpoint(fileService.getEndpoint(), "fadams", "passw0rd");
+		authenticateEndpoint(fileService.getEndpoint(), USERNAME, PASSWORD);
 		List<FileEntry> fileEntries = fileService.getMyFolders(null);
 		if (fileEntries != null && !fileEntries.isEmpty()) {
 			for (FileEntry fEntry : fileEntries) {
@@ -154,24 +146,24 @@ public class FileServiceTest extends BaseUnitTest {
 		}
 	}
 
-	@Ignore
-	@Test
-	public void testGetMyPinnedFolders() throws Exception {
-		FileService fileService = new FileService();
-		authenticateEndpoint(fileService.getEndpoint(), "fadams", "passw0rd");
-		List<FileEntry> fileEntries = fileService.getMyPinnedFolders(null);
-		if (fileEntries != null && !fileEntries.isEmpty()) {
-			for (FileEntry fEntry : fileEntries) {
-				assertEquals(fEntry.getCategory(), "collection");
-			}
-		}
-	}
+//  Commenting this test as the corresponding wrapper needs to be checked in yet.
+//	@Ignore
+//	@Test
+//	public void testGetMyPinnedFolders() throws Exception {
+//		FileService fileService = new FileService();
+//		authenticateEndpoint(fileService.getEndpoint(), USERNAME, PASSWORD);
+//		List<FileEntry> fileEntries = fileService.getMyPinnedFolders(null);
+//		if (fileEntries != null && !fileEntries.isEmpty()) {
+//			for (FileEntry fEntry : fileEntries) {
+//				assertEquals(fEntry.getCategory(), "collection");
+//			}
+//		}
+//	}
 
-	@Ignore
 	@Test
 	public void testGetFoldersWithRecentlyAddedFiles() throws Exception {
 		FileService fileService = new FileService();
-		authenticateEndpoint(fileService.getEndpoint(), "fadams", "passw0rd");
+		authenticateEndpoint(fileService.getEndpoint(), USERNAME, PASSWORD);
 		List<FileEntry> fileEntries = fileService.getFoldersWithRecentlyAddedFiles(null);
 		if (fileEntries != null && !fileEntries.isEmpty()) {
 			for (FileEntry fEntry : fileEntries) {
@@ -180,12 +172,13 @@ public class FileServiceTest extends BaseUnitTest {
 		}
 	}
 
-	@Ignore
 	@Test
 	public void testGetFilesInFolder() throws Exception {
 		FileService fileService = new FileService();
-		authenticateEndpoint(fileService.getEndpoint(), "fadams", "passw0rd");
-		List<FileEntry> fileEntries = fileService.getFilesInFolder(TEST_COLLECTIONID, null);
+		authenticateEndpoint(fileService.getEndpoint(), USERNAME, PASSWORD);
+		FileEntryList listOfFolders = fileService.getMyFolders();
+		String testFolderId = listOfFolders.get(0).getFileId();
+		List<FileEntry> fileEntries = fileService.getFilesInFolder(testFolderId, null);
 		if (fileEntries != null && !fileEntries.isEmpty()) {
 			for (FileEntry fEntry : fileEntries) {
 				assertEquals(fEntry.getCategory(), "document");
@@ -193,66 +186,65 @@ public class FileServiceTest extends BaseUnitTest {
 		}
 	}
 
-	@Ignore
-	@Test
-	public void testGetPersonLibrary() throws Exception {
-		FileService fileService = new FileService();
-		authenticateEndpoint(fileService.getEndpoint(), "fadams", "passw0rd");
-		List<FileEntry> fileEntries = fileService.getPersonLibrary(TEST_USERID, null);
-		if (fileEntries != null && !fileEntries.isEmpty()) {
-			for (FileEntry fEntry : fileEntries) {
-				assertEquals(fEntry.getCategory(), "document");
-			}
-		}
-	}
+//	@Ignore
+//	@Test
+//	public void testGetPersonLibrary() throws Exception {
+//		FileService fileService = new FileService();
+//		authenticateEndpoint(fileService.getEndpoint(), USERNAME, PASSWORD);
+//		List<FileEntry> fileEntries = fileService.getPersonLibrary(TEST_USERID, null);
+//		if (fileEntries != null && !fileEntries.isEmpty()) {
+//			for (FileEntry fEntry : fileEntries) {
+//				assertEquals(fEntry.getCategory(), "document");
+//			}
+//		}
+//	}
 
-	@Ignore
-	@Test
-	public void testGetPublicFilesComments() throws Exception {
-		FileService fileService = new FileService();
-		authenticateEndpoint(fileService.getEndpoint(), "fadams", "passw0rd");
-		FileEntry fileEntry = fileService.getFile(TEST_FILEID, true);
-		List<CommentEntry> commentEntries = fileService.getPublicFilesComments(fileEntry, null);
-		if (commentEntries != null && !commentEntries.isEmpty()) {
-			for (CommentEntry fEntry : commentEntries) {
-				assertNotNull(fEntry.getComment());
-			}
-		}
-	}
+//	@Ignore
+//	@Test
+//	public void testGetPublicFilesComments() throws Exception {
+//		FileService fileService = new FileService();
+//		authenticateEndpoint(fileService.getEndpoint(), USERNAME, PASSWORD);
+//		FileEntry fileEntry = fileService.getFile(TEST_FILEID, true);
+//		List<CommentEntry> commentEntries = fileService.getPublicFilesComments(fileEntry, null);
+//		if (commentEntries != null && !commentEntries.isEmpty()) {
+//			for (CommentEntry fEntry : commentEntries) {
+//				assertNotNull(fEntry.getComment());
+//			}
+//		}
+//	}
 
-	@Ignore
-	@Test
-	public void testGetFilesComments() throws Exception {
-		FileService fileService = new FileService();
-		authenticateEndpoint(fileService.getEndpoint(), "fadams", "passw0rd");
-		FileEntry fileEntry = fileService.getFile(TEST_FILEID, true);
-		List<CommentEntry> commentEntries = fileService.getFilesComments(fileEntry, null);
-		if (commentEntries != null && !commentEntries.isEmpty()) {
-			for (CommentEntry fEntry : commentEntries) {
-				assertNotNull(fEntry.getComment());
-			}
-		}
-	}
+//	@Ignore
+//	@Test
+//	public void testGetFilesComments() throws Exception {
+//		FileService fileService = new FileService();
+//		authenticateEndpoint(fileService.getEndpoint(), USERNAME, PASSWORD);
+//		FileEntry fileEntry = fileService.getFile(TEST_FILEID, true);
+//		List<CommentEntry> commentEntries = fileService.getFilesComments(fileEntry, null);
+//		if (commentEntries != null && !commentEntries.isEmpty()) {
+//			for (CommentEntry fEntry : commentEntries) {
+//				assertNotNull(fEntry.getComment());
+//			}
+//		}
+//	}
 
-	@Ignore
-	@Test
-	public void testGetMyFilesComments() throws Exception {
-		FileService fileService = new FileService();
-		authenticateEndpoint(fileService.getEndpoint(), "fadams", "passw0rd");
-		FileEntry fileEntry = fileService.getFile(TEST_FILEID, true);
-		List<CommentEntry> commentEntries = fileService.getMyFilesComments(fileEntry, null);
-		if (commentEntries != null && !commentEntries.isEmpty()) {
-			for (CommentEntry fEntry : commentEntries) {
-				assertNotNull(fEntry.getComment());
-			}
-		}
-	}
+//	@Ignore
+//	@Test
+//	public void testGetMyFilesComments() throws Exception {
+//		FileService fileService = new FileService();
+//		authenticateEndpoint(fileService.getEndpoint(), USERNAME, PASSWORD);
+//		FileEntry fileEntry = fileService.getFile(TEST_FILEID, true);
+//		List<CommentEntry> commentEntries = fileService.getMyFilesComments(fileEntry, null);
+//		if (commentEntries != null && !commentEntries.isEmpty()) {
+//			for (CommentEntry fEntry : commentEntries) {
+//				assertNotNull(fEntry.getComment());
+//			}
+//		}
+//	}
 
-	@Ignore
 	@Test
 	public void testGetFilesInMyRecycleBin() throws Exception {
 		FileService fileService = new FileService();
-		authenticateEndpoint(fileService.getEndpoint(), "fadams", "passw0rd");
+		authenticateEndpoint(fileService.getEndpoint(), USERNAME, PASSWORD);
 		List<FileEntry> fileEntries = fileService.getFilesInMyRecycleBin(null);
 		if (fileEntries != null && !fileEntries.isEmpty()) {
 			for (FileEntry fEntry : fileEntries) {
@@ -261,97 +253,104 @@ public class FileServiceTest extends BaseUnitTest {
 		}
 	}
 
-	@Ignore
-	@Test
-	public void testUpdate() throws Exception {
-		FileService fileService = new FileService();
-		authenticateEndpoint(fileService.getEndpoint(), "fadams", "passw0rd");
-		FileEntry fileEntry = fileService.getFile(TEST_FILEID, false);
-		Map<String, String> paramsMap = new HashMap<String, String>();
-		Random random = new Random();
-		paramsMap.put(FileRequestParams.TAG, "Junit_Tag" + random.nextInt());
-		Map<String, String> payloadMap = new HashMap<String, String>();
-		payloadMap.put(FileRequestPayload.LABEL, "Junit_Label");
-		fileEntry = fileService.update(fileEntry, paramsMap, payloadMap);
-		assertEquals(fileEntry.getTitle(), "Junit_Label");
-	}
+//	@Test
+//	public void testUpdate() throws Exception {
+//		FileService fileService = new FileService();
+//		authenticateEndpoint(fileService.getEndpoint(), USERNAME, PASSWORD);
+//		FileEntryList listOfFiles = fileService.getMyFiles();
+//		String testFileId = listOfFiles.get(0).getFileId();
+//		FileEntry fileEntry = fileService.getFile(testFileId, false);
+//		Map<String, String> paramsMap = new HashMap<String, String>();
+//		Random random = new Random();
+//		paramsMap.put(FileRequestParams.TAG.getFileRequestParams(), "Junit_Tag" + random.nextInt());
+//		Map<String, String> payloadMap = new HashMap<String, String>();
+//		payloadMap.put(FileRequestPayload.LABEL.getFileRequestPayload(), "Junit_Label");
+//		fileEntry = fileService.updateFile(fileEntry.getFileId(), paramsMap, payloadMap);
+//		assertEquals(fileEntry.getTitle(), "Junit_Label");
+//	}
 
-	@Ignore
 	@Test
 	public void testLock() throws Exception {
 		FileService fileService = new FileService();
-		authenticateEndpoint(fileService.getEndpoint(), "fadams", "passw0rd");
-		fileService.lock(TEST_FILEID);
-		FileEntry fileEntry = fileService.getFile(TEST_FILEID, true);
+		authenticateEndpoint(fileService.getEndpoint(), USERNAME, PASSWORD);
+		FileEntryList listOfFiles = fileService.getMyFiles();
+		String testFileId = listOfFiles.get(0).getFileId();
+		fileService.lock(testFileId);
+		FileEntry fileEntry = fileService.getFile(testFileId, true);
 		assertEquals(fileEntry.getLock(), "HARD");
 	}
 
-	@Ignore
 	@Test
 	public void testUnlock() throws Exception {
 		FileService fileService = new FileService();
-		authenticateEndpoint(fileService.getEndpoint(), "fadams", "passw0rd");
-		fileService.unlock(TEST_FILEID);
-		FileEntry fileEntry = fileService.getFile(TEST_FILEID, true);
+		authenticateEndpoint(fileService.getEndpoint(), USERNAME, PASSWORD);
+		FileEntryList listOfFiles = fileService.getMyFiles();
+		String testFileId = listOfFiles.get(0).getFileId();
+		fileService.unlock(testFileId);
+		FileEntry fileEntry = fileService.getFile(testFileId, true);
 		assertEquals(fileEntry.getLock(), "NONE");
 	}
 
-	@Ignore
 	@Test
 	public void testDelete() throws Exception {
 		FileService fileService = new FileService();
-		authenticateEndpoint(fileService.getEndpoint(), "fadams", "passw0rd");
-		fileService.delete(TEST_DELETEFILEID);
-		FileEntry fileEntry = fileService.getFile(TEST_DELETEFILEID, true);
-		Assert.assertNull(fileEntry.getLabel());
+		authenticateEndpoint(fileService.getEndpoint(), USERNAME, PASSWORD);
+		FileEntryList listOfFiles = fileService.getMyFiles();
+		String testDeleteFileId = listOfFiles.get(0).getFileId();
+		fileService.deleteFile(testDeleteFileId);
 	}
 
-	@Ignore
 	@Test
 	public void testAddCommentToFile() throws Exception {
 		FileService fileService = new FileService();
-		authenticateEndpoint(fileService.getEndpoint(), "fadams", "passw0rd");
-		FileEntry fileEntry = fileService.getFile(TEST_FILEID, true);
+		authenticateEndpoint(fileService.getEndpoint(), USERNAME, PASSWORD);
+		FileEntryList listOfFiles = fileService.getMyFiles();
+		String testFileId = listOfFiles.get(0).getFileId();
+		FileEntry fileEntry = fileService.getFile(testFileId, true);
 		String comment = "Junit Comment - Added from FileServiceTest, testAddCommentToFile";
 		CommentEntry commentEntry;
-		commentEntry = fileService.addCommentToFile(fileEntry, null, comment);
+		commentEntry = fileService.addCommentToFile(fileEntry.getFileId(), comment, fileEntry.getAuthorEntry().getUserUuid() , null);
 		assertEquals(commentEntry.getComment(),
 				"Junit Comment - Added from FileServiceTest, testAddCommentToFile");
 	}
 
-	@Ignore
-	@Test
-	public void testAddCommentToMyFile() throws Exception {
-		FileService fileService = new FileService();
-		authenticateEndpoint(fileService.getEndpoint(), "fadams", "passw0rd");
-		FileEntry fileEntry = fileService.getFile(TEST_FILEID, true);
-		String comment = "Junit Comment - Added from FileServiceTest, testAddCommentToMyFile";
-		fileEntry = fileService.addCommentToMyFile(fileEntry, null, comment);
-		assertEquals(fileEntry.getCommentEntry().getComment(),
-				"Junit Comment - Added from FileServiceTest, testAddCommentToMyFile");
-	}
+//	@Ignore
+//	@Test
+//	public void testAddCommentToMyFile() throws Exception {
+//		FileService fileService = new FileService();
+//		authenticateEndpoint(fileService.getEndpoint(), USERNAME, PASSWORD);
+//		FileEntry fileEntry = fileService.getFile(TEST_FILEID, true);
+//		String comment = "Junit Comment - Added from FileServiceTest, testAddCommentToMyFile";
+//		fileEntry = fileService.addCommentToMyFile(fileEntry, null, comment);
+//		assertEquals(fileEntry.getCommentEntry().getComment(),
+//				"Junit Comment - Added from FileServiceTest, testAddCommentToMyFile");
+//	}
 
-	@Ignore
-	@Test
-	public void testFileUpload() throws IOException, ClientServicesException, Exception {
-		File t = new File(TEST_NAME);
-		FileOutputStream s = new FileOutputStream(t);
-		s.write(TEST_CONTENT.getBytes());
-		s.flush();
-		s.close();
-		String fileName = t.getPath();
-		FileService service = new FileService();
-		authenticateEndpoint(service.getEndpoint(), "fadams", "passw0rd");
-		FileEntry entry = service.upload(fileName);
-		assertNotNull(entry.getCategory());
-	}
+//	@Ignore
+//	@Test
+//	public void testFileUpload() throws IOException, ClientServicesException, Exception {
+//		File t = new File(TEST_NAME);
+//		FileOutputStream s = new FileOutputStream(t);
+//		s.write(TEST_CONTENT.getBytes());
+//		s.flush();
+//		s.close();
+//		String fileName = t.getPath();
+//		FileService service = new FileService();
+//		authenticateEndpoint(service.getEndpoint(), USERNAME, PASSWORD);
+//		FileEntry entry = service.upload(fileName);
+//		assertNotNull(entry.getCategory());
+//	}
 
-	@Ignore
 	@Test
 	public void testGetNonce() {
 		FileService fileService = new FileService();
-		authenticateEndpoint(fileService.getEndpoint(), "fadams", "passw0rd");
-		String nonce = fileService.getNonce();
+		authenticateEndpoint(fileService.getEndpoint(), USERNAME, PASSWORD);
+		String nonce = null;
+		try {
+			nonce = fileService.getNonce();
+		} catch (FileServiceException e) {
+			
+		}
 		assertNotNull(nonce);
 	}
 }

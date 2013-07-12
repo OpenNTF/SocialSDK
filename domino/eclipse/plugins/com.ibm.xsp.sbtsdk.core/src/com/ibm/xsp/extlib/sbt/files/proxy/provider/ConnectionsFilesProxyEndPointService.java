@@ -61,7 +61,7 @@ public class ConnectionsFilesProxyEndPointService extends ProxyEndpointService{
 	         Object httpResp = null;                                                                                                
 	                                                                                                                                
 	         try {                                                                                                                  
-	         	httpResp = svc.get(serviceUrl,inputStream);                                                                        
+	         	httpResp = svc.get(serviceUrl,inputStream).getData();                                                                        
 	                                                                                                                                
 	         } catch (ClientServicesException e) {                                                                                  
 	             throw new FacesExceptionEx(e, "Failed to perform proxy request");                                                  

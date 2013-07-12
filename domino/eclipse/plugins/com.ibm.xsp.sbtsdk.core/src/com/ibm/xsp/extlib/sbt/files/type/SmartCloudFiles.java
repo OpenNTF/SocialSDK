@@ -45,10 +45,10 @@ import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientService.HandlerJson;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.ClientService.HandlerXml;
-import com.ibm.sbt.services.client.connections.files.exception.FileServiceException;
+import com.ibm.sbt.services.client.connections.files.FileService;
+import com.ibm.sbt.services.client.connections.files.FileServiceException;
 import com.ibm.sbt.services.client.connections.files.model.FileRequestParams;
 import com.ibm.sbt.services.client.connections.files.model.Headers;
-import com.ibm.sbt.services.client.smartcloud.files.FileService;
 import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
 import com.ibm.sbt.util.DataNavigator;
@@ -197,7 +197,7 @@ public class SmartCloudFiles extends AbstractType {
             throws ClientServicesException {
         authenticate(accessor);
         HandlerXml xml = new HandlerXml();
-        Document document = (Document) svc.get("files/basic/cmis/repository",params,xml);
+        Document document = (Document) svc.get("files/basic/cmis/repository",params,xml).getData();
 
         ArrayList<FileEntry> entries = new ArrayList<FileEntry>();
         // Extract the content from the ATOM feed...
@@ -282,7 +282,7 @@ public class SmartCloudFiles extends AbstractType {
             Object file;
             //https://apps.na.collabserv.com/files/app/file/c72336bf-bb61-44f6-9712-5ee657ef17cc
             try {
-                file =  svc.get("files/apps/file/"+fileId);
+                file =  svc.get("files/apps/file/"+fileId).getData();
                 
             } catch (ClientServicesException e) {
                 throw new FacesExceptionEx(e, "Failed to perform proxy request");
@@ -340,9 +340,9 @@ public class SmartCloudFiles extends AbstractType {
 
     	    
     		FileService svc= new FileService();
-    		svc.uploadFile(is, name, serverFile.length());
+    		svc.upload(is, name, serverFile.length(), null);
     		 
-    	    } catch (com.ibm.sbt.services.client.smartcloud.files.FileServiceException e) {
+    	    } catch (FileServiceException e) {
     	        e.printStackTrace();
     	    } catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block

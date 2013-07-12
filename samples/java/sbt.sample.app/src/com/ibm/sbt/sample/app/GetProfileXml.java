@@ -106,7 +106,7 @@ public class GetProfileXml {
         String profileUrl = "profiles/atom/profile.do";
         Map<String, String> parameters = new HashMap<String, String>();
         parameters.put("email", email);
-        Object result = endpoint.xhrGet(profileUrl, parameters, ClientService.FORMAT_XML);
+        Object result = endpoint.xhrGet(profileUrl, parameters, ClientService.FORMAT_XML).getData();
         String xml = DOMUtil.getXMLString((Node)result);
         return xml;
     }

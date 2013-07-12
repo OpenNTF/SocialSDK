@@ -10,111 +10,211 @@ import java.util.Map;
 import org.junit.Ignore;
 import org.junit.Test;
 import com.ibm.sbt.services.BaseUnitTest;
+import com.ibm.sbt.services.client.connections.profiles.ProfileAdminService;
+import com.ibm.sbt.services.client.connections.profiles.ProfileService;
+import com.ibm.sbt.services.client.connections.profiles.ProfileServiceException;
+import com.ibm.sbt.services.client.connections.profiles.Profile;
+import com.ibm.sbt.services.client.connections.profiles.ProfileList;
+import com.ibm.sbt.services.client.connections.profiles.ConnectionEntryList;
+import com.ibm.sbt.services.client.connections.profiles.ConnectionEntry;;
 
 /**
  * Tests for the java connections Profile API by calling Connections server using configuration in
  * managed-beans
  * 
+ * @author Swati Singh
  * @author Vineet Kanwal
  */
 public class ProfileServiceTest extends BaseUnitTest {
-
+	
 	@Ignore
 	@Test
-	public final void testGetProfileForEmail() throws Exception {
-
+	public final void tempMethodPrePopulatedData() throws Exception {
 		ProfileService profileService = new ProfileService();
-		Profile profile = profileService.getProfile(properties.getProperty("email1"));
+		Profile profile = profileService.getProfile("mockUser@renovations.com");
 		assertNotNull(profile);
-		assertNotNull(profile.getData());
-		assertEquals("Frank Adams", profile.getDisplayName());
-		assertEquals("Profile information for Frank Adams", profile.getAbout());
-		assertEquals("{building=WTFT5, floor=3rd}", profile.getAddress().toString());
-		assertEquals(null, profile.getDepartment());
-		assertEquals("Frank Adams", profile.getDisplayName());
-		assertEquals(properties.getProperty("email1"), profile.getEmail());
-		assertEquals(properties.getProperty("userId1"), profile.getId());
-		assertEquals("123445678", profile.getPhoneNumber());
+		assertEquals("mockUser", profile.getDisplayName());
+	}
+
+
+		
+	@Test
+	public final void testGetProfile() throws Exception {
+
+		ProfileAdminService profileAdminService = new ProfileAdminService();
+		profileAdminService.getEndpoint().logout();
+		authenticateEndpoint(profileAdminService.getEndpoint(), properties.getProperty("adminUser"),
+				properties.getProperty("passwordAdmin"));
+		Profile profile = profileAdminService.newProfile();
+		profile.setAsString("guid", "testUserD9A04-F2E1-1222-4825-7A700026E92C");
+		profile.setAsString("email", "testUser@renovations.com");
+		profile.setAsString("uid", "testUser");
+		profile.setAsString("distinguishedName", "CN=testUser def,o=renovations");
+		profile.setAsString("displayName", "testUser");
+		profile.setAsString("givenNames", "testUser");
+		profile.setAsString("surname", "testUser");
+		profile.setAsString("userState", "active");
+
+		profileAdminService.createProfile(profile);
+		
+		ProfileService svc = new ProfileService();
+		profile = svc.getProfile("testUser@renovations.com");
+		assertNotNull(profile);
+		assertEquals("testUser", profile.getDisplayName());
+		assertEquals("testUser@renovations.com", profile.getEmail());
+		assertNotNull(profile.getUserid());
 		assertNotNull(profile.getProfileUrl());
 		assertNotNull(profile.getPronunciationUrl());
 		assertNotNull(profile.getThumbnailUrl());
-		assertEquals("Dr", profile.getTitle());
-		assertEquals(properties.getProperty("userId1"), profile.getUniqueId());
+		
+		profileAdminService.deleteProfile(profile.getUserid());
 	}
 
-	@Ignore
-	@Test
-	public final void testGetProfileForUserId() throws Exception{
+	@Test(expected = ProfileServiceException.class)
+	public final void testGetProfileWithNullUserId() throws Exception {
 
 		ProfileService profileService = new ProfileService();
-		Profile profile = profileService.getProfile(properties.getProperty("userId1"));
-		assertNotNull(profile);
-		assertNotNull(profile.getData());
-		assertEquals("Frank Adams", profile.getDisplayName());
-		assertEquals("Profile information for Frank Adams", profile.getAbout());
-		assertEquals("{building=WTFT5, floor=3rd}", profile.getAddress().toString());
-		assertEquals(null, profile.getDepartment());
-		assertEquals("Frank Adams", profile.getDisplayName());
-		assertEquals(properties.getProperty("email1"), profile.getEmail());
-		assertEquals(properties.getProperty("userId1"), profile.getId());
-		assertEquals("123445678", profile.getPhoneNumber());
-		assertNotNull(profile.getProfileUrl());
-		assertNotNull(profile.getPronunciationUrl());
-		assertNotNull(profile.getThumbnailUrl());
-		assertEquals("Dr", profile.getTitle());
-		assertEquals(properties.getProperty("userId1"), profile.getUniqueId());
+		profileService.getProfile(null);
+	
+	}
+	
+	@Test
+	public void testSearchProfilesWithParams() throws Exception {
+		ProfileService profileService = new ProfileService();
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put("email", properties.getProperty("email1"));
+		parameters.put("ps", "5");
+		ProfileList profileEntries = profileService.searchProfiles(parameters);
+		if (profileEntries != null && !profileEntries.isEmpty()) {
+			for (Profile profile : profileEntries) {
+				assertNotNull(profile.getDisplayName());
+			}
+		}
+	}
+	
+	@Test
+	public void testSearchProfilesWithInvalidParams() throws Exception {
+		ProfileService profileService = new ProfileService();
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put("email", "abc@xyz.c");
+		ProfileList profileEntries = profileService.searchProfiles(parameters);
+		assertEquals(0, profileEntries.size());
+		
 	}
 
-	/**
+	@Test
+	public void testGetColleagues() throws Exception {
+		ProfileService profileService = new ProfileService();
+		ProfileList profileEntries = profileService.getColleagues( properties.getProperty("user1"));
+		if (profileEntries != null && !profileEntries.isEmpty()) {
+			for (Profile profile : profileEntries) {
+				assertNotNull(profile.getDisplayName());
+			}
+		}
+	}
+	
+	@Test
+	public void testGetColleaguesForInvalidUser() throws Exception {
+		ProfileService profileService = new ProfileService();
+		ProfileList profileEntries = profileService.getColleagues("abc@xyz.c");
+		assertEquals(0, profileEntries.size());
+		
+	}
+	
+	@Test
+	public void testGetColleaguesConnectionEntries() throws Exception {
+		ProfileService profileService = new ProfileService();
+		ConnectionEntryList connectionEntries = profileService.getColleaguesConnectionEntries( properties.getProperty("user1"));
+		if (connectionEntries != null && !connectionEntries.isEmpty()) {
+			for (ConnectionEntry connectionEntry : connectionEntries) {
+				assertNotNull(connectionEntry.getTitle());
+			}
+		}
+	}
+	
+	@Test
+	public void testGetColleaguesConnectionEntriesForInvalidUser() throws Exception {
+		ProfileService profileService = new ProfileService();
+		ConnectionEntryList connectionEntries = profileService.getColleaguesConnectionEntries("abc@xyz.c");
+		assertEquals(0, connectionEntries.size());
+	}
+	
 	@Ignore
 	@Test
-	public final void testGetProfiles() {
-		//TODO: fix test with the final API
+	public void testCheckColleague() throws Exception {
 		ProfileService profileService = new ProfileService();
-		Profile[] profiles = profileService.getProfiles(new String[] { properties.getProperty("email1"),
-				properties.getProperty("email2") });
-		assertNotNull(profiles);
-		assertEquals(2, profiles.length);
-		assertNotNull(profiles[0]);
-		assertNotNull(profiles[0].getData());
-		assertEquals("Frank Adams", profiles[0].getDisplayName());
-		assertNotNull(profiles[1]);
-		assertNotNull(profiles[1].getData());
-		assertEquals("Bill Jordan", profiles[1].getDisplayName());
+		ConnectionEntry connectionEntry = profileService.checkColleague(properties.getProperty("email1"), properties.getProperty("email3"));
+		assertNotNull(connectionEntry.getTitle());
+		assertNotNull(connectionEntry.getConnectionId());
 	}
-	*/
 
+
+	@Test
+	public void testGetCommonColleaguesProfiles() throws Exception {
+		ProfileService profileService = new ProfileService();
+		ProfileList profileEntries = profileService.getCommonColleaguesProfiles( properties.getProperty("email1"),properties.getProperty("email2") );
+		if (profileEntries != null && !profileEntries.isEmpty()) {
+			for (Profile profileEntry : profileEntries) {
+				assertNotNull(profileEntry.getTitle());
+			}
+		}
+	}
+
+	@Test
+	public void testGetConnectionsColleagueEntriesByStatus() throws Exception {
+		ProfileService profileService = new ProfileService();
+		ConnectionEntryList connectionEntries = profileService.getConnectionsColleagueEntriesByStatus( properties.getProperty("user1"),properties.getProperty("accepted") );
+		if (connectionEntries != null && !connectionEntries.isEmpty()) {
+			for (ConnectionEntry connectionEntry : connectionEntries) {
+				assertNotNull(connectionEntry.getTitle());
+			}
+		}
+	}
+	
+	@Test
+	public void testGetConnectionsProfileEntriesByStatus() throws Exception {
+		ProfileService profileService = new ProfileService();
+		ProfileList profileEntries = profileService.getConnectionsProfileEntriesByStatus( properties.getProperty("user1"),properties.getProperty("accepted") );
+		if (profileEntries != null && !profileEntries.isEmpty()) {
+			for (Profile profileEntry : profileEntries) {
+				assertNotNull(profileEntry.getTitle());
+			}
+		}
+	}
+	
+	@Test
+	public void testGetReportToChain() throws Exception {
+		ProfileService profileService = new ProfileService();
+		ProfileList profileEntries = profileService.getReportToChain( properties.getProperty("user1"));
+		if (profileEntries != null && !profileEntries.isEmpty()) {
+			for (Profile profile : profileEntries) {
+				assertNotNull(profile.getDisplayName());
+			}
+		}
+	}
+	
+	@Test
+	public void testGetDirectReports() throws Exception {
+		ProfileService profileService = new ProfileService();
+		ProfileList profileEntries = profileService.getDirectReports( properties.getProperty("user1"));
+		if (profileEntries != null && !profileEntries.isEmpty()) {
+			for (Profile profile : profileEntries) {
+				assertNotNull(profile.getDisplayName());
+			}
+		}
+	}
+	
 	@Ignore
 	@Test
-	public final void testGetProfileWithLoadFalse() throws Exception {
-
+	public void testSendInvite() throws Exception {
 		ProfileService profileService = new ProfileService();
-		Profile profile = profileService.getProfile(properties.getProperty("email1"), false);
-		assertNotNull(profile);
-		assertNull(profile.getData());
+		authenticateEndpoint(profileService.getEndpoint(), properties.getProperty("user1"),
+				properties.getProperty("passwordUser1"));
+		
+		profileService.sendInvite(properties.getProperty("email4"));
+		
 	}
-
-	@Ignore
-	@Test
-	public final void testGetProfileForInvalidEmail() throws Exception {
-
-		ProfileService profileService = new ProfileService();
-		Profile profile = profileService.getProfile("Test@Ignore @Test.com");
-		assertNotNull(profile);
-		assertNull(profile.getDisplayName());
-	}
-
-	@Ignore
-	@Test
-	public final void testGetProfileForInvalidUserId() throws Exception {
-
-		ProfileService profileService = new ProfileService();
-		Profile profile = profileService.getProfile("ewuirewi983298329832");
-		assertNotNull(profile);
-		assertNull(profile.getDisplayName());
-	}
-
-	@Ignore
+		
 	@Test
 	public final void testUpdateProfile() throws Exception{
 
@@ -122,68 +222,36 @@ public class ProfileServiceTest extends BaseUnitTest {
 		authenticateEndpoint(profileService.getEndpoint(), properties.getProperty("user1"),
 				properties.getProperty("passwordUser1"));
 		Profile profile = profileService.getProfile(properties.getProperty("email1"));
-		Map<String, String> addressMap = new HashMap<String, String>();
-		addressMap.put("building", "TEST_BUILDING");
-		addressMap.put("floor", "TEST_FLOOR");
-		profile.setAddress(addressMap);
-		profile.setPhoneNumber("TEST_PHONE_NUMBER");
-		boolean result = profileService.updateProfile(profile);
-		assertEquals(true, result);
+		profile.setPhoneNumber("9999999999");
+		profileService.updateProfile(profile);
 		profile = profileService.getProfile(properties.getProperty("email1"));
-		assertEquals("{building=TEST_BUILDING, floor=TEST_FLOOR}", profile.getAddress().toString());
-		assertEquals("TEST_PHONE_NUMBER", profile.getPhoneNumber());
+		assertEquals("9999999999", profile.getPhoneNumber());
 
-		// CHANGING IT BACK TO ORIGINAL
-		addressMap = new HashMap<String, String>();
-		addressMap.put("building", "WTFT5");
-		addressMap.put("floor", "3rd");
-		profile.setAddress(addressMap);
-		profile.setPhoneNumber("123445678");
-		result = profileService.updateProfile(profile);
-		assertEquals(true, result);
+		profileService.getEndpoint().logout();
+
 	}
 
 	/**
 	 * Updating Profile of a user with credentials of some other user
 	 */
-	@Ignore
-	@Test
+	@Test(expected = ProfileServiceException.class)
 	public final void testUpdateProfileWithInvalidCredentials() throws Exception{
 
 		ProfileService profileService = new ProfileService();
-		authenticateEndpoint(profileService.getEndpoint(), properties.getProperty("user2"),
-				properties.getProperty("passwordUser2"));
+		//authenticateEndpoint(profileService.getEndpoint(), properties.getProperty("user2"),
+			//	properties.getProperty("passwordUser2"));
 		Profile profile = profileService.getProfile(properties.getProperty("email1"));
-		Map<String, String> addressMap = new HashMap<String, String>();
-		addressMap.put("building", "TEST_BUILDING");
-		addressMap.put("floor", "TEST_FLOOR");
-		profile.setAddress(addressMap);
 		profile.setPhoneNumber("TEST_PHONE_NUMBER");
-		boolean result = profileService.updateProfile(profile);
-		assertFalse(result);
+		profileService.updateProfile(profile);
 	}
 
-	@Ignore
-	@Test
-	public final void testUpdateProfileForEmptyFields() throws Exception{
+	@Test(expected = ProfileServiceException.class)
+	public final void testUpdateProfileWithNullArgument() throws Exception{
 
 		ProfileService profileService = new ProfileService();
 		authenticateEndpoint(profileService.getEndpoint(), properties.getProperty("user1"),
 				properties.getProperty("passwordUser1"));
-		Profile profile = profileService.getProfile(properties.getProperty("email1"));
-		boolean result = profileService.updateProfile(profile);
-		assertEquals(true, result);
-	}
-
-	@Ignore
-	@Test
-	public final void testUpdateProfileForNull() throws Exception{
-
-		ProfileService profileService = new ProfileService();
-		authenticateEndpoint(profileService.getEndpoint(), properties.getProperty("user1"),
-				properties.getProperty("passwordUser1"));
-		boolean result = profileService.updateProfile(null);
-		assertEquals(false, result);
+		profileService.updateProfile(null);
 	}
 
 	@Ignore
@@ -196,8 +264,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 		Profile profile = profileService.getProfile(properties.getProperty("email1"));
 		File file = new File("config/image.jpg");
 		profile.setPhotoLocation(file.getAbsolutePath());
-		boolean result = profileService.updateProfilePhoto(profile);
-		assertEquals(true, result);
+		profileService.updateProfilePhoto(profile);
 	}
 
 	@Ignore
@@ -210,8 +277,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 		Profile profile = profileService.getProfile(properties.getProperty("email1"));
 		File file = new File("config/image");
 		profile.setPhotoLocation(file.getAbsolutePath());
-		boolean result = profileService.updateProfilePhoto(profile);
-		assertEquals(false, result);
+		profileService.updateProfilePhoto(profile);
 	}
 
 	@Ignore
@@ -224,7 +290,8 @@ public class ProfileServiceTest extends BaseUnitTest {
 		Profile profile = profileService.getProfile(properties.getProperty("email1"));
 		File file = new File("image1.jpg");
 		profile.setPhotoLocation(file.getAbsolutePath());
-		boolean result = profileService.updateProfilePhoto(profile);
-		assertEquals(false, result);
+		profileService.updateProfilePhoto(profile);
 	}
+	
+
 }

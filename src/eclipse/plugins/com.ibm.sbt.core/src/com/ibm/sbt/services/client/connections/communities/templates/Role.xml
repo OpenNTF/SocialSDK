@@ -1,0 +1,1 @@
+<snx:role xmlns:snx="http://www.ibm.com/xmlns/prod/sn" component="http://www.ibm.com/xmlns/prod/sn/communities">${role}</snx:role>

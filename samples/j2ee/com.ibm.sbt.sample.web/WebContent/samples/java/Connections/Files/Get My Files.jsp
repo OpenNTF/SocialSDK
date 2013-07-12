@@ -14,10 +14,11 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<%@page import="com.ibm.sbt.services.client.connections.files.model.FileRequestParams"%>
-<%@page import="java.util.HashMap"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.FileService"%>
+<%@page import="com.ibm.sbt.services.client.connections.files.model.CommentEntry"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.model.FileEntry"%>
+<%@page import="com.ibm.sbt.services.client.connections.files.FileEntryList"%>
+<%@page import="java.util.HashMap"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.io.PrintWriter"%>
@@ -40,10 +41,9 @@
 	<%
 	try {		
 		FileService fileService = new FileService();
-		List<FileEntry> files = fileService.getMyFiles(); 
+		FileEntryList files = fileService.getMyFiles(); 
 		if(files != null && ! files.isEmpty()) {
-			for (Iterator iterator = files.iterator(); iterator.hasNext();) {
-				FileEntry file = (FileEntry)iterator.next();
+			for (FileEntry file : files) {
 				out.println("<a href=\"" + file.getDownloadLink() + "\"> " + file.getLabel() + "</a><br/>" );
 			}
 		} else {

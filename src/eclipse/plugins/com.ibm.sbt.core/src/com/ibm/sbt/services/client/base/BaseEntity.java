@@ -57,20 +57,31 @@ public class BaseEntity {
 	 */
 	public String getAsString(FieldEntry field){
 		if (fields.containsKey(field.getName())){
-		 return fields.get(field.getName()).toString();
+			Object value = fields.get(field.getName());
+			return (value == null) ? null : value.toString();
 		}
-		if (dataHandler != null)
+		if (dataHandler != null){
 			return dataHandler.getAsString(field);
+		}
 		throw new NullPointerException(StringUtil.format("Field {0} was not found or had no value",field.getName()));
 	}
 	
-	public String getAsString(String field){
-		if (fields.containsKey(field)){
-		 return fields.get(field).toString();
+	/**
+	 *	This method retrieves the value of a field as a String. If the field has been modified it retrieves the value from the fields Map.
+	 *	Otherwise it delegates to the data handler the task to retrieve the field from the data object. 
+	 *
+	 * @param fieldName
+	 * @return
+	 */
+	public String getAsString(String fieldName){
+		if (fields.containsKey(fieldName)){
+			Object value = fields.get(fieldName);
+			return (value == null) ? null : value.toString();
 		}
-		if (dataHandler != null)
-			return dataHandler.getAsString(field);
-		throw new NullPointerException(StringUtil.format("Field {0} was not found or had no value",field));
+		if (dataHandler != null){
+			return dataHandler.getAsString(fieldName);
+		}
+		throw new NullPointerException(StringUtil.format("Field {0} was not found or had no value",fieldName));
 	}
 	
 	/**

@@ -130,15 +130,4 @@ public class Member extends BaseEntity {
 		return (XmlDataHandler)super.getDataHandler();
 	}
 	
-	@Override
-	public String toString()
-	{
-		try {
-			return DOMUtil.getXMLString(getDataHandler().getData());
-		} catch (XMLException e) {
-			e.printStackTrace();
-			return "";
-		}
-	}
-
 }

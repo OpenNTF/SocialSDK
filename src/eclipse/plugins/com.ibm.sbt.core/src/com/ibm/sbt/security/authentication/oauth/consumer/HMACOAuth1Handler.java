@@ -44,8 +44,8 @@ import com.ibm.sbt.services.util.SSLUtil;
 
 public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 
-	public HMACOAuth1Handler(OAProvider provider) {
-		super(provider);
+	public HMACOAuth1Handler() {
+//		super(provider);
 	}
 	private static final long	serialVersionUID	= 1L;
 
@@ -58,17 +58,17 @@ public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 
 		int responseCode = HttpStatus.SC_OK;
 		Context context = Context.get();
-		OAProvider oaProvider = getOAProvider();
+//		OAProvider oaProvider = getOAProvider();
 		String responseBody = "";
 		try {
 			HttpClient client = new DefaultHttpClient();
-			if (oaProvider.getForceTrustSSLCertificate()) {
+			if (getForceTrustSSLCertificate()) {
 				client = SSLUtil.wrapHttpClient((DefaultHttpClient) client);
 			}
 
 			// In case of Twitter, this callback URL registered can be different from the URL specified below.
-			String callbackUrl = oaProvider.getCallbackUrl(context);
-			String consumerKey = oaProvider.getConsumerKey();
+			String callbackUrl = getCallbackUrl(context);
+			String consumerKey = getConsumerKey();
 			String nonce = getNonce();
 			String timeStamp = getTimestamp();
 
@@ -78,11 +78,11 @@ public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 			signatureParamsMap.put(Configuration.CALLBACK, callbackUrl);
 			signatureParamsMap.put(Configuration.CONSUMER_KEY, consumerKey);
 			signatureParamsMap.put(Configuration.NONCE, nonce);
-			signatureParamsMap.put(Configuration.SIGNATURE_METHOD, oaProvider.getSignatureMethod());
+			signatureParamsMap.put(Configuration.SIGNATURE_METHOD, getSignatureMethod());
 			signatureParamsMap.put(Configuration.TIMESTAMP, timeStamp);
 			signatureParamsMap.put(Configuration.VERSION, Configuration.OAUTH_VERSION1);
 
-			String consumerSecret = oaProvider.getConsumerSecret();
+			String consumerSecret = getConsumerSecret();
 			String requestPostUrl = getRequestTokenURL();
 			HttpPost method = new HttpPost(requestPostUrl);
 			String signature = HMACEncryptionUtility.generateHMACSignature(requestPostUrl,
@@ -94,7 +94,7 @@ public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 			headerStr.append(",").append(Configuration.CONSUMER_KEY).append("=\"").append(consumerKey)
 					.append("\"");
 			headerStr.append(",").append(Configuration.SIGNATURE_METHOD).append("=\"")
-					.append(oaProvider.getSignatureMethod()).append("\"");
+					.append(getSignatureMethod()).append("\"");
 			headerStr.append(",").append(Configuration.TIMESTAMP).append("=\"").append(timeStamp)
 					.append("\"");
 			headerStr.append(",").append(Configuration.NONCE).append("=\"").append(nonce).append("\"");
@@ -172,10 +172,10 @@ public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 
 		int responseCode = HttpStatus.SC_OK;
 		String responseBody = null;
-		OAProvider oaProvider = getOAProvider();
+//		OAProvider oaProvider = getOAProvider();
 		try {
 			HttpClient client = new DefaultHttpClient();
-			if (oaProvider.getForceTrustSSLCertificate()) {
+			if (getForceTrustSSLCertificate()) {
 				client = SSLUtil.wrapHttpClient((DefaultHttpClient) client);
 			}
 
@@ -186,7 +186,7 @@ public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 					.append(URLEncoder.encode(verifierCode, "UTF-8"));
 			HttpPost method = new HttpPost(requestPostUrl.toString());
 			// Collecting parameters for preparing the Signature
-			String consumerKey = oaProvider.getConsumerKey();
+			String consumerKey = getConsumerKey();
 			String requestToken = getRequestToken();
 			String nonce = getNonce();
 			String timeStamp = getTimestamp();
@@ -199,12 +199,12 @@ public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 			signatureParamsMap.put(Configuration.CONSUMER_KEY, consumerKey);
 			signatureParamsMap.put(Configuration.NONCE, nonce);
 			signatureParamsMap.put(Configuration.OAUTH_TOKEN, requestToken);
-			signatureParamsMap.put(Configuration.SIGNATURE_METHOD, oaProvider.getSignatureMethod());
+			signatureParamsMap.put(Configuration.SIGNATURE_METHOD, getSignatureMethod());
 			signatureParamsMap.put(Configuration.TIMESTAMP, timeStamp);
 			signatureParamsMap.put(Configuration.VERSION, Configuration.OAUTH_VERSION1);
 
 			String requestTokenSecret = getRequestTokenSecret();
-			String consumerSecret = oaProvider.getConsumerSecret();
+			String consumerSecret = getConsumerSecret();
 			String signature = HMACEncryptionUtility.generateHMACSignature(requestPostUrl.toString(),
 					method.getMethod(), consumerSecret, requestTokenSecret, signatureParamsMap);
 
@@ -214,7 +214,7 @@ public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 			headerStr.append("OAuth ").append(Configuration.CONSUMER_KEY).append("=\"").append(consumerKey)
 					.append("\"");
 			headerStr.append(",").append(Configuration.SIGNATURE_METHOD).append("=\"")
-					.append(oaProvider.getSignatureMethod()).append("\"");
+					.append(getSignatureMethod()).append("\"");
 			headerStr.append(",").append(Configuration.TIMESTAMP).append("=\"").append(timeStamp)
 					.append("\"");
 			headerStr.append(",").append(Configuration.NONCE).append("=\"").append(nonce).append("\"");
@@ -267,20 +267,20 @@ public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 	 */
 	public String createAuthorizationHeader(String url, Map<String, String> params) throws OAuthException {
 
-		OAProvider oaProvider = getOAProvider();
+//		OAProvider oaProvider = getOAProvider();
 		Context context = Context.get();
 
 		String nonce = getNonce();
 		String timeStamp = getTimestamp();
-		String consumerKey = oaProvider.getConsumerKey();
-		String consumerSecret = oaProvider.getConsumerSecret();
+		String consumerKey = getConsumerKey();
+		String consumerSecret = getConsumerSecret();
 		String method = context.getHttpRequest().getMethod();
 		/*
 		 * This is the Access Token which is obtained from the Application, while registering the App. User
 		 * will have to create these tokens, in the application, if not generated already. This Access Token
 		 * if required for executing APIs on Twitter.
 		 */
-		String applicationAccessToken = oaProvider.getApplicationAccessToken();
+		String applicationAccessToken = getApplicationAccessToken();
 		/* This is the Access Token Secret which is obtained from the getAccessTokenFromServer() method. */
 		String tokenSecret = getAccessTokenSecret();
 		/*
@@ -292,7 +292,7 @@ public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 		TreeMap<String, String> treeMap = new TreeMap<String, String>();
 		treeMap.put(Configuration.CONSUMER_KEY, consumerKey);
 		treeMap.put(Configuration.NONCE, nonce);
-		treeMap.put(Configuration.SIGNATURE_METHOD, oaProvider.getSignatureMethod());
+		treeMap.put(Configuration.SIGNATURE_METHOD, getSignatureMethod());
 		treeMap.put(Configuration.VERSION, Configuration.OAUTH_VERSION1);
 		treeMap.put(Configuration.TIMESTAMP, timeStamp);
 		treeMap.put(Configuration.OAUTH_TOKEN, applicationAccessToken);
@@ -323,7 +323,7 @@ public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 					"createAuthorizationHeader failed with UnsupportedEncodingException");
 		}
 		headerStr.append(",").append(Configuration.SIGNATURE_METHOD).append("=\"")
-				.append(oaProvider.getSignatureMethod()).append("\"");
+				.append(getSignatureMethod()).append("\"");
 		headerStr.append(",").append(Configuration.TIMESTAMP).append("=\"").append(timeStamp).append("\"");
 		headerStr.append(",").append(Configuration.OAUTH_TOKEN).append("=\"").append(applicationAccessToken)
 				.append("\"");

@@ -3,6 +3,7 @@ package com.ibm.sbt.services.client.connections.files.model;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 /**
@@ -67,12 +68,12 @@ public class FileCreationParameters {
      /**
       * User ID of the user to share the content with. This parameter can be applied multiple times.
       */
-    public Collection<String> shareWith;
+    public Collection<String> shareWith = new LinkedList<String>();
     
     /**
      * String. Keyword that helps to classify the file. This parameter can be applied multiple times if multiple tags are passed. 
      */
-    public Collection<String> tags;
+    public Collection<String> tags = new LinkedList<String>();
         
     /**
      * Specifies who can see the file. Options are private or public. A public file is visible to all users and can be shared by all users. 

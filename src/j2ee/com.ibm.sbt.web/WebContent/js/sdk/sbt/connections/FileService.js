@@ -20,8 +20,8 @@
  * @module sbt.connections.FileService
  */
 
-define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstants", "../base/BaseService", "../base/BaseEntity", "../base/XmlDataHandler", "../config", "../util", "../xml"
-	   ], function(declare, lang, stringUtil, Promise, consts, BaseService, BaseEntity, XmlDataHandler, config, util, xml) {
+define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstants", "../base/BaseService", "../base/BaseEntity", "../base/XmlDataHandler", "../config", "../util", "../xml"], 
+		function(declare, lang, stringUtil, Promise, consts, BaseService, BaseEntity, XmlDataHandler, config, util, xml) {
 
 	/**
 	 * Comment class associated with a file comment.
@@ -1221,6 +1221,10 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 				var message = "HTML 5 File API is not supported by the Browser.";
 				return this.createBadRequestPromise(message);
 			}
+			// Dojo 1.4.3 does not support HTML5 FormData
+			if(util.getJavaScriptLibrary().indexOf("Dojo 1.4") != -1) {
+				return this.createBadRequestPromise("Dojo 1.4.* is not supported for File Upload");
+			}			
 			var files = null;
 			if (typeof fileControlOrId == "string") {
 				var fileControl = document.getElementById(fileControlOrId);
@@ -1236,8 +1240,9 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 			var file = files[0];
 			var data = new FormData();
 			data.append("file", file);
+
 			return this.uploadFileBinary(data, file.name, args);
-		},
+		},		
 
 		/**
 		 * Uploads a new file for logged in user.
@@ -1256,12 +1261,16 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 			if (promise) {
 				return promise;
 			}
+			if(util.getJavaScriptLibrary().indexOf("Dojo 1.4.3") != -1) {
+				return this.createBadRequestPromise("Dojo 1.4.3 is not supported for File Upload");
+			}
 			// /files/<<endpointName>>/<<serviceType>>/fileName eg. /files/smartcloud/connections/fileName?args
 			var url = this.constructUrl(config.Properties.serviceUrl + "/files/" + this.endpoint.proxyPath + "/" + "connections" + "/" + encodeURIComponent(fileName),
 					args && args.parameters ? args.parameters : {});
 			var headers = {
-				"Content-Type" : false
-			};
+				"Content-Type" : false,
+				 "Process-Data" : false,
+			};			
 			var options = {
 				method : "POST",
 				headers : headers,
@@ -1269,12 +1278,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 				data : binaryContent
 			};
 
-			return this.updateEntity(url, options, this.getFileFeedCallbacks());
-			/*
-			 * this.endpoint.xhrPost({ url : url, postData : binaryContent, headers : headers, load : function(data) { var file = self.getFileFeedCallbacks().createEntity(this, data); if (args) { if
-			 * (args.load) args.load(file); else if (args.handle) args.handle(file); } else { log.error("Callbacks not defined. Return Value={0}", param); } }, error : function(error) {
-			 * util.notifyError(error, args); } });
-			 */
+			return this.updateEntity(url, options, this.getFileFeedCallbacks());			
 		},
 
 		/**

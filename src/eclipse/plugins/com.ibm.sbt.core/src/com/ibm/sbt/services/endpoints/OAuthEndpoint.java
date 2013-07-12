@@ -18,8 +18,6 @@ package com.ibm.sbt.services.endpoints;
 
 import java.io.IOException;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.apache.http.HttpException;
 import org.apache.http.HttpRequest;
@@ -49,18 +47,12 @@ import com.ibm.sbt.util.SBTException;
  * </p>
  * 
  * @author Philippe Riand
+ * @author Vimal Dhupar
  */
 public class OAuthEndpoint extends AbstractEndpoint {
 
 	protected OAuth1Handler	oAuthHandler	= new OAuth1Handler();
 	
-	// for logging
-	private static final String sourceClass = OAuthEndpoint.class.getName();
-	private static final Logger logger = Logger.getLogger(sourceClass);
-
-	public OAuthEndpoint() {
-	}
-
 	@Override
 	public void checkValid() throws SBTException {
 		super.checkValid();
@@ -80,10 +72,6 @@ public class OAuthEndpoint extends AbstractEndpoint {
 			throw new SBTException(null, "The Endpoint access token URL is empty, class {0}", getClass());
 		}
 	}
-
-//	public OAProvider getOAuthProvider() {
-//		return oaProvider;
-//	}
 
 	@Override
 	public void setUrl(String url) {
@@ -241,7 +229,6 @@ public class OAuthEndpoint extends AbstractEndpoint {
 	public void initialize(DefaultHttpClient httpClient) throws ClientServicesException {
 		try {
 			AccessToken token = oAuthHandler.acquireToken(false);
-//			OAuthHandler oaHandler = oAuthHandler;
 			if ((token != null) && (oAuthHandler != null)) {
 				HttpRequestInterceptor oauthInterceptor = new OAuthInterceptor(token, super.getUrl(),oAuthHandler);
 				httpClient.addRequestInterceptor(oauthInterceptor, 0);
@@ -289,7 +276,6 @@ public class OAuthEndpoint extends AbstractEndpoint {
 					authorizationheader = oaHandler.createAuthorizationHeader();
 				}
 			} else {
-				logger.log(Level.SEVERE, "Error retrieving OAuth Handler. OAuth Handler is null");
 				throw new HttpException("Error retrieving OAuth Handler. OAuth Handler is null");
 			}
 			request.addHeader("Authorization", authorizationheader);

@@ -24,6 +24,7 @@ import com.ibm.commons.util.QuickSort;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.ReaderInputStream;
 import com.ibm.sbt.jslibrary.SBTEnvironment;
+import com.ibm.sbt.playground.assets.jssnippets.JSSnippetAssetNode;
 import com.ibm.sbt.playground.vfs.VFSFile;
 
 public class AssetBrowser {
@@ -88,8 +89,13 @@ public class AssetBrowser {
 					String fileName = getNameWithoutExtension(s.getName(), ext);
 					if(!snippets.contains(fileName)) {
 						AssetNode sn = factory.createAssetNode(node,fileName);
-						node.getChildren().add(sn);
-						snippets.add(fileName);
+						Properties p = new Properties();
+						sn.readProperties(s.getVFS(), sn, p);
+						if(includeNode(p)){
+						    node.getChildren().add(sn);
+						    snippets.add(fileName);
+						}
+                        
 					}
 				}
 			}
@@ -107,26 +113,13 @@ public class AssetBrowser {
 			
 		}).sort();
 	}
-
-	/*
-	 * Decide whether a node should be included in the tree.
-	 * @param properties
-	 * @return True if this node is to be included, false if it should not be included in the tree.
-	 */
-    private boolean includeNode(String properties) {
-        if(this.endpoints == null){
+	
+	private boolean includeNode(Properties properties){
+	    if(this.endpoints == null){
             return false;
         }
-        ReaderInputStream is = new ReaderInputStream(new StringReader(properties));
-        Properties p = new Properties();
-        try {
-            p.load(is);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        
-        String sampleEndpoints = p.getProperty(CategoryNode.ENDPOINT_PROPERTY_KEY);
-        String sampleJsLibs = p.getProperty(CategoryNode.JS_LIB_ID_PROPERTY_KEY);
+        String sampleEndpoints = properties.getProperty(CategoryNode.ENDPOINT_PROPERTY_KEY);
+        String sampleJsLibs = properties.getProperty(CategoryNode.JS_LIB_ID_PROPERTY_KEY);
         if(StringUtil.isEmpty(sampleEndpoints) && StringUtil.isEmpty(sampleJsLibs))
             return true; // no requirements specified, include it.
         else{
@@ -137,7 +130,22 @@ public class AssetBrowser {
             else
                 return endpointMatches(sampleEndpoints) && jsLibMatches(sampleJsLibs);
         }
-        
+	}
+
+	/*
+	 * Decide whether a node should be included in the tree.
+	 * @param properties
+	 * @return True if this node is to be included, false if it should not be included in the tree.
+	 */
+    private boolean includeNode(String properties) {
+        ReaderInputStream is = new ReaderInputStream(new StringReader(properties));
+        Properties p = new Properties();
+        try {
+            p.load(is);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return includeNode(p);
     }
     
     private boolean jsLibMatches(String sampleJsLibs){
@@ -145,10 +153,10 @@ public class AssetBrowser {
             return true; // no jsLibId specified in request url, include all samples.
         String sampleJsLibArray[] = sampleJsLibs.split(",");
         for(String sampleJsLib : sampleJsLibArray){
-            if(this.jsLibId.contains(sampleJsLib))
-                return true;
+            if(!this.jsLibId.contains(sampleJsLib))
+                return false;
         }
-        return false;
+        return true;
     }
     
     private boolean endpointMatches(String sampleEndpoints){
@@ -157,12 +165,12 @@ public class AssetBrowser {
         String[] sampleEndpointsArray = sampleEndpoints.split(",");
         for(String sampleEndpoint : sampleEndpointsArray){
             for(SBTEnvironment.Endpoint envEndpoint : this.endpoints){
-                if(StringUtil.equals(sampleEndpoint, envEndpoint.getName())){
-                    return true;
+                if(!StringUtil.equals(sampleEndpoint, envEndpoint.getName())){
+                    return false;
                 }
             }
         }
-        return false;
+        return true;
     }
 
     protected boolean isExtension(String ext) {

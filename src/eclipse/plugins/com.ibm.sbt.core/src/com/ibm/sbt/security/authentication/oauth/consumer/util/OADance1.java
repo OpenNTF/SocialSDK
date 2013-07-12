@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
- */
+ 
 package com.ibm.sbt.security.authentication.oauth.consumer.util;
 
 import java.io.IOException;
@@ -33,7 +33,7 @@ import com.ibm.sbt.security.authentication.oauth.consumer.OAProvider;
 import com.ibm.sbt.security.authentication.oauth.consumer.OAuth1Handler;
 import com.ibm.sbt.security.credential.store.CredentialStore;
 
-/**
+*//**
  * Encapsulate the different steps in the OAuth "dance".
  * <p>
  * This object is kept in the user session while "playing the dance". In a full
@@ -42,7 +42,7 @@ import com.ibm.sbt.security.credential.store.CredentialStore;
  * </p>
  * 
  * @author Philippe Riand
- */
+ *//*
 public class OADance implements Serializable {
 
 	private static final ProfilerType profilerReadTempToken = new ProfilerType(
@@ -111,10 +111,10 @@ public class OADance implements Serializable {
 	// Requesting a token
 	// =================================================================
 
-	/**
+	*//**
 	 * Request a temporary token for the application and redirect to a callback
 	 * page.
-	 */
+	 *//*
 	public synchronized void perform3LegsDance(Context context) throws OAuthException {
 		if (Profiler.isEnabled()) {
 			ProfilerAggregator agg = Profiler.startProfileBlock(
@@ -182,9 +182,9 @@ public class OADance implements Serializable {
 		}
 	}
 
-	/**
+	*//**
 	 * Read the OAuth token from the verifier.
-	 */
+	 *//*
 	public AccessToken readToken(String token, String verifier)
 			throws OAuthException {
 		if (Profiler.isEnabled()) {
@@ -219,12 +219,12 @@ public class OADance implements Serializable {
 		return oaProvider.createToken(getAppId(), getServiceName(),
 				oauthHandler, getUserId());
 	}
-	/*
+	
 	 * If the OAuth dance fails we want to provide as much info as possible
 	 * about the OAuth information we are using. Often we will be dealing with
 	 * non Lotus services so we want to make sure the admin has enough info to
 	 * start diagnosing what is wrong.
-	 */
+	 
 	private void throwOAuthException(Exception e, String method, String message)
 			throws OAuthException {
 		String callback = null;
@@ -329,3 +329,4 @@ public class OADance implements Serializable {
 				+ extraInfo.toString());
 	}
 }
+*/

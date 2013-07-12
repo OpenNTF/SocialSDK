@@ -2,19 +2,30 @@ package com.ibm.sbt.services.client.connections.communities;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-import java.util.Arrays;
-import java.util.Collection;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import org.junit.Ignore;
-import org.junit.Test;
-import com.ibm.commons.xml.XMLException;
 import com.ibm.sbt.services.BaseUnitTest;
-
+import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.client.connections.communities.Community;
+import com.ibm.sbt.services.client.connections.communities.CommunityService;
+import com.ibm.sbt.services.client.connections.communities.MemberList;
+import com.ibm.sbt.services.client.connections.communities.Member;
+import com.ibm.sbt.services.client.connections.communities.CommunityList;
+import com.ibm.sbt.services.client.connections.communities.BookmarkList;
+import com.ibm.sbt.services.client.connections.communities.Bookmark;
+import com.ibm.sbt.services.client.connections.communities.ForumTopic;
+import com.ibm.sbt.services.client.connections.communities.ForumTopicList;
+import com.ibm.sbt.services.client.connections.communities.Invite;
+import com.ibm.sbt.services.client.connections.communities.InviteList;
+import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
+import com.ibm.sbt.services.endpoints.EndpointFactory;
 /**
  * Tests for the java connections Communities API a test class provides its own tests extending the test
  * endpoint abstract class
@@ -24,37 +35,37 @@ import com.ibm.sbt.services.BaseUnitTest;
  */
 
 public class CommunityServiceTest extends BaseUnitTest {
-	@Ignore
+	
+	
+
 	@Test
 	public final void testGetCommunityById() throws Exception {
 
 		CommunityService communityService = new CommunityService();
-		Community community = communityService.getCommunity(properties.getProperty("communityUuid"));
-		assertNotNull(community);
-		assertNotNull(community.getData());
-		assertEquals("tCom12", community.getTitle());
+		authenticateEndpoint(communityService.getEndpoint(), properties.getProperty("user1"),
+				properties.getProperty("passwordUser1"));
+	
+		Community community = communityService.newCommunity();
+		community.setTitle("testCommunity"+System.currentTimeMillis());
+		community.setContent("test Community Content");
+		community = community.save();
+		community = communityService.getCommunity(community.getCommunityUuid());
+		assertEquals(true, community.getTitle().startsWith("testCommunity"));
 		assertEquals("test Community Content", community.getContent());
-		assertNotNull(community.getCommunityUrl());
-		assertNotNull(community.getCommunityUuid());
-		assertNotNull(community.getMembersUrl());
-		assertEquals(properties.getProperty("communityUuid"), community.getCommunityUuid());
+		
 	}
 
-	@Ignore
-	@Test
+	@Test(expected = CommunityServiceException.class)
 	public final void testGetCommunityByInvalidId() throws Exception {
 
 		CommunityService communityService = new CommunityService();
 		Community community = communityService.getCommunity("2344invalid");
-		assertNotNull(community);
-		assertNull(community.getData());
 	}
 
-	@Ignore
 	@Test
 	public final void testGetPublicCommunities() throws Exception {
 		CommunityService communityService = new CommunityService();
-		Collection<Community> communities = communityService.getPublicCommunities();
+		CommunityList communities = communityService.getPublicCommunities();
 		for (Community community : communities) {
 			assertNotNull(community.getTitle());
 			assertNotNull(community.getCommunityUrl());
@@ -63,14 +74,13 @@ public class CommunityServiceTest extends BaseUnitTest {
 		}
 	}
 
-	@Ignore
 	@Test
 	public final void testGetPublicCommunitiesByParameters() throws Exception {
 		CommunityService communityService = new CommunityService();
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("tag", "test");
 		parameters.put("ps", "5");
-		Collection<Community> communities = communityService.getPublicCommunities(parameters);
+		CommunityList communities = communityService.getPublicCommunities(parameters);
 		for (Community community : communities) {
 			assertNotNull(community.getTitle());
 			assertNotNull(community.getCommunityUrl());
@@ -80,13 +90,12 @@ public class CommunityServiceTest extends BaseUnitTest {
 		}
 	}
 
-	@Ignore
 	@Test
 	public final void testGetMyCommunities() throws Exception {
 		CommunityService communityService = new CommunityService();
 		authenticateEndpoint(communityService.getEndpoint(), properties.getProperty("user1"),
 				properties.getProperty("passwordUser1"));
-		Collection<Community> communities = communityService.getMyCommunities();
+		CommunityList communities = communityService.getMyCommunities();
 		for (Community community : communities) {
 			assertNotNull(community.getTitle());
 			assertNotNull(community.getCommunityUrl());
@@ -96,12 +105,13 @@ public class CommunityServiceTest extends BaseUnitTest {
 		}
 	}
 
-	@Ignore
 	@Test
 	public final void testGetCommunityBookmarks() throws Exception {
 		CommunityService communityService = new CommunityService();
-		Community community = communityService.getCommunity(properties.getProperty("communityUuid"), true);
-		List<Bookmark> 	bookmarks = Arrays.asList(communityService.getBookmarks(community));
+		CommunityList communities = communityService.getPublicCommunities();
+		Community community = communities.iterator().next();
+		
+		BookmarkList bookmarks = communityService.getBookmarks(community.getCommunityUuid());
 		
 		for (Bookmark bookmark : bookmarks) {
 			assertNotNull(bookmark.getTitle());
@@ -109,40 +119,59 @@ public class CommunityServiceTest extends BaseUnitTest {
 		}
 	}
 
-	@Ignore
 	@Test
 	public final void testGetCommunityForumTopics() throws Exception {
 		CommunityService communityService = new CommunityService();
-		Community community = communityService.getCommunity(properties.getProperty("communityUuid"), true);
-		List<ForumTopic> forumTopics = Arrays.asList(communityService.getForumTopics(community));
+		CommunityList communities = communityService.getPublicCommunities();
+		Community community = communities.iterator().next();
+		
+		ForumTopicList forumTopics = communityService.getForumTopics(community.getCommunityUuid());
 
 		for (ForumTopic forumTopic : forumTopics) {
 			assertNotNull(forumTopic.getTitle());
 		}
 	}
 
-	@Ignore
+	@Test
+	public final void testGetMyInvites() throws Exception {
+		CommunityService communityService = new CommunityService();
+		authenticateEndpoint(communityService.getEndpoint(), properties.getProperty("user1"),
+				properties.getProperty("passwordUser1"));
+	
+		InviteList invites = communityService.getMyInvites();
+		if(invites.getTotalResults() > 0){
+			for (Invite invite : invites) {
+				assertNotNull(invite.getTitle());
+			}
+		}
+	}
+	
 	@Test
 	public final void testGetMembers() throws Exception {
 		CommunityService communityService = new CommunityService();
-		Community community = communityService.getCommunity(properties.getProperty("communityUuid"));
-		List<Member> members = Arrays.asList(communityService.getMembers(community));
+		CommunityList communities = communityService.getPublicCommunities();
+		Community community = communities.iterator().next();
+		
+		MemberList members = communityService.getMembers(community.getCommunityUuid());
 
 		for (Member member : members) {
-			assertNotNull(member.getId());
+			assertNotNull(member.getUserid());
 			assertNotNull(member.getName());
 		}
 	}
 	
-	@Ignore
 	@Test
 	public final void testCreateCommuniy() throws Exception {
 		CommunityService communityService = new CommunityService();
-		Community community = communityService.getCommunity("", false);
-		community.setTitle("testCommunity");
+		authenticateEndpoint(communityService.getEndpoint(), properties.getProperty("user1"),
+				properties.getProperty("passwordUser1"));
+	
+		Community community = communityService.newCommunity();
+		community.setTitle("testCommunity"+System.currentTimeMillis());
 		community.setContent("test Community Content");
-		community = communityService.createCommunity(community, true);
-		assertEquals("testCommunity", community.getTitle());
+		community.setCommunityType("public");
+		community = community.save();
+		assertEquals(true, community.getTitle().startsWith("testCommunity"));
 		assertEquals("test Community Content", community.getContent());
 
 	}
@@ -151,37 +180,56 @@ public class CommunityServiceTest extends BaseUnitTest {
 	@Test
 	public final void testUpdateCommuniy() throws Exception {
 		CommunityService communityService = new CommunityService();
-		Community community = communityService.getCommunity(properties.getProperty("communityUuid"));
+		authenticateEndpoint(communityService.getEndpoint(), properties.getProperty("user1"),
+				properties.getProperty("passwordUser1"));
+		CommunityList communities = communityService.getMyCommunities();
+		Community community = communities.iterator().next();
 		community.setTitle("test Title");
 		community.setContent("test Content");
-		assertTrue(communityService.updateCommunity(community));
-
+		communityService.updateCommunity(community);
+		community = community.load();
+		assertEquals("test Title", community.getTitle());
+		assertEquals("test Content", community.getContent());
 	}
 
-	@Ignore
 	@Test
-	public final void testAddMember() throws Exception {
+	public final void testAddRemoveMember() throws Exception {
 		CommunityService communityService = new CommunityService();
-		Member member = new Member(communityService, properties.getProperty("email1"));
-		Community community = communityService.getCommunity(properties.getProperty("communityUuid"), false);
-		assertTrue(communityService.addMember(community, member));
+		authenticateEndpoint(communityService.getEndpoint(), properties.getProperty("user1"),
+				properties.getProperty("passwordUser1"));
+	
+		CommunityList communities = communityService.getMyCommunities();
+		Community community = communities.iterator().next();
+		communityService.addMember(community.getCommunityUuid(), properties.getProperty("email2"));
+		MemberList members = communityService.getMembers(community.getCommunityUuid());
+		for (Member member : members) {
+			assertNotNull(member.getUserid());
+			assertNotNull(member.getName());
+		}
+		communityService.removeMember(community.getCommunityUuid(), properties.getProperty("email2"));
 	}
 
-	@Ignore
-	@Test
-	public final void testRemoveMember() throws Exception {
-		CommunityService communityService = new CommunityService();
-		Member member = new Member(communityService, properties.getProperty("email1"));
-		Community community = communityService.getCommunity(properties.getProperty("communityUuid"), false);
-		assertTrue(communityService.removeMember(community, member));
-	}
 
-	@Ignore
 	@Test
 	public final void testDeleteCommunity() throws Exception {
 		CommunityService communityService = new CommunityService();
-		Community community = communityService.getCommunity(properties.getProperty("communityUuid"), false);
-		assertTrue(communityService.deleteCommunity(community));
+		authenticateEndpoint(communityService.getEndpoint(), properties.getProperty("user1"),
+				properties.getProperty("passwordUser1"));
+		CommunityList communities = communityService.getMyCommunities();
+		Community community = communities.iterator().next();
+	
+		try {
+			communityService.deleteCommunity(community.getCommunityUuid());
+			community = communityService.getCommunity(properties.getProperty("communityUuid"));
+		} catch (CommunityServiceException e) {
+			if (e.getCause() instanceof ClientServicesException) {
+				assertEquals(404, ((ClientServicesException)e.getCause()).getResponseStatusCode());
+				return;
+			} else {
+				throw e;
+			}
+		}
+		fail("Community found");
 	}
 
 }

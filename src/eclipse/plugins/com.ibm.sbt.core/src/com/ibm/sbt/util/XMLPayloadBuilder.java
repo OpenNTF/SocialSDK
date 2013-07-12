@@ -25,7 +25,6 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
 
-import com.ibm.sbt.services.client.smartcloud.communities.Community;
 
 /**
  * @author Carlos Manias
@@ -33,7 +32,7 @@ import com.ibm.sbt.services.client.smartcloud.communities.Community;
  */
 public class XMLPayloadBuilder implements PayloadBuilder {
 
-	private static final String sourceClass = Community.class.getName();
+	private static final String sourceClass = XMLPayloadBuilder.class.getName();
     private static final Logger logger = Logger.getLogger(sourceClass);
     
 	protected XMLPayloadBuilder() {}

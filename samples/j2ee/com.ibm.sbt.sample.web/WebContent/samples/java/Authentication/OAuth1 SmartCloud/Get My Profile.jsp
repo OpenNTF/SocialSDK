@@ -38,7 +38,7 @@
 	<%
 		try {		
 				ProfileService service = new ProfileService("smartcloud"); //If no endpoint is specified, it uses default end point i.e connections
-				Profile profile = service.getProfile();
+				Profile profile = service.getMyProfile();
 				if(profile != null)
 				{
 					out.println("<B>Profile </B> ");

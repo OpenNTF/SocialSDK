@@ -14,11 +14,14 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<%@page import="java.util.List"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.model.FileRequestPayload"%>
-<%@page import="com.ibm.sbt.services.client.connections.files.model.FileRequestParams"%>
-<%@page import="java.util.Date"%>
+<%@page import="com.ibm.sbt.services.client.connections.files.model.FileCreationParameters"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.FileService"%>
+<%@page import="com.ibm.sbt.services.client.connections.files.model.CommentEntry"%>
+<%@page import="com.ibm.sbt.services.client.connections.files.model.FileEntry"%>
+<%@page import="com.ibm.sbt.services.client.connections.files.FileEntryList"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.Date"%>
 <%@page import="com.ibm.sbt.services.endpoints.Endpoint"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.HashMap"%>
@@ -26,46 +29,48 @@
 <%@page import="com.ibm.sbt.services.client.ClientService"%>
 <%@page import="com.ibm.sbt.services.endpoints.EndpointFactory"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
-<%@page import="com.ibm.commons.runtime.Context"%>  
-<%@page import="com.ibm.sbt.services.client.connections.files.model.FileEntry"%>
-<%@page 
-	language="java" contentType="text/html; charset=ISO-8859-1" 
-	pageEncoding="ISO-8859-1"%>
-<html> 
+<%@page import="com.ibm.commons.runtime.Context"%>
+<%@page language="java" contentType="text/html; charset=ISO-8859-1"
+  pageEncoding="ISO-8859-1"%>
+<html>
 <head>
-	<title>SBT JAVA Sample - Update</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>SBT JAVA Sample - Update</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
-<body>	
-	<%
-	try {
-			FileService fileService = new FileService();
-        	List<FileEntry> fileEntries = fileService.getMyFiles();
-        	FileEntry fileEntry = fileEntries.get(0);
-			String fileId = fileEntry.getFileId();
-			String shareWithUserId = Context.get().getProperty("sample.userId2");
-			fileEntry = fileService.getFile(fileId, false); 
-			
-			out.println("<b> Updating File </b>");	 
-			out.println("<br>"); 
-			
-			Map<String, String> paramsMap = new HashMap<String, String>();
-			paramsMap.put(FileRequestParams.SHAREPERMISSION, "Edit");
-			paramsMap.put(FileRequestParams.SHAREWITH, shareWithUserId);
-			paramsMap.put(FileRequestParams.TAG, "TagUpdateFile");
-			
-			Map<String, String> payloadMap = new HashMap<String, String>();
-			payloadMap.put(FileRequestPayload.LABEL, "LabelUpdateFileNew" + System.currentTimeMillis());
-			fileEntry = fileService.update(fileEntry, paramsMap, payloadMap);
-			
-			out.println("File Updated : " + fileEntry.getFileId());
-		}catch (Throwable e) {
-			out.println("<pre>");
-			out.println(e.getMessage());
-			out.println("</pre>");	
-		}				
-		%>
-	 <br>
+<body>
+  <%
+      try {
+          FileService fileService = new FileService();
+          List<FileEntry> fileEntries = fileService.getMyFiles();
+          FileEntry fileEntry = fileEntries.get(0);
+          String fileId = fileEntry.getFileId();
+          String shareWithUserId = Context.get().getProperty("sample.userId2");
+          fileEntry = fileService.getFile(fileId, false);
+
+          out.println("<b> Updating File </b>");
+          out.println("<br>");
+
+          FileCreationParameters p = new FileCreationParameters();
+          p.sharePermission = FileCreationParameters.Permission.EDIT;
+          p.shareWith.add(shareWithUserId);
+          p.tags.add("TagUpdateFile");
+
+          Map<String, String> paramsMap = p.buildParameters();
+
+          
+          Map<String, String> payloadMap = new HashMap<String, String>();
+          payloadMap.put(FileRequestPayload.LABEL.toString(), "LabelUpdateFileNew" + System.currentTimeMillis());
+
+          fileEntry = fileService.updateFileInformation(fileEntry, paramsMap, payloadMap);
+
+          out.println("File Updated : " + fileEntry.getFileId());
+      } catch (Throwable e) {
+          out.println("<pre>");
+          out.println(e.getMessage());
+          out.println("</pre>");
+      }
+  %>
+  <br>
 </body>
 </html>

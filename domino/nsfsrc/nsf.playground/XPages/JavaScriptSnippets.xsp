@@ -83,10 +83,19 @@ if(doc) {	o = {		status:			"ok",		id:				snippetId,		unid:			doc.getUniversa
 			</xe:this.methods>
 		</xe:jsonRpcService>
 		<xc:ccLayout navigationPath="/JavaScriptSnippets"
-			title="#{javascript:optionsBean.getApplicationTitle('JavaScript Snippets')}" wholePage="true">
+			title="#{javascript:optionsBean.getApplicationTitle('JavaScript Snippets')}"
+			wholePage="true">
 			<xp:this.facets>
-				<xp:panel id="PlaceBarActions"
-					xp:key="PlaceBarActions">
+				<xp:panel id="PlaceBarActions" xp:key="PlaceBarActions">
+					<xp:comboBox id="comboLibrary" value="#{sessionScope.javaScriptLibrary}"
+						defaultValue="#{javascript:return
+								snippetBean.getDefaultJavaScriptLibrary()}">
+						<xp:selectItems>
+							<xp:this.value><![CDATA[#{javascript:snippetBean.getJavaScriptLibraries()}]]></xp:this.value>
+						</xp:selectItems>
+						<xp:eventHandler event="onchange" submit="true"
+							refreshMode="complete">
+						</xp:eventHandler></xp:comboBox>
 					<xc:ccEnvironmentComboBox></xc:ccEnvironmentComboBox>
 				</xp:panel>
 			</xp:this.facets>
@@ -105,18 +114,16 @@ if(doc) {	o = {		status:			"ok",		id:				snippetId,		unid:			doc.getUniversa
 					<xe:djBorderContainer id="djBorderContainer1"
 						liveSplitters="true">
 						<xe:this.dojoAttributes>
-							<xp:dojoAttribute name="gutters"
-								value="false">
+							<xp:dojoAttribute name="gutters" value="false">
 							</xp:dojoAttribute>
 						</xe:this.dojoAttributes>
 						<xe:djBorderPane region="top">
 							<xe:toolbar id="toolbar1">
 								<xe:this.treeNodes>
-									<xe:basicLeafNode
-										label="New Snippet" styleClass="dijitIconNewTask" href="#">
+									<xe:basicLeafNode label="New Snippet"
+										styleClass="dijitIconNewTask" href="#">
 									</xe:basicLeafNode>
-									<xe:basicLeafNode label="Save"
-										styleClass="dijitIconSave"
+									<xe:basicLeafNode label="Save" styleClass="dijitIconSave"
 										loaded="${javascript:userBean.canCreateDocs}">
 										<xe:this.onClick><![CDATA[if("#{userBean.canCreateDocs}"!="true") {
 	alert("You are not allowed to save a document. Please authenticate with a different user.");
@@ -129,17 +136,15 @@ if(pageGlobal.unid) {
 }]]></xe:this.onClick>
 									</xe:basicLeafNode>
 									<xe:basicLeafNode label="Save As..."
-										styleClass="dijitIconSave"
-										loaded="${javascript:userBean.canCreateDocs}">
+										styleClass="dijitIconSave" loaded="${javascript:userBean.canCreateDocs}">
 										<xe:this.onClick><![CDATA[if("#{userBean.canCreateDocs}"!="true") {
 	alert("You are not allowed to save a document. Please authenticate with a different user.");
 	return;
 }
 XSP.openDialog("#{id:snippetDialog}")]]></xe:this.onClick>
 									</xe:basicLeafNode>
-									<xe:basicLeafNode
-										label="Delete Snippet..." styleClass="dijitIconDelete"
-										loaded="${javascript:userBean.canCreateDocs}">
+									<xe:basicLeafNode label="Delete Snippet..."
+										styleClass="dijitIconDelete" loaded="${javascript:userBean.canCreateDocs}">
 										<xe:this.onClick><![CDATA[if("#{userBean.canCreateDocs}"!="true") {
 	alert("You are not allowed to delete a document. Please authenticate with a different user.");
 	return;
@@ -150,12 +155,11 @@ if(confirm("This operation cannot be undone.\nDo you really want to delete this 
 									</xe:basicLeafNode>
 								</xe:this.treeNodes>
 							</xe:toolbar>
-							<xp:link escape="true" text="Edit..."
-								id="deleteLink" style="display:none">
+							<xp:link escape="true" text="Edit..." id="deleteLink"
+								style="display:none">
 								<xp:image id="image2" url="/edit.jpg"></xp:image>
-								<xp:eventHandler event="onclick"
-									submit="true" refreshMode="partial"
-									refreshId="widgetContainer1">
+								<xp:eventHandler event="onclick" submit="true"
+									refreshMode="partial" refreshId="widgetContainer1">
 									<xp:this.action><![CDATA[#{javascript:var unid = context.getSubmittedValue()
 var doc = database.getDocumentByUNID(unid);
 if(doc) {
@@ -172,46 +176,37 @@ if(doc) {
 								style="width: 100%; height: 100%; border: none">
 								<xe:djTabPane id="tabHtml" title="HTML"
 									onShow="pageGlobal.htmlEditor.refresh()">
-									<xp:div
-										style="border: 1px solid #AAAAAA; height: 100%">
+									<xp:div style="border: 1px solid #AAAAAA; height: 100%">
 										<xc:PlaygroundTabHtml></xc:PlaygroundTabHtml>
 									</xp:div>
 								</xe:djTabPane>
-								<xe:djTabPane id="tabJs"
-									title="JavaScript" onShow="pageGlobal.jsEditor.refresh()">
-									<xp:div
-										style="border: 1px solid #AAAAAA; height: 100%">
+								<xe:djTabPane id="tabJs" title="JavaScript"
+									onShow="pageGlobal.jsEditor.refresh()">
+									<xp:div style="border: 1px solid #AAAAAA; height: 100%">
 										<xc:PlaygroundTabJavaScript></xc:PlaygroundTabJavaScript>
 									</xp:div>
 								</xe:djTabPane>
 								<xe:djTabPane id="tabCss" title="CSS"
 									onShow="pageGlobal.cssEditor.refresh()">
-									<xp:div
-										style="border: 1px solid #AAAAAA; height: 100%">
+									<xp:div style="border: 1px solid #AAAAAA; height: 100%">
 										<xc:PlaygroundTabCss></xc:PlaygroundTabCss>
 									</xp:div>
 								</xe:djTabPane>
-								<xe:djTabPane id="djTabProperties"
-									title="Properties"
+								<xe:djTabPane id="djTabProperties" title="Properties"
 									onShow="pageGlobal.propertiesEditor.refresh()">
-									<xp:div
-										style="border: 1px solid #AAAAAA; height: 100%">
+									<xp:div style="border: 1px solid #AAAAAA; height: 100%">
 										<xc:PlaygroundTabProperties></xc:PlaygroundTabProperties>
 									</xp:div>
 								</xe:djTabPane>
-								<xe:djTabPane id="djTabDocumentation"
-									title="Documentation">
-									<xp:div
-										style="border: 1px solid #AAAAAA; height: 100%">
+								<xe:djTabPane id="djTabDocumentation" title="Documentation">
+									<xp:div style="border: 1px solid #AAAAAA; height: 100%">
 										<xc:PlaygroundTabDocumentation></xc:PlaygroundTabDocumentation>
 									</xp:div>
 								</xe:djTabPane>
 							</xe:djTabContainer>
 						</xe:djBorderPane>
-						<xe:djBorderPane region="top"
-							splitter="false">
-							<xe:toolbar id="toolbar2"
-								style="display: inline-block">
+						<xe:djBorderPane region="top" splitter="false">
+							<xe:toolbar id="toolbar2" style="display: inline-block">
 								<xe:this.treeNodes>
 									<xe:basicLeafNode label="Run"
 										styleClass="dijitEditorIcon dijitEditorIconViewSource"
@@ -221,19 +216,12 @@ if(doc) {
 										styleClass="dijitEditorIcon dijitEditorIconViewSource"
 										onClick="runCode(true)">
 									</xe:basicLeafNode>
-									<xe:basicLeafNode
-										label="Show Generated HTML"
+									<xe:basicLeafNode label="Show Generated HTML"
 										styleClass="dijitEditorIcon dijitEditorIconViewSource"
 										onClick="showCode()">
 									</xe:basicLeafNode>
 								</xe:this.treeNodes>
 							</xe:toolbar>
-							<xp:comboBox id="comboLibrary"
-								onchange="runCode(false)">
-								<xp:selectItems>
-									<xp:this.value><![CDATA[#{javascript:snippetBean.getJavaScriptLibraries()}]]></xp:this.value>
-								</xp:selectItems>
-							</xp:comboBox>
 						</xe:djBorderPane>
 						<xe:djBorderPane region="center"
 							style="border: 1px solid #AAAAAA;">
@@ -241,8 +229,7 @@ if(doc) {
 								<xc:SnippetsPreviewPane></xc:SnippetsPreviewPane>
 							</xp:div>
 						</xe:djBorderPane>
-						<xe:djBorderPane region="bottom"
-							splitter="false">
+						<xe:djBorderPane region="bottom" splitter="false">
 							<xc:ApacheLicense></xc:ApacheLicense>
 						</xe:djBorderPane>
 					</xe:djBorderContainer>
@@ -386,7 +373,8 @@ codeEditor.setValue(_codeData);
 
 	<xc:ccEnvironmentComboBoxDialogs></xc:ccEnvironmentComboBoxDialogs>
 
-	<form id="PreviewForm" action="#{javascript:@FullUrl('/xsp/preview/javascriptsnippet')}"
+	<form id="PreviewForm"
+		action="#{javascript:@FullUrl('/xsp/preview/javascriptsnippet')}"
 		method="post" target="preview">
 		<input type="hidden" name="fm_html" id="html" />
 		<input type="hidden" name="fm_js" id="js" />

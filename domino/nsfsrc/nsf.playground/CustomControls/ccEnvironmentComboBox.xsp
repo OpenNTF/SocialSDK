@@ -21,9 +21,7 @@ if(e==dataAccess.CUSTOM) {
 	var dlgId = getClientId("customEnvDialog")
 	view.postScript("setTimeout('XSP.openDialog(\\'"+dlgId+"\\')');");
 } else {
-	if(compositeData.fullRefresh) {
-		context.reloadPage()
-	}
+	context.reloadPage()
 }}]]></xp:this.action>
 		</xp:eventHandler>
 	</xp:comboBox>

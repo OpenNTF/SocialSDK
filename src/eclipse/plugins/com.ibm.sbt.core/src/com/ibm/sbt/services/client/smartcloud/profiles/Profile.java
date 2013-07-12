@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,117 +16,39 @@
 
 package com.ibm.sbt.services.client.smartcloud.profiles;
 
-import java.io.Serializable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import com.ibm.commons.util.StringUtil;
-import com.ibm.commons.util.io.json.JsonObject;
-import com.ibm.sbt.services.client.ClientService;
-import com.ibm.sbt.services.client.SBTServiceException;
-import com.ibm.sbt.services.client.connections.files.utils.Messages;
-import com.ibm.sbt.util.DataNavigator;
+import com.ibm.sbt.services.client.base.BaseEntity;
+import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
+import com.ibm.sbt.services.client.base.datahandlers.JsonDataHandler;
 
 /**
- * This File does not have set/update/create/remove methods, as there are no Public APIs to perform these
- * functions.
- * <p>
- * 
+ * This Class creates a Profile Object from Profile Service
  * @Represents SmartCloud Profile
  * @author Vimal Dhupar
  */
-public class Profile implements Serializable {
+public class Profile extends BaseEntity {
 
-	private static final String	sourceClass			= Profile.class.getName();
-	private static final Logger	logger				= Logger.getLogger(sourceClass);
-	private static final long	serialVersionUID	= 2500126733627058535L;
-	private JsonObject			data;
-	private String				reqId;
-	private ProfileService		service;
-
-	public Profile() {
+	public Profile(BaseService svc, DataHandler<?> handler) {
+		super(svc,handler);
 	}
-
-	public Profile(String reqId, ProfileService service) {
-		this.reqId = reqId;
-		this.service = service;
+	
+	@Override
+	public JsonDataHandler getDataHandler(){
+		return (JsonDataHandler)dataHandler;
 	}
-
-	public Profile(String reqId, ProfileService service, DataNavigator resultObject) {
-		this.reqId = reqId;
-		this.service = service;
-		this.data = (JsonObject) resultObject.getCurrentNode();
-	}
-
-	/**
-	 * @return Service
-	 */
-	public ProfileService getService() {
-		return service;
-	}
-
-	/**
-	 * @set Service
-	 */
-	@SuppressWarnings("unused")
-	private void setService(ProfileService service) {
-		this.service = service;
-	}
-
-	/**
-	 * getData
-	 * 
-	 * @return Data
-	 */
-	public Object getData() {
-		return data;
-	}
-
-	/**
-	 * setData
-	 * 
-	 * @param data
-	 *            Method sets the response from the API call to data method for locally referring the data in
-	 *            future.
-	 */
-	public void setData(JsonObject data) {
-		this.data = data;
-	}
-
-	/**
-	 * load
-	 * 
-	 * @throws SBTServiceException
-	 */
-	public void load() throws SBTServiceException {
-		service.load(this, ProfilesAPIMap.GETPROFILEUSINGUSERGUID.getUrl(this.getId()),
-				ClientService.FORMAT_JSON);
-	}
-
+	
 	/**
 	 * getThumbnailUrl
 	 * 
 	 * @return ThumbnailUrl
 	 */
 	public String getThumbnailUrl() {
-		return get("thumbnailUrl");
-	}
-
-	/**
-	 * getUniqueId
-	 * 
-	 * @return id
-	 */
-	public String getUniqueId() {
-		return get("id");
-	}
-
-	/**
-	 * getReqId
-	 * 
-	 * @return ReqId
-	 */
-	public String getReqId() {
-		return reqId;
+		String thumbnailUrl = getAsString(ProfilesJsonPath.ThumbnailUrl);
+		if(StringUtil.isNotEmpty(thumbnailUrl)) {
+			thumbnailUrl = super.getService().getEndpoint().getUrl() +"/contacts/img/photos/"+ thumbnailUrl; 
+		}
+		return thumbnailUrl;
 	}
 
 	/**
@@ -135,7 +57,7 @@ public class Profile implements Serializable {
 	 * @return name
 	 */
 	public String getDisplayName() {
-		return get("displayName");
+		return getAsString(ProfilesJsonPath.DisplayName);
 	}
 
 	/**
@@ -144,7 +66,7 @@ public class Profile implements Serializable {
 	 * @return id
 	 */
 	public String getId() {
-		return get("id");
+		return getAsString(ProfilesJsonPath.Id);
 	}
 
 	/**
@@ -153,7 +75,7 @@ public class Profile implements Serializable {
 	 * @return email
 	 */
 	public String getEmail() {
-		return get("email");
+		return getAsString(ProfilesJsonPath.EmailAddress);
 	}
 
 	/**
@@ -162,7 +84,7 @@ public class Profile implements Serializable {
 	 * @return
 	 */
 	public String getAddress() {
-		return get("address");
+		return getAsString(ProfilesJsonPath.Address);
 	}
 
 	/**
@@ -171,7 +93,7 @@ public class Profile implements Serializable {
 	 * @return
 	 */
 	public String getDepartment() {
-		return get("department");
+		return getAsString(ProfilesJsonPath.Department);
 	}
 
 	/**
@@ -180,7 +102,7 @@ public class Profile implements Serializable {
 	 * @return
 	 */
 	public String getTitle() {
-		return get("title");
+		return getAsString(ProfilesJsonPath.Title);
 	}
 
 	/**
@@ -189,7 +111,7 @@ public class Profile implements Serializable {
 	 * @return
 	 */
 	public String getProfileUrl() {
-		return get("profileUrl");
+		return getAsString(ProfilesJsonPath.ProfileUrl);
 	}
 
 	/**
@@ -198,7 +120,7 @@ public class Profile implements Serializable {
 	 * @return
 	 */
 	public String getPhoneNumber() {
-		return get("phoneNumbers");
+		return getAsString(ProfilesJsonPath.PhoneNumbers);
 	}
 
 	/**
@@ -207,7 +129,7 @@ public class Profile implements Serializable {
 	 * @return
 	 */
 	public String getCountry() {
-		return get("country");
+		return getAsString(ProfilesJsonPath.Country);
 	}
 
 	/**
@@ -216,56 +138,6 @@ public class Profile implements Serializable {
 	 * @return
 	 */
 	public String getAboutMe() {
-		return get("aboutMe");
-	}
-
-	/**
-	 * @param fieldName
-	 * @return value for specified field. Field names follow IBM Connections naming convention
-	 */
-
-	public String get(String fieldName) {
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "get", new Object[] { fieldName });
-		}
-		String result = null;
-		if (null == this.data) {
-			logger.log(Level.SEVERE, Messages.ProfileError_1);
-			return null;
-		}
-		DataNavigator.Json nav = new DataNavigator.Json(this.data); // this.data has the response feed.
-		DataNavigator entry = nav.get("entry");
-		if (entry.getCurrentNode() == null) {
-			entry = nav; // this means we have already set the entry itself in the data, and not the feed. So
-							// we take the nav itself as the data and parse through it.
-		}
-		if (fieldName.equals("thumbnailUrl")) {
-			String photo = entry.stringValue("photo");
-			if (!StringUtil.isEmpty(photo)) {
-				result = this.service.getEndpoint().getUrl() + "/contacts/img/photos/" + photo;
-			}
-		} else if (fieldName.equals("email")) {
-			result = entry.stringValue("emailAddress");
-		} else if (fieldName.equals("department")) {
-			if (entry.get("org") != null) {
-				result = entry.get("org").stringValue("name");
-			}
-		} else if (fieldName.equals("title")) {
-			result = entry.stringValue("jobtitle");
-		} else if (fieldName.equals("phoneNumbers")) {
-			result = entry.stringValue("telephone");
-		} else {
-			result = entry.stringValue(fieldName);
-		}
-		if (logger.isLoggable(Level.FINEST)) {
-			logger.exiting(sourceClass, "get");
-		}
-		logger.log(Level.FINEST, Messages.ProfileInfo_6 + result);
-		return result;
-	}
-	
-	@Override
-	public String toString() {
-		return this.toString();
+		return getAsString(ProfilesJsonPath.About);
 	}
 }

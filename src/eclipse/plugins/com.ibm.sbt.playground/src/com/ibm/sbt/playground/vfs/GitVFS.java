@@ -81,7 +81,7 @@ public class GitVFS extends RemoteVFS {
 			RestClient c = createGitClient(getUserName(),getPassword());
 			String path = URLEncoding.encodeURIString(getPath(),"utf-8",0,false);
 			try {
-				Map<String,Object> json = (Map<String,Object>)c.get(path,new RestClient.HandlerJson(JsonJavaFactory.instance));
+				Map<String,Object> json = (Map<String,Object>)c.get(path,new RestClient.HandlerJson(JsonJavaFactory.instance)).getData();
 				String content = (String)json.get("content");
 				if(content!=null) {
 					String encoding = (String)json.get("encoding");
@@ -131,7 +131,7 @@ public class GitVFS extends RemoteVFS {
 				ArrayList<BaseFile> files = new ArrayList<BaseFile>();
 				RestClient c = createGitClient(getUserName(),getPassword());
 				String path = URLEncoding.encodeURIString(getPath(),"utf-8",0,false);
-				Object json = c.get(path,new RestClient.HandlerJson(JsonJavaFactory.instance));
+				Object json = c.get(path,new RestClient.HandlerJson(JsonJavaFactory.instance)).getData();
 				//System.out.println("Emit request for: "+path);				
 				if(json instanceof List) {
 					for(Object entry: (List)json) {

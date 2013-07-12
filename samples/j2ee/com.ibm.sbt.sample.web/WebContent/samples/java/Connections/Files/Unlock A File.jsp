@@ -14,12 +14,14 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<%@page import="java.util.List"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.FileService"%>
+<%@page import="com.ibm.sbt.services.client.connections.files.model.CommentEntry"%>
+<%@page import="com.ibm.sbt.services.client.connections.files.model.FileEntry"%>
+<%@page import="com.ibm.sbt.services.client.connections.files.FileEntryList"%>
+<%@page import="java.util.List"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
 <%@page import="java.io.PrintWriter"%>
-<%@page import="com.ibm.sbt.services.client.connections.files.model.FileEntry"%>
 <%@page 
 	language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -38,7 +40,7 @@
 				String fileId = fileEntry.getFileId();
 				out.println("<b> UnLocking File</b>" + fileId); 	
 				fileService.unlock(fileId);
-				out.println("<br> File UnLock Status : " + fileService.FileStatus ); 
+				out.println("<br> File is now Unlocked"); 
 		}catch (Throwable e) {
 			out.println("<pre>");
 			out.println(e.getMessage());

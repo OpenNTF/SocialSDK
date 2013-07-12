@@ -15,7 +15,9 @@
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@page import="com.ibm.sbt.services.client.connections.files.FileService"%>
-<%@page import="com.ibm.sbt.services.client.connections.files.model.FileEntry"%> 
+<%@page import="com.ibm.sbt.services.client.connections.files.model.CommentEntry"%>
+<%@page import="com.ibm.sbt.services.client.connections.files.model.FileEntry"%>
+<%@page import="com.ibm.sbt.services.client.connections.files.FileEntryList"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%> 
 <%@page import="java.io.PrintWriter"%>
@@ -37,10 +39,9 @@
 	<%
 	try {		
 		FileService fileService = new FileService();
-		List<FileEntry> fileEntries = fileService.getMyFolders(null); 
+		FileEntryList fileEntries = fileService.getMyFolders(null); 
 		if(fileEntries != null && ! fileEntries.isEmpty()) {
-			for (Iterator iterator = fileEntries.iterator(); iterator.hasNext();) {
-				FileEntry fileEntry = (FileEntry)iterator.next();
+			for (FileEntry fileEntry : fileEntries) {
 				out.println("Name :  " + fileEntry.getLabel() );
 			}
 		} else {

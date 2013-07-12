@@ -7,34 +7,32 @@ package com.ibm.sbt.services.client.connections.profiles.utils;
  */
 public class Messages {
 
-	public static String	InvalidArgument_1		= "Required input parameter is missing : id";
-	public static String	InvalidArgument_2		= "Required input parameter is missing : connectionId";
-	public static String	InvalidArgument_3		= "Invalid Input  : Null profile was passed";
-	public static String	InvalidArgument_4		= "Required input parameter is missing  : source id is missing";
-	public static String	InvalidArgument_5		= "Required input parameter is missing  : target id is missing";
-	public static String	GetProfileInfo_1		= "returning  requested profile";
-	public static String	GetProfileInfo_2		= "empty response from server for requested profile";
-	public static String	GetProfileInfo_3		= "Error while loading a profile";
-	public static String	GetProfileInfo_4		= "Error encountered while updating profile";
-	public static String	ProfileServiceException_1= "Exception occurred in method";
-	public static String	UpdateProfileInfo_1		= "Extension of file being uploaded is may be null";
-	public static String	PayloadInfo_1			= "Empty Payload Map provided.";
-	public static String	ProfilesException_1		= "Exception occurred in method while fetching User's Profile";
-	public static String	ProfileError_1			= "Profile Object : Data is null";
-	public static String	ProfileError_2			= "Error in method";
-	public static String	ProfileInfo_1			= "Cache Hit - Object found in Cache : ";
-	public static String	ProfileInfo_2			= "Cache Miss - Object not found in Cache : ";
-	public static String	ProfileInfo_4			= "Adding fetched Profile to Cache";
-	public static String	ProfileInfo_5			= "Error executing xpath query";
-	public static String	ProfileInfo_6			= "get method, returning the result : ";
-	public static String	ProfileInfo_7			= "resolved Profiles URL :";
-	public static String	ProfileInfo_8 			= "Error converting xml to String";
-	public static String	ProfileInfo_9 			= "Error encountered while updating photo";
-	public static String 	SendInviteMsg 			= "Please accept this invitation to be in my network of Connections colleagues.";
-	public static String    DeleteInviteError		= "Error encountered in deleting invite";
-	public static String    AcceptInviteError       = "Error encountered in accepting invite";
+	public static String	InvalidArgument_1				= "Required input parameter is missing : id";
+	public static String	InvalidArgument_2				= "Required input parameter is missing : connectionId";
+	public static String	InvalidArgument_3				= "Invalid Input  : Profile passed is null";
+	public static String	InvalidArgument_4				= "Required input parameter is missing  : source id is missing";
+	public static String	InvalidArgument_5				= "Required input parameter is missing  : target id is missing";
+	public static String	InvalidArgument_6				= "Invalid Input  : Connection passed is null";
 	
-
-	private Messages() {
-	}
+	public static String	ProfileServiceException_1		= "Exception occurred in method";
+	public static String	ProfileException				= "Error getting profile with identifier : {0}";
+	public static String	SearchException					= "Problem occurred while searching profiles";
+	public static String	ColleaguesException				= "Problem occurred while getting colleagues of user with identifier : {0}";
+	public static String	CheckColleaguesException		= "Problem occurred in checking if two users are colleagues";
+	public static String	CommonColleaguesException		= "Problem occurred in getting common colleagues of users {0} and {1}";
+	public static String	ReportingChainException			= "Problem occurred in getting report chain of user with identifier : {0}";
+	public static String	DirectReportsException			= "Problem occurred in getting direct reports of user with identifier : {0}";
+	public static String	ConnectionsByStatusException	= "Problem occurred while getting connections by status for user with identifier : {0}"; 
+	public static String	SendInviteException				= "Problem occurred in sending Invite to user with identifier : {0}"; 
+	public static String	SendInvitePayloadException		= "Error creating Send Invite Payload";
+	public static String 	SendInviteMsg 					= "Please accept this invitation to be in my network of Connections colleagues.";
+	public static String	AcceptInviteException			= "Problem occurred in accepting Invite with connection Id : {0}"; 
+	public static String	AcceptInvitePayloadException	= "Error creating Accept Invite Payload";
+	public static String	DeleteInviteException			= "Problem occurred in deleting Invite with connection Id : {0}";
+	public static String	UpdateProfilePhotoException		= "Problem occurred in Updating Profile Photo";
+	public static String	UpdateProfileException			= "Problem occurred in Updating Profile ";
+	public static String	DeleteProfileException			= "Problem occurred in deleting Profile of user with identifier : {0}";
+	public static String	CreateProfileException			= "Problem occurred in creating Profile of user with identifier : {0}";
+	public static String	CreateProfilePayloadException	= "Error in create Profile Payload";
+	
 }

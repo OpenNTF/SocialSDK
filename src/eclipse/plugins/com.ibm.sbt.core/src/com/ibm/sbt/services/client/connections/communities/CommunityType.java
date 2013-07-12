@@ -34,7 +34,7 @@ public enum CommunityType {
 	BOOKMARKS("bookmarks"),
 	FORUMTOPICS("forum/topics"),
 	SUBCOMMUNITIES("subcommunities"),
-	INVITES("invites"),
+	INVITES("invites/my"),
 	REMOTEAPPLICATIONS("remoteApplications");
 	
 	private String comType;

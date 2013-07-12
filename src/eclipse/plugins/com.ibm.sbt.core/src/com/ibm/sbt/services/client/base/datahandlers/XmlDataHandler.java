@@ -173,17 +173,15 @@ public class XmlDataHandler implements DataHandler<Node> {
      * @return Execute xpath query 
      */
     public String getFieldUsingXPath(XPathExpression xpathQuery) {
-    	String result = "";
-    	
-    	XResult xResult;
 		try {
-			xResult = xpathQuery.eval(data, nameSpaceCtx);
-			result = xResult.getStringValue() != null ? xResult.getStringValue() : "";
+			XResult xResult = xpathQuery.eval(data, nameSpaceCtx);
+			return xResult.getStringValue();
 		} catch (XPathException e) {
+			// TODO Add Logging
 		} catch (XMLException e) {
+			// TODO Add Logging
 		}
-    	
-    	return result;
+    	return null;
     }
     
     /**

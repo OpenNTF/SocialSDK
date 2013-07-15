@@ -161,6 +161,7 @@ define(['./declare', '../util', '../Promise', './jquery'], function(declare, uti
 		    
 		    if (args.headers) {
 		    	settings.headers = args.headers;	
+		    	// HTML5 FormData in jQuery requires contentType and processData = false on settings instead of headers as in dojo
 		    	var contentType = args.headers["Content-Type"];
 		    	if(contentType != undefined && contentType == false) {
 		    		settings.contentType = false;

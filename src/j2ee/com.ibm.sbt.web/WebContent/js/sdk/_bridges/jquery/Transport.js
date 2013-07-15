@@ -152,15 +152,26 @@ define(['./declare', '../util', '../Promise', './jquery'], function(declare, uti
 		    
 		    if (!args.handleAs) {
 		    	jQuery.extend(args, {handleAs: "text"});
-		    }
+		    }		    
 		    var settings = {
 		        type: method,
 		        data: xhrData,
-		        dataType: args.handleAs
+		        dataType: args.handleAs,		       
 		    };
 		    
 		    if (args.headers) {
 		    	settings.headers = args.headers;	
+		    	// HTML5 FormData in jQuery requires contentType and processData = false on settings instead of headers as in dojo
+		    	var contentType = args.headers["Content-Type"];
+		    	if(contentType != undefined && contentType == false) {
+		    		settings.contentType = false;
+		    		delete settings.headers["Content-Type"];
+		    	}
+		    	var processData = args.headers["Process-Data"];
+		    	if(processData != undefined && processData == false) {
+		    		settings.processData = false;
+		    		delete settings.headers["Process-Data"];
+		    	}		    	
 		    }
 		    
 		    if (!jQ_v_gte_18) {

@@ -6,7 +6,7 @@
     <title>Social Business Toolkit - Samples</title>
     <link href="images/sbt.png" rel="shortcut icon">
 
-    <link href="/sbt.bootstrap211/bootstrap/css/bootstrap.css" rel="stylesheet"></link>
+    <link href="/sbt.bootstrap211/bootstrap/css/bootstrap-sbt.css" rel="stylesheet"></link>
     <link href="css/stickyfooter.css" rel="stylesheet"></link>
     <link href="/sbt.bootstrap211/bootstrap/css/bootstrap-responsive.css" rel="stylesheet"></link>
     

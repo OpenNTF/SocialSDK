@@ -1,6 +1,7 @@
 (function($) {
 
     var snippetPage = "includes/js_snippet.jsp";
+    var outlinePage = "includes/outline.jsp";
     var previewPage = "javascriptPreview.jsp";
 
     function getUrlParameter(url, name) {
@@ -11,21 +12,27 @@
 
     }
 
-    function ajaxRefresh(snippet, jsLibId, env, themeId){
+    function ajaxRefresh(snippet, jsLibId, env, themeId, callback){
         // refresh snippet with js_snippet.jsp
         var parameters = "?snippet=" + snippet + "&jsLibId=" + jsLibId;
         if(env != null && env != "")
             parameters = parameters + "&env=" + env;
         if(themeId != null && themeId != "")
             parameters = parameters + "&themeId=" + themeId;
-        var snippetQuery = snippetPage + parameters;
-        $("#snippetContainer").load(snippetQuery);
-        // refresh iframe with javascriptPreview.jsp.
-        var previewQuery = previewPage + parameters;
-        $("#previewFrame").attr('src', previewQuery);
+        if(snippet){
+            var snippetQuery = snippetPage + parameters;
+            $("#snippetContainer").load(snippetQuery);
+            
+            // refresh iframe with javascriptPreview.jsp.
+            var previewQuery = previewPage + parameters;
+            $("#previewFrame").attr('src', previewQuery);
 
-        // update previewLink
-        $("#previewLink").attr("href", previewQuery).text(previewQuery);
+            // update previewLink
+            $("#previewLink").attr("href", previewQuery).text(previewQuery);
+        }
+        
+        if(callback)
+            callback(parameters);
     }
     // Debug flags whether we are going to use firebug.
     function postCode(frame, debug){
@@ -161,22 +168,33 @@
             $("div[class*='leafNode'] > div > span").css('cursor', 'pointer');
         };
 
-        $('#tree').on("newNodeEvent", function(e){
-            setLeafBehaviour();
+        var setNewLeafNodeListener = function(){
+            $('#tree').on("newNodeEvent", function(e){
+                setLeafBehaviour();
+            });
+        };
+        $("#treeOutline").ajaxComplete(function(){
+            setNewLeafNodeListener();
         });
-        
         setLeafBehaviour();
+        setNewLeafNodeListener();
         $("#envChange").change(function(e){
             e.preventDefault();
             var env = getUrlParameter($("#envChange option:selected").attr("value"), "env");
             setEnv(env);
-            ajaxRefresh(getSnippet(), getJsLibId(), getEnv(), getThemeId());
+            ajaxRefresh(getSnippet(), getJsLibId(), getEnv(), getThemeId(), function(parameters){
+                var outlineQuery = outlinePage + parameters;
+                $("#treeOutline").load(outlineQuery);
+            });
         });
         $("#libChange").change(function(e){
             e.preventDefault();
             var jsLibId = getUrlParameter($("#libChange option:selected").attr("value"), "jsLibId");
             setJsLibId(jsLibId);
-            ajaxRefresh(getSnippet(), getJsLibId(), getEnv(), getThemeId());
+            ajaxRefresh(getSnippet(), getJsLibId(), getEnv(), getThemeId(), function(parameters){
+                var outlineQuery = outlinePage + parameters;
+                $("#treeOutline").load(outlineQuery);
+            });
         });
         var cssObj = {
                 'max-height' : document.body.scrollHeight,

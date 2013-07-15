@@ -21,9 +21,10 @@
     <%
     String json = "";
     if(request.getRequestURL().toString().endsWith("java.jsp"))
-        json = SnippetFactory.getJavaSnippets(application).getAsJson();
-    else if(request.getRequestURL().toString().endsWith("javascript.jsp"))
-    	json = SnippetFactory.getJsSnippetsAsJson(application, request);
+        json = SnippetFactory.getJavaSnippets(application, request).getAsJson();
+    else {
+        json = SnippetFactory.getJsSnippetsAsJson(application, request);
+    }
         
     %>
     <script type="text/javascript">

@@ -73,7 +73,7 @@ public class SnippetServlet extends BaseHttpServlet {
 			String format = getFormat(request);
 
 			String str = null;
-			RootNode rootNode = SnippetFactory.getJsSnippets(getServletContext());
+			RootNode rootNode = SnippetFactory.getJsSnippets(getServletContext(), request);
 			if (unid != null && unid.length() > 0) {
 				VFSFile rootFile = SnippetFactory.getJsRootFile(getServletContext());
 				JSSnippet snippet = (JSSnippet) rootNode.loadAsset(rootFile, unid);

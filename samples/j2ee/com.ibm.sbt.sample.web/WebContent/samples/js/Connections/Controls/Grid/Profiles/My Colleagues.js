@@ -1,7 +1,7 @@
 require(["sbt/dom", "sbt/lang", "sbt/connections/controls/profiles/ProfileGrid","sbt/connections/controls/bootstrap/ProfileRendererMixin"], function(dom, lang, ProfileGrid, ProfileRendererMixin) {
     var grid = new ProfileGrid({
         type : "colleagues",
-        email : "%{sample.email1}",
+        userid : "%{sample.userId1}"
     });
     
     lang.mixin(grid.renderer, ProfileRendererMixin);

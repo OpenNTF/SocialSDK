@@ -47,7 +47,6 @@ import com.ibm.sbt.util.SBTException;
  * </p>
  * 
  * @author Philippe Riand
- * @author Vimal Dhupar
  */
 public class OAuthEndpoint extends AbstractEndpoint {
 

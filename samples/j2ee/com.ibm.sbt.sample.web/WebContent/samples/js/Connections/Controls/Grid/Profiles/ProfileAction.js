@@ -1,8 +1,7 @@
 require(["sbt/dom", "sbt/connections/controls/profiles/ProfileGrid"], function(dom, ProfileGrid) {
     var grid = new ProfileGrid({
         type : "profile",
-        email : "%{sample.email1}",
-        userid : "%{sample.id1}"
+        userid : "%{sample.userId1}"
     });
     
     grid.profileAction = {

@@ -897,6 +897,32 @@ public class ActivityStreamService extends BaseService {
 		}
 	}
 	
+	
+	/**
+	 * postMBEntry Creates Microblog entry
+	 * 
+	 * @param user
+	 * @param group
+	 * @param application
+	 * @param jsondata
+	 * @param header
+	 * @return JsonJavaObject
+	 * @throws ActivityStreamServiceException
+	 */
+	public String postMBEntry(String user, String group,
+			String application, JsonJavaObject postPayload)
+			throws ActivityStreamServiceException {
+
+		if (null == postPayload) {
+			throw new ActivityStreamServiceException(null,
+					"postPayload passed was null");
+		}
+
+		String postUrl = resolveUrlForPostingMB(user, group, application);
+		return postEntry(postUrl, postPayload);
+
+	}
+	
 	public ActivityStreamEntityList getActivityStreamEntities(String user,
 			String group, String app, Map<String, String> params) throws ActivityStreamServiceException {
 
@@ -968,6 +994,37 @@ public class ActivityStreamService extends BaseService {
 
 		return streamUrl.toString();
 	}
+	
+	
+	/*
+	 * Method responsible for generating appropriate REST URLs for POST functionality
+	 */
+	private String resolveUrlForPostingMB(String user, String group, String application) {
+
+		StringBuilder streamUrl = new StringBuilder(baseUrl);
+		streamUrl.append(AuthUtil.INSTANCE.getAuthValue(endpoint)).append(restUrl); // Basic or Oauth
+		
+		streamUrl.append(boardUrl); // include a condition here to switch this to board url
+
+		if (StringUtil.isEmpty(user)) {
+			user = ASUser.PUBLIC.getUserType();
+		}
+
+		if (StringUtil.isEmpty(group)) {
+			group = ASGroup.ALL.getGroupType();
+		}
+
+		streamUrl.append(ConnectionsConstants.SEPARATOR + user).append(ConnectionsConstants.SEPARATOR + group);
+		if (!(StringUtil.isEmpty(application))) {
+			streamUrl.append(ConnectionsConstants.SEPARATOR + application);
+		}
+
+		return streamUrl.toString();
+	}
+	
+
+	
+	
 	private String getUserLanguage() {
 		return "en";
 	}

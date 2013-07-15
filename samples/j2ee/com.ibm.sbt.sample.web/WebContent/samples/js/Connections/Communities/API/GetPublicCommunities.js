@@ -5,11 +5,7 @@ require([ "sbt/dom", "sbt/json", "sbt/connections/CommunityService" ], function(
             page : 1,
             ps : 10,
             since : "2009-01-04T20:32:31.171Z",
-            sortField  : "lastmod" // | name | count,
-            // email : "%{sample.email1}",
-            // search : "",
-            // tag : "tag1",
-            // userid : "%{sample.userid1}"
+            sortField  : "lastmod"
         });
     promise.then(
         function(communities) {

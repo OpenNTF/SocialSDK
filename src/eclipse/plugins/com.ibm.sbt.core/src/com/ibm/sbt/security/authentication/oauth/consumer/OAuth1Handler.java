@@ -635,10 +635,9 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 			// Here if we are forced to start an OAuth dance, we clear the Store from any existing tokens for this application and fetch new tokens.
 			deleteToken();
 			setApplicationPage(getApplicationPage(context));
-			context.getSessionMap().put(Configuration.OAUTH1_HANDLER, this);
 			try {
 				// This sends a signal
-				perform3LegsDance(context);
+				performOAuth1Dance();
 			} catch (Exception ex) {
 				throw new SBTException(ex, "Error while acquiring OAuth token");
 			}
@@ -651,35 +650,34 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 	 * Request a temporary token for the application and redirect to a callback
 	 * page.
 	 */
-	public synchronized void perform3LegsDance(Context context) throws OAuthException {
+	public synchronized void performOAuth1Dance() throws OAuthException {
 		if (Profiler.isEnabled()) {
 			ProfilerAggregator agg = Profiler.startProfileBlock(
 					profilerReadTempToken, "");
 			long ts = Profiler.getCurrentTime();
 			try {
-				_perform3LegsDance(context);
+				_performOAuth1Dance();
 			} finally {
 				Profiler.endProfileBlock(agg, ts);
 			}
 		} else {
-			_perform3LegsDance(context);
+			_performOAuth1Dance();
 		}
 	}
-	protected void _perform3LegsDance(Context context) throws OAuthException {
+	protected synchronized void _performOAuth1Dance() throws OAuthException {
 		try {
 			// Call the OAuth1Handler's method to get the Request token by
 			// making network call.
 			getRequestTokenFromServer();
-
 			String redirectUrl = getAuthorizationURL() + "?" + OAConstants.OAUTH_TOKEN + "=" + getRequestToken();
 			// tbd: is there a better way to handle this DropboxFiles specific parameter?
 			if (redirectUrl.contains("dropbox")) {
 				redirectUrl = redirectUrl + "&" + OAConstants.OAUTH_CALLBACK
-				+ "=" + getCallbackUrl(context);
+				+ "=" + getCallbackUrl(Context.get());
 			}
 
 			// Look if there are paththough parameters
-			String pass = (String) context.getRequestParameterMap().get("oaredirect");
+			String pass = (String) Context.get().getRequestParameterMap().get("oaredirect");
 			if (StringUtil.isNotEmpty(pass)) {
 				// Commenting this logic of modification of URL, as this creates
 				// a URL for OAuth1.0 which includes unsupported parameters, and
@@ -691,28 +689,23 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 				// redirectUrl = redirectUrl + "&oaredirect=" +
 				// URLEncoder.encode(pass,"utf-8");
 			}
-
+			Context.get().getSessionMap().put(Configuration.OAUTH1_HANDLER, this);
 			// URL redirection
-			context.sendRedirect(redirectUrl);
+			Context.get().sendRedirect(redirectUrl);
 			// throw new RedirectSignal();
 			// throw new RedirectSignal(redirectUrl);
 		} catch (IOException e) {
-			throwOAuthException(e, "_perform3LegsDance",
-			"Failed to get request token.");
+			throwOAuthException(e, "_performOAuth1Dance", "Failed to get request token.");
 		} catch (OAuthException e) {
-			throwOAuthException(e, "_perform3LegsDance",
-			"Failed to get request token.");
+			throwOAuthException(e, "_performOAuth1Dance", "Failed to get request token.");
 		} catch (URISyntaxException e) {
-			throwOAuthException(e, "_perform3LegsDance",
-			"Failed to get request token.");
+			throwOAuthException(e, "_performOAuth1Dance", "Failed to get request token.");
 		} catch (Exception e) {
-			throwOAuthException(e, "_perform3LegsDance",
-			"Failed to get request token.");
+			throwOAuthException(e, "_performOAuth1Dance", "Failed to get request token.");
 		}
 	}
 
-	private void throwOAuthException(Exception e, String method, String message)
-	throws OAuthException {
+	private void throwOAuthException(Exception e, String method, String message) throws OAuthException {
 		String callback = null;
 		String secret = null;
 		String key = null;
@@ -815,36 +808,26 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 	}
 
 
-	public String getApplicationPage(Context context) throws OAuthException {
-		// We just return to the same page
-		Object _req = context.getHttpRequest();
-		if (_req instanceof HttpServletRequest) {
-			HttpServletRequest request = (HttpServletRequest) _req;
-			String url = UrlUtil.getRequestUrl(request);
-			return url;
-		}
-		return null;
-	}
-
-	public String getCallbackUrl(Context context) throws OAuthException {
-		Object _req = context.getHttpRequest();
-		if (_req instanceof HttpServletRequest) {
-			HttpServletRequest request = (HttpServletRequest) _req;
-			String proxyBaseUrl = PathUtil.concat(ServiceUtil.getProxyUrl(request), OACallback.URL_PATH, '/');
-			return proxyBaseUrl;
-		}
-		return null;
-	}
-
-	//	protected OADance createOAuthDance(Context context, String userId) throws OAuthException {
-	//		String callback = getCallbackUrl(context);
-	//		String initialPage = getApplicationPage(context);
-	//
-	//		// Store the Oauth handler in session object
-	//		context.getSessionMap().put(Configuration.OAUTH1_HANDLER, this);
-	////		context.getSessionMap().put("oaProvider", this);
-	//		return new OADance(this, getAppId(), getServiceName(), userId, callback, initialPage);
-	//	}
+//	public String getApplicationPage(Context context) throws OAuthException {
+//		// We just return to the same page
+//		Object _req = context.getHttpRequest();
+//		if (_req instanceof HttpServletRequest) {
+//			HttpServletRequest request = (HttpServletRequest) _req;
+//			String url = UrlUtil.getRequestUrl(request);
+//			return url;
+//		}
+//		return null;
+//	}
+//
+//	public String getCallbackUrl(Context context) throws OAuthException {
+//		Object _req = context.getHttpRequest();
+//		if (_req instanceof HttpServletRequest) {
+//			HttpServletRequest request = (HttpServletRequest) _req;
+//			String proxyBaseUrl = PathUtil.concat(ServiceUtil.getProxyUrl(request), OACallback.URL_PATH, '/');
+//			return proxyBaseUrl;
+//		}
+//		return null;
+//	}
 
 	protected AccessToken findTokenFromStore(Context context, String userId) throws OAuthException {
 		if (Profiler.isEnabled()) {

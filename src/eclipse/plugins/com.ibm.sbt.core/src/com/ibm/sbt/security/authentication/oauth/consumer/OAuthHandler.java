@@ -17,8 +17,15 @@ package com.ibm.sbt.security.authentication.oauth.consumer;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import javax.servlet.http.HttpServletRequest;
+
+import com.ibm.commons.runtime.Context;
+import com.ibm.commons.runtime.util.UrlUtil;
+import com.ibm.commons.util.PathUtil;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.core.configuration.Configuration;
+import com.ibm.sbt.security.authentication.oauth.OAuthException;
+import com.ibm.sbt.security.authentication.oauth.consumer.servlet.OACallback;
+import com.ibm.sbt.service.util.ServiceUtil;
 
 public abstract class OAuthHandler {
 
@@ -168,4 +175,25 @@ public abstract class OAuthHandler {
 		return sourceText.replaceAll("<", "&lt;");
 	}
 
+	public String getApplicationPage(Context context) throws OAuthException {
+		// We just return to the same page
+		Object _req = context.getHttpRequest();
+		if (_req instanceof HttpServletRequest) {
+			HttpServletRequest request = (HttpServletRequest) _req;
+			String url = UrlUtil.getRequestUrl(request);
+			return url;
+		}
+		return null;
+	}
+
+	public String getCallbackUrl(Context context) throws OAuthException {
+		Object _req = context.getHttpRequest();
+		if (_req instanceof HttpServletRequest) {
+			HttpServletRequest request = (HttpServletRequest) _req;
+			String proxyBaseUrl = PathUtil.concat(ServiceUtil.getProxyUrl(request), OACallback.URL_PATH, '/');
+			return proxyBaseUrl;
+		}
+		return null;
+	}
+	
 }

@@ -1269,7 +1269,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 					args && args.parameters ? args.parameters : {});
 			var headers = {
 				"Content-Type" : false,
-				 "Process-Data" : false,
+				"Process-Data" : false, // processData = false is reaquired by jquery 
 			};			
 			var options = {
 				method : "POST",

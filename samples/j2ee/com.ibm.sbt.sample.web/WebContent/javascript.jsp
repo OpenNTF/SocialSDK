@@ -13,7 +13,7 @@
     <script src="libs/codemirror/mode/css/css.js"></script>
     <script src="libs/codemirror/lib/util/formatting.js"></script>
     <script src="/sbt.dojo180/dojo/dojo.js"></script>
-    <link href="/sbt.bootstrap211/bootstrap/css/bootstrap.css" rel="stylesheet"></link>
+    <link href="/sbt.bootstrap211/bootstrap/css/bootstrap-sbt.css" rel="stylesheet"></link>
     <style type="text/css">
       body {
         padding-top: 60px;
@@ -33,7 +33,8 @@
     <!-- main content starts -->
     <div class="container-fluid">
 		<div class="row-fluid">
-			<div class="span3">
+			<div id="treeOutline" class="span3">
+                <p class="muted">Displays the samples available for the current combination of library and environment</p>
 				<%@include file="includes/outline.jsp"%>
 			</div>
 			<div class="span8">

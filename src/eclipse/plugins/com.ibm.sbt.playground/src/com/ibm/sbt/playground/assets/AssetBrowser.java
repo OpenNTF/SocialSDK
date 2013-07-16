@@ -16,11 +16,15 @@
 package com.ibm.sbt.playground.assets;
 
 import java.io.IOException;
+import java.io.StringReader;
 import java.util.HashSet;
+import java.util.Properties;
 import java.util.Set;
-
 import com.ibm.commons.util.QuickSort;
 import com.ibm.commons.util.StringUtil;
+import com.ibm.commons.util.io.ReaderInputStream;
+import com.ibm.sbt.jslibrary.SBTEnvironment;
+import com.ibm.sbt.playground.assets.jssnippets.JSSnippetAssetNode;
 import com.ibm.sbt.playground.vfs.VFSFile;
 
 public class AssetBrowser {
@@ -33,13 +37,22 @@ public class AssetBrowser {
 	private VFSFile rootDirectory;
 	private NodeFactory factory;
 	private String[] extensions;
+	private SBTEnvironment.Endpoint[] endpoints;
+	private String jsLibId;
 	
 	public AssetBrowser(VFSFile rootDirectory, NodeFactory factory) {
 		this.rootDirectory = rootDirectory;
 		this.factory = factory;
 		this.extensions = factory.getAssetExtensions();
 	}
-
+	
+	public AssetBrowser(VFSFile rootDirectory, NodeFactory factory, SBTEnvironment.Endpoint[] endpoints, String jsLibId) {
+        this.rootDirectory = rootDirectory;
+        this.factory = factory;
+        this.extensions = factory.getAssetExtensions();
+        this.endpoints = endpoints;
+        this.jsLibId = jsLibId;
+    }
 	
 	public RootNode readAssets() throws IOException {
 		return readAssets(new RootNode(),null);
@@ -66,16 +79,23 @@ public class AssetBrowser {
 		for(VFSFile s: children) {
 			if(s.isFolder()) {
 				CategoryNode cn = factory.createCategoryNode(node, s.getName());
-				node.getChildren().add(cn);
-				browseDirectory(s,cn,cb);
+				if(includeNode(cn.readGlobalProperties(s.getVFS()))){
+				    node.getChildren().add(cn);
+				    browseDirectory(s,cn,cb);
+				}
 			} else if(s.isFile()) {
 				String ext = getExtension(s.getName(), extensions);
 				if(ext!=null) {
 					String fileName = getNameWithoutExtension(s.getName(), ext);
 					if(!snippets.contains(fileName)) {
 						AssetNode sn = factory.createAssetNode(node,fileName);
-						node.getChildren().add(sn);
-						snippets.add(fileName);
+						Properties p = new Properties();
+						sn.readProperties(s.getVFS(), sn, p);
+						if(includeNode(p)){
+						    node.getChildren().add(sn);
+						    snippets.add(fileName);
+						}
+                        
 					}
 				}
 			}
@@ -93,7 +113,72 @@ public class AssetBrowser {
 			
 		}).sort();
 	}
-	protected boolean isExtension(String ext) {
+	
+	private boolean includeNode(Properties properties){
+	    if(this.endpoints == null){
+            return false;
+        }
+        String sampleEndpoints = properties.getProperty(CategoryNode.ENDPOINT_PROPERTY_KEY);
+        String sampleJsLibs = properties.getProperty(CategoryNode.JS_LIB_ID_PROPERTY_KEY);
+        if(StringUtil.isEmpty(sampleEndpoints) && StringUtil.isEmpty(sampleJsLibs))
+            return true; // no requirements specified, include it.
+        else{
+            if(StringUtil.isEmpty(sampleEndpoints))    
+                return jsLibMatches(sampleJsLibs);
+            else if(StringUtil.isEmpty(sampleJsLibs))
+                return endpointMatches(sampleEndpoints);
+            else
+                return endpointMatches(sampleEndpoints) && jsLibMatches(sampleJsLibs);
+        }
+	}
+
+	/*
+	 * Decide whether a node should be included in the tree.
+	 * @param properties
+	 * @return True if this node is to be included, false if it should not be included in the tree.
+	 */
+    private boolean includeNode(String properties) {
+        ReaderInputStream is = new ReaderInputStream(new StringReader(properties));
+        Properties p = new Properties();
+        try {
+            p.load(is);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return includeNode(p);
+    }
+    
+    private boolean jsLibMatches(String sampleJsLibs){
+        if(this.jsLibId == null)
+            return true; // no jsLibId specified in request url, include all samples.
+        String sampleJsLibArray[] = sampleJsLibs.split(",");
+        for(String sampleJsLib : sampleJsLibArray){
+            if(this.jsLibId.contains(sampleJsLib))
+                return true;
+        }
+        return false;
+    }
+    
+    private boolean endpointMatches(String sampleEndpoints){
+        if(this.endpoints == null)
+            return true; // no endpoints in context for some reason, include samples.
+        String[] sampleEndpointsArray = sampleEndpoints.split(",");
+        for(String sampleEndpoint : sampleEndpointsArray){
+            if(!endpointsArrayContains(sampleEndpoint))
+                return false;
+        }
+        return true;
+    }
+    
+    private boolean endpointsArrayContains(String endpointName){
+        for(SBTEnvironment.Endpoint envEndpoint : this.endpoints){
+            if(StringUtil.equals(envEndpoint.getName(), endpointName))
+                return true;
+        }
+        return false;
+    }
+    
+    protected boolean isExtension(String ext) {
 		if(extensions!=null) {
 			for(int i=0; i<extensions.length; i++) {
 				if(extensions[i].equals(ext)) {

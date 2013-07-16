@@ -61,7 +61,7 @@
 					</select>
 				</form>
 				&nbsp;
-				<form class="navbar-form pull-right" style="<%=formStyle%>">
+				<form class="navbar-form pull-right" style="margin-right: 10px;<%=formStyle%>">
 					<span style="vertical-align: middle">Environment: </span> <select
 						id="envChange">
 						<%
@@ -78,6 +78,7 @@
 						%>
 					</select>
 				</form>
+                &nbsp;&nbsp;
 			</div>
 		</div>
 	</div>

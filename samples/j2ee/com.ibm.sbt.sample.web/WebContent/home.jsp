@@ -18,7 +18,7 @@
     
     <div id="wrap">
       <!-- main content starts -->
-      <div class="hero-unit" style="background-image:url('images/cover-bg.gif');color:white;">
+      <div class="hero-unit" style="background-image:url('images/cover-bg.jpg');color:white;">
         <h2>Samples Application</h2>
         <p>The Social Business Toolkit SDK is a set of libraries and code samples that you use for connecting to the IBM Social Platform.
         The samples application is a web-based live demonstration of the JavaScript and Java APIs that are exposed by the SDK.

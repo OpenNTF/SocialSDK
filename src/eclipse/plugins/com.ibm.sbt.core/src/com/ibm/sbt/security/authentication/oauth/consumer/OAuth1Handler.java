@@ -84,17 +84,17 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 	private int 			expireThreshold;
 	private String 			applicationPage;
 	private boolean 		storeRead;
-	private String 			appId;
-	private String 			serviceName;
-	private String 			credentialStore;
-	private String 			consumerKey;
-	private String 			consumerSecret;
-	private String 			requestTokenURL;
-	private String 			authorizationURL;
-	private String 			accessTokenURL;
-	private String 			signatureMethod;
-	private boolean			forceTrustSSLCertificate;
-	public String 			applicationAccessToken;
+	protected String 			appId;
+	protected String 			serviceName;
+	protected String 			credentialStore;
+	protected String 			consumerKey;
+	protected String 			consumerSecret;
+	protected String 			requestTokenURL;
+	protected String 			authorizationURL;
+	protected String 			accessTokenURL;
+	protected String 			signatureMethod;
+	protected boolean			forceTrustSSLCertificate;
+	protected String 			applicationAccessToken;
 
 	public OAuth1Handler() {
 		this.expireThreshold = EXPIRE_THRESHOLD;

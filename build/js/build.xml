@@ -105,9 +105,9 @@
 
     <echo>NodeJS executable: ${resolved.node}</echo>
     <echo>Arguments:         ${resolved.yui} ${dir.src} -o ${dir.jsdoc.output} -c ${dir.jsdoc.config}</echo>
-    <exec executable="${node.exec}" dir="." failonerror="true">
+    <exec executable="${node.exec}" failonerror="true" dir="${dir.src}">
       <arg value="${yuidoc.exec}"/>
-      <arg value="${dir.src}"/>
+      <arg value="."/>
       <arg value="-o"/>
       <arg value="${dir.jsdoc.output}"/>
       <arg value="-c"/>

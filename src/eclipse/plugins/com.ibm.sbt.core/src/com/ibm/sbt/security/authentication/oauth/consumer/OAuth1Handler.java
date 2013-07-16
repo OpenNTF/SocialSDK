@@ -23,8 +23,6 @@ import java.net.URLEncoder;
 import java.security.SecureRandom;
 import java.util.Date;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
@@ -32,8 +30,6 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import com.ibm.commons.Platform;
 import com.ibm.commons.runtime.Context;
-import com.ibm.commons.runtime.util.UrlUtil;
-import com.ibm.commons.util.PathUtil;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.StreamUtil;
 import com.ibm.commons.util.profiler.Profiler;
@@ -42,11 +38,9 @@ import com.ibm.commons.util.profiler.ProfilerType;
 import com.ibm.sbt.core.configuration.Configuration;
 import com.ibm.sbt.plugin.SbtCoreLogger;
 import com.ibm.sbt.security.authentication.oauth.OAuthException;
-import com.ibm.sbt.security.authentication.oauth.consumer.servlet.OACallback;
 import com.ibm.sbt.security.credential.store.CredentialStore;
 import com.ibm.sbt.security.credential.store.CredentialStoreException;
 import com.ibm.sbt.security.credential.store.CredentialStoreFactory;
-import com.ibm.sbt.service.util.ServiceUtil;
 import com.ibm.sbt.services.util.AnonymousCredentialStore;
 import com.ibm.sbt.services.util.SSLUtil;
 import com.ibm.sbt.util.SBTException;
@@ -806,28 +800,6 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 		throw new OAuthException(e, message + formattedString
 				+ extraInfo.toString());
 	}
-
-
-//	public String getApplicationPage(Context context) throws OAuthException {
-//		// We just return to the same page
-//		Object _req = context.getHttpRequest();
-//		if (_req instanceof HttpServletRequest) {
-//			HttpServletRequest request = (HttpServletRequest) _req;
-//			String url = UrlUtil.getRequestUrl(request);
-//			return url;
-//		}
-//		return null;
-//	}
-//
-//	public String getCallbackUrl(Context context) throws OAuthException {
-//		Object _req = context.getHttpRequest();
-//		if (_req instanceof HttpServletRequest) {
-//			HttpServletRequest request = (HttpServletRequest) _req;
-//			String proxyBaseUrl = PathUtil.concat(ServiceUtil.getProxyUrl(request), OACallback.URL_PATH, '/');
-//			return proxyBaseUrl;
-//		}
-//		return null;
-//	}
 
 	protected AccessToken findTokenFromStore(Context context, String userId) throws OAuthException {
 		if (Profiler.isEnabled()) {

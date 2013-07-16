@@ -138,6 +138,25 @@ define(['./lang','sbt/i18n!sbt/nls/util','./log'],function(lang, nls, log) {
 	            pairs.push(encodeURIComponent(name) + "=" + encodeURIComponent(value));
 	        }
 	        return pairs.join(delim);
+	    },
+	    /**
+	     * Returns the JavaScript Library and version used
+	     * @returns {String} JavaScript Library with version
+	     */
+	    getJavaScriptLibrary : function(){
+	    	var jsLib = "Unknown";
+	    	if(window.dojo) {
+	    		if(dojo.version) {
+	    			jsLib = "Dojo "+dojo.version;
+	    		}
+	    	} else if(define && define.amd && define.amd.vendor && define.amd.vendor === "dojotoolkit.org") {
+	    		require(["dojo/_base/kernel"], function(kernel){ 
+	    			jsLib = "Dojo AMD "+kernel.version;
+	    		});
+	    	} else if(window.jQuery) {
+	    		jsLib = "JQuery "+jQuery.fn.jquery;
+	    	} 
+	    	return jsLib;
 	    }
 	};
 });

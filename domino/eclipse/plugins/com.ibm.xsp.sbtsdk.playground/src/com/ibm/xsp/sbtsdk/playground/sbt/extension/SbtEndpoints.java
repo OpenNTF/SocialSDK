@@ -97,7 +97,7 @@ public class SbtEndpoints extends Endpoints {
     	
 		// Override the beans with the environment definition
 		{
-			ConnectionsBasicEndpoint ep = (ConnectionsBasicEndpoint)ManagedBeanUtil.getBean(context, "connections");
+			ConnectionsBasicEndpoint ep = (ConnectionsBasicEndpoint)ManagedBeanUtil.getBean(context, "connectionsBasic");
 			if(ep!=null) {
 				ep.setUrl(env.getField("Con_URL"));
 			}
@@ -113,7 +113,7 @@ public class SbtEndpoints extends Endpoints {
 			}
 		}
 		{
-			SmartCloudOAuthEndpoint ep = (SmartCloudOAuthEndpoint)ManagedBeanUtil.getBean(context, "smartcloud");
+			SmartCloudOAuthEndpoint ep = (SmartCloudOAuthEndpoint)ManagedBeanUtil.getBean(context, "smartcloudOA");
 			if(ep!=null) {
 				ep.setUrl(env.getField("Sma_URL"));
 				ep.setConsumerKey(env.getField("Sma_OA_ConsumerKey"));

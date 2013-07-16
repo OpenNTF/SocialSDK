@@ -29,7 +29,7 @@
 <%@page import="com.ibm.sbt.playground.assets.CategoryNode"%>
 <%@page import="com.ibm.sbt.sample.web.util.SnippetFactory"%>
 <%
-RootNode rootNode = SnippetFactory.getJsSnippets(application);
+RootNode rootNode = SnippetFactory.getJsSnippets(application, request);
 String snippetName = request.getParameter("snippet");
 JSSnippet snippet = (JSSnippet)rootNode.loadAsset(SnippetFactory.getJsRootFile(application), snippetName);
 String[] labels = snippet.getLabels();
@@ -59,7 +59,7 @@ if (snippet != null) {
       // Set title (if supported by container)
       gadgets.window.setTitle('Social Business Toolkit Sample - <%=name%>');
     </script>
-    <link href="/sbt.bootstrap211/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="/sbt.bootstrap211/bootstrap/css/bootstrap-sbt.css" rel="stylesheet">
     <link href="/sbt.bootstrap211/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
  	<script type="text/javascript" src="/sbt.dojo180/dojo/dojo.js" djConfig="parseOnLoad: true"></script>
 	<%

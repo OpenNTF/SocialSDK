@@ -25,7 +25,6 @@ import javax.servlet.http.HttpServletResponse;
 import nsf.playground.beans.DataAccessBean;
 import nsf.playground.environments.PlaygroundEnvironment;
 
-import com.ibm.commons.util.StringUtil;
 import com.ibm.xsp.sbtsdk.servlets.DominoServiceServlet;
 
 
@@ -41,11 +40,9 @@ public class PlaygroundDominoServiceServlet extends DominoServiceServlet {
 		// The API explorer sets the current environment as a request header
 		// If this parameter exists, then we initialize it
 		String envName = request.getHeader("x-env");
-		if(StringUtil.isNotEmpty(envName)) {
-			DataAccessBean dataAccess = DataAccessBean.get();
-			PlaygroundEnvironment env = dataAccess.getEnvironment(envName);
-			env.prepareEndpoints();
-		}
+		DataAccessBean dataAccess = DataAccessBean.get();
+		PlaygroundEnvironment env = dataAccess.getCurrentEnvironment(envName);
+		env.prepareEndpoints();
 		
 		super.service(request, response);
 	}

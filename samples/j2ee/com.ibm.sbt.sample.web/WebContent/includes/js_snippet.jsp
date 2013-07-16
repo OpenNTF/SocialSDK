@@ -18,14 +18,6 @@
             js = snippet.getJs();
             css = snippet.getCss();
             docHtml = snippet.getDocHtml();
-            
-            // replace substitution variables
-            if (StringUtil.isNotEmpty(js)) {
-                js = ParameterProcessor.process(js);
-            }
-            if (StringUtil.isNotEmpty(html)) {
-                html = ParameterProcessor.process(html);
-            }
         }
     %>
     <div id="jsContents">

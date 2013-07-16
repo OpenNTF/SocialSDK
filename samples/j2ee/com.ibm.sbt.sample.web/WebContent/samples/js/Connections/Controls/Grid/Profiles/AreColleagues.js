@@ -3,9 +3,8 @@ require(["sbt/dom", "sbt/connections/controls/profiles/ColleagueGrid"],
         var grid = new ColleagueGrid({
             type: "dynamic",
             rendererArgs: { hideViewAll: true },
-            email: "%{sample.email1}",
-            targetEmails: [ "AndreasBerzat@renovations.com", "JasmineHaj@renovations.com", "TedAmado@renovations.com", 
-                            "LouiseFitzgerald@renovations.com", "EdBlanks@renovations.com", "NancySmith@renovations.com" ]
+            userid: "%{sample.userId1}",
+            targetUserids: [ "%{sample.userId2}",  "%{sample.userId3}", "%{sample.userId4}", "%{sample.userId5}" ]
         });
         dom.byId("gridDiv").appendChild(grid.domNode);
     }

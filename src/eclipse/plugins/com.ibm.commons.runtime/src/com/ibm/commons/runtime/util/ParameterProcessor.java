@@ -16,10 +16,13 @@
 package com.ibm.commons.runtime.util;
 
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import com.ibm.commons.runtime.Application;
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.util.StringUtil;
@@ -31,6 +34,8 @@ public class ParameterProcessor {
 	
 	static final String DELIM_START = "%{"; //$NON-NLS-1$
 	static final String DELIM_END	= "}"; //$NON-NLS-1$
+	
+	static ParameterProvider defaultProvider;
 
 	/**
 	 * 
@@ -56,7 +61,51 @@ public class ParameterProcessor {
 		}
 		return input;
 	}
+	
+	public static List<String> getParametersQueryString(String input){
+	    Pattern paramsPattern = Pattern.compile("%\\{(.*?)\\}");
+	    Matcher paramsMatcher = paramsPattern.matcher(input);
+	    ArrayList<String> result = new ArrayList<String>();
+	    while(paramsMatcher.find()){
+	        result.add(paramsMatcher.group(1));
+	    }
+	    return result;
+	}
+	
+	public static ParameterProvider getDefaultProvider(){
+	    if(defaultProvider != null)
+	        return defaultProvider;
+	    final Context context = Context.getUnchecked();
+	    final Application application = Application.getUnchecked();
+	    defaultProvider = new ParameterProvider() {
+            @Override
+            public String getParameter(String name) {
+                if (context != null) {
+                    return context.getProperty(name);
+                }
+                return (application == null) ? null : application.getProperty(name);
+            }
+        };
+        return defaultProvider;
+	}
 
+	public static ParameterProvider getDefaultProvider(final ParameterProvider provider){
+        final ParameterProvider defaultProvider = getDefaultProvider();
+	    ParameterProvider result = new ParameterProvider() {
+            @Override
+            public String getParameter(String name) {
+                if (provider != null) {
+                    String value = provider.getParameter(name);
+                    if (value != null) {
+                        return value;
+                    }
+                }
+                return defaultProvider.getParameter(name);
+            }
+        };
+        return result;
+    }
+	
     /**
      * 
      * @param input

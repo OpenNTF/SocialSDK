@@ -78,7 +78,6 @@
 						%>
 					</select>
 				</form>
-                &nbsp;&nbsp;
 			</div>
 		</div>
 	</div>

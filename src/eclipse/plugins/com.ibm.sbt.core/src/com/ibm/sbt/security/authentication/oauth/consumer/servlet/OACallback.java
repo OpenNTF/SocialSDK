@@ -40,6 +40,7 @@ import com.ibm.sbt.services.util.AnonymousCredentialStore;
  * </p>
  * 
  * @author Philippe Riand
+ * @author Vimal Dhupar
  */
 public class OACallback extends AbstractServiceHandler {
 

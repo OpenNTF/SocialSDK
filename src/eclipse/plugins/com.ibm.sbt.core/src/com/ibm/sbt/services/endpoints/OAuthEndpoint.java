@@ -154,7 +154,9 @@ public class OAuthEndpoint extends AbstractEndpoint {
 	public void setSignatureMethod(String signatureMethod) {
 		oAuthHandler.setSignatureMethod(signatureMethod);
 		if (StringUtil.equalsIgnoreCase(Configuration.HMAC_SIGNATURE, signatureMethod)) {
-			this.setOauthHandler(new HMACOAuth1Handler());
+			this.setOauthHandler(new HMACOAuth1Handler(getConsumerKey(), getConsumerSecret(), getCredentialStore(), getAppId(), 
+					getServiceName(), getRequestTokenURL(), getAuthorizationURL(), getAccessTokenURL(), getSignatureMethod(), 
+					isForceTrustSSLCertificate(), getApplicationAccessToken()));
 		}
 	}
 
@@ -178,11 +180,11 @@ public class OAuthEndpoint extends AbstractEndpoint {
 	}
 
 	public String getApplicationAccessToken() {
-		return oAuthHandler.applicationAccessToken;
+		return oAuthHandler.getApplicationAccessToken();
 	}
 
 	public void setApplicationAccessToken(String applicationAccessToken) {
-		oAuthHandler.applicationAccessToken = applicationAccessToken;
+		oAuthHandler.setApplicationAccessToken(applicationAccessToken);
 	}
 
 	@Override

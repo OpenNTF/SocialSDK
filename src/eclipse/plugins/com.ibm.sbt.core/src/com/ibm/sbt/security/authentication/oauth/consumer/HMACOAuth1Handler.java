@@ -45,8 +45,30 @@ import com.ibm.sbt.services.util.SSLUtil;
 public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 
 	public HMACOAuth1Handler() {
-//		super(provider);
 	}
+	
+
+
+	public HMACOAuth1Handler(String consumerKey, String consumerSecret,
+			String credentialStore, String appId, String serviceName,
+			String requestTokenURL, String authorizationURL,
+			String accessTokenURL, String signatureMethod,
+			boolean forceTrustSSLCertificate, String applicationAccessToken) {
+		this.consumerKey = consumerKey;
+		this.consumerSecret = consumerSecret;
+		this.credentialStore = credentialStore;
+		this.appId = appId;
+		this.serviceName = serviceName;
+		this.requestTokenURL = requestTokenURL;
+		this.authorizationURL = authorizationURL;
+		this.accessTokenURL = accessTokenURL;
+		this.signatureMethod = signatureMethod;
+		this.forceTrustSSLCertificate = forceTrustSSLCertificate;
+		this.applicationAccessToken = applicationAccessToken;
+	}
+
+
+
 	private static final long	serialVersionUID	= 1L;
 
 	/*
@@ -58,7 +80,6 @@ public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 
 		int responseCode = HttpStatus.SC_OK;
 		Context context = Context.get();
-//		OAProvider oaProvider = getOAProvider();
 		String responseBody = "";
 		try {
 			HttpClient client = new DefaultHttpClient();
@@ -172,7 +193,6 @@ public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 
 		int responseCode = HttpStatus.SC_OK;
 		String responseBody = null;
-//		OAProvider oaProvider = getOAProvider();
 		try {
 			HttpClient client = new DefaultHttpClient();
 			if (getForceTrustSSLCertificate()) {
@@ -267,14 +287,11 @@ public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 	 */
 	public String createAuthorizationHeader(String url, Map<String, String> params) throws OAuthException {
 
-//		OAProvider oaProvider = getOAProvider();
-		Context context = Context.get();
-
 		String nonce = getNonce();
 		String timeStamp = getTimestamp();
 		String consumerKey = getConsumerKey();
 		String consumerSecret = getConsumerSecret();
-		String method = context.getHttpRequest().getMethod();
+		String method = Context.get().getHttpRequest().getMethod();
 		/*
 		 * This is the Access Token which is obtained from the Application, while registering the App. User
 		 * will have to create these tokens, in the application, if not generated already. This Access Token

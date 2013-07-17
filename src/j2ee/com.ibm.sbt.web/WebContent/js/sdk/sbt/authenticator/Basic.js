@@ -123,19 +123,25 @@ return declare(null, {
 	},
 	
 	_authMainWindow: function(options, loginPage, sbtUrl) {
-		var proxy = options.proxy.proxyUrl;
-		var actionURL = proxy.substring(0,proxy.lastIndexOf("/"))+"/basicAuth/"+options.proxyPath+"/JSApp";
-		var urlParamsMap = {
-            actionURL: actionURL,
-            redirectURL: document.URL,
-            loginUi: 'mainWindow',
-            showWrongCredsMessage: 'false'
-        };
-		
-        var urlParams = util.createQuery(urlParamsMap, "&");
-		var url = sbtUrl+loginPage + '?' + urlParams;
-		window.location.href = url;
-		
+		require(["sbt/i18n!sbt/nls/loginForm"], function(loginForm) {
+			var proxy = options.proxy.proxyUrl;
+			var actionURL = proxy.substring(0,proxy.lastIndexOf("/"))+"/basicAuth/"+options.proxyPath+"/JSApp";
+			var urlParamsMap = {
+	            actionURL: actionURL,
+	            redirectURL: document.URL,
+	            loginUi: 'mainWindow',
+	            showWrongCredsMessage: 'false',
+		      	username: loginForm.username,
+		    	password: loginForm.password,
+		    	login_ok: loginForm.login_ok,
+		    	login_cancel: loginForm.login_cancel,
+		    	wrong_creds_message: loginForm.wrong_creds_message
+	        };
+			
+	        var urlParams = util.createQuery(urlParamsMap, "&");
+			var url = sbtUrl+loginPage + '?' + urlParams;
+			window.location.href = url;
+		});
 		return true;
 	}
 	

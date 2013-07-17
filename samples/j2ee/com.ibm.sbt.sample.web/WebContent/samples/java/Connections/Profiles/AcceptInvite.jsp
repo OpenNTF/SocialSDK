@@ -18,12 +18,13 @@
 <%@page import="com.ibm.commons.runtime.Context"%>
 <%@page import="com.ibm.sbt.services.client.connections.profiles.ProfileService"%>
 <%@page import="com.ibm.sbt.services.client.connections.profiles.ConnectionEntry"%>
+<%@page import="com.ibm.sbt.services.client.connections.profiles.ConnectionEntryList"%>
 <%@page
 	language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <html>
 <head>
-	<title>Send Invite</title>
+	<title>Accept Invite</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 <body>
@@ -31,16 +32,23 @@
 	<%
 		try {
 			ProfileService connProfSvc = new ProfileService();
-			ConnectionEntry connection = connProfSvc.newConnectionEntry();
-			connection.setConnectionId("02e01084-d2ee-466e-bc06-6975cc6b1958");
-			connection.setTitle("Betty Heinz");
-			connection.setContent("Joined your nw");
-			connProfSvc.acceptInvite(connection);
-		} catch (Throwable e) {
+			String userId = Context.get().getProperty("sample.userId1");
+			ConnectionEntryList invites = connProfSvc.getConnectionsColleagueEntriesByStatus(userId, "pending");
+			if(invites != null && ! invites.isEmpty()){
+			if(invites.getTotalResults() > 0){
+				ConnectionEntry invite = invites.iterator().next();
+				invite.setContent("accepting your invite");
+				connProfSvc.acceptInvite(invite);
+			}
+			}
+			else
+				out.println("No Pending invites to accept");
+		}  catch (Throwable e) {
 			out.println("<pre>");
 			out.println(e.getMessage());
 			out.println("</pre>");
 		}
+		
 	%>
 	</div>
 </body>

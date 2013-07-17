@@ -20,7 +20,7 @@ public class ConnectionEntry extends BaseEntity{
 	 */
 	public String getConnectionId() {
 		String selfLink = getSelfLink();
-		String connectionId = selfLink.substring(selfLink.lastIndexOf("connectionId="),selfLink.lastIndexOf('&'));// check why the selfLink is not returned
+		String connectionId = selfLink.substring(selfLink.lastIndexOf("=")+1,selfLink.length());
 		return connectionId;
 	}
 

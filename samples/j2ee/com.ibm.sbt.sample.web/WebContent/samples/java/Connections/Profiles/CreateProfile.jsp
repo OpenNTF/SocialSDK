@@ -32,17 +32,17 @@
 	
 		ProfileAdminService service = new ProfileAdminService(); //If no endpoint is specified, it uses default end point i.e connections
 		Profile profile = service.newProfile();
-		String email = "testUser224@renovations.com";
-		profile.setAsString("guid",	"testUser224D9A04-F2E1-1222-4825-7A700026E92C");
-		profile.setAsString("email", email);
-		profile.setAsString("uid", "testUser224");
-		profile.setAsString("distinguishedName","CN=testUser224 def,o=renovations");
-		profile.setAsString("displayName", "testUser224");
-		profile.setAsString("givenNames", "testUser224");
-		profile.setAsString("surname", "testUser224");
+		long random = System.currentTimeMillis();
+		profile.setAsString("guid",	"testUser"+ random);
+		profile.setAsString("email","testUser"+ random+"@renovations.com");
+		profile.setAsString("uid", "testUser"+ random);
+		profile.setAsString("distinguishedName","CN=testUser"+random+"def,o=renovations");
+		profile.setAsString("displayName", "testUser"+ random);
+		profile.setAsString("givenNames", "testUser"+ random);
+		profile.setAsString("surname", "testUser"+ random);
 		profile.setAsString("userState", "active");
 		service.createProfile(profile);
-		profile = service.getProfile("testUser224@renovations.com");
+		profile = service.getProfile("testUser"+ random+"@renovations.com");
 		out.println("<b> Profile Created :with display name "+ profile.getDisplayName());
 	} catch (Throwable e) {
 			out.println("<pre>");

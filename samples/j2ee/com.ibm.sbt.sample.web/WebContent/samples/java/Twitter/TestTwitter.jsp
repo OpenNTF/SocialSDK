@@ -1,4 +1,5 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@page import="com.ibm.sbt.services.client.Response"%>
 <%@page import="com.ibm.sbt.services.endpoints.Endpoint"%>
 <%@page import="com.ibm.commons.util.io.json.JsonJavaFactory"%>
 <%@page import="com.ibm.commons.util.io.json.JsonGenerator"%>
@@ -40,12 +41,12 @@
      	Map<String, String> params = new HashMap<String,String>();
        	params.put("page", "1"); 
         params.put("count", "3"); 
-        Object result = ep.xhrGet(twitterUrl, params);
+        Response result = ep.xhrGet(twitterUrl, params);
 	 %>
 	 <pre>
 	 <code>
 	 	<%= 
-	 		JsonGenerator.toJson(JsonJavaFactory.instanceEx,result,false) 
+	 		JsonGenerator.toJson(JsonJavaFactory.instanceEx,result.getData(),false) 
 	 	%>
 	 </code>
 	 </pre>

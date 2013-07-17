@@ -39,15 +39,14 @@
 		try {
 				String userId = Context.get().getProperty("sample.id1");
 				ProfileService connProfSvc = new ProfileService();
-				Profile profile = connProfSvc.newProfile(userId);
+				Profile profile = connProfSvc.getProfile(userId);
 				
 				if (profile != null) {
-					ProfileList profiles = profile.getColleagues();
-					if(profiles != null && ! profiles.isEmpty()) {
-						for (Iterator iterator = profiles.iterator(); iterator.hasNext();) 
+					ProfileList colleagues = profile.getColleagues();
+					if(colleagues != null && ! colleagues.isEmpty()) {
+						for (Profile colleague : colleagues)
 						{
-						Profile profile1 = (Profile)iterator.next();
-						out.println("<b>Name : </b> " + profile1.getDisplayName());
+						out.println("<b>Name : </b> " + colleague.getDisplayName());
 						out.println("<br>");
 						}
 					} else {

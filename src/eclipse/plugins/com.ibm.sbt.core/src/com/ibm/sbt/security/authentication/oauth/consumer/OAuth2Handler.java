@@ -854,7 +854,8 @@ public class OAuth2Handler extends OAuthHandler {
         }
     }
     
-    protected String getCallbackUrl(Context context) throws OAuthException {
+    @Override
+	public String getCallbackUrl(Context context) throws OAuthException {
     	Object _req = context.getHttpRequest();
     	if(_req instanceof HttpServletRequest) {
         	HttpServletRequest request = (HttpServletRequest)_req;

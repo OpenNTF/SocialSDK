@@ -64,6 +64,8 @@ define([ "../../../declare",
      */
     var ProfileGrid = declare(Grid, {
     	
+    	endpoint:"smartcloud",
+    	
     	/**
     	 * @param options, This is a list of all
     	 * the different types of profile grids available.
@@ -77,7 +79,8 @@ define([ "../../../declare",
                     attributes : ProfileXPath,
                     paramSchema : ParamSchema,
                     feedXPath : FeedXPath,
-                    namespaces : Namespaces
+                    namespaces : Namespaces,
+                    endpoint: this.endpoint
                 },
                 rendererArgs : {
                     type : "contacts"
@@ -89,7 +92,8 @@ define([ "../../../declare",
 	                attributes : ProfileXPath,
 	                paramSchema : ParamSchema,
 	                feedXPath : FeedXPath,
-	                namespaces : Namespaces
+	                namespaces : Namespaces,
+	                endpoint: this.endpoint
 	            },
 	            rendererArgs : {
 	                type : "friends"

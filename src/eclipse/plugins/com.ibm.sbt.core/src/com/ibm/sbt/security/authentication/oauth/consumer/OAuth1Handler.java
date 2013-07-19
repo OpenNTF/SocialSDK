@@ -165,7 +165,9 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 		} catch (Exception e) {
 			throw new Exception("Internal error - getRequestToken failed Exception: <br>" + e);
 		} finally {
-			content.close();
+			if(content!=null) {
+				content.close();
+			}
 		}
 		if (responseCode != HttpStatus.SC_OK) {
 			if (responseCode == HttpStatus.SC_NOT_IMPLEMENTED) {

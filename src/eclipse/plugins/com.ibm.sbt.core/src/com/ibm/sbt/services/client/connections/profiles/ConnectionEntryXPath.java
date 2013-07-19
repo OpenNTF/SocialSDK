@@ -16,7 +16,7 @@ public enum ConnectionEntryXPath implements FieldEntry {
 	contributorName("./snx:connection/a:contributor[@snx:rel=\"http://www.ibm.com/xmlns/prod/sn/connection/target\"]/a:name"),
 	contributorUserId("./snx:connection/a:contributor[@snx:rel=\"http://www.ibm.com/xmlns/prod/sn/connection/target\"]/snx:userid"),
 	contributorEmail("./snx:connection/a:contributor[@snx:rel=\"http://www.ibm.com/xmlns/prod/sn/connection/target\"]/a:email"),
-	selfLinkFromEntry("./a:link/@href"),
+	selfLinkFromEntry("./a:link[@rel=\"self\"]/@href"),
 	editLinkFromEntry("./a:link[@rel=\"edit\"]/@href"),
 	content("./a:content");
 	

@@ -702,11 +702,11 @@ public class ProfileService extends BaseService {
 			Object payload = constructSendInviteRequestBody(inviteMsg);
 			super.createData(url, parameters, payload);
 		} catch (ClientServicesException e) {
-			throw new ProfileServiceException(e, Messages.SendInviteException);
+			throw new ProfileServiceException(e, Messages.SendInviteException, id);
 		} catch (TransformerException e) {
 			throw new ProfileServiceException(e, Messages.SendInvitePayloadException);
 		} catch (IOException e) {
-			throw new ProfileServiceException(e, Messages.SendInviteException);
+			throw new ProfileServiceException(e, Messages.SendInviteException, id);
 		}
 
 	}
@@ -874,7 +874,6 @@ public class ProfileService extends BaseService {
 		if(!StringUtil.isEmpty(action)){
 			xml = transformer.updateTransform(action, connectionEntry.getFieldsMap());
 		}
-
 		return xml;	
 	}
 

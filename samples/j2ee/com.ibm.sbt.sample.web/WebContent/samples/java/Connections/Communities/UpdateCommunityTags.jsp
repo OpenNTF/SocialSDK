@@ -18,6 +18,7 @@
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.Community"%>
+<%@page import="com.ibm.sbt.services.client.connections.communities.CommunityList"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.ArrayList"%>
@@ -37,27 +38,28 @@
 	<%
 	try {
 		CommunityService communityService = new CommunityService();
-		Collection<Community> communities = communityService.getPublicCommunities();
-		Community community = communities.iterator().next();
-		community.setTitle("Test Community" + System.currentTimeMillis());
-		community.setContent("Test Community updated by Update Community Java snippet");
-		community.setCommunityType("public");
-		List<String> tags = new ArrayList<String>();
-		tags.add("demotag");
-		community.setTags(tags);
-		communityService.updateCommunity(community);
-		
-		out.println("Community updated is: " + community.getCommunityUuid());
-		
-		community = communityService.getCommunity(community.getCommunityUuid());
-		 
-		out.println("Community Tags:");
-		out.println("<br>");
-		tags = community.getTags();
-		for (int i = 0; i < tags.size(); i++) {
-			out.println(tags.get(i));
+		CommunityList communities = communityService.getMyCommunities();
+		if(communities!=null && !communities.isEmpty()){
+			Community community = communities.iterator().next();
+			community.setTitle("Test Community" + System.currentTimeMillis());
+			community.setContent("Test Community updated by Update Community Java snippet");
+			community.setCommunityType("public");
+			List<String> tags = new ArrayList<String>();
+			tags.add("demotag");
+			community.setTags(tags);
+			communityService.updateCommunity(community);
+			community = communityService.getCommunity(community.getCommunityUuid());
+			out.println("Community updated is: " + community.getCommunityUuid());
+			out.println("Community Tags:");
 			out.println("<br>");
+			tags = community.getTags();
+			for (int i = 0; i < tags.size(); i++) {
+				out.println(tags.get(i));
+				out.println("<br>");
+			}
 		}
+		else
+			out.println("No community exist to update");
 	} catch (Exception e) {
 		out.println("<pre>");
 		out.println(e.getMessage());

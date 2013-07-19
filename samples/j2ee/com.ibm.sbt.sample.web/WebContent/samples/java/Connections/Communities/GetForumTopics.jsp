@@ -48,7 +48,7 @@
 				}
 			}
 			else
-				out.println("Problem Occurred while fetching forumTopics for this community");
+				out.println("No Forum Topics found for this Community");
 		} catch (Throwable e) {
 			out.println("<pre>");
 			out.println(e.getMessage());

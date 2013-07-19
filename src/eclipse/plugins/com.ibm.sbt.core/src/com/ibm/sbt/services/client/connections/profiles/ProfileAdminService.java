@@ -105,11 +105,11 @@ public class ProfileAdminService extends ProfileService {
 			String createUrl = resolveProfileUrl(ProfileAPI.ADMIN.getProfileEntityType(),ProfileType.ADDPROFILE.getProfileType());
 			super.createData(createUrl, parameters, createPayload, ClientService.FORMAT_CONNECTIONS_OUTPUT);
 		}catch(ClientServicesException e) {
-			throw new ProfileServiceException(e, Messages.CreateProfileException);
+			throw new ProfileServiceException(e, Messages.CreateProfileException, profile.getAsString("email"));
 		}catch (TransformerException e) {
 			throw new ProfileServiceException(e, Messages.CreateProfilePayloadException);
 		} catch (IOException e) {
-			throw new ProfileServiceException(e, Messages.CreateProfileException);
+			throw new ProfileServiceException(e, Messages.CreateProfileException, profile.getAsString("email") );
 		}
 
 	}

@@ -36,7 +36,7 @@
 	<div id="content">
 	<%
 		try {
-			String userId = Context.get().getProperty("sample.userId1");
+			String userId = Context.get().getProperty("sample.id1");
 			ProfileService connProfSvc = new ProfileService();
 			Map<String, String> params = new HashMap<String, String>();
 			params.put("inclMessage", "true");

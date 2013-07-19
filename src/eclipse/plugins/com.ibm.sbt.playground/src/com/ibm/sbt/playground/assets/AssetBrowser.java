@@ -18,13 +18,13 @@ package com.ibm.sbt.playground.assets;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 import com.ibm.commons.util.QuickSort;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.ReaderInputStream;
 import com.ibm.sbt.jslibrary.SBTEnvironment;
-import com.ibm.sbt.playground.assets.jssnippets.JSSnippetAssetNode;
 import com.ibm.sbt.playground.vfs.VFSFile;
 
 public class AssetBrowser {
@@ -100,6 +100,13 @@ public class AssetBrowser {
 				}
 			}
 		}
+	    List<Node> nodeChildren = node.getChildren();
+	    if(nodeChildren == null || nodeChildren.isEmpty()){
+	        CategoryNode nodeParent = node.getParent();
+	        if(nodeParent != null){
+	            nodeParent.getChildren().remove(node);
+	        }
+	    }
 		// Sort the samples alphabetically
 		(new QuickSort.JavaList(node.getChildren()) {
 			@Override

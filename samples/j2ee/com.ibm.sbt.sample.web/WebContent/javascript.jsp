@@ -34,7 +34,6 @@
     <div class="container-fluid">
 		<div class="row-fluid">
 			<div id="treeOutline" class="span3">
-                <p class="muted">Displays the samples available for the current combination of library and environment</p>
 				<%@include file="includes/outline.jsp"%>
 			</div>
 			<div class="span8">

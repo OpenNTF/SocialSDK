@@ -874,7 +874,6 @@ public class ProfileService extends BaseService {
 		if(!StringUtil.isEmpty(action)){
 			xml = transformer.updateTransform(action, connectionEntry.getFieldsMap());
 		}
-		System.out.println("accept xml "+xml);
 		return xml;	
 	}
 

@@ -39,7 +39,7 @@
 		Collection<Community> communities = communityService.getPublicCommunities();
 		Community community = communities.iterator().next();
 		String id = Context.get().getProperty("sample.id2");
-		communityService.addMember(community.getCommunityUuid(),id,"");
+		communityService.addMember(community.getCommunityUuid(),id);
 		out.println("user : "+id+" added to community "+community.getCommunityUuid());
 		
 		

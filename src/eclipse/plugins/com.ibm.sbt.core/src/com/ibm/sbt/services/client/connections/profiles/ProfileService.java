@@ -109,7 +109,7 @@ public class ProfileService extends BaseService {
 
 
 	public Profile newProfile(String id) throws ProfileServiceException {
-		Profile profile = getProfile(id);
+		Profile profile = new Profile(this, id);
 		return profile;
 	}
 

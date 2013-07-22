@@ -58,13 +58,14 @@ define([ "../../../declare",
         pageSize : parameter.oneBasedInteger("count")
     };
 	
+	var endpoint = "smartcloud";
+	
     /**
      * @class ProfileGrid
      * @namespace sbt.connections.controls.profiles
      */
     var ProfileGrid = declare(Grid, {
-    	
-    	endpoint:"smartcloud",
+   
     	
     	/**
     	 * @param options, This is a list of all
@@ -80,7 +81,7 @@ define([ "../../../declare",
                     paramSchema : ParamSchema,
                     feedXPath : FeedXPath,
                     namespaces : Namespaces,
-                    endpoint: this.endpoint
+                    endpoint: endpoint
                 },
                 rendererArgs : {
                     type : "contacts"
@@ -93,7 +94,7 @@ define([ "../../../declare",
 	                paramSchema : ParamSchema,
 	                feedXPath : FeedXPath,
 	                namespaces : Namespaces,
-	                endpoint: this.endpoint
+	                endpoint: endpoint
 	            },
 	            rendererArgs : {
 	                type : "friends"

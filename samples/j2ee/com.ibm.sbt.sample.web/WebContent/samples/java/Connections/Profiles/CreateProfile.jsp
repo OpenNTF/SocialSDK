@@ -30,19 +30,18 @@
 	<%
 	try {
 	
-		ProfileAdminService service = new ProfileAdminService(); //If no endpoint is specified, it uses default end point i.e connections
-		Profile profile = service.newProfile();
-		String email = "testUser224@renovations.com";
-		profile.setAsString("guid",	"testUser224D9A04-F2E1-1222-4825-7A700026E92C");
-		profile.setAsString("email", email);
-		profile.setAsString("uid", "testUser224");
-		profile.setAsString("distinguishedName","CN=testUser224 def,o=renovations");
-		profile.setAsString("displayName", "testUser224");
-		profile.setAsString("givenNames", "testUser224");
-		profile.setAsString("surname", "testUser224");
-		profile.setAsString("userState", "active");
+		ProfileAdminService service = new ProfileAdminService(); 
+		Profile profile = service.newProfile(Context.get().getProperty("createProfileUid"));
+		profile.setAsString("guid",	Context.get().getProperty("createProfileId"));
+		profile.setAsString("email", Context.get().getProperty("createProfileEmail"));
+		profile.setAsString("uid", Context.get().getProperty("createProfileUid"));
+		profile.setAsString("distinguishedName",Context.get().getProperty("createProfileDistinguishedName"));
+		profile.setAsString("displayName", Context.get().getProperty("testUser"));
+		profile.setAsString("givenNames", Context.get().getProperty("createProfileGivenNames"));
+		profile.setAsString("surname", Context.get().getProperty("createProfileSurName"));
+		profile.setAsString("userState", Context.get().getProperty("createProfileUserState"));
 		service.createProfile(profile);
-		profile = service.getProfile("testUser224@renovations.com");
+		profile = service.getProfile(Context.get().getProperty("createProfileUserState"));
 		out.println("<b> Profile Created :with display name "+ profile.getDisplayName());
 	} catch (Throwable e) {
 			out.println("<pre>");

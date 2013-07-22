@@ -187,7 +187,9 @@ public class OAuth2Handler extends OAuthHandler {
 		} catch (Exception e) {
 			throw new Exception("getAccessToken failed with Exception: <br>" + e);
 		} finally {
-			content.close();
+			if(content != null) {
+				content.close(); 
+			}
 		}
 		if (responseCode != HttpStatus.SC_OK) {
 			getAccessTokenForAuthorizedUsingPOST();
@@ -280,7 +282,9 @@ public class OAuth2Handler extends OAuthHandler {
 			e.printStackTrace();
 			throw new Exception("getAccessToken failed with Exception: <br>" + e);
 		} finally {
-			content.close();
+			if(content!=null) {
+				content.close();
+			}
 		}
 		if (responseCode != HttpStatus.SC_OK) {
 			if (responseCode == HttpStatus.SC_UNAUTHORIZED) {
@@ -654,8 +658,9 @@ public class OAuth2Handler extends OAuthHandler {
     		String responseBody = null;
     		InputStream content = null;
     		try {
-    			HttpClient client;
-    			client = new DefaultHttpClient();
+    			HttpClient client = new DefaultHttpClient();
+    			if(forceTrustSSLCertificate)
+    				client = (DefaultHttpClient)SSLUtil.wrapHttpClient((DefaultHttpClient)client);
     			StringBuilder url = new StringBuilder();
     			url.append(getAccessTokenURL()).append('?');
     			url.append(Configuration.OAUTH2_CLIENT_ID);
@@ -684,7 +689,9 @@ public class OAuth2Handler extends OAuthHandler {
     		} finally {
     			if (method != null){
 					try {
-						content.close();
+						if(content!=null) {
+							content.close();
+						}
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -854,7 +861,8 @@ public class OAuth2Handler extends OAuthHandler {
         }
     }
     
-    protected String getCallbackUrl(Context context) throws OAuthException {
+    @Override
+	public String getCallbackUrl(Context context) throws OAuthException {
     	Object _req = context.getHttpRequest();
     	if(_req instanceof HttpServletRequest) {
         	HttpServletRequest request = (HttpServletRequest)_req;

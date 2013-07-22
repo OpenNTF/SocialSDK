@@ -32,7 +32,6 @@
 	
 		ProfileAdminService service = new ProfileAdminService(); 
 		Profile profile = service.newProfile(Context.get().getProperty("createProfileUid"));
-		long random = System.currentTimeMillis();
 		profile.setAsString("guid",	Context.get().getProperty("createProfileId"));
 		profile.setAsString("email", Context.get().getProperty("createProfileEmail"));
 		profile.setAsString("uid", Context.get().getProperty("createProfileUid"));

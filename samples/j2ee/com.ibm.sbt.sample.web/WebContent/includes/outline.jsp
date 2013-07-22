@@ -8,6 +8,15 @@
 <%@page import="com.ibm.sbt.sample.web.util.SnippetFactory"%>
 <%@page import="com.ibm.sbt.playground.assets.javasnippets.JavaSnippet"%>
 <%@page import="com.ibm.sbt.sample.web.util.Util"%>
+<%
+    String json = "";
+    if(request.getRequestURL().toString().endsWith("java.jsp"))
+        json = SnippetFactory.getJavaSnippets(application, request).getAsJson();
+    else {
+        json = SnippetFactory.getJsSnippetsAsJson(application, request);
+%>
+<p class="muted">Displays the samples available for the current combination of library and environment</p>
+<%} %>
 <div class="well sidebar-nav">
 	<div class="btn-group">
 		<button class="btn btn-mini" id="expandAll">
@@ -18,15 +27,6 @@
 		</button>
 	</div>
     <div id="tree"></div>
-    <%
-    String json = "";
-    if(request.getRequestURL().toString().endsWith("java.jsp"))
-        json = SnippetFactory.getJavaSnippets(application, request).getAsJson();
-    else {
-        json = SnippetFactory.getJsSnippetsAsJson(application, request);
-    }
-        
-    %>
     <script type="text/javascript">
     require(["dojo/_base/declare", "dojo/ready", "dojo/dom", "dojo/dom-class", "dojo/store/Memory",
              "dijit/tree/ObjectStoreModel", "dijit/Tree"], 

@@ -19,6 +19,7 @@
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.Community"%>
+<%@page import="com.ibm.sbt.services.client.connections.communities.CommunityList"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
 <%@page import="java.util.HashMap"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -35,12 +36,16 @@
 	<%
 	try {
 		CommunityService communityService = new CommunityService();
-		Collection<Community> communities = communityService.getMyCommunities();
-		Community community = communities.iterator().next();
-		out.println("<b> Community Title : "+community.getTitle());
-		community.delete();	
-		out.println("<b> Community Removed : "+community.getCommunityUuid());
-		out.println("<br>");
+		CommunityList communities = communityService.getMyCommunities();
+		if(communities != null && !communities.isEmpty()){
+			Community community = communities.iterator().next();
+			out.println("<b> Community Title : "+community.getTitle());
+			community.delete();	
+			out.println("<b> Community Removed : "+community.getCommunityUuid());
+			out.println("<br>");
+		}
+		else
+		 	out.println("<b> No Communities exist for removal ");
 	} catch (Throwable e) {
 		out.println("<pre>");
 		out.println(e.getMessage());

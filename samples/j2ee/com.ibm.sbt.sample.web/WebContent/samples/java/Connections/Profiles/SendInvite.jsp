@@ -30,10 +30,9 @@
 	<div id="content">
 	<%
 	try{
-		String userId = Context.get().getProperty("sample.id1");
+		String userId = Context.get().getProperty("sample.id2");
 		ProfileService connProfSvc = new ProfileService();
-		Profile profile = connProfSvc.getProfile(userId);
-		connProfSvc.sendInvite("BettyHeinz@renovations.com", "plz join my nw"); 
+		connProfSvc.sendInvite(userId); 
 		out.println("Invite sent");
 	}
 	catch (Throwable e) {

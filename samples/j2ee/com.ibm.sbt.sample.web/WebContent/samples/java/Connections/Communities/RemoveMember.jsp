@@ -39,7 +39,7 @@
 	<%
 	try {
 		CommunityService communityService = new CommunityService();
-		Collection<Community> communities = communityService.getPublicCommunities();
+		Collection<Community> communities = communityService.getMyCommunities();
 		Community community = communities.iterator().next();
 		MemberList members = communityService.getMembers(community.getCommunityUuid());
 		if(members != null && !members.isEmpty()){

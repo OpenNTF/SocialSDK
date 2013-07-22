@@ -19,6 +19,9 @@
 <%@page import="com.ibm.commons.runtime.Context"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.Community"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
+
+<%@page import="com.ibm.sbt.services.client.connections.communities.MemberList"%>
+<%@page import="com.ibm.sbt.services.client.connections.communities.Member"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Collection"%>
 <%@page 
@@ -36,11 +39,18 @@
 	<%
 	try {
 		CommunityService communityService = new CommunityService();
-		Collection<Community> communities = communityService.getPublicCommunities();
+		Collection<Community> communities = communityService.getMyCommunities();
 		Community community = communities.iterator().next();
-		String id = Context.get().getProperty("sample.id2");
-		communityService.removeMember(community.getCommunityUuid(), id);
-		out.println("<b> Member Removed : "+id+" from community "+community.getCommunityUuid());
+		MemberList members = communityService.getMembers(community.getCommunityUuid());
+		if(members != null && !members.isEmpty()){
+			if(members.getTotalResults() > 1){
+				Member member = members.iterator().next();	
+				communityService.removeMember(community.getCommunityUuid(), member.getUserid());
+				out.println("<b> Member Removed : "+ member.getUserid() +" from community "+community.getCommunityUuid());
+			}
+			else
+			 	out.println("<b> Not enough members to remove from community with Id: "+community.getCommunityUuid());
+		}
 		
 	} catch (Throwable e) {
 		out.println("<pre>");

@@ -335,7 +335,7 @@
 		</managed-property>
 		<managed-property>
 			<property-name>authenticationPage</property-name>
-			<value>/sbt/loginForm.html?endpoint=connections</value>
+			<value>/sbt/loginForm.html?endpoint=smartcloudBasic</value>
 		</managed-property>
 		<managed-property>
 			<property-name>authenticationService</property-name>

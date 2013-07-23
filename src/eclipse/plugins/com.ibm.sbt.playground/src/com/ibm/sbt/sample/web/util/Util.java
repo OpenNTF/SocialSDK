@@ -59,8 +59,7 @@ public class Util {
         // title, id
         { "Default", "defaultEnvironment" },
         { "SmartCloud", "smartcloudEnvironment" },
-        { "Open Social", "openSocial"},
-        { "SmartCloud for Social Business", "SC4SB"}
+        { "Open Social", "openSocial"}
     };
     
     public static String[] BOOTSTRAP_STYLES = {   

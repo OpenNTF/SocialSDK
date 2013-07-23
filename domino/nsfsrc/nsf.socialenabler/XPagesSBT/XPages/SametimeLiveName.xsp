@@ -1,29 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
 	xmlns:xc="http://www.ibm.com/xsp/custom">
-	
-		<xp:this.resources> 
-                <xp:script clientSide="true"> 
-                        <xp:this.contents><![CDATA[ 
-require(["dojo/ready",
-		    "dijit/MenuItem"],
-			function(ready, MenuItem) {
-				if(!MenuItem.prototype._onClick) {
-					MenuItem.prototype._onClick = function(evt) {
-						this.getParent().onItemClick(this, evt);
-						event.stop(evt);
-					};
-				}
-
-				ready(function() {
-      					stproxy.addOnLoad(stproxy.login.loginAsAnon);
-				});
-			}
-	);
- 
-]]></xp:this.contents> 
-                </xp:script> 
-        </xp:this.resources> 
 	<xc:OneUILayout navigationPath="/Sametime/LiveName" title="Sametime LiveName" connection="greenhouseSametime">
 		<xp:this.facets>
 			<xp:panel xp:key="LeftColumn" id="panel4">

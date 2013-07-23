@@ -18,6 +18,7 @@ package com.ibm.xsp.extlib.sbt.user;
 import java.util.Set;
 
 import com.ibm.commons.Platform;
+import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.jscript.types.FBSValue;
 import com.ibm.sbt.services.client.ClientService.HandlerJson;
 import com.ibm.sbt.services.client.ClientServicesException;
@@ -87,7 +88,7 @@ public class SmartCloudPeopleDataProvider extends AbstractPeopleDataProvider {
 			    //TODO - Padraic
 			 	HandlerJson json= new HandlerJson();
 			 	Object result = service.get("/manage/oauth/getUserIdentity", json).getData();
-			    if(result instanceof FBSValue){
+			    if(result instanceof JsonJavaObject){
 			        JsonNavigator jsonUtil = new JsonNavigator(result);
 			        PeopleData data = new PeopleData();
 			        data.smartCloudSubscriberId = jsonUtil.stringValue("subscriberid");

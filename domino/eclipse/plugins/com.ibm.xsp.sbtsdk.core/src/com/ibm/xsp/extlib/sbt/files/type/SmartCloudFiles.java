@@ -193,7 +193,7 @@ public class SmartCloudFiles extends AbstractType {
         return TYPE;
     }
 
-    public List<FileEntry> readFileEntries(ClientService svc, RestDataBlockAccessor accessor, Map<String, String> params)
+    public List<FileEntry> readFileEntries(ClientService svc, RestDataBlockAccessor accessor, Map<String, String> params,String serviceUrl)
             throws ClientServicesException {
         authenticate(accessor);
         HandlerXml xml = new HandlerXml();
@@ -204,12 +204,13 @@ public class SmartCloudFiles extends AbstractType {
         XmlNavigator navigator = new XmlNavigator(document);
         //TODO Externalize these constants
         DataNavigator mynav = navigator.get("feed/entry");
+
         if (mynav != null) {
             String epName = accessor.findEndpointName();
             for (int i = 0; i < mynav.getCount(); i++) {
                 FileEntry entry = new FileEntry();
                 DataNavigator nav = mynav.get(i);
-                entry.setUserId(params.get("subscriberId"));
+                entry.setUserId((String) UserBean.get().getPerson().getField(LOTUS_LIVE_SUBSCRIBER_ID));
                 entry.setTitle(nav.stringValue("title"));
                 entry.setUpdated(nav.dateValue("updated"));
                 entry.setPublished(nav.dateValue("published"));
@@ -228,6 +229,7 @@ public class SmartCloudFiles extends AbstractType {
                 entry.setFileId(id);
                 entry.setUniqueId(id);
                 DataNavigator propsNavigator = nav.get("object/properties");
+
                 String description = propsNavigator.get("propertyString").selectEq("@displayName", "Description").stringValue("value");
                 entry.setDescription(StringUtil.getNonNullString(description));
                 String size = propsNavigator.get("propertyInteger").selectEq("@propertyDefinitionId", "cmis:contentStreamLength").stringValue("value");
@@ -278,11 +280,10 @@ public class SmartCloudFiles extends AbstractType {
             String repositoryId = request.getParameter(PARAM_REPOSITORY_ID);
             String href = "/" + repositoryId + "/object/snx:file!" + fileId + "/stream/" + fileId;
             SmartCloudService svc = (SmartCloudService) createClientService(bean, href);
-            BasicHttpResponse httpResp = null;
             Object file;
-            //https://apps.na.collabserv.com/files/app/file/c72336bf-bb61-44f6-9712-5ee657ef17cc
+           
             try {
-                file =  svc.get("files/apps/file/"+fileId).getData();
+                file =  svc.get("files/basic/cmis/repository/"+href).getData();
                 
             } catch (ClientServicesException e) {
                 throw new FacesExceptionEx(e, "Failed to perform proxy request");

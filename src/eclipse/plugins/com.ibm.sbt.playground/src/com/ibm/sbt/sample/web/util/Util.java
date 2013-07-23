@@ -114,6 +114,8 @@ public class Util {
         _bodyClassMap.put("all", "lotusui30_body lotusui30_fonts lotusui30");
     }
     
+    private static String[][] _environments = null;
+    
     public static String[][] getJavaScriptLibs(HttpServletRequest request) {
         return JS_LIBS;
     }
@@ -291,7 +293,19 @@ public class Util {
     }
     
     public static String[][] getEnvironments(HttpServletRequest request) {
-        return ENVIRONMENTS;
+    	if (_environments == null) {
+    		String environments = getProperty("environments");
+    		if (StringUtil.isEmpty(environments)) {
+    			_environments = ENVIRONMENTS;
+    		} else {
+    			String[] pairs = StringUtil.splitString(environments, ',');
+    			_environments = new String[pairs.length][];
+    			for (int i=0; i<pairs.length; i++) {
+    				_environments[i] = StringUtil.splitString(pairs[i], ':');
+    			}
+    		}
+    	}
+        return _environments;
     }
 
     public static String getEnvironmentId(HttpServletRequest request) {

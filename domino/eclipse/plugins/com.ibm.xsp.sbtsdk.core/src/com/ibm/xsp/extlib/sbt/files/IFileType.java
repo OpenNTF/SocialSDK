@@ -93,7 +93,7 @@ public interface IFileType {
      * @throws ClientServicesException
      * 
      */
-    public List<FileEntry> readFileEntries(ClientService svc, RestDataBlockAccessor accessor, Map<String, String> params) throws ClientServicesException;
+    public List<FileEntry> readFileEntries(ClientService svc, RestDataBlockAccessor accessor, Map<String, String> params, String serviceURL) throws ClientServicesException;
 
     /**
      * Delegates to a proxy for operations such as File Download

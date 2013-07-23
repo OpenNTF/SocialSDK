@@ -16,6 +16,8 @@
 package com.ibm.xsp.extlib.sbt.files.type;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -40,6 +42,11 @@ import com.ibm.sbt.services.client.ClientService.HandlerInputStream;
 import com.ibm.sbt.services.client.ClientService.HandlerXml;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.connections.ConnectionsService;
+import com.ibm.sbt.services.client.connections.files.FileService;
+import com.ibm.sbt.services.client.connections.files.FileServiceException;
+import com.ibm.sbt.services.client.connections.files.model.FileCreationParameters;
+import com.ibm.sbt.services.client.connections.files.model.FileRequestParams;
+import com.ibm.sbt.services.client.connections.files.model.Headers;
 import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
 import com.ibm.sbt.util.DataNavigator;
@@ -189,7 +196,7 @@ public class ConnectionsFiles extends AbstractType {
      * @see com.ibm.xsp.extlib.sbt.files.IFileType#readFileEntries(com.ibm.xsp.extlib.sbt.services.client.Service,
      * java.util.Map)
      */
-    public List<FileEntry> readFileEntries(ClientService svc, RestDataBlockAccessor accessor, Map<String, String> params)
+    public List<FileEntry> readFileEntries(ClientService svc, RestDataBlockAccessor accessor, Map<String, String> params, String serviceUrl)
             throws ClientServicesException {
         ArrayList<FileEntry> fileEntries = new ArrayList<FileEntry>();
         if (svc != null) {
@@ -338,17 +345,25 @@ public class ConnectionsFiles extends AbstractType {
 		if (StringUtil.isEmpty(ext)) {
 		    throw new FacesExceptionEx(new NullPointerException(), "Extension of file being uploaded may not be null");
 		}
-		//https://greenhouse.lotus.com/files/basic/api/myuserlibrary/feed?file=IBMNotesInstall.log
-		String uploadUrl = "files/basic/api/myuserlibrary/feed";
-		ConnectionsService svc = new ConnectionsService (authBean);
+		
+		FileService svc = new FileService();
+		
+		FileCreationParameters p = new FileCreationParameters();
+        p.visibility = FileCreationParameters.Visibility.PUBLIC;
+        InputStream is;
 
-		params.put("file", name);
-
-		try {
-			svc.post(uploadUrl, params, null, serverFile,null);
-		}catch (ClientServicesException e) {
+       try {
+    	  
+    	    is = new FileInputStream(serverFile);
+			com.ibm.sbt.services.client.connections.files.model.FileEntry entry = svc.upload(is,name, serverFile.length(),p.buildParameters());
+				 
+		}catch (FileServiceException e) {
             throw new FacesExceptionEx(e);
-        }
+        } catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+       
     }
 
     /*

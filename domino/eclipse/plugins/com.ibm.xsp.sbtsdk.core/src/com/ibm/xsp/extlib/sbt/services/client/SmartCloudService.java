@@ -57,7 +57,7 @@ public class SmartCloudService extends ClientService {
          * /files/basic/cmis/repository/{repositoryId}/folderc/snx:files
          */
         if(parameters!=null) {
-            String subscriberId = "20108978"; /*(String)UserBean.get().getPerson().getField(SmartCloudFiles.LOTUS_LIVE_SUBSCRIBER_ID); */
+            String subscriberId = (String)UserBean.get().getPerson().getField(SmartCloudFiles.LOTUS_LIVE_SUBSCRIBER_ID);
             b.append("/p!"); 
             if(StringUtil.isEmpty(subscriberId)){
                 if(ExtlibCoreLogger.SBT.isErrorEnabled()){

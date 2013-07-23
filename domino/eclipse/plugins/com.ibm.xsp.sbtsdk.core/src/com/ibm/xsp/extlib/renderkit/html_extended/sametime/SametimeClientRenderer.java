@@ -97,6 +97,8 @@ public class SametimeClientRenderer extends FacesRendererEx {
 
         // Write the login
         writeLogin(context, rootEx, stClient, stServer);
+        
+        writeSametimeDojoEvent(context, rootEx);
     }
     
     protected void writeProxyConfig(FacesContext context, UIViewRootEx2 rootEx, UISametimeClient stClient, Endpoint stServer, String linkurl) throws IOException {
@@ -123,6 +125,30 @@ public class SametimeClientRenderer extends FacesRendererEx {
             throw new FacesExceptionEx(ex);
         }
     }
+    
+    protected void writeSametimeDojoEvent(FacesContext context, UIViewRootEx2 rootEx) throws IOException {
+
+            StringBuilder b = new StringBuilder(256);
+            
+            b.append("require([\"dojo/ready\",\n");
+            b.append("\"dijit/MenuItem\"],\n");
+            b.append("function(ready, MenuItem) {\n");
+            b.append("if(!MenuItem.prototype._onClick) {\n");
+            b.append("MenuItem.prototype._onClick = function(evt) {\n");
+            b.append("this.getParent().onItemClick(this, evt);\n");
+            b.append("event.stop(evt);\n");
+            b.append("};\n");
+            b.append("}\n");
+            b.append("ready(function() {\n");
+            b.append("stproxy.addOnLoad(stproxy.login.loginAsAnon);\n");
+            b.append("});\n");
+            b.append("}\n");
+            b.append(");\n");
+            
+            rootEx.addScript(b.toString());
+    }
+    
+    
     
     protected JsonObject createProxyConfig(FacesContext context, UISametimeClient stClient, Endpoint stServer, String linkurl) throws IOException {
         // Get the proxy object in memory

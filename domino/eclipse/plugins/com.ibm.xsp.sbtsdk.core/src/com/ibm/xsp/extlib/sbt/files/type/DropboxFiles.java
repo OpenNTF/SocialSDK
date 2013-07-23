@@ -163,10 +163,10 @@ public class DropboxFiles extends AbstractType {
         return TYPE;
     }
 
-    public List<FileEntry> readFileEntries(ClientService svc, RestDataBlockAccessor accessor, Map<String, String> params) throws ClientServicesException {
+    public List<FileEntry> readFileEntries(ClientService svc, RestDataBlockAccessor accessor, Map<String, String> params,String serviceUrl) throws ClientServicesException {
         
     	HandlerJson json= new HandlerJson();  	
-    	Object jsonObject = (Object) svc.get(getServiceUrl(),params, json).getData();
+    	Object jsonObject = (Object) svc.get(serviceUrl,params, json).getData();
         ArrayList<FileEntry> entries = new ArrayList<FileEntry>();
         String epName = accessor.findEndpointName();
         JsonNavigator navigator = new JsonNavigator(jsonObject);

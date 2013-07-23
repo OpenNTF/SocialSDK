@@ -33,8 +33,8 @@
 							var="update">
 							<xp:this.value>
 	<![CDATA[#{javascript:
-	var svc = new com.ibm.sbt.services.client.activitystreams.ActivityStreamService();
-	return svc.getUpdatesFromMyBoard();
+	var svc = com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamService();
+	return svc.getUpdatesFromMyNetwork();
 }]]></xp:this.value>
 							<xp:div>
 								<xp:table style="width:350px">
@@ -69,7 +69,7 @@
 											<xp:button value="Send update to my activity stream" id="button2">
 						<xp:eventHandler event="onclick" submit="true"
 							refreshMode="complete">
-							<xp:this.action><![CDATA[#{javascript:var svc = new com.ibm.sbt.services.client.activitystreams.ActivityStreamService();
+							<xp:this.action><![CDATA[#{javascript:var svc = new com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamService();
 			var postPayload = new com.ibm.commons.util.io.json.JsonJavaObject();
 			var actor =new com.ibm.commons.util.io.json.JsonJavaObject();
 			var object =new com.ibm.commons.util.io.json.JsonJavaObject();

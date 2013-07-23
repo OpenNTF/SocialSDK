@@ -132,12 +132,9 @@ public class FileServiceData extends RestObjectDataSource {
                     // Create the service and and read the file entries
                     svc = createService(provider, fileService, serviceUrl + root + path);
                 }
-                //TODO - Padraic 
-
-//                urlForLog = svc.getUrl();
+               
                 
-                urlForLog = serviceUrl;
-                List<FileEntry> entries = fileService.readFileEntries(svc, this, params);
+                List<FileEntry> entries = fileService.readFileEntries(svc, this, params, serviceUrl);
 
                 FileEntry[] data = entries.toArray(new FileEntry[entries.size()]);
                 return new ArrayBlock(index, data);

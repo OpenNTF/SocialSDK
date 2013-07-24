@@ -56,11 +56,11 @@
     </managed-property>
     <managed-property>
       <property-name>consumerKey</property-name>
-      <value></value>
+      <value/>
     </managed-property>
     <managed-property>
       <property-name>consumerSecret</property-name>
-      <value></value>
+      <value/>
     </managed-property>
     <managed-property>
       <property-name>signatureMethod</property-name>
@@ -107,11 +107,11 @@
     </managed-property>
     <managed-property>
       <property-name>consumerKey</property-name>
-      <value></value>
+      <value/>
     </managed-property>
     <managed-property>
       <property-name>consumerSecret</property-name>
-      <value></value>
+      <value/>
     </managed-property>
     <managed-property>
       <property-name>signatureMethod</property-name>
@@ -119,7 +119,7 @@
     </managed-property>
     <managed-property>
       <property-name>applicationAccessToken</property-name>
-      <value></value>
+      <value/>
     </managed-property>
   </managed-bean>
   <!--
@@ -157,11 +157,11 @@
     </managed-property>
     <managed-property>
       <property-name>consumerKey</property-name>
-      <value></value>
+      <value/>
     </managed-property>
     <managed-property>
       <property-name>consumerSecret</property-name>
-      <value></value>
+      <value/>
     </managed-property>
     <managed-property>
       <property-name>appId</property-name>
@@ -216,11 +216,11 @@
     </managed-property>
     <managed-property>
       <property-name>consumerKey</property-name>
-      <value></value>
+      <value/>
     </managed-property>
     <managed-property>
       <property-name>consumerSecret</property-name>
-      <value></value>
+      <value/>
     </managed-property>
     <managed-property>
       <property-name>appId</property-name>
@@ -304,87 +304,20 @@
       <property-name>proxyEnabled</property-name>
       <value>true</value>
     </managed-property>
-        <managed-property>
-          <property-name>credentialStore</property-name>
-          <value>PwdStore</value>
-        </managed-property>
-    <managed-property>
-      <property-name>authenticationPage</property-name>
-      <value>_BasicLogin?endpoint=w3Connections</value>
-    </managed-property>
-  </managed-bean>
-  <!--
-        Connections using LTPA 
-   -->
-  <managed-bean>
-    <managed-bean-name>connectionsLtpa</managed-bean-name>
-    <managed-bean-class>com.ibm.sbt.services.endpoints.DominoSSOEndpoint
-		</managed-bean-class>
-    <managed-bean-scope>application</managed-bean-scope>
-    <managed-property>
-      <property-name>url</property-name>
-      <value>http://sbtdev.swg.usma.ibm.com:81</value>
-    </managed-property>
-  </managed-bean>
-  <managed-bean>
-    <managed-bean-name>tapStageConnections3</managed-bean-name>
-    <managed-bean-class>
-			com.ibm.sbt.services.endpoints.BasicEndpoint
-		</managed-bean-class>
-    <managed-bean-scope>session</managed-bean-scope>
-    <managed-property>
-      <property-name>url</property-name>
-      <value>https://tapstage.swg.usma.ibm.com</value>
-    </managed-property>
-    <managed-property>
-      <property-name>proxyEnabled</property-name>
-      <value>true</value>
-    </managed-property>
     <managed-property>
       <property-name>credentialStore</property-name>
-      <value>PasswordStore</value>
-    </managed-property>
-    <managed-property>
-      <property-name>forceTrustSSLCertificate</property-name>
-      <value>true</value>
+      <value>PwdStore</value>
     </managed-property>
     <managed-property>
       <property-name>authenticationPage</property-name>
-      <value>_BasicLogin?endpoint=tapStageConnections3</value>
-    </managed-property>
-  </managed-bean>
-  <managed-bean>
-    <managed-bean-name>tapStageConnections4</managed-bean-name>
-    <managed-bean-class>
-			com.ibm.sbt.services.endpoints.BasicEndpoint
-		</managed-bean-class>
-    <managed-bean-scope>session</managed-bean-scope>
-    <managed-property>
-      <property-name>url</property-name>
-      <value>https://tapstage.swg.usma.ibm.com/ic4</value>
-    </managed-property>
-    <managed-property>
-      <property-name>proxyEnabled</property-name>
-      <value>true</value>
-    </managed-property>
-    <managed-property>
-      <property-name>credentialStore</property-name>
-      <value>PasswordStore</value>
-    </managed-property>
-    <managed-property>
-      <property-name>forceTrustSSLCertificate</property-name>
-      <value>true</value>
-    </managed-property>
-    <managed-property>
-      <property-name>authenticationPage</property-name>
-      <value>_BasicLogin?endpoint=tapStageConnections4</value>
+      <value>/openntf/XPagesSbt.nsf/_BasicLogin?endpoint=w3Connections</value>
     </managed-property>
   </managed-bean>
   <!--
   		Greenhouse Sametime 
    -->
   <managed-bean>
-    <managed-bean-name>greenhouseSametime</managed-bean-name>
+    <managed-bean-name>sametime</managed-bean-name>
     <managed-bean-class>com.ibm.sbt.services.endpoints.SametimeBasicEndpoint
 		</managed-bean-class>
     <managed-bean-scope>session</managed-bean-scope>
@@ -402,27 +335,6 @@
     </managed-property>
   </managed-bean>
   <!--
-  		IBM w3 Sametime 
-   -->
-  <managed-bean>
-    <managed-bean-name>w3Sametime</managed-bean-name>
-    <managed-bean-class>com.ibm.sbt.services.endpoints.BasicEndpoint
-		</managed-bean-class>
-    <managed-bean-scope>session</managed-bean-scope>
-    <managed-property>
-      <property-name>url</property-name>
-      <value>https://tandem.swg.usma.ibm.com</value>
-    </managed-property>
-    <managed-property>
-      <property-name>credentialStore</property-name>
-      <value>PasswordStore</value>
-    </managed-property>
-    <managed-property>
-      <property-name>authenticationPage</property-name>
-      <value>_BasicLogin?endpoint=w3Sametime</value>
-    </managed-property>
-  </managed-bean>
-  <!--
         Stackoverflow 
    -->
   <managed-bean>
@@ -435,13 +347,13 @@
       <property-name>url</property-name>
       <value>https://api.stackexchange.com</value>
     </managed-property>
-        <managed-property>
-          <property-name>credentialStore</property-name>
-          <value>PwdStore</value>
-        </managed-property>
+    <managed-property>
+      <property-name>credentialStore</property-name>
+      <value>PwdStore</value>
+    </managed-property>
     <managed-property>
       <property-name>authenticationPage</property-name>
-      <value>_BasicLogin?endpoint=stackOverflow</value>
+      <value>/XPagesSBT.nsf/_BasicLogin?endpoint=stackOverflow</value>
     </managed-property>
   </managed-bean>
   <!--
@@ -457,10 +369,10 @@
       <property-name>url</property-name>
       <value>http://projects.openntf.org</value>
     </managed-property>
-        <managed-property>
-          <property-name>credentialStore</property-name>
-          <value>PwdStore</value>
-        </managed-property>
+    <managed-property>
+      <property-name>credentialStore</property-name>
+      <value>PwdStore</value>
+    </managed-property>
     <managed-property>
       <property-name>authenticationPage</property-name>
       <value>_BasicLogin?endpoint=redmine</value>

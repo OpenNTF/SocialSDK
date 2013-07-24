@@ -21,7 +21,7 @@ define({
         filterByTag : "Click to filter by tag",
         updatedBy : "Updated by ",
         person : "1 person",
-        people : "${memberCount} people",
+        people : "{memberCount} people",
         tags : "Tags: ",
         date: "Date",
         popularity: "Popularity",

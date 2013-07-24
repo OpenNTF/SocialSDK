@@ -60,12 +60,10 @@ public class TwitterDataSource extends RestObjectDataSource {
     public static class TwitterDataBlockAccessor extends RestDataBlockAccessor {
         private static final String VERSION = "1.1";
         private static final String FORMAT = "json";
-        private static final String TWTR_MENTIONS = VERSION + "/statuses/mentions." + FORMAT;
-        private static final String TWTR_RT_BY_ME = VERSION + "/statuses/retweeted_by_me." + FORMAT;
-        private static final String TWTR_RT_TO_ME = VERSION + "/statuses/retweeted_to_me." + FORMAT;
+        private static final String TWTR_MENTIONS = VERSION + "/statuses/mentions_timeline." + FORMAT;
         private static final String TWTR_RT_OF_ME = VERSION + "/statuses/retweets_of_me." + FORMAT;
         private static final String TWTR_TIME_LINE = VERSION + "/statuses/home_timeline." + FORMAT;
-        private static final String TWTR_PUBLIC_TIME_LINE = VERSION + "/statuses/public_timeline." + FORMAT;
+        private static final String TWTR_PUBLIC_TIME_LINE = VERSION + "/statuses/sample." + FORMAT;
         private String feedType;
         private String hashTag;
         private String searchEndpoint;
@@ -94,15 +92,10 @@ public class TwitterDataSource extends RestObjectDataSource {
             else if(StringUtil.equals("publicTimeLine", this.feedType)){
                 url = TWTR_PUBLIC_TIME_LINE;
             }
-            else if(StringUtil.equals("rtByMe", this.feedType)){
-                url = TWTR_RT_BY_ME;
-            }
             else if(StringUtil.equals("rtOfMe", this.feedType)){
                 url = TWTR_RT_OF_ME;
             }
-            else if(StringUtil.equals("rtToMe", this.feedType)){
-                url = TWTR_RT_TO_ME;
-            }
+            
             return url;
         }
 
@@ -118,8 +111,9 @@ public class TwitterDataSource extends RestObjectDataSource {
                 Endpoint provider = findEndpointBean();
                 Map<String, String> params = getParameters(index, blockSize);
                 List<TwitterEntry> entries = new ArrayList<TwitterEntry>();
+                String svcUrl= getServiceUrl();
                 if(StringUtil.isEmpty(hashTag)){
-                    ClientService svc = createClientService(provider, getServiceUrl());
+                    ClientService svc = createClientService(provider, svcUrl);
                    
                     HandlerJson json  = new HandlerJson();
                     ArrayList collection = (ArrayList)svc.get(statusUrl, json).getData();
@@ -151,10 +145,7 @@ public class TwitterDataSource extends RestObjectDataSource {
                     //TODO - Padraic
                     HandlerJson json= new HandlerJson();
                     ArrayList collection = (ArrayList)svc.get(null,params, json).getData();
-                    //JsonNavigator navigator = new JsonNavigator((Document)doc);
-                   //DataNavigator dn = navigator.get("feed/entry");
-                    
-                    
+        
                     if(collection != null){
                         int vc = collection.size();
                         for(int i = 0; i < vc; i++) {

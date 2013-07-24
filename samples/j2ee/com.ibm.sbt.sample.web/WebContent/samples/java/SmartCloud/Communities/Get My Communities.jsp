@@ -1,5 +1,5 @@
 <!-- /*
- * © Copyright IBM Corp. 2012
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -38,7 +38,7 @@
 	<%
 		try {
 			
-			CommunityService svc = new CommunityService("smartcloudBasic");
+			CommunityService svc = new CommunityService("smartcloud");
 			Map<String, String> parameters = new HashMap<String, String>();
 			parameters.put("ps", "5");
 			

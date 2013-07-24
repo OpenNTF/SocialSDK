@@ -1,5 +1,5 @@
 <!-- /*
- * © Copyright IBM Corp. 2012
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -35,7 +35,7 @@
 	<div id="content">
 	<%
 		try {
-			CommunityService svc = new CommunityService("smartcloudBasic");
+			CommunityService svc = new CommunityService("smartcloud");
 			InviteList invites = svc.getMyInvites();
 			if(invites != null && ! invites.isEmpty()) {
 				out.println("<br>Listing Invites <br>");
@@ -45,7 +45,7 @@
 				}
 			}
 			else {
-				out.println("No Results");
+				out.println("No Invites found.");
 			}
 		} catch (Throwable e) {
 			out.println("<pre>");

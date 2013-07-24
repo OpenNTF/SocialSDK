@@ -40,9 +40,8 @@
 								<xp:table style="width:350px">
 									<xp:tr>
 										<xp:td>
-											<xp:text escape="true"
-												id="computedField1"
-												value="#{javascript:update.getSummary()}">
+											<xp:text id="computedField1"
+												value="#{javascript:update.getSummary()}" escape="false">
 											</xp:text>
 										</xp:td>
 										<xp:td style="width:100px">
@@ -96,8 +95,8 @@
 
 			var header = new java.util.HashMap();
 			header.put("Content-Type", "application/json");
-			entry= svc.postEntry(postPayload, header);
-			var entryId = entry.getJsonObject("entry").getString("id");
+			entry= svc.postEntry(postPayload);
+			var entryId = entry;
 			getComponent("computedField3").setValue(entryId);
 
     	}]]></xp:this.action>

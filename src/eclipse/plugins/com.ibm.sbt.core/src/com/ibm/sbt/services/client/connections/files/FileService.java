@@ -19,7 +19,6 @@ package com.ibm.sbt.services.client.connections.files;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.io.StringReader;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -30,7 +29,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import org.apache.http.conn.EofSensorInputStream;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
@@ -42,7 +40,6 @@ import com.ibm.sbt.services.client.connections.files.FileServiceException;
 import com.ibm.sbt.services.client.connections.files.model.CommentEntry;
 import com.ibm.sbt.services.client.connections.files.model.FileCommentParameterBuilder;
 import com.ibm.sbt.services.client.connections.files.model.FileCommentsFeedParameterBuilder;
-import com.ibm.sbt.services.client.connections.files.model.FileCreationParameters;
 import com.ibm.sbt.services.client.connections.files.model.FileEntry;
 import com.ibm.sbt.services.client.connections.files.model.FileRequestParams;
 import com.ibm.sbt.services.client.connections.files.model.FileRequestPayload;
@@ -55,8 +52,6 @@ import com.ibm.sbt.services.client.ClientService.ContentStream;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.ClientService;
-import com.ibm.sbt.services.endpoints.Endpoint;
-import com.ibm.sbt.services.util.AuthUtil;
 
 /**
  * FileService can be used to perform File related operations.
@@ -277,13 +272,13 @@ public class FileService extends BaseService {
         } else {
             subFilters.setUserId(userId);
         } 
-        String authValue = AuthUtil.INSTANCE.getAuthValue(this.endpoint);
+        String authValue = "basic";
         subFilters.setFileId(fileId);
         subFilters.setUserId(userId);
         String resultType = ResultType.FEED.getResultType();
         String requestUri  =FileServiceURIBuilder.POST_COMMENT_TO_FILE.populateURL(accessType, category, null,
                 null,
-                subFilters, resultType, authValue);
+                subFilters, resultType);
                 
 
         Document payload = this.constructPayloadForComments(comment);
@@ -1247,8 +1242,6 @@ public class FileService extends BaseService {
         
         SubFilters subFilters = new SubFilters();
 
-        String authType = AuthUtil.INSTANCE.getAuthValue(this.endpoint);
-        
         subFilters.setFileId(fileId);
         
         subFilters.setUserId(userId);
@@ -1275,7 +1268,7 @@ public class FileService extends BaseService {
             else
                 parameters.putAll(uriBuilder.getParameters());
             //TODO: pass in headers
-            commentEntries = (CommentEntryList) getEntities(uriBuilder.populateURL(accessType,   null, null, null, subFilters, null, authType), parameters, headers, new CommentEntryFeedHandler());
+            commentEntries = (CommentEntryList) getEntities(uriBuilder.populateURL(accessType,   null, null, null, subFilters, null), parameters, headers, new CommentEntryFeedHandler());
             return commentEntries;
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
@@ -1538,8 +1531,7 @@ public class FileService extends BaseService {
             logger.entering(sourceClass, "getFilesModerationServiceDocument");
         }
 
-        String authValue = AuthUtil.INSTANCE.getAuthValue(this.endpoint);
-        String requestUri = FileServiceURIBuilder.GET_SERVICE_DOCUMENT.populateURL(AccessType.AUTHENTICATED.toString(), null, null, null, null, null, authValue);
+        String requestUri = FileServiceURIBuilder.GET_SERVICE_DOCUMENT.populateURL(AccessType.AUTHENTICATED.toString(), null, null, null, null, null);
         Response result = null;
         try {
             result = super.retrieveData(requestUri, null);
@@ -3288,7 +3280,7 @@ public class FileService extends BaseService {
         // if the user has set these values then ok. otherwise, we set the default to GetMyFiles :
         // /files/basic/api/myuserlibrary/feed
         StringBuilder url = new StringBuilder(baseUrl);
-        url.append(SEPARATOR).append(AuthUtil.INSTANCE.getAuthValue(this.endpoint));
+        url.append(SEPARATOR).append("basic");
         // if none of the values have been set, then we set default values here.
         // by default here we are giving the feed of My Files
         if (StringUtil.isEmpty(accessType) && StringUtil.isEmpty(category) && StringUtil.isEmpty(view)

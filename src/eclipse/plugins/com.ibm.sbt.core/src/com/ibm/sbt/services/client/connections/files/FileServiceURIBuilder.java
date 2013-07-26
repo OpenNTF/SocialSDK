@@ -54,8 +54,9 @@ public enum FileServiceURIBuilder {
     }
 
     public String populateURL(String accessType, String category, String view,
-            String filter, SubFilters subFilters, String resultType, String authType) {
+            String filter, SubFilters subFilters, String resultType) {
         String ret = baseUrl;
+        String authType = "basic";
         if (StringUtil.isEmpty(accessType) && StringUtil.isEmpty(category) && StringUtil.isEmpty(view)
                 && StringUtil.isEmpty(filter) && subFilters.isEmpty()) {
             accessType = AccessType.AUTHENTICATED.getAccessType();

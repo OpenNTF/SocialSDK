@@ -12,49 +12,49 @@
       <xe:dumpObject id="dumpObject1" value="#{javascript:@Endpoint('smartcloud')}"
          useBeanProperties="true" title="Lotus Live Test Service">
       </xe:dumpObject>
-      <xp:button value="Get an OAuth token" id="button1">
-         <xp:eventHandler event="onclick" submit="true"
-            refreshMode="complete">
-            <xp:this.action>
-               <![CDATA[#{javascript:
-viewScope.text = null
-@Endpoint('smartcloud').getOAuthProvider().acquireToken(true) 
-               }]]>
-            </xp:this.action>
-         </xp:eventHandler>
-      </xp:button>
-      <xp:button value="Force Renew OAuth token" id="button3">
-         <xp:eventHandler event="onclick" submit="true"
-            refreshMode="complete">
-            <xp:this.action>
-               <![CDATA[#{javascript:
-viewScope.text = null
-@Endpoint('smartcloud').getOAuthProvider().renewToken()
-               }]]>
-            </xp:this.action>
-         </xp:eventHandler>
-      </xp:button>
+<!--      <xp:button value="Get an OAuth token" id="button1">-->
+<!--         <xp:eventHandler event="onclick" submit="true"-->
+<!--            refreshMode="complete">-->
+<!--            <xp:this.action>-->
+<!--               <![CDATA[#{javascript:-->
+<!--viewScope.text = null-->
+<!--@Endpoint('smartcloud').getOAuthProvider().acquireToken(true) -->
+<!--               }]]>-->
+<!--            </xp:this.action>-->
+<!--         </xp:eventHandler>-->
+<!--      </xp:button>-->
+<!--      <xp:button value="Force Renew OAuth token" id="button3">-->
+<!--         <xp:eventHandler event="onclick" submit="true"-->
+<!--            refreshMode="complete">-->
+<!--            <xp:this.action>-->
+<!--               <![CDATA[#{javascript:-->
+<!--viewScope.text = null-->
+<!--@Endpoint('smartcloud').getOAuthProvider().renewToken()-->
+<!--               }]]>-->
+<!--            </xp:this.action>-->
+<!--         </xp:eventHandler>-->
+<!--      </xp:button>-->
       <xe:dumpObject id="dumpObject2" useBeanProperties="true"
-         value="#{javascript:@Endpoint('smartcloud').getOAuthProvider().acquireToken()}" title="OAuth Token">
+         value="#{javascript:@Endpoint('smartcloud')}" title="OAuth Token">
       </xe:dumpObject>
       
-      <xp:button value="Call the SmartCloud test service"
-         id="button4">
-         <xp:eventHandler event="onclick" submit="true"
-            refreshMode="complete">
-            <xp:this.action>
-               <![CDATA[#{javascript:
-if(!@Endpoint('smartcloud').getOAuthProvider().acquireToken()) 
-{  viewScope.text = "Please, acquire a token before calling the service"
-   return; 
-}        
-var svc = new sbt.GenericService(@Endpoint('smartcloud'),"manage/oauth/getUserIdentity")
-var msg = svc.get(null,"text");
-viewScope.text = msg
-               }]]>
-            </xp:this.action>
-         </xp:eventHandler>
-      </xp:button>
+<!--      <xp:button value="Call the SmartCloud test service"-->
+<!--         id="button4">-->
+<!--         <xp:eventHandler event="onclick" submit="true"-->
+<!--            refreshMode="complete">-->
+<!--            <xp:this.action>-->
+<!--               <![CDATA[#{javascript:-->
+<!--if(!@Endpoint('smartcloud').getOAuthProvider().acquireToken()) -->
+<!--{  viewScope.text = "Please, acquire a token before calling the service"-->
+<!--   return; -->
+<!--}        -->
+<!--var svc = new sbt.GenericService(@Endpoint('smartcloud'),"manage/oauth/getUserIdentity")-->
+<!--var msg = svc.get(null,"text");-->
+<!--viewScope.text = msg-->
+<!--               }]]>-->
+<!--            </xp:this.action>-->
+<!--         </xp:eventHandler>-->
+<!--      </xp:button>-->
       <br />
 
       <br /> <br />

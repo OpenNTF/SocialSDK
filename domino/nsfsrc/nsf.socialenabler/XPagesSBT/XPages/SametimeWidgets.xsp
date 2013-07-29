@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
 	xmlns:xc="http://www.ibm.com/xsp/custom">
+<<<<<<< HEAD
+	<xc:OneUILayout navigationPath="/Sametime/Widgets" title="Sametime Widgets" connection="greenhouseSametime">
+=======
 	
 	<xc:OneUILayout navigationPath="/Sametime/Widgets" title="Sametime Widgets" connection="sametime">
+>>>>>>> refs/heads/master
 		<xp:this.facets>
 			<xp:panel xp:key="LeftColumn" id="panel4">
 				<xc:LeftSametime></xc:LeftSametime>

@@ -57,8 +57,8 @@ Require-Bundle: org.eclipse.core.runtime,
  com.ibm.domino.xsp.adapter,
  com.ibm.xsp.domino,
  com.ibm.xsp.extlib,
- com.ibm.sbt.core;bundle-version="1.0.0",
- com.ibm.commons.runtime;bundle-version="1.0.0",
- com.ibm.sbt.libs;bundle-version="1.0.0"
+ com.ibm.sbt.core,
+ com.ibm.commons.runtime,
+ com.ibm.sbt.libs
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: com.ibm.xsp.extlib.plugin.SBTPluginActivator

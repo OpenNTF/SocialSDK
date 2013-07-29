@@ -24,15 +24,11 @@ import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.entity.FileEntity;
 
-import sun.net.dns.ResolverConfiguration.Options;
-
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.endpoints.Endpoint;
-import com.ibm.xsp.extlib.beans.UserBean;
 import com.ibm.xsp.extlib.log.ExtlibCoreLogger;
-import com.ibm.xsp.extlib.sbt.files.type.SmartCloudFiles;
 
 
 /**

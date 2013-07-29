@@ -222,10 +222,6 @@
       <property-name>consumerSecret</property-name>
       <value/>
     </managed-property>
-    <managed-property>
-      <property-name>appId</property-name>
-      <value>XPagesSBT</value>
-    </managed-property>
   </managed-bean>
   <!--
         Greenhouse Connections 

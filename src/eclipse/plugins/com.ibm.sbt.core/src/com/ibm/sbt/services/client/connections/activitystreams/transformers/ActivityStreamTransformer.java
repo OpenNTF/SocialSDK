@@ -33,7 +33,7 @@ public class ActivityStreamTransformer extends AbstractBaseTransformer {
 	private final String GENERATOR = "generator";
 	private final String OBJECT = "object";
 	private final String PROVIDER = "provider";
-	private final String TARGET = "target";
+	private final String TARGET = "targetTmpl";
 	private final String TO = "to";
 	private final String IMAGE = "image";
 	private final String CONNSTATE = "connState";

@@ -17,14 +17,14 @@
 // NLS_CHARSET=UTF-8
 define({
   root: {
-      updatedBy : "Updated by ",
+      updatedBy : "Updated by",
       name: "Name",
       updated: "Updated",
       downloads: "Downloads",
       comments: "Comments",
       likes: "Likes",
       noLikes: "No one likes this",
-      oneLine: "1 person likes this",
+      oneLike: "1 person likes this",
       nLikes: "{recommendationCount} people like this",
       downloads: "Downloads",
       download: "Download",

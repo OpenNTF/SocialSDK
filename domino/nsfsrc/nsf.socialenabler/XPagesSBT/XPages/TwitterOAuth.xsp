@@ -13,57 +13,57 @@
 		<xe:dumpObject id="dumpObject1" value="#{javascript:@Endpoint('twitter')}"
 			useBeanProperties="true" title="Twitter Test Service">
 		</xe:dumpObject>
-		<xp:button value="Get an OAuth token" id="button1">
-			<xp:eventHandler event="onclick" submit="true"
-				refreshMode="complete">
-				<xp:this.action>
-					<![CDATA[#{javascript:
-viewScope.text = null
-@Endpoint('twitter').getOAuthProvider().acquireToken(true) 
-               }]]>
-				</xp:this.action>
-			</xp:eventHandler>
-		</xp:button>
-		<xp:button value="Delete OAuth token" id="button5">
-			<xp:eventHandler event="onclick" submit="true"
-				refreshMode="complete">
-				<xp:this.action><![CDATA[#{javascript:viewScope.text = null
-@Endpoint('twitter').getOAuthProvider().deleteToken()
-}]]></xp:this.action>
-			</xp:eventHandler>
-		</xp:button>
-		<xp:button value="Force Renew OAuth token" id="button3">
-			<xp:eventHandler event="onclick" submit="true"
-				refreshMode="complete">
-				<xp:this.action>
-					<![CDATA[#{javascript:
-viewScope.text = null
-@Endpoint('twitter').getOAuthProvider().renewToken()
-               }]]>
-				</xp:this.action>
-			</xp:eventHandler>
-		</xp:button>
+<!--		<xp:button value="Get an OAuth token" id="button1">-->
+<!--			<xp:eventHandler event="onclick" submit="true"-->
+<!--				refreshMode="complete">-->
+<!--				<xp:this.action>-->
+<!--					<![CDATA[#{javascript:-->
+<!--viewScope.text = null-->
+<!--@Endpoint('twitter').getOAuthProvider().acquireToken(true) -->
+<!--               }]]>-->
+<!--				</xp:this.action>-->
+<!--			</xp:eventHandler>-->
+<!--		</xp:button>-->
+<!--		<xp:button value="Delete OAuth token" id="button5">-->
+<!--			<xp:eventHandler event="onclick" submit="true"-->
+<!--				refreshMode="complete">-->
+<!--				<xp:this.action><![CDATA[#{javascript:viewScope.text = null-->
+<!--@Endpoint('twitter').getOAuthProvider().deleteToken()-->
+<!--}]]></xp:this.action>-->
+<!--			</xp:eventHandler>-->
+<!--		</xp:button>-->
+<!--		<xp:button value="Force Renew OAuth token" id="button3">-->
+<!--			<xp:eventHandler event="onclick" submit="true"-->
+<!--				refreshMode="complete">-->
+<!--				<xp:this.action>-->
+<!--					<![CDATA[#{javascript:-->
+<!--viewScope.text = null-->
+<!--@Endpoint('twitter').getOAuthProvider().renewToken()-->
+<!--               }]]>-->
+<!--				</xp:this.action>-->
+<!--			</xp:eventHandler>-->
+<!--		</xp:button>-->
 		<xe:dumpObject id="dumpObject2" useBeanProperties="true"
-			value="#{javascript:@Endpoint('twitter').getOAuthProvider().acquireToken()}"
+			value="#{javascript:@Endpoint('twitter')}"
 			title="OAuth Token">
 		</xe:dumpObject>
 
-		<xp:button value="Call the twitter test service" id="button4">
-			<xp:eventHandler event="onclick" submit="true"
-				refreshMode="complete">
-				<xp:this.action>
-					<![CDATA[#{javascript:
-if(!@Endpoint('twitter').getOAuthProvider().acquireToken()) 
-{  viewScope.text = "Please, acquire a token before calling the service"
-   return; 
-}        
-var svc = new sbt.TwitterService(@Endpoint('twitter'),"manage/oauth/getUserIdentity")
-var msg = svc.get(null,"text");
-viewScope.text = msg
-               }]]>
-				</xp:this.action>
-			</xp:eventHandler>
-		</xp:button>
+<!--		<xp:button value="Call the twitter test service" id="button4">-->
+<!--			<xp:eventHandler event="onclick" submit="true"-->
+<!--				refreshMode="complete">-->
+<!--				<xp:this.action>-->
+<!--					<![CDATA[#{javascript:-->
+<!--if(!@Endpoint('twitter').getOAuthProvider().acquireToken()) -->
+<!--{  viewScope.text = "Please, acquire a token before calling the service"-->
+<!--   return; -->
+<!--}        -->
+<!--var svc = new sbt.TwitterService(@Endpoint('twitter'),"manage/oauth/getUserIdentity")-->
+<!--var msg = svc.get(null,"text");-->
+<!--viewScope.text = msg-->
+<!--               }]]>-->
+<!--				</xp:this.action>-->
+<!--			</xp:eventHandler>-->
+<!--		</xp:button>-->
 		<br />
 
 		<br />

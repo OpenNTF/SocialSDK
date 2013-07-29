@@ -16,6 +16,7 @@
  */ -->
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@page import="com.ibm.commons.runtime.Context"%>
 <%@page import="com.ibm.sbt.services.client.connections.activitystreams.templates.ASDataPopulator"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.sbt.services.client.connections.activitystreams.model.Reply"%>
@@ -62,7 +63,12 @@
 			populator.setGeneratorUrl("testdatageneratorUrl");
 			
 			populator.setActorConnectionsState("active");
-			populator.setActorId("urn:lsid:lconn.ibm.com:profiles.person:0EE5A7FA-3434-9A59-4825-7A7000278DAA");
+			
+			String userid = Context.get().getProperty("sample.userId1");
+			String actorId = "urn:lsid:lconn.ibm.com:profiles.person:"+userid;
+			
+			
+			populator.setActorId(actorId);
 			populator.setActorName("Frank Adams");
 			populator.setActorObjectType("person");
 			
@@ -72,7 +78,7 @@
 			populator.setObjectType("testdataaObjectType");
 			populator.setObjectUrl("testdataaObjectUrl");
 			
-			populator.setToId("urn:lsid:lconn.ibm.com:profiles.person:0EE5A7FA-3434-9A59-4825-7A7000278DAA");
+			populator.setToId(actorId);
 			populator.setToObjectType("person");
 			
 			populator.setPublished("2013-07-06T01:55:56.276Z");

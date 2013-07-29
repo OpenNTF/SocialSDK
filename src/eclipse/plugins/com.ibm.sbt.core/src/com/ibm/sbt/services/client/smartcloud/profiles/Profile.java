@@ -122,7 +122,16 @@ public class Profile extends BaseEntity {
 	public String getPhoneNumber() {
 		return getAsString(ProfilesJsonPath.PhoneNumbers);
 	}
-
+	
+	/**
+	 * getOrgId
+	 * 
+	 * @return
+	 */
+	public String getOrgId() { 
+		return this.getAsString(ProfilesJsonPath.OrgId); 
+	}
+	
 	/**
 	 * getCountry
 	 * 

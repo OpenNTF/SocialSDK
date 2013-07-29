@@ -18,14 +18,12 @@
 <%@page import="com.ibm.sbt.services.client.connections.files.model.CommentEntry"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.model.FileEntry"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.FileEntryList"%>
-<%@page import="java.util.HashMap"%>
-<%@page import="java.util.List"%>
-<%@page import="java.util.Map"%>
-<%@page import="java.io.PrintWriter"%>
-<%@page import="java.util.Iterator"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
-<%@page import="com.ibm.commons.runtime.Context"%>  
- 
+<%@page import="com.ibm.commons.runtime.Context"%> 
+<%@page import="java.io.PrintWriter"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.Iterator"%> 
+
 <%@page 
 	language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -35,16 +33,16 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
-<body>
-	<h4>My Files</h4>
+<body>	 
+	<h4>Get My Folders</h4>
 	<div id="content">
 	<%
 	try {		
 		FileService fileService = new FileService("smartcloud");
-		FileEntryList files = fileService.getMyFiles(); 
-		if(files != null && ! files.isEmpty()) {
-			for (FileEntry file : files) {
-				out.println("<a href=\"" + file.getDownloadLink() + "\"> " + file.getLabel() + "</a><br/>" );
+		FileEntryList fileEntries = fileService.getMyFolders(null); 
+		if(fileEntries != null && ! fileEntries.isEmpty()) {
+			for (FileEntry fileEntry : fileEntries) {
+				out.println("Name :  " + fileEntry.getLabel() );
 			}
 		} else {
 			out.println("No Results");

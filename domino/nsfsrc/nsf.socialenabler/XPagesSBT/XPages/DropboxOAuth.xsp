@@ -13,61 +13,61 @@
 		<xe:dumpObject id="dumpObject1" value="#{javascript:@Endpoint('dropbox')}"
 			useBeanProperties="true" title="Dropbox Service">
 		</xe:dumpObject>
-		<xp:button value="Get an OAuth token" id="button1">
-			<xp:eventHandler event="onclick" submit="true"
-				refreshMode="complete">
-				<xp:this.action>
-               <![CDATA[#{javascript:
-viewScope.text = null
-@Endpoint('dropbox').getOAuthProvider().acquireToken(true) 
-               }]]>
-				</xp:this.action>
-			</xp:eventHandler>
-		</xp:button>
-		<xp:button value="Delete OAuth token" id="button5">
-			<xp:eventHandler event="onclick" submit="true"
-				refreshMode="complete">
-				<xp:this.action><![CDATA[#{javascript:viewScope.text = null
-@Endpoint('dropbox').getOAuthProvider().deleteToken()
-}]]></xp:this.action>
-			</xp:eventHandler>
-		</xp:button>
-		<xp:button value="Force Renew OAuth token" id="button3">
-			<xp:eventHandler event="onclick" submit="true"
-				refreshMode="complete">
-				<xp:this.action>
-               <![CDATA[#{javascript:
-viewScope.text = null
-@Endpoint('dropbox').getOAuthProvider().renewToken()
-               }]]>
-				</xp:this.action>
-			</xp:eventHandler>
-		</xp:button>
+<!--		<xp:button value="Get an OAuth token" id="button1">-->
+<!--			<xp:eventHandler event="onclick" submit="true"-->
+<!--				refreshMode="complete">-->
+<!--				<xp:this.action>-->
+<!--               <![CDATA[#{javascript:-->
+<!--viewScope.text = null-->
+<!--@Endpoint('dropbox').getOAuthProvider().acquireToken(true) -->
+<!--               }]]>-->
+<!--				</xp:this.action>-->
+<!--			</xp:eventHandler>-->
+<!--		</xp:button>-->
+<!--		<xp:button value="Delete OAuth token" id="button5">-->
+<!--			<xp:eventHandler event="onclick" submit="true"-->
+<!--				refreshMode="complete">-->
+<!--				<xp:this.action><![CDATA[#{javascript:viewScope.text = null-->
+<!--@Endpoint('dropbox').getOAuthProvider().deleteToken()-->
+<!--}]]></xp:this.action>-->
+<!--			</xp:eventHandler>-->
+<!--		</xp:button>-->
+<!--		<xp:button value="Force Renew OAuth token" id="button3">-->
+<!--			<xp:eventHandler event="onclick" submit="true"-->
+<!--				refreshMode="complete">-->
+<!--				<xp:this.action>-->
+<!--               <![CDATA[#{javascript:-->
+<!--viewScope.text = null-->
+<!--@Endpoint('dropbox').getOAuthProvider().renewToken()-->
+<!--               }]]>-->
+<!--				</xp:this.action>-->
+<!--			</xp:eventHandler>-->
+<!--		</xp:button>-->
 		<xe:dumpObject id="dumpObject2" useBeanProperties="true"
-			value="#{javascript:dropbox.getOAuthProvider().acquireToken()}"
+			value="#{javascript:@Endpoint('dropbox')}"
 			title="OAuth Token">
 		</xe:dumpObject>
 
-		<xp:button value="Call the Dropbox service" id="button4">
-			<xp:eventHandler event="onclick" submit="true"
-				refreshMode="complete">
-				<xp:this.action>
-               <![CDATA[#{javascript:
-if(!dropbox.getOAuthProvider().acquireToken()) 
-{  viewScope.text = "Please, acquire a token before calling the service"
-   return; 
-}        
-var svc = new sbt.DropboxService(dropbox,"1/account/info/")
-
-var account_info = svc.get(null,"json");
-
-var user = account_info.email;
-
-viewScope.text = user
-               }]]>
-				</xp:this.action>
-			</xp:eventHandler>
-		</xp:button>
+<!--		<xp:button value="Call the Dropbox service" id="button4">-->
+<!--			<xp:eventHandler event="onclick" submit="true"-->
+<!--				refreshMode="complete">-->
+<!--				<xp:this.action>-->
+<!--               <![CDATA[#{javascript:-->
+<!--if(!dropbox.getOAuthProvider().acquireToken()) -->
+<!--{  viewScope.text = "Please, acquire a token before calling the service"-->
+<!--   return; -->
+<!--}        -->
+<!--var svc = new sbt.DropboxService(dropbox,"1/account/info/")-->
+<!---->
+<!--var account_info = svc.get(null,"json");-->
+<!---->
+<!--var user = account_info.email;-->
+<!---->
+<!--viewScope.text = user-->
+<!--               }]]>-->
+<!--				</xp:this.action>-->
+<!--			</xp:eventHandler>-->
+<!--		</xp:button>-->
 		<br />
 
 		<br />

@@ -1,138 +1,71 @@
-function createUser(userName, password, idfile, certPassword) {
-	var done = false;
-	if( idfile && idfile.length() > 3 )
-	{
-		if( ".id" == idfile.substring( idfile.length()-3 ) )
-		{
-			idfile = idfile.substring( 0, idfile.length()-3 );
-		} 
-	}
-	if( userName )
-	{
-		if( userName.isEmpty() )return;
-		var st = new java.util.StringTokenizer( userName.toString() );
-		var tokens = st.countTokens();
-		var emptyString = new java.lang.String("");
-		var firstName = emptyString, middleName = emptyString, lastName = null;
-		if( tokens == 1 )
-			lastName = st.nextToken();
-		else if( tokens == 2 )
-		{
-			firstName = st.nextToken();
-			lastName = st.nextToken();
-		}
-		else if( tokens == 3 )
-		{
-			firstName = st.nextToken();
-			middleName = st.nextToken();
-			lastName = st.nextToken();
-		}
-		print( firstName );
-		print( middleName );
-		print( lastName );
-		if( lastName == null )return;
-		
-		try {
-	      var reg = session.createRegistration();
-	      reg.setCreateMailDb(true);
-	      reg.setCertifierIDFile("/mnt/NotesDrive/notesdata/cert.id");
-	      var dt = session.createDateTime("Today");
-	      dt.setNow();
-	      dt.adjustYear(1);
-	      reg.setExpiration(dt);
-	      reg.setIDType(lotus.domino.Registration.ID_HIERARCHICAL);
-	      reg.setMinPasswordLength(5); // password strength
-	      reg.setRegistrationLog("log.nsf");
-	      reg.setUpdateAddressBook(true);
-	      done = reg.registerNewUser( lastName,
-	        idfile + ".id",
-	        "",
-	        firstName,
-	        middleName,
-	        certPassword,
-	        "", // location field
-	        "", // comment field
-	        "mail/" + idfile + ".nsf", // mail file
-	        "", // forwarding domain
-	        password);
-	        reg.recycle();
+function parseSmartCloudProfile(nav){
+	var url = nav.getAsString("profileUrl");
 
-	    } catch( e ) {
-	    	sessionScope.userActionResult =  "failed to create. Check your input";
-	    	sessionScope.idfile = null;
-	        reg.recycle();
-	        return;
-	    }
+	var myname = nav.getAsString("displayName");
+	var aboutMe = nav.getAsString("aboutMe");
+	var country = nav.getAsString("country");
+	var email = nav.getAsString("emailAddress");
+	
+	var photo = nav.getEntries("photos");
+  
+    photo = photo.get(0).getAsString("value");
+    if(photo != null){
+    	photo = "https://apps.na.collabserv.com/contacts/img/photos/" + photo;
+    }
+    else{
+    	photo = "/no_pic.jpg";
+    }
+    
+    var addresses = nav.getEntries("addresses");
+
+   	address = addresses.get(4).getAsString("address");
+    var phone = nav.getEntries("phoneNumbers");
+    phone = phone.get(4).getAsString("phone");
+
+	return {
+		"image" : photo,
+		"email" : email,
+		"phone" : phone,
+		"address" : address,
+		"url" : url,
+		"myname" : myname,
+		"aboutMe" : aboutMe,
+		"country" : country
 	}
-	if( done )
-	{
-		sessionScope.userActionResult = lastName + " created";
-		idfile += ".id";
-		sessionScope.idfile = idfile;
-		var f = new java.io.File( idfile );
-		var fileToDownload = "domino/html/" + idfile;
-		var fo = new java.io.File( fileToDownload );
-		fo.createNewFile();
-		var is = new java.io.FileInputStream( f );
-		var os = new java.io.FileOutputStream( fo );
-		var buffer = new byte[1024];
-		for( var nBytes = 0; (nBytes = is.read( buffer )) > 0 ; )
-			os.write( buffer, 0, nBytes );
-		is.close();
-		os.close();
-		fo.deleteOnExit();	
-	}
-	else
-	{
-		sessionScope.userActionResult = lastName + " not created";
-		sessionScope.idfile = null;
-	} 
 }
+function parseSmartCloudContacts(profiles){
 
-function searchUser(userName) {
-	if( userName )
-	{
-		var registration = session.createRegistration();
-		var mailServer = new java.lang.StringBuffer();
-		var mailFile = new java.lang.StringBuffer();
-		var mailDomain = new java.lang.StringBuffer();
-		var mailSystem = new java.lang.StringBuffer();
-		var profile = new java.util.Vector();
-		try
-		{
-			registration.getUserInfo( userName,
-				mailServer,
-				mailFile,
-				mailDomain,
-				mailSystem,
-				profile );
-		}
-		catch( err )
-		{
-			sessionScope.userActionResult = "Not Found";
-			sessionScope.idfile = null;
-			registration.recycle();
-			return;	
-		}
-		registration.recycle();	
-			
-		sessionScope.userActionResult = "Found";
-		print( "Mail server: "+mailServer );
-		print( "Mail file: "+mailFile );
+	var entries = profiles.size();
 
-		var idfile = mailFile.toString();
-		var pathSeparator = idfile.indexOf('/');
-		if( pathSeparator >= 0 )
-			idfile = idfile.substring( pathSeparator+1 );
-		var ext = idfile.lastIndexOf('.');
-		if( ext >= 0 )
-			idfile = idfile.substring(0, ext);
-		idfile += ".id";
-		
-		sessionScope.idfile = idfile;
-	}
-	else
-	{
-		return;
-	}
+    if(entries != null){
+    	var contacts = new Array(profiles.size());
+        for(var i = 0; i < profiles.size(); i++){
+            var nav = profiles.get(i).getDataHandler();
+            var photos = nav.getEntries("photos"); 
+            var photo=null;        
+            if(photos.size()==2){
+            	photo = photos.get(1).getAsString("value");          	
+        		if(photo != null && photo != "PROFILES"){
+            		photo = "https://apps.na.collabserv.com/contacts/img/photos/" + photo;
+            	}
+            	else{
+            		photo = "/no_pic.jpg";
+            		}
+            	}
+            
+            var name = nav.getAsString("displayName");
+            
+            var email = nav.getAsString("emailAddress");
+            
+            var profile = nav.getAsString("profileUrl");
+            contacts[i] = {
+            	"name" : name,
+            	"photo" : photo,
+            	"email" : email,
+            	"profile" : profile
+            }
+        }
+        return contacts;
+    }
+    return null;
 }

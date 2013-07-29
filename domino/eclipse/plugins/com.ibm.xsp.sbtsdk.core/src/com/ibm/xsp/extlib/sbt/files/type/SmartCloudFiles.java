@@ -42,6 +42,7 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.StreamUtil;
 import com.ibm.designer.runtime.util.MIME;
 import com.ibm.sbt.services.client.ClientService;
+import com.ibm.sbt.services.client.ClientService.ContentStream;
 import com.ibm.sbt.services.client.ClientService.HandlerJson;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.ClientService.HandlerXml;
@@ -337,18 +338,19 @@ public class SmartCloudFiles extends AbstractType {
             InputStream is = null;
     		
     	    try {
-    	        is = new FileInputStream(serverFile);
+				is = new FileInputStream(serverFile);
+				ContentStream contentFile = new ContentStream(is,serverFile.length(), name);
+				SmartCloudService svc = new SmartCloudService(authBean);
 
-    	    
-    		FileService svc= new FileService();
-    		svc.upload(is, name, serverFile.length(), null);
+				svc.post(SERVICE_URL, params, contentFile);
     		 
-    	    } catch (FileServiceException e) {
+    	    } catch (ClientServicesException e) {
     	        e.printStackTrace();
     	    } catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+    	    
 
     		finally {
     			if(is != null)

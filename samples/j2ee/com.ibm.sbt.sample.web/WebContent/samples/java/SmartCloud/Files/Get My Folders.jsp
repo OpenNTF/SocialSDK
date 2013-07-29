@@ -39,7 +39,7 @@
 	<%
 	try {		
 		FileService fileService = new FileService("smartcloud");
-		FileEntryList fileEntries = fileService.getMyFolders(null); 
+		FileEntryList fileEntries = fileService.getMyFolders(); 
 		if(fileEntries != null && ! fileEntries.isEmpty()) {
 			for (FileEntry fileEntry : fileEntries) {
 				out.println("Name :  " + fileEntry.getLabel() );

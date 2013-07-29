@@ -432,7 +432,7 @@
         </managed-property>
     </managed-bean>
 
-  	<!-- Mail Session Factory for the EMail Service -->
+  	<!-- Mail Session Factory for the Email Service -->
 	<managed-bean>
 		<managed-bean-name>ibmsbt-sessionfactory</managed-bean-name>
 		<managed-bean-class>com.ibm.sbt.services.client.email.MailSessionFactory

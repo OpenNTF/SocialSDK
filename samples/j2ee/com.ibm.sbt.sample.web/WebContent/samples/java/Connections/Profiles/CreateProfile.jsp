@@ -31,17 +31,17 @@
 	try {
 	
 		ProfileAdminService service = new ProfileAdminService(); 
-		Profile profile = service.newProfile(Context.get().getProperty("createProfileUid"));
-		profile.setAsString("guid",	Context.get().getProperty("createProfileId"));
-		profile.setAsString("email", Context.get().getProperty("createProfileEmail"));
-		profile.setAsString("uid", Context.get().getProperty("createProfileUid"));
-		profile.setAsString("distinguishedName",Context.get().getProperty("createProfileDistinguishedName"));
-		profile.setAsString("displayName", Context.get().getProperty("testUser"));
-		profile.setAsString("givenNames", Context.get().getProperty("createProfileGivenNames"));
-		profile.setAsString("surname", Context.get().getProperty("createProfileSurName"));
-		profile.setAsString("userState", Context.get().getProperty("createProfileUserState"));
+		Profile profile = service.newProfile(Context.get().getProperty("sample.createProfileUid"));
+		profile.setAsString("guid",	Context.get().getProperty("sample.createProfileId"));
+		profile.setAsString("email", Context.get().getProperty("sample.createProfileEmail"));
+		profile.setAsString("uid", Context.get().getProperty("sample.createProfileUid"));
+		profile.setAsString("distinguishedName",Context.get().getProperty("sample.createProfileDistinguishedName"));
+		profile.setAsString("displayName", Context.get().getProperty("sample.createProfileDisplayName"));
+		profile.setAsString("givenNames", Context.get().getProperty("sample.createProfileGivenNames"));
+		profile.setAsString("surname", Context.get().getProperty("sample.createProfileSurName"));
+		profile.setAsString("userState", Context.get().getProperty("sample.createProfileUserState"));
 		service.createProfile(profile);
-		profile = service.getProfile(Context.get().getProperty("createProfileUserState"));
+		profile = service.getProfile(Context.get().getProperty("sample.createProfileId"));
 		out.println("<b> Profile Created :with display name "+ profile.getDisplayName());
 	} catch (Throwable e) {
 			out.println("<pre>");

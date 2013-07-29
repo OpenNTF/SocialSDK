@@ -23,7 +23,7 @@ public class Messages {
 	public static String	ReportingChainException			= "Problem occurred in getting report chain of user with identifier : {0}";
 	public static String	DirectReportsException			= "Problem occurred in getting direct reports of user with identifier : {0}";
 	public static String	ConnectionsByStatusException	= "Problem occurred while getting connections by status for user with identifier : {0}"; 
-	public static String	SendInviteException				= "Problem occurred in sending Invite to user with identifier : {0}"; 
+	public static String	SendInviteException				= "Problem occurred in sending Invite to user with identifier : {0}, please check if there is already a pending invite for this user"; 
 	public static String	SendInvitePayloadException		= "Error creating Send Invite Payload";
 	public static String 	SendInviteMsg 					= "Please accept this invitation to be in my network of Connections colleagues.";
 	public static String	AcceptInviteException			= "Problem occurred in accepting Invite with connection Id : {0}"; 
@@ -32,7 +32,7 @@ public class Messages {
 	public static String	UpdateProfilePhotoException		= "Problem occurred in Updating Profile Photo";
 	public static String	UpdateProfileException			= "Problem occurred in Updating Profile ";
 	public static String	DeleteProfileException			= "Problem occurred in deleting Profile of user with identifier : {0}";
-	public static String	CreateProfileException			= "Problem occurred in creating Profile of user with identifier : {0}";
+	public static String	CreateProfileException			= "Problem occurred in creating Profile of user with identifier : {0}, please check if profile already exists with this id";
 	public static String	CreateProfilePayloadException	= "Error in create Profile Payload";
 	
 }

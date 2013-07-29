@@ -18,43 +18,43 @@
 <%@page import="com.ibm.sbt.services.client.connections.files.model.CommentEntry"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.model.FileEntry"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.FileEntryList"%>
-<%@page import="java.util.HashMap"%>
 <%@page import="java.util.List"%>
-<%@page import="java.util.Map"%>
-<%@page import="java.io.PrintWriter"%>
-<%@page import="java.util.Iterator"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>  
- 
+<%@page import="java.util.Map"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.io.PrintWriter"%>
+
 <%@page 
 	language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <html>
 <head>
-	<title>SBT JAVA Sample - Files</title>
+	<title>SBT JAVA Sample - Update</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
-<body>
-	<h4>My Files</h4>
+<body>	
+	<h4>Add Comment To File</h4>
 	<div id="content">
 	<%
-	try {		
-		FileService fileService = new FileService("smartcloud");
-		FileEntryList files = fileService.getMyFiles(); 
-		if(files != null && ! files.isEmpty()) {
-			for (FileEntry file : files) {
-				out.println("<a href=\"" + file.getDownloadLink() + "\"> " + file.getLabel() + "</a><br/>" );
-			}
-		} else {
-			out.println("No Results");
-		}
-	} catch (Throwable e) {
-		out.println("<pre>");
-		out.println(e.getMessage());
-		out.println("</pre>");	
-	}					
+	    try { 
+	        FileService fileService = new FileService("smartcloud");
+	        FileEntryList fileEntries = fileService.getMyFiles();
+	        FileEntry fileEntry = fileEntries.get(0);
+	        CommentEntry commentEntry = fileService.addCommentToFile(fileEntry, "Comment added by Add Comment To File java sample at " + System.currentTimeMillis(), null);
+	        if (commentEntry != null) {
+	        	String commentId = commentEntry.getCommentId();
+	            out.println("Comment Id : " + commentId + "<br/>");
+	        }
+	    } catch (Throwable e) {
+	        out.println("<pre>");
+	       	e.printStackTrace(new PrintWriter(out));
+	        out.println("</pre>");
+	    }
 	%>
-	</div>
+	 <br>   
+   </div>
 </body>
 </html>

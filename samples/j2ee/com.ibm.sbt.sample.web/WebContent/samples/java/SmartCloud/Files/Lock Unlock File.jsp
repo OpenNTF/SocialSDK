@@ -59,7 +59,7 @@
         }
     } catch (Throwable e) {
         out.println("<pre>");
-       out.println(e.getMessage());
+       	out.println(e.getMessage());
         out.println("</pre>");
     }
 	%>

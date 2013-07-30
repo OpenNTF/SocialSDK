@@ -16,12 +16,9 @@
  */
 package com.ibm.xsp.extlib.sbt.services.client;
 
-import sun.net.dns.ResolverConfiguration.Options;
-
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.endpoints.Endpoint;
-import com.ibm.xsp.extlib.util.ExtLibUtil;
 
 /**
  * @author doconnor

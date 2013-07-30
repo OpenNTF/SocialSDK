@@ -19,10 +19,9 @@ package com.ibm.xsp.sbtsdk.playground.sbt.extension;
 import java.io.IOException;
 import java.util.Properties;
 
-import com.ibm.commons.util.PathUtil;
-import com.ibm.commons.util.StringUtil;
-
 import nsf.playground.extension.ImportOptions;
+
+import com.ibm.commons.util.StringUtil;
 
 
 /**

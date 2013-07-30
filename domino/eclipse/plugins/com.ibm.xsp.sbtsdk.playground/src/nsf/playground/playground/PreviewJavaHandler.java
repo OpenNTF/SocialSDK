@@ -23,12 +23,14 @@ import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.util.ParameterProcessor;
 import com.ibm.commons.runtime.util.UrlUtil;
 import com.ibm.commons.util.IExceptionEx;
+import com.ibm.commons.util.PathUtil;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonJavaFactory;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.commons.util.io.json.JsonParser;
 import com.ibm.sbt.jslibrary.SBTEnvironment;
 import com.ibm.xsp.model.domino.DominoUtils;
+import com.ibm.xsp.sbtsdk.servlets.JavaScriptLibraries;
 import com.ibm.xsp.util.HtmlUtil;
 import com.ibm.xsp.util.ManagedBeanUtil;
 
@@ -98,6 +100,12 @@ public class PreviewJavaHandler extends PreviewHandler {
 		PlaygroundEnvironment env = dataAccess.getEnvironment(envName);
 		env.prepareEndpoints();
 		
+		String serverUrl = composeServerUrl(req);
+		String dbUrl = composeDatabaseUrl(req,serverUrl);
+
+		JavaScriptLibraries.JSLibrary jsLib = JavaScriptLibraries.LIBRARIES[0]; // Default 
+		String jsLibraryPath = getDefautLibraryPath(serverUrl);
+		
 		SBTEnvironment.push(Context.get(), env);
 
 		EnvParameterProvider prov = new EnvParameterProvider(env);
@@ -112,6 +120,8 @@ public class PreviewJavaHandler extends PreviewHandler {
 			throw new ServletException(ex);
 		}
 		
+
+		
 		PrintWriter pw = resp.getWriter();
 		
 		pw.println("<!DOCTYPE html>");
@@ -119,13 +129,48 @@ public class PreviewJavaHandler extends PreviewHandler {
 		
 		pw.println("<head>");
 		pw.println("  <title>Social Business Playground - Java Snippet</title>");
+		
+		pw.println("  <style type=\"text/css\">");
+		pw.println("    @import \""+jsLibraryPath+"dijit/themes/claro/claro.css\";");
+		pw.println("    @import \""+jsLibraryPath+"dojo/resources/dojo.css\";");
+		pw.println("  </style>");
+		String bodyTheme = "claro";
+
+		jsLibraryPath = PathUtil.concat(jsLibraryPath,"/dojo/dojo.js",'/');
+		pw.println("  <script type=\"text/javascript\">");
+		pw.println("  	dojoConfig = {");
+		pw.println("  	    parseOnLoad: true");
+		pw.println("  	};");
+		pw.println("  </script>");
+		pw.println("  <script type=\"text/javascript\" src=\""+jsLibraryPath+"\"></script>");
+
+		String libType = jsLib.getLibType().toString();
+		String libVersion = jsLib.getLibVersion();
+		pw.print("  <script type=\"text/javascript\" src=\""+composeToolkitUrl(dbUrl)+"?lib="+libType+"&ver="+libVersion);
+		pw.print("&env=");
+		pw.print(envName);
+		pw.println("\"></script>");
+		
+		pw.println("  <script>");
+		pw.println("    require(['dojo/parser']);"); // avoid dojo warning
+		pw.println("  </script>");
+		
 		pw.println("</head>");
 
-		pw.println("<body>");
-		
-//		pw.println("<pre>");
-//		pw.println(jsp);
-//		pw.println("</pre>");
+		pw.print("<body");
+		if(StringUtil.isNotEmpty(bodyTheme)) {
+			pw.print(" class=\"");
+			pw.print(bodyTheme);
+			pw.print("\"");
+		}
+		pw.println(">");
+
+		//Debugging...
+		if(false) {
+			pw.println("<pre>");
+			pw.println(jsp);
+			pw.println("</pre>");
+		}
 		
 		String jspClassName = "xspjsp.jsp_"+unid;
 		//String jspClassName = "jsp_"+unid;

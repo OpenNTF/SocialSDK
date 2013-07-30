@@ -60,9 +60,7 @@ public abstract class AssetNode extends Node {
 		// Read the properties, starting from the most global ones
 		Properties p = new Properties();
 		readProperties(root.getVFS(), this, p);
-		if(!p.isEmpty()) {
-			s.init(p);
-		}
+		s.init(p);
 
 		return s;
 	}

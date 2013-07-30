@@ -84,9 +84,11 @@ public abstract class Endpoints {
     protected void pushProperty(FacesContextEx ctx, PlaygroundEnvironment env, String name) {
     	String p = env.getPropertyValueByName(name);
     	if(StringUtil.isNotEmpty(p)) {
-            RequestParameters rq = ctx.getRequestParameters();
-    		rq.setProperty(name, p);
-    		//ctx.setSessionProperty(name, p);
+//            RequestParameters rq = ctx.getRequestParameters();
+//    		rq.setProperty(name, p);
+    		ctx.setSessionProperty(name, p);
+    	} else {
+    		ctx.setSessionProperty(name, null);
     	}
     }
 	

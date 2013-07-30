@@ -279,7 +279,7 @@ public class APIImporter extends AssetImporter {
 	protected List<DocEntry> loadEntries(RestClient client, ImportSource source) throws IOException {
 		ArrayList<DocEntry> list = new ArrayList<APIImporter.DocEntry>();
 		try {
-			String path = URLEncoding.encodeURIString("/api/data/collections/name/AllAPIExplorer","utf-8",0,false);
+			String path = URLEncoding.encodeURIString("/api/data/collections/name/AllAPIExplorer?ps=99999","utf-8",0,false);
 			Object json = client.get(path,new RestClient.HandlerJson(JsonJavaObjectI.instanceExI)).getData();
 			if(json instanceof List) {
 				for(Object entry: (List)json) {

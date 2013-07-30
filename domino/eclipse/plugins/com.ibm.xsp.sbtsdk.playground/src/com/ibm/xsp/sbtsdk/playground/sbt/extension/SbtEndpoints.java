@@ -134,7 +134,7 @@ public class SbtEndpoints extends Endpoints {
 			}
 		}
 		{
-			DominoBasicEndpoint ep = (DominoBasicEndpoint)ManagedBeanUtil.getBean(context, "domino");
+			DominoBasicEndpoint ep = (DominoBasicEndpoint)ManagedBeanUtil.getBean(context, "dominoBasic");
 			if(ep!=null) {
 				ep.setUrl(env.getField("Dom_URL"));
 			}

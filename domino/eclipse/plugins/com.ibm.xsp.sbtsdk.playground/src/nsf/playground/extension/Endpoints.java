@@ -18,6 +18,7 @@ package nsf.playground.extension;
 
 import com.ibm.commons.util.StringUtil;
 import com.ibm.xsp.context.FacesContextEx;
+import com.ibm.xsp.context.RequestParameters;
 
 import nsf.playground.environments.PlaygroundEnvironment;
 
@@ -83,7 +84,11 @@ public abstract class Endpoints {
     protected void pushProperty(FacesContextEx ctx, PlaygroundEnvironment env, String name) {
     	String p = env.getPropertyValueByName(name);
     	if(StringUtil.isNotEmpty(p)) {
+//            RequestParameters rq = ctx.getRequestParameters();
+//    		rq.setProperty(name, p);
     		ctx.setSessionProperty(name, p);
+    	} else {
+    		ctx.setSessionProperty(name, null);
     	}
     }
 	

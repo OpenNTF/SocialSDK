@@ -11,15 +11,24 @@ if(p) {
 			env.prepareEndpoints();
 		}
 	}
+	var exception;
 	var id = p.id;
 	var doc = database.getDocumentByUNID(id)
 	if(doc) {
 		var xpages = doc.getItemValueString("XPages");
 		var pageName = "playground/"+id+"_"+doc.getLastModified().toJavaDate().getTime();
-		dynamicXPagesBean.compile(pageName,xpages);
-		context.redirectToPage(pageName);
+		try {
+			dynamicXPagesBean.compile(pageName,xpages);
+			context.redirectToPage(pageName);
+		} catch(e) {
+			exception = e;
+		}
 	}
 }}]]></xp:this.beforeRenderResponse>
+	<xp:text escape="true" id="computedField1"
+		value="#{javascript:dynamicXPagesBean.compilationExceptionString(exception,false,true)}" tagName="pre">
+	</xp:text>
+	<!-- 
 	<bz:controlFactory id="controlFactory1" autoCreate="true" loaded="false">
 		<bz:this.controlBuilder>
 			<bz:markupControlBuilder>
@@ -44,5 +53,6 @@ return "<xp:span>Cannot interpret XPages markup</xp:span>";}]]></bz:this.xmlMark
 			</bz:markupControlBuilder>
 		</bz:this.controlBuilder>
 	</bz:controlFactory>
-
+ -->
+ 
 </xp:view>

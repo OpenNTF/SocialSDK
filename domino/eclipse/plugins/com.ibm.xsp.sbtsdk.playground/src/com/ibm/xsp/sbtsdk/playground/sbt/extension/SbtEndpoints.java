@@ -70,6 +70,9 @@ public class SbtEndpoints extends Endpoints {
 				//new Property("Twitter_URL", "Twitter URL"),
 				new Property("Twitter_OA_ConsumerKey", "Twitter Consumer Key"),
 				new Property("Twitter_OA_ConsumerSecret", "Twitter Consumer Secret"),
+				
+				new Property("Dropbox_OA_ConsumerKey", "Dropbox Consumer Key"),
+				new Property("Dropbox_OA_ConsumerSecret", "Dropbox Consumer Secret"),
 		}),
 	};
 
@@ -83,7 +86,7 @@ public class SbtEndpoints extends Endpoints {
 
 	@Override
 	public String getEndpointNames() {
-		return "connections,connectionsOA2,smartcloud,smartcloudOA2,sametime,domino,watson";
+		return "connections,connectionsOA2,smartcloud,smartcloudOA2,sametime,domino,watson,twitter,dropbox";
 	}
     
     @Override
@@ -94,6 +97,8 @@ public class SbtEndpoints extends Endpoints {
     	pushProperty(context,env,"sbt.endpoint.smartcloud");
     	pushProperty(context,env,"sbt.endpoint.domino");
     	pushProperty(context,env,"sbt.endpoint.sametime");
+    	pushProperty(context,env,"sbt.endpoint.twitter");
+    	pushProperty(context,env,"sbt.endpoint.dropbox");
     	
 		// Override the beans with the environment definition
 		{
@@ -147,10 +152,16 @@ public class SbtEndpoints extends Endpoints {
 		}
 		{
 			// Temporarily use OAuth endpoint
-			OAuthEndpoint ep = (OAuthEndpoint)ManagedBeanUtil.getBean(context, "twitter");
-			if(ep!=null) {
-				ep.setConsumerKey(env.getField("Twitter_OA_ConsumerKey"));
-				ep.setConsumerSecret(env.getField("Twitter_OA_ConsumerSecret"));
+			OAuthEndpoint ept = (OAuthEndpoint)ManagedBeanUtil.getBean(context, "twitter");
+			if(ept!=null) {
+				ept.setConsumerKey(env.getField("Twitter_OA_ConsumerKey"));
+				ept.setConsumerSecret(env.getField("Twitter_OA_ConsumerSecret"));
+			}
+			// Temporarily use OAuth endpoint
+			OAuthEndpoint epd = (OAuthEndpoint)ManagedBeanUtil.getBean(context, "twitter");
+			if(epd!=null) {
+				epd.setConsumerKey(env.getField("Twitter_OA_ConsumerKey"));
+				epd.setConsumerSecret(env.getField("Twitter_OA_ConsumerSecret"));
 			}
 		}
 	}    

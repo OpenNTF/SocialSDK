@@ -17,7 +17,7 @@
 							var="update">
 							<xp:this.value>
 	<![CDATA[#{javascript:
-	var svc = new com.ibm.sbt.services.client.activitystreams.ActivityStreamService();
+	var svc = new com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamService();
 	return svc.getUpdatesFromPeopleIFollow();
 }]]></xp:this.value>
 							<xp:div>

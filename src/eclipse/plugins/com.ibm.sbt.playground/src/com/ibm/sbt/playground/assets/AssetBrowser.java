@@ -121,9 +121,9 @@ public class AssetBrowser {
 		}).sort();
 	}
 	
-	private boolean includeNode(Properties properties){
+	protected boolean includeNode(Properties properties){
 	    if(this.endpoints == null){
-            return false;
+            return true;
         }
         String sampleEndpoints = properties.getProperty(CategoryNode.ENDPOINT_PROPERTY_KEY);
         String sampleJsLibs = properties.getProperty(CategoryNode.JS_LIB_ID_PROPERTY_KEY);
@@ -144,7 +144,7 @@ public class AssetBrowser {
 	 * @param properties
 	 * @return True if this node is to be included, false if it should not be included in the tree.
 	 */
-    private boolean includeNode(String properties) {
+	protected boolean includeNode(String properties) {
         ReaderInputStream is = new ReaderInputStream(new StringReader(properties));
         Properties p = new Properties();
         try {
@@ -155,7 +155,7 @@ public class AssetBrowser {
         return includeNode(p);
     }
     
-    private boolean jsLibMatches(String sampleJsLibs){
+	protected boolean jsLibMatches(String sampleJsLibs){
         if(this.jsLibId == null)
             return true; // no jsLibId specified in request url, include all samples.
         String sampleJsLibArray[] = sampleJsLibs.split(",");
@@ -166,7 +166,7 @@ public class AssetBrowser {
         return false;
     }
     
-    private boolean endpointMatches(String sampleEndpoints){
+	protected boolean endpointMatches(String sampleEndpoints){
         if(this.endpoints == null)
             return true; // no endpoints in context for some reason, include samples.
         String[] sampleEndpointsArray = sampleEndpoints.split(",");

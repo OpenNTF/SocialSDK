@@ -3,6 +3,7 @@ package nsf.playground.snippets;
 import java.io.File;
 import java.lang.reflect.Array;
 import java.util.List;
+import java.util.Properties;
 import java.util.Vector;
 
 import javax.faces.application.FacesMessage;
@@ -187,7 +188,12 @@ public abstract class AssetImporter {
 		VFS vfs=createImportVFS(source);
 		VFSFile rootDir=vfs.getRoot();
 
-		AssetBrowser a=new AssetBrowser(rootDir, getNodeFactory());
+		AssetBrowser a=new AssetBrowser(rootDir, getNodeFactory()) {
+			// Import all the nodes to the DB, regardless of the constraints (endpoints, jslibs...)
+			protected boolean includeNode(Properties properties){
+				return true;
+			}
+		};
 
 		AssetBrowser.Callback cb=null;
 		if(action!=null) {

@@ -7,7 +7,7 @@
 		<xe:objectData var="objectData1">
 			<xe:this.createObject><![CDATA[#{javascript:var ep = @Endpoint("smartcloud");
 var profileService = new com.ibm.sbt.services.client.smartcloud.profiles.ProfileService("smartcloud");
-var result= profileService.getProfile().getData();
+var result= profileService.getMyProfile().getDataHandler();
 return parseSmartCloudProfile(result);
 
 }]]></xe:this.createObject>

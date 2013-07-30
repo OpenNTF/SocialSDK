@@ -6,9 +6,8 @@
 			<xe:this.createObject><![CDATA[#{javascript:var ep = @Endpoint("smartcloud");
 var svc = new sbt.SmartCloudContactsService(ep);
 var profileService = new com.ibm.sbt.services.client.smartcloud.profiles.ProfileService("smartcloud");
-var result= profileService.getProfile().getData();
-return parseSmartCloudContacts(result);
-
+var contactsList= profileService.getMyContacts();
+return parseSmartCloudContacts(contactsList);
 
 }]]></xe:this.createObject>
 		</xe:objectData>

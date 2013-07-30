@@ -27,10 +27,15 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.zip.GZIPInputStream;
+
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
@@ -46,6 +51,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.w3c.dom.Node;
+
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.NoAccessSignal;
 import com.ibm.commons.util.FastStringBuffer;
@@ -75,52 +81,83 @@ import com.ibm.commons.runtime.util.UrlUtil;
  * Base class for a REST service client.
  * 
  * @author Philippe Riand
+ * @author Mark Wallace
  */
 public abstract class ClientService {
 
-	private static final ProfilerType	profilerRequest				= new ProfilerType(
-																			"Executing REST request, ");	//$NON-NLS-1$
+	protected Endpoint endpoint;
 
 	// Constants for the methods
-	public static final String			METHOD_GET					= "get";
-	public static final String			METHOD_PUT					= "put";
-	public static final String			METHOD_POST					= "post";
-	public static final String			METHOD_DELETE				= "delete";
+	public static final String METHOD_GET = "get"; //$NON-NLS-1$
+	public static final String METHOD_PUT = "put"; //$NON-NLS-1$
+	public static final String METHOD_POST = "post"; //$NON-NLS-1$
+	public static final String METHOD_DELETE = "delete"; //$NON-NLS-1$
 
 	// These represents how the result should be formatted to the caller
-	public static final Handler			FORMAT_UNKNOWN				= null;
-	public static final Handler			FORMAT_NULL					= new HandlerNull();
-	public static final Handler			FORMAT_TEXT					= new HandlerString();
-	public static final Handler			FORMAT_INPUTSTREAM			= new HandlerInputStream();
-	public static final Handler			FORMAT_XML					= new HandlerXml();
-	public static final Handler			FORMAT_JSON					= new HandlerJson();
+	public static final Handler FORMAT_UNKNOWN = null;
+	public static final Handler FORMAT_NULL = new HandlerNull();
+	public static final Handler FORMAT_TEXT = new HandlerString();
+	public static final Handler FORMAT_INPUTSTREAM = new HandlerInputStream();
+	public static final Handler FORMAT_XML = new HandlerXml();
+	public static final Handler FORMAT_JSON = new HandlerJson();
 
-	// TODO:
-	// ?? Should be moved elsewhere?
-	// ?? What is it for?
-	public static final Handler			FORMAT_CONNECTIONS_OUTPUT	= new HandlerConnectionHeader();
+	// TODO: Should be moved elsewhere? What is it for?
+	public static final Handler FORMAT_CONNECTIONS_OUTPUT = new HandlerConnectionHeader();
+	
+	private static final ProfilerType profilerRequest = new ProfilerType("Executing REST request, "); //$NON-NLS-1$
 
-	protected Endpoint					endpoint;
+	private static final String sourceClass = ClientService.class.getName();
+	private static final Logger logger = Logger.getLogger(sourceClass);
 
+	/**
+	 * Default constructor
+	 */
 	public ClientService() {
 	}
 
+	/**
+	 * Construct a ClientService with the specified Endpoint
+	 * 
+	 * @param endpoint
+	 */
 	public ClientService(Endpoint endpoint) {
 		this.endpoint = endpoint;
 	}
 
+	/**
+	 * Construct a ClientService with the Endpoint with the specified name
+	 * 
+	 * @param endpoint
+	 */
 	public ClientService(String endpointName) {
 		this.endpoint = EndpointFactory.getEndpoint(endpointName);
 	}
 
+	/**
+	 * Return the associated Endpoint
+	 * 
+	 * @return
+	 */
 	public Endpoint getEndpoint() {
 		return endpoint;
 	}
 
+	/**
+	 * Set the associated Endpoint
+	 * 
+	 * @param endpoint
+	 */
 	public void setEndpoint(Endpoint endpoint) {
 		this.endpoint = endpoint;
 	}
 
+	/**
+	 * If there is an associated endpoint then check is authentication required
+	 * and if so trigger the authentication process.
+	 * 
+	 * @param args
+	 * @throws ClientServicesException
+	 */
 	protected void checkAuthentication(Args args) throws ClientServicesException {
 		if (endpoint != null) {
 			if (endpoint.isRequiresAuthentication() && !endpoint.isAuthenticated()) {
@@ -129,16 +166,35 @@ public abstract class ClientService {
 		}
 	}
 
+	/**
+	 * Get the URL path for the specified arguments and check it is valid
+	 * i.e. not null. If it is a null throw a ClientServicesException.
+	 * 
+	 * @param args
+	 * @throws ClientServicesException
+	 */
 	protected void checkUrl(Args args) throws ClientServicesException {
 		if (StringUtil.isEmpty(getUrlPath(args))) {
 			throw new ClientServicesException(null, "The service URL is empty");
 		}
 	}
 
+	/**
+	 * Check the read parameters and throw a ClientServicesException if
+	 * they are invalid.
+	 * 
+	 * @param parameters
+	 * @throws ClientServicesException
+	 */
 	protected void checkReadParameters(Map<String, String> parameters) throws ClientServicesException {
 		// nothing for now...
 	}
 
+	/**
+	 * Return the URL from the associated endpoint.
+	 * 
+	 * @return
+	 */
 	protected String getBaseUrl() {
 		if (endpoint != null) {
 			return endpoint.getUrl();
@@ -146,12 +202,24 @@ public abstract class ClientService {
 		return null;
 	}
 
+	/**
+	 * Initialize the associated Endpoint with the specified HttpClient.
+	 * 
+	 * @param httpClient
+	 * @throws ClientServicesException
+	 */
 	protected void initialize(DefaultHttpClient httpClient) throws ClientServicesException {
 		if (endpoint != null) {
 			endpoint.initialize(httpClient);
 		}
 	}
 
+	/**
+	 * Return true if force trust SSL certificate is set for the associated Endpoint.
+	 * 
+	 * @return
+	 * @throws ClientServicesException
+	 */
 	protected boolean isForceTrustSSLCertificate() throws ClientServicesException {
 		if (endpoint != null) {
 			return endpoint.isForceTrustSSLCertificate();
@@ -159,6 +227,12 @@ public abstract class ClientService {
 		return false;
 	}
 
+	/**
+	 * Return the proxy info from the associated Endpoint or an empty string
+	 * 
+	 * @return
+	 * @throws ClientServicesException
+	 */
 	protected String getHttpProxy() throws ClientServicesException {
 		if (endpoint != null) {
 			String proxyinfo = endpoint.getHttpProxy();
@@ -167,15 +241,21 @@ public abstract class ClientService {
 			}
 			return proxyinfo;
 		}
-		return "";
+		return ""; // TODO should this be null?
 	}
 
+	/**
+	 * Force authentication for the associated Endpoint.
+	 * 
+	 * @param args
+	 * @throws ClientServicesException
+	 */
 	protected void forceAuthentication(Args args) throws ClientServicesException {
 		if (endpoint != null) {
 			endpoint.authenticate(true);
 		} else {
-			throw new NoAccessSignal(StringUtil.format("Authorization needed for service {0}",
-					getUrlPath(args)));
+			String msg = StringUtil.format("Authorization needed for service {0}", getUrlPath(args));
+			throw new NoAccessSignal(msg);
 		}
 	}
 
@@ -185,10 +265,10 @@ public abstract class ClientService {
 
 	public static class Args {
 
-		private String				serviceUrl; // Service URL to call, relative to the endpoint
-		private Map<String, String>	parameters; // Query String parameters
-		private Map<String, String>	headers;	// HTTP Headers
-		private Handler				handler;	// Format of the result
+		private String serviceUrl; // Service URL to call, relative to the endpoint
+		private Map<String, String> parameters; // Query String parameters
+		private Map<String, String> headers; // HTTP Headers
+		private Handler handler; // Format of the result
 
 		public Args() {
 		}
@@ -243,6 +323,15 @@ public abstract class ClientService {
 		public Args setHandler(Handler handler) {
 			this.handler = handler;
 			return this;
+		}
+
+		@Override
+		public String toString() {
+			StringBuilder sb = new StringBuilder();
+			sb.append("{ serviceUrl:").append(serviceUrl);
+			sb.append(", parameters:").append(parameters);
+			sb.append(", headers:").append(headers).append("}");
+			return sb.toString();
 		}
 	}
 
@@ -659,8 +748,15 @@ public abstract class ClientService {
 		}
 	}
 
-	protected Handler createResponseHandler(HttpResponse response, HttpEntity entity)
+	protected Handler findErrorHandler(HttpRequestBase request, HttpResponse response)
+			throws ClientServicesException, UnsupportedEncodingException, IOException {
+		throwClientServicesException(request, response);
+		return null;
+	}
+	
+	protected Handler findSuccessHandler(HttpRequestBase request, HttpResponse response)
 			throws UnsupportedEncodingException, IOException {
+		HttpEntity entity = response.getEntity();
 		if (entity != null) {
 			Header hd = entity.getContentType();
 			if (hd != null) {
@@ -811,35 +907,60 @@ public abstract class ClientService {
 	// Actual request execution
 	// =================================================================
 
+	/**
+	 * Execute an XML Http request with the specified arguments
+	 * 
+	 * @param method
+	 * @param args
+	 * @param content
+	 * @return
+	 * @throws ClientServicesException
+	 */
 	public Response xhr(String method, Args args, Object content) throws ClientServicesException {
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.entering(sourceClass, "xhr", new Object[] { method, args });
+		}
 
 		checkAuthentication(args);
 		checkUrl(args);
 		checkReadParameters(args.parameters);
 		String url = composeRequestUrl(args);
-		if (StringUtil.equalsIgnoreCase(method, "get")) {
+		Response response = null;
+		if (StringUtil.equalsIgnoreCase(method, METHOD_GET)) {
 			HttpGet httpGet = new HttpGet(url);
-			return execRequest(httpGet, args, content);
-		} else if (StringUtil.equalsIgnoreCase(method, "post")) {
+			response = execRequest(httpGet, args, content);
+		} else if (StringUtil.equalsIgnoreCase(method, METHOD_POST)) {
 			HttpPost httpPost = new HttpPost(url);
-			return execRequest(httpPost, args, content);
+			response = execRequest(httpPost, args, content);
 		} else if (StringUtil.equalsIgnoreCase(method, "put")) {
 			HttpPut httpPut = new HttpPut(url);
-			return execRequest(httpPut, args, content);
+			response = execRequest(httpPut, args, content);
 		} else if (StringUtil.equalsIgnoreCase(method, "delete")) {
 			HttpDelete httpDelete = new HttpDelete(url);
-			return execRequest(httpDelete, args, content);
+			response = execRequest(httpDelete, args, content);
 		} else {
 			throw new ClientServicesException(null, "Unsupported HTTP method {0}", method);
 		}
+		
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.exiting(sourceClass, "xhr", response);
+		}
+		return response;
 	}
 
-	protected Response execRequest(HttpRequestBase httpRequestBase, Args args, Object content)
-			throws ClientServicesException {
-
+	/**
+	 * Execute the specified HttpRequest
+	 * 
+	 * @param httpRequestBase
+	 * @param args
+	 * @param content
+	 * @return
+	 * @throws ClientServicesException
+	 */
+	protected Response execRequest(HttpRequestBase httpRequestBase, Args args, Object content) throws ClientServicesException {
 		if (Profiler.isEnabled()) {
-			ProfilerAggregator agg = Profiler.startProfileBlock(profilerRequest, httpRequestBase.getMethod()
-					.toUpperCase() + " " + getUrlPath(args));
+			String msg = httpRequestBase.getMethod().toUpperCase() + " " + getUrlPath(args);
+			ProfilerAggregator agg = Profiler.startProfileBlock(profilerRequest, msg);
 			long ts = Profiler.getCurrentTime();
 			try {
 				return _xhr(httpRequestBase, args, content);
@@ -862,8 +983,7 @@ public abstract class ClientService {
 	 *            the args (such as url params) that have been pushed through by the calling service
 	 * @return true if the client wants the super class to take care of processing the content
 	 */
-	protected Response _xhr(HttpRequestBase httpRequestBase, Args args, Object content)
-			throws ClientServicesException {
+	protected Response _xhr(HttpRequestBase httpRequestBase, Args args, Object content) throws ClientServicesException {
 		DefaultHttpClient httpClient = createHttpClient(httpRequestBase, args);
 		initialize(httpClient);
 
@@ -907,40 +1027,74 @@ public abstract class ClientService {
 		}
 	}
 
-	protected HttpResponse executeRequest(HttpClient httpClient, HttpRequestBase httpRequestBase, Args args)
-			throws ClientServicesException {
+	/**
+	 * Execute the specified the request.
+	 * 
+	 * @param httpClient
+	 * @param httpRequestBase
+	 * @param args
+	 * @return
+	 * @throws ClientServicesException
+	 */
+	protected HttpResponse executeRequest(HttpClient httpClient, HttpRequestBase httpRequestBase, 
+			Args args) throws ClientServicesException {
 		try {
 			return httpClient.execute(httpRequestBase);
 		} catch (Exception ex) {
+			if (logger.isLoggable(Level.FINE)) {
+				String msg = "Exception ocurred while execuring request {0} {1}";
+				msg = StringUtil.format(msg, httpRequestBase.getMethod(), args);
+				logger.log(Level.FINE, msg, ex);
+			}
+			
 			if (ex instanceof ClientServicesException) {
 				throw (ClientServicesException) ex;
 			}
-			throw new ClientServicesException(ex, "Error while executing the REST service {0}",
-					httpRequestBase.getURI().toString());
+			String msg = "Error while executing the REST service {0}";
+			String param = httpRequestBase.getURI().toString();
+			throw new ClientServicesException(ex, msg, param);
 		}
 	}
 
+	/**
+	 * Process the specified response
+	 * 
+	 * @param httpClient
+	 * @param httpRequestBase
+	 * @param httpResponse
+	 * @param args
+	 * @return
+	 * @throws ClientServicesException
+	 */
 	protected Response processResponse(HttpClient httpClient, HttpRequestBase httpRequestBase,
-			HttpResponse response, Args args) throws ClientServicesException {
-		if (!checkStatus(response.getStatusLine().getStatusCode())) {
+			HttpResponse httpResponse, Args args) throws ClientServicesException {
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.entering(sourceClass, "processResponse", new Object[] { httpRequestBase.getURI(), httpResponse.getStatusLine() });
+		}
+
+		int statusCode = httpResponse.getStatusLine().getStatusCode();
+		String reasonPhrase = httpResponse.getStatusLine().getReasonPhrase();
+		if (!checkStatus(statusCode)) {
 			if (SbtCoreLogger.SBT.isErrorEnabled()) {
 				// Do not throw an exception here as some of the non OK responses are not error cases.
-				SbtCoreLogger.SBT
-						.errorp(this,
-								"processResponse",
-								"Client service request to: {0} did not return OK status. Status returned: {1}, reason: {2}, expected: {3}",
-								httpRequestBase.getURI(), response.getStatusLine().getStatusCode(), response
-										.getStatusLine().getReasonPhrase(), HttpStatus.SC_OK);
+				String msg = "Client service request to: {0} did not return OK status. Status returned: {1}, reason: {2}, expected: {3}";
+				msg = StringUtil.format(msg, httpRequestBase.getURI(), statusCode, reasonPhrase, HttpStatus.SC_OK);
+				SbtCoreLogger.SBT.traceDebugp(this, "processResponse", msg);
 			}
 		}
-		if ((response.getStatusLine().getStatusCode() == HttpServletResponse.SC_UNAUTHORIZED)
-				|| (endpoint != null && endpoint.getAuthenticationErrorCode() == response.getStatusLine()
-						.getStatusCode())) {
+		if ((httpResponse.getStatusLine().getStatusCode() == HttpServletResponse.SC_UNAUTHORIZED) || 
+			(endpoint != null && endpoint.getAuthenticationErrorCode() == statusCode)) {
 			forceAuthentication(args);
 			return null;
 		}
-		Handler format = _parseResult(httpRequestBase, response, args.handler);
-		return new Response(httpClient, response, httpRequestBase, args, format);
+		Handler format = findHandler(httpRequestBase, httpResponse, args.handler);
+		
+		Response response = new Response(httpClient, httpResponse, httpRequestBase, args, format);
+
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.exiting(sourceClass, "processResponse", response);
+		}
+		return response;
 	}
 
 	private boolean checkStatus(int statusCode) {
@@ -1045,59 +1199,71 @@ public abstract class ClientService {
 		return FORMAT_INPUTSTREAM;
 	}
 
-	protected Handler _parseResult(HttpRequestBase request, HttpResponse response, Handler format)
+	/**
+	 * Find the handler for the specified response
+	 * 
+	 * @param request
+	 * @param response
+	 * @param format
+	 * @return
+	 * @throws ClientServicesException
+	 */
+	protected Handler findHandler(HttpRequestBase request, HttpResponse response, Handler handler)
 			throws ClientServicesException {
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.entering(sourceClass, "findHandler", new Object[] { request.getURI(), response.getStatusLine(), handler });
+		}
+
 		try {
 			int statusCode = response.getStatusLine().getStatusCode();
 			if (response.getStatusLine().getStatusCode() == HttpServletResponse.SC_INTERNAL_SERVER_ERROR) {
-				generateResultError500(statusCode, request, response);
+				handler = findErrorHandler(request, response);
 			}
 
-			HttpEntity entity = response.getEntity();
-			if (format == null) {
-				format = createResponseHandler(response, entity);
+			// Connections Delete API returns SC_NO_CONTENT for successful deletion.
+			if (isErrorStatusCode(statusCode)) { 
+				handler = findErrorHandler(request, response);
 			}
 
-			if ((statusCode != HttpStatus.SC_OK) && (statusCode != HttpStatus.SC_CREATED)
-					&& (statusCode != HttpStatus.SC_ACCEPTED) && (statusCode != HttpStatus.SC_NO_CONTENT)) { // Connections
-																												// Delete
-																												// API
-																												// returns
-																												// SC_NO_CONTENT
-																												// for
-																												// successful
-																												// deletion.
-				generateResultError(statusCode, request, response, entity);
+			if (handler == null) {
+				handler = findSuccessHandler(request, response);
 			}
 
 			// SBT doesn't have a JS interpreter...
-			if (format != null) {
-				return format;
+			if (handler == null) {
+				handler = new HandlerRaw();
 			}
-			// else if (StringUtil.equals(format, FORMAT_CONNECTIONS_OUTPUT)) {
-			// return readLocationHeaderAsString(httpRequestBase, response, entity);
-			// }
-			return new HandlerRaw();
 		} catch (Exception ex) {
 			if (ex instanceof ClientServicesException) {
 				throw (ClientServicesException) ex;
 			}
 			throw new ClientServicesException(ex, "Error while parsing the REST service results");
 		}
+
+		if (logger.isLoggable(Level.FINEST)) {
+			logger.exiting(sourceClass, "findHandler", handler);
+		}
+		return handler;
 	}
 
-	protected void generateResultError500(int statusCode, HttpRequestBase request, HttpResponse response)
-			throws ClientServicesException {
-		// PHIL:
-		// Why SBT exception and not ClientService
-		throw new SBTException(null,
-				"Request for url: {0} did not complete successfully. Error code {1} [{2}] returned",
-				request.getURI(), response.getStatusLine().getStatusCode(), response.getStatusLine()
-						.getReasonPhrase());
+	/**
+	 * @param statusCode
+	 * @return
+	 */
+	protected boolean isErrorStatusCode(int statusCode) {
+		return (statusCode != HttpStatus.SC_OK) && 
+			(statusCode != HttpStatus.SC_CREATED) && 
+			(statusCode != HttpStatus.SC_ACCEPTED) && 
+			(statusCode != HttpStatus.SC_NO_CONTENT);
 	}
 
-	protected void generateResultError(int statusCode, HttpRequestBase request, HttpResponse response,
-			HttpEntity entity) throws ClientServicesException {
+	/**
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws ClientServicesException
+	 */
+	protected void throwClientServicesException(HttpRequestBase request, HttpResponse response) throws ClientServicesException {
 		throw new ClientServicesException(response, request);
 	}
 

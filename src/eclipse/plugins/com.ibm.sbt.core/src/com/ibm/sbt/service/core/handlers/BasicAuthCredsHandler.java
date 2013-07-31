@@ -119,8 +119,12 @@ public class BasicAuthCredsHandler extends AbstractServiceHandler {
 		String url = (String)req.getParameter(REDIRECT_URL);
 		if(authentication.equals(AUTH_DECLINED)){
 			if(url != null){
-				if(url.indexOf("showWrongCredsMessage=true") == -1) // don't add again if wrongCreds parameter is already added for declined Authentication
-					url = PathUtil.concat(url,"showWrongCredsMessage=true", '?');
+				if(url.indexOf("showWrongCredsMessage=true") == -1){// don't add again if wrongCreds parameter is already added for declined Authentication
+					if(url.indexOf('?')!= -1)
+						url = PathUtil.concat(url,"showWrongCredsMessage=true", '&');
+					else
+						url = PathUtil.concat(url,"showWrongCredsMessage=true", '?');
+				}	
 			}
 		}
 		context.sendRedirect(url);

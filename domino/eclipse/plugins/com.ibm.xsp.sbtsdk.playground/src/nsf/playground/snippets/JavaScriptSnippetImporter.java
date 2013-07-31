@@ -4,6 +4,7 @@ import lotus.domino.Database;
 import lotus.domino.Document;
 import nsf.playground.beans.JavaScriptSnippetBean;
 
+import com.ibm.sbt.playground.assets.Asset;
 import com.ibm.sbt.playground.assets.AssetNode;
 import com.ibm.sbt.playground.assets.NodeFactory;
 import com.ibm.sbt.playground.assets.jssnippets.JSSnippet;
@@ -37,8 +38,9 @@ public class JavaScriptSnippetImporter extends AssetImporter {
 		return new JSSnippetNodeFactory();
 	}
 
-	protected void saveAsset(ImportSource source, VFSFile root, AssetNode node) throws Exception {
-		JSSnippet snippet = (JSSnippet)node.load(root);
+	@Override
+	protected void saveAsset(ImportSource source, VFSFile root, AssetNode node, Asset asset) throws Exception {
+		JSSnippet snippet = (JSSnippet)asset;
 		Document doc = getDatabase().createDocument();
 		try {
 			setItemValue(doc,"Form", FORM);

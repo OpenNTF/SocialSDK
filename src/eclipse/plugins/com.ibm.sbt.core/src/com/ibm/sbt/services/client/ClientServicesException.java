@@ -16,10 +16,17 @@
 
 package com.ibm.sbt.services.client;
 
+import java.io.IOException;
 import java.net.URI;
+import java.util.logging.Level;
+
+import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpRequestBase;
+
 import com.ibm.commons.util.AbstractException;
+import com.ibm.commons.util.StringUtil;
+import com.ibm.sbt.services.client.ClientService.HandlerRaw;
 
 /**
  * REST services related exception.
@@ -30,6 +37,26 @@ public class ClientServicesException extends AbstractException {
 
 	private static final long	serialVersionUID	= 1L;
 	private int					responseStatusCode;
+
+	// TODO fill more response code from rfc2616, section 10
+	public static final int	BAD_REQUEST						= 400;
+	public static final int	UNAUTHORIZED					= 401;
+	public static final int	PAYMENT_REQURED					= 402;
+	public static final int	FORBIDDEN						= 403;
+	public static final int	NOT_FOUND						= 404;
+	public static final int	METHOD_NOT_ALLOWED				= 405;
+	public static final int	NOT_ACCEPTABLE					= 406;
+	public static final int	PROXY_AUTHENTICATION_REQUIRED	= 407;
+	public static final int	REQUEST_TIMEOUT					= 408;
+	public static final int	CONFLICT						= 409;
+	public static final int	GONE							= 410;
+	public static final int	LENGTH_REQUIRED					= 411;
+	public static final int	PRECONDITION_FAILED				= 412;
+	public static final int	REQUEST_URI_TOO_LONG			= 413;
+	public static final int	REQUEST_ENTITY_TOO_LARGE		= 414;
+	public static final int	UNSUPPORTED_MEDIA_TYPE			= 415;
+	public static final int	REQUEST_RANGE_NOT_SATISFIABLE	= 416;
+	public static final int	EXPECTATION_FAILED				= 416;
 
 	public String getReasonPhrase() {
 		return reasonPhrase;
@@ -67,10 +94,7 @@ public class ClientServicesException extends AbstractException {
 	}
 
 	public ClientServicesException(HttpResponse response, HttpRequestBase request) {
-		this(null,
-				"HTTP Status {0}, {1}. HTTP error response code received in response to request to url: {2}",
-				response.getStatusLine().getStatusCode(), response.getStatusLine().getReasonPhrase(), request
-						.getURI());
+		this(null, createMessage(request, response));
 		this.setResponseStatusCode(response.getStatusLine().getStatusCode());
 		this.setReasonPhrase(response.getStatusLine().getReasonPhrase());
 		this.setRequestURI(request.getURI());
@@ -95,25 +119,22 @@ public class ClientServicesException extends AbstractException {
 	public boolean isServerError() {
 		return responseStatusCode > 499 && responseStatusCode < 600;
 	}
-
-	// TODO fill more response code from rfc2616, section 10
-	public static final int	BAD_REQUEST						= 400;
-	public static final int	UNAUTHORIZED					= 401;
-	public static final int	PAYMENT_REQURED					= 402;
-	public static final int	FORBIDDEN						= 403;
-	public static final int	NOT_FOUND						= 404;
-	public static final int	METHOD_NOT_ALLOWED				= 405;
-	public static final int	NOT_ACCEPTABLE					= 406;
-	public static final int	PROXY_AUTHENTICATION_REQUIRED	= 407;
-	public static final int	REQUEST_TIMEOUT					= 408;
-	public static final int	CONFLICT						= 409;
-	public static final int	GONE							= 410;
-	public static final int	LENGTH_REQUIRED					= 411;
-	public static final int	PRECONDITION_FAILED				= 412;
-	public static final int	REQUEST_URI_TOO_LONG			= 413;
-	public static final int	REQUEST_ENTITY_TOO_LARGE		= 414;
-	public static final int	UNSUPPORTED_MEDIA_TYPE			= 415;
-	public static final int	REQUEST_RANGE_NOT_SATISFIABLE	= 416;
-	public static final int	EXPECTATION_FAILED				= 416;
+	
+	static private String createMessage(HttpRequestBase request, HttpResponse response) {
+		String msg = null;
+		int statusCode = response.getStatusLine().getStatusCode();
+		String reasonPhrase = response.getStatusLine().getReasonPhrase();
+		URI requestUri = request.getURI();
+		try {
+			HandlerRaw handler = new HandlerRaw();
+			Object data = handler.parseContent(request, response, response.getEntity());
+			msg = "Request to url {0} returned an error response {1}:{2} {3}";
+			msg = StringUtil.format(msg, requestUri, statusCode, reasonPhrase, data);
+		} catch (Exception e) {
+			msg = "Request to url {0} returned an error response {1}:{2}";
+			msg = StringUtil.format(msg, requestUri, statusCode, reasonPhrase);
+		}	
+		return msg;
+	}
 
 }

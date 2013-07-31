@@ -22,10 +22,12 @@ import nsf.playground.extension.Endpoints;
 import com.ibm.sbt.services.endpoints.ConnectionsBasicEndpoint;
 import com.ibm.sbt.services.endpoints.ConnectionsOAuth2Endpoint;
 import com.ibm.sbt.services.endpoints.DominoBasicEndpoint;
+import com.ibm.sbt.services.endpoints.DropBoxOAuthEndpoint;
 import com.ibm.sbt.services.endpoints.OAuthEndpoint;
 import com.ibm.sbt.services.endpoints.SametimeBasicEndpoint;
 import com.ibm.sbt.services.endpoints.SmartCloudOAuth2Endpoint;
 import com.ibm.sbt.services.endpoints.SmartCloudOAuthEndpoint;
+import com.ibm.sbt.services.endpoints.TwitterOAuthEndpoint;
 import com.ibm.xsp.context.FacesContextEx;
 import com.ibm.xsp.util.ManagedBeanUtil;
 
@@ -68,6 +70,7 @@ public class SbtEndpoints extends Endpoints {
 */		
 		new Category("Social Networks", new Property[] {
 				//new Property("Twitter_URL", "Twitter URL"),
+				new Property("Twitter_OA_AppplicationAccessToken", "Twitter Application Access Token"),
 				new Property("Twitter_OA_ConsumerKey", "Twitter Consumer Key"),
 				new Property("Twitter_OA_ConsumerSecret", "Twitter Consumer Secret"),
 				
@@ -151,17 +154,16 @@ public class SbtEndpoints extends Endpoints {
 			}
 		}
 		{
-			// Temporarily use OAuth endpoint
-			OAuthEndpoint ept = (OAuthEndpoint)ManagedBeanUtil.getBean(context, "twitter");
-			if(ept!=null) {
-				ept.setConsumerKey(env.getField("Twitter_OA_ConsumerKey"));
-				ept.setConsumerSecret(env.getField("Twitter_OA_ConsumerSecret"));
-			}
-			// Temporarily use OAuth endpoint
-			OAuthEndpoint epd = (OAuthEndpoint)ManagedBeanUtil.getBean(context, "twitter");
+			TwitterOAuthEndpoint epd = (TwitterOAuthEndpoint)ManagedBeanUtil.getBean(context, "twitter");
 			if(epd!=null) {
+				epd.setApplicationAccessToken(env.getField("Twitter_OA_AppplicationAccessToken"));
 				epd.setConsumerKey(env.getField("Twitter_OA_ConsumerKey"));
 				epd.setConsumerSecret(env.getField("Twitter_OA_ConsumerSecret"));
+			}
+			DropBoxOAuthEndpoint ept = (DropBoxOAuthEndpoint)ManagedBeanUtil.getBean(context, "dropbox");
+			if(ept!=null) {
+				ept.setConsumerKey(env.getField("Dropbox_OA_ConsumerKey"));
+				ept.setConsumerSecret(env.getField("Dropbox_OA_ConsumerSecret"));
 			}
 		}
 	}    

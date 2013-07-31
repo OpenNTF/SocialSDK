@@ -28,6 +28,7 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonJavaFactory;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.commons.util.io.json.JsonParser;
+import com.ibm.jscript.InterpretException;
 import com.ibm.sbt.jslibrary.SBTEnvironment;
 import com.ibm.xsp.model.domino.DominoUtils;
 import com.ibm.xsp.sbtsdk.servlets.JavaScriptLibraries;
@@ -203,10 +204,13 @@ public class PreviewJavaHandler extends PreviewHandler {
 				((IExceptionEx)e).printExtraInformation(psw);
 				psw.println("");
 			}
+			if(sourceCode==null) {
+				JspCompiler compiler = new JspCompiler();
+				sourceCode = compiler.compileJsp(jsp, jspClassName);
+			}
 			if(sourceCode!=null) {
-				psw.println("<pre>");
-				psw.println(HtmlUtil.toHTMLContentString(sourceCode, false));
-				psw.println("</pre>");
+				printSourceCode(psw,sourceCode,true,-1);
+				//psw.println(HtmlUtil.toHTMLContentString(sourceCode, false));
 			}
 			e.printStackTrace(psw);
 			psw.flush();
@@ -220,4 +224,56 @@ public class PreviewJavaHandler extends PreviewHandler {
 		pw.flush();
 		pw.close();
 	}
+	
+    public void printSourceCode(PrintWriter out, String code, boolean alltext, int errline) {
+        if(code==null) {
+        	return;
+        }
+        code = code.trim();
+        if (StringUtil.isNotEmpty(code)) {
+            int codeLength = code.length();
+            int pos = 0;
+            for (int line = 1; pos < codeLength; line++) {
+                int start = pos;
+                while (pos < codeLength && code.charAt(pos) != '\n'
+                        && code.charAt(pos) != '\r') {
+                    pos++;
+                }
+                boolean show = alltext || Math.abs(line-errline)<3; // 5 lines being displayed 
+                boolean iserr = errline == line; 
+                if(show) {
+	                if (iserr) {
+	                    out.print("->"); //$NON-NLS-1$
+	                } else {
+	                	out.print("  "); //$NON-NLS-1$
+	                }
+	            	String sLine = StringUtil.toString(line);
+	                for (int i = 0; i < 4 - sLine.length(); i++) {
+	                    out.print(" "); //$NON-NLS-1$
+	                }
+	                out.print(sLine);
+	                out.print(": "); //$NON-NLS-1$
+	                out.print(code.substring(start, pos));
+                }
+                if (pos < codeLength) {
+                    if (code.charAt(pos) == '\n') {
+                        pos++;
+                        if (pos < codeLength && code.charAt(pos) == '\r') {
+                            pos++;
+                        }
+                    }
+                    else if (code.charAt(pos) == '\r') {
+                        pos++;
+                        if (pos < codeLength && code.charAt(pos) == '\n') {
+                            pos++;
+                        }
+                    }
+                }
+                if(show) {
+	                out.println(""); //$NON-NLS-1$
+                }
+            }
+        }
+    }
+
 }

@@ -15,6 +15,7 @@ import nsf.playground.jobs.AsyncAction;
 
 import com.ibm.commons.Platform;
 import com.ibm.commons.util.StringUtil;
+import com.ibm.sbt.playground.assets.Asset;
 import com.ibm.sbt.playground.assets.AssetBrowser;
 import com.ibm.sbt.playground.assets.AssetNode;
 import com.ibm.sbt.playground.assets.CategoryNode;
@@ -70,7 +71,7 @@ public abstract class AssetImporter {
 
 	protected abstract NodeFactory getNodeFactory(); 
 	
-	protected abstract void saveAsset(ImportSource source, VFSFile root, AssetNode node) throws Exception;
+	protected abstract void saveAsset(ImportSource source, VFSFile root, AssetNode node, Asset asset) throws Exception;
 	
 	
 	////////////////////////////////////////////////////////////////////////////////
@@ -126,11 +127,25 @@ public abstract class AssetImporter {
 			if(action!=null) {
 				action.updateTask(StringUtil.format("Importing Asset: {0}", node.getPath()));
 			}
-			AssetNode sn=(AssetNode) node;
-			saveAsset(source, root, sn);
-			count++;
+			Asset asset = loadAsset(source, root, (AssetNode) node);
+			if(shouldImport(asset)) {
+				saveAsset(source, root, (AssetNode)node, asset);
+				count++;
+			}
 		}
 		return count;
+	}
+
+	protected Asset loadAsset(ImportSource source, VFSFile root, AssetNode node) throws Exception {
+		return node.load(root);
+	}
+	
+	protected boolean shouldImport(Asset asset) {
+		String pub = asset.getProperty("publish");
+		if(StringUtil.equals(pub, "false")) {
+			return false;
+		}
+		return true;
 	}
 
 	

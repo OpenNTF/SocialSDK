@@ -15,10 +15,6 @@
  */
 package com.ibm.sbt.services.endpoints;
 
-import com.ibm.sbt.services.client.ClientService;
-import com.ibm.sbt.services.client.ClientServicesException;
-import com.ibm.sbt.services.client.smartcloud.SmartCloudService;
-
 /**
  * @author Vimal Dhupar
  *
@@ -26,27 +22,6 @@ import com.ibm.sbt.services.client.smartcloud.SmartCloudService;
 
 public class TwitterOAuthEndpoint extends OAuthEndpoint {
 	
-private static final int authenticationErrorCode = 403;
-	
     public TwitterOAuthEndpoint() {
-    }
-
-    @Override
-	public ClientService getClientService() throws ClientServicesException {
-    	return new SmartCloudService(this);
-    }
-    
-    @Override
-	public boolean isHeaderAllowed(String headerName, String serviceUrl){
-    	if (headerName.equalsIgnoreCase("Origin"))
-		{
-			return false;
-		}
-		return true;
-
-    }
-    @Override
-	public int getAuthenticationErrorCode(){
-    	return authenticationErrorCode;
     }
 }

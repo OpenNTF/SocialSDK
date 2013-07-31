@@ -8,10 +8,10 @@
 	</managed-bean>
 
 	<!--  
-		Password store for OAuth / SmartCloud based on DBCredentialStore
+		Password store based on DBCredentialStore
 	-->
 	<managed-bean>
-		<managed-bean-name>SmartCloudDBStore</managed-bean-name>
+		<managed-bean-name>CredStoreDB</managed-bean-name>
 		<managed-bean-class>com.ibm.sbt.security.credential.store.DBCredentialStore</managed-bean-class>
 		<!--  
 			Managed Property jdbcDriverClass is required to provide the driver class name, when jndi is not being used.
@@ -253,7 +253,7 @@
 		<!-- Access to the credential store -->
 		<managed-property>
 			<property-name>credentialStore</property-name>
-			<value>SmartCloudDBStore</value>
+			<value>CredStore</value>
 		</managed-property>
 		<managed-property>
 			<property-name>serviceName</property-name>
@@ -312,7 +312,7 @@
 		<!-- Access to the credential store -->
 		<managed-property>
 			<property-name>credentialStore</property-name>
-			<value>SmartCloudDBStore</value>
+			<value>CredStore</value>
 		</managed-property>
 	</managed-bean>
 	
@@ -469,16 +469,10 @@
 	</managed-bean>
   
   	<!-- Twitter -->
-	<managed-bean>
-		<managed-bean-name>TwitterStore</managed-bean-name>
-		<managed-bean-class>com.ibm.sbt.security.credential.store.MemoryStore</managed-bean-class>
-
-		<managed-bean-scope>application</managed-bean-scope>
-		<!-- Fixed OAuth Application parameters -->
-	</managed-bean>
+	<!-- Fixed OAuth Application parameters -->
 	<managed-bean>
 		<managed-bean-name>twitter</managed-bean-name>
-		<managed-bean-class>com.ibm.sbt.services.endpoints.OAuthEndpoint</managed-bean-class>
+		<managed-bean-class>com.ibm.sbt.services.endpoints.TwitterOAuthEndpoint</managed-bean-class>
 		<managed-bean-scope>application</managed-bean-scope>
 		<!-- Endpoint URL -->
 		<managed-property>
@@ -526,7 +520,7 @@
 		<!-- Access to the token store -->
 		<managed-property>
 			<property-name>credentialStore</property-name>
-			<value>TwitterStore</value>
+			<value>CredStore</value>
 		</managed-property>
 		<managed-property>
 			<property-name>serviceName</property-name>
@@ -540,17 +534,10 @@
 	
 	<!-- Dropbox -->
 	
-	<!-- Dropbox Store-->
-	<managed-bean>
-		<managed-bean-name>DropboxStore</managed-bean-name>
-		<managed-bean-class>com.ibm.sbt.security.authentication.oauth.consumer.store.MemoryTokenStore</managed-bean-class>
-		<managed-bean-scope>application</managed-bean-scope>
-	</managed-bean>
-	
 	<!-- Dropbox oauth endpoint -->
 	<managed-bean>
 		<managed-bean-name>dropbox</managed-bean-name>
-		<managed-bean-class>com.ibm.sbt.services.endpoints.OAuthEndpoint</managed-bean-class>
+		<managed-bean-class>com.ibm.sbt.services.endpoints.DropBoxOAuthEndpoint</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 		<!-- Endpoint URL -->
 		<managed-property>
@@ -589,7 +576,7 @@
 		</managed-property>
 		<managed-property>
 			<property-name>credentialStore</property-name>
-			<value>DropboxStore</value>
+			<value>CredStore</value>
 		</managed-property>
 		<managed-property>
 			<property-name>serviceName</property-name>

@@ -35,15 +35,12 @@ public class PlaygroundToolkitServlet extends ToolkitServlet {
 	}
 	
     protected SBTEnvironment getDefaultEnvironment(Context context) {
-		try {
-			DataAccessBean dataAccess = DataAccessBean.get();
-			String envName = (String)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("environment");
-			PlaygroundEnvironment env = dataAccess.getEnvironment(envName);
-			env.prepareEndpoints();
-			return env;
-		} catch(IOException ex) {
-			return super.getDefaultEnvironment(context);
-		}
+		DataAccessBean dataAccess = DataAccessBean.get();
+		String envName = context.getHttpRequest().getHeader("x-env");
+		//String envName = (String)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("environment");
+		PlaygroundEnvironment env = dataAccess.getCurrentEnvironment(envName);
+		env.prepareEndpoints();
+		return env;
     }	
 
 }

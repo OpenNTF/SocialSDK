@@ -79,7 +79,9 @@ public class JspSampleWriter extends JspWriter {
 		write(s);
 	}
 	public void print(String s) throws IOException {
-		write(s);
+		if(s!=null) {
+			write(s);
+		}
 	}
 	public void print(Object obj) throws IOException {
 		if(obj!=null) {

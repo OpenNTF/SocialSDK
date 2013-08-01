@@ -55,8 +55,10 @@ public class CommunityTransformer extends AbstractBaseTransformer {
 		for(Map.Entry<String, Object> xmlEntry : fieldmap.entrySet()){
 			
 			String currentElement = xmlEntry.getKey(); 
-			String currentValue = xmlEntry.getValue().toString(); 
-			
+			String currentValue = "";
+			if(xmlEntry.getValue() != null){
+				currentValue = xmlEntry.getValue().toString();
+			}
 			if(currentElement.contains("tag")){
 				tagsXml += getXMLRep(getStream(sourcepath+"CategoryTmpl.xml"),"tag",XmlTextUtil.escapeXMLChars(currentValue));
 			}else if(currentElement.equalsIgnoreCase("content")){

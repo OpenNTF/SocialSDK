@@ -31,18 +31,19 @@
 	try {
 	
 		ProfileAdminService service = new ProfileAdminService(); 
-		Profile profile = service.newProfile(Context.get().getProperty("sample.createProfileUid"));
-		profile.setAsString("guid",	Context.get().getProperty("sample.createProfileId"));
-		profile.setAsString("email", Context.get().getProperty("sample.createProfileEmail"));
-		profile.setAsString("uid", Context.get().getProperty("sample.createProfileUid"));
+		long random = System.currentTimeMillis();
+		Profile profile = service.newProfile(Context.get().getProperty("sample.createProfileUid")+random);
+		
+		profile.setAsString("guid",	Context.get().getProperty("sample.createProfileId")+random);
+		profile.setAsString("uid", Context.get().getProperty("sample.createProfileUid")+random);
 		profile.setAsString("distinguishedName",Context.get().getProperty("sample.createProfileDistinguishedName"));
-		profile.setAsString("displayName", Context.get().getProperty("sample.createProfileDisplayName"));
+		profile.setAsString("displayName", Context.get().getProperty("sample.createProfileDisplayName")+random);
 		profile.setAsString("givenNames", Context.get().getProperty("sample.createProfileGivenNames"));
 		profile.setAsString("surname", Context.get().getProperty("sample.createProfileSurName"));
 		profile.setAsString("userState", Context.get().getProperty("sample.createProfileUserState"));
 		service.createProfile(profile);
-		profile = service.getProfile(Context.get().getProperty("sample.createProfileId"));
-		out.println("<b> Profile Created :with display name "+ profile.getDisplayName());
+		profile = service.getProfile(Context.get().getProperty("sample.createProfileId")+random);
+		out.println("Profile Created :with display name "+ profile.getDisplayName());
 	} catch (Throwable e) {
 			out.println("<pre>");
 			out.println(e.getMessage());

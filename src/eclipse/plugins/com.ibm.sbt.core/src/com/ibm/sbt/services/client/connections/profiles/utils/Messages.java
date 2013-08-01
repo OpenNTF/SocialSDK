@@ -32,7 +32,7 @@ public class Messages {
 	public static String	UpdateProfilePhotoException		= "Problem occurred in Updating Profile Photo";
 	public static String	UpdateProfileException			= "Problem occurred in Updating Profile ";
 	public static String	DeleteProfileException			= "Problem occurred in deleting Profile of user with identifier : {0}";
-	public static String	CreateProfileException			= "Problem occurred in creating Profile of user with identifier : {0}, please check if profile already exists with this id";
+	public static String	CreateProfileException			= "Problem occurred while creating Profile. Please check if profile already exists. Please check if logged in user has admin rights.";
 	public static String	CreateProfilePayloadException	= "Error in create Profile Payload";
 	
 }

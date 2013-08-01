@@ -94,7 +94,10 @@ public class ProfileTransformer  extends AbstractBaseTransformer {
 
 		for(Map.Entry<String, Object> xmlEntry : fieldmap.entrySet()){
 			String currentElement = xmlEntry.getKey();
-			String currentValue = xmlEntry.getValue().toString();
+			String currentValue = "";
+			if(xmlEntry.getValue() != null){
+				currentValue = xmlEntry.getValue().toString();
+			}
 			
 			// for address
 			if(currentElement.equalsIgnoreCase("streetAddress") || currentElement.equalsIgnoreCase("extendedAddress") ||

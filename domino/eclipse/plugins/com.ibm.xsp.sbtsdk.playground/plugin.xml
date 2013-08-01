@@ -11,5 +11,14 @@
          	type="com.ibm.sbt.playground.extension"
          	class="com.ibm.xsp.sbtsdk.playground.sbt.SbtPlaygroundExtensionFactory" />
     </extension>
+    
+    <extension point="com.ibm.pvc.webcontainer.application">
+		<contextRoot>
+			/osplayground
+      	</contextRoot>
+      	<contentLocation>
+        	WebContent
+      	</contentLocation>
+   	</extension>
 
 </plugin>

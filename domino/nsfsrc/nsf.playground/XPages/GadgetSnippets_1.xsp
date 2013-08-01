@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:this.resources>
+		<xp:script src="http://priand64.swg.usma.ibm.com/osplayground/gadgets/js/container.js?c=1&amp;debug=1&amp;container=default" clientSide="true"></xp:script>
+<!-- 		
+		<xp:script src="http://priand64.swg.usma.ibm.com/osp/gadgets/js/container:open-views:rpc:xmlutil:selection:actions.js?c=1&amp;debug=1&amp;container=default" clientSide="true"></xp:script>
+ -->		
+	</xp:this.resources>
+
+	<xc:ccMainPageResources></xc:ccMainPageResources>
+
+	<xp:form>
+		<xc:ccLayout navigationPath="/GadgetSnippets"
+			title="#{javascript:optionsBean.getApplicationTitle('OpenSocial Gadgets')}" wholePage="true">
+			<div id="mygadget">
+			</div>
+		</xc:ccLayout>
+	</xp:form>
+
+	<div id="mygadget">
+	</div>
+ 	
+	<script src="gadget.js"></script>
+	
+</xp:view>

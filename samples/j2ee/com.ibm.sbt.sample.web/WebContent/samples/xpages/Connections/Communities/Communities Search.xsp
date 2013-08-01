@@ -74,7 +74,7 @@ community.getCommunityType();}]]></xp:this.value>
 			<!--}]]></xp:this.value>-->
 
 			<xp:this.value><![CDATA[#{javascript:var uname = community.getAuthor().getName();
-var uid= community.getAuthor().getId();
+var uid= community.getAuthor().getUserid();
 var ps = new com.ibm.sbt.services.client.connections.profiles.ProfileService();
 var Profile = ps.getProfile(uid);
 var url = "<img src=\"" + Profile.getThumbnailUrl() + "\" title=\"" + uname + "\" width=\"40\" height=\"40\">";
@@ -82,10 +82,10 @@ return url;}]]></xp:this.value>
 			
 		</xp:viewColumn>
 		<xp:viewColumn id="viewColumn5"
-			value="#{javascript:community.getPublished()}">
+			value="#{javascript:community.getSummary()}">
 			<xp:this.facets>
 				<xp:viewColumnHeader xp:key="header"
-					id="viewColumnHeader5" value="Created">
+					id="viewColumnHeader5" value="Summary">
 				</xp:viewColumnHeader>
 			</xp:this.facets>
 		</xp:viewColumn>

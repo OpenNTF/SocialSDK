@@ -88,6 +88,11 @@
 						style="width:99%;height:99%;font-family:Courier New;font-size:10pt">
 					</xp:inputTextarea>
 				</xe:djTabPane>
+				<xe:djTabPane id="djTabPane7" title="JSON Playload">
+					<xp:inputTextarea id="inputTextarea5" value="#{document1.Json}"
+						style="width:99%;height:99%;font-family:Courier New;font-size:10pt">
+					</xp:inputTextarea>
+				</xe:djTabPane>
 				<xe:djTabPane id="djTabPane4" title="Properties">
 					<xp:inputTextarea id="inputTextarea2" value="#{document1.Properties}"
 						style="width:99%;height:99%;font-family:Courier New;font-size:10pt">

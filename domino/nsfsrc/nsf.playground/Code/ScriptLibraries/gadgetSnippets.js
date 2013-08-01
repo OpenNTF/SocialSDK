@@ -29,6 +29,9 @@ function createSnippet() {
 	if(pageGlobal.cssEditor) {
 		pageGlobal.cssEditor.setValue("");
 	}
+	if(pageGlobal.jsonEditor) {
+		pageGlobal.jsonEditor.setValue("");
+	}
 	if(pageGlobal.propertiesEditor) {
 		pageGlobal.propertiesEditor.setValue("");
 	}
@@ -54,6 +57,7 @@ function loadSnippet(id) {
 			if(pageGlobal.htmlEditor) pageGlobal.htmlEditor.setValue(r.html);
 			if(pageGlobal.jsEditor) pageGlobal.jsEditor.setValue(r.js);
 			if(pageGlobal.cssEditor) pageGlobal.cssEditor.setValue(r.css);
+			if(pageGlobal.jsonEditor) pageGlobal.jsonEditor.setValue(r.json);
 			if(pageGlobal.propertiesEditor) pageGlobal.propertiesEditor.setValue(r.properties);
 			if(pageGlobal.documentationPanel) pageGlobal.documentationPanel.innerHTML = r.documentation;
 			selectTab(pageGlobal.tabGadget);
@@ -76,8 +80,6 @@ function selectTab(tab) {
  */
 function runCode(debug) {
 	if(pageGlobal._loadingFrame) {
-		// This can fail is the iFrame was redirected to a different domain
-		// ex: OAuth dance
 		try {
 			var iDoc = window.frames['preview'].document;
 			var b = iDoc.getElementsByTagName("body")[0];
@@ -86,53 +88,39 @@ function runCode(debug) {
 	}
 
 	// Compose the HTML code
+	var gadget = pageGlobal.gadgetEditor.getValue();
 	var html = pageGlobal.htmlEditor.getValue();
 	var js = pageGlobal.jsEditor.getValue();
 	var css = pageGlobal.cssEditor.getValue();
+	var json = pageGlobal.jsonEditor.getValue();
 	var properties = pageGlobal.propertiesEditor.getValue();
 	
-	// Get the current environment
-	var env = dojo.byId(pageGlobal.cbEnv).value;
-	var lib = dojo.byId(pageGlobal.cbLibrary).selectedIndex;
+	// Get the current options
 	var options = {
-		env: env,
-		debug: debug,
-		lib: lib
+		debug: debug
 	}
+
+	// Calculate a random gadget id to cheat shindig cache and have a key on the server side
+	var gadgetId=(Math.floor(Math.random()*1000000000)).toString(36);
 	
-	// And update the frame by executing a post to a servlet
+	// Send the gadget content by posting the data
 	var form = dojo.byId("PreviewForm");
+	form["fm_gadgetid"].value = gadgetId;
+	form["fm_gadget"].value = gadget;
 	form["fm_html"].value = html;
 	form["fm_js"].value = js;
 	form["fm_css"].value = css;
+	form["fm_json"].value = json;
 	form["fm_properties"].value = properties;
 	form["fm_options"].value = dojo.toJson(options);
-	form.submit();
-}
-
-/**
- * Show source code 
- */
-function showCode() {
-	// Compose the HTML code
-	var html = pageGlobal.htmlEditor.getValue();
-	var js = pageGlobal.jsEditor.getValue();
-	var css = pageGlobal.cssEditor.getValue();
-	var properties = pageGlobal.propertiesEditor.getValue();
-	var form = dojo.byId("PreviewForm");
-	form["fm_html"].value = html;
-	form["fm_js"].value = js;
-	form["fm_css"].value = css;
-	form["fm_properties"].value = properties;
-	
-	// And update the frame by executing a post to a servlet
 	dojo.xhrPost({
 		form: form,
 		handleAs: "text",
 		load: function(data){
-			window._codeData = data; 
-			//alert(data);
-			XSP.openDialog(pageGlobal.codeDialog);			
+			// https require the certificates on the server... 
+			var url = form.action+"/"+gadgetId+"/gadget.xml";
+			url = url.replace("https://","http://");
+			initGadget(url);
 		},
         error: function(error){
 			alert(error);
@@ -150,14 +138,22 @@ function updateNavSelection() {
 	}
 }
 
+var globalOSContainer = null;
+var globalOSGadget = null;
+var globalOSSite = null;
+
 function initOSContainer() {
-	// Call close on mySite and call navigate again with a new URL
-	var container = new osapi.container.Container({});
-	var myGadget = dojo.byId("mygadget");
-	var mySite = container.newGadgetSite(myGadget);
+	globalOSContainer = new osapi.container.Container({});
+	globalOSGadget = dojo.byId("osgadget");
+	globalOSSite = globalOSContainer.newGadgetSite(globalOSGadget);
+}
+
+function initGadget(url) {
 	var viewParams = {}
 	var renderParams = {}
 	renderParams[osapi.container.RenderParam.HEIGHT] = '100%'; 
-	renderParams[osapi.container.RenderParam.WIDTH] = '100%'; 
-	container.navigateGadget(mySite,"https://raw.github.com/OpenSocial/explorer/master/gadget-specs/src/main/specs/welcome/gadget.xml",viewParams,renderParams);
+	renderParams[osapi.container.RenderParam.WIDTH] = '100%';
+	
+	globalOSSite.close();
+	globalOSContainer.navigateGadget(globalOSSite,url,viewParams,renderParams);
 }

@@ -157,16 +157,6 @@
     <url-pattern>*</url-pattern>
   </filter-mapping>
   
-  <!-- Gadget Spec Servlet -->
-<!--   
-  <servlet>
-    <servlet-name>gadgetspec</servlet-name>
-    <servlet-class>
-      org.opensocial.explorer.specserver.servlet.GadgetSpecServlet
-    </servlet-class>
-  </servlet>
- -->
-   
   <!-- Render a Gadget -->
   <servlet>
     <servlet-name>xml-to-html</servlet-name>
@@ -281,21 +271,6 @@
       org.apache.shindig.gadgets.servlet.RpcSwfServlet
     </servlet-class>
   </servlet>
-  
-<!-- 
-  <servlet>
-    <servlet-name>openid</servlet-name>
-    <servlet-class>
-      org.opensocial.explorer.server.openid.OpenIDServlet
-    </servlet-class>
-  </servlet>
- -->
-<!--    
-  <servlet-mapping>
-    <servlet-name>gadgetspec</servlet-name>
-    <url-pattern>/gadgetspec/*</url-pattern>
-  </servlet-mapping>
- -->
    
   <servlet-mapping>
     <servlet-name>js</servlet-name>
@@ -370,13 +345,6 @@
     <servlet-name>rpcSwf</servlet-name>
     <url-pattern>/xpc*</url-pattern>
   </servlet-mapping>
-
-<!-- 
-  <servlet-mapping>
-    <servlet-name>openid</servlet-name>
-    <url-pattern>/openid/*</url-pattern>
-  </servlet-mapping>
--->
 
   <listener>
     <listener-class>org.apache.shindig.common.servlet.GuiceServletContextListener</listener-class>

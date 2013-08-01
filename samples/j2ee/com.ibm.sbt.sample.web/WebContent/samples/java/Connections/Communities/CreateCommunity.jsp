@@ -46,7 +46,7 @@
 		tags.add("tag2"); 
 		community.setTags(tags);
 		community = community.save(); 
-		out.println("Community created is: " + community.getCommunityUuid());
+		out.println("Community created with Id : " + community.getCommunityUuid());
 		out.println("Community Tags:");
 		out.println("<br>");
 		tags = community.getTags();

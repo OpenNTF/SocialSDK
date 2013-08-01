@@ -20,7 +20,7 @@
 				</xp:viewColumnHeader>
 			</xp:viewColumn>
 			<xp:viewColumn columnName="Id" id="viewColumn1"
-				value="#{javascript:profile.getId();}">
+				value="#{javascript:profile.getUserid();}">
 				<xp:viewColumnHeader value="Connections Id"
 					id="viewColumnHeader2">
 				</xp:viewColumnHeader>

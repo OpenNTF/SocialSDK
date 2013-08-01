@@ -58,6 +58,7 @@ return true;]]></xp:this.onkeypress>
 		case "javaSnippet": 	return javaSnippetBean.getSnippetsAsJson(); 
 		case "xPagesSnippet": 	return xpagesSnippetBean.getSnippetsAsJson(); 
 		case "api": 			return apiBean.getSnippetsAsJson();
+		case "gadget": 			return gadgetSnippetBean.getSnippetsAsJson(); 
 	} return "";
 	};	var assetsStore = new dojo.data.ItemFileReadStore({data:{identifier:'id',label:'name',items:assetsData}});
 	var assetsModel = new dijit.tree.TreeStoreModel({		store: assetsStore	});

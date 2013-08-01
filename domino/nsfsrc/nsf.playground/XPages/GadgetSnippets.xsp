@@ -2,6 +2,7 @@
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
 	xmlns:xe="http://www.ibm.com/xsp/coreex">
 	<xp:this.resources>
+		<xp:script src="http://priand64.swg.usma.ibm.com/osplayground/gadgets/js/container.js?c=1&amp;debug=1&amp;container=default" clientSide="true"></xp:script>
 		<xp:script src="/gadgetSnippets.js" clientSide="true"></xp:script>
 		<xp:dojoModule name="dojo.hash"></xp:dojoModule>
 		<xp:dojoModule name="extlib.codemirror.lib.codemirror"></xp:dojoModule>
@@ -33,11 +34,15 @@
 	tabHtml:		'#{id:tabHtml}',
 	tabJs:			'#{id:tabJs}',
 	tabCss:			'#{id:tabCss}',
+	tabJson:		'#{id:tabJson}',
 	codeDialog:		'#{id:codeDialog}'
 }
 dojo.addOnLoad(function() {
    dojo.connect(window, "onresize", resize);
    resize();
+});
+dojo.addOnLoad(function() {
+   initOSContainer();
 });
 
 function prepend(h,f) {
@@ -84,6 +89,7 @@ if(doc) {
 		html:			doc.getItemValueString("html"),
 		js:				doc.getItemValueString("javascript"),
 		css:			doc.getItemValueString("css"),
+		json:			doc.getItemValueString("json"),
 		properties:		doc.getItemValueString("properties"),
 		documentation:	doc.getItemValueString("documentation")
 	}
@@ -197,6 +203,12 @@ if(doc) {
 									onShow="pageGlobal.cssEditor.refresh()">
 									<xp:div style="border: 1px solid #AAAAAA; height: 100%">
 										<xc:PlaygroundTabCss></xc:PlaygroundTabCss>
+									</xp:div>
+								</xe:djTabPane>
+								<xe:djTabPane id="tabJson" title="JSON Payload"
+									onShow="pageGlobal.jsonEditor.refresh()">
+									<xp:div style="border: 1px solid #AAAAAA; height: 100%">
+										<xc:PlaygroundTabJson></xc:PlaygroundTabJson>
 									</xp:div>
 								</xe:djTabPane>
 								<xe:djTabPane id="djTabProperties" title="Properties"
@@ -340,6 +352,8 @@ return document1.getDocument().getUniversalID()
 					style="display:none"></xp:inputTextarea>
 				<xp:inputTextarea id="htmlDlgEditor" value="#{document1.Html}"
 					style="display:none"></xp:inputTextarea>
+				<xp:inputTextarea id="jsonDlgEditor" value="#{document1.Json}"
+					style="display:none"></xp:inputTextarea>
 				<xp:inputTextarea id="propertiesDlgEditor" value="#{document1.properties}"
 					style="display:none"></xp:inputTextarea>
 			</xp:div>
@@ -347,6 +361,7 @@ return document1.getDocument().getUniversalID()
 				<xp:this.value><![CDATA[dojo.byId('#{id:gadgetDlgEditor}').value = pageGlobal.gadgetEditor.getValue();
 dojo.byId('#{id:jsDlgEditor}').value = pageGlobal.jsEditor.getValue();
 dojo.byId('#{id:cssDlgEditor}').value = pageGlobal.cssEditor.getValue();
+dojo.byId('#{id:jsonDlgEditor}').value = pageGlobal.jsonEditor.getValue();
 dojo.byId('#{id:propertiesDlgEditor}').value = pageGlobal.propertiesEditor.getValue();
 dojo.byId('#{id:htmlDlgEditor}').value = pageGlobal.htmlEditor.getValue();]]></xp:this.value>
 			</xp:scriptBlock>
@@ -354,12 +369,14 @@ dojo.byId('#{id:htmlDlgEditor}').value = pageGlobal.htmlEditor.getValue();]]></x
 	</xe:dialog>
 
 	<form id="PreviewForm"
-		action="#{javascript:@FullUrl('/xsp/preview/osgadgets')}"
+		action="#{javascript:@FullUrl('/xsp/preview/gadgetsnippet')}"
 		method="post" target="preview">
-		<input type="hidden" name="fm_gadget" id="gadget" />
+		<input type="hidden" name="fm_gadgetid" id="gadgetid" />
+		<input type="hidden" name="fm_gadget" id="input1" />
 		<input type="hidden" name="fm_html" id="html" />
 		<input type="hidden" name="fm_js" id="js" />
 		<input type="hidden" name="fm_css" id="css" />
+		<input type="hidden" name="fm_json" id="json" />
 		<input type="hidden" name="fm_properties" id="properties" />
 		<input type="hidden" name="fm_options" id="options" />
 	</form>

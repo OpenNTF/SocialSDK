@@ -24,8 +24,7 @@ Require-Bundle: org.eclipse.core.runtime,
  com.ibm.xsp.extlib,
  com.ibm.sbt.web,
  com.ibm.pvc.servlet.jsp,
- com.ibm.xsp.sbtsdk,
- com.ibm.fiesta.libs;bundle-version="9.0.0";resolution:=optional
+ com.ibm.xsp.sbtsdk
 Export-Package: com.ibm.xsp.sbtsdk.playground.sbt,
  com.ibm.xsp.sbtsdk.playground.sbt.extension,
  nsf.playground.beans,

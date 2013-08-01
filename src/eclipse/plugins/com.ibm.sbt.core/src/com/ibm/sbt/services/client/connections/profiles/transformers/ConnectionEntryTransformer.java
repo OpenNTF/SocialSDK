@@ -69,7 +69,10 @@ public class ConnectionEntryTransformer  extends AbstractBaseTransformer {
 		for(Map.Entry<String, Object> xmlEntry : fieldmap.entrySet()){
 			
 			String currentElement = xmlEntry.getKey();
-			String currentValue = xmlEntry.getKey();
+			String currentValue = "";
+			if(xmlEntry.getValue() != null){
+				currentValue = xmlEntry.getValue().toString();
+			}
 			
 			if(currentElement.equalsIgnoreCase("id")){
 				idXml = getXMLRep(getStream(sourcepath+"ConnectionEntryIdTmpl.xml"),currentElement,XmlTextUtil.escapeXMLChars(currentValue));

@@ -40,7 +40,7 @@
 		Community community = communityService.newCommunity();
 		community.setTitle("Test Community 1ab" + System.currentTimeMillis());
 		community.setContent("Test Community updated by Update Community Java snippet");
-		community.setCommunityType("public");
+		community.setCommunityType("private");
 		List<String> tags = new ArrayList<String>();
 		tags.add("tag1"); 
 		tags.add("tag2"); 

@@ -105,7 +105,7 @@ if(doc) {	o = {		status:			"ok",		id:				snippetId,		unid:			doc.getUniversa
 					<xp:dojoAttribute name="design" value="sidebar"></xp:dojoAttribute>
 				</xe:this.dojoAttributes>
 				<xe:djBorderPane id="djBorderPane3" region="leading"
-					splitter="true" style="width:280px">
+					splitter="true" style="width:300px">
 					<xp:div id="leftRefresh" style="height: 100%">
 						<xc:ccAssetTree type="snippet"></xc:ccAssetTree>
 					</xp:div>

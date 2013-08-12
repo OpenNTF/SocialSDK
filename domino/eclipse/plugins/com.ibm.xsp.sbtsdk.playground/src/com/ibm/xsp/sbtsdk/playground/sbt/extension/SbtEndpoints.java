@@ -22,10 +22,12 @@ import nsf.playground.extension.Endpoints;
 import com.ibm.sbt.services.endpoints.ConnectionsBasicEndpoint;
 import com.ibm.sbt.services.endpoints.ConnectionsOAuth2Endpoint;
 import com.ibm.sbt.services.endpoints.DominoBasicEndpoint;
+import com.ibm.sbt.services.endpoints.DropBoxOAuthEndpoint;
 import com.ibm.sbt.services.endpoints.OAuthEndpoint;
 import com.ibm.sbt.services.endpoints.SametimeBasicEndpoint;
 import com.ibm.sbt.services.endpoints.SmartCloudOAuth2Endpoint;
 import com.ibm.sbt.services.endpoints.SmartCloudOAuthEndpoint;
+import com.ibm.sbt.services.endpoints.TwitterOAuthEndpoint;
 import com.ibm.xsp.context.FacesContextEx;
 import com.ibm.xsp.util.ManagedBeanUtil;
 
@@ -68,8 +70,12 @@ public class SbtEndpoints extends Endpoints {
 */		
 		new Category("Social Networks", new Property[] {
 				//new Property("Twitter_URL", "Twitter URL"),
+				new Property("Twitter_OA_AppplicationAccessToken", "Twitter Application Access Token"),
 				new Property("Twitter_OA_ConsumerKey", "Twitter Consumer Key"),
 				new Property("Twitter_OA_ConsumerSecret", "Twitter Consumer Secret"),
+				
+				new Property("Dropbox_OA_ConsumerKey", "Dropbox Consumer Key"),
+				new Property("Dropbox_OA_ConsumerSecret", "Dropbox Consumer Secret"),
 		}),
 	};
 
@@ -83,7 +89,7 @@ public class SbtEndpoints extends Endpoints {
 
 	@Override
 	public String getEndpointNames() {
-		return "connections,connectionsOA2,smartcloud,smartcloudOA2,sametime,domino,watson";
+		return "connections,connectionsOA2,smartcloud,smartcloudOA2,sametime,domino,watson,twitter,dropbox";
 	}
     
     @Override
@@ -94,6 +100,8 @@ public class SbtEndpoints extends Endpoints {
     	pushProperty(context,env,"sbt.endpoint.smartcloud");
     	pushProperty(context,env,"sbt.endpoint.domino");
     	pushProperty(context,env,"sbt.endpoint.sametime");
+    	pushProperty(context,env,"sbt.endpoint.twitter");
+    	pushProperty(context,env,"sbt.endpoint.dropbox");
     	
 		// Override the beans with the environment definition
 		{
@@ -134,7 +142,7 @@ public class SbtEndpoints extends Endpoints {
 			}
 		}
 		{
-			DominoBasicEndpoint ep = (DominoBasicEndpoint)ManagedBeanUtil.getBean(context, "domino");
+			DominoBasicEndpoint ep = (DominoBasicEndpoint)ManagedBeanUtil.getBean(context, "dominoBasic");
 			if(ep!=null) {
 				ep.setUrl(env.getField("Dom_URL"));
 			}
@@ -146,11 +154,16 @@ public class SbtEndpoints extends Endpoints {
 			}
 		}
 		{
-			// Temporarily use OAuth endpoint
-			OAuthEndpoint ep = (OAuthEndpoint)ManagedBeanUtil.getBean(context, "twitter");
-			if(ep!=null) {
-				ep.setConsumerKey(env.getField("Twitter_OA_ConsumerKey"));
-				ep.setConsumerSecret(env.getField("Twitter_OA_ConsumerSecret"));
+			TwitterOAuthEndpoint epd = (TwitterOAuthEndpoint)ManagedBeanUtil.getBean(context, "twitter");
+			if(epd!=null) {
+				epd.setApplicationAccessToken(env.getField("Twitter_OA_AppplicationAccessToken"));
+				epd.setConsumerKey(env.getField("Twitter_OA_ConsumerKey"));
+				epd.setConsumerSecret(env.getField("Twitter_OA_ConsumerSecret"));
+			}
+			DropBoxOAuthEndpoint ept = (DropBoxOAuthEndpoint)ManagedBeanUtil.getBean(context, "dropbox");
+			if(ept!=null) {
+				ept.setConsumerKey(env.getField("Dropbox_OA_ConsumerKey"));
+				ept.setConsumerSecret(env.getField("Dropbox_OA_ConsumerSecret"));
 			}
 		}
 	}    

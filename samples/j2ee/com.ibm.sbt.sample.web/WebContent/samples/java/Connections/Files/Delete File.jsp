@@ -14,6 +14,7 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@page import="java.util.List"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.FileService"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.model.CommentEntry"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.model.FileEntry"%>
@@ -34,10 +35,11 @@
 	<%
 	try {
 				FileService service = new FileService(); 
-				String fileId = Context.get().getProperty("sample.deleteFileId");
+				List<FileEntry> fileEntries = service.getMyFiles();
+        		FileEntry fileEntry = fileEntries.get(0);
+				String fileId = fileEntry.getFileId();
 				out.println("<b> Deleting File </b>" + fileId);	
 			 	service.deleteFile(fileId);
-								
 				out.println("<br> file deleted successfully"); 
 		}catch (Throwable e) {
 			out.println("<pre>");

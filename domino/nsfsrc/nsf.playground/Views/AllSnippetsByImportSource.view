@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
 <note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='85257AA80077A28B'>
-<noteinfo noteid='1b2' unid='63A9C8767A1DA52685257A8E005525AD' sequence='25'>
+<noteinfo noteid='1b2' unid='63A9C8767A1DA52685257A8E005525AD' sequence='32'>
 <created><datetime dst='true'>20121005T113002,05-04</datetime></created>
-<modified><datetime dst='true'>20130524T153250,65-04</datetime></modified>
-<revised><datetime dst='true'>20130524T153250,64-04</datetime></revised>
-<lastaccessed><datetime dst='true'>20130524T153250,65-04</datetime></lastaccessed>
+<modified><datetime dst='true'>20130731T171405,50-04</datetime></modified>
+<revised><datetime dst='true'>20130731T171405,49-04</datetime></revised>
+<lastaccessed><datetime dst='true'>20130731T171405,50-04</datetime></lastaccessed>
 <addedtofile><datetime>20121104T143452,02-05</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></updatedby>
 <wassignedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></wassignedby>
@@ -12,12 +12,13 @@
 <item name='$TITLE' sign='true'><text>AllSnippetsByImportSource</text></item>
 <item name='$Index' sign='true'><text/></item>
 <item name='$Formula' summary='true' sign='true'><formula compiled='true'>
-MgECAAwAAgAkNWkAAwAFADwANwAHAAQADAACAAQAAgAJAAQAZm9ybUltcG9ydFNvdXJjZUlkTmFt
-ZSQ1JENvbmZsaWN0JFJFRgAEAAQAAACsAAUABABGb3JtAQAOAEFQSURlc2NyaXB0aW9uCgIEAAUA
-BABGb3JtAQARAEphdmFTY3JpcHRTbmlwcGV0AAoCBAAdAgUABABGb3JtAQALAEphdmFTbmlwcGV0
-AAoCBAAdAgUABABGb3JtAQARAE9wZW5Tb2NpYWxTbmlwcGV0AAoCBAAdAgUABABGb3JtAQANAFhQ
-YWdlc1NuaXBwZXQACgIEAB0CBAADAAcAOAAyAAkzUzRTNlM3UzlTMTBTMTJTMTNTMTVTMTZTMThT
-MTlTMjFTMjJTMjRTMjVTMjdTMjhT
+XgECAAwAAgAkNWkAAwAFADwANwAHAAQADAACAAQAAgAJAAQAZm9ybUltcG9ydFNvdXJjZUlkTmFt
+ZSQ1JENvbmZsaWN0JFJFRgAEAAQAAADMAAUABABGb3JtAQAOAEFQSURlc2NyaXB0aW9uCgIEAAUA
+BABGb3JtAQANAEdhZGdldFNuaXBwZXQACgIEAB0CBQAEAEZvcm0BABEASmF2YVNjcmlwdFNuaXBw
+ZXQACgIEAB0CBQAEAEZvcm0BAAsASmF2YVNuaXBwZXQACgIEAB0CBQAEAEZvcm0BABEAT3BlblNv
+Y2lhbFNuaXBwZXQACgIEAB0CBQAEAEZvcm0BAA0AWFBhZ2VzU25pcHBldAAKAgQAHQIEAAMABwBE
+AD4ACTNTNFM2UzdTOVMxMFMxMlMxM1MxNVMxNlMxOFMxOVMyMVMyMlMyNFMyNVMyN1MyOFMzMFMz
+MVMzM1MzNFM=
 </formula></item>
 <item name='$Collation' summary='true'>
 <rawitemdata type='2'>
@@ -42,7 +43,7 @@ AAAAAAAIAAAAAAABAA==
 <item name='$DesignerVersion'><text>8.5.3</text></item>
 <item name='$SelQuery' sign='true'>
 <rawitemdata type='f'>
-gQYAAAAAif9cAAAAAAAFAA4AEQALABEADQBBUElEZXNjcmlwdGlvbkphdmFTY3JpcHRTbmlwcGV0
-SmF2YVNuaXBwZXRPcGVuU29jaWFsU25pcHBldFhQYWdlc1NuaXBwZXQ=
+gQYAAAAAif9rAAAAAAAGAA4ADQARAAsAEQANAEFQSURlc2NyaXB0aW9uR2FkZ2V0U25pcHBldEph
+dmFTY3JpcHRTbmlwcGV0SmF2YVNuaXBwZXRPcGVuU29jaWFsU25pcHBldFhQYWdlc1NuaXBwZXQA
 </rawitemdata></item></note>
 

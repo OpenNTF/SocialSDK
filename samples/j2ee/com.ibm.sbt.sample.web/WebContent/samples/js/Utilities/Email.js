@@ -44,24 +44,28 @@ require(['sbt/emailService'], function(email) {
           subject: subject,
           mimeParts: mimeParts
         };
-        email.send(emailJson, { 
-            handle: function(response) {
+        email.send(emailJson).then(
+            function(response) {
+            	//This callback may still be called even if there is a problem sending the email.
+            	//This API allows you to send multiple individual emails at once so it is possible
+            	//that one email may fail to send while the other may succeed.
                 var successElement = document.getElementById('success');
                 successElement.setAttribute('style', 'display:none;');
                 var errorElement = document.getElementById('error');
                 errorElement.setAttribute('style', 'display:none;');
                 if(response.message || (response.error && response.error.length != 0)) {
-                    if(response.message) {
-                        errorElement.innerHTML = response.message;
-                    } else {
-                        errorElement.innerHTML = response.error[0].message;
-                    }
+                	errorElement.innerHTML = response.message || response.error[0].message;
                     errorElement.setAttribute('style', '');
                 } else {
                     successElement.setAttribute('style', '');
                 }
-            }
-        });
+            },
+            function(error) {
+            	//This will only be executed if there is an error with the request to 
+            	//the server to send all the emails.
+            	var errorElement = document.getElementById('error');
+            	errorElement.innerHTML = error.message || 'There was an error sending the email.';
+            	errorElement.setAttribute('style', '');
+            });
     };
-    
 });

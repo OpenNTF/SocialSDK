@@ -40,13 +40,13 @@
 		Community community = communityService.newCommunity();
 		community.setTitle("Test Community 1ab" + System.currentTimeMillis());
 		community.setContent("Test Community updated by Update Community Java snippet");
-		community.setCommunityType("public");
+		community.setCommunityType("private");
 		List<String> tags = new ArrayList<String>();
 		tags.add("tag1"); 
 		tags.add("tag2"); 
 		community.setTags(tags);
 		community = community.save(); 
-		out.println("Community created is: " + community.getCommunityUuid());
+		out.println("Community created with Id : " + community.getCommunityUuid());
 		out.println("Community Tags:");
 		out.println("<br>");
 		tags = community.getTags();

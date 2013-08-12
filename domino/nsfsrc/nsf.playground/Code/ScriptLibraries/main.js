@@ -21,7 +21,7 @@ dojo.addOnLoad(function() {
  * @return
  */
 function resize() {
-	require(["dojo/dom-geometry"], function(domGeom){
+	require(["dojo/_base/window","dojo/dom-geometry","dojo/dom-class"], function(win,domGeom,domClass){
 		function windowHeight() {
 			var scrollRoot = (dojo.doc.compatMode == 'BackCompat') ? dojo.body() : dojo.doc.documentElement;
 			return scrollRoot.clientHeight;
@@ -32,11 +32,21 @@ function resize() {
 			return h;
 		}
 		var h = windowHeight();
-		var hd = eltHeight("#nav_bar_include")+eltHeight(".lotusBanner")+eltHeight(".lotusTitleBar2")+eltHeight(".lotusTitleBar")+eltHeight(".lotusPlaceBar");
-		var ft = eltHeight(".lotusFooter")+eltHeight(".lotusLegal");
-		dojo.query(".lotusMain").style("height",(h-hd-ft)+"px");
-		//console.log("h="+h+", hd="+hd+", ft="+ft+", result="+(h-hd-ft-25))
-		dijit.byId(pageGlobal.borderContainer).resize()
+		if(domClass.contains(win.body(),"lotusui30")) {
+			var hd = eltHeight("#nav_bar_include")+eltHeight(".lotusBanner")+eltHeight(".lotusTitleBar2")+eltHeight(".lotusTitleBar")+eltHeight(".lotusPlaceBar");
+			var ft = eltHeight(".lotusFooter")+eltHeight(".lotusLegal");
+			dojo.query(".lotusMain").style("height",(h-hd-ft)+"px");
+			//console.log("h="+h+", hd="+hd+", ft="+ft+", result="+(h-hd-ft-25))
+			dijit.byId(pageGlobal.borderContainer).resize()
+		} else if(domClass.contains(win.body(),"dbootstrap")) {
+			var hd = eltHeight("#nav_bar_include")+eltHeight(".lotusBanner")+eltHeight(".lotusTitleBar2")+eltHeight(".lotusTitleBar")+eltHeight(".lotusPlaceBar");
+			var ft = eltHeight(".lotusFooter")+eltHeight(".lotusLegal");
+			dojo.query(".container-fluid").style("height",(h-hd-ft)+"px");
+			dojo.query(".row-fluid").style("height","100%");
+			dojo.query(".span12").style("height","100%");
+			console.log("h="+h+", hd="+hd+", ft="+ft+", result="+(h-hd-ft-25))
+			dijit.byId(pageGlobal.borderContainer).resize()
+		}
 	});
 }
 

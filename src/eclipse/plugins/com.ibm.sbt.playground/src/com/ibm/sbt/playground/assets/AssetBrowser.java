@@ -164,16 +164,20 @@ public class AssetBrowser {
         }
         return false;
     }
-    
+    /**
+     * 
+     * @param sampleRuntimes comma-delimited String of runtimes the sample supports.
+     * @return true if any of the runtimes matches one supported in the current environment, false otherwise.
+     */
 	protected boolean runtimeMatches(String sampleRuntimes){
         if(this.runtimes == null)
             return true; // no runtimes in context for some reason, include samples.
         String[] sampleRuntimesArray = sampleRuntimes.split(",");
         for(String sampleRuntime : sampleRuntimesArray){
-            if(!runtimesArrayContains(sampleRuntime))
-                return false;
+            if(runtimesArrayContains(sampleRuntime))
+                return true;
         }
-        return true;
+        return false;
     }
     
     private boolean runtimesArrayContains(String runtimeName){

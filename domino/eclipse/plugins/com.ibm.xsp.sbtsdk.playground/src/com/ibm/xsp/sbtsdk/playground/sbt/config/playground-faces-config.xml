@@ -18,6 +18,13 @@
 <!-- ******************************************************************* -->
 <faces-config>
 
+	<!-- Credential store physical implementation -->
+	<managed-bean>
+		<managed-bean-name>CredStore</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.security.credential.store.MemoryStore</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+
   <!--  SmartCloud OAuth 1.0 -->
   <managed-bean>
     <managed-bean-name>smartcloudOA</managed-bean-name>
@@ -149,7 +156,7 @@
   <!-- Twitter -->
   <managed-bean>
     <managed-bean-name>twitter</managed-bean-name>
-    <managed-bean-class>com.ibm.sbt.services.endpoints.OAuthEndpoint
+    <managed-bean-class>com.ibm.sbt.services.endpoints.TwitterOAuthEndpoint
 		</managed-bean-class>
     <managed-bean-scope>application</managed-bean-scope>
     <!-- Endpoint URL -->
@@ -163,15 +170,6 @@
 			</property-name>
       <value>true</value>
     </managed-property>
-    <!--
-			Access Token obtained from the Twitter Application. This is required
-			for authorizing the API calls
-		-->
-    <!--
-			<managed-property> <property-name>applicationAccessToken
-			</property-name> <value>%{twitter.applicationAccessToken} </value>
-			</managed-property>
-		-->
     <managed-property>
       <property-name>requestTokenURL</property-name>
       <value>https://api.twitter.com/oauth/request_token
@@ -187,6 +185,15 @@
       <value>https://api.twitter.com/oauth/access_token
 			</value>
     </managed-property>
+    <!--
+			Access Token obtained from the Twitter Application. This is required
+			for authorizing the API calls
+	<managed-property>
+		<property-name>applicationAccessToken</property-name>
+		<value>%{twitter.applicationAccessToken} </value>
+	</managed-property>
+		-->
+	
     <managed-property>
       <property-name>signatureMethod</property-name>
       <value>HMAC-SHA1</value>
@@ -201,5 +208,47 @@
       <value>XPagesSBT</value>
     </managed-property>
   </managed-bean>
+  
+	<!-- Dropbox oauth endpoint -->
+	<managed-bean>
+		<managed-bean-name>dropbox</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.services.endpoints.DropBoxOAuthEndpoint</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<!-- Endpoint URL -->
+		<managed-property>
+			<property-name>url</property-name>
+			<value>https://api.dropbox.com</value>
+		</managed-property>
+
+		<!-- Trust the connection -->
+		<managed-property>
+			<property-name>forceTrustSSLCertificate</property-name>
+			<value>true</value>
+		</managed-property>
+		<managed-property>
+			<property-name>requestTokenURL</property-name>
+			<value>https://api.dropbox.com/1/oauth/request_token</value>
+		</managed-property>
+		<managed-property>
+			<property-name>authorizationURL</property-name>
+			<value>https://www.dropbox.com/1/oauth/authorize</value>
+		</managed-property>
+		<managed-property>
+			<property-name>accessTokenURL</property-name>
+			<value>https://api.dropbox.com/1/oauth/access_token</value>
+		</managed-property>		
+		<managed-property>
+			<property-name>signatureMethod</property-name>
+			<value>PLAINTEXT</value>
+		</managed-property>
+		<managed-property>
+			<property-name>serviceName</property-name>
+			<value>Dropbox</value>
+		</managed-property>
+		<managed-property>
+			<property-name>appId</property-name>
+      		<value>XPagesSBT</value>
+		</managed-property>
+	</managed-bean>
 
 </faces-config>

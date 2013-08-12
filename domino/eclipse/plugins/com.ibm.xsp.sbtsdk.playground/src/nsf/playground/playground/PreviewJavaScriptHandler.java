@@ -14,8 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import nsf.playground.beans.DataAccessBean;
 import nsf.playground.environments.PlaygroundEnvironment;
 
-import com.ibm.commons.runtime.Context;
-import com.ibm.commons.runtime.RuntimeConstants;
 import com.ibm.commons.runtime.util.ParameterProcessor;
 import com.ibm.commons.runtime.util.UrlUtil;
 import com.ibm.commons.util.PathUtil;
@@ -24,11 +22,8 @@ import com.ibm.commons.util.io.ReaderInputStream;
 import com.ibm.commons.util.io.json.JsonJavaFactory;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.commons.util.io.json.JsonParser;
-import com.ibm.sbt.jslibrary.SBTEnvironment;
 import com.ibm.sbt.playground.extension.JavaScriptPreviewExtension;
 import com.ibm.sbt.playground.extension.PlaygroundExtensionFactory;
-import com.ibm.xsp.context.DojoLibrary;
-import com.ibm.xsp.context.DojoLibraryFactory;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.ibm.xsp.sbtsdk.servlets.JavaScriptLibraries;
 
@@ -369,44 +364,4 @@ public class PreviewJavaScriptHandler extends PreviewHandler {
 		pw.flush();
 		pw.close();
 	}	
-	
-	private String getDefautLibraryPath(String serverUrl) {
-		DojoLibrary lib = DojoLibraryFactory.getDefaultLibrary();
-        String s = '-'+lib.getVersionTag();
-		return serverUrl+"/xsp/.ibmxspres/dojoroot"+s+"/";
-	}
-	
-	private String composeServerUrl(HttpServletRequest req) {		
-//		System.out.println("scheme:"+req.getScheme());
-//		System.out.println("server:"+req.getServerName());
-//		System.out.println("serverPath:"+req.getServletPath());
-//		System.out.println("contextPath:"+req.getContextPath());
-//		System.out.println("pathInfo:"+req.getPathInfo());
-//		System.out.println("BaseURL:"+b.toString());
-		
-		StringBuilder b = new StringBuilder();
-		String scheme = req.getScheme();
-		String server = req.getServerName();
-		int port = req.getServerPort();
-		
-		b.append(scheme);
-		b.append("://");
-		b.append(server);
-		if( !(((port==80)&&scheme.equals("http")) || ((port==443)&&scheme.equals("https"))) ) {
-			b.append(':');
-			b.append(Integer.toString(port));
-		}
-		
-		return b.toString();
-	}
-	
-	private String composeDatabaseUrl(HttpServletRequest req, String serverUrl) {
-		String contextPath = req.getContextPath();
-		return serverUrl+contextPath;
-	}
-	
-	private String composeToolkitUrl(String databaseUrl) {
-		return PathUtil.concat(databaseUrl,RuntimeConstants.get().getConstant(RuntimeConstants.LIBRARY_BASEURL),'/');
-		//return PathUtil.concat(databaseUrl,"xsp"+PlaygroundToolkitServletFactory.LIBRARY_PATHINFO,'/');
-	}
 }

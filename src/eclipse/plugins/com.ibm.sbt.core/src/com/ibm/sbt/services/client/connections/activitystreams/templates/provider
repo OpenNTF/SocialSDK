@@ -1,5 +1,5 @@
-provider: {
-    id: "${providerId}",
-    displayName: "${providerDisplayName}",
-    url: "${providerUrl}"
+"provider": {
+    "id": "${providerId}",
+    "displayName": "${providerDisplayName}",
+    "url": "${providerUrl}"
 }

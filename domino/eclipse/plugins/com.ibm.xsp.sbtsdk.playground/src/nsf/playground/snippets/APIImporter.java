@@ -23,6 +23,7 @@ import com.ibm.commons.util.io.json.JsonGenerator;
 import com.ibm.commons.util.io.json.JsonJavaFactory;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.commons.util.io.json.JsonParser;
+import com.ibm.sbt.playground.assets.Asset;
 import com.ibm.sbt.playground.assets.AssetNode;
 import com.ibm.sbt.playground.assets.Node;
 import com.ibm.sbt.playground.assets.NodeFactory;
@@ -59,9 +60,10 @@ public class APIImporter extends AssetImporter {
 	protected NodeFactory getNodeFactory() {
 		return new APINodeFactory();
 	}
-	
-	protected void saveAsset(ImportSource source, VFSFile root, AssetNode node) throws Exception {
-		APIDescription snippet = (APIDescription)node.load(root);
+
+	@Override
+	protected void saveAsset(ImportSource source, VFSFile root, AssetNode node, Asset asset) throws Exception {
+		APIDescription snippet = (APIDescription)asset;
 		saveAsset(node.getUnid(), node.getCategory(), node.getName(), source.getName(), snippet.getJson(), snippet.getPropertiesAsString());
 	}
 
@@ -125,12 +127,13 @@ public class APIImporter extends AssetImporter {
 			String name = trimSeparator(extractName(path));
 			String json = JsonGenerator.toJson(JsonJavaFactory.instanceEx, ed.getValue().content);
 			String properties = createPropertiesAsString(options,products,path);
+
 			saveAsset(id, category, name, source.getName(), json, properties);
 		}
 		
 		return apiDocs.size();
 	}
-	
+
 	private String adjustPath(List<ImportOptions> options, String[] products, String path) throws IOException {
 		for(int i=0; i<options.size(); i++) {
 			String adjustedPath = options.get(i).adjustExplorerPath(products, path);
@@ -279,7 +282,7 @@ public class APIImporter extends AssetImporter {
 	protected List<DocEntry> loadEntries(RestClient client, ImportSource source) throws IOException {
 		ArrayList<DocEntry> list = new ArrayList<APIImporter.DocEntry>();
 		try {
-			String path = URLEncoding.encodeURIString("/api/data/collections/name/AllAPIExplorer","utf-8",0,false);
+			String path = URLEncoding.encodeURIString("/api/data/collections/name/AllAPIExplorer?ps=99999","utf-8",0,false);
 			Object json = client.get(path,new RestClient.HandlerJson(JsonJavaObjectI.instanceExI)).getData();
 			if(json instanceof List) {
 				for(Object entry: (List)json) {

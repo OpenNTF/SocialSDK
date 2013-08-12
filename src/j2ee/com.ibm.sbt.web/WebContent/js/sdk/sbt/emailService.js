@@ -27,8 +27,7 @@ define(['./declare', './lang', './config', './_bridge/Transport', './json'], fun
          * @method send
          * @static
          * @param {Object || Array} email The JSON object representing the email to send.
-         * @param {Object} [callbacks] An object of callback functions.  The possible properties for callback functions are load,
-         * error, and handle.
+         * @return {sbt.Promise} A promise to fulfill the send.
          * 
          * @example
          *     var emails = 
@@ -82,7 +81,7 @@ define(['./declare', './lang', './config', './_bridge/Transport', './json'], fun
          *                         ]
          *              }
          *         ];
-         *     var loadCallback = function(response) {
+         *     var successCallback = function(response) {
          *         //If you send multiple emails, for example emails is an array of email objects,
          *         //than it is possible that some emails succeeded being sent while others may have
          *         //failed.  It is good practice to check for any emails that had errors being sent.
@@ -95,22 +94,16 @@ define(['./declare', './lang', './config', './_bridge/Transport', './json'], fun
          *         }
          *     };
          *  
-         *     var errorCallback = function(response) {
+         *     var errorCallback = function(error) {
          *         //This callback will only be called if there was an error in the request
          *         //being made to the server.  It will NOT be called if there are errors
          *         //with any of the emails being sent.
-         *         if(response.message) {
+         *         if(error.message) {
          *             //The request failed handle it.
          *         }
          *     };
          *  
-         *     var handleCallback = function(response) {
-         *         //This callback is called no matter whether the request succeeded or failed.
-         *         errorCallback(response);
-         *         loadCallback(response);
-         *     };
-         *  
-         *     email.send(emails, {load: loadCallback, error: errorCallback, handle: handleCallback});
+         *     email.send(emails).then(successCallback, errorCallback);
          */
         send : function(emails) {
             var postUrl = config.Properties.serviceUrl + '/mailer';

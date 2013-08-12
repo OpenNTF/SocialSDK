@@ -40,8 +40,10 @@ public class Profile extends BaseEntity {
 	
 	/**
 	 * getThumbnailUrl
+	 * 			returns the URL to get the Thumbnail of the user
 	 * 
-	 * @return ThumbnailUrl
+	 * @return string 
+	 * 			Thumbnail Url
 	 */
 	public String getThumbnailUrl() {
 		String thumbnailUrl = getAsString(ProfilesJsonPath.ThumbnailUrl);
@@ -53,8 +55,9 @@ public class Profile extends BaseEntity {
 
 	/**
 	 * getDisplayName
-	 * 
-	 * @return name
+	 * 			returns the display name of the user
+	 * @return string
+	 * 			name
 	 */
 	public String getDisplayName() {
 		return getAsString(ProfilesJsonPath.DisplayName);
@@ -62,8 +65,9 @@ public class Profile extends BaseEntity {
 
 	/**
 	 * getId
-	 * 
-	 * @return id
+	 * 			returns the id of the user
+	 * @return string
+	 * 			id
 	 */
 	public String getId() {
 		return getAsString(ProfilesJsonPath.Id);
@@ -71,8 +75,9 @@ public class Profile extends BaseEntity {
 
 	/**
 	 * getEmail
-	 * 
-	 * @return email
+	 * 			returns the email address of the user
+	 * @return string
+	 * 			email
 	 */
 	public String getEmail() {
 		return getAsString(ProfilesJsonPath.EmailAddress);
@@ -80,8 +85,9 @@ public class Profile extends BaseEntity {
 
 	/**
 	 * getAddress
-	 * 
-	 * @return
+	 * 			returns the primary address of the user
+	 * @return string 
+	 * 			address
 	 */
 	public String getAddress() {
 		return getAsString(ProfilesJsonPath.Address);
@@ -89,8 +95,9 @@ public class Profile extends BaseEntity {
 
 	/**
 	 * getDepartment
-	 * 
-	 * @return
+	 * 			returns the department of the user
+	 * @return string
+	 * 			department
 	 */
 	public String getDepartment() {
 		return getAsString(ProfilesJsonPath.Department);
@@ -98,8 +105,9 @@ public class Profile extends BaseEntity {
 
 	/**
 	 * getTitle
-	 * 
-	 * @return
+	 * 			returns the job title of the user
+	 * @return string 
+	 * 			title
 	 */
 	public String getTitle() {
 		return getAsString(ProfilesJsonPath.Title);
@@ -107,8 +115,9 @@ public class Profile extends BaseEntity {
 
 	/**
 	 * getProfileUrl
-	 * 
-	 * @return
+	 * 			returns the Url to the Profile of the user
+	 * @return string
+	 * 			profileUrl
 	 */
 	public String getProfileUrl() {
 		return getAsString(ProfilesJsonPath.ProfileUrl);
@@ -116,8 +125,9 @@ public class Profile extends BaseEntity {
 
 	/**
 	 * getPhoneNumber
-	 * 
-	 * @return
+	 * 			returns the phone number of the user
+	 * @return string
+	 * 			phoneNumber
 	 */
 	public String getPhoneNumber() {
 		return getAsString(ProfilesJsonPath.PhoneNumbers);
@@ -125,8 +135,9 @@ public class Profile extends BaseEntity {
 
 	/**
 	 * getCountry
-	 * 
-	 * @return
+	 * 			returns the country of the user
+	 * @return string
+	 * 			country
 	 */
 	public String getCountry() {
 		return getAsString(ProfilesJsonPath.Country);
@@ -134,10 +145,23 @@ public class Profile extends BaseEntity {
 
 	/**
 	 * getAboutMe
-	 * 
-	 * @return
+	 * 			returns the description/about details of the user
+	 * @return string
+	 * 			about
 	 */
 	public String getAboutMe() {
 		return getAsString(ProfilesJsonPath.About);
 	}
+	
+	/**
+	 * getOrgId
+	 * 			returns the organization Id of the user
+	 * @return string
+	 * 			orgId
+	 */
+	public String getOrgId() { 
+		return this.getAsString(ProfilesJsonPath.OrgId); 
+	}
+	
+	
 }

@@ -54,15 +54,15 @@ public class PreviewServlet extends FacesContextServlet {
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// Dispatch to the right handler
 		String pathInfo = req.getPathInfo();
-		if(StringUtil.equalsIgnoreCase(pathInfo, "/javascriptsnippet")) {
+		if(StringUtil.startsWithIgnoreCase(pathInfo, "/javascriptsnippet")) {
 			getJavaScriptSnippetHandler().doService(req, resp);
-		} else if(StringUtil.equalsIgnoreCase(pathInfo, "/javasnippet")) {
+		} else if(StringUtil.startsWithIgnoreCase(pathInfo, "/javasnippet")) {
 			getJavaSnippetHandler().doService(req, resp);
-		} else if(StringUtil.equalsIgnoreCase(pathInfo, "/jsppage")) {
+		} else if(StringUtil.startsWithIgnoreCase(pathInfo, "/jsppage")) {
 			getJavaSnippetHandler().doService(req, resp);
-		} else if(StringUtil.equalsIgnoreCase(pathInfo, "/xpagessnippet")) {
+		} else if(StringUtil.startsWithIgnoreCase(pathInfo, "/xpagessnippet")) {
 			getXPagesSnippetHandler().doService(req, resp);
-		} else if(StringUtil.equalsIgnoreCase(pathInfo, "/gadgetsnippet")) {
+		} else if(StringUtil.startsWithIgnoreCase(pathInfo, "/gadgetsnippet")) {
 			getGadgetSnippetHandler().doService(req, resp);
 		}
 	}

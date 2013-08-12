@@ -1,16 +1,14 @@
-function parseSmartCloudProfile(json){
-	var nav = new sbt.JsonNavigator(json);
-	var entry = nav.get("entry");
-	var url = entry.stringValue("profileUrl");
-	var myname = entry.stringValue("displayName");
-	var aboutMe = entry.stringValue("aboutMe");
-	var country = entry.stringValue("country");
-	var email = entry.stringValue("emailAddress");
+function parseSmartCloudProfile(nav){
+	var url = nav.getAsString("profileUrl");
+
+	var myname = nav.getAsString("displayName");
+	var aboutMe = nav.getAsString("aboutMe");
+	var country = nav.getAsString("country");
+	var email = nav.getAsString("emailAddress");
 	
-	var photo = entry.get("photos");
-	println(photo);
-    photo = photo.selectEq("type", "Photo");
-    photo = photo.stringValue("value");
+	var photo = nav.getEntries("photos");
+  
+    photo = photo.get(0).getAsString("value");
     if(photo != null){
     	photo = "https://apps.na.collabserv.com/contacts/img/photos/" + photo;
     }
@@ -18,13 +16,11 @@ function parseSmartCloudProfile(json){
     	photo = "/no_pic.jpg";
     }
     
-    var address = entry.get("addresses");
-    address = address.selectEq("title", "Primary Address");
-    address = address.stringValue("address");
-    
-    var phone = entry.get("phoneNumbers");
-    phone = phone.selectEq("title", "Primary Telephone");
-    phone = phone.stringValue("phone");
+    var addresses = nav.getEntries("addresses");
+
+   	address = addresses.get(4).getAsString("address");
+    var phone = nav.getEntries("phoneNumbers");
+    phone = phone.get(4).getAsString("phone");
 
 	return {
 		"image" : photo,
@@ -37,26 +33,31 @@ function parseSmartCloudProfile(json){
 		"country" : country
 	}
 }
-function parseSmartCloudContacts(json){
-	var navigator  = new sbt.JsonNavigator(json).get("entry");
-    
-    if(navigator != null){
-    	var contacts = new Array(navigator.getCount());
-        for(var i = 0; i < navigator.getCount(); i++){
-            var nav = navigator.get(i);
-            var photo = nav.get("photos").selectEq("type", "Photo");
-            photo = photo.stringValue("value");
-            if(photo != null && photo != "PROFILES"){
-            	photo = "https://apps.na.collabserv.com/contacts/img/photos/" + photo;
-            }
-            else{
-            	photo = "/no_pic.jpg";
-            }
-            var name = nav.stringValue("displayName");
+function parseSmartCloudContacts(profiles){
+
+	var entries = profiles.size();
+
+    if(entries != null){
+    	var contacts = new Array(profiles.size());
+        for(var i = 0; i < profiles.size(); i++){
+            var nav = profiles.get(i).getDataHandler();
+            var photos = nav.getEntries("photos"); 
+            var photo=null;        
+            if(photos.size()==2){
+            	photo = photos.get(1).getAsString("value");          	
+        		if(photo != null && photo != "PROFILES"){
+            		photo = "https://apps.na.collabserv.com/contacts/img/photos/" + photo;
+            	}
+            	else{
+            		photo = "/no_pic.jpg";
+            		}
+            	}
             
-            var email = nav.stringValue("emailAddress");
+            var name = nav.getAsString("displayName");
             
-            var profile = nav.stringValue("profileUrl");
+            var email = nav.getAsString("emailAddress");
+            
+            var profile = nav.getAsString("profileUrl");
             contacts[i] = {
             	"name" : name,
             	"photo" : photo,

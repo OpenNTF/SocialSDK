@@ -6,12 +6,12 @@
 						<xp:eventHandler event="onclick" submit="true"
 							refreshMode="complete">
 							<xp:this.action><![CDATA[#{javascript:
-			var svc = new com.ibm.sbt.services.client.activitystreams.ActivityStreamService();
+			var svc = new com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamService();
 			var postPayload = new com.ibm.commons.util.io.json.JsonJavaObject();
 			var actor =new com.ibm.commons.util.io.json.JsonJavaObject();
 			var object =new com.ibm.commons.util.io.json.JsonJavaObject();
 			actor.put("id", "@self");
-			object.put("summary", "Padraic Edwards and Martin Donnelly will present a Webinar on XPages and SBT on July 10th.");
+			object.put("summary", "Test XPages Post");
 			object.put("objectType", "Post");
 			var randomGen = java.util.Random(19580427);
 			var randomNum = randomGen.nextInt();
@@ -27,11 +27,8 @@
 			postPayload.put("updated", new java.util.Date().getTime());
 			postPayload.put("object", object);
 
-			var header = new java.util.HashMap();
-			header.put("Content-Type", "application/json");
-			entry= svc.postEntry(postPayload, header);
-			var entryId = entry.getJsonObject("entry").getString("id");
-			getComponent("computedField1").setValue(entryId);
+			entry= svc.postEntry(postPayload);
+			getComponent("computedField1").setValue(entry);
 
     	}]]></xp:this.action>
 						</xp:eventHandler></xp:button>

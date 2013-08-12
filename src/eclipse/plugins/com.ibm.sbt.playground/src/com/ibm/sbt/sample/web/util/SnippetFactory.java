@@ -196,12 +196,12 @@ public class SnippetFactory {
 	 * @throws IOException
 	 */
 	private static RootNode readAssets(ServletContext context, VFSFile file, NodeFactory nodeFactory, HttpServletRequest request) throws IOException{
-	    AssetBrowser imp = new AssetBrowser(file, nodeFactory, getEndpoints(request), getJsLibId(request));
+	    AssetBrowser imp = new AssetBrowser(file, nodeFactory, getRuntimes(request), getJsLibId(request));
 	    
 		return (RootNode)imp.readAssets(new RootNode(), null);
 	}
 	
-	private static SBTEnvironment.Endpoint[] getEndpoints(HttpServletRequest request){
+	private static String[] getRuntimes(HttpServletRequest request){
 	    Context context = Context.get();
 	    String environment = "defaultEnvironment";
 	    if(request.getParameter("env") != null){
@@ -213,7 +213,7 @@ public class SnippetFactory {
 	    Object obj = context.getBean(environment);
 	    if(obj != null){
 	        SBTEnvironment bean = (SBTEnvironment) obj;
-	        return bean.getEndpointsArray();
+	        return bean.getRuntimesArray();
 	    }
 	    else {
 	        return null;

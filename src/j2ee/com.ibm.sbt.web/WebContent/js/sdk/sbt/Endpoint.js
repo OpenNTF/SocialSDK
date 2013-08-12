@@ -196,11 +196,18 @@ var Endpoint = declare(null, {
             	if(!error.message){
             		error.message = self.getErrorMessage(error.cause);
             	}
-                if (self._isAuthRequired(error, options)) {
-                    return self._authenticate(url, options, promise);
-                }                
-                promise.rejected(error);
-                promise.response.rejected(error);
+                var authRequiredPromise = self._isAuthRequired(error, options);
+                authRequiredPromise.then(function(response){
+                	if(response){
+                		self._authenticate(url, options, promise);
+                	}else{
+                		promise.rejected(error);
+                        promise.response.rejected(error);
+                	}
+                }, function(error){
+                	promise.rejected(error);
+                    promise.response.rejected(error);
+                }); 
             }
         );
         
@@ -248,7 +255,7 @@ var Endpoint = declare(null, {
 		        		isForbiddenErrorButAuthenticated = true;
 		        	}
 		        }
-				if (error.code == 401 || (!isForbiddenErrorButAuthenticated && error.code == self.authenticationErrorCode)) {
+				if ((error.code == 401 && !self.isAuthenticated)|| (!isForbiddenErrorButAuthenticated && error.code == self.authenticationErrorCode)) {
 					var autoAuthenticate =  _args.autoAuthenticate || self.autoAuthenticate;
 					if(autoAuthenticate == undefined){
 						autoAuthenticate = true;
@@ -418,20 +425,23 @@ var Endpoint = declare(null, {
 			result property in response object returns true/false depending on whether authentication is valid or not.
 	*/
 	isAuthenticationValid : function(args) {
+		var promise = new Promise();
 		args = args || {};
+		var self = this;
 		var proxy = this.proxy.proxyUrl;
 		var actionURL = proxy.substring(0, proxy.lastIndexOf("/")) + "/authHandler/" + this.proxyPath + "/isAuthValid";
-		this.transport.xhr('POST',{
+		this.transport.xhr('POST',{			
 			handleAs : "json",
 			url : actionURL,
-			load : function(response) {
-				self.isAuthenticated = false;
+			load : function(response) {				
+				self.isAuthenticated = response.result;
 				promise.fulfilled(response);
 			},
 			error : function(response) {
 				promise.rejected(response);
 			}
 		}, true);
+		return promise;
 	},
 	
 	// Internal stuff goes here and should not be documented
@@ -521,24 +531,27 @@ var Endpoint = declare(null, {
      * Return true if automatic authentication is required. 
      */
     _isAuthRequired : function(error, options) {
-        var status = error.response.status || null;
-        if(status == 403){
-        	// checking if we are getting 403 inspite of being already authenticated (eg. Get Public Files/Folders API on Smartcloud
-        	if(this.isAuthenticated){
-        		return false;
-        	}
-        }
-        var isAuthErr = status == 401 || status == this.authenticationErrorCode;
-        
-        var isAutoAuth =  options.autoAuthenticate || this.autoAuthenticate;
-        if (isAutoAuth == undefined){
-            isAutoAuth = true;
-        } 
-        
-        return isAuthErr && isAutoAuth && this.authenticator && !this._authRejected;
+    	var promise = new Promise();    	
+        var status = error.response.status || null;      
+        	// checking if we are getting 403 or 401 inspite of being already authenticated (eg. Get Public Files/Folders API on Smartcloud
+    	if(this.isAuthenticated){ 
+    		this.isAuthenticationValid().then(function(response){        		
+    			promise.fulfilled(!response.result);        			
+    		},function(response) {
+				promise.rejected(response);
+			});        		
+    	}else{	        
+	        var isAuthErr = status == 401 || status == this.authenticationErrorCode;		        
+	        var isAutoAuth =  options.autoAuthenticate || this.autoAuthenticate;
+	        if (isAutoAuth == undefined){
+	            isAutoAuth = true;
+	        } 
+	        promise.fulfilled(isAuthErr && isAutoAuth && this.authenticator && !this._authRejected);	        
+    	}
+        return promise;
     },
-    getErrorMessage: function(error) {
-        var text = error.responseText || (error.response&&error.response.text);
+    getErrorMessage: function(error) {    	
+        var text = error.responseText || (error.response&&error.response.text) ;
         if (text) {
             try {            	
                 var dom = xml.parse(text);
@@ -549,8 +562,13 @@ var Endpoint = declare(null, {
                 }
             } catch(ex) {
                 console.log(ex);
+            }  
+            var trimmedText = text.replace(/(\r\n|\n|\r)/g,"");
+            if(!(trimmedText)){            	
+            	return nls.generic_error_message;
+            }else{
+            	return text;
             }
-            return text;
         } else {
             return error;
         }

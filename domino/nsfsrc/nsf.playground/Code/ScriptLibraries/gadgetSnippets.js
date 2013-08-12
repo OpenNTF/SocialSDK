@@ -110,7 +110,7 @@ function runCode(debug) {
 	form["fm_html"].value = html;
 	form["fm_js"].value = js;
 	form["fm_css"].value = css;
-	form["fm_json"].value = json;
+	//form["fm_json"].value = json; // Consume locally - not served by our server
 	form["fm_properties"].value = properties;
 	form["fm_options"].value = dojo.toJson(options);
 	dojo.xhrPost({
@@ -120,7 +120,7 @@ function runCode(debug) {
 			// https require the certificates on the server... 
 			var url = form.action+"/"+gadgetId+"/gadget.xml";
 			url = url.replace("https://","http://");
-			initGadget(url);
+			initGadget(url,json);
 		},
         error: function(error){
 			alert(error);
@@ -146,9 +146,29 @@ function initOSContainer() {
 	globalOSContainer = new osapi.container.Container({});
 	globalOSGadget = dojo.byId("osgadget");
 	globalOSSite = globalOSContainer.newGadgetSite(globalOSGadget);
+	
+	//var asurl = "http://connections.swg.usma.ibm.com/connections/resources/web/com.ibm.social.as/gadget/ActivityStreamNotes.xml";
+	globalASGadget = dojo.byId("asgadget");
+	if(globalASGadget) {
+		var asurl = "http://priandqs.swg.usma.ibm.com:81/connections/resources/web/com.ibm.social.as/gadget/ActivityStreamNotes.xml";
+		globalASSite = globalOSContainer.newGadgetSite(globalASGadget);
+		var viewParams = {}
+		var renderParams = {}
+		renderParams[osapi.container.RenderParam.HEIGHT] = '100%'; 
+		renderParams[osapi.container.RenderParam.WIDTH] = '100%';
+		globalASSite.close();
+		globalOSContainer.navigateGadget(globalASSite,asurl,viewParams,renderParams);
+	}
 }
 
-function initGadget(url) {
+function initGadget(url,dataModel) {
+	if(dataModel && dataModel.length>0) {
+		renderEmbeddedExperience(url,dataModel);
+	} else {
+		renderGadget(url);
+	}
+}
+function renderGadget(url) {
 	var viewParams = {}
 	var renderParams = {}
 	renderParams[osapi.container.RenderParam.HEIGHT] = '100%'; 
@@ -156,4 +176,28 @@ function initGadget(url) {
 	
 	globalOSSite.close();
 	globalOSContainer.navigateGadget(globalOSSite,url,viewParams,renderParams);
+}
+
+function renderEmbeddedExperience(url, dataModel) {
+	globalOSSite.close();
+	globalOSContainer.preloadGadget(url, function(metadata) {
+      if(metadata && metadata[url]) {
+        //self.gadgetToolbar.setGadgetMetadata(metadata[url]);
+        var siteNode = dojo.byId("osgadget");
+        oDataModel = JSON.parse(dataModel),
+        renderParams = {};
+        oDataModel.gadget = url;
+        renderParams[osapi.container.ee.RenderParam.GADGET_RENDER_PARAMS] = {};
+        renderParams[osapi.container.ee.RenderParam.GADGET_RENDER_PARAMS][osapi.container.RenderParam.HEIGHT] = '100%';
+        renderParams[osapi.container.ee.RenderParam.GADGET_RENDER_PARAMS][osapi.container.RenderParam.WIDTH] = '100%';
+        renderParams[osapi.container.ee.RenderParam.GADGET_VIEW_PARAMS] = {"gadgetUrl" : url}; 
+
+        globalOSContainer.ee.navigate(siteNode, oDataModel, renderParams, function(site){
+          // Set the site so we can clean it up when we switch gadgets
+        	globalOSSite = site;
+        });
+      } else {
+        console.error('There was an error preloading the embedded experience.');
+      }
+    });
 }

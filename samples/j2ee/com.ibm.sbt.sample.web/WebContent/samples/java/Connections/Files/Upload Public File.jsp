@@ -39,13 +39,13 @@
   <div id="content">
     <%
         try {
-            FileService communityService = new FileService();
+            FileService fileService = new FileService();
             String content = "Test Content";
             String name = "Test File " + System.nanoTime() + ".txt";
             FileCreationParameters p = new FileCreationParameters();
             p.visibility = FileCreationParameters.Visibility.PUBLIC;
 
-            FileEntry entry = communityService.upload(
+            FileEntry entry = fileService.upload(
                     new ByteArrayInputStream(content.getBytes(Charset.forName("UTF-8"))), name,
                     content.length(), p.buildParameters());
 

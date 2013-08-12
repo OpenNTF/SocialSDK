@@ -263,6 +263,10 @@
 			<property-name>appId</property-name>
 			<value>%{smartcloud.appId}</value>
 		</managed-property>
+		<managed-property>
+			<property-name>authenticationService</property-name>
+			<value>communities/service/atom/communities/my</value>
+		</managed-property>
 	</managed-bean>
 	
 	<!--  SmartCloud OAuth 2.0 -->	

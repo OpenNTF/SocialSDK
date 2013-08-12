@@ -47,6 +47,10 @@
 			<property-name>properties</property-name>
 			<value>sample.email1,sample.email2</value>
 		</managed-property>
+		<managed-property>
+		    <property-name>runtimes</property-name>
+		    <value>connections,smartcloud,domino</value>
+		</managed-property>
 	</managed-bean>
 	
 	<!-- SmartCloud Environment -->
@@ -62,6 +66,10 @@
 			<property-name>properties</property-name>
 			<value>sample.email1,sample.email2</value>
 		</managed-property>
+		<managed-property>
+            <property-name>runtimes</property-name>
+            <value>smartcloud</value>
+        </managed-property>
 	</managed-bean>
 	
 	<!-- SmartCloud Basic Authentication Environment -->
@@ -73,6 +81,10 @@
 			<property-name>endpoints</property-name>
 			<value>smartcloudBasic:connections</value>
 		</managed-property>
+		<managed-property>
+            <property-name>runtimes</property-name>
+            <value>smartcloud</value>
+        </managed-property>
 	</managed-bean>
 	
     <!--  OpenSocial Environment -->

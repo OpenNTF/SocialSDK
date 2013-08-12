@@ -130,14 +130,16 @@ public class SBTEnvironment {
 	private String	name;
 	private Endpoint[] endpoints;
 	private Property[] properties;
+	private String[] runtimes;
 	
 	public SBTEnvironment() {
 	}
 	
-	public SBTEnvironment(String name, Endpoint[] endpoints, Property[] properties) {
+	public SBTEnvironment(String name, Endpoint[] endpoints, Property[] properties, String[] runtimes) {
 		this.name = name;
 		this.endpoints = endpoints;
 		this.properties = properties;
+		this.runtimes = runtimes;
 	}
 	
 	public String getName() {
@@ -158,6 +160,21 @@ public class SBTEnvironment {
 	public void setPropertiesArray(Property[] properties) {
 		this.properties = properties;
 	}
+	public String[] getRuntimesArray() {
+        return runtimes;
+    }
+    public void setRuntimesArray(String[] runtimes) {
+        this.runtimes = runtimes;
+    }
+    
+    public String getRuntimes(){
+        return StringUtil.concatStrings(this.runtimes, ',', false);
+    }
+    
+    public void setRuntimes(String sRuntimes){
+        this.runtimes = StringUtil.splitString(sRuntimes, ',');
+    }
+    
 	public String getProperties() {
 		try {
 			return serializeProperties(properties);
@@ -235,6 +252,10 @@ public class SBTEnvironment {
 			}
 		}
 		return null;
+	}
+	
+	public static String[] parseRuntimes(String sRuntimes){
+	    return new String[]{"burp"};
 	}
 		
 	//

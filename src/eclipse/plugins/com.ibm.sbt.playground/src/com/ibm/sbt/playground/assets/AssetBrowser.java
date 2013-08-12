@@ -24,7 +24,6 @@ import java.util.Set;
 import com.ibm.commons.util.QuickSort;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.ReaderInputStream;
-import com.ibm.sbt.jslibrary.SBTEnvironment;
 import com.ibm.sbt.playground.vfs.VFSFile;
 
 public class AssetBrowser {
@@ -37,7 +36,7 @@ public class AssetBrowser {
 	private VFSFile rootDirectory;
 	private NodeFactory factory;
 	private String[] extensions;
-	private SBTEnvironment.Endpoint[] endpoints;
+	private String[] runtimes;
 	private String jsLibId;
 	
 	public AssetBrowser(VFSFile rootDirectory, NodeFactory factory) {
@@ -46,11 +45,11 @@ public class AssetBrowser {
 		this.extensions = factory.getAssetExtensions();
 	}
 	
-	public AssetBrowser(VFSFile rootDirectory, NodeFactory factory, SBTEnvironment.Endpoint[] endpoints, String jsLibId) {
+	public AssetBrowser(VFSFile rootDirectory, NodeFactory factory, String[] runtimes, String jsLibId) {
         this.rootDirectory = rootDirectory;
         this.factory = factory;
         this.extensions = factory.getAssetExtensions();
-        this.endpoints = endpoints;
+        this.runtimes = runtimes;
         this.jsLibId = jsLibId;
     }
 	
@@ -122,20 +121,20 @@ public class AssetBrowser {
 	}
 	
 	protected boolean includeNode(Properties properties){
-	    if(this.endpoints == null){
+	    if(this.runtimes == null){
             return true;
         }
-        String sampleEndpoints = properties.getProperty(CategoryNode.ENDPOINT_PROPERTY_KEY);
+        String sampleRuntimes = properties.getProperty(CategoryNode.RUNTIME_PROPERTY_KEY);
         String sampleJsLibs = properties.getProperty(CategoryNode.JS_LIB_ID_PROPERTY_KEY);
-        if(StringUtil.isEmpty(sampleEndpoints) && StringUtil.isEmpty(sampleJsLibs))
+        if(StringUtil.isEmpty(sampleRuntimes) && StringUtil.isEmpty(sampleJsLibs))
             return true; // no requirements specified, include it.
         else{
-            if(StringUtil.isEmpty(sampleEndpoints))    
+            if(StringUtil.isEmpty(sampleRuntimes))    
                 return jsLibMatches(sampleJsLibs);
             else if(StringUtil.isEmpty(sampleJsLibs))
-                return endpointMatches(sampleEndpoints);
+                return runtimeMatches(sampleRuntimes);
             else
-                return endpointMatches(sampleEndpoints) && jsLibMatches(sampleJsLibs);
+                return runtimeMatches(sampleRuntimes) && jsLibMatches(sampleJsLibs);
         }
 	}
 
@@ -166,20 +165,20 @@ public class AssetBrowser {
         return false;
     }
     
-	protected boolean endpointMatches(String sampleEndpoints){
-        if(this.endpoints == null)
-            return true; // no endpoints in context for some reason, include samples.
-        String[] sampleEndpointsArray = sampleEndpoints.split(",");
-        for(String sampleEndpoint : sampleEndpointsArray){
-            if(!endpointsArrayContains(sampleEndpoint))
+	protected boolean runtimeMatches(String sampleRuntimes){
+        if(this.runtimes == null)
+            return true; // no runtimes in context for some reason, include samples.
+        String[] sampleRuntimesArray = sampleRuntimes.split(",");
+        for(String sampleRuntime : sampleRuntimesArray){
+            if(!runtimesArrayContains(sampleRuntime))
                 return false;
         }
         return true;
     }
     
-    private boolean endpointsArrayContains(String endpointName){
-        for(SBTEnvironment.Endpoint envEndpoint : this.endpoints){
-            if(StringUtil.equals(envEndpoint.getName(), endpointName))
+    private boolean runtimesArrayContains(String runtimeName){
+        for(String envRuntime : this.runtimes){
+            if(StringUtil.equals(envRuntime, runtimeName))
                 return true;
         }
         return false;

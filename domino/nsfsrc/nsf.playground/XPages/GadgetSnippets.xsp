@@ -2,7 +2,7 @@
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
 	xmlns:xe="http://www.ibm.com/xsp/coreex">
 	<xp:this.resources>
-		<xp:script src="http://priand64.swg.usma.ibm.com/osplayground/gadgets/js/container.js?c=1&amp;debug=1&amp;container=default" clientSide="true"></xp:script>
+		<xp:script src="http://priand64.swg.usma.ibm.com/osplayground/gadgets/js/container:embedded-experiences.js?c=1&amp;debug=1&amp;container=default" clientSide="true"></xp:script>
 		<xp:script src="/gadgetSnippets.js" clientSide="true"></xp:script>
 		<xp:dojoModule name="dojo.hash"></xp:dojoModule>
 		<xp:dojoModule name="extlib.codemirror.lib.codemirror"></xp:dojoModule>
@@ -244,6 +244,11 @@ if(doc) {
 							<xc:ApacheLicense></xc:ApacheLicense>
 						</xe:djBorderPane>
 					</xe:djBorderContainer>
+				</xe:djBorderPane>
+				<xe:djBorderPane id="djBorderPane1" region="right"
+					splitter="true" style="width:280px">
+					<div id="asgadget" style="height: 100%; width: 100%;">
+					</div>
 				</xe:djBorderPane>
 			</xe:djBorderContainer>
 		</xc:ccLayout>

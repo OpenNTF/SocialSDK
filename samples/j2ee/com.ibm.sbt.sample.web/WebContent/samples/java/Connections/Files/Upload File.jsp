@@ -38,10 +38,10 @@
   <div id="content">
     <%
       try {
-        FileService communityService = new FileService();
+        FileService fileService = new FileService();
         String content = "Test File Content";
         String name = "Test File " + System.nanoTime() + ".txt";
-        FileEntry entry = communityService.upload(new ByteArrayInputStream(content.getBytes(Charset.forName("UTF-8"))), name, content.length(),null);
+        FileEntry entry = fileService.upload(new ByteArrayInputStream(content.getBytes(Charset.forName("UTF-8"))), name, content.length(),null);
       
         out.println("File created: id ["+entry.getFileId()+"] title [" + entry.getTitle() + "]");
       } catch (Throwable e) {

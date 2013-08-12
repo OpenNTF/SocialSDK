@@ -77,6 +77,11 @@ public class LibraryRequest {
     public static final String PARAM_CLIENT_PROPERTIES = "props";
 
     /**
+     * List of client runtimes
+     */
+    public static final String PARAM_CLIENT_RUNTIMES = "runtimes";
+    
+    /**
      * Underlying library to be used, default is 'dojo'
      */
     public static final String PARAM_JSLIB = "lib";
@@ -422,6 +427,11 @@ public class LibraryRequest {
                 } catch (IOException ex) {
                     Platform.getInstance().log(ex);
                 }
+            }
+            
+            String runtimesStr = httpRequest.getParameter(PARAM_CLIENT_RUNTIMES);
+            if(!StringUtil.isEmpty(runtimesStr)){
+                setRuntimes(runtimesStr);
             }
         }
 

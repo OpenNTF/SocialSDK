@@ -31,7 +31,7 @@ import com.ibm.sbt.playground.vfs.VFSFile;
 public class CategoryNode extends Node {
 	
 	public static final String GLOBAL_PROPERTIES = "_global.properties";
-	public static final String ENDPOINT_PROPERTY_KEY = "endpoints";
+	public static final String RUNTIME_PROPERTY_KEY = "runtimes";
 	public static final String JS_LIB_ID_PROPERTY_KEY = "jslibs";
 
 	private List<Node> children = new ArrayList<Node>();

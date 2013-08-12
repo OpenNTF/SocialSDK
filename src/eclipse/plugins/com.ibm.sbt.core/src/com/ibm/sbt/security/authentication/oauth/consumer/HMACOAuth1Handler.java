@@ -29,6 +29,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import com.ibm.commons.runtime.Context;
+import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.StreamUtil;
 import com.ibm.sbt.core.configuration.Configuration;
 import com.ibm.sbt.security.authentication.oauth.OAuthException;
@@ -130,7 +131,7 @@ public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 			InputStream content = httpResponse.getEntity().getContent();
 			BufferedReader reader = new BufferedReader(new InputStreamReader(content));
 			try {
-				responseBody = reader.readLine();
+				responseBody = StreamUtil.readString(reader);
 			} finally {
 				StreamUtil.close(reader);
 			}

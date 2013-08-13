@@ -17,9 +17,9 @@
 /**
  * 
  */
-define([ "../../../text!sbt/controls/grid/bootstrap/templates/GridPager.html", 
-        "../../../text!sbt/controls/grid/bootstrap/templates/GridSorter.html",
-        "../../../text!sbt/controls/grid/bootstrap/templates/SortAnchor.html" ], 
+define([ "../../../text!./templates/GridPager.html", 
+        "../../../text!./templates/GridSorter.html",
+        "../../../text!./templates/SortAnchor.html" ], 
         function(GridPager, GridSorter, SortAnchor) {
 
     /**

@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-define(["sbt/declare", "sbt/connections/controls/WidgetWrapper", "sbt/text!sbt/connections/controls/sharebox/templates/InputFormContent.html"], function(declare, WidgetWrapper, defaultTemplate) {
+define(["sbt/declare", "sbt/connections/controls/WidgetWrapper", "sbt/text!./templates/InputFormContent.html"], function(declare, WidgetWrapper, defaultTemplate) {
 
     /**
      * @class sbt.controls.sharebox.InputFormWrapper

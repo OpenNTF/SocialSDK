@@ -13,7 +13,7 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-define(["../../../declare", "../../../connections/controls/WidgetWrapper", "../../../text!sbt/connections/controls/templates/FileGridWrapperContent.html"], function(declare, WidgetWrapper, defaultTemplate) {
+define(["../../../declare", "../../../connections/controls/WidgetWrapper", "../../../text!../templates/FileGridWrapperContent.html"], function(declare, WidgetWrapper, defaultTemplate) {
 
     /**
      * The wrapper for the ActivityStream. 

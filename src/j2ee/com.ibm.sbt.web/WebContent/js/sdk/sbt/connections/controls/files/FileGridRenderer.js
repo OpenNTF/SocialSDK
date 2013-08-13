@@ -21,11 +21,11 @@ define(["../../../declare",
         "../../../stringUtil", 
         "../../../i18n",
         "../ConnectionsGridRenderer",
-        "../../../i18n!sbt/connections/controls/files/nls/FileGridRenderer",
-        "../../../text!sbt/connections/controls/files/templates/FileRow.html",
-        "../../../text!sbt/connections/controls/files/templates/RecycledFileRow.html",
-        "../../../text!sbt/connections/controls/files/templates/FolderRow.html", 
-        "../../../text!sbt/connections/controls/files/templates/CommentRow.html"], 
+        "../../../i18n!./nls/FileGridRenderer",
+        "../../../text!./templates/FileRow.html",
+        "../../../text!./templates/RecycledFileRow.html",
+        "../../../text!./templates/FolderRow.html", 
+        "../../../text!./templates/CommentRow.html"], 
         function(declare, stringUtil, i18n, ConnectionsGridRenderer, nls, fileTemplate, recycledFileTemplate, folderTemplate, commentTemplate) {
     
     /**

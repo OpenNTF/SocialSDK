@@ -17,7 +17,7 @@
  * Social Business Toolkit SDK.
  * Definition of an authentication mechanism.
  */
-define(["../declare", "../lang", "../util"],function(declare, lang, util) {
+define(["../declare", "../lang", "../util", "../i18n!sbt/nls/loginForm"],function(declare, lang, util, loginForm) {
 /**
  * Proxy basic authentication.
  * 
@@ -64,7 +64,7 @@ return declare(null, {
 	},	
 	
 	_authDialog: function(options, dialogLoginPage, sbtConfig) {
-		require(["sbt/_bridge/ui/BasicAuth_Dialog", "sbt/i18n!sbt/nls/loginForm", "sbt/dom"], function(dialog, loginForm, dom) {
+		require(["sbt/_bridge/ui/BasicAuth_Dialog", "sbt/dom"], function(dialog, dom) {
 		    if(options.cancel){
 	            sbtConfig.cancel = options.cancel;
 	        }
@@ -80,44 +80,42 @@ return declare(null, {
 	},
 	
 	_authPopup: function(options, loginPage, sbtConfig, sbtUrl) {
-	    require(["sbt/i18n!sbt/nls/loginForm"], function(loginForm) {
-            var proxy = options.proxy.proxyUrl;
-            var actionURL = proxy.substring(0,proxy.lastIndexOf("/"))+"/basicAuth/"+options.proxyPath+"/JSApp";
-            var urlParamsMap = {
-                actionURL: actionURL,
-                redirectURL: 'empty',
-                loginUi: 'popup',
-                showWrongCredsMessage: 'false'
-            };
-            var urlParams = util.createQuery(urlParamsMap, "&");
-            var url = sbtUrl+loginPage + '?' + urlParams;
-                                             
-            var windowParamsMap = {
-                width: window.screen.availWidth / 2,
-                height: window.screen.availHeight / 2,
-                left: window.screen.availWidth / 4,
-                top: window.screen.availHeight / 4,
-                menubar: 0,
-                toolbar: 0,
-                status: 0,
-                location: 0,
-                scrollbars: 1,
-                resizable: 1
-            };
-            var windowParams = util.createQuery(windowParamsMap, ",");
-            var loginWindow = window.open(url,'Authentication', windowParams);
-            if(options.callback){
-                sbtConfig.callback = options.callback;
-                loginWindow.callback = options.callback;
-            }
-            if(options.cancel){
-                sbtConfig.cancel = options.cancel;
-                loginWindow.cancel = options.cancel;
-            }
-            loginWindow.globalLoginFormStrings = loginForm;
-            loginWindow.globalEndpointAlias = options.name;
-            loginWindow.focus();
-        });
+        var proxy = options.proxy.proxyUrl;
+        var actionURL = proxy.substring(0,proxy.lastIndexOf("/"))+"/basicAuth/"+options.proxyPath+"/JSApp";
+        var urlParamsMap = {
+            actionURL: actionURL,
+            redirectURL: 'empty',
+            loginUi: 'popup',
+            showWrongCredsMessage: 'false'
+        };
+        var urlParams = util.createQuery(urlParamsMap, "&");
+        var url = sbtUrl+loginPage + '?' + urlParams;
+                                         
+        var windowParamsMap = {
+            width: window.screen.availWidth / 2,
+            height: window.screen.availHeight / 2,
+            left: window.screen.availWidth / 4,
+            top: window.screen.availHeight / 4,
+            menubar: 0,
+            toolbar: 0,
+            status: 0,
+            location: 0,
+            scrollbars: 1,
+            resizable: 1
+        };
+        var windowParams = util.createQuery(windowParamsMap, ",");
+        var loginWindow = window.open(url,'Authentication', windowParams);
+        if(options.callback){
+            sbtConfig.callback = options.callback;
+            loginWindow.callback = options.callback;
+        }
+        if(options.cancel){
+            sbtConfig.cancel = options.cancel;
+            loginWindow.cancel = options.cancel;
+        }
+        loginWindow.globalLoginFormStrings = loginForm;
+        loginWindow.globalEndpointAlias = options.name;
+        loginWindow.focus();
         
         return true;
 	},
@@ -129,7 +127,12 @@ return declare(null, {
             actionURL: actionURL,
             redirectURL: document.URL,
             loginUi: 'mainWindow',
-            showWrongCredsMessage: 'false'
+            showWrongCredsMessage: 'false',
+		      	username: loginForm.username,
+		    	password: loginForm.password,
+		    	login_ok: loginForm.login_ok,
+		    	login_cancel: loginForm.login_cancel,
+		    	wrong_creds_message: loginForm.wrong_creds_message
         };
 		
         var urlParams = util.createQuery(urlParamsMap, "&");

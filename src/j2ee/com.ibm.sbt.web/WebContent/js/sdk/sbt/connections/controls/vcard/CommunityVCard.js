@@ -22,7 +22,7 @@ define(["../../../declare",
         "../../../widget/_TemplatedWidget",
         "../../../lang",
         "../../../connections/controls/vcard/SemanticTagService",
-        "../../../text!sbt/connections/controls/vcard/templates/CommunityVCard.html"], 
+        "../../../text!./templates/CommunityVCard.html"], 
         function(declare, dom, _TemplatedWidget, lang, SemanticTagService, template) {
 
     /**

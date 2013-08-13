@@ -33,7 +33,7 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../connectio
         /**
          * The InputForm will be held here.
          * 
-         * @property configUtil 
+         * @property inputForm 
          * @type Object
          * @default null
          */

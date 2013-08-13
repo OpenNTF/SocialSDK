@@ -5,10 +5,7 @@
 			<xe:basicContainerNode transparent="true"
 				loaded="${javascript:optionsBean.javaScriptSnippetsEnabled}">
 				<xe:pageTreeNode page="ManageJavaScriptSnippetsByCategory"
-					label="JavaScript Snippets By Category" selection="/Manage/JavaScriptSnippetsByCategory">
-				</xe:pageTreeNode>
-				<xe:pageTreeNode page="ManageJavaScriptSnippetsByAuthor"
-					label="JavaScript Snippets By Author" selection="/Manage/JavaScriptSnippetsByAuthor">
+					label="JavaScript Snippets" selection="/Manage/JavaScriptSnippets">
 				</xe:pageTreeNode>
 				<xe:pageTreeNode page="ManageImportJavaScriptSnippets" label="Import JavaScript Snippets"
 					selection="/Manage/ImportJavaScriptSnippets">
@@ -18,10 +15,7 @@
 				loaded="${javascript:optionsBean.javaSnippetsEnabled}">
 				<xe:separatorTreeNode></xe:separatorTreeNode>
 				<xe:pageTreeNode page="ManageJavaSnippetsByCategory"
-					label="Java Snippets By Category" selection="/Manage/JavaSnippetsByCategory">
-				</xe:pageTreeNode>
-				<xe:pageTreeNode page="ManageJavaSnippetsByAuthor"
-					label="Java Snippets By Author" selection="/Manage/JavaSnippetsByAuthor">
+					label="Java Snippets" selection="/Manage/JavaSnippets">
 				</xe:pageTreeNode>
 				<xe:pageTreeNode page="ManageImportJavaSnippets" label="Import Java Snippets"
 					selection="/Manage/ImportJavaSnippets">
@@ -31,10 +25,7 @@
 				loaded="${javascript:optionsBean.gadgetSnippetsEnabled}">
 				<xe:separatorTreeNode></xe:separatorTreeNode>
 				<xe:pageTreeNode page="ManageGadgetSnippetsByCategory"
-					label="OpenSocial Gadgets By Category" selection="/Manage/GadgetSnippetsByCategory">
-				</xe:pageTreeNode>
-				<xe:pageTreeNode page="ManageGadgetSnippetsByAuthor"
-					label="OpenSocial Gadgets By Author" selection="/Manage/GadgetSnippetsByAuthor">
+					label="OpenSocial Gadgets" selection="/Manage/GadgetSnippets">
 				</xe:pageTreeNode>
 				<xe:pageTreeNode page="ManageImportGadgetSnippets" label="Import OpenSocial Gadgets"
 					selection="/Manage/ImportGadgetSnippets">
@@ -44,10 +35,7 @@
 				loaded="${javascript:optionsBean.xpagesSnippetsEnabled}">
 				<xe:separatorTreeNode></xe:separatorTreeNode>
 				<xe:pageTreeNode page="ManageXPagesSnippetsByCategory"
-					label="XPages Snippets By Category" selection="/Manage/XPagesSnippetsByCategory">
-				</xe:pageTreeNode>
-				<xe:pageTreeNode page="ManageXPagesSnippetsByAuthor"
-					label="XPages Snippets By Author" selection="/Manage/XPagesSnippetsByAuthor">
+					label="XPages Snippets" selection="/Manage/XPagesSnippets">
 				</xe:pageTreeNode>
 				<xe:pageTreeNode page="ManageImportXPagesSnippets" label="Import XPages Snippets"
 					selection="/Manage/ImportXPagesSnippets">
@@ -56,11 +44,8 @@
 			<xe:basicContainerNode transparent="true"
 				loaded="${javascript:optionsBean.explorerEnabled}">
 				<xe:separatorTreeNode></xe:separatorTreeNode>
-				<xe:pageTreeNode page="ManageAPIsByCategory" label="APIs By Category"
-					selection="/Manage/APIsByCategory">
-				</xe:pageTreeNode>
-				<xe:pageTreeNode page="ManageAPIsByAuthor" label="APIs By Author"
-					selection="/Manage/APIsByAuthor">
+				<xe:pageTreeNode page="ManageAPIsByCategory" label="APIs"
+					selection="/Manage/ManageAPIs">
 				</xe:pageTreeNode>
 				<xe:pageTreeNode page="ApiDocumentation" label="Edit API Documentation">
 				</xe:pageTreeNode>

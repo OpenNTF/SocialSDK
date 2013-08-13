@@ -71,7 +71,7 @@ public class APIImporter extends AssetImporter {
 		Document doc = getDatabase().createDocument();
 		try {
 			setItemValue(doc,"Form", FORM);
-			setItemValue(doc,"Author", doc.getParentDatabase().getParent().getUserName()); // Should we make this private (reader field)?
+			setItemValue(doc,"Author", doc.getParentDatabase().getParent().getEffectiveUserName()); // Should we make this private (reader field)?
 			setItemValue(doc,"Id", id);
 			setItemValue(doc,"Category", category);
 			setItemValue(doc,"Name", name);
@@ -109,7 +109,6 @@ public class APIImporter extends AssetImporter {
 			return 0;
 		}
 		for(int i=0; i<list.size(); i++) {
-			System.out.println("Importing #"+i+":"+list.get(i).toString());
 			if(action!=null&&action.isCancelled()) {
 				return 0;
 			}

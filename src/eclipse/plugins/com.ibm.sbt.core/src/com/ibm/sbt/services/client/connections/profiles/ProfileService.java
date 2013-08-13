@@ -106,8 +106,6 @@ public class ProfileService extends BaseService {
 	 * @return Profile
 	 * @throws ProfileServiceException
 	 */
-
-
 	public Profile newProfile(String id) throws ProfileServiceException {
 		Profile profile = new Profile(this, id);
 		return profile;

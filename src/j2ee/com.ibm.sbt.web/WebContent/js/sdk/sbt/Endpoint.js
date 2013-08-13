@@ -218,11 +218,14 @@ var Endpoint = declare(null, {
 	/*
 	 * Sends a request using XMLHttpRequest with the given URL and options.
 	 * 
-	 * @method xhr @param {String} [method] The HTTP method to use to make the
-	 * request. Must be uppercase. Default is 'GET'. @param {Object} [args]
-	 * @param {String} [args.url] @param {Function} [args.handle] @param
-	 * {Function} [args.load] @param {Function} [args.error] @param {Boolean}
-	 * [hasBody]
+	 * @method xhr 
+	 * @param {String} [method] The HTTP method to use to make the request. Must be uppercase. Default is 'GET'. 
+	 * @param {Object} [args]
+	 * 		@param {String} [args.url] 
+	 * 		@param {Function} [args.handle] 
+	 * 		@param {Function} [args.load] 
+	 *  	@param {Function} [args.error] 
+	 *  	@param {Boolean} [hasBody]
 	 */
 	xhr: function(method,args,hasBody) {
 		var self = this;

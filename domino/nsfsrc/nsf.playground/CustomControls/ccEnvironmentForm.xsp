@@ -84,6 +84,12 @@ dataAccess.copyEnvironment(document1,v);
 			loaded="${javascript:!compositeData.editbean}">
 			<xp:inputRichText id="inputRichText1" value="#{document1.Description}"></xp:inputRichText>
 		</xe:formRow>
+		<xe:formRow id="formRow2" label="Runtime Platforms:"
+			loaded="${javascript:!compositeData.editbean}">
+			<xp:inputText id="inputText1"
+				disableClientSideValidation="true" value="#{document1.Runtimes}" size="80">
+			</xp:inputText>
+		</xe:formRow>
 
 		<xe:formRow labelPosition="none">
 			<xe:djTabContainer id="djTabContainer1"

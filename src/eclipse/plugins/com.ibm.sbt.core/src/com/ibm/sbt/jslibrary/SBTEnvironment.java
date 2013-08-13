@@ -142,6 +142,12 @@ public class SBTEnvironment {
 		this.runtimes = runtimes;
 	}
 	
+	public SBTEnvironment(String name, Endpoint[] endpoints, Property[] properties) {
+        this.name = name;
+        this.endpoints = endpoints;
+        this.properties = properties;
+    }
+	
 	public String getName() {
 		return name;
 	}

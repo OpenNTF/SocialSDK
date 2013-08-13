@@ -41,10 +41,10 @@ define([ "../../declare", "../../data/AtomReadStore", "../../widget/_TemplatedWi
                 self.data = {
                     items : items,
                     start : options.start,
-                    end : options.start + results.length,
+                    end : options.start + items.length,
                     count : items.length,
                     totalCount : store.totalResults,
-                    response : store.results.response
+                    response : store.response
                 };
                 try {
                     self.renderer.render(self, self.gridNode, items, self.data);

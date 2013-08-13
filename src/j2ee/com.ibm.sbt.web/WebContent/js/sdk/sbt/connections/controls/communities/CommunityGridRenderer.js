@@ -178,30 +178,10 @@ define(["../../../declare", "../../../stringUtil", "../../../i18n", "../../../la
                  } 
                  return tagsStr;
              }
-         },
+         }
          
          // Internals
          
-         _substitute : function(template, item) {
-             var self = this;
-             return stringUtil.transform(template, item, function(value, key) {
-                 if (typeof value == "undefined") {
-                     // check the renderer for the property
-                     value = this._getObject(key, false, self);
-                 }
-
-                 if (typeof value == "undefined") {
-                     value = "ERROR:" + key;
-                 }
-
-                 if (value == null) {
-                     return "";
-                 }
-
-                 return value;
-             }, this);
-         }
-
     });
     
     return CommunityGridRenderer;

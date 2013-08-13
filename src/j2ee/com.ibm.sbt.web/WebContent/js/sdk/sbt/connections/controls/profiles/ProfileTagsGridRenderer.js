@@ -99,25 +99,15 @@ define(["../../../declare", "../../../stringUtil", "../../../xpath", "../../../x
            */
           tagHeader: function(grid, renderer, items, data) {
         	  if (grid.sourceEmail || grid.sourceKey) {
-        		  return nls.taggedBy;
+        		  var params = { 
+        			  tagSource : grid.sourceName || grid.sourceEmail || grid.sourceKey,
+        			  tagTarget : grid.targetName || grid.targetEmail || grid.targetKey
+        		  };
+        		  return stringUtil.replace(nls.taggedBy, params);
         	  } else {
         		  var str = (this._numberOfContributors == 1) ? nls.taggedByPerson : nls.taggedByPeople;
         		  return stringUtil.replace(str, { numberOfContributors : this._numberOfContributors });
         	  }
-          },
-          
-          /**
-           * Return the tag source.
-           */
-          tagSource: function(grid, renderer, items, data) {
-        	  return grid.sourceEmail || grid.sourceKey;
-          },
-          
-          /**
-           * Return the tag target.
-           */
-          tagTarget: function(grid, renderer, items, data) {
-        	  return grid.targetEmail || grid.targetKey;
           },
           
           //Internals

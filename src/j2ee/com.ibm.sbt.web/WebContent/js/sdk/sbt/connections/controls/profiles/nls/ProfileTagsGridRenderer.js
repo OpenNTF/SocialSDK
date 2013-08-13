@@ -20,7 +20,7 @@ define({
 	  taggedByPerson : "Tagged by 1 person:",
 	  taggedByPeople : "Tagged by {numberOfContributors} people:",
 	  taggedByMe     : "My tags for this profile:",
-	  taggedBy       : "{tagSource} tags for {tagTarget}:"
+	  taggedBy       : "Tagged by {tagSource}:"
   }
 });
 

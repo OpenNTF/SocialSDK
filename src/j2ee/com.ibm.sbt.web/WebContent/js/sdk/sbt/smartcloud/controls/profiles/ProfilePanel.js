@@ -18,13 +18,12 @@
  * @module sbt.connections.controls.profiles.ProfilePanel
  */
 define(["../../../declare", "../../../lang", "../../../config", 
-        "../../../connections/ProfileService",
+        "../../../smartcloud/ProfileService",
         "../../../controls/panel/_ProfilePanel",
-        "../../../text!sbt/connections/controls/profiles/templates/ProfilePanel.html"], 
+        "../../../text!sbt/smartcloud/controls/profiles/templates/ProfilePanel.html"], 
         function(declare, lang, config, ProfileService, _ProfilePanel, PanelTmpl) {
 
-    var basicPeopleMe = "/connections/opensocial/basic/rest/people/@me/";
-    var oauthPeopleMe = "/connections/opensocial/oauth/rest/people/@me/";
+    var getUserIdentity = "/manage/oauth/getUserIdentity";
 	
     /**
      * @module sbt.connections.controls.profiles.ProfilePanel
@@ -38,16 +37,13 @@ define(["../../../declare", "../../../lang", "../../../config",
         },
         
         getMyProfile: function() {
-            var endpoint = this._getEndpoint();
-            var path = basicPeopleMe;
-            if (endpoint.authType == 'oauth') {
-                path = oauthPeopleMe;
-            }
+            var path = getUserIdentity;
             
             var self = this;
+            var endpoint = this._getEndpoint();
             endpoint.request(path, { handleAs : "json", preventCache : true }).then(
                 function(response) {
-                    var userid = response.entry.id.replace('urn:lsid:lconn.ibm.com:profiles.person:', '');
+                	var userid = response.subscriberid;
                     self.getProfile(userid);
                 },
                 function(error) {
@@ -58,7 +54,7 @@ define(["../../../declare", "../../../lang", "../../../config",
         
         getProfile: function(id) {
         	var self = this;
-            var promise = this._getProfileService().getProfile(id);
+            var promise = this._getProfileService().getProfileByGUID(id);
             promise.then(    
                 function(profile) {
                 	self.profile = profile;
@@ -85,9 +81,9 @@ define(["../../../declare", "../../../lang", "../../../config",
         },
         
         _getEndpointName: function() {
-        	return this.endpoint || "connections";
-        }        
-                
+        	return this.endpoint || "smartcloud";
+        }
+        
     });
     
     return ProfilePanel;

@@ -16,10 +16,6 @@
 
 package nsf.playground.servlets;
 
-import java.io.IOException;
-
-import javax.faces.context.FacesContext;
-
 import nsf.playground.beans.DataAccessBean;
 import nsf.playground.environments.PlaygroundEnvironment;
 

@@ -48,13 +48,16 @@ public class GadgetSnippetImporter extends AssetImporter {
 			setItemValue(doc,"Id", node.getUnid());
 			setItemValue(doc,"Category", node.getCategory());
 			setItemValue(doc,"Name", node.getName());
+			setItemValue(doc,"FilterRuntimes", snippet.getProperty("runtimes"));
 			setItemValue(doc,"Description", snippet.getProperty("description"));
 			setItemValue(doc,"Tags", snippet.getProperty("tags"));
 			setItemValue(doc,"ImportSource", source.getName());
 			setItemValueRichText(doc,"XPages", snippet.getXsp());
+			snippet.getProperties().remove("endpoints");
+			snippet.getProperties().remove("description");
 			setItemValueRichText(doc,"Properties", snippet.getPropertiesAsString());
 			setItemValueRichText(doc,"Documentation", snippet.getDocHtml());
-			
+
 			doc.save();
 		} finally {
 			doc.recycle();

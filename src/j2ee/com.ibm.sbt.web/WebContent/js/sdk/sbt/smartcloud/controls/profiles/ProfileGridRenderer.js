@@ -18,8 +18,8 @@
  * @module sbt.smartcloud.controls.profiles.ProfileGridRenderer
  */
 define(["../../../declare", "../../../lang", "../../../stringUtil", "../BaseGridRenderer",
-        "../../../i18n!sbt/smartcloud/controls/profiles/nls/ProfileGridRenderer",
-        "../../../text!sbt/smartcloud/controls/profiles/templates/ProfileRow.html"], 
+        "../../../i18n!./nls/ProfileGridRenderer",
+        "../../../text!./templates/ProfileRow.html"], 
         function(declare, lang, stringUtil, BaseGridRenderer, nls, profileTemplate) {
 		
     /**

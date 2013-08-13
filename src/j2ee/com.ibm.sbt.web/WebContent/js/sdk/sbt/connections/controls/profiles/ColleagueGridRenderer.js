@@ -19,10 +19,10 @@
  */
 define(["../../../declare", "../../../stringUtil",
         "../ConnectionsGridRenderer",
-        "../../../i18n!sbt/connections/controls/profiles/nls/ColleagueGridRenderer",
-        "../../../text!sbt/connections/controls/profiles/templates/ColleagueItem.html",
-        "../../../text!sbt/connections/controls/profiles/templates/ViewAll.html",
-        "../../../text!sbt/connections/controls/profiles/templates/ColleagueItemFull.html"], 
+        "../../../i18n!./nls/ColleagueGridRenderer",
+        "../../../text!./templates/ColleagueItem.html",
+        "../../../text!./templates/ViewAll.html",
+        "../../../text!./templates/ColleagueItemFull.html"], 
         function(declare, stringUtil, ConnectionsGridRenderer, nls, colleagueItemTemplate, viewAllTemplate, colleagueItemFullTemplate) {
 		
     /**

@@ -92,14 +92,16 @@ window._sbt_bridge_compat = true;
 		}
 		
 		for ( var args = [], depName, i = 0; i < deps.length; i++) {
-			depName = resolvePath(deps[i]);
+			depName = deps[i];
             var arg;
 			// check has an plugin been specified
 			var exclamationIndex = depName.indexOf("!");
 			if (exclamationIndex > -1) {
 			    var pluginName = depName.substring(0, exclamationIndex);
+			    pluginName = resolvePath(pluginName);
 				if (pluginName == "sbt.i18n") {
                     var bundleName = depName.substring(exclamationIndex+1);
+                    bundleName = resolvePath(bundleName);
                     var mod = dojo.require(bundleName);
                     arg = mod.root||mod;
                     var bundles = findBundles(mod.root?mod:null,dojo.locale,bundleName);
@@ -107,25 +109,28 @@ window._sbt_bridge_compat = true;
                         dojo.mixin(arg,dojo.require(bundles[mi]));
                     }
 				} else if (pluginName == "sbt.text") {
-					exclamationIndex = deps[i].indexOf("!");
-                    var fileName = deps[i].substring(exclamationIndex+1,deps[i].length);
-                    if (fileName.charAt(0) == '.') {
+					exclamationIndex = depName.indexOf("!");
+                    var filePath = depName.substring(exclamationIndex+1,depName.length);
+                    var fileName = filePath.substring(filePath.lastIndexOf("/")+1);
+                    filePath = resolvePath(filePath);
+                    if (filePath.charAt(0) == '.') {
                         var loc = dojo.doc.location;
                         var index = loc.pathname.indexOf('/', 1);
                         var url = loc.protocol + "//" + loc.host + loc.pathname.substring(0, index);
-                        url += fileName.substring(1);
+                        url += filePath.substring(1);
                         arg = dojo.cache(new dojo._Url(url));
                     } else {
-                        var moduleIndex = fileName.indexOf("/");
-                        var extnIndex = fileName.lastIndexOf(".");
-                        var moduleId = fileName.substring(0, moduleIndex);
-                        var url = fileName.substring(moduleIndex+1);
+                        var extnIndex = filePath.lastIndexOf(".");
+                        var moduleIndex = filePath.lastIndexOf(fileName) - 1;
+                        var moduleId = filePath.substring(0, moduleIndex);
+                        var url = filePath.substring(moduleIndex+1);
                         arg = dojo.cache(moduleId, url);
                     } 
                 } else {
 					arg = null;
 				}
 			} else {
+			    depName = resolvePath(depName);
 				switch (depName) {
 				case "require":
 					arg = function(relativeId) {

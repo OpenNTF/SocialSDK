@@ -1,11 +1,11 @@
 define(["../../../declare",
         "../BaseGridRenderer",
-        "../../../text!sbt/smartcloud/controls/profiles/templates/ColleagueItem.html",
+        "../../../text!./templates/ColleagueItem.html",
         "../../../stringUtil",
         "../../../lang",
         "./nls/ColleagueGridRenderer",
-        "../../../text!sbt/smartcloud/controls/profiles/templates/ColleagueItemFull.html",
-        "../../../text!sbt/smartcloud/controls/profiles/templates/ViewAll.html"], 
+        "../../../text!./templates/ColleagueItemFull.html",
+        "../../../text!./templates/ViewAll.html"], 
 		
 function(declare, BaseGridRenderer, ColleagueItemTemplate, stringUtil, lang, nls, colleagueItemFullTemplate, viewAllTemplate){
 	

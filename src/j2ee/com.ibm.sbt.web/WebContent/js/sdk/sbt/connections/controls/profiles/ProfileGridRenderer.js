@@ -19,10 +19,10 @@
  */
 define(["../../../declare",
         "../ConnectionsGridRenderer",
-        "../../../i18n!sbt/connections/controls/profiles/nls/ProfileGridRenderer",
-        "../../../text!sbt/connections/controls/profiles/templates/ProfileRow.html",
-        "../../../text!sbt/connections/controls/profiles/templates/SharedConnectionsRow.html",
-        "../../../text!sbt/connections/controls/profiles/templates/StatusUpdateRow.html"], 
+        "../../../i18n!./nls/ProfileGridRenderer",
+        "../../../text!./templates/ProfileRow.html",
+        "../../../text!./templates/SharedConnectionsRow.html",
+        "../../../text!./templates/StatusUpdateRow.html"], 
         function(declare, ConnectionsGridRenderer, nls, profileTemplate, sharedConnTemplate, statusUpdateTemplate) {
 		
     /**

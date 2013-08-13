@@ -113,6 +113,30 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         },
         
         /**
+         * XPath expressions to be used when reading a Profile Tag feed
+         */
+        ProfileTagsXPath : {
+        	// used by getEntitiesDataArray
+        	entries : "/app:categories/a:category",
+        	// used to access data from the feed
+        	targetEmail : "app:categories/snx:targetEmail",
+        	numberOfContributors : "app:categories/@snx:numberOfContributors",
+            // used by getEntityData
+            entry : "/app:categories/a:category",
+            // used by getEntityId
+            uid : "@term",
+            // used by getters
+            id : "@term",
+            term : "@term",
+            frequency : "@snx:frequency",
+            intensity : "@snx:intensityBin", 
+            visibility : "@snx:visibilityBin",
+            contributorName : "a:name",
+            contributorUserid : "a:userid",
+            contributorEmail : "a:email"
+        },
+        
+        /**
          * XML elements to be used when creating a Profile Entry
          *                    
          **/        
@@ -143,6 +167,11 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         AtomConnectionsDo : "/profiles{authType}/atom/connections.do",
         
         /**
+         * Retrieve the tags assigned to a profile from the Profiles tag collection.
+         */
+        AtomTagsDo : "/profiles{authType}/atom/profileTags.do",
+        
+        /**
          * Admin API - create a new profile.
          */
         AdminAtomProfileDo : "/profiles/admin/atom/profiles.do",
@@ -150,7 +179,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         /**
          * Admin API - delete a  profile.
          */
-        AdminAtomProfileEntryDo : "/profiles/admin/atom/profileEntry.do",
-
+        AdminAtomProfileEntryDo : "/profiles/admin/atom/profileEntry.do"
+        
     });
 });

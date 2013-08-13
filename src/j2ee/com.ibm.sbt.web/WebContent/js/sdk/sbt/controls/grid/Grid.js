@@ -68,8 +68,14 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
          */
         selectedRows: null,
         
+        /*
+         * TODO remove this?
+         */
         _strings: {},
 
+        /*
+         * Arguments for the associated data store
+         */
         _storeArgs: null,
 
         /*
@@ -155,9 +161,10 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
            }
         },
         
-        /**Refresh the grid
+        /**
+         * Refresh the grid
          * @method - refresh
-         * */
+         */
         refresh: function() {
            if (this.data) {
               if (this.data.fromUrl) {
@@ -168,9 +175,10 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
            }
         },
         
-        /**Update the grid
+        /**
+         * Update the grid
          * @method - update
-         * */
+         */
         update: function(data) {
            if (arguments.length > 0) {
               this.data = data;
@@ -369,30 +377,20 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
         	}
         },
         
-        // Internals
+        /**
+         * Return the auth type to be  used
+         * @returns {String}
+         */
+        getAuthType: function() {
+        	return "";
+        },
         
-        _sort: function(index, defaultOrder, el, data, ev) {
-        	this._stopEvent(ev);
-            var options = {
-                start: data.start, count: this.pageSize, 
-                sort: [{ attribute: index }]
-            };
-            
-            if(this.filterTag != "" && this.filterTag != null){
-           	 options.tag = this.filterTag;
-            }
-            
-            if(this._activeSortAnchor === this._sortInfo[index]) {
-                this._activeSortIsDesc = !this._activeSortIsDesc; // Flip sort order
-            }
-            else { // Change active sort to anchor clicked and its default order
-                this._activeSortAnchor = this._sortInfo[index];
-                this._activeSortIsDesc = defaultOrder;
-            }
-            options.sort[0].descending = this._activeSortIsDesc;
-
-            this._doQuery(this.store, options);
-
+        /**
+         * Return the url parameters to be used
+         * @returns {Object}
+         */
+        getUrlParams: function() {
+        	return { authType : this.getAuthType() };
         },
         
         /**
@@ -434,7 +432,34 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
         // Internals
         
         /*
-         * 
+         * Sort the contents
+         */
+        _sort: function(index, defaultOrder, el, data, ev) {
+        	this._stopEvent(ev);
+            var options = {
+                start: data.start, count: this.pageSize, 
+                sort: [{ attribute: index }]
+            };
+            
+            if(this.filterTag != "" && this.filterTag != null){
+           	 options.tag = this.filterTag;
+            }
+            
+            if(this._activeSortAnchor === this._sortInfo[index]) {
+                this._activeSortIsDesc = !this._activeSortIsDesc; // Flip sort order
+            }
+            else { // Change active sort to anchor clicked and its default order
+                this._activeSortAnchor = this._sortInfo[index];
+                this._activeSortIsDesc = defaultOrder;
+            }
+            options.sort[0].descending = this._activeSortIsDesc;
+
+            this._doQuery(this.store, options);
+
+        },
+        
+        /*
+         * Filter the contents
          */
         _filter: function(args, data){
         	var options = {
@@ -453,12 +478,11 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
         },
         
         /*
-         * 
+         * Display the specified error message 
          */
         _updateWithError: function(e) {
         	console.error(e.message);
-        	e = "There was an error communicating with the server";
-            this.renderer.renderError(this, this.gridNode, e);
+            this.renderer.renderError(this, this.gridNode, e.message);
         }
 
     });

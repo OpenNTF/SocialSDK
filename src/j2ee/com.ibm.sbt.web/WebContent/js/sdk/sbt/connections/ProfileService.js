@@ -31,6 +31,7 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
     var OAuthString = "/oauth";
     var basicAuthString = "";
     var defaultAuthString = "";
+    
     /**
      * Profile class.
      * 
@@ -318,6 +319,68 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
     });
 
     /**
+     * ProfileTag class.
+     * 
+     * @class ProfileTag
+     * @namespace sbt.connections
+     */
+    var ProfileTag = declare(BaseEntity, {
+
+        /**
+         * 
+         * @constructor
+         * @param args
+         */
+        constructor : function(args) {            
+        },
+
+        /**
+         * Get term of the profile tag
+         * 
+         * @method getTerm
+         * @return {String} term of the profile tag
+         * 
+         */
+        getTerm : function() {
+            return this.getAsString("term");
+        },
+        
+        /**
+         * Get frequency of the profile tag
+         * 
+         * @method getFrequency
+         * @return {Number} frequency of the profile tag
+         * 
+         */
+        getFrequency : function() {
+            return this.getAsNumber("frequency");
+        },
+        
+        /**
+         * Get intensity of the profile tag
+         * 
+         * @method getIntensity
+         * @return {Number} intensity of the profile tag
+         * 
+         */
+        getIntensity : function() {
+            return this.getAsNumber("intensity");
+        },
+        
+        /**
+         * Get visibility of the profile tag
+         * 
+         * @method getVisibility
+         * @return {Number} visibility of the profile tag
+         * 
+         */
+        getVisibility : function() {
+            return this.getAsNumber("visibility");
+        }
+        
+    });
+    
+    /**
      * Callbacks used when reading an entry that contains a Profile.
      */
     var ProfileCallbacks = {
@@ -379,6 +442,31 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
     };
     
     /**
+     * Callbacks used when reading a feed that contains Profile Tag entries.
+     */
+    var ProfileTagFeedCallbacks = {
+        createEntities : function(service,data,response) {
+            return new XmlDataHandler({
+                data : data,
+                namespaces : consts.Namespaces,
+                xpath : consts.ProfileTagsXPath
+            });
+        },
+        createEntity : function(service,data,response) {
+            var entryHandler = new XmlDataHandler({
+                data : data,
+                namespaces : consts.Namespaces,
+                xpath : consts.ProfileTagsXPath
+            });
+            return new ProfileTag({
+                service : service,
+                id : entryHandler.getEntityId(),
+                dataHandler : entryHandler
+            });
+        }
+    };
+    
+    /**
      * ProfileService class.
      * 
      * @class ProfileService
@@ -409,6 +497,7 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
         getDefaultEndpointName: function() {
             return "connections";
         },
+        
         /**
         * Create a Profile object with the specified data.
         * 
@@ -416,7 +505,6 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
         * @param {Object} args Object containing the fields for the 
         *            new Profile 
         */
-        
         newProfile : function(args) {
             return this._toProfile(args);
         },
@@ -436,7 +524,6 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
             if (promise) {
                 return promise;
             }
-            
             return profile.load(args);
         },
         
@@ -472,9 +559,35 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
                     data : this._constructProfilePostData(profile)
                 };   
             var url = this.constructUrl(consts.AtomProfileEntry, {}, {authType : this._getProfileAuthString()});
+
             return this.updateEntity(url, options, callbacks, args);
-            
         },      
+        
+        /**
+         * Get the tags for the specified profile
+         * 
+         * @method getTags
+         * @param {Object/String} profileOrId profile object representing the profile or user/email of the profile
+         * @param {Object} args Object representing various query parameters that can be passed. The parameters must 
+         * be exactly as they are supported by IBM Connections.
+         */
+        getTags : function(profileOrId, args) {
+            // detect a bad request by validating required arguments
+            var idObject = this._toTargetObject(profileOrId);
+            var promise = this._validateTargetObject(idObject);
+            if (promise) {
+                return promise;
+            }
+            
+            var options = {
+                method : "GET",
+                handleAs : "text",
+                query : lang.mixin(idObject, args || {})
+            };
+            var url = this.constructUrl(consts.AtomTagsDo, {}, {authType : this._getProfileAuthString()});
+
+            return this.getEntities(url, options, this.getProfileTagFeedCallbacks(), args);
+        },
         
         /**
          * Get the colleagues for the specified profile
@@ -521,7 +634,14 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
         },
 
         /*
-         * 
+         * Return callbacks for a profile tag feed
+         */
+        getProfileTagFeedCallbacks : function() {
+            return ProfileTagFeedCallbacks;
+        },
+
+        /*
+         * Convert profile or key to id object
          */
         _toIdObject : function(profileOrId) {
             var idObject = {};
@@ -544,10 +664,42 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
         },
         
         /*
+         * Convert profile or key to target object
+         */
+        _toTargetObject : function(profileOrId) {
+            var targetObject = {};
+            if (lang.isString(profileOrId)) {
+                var userIdOrEmail = profileOrId;
+                if (this.isEmail(userIdOrEmail)) {
+                	targetObject.targetEmail = userIdOrEmail;
+                } else {
+                	targetObject.targetKey = userIdOrEmail;
+                }
+            } else if (profileOrId instanceof Profile) {
+                if (profileOrId.getUserid()) {
+                	targetObject.targetKey = profileOrId.getUserid();
+                }
+                else if (profileOrId.getEmail()) {
+                	targetObject.targetEmail = profileOrId.getEmail();
+                }
+            }
+            return targetObject;
+        },
+        
+        /*
          * Validate an ID object
          */
         _validateIdObject : function(idObject) {
             if (!idObject.userid && !idObject.email) {
+                return this.createBadRequestPromise("Invalid argument, userid or email must be specified.");
+            }
+        },
+        
+        /*
+         * Validate an Target object
+         */
+        _validateTargetObject : function(idObject) {
+            if (!idObject.targetKey && !idObject.targetEmail) {
                 return this.createBadRequestPromise("Invalid argument, userid or email must be specified.");
             }
         },
@@ -581,19 +733,20 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
             }
         },
         
-        /**
-         * Returns true if address is to be updated else false.
+        /*
+         * Returns true if an address field has been set.
          */
-        _AddressToBeUpdated : function(profile){
+        _isAddressSet : function(profile){
         	return (profile._fields["streetAddress"] || profile._fields["extendedAddress"] || profile._fields["locality"] || profile._fields["region"] || profile._fields["postalCode"] || profile._fields["countryName"]);
         },
-        /**
+        
+        /*
          * Constructs update profile request body.
          */
         _constructProfilePostData : function(profile) {
             var transformer = function(value,key) {
                 if (key == "address") {                	
-                	value = profile.service._AddressToBeUpdated(profile) ? stringUtil.transform(updateProfileAddressTemplate, {"streetAddress" : profile._fields["streetAddress"], 
+                	value = profile.service._isAddressSet(profile) ? stringUtil.transform(updateProfileAddressTemplate, {"streetAddress" : profile._fields["streetAddress"], 
                 	"extendedAddress" : profile._fields["extendedAddress"], "locality" : profile._fields["locality"], "region" : profile._fields["region"],
                 	"postalCode" : profile._fields["postalCode"], "countryName" : profile._fields["countryName"]}) : null;
                 } 
@@ -606,6 +759,9 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
             return stringUtil.transform(updateProfileXmlTemplate, profile, transformer, profile);
         },
         
+        /*
+         * Constructs update profile request body.
+         */
         _constructProfilePutData : function(profile) {
             var transformer = function(value,key) {
             	if(profile._fields[key]){
@@ -615,24 +771,31 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
             };
             return stringUtil.transform(createProfileTemplate, profile, transformer, profile);
         },
-        
+
+        /*
+         * Validate a Profile object
+         */
         _validateProfile : function(profile) {
             if (!profile || (!profile.getUserid() && !profile.getEmail())) {
                 return this.createBadRequestPromise("Invalid argument, profile with valid userid or email must be specified.");
             }            
         },
         
+        /*
+         * Validate a Profile id
+         */
         _validateProfileId : function(profileId) {
             if (!profileId || profileId.length == 0) {
                 return this.createBadRequestPromise("Invalid argument, expected userid or email");
             }
         },
+        
         _getProfileAuthString : function(){
-        	if (this.endpoint.authType == consts.AuthTypes.Basic){
+        	if (this.endpoint.authType == consts.AuthTypes.Basic) {
         		return basicAuthString;
-        	}else if(this.endpoint.authType == consts.AuthTypes.OAuth){
+        	} else if (this.endpoint.authType == consts.AuthTypes.OAuth) {
         		return OAuthString;
-        	}else{
+        	} else {
         		return defaultAuthString;
         	}
         }

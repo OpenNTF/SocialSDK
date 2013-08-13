@@ -37,16 +37,17 @@ define([ "../../declare", "../../data/AtomReadStore", "../../widget/_TemplatedWi
                 self.renderer.renderError(self, self.gridNode, error);
             };
             
-            var handleComplete = function(results, args) {
+            var handleComplete = function(items, args) {
                 self.data = {
-                    items : results,
+                    items : items,
                     start : options.start,
                     end : options.start + results.length,
-                    count : results.length,
-                    totalCount : store.totalResults
+                    count : items.length,
+                    totalCount : store.totalResults,
+                    response : store.results.response
                 };
                 try {
-                    self.renderer.render(self, self.gridNode, results, self.data);
+                    self.renderer.render(self, self.gridNode, items, self.data);
                     self.onUpdate(self.data);
                 } catch (error) {
                     self.renderer.renderError(self, self.gridNode, error);

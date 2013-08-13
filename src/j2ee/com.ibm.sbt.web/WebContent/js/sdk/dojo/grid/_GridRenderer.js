@@ -47,6 +47,10 @@ define([ "../../_bridge/declare" ],
             return dojo.isString(obj);
         },
         
+        _substitute: function(template, map, transform, thisObject) {
+        	return dojo.substitute(template, map, transform, thisObject);
+        },
+        
         _getObject: function(name, create, context) {
             return dojo.getObject(name, create, context);
         },

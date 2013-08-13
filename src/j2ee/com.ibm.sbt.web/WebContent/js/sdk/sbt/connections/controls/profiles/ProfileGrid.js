@@ -15,7 +15,7 @@
  */
 
 /**
- * 
+ * @module sbt.connections.controls.profiles.ProfileGrid
  */
 define([ "../../../declare", 
 		 "../../../controls/grid/Grid", 

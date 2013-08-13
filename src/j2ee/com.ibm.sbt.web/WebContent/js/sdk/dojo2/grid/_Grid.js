@@ -44,16 +44,17 @@ define([ "../../declare", "../../store/AtomStore", "dojo/_base/lang", "dojo/_bas
             var results = store.query(query, options);
             
             Deferred.when(results.total, function(totalCount) {
-                Deferred.when(results, function(results) {
+                Deferred.when(results, function(items) {
                     self.data = {
-                     items : results,
+                     items : items,
                      start : options.start,
-                     end : options.start + results.length,
-                     count : results.length,
-                     totalCount : totalCount
+                     end : options.start + items.length,
+                     count : items.length,
+                     totalCount : totalCount,
+                     response : results.response
                     };
                     try {
-                        self.renderer.render(self, self.gridNode, results, self.data);
+                        self.renderer.render(self, self.gridNode, items, self.data);
                         self.onUpdate(self.data);
                     } catch (error) {
                         self.renderer.renderError(self, self.gridNode, error);

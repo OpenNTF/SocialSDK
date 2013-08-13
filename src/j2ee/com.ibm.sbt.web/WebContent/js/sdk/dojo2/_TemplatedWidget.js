@@ -18,8 +18,8 @@
  * 
  */
 define([ "../_bridge/declare",
-         "dojo/_base/lang", "dojo/_base/connect", "dojo/touch", "dijit/_WidgetBase", "dijit/_TemplatedMixin"], 
-        function(declare, lang, connect, touch, _WidgetBase, _TemplatedMixin) {
+         "dojo/_base/lang", "dojo/string", "dojo/dom-construct", "dojo/_base/connect", "dojo/touch", "dijit/_WidgetBase", "dijit/_TemplatedMixin"], 
+        function(declare, lang, string, domConstruct, connect, touch, _WidgetBase, _TemplatedMixin) {
 
     /**
      * @module sbt.widget._TemplatedWidget
@@ -38,7 +38,67 @@ define([ "../_bridge/declare",
         },
         
         _mixin: function(dest,sources) {
-            return lang.mixin(dest,sources);
+        	return lang.mixin.apply(this, arguments);
+        },
+        
+        _destroy: function(node) {
+            domConstruct.destroy(node);
+        },
+        
+        _create: function(name, attribs, parent) {
+            return domConstruct.create(name, attribs, parent);
+        },
+        
+        _toDom: function(template, parent) {
+            return domConstruct.toDom(template, parent);
+        },
+        
+        _isString: function(obj) {
+            return lang.isString(obj);
+        },
+        
+        _substitute: function(template, map, transform, thisObject) {
+        	return string.substitute(template, map, transform, thisObject);
+        },
+        
+        _getObject: function(name, create, context) {
+            return lang.getObject(name, create, context);
+        },
+        
+        _hitch: function(scope, method) {
+            if (arguments.length > 2) {
+                return lang._hitchArgs.apply(dojo, arguments);
+            } else {
+                return lang.hitch(scope, method);
+            }
+        },
+        
+        _doAttachEvents: function(el, scope) {
+            var nodes = (el.all || el.getElementsByTagName("*"));
+            for (var i in nodes) {
+                var attachEvent = (nodes[i].getAttribute) ? nodes[i].getAttribute(this.AttachEventAttribute) : null;
+                if (attachEvent) {
+                    nodes[i].removeAttribute(this.AttachEventAttribute);
+                    var event, events = attachEvent.split(/\s*,\s*/);
+                    while((event = events.shift())) {
+                        if (event) {
+                            var func = null;
+                            if (event.indexOf(":") != -1) {
+                                var eventFunc = event.split(":");
+                                event = this._trim(eventFunc[0]);
+                                func = this._trim(eventFunc[1]);
+                            } else {
+                                event = this._trim(event);
+                            }
+                            if (!func) {
+                                func = event;
+                            }
+                            var callback = this._hitch(this, this[func], nodes[i], scope);
+                            this._connect(nodes[i], event, callback);
+                        }
+                    }
+                }
+            }
         }
     
     });

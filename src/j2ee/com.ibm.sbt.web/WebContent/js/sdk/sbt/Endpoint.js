@@ -185,31 +185,32 @@ var Endpoint = declare(null, {
         }
         
         var promise = new Promise();
-        promise.response = new Promise();
-        
-        var self = this;
-        this.transport.request(qurl, options).response.then(
-            function(response) {
-                promise.fulfilled(response.data);
-                promise.response.fulfilled(response);
-            }, function(error) {
-            	if(!error.message){
-            		error.message = self.getErrorMessage(error.cause);
-            	}
-                var authRequiredPromise = self._isAuthRequired(error, options);
-                authRequiredPromise.then(function(response){
-                	if(response){
-                		self._authenticate(url, options, promise);
-                	}else{
-                		promise.rejected(error);
-                        promise.response.rejected(error);
-                	}
-                }, function(error){
-                	promise.rejected(error);
-                    promise.response.rejected(error);
-                }); 
-            }
-        );
+        promise.response = new Promise();       
+
+		var self = this;
+		this.transport.request(qurl, options).response.then(function(response) {
+			promise.fulfilled(response.data);
+			promise.response.fulfilled(response);
+		}, function(error) {
+			if (!error.message) {
+				error.message = self.getErrorMessage(error.cause);
+			}
+			var authRequiredPromise = self._isAuthRequired(error, options);
+			authRequiredPromise.then(
+				function(response) {
+					if (response) {
+						self._authenticate(url, options, promise);
+					} else {
+						promise.rejected(error);
+						promise.response.rejected(error);
+					}
+				}, 
+				function(error) {
+					promise.rejected(error);
+					promise.response.rejected(error);
+				}
+			);
+		});
         
         return promise;
     },
@@ -217,14 +218,11 @@ var Endpoint = declare(null, {
 	/*
 	 * Sends a request using XMLHttpRequest with the given URL and options.
 	 * 
-	 * @method xhr
-	 * @param {String} [method] The HTTP method to use to make the request. Must be uppercase. Default is 'GET'.
-	 * @param {Object} [args]
-     *     @param {String} [args.url]
-     *     @param {Function} [args.handle]
-     *     @param {Function} [args.load]
-     *     @param {Function} [args.error]
-	 * @param {Boolean} [hasBody]
+	 * @method xhr @param {String} [method] The HTTP method to use to make the
+	 * request. Must be uppercase. Default is 'GET'. @param {Object} [args]
+	 * @param {String} [args.url] @param {Function} [args.handle] @param
+	 * {Function} [args.load] @param {Function} [args.error] @param {Boolean}
+	 * [hasBody]
 	 */
 	xhr: function(method,args,hasBody) {
 		var self = this;
@@ -373,18 +371,20 @@ var Endpoint = declare(null, {
 		var self = this;
 		var proxy = this.proxy.proxyUrl;
 		var actionURL = proxy.substring(0, proxy.lastIndexOf("/")) + "/authHandler/" + this.proxyPath + "/logout";
-		this.transport.xhr('POST',{
-			handleAs : "json",
-			url : actionURL,
-			load : function(response) {
-				self.isAuthenticated = false;
-				promise.fulfilled(response);
-			},
-			error : function(response) {
-				self.isAuthenticated = false;
-				promise.rejected(response);
-			}
-		}, true);
+		var	options = { 
+        	   	method : "POST", 
+        	   	handleAs : "json"
+        	};		
+		this.transport.request(actionURL, options).then(
+				function (response){
+					self.isAuthenticated = false;
+					promise.fulfilled(response);
+				}, 
+				function(error){
+					self.isAuthenticated = false;
+					promise.rejected(error);
+				}		
+			);		
 		return promise;
 	},
 	
@@ -400,17 +400,19 @@ var Endpoint = declare(null, {
 		var self = this;
 		var proxy = this.proxy.proxyUrl;
 		var actionURL = proxy.substring(0, proxy.lastIndexOf("/")) + "/authHandler/" + this.proxyPath + "/isAuth";
-		this.transport.xhr('POST',{
-			handleAs : "json",
-			url : actionURL,
-			load : function(response) {
+		var	options = { 
+        	   	method : "POST", 
+        	   	handleAs : "json"
+        	};        
+		this.transport.request(actionURL, options).then(
+			function (response){
 				self.isAuthenticated = true;
 				promise.fulfilled(response);
-			},
-			error : function(response) {
-				promise.rejected(response);
-			}
-		}, true);
+			}, 
+			function(error){
+				promise.rejected(error);
+			}		
+		);		
 		return promise;
 	},
 	
@@ -430,17 +432,19 @@ var Endpoint = declare(null, {
 		var self = this;
 		var proxy = this.proxy.proxyUrl;
 		var actionURL = proxy.substring(0, proxy.lastIndexOf("/")) + "/authHandler/" + this.proxyPath + "/isAuthValid";
-		this.transport.xhr('POST',{			
-			handleAs : "json",
-			url : actionURL,
-			load : function(response) {				
+		var	options = { 
+        	   	method : "POST", 
+        	   	handleAs : "json"
+        	};        
+		this.transport.request(actionURL, options).then(
+			function (response){
 				self.isAuthenticated = response.result;
 				promise.fulfilled(response);
-			},
-			error : function(response) {
-				promise.rejected(response);
-			}
-		}, true);
+			}, 
+			function(error){
+				promise.rejected(error);
+			}		
+		);
 		return promise;
 	},
 	
@@ -528,31 +532,40 @@ var Endpoint = declare(null, {
     },
 
     /*
-     * Return true if automatic authentication is required. 
+     * Return true if automatic authentication is required. This method returns a promise with the success callback returning
+	 * a boolean whether authentication is required. It first checks if the client is already authenticated
+	 * and if yes, whether the authentication is valid. Else, it checks for the status code and other
+	 * configuration paramters to decide if authentication is required.
      */
-    _isAuthRequired : function(error, options) {
-    	// this method returns a promise with the success callback returning a boolean whether authentication is 
-    	// required. It first checks if the client is already authenticated and if yes, whether the authentication
-    	// is valid. Else, it checks for the status code and other configuration paramters to decide if authentication
-    	// is required.
-    	var promise = new Promise();    	
-        var status = error.response.status || null;      
-    	if(this.isAuthenticated){ 
-    		this.isAuthenticationValid().then(function(response){        		
-    			promise.fulfilled(!response.result);        			
-    		},function(response) {
-				promise.rejected(response);
-			});        		
-    	}else{	        
-	        var isAuthErr = status == 401 || status == this.authenticationErrorCode;		        
-	        var isAutoAuth =  options.autoAuthenticate || this.autoAuthenticate;
-	        if (isAutoAuth == undefined){
-	            isAutoAuth = true;
-	        } 
-	        promise.fulfilled(isAuthErr && isAutoAuth && this.authenticator && !this._authRejected);	        
-    	}
-        return promise;
-    },
+ 	_isAuthRequired : function(error, options) {		
+		var promise = new Promise();
+		var status = error.response.status || null;
+		if (this.isAuthenticated) {
+			this.isAuthenticationValid().then(
+				function(response) {
+					promise.fulfilled(!response.result);
+				}, 
+				function(response) {
+					promise.rejected(response);
+				}
+			);
+		} else {
+			var isAuthErr = status == 401 || status == this.authenticationErrorCode;
+
+			// User can mention autoAuthenticate as part of request
+			// arguments ie args variable to service wrappers or
+			// as a property of endpoint in managed-beans.xml
+			var isAutoAuth = options.autoAuthenticate || this.autoAuthenticate;
+			if (isAutoAuth == undefined) {
+				isAutoAuth = true;
+			}
+			// The response is calculated based on error code, isAutoAuth
+			// calculated above, authenticator property of
+			// endpoint and whether the authentication was rejected earlier.
+			promise.fulfilled(isAuthErr && isAutoAuth && this.authenticator && !this._authRejected);
+		}
+		return promise;
+	},
     getErrorMessage: function(error) {    	
         var text = error.responseText || (error.response&&error.response.text) ;
         if (text) {
@@ -563,8 +576,7 @@ var Endpoint = declare(null, {
                     text = messages[0].text || messages[0].textContent;                	
                     text = lang.trim(text);
                 }
-            } catch(ex) {
-                console.log(ex);
+            } catch(ex) {                
             }  
             var trimmedText = text.replace(/(\r\n|\n|\r)/g,"");
             if(!(trimmedText)){            	

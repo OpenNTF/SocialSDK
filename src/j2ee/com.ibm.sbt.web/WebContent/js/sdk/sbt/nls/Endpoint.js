@@ -21,11 +21,8 @@
 
 define({
   root: ({	 
-	  cannot_find_endpoint:"Unable to find endpoint named {0}, creating it now with an error transport.",
-	  generic_error_message:"An error has occurred"
-		  
+	  cannot_find_endpoint:"Unable to find endpoint named {0}, creating it now with an error transport."
   }),
-
   "zh": true,
   "zh-tw": true,
   "tr": true,

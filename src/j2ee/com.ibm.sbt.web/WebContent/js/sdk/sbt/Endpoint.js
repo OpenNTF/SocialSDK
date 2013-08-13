@@ -255,7 +255,7 @@ var Endpoint = declare(null, {
 		        		isForbiddenErrorButAuthenticated = true;
 		        	}
 		        }
-				if ((error.code == 401 && !self.isAuthenticated)|| (!isForbiddenErrorButAuthenticated && error.code == self.authenticationErrorCode)) {
+				if ((error.code == 401)|| (!isForbiddenErrorButAuthenticated && error.code == self.authenticationErrorCode)) {
 					var autoAuthenticate =  _args.autoAuthenticate || self.autoAuthenticate;
 					if(autoAuthenticate == undefined){
 						autoAuthenticate = true;
@@ -531,9 +531,12 @@ var Endpoint = declare(null, {
      * Return true if automatic authentication is required. 
      */
     _isAuthRequired : function(error, options) {
+    	// this method returns a promise with the success callback returning a boolean whether authentication is 
+    	// required. It first checks if the client is already authenticated and if yes, whether the authentication
+    	// is valid. Else, it checks for the status code and other configuration paramters to decide if authentication
+    	// is required.
     	var promise = new Promise();    	
         var status = error.response.status || null;      
-        	// checking if we are getting 403 or 401 inspite of being already authenticated (eg. Get Public Files/Folders API on Smartcloud
     	if(this.isAuthenticated){ 
     		this.isAuthenticationValid().then(function(response){        		
     			promise.fulfilled(!response.result);        			
@@ -565,7 +568,7 @@ var Endpoint = declare(null, {
             }  
             var trimmedText = text.replace(/(\r\n|\n|\r)/g,"");
             if(!(trimmedText)){            	
-            	return nls.generic_error_message;
+            	return error.message;
             }else{
             	return text;
             }

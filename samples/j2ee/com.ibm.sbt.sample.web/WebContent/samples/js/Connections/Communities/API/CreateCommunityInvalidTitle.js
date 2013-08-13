@@ -2,18 +2,18 @@ require(["sbt/dom", "sbt/json", "sbt/connections/CommunityConstants", "sbt/conne
     function(dom,json,consts,CommunityService) {
 
     var now = new Date();
-    var title = "CreateCommunity Test " + now.getTime();
+    var title = "CreateCommunityInvalidTitle Test " + now.getTime();
     var content = "Create community test content: " + now.getTime();
 
     var communityService = new CommunityService();
-
+    
     try { 
         var results = [];
         
         // Invalid title
         var community = communityService.newCommunity();
-        community.setTitle(title + " - 4");
-        community.setContent(content + " - 4");
+        community.setTitle(title);
+        community.setContent(content);
         community.setTags("tag1,tag2,tag3");
         community.setCommunityType(consts.Public);
         promise = communityService.createCommunity(community);
@@ -23,8 +23,8 @@ require(["sbt/dom", "sbt/json", "sbt/connections/CommunityConstants", "sbt/conne
                 dom.setText("json", json.jsonBeanStringify(results));
                 
                 community = communityService.newCommunity();
-                community.setTitle(title + " - 4");
-                community.setContent(content + " - 4");
+                community.setTitle(title);
+                community.setContent(content);
                 community.setTags("tag1,tag2,tag3");
                 community.setCommunityType(consts.Public);
                 promise = communityService.createCommunity(community);

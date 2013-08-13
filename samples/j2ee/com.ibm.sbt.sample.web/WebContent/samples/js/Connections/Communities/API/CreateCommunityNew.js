@@ -2,7 +2,7 @@ require(["sbt/dom", "sbt/json", "sbt/connections/CommunityConstants", "sbt/conne
     function(dom,json,consts,CommunityService) {
 
     var now = new Date();
-    var title = "CreateCommunity Test " + now.getTime();
+    var title = "CreateCommunityNew Test " + now.getTime();
     var content = "Create community test content: " + now.getTime();
 
     var communityService = new CommunityService();

@@ -77,9 +77,9 @@ public abstract class AssetBean {
 					// 4 ImportSource
 					// 5 CreateDate
 					// 6 Description
-					String filterEndpoints = (String)values.get(7);
+					String filterRuntimes = (String)values.get(7);
 					String filterLibraries = (String)values.get(8);
-					if(acceptAsset(e, filterEndpoints, filterLibraries)) {
+					if(acceptAsset(e, filterRuntimes, filterLibraries)) {
 						CategoryNode c = findCategory(root, cat);
 						AssetNode node = createAssetNode(notesUnid,c,name,cat,jspUrl);
 						node.setTooltip((String)values.get(6));
@@ -100,9 +100,9 @@ public abstract class AssetBean {
 					// 4 ImportSource
 					// 5 CreateDate
 					// 6 Description
-					String filterEndpoints = (String)values.get(7);
+					String filterRuntimes = (String)values.get(7);
 					String filterLibraries = (String)values.get(8);
-					if(acceptAsset(e, filterEndpoints, filterLibraries)) {
+					if(acceptAsset(e, filterRuntimes, filterLibraries)) {
 						CategoryNode c = findCategory(root, cat);
 						AssetNode node = createAssetNode(notesUnid,c,name,cat,findUniqueUrl(c,notesUnid,assetId));
 						node.setTooltip((String)values.get(6));
@@ -115,7 +115,7 @@ public abstract class AssetBean {
 			v.recycle();
 		}
 	}
-	protected boolean acceptAsset(ViewEntry e, String filterEndpoints, String filterLibraries) {
+	protected boolean acceptAsset(ViewEntry e, String filterRuntimes, String filterLibraries) {
 		return true;
 	}
 	private String findUniqueUrl(CategoryNode cat, String unid, String assetId) {

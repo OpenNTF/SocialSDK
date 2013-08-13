@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
+import nsf.playground.environments.PlaygroundEnvironment;
+
 import lotus.domino.Database;
 import lotus.domino.NotesException;
 import lotus.domino.View;
@@ -58,64 +60,99 @@ public abstract class AssetBean {
 		return r.generateAsStringHier(root,true);
 	}
 	protected RootNode readSnippetsNodes() throws NotesException {
-		//PlaygroundEnvironment env = DataAccessBean.get().findCurrentEnvironment();
-		Database db = ExtLibUtil.getCurrentDatabase();
-		View v = db.getView("AllSnippetsFlat");
+		this.assetLoaderEnvironment = PlaygroundEnvironment.getCurrentEnvironment();
 		try {
-			RootNode root = new RootNode();
-			String apisSearch = (String)ExtLibUtil.getViewScope().get("assetSearch");
-			if(StringUtil.isNotEmpty(apisSearch)) {
-				v.FTSearch(apisSearch);
-				ViewEntryCollection col = v.getAllEntriesByKey(getAssetForm());
-				for(ViewEntry e=col.getFirstEntry(); e!=null; e=col.getNextEntry()) {
-					Vector<?> values = e.getColumnValues();
-					String notesUnid = e.getUniversalID();
-					// 2 type
-					String cat = (String)values.get(1);
-					String name = (String)values.get(2);
-					String jspUrl = (String)values.get(3);
-					// 4 ImportSource
-					// 5 CreateDate
-					// 6 Description
-					String filterRuntimes = (String)values.get(7);
-					String filterLibraries = (String)values.get(8);
-					if(acceptAsset(e, filterRuntimes, filterLibraries)) {
-						CategoryNode c = findCategory(root, cat);
-						AssetNode node = createAssetNode(notesUnid,c,name,cat,jspUrl);
-						node.setTooltip((String)values.get(6));
-						c.getChildren().add(node);
+			//PlaygroundEnvironment env = DataAccessBean.get().findCurrentEnvironment();
+			Database db = ExtLibUtil.getCurrentDatabase();
+			View v = db.getView("AllSnippetsFlat");
+			try {
+				RootNode root = new RootNode();
+				String apisSearch = (String)ExtLibUtil.getViewScope().get("assetSearch");
+				if(StringUtil.isNotEmpty(apisSearch)) {
+					v.FTSearch(apisSearch);
+					ViewEntryCollection col = v.getAllEntriesByKey(getAssetForm());
+					for(ViewEntry e=col.getFirstEntry(); e!=null; e=col.getNextEntry()) {
+						Vector<?> values = e.getColumnValues();
+						String notesUnid = e.getUniversalID();
+						// 2 type
+						String cat = (String)values.get(1);
+						String name = (String)values.get(2);
+						String jspUrl = (String)values.get(3);
+						// 4 ImportSource
+						// 5 CreateDate
+						// 6 Description
+						String filterRuntimes = (String)values.get(7);
+						String filterLibraries = (String)values.get(8);
+						if(acceptAsset(e, filterRuntimes, filterLibraries)) {
+							CategoryNode c = findCategory(root, cat);
+							AssetNode node = createAssetNode(notesUnid,c,name,cat,jspUrl);
+							node.setTooltip((String)values.get(6));
+							c.getChildren().add(node);
+						}
+					}
+				} else { 
+					v.setAutoUpdate(false);
+					ViewNavigator nav = v.createViewNavFromCategory(getAssetForm());
+					nav.setBufferMaxEntries(500);
+					for(ViewEntry e=nav.getFirst(); e!=null; e=nav.getNext()) {
+						Vector<?> values = e.getColumnValues();
+						String notesUnid = e.getUniversalID();
+						// 2 type
+						String cat = (String)values.get(1);
+						String name = (String)values.get(2);
+						String assetId = (String)values.get(3);
+						// 4 ImportSource
+						// 5 CreateDate
+						// 6 Description
+						String filterRuntimes = (String)values.get(7);
+						String filterLibraries = (String)values.get(8);
+						if(acceptAsset(e, filterRuntimes, filterLibraries)) {
+							CategoryNode c = findCategory(root, cat);
+							AssetNode node = createAssetNode(notesUnid,c,name,cat,findUniqueUrl(c,notesUnid,assetId));
+							node.setTooltip((String)values.get(6));
+							c.getChildren().add(node);
+						}
 					}
 				}
-			} else { 
-				v.setAutoUpdate(false);
-				ViewNavigator nav = v.createViewNavFromCategory(getAssetForm());
-				nav.setBufferMaxEntries(500);
-				for(ViewEntry e=nav.getFirst(); e!=null; e=nav.getNext()) {
-					Vector<?> values = e.getColumnValues();
-					String notesUnid = e.getUniversalID();
-					// 2 type
-					String cat = (String)values.get(1);
-					String name = (String)values.get(2);
-					String assetId = (String)values.get(3);
-					// 4 ImportSource
-					// 5 CreateDate
-					// 6 Description
-					String filterRuntimes = (String)values.get(7);
-					String filterLibraries = (String)values.get(8);
-					if(acceptAsset(e, filterRuntimes, filterLibraries)) {
-						CategoryNode c = findCategory(root, cat);
-						AssetNode node = createAssetNode(notesUnid,c,name,cat,findUniqueUrl(c,notesUnid,assetId));
-						node.setTooltip((String)values.get(6));
-						c.getChildren().add(node);
-					}
-				}
+				return root;
+			} finally {
+				v.recycle();
 			}
-			return root;
 		} finally {
-			v.recycle();
+			this.assetLoaderEnvironment = null;
 		}
 	}
+	// Just for readSnippetsNodes
+	private transient PlaygroundEnvironment assetLoaderEnvironment;
 	protected boolean acceptAsset(ViewEntry e, String filterRuntimes, String filterLibraries) {
+		// Check for the runtimes
+		// If at least one runtime is available, then we do accept the snippet
+		if(assetLoaderEnvironment!=null && StringUtil.isNotEmpty(filterRuntimes)) {
+			boolean ok = false;
+			String[] eps = StringUtil.splitString(filterRuntimes, ',', true);
+			for(int i=0; i<eps.length; i++) {
+				String ep = eps[i];
+				if(runtimeExists(ep)) {
+					ok = true;
+				}
+			}
+			if(!ok) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	protected boolean runtimeExists(String name) {
+		String[] runtimes = assetLoaderEnvironment.getRuntimesArray();
+		if(runtimes!=null && runtimes.length>0) {
+			for(int i=0; i<runtimes.length; i++) {
+				if(StringUtil.equals(runtimes[i], name)) {
+					return true;
+				}
+			}
+			return false;
+		}
 		return true;
 	}
 	private String findUniqueUrl(CategoryNode cat, String unid, String assetId) {

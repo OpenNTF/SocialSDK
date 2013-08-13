@@ -260,10 +260,6 @@ public class SBTEnvironment {
 		return null;
 	}
 	
-	public static String[] parseRuntimes(String sRuntimes){
-	    return new String[]{"burp"};
-	}
-		
 	//
 	// Utilities to read a list of strings as rows
 	// These are intended to be used by inheriting classes 

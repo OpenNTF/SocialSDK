@@ -17,7 +17,7 @@
  * 
  */
 define(["../../declare", "../../config", "../../widget/_TemplatedWidget", "../../stringUtil", "../../json", 
-        "../../text!sbt/connections/controls/templates/WidgetFrame.html", "../../i18n!sbt/connections/controls/nls/WidgetWrapper" ], 
+        "../../text!./templates/WidgetFrame.html", "../../i18n!sbt/connections/controls/nls/WidgetWrapper" ], 
         function(declare, config, _TemplatedWidget, stringUtil, JSON, frameTemplate, nls) {
 
     /**

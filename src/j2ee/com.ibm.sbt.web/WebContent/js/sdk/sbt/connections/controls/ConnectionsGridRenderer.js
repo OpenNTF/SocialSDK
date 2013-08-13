@@ -18,10 +18,10 @@
  * 
  */
 define([ "../../declare", "../../controls/grid/GridRenderer",
-        "../../text!sbt/controls/grid/templates/GridPager.html", 
-        "../../text!sbt/controls/grid/templates/GridSorter.html",
-        "../../text!sbt/controls/grid/templates/SortAnchor.html",
-        "../../i18n!sbt/connections/controls/nls/ConnectionsGridRenderer" ],
+        "../../text!../../controls/grid/templates/GridPager.html", 
+        "../../text!../../controls/grid/templates/GridSorter.html",
+        "../../text!../../controls/grid/templates/SortAnchor.html",
+        "../../i18n!./nls/ConnectionsGridRenderer" ],
         function(declare, GridRenderer, GridPager, GridSorter, SortAnchor, nls) {
 
     /**

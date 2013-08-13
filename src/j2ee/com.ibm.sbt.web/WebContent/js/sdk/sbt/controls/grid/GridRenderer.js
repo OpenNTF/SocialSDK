@@ -17,8 +17,8 @@
 /**
  * 
  */
-define([ "../../declare", "../../dom", "../../lang", "dojo/string", "../../widget/grid/_GridRenderer" ], 
-         function(declare, dom, lang, string, _GridRenderer) {
+define([ "../../declare", "../../dom", "../../lang", "../../widget/grid/_GridRenderer" ], 
+         function(declare, dom, lang, _GridRenderer) {
 
     /**
      * @module sbt.controls.grid.GridRenderer
@@ -26,9 +26,14 @@ define([ "../../declare", "../../dom", "../../lang", "dojo/string", "../../widge
      * @namespace  sbt.controls.grid
      */
     var GridRenderer = declare([ _GridRenderer ], {
-        /**Strings used in the grid*/
+        /**
+         * Strings used in the grid
+         */
     	nls: null,
-    	/**CSS class to be used for tables - see ConnectionsGridRenderer*/
+    	
+    	/**
+    	 * CSS class to be used for tables - see ConnectionsGridRenderer
+    	 */
         tableClass: null,
         emptyClass: null,
         errorClass: null,
@@ -209,7 +214,7 @@ define([ "../../declare", "../../dom", "../../lang", "dojo/string", "../../widge
          * @return - A String for paging - for example "0 - 5 Of 5"
          */
         pagingResults : function(grid,renderer,items,data) {
-            return string.substitute(renderer.nls.pagingResults, data);
+            return this._substitute(renderer.nls.pagingResults, data);
         },
         
         /**If the user is on the first page of results, they cannot click
@@ -353,7 +358,7 @@ define([ "../../declare", "../../dom", "../../lang", "dojo/string", "../../widge
          */
         _substituteItem : function(template,grid,item,i,items) {
             var self = this;
-            return string.substitute(template, item, function(value,key) {
+            return this._substitute(template, item, function(value,key) {
                 if (typeof value == "undefined") {
                     // check the renderer for the property
                     value = this._getObject(key, false, self);
@@ -387,7 +392,7 @@ define([ "../../declare", "../../dom", "../../lang", "dojo/string", "../../widge
 
         _substituteItems : function(template,grid,renderer,items,data) {
             var self = this;
-            return string.substitute(template, renderer, function(value,key) {
+            return this._substitute(template, renderer, function(value,key) {
                 if (typeof value == "undefined") {
                     // check the renderer for the property
                     value = this._getObject(key, false, self);

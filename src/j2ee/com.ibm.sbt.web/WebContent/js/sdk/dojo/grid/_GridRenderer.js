@@ -47,6 +47,10 @@ define([ "../../_bridge/declare" ],
             return dojo.isString(obj);
         },
         
+        _substitute: function(template, map, transform, thisObject) {
+        	return dojo.string.substitute(template, map, transform, thisObject);
+        },
+        
         _getObject: function(name, create, context) {
             return dojo.getObject(name, create, context);
         },
@@ -62,9 +66,11 @@ define([ "../../_bridge/declare" ],
                 return dojo.hitch(scope, method);
             }
         },
+        
         _addClass: function(node,className){
 			return dojo.addClass(node,className);
 		},
+		
 		_removeClass: function(node, className){
 			return dojo.removeClass(node,className);
 		}

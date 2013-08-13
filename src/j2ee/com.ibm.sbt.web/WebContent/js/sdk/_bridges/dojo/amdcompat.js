@@ -110,7 +110,7 @@ window._sbt_bridge_compat = true;
                     }
 				} else if (pluginName == "sbt.text") {
 					exclamationIndex = depName.indexOf("!");
-                    var filePath = deps[i].substring(exclamationIndex+1,deps[i].length);
+                    var filePath = depName.substring(exclamationIndex+1,depName.length);
                     var fileName = filePath.substring(filePath.lastIndexOf("/")+1);
                     filePath = resolvePath(filePath);
                     if (filePath.charAt(0) == '.') {

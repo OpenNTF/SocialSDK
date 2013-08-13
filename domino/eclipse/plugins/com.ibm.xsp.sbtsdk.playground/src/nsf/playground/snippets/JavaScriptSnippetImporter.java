@@ -44,11 +44,11 @@ public class JavaScriptSnippetImporter extends AssetImporter {
 		Document doc = getDatabase().createDocument();
 		try {
 			setItemValue(doc,"Form", FORM);
-			setItemValue(doc,"Author", doc.getParentDatabase().getParent().getUserName()); // Should we make this private (reader field)?
+			setItemValue(doc,"Author", doc.getParentDatabase().getParent().getEffectiveUserName()); // Should we make this private (reader field)?
 			setItemValue(doc,"Id", node.getUnid());
 			setItemValue(doc,"Category", node.getCategory());
 			setItemValue(doc,"Name", node.getName());
-			setItemValue(doc,"FilterEndpoints", snippet.getProperty("endpoints"));
+			setItemValue(doc,"FilterRuntimes", snippet.getProperty("runtimes"));
 			setItemValue(doc,"FilterLibraries", snippet.getProperty("jslibs"));
 			setItemValue(doc,"Tags", snippet.getProperty("tags"));
 			setItemValue(doc,"Description", snippet.getProperty("description"));

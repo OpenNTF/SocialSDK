@@ -207,6 +207,10 @@ public abstract class DataAccessBean {
 		env.setNoteID(d.getNoteID());
 		env.setName(d.getItemValueString("Name"));
 		env.setDescription(d.getItemValueString("Description"));
+		String runtimes = d.getItemValueString("Runtimes");
+		if(StringUtil.isNotEmpty(runtimes)) {
+			env.setRuntimes(runtimes);
+		}
 		env.setProperties(d.getItemValueString("Properties"));
 		
 		boolean def = StringUtil.equals(d.getItemValueString("Preferred"),"1");

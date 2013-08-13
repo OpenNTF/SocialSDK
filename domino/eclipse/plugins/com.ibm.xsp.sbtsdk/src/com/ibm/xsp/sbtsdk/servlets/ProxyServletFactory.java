@@ -36,7 +36,7 @@ public class ProxyServletFactory extends ServletFactory {
 				return s;
 			}
 		}
-		return ToolkitServlet.class.getName();
+		return DominoServiceServlet.class.getName();
 	}
 
 	public ProxyServletFactory() {

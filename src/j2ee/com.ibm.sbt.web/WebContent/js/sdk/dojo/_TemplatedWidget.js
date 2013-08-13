@@ -57,7 +57,7 @@ define([ "../_bridge/declare",
         },
         
         _substitute: function(template, map, transform, thisObject) {
-        	return dojo.substitute(template, map, transform, thisObject);
+        	return dojo.string.substitute(template, map, transform, thisObject);
         },
         
         _getObject: function(name, create, context) {

@@ -17,9 +17,8 @@
 /**
  * @module sbt.controls.panel._ProfilePanel
  */
-define(["../../declare", "../../lang", "../../widget/_TemplatedWidget",
-        "../../text!sbt/controls/panel/templates/ProfilePanel.html"], 
-        function(declare, lang, _TemplatedWidget, PanelTmpl) {
+define(["../../declare", "../../lang", "../../widget/_TemplatedWidget"], 
+        function(declare, lang, _TemplatedWidget) {
 
     /**
      * @module sbt.controls.panel._ProfilePanel
@@ -27,14 +26,12 @@ define(["../../declare", "../../lang", "../../widget/_TemplatedWidget",
     var _ProfilePanel = declare([ _TemplatedWidget ], {
     	
     	templateString: "<div><strong> Loading profile... </strong></div>",
-    	template: PanelTmpl,
+    	template: null,
     	
     	profile: null,
     	
     	errorClass: null,
     	
-    	type: "my",
-                
         constructor: function(args) {
             lang.mixin(this, args);
             
@@ -51,7 +48,7 @@ define(["../../declare", "../../lang", "../../widget/_TemplatedWidget",
         	
         	if (this.email || this.userid) {
         		this.getProfile(this.email || this.userid);
-        	} else if (this.type == "my") {
+        	} else {
         		this.getMyProfile();
         	}
         },
@@ -134,10 +131,6 @@ define(["../../declare", "../../lang", "../../widget/_TemplatedWidget",
               role: "alert",
               tabIndex: 0
             }, el, "only");
-        },
-        
-        _getEndpoint: function() {
-        	return this.endpoint || "connections";
         },
         
     	_getTemplate: function(domId) {

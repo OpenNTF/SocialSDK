@@ -18,7 +18,7 @@
  * 
  */
 define(["../../../lang", "../../../controls/grid/bootstrap/GridRendererMixin",
-         "../../../text!sbt/connections/controls/bootstrap/templates/FileRow.html" ], 
+         "../../../text!./templates/FileRow.html" ], 
         function(lang, GridRendererMixin, FileRow) {
 
     /**

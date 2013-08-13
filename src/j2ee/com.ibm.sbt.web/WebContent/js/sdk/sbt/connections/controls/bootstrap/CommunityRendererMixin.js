@@ -18,8 +18,8 @@
  * 
  */
 define(["../../../lang", "../../../controls/grid/bootstrap/GridRendererMixin",
-         "../../../text!sbt/connections/controls/bootstrap/templates/CommunityRow.html",
-         "../../../text!sbt/connections/controls/bootstrap/templates/TagAnchor.html" ], 
+         "../../../text!./templates/CommunityRow.html",
+         "../../../text!./templates/TagAnchor.html" ], 
         function(lang, GridRendererMixin, CommunityRow, TagAnchor) {
 
     /**

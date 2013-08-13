@@ -225,13 +225,12 @@ define(["../declare","../config", "../lang", "../base/core", "../xml", "../xpath
                 load : function(response) {
                     try {
                         // parse the data
+                    	self.response = response;
                         self._xmlData = xml.parse(response);
                         self.totalResults = parseInt(xpath.selectText(self._xmlData, self.atom.totalResults, self.namespaces));
                         self.startIndex = parseInt(xpath.selectText(self._xmlData, self.atom.startIndex, self.namespaces));
                         self.itemsPerPage = parseInt(xpath.selectText(self._xmlData, self.atom.itemsPerPage, self.namespaces));
                         self.items = self._createItems(self._xmlData);
-                        
-                        
                         
                         // invoke callbacks
                         if (args.onBegin) {

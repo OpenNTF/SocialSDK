@@ -17,8 +17,8 @@
 /**
  * 
  */
-define([ "../../_bridge/declare", "dojo/_base/lang", "dojo/dom-construct", "dijit/_WidgetBase" ,'dojo/dom-class'], 
-         function(declare, lang, domConstruct, _WidgetBase, domClass) {
+define([ "../../_bridge/declare", "dojo/_base/lang", "dojo/string", "dojo/dom-construct", "dijit/_WidgetBase" ,'dojo/dom-class'], 
+         function(declare, lang, string, domConstruct, _WidgetBase, domClass) {
 
     /*
      * @module sbt.widget.grid._GridRenderer
@@ -27,52 +27,75 @@ define([ "../../_bridge/declare", "dojo/_base/lang", "dojo/dom-construct", "diji
         
         _blankGif: dijit._WidgetBase.prototype._blankGif,
         
-        /*Utility to mix to objects or classes together*/
+        /*
+         * Utility to mix to objects or classes together
+         */
         _mixin: function(dest,sources) {
-            return lang.mixin(dest,sources);
+        	return lang.mixin.apply(this, arguments);
         },
         
-        /*destroy a DOM node
-         * @node - the node to be destroyed*/
+        /*
+         * Destroy a DOM node
+         * @node - the node to be destroyed
+         */
         _destroy: function(node) {
             domConstruct.destroy(node);
         },
         
-        /*Create a DOM node
+        /*
+         * Create a DOM node
          * @name - the name of the element, for example DIV
          * @attribs - the attributes of the element, for example id
-         * @parent - the element to which the newly created node will be attached to*/
+         * @parent - the element to which the newly created node will be attached to
+         */
         _create: function(name, attribs, parent) {
             return domConstruct.create(name, attribs, parent);
         },
         
-        /*Similar to create, takes an HTML String an converts it into a DOM node
+        /*
+         * Similar to create, takes an HTML String an converts it into a DOM node
          * This function takes a HTML template which is converted to a DOM node
          * @template - the HTML template to be used
          * @parent - the parent node that the newly created node will attach to
-         * */
+         */
         _toDom: function(template, parent) {
             return domConstruct.toDom(template, parent);
         },
         
-        /*Check if an objects type is String*/
+        /*
+         * Check if an objects type is String
+         */
         _isString: function(obj) {
             return lang.isString(obj);
         },
         
+        /*
+         * Performs parameterized substitutions on a string.
+         */
+        _substitute: function(template, map, transform, thisObject) {
+        	return string.substitute(template, map, transform, thisObject);
+        },
+        
+        /*
+         * Get an object
+         */
         _getObject: function(name, create, context) {
             return lang.getObject(name, create, context);
         },
         
-        /*Removes White space from the beginning and end of a string
-         * @str - the string to remove white space from */
+        /*
+         * Removes White space from the beginning and end of a string
+         * @str - the string to remove white space from
+         */
         _trim: function(str) {
             return lang.trim(str);
         },
        
-        /*A function that allows a function to execute in a different scope
+        /*
+         * A function that allows a function to execute in a different scope
          * @scope - the scope you wish to execute in
-         * @method - the function to execute*/
+         * @method - the function to execute
+         */
         _hitch: function(scope, method) {
             if (arguments.length > 2) {
                 return lang._hitchArgs.apply(dojo, arguments);
@@ -80,9 +103,17 @@ define([ "../../_bridge/declare", "dojo/_base/lang", "dojo/dom-construct", "diji
                 return lang.hitch(scope, method);
             }
         },
+        
+        /*
+         * Add a CSS class
+         */
         _addClass: function(node,className){
 			return domClass.add(node,className);
 		},
+		
+		/*
+		 * Remove a CSS class
+		 */
 		_removeClass: function(node, className){
 			return domClass.remove(node,className);
 		}

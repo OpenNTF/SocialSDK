@@ -38,6 +38,66 @@ define([ "../_bridge/declare",
         
         _mixin: function(dest,sources) {
             return dojo.mixin(dest,sources);
+        },
+        
+        _destroy: function(node) {
+            dojo.destroy(node);
+        },
+        
+        _create: function(name, attribs, parent) {
+            return dojo.create(name, attribs, parent);
+        },
+        
+        _toDom: function(frag, doc) {
+            return dojo._toDom(frag, doc);
+        },
+        
+        _isString: function(obj) {
+            return dojo.isString(obj);
+        },
+        
+        _substitute: function(template, map, transform, thisObject) {
+        	return dojo.string.substitute(template, map, transform, thisObject);
+        },
+        
+        _getObject: function(name, create, context) {
+            return dojo.getObject(name, create, context);
+        },
+        
+        _hitch: function(scope, method) {
+            if (arguments.length > 2) {
+                return dojo._hitchArgs.apply(dojo, arguments);
+            } else {
+                return dojo.hitch(scope, method);
+            }
+        },
+        
+        _doAttachEvents: function(el, scope) {
+            var nodes = (el.all || el.getElementsByTagName("*"));
+            for (var i in nodes) {
+                var attachEvent = (nodes[i].getAttribute) ? nodes[i].getAttribute("data-dojo-attach-event") : null;
+                if (attachEvent) {
+                    nodes[i].removeAttribute("data-dojo-attach-event");
+                    var event, events = attachEvent.split(/\s*,\s*/);
+                    while((event = events.shift())) {
+                        if (event) {
+                            var func = null;
+                            if (event.indexOf(":") != -1) {
+                                var eventFunc = event.split(":");
+                                event = this._trim(eventFunc[0]);
+                                func = this._trim(eventFunc[1]);
+                            } else {
+                                event = this._trim(event);
+                            }
+                            if (!func) {
+                                func = event;
+                            }
+                            var callback = this._hitch(this, this[func], nodes[i], scope);
+                            this._connect(nodes[i], event, callback);
+                        }
+                    }
+                }
+            }
         }
         
     });

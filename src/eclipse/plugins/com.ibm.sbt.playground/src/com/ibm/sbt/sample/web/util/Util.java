@@ -54,12 +54,16 @@ public class Util {
         { "Bootstrap", "bootstrap" },
         { "One UI", "oneui" }
     };
+
+    public static final String defaultEnvironment = "defaultEnvironment";
     
     public static String[][] ENVIRONMENTS = new String[][] {
         // title, id
-        { "Default", "defaultEnvironment" },
-        { "SmartCloud", "smartcloudEnvironment" },
-        { "Open Social", "openSocial"}
+        { "Default", "defaultEnvironment"},
+        { "Connections", "connectionsEnvironment"},
+        { "SmartCloud", "smartcloudEnvironment"},
+        { "Third Party APIs", "thirdPartyAPIsEnvironment"},
+        { "OpenSocial", "openSocial"}
     };
     
     public static String[] BOOTSTRAP_STYLES = {   

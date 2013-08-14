@@ -18,19 +18,14 @@ package com.ibm.sbt.services.client.connections.files;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import java.io.IOException;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import org.junit.Assert;
+
 import org.junit.Test;
 
 import com.ibm.sbt.services.BaseUnitTest;
 import com.ibm.sbt.services.client.connections.files.model.CommentEntry;
 import com.ibm.sbt.services.client.connections.files.model.FileEntry;
-import com.ibm.sbt.services.client.connections.files.model.FileRequestParams;
-import com.ibm.sbt.services.client.connections.files.model.FileRequestPayload;
 
 public class FileServiceTest extends BaseUnitTest {
 
@@ -289,6 +284,16 @@ public class FileServiceTest extends BaseUnitTest {
 		fileService.unlock(testFileId);
 		FileEntry fileEntry = fileService.getFile(testFileId, true);
 		assertEquals(fileEntry.getLock(), "NONE");
+	}
+	
+	@Test
+	public void testPinAndUnPin() throws Exception {
+		FileService fileService = new FileService();
+		authenticateEndpoint(fileService.getEndpoint(), USERNAME, PASSWORD);
+		FileEntryList listOfFiles = fileService.getMyFiles();
+		String testFileId = listOfFiles.get(0).getFileId();
+		fileService.pinFile(testFileId);
+		fileService.unPinFile(testFileId);
 	}
 
 	@Test

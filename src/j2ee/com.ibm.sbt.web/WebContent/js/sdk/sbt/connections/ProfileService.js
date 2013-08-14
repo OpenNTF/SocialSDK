@@ -619,6 +619,83 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
             return this.getEntities(url, options, this.getProfileFeedCallbacks(), args);
         },
         
+        /**
+         * Get the reporting chain for the specified person.
+         * 
+         * @method getReportingChain
+         * @param {Object/String} profileOrId profile object representing the profile or user/email of the profile
+         * @param {Object} args Object representing various query parameters
+         *            that can be passed. The parameters must be exactly as they are
+         *            supported by IBM Connections.
+         */
+        getReportingChain : function(profileOrId, args) {
+            // detect a bad request by validating required arguments
+            var idObject = this._toIdObject(profileOrId);
+            var promise = this._validateIdObject(idObject);
+            if (promise) {
+                return promise;
+            }
+            
+            var requestArgs = lang.mixin(idObject, args || {});
+            var options = {
+                method : "GET",
+                handleAs : "text",
+                query : requestArgs
+            };
+            var url = this.constructUrl(consts.AtomReportingChainDo, {}, {authType : this._getProfileAuthString()});
+            return this.getEntities(url, options, this.getProfileFeedCallbacks(), args);
+        },
+        
+        /**
+         * Get the people managed for the specified person.
+         * 
+         * @method getPeopleManaged
+         * @param {Object/String} profileOrId profile object representing the profile or user/email of the profile
+         * @param {Object} args Object representing various query parameters
+         *            that can be passed. The parameters must be exactly as they are
+         *            supported by IBM Connections.
+         */
+        getPeopleManaged : function(profileOrId, args) {
+            // detect a bad request by validating required arguments
+            var idObject = this._toIdObject(profileOrId);
+            var promise = this._validateIdObject(idObject);
+            if (promise) {
+                return promise;
+            }
+            
+            var requestArgs = lang.mixin(idObject, args || {});
+            var options = {
+                method : "GET",
+                handleAs : "text",
+                query : requestArgs
+            };
+            var url = this.constructUrl(consts.AtomPeopleManagedDo, {}, {authType : this._getProfileAuthString()});
+            return this.getEntities(url, options, this.getProfileFeedCallbacks(), args);
+        },
+                
+        /**
+         * Search for a set of profiles that match a specific criteria and return them in a feed.
+         * 
+         * @method search
+         * @param {Object} args Object representing various query parameters
+         *            that can be passed. The parameters must be exactly as they are
+         *            supported by IBM Connections.
+         */
+        search : function(args) {
+            // detect a bad request by validating required arguments
+            if (!args) {
+            	return this.createBadRequestPromise("Invalid arguments, one or more of the input parameters to narrow the search must be specified.");
+            }
+            
+            var options = {
+                method : "GET",
+                handleAs : "text",
+                query : args
+            };
+            var url = this.constructUrl(consts.AtomSearchDo, {}, {authType : this._getProfileAuthString()});
+            return this.getEntities(url, options, this.getProfileFeedCallbacks(), args);
+        },
+        
         /*
          * Return callbacks for a profile feed
          */

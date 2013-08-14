@@ -2259,9 +2259,8 @@ public class FileService extends BaseService {
                 resultType);
         Map<String, String> params = new HashMap<String, String>();
         params.put(FileRequestParams.ITEMID.getFileRequestParams(), fileId);
-        Map<String, String> headers = new HashMap<String, String>();
         try {
-            super.updateData(requestUri, params, headers, null, fileId);
+            super.createData(requestUri, params, null);
         } catch (Exception e) {
             if (logger.isLoggable(Level.WARNING)) {
                 logger.log(Level.WARNING, e.getMessage(), e);
@@ -2562,14 +2561,14 @@ public class FileService extends BaseService {
         Map<String, String> params = new HashMap<String, String>();
         params.put(FileRequestParams.ITEMID.getFileRequestParams(), fileId);
         try {
-            super.deleteData(requestUri, null, fileId);
+            super.deleteData(requestUri, params ,null);
         } catch (Exception e) {
             if (logger.isLoggable(Level.WARNING)) {
                 logger.log(Level.WARNING, e.getMessage(), e);
             }
             throw new FileServiceException(e, "Error unpinning the file");
         }
-    }
+    } 
 
     public void unPinFolder(String folderId) throws FileServiceException {
         if (logger.isLoggable(Level.FINEST)) {

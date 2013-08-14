@@ -374,20 +374,18 @@ var Endpoint = declare(null, {
 		var self = this;
 		var proxy = this.proxy.proxyUrl;
 		var actionURL = proxy.substring(0, proxy.lastIndexOf("/")) + "/authHandler/" + this.proxyPath + "/logout";
-		var	options = { 
-        	   	method : "POST", 
-        	   	handleAs : "json"
-        	};		
-		this.transport.request(actionURL, options).then(
-				function (response){
-					self.isAuthenticated = false;
-					promise.fulfilled(response);
-				}, 
-				function(error){
-					self.isAuthenticated = false;
-					promise.rejected(error);
-				}		
-			);		
+		this.transport.xhr('POST',{
+			handleAs : "json",
+			url : actionURL,
+			load : function(response) {
+				self.isAuthenticated = false;
+				promise.fulfilled(response);
+			},
+			error : function(response) {
+				self.isAuthenticated = false;
+				promise.rejected(response);
+			}
+		}, true);		
 		return promise;
 	},
 	
@@ -403,19 +401,17 @@ var Endpoint = declare(null, {
 		var self = this;
 		var proxy = this.proxy.proxyUrl;
 		var actionURL = proxy.substring(0, proxy.lastIndexOf("/")) + "/authHandler/" + this.proxyPath + "/isAuth";
-		var	options = { 
-        	   	method : "POST", 
-        	   	handleAs : "json"
-        	};        
-		this.transport.request(actionURL, options).then(
-			function (response){
+		this.transport.xhr('POST',{
+			handleAs : "json",
+			url : actionURL,
+			load : function(response) {
 				self.isAuthenticated = true;
 				promise.fulfilled(response);
-			}, 
-			function(error){
-				promise.rejected(error);
-			}		
-		);		
+			},
+			error : function(response) {
+				promise.rejected(response);
+			}
+		}, true);		
 		return promise;
 	},
 	
@@ -435,19 +431,17 @@ var Endpoint = declare(null, {
 		var self = this;
 		var proxy = this.proxy.proxyUrl;
 		var actionURL = proxy.substring(0, proxy.lastIndexOf("/")) + "/authHandler/" + this.proxyPath + "/isAuthValid";
-		var	options = { 
-        	   	method : "POST", 
-        	   	handleAs : "json"
-        	};        
-		this.transport.request(actionURL, options).then(
-			function (response){
+		this.transport.xhr('POST',{			
+			handleAs : "json",
+			url : actionURL,
+			load : function(response) {				
 				self.isAuthenticated = response.result;
 				promise.fulfilled(response);
-			}, 
-			function(error){
-				promise.rejected(error);
-			}		
-		);
+			},
+			error : function(response) {
+				promise.rejected(response);
+			}
+		}, true);
 		return promise;
 	},
 	
@@ -555,16 +549,20 @@ var Endpoint = declare(null, {
 		} else {
 			var isAuthErr = status == 401 || status == this.authenticationErrorCode;
 
-			// User can mention autoAuthenticate as part of request
-			// arguments ie args variable to service wrappers or
-			// as a property of endpoint in managed-beans.xml
+			// User can mention autoAuthenticate as part service wrappers call that is the args json variable or
+			// as a property of endpoint in managed-beans.xml. 
+			// isAutoAuth variable is true when autoAuthenticate property is true in args json variable or 
+			// autoAuthenticate property in endpoint defination in managed-beans.xml is true. It is false otherwise.
 			var isAutoAuth = options.autoAuthenticate || this.autoAuthenticate;
 			if (isAutoAuth == undefined) {
 				isAutoAuth = true;
 			}
-			// The response is calculated based on error code, isAutoAuth
-			// calculated above, authenticator property of
-			// endpoint and whether the authentication was rejected earlier.
+			// The response is returned as a boolean value as an argument to the success callback of the promise. This 
+			// value is true when the error code is 401 or any authentication error code for a particular endpoint
+			// (isAuthErr variable) and autoAuthenticate parameter is mentioned true (based on isAutoAuth variable)
+			// and authenticator property the endpoint (could be js object of type Basic or OAuth)is defined and the 
+			// authentication was not rejected earlier. 
+			// It is false otherwise. The true value of this expression triggers the authentication process from the client.
 			promise.fulfilled(isAuthErr && isAutoAuth && this.authenticator && !this._authRejected);
 		}
 		return promise;

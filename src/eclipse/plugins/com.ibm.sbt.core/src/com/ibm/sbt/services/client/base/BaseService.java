@@ -19,12 +19,14 @@ package com.ibm.sbt.services.client.base;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import com.ibm.commons.runtime.Context;
 import com.ibm.commons.util.StringUtil;
-import com.ibm.sbt.services.client.ClientService.*;
+import com.ibm.sbt.jslibrary.SBTEnvironment;
 import com.ibm.sbt.services.client.ClientService;
-import com.ibm.sbt.services.client.base.datahandlers.EntityList;
+import com.ibm.sbt.services.client.ClientService.Handler;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
+import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
 
@@ -69,6 +71,19 @@ public abstract class BaseService {
 		if (StringUtil.isEmpty(endpointName)) {
 			endpointName = DEFAULT_ENDPOINT_NAME;
 		}
+		String javaEnv = Context.get().getProperty("javaEnvironment");
+		if(javaEnv!=null){
+		    SBTEnvironment env = (SBTEnvironment) Context.get().getBean(javaEnv);
+		    SBTEnvironment.Endpoint[] endpointsArray = env.getEndpointsArray();
+		    
+		    for(SBTEnvironment.Endpoint endpoint : endpointsArray){
+		        if(StringUtil.equals(endpointName, endpoint.getAlias())){
+	                endpointName = endpoint.getName();
+	                break;
+		        }
+		    }
+		}
+		
 		this.endpoint = EndpointFactory.getEndpoint(endpointName);
 		this.cacheSize = cacheSize;
 	}

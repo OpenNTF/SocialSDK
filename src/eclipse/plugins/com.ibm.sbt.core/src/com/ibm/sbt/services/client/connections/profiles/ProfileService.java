@@ -809,6 +809,14 @@ public class ProfileService extends BaseService {
 
 	}
 
+	/**
+	 * Wrapper method to update a User's profile photo
+	 * 
+	 * @param File
+	 * 			image to be uploaded as profile photo
+	 * @param userid
+	 * @throws ProfileServiceException
+	 */
 	public void updateProfilePhoto(File file, String userid) throws ProfileServiceException{
 
 		if (userid == null) {
@@ -836,9 +844,7 @@ public class ProfileService extends BaseService {
 				
 			}
 		} catch (ClientServicesException e) {
-			e.printStackTrace();
-	//		throw new ProfileServiceException(e, Messages.UpdateProfilePhotoException);
-
+			throw new ProfileServiceException(e, Messages.UpdateProfilePhotoException);
 		}
 	
 	}

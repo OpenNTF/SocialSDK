@@ -18,58 +18,16 @@
  * @module sbt.connections.controls.profiles.ProfileGrid
  */
 define([ "../../../declare", 
+		 "../../../config",
+		 "../../../lang",
 		 "../../../controls/grid/Grid", 
 		 "./ProfileGridRenderer", 
 		 "./ProfileAction", 
 		 "../../../connections/controls/vcard/SemanticTagService", 
-		 "../../../config",
 		 "../../../store/parameter",
 		 "../../../connections/ProfileConstants"], 
-        function(declare, Grid, ProfileGridRenderer, ProfileAction, SemanticTagService, sbt, parameter) {
+        function(declare, sbt, lang, Grid, ProfileGridRenderer, ProfileAction, SemanticTagService, parameter, consts) {
 
-	// TODO use values from constants and handle authType
-	var profileUrls = {
-	    profile : "/profiles/atom/profile.do", 
-        reportingChain : "/profiles/atom/reportingChain.do?outputType=profile&format=full", 
-        colleagues: "/profiles/atom/connections.do?connectionType=colleague&outputType=profile&format=full" , 
-        peopleManaged: "/profiles/atom/peopleManaged.do",
-        statusUpdates: "/profiles/atom/mv/theboard/entries.do?outputType=profile&format=full",
-        connectionsInCommon: "/profiles/atom/connectionsInCommon.do?connectionType=colleague&outputType=profile&format=full"
-	};
-	var xpath_profile = {
-        "id":               "a:id",
-	 	"entry":			"/a:feed/a:entry",
-		"uid":				"a:contributor/snx:userid",
-		"name":				"a:contributor/a:name",
-		"email":            "a:contributor/a:email",
-		"title":            "a:title",
-		"statusUpdate":     "a:title[@type='text']",
-		"statusLastUpdate": "a:updated",
-		"altEmail":         "a:content/h:div/h:span/h:div[@class='x-groupwareMail']",
-		"photo":			"a:link[@rel='http://www.ibm.com/xmlns/prod/sn/image']/@href",			
-		"jobTitle":			"a:content/h:div/h:span/h:div[@class='title']",
-		"organizationUnit":	"a:content/h:div/h:span/h:div[@class='org']/h:span[@class='organization-unit']",
-		"fnUrl":			"a:content/h:div/h:span/h:div/h:a[@class='fn url']/@href",			
-		"telephoneNumber":	"a:content/h:div/h:span/h:div[@class='tel']/h:span[@class='value']",			
-		"bldgId":			"a:content/h:div/h:span/h:div/h:span[@class='x-building']",			
-		"floor":			"a:content/h:div/h:span/h:div/h:span[@class='x-floor']",
-		"streetAddress":	"a:content/h:div/h:span/h:div/h:div[@class='street-address']",
-		"extendedAddress":	"a:content/h:div/h:span/h:div/h:div[@class='extended-address x-streetAddress2']",
-		"locality":			"a:content/h:div/h:span/h:div/h:span[@class='locality']",
-		"postalCode":		"a:content/h:div/h:span/h:div/h:span[@class='postal-code']",
-		"region":			"a:content/h:div/h:span/h:div/h:span[@class='region']",
-		"countryName":		"a:content/h:div/h:span/h:div/h:div[@class='country-name']",			
-		"soundUrl":			"a:content/h:div/h:span/h:div/h:a[@class='sound url']/@href",	
-		"summary":			"a:summary",
-		"groupwareMail":	"a:content/h:div/h:span/h:div[@class='x-groupwareMail']",				
-		"networkProfileId":	"snx:connection/a:contributor[@snx:rel='http://www.ibm.com/xmlns/prod/sn/connection/target']/snx:userid",
-		"networkProfileName":	"snx:connection/a:contributor[@snx:rel='http://www.ibm.com/xmlns/prod/sn/connection/target']/a:name",
-		"networkProfileEmail":	"snx:connection/a:contributor[@snx:rel='http://www.ibm.com/xmlns/prod/sn/connection/target']/a:email",
-        "totalResults"      :"/a:feed/opensearch:totalResults",
-        "startIndex"        :"/a:feed/opensearch:startIndex",
-        "itemsPerPage"      :"/a:feed/opensearch:itemsPerPage"
-	};
-	
 	var sortVals = {
 			displayName: "displayName",
        		recent: "3" 
@@ -96,20 +54,11 @@ define([ "../../../declare",
     	 * the atom store and grid renderer.
     	 */
         options : {
-            "reportingChain" : {
-                storeArgs : {
-                    url : profileUrls.reportingChain,
-                    attributes : xpath_profile,
-                    paramSchema: ParamSchema
-                },
-                rendererArgs : {
-                    type : "profile"
-                }
-            },
             "profile" : {
                 storeArgs : {
-                    url : profileUrls.profile,
-                    attributes : xpath_profile,
+                    url : consts.AtomProfileDo,
+                    attributes : consts.ProfileXPath,
+                    feedXPath : consts.ProfileFeedXPath,
                     paramSchema: ParamSchema
                 },
                 rendererArgs : {
@@ -118,8 +67,20 @@ define([ "../../../declare",
             },
             "colleagues" : {
                 storeArgs : {
-                     url : profileUrls.colleagues,
-                    attributes : xpath_profile,
+                     url : consts.AtomConnectionsDo,
+                     attributes : consts.ProfileXPath,
+                     feedXPath : consts.ProfileFeedXPath,
+                     paramSchema: ParamSchema
+                },
+                rendererArgs : {
+                    type : "profile"
+                }
+            },
+            "connectionsInCommon" : {
+                storeArgs : {
+                    url : consts.AtomConnectionsInCommonDo,
+                    attributes : consts.ProfileXPath,
+                    feedXPath : consts.ProfileFeedXPath,
                     paramSchema: ParamSchema
                 },
                 rendererArgs : {
@@ -128,18 +89,31 @@ define([ "../../../declare",
             },
             "peopleManaged" : {
                 storeArgs : {
-                    url : profileUrls.peopleManaged,
-                    attributes : xpath_profile,
+                    url : consts.AtomPeopleManagedDo,
+                    attributes : consts.ProfileXPath,
+                    feedXPath : consts.ProfileFeedXPath,
                     paramSchema: ParamSchema
                 },
                 rendererArgs : {
                     type : "profile"
                 }
             },
-            "connectionsInCommon" : {
+            "reportingChain" : {
                 storeArgs : {
-                    url : profileUrls.connectionsInCommon,
-                    attributes : xpath_profile,
+                    url : consts.AtomReportingChainDo,
+                    attributes : consts.ProfileXPath,
+                    feedXPath : consts.ProfileFeedXPath,
+                    paramSchema: ParamSchema
+                },
+                rendererArgs : {
+                    type : "profile"
+                }
+            },
+            "search" : {
+                storeArgs : {
+                    url : consts.AtomSearchDo,
+                    attributes : consts.ProfileXPath,
+                    feedXPath : consts.ProfileFeedXPath,
                     paramSchema: ParamSchema
                 },
                 rendererArgs : {
@@ -148,7 +122,9 @@ define([ "../../../declare",
             },
             "dynamic" : {
                 storeArgs : {
-                    attributes : xpath_profile
+                    attributes : consts.ProfileXPath,
+                    feedXPath : consts.ProfileFeedXPath,
+                    paramSchema: ParamSchema
                 },
                 rendererArgs : {
                     type : "profile"
@@ -173,8 +149,7 @@ define([ "../../../declare",
          * @method constructor
          * */
         constructor: function(args){
-        	
-        	if(args.type == "peopleManaged" || args.type == "reportingChain" || args.type == "profile"){
+        	if(args.type == "peopleManaged" || args.type == "reportingChain" || args.type == "profile") {
         		this.hideSorter = true;
         	}
         	
@@ -282,24 +257,33 @@ define([ "../../../declare",
         },
 
         // Internals
+        
         _buildUrl: function(url) {
-            if (url.indexOf("?") < 0) {
-                url += "?";
-            } else {
-                url += "&";
-            }
+            var params = { 
+            	outputType : "profile",
+            	format : "full"
+            };
             
-            if (this.email) {
-                url += "email=" + this.email;
-            } else if (this.email1 && this.email2) {
-                url += "email=" + this.email1 + "," + this.email2;
-            } else if (this.userid) {
-                url += "userid=" + this.userid;
-            } else if (this.userid1 && this.userid2) {
-                url += "userid=" + this.userid1 + "," + this.userid2;
+            if (this.query) {
+            	params = lang.mixin(params, this.query);
             }
+            if (this.type == "colleagues") {
+            	params = lang.mixin(params, { connectionType : "colleague" });
+            }
+            if (this.email) {
+            	params = lang.mixin(params, { email : this.email });
+            } 
+            if (this.email1 && this.email2) {
+            	params = lang.mixin(params, { email : this.email1 + "," + this.email2 });
+            } 
+            if (this.userid) {
+            	params = lang.mixin(params, { userid : this.userid });
+            } 
+            if (this.userid1 && this.userid2) {
+            	params = lang.mixin(params, { userid : this.userid1 + "," + this.userid2 });
+            } 
 
-            return url;
+            return this.constructUrl(url, params, this.getUrlParams());
         }
 
     });

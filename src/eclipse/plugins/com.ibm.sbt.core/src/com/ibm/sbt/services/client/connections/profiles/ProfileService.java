@@ -16,6 +16,7 @@
 
 package com.ibm.sbt.services.client.connections.profiles;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -782,7 +783,7 @@ public class ProfileService extends BaseService {
 			setIdParameter(parameters, profile.getUserid());
 
 			String filePath = profile.getFieldsMap().get("imageLocation").toString();
-			java.io.File file = new java.io.File(filePath);
+			File file = new File(filePath);
 			String name = filePath.substring(filePath.lastIndexOf('\\') + 1);
 
 			int dot = name.lastIndexOf('.');
@@ -808,6 +809,39 @@ public class ProfileService extends BaseService {
 
 	}
 
+	public void updateProfilePhoto(File file, String userid) throws ProfileServiceException{
+
+		if (userid == null) {
+			throw new ProfileServiceException(null, Messages.InvalidArgument_3);
+		}
+		try {
+			Map<String, String> parameters = new HashMap<String, String>();
+			setIdParameter(parameters, userid);
+			String name = file.getName();
+			int dot = name.lastIndexOf('.');
+			String ext = "";
+			if (dot > -1) {
+				ext = name.substring(dot + 1); // add one for the dot!
+			}
+			if (!StringUtil.isEmpty(ext)) {
+				Map<String, String> headers = new HashMap<String, String>();
+				if (ext.equalsIgnoreCase("jpg")) {
+					headers.put(ProfilesConstants.REQ_HEADER_CONTENT_TYPE_PARAM, "image/jpeg");	// content-type should be image/jpeg for file extension - jpeg/jpg
+				} else {
+					headers.put(ProfilesConstants.REQ_HEADER_CONTENT_TYPE_PARAM, "image/" + ext);
+				}
+				String url = resolveProfileUrl(ProfileAPI.NONADMIN.getProfileEntityType(),
+						ProfileType.UPDATEPROFILEPHOTO.getProfileType());
+				getClientService().put(url, parameters, headers, file, ClientService.FORMAT_NULL);
+				
+			}
+		} catch (ClientServicesException e) {
+			e.printStackTrace();
+	//		throw new ProfileServiceException(e, Messages.UpdateProfilePhotoException);
+
+		}
+	
+	}
 	/**
 	 * Wrapper method to update a User's profile
 	 * 

@@ -159,7 +159,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         /**
          * Update a profile entry.
          */
-        AtomProfileEntry : "/profiles{authType}/atom/profileEntry.do",
+        AtomProfileEntryDo : "/profiles{authType}/atom/profileEntry.do",
         
         /**
          * Retrieve a feed that lists the contacts that a person has designated as colleagues.

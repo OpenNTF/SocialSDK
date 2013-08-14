@@ -72,8 +72,25 @@ define([ "../../_bridge/declare", "dojo/_base/lang", "dojo/string", "dojo/dom-co
         /*
          * Performs parameterized substitutions on a string.
          */
-        _substitute: function(template, map, transform, thisObject) {
-        	return string.substitute(template, map, transform, thisObject);
+        _substitute: function(template, map, transformer, thisObject) {
+        	if (!transformer) {
+        		transformer = function(value, key) {
+                    if (typeof value == "undefined") {
+                        // check the renderer for the property
+                        value = this._getObject(key, false, self);
+                    }
+
+                    if (typeof value == "undefined" || value == null) {
+                        return "";
+                    }
+
+                    return value;
+        		};
+        	}
+        	if (!thisObject) {
+        		thisObject = this;
+        	}
+        	return string.substitute(template, map, transformer, thisObject);
         },
         
         /*

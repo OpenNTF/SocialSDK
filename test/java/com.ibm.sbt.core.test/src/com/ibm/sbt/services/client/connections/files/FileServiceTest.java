@@ -43,7 +43,6 @@ public class FileServiceTest extends BaseUnitTest {
 		FileService fileService = new FileService();
 		authenticateEndpoint(fileService.getEndpoint(), USERNAME, PASSWORD);
 		FileEntryList listOfFiles = fileService.getMyFiles();
-		System.out.println(listOfFiles.size());
 		String testFileId = listOfFiles.get(0).getFileId();
 		FileEntry entry = fileService.getFile(testFileId, true);
 		assertEquals(entry.getCategory(), "document");

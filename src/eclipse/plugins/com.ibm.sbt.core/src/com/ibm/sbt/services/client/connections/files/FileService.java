@@ -2568,7 +2568,7 @@ public class FileService extends BaseService {
             }
             throw new FileServiceException(e, "Error unpinning the file");
         }
-    }
+    } 
 
     public void unPinFolder(String folderId) throws FileServiceException {
         if (logger.isLoggable(Level.FINEST)) {

@@ -16,6 +16,7 @@
 
 package com.ibm.sbt.services.client.connections.files;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -290,10 +291,21 @@ public class FileServiceTest extends BaseUnitTest {
 	public void testPinAndUnPin() throws Exception {
 		FileService fileService = new FileService();
 		authenticateEndpoint(fileService.getEndpoint(), USERNAME, PASSWORD);
+		
 		FileEntryList listOfFiles = fileService.getMyFiles();
 		String testFileId = listOfFiles.get(0).getFileId();
+		
 		fileService.pinFile(testFileId);
+		List<FileEntry> pinnedFiles = fileService.getPinnedFiles(null);
+		assertTrue(pinnedFiles.size() > 0);
+		assertEquals(testFileId,pinnedFiles.get(0).getFileId());
+		
 		fileService.unPinFile(testFileId);
+		pinnedFiles = fileService.getPinnedFiles(null);
+		if(pinnedFiles.size() > 0){
+			assertTrue(testFileId != pinnedFiles.get(0).getFileId());
+		}
+		
 	}
 
 	@Test

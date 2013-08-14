@@ -558,7 +558,7 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
                     headers : consts.AtomXmlHeaders,
                     data : this._constructProfilePostData(profile)
                 };   
-            var url = this.constructUrl(consts.AtomProfileEntry, {}, {authType : this._getProfileAuthString()});
+            var url = this.constructUrl(consts.AtomProfileEntryDo, {}, {authType : this._getProfileAuthString()});
 
             return this.updateEntity(url, options, callbacks, args);
         },      

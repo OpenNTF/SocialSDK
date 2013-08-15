@@ -10,7 +10,10 @@
 <%@page import="com.ibm.sbt.sample.web.util.Util"%>
 <%
     String json = "";
-    if(request.getRequestURL().toString().endsWith("java.jsp"))
+    String langParam = request.getParameter("lang");
+    if(langParam == null)
+        langParam = "";
+    if(request.getRequestURL().toString().endsWith("java.jsp") || langParam.equals("java"))
         json = SnippetFactory.getJavaSnippets(application, request).getAsJson();
     else {
         json = SnippetFactory.getJsSnippetsAsJson(application, request);

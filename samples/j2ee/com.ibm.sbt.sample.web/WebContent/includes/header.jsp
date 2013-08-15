@@ -43,7 +43,26 @@
 					<li class="<%=jsClass%>"><a href="javascript.jsp">JavaScript</a></li>
 					<li class="<%=javaClass%>"><a href="java.jsp">Java</a></li>
 				</ul>
-				<form class="navbar-form pull-right" style="<%=formStyle%>">
+                
+                <form class="navbar-form pull-right">
+                    <span style="vertical-align: middle">Environment: </span> <select
+                        id="envChange">
+                        <%
+                            String[][] envs = Util.getEnvironments(request);
+                            for (int i = 0; i < envs.length; i++) {
+                                String title = envs[i][0];
+                                String id = envs[i][1];
+                                String url = Util.getPageUrl(request, null, null, id);
+                                String selected = Util.getEnvironmentId(request).equals(id) ? " selected='selected'" : "";
+                        %>
+                        <option value="<%=url%>" <%=selected%>><%=title%></option>
+                        <%
+                            }
+                        %>
+                    </select>
+                </form>
+                
+				<form class="navbar-form pull-right" style="<%=formStyle%>;margin-right: 10px;">
 					<span style="vertical-align: middle">JavaScript Library: </span> <select
 						id="libChange">
 						<%
@@ -53,24 +72,6 @@
 								String id = jsLibs[i][1];
 								String url = Util.getPageUrl(request, id, null);
 								String selected = Util.getSelectedLibrary(request).equals(id) ? " selected='selected'" : "";
-						%>
-						<option value="<%=url%>" <%=selected%>><%=title%></option>
-						<%
-							}
-						%>
-					</select>
-				</form>
-				&nbsp;
-				<form class="navbar-form pull-right" style="margin-right: 10px;<%=formStyle%>">
-					<span style="vertical-align: middle">Environment: </span> <select
-						id="envChange">
-						<%
-							String[][] envs = Util.getEnvironments(request);
-							for (int i = 0; i < envs.length; i++) {
-								String title = envs[i][0];
-								String id = envs[i][1];
-								String url = Util.getPageUrl(request, null, null, id);
-								String selected = Util.getEnvironmentId(request).equals(id) ? " selected='selected'" : "";
 						%>
 						<option value="<%=url%>" <%=selected%>><%=title%></option>
 						<%

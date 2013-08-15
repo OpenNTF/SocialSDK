@@ -210,6 +210,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
 
         /**
          * Return the default endpoint name if client did not specify one.
+         * 
+         * @method getDefaultEndpointName
          * @returns {String}
          */
         getDefaultEndpointName: function() {
@@ -219,6 +221,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         /**
          * Search Lotus Connection for public information.
          * 
+         * @method getResults
          * @param query Text to search for
          * @param requestArgs
          */
@@ -238,6 +241,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * authentication information in the request to retrieve this 
          * resource.
          * 
+         * @method getMyResults
          * @param query Text to search for
          * @param requestArgs
          */
@@ -255,6 +259,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * Search Lotus Connection for public information, and then return 
          * the people associated with the results.
          * 
+         * @method getPeople
          * @param query Text to search for
          * @param requestArgs
          */
@@ -274,6 +279,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * associated with the results. You must provide authentication 
          * information in the request to retrieve this resource.
          * 
+         * @method getMyPeople
          * @param query Text to search for
          * @param requestArgs
          */
@@ -291,6 +297,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * Search Lotus Connection for public information, and then 
          * return the tags associated with the results.
          * 
+         * @method getTags
          * @param query Text to search for
          * @param requestArgs
          */
@@ -310,6 +317,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * with the results. You must provide authentication information in the 
          * request to retrieve this resource.
          * 
+         * @method getMyTags
          * @param query Text to search for
          * @param requestArgs
          */
@@ -328,6 +336,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * applications associated with the results and identify how many results 
          * were found per application.
          * 
+         * @method getApplications
          * @param query Text to search for
          * @param requestArgs
          */
@@ -348,6 +357,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * per application. You must provide authentication information in the 
          * request to retrieve this resource.
          * 
+         * @method getMyApplications
          * @param query Text to search for
          * @param requestArgs
          */
@@ -365,6 +375,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * Search Lotus Connection for public information, and then 
          * return the dates associated with the results.
          * 
+         * @method getDates
          * @param query Text to search for
          * @param requestArgs
          */
@@ -384,6 +395,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * associated with the results. You must provide authentication 
          * information in the request to retrieve this resource.
          * 
+         * @method getMyDates
          * @param query Text to search for
          * @param requestArgs
          */

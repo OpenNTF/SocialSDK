@@ -71,23 +71,42 @@ public abstract class BaseService {
 		if (StringUtil.isEmpty(endpointName)) {
 			endpointName = DEFAULT_ENDPOINT_NAME;
 		}
-		String javaEnv = Context.get().getProperty("javaEnvironment");
-		if(javaEnv!=null){
-		    SBTEnvironment env = (SBTEnvironment) Context.get().getBean(javaEnv);
-		    SBTEnvironment.Endpoint[] endpointsArray = env.getEndpointsArray();
-		    
-		    for(SBTEnvironment.Endpoint endpoint : endpointsArray){
-		        if(StringUtil.equals(endpointName, endpoint.getAlias())){
-	                endpointName = endpoint.getName();
-	                break;
-		        }
-		    }
-		}
 		
-		this.endpoint = EndpointFactory.getEndpoint(endpointName);
+		this.endpoint = getEnvironmentEndpoint(endpointName);
 		this.cacheSize = cacheSize;
 	}
 
+	/*
+	 * Check the environment to see which endpoints are available.
+	 * @param endpointName Requested endpoint.
+	 * @return The Endpoint which matches endpointName, first by alias then by name. 
+	 * @throws SBTException if endpointName is not found in the environment.
+	 */
+	private Endpoint getEnvironmentEndpoint(String endpointName){
+	    String javaEnv = Context.get().getProperty("environment");
+	    boolean endpointValid = false;
+        if(javaEnv!=null){
+            SBTEnvironment env = (SBTEnvironment) Context.get().getBean(javaEnv);
+            SBTEnvironment.Endpoint[] endpointsArray = env.getEndpointsArray();
+            
+            for(SBTEnvironment.Endpoint endpoint : endpointsArray){
+                if(StringUtil.equals(endpointName, endpoint.getAlias())){
+                    endpointName = endpoint.getName();
+                    endpointValid = true;
+                    break;
+                } else if (StringUtil.equals(endpointName, endpoint.getName())){
+                    endpointValid = true;
+                    break;
+                }
+            }
+        }
+        if(endpointValid){
+            return EndpointFactory.getEndpoint(endpointName);
+        } else{
+            return EndpointFactory.getEndpoint(null);
+        }
+        
+	}
 
 	/**
 	 * @return dataFormat

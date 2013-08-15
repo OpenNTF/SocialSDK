@@ -9,9 +9,11 @@ define(["../../../declare",
 		
 function(declare, BaseGridRenderer, ColleagueItemTemplate, stringUtil, lang, nls, colleagueItemFullTemplate, viewAllTemplate){
 	
-	var ColleagueGridRenderer = declare(BaseGridRenderer,{
+	var ColleagueGridRenderer = declare(BaseGridRenderer, {
 		
+		_nls: nls,
 		
+		containerClass: "lotusChunk",
 		
 		/** The template used to construct a photo url  */
         contactImageUrl: "{baseUrl}/contacts/img/photos/{photo}",
@@ -41,7 +43,6 @@ function(declare, BaseGridRenderer, ColleagueItemTemplate, stringUtil, lang, nls
          * @param args
          */
         constructor: function(args) {
-        	this.nls = nls;
         },
         
         /**
@@ -62,6 +63,7 @@ function(declare, BaseGridRenderer, ColleagueItemTemplate, stringUtil, lang, nls
        			return stringUtil.replace(this.noContactImageUrl, { baseUrl : ep.baseUrl });
        		}
         },
+        
         render: function(grid, el, items, data) {
             while (el.childNodes[0]) {
                 this._destroy(el.childNodes[0]);
@@ -83,7 +85,7 @@ function(declare, BaseGridRenderer, ColleagueItemTemplate, stringUtil, lang, nls
              return this._create("div", { "class": this.containerClass }, el);
          },
          
-        renderViewAll: function(grid, el, items, data){
+         renderViewAll: function(grid, el, items, data){
         	if (this.viewAllTemplate && !grid.hideViewAll) {
                 var node;
                 if (this._isString(this.viewAllTemplate)) {
@@ -96,12 +98,13 @@ function(declare, BaseGridRenderer, ColleagueItemTemplate, stringUtil, lang, nls
                 
                 this._doAttachEvents(grid, el, data);
             }
-        },
-        viewAllTitle: function(grid, renderer, items, data) {
+         },
+         
+         viewAllTitle: function(grid, renderer, items, data) {
             var str = (data.totalCount == 1) ? this.nls.root.person : this.nls.root.people;
             var totalCount = stringUtil.replace(str, { totalCount : data.totalCount });
             return stringUtil.replace(nls.root.viewAll, { totalCount : totalCount });
-        }
+         }
 		
 	});
 	return ColleagueGridRenderer;

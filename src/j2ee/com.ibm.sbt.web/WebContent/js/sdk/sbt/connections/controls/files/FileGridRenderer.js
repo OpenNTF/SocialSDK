@@ -58,8 +58,6 @@ define(["../../../declare",
              } else if (args.type == "comment"){
                  this.template = commentTemplate;
              }
-             
-             
          },
          
          /**

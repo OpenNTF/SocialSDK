@@ -39,17 +39,21 @@ define(["../../../declare", "../../../lang", "../../../config",
         getMyProfile: function() {
             var path = getUserIdentity;
             
-            var self = this;
-            var endpoint = this._getEndpoint();
-            endpoint.request(path, { handleAs : "json", preventCache : true }).then(
-                function(response) {
-                	var userid = response.subscriberid;
-                    self.getProfile(userid);
-                },
-                function(error) {
-                    self._displayError(error);
-                }
-            );
+            if (this.userid) {
+            	this.getProfile(this.userid);
+            } else {
+                var self = this;
+                var endpoint = this._getEndpoint();
+                endpoint.request(path, { handleAs : "json", preventCache : true }).then(
+                    function(response) {
+                    	var userid = response.subscriberid;
+                        self.getProfile(userid);
+                    },
+                    function(error) {
+                        self._displayError(error);
+                    }
+                );
+            }
         },
         
         getProfile: function(id) {

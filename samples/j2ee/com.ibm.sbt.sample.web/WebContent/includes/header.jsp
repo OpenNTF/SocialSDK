@@ -62,7 +62,7 @@
                     </select>
                 </form>
                 
-				<form class="navbar-form pull-right" style="margin-right: 10px;">
+				<form class="navbar-form pull-right" style="<%=formStyle%>;margin-right: 10px;">
 					<span style="vertical-align: middle">JavaScript Library: </span> <select
 						id="libChange">
 						<%

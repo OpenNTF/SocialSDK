@@ -166,7 +166,7 @@ define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscr
 		@method getTelehoneNumber
 		@return {String} Telephone number object of the profile
 		**/
-		getTelehoneNumber: function () {
+		getTelephoneNumber: function () {
 			return this.getAsString("telephone"); 
 		},
 		/**
@@ -299,9 +299,9 @@ define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscr
             var options = {
                 method : "GET",
                 handleAs : "json", 
-                query : requestArgs
+                query : args || { format: "json" }
             };
-            var entityId = idObject.userid;
+            var entityId = encodeURIComponent(idObject.userid);
             var url = this.constructUrl(Consts.GetProfileByGUID, {}, {idToBeReplaced : entityId});
             return this.getEntity(url, options, entityId, this.getProfileCallbacks());
         },

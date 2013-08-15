@@ -26,6 +26,8 @@ import com.ibm.sbt.jslibrary.servlet.LibraryRequest;
  */
 public class DominoDojoLibrary extends DojoLibrary {
 	
+	public static final boolean WATSON	= false;
+	
 	public static final String	NAME	= "dojo";					//$NON-NLS-1$
 	
 	public DominoDojoLibrary() {
@@ -46,20 +48,22 @@ public class DominoDojoLibrary extends DojoLibrary {
 	}
 	
 	protected String[][] addExtraModules(String[][] s) {
-		if(true) {
+		if(WATSON) {
 			String[][] ns = new String[s.length+1][];
 			System.arraycopy(s, 0, ns, 0, s.length);
-			return new String[][] {
-				{"com/ibm/watson", "/.watson/com/ibm/watson"}
-			};
+			System.arraycopy(WATSON_LIBS, 0, ns, s.length, WATSON_LIBS.length);
+			return ns;
 		}
 		return s;
 	}
+	private static final String[][] WATSON_LIBS = new String[][] {{"com/ibm/watson", "/.watson/com/ibm/watson"}};
 	
 	protected String getModuleUrl(LibraryRequest request, String modulePath, ModuleType type) {
-		if(type==ModuleType.SBTX_MODULE && modulePath.startsWith("/.watson/")) {
-			String jsUrl = "https://priand64.swg.usma.ibm.com/xsp/.ibmxspres/";
-			return PathUtil.concat(jsUrl, modulePath, '/');
+		if(WATSON) {
+			if(type==ModuleType.SBTX_MODULE && modulePath.startsWith("/.watson/")) {
+				String jsUrl = "https://priand64.swg.usma.ibm.com/xsp/.ibmxspres/";
+				return PathUtil.concat(jsUrl, modulePath, '/');
+			}
 		}
 		return super.getModuleUrl(request, modulePath, type);
 	}

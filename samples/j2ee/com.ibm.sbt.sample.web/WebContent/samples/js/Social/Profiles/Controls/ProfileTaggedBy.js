@@ -1,9 +1,9 @@
 require(["sbt/dom", "sbt/connections/controls/profiles/ProfileTagsGrid"], function(dom, ProfileTagsGrid) {
     var grid = new ProfileTagsGrid({
         type : "list",
-        targetEmail : "%{sample.email2}",
-        sourceEmail : "%{sample.email1}",
-        sourceName : "%{sample.displayName1}"
+        targetEmail : "%{sample.email1}",
+        sourceEmail : "%{sample.email2}",
+        sourceName : "%{sample.displayName2}"
     });
 
     dom.byId("gridDiv").appendChild(grid.domNode);

@@ -6,14 +6,18 @@ require(["sbt/dom", "sbt/connections/controls/profiles/ProfileGrid"], function(d
     
     grid.profileAction = {
     		
-    	getTooltip: function(){
-    		return "This is the override function;"
-    		
-    	},
-    	
-    	execute: function(){
-    		alert("This is the click override function");
-    	}
+        getTooltip : function(item) {
+        	return string.substitute("Display details for ${name}", { title : item.getValue("name") });
+        },
+
+        execute : function(item,opts,event) {
+            var str =
+                "userid: " + item.getValue("userid") + "\n" +
+                "name: " + item.getValue("name") + "\n" +
+                "email: " + item.getValue("email") + "\n" +
+                "profileUrl: " + item.getValue("profileUrl");
+            alert(str);
+        }
     
     };
    

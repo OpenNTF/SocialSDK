@@ -63,7 +63,7 @@ define([ "../../declare", "../../controls/grid/GridRenderer",
          */
         constructor : function(args) {
             this._mixin(this, args);
-            this.nls = this._mixin(this._nls, nls);
+            this.nls = this._mixin(nls, this._nls);
         }
 
     });

@@ -21,7 +21,7 @@ require(["sbt/dom", "sbt/json", "sbt/smartcloud/ProfileService"],
 function getResults(profile) {
     return {
     	"getUserId" : profile.getId(),
-        "getName" : profile.getDisplayName(),
+        "getDisplayName" : profile.getDisplayName(),
         "getThumbnailUrl" : profile.getThumbnailUrl(),
         "getEmail" : profile.getEmail(),
         "getAddress" : profile.getAddress(),

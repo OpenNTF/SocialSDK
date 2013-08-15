@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app"
+	xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:os="http://a9.com/-/spec/opensearch/1.1/"
+	xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:thr="http://purl.org/syndication/thread/1.0">
+	<generator uri="http://www.ibm.com/xmlns/prod/sn" version="4.0.0.0">IBM
+		Connections - Activities</generator>
+	<icon>https://qs.renovations.com:444/activities/styles/images/favicon.ico
+	</icon>
+	<logo>https://qs.renovations.com:444/activities/nav/common/images/iconActivities128.png
+	</logo>
+	<id>https://qs.renovations.com:444/activities/service/atom2/activities?email=FrankAdams%40renovations.com
+	</id>
+	<title type="text">Activity Dashboard for Frank Adams</title>
+	<updated>2013-08-15T20:32:41Z</updated>
+	<author>
+		<name>Frank Adams</name>
+		<email>FrankAdams@renovations.com</email>
+		<snx:userid>0EE5A7FA-3434-9A59-4825-7A7000278DAA</snx:userid>
+		<snx:userState>active</snx:userState>
+	</author>
+	<link rel="self"
+		href="https://qs.renovations.com:444/activities/service/atom2/activities?email=FrankAdams%40renovations.com" />
+	<link rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml"
+		href="https://qs.renovations.com:444/activities/service/atom2/service" />
+	<link rel="http://www.ibm.com/xmlns/prod/sn/tag-cloud" type="application/atomcat+xml"
+		href="https://qs.renovations.com:444/activities/service/atom2/tags" />
+	<link rel="alternate"
+		href="https://qs.renovations.com:444/activities/service/html/activities?email=FrankAdams%40renovations.com" />
+	<os:totalResults>3</os:totalResults>
+	<os:startIndex>1</os:startIndex>
+	<entry>
+		<id>urn:lsid:ibm.com:oa:9f8b0a00-d262-4b9d-a403-e900727339ef</id>
+		<title type="text">Activity 3</title>
+		<updated>2013-08-15T20:32:41Z</updated>
+		<published>2013-08-15T20:32:41Z</published>
+		<author>
+			<name>Frank Adams</name>
+			<email>FrankAdams@renovations.com</email>
+			<snx:userid>0EE5A7FA-3434-9A59-4825-7A7000278DAA</snx:userid>
+			<snx:ldapid>d8df4821-0479-4bd7-b489-3d17cb8f8eda</snx:ldapid>
+			<snx:userState>active</snx:userState>
+		</author>
+		<contributor>
+			<name>Frank Adams</name>
+			<email>FrankAdams@renovations.com</email>
+			<snx:userid>0EE5A7FA-3434-9A59-4825-7A7000278DAA</snx:userid>
+			<snx:ldapid>d8df4821-0479-4bd7-b489-3d17cb8f8eda</snx:ldapid>
+			<snx:userState>active</snx:userState>
+		</contributor>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/type"
+			term="activity" label="Activity" />
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/priority"
+			term="1" label="Normal" />
+		<snx:duedate>2013-12-31T00:00:00Z</snx:duedate>
+		<category term="three" />
+		<link rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml"
+			href="https://qs.renovations.com:444/activities/service/atom2/acl?activityUuid=9f8b0a00-d262-4b9d-a403-e900727339ef" />
+		<link rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml"
+			href="https://qs.renovations.com:444/activities/service/atom2/activity/history?activityUuid=9f8b0a00-d262-4b9d-a403-e900727339ef" />
+		<link rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml"
+			href="https://qs.renovations.com:444/activities/service/atom2/entrytemplates?activityUuid=9f8b0a00-d262-4b9d-a403-e900727339ef" />
+		<app:collection
+			href="https://qs.renovations.com:444/activities/service/atom2/activity?activityUuid=9f8b0a00-d262-4b9d-a403-e900727339ef&amp;email=FrankAdams%40renovations.com">
+			<title type="text">Activity 3</title>
+			<app:categories
+				href="https://qs.renovations.com:444/activities/service/atom2/categories?activityUuid=9f8b0a00-d262-4b9d-a403-e900727339ef" />
+		</app:collection>
+		<snx:activity>9f8b0a00-d262-4b9d-a403-e900727339ef</snx:activity>
+		<link rel="edit" type="application/atom+xml"
+			href="https://qs.renovations.com:444/activities/service/atom2/activitynode?activityNodeUuid=9f8b0a00-d262-4b9d-a403-e900727339ef" />
+		<link rel="self" type="application/atom+xml"
+			href="https://qs.renovations.com:444/activities/service/atom2/activity?activityUuid=9f8b0a00-d262-4b9d-a403-e900727339ef&amp;email=FrankAdams%40renovations.com" />
+		<link rel="alternate" type="application/xhtml+xml"
+			href="https://qs.renovations.com:444/activities/service/html/activity/recent?activityUuid=9f8b0a00-d262-4b9d-a403-e900727339ef" />
+		<link rel="alternate" type="text/html"
+			href="https://qs.renovations.com:444/activities/service/html/activity/recent?activityUuid=9f8b0a00-d262-4b9d-a403-e900727339ef" />
+		<snx:position>-2147483648</snx:position>
+		<snx:depth>0</snx:depth>
+		<snx:permissions>none, create_activity, view_activity, edit_activity,
+			delete_activity, activity_owner, edit_activity_tags, design_activity,
+			edit_statements, delete_statements, add_members, delete_members,
+			create_entries, edit_personal_entries, edit_all_entries,
+			delete_personal_entries, delete_all_entries,
+			edit_personal_entry_tags, edit_all_entry_tags, view_members
+		</snx:permissions>
+		<snx:icon>https://qs.renovations.com:444/activities/nav/common/images/iconActivities16.png
+		</snx:icon>
+		<content type="text">
+		</content>
+	</entry>
+	<entry>
+		<id>urn:lsid:ibm.com:oa:89b57884-f6b4-404c-a1f1-d07be22e5124</id>
+		<title type="text">Activity 2</title>
+		<updated>2013-08-15T20:32:15Z</updated>
+		<published>2013-08-15T20:32:15Z</published>
+		<author>
+			<name>Frank Adams</name>
+			<email>FrankAdams@renovations.com</email>
+			<snx:userid>0EE5A7FA-3434-9A59-4825-7A7000278DAA</snx:userid>
+			<snx:ldapid>d8df4821-0479-4bd7-b489-3d17cb8f8eda</snx:ldapid>
+			<snx:userState>active</snx:userState>
+		</author>
+		<contributor>
+			<name>Frank Adams</name>
+			<email>FrankAdams@renovations.com</email>
+			<snx:userid>0EE5A7FA-3434-9A59-4825-7A7000278DAA</snx:userid>
+			<snx:ldapid>d8df4821-0479-4bd7-b489-3d17cb8f8eda</snx:ldapid>
+			<snx:userState>active</snx:userState>
+		</contributor>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/type"
+			term="activity" label="Activity" />
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/priority"
+			term="1" label="Normal" />
+		<snx:duedate>2013-10-31T00:00:00Z</snx:duedate>
+		<category term="two" />
+		<link rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml"
+			href="https://qs.renovations.com:444/activities/service/atom2/acl?activityUuid=89b57884-f6b4-404c-a1f1-d07be22e5124" />
+		<link rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml"
+			href="https://qs.renovations.com:444/activities/service/atom2/activity/history?activityUuid=89b57884-f6b4-404c-a1f1-d07be22e5124" />
+		<link rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml"
+			href="https://qs.renovations.com:444/activities/service/atom2/entrytemplates?activityUuid=89b57884-f6b4-404c-a1f1-d07be22e5124" />
+		<app:collection
+			href="https://qs.renovations.com:444/activities/service/atom2/activity?activityUuid=89b57884-f6b4-404c-a1f1-d07be22e5124&amp;email=FrankAdams%40renovations.com">
+			<title type="text">Activity 2</title>
+			<app:categories
+				href="https://qs.renovations.com:444/activities/service/atom2/categories?activityUuid=89b57884-f6b4-404c-a1f1-d07be22e5124" />
+		</app:collection>
+		<snx:activity>89b57884-f6b4-404c-a1f1-d07be22e5124</snx:activity>
+		<link rel="edit" type="application/atom+xml"
+			href="https://qs.renovations.com:444/activities/service/atom2/activitynode?activityNodeUuid=89b57884-f6b4-404c-a1f1-d07be22e5124" />
+		<link rel="self" type="application/atom+xml"
+			href="https://qs.renovations.com:444/activities/service/atom2/activity?activityUuid=89b57884-f6b4-404c-a1f1-d07be22e5124&amp;email=FrankAdams%40renovations.com" />
+		<link rel="alternate" type="application/xhtml+xml"
+			href="https://qs.renovations.com:444/activities/service/html/activity/recent?activityUuid=89b57884-f6b4-404c-a1f1-d07be22e5124" />
+		<link rel="alternate" type="text/html"
+			href="https://qs.renovations.com:444/activities/service/html/activity/recent?activityUuid=89b57884-f6b4-404c-a1f1-d07be22e5124" />
+		<snx:position>-2147483648</snx:position>
+		<snx:depth>0</snx:depth>
+		<snx:permissions>none, create_activity, view_activity, edit_activity,
+			delete_activity, activity_owner, edit_activity_tags, design_activity,
+			edit_statements, delete_statements, add_members, delete_members,
+			create_entries, edit_personal_entries, edit_all_entries,
+			delete_personal_entries, delete_all_entries,
+			edit_personal_entry_tags, edit_all_entry_tags, view_members
+		</snx:permissions>
+		<snx:icon>https://qs.renovations.com:444/activities/nav/common/images/iconActivities16.png
+		</snx:icon>
+		<content type="text">
+		</content>
+	</entry>
+	<entry>
+		<id>urn:lsid:ibm.com:oa:ab25493a-6ed5-408a-8e0e-95eaccaca4e6</id>
+		<title type="text">Activity 1</title>
+		<updated>2013-08-15T20:31:33Z</updated>
+		<published>2013-08-15T20:31:33Z</published>
+		<author>
+			<name>Frank Adams</name>
+			<email>FrankAdams@renovations.com</email>
+			<snx:userid>0EE5A7FA-3434-9A59-4825-7A7000278DAA</snx:userid>
+			<snx:ldapid>d8df4821-0479-4bd7-b489-3d17cb8f8eda</snx:ldapid>
+			<snx:userState>active</snx:userState>
+		</author>
+		<contributor>
+			<name>Frank Adams</name>
+			<email>FrankAdams@renovations.com</email>
+			<snx:userid>0EE5A7FA-3434-9A59-4825-7A7000278DAA</snx:userid>
+			<snx:ldapid>d8df4821-0479-4bd7-b489-3d17cb8f8eda</snx:ldapid>
+			<snx:userState>active</snx:userState>
+		</contributor>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/type"
+			term="activity" label="Activity" />
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/priority"
+			term="1" label="Normal" />
+		<snx:duedate>2013-08-29T23:00:00Z</snx:duedate>
+		<category term="one" />
+		<link rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml"
+			href="https://qs.renovations.com:444/activities/service/atom2/acl?activityUuid=ab25493a-6ed5-408a-8e0e-95eaccaca4e6" />
+		<link rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml"
+			href="https://qs.renovations.com:444/activities/service/atom2/activity/history?activityUuid=ab25493a-6ed5-408a-8e0e-95eaccaca4e6" />
+		<link rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml"
+			href="https://qs.renovations.com:444/activities/service/atom2/entrytemplates?activityUuid=ab25493a-6ed5-408a-8e0e-95eaccaca4e6" />
+		<app:collection
+			href="https://qs.renovations.com:444/activities/service/atom2/activity?activityUuid=ab25493a-6ed5-408a-8e0e-95eaccaca4e6&amp;email=FrankAdams%40renovations.com">
+			<title type="text">Activity 1</title>
+			<app:categories
+				href="https://qs.renovations.com:444/activities/service/atom2/categories?activityUuid=ab25493a-6ed5-408a-8e0e-95eaccaca4e6" />
+		</app:collection>
+		<snx:activity>ab25493a-6ed5-408a-8e0e-95eaccaca4e6</snx:activity>
+		<link rel="edit" type="application/atom+xml"
+			href="https://qs.renovations.com:444/activities/service/atom2/activitynode?activityNodeUuid=ab25493a-6ed5-408a-8e0e-95eaccaca4e6" />
+		<link rel="self" type="application/atom+xml"
+			href="https://qs.renovations.com:444/activities/service/atom2/activity?activityUuid=ab25493a-6ed5-408a-8e0e-95eaccaca4e6&amp;email=FrankAdams%40renovations.com" />
+		<link rel="alternate" type="application/xhtml+xml"
+			href="https://qs.renovations.com:444/activities/service/html/activity/recent?activityUuid=ab25493a-6ed5-408a-8e0e-95eaccaca4e6" />
+		<link rel="alternate" type="text/html"
+			href="https://qs.renovations.com:444/activities/service/html/activity/recent?activityUuid=ab25493a-6ed5-408a-8e0e-95eaccaca4e6" />
+		<snx:position>-2147483648</snx:position>
+		<snx:depth>0</snx:depth>
+		<snx:permissions>none, create_activity, view_activity, edit_activity,
+			delete_activity, activity_owner, edit_activity_tags, design_activity,
+			edit_statements, delete_statements, add_members, delete_members,
+			create_entries, edit_personal_entries, edit_all_entries,
+			delete_personal_entries, delete_all_entries,
+			edit_personal_entry_tags, edit_all_entry_tags, view_members
+		</snx:permissions>
+		<snx:icon>https://qs.renovations.com:444/activities/nav/common/images/iconActivities16.png
+		</snx:icon>
+		<content type="text">
+		</content>
+	</entry>
+</feed>

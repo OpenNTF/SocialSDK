@@ -30,7 +30,8 @@ function getResults(profile) {
         "getProfileUrl" : profile.getProfileUrl(),
         "getTelephoneNumber" : profile.getTelephoneNumber(),
         "getCountry" : profile.getCountry(),
-        "getOrganisationId" : profile.getOrgId(),
+        "getOrgId" : profile.getOrgId(),
+        "getOrg" : profile.getOrg(),
         "getAbout" : profile.getAbout()
     };
 }

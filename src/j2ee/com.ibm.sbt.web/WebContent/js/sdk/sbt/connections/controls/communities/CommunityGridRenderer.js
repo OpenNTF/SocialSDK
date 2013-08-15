@@ -129,7 +129,7 @@ define(["../../../declare", "../../../stringUtil", "../../../i18n", "../../../la
           */
          displayTags: function(grid, item, i, items) {
         	 var tags = item.getValue("tags");
-             if (tags == undefined || lang.isString(tags)) {
+             if (tags == undefined) {
                  return "display: none";
              } else {
                  return "";
@@ -146,7 +146,7 @@ define(["../../../declare", "../../../stringUtil", "../../../i18n", "../../../la
           */
          tagsLabel: function(grid, item, i, items) {
         	 var tags = item.getValue("tags");
-             if (tags == undefined || lang.isString(tags)) {
+             if (tags == undefined) {
                  return "";
              } else {
                  return this.nls.tags;
@@ -164,7 +164,7 @@ define(["../../../declare", "../../../stringUtil", "../../../i18n", "../../../la
           */
          tagsAnchors: function(grid, item, i, items) {
              var tags = item.getValue("tags");
-             if (tags == undefined || lang.isString(tags)) {
+             if (tags == undefined) {
                  return "";
              } else {
                  var tagsStr = "";
@@ -175,7 +175,9 @@ define(["../../../declare", "../../../stringUtil", "../../../i18n", "../../../la
                              tagsStr += ", ";
                          }
                      }
-                 } 
+                 } else if (lang.isString(tags)) {
+                	 tagsStr = this._substitute(this.tagAnchorTemplate, { tagName : tags });
+                 }
                  return tagsStr;
              }
          }

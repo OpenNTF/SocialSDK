@@ -79,20 +79,33 @@ define([ "../../../declare",
         },
         
         /**
-         * Creates an instance of an AtomStore
-         * @method createDefaultStore
-         * @param args will contain the url and attributes for the atom store.
-         * @returns The createDefaultStore method of the superclass, which will return an
-         * instance of the AtomStore.
+         * Override buildUrl to add format, target and source
+         * 
+         * @method buildUrl
+         * @param url base url
+         * @param args arguments that will be passed to the store
+         * @returns Built url
          */
-        createDefaultStore : function(args) {
-            if (!args.url) {
-                return null;
-            }
+        buildUrl: function(url, args) {
+            var params = { format : this.format };
             
-            args.url = this._buildUrl(args.url);
+            if (this.query) {
+            	params = lang.mixin(params, this.query);
+            }
+            if (this.targetEmail) {
+            	params = lang.mixin(params, { targetEmail : this.targetEmail });
+            } 
+            if (this.targetKey) {
+            	params = lang.mixin(params, { targetKey : this.targetKey });
+            } 
+            if (this.sourceEmail) {
+            	params = lang.mixin(params, { sourceEmail : this.sourceEmail });
+            } 
+            if (this.sourceKey) {
+            	params = lang.mixin(params, { sourceKey : this.sourceKey });
+            } 
 
-            return this.inherited(arguments);
+            return this.constructUrl(url, params, this.getUrlParams());
         },
         
         /**
@@ -128,38 +141,16 @@ define([ "../../../declare",
          * @param ev the event 
          */
         handleClick: function(el, data, ev) {
-            if (this.ProfileTagAction) {
+            if (this.profileTagAction) {
             	console.log(data);
                 this._stopEvent(ev);
                 
                 this.profileTagAction.execute(data, { grid : this.grid }, ev);
             }
-        },
+        }
         
         // Internals
         
-        /*
-         * Construct the URL to be used to retrieve the users tags
-         */
-        _buildUrl: function(url) {
-            var params = { format : this.format };
-            
-            if (this.targetEmail) {
-            	params = lang.mixin(params, { targetEmail : this.targetEmail });
-            } 
-            if (this.targetKey) {
-            	params = lang.mixin(params, { targetKey : this.targetKey });
-            } 
-            if (this.sourceEmail) {
-            	params = lang.mixin(params, { sourceEmail : this.sourceEmail });
-            } 
-            if (this.sourceKey) {
-            	params = lang.mixin(params, { sourceKey : this.sourceKey });
-            } 
-
-            return this.constructUrl(url, params, this.getUrlParams());
-        }
-
     });
 
     return ProfileTagsGrid;

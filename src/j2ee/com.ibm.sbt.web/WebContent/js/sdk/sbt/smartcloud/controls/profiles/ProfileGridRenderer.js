@@ -28,7 +28,7 @@ define(["../../../declare", "../../../lang", "../../../stringUtil", "../BaseGrid
      */
     var ProfileGridRenderer = declare(BaseGridRenderer, {
 
-         /**
+         /*
           * The strings used in the grid, these are stored in a separate file, in the nls folder
           */
          _nls: nls,

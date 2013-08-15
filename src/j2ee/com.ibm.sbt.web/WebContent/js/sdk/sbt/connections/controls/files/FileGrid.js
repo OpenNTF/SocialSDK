@@ -379,15 +379,41 @@ define([ "../../../declare",
         },
         
         /**
-         * Creates a new AtomStore
-         * @method createDefaultStore
-         * @param args -Store args, PArameters for the Atom store, such as URL, and Attributes
-         * @returns
+         * Override buildUrl to add direction, userId and fileId
+         * 
+         * @method buildUrl
+         * @param url base url
+         * @param args arguments that will be passed to the store
+         * @returns Built url
          */
-        createDefaultStore : function(args) {
-            args.url = this._buildUrl(args.url);
+        buildUrl: function(url, args) {
+            var params = { format : this.format };
             
-            return this.inherited(arguments);
+            if (this.query) {
+            	params = lang.mixin(params, this.query);
+            }
+            if (this.direction) {
+            	params = lang.mixin(params, { direction : this.direction });
+            } 
+
+            return this.constructUrl(url, params, this.getUrlParams());
+        },
+        
+        /**
+         * Return the url parameters to be used
+         * @returns {Object}
+         */
+        getUrlParams: function() {
+        	var params = { authType : this.getAuthType() };
+
+        	if (this.userid || this.userId) {
+            	params = lang.mixin(params, { userId : this.userid || this.userId });
+            } 
+            if (this.fileid || this.fileId) {
+            	params = lang.mixin(params, { fileId : this.fileid || this.fileId });
+            }
+            
+            return params;
         },
         
         /**
@@ -424,6 +450,7 @@ define([ "../../../declare",
                 this.fileAction.execute(data, { grid : this.grid }, ev);
             }
         },
+        
         /**
          * @method getSortInfo
          * @returns A List of Strings,that describe how the grid can be sorted
@@ -592,6 +619,7 @@ define([ "../../../declare",
 	        	
 	          }
         },	
+        
         /**This function pins(favourites) a file,
          * It will send a request to the server using the file service API,
          * And when the request returns successfully, the css clas
@@ -639,17 +667,9 @@ define([ "../../../declare",
         		));
         	}
         	
-        },
-        // Internals
-        _buildUrl: function(url) {
-            url = stringUtil.replace(url, this);
-            
-            if (this.direction) {
-                url += "?direction=" + this.direction;
-            }
-
-            return url;
         }
+
+        // Internals
 
     });
 

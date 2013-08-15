@@ -15,8 +15,6 @@
  */
 package com.ibm.xsp.sbtsdk.servlets;
 
-import org.apache.commons.io.input.SwappedDataInputStream;
-
 import com.ibm.commons.util.PathUtil;
 import com.ibm.sbt.jslibrary.servlet.DojoLibrary;
 import com.ibm.sbt.jslibrary.servlet.LibraryRequest;

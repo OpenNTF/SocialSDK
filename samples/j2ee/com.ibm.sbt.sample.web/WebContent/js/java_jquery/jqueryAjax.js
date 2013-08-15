@@ -17,16 +17,22 @@
             setEnv(env="defaultEnvironment");
         parameters = parameters + "&env=" + env + "&lang=java";
         var snippetQuery = snippetPage + parameters;
-        $("#snippetContainer").load(snippetQuery);
-        // refresh iframe with javaPreview.jsp.
-        var previewQuery = previewPage + parameters;
-        $("#previewFrame").attr('src', previewQuery);
-
-        // update previewLink
-        $("#previewLink").attr("href", previewQuery).text(previewQuery);
-        
-        if(callback)
+        if(callback){
+            $("#snippetContainer").empty();
+            $("#previewFrame").attr('src', "about:blank");
+            $("#previewLink").empty();
             callback(parameters);
+        }
+        else if(snippet){
+            $("#snippetContainer").load(snippetQuery);
+            // refresh iframe with javaPreview.jsp.
+            var previewQuery = previewPage + parameters;
+            $("#previewFrame").attr('src', previewQuery);
+    
+            // update previewLink
+            $("#previewLink").attr("href", previewQuery).text(previewQuery);
+        }
+        
     }
 
     function setSnippet(snippet){

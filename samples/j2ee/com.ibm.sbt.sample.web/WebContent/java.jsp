@@ -34,7 +34,7 @@
     <!-- main content starts -->
     <div class="container-fluid">
         <div class="row-fluid">
-            <div class="span3">
+            <div id="treeOutline" class="span3">
                 <%@include file="includes/outline.jsp"%>
             </div>
             <div class="span8">

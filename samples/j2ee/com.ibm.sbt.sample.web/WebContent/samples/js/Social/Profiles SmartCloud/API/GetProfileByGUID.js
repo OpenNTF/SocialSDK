@@ -26,9 +26,9 @@ function getResults(profile) {
         "getEmail" : profile.getEmail(),
         "getAddress" : profile.getAddress(),
         "getDepartment" : profile.getDepartment(),
-        "getTitle" : profile.getTitle(),
+        "getJobTitle" : profile.getJobTitle(),
         "getProfileUrl" : profile.getProfileUrl(),
-        "getPhoneNumber" : profile.getPhoneNumber(),
+        "getTelephoneNumber" : profile.getTelephoneNumber(),
         "getCountry" : profile.getCountry(),
         "getOrganisationId" : profile.getOrgId(),
         "getAbout" : profile.getAbout()

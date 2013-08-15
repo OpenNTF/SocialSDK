@@ -123,12 +123,33 @@ define([ "../../../declare",
             this._activeSortIsDesc = true;
         },
 
-        createDefaultStore : function(args) {
-            args.url = this._buildUrl(args.url);
+        /**
+         * Override buildUrl to add format and component
+         * 
+         * @method buildUrl
+         * @param url base url
+         * @param args arguments that will be passed to the store
+         * @returns Built url
+         */
+        buildUrl: function(url, args) {
+            var params = { format : this.format };
             
-            return this.inherited(arguments);
+            if (this.query) {
+            	params = lang.mixin(params, this.query);
+            }
+            if (this.component) {
+            	params = lang.mixin(params, { component : this.component });
+            } 
+
+            return this.constructUrl(url, params, this.getUrlParams());
         },
 
+        /**
+         * Return an instance of SearchGridRenderer.
+         * 
+         * @method createDefaultRenderer
+         * @param args
+         */
         createDefaultRenderer : function(args) {
             return new SearchGridRenderer(args);
         },
@@ -148,38 +169,28 @@ define([ "../../../declare",
             };
         },
         
+        /**
+         * @method sortByRelevance
+         * @param el
+         * @param data
+         * @param ev
+         */
         sortByRelevance: function(el, data, ev){
             this._sort("relevance", true, el, data, ev);
         },
 
         /**
          * Sort the grid rows by last modified date
-         * @method sortByLastModified
+         * @method sortByDate
          * @param el The element that was clicked, typically a "sort by" button
          * @param data the data associated with the element
          * @param ev the event
          */
         sortByDate: function(el, data, ev) {
             this._sort("date", true, el, data, ev);
-        },
+        }
         
         // Internals
-        _buildUrl: function(url) {
-            if(this.query){
-                url += "?query=" + this.query;
-                var app = this.app;
-                if(app !== undefined){
-                    if(app.indexOf("bookmark") === 0 || app.indexOf("dogear") == 0)
-                        url += "&component=dogear";
-                    else if(app.indexOf("status") === 0)
-                        url += "&component=status_updates";
-                    else if(app !== "all")
-                        url += "&component=" + this.app;
-                }
-
-            }
-            return url;
-        }
 
     });
 

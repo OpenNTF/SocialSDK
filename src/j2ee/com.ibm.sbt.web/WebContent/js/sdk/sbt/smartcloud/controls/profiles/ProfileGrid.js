@@ -58,15 +58,12 @@ define([ "../../../declare",
         pageSize : parameter.oneBasedInteger("count")
     };
 	
-	var endpoint = "smartcloud";
-	
     /**
      * @class ProfileGrid
      * @namespace sbt.connections.controls.profiles
      */
     var ProfileGrid = declare(Grid, {
    
-    	
     	/**
     	 * @param options, This is a list of all
     	 * the different types of profile grids available.
@@ -81,7 +78,6 @@ define([ "../../../declare",
                     paramSchema : ParamSchema,
                     feedXPath : FeedXPath,
                     namespaces : Namespaces,
-                    endpoint: endpoint
                 },
                 rendererArgs : {
                     type : "contacts"
@@ -94,7 +90,6 @@ define([ "../../../declare",
 	                paramSchema : ParamSchema,
 	                feedXPath : FeedXPath,
 	                namespaces : Namespaces,
-	                endpoint: endpoint
 	            },
 	            rendererArgs : {
 	                type : "friends"
@@ -102,6 +97,11 @@ define([ "../../../declare",
 	        }
         },
         
+        /**
+         * Endpoint to use, default is 'smartcloud'
+         */
+    	endpoint: "smartcloud",
+    	
         /**
          * A profile action, defines default behaviour for when 
          * items in the grid are clicked on or hovered on,
@@ -115,36 +115,11 @@ define([ "../../../declare",
          */
         defaultOption: "contacts",
         
-        /**Constructor function
+        /**
+         * Constructor function
          * @method constructor
-         * */
+         */
         constructor: function(args){
-        },
-        
-        /**
-         * Creates an instance of an AtomStore
-         * @method createDefaultStore
-         * @param args will contain the url and attributes for the atom store.
-         * @returns The createDefaultStore method of the superclass, which will return an
-         * instance of the AtomStore.
-         */
-        createDefaultStore : function(args) {
-            if (!args.url) {
-                return null;
-            }
-            
-            return this.inherited(arguments);
-        },
-        
-        /**
-         * The post create function is called, after the grid has been created.
-         * The function will call the super classes post create
-         * then load the semantic tag service. The semantic tag service
-         * is Javascript for creating business card functionality.
-         * @method postCreate
-         */
-        postCreate: function() {        	
-        	this.inherited(arguments);
         },
         
         /**

@@ -141,7 +141,30 @@ public class FileServiceTest extends BaseUnitTest {
 			}
 		}
 	}
-
+	
+	@Test
+	public void pinAndUnpinFolder() throws Exception{
+		
+		//Create File Service
+		FileService fileService = new FileService();
+		authenticateEndpoint(fileService.getEndpoint(), USERNAME, PASSWORD);
+		
+		//Pin the first folder in My Folders
+		List<FileEntry> fileEntries = fileService.getMyFolders(null);
+		fileService.pinFolder(fileEntries.get(0).getFileId());
+		
+		//Check that the folder is now in the list of Pinned Folders and the list is > 0
+		List<FileEntry> pinnedFolders = fileService.getPinnedFolders();
+		assertTrue(pinnedFolders.size() > 0);
+		assertEquals(fileEntries.get(0).getFileId(), pinnedFolders.get(0).getFileId());
+		
+		//Remove the Pinned folder and check that pinned folders no longer contains the folder
+		fileService.unPinFolder(pinnedFolders.get(0).getFileId());
+		if(pinnedFolders.size() > 0){
+			assertTrue(fileEntries.get(0).getFileId() != pinnedFolders.get(0).getFileId());
+		}
+	}
+	
 //  Commenting this test as the corresponding wrapper needs to be checked in yet.
 //	@Ignore
 //	@Test

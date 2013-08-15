@@ -11,8 +11,8 @@
  
  String envName = StringUtil.isNotEmpty(envId) ? envId : Util.defaultEnvironment;
  
- if(Context.get().getProperty("javaEnvironment") == null){
-     Context.get().setProperty("javaEnvironment", envName);
+ if(Context.get().getProperty("environment") == null){
+     Context.get().setProperty("environment", envName);
  }
  
  JavaSnippet snippet = SnippetFactory.getJavaSnippet(application, request, snippetId);

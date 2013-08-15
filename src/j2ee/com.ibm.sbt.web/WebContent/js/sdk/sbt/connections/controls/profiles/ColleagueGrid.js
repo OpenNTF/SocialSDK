@@ -17,10 +17,10 @@
 /**
  * 
  */
-define([ "../../../declare", "../../../config", "../../../xml", "../../../xpath", "../../../stringUtil", 
+define([ "../../../declare", "../../../config", "../../../lang", "../../../xml", "../../../xpath", "../../../stringUtil", 
          "../../../connections/ConnectionsConstants",
          "./ProfileGrid", "./ColleagueGridRenderer", "../ViewAllAction" ], 
-        function(declare, config, xml, xpath, stringUtil, conn, ProfileGrid, ColleagueGridRenderer, ViewAllAction) {
+        function(declare, config, lang, xml, xpath, stringUtil, conn, ProfileGrid, ColleagueGridRenderer, ViewAllAction) {
 
     /**
      * @class ColleagueGrid
@@ -54,6 +54,40 @@ define([ "../../../declare", "../../../config", "../../../xml", "../../../xpath"
         },
         
         /**
+         * Override buildUrl to add outputType, format and email/userid's
+         * 
+         * @method buildUrl
+         * @param url base url
+         * @param args arguments that will be passed to the store
+         * @returns Built url
+         */
+        buildUrl: function(url, args) {
+            var params = { 
+            	connectionType : "colleague",
+            	outputType : "profile",
+            	format : "full"
+            };
+            
+            if (this.query) {
+            	params = lang.mixin(params, this.query);
+            }
+            if (this.email) {
+            	params = lang.mixin(params, { email : this.email });
+            } 
+            if (this.email1 && this.email2) {
+            	params = lang.mixin(params, { email : this.email1 + "," + this.email2 });
+            } 
+            if (this.userid) {
+            	params = lang.mixin(params, { userid : this.userid });
+            } 
+            if (this.userid1 && this.userid2) {
+            	params = lang.mixin(params, { userid : this.userid1 + "," + this.userid2 });
+            } 
+
+            return this.constructUrl(url, params, this.getUrlParams());
+        },
+
+        /**
          * The post create function is called, after the grid has been created.
          * The function will call the super classes post create
          * then if target emails/ids were set will.
@@ -67,6 +101,11 @@ define([ "../../../declare", "../../../config", "../../../xml", "../../../xpath"
             }
         },
         
+        /**
+         * Compute colleagues based on specified targets and add to the Grid.
+         * 
+         * @method addColleagues
+         */
         addColleagues: function() {
             var targets = arguments.targetEmails || arguments.targetUserids || this.targetEmails || this.targetUserids;
             var id = arguments.email || arguments.userid || this.email || this.userid;
@@ -158,8 +197,7 @@ define([ "../../../declare", "../../../config", "../../../xml", "../../../xpath"
             }
         },
         
-        _constructTargetUrl: function() {
-        },
+        // Internals
         
         _getColleagueEmail: function(doc, id) {
         	var userids = this._selectArray(doc, "/a:entry/snx:connection/a:contributor/snx:userid");

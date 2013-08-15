@@ -172,24 +172,42 @@ define([ "../../../declare",
             this._activeSortIsDesc = false;
         },
         
-        
         /**
-         * Creates an instance of an AtomStore
-         * @method createDefaultStore
-         * @param args will contain the url and attributes for the atom store.
-         * @returns The createDefaultStore method of the superclass, which will return an
-         * instance of the AtomStore.
+         * Override buildUrl to add outputType, format and email/userid's
+         * 
+         * @method buildUrl
+         * @param url base url
+         * @param args arguments that will be passed to the store
+         * @returns Built url
          */
-        createDefaultStore : function(args) {
-            if (!args.url) {
-                return null;
-            }
+        buildUrl: function(url, args) {
+            var params = { 
+            	outputType : "profile",
+            	format : "full"
+            };
             
-            args.url = this._buildUrl(args.url);
+            if (this.query) {
+            	params = lang.mixin(params, this.query);
+            }
+            if (this.type == "colleagues") {
+            	params = lang.mixin(params, { connectionType : "colleague" });
+            }
+            if (this.email) {
+            	params = lang.mixin(params, { email : this.email });
+            } 
+            if (this.email1 && this.email2) {
+            	params = lang.mixin(params, { email : this.email1 + "," + this.email2 });
+            } 
+            if (this.userid) {
+            	params = lang.mixin(params, { userid : this.userid });
+            } 
+            if (this.userid1 && this.userid2) {
+            	params = lang.mixin(params, { userid : this.userid1 + "," + this.userid2 });
+            } 
 
-            return this.inherited(arguments);
+            return this.constructUrl(url, params, this.getUrlParams());
         },
-        
+
         /**
          * The post create function is called, after the grid has been created.
          * The function will call the super classes post create
@@ -254,38 +272,10 @@ define([ "../../../declare",
 
         sortByRecent: function(el, data, ev){
         	this._sort("recent", true, el, data, ev);
-        },
+        }
 
         // Internals
         
-        _buildUrl: function(url) {
-            var params = { 
-            	outputType : "profile",
-            	format : "full"
-            };
-            
-            if (this.query) {
-            	params = lang.mixin(params, this.query);
-            }
-            if (this.type == "colleagues") {
-            	params = lang.mixin(params, { connectionType : "colleague" });
-            }
-            if (this.email) {
-            	params = lang.mixin(params, { email : this.email });
-            } 
-            if (this.email1 && this.email2) {
-            	params = lang.mixin(params, { email : this.email1 + "," + this.email2 });
-            } 
-            if (this.userid) {
-            	params = lang.mixin(params, { userid : this.userid });
-            } 
-            if (this.userid1 && this.userid2) {
-            	params = lang.mixin(params, { userid : this.userid1 + "," + this.userid2 });
-            } 
-
-            return this.constructUrl(url, params, this.getUrlParams());
-        }
-
     });
 
     return ProfileGrid;

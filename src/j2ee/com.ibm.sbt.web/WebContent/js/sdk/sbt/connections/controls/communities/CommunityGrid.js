@@ -89,7 +89,6 @@ define([ "../../../declare",
          * @method constructor
          */
         constructor: function(args) {
-        	
             var nls = this.renderer.nls;
             
             /**

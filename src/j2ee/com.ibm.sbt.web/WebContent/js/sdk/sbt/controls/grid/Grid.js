@@ -132,7 +132,26 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
          * @returns - an atom store instance
          */
         createDefaultStore: function(args) {
+            if (args.url) {
+                args.url = this.buildUrl(args.url, args);
+            }
             return this._createDefaultStore(args);
+        },
+        
+        /**
+         * Allow Grid to build the complete URL before it is passed to the store.
+         * 
+         * @method buildUrl
+         * @param url base url
+         * @param args arguments that will be passed to the store
+         * @returns Built url
+         */
+        buildUrl: function(url, args) {
+        	var params = {};
+            if (this.query) {
+            	params = lang.mixin(params, this.query);
+            }
+            return this.constructUrl(url, params, this.getUrlParams());
         },
 
         /**

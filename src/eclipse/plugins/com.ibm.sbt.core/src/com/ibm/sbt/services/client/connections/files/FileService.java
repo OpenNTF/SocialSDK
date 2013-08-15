@@ -2336,9 +2336,10 @@ public class FileService extends BaseService {
         if (null == params) {
             params = new HashMap<String, String>();
         }
+        HashMap<String, String> headers = new HashMap<String, String>();
         params.put(FileRequestParams.ITEMID.getFileRequestParams(), folderId);
         try {
-            super.createData(requestUri, params,  null);
+            super.updateData(requestUri, params, headers, null, folderId);
         } catch (Exception e) {
             if (logger.isLoggable(Level.WARNING)) {
                 logger.log(Level.WARNING, e.getMessage(), e);
@@ -2584,7 +2585,7 @@ public class FileService extends BaseService {
         Map<String, String> params = new HashMap<String, String>();
         params.put(FileRequestParams.ITEMID.getFileRequestParams(), folderId);
         try {
-            super.deleteData(requestUri, params, null);
+            super.deleteData(requestUri, null, folderId);
         } catch (Exception e) {
             if (logger.isLoggable(Level.WARNING)) {
                 logger.log(Level.WARNING, e.getMessage(), e);

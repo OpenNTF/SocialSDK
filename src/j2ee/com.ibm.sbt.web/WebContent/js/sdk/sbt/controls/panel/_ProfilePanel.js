@@ -17,8 +17,8 @@
 /**
  * @module sbt.controls.panel._ProfilePanel
  */
-define(["../../declare", "../../lang", "../../dom", "../../widget/_TemplatedWidget"], 
-        function(declare, lang, dom, _TemplatedWidget) {
+define(["../../declare", "../../lang", "../../widget/_TemplatedWidget"], 
+        function(declare, lang, _TemplatedWidget) {
 
     /**
      * @module sbt.controls.panel._ProfilePanel

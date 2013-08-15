@@ -19,12 +19,14 @@ package com.ibm.sbt.services.client.base;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import com.ibm.commons.runtime.Context;
 import com.ibm.commons.util.StringUtil;
-import com.ibm.sbt.services.client.ClientService.*;
+import com.ibm.sbt.jslibrary.SBTEnvironment;
 import com.ibm.sbt.services.client.ClientService;
-import com.ibm.sbt.services.client.base.datahandlers.EntityList;
+import com.ibm.sbt.services.client.ClientService.Handler;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
+import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
 
@@ -69,10 +71,42 @@ public abstract class BaseService {
 		if (StringUtil.isEmpty(endpointName)) {
 			endpointName = DEFAULT_ENDPOINT_NAME;
 		}
-		this.endpoint = EndpointFactory.getEndpoint(endpointName);
+		
+		this.endpoint = getEnvironmentEndpoint(endpointName);
 		this.cacheSize = cacheSize;
 	}
 
+	/*
+	 * Check the environment to see which endpoints are available.
+	 * @param endpointName Requested endpoint.
+	 * @return The Endpoint which matches endpointName, first by alias then by name. 
+	 * @throws SBTException if endpointName is not found in the environment.
+	 */
+	private Endpoint getEnvironmentEndpoint(String endpointName){
+	    String javaEnv = Context.get().getProperty("environment");
+	    boolean endpointValid = false;
+        if(javaEnv!=null){
+            SBTEnvironment env = (SBTEnvironment) Context.get().getBean(javaEnv);
+            SBTEnvironment.Endpoint[] endpointsArray = env.getEndpointsArray();
+            
+            for(SBTEnvironment.Endpoint endpoint : endpointsArray){
+                if(StringUtil.equals(endpointName, endpoint.getAlias())){
+                    endpointName = endpoint.getName();
+                    endpointValid = true;
+                    break;
+                } else if (StringUtil.equals(endpointName, endpoint.getName())){
+                    endpointValid = true;
+                    break;
+                }
+            }
+        }
+        if(endpointValid){
+            return EndpointFactory.getEndpoint(endpointName);
+        } else{
+            return EndpointFactory.getEndpoint(null);
+        }
+        
+	}
 
 	/**
 	 * @return dataFormat

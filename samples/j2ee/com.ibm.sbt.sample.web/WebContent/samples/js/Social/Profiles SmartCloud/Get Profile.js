@@ -20,8 +20,8 @@ require([ "sbt/smartcloud/ProfileService", "sbt/dom", "sbt/config" ], function(P
 			dom.setText("name", getAttributeValue(profile.getDisplayName()));
 			dom.setText("email", getAttributeValue(profile.getEmail()));
 			dom.setText("thumbnailUrl", getAttributeValue(profile.getThumbnailUrl()));
-			dom.setText("jobTitle", getAttributeValue(profile.getJobTitle()));
-			dom.setText("telephoneNumber", getAttributeValue(profile.getTelephoneNumber()));
+			dom.setText("jobTitle", getAttributeValue(profile.getTitle()));
+			dom.setText("telephoneNumber", getAttributeValue(profile.getPhoneNumber()));
 			dom.setText("profileUrl", getAttributeValue(profile.getProfileUrl()));
 			dom.setText("address", getAttributeValue(profile.getAddress()));
 			dom.setText("department", getAttributeValue(profile.getDepartment()));

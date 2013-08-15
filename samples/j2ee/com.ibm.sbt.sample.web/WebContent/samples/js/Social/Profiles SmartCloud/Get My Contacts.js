@@ -1,4 +1,4 @@
-require([ "sbt/smartcloud/ProfileService", "sbt/dom", "sbt/Endpoint" ], function(ProfileService, dom, Endpoint) {
+require([ "sbt/smartcloud/ProfileService", "sbt/dom"], function(ProfileService, dom) {
 
 	dom.setText("success", "Please wait... Loading your Contact List");
 

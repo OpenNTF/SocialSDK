@@ -19,7 +19,13 @@
             parameters = parameters + "&env=" + env;
         if(themeId != null && themeId != "")
             parameters = parameters + "&themeId=" + themeId;
-        if(snippet){
+        if(callback){
+            $("#snippetContainer").empty();
+            $("#previewFrame").attr('src', "about:blank");
+            $("#previewLink").empty();
+            callback(parameters);
+        }
+        else if(snippet){
             var snippetQuery = snippetPage + parameters;
             $("#snippetContainer").load(snippetQuery);
             
@@ -30,9 +36,6 @@
             // update previewLink
             $("#previewLink").attr("href", previewQuery).text(previewQuery);
         }
-        
-        if(callback)
-            callback(parameters);
     }
     // Debug flags whether we are going to use firebug.
     function postCode(frame, debug){

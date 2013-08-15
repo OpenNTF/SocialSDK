@@ -93,6 +93,14 @@ define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscr
 			return this.getAsString("id");
 		},
 		/**
+		Returns the object id of the User
+		@method getObjectId
+		@return {String} id of the User	
+		**/
+		getObjectId: function () {
+			return this.getAsString("objectId");
+		},
+		/**
 		Get display name of the User
 		@method getDisplayName
 		@return {String} display name of the User	
@@ -138,12 +146,12 @@ define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscr
 			return this.getAsString("department"); 
 		},
 		/**
-		Get title of the profile
-		@method getTitle
-		@return {String} title of the profile
+		Get job title of the profile
+		@method getJobTitle
+		@return {String} job title of the profile
 		**/
-		getTitle: function () {
-			return this.getAsString("title");
+		getJobTitle: function () {
+			return this.getAsString("jobTitle");
 		},
 		/**
 		Get profile URL of the profile
@@ -154,12 +162,12 @@ define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscr
 			return this.getAsString("profileUrl");
 		},
 		/**
-		Get phone number of the profile
-		@method getPhoneNumber
-		@return {String} Phone number object of the profile
+		Get telephone number of the profile
+		@method getTelehoneNumber
+		@return {String} Telephone number object of the profile
 		**/
-		getPhoneNumber: function () {
-			return this.getAsString("phoneNumbers"); 
+		getTelehoneNumber: function () {
+			return this.getAsString("telephone"); 
 		},
 		/**
 		Get Country of the profile
@@ -176,6 +184,14 @@ define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscr
 		**/
 		getOrgId: function () { 
 			return this.getAsString("orgId"); 
+		},
+		/**
+		Get Organization of the profile
+		@method getOrg
+		@return {String} Organization of the profile
+		**/
+		getOrg: function () { 
+			return this.getAsString("org"); 
 		},
 		/**
 		Get "About Me"/description of the profile

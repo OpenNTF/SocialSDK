@@ -19,8 +19,8 @@
  * 
  * @module sbt.connections.ProfileService
  */
-define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConstants", "../base/BaseService", "../base/BaseEntity", "../base/XmlDataHandler", "../base/VCardDataHandler", "../Cache" ], function(
-        declare,lang,config,stringUtil,consts,BaseService,BaseEntity,XmlDataHandler, VCardDataHandler, Cache) {
+define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConstants", "../base/BaseService", "../base/BaseEntity", "../base/XmlDataHandler", "../base/VCardDataHandler", "../Cache", "../util" ], function(
+        declare,lang,config,stringUtil,consts,BaseService,BaseEntity,XmlDataHandler, VCardDataHandler, Cache, util) {
 
 	var updateProfileXmlTemplate = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns:app=\"http://www.w3.org/2007/app\" xmlns:thr=\"http://purl.org/syndication/thread/1.0\" xmlns:fh=\"http://purl.org/syndication/history/1.0\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\" xmlns:opensearch=\"http://a9.com/-/spec/opensearch/1.1/\" xmlns=\"http://www.w3.org/2005/Atom\"><category term=\"profile\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category><content type=\"text\">\nBEGIN:VCARD\nVERSION:2.1\n${jobTitle}${address}${telephoneNumber}${building}${floor}END:VCARD\n</content></entry>";
     var updateProfileAttributeTemplate = "${attributeName}:${attributeValue}\n";
@@ -618,6 +618,69 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
             var url = this.constructUrl(consts.AtomConnectionsDo, {}, {authType : this._getProfileAuthString()});
             return this.getEntities(url, options, this.getProfileFeedCallbacks(), args);
         },
+        
+
+        /**
+		 * Updates the profile photo of a user.
+		 * @method updateProfilePhoto
+		 * @param {Object} fileControlOrId The Id of html control or the html control
+		 * @param @param {Object/String} profileOrId profile object representing the profile or user/email of the profile 
+		 * @param {Object} [args] The additional parameters
+		 */
+		updateProfilePhoto: function (fileControlOrId, profileOrId, args) {
+			var promise = this.validateField("File Control Or Id", fileControlOrId);
+			if (promise) {
+				return promise;
+			}
+			if (!window.File || !window.FormData) {
+				var message = "HTML 5 File API is not supported by the Browser.";
+				return this.createBadRequestPromise(message);
+			}
+			// Dojo 1.4.3 does not support HTML5 FormData
+			if(util.getJavaScriptLibrary().indexOf("Dojo 1.4") != -1) {
+				return this.createBadRequestPromise("Dojo 1.4.* is not supported for Update Profile Photo");
+			}
+			var idObject = this._toIdObject(profileOrId);
+            var promise = this._validateIdObject(idObject);
+            if (promise) {
+                return promise;
+            }
+			var files = null;
+			if (typeof fileControlOrId == "string") {
+				var fileControl = document.getElementById(fileControlOrId);
+				filePath = fileControl.value;
+				files = fileControl.files;
+			} else if (typeof fileControlOrId == "object") {
+				filePath = fileControlOrId.value;
+				files = fileControlOrId.files;
+			} else {
+				return this.createBadRequestPromise("File Control or ID is required");
+			}
+
+			var file = files[0];
+			var formData = new FormData();
+			formData.append("file", file);
+			var requestArgs = lang.mixin(idObject, args || {});		
+			var url = this.constructUrl(config.Properties.serviceUrl + "/files/" + this.endpoint.proxyPath + "/" + "connections" + "/" + encodeURIComponent(file.name),
+					args && args.parameters ? args.parameters : {});
+			var headers = {
+				"Content-Type" : false,
+				"Process-Data" : false, // processData = false is reaquired by jquery 
+			};			
+			var options = {
+				method : "PUT",
+				headers : headers,
+				query : requestArgs || {},
+				data : formData
+			};
+			var callbacks = {
+					createEntity : function(service, data, response) {
+						return "Success";
+					}
+			};
+
+			return this.updateEntity(url, options, callbacks);			
+		},
         
         /*
          * Return callbacks for a profile feed

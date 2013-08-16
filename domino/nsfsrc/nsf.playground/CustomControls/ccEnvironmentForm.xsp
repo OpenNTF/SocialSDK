@@ -84,11 +84,24 @@ dataAccess.copyEnvironment(document1,v);
 			loaded="${javascript:!compositeData.editbean}">
 			<xp:inputRichText id="inputRichText1" value="#{document1.Description}"></xp:inputRichText>
 		</xe:formRow>
-		<xe:formRow id="formRow2" label="Runtime Platforms:"
+		<xe:formRow id="formRow3" label="Runtime Platforms:"
 			loaded="${javascript:!compositeData.editbean}">
-			<xp:inputText id="inputText1"
-				disableClientSideValidation="true" value="#{document1.Runtimes}" size="80">
-			</xp:inputText>
+			<xe:djextListTextBox
+				id="djRuntimePlatforms" multipleSeparator=","
+				multipleTrim="true" 
+				value="#{document1.Runtimes}" title="Runtime platforms">
+				<xp:eventHandler event="onChange" submit="true"
+					refreshMode="partial" refreshId="formTable1">
+				</xp:eventHandler>
+			</xe:djextListTextBox>
+			<xe:valuePicker id="valuePicker1" for="djRuntimePlatforms"
+				pickerText="Add" dojoType="extlib.dijit.PickerCheckbox">
+				<xe:this.dataProvider>
+					<xe:simpleValuePicker
+						valueList="#{javascript:optionsBean.getRuntimePlatforms()}">
+					</xe:simpleValuePicker>
+				</xe:this.dataProvider>
+			</xe:valuePicker>
 		</xe:formRow>
 
 		<xe:formRow labelPosition="none">
@@ -101,14 +114,21 @@ dataAccess.copyEnvironment(document1,v);
 				</xe:djTabPane>
 				<xp:repeat id="repeat3" rows="30" repeatControls="true"
 					value="#{javascript:optionsBean.getEnvironmentCategories()}" var="cat">
-					<xe:djTabPane id="djTabPane1" title="${javascript:cat.getLabel()}">
-						<xe:formTable labelWidth="17em" style="margin-left: 8px">
-							<xp:repeat id="repeat4" rows="30" repeatControls="true"
-								value="#{javascript:cat.getProperties()}" var="prop">
-								<xe:formRow id="formRow13" label="${javascript:prop.getLabel()+':'}">
+					<xe:djTabPane id="djTabPane1"
+						title="${javascript:cat.getLabel()}">
+						<xe:this.rendered><![CDATA[#{javascript:var p = getComponent('djRuntimePlatforms').getValueAsString();
+return !p || p.contains(cat.getRuntimePlatform())}]]></xe:this.rendered>
+						<xe:formTable labelWidth="17em"
+							style="margin-left: 8px">
+							<xp:repeat id="repeat4" rows="30"
+								repeatControls="true" value="#{javascript:cat.getProperties()}"
+								var="prop">
+								<xe:formRow id="formRow13"
+									label="${javascript:prop.getLabel()+':'}">
 									<xp:inputText id="inputText23"
 										disableClientSideValidation="true"
-										value="${javascript:'#{document1.'+prop.getName()+'}'}" size="80">
+										value="${javascript:'#{document1.'+prop.getName()+'}'}"
+										size="80">
 									</xp:inputText>
 								</xe:formRow>
 							</xp:repeat>

@@ -30,11 +30,16 @@ import nsf.playground.environments.PlaygroundEnvironment;
 public abstract class Endpoints {
 	
 	public static class Category {
+		private String platform; 
 		private String label; 
 		private Property[] properties; 
-		public Category(String label, Property[] properties) {
+		public Category(String platform, String label, Property[] properties) {
+			this.platform = platform;
 			this.label = label;
 			this.properties = properties;
+		}
+		public String getRuntimePlatform() {
+			return platform;
 		}
 		public String getLabel() {
 			return label;

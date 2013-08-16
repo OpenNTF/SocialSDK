@@ -40,7 +40,6 @@ public abstract class PlaygroundExtensionFactory {
         		PlaygroundExtensionFactory.class);
 	}
 	
-	@SuppressWarnings("unchecked")
 	public static List<PlaygroundExtensionFactory> getFactories() {
 		// We cannot use the application object here because of some ClassLoader issues and security
 		// We only load plug-in based extension in the static initializer
@@ -49,11 +48,8 @@ public abstract class PlaygroundExtensionFactory {
 		return factories;
 	}
 
-	public static<T> List<T> getExtensions(Class<T> clazz) {
-		return getExtensions(clazz,null);
-	}
 	@SuppressWarnings("unchecked")
-	public static<T> List<T> getExtensions(Class<T> clazz, String[] platforms) {
+	public static<T> List<T> getExtensions(Class<T> clazz) {
 		ArrayList<T> extensions = new ArrayList<T>();
 		if(factories!=null) {
 			for(PlaygroundExtensionFactory f: factories) {
@@ -68,10 +64,6 @@ public abstract class PlaygroundExtensionFactory {
 	}
 	
 	public PlaygroundExtensionFactory() {
-	}
-	
-	public boolean isValidPlatform(String[] platforms) {
-		return true;
 	}
 	
 	public Object getExtension(Class<?> clazz) {

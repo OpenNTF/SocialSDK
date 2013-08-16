@@ -67,10 +67,6 @@ public class PlaygroundEnvironment extends SBTEnvironment {
 		setEndpointsArray(createEndpoints());
 	}
 	
-	public String[] getPlatforms() {
-		return null;
-	}
-	
 	public Map<String,String> getFieldMap() {
 		return fields;
 	}
@@ -84,7 +80,7 @@ public class PlaygroundEnvironment extends SBTEnvironment {
 	private SBTEnvironment.Endpoint[] createEndpoints() {
 		ArrayList<SBTEnvironment.Endpoint> endpoints = new ArrayList<SBTEnvironment.Endpoint>();
 
-		List<Endpoints> envext = PlaygroundExtensionFactory.getExtensions(Endpoints.class,getPlatforms());
+		List<Endpoints> envext = PlaygroundExtensionFactory.getExtensions(Endpoints.class);
 		for(int ev=0; ev<envext.size(); ev++) {
 			Endpoints e = envext.get(ev);
 			String[] sp = StringUtil.splitString(e.getEndpointNames(), ',', true);
@@ -120,7 +116,7 @@ public class PlaygroundEnvironment extends SBTEnvironment {
 	}
 
 	public void prepareEndpoints() {
-		List<Endpoints> endpoints = PlaygroundExtensionFactory.getExtensions(Endpoints.class,getPlatforms());
+		List<Endpoints> endpoints = PlaygroundExtensionFactory.getExtensions(Endpoints.class);
 		for(int i=0; i<endpoints.size(); i++) {
 			endpoints.get(i).prepareEndpoints(this);
 		}

@@ -1,21 +1,22 @@
 package nsf.playground.beans;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
-
-import nsf.playground.extension.Endpoints;
-import nsf.playground.extension.Endpoints.Category;
-import nsf.playground.extension.Endpoints.Property;
 
 import lotus.domino.Database;
 import lotus.domino.Document;
 import lotus.domino.NotesException;
 import lotus.domino.View;
+import nsf.playground.extension.Endpoints;
+import nsf.playground.extension.Endpoints.Category;
 
 import com.ibm.commons.Platform;
+import com.ibm.commons.util.QuickSort;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.playground.extension.PlaygroundExtensionFactory;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
@@ -159,6 +160,23 @@ public abstract class OptionsBean {
 		}
 		return result;
 	}
+
+	public String[] getRuntimePlatforms() {
+		Set<String> result = new HashSet<String>();
+		List<Endpoints> envext = PlaygroundExtensionFactory.getExtensions(Endpoints.class); // Get the categories for all the platforms
+		for(int i=0; i<envext.size(); i++) {
+			Category[] cats = envext.get(i).getPropertyList();
+			if(cats!=null) {
+				for(int j=0; j<cats.length; j++) {
+					result.add(cats[j].getRuntimePlatform());
+				}
+			}
+		}
+		String[] s = result.toArray(new String[result.size()]);
+		(new QuickSort.StringArray(s)).sort();
+		return s;
+	}
+	
 	
 	//
 	// Load Options

@@ -23,7 +23,6 @@ import com.ibm.sbt.services.endpoints.ConnectionsBasicEndpoint;
 import com.ibm.sbt.services.endpoints.ConnectionsOAuth2Endpoint;
 import com.ibm.sbt.services.endpoints.DominoBasicEndpoint;
 import com.ibm.sbt.services.endpoints.DropBoxOAuthEndpoint;
-import com.ibm.sbt.services.endpoints.OAuthEndpoint;
 import com.ibm.sbt.services.endpoints.SametimeBasicEndpoint;
 import com.ibm.sbt.services.endpoints.SmartCloudOAuth2Endpoint;
 import com.ibm.sbt.services.endpoints.SmartCloudOAuthEndpoint;
@@ -41,14 +40,14 @@ public class SbtEndpoints extends Endpoints {
 	public static final SbtEndpoints instance = new SbtEndpoints();
 	
 	private static final Category[] PROPERTIES = new Category[] {
-		new Category("Connections Server", new Property[] {
+		new Category("connections","Connections Server", new Property[] {
 				new Property("Con_URL", "URL"),
 				new Property("Con_OA2_ConsumerKey", "OAuth2 - Consumer Key"),
 				new Property("Con_OA2_ConsumerSecret", "OAuth2 - Consumer Secret"),
 				new Property("Con_OA2_AuthorizationURL", "OAuth2 - Authorization URL"),
 				new Property("Con_OA2_AccessTokenURL", "OAuth2 - Access Token URL"),
 		}),
-		new Category("SmartCloud Server", new Property[] {
+		new Category("smartcloud","SmartCloud Server", new Property[] {
 				new Property("Sma_URL", "URL"),
 				new Property("Sma_OA_ConsumerKey", "Consumer Key"),
 				new Property("Sma_OA_ConsumerSecret", "OAuth1 - Consumer Secret"),
@@ -60,7 +59,7 @@ public class SbtEndpoints extends Endpoints {
 				new Property("Sma_OA2_AuthorizationURL", "OAuth2 - Authorization URL"),
 				new Property("Sma_OA2_AccessTokenURL", "OAuth2 - Access Token URL"),
 		}),
-		new Category("Domino Server", new Property[] {
+		new Category("domino","Domino Server", new Property[] {
 				new Property("Dom_URL", "URL"),
 		}),
 /*		
@@ -68,12 +67,13 @@ public class SbtEndpoints extends Endpoints {
 				new Property("St_URL", "URL"),
 		}),
 */		
-		new Category("Social Networks", new Property[] {
+		new Category("twitter","Twitter", new Property[] {
 				//new Property("Twitter_URL", "Twitter URL"),
 				new Property("Twitter_OA_AppplicationAccessToken", "Twitter Application Access Token"),
 				new Property("Twitter_OA_ConsumerKey", "Twitter Consumer Key"),
 				new Property("Twitter_OA_ConsumerSecret", "Twitter Consumer Secret"),
-				
+		}),
+		new Category("dropbox","Dropbox", new Property[] {
 				new Property("Dropbox_OA_ConsumerKey", "Dropbox Consumer Key"),
 				new Property("Dropbox_OA_ConsumerSecret", "Dropbox Consumer Secret"),
 		}),

@@ -433,7 +433,10 @@ define([ "../../../declare",
          */
         postCreate: function() {        	
         	this.inherited(arguments);
-        	SemanticTagService.loadSemanticTagService();
+        	var endpoint = this.store.getEndpoint().proxyPath;
+        	if(endpoint != "smartcloud"){
+        		SemanticTagService.loadSemanticTagService();
+        	}
         },
         
         /**

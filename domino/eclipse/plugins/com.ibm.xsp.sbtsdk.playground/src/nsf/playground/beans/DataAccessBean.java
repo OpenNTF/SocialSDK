@@ -220,7 +220,7 @@ public abstract class DataAccessBean {
 		
 		env.getFieldMap().clear();
 		
-		List<Endpoints> envext = PlaygroundExtensionFactory.getExtensions(Endpoints.class,env.getPlatforms());
+		List<Endpoints> envext = PlaygroundExtensionFactory.getExtensions(Endpoints.class);
 		for(int i=0; i<envext.size(); i++) {
 			Category[] cats = envext.get(i).getPropertyList();
 			if(cats!=null) {
@@ -240,7 +240,7 @@ public abstract class DataAccessBean {
 	public PlaygroundEnvironment writeEnvironment(PlaygroundEnvironment env, Document d) throws NotesException, IOException {
 		d.replaceItemValue("Properties",env.getProperties());
 
-		List<Endpoints> envext = PlaygroundExtensionFactory.getExtensions(Endpoints.class,env.getPlatforms());
+		List<Endpoints> envext = PlaygroundExtensionFactory.getExtensions(Endpoints.class);
 		for(int i=0; i<envext.size(); i++) {
 			Category[] cats = envext.get(i).getPropertyList();
 			if(cats!=null) {

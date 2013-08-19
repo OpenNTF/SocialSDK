@@ -1,7 +1,7 @@
-require(["sbt/connections/ActivitiesService", "sbt/dom"], 
-    function(ActivitiesService,dom) {
+require(["sbt/connections/ActivityService", "sbt/dom"], 
+    function(ActivityService,dom) {
         var createRow = function(title, activityId) {
-            var table = dom.byId("communitiesTable");
+            var table = dom.byId("activitiesTable");
             var tr = document.createElement("tr");
             table.appendChild(tr);
             var td = document.createElement("td");
@@ -12,7 +12,7 @@ require(["sbt/connections/ActivitiesService", "sbt/dom"],
             tr.appendChild(td);
         };
 
-        var activitiesService = new ActivitiesService();
+        var activitiesService = new ActivityService();
         activitiesService.getMyActivities().then(
             function(activities) {
                 if (activities.length == 0) {

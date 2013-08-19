@@ -84,6 +84,8 @@ public class JsonWriter extends JsonGenerator.WriterGenerator {
         if(!first[objectLevels]) {
             out(',');
         }
+        nl();
+        indent();
     }
     public void endArrayItem() throws IOException {
         first[objectLevels]=false;

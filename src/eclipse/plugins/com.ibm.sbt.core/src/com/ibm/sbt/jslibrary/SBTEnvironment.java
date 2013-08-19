@@ -166,19 +166,29 @@ public class SBTEnvironment {
 	public void setPropertiesArray(Property[] properties) {
 		this.properties = properties;
 	}
+
 	public String[] getRuntimesArray() {
         return runtimes;
     }
     public void setRuntimesArray(String[] runtimes) {
         this.runtimes = runtimes;
     }
-    
     public String getRuntimes(){
         return StringUtil.concatStrings(this.runtimes, ',', false);
     }
-    
     public void setRuntimes(String sRuntimes){
         this.runtimes = StringUtil.splitString(sRuntimes, ',');
+    }
+    public boolean hasRuntime(String runtime) {
+    	if(runtimes!=null && runtime.length()>=1) {
+    		for(int i=0; i<runtimes.length; i++) {
+    			if(StringUtil.equals(runtime, runtimes[i])) {
+    				return true;
+    			}
+    		}
+    		return false;
+    	}
+    	return true;
     }
     
 	public String getProperties() {

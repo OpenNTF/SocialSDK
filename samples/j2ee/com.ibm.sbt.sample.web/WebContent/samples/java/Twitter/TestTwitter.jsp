@@ -42,13 +42,11 @@
        	params.put("page", "1"); 
         params.put("count", "3"); 
         Response result = ep.xhrGet(twitterUrl, params);
+        if(result != null) {
+	 		out.println( JsonGenerator.toJson(JsonJavaFactory.instanceEx,result.getData(),false) ); 
+	 	} else {
+	 		 out.println("No Result");
+	 	}
 	 %>
-	 <pre>
-	 <code>
-	 	<%= 
-	 		JsonGenerator.toJson(JsonJavaFactory.instanceEx,result.getData(),false) 
-	 	%>
-	 </code>
-	 </pre>
 </body>
 </html>

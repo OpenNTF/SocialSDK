@@ -63,7 +63,7 @@ public class SbtEndpoints extends Endpoints {
 				new Property("Dom_URL", "URL"),
 		}),
 /*		
-		new Category("Sametime", new Property[] {
+		new Category("sametime","Sametime", new Property[] {
 				new Property("St_URL", "URL"),
 		}),
 */		
@@ -107,63 +107,95 @@ public class SbtEndpoints extends Endpoints {
 		{
 			ConnectionsBasicEndpoint ep = (ConnectionsBasicEndpoint)ManagedBeanUtil.getBean(context, "connectionsBasic");
 			if(ep!=null) {
-				ep.setUrl(env.getField("Con_URL"));
+				if(env.hasRuntime("connections")) {
+					ep.setUrl(env.getField("Con_URL"));
+				} else {
+					ep.setUrl(null);
+				}
 			}
 		}
 		{
 			ConnectionsOAuth2Endpoint ep = (ConnectionsOAuth2Endpoint)ManagedBeanUtil.getBean(context, "connectionsOA2");
 			if(ep!=null) {
-				ep.setUrl(env.getField("Con_URL"));
-				ep.setConsumerKey(env.getField("Con_OA2_ConsumerKey"));
-				ep.setConsumerSecret(env.getField("Con_OA2_ConsumerSecret"));
-				ep.setAuthorizationURL(env.getField("Con_OA2_AuthorizationURL"));
-				ep.setAccessTokenURL(env.getField("Con_OA2_AccessTokenURL"));
+				if(env.hasRuntime("connections")) {
+					ep.setUrl(env.getField("Con_URL"));
+					ep.setConsumerKey(env.getField("Con_OA2_ConsumerKey"));
+					ep.setConsumerSecret(env.getField("Con_OA2_ConsumerSecret"));
+					ep.setAuthorizationURL(env.getField("Con_OA2_AuthorizationURL"));
+					ep.setAccessTokenURL(env.getField("Con_OA2_AccessTokenURL"));
+				} else {
+					ep.setUrl(null);
+				}
 			}
 		}
 		{
 			SmartCloudOAuthEndpoint ep = (SmartCloudOAuthEndpoint)ManagedBeanUtil.getBean(context, "smartcloudOA");
 			if(ep!=null) {
-				ep.setUrl(env.getField("Sma_URL"));
-				ep.setConsumerKey(env.getField("Sma_OA_ConsumerKey"));
-				ep.setConsumerSecret(env.getField("Sma_OA_ConsumerSecret"));
-				ep.setRequestTokenURL(env.getField("Sma_OA_RequestTokenURL"));
-				ep.setAuthorizationURL(env.getField("Sma_OA_AuthorizationURL"));
-				ep.setAccessTokenURL(env.getField("Sma_OA_AccessTokenURL"));
+				if(env.hasRuntime("smartcloud")) {
+					ep.setUrl(env.getField("Sma_URL"));
+					ep.setConsumerKey(env.getField("Sma_OA_ConsumerKey"));
+					ep.setConsumerSecret(env.getField("Sma_OA_ConsumerSecret"));
+					ep.setRequestTokenURL(env.getField("Sma_OA_RequestTokenURL"));
+					ep.setAuthorizationURL(env.getField("Sma_OA_AuthorizationURL"));
+					ep.setAccessTokenURL(env.getField("Sma_OA_AccessTokenURL"));
+				} else {
+					ep.setUrl(null);
+				}
 			}
 		}
 		{
 			SmartCloudOAuth2Endpoint ep = (SmartCloudOAuth2Endpoint)ManagedBeanUtil.getBean(context, "smartcloudOA2");
 			if(ep!=null) {
-				ep.setUrl(env.getField("Sma_URL"));
-				ep.setConsumerKey(env.getField("Sma_OA2_ConsumerKey"));
-				ep.setConsumerSecret(env.getField("Sma_OA2_ConsumerSecret"));
-				ep.setAuthorizationURL(env.getField("Sma_OA2_AuthorizationURL"));
-				ep.setAccessTokenURL(env.getField("Sma_OA2_AccessTokenURL"));
+				if(env.hasRuntime("smartcloud")) {
+					ep.setUrl(env.getField("Sma_URL"));
+					ep.setConsumerKey(env.getField("Sma_OA2_ConsumerKey"));
+					ep.setConsumerSecret(env.getField("Sma_OA2_ConsumerSecret"));
+					ep.setAuthorizationURL(env.getField("Sma_OA2_AuthorizationURL"));
+					ep.setAccessTokenURL(env.getField("Sma_OA2_AccessTokenURL"));
+				} else {
+					ep.setUrl(null);
+				}
 			}
 		}
 		{
 			DominoBasicEndpoint ep = (DominoBasicEndpoint)ManagedBeanUtil.getBean(context, "dominoBasic");
 			if(ep!=null) {
-				ep.setUrl(env.getField("Dom_URL"));
+				if(env.hasRuntime("domino")) {
+					ep.setUrl(env.getField("Dom_URL"));
+				} else {
+					ep.setUrl(null);
+				}
 			}
 		}
 		{
 			SametimeBasicEndpoint ep = (SametimeBasicEndpoint)ManagedBeanUtil.getBean(context, "sametime");
 			if(ep!=null) {
-				ep.setUrl(env.getField("St_URL"));
+				if(env.hasRuntime("sametime")) {
+					ep.setUrl(env.getField("St_URL"));
+				} else {
+					ep.setUrl(null);
+				}
 			}
 		}
 		{
 			TwitterOAuthEndpoint epd = (TwitterOAuthEndpoint)ManagedBeanUtil.getBean(context, "twitter");
 			if(epd!=null) {
-				epd.setApplicationAccessToken(env.getField("Twitter_OA_AppplicationAccessToken"));
-				epd.setConsumerKey(env.getField("Twitter_OA_ConsumerKey"));
-				epd.setConsumerSecret(env.getField("Twitter_OA_ConsumerSecret"));
+				if(env.hasRuntime("twitter")) {
+					epd.setApplicationAccessToken(env.getField("Twitter_OA_AppplicationAccessToken"));
+					epd.setConsumerKey(env.getField("Twitter_OA_ConsumerKey"));
+					epd.setConsumerSecret(env.getField("Twitter_OA_ConsumerSecret"));
+				} else {
+					epd.setUrl(null);
+				}
 			}
 			DropBoxOAuthEndpoint ept = (DropBoxOAuthEndpoint)ManagedBeanUtil.getBean(context, "dropbox");
 			if(ept!=null) {
-				ept.setConsumerKey(env.getField("Dropbox_OA_ConsumerKey"));
-				ept.setConsumerSecret(env.getField("Dropbox_OA_ConsumerSecret"));
+				if(env.hasRuntime("dropbox")) {
+					ept.setConsumerKey(env.getField("Dropbox_OA_ConsumerKey"));
+					ept.setConsumerSecret(env.getField("Dropbox_OA_ConsumerSecret"));
+				} else {
+					ept.setUrl(null);
+				}
 			}
 		}
 	}    

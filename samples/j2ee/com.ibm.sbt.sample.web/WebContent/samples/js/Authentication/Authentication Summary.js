@@ -3,6 +3,10 @@ require(["sbt/dom", "sbt/config"], function(dom, config) {
 	/*creating rows*/
 	var endpoints = config.Endpoints;
 	for (var endpointName in endpoints) {
+		var ep = config.findEndpoint(endpointName);
+		if(!ep || ep.invalid) {
+			continue;
+		}
 		var tr = document.createElement("tr");
 		table.appendChild(tr);
 		var td = document.createElement("td");
@@ -33,7 +37,6 @@ require(["sbt/dom", "sbt/config"], function(dom, config) {
 		td3.appendChild(loginButton);
 		/*creating login logout buttons*/
 		
-		var ep = config.findEndpoint(endpointName);
 		if(ep.isAuthenticated){
 			loginButton.style.display = "none";
 			dom.setText("td2"+endpointName, "Logged in");

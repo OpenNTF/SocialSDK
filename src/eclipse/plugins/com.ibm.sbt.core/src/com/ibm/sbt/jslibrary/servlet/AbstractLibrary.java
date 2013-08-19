@@ -46,6 +46,7 @@ import com.ibm.sbt.services.endpoints.OAuth2Endpoint;
 import com.ibm.sbt.services.endpoints.OAuthEndpoint;
 import com.ibm.sbt.services.endpoints.js.JSReference;
 import com.ibm.sbt.services.util.AuthUtil;
+import com.ibm.sbt.util.SBTException;
 
 /**
  * Handles initialising the Social Business Toolkit library with the appropriate bridge to the underlying JavaScript library i.e. dojo or jquery or ... This class need to be thread safe, only a single instance will be created.
@@ -814,7 +815,12 @@ abstract public class AbstractLibrary {
 		if (!endpoint.isAllowClientAccess()) {
 			return false;
 		}
-		return true;
+		try {
+			endpoint.checkValid();
+			return true;
+		} catch(SBTException ex) {
+			return false;
+		}
 	}
 
 	/*

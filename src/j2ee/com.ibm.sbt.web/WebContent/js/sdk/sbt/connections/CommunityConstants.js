@@ -238,7 +238,16 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.CommunityService
          */
-        AtomCommunityInstance : "communities/service/atom/community/instance"
+        AtomCommunityInstance : "communities/service/atom/community/instance",
+        
+        /**
+         * Get a feed that includes the topics in a specific community forum.
+         * 
+         * @property AtomCommunityForumTopics
+         * @type String
+         * @for sbt.connections.CommunityService
+         */
+        AtomCommunityForumTopics : "/communities/service/atom/community/forum/topics"
 
     }, conn);
 });

@@ -389,11 +389,7 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
          */
         encodeImageUrl: function(url) {
         	var ep = this.store.getEndpoint();
-        	if (ep.authType == "oauth") {
-        		return ep.proxy.rewriteUrl(ep.baseUrl, url, ep.proxyPath);
-        	} else {
-        		return url;
-        	}
+        	return ep.proxy.rewriteUrl(ep.baseUrl, url, ep.proxyPath);
         },
         
         /**

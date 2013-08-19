@@ -537,18 +537,21 @@ var Endpoint = declare(null, {
  	_isAuthRequired : function(error, options) {		
 		var promise = new Promise();
 		var status = error.response.status || null;
+		var isAuthErr = status == 401 || status == this.authenticationErrorCode;
 		if (this.isAuthenticated) {
-			this.isAuthenticationValid().then(
-				function(response) {
-					promise.fulfilled(!response.result);
-				}, 
-				function(response) {
-					promise.rejected(response);
-				}
-			);
+			if (!isAuthErr) {
+				promise.fulfilled(false);
+			} else {
+				this.isAuthenticationValid().then(
+					function(response) {
+						promise.fulfilled(!response.result);
+					}, 
+					function(response) {
+						promise.rejected(response);
+					}
+				);
+			}
 		} else {
-			var isAuthErr = status == 401 || status == this.authenticationErrorCode;
-
 			// User can mention autoAuthenticate as part service wrappers call that is the args json variable or
 			// as a property of endpoint in managed-beans.xml. 
 			// isAutoAuth variable is true when autoAuthenticate property is true in args json variable or 

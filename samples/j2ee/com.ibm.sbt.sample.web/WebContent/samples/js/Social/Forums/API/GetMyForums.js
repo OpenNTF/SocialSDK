@@ -1,6 +1,6 @@
-require([ "sbt/dom", "sbt/json", "sbt/connections/ActivityService" ], function(dom,json,ActivityService) {
-        var activitiesService = new ActivityService();
-        var promise = activitiesService.getMyActivities({
+require([ "sbt/dom", "sbt/json", "sbt/connections/ForumService" ], function(dom,json,ForumService) {
+        var forumService = new ForumService();
+        var promise = forumService.getMyForums({
                 asc : true,
                 page : 1,
                 ps : 2

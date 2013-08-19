@@ -378,6 +378,7 @@ public class JsonGenerator {
                 } else {
                     coma = true;
                 }
+                indent();
                 outLiteral(propValue); 
                 indentLevel--;
             }

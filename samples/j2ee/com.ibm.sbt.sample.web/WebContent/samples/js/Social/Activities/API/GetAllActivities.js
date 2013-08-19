@@ -1,5 +1,5 @@
-require([ "sbt/dom", "sbt/json", "sbt/connections/ActivitiesService" ], function(dom,json,ActivitiesService) {
-        var activitiesService = new ActivitiesService();
+require([ "sbt/dom", "sbt/json", "sbt/connections/ActivityService" ], function(dom,json,ActivityService) {
+        var activitiesService = new ActivityService();
         var promise = activitiesService.getAllActivities({
                 asc : true,
                 page : 1,

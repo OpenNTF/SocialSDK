@@ -1,15 +1,11 @@
 require(["sbt/connections/ConnectionsConstants","sbt/config","sbt/xml","sbt/xpath","sbt/dom"],function(conn,config,xml,xpath,dom) {
     var endpoint = config.findEndpoint("connections");
     
-    var url = "/activities/service/atom2/activities";
+    var url = "/forums/atom/forums/my";
     
     var options = { 
         method : "GET", 
-        handleAs : "text",
-        query : {
-            email : "%{sample.email1}",
-            ps : 5
-        }
+        handleAs : "text"
     };
     
     endpoint.request(url, options).then(
@@ -21,7 +17,7 @@ require(["sbt/connections/ConnectionsConstants","sbt/config","sbt/xml","sbt/xpat
       			displayStr += activityName + ((count == activities.length -1) ?"  ":" , ");
       		}
       		if (displayStr.length == 0) {
-                displayStr = "You are not an owner of any activities.";
+                displayStr = "You are not an owner of any forums.";
             }
       		dom.setText("content", displayStr);
         },

@@ -20,8 +20,8 @@
 <form method="GET" action="<%=callbackURL%>">
 <fieldset>
 <legend id="legend">Input the data required by the sample:</legend>
-<!-- Hard coded small width is fine since the table will expand when it goes beyond -->
-<table style="width:20px" class="table table-bordered" border="1" >
+<!-- Hard coded small width is fine since the table will expand to suit the content -->
+<table style="width:20px" class="table" >
     <tr>
         <th scope="col">Property</th>
         <th scope="col">Value</th>
@@ -59,7 +59,7 @@
               
               <tr>
                 <th style="vertical-align:middle;" scope="row"><%=label+":" %></th>
-                <td><input style="margin-bottom:0px;" type="text" name="<%=parameter%>" value="<%=value%>" ></td>
+                <td><input style="vertical-align:middle;margin-bottom:0px;" type="text" name="<%=parameter%>" value="<%=value%>" ></td>
               </tr>
     <%
             }

@@ -13,3 +13,45 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
+
+define([ "../../../declare", "../../../controls/grid/GridAction","../../../i18n!./nls/ForumGridRenderer"], 
+        function(declare, GridAction, nls) {
+
+    /**
+     * @class ForumAction
+     * @namespace sbt.connections.controls.forum
+     * @module sbt.connections.controls.forum.forumAction
+     */
+    var ForumAction = declare(GridAction, {
+        
+        /**ForumAction Constructor function
+         * @method constructor
+         * */
+        constructor: function() {
+        },
+        
+        /**
+         * Handles displaying a tooltip for an item
+         * @method getTooltip
+         * @param item The element that will use the tooltip
+         */
+        getTooltip: function(item) {
+        	return nls.goToForum;
+        },
+        
+        /**
+         * The execute function is called from the handle click function
+         * 
+         * @method execute
+         * @param item The item which fired the event
+         * @param opts
+         * @param event The event
+         */
+        execute: function(item, opts, event) {
+        	document.location.href = item.forumURL;
+        }
+
+    });
+
+    return ForumAction;
+});

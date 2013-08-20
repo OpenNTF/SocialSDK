@@ -388,12 +388,8 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
          * @param url
          */
         encodeImageUrl: function(url) {
-        	var ep = this.store.getEndpoint();
-        	if (ep.authType == "oauth") {
-        		return ep.proxy.rewriteUrl(ep.baseUrl, url, ep.proxyPath);
-        	} else {
-        		return url;
-        	}
+        	var ep = this.store.getEndpoint();       
+        	return ep.proxy.rewriteUrl(ep.baseUrl, url, ep.proxyPath);
         },
         
         /**

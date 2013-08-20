@@ -17,6 +17,10 @@
 // NLS_CHARSET=UTF-8
 define({
     root: {
-
+    	forums: "Forums",
+    	threads: "Topics/Messages",
+    	latestPost: "Latest Post",
+    	goToForum: "Go To The Forum",
+    	viewProfile: "View Profile"
     }
 });

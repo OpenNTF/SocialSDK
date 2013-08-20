@@ -43,7 +43,6 @@ define(["../../../declare",
 	    	 */
 	    	constructor: function(args){
 	    		this.template = ForumRow;
-	    		
 	    	},
 	    	
 	    	/**

@@ -27,7 +27,7 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
      */
     var Grid = declare([ _Grid ], {
 
-    	/**
+    	/** 
     	 * Data associated with this Grid
     	 */
         data: null,

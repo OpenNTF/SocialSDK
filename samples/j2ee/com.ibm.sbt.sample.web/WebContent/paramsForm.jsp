@@ -58,7 +58,7 @@
     %>
               
               <tr>
-                <th scope="row"><%=label+":" %></th>
+                <th style="vertical-align:middle;" scope="row"><%=label+":" %></th>
                 <td><input style="margin-bottom:0px;" type="text" name="<%=parameter%>" value="<%=value%>" ></td>
               </tr>
     <%

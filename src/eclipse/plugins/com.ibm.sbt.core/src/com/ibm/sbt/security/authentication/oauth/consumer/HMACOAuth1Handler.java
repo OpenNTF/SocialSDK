@@ -29,7 +29,6 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import com.ibm.commons.runtime.Context;
-import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.StreamUtil;
 import com.ibm.sbt.core.configuration.Configuration;
 import com.ibm.sbt.security.authentication.oauth.OAuthException;
@@ -45,11 +44,11 @@ import com.ibm.sbt.services.util.SSLUtil;
 
 public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 
+	protected String 			applicationAccessToken;
+	
 	public HMACOAuth1Handler() {
 	}
 	
-
-
 	public HMACOAuth1Handler(String consumerKey, String consumerSecret,
 			String credentialStore, String appId, String serviceName,
 			String requestTokenURL, String authorizationURL,
@@ -68,10 +67,16 @@ public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 		this.applicationAccessToken = applicationAccessToken;
 	}
 
-
-
 	private static final long	serialVersionUID	= 1L;
 
+	public String getApplicationAccessToken() {
+		return applicationAccessToken;
+	}
+
+	public void setApplicationAccessToken(String applicationAccessToken) {
+		this.applicationAccessToken = applicationAccessToken;
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * @see com.ibm.sbt.security.authentication.oauth.consumer.OAuth1Handler#getRequestTokenFromServer()
@@ -135,7 +140,6 @@ public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 			} finally {
 				StreamUtil.close(reader);
 			}
-
 		} catch (Exception e) {
 			throw new OAuthException(e, "Internal error - getRequestToken failed Exception: ");
 		}
@@ -255,7 +259,7 @@ public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 			InputStream content = httpResponse.getEntity().getContent();
 			BufferedReader reader = new BufferedReader(new InputStreamReader(content));
 			try {
-				responseBody = reader.readLine();
+				responseBody = StreamUtil.readString(reader);
 			} finally {
 				StreamUtil.close(reader);
 			}
@@ -298,7 +302,7 @@ public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 		 * will have to create these tokens, in the application, if not generated already. This Access Token
 		 * if required for executing APIs on Twitter.
 		 */
-		String applicationAccessToken = getApplicationAccessToken();
+//		String applicationAccessToken = getApplicationAccessToken();
 		/* This is the Access Token Secret which is obtained from the getAccessTokenFromServer() method. */
 		String tokenSecret = getAccessTokenSecret();
 		/*

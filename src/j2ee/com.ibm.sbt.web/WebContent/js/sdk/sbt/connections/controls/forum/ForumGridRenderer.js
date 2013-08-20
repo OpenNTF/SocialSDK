@@ -85,7 +85,7 @@ define(["../../../declare",
 	         * @param data - the data associated with the current element
 	         */
 	        renderHeader : function(grid,el,items,data,tbody) {
-	            if (this.headerTemplate && !hideHeader) {
+	            if (this.headerTemplate && !this.hideHeader) {
 	                var node;
 	                if (this._isString(this.headerTemplate)) {
 	                    var domStr = this._substituteItems(this.headerTemplate, grid, this, items, data);

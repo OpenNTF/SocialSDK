@@ -46,9 +46,9 @@ define(["../../../declare",
 	        options : {
 	            "my" : {
 	                storeArgs : {
-	                    url : consts.url.my,
+	                    url : consts.AtomForumsMy,
 	                    attributes : consts.ForumXPath,
-	                    feedXPath : consts.ForumFeedXPath,
+	                    feedXPath : consts.ForumsFeedXPath,
 	                    paramSchema: ParamSchema
 	                },
 	                rendererArgs : {
@@ -57,9 +57,9 @@ define(["../../../declare",
 	            },
 	            "public" : {
 	                storeArgs : {
-	                    url : consts.url.publicForums,
+	                    url : consts.AtomForumTopics,
 	                    attributes : consts.ForumXPath,
-	                    feedXPath : consts.ForumFeedXPath,
+	                    feedXPath : consts.ForumsFeedXPath,
 	                    paramSchema: ParamSchema
 	                },
 	                rendererArgs : {

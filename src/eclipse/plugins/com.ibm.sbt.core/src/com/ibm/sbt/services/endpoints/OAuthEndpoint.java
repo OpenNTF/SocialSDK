@@ -53,10 +53,10 @@ public class OAuthEndpoint extends AbstractEndpoint {
 	protected OAuth1Handler	oAuthHandler; 
 	
 	protected OAuthEndpoint(){
-		oAuthHandler = new OAuth1Handler();
+		this.oAuthHandler = new OAuth1Handler();
 	}
 	protected OAuthEndpoint(HMACOAuth1Handler handler) {
-		oAuthHandler = handler;
+		this.oAuthHandler = handler;
 	}
 	
 	
@@ -161,12 +161,6 @@ public class OAuthEndpoint extends AbstractEndpoint {
 
 	public void setSignatureMethod(String signatureMethod) {
 		oAuthHandler.setSignatureMethod(signatureMethod);
-//		if (StringUtil.equalsIgnoreCase(Configuration.HMAC_SIGNATURE, signatureMethod)) {
-//			this.setOauthHandler(new HMACOAuth1Handler(getConsumerKey(), getConsumerSecret(), getCredentialStore(), getAppId(), 
-//					getServiceName(), getRequestTokenURL(), getAuthorizationURL(), getAccessTokenURL(), getSignatureMethod(), 
-//					isForceTrustSSLCertificate()));
-			//wrong endpoint mentioned in the bean.
-//		}
 	}
 
 	protected void setOauthHandler(HMACOAuth1Handler hmacoAuth1Handler) {
@@ -187,14 +181,6 @@ public class OAuthEndpoint extends AbstractEndpoint {
 	public void setForceTrustSSLCertificate(boolean forceTrustSSLCertificate) {
 		oAuthHandler.setForceTrustSSLCertificate(forceTrustSSLCertificate);
 	}
-
-	/*public String getApplicationAccessToken() {
-		return oAuthHandler.getApplicationAccessToken();
-	}
-
-	public void setApplicationAccessToken(String applicationAccessToken) {
-		oAuthHandler.setApplicationAccessToken(applicationAccessToken);
-	}*/
 
 	@Override
 	public JSReference getAuthenticator(String endpointName, String sbtUrl) {

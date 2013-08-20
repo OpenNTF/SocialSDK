@@ -21,11 +21,10 @@ define([ "../../../declare",
          "../../../controls/grid/Grid", 
          "./CommunityGridRenderer", 
          "./CommunityAction", 
-         "../../../connections/controls/vcard/SemanticTagService",
          "../../../config",
          "../../../connections/CommunityConstants",
          "../../../store/parameter"], 
-        function(declare, Grid, CommunityGridRenderer, CommunityAction, SemanticTagService, sbt, consts, parameter) {
+        function(declare, Grid, CommunityGridRenderer, CommunityAction, sbt, consts, parameter) {
 	
 	var sortVals = {
 			date: "modified",
@@ -133,10 +132,7 @@ define([ "../../../declare",
          */
         postCreate: function() {        	
         	this.inherited(arguments);
-        	var endpoint = this.store.getEndpoint().proxyPath;
-        	if(endpoint != "smartcloud"){
-        		SemanticTagService.loadSemanticTagService();
-        	}
+        	
         },
         
         /**

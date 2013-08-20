@@ -26,10 +26,9 @@ define([ "../../../declare",
          "../../../controls/grid/Grid", 
          "./FileGridRenderer", 
          "./FileAction",
-         "../../../connections/controls/vcard/SemanticTagService", 
          "../../../connections/FileService",
          "../../../connections/FileConstants"], 
-        function(declare, lang, dom, stringUtil, sbt, parameter, Grid, FileGridRenderer, FileAction, SemanticTagService, FileService, FileConstants) {
+        function(declare, lang, dom, stringUtil, sbt, parameter, Grid, FileGridRenderer, FileAction, FileService, FileConstants) {
 
 	// TODO use values from constants and handle authType
 	var fileUrls = {
@@ -433,10 +432,6 @@ define([ "../../../declare",
          */
         postCreate: function() {        	
         	this.inherited(arguments);
-        	var endpoint = this.store.getEndpoint().proxyPath;
-        	if(endpoint != "smartcloud"){
-        		SemanticTagService.loadSemanticTagService();
-        	}
         },
         
         /**

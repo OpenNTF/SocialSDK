@@ -23,10 +23,9 @@ define([ "../../../declare",
 		 "../../../controls/grid/Grid", 
 		 "./ProfileGridRenderer", 
 		 "./ProfileAction", 
-		 "../../../connections/controls/vcard/SemanticTagService", 
 		 "../../../store/parameter",
 		 "../../../connections/ProfileConstants"], 
-        function(declare, sbt, lang, Grid, ProfileGridRenderer, ProfileAction, SemanticTagService, parameter, consts) {
+        function(declare, sbt, lang, Grid, ProfileGridRenderer, ProfileAction,parameter, consts) {
 
 	var sortVals = {
 			displayName: "displayName",
@@ -217,8 +216,7 @@ define([ "../../../declare",
          */
         postCreate: function() {        	
         	this.inherited(arguments);
-        	
-        	SemanticTagService.loadSemanticTagService();
+
         },
         
         /**

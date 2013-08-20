@@ -82,6 +82,7 @@ public class OAuth2Handler extends OAuthHandler {
 	private String applicationPage;
 	private int expireThreshold;
 	private boolean forceTrustSSLCertificate;
+	private AccessToken accessTokenObject;
 	
 	// Type used to store the credentials
 	public static final String ACCESS_TOKEN_STORE_TYPE = "OAUTH2_ACCESS_TOKEN_STORE";
@@ -359,6 +360,14 @@ public class OAuth2Handler extends OAuthHandler {
 	public void setAccessToken(String accessToken) {
 		this.accessToken = accessToken;
 	}
+	
+	public AccessToken getAccessTokenObject() {
+		return accessTokenObject;
+	}
+
+	public void setAccessTokenObject(AccessToken accessTokenObject) {
+		this.accessTokenObject = accessTokenObject;
+	}
 
 	public String getRefreshToken() {
 		return refreshToken;
@@ -527,9 +536,16 @@ public class OAuth2Handler extends OAuthHandler {
         // Look for a token in the store
     	// If the user is anonymous, then the token might had been stored in the session
         if(!force) {
-            AccessToken tk = context.isCurrentUserAnonymous() 
-            						? (AccessToken)AnonymousCredentialStore.loadCredentials(context,getAppId(),getServiceName()) 
-            						: findTokenFromStore(context, userId);
+        	AccessToken tk;
+        	
+            if(StringUtil.isEmpty(getCredentialStore())){
+            	// if cred store is not defined in end point return from bean
+            	tk = getAccessTokenObject();
+            }else{
+            	tk = context.isCurrentUserAnonymous() 
+    			? (AccessToken)AnonymousCredentialStore.loadCredentials(context,getAppId(),getServiceName()) 
+    			: findTokenFromStore(context, userId);
+            }
             if(tk!=null) {
                 if(shouldRenewToken(tk)) { //based on expiration date, check if token needs to be renewed.
                     return renewToken(tk); 
@@ -706,17 +722,21 @@ public class OAuth2Handler extends OAuthHandler {
 					renewedtoken = createToken(getAppId(),getServiceName()); // Now create a new token and save that in the store    		
 					Context context = Context.get();
 					try {
-			        	if(!context.isCurrentUserAnonymous()) {
-			        		CredentialStore credStore = findCredentialStore();
-			        		if (credStore != null) {
-								// if the token is already present, and was expired due to which we have fetched a new 
-								// token, then we remove the token from the store first and then add this new token.
-								deleteToken();
-								credStore.store(getServiceName(), ACCESS_TOKEN_STORE_TYPE, context.getCurrentUserId(), token);
-							}
-			            } else {
-			            	AnonymousCredentialStore.storeCredentials(context, token, getAppId(), getServiceName()); // Store the token for anonymous user
-			            }
+		        		if(StringUtil.isEmpty(getCredentialStore())){
+		        			this.setAccessTokenObject(renewedtoken);
+		        		}else{
+				        	if(!context.isCurrentUserAnonymous()) {
+				        		CredentialStore credStore = findCredentialStore();
+				        		if (credStore != null) {
+									// if the token is already present, and was expired due to which we have fetched a new 
+									// token, then we remove the token from the store first and then add this new token.
+									deleteToken();
+									credStore.store(getServiceName(), ACCESS_TOKEN_STORE_TYPE, context.getCurrentUserId(), renewedtoken);
+								}
+				            } else {
+				            	AnonymousCredentialStore.storeCredentials(context, renewedtoken, getAppId(), getServiceName()); // Store the token for anonymous user
+				            }
+		        		}
 					} catch (CredentialStoreException cse) {
 						throw new OAuthException(cse, "Error trying to renew Token.");
 					}

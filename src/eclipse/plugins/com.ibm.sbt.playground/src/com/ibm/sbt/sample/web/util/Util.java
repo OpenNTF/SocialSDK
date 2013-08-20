@@ -63,6 +63,7 @@ public class Util {
         { "Connections", "connectionsEnvironment"},
         { "SmartCloud", "smartcloudEnvironment"},
         { "Third Party APIs", "thirdPartyAPIsEnvironment"},
+        { "Domino", "dominoEnvironment"},
         { "OpenSocial", "openSocial"}
     };
     

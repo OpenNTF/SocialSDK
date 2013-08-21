@@ -145,7 +145,7 @@ public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 			throw new OAuthException(e, "Internal error - getRequestToken failed Exception: ");
 		}
 		if (responseCode != HttpStatus.SC_OK) {
-			String exceptionDetail = createException(responseCode, responseBody);
+			String exceptionDetail = buildErrorMessage(responseCode, responseBody);
 			if (StringUtil.isNotEmpty(exceptionDetail)) {
 				throw new OAuthException(null,
 						"HMACOAuth1Handler.java : " + exceptionDetail);
@@ -168,7 +168,7 @@ public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 		}
 	}
 
-	private String createException(int responseCode, String responseBody) {
+	private String buildErrorMessage(int responseCode, String responseBody) {
 		String exceptionDetail = null;
 		if (responseCode == HttpStatus.SC_NOT_IMPLEMENTED) {
 			exceptionDetail = "getRequestToken failed with Response Code: Not implemented (501), Msg: " + responseBody;
@@ -267,7 +267,7 @@ public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 			throw new OAuthException(e, "Internal error - getAccessToken failed Exception: ");
 		}
 		if (responseCode != HttpStatus.SC_OK) {
-			String exceptionDetail = createException(responseCode, responseBody);
+			String exceptionDetail = buildErrorMessage(responseCode, responseBody);
 			if (exceptionDetail != null) {
 				throw new OAuthException(null,
 						"HMACOAuth1Handler.java : " + exceptionDetail);

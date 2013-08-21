@@ -62,6 +62,14 @@ public class ApplicationEndpoint implements Endpoint {
     public Map<String, Object> getClientParams() {
     	return clientParams;
     }
+    
+    /* (non-Javadoc)
+     * @see com.ibm.sbt.services.endpoints.Endpoint#getPlatform()
+     */
+    @Override
+    public String getPlatform() {
+    	return null;
+    }
 
     @Override
 	public String getUrl() {

@@ -34,6 +34,11 @@ public class ConnectionsBasicEndpoint extends BasicEndpoint {
     public ConnectionsBasicEndpoint() {
         endpointAdapter = new ConnectionsEndpointAdapter(this);
     }
+    
+    @Override
+    public String getPlatform() {
+    	return PLATFORM_CONNECTIONS;
+    }
 
     @Override
 	public boolean isHeaderAllowed(String headerName, String serviceUrl){

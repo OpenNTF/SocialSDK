@@ -39,6 +39,11 @@ public class SmartCloudBasicEndpoint extends BasicEndpoint {
     }
 
     @Override
+    public String getPlatform() {
+    	return PLATFORM_SMARTCLOUD;
+    }
+
+    @Override
 	public boolean isHeaderAllowed(String headerName, String serviceUrl){
 		return endpointAdapter.isHeaderAllowed(headerName, serviceUrl);
     }

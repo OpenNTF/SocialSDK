@@ -24,4 +24,10 @@ public class TwitterOAuthEndpoint extends OAuthEndpoint {
 	
     public TwitterOAuthEndpoint() {
     }
+
+    @Override
+    public String getPlatform() {
+    	return PLATFORM_TWITTER;
+    }
+
 }

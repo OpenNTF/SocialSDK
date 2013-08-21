@@ -45,11 +45,11 @@ import com.ibm.sbt.services.util.SSLUtil;
 
 public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 
+	protected String 			applicationAccessToken;
+	
 	public HMACOAuth1Handler() {
 	}
 	
-
-
 	public HMACOAuth1Handler(String consumerKey, String consumerSecret,
 			String credentialStore, String appId, String serviceName,
 			String requestTokenURL, String authorizationURL,
@@ -68,10 +68,16 @@ public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 		this.applicationAccessToken = applicationAccessToken;
 	}
 
-
-
 	private static final long	serialVersionUID	= 1L;
 
+	public String getApplicationAccessToken() {
+		return applicationAccessToken;
+	}
+
+	public void setApplicationAccessToken(String applicationAccessToken) {
+		this.applicationAccessToken = applicationAccessToken;
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * @see com.ibm.sbt.security.authentication.oauth.consumer.OAuth1Handler#getRequestTokenFromServer()
@@ -135,15 +141,14 @@ public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 			} finally {
 				StreamUtil.close(reader);
 			}
-
 		} catch (Exception e) {
 			throw new OAuthException(e, "Internal error - getRequestToken failed Exception: ");
 		}
 		if (responseCode != HttpStatus.SC_OK) {
-			Exception exception = createException(responseCode, responseBody);
-			if (exception != null) {
-				throw new OAuthException(exception,
-						"HMACOAuth1Handler.java : getRequestToken caused exception");
+			String exceptionDetail = buildErrorMessage(responseCode, responseBody);
+			if (StringUtil.isNotEmpty(exceptionDetail)) {
+				throw new OAuthException(null,
+						"HMACOAuth1Handler.java : " + exceptionDetail);
 			}
 		} else {
 			/*
@@ -163,26 +168,24 @@ public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 		}
 	}
 
-	private Exception createException(int responseCode, String responseBody) {
-		Exception exception = null;
+	private String buildErrorMessage(int responseCode, String responseBody) {
+		String exceptionDetail = null;
 		if (responseCode == HttpStatus.SC_NOT_IMPLEMENTED) {
-			exception = new Exception(
-					"getRequestToken failed with Response Code: Not implemented (501), Msg: " + responseBody);
+			exceptionDetail = "getRequestToken failed with Response Code: Not implemented (501), Msg: " + responseBody;
 		} else if (responseCode == HttpStatus.SC_UNAUTHORIZED) {
-			exception = new Exception("getRequestToken failed with Response Code: Unauthorized (401), Msg: "
-					+ responseBody);
+			exceptionDetail = "getRequestToken failed with Response Code: Unauthorized (401), Msg: "
+					+ responseBody;
 		} else if (responseCode == HttpStatus.SC_BAD_REQUEST) {
-			exception = new Exception("getRequestToken failed with Response Code: Bad Request (400), Msg: "
-					+ responseBody);
+			exceptionDetail = "getRequestToken failed with Response Code: Bad Request (400), Msg: "
+					+ responseBody;
 		} else if (responseCode == HttpStatus.SC_INTERNAL_SERVER_ERROR) {
-			exception = new Exception(
-					"getRequestToken failed with Response Code: Internal Server error (500), Msg: "
-							+ responseBody);
+			exceptionDetail = "getRequestToken failed with Response Code: Internal Server error (500), Msg: "
+							+ responseBody;
 		} else {
-			exception = new Exception("getRequestToken failed with Response Code (" + responseCode
-					+ "), Msg: " + responseBody);
+			exceptionDetail = "getRequestToken failed with Response Code (" + responseCode
+					+ "), Msg: " + responseBody;
 		}
-		return exception;
+		return exceptionDetail;
 	}
 
 	/*
@@ -255,7 +258,7 @@ public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 			InputStream content = httpResponse.getEntity().getContent();
 			BufferedReader reader = new BufferedReader(new InputStreamReader(content));
 			try {
-				responseBody = reader.readLine();
+				responseBody = StreamUtil.readString(reader);
 			} finally {
 				StreamUtil.close(reader);
 			}
@@ -264,10 +267,10 @@ public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 			throw new OAuthException(e, "Internal error - getAccessToken failed Exception: ");
 		}
 		if (responseCode != HttpStatus.SC_OK) {
-			Exception exception = createException(responseCode, responseBody);
-			if (exception != null) {
-				throw new OAuthException(exception,
-						"HMACOAuth1Handler.java : getAccessToken caused exception");
+			String exceptionDetail = buildErrorMessage(responseCode, responseBody);
+			if (exceptionDetail != null) {
+				throw new OAuthException(null,
+						"HMACOAuth1Handler.java : " + exceptionDetail);
 			}
 		} else {
 			/*
@@ -298,7 +301,6 @@ public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 		 * will have to create these tokens, in the application, if not generated already. This Access Token
 		 * if required for executing APIs on Twitter.
 		 */
-		String applicationAccessToken = getApplicationAccessToken();
 		/* This is the Access Token Secret which is obtained from the getAccessTokenFromServer() method. */
 		String tokenSecret = getAccessTokenSecret();
 		/*
@@ -326,7 +328,7 @@ public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 			signature = HMACEncryptionUtility.generateHMACSignature(url, method, consumerSecret, tokenSecret,
 					treeMap);
 		} catch (Exception e) {
-			throw new OAuthException(new Exception(e), "createAuthorizationHeader failed with Exception");
+			throw new OAuthException(e, "createAuthorizationHeader failed with Exception");
 		}
 
 		StringBuilder headerStr = new StringBuilder();
@@ -337,7 +339,7 @@ public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 			headerStr.append(",").append(Configuration.SIGNATURE).append("=\"")
 					.append(URLEncoder.encode(signature, "UTF-8")).append("\"");
 		} catch (UnsupportedEncodingException e1) {
-			throw new OAuthException(new Exception(e1),
+			throw new OAuthException(e1,
 					"createAuthorizationHeader failed with UnsupportedEncodingException");
 		}
 		headerStr.append(",").append(Configuration.SIGNATURE_METHOD).append("=\"")

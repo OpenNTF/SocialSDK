@@ -1,5 +1,5 @@
 /****************************************************************************************
- * Copyright 2012 IBM Corp.                                                                   *
+ * Copyright 2013 IBM Corp.                                                                   *
  *                                                                                      *
  * Licensed under the Apache License, Version 2.0 (the "License");                      *
  * you may not use this file except in compliance with the License.                     *
@@ -14,7 +14,6 @@
 
 package com.ibm.sbt.security.authentication.oauth.consumer;
 
-//import java.awt.Desktop;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -46,6 +45,7 @@ import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.util.UrlUtil;
 import com.ibm.commons.util.PathUtil;
 import com.ibm.commons.util.StringUtil;
+import com.ibm.commons.util.io.StreamUtil;
 import com.ibm.commons.util.profiler.Profiler;
 import com.ibm.commons.util.profiler.ProfilerAggregator;
 import com.ibm.commons.util.profiler.ProfilerType;
@@ -183,9 +183,13 @@ public class OAuth2Handler extends OAuthHandler {
 	    	}
 			content = httpResponse.getEntity().getContent();
 			BufferedReader reader = new BufferedReader(new InputStreamReader(content));
-			responseBody = reader.readLine();
+			try {
+				responseBody = StreamUtil.readString(reader);
+			} finally {
+				StreamUtil.close(reader);
+			}
 		} catch (Exception e) {
-			throw new Exception("getAccessToken failed with Exception: <br>" + e);
+			throw new OAuthException(e, "getAccessToken failed with Exception: <br>");
 		} finally {
 			if(content != null) {
 				content.close(); 
@@ -277,10 +281,13 @@ public class OAuth2Handler extends OAuthHandler {
 			
 			content = httpResponse.getEntity().getContent();
 			BufferedReader reader = new BufferedReader(new InputStreamReader(content));
-			responseBody = reader.readLine();
+			try {
+				responseBody = StreamUtil.readString(reader);
+			} finally {
+				StreamUtil.close(reader);
+			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			throw new Exception("getAccessToken failed with Exception: <br>" + e);
+			throw new OAuthException(e,"getAccessToken failed with Exception: <br>");
 		} finally {
 			if(content!=null) {
 				content.close();
@@ -290,13 +297,13 @@ public class OAuth2Handler extends OAuthHandler {
 			if (responseCode == HttpStatus.SC_UNAUTHORIZED) {
 			    String msg = "Unable to retrieve access token. Please check in OAuth 2.0 registration for {0} that the client secret matches the consumer key.";
 			    logger.info(MessageFormat.format(msg, consumerKey));
-				throw new Exception("getAccessToken failed with Response Code: Unauthorized (401),<br>Msg: " + responseBody);
+				throw new OAuthException(null, "getAccessToken failed with Response Code: Unauthorized (401),<br>Msg: " + responseBody);
 			} else if (responseCode == HttpStatus.SC_BAD_REQUEST) {
-				throw new Exception("getAccessToken failed with Response Code: Bad Request (400),<br>Msg: " + responseBody);
+				throw new OAuthException(null, "getAccessToken failed with Response Code: Bad Request (400),<br>Msg: " + responseBody);
 			} else if (responseCode == HttpStatus.SC_INTERNAL_SERVER_ERROR) {
-				throw new Exception("getAccessToken failed with Response Code: Internal Server error (500),<br>Msg: " + responseBody);
+				throw new OAuthException(null, "getAccessToken failed with Response Code: Internal Server error (500),<br>Msg: " + responseBody);
 			} else {
-				throw new Exception("getAccessToken failed with Response Code: (" + responseCode + "),<br>Msg: " + responseBody);
+				throw new OAuthException(null, "getAccessToken failed with Response Code: (" + responseCode + "),<br>Msg: " + responseBody);
 			}
 		} else {
 			setOAuthData(responseBody); //save the returned data
@@ -683,9 +690,13 @@ public class OAuth2Handler extends OAuthHandler {
     			responseCode = httpResponse.getStatusLine().getStatusCode();
     			content = httpResponse.getEntity().getContent();
     			BufferedReader reader = new BufferedReader(new InputStreamReader(content));
-    			responseBody = reader.readLine();
+    			try {
+    				responseBody = StreamUtil.readString(reader);
+    			} finally {
+    				StreamUtil.close(reader);
+    			}
     		} catch (Exception e) {
-    			throw new OAuthException(null,"refreshAccessToken failed with Exception: <br>" + e);
+    			throw new OAuthException(e ,"refreshAccessToken failed with Exception: <br>");
     		} finally {
     			if (method != null){
 					try {

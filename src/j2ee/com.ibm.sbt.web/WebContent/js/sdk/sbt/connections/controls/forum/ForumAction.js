@@ -14,8 +14,8 @@
  * permissions and limitations under the License.
  */
 
-define([ "../../../declare", "../../../controls/grid/GridAction","../../../i18n!./nls/ForumGridRenderer"], 
-        function(declare, GridAction, nls) {
+define([ "../../../declare", "../../../controls/grid/GridAction","../../../i18n!./nls/ForumGridRenderer","../../../stringUtil"], 
+        function(declare, GridAction, nls, stringUtil) {
 
     /**
      * @class ForumAction
@@ -24,6 +24,11 @@ define([ "../../../declare", "../../../controls/grid/GridAction","../../../i18n!
      */
     var ForumAction = declare(GridAction, {
         
+    	nls: {
+            tooltip: "Go to {title}",
+        },
+       
+    	
         /**ForumAction Constructor function
          * @method constructor
          * */
@@ -36,7 +41,7 @@ define([ "../../../declare", "../../../controls/grid/GridAction","../../../i18n!
          * @param item The element that will use the tooltip
          */
         getTooltip: function(item) {
-        	return nls.goToForum;
+        	 return stringUtil.replace(this.nls.tooltip, { title : item.getValue("title") });
         },
         
         /**

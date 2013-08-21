@@ -388,11 +388,7 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
          * @param url
          */
         encodeImageUrl: function(url) {
-<<<<<<< HEAD
         	var ep = this.store.getEndpoint();       
-=======
-        	var ep = this.store.getEndpoint();
->>>>>>> master
         	return ep.proxy.rewriteUrl(ep.baseUrl, url, ep.proxyPath);
         },
         

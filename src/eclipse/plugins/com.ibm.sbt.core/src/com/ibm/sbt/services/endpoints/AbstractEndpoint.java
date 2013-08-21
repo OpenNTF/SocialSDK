@@ -22,6 +22,7 @@ import java.util.Map;
 
 
 
+
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.DefaultHttpClient;
 
@@ -67,6 +68,12 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     
     private static final int authenticationErrorCode = 401;
     
+    protected static final String PLATFORM_CONNECTIONS = "connections";
+    protected static final String PLATFORM_SMARTCLOUD = "smartcloud";
+    protected static final String PLATFORM_DOMINO = "domino";
+    protected static final String PLATFORM_SAMETIME = "sametime";
+    protected static final String PLATFORM_DROPBOX = "dropbox";
+    protected static final String PLATFORM_TWITTER = "twitter";
     
     public AbstractEndpoint() {
     }
@@ -84,6 +91,14 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     @Override
     public Map<String, Object> getClientParams() {
     	return clientParams;
+    }
+    
+    /* (non-Javadoc)
+     * @see com.ibm.sbt.services.endpoints.Endpoint#getPlatform()
+     */
+    @Override
+    public String getPlatform() {
+    	return null;
     }
     
     @Override

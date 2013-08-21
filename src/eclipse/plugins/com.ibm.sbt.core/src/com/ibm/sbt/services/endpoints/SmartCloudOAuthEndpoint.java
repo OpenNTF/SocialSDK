@@ -32,6 +32,11 @@ public class SmartCloudOAuthEndpoint extends OAuthEndpoint {
     }
 
     @Override
+    public String getPlatform() {
+    	return PLATFORM_SMARTCLOUD;
+    }
+
+    @Override
 	public ClientService getClientService() throws ClientServicesException {
     	return new SmartCloudService(this);
     }

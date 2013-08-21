@@ -863,19 +863,21 @@ abstract public class AbstractLibrary {
 	 * Return error message to be associated with an invalid endpoint
 	 */
 	protected String getInvalidEndpointMessage(LibraryRequest request, Endpoint endpoint, String logicalName) {
-		if (useGadgetTransport(endpoint)) {
-			String serviceName = getServiceName(endpoint);
-			if (StringUtil.isEmpty(serviceName)) {
-				return "OAuth service name not available for: " + logicalName;
+		if(endpoint!=null) {
+			if (useGadgetTransport(endpoint)) {
+				String serviceName = getServiceName(endpoint);
+				if (StringUtil.isEmpty(serviceName)) {
+					return "OAuth service name not available for: " + logicalName;
+				}
 			}
-		}
-		if (endpoint != null && !endpoint.isAllowClientAccess()) {
-			return "Client access disallowed for: " + logicalName;
-		}
-		try {
-			endpoint.checkValid();
-		} catch(SBTException ex) {
-			return ex.getMessage();
+			if (!endpoint.isAllowClientAccess()) {
+				return "Client access disallowed for: " + logicalName;
+			}
+			try {
+				endpoint.checkValid();
+			} catch(SBTException ex) {
+				return ex.getMessage();
+			}
 		}
 		return "Required endpoint is not available: " + logicalName;
 	}

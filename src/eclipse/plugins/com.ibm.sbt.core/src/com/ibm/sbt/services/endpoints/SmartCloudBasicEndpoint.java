@@ -35,6 +35,7 @@ public class SmartCloudBasicEndpoint extends BasicEndpoint {
     
     public SmartCloudBasicEndpoint() {
         endpointAdapter = new ConnectionsEndpointAdapter(this);
+    	clientParams.put("isSmartCloud", true);
     }
 
     @Override

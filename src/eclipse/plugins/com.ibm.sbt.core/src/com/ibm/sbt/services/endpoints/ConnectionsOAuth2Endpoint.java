@@ -39,7 +39,6 @@ public class ConnectionsOAuth2Endpoint extends OAuth2Endpoint {
 	 * @return boolean true depicting header is passed
 	 * 
 	 */
-
     @Override
 	public boolean isHeaderAllowed(String headerName, String serviceUrl){
     	if (headerName.equalsIgnoreCase("x-requested-with"))
@@ -52,6 +51,10 @@ public class ConnectionsOAuth2Endpoint extends OAuth2Endpoint {
 
     }
 
+    @Override
+    public String getPlatform() {
+    	return PLATFORM_CONNECTIONS;
+    }
 
     @Override
 	public ClientService getClientService() throws ClientServicesException {

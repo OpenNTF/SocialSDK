@@ -37,7 +37,6 @@ public class ConnectionsSSOEndpoint extends SSOEndpoint {
 	 * @return boolean true depicting header is passed
 	 * 
 	 */
-
     @Override
 	public boolean isHeaderAllowed(String headerName, String serviceUrl){
     	if (headerName.equalsIgnoreCase("x-requested-with"))
@@ -50,6 +49,10 @@ public class ConnectionsSSOEndpoint extends SSOEndpoint {
 
     }
 
+    @Override
+    public String getPlatform() {
+    	return PLATFORM_CONNECTIONS;
+    }
     
     @Override
 	public ClientService getClientService() throws ClientServicesException {

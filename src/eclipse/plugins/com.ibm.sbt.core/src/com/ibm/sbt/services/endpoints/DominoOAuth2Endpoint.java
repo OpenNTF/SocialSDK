@@ -30,6 +30,11 @@ public class DominoOAuth2Endpoint extends OAuth2Endpoint {
     }
 
     @Override
+    public String getPlatform() {
+    	return PLATFORM_DOMINO;
+    }
+
+    @Override
 	public ClientService getClientService() throws ClientServicesException {
     	return new DominoService(this);
     }    

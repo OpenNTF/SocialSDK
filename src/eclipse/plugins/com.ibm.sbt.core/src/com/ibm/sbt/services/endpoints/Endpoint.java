@@ -135,6 +135,12 @@ public interface Endpoint {
     public String getApiVersion();
     
     /**
+     * Get platform for the endpoint
+     * @return
+     */
+    public String getPlatform();
+    
+    /**
      * Return a collection of client parameters that should be emitted with the 
      * endpoint when valid.
      * @return

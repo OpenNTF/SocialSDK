@@ -16,7 +16,10 @@
 
 package com.ibm.sbt.services.endpoints;
 
+import java.util.HashMap;
 import java.util.Map;
+
+
 
 
 import org.apache.http.client.methods.HttpRequestBase;
@@ -59,7 +62,11 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     private boolean forceTrustSSLCertificate;
     private String httpProxy;
     private boolean allowClientAccess = true;
+    
+    protected Map<String, Object> clientParams = new HashMap<String, Object>();
+    
     private static final int authenticationErrorCode = 401;
+    
     
     public AbstractEndpoint() {
     }
@@ -69,6 +76,14 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     	if(StringUtil.isEmpty(getUrl())) {
     		throw new SBTException(null,"The Endpoint url is empty, class {0}",getClass());
     	}
+    }
+    
+    /* (non-Javadoc)
+     * @see com.ibm.sbt.services.endpoints.Endpoint#getClientParams()
+     */
+    @Override
+    public Map<String, Object> getClientParams() {
+    	return clientParams;
     }
     
     @Override

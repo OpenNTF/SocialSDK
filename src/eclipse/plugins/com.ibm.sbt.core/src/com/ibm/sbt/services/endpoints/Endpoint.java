@@ -16,6 +16,7 @@
 package com.ibm.sbt.services.endpoints;
 
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -132,6 +133,13 @@ public interface Endpoint {
      * @return
      */
     public String getApiVersion();
+    
+    /**
+     * Return a collection of client parameters that should be emitted with the 
+     * endpoint when valid.
+     * @return
+     */
+    public Map<String, Object> getClientParams();
     
     /**
      * Verifies whether the given header is supported by the endpoint

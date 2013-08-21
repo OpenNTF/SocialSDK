@@ -24,10 +24,13 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
+
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.util.PathUtil;
 import com.ibm.commons.util.StringUtil;
@@ -85,6 +88,7 @@ abstract public class AbstractLibrary {
 	public static final String		IS_AUTHENTICATED				= "isAuthenticated";
 	public static final String		PROP_AUTHENTICATION_ERROR_CODE	= "authenticationErrorCode";
 	public static final String		PROP_ENDPOINT_ALIAS	            = "name";
+	public static final String		PROP_PLATFORM    	            = "platform";
 
 	public static final String		PROP_MODULE_PREFIX				= "_module";
 	public static final String		PROP_MODULE_AUTHENTICATOR		= "_moduleAuthenticator";
@@ -363,7 +367,7 @@ abstract public class AbstractLibrary {
 				jsonEndpoint.putJsonProperty(PROP_TRANSPORT, transportRef);
 				String moduleName = getTransport(request, endpoint, endpointName).getModuleName();
 				jsonEndpoint.putJsonProperty(PROP_MODULE_TRANSPORT, moduleName);
-			}
+			} 
 
 			// configure the authentication
 			jsonEndpoint.putJsonProperty(PROP_AUTH_TYPE, AuthUtil.INSTANCE.getAuthValue(endpoint));
@@ -379,8 +383,20 @@ abstract public class AbstractLibrary {
 			if (endpoint.getAutoAuthenticate() != null) {
 				jsonEndpoint.putJsonProperty(PROP_AUTO_AUTHENTICATE, endpoint.getAutoAuthenticate());
 			}
+			if (endpoint.getPlatform() != null) {
+				jsonEndpoint.putJsonProperty(PROP_PLATFORM, endpoint.getPlatform());
+			}
 			jsonEndpoint.putJsonProperty(PROP_AUTHENTICATION_ERROR_CODE,
 					endpoint.getAuthenticationErrorCode());
+			
+			// configure client properties
+			Map<String, Object> params = endpoint.getClientParams();
+			Iterator<String> keys = params.keySet().iterator();
+			while(keys.hasNext()) {
+				String key = keys.next();
+				Object value = params.get(key);
+				jsonEndpoint.putJsonProperty(key, value);
+			}
 
 		} else {
 			// set the endpoint url
@@ -855,6 +871,11 @@ abstract public class AbstractLibrary {
 		}
 		if (endpoint != null && !endpoint.isAllowClientAccess()) {
 			return "Client access disallowed for: " + logicalName;
+		}
+		try {
+			endpoint.checkValid();
+		} catch(SBTException ex) {
+			return ex.getMessage();
 		}
 		return "Required endpoint is not available: " + logicalName;
 	}

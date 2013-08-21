@@ -19,8 +19,9 @@ define(["../../../declare",
         "../../../store/parameter",
         "./ForumGridRenderer", 
 		 "./ForumAction",
+		 "./ViewProfileAction",
         "../../../connections/ForumConstants"], 
-    function(declare, Grid, parameter, ForumGridRenderer, ForumAction, consts){
+    function(declare, Grid, parameter, ForumGridRenderer, ForumAction, ViewProfileAction, consts){
 	
 		/**Values that forums Can be sorted By, NOTE Sotring is not enabled in Connections*/
 		var sortVals = {
@@ -45,7 +46,8 @@ define(["../../../declare",
 	    	
 	    	/**Hide the table header */
 	    	hideHeader: false,
-
+	    	baseProfilesUrl: "/profiles",
+	    	
 	        options : {
 	            "my" : {
 	                storeArgs : {
@@ -76,6 +78,7 @@ define(["../../../declare",
 	        
 	        /**forumAction handles onClick and tooltip functions */
 	        forumAction : new ForumAction(),
+	        viewProfileAction: new ViewProfileAction(),
 	        
 	        /**
 	         * The constructor function.
@@ -85,6 +88,9 @@ define(["../../../declare",
 	        constructor: function(args){
 	        	if(args.hideHeader){
 	        		this.hideHeader = args.hideHeader;
+	        	}
+	        	if(args.baseProfilesUrl){
+	        		this.baseProfilesUrl = args.baseProfilesUrl;
 	        	}
 	        	
 	        },
@@ -128,9 +134,7 @@ define(["../../../declare",
 	         */
 	        viewAuthorProfile: function(el, data, ev){
 	        	this._stopEvent(ev);
-	        	var endpoint = this.store.getEndpoint();
-	        	var profileURL = endpoint.baseUrl + "/profiles/html/myProfileView.do?userid="+data.authorId;
-	        	document.location.href = profileURL;
+	        	this.viewProfileAction.openAuthorProfile(data, this.store,this.baseProfilesUrl);
 	        }
 		
 		});

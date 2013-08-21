@@ -454,17 +454,20 @@ define([ "../declare", "../lang", "../stringUtil", "../config", "../Promise", ".
          * post an Activity Stream microblog entry
          * 
          * @method postMicroblogEntry
-         * @param {Object} postData a json object representing data to be posted
-         * @param {String} userType user type for which activity stream is to be posted
+         * * @param {String}
+         * 			  userType user type for which activity stream is to be posted
          *            If null is passed for userType, then '@public' will be used as 
          * 			  default 
-         * @param {String} groupType group type for which activity stream is to be posted
+         * * @param {String}
+         * 			  groupType group type for which activity stream is to be posted
          *            If null is passed for userType, then '@all' will be used as 
          * 			  default 
-         * @param {String} application type for which activity stream is to be posted
+         * * @param {String}
+         * 			  application type for which activity stream is to be posted
          *            If null is passed for userType, then '@all' will be used as 
          * 			  default 
-         * @param {Object} args Object representing various parameters
+         *  @param {Object}
+         *            [args]Object representing various parameters
          *            that can be passed to post an activity stream. 
          *            The parameters must be exactly as they are
          *            supported by IBM Connections.

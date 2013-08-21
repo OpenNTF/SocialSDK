@@ -105,21 +105,6 @@
             <value>twitter,dropbox</value>
         </managed-property>
     </managed-bean>
-    
-    <!-- Domino Environment -->
-    <managed-bean>
-        <managed-bean-name>dominoEnvironment</managed-bean-name>
-        <managed-bean-class>com.ibm.sbt.jslibrary.SBTEnvironment</managed-bean-class>
-        <managed-bean-scope>application</managed-bean-scope>
-        <managed-property>
-            <property-name>endpoints</property-name>
-            <value>domino</value>
-        </managed-property>
-        <managed-property>
-            <property-name>runtimes</property-name>
-            <value>domino</value>
-        </managed-property>
-    </managed-bean>
 	
 	<!-- SmartCloud Basic Authentication Environment -->
 	<managed-bean>

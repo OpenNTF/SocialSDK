@@ -6,8 +6,8 @@ require([ "sbt/dom", "sbt/json", "sbt/connections/ForumService" ], function(dom,
                 ps : 2
             });
         promise.then(
-            function(forums) {
-                dom.setText("json", json.jsonBeanStringify(forums));
+            function(activities) {
+                dom.setText("json", json.jsonBeanStringify(activities));
             },
             function(error) {
                 dom.setText("json", json.jsonBeanStringify(error));

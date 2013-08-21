@@ -30,6 +30,11 @@ public class DominoSSOEndpoint extends SSOEndpoint {
     }
 
     @Override
+    public String getPlatform() {
+    	return PLATFORM_DOMINO;
+    }
+
+    @Override
 	public ClientService getClientService() throws ClientServicesException {
     	return new DominoService(this);
     }

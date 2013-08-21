@@ -16,6 +16,7 @@
 
 package com.ibm.sbt.services.endpoints;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -43,6 +44,8 @@ import com.ibm.sbt.util.SBTException;
  */
 public class ApplicationEndpoint implements Endpoint {
 
+    protected Map<String, Object> clientParams = new HashMap<String, Object>();
+    	
 	private static final int authenticationErrorCode = 401;
 	
     public ApplicationEndpoint() {
@@ -50,6 +53,22 @@ public class ApplicationEndpoint implements Endpoint {
     
     protected IllegalStateException newNotApplicableException() {
     	throw new IllegalStateException("This function is not application for an ApplicationEndpoint");
+    }
+    
+    /* (non-Javadoc)
+     * @see com.ibm.sbt.services.endpoints.Endpoint#getClientParams()
+     */
+    @Override
+    public Map<String, Object> getClientParams() {
+    	return clientParams;
+    }
+    
+    /* (non-Javadoc)
+     * @see com.ibm.sbt.services.endpoints.Endpoint#getPlatform()
+     */
+    @Override
+    public String getPlatform() {
+    	return null;
     }
 
     @Override

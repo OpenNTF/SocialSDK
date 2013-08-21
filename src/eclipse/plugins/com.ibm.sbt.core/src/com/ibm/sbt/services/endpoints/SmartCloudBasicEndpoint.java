@@ -35,6 +35,12 @@ public class SmartCloudBasicEndpoint extends BasicEndpoint {
     
     public SmartCloudBasicEndpoint() {
         endpointAdapter = new ConnectionsEndpointAdapter(this);
+    	clientParams.put("isSmartCloud", true);
+    }
+
+    @Override
+    public String getPlatform() {
+    	return PLATFORM_SMARTCLOUD;
     }
 
     @Override

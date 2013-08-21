@@ -21,18 +21,18 @@ require([ "sbt/config", "sbt/connections/ProfileService", "sbt/dom" ], function(
 		profileDisplayName = entry.displayName;
 		dom.setText("success", "Please wait... Loading the profile entry for " + profileDisplayName);
 		profileService = new ProfileService();
-		loadProfile();
+		loadProfile(false);
 	}
 
 	function parseUserid(entry) {		
 		return entry.id.substring("urn:lsid:lconn.ibm.com:profiles.person:".length);
 	}
-	function loadProfile() {
+	function loadProfile(afterUpdate) {
 		var promise = profileService.getProfile(profileId);
 		try {
 			promise.then(function(profile) {
 				currentProfile = profile;
-				loadProfileFields();
+				loadProfileFields(afterUpdate);
 			}, function(error) {
 				handleError(error);
 			});
@@ -47,15 +47,14 @@ require([ "sbt/config", "sbt/connections/ProfileService", "sbt/dom" ], function(
 		currentProfile.setJobTitle(jobTitle);
 
 		currentProfile.update().then(function(profile) {
-			loadProfile();
-			handleProfileUpdated();
+			loadProfile(true);			
 		}, function(error) {
 			handleError(error);
 		});
 		displayMessage("Please wait... Updating the profile entry for " + profileDisplayName);
 	}
 
-	function loadProfileFields() {
+	function loadProfileFields(afterUpdate) {
 		if (!currentProfile) {
 			dom.byId("userId").value = "";
 			dom.byId("building").value = "";
@@ -69,18 +68,17 @@ require([ "sbt/config", "sbt/connections/ProfileService", "sbt/dom" ], function(
 		dom.byId("building").value = currentProfile.getBuilding();
 		dom.byId("floor").value = currentProfile.getFloor();
 		dom.byId("jobTitle").value = currentProfile.getJobTitle();
-
-		displayMessage("Successfully loaded profile entry for " + profileDisplayName);
+		if(afterUpdate){
+			displayMessage("Successfully updated profile entry for " + profileDisplayName);
+		}else{
+			displayMessage("Successfully loaded profile entry for " + profileDisplayName);
+		}
 		addOnClickHandlers();
-	}
-
-	function handleProfileUpdated() {
-		displayMessage("Successfully updated profile entry for " + profileDisplayName);
-	}
+	}	
 
 	function addOnClickHandlers() {
 		dom.byId("loadBtn").onclick = function(evt) {
-			loadProfile();
+			loadProfile(false);
 		};
 
 		dom.byId("updateBtn").onclick = function(evt) {

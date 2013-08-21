@@ -89,6 +89,7 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 	protected String 			signatureMethod;
 	protected boolean			forceTrustSSLCertificate;
 	protected String 			applicationAccessToken;
+	protected AccessToken 		accessTokenObject;
 
 	public OAuth1Handler() {
 		this.expireThreshold = EXPIRE_THRESHOLD;
@@ -378,6 +379,14 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 	public String getAccessToken() {
 		return accessToken;
 	}
+	
+	public AccessToken getAccessTokenObject() {
+		return accessTokenObject;
+	}
+
+	public void setAccessTokenObject(AccessToken accessTokenObject) {
+		this.accessTokenObject = accessTokenObject;
+	}
 
 	public String getRequestToken() {
 		return requestToken;
@@ -614,16 +623,22 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 		// Look for a token in the store
 		// If the user is anonymous, then the token might had been stored in the session
 		if (!force) {
-			AccessToken tk = context.isCurrentUserAnonymous() ? (AccessToken) AnonymousCredentialStore
+			AccessToken tk;
+            if(StringUtil.isEmpty(getCredentialStore())){
+            	// if cred store is not defined in end point return from bean
+            	tk = getAccessTokenObject();
+            }else{
+			 tk = context.isCurrentUserAnonymous() ? (AccessToken) AnonymousCredentialStore
 					.loadCredentials(context, getAppId(), getServiceName()) : findTokenFromStore(context,
 							userId);
-					if (tk != null) {
-						setAccessToken(tk);
-						if (shouldRenewToken(tk)) {
-							return renewToken(tk);
-						}
-						return tk;
-					}
+            }
+			if (tk != null) {
+				setAccessToken(tk);
+				if (shouldRenewToken(tk)) {
+					return renewToken(tk);
+				}
+				return tk;
+			}
 		}
 
 		// Ok, we should then play the OAuth dance if requested
@@ -893,21 +908,26 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 			getAccessTokenFromServer();
 
 			token = createToken(getAppId(), getServiceName(), this, token.getUserId());
-			if (!Context.get().isCurrentUserAnonymous()) {
-				CredentialStore credStore = findCredentialStore();
-				if (credStore != null) {
-					try {
-						// if the token is already present, and was expired due to which we have fetched a new 
-						// token, then we remove the token from the store first and then add this new token.
-						deleteToken();
-						credStore.store(getServiceName(), ACCESS_TOKEN_STORE_TYPE, context.getCurrentUserId(), token);
-					} catch (CredentialStoreException cse) {
-						throw new OAuthException(cse);
+			
+			if(StringUtil.isEmpty(getCredentialStore())){
+    			this.setAccessTokenObject(token);
+    		}else{			
+				if (!Context.get().isCurrentUserAnonymous()) {
+					CredentialStore credStore = findCredentialStore();
+					if (credStore != null) {
+						try {
+							// if the token is already present, and was expired due to which we have fetched a new 
+							// token, then we remove the token from the store first and then add this new token.
+							deleteToken();
+							credStore.store(getServiceName(), ACCESS_TOKEN_STORE_TYPE, context.getCurrentUserId(), token);
+						} catch (CredentialStoreException cse) {
+							throw new OAuthException(cse);
+						}
 					}
+				} else {
+					AnonymousCredentialStore.storeCredentials(Context.get(), token, getAppId(), getServiceName());
 				}
-			} else {
-				AnonymousCredentialStore.storeCredentials(Context.get(), token, getAppId(), getServiceName());
-			}
+		}
 			//
 		} catch (IOException e) {
 			throw new OAuthException(e);

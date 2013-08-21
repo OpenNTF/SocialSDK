@@ -42,6 +42,9 @@ define(["../../../declare",
 		 * @module sbt.connections.controls.forum.ForumGrid
 		 */
 	    var ForumGrid = declare(Grid,{
+	    	
+	    	/**Hide the table header */
+	    	hideHeader: false,
 
 	        options : {
 	            "my" : {
@@ -80,6 +83,9 @@ define(["../../../declare",
 	         * @param args
 	         */
 	        constructor: function(args){
+	        	if(args.hideHeader){
+	        		this.hideHeader = args.hideHeader;
+	        	}
 	        	
 	        },
 	        

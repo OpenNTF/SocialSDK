@@ -15,6 +15,9 @@
  */
 package com.ibm.sbt.services.endpoints;
 
+import com.ibm.commons.util.StringUtil;
+import com.ibm.sbt.core.configuration.Configuration;
+import com.ibm.sbt.security.authentication.oauth.consumer.HMACOAuth1Handler;
 /**
  * @author Vimal Dhupar
  *
@@ -23,11 +26,26 @@ package com.ibm.sbt.services.endpoints;
 public class TwitterOAuthEndpoint extends OAuthEndpoint {
 	
     public TwitterOAuthEndpoint() {
+    	super(new HMACOAuth1Handler());
     }
+    public String getApplicationAccessToken() {
+		return ((HMACOAuth1Handler)oAuthHandler).getApplicationAccessToken();
+	}
 
+	public void setApplicationAccessToken(String applicationAccessToken) {
+		((HMACOAuth1Handler)oAuthHandler).setApplicationAccessToken(applicationAccessToken);
+	}
     @Override
+	public void setSignatureMethod(String signatureMethod) {
+		oAuthHandler.setSignatureMethod(signatureMethod);
+		if (StringUtil.equalsIgnoreCase(Configuration.HMAC_SIGNATURE, signatureMethod)) {
+			this.setOauthHandler(new HMACOAuth1Handler(getConsumerKey(), getConsumerSecret(), getCredentialStore(), getAppId(), 
+					getServiceName(), getRequestTokenURL(), getAuthorizationURL(), getAccessTokenURL(), getSignatureMethod(), 
+					isForceTrustSSLCertificate(), getApplicationAccessToken()));
+    }
+	}
+	@Override
     public String getPlatform() {
     	return PLATFORM_TWITTER;
     }
-
 }

@@ -30,7 +30,6 @@ import com.ibm.commons.runtime.RuntimeConstants;
 import com.ibm.commons.runtime.util.UrlUtil;
 import com.ibm.commons.util.PathUtil;
 import com.ibm.commons.util.StringUtil;
-import com.ibm.sbt.core.configuration.Configuration;
 import com.ibm.sbt.security.authentication.oauth.OAuthException;
 import com.ibm.sbt.security.authentication.oauth.consumer.AccessToken;
 import com.ibm.sbt.security.authentication.oauth.consumer.HMACOAuth1Handler;
@@ -51,7 +50,13 @@ import com.ibm.sbt.util.SBTException;
  */
 public class OAuthEndpoint extends AbstractEndpoint {
 
-	protected OAuth1Handler	oAuthHandler	= new OAuth1Handler();
+	protected OAuth1Handler	oAuthHandler; 
+	protected OAuthEndpoint(){
+		this.oAuthHandler = new OAuth1Handler();
+	}
+	protected OAuthEndpoint(HMACOAuth1Handler handler) {
+		this.oAuthHandler = handler;
+	}
 	
 	@Override
 	public void checkValid() throws SBTException {
@@ -154,14 +159,9 @@ public class OAuthEndpoint extends AbstractEndpoint {
 
 	public void setSignatureMethod(String signatureMethod) {
 		oAuthHandler.setSignatureMethod(signatureMethod);
-		if (StringUtil.equalsIgnoreCase(Configuration.HMAC_SIGNATURE, signatureMethod)) {
-			this.setOauthHandler(new HMACOAuth1Handler(getConsumerKey(), getConsumerSecret(), getCredentialStore(), getAppId(), 
-					getServiceName(), getRequestTokenURL(), getAuthorizationURL(), getAccessTokenURL(), getSignatureMethod(), 
-					isForceTrustSSLCertificate(), getApplicationAccessToken()));
-		}
 	}
 
-	private void setOauthHandler(HMACOAuth1Handler hmacoAuth1Handler) {
+	protected void setOauthHandler(HMACOAuth1Handler hmacoAuth1Handler) {
 		this.oAuthHandler = hmacoAuth1Handler;
 	}
 
@@ -178,14 +178,8 @@ public class OAuthEndpoint extends AbstractEndpoint {
 	@Override
 	public void setForceTrustSSLCertificate(boolean forceTrustSSLCertificate) {
 		oAuthHandler.setForceTrustSSLCertificate(forceTrustSSLCertificate);
-	}
 
-	public String getApplicationAccessToken() {
-		return oAuthHandler.getApplicationAccessToken();
-	}
 
-	public void setApplicationAccessToken(String applicationAccessToken) {
-		oAuthHandler.setApplicationAccessToken(applicationAccessToken);
 	}
 
 	@Override

@@ -68,6 +68,7 @@ public class OA2Callback extends AbstractServiceHandler {
 			oAuthHandler.getAccessTokenForAuthorizedUser(); // This retrieves and sets all authentication information in OAuth2Handler
 			AccessToken token = oAuthHandler.createToken(oAuthHandler.getAppId(),oAuthHandler.getServiceName());
             // Store the new key
+			oAuthHandler.setAccessTokenObject(token); 
         	if(!context.isCurrentUserAnonymous()) {
         		CredentialStore credStore = CredentialStoreFactory.getCredentialStore(oAuthHandler.getCredentialStore());
         		if(credStore!=null) {

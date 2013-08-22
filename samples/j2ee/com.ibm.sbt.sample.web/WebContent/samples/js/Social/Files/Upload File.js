@@ -1,11 +1,3 @@
-require([ "sbt/connections/FileService", "sbt/dom" ], function(FileService, dom) {
-	var fileService = new FileService();
-	// To make sure authentication happens before upload 
-	fileService.endpoint.authenticate().then(function() {
-		handleLoggedIn(fileService, dom);
-	});
-});
-
 function addOnClickHandlers(fileService, dom) {
 
 	dom.byId("uploadBtn").onclick = function(evt) {
@@ -58,3 +50,12 @@ function clearError(dom) {
 
 	dom.byId("error").style.display = "none";
 }
+
+require([ "sbt/connections/FileService", "sbt/dom" ], function(FileService, dom) {
+	var fileService = new FileService();
+	// To make sure authentication happens before upload 
+	fileService.endpoint.authenticate().then(function() {
+		handleLoggedIn(fileService, dom);
+	});
+});
+

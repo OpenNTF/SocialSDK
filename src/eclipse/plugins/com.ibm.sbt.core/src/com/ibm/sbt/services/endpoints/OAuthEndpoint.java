@@ -54,7 +54,7 @@ public class OAuthEndpoint extends AbstractEndpoint {
 	protected OAuthEndpoint(){
 		this.oAuthHandler = new OAuth1Handler();
 	}
-	protected OAuthEndpoint(HMACOAuth1Handler handler) {
+	protected OAuthEndpoint(OAuth1Handler handler) {
 		this.oAuthHandler = handler;
 	}
 	

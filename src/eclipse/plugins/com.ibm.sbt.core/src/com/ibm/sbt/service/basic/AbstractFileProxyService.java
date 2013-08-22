@@ -39,17 +39,22 @@ import com.ibm.sbt.services.endpoints.EndpointFactory;
 import com.ibm.sbt.services.util.AuthUtil;
 import com.ibm.sbt.services.util.SSLUtil;
 
-/** @author Vineet Kanwal **/
+/**
+ * 
+ * @author Vineet Kanwal
+ **/
 public abstract class AbstractFileProxyService extends ProxyEndpointService {
 
 	protected String fileNameOrId = null;
+
+	protected String method = null;
 
 	private Long length = 0L;
 
 	protected String libraryId = null;
 
 	protected abstract String getRequestURI(String smethod, String authType, Map<String, String[]> params) throws ServletException;
-	
+
 	@Override
 	protected void initProxy(HttpServletRequest request, HttpServletResponse response) throws ServletException {
 		// TODO can this be moved to parametrers
@@ -62,15 +67,15 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 			if (!endpoint.isAllowClientAccess()) {
 				throw new ServletException(StringUtil.format("Client access forbidden for the specified endpoint {0}", endPointName));
 			}
-			fileNameOrId = pathTokens[4];			
+			fileNameOrId = pathTokens[4];
 			if (fileNameOrId == null) {
-				writeErrorResponse(HttpServletResponse.SC_BAD_REQUEST, "File Name not provided.", new String[] {}, new String[] {}, response,
-						request);
+				writeErrorResponse(HttpServletResponse.SC_BAD_REQUEST, "File Name not provided.", new String[] {}, new String[] {}, response, request);
 				return;
 			}
 			if (pathTokens.length == 6) {
 				libraryId = pathTokens[5];
 			}
+			method = request.getMethod();
 			requestURI = getRequestURI(request.getMethod(), AuthUtil.INSTANCE.getAuthValue(endpoint), request.getParameterMap());
 			return;
 		}
@@ -80,7 +85,7 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 	@Override
 	public void serviceProxy(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		InputStream inputStream = request.getInputStream();
-		request.getHeaderNames(); //("Content-Type");
+		request.getHeaderNames(); // ("Content-Type");
 		OutputStream out = null;
 		try {
 			initProxy(request, response);
@@ -89,7 +94,7 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 			URI url = getRequestURI(request);
 			HttpRequestBase method = createMethod(smethod, url, request);
 			if (prepareForwardingMethod(method, request, client)) {
-				if (smethod.equalsIgnoreCase("POST")) {
+				if (smethod.equalsIgnoreCase("POST") || (smethod.equalsIgnoreCase("PUT"))) {
 					FileItemFactory factory = new DiskFileItemFactory();
 					// Create a new file upload handler
 					ServletFileUpload upload = new ServletFileUpload(factory);
@@ -101,16 +106,16 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 								response, request);
 						return;
 					}
-					for (FileItem uploadedFile : fileItems) {						
+					for (FileItem uploadedFile : fileItems) {
 						InputStream uploadedFileContent = uploadedFile.getInputStream();
-						File file = convertInputStreamToFile(uploadedFileContent, uploadedFile.getSize());												
-						Map<String, String[]> params = request.getParameterMap() != null ? request.getParameterMap() : new HashMap<String, String[]>();						
+						File file = convertInputStreamToFile(uploadedFileContent, uploadedFile.getSize());
+						Map<String, String[]> params = request.getParameterMap() != null ? request.getParameterMap() : new HashMap<String, String[]>();
 						Content content = getFileContent(file, length, fileNameOrId);
 						Map<String, String> headers = createHeaders();
-						
+
 						xhr(request, response, url.getPath(), params, headers, content, getFormat());
 					}
-				} else if (smethod.equalsIgnoreCase("GET")) {					
+				} else if (smethod.equalsIgnoreCase("GET")) {
 					xhr(request, response, requestURI, new HashMap<String, String[]>(), new HashMap<String, String>(), null, ClientService.FORMAT_INPUTSTREAM);
 
 				}
@@ -134,21 +139,21 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 	protected abstract Handler getFormat();
 
 	private File convertInputStreamToFile(InputStream inputStream, Long size) throws IOException {
-		
+
 		OutputStream out = null;
 		try {
 			File file = new File(fileNameOrId); // TODO check with Phil to avoid conflict in name
 			out = new FileOutputStream(file);
 			int bufferSize = size.intValue() < 8192 ? size.intValue() : 8192;
-			byte[] bytes = new byte[bufferSize]; 
+			byte[] bytes = new byte[bufferSize];
 			int read = 0;
 			while ((read = inputStream.read(bytes)) != -1) {
-				length += read;				
+				length += read;
 				out.write(bytes);
 				out.flush();
 			}
 			inputStream.close();
-			out.close();			
+			out.close();
 			return file;
 		} catch (IOException e) {
 			throw e;
@@ -204,23 +209,22 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 		}
 		return b.toString();
 	}
-	
+
 	protected void forceAuthentication(Args args) throws ClientServicesException {
 		if (endpoint != null) {
 			endpoint.authenticate(true);
 		} else {
-			throw new NoAccessSignal(StringUtil.format("Authorization needed for service {0}",
-					getUrlPath(args)));
+			throw new NoAccessSignal(StringUtil.format("Authorization needed for service {0}", getUrlPath(args)));
 		}
 	}
-	
+
 	protected String getBaseUrl() {
 		if (endpoint != null) {
 			return endpoint.getUrl();
 		}
 		return null;
 	}
-	
+
 	protected String getUrlPath(Args args) {
 		String baseUrl = getBaseUrl();
 		String serviceUrl = args.getServiceUrl();
@@ -250,12 +254,12 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 		if (content != null) {
 			content.initRequestContent(httpClient, method, args);
 		}
-		HttpResponse clientResponse = httpClient.execute(method);			
+		HttpResponse clientResponse = httpClient.execute(method);
+
 		if ("get".equalsIgnoreCase(smethod) && (clientResponse.getStatusLine().getStatusCode() == HttpServletResponse.SC_UNAUTHORIZED)
-				|| (endpoint != null && endpoint.getAuthenticationErrorCode() == clientResponse.getStatusLine()
-						.getStatusCode())) {
+				|| (endpoint != null && endpoint.getAuthenticationErrorCode() == clientResponse.getStatusLine().getStatusCode())) {
 			forceAuthentication(args);
 		}
-		prepareResponse(method, request, response, clientResponse, true);	
+		prepareResponse(method, request, response, clientResponse, true);
 	}
 }

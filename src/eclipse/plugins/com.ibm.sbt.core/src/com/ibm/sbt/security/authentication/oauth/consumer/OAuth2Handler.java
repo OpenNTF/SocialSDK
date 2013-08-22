@@ -189,7 +189,7 @@ public class OAuth2Handler extends OAuthHandler {
 				StreamUtil.close(reader);
 			}
 		} catch (Exception e) {
-			throw new OAuthException(e, "getAccessToken failed with Exception: <br>");
+			throw new OAuthException(e, "getAccessToken failed with Exception: <br>" + e);
 		} finally {
 			if(content != null) {
 				content.close(); 
@@ -294,16 +294,11 @@ public class OAuth2Handler extends OAuthHandler {
 			}
 		}
 		if (responseCode != HttpStatus.SC_OK) {
-			if (responseCode == HttpStatus.SC_UNAUTHORIZED) {
-			    String msg = "Unable to retrieve access token. Please check in OAuth 2.0 registration for {0} that the client secret matches the consumer key.";
-			    logger.info(MessageFormat.format(msg, consumerKey));
-				throw new OAuthException(null, "getAccessToken failed with Response Code: Unauthorized (401),<br>Msg: " + responseBody);
-			} else if (responseCode == HttpStatus.SC_BAD_REQUEST) {
-				throw new OAuthException(null, "getAccessToken failed with Response Code: Bad Request (400),<br>Msg: " + responseBody);
-			} else if (responseCode == HttpStatus.SC_INTERNAL_SERVER_ERROR) {
-				throw new OAuthException(null, "getAccessToken failed with Response Code: Internal Server error (500),<br>Msg: " + responseBody);
-			} else {
-				throw new OAuthException(null, "getAccessToken failed with Response Code: (" + responseCode + "),<br>Msg: " + responseBody);
+
+			String exceptionDetail = buildErrorMessage(responseCode, responseBody);
+			if (exceptionDetail != null) {
+				throw new OAuthException(null,
+						"OAuth2Handler.java : getAccessToken failed. " + exceptionDetail);
 			}
 		} else {
 			setOAuthData(responseBody); //save the returned data
@@ -696,7 +691,7 @@ public class OAuth2Handler extends OAuthHandler {
     				StreamUtil.close(reader);
     			}
     		} catch (Exception e) {
-    			throw new OAuthException(e ,"refreshAccessToken failed with Exception: <br>");
+    			throw new OAuthException(e ,"refreshAccessToken failed with Exception: <br>" + e);
     		} finally {
     			if (method != null){
 					try {
@@ -704,8 +699,7 @@ public class OAuth2Handler extends OAuthHandler {
 							content.close();
 						}
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+						throw new OAuthException(e ,"refreshAccessToken failed with Exception: <br>" + e);
 					}
     			}
     		}

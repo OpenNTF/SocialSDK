@@ -148,7 +148,7 @@ public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 			String exceptionDetail = buildErrorMessage(responseCode, responseBody);
 			if (StringUtil.isNotEmpty(exceptionDetail)) {
 				throw new OAuthException(null,
-						"HMACOAuth1Handler.java : " + exceptionDetail);
+						"HMACOAuth1Handler.java : getRequestTokenFromServer failed." + exceptionDetail);
 			}
 		} else {
 			/*
@@ -166,26 +166,7 @@ public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 			 */
 			setOAuthCallbackConfirmed(getTokenValue(responseBody, Configuration.OAUTH_CALLBACK_CONFIRMED));
 		}
-	}
 
-	private String buildErrorMessage(int responseCode, String responseBody) {
-		String exceptionDetail = null;
-		if (responseCode == HttpStatus.SC_NOT_IMPLEMENTED) {
-			exceptionDetail = "getRequestToken failed with Response Code: Not implemented (501), Msg: " + responseBody;
-		} else if (responseCode == HttpStatus.SC_UNAUTHORIZED) {
-			exceptionDetail = "getRequestToken failed with Response Code: Unauthorized (401), Msg: "
-					+ responseBody;
-		} else if (responseCode == HttpStatus.SC_BAD_REQUEST) {
-			exceptionDetail = "getRequestToken failed with Response Code: Bad Request (400), Msg: "
-					+ responseBody;
-		} else if (responseCode == HttpStatus.SC_INTERNAL_SERVER_ERROR) {
-			exceptionDetail = "getRequestToken failed with Response Code: Internal Server error (500), Msg: "
-							+ responseBody;
-		} else {
-			exceptionDetail = "getRequestToken failed with Response Code (" + responseCode
-					+ "), Msg: " + responseBody;
-		}
-		return exceptionDetail;
 	}
 
 	/*
@@ -270,7 +251,7 @@ public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 			String exceptionDetail = buildErrorMessage(responseCode, responseBody);
 			if (exceptionDetail != null) {
 				throw new OAuthException(null,
-						"HMACOAuth1Handler.java : " + exceptionDetail);
+						"HMACOAuth1Handler.java : getAccessTokenFromServer failed. " + exceptionDetail);
 			}
 		} else {
 			/*

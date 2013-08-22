@@ -172,21 +172,10 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 			}
 		}
 		if (responseCode != HttpStatus.SC_OK) {
-			if (responseCode == HttpStatus.SC_NOT_IMPLEMENTED) {
-				throw new OAuthException(null, "getRequestToken failed with Response Code: Not implemented (501),<br>Msg: "
-						+ responseBody);
-			} else if (responseCode == HttpStatus.SC_UNAUTHORIZED) {
-				throw new OAuthException(null, "getRequestToken failed with Response Code: Unauthorized (401),<br>Msg: "
-						+ responseBody);
-			} else if (responseCode == HttpStatus.SC_BAD_REQUEST) {
-				throw new OAuthException(null, "getRequestToken failed with Response Code: Bad Request (400),<br>Msg: "
-						+ responseBody.toString());
-			} else if (responseCode == HttpStatus.SC_INTERNAL_SERVER_ERROR) {
-				throw new OAuthException(null, "getRequestToken failed with Response Code: Internal Server error (500),<br>Msg: "
-						+ responseBody);
-			} else {
-				throw new OAuthException(null, "getRequestToken failed with Response Code (" + responseCode
-						+ "),<br>Msg: " + responseBody);
+			String exceptionDetail = buildErrorMessage(responseCode, responseBody);
+			if (exceptionDetail != null) {
+				throw new OAuthException(null,
+						"OAuth1Handler.java : getRequestToken failed. " + exceptionDetail);
 			}
 		} else {
 			setRequestToken(getTokenValue(responseBody, Configuration.OAUTH_TOKEN));
@@ -246,24 +235,13 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 			}
 		} catch (Exception e) {
 			Platform.getInstance().log(e);
-			throw new OAuthException(e, "Internal error - getRequestToken failed Exception: <br>");
+			throw new OAuthException(e, "Internal error - getAccessToken failed Exception: <br>" + e);
 		}
 		if (responseCode != HttpStatus.SC_OK) {
-			if (responseCode == HttpStatus.SC_NOT_IMPLEMENTED) {
-				throw new OAuthException(null, "getRequestToken failed with Response Code: Not implemented (501),<br>Msg: "
-						+ responseBody);
-			} else if (responseCode == HttpStatus.SC_UNAUTHORIZED) {
-				throw new OAuthException(null, "getRequestToken failed with Response Code: Unauthorized (401),<br>Msg: "
-						+ responseBody);
-			} else if (responseCode == HttpStatus.SC_BAD_REQUEST) {
-				throw new OAuthException(null, "getRequestToken failed with Response Code: Bad Request (400),<br>Msg: "
-						+ responseBody);
-			} else if (responseCode == HttpStatus.SC_INTERNAL_SERVER_ERROR) {
-				throw new OAuthException(null, "getRequestToken failed with Response Code: Internal Server error (500),<br>Msg: "
-						+ responseBody);
-			} else {
-				throw new OAuthException(null, "getRequestToken failed with Response Code (" + responseCode
-						+ "),<br>Msg: " + responseBody);
+			String exceptionDetail = buildErrorMessage(responseCode, responseBody);
+			if (exceptionDetail != null) {
+				throw new OAuthException(null,
+						"OAuth1Handler.java : getAccessToken failed. " + exceptionDetail);
 			}
 		} else {
 			setAccessToken(getTokenValue(responseBody, Configuration.OAUTH_TOKEN));

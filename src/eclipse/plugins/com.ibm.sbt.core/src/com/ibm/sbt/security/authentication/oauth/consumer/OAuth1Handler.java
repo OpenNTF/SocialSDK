@@ -611,7 +611,8 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 	}
 
 	public AccessToken _acquireToken(boolean login, boolean force) throws OAuthException {
-		Context context = Context.get();
+    	Context context = Context.get();
+    	AccessToken tk;
 
 		// If force is used, then login must be requested
 		if (force) {
@@ -623,8 +624,7 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 		// Look for a token in the store
 		// If the user is anonymous, then the token might had been stored in the session
 		if (!force) {
-			AccessToken tk;
-            if(StringUtil.isEmpty(getCredentialStore())){
+			if (getAccessTokenObject() != null) {
             	// if cred store is not defined in end point return from bean
             	tk = getAccessTokenObject();
             }else{
@@ -644,6 +644,7 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 		// Ok, we should then play the OAuth dance if requested
 		if (login) {
 			// Here if we are forced to start an OAuth dance, we clear the Store from any existing tokens for this application and fetch new tokens.
+			setAccessTokenObject(null);
 			deleteToken();
 			setApplicationPage(getApplicationPage(context));
 			try {
@@ -908,26 +909,23 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 			getAccessTokenFromServer();
 
 			token = createToken(getAppId(), getServiceName(), this, token.getUserId());
-			
-			if(StringUtil.isEmpty(getCredentialStore())){
-    			this.setAccessTokenObject(token);
-    		}else{			
-				if (!Context.get().isCurrentUserAnonymous()) {
-					CredentialStore credStore = findCredentialStore();
-					if (credStore != null) {
-						try {
-							// if the token is already present, and was expired due to which we have fetched a new 
-							// token, then we remove the token from the store first and then add this new token.
-							deleteToken();
-							credStore.store(getServiceName(), ACCESS_TOKEN_STORE_TYPE, context.getCurrentUserId(), token);
-						} catch (CredentialStoreException cse) {
-							throw new OAuthException(cse);
-						}
+			setAccessTokenObject(token);
+			if (!Context.get().isCurrentUserAnonymous()) {
+				CredentialStore credStore = findCredentialStore();
+				if (credStore != null) {
+					try {
+						// if the token is already present, and was expired due to which we have fetched a new 
+						// token, then we remove the token from the store first and then add this new token.
+						deleteToken();
+						credStore.store(getServiceName(), ACCESS_TOKEN_STORE_TYPE, context.getCurrentUserId(), token);
+					} catch (CredentialStoreException cse) {
+						throw new OAuthException(cse);
 					}
-				} else {
-					AnonymousCredentialStore.storeCredentials(Context.get(), token, getAppId(), getServiceName());
 				}
-		}
+			} else {
+				AnonymousCredentialStore.storeCredentials(Context.get(), token, getAppId(), getServiceName());
+			}
+		
 			//
 		} catch (IOException e) {
 			throw new OAuthException(e);

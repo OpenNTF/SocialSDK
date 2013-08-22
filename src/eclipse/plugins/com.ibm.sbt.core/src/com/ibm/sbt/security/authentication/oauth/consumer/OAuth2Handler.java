@@ -59,6 +59,9 @@ import com.ibm.sbt.service.util.ServiceUtil;
 import com.ibm.sbt.services.util.AnonymousCredentialStore;
 import com.ibm.sbt.services.util.SSLUtil;
 
+/**
+ * @author Manish Kataria
+ */
 
 public class OAuth2Handler extends OAuthHandler {
 
@@ -520,12 +523,13 @@ public class OAuth2Handler extends OAuthHandler {
     /*
      * This method searches for existing token in store.
      * It can also conditionally trigger the OAuth2 Dance to procure new tokens
+     * When parameter force is True, we re-perform the Oauth Dance.
+     * When parameter login is True, we re-perform the Oauth dance only when tokens are not available in store or bean
      */
     
     public AccessToken _acquireToken(boolean login, boolean force) throws OAuthException {
-    	
     	Context context = Context.get();
-    	
+    	AccessToken tk;
         // If force is used, then login must be requested
         if(force) {
             login = true;
@@ -536,16 +540,15 @@ public class OAuth2Handler extends OAuthHandler {
         // Look for a token in the store
     	// If the user is anonymous, then the token might had been stored in the session
         if(!force) {
-        	AccessToken tk;
-        	
-            if(StringUtil.isEmpty(getCredentialStore())){
-            	// if cred store is not defined in end point return from bean
-            	tk = getAccessTokenObject();
-            }else{
+        	if (getAccessTokenObject() != null) {
+    			// read from the local bean if accesstoken is present
+    			tk = getAccessTokenObject();
+    		}else{
             	tk = context.isCurrentUserAnonymous() 
     			? (AccessToken)AnonymousCredentialStore.loadCredentials(context,getAppId(),getServiceName()) 
     			: findTokenFromStore(context, userId);
-            }
+    		}
+        	
             if(tk!=null) {
                 if(shouldRenewToken(tk)) { //based on expiration date, check if token needs to be renewed.
                     return renewToken(tk); 
@@ -722,21 +725,18 @@ public class OAuth2Handler extends OAuthHandler {
 					renewedtoken = createToken(getAppId(),getServiceName()); // Now create a new token and save that in the store    		
 					Context context = Context.get();
 					try {
-		        		if(StringUtil.isEmpty(getCredentialStore())){
-		        			this.setAccessTokenObject(renewedtoken);
-		        		}else{
-				        	if(!context.isCurrentUserAnonymous()) {
-				        		CredentialStore credStore = findCredentialStore();
-				        		if (credStore != null) {
-									// if the token is already present, and was expired due to which we have fetched a new 
-									// token, then we remove the token from the store first and then add this new token.
-									deleteToken();
-									credStore.store(getServiceName(), ACCESS_TOKEN_STORE_TYPE, context.getCurrentUserId(), renewedtoken);
-								}
-				            } else {
-				            	AnonymousCredentialStore.storeCredentials(context, renewedtoken, getAppId(), getServiceName()); // Store the token for anonymous user
-				            }
-		        		}
+						setAccessTokenObject(renewedtoken);
+			        	if(!context.isCurrentUserAnonymous()) {
+			        		CredentialStore credStore = findCredentialStore();
+			        		if (credStore != null) {
+								// if the token is already present, and was expired due to which we have fetched a new 
+								// token, then we remove the token from the store first and then add this new token.
+								deleteToken();
+								credStore.store(getServiceName(), ACCESS_TOKEN_STORE_TYPE, context.getCurrentUserId(), renewedtoken);
+							}
+			            } else {
+			            	AnonymousCredentialStore.storeCredentials(context, renewedtoken, getAppId(), getServiceName()); // Store the token for anonymous user
+			            }
 					} catch (CredentialStoreException cse) {
 						throw new OAuthException(cse, "Error trying to renew Token.");
 					}

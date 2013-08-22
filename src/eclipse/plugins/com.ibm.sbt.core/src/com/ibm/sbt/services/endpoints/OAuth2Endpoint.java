@@ -64,7 +64,7 @@ public class OAuth2Endpoint extends AbstractEndpoint {
 	@Override
 	public void authenticate(boolean force) throws ClientServicesException {
 		try {
-			oAuthHandler._acquireToken(true, false);
+			oAuthHandler.acquireToken(true, false);
 		} catch (OAuthException ex) {
 			throw new ClientServicesException(ex);
 		}

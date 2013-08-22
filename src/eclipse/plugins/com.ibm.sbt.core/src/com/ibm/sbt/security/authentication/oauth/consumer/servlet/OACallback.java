@@ -85,6 +85,7 @@ public class OACallback extends AbstractServiceHandler {
 				throw new ServletException("Missing OAuth token");
 			}
 			// Store the new key
+			oAuthHandler.setAccessTokenObject(tk); 
 			if (!context.isCurrentUserAnonymous()) {
 				CredentialStore cs = CredentialStoreFactory.getCredentialStore(oAuthHandler.getCredentialStore());
 				if (cs != null) {

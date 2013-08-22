@@ -48,6 +48,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
     		content : "a:content[@type='text']",
             moderation : "snx:moderation/@status",
             threadCount: "a:link[@rel='replies']/@thr:count",	
+            forumURL : "a:link[@rel='alternate']/@href"
         },
         
 		/**

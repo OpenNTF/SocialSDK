@@ -20,8 +20,8 @@
  * @module sbt.base.BaseService
  * @author Carlos Manias
  */
-define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cache", "../Promise" ], 
-    function(config, declare,lang,log,stringUtil,Cache,Promise) {
+define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cache", "../Promise", "../util" ], 
+    function(config, declare,lang,log,stringUtil,Cache,Promise, util) {
 	// TODO sbt/config is required here to solve module loading
 	// issues with jquery until we remove the global sbt object
 	
@@ -465,6 +465,20 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
                     return promise;
                 }
             }
+        },
+        
+        /**
+         * Validate HTML5 File API Support for browser and JS Library	
+         */
+        validateHTML5FileSupport : function() {
+        	if (!window.File || !window.FormData) {
+				var message = "HTML 5 File API is not supported by the Browser.";
+				return this.createBadRequestPromise(message);
+			}
+        	// Dojo 1.4.3 does not support HTML5 FormData
+			if(util.getJavaScriptLibrary().indexOf("Dojo 1.4") != -1) {
+				return this.createBadRequestPromise("Dojo 1.4.* is not supported for Update Profile Photo");
+			}
         },
         
         /*

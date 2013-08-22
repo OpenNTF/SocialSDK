@@ -1217,13 +1217,9 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 			if (promise) {
 				return promise;
 			}
-			if (!window.File || !window.FormData) {
-				var message = "HTML 5 File API is not supported by the Browser.";
-				return this.createBadRequestPromise(message);
-			}
-			// Dojo 1.4.3 does not support HTML5 FormData
-			if(util.getJavaScriptLibrary().indexOf("Dojo 1.4") != -1) {
-				return this.createBadRequestPromise("Dojo 1.4.* is not supported for File Upload");
+			promose = this.validateHTML5FileSupport();
+			if(promise){
+				return promise;
 			}			
 			var files = null;
 			if (typeof fileControlOrId == "string") {

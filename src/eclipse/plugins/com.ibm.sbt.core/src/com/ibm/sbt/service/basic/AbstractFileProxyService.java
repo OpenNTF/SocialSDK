@@ -39,10 +39,15 @@ import com.ibm.sbt.services.endpoints.EndpointFactory;
 import com.ibm.sbt.services.util.AuthUtil;
 import com.ibm.sbt.services.util.SSLUtil;
 
-/** @author Vineet Kanwal **/
+/** 
+ * 
+ * @author Vineet Kanwal 
+ **/
 public abstract class AbstractFileProxyService extends ProxyEndpointService {
 
 	protected String fileNameOrId = null;
+	
+	protected String method = null;
 
 	private Long length = 0L;
 
@@ -71,6 +76,7 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 			if (pathTokens.length == 6) {
 				libraryId = pathTokens[5];
 			}
+			method = request.getMethod();
 			requestURI = getRequestURI(request.getMethod(), AuthUtil.INSTANCE.getAuthValue(endpoint), request.getParameterMap());
 			return;
 		}
@@ -89,7 +95,7 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 			URI url = getRequestURI(request);
 			HttpRequestBase method = createMethod(smethod, url, request);
 			if (prepareForwardingMethod(method, request, client)) {
-				if (smethod.equalsIgnoreCase("POST")) {
+				if (smethod.equalsIgnoreCase("POST") || (smethod.equalsIgnoreCase("PUT"))) {
 					FileItemFactory factory = new DiskFileItemFactory();
 					// Create a new file upload handler
 					ServletFileUpload upload = new ServletFileUpload(factory);
@@ -104,7 +110,7 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 					for (FileItem uploadedFile : fileItems) {						
 						InputStream uploadedFileContent = uploadedFile.getInputStream();
 						File file = convertInputStreamToFile(uploadedFileContent, uploadedFile.getSize());												
-						Map<String, String[]> params = request.getParameterMap() != null ? request.getParameterMap() : new HashMap<String, String[]>();						
+						Map<String, String[]> params = request.getParameterMap() != null ? request.getParameterMap() : new HashMap<String, String[]>();								
 						Content content = getFileContent(file, length, fileNameOrId);
 						Map<String, String> headers = createHeaders();
 						
@@ -250,7 +256,8 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 		if (content != null) {
 			content.initRequestContent(httpClient, method, args);
 		}
-		HttpResponse clientResponse = httpClient.execute(method);			
+		HttpResponse clientResponse = httpClient.execute(method);	
+		 
 		if ("get".equalsIgnoreCase(smethod) && (clientResponse.getStatusLine().getStatusCode() == HttpServletResponse.SC_UNAUTHORIZED)
 				|| (endpoint != null && endpoint.getAuthenticationErrorCode() == clientResponse.getStatusLine()
 						.getStatusCode())) {

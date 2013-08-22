@@ -46,6 +46,7 @@ import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.util.UrlUtil;
 import com.ibm.commons.util.PathUtil;
 import com.ibm.commons.util.StringUtil;
+import com.ibm.commons.util.io.StreamUtil;
 import com.ibm.commons.util.profiler.Profiler;
 import com.ibm.commons.util.profiler.ProfilerAggregator;
 import com.ibm.commons.util.profiler.ProfilerType;
@@ -183,9 +184,13 @@ public class OAuth2Handler extends OAuthHandler {
 	    	}
 			content = httpResponse.getEntity().getContent();
 			BufferedReader reader = new BufferedReader(new InputStreamReader(content));
-			responseBody = reader.readLine();
+			try {
+				responseBody = StreamUtil.readString(reader);
+			} finally {
+				StreamUtil.close(reader);
+			}
 		} catch (Exception e) {
-			throw new Exception("getAccessToken failed with Exception: <br>" + e);
+			throw new OAuthException(e, "getAccessToken failed with Exception: <br>" + e);
 		} finally {
 			if(content != null) {
 				content.close(); 
@@ -277,26 +282,23 @@ public class OAuth2Handler extends OAuthHandler {
 			
 			content = httpResponse.getEntity().getContent();
 			BufferedReader reader = new BufferedReader(new InputStreamReader(content));
-			responseBody = reader.readLine();
+			try {
+				responseBody = StreamUtil.readString(reader);
+			} finally {
+				StreamUtil.close(reader);
+			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			throw new Exception("getAccessToken failed with Exception: <br>" + e);
+			throw new OAuthException(e,"getAccessToken failed with Exception: <br>");
 		} finally {
 			if(content!=null) {
 				content.close();
 			}
 		}
 		if (responseCode != HttpStatus.SC_OK) {
-			if (responseCode == HttpStatus.SC_UNAUTHORIZED) {
-			    String msg = "Unable to retrieve access token. Please check in OAuth 2.0 registration for {0} that the client secret matches the consumer key.";
-			    logger.info(MessageFormat.format(msg, consumerKey));
-				throw new Exception("getAccessToken failed with Response Code: Unauthorized (401),<br>Msg: " + responseBody);
-			} else if (responseCode == HttpStatus.SC_BAD_REQUEST) {
-				throw new Exception("getAccessToken failed with Response Code: Bad Request (400),<br>Msg: " + responseBody);
-			} else if (responseCode == HttpStatus.SC_INTERNAL_SERVER_ERROR) {
-				throw new Exception("getAccessToken failed with Response Code: Internal Server error (500),<br>Msg: " + responseBody);
-			} else {
-				throw new Exception("getAccessToken failed with Response Code: (" + responseCode + "),<br>Msg: " + responseBody);
+			String exceptionDetail = buildErrorMessage(responseCode, responseBody);
+			if (exceptionDetail != null) {
+				throw new OAuthException(null,
+						"OAuth2Handler.java : getAccessToken failed. " + exceptionDetail);
 			}
 		} else {
 			setOAuthData(responseBody); //save the returned data
@@ -683,9 +685,13 @@ public class OAuth2Handler extends OAuthHandler {
     			responseCode = httpResponse.getStatusLine().getStatusCode();
     			content = httpResponse.getEntity().getContent();
     			BufferedReader reader = new BufferedReader(new InputStreamReader(content));
-    			responseBody = reader.readLine();
+    			try {
+    				responseBody = StreamUtil.readString(reader);
+    			} finally {
+    				StreamUtil.close(reader);
+    			}
     		} catch (Exception e) {
-    			throw new OAuthException(null,"refreshAccessToken failed with Exception: <br>" + e);
+    			throw new OAuthException(e ,"refreshAccessToken failed with Exception: <br>" + e);
     		} finally {
     			if (method != null){
 					try {
@@ -693,8 +699,7 @@ public class OAuth2Handler extends OAuthHandler {
 							content.close();
 						}
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+						throw new OAuthException(e ,"refreshAccessToken failed with Exception: <br>" + e);
 					}
     			}
     		}

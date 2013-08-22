@@ -11,59 +11,51 @@ import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientService.Content;
 import com.ibm.sbt.services.client.ClientService.ContentFile;
 import com.ibm.sbt.services.client.ClientService.Handler;
-import com.ibm.sbt.services.client.connections.profiles.ProfilesConstants;
 import com.ibm.sbt.services.util.AuthUtil;
 
 /**
  * 
  * @author Vineet Kanwal
- *
+ * 
  */
 public class ConnectionsFileProxyService extends AbstractFileProxyService {
 
-	private static final String UPLOAD_URL = "/files/basic/api/myuserlibrary/feed"; // TODO set as property on endpoint	
+	private static final String UPLOAD_URL = "/files/basic/api/myuserlibrary/feed"; // TODO set as property on endpoint
 	private static final String DOWNLOAD_URL = "/files/basic/api/library/{0}/document/{1}/media";
-	
+
 	@Override
-	protected Content getFileContent(File file, long length, String name) {	
+	protected Content getFileContent(File file, long length, String name) {
 		Content content;
-	//	if("PUT".equalsIgnoreCase(method)){
-			String contentType = null;
-			int dot = fileNameOrId.lastIndexOf('.');
-			String ext = null;
-			if (dot > -1) {
-				ext = fileNameOrId.substring(dot + 1); // add one for the dot!
+		String contentType = null;
+		int dot = fileNameOrId.lastIndexOf('.');
+		String ext = null;
+		if (dot > -1) {
+			ext = fileNameOrId.substring(dot + 1); // add one for the dot!
+		}
+		if (!StringUtil.isEmpty(ext)) {
+			if (ext.equalsIgnoreCase("jpg")) {
+				contentType = "image/jpeg"; // content-type should be image/jpeg for file extension jpg
+			} else {
+				contentType = "image/" + ext;
 			}
-			if (!StringUtil.isEmpty(ext)) {				
-				if (ext.equalsIgnoreCase("jpg")) {
-					contentType = "image/jpeg";	// content-type should be image/jpeg for file extension jpg
-				} else {
-					contentType = "image/" + ext;
-				}
-			}
-			content = new ContentFile(file, contentType);
-	/*	}
-		else {
-			content = new ContentFile(file);
-		}*/
+		}
+		content = new ContentFile(file, contentType);
 		return content;
 	}
 
 	@Override
-	protected String getRequestURI(String method, String authType, Map<String, String[]> params) throws ServletException{
-		if("POST".equalsIgnoreCase(method)){
+	protected String getRequestURI(String method, String authType, Map<String, String[]> params) throws ServletException {
+		if ("POST".equalsIgnoreCase(method)) {
 			return UPLOAD_URL;
-		}
-		else if("PUT".equalsIgnoreCase(method)){
-			//return PROFILE_PIC_UPLOAD_URL;
+		} else if ("PUT".equalsIgnoreCase(method)) {
+			// return PROFILE_PIC_UPLOAD_URL;
 			StringBuilder profileUrl = new StringBuilder("/profiles");
-			if (AuthUtil.INSTANCE.getAuthValue(endpoint).equalsIgnoreCase("oauth")) {				
-				profileUrl.append("/").append("oauth");				
+			if (AuthUtil.INSTANCE.getAuthValue(endpoint).equalsIgnoreCase("oauth")) {
+				profileUrl.append("/").append("oauth");
 			}
-			profileUrl.append("/").append("photo.do");	
+			profileUrl.append("/").append("photo.do");
 			return profileUrl.toString();
-		}
-		else if("GET".equalsIgnoreCase(method)){
+		} else if ("GET".equalsIgnoreCase(method)) {
 			if (fileNameOrId == null) {
 				throw new ServletException("File ID is required in URL for download.");
 			}
@@ -77,14 +69,14 @@ public class ConnectionsFileProxyService extends AbstractFileProxyService {
 
 	@Override
 	protected Map<String, String> createHeaders() {
-		return new HashMap<String, String>();		
+		return new HashMap<String, String>();
 	}
 
 	@Override
-	protected Handler getFormat() {	
-		if("PUT".equalsIgnoreCase(method)){
+	protected Handler getFormat() {
+		if ("PUT".equalsIgnoreCase(method)) {
 			return ClientService.FORMAT_NULL;
-		}		
+		}
 		return ClientService.FORMAT_XML;
 	}
 

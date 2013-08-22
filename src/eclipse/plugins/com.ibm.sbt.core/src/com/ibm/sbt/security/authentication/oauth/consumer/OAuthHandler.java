@@ -18,6 +18,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.http.HttpStatus;
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.util.UrlUtil;
 import com.ibm.commons.util.PathUtil;
@@ -85,6 +86,25 @@ public abstract class OAuthHandler {
 
 	}
 
+	public String buildErrorMessage(int responseCode, String responseBody) {
+		String errorDetail = null;
+		if (responseCode == HttpStatus.SC_NOT_IMPLEMENTED) {
+			errorDetail = "Response Code: Not implemented (501), Msg: " + responseBody;
+		} else if (responseCode == HttpStatus.SC_UNAUTHORIZED) {
+			errorDetail = "Response Code: Unauthorized (401), Msg: "
+					+ responseBody;
+		} else if (responseCode == HttpStatus.SC_BAD_REQUEST) {
+			errorDetail = "Response Code: Bad Request (400), Msg: "
+					+ responseBody;
+		} else if (responseCode == HttpStatus.SC_INTERNAL_SERVER_ERROR) {
+			errorDetail = "Response Code: Internal Server error (500), Msg: "
+							+ responseBody;
+		} else {
+			errorDetail = "Response Code (" + responseCode
+					+ "), Msg: " + responseBody;
+		}
+		return errorDetail;
+	}
 	public boolean isShowOAuthFlow() {
 		return showOAuthFlow;
 	}

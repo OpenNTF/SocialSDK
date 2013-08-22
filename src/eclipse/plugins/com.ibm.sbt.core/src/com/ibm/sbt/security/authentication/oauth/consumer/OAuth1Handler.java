@@ -87,6 +87,7 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 	protected String 			accessTokenURL;
 	protected String 			signatureMethod;
 	protected boolean			forceTrustSSLCertificate;
+	protected AccessToken 		accessTokenObject;
 
 	public OAuth1Handler() {
 		this.expireThreshold = EXPIRE_THRESHOLD;
@@ -358,6 +359,14 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 	public String getRequestToken() {
 		return requestToken;
 	}
+	
+	public AccessToken getAccessTokenObject() {
+		return accessTokenObject;
+	}
+
+	public void setAccessTokenObject(AccessToken accessTokenObject) {
+		this.accessTokenObject = accessTokenObject;
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -573,7 +582,8 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 	}
 
 	public AccessToken _acquireToken(boolean login, boolean force) throws OAuthException {
-		Context context = Context.get();
+    	Context context = Context.get();
+    	AccessToken tk;
 
 		// If force is used, then login must be requested
 		if (force) {
@@ -585,22 +595,30 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 		// Look for a token in the store
 		// If the user is anonymous, then the token might had been stored in the session
 		if (!force) {
-			AccessToken tk = context.isCurrentUserAnonymous() ? (AccessToken) AnonymousCredentialStore
+			if (getAccessTokenObject() != null) {
+            	// if cred store is not defined in end point return from bean
+            	tk = getAccessTokenObject();
+            }else{
+			 tk = context.isCurrentUserAnonymous() ? (AccessToken) AnonymousCredentialStore
 					.loadCredentials(context, getAppId(), getServiceName()) : findTokenFromStore(context,
 							userId);
-					if (tk != null) {
-						setAccessToken(tk);
-						if (shouldRenewToken(tk)) {
-							return renewToken(tk);
-						}
-						return tk;
-					}
+            }
+					
+			// check if token needs to be renewed
+			if (tk != null) {
+				setAccessToken(tk);
+				if (shouldRenewToken(tk)) {
+					return renewToken(tk);
+				}
+				return tk;
+			}
 		}
 
 		// Ok, we should then play the OAuth dance if requested
 		if (login) {
 			// Here if we are forced to start an OAuth dance, we clear the Store from any existing tokens for this application and fetch new tokens.
 			deleteToken();
+			setAccessTokenObject(null);
 			setApplicationPage(getApplicationPage(context));
 			try {
 				// This sends a signal
@@ -864,6 +882,7 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 			getAccessTokenFromServer();
 
 			token = createToken(getAppId(), getServiceName(), this, token.getUserId());
+			setAccessTokenObject(token);
 			if (!Context.get().isCurrentUserAnonymous()) {
 				CredentialStore credStore = findCredentialStore();
 				if (credStore != null) {

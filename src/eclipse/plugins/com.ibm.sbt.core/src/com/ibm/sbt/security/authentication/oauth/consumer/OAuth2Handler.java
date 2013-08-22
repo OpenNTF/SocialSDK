@@ -60,6 +60,9 @@ import com.ibm.sbt.service.util.ServiceUtil;
 import com.ibm.sbt.services.util.AnonymousCredentialStore;
 import com.ibm.sbt.services.util.SSLUtil;
 
+/**
+ * @author Manish Kataria
+ */
 
 public class OAuth2Handler extends OAuthHandler {
 
@@ -83,6 +86,7 @@ public class OAuth2Handler extends OAuthHandler {
 	private String applicationPage;
 	private int expireThreshold;
 	private boolean forceTrustSSLCertificate;
+	private AccessToken accessTokenObject;
 	
 	// Type used to store the credentials
 	public static final String ACCESS_TOKEN_STORE_TYPE = "OAUTH2_ACCESS_TOKEN_STORE";
@@ -361,6 +365,14 @@ public class OAuth2Handler extends OAuthHandler {
 	public void setAccessToken(String accessToken) {
 		this.accessToken = accessToken;
 	}
+	
+	public AccessToken getAccessTokenObject() {
+		return accessTokenObject;
+	}
+
+	public void setAccessTokenObject(AccessToken accessTokenObject) {
+		this.accessTokenObject = accessTokenObject;
+	}
 
 	public String getRefreshToken() {
 		return refreshToken;
@@ -513,11 +525,13 @@ public class OAuth2Handler extends OAuthHandler {
     /*
      * This method searches for existing token in store.
      * It can also conditionally trigger the OAuth2 Dance to procure new tokens
+     * When parameter force is True, we reperform the Oauth Dance.
+     * When login is True, we reperform the Oauth dance only when tokens are not available in store or bean
      */
     
     public AccessToken _acquireToken(boolean login, boolean force) throws OAuthException {
-    	
     	Context context = Context.get();
+    	AccessToken tk;
     	
         // If force is used, then login must be requested
         if(force) {
@@ -529,9 +543,17 @@ public class OAuth2Handler extends OAuthHandler {
         // Look for a token in the store
     	// If the user is anonymous, then the token might had been stored in the session
         if(!force) {
-            AccessToken tk = context.isCurrentUserAnonymous() 
-            						? (AccessToken)AnonymousCredentialStore.loadCredentials(context,getAppId(),getServiceName()) 
-            						: findTokenFromStore(context, userId);
+        	
+        	if (getAccessTokenObject() != null) {
+    			// read from the local bean if accesstoken is present
+    			tk = getAccessTokenObject();
+    		}else{
+            	tk = context.isCurrentUserAnonymous() 
+    			? (AccessToken)AnonymousCredentialStore.loadCredentials(context,getAppId(),getServiceName()) 
+    			: findTokenFromStore(context, userId);
+    		}
+
+        	// check if token needs to be renewed
             if(tk!=null) {
                 if(shouldRenewToken(tk)) { //based on expiration date, check if token needs to be renewed.
                     return renewToken(tk); 
@@ -541,6 +563,7 @@ public class OAuth2Handler extends OAuthHandler {
         }
     	if(login) {
     		deleteToken();
+    		setAccessTokenObject(null);
     		performOAuth2Dance();
     	}
         return null; 
@@ -710,6 +733,7 @@ public class OAuth2Handler extends OAuthHandler {
 					setOAuthData(responseBody);
 					renewedtoken = createToken(getAppId(),getServiceName()); // Now create a new token and save that in the store    		
 					Context context = Context.get();
+					setAccessTokenObject(renewedtoken);
 					try {
 			        	if(!context.isCurrentUserAnonymous()) {
 			        		CredentialStore credStore = findCredentialStore();

@@ -26,11 +26,10 @@ define([ "../../../declare",
          "../../../controls/grid/Grid", 
          "./FileGridRenderer", 
          "./FileAction",
-         "../../../connections/controls/vcard/SemanticTagService", 
          "../../../connections/FileService",
          "../../../connections/FileConstants"], 
-        function(declare, lang, dom, stringUtil, sbt, parameter, Grid, FileGridRenderer, FileAction, SemanticTagService, FileService, FileConstants) {
-
+        function(declare, lang, dom, stringUtil, sbt, parameter, Grid, FileGridRenderer, FileAction, FileService, FileConstants) {
+ 
 	// TODO use values from constants and handle authType
 	var fileUrls = {
 		publicFiles : "/files/basic/anonymous/api/documents/feed?visibility=public",
@@ -433,7 +432,6 @@ define([ "../../../declare",
          */
         postCreate: function() {        	
         	this.inherited(arguments);
-        	SemanticTagService.loadSemanticTagService();
         },
         
         /**

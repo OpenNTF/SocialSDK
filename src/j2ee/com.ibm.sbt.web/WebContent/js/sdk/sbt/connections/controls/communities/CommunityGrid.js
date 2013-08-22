@@ -21,18 +21,17 @@ define([ "../../../declare",
          "../../../controls/grid/Grid", 
          "./CommunityGridRenderer", 
          "./CommunityAction", 
-         "../../../connections/controls/vcard/SemanticTagService",
          "../../../config",
          "../../../connections/CommunityConstants",
          "../../../store/parameter"], 
-        function(declare, Grid, CommunityGridRenderer, CommunityAction, SemanticTagService, sbt, consts, parameter) {
+        function(declare, Grid, CommunityGridRenderer, CommunityAction, sbt, consts, parameter) {
 	
 	var sortVals = {
 			date: "modified",
             popularity: "count",
             name: "title"
 	};
-	
+	 
 	var ParamSchema = {	
 		pageNumber: parameter.oneBasedInteger("page"),	
 		pageSize: parameter.oneBasedInteger("ps"),
@@ -134,7 +133,6 @@ define([ "../../../declare",
         postCreate: function() {        	
         	this.inherited(arguments);
         	
-        	SemanticTagService.loadSemanticTagService();
         },
         
         /**

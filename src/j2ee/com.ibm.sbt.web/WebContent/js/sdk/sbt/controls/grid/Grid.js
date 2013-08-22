@@ -17,8 +17,8 @@
 /**
  * 
  */
-define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil", "../../widget/grid/_Grid"], 
-        function(declare, lang, itemFactory, stringUtil, _Grid) {
+define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil", "../../widget/grid/_Grid","../../connections/controls/vcard/SemanticTagService", ], 
+        function(declare, lang, itemFactory, stringUtil, _Grid, SemanticTagService) {
 
     /**
      * @class grid
@@ -27,7 +27,7 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
      */
     var Grid = declare([ _Grid ], {
 
-    	/**
+    	/** 
     	 * Data associated with this Grid
     	 */
         data: null,
@@ -178,6 +178,11 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
                this.created = true;
                this.update();
            }
+           
+           var endpoint = this.store.getEndpoint().name;
+	       	if(endpoint == "connections"){
+	       		SemanticTagService.loadSemanticTagService();
+	       	}
         },
         
         /**

@@ -17,14 +17,16 @@
  * Social Business Toolkit SDK.
  * Definition of an authentication mechanism.
  */
-define(["../declare", "../lang", "../i18n!sbt/authenticator/nls/SSO"],function(declare, lang, ssoMessage) {
+define(["../declare", "../lang", "../util"],function(declare, lang, util) {
 /**
  * Proxy SSO authentication.
  * 
  * This class triggers the authentication for a service.
  */
 return declare(null, {
-	message:		"sbt/authenticator/templates/Message.html",
+	loginUi: "",
+	messageSSO: "/sbt/authenticator/templates/MessageSSO.html",
+	dialogMessageSSO: "authenticator/templates/MessageDialogSSO.html",
     url: "",
     
     constructor: function(args){
@@ -32,21 +34,73 @@ return declare(null, {
     },
 	
     authenticate: function(options) {
-		globalSSOMessageStrings = ssoMessage;
-		var popUpURL =  this.message;
-		var url = this.url+popUpURL;
-		var newWindowWidth = 300;
-		var newWindowLeftAttr = document.body.offsetWidth/2 - newWindowWidth/2;
-		var loginWindow = window.open(url,'Authentication',
-				   'width='+newWindowWidth
-				   +',height=200'
-				   +',left='+newWindowLeftAttr
-				   +',menubar=0'
-				   +',toolbar=0'
-				   +',status=0'
-				   +',location=0'
-				   +',scrollbars=1'
-				   +',resizable=1');
+    	var self = this;
+	    require(['sbt/config', 'sbt/i18n!sbt/nls/messageSSO'], function(config, ssoStr){
+	        var mode =  options.loginUi || config.Properties["loginUi"] || self.loginUi;
+	        var messagePage = options.messageSSO || config.Properties["messageSSO"] || self.messageSSO;
+	        var dialogMessagePage = options.dialogMessageSSO || config.Properties["dialogMessageSSO"] || self.dialogMessageSSO;
+	        if(mode=="popup") {
+	            self._authPopup(options, messagePage, config, self.url, ssoStr);
+	        } else if(mode=="dialog") {
+	            self._authDialog(options, dialogMessagePage, config, ssoStr);
+	        } else {
+	            self._authMainWindow(options, messagePage, self.url, ssoStr);
+	        }
+	    });
+		return true;
+    	
+	},
+	
+	_authPopup: function(options, messagePage, sbtConfig, sbtUrl, ssoStrings) {
+        var urlParamsMap = {
+            loginUi: 'popup'
+        };
+        var urlParams = util.createQuery(urlParamsMap, "&");
+        var url = sbtUrl+messagePage + '?' + urlParams;
+                                         
+        var windowParamsMap = {
+            width: window.screen.availWidth / 2,
+            height: window.screen.availHeight / 2,
+            left: window.screen.availWidth / 4,
+            top: window.screen.availHeight / 4,
+            menubar: 0,
+            toolbar: 0,
+            status: 0,
+            location: 0,
+            scrollbars: 1,
+            resizable: 1
+        };
+        var windowParams = util.createQuery(windowParamsMap, ",");
+        var loginWindow = window.open(url,'Authentication', windowParams);
+        loginWindow.globalSSOStrings = ssoStrings;
+        loginWindow.globalEndpointAlias = options.name;
+        loginWindow.focus();
+        
+        return true;
+	},
+	
+	_authDialog: function(options, dialogLoginPage, sbtConfig, ssoStr) {
+		require(["sbt/_bridge/ui/SSO_Dialog", "sbt/dom"], function(dialog, dom) {	        
+			dialog.show(options, dialogLoginPage, ssoStr);
+			dom.setText('reloginMessage', ssoStr.message);
+			dom.setAttr(dom.byId('ssoLoginFormOK'), "value", ssoStr.relogin_button_text);
+		});
+		return true;
+	},
+	
+	_authMainWindow: function(options, loginPage, sbtUrl, ssoStrings) {
+		var urlParamsMap = {
+            redirectURL: document.URL,
+            loginUi: 'mainWindow',
+          	message_title: ssoStrings.message_title,
+        	message: ssoStrings.message,
+        	relogin_button_text: ssoStrings.relogin_button_text
+        };
+		
+        var urlParams = util.createQuery(urlParamsMap, "&");
+		var url = sbtUrl+loginPage + '?' + urlParams;
+		var loginWindow = window.location.href = url;
+		
 		return true;
 	}
 }

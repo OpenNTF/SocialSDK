@@ -22,7 +22,8 @@
 define({
   root: ({	 
 	  message_title: "ReAuthenticate",
-	  message:"Authentication expired, Please login again."
+	  message:"Authentication expired, Please login again.",
+	  relogin_button_text: "ReLogin"
   }),
 
   "zh": true,

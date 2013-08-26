@@ -25,8 +25,10 @@ import java.util.Map;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import com.ibm.commons.util.StringUtil;
+import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
@@ -35,6 +37,7 @@ import com.ibm.sbt.services.client.connections.profiles.feedhandlers.ProfileFeed
 import com.ibm.sbt.services.client.connections.profiles.transformers.ConnectionEntryTransformer;
 import com.ibm.sbt.services.client.connections.profiles.transformers.ProfileTransformer;
 import com.ibm.sbt.services.client.connections.profiles.utils.Messages;
+import com.ibm.sbt.services.client.base.datahandlers.JsonDataHandler;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.util.AuthUtil;
@@ -134,6 +137,24 @@ public class ProfileService extends BaseService {
 		XmlDataHandler handler = new XmlDataHandler(data, ConnectionsConstants.nameSpaceCtx, expr);
 		ConnectionEntry connectionEntry = new ConnectionEntry(this, handler);
 		return connectionEntry;
+	}
+	
+	public String getMyUserId()throws ProfileServiceException{
+		String id = "";
+		String peopleApiUrl ="/connections/opensocial/basic/rest/people/@me/";
+		try {
+			Response feed = getClientService().get(peopleApiUrl);
+			JsonDataHandler dataHandler = new JsonDataHandler((JsonJavaObject)feed.getData());
+			id = dataHandler.getAsString("entry/id");
+			id = id.substring(id.lastIndexOf(':')+1, id.length());
+		} catch (ClientServicesException e) {
+			throw new ProfileServiceException(e, Messages.ProfileException, id);
+		}
+		return id;
+		
+	}
+	public Profile getMyProfile() throws ProfileServiceException{
+		return getProfile(getMyUserId(), null);
 	}
 
 	public Profile getProfile(String id) throws ProfileServiceException{
@@ -817,23 +838,22 @@ public class ProfileService extends BaseService {
 	 * @param userid
 	 * @throws ProfileServiceException
 	 */
-	public void updateProfilePhoto(File file, String userid) throws ProfileServiceException{
+	public void updateProfilePhoto(File file) throws ProfileServiceException{
 
-		if (userid == null) {
-			throw new ProfileServiceException(null, Messages.InvalidArgument_3);
-		}
 		try {
+
+			String id = getMyUserId();			
 			Map<String, String> parameters = new HashMap<String, String>();
-			setIdParameter(parameters, userid);
+			setIdParameter(parameters, id);
 			String name = file.getName();
-			int dot = name.lastIndexOf('.');
+			int dot = StringUtil.lastIndexOfIgnoreCase(name, ".");
 			String ext = "";
 			if (dot > -1) {
 				ext = name.substring(dot + 1); // add one for the dot!
 			}
 			if (!StringUtil.isEmpty(ext)) {
 				Map<String, String> headers = new HashMap<String, String>();
-				if (ext.equalsIgnoreCase("jpg")) {
+				if (StringUtil.equalsIgnoreCase(ext,"jpg")) {
 					headers.put(ProfilesConstants.REQ_HEADER_CONTENT_TYPE_PARAM, "image/jpeg");	// content-type should be image/jpeg for file extension - jpeg/jpg
 				} else {
 					headers.put(ProfilesConstants.REQ_HEADER_CONTENT_TYPE_PARAM, "image/" + ext);
@@ -864,6 +884,7 @@ public class ProfileService extends BaseService {
 			parameters.put(ProfilesConstants.OUTPUT, "vcard");
 			parameters.put(ProfilesConstants.FORMAT, "full");
 			setIdParameter(parameters, profile.getUserid());
+			
 			Object updateProfilePayload;
 			try {
 				updateProfilePayload = constructUpdateRequestBody(profile);

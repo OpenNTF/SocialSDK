@@ -20,8 +20,8 @@
  * 
  * @module sbt.base.DataHandler
  */
-define([ "../declare", "../lang", "../stringUtil", "../xml", "../xpath", "./DataHandler" ], function(declare,lang,stringUtil,xml,xpath,
-        DataHandler) {
+define([ "../declare", "../lang", "../stringUtil", "../xml", "../xpath", "./DataHandler" ], 
+	function(declare,lang,stringUtil,xml,xpath,DataHandler) {
 
     /**
      * XmlDataHandler class
@@ -214,6 +214,22 @@ define([ "../declare", "../lang", "../stringUtil", "../xml", "../xpath", "./Data
             }
             return this._values["entries"];
         },
+        
+        /**
+         * @method toJson
+         * @returns {Object}
+         */
+        toJson : function() {
+        	var jsonObj = {};
+        	
+        	for (var name in this.xpath) {
+                if (this.xpath.hasOwnProperty(name)) {
+                    jsonObj[name] = this.getAsString(name);
+                }
+            }
+        	
+        	return jsonObj;
+        },        
 
         /*
          * Convert the input to a node by parsing as string and using

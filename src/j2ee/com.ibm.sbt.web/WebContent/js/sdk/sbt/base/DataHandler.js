@@ -120,6 +120,14 @@ define([ "../declare", "../lang" ], function(declare,lang) {
          */
         getEntitiesDataArray : function() {
             return [];
+        }, 
+        
+        /**
+         * @method toJso
+         * @returns {Object}
+         */
+        toJson : function() {
+        	
         }
 
     });

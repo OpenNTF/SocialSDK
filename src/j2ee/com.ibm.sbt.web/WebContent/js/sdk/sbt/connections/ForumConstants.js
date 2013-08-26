@@ -48,7 +48,52 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
     		content : "a:content[@type='text']",
             moderation : "snx:moderation/@status",
             threadCount: "a:link[@rel='replies']/@thr:count",	
-            forumURL : "a:link[@rel='alternate']/@href"
+            forumUrl : "a:link[@rel='alternate']/@href",
+            communityUuid : "snx:communityUuid"
+        },
+        
+        /**
+         * XPath expressions to be used when reading an forum topic entry
+         */
+        ForumTopicXPath : {
+            // used by getEntityData
+            entry : "/a:entry",
+            // used by getEntityId
+            uid : "a:id",
+            // used by getters
+            id : "a:id",
+            title : "a:title",
+            updated : "a:updated",
+            published : "a:published",
+            authorUserid : "a:author/snx:userid",
+            authorName : "a:author/a:name",
+            authorEmail : "a:author/a:email",
+    		content : "a:content[@type='text']",
+            permissions : "snx:permissions",
+            alternateUrl : "a:link[@rel='alternate']/@href",
+            communityUuid : "snx:communityUuid"
+        },
+        
+        /**
+         * XPath expressions to be used when reading an forum reply entry
+         */
+        ForumReplyXPath : {
+            // used by getEntityData
+            entry : "/a:entry",
+            // used by getEntityId
+            uid : "a:id",
+            // used by getters
+            id : "a:id",
+            title : "a:title",
+            updated : "a:updated",
+            published : "a:published",
+            authorUserid : "a:author/snx:userid",
+            authorName : "a:author/a:name",
+            authorEmail : "a:author/a:email",
+    		content : "a:content[@type='html']",
+            permissions : "snx:permissions",
+            alternateUrl : "a:link[@rel='alternate']/@href",
+            communityUuid : "snx:communityUuid"
         },
         
 		/**
@@ -70,11 +115,6 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
 		 * Get a feed that includes the topics in a specific stand-alone forum.  
          */
         AtomForumTopics : "/forums/atom/topics",
-        
-		/**
-		 * Get a feed that includes the topics in a specific community forum.  
-         */
-        AtomCommunityForumTopics : "/communities/service/atom/community/forum/topics",
         
         /**
          * Get a feed that includes the topics that the authenticated user created in stand-alone forums and in forums associated 

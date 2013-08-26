@@ -220,6 +220,6 @@ public class DojoLibrary extends AbstractLibrary {
 	    if ("request".equals(transport) && isExceedsVersion(request.getJsVersion(), minimumDojo2Version)) {
         	return endpoint.getTransport(endpointName, MODULE_REQUESTTRANSPORT);
     	}
-		return endpoint.getTransport(endpointName, MODULE_TRANSPORT);
+		return super.getTransport(request, endpoint, endpointName);
 	}
 }

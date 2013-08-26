@@ -20,7 +20,7 @@
  * @module sbt.connections.ProfileService
  */
 define([ "../declare", "../lang", "../config", "../stringUtil", "./XmlDataHandler" ], 
-        function(declare,lang,config,stringUtil,XmlDataHandler) {
+    function(declare,lang,config,stringUtil,XmlDataHandler) {
 
     /**
      * VCardDataHandler class.

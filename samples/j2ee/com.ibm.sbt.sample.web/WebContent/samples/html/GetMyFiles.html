@@ -1,0 +1,83 @@
+<!-- 
+/*
+ * � Copyright IBM Corp. 2012
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at:
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+ * implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */ -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+
+<link href="/sbt.bootstrap211/bootstrap/css/bootstrap.css" rel="stylesheet">
+<link href="/sbt.bootstrap211/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad : true
+	};
+</script>
+
+<script type="text/javascript" src="/sbt.dojo180/dojo/dojo.js"></script>
+<script type="text/javascript" src="/sbt.sample.web/library?ver=1.8.0"></script>
+<script>
+	require([ 'dojo/parser' ]);
+</script>
+</head>
+<body>
+
+	<h3>Disk Usage: Smart Cloud Integration</h3>
+
+	<!-- Where Snippet goes -->
+	<table class="table table-striped" id="filesTable">
+		<tr>
+			<th>Title</th>
+			<th>Id</th>
+		</tr>
+	</table>
+	
+	<script>
+	require([ "sbt/connections/FileService", "sbt/dom" ], function(FileService, dom) {
+        var createRow = function(file) {
+            var table = dom.byId("filesTable");
+            var tr = document.createElement("tr");
+            table.appendChild(tr);
+            var td = document.createElement("td");
+            td.innerHTML = file.getId();
+            tr.appendChild(td);
+            td = document.createElement("td");
+            tr.appendChild(td);
+            var a = document.createElement("a");
+            a.href = file.getDownloadUrl();
+            a.innerHTML = file.getTitle();
+            td.appendChild(a);
+        };
+
+        var fileService = new FileService({ endpoint : "smartcloudOA2"});
+    	fileService.getMyFiles().then(
+            function(files) {
+                if (files.length == 0) {
+                	 dom.setText("content","You are not an owner of any files.");
+                } else {
+                    for(var i=0; i<files.length; i++){
+                        var file = files[i];
+                        createRow(file);
+                    }
+                }
+            },
+            function(error) {
+                dom.setText("content", "Error code:" +  error.code + ", message:" + error.message);
+            }       
+    	);
+    });
+	</script>
+</body>

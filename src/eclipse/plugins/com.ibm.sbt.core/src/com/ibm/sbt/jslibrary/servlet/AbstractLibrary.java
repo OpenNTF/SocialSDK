@@ -105,6 +105,8 @@ abstract public class AbstractLibrary {
 	public static final String		MODULE_IFRAMETRANSPORT			= "sbt/_bridge/IFrameTransport";
 	public static final String		MODULE_TRANSPORT				= "sbt/_bridge/Transport";
 	public static final String		MODULE_REQUESTTRANSPORT			= "sbt/_bridge/RequestTransport";
+	public static final String		MODULE_MOCK_TRANSPORT			= "sbt/MockTransport";
+	public static final String		MODULE_DEBUG_TRANSPORT			= "sbt/DebugTransport";
 	public static final String		MODULE_ERROR_TRANSPORT			= "sbt/ErrorTransport";
 	public static final String		MODULE_GADGET_TRANSPORT			= "sbt/GadgetTransport";
 	public static final String		MODULE_CACHE					= "sbt/Cache";
@@ -811,14 +813,23 @@ abstract public class AbstractLibrary {
 		return null;
 	}
 
-	/**
-	 * @param request
-	 * @param endpoint
-	 * @param endpointName
-	 * @return
+	/*
+	 * Return the JSReference for the Transport module to use
 	 */
 	protected JSReference getTransport(LibraryRequest request, Endpoint endpoint, String endpointName) {
-		return endpoint.getTransport(endpointName, MODULE_TRANSPORT);
+		return endpoint.getTransport(endpointName, getDefaultTransport(request));
+	}
+
+	/*
+	 * Return the JSReference for the Transport module to use
+	 */
+	protected String getDefaultTransport(LibraryRequest request) {
+		if (request.isDebugTransport()) {
+			return MODULE_DEBUG_TRANSPORT;
+		} else if (request.isMockTransport()) {
+			return MODULE_MOCK_TRANSPORT;
+		}
+		return MODULE_TRANSPORT;
 	}
 
 	/*

@@ -1,10 +1,10 @@
-require(["sbt/dom", "sbt/connections/controls/communities/CommunityGrid", "dojo/string"], function(dom, CommunityGrid,string) {
+require(["sbt/dom", "sbt/stringUtil", "sbt/connections/controls/communities/CommunityGrid"], function(dom, stringUtil, CommunityGrid) {
     var grid = new CommunityGrid();
 
     // create custom action
     grid.communityAction = {
         getTooltip : function(item) {
-        	return string.substitute("Display details for ${title}", { title : item.getValue("title") });
+        	return stringUtil.replace("Display details for {title}", { title : item.getValue("title") });
         },
 
         execute : function(item,opts,event) {

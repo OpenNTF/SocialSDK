@@ -56,6 +56,8 @@ public class LibraryRequest {
     protected String toolkitExtJsUrl;
     protected String jsLibraryUrl;
     protected boolean debug;
+    protected boolean debugTransport;
+    protected boolean mockTransport;
 
     protected SBTEnvironment environment;
 
@@ -63,6 +65,8 @@ public class LibraryRequest {
     public static final String DEFAULT_JSLIB = "dojo";
     public static final String DEFAULT_VERSION = "1.4";
     public static final Boolean DEFAULT_DEBUG = false;
+    public static final Boolean DEFAULT_DEBUG_TRANSPORT = false;
+    public static final Boolean DEFAULT_MOCK_TRANSPORT = false;
 
     // Definition of the servlet parameters (query string)
 
@@ -100,6 +104,16 @@ public class LibraryRequest {
      * Sets debug mode if true
      */
     public static final String PARAM_DEBUG = "debug";
+    
+    /**
+     * Sets debug transport mode if true
+     */
+    public static final String PARAM_DEBUG_TRANSPORT = "debugTransport";
+    
+    /**
+     * Sets mock transport mode if true
+     */
+    public static final String PARAM_MOCK_TRANSPORT = "mockTransport";
     
     /**
      * Enables/Disables the aggregator (default is false)
@@ -233,6 +247,22 @@ public class LibraryRequest {
      * 
      * @return
      */
+    public boolean isDebugTransport() {
+        return debugTransport;
+    }
+
+    /**
+     * 
+     * @return
+     */
+    public boolean isMockTransport() {
+        return mockTransport;
+    }
+
+    /**
+     * 
+     * @return
+     */
     public String getIFrameUrl() {
         return iframeUrl;
     }
@@ -306,6 +336,8 @@ public class LibraryRequest {
         jsLib = readString(req, PARAM_JSLIB, getDefaultJsLib());
         jsVersion = readString(req, PARAM_JSVERSION, "dojo".equals(jsLib) ? getDefaultJsVersion() : "");
         debug = Boolean.parseBoolean(readString(req, PARAM_DEBUG, getDefaultDebug()));
+        debugTransport = Boolean.parseBoolean(readString(req, PARAM_DEBUG_TRANSPORT, getDefaultDebugTransport()));
+        mockTransport = Boolean.parseBoolean(readString(req, PARAM_MOCK_TRANSPORT, getDefaultMockTransport()));
         String environmentName = req.getParameter(PARAM_ENVIRONMENT);
         if (!StringUtil.isEmpty(environmentName)) {
             SBTEnvironment parentEnvironment = SBTEnvironmentFactory.get(environmentName);
@@ -334,6 +366,14 @@ public class LibraryRequest {
     
     protected String getDefaultDebug() {
     	return DEFAULT_DEBUG.toString();
+    }
+
+    protected String getDefaultDebugTransport() {
+    	return DEFAULT_DEBUG_TRANSPORT.toString();
+    }
+
+    protected String getDefaultMockTransport() {
+    	return DEFAULT_MOCK_TRANSPORT.toString();
     }
 
     /**

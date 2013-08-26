@@ -59,11 +59,12 @@ define([ 'dojo/_base/declare', 'dojo/_base/xhr', 'dojo/_base/lang', 'dojox/xml/p
             var method = options.method || "GET";
             method = method.toUpperCase();
             var query = this.createQuery(options.query);
-            if(url && query){
-                url += (~url.indexOf('?') ? '&' : '?') + query;
+            var qurl = url;
+            if(qurl && query){
+            	qurl += (~qurl.indexOf('?') ? '&' : '?') + query;
             } 
             var args = {
-                url : url,
+                url : qurl,
                 handleAs : options.handleAs || "text"
             };
             //if (options.query) {

@@ -186,7 +186,7 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
          */
         refresh: function() {
            if (this.data) {
-              if (this.data.fromUrl) {
+              if (this.store) {
                  this.update(null);
               } else {
                  this.update();

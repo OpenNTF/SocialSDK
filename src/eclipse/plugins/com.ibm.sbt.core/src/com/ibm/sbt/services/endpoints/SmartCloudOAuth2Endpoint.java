@@ -28,6 +28,12 @@ public class SmartCloudOAuth2Endpoint extends OAuth2Endpoint {
 	private static final int authenticationErrorCode = 403;
 	
     public SmartCloudOAuth2Endpoint() {
+    	clientParams.put("isSmartCloud", true);
+    }
+
+    @Override
+    public String getPlatform() {
+    	return PLATFORM_SMARTCLOUD;
     }
 
     @Override

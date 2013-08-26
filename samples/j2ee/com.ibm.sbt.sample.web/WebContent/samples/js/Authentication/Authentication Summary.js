@@ -55,6 +55,7 @@ require(["sbt/dom", "sbt/config"], function(dom, config) {
 			logoutButton.style.display = "none";
 			dom.setText("td2"+endpointName, "Not Logged in");
 			loginButton.onclick= function (){
+				config.Properties["loginUi"]="popup";
 				config.findEndpoint(this.name).authenticate();    // Calling authenticate. (this.name has endpoint name)
 			};
 		}

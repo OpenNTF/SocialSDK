@@ -46,7 +46,9 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
             contributorName : "a:contributor/a:name",
             contributorEmail : "a:contributor/a:email",
     		content : "a:content[@type='text']",
-            moderation : "snx:moderation/@status"
+            moderation : "snx:moderation/@status",
+            threadCount: "a:link[@rel='replies']/@thr:count",	
+            forumURL : "a:link[@rel='alternate']/@href"
         },
         
 		/**

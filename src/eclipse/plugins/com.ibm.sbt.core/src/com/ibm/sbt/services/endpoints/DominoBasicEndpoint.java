@@ -28,6 +28,12 @@ public class DominoBasicEndpoint extends BasicEndpoint {
 
     public DominoBasicEndpoint() {
     }
+
+    @Override
+    public String getPlatform() {
+    	return PLATFORM_DOMINO;
+    }
+
     public DominoBasicEndpoint(String user, String password, String authenticationPage) {
         super(user, password, authenticationPage);
     }

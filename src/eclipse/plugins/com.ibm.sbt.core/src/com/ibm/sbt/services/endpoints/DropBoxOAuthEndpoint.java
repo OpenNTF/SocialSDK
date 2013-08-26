@@ -24,4 +24,9 @@ public class DropBoxOAuthEndpoint extends OAuthEndpoint {
 	
     public DropBoxOAuthEndpoint() {
     }
+
+    @Override
+    public String getPlatform() {
+    	return PLATFORM_DROPBOX;
+    }
 }

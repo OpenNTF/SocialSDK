@@ -33,6 +33,11 @@ public class SametimeBasicEndpoint extends BasicEndpoint {
     }
 
     @Override
+    public String getPlatform() {
+    	return PLATFORM_SAMETIME;
+    }
+
+    @Override
 	public ClientService getClientService() throws ClientServicesException {
     	return new SametimeService(this);
     }

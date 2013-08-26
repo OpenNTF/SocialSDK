@@ -4,8 +4,9 @@ require(["sbt/dom",
          "sbt/connections/controls/profiles/ProfilePanel",
          "sbt/connections/controls/profiles/ProfileTagsGrid",
          "sbt/connections/controls/communities/CommunityGrid",
+         "sbt/connections/controls/search/SearchGrid",
          "sbt/connections/controls/astream/ActivityStreamWrapper"],
-function(dom, stringUtil, CommunityService, ProfilePanel, ProfileTagsGrid, CommunityGrid, ActivityStreamWrapper) {
+function(dom, stringUtil, CommunityService, ProfilePanel, ProfileTagsGrid, CommunityGrid, SearchGrid, ActivityStreamWrapper) {
 	// Profile Panel
 	var profilePanel = new ProfilePanel({
         email : '%{sample.email1}'
@@ -17,6 +18,21 @@ function(dom, stringUtil, CommunityService, ProfilePanel, ProfileTagsGrid, Commu
         type : "list",
         targetEmail : "%{sample.email1}"
     });
+    profileTagsGrid.profileTagAction = {
+        getTooltip : function(item) {
+        	return string.substitute("Display people tagged with ${term}", { title : item.getValue("term") });
+        },
+        execute : function(item,opts,event) {
+            var term = item.getValue("term");
+            
+            var searchGrid = new SearchGrid({
+                type: "public",
+                query : { component : "profiles", tag : term }
+           });
+           dom.byId("taggedProfilesDiv").appendChild(searchGrid.domNode);
+           searchGrid.update();
+        }
+    };
     dom.byId("profileTagsGridDiv").appendChild(profileTagsGrid.domNode);
     profileTagsGrid.update();
 	

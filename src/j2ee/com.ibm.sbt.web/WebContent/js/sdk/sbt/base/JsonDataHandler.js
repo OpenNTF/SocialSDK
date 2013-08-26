@@ -178,6 +178,18 @@ define(["../declare", "../lang", "../json", "./DataHandler", "../Jsonpath", "../
         	return resultingArray[0];
         },
         
+        /**
+         * @method toJson
+         * @returns {Object}
+         */
+        toJson : function() {
+        	return this.data;
+        },
+        
+        //
+        // Internals
+        //
+        
         _getDate : function(property) {
         	var text = this._get(property)[0];
         	if(text instanceof Date) {
@@ -214,6 +226,7 @@ define(["../declare", "../lang", "../json", "./DataHandler", "../Jsonpath", "../
                 throw new Error(msg);
             }
         },
+        
         /**
          Validate that the object is valid
          **/

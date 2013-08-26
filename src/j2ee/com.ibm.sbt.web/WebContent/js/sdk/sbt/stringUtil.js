@@ -105,6 +105,20 @@ define(['./xml'], function(xml) {
 		            return value.toString();
 		        }
 		    );
-		}
+		},
+		
+        hashCode: function(str) {
+            if (str.length == 0) {
+            	return 0;
+            }
+            var hash = 0, i, char;
+            for (i = 0, l = str.length; i < l; i++) {
+                char = str.charCodeAt(i);
+                hash = ((hash<<5)-hash)+char;
+                hash |= 0;
+            }
+            return hash;
+        }
+
 	};
 });

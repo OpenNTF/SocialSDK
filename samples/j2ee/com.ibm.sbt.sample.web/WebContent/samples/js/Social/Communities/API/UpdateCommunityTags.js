@@ -3,7 +3,7 @@ require(["sbt/connections/CommunityService", "sbt/dom", "sbt/json"],
     	var communityService = new CommunityService();	
     	var promise = communityService.getCommunity("%{sample.communityId}");
     	promise.then(
-    		function (community) {
+    		function(community) {
     			community.setTags(["newTag1", "newTag2", "newTag3"]);
     			communityService.updateCommunity(community).then(						
     	            function(response) {           
@@ -13,7 +13,10 @@ require(["sbt/connections/CommunityService", "sbt/dom", "sbt/json"],
     	                dom.setText("json", json.jsonBeanStringify(error));
     	            }       
     			);
-    		}
+    		},
+            function(error) {
+                dom.setText("json", json.jsonBeanStringify(error));
+            } 
     	);
     }
 );

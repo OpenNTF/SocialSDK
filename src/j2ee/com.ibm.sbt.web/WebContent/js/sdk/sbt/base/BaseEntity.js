@@ -87,6 +87,17 @@ define([ "../declare", "../lang", "../log", "../stringUtil" ],
         },
         
         /**
+         * Called to set the entity data after the entity
+         * was loaded. This will cause the existing fields to be cleared.
+         * 
+         * @param data
+         */
+        setData : function(data) {
+        	this._fields = {};
+        	this.dataHandler.setData(data);
+        },
+        
+        /**
          * Return true if this entity has been loaded.
          *  
          * @returns true if this entity has been loaded
@@ -350,7 +361,7 @@ define([ "../declare", "../lang", "../log", "../stringUtil" ],
          * @returns {Object}
          */
         toJson : function() {
-        	return (dataHandler) ? dataHandler.toJson() : {};
+        	return (this.dataHandler) ? this.dataHandler.toJson() : {};
         },
 
         /*

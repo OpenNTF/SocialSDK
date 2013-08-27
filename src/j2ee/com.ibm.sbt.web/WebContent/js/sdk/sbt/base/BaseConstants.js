@@ -71,7 +71,7 @@ define([ "../config" ], function(sbt) {
             contributorUserid : "a:contributor/snx:userid",
             contributorName : "a:contributor/a:name",
             contributorEmail : "a:contributor/a:email",
-    		content : "a:content",
+    		content : "a:content[@type='html']",
     		categoryTerm : "a:category/@term",
             editUrl : "a:link[@rel='edit']/@href",
             selfUrl : "a:link[@rel='self']/@href",

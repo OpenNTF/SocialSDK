@@ -71,6 +71,16 @@ define([ "../declare", "../lang", "../stringUtil", "../xml", "../xpath", "./Data
         },
 
         /**
+         * Called to set the handler data.
+         * 
+         * @param data
+         */
+        setData : function(data) {
+            this._values = {}; // TODO option to disable cache
+            this.data = this._fromNodeOrString(data);
+        },        
+        
+        /**
          * @method getAsString
          * @param property
          * @returns

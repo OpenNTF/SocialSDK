@@ -1106,7 +1106,18 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             
             var callbacks = {};
             callbacks.createEntity = function(service,data,response) {
-                // TODO community.dataHandler = null;
+            	// preserve the communityUuid
+            	var communityUuid = community.getCommunityUuid();
+            	if (data) {
+            		var dataHandler = new CommunityDataHandler({
+                        service :  service,
+                        data : data,
+                        namespaces : consts.Namespaces,
+                        xpath : consts.CommunityXPath
+                    });
+                	community.setDataHandler(dataHandler);
+            	}
+            	community.setCommunityUuid(communityUuid);
                 return community;
             };
 

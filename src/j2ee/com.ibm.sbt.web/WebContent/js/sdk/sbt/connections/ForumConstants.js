@@ -30,25 +30,9 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * XPath expressions to be used when reading an forum entry
          */
         ForumXPath : {
-            // used by getEntityData
-            entry : "/a:entry",
-            // used by getEntityId
-            uid : "a:id",
-            // used by getters
-            id : "a:id",
-            title : "a:title",
-            updated : "a:updated",
-            published : "a:published",
-            authorUserid : "a:author/snx:userid",
-            authorName : "a:author/a:name",
-            authorEmail : "a:author/a:email",
-            contributorUserid : "a:contributor/snx:userid",
-            contributorName : "a:contributor/a:name",
-            contributorEmail : "a:contributor/a:email",
-    		content : "a:content[@type='text']",
+        	forumUuid : "a:id",
             moderation : "snx:moderation/@status",
             threadCount: "a:link[@rel='replies']/@thr:count",	
-            forumUrl : "a:link[@rel='alternate']/@href",
             communityUuid : "snx:communityUuid"
         },
         
@@ -56,21 +40,9 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * XPath expressions to be used when reading an forum topic entry
          */
         ForumTopicXPath : {
-            // used by getEntityData
-            entry : "/a:entry",
-            // used by getEntityId
-            uid : "a:id",
-            // used by getters
-            id : "a:id",
-            title : "a:title",
-            updated : "a:updated",
-            published : "a:published",
-            authorUserid : "a:author/snx:userid",
-            authorName : "a:author/a:name",
-            authorEmail : "a:author/a:email",
-    		content : "a:content[@type='text']",
+        	topicUuid : "a:id",
+        	forumUuid : "thr:in-reply-to/@ref",
             permissions : "snx:permissions",
-            alternateUrl : "a:link[@rel='alternate']/@href",
             communityUuid : "snx:communityUuid"
         },
         
@@ -78,23 +50,26 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * XPath expressions to be used when reading an forum reply entry
          */
         ForumReplyXPath : {
-            // used by getEntityData
-            entry : "/a:entry",
-            // used by getEntityId
-            uid : "a:id",
-            // used by getters
-            id : "a:id",
-            title : "a:title",
-            updated : "a:updated",
-            published : "a:published",
-            authorUserid : "a:author/snx:userid",
-            authorName : "a:author/a:name",
-            authorEmail : "a:author/a:email",
-    		content : "a:content[@type='html']",
+        	replyUuid : "a:id",
+        	forumUuid : "thr:in-reply-to/@ref",
             permissions : "snx:permissions",
-            alternateUrl : "a:link[@rel='alternate']/@href",
             communityUuid : "snx:communityUuid"
         },
+        
+        /**
+		 * Edit link for a forum entry.  
+         */
+        AtomForum : "forums/atom/forum",
+        
+		/**
+		 * Edit link for a forum topic entry.  
+         */
+        AtomTopic : "/forums/atom/topic",
+        
+		/**
+		 * Edit link for a forum reply entry.  
+         */
+        AtomReply : "/forums/atom/reply",
         
 		/**
 		 * Get a feed that includes all stand-alone and community forums created in the enterprise. 
@@ -114,7 +89,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
 		/**
 		 * Get a feed that includes the topics in a specific stand-alone forum.  
          */
-        AtomForumTopics : "/forums/atom/topics",
+        AtomTopics : "/forums/atom/topics",
         
         /**
          * Get a feed that includes the topics that the authenticated user created in stand-alone forums and in forums associated 

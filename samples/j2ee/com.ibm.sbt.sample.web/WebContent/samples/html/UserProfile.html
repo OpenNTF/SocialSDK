@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- Copyright IBM Corp. 2013, 2013 All Rights Reserved. -->
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>User Profile</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link type="text/css" href="https://apps.na.collabservtest.lotus.com/theming/theme/css/3" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/contacts/css/1.40.23/profilesAll.css" />
+<link rel="stylesheet" href="https://apps.na.collabservtest.lotus.com/bhc/dist/1.40.23/bhc/themes/bluehouse/bluehouse.css" />
+
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad : true,
+		locale : 'en'
+	};
+</script>
+<script type="text/javascript" src="https://localhost:8443/sbt.dojo180/dojo/dojo.js.uncompressed.js"></script>
+<script type="text/javascript" src="https://localhost:8443/sbt.sample.web/library?lib=dojo&ver=1.8.0&env=smartcloudEnvironment"></script>
+</head>
+
+<body class="tundra lotusui30 lotusui30_body scloud3" dir="ltr">
+
+	<!-- Include the Smart Cloud navigation bar -->
+	<div class="lotusui30 lotusui30_fonts scloud3">
+		<script type="text/javascript" src="https://apps.na.collabservtest.lotus.com/manage/navbar/banner/smartcloudExt?oneui=3"></script>
+	</div>
+
+	<div class="lotusFrame lotusui30_layout">
+		<div class="lotusMain">
+			<div class="lotusColLeft">
+				<div class="lotusChunk">
+					<div id="profilePanelDiv"></div>
+				</div>
+				<div class="lotusChunk" style="padding-top: 20px;">
+				</div>
+			</div>
+			<div class="lotusContent">
+				<div class="lotusChunk">
+					<div id="communityGridDiv"></div>
+				</div>
+				<div class="lotusChunk" style="padding-top: 20px;">
+					<div id="recentUpdatesDiv" style="height: 480px;"></div>
+				</div>
+			</div>
+			<div class="lotusColRight">
+				<div class="lotusChunk"></div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+	require(["sbt/dom", 
+	         "sbt/stringUtil", 
+	         "sbt/connections/CommunityService",
+	         "sbt/smartcloud/controls/profiles/ProfilePanel",
+	         "sbt/connections/controls/communities/CommunityGrid",
+	         "sbt/connections/controls/astream/ActivityStreamWrapper"],
+	function(dom, stringUtil, CommunityService, ProfilePanel, CommunityGrid, ActivityStreamWrapper) {
+		// Profile Panel
+		var profilePanel = new ProfilePanel({
+	    }, document.createElement('div'));
+	    dom.byId("profilePanelDiv").appendChild(profilePanel.domNode);
+	
+	    // Community Grid
+	    var communityService = new CommunityService();
+	    var communityGrid = new CommunityGrid({
+	        type: "public",
+	        query: { tag: "course" }
+	    });
+	    communityGrid.communityAction = {
+	        getTooltip : function(item) {
+	        	return stringUtil.replace("Display recent updates for {title}", { title : item.getValue("title") });
+	        },
+	
+	        execute : function(item,opts,event) {
+	            var communityUuid = item.getValue("communityUuid");
+	            communityUuid = communityService.getUrlParameter(communityUuid, "communityUuid");
+	            
+	            // remove existing
+	            var recentUpdatesDiv = dom.byId("recentUpdatesDiv");
+	            while (recentUpdatesDiv.childNodes[0]) {
+	                dom.destroy(recentUpdatesDiv.childNodes[0]);
+	            }
+	
+	            // add a new wrapper
+	            var feedUrl = "/basic/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:{communityUuid}/@all/@status?rollup=true";
+	            feedUrl = stringUtil.replace(feedUrl, { communityUuid : communityUuid });
+	            var activityStreamWrapper = new ActivityStreamWrapper({
+	                feedUrl : feedUrl,
+	                activityStreamNode : "activityStream"
+	            });
+	            recentUpdatesDiv.appendChild(activityStreamWrapper.domNode);
+	            activityStreamWrapper.startup();
+	        }
+	    };
+	    dom.byId("communityGridDiv").appendChild(communityGrid.domNode);
+	    communityGrid.update();
+	});
+	</script>
+
+</body>
+
+</html>

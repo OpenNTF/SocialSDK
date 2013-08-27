@@ -120,7 +120,7 @@ define(['./_bridge/json', './_bridge/lang', './log', './stringUtil'], function(j
             var jsonObj = {};
             for (var property in theObj) {
                 var value = this._getObjectValue(theObj, property, seen);
-                if (value) {
+                if (value || !isNaN(value)) {
                     jsonObj[property] = value;
                 }
             }

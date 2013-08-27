@@ -41,21 +41,21 @@
         FileService fileService = new FileService();
         List<FileEntry> fileEntries = fileService.getMyFiles();
         FileEntry fileEntry = fileEntries.get(0);
-        String lock = fileEntry.getLock();
+        String lock = fileEntry.getLockType();
         if ("NONE".equalsIgnoreCase(lock)) {
         	fileService.lock(fileEntry.getFileId());
         	fileEntry = fileService.getFile(fileEntry.getFileId(), true);
-        	out.println("File " + fileEntry.getLabel() + " locked: " + fileEntry.getLock());
+        	out.println("File " + fileEntry.getLabel() + " locked: " + fileEntry.getLockType());
         	fileService.unlock(fileEntry.getFileId());
         	fileEntry = fileService.getFile(fileEntry.getFileId(), true);
-        	out.println("<br/>File " + fileEntry.getLabel() + " locked: " + fileEntry.getLock());
+        	out.println("<br/>File " + fileEntry.getLabel() + " locked: " + fileEntry.getLockType());
         } else {
         	fileService.unlock(fileEntry.getFileId());
         	fileEntry = fileService.getFile(fileEntry.getFileId(), true);
-        	out.println("File " + fileEntry.getLabel() + " locked: " + fileEntry.getLock());
+        	out.println("File " + fileEntry.getLabel() + " locked: " + fileEntry.getLockType());
         	fileService.lock(fileEntry.getFileId());
         	fileEntry = fileService.getFile(fileEntry.getFileId(), true);
-        	out.println("<br/>File " + fileEntry.getLabel() + " locked: " + fileEntry.getLock());
+        	out.println("<br/>File " + fileEntry.getLabel() + " locked: " + fileEntry.getLockType());
         }
     } catch (Throwable e) {
         out.println("<pre>");

@@ -79,17 +79,31 @@ public class FileEntry extends BaseEntity {
 		this.label = label;
 	}
 
-	public String getLock() {
+	public String getLockType() {
 		if (!StringUtil.isEmpty(lock)) {
 			return lock;
 		}
 		return getAsString(FileEntryXPath.LockFromEntry);
 	}
 
-	public void setLock(String lock) {
+	public void setLockType(String lock) {
 		this.lock = lock;
 	}
 
+	/**
+	 * isLocked
+	 * <p>
+	 * method to determine whether a file is locked. returns true if the file is locked, false otherwise.
+	 * @return boolean 
+	 * 
+	 */
+	public boolean isLocked() {
+		if("HARD".equalsIgnoreCase(getLockType()))
+			return true;
+		else 
+			return false;
+	}
+	
 	public String getTitle() {
 		if (!StringUtil.isEmpty(title)) {
 			return title;
@@ -223,9 +237,15 @@ public class FileEntry extends BaseEntity {
 		return modifierEntry;
 	}
 
+	/**
+	 * getVisibility
+	 * <p>
+	 * returns the visibility status of the file, whether private, public or shared?
+	 * 
+	 * @return
+	 */
 	public String getVisibility() {
-		return getAsString(FileEntryXPath.VisibilityFromEntry
-);
+		return getAsString(FileEntryXPath.VisibilityFromEntry);
 	}
 
 	public String getLibraryId() {
@@ -240,8 +260,15 @@ public class FileEntry extends BaseEntity {
 		return getAsString(FileEntryXPath.PropagationFromEntry);
 	}
 
-	public String getTotalMediaSize() {
-		return getAsString(FileEntryXPath.TotalMediaSizeFromEntry);
+	/**
+	 * getSize
+	 * <p>
+	 * return the total size of the file/media in bytes
+	 * @return
+	 */
+	public String getSize() {
+		String size = getAsString(FileEntryXPath.TotalMediaSizeFromEntry);
+		return size + "bytes";
 	}
 
 	public String getObjectTypeId() {

@@ -1,7 +1,7 @@
 Social Business Toolkit SDK
 (c) Copyright IBM Corp. 2010, 2013
 
-This product includes software developed at
+This product includes software developed for
 OpenNTF (http://www.OpenNTF.Org/).
 
 The project contains XPages Social Features which uses network services such as Dropbox and Facebook.  It is your responsibility to ensure that your use of such services is in compliance with their associated Terms of Use or Terms of Service.  Further, use of the Twitter API is subject to the Twitter API Terms - https://dev.twitter.com/terms/api-terms and Twitters Terms of Service - http://twitter.com/tos, under your own contract with Twitter.  It is your responsibility to ensure compliance with these Terms.
@@ -135,7 +135,7 @@ Available from http://tomcat.apache.org/
    - web-fragment_3_0.xsd
   may be obtained from http://java.sun.com/xml/ns/javaee/
 
-Require.js v2.0.6 
+Require.js v2.0.6 and Require.js plugins - i18n,js and text.js
 Licensed under MIT or the new BSD license
 Available from http://requirejs.org/ 
 
@@ -143,7 +143,7 @@ has.js, 3d0c6e3
 Tri-Licensed under Academic Free or New BSD or MIT Licenses. 
 Available under https://github.com/phiggins42/has.js 
 
-Bootstrap.css (Subset) v2.1.1 
+Bootstrap (Subset) v2.1.1 
 Licensed under Apache v2.0
 Available from http://twitter.github.com/bootstrap/
 
@@ -173,6 +173,27 @@ Jasmine 1.3.1
 Licensed under the MIT license
 Available from https://github.com/pivotal/jasmine/downloads
 
+Jenkins Plugins
+Licensed under the MIT License
+Available from:
+   Join Plugin - https://github.com/jenkinsci/join-plugin
+   Greenballs Plugin - https://github.com/jenkinsci/greenballs-plugin
+   Jenkins Clone Workspace Plugin - https://github.com/jenkinsci/jenkins-clone-workspace-scm-plugin
+
+Redline
+Licensed under the MIT License
+Available from: http://redline-rpm.org/
+
+Javascript Aggregator
+Licensed under Apache 2.0
+Available from https://github.com/OpenNTF/JavascriptAggregator
+
+Apache Commons CLI 1.2
+Licensed under Apache 2.0
+Available from http://commons.apache.org/proper/commons-cli/index.html
+   Copyright 2001-2009 The Apache Software Foundation
+   This product includes software developed by
+   The Apache Software Foundation (http://www.apache.org/).
 
 
 The following three sources are not shipped with this package - but are loaded and executed dynamically.
@@ -189,9 +210,11 @@ Yui-min 3.8.0
 Licensed under the BSD license
 Available from http://yui.yahooapis.com/combo?3.8.0pr2/build/yui/yui-min.js
 
+Junit
+Licensed under the EPL 1.0
+Available from Eclipse download at http://download.eclipse.org/releases/juno
 
-
-
-
-
+Dojo toolkit linkage 1.4.3, 1.6.1, 1.7.4
+Licensed under the BSD liecnse
+Available from http://dojotoolkit.org/
 

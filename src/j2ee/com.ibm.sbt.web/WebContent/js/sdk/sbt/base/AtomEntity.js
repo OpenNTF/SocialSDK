@@ -19,8 +19,10 @@
  * 
  * @module sbt.base.AtomEntity
  */
-define([ "../declare", "../lang", "./BaseConstants", "./BaseEntity", "./XmlDataHandler" ], 
-    function(declare,lang,BaseConstants,BaseEntity,XmlDataHandler) {
+define([ "../declare", "../lang", "../stringUtil", "./BaseConstants", "./BaseEntity", "./XmlDataHandler" ], 
+    function(declare,lang,stringUtil,BaseConstants,BaseEntity,XmlDataHandler) {
+
+    var EntryTmpl = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:app=\"http://www.w3.org/2007/app\"><title type=\"text\">${getTitle}</title><content type=\"${contentType}\">${getContent}</content>${categoryScheme}${createEntryData}</entry>";
 
     /**
      * AtomEntity class represents an entry from an ATOM feed.
@@ -29,6 +31,9 @@ define([ "../declare", "../lang", "./BaseConstants", "./BaseEntity", "./XmlDataH
      * @namespace sbt.base
      */
     var AtomEntity = declare(BaseEntity, {
+    	
+    	contentType : "html",
+    	categoryScheme : "",
 
         /**
          * Construct an AtomEntity.
@@ -42,7 +47,7 @@ define([ "../declare", "../lang", "./BaseConstants", "./BaseEntity", "./XmlDataH
                 service : args.service,
                 data : args.data,
                 namespaces : lang.mixin(BaseConstants.Namespaces, args.namespaces || {}),
-                xpath : lang.mixin(BaseConstants.AtomEntryXPath, args.xpath || {})
+                xpath : lang.mixin(BaseConstants.AtomEntryXPath, args.xpath || this.xpath || {})
             });
         },
         
@@ -97,13 +102,13 @@ define([ "../declare", "../lang", "./BaseConstants", "./BaseEntity", "./XmlDataH
         },
         
         /**
-         * Return the array of content from ATOM entry document.
+         * Return the content from ATOM entry document.
          * 
          * @method getContent
          * @return {Object} Content
          */
         getContent : function() {
-            return this.getAsArray("content");
+            return this.getAsString("content");
         },
 
         /**
@@ -112,8 +117,8 @@ define([ "../declare", "../lang", "./BaseConstants", "./BaseEntity", "./XmlDataH
          * @method setContent
          * @param {String} content
          */
-        setContent : function(content, type) {
-            return this.setAsString("a:content[@type='"+type+"']", content);
+        setContent : function(content) {
+            return this.setAsString("content", content);
         },
 
         /**
@@ -207,6 +212,28 @@ define([ "../declare", "../lang", "./BaseConstants", "./BaseEntity", "./XmlDataH
          */
         getEditUrl : function() {
             return this.getAsString("editUrl");
+        },
+
+        /**
+         * Create ATOM entry XML
+         * 
+         * @returns
+         */
+        createPostData : function() {
+            var transformer = function(value,key) {
+                return value;
+            };
+            var postData = stringUtil.transform(EntryTmpl, this, transformer, this);
+            return stringUtil.trim(postData);
+        },
+        
+        /**
+         * Return extra entry data to be included in post data for this entity.
+         * 
+         * @returns {String}
+         */
+        createEntryData : function() {
+        	return "";
         }
 
     });

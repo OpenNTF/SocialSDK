@@ -1,6 +1,8 @@
 var currentCommunity = null;
 
 require(["sbt/config", "sbt/connections/CommunityService", "sbt/dom"], function(config, CommunityService, dom) {
+    dom.setText("success", "Please wait... Loading your profile entry");
+    
     var endpoint = config.findEndpoint("connections");
     var url = "/connections/opensocial/basic/rest/people/@me/";
     if (endpoint.proxyPath == "smartcloud") {
@@ -14,7 +16,6 @@ require(["sbt/config", "sbt/connections/CommunityService", "sbt/dom"], function(
             handleError(dom, error);
         }
     );
-    dom.setText("success", "Please wait... Loading your profile entry");
 });
 
 function loadCommunity(communityService, dom) {
@@ -43,6 +44,8 @@ function loadCommunity(communityService, dom) {
 }
 
 function createCommunity(communityService, title, type, content, tags, dom) {
+    displayMessage(dom, "Please wait... Creating community: " + community.getTitle());
+    
     currentCommunity = null;
     var community = communityService.newCommunity(); 
     community.setTitle(title);
@@ -64,11 +67,11 @@ function createCommunity(communityService, title, type, content, tags, dom) {
             handleError(dom, error);
         }
     );
-    
-    displayMessage(dom, "Please wait... Creating community: " + community.getTitle());
 }
 
 function deleteCommunity(community, dom) {
+    displayMessage(dom, "Please wait... Deleting community: " + community.getCommunityUuid());
+    
     community.remove().then(               
         function() { 
             handleCommunityDeleted(community, dom);
@@ -77,11 +80,11 @@ function deleteCommunity(community, dom) {
             handleError(dom, error);
         }
     );
-    
-    displayMessage(dom, "Please wait... Deleting community: " + community.getCommunityUuid());
 }
 
 function updateCommunity(community, title, type, content, tags, dom) {
+    displayMessage(dom, "Please wait... Updating community: " + community.getCommunityUuid());
+    
     community.setTitle(title);
     community.setCommunityType(type);
     community.setContent(content);
@@ -94,16 +97,15 @@ function updateCommunity(community, title, type, content, tags, dom) {
             handleError(dom, error);
         }
     );
-    displayMessage(dom, "Please wait... Updating community: " + community.getCommunityUuid());
 }
 
 function handleLoggedIn(entry, CommunityService, dom) {
+    displayMessage(dom, "Please wait... Loading your latest community");
+
     var communityService = new CommunityService();
     loadCommunity(communityService, dom);
 
-    addOnClickHandlers(communityService, dom);
-    
-    displayMessage(dom, "Please wait... Loading your latest community");
+    addOnClickHandlers(communityService, dom);    
 }
 
 function handleCommunityLoaded(community, dom) {

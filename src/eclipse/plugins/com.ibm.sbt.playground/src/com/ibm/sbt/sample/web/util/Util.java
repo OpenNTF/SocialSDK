@@ -165,6 +165,18 @@ public class Util {
         if (StringUtil.isNotEmpty(environment)) {
             libraryUrl += "&env=" + environment;
         }
+        String debug = request.getParameter("debug");
+        if (StringUtil.isNotEmpty(debug)) {
+            libraryUrl += "&debug=" + debug;
+        }
+        String debugTransport = request.getParameter("debugTransport");
+        if (StringUtil.isNotEmpty(debugTransport)) {
+            libraryUrl += "&debugTransport=" + debugTransport;
+        }
+        String mockTransport = request.getParameter("mockTransport");
+        if (StringUtil.isNotEmpty(mockTransport)) {
+            libraryUrl += "&mockTransport=" + mockTransport;
+        }
         String baseUrl = UrlUtil.getBaseUrl(request);
         return PathUtil.concat(baseUrl, libraryUrl,'/');
     }

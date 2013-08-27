@@ -21,6 +21,7 @@
       String css = null;
       String theme = request.getParameter("themeId");
       boolean debug = false;
+      boolean debugTransport = false;
       boolean loadDojo = true;
       final HttpServletRequest finalRequest = request;
       ParameterProvider parameterProvider = ParameterProcessor.getDefaultProvider(new ParameterProvider() {
@@ -82,6 +83,7 @@
           loadDojo = Boolean.parseBoolean(request.getParameter("loadDojo"));
       }
       debug = Boolean.parseBoolean(request.getParameter("debug"));
+      debugTransport = Boolean.parseBoolean(request.getParameter("debugTransport"));
   %>
   <head>
     <meta charset="utf-8">
@@ -134,5 +136,11 @@
         out.println("<div>Error, unable to load snippet: "+snippetName+"</div>");
     }
     %>
+    <%if(debugTransport){%>
+        <hr/>
+		<pre>
+			<div id="mockData" class="alert"></div>
+		</pre>
+    <%}%>
   </body>
 </html>

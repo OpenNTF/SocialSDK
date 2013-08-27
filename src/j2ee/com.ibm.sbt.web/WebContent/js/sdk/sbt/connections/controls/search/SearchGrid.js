@@ -18,12 +18,13 @@
  * 
  */
 define([ "../../../declare", 
+         "../../../lang", 
          "../../../config", 
          "../../../controls/grid/Grid", 
          "./SearchGridRenderer", 
          "../../../store/parameter",
          "../../../connections/SearchConstants"], 
-        function(declare, sbt, Grid, SearchGridRenderer, parameter, consts) {
+        function(declare, lang, sbt, Grid, SearchGridRenderer, parameter, consts) {
 
     var sortVals = {
         relevance: "",

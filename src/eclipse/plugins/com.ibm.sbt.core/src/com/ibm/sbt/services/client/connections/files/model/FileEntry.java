@@ -22,6 +22,7 @@ import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 import com.ibm.sbt.services.client.connections.files.FileEntryXPath;
 import com.ibm.sbt.services.client.connections.files.FileService;
+import com.ibm.sbt.services.client.connections.files.util.FileConstants;
 
 /**
  * @Represents Connections File
@@ -98,7 +99,7 @@ public class FileEntry extends BaseEntity {
 	 * 
 	 */
 	public boolean isLocked() {
-		if("HARD".equalsIgnoreCase(getLockType()))
+		if(FileConstants.LockType_HARD.equalsIgnoreCase(getLockType()))
 			return true;
 		else 
 			return false;

@@ -296,7 +296,7 @@ public class FileServiceTest extends BaseUnitTest {
 		String testFileId = listOfFiles.get(0).getFileId();
 		fileService.lock(testFileId);
 		FileEntry fileEntry = fileService.getFile(testFileId, true);
-		assertEquals(fileEntry.getLock(), "HARD");
+		assertEquals(fileEntry.getLockType(), "HARD");
 	}
 
 	@Test
@@ -307,7 +307,7 @@ public class FileServiceTest extends BaseUnitTest {
 		String testFileId = listOfFiles.get(0).getFileId();
 		fileService.unlock(testFileId);
 		FileEntry fileEntry = fileService.getFile(testFileId, true);
-		assertEquals(fileEntry.getLock(), "NONE");
+		assertEquals(fileEntry.getLockType(), "NONE");
 	}
 	
 	@Test

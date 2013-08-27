@@ -262,6 +262,33 @@ public class JsonDataHandler implements DataHandler<JsonJavaObject>{
 			return 0;
 		}
 	}
+	
+	/**
+     * @param fieldName
+     * @return value as long 
+     */
+	@Override
+	public Long getAsLong(String fieldName) {
+		try {
+			return Long.parseLong(getAsString(fieldName));
+		} catch (NumberFormatException e) {
+			return (long) 0;
+		}
+	}
+	
+	/**
+     * @param fieldName
+     * @return value as long 
+     */
+	@Override
+	public Long getAsLong(FieldEntry fieldName) {
+		String field = (String)fieldName.getPath();
+		try {
+			return Long.parseLong(getAsString(field));
+		} catch (NumberFormatException e) {
+			return (long) 0;
+		}
+	}
 
     /**
      * @param field

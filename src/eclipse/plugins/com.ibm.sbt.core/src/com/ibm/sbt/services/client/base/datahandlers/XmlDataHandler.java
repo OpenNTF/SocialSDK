@@ -344,4 +344,27 @@ public class XmlDataHandler implements DataHandler<Node> {
 	public Node getEntry(String path) {
 		return getEntry(getData(), getXPathQuery(path));
 	}
+
+	/**
+     * @param fieldName
+     * @return value as long 
+     */
+	@Override
+	public Long getAsLong(String fieldName) {
+		try {
+			return Long.parseLong(getAsString(fieldName));
+		} catch (NumberFormatException e) {
+			return (long) 0;
+		}
+	}
+
+	@Override
+	public Long getAsLong(FieldEntry fieldName) {
+		String value = getAsString(fieldName);
+		try {
+			return Long.parseLong(value);
+		} catch (NumberFormatException e) {
+			return (long) 0;
+		}
+	}
 }

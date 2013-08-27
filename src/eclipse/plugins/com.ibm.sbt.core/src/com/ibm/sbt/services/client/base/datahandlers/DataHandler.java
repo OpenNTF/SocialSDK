@@ -46,6 +46,8 @@ public interface DataHandler<DataType> {
 	public DataType getEntry(String path);
 	public void setData(final Object data);
 	public Object getData();
+	public Long getAsLong(String fieldName);
+	public Long getAsLong(FieldEntry fieldName);
 	
 }
 

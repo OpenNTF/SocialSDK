@@ -1,16 +1,19 @@
 require(["sbt/connections/FileService", "sbt/dom"], 
     function(FileService,dom) {
-        var createRow = function(i) {
-            var table = dom.byId("filesTable");
-            var tr = document.createElement("tr");
-            table.appendChild(tr);
-            var td = document.createElement("td");
-            td.setAttribute("id", "title"+i);
-            tr.appendChild(td);
-            td = document.createElement("td");
-            td.setAttribute("id", "id"+i);
-            tr.appendChild(td);
-        };
+	    var createRow = function(file) {
+	        var table = dom.byId("filesTable");
+	        var tr = document.createElement("tr");
+	        table.appendChild(tr);
+	        var td = document.createElement("td");
+	        td.innerHTML = file.getId();
+	        tr.appendChild(td);
+	        td = document.createElement("td");
+	        tr.appendChild(td);
+	        var a = document.createElement("a");
+	        a.href = file.getDownloadUrl();
+	        a.innerHTML = file.getTitle();
+	        td.appendChild(a);
+	    };
 
         var fileService = new FileService();
     	fileService.getMyFiles().then(
@@ -20,14 +23,7 @@ require(["sbt/connections/FileService", "sbt/dom"],
                 } else {
                     for(var i=0; i<files.length; i++){
                         var file = files[i];
-                        createRow(i);
-                        var aElement = document.createElement("a");
-            			aElement.setAttribute("id", "a" + i);
-            			aElement.setAttribute("href", file.getDownloadUrl());			            			                       
-            			var title = document.getElementById("title"+i);
-            			title.appendChild(aElement);
-            			dom.setText("a" + i, file.getTitle());
-                        dom.setText("id"+i, file.getId()); 
+                        createRow(file);
                     }
                 }
             },

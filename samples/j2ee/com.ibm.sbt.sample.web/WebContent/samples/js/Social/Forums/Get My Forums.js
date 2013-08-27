@@ -21,8 +21,8 @@ require(["sbt/connections/ForumService", "sbt/dom"],
                     for(var i=0; i<forums.length; i++){
                         var forum = forums[i];
                         var title = forum.getTitle(); 
-                        var id = forum.getId(); 
-                        createRow(title, id);
+                        var uuid = forum.getForumUuid(); 
+                        createRow(title, uuid);
                     }
                 }
             },

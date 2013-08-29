@@ -16,6 +16,7 @@
 
 define(["../../../declare",
         "../ConnectionsGridRenderer",
+        "../../../i18n",
         "../../../text!./templates/ForumRow.html",
         "../../../text!./templates/TableHeader.html",
         "../../../text!./templates/TopicRow.html",
@@ -24,7 +25,7 @@ define(["../../../declare",
         "../../../text!./templates/ReplyHeader.html",
         "../../../i18n!./nls/ForumGridRenderer"], 
 
-    function(declare, ConnectionsGridRenderer, ForumRow, tableHeader, TopicRow, TopicHeader, ReplyTemplate, ReplyHeader, nls){
+    function(declare, ConnectionsGridRenderer, i18n, ForumRow, tableHeader, TopicRow, TopicHeader, ReplyTemplate, ReplyHeader, nls){
 		
 		/**
 		 * @class ForumGridRenderer
@@ -172,6 +173,20 @@ define(["../../../declare",
 	           this._doAttachEvents(grid, el,data);
 	           
 	           console.log("a");
+	        },
+	        
+	        
+	        getDateLabel: function(grid, item, i, items){
+	             var result = i18n.getUpdatedLabel(item.getValue('updated'));
+	             return result;
+	        },
+	        
+	        getParentLink: function(grid, item, i, items){
+	        	
+	        	if(grid.params.type == "myTopics"){
+	        		return item.topicForumTitle;
+	        	}
+	        	return '<a class="lotusBreakWord" href="#" data-dojo-attach-event="onclick: previousPage" >'+item.topicForumTitle+'</a>';
 	        },
 	        
 	        /**

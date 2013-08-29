@@ -177,11 +177,14 @@ define(["../../../declare",
 	        	this.renderer.headerTemplate = this.renderer.topicHeader;
 	        	this._storeArgs.attributes = consts.ForumTopicXPath;
 	        	
-	        	this.store._args.url = consts.AtomForumTopics+"?forumUuid="+this._forumID;
+	        	if(this.params.type=="myTopics"){
+	        		this.store._args.url = consts.AtomTopicsMy;
+	        	}else{
+	        		this.store._args.url = consts.AtomForumTopics+"?forumUuid="+this._forumID;
+	        	}
 
 	        	this._doQuery(this.store, options);
-	        	
-	        	console.log("done");
+
 	        },
 	        
 	        getTopicReplies: function(topicId,options){

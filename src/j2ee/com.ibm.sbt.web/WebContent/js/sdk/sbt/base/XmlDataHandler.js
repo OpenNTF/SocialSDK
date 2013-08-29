@@ -276,6 +276,9 @@ define([ "../declare", "../lang", "../stringUtil", "../xml", "../xpath", "./Data
          * Select xpath as string
          */
         _selectText : function(property) {
+        	if (!this.data) {
+        		return null;
+        	}
             return stringUtil.trim(xpath.selectText(this.data, this._getXPath(property), this.namespaces));
         },
         
@@ -283,6 +286,9 @@ define([ "../declare", "../lang", "../stringUtil", "../xml", "../xpath", "./Data
          * Select xpath as number
          */
         _selectNumber : function(property) {
+        	if (!this.data) {
+        		return null;
+        	}
             return xpath.selectNumber(this.data, this._getXPath(property), this.namespaces);
         },
         
@@ -290,6 +296,9 @@ define([ "../declare", "../lang", "../stringUtil", "../xml", "../xpath", "./Data
          * Select xpath as date
          */
         _selectDate : function(property) {
+        	if (!this.data) {
+        		return null;
+        	}
             var text = this._selectText(property);
             return text ? new Date(text) : null;
         },
@@ -298,6 +307,9 @@ define([ "../declare", "../lang", "../stringUtil", "../xml", "../xpath", "./Data
          * Select xpath as boolean
          */
         _selectBoolean : function(property) {
+        	if (!this.data) {
+        		return null;
+        	}
             var text = this._selectText(property);
             return text ? true : false;
         },
@@ -306,6 +318,9 @@ define([ "../declare", "../lang", "../stringUtil", "../xml", "../xpath", "./Data
          * Select xpath as array
          */
         _selectArray : function(property) {
+        	if (!this.data) {
+        		return null;
+        	}
             var nodes = xpath.selectNodes(this.data, this._getXPath(property), this.namespaces);
             var ret = null;
             if (nodes) {

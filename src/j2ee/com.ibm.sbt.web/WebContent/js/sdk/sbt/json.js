@@ -97,9 +97,10 @@ define(['./_bridge/json', './_bridge/lang', './log', './stringUtil'], function(j
         _stringifyCyclicCheck: function(jsonObj, indent) {
             var jsonImpl = JSON || jsonLib;
             var seen = [];
+            var self = this;
             return jsonImpl.stringify(jsonObj, function(key, val) {
                 if (lang.isObject(val)) {
-                    if (seen.indexOf(val) >= 0)
+                    if (seen.indexOf(val) >= 0 && !self._isBuiltin(val))
                         return undefined;
                     seen.push(val);
                 }
@@ -120,7 +121,7 @@ define(['./_bridge/json', './_bridge/lang', './log', './stringUtil'], function(j
             var jsonObj = {};
             for (var property in theObj) {
                 var value = this._getObjectValue(theObj, property, seen);
-                if (value) {
+                if (value || !isNaN(value)) {
                     jsonObj[property] = value;
                 }
             }

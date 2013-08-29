@@ -71,9 +71,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
     		content : "a:content[@type='text']",
             permissions : "snx:permissions",
             alternateUrl : "a:link[@rel='alternate']/@href",
-            communityUuid : "snx:communityUuid",
-            topicForumTitle: "/a:feed/a:title",
-            threadCount: "a:link[@rel='replies']/@thr:count",	
+            communityUuid : "snx:communityUuid"
         },
         
         /**
@@ -95,9 +93,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
     		content : "a:content[@type='html']",
             permissions : "snx:permissions",
             alternateUrl : "a:link[@rel='alternate']/@href",
-            communityUuid : "snx:communityUuid",
-            topicTitle: "/a:feed/a:title",
-            topicUrl: "/a:feed/a:id"
+            communityUuid : "snx:communityUuid"
         },
         
 		/**

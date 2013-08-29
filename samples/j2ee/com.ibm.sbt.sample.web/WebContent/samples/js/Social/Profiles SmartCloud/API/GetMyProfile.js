@@ -15,7 +15,7 @@ require([ "sbt/smartcloud/ProfileService", "sbt/dom", "sbt/config", "sbt/json" ]
 		var profileId = parseUserid(entry);
 		var profileService = new ProfileService();
 		try {
-		profileService.getProfileByGUID(profileId).then( 
+		profileService.getProfile(profileId).then( 
 
 	                function(profile){
 	                	results = getResults(profile);

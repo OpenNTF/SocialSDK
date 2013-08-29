@@ -2,7 +2,7 @@ require([ "sbt/connections/ForumService", "sbt/connections/ForumConstants", "sbt
     try {
         var forumService = new ForumService();
         var forumReply = forumService.newForumReply();
-        forumReply.setTopicUuid("%{ForumService.replyUuid}").setTitle("%{ForumService.replyTitle}").setContent("%{ForumService.replyContent}");
+        forumReply.setReplyUuid("%{ForumService.replyUuid}").setTitle("%{ForumService.replyTitle}").setContent("%{ForumService.replyContent}");
         var promise = forumService.updateForumReply(forumReply);
         promise.then(function(response) {
             dom.setText("json", json.jsonBeanStringify(response));

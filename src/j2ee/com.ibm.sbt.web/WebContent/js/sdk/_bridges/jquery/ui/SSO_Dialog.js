@@ -22,14 +22,12 @@
 define(["sbt/config", 'jquery/ui'], function(config) {
 	
 	return {
-		show: function(options, dialogLoginPage) {
+		show: function(options, dialogLoginPage, ssoStrings) {
 		  try{
 			var self = this;
 			require(['sbt/config', 'requirejs/text!sbt/'+dialogLoginPage],function(config, loginPage){
-				var _title = "Authentication";
+				var _title = ssoStrings.message_title;
 				var _isModal = false;
-				var _width = 350;
-				var _height = 220;
 				var _autoOpen = true;
 				var _resizeable = true;
 				var _draggable = true;
@@ -37,8 +35,6 @@ define(["sbt/config", 'jquery/ui'], function(config) {
 	            var d = config.dialog = jQuery(loginPage).dialog({
 					title : _title,
 					modal: _isModal,
-					width: _width,
-					height: _height,
 					resizeable: _resizeable,
 					draggable: _draggable,
 					autoOpen : _autoOpen

@@ -26,7 +26,6 @@ define(["sbt/i18n!sbt/authenticator/nls/SSO", "sbt/config"], function(ssoStrings
 			  require(["dijit.Dialog", "dojo.cache"]);
 					var d = new dijit.Dialog({
 						title: ssoStrings.message_title,
-			            style: "width: 350px",
 			            content: dojo.cache("sbt", dialogLoginPage),
 			            onRelogin : function () {
 			            	d.hide();

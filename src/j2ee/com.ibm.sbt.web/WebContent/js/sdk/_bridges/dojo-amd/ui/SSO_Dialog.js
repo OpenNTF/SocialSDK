@@ -25,7 +25,6 @@ define(['dijit/Dialog', "dojo/cache", "sbt/config", "dojo/on", "sbt/dom"], funct
 		  try{
 			var d = new Dialog({
 				title: ssoStrings.message_title,
-	            style: "width: 350px",
 	            content: cache("sbt", dialogLoginPage),
 	            onRelogin : function () {
 	            	d.hide();

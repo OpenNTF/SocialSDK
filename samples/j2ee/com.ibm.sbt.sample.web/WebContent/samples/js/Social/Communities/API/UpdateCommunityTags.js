@@ -4,7 +4,7 @@ require(["sbt/connections/CommunityService", "sbt/dom", "sbt/json"],
     	var promise = communityService.getCommunity("%{sample.communityId}");
     	promise.then(
     		function(community) {
-    			community.setTags(["newTag1", "newTag2", "newTag3"]);
+    			community.setTags(["newtag1", "newtag2", "newtag3"]);
     			communityService.updateCommunity(community).then(						
     	            function(response) {           
     	                dom.setText("json", json.jsonBeanStringify(response));

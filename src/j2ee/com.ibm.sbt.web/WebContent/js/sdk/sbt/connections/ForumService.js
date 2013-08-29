@@ -29,6 +29,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
 	var CategoryReply = "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/type\" term=\"forum-reply\"></category>";
     
 	var TopicTmpl = "<thr:in-reply-to xmlns:thr=\"http://purl.org/syndication/thread/1.0\" ref=\"urn:lsid:ibm.com:forum:${getForumUuid}\" type=\"application/atom+xml\" href=\"\"></thr:in-reply-to>";
+	var ReplyTmpl = "<thr:in-reply-to xmlns:thr=\"http://purl.org/syndication/thread/1.0\" ref=\"urn:lsid:ibm.com:forum:${getTopicUuid}\" type=\"application/atom+xml\" href=\"\"></thr:in-reply-to>";
 	
     /**
      * Forum class represents an entry for a forums feed returned by the
@@ -377,6 +378,22 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          */
         constructor : function(args) {
         },
+        
+        /**
+         * Return extra entry data to be included in post data for this entity.
+         * 
+         * @returns {String}
+         */
+        createEntryData : function() {
+        	if (!this.getTopicUuid()) {
+        		return "";
+        	}
+            var transformer = function(value,key) {
+                return value;
+            };
+            var postData = stringUtil.transform(ReplyTmpl, this, transformer, this);
+            return stringUtil.trim(postData);
+        },
 
         /**
          * Return the value of id from Forum Reply ATOM
@@ -388,6 +405,16 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         getReplyUuid : function() {
             var uid = this.getAsString("replyUuid");
             return extractForumUuid(uid);
+        },
+
+        /**
+         * Sets id of IBM Connections Forum Reply.
+         * 
+         * @method setReplyUuid
+         * @param {String} replyUuid Id of the forum reply
+         */
+        setReplyUuid : function(replyUuid) {
+            return this.setAsString("replyUuid", replyUuid);
         },
 
         /**
@@ -410,18 +437,6 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          */
         setTopicUuid : function(topicUuid) {
             return this.setAsString("topicUuid", topicUuid);
-        },
-
-        /**
-         * Return the value of IBM Connections forum ID from forum ATOM
-         * entry document.
-         * 
-         * @method getForumUuid
-         * @return {String} Forum ID of the forum
-         */
-        getForumUuid : function() {
-            var uid = this.getAsString("forumUuid");
-            return extractForumUuid(uid);
         },
 
         /**
@@ -1043,8 +1058,9 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             callbacks.createEntity = function(service,data,response) {
                 var replyUuid = this.getLocationParameter(response, "replyUuid");
                 forumReply.setReplyUuid(replyUuid);
-                return forum;
-            };forumReply
+                forumReply.setData(data);
+                return forumReply;
+            };
 
             var options = {
                 method : "POST",
@@ -1069,7 +1085,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @param {Object} [args] Argument object
          */
         updateForumReply : function(replyOrJson,args) {
-            var forumReply = this._toForumTopic(topicOrJson);
+            var forumReply = this._toForumReply(replyOrJson);
             var promise = this._validateForumReply(forumReply, true, args);
             if (promise) {
                 return promise;
@@ -1107,7 +1123,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @param {Object} [args] Argument object
          */
         deleteForumReply : function(replyUuid,args) {
-            var promise = this._validatReplyUuid(replyUuid);
+            var promise = this._validateReplyUuid(replyUuid);
             if (promise) {
                 return promise;
             }            

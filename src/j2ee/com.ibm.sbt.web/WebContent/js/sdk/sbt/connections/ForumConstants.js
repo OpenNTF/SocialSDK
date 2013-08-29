@@ -51,7 +51,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          */
         ForumReplyXPath : {
         	replyUuid : "a:id",
-        	forumUuid : "thr:in-reply-to/@ref",
+        	topicUuid : "thr:in-reply-to/@ref",
             permissions : "snx:permissions",
             communityUuid : "snx:communityUuid"
         },

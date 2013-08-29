@@ -20,8 +20,9 @@ define(["../../../declare",
         "./ForumGridRenderer", 
 		 "./ForumAction",
 		 "./ViewProfileAction",
+		 "./BackAction",
         "../../../connections/ForumConstants"], 
-    function(declare, Grid, parameter, ForumGridRenderer, ForumAction, ViewProfileAction, consts){
+    function(declare, Grid, parameter, ForumGridRenderer, ForumAction, ViewProfileAction, BackAction, consts){
 	
 		/**Values that forums Can be sorted By, NOTE Sotring is not enabled in Connections*/
 		var sortVals = {
@@ -70,7 +71,18 @@ define(["../../../declare",
 	                rendererArgs : {
 	                    type : "public"
 	                }
-	            }
+	            },
+	            "myTopics" : {
+	                storeArgs : {
+	                    url : consts. AtomTopicsMy,
+	                    attributes : consts.ForumTopicXPath,
+	                    feedXPath : consts.ForumsFeedXPath,
+	                    paramSchema: ParamSchema
+	                },
+	                rendererArgs : {
+	                    type : "myTopics"
+	                }
+	            }	            
 	        },
 		    
 	        /**The default Forum Grid that will be created, if another type is not specified */
@@ -79,6 +91,7 @@ define(["../../../declare",
 	        /**forumAction handles onClick and tooltip functions */
 	        forumAction : new ForumAction(),
 	        viewProfileAction: new ViewProfileAction(),
+	        backAction: new BackAction(),
 	        
 	        /**
 	         * The constructor function.
@@ -118,7 +131,7 @@ define(["../../../declare",
 	        handleClick: function(el, data, ev) {
 	            if (this.forumAction) {
 	                this._stopEvent(ev);
-	                this.forumAction.execute(data, { grid : this.grid }, ev);
+	                this.forumAction.execute(data, this , ev);
 	            }
 	        },
 	    	
@@ -135,6 +148,111 @@ define(["../../../declare",
 	        viewAuthorProfile: function(el, data, ev){
 	        	this._stopEvent(ev);
 	        	this.viewProfileAction.openAuthorProfile(data, this.store,this.baseProfilesUrl);
+	        },
+	        
+	        getForums: function(options){
+	        	
+	        	this.renderer.template = this.renderer.forumTemplate;
+	        	this.renderer.headerTemplate = this.renderer.forumHeader;
+	        	this._storeArgs.attributes = consts.ForumXPath;
+	        	
+	        	if(this.store.attributes){
+	        		this.store.attributes = consts.ForumXPath;
+	        	}
+	        	
+	        	if(this.params.type == "my"){
+	        		
+	        		//to handle difference in dojo 143 & 180
+	        		if(this.store._args){
+	        			this.store._args.url = consts.AtomForumsMy;
+	        		}else if(this.store.url){
+	        			this.store.url = consts.AtomForumsMy;
+	        		}
+	        		
+	        	}else{
+	        		if(this.store._args){
+	        			this.store._args.url = consts.AtomForumTopics;
+	        		}else if(this.store.url){
+	        			this.store.url = consts.AtomForumTopics;
+	        		}	
+	        	}
+
+	        	this._doQuery(this.store, options);
+	        },
+	        
+	        _forumID: "",
+	        
+	        /**
+	         * 
+	         * Show forum Topics
+	         * @param forumId
+	         * @param options
+	         */
+	        getTopics: function(forumId,options){
+	        	
+	        	if(forumId != ""){
+	        		this._forumID = forumId;
+	        	}
+
+	        	this.renderer.template = this.renderer.topicTemplate;
+	        	this.renderer.headerTemplate = this.renderer.topicHeader;
+	        	this._storeArgs.attributes = consts.ForumTopicXPath;
+	        	
+	        	if(this.store.attributes){
+	        		this.store.attributes = consts.ForumTopicXPath;
+	        	}
+	        		        	
+	        	if(this.params.type=="myTopics"){
+	        		
+	        		//To handle difference between dojo 143 & 180
+	        		if(this.store._args){
+	        			this.store._args.url = consts.AtomTopicsMy;
+	        		}else if(this.store.url){
+	        			this.store.url = consts.AtomTopicsMy;
+	        		}
+	        		
+	        	}else{
+	        		
+	        		if(this.store._args){
+	        			this.store._args.url = consts.AtomForumTopics+"?forumUuid="+this._forumID;
+	        		}else if(this.store.url){
+	        			this.store.url = consts.AtomForumTopics+"?forumUuid="+this._forumID;
+	        		}
+	        		
+	        	}
+
+	        	this._doQuery(this.store, options);
+
+	        },
+	        
+	        getTopicReplies: function(topicId,options){
+	        	
+	        	
+	        	this.renderer.template = this.renderer.replyTemplate;
+	        	this.renderer.headerTemplate = this.renderer.replyHeader;
+	        	
+	        	this._storeArgs.attributes = consts.ForumReplyXPath;
+	        	if(this.store.attributes){
+	        		this.store.attributes = consts.ForumReplyXPath;
+	        	}
+	        	
+	        	//To handle difference between dojo 143 & 180
+	        	if(this.store._args){
+	        		this.store._args.url = consts.AtomReplies+"?topicUuid="+topicId;
+	        	}else if(this.store.url){
+	        		this.store.url = consts.AtomReplies+"?topicUuid="+topicId;
+	        	}
+	
+	        	this._doQuery(this.store, options);
+	        	
+	        	console.log("s");
+	        },
+	        
+	        previousPage: function(el, data, ev){
+	        	if (this.backAction) {
+	                this._stopEvent(ev);
+	                this.backAction.previousPage(data, this , ev);
+	            }
 	        }
 		
 		});

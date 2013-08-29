@@ -71,7 +71,8 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
     		content : "a:content[@type='text']",
             permissions : "snx:permissions",
             alternateUrl : "a:link[@rel='alternate']/@href",
-            communityUuid : "snx:communityUuid"
+            communityUuid : "snx:communityUuid",
+            topicForumTitle: "/a:feed/a:title"
         },
         
         /**

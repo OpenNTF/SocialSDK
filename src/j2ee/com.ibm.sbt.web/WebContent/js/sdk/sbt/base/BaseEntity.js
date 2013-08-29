@@ -17,7 +17,7 @@
 /**
  * Javascript Base APIs for IBM Connections
  * 
- * @module sbt.base.BaseService
+ * @module sbt.base.BaseEntity
  */
 define([ "../declare", "../lang", "../log", "../stringUtil" ], 
     function(declare,lang,log,stringUtil) {
@@ -84,6 +84,17 @@ define([ "../declare", "../lang", "../log", "../stringUtil" ],
         setDataHandler : function(dataHandler) {
         	this._fields = {};
         	this.dataHandler = dataHandler;
+        },
+        
+        /**
+         * Called to set the entity data after the entity
+         * was loaded. This will cause the existing fields to be cleared.
+         * 
+         * @param data
+         */
+        setData : function(data) {
+        	this._fields = {};
+        	this.dataHandler.setData(data);
         },
         
         /**
@@ -341,6 +352,16 @@ define([ "../declare", "../lang", "../log", "../stringUtil" ],
          */
         remove : function(fieldName) {
             delete this._fields[fieldName];
+        },
+        
+        /**
+         * Return the json representation of the entity
+         * 
+         * @method toJson
+         * @returns {Object}
+         */
+        toJson : function() {
+        	return (this.dataHandler) ? this.dataHandler.toJson() : {};
         },
 
         /*

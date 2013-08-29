@@ -50,6 +50,15 @@ define([ "../declare", "../lang" ], function(declare,lang) {
         },
 
         /**
+         * Called to set the handler data.
+         * 
+         * @param data
+         */
+        setData : function(data) {
+        	this.data = data;
+        },
+        
+        /**
          * @method getAsString
          * @param data
          * @returns
@@ -120,6 +129,13 @@ define([ "../declare", "../lang" ], function(declare,lang) {
          */
         getEntitiesDataArray : function() {
             return [];
+        }, 
+        
+        /**
+         * @method toJso
+         * @returns {Object}
+         */
+        toJson : function() {
         }
 
     });

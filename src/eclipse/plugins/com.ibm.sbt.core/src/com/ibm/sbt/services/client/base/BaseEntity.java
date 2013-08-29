@@ -119,6 +119,21 @@ public class BaseEntity {
 	}
 	
 	/**
+	 * Returns the value of a field as a long
+	 * 
+	 * @param field
+	 * @return
+	 */
+	public Long getAsLong(FieldEntry field){
+		if (fields.containsKey(field.getName())){
+			return (Long)fields.get(field.getName());
+		}
+		if (dataHandler != null)
+			return dataHandler.getAsLong(field);
+		throw new NullPointerException(StringUtil.format("Field {0} was not found or had no value",field.getName()));
+	}
+	
+	/**
 	 * Returns the value of a field as a float
 	 * 
 	 * @param field

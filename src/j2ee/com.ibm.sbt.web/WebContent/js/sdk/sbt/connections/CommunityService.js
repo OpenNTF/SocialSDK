@@ -20,7 +20,8 @@
  * @module sbt.connections.CommunityService
  */
 define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", "./CommunityConstants", "../base/BaseService",
-         "../base/BaseEntity", "../base/XmlDataHandler" ], function(declare,config,lang,stringUtil,Promise,consts,BaseService,BaseEntity,XmlDataHandler) {
+         "../base/BaseEntity", "../base/XmlDataHandler", "./ForumService" ], 
+    function(declare,config,lang,stringUtil,Promise,consts,BaseService,BaseEntity,XmlDataHandler,ForumService) {
 
     var CommunityTmpl = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:app=\"http://www.w3.org/2007/app\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\"><title type=\"text\">${getTitle}</title><content type=\"html\">${getContent}</content><category term=\"community\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category>${getTags}<snx:communityType>${getCommunityType}</snx:communityType><snx:isExternal>false</snx:isExternal>${getCommunityUuid}${getCommunityTheme}</entry>";
     var CategoryTmpl = "<category term=\"${tag}\"></category>";
@@ -411,6 +412,18 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             } else {
                 return this.service.createCommunity(this, args);
             }
+        },
+        
+        /**
+         * Get the list of community forums.
+         * 
+         * @method getForums
+         * @param {Object} [args] Argument object
+         */
+        getForums : function(args) {
+        	var forumService = this.service.getForumService();
+        	var requestArgs = lang.mixin(args || {}, { communityUuid : this.getCommunityUuid() });
+        	return forumService.getForums(requestArgs);
         }        
 
     });
@@ -583,7 +596,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         },
         
         /**
-         * Remove this member from the community
+         * Remove this member from the community.
          * 
          * @method remove
          * @param {Object} [args] Argument object
@@ -811,6 +824,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
      * @namespace sbt.connections
      */
     var CommunityService = declare(BaseService, {
+    	
+    	forumService : null,
 
         /**
          * Constructor for CommunityService
@@ -828,8 +843,20 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * Return the default endpoint name if client did not specify one.
          * @returns {String}
          */
-        getDefaultEndpointName: function() {
+        getDefaultEndpointName : function() {
             return "connections";
+        },
+        
+        /**
+         * Return a ForumService instance
+         * @returns {ForumService}
+         */
+        getForumService : function() {
+        	if (!this.forumService) {
+        		this.forumService = new ForumService();
+        		this.forumService.endpoint = this.endpoint;
+        	}
+        	return this.forumService;
         },
         
         /**
@@ -1079,7 +1106,18 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             
             var callbacks = {};
             callbacks.createEntity = function(service,data,response) {
-                // TODO community.dataHandler = null;
+            	// preserve the communityUuid
+            	var communityUuid = community.getCommunityUuid();
+            	if (data) {
+            		var dataHandler = new CommunityDataHandler({
+                        service :  service,
+                        data : data,
+                        namespaces : consts.Namespaces,
+                        xpath : consts.CommunityXPath
+                    });
+                	community.setDataHandler(dataHandler);
+            	}
+            	community.setCommunityUuid(communityUuid);
                 return community;
             };
 
@@ -1198,6 +1236,33 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             
             return this.deleteEntity(consts.AtomCommunityMembers, options, value);
         },
+        
+        /**
+         * Get a list of forum topics that includes the topics in a specific forum
+         * for the specified community.
+         * 
+         * @method getForumTopics
+         * @param communityUuid
+         * @param requestArgs
+         * @returns
+         */
+        getForumTopics: function(communityUuid, requestArgs) {
+            var promise = this._validateCommunityUuid(communityUuid);
+            if (promise) {
+                return promise;
+            }
+            
+            var requestArgs = lang.mixin({
+                communityUuid : communityUuid
+            }, args || {});
+            var options = {
+                method : "GET",
+                handleAs : "text",
+                query : requestArgs
+            };
+            
+            return this.getEntities(consts.AtomCommunityForumTopics, options, ForumService.ForumTopicFeedCallbacks);
+        },        
         
         /*
          * Callbacks used when reading a feed that contains Community entries.

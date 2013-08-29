@@ -34,7 +34,7 @@
 		try {   
 				ProfileService service = new ProfileService("smartcloud"); //If no endpoint is specified, it uses default end point i.e connections
 				String contactGUID = Context.get().getProperty("sample.smartcloud.contactGUID");
-				Profile profile = service.getContactByGUID(contactGUID);
+				Profile profile = service.getContact(contactGUID);
 				if(profile != null)
 				{
 					out.println("<B>Contact Details </B> ");

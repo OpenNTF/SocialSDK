@@ -45,8 +45,7 @@ define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscr
          * profile entry document in the profile object.
          * 
          * @method load
-         * @param {Object}
-         *            [args] Argument object
+         * @param {Object} [args] Argument object
          * 
          */
 		load: function(args) {
@@ -76,26 +75,27 @@ define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscr
 		},
 		
 		/**
-		Get data feed
-		@method getData
-		@return {Json} json Feed
+		 * Get data feed
+		 * @method getData
+		 * @return {Json} json Feed
 		**/
 		getData: function() {
 			return this.dataHandler.getEntityData();
 		},
 		
 		/**
-		Returns the id of the User
-		@method getId
-		@return {String} id of the User	
+		 * Returns the id of the User
+		 * @method getId
+		 * @return {String} id of the User	
 		**/
 		getId: function () {
 			return this.getAsString("id");
 		},
+		
 		/**
-		Returns the object id of the User
-		@method getObjectId
-		@return {String} id of the User	
+		 * Returns the object id of the User
+		 * @method getObjectId
+		 * @return {String} id of the User	
 		**/
 		getObjectId: function () {
 			return this.getAsString("objectId");
@@ -282,13 +282,11 @@ define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscr
         /**
          * Get the profile of a user.
          * 
-         * @method getProfileByGUID
-         * @param {String}
-         *            userId Userid of the profile
-         * @param {Object}
-         *            args Argument object
+         * @method getProfile
+         * @param {String} userId Userid of the profile
+         * @param {Object} args Argument object
          */
-        getProfileByGUID : function(userId, args) {
+        getProfile : function(userId, args) {
             var idObject = this._toIdObject(userId);
             var promise = this._validateIdObject(idObject);
             if (promise) {
@@ -305,17 +303,27 @@ define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscr
             var url = this.constructUrl(Consts.GetProfileByGUID, {}, {idToBeReplaced : entityId});
             return this.getEntity(url, options, entityId, this.getProfileCallbacks());
         },
+        
+        /**
+         * Get the profile of a user.
+         * 
+         * @method getProfileByGUID
+         * @param {String} userId Userid of the profile
+         * @param {Object} args Argument object
+         * @deprecated Use getProfile instead.
+         */
+        getProfileByGUID : function(userId, args) {
+            return this.getProfile(userId, args);
+        },
 
         /**
          * Get the contact details of a user.
          * 
-         * @method getContactByGUID
-         * @param {String}
-         *            userId Userid of the profile
-         * @param {Object}
-         *            args Argument object
+         * @method getContact
+         * @param {String} userId Userid of the profile
+         * @param {Object} args Argument object
          */
-        getContactByGUID : function(userId, args) {
+        getContact : function(userId, args) {
             var idObject = this._toIdObject(userId);
             var promise = this._validateIdObject(idObject);
             if (promise) {
@@ -334,11 +342,22 @@ define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscr
         },
         
         /**
+         * Get the contact details of a user.
+         * 
+         * @method getContactByGUID
+         * @param {String} userId Userid of the profile
+         * @param {Object} args Argument object
+         * @deprecated Use getContact instead.
+         */
+        getContactByGUID : function(userId, args) {
+           return this.getContact(userId, args);
+        },
+        
+        /**
          * Get logged in user's Connections
          * 
          * @method getMyConnections
-         * @param {Object}
-         *            args Argument object
+         * @param {Object} args Argument object
          */
         getMyConnections : function(args) {
         	var options = {
@@ -353,8 +372,7 @@ define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscr
          * Get logged in user's Contacts
          * 
          * @method getMyContacts
-         * @param {Object}
-         *            args Argument object
+         * @param {Object} args Argument object
          */
         getMyContacts : function(args) {
         	var options = {
@@ -371,8 +389,7 @@ define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscr
          * @method getMyContactsByIndex
          * @param startIndex
          * @param count
-         * @param {Object}
-         *            args Argument object
+         * @param {Object} args Argument object
          */
         getMyContactsByIndex : function(startIndex, count, args) {
         	var requestArgs = { "startIndex" : startIndex, "count" : count };

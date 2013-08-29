@@ -111,7 +111,7 @@ public class ProfileService extends BaseService {
 	}
 	
 	/**
-	 * getContactByGUID
+	 * getContact
 	 * <p>
 	 * Fetches the contact information of the user based on the input GUID.
 	 * 
@@ -120,7 +120,7 @@ public class ProfileService extends BaseService {
 	 * @return Profile
 	 * @throws ProfileServiceException
 	 */
-	public Profile getContactByGUID(String userGUId) throws ProfileServiceException {
+	public Profile getContact(String userGUId) throws ProfileServiceException {
 		if (StringUtil.isEmpty(userGUId)) {
 			throw new ProfileServiceException(null, Messages.InvalidValue_3);
 		}
@@ -132,6 +132,21 @@ public class ProfileService extends BaseService {
 		} catch (IOException e) {
 			throw new ProfileServiceException(e, Messages.ProfileError_1);
 		}
+	}
+	
+	/**
+	 * getContactByGUID
+	 * <p>
+	 * Fetches the contact information of the user based on the input GUID.
+	 * 
+	 * @param userId
+	 *            contact Guid of the profile to be fetched
+	 * @return Profile
+	 * @throws ProfileServiceException
+	 * @deprecated Use getContact instead
+	 */
+	public Profile getContactByGUID(String userGUId) throws ProfileServiceException {
+		return getContact(userGUId);
 	}
 
 	/**

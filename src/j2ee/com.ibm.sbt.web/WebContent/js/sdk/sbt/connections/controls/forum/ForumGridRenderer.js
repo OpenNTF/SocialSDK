@@ -18,9 +18,13 @@ define(["../../../declare",
         "../ConnectionsGridRenderer",
         "../../../text!./templates/ForumRow.html",
         "../../../text!./templates/TableHeader.html",
+        "../../../text!./templates/TopicRow.html",
+        "../../../text!./templates/TopicHeader.html",
+        "../../../text!./templates/ReplyRow.html",
+        "../../../text!./templates/ReplyHeader.html",
         "../../../i18n!./nls/ForumGridRenderer"], 
 
-    function(declare, ConnectionsGridRenderer, ForumRow, tableHeader,nls){
+    function(declare, ConnectionsGridRenderer, ForumRow, tableHeader, TopicRow, TopicHeader, ReplyTemplate, ReplyHeader, nls){
 		
 		/**
 		 * @class ForumGridRenderer
@@ -32,6 +36,18 @@ define(["../../../declare",
 	    	/**Strings used by the forum grid */
 	    	_nls:nls,
 	    	
+	    	topicTemplate: TopicRow,
+	    	
+	    	topicHeader: TopicHeader,
+	    	
+	    	replyTemplate: ReplyTemplate,
+	    	
+	    	replyHeader: ReplyHeader,
+	    	
+	    	forumTemplate: ForumRow,
+	    	
+	    	forumHeader: tableHeader,
+	    	
 	    	headerTemplate: tableHeader,
 	    	
 	    	/**
@@ -40,7 +56,14 @@ define(["../../../declare",
 	    	 * @param args
 	    	 */
 	    	constructor: function(args){
-	    		this.template = ForumRow;
+	    		
+	    		if(args.type=="myTopics"){
+	    			this.template = this.topicTemplate;
+	    			this.headerTemplate = this.topicHeader;
+	    		}else{
+	    			this.template = this.forumTemplate;
+	    		}
+	    		
 	    	},
 	    	
 	    	/**
@@ -121,6 +144,37 @@ define(["../../../declare",
 	        },
 	        
 	        /**
+	         * Creates a Div, with a different CSS class, to display a grid that has no results
+	         * @method - renderEmpty
+	         * @param - grid - The Grid
+	         * @param - el - The Current Element
+	         */
+	        renderEmpty: function(grid, el,data) {
+	           while (el.childNodes[0]) {
+	               this._destroy(el.childNodes[0]);
+	           }
+	           var ediv = this._create("div", {
+	             "class": this.emptyClass,
+	             innerHTML: "<h2>" + this.nls.noResults +"</h2>",
+	             role: "document",
+	             tabIndex: 0,
+	           }, el, "only");
+	           
+	           var backButton = this._create("input",{
+	        	   type:"button",
+	        	   "class":"lotusBtn",
+	        	   value:this.nls.back,
+	        	   "data-dojo-attach-event": "onclick: previousPage",
+	        	   role: "button",
+	        	   tabindex: "0",
+	           },el,"only");
+	           
+	           this._doAttachEvents(grid, el,data);
+	           
+	           console.log("a");
+	        },
+	        
+	        /**
 	          * Displays a tooltip by calling the getTooltip function in the ForumAction class
 	          * @method tooltip
 	          * @param grid The Grid element
@@ -133,7 +187,7 @@ define(["../../../declare",
 	             if (grid.forumAction) {
 	                 return grid.forumAction.getTooltip(item);
 	             }
-	         }
+	         },
 	    	
 	    });
 	

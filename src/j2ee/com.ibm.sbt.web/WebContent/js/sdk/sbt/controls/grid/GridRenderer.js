@@ -62,7 +62,7 @@ define([ "../../declare", "../../dom", "../../lang", "../../widget/grid/_GridRen
            }
            var size = items.length;
            if (size === 0) {
-              this.renderEmpty(grid, el);
+              this.renderEmpty(grid, el,data);
            }
            else {
               this.renderPager(grid, el, items, data);
@@ -172,7 +172,7 @@ define([ "../../declare", "../../dom", "../../lang", "../../widget/grid/_GridRen
          * @param - grid - The Grid
          * @param - el - The Current Element
          */
-        renderEmpty: function(grid, el) {
+        renderEmpty: function(grid, el,data) {
            while (el.childNodes[0]) {
                this._destroy(el.childNodes[0]);
            }

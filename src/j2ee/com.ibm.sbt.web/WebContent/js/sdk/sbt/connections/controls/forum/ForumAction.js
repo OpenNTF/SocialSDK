@@ -52,8 +52,25 @@ define([ "../../../declare", "../../../controls/grid/GridAction","../../../i18n!
          * @param opts
          * @param event The event
          */
-        execute: function(item, opts, event) {
-        	document.location.href = item.forumURL;
+        execute: function(item, grid, event) {
+        	
+        	var startOfId = item.id.lastIndexOf(":")+1;
+        	var id = item.id.substring(startOfId,item.id.length);
+        	
+        	var options = {
+                start: grid.data.start, count: grid.pageSize
+            };
+        	
+        	if(grid.renderer.template == grid.renderer.topicTemplate){
+
+        		grid.getTopicReplies(id,options);
+        		
+        	}else{
+        		
+            	grid.getTopics(id,options);
+        	}
+        	
+        	
         }
 
     });

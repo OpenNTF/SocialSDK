@@ -136,7 +136,6 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
 		/**
 		 * Get a feed that includes the topics in a specific stand-alone forum.  
          */
-        AtomForumTopics : "/forums/atom/topics",
         
         AtomTopics : "/forums/atom/topics",
         

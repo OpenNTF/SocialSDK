@@ -154,27 +154,12 @@ define(["../../../declare",
 	        	
 	        	this.renderer.template = this.renderer.forumTemplate;
 	        	this.renderer.headerTemplate = this.renderer.forumHeader;
-	        	this._storeArgs.attributes = consts.ForumXPath;
-	        	
-	        	if(this.store.attributes){
-	        		this.store.attributes = consts.ForumXPath;
-	        	}
-	        	
+	        	this.store.setAttributes(consts.ForumXPath);
+
 	        	if(this.params.type == "my"){
-	        		
-	        		//to handle difference in dojo 143 & 180
-	        		if(this.store._args){
-	        			this.store._args.url = consts.AtomForumsMy;
-	        		}else if(this.store.url){
-	        			this.store.url = consts.AtomForumsMy;
-	        		}
-	        		
+	        		this.store.setUrl(consts.AtomForumsMy);
 	        	}else{
-	        		if(this.store._args){
-	        			this.store._args.url = consts.AtomForumsPublic;
-	        		}else if(this.store.url){
-	        			this.store.url = consts.AtomForumsPublic;
-	        		}	
+	        		this.store.setUrl(consts.AtomForumsPublic);
 	        	}
 
 	        	this.update(null);
@@ -189,59 +174,32 @@ define(["../../../declare",
 	         * @param options
 	         */
 	        getTopics: function(forumId,options){
-	        	
+	        		        
 	        	if(forumId != ""){
 	        		this._forumID = forumId;
 	        	}
 
 	        	this.renderer.template = this.renderer.topicTemplate;
 	        	this.renderer.headerTemplate = this.renderer.topicHeader;
-	        	this._storeArgs.attributes = consts.ForumTopicXPath;
-	        	
-	        	if(this.store.attributes){
-	        		this.store.attributes = consts.ForumTopicXPath;
-	        	}
-	        		        	
+	        	this.store.setAttributes(consts.ForumTopicXPath);
+	        	        	
 	        	if(this.params.type=="myTopics"){
-	        		
-	        		//To handle difference between dojo 143 & 180
-	        		if(this.store._args){
-	        			this.store._args.url = consts.AtomTopicsMy;
-	        		}else if(this.store.url){
-	        			this.store.url = consts.AtomTopicsMy;
-	        		}
-	        		
+	        		this.store.setUrl(consts.AtomTopicsMy);
 	        	}else{
-	        		
-	        		if(this.store._args){
-	        			this.store._args.url = consts.AtomTopics+"?forumUuid="+this._forumID;
-	        		}else if(this.store.url){
-	        			this.store.url = consts.AtomTopics+"?forumUuid="+this._forumID;
-	        		}
-	        		
+	        		this.store.setUrl(consts.AtomTopics+"?forumUuid="+this._forumID);
 	        	}
-
+	        	
 	        	this.update(null);
-
 	        },
 	        
 	        getTopicReplies: function(topicId,options){
 	        	
-	        	
 	        	this.renderer.template = this.renderer.replyTemplate;
 	        	this.renderer.headerTemplate = this.renderer.replyHeader;
+	        	this.store.setAttributes(consts.ForumReplyXPath);
+	        		        	
+	        	this.store.setUrl(consts.AtomReplies+"?topicUuid="+topicId);
 	        	
-	        	this._storeArgs.attributes = consts.ForumReplyXPath;
-	        	if(this.store.attributes){
-	        		this.store.attributes = consts.ForumReplyXPath;
-	        	}
-	        	
-	        	//To handle difference between dojo 143 & 180
-	        	if(this.store._args){
-	        		this.store._args.url = consts.AtomReplies+"?topicUuid="+topicId;
-	        	}else if(this.store.url){
-	        		this.store.url = consts.AtomReplies+"?topicUuid="+topicId;
-	        	}
 	        	this.update(null);
 	        },
 	        

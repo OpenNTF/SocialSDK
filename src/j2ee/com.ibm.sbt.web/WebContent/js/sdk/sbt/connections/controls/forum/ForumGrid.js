@@ -177,7 +177,7 @@ define(["../../../declare",
 	        		}	
 	        	}
 
-	        	this._doQuery(this.store, options);
+	        	this.update(null);
 	        },
 	        
 	        _forumID: "",
@@ -221,7 +221,7 @@ define(["../../../declare",
 	        		
 	        	}
 
-	        	this._doQuery(this.store, options);
+	        	this.update(null);
 
 	        },
 	        
@@ -242,8 +242,7 @@ define(["../../../declare",
 	        	}else if(this.store.url){
 	        		this.store.url = consts.AtomReplies+"?topicUuid="+topicId;
 	        	}
-	
-	        	this._doQuery(this.store, options);
+	        	this.update(null);
 	        },
 	        
 	        previousPage: function(el, data, ev){

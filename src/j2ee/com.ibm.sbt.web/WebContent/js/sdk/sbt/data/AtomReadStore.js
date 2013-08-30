@@ -85,6 +85,14 @@ define(["../declare","../config", "../lang", "../base/core", "../xml", "../xpath
         	return this._endpoint;
         },
         
+        setUrl: function(url){
+        	this.url = url;
+        },
+        
+        setAttributes: function(attributes){
+        	this.attributes = attributes;
+        },
+        
         /*
          * Returns defaultValue if and only if *item* does not have a value for *attribute*.
          */

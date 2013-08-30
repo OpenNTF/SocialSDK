@@ -394,6 +394,14 @@ define(["../declare","../config","../lang", "../base/core", "../xml", "../xpath"
             return object.id;
         },
         
+        setUrl: function(url){
+        	this._args.url = url;
+        },
+        
+        setAttributes: function(attributes){
+        	this._args.attributes = attributes;
+        },
+        
         /**
          * Queries the store for objects. This does not alter the store, but returns a set of data from the store.
          * @method query

@@ -32,19 +32,17 @@ define([ "../../../declare", "../../../controls/grid/GridAction","../../../i18n!
 
         },
         
-      
-        previousPage: function(item, grid, event){
+        showForums: function(item, grid, event){
         	var options = {
                 start: grid.data.start, count: grid.pageSize
-            };        	
-        	
-        	if(grid.renderer.template == grid.renderer.topicTemplate){
-        		grid.getForums(options);
-        	}else if (grid.renderer.template == grid.renderer.replyTemplate){
-  
-        		grid.getTopics("",options);
-        	}
-        	
+            }; 
+        	grid.getForums(options);
+        },
+        showTopics: function(item, grid, event){
+        	var options = {
+                start: grid.data.start, count: grid.pageSize
+            }; 
+        	grid.getTopics("",options);
         }
 
     });

@@ -171,9 +171,9 @@ define(["../../../declare",
 	        		
 	        	}else{
 	        		if(this.store._args){
-	        			this.store._args.url = consts.AtomForumTopics;
+	        			this.store._args.url = consts.AtomForumsPublic;
 	        		}else if(this.store.url){
-	        			this.store.url = consts.AtomForumTopics;
+	        			this.store.url = consts.AtomForumsPublic;
 	        		}	
 	        	}
 
@@ -214,9 +214,9 @@ define(["../../../declare",
 	        	}else{
 	        		
 	        		if(this.store._args){
-	        			this.store._args.url = consts.AtomForumTopics+"?forumUuid="+this._forumID;
+	        			this.store._args.url = consts.AtomTopics+"?forumUuid="+this._forumID;
 	        		}else if(this.store.url){
-	        			this.store.url = consts.AtomForumTopics+"?forumUuid="+this._forumID;
+	        			this.store.url = consts.AtomTopics+"?forumUuid="+this._forumID;
 	        		}
 	        		
 	        	}

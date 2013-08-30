@@ -24,6 +24,7 @@
          point="com.ibm.commons.Extension">
       <service type="com.ibm.xsp.renderkit.ContentTypeRenderer" class="com.ibm.xsp.extlib.sbt.twitter.TwitterContentType" />
    </extension>
+<!--   
    <extension
          point="com.ibm.commons.Extension">
       <service
@@ -31,6 +32,7 @@
             type="com.ibm.sbt.service.proxyendpointservice.provider">
       </service>
    </extension>
+-->   
    <!--
    <extension point="com.ibm.commons.Extension">
       <service type="com.ibm.xsp.adapter.servletFactory" class="com.ibm.xsp.extlib.sbt.files.proxy.ExtLibxServletFactory" />

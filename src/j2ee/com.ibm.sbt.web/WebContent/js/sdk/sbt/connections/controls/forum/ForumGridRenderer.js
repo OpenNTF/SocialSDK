@@ -23,9 +23,12 @@ define(["../../../declare",
         "../../../text!./templates/TopicHeader.html",
         "../../../text!./templates/ReplyRow.html",
         "../../../text!./templates/ReplyHeader.html",
+        "../../../text!./templates/ReplyBreadCrumb.html",
+        "../../../text!./templates/TopicBreadCrumb.html",
         "../../../i18n!./nls/ForumGridRenderer"], 
 
-    function(declare, ConnectionsGridRenderer, i18n, ForumRow, tableHeader, TopicRow, TopicHeader, ReplyTemplate, ReplyHeader, nls){
+    function(declare, ConnectionsGridRenderer, i18n, ForumRow, tableHeader, TopicRow, 
+    		TopicHeader, ReplyTemplate, ReplyHeader,ReplyBreadCrumb,TopicBreadCrumb, nls){
 		
 		/**
 		 * @class ForumGridRenderer
@@ -50,6 +53,12 @@ define(["../../../declare",
 	    	forumHeader: tableHeader,
 	    	
 	    	headerTemplate: tableHeader,
+	    	
+	    	replyBreadCrumb: ReplyBreadCrumb,
+	    	
+	    	topicBreadCrumb: TopicBreadCrumb,
+	    	
+	    	breadCrumb: ReplyBreadCrumb,
 	    	
 	    	/**
 	    	 * The constructor function
@@ -88,6 +97,8 @@ define(["../../../declare",
 	              
 	              var tbody = this.renderTable(grid, el, items, data);
 	              
+	              this.renderBreadCrumb(grid, el, items, data, tbody);
+	              
 	              this.renderHeader(grid, el, items, data, tbody);
 	              
 	              for (var i=0; i<items.length; i++) {
@@ -120,7 +131,21 @@ define(["../../../declare",
 	                this._doAttachEvents(grid, tbody, data);
 	            }
 	        },
-
+	        
+	        renderBreadCrumb: function(grid,el,items,data,tbody) {
+	            if (this.breadCrumb && !grid.hideBreadCrumb) {
+	                var node;
+	                if (this._isString(this.breadCrumb)) {
+	                    var domStr = this._substituteItems(this.breadCrumb, grid, this, items, data);
+	                    node = this._toDom(domStr, el.ownerDocument);
+	                } else {
+	                    node = this.breadCrumb.cloneNode(true);
+	                }
+	                tbody.appendChild(node);
+	                
+	                this._doAttachEvents(grid, tbody, data);
+	            }
+	        },
 	    	 /***
 	         * Creates a table and table body, Attaches the table body to the 
 	         * table, and returns the table body

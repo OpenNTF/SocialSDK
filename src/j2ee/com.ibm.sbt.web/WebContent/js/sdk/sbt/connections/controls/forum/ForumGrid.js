@@ -92,6 +92,7 @@ define(["../../../declare",
 	        forumAction : new ForumAction(),
 	        viewProfileAction: new ViewProfileAction(),
 	        backAction: new BackAction(),
+	        hideBreadCrumb: true,
 	        
 	        /**
 	         * The constructor function.
@@ -155,7 +156,8 @@ define(["../../../declare",
 	        	this.renderer.template = this.renderer.forumTemplate;
 	        	this.renderer.headerTemplate = this.renderer.forumHeader;
 	        	this.store.setAttributes(consts.ForumXPath);
-
+	        	this.hideBreadCrumb = true;
+	        	
 	        	if(this.params.type == "my"){
 	        		this.store.setUrl(consts.AtomForumsMy);
 	        	}else{
@@ -181,7 +183,9 @@ define(["../../../declare",
 
 	        	this.renderer.template = this.renderer.topicTemplate;
 	        	this.renderer.headerTemplate = this.renderer.topicHeader;
+	        	this.renderer.breadCrumb = this.renderer.topicBreadCrumb;
 	        	this.store.setAttributes(consts.ForumTopicXPath);
+	        	this.hideBreadCrumb = false;
 	        	        	
 	        	if(this.params.type=="myTopics"){
 	        		this.store.setUrl(consts.AtomTopicsMy);
@@ -196,20 +200,28 @@ define(["../../../declare",
 	        	
 	        	this.renderer.template = this.renderer.replyTemplate;
 	        	this.renderer.headerTemplate = this.renderer.replyHeader;
+	        	this.renderer.breadCrumb = this.renderer.replyBreadCrumb;
 	        	this.store.setAttributes(consts.ForumReplyXPath);
+	        	this.hideBreadCrumb = false;
 	        		        	
 	        	this.store.setUrl(consts.AtomReplies+"?topicUuid="+topicId);
 	        	
 	        	this.update(null);
 	        },
 	        
-	        previousPage: function(el, data, ev){
+	        showTopics: function(el, data, ev){
 	        	if (this.backAction) {
 	                this._stopEvent(ev);
-	                this.backAction.previousPage(data, this , ev);
+	                this.backAction.showTopics(data, this , ev);
+	            }
+	        },
+	        
+	        showForums: function(el, data, ev){
+	        	if (this.backAction) {
+	                this._stopEvent(ev);
+	                this.backAction.showForums(data, this , ev);
 	            }
 	        }
-		
 		});
 	
 	    return ForumGrid;

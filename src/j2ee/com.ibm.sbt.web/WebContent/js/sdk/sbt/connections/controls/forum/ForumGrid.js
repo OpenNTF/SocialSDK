@@ -244,8 +244,6 @@ define(["../../../declare",
 	        	}
 	
 	        	this._doQuery(this.store, options);
-	        	
-	        	console.log("s");
 	        },
 	        
 	        previousPage: function(el, data, ev){

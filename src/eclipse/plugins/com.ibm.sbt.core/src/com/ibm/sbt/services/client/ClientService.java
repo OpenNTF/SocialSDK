@@ -1268,7 +1268,7 @@ public abstract class ClientService {
 	}
 
 	// Until we move to HttpClient 4.1
-	protected static InputStream getEntityContent(HttpRequestBase request, HttpResponse response,
+	public static InputStream getEntityContent(HttpRequestBase request, HttpResponse response,
 			HttpEntity entity) throws IOException {
 		InputStream is = entity.getContent();
 		if (is != null) {
@@ -1280,7 +1280,7 @@ public abstract class ClientService {
 		return is;
 	}
 
-	protected DefaultHttpClient createHttpClient(HttpRequestBase httpRequestBase, Args args)
+	public DefaultHttpClient createHttpClient(HttpRequestBase httpRequestBase, Args args)
 			throws ClientServicesException {
 		// Check if we should trust the HTTPS certificates
 		DefaultHttpClient httpClient = new DefaultHttpClient();

@@ -19,10 +19,9 @@ define(["../../../declare",
         "../../../store/parameter",
         "./ForumGridRenderer", 
 		 "./ForumAction",
-		 "./ViewProfileAction",
 		 "./BackAction",
         "../../../connections/ForumConstants"], 
-    function(declare, Grid, parameter, ForumGridRenderer, ForumAction, ViewProfileAction, BackAction, consts){
+    function(declare, Grid, parameter, ForumGridRenderer, ForumAction, BackAction, consts){
 	
 		/**Values that forums Can be sorted By, NOTE Sotring is not enabled in Connections*/
 		var sortVals = {
@@ -47,7 +46,6 @@ define(["../../../declare",
 	    	
 	    	/**Hide the table header */
 	    	hideHeader: false,
-	    	baseProfilesUrl: "/profiles",
 	    	
 	        options : {
 	            "my" : {
@@ -90,7 +88,6 @@ define(["../../../declare",
 	        
 	        /**forumAction handles onClick and tooltip functions */
 	        forumAction : new ForumAction(),
-	        viewProfileAction: new ViewProfileAction(),
 	        backAction: new BackAction(),
 	        hideBreadCrumb: true,
 	        
@@ -146,10 +143,6 @@ define(["../../../declare",
 	         * @param data all of the items from the current row of the grid. 
 	         * @param ev the event 
 	         */
-	        viewAuthorProfile: function(el, data, ev){
-	        	this._stopEvent(ev);
-	        	this.viewProfileAction.openAuthorProfile(data, this.store,this.baseProfilesUrl);
-	        },
 	        
 	        getForums: function(options){
 	        	
@@ -221,7 +214,30 @@ define(["../../../declare",
 	                this._stopEvent(ev);
 	                this.backAction.showForums(data, this , ev);
 	            }
-	        }
+	        },
+	        
+	        /**
+	         * Add the since parameter to the URL, so that all forums will be 
+	         * displayed and not just those that have been recently modified.
+	         * The since parameter returns all entries last modified since a specified date. 
+	         * Specify the date in the number of milliseconds since Unix EPOCH.  
+	         * In this case 1 is used so all forums will be displayed.
+	         * @param url The Rest API URL for the forum feed
+	         * @param args
+	         * @returns
+	         */
+	        buildUrl: function(url, args) {	        	
+	            var urlParams = { since: 1};
+	            if (this.query) {
+	            	params = lang.mixin(params, this.query);
+	            }
+	            if (this.direction) {
+	            	params = lang.mixin(params, { direction : this.direction });
+	            } 
+	            return this.constructUrl(url, urlParams, {});
+	        },
+	        
+
 		});
 	
 	    return ForumGrid;

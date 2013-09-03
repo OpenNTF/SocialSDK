@@ -807,10 +807,10 @@ public class ProfileService extends BaseService {
 			File file = new File(filePath);
 			String name = filePath.substring(filePath.lastIndexOf('\\') + 1);
 
-			int dot = name.lastIndexOf('.');
+			int indexOfDot = name.lastIndexOf('.');
 			String ext = null;
-			if (dot > -1) {
-				ext = name.substring(dot + 1); // add one for the dot!
+			if (indexOfDot > -1) {
+				ext = name.substring(indexOfDot + 1); // add one for the dot!
 			}
 			if (!StringUtil.isEmpty(ext)) {
 				Map<String, String> headers = new HashMap<String, String>();

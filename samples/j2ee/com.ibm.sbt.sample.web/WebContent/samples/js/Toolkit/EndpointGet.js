@@ -4,7 +4,7 @@ require([ "sbt/config", "sbt/lang", "sbt/dom", "sbt/json", "sbt/xml" ],
     var options = { 
         method : "GET", 
         query : {
-            communityUuid : "%{sample.communityId}"
+            communityUuid : "%{sample.communityId|label=communityId|helpSnippetId=Social_Communities_Get_My_Communities}"
         }
     };
     

@@ -234,19 +234,61 @@ public class ParameterProcessor {
 	}
 
 	/*
-	 * Process a parameter with the following format:
-	 * 		name[=value]
-	 */
-	private static String processParameter(String name, ParameterProvider provider) {
-		String[] parts = StringUtil.splitString(name, '=');
-		if (parts.length == 2) {
-			String value = provider.getParameter(parts[0]);
-			return StringUtil.isEmpty(value) ? parts[1] : value;
-		} else {
-			return provider.getParameter(name);
-		}
-	}
-
+     * Process a parameter with the following format:
+     *      name[=value][|label=xxx][|required]
+     * Just adds the name
+     */
+    private static String processParameter(String name, ParameterProvider provider) {
+        String[] parts = StringUtil.splitString(name, '|');
+        String[] namePart = StringUtil.splitString(parts[0], '=');
+        if (namePart.length == 2) {
+            String value = provider.getParameter(namePart[0]);
+            return StringUtil.isEmpty(value) ? namePart[1] : value;
+        } else {
+            return provider.getParameter(namePart[0]);
+        }
+    }
+	
+	   
+    /**
+     * Gets the specified part out of a parameter of format
+     *    name[=value][|label=xxx][|idHelpSnippet=snippet_id][|required]
+     *    
+     *    name is always first. If a part is followed by '=' then the part after '=' is returned, else it just returns the part.
+     * @param parameter
+     * @return
+     */
+    public static String getParameterPart(String parameter, String part){
+        String[] parts = StringUtil.splitString(parameter, '|');
+        
+        if(part.equals("name")){ // return the name not the value
+            String[] namePart = StringUtil.splitString(parts[0], '=');
+            return namePart[0];
+        } 
+        else if(part.equals("required")){
+            if(parts[parts.length - 1].equals("required")){
+                return "required";
+            }
+            else{
+                return null;
+            }
+        }
+        
+        for(int i = 1; i < parts.length; i++){
+            String[] splitParts = StringUtil.splitString(parts[i], '=');
+            if(splitParts[0].equals(part)){
+                if(splitParts.length == 1){
+                    return splitParts[0];
+                }
+                else{
+                    return splitParts[1];
+                }
+            }
+        }
+        
+        return null;
+    }
+    
 	/**
 	 * Interface to provide parameter values for the processing
 	 */

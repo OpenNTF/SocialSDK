@@ -70,25 +70,31 @@
             <%
             for(String param : paramList){
                 String value = "";
-                String storeKey = snippetName + "_" + param;
+                String name = ParameterProcessor.getParameterPart(param, "name");
+                String storeKey = snippetName + "_" + name;
                 String storedValue = (String) session.getAttribute(storeKey);
                 if(storedValue != null){
                     value = storedValue;
                 }
-                Context con = Context.get();
-                if(con.getProperty(param + ".idHelpSnippet") == null){
+                
+                String label = ParameterProcessor.getParameterPart(param, "label");
+                if(label == null){
+                    label = name;
+                }
+                String helpSnippetId = ParameterProcessor.getParameterPart(param, "helpSnippetId");
+                if(helpSnippetId == null){
             %>
             <tr>
-                <th style="vertical-align:middle;" scope="row"><%=param %></th>
-                <td><input style="vertical-align:middle;margin-bottom:0px;" type="text" name="<%=param %>" value="<%=value %>" ></td>
+                <th style="vertical-align:middle;" scope="row"><%=label %></th>
+                <td><input style="vertical-align:middle;margin-bottom:0px;" type="text" name="<%=name %>" value="<%=value %>" ></td>
             </tr>
             <%
                 }
             else{
             %>
             <tr>
-                <th style="vertical-align:middle;" scope="row"><a target="_blank" href="javascriptPreview.jsp?snippet=<%=con.getProperty(param + ".idHelpSnippet")%>"><%=param %></a></th>
-                <td><input style="vertical-align:middle;margin-bottom:0px;" type="text" name="<%=param %>" value="<%=value %>" ></td>
+                <th style="vertical-align:middle;" scope="row"><a target="_blank" href="javascriptPreview.jsp?snippet=<%=helpSnippetId%>"><%=label %></a></th>
+                <td><input style="vertical-align:middle;margin-bottom:0px;" type="text" name="<%=name %>" value="<%=value %>" ></td>
             </tr>
             <%
                 }

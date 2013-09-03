@@ -3,7 +3,6 @@
 <%@page import="com.ibm.sbt.playground.assets.AssetNode"%>
 <%@page import="com.ibm.sbt.playground.assets.RootNode"%>
 <%@page import="com.ibm.sbt.playground.assets.jssnippets.JSSnippet"%>
-<%@page import="java.util.List"%>
 <%@page import="javax.servlet.http.HttpServletRequest"%>
 <%@page import="com.ibm.commons.util.StringUtil"%>
 <%@page import="com.ibm.commons.runtime.util.ParameterProcessor"%>
@@ -21,12 +20,22 @@
       String css = null;
       String theme = request.getParameter("themeId");
       boolean debug = false;
-      boolean debugTransport = false;
       boolean loadDojo = true;
       final HttpServletRequest finalRequest = request;
+      final HttpSession finalSession = session;
+      final String finalSnippetName = snippetName;
       ParameterProvider parameterProvider = ParameterProcessor.getDefaultProvider(new ParameterProvider() {
           public String getParameter(String name) {
-              return finalRequest.getParameter(name);
+              String value = finalRequest.getParameter(name);
+              String storeKey = finalSnippetName + "_" + name; // store per snippet
+              if(value != null){
+                  finalSession.setAttribute(storeKey, value); //store non-empty params provided by url
+              }
+              
+              if(value == null){
+                  value = (String) finalSession.getAttribute(storeKey); //check if there is a stored param
+              }
+              return value;
           }
       });
       // doGet
@@ -42,31 +51,17 @@
               if(StringUtil.isEmpty(theme))
                   theme = snippet.getTheme();
           
-              // replace substitution variables
-              boolean allParamsFound = true;
-              List<String> parameters = ParameterProcessor.getParametersQueryString(js + html);
-              String queryParams = "";
-              for(String param : parameters){
-                  String match = parameterProvider.getParameter(param);
-                  queryParams+=param+"="+match+"&";
-                  if(match == null)
-                      allParamsFound=false;
-              }
-              if(!allParamsFound){
-                  String callbackUrl = URLEncoder.encode(request.getRequestURI()+"?" + request.getQueryString(), "UTF-8");
-                  response.sendRedirect("paramsForm.jsp?callback=" + callbackUrl + "&" + queryParams);
-              }
               if (StringUtil.isNotEmpty(js)) {
-          		js = ParameterProcessor.process(js, parameterProvider);
+                js = ParameterProcessor.process(js, parameterProvider);
               }
               if (StringUtil.isNotEmpty(html)) {
-          		html = ParameterProcessor.process(html, parameterProvider);
+                html = ParameterProcessor.process(html, parameterProvider);
               }
           }
       } 
       // doPost
       else if (request.getMethod().equals("POST")){
-    	  JSSnippet snippet = null;
+          JSSnippet snippet = null;
           if (StringUtil.isEmpty(theme)){
               snippet = (JSSnippet)SnippetFactory.getJsSnippet(application, request, snippetName);
               theme = snippet.getTheme();
@@ -83,19 +78,18 @@
           loadDojo = Boolean.parseBoolean(request.getParameter("loadDojo"));
       }
       debug = Boolean.parseBoolean(request.getParameter("debug"));
-      debugTransport = Boolean.parseBoolean(request.getParameter("debugTransport"));
   %>
   <head>
     <meta charset="utf-8">
     <title>Social Business Toolkit - JavaScript Preview</title>
     <script type="text/javascript">
       window.onerror = function(msg, url, linenumber) {
-    	var d =  document.createElement('div');
-    	d.innerHTML += 'Unhandled error: '+msg+'\n in page: '+url+'\nat: '+linenumber;
-    	document.getElementById('_jsErrors').appendChild(d);
-		return true;
+        var d =  document.createElement('div');
+        d.innerHTML += 'Unhandled error: '+msg+'\n in page: '+url+'\nat: '+linenumber;
+        document.getElementById('_jsErrors').appendChild(d);
+        return true;
       }
-	</script>
+    </script>
     <link href="images/sbt.png" rel="shortcut icon">
     <%
     String[] styleHrefs = Util.getStyles(request, theme);
@@ -136,11 +130,5 @@
         out.println("<div>Error, unable to load snippet: "+snippetName+"</div>");
     }
     %>
-    <%if(debugTransport){%>
-        <hr/>
-		<pre>
-			<div id="mockData" class="alert"></div>
-		</pre>
-    <%}%>
   </body>
 </html>

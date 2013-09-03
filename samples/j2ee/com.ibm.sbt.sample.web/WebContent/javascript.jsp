@@ -32,11 +32,11 @@
 
     <!-- main content starts -->
     <div class="container-fluid">
-		<div class="row-fluid">
-			<div id="treeOutline" class="span3">
-				<%@include file="includes/outline.jsp"%>
-			</div>
-			<div class="span8">
+        <div class="row-fluid">
+            <div id="treeOutline" class="span3">
+                <%@include file="includes/outline.jsp"%>
+            </div>
+            <div class="span8">
                 <div>
                     <ul class="nav nav-tabs">
                         <li class="active">
@@ -51,20 +51,23 @@
                         <li>
                             <a href="#">Documentation</a>
                         </li>
+                        <li id="propertyTab">
+                            <a href="#">Properties</a>
+                        </li>
                     </ul>
                     <div id="snippetContainer" style="border-style:solid;border-width:1px;width=500px;height:300px;border-color:#D3D3D3;overflow:auto;">
                         <%@include file="includes/js_snippet.jsp"%>
                     </div>
                 </div>
-				
-				<div><hr/></div>
+                
+                <div><hr/></div>
                 <div id="demoContainer">
                     <%@include file="includes/js_runner.jsp"%>
                 </div>
-				
-			</div>
-		</div>
-	</div>
+                
+            </div>
+        </div>
+    </div>
     <script src="/sbt.jquery182/js/jquery-1.8.2.min.js"></script>
     <script src="js/js_jquery/jqueryNavbar.js"></script>
     <script src="js/js_jquery/jqueryAjax.js"></script>

@@ -90,6 +90,10 @@
             var docDiv = $("#docContents");
             docDiv.showSnippetDivContents(); 
             break;
+        case "PROPERTIES":
+            var propertyDiv = $("#propertyContents");
+            propertyDiv.showSnippetDivContents(); 
+            break;
         default: 
             console.log($li.text().trim().toUpperCase());
             break;

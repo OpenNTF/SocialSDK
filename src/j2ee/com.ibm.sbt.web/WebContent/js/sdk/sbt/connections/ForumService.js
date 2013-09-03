@@ -632,6 +632,10 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
      * @namespace sbt.connections
      */
     var ForumService = declare(BaseService, {
+        
+        defaultContextRootMap: {
+            forums: "forums"
+        },
 
         /**
          * Constructor for ForumsService

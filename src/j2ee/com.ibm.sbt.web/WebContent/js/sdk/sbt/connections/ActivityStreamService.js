@@ -156,6 +156,11 @@ define([ "../declare", "../lang", "../stringUtil", "../config", "../Promise", ".
      * @namespace sbt.connections
      */
     var ActivityStreamService = declare(BaseService, {
+
+        defaultContextRootMap: {
+            connections: "connections"
+        },
+        
         /**
          * Constructor for ActivityStreamService
          * 

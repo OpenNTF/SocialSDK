@@ -139,6 +139,11 @@ public class ApplicationEndpoint implements Endpoint {
     }
     
     @Override
+    public Map<String, String> getServiceMappings() {
+        return null;
+    }
+    
+    @Override
 	public String getAuthType() {
     	return "application";
     }

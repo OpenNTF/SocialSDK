@@ -703,6 +703,10 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 	 */
 	var FileService = declare(BaseService, {
 
+	    defaultContextRootMap: {
+            files: "files"
+        },
+	    
 		/**
 		 * Constructor for FileService
 		 * 

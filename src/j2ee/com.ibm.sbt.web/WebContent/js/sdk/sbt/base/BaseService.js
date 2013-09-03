@@ -86,6 +86,16 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
             if (!url) {
                 throw new Error("BaseService.constructUrl: Invalid argument, url is undefined or null.");
             }
+            
+            var serviceMappings = this.endpoint.serviceMappings;
+            urlParams = {};
+            if(!util.isEmptyObject(serviceMappings)){
+                lang.mixin(urlParams, serviceMappings);
+            }
+            else{
+                lang.mixin(urlParams, this.defaultContextRootMap);
+            }
+            
             if (urlParams) {
                 url = stringUtil.replace(url, urlParams);
                 
@@ -120,6 +130,7 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
          * @returns {sbt/Promise}
          */
         getEntities : function(url,options,callbacks) {
+            url = this.constructUrl(url);
             var self = this;
             var promise = new Promise();
             this.request(url,options,null,promise).response.then(

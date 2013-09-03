@@ -57,17 +57,17 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
 		/**
          * Search for content in all of the activities, both completed and active, that matches a specific criteria.
          */
-        AtomActivitiesEverything : "/activities/service/atom2/everything",
+        AtomActivitiesEverything : "/{activities}service/atom2/everything",
         
         /**
          * Get a feed of all active activities that match a specific criteria.
          */
-        AtomActivitiesMy : "activities/service/atom2/activities",
+        AtomActivitiesMy : "/{activities}service/atom2/activities",
 
         /**
          * Search for a set of completed activities that match a specific criteria.
          */
-        AtomActivitiesCompleted : "activities/service/atom2/completed",
+        AtomActivitiesCompleted : "/{activities}service/atom2/completed",
 
     });
 });

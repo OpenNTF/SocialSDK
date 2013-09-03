@@ -824,6 +824,10 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
      * @namespace sbt.connections
      */
     var CommunityService = declare(BaseService, {
+        
+        defaultContextRootMap: {
+            communities: "communities"
+        },
     	
     	forumService : null,
 

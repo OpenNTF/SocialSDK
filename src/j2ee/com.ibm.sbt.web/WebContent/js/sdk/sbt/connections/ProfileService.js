@@ -474,6 +474,10 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
      */
     var ProfileService = declare(BaseService, {
 
+        defaultContextRootMap: {
+            profiles: "profiles"
+        },
+        
         /**
          * 
          * @constructor

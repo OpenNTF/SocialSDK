@@ -26,7 +26,7 @@ import com.ibm.commons.util.StringUtil;
  */
 public enum FileServiceURIBuilder {
 
-    FILES("/files"),
+    FILES("/{files}"),
     
     GET_SERVICE_DOCUMENT("files/{auth-type}{access-type}/introspection"),
     

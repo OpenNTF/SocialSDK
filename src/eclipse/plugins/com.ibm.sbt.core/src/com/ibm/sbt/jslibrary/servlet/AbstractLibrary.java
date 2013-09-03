@@ -24,13 +24,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
-
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.util.PathUtil;
 import com.ibm.commons.util.StringUtil;
@@ -89,6 +86,7 @@ abstract public class AbstractLibrary {
 	public static final String		PROP_AUTHENTICATION_ERROR_CODE	= "authenticationErrorCode";
 	public static final String		PROP_ENDPOINT_ALIAS	            = "name";
 	public static final String		PROP_PLATFORM    	            = "platform";
+	public static final String      PROP_SERVICE_MAPPINGS           = "serviceMappings";
 
 	public static final String		PROP_MODULE_PREFIX				= "_module";
 	public static final String		PROP_MODULE_AUTHENTICATOR		= "_moduleAuthenticator";
@@ -342,6 +340,8 @@ abstract public class AbstractLibrary {
 			} catch (ClientServicesException e) {
 				jsonEndpoint.putJsonProperty(IS_AUTHENTICATED, false);
 			}
+			
+			jsonEndpoint.putJsonProperty(PROP_SERVICE_MAPPINGS, endpoint.getServiceMappings());
 
 			// configure endpoint to use proxy
 			if (useProxy(endpoint)) {

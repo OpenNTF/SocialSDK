@@ -250,6 +250,10 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
      */
     var ActivitiesService = declare(BaseService, {
 
+        defaultContextRootMap: {
+            activities: "activities"
+        },
+        
         /**
          * Constructor for ActivitiesService
          * 

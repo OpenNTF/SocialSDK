@@ -16,17 +16,14 @@
 package com.ibm.sbt.services.endpoints;
 
 import java.util.Map;
-import java.util.Set;
-
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.DefaultHttpClient;
-
 import com.ibm.sbt.security.authentication.AuthenticationException;
 import com.ibm.sbt.services.client.ClientService;
-import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.ClientService.Args;
 import com.ibm.sbt.services.client.ClientService.Handler;
 import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.endpoints.js.JSReference;
 import com.ibm.sbt.util.SBTException;
 
@@ -133,6 +130,12 @@ public interface Endpoint {
      * @return
      */
     public String getApiVersion();
+    
+    /**
+     * Get map, used to map default service urls to custom urls. e.g. /files to /myfiles
+     * @return
+     */
+    public Map<String, String> getServiceMappings();
     
     /**
      * Get platform for the endpoint

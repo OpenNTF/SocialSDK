@@ -18,9 +18,7 @@ package com.ibm.sbt.services.endpoints;
 
 import java.io.IOException;
 import java.net.URLEncoder;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.apache.http.HttpException;
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpRequestInterceptor;
@@ -32,13 +30,11 @@ import org.apache.http.impl.auth.BasicSchemeFactory;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.protocol.HttpContext;
-
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.util.UrlUtil;
 import com.ibm.commons.util.PathUtil;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.security.authentication.AuthenticationException;
-import com.ibm.sbt.security.authentication.password.PasswordException;
 import com.ibm.sbt.security.authentication.password.consumer.UserPassword;
 import com.ibm.sbt.security.credential.store.CredentialStore;
 import com.ibm.sbt.security.credential.store.CredentialStoreException;

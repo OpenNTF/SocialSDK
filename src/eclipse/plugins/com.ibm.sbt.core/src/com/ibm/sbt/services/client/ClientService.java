@@ -29,13 +29,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.zip.GZIPInputStream;
-
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
@@ -51,9 +50,9 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.w3c.dom.Node;
-
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.NoAccessSignal;
+import com.ibm.commons.runtime.util.UrlUtil;
 import com.ibm.commons.util.FastStringBuffer;
 import com.ibm.commons.util.PathUtil;
 import com.ibm.commons.util.StringUtil;
@@ -74,8 +73,6 @@ import com.ibm.sbt.service.debug.ProxyDebugUtil;
 import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
 import com.ibm.sbt.services.util.SSLUtil;
-import com.ibm.sbt.util.SBTException;
-import com.ibm.commons.runtime.util.UrlUtil;
 
 /**
  * Base class for a REST service client.
@@ -1131,8 +1128,26 @@ public abstract class ClientService {
 	protected String getUrlPath(Args args) {
 		String baseUrl = getBaseUrl();
 		String serviceUrl = args.getServiceUrl();
+		serviceUrl = substituteServiceMapping(serviceUrl);
 		return PathUtil.concat(baseUrl, serviceUrl, '/');
 	}
+	
+	protected String substituteServiceMapping(String url){
+        String regex = "\\{(.*?)\\}";
+        
+        Pattern paramsPattern = Pattern.compile(regex);
+        Matcher paramsMatcher = paramsPattern.matcher(url);
+        
+        while(paramsMatcher.find()){
+            String subOut = paramsMatcher.group(1);
+            String subIn = this.endpoint.getServiceMappings().get(subOut);
+            if(subIn != null){
+                return url.replaceFirst("\\{" + subOut + "\\}", subIn);
+            }
+        }
+        
+        return url.replace("{", "").replace("}", "");
+    }
 
 	protected void addUrlParts(StringBuilder b, Args args) throws ClientServicesException {
 	}

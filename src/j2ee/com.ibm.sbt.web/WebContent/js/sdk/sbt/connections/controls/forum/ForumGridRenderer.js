@@ -16,11 +16,19 @@
 
 define(["../../../declare",
         "../ConnectionsGridRenderer",
+        "../../../i18n",
         "../../../text!./templates/ForumRow.html",
         "../../../text!./templates/TableHeader.html",
+        "../../../text!./templates/TopicRow.html",
+        "../../../text!./templates/TopicHeader.html",
+        "../../../text!./templates/ReplyRow.html",
+        "../../../text!./templates/ReplyHeader.html",
+        "../../../text!./templates/ReplyBreadCrumb.html",
+        "../../../text!./templates/TopicBreadCrumb.html",
         "../../../i18n!./nls/ForumGridRenderer"], 
 
-    function(declare, ConnectionsGridRenderer, ForumRow, tableHeader,nls){
+    function(declare, ConnectionsGridRenderer, i18n, ForumRow, tableHeader, TopicRow, 
+    		TopicHeader, ReplyTemplate, ReplyHeader,ReplyBreadCrumb,TopicBreadCrumb, nls){
 		
 		/**
 		 * @class ForumGridRenderer
@@ -32,7 +40,25 @@ define(["../../../declare",
 	    	/**Strings used by the forum grid */
 	    	_nls:nls,
 	    	
+	    	topicTemplate: TopicRow,
+	    	
+	    	topicHeader: TopicHeader,
+	    	
+	    	replyTemplate: ReplyTemplate,
+	    	
+	    	replyHeader: ReplyHeader,
+	    	
+	    	forumTemplate: ForumRow,
+	    	
+	    	forumHeader: tableHeader,
+	    	
 	    	headerTemplate: tableHeader,
+	    	
+	    	replyBreadCrumb: ReplyBreadCrumb,
+	    	
+	    	topicBreadCrumb: TopicBreadCrumb,
+	    	
+	    	breadCrumb: ReplyBreadCrumb,
 	    	
 	    	/**
 	    	 * The constructor function
@@ -40,7 +66,14 @@ define(["../../../declare",
 	    	 * @param args
 	    	 */
 	    	constructor: function(args){
-	    		this.template = ForumRow;
+	    		
+	    		if(args.type=="myTopics"){
+	    			this.template = this.topicTemplate;
+	    			this.headerTemplate = this.topicHeader;
+	    		}else{
+	    			this.template = this.forumTemplate;
+	    		}
+	    		
 	    	},
 	    	
 	    	/**
@@ -63,6 +96,8 @@ define(["../../../declare",
 	              this.renderPager(grid, el, items, data);
 	              
 	              var tbody = this.renderTable(grid, el, items, data);
+	              
+	              this.renderBreadCrumb(grid, el, items, data, tbody);
 	              
 	              this.renderHeader(grid, el, items, data, tbody);
 	              
@@ -96,7 +131,21 @@ define(["../../../declare",
 	                this._doAttachEvents(grid, tbody, data);
 	            }
 	        },
-
+	        
+	        renderBreadCrumb: function(grid,el,items,data,tbody) {
+	            if (this.breadCrumb && !grid.hideBreadCrumb) {
+	                var node;
+	                if (this._isString(this.breadCrumb)) {
+	                    var domStr = this._substituteItems(this.breadCrumb, grid, this, items, data);
+	                    node = this._toDom(domStr, el.ownerDocument);
+	                } else {
+	                    node = this.breadCrumb.cloneNode(true);
+	                }
+	                tbody.appendChild(node);
+	                
+	                this._doAttachEvents(grid, tbody, data);
+	            }
+	        },
 	    	 /***
 	         * Creates a table and table body, Attaches the table body to the 
 	         * table, and returns the table body
@@ -121,6 +170,51 @@ define(["../../../declare",
 	        },
 	        
 	        /**
+	         * Creates a Div, with a different CSS class, to display a grid that has no results
+	         * @method - renderEmpty
+	         * @param - grid - The Grid
+	         * @param - el - The Current Element
+	         */
+	        renderEmpty: function(grid, el,data) {
+	           while (el.childNodes[0]) {
+	               this._destroy(el.childNodes[0]);
+	           }
+	           var ediv = this._create("div", {
+	             "class": this.emptyClass,
+	             innerHTML: "<h2>" + this.nls.noResults +"</h2>",
+	             role: "document",
+	             tabIndex: 0,
+	           }, el, "only");
+	           
+	           var backButton = this._create("input",{
+	        	   type:"button",
+	        	   "class":"lotusBtn",
+	        	   value:this.nls.back,
+	        	   "data-dojo-attach-event": "onclick: previousPage",
+	        	   role: "button",
+	        	   tabindex: "0",
+	           },el,"only");
+	           
+	           this._doAttachEvents(grid, el,data);
+	           
+	           console.log("a");
+	        },
+	        
+	        
+	        getDateLabel: function(grid, item, i, items){
+	             var result = i18n.getUpdatedLabel(item.getValue('updated'));
+	             return result;
+	        },
+	        
+	        getParentLink: function(grid, item, i, items){
+	        	
+	        	if(grid.params.type == "myTopics"){
+	        		return item.getValue("topicForumTitle");
+	        	}
+	        	return '<a class="lotusBreakWord" href="#" data-dojo-attach-event="onclick: previousPage" >'+item.getValue("topicForumTitle")+'</a>';
+	        },
+	         
+	        /**
 	          * Displays a tooltip by calling the getTooltip function in the ForumAction class
 	          * @method tooltip
 	          * @param grid The Grid element
@@ -133,7 +227,7 @@ define(["../../../declare",
 	             if (grid.forumAction) {
 	                 return grid.forumAction.getTooltip(item);
 	             }
-	         }
+	         },
 	    	
 	    });
 	

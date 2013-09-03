@@ -58,7 +58,7 @@ define(["../../../declare", "../../../lang", "../../../config",
         
         getProfile: function(id) {
         	var self = this;
-            var promise = this._getProfileService().getProfileByGUID(id);
+            var promise = this._getProfileService().getProfile(id);
             promise.then(    
                 function(profile) {
                 	self.profile = profile;

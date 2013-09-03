@@ -41,7 +41,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 	public final void testGetContactByGUID() throws SBTServiceException {
 		ProfileService profileService = new ProfileService("smartcloud");
 		authenticateEndpoint(profileService.getEndpoint(), TEST_EMAIL, TEST_PASSWORD);
-		Profile profile = profileService.getContactByGUID(TEST_GUID);
+		Profile profile = profileService.getContact(TEST_GUID);
 		assertNotNull(profile);
 		assertNotNull(profile.getDisplayName());
 		assertNotNull(profile.getAboutMe());

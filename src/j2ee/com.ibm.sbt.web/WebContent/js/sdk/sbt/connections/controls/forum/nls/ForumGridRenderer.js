@@ -18,9 +18,17 @@
 define({
     root: {
     	forums: "Forums",
+    	forum: "Forum",
     	threads: "Topics/Messages",
     	latestPost: "Latest Post",
     	goToForum: "Go To The Forum",
-    	viewProfile: "View Profile"
+    	viewProfile: "View Profile",
+    	replies: "Replies",
+    	topics: "Topic",
+    	topic: "Topic",
+    	author: "Author",
+    	date: "Date",
+    	back:"Back",
+    	noResults: "There are no results"
     }
 });

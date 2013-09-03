@@ -89,14 +89,12 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
             
             var serviceMappings = this.endpoint.serviceMappings;
             urlParams = {};
+            lang.mixin(urlParams, this.defaultContextRootMap);
             if(!util.isEmptyObject(serviceMappings)){
                 lang.mixin(urlParams, serviceMappings);
             }
-            else{
-                lang.mixin(urlParams, this.defaultContextRootMap);
-            }
             
-            if (urlParams) {
+            if (urlParams && !util.isEmptyObject(urlParams)) {
                 url = stringUtil.replace(url, urlParams);
                 
                 if (url.indexOf("//") != -1) {

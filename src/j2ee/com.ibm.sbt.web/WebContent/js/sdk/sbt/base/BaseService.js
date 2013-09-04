@@ -51,6 +51,18 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
          * Regular expression used to remove // from url's
          */
         _regExp : new RegExp("/{2}"),
+        
+        defaultContextRootMap: {
+            activities: "activities",
+            blogs: "blogs",
+            communities: "communities",
+            connections: "connections",
+            dogear: "dogear",
+            files: "files",
+            forums: "forums",
+            profiles: "profiles",
+            search: "search"
+        },
 
         /**
          * Constructor for BaseService

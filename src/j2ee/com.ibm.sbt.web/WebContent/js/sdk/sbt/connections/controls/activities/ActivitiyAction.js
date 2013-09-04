@@ -18,11 +18,11 @@ define([ "../../../declare", "../../../controls/grid/GridAction"],
         function(declare, GridAction) {
 
     /**
-     * @class ActivitiesGridAction
+     * @class ActivityAction
      * @namespace sbt.connections.controls.activities
-     * @module sbt.connections.controls.activities.ActivitiesGridAction
+     * @module sbt.connections.controls.activities.ActivityAction
      */
-    var ActivitiesGridAction = declare(GridAction, {
+    var ActivityGridAction = declare(GridAction, {
        
     	
         /**ForumAction Constructor function
@@ -57,5 +57,5 @@ define([ "../../../declare", "../../../controls/grid/GridAction"],
 
     });
 
-    return ActivitiesGridAction;
+    return ActivityGridAction;
 });

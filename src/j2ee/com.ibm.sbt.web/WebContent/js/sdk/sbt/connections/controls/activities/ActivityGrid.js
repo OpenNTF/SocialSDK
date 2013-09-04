@@ -20,11 +20,11 @@
 define([ "../../../declare",
          "../../../controls/grid/Grid",
          "../../../store/parameter",
-         "./ActivitiesGridRenderer",
-         "./ActivitiesGridAction",
+         "./ActivityGridRenderer",
+         "./ActivityAction",
          "../../../connections/ActivityConstants"], 
 
-function(declare, Grid, parameter, ActivitiesGridRenderer, ActivitiesGridAction, consts) {
+function(declare, Grid, parameter, ActivitiesGridRenderer, ActivityAction, consts) {
 	
 	/**Sorting Values*/
 	var sortVals = {
@@ -42,11 +42,11 @@ function(declare, Grid, parameter, ActivitiesGridRenderer, ActivitiesGridAction,
 	};
 	
 	/**
-     * @class ActivitiesGrid
+     * @class ActivityGrid
      * @namespace  sbt.connections.controls.activities
-     * @module sbt.connections.controls.activities.ActivitiesGrid
+     * @module sbt.connections.controls.activities.ActivityGrid
      */
-	var ActivitiesGrid = declare(Grid,{
+	var ActivityGrid = declare(Grid,{
 
 		options : {
 	            "my" : {
@@ -66,7 +66,7 @@ function(declare, Grid, parameter, ActivitiesGridRenderer, ActivitiesGridAction,
 		defaultOption: "my", 
 		
 		/**class to handle on click and tooltip actions  */
-		activitiesAction : new ActivitiesGridAction(),
+		activityAction : new ActivityAction(),
 		
 		/**
 		 * ActivitiesGrid Constructor
@@ -155,9 +155,9 @@ function(declare, Grid, parameter, ActivitiesGridRenderer, ActivitiesGridAction,
 		 * @param ev the event
 		 */
 		handleClick: function(el, data, ev) {
-	        if (this.activitiesAction) {
+	        if (this.activityAction) {
 	           this._stopEvent(ev);
-	           this.activitiesAction.execute(data, this , ev);
+	           this.activityAction.execute(data, this , ev);
 	        }
 	    },
 		 
@@ -174,5 +174,5 @@ function(declare, Grid, parameter, ActivitiesGridRenderer, ActivitiesGridAction,
 				
 	});
 	
-	return ActivitiesGrid;
+	return ActivityGrid;
 });

@@ -1,6 +1,6 @@
-require(["sbt/dom", "sbt/connections/controls/activities/ActivitiesGrid"], function(dom, ActivitiesGrid) {
+require(["sbt/dom", "sbt/connections/controls/activities/ActivityGrid"], function(dom, ActivityGrid) {
     
-	var grid = new ActivitiesGrid({
+	var grid = new ActivityGrid({
 		type: "my"
 	});
 

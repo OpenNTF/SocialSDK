@@ -18,16 +18,16 @@ define(["../../../declare",
         "../ConnectionsGridRenderer",
         "../../../i18n",
         "../../../text!./templates/ActivityRow.html",
-        "../../../i18n!./nls/ActivitiesGridRenderer"], 
+        "../../../i18n!./nls/ActivityGridRenderer"], 
 
     function(declare, ConnectionsGridRenderer, i18n, ActivityRow, nls){
 		
 		/**
-		 * @class ActivitiesGridRenderer
+		 * @class ActivityGridRenderer
 		 * @namespace sbt.connections.controls.activities
-		 * @module sbt.connections.controls.forum.ActivitiesGridRenderer
+		 * @module sbt.connections.controls.forum.ActivityGridRenderer
 		 */
-	    var ActivitiesGridRenderer = declare(ConnectionsGridRenderer,{
+	    var ActivityGridRenderer = declare(ConnectionsGridRenderer,{
 	    	
 	    	/**Strings used by the forum grid */
 	    	_nls:nls,
@@ -58,5 +58,5 @@ define(["../../../declare",
 	    	
 	    });
 	
-	return ActivitiesGridRenderer;
+	return ActivityGridRenderer;
 });

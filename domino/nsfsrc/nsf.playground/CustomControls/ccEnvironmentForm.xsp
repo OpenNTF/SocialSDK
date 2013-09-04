@@ -1,55 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
 	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<style>
+		.EnvDialog .lotusFormTable { width: 98%; height: 100%; overflow-y: scroll; }
+		.EnvDialog .lotusDialog .lotusDialogContent { overflow-x: hidden; overflow-y: auto; }
+	</style>
 	<xe:formTable id="formTable1" formTitle="Environment"
-		formDescription="Enter here the data for your environment" labelWidth="12em">
+		formDescription="Enter here the data for your environment" labelWidth="12em" style="width: 100%; height: 100%">
 		<xp:this.facets>
-			<xp:panel xp:key="footer" id="panel3">
-				<xp:panel id="panel2" loaded="${javascript:!compositeData.editbean}">
-					<xp:button value="Save" id="button1"
-						loaded="${javascript:userBean.canCreateDocs}">
-						<xp:eventHandler event="onclick" submit="true"
-							refreshMode="complete">
-							<xp:this.action>
-								<xp:actionGroup>
-									<xp:saveDocument var="document1"></xp:saveDocument>
-									<xp:executeScript script="#{javascript:dataAccess.clearCache()}">
-									</xp:executeScript>
-									<xe:changeDynamicContentAction
-										facetName="view">
-									</xe:changeDynamicContentAction>
-								</xp:actionGroup>
-							</xp:this.action>
-						</xp:eventHandler>
-					</xp:button>
-					<xp:button value="Cancel" id="button2">
-						<xp:eventHandler event="onclick" submit="true"
-							refreshMode="complete" immediate="true" save="false">
-							<xp:this.action>
-								<xe:changeDynamicContentAction
-									facetName="view">
-								</xe:changeDynamicContentAction>
-							</xp:this.action>
-						</xp:eventHandler>
-					</xp:button>
-				</xp:panel>
-				<xp:panel id="panel1" loaded="${javascript:compositeData.editbean}">
-					<xp:button value="Save" id="button4">
-						<xp:eventHandler event="onclick" submit="true"
-							refreshMode="complete">
-							<xp:this.action><![CDATA[#{javascript:var env = dataAccess.getCustomEnvironment();
-dataAccess.readEnvironment(env,document1.getDocument(true));
-var dlg = getComponent('customEnvDialog')
-dlg.hide();}]]></xp:this.action>
-						</xp:eventHandler>
-					</xp:button>
-					<xp:button value="Cancel" id="button6">
-						<xp:eventHandler event="onclick" submit="false">
-							<xp:this.script><![CDATA[XSP.closeDialog('#{id:customEnvDialog}')]]></xp:this.script>
-						</xp:eventHandler>
-					</xp:button>
-				</xp:panel>
-			</xp:panel>
 			<xp:panel xp:key="header" id="panel4"
 				loaded="${javascript:userBean.canCreateDocs}">
 				<xp:inputText id="inputText20" style="display:none">
@@ -84,8 +42,8 @@ dataAccess.copyEnvironment(document1,v);
 			loaded="${javascript:!compositeData.editbean}">
 			<xp:inputRichText id="inputRichText1" value="#{document1.Description}"></xp:inputRichText>
 		</xe:formRow>
-		<xe:formRow id="formRow3" label="Runtime Platforms:"
-			loaded="${javascript:!compositeData.editbean}">
+		
+		<xe:formRow id="formRow3" label="Runtime Platforms:">
 			<xe:djextListTextBox
 				id="djRuntimePlatforms" multipleSeparator=","
 				multipleTrim="true" 
@@ -109,7 +67,7 @@ dataAccess.copyEnvironment(document1,v);
 				tabPosition="left-h" doLayout="false">
 				<xe:djTabPane id="djTabPane2" title="Properties">
 					<xp:inputTextarea id="inputTextarea1" value="#{document1.Properties}"
-						cols="100" rows="25" style="font-family:Courier New">
+						rows="15" style="font-family:Courier New; width: 100%">
 					</xp:inputTextarea>
 				</xe:djTabPane>
 				<xp:repeat id="repeat3" rows="30" repeatControls="true"
@@ -118,7 +76,7 @@ dataAccess.copyEnvironment(document1,v);
 						title="${javascript:cat.getLabel()}">
 						<xe:this.rendered><![CDATA[#{javascript:var p = getComponent('djRuntimePlatforms').getValueAsString();
 return !p || p.contains(cat.getRuntimePlatform())}]]></xe:this.rendered>
-						<xe:formTable labelWidth="17em"
+						<xe:formTable labelWidth="14em"
 							style="margin-left: 8px">
 							<xp:repeat id="repeat4" rows="30"
 								repeatControls="true" value="#{javascript:cat.getProperties()}"

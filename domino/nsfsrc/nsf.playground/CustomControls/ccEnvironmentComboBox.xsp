@@ -18,8 +18,9 @@
 			refreshMode="partial" refreshId="PlaceBarActions">
 			<xp:this.action><![CDATA[#{javascript:var e = sessionScope.environment
 if(e==dataAccess.CUSTOM) {
-	var dlgId = getClientId("customEnvDialog")
-	view.postScript("setTimeout('XSP.openDialog(\\'"+dlgId+"\\')');");
+	context.reloadPage()
+	//var dlgId = getClientId("customEnvDialog")
+	//view.postScript("setTimeout('XSP.openDialog(\\'"+dlgId+"\\')');");
 } else {
 	context.reloadPage()
 }}]]></xp:this.action>

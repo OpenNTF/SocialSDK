@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
-	xmlns:xc="http://www.ibm.com/xsp/custom"
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
 	xmlns:xe="http://www.ibm.com/xsp/coreex">
 	<xp:this.resources>
 		<xp:dojoModule name="extlib.dijit.Picker"></xp:dojoModule>
 		<xp:dojoModule name="extlib.dijit.OneUIPickerList"></xp:dojoModule>
 		<xp:dojoModule name="extlib.dijit.OneUIDialog"></xp:dojoModule>
-		<xp:dojoModule name="ibm.xsp.widget.layout.xspCKEditor"></xp:dojoModule>		
+		<xp:dojoModule name="ibm.xsp.widget.layout.xspCKEditor"></xp:dojoModule>
 	</xp:this.resources>
 	<xc:ccManagePageResources></xc:ccManagePageResources>
 	<xc:ccLayout navigationPath="/Manage/Environments">
@@ -21,22 +20,18 @@
 				<xp:this.facets>
 					<xp:panel xp:key="view" id="panel1">
 						<xc:ccNoAccessUser></xc:ccNoAccessUser>
-						<xp:panel style="padding: 0px 5px 0px 5px;"
-							loaded="${javascript:userBean.canCreateDocs}">
-							<xp:button value="New Environment"
-								id="button3">
-								<xp:eventHandler event="onclick"
-									submit="false" id="eventHandler1">
+						<xp:panel style="padding: 0px 5px 0px 5px;" loaded="${javascript:userBean.canCreateDocs}">
+							<xp:button value="New Environment" id="button3">
+								<xp:eventHandler event="onclick" submit="false"
+									id="eventHandler1">
 									<xp:this.script><![CDATA[XSP.showContent("#{id:dynp}","form")]]></xp:this.script>
 								</xp:eventHandler>
 							</xp:button>
-							<xp:button
-								value="Delete Selected Environments" id="button4">
-								<xp:eventHandler event="onclick"
-									submit="true" id="eventHandler2" refreshMode="partial">
+							<xp:button value="Delete Selected Environments" id="button4">
+								<xp:eventHandler event="onclick" submit="true"
+									id="eventHandler2" refreshMode="partial">
 									<xp:this.action>
-										<xp:deleteSelectedDocuments
-											view="dataView1"
+										<xp:deleteSelectedDocuments view="dataView1"
 											message="This operation cannot be undone. Do you want to continue?">
 										</xp:deleteSelectedDocuments>
 									</xp:this.action>
@@ -47,28 +42,25 @@
 
 						<xe:dataView id="dataView1" var="viewEntry"
 							collapsibleCategory="true" collapsibleRows="true" rows="500"
-							showCheckbox="${javascript:userBean.canCreateDocs}"
-							style="margin-left: 25px" collapsibleDetail="false"
-							expandedDetail="true">
+							showCheckbox="${javascript:userBean.canCreateDocs}" style="margin-left: 25px"
+							collapsibleDetail="false" expandedDetail="true">
 							<xe:this.data>
-								<xp:dominoView var="view1"
-									viewName="AllEnvironments">
+								<xp:dominoView var="view1" viewName="AllEnvironments">
 								</xp:dominoView>
 							</xe:this.data>
 							<xp:this.facets>
-								<xp:pager layout="Previous Group Next"
-									id="pager2" xp:key="pagerTopRight" partialRefresh="true"
-									partialExecute="true">
+								<xp:pager layout="Previous Group Next" id="pager2"
+									xp:key="pagerTopRight" partialRefresh="true" partialExecute="true">
 								</xp:pager>
 								<xp:panel xp:key="detail" id="pager1">
-									<xe:listInline id="listInline2" loaded="${javascript:userBean.canCreateDocs}">
-									<xp:text escape="true" id="computedField1" value="#{viewEntry.Runtimes}">
-									</xp:text>
-										<xp:link escape="true"
-											text="Duplicate the environment" id="link1"
-											style="margin-left:10.0px">
-											<xp:eventHandler
-												event="onclick" submit="true" refreshMode="complete">
+									<xe:listInline id="listInline2"
+										loaded="${javascript:userBean.canCreateDocs}">
+										<xp:text escape="true" id="computedField1" value="#{viewEntry.Runtimes}">
+										</xp:text>
+										<xp:link escape="true" text="Duplicate the environment"
+											id="link1" style="margin-left:10.0px">
+											<xp:eventHandler event="onclick" submit="true"
+												refreshMode="complete">
 												<xp:this.action><![CDATA[#{javascript:dataAccess.duplicateEnvironment(viewEntry.getNoteID());}]]></xp:this.action>
 											</xp:eventHandler>
 										</xp:link>
@@ -76,8 +68,7 @@
 								</xp:panel>
 							</xp:this.facets>
 							<xe:this.summaryColumn>
-								<xe:viewSummaryColumn
-									columnName="Name">
+								<xe:viewSummaryColumn columnName="Name">
 									<xe:this.href><![CDATA[javascript:XSP.showContent("#{id:dynp}","form",{action:'editDocument',documentId:'#{javascript:viewEntry.getNoteID()}'})]]></xe:this.href>
 								</xe:viewSummaryColumn>
 							</xe:this.summaryColumn>
@@ -86,11 +77,38 @@
 
 					<xp:panel xp:key="form" id="panel2">
 						<xp:this.data>
-							<xp:dominoDocument var="document1"
-								formName="Environment">
+							<xp:dominoDocument var="document1" formName="Environment">
 							</xp:dominoDocument>
 						</xp:this.data>
 						<xc:ccEnvironmentForm></xc:ccEnvironmentForm>
+						<xp:panel id="panel3" loaded="${javascript:!compositeData.editbean}">
+							<xp:button value="Save" id="button1"
+								loaded="${javascript:userBean.canCreateDocs}">
+								<xp:eventHandler event="onclick" submit="true"
+									refreshMode="complete">
+									<xp:this.action>
+										<xp:actionGroup>
+											<xp:saveDocument var="document1"></xp:saveDocument>
+											<xp:executeScript script="#{javascript:dataAccess.clearCache()}">
+											</xp:executeScript>
+											<xe:changeDynamicContentAction
+												facetName="view">
+											</xe:changeDynamicContentAction>
+										</xp:actionGroup>
+									</xp:this.action>
+								</xp:eventHandler>
+							</xp:button>
+							<xp:button value="Cancel" id="button2">
+								<xp:eventHandler event="onclick" submit="true"
+									refreshMode="complete" immediate="true" save="false">
+									<xp:this.action>
+										<xe:changeDynamicContentAction
+											facetName="view">
+										</xe:changeDynamicContentAction>
+									</xp:this.action>
+								</xp:eventHandler>
+							</xp:button>
+						</xp:panel>
 						<xe:dumpObject loaded="false" id="dumpObject1"
 							title="document" value="#{document1}" />
 					</xp:panel>

@@ -21,9 +21,12 @@ dataAccess.writeEnvironment(env,document1.getDocument());}]]></xp:this.postNewDo
 							refreshMode="complete">
 							<xp:this.action><![CDATA[#{javascript:var env = dataAccess.getCustomEnvironment();
 dataAccess.readEnvironment(env,document1.getDocument(true));
-context.reloadPage();
-//var dlg = getComponent('customEnvDialog')
-//dlg.hide();
+if(true) {
+	context.reloadPage();
+} else {
+	var dlg = getComponent('customEnvDialog')
+	dlg.hide();
+}
 }]]></xp:this.action>
 						</xp:eventHandler>
 					</xp:button>

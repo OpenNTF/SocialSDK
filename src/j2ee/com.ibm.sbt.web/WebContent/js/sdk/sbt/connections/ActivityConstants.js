@@ -51,7 +51,8 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
     		position : "snx:position",
     		depth : "snx:depth",
     		permissions : "snx:permissions",
-    		icon : "snx:icon"
+    		icon : "snx:icon",
+    		recentUpdatesUrl: "a:link[@rel='alternate']/@href",
         },
         
 		/**

@@ -14,18 +14,18 @@
  * permissions and limitations under the License.
  */
 
-define([ "../../../declare", "../../../controls/grid/GridAction","../../../i18n!./nls/ForumGridRenderer","../../../stringUtil"], 
-        function(declare, GridAction, nls, stringUtil) {
+define([ "../../declare", "./GridAction","../../stringUtil"], 
+        function(declare, GridAction, stringUtil) {
 
     /**
      * @class ViewProfileAction
-     * @namespace sbt.connections.controls.forum
-     * @module sbt.connections.controls.forum.ViewProfileAction
+     * @namespace sbt.connections.controls
+     * @module sbt.connections.controls.ViewProfileAction
      */
     var ViewProfileAction = declare(GridAction, {
        
     	
-        /**ForumAction Constructor function
+        /**ViewProfileAction Constructor function
          * @method constructor
          * */
         constructor: function(args) {

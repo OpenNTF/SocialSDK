@@ -174,7 +174,10 @@ public class SBTEnvironment {
         this.runtimes = runtimes;
     }
     public String getRuntimes(){
-        return StringUtil.concatStrings(this.runtimes, ',', false);
+    	if(runtimes!=null && runtimes.length>0) {
+    		return StringUtil.concatStrings(this.runtimes, ',', false);
+    	}
+    	return "";
     }
     public void setRuntimes(String sRuntimes){
         this.runtimes = StringUtil.splitString(sRuntimes, ',');

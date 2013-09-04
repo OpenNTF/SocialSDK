@@ -100,7 +100,10 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
             }
             
             var serviceMappings = this.endpoint.serviceMappings;
-            urlParams = {};
+            if(!urlParams){
+                urlParams = {};
+            }
+            
             lang.mixin(urlParams, this.defaultContextRootMap);
             if(!util.isEmptyObject(serviceMappings)){
                 lang.mixin(urlParams, serviceMappings);

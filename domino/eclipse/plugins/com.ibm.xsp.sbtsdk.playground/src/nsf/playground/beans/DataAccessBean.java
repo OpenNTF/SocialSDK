@@ -239,6 +239,7 @@ public abstract class DataAccessBean {
 	}
 	public PlaygroundEnvironment writeEnvironment(PlaygroundEnvironment env, Document d) throws NotesException, IOException {
 		d.replaceItemValue("Properties",env.getProperties());
+		d.replaceItemValue("Runtimes",env.getRuntimes());
 
 		List<Endpoints> envext = PlaygroundExtensionFactory.getExtensions(Endpoints.class);
 		for(int i=0; i<envext.size(); i++) {

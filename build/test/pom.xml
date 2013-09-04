@@ -31,6 +31,9 @@
     <module>../../test/java/com.ibm.sbt.core.test</module>
     <module>stopcargo</module>
 -->
+    <module>../../test/selenium/com.ibm.sbt.automation.core</module>
+    <module>../../test/selenium/com.ibm.sbt.automation.test</module>
+
   </modules>
 
 </project>

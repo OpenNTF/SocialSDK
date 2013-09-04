@@ -1,15 +1,16 @@
-<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+<assembly
+  xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
   <id>beta</id>
   <formats>
     <format>zip</format>
-	<format>tar.gz</format>
+    <format>tar.gz</format>
   </formats>
   <baseDirectory>target</baseDirectory>
   <includeBaseDirectory>false</includeBaseDirectory>
   <moduleSets>
-    <moduleSet>  
+    <moduleSet>
       <useAllReactorProjects>true</useAllReactorProjects>
       <includes>
         <include>com.ibm.sbt.sdk:com.ibm.commons</include>
@@ -24,44 +25,44 @@
         <unpack>false</unpack>
       </binaries>
     </moduleSet>
-    <moduleSet>  
+    <moduleSet>
       <useAllReactorProjects>true</useAllReactorProjects>
       <includes>
         <include>com.ibm.sbt.sdk:sbt</include>
         <include>com.ibm.sbt.sdk:sbt.dojo180</include>
         <include>com.ibm.sbt.sdk:sbt.jquery182</include>
         <include>com.ibm.sbt.sdk:sbt.bootstrap211</include>
-	  </includes>
+      </includes>
       <binaries>
         <outputDirectory>sbtsdk/redist/war</outputDirectory>
         <outputFileNameMapping>${module.artifactId}.${module.extension}</outputFileNameMapping>
         <unpack>false</unpack>
       </binaries>
     </moduleSet>
-    <moduleSet>  
+    <moduleSet>
       <useAllReactorProjects>true</useAllReactorProjects>
       <includes>
         <include>com.ibm.sbt.sample:sbt.sample</include>
-	  </includes>
+      </includes>
       <binaries>
         <outputDirectory>sbtsdk/samples/ear</outputDirectory>
         <outputFileNameMapping>${module.artifactId}-${project.version}.${buildLabel}.${module.extension}</outputFileNameMapping>
         <unpack>false</unpack>
       </binaries>
     </moduleSet>
-    <moduleSet>  
+    <moduleSet>
       <useAllReactorProjects>true</useAllReactorProjects>
       <includes>
         <include>com.ibm.sbt.sample:sbt.sample.portlets</include>
         <include>com.ibm.sbt.sample:acme.social.sample</include>
-	  </includes>
+      </includes>
       <binaries>
         <outputDirectory>sbtsdk/samples/ear</outputDirectory>
         <outputFileNameMapping>${module.artifactId}-${project.version}.${buildLabel}.${module.extension}</outputFileNameMapping>
         <unpack>false</unpack>
       </binaries>
     </moduleSet>
-    <moduleSet>  
+    <moduleSet>
       <useAllReactorProjects>true</useAllReactorProjects>
       <includes>
         <include>com.ibm.sbt.sample:sbt.sample.web</include>
@@ -71,14 +72,14 @@
         <include>com.ibm.sbt.sample:acme.sample.webapp</include>
         <include>com.ibm.sbt.sample:helloworld.webapp</include>
         <include>com.ibm.sbt.sample:smartcloud.webapp</include>
-    </includes>
+      </includes>
       <binaries>
         <outputDirectory>sbtsdk/samples/war</outputDirectory>
         <outputFileNameMapping>${module.artifactId}.${module.extension}</outputFileNameMapping>
         <unpack>false</unpack>
       </binaries>
     </moduleSet>
-    <moduleSet>  
+    <moduleSet>
       <useAllReactorProjects>true</useAllReactorProjects>
       <includes>
         <include>com.ibm.sbt.sdk:com.ibm.commons</include>
@@ -86,27 +87,39 @@
         <include>com.ibm.sbt.sdk:com.ibm.commons.xml</include>
         <include>com.ibm.sbt.sdk:com.ibm.sbt.core</include>
         <include>com.ibm.sbt.sample:sbt.sample.app</include>
-    </includes>
+      </includes>
       <binaries>
         <outputDirectory>sbtsdk/samples/jar</outputDirectory>
         <outputFileNameMapping>${module.artifactId}-${project.version}.${module.extension}</outputFileNameMapping>
         <unpack>false</unpack>
       </binaries>
     </moduleSet>
+    <moduleSet>
+      <useAllReactorProjects>true</useAllReactorProjects>
+      <includes>
+        <include>com.ibm.sbt.test:com.ibm.sbt.automation.core</include>
+        <include>com.ibm.sbt.test:com.ibm.sbt.automation.test</include>
+      </includes>
+      <binaries>
+        <outputDirectory>sbtsdk/test/selenium</outputDirectory>
+        <outputFileNameMapping>${module.artifactId}-${project.version}.${buildLabel}.${module.extension}</outputFileNameMapping>
+        <unpack>false</unpack>
+      </binaries>
+    </moduleSet>
   </moduleSets>
   <dependencySets>
-  <dependencySet>
-   <includes>
-    <include>commons-logging:commons-logging</include>
-    <include>org.apache.httpcomponents:httpclient</include>
-    <include>org.apache.httpcomponents:httpcore</include>
-   </includes>
-  <outputDirectory>sbtsdk/samples/jar</outputDirectory>
-  </dependencySet>
+    <dependencySet>
+      <includes>
+        <include>commons-logging:commons-logging</include>
+        <include>org.apache.httpcomponents:httpclient</include>
+        <include>org.apache.httpcomponents:httpcore</include>
+      </includes>
+      <outputDirectory>sbtsdk/samples/jar</outputDirectory>
+    </dependencySet>
   </dependencySets>
-  
+
   <fileSets>
-  <fileSet>
+    <fileSet>
       <directory>../../samples/java/sbt.sample.app</directory>
       <outputDirectory>sbtsdk/samples/jar</outputDirectory>
       <includes>
@@ -127,11 +140,11 @@
         <include>**/*.*</include>
       </includes>
     </fileSet>
-        <fileSet>
+    <fileSet>
       <directory>${build.target}/com.ibm.sbt.test/com.ibm.sbt.core.test/site</directory>
       <outputDirectory>sbtsdk/reports</outputDirectory>
       <includes>
-		<include>surefire-report.html</include>
+        <include>surefire-report.html</include>
       </includes>
     </fileSet>
     <fileSet>
@@ -139,8 +152,8 @@
       <outputDirectory>sbtsdk</outputDirectory>
       <includes>
         <include>version.txt</include>
-		<include>changelog.txt</include>
-		<include>weekly.txt</include>
+        <include>changelog.txt</include>
+        <include>weekly.txt</include>
       </includes>
       <lineEnding>crlf</lineEnding>
     </fileSet>
@@ -185,23 +198,37 @@
     <fileSet>
       <directory>../../src/scripts</directory>
       <outputDirectory>sbtsdk/scripts</outputDirectory>
-	  <excludes>
-		<exclude>**/.project</exclude>
-	  </excludes>
+      <excludes>
+        <exclude>**/.project</exclude>
+      </excludes>
       <includes>
         <include>*.*</include>
       </includes>
     </fileSet>
     <fileSet>
+      <directory>../../test/selenium</directory>
+      <outputDirectory>sbtsdk/source</outputDirectory>
+      <excludes>
+        <exclude>**/bin/</exclude>
+        <exclude>**/pom.xml</exclude>
+        <exclude>**/.jazzignore</exclude>
+        <exclude>**/.apt_generated</exclude>
+        <exclude>**/.factorypath</exclude>
+      </excludes>
+      <includes>
+        <include>**/*.*</include>
+      </includes>
+    </fileSet>
+    <fileSet>
       <directory>../../src/eclipse/plugins</directory>
       <outputDirectory>sbtsdk/source</outputDirectory>
-	  <excludes>
-		<exclude>**/bin/</exclude>
-		<exclude>**/pom.xml</exclude>
-		<exclude>**/.jazzignore</exclude>
-		<exclude>**/.apt_generated</exclude>
-		<exclude>**/.factorypath</exclude>
-	  </excludes>
+      <excludes>
+        <exclude>**/bin/</exclude>
+        <exclude>**/pom.xml</exclude>
+        <exclude>**/.jazzignore</exclude>
+        <exclude>**/.apt_generated</exclude>
+        <exclude>**/.factorypath</exclude>
+      </excludes>
       <includes>
         <include>**/*.*</include>
       </includes>
@@ -209,13 +236,13 @@
     <fileSet>
       <directory>../../domino/eclipse/plugins/com.ibm.xsp.sbtsdk</directory>
       <outputDirectory>sbtsdk/source/com.ibm.xsp.sbtsdk</outputDirectory>
-    <excludes>
-    <exclude>**/bin/</exclude>
-    <exclude>**/pom.xml</exclude>
-    <exclude>**/.jazzignore</exclude>
-    <exclude>**/.apt_generated</exclude>
-    <exclude>**/.factorypath</exclude>
-    </excludes>
+      <excludes>
+        <exclude>**/bin/</exclude>
+        <exclude>**/pom.xml</exclude>
+        <exclude>**/.jazzignore</exclude>
+        <exclude>**/.apt_generated</exclude>
+        <exclude>**/.factorypath</exclude>
+      </excludes>
       <includes>
         <include>**/*.*</include>
       </includes>
@@ -223,13 +250,13 @@
     <fileSet>
       <directory>../../domino/eclipse/features</directory>
       <outputDirectory>sbtsdk/source</outputDirectory>
-    <excludes>
-    <exclude>**/bin/</exclude>
-    <exclude>**/pom.xml</exclude>
-    <exclude>**/.jazzignore</exclude>
-    <exclude>**/.apt_generated</exclude>
-    <exclude>**/.factorypath</exclude>
-    </excludes>
+      <excludes>
+        <exclude>**/bin/</exclude>
+        <exclude>**/pom.xml</exclude>
+        <exclude>**/.jazzignore</exclude>
+        <exclude>**/.apt_generated</exclude>
+        <exclude>**/.factorypath</exclude>
+      </excludes>
       <includes>
         <include>**/*.*</include>
       </includes>
@@ -237,13 +264,13 @@
     <fileSet>
       <directory>../../src/j2ee</directory>
       <outputDirectory>sbtsdk/source</outputDirectory>
-	  <excludes>
-		<exclude>**/bin/</exclude>
-		<exclude>**/pom.xml</exclude>
-		<exclude>**/.jazzignore</exclude>
-		<exclude>**/.apt_generated</exclude>
-		<exclude>**/.factorypath</exclude>
-	  </excludes>
+      <excludes>
+        <exclude>**/bin/</exclude>
+        <exclude>**/pom.xml</exclude>
+        <exclude>**/.jazzignore</exclude>
+        <exclude>**/.apt_generated</exclude>
+        <exclude>**/.factorypath</exclude>
+      </excludes>
       <includes>
         <include>**/*.*</include>
       </includes>
@@ -251,13 +278,13 @@
     <fileSet>
       <directory>../../samples/j2ee</directory>
       <outputDirectory>sbtsdk/source</outputDirectory>
-	  <excludes>
-		<exclude>**/bin/</exclude>
-		<exclude>**/pom.xml</exclude>
-		<exclude>**/.jazzignore</exclude>
-		<exclude>**/.apt_generated</exclude>
-		<exclude>**/.factorypath</exclude>
-	  </excludes>
+      <excludes>
+        <exclude>**/bin/</exclude>
+        <exclude>**/pom.xml</exclude>
+        <exclude>**/.jazzignore</exclude>
+        <exclude>**/.apt_generated</exclude>
+        <exclude>**/.factorypath</exclude>
+      </excludes>
       <includes>
         <include>**/*.*</include>
       </includes>
@@ -265,13 +292,13 @@
     <fileSet>
       <directory>../../samples/java</directory>
       <outputDirectory>sbtsdk/source</outputDirectory>
-	  <excludes>
-		<exclude>**/bin/</exclude>
-		<exclude>**/pom.xml</exclude>
-		<exclude>**/.jazzignore</exclude>
-		<exclude>**/.apt_generated</exclude>
-		<exclude>**/.factorypath</exclude>
-	  </excludes>
+      <excludes>
+        <exclude>**/bin/</exclude>
+        <exclude>**/pom.xml</exclude>
+        <exclude>**/.jazzignore</exclude>
+        <exclude>**/.apt_generated</exclude>
+        <exclude>**/.factorypath</exclude>
+      </excludes>
       <includes>
         <include>**/*.*</include>
       </includes>
@@ -279,15 +306,15 @@
     <fileSet>
       <directory>../../prereqs/eclipse/plugins</directory>
       <outputDirectory>sbtsdk/source</outputDirectory>
-	  <excludes>
-		<exclude>com.ibm.sbt.libs.was/</exclude>
-		<exclude>com.ibm.sbt.libs.j2ee.tomcat/</exclude>
-		<exclude>**/bin/</exclude>
-		<exclude>**/pom.xml</exclude>
-		<exclude>**/.jazzignore</exclude>
-		<exclude>**/.apt_generated</exclude>
-		<exclude>**/.factorypath</exclude>
-	  </excludes>
+      <excludes>
+        <exclude>com.ibm.sbt.libs.was/</exclude>
+        <exclude>com.ibm.sbt.libs.j2ee.tomcat/</exclude>
+        <exclude>**/bin/</exclude>
+        <exclude>**/pom.xml</exclude>
+        <exclude>**/.jazzignore</exclude>
+        <exclude>**/.apt_generated</exclude>
+        <exclude>**/.factorypath</exclude>
+      </excludes>
       <includes>
         <include>**/*.*</include>
       </includes>
@@ -308,47 +335,30 @@
     </fileSet>
 
     <fileSet>
-	  <directory>${build.target}/com.ibm.sbt.domino/com.ibm.sbt.domino.updatesite</directory>
+      <directory>${build.target}/com.ibm.sbt.domino/com.ibm.sbt.domino.updatesite</directory>
       <outputDirectory>sbtsdk/redist/domino</outputDirectory>
       <includes>
         <include>com.ibm.sbt.domino.updatesite.zip</include>
       </includes>
     </fileSet>
-      <fileSet>
-    <directory>${build.target}/com.ibm.sbt.domino/com.ibm.sbt.domino.playground.updatesite</directory>
+    <fileSet>
+      <directory>${build.target}/com.ibm.sbt.domino/com.ibm.sbt.domino.playground.updatesite</directory>
       <outputDirectory>sbtsdk/redist/domino</outputDirectory>
       <includes>
         <include>com.ibm.sbt.domino.playground.updatesite.zip</include>
       </includes>
     </fileSet>
-	<!--
     <fileSet>
-      <directory>../../test/j2ee</directory>
-      <outputDirectory>sbtsdk/source</outputDirectory>
-	  <excludes>
-	    <exclude>com.ibm.sbt.jasmine.web/</exclude>
-		<exclude>**/bin/</exclude>
-		<exclude>**/pom.xml</exclude>
-		<exclude>**/.jazzignore</exclude>
-		<exclude>**/.apt_generated</exclude>
-		<exclude>**/.factorypath</exclude>
-	  </excludes>
+      <directory>../../workspaces</directory>
+      <outputDirectory>sbtsdk/</outputDirectory>
+      <useDefaultExcludes>false</useDefaultExcludes>
+      <excludes>
+        <exclude>**/.jazzignore</exclude>
+        <exclude>**/.gitignore</exclude>
+      </excludes>
       <includes>
-        <include>**/*.*</include>
+        <include>**/*</include>
       </includes>
     </fileSet>
-	-->
-  <fileSet>
-    <directory>../../workspaces</directory>
-    <outputDirectory>sbtsdk/</outputDirectory>
-    <useDefaultExcludes>false</useDefaultExcludes>
-    <excludes>
-      <exclude>**/.jazzignore</exclude>
-      <exclude>**/.gitignore</exclude>
-    </excludes>
-    <includes>
-      <include>**/*</include>
-    </includes>
-  </fileSet>
   </fileSets>
 </assembly>

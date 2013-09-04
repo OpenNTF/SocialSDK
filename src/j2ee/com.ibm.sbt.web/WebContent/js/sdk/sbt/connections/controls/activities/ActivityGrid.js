@@ -24,7 +24,7 @@ define([ "../../../declare",
          "./ActivityAction",
          "../../../connections/ActivityConstants"], 
 
-function(declare, Grid, parameter, ActivitiesGridRenderer, ActivityAction, consts) {
+function(declare, Grid, parameter, ActivityGridRenderer, ActivityAction, consts) {
 	
 	/**Sorting Values*/
 	var sortVals = {
@@ -169,7 +169,7 @@ function(declare, Grid, parameter, ActivitiesGridRenderer, ActivityAction, const
          * @returns an instance of an ActivitiesGridRenderer.
          */
         createDefaultRenderer : function(args) {
-            return new ActivitiesGridRenderer(args);
+            return new ActivityGridRenderer(args);
         },
 				
 	});

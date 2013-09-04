@@ -19,8 +19,7 @@
   </managed-bean>
   <managed-bean>
     <managed-bean-name>docOptionsBean</managed-bean-name>
-    <managed-bean-class>doc.OptionsBean
-		</managed-bean-class>
+    <managed-bean-class>doc.OptionsBean</managed-bean-class>
     <managed-bean-scope>application</managed-bean-scope>
     <!--
 			<managed-property> <property-name>playgroundUrl</property-name>

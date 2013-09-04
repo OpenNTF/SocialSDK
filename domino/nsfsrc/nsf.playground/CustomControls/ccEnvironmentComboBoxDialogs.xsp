@@ -2,9 +2,9 @@
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
 	xmlns:xe="http://www.ibm.com/xsp/coreex">
 
-	<xe:dialog id="customEnvDialog" title="Custom Environment">
-		<xp:panel
-			style="height: 36em; overflow-y: scroll; margin-left:10px; margin-right: 5px;">
+	<xe:dialog id="customEnvDialog" title="Custom Environment"
+		style="height: 45em; width: 70em;" styleClass="EnvDialog">
+		<xp:panel style="margin-left:10px; margin-right: 5px;">
 			<xp:this.data>
 				<xp:dominoDocument var="document1" formName="Environment">
 					<xp:this.postNewDocument><![CDATA[#{javascript:var env = dataAccess.getCustomEnvironment();
@@ -12,6 +12,28 @@ dataAccess.writeEnvironment(env,document1.getDocument());}]]></xp:this.postNewDo
 				</xp:dominoDocument>
 			</xp:this.data>
 			<xc:ccEnvironmentForm editbean="true"></xc:ccEnvironmentForm>
+			<xe:dialogContent id="dialogContent1">
+			</xe:dialogContent>
+			<xe:dialogButtonBar id="dialogButtonBar1">
+				<xp:panel id="panel1">
+					<xp:button value="Save" id="button4">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete">
+							<xp:this.action><![CDATA[#{javascript:var env = dataAccess.getCustomEnvironment();
+dataAccess.readEnvironment(env,document1.getDocument(true));
+context.reloadPage();
+//var dlg = getComponent('customEnvDialog')
+//dlg.hide();
+}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:button>
+					<xp:button value="Cancel" id="button6">
+						<xp:eventHandler event="onclick" submit="false">
+							<xp:this.script><![CDATA[XSP.closeDialog('#{id:customEnvDialog}')]]></xp:this.script>
+						</xp:eventHandler>
+					</xp:button>
+				</xp:panel>
+			</xe:dialogButtonBar>
 		</xp:panel>
 	</xe:dialog>
 

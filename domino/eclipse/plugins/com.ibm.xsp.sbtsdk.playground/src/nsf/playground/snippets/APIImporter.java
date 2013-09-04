@@ -75,9 +75,14 @@ public class APIImporter extends AssetImporter {
 			setItemValue(doc,"Id", id);
 			setItemValue(doc,"Category", category);
 			setItemValue(doc,"Name", name);
+//			setItemValue(doc,"FilterRuntimes", snippet.getProperty("runtimes"));
 			setItemValue(doc,"ImportSource", source);
 			setItemValueRichText(doc,"Json", json);
 			setItemValueRichText(doc,"Properties", properties);
+			
+//			if(products!=null && products.length>0) {
+//				setItemValue(doc,"filterRuntime", StringUtil.concatStrings(products, ',', true));
+//			}
 			
 			doc.save();
 		} finally {

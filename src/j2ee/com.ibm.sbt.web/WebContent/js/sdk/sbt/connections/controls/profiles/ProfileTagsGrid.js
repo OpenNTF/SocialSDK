@@ -84,9 +84,10 @@ define([ "../../../declare",
          * @method buildUrl
          * @param url base url
          * @param args arguments that will be passed to the store
+         * @param endpoint An endpoint which may contain custom service mappings.
          * @returns Built url
          */
-        buildUrl: function(url, args) {
+        buildUrl: function(url, args, endpoint) {
             var params = { format : this.format };
             
             if (this.query) {
@@ -105,7 +106,7 @@ define([ "../../../declare",
             	params = lang.mixin(params, { sourceKey : this.sourceKey });
             } 
 
-            return this.constructUrl(url, params, this.getUrlParams());
+            return this.constructUrl(url, params, this.getUrlParams(), endpoint);
         },
         
         /**

@@ -17,8 +17,8 @@
 /**
  * 
  */
-define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil", "../../widget/grid/_Grid"], 
-        function(declare, lang, itemFactory, stringUtil, _Grid) {
+define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil", "../../widget/grid/_Grid", "../../util"], 
+        function(declare, lang, itemFactory, stringUtil, _Grid, util) {
 
     /**
      * @class grid
@@ -132,10 +132,13 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
          * @returns - an atom store instance
          */
         createDefaultStore: function(args) {
-            if (args.url) {
-                args.url = this.buildUrl(args.url, args);
+            var store = this._createDefaultStore(args);
+            var _args = store._args;
+            if (_args.url) {
+                _args.url = this.buildUrl(_args.url, _args, store.getEndpoint());
             }
-            return this._createDefaultStore(args);
+            
+            return store;
         },
         
         /**
@@ -144,14 +147,15 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
          * @method buildUrl
          * @param url base url
          * @param args arguments that will be passed to the store
+         * @param endpoint The endpoint, needed to verify if custom service mappings are present.
          * @returns Built url
          */
-        buildUrl: function(url, args) {
+        buildUrl: function(url, args, endpoint) {
         	var params = {};
             if (this.query) {
             	params = lang.mixin(params, this.query);
             }
-            return this.constructUrl(url, params, this.getUrlParams());
+            return this.constructUrl(url, params, this.getUrlParams(), endpoint);
         },
 
         /**
@@ -408,19 +412,43 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
         	return { authType : this.getAuthType() };
         },
         
+        defaultContextRootMap: {
+            activities: "activities",
+            blogs: "blogs",
+            communities: "communities",
+            connections: "connections",
+            dogear: "dogear",
+            files: "files",
+            forums: "forums",
+            profiles: "profiles",
+            search: "search"
+        },
+        
         /**
          * Construct a url using the specified parameters 
          * @method constructUrl
          * @param url
          * @param params
          * @param urlParams
+         * @param endpoint An endpoint which may contain custom service mappings.
          * @returns
          */
-        constructUrl : function(url,params,urlParams) {
+        constructUrl : function(url,params,urlParams, endpoint) {
             if (!url) {
                 throw new Error("Grid.constructUrl: Invalid argument, url is undefined or null.");
             }
-            if (urlParams) {
+            if(!urlParams){
+                urlParams = {};
+            }
+            lang.mixin(urlParams, this.defaultContextRootMap);
+            if(endpoint){
+                var serviceMappings = endpoint.serviceMappings;
+                
+                if(!util.isEmptyObject(serviceMappings)){
+                    lang.mixin(urlParams, serviceMappings);
+                }
+            }
+            if (urlParams && !util.isEmptyObject(urlParams)) {
                 url = stringUtil.replace(url, urlParams);
                 
                 if (url.indexOf("//") != -1) {

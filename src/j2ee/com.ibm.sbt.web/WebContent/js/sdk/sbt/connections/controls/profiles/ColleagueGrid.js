@@ -59,9 +59,10 @@ define([ "../../../declare", "../../../config", "../../../lang", "../../../xml",
          * @method buildUrl
          * @param url base url
          * @param args arguments that will be passed to the store
+         * @param endpoint An endpoint which may contain custom service mappings.
          * @returns Built url
          */
-        buildUrl: function(url, args) {
+        buildUrl: function(url, args, endpoint) {
             var params = { 
             	connectionType : "colleague",
             	outputType : "profile",
@@ -84,7 +85,7 @@ define([ "../../../declare", "../../../config", "../../../lang", "../../../xml",
             	params = lang.mixin(params, { userid : this.userid1 + "," + this.userid2 });
             } 
 
-            return this.constructUrl(url, params, this.getUrlParams());
+            return this.constructUrl(url, params, this.getUrlParams(), endpoint);
         },
 
         /**

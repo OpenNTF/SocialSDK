@@ -1,4 +1,4 @@
-require(["sbt/dom", "sbt/connections/controls/forum/ForumGrid"], function(dom, ForumGrid) {
+require(["sbt/dom", "sbt/connections/controls/forums/ForumGrid"], function(dom, ForumGrid) {
     var grid = new ForumGrid({
          type: "public"
     });

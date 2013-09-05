@@ -36,7 +36,7 @@
                 <echo
                   message="copying to ${project.target.directory}/com.ibm.sbt.sample/com.ibm.sbt.landing/com.ibm.sbt.landing" />
                 <echo message="copying from ${project.target.directory}/doc" />
-                <copy
+                <copy failonerror="false"
                   todir="${project.target.directory}/com.ibm.sbt.sample/com.ibm.sbt.landing/com.ibm.sbt.landing">
                   <fileset dir="${project.target.directory}/doc" />
                 </copy>

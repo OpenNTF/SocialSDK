@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app" xmlns:snx="http://www.ibm.com/xmlns/prod/sn">
+${getTitle}
+${getContent}
+<category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="forum-reply"></category>
+${getTags}
+</entry>
+

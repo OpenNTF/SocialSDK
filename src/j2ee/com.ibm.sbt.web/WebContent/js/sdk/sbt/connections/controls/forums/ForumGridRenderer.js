@@ -25,10 +25,12 @@ define(["../../../declare",
         "../../../text!./templates/ReplyHeader.html",
         "../../../text!./templates/ReplyBreadCrumb.html",
         "../../../text!./templates/TopicBreadCrumb.html",
+        "../../../text!./templates/MyTopicsBreadCrumb.html",
         "../../../i18n!./nls/ForumGridRenderer"], 
 
     function(declare, ConnectionsGridRenderer, i18n, ForumRow, tableHeader, TopicRow, 
-    		TopicHeader, ReplyTemplate, ReplyHeader,ReplyBreadCrumb,TopicBreadCrumb, nls){
+    		TopicHeader, ReplyTemplate, ReplyHeader,ReplyBreadCrumb,TopicBreadCrumb, 
+    		MyTopicsBreadCrumb, nls){
 		
 		/**
 		 * @class ForumGridRenderer
@@ -57,6 +59,8 @@ define(["../../../declare",
 	    	replyBreadCrumb: ReplyBreadCrumb,
 	    	
 	    	topicBreadCrumb: TopicBreadCrumb,
+	    	
+	    	myTopicsBreadCrumb:MyTopicsBreadCrumb,
 	    	
 	    	breadCrumb: ReplyBreadCrumb,
 	    	

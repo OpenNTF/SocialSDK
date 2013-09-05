@@ -181,10 +181,12 @@ define(["../../../declare",
 	        	this.renderer.breadCrumb = this.renderer.topicBreadCrumb;
 	        	this.store.setAttributes(consts.ForumTopicXPath);
 	        	this.hideBreadCrumb = false;
+	        	
 	        	        	
 	        	if(this.params.type=="myTopics"){
 	        		var url = this.buildUrl(consts.AtomTopicsMy, {});
 	        		this.store.setUrl(url);
+	        		this.hideBreadCrumb = true;
 	        	}else{
 	        		var url = this.buildUrl(consts.AtomTopics+"?forumUuid="+this._forumID, {});
 	        		this.store.setUrl(url);
@@ -197,9 +199,15 @@ define(["../../../declare",
 	        	
 	        	this.renderer.template = this.renderer.replyTemplate;
 	        	this.renderer.headerTemplate = this.renderer.replyHeader;
-	        	this.renderer.breadCrumb = this.renderer.replyBreadCrumb;
 	        	this.store.setAttributes(consts.ForumReplyXPath);
 	        	this.hideBreadCrumb = false;
+	        	
+	        	if(this.params.type=="myTopics"){
+	        		this.renderer.breadCrumb = this.renderer.myTopicsBreadCrumb;
+	        	}else{
+	        		this.renderer.breadCrumb = this.renderer.replyBreadCrumb;
+	        	}
+	        	
 	        	
 	        	var url = this.buildUrl(consts.AtomReplies+"?topicUuid="+topicId,{});
 	        	this.store.setUrl(url);

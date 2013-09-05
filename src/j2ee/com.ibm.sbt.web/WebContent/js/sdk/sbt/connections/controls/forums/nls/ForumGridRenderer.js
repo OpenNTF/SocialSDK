@@ -19,7 +19,7 @@ define({
     root: {
     	forums: "Forums",
     	forum: "Forum",
-    	threads: "Topics/Messages",
+    	threads: "Topics",
     	latestPost: "Latest Post",
     	goToForum: "Go To The Forum",
     	viewProfile: "View Profile",

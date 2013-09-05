@@ -10,7 +10,4 @@
     <relativePath>../../../build/sdk</relativePath>
   </parent>
   
-  <build>
-    <directory>${build.target}/${project.groupId}/${project.artifactId}</directory>
-  </build>
 </project>

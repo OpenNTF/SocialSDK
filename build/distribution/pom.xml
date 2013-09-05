@@ -103,7 +103,7 @@
                 file="./../../src/config/sbt.properties"/>
                 
                 
-            <copy file="${project.target.directory}/com.ibm.sbt.sdk/com.ibm.commons.runtime/com.ibm.commons.runtime.jar" 
+            <copy file="${project.root}/src/eclipse/plugins/com.ibm.commons.runtime/target/com.ibm.commons.runtime-1.0.0-SNAPSHOT.jar" 
 			todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/lib" />
 	        <copy file="${project.prereqs.directory}/eclipse/plugins/com.ibm.sbt.libs.java/lib/commons-logging-1.1.1.jar"
 			todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/lib" />
@@ -125,16 +125,14 @@
 	        <delete dir="${project.target.directory}/tomcat/unzip" />
 
 	        <!-- Create Update Site -->
-	        <zip basedir="${project.target.directory}/com.ibm.sbt.domino/com.ibm.sbt.domino.updatesite/site" 
+	        <zip basedir="${project.root}/domino/eclipse/updatesites/com.ibm.sbt.domino.updatesite/target/site" 
 			destfile="${project.target.directory}/com.ibm.sbt.domino/com.ibm.sbt.domino.updatesite/com.ibm.sbt.domino.updatesite.zip" 
 			compress="true"/>
-	        <delete dir="${project.target.directory}/com.ibm.sbt.domino/com.ibm.sbt.domino.updatesite/site.zip"/>
 
           <!-- Create Update Site -->
-          <zip basedir="${project.target.directory}/com.ibm.sbt.domino/com.ibm.sbt.domino.playground.updatesite/site" 
+          <zip basedir="${project.root}/domino/eclipse/updatesites/com.ibm.sbt.domino.playground.updatesite/target/site" 
           destfile="${project.target.directory}/com.ibm.sbt.domino/com.ibm.sbt.domino.playground.updatesite/com.ibm.sbt.domino.playground.updatesite.zip" 
           compress="true"/>
-          <delete dir="${project.target.directory}/com.ibm.sbt.domino/com.ibm.sbt.domino.playground.updatesite/site.zip"/>
 
 	        <!-- Create a version file -->
 	        <echo file="${project.target.directory}/doc/version.txt">version: ${project.version}.${buildLabel}</echo>

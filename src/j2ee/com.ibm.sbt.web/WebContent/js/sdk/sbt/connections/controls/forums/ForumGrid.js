@@ -152,9 +152,11 @@ define(["../../../declare",
 	        	this.hideBreadCrumb = true;
 	        	
 	        	if(this.params.type == "my"){
-	        		this.store.setUrl(consts.AtomForumsMy);
+	        		var url = this.buildUrl(consts.AtomForumsMy, {});
+	        		this.store.setUrl(url);
 	        	}else{
-	        		this.store.setUrl(consts.AtomForumsPublic);
+	        		var url = this.buildUrl(consts.AtomForumsPublic, {});
+	        		this.store.setUrl(url);
 	        	}
 
 	        	this.update(null);
@@ -179,11 +181,15 @@ define(["../../../declare",
 	        	this.renderer.breadCrumb = this.renderer.topicBreadCrumb;
 	        	this.store.setAttributes(consts.ForumTopicXPath);
 	        	this.hideBreadCrumb = false;
+	        	
 	        	        	
 	        	if(this.params.type=="myTopics"){
-	        		this.store.setUrl(consts.AtomTopicsMy);
+	        		var url = this.buildUrl(consts.AtomTopicsMy, {});
+	        		this.store.setUrl(url);
+	        		this.hideBreadCrumb = true;
 	        	}else{
-	        		this.store.setUrl(consts.AtomTopics+"?forumUuid="+this._forumID);
+	        		var url = this.buildUrl(consts.AtomTopics+"?forumUuid="+this._forumID, {});
+	        		this.store.setUrl(url);
 	        	}
 	        	
 	        	this.update(null);
@@ -193,11 +199,18 @@ define(["../../../declare",
 	        	
 	        	this.renderer.template = this.renderer.replyTemplate;
 	        	this.renderer.headerTemplate = this.renderer.replyHeader;
-	        	this.renderer.breadCrumb = this.renderer.replyBreadCrumb;
 	        	this.store.setAttributes(consts.ForumReplyXPath);
 	        	this.hideBreadCrumb = false;
-	        		        	
-	        	this.store.setUrl(consts.AtomReplies+"?topicUuid="+topicId);
+	        	
+	        	if(this.params.type=="myTopics"){
+	        		this.renderer.breadCrumb = this.renderer.myTopicsBreadCrumb;
+	        	}else{
+	        		this.renderer.breadCrumb = this.renderer.replyBreadCrumb;
+	        	}
+	        	
+	        	
+	        	var url = this.buildUrl(consts.AtomReplies+"?topicUuid="+topicId,{});
+	        	this.store.setUrl(url);
 	        	
 	        	this.update(null);
 	        },

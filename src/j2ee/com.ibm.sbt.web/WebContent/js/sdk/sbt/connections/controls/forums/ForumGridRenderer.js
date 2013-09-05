@@ -95,9 +95,9 @@ define(["../../../declare",
 	           else {
 	              this.renderPager(grid, el, items, data);
 	              
-	              var tbody = this.renderTable(grid, el, items, data);
+	              this.renderBreadCrumb(grid, el, items, data);
 	              
-	              this.renderBreadCrumb(grid, el, items, data, tbody);
+	              var tbody = this.renderTable(grid, el, items, data);
 	              
 	              this.renderHeader(grid, el, items, data, tbody);
 	              
@@ -132,7 +132,7 @@ define(["../../../declare",
 	            }
 	        },
 	        
-	        renderBreadCrumb: function(grid,el,items,data,tbody) {
+	        renderBreadCrumb: function(grid,el,items,data) {
 	            if (this.breadCrumb && !grid.hideBreadCrumb) {
 	                var node;
 	                if (this._isString(this.breadCrumb)) {
@@ -141,9 +141,9 @@ define(["../../../declare",
 	                } else {
 	                    node = this.breadCrumb.cloneNode(true);
 	                }
-	                tbody.appendChild(node);
+	                el.appendChild(node);
 	                
-	                this._doAttachEvents(grid, tbody, data);
+	                this._doAttachEvents(grid, el, data);
 	            }
 	        },
 	    	 /***
@@ -179,25 +179,17 @@ define(["../../../declare",
 	           while (el.childNodes[0]) {
 	               this._destroy(el.childNodes[0]);
 	           }
+	            
+	           this.renderBreadCrumb(grid, el, data );
+	           
 	           var ediv = this._create("div", {
-	             "class": this.emptyClass,
-	             innerHTML: "<h2>" + this.nls.noResults +"</h2>",
-	             role: "document",
-	             tabIndex: 0,
-	           }, el, "only");
+		             "class": this.emptyClass,
+		             innerHTML: "<h2>" + this.nls.noResults +"</h2>",
+		             role: "document",
+		             tabIndex: 0,
+		           }, el, "only");
 	           
-	           var backButton = this._create("input",{
-	        	   type:"button",
-	        	   "class":"lotusBtn",
-	        	   value:this.nls.back,
-	        	   "data-dojo-attach-event": "onclick: previousPage",
-	        	   role: "button",
-	        	   tabindex: "0",
-	           },el,"only");
-	           
-	           this._doAttachEvents(grid, el,data);
-	           
-	           console.log("a");
+	           this._doAttachEvents(grid, el, data);
 	        },
 	        
 	        

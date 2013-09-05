@@ -23,6 +23,7 @@
     <project.target.directory>${build.target}</project.target.directory>
     <project.platform.directory>${user.dir}/../platform</project.platform.directory>
     <project.prereqs.directory>${user.dir}/../prereqs</project.prereqs.directory>
+    <project.root>${user.dir}/..</project.root>
   </properties>
 
   <parent>
@@ -64,29 +65,40 @@
 	      <target>
 	        <!-- Package Tomcat -->
             <delete dir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps/ROOT"/>
+
+            <copy tofile="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps/sbt.war" 
+                file="${project.root}/src/j2ee/com.ibm.sbt.web/target/sbt-1.0.0-SNAPSHOT.war"/>
+                
+            <copy tofile="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps/sbt.dojo180.war" 
+                file="${project.root}/src/j2ee/com.ibm.sbt.dojo180/target/sbt.dojo180-1.0.0.war"/>
             
-            <copy todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps" 
-                file="${project.target.directory}/com.ibm.sbt.sdk/sbt/sbt.war"/>
-            <copy todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps" 
-                file="${project.target.directory}/com.ibm.sbt.sdk/sbt.dojo180/sbt.dojo180.war"/>
-            <copy todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps" 
-                file="${project.target.directory}/com.ibm.sbt.sdk/sbt.jquery182/sbt.jquery182.war"/>
-            <copy todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps" 
-                file="${project.target.directory}/com.ibm.sbt.sdk/sbt.bootstrap211/sbt.bootstrap211.war"/>
-            <copy todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps" 
-                file="${project.target.directory}/com.ibm.sbt.sample/sbt.sample.web/sbt.sample.web.war"/>
+            <copy tofile="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps/sbt.jquery182.war" 
+                file="${project.root}/src/j2ee/com.ibm.sbt.jquery182/target/sbt.jquery182-1.0.0.war"/>
+                
+            <copy tofile="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps/sbt.bootstrap211.war" 
+                file="${project.root}/src/j2ee/com.ibm.sbt.bootstrap211/target/sbt.bootstrap211-1.0.0.war"/>
+            
+            <copy tofile="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps/sbt.sample.web.war" 
+                file="${project.root}/samples/j2ee/com.ibm.sbt.sample.web/target/sbt.sample.web-1.0.0.war"/>
+            
             <copy tofile="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps/ROOT.war" 
-                file="${project.target.directory}/com.ibm.sbt.sample/com.ibm.sbt.landing/com.ibm.sbt.landing.war"/>
-            <copy todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps" 
-                file="${project.target.directory}/com.ibm.sbt.sample/acme.social.sample.dataapp/acme.social.sample.dataapp.war"/>
-            <copy todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps" 
-                file="${project.target.directory}/com.ibm.sbt.sample/acme.social.sample.webapp/acme.social.sample.webapp.war"/>
-            <copy todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps" 
-                file="${project.target.directory}/com.ibm.sbt.sample/helloworld.webapp/helloworld.webapp.war"/>
-            <copy todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps" 
-                file="${project.target.directory}/com.ibm.sbt.sample/smartcloud.webapp/smartcloud.webapp.war"/>
-            <copy todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps" 
-                file="${project.target.directory}/com.ibm.sbt.sample/acme.sample.webapp/acme.sample.webapp.war"/>
+                file="${project.root}/samples/j2ee/com.ibm.sbt.landing/target/com.ibm.sbt.landing-1.0.0.war"/>
+            
+            <copy tofile="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps/acme.social.sample.dataapp.war" 
+                file="${project.root}/samples/j2ee/acme.social.sample.dataapp/target/acme.social.sample.dataapp-1.0.0.war"/>
+            
+            <copy tofile="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps/acme.social.sample.webapp.war" 
+                file="${project.root}/samples/j2ee/acme.social.sample.webapp/target/acme.social.sample.webapp-1.0.0.war"/>
+            
+            <copy tofile="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps/helloworld.webapp.war" 
+                file="${project.root}/samples/j2ee/helloworld.webapp/target/helloworld.webapp-1.0.0.war"/>
+            
+            <copy tofile="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps/smartcloud.webapp.war" 
+                file="${project.root}/samples/j2ee/smartcloud.webapp/target/smartcloud.webapp-1.0.0.war"/>
+            
+            <copy tofile="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps/acme.sample.webapp.war" 
+                file="${project.root}/samples/j2ee/acme.sample.webapp/target/acme.sample.webapp-1.0.0.war"/>
+                
             <copy todir="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/conf" 
                 file="./../../src/config/sbt.properties"/>
                 

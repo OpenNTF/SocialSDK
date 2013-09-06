@@ -16,11 +16,14 @@
 
 package nsf.playground.extension;
 
-import com.ibm.commons.util.StringUtil;
-import com.ibm.xsp.context.FacesContextEx;
-import com.ibm.xsp.context.RequestParameters;
+import java.util.ArrayList;
+import java.util.List;
 
 import nsf.playground.environments.PlaygroundEnvironment;
+
+import com.ibm.commons.util.StringUtil;
+import com.ibm.sbt.playground.extension.PlaygroundExtensionFactory;
+import com.ibm.xsp.context.FacesContextEx;
 
 
 
@@ -29,14 +32,54 @@ import nsf.playground.environments.PlaygroundEnvironment;
  */
 public abstract class Endpoints {
 	
+	public static class Categories {
+		private List<Category> categories;
+		public Categories() {
+			this.categories = new ArrayList<Endpoints.Category>();
+			List<Endpoints> envext = PlaygroundExtensionFactory.getExtensions(Endpoints.class); // Get the categories for all the platforms
+			for(int i=0; i<envext.size(); i++) {
+				Category[] cats = envext.get(i).getPropertyList();
+				if(cats!=null) {
+					for(int j=0; j<cats.length; j++) {
+						categories.add(cats[j]);
+					}
+				}
+			}
+		}
+		public List<Category> getCategories() {
+			return categories;
+		}
+		public String[] getCategoryNames() {
+			String[] s = new String[categories.size()];
+			for(int i=0; i<categories.size(); i++) {
+				s[i] = categories.get(i).toString();
+			}
+			return s;
+		}
+		public int findCategory(String catName) {
+			for(int i=0; i<categories.size(); i++) {
+				if(StringUtil.equals(categories.get(i), catName)) {
+					return i;
+				}
+			}
+			return -1;
+		}
+	}
 	public static class Category {
 		private String platform; 
 		private String label; 
+		private String tabLabel; 
 		private Property[] properties; 
-		public Category(String platform, String label, Property[] properties) {
+		private Group[] groups;
+		public Category(String platform, String label, String tabLabel, Property[] properties, Group[] groups) {
 			this.platform = platform;
 			this.label = label;
+			this.tabLabel = tabLabel;
 			this.properties = properties;
+			this.groups = groups;
+		}
+		public String toString() {
+			return label;
 		}
 		public String getRuntimePlatform() {
 			return platform;
@@ -44,8 +87,44 @@ public abstract class Endpoints {
 		public String getLabel() {
 			return label;
 		}
+		public String getTabLabel() {
+			return tabLabel;
+		}
+		public Group[] getGroups() {
+			return groups;
+		}
+		public String[] getGroupNames() {
+			String[] s = new String[groups.length];
+			for(int i=0; i<groups.length; i++) {
+				s[i] = groups[i].toString();
+			}
+			return s;
+		}
+		public int findGroup(String groupName) {
+			for(int i=0; i<groups.length; i++) {
+				if(StringUtil.equals(groups[i], groupName)) {
+					return i;
+				}
+			}
+			return -1;
+		}
 		public Property[] getProperties() {
 			return properties;
+		}
+		public String[] getPropertyNames() {
+			String[] s = new String[properties.length];
+			for(int i=0; i<properties.length; i++) {
+				s[i] = properties[i].toString();
+			}
+			return s;
+		}
+		public int findProperty(String propName) {
+			for(int i=0; i<properties.length; i++) {
+				if(StringUtil.equals(properties[i], propName)) {
+					return i;
+				}
+			}
+			return -1;
 		}
 	}
 	public static class Property {
@@ -60,6 +139,9 @@ public abstract class Endpoints {
 			this.label = label;
 			this.valueList = valueList;
 		}
+		public String toString() {
+			return label;
+		}
 		public String getName() {
 			return name;
 		}
@@ -68,6 +150,23 @@ public abstract class Endpoints {
 		}
 		public String[] getValueList() {
 			return valueList;
+		}
+	}
+	public static class Group {
+		private String label; 
+		private String[] properties; 
+		public Group(String label, String[] properties) {
+			this.label = label;
+			this.properties = properties;
+		}
+		public String toString() {
+			return label;
+		}
+		public String getLabel() {
+			return label;
+		}
+		public String[] getProperties() {
+			return properties;
 		}
 	}
 

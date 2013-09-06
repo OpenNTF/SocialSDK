@@ -15,7 +15,7 @@
  */
 
 /**
- * The Communities API allows application programs to retrieve community information, subscribe to community updates, and create or modify communities.
+ * Use the Search API to perform searches across the installed Connections applications.
  * 
  * Returns a list of results with the specified text in the title, description, or content. Encode the strings. By default, spaces are treated as an AND operator. The following operators are supported:
  *

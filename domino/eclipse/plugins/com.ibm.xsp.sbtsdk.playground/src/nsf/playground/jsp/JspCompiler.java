@@ -27,7 +27,7 @@ import com.ibm.xsp.FacesExceptionEx;
 
 
 /**
- * Tiny JSP process that replaces basic JSP directives, <% %> <%=...%> and generate a Java class.
+ * Tiny JSP processor that replaces basic JSP directives, <% %> <%=...%> and generates a Java class.
  * 
  * @author priand
  */
@@ -35,6 +35,12 @@ public class JspCompiler {
 	
 	public static final String START_TAG = "<%"; //$NON-NLS-1$
 	public static final String END_TAG 	 = "%>";  //$NON-NLS-1$
+
+	public static final String START_DECLARATION = "<%!"; //$NON-NLS-1$
+	public static final String END_DECLARATION 	 = "%>";  //$NON-NLS-1$
+
+	public static final String START_DIRECTIVE = "<%@"; //$NON-NLS-1$
+	public static final String END_DIRECTIVE 	 = "%>";  //$NON-NLS-1$
 
 	private static final String IMPORTPATTERN = "<%@[ \\t\\n\\r]*page[ \\t\\n\\r]+import[ \\t\\n\\r]*=[ \\t\\n\\r]*[\\\'\\\"]([^\\\'\\\"]+)[\\\'\\\"][ \\t\\n\\r]*%>";
 	private static Pattern importPattern = Pattern.compile(IMPORTPATTERN);
@@ -46,7 +52,7 @@ public class JspCompiler {
 	public String compileJsp(String source, String className) throws FacesException {
 		StringBuilder javaSource = new StringBuilder(2048);
 		
-		generateHeader(javaSource, source, className);
+		source = generateHeader(javaSource, source, className);
 		
 		source = extractBody(source);
 		int slen = source.length();
@@ -64,7 +70,7 @@ public class JspCompiler {
 			if(exp>=0) {
 				int stend = source.indexOf(END_TAG,exp+2); 
 				if(stend<0) {
-					throw new FacesExceptionEx(null,"<% without a closing %>");
+					throw new FacesExceptionEx(null,"{0} without a closing {1}",START_TAG,END_TAG);
 				}
 				
 				if(source.charAt(exp+2)=='=') { 
@@ -99,7 +105,7 @@ public class JspCompiler {
 		return source;
 	}
 	
-	protected void generateHeader(StringBuilder b, String source, String className) {
+	protected String generateHeader(StringBuilder b, String source, String className) {
 		int pos = className.lastIndexOf('.');
 		String genPackage = pos>=0 ? className.substring(0,pos) : null;
 		String genClass = pos>=0 ? className.substring(pos+1) :className;
@@ -107,12 +113,16 @@ public class JspCompiler {
 			b.append("package ").append(genPackage).append(";\n");
 			b.append("\n");
 		}
-		generateImports(b, source);
+		source = generateImports(b, source);
 		b.append("public class ").append(genClass).append(" extends nsf.playground.jsp.JspFragment {\n");
+		source = generateDeclarations(b, source);
+		
 		b.append("  public void exec(JspWriter out, HttpServletRequest request, HttpServletResponse response) throws Exception {\n");
+		
+		return source;
 	}
 
-	protected void generateImports(StringBuilder b, String source) throws FacesException {
+	protected String generateImports(StringBuilder b, String source) throws FacesException {
 		// Std imports
 		b.append("import javax.servlet.http.HttpServletRequest;\n");
 		b.append("import javax.servlet.http.HttpServletResponse;\n");
@@ -121,10 +131,36 @@ public class JspCompiler {
 		// Then import from the JSP page
 		Matcher matcher = importPattern.matcher(source);
 		while(matcher.find()) {
-			String imp = matcher.group(1); 
-			b.append("import ").append(imp).append(";\n");
+			String imp = matcher.group(1);
+			String[] allImp = StringUtil.splitString(imp, ',');
+			for(int i=0; i<allImp.length; i++) {
+				b.append("import ").append(allImp[i]).append(";\n");
+			}
 		}
 		b.append("\n");
+		
+		return source;
+	}
+
+	protected String generateDeclarations(StringBuilder b, String source) throws FacesException {
+		while(true) {
+			int dec = source.indexOf(START_DECLARATION);
+			if(dec<0) {
+				break;
+			}
+			int stend = source.indexOf(END_DECLARATION,dec+2); 
+			if(stend<0) {
+				throw new FacesExceptionEx(null,"{0} without a closing {1}",START_DECLARATION,END_DECLARATION);
+			}
+			
+			String text = source.substring(dec+3,stend).trim();
+			b.append('\n');
+			b.append(text);
+			b.append('\n');
+
+			source = source.substring(0,dec)+source.substring(stend+END_DECLARATION.length(),source.length());
+		}
+		return source;
 	}
 	
 	

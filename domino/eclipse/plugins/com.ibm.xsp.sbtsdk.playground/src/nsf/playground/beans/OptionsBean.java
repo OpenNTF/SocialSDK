@@ -1,6 +1,5 @@
 package nsf.playground.beans;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -13,6 +12,7 @@ import lotus.domino.Document;
 import lotus.domino.NotesException;
 import lotus.domino.View;
 import nsf.playground.extension.Endpoints;
+import nsf.playground.extension.Endpoints.Categories;
 import nsf.playground.extension.Endpoints.Category;
 
 import com.ibm.commons.Platform;
@@ -48,6 +48,8 @@ public abstract class OptionsBean {
 	private String banner;
 	private String applicationTitle;
 	private String applicationLogo;
+	
+	private Categories categories;
 	
 	public OptionsBean() {
 		loadOptions();
@@ -147,18 +149,8 @@ public abstract class OptionsBean {
 	//
 	//
 	//
-	public List<Category> getEnvironmentCategories() {
-		ArrayList<Category> result = new ArrayList<Endpoints.Category>();
-		List<Endpoints> envext = PlaygroundExtensionFactory.getExtensions(Endpoints.class); // Get the categories for all the platforms
-		for(int i=0; i<envext.size(); i++) {
-			Category[] cats = envext.get(i).getPropertyList();
-			if(cats!=null) {
-				for(int j=0; j<cats.length; j++) {
-					result.add(cats[j]);
-				}
-			}
-		}
-		return result;
+	public Categories getEnvironmentCategories() {
+		return categories;
 	}
 
 	public String[] getRuntimePlatforms() {
@@ -195,6 +187,8 @@ public abstract class OptionsBean {
 			this.banner = getEnvironmentString(doc,"Banner");
 			this.applicationTitle = getEnvironmentString(doc,"AppTitle","IBM Social Business Toolkit");
 			this.applicationLogo = getEnvironmentString(doc,"AppLogo");
+			
+			this.categories = new Categories();
 		} finally {
 			try {
 				if(doc!=null) {

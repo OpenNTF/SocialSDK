@@ -32,13 +32,14 @@
 	<%
 		try {
 			ProfileService connProfSvc = new ProfileService();
-			String userId = Context.get().getProperty("sample.userId1");
+			String userId = connProfSvc.getMyUserId();
 			ConnectionEntryList invites = connProfSvc.getConnectionsColleagueEntriesByStatus(userId, "pending");
 			if(invites != null && ! invites.isEmpty()){
 			if(invites.getTotalResults() > 0){
 				ConnectionEntry invite = invites.iterator().next();
 				invite.setContent("accepting your invite");
 				connProfSvc.acceptInvite(invite);
+				out.println("Accepted invite from "+invite.getContributorName());
 			}
 			}
 			else

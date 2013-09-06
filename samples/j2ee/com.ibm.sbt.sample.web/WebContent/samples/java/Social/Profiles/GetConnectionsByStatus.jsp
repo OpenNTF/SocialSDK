@@ -36,23 +36,19 @@
 	<div id="content">
 	<%
 		try {
-			String userId = Context.get().getProperty("sample.id1");
 			ProfileService connProfSvc = new ProfileService();
+			String userId = connProfSvc.getMyUserId();
 			Map<String, String> params = new HashMap<String, String>();
-			params.put("inclMessage", "true");
-	
 			ConnectionEntryList entries = connProfSvc.getConnectionsColleagueEntriesByStatus(userId, "pending", params);
-		
 			if (entries != null && !entries.isEmpty()) {
-				out.println("<b> User's colleagues </b>");
+				out.println("<b> Pending Invites from :</b>");
 				out.println("<br>");
-				for (Iterator iterator = entries.iterator(); iterator.hasNext();) {
-					ConnectionEntry entry = (ConnectionEntry) iterator.next();
-					out.println("<b>Invite : </b> " + entry.getTitle() +entry.getContent());
+				for (ConnectionEntry entry : entries) {
+					out.println(entry.getTitle());
 					out.println("<br>");
 				}
 			} else {
-				out.println("No result");
+				out.println("No pending invites");
 			}
 		} catch (Throwable e) {
 			out.println("<pre>");

@@ -125,15 +125,21 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
             this.request(url,options,null,promise).response.then(
                 function(response) {
                     promise.response = response;
-                    var feedHandler = callbacks.createEntities.apply(self, [ self, response.data, response ]);
-                    var entitiesArray = feedHandler.getEntitiesDataArray();
-                    var entities = [];
-                    for ( var i = 0; i < entitiesArray.length; i++) {
-                        var entity = callbacks.createEntity.apply(self, [ self, entitiesArray[i], response ]);
-                        entities.push(entity);
+                    try {
+	                    var feedHandler = callbacks.createEntities.apply(self, [ self, response.data, response ]);
+	                    var entitiesArray = feedHandler.getEntitiesDataArray();
+	                    var entities = [];
+	                    for ( var i = 0; i < entitiesArray.length; i++) {
+	                        var entity = callbacks.createEntity.apply(self, [ self, entitiesArray[i], response ]);
+	                        entities.push(entity);
+	                    }
+	                    promise.summary = feedHandler.getSummary();
+	                    promise.fulfilled(entities);
+                    } catch (cause) {
+                    	var error = new Error("Invalid response");
+                    	error.cause = cause;
+                    	promise.rejected(error);
                     }
-                    promise.summary = feedHandler.getSummary();
-                    promise.fulfilled(entities);
                 },
                 function(error) {
                     promise.rejected(error);
@@ -169,11 +175,21 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
             this.request(url,options,entityId,promise).response.then(
                 function(response) {
                     promise.response = response;
-                    var entity = callbacks.createEntity.apply(self, [ self, response.data, response ]);
-                    if (self._cache && entityId) {
-                        self.fullFillOrRejectPromises.apply(self, [ entityId, entity, response ]);
-                    } else {
-                        promise.fulfilled(entity);
+                    try {
+                        var entity = callbacks.createEntity.apply(self, [ self, response.data, response ]);
+                        if (self._cache && entityId) {
+                            self.fullFillOrRejectPromises.apply(self, [ entityId, entity, response ]);
+                        } else {
+                            promise.fulfilled(entity);
+                        }
+                    } catch (cause) {
+                    	var error = new Error("Invalid response");
+                    	error.cause = cause;
+                        if (self._cache && entityId) {
+                            self.fullFillOrRejectPromises.apply(self, [ entityId, error ]);
+                        } else {
+                            promise.rejected(error);
+                        }
                     }
                 },
                 function(error) {

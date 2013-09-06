@@ -11,19 +11,21 @@
 <h3>Social Hello World</h3>
 <script type="text/javascript">
 require(["sbt/connections/ProfileService","sbt/connections/CommunityService","sbt/dom"], 
-	    function(ProfileService, CommunityService, dom) {
-		var id = "FrankAdams@renovations.com";
+	function(ProfileService, CommunityService, dom) {
+		var profileId = "FrankAdams@renovations.com";
 		var profileService = new ProfileService();
-		profileService.getProfile({
-			id: id,		
-			load: function(profile) {
-				dom.setText("name", profile.getDisplayName());		
+		profileService.getProfile(profileId).then(    
+            function(profile) {
+				dom.setText("name", profile.getName());		
 				dom.byId("photo").src = profile.getThumbnailUrl();
-			}
-		});
+            },
+            function(error) {
+            	dom.setText("error", error);
+            }
+        );
 	  	var communityService = new CommunityService();
-	  	communityService.getPublicCommunities({
-			load: function(communities) {
+	  	communityService.getPublicCommunities().then(
+			function(communities) {
 				dom.setText("count", communities.length);
 				var ul = document.getElementById("communities")
 				for (var i=0; i<communities.length; i++) {
@@ -33,12 +35,16 @@ require(["sbt/connections/ProfileService","sbt/connections/CommunityService","sb
 					li.setAttribute("id", "community" + i);
 					dom.setText("community" + i, community.getTitle());
 				}
-			}		
-		});
+			},
+			function(error) {
+            	dom.setText("error", error);
+			}
+		);
 	});
 </script>
 <div id="name"></div>
 <img id="photo" src=""></img>
 <ul id="communities"></ul>
+<div id="error"></div>
 </body>
 </html>

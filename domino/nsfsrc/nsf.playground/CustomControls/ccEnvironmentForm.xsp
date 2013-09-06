@@ -71,13 +71,14 @@ dataAccess.copyEnvironment(document1,v);
 					</xp:inputTextarea>
 				</xe:djTabPane>
 				<xp:repeat id="repeat3" rows="30" repeatControls="true"
-					value="#{javascript:optionsBean.getEnvironmentCategories()}" var="cat">
+					value="#{javascript:optionsBean.getEnvironmentCategories().getCategories()}" var="cat">
 					<xe:djTabPane id="djTabPane1"
-						title="${javascript:cat.getLabel()}">
+						title="${javascript:cat.getTabLabel()}">
 						<xe:this.rendered><![CDATA[#{javascript:var p = getComponent('djRuntimePlatforms').getValueAsString();
 return !p || p.contains(cat.getRuntimePlatform())}]]></xe:this.rendered>
 						<xe:formTable labelWidth="14em"
-							style="margin-left: 8px">
+							style="margin-left: 8px"
+							formTitle="#{javascript:cat.getLabel()}">
 							<xp:repeat id="repeat4" rows="30"
 								repeatControls="true" value="#{javascript:cat.getProperties()}"
 								var="prop">

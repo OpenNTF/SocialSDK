@@ -51,10 +51,12 @@ import org.apache.http.Header;
  */
 public class OAuthEndpoint extends AbstractEndpoint {
 
-	protected OAuth1Handler	oAuthHandler; 
-	protected OAuthEndpoint(){
+	protected OAuth1Handler	oAuthHandler;
+	
+	public OAuthEndpoint(){
 		this.oAuthHandler = new OAuth1Handler();
 	}
+	
 	protected OAuthEndpoint(OAuth1Handler handler) {
 		this.oAuthHandler = handler;
 	}

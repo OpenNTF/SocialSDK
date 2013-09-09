@@ -78,7 +78,6 @@
             queryObj.themeId = themeId;
         }
         var queryString = "?";
-        $.extend(queryObj, getSubstitutionParams());
         queryString += createQuery(queryObj, "&");
         
         if(callback){
@@ -88,9 +87,6 @@
             callback(queryString);
         }
         else if(snippet){
-            if(queryObj.missingParams){
-                return;
-            }
             var snippetQuery = snippetPage + queryString;
             $("#snippetContainer").load(snippetQuery, function(){
                 var subParams = getSubstitutionParams();
@@ -125,15 +121,21 @@
 
         var postData = {
             snippet: getSnippet(),
-            htmlData: html,
-            jsData: js,
-            cssData: css,
             debug: debug,
-            jsLibId: getJsLibId,
+            jsLibId: getJsLibId(),
             env: getEnv(),
             themeId: getThemeId()
-        };
-        $.extend(postData, getSubstitutionParams());
+        }; // base of a get request
+        
+        var newLink = previewPage + "?" + createQuery(postData, "&");
+        
+        $.extend(postData, {
+            htmlData: html,
+            jsData: js,
+            cssData: css
+         }); // add html etc
+        
+        $.extend(postData, getSubstitutionParams()); // add sub params
         if(postData.missingParams){
             displayMissingParamsMessage(postData.missingParams);
             return;
@@ -156,7 +158,7 @@
                 preview.close();
         }, 'html');
         // update previewLink
-        var newLink = previewPage + "?" + createQuery(postData, "&");
+        
         $("#previewLink").attr("href", newLink).text(newLink);
     }
 

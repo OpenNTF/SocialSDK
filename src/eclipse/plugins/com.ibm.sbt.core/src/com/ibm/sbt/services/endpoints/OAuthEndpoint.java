@@ -39,6 +39,7 @@ import com.ibm.sbt.security.authentication.oauth.consumer.servlet.OAClientAuthen
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.endpoints.js.JSReference;
 import com.ibm.sbt.util.SBTException;
+import org.apache.http.Header;
 
 /**
  * Bean that provides authentication via OAuth.
@@ -274,6 +275,15 @@ public class OAuthEndpoint extends AbstractEndpoint {
 			} else {
 				throw new HttpException("Error retrieving OAuth Handler. OAuth Handler is null");
 			}
+			
+			// Remove any existing authorization headers which can cause oauth requests to fail
+			if(request.containsHeader("authorization")){
+				Header[] header = request.getHeaders("authorization");
+				for (int i = 0; i < header.length; i++) {
+					request.removeHeader(header[i]);
+				}
+			} 
+			
 			request.addHeader("Authorization", authorizationheader);
 		}
 	}

@@ -282,7 +282,7 @@ public class OAuthEndpoint extends AbstractEndpoint {
 				for (int i = 0; i < header.length; i++) {
 					request.removeHeader(header[i]);
 				}
-			}
+			} 
 			
 			request.addHeader("Authorization", authorizationheader);
 		}

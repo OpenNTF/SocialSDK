@@ -1,5 +1,5 @@
 require(["sbt/dom", 
-         "sbt/connections/controls/forum/ForumGrid",
+         "sbt/connections/controls/forums/ForumGrid",
          "sbt/connections/ForumService"], 
     function(dom, ForumGrid, ForumService) {
 		// display My Forums

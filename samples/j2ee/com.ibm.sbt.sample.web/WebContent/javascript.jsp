@@ -51,6 +51,9 @@
                         <li>
                             <a href="#">Documentation</a>
                         </li>
+                        <li id="propertyTab">
+                            <a href="#">Properties</a>
+                        </li>
                     </ul>
                     <div id="snippetContainer" style="border-style:solid;border-width:1px;width=500px;height:300px;border-color:#D3D3D3;overflow:auto;">
                         <%@include file="includes/js_snippet.jsp"%>

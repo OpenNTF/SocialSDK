@@ -62,7 +62,7 @@ public class ParameterProcessor {
 		return input;
 	}
 	
-	public static List<String> getParametersQueryString(String input){
+	public static List<String> getParameters(String input){
 	    Pattern paramsPattern = Pattern.compile("%\\{(.*?)\\}");
 	    Matcher paramsMatcher = paramsPattern.matcher(input);
 	    ArrayList<String> result = new ArrayList<String>();

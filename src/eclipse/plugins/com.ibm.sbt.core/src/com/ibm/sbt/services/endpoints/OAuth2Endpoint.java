@@ -113,7 +113,7 @@ public class OAuth2Endpoint extends AbstractEndpoint {
 				for (int i = 0; i < header.length; i++) {
 					request.removeHeader(header[i]);
 				}
-			}
+			} 
 			
 			
 			String authorizationheader = "Bearer " + token.getAccessToken();

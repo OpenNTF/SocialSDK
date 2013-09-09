@@ -1,6 +1,8 @@
 package com.ibm.sbt.services.endpoints;
 
 import java.io.IOException;
+
+import org.apache.http.Header;
 import org.apache.http.HttpException;
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpRequestInterceptor;
@@ -104,6 +106,16 @@ public class OAuth2Endpoint extends AbstractEndpoint {
 				Platform.getInstance().log(e);
 				return;
 			}
+			
+			// Remove any existing authorization headers which can cause oauth requests to fail
+			if(request.containsHeader("authorization")){
+				Header[] header = request.getHeaders("authorization");
+				for (int i = 0; i < header.length; i++) {
+					request.removeHeader(header[i]);
+				}
+			}
+			
+			
 			String authorizationheader = "Bearer " + token.getAccessToken();
 			request.addHeader("Authorization", authorizationheader);
 		}

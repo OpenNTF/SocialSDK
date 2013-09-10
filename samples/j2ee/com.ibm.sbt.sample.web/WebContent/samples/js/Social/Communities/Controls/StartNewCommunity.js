@@ -10,7 +10,7 @@ function(dom, ProfileGrid, ProfileRendererMixin, CommunityService, lang) {
 	
 	var grid = new ProfileGrid({
         type : "colleagues",
-        email : "%{sample.email1}",
+        email : "%{name=sample.email1}",
     });
     
     lang.mixin(grid.renderer, ProfileRendererMixin);

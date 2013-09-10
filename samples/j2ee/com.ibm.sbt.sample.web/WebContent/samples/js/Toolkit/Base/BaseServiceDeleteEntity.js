@@ -15,11 +15,11 @@ require([ "sbt/base/XmlDataHandler", "sbt/lang", "sbt/dom", "sbt/json",
             var options = {
                 method : "DELETE",
                 handleAs : "text",
-                query : { communityUuid : "%{sample.communityId}" }
+                query : { communityUuid : "%{name=sample.communityId}" }
             };
             
             var url = baseService.constructUrl(consts.AtomCommunityInstance, {}, {authType : ""});
-            var promise = baseService.deleteEntity(url, options, "%{sample.communityId}", args);
+            var promise = baseService.deleteEntity(url, options, "%{name=sample.communityId}", args);
             promise.then(
                 function(data) {
                     results.push({

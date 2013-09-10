@@ -8,33 +8,110 @@
         return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(url)||[,""])[1].replace(/\+/g, '%20'))||null;
     }
 
-    function buildUrl(){
-
+    function createQuery(queryMap, delimiter){
+        if(!queryMap){
+            return null;
+        }
+        var delim = delimiter;
+        if(!delim){
+            delim = ",";
+        }
+        var pairs = [];
+        for(var name in queryMap){
+            var value = queryMap[name];
+            pairs.push(encodeURIComponent(name) + "=" + encodeURIComponent(value));
+        }
+        return pairs.join(delim);
     }
-
+    
+    function getSubstitutionParams(){
+        var result = {};
+        
+        var snippetParamList = $("#propertyContents input[type=text]");
+        if(snippetParamList.length > 0){
+            var i;
+            for(i = 0; i < snippetParamList.length; i++){
+                var input = snippetParamList[i];
+                if(input.value){
+                    result[input.name] = input.value;
+                }
+                else{
+                    if(document.getElementById("requiredMarker")){ // check if it is required
+                        if(result.missingParams){
+                            result.missingParams.push(input.name);
+                        }
+                        else{
+                            result.missingParams = [];
+                            result.missingParams.push(input.name);
+                        }
+                    }
+                    else{
+                        result[input.name] = input.value; // put in the empty value so it overwrites the cached version 
+                    }
+                }
+            }
+        }
+        
+        return result;
+    }
+    
+    function displayMissingParamsMessage(missingParamsArray){
+        $("#paramsMissingError").text("The following parameters must not be empty: " + missingParamsArray.join(",")).removeClass("hide");
+        var propContent = $("#propertyContents");
+        propContent.css("display", ""); 
+        propContent.siblings().css("display", "none");
+        
+        var propTab = $("#propertyTab");
+        propTab.addClass("active"); 
+        propTab.siblings().removeClass("active");
+    }
+    
+    function hideMissingParamsMessage(){
+        $("#paramsMissingError").addClass("hide");
+    }
+    
     function ajaxRefresh(snippet, jsLibId, env, themeId, callback){
         // refresh snippet with js_snippet.jsp
-        var parameters = "?snippet=" + snippet + "&jsLibId=" + jsLibId;
-        if(env != null && env != "")
-            parameters = parameters + "&env=" + env;
-        if(themeId != null && themeId != "")
-            parameters = parameters + "&themeId=" + themeId;
+        var queryObj = {
+            snippet: snippet,
+            jsLibId: jsLibId
+        };
+        if(env != null && env != ""){
+            queryObj.env = env;
+        }
+        if(themeId != null && themeId != ""){
+            queryObj.themeId = themeId;
+        }
+        var queryString = "?";
+        queryString += createQuery(queryObj, "&");
+        
         if(callback){
             $("#snippetContainer").empty();
             $("#previewFrame").attr('src', "about:blank");
             $("#previewLink").empty();
-            callback(parameters);
+            callback(queryString);
         }
         else if(snippet){
-            var snippetQuery = snippetPage + parameters;
-            $("#snippetContainer").load(snippetQuery);
+            var snippetQuery = snippetPage + queryString;
+            $("#snippetContainer").load(snippetQuery, function(){
+                var subParams = getSubstitutionParams();
+                if(subParams.missingParams){
+                    displayMissingParamsMessage(subParams.missingParams);
+                    return;
+                }
+                else{
+                    hideMissingParamsMessage();
+                }
+            });
+            
             
             // refresh iframe with javascriptPreview.jsp.
-            var previewQuery = previewPage + parameters;
+            var previewQuery = previewPage + queryString;
             $("#previewFrame").attr('src', previewQuery);
-
+            
             // update previewLink
-            $("#previewLink").attr("href", previewQuery).text(previewQuery);
+            var newLink = previewQuery;
+            $("#previewLink").attr("href", newLink).text(newLink);
         }
     }
     // Debug flags whether we are going to use firebug.
@@ -47,7 +124,31 @@
         var js = jsDiv.firstChild && jsDiv.firstChild.CodeMirror ? jsDiv.firstChild.CodeMirror.getValue() : jsDiv.textContent;
         var css = cssDiv.firstChild && cssDiv.firstChild.CodeMirror ? cssDiv.firstChild.CodeMirror.getValue() : cssDiv.textContent;
 
-        $.post(previewPage, { snippet: getSnippet(), htmlData: html, jsData: js, cssData: css, debug: debug, jsLibId:getJsLibId(), env: getEnv(),  themeId: getThemeId()}, function(data) {
+        var postData = {
+            snippet: getSnippet(),
+            debug: debug,
+            jsLibId: getJsLibId(),
+            env: getEnv(),
+            themeId: getThemeId()
+        }; // base of a get request
+        
+        var newLink = previewPage + "?" + createQuery(postData, "&");
+        
+        $.extend(postData, {
+            htmlData: html,
+            jsData: js,
+            cssData: css
+         }); // add html etc
+        
+        $.extend(postData, getSubstitutionParams()); // add sub params
+        if(postData.missingParams){
+            displayMissingParamsMessage(postData.missingParams);
+            return;
+        }
+        else{
+            hideMissingParamsMessage();
+        }
+        $.post(previewPage, postData, function(data) {
                 var wrapper = $(".iframeWrapper");
                 wrapper.find(frame).remove();
                 var $frame = $('<iframe id="previewFrame" src=""  width="100%" height="100%" style="border-style:none;"></iframe>');
@@ -61,6 +162,9 @@
                 preview.write(data);
                 preview.close();
         }, 'html');
+        // update previewLink
+        
+        $("#previewLink").attr("href", newLink).text(newLink);
     }
 
     function showDialog(){

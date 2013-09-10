@@ -24,11 +24,9 @@
       boolean debugTransport = false;
       boolean loadDojo = true;
       final HttpServletRequest finalRequest = request;
-      ParameterProvider parameterProvider = ParameterProcessor.getDefaultProvider(new ParameterProvider() {
-          public String getParameter(String name) {
-              return finalRequest.getParameter(name);
-          }
-      });
+      final HttpSession finalSession = session;
+      final String finalSnippetName = snippetName;
+      ParameterProvider parameterProvider = ParameterProcessor.getWebProvider(finalRequest, finalSession, finalSnippetName);
       // doGet
       if(request.getMethod().equals("GET")){
           JSSnippet snippet = (JSSnippet)SnippetFactory.getJsSnippet(application, request, snippetName);
@@ -42,20 +40,6 @@
               if(StringUtil.isEmpty(theme))
                   theme = snippet.getTheme();
           
-              // replace substitution variables
-              boolean allParamsFound = true;
-              List<String> parameters = ParameterProcessor.getParametersQueryString(js + html);
-              String queryParams = "";
-              for(String param : parameters){
-                  String match = parameterProvider.getParameter(param);
-                  queryParams+=param+"="+match+"&";
-                  if(match == null)
-                      allParamsFound=false;
-              }
-              if(!allParamsFound){
-                  String callbackUrl = URLEncoder.encode(request.getRequestURI()+"?" + request.getQueryString(), "UTF-8");
-                  response.sendRedirect("paramsForm.jsp?callback=" + callbackUrl + "&" + queryParams);
-              }
               if (StringUtil.isNotEmpty(js)) {
           		js = ParameterProcessor.process(js, parameterProvider);
               }

@@ -4,7 +4,7 @@ require(["sbt/dom", "sbt/json", "sbt/config", "sbt/connections/CommunityService"
         endpoint.authenticate();
         
         var communityService = new CommunityService();
-        var communityId = "%{sample.communityId}";
+        var communityId = "%{name=sample.communityId|helpSnippetId=Social_Communities_Get_My_Communities}";
 
         var results = [];
         

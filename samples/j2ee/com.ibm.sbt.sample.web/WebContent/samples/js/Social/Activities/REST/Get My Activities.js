@@ -7,7 +7,7 @@ require(["sbt/connections/ConnectionsConstants","sbt/config","sbt/xml","sbt/xpat
         method : "GET", 
         handleAs : "text",
         query : {
-            email : "%{sample.email1}",
+            email : "%{name=sample.email1}",
             ps : 5
         }
     };

@@ -36,12 +36,17 @@
                     result[input.name] = input.value;
                 }
                 else{
-                    if(result.missingParams){
-                        result.missingParams.push(input.name);
+                    if(document.getElementById("requiredMarker")){ // check if it is required
+                        if(result.missingParams){
+                            result.missingParams.push(input.name);
+                        }
+                        else{
+                            result.missingParams = [];
+                            result.missingParams.push(input.name);
+                        }
                     }
                     else{
-                        result.missingParams = [];
-                        result.missingParams.push(input.name);
+                        result[input.name] = input.value; // put in the empty value so it overwrites the cached version 
                     }
                 }
             }

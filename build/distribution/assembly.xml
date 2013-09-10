@@ -127,7 +127,7 @@
       </includes>
     </fileSet>
     <fileSet>
-      <directory>${build.target}/doc/javadoc</directory>
+      <directory>../../build/target/site/apidocs/javadoc</directory>
       <outputDirectory>sbtsdk/doc/javadoc</outputDirectory>
       <includes>
         <include>**/*.*</include>
@@ -141,10 +141,10 @@
       </includes>
     </fileSet>
     <fileSet>
-      <directory>${build.target}/com.ibm.sbt.test/com.ibm.sbt.core.test/site</directory>
+      <directory>${build.target}/reports/jshint</directory>
       <outputDirectory>sbtsdk/reports</outputDirectory>
       <includes>
-        <include>surefire-report.html</include>
+        <include>*.xml</include>
       </includes>
     </fileSet>
     <fileSet>

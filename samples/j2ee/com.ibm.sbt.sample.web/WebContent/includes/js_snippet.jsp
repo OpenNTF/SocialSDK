@@ -70,34 +70,31 @@
             <%
             for(String param : paramList){
                 String value = "";
-                String name = ParameterProcessor.getParameterPart(param, "name");
+                String name = ParameterProcessor.getParameterPart(param, "label");
+                if(name == null){
+                    name = ParameterProcessor.getParameterPart(param, "name");
+                }
+                
                 String storeKey = snippetName + "_" + name;
                 String storedValue = (String) session.getAttribute(storeKey);
                 if(storedValue != null){
                     value = storedValue;
                 }
-                
-                String label = ParameterProcessor.getParameterPart(param, "label");
-                if(label == null){
-                    label = name;
+                boolean isRequired = true;
+                String requiredParam = ParameterProcessor.getParameterPart(param, "required");
+                if(requiredParam != null && requiredParam.equalsIgnoreCase("false")){
+                    isRequired = false;
                 }
+                String requiredMarkUp = isRequired ? "<span id='requiredMarker' style='display:inline; color:red;'>*</span>" : "";
+
                 String helpSnippetId = ParameterProcessor.getParameterPart(param, "helpSnippetId");
-                if(helpSnippetId == null){
+                String helpLinkMarkUp = helpSnippetId != null ? "<a target='_blank' href='javascriptPreview.jsp?snippet=" + helpSnippetId + "'>" + name + "</a>" : name;
             %>
             <tr>
-                <th style="vertical-align:middle;" scope="row"><%=label %></th>
+                <th style="vertical-align:middle;" scope="row"><%=helpLinkMarkUp%><%=requiredMarkUp%></th>
                 <td><input style="vertical-align:middle;margin-bottom:0px;" type="text" name="<%=name %>" value="<%=value %>" ></td>
             </tr>
             <%
-                }
-            else{
-            %>
-            <tr>
-                <th style="vertical-align:middle;" scope="row"><a target="_blank" href="javascriptPreview.jsp?snippet=<%=helpSnippetId%>"><%=label %></a></th>
-                <td><input style="vertical-align:middle;margin-bottom:0px;" type="text" name="<%=name %>" value="<%=value %>" ></td>
-            </tr>
-            <%
-                }
             }
             %>
         </table>

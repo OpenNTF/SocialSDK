@@ -234,10 +234,14 @@ public class ParameterProcessor {
 	}
 
 	/*
-	 * Process a parameter with the following format:
+	 * Process a parameter with one of the following formats:
 	 * 		name[=value]
+	 *      name=xxx[|value=xxx][|label=xxx][|idHelpSnippet=snippet_id][|required=boolean]
 	 */
 	private static String processParameter(String name, ParameterProvider provider) {
+	    if(name.contains("|")){
+	        return provider.getParameter(name);
+	    }
 		String[] parts = StringUtil.splitString(name, '=');
 		if (parts.length == 2) {
 			String value = provider.getParameter(parts[0]);
@@ -248,30 +252,17 @@ public class ParameterProcessor {
 	}
 	
 	/**
-     * Gets the specified part out of a parameter of format
+	 * Gets the specified part out of a parameter of format
      *    name[=value][|label=xxx][|idHelpSnippet=snippet_id][|required]
      *    
-     *    name is always first. If a part is followed by '=' then the part after '=' is returned, else it just returns the part.
-     * @param parameter
-     * @return
-     */
-    public static String getParameterPart(String parameter, String part){
-        String[] parts = StringUtil.splitString(parameter, '|');
-        
-        if(part.equals("name")){ // return the name not the value
-            String[] namePart = StringUtil.splitString(parts[0], '=');
-            return namePart[0];
-        } 
-        else if(part.equals("required")){
-            if(parts[parts.length - 1].equals("required")){
-                return "required";
-            }
-            else{
-                return null;
-            }
-        }
-        
-        for(int i = 1; i < parts.length; i++){
+     *    If a part is followed by '=' then the part after '=' is returned, else it just returns the part.
+     *    Here the parameter is already split into name=value sections.
+	 * @param parts The parameter split into name=value pieces.
+	 * @param part The part to be retrieved.
+	 * @return
+	 */
+	public static String getParameterPart(String[] parts, String part){
+	    for(int i = 0; i < parts.length; i++){
             String[] splitParts = StringUtil.splitString(parts[i], '=');
             if(splitParts[0].equals(part)){
                 if(splitParts.length == 1){
@@ -282,8 +273,19 @@ public class ParameterProcessor {
                 }
             }
         }
+	    return null;
+	}
+	
+	/**
+	 * Splits the parameter into sections and returns the value of part.
+	 * @param parameter
+	 * @param part
+	 * @return
+	 */
+    public static String getParameterPart(String parameter, String part){
+        String[] parts = StringUtil.splitString(parameter, '|');
         
-        return null;
+        return getParameterPart(parts, part);
     }
 
 	/**

@@ -69,7 +69,7 @@
         
             <%
             for(String param : paramList){
-                String value = "";
+                String value = ParameterProcessor.getWebProvider(request, session, snippetName).getParameter(param);
                 String name = ParameterProcessor.getParameterPart(param, "label");
                 if(name == null){
                     name = ParameterProcessor.getParameterPart(param, "name");
@@ -80,6 +80,11 @@
                 if(storedValue != null){
                     value = storedValue;
                 }
+                
+                if(value == null){
+                    value = "";
+                }
+                
                 boolean isRequired = true;
                 String requiredParam = ParameterProcessor.getParameterPart(param, "required");
                 if(requiredParam != null && requiredParam.equalsIgnoreCase("false")){

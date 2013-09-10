@@ -23,6 +23,8 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import com.ibm.commons.runtime.Application;
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.util.StringUtil;
@@ -79,7 +81,8 @@ public class ParameterProcessor {
 	    final Application application = Application.getUnchecked();
 	    defaultProvider = new ParameterProvider() {
             @Override
-            public String getParameter(String name) {
+            public String getParameter(String parameter) {
+                String name = ParameterProcessor.getParameterPart(parameter, "name");
                 if (context != null) {
                     return context.getProperty(name);
                 }
@@ -87,6 +90,33 @@ public class ParameterProcessor {
             }
         };
         return defaultProvider;
+	}
+	
+	public static ParameterProvider getWebProvider(final HttpServletRequest finalRequest, final HttpSession finalSession, final String finalSnippetName){
+	    return ParameterProcessor.getDefaultProvider(new ParameterProvider() {
+	          @Override
+            public String getParameter(String parameter) {
+	              String name = ParameterProcessor.getParameterPart(parameter, "label"); 
+	              String value = finalRequest.getParameter(name);
+	              if(name == null && value == null){ // for backwards compatibility with non-labelled params...
+	                  name = ParameterProcessor.getParameterPart(parameter, "name");
+	                  value = finalRequest.getParameter(name);
+	              }
+	              
+	              String storeKey = finalSnippetName + "_" + name; // store per snippet
+	              
+	              if(value == null){
+	                  value = (String) finalSession.getAttribute(storeKey); //check if there is a stored param
+	              }
+	              
+	              if(value == null){
+	                  value = ParameterProcessor.getParameterPart(parameter, "value"); // check if a default value was specified.
+	              }
+	              
+	              return value;
+	          }
+	    });
+	    
 	}
 
 	public static ParameterProvider getDefaultProvider(final ParameterProvider provider){
@@ -283,6 +313,9 @@ public class ParameterProcessor {
 	 * @return
 	 */
     public static String getParameterPart(String parameter, String part){
+        if(!parameter.contains("|") && !parameter.contains("=")){
+            return parameter;
+        }
         String[] parts = StringUtil.splitString(parameter, '|');
         
         return getParameterPart(parts, part);

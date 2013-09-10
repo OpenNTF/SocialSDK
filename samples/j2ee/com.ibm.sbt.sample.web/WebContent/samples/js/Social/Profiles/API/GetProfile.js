@@ -1,6 +1,6 @@
 require(["sbt/dom", "sbt/json", "sbt/connections/ProfileService"], 
     function(dom,json,ProfileService) {
-    var profileId = "%{sample.email1}";
+    var profileId = "%{name=sample.email1}";
     var results = null;
     try {
         var profileService = new ProfileService();

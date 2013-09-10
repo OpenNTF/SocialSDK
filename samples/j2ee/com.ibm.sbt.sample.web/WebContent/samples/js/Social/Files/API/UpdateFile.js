@@ -3,7 +3,7 @@ require([ "sbt/connections/FileService", "sbt/dom", "sbt/json" ], function(FileS
 	var fileService = new FileService();
 
 	fileService.updateFileMetadata({
-		id : "%{sample.fileId}",
+		id : "%{name=sample.fileId|helpSnippetId=Social_Files_Get_My_Files}",
 		label : "New Label"+(new Date()).getTime(),
 		summary : "New Summary",
 		visibility : "public"

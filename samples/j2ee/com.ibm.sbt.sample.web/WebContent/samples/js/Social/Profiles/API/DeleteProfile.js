@@ -1,5 +1,5 @@
 require(["sbt/connections/ProfileAdminService","sbt/dom", "sbt/json"], function(ProfileAdminService,dom, json) {
-	var id = "%{sample.createProfileId}";
+	var id = "%{name=sample.createProfileId}";
 	var profileAdminService = new ProfileAdminService();	
 	var promise = profileAdminService.deleteProfile(id);
 	promise.then(function(id){

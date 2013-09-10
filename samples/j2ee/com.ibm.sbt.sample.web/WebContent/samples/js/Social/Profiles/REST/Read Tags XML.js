@@ -6,7 +6,7 @@ require(["sbt/dom", "sbt/config" ], function(dom, config) {
         handleAs : "text",
         query : {
         	format : "full",
-        	targetEmail : "%{sample.email1}"
+        	targetEmail : "%{name=sample.email1}"
         }
     };
         

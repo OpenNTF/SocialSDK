@@ -11,7 +11,7 @@ require([ "sbt/config", "sbt/lang", "sbt/dom", "sbt/json", "sbt/xml" ],
         method: "GET" , 
         handleAs : "text",
         query : {
-            email : "%{sample.email1}"
+            email : "%{name=sample.email1}"
         },
         loginUi : "dialog"
     };

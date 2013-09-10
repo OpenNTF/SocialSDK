@@ -7,8 +7,8 @@ require(["sbt/dom", "sbt/connections/controls/profiles/ColleagueGrid" ],
     var grid = new ColleagueGrid({
         type: "dynamic",
         rendererArgs: { hideViewAll: true, template : template },
-        email: "%{sample.email1}",
-        targetEmails: [ "%{sample.email1}", "%{sample.email2}" ]
+        email: "%{name=sample.email1}",
+        targetEmails: [ "%{name=sample.email1}", "%{name=sample.email2}" ]
     });
     dom.byId("gridDiv").appendChild(grid.domNode);
 });

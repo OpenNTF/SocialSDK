@@ -1,6 +1,6 @@
 require([ "sbt/dom", "sbt/json", "sbt/connections/SearchService" ], function(dom,json,SearchService) {
         var searchService = new SearchService();
-        var promise = searchService.getMyTags("%{sample.searchQuery}");
+        var promise = searchService.getMyTags("%{name=sample.searchQuery}");
         promise.then(
             function(results) {
                 dom.setText("json", json.jsonBeanStringify(results));

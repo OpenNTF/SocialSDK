@@ -1,5 +1,5 @@
 require(["sbt/connections/ProfileService","sbt/dom", "sbt/json"], function(ProfileService,dom, json) {
-	var id1 = "%{name=sample.id1}";	
+	var id1 = "%{name=sample.id1|helpSnippetId=Social_Profiles_Get_Profile}";	
 	var result;
 	var profileService = new ProfileService();
 	var profile = profileService.newProfile(id1);				

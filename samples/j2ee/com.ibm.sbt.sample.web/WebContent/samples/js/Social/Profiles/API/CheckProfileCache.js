@@ -3,7 +3,7 @@ var results = [];
 require(["sbt/dom", "sbt/json", "sbt/connections/ProfileService"], 
     function(dom,json,ProfileService) {
     var profileService = new ProfileService();    
-    var profileId = "%{name=sample.userId1}";
+    var profileId = "%{name=sample.userId1|helpSnippetId=Social_Profiles_Get_Profile}";
     profileService.getProfile(profileId).then(    
         function(profile) {
         	results.push({"Cache count after first get operation" : profileService._cache.count});

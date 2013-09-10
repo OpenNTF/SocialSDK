@@ -4,7 +4,7 @@ require([ "sbt/config", "sbt/lang", "sbt/dom", "sbt/json", "sbt/xml" ],
     var endpoint = config.findEndpoint("connections");
     var results = [];
     
-    endpoint.request("files/basic/api/myuserlibrary/document/%{name=sample.fileId}/entry", { method : "GET" }).then(
+    endpoint.request("files/basic/api/myuserlibrary/document/%{name=sample.fileId|helpSnippetId=Social_Files_Get_My_Files}/entry", { method : "GET" }).then(
         function(response) {
             dom.setText("json", response || "<empty>");
         }, 

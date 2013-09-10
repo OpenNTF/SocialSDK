@@ -2,7 +2,7 @@ require([ "sbt/connections/FileService", "sbt/dom", "sbt/json" ], function(FileS
 
 	var fileService = new FileService();
 
-	fileService.pinFile("%{name=sample.fileId}").then(function(status) {
+	fileService.pinFile("%{name=sample.fileId|helpSnippetId=Social_Files_Get_My_Files}").then(function(status) {
 
 		dom.setText("json", json.jsonBeanStringify({
 			status : status

@@ -2,7 +2,7 @@ require([ "sbt/connections/FileService", "sbt/dom", "sbt/json" ], function(FileS
 
 	var fileService = new FileService();
 
-	fileService.addFilesToFolder([ "%{name=sample.fileId}" ], "%{name=sample.folderId}").then(function(status) {
+	fileService.addFilesToFolder([ "%{name=sample.fileId|helpSnippetId=Social_Files_Get_My_Files}" ], "%{name=sample.folderId|helpSnippetId=Social_Files_Get_My_Folders}").then(function(status) {
 		dom.setText("json", json.jsonBeanStringify({
 			status : status
 		}));

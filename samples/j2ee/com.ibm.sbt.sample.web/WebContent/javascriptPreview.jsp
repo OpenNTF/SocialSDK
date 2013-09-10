@@ -26,31 +26,7 @@
       final HttpServletRequest finalRequest = request;
       final HttpSession finalSession = session;
       final String finalSnippetName = snippetName;
-      ParameterProvider parameterProvider = ParameterProcessor.getDefaultProvider(new ParameterProvider() {
-          public String getParameter(String parameter) {
-              String name = ParameterProcessor.getParameterPart(parameter, "label"); 
-              String value = finalRequest.getParameter(name);
-              if(name == null && value == null){ // for backwards compatibility with non-labelled params...
-                  name = ParameterProcessor.getParameterPart(parameter, "name");
-                  value = finalRequest.getParameter(name);
-              }
-              
-              String storeKey = finalSnippetName + "_" + name; // store per snippet
-              if(value != null){
-                  finalSession.setAttribute(storeKey, value); //store non-empty params provided by url
-              }
-              
-              if(value == null){
-                  value = (String) finalSession.getAttribute(storeKey); //check if there is a stored param
-              }
-              
-              if(value == null){
-                  value = ParameterProcessor.getParameterPart(parameter, "value"); // check if a default value was specified.
-              }
-              
-              return value;
-          }
-      });
+      ParameterProvider parameterProvider = ParameterProcessor.getWebProvider(finalRequest, finalSession, finalSnippetName);
       // doGet
       if(request.getMethod().equals("GET")){
           JSSnippet snippet = (JSSnippet)SnippetFactory.getJsSnippet(application, request, snippetName);

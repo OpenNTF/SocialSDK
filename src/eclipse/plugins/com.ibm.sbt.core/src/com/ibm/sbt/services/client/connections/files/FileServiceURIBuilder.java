@@ -28,19 +28,19 @@ public enum FileServiceURIBuilder {
 
     FILES("/files"),
     
-    GET_SERVICE_DOCUMENT("files/{auth-type}{access-type}/introspection"),
+    GET_SERVICE_DOCUMENT("{files}/{auth-type}{access-type}/introspection"),
     
-    POST_COMMENT_TO_FILE("files/{auth-type}{access-type}/userlibrary/{user-id}/document/{document-id}/feed"),
+    POST_COMMENT_TO_FILE("{files}/{auth-type}{access-type}/userlibrary/{user-id}/document/{document-id}/feed"),
     
-    GET_COMMENTS_FEED_FROM_USER_FILE("files/{auth-type}{access-type}/userlibrary/{user-id}/document/{document-id}/feed", new HashMap<String, String>() {{
+    GET_COMMENTS_FEED_FROM_USER_FILE("{files}/{auth-type}{access-type}/userlibrary/{user-id}/document/{document-id}/feed", new HashMap<String, String>() {{
        put("category", "comment");
      }}),
-     GET_COMMENTS_FEED_FROM_MY_FILE("files/{auth-type}{access-type}/myuserlibrary/document/{document-id}/feed", new HashMap<String, String>() {{
+     GET_COMMENTS_FEED_FROM_MY_FILE("{files}/{auth-type}{access-type}/myuserlibrary/document/{document-id}/feed", new HashMap<String, String>() {{
          put("category", "comment");
        }}),
         
-    GET_SINGLE_COMMENT_FROM_USER_FILE("files/{auth-type}{access-type}/userlibrary/{user-id}/document/{document-id}/comment/{comment-id}/entry"),
-    GET_SINGLE_COMMENT_FROM_MY_FILE("files/{auth-type}{access-type}/myuserlibrary/document/{document-id}/comment/{comment-id}/entry");
+    GET_SINGLE_COMMENT_FROM_USER_FILE("{files}/{auth-type}{access-type}/userlibrary/{user-id}/document/{document-id}/comment/{comment-id}/entry"),
+    GET_SINGLE_COMMENT_FROM_MY_FILE("{files}/{auth-type}{access-type}/myuserlibrary/document/{document-id}/comment/{comment-id}/entry");
 
     final String baseUrl;
     private final HashMap<String, String> parameters;

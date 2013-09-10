@@ -86,7 +86,18 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
             if (!url) {
                 throw new Error("BaseService.constructUrl: Invalid argument, url is undefined or null.");
             }
-            if (urlParams) {
+            
+            var serviceMappings = this.endpoint.serviceMappings;
+            if(!urlParams){
+                urlParams = {};
+            }
+            
+            lang.mixin(urlParams, this.contextRootMap);
+            if(!util.isEmptyObject(serviceMappings)){
+                lang.mixin(urlParams, serviceMappings);
+            }
+            
+            if (urlParams && !util.isEmptyObject(urlParams)) {
                 url = stringUtil.replace(url, urlParams);
                 
                 if (url.indexOf("//") != -1) {
@@ -120,6 +131,7 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
          * @returns {sbt/Promise}
          */
         getEntities : function(url,options,callbacks) {
+            url = this.constructUrl(url);
             var self = this;
             var promise = new Promise();
             this.request(url,options,null,promise).response.then(
@@ -158,6 +170,7 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
          * @returns {sbt/Promise}
          */
         getEntity : function(url,options,entityId,callbacks) {
+            url = this.constructUrl(url);
             var promise = this._validateEntityId(entityId);
             if (promise) {
                 return promise;
@@ -213,6 +226,7 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
          * @param sbt/Promise
          */
         updateEntity : function(url, options, callbacks) {
+            url = this.constructUrl(url);
             var self = this;
             var promise = new Promise();
             this.endpoint.request(url,options,null,promise).response.then(
@@ -258,6 +272,7 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
          * @param sbt/Promise
          */
         deleteEntity : function(url,options,entityId) {
+            url = this.constructUrl(url);
             var promise = this._validateEntityId(entityId);
             if (promise) {
                 return promise;
@@ -289,6 +304,7 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
          * @param sbt/Promise
          */
         request : function(url,options,entityId,promise) {
+            url = this.constructUrl(url);
             if (this._cache && entityId) {
                 this.pushPromise(entityId, promise);
             }

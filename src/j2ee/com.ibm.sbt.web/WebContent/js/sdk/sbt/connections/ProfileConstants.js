@@ -154,57 +154,57 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
 		/**
          * Retrieve a profile entry.
          */
-        AtomProfileDo : "/profiles{authType}/atom/profile.do",
+        AtomProfileDo : "/{profiles}{authType}/atom/profile.do",
         
         /**
          * Update a profile entry.
          */
-        AtomProfileEntryDo : "/profiles{authType}/atom/profileEntry.do",
+        AtomProfileEntryDo : "/{profiles}{authType}/atom/profileEntry.do",
         
         /**
          * Retrieve a feed that lists the contacts that a person has designated as colleagues.
          */
-        AtomConnectionsDo : "/profiles{authType}/atom/connections.do",
+        AtomConnectionsDo : "/{profiles}{authType}/atom/connections.do",
         
         /**
          * Retrieve the profiles of the people who comprise a specific user's report-to chain.
          */
-        AtomReportingChainDo : "/profiles{authType}/atom/reportingChain.do",
+        AtomReportingChainDo : "/{profiles}{authType}/atom/reportingChain.do",
         
         /**
          * Retrieve the people managed by a specified person.
          */
-        AtomPeopleManagedDo : "/profiles{authType}/atom/peopleManaged.do",
+        AtomPeopleManagedDo : "/{profiles}{authType}/atom/peopleManaged.do",
         
         /**
          * Retrieve status updates for a specified person.
          */
-        AtomConnectionsInCommonDo : "/profiles{authType}/atom/connectionsInCommon.do",
+        AtomConnectionsInCommonDo : "/{profiles}{authType}/atom/connectionsInCommon.do",
         
         /**
          * Search for a set of profiles that match a specific criteria and return them in a feed.
          */
-        AtomSearchDo : "/profiles{authType}/atom/search.do",
+        AtomSearchDo : "/{profiles}{authType}/atom/search.do",
         
         /**
          * Retrieve the profiles of the people who report to a specific user. 
          */
-        AtomPeopleManagedDo : "/profiles{authType}/atom/peopleManaged.do",
+        AtomPeopleManagedDo : "/{profiles}{authType}/atom/peopleManaged.do",
         
         /**
          * Retrieve the tags assigned to a profile from the Profiles tag collection.
          */
-        AtomTagsDo : "/profiles{authType}/atom/profileTags.do",
+        AtomTagsDo : "/{profiles}{authType}/atom/profileTags.do",
         
         /**
          * Admin API - create a new profile.
          */
-        AdminAtomProfileDo : "/profiles/admin/atom/profiles.do",
+        AdminAtomProfileDo : "/{profiles}/admin/atom/profiles.do",
         
         /**
          * Admin API - delete a  profile.
          */
-        AdminAtomProfileEntryDo : "/profiles/admin/atom/profileEntry.do"
+        AdminAtomProfileEntryDo : "/{profiles}/admin/atom/profileEntry.do"
         
     });
 });

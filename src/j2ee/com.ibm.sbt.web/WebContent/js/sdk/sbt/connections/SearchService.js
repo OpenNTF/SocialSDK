@@ -195,6 +195,10 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
      * @namespace sbt.connections
      */
     var SearchService = declare(BaseService, {
+        
+        contextRootMap: {
+            search: "search"
+        },
 
         /**
          * Constructor for SearchService

@@ -106,49 +106,49 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         /**
 		 * Edit link for a forum entry.  
          */
-        AtomForum : "forums/atom/forum",
+        AtomForum : "{forums}/atom/forum",
         
         /**
 		 * Edit link for a forum topic entry.  
          */
-        AtomTopic : "/forums/atom/topic",
+        AtomTopic : "/{forums}/atom/topic",
         
 		/**
 		 * Edit link for a forum reply entry.  
          */
-        AtomReply : "/forums/atom/reply",
+        AtomReply : "/{forums}/atom/reply",
         
 		/**
 		 * Get a feed that includes all stand-alone and community forums created in the enterprise. 
          */
-        AtomForums : "/forums/atom/forums",
+        AtomForums : "/{forums}/atom/forums",
         
 		/**
 		 * Get a feed that includes all of the forums hosted by the Forums application. 
          */
-        AtomForumsPublic : "/forums/atom/forums/public",
+        AtomForumsPublic : "/{forums}/atom/forums/public",
         
 		/**
 		 * Get a feed that includes forums created by the authenticated user or associated with communities to which the user belongs.  
          */
-        AtomForumsMy : "/forums/atom/forums/my",
+        AtomForumsMy : "/{forums}/atom/forums/my",
         
 		/**
 		 * Get a feed that includes the topics in a specific stand-alone forum.  
          */
         
-        AtomTopics : "/forums/atom/topics",
+        AtomTopics : "/{forums}/atom/topics",
         
         /**
          * Get a feed that includes the topics that the authenticated user created in stand-alone forums and in forums associated 
          * with communities to which the user belongs. 
          */
-        AtomTopicsMy : "/forums/atom/topics/my",
+        AtomTopicsMy : "/{forums}/atom/topics/my",
         
         /**
          * Get a feed that includes all of the replies for a specific forum topic. 
          */
-        AtomReplies : "/forums/atom/replies",
+        AtomReplies : "/{forums}/atom/replies",
         
         /**
          * Get a category document that lists the tags that have been assigned to forums. 

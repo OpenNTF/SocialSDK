@@ -32,8 +32,8 @@
     <module>prereq</module>
     <module>sdk</module>
     <module>domino</module>
-    <module>sample</module>
     <module>js</module>
+    <module>sample</module>
     <module>reporting</module>
     <module>test</module>
     <module>distribution</module>

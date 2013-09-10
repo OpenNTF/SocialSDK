@@ -127,7 +127,7 @@
       </includes>
     </fileSet>
     <fileSet>
-      <directory>${build.target}/doc/javadoc</directory>
+      <directory>../../build/target/site/apidocs/javadoc</directory>
       <outputDirectory>sbtsdk/doc/javadoc</outputDirectory>
       <includes>
         <include>**/*.*</include>
@@ -141,10 +141,10 @@
       </includes>
     </fileSet>
     <fileSet>
-      <directory>${build.target}/com.ibm.sbt.test/com.ibm.sbt.core.test/site</directory>
+      <directory>${build.target}/reports/jshint</directory>
       <outputDirectory>sbtsdk/reports</outputDirectory>
       <includes>
-        <include>surefire-report.html</include>
+        <include>*.xml</include>
       </includes>
     </fileSet>
     <fileSet>
@@ -210,6 +210,7 @@
       <outputDirectory>sbtsdk/source</outputDirectory>
       <excludes>
         <exclude>**/bin/</exclude>
+        <exclude>**/target/</exclude>
         <exclude>**/pom.xml</exclude>
         <exclude>**/.jazzignore</exclude>
         <exclude>**/.apt_generated</exclude>
@@ -220,10 +221,15 @@
       </includes>
     </fileSet>
     <fileSet>
+      <directory>../../src/dbscripts</directory>
+      <outputDirectory>sbtsdk/source/dbscripts</outputDirectory>
+    </fileSet>
+    <fileSet>
       <directory>../../src/eclipse/plugins</directory>
       <outputDirectory>sbtsdk/source</outputDirectory>
       <excludes>
         <exclude>**/bin/</exclude>
+        <exclude>**/target/</exclude>
         <exclude>**/pom.xml</exclude>
         <exclude>**/.jazzignore</exclude>
         <exclude>**/.apt_generated</exclude>
@@ -238,6 +244,7 @@
       <outputDirectory>sbtsdk/source/com.ibm.xsp.sbtsdk</outputDirectory>
       <excludes>
         <exclude>**/bin/</exclude>
+        <exclude>**/target/</exclude>
         <exclude>**/pom.xml</exclude>
         <exclude>**/.jazzignore</exclude>
         <exclude>**/.apt_generated</exclude>
@@ -252,6 +259,7 @@
       <outputDirectory>sbtsdk/source</outputDirectory>
       <excludes>
         <exclude>**/bin/</exclude>
+        <exclude>**/target/</exclude>
         <exclude>**/pom.xml</exclude>
         <exclude>**/.jazzignore</exclude>
         <exclude>**/.apt_generated</exclude>
@@ -266,6 +274,7 @@
       <outputDirectory>sbtsdk/source</outputDirectory>
       <excludes>
         <exclude>**/bin/</exclude>
+        <exclude>**/target/</exclude>
         <exclude>**/pom.xml</exclude>
         <exclude>**/.jazzignore</exclude>
         <exclude>**/.apt_generated</exclude>
@@ -280,6 +289,7 @@
       <outputDirectory>sbtsdk/source</outputDirectory>
       <excludes>
         <exclude>**/bin/</exclude>
+        <exclude>**/target/</exclude>
         <exclude>**/pom.xml</exclude>
         <exclude>**/.jazzignore</exclude>
         <exclude>**/.apt_generated</exclude>
@@ -294,6 +304,7 @@
       <outputDirectory>sbtsdk/source</outputDirectory>
       <excludes>
         <exclude>**/bin/</exclude>
+        <exclude>**/target/</exclude>
         <exclude>**/pom.xml</exclude>
         <exclude>**/.jazzignore</exclude>
         <exclude>**/.apt_generated</exclude>
@@ -310,6 +321,7 @@
         <exclude>com.ibm.sbt.libs.was/</exclude>
         <exclude>com.ibm.sbt.libs.j2ee.tomcat/</exclude>
         <exclude>**/bin/</exclude>
+        <exclude>**/target/</exclude>
         <exclude>**/pom.xml</exclude>
         <exclude>**/.jazzignore</exclude>
         <exclude>**/.apt_generated</exclude>

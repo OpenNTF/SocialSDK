@@ -41,13 +41,21 @@
 		factory="com.ibm.commons.runtime.naming.UrlFactory" url="faces-config.xml" />
 	-->
 
-    <!-- Configures the location of a sbt.properties file which 
-         contains the configuration proeprties for use with the Social Business Toolkit -->
+     <!-- Configures the database credential store which is used to securely store
+		user credentials -->
+    <!--
+	<Resource name="jdbc/ibmsbt-dbtokenstore" auth="Container" type="javax.sql.DataSource"
+    	maxActive="100" maxIdle="30" maxWait="10000" username="admin" password="***REMOVED***" 
+    	driverClassName="<drive class name>" url="jdbc:mysql://localhost:3306/<database name>"/>
+	-->
+
+   <!-- Configures the location of a sbt.properties file which 
+         contains the configuration properties for use with the Social Business Toolkit -->
     <Resource name="url/ibmsbt-sbtproperties" auth="Container" type="java.net.URL" 
 		factory="com.ibm.commons.runtime.naming.UrlFactory" url="sbt.properties" />
 
     <!-- Configures the mail session for the SDK, by default this uses the IBM Developer QuickStart Image -->
     <Resource name="mail/ibmsbt-session" type="javax.mail.Session" auth="Container" mail.smtp.host="qs.renovations.com"
-    mail.smtp.auth="true" mail.user="admin" password="***REMOVED***" mail.from="admin@renovations.com" mail.debug="false"/>
+		mail.smtp.auth="true" mail.user="admin" password="***REMOVED***" mail.from="admin@renovations.com" mail.debug="false"/>
 
 </Context>

@@ -29,7 +29,7 @@ define([ "../declare", "../lang", "../stringUtil", "../config", "../Promise", ".
      * @namespace sbt.base
      */   
 	var ActivityStreamsDataHandler = declare(DataHandler, {	
-        
+	    
 		constructor : function(args) {
             lang.mixin(this, args);
             this.data = args.data;
@@ -156,6 +156,11 @@ define([ "../declare", "../lang", "../stringUtil", "../config", "../Promise", ".
      * @namespace sbt.connections
      */
     var ActivityStreamService = declare(BaseService, {
+        
+        contextRootMap: {
+            connections: "connections"
+        },
+        
         /**
          * Constructor for ActivityStreamService
          * 

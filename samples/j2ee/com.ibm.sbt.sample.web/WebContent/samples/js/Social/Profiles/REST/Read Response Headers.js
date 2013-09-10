@@ -6,7 +6,7 @@ require([ "sbt/dom", "sbt/config" ], function(dom, config) {
         method : "GET", 
         handleAs : "text",
         query : {
-        	userid : "%{name=sample.id1}"
+        	userid : "%{name=sample.id1|helpSnippetId=Social_Profiles_Get_Profile}"
         }
     };
         

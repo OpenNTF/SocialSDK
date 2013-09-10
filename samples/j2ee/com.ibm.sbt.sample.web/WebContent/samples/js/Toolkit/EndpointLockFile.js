@@ -4,7 +4,7 @@ require([ "sbt/connections/ConnectionsConstants", "sbt/config", "sbt/lang", "sbt
     var endpoint = config.findEndpoint("connections");
     var results = [];
     
-    endpoint.request("files/basic/api/myuserlibrary/document/%{name=sample.fileId}/entry", { method : "GET" }).then(
+    endpoint.request("files/basic/api/myuserlibrary/document/%{name=sample.fileId|helpSnippetId=Social_Files_Get_My_Files}/entry", { method : "GET" }).then(
         function(entry) {
             var document = xml.parse(entry);
             var lockType = xpath.selectText(document, "/a:entry/td:lock/@type", conn.Namespaces);

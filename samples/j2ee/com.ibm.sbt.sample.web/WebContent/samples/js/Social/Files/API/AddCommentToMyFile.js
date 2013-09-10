@@ -2,7 +2,7 @@ require([ "sbt/connections/FileService", "sbt/dom", "sbt/json" ], function(FileS
 
 	var fileService = new FileService();
 
-	fileService.addCommentToMyFile("%{name=sample.fileId}", "Comment Added from JS Sample").then(function(comment) {
+	fileService.addCommentToMyFile("%{name=sample.fileId|helpSnippetId=Social_Files_Get_My_Files}", "Comment Added from JS Sample").then(function(comment) {
 
 		dom.setText("json", json.jsonBeanStringify(comment));
 

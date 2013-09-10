@@ -30,6 +30,7 @@ import com.ibm.sbt.services.client.connections.forums.feedhandler.ForumsFeedHand
 import com.ibm.sbt.services.client.connections.forums.feedhandler.RepliesFeedHandler;
 import com.ibm.sbt.services.client.connections.forums.feedhandler.TopicsFeedHandler;
 import com.ibm.sbt.services.client.connections.forums.transformers.BaseForumTransformer;
+import com.ibm.sbt.services.util.AuthUtil;
 
 
 /**
@@ -44,14 +45,33 @@ public class ForumService extends BaseService {
 	/**
 	 * Used in constructing REST APIs
 	 */
-	public static final String	_baseUrl				= "/forums/atom/";
+	public static final String	_baseUrl				= "/forums/";
+	public static final String _basicUrl				= "atom/";
+	public static final String _oauthUrl				= "oauth/atom/";
 	private static final String FORUM_UNIQUE_IDENTIFIER = "forumUuid";
 	private static final String TOPIC_UNIQUE_IDENTIFIER = "topicUuid";
 	private static final String REPLY_UNIQUE_IDENTIFIER = "replyUuid";
 	public static final String CREATE_OP 				= "create";
 	
 	/**
-	 * This method returns the all forums
+	 * Default Constructor
+	 */
+	
+	public ForumService() {
+		this(DEFAULT_ENDPOINT_NAME);
+	}
+	
+	/**
+	 * Constructor
+	 * 
+	 * @param endpoint
+	 *            Creates ForumService Object with specified values of endpoint
+	 */
+	public ForumService(String endpoint) {
+		super(endpoint, DEFAULT_CACHE_SIZE);
+	}
+	
+	/** This method returns the all forums
 	 * 
 	 * @return
 	 * @throws ForumServiceException
@@ -783,6 +803,12 @@ public class ForumService extends BaseService {
 	 */
 	protected String resolveUrl(ForumType forumType, FilterType filterType, Map<String, String> params) {
 		StringBuilder baseUrl = new StringBuilder(_baseUrl);
+		
+		if (AuthUtil.INSTANCE.getAuthValue(endpoint).equalsIgnoreCase(ConnectionsConstants.OAUTH)) {
+			baseUrl.append(_oauthUrl);
+		}else{
+			baseUrl.append(_basicUrl);
+		}
 		
 		// todo : Add oauth logic
 		if(filterType != null){

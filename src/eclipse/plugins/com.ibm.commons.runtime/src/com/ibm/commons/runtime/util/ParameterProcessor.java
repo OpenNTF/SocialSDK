@@ -269,16 +269,12 @@ public class ParameterProcessor {
 	 *      name=xxx[|value=xxx][|label=xxx][|idHelpSnippet=snippet_id][|required=boolean]
 	 */
 	private static String processParameter(String name, ParameterProvider provider) {
-	    if(name.contains("|")){
+	    if(name.contains("|") || name.contains("=")){
 	        return provider.getParameter(name);
 	    }
-		String[] parts = StringUtil.splitString(name, '=');
-		if (parts.length == 2) {
-			String value = provider.getParameter(parts[0]);
-			return StringUtil.isEmpty(value) ? parts[1] : value;
-		} else {
-			return provider.getParameter(name);
-		}
+	    else{
+	        return provider.getParameter(name);
+	    }
 	}
 	
 	/**

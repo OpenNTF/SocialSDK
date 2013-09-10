@@ -1,5 +1,5 @@
 require(["sbt/dom", "sbt/connections/controls/vcard/ProfileVCardInline"], function(dom, ProfileVCardInline) {
-    var profileCard = new ProfileVCardInline({ userName : "%{sample.displayName1}", userId : "%{sample.id1}" });
+    var profileCard = new ProfileVCardInline({ userName : "%{name=sample.displayName1}", userId : "%{name=sample.id1}" });
    
     dom.byId("vcardDiv").appendChild(profileCard.domNode);
 });

@@ -1,7 +1,7 @@
 require(["sbt/dom", "sbt/json", "sbt/connections/CommunityService"], function(dom,json,CommunityService) {
     try {
         var communityService = new CommunityService();
-        var communityId = "%{sample.communityId}";
+        var communityId = "%{name=sample.communityId}";
 
         var results = [];
         

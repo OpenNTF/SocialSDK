@@ -5,7 +5,7 @@ require(["sbt/dom", "sbt/config" ], function(dom, config) {
         method : "GET", 
         handleAs : "text",
         query : {
-        	userid : "%{sample.id1}"
+        	userid : "%{name=sample.id1}"
         }
     };
         

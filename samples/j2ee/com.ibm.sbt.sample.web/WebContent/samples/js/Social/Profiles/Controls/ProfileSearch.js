@@ -1,7 +1,7 @@
 require(["sbt/dom", "sbt/connections/controls/profiles/ProfileGrid"], function(dom, ProfileGrid) {
     var grid = new ProfileGrid({
         type : "search",
-        query : { userid : "%{sample.userId1}" }
+        query : { userid : "%{name=sample.userId1}" }
     });
 
     dom.byId("gridDiv").appendChild(grid.domNode);

@@ -10,7 +10,7 @@ require([ "sbt/config", "sbt/_bridge/Transport", "sbt/lang", "sbt/dom", "sbt/jso
         method: "GET" , 
         handleAs : "text",
         query : {
-            communityUuid : "%{sample.communityId}"
+            communityUuid : "%{name=sample.communityId}"
         }
     };
     

@@ -1,6 +1,6 @@
 require([ "sbt/dom", "sbt/json", "sbt/connections/ActivityStreamService", "sbt/connections/ActivityStreamConstants" ], function(dom,json,ActivityStreamService, ASConstants) {
     var acticityStreamService = new ActivityStreamService();
-    var communityID = "%{sample.communityId}";
+    var communityID = "%{name=sample.communityId}";
 	var postData = { //creating post data
 			actor:{
 				id:"@me"

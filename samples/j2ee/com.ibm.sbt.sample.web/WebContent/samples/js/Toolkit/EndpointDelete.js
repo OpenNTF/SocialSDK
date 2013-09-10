@@ -4,7 +4,7 @@ require([ "sbt/config", "sbt/lang", "sbt/dom", "sbt/json", "sbt/xml" ],
     var options = { 
         method : "DELETE", 
         query : {
-            communityUuid : "%{sample.communityId}"
+            communityUuid : "%{name=sample.communityId}"
         }
     };
     

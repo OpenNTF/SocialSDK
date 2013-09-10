@@ -2,7 +2,7 @@ require([ "sbt/connections/FileService", "sbt/dom", "sbt/json" ], function(FileS
 
 	var fileService = new FileService();
 
-	fileService.getFile("%{sample.fileId}").then(function(file) {
+	fileService.getFile("%{name=sample.fileId}").then(function(file) {
 		file.remove().then(function(response) {
 			dom.setText("json", json.jsonBeanStringify({
 				status : "Success"

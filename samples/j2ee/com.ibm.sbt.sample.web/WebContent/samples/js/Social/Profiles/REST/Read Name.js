@@ -5,7 +5,7 @@ require([ "sbt/connections/ConnectionsConstants", "sbt/dom", "sbt/xml", "sbt/xpa
         method : "GET", 
         handleAs : "text",
         query : {
-        	userid : "%{name=sample.id1}"
+        	userid : "%{name=sample.id1|helpSnippetId=Social_Profiles_Get_Profile}"
         }
     };
         

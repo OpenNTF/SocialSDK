@@ -2,7 +2,7 @@ require([ "sbt/dom", "sbt/json", "sbt/connections/CommunityService" ],
     function(dom,json,CommunityService) {
 
         var communityService = new CommunityService();
-        var promise = communityService.getMembers("%{sample.communityId}");
+        var promise = communityService.getMembers("%{name=sample.communityId}");
         promise.then(
             function(communities) {
                 dom.setText("json", json.jsonBeanStringify(communities));

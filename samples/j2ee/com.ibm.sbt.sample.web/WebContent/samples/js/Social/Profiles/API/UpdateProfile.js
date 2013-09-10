@@ -1,12 +1,12 @@
 require(["sbt/connections/ProfileService","sbt/dom", "sbt/json"], function(ProfileService,dom, json) {
-	var id1 = "%{sample.id1}";	
+	var id1 = "%{name=sample.id1}";	
 	var result;
 	var profileService = new ProfileService();
 	var profile = profileService.newProfile(id1);				
-	profile.setJobTitle("%{sample.updateProfileJobTitle}");
-	profile.setBuilding("%{sample.updateProfileBuilding}");
-	profile.setFloor("%{sample.updateProfileFloor}");
-	profile.setTelephoneNumber("%{sample.updateProfileTelephoneNumber}");
+	profile.setJobTitle("%{name=sample.updateProfileJobTitle}");
+	profile.setBuilding("%{name=sample.updateProfileBuilding}");
+	profile.setFloor("%{name=sample.updateProfileFloor}");
+	profile.setTelephoneNumber("%{name=sample.updateProfileTelephoneNumber}");
 	profileService.updateProfile(profile).then(
 		function (profile){
 			profile.load().then(						

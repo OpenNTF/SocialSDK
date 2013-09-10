@@ -2,7 +2,7 @@ require([ "sbt/connections/ProfileService", "sbt/dom", "sbt/json" ], function(Pr
     var results = [];   
 	try {
         var profileService = new ProfileService();
-        var promise = profileService.getPeopleManaged("%{sample.id1}");
+        var promise = profileService.getPeopleManaged("%{name=sample.id1}");
         promise.then(
             function(profiles) {
             	var result = [];

@@ -1,8 +1,8 @@
 require(["sbt/connections/CommunityService", "sbt/dom", "sbt/json"], function(CommunityService, dom, json) {
     try {
         var communityService = new CommunityService();
-        var communityUuid = "%{sample.communityId}";
-        var id = "%{sample.id2}";
+        var communityUuid = "%{name=sample.communityId}";
+        var id = "%{name=sample.id2}";
         var promise = communityService.addMember(communityUuid, id);
         promise.then(
             function(member) {

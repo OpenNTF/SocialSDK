@@ -2,7 +2,7 @@ require([ "sbt/connections/FileService", "sbt/dom", "sbt/json" ], function(FileS
 
 	var fileService = new FileService();
 
-	fileService.getFile("%{sample.fileId}").then(function(file) {
+	fileService.getFile("%{name=sample.fileId}").then(function(file) {
 		fileService.getPublicFileComments(file.getAuthor().authorUserId, file.getId()).then(function(comments) {
 			dom.setText("json", json.jsonBeanStringify(comments));
 		}, function(error) {

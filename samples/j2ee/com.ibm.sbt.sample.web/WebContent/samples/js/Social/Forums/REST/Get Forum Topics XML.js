@@ -6,7 +6,7 @@ require([ "sbt/config","sbt/dom" ], function(config,dom) {
     var options = { 
         method : "GET", 
         handleAs : "text",
-        query : { forumUuid : "%{ForumService.forumUuid}" }
+        query : { forumUuid : "%{name=ForumService.forumUuid}" }
     };
     
     endpoint.request(url, options).then(

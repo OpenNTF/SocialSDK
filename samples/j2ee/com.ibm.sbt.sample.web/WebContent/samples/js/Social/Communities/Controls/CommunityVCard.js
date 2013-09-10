@@ -1,7 +1,7 @@
 require(["sbt/dom", "sbt/connections/controls/vcard/CommunityVCard"], function(dom, CommunityVCard) {
     var communityCard = new CommunityVCard({
         name : "",
-        uuid : "%{sample.communityId}",
+        uuid : "%{name=sample.communityId}",
         selectedWidgetId : ""
     });
 

@@ -3,8 +3,8 @@ require(["sbt/dom", "sbt/connections/controls/profiles/ColleagueGrid"],
         var grid = new ColleagueGrid({
             type: "dynamic",
             rendererArgs: { hideViewAll: true },
-            userid: "%{sample.userId1}",
-            targetUserids: [ "%{sample.userId2}",  "%{sample.userId3}", "%{sample.userId4}", "%{sample.userId5}" ]
+            userid: "%{name=sample.userId1}",
+            targetUserids: [ "%{name=sample.userId2}",  "%{name=sample.userId3}", "%{name=sample.userId4}", "%{name=sample.userId5}" ]
         });
         dom.byId("gridDiv").appendChild(grid.domNode);
     }

@@ -19,7 +19,7 @@ require([ "sbt/config", "sbt/dom" ],
 	        // ps : Page size. Specify the number of entries to return per page.
 	        // start : Defines an offset from the first result in the set. This parameter is ignored if a page parameter is provided. This starts from 0. The default is 0.
 	        query : {
-	        	query : "%{sample.displayName1}"
+	        	query : "%{name=sample.displayName1}"
 	        }
 	    };
 	        

@@ -83,7 +83,10 @@ org.apache.commons.fileupload.disk.DiskFileItemFactory,org.apache.commons.fileup
 		<input type="file" name="file" /> 
 		<input type="submit" value="upload" />
 	</form>
-	<h4>${requestScope["message"]}</h4>
+	<%if (request.getAttribute("message") != null) {%>
+	<h4><%=request.getAttribute("message")%></h4>
+	<% } %>
+
 </div>
 <%	if (request.getAttribute("success") != null) {
 		if (request.getAttribute("success").equals("true")) {

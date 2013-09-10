@@ -7,7 +7,7 @@ require([ "sbt/config","sbt/dom" ], function(config,dom) {
         method : "GET", 
         handleAs : "text",
         query : {
-            email : "%{sample.email1}"
+            email : "%{name=sample.email1}"
         }
     };
     

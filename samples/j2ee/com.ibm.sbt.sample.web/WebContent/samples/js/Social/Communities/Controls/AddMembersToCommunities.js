@@ -29,7 +29,7 @@ function(dom, CommunityGrid, ProfileGrid,CommunityService,CommunityRendererMixin
 	//create a new profile grid
 	var profileGrid = new ProfileGrid({
 	    type : "colleagues",
-	    email : "%{sample.email1}"
+	    email : "%{name=sample.email1}"
 	});
 	
 	lang.mixin(profileGrid.renderer, ProfileRendererMixin);

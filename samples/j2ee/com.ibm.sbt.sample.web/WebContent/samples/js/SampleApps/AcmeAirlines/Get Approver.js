@@ -16,7 +16,7 @@ require(["sbt/config", "sbt/json", "sbt/dom", "sbt/xml", "sbt/xpath", "sbt/conne
         if (endpoint.authType == 'oauth') {
             path = oauthReportingChain;
         }
-        path += "%{sample.id1}";
+        path += "%{name=sample.id1}";
         
         endpoint.request(path).then(
             function(response) {

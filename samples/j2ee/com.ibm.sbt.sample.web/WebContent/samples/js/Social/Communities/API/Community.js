@@ -3,7 +3,7 @@ require([ "sbt/base/XmlDataHandler", "sbt/dom", "sbt/json", "sbt/connections/Com
             var results = [];
             
             var communityService = new CommunityService();
-            var community = communityService.newCommunity("%{sample.communityId}");
+            var community = communityService.newCommunity("%{name=sample.communityId}");
             results.push(community);
             dom.setText("json", json.jsonBeanStringify(results));
             

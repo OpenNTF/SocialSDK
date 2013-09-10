@@ -1,6 +1,6 @@
 require([ "sbt/dom", "sbt/json", "sbt/connections/ActivityStreamService", "sbt/connections/ActivityStreamConstants" ], function(dom,json,ActivityStreamService, ASConstants) {
     var acticityStreamService = new ActivityStreamService();
-    var userID = "%{sample.id1}";
+    var userID = "%{name=sample.id1}";
     var postData = { //creating post data
 		content: "A test update @ "+new Date()
 	};

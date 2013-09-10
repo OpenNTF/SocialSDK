@@ -59,9 +59,9 @@ require([ "sbt/Endpoint", "sbt/emailService", "sbt/json", "sbt/dom"],
     
     // demonstrate calling the method
     var flight = {
-        "FlightId":"103", "UserId":"%{sample.email1}", "ApproverId":"%{sample.email3}", "Reason":"business", "state":"started"
+        "FlightId":"103", "UserId":"%{name=sample.email1}", "ApproverId":"%{name=sample.email3}", "Reason":"business", "state":"started"
     };
-    var displayName = "%{sample.displayName1}";
+    var displayName = "%{name=sample.displayName1}";
     var eeDataModel = {
         "gadget" : getGadgetUrl(), "context" : flight
     };

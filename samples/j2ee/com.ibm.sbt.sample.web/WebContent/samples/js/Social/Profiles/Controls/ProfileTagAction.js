@@ -1,9 +1,9 @@
 require(["sbt/dom", "sbt/connections/controls/profiles/ProfileTagsGrid"], function(dom, ProfileTagsGrid) {
     var grid = new ProfileTagsGrid({
         type : "list",
-        targetEmail : "%{sample.email1}",
-        sourceEmail : "%{sample.email2}",
-        sourceName : "%{sample.displayName2}"
+        targetEmail : "%{name=sample.email1}",
+        sourceEmail : "%{name=sample.email2}",
+        sourceName : "%{name=sample.displayName2}"
     });
     
     grid.profileTagAction = {

@@ -2,7 +2,7 @@ require([ "sbt/connections/FileService", "sbt/dom", "sbt/json" ], function(FileS
 
 	var fileService = new FileService();
 
-	fileService.lockFile("%{sample.fileId}").then(function(status) {
+	fileService.lockFile("%{name=sample.fileId}").then(function(status) {
 		dom.setText("json", json.jsonBeanStringify({
 			status : status
 		}));

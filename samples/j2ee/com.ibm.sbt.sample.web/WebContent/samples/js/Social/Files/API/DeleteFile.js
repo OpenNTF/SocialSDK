@@ -2,7 +2,7 @@ require([ "sbt/connections/FileService", "sbt/dom", "sbt/json" ], function(FileS
 
 	var fileService = new FileService();
 
-	fileService.deleteFile("%{sample.fileId}").then(function(response) {
+	fileService.deleteFile("%{name=sample.fileId}").then(function(response) {
 		dom.setText("json", json.jsonBeanStringify({
 			status : "Success"
 		}));

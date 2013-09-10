@@ -11,7 +11,7 @@ require([ "sbt/config", "sbt/lang", "sbt/dom", "sbt/json", "sbt/xml", "sbt/strin
         communityType : "public",
         title : title,
         content : content,
-        communityUuid : "%{sample.communityId}"
+        communityUuid : "%{name=sample.communityId}"
     };
     var putData = stringUtil.transform(CommunityTmpl, communityJson);
     
@@ -21,7 +21,7 @@ require([ "sbt/config", "sbt/lang", "sbt/dom", "sbt/json", "sbt/xml", "sbt/strin
             "Content-Type" : "application/atom+xml"
         },
         query : {
-            communityUuid : "%{sample.communityId}"
+            communityUuid : "%{name=sample.communityId}"
         },
         data : putData
     };

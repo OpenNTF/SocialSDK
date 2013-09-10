@@ -115,19 +115,19 @@ require(["sbt/Endpoint", "sbt/connections/ActivityStreamService", "sbt/json", "s
     
     // demonstrate calling the method
     var flight = {
-        "FlightId":"203", "UserId":"%{sample.email1}", "ApproverId":"%{sample.email3}", "Arrive":"CDG", "Depart":"ORD"
+        "FlightId":"203", "UserId":"%{name=sample.email1}", "ApproverId":"%{name=sample.email3}", "Arrive":"CDG", "Depart":"ORD"
     };
     var personObj = {
-        "displayName": "%{sample.displayName1}",
+        "displayName": "%{name=sample.displayName1}",
         "emails": [
             {
                 "type": "primary",
-                "value": "%{sample.email1}",
+                "value": "%{name=sample.email1}",
                 "primary": true
             }
         ],
-        "id": "%{sample.userId1}"
+        "id": "%{name=sample.userId1}"
     };
-    var approverId = "%{sample.userId3}";
+    var approverId = "%{name=sample.userId3}";
     postASEntry(flight, personObj, approverId);    
 });

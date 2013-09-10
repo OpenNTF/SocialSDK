@@ -5,7 +5,7 @@ require([ "sbt/connections/ConnectionsConstants", "sbt/dom", "sbt/xml", "sbt/xpa
         method : "GET", 
         handleAs : "text",
         query : {
-        	userid : "%{sample.id1}"
+        	userid : "%{name=sample.id1}"
         }
     };
         

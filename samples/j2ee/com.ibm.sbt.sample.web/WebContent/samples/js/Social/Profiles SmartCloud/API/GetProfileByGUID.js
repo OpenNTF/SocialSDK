@@ -3,7 +3,7 @@ require(["sbt/dom", "sbt/json", "sbt/smartcloud/ProfileService"],
     var results = null;
     try {
         var profileService = new ProfileService();
-        var promise = profileService.getProfile("%{sample.smartcloud.subscriberId}");
+        var promise = profileService.getProfile("%{name=sample.smartcloud.subscriberId}");
         promise.then(    
             function(profile){
             	results = getResults(profile);

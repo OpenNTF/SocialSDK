@@ -49,6 +49,7 @@ import com.ibm.sbt.util.SBTException;
  */
 public abstract class AbstractEndpoint implements Endpoint, Cloneable {
 
+    private Map<String, String> serviceMappings = new HashMap<String, String>();
     private String url;
     private String label;
     private String dialogLoginPage;
@@ -414,5 +415,28 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     }
     @Override
     public void handleAuthenticationError() {
+    }
+    
+    /**
+     * @return the serviceMappings
+     */
+    @Override
+    public Map<String, String> getServiceMappings() {
+        return this.serviceMappings;
+    }
+
+    /**
+     * @param serviceMappings the serviceMappings to set. Stored as a Map.
+     */
+    public void setServiceMaps(String serviceMappings) {
+        String[] mapArray = serviceMappings.split(",");
+        for(String map : mapArray){
+            String[] temp = map.split(":");
+            String from = temp[0];
+            String to = temp[1];
+            if(!this.serviceMappings.containsKey(from)){
+                this.serviceMappings.put(from, to);
+            }
+        }
     }
 }

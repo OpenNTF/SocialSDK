@@ -1,7 +1,7 @@
 require([ "sbt/dom", "sbt/lang", "sbt/connections/controls/profiles/ProfileGrid" ], function(dom, lang, ProfileGrid) {
 	var grid = new ProfileGrid({
 		type : "colleagues",
-		email : "%{sample.email1}",
+		email : "%{name=sample.email1}",
 		hideSorter : true,
 		hidePager : true,
 		pageSize : 6

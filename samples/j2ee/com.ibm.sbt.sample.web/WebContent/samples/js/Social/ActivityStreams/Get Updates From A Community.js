@@ -14,7 +14,7 @@ require(["sbt/connections/ActivityStreamService", "sbt/connections/ActivityStrea
             td.setAttribute("id", "text"+i);
             tr.appendChild(td);
         };
-        var communityID = "%{sample.communityId}";
+        var communityID = "%{name=sample.communityId|helpSnippetId=Social_Communities_Get_My_Communities}";
     	var activityStreamService = new ActivityStreamService();
     	var promise = activityStreamService.getUpdatesFromACommunity(
     		communityID,

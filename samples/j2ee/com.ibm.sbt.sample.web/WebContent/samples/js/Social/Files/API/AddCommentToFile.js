@@ -4,7 +4,7 @@ require([ "sbt/connections/FileService", "sbt/dom", "sbt/json" ], function(FileS
 	
 	var date = new Date();
 
-	fileService.getFile("%{sample.fileId}").then(
+	fileService.getFile("%{name=sample.fileId|helpSnippetId=Social_Files_Get_My_Files}").then(
 		function(file) {
 			fileService.addCommentToFile(file.getAuthor().authorUserId, file.getId(), "Comment Added from JS Sample on "+date).then(
 				function(comment) {

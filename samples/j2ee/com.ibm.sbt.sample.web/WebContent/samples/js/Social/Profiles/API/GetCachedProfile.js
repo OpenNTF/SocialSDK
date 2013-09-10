@@ -3,7 +3,7 @@ var count = 0;
 var results = [];
 
 function getTheProfile(profileService, dom, json, recurse) {
-    var profileId = "%{sample.email1}";
+    var profileId = "%{name=sample.email1}";
     profileService.getProfile(profileId).then(    
         function(profile) {
             if (!theProfile) {

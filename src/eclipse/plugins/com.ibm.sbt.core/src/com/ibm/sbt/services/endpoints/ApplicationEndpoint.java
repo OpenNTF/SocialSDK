@@ -289,4 +289,9 @@ public class ApplicationEndpoint implements Endpoint {
     @Override
     public void handleAuthenticationError() {
     }
+
+    @Override
+    public Map<String, String> getServiceMappings() {
+        return null;
+    }
 }

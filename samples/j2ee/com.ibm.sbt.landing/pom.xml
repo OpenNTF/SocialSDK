@@ -12,6 +12,8 @@
   </parent>
   <properties>
     <project.target.directory>${build.target}</project.target.directory>
+    <project.base.directory>${basedir}</project.base.directory>
+
   </properties>
   <dependencies>
     <dependency>
@@ -32,13 +34,13 @@
             <phase>prepare-package</phase>
             <configuration>
               <target name="default">
-
-                <echo
-                  message="copying to ${project.target.directory}/com.ibm.sbt.sample/com.ibm.sbt.landing/com.ibm.sbt.landing" />
-                <echo message="copying from ${project.target.directory}/doc" />
                 <copy failonerror="false"
-                  todir="${project.target.directory}/com.ibm.sbt.sample/com.ibm.sbt.landing/com.ibm.sbt.landing">
-                  <fileset dir="${project.target.directory}/doc" />
+                  todir="${project.base.directory}/target/com.ibm.sbt.landing-1.0.0/javadoc">
+                  <fileset dir="${project.base.directory}/../../../build/target/site/apidocs/javadoc" />
+                </copy>
+                <copy failonerror="false"
+                  todir="${project.base.directory}/target/com.ibm.sbt.landing-1.0.0/jsdoc">
+                  <fileset dir="${project.target.directory}/doc/jsdoc" />
                 </copy>
               </target>
             </configuration>

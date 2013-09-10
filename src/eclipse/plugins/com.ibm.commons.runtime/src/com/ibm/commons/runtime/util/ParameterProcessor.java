@@ -23,6 +23,8 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import com.ibm.commons.runtime.Application;
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.util.StringUtil;
@@ -62,7 +64,7 @@ public class ParameterProcessor {
 		return input;
 	}
 	
-	public static List<String> getParametersQueryString(String input){
+	public static List<String> getParameters(String input){
 	    Pattern paramsPattern = Pattern.compile("%\\{(.*?)\\}");
 	    Matcher paramsMatcher = paramsPattern.matcher(input);
 	    ArrayList<String> result = new ArrayList<String>();
@@ -79,7 +81,8 @@ public class ParameterProcessor {
 	    final Application application = Application.getUnchecked();
 	    defaultProvider = new ParameterProvider() {
             @Override
-            public String getParameter(String name) {
+            public String getParameter(String parameter) {
+                String name = ParameterProcessor.getParameterPart(parameter, "name");
                 if (context != null) {
                     return context.getProperty(name);
                 }
@@ -87,6 +90,33 @@ public class ParameterProcessor {
             }
         };
         return defaultProvider;
+	}
+	
+	public static ParameterProvider getWebProvider(final HttpServletRequest finalRequest, final HttpSession finalSession, final String finalSnippetName){
+	    return ParameterProcessor.getDefaultProvider(new ParameterProvider() {
+	          @Override
+            public String getParameter(String parameter) {
+	              String name = ParameterProcessor.getParameterPart(parameter, "label"); 
+	              String value = finalRequest.getParameter(name);
+	              if(name == null && value == null){ // for backwards compatibility with non-labelled params...
+	                  name = ParameterProcessor.getParameterPart(parameter, "name");
+	                  value = finalRequest.getParameter(name);
+	              }
+	              
+	              String storeKey = finalSnippetName + "_" + name; // store per snippet
+	              
+	              if(value == null){
+	                  value = (String) finalSession.getAttribute(storeKey); //check if there is a stored param
+	              }
+	              
+	              if(value == null){
+	                  value = ParameterProcessor.getParameterPart(parameter, "value"); // check if a default value was specified.
+	              }
+	              
+	              return value;
+	          }
+	    });
+	    
 	}
 
 	public static ParameterProvider getDefaultProvider(final ParameterProvider provider){
@@ -234,18 +264,58 @@ public class ParameterProcessor {
 	}
 
 	/*
-	 * Process a parameter with the following format:
+	 * Process a parameter with one of the following formats:
 	 * 		name[=value]
+	 *      name=xxx[|value=xxx][|label=xxx][|idHelpSnippet=snippet_id][|required=boolean]
 	 */
 	private static String processParameter(String name, ParameterProvider provider) {
-		String[] parts = StringUtil.splitString(name, '=');
-		if (parts.length == 2) {
-			String value = provider.getParameter(parts[0]);
-			return StringUtil.isEmpty(value) ? parts[1] : value;
-		} else {
-			return provider.getParameter(name);
-		}
+	    if(name.contains("|") || name.contains("=")){
+	        return provider.getParameter(name);
+	    }
+	    else{
+	        return provider.getParameter(name);
+	    }
 	}
+	
+	/**
+	 * Gets the specified part out of a parameter of format
+     *    name[=value][|label=xxx][|idHelpSnippet=snippet_id][|required]
+     *    
+     *    If a part is followed by '=' then the part after '=' is returned, else it just returns the part.
+     *    Here the parameter is already split into name=value sections.
+	 * @param parts The parameter split into name=value pieces.
+	 * @param part The part to be retrieved.
+	 * @return
+	 */
+	public static String getParameterPart(String[] parts, String part){
+	    for(int i = 0; i < parts.length; i++){
+            String[] splitParts = StringUtil.splitString(parts[i], '=');
+            if(splitParts[0].equals(part)){
+                if(splitParts.length == 1){
+                    return splitParts[0];
+                }
+                else{
+                    return splitParts[1];
+                }
+            }
+        }
+	    return null;
+	}
+	
+	/**
+	 * Splits the parameter into sections and returns the value of part.
+	 * @param parameter
+	 * @param part
+	 * @return
+	 */
+    public static String getParameterPart(String parameter, String part){
+        if(!parameter.contains("|") && !parameter.contains("=")){
+            return parameter;
+        }
+        String[] parts = StringUtil.splitString(parameter, '|');
+        
+        return getParameterPart(parts, part);
+    }
 
 	/**
 	 * Interface to provide parameter values for the processing

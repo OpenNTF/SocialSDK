@@ -1,13 +1,13 @@
 require(["sbt/connections/ProfileService","sbt/dom", "sbt/json"], function(ProfileService,dom, json) {
-	var id = "%{sample.id1}";
+	var id = "%{name=sample.id1|helpSnippetId=Social_Profiles_Get_Profile}";
 	var result, promise2;
 	var profileService = new ProfileService();
 	var profile = profileService.newProfile({
 		id : id,		
-		jobTitle : "%{sample.updateProfileJobTitle}" + "-1",
-		floor : "%{sample.updateProfileFloor}" + "-1",
-		building : "%{sample.updateProfileBuilding}" + "-1",
-		telephoneNumber : "%{sample.updateProfileTelephoneNumber}"
+		jobTitle : "%{name=sample.updateProfileJobTitle}" + "-1",
+		floor : "%{name=sample.updateProfileFloor}" + "-1",
+		building : "%{name=sample.updateProfileBuilding}" + "-1",
+		telephoneNumber : "%{name=sample.updateProfileTelephoneNumber}"
 	});	
 	promise2 = profile.update();
 	promise2.then(

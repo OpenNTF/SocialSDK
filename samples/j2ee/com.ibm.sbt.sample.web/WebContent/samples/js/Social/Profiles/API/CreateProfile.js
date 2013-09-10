@@ -1,15 +1,15 @@
 require(["sbt/connections/ProfileAdminService","sbt/dom", "sbt/json"], function(ProfileAdminService,dom, json) {
-	var id = "%{sample.createProfileId}";
+	var id = "%{name=sample.createProfileId}";
 	var profileAdminService = new ProfileAdminService();
 	var profile = profileAdminService.newProfile(id);
-	profile.setAsString("guid", "%{sample.createProfileId}");
-    profile.setAsString("email", "%{sample.createProfileEmail}");
-    profile.setAsString("uid", "%{sample.createProfileUid}");
-    profile.setAsString("distinguishedName", "%{sample.createProfileDistinguishedName}");
-    profile.setAsString("displayName", "%{sample.createProfileDisplayName}");
-    profile.setAsString("givenNames", "%{sample.createProfileGivenNames}");
-    profile.setAsString("surname", "%{sample.createProfileSurName}");
-    profile.setAsString("userState", "%{sample.createProfileUserState}");
+	profile.setAsString("guid", "%{name=sample.createProfileId}");
+    profile.setAsString("email", "%{name=sample.createProfileEmail}");
+    profile.setAsString("uid", "%{name=sample.createProfileUid}");
+    profile.setAsString("distinguishedName", "%{name=sample.createProfileDistinguishedName}");
+    profile.setAsString("displayName", "%{name=sample.createProfileDisplayName}");
+    profile.setAsString("givenNames", "%{name=sample.createProfileGivenNames}");
+    profile.setAsString("surname", "%{name=sample.createProfileSurName}");
+    profile.setAsString("userState", "%{name=sample.createProfileUserState}");
 	var promise = profileAdminService.createProfile(profile);
 	promise.then(function(profile){
 		profile.load().then(function(profile){

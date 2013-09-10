@@ -1,7 +1,7 @@
 require(["sbt/connections/ForumService", "sbt/dom", "sbt/json"], 
     function(ForumService, dom, json) {
     	var forumService = new ForumService();	
-    	var topicUuid = "%{ForumService.topicUuid}";	
+    	var topicUuid = "%{name=ForumService.topicUuid}";	
         var promise = forumService.deleteForumTopic(topicUuid);
         promise.then(
             function(topicUuid) {

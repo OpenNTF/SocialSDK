@@ -161,7 +161,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
 			 WIN : "win"
 		},
 		ActivityStreamUrls: {
-			activityStreamBaseUrl : "/connections/opensocial/",
+			activityStreamBaseUrl : "/{connections}/opensocial/",
 			activityStreamRestUrl : "/rest/activitystreams/",
 			activityStreamUBlogRestUrl : "/rest/ublog/"
 		},

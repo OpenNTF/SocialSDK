@@ -177,7 +177,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.CommunityService
          */
-        AtomCommunitiesAll : "/communities/service/atom/communities/all",
+        AtomCommunitiesAll : "/{communities}/service/atom/communities/all",
 
         /**
          * A feed of communities of which the authenticated user is a member.
@@ -190,7 +190,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.CommunityService
          */
-        AtomCommunitiesMy : "/communities/service/atom/communities/my",
+        AtomCommunitiesMy : "/{communities}/service/atom/communities/my",
         
         /**
          * A feed of invitations.
@@ -203,7 +203,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.CommunityService
          */
-        AtomCommunityInvitesMy : "/communities/service/atom/community/invites/my",
+        AtomCommunityInvitesMy : "/{communities}/service/atom/community/invites/my",
         
         /**
          * A feed of subcommunities.
@@ -247,7 +247,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.CommunityService
          */
-        AtomCommunityForumTopics : "/communities/service/atom/community/forum/topics"
+        AtomCommunityForumTopics : "/{communities}/service/atom/community/forum/topics"
 
     }, conn);
 });

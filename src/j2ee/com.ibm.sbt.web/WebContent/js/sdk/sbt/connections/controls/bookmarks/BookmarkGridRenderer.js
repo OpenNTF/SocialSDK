@@ -25,12 +25,19 @@ define(["../../../declare", "../../../i18n",
         "../../../lang"], 
         function(declare, i18n,  ConnectionsGridRenderer, BookmarkRow,TagAnchor, nls, lang ) {
 
+		/**
+		* @class BookmarkGridRenderer
+	    * @namespace sbt.connections.controls.bookmarks
+	    * @module sbt.connections.controls.bookmarks.BookmarkGridRenderer
+	    * */
 		var BookmarkGridRenderer = declare(ConnectionsGridRenderer,{
 			
 			_nls: nls,
 			
 			/**
-			 * 
+			 * The Constructor function
+			 * @method constructor
+			 * @param args
 			 */
 			constructor: function(args){
 				this.template = BookmarkRow;

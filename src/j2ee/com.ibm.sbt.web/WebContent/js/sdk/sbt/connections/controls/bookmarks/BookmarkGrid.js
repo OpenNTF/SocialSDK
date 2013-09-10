@@ -5,11 +5,17 @@ define(["../../../declare",
         "./BookmarkGridRenderer"], 
     function(declare,Grid,parameter,consts,BookmarkGridRenderer){
 	
+	/**
+	 * Sorting values
+	 */
 	var sortVals = {
 			date: "created",
             popularity: "popularity"
 	};
 	
+	/**
+	 * Sorting and paging parameters
+	 */
 	var ParamSchema = {	
 		pageNumber: parameter.oneBasedInteger("page"),	
 		pageSize: parameter.oneBasedInteger("ps"),
@@ -17,6 +23,11 @@ define(["../../../declare",
 		sortOrder: parameter.sortOrder("sortOrder")			
 	};
 	
+	/**
+	 * @class BookmarkGrid
+     * @namespace sbt.connections.controls.bookmarks
+     * @module sbt.connections.controls.bookmarks.BookmarkGrid
+	 */
 	var BookmarkGrid = declare(Grid,{
 		
 		 options : {
@@ -35,6 +46,12 @@ define(["../../../declare",
 	      * Default grid option.
 	      */
 	     defaultOption: "any", 
+	     
+	     /**
+	      * The grid constructor function
+	      * @method constructor
+	      * @param args
+	      */
 	     constructor: function(args){
 	    	 
 	    	var nls = this.renderer.nls;
@@ -54,6 +71,13 @@ define(["../../../declare",
             this._activeSortIsDesc = true;
 	     }, 
 	     
+	     /**
+	      * Used to add parameters to the URL
+	      * @method buildUrl
+	      * @param url the url to add parameters to
+	      * @param args
+	      * @returns the url with parameters 
+	      */
 	     buildUrl: function(url, args) {
 	    	 var urlParams;
 	    	 
@@ -68,6 +92,11 @@ define(["../../../declare",
 	          return this.constructUrl(url, urlParams, {});
 	        },
 	     
+        /**
+         * Creates a Renderer for this grid.
+         * @param args
+         * @returns {BookmarkGridRenderer}
+         */
 	     createDefaultRenderer: function(args){
 	    	 return new BookmarkGridRenderer(args);
 	     },
@@ -90,9 +119,10 @@ define(["../../../declare",
 	     
 	    /**
          * Filter the bookmarks by specified tag
-         * @param el
-         * @param data
-         * @param ev
+         * @method filterByTag
+         * @param el The Grid Dom node
+         * @param data The Grid's data
+         * @param ev The Event
          */
         filterByTag: function(el, data, ev){
         	this._stopEvent(ev);
@@ -104,27 +134,61 @@ define(["../../../declare",
         	this._filter(options,data);
         },
         
+        /**
+         * Sorts the grid by date of creation.
+         * @method sortByDate
+         * @param el The Grid dom Element
+         * @param data the Grid's data
+         * @param ev the event
+         */
         sortByDate: function(el, data, ev){
         	this._sort("date", true, el, data, ev);
         },
         
+        /**
+         * Sort the Grid by popularity
+         * @method sortByPopularity
+         * @param el The grid element
+         * @param data the Grids data
+         * @param ev The event
+         */
         sortByPopularity: function(el, data, ev){
         	this._sort("popularity", true, el, data, ev);
         },
         
+        /**
+         * Event Handler for onClick events
+         * @method handleClick
+         * @param el the grid element
+         * @param data the grids data
+         * @param ev the event
+         */
         handleClick: function(el, data, ev){
         	
         	this._stopEvent(ev);
         	this.bookmarkAction.execute(data);
         },
         
+        /**
+         * Default Action for handling click events and returning tooltip text.
+         */
         bookmarkAction: {
         	
+        	/**
+        	 * Returns a string to be used in a tooltip or title. 
+        	 * @method getTooltip 
+        	 * @param item
+        	 * @returns A String to be used in a tooltip. 
+        	 */
         	getTooltip: function(item){
         		return item.getValue("title");
         	},
         	
-        	
+        	/**
+        	 * The code is executed from an onClick event
+        	 * @method execute
+        	 * @param data the Data associated with the grid
+        	 */
         	execute: function(data){
         		var url = data.getValue("url");
         		window.location.assign(url);

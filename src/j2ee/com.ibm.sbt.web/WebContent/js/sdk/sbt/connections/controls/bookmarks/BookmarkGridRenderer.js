@@ -14,9 +14,6 @@
  * permissions and limitations under the License.
  */
 
-/**
- * @module sbt.connections.controls.communities.CommunityGridRenderer
- */
 define(["../../../declare", "../../../i18n", 
         "../../../connections/controls/ConnectionsGridRenderer",
         "../../../text!../../../connections/controls/bookmarks/templates/BookmarkRow.html",

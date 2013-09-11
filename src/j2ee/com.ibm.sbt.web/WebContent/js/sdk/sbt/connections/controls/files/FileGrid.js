@@ -32,19 +32,6 @@ define([ "../../../declare",
         function(declare, lang, dom, stringUtil, sbt, parameter, Grid, FileGridRenderer, FileAction, SemanticTagService, FileService, FileConstants) {
 
 	// TODO use values from constants and handle authType
-	var fileUrls = {
-		publicFiles : "/files/basic/anonymous/api/documents/feed?visibility=public",
-        pinnedFiles : "/files/basic/api/myfavorites/documents/feed",
-        folders : "/files/basic/api/collections/feed",
-        pinnedFolders : "/files/basic/api/myfavorites/collections/feed",
-        activeFolders : "/files//basic/api/collections/addedto/feed", // Folders you recently added files too.
-        publicFolders : "/files/basic/anonymous/api/collections/feed",
-        library : "/files/basic/api/myuserlibrary/feed",
-        shares : "/files/basic/api/documents/shared/feed", // only lists files shared with you.
-        recycledFiles : "/files/basic/api/myuserlibrary/view/recyclebin/feed",
-        fileComments : "/files/basic/api/userlibrary/{userId}/document/{fileId}/feed?category=comment",
-        fileShares : "/files/basic/api/documents/shared/feed"
-	};
 	var xpath_files = {
 		"id" : "id",
 		"uuid" : "td:uuid",
@@ -181,7 +168,7 @@ define([ "../../../declare",
         options : {
             "library" : {
                 storeArgs : {
-                    url : fileUrls.library,
+                    url : FileConstants.AtomFilesMy,
                     attributes : xpath_files,
                     paramSchema: ParamSchema
                 },
@@ -191,7 +178,7 @@ define([ "../../../declare",
             },
             "publicFiles" : {
                 storeArgs : {
-                    url : fileUrls.publicFiles,
+                    url : FileConstants.AtomFilesPublic,
                     attributes : xpath_files,
                     paramSchema: ParamSchema
                 },
@@ -201,7 +188,7 @@ define([ "../../../declare",
             },
             "pinnedFiles" : {
                 storeArgs : {
-                    url : fileUrls.pinnedFiles,
+                    url : FileConstants.AtomFilesMyPinned,
                     attributes : xpath_files,
                     paramSchema: ParamSchema
                 },
@@ -211,7 +198,7 @@ define([ "../../../declare",
             },
             "folders" : {
                 storeArgs : {
-                    url : fileUrls.folders,
+                    url : FileConstants.AtomFoldersMy,
                     attributes : xpath_folders,
                     paramSchema: ParamSchema
                 },
@@ -221,7 +208,7 @@ define([ "../../../declare",
             },
             "publicFolders" : {
                 storeArgs : {
-                    url : fileUrls.publicFolders,
+                    url : FileConstants.AtomFoldersPublic,
                     attributes : xpath_folders,
                     paramSchema: ParamSchema
                 },
@@ -231,7 +218,7 @@ define([ "../../../declare",
             },
             "pinnedFolders" : {
                 storeArgs : {
-                    url : fileUrls.pinnedFolders,
+                    url : FileConstants.AtomFilesMyPinned,
                     attributes : xpath_folders,
                     paramSchema: ParamSchema
                 },
@@ -241,7 +228,7 @@ define([ "../../../declare",
             },
             "activeFolders" : {
                 storeArgs : {
-                    url : fileUrls.activeFolders,
+                    url : FileConstants.AtomFoldersActive,
                     attributes : xpath_folders,
                     paramSchema: ParamSchema
                 },
@@ -251,7 +238,7 @@ define([ "../../../declare",
             },
             "shares" : {
                 storeArgs : {
-                    url : fileUrls.shares,
+                    url : FileConstants.AtomFilesShared,
                     attributes : xpath_files,
                     paramSchema: ParamSchema
                 },
@@ -261,7 +248,7 @@ define([ "../../../declare",
             },
             "recycledFiles" : {
                 storeArgs : {
-                    url : fileUrls.recycledFiles,
+                    url : FileConstants.AtomFilesRecycled,
                     attributes : xpath_files,
                     paramSchema: ParamSchema
                 },
@@ -271,7 +258,7 @@ define([ "../../../declare",
             },
             "fileComments" : {
                 storeArgs : {
-                    url : fileUrls.fileComments,
+                    url : FileConstants.AtomFileCommentsMy,
                     attributes : xpath_comments,
                     paramSchema: ParamSchema
                 },
@@ -281,7 +268,7 @@ define([ "../../../declare",
             },
             "fileShares" : {
                 storeArgs : {
-                    url : fileUrls.fileShares,
+                    url : FileConstants.AtomFilesShared,
                     attributes : xpath_files,
                     paramSchema: ParamSchema
                 },

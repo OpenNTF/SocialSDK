@@ -87,17 +87,22 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
                 throw new Error("BaseService.constructUrl: Invalid argument, url is undefined or null.");
             }
             
-            var serviceMappings = this.endpoint.serviceMappings;
-            if(!urlParams){
-                urlParams = {};
+            if(this.endpoint){
+                lang.mixin(this.contextRootMap, this.endpoint.serviceMappings);
+                
+                if(this.contextRootMap && !util.isEmptyObject(this.contextRootMap)){
+                    url = stringUtil.transform(url, this.contextRootMap, function(value, key){
+                        if(!value){
+                            return key;
+                        }
+                        else{
+                            return value;
+                        }
+                    }, this);
+                }
             }
             
-            lang.mixin(urlParams, this.contextRootMap);
-            if(!util.isEmptyObject(serviceMappings)){
-                lang.mixin(urlParams, serviceMappings);
-            }
-            
-            if (urlParams && !util.isEmptyObject(urlParams)) {
+            if (urlParams) {
                 url = stringUtil.replace(url, urlParams);
                 
                 if (url.indexOf("//") != -1) {

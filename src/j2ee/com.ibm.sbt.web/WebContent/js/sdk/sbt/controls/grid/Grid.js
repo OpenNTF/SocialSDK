@@ -437,18 +437,6 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
         	return { authType : this.getAuthType() };
         },
         
-        contextRootMap: {
-            activities: "activities",
-            blogs: "blogs",
-            communities: "communities",
-            connections: "connections",
-            dogear: "dogear",
-            files: "files",
-            forums: "forums",
-            profiles: "profiles",
-            search: "search"
-        },
-        
         /**
          * Construct a url using the specified parameters 
          * @method constructUrl
@@ -463,19 +451,22 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
                 throw new Error("Grid.constructUrl: Invalid argument, url is undefined or null.");
             }
             
-            if(!urlParams){
-                urlParams = {};
-            }
-            lang.mixin(urlParams, this.defaultContextRootMap);
             if(endpoint){
-                var serviceMappings = endpoint.serviceMappings;
+                lang.mixin(this.contextRootMap, endpoint.serviceMappings);
                 
-                if(!util.isEmptyObject(serviceMappings)){
-                    lang.mixin(urlParams, serviceMappings);
+                if(this.contextRootMap && !util.isEmptyObject(this.contextRootMap)){
+                    url = stringUtil.transform(url, this.contextRootMap, function(value, key){
+                        if(!value){
+                            return key;
+                        }
+                        else{
+                            return value;
+                        }
+                    }, this);
                 }
             }
             
-            if (urlParams && !util.isEmptyObject(urlParams)) {
+            if (urlParams) {
                 url = stringUtil.replace(url, urlParams);
                 
                 if (url.indexOf("//") != -1) {

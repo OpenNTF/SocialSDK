@@ -18,6 +18,8 @@ package com.ibm.sbt.services.endpoints;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 
@@ -427,16 +429,35 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
 
     /**
      * @param serviceMappings the serviceMappings to set. Stored as a Map.
+     * @throws Exception 
      */
     public void setServiceMaps(String serviceMappings) {
+        Logger logger = Logger.getLogger(AbstractEndpoint.class.getName());
+        if(!mapFormatValid(serviceMappings)){
+            logger.log(Level.WARNING, "serviceMaps value \"{0}\" is invalid, check your managed-beans.xml. Must be formatted as 'root1:customRoot1,root2:customRoot2' e.g. 'files:myfiles'", serviceMappings);
+        }
+        else{
+            String[] mapArray = serviceMappings.split(",");
+            for(String map : mapArray){
+                String[] temp = map.split(":");
+                String from = temp[0];
+                String to = temp[1];
+                if(!this.serviceMappings.containsKey(from)){
+                    this.serviceMappings.put(from, to);
+                }
+            }
+        }
+    }
+    
+    private boolean mapFormatValid(String serviceMappings){
         String[] mapArray = serviceMappings.split(",");
         for(String map : mapArray){
             String[] temp = map.split(":");
-            String from = temp[0];
-            String to = temp[1];
-            if(!this.serviceMappings.containsKey(from)){
-                this.serviceMappings.put(from, to);
+            if(temp.length != 2 && StringUtil.isNotEmpty(map)){
+                return false;
             }
         }
+        
+        return true;
     }
 }

@@ -212,7 +212,7 @@
         <!-- Add any custom service mappings below -->
         <managed-property>
             <property-name>serviceMaps</property-name>
-            <value>connections:%{w3connections.connectionsContextRoot}</value>
+            <value>%{w3connections.contextRootMap}</value>
         </managed-property>
     </managed-bean>
 	

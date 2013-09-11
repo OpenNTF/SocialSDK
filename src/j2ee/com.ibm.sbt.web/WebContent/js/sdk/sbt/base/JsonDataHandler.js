@@ -259,7 +259,6 @@ define(["../declare", "../lang", "../json", "./DataHandler", "../Jsonpath", "../
 		},
 		
 		extractFirstElement: function(result){
-			this._validateObject(result);
 			return this._evalJsonWithData("$[0]", result);
 		}
 	});

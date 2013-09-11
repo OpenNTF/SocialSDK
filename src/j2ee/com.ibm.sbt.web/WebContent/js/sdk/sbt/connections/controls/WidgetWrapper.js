@@ -110,12 +110,28 @@ define(["../../declare", "../../config", "../../widget/_TemplatedWidget", "../..
                 var libraryUrl = config.Properties.libraryUrl + libraryParams;
                 
                 if(this.defaultTemplate){
-                    this.defaultTemplate = stringUtil.transform(this.defaultTemplate, {
+                    var templateReplacements = {
                         args: JSON.stringify(this.args),
                         proxyUrl: proxyUrl,
                         connectionsUrl: connectionsUrl,
                         libraryUrl: libraryUrl,
                         sbtProps: JSON.stringify(config.Properties)
+                    };
+                    this.defaultTemplate = stringUtil.transform(this.defaultTemplate, templateReplacements, function(value, key){
+                        if(!value){
+                            return "${" + key + "}";
+                        }
+                        else{
+                            return value;
+                        }
+                    });
+                    this.defaultTemplate = stringUtil.transform(this.defaultTemplate,  this._endpoint.serviceMappings, function(value, key){
+                        if(!value){
+                            return key;
+                        }
+                        else{
+                            return value;
+                        }
                     });
                 }
                 else{

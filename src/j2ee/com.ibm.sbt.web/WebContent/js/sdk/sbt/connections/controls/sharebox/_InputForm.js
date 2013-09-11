@@ -20,7 +20,7 @@ define(["sbt/declare", "sbt/json", "sbt/connections/controls/_ConnectionsWidget"
          *     @param {String} args.shareBoxNode Should contain the id of the html element to add the InputForm to.
          */
         constructor: function(args){
-            var url = "/connections/opensocial/basic/rest/ublog/@config/settings";
+            var url = "/${connections}/opensocial/basic/rest/ublog/@config/settings";
             var self = this;
             
             var xhrArgs = {

@@ -28,7 +28,7 @@ define(["../../declare", "../../config", "../../connections/controls/astream/_Xh
          * @property baseUrl
          * @type String
          */
-        baseUrl: config.Properties.serviceUrl + "/proxy/connections/connections/resources/web/",
+        baseUrl: config.Properties.serviceUrl + "/proxy/connections/${connections}/resources/web/",
         
         /*
          * The _XhrHandler to use in this connections widget.

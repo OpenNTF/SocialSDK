@@ -13,7 +13,7 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-define(["../../../declare", "../../../config"], function(declare, config){
+define(["../../../declare", "../../../config", "../../../stringUtil", "../../../lang", "../../../util"], function(declare, config, stringUtil, lang, util){
     /*
      * @class _XhrHandler
      */
@@ -28,6 +28,10 @@ define(["../../../declare", "../../../config"], function(declare, config){
          */
         endpoint: null,
         
+        contextRootMap: {
+            connections: "connections"
+        },
+        
         /*
          * A helper method to ensure things like a proxy and and authentication protocol are present in the url.
          * 
@@ -40,6 +44,28 @@ define(["../../../declare", "../../../config"], function(declare, config){
          * @param {String} args.url The url which we will xhr to. If this is not present this method does nothing.
          */
         modifyUrl: function(args){
+            if(this.endpoint){
+                lang.mixin(this.contextRootMap, this.endpoint.serviceMappings);
+                
+                if(this.contextRootMap && !util.isEmptyObject(this.contextRootMap)){
+                    var url = args.url || args.serviceUrl;
+                    url = stringUtil.transform(url, this.contextRootMap, function(value, key){
+                        if(!value){
+                            return key;
+                        }
+                        else{
+                            return value;
+                        }
+                    }, this);
+                    if(args.url){
+                        args.url = url;
+                    }
+                    else{
+                        args.serviceUrl = url;
+                    }
+                }
+            }
+            
             if(!args.url){
                 return;
             }

@@ -31,7 +31,7 @@ public enum MemberXPath implements FieldEntry {
 	uid("./a:contributor/snx:userid"), 
 	userid("./a:contributor/snx:userid"),
 	name("./a:contributor/a:name"),
-	email("./a:link[@rel='http://www.ibm.com/xmlns/prod/sn/member-list']/@href"),
+	email("./a:contributor/a:email"),
 	role("./snx:role");
 	
 	private final XPathExpression path;

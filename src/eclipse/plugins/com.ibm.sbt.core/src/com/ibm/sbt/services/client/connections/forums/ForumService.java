@@ -45,12 +45,13 @@ public class ForumService extends BaseService {
 	/**
 	 * Used in constructing REST APIs
 	 */
-	public static final String	_baseUrl				= "/forums/";
-	public static final String _basicUrl				= "atom/";
+	private static final String	_baseUrl				= "/forums/";
+	private static final String _basicUrl				= "atom/";
 	public static final String _oauthUrl				= "oauth/atom/";
 	private static final String FORUM_UNIQUE_IDENTIFIER = "forumUuid";
 	private static final String TOPIC_UNIQUE_IDENTIFIER = "topicUuid";
 	private static final String REPLY_UNIQUE_IDENTIFIER = "replyUuid";
+	private static final String COMM_UNIQUE_IDENTIFIER	= "communityUuid";
 	public static final String CREATE_OP 				= "create";
 	
 	/**
@@ -506,6 +507,42 @@ public class ForumService extends BaseService {
 			
 			String url = resolveUrl(ForumType.TOPICS,null,params);
 			result = createData(url, null, headers,payload);
+			topic = (ForumTopic) new TopicsFeedHandler(this).createEntity(result);
+
+		} catch (Exception e) {
+			throw new ForumServiceException(e, "error creating forum");
+		}
+
+        return topic;
+	}
+	
+	
+	
+	/**
+	 * Wrapper method to create a Topic for default Forum of a Community
+	 * <p>
+	 * User should be authenticated to call this method
+	 * @param ForumTopic
+	 * @return Topic
+	 * @throws ForumServiceException
+	 */
+	public ForumTopic createCommunityForumTopic(ForumTopic topic,String communityId) throws ForumServiceException {
+		if (null == topic){
+			throw new ForumServiceException(null,"Topic object passed was null");
+		}
+		Response result = null;
+		try {
+			BaseForumTransformer transformer = new BaseForumTransformer(topic);
+			Object 	payload = transformer.transform(topic.getFieldsMap());
+
+			Map<String, String> params = new HashMap<String, String>();
+			params.put(COMM_UNIQUE_IDENTIFIER, communityId);
+
+			Map<String, String> headers = new HashMap<String, String>();
+			headers.put("Content-Type", "application/atom+xml");
+			String postUrl = resolveUrl(ForumType.TOPICS,null,null);
+			System.out.println("url "+postUrl);
+			result = createData(postUrl, params, headers,payload);
 			topic = (ForumTopic) new TopicsFeedHandler(this).createEntity(result);
 
 		} catch (Exception e) {

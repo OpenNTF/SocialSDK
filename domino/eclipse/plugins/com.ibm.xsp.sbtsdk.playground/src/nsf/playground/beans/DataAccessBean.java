@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.context.FacesContext;
 
@@ -41,18 +42,6 @@ public abstract class DataAccessBean {
 		return (DataAccessBean)ManagedBeanUtil.getBean(FacesContext.getCurrentInstance(), "dataAccess");
 	}
 	
-	//
-	// Managing environments
-	//
-	private PlaygroundEnvironment customEnvironment = new PlaygroundEnvironment(CUSTOM) {
-		{
-			setDescription("This is a custom, transient environment that can be defined to point to your own servers, or use our own OAuth keys");
-		}
-		// This cannot be set for the custom env, as it is not persisted
-		public void setNoteID(String noteID) {
-		}
-	};
-
 	private boolean cacheFilled;
 	private HashMap<String,PlaygroundEnvironment> environments = new HashMap<String,PlaygroundEnvironment>();
 	private String[] envNames = StringUtil.EMPTY_STRING_ARRAY;
@@ -130,7 +119,30 @@ public abstract class DataAccessBean {
 	}
 
 	public PlaygroundEnvironment getCustomEnvironment() {
-		return customEnvironment;
+		// The environment is stored on per session (user) 
+		Map<String,Object> sc = ExtLibUtil.getSessionScope();
+		PlaygroundEnvironment env = (PlaygroundEnvironment)sc.get("custom-env");
+		if(env==null) {
+			env = new PlaygroundEnvironment(CUSTOM) {
+				{
+					setDescription("This is a custom, transient environment that can be defined to point to your own servers, or use our own OAuth keys");
+					// Set all the default properties
+					List<nsf.playground.extension.Endpoints.Property> props = Endpoints.categories.getAllProperties();
+					for(int i=0; i<props.size(); i++) {
+						nsf.playground.extension.Endpoints.Property p = props.get(i);
+						String defValue = p.getDefaultValue();
+						if(StringUtil.isNotEmpty(defValue)) {
+							putField(p.getName(), p.getDefaultValue());
+						}
+					}
+				}
+				// This cannot be set for the custom env, as it is not persisted
+				public void setNoteID(String noteID) {
+				}
+			};
+			sc.put("custom-env",env);
+		}
+		return env;
 	}
 	
 	private synchronized void updateCache() throws IOException {
@@ -237,7 +249,7 @@ public abstract class DataAccessBean {
 		}
 		return env;
 	}
-	public PlaygroundEnvironment writeEnvironment(PlaygroundEnvironment env, Document d) throws NotesException, IOException {
+	public PlaygroundEnvironment writeEnvironment(PlaygroundEnvironment env, DominoDocument d) throws NotesException, IOException {
 		d.replaceItemValue("Properties",env.getProperties());
 		d.replaceItemValue("Runtimes",env.getRuntimes());
 
@@ -249,8 +261,9 @@ public abstract class DataAccessBean {
 					Property[] props = cats[j].getProperties();
 					if(props!=null) {
 						for(int k=0; k<props.length; k++) {
-							Property p = props[k];
-							d.replaceItemValue(p.getName(),env.getField(p.getName()));
+							String pName = props[k].getName();
+							String v = env.getField(pName);
+							d.replaceItemValue(pName,v);
 						}
 					}
 				}

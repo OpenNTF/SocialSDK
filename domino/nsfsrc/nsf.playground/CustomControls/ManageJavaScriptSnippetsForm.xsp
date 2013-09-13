@@ -66,9 +66,9 @@
 				cols="120" rows="5">
 			</xp:inputTextarea>
 		</xe:formRow>
-		<xe:formRow id="formRow2" label="Endpoints Filter:">
+		<xe:formRow id="formRow2" label="Runtime Filter:">
 			<xp:inputText id="inputText4"
-				disableClientSideValidation="true" value="#{document1.FilterEndpoints}" size="80">
+				disableClientSideValidation="true" value="#{document1.FilterRuntimes}" size="80">
 			</xp:inputText>
 		</xe:formRow>
 		<xe:formRow id="formRow6" label="Libraries Filter:">
@@ -107,6 +107,6 @@
 			</xe:djTabContainer>
 		</xe:formRow>
 	</xe:formTable>
-	<xe:dumpObject loaded="false" id="dumpObject1" title="document"
+	<xe:dumpObject loaded="true" id="dumpObject1" title="document"
 		value="#{document1}" />
 </xp:view>

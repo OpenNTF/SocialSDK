@@ -89,52 +89,52 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
 		/**
          * Search IBM Connections for public information.
          */
-        publicSearch : "/search/atom/search/results",
+        publicSearch : "/${search}/atom/search/results",
         
         /**
          * Search IBM Connections for both public information and private information that you have access to.
          */
-        mySearch : "/search/atom/mysearch/results",
+        mySearch : "/${search}/atom/mysearch/results",
 
 		/**
          * Search IBM Connection for public information, and then return the people associated with the results.
          */
-        peopleSearch : "/search/atom/search/facets/people",
+        peopleSearch : "/${search}/atom/search/facets/people",
         
         /**
          * Search Lotus Connections for both public information and private information that you have access to, and then return the people associated with the results.
          */
-        myPeopleSearch : "/search/atom/mysearch/facets/people",
+        myPeopleSearch : "/${search}/atom/mysearch/facets/people",
 
 		/**
          * Search IBM Connection for public information, and then return the tags associated with the results.
          */
-        tagsSearch : "/search/atom/search/facets/tags",
+        tagsSearch : "/${search}/atom/search/facets/tags",
         
         /**
          * Search Lotus Connections for both public information and private information that you have access to, and then return the tags associated with the results.
          */
-        myTagsSearch : "/search/atom/mysearch/facets/tags",
+        myTagsSearch : "/${search}/atom/mysearch/facets/tags",
 
 		/**
          * Search IBM Connection for public information, and then return the dates associated with the results.
          */
-        dateSearch : "/search/atom/search/facets/date",
+        dateSearch : "/${search}/atom/search/facets/date",
         
         /**
          * Search Lotus Connections for both public information and private information that you have access to, and then return the dates associated with the results.
          */
-        myDateSearch : "/search/atom/mysearch/facets/date",
+        myDateSearch : "/${search}/atom/mysearch/facets/date",
 
 		/**
          * Search IBM Connection for public information, and then return the applications associated with the results.
          */
-        sourceSearch : "/search/atom/search/facets/source",
+        sourceSearch : "/${search}/atom/search/facets/source",
         
         /**
          * Search Lotus Connections for both public information and private information that you have access to, and then return the applications associated with the results.
          */
-        mySourceSearch : "/search/atom/mysearch/facets/source"
+        mySourceSearch : "/${search}/atom/mysearch/facets/source"
 
     });
 });

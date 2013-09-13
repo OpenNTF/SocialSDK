@@ -237,9 +237,10 @@ define(["../../../declare",
 	         * In this case 1 is used so all forums will be displayed.
 	         * @param url The Rest API URL for the forum feed
 	         * @param args
+	         * @param endpoint An endpoint which may contain custom service mappings.
 	         * @returns
 	         */
-	        buildUrl: function(url, args) {	        	
+	        buildUrl: function(url, args, endpoint) {	        	
 	            var urlParams = { since: 1};
 	            if (this.query) {
 	            	params = lang.mixin(params, this.query);
@@ -247,7 +248,7 @@ define(["../../../declare",
 	            if (this.direction) {
 	            	params = lang.mixin(params, { direction : this.direction });
 	            } 
-	            return this.constructUrl(url, urlParams, {});
+	            return this.constructUrl(url, urlParams, {}, endpoint);
 	        },
 	        
 

@@ -58,7 +58,7 @@ public class ActivityStreamService extends BaseService {
 	/**
 	 * Used in constructing REST APIs
 	 */
-	public static final String	baseUrl		= "/connections/opensocial/";
+	public static final String	baseUrl		= "/{connections}/opensocial/";
 	/**
 	 * Used in constructing REST APIs
 	 */

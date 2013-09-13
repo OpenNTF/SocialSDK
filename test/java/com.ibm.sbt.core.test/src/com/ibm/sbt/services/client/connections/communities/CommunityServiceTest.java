@@ -20,12 +20,11 @@ import com.ibm.sbt.services.client.connections.communities.Member;
 import com.ibm.sbt.services.client.connections.communities.CommunityList;
 import com.ibm.sbt.services.client.connections.communities.BookmarkList;
 import com.ibm.sbt.services.client.connections.communities.Bookmark;
-import com.ibm.sbt.services.client.connections.communities.ForumTopic;
-import com.ibm.sbt.services.client.connections.communities.ForumTopicList;
 import com.ibm.sbt.services.client.connections.communities.Invite;
 import com.ibm.sbt.services.client.connections.communities.InviteList;
 import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
-import com.ibm.sbt.services.endpoints.EndpointFactory;
+import com.ibm.sbt.services.client.connections.forums.TopicList;
+import com.ibm.sbt.services.client.connections.forums.model.BaseForumEntity;
 /**
  * Tests for the java connections Communities API a test class provides its own tests extending the test
  * endpoint abstract class
@@ -125,9 +124,9 @@ public class CommunityServiceTest extends BaseUnitTest {
 		CommunityList communities = communityService.getPublicCommunities();
 		Community community = communities.iterator().next();
 		
-		ForumTopicList forumTopics = communityService.getForumTopics(community.getCommunityUuid());
+		TopicList forumTopics = communityService.getForumTopics(community.getCommunityUuid());
 
-		for (ForumTopic forumTopic : forumTopics) {
+		for (BaseForumEntity forumTopic : forumTopics) {
 			assertNotNull(forumTopic.getTitle());
 		}
 	}

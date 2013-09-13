@@ -32,7 +32,7 @@ import com.ibm.xsp.util.ManagedBeanUtil;
  * @author priand
  */
 public abstract class OptionsBean {
-	
+
 	public static OptionsBean get() {
 		return (OptionsBean)ManagedBeanUtil.getBean(FacesContext.getCurrentInstance(), "optionsBean");
 	}
@@ -42,6 +42,7 @@ public abstract class OptionsBean {
 	private boolean xpagesSnippetsEnabled;
 	private boolean gadgetSnippetsEnabled;
 	private boolean explorerEnabled;
+	private boolean apiDocumentationEnabled;
 	private boolean apacheLicense;
 	private String environments;
 	
@@ -49,7 +50,6 @@ public abstract class OptionsBean {
 	private String applicationTitle;
 	private String applicationLogo;
 	
-	private Categories categories;
 	
 	public OptionsBean() {
 		loadOptions();
@@ -145,12 +145,19 @@ public abstract class OptionsBean {
 		this.banner=banner;
 	}
 	
+	public boolean isApiDocumentationEnabled() {
+		return apiDocumentationEnabled;
+	}
+	public void setApiDocumentationEnabled(boolean apiDocumentationEnabled) {
+		this.apiDocumentationEnabled=apiDocumentationEnabled;
+	}
+
 	
 	//
 	//
 	//
 	public Categories getEnvironmentCategories() {
-		return categories;
+		return Endpoints.categories;
 	}
 
 	public String[] getRuntimePlatforms() {
@@ -183,12 +190,12 @@ public abstract class OptionsBean {
 			this.explorerEnabled = getEnvironmentBoolean(doc,"APIExplorer");
 			this.apacheLicense = getEnvironmentBoolean(doc,"ApacheLicense");
 			this.environments = getEnvironmentString(doc,"Environments");
+			
+			this.apiDocumentationEnabled = getEnvironmentBoolean(doc,"APIDocumentation");
 	
 			this.banner = getEnvironmentString(doc,"Banner");
 			this.applicationTitle = getEnvironmentString(doc,"AppTitle","IBM Social Business Toolkit");
 			this.applicationLogo = getEnvironmentString(doc,"AppLogo");
-			
-			this.categories = new Categories();
 		} finally {
 			try {
 				if(doc!=null) {

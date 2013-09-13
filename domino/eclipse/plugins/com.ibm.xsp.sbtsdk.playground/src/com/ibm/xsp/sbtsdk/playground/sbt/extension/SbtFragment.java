@@ -24,8 +24,6 @@ import nsf.playground.extension.PlaygroundFragment;
  */
 public class SbtFragment extends PlaygroundFragment {
     
-	public static final SbtFragment instance = new SbtFragment();
-	
     public SbtFragment() {
     }
 

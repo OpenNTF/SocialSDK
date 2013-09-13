@@ -91,9 +91,10 @@ define(["../../../declare",
 	      * @method buildUrl
 	      * @param url the url to add parameters to
 	      * @param args
+	      * @param endpoint An endpoint which may contain custom service mappings.
 	      * @returns the url with parameters 
 	      */
-	     buildUrl: function(url, args) {
+	     buildUrl: function(url, args, endpoint) {
 	    	 var urlParams;
 	    	 
 	    	 if(this.type == "private"){
@@ -104,7 +105,7 @@ define(["../../../declare",
 	    		 urlParams = {access: "any"};
 	    	 }
 
-	          return this.constructUrl(url, urlParams, {});
+	          return this.constructUrl(url, urlParams, {}, endpoint);
 	        },
 	     
         /**

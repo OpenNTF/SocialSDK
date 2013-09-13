@@ -633,6 +633,10 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
      */
     var ForumService = declare(BaseService, {
 
+        contextRootMap: {
+            forums: "forums"
+        },
+        
         /**
          * Constructor for ForumsService
          * 

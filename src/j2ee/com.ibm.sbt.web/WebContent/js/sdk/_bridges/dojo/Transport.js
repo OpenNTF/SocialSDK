@@ -78,6 +78,8 @@ define([ './declare', 'dojo/_base/xhr', 'dojox/xml/parser', '../util', '../Promi
             } else if (method == "POST") {
                 args.postData = options.data || null;
                 hasBody = true;
+            } else if(method == "GET") {
+            	args.preventCache = true; // to ensure each time fresh feed is retrieved with network call
             }
             
             var promise = new Promise();

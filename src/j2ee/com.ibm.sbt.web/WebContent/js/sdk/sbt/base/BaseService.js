@@ -51,6 +51,11 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
          * Regular expression used to remove // from url's
          */
         _regExp : new RegExp("/{2}"),
+        
+        /**
+         * A map of default context roots to custom, if any. This will be implemented in subClasses of BaseService.
+         */
+        contextRootMap: {},
 
         /**
          * Constructor for BaseService
@@ -90,16 +95,14 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
             if(this.endpoint){
                 lang.mixin(this.contextRootMap, this.endpoint.serviceMappings);
                 
-                if(this.contextRootMap && !util.isEmptyObject(this.contextRootMap)){
-                    url = stringUtil.transform(url, this.contextRootMap, function(value, key){
-                        if(!value){
-                            return key;
-                        }
-                        else{
-                            return value;
-                        }
-                    }, this);
-                }
+                url = stringUtil.transform(url, this.contextRootMap, function(value, key){
+                    if(!value){
+                        return key;
+                    }
+                    else{
+                        return value;
+                    }
+                }, this);
             }
             
             if (urlParams) {

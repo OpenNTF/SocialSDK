@@ -23,8 +23,8 @@ function updateProfilePhoto(profileService, profileId, dom) {
 	// "your-files" is the ID of the HTML5 File Control. Refer to Update Profile Photo.html
 	profileService.updateProfilePhoto("your-files", profileId).then(function(file) {		
 		profileService.getProfile(profileId).then(function(profile) {
-			var url =  profile.getThumbnailUrl();
-			dom.byId("image").src = url.substring(0, url.indexOf("&lastMod"));
+			var url =  profile.getThumbnailUrl();			
+			dom.byId("image").src = url + "&rand=" + Math.random();
 			displayMessage(dom, "Profile Photo updated successfuly");
 			dom.byId("loading").style.visibility = "hidden";
 		}, function(error) {

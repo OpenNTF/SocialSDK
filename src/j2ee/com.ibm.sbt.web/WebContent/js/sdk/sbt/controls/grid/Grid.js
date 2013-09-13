@@ -114,7 +114,7 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
                     this._storeArgs = this.options[this.defaultOption].storeArgs;
                     this._storeArgs.endpoint = this.endpoint;
                     if (args && args.type && this.options.hasOwnProperty(args.type)) {
-                        this._storeArgs = this.options[args.type].storeArgs;  
+                        lang.mixin(this._storeArgs, this.options[args.type].storeArgs); 
                     }   
                 }
                 this.store = this.createDefaultStore(this._storeArgs);

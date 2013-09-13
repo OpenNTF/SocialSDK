@@ -109,6 +109,14 @@ context.reloadPage()}]]></xp:this.action>
 						<xp:selectItem itemLabel="false"></xp:selectItem>
 					</xp:comboBox>
 				</xe:formRow>
+				<xe:formRow id="formRow12" label="API Documentation">
+					<xp:comboBox id="comboBox7"
+						value="#{document1.APIDocumentation}">
+						<xp:selectItem itemLabel=""></xp:selectItem>
+						<xp:selectItem itemLabel="true"></xp:selectItem>
+						<xp:selectItem itemLabel="false"></xp:selectItem>
+					</xp:comboBox>
+				</xe:formRow>
 				<xe:formRow id="formRow10">
 				<br/>
 				</xe:formRow>

@@ -80,6 +80,8 @@ define([ 'dojo/_base/declare', 'dojo/_base/xhr', 'dojo/_base/lang', 'dojox/xml/p
             } else if (method == "POST") {
                 args.postData = options.data || null;
                 hasBody = true;
+            } else if(method == "GET") { // to ensure each time fresh feed is retrieved with network call
+            	args.preventCache = true;
             }
             
             var promise = new Promise();

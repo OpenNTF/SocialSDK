@@ -78,8 +78,8 @@ define(['./declare', '../util', '../Promise', './jquery'], function(declare, uti
             } else if (method == "POST") {
                 args.postData = options.data || null;
                 hasBody = true;
-            }
-            
+            } 
+                       
             var promise = new Promise();
             promise.response = new Promise();
             var self = this;
@@ -158,7 +158,9 @@ define(['./declare', '../util', '../Promise', './jquery'], function(declare, uti
 		        data: xhrData,
 		        dataType: args.handleAs,		       
 		    };
-		    
+		    if(method== "GET"){ // to ensure each time fresh feed is retrieved with network call
+		    	settings.cache = false;
+		    }
 		    if (args.headers) {
 		    	settings.headers = args.headers;	
 		    	// HTML5 FormData in jQuery requires contentType and processData = false on settings instead of headers as in dojo

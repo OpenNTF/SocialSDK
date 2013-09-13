@@ -58,8 +58,6 @@ public class SbtImportOptions extends ImportOptions {
 	}
 	
 	
-	public static final SbtImportOptions instance = new SbtImportOptions();
-	
     public SbtImportOptions() {
 	}
     

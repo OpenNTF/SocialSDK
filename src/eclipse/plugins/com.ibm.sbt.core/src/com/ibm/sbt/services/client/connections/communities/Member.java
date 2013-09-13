@@ -15,8 +15,7 @@
  */
 package com.ibm.sbt.services.client.connections.communities;
 
-import com.ibm.commons.xml.DOMUtil;
-import com.ibm.commons.xml.XMLException;
+import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
@@ -30,9 +29,12 @@ import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
  */
 public class Member extends BaseEntity {
 	
-	static public final String MEMBER = "member"; //$NON-NLS-1$
-	static public final String OWNER = "owner"; //$NON-NLS-1$
-	
+	/**
+     * The Uuid of the community associated with this Member
+     */
+    private String communityUuid;
+
+
 	/**
 	 * Constructor
 	 * 
@@ -58,6 +60,19 @@ public class Member extends BaseEntity {
 		super(svc,handler);
 	}
 
+	public String getCommunityUuid(){
+	    	String communityId = "";
+	    	try {
+	    		communityId = getAsString(MemberXPath.id);
+			} catch (Exception e) {}
+	    	
+	    	if(StringUtil.isEmpty(communityId)){
+	    		communityId = communityUuid;
+	    	}
+	    	//extract the community id from /service/atom/community/members?communityUuid=7c91e35e-96c9-46e6-8b8d-77c4d2890de6&amp;email=boydgossens@renovations.com
+	    	communityId = communityId.substring(communityId.indexOf("=")+1,communityId.indexOf("&"));
+	    	return communityId;
+	}
 	/**
 	 * 
 	 * @return id
@@ -86,7 +101,7 @@ public class Member extends BaseEntity {
 	 * @set name
 	 */
 	public void setName(String name) {
-		fields.put(MemberXPath.name.name(),name);
+		setAsString(MemberXPath.name, name);
 	}
 
 	/**
@@ -94,7 +109,7 @@ public class Member extends BaseEntity {
 	 * @set id
 	 */
 	public void setUserid(String id) {
-		fields.put(MemberXPath.userid.name(),id);
+		setAsString(MemberXPath.userid, id);
 	}
 	
 	/**
@@ -102,7 +117,7 @@ public class Member extends BaseEntity {
 	 * @set email
 	 */
 	public void setEmail(String email) {
-		fields.put(MemberXPath.email.name(),email);
+		setAsString(MemberXPath.email, email);
 	}
 	
 	/**
@@ -117,9 +132,19 @@ public class Member extends BaseEntity {
 	 * @set role
 	 */
 	public void setRole(String role){
-		fields.put(MemberXPath.role.name(),role);
+		setAsString(MemberXPath.role, role);
 	}
 		
+	public Member load() throws CommunityServiceException
+	{
+	  	return getService().getMember(getCommunityUuid(), getUserid());
+	}
+	 
+	public void remove() throws CommunityServiceException
+	{
+	  	getService().removeMember(getCommunityUuid(), getUserid());
+	}
+	
 	@Override
 	public CommunityService getService(){
 		return (CommunityService)super.getService();

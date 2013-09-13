@@ -826,6 +826,10 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
     var CommunityService = declare(BaseService, {
     	
     	forumService : null,
+    	
+    	contextRootMap: {
+            communities: "communities"
+        },
 
         /**
          * Constructor for CommunityService

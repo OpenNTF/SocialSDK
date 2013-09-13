@@ -40,7 +40,17 @@ define(['./lang','sbt/i18n!sbt/nls/util','./log'],function(lang, nls, log) {
 		}
 	}	
 	return {
-		notifyError: _notifyError,			
+		notifyError: _notifyError,	
+		isEmptyObject: function(obj){
+            var isEmpty = true;
+            for( var key in obj ){
+                if(obj.hasOwnProperty(key)){
+                    isEmpty = false;
+                    break;
+                }
+            }
+            return isEmpty;
+        },
 		checkObjectClass: function(object, className, message, args){
 			if(object.declaredClass != className){
 				if(args){

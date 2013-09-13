@@ -17,8 +17,8 @@
 /**
  * 
  */
-define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil", "../../widget/grid/_Grid", "./ViewProfileAction"], 
-        function(declare, lang, itemFactory, stringUtil, _Grid, ViewProfileAction) {
+define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil", "../../widget/grid/_Grid", "./ViewProfileAction", "../../util"], 
+        function(declare, lang, itemFactory, stringUtil, _Grid, ViewProfileAction, util) {
 
     /**
      * @class grid
@@ -114,7 +114,7 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
                     this._storeArgs = this.options[this.defaultOption].storeArgs;
                     this._storeArgs.endpoint = this.endpoint;
                     if (args && args.type && this.options.hasOwnProperty(args.type)) {
-                        this._storeArgs = this.options[args.type].storeArgs;  
+                        lang.mixin(this._storeArgs, this.options[args.type].storeArgs); 
                     }   
                 }
                 this.store = this.createDefaultStore(this._storeArgs);
@@ -142,10 +142,13 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
          * @returns - an atom store instance
          */
         createDefaultStore: function(args) {
-            if (args.url) {
-                args.url = this.buildUrl(args.url, args);
+            var store = this._createDefaultStore(args);
+            var _args = store._args;
+            if (_args.url) {
+                _args.url = this.buildUrl(_args.url, _args, store.getEndpoint());
             }
-            return this._createDefaultStore(args);
+            
+            return store;
         },
         
         /**
@@ -154,14 +157,15 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
          * @method buildUrl
          * @param url base url
          * @param args arguments that will be passed to the store
+         * @param endpoint The endpoint, needed to verify if custom service mappings are present.
          * @returns Built url
          */
-        buildUrl: function(url, args) {
-        	var params = {};
+        buildUrl: function(url, args, endpoint) {
+            var params = {};
             if (this.query) {
-            	params = lang.mixin(params, this.query);
+                params = lang.mixin(params, this.query);
             }
-            return this.constructUrl(url, params, this.getUrlParams());
+            return this.constructUrl(url, params, this.getUrlParams(), endpoint);
         },
 
         /**
@@ -439,12 +443,29 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
          * @param url
          * @param params
          * @param urlParams
+         * @param endpoint An endpoint which may contain custom service mappings.
          * @returns
          */
-        constructUrl : function(url,params,urlParams) {
+        constructUrl : function(url,params,urlParams, endpoint) {
             if (!url) {
                 throw new Error("Grid.constructUrl: Invalid argument, url is undefined or null.");
             }
+            
+            if(endpoint){
+                lang.mixin(this.contextRootMap, endpoint.serviceMappings);
+                
+                if(this.contextRootMap && !util.isEmptyObject(this.contextRootMap)){
+                    url = stringUtil.transform(url, this.contextRootMap, function(value, key){
+                        if(!value){
+                            return key;
+                        }
+                        else{
+                            return value;
+                        }
+                    }, this);
+                }
+            }
+            
             if (urlParams) {
                 url = stringUtil.replace(url, urlParams);
                 

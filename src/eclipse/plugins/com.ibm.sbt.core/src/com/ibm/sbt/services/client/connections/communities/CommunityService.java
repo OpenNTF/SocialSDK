@@ -63,7 +63,7 @@ public class CommunityService extends BaseService {
 	/**
 	 * Used in constructing REST APIs
 	 */
-	public static final String	CommunityBaseUrl	= "communities/service/atom";
+	public static final String	CommunityBaseUrl	= "{communities}/service/atom";
 	
 	/**
 	 * Constructor Creates CommunityService Object with default endpoint and default cache size

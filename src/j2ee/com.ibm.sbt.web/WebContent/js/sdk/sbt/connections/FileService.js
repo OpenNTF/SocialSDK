@@ -702,6 +702,10 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 	 * @namespace sbt.connections
 	 */
 	var FileService = declare(BaseService, {
+	    
+	    contextRootMap: {
+            files: "files"
+        },
 
 		/**
 		 * Constructor for FileService

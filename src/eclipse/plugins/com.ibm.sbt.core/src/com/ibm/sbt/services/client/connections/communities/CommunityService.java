@@ -31,11 +31,13 @@ import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.base.util.EntityUtil;
 import com.ibm.sbt.services.client.connections.communities.feedhandlers.BookmarkFeedHandler;
 import com.ibm.sbt.services.client.connections.communities.feedhandlers.CommunityFeedHandler;
-import com.ibm.sbt.services.client.connections.communities.feedhandlers.ForumTopicFeedHandler;
+import com.ibm.sbt.services.client.connections.forums.feedhandler.TopicsFeedHandler;
 import com.ibm.sbt.services.client.connections.communities.feedhandlers.InviteFeedHandler;
 import com.ibm.sbt.services.client.connections.communities.feedhandlers.MemberFeedHandler;
 import com.ibm.sbt.services.client.connections.communities.tranformers.CommunityMemberTransformer;
 import com.ibm.sbt.services.client.connections.communities.util.Messages;
+import com.ibm.sbt.services.client.connections.forums.ForumService;
+import com.ibm.sbt.services.client.connections.forums.TopicList;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.util.AuthUtil;
@@ -58,11 +60,6 @@ import com.ibm.sbt.services.util.AuthUtil;
 
 public class CommunityService extends BaseService {
 	private static final String COMMUNITY_UNIQUE_IDENTIFIER = "communityUuid";
-	private final CommunityFeedHandler communityFeedHandler = new CommunityFeedHandler(this);
-	private final MemberFeedHandler memberFeedHandler = new MemberFeedHandler(this);
-	private final BookmarkFeedHandler bookmarkFeedHandler = new BookmarkFeedHandler(this);
-	private final ForumTopicFeedHandler forumTopicFeedHandler = new ForumTopicFeedHandler(this);
-	private final InviteFeedHandler inviteFeedHandler = new InviteFeedHandler(this);
 	/**
 	 * Used in constructing REST APIs
 	 */
@@ -121,7 +118,7 @@ public class CommunityService extends BaseService {
 			parameters = new HashMap<String, String>();
 		}
 		try {
-			communities = (CommunityList) getEntities(requestUrl, parameters, communityFeedHandler);
+			communities = (CommunityList) getEntities(requestUrl, parameters, new CommunityFeedHandler(this));
 		} catch (ClientServicesException e) {
 			throw new CommunityServiceException(e, Messages.PublicCommunitiesException);
 		} catch (IOException e) {
@@ -148,7 +145,7 @@ public class CommunityService extends BaseService {
 				CommunityType.INSTANCE.getCommunityType());
 		Community community;
 		try {
-			community = (Community)getEntity(url, parameters, communityFeedHandler);
+			community = (Community)getEntity(url, parameters, new CommunityFeedHandler(this));
 		} catch (ClientServicesException e) {
 			throw new CommunityServiceException(e, Messages.CommunityException, communityUuid);
 		} catch (Exception e) {
@@ -209,7 +206,7 @@ public class CommunityService extends BaseService {
 		
 		MemberList members = null;
 		try {
-			members = (MemberList) getEntities(requestUrl, parameters, memberFeedHandler);
+			members = (MemberList) getEntities(requestUrl, parameters, new MemberFeedHandler(this));
 		} catch (ClientServicesException e) {
 			throw new CommunityServiceException(e, Messages.CommunityMembersException, communityUuid);
 		} catch (IOException e) {
@@ -242,7 +239,7 @@ public class CommunityService extends BaseService {
 			 parameters = new HashMap<String, String>();
 		}
 		try {
-			communities = (CommunityList) getEntities(requestUrl, parameters, communityFeedHandler);
+			communities = (CommunityList) getEntities(requestUrl, parameters, new CommunityFeedHandler(this));
 		} catch (ClientServicesException e) {
 			throw new CommunityServiceException(e, Messages.MyCommunitiesException);
 		} catch (IOException e) {
@@ -278,7 +275,7 @@ public class CommunityService extends BaseService {
 		
 		CommunityList communities = null;
 		try {
-			communities = (CommunityList) getEntities(requestUrl, parameters, communityFeedHandler);
+			communities = (CommunityList) getEntities(requestUrl, parameters, new CommunityFeedHandler(this));
 		} catch (ClientServicesException e) {
 			throw new CommunityServiceException(e, Messages.SubCommunitiesException, communityUuid);
 		} catch (IOException e) {
@@ -314,7 +311,7 @@ public class CommunityService extends BaseService {
 		
 		BookmarkList bookmarks = null;
 		try {
-			bookmarks = (BookmarkList) getEntities(requestUrl, parameters, bookmarkFeedHandler);
+			bookmarks = (BookmarkList) getEntities(requestUrl, parameters, new BookmarkFeedHandler(this));
 		} catch (ClientServicesException e) {
 			throw new CommunityServiceException(e, Messages.CommunityBookmarksException, communityUuid);
 		} catch (IOException e) {
@@ -325,7 +322,7 @@ public class CommunityService extends BaseService {
 
 	}
 
-	public ForumTopicList getForumTopics(String communityUuid) throws CommunityServiceException {
+	public TopicList getForumTopics(String communityUuid) throws CommunityServiceException {
 		return getForumTopics(communityUuid, null);
 	}
 	/**
@@ -336,7 +333,7 @@ public class CommunityService extends BaseService {
 	 * @return Forum topics of the given Community 
 	 * @throws CommunityServiceException
 	 */
-	public ForumTopicList getForumTopics(String communityUuid, Map<String, String> parameters) throws CommunityServiceException {
+	public TopicList getForumTopics(String communityUuid, Map<String, String> parameters) throws CommunityServiceException {
 		
 		if (StringUtil.isEmpty(communityUuid)){
 			throw new CommunityServiceException(null, Messages.NullCommunityIdException);
@@ -347,9 +344,9 @@ public class CommunityService extends BaseService {
 		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
 		String requestUrl = resolveCommunityUrl(CommunityEntity.COMMUNITY.getCommunityEntityType(),	CommunityType.FORUMTOPICS.getCommunityType());
 		
-		ForumTopicList forumTopics = null;
+		TopicList forumTopics = null;
 		try {
-			forumTopics = (ForumTopicList) getEntities(requestUrl, parameters, forumTopicFeedHandler);
+			forumTopics = (TopicList) getEntities(requestUrl, parameters, new TopicsFeedHandler(new ForumService()));
 		}catch (ClientServicesException e) {
 			throw new CommunityServiceException(e, Messages.CommunityForumTopicsException, communityUuid);
 		} catch (IOException e) {
@@ -380,7 +377,7 @@ public class CommunityService extends BaseService {
 		String requestUrl = resolveCommunityUrl(CommunityEntity.COMMUNITY.getCommunityEntityType(),	CommunityType.INVITES.getCommunityType());
 		InviteList invites = null;
 		try {
-			invites = (InviteList) getEntities(requestUrl, parameters, inviteFeedHandler);
+			invites = (InviteList) getEntities(requestUrl, parameters, new InviteFeedHandler(this));
 		}catch (ClientServicesException e) {
 			throw new CommunityServiceException(e, Messages.CommunityInvitationsException);
 		} catch (IOException e) {

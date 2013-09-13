@@ -271,7 +271,7 @@ public class Community extends BaseEntity {
 	 * @throws CommunityServiceException
 	 */
 
-	public void delete() throws CommunityServiceException {
+	public void remove() throws CommunityServiceException {
 	   	getService().deleteCommunity(getCommunityUuid());
 	}
 	/**
@@ -289,7 +289,47 @@ public class Community extends BaseEntity {
 			return getService().getCommunity(getCommunityUuid());
 		}
 	}
+	/**
+	 * This method gets Community member
+	 * 
+	 * @return
+	 * @throws CommunityServiceException
+	 */
+	public Member getMember(String memberID) throws CommunityServiceException
+    {
+		return getService().getMember(getCommunityUuid(), memberID );
+    }
+	/**
+	 * This method adds Community member
+	 * 
+	 * @return
+	 * @throws CommunityServiceException
+	 */
+	public boolean addMember(String memberID) throws CommunityServiceException
+    {
+		return addMember(memberID , "");
+    }
+	/**
+	 * This method adds Community member
+	 * 
+	 * @return
+	 * @throws CommunityServiceException
+	 */
+	public boolean addMember(String memberID, String role) throws CommunityServiceException
+    {
+		return getService().addMember(getCommunityUuid(), memberID , role);
+    }
 	
+	/**
+	 * This method removes Community member
+	 * 
+	 * @return
+	 * @throws CommunityServiceException
+	 */
+	public void removeMember(String memberID) throws CommunityServiceException
+    {
+		getService().removeMember(getCommunityUuid(), memberID );
+    }
 	/**
 	 * This method gets the subcommunities of a community
 	 * 

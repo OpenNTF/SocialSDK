@@ -41,39 +41,39 @@ public class SbtEndpoints extends Endpoints {
 	
 	private static final Category[] PROPERTIES = new Category[] {
 		new Category("connections","IBM Connections on Premises","IBM Connections", new Property[] {
-				new Property("Con_URL", "URL"),
+				new Property("Con_URL", "URL", "https://[myconnections-server]"),
 				new Property("Con_OA2_ConsumerKey", "OAuth2 - Consumer Key"),
 				new Property("Con_OA2_ConsumerSecret", "OAuth2 - Consumer Secret"),
-				new Property("Con_OA2_AuthorizationURL", "OAuth2 - Authorization URL"),
-				new Property("Con_OA2_AccessTokenURL", "OAuth2 - Access Token URL"),
+				new Property("Con_OA2_AuthorizationURL", "OAuth2 - Authorization URL", "https://[myconnections-server]/oauth2/endpoint/connectionsProvider/authorize"),
+				new Property("Con_OA2_AccessTokenURL", "OAuth2 - Access Token URL", "https://[myconnections-server]/oauth2/endpoint/connectionsProvider/token"),
 		}, new Group[] {
-				new Group("IBM Connections using Basic Authentication", new String[] {"Con_URL"}),
-				new Group("IBM Connections using OAuth 2", new String[] {"Con_URL","Con_OA2_ConsumerKey","Con_OA2_ConsumerSecret","Con_OA2_AuthorizationURL","Con_OA2_AccessTokenURL"}),
-		}),
+				new Group("Basic Authentication", new String[] {"Con_URL"}, "# Connections default is Basic Auth\n\nsbt.endpoint.connections=connectionsBasic\n"),
+				new Group("OAuth 2", new String[] {"Con_URL","Con_OA2_ConsumerKey","Con_OA2_ConsumerSecret","Con_OA2_AuthorizationURL","Con_OA2_AccessTokenURL"}, "# Connections default is OAuth 2\nsbt.endpoint.connections=connectionsOA2\n", 1),
+		}, null),
 		new Category("smartcloud","IBM SmartCloud for Social Business", "IBM SmartCloud", new Property[] {
-				new Property("Sma_URL", "URL"),
-				new Property("Sma_OA_ConsumerKey", "Consumer Key"),
+				new Property("Sma_URL", "URL", "https://apps.na.collabserv.com"),
+				new Property("Sma_OA_ConsumerKey", "OAuth1 - Consumer Key"),
 				new Property("Sma_OA_ConsumerSecret", "OAuth1 - Consumer Secret"),
-				new Property("Sma_OA_RequestTokenURL", "OAuth1 - Request Token URL"),
-				new Property("Sma_OA_AuthorizationURL", "OAuth1 - Authorization URL"),
-				new Property("Sma_OA_AccessTokenURL", "OAuth1 - AccessToken URL"),
+				new Property("Sma_OA_RequestTokenURL", "OAuth1 - Request Token URL", "https://apps.na.collabserv.com/manage/oauth/getRequestToken"),
+				new Property("Sma_OA_AuthorizationURL", "OAuth1 - Authorization URL", "https://apps.na.collabserv.com/manage/oauth/authorizeToken"),
+				new Property("Sma_OA_AccessTokenURL", "OAuth1 - AccessToken URL", "https://apps.na.collabserv.com/manage/oauth/getAccessToken"),
 				new Property("Sma_OA2_ConsumerKey", "OAuth2 - Consumer Key"),
 				new Property("Sma_OA2_ConsumerSecret", "OAuth2 - Consumer Secret"),
-				new Property("Sma_OA2_AuthorizationURL", "OAuth2 - Authorization URL"),
-				new Property("Sma_OA2_AccessTokenURL", "OAuth2 - Access Token URL"),
+				new Property("Sma_OA2_AuthorizationURL", "OAuth2 - Authorization URL", "https://apps.na.collabserv.com/manage/oauth2/authorize"),
+				new Property("Sma_OA2_AccessTokenURL", "OAuth2 - Access Token URL", "https://apps.na.collabserv.com/manage/oauth2/token"),
 		}, new Group[] {
-				new Group("IBM Connections using OAuth 1", new String[] {"Sma_URL","Sma_OA_ConsumerKey","Sma_OA_ConsumerSecret","Sma_OA_RequestTokenURL","Sma_OA_AuthorizationURL","Sma_OA_AccessTokenURL"}),
-				new Group("IBM Connections using OAuth 2", new String[] {"Sma_URL","Sma_OA2_ConsumerKey","Sma_OA2_ConsumerSecret","Sma_OA2_AuthorizationURL","Sma_OA2_AccessTokenURL"}),
-		}),
+				new Group("OAuth 1", new String[] {"Sma_URL","Sma_OA_ConsumerKey","Sma_OA_ConsumerSecret","Sma_OA_RequestTokenURL","Sma_OA_AuthorizationURL","Sma_OA_AccessTokenURL"}, "# Make SmartCloud OAuth 1 the default server for Connections\nsbt.endpoint.connections=smartcloudOA\nsbt.endpoint.smartcloud=smartcloudOA"),
+				new Group("OAuth 2", new String[] {"Sma_URL","Sma_OA2_ConsumerKey","Sma_OA2_ConsumerSecret","Sma_OA2_AuthorizationURL","Sma_OA2_AccessTokenURL"}, "# Make SmartCloud OAuth 2 the default server for Connections\nsbt.endpoint.connections=smartcloudOA2\nsbt.endpoint.smartcloud=smartcloudOA2",1),
+		}, null),
 		new Category("domino","IBM Domino", "IBM Domino", new Property[] {
 				new Property("Dom_URL", "URL"),
 		}, new Group[] {
-				//new Group("IBM Domino using Basic Authentication", new String[] {"Dom_URL"}),
-		}),
+				new Group("Basic Authentication", new String[] {"Dom_URL"}, null),
+		}, null),
 /*		
 		new Category("sametime","Sametime", new Property[] {
 				new Property("St_URL", "URL"),
-		}),
+		}, null),
 */		
 		new Category("twitter","Twitter","Twitter",  new Property[] {
 				//new Property("Twitter_URL", "Twitter URL"),
@@ -81,14 +81,14 @@ public class SbtEndpoints extends Endpoints {
 				new Property("Twitter_OA_ConsumerKey", "Twitter Consumer Key"),
 				new Property("Twitter_OA_ConsumerSecret", "Twitter Consumer Secret"),
 		}, new Group[] {
-				
-		}),
+				new Group("OAuth", new String[] {"Twitter_OA_AppplicationAccessToken","Twitter_OA_ConsumerKey","Twitter_OA_ConsumerSecret"}, null, 1),
+		}, null),
 		new Category("dropbox","Dropbox","Dropbox", new Property[] {
 				new Property("Dropbox_OA_ConsumerKey", "Dropbox Consumer Key"),
 				new Property("Dropbox_OA_ConsumerSecret", "Dropbox Consumer Secret"),
 		}, new Group[] {
-				
-		}),
+				new Group("OAuth", new String[] {"Dropbox_OA_ConsumerKey","Dropbox_OA_ConsumerSecret"}, null),
+		}, null),
 	};
 
     public SbtEndpoints() {

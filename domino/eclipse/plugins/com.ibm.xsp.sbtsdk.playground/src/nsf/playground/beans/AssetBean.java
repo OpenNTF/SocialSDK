@@ -147,7 +147,7 @@ public abstract class AssetBean {
 		String[] runtimes = assetLoaderEnvironment.getRuntimesArray();
 		if(runtimes!=null && runtimes.length>0) {
 			for(int i=0; i<runtimes.length; i++) {
-				if(StringUtil.equals(runtimes[i], name)) {
+				if(StringUtil.equalsIgnoreCase(runtimes[i], name)) {
 					return true;
 				}
 			}

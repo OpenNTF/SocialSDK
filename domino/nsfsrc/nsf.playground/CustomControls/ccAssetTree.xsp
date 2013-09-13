@@ -87,7 +87,12 @@ return true;]]></xp:this.onkeypress>
 	};
 	// Suppress the wide out effect
 	dijit.defaultDuration = 0;
+	// Display the empty tree message
+	if(assetsData[0].children.length==0) {
+		dojo.style('emptyTree',{display:'block'});
+	}
 });]]></xp:this.value>				</xp:scriptBlock>				<div id="assetsTree"></div>
+				<div id="emptyTree" style='display:none'>The current filtering options don't match any snippets. Please select a different environment.</div>
 			</xp:div>
 		</xe:djBorderPane>
 	</xe:djBorderContainer>

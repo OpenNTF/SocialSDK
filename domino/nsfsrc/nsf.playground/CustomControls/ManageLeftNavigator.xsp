@@ -47,7 +47,7 @@
 				<xe:pageTreeNode page="ManageAPIsByCategory" label="APIs"
 					selection="/Manage/ManageAPIs">
 				</xe:pageTreeNode>
-				<xe:pageTreeNode page="ApiDocumentation" label="Edit API Documentation">
+				<xe:pageTreeNode page="ApiDocumentation" label="Edit API Documentation" loaded="${javascript:optionsBean.apiDocumentationEnabled}">
 				</xe:pageTreeNode>
 				<xe:pageTreeNode page="ManageImportAPIs" label="Import API Descriptions"
 					selection="/Manage/ImportAPIs">

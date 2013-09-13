@@ -3,57 +3,42 @@
 	xmlns:xe="http://www.ibm.com/xsp/coreex">
 
 	<xe:dialog id="customEnvDialog" title="Custom Environment"
-		style="height: 55em; width: 70em;" styleClass="EnvDialog">
+		styleClass="EnvDialog">
 		<xp:panel style="margin-left:10px; margin-right: 5px;">
 			<xp:this.data>
 				<xp:dominoDocument var="document1" formName="Environment">
 					<xp:this.postNewDocument><![CDATA[#{javascript:var env = dataAccess.getCustomEnvironment();
-dataAccess.writeEnvironment(env,document1.getDocument());}]]></xp:this.postNewDocument>
+dataAccess.writeEnvironment(env,document1);}]]></xp:this.postNewDocument>
 				</xp:dominoDocument>
 			</xp:this.data>
-			<xe:dialogContent id="dialogContent1">
-				<xe:dynamicContent id="dynp" defaultFacet="editor"
+			<xe:dialogContent id="dialogContent1" style="height: 65em; width: 75em;" >
+				<xe:dynamicContent id="dynp" defaultFacet="${javascript:sessionScope.envDlg||'wizard'}"
 					partialEvents="true">
 					<xp:this.facets>
-						<xe:formTable xp:key="wiz1" id="formTable1"
-							formTitle="Define your target platform" formDescription="What platform do you want to connect to?"
-							labelWidth="12em" style="width: 100%; height: 100%"
-							labelPosition="above">
-							<xe:formRow id="formRow1"
-								label="What server do you want to connect to?">
-								<xp:comboBox id="comboCat">
-									<xp:selectItems>
-										<xp:this.value><![CDATA[#{javascript:optionsBean.getEnvironmentCategories().getCategoryNames()}]]></xp:this.value>
-									</xp:selectItems>
-								</xp:comboBox>
-							</xe:formRow>
-<!-- 						
-							<xe:formRow id="formRow3"
-								label="What kind of authentication mechanism would you like to use?">
-								<xp:comboBox id="comboGrp">
-									<xp:selectItems>
-										<xp:this.value><![CDATA[#{javascript:optionsBean.getEnvironmentCategoryGroupNames(getComponent('comboCat').getValue())}]]></xp:this.value>
-									</xp:selectItems>
-								</xp:comboBox>
-							</xe:formRow>
- -->
-							<xe:formRow id="formRow2" label="Enter the parameters for your server">
-								<xp:dataTable id="dataTable1" rows="30">
-									<xp:this.value><![CDATA[#{javascript:return [1,2,3,4]}]]></xp:this.value>
-									<xp:column id="column1">Title</xp:column>
-									<xp:column id="column2">Value</xp:column>
-								</xp:dataTable>
-							</xe:formRow>
-
-
-						</xe:formTable>
 						<xc:ccEnvironmentForm xp:key="editor"
 							editbean="true"></xc:ccEnvironmentForm>
+						<xc:ccEnvironmentWizard xp:key="wizard"></xc:ccEnvironmentWizard>
 					</xp:this.facets>
 				</xe:dynamicContent>
 			</xe:dialogContent>
 			<xe:dialogButtonBar id="dialogButtonBar1">
 				<xp:panel id="panel1">
+					<xe:linksList id="linksList1" style="float:left">
+						<xe:this.treeNodes>
+							<xe:basicLeafNode label="Simple Mode"
+								submitValue="wizard">
+							</xe:basicLeafNode>
+							<xe:basicLeafNode label="Advanced Mode"
+								submitValue="editor">
+							</xe:basicLeafNode>
+						</xe:this.treeNodes>
+						<xp:eventHandler event="onItemClick"
+							submit="true" refreshMode="complete">
+							<xe:this.action><![CDATA[#{javascript:sessionScope.envDlg=context.getSubmittedValue()
+sessionScope.envCat=''
+sessionScope.envGroup=''
+getComponent('dynp').show(sessionScope.envDlg)}]]></xe:this.action>
+						</xp:eventHandler></xe:linksList>
 					<xp:button value="Save" id="button4">
 						<xp:eventHandler event="onclick" submit="true"
 							refreshMode="complete">

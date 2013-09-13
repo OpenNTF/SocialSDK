@@ -2,11 +2,14 @@
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
 	xmlns:xe="http://www.ibm.com/xsp/coreex">
 	<style>
-		.EnvDialog .lotusFormTable { width: 98%; height: 100%; overflow-y: scroll; }
-		.EnvDialog .lotusDialog .lotusDialogContent { overflow-x: hidden; overflow-y: auto; }
+		.EnvDialog .lotusFormTable { width: 98%; height: 100%;
+		overflow-y: scroll; }
+		.EnvDialog .lotusDialog .lotusDialogContent {
+		overflow-x: hidden; overflow-y: auto; }
 	</style>
-	<xe:formTable id="formTable1" formTitle="Environment"
-		formDescription="Enter here the data for your environment" labelWidth="12em" style="width: 100%; height: 100%">
+	<xe:formTable id="formTable1" formTitle="Advanced Environment Definition"
+		formDescription="Enter here the data for your environment" labelWidth="12em"
+		style="width: 100%; height: 100%">
 		<xp:this.facets>
 			<xp:panel xp:key="header" id="panel4"
 				loaded="${javascript:userBean.canCreateDocs}">
@@ -42,12 +45,11 @@ dataAccess.copyEnvironment(document1,v);
 			loaded="${javascript:!compositeData.editbean}">
 			<xp:inputRichText id="inputRichText1" value="#{document1.Description}"></xp:inputRichText>
 		</xe:formRow>
-		
+
 		<xe:formRow id="formRow3" label="Runtime Platforms:">
-			<xe:djextListTextBox
-				id="djRuntimePlatforms" multipleSeparator=","
-				multipleTrim="true" 
-				value="#{document1.Runtimes}" title="Runtime platforms">
+			<xe:djextListTextBox id="djRuntimePlatforms"
+				multipleSeparator="," multipleTrim="true" value="#{document1.Runtimes}"
+				title="Runtime platforms">
 				<xp:eventHandler event="onChange" submit="true"
 					refreshMode="partial" refreshId="formTable1">
 				</xp:eventHandler>
@@ -71,23 +73,19 @@ dataAccess.copyEnvironment(document1,v);
 					</xp:inputTextarea>
 				</xe:djTabPane>
 				<xp:repeat id="repeat3" rows="30" repeatControls="true"
-					value="#{javascript:optionsBean.getEnvironmentCategories().getCategories()}" var="cat">
-					<xe:djTabPane id="djTabPane1"
-						title="${javascript:cat.getTabLabel()}">
+					value="#{javascript:optionsBean.getEnvironmentCategories().getCategories()}"
+					var="cat">
+					<xe:djTabPane id="djTabPane1" title="${javascript:cat.getTabLabel()}">
 						<xe:this.rendered><![CDATA[#{javascript:var p = getComponent('djRuntimePlatforms').getValueAsString();
 return !p || p.contains(cat.getRuntimePlatform())}]]></xe:this.rendered>
-						<xe:formTable labelWidth="14em"
-							style="margin-left: 8px"
+						<xe:formTable labelWidth="14em" style="margin-left: 8px"
 							formTitle="#{javascript:cat.getLabel()}">
-							<xp:repeat id="repeat4" rows="30"
-								repeatControls="true" value="#{javascript:cat.getProperties()}"
-								var="prop">
-								<xe:formRow id="formRow13"
-									label="${javascript:prop.getLabel()+':'}">
+							<xp:repeat id="repeat4" rows="30" repeatControls="true"
+								value="#{javascript:cat.getProperties()}" var="prop">
+								<xe:formRow id="formRow13" label="${javascript:prop.getLabel()+':'}">
 									<xp:inputText id="inputText23"
 										disableClientSideValidation="true"
-										value="${javascript:'#{document1.'+prop.getName()+'}'}"
-										size="80">
+										value="${javascript:'#{document1.'+prop.getName()+'}'}" size="80">
 									</xp:inputText>
 								</xe:formRow>
 							</xp:repeat>
@@ -96,7 +94,6 @@ return !p || p.contains(cat.getRuntimePlatform())}]]></xe:this.rendered>
 				</xp:repeat>
 			</xe:djTabContainer>
 		</xe:formRow>
-
 	</xe:formTable>
 
 	<xe:dumpObject loaded="false" id="dumpObject1" title="document"

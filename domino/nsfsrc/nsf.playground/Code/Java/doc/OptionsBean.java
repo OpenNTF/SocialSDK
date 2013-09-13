@@ -2,7 +2,6 @@ package doc;
 
 import javax.faces.context.FacesContext;
 
-import com.ibm.commons.util.PathUtil;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.xsp.util.FacesUtil;
 
@@ -26,7 +25,7 @@ public class OptionsBean {
 		String baseUrl = playgroundUrl;
 		if(StringUtil.isEmpty(baseUrl)) {
 			// Get the current server and use a default database name
-			baseUrl = FacesUtil.makeUrlAbsolute(FacesContext.getCurrentInstance(), "/SBTPlayground.nsf");
+			baseUrl = FacesUtil.makeUrlAbsolute(FacesContext.getCurrentInstance(), "/sbtplayground.nsf");
 		}
 		b.append(baseUrl);
 		b.append("/Playground.xsp");

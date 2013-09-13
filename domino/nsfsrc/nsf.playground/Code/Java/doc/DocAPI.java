@@ -98,6 +98,7 @@ public class DocAPI {
 		return false;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void remove(DominoDocument doc, String fieldName, int idx) throws Exception {
 		String json = doc.getItemValueString(fieldName);
 		if(!StringUtil.isSpace(json)) {

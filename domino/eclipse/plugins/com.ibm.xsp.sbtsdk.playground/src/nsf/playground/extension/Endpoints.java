@@ -19,8 +19,13 @@ package nsf.playground.extension;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+
 import nsf.playground.environments.PlaygroundEnvironment;
 
+import com.ibm.commons.runtime.util.UrlUtil;
+import com.ibm.commons.util.PathUtil;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.playground.extension.PlaygroundExtensionFactory;
 import com.ibm.xsp.context.FacesContextEx;
@@ -31,6 +36,8 @@ import com.ibm.xsp.context.FacesContextEx;
  * Endpoints used by the Playground 
  */
 public abstract class Endpoints {
+	
+	public static Categories categories = new Categories();
 	
 	public static class Categories {
 		private List<Category> categories;
@@ -56,13 +63,27 @@ public abstract class Endpoints {
 			}
 			return s;
 		}
-		public int findCategory(String catName) {
-			for(int i=0; i<categories.size(); i++) {
-				if(StringUtil.equals(categories.get(i), catName)) {
-					return i;
+		public Category findCategory(String catName) {
+			if(StringUtil.isNotEmpty(catName)) {
+				for(int i=0; i<categories.size(); i++) {
+					if(StringUtil.equals(categories.get(i).getLabel(), catName)) {
+						return categories.get(i);
+					}
 				}
 			}
-			return -1;
+			return null;
+		}
+		public List<Property> getAllProperties() {
+			List<Property> allProps = new ArrayList<Endpoints.Property>();
+			for(int i=0; i<categories.size(); i++) {
+				Property[] props = categories.get(i).properties;
+				if(props!=null) {
+					for(int j=0; j<props.length; j++) {
+						allProps.add(props[j]);
+					}
+				}
+			}
+			return allProps;
 		}
 	}
 	public static class Category {
@@ -71,12 +92,14 @@ public abstract class Endpoints {
 		private String tabLabel; 
 		private Property[] properties; 
 		private Group[] groups;
-		public Category(String platform, String label, String tabLabel, Property[] properties, Group[] groups) {
+		private String runtimeProperties;
+		public Category(String platform, String label, String tabLabel, Property[] properties, Group[] groups, String runtimeProperties) {
 			this.platform = platform;
 			this.label = label;
 			this.tabLabel = tabLabel;
 			this.properties = properties;
 			this.groups = groups;
+			this.runtimeProperties = runtimeProperties;
 		}
 		public String toString() {
 			return label;
@@ -100,13 +123,13 @@ public abstract class Endpoints {
 			}
 			return s;
 		}
-		public int findGroup(String groupName) {
+		public Group findGroup(String groupName) {
 			for(int i=0; i<groups.length; i++) {
-				if(StringUtil.equals(groups[i], groupName)) {
-					return i;
+				if(StringUtil.equals(groups[i].getLabel(), groupName)) {
+					return groups[i];
 				}
 			}
-			return -1;
+			return null;
 		}
 		public Property[] getProperties() {
 			return properties;
@@ -118,26 +141,29 @@ public abstract class Endpoints {
 			}
 			return s;
 		}
-		public int findProperty(String propName) {
+		public Property findProperty(String propName) {
 			for(int i=0; i<properties.length; i++) {
-				if(StringUtil.equals(properties[i], propName)) {
-					return i;
+				if(StringUtil.equals(properties[i].getName(), propName)) {
+					return properties[i];
 				}
 			}
-			return -1;
+			return null;
+		}
+		public String getRuntimeProperties() {
+			return runtimeProperties;
 		}
 	}
 	public static class Property {
 		private String name; 
 		private String label; 
-		private String[] valueList; 
+		private String defaultValue; 
 		public Property(String name, String label) {
 			this(name, label, null);
 		}
-		public Property(String name, String label, String[] valueList) {
+		public Property(String name, String label, String defaultValue) {
 			this.name = name;
 			this.label = label;
-			this.valueList = valueList;
+			this.defaultValue = defaultValue;
 		}
 		public String toString() {
 			return label;
@@ -148,16 +174,23 @@ public abstract class Endpoints {
 		public String getLabel() {
 			return label;
 		}
-		public String[] getValueList() {
-			return valueList;
+		public String getDefaultValue() {
+			return defaultValue;
 		}
 	}
 	public static class Group {
 		private String label; 
 		private String[] properties; 
-		public Group(String label, String[] properties) {
+		private String runtimeProperties;
+		private int helpType;
+		public Group(String label, String[] properties, String runtimeProperties) {
+			this(label, properties, runtimeProperties, 0);
+		}
+		public Group(String label, String[] properties, String runtimeProperties, int helpType) {
 			this.label = label;
 			this.properties = properties;
+			this.runtimeProperties = runtimeProperties;
+			this.helpType = helpType;
 		}
 		public String toString() {
 			return label;
@@ -167,6 +200,32 @@ public abstract class Endpoints {
 		}
 		public String[] getProperties() {
 			return properties;
+		}
+		public boolean hasProperty(String name) {
+			if(properties!=null) {
+				for(int i=0; i<properties.length; i++) {
+					if(StringUtil.equals(properties[i], name)) {
+						return true;
+					}
+				}
+			}
+			return false;
+		}
+		public String getRuntimeProperties() {
+			return runtimeProperties;
+		}
+		public String getHelpText() {
+			switch(helpType) {
+				case 1: {
+					return getHelpTextOAuth2();
+				}
+			}
+			return null;
+		}
+		public String getHelpTextOAuth2() {
+			HttpServletRequest req = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+			String s = UrlUtil.getRequestUrl(req,UrlUtil.URL_CONTEXTPATH);
+			return StringUtil.format("OAuth 2 callback: {0}",PathUtil.concat(s, "xsp/.sbtservice/oauth20_cb", '/'));
 		}
 	}
 

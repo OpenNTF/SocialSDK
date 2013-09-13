@@ -20,8 +20,8 @@
 <%@page import="com.ibm.commons.runtime.Context"%>
 <%@page	import="com.ibm.sbt.services.client.connections.communities.Community"%>
 <%@page	import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
-<%@page	import="com.ibm.sbt.services.client.connections.communities.ForumTopic"%>
-<%@page	import="com.ibm.sbt.services.client.connections.communities.ForumTopicList"%>
+<%@page import="com.ibm.sbt.services.client.connections.forums.model.BaseForumEntity"%>
+<%@page import="com.ibm.sbt.services.client.connections.forums.TopicList"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <html>
@@ -39,12 +39,14 @@
 			Collection<Community> communities = communityService.getPublicCommunities();
 			Community community = communities.iterator().next();
 			
-			ForumTopicList forumTopics = communityService.getForumTopics(community.getCommunityUuid());
+			TopicList forumTopics = communityService.getForumTopics(community.getCommunityUuid());
 			if(forumTopics.getTotalResults() > 0 ){
 				out.println("<br>Listing forum topics of a Community <br>");
-				for (ForumTopic forumTopic : forumTopics) {
-					out.println("<b>Forum Topic Title : </b> " + forumTopic.getTitle());
-					out.println("<br>");
+				for (BaseForumEntity forumTopic : forumTopics) {
+					out.println("<b>Forum Topic Title : </b> " + forumTopic.getTitle()+"<br>");
+					out.println("<b>Forum Topic id : </b> " + forumTopic.getUid()+"<br>");
+					out.println("<b>Forum Topic updated : </b> " + forumTopic.getUpdated()+"<br>");
+					out.println("<b>Forum Topic published : </b> " + forumTopic.getPublished()+"<br><br>");
 				}
 			}
 			else

@@ -28,10 +28,11 @@ import com.ibm.sbt.services.client.base.datahandlers.FieldEntry;
  */
 public enum MemberXPath implements FieldEntry {
 	entry("/a:entry"),
-	uid("./a:contributor/snx:userid"), 
-	userid("./a:contributor/snx:userid"),
-	name("./a:contributor/a:name"),
-	email("./a:contributor/a:email"),
+	id("./id"),
+	uid("./contributor/snx:userid"), 
+	userid("./contributor/snx:userid"),
+	name("./contributor/name"),
+	email("./contributor/email"),
 	role("./snx:role");
 	
 	private final XPathExpression path;

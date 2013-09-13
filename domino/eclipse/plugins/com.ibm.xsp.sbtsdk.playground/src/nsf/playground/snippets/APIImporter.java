@@ -64,10 +64,11 @@ public class APIImporter extends AssetImporter {
 	@Override
 	protected void saveAsset(ImportSource source, VFSFile root, AssetNode node, Asset asset) throws Exception {
 		APIDescription snippet = (APIDescription)asset;
-		saveAsset(node.getUnid(), node.getCategory(), node.getName(), source.getName(), snippet.getJson(), snippet.getPropertiesAsString());
+		String[] products = StringUtil.splitString(snippet.getProperty("runtimes"),',');
+		saveAsset(node.getUnid(), node.getCategory(), node.getName(), source.getName(), snippet.getJson(), products, snippet.getPropertiesAsString());
 	}
 
-	protected void saveAsset(String id, String category, String name, String source, String json, String properties) throws Exception {
+	protected void saveAsset(String id, String category, String name, String source, String json, String[] products, String properties) throws Exception {
 		Document doc = getDatabase().createDocument();
 		try {
 			setItemValue(doc,"Form", FORM);
@@ -80,9 +81,9 @@ public class APIImporter extends AssetImporter {
 			setItemValueRichText(doc,"Json", json);
 			setItemValueRichText(doc,"Properties", properties);
 			
-//			if(products!=null && products.length>0) {
-//				setItemValue(doc,"filterRuntime", StringUtil.concatStrings(products, ',', true));
-//			}
+			if(products!=null && products.length>0) {
+				setItemValue(doc,"FilterRuntimes", StringUtil.concatStrings(products, ',', true));
+			}
 			
 			doc.save();
 		} finally {
@@ -132,7 +133,7 @@ public class APIImporter extends AssetImporter {
 			String json = JsonGenerator.toJson(JsonJavaFactory.instanceEx, ed.getValue().content);
 			String properties = createPropertiesAsString(options,products,path);
 
-			saveAsset(id, category, name, source.getName(), json, properties);
+			saveAsset(id, category, name, source.getName(), json, products, properties);
 		}
 		
 		return apiDocs.size();
@@ -197,6 +198,7 @@ public class APIImporter extends AssetImporter {
 			}
 			
 			String[] products = StringUtil.splitString(doc.getString("Products"),',');
+			String s = doc.toString();
 			List mt = (List)doc.get("RequestsDetails");
 			if(mt!=null) {
 				for(int i=0; i<mt.size(); i++) {

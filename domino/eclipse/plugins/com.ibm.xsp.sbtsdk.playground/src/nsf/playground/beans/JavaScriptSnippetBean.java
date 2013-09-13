@@ -2,7 +2,6 @@ package nsf.playground.beans;
 
 import lotus.domino.NotesException;
 import lotus.domino.ViewEntry;
-import nsf.playground.environments.PlaygroundEnvironment;
 
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.playground.assets.AssetNode;

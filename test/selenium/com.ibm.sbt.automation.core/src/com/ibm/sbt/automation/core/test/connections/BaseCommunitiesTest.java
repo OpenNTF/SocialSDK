@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -259,7 +259,7 @@ public class BaseCommunitiesTest extends BaseApiTest {
             CommunityService communityService = getCommunityService();
             Member member = new Member(communityService, id, null, null);
             member.setRole(role);
-            boolean added = communityService.addMember(community, member);
+            boolean added = communityService.addMember(community.getCommunityUuid(), member.getUserid());
             Assert.assertTrue("Unable to add member: "+id, added);
             Trace.log("Added member: "+id);
             return added;

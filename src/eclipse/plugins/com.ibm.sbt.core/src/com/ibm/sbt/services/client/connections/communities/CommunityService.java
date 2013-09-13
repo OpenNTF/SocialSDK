@@ -468,21 +468,44 @@ public class CommunityService extends BaseService {
 	}
 	
 	/**
-	 * Wrapper method to add member to a community.
+	 * Wrapper method to get member of a community.
 	 * <p> 
-	 * User should be logged in as a owner of the community to call this method
-	 * Role of the newly added member defaults to "Member"
 	 * 
-	 * @param community
-	 * 				 Community to which the member needs to be added
-	 * @param member
-	 * 				 Member which is to be added
+	 * @param communityUuid 
+	 * 				 Id of Community
+	 * @param memberId
+	 * 				 Id of Member 
+	 * @return Member
 	 * @throws CommunityServiceException
 	 */
-	public boolean addMember(Community community, Member member) throws CommunityServiceException {
-		return addMember(community.getCommunityUuid(), member.getUserid(), member.getRole());
+	
+	public Member getMember(String communityUuid, String memberId) throws CommunityServiceException {
+		if (StringUtil.isEmpty(communityUuid)||StringUtil.isEmpty(memberId)){
+			throw new CommunityServiceException(null, Messages.NullCommunityIdOrUserIdException);
+		}
+		
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
+		if(memberId.contains("@")){
+			parameters.put("email", memberId);
+		}
+		else{
+			parameters.put("userid", memberId);
+		}
+		String url = resolveCommunityUrl(CommunityEntity.COMMUNITY.getCommunityEntityType(),
+				CommunityType.MEMBERS.getCommunityType());
+		Member member;
+		try {
+			member = (Member)getEntity(url, parameters, new MemberFeedHandler(this));
+		} catch (ClientServicesException e) {
+			throw new CommunityServiceException(e, Messages.GetMemberException, communityUuid);
+		} catch (Exception e) {
+			throw new CommunityServiceException(e, Messages.GetMemberException, communityUuid);
+		}
+		
+		return member;
 	}
-
+	
 	/**
 	 * Wrapper method to add member to a community.
 	 * <p> 
@@ -545,7 +568,45 @@ public class CommunityService extends BaseService {
 			throw new CommunityServiceException(e, Messages.AddMemberException, memberId, role, communityUuid);
 		}
 	}
-
+	/**
+	 * Wrapper method to update member of a community.
+	 * <p> 
+	 * User should be logged in as a owner of the community to call this method
+	 * 
+	 * @param community 
+	 * 				 Id of Community 
+	 * @param memberId
+	 * 				 Id of Member 
+	 * @throws CommunityServiceException
+	 */
+	public void updateMember(String communityId, Member member)throws CommunityServiceException {
+		if (StringUtil.isEmpty(communityId)||StringUtil.isEmpty(member.getUserid())){
+			throw new CommunityServiceException(null, Messages.NullCommunityIdUserIdOrRoleException);
+		}
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityId);
+	
+		parameters.put("userid", member.getUserid());
+	
+		Object memberPayload;
+		try {
+			
+			member.setUserid(member.getUserid()); // to add this in fields map for update
+			memberPayload = new CommunityMemberTransformer().transform(member.getFieldsMap());
+		} catch (TransformerException e) {
+			throw new CommunityServiceException(e, Messages.UpdateMemberException);
+		}
+		
+		String communityUpdateMembertUrl = resolveCommunityUrl(CommunityEntity.COMMUNITY.getCommunityEntityType(),CommunityType.MEMBERS.getCommunityType());
+		try {
+			super.createData(communityUpdateMembertUrl, parameters, memberPayload);
+		} catch (ClientServicesException e) {
+			throw new CommunityServiceException(e, Messages.UpdateMemberException, member.getUserid(), member.getRole(), communityId);
+		} catch (IOException e) {
+			throw new CommunityServiceException(e, Messages.UpdateMemberException, member.getUserid(), member.getRole(), communityId);
+		}
+		
+	}
 	/**
 	 * Wrapper method to remove member from a community.
 	 * <p> 

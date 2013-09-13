@@ -32,18 +32,31 @@ import com.ibm.xsp.sbtsdk.playground.sbt.extension.SbtImportOptions;
  */
 public class SbtPlaygroundExtensionFactory extends PlaygroundExtensionFactory {
 	
+	public PlaygroundFragment fragment;
+	public ImportOptions importOptions;
+	public SbtEndpoints endpoints;
+
 	public SbtPlaygroundExtensionFactory() {
 	}
 
 	public Object getExtension(Class<?> clazz) {
 		if(clazz==PlaygroundFragment.class) {
-			return SbtFragment.instance;
+			if(fragment==null) {
+				fragment = new SbtFragment();
+			}
+			return fragment;
 		}
 		if(clazz==ImportOptions.class) {
-			return SbtImportOptions.instance;
+			if(importOptions==null) {
+				importOptions = new SbtImportOptions();
+			}
+			return importOptions;
 		}
 		if(clazz==Endpoints.class) {
-			return SbtEndpoints.instance;
+			if(endpoints==null) {
+				endpoints = new SbtEndpoints();
+			}
+			return endpoints;
 		}
 		return null;
 	}

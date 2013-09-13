@@ -21,7 +21,7 @@ function updateProfilePhoto(profileService, profileId, dom) {
 	dom.setText('status', '');
 
 	// "your-files" is the ID of the HTML5 File Control. Refer to Update Profile Photo.html
-	profileService.updateProfilePhoto("your-files", profileId).then(function(file) {		
+	profileService.updateProfilePhoto("your-files", profileId).then(function() {		
 		profileService.getProfile(profileId).then(function(profile) {
 			var url =  profile.getThumbnailUrl();			
 			dom.byId("image").src = url + "&rand=" + Math.random();

@@ -37,9 +37,7 @@ import com.ibm.xsp.util.ManagedBeanUtil;
  */
 public class SbtEndpoints extends Endpoints {
 
-	public static final SbtEndpoints instance = new SbtEndpoints();
-	
-	private static final Category[] PROPERTIES = new Category[] {
+	private Category[] PROPERTIES = new Category[] {
 		new Category("connections","IBM Connections on Premises","IBM Connections", new Property[] {
 				new Property("Con_URL", "URL", "https://[myconnections-server]"),
 				new Property("Con_OA2_ConsumerKey", "OAuth2 - Consumer Key"),

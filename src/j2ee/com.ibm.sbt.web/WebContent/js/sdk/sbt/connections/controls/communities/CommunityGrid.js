@@ -45,6 +45,10 @@ define([ "../../../declare",
      * @namespace  sbt.connections.controls.communities
      */
     var CommunityGrid = declare(Grid, {
+        
+        contextRootMap: {
+            communities: "communities"
+        },
     	
     	/**
     	 * Options are for which type of community grid is to be created

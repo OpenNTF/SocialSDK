@@ -89,6 +89,7 @@ abstract public class AbstractLibrary {
 	public static final String		PROP_AUTHENTICATION_ERROR_CODE	= "authenticationErrorCode";
 	public static final String		PROP_ENDPOINT_ALIAS	            = "name";
 	public static final String		PROP_PLATFORM    	            = "platform";
+	public static final String      PROP_SERVICE_MAPPINGS           = "serviceMappings";
 
 	public static final String		PROP_MODULE_PREFIX				= "_module";
 	public static final String		PROP_MODULE_AUTHENTICATOR		= "_moduleAuthenticator";
@@ -342,6 +343,8 @@ abstract public class AbstractLibrary {
 			} catch (ClientServicesException e) {
 				jsonEndpoint.putJsonProperty(IS_AUTHENTICATED, false);
 			}
+			
+			jsonEndpoint.putJsonProperty(PROP_SERVICE_MAPPINGS, endpoint.getServiceMappings());
 
 			// configure endpoint to use proxy
 			if (useProxy(endpoint)) {

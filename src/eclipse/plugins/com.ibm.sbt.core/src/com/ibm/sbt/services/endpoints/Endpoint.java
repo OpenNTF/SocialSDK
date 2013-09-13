@@ -135,6 +135,12 @@ public interface Endpoint {
     public String getApiVersion();
     
     /**
+     * Get map, used to map default service urls to custom urls. e.g. /files to /myfiles
+     * @return
+     */
+    public Map<String, String> getServiceMappings();
+    
+    /**
      * Get platform for the endpoint
      * @return
      */

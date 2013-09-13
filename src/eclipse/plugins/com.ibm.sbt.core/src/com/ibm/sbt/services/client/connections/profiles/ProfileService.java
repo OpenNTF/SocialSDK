@@ -63,7 +63,7 @@ public class ProfileService extends BaseService {
 	/**
 	 * Used in constructing REST APIs
 	 */
-	public static final String				ProfileBaseUrl	= "profiles";
+	public static final String				ProfileBaseUrl	= "{profiles}";
 
 
 	private final ProfileFeedHandler profileFeedHandler = new ProfileFeedHandler(this);

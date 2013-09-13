@@ -48,7 +48,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.BoomarkService
          */
-        AtomBookmarksAll : "/dogear/atom",
+        AtomBookmarksAll : "/${dogear}/atom",
 
 
     }, conn);

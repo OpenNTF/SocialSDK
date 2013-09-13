@@ -473,6 +473,10 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
      * @namespace sbt.connections
      */
     var ProfileService = declare(BaseService, {
+        
+        contextRootMap: {
+            profiles: "profiles"
+        },
 
         /**
          * 

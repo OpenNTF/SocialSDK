@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:panel id='wizPanel' style='height: 24em'>
+		<xp:this.dataContexts>
+			<xp:dataContext var="cat"
+				value="#{javascript:return optionsBean.getEnvironmentCategories().findCategory(sessionScope.envCat||'') || false}">
+			</xp:dataContext>
+			<xp:dataContext var="group"
+				value="#{javascript:return (cat &amp;&amp; sessionScope.envGroup &amp;&amp; cat.findGroup(sessionScope.envGroup)) || false;}">
+			</xp:dataContext>
+		</xp:this.dataContexts>
+		<xe:formTable id="formTable1" formTitle="Environment Definition"
+			formDescription="Enter here the data for your environment"
+			labelWidth="23em" style="width: 94%; height: 94%">
+			<xe:formRow id='step1' label='What server do you want to connect to?'>
+				<xp:comboBox id="comboCat" value="#{sessionScope.envCat}">
+					<xp:selectItem itemLabel="&lt;Select a server&gt;">
+					</xp:selectItem>
+					<xp:selectItems>
+						<xp:this.value><![CDATA[#{javascript:optionsBean.getEnvironmentCategories().getCategoryNames()}]]></xp:this.value>
+					</xp:selectItems>
+					<xp:eventHandler event="onchange" submit="true"
+						refreshMode="partial" refreshId="wizPanel">
+						<xp:this.action><![CDATA[#{javascript:if(cat) {
+	document1.replaceItemValue('Runtimes',cat.getRuntimePlatform())
+} else {
+	document1.replaceItemValue('Runtimes','')
+}
+sessionScope.envGroup=''}]]></xp:this.action>
+					</xp:eventHandler>
+
+				</xp:comboBox>
+			</xe:formRow>
+			<xe:formRow id='tr1'
+				label='What authentication method do you want to use?'>
+				<xp:this.rendered><![CDATA[#{javascript:cat}]]></xp:this.rendered>
+				<xp:comboBox id="comboBox1" value="#{sessionScope.envGroup}">
+					<xp:selectItem itemLabel="&lt;Select a method&gt;">
+					</xp:selectItem>
+					<xp:selectItems>
+						<xp:this.value><![CDATA[#{javascript:cat.getGroupNames()}]]></xp:this.value>
+					</xp:selectItems>
+					<xp:eventHandler event="onchange" submit="true"
+						refreshMode="partial" refreshId="wizPanel">
+						<xp:this.action><![CDATA[#{javascript:if(group) {
+	var c1 = cat.getRuntimeProperties();
+	var c2 = group.getRuntimeProperties();
+	var c = (c1 ? c1+'\'':'') + c2;
+	document1.replaceItemValue('Properties',c||'')
+} else {
+	document1.replaceItemValue('Properties','')
+}
+delete sessionScope.envGroup}]]></xp:this.action>
+					</xp:eventHandler>
+
+				</xp:comboBox>
+			</xe:formRow>
+			<xp:repeat var="prop" repeatControls="true">
+				<xp:this.value><![CDATA[#{javascript:optionsBean.getEnvironmentCategories().getAllProperties()}]]></xp:this.value>
+				<xe:formRow label='${javascript:prop.getLabel()}'
+					styleClass="${javascript:'__'+prop.getName()}"
+					rendered="#{javascript:group &amp;&amp; group.hasProperty(this.getStyleClass().substring(2))}">
+					<xp:inputText id="inputText1" size="80"
+						value="${javascript:'#{document1.'+prop.getName()+'}'}">
+					</xp:inputText>
+				</xe:formRow>
+			</xp:repeat>
+			<xe:formRow id='formRow1' labelPosition="none">
+				<xp:this.rendered><![CDATA[#{javascript:group && group.getHelpText()}]]></xp:this.rendered>
+				<xp:text escape="true" id="computedField1"
+					value="#{javascript:group.getHelpText()}">
+				</xp:text>
+			</xe:formRow>
+		</xe:formTable>
+	</xp:panel>
+</xp:view>

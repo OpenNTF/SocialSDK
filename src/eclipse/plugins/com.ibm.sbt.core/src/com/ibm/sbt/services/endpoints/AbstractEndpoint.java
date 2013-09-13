@@ -432,6 +432,9 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
      * @throws Exception 
      */
     public void setServiceMaps(String serviceMappings) {
+        if(StringUtil.isEmpty(serviceMappings)){
+            return;
+        }
         Logger logger = Logger.getLogger(AbstractEndpoint.class.getName());
         if(!mapFormatValid(serviceMappings)){
             logger.log(Level.WARNING, "serviceMaps value \"{0}\" is invalid, check your managed-beans.xml. Must be formatted as 'root1:customRoot1,root2:customRoot2' e.g. 'files:myfiles'", serviceMappings);

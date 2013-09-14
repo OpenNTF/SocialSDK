@@ -19,7 +19,6 @@ import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.datahandlers.JsonDataHandler;
-import com.ibm.sbt.services.client.connections.activitystreams.model.ActivityStreamEntity;
 
 
 /**

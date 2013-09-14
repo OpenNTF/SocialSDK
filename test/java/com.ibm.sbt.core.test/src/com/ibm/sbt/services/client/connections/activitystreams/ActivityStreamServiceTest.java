@@ -29,7 +29,6 @@ import org.junit.Test;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.services.BaseUnitTest;
 import com.ibm.sbt.services.client.SBTServiceException;
-import com.ibm.sbt.services.client.connections.activitystreams.model.ActivityStreamEntity;
 
 public class ActivityStreamServiceTest extends BaseUnitTest {
 

@@ -100,7 +100,7 @@ public class ActivityStreamService extends BaseService {
 	 * @throws ActivityStreamServiceException
 	 */
 
-	public ActivityStreamEntityList getActivityStream() throws ActivityStreamServiceException {
+	public ActivityStreamEntityList getStream() throws ActivityStreamServiceException {
 		return getActivityStreamEntities("", "", "", null);
 	}
 	
@@ -120,7 +120,7 @@ public class ActivityStreamService extends BaseService {
 	 * @throws ActivityStreamServiceException
 	 */
 
-	public ActivityStreamEntityList getActivityStream(String user, String group, String app,
+	public ActivityStreamEntityList getStream(String user, String group, String app,
 			Map<String, String> params) throws ActivityStreamServiceException {
 
 		// Set the parameters being passed in by user
@@ -908,7 +908,7 @@ public class ActivityStreamService extends BaseService {
 	 * @return JsonJavaObject
 	 * @throws ActivityStreamServiceException
 	 */
-	public String postMBEntry(String user, String group,
+	public String postMicroblogEntry(String user, String group,
 			String application, JsonJavaObject postPayload)
 			throws ActivityStreamServiceException {
 

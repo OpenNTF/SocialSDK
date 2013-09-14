@@ -20,7 +20,6 @@
 <%@page import="com.ibm.commons.runtime.Context"%>
 <%@page	import="com.ibm.sbt.services.client.connections.communities.Community"%>
 <%@page	import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
-<%@page	import="com.ibm.sbt.services.client.connections.communities.ForumTopic"%>
 <%@page	import="com.ibm.sbt.services.client.connections.communities.CommunityList"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -31,7 +30,7 @@
 </head>
 
 <body>
-	<h4>Community Forum Topics</h4>
+	<h4>Sub Communities</h4>
 	<div id="content">
 	<%
 		try {

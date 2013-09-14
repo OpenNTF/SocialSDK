@@ -236,6 +236,39 @@ public class ActivityStreamService extends BaseService {
 	
 	
 	/**
+	 * Wrapper method to get all status updates for logged in user
+	 * <p>
+	 * Assumes {@link ASUser} as ME, {@link ASGroup} as ALL and {@link ASApplication} as STATUS
+	 * 
+	 * @return ActivityStreamEntityList
+	 * @throws ActivityStreamServiceException
+	 */
+	public ActivityStreamEntityList getMyStatusUpdates() throws ActivityStreamServiceException {
+		return getMyStatusUpdates(null);
+	}
+	
+	
+	/**
+	 * Wrapper method to get all status updates for logged in user
+	 * <p>
+	 * Assumes {@link ASUser} as ME, {@link ASGroup} as ALL and {@link ASApplication} as STATUS
+	 * @param params
+	 * 	Additional parameters used for constructing URL's
+	 * 
+	 * @return ActivityStreamEntityList
+	 * @throws ActivityStreamServiceException
+	 */
+	public ActivityStreamEntityList getMyStatusUpdates(Map<String, String> params) throws ActivityStreamServiceException {
+		if (null == params) {
+			params = new HashMap<String, String>();
+			params.put(ActivityStreamRequestParams.lang, getUserLanguage());
+		}
+		return getActivityStreamEntities(ASUser.ME.getUserType(), ASGroup.ALL.getGroupType(),
+				ASApplication.STATUS.getApplicationType(), params);
+	}
+	
+	
+	/**
 	 * Wrapper method to get all updates for all user's logged in user follows from Activity Streams
 	 * <p>
 	 * Assumes {@link ASUser} as ME, {@link ASGroup} as FOLLOWING and {@link ASApplication} as STATUS
@@ -398,7 +431,7 @@ public class ActivityStreamService extends BaseService {
 	/**
 	 * Wrapper method to get Filtered view of a user's stream based on notification events
 	 * <p>
-	 * Assumes {@link ASUser} as ME in parameter, {@link ASGroup} as NOTESFORME and {@link ASApplication} as NOAPP
+	 * Assumes {@link ASUser} as ME in parameter, {@link ASGroup} as RESPONSES and {@link ASApplication} as NOAPP
 	 * 
 	 * @param params
 	 *            Additional parameters used for constructing URL's
@@ -411,7 +444,7 @@ public class ActivityStreamService extends BaseService {
 			params = new HashMap<String, String>();
 			params.put(ActivityStreamRequestParams.lang, getUserLanguage());
 		}
-		return getActivityStreamEntities(ASUser.ME.getUserType(),ASGroup.NOTESFORME.getGroupType(), ASApplication.NOAPP.getApplicationType(), params);
+		return getActivityStreamEntities(ASUser.ME.getUserType(),ASGroup.RESPONSES.getGroupType(), ASApplication.NOAPP.getApplicationType(), params);
 	}
 	
 	

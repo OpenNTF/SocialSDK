@@ -1,4 +1,4 @@
-package com.ibm.sbt.services.client.connections.activitystreams.templates;
+package com.ibm.sbt.services.client.connections.activitystreams;
 /*
  * © Copyright IBM Corp. 2013
  * 

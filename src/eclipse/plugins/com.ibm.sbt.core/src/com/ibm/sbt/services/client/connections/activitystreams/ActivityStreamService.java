@@ -100,7 +100,7 @@ public class ActivityStreamService extends BaseService {
 	 * @throws ActivityStreamServiceException
 	 */
 
-	public ActivityStreamEntityList getActivityStream() throws ActivityStreamServiceException {
+	public ActivityStreamEntityList getStream() throws ActivityStreamServiceException {
 		return getActivityStreamEntities("", "", "", null);
 	}
 	
@@ -120,7 +120,7 @@ public class ActivityStreamService extends BaseService {
 	 * @throws ActivityStreamServiceException
 	 */
 
-	public ActivityStreamEntityList getActivityStream(String user, String group, String app,
+	public ActivityStreamEntityList getStream(String user, String group, String app,
 			Map<String, String> params) throws ActivityStreamServiceException {
 
 		// Set the parameters being passed in by user
@@ -231,6 +231,39 @@ public class ActivityStreamService extends BaseService {
 
 		params.put(ActivityStreamRequestParams.rollUp, "true");
 		return getActivityStreamEntities(ASUser.ME.getUserType(), ASGroup.FRIENDS.getGroupType(),
+				ASApplication.STATUS.getApplicationType(), params);
+	}
+	
+	
+	/**
+	 * Wrapper method to get all status updates for logged in user
+	 * <p>
+	 * Assumes {@link ASUser} as ME, {@link ASGroup} as ALL and {@link ASApplication} as STATUS
+	 * 
+	 * @return ActivityStreamEntityList
+	 * @throws ActivityStreamServiceException
+	 */
+	public ActivityStreamEntityList getMyStatusUpdates() throws ActivityStreamServiceException {
+		return getMyStatusUpdates(null);
+	}
+	
+	
+	/**
+	 * Wrapper method to get all status updates for logged in user
+	 * <p>
+	 * Assumes {@link ASUser} as ME, {@link ASGroup} as ALL and {@link ASApplication} as STATUS
+	 * @param params
+	 * 	Additional parameters used for constructing URL's
+	 * 
+	 * @return ActivityStreamEntityList
+	 * @throws ActivityStreamServiceException
+	 */
+	public ActivityStreamEntityList getMyStatusUpdates(Map<String, String> params) throws ActivityStreamServiceException {
+		if (null == params) {
+			params = new HashMap<String, String>();
+			params.put(ActivityStreamRequestParams.lang, getUserLanguage());
+		}
+		return getActivityStreamEntities(ASUser.ME.getUserType(), ASGroup.ALL.getGroupType(),
 				ASApplication.STATUS.getApplicationType(), params);
 	}
 	
@@ -398,7 +431,7 @@ public class ActivityStreamService extends BaseService {
 	/**
 	 * Wrapper method to get Filtered view of a user's stream based on notification events
 	 * <p>
-	 * Assumes {@link ASUser} as ME in parameter, {@link ASGroup} as NOTESFORME and {@link ASApplication} as NOAPP
+	 * Assumes {@link ASUser} as ME in parameter, {@link ASGroup} as RESPONSES and {@link ASApplication} as NOAPP
 	 * 
 	 * @param params
 	 *            Additional parameters used for constructing URL's
@@ -411,7 +444,7 @@ public class ActivityStreamService extends BaseService {
 			params = new HashMap<String, String>();
 			params.put(ActivityStreamRequestParams.lang, getUserLanguage());
 		}
-		return getActivityStreamEntities(ASUser.ME.getUserType(),ASGroup.NOTESFORME.getGroupType(), ASApplication.NOAPP.getApplicationType(), params);
+		return getActivityStreamEntities(ASUser.ME.getUserType(),ASGroup.RESPONSES.getGroupType(), ASApplication.NOAPP.getApplicationType(), params);
 	}
 	
 	
@@ -908,7 +941,7 @@ public class ActivityStreamService extends BaseService {
 	 * @return JsonJavaObject
 	 * @throws ActivityStreamServiceException
 	 */
-	public String postMBEntry(String user, String group,
+	public String postMicroblogEntry(String user, String group,
 			String application, JsonJavaObject postPayload)
 			throws ActivityStreamServiceException {
 

@@ -18,7 +18,7 @@
  <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.sbt.services.client.connections.activitystreams.model.Reply"%>
-<%@page import="com.ibm.sbt.services.client.connections.activitystreams.model.ActivityStreamEntity"%>
+<%@page import="com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamEntity"%>
 <%@page import="com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamEntityList"%>
 <%@page import="com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamService"%>
 <%@page import="java.util.List"%>

@@ -30,7 +30,6 @@ import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
-import com.ibm.sbt.services.client.connections.activitystreams.templates.ASDataPopulator;
 import com.ibm.sbt.services.client.connections.activitystreams.transformers.ActivityStreamTransformer;
 import com.ibm.sbt.services.util.AuthUtil;
 

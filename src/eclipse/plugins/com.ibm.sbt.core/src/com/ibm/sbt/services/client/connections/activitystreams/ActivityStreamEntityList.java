@@ -22,7 +22,6 @@ import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.base.datahandlers.JsonDataHandler;
 import com.ibm.sbt.services.client.connections.activitystreams.model.ASJsonPath;
-import com.ibm.sbt.services.client.connections.activitystreams.model.ActivityStreamEntity;
 
 
 /**

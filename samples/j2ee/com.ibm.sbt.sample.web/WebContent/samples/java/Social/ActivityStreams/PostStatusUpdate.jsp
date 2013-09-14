@@ -53,7 +53,7 @@
 			postPayload.put("content", statusMsg);
 
 			ActivityStreamService _service = new ActivityStreamService();
-			String entryId = _service.postMBEntry(Context.get().getProperty("sample.userId1"),ASGroup.ALL.getGroupType(),"",postPayload);
+		String entryId = _service.postMicroblogEntry(Context.get().getProperty("sample.userId1"),ASGroup.ALL.getGroupType(),"",postPayload);
 			out.println("Created entry:" + entryId);
 		} catch (Throwable e) {
 			out.println("<pre>");

@@ -46,8 +46,8 @@
             Map<String, String> headers = new HashMap<String, String>();
             headers.put("Content-Type", "application/json");
 			ActivityStreamService svc = new ActivityStreamService();
-      
-			ActivityStreamEntityList _entries = svc.getActivityStream(
+	      
+		ActivityStreamEntityList _entries = svc.getStream(
               ASUser.ME.getUserType(), 
               ASGroup.ALL.getGroupType(),
               ASApplication.ALL.getApplicationType(), 

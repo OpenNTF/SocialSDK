@@ -20,7 +20,7 @@ import com.ibm.commons.util.StringUtil;
  */
 import com.ibm.sbt.services.client.base.transformers.AbstractBaseTransformer;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
-import com.ibm.sbt.services.client.connections.activitystreams.templates.ASDataPopulator;
+import com.ibm.sbt.services.client.connections.activitystreams.ASDataPopulator;
 
 /**
  * Manish Kataria 

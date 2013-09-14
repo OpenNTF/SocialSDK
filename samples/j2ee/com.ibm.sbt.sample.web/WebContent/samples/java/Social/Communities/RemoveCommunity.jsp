@@ -40,7 +40,7 @@
 		if(communities != null && !communities.isEmpty()){
 			Community community = communities.iterator().next();
 			out.println("<b> Community Title : "+community.getTitle());
-			community.delete();	
+			community.remove();	
 			out.println("<b> Community Removed : "+community.getCommunityUuid());
 			out.println("<br>");
 		}

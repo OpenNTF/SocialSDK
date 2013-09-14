@@ -15,7 +15,7 @@
  */
 
 
-package com.ibm.sbt.services.client.connections.activitystreams.model;
+package com.ibm.sbt.services.client.connections.activitystreams;
 
 
 /**
@@ -30,6 +30,11 @@ import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 import com.ibm.sbt.services.client.base.datahandlers.JsonDataHandler;
+import com.ibm.sbt.services.client.connections.activitystreams.model.ASJsonPath;
+import com.ibm.sbt.services.client.connections.activitystreams.model.Actor;
+import com.ibm.sbt.services.client.connections.activitystreams.model.Attachment;
+import com.ibm.sbt.services.client.connections.activitystreams.model.Community;
+import com.ibm.sbt.services.client.connections.activitystreams.model.Reply;
 
 public class ActivityStreamEntity extends BaseEntity{
 	// ToDo add target ( right now being used with community )

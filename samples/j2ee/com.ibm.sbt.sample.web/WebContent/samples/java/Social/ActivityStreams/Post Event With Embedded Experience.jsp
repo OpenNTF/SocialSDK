@@ -19,10 +19,10 @@
 <%@page import="java.util.Date"%>
 <%@page import="com.ibm.sbt.services.client.connections.activitystreams.ASVerb"%>
 <%@page import="com.ibm.commons.util.io.json.JsonJavaObject"%>
-<%@page import="com.ibm.sbt.services.client.connections.activitystreams.templates.ASDataPopulator"%>
+<%@page import="com.ibm.sbt.services.client.connections.activitystreams.ASDataPopulator"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.sbt.services.client.connections.activitystreams.model.Reply"%>
-<%@page import="com.ibm.sbt.services.client.connections.activitystreams.model.ActivityStreamEntity"%>
+<%@page import="com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamEntity"%>
 <%@page import="com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamEntityList"%>
 <%@page import="com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamService"%>
 <%@page import="java.util.List"%>

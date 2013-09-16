@@ -5,7 +5,7 @@ require([ "sbt/base/JsonDataHandler", "sbt/lang", "sbt/dom", "sbt/json", "sbt/sm
 	
 	var profileEntryHandler = new JsonDataHandler({
             data : entry,
-            jsonpath : consts.ProfileJPath
+            jsonpath : consts.ProfileJsonPath
         });
 
         try {

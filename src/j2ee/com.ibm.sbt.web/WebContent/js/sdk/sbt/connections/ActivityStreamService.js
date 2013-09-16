@@ -187,23 +187,23 @@ define([ "../declare", "../lang", "../stringUtil", "../config", "../Promise", ".
          * Get activity stream for given user, group and application type
          * 
          * @method getStream
-         * @param {String} userType user type for which activity stream is to be obtained.
+         * @param {String} [userType] user type for which activity stream is to be obtained.
          * 			  If null is passed for userType, then '@public' will be used as 
          * 			  default
-         * @param {String} groupType group type for which activity stream is to be obtained
+         * @param {String} [groupType] group type for which activity stream is to be obtained
          * 			  If null is passed for userType, then '@all' will be used as 
          * 			  default
-         * @param {String} applicationType application type for which activity stream is to be obtained
+         * @param {String} [applicationType] application type for which activity stream is to be obtained
          *            If null is passed for userType, then '@all' will be used as 
          * 			  default
-         * @param {Object} args Object representing various query parameters
+         * @param {Object} [args] Object representing various query parameters
          *            that can be passed. The parameters must be exactly as they are
          *            supported by IBM Connections.
          */
         getStream : function(userType, groupType, applicationType, args) {
         	var _userType = userType || consts.ASUser.PUBLIC; //Default is public updates
 			var _groupType = groupType || consts.ASGroup.ALL; // Default is all groups
-			var _applicationType = applicationType || consts.ASApplication.ALL; // Default is all Applications
+			var _applicationType = applicationType || consts.ASApplication.STATUS; // Default is all Applications
 //			var url = consts.ActivityStreamUrls.activityStreamBaseUrl+this.endpoint.authType+consts.ActivityStreamUrls.activityStreamRestUrl+_userType+"/"+_groupType+"/"+_applicationType;
             var url = this.constructUrl(consts.ActivityStreamUrls.activityStreamBaseUrl+"{authType}"+consts.ActivityStreamUrls.activityStreamRestUrl+"{userType}/{groupType}/{appType}", 
                     {}, 
@@ -213,26 +213,50 @@ define([ "../declare", "../lang", "../stringUtil", "../config", "../Promise", ".
                 handleAs : "json",
                 query : args || {}
             };
-            return this.getEntities(url, options, this.getActivityStreamCallbacks(), args);
+            return this.getEntities(url, options, this.getActivityStreamCallbacks());
+        },
+        
+        /**
+         * Get all updates.
+         * 
+         * @method getAllUpdates
+         * @param {Object} [args] Object representing various query parameters
+         *            that can be passed. The parameters must be exactly as they are
+         *            supported by IBM Connections.
+         */
+        getAllUpdates : function(args) {
+			return this.getStream(consts.ASUser.PUBLIC, consts.ASGroup.ALL, consts.ASApplication.ALL, args);
         },
         
         /**
          * Get my status updates.
          * 
          * @method getMyStatusUpdates
-         * @param {Object} args Object representing various query parameters
+         * @param {Object} [args] Object representing various query parameters
          *            that can be passed. The parameters must be exactly as they are
          *            supported by IBM Connections.
          */
         getMyStatusUpdates : function(args) {
 			return this.getStream(consts.ASUser.ME, consts.ASGroup.ALL, consts.ASApplication.STATUS, args);
         },
+        
+        /**
+         * Get status updates from my network.
+         * 
+         * @method getStatusUpdatesFromMyNetwork
+         * @param {Object} [args] Object representing various query parameters
+         *            that can be passed. The parameters must be exactly as they are
+         *            supported by IBM Connections.
+         */
+        getStatusUpdatesFromMyNetwork : function(args) {
+			return this.getStream(consts.ASUser.ME, consts.ASGroup.FRIENDS, consts.ASApplication.STATUS, args);
+        },
 
         /**
          * Get Updates from My Network
          * 
          * @method getUpdatesFromMyNetwork
-         * @param {Object} args Object representing various query parameters
+         * @param {Object} [args] Object representing various query parameters
          *            that can be passed. The parameters must be exactly as they are
          *            supported by IBM Connections.
          */
@@ -244,19 +268,19 @@ define([ "../declare", "../lang", "../stringUtil", "../config", "../Promise", ".
          * Get Updates from People I Follow
          * 
          * @method getUpdatesFromPeopleIFollow
-         * @param {Object} args Object representing various query parameters
+         * @param {Object} [args] Object representing various query parameters
          *            that can be passed. The parameters must be exactly as they are
          *            supported by IBM Connections.
          */
         getUpdatesFromPeopleIFollow : function(args) {
-			return this.getStream(consts.ASUser.ME, consts.ASGroup.FOLLOWING, consts.ASApplication.PEOPLE, args);
+			return this.getStream(consts.ASUser.ME, consts.ASGroup.FOLLOWING, consts.ASApplication.STATUS, args);
         },
 
         /**
          * Get Updates from Communities I Follow
          * 
          * @method getUpdatesFromCommunitiesIFollow
-         * @param {Object} args Object representing various query parameters
+         * @param {Object} [args] Object representing various query parameters
          *            that can be passed. The parameters must be exactly as they are
          *            supported by IBM Connections.
          */
@@ -267,14 +291,14 @@ define([ "../declare", "../lang", "../stringUtil", "../config", "../Promise", ".
         /**
          * Get Updates from a Community
          * 
-         * @method getUpdatesFromACommunity
+         * @method getUpdatesFromCommunity
          * @param {String} communityID Community id Community id for which activity Stream
 		 *			  is to be obtained
-         * @param {Object} args Object representing various query parameters
+         * @param {Object} [args] Object representing various query parameters
          *            that can be passed. The parameters must be exactly as they are
          *            supported by IBM Connections.
          */
-        getUpdatesFromACommunity : function(communityID, args) {
+        getUpdatesFromCommunity : function(communityID, args) {
         	var promise = this._validateCommunityUuid(communityID);
             if (promise) {
                 return promise;
@@ -288,11 +312,11 @@ define([ "../declare", "../lang", "../stringUtil", "../config", "../Promise", ".
          * @method getUpdatesFromUser
          * @param {String} userId User id for which activity Stream
 		 *	  		  is to be obtained
-         * @param {Object} args Object representing various query parameters
+         * @param {Object} [args] Object representing various query parameters
          *            that can be passed. The parameters must be exactly as they are
          *            supported by IBM Connections.
          */
-        getUpdatesFromAUser : function(userId, args) {
+        getUpdatesFromUser : function(userId, args) {
         	var promise = this._validateUserId(userId);
             if (promise) {
                 return promise;
@@ -304,7 +328,7 @@ define([ "../declare", "../lang", "../stringUtil", "../config", "../Promise", ".
          * Get Notifications for Me
          * 
          * @method getNotificationsForMe
-         * @param {Object} args Object representing various query parameters
+         * @param {Object} [args] Object representing various query parameters
          *            that can be passed. The parameters must be exactly as they are
          *            supported by IBM Connections.
          */
@@ -316,7 +340,7 @@ define([ "../declare", "../lang", "../stringUtil", "../config", "../Promise", ".
          * Get Notifications from Me
          * 
          * @method getNotificationsFromMe
-         * @param {Object} args Object representing various query parameters
+         * @param {Object} [args] Object representing various query parameters
          *            that can be passed. The parameters must be exactly as they are
          *            supported by IBM Connections.
          */
@@ -328,7 +352,7 @@ define([ "../declare", "../lang", "../stringUtil", "../config", "../Promise", ".
          * Get Responses to My Content
          * 
          * @method getResponsesToMyContent
-         * @param {Object} args Object representing various query parameters
+         * @param {Object} [args] Object representing various query parameters
          *            that can be passed. The parameters must be exactly as they are
          *            supported by IBM Connections.
          */
@@ -339,25 +363,61 @@ define([ "../declare", "../lang", "../stringUtil", "../config", "../Promise", ".
         /**
          * Get Actions pending on me
          * 
-         * @method getMyActionableView
-         * @param {Object} args Object representing various query parameters
+         * @method getMyActionableItems
+         * @param {Object} [args] Object representing various query parameters
          *            that can be passed. The parameters must be exactly as they are
          *            supported by IBM Connections.
          */
-        getMyActionableView : function(args) {
+        getMyActionableItems : function(args) {
 			return this.getStream(consts.ASUser.ME, consts.ASGroup.ACTIONS, consts.ASApplication.ALL, args);
+        },
+
+        /**
+         * Get Actions pending on me for an applications
+         * 
+         * @method getMyActionableItemsForApplication
+         * @param {String} application name for which pending action items
+		 *	  		  are to be obtained
+         * @param {Object} [args] Object representing various query parameters
+         *            that can be passed. The parameters must be exactly as they are
+         *            supported by IBM Connections.
+         */
+        getMyActionableItemsForApplication : function(application, args) {
+        	var promise = this._validateApplicationName(application);
+            if (promise) {
+                return promise;
+            }
+			return this.getStream(consts.ASUser.ME, consts.ASGroup.ACTIONS, application, args);
         },
         
         /**
          * Get Updates Saved by me
          * 
-         * @method getMySavedView
-         * @param {Object} args Object representing various query parameters
+         * @method getMySavedItems
+         * @param {Object} [args] Object representing various query parameters
          *            that can be passed. The parameters must be exactly as they are
          *            supported by IBM Connections.
          */
-        getMySavedView : function(args) {
+        getMySavedItems : function(args) {
 			return this.getStream(consts.ASUser.ME, consts.ASGroup.SAVED, consts.ASApplication.ALL, args);
+        },
+        
+        /**
+         * Get Updates Saved by me
+         * 
+         * @method getMySavedItemsForApplication
+         * @param {String} application name for which saved items
+		 *	  		  are to be obtained
+         * @param {Object} [args] Object representing various query parameters
+         *            that can be passed. The parameters must be exactly as they are
+         *            supported by IBM Connections.
+         */
+        getMySavedItemsForApplication : function(application, args) {
+        	var promise = this._validateApplicationName(application);
+            if (promise) {
+                return promise;
+            }
+			return this.getStream(consts.ASUser.ME, consts.ASGroup.SAVED, application, args);
         },
         
         /**
@@ -381,16 +441,24 @@ define([ "../declare", "../lang", "../stringUtil", "../config", "../Promise", ".
          * Get searched view by filters
          * 
          * @method searchByFilters
+         * @param {String} query Filters can be passed to this method to get as activity stream
+         * 		   filtered by them. here is a sample string of two filters:
+		 *         "[{'type':'tag','values':['"+tags+"']},{'type':'tag','values':['test','mobile']}]"
          * @param {String} filters Filters can be passed to this method to get as activity stream
          * 		   filtered by them. here is a sample string of two filters:
-		 *         "[{'type':'tag','values':['"+tags+"']},{'type':'tag','values':['test',"mobile"]}]"
+		 *         "[{'type':'tag','values':['"+tags+"']},{'type':'tag','values':['test','mobile']}]"
          */
-        searchByFilters : function(filters) {
+        searchByFilters : function(query, filters) {
+        	var promise = this._validateSearchQuery(query);
+            if (promise) {
+                return promise;
+            }
         	var promise = this._validateSearchFilters(filters);
             if (promise) {
                 return promise;
             }
         	var args = {};
+        	args.query = query;
         	args.filters = filters;
 			return this.getStream(null, null, null, args);
         },
@@ -411,22 +479,39 @@ define([ "../declare", "../lang", "../stringUtil", "../config", "../Promise", ".
         	args.filters = "[{'type':'tag','values':['"+tags+"']}]";
 			return this.getStream(null, null, null, args);
         },
+        
+        /**
+         * Get searched view by pattern
+         * 
+         * @method searchByPattern
+         * @param {String} pattern string containing tags separated by commas for which activity 
+         * 			  stream search is to be done.
+         */
+        searchByPattern : function(pattern) {
+        	var promise = this._validateSearchTags(pattern);
+            if (promise) {
+                return promise;
+            }
+        	var args = {};
+        	args.custom = pattern;
+			return this.getStream(null, null, null, args);
+        },
 
         /**
          * post an Activity Stream entry
          * 
          * @method postEntry
          * @param {Object} postData a json object representing data to be posted
-         * @param {String} userType user type for which activity stream is to be posted
+         * @param {String} [userType] user type for which activity stream is to be posted
          *            If null is passed for userType, then '@me' will be used as 
          * 			  default
-         * @param {String} groupType group type for which activity stream is to be posted
+         * @param {String} [groupType] group type for which activity stream is to be posted
          *            If null is passed for userType, then '@all' will be used as 
          * 			  default
-         * @param {String} application type for which activity stream is to be posted
+         * @param {String} [applicationType] for which activity stream is to be posted
          *            If null is passed for userType, then '@all' will be used as 
          * 			  default
-         * @param {Object} args Object representing various query parameters
+         * @param {Object} [args] Object representing various query parameters
          *            that can be passed. The parameters must be exactly as they are
          *            supported by IBM Connections.
          */
@@ -454,22 +539,29 @@ define([ "../declare", "../lang", "../stringUtil", "../config", "../Promise", ".
          * post an Activity Stream microblog entry
          * 
          * @method postMicroblogEntry
-         * @param {Object} postData a json object representing data to be posted
-         * @param {String} userType user type for which activity stream is to be posted
+         * @param {Object/String} postData a json object representing data to be posted
+         * @param {String} [userType] user type for which activity stream is to be posted
          *            If null is passed for userType, then '@public' will be used as 
          * 			  default 
-         * @param {String} groupType group type for which activity stream is to be posted
+         * @param {String} [groupType] group type for which activity stream is to be posted
          *            If null is passed for userType, then '@all' will be used as 
          * 			  default 
-         * @param {String} application type for which activity stream is to be posted
+         * @param {String} [applicationType] for which activity stream is to be posted
          *            If null is passed for userType, then '@all' will be used as 
          * 			  default 
-         * @param {Object} args Object representing various parameters
+         * @param {Object} [args] Object representing various parameters
          *            that can be passed to post an activity stream. 
          *            The parameters must be exactly as they are
          *            supported by IBM Connections.
          */
         postMicroblogEntry : function(postData, userType, groupType, applicationType, args) {
+        	if (typeof postData == "string") {
+				postData = {"content":postData};
+			} else if (typeof postData == "object") {
+				postData = postData;
+			} else {
+				return this.createBadRequestPromise("Invalid argument with postMicroblogEntry, expected String or Object");
+			}
         	var _userType = userType || consts.ASUser.ME; //Default is public updates
 			var _groupType = groupType || consts.ASGroup.ALL; // Default is all groups
 			var _applicationType = applicationType || ""; // Default is all Applications
@@ -504,6 +596,15 @@ define([ "../declare", "../lang", "../stringUtil", "../config", "../Promise", ".
         _validateSearchQuery : function(searchQuery) {
             if (!searchQuery || searchQuery.length == 0) {
                 return this.createBadRequestPromise("Invalid argument, expected communityUuid.");
+            }
+        },
+        
+        /*
+         * Validate application name, and return a Promise if invalid.
+         */
+        _validateApplicationName : function(application) {
+            if (!application || application.length == 0) {
+                return this.createBadRequestPromise("Invalid argument, expected application name.");
             }
         },
         

@@ -15,7 +15,7 @@ require(["sbt/connections/ActivityStreamService", "sbt/connections/ActivityStrea
             tr.appendChild(td);
         };
     	var activityStreamService = new ActivityStreamService();
-    	var promise = activityStreamService.getMyActionableView(
+    	var promise = activityStreamService.getMyActionableItems(
 			{
 				count: 5
 			}

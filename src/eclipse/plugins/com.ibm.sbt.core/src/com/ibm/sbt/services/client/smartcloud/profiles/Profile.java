@@ -20,7 +20,6 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
-import com.ibm.sbt.services.client.base.datahandlers.JsonDataHandler;
 
 /**
  * This Class creates a Profile Object from Profile Service
@@ -33,11 +32,6 @@ public class Profile extends BaseEntity {
 		super(svc,handler);
 	}
 	
-	@Override
-	public JsonDataHandler getDataHandler(){
-		return (JsonDataHandler)dataHandler;
-	}
-	
 	/**
 	 * getThumbnailUrl
 	 * 			returns the URL to get the Thumbnail of the user
@@ -46,7 +40,7 @@ public class Profile extends BaseEntity {
 	 * 			Thumbnail Url
 	 */
 	public String getThumbnailUrl() {
-		String thumbnailUrl = getAsString(ProfilesJsonPath.ThumbnailUrl);
+		String thumbnailUrl = getAsString(ProfileJsonPath.ThumbnailUrl);
 		if(StringUtil.isNotEmpty(thumbnailUrl)) {
 			thumbnailUrl = super.getService().getEndpoint().getUrl() +"/contacts/img/photos/"+ thumbnailUrl; 
 		}
@@ -60,7 +54,7 @@ public class Profile extends BaseEntity {
 	 * 			name
 	 */
 	public String getDisplayName() {
-		return getAsString(ProfilesJsonPath.DisplayName);
+		return getAsString(ProfileJsonPath.DisplayName);
 	}
 
 	/**
@@ -70,9 +64,19 @@ public class Profile extends BaseEntity {
 	 * 			id
 	 */
 	public String getId() {
-		return getAsString(ProfilesJsonPath.Id);
+		return getAsString(ProfileJsonPath.Id);
 	}
 
+	/**
+	 * getObjectId
+	 * 			Returns the object id of the User
+	 * @return String
+	 * 			objectId	
+	**/
+	public String getObjectId() {
+		return this.getAsString(ProfileJsonPath.ObjectId);
+	}
+	
 	/**
 	 * getEmail
 	 * 			returns the email address of the user
@@ -80,7 +84,7 @@ public class Profile extends BaseEntity {
 	 * 			email
 	 */
 	public String getEmail() {
-		return getAsString(ProfilesJsonPath.EmailAddress);
+		return getAsString(ProfileJsonPath.EmailAddress);
 	}
 
 	/**
@@ -90,7 +94,7 @@ public class Profile extends BaseEntity {
 	 * 			address
 	 */
 	public String getAddress() {
-		return getAsString(ProfilesJsonPath.Address);
+		return getAsString(ProfileJsonPath.Address);
 	}
 
 	/**
@@ -100,17 +104,17 @@ public class Profile extends BaseEntity {
 	 * 			department
 	 */
 	public String getDepartment() {
-		return getAsString(ProfilesJsonPath.Department);
+		return getAsString(ProfileJsonPath.Department);
 	}
 
 	/**
-	 * getTitle
+	 * getJobTitle
 	 * 			returns the job title of the user
 	 * @return string 
 	 * 			title
 	 */
-	public String getTitle() {
-		return getAsString(ProfilesJsonPath.Title);
+	public String getJobTitle() {
+		return getAsString(ProfileJsonPath.Title);
 	}
 
 	/**
@@ -120,17 +124,17 @@ public class Profile extends BaseEntity {
 	 * 			profileUrl
 	 */
 	public String getProfileUrl() {
-		return getAsString(ProfilesJsonPath.ProfileUrl);
+		return getAsString(ProfileJsonPath.ProfileUrl);
 	}
 
 	/**
-	 * getPhoneNumber
+	 * getTelephoneNumber
 	 * 			returns the phone number of the user
 	 * @return string
 	 * 			phoneNumber
 	 */
-	public String getPhoneNumber() {
-		return getAsString(ProfilesJsonPath.PhoneNumbers);
+	public String getTelephoneNumber() {
+		return getAsString(ProfileJsonPath.PhoneNumbers);
 	}
 
 	/**
@@ -140,17 +144,17 @@ public class Profile extends BaseEntity {
 	 * 			country
 	 */
 	public String getCountry() {
-		return getAsString(ProfilesJsonPath.Country);
+		return getAsString(ProfileJsonPath.Country);
 	}
 
 	/**
-	 * getAboutMe
+	 * getAbout
 	 * 			returns the description/about details of the user
 	 * @return string
 	 * 			about
 	 */
-	public String getAboutMe() {
-		return getAsString(ProfilesJsonPath.About);
+	public String getAbout() {
+		return getAsString(ProfileJsonPath.About);
 	}
 	
 	/**
@@ -160,8 +164,30 @@ public class Profile extends BaseEntity {
 	 * 			orgId
 	 */
 	public String getOrgId() { 
-		return this.getAsString(ProfilesJsonPath.OrgId); 
+		return this.getAsString(ProfileJsonPath.OrgId); 
 	}
 	
+	/**
+	 * getOrg
+	 * 		Get Organization of the profile
+	 * @return String
+	 * 		Organization of the profile
+	**/
+	public String getOrg() { 
+		return this.getDepartment();
+	}
+	
+	/**
+	 * load
+	 * @throws ProfileServiceException
+	 */
+	public void load() throws ProfileServiceException {
+    	getService().getProfile(getId());
+    }
+	
+	@Override
+	public ProfileService getService(){
+		return (ProfileService)super.getService();
+	}
 	
 }

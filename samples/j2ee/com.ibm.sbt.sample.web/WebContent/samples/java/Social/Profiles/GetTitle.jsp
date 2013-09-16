@@ -35,8 +35,8 @@
 			ProfileService connProfSvc = new ProfileService();
 			Profile profile = connProfSvc.getProfile(userId);
 			if (profile != null) {
-				if (profile.getTitle() != null) {
-					out.println(profile.getTitle());
+				if (profile.getJobTitle() != null) {
+					out.println(profile.getJobTitle());
 				} else {
 					out.println("No information found");
 				}

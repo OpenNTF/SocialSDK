@@ -35,8 +35,8 @@
 			ProfileService connProfSvc = new ProfileService();
 			Profile profile = connProfSvc.getProfile(userId);
 			if (profile != null) {
-				if (profile.getPhoneNumber() != null) {
-					out.println(profile.getPhoneNumber());
+				if (profile.getTelephoneNumber() != null) {
+					out.println(profile.getTelephoneNumber());
 				} else {
 					out.println("No information found");
 				}

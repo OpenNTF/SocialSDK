@@ -32,8 +32,7 @@
 	
 		ProfileAdminService service = new ProfileAdminService(); 
 		long random = System.currentTimeMillis();
-		Profile profile = service.newProfile(Context.get().getProperty("sample.createProfileUid")+random);
-		
+		Profile profile = new Profile(service, Context.get().getProperty("sample.createProfileUid")+random);
 		profile.setAsString("guid",	Context.get().getProperty("sample.createProfileId")+random);
 		profile.setAsString("uid", Context.get().getProperty("sample.createProfileUid")+random);
 		profile.setAsString("distinguishedName",Context.get().getProperty("sample.createProfileDistinguishedName"));
@@ -43,7 +42,7 @@
 		profile.setAsString("userState", Context.get().getProperty("sample.createProfileUserState"));
 		service.createProfile(profile);
 		profile = service.getProfile(Context.get().getProperty("sample.createProfileId")+random);
-		out.println("Profile Created :with display name "+ profile.getDisplayName());
+		out.println("Profile Created :with display name "+ profile.getName());
 	} catch (Throwable e) {
 			out.println("<pre>");
 			out.println(e.getMessage());

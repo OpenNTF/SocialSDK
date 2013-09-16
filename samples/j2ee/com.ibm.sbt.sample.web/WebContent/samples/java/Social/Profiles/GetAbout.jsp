@@ -21,6 +21,7 @@
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.sbt.services.client.connections.profiles.ProfileService"%>
 <%@page import="com.ibm.sbt.services.client.connections.profiles.Profile"%>
+<%@page import="com.ibm.commons.util.StringUtil"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"	pageEncoding="ISO-8859-1"%>
 <html>
 <head>
@@ -37,8 +38,8 @@
 		ProfileService connProfSvc = new ProfileService();
 		Profile profile = connProfSvc.getProfile(userId);
 		if(profile != null){
-			if(profile.getAbout() != null){
-				out.println(profile.getAbout());
+			if(StringUtil.isNotEmpty(profile.getSummary())){
+				out.println(profile.getSummary());
 			}
 			else{
 				out.println("No information found");

@@ -25,7 +25,18 @@ public enum ProfileXPath implements FieldEntry {
 	region("./a:content/h:div/h:span/h:div/h:span[@class='region']"),
 	countryName("./a:content/h:div/h:span/h:div/h:div[@class='country-name']"),			
 	soundUrl("./a:content/h:div/h:span/h:div/h:a[@class='sound url']/@href"),	
-	summary("./a:summary");	
+	summary("./a:summary"),	
+	tagEntry("/app:categories/a:category"),
+	// used to access data from the feed
+	targetEmail("app:categories/snx:targetEmail"),
+	numberOfContributors("/app:categories/@snx:numberOfContributors"),
+    term("./@term"),
+    frequency("./@snx:frequency"),
+    intensity("./@snx:intensityBin"), 
+    visibility("./@snx:visibilityBin"),
+    contributorName("./a:name"),
+    contributorUserid("./a:userid"),
+    contributorEmail("./a:email");
 	
 	private final XPathExpression path;
 	

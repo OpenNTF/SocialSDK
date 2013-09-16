@@ -52,6 +52,7 @@
 					out.println("<br>");
 			}
 		} catch (Throwable e) {
+		e.printStackTrace();
 			out.println("<pre>");
 			out.println("Problem Occurred while fetching my communities: " + e.getMessage());
 			

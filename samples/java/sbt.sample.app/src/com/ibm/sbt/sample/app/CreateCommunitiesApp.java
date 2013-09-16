@@ -128,7 +128,7 @@ public class CreateCommunitiesApp {
 	    try {
             for (int i=0; i<10; i++) {
             	long start = System.currentTimeMillis();
-            	Community community = app.communityService.newCommunity();
+            	Community community = new Community(app.communityService, "");
             	community.setTitle("CreateCommunity-"+System.currentTimeMillis()+"-"+i);
             	community.setCommunityType("public");
             	community.setContent("");

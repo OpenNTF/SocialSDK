@@ -41,8 +41,8 @@
 		CommunityList communities = communityService.getMyCommunities();
 		Community community = communities.iterator().next();
 		String id = Context.get().getProperty("sample.id2");
-		Member new_member = new Member(communityService,id);
-		communityService.addMember(community.getCommunityUuid(),new_member);
+		Member newMember = new Member(communityService,id);
+		communityService.addMember(community.getCommunityUuid(),newMember);
 		out.println("user : "+id+" added to community "+community.getCommunityUuid());
 	} catch (Throwable e) {
 		out.println("<pre>");

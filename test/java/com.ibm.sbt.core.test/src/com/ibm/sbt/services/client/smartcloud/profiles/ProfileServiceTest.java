@@ -26,15 +26,15 @@ public class ProfileServiceTest extends BaseUnitTest {
 		Profile profile = profileService.getProfile(TEST_USERID);
 		assertNotNull(profile);
 		assertEquals("Frank Adams", profile.getDisplayName());
-		assertEquals("Sales Executive IBM Collaboration Software", profile.getAboutMe());
+		assertEquals("Sales Executive IBM Collaboration Software", profile.getAbout());
 		assertEquals("Mountain View", profile.getAddress());
 		assertEquals("SDK Renovations", profile.getDepartment());
 		assertEquals("Frank Adams", profile.getDisplayName());
 		assertEquals("frankadams@try.lotuslive.com", profile.getEmail());
-		assertEquals("456-098-3784", profile.getPhoneNumber());
+		assertEquals("456-098-3784", profile.getTelephoneNumber());
 		assertNotNull(profile.getProfileUrl());
 		assertNotNull(profile.getThumbnailUrl());
-		assertEquals("Sales Executive", profile.getTitle());
+		assertEquals("Sales Executive", profile.getJobTitle());
 	}
 	
 	@Test
@@ -44,7 +44,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 		Profile profile = profileService.getContact(TEST_GUID);
 		assertNotNull(profile);
 		assertNotNull(profile.getDisplayName());
-		assertNotNull(profile.getAboutMe());
+		assertNotNull(profile.getAbout());
 		assertNotNull(profile.getDepartment());
 	}
 	

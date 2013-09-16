@@ -20,7 +20,6 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
-import com.ibm.sbt.services.client.base.datahandlers.JsonDataHandler;
 
 /**
  * This Class creates a Profile Object from Profile Service
@@ -33,11 +32,6 @@ public class Profile extends BaseEntity {
 		super(svc,handler);
 	}
 	
-	@Override
-	public JsonDataHandler getDataHandler(){
-		return (JsonDataHandler)dataHandler;
-	}
-	
 	/**
 	 * getThumbnailUrl
 	 * 			returns the URL to get the Thumbnail of the user
@@ -46,7 +40,7 @@ public class Profile extends BaseEntity {
 	 * 			Thumbnail Url
 	 */
 	public String getThumbnailUrl() {
-		String thumbnailUrl = getAsString(ProfilesJsonPath.ThumbnailUrl);
+		String thumbnailUrl = getAsString(ProfileJPath.ThumbnailUrl);
 		if(StringUtil.isNotEmpty(thumbnailUrl)) {
 			thumbnailUrl = super.getService().getEndpoint().getUrl() +"/contacts/img/photos/"+ thumbnailUrl; 
 		}
@@ -60,7 +54,7 @@ public class Profile extends BaseEntity {
 	 * 			name
 	 */
 	public String getDisplayName() {
-		return getAsString(ProfilesJsonPath.DisplayName);
+		return getAsString(ProfileJPath.DisplayName);
 	}
 
 	/**
@@ -70,7 +64,7 @@ public class Profile extends BaseEntity {
 	 * 			id
 	 */
 	public String getId() {
-		return getAsString(ProfilesJsonPath.Id);
+		return getAsString(ProfileJPath.Id);
 	}
 
 	/**
@@ -80,7 +74,7 @@ public class Profile extends BaseEntity {
 	 * 			email
 	 */
 	public String getEmail() {
-		return getAsString(ProfilesJsonPath.EmailAddress);
+		return getAsString(ProfileJPath.EmailAddress);
 	}
 
 	/**
@@ -90,7 +84,7 @@ public class Profile extends BaseEntity {
 	 * 			address
 	 */
 	public String getAddress() {
-		return getAsString(ProfilesJsonPath.Address);
+		return getAsString(ProfileJPath.Address);
 	}
 
 	/**
@@ -100,17 +94,17 @@ public class Profile extends BaseEntity {
 	 * 			department
 	 */
 	public String getDepartment() {
-		return getAsString(ProfilesJsonPath.Department);
+		return getAsString(ProfileJPath.Department);
 	}
 
 	/**
-	 * getTitle
+	 * getJobTitle
 	 * 			returns the job title of the user
 	 * @return string 
 	 * 			title
 	 */
-	public String getTitle() {
-		return getAsString(ProfilesJsonPath.Title);
+	public String getJobTitle() {
+		return getAsString(ProfileJPath.Title);
 	}
 
 	/**
@@ -120,17 +114,17 @@ public class Profile extends BaseEntity {
 	 * 			profileUrl
 	 */
 	public String getProfileUrl() {
-		return getAsString(ProfilesJsonPath.ProfileUrl);
+		return getAsString(ProfileJPath.ProfileUrl);
 	}
 
 	/**
-	 * getPhoneNumber
+	 * getTelephoneNumber
 	 * 			returns the phone number of the user
 	 * @return string
 	 * 			phoneNumber
 	 */
-	public String getPhoneNumber() {
-		return getAsString(ProfilesJsonPath.PhoneNumbers);
+	public String getTelephoneNumber() {
+		return getAsString(ProfileJPath.PhoneNumbers);
 	}
 
 	/**
@@ -140,17 +134,17 @@ public class Profile extends BaseEntity {
 	 * 			country
 	 */
 	public String getCountry() {
-		return getAsString(ProfilesJsonPath.Country);
+		return getAsString(ProfileJPath.Country);
 	}
 
 	/**
-	 * getAboutMe
+	 * getAbout
 	 * 			returns the description/about details of the user
 	 * @return string
 	 * 			about
 	 */
-	public String getAboutMe() {
-		return getAsString(ProfilesJsonPath.About);
+	public String getAbout() {
+		return getAsString(ProfileJPath.About);
 	}
 	
 	/**
@@ -160,8 +154,30 @@ public class Profile extends BaseEntity {
 	 * 			orgId
 	 */
 	public String getOrgId() { 
-		return this.getAsString(ProfilesJsonPath.OrgId); 
+		return this.getAsString(ProfileJPath.OrgId); 
 	}
 	
+	/**
+	 * getOrg
+	 * 		Get Organization of the profile
+	 * @return String
+	 * 		Organization of the profile
+	**/
+	public String getOrg() { 
+		return this.getDepartment();
+	}
+	
+	/**
+	 * load
+	 * @throws ProfileServiceException
+	 */
+	public void load() throws ProfileServiceException {
+    	getService().getProfile(getId());
+    }
+	
+	@Override
+	public ProfileService getService(){
+		return (ProfileService)super.getService();
+	}
 	
 }

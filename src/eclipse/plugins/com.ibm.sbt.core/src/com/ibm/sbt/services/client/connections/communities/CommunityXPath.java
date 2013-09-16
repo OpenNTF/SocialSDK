@@ -34,6 +34,7 @@ public enum CommunityXPath implements FieldEntry {
 	logoUrl("./a:link[@rel='http://www.ibm.com/xmlns/prod/sn/logo']/@href"),
 	membersUrl("./a:link[@rel='http://www.ibm.com/xmlns/prod/sn/member-list']/@href"),
 	communityUrl("./a:link[@rel='alternate']/@href"),
+	communityAtomUrl("a:link[@rel='self']/@href"),
 	tags("./category/@term"), 
 	content("./a:content[@type='html']"),
 	memberCount("./snx:membercount"),
@@ -47,7 +48,8 @@ public enum CommunityXPath implements FieldEntry {
 	contributorName("./a:contributor/a:name"),
 	contributorEmail("./a:contributor/a:email"),
 	communityTheme("./snx:communityTheme"),
-	role("./snx:role");
+	role("./snx:role"),
+	inviteCommunityUrl("./a:link[@rel='http://www.ibm.com/xmlns/prod/sn/community']/@href"),;
 	
 	private final XPathExpression path;
 	

@@ -42,7 +42,7 @@ public class ProfileAdminServiceTest extends BaseUnitTest {
 		 
 		profileAdminService.createProfile(profile);
 		profile = profileAdminService.getProfile("testUser@renovations.com");
-		assertNotNull(profile.getDisplayName());
+		assertNotNull(profile.getName());
 
 	}
 
@@ -60,7 +60,7 @@ public class ProfileAdminServiceTest extends BaseUnitTest {
 		Profile profile = profileEntries.iterator().next();
 		profileAdminService.deleteProfile(profile.getUserid());
 		profile = profileAdminService.getProfile("testUser@renovations.com");
-		assertNull(profile.getDisplayName());
+		assertNull(profile.getName());
 	}
 
 }

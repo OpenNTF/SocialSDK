@@ -20,6 +20,7 @@ import com.ibm.sbt.services.client.base.datahandlers.FieldEntry;
 public enum ProfileJsonPath implements FieldEntry {
 	Entry("entry"),
 	Id("id"),
+	ObjectId("objectId"),
 	DisplayName("displayName"),
 	EmailAddress("emailAddress"),
 	ThumbnailUrl("photo"),

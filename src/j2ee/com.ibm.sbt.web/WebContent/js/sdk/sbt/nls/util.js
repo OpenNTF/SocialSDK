@@ -22,7 +22,7 @@
 define({
   root: ({	 
 	  error_callback:"Error running error callback : {0}",
-	  error_console:"Error received. Error Code = {0}. Error Message = {1}",	  
+	  error_console:"Error received. Error Code = {0}. Error Message = {1}"	  
   })
   
 });

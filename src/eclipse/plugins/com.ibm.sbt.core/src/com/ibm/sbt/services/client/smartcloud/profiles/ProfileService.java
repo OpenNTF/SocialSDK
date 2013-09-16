@@ -63,6 +63,9 @@ public class ProfileService extends BaseService {
 		super(endpoint, cacheSize);
 	}
 		
+	public String getDefaultEndpointName() {
+		return "smartcloud";
+	}
 	/**
 	 * getProfile
 	 * <p>
@@ -76,7 +79,7 @@ public class ProfileService extends BaseService {
 		JsonObject result = null;
 		try {
 			//making a call directly here using ClientService's get method,  
-			Response response = endpoint.getClientService().get(ProfilesAPIMap.GETUSERIDENTITY.getUrl(), ClientService.FORMAT_JSON);
+			Response response = endpoint.getClientService().get(ProfileConstants.GETUSERIDENTITY.getUrl(), ClientService.FORMAT_JSON);
 			result = (JsonObject) response.getData() ;
 		} catch (ClientServicesException cse) {
 			throw new ProfileServiceException(cse, Messages.InvalidValue_1);
@@ -100,7 +103,7 @@ public class ProfileService extends BaseService {
 		if (StringUtil.isEmpty(userId)) {
 			throw new ProfileServiceException(null, Messages.InvalidValue_3);
 		}
-		String serviceUrl = ProfilesAPIMap.GETPROFILEUSINGUSERGUID.getUrl(userId);
+		String serviceUrl = ProfileConstants.GETPROFILEUSINGUSERGUID.getUrl(userId);
 		try {
 			return (Profile) getEntity(serviceUrl, null, profileFeedHandler);
 		} catch (ClientServicesException e) {
@@ -124,7 +127,7 @@ public class ProfileService extends BaseService {
 		if (StringUtil.isEmpty(userGUId)) {
 			throw new ProfileServiceException(null, Messages.InvalidValue_3);
 		}
-		String serviceUrl = ProfilesAPIMap.GETCONTACTBYCONTACTGUID.getUrl(userGUId);
+		String serviceUrl = ProfileConstants.GETCONTACTBYCONTACTGUID.getUrl(userGUId);
 		try {
 			return (Profile) getEntity(serviceUrl, null, profileFeedHandler);
 		} catch (ClientServicesException e) {
@@ -158,7 +161,7 @@ public class ProfileService extends BaseService {
 	 * @throws ProfileServiceException
 	 */
 	public ProfileList getMyContacts() throws ProfileServiceException {
-		String serviceUrl = ProfilesAPIMap.GETMYCONTACTS.getUrl();
+		String serviceUrl = ProfileConstants.GETMYCONTACTS.getUrl();
 		try {
 			return (ProfileList) getEntities(serviceUrl, null, profileFeedHandler);
 		} catch (ClientServicesException e) {
@@ -180,7 +183,7 @@ public class ProfileService extends BaseService {
 	 * @throws ProfileServiceException
 	 */
 	public ProfileList getMyContactsByIndex(int startIndex, int count) throws ProfileServiceException {
-		String serviceUrl = ProfilesAPIMap.GETMYCONTACTS.getUrl();
+		String serviceUrl = ProfileConstants.GETMYCONTACTS.getUrl();
 		Integer startI = new Integer(startIndex);
 		Integer countI = new Integer(count);
 		Map<String, String> paramsMap = new HashMap<String, String>();
@@ -202,7 +205,7 @@ public class ProfileService extends BaseService {
 	 * @throws ProfileServiceException
 	 */
 	public ProfileList getMyConnections() throws ProfileServiceException {
-		String serviceUrl = ProfilesAPIMap.GETMYCONNECTIONS.getUrl();
+		String serviceUrl = ProfileConstants.GETMYCONNECTIONS.getUrl();
 		try {
 			return (ProfileList) getEntities(serviceUrl, null, profileFeedHandler);
 		} catch (ClientServicesException e) {

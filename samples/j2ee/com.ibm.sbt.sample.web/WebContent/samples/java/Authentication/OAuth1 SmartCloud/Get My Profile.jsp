@@ -52,7 +52,7 @@
 					out.println("<br>");
 					out.println("<B> Id : 	</B>" + profile.getId());
 					out.println("<br>");
-					out.println("<B> About Me : 	</B>" + profile.getAboutMe());
+					out.println("<B> About Me : 	</B>" + profile.getAbout());
 					out.println("<br>");
 					out.println("<B> Address : 	</B>" + profile.getAddress());
 					out.println("<br>");
@@ -60,11 +60,11 @@
 					out.println("<br>");
 					out.println("<B> Department : 	</B>" + profile.getDepartment());
 					out.println("<br>");
-					out.println("<B> Phone Number : 	</B>" + profile.getPhoneNumber());
+					out.println("<B> Phone Number : 	</B>" + profile.getTelephoneNumber());
 					out.println("<br>");
 					out.println("<B> Profile Url : 	</B>" + profile.getProfileUrl());
 					out.println("<br>");
-					out.println("<B> Title : 	</B>" + profile.getTitle());
+					out.println("<B> Title : 	</B>" + profile.getJobTitle());
 					out.println("<br>");
 				}
 				else

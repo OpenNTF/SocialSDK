@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ibm.commons.util.StringUtil;
+import com.ibm.domino.xsp.module.nsf.NSFComponentModule;
+import com.ibm.domino.xsp.module.nsf.NotesContext;
 import com.ibm.xsp.application.ApplicationEx;
 import com.ibm.xsp.context.FacesContextEx;
 import com.ibm.xsp.extlib.servlet.FacesContextServlet;
@@ -57,11 +59,15 @@ public class PreviewServlet extends FacesContextServlet {
 	}
 
 	public void service(ServletRequest servletRequest, ServletResponse servletResponse) throws ServletException, IOException {
+		// Make sure that the JSF servlet is created an initialized
+		NotesContext.getCurrent().getModule().getXspEngineServlet();
+		
 		// Create a temporary FacesContext and make it available
         FacesContext context = initContext(servletRequest, servletResponse);
         try {
     		// Make sure that the app hasn't been discarded
     		// If so, then we return a SERVICE_UNAVAILABLE error
+        	// Just for security
     		ApplicationEx app = ((FacesContextEx)context).getApplicationEx();
     		if(app.getController()==null) {
     			HttpServletResponse resp = (HttpServletResponse)servletResponse; 

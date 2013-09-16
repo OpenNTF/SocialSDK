@@ -37,7 +37,7 @@
 	<%
 	try {
 		CommunityService communityService = new CommunityService();
-		Community community = communityService.newCommunity();
+		Community community =  new Community(communityService, "");
 		community.setTitle("Test Community 1ab" + System.currentTimeMillis());
 		community.setContent("Test Community updated by Update Community Java snippet");
 		community.setCommunityType("private");

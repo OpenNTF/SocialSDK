@@ -44,7 +44,7 @@ public class CommunityServiceTest extends BaseUnitTest {
 		authenticateEndpoint(communityService.getEndpoint(), properties.getProperty("user1"),
 				properties.getProperty("passwordUser1"));
 	
-		Community community = communityService.newCommunity();
+		Community community = new Community(communityService, "");
 		community.setTitle("testCommunity"+System.currentTimeMillis());
 		community.setContent("test Community Content");
 		community = community.save();
@@ -165,7 +165,7 @@ public class CommunityServiceTest extends BaseUnitTest {
 		authenticateEndpoint(communityService.getEndpoint(), properties.getProperty("user1"),
 				properties.getProperty("passwordUser1"));
 	
-		Community community = communityService.newCommunity();
+		Community community = new Community(communityService, "");
 		community.setTitle("testCommunity"+System.currentTimeMillis());
 		community.setContent("test Community Content");
 		community.setCommunityType("public");
@@ -199,7 +199,8 @@ public class CommunityServiceTest extends BaseUnitTest {
 	
 		CommunityList communities = communityService.getMyCommunities();
 		Community community = communities.iterator().next();
-		communityService.addMember(community.getCommunityUuid(), properties.getProperty("email2"));
+		Member newMember = new Member(communityService, properties.getProperty("email2"));
+		communityService.addMember(community.getCommunityUuid(), newMember );
 		MemberList members = communityService.getMembers(community.getCommunityUuid());
 		for (Member member : members) {
 			assertNotNull(member.getUserid());

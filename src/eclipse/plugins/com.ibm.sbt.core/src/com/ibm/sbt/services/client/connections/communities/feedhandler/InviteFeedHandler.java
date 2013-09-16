@@ -13,17 +13,17 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-package com.ibm.sbt.services.client.connections.communities.feedhandlers;
+package com.ibm.sbt.services.client.connections.communities.feedhandler;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.IFeedHandler;
-import com.ibm.sbt.services.client.connections.communities.Bookmark;
-import com.ibm.sbt.services.client.connections.communities.BookmarkList;
+import com.ibm.sbt.services.client.connections.communities.Invite;
+import com.ibm.sbt.services.client.connections.communities.InviteList;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
-import com.ibm.sbt.services.client.connections.communities.BookmarkXPath;
+import com.ibm.sbt.services.client.connections.communities.CommunityXPath;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 
@@ -32,7 +32,7 @@ import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
  * @author Swati Singh
  *
  */
-public class BookmarkFeedHandler implements IFeedHandler {
+public class InviteFeedHandler implements IFeedHandler {
 
 	private final CommunityService service;
 	
@@ -41,40 +41,40 @@ public class BookmarkFeedHandler implements IFeedHandler {
 	 * 
 	 * @param service
 	 */
-	public BookmarkFeedHandler(CommunityService service){
+	public InviteFeedHandler(CommunityService service){
 		this.service = service;
 	}
 	
 	/**
 	 * @param requestData
-	 * @return Bookmark
+	 * @return Invite
 	 */
 	@Override
-	public Bookmark createEntity(Response requestData) {
+	public Invite createEntity(Response requestData) {
 		Node data = (Node)requestData.getData();
 		return createEntityFromData(data);
 	}
 	
 	/**
 	 * @param data object
-	 * @return Bookmark
+	 * @return Invite
 	 */
 	@Override
-	public Bookmark createEntityFromData(Object data) {
+	public Invite createEntityFromData(Object data) {
 		Node node = (Node)data;
-		XPathExpression expr = (data instanceof Document) ? (XPathExpression)BookmarkXPath.entry.getPath() : null;
+		XPathExpression expr = (data instanceof Document) ? (XPathExpression)CommunityXPath.entry.getPath() : null;
 		XmlDataHandler handler = new XmlDataHandler(node, ConnectionsConstants.nameSpaceCtx, expr);
-		Bookmark bookmark = new Bookmark(service, handler);
-		return bookmark;
+		Invite invite = new Invite(service, handler);
+		return invite;
 	}
 
 	/**
 	 * @param data object
-	 * @return Collection of communities
+	 * @return Collection of community Invitations
 	 */
 	@Override
-	public BookmarkList createEntityList(Response requestData) {
-		return new BookmarkList((Response)requestData, this);
+	public InviteList createEntityList(Response requestData) {
+		return new InviteList((Response)requestData, this);
 	}
 
 	/**

@@ -37,16 +37,12 @@
 	<div id="content">
 	<%
 		try {
-			
 			CommunityService svc = new CommunityService();
 			Map<String, String> parameters = new HashMap<String, String>();
 			parameters.put("ps", "5");
-			
 			CommunityList communities = svc.getMyCommunities(parameters);
-			
 			out.println("<br>Listing my communities , Total communities found : "+communities.getTotalResults());
 			out.println("<br>");
-		
 			for (Community community : communities) {
 					out.println("<b>Name : </b> " + community.getTitle());
 					out.println("<br>");

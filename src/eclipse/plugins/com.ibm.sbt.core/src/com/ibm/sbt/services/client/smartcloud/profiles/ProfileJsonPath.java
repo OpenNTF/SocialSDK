@@ -17,7 +17,7 @@ package com.ibm.sbt.services.client.smartcloud.profiles;
 
 import com.ibm.sbt.services.client.base.datahandlers.FieldEntry;
 
-public enum ProfileJPath implements FieldEntry {
+public enum ProfileJsonPath implements FieldEntry {
 	Entry("entry"),
 	Id("id"),
 	DisplayName("displayName"),
@@ -36,7 +36,7 @@ public enum ProfileJPath implements FieldEntry {
 	ItemsPerPage("itemsPerPage");
 	
 	private final String jsonPath;
-	private ProfileJPath(final String path) {
+	private ProfileJsonPath(final String path) {
 		this.jsonPath = path;
 	}
 	

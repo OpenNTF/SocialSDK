@@ -40,7 +40,7 @@ public class Profile extends BaseEntity {
 	 * 			Thumbnail Url
 	 */
 	public String getThumbnailUrl() {
-		String thumbnailUrl = getAsString(ProfileJPath.ThumbnailUrl);
+		String thumbnailUrl = getAsString(ProfileJsonPath.ThumbnailUrl);
 		if(StringUtil.isNotEmpty(thumbnailUrl)) {
 			thumbnailUrl = super.getService().getEndpoint().getUrl() +"/contacts/img/photos/"+ thumbnailUrl; 
 		}
@@ -54,7 +54,7 @@ public class Profile extends BaseEntity {
 	 * 			name
 	 */
 	public String getDisplayName() {
-		return getAsString(ProfileJPath.DisplayName);
+		return getAsString(ProfileJsonPath.DisplayName);
 	}
 
 	/**
@@ -64,7 +64,7 @@ public class Profile extends BaseEntity {
 	 * 			id
 	 */
 	public String getId() {
-		return getAsString(ProfileJPath.Id);
+		return getAsString(ProfileJsonPath.Id);
 	}
 
 	/**
@@ -74,7 +74,7 @@ public class Profile extends BaseEntity {
 	 * 			email
 	 */
 	public String getEmail() {
-		return getAsString(ProfileJPath.EmailAddress);
+		return getAsString(ProfileJsonPath.EmailAddress);
 	}
 
 	/**
@@ -84,7 +84,7 @@ public class Profile extends BaseEntity {
 	 * 			address
 	 */
 	public String getAddress() {
-		return getAsString(ProfileJPath.Address);
+		return getAsString(ProfileJsonPath.Address);
 	}
 
 	/**
@@ -94,7 +94,7 @@ public class Profile extends BaseEntity {
 	 * 			department
 	 */
 	public String getDepartment() {
-		return getAsString(ProfileJPath.Department);
+		return getAsString(ProfileJsonPath.Department);
 	}
 
 	/**
@@ -104,7 +104,7 @@ public class Profile extends BaseEntity {
 	 * 			title
 	 */
 	public String getJobTitle() {
-		return getAsString(ProfileJPath.Title);
+		return getAsString(ProfileJsonPath.Title);
 	}
 
 	/**
@@ -114,7 +114,7 @@ public class Profile extends BaseEntity {
 	 * 			profileUrl
 	 */
 	public String getProfileUrl() {
-		return getAsString(ProfileJPath.ProfileUrl);
+		return getAsString(ProfileJsonPath.ProfileUrl);
 	}
 
 	/**
@@ -124,7 +124,7 @@ public class Profile extends BaseEntity {
 	 * 			phoneNumber
 	 */
 	public String getTelephoneNumber() {
-		return getAsString(ProfileJPath.PhoneNumbers);
+		return getAsString(ProfileJsonPath.PhoneNumbers);
 	}
 
 	/**
@@ -134,7 +134,7 @@ public class Profile extends BaseEntity {
 	 * 			country
 	 */
 	public String getCountry() {
-		return getAsString(ProfileJPath.Country);
+		return getAsString(ProfileJsonPath.Country);
 	}
 
 	/**
@@ -144,7 +144,7 @@ public class Profile extends BaseEntity {
 	 * 			about
 	 */
 	public String getAbout() {
-		return getAsString(ProfileJPath.About);
+		return getAsString(ProfileJsonPath.About);
 	}
 	
 	/**
@@ -154,7 +154,7 @@ public class Profile extends BaseEntity {
 	 * 			orgId
 	 */
 	public String getOrgId() { 
-		return this.getAsString(ProfileJPath.OrgId); 
+		return this.getAsString(ProfileJsonPath.OrgId); 
 	}
 	
 	/**

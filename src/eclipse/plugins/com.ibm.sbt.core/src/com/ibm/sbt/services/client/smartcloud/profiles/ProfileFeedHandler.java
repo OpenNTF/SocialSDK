@@ -40,7 +40,7 @@ public class ProfileFeedHandler implements IFeedHandler{
 	public Profile createEntity(Response requestData) {
 		JsonJavaObject data = (JsonJavaObject)requestData.getData();
 		JsonDataHandler handler = new JsonDataHandler(data);
-		data = handler.getEntry(ProfileJPath.Entry.getPath());
+		data = handler.getEntry(ProfileJsonPath.Entry.getPath());
 		return createEntityFromData(data);
 	}
 	

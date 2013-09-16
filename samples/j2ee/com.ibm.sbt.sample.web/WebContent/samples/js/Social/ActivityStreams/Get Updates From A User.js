@@ -16,7 +16,7 @@ require(["sbt/connections/ActivityStreamService", "sbt/connections/ActivityStrea
         };
         var userID = "%{name=sample.id1|helpSnippetId=Social_Profiles_Get_Profile}";
     	var activityStreamService = new ActivityStreamService();
-    	var promise = activityStreamService.getUpdatesFromAUser(
+    	var promise = activityStreamService.getUpdatesFromUser(
     		userID,
 			{
 				count: 5

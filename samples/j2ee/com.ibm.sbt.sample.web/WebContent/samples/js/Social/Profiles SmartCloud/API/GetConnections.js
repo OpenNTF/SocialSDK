@@ -1,22 +1,25 @@
 require([ "sbt/dom", "sbt/json", "sbt/smartcloud/ProfileService" ], 
 	function(dom, json, ProfileService) {
+	var results = [];  
 	try {
-		var results = "";
 		var profileService = new ProfileService();
 		var promise = profileService.getMyConnections();
 		promise.then(function(profiles) {
-			dom.setText("json", json.jsonBeanStringify(getResults(profiles)));
-		}, function(error) {
-			dom.setText("json", json.jsonBeanStringify(error));
-		});
-	} catch (error) {
-		dom.setText("json", json.jsonBeanStringify(error));
-	}
+	        var result = [];
+	       	for(var i=0; i<profiles.length; i++){
+	               var profile = profiles[i];	           
+	               result.push({"Name" : profile.getDisplayName()}); 
+	        }  
+	       	results.push(result);
+	       	dom.setText("json", json.jsonBeanStringify(results));
+       },
+       function(error) {
+       	results.push(error);
+           dom.setText("json", json.jsonBeanStringify(results));
+       }
+   );
+} catch(error) {
+	results.push(error);
+   dom.setText("json", json.jsonBeanStringify(results));
+}
 });
-function getResults(profiles) {
-	var results = [];
-	for ( var i = 0; i < profiles.length; i++) {
-		results.push(profiles[i].getData());
-	}
-	return results;
-};

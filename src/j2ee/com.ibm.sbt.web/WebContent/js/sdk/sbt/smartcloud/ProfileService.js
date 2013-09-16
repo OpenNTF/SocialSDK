@@ -21,8 +21,8 @@
  *	@module sbt.smartcloud.ProfileService
 **/
 
-define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscriber","../Jsonpath","../base/BaseService", "../base/JsonDataHandler", "./ProfileConstants", "../base/BaseEntity"],
-		function(declare, lang, config, StringUtil, Cache, Subscriber, JsonPath, BaseService, JsonDataHandler, Consts, BaseEntity) {
+define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscriber","../Jsonpath","../base/BaseService", "../base/JsonDataHandler", "./ProfileConstants", "../base/BaseEntity","../Promise"],
+		function(declare, lang, config, StringUtil, Cache, Subscriber, JsonPath, BaseService, JsonDataHandler, Consts, BaseEntity, Promise) {
 	/**
      * Profile class representing the Smartcloud User Profile.
      * 
@@ -60,7 +60,7 @@ define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscr
                 createEntity : function(service,data,response) {
                     return new JsonDataHandler({
                         data : data,
-                        jsonpath : Consts.ProfileJPath
+                        jsonpath : Consts.ProfileJsonPath
                     });
                 }
             };
@@ -72,15 +72,6 @@ define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscr
                 query : requestArgs
             };
             return this.service.getEntity(consts.GetProfile, options, profileId, callbacks, args);
-		},
-		
-		/**
-		 * Get data feed
-		 * @method getData
-		 * @return {Json} json Feed
-		**/
-		getData: function() {
-			return this.dataHandler.getEntityData();
 		},
 		
 		/**
@@ -210,7 +201,7 @@ define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscr
         createEntity : function(service,data,response) {
         	var entryHandler = new JsonDataHandler({
                     data : data,
-                    jsonpath : Consts.ProfileJPath
+                    jsonpath : Consts.ProfileJsonPath
                 });
 
             return new Profile({
@@ -228,14 +219,14 @@ define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscr
         createEntities : function(service,data,response) {
         	return new JsonDataHandler({
                     data : data,
-                    jsonpath : Consts.ProfileJPath
+                    jsonpath : Consts.ProfileJsonPath
                 });
         }, 
         
         createEntity : function(service,data,response) {
         	var entryHandler = new JsonDataHandler({
                 data : data,
-                jsonpath : Consts.ProfileJPath
+                jsonpath : Consts.ProfileJsonPath
             });
 
         return new Profile({
@@ -315,7 +306,48 @@ define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscr
         getProfileByGUID : function(userId, args) {
             return this.getProfile(userId, args);
         },
-
+        
+        /**
+         * Get the profile of a logged in user.
+         * 
+         * @method getMyProfile
+         * @param {Object} args Argument object
+         */
+        getMyProfile : function(args) {
+            var self = this;
+        	var url = Consts.GetUserIdentity;
+        	
+        	var promise = new Promise();
+        	this.endpoint.request(url, { handleAs : "json" }).then(function(response) {
+        		
+        		var idObject = self._toIdObject(response.subscriberid);
+	            var promise1 = self._validateIdObject(idObject);
+	            if (promise1) {
+	                return promise1;
+	            }
+	
+	            var requestArgs = lang.mixin(idObject, args || {format:"json"});
+	            var options = {
+	                method : "GET",
+	                handleAs : "json", 
+	                query : requestArgs
+	            };
+	            var entityId = encodeURIComponent(idObject.userid);
+	            var url = self.constructUrl(Consts.GetProfileByGUID, {}, {idToBeReplaced : entityId});
+	            (self.getEntity(url, options, entityId, self.getProfileCallbacks())).then(function(response) {
+	            	promise.fulfilled(response);
+				},
+				function(error) {
+					promise.rejected(error);
+				});
+        	},
+        	function(error) {
+        		promise.rejected(error);
+        	}
+        );
+        return promise;
+        },
+        
         /**
          * Get the contact details of a user.
          * 

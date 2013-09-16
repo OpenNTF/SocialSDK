@@ -5,7 +5,7 @@ require([ "sbt/base/JsonDataHandler", "sbt/lang", "sbt/dom", "sbt/json", "sbt/sm
 	
 	var profileFeedHandler = new JsonDataHandler({
             data : feed,
-            jsonpath : consts.ProfileJPath
+            jsonpath : consts.ProfileJsonPath
         });
 
         try {
@@ -14,7 +14,7 @@ require([ "sbt/base/JsonDataHandler", "sbt/lang", "sbt/dom", "sbt/json", "sbt/sm
             for(var i=0;i<entries.length;i++) {
             	var profileEntryHandler = new JsonDataHandler({
                      data : entries[i],
-                     jsonpath : consts.ProfileJPath
+                     jsonpath : consts.ProfileJsonPath
                  });
                  results.push(getResults(profileEntryHandler));
 	        }

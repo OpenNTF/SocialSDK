@@ -57,7 +57,7 @@ define([ "../lang" ], function(lang) {
         /**
          * JsonPath expressions to be used when reading a Profile Entry
          */
-        ProfileJPath : { 
+        ProfileJsonPath : { 
         	thumbnailUrl : "$..photo",
         	address : "$..address",
         	department : "$..name",

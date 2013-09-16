@@ -742,7 +742,7 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
 					args && args.parameters ? args.parameters : {});
 			var headers = {
 				"Content-Type" : false,
-				"Process-Data" : false, // processData = false is reaquired by jquery 
+				"Process-Data" : false // processData = false is reaquired by jquery 
 			};			
 			var options = {
 				method : "PUT",

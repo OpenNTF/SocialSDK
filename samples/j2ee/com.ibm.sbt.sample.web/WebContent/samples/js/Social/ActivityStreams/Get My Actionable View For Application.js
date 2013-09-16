@@ -15,19 +15,16 @@ require(["sbt/connections/ActivityStreamService", "sbt/connections/ActivityStrea
             tr.appendChild(td);
         };
     	var activityStreamService = new ActivityStreamService();
-    	var promise = activityStreamService.searchByFilters(
-    		"status",
-    		"[" +
-				"{" +
-					"'type':'tag'," +
-					"'values':['test','mobile']" +
-				"}" +
-			"]"
+    	var promise = activityStreamService.getMyActionableItemsForApplication(
+    		"communities",
+			{
+				count: 5
+			}
     	);
     	promise.then(
             function(as){
                 if (as.length == 0) {
-                    dom.setText("content", "No Results for this Stream.");
+                	dom.setText("content", "No Results for this Stream.");
                 } else {
                     for(var i=0; i<as.length; i++){
                         var ase = as[i];

@@ -16,7 +16,7 @@ require(["sbt/connections/ActivityStreamService", "sbt/connections/ActivityStrea
         };
         var communityID = "%{name=sample.communityId|helpSnippetId=Social_Communities_Get_My_Communities}";
     	var activityStreamService = new ActivityStreamService();
-    	var promise = activityStreamService.getUpdatesFromACommunity(
+    	var promise = activityStreamService.getUpdatesFromCommunity(
     		communityID,
 			{
 				count: 5

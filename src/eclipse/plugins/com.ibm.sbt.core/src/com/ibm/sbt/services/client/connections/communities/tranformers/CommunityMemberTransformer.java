@@ -48,7 +48,7 @@ public class CommunityMemberTransformer extends AbstractBaseTransformer {
 			if (currentElement.contains("role")) {
 				roleXml = getXMLRep(getStream(sourcepath + "Role.xml"),currentElement,XmlTextUtil.escapeXMLChars(currentValue));
 				templateXml = getXMLRep(templateXml, "getRole", roleXml);
-			} else if (currentElement.equalsIgnoreCase("id") || currentElement.equalsIgnoreCase("userid")) {
+			} else if (currentElement.equalsIgnoreCase("id") || currentElement.equalsIgnoreCase("userid")|| currentElement.equalsIgnoreCase("contributorUid")) {
 				// check if user provided email or userid and select the template accodingly
 				if (EntityUtil.isEmail(currentValue)) {
 					useridXml = getXMLRep(getStream(sourcepath+ "EmailTmpl.xml"), "email", currentValue);

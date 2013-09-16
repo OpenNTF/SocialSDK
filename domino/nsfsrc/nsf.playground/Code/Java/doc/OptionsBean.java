@@ -106,9 +106,9 @@ public class OptionsBean {
 		String url = b.toString(); 
 		// TEMP FIX FOR DEMO
 		// Make sure it is HTTP else the iframe might fail
-		if(url.startsWith("https:")) {
-			url = "http:"+url.substring("https:".length());
-		}
+//		if(url.startsWith("https:")) {
+//			url = "http:"+url.substring("https:".length());
+//		}
 		System.out.println("URL="+url);
 		return url;
 	}

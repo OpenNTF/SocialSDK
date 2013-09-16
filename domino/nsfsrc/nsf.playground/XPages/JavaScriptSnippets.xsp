@@ -382,4 +382,5 @@ codeEditor.setValue(_codeData);
 		<input type="hidden" name="fm_properties" id="properties" />
 		<input type="hidden" name="fm_options" id="options" />
 	</form>
+ 
 </xp:view>

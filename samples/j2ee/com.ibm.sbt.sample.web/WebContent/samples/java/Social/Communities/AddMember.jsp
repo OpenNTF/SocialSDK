@@ -20,6 +20,7 @@
 <%@page import="com.ibm.sbt.services.client.connections.communities.Community"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.CommunityList"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
+<%@page import="com.ibm.sbt.services.client.connections.communities.Member"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Collection"%>
 <%@page 
@@ -40,10 +41,9 @@
 		CommunityList communities = communityService.getMyCommunities();
 		Community community = communities.iterator().next();
 		String id = Context.get().getProperty("sample.id2");
-		communityService.addMember(community.getCommunityUuid(),id);
+		Member new_member = new Member(communityService,id);
+		communityService.addMember(community.getCommunityUuid(),new_member);
 		out.println("user : "+id+" added to community "+community.getCommunityUuid());
-		
-		
 	} catch (Throwable e) {
 		out.println("<pre>");
 		out.println(e.getMessage());

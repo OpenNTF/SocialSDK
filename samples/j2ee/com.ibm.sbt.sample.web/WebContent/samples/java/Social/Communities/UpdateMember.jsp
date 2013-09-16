@@ -43,7 +43,7 @@
 		String communityId = communities.get(0).getCommunityUuid();
 		
 		MemberList members = communityService.getMembers(communityId);
-		if(members !=null && members.size()>0){
+		if(members !=null && members.size()>1){
 			for (Member member :members){
 				if(member.getRole().equalsIgnoreCase("member")){
 					member.setRole("owner");
@@ -59,7 +59,7 @@
 		}
 		
 	} catch (Throwable e) {
-	e.printStackTrace();
+		e.printStackTrace();
 		out.println("<pre>");
 		out.println(e.getMessage());
 		out.println("</pre>");

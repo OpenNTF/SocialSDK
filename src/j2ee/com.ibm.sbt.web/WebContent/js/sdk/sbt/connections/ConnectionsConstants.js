@@ -55,7 +55,7 @@ define([], function() {
             // used by getSummary
             totalResults : "/a:feed/opensearch:totalResults",
             startIndex : "/a:feed/opensearch:startIndex",
-            itemsPerPage : "/a:feed/opensearch:itemsPerPage",
+            itemsPerPage : "/a:feed/opensearch:itemsPerPage"
         },
 
         /**

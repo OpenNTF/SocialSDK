@@ -33,7 +33,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 		ProfileService profileService = new ProfileService();
 		Profile profile = profileService.getProfile("mockUser@renovations.com");
 		assertNotNull(profile);
-		assertEquals("mockUser", profile.getDisplayName());
+		assertEquals("mockUser", profile.getName());
 	}
 
 
@@ -45,7 +45,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 		profileAdminService.getEndpoint().logout();
 		authenticateEndpoint(profileAdminService.getEndpoint(), properties.getProperty("adminUser"),
 				properties.getProperty("passwordAdmin"));
-		Profile profile = profileAdminService.newProfile();
+		Profile profile = new Profile(profileAdminService, "testUser");
 		profile.setAsString("guid", "testUserD9A04-F2E1-1222-4825-7A700026E92C");
 		profile.setAsString("email", "testUser@renovations.com");
 		profile.setAsString("uid", "testUser");
@@ -60,7 +60,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 		ProfileService svc = new ProfileService();
 		profile = svc.getProfile("testUser@renovations.com");
 		assertNotNull(profile);
-		assertEquals("testUser", profile.getDisplayName());
+		assertEquals("testUser", profile.getName());
 		assertEquals("testUser@renovations.com", profile.getEmail());
 		assertNotNull(profile.getUserid());
 		assertNotNull(profile.getProfileUrl());
@@ -87,7 +87,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 		ProfileList profileEntries = profileService.searchProfiles(parameters);
 		if (profileEntries != null && !profileEntries.isEmpty()) {
 			for (Profile profile : profileEntries) {
-				assertNotNull(profile.getDisplayName());
+				assertNotNull(profile.getName());
 			}
 		}
 	}
@@ -108,7 +108,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 		ProfileList profileEntries = profileService.getColleagues( properties.getProperty("user1"));
 		if (profileEntries != null && !profileEntries.isEmpty()) {
 			for (Profile profile : profileEntries) {
-				assertNotNull(profile.getDisplayName());
+				assertNotNull(profile.getName());
 			}
 		}
 	}
@@ -155,7 +155,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 		ProfileList profileEntries = profileService.getCommonColleaguesProfiles( properties.getProperty("email1"),properties.getProperty("email2") );
 		if (profileEntries != null && !profileEntries.isEmpty()) {
 			for (Profile profileEntry : profileEntries) {
-				assertNotNull(profileEntry.getTitle());
+				assertNotNull(profileEntry.getJobTitle());
 			}
 		}
 	}
@@ -177,7 +177,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 		ProfileList profileEntries = profileService.getConnectionsProfileEntriesByStatus( properties.getProperty("user1"),properties.getProperty("accepted") );
 		if (profileEntries != null && !profileEntries.isEmpty()) {
 			for (Profile profileEntry : profileEntries) {
-				assertNotNull(profileEntry.getTitle());
+				assertNotNull(profileEntry.getJobTitle());
 			}
 		}
 	}
@@ -185,10 +185,10 @@ public class ProfileServiceTest extends BaseUnitTest {
 	@Test
 	public void testGetReportToChain() throws Exception {
 		ProfileService profileService = new ProfileService();
-		ProfileList profileEntries = profileService.getReportToChain( properties.getProperty("user1"));
+		ProfileList profileEntries = profileService.getReportingChain( properties.getProperty("user1"));
 		if (profileEntries != null && !profileEntries.isEmpty()) {
 			for (Profile profile : profileEntries) {
-				assertNotNull(profile.getDisplayName());
+				assertNotNull(profile.getName());
 			}
 		}
 	}
@@ -196,10 +196,10 @@ public class ProfileServiceTest extends BaseUnitTest {
 	@Test
 	public void testGetDirectReports() throws Exception {
 		ProfileService profileService = new ProfileService();
-		ProfileList profileEntries = profileService.getDirectReports( properties.getProperty("user1"));
+		ProfileList profileEntries = profileService.getPeopleManaged( properties.getProperty("user1"));
 		if (profileEntries != null && !profileEntries.isEmpty()) {
 			for (Profile profile : profileEntries) {
-				assertNotNull(profile.getDisplayName());
+				assertNotNull(profile.getName());
 			}
 		}
 	}
@@ -222,10 +222,10 @@ public class ProfileServiceTest extends BaseUnitTest {
 		authenticateEndpoint(profileService.getEndpoint(), properties.getProperty("user1"),
 				properties.getProperty("passwordUser1"));
 		Profile profile = profileService.getProfile(properties.getProperty("email1"));
-		profile.setPhoneNumber("9999999999");
+		profile.setTelephoneNumber("9999999999");
 		profileService.updateProfile(profile);
 		profile = profileService.getProfile(properties.getProperty("email1"));
-		assertEquals("9999999999", profile.getPhoneNumber());
+		assertEquals("9999999999", profile.getTelephoneNumber());
 
 		profileService.getEndpoint().logout();
 
@@ -241,7 +241,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 		//authenticateEndpoint(profileService.getEndpoint(), properties.getProperty("user2"),
 			//	properties.getProperty("passwordUser2"));
 		Profile profile = profileService.getProfile(properties.getProperty("email1"));
-		profile.setPhoneNumber("TEST_PHONE_NUMBER");
+		profile.setTelephoneNumber("TEST_PHONE_NUMBER");
 		profileService.updateProfile(profile);
 	}
 

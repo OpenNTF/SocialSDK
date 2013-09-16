@@ -199,8 +199,8 @@ public class CommunityServiceTest extends BaseUnitTest {
 	
 		CommunityList communities = communityService.getMyCommunities();
 		Community community = communities.iterator().next();
-		Member new_member = new Member(communityService, properties.getProperty("email2"));
-		communityService.addMember(community.getCommunityUuid(), new_member );
+		Member newMember = new Member(communityService, properties.getProperty("email2"));
+		communityService.addMember(community.getCommunityUuid(), newMember );
 		MemberList members = communityService.getMembers(community.getCommunityUuid());
 		for (Member member : members) {
 			assertNotNull(member.getUserid());

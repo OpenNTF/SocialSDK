@@ -20,7 +20,7 @@ package com.ibm.sbt.services.client.smartcloud.profiles;
  * 
  * @author Vimal Dhupar
  */
-public enum ProfilesAPIMap {
+public enum ProfileConstants {
 	GETPROFILE("/lotuslive-shindig-server/social/rest/people/@me/@self"), 
 	GETUSERIDENTITY("/manage/oauth/getUserIdentity"), 
 	GETCONTACTBYCONTACTGUID("/lotuslive-shindig-server/social/rest/people/lotuslive:contact:p!{idToBeReplaced}/@self"), 
@@ -30,7 +30,7 @@ public enum ProfilesAPIMap {
 
 	private final String	url;
 
-	ProfilesAPIMap(String url) {
+	ProfileConstants(String url) {
 		this.url = url;
 	}
 

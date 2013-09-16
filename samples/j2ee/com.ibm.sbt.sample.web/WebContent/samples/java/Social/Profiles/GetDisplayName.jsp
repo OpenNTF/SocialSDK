@@ -34,7 +34,7 @@
 			ProfileService connProfSvc = new ProfileService();
 			Profile profile = connProfSvc.getProfile(userId);
 			if(profile.getUserid()!=null){
-				out.println(profile.getDisplayName());
+				out.println(profile.getName());
 			}
 		} catch (Throwable e) {
 			out.println("<pre>");

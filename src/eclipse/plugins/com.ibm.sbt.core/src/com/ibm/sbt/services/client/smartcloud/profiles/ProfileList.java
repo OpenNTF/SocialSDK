@@ -52,7 +52,7 @@ public class ProfileList extends EntityList<Profile> {
 	protected ArrayList<Profile> createEntities() {
 		JsonDataHandler dataHandler = new JsonDataHandler(getData());
 		ArrayList<Profile> profiles = new ArrayList<Profile>();
-		List<JsonJavaObject> entries = dataHandler.getEntries(ProfilesJsonPath.Entry);
+		List<JsonJavaObject> entries = dataHandler.getEntries(ProfileJsonPath.Entry);
 		for (JsonJavaObject entry: entries) {
 			Profile profile = getEntity(entry);
 			profiles.add(profile);
@@ -63,19 +63,19 @@ public class ProfileList extends EntityList<Profile> {
 	@Override
 	public int getTotalResults() {
 		JsonDataHandler dataHandler = new JsonDataHandler(getData());
-		return (int) dataHandler.getAsFloat(ProfilesJsonPath.TotalResults);
+		return (int) dataHandler.getAsFloat(ProfileJsonPath.TotalResults);
 	}
 
 	@Override
 	public int getStartIndex() {
 		JsonDataHandler dataHandler = new JsonDataHandler(getData());
-		return dataHandler.getAsInt(ProfilesJsonPath.StartIndex);
+		return dataHandler.getAsInt(ProfileJsonPath.StartIndex);
 	}
 
 	@Override
 	public int getItemsPerPage() {
 		JsonDataHandler dataHandler = new JsonDataHandler(getData());
-		return dataHandler.getAsInt(ProfilesJsonPath.ItemsPerPage);
+		return dataHandler.getAsInt(ProfileJsonPath.ItemsPerPage);
 	}
 
 	@Override

@@ -533,106 +533,6 @@ public class ProfileService extends BaseService {
 	}
 
 	/**
-	 * Wrapper method to get a list of Connections based on status
-	 * 
-	 * @param id
-	 * 			unique identifier of the user , it can be email or userID
-	 * @param status
-	 * 				Specifies the status of the invitation
-	 * @return List of Connections based on status 
-	 * @throws ProfileServiceException
-	 */
-	public ConnectionEntryList getConnectionsColleagueEntriesByStatus(String id, String status) throws ProfileServiceException{
-		return getConnectionsColleagueEntriesByStatus(id, status,null);
-	}
-	/**
-	 * Wrapper method to get a list of Connections based on status
-	 * 
-	 * @param id
-	 * 			unique identifier of the user , it can be email or userID 
-	 * @param status
-	 * 				Specifies the status of the invitation
-	 * @param parameters
-	 * 				  list of query string parameters to pass to API
-	 * @return List of Connections based on status 
-	 * @throws ProfileServiceException
-	 * 
-	 */
-	public ConnectionEntryList getConnectionsColleagueEntriesByStatus(String id, String status, Map<String, String> parameters)throws ProfileServiceException{
-
-		if (StringUtil.isEmpty(id)) {
-			throw new ProfileServiceException(null, Messages.InvalidArgument_1);
-		}
-		String url = resolveProfileUrl(ProfileAPI.NONADMIN.getProfileEntityType(),
-				ProfileType.CONNECTIONS.getProfileType());
-		if(parameters == null)
-			parameters = new HashMap<String, String>();
-		parameters.put("connectionType", "colleague");
-		parameters.put("outputType","connection");
-		parameters.put("status",status);
-		setIdParameter(parameters, id);
-
-		ConnectionEntryList connectionEntries = null;
-		try {
-			connectionEntries = (ConnectionEntryList) getEntities(url, parameters, new ConnectionEntryFeedHandler(this));
-		} catch (ClientServicesException e) {
-			throw new ProfileServiceException(e, Messages.ConnectionsByStatusException, id);
-		} catch (IOException e) {
-			throw new ProfileServiceException(e, Messages.ConnectionsByStatusException, id);
-		}
-		return connectionEntries;
-	}
-	/**
-	 * Wrapper method to get a list of Connections based on status
-	 * 
-	 * @param id
-	 * 			unique identifier of the user to whom the invite is to be sent, it can be email or userID 
-	 * @param status
-	 * 				Specifies the status of the invitation
-	 * @return List of profiles
-	 * @throws ProfileServiceException
-	 */
-	public ProfileList getConnectionsProfileEntriesByStatus(String id, String status) throws ProfileServiceException{
-		return getConnectionsProfileEntriesByStatus(id, status, null);
-	}
-	/**
-	 * Wrapper method to get a list of Connections based on status 
-	 * 
-	 * @param id
-	 * 			unique identifier of the user , it can be email or userID
-	 * @param status
-	 * 				Specifies the status of the invitation
-	 * @param parameters
-	 * 				  list of query string parameters to pass to API
-	 * @return List of profiles
-	 * @throws ProfileServiceException
-	 * 
-	 */
-	public ProfileList getConnectionsProfileEntriesByStatus(String id, String status, Map<String, String> parameters)throws ProfileServiceException{
-
-		if (StringUtil.isEmpty(id)) {
-			throw new ProfileServiceException(null, Messages.InvalidArgument_1);
-		}
-		String url = resolveProfileUrl(ProfileAPI.NONADMIN.getProfileEntityType(),
-				ProfileType.CONNECTIONS.getProfileType());
-		if(parameters == null)
-			parameters = new HashMap<String, String>();
-		parameters.put("connectionType", "colleague");
-		parameters.put("outputType","connection");
-		parameters.put("status",status);
-		setIdParameter(parameters, id);
-
-		ProfileList profiles = null;
-		try {
-			profiles = (ProfileList) getEntities(url, parameters, new ProfileFeedHandler(this));
-		} catch (ClientServicesException e) {
-			throw new ProfileServiceException(e, Messages.ConnectionsByStatusException, id);
-		} catch (IOException e) {
-			throw new ProfileServiceException(e, Messages.ConnectionsByStatusException, id);
-		}
-		return profiles;
-	}
-	/**
 	 * Wrapper method to send Invite to a user to become colleague
 	 * <p>
 	 * a default Invite message is used while sending the invite
@@ -737,49 +637,6 @@ public class ProfileService extends BaseService {
 	}
 
 	/**
-	 * Wrapper method to update a User's profile photo
-	 * 
-	 * @param Profile
-	 * @throws ProfileServiceException
-	 */
-	public void updateProfilePhoto(Profile profile) throws ProfileServiceException{
-
-		if (profile == null) {
-			throw new ProfileServiceException(null, Messages.InvalidArgument_3);
-		}
-
-		try {
-			Map<String, String> parameters = new HashMap<String, String>();
-			setIdParameter(parameters, profile.getUserid());
-
-			String filePath = profile.getFieldsMap().get("imageLocation").toString();
-			java.io.File file = new java.io.File(filePath);
-			String name = filePath.substring(filePath.lastIndexOf('\\') + 1);
-
-			int dot = name.lastIndexOf('.');
-			String ext = null;
-			if (dot > -1) {
-				ext = name.substring(dot + 1); // add one for the dot!
-			}
-			if (!StringUtil.isEmpty(ext)) {
-				Map<String, String> headers = new HashMap<String, String>();
-				if (ext.equalsIgnoreCase("jpg")) {
-					headers.put(ProfilesConstants.REQ_HEADER_CONTENT_TYPE_PARAM, "image/jpeg");	// content-type should be image/jpeg for file extension - jpeg/jpg
-				} else {
-					headers.put(ProfilesConstants.REQ_HEADER_CONTENT_TYPE_PARAM, "image/" + ext);
-				}
-				String url = resolveProfileUrl(ProfileAPI.NONADMIN.getProfileEntityType(),
-						ProfileType.UPDATEPROFILEPHOTO.getProfileType());
-				getClientService().put(url, parameters, headers, file, ClientService.FORMAT_NULL);
-			}
-		} catch (ClientServicesException e) {
-			throw new ProfileServiceException(e, Messages.UpdateProfilePhotoException);
-		}
-		profile.clearFieldsMap();
-
-	}
-
-	/**
 	 * Wrapper method to update a User's profile
 	 * 
 	 * @param Profile
@@ -840,13 +697,11 @@ public class ProfileService extends BaseService {
 	 * @param userid
 	 * @throws ProfileServiceException
 	 */
-	public void updateProfilePhoto(File file) throws ProfileServiceException{
+	public void updateProfilePhoto(File file, String userId) throws ProfileServiceException{
 
 		try {
-
-			String id = getMyUserId();			
 			Map<String, String> parameters = new HashMap<String, String>();
-			setIdParameter(parameters, id);
+			setIdParameter(parameters, userId);
 			String name = file.getName();
 			int dot = StringUtil.lastIndexOfIgnoreCase(name, ".");
 			String ext = "";

@@ -161,28 +161,6 @@ public class ProfileServiceTest extends BaseUnitTest {
 	}
 
 	@Test
-	public void testGetConnectionsColleagueEntriesByStatus() throws Exception {
-		ProfileService profileService = new ProfileService();
-		ConnectionEntryList connectionEntries = profileService.getConnectionsColleagueEntriesByStatus( properties.getProperty("user1"),properties.getProperty("accepted") );
-		if (connectionEntries != null && !connectionEntries.isEmpty()) {
-			for (ConnectionEntry connectionEntry : connectionEntries) {
-				assertNotNull(connectionEntry.getTitle());
-			}
-		}
-	}
-	
-	@Test
-	public void testGetConnectionsProfileEntriesByStatus() throws Exception {
-		ProfileService profileService = new ProfileService();
-		ProfileList profileEntries = profileService.getConnectionsProfileEntriesByStatus( properties.getProperty("user1"),properties.getProperty("accepted") );
-		if (profileEntries != null && !profileEntries.isEmpty()) {
-			for (Profile profileEntry : profileEntries) {
-				assertNotNull(profileEntry.getJobTitle());
-			}
-		}
-	}
-	
-	@Test
 	public void testGetReportToChain() throws Exception {
 		ProfileService profileService = new ProfileService();
 		ProfileList profileEntries = profileService.getReportingChain( properties.getProperty("user1"));
@@ -263,8 +241,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 				properties.getProperty("passwordUser1"));
 		Profile profile = profileService.getProfile(properties.getProperty("email1"));
 		File file = new File("config/image.jpg");
-		profile.setPhotoLocation(file.getAbsolutePath());
-		profileService.updateProfilePhoto(profile);
+		profileService.updateProfilePhoto(file, profile.getUserid());
 	}
 
 	@Ignore
@@ -276,8 +253,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 				properties.getProperty("passwordUser1"));
 		Profile profile = profileService.getProfile(properties.getProperty("email1"));
 		File file = new File("config/image");
-		profile.setPhotoLocation(file.getAbsolutePath());
-		profileService.updateProfilePhoto(profile);
+		profileService.updateProfilePhoto(file, profile.getUserid());
 	}
 
 	@Ignore
@@ -290,7 +266,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 		Profile profile = profileService.getProfile(properties.getProperty("email1"));
 		File file = new File("image1.jpg");
 		profile.setPhotoLocation(file.getAbsolutePath());
-		profileService.updateProfilePhoto(profile);
+		profileService.updateProfilePhoto(file, profile.getUserid());
 	}
 	
 

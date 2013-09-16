@@ -14,7 +14,7 @@ public class Bookmark extends BaseEntity{
 
 	public Bookmark(CommunityService communityService, String id) {
 		setService(communityService);
-		setAsString(BookmarkXPath.id, id);
+		setAsString(CommunityXPath.id, id);
 	}
 	
 	public Bookmark(CommunityService svc, DataHandler<?> handler)
@@ -29,7 +29,7 @@ public class Bookmark extends BaseEntity{
 	 * @return id
 	 */	
 	public String getId() {
-		return getAsString(BookmarkXPath.id);
+		return getAsString(CommunityXPath.id);
 	}
 	
 	/**
@@ -38,7 +38,7 @@ public class Bookmark extends BaseEntity{
 	 * @return title
 	 */	
 	public String getTitle() {
-		return getAsString(BookmarkXPath.title);
+		return getAsString(CommunityXPath.title);
 	}
 
 	/**
@@ -47,14 +47,14 @@ public class Bookmark extends BaseEntity{
 	 * @return summary
 	 */	
 	public String getSummary() {
-		return getAsString(BookmarkXPath.summary);
+		return getAsString(CommunityXPath.summary);
 	}
 
 	/**
 	 * Method sets the bookmark title
 	 */	
 	public void setTitle(String title) {
-		setAsString(BookmarkXPath.title, title);
+		setAsString(CommunityXPath.title, title);
 	}
 
 }

@@ -33,8 +33,8 @@ public class Messages {
 	public static String	NullCommunityIdUserIdOrRoleException	= "Community Id or userid or role was null";
 	public static String	NullCommunityIdOrUserIdException		= "Community Id or userid was null";
 	public static String	GetMemberException						= "Error geting member {0} in community with Id {1}";
-	public static String	AddMemberException						= "Error adding member {0} with role {1} to community {2}";
-	public static String	UpdateMemberException					= "Error updating member {0} with role {1} to community {2}";
+	public static String	AddMemberException						= "Error adding member {0} to community {1}";
+	public static String	UpdateMemberException					= "Error updating member {0} to community {1}";
 	public static String	RemoveMemberException					= "Error removing member {0} from community {1}";
 	public static String	NullCommunityIdException				= "No CommunityId Passed";	
 	public static String	DeleteCommunityException				= "Error Deleting Community {0}";	

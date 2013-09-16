@@ -20,10 +20,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
 import com.ibm.commons.util.StringUtil;
-import com.ibm.commons.xml.DOMUtil;
-import com.ibm.commons.xml.XMLException;
 import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.connections.communities.CommunityList;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
@@ -205,6 +202,16 @@ public class Community extends BaseEntity {
 	}
 	
 	/**
+	 * @return the community theme
+	 */
+	public String getCommunityTheme(){
+		return getAsString(CommunityXPath.communityTheme);
+	}
+	
+	public void setCommunityTheme(String theme) {
+		setAsString(CommunityXPath.communityTheme, theme);
+	}
+	/**
 	 * @return the update date of community
 	 */
 	public Date getUpdated(){
@@ -216,11 +223,9 @@ public class Community extends BaseEntity {
 	 * @return the authorUid
 	 */
 	public Member getAuthor(){
-		Member author = new Member(
-					getService(),
-					getAsString(CommunityXPath.authorUid), 
-					getAsString(CommunityXPath.authorName), 
-					getAsString(CommunityXPath.authorEmail));
+		Member author = new Member(getService(), getAsString(CommunityXPath.authorUid));
+		author.setName(getAsString(CommunityXPath.authorName));
+		author.setEmail(getAsString(CommunityXPath.authorEmail));
 		return author;
 	}
 	
@@ -228,11 +233,9 @@ public class Community extends BaseEntity {
 	 * @return the ContributorId
 	 */
 	public Member getContributor(){
-		Member contributor = new Member(
-					getService(),
-					getAsString(CommunityXPath.contributorUid),
-					getAsString(CommunityXPath.contributorName),
-					getAsString(CommunityXPath.contributorEmail));
+		Member contributor = new Member(getService(), getAsString(CommunityXPath.contributorUid));
+		contributor.setName(getAsString(CommunityXPath.contributorName));
+		contributor.setEmail(getAsString(CommunityXPath.contributorEmail));
 		return contributor;
 	}
 	
@@ -263,6 +266,17 @@ public class Community extends BaseEntity {
 		return getService().getCommunity(getCommunityUuid());
     }
 	
+	/**
+	 * This method updates the community 
+	 * 
+	 * @return
+	 * @throws CommunityServiceException
+	 */
+	
+	public void update() throws CommunityServiceException
+    {
+		getService().updateCommunity(this);
+    }
 		
 	/**
 	 * This method deletes the community on the server
@@ -299,25 +313,16 @@ public class Community extends BaseEntity {
     {
 		return getService().getMember(getCommunityUuid(), memberID );
     }
+	
 	/**
 	 * This method adds Community member
 	 * 
 	 * @return
 	 * @throws CommunityServiceException
 	 */
-	public boolean addMember(String memberID) throws CommunityServiceException
+	public boolean addMember(Member member) throws CommunityServiceException
     {
-		return addMember(memberID , "");
-    }
-	/**
-	 * This method adds Community member
-	 * 
-	 * @return
-	 * @throws CommunityServiceException
-	 */
-	public boolean addMember(String memberID, String role) throws CommunityServiceException
-    {
-		return getService().addMember(getCommunityUuid(), memberID , role);
+		return getService().addMember(getCommunityUuid(), member);
     }
 	
 	/**

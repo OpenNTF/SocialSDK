@@ -40,14 +40,15 @@ public class Member extends BaseEntity {
 	 * 
 	 * @param communityService
 	 * @param id
-	 * @param name
-	 * @param email
 	 */
-	public Member(CommunityService communityService, String id, String name, String email) {
+	public Member(CommunityService communityService, String id) {
 		setService(communityService);
-		setUserid(id);
-		setName(name);
-		setEmail(email);
+		if(id.contains("@")){
+			setEmail(id);
+		}
+		else{
+			setUserid(id);
+		}
 	}
 	
 	/**
@@ -63,7 +64,7 @@ public class Member extends BaseEntity {
 	public String getCommunityUuid(){
 	    	String communityId = "";
 	    	try {
-	    		communityId = getAsString(MemberXPath.id);
+	    		communityId = getAsString(CommunityXPath.id);
 			} catch (Exception e) {}
 	    	
 	    	if(StringUtil.isEmpty(communityId)){
@@ -78,7 +79,7 @@ public class Member extends BaseEntity {
 	 * @return id
 	 */
 	public String getUserid() {
-		return getAsString(MemberXPath.userid);
+		return getAsString(CommunityXPath.contributorUid);
 	}
 
 	/**
@@ -86,7 +87,7 @@ public class Member extends BaseEntity {
 	 * @return name
 	 */
 	public String getName() {
-		return getAsString(MemberXPath.name);
+		return getAsString(CommunityXPath.contributorName);
 	}
 
 	/**
@@ -94,14 +95,14 @@ public class Member extends BaseEntity {
 	 * @return email
 	 */
 	public String getEmail() {
-		return getAsString(MemberXPath.email);
+		return getAsString(CommunityXPath.contributorEmail);
 	}
 	
 	/**
 	 * @set name
 	 */
 	public void setName(String name) {
-		setAsString(MemberXPath.name, name);
+		setAsString(CommunityXPath.contributorName, name);
 	}
 
 	/**
@@ -109,7 +110,7 @@ public class Member extends BaseEntity {
 	 * @set id
 	 */
 	public void setUserid(String id) {
-		setAsString(MemberXPath.userid, id);
+		setAsString(CommunityXPath.contributorUid, id);
 	}
 	
 	/**
@@ -117,7 +118,7 @@ public class Member extends BaseEntity {
 	 * @set email
 	 */
 	public void setEmail(String email) {
-		setAsString(MemberXPath.email, email);
+		setAsString(CommunityXPath.contributorEmail, email);
 	}
 	
 	/**
@@ -125,14 +126,14 @@ public class Member extends BaseEntity {
 	 * @return role
 	 */
 	public String getRole() {
-		return getAsString(MemberXPath.role);
+		return getAsString(CommunityXPath.role);
 	}
 	
 	/**
 	 * @set role
 	 */
 	public void setRole(String role){
-		setAsString(MemberXPath.role, role);
+		setAsString(CommunityXPath.role, role);
 	}
 		
 	public Member load() throws CommunityServiceException

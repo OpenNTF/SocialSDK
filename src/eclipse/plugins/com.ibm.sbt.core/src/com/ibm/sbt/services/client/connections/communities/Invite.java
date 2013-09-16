@@ -1,5 +1,6 @@
 package com.ibm.sbt.services.client.connections.communities;
 
+import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 
@@ -11,10 +12,12 @@ import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 
 public class Invite extends BaseEntity{
 
+	private String communityUuid;
+
 
 	public Invite(CommunityService communityService, String id) {
 		setService(communityService);
-		setAsString(InviteXPath.id, id);
+		setAsString(CommunityXPath.id, id);
 	}
 	
 	public Invite(CommunityService svc, DataHandler<?> handler)
@@ -22,6 +25,19 @@ public class Invite extends BaseEntity{
 		super(svc,handler);
 	}
 	
+	public String getCommunityUuid(){
+    	String communityId = "";
+    	try {
+    		communityId = getAsString(CommunityXPath.inviteCommunityUrl);
+		} catch (Exception e) {}
+    	
+    	if(StringUtil.isEmpty(communityId)){
+    		communityId = communityUuid;
+    	}
+    	//extract the community id from /communities/service/atom/community?communityUuid=33320ce4-058b-4066-95de-efbb44825773
+    	communityId = communityId.substring(communityId.indexOf("=")+1,communityId.length());
+    	return communityId;
+}
 	
 	/**
 	 * getId
@@ -29,7 +45,7 @@ public class Invite extends BaseEntity{
 	 * @return id
 	 */	
 	public String getId() {
-		return getAsString(InviteXPath.id);
+		return getAsString(CommunityXPath.id);
 	}
 	
 	/**
@@ -38,48 +54,54 @@ public class Invite extends BaseEntity{
 	 * @return title
 	 */	
 	public String getTitle() {
-		return getAsString(InviteXPath.title);
+		return getAsString(CommunityXPath.title);
 	}
 
 	/**
-	 * getSummary
+	 * Returns the content
 	 * 
-	 * @return summary
-	 */	
-	public String getSummary() {
-		return getAsString(InviteXPath.summary);
+	 * @return content
+	 */
+	public String getContent() {
+		return getAsString(CommunityXPath.content);
 	}
 
+	/**
+	 * @sets the content
+	 * 
+	 * @param content
+	 */
+	public void setContent(String content) {
+		setAsString(CommunityXPath.content, content);
+	}
+	
 	/**
 	 * Method sets the Invite title
 	 */	
 	public void setTitle(String title) {
-		setAsString(InviteXPath.title, title);
+		setAsString(CommunityXPath.title, title);
 	}
 	
 	/**
-	 * @return the author
+	 * @return the authorUid
 	 */
 	public Member getAuthor(){
-		Member author = new Member(
-					getService(),
-					getAsString(InviteXPath.authorUid), 
-					getAsString(InviteXPath.authorName), 
-					getAsString(InviteXPath.authorEmail));
+		Member author = new Member(getService(), getAsString(CommunityXPath.authorUid));
+		author.setName(getAsString(CommunityXPath.authorName));
+		author.setEmail(getAsString(CommunityXPath.authorEmail));
 		return author;
 	}
 	
 	/**
-	 * @return the Contributor
+	 * @return the ContributorId
 	 */
 	public Member getContributor(){
-		Member contributor = new Member(
-					getService(),
-					getAsString(InviteXPath.contributorUid),
-					getAsString(InviteXPath.contributorName),
-					getAsString(InviteXPath.contributorEmail));
+		Member contributor = new Member(getService(), getAsString(CommunityXPath.contributorUid));
+		contributor.setName(getAsString(CommunityXPath.contributorName));
+		contributor.setEmail(getAsString(CommunityXPath.contributorEmail));
 		return contributor;
 	}
+	
 
 	@Override
 	public CommunityService getService(){

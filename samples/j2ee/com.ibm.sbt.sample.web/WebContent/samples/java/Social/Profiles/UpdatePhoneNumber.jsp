@@ -18,6 +18,7 @@
 <%@page import="com.ibm.commons.runtime.Context"%>
 <%@page import="com.ibm.sbt.services.client.connections.profiles.ProfileService"%>
 <%@page import="com.ibm.sbt.services.client.connections.profiles.Profile"%>
+<%@page import="com.ibm.commons.util.StringUtil"%>
 <%@page
 	language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -34,7 +35,7 @@
 		String userId =  Context.get().getProperty("sample.id1");
 		ProfileService connProfSvc = new ProfileService();
 		Profile profile = connProfSvc.getProfile(userId);
-		if(profile.getUserid()!=null){
+		if(StringUtil.isNotEmpty(profile.getUserid())){
 			profile.setTelephoneNumber("7777779");
 			connProfSvc.updateProfile(profile);
 			profile = connProfSvc.getProfile(userId);

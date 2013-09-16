@@ -44,7 +44,8 @@ org.apache.commons.fileupload.disk.DiskFileItemFactory,org.apache.commons.fileup
 			if (StringUtil.equalsIgnoreCase(type,"image")) {
 				//Create ProfileService instance and call updateProfilePhoto wrapper function to update Profile Pic
 				ProfileService profileService = new ProfileService();
-				profileService.updateProfilePhoto(file);
+				String id = profileService.getMyUserId();
+				profileService.updateProfilePhoto(file, id);
 			} else {
 				request.setAttribute("message", "File selected is not an image file");
 				request.setAttribute("success", "false");

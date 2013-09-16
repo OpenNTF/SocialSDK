@@ -60,7 +60,7 @@ define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscr
                 createEntity : function(service,data,response) {
                     return new JsonDataHandler({
                         data : data,
-                        jsonpath : Consts.ProfileJPath
+                        jsonpath : Consts.ProfileJsonPath
                     });
                 }
             };
@@ -72,15 +72,6 @@ define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscr
                 query : requestArgs
             };
             return this.service.getEntity(consts.GetProfile, options, profileId, callbacks, args);
-		},
-		
-		/**
-		 * Get data feed
-		 * @method getData
-		 * @return {Json} json Feed
-		**/
-		getData: function() {
-			return this.dataHandler.getEntityData();
 		},
 		
 		/**
@@ -210,7 +201,7 @@ define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscr
         createEntity : function(service,data,response) {
         	var entryHandler = new JsonDataHandler({
                     data : data,
-                    jsonpath : Consts.ProfileJPath
+                    jsonpath : Consts.ProfileJsonPath
                 });
 
             return new Profile({
@@ -228,14 +219,14 @@ define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscr
         createEntities : function(service,data,response) {
         	return new JsonDataHandler({
                     data : data,
-                    jsonpath : Consts.ProfileJPath
+                    jsonpath : Consts.ProfileJsonPath
                 });
         }, 
         
         createEntity : function(service,data,response) {
         	var entryHandler = new JsonDataHandler({
                 data : data,
-                jsonpath : Consts.ProfileJPath
+                jsonpath : Consts.ProfileJsonPath
             });
 
         return new Profile({
@@ -315,7 +306,7 @@ define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscr
         getProfileByGUID : function(userId, args) {
             return this.getProfile(userId, args);
         },
-
+        
         /**
          * Get the contact details of a user.
          * 

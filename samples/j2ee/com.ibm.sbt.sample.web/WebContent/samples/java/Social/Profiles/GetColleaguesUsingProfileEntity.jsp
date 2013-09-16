@@ -46,7 +46,7 @@
 					if(colleagues != null && ! colleagues.isEmpty()) {
 						for (Profile colleague : colleagues)
 						{
-						out.println("<b>Name : </b> " + colleague.getDisplayName());
+						out.println("<b>Name : </b> " + colleague.getName());
 						out.println("<br>");
 						}
 					} else {

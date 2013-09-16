@@ -39,11 +39,11 @@
 		ProfileService connProfSvc = new ProfileService();
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("userid", userId);
-		ProfileList profiles = connProfSvc.getReportToChain(userId, params);
+		ProfileList profiles = connProfSvc.getReportingChain(userId, params);
 		if(profiles != null && ! profiles.isEmpty()) {
 			for (Iterator iterator = profiles.iterator(); iterator.hasNext();) {
 				Profile profile = (Profile)iterator.next();
-				out.println("<b>Name : </b> " + profile.getDisplayName());
+				out.println("<b>Name : </b> " + profile.getName());
 				out.println("<br>");
 			}
 		} else {

@@ -22,21 +22,16 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
 import com.ibm.commons.util.StringUtil;
-import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.profiles.feedhandlers.ConnectionEntryFeedHandler;
 import com.ibm.sbt.services.client.connections.profiles.feedhandlers.ProfileFeedHandler;
 import com.ibm.sbt.services.client.connections.profiles.transformers.ConnectionEntryTransformer;
 import com.ibm.sbt.services.client.connections.profiles.transformers.ProfileTransformer;
 import com.ibm.sbt.services.client.connections.profiles.utils.Messages;
-import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.base.datahandlers.JsonDataHandler;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.services.client.ClientService;
@@ -64,10 +59,6 @@ public class ProfileService extends BaseService {
 	 * Used in constructing REST APIs
 	 */
 	public static final String				ProfileBaseUrl	= "{profiles}";
-
-
-	private final ProfileFeedHandler profileFeedHandler = new ProfileFeedHandler(this);
-	private final ConnectionEntryFeedHandler connectionEntryFeedHandler = new ConnectionEntryFeedHandler(this);
 
 	/**
 	 * Constructor Creates ProfileService Object with default endpoint and default cache size
@@ -100,49 +91,25 @@ public class ProfileService extends BaseService {
 	}
 	
 	/**
-	 * Wrapper method to get profile of a user, it makes the network call to fetch the Profile's of a user based on load parameter
-	 * being true/false.
+	 * Wrapper method to get profile of a user
 	 *
-	 * @param userId
+	 * @param id
 	 *             unique identifier of User , it can either be email or id 				
-	 * @param loaded
-	 * 			    if true, fetches profile content from server and populates the data member of {@link Profile} with the fetched content 
 	 * @return Profile
 	 * @throws ProfileServiceException
 	 */
-	public Profile newProfile(String id) throws ProfileServiceException {
-		Profile profile = new Profile(this, id);
-		return profile;
-	}
-
-	public Profile newProfile() throws ProfileServiceException {
-		Profile profile = new Profile(this, "");
-		return profile;
-	}
-
-	public Profile newProfile(Node data) {
-		XPathExpression expr = (data instanceof Document) ? (XPathExpression)ProfileXPath.entry.getPath() : null;
-		XmlDataHandler handler = new XmlDataHandler(data, ConnectionsConstants.nameSpaceCtx, expr);
-		Profile profile = new Profile(this, handler);
-		return profile;
-	}
-
-	public ConnectionEntry newConnectionEntry() throws ProfileServiceException {
-		ConnectionEntry connectionEntry = new ConnectionEntry(this, null);
-		return connectionEntry;
-	}
-
-	public ConnectionEntry newConnectionEntry(Node data) {
-		XPathExpression expr = (data instanceof Document) ? (XPathExpression)ConnectionEntryXPath.entry.getPath() : null;
-		XmlDataHandler handler = new XmlDataHandler(data, ConnectionsConstants.nameSpaceCtx, expr);
-		ConnectionEntry connectionEntry = new ConnectionEntry(this, handler);
-		return connectionEntry;
-	}
-
 	public Profile getProfile(String id) throws ProfileServiceException{
 		return getProfile(id, null);
 	}
-
+	/**
+	 * Wrapper method to get profile of a user
+	 *
+	 * @param id
+	 *             unique identifier of User , it can either be email or id 	
+	 * @param parameters          			
+	 * @return Profile
+	 * @throws ProfileServiceException
+	 */
 	public Profile getProfile(String id, Map<String, String> parameters) throws ProfileServiceException{
 		// TODO: Do a cache lookup first. If cache miss, make a network call to get profile
 
@@ -157,7 +124,7 @@ public class ProfileService extends BaseService {
 		String url = resolveProfileUrl(ProfileAPI.NONADMIN.getProfileEntityType(),ProfileType.GETPROFILE.getProfileType());
 
 		try {
-			profile = (Profile)getEntity(url, parameters, profileFeedHandler);
+			profile = (Profile)getEntity(url, parameters, new ProfileFeedHandler(this));
 		} catch (ClientServicesException e) {
 			throw new ProfileServiceException(e, Messages.ProfileException, id);
 		} catch (IOException e) {
@@ -183,7 +150,7 @@ public class ProfileService extends BaseService {
 
 		ProfileList profiles = null;
 		try {
-			profiles = (ProfileList) getEntities(url, parameters, profileFeedHandler);
+			profiles = (ProfileList) getEntities(url, parameters, new ProfileFeedHandler(this));
 		} catch (ClientServicesException e) {
 			throw new ProfileServiceException(e, Messages.SearchException);
 		} catch (IOException e) {
@@ -232,7 +199,7 @@ public class ProfileService extends BaseService {
 
 		ProfileList profiles = null;
 		try {
-			profiles = (ProfileList) getEntities(url, parameters, profileFeedHandler);
+			profiles = (ProfileList) getEntities(url, parameters, new ProfileFeedHandler(this));
 		} catch (ClientServicesException e) {
 			throw new ProfileServiceException(e, Messages.ColleaguesException, id);
 		} catch (IOException e) {
@@ -280,7 +247,7 @@ public class ProfileService extends BaseService {
 
 		ConnectionEntryList connectionEntries = null;
 		try {
-			connectionEntries = (ConnectionEntryList) getEntities(url, parameters, connectionEntryFeedHandler);
+			connectionEntries = (ConnectionEntryList) getEntities(url, parameters, new ConnectionEntryFeedHandler(this));
 		} catch (ClientServicesException e) {
 			throw new ProfileServiceException(e, Messages.ColleaguesException, id);
 		} catch (IOException e) {
@@ -342,7 +309,7 @@ public class ProfileService extends BaseService {
 
 		ConnectionEntry connectionEntry;
 		try {
-			connectionEntry = (ConnectionEntry)getEntity(url, parameters, connectionEntryFeedHandler);
+			connectionEntry = (ConnectionEntry)getEntity(url, parameters, new ConnectionEntryFeedHandler(this));
 		} catch (ClientServicesException e) {
 			throw new ProfileServiceException(e, Messages.CheckColleaguesException);
 		} catch (IOException e) {
@@ -405,7 +372,7 @@ public class ProfileService extends BaseService {
 
 		ProfileList profiles = null;
 		try {
-			profiles = (ProfileList) getEntities(url, parameters, profileFeedHandler);
+			profiles = (ProfileList) getEntities(url, parameters, new ProfileFeedHandler(this));
 		} catch (ClientServicesException e) {
 			throw new ProfileServiceException(e, Messages.CommonColleaguesException, sourceId, targetId );
 		} catch (IOException e) {
@@ -466,7 +433,7 @@ public class ProfileService extends BaseService {
 
 		ConnectionEntryList connectionEntries = null;
 		try {
-			connectionEntries = (ConnectionEntryList) getEntities(url, parameters, connectionEntryFeedHandler);
+			connectionEntries = (ConnectionEntryList) getEntities(url, parameters, new ConnectionEntryFeedHandler(this));
 		} catch (ClientServicesException e) {
 			throw new ProfileServiceException(e, Messages.CommonColleaguesException, sourceId, targetId);
 		} catch (IOException e) {
@@ -484,8 +451,8 @@ public class ProfileService extends BaseService {
 	 * @return List of Profiles 
 	 * @throws ProfileServiceException
 	 */
-	public ProfileList getReportToChain(String id) throws ProfileServiceException{
-		return getReportToChain(id,null);
+	public ProfileList getReportingChain(String id) throws ProfileServiceException{
+		return getReportingChain(id,null);
 	}
 	/**
 	 * Wrapper method to get a user's report to chain
@@ -497,7 +464,7 @@ public class ProfileService extends BaseService {
 	 * @return List of Profiles
 	 * @throws ProfileServiceException	
 	 */
-	public ProfileList getReportToChain (String id, Map<String, String> parameters)throws ProfileServiceException{
+	public ProfileList getReportingChain (String id, Map<String, String> parameters)throws ProfileServiceException{
 
 		if (StringUtil.isEmpty(id)) {
 			throw new ProfileServiceException(null, Messages.InvalidArgument_1);
@@ -510,7 +477,7 @@ public class ProfileService extends BaseService {
 
 		ProfileList profiles = null;
 		try {
-			profiles = (ProfileList) getEntities(url, parameters, profileFeedHandler);
+			profiles = (ProfileList) getEntities(url, parameters, new ProfileFeedHandler(this));
 		} catch (ClientServicesException e) {
 			throw new ProfileServiceException(e, Messages.ReportingChainException, id);
 		} catch (IOException e) {
@@ -522,18 +489,18 @@ public class ProfileService extends BaseService {
 	}
 
 	/**
-	 * Wrapper method to get a person's direct reports
+	 * Wrapper method to get a person's people managed
 	 * 
 	 * @param id 
 	 * 		   unique identifier of the user whose direct reports are required, it can be email or userID
 	 * @return List of Profiles 
 	 * @throws ProfileServiceException
 	 */
-	public ProfileList getDirectReports(String id) throws ProfileServiceException{
-		return getReportToChain(id,null);
+	public ProfileList getPeopleManaged(String id) throws ProfileServiceException{
+		return getPeopleManaged(id,null);
 	}
 	/**
-	 * Wrapper method to get a person's direct reports
+	 * Wrapper method to get a person's people managed
 	 * 
 	 * @param id
 	 * 		   unique identifier of the user whose direct reports are required, it can be email or userID
@@ -543,7 +510,7 @@ public class ProfileService extends BaseService {
 	 * @throws ProfileServiceException
 	 * 
 	 */
-	public ProfileList getDirectReports(String id, Map<String, String> parameters)throws ProfileServiceException{
+	public ProfileList getPeopleManaged(String id, Map<String, String> parameters)throws ProfileServiceException{
 
 		if (StringUtil.isEmpty(id)) {
 			throw new ProfileServiceException(null, Messages.InvalidArgument_1);
@@ -556,7 +523,7 @@ public class ProfileService extends BaseService {
 
 		ProfileList profiles = null;
 		try {
-			profiles = (ProfileList) getEntities(url, parameters, profileFeedHandler);
+			profiles = (ProfileList) getEntities(url, parameters, new ProfileFeedHandler(this));
 		} catch (ClientServicesException e) {
 			throw new ProfileServiceException(e, Messages.DirectReportsException, id);
 		} catch (IOException e) {
@@ -607,7 +574,7 @@ public class ProfileService extends BaseService {
 
 		ConnectionEntryList connectionEntries = null;
 		try {
-			connectionEntries = (ConnectionEntryList) getEntities(url, parameters, connectionEntryFeedHandler);
+			connectionEntries = (ConnectionEntryList) getEntities(url, parameters, new ConnectionEntryFeedHandler(this));
 		} catch (ClientServicesException e) {
 			throw new ProfileServiceException(e, Messages.ConnectionsByStatusException, id);
 		} catch (IOException e) {
@@ -657,7 +624,7 @@ public class ProfileService extends BaseService {
 
 		ProfileList profiles = null;
 		try {
-			profiles = (ProfileList) getEntities(url, parameters, profileFeedHandler);
+			profiles = (ProfileList) getEntities(url, parameters, new ProfileFeedHandler(this));
 		} catch (ClientServicesException e) {
 			throw new ProfileServiceException(e, Messages.ConnectionsByStatusException, id);
 		} catch (IOException e) {
@@ -943,7 +910,7 @@ public class ProfileService extends BaseService {
 	 * @throws ProfileServiceException 
 	 */
 	protected Object constructSendInviteRequestBody(String inviteMsg) throws TransformerException, ProfileServiceException {
-		ConnectionEntry connectionEntry = this.newConnectionEntry();
+		ConnectionEntry connectionEntry = new ConnectionEntry(this, null);
 		connectionEntry.setContent(inviteMsg);
 		ConnectionEntryTransformer transformer = new ConnectionEntryTransformer(connectionEntry);
 		String xml = transformer.createTransform(connectionEntry.getFieldsMap());

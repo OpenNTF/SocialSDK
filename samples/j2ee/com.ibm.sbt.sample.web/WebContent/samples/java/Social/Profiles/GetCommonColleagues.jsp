@@ -50,7 +50,7 @@
 				out.println("<br>");
 				for (Iterator iterator = entries.iterator(); iterator.hasNext();) {
 					Profile entry = (Profile) iterator.next();
-					out.println(entry.getDisplayName());
+					out.println(entry.getName());
 					out.println("<br>");
 				}
 			} else {

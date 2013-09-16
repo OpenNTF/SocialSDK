@@ -43,15 +43,19 @@
 		String communityId = communities.get(0).getCommunityUuid();
 		
 		MemberList members = communityService.getMembers(communityId);
-		if(members !=null && members.size()>1){
+		if(members !=null && members.size()>1){ // size>1 so as to ensure we do not change onwnership of already a owner
+		Boolean roleMemberFound = false;
 			for (Member member :members){
 				if(member.getRole().equalsIgnoreCase("member")){
+					roleMemberFound = true;
 					member.setRole("owner");
 					communityService.updateMember(communityId,member);
 					member = member.load();
 					out.println("member with name : "+member.getName()+" updated with role "+ member.getRole()+"<br>");
-	
 				}
+			}
+			if(roleMemberFound == false){
+					out.println("No members with \"member\" role found in this community");
 			}
 		}
 		else{
@@ -59,7 +63,6 @@
 		}
 		
 	} catch (Throwable e) {
-		e.printStackTrace();
 		out.println("<pre>");
 		out.println(e.getMessage());
 		out.println("</pre>");

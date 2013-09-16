@@ -111,10 +111,10 @@ define(['./xml'], function(xml) {
             if (str.length == 0) {
             	return 0;
             }
-            var hash = 0, i, char;
+            var hash = 0, i, charStr;
             for (i = 0, l = str.length; i < l; i++) {
-                char = str.charCodeAt(i);
-                hash = ((hash<<5)-hash)+char;
+            	charStr = str.charCodeAt(i);
+                hash = ((hash<<5)-hash)+charStr;
                 hash |= 0;
             }
             return hash;

@@ -28,7 +28,6 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonJavaFactory;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.commons.util.io.json.JsonParser;
-import com.ibm.jscript.InterpretException;
 import com.ibm.sbt.jslibrary.SBTEnvironment;
 import com.ibm.xsp.model.domino.DominoUtils;
 import com.ibm.xsp.sbtsdk.servlets.JavaScriptLibraries;

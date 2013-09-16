@@ -68,6 +68,16 @@ public class Profile extends BaseEntity {
 	}
 
 	/**
+	 * getObjectId
+	 * 			Returns the object id of the User
+	 * @return String
+	 * 			objectId	
+	**/
+	public String getObjectId() {
+		return this.getAsString(ProfileJsonPath.ObjectId);
+	}
+	
+	/**
 	 * getEmail
 	 * 			returns the email address of the user
 	 * @return string

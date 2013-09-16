@@ -44,6 +44,16 @@
 			community = svc.getCommunity(community.getCommunityUuid());
 			String title = community.getTitle();
 			out.println("<b>Title is: </b>" + title);
+			out.println("<b>Type : </b>" + community.getCommunityType()+"<br>");
+			out.println("<b>Url : </b>" + community.getCommunityUrl()+"<br>");
+			out.println("<b>uuid : </b>" + community.getCommunityUuid()+"<br>");
+			out.println("<b>content : </b>" + community.getContent()+"<br>");
+			out.println("<b>community url : </b>" + community.getCommunityUrl()+"<br>");
+			out.println("<b>logo url : </b>" + community.getLogoUrl()+"<br>");
+			out.println("<b>member count : </b>" + community.getMemberCount()+"<br>");
+			out.println("<b>member url : </b>" + community.getMembersUrl()+"<br>");
+			out.println("<b>summary : </b>" + community.getSummary()+"<br>");
+			
 			
 		} catch (Throwable e) {
 			out.println("<pre>");

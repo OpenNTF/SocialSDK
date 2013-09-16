@@ -13,26 +13,26 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-package com.ibm.sbt.services.client.connections.communities.feedhandlers;
+package com.ibm.sbt.services.client.connections.communities.feedhandler;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.IFeedHandler;
-import com.ibm.sbt.services.client.connections.communities.Invite;
-import com.ibm.sbt.services.client.connections.communities.InviteList;
+import com.ibm.sbt.services.client.connections.communities.Community;
+import com.ibm.sbt.services.client.connections.communities.CommunityList;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
-import com.ibm.sbt.services.client.connections.communities.InviteXPath;
+import com.ibm.sbt.services.client.connections.communities.CommunityXPath;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 
 /**
  * 
- * @author Swati Singh
+ * @author Carlos Manias
  *
  */
-public class InviteFeedHandler implements IFeedHandler {
+public class CommunityFeedHandler implements IFeedHandler {
 
 	private final CommunityService service;
 	
@@ -41,40 +41,40 @@ public class InviteFeedHandler implements IFeedHandler {
 	 * 
 	 * @param service
 	 */
-	public InviteFeedHandler(CommunityService service){
+	public CommunityFeedHandler(CommunityService service){
 		this.service = service;
 	}
 	
 	/**
 	 * @param requestData
-	 * @return Invite
+	 * @return community
 	 */
 	@Override
-	public Invite createEntity(Response requestData) {
+	public Community createEntity(Response requestData) {
 		Node data = (Node)requestData.getData();
 		return createEntityFromData(data);
 	}
 	
 	/**
 	 * @param data object
-	 * @return Invite
+	 * @return community
 	 */
 	@Override
-	public Invite createEntityFromData(Object data) {
+	public Community createEntityFromData(Object data) {
 		Node node = (Node)data;
-		XPathExpression expr = (data instanceof Document) ? (XPathExpression)InviteXPath.entry.getPath() : null;
+		XPathExpression expr = (data instanceof Document) ? (XPathExpression)CommunityXPath.entry.getPath() : null;
 		XmlDataHandler handler = new XmlDataHandler(node, ConnectionsConstants.nameSpaceCtx, expr);
-		Invite invite = new Invite(service, handler);
-		return invite;
+		Community community = new Community(service, handler);
+		return community;
 	}
 
 	/**
 	 * @param data object
-	 * @return Collection of community Invitations
+	 * @return Collection of communities
 	 */
 	@Override
-	public InviteList createEntityList(Response requestData) {
-		return new InviteList((Response)requestData, this);
+	public CommunityList createEntityList(Response requestData) {
+		return new CommunityList((Response)requestData, this);
 	}
 
 	/**

@@ -29,11 +29,11 @@ import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.base.util.EntityUtil;
-import com.ibm.sbt.services.client.connections.communities.feedhandlers.BookmarkFeedHandler;
-import com.ibm.sbt.services.client.connections.communities.feedhandlers.CommunityFeedHandler;
+import com.ibm.sbt.services.client.connections.communities.feedhandler.BookmarkFeedHandler;
+import com.ibm.sbt.services.client.connections.communities.feedhandler.CommunityFeedHandler;
 import com.ibm.sbt.services.client.connections.forums.feedhandler.TopicsFeedHandler;
-import com.ibm.sbt.services.client.connections.communities.feedhandlers.InviteFeedHandler;
-import com.ibm.sbt.services.client.connections.communities.feedhandlers.MemberFeedHandler;
+import com.ibm.sbt.services.client.connections.communities.feedhandler.InviteFeedHandler;
+import com.ibm.sbt.services.client.connections.communities.feedhandler.MemberFeedHandler;
 import com.ibm.sbt.services.client.connections.communities.tranformers.CommunityMemberTransformer;
 import com.ibm.sbt.services.client.connections.communities.util.Messages;
 import com.ibm.sbt.services.client.connections.forums.ForumService;
@@ -153,25 +153,6 @@ public class CommunityService extends BaseService {
 		}
 		
 		return community;
-	}
-	
-	public Community newCommunity() throws CommunityServiceException {
-		return new Community(this, "");
-	}
-	
-	public Community newCommunity(String communityUuid) throws CommunityServiceException {
-		return new Community(this, communityUuid);
-	}
-	
-	/**
-	 * This method returns the Communities of which the user is a member or owner.
-	 * 
-	 * @param community
-	 * @return MemberList
-	 * @throws CommunityServiceException
-	 */
-	public MemberList getMembers(Community community) throws CommunityServiceException {
-		return getMembers(community.getCommunityUuid(), null);
 	}
 	
 	/**
@@ -378,6 +359,7 @@ public class CommunityService extends BaseService {
 		InviteList invites = null;
 		try {
 			invites = (InviteList) getEntities(requestUrl, parameters, new InviteFeedHandler(this));
+			
 		}catch (ClientServicesException e) {
 			throw new CommunityServiceException(e, Messages.CommunityInvitationsException);
 		} catch (IOException e) {
@@ -502,23 +484,6 @@ public class CommunityService extends BaseService {
 		
 		return member;
 	}
-	
-	/**
-	 * Wrapper method to add member to a community.
-	 * <p> 
-	 * User should be logged in as a owner of the community to call this method
-	 * Role of the newly added member defaults to "Member"
-	 * 
-	 * @param communityUuid 
-	 * 				 Id of Community to which the member needs to be added
-	 * @param memberId
-	 * 				 Id of Member which is to be added
-	 * @throws CommunityServiceException
-	 */
-	public boolean addMember(String communityUuid, String memberId) throws CommunityServiceException {
-		return addMember(communityUuid,memberId,null);
-	}
-
 	/**
 	 * Wrapper method to add member to a community.
 	 * <p> 
@@ -528,28 +493,26 @@ public class CommunityService extends BaseService {
 	 * 				 Id of Community to which the member needs to be added
 	 * @param memberId
 	 * 				 Id of Member which is to be added
-	 * @role
-	 * 				 Role of newly added member in Community ("eg : owner")
 	 * @throws CommunityServiceException
 	 */
-	public boolean addMember(String communityUuid, String memberId, String role) throws CommunityServiceException {
-		if (StringUtil.isEmpty(communityUuid)||StringUtil.isEmpty(memberId)){
+	public boolean addMember(String communityUuid, Member member) throws CommunityServiceException {
+		if (StringUtil.isEmpty(communityUuid)){
 			throw new CommunityServiceException(null, Messages.NullCommunityIdUserIdOrRoleException);
 		}
-		
-		if(StringUtil.isEmpty(role)){
-			role = "member"; //default role is member
-		}
 
+		try {
+			if(StringUtil.isEmpty(member.getRole())){
+				member.setRole("member"); //default role is member
+			}
+		} catch (Exception e) {	
+			member.setRole("member"); 
+		}
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
 		
-		Map<String, Object> fields = new HashMap<String, Object>();
-		fields.put("id", memberId);
-		fields.put("role", role);
 		Object communityPayload;
 		try {
-			communityPayload = new CommunityMemberTransformer().transform(fields);
+			communityPayload = new CommunityMemberTransformer().transform(member.getFieldsMap());
 		} catch (TransformerException e) {
 			throw new CommunityServiceException(e, Messages.CreateCommunityPayloadException);
 		}
@@ -560,9 +523,9 @@ public class CommunityService extends BaseService {
 			int statusCode = response.getResponse().getStatusLine().getStatusCode();
 			return statusCode == HttpServletResponse.SC_CREATED;
 		} catch (ClientServicesException e) {
-			throw new CommunityServiceException(e, Messages.AddMemberException, memberId, role, communityUuid);
+			throw new CommunityServiceException(e, Messages.AddMemberException, member.getUserid(), communityUuid);
 		} catch (IOException e) {
-			throw new CommunityServiceException(e, Messages.AddMemberException, memberId, role, communityUuid);
+			throw new CommunityServiceException(e, Messages.AddMemberException, member.getUserid(), communityUuid);
 		}
 	}
 	/**
@@ -638,19 +601,6 @@ public class CommunityService extends BaseService {
 		}
 	}
 
-	/**
-	 * Wrapper method to delete a community
-	 * <p>
-	 * User should be logged in as a owner of the community to call this method.
-	 * 
-	 * @param String
-	 * 				community which is to be deleted
-	 * @throws CommunityServiceException
-	 */
-	public void deleteCommunity(Community community) throws CommunityServiceException {
-		deleteCommunity(community.getCommunityUuid());
-	}
-	
 	/**
 	 * Wrapper method to delete a community
 	 * <p>

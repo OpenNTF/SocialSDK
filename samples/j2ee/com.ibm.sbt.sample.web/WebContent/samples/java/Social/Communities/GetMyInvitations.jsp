@@ -40,10 +40,9 @@
 			
 			out.println("<br>Listing Invites <br>");
 			for (Invite invite : invites) {
-				out.println("<b>Invites Title : </b> " + invite.getTitle());
-				out.println("<br>");
+				out.println("<b>Invites Title : </b> " + invite.getTitle()+"<br>");
+				out.println("<b>Invites recieved from "+invite.getAuthor().getName()+"<br>");
 			}
-			
 		} catch (Throwable e) {
 			out.println("<pre>");
 			out.println(e.getMessage());

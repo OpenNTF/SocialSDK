@@ -48,9 +48,9 @@ public class Profile extends BaseEntity{
 		super(svc,handler);
 	}
 	
-    public void load() throws ProfileServiceException
+    public Profile load() throws ProfileServiceException
     {
-    	getService().getProfile(getReqId());
+    	return getService().getProfile(getUserid());
     }
     
     public void update() throws ProfileServiceException
@@ -70,7 +70,7 @@ public class Profile extends BaseEntity{
 	/**
      * @return the name
      */
-    public String getDisplayName() {
+    public String getName() {
     	return getAsString(ProfileXPath.name);
     }
    
@@ -80,18 +80,22 @@ public class Profile extends BaseEntity{
     public String getEmail() {
     	return getAsString(ProfileXPath.email);
     }
+    
+    public String getGroupwareEmail() {
+    	return getAsString(ProfileXPath.groupwareMail);
+    }
     /**
      * @return the Title
      */
       
-    public String getTitle() {
-    	return getAsString(ProfileXPath.title);
+    public String getJobTitle() {
+    	return getAsString(ProfileXPath.jobTitle);
     }
     /**
      * @return the telephone number
      */
     
-    public String getPhoneNumber() {
+    public String getTelephoneNumber() {
     	return getAsString(ProfileXPath.telephoneNumber);
     }
     /**
@@ -125,9 +129,9 @@ public class Profile extends BaseEntity{
     }
     
     /**
-     * @return the about me
+     * @return the summary
      */
-    public String  getAbout() {
+    public String  getSummary() {
     	return getAsString(ProfileXPath.summary);
     }
     /**
@@ -149,39 +153,13 @@ public class Profile extends BaseEntity{
    
     public Object getAddress() {
     	 HashMap<String, String> AddressMap = new HashMap<String, String>();
-//    	 AddressMap.put("country",get("countryName"));
-//    	 AddressMap.put("locality",get("locality"));
-//    	 AddressMap.put("postalCode",get("postalCode"));
-//    	 AddressMap.put("region",get("region"));
-//     	 AddressMap.put("streetAddress",StringUtil.format(",", get("streetAddress"), get("extendedAddress")));
-    	 AddressMap.put("building",getAsString(ProfileXPath.building));
-    	 AddressMap.put("floor",getAsString(ProfileXPath.floor));
+    	 AddressMap.put("countryName", getAsString(ProfileXPath.countryName));
+    	 AddressMap.put("locality", getAsString(ProfileXPath.locality));
+    	 AddressMap.put("postalCode", getAsString(ProfileXPath.postalCode));
+    	 AddressMap.put("region", getAsString(ProfileXPath.region));
+     	 AddressMap.put("streetAddress", getAsString(ProfileXPath.streetAddress));
+    	 AddressMap.put("extendedAddress", getAsString(ProfileXPath.extendedAddress));
     	 return AddressMap;
-    }
-  
-     /**
-     * @return the id
-     */
-    public String getUniqueId() {
-    	return getAsString(ProfileXPath.uid);
-    }
-
-   
-    public String getReqId() {
-    	return fields.get(ProfileXPath.uid).toString();
-    }
-   
-    public void setReqId(String id) {
-    	fields.put(ProfileXPath.uid.getName(), id);
-    }
-      
-    public void setBuilding(String building) {
-        setAsString(ProfileXPath.building, building);
-    }
-    
-    
-    public void setFloor(String floor) {
-        setAsString(ProfileXPath.floor, floor);
     }
     
     public void setAddress(Map<String, String> addressMap) {
@@ -204,15 +182,18 @@ public class Profile extends BaseEntity{
 			if(addressPairs.getKey().equalsIgnoreCase("streetAddress")) {
 				setAsString(ProfileXPath.streetAddress,addressPairs.getValue());
 			}
+			if(addressPairs.getKey().equalsIgnoreCase("extendedAddress")) {
+				setAsString(ProfileXPath.extendedAddress,addressPairs.getValue());
+			}
 		}
    }
     
-    public void setPhoneNumber(String telephoneNumber){
+    public void setTelephoneNumber(String telephoneNumber){
     	setAsString(ProfileXPath.telephoneNumber, telephoneNumber);
     }
     
-    public void setTitle(String title){
-    	setAsString(ProfileXPath.title, title);
+    public void setJobTitle(String title){
+    	setAsString(ProfileXPath.jobTitle, title);
     }
     
     public void setEmail(String email){

@@ -12,6 +12,9 @@ import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 
 public class Invite extends BaseEntity{
 
+	private String communityUuid;
+
+
 	public Invite(CommunityService communityService, String id) {
 		setService(communityService);
 		setAsString(CommunityXPath.id, id);
@@ -21,6 +24,20 @@ public class Invite extends BaseEntity{
 	{
 		super(svc,handler);
 	}
+	
+	public String getCommunityUuid(){
+    	String communityId = "";
+    	try {
+    		communityId = getAsString(CommunityXPath.inviteCommunityUrl);
+		} catch (Exception e) {}
+    	
+    	if(StringUtil.isEmpty(communityId)){
+    		communityId = communityUuid;
+    	}
+    	//extract the community id from /communities/service/atom/community?communityUuid=33320ce4-058b-4066-95de-efbb44825773
+    	communityId = communityId.substring(communityId.indexOf("=")+1,communityId.length());
+    	return communityId;
+}
 	
 	/**
 	 * getId
@@ -38,15 +55,6 @@ public class Invite extends BaseEntity{
 	 */	
 	public String getTitle() {
 		return getAsString(CommunityXPath.title);
-	}
-
-	/**
-	 * getSummary
-	 * 
-	 * @return summary
-	 */	
-	public String getSummary() {
-		return getAsString(CommunityXPath.summary);
 	}
 
 	/**

@@ -27,13 +27,14 @@ import com.ibm.sbt.services.client.base.datahandlers.FieldEntry;
  */
 public enum CommunityXPath implements FieldEntry {
 	entry("/a:entry"),
+	id("./a:id"),
 	communityUuid("./snx:communityUuid"), 
 	title("./a:title"),
 	summary("./a:summary[@type='text']"),
 	logoUrl("./a:link[@rel='http://www.ibm.com/xmlns/prod/sn/logo']/@href"),
 	membersUrl("./a:link[@rel='http://www.ibm.com/xmlns/prod/sn/member-list']/@href"),
 	communityUrl("./a:link[@rel='alternate']/@href"),
-	tags("./a:category/@term"), 
+	tags("./category/@term"), 
 	content("./a:content[@type='html']"),
 	memberCount("./snx:membercount"),
 	communityType("./snx:communityType"), 
@@ -44,7 +45,9 @@ public enum CommunityXPath implements FieldEntry {
 	authorEmail("./a:author/a:email"),
 	contributorUid("./a:contributor/snx:userid"),
 	contributorName("./a:contributor/a:name"),
-	contributorEmail("./a:contributor/a:email");
+	contributorEmail("./a:contributor/a:email"),
+	communityTheme("./snx:communityTheme"),
+	role("./snx:role");
 	
 	private final XPathExpression path;
 	

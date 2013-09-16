@@ -1,4 +1,4 @@
-/*
+ /*
  * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
@@ -13,17 +13,17 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-package com.ibm.sbt.services.client.connections.communities.feedhandlers;
+package com.ibm.sbt.services.client.connections.communities.feedhandler;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.IFeedHandler;
-import com.ibm.sbt.services.client.connections.communities.Community;
-import com.ibm.sbt.services.client.connections.communities.CommunityList;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
 import com.ibm.sbt.services.client.connections.communities.CommunityXPath;
+import com.ibm.sbt.services.client.connections.communities.Member;
+import com.ibm.sbt.services.client.connections.communities.MemberList;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 
@@ -32,7 +32,7 @@ import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
  * @author Carlos Manias
  *
  */
-public class CommunityFeedHandler implements IFeedHandler {
+public class MemberFeedHandler implements IFeedHandler {
 
 	private final CommunityService service;
 	
@@ -41,40 +41,40 @@ public class CommunityFeedHandler implements IFeedHandler {
 	 * 
 	 * @param service
 	 */
-	public CommunityFeedHandler(CommunityService service){
+	public MemberFeedHandler(CommunityService service){
 		this.service = service;
 	}
 	
 	/**
 	 * @param requestData
-	 * @return community
+	 * @return community member
 	 */
 	@Override
-	public Community createEntity(Response requestData) {
+	public Member createEntity(Response requestData) {
 		Node data = (Node)requestData.getData();
 		return createEntityFromData(data);
 	}
 	
 	/**
 	 * @param data object
-	 * @return community
+	 * @return community member
 	 */
 	@Override
-	public Community createEntityFromData(Object data) {
+	public Member createEntityFromData(Object data) {
 		Node node = (Node)data;
 		XPathExpression expr = (data instanceof Document) ? (XPathExpression)CommunityXPath.entry.getPath() : null;
 		XmlDataHandler handler = new XmlDataHandler(node, ConnectionsConstants.nameSpaceCtx, expr);
-		Community community = new Community(service, handler);
-		return community;
+		Member member = new Member(service, handler);
+		return member;
 	}
 
 	/**
 	 * @param data object
-	 * @return Collection of communities
+	 * @return Collection of community members
 	 */
 	@Override
-	public CommunityList createEntityList(Response requestData) {
-		return new CommunityList((Response)requestData, this);
+	public MemberList createEntityList(Response requestData) {
+		return new MemberList((Response)requestData, this);
 	}
 
 	/**

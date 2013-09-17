@@ -5,13 +5,9 @@ require(["sbt/dom", "sbt/json", "sbt/smartcloud/ProfileService"],
         var profileService = new ProfileService();
         var promise = profileService.getContact("%{name=sample.smartcloud.contactGUID|helpSnippetId=Social_Profiles_SmartCloud_Get_Profile}"); 
         promise.then(    
-            function(profiles){
-            	var result = [];
-              	 for(var i=0; i<profiles.length; i++){
-                       var profile = profiles[i];	           
-                       result.push({"Name" : profile.getDisplayName()}); 
-                   }  
-              	 results.push(result);
+            function(profile){
+            	var result = {"Name" : profile.getDisplayName()}; 
+                results.push(result);
               	dom.setText("json", json.jsonBeanStringify(results));
               },
               function(error) {

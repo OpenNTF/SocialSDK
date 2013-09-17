@@ -571,13 +571,13 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
          * Get the tags for the specified profile
          * 
          * @method getTags
-         * @param {Object/String} profileOrId profile object representing the profile or user/email of the profile
+         * @param {String} id userId/email of the profile
          * @param {Object} args Object representing various query parameters that can be passed. The parameters must 
          * be exactly as they are supported by IBM Connections.
          */
-        getTags : function(profileOrId, args) {
+        getTags : function(id, args) {
             // detect a bad request by validating required arguments
-            var idObject = this._toTargetObject(profileOrId);
+            var idObject = this._toTargetObject(id);
             var promise = this._validateTargetObject(idObject);
             if (promise) {
                 return promise;
@@ -597,14 +597,14 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
          * Get the colleagues for the specified profile
          * 
          * @method getColleagues
-         * @param {Object/String} profileOrId profile object representing the profile or user/email of the profile
+         * @param {String} id userId/email of the profile
          * @param {Object} args Object representing various query parameters
          *            that can be passed. The parameters must be exactly as they are
          *            supported by IBM Connections.
          */
-        getColleagues : function(profileOrId, args) {
+        getColleagues : function(id, args) {
             // detect a bad request by validating required arguments
-            var idObject = this._toIdObject(profileOrId);
+            var idObject = this._toIdObject(id);
             var promise = this._validateIdObject(idObject);
             if (promise) {
                 return promise;
@@ -627,14 +627,14 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
          * Get the reporting chain for the specified person.
          * 
          * @method getReportingChain
-         * @param {Object/String} profileOrId profile object representing the profile or user/email of the profile
+         * @param {String} id userId/email of the profile
          * @param {Object} args Object representing various query parameters
          *            that can be passed. The parameters must be exactly as they are
          *            supported by IBM Connections.
          */
-        getReportingChain : function(profileOrId, args) {
+        getReportingChain : function(id, args) {
             // detect a bad request by validating required arguments
-            var idObject = this._toIdObject(profileOrId);
+            var idObject = this._toIdObject(id);
             var promise = this._validateIdObject(idObject);
             if (promise) {
                 return promise;
@@ -654,14 +654,14 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
          * Get the people managed for the specified person.
          * 
          * @method getPeopleManaged
-         * @param {Object/String} profileOrId profile object representing the profile or user/email of the profile
+         * @param {String} id userId/email of the profile
          * @param {Object} args Object representing various query parameters
          *            that can be passed. The parameters must be exactly as they are
          *            supported by IBM Connections.
          */
-        getPeopleManaged : function(profileOrId, args) {
+        getPeopleManaged : function(id, args) {
             // detect a bad request by validating required arguments
-            var idObject = this._toIdObject(profileOrId);
+            var idObject = this._toIdObject(id);
             var promise = this._validateIdObject(idObject);
             if (promise) {
                 return promise;
@@ -704,10 +704,10 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
 		 * Updates the profile photo of a user.
 		 * @method updateProfilePhoto
 		 * @param {Object} fileControlOrId The Id of html control or the html control
-		 * @param @param {Object/String} profileOrId profile object representing the profile or user/email of the profile 
+		 * @param @param {String} id userId/email of the profile 
 		 * @param {Object} [args] The additional parameters
 		 */
-		updateProfilePhoto: function (fileControlOrId, profileOrId, args) {
+		updateProfilePhoto: function (fileControlOrId, id, args) {
 			var promise = this.validateField("File Control Or Id", fileControlOrId);
 			if (promise) {
 				return promise;
@@ -717,7 +717,7 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
 				return promise;
 			}			
 			
-			var idObject = this._toIdObject(profileOrId);
+			var idObject = this._toIdObject(id);
 			var files = null;
 			if (typeof fileControlOrId == "string") {
 				var fileControl = document.getElementById(fileControlOrId);

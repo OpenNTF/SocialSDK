@@ -13,15 +13,14 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-package com.ibm.sbt.services.client.connections.files.model;
+package com.ibm.sbt.services.client.connections.files;
 
 import java.util.Date;
 
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
-import com.ibm.sbt.services.client.connections.files.FileEntryXPath;
-import com.ibm.sbt.services.client.connections.files.FileService;
+import com.ibm.sbt.services.client.connections.files.model.FileEntryXPath;
 
 /**
  * Comment Entry Class - representing a Comment Entry of the File.

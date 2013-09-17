@@ -1,4 +1,4 @@
-package com.ibm.sbt.services.client.connections.files;
+package com.ibm.sbt.services.client.connections.files.model;
 
 import com.ibm.commons.xml.DOMUtil;
 import com.ibm.commons.xml.XMLException;

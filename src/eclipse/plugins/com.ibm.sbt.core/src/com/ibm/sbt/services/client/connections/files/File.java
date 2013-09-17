@@ -13,7 +13,7 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-package com.ibm.sbt.services.client.connections.files.model;
+package com.ibm.sbt.services.client.connections.files;
 
 import java.util.Map;
 
@@ -21,10 +21,11 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
-import com.ibm.sbt.services.client.connections.files.FileEntryXPath;
-import com.ibm.sbt.services.client.connections.files.FileService;
-import com.ibm.sbt.services.client.connections.files.FileServiceException;
+import com.ibm.sbt.services.client.connections.files.model.Author;
+import com.ibm.sbt.services.client.connections.files.model.Modifier;
+import com.ibm.sbt.services.client.connections.files.model.Person;
 import com.ibm.sbt.services.client.connections.files.util.FileConstants;
+import com.ibm.sbt.services.client.connections.files.model.FileEntryXPath;
 
 /**
  * @Represents Connections File

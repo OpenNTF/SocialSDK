@@ -1,9 +1,9 @@
-require(["sbt/connections/ForumService", "sbt/dom"], 
-    function(ForumService,dom) {
-        var createRow = function(forum) {
-            var title = forum.getTitle(); 
-            var forumUuid = forum.getForumUuid(); 
-            var communityUuid = forum.getCommunityUuid(); 
+require(["sbt/connections/CommunityService", "sbt/dom"], 
+    function(CommunityService,dom) {
+        var createRow = function(topic) {
+            var title = topic.getTitle(); 
+            var forumUuid = topic.getForumUuid(); 
+            var communityUuid = topic.getCommunityUuid(); 
         	
             var table = dom.byId("forumsTable");
             var tr = document.createElement("tr");
@@ -19,15 +19,15 @@ require(["sbt/connections/ForumService", "sbt/dom"],
             tr.appendChild(td);
         };
 
-        var forumService = new ForumService();
-        forumService.getMyForums({ since : 0 }).then(
-            function(forums) {
-                if (forums.length == 0) {
-                    text = "You do not have any forums.";
+        var communityService = new CommunityService();
+        communityService.getForumTopics("%{sample.communityId}").then(
+            function(topics) {
+                if (topics.length == 0) {
+                    text = "Community does not have any forums topics.";
                 } else {
-                    for(var i=0; i<forums.length; i++){
-                        var forum = forums[i];
-                        createRow(forum);
+                    for(var i=0; i<topics.length; i++){
+                        var topic = topics[i];
+                        createRow(topic);
                     }
                 }
             },

@@ -3,7 +3,7 @@ require(["sbt/connections/CommunityService", "sbt/dom", "sbt/json"],
         var communityService = new CommunityService();  
         var community = communityService.newCommunity(); 
         var now = new Date();
-        community.setTitle("Test Community " + now.getTime());
+        community.setTitle("CommunityNewSave.js " + now.getTime());
         community.setContent("Test community created: " + now);
         var promise = community.save();
         promise.then(

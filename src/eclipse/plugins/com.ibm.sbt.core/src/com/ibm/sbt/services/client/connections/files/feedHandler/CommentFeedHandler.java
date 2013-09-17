@@ -8,7 +8,7 @@ import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.files.CommentList;
 import com.ibm.sbt.services.client.connections.files.FileService;
-import com.ibm.sbt.services.client.connections.files.model.Comment;
+import com.ibm.sbt.services.client.connections.files.Comment;
 
 public class CommentFeedHandler implements IFeedHandler {
 	

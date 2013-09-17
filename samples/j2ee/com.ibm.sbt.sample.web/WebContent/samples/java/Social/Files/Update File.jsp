@@ -17,8 +17,8 @@
 <%@page import="com.ibm.sbt.services.client.connections.files.model.FileRequestPayload"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.model.FileCreationParameters"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.FileService"%>
-<%@page import="com.ibm.sbt.services.client.connections.files.model.Comment"%>
-<%@page import="com.ibm.sbt.services.client.connections.files.model.File"%>
+<%@page import="com.ibm.sbt.services.client.connections.files.Comment"%>
+<%@page import="com.ibm.sbt.services.client.connections.files.File"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.FileList"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Date"%>

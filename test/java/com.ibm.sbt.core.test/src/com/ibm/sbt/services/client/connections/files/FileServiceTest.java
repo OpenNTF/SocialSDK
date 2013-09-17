@@ -25,8 +25,6 @@ import java.util.List;
 import org.junit.Test;
 
 import com.ibm.sbt.services.BaseUnitTest;
-import com.ibm.sbt.services.client.connections.files.model.Comment;
-import com.ibm.sbt.services.client.connections.files.model.File;
 
 public class FileServiceTest extends BaseUnitTest {
 

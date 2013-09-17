@@ -15,9 +15,9 @@
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@page import="com.ibm.sbt.services.client.connections.files.FileService"%>
-<%@page import="com.ibm.sbt.services.client.connections.files.model.CommentEntry"%>
-<%@page import="com.ibm.sbt.services.client.connections.files.model.FileEntry"%>
-<%@page import="com.ibm.sbt.services.client.connections.files.FileEntryList"%>
+<%@page import="com.ibm.sbt.services.client.connections.files.model.Comment"%>
+<%@page import="com.ibm.sbt.services.client.connections.files.model.File"%>
+<%@page import="com.ibm.sbt.services.client.connections.files.FileList"%>
 <%@page import="java.util.List"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
@@ -37,8 +37,8 @@
 	<%
 	try {
 			FileService fileService = new FileService();
-        	List<FileEntry> fileEntries = fileService.getMyFiles();
-        	FileEntry fileEntry = fileEntries.get(0);
+        	List<File> fileEntries = fileService.getMyFiles();
+        	File fileEntry = fileEntries.get(0);
 			String fileId = fileEntry.getFileId();
 				out.println("<b> Locking File</b>" + fileId);	
 				fileService.lock(fileId);

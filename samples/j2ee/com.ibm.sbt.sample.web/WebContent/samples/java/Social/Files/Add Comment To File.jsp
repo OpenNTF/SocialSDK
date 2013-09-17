@@ -15,9 +15,9 @@
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@page import="com.ibm.sbt.services.client.connections.files.FileService"%>
-<%@page import="com.ibm.sbt.services.client.connections.files.model.CommentEntry"%>
-<%@page import="com.ibm.sbt.services.client.connections.files.model.FileEntry"%>
-<%@page import="com.ibm.sbt.services.client.connections.files.FileEntryList"%>
+<%@page import="com.ibm.sbt.services.client.connections.files.model.Comment"%>
+<%@page import="com.ibm.sbt.services.client.connections.files.model.File"%>
+<%@page import="com.ibm.sbt.services.client.connections.files.FileList"%>
 <%@page import="java.util.List"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>  
@@ -39,20 +39,20 @@
 	<h4>Add Comment To File</h4>
 	<div id="content">
 	<%
-	    try { 
-	        FileService fileService = new FileService();
-	        FileEntryList fileEntries = fileService.getMyFiles();
-	        FileEntry fileEntry = fileEntries.get(0);
-	        CommentEntry commentEntry = fileService.addCommentToFile(fileEntry, "Comment added by Add Comment To File java sample at " + System.currentTimeMillis(), null);
-	        if (commentEntry != null) {
-	        	String commentId = commentEntry.getCommentId();
-	            out.println("Comment Id : " + commentId + "<br/>");
-	        }
-	    } catch (Throwable e) {
-	        out.println("<pre>");
-	      	out.println(e.getMessage());
-	        out.println("</pre>");
-	    }
+		try { 
+			        FileService fileService = new FileService();
+			        FileList fileEntries = fileService.getMyFiles();
+			        File fileEntry = fileEntries.get(0);
+			        Comment commentEntry = fileService.addCommentToFile(fileEntry.getFileId(), "Comment added by Add Comment To File java sample at " + System.currentTimeMillis(), null);
+			        if (commentEntry != null) {
+			        	String commentId = commentEntry.getCommentId();
+			            out.println("Comment Id : " + commentId + "<br/>");
+			        }
+			    } catch (Throwable e) {
+			        out.println("<pre>");
+			      	out.println(e.getMessage());
+			        out.println("</pre>");
+			    }
 	%>
 	 <br>   
    </div>

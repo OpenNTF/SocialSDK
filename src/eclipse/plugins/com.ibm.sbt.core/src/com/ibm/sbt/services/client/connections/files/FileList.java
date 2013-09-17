@@ -7,15 +7,16 @@ import org.w3c.dom.Node;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.ConnectionsFeedXpath;
-import com.ibm.sbt.services.client.connections.files.model.FileEntry;
+import com.ibm.sbt.services.client.connections.files.model.File;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
+import com.ibm.sbt.services.client.connections.files.feedHandler.*;
 
-public class FileEntryList extends EntityList<FileEntry> {
+public class FileList extends EntityList<File> {
 
-	public FileEntryList(Response requestData, BaseService service) {
-		super(requestData, service);
+	public FileList(Response requestData, FileFeedHandler feedHandler) {
+		super(requestData, feedHandler);
 	}
 	
 	@Override
@@ -29,12 +30,22 @@ public class FileEntryList extends EntityList<FileEntry> {
 	}
 
 	@Override
-	protected ArrayList<FileEntry> createEntities() {
+	public FileFeedHandler getFeedHandler() {
+		return (FileFeedHandler)super.getFeedHandler();
+	}
+	
+	@Override
+	public File getEntity(Object data) {
+		return (File)super.getEntity(data);
+	}
+	
+	@Override
+	protected ArrayList<File> createEntities() {
 		XmlDataHandler dataHandler = new XmlDataHandler(getData(), ConnectionsConstants.nameSpaceCtx);
-		ArrayList<FileEntry> fileEntries = new ArrayList<FileEntry>();
+		ArrayList<File> fileEntries = new ArrayList<File>();
 		List<Node> entries = dataHandler.getEntries(FileEntryXPath.Entry);
 		for (Node node: entries) {
-			FileEntry fileEntry = getService().newFileEntry(node);
+			File fileEntry = getEntity(node);
 			fileEntries.add(fileEntry);
 		}
 		return fileEntries;

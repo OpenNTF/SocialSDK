@@ -50,7 +50,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
             threadCount: "a:link[@rel='replies']/@thr:count",	
             forumUrl : "a:link[@rel='alternate']/@href",
             communityUuid : "snx:communityUuid",
-            forumUuid : "a:id",
+            forumUuid : "a:id"
         },
         
         /**

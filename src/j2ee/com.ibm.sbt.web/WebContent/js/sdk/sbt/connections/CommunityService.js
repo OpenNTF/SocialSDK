@@ -278,6 +278,28 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         },
 
         /**
+         * Get a list for forum topics that includes the topics in this community.
+         * 
+         * @method getForumTopics
+         * @param {Object} args
+         */
+        getForumTopics : function(args) {
+        	return this.service.getForumTopics(this.getCommunityUuid(), args);
+        },
+        
+        /**
+         * Create a forum topc by sending an Atom entry document containing the 
+         * new forum to the forum replies resource.
+         * 
+         * @method createForumTopic
+         * @param {Object} forumTopic Forum topic object which denotes the forum topic to be created.
+         * @param {Object} [args] Argument object
+         */
+        createForumTopic : function(communityUuid, topicOrJson, args) {
+        	return this.service.createForumTopic(this.getCommunityUuid(), topicOrJson, args);
+        },
+        
+        /**
          * Get sub communities of a community.
          * 
          * @method getSubCommunities
@@ -814,6 +836,23 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             });
         }
     };
+    
+    var ConnectionsForumTopicFeedCallbacks = {
+        createEntities : function(service,data,response) {
+            return new XmlDataHandler({
+                service :  service,
+                data : data,
+                namespaces : consts.Namespaces,
+                xpath : consts.CommunityFeedXPath
+            });
+        },
+        createEntity : function(service,data,response) {
+        	var forumService = service.getForumService();
+        	var forumTopic = forumService.newForumTopic({});
+        	forumTopic.setData(data);
+            return forumTopic;
+        }
+    };
 
     // TODO test all action methods work with args == undefined
 
@@ -985,7 +1024,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * supported by IBM Connections like ps, sortBy etc.
          */
         getSubCommunities : function(communityUuid,args) {
-            var promise = this._validateCommunityUuid(communityUuid, args);
+            var promise = this._validateCommunityUuid(communityUuid);
             if (promise) {
                 return promise;
             }
@@ -1002,6 +1041,74 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             return this.getEntities(consts.AtomCommunitySubCommunities, options, this.getCommunityFeedCallbacks());
         },
 
+        /**
+         * Get a list for forum topics for th specified community.
+         * 
+         * @method getForumTopics
+         * @param communityUuid
+         * @param args
+         * @returns
+         */
+        getForumTopics: function(communityUuid, args) {
+            var promise = this._validateCommunityUuid(communityUuid);
+            if (promise) {
+                return promise;
+            }
+
+            var requestArgs = lang.mixin(
+            	{ communityUuid : communityUuid }, args || {});
+            var options = {
+                method : "GET",
+                handleAs : "text",
+                query : requestArgs
+            };
+            
+            return this.getEntities(consts.AtomCommunityForumTopics, options, this.getForumTopicFeedCallbacks());
+        },
+           
+        /**
+         * Create a forum topc by sending an Atom entry document containing the 
+         * new forum to the forum replies resource.
+         * 
+         * @method createForumTopic
+         * @param {String} communityUuid Community UUID of the community for this forum topic
+         * @param {Object} forumTopic Forum topic object which denotes the forum topic to be created.
+         * @param {Object} [args] Argument object
+         */
+        createForumTopic : function(communityUuid, topicOrJson, args) {
+            var promise = this._validateCommunityUuid(communityUuid);
+            if (promise) {
+                return promise;
+            }
+        	
+        	var forumService = this.getForumService();
+            var forumTopic = forumService.newForumTopic(topicOrJson);
+            var promise = forumService._validateForumTopic(forumTopic, false, args);
+            if (promise) {
+                return promise;
+            }
+
+            var callbacks = {};
+            callbacks.createEntity = function(service,data,response) {
+                var topicUuid = this.getLocationParameter(response, "topicUuid");
+                forumTopic.setTopicUuid(topicUuid);
+                forumTopic.setData(data);
+                return forumTopic;
+            };
+
+            var requestArgs = lang.mixin(
+                	{ communityUuid : communityUuid }, args || {});
+            
+            var options = {
+                method : "POST",
+                query : requestArgs,
+                headers : consts.AtomXmlHeaders,
+                data : forumTopic.createPostData()
+            };
+            
+            return this.updateEntity(consts.AtomCommunityForumTopics, options, callbacks, args);
+        },
+        
         /**
          * Create a Community object with the specified data.
          * 
@@ -1237,38 +1344,18 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             return this.deleteEntity(consts.AtomCommunityMembers, options, value);
         },
         
-        /**
-         * Get a list of forum topics that includes the topics in a specific forum
-         * for the specified community.
-         * 
-         * @method getForumTopics
-         * @param communityUuid
-         * @param requestArgs
-         * @returns
-         */
-        getForumTopics: function(communityUuid, requestArgs) {
-            var promise = this._validateCommunityUuid(communityUuid);
-            if (promise) {
-                return promise;
-            }
-            
-            var requestArgs = lang.mixin({
-                communityUuid : communityUuid
-            }, args || {});
-            var options = {
-                method : "GET",
-                handleAs : "text",
-                query : requestArgs
-            };
-            
-            return this.getEntities(consts.AtomCommunityForumTopics, options, ForumService.ForumTopicFeedCallbacks);
-        },        
-        
         /*
          * Callbacks used when reading a feed that contains Community entries.
          */
         getCommunityFeedCallbacks: function() {
             return ConnectionsCommunityFeedCallbacks;
+        },
+
+        /*
+         * Callbacks used when reading a feed that contains forum topic entries.
+         */
+        getForumTopicFeedCallbacks: function() {
+            return ConnectionsForumTopicFeedCallbacks;
         },
 
         /*

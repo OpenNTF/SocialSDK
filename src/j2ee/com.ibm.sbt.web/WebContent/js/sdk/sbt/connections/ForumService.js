@@ -28,6 +28,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
 	var CategoryTopic = "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/type\" term=\"forum-topic\"></category>";
 	var CategoryReply = "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/type\" term=\"forum-reply\"></category>";
     
+	var CommunityTmpl = "<snx:communityUuid xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\">${getCommunityUuid}</snx:communityUuid>";
 	var TopicTmpl = "<thr:in-reply-to xmlns:thr=\"http://purl.org/syndication/thread/1.0\" ref=\"urn:lsid:ibm.com:forum:${getForumUuid}\" type=\"application/atom+xml\" href=\"\"></thr:in-reply-to>";
 	var ReplyTmpl = "<thr:in-reply-to xmlns:thr=\"http://purl.org/syndication/thread/1.0\" ref=\"urn:lsid:ibm.com:forum:${getTopicUuid}\" type=\"application/atom+xml\" href=\"\"></thr:in-reply-to>";
 	
@@ -54,6 +55,22 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         },
 
         /**
+         * Return extra entry data to be included in post data for this entity.
+         * 
+         * @returns {String}
+         */
+        createEntryData : function() {
+        	if (!this.getCommunityUuid()) {
+        		return "";
+        	}
+            var transformer = function(value,key) {
+                return value;
+            };
+            var postData = stringUtil.transform(CommunityTmpl, this, transformer, this);
+            return stringUtil.trim(postData);
+        },
+
+        /**
          * Return the value of id from Forum ATOM
          * entry document.
          * 
@@ -73,6 +90,27 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          */
         setForumUuid : function(forumUuid) {
             return this.setAsString("forumUuid", forumUuid);
+        },
+
+        /**
+         * Return the value of communityUuid from Forum ATOM
+         * entry document.
+         * 
+         * @method getCommunityUuid
+         * @return {String} Uuid of the Community
+         */
+        getCommunityUuid : function() {
+            return this.getAsString("communityUuid");
+        },
+
+        /**
+         * Sets communityUuid of IBM Connections forum.
+         * 
+         * @method setCommunityUuid
+         * @param {String} communityUuid Community Uuid of the forum
+         */
+        setCommunityUuid : function(communityUuid) {
+            return this.setAsString("communityUuid", communityUuid);
         },
 
         /**
@@ -253,6 +291,27 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          */
         setForumUuid : function(forumUuid) {
             return this.setAsString("forumUuid", forumUuid);
+        },
+
+        /**
+         * Return the value of communityUuid from Forum ATOM
+         * entry document.
+         * 
+         * @method getCommunityUuid
+         * @return {String} Uuid of the Community
+         */
+        getCommunityUuid : function() {
+            return this.getAsString("communityUuid");
+        },
+
+        /**
+         * Sets communityUuid of IBM Connections forum.
+         * 
+         * @method setCommunityUuid
+         * @param {String} communityUuid Community Uuid of the forum
+         */
+        setCommunityUuid : function(communityUuid) {
+            return this.setAsString("communityUuid", communityUuid);
         },
 
         /**
@@ -943,9 +1002,13 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 return forumTopic;
             };
 
+            var requestArgs = lang.mixin({
+                forumUuid : forumTopic.getForumUuid()
+            }, args || {});
+            
             var options = {
                 method : "POST",
-                query : args || { forumUuid : forumTopic.getForumUuid() },
+                query : requestArgs,
                 headers : consts.AtomXmlHeaders,
                 data : forumTopic.createPostData()
             };

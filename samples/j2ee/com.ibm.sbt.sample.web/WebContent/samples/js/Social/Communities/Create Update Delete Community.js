@@ -44,7 +44,7 @@ function loadCommunity(communityService, dom) {
 }
 
 function createCommunity(communityService, title, type, content, tags, dom) {
-    displayMessage(dom, "Please wait... Creating community: " + community.getTitle());
+    displayMessage(dom, "Please wait... Creating community: " + title);
     
     currentCommunity = null;
     var community = communityService.newCommunity(); 

@@ -1,6 +1,7 @@
 require(["sbt/dom", "sbt/connections/controls/communities/CommunityGrid", "sbt/connections/CommunityService"], function(dom, CommunityGrid, CommunityService) {
     var grid = new CommunityGrid({
          type: "my",
+         pageSize: 20,
          hideSorter: true
     });
              

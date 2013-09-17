@@ -8,7 +8,7 @@ import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.files.FileList;
 import com.ibm.sbt.services.client.connections.files.FileService;
-import com.ibm.sbt.services.client.connections.files.model.File;
+import com.ibm.sbt.services.client.connections.files.File;
 
 public class FileFeedHandler implements IFeedHandler{
 

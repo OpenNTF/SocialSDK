@@ -1,6 +1,6 @@
 require([ "sbt/dom", "sbt/json", "sbt/connections/ForumService" ], function(dom,json,ForumService) {
         var forumService = new ForumService();
-        var promise = forumService.getForums({
+        var promise = forumService.getAllForums({
                 asc : true,
                 page : 1,
                 ps : 2

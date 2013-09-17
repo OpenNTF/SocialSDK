@@ -15,9 +15,9 @@
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@page import="com.ibm.sbt.services.client.connections.files.FileService"%>
-<%@page import="com.ibm.sbt.services.client.connections.files.model.CommentEntry"%>
-<%@page import="com.ibm.sbt.services.client.connections.files.model.FileEntry"%>
-<%@page import="com.ibm.sbt.services.client.connections.files.FileEntryList"%>
+<%@page import="com.ibm.sbt.services.client.connections.files.model.Comment"%>
+<%@page import="com.ibm.sbt.services.client.connections.files.model.File"%>
+<%@page import="com.ibm.sbt.services.client.connections.files.FileList"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>  
 <%@page import="java.util.List"%>
@@ -36,21 +36,21 @@
 	<h4>Get Files Shared With Me</h4>
 	<div id="content">
 	<%
-	try {		
-		FileService fileService = new FileService();
-		FileEntryList fileEntries = fileService.getFilesSharedWithMe(); 
-		if(fileEntries != null && ! fileEntries.isEmpty()) {
-			for (FileEntry fileEntry : fileEntries) {
-				out.println("<a href=\"" + fileEntry.getDownloadLink() + "\"> " + fileEntry.getLabel() + "</a><br/>" );
-			}
-		} else {
-			out.println("No Results");
+		try {		
+			FileService fileService = new FileService();
+			FileList fileEntries = fileService.getFilesSharedWithMe(); 
+			if(fileEntries != null && ! fileEntries.isEmpty()) {
+		for (File fileEntry : fileEntries) {
+			out.println("<a href=\"" + fileEntry.getDownloadUrl() + "\"> " + fileEntry.getLabel() + "</a><br/>" );
 		}
-	} catch (Throwable e) {
-		out.println("<pre>");
-		out.println(e.getMessage());
-		out.println("</pre>");	
-	}					
+			} else {
+		out.println("No Results");
+			}
+		} catch (Throwable e) {
+			out.println("<pre>");
+			out.println(e.getMessage());
+			out.println("</pre>");	
+		}
 	%>
 	</div>
 </body>

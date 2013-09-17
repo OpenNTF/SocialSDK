@@ -5,41 +5,41 @@ import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 import com.ibm.sbt.services.client.connections.files.FileEntryXPath;
 
 
-public class ModifierEntry extends PersonEntry {
+public class Modifier extends Person {
 
-	public ModifierEntry(BaseService svc, DataHandler<?> dataHandler) {
+	public Modifier(BaseService svc, DataHandler<?> dataHandler) {
 		super(svc, dataHandler);
 	}
 	
 	public void setUserUuid(String userUuId) {
-		setAsString(FileEntryXPath.UserUuidModifier, userUuId);
+		setAsString(FileEntryXPath.ModifierUserUuid, userUuId);
 	}
 	
 	public void setName(String name) {
-		setAsString(FileEntryXPath.NameModifier, name);
+		setAsString(FileEntryXPath.ModifierName, name);
 	}
 
 	public void setEmail(String email) {
-		setAsString(FileEntryXPath.EmailModifier, email);
+		setAsString(FileEntryXPath.ModifierEmail, email);
 	}
 
 	public void setUserState(String userState) {
-		setAsString(FileEntryXPath.UserStateModifier, userState);
+		setAsString(FileEntryXPath.ModifierUserState, userState);
 	}
 	
 	public String getEmail() {
-		return dataHandler.getAsString(FileEntryXPath.EmailModifier);
+		return dataHandler.getAsString(FileEntryXPath.ModifierEmail);
 	}
 
 	public String getName() {
-		return dataHandler.getAsString(FileEntryXPath.NameModifier);
+		return dataHandler.getAsString(FileEntryXPath.ModifierName);
 	}
 
 	public String getUserState() {
-		return dataHandler.getAsString(FileEntryXPath.UserStateModifier);
+		return dataHandler.getAsString(FileEntryXPath.ModifierUserState);
 	}
 
 	public String getUserUuid() {
-		return dataHandler.getAsString(FileEntryXPath.UserUuidModifier);
+		return dataHandler.getAsString(FileEntryXPath.ModifierUserUuid);
 	}
 }

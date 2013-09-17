@@ -342,11 +342,11 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * Remove member of a community
          * 
          * @method removeMember
-         * @param {String/Object} Member id of the member or member object (of the member to be removed)
+         * @param {String} Member id of the member 
          * @param {Object} [args] Argument object
          */
-        removeMember : function(member,args) {
-            return this.service.removeMember(this.getCommunityUuid(), member, args);
+        removeMember : function(memberId,args) {
+            return this.service.removeMember(this.getCommunityUuid(), memberId, args);
         },
         
         /**
@@ -663,6 +663,17 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         getCommunityUuid : function() {
             return this.communityUuid;
         },
+        
+        /**
+         * Return the id of the invite.
+         * 
+         * @method getId
+         * @return {String} id
+         */
+        
+        getId: function() {
+    		return this.getAsString("uid");
+    	},
 
         /**
          * Return the community invite title.
@@ -1318,15 +1329,15 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * 
          * @method
          * @param {String/Object} community id of the community or the community object.
-         * @param {String/Object} member id of the member or member object (of the member to be removed)
+         * @param {String} memberId id of the member
          * @param {Object} [args] Argument object
          */
-        removeMember : function(communityUuid,memberOrId,args) {
+        removeMember : function(communityUuid,memberId,args) {
             var promise = this._validateCommunityUuid(communityUuid);
             if (promise) {
                 return promise;
             }
-            var member = this._toMember(memberOrId);
+            var member = this._toMember(memberId);
             promise = this._validateMember(member);
             if (promise) {
                 return promise;

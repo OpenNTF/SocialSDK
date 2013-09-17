@@ -33,10 +33,6 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
      */
     var Activity = declare(BaseEntity, {
         
-        contextRootMap: {
-            activities: "activities"
-        },
-
         /**
          * Construct a Result entity.
          * 
@@ -253,6 +249,10 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
      * @namespace sbt.connections
      */
     var ActivitiesService = declare(BaseService, {
+        
+        contextRootMap: {
+            activities: "activities"
+        },
 
         /**
          * Constructor for ActivitiesService

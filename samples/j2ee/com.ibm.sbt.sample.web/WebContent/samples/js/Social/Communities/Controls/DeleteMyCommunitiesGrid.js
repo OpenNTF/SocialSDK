@@ -1,6 +1,7 @@
 require(["sbt/dom", "sbt/connections/controls/communities/CommunityGrid", "sbt/connections/CommunityService"], function(dom, CommunityGrid, CommunityService) {
     var grid = new CommunityGrid({
          type: "my",
+         pageSize: 20,
          hideSorter: true
     });
              
@@ -28,6 +29,7 @@ require(["sbt/dom", "sbt/connections/controls/communities/CommunityGrid", "sbt/c
         	var ret = confirm("Are you sure you want to deleted the following:\n" +
         			str + "\n It is not possible to restore deleted communities!");
         	if (ret) {
+        		dom.byId("deleteBtn").disabled = true;
         		deleteCommunities(grid, communityService, dom, communities);
         	}
         }
@@ -38,6 +40,8 @@ require(["sbt/dom", "sbt/connections/controls/communities/CommunityGrid", "sbt/c
 function deleteCommunities(grid, communityService, dom, communities) {
 	var community = communities.pop();
 	if (!community) {
+		dom.byId("deleteBtn").disabled = false;
+		dom.byId("statusDiv").innerHTML = "Communities deleted";
 		grid.refresh();
 		return;
 	}
@@ -55,6 +59,9 @@ function deleteCommunities(grid, communityService, dom, communities) {
         	deleteCommunities(grid, communityService, dom, communities);
         }, function(error) {
             alert("Unable to delete '"+ title + "' aborting operation.");
+    		dom.byId("deleteBtn").disabled = false;
+    		dom.byId("statusDiv").innerHTML = "Unable to delete '"+ title + "' aborting operation.";
+    		grid.refresh();
         }
     );
 }

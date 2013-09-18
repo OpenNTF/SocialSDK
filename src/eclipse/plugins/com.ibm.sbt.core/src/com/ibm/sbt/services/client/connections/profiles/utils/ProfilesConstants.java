@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-package com.ibm.sbt.services.client.connections.profiles;
+package com.ibm.sbt.services.client.connections.profiles.utils;
 
 import java.util.HashMap;
 

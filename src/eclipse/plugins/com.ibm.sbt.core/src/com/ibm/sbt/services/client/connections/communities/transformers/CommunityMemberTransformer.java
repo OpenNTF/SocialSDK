@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-package com.ibm.sbt.services.client.connections.communities.tranformers;
+package com.ibm.sbt.services.client.connections.communities.transformers;
 
 import java.util.Map;
 import com.ibm.sbt.services.util.XmlTextUtil;

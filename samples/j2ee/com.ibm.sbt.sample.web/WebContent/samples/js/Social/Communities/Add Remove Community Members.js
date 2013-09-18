@@ -46,11 +46,11 @@ function loadMembers(community, dom) {
 
 function removeMembers(community, members, dom) {
     for (var i=0; i<members.length-1; i++) {
-        community.removeMember(members[i]);
+        community.removeMember(members[i].getUserid());
     }
 
     // wait for the last remove before reloading
-    community.removeMember(members[members.length-1]).then(
+    community.removeMember(members[members.length-1].getUserid()).then(
         function(memberId) {
             loadMembers(community, dom);
         },

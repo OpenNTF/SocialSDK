@@ -23,7 +23,7 @@ import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.connections.communities.Bookmark;
 import com.ibm.sbt.services.client.connections.communities.BookmarkList;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
-import com.ibm.sbt.services.client.connections.communities.CommunityXPath;
+import com.ibm.sbt.services.client.connections.communities.model.CommunityXPath;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 

@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import com.ibm.commons.util.StringUtil;
@@ -45,7 +46,6 @@ import com.ibm.sbt.services.client.connections.files.util.NamespacesConnections;
 import com.ibm.sbt.services.client.ClientService.ContentStream;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.ClientService;
-import com.ibm.sbt.services.client.connections.files.util.FileConstants;
 
 /**
  * FileService can be used to perform File related operations.
@@ -2497,15 +2497,14 @@ public class FileService extends BaseService {
      * @return
      * @throws FileServiceException
      */
-    public File updateFileMetadata(File fileEntry, Map<String, String> params,
-            Map<String, String> payloadMap) throws FileServiceException {
+    public File updateFileMetadata(File fileEntry, Map<String, String> params) throws FileServiceException {
         if (fileEntry == null) {
             throw new FileServiceException(null, Messages.Invalid_FileEntry);
         }
         if (StringUtil.isEmpty(fileEntry.getFileId())) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
-        return this.updateFileMetadata(fileEntry.getFileId(), params, payloadMap);
+        return this.updateFileMetadata(fileEntry.getFileId(), params, fileEntry.getFieldsMap());
     }
 
     /**
@@ -2518,7 +2517,7 @@ public class FileService extends BaseService {
      */
     public File updateFileMetadata(String fileId, Map<String, String> updationsMap)
             throws FileServiceException {
-        Map<String, String> payloadMap = new HashMap<String, String>();
+        Map<String, Object> payloadMap = new HashMap<String, Object>();
         Map<String, String> paramsMap = new HashMap<String, String>();
         this.parseUpdationsMap(updationsMap, payloadMap, paramsMap);
         return this.updateFileMetadata(fileId, paramsMap, payloadMap);
@@ -2575,7 +2574,7 @@ public class FileService extends BaseService {
      * @throws FileServiceException
      */
     public File updateFileMetadata(String fileId, Map<String, String> params,
-            Map<String, String> payloadMap) throws FileServiceException {
+            Map<String, Object> payloadMap) throws FileServiceException {
         if (StringUtil.isEmpty(fileId)) {
             return new File();
         }
@@ -2621,7 +2620,7 @@ public class FileService extends BaseService {
         // File File = (File) executeGet(requestUri, null, ClientService.FORMAT_XML,
         // null).get(0);
 
-        Map<String, String> payloadMap = new HashMap<String, String>();
+        Map<String, Object> payloadMap = new HashMap<String, Object>();
         Map<String, String> paramsMap = new HashMap<String, String>();
         Map<String, String> headers = new HashMap<String, String>();
         this.parseUpdationsMap(updationsMap, payloadMap, paramsMap);
@@ -2759,7 +2758,7 @@ public class FileService extends BaseService {
      * @return Document
      */
 
-    private Document constructPayload(String fileId, Map<String, String> payloadMap) {
+    private Document constructPayload(String fileId, Map<String, Object> payloadMap) {
         if (payloadMap == null || payloadMap.isEmpty()) {
             return null;
             // throw new FileServiceException(null, Messages.PayloadInfo_1);
@@ -2770,12 +2769,12 @@ public class FileService extends BaseService {
         requestBody.append("<id>urn:lsid:ibm.com:td:" + fileId + "</id>");
         requestBody.append("<uuid xmlns=\""
                             + ConnectionsConstants.nameSpaceCtx.getNamespaceURI("td") + "\">" + fileId + "</uuid>");
-        Iterator<Map.Entry<String, String>> entries = payloadMap.entrySet().iterator();
+        Iterator<Map.Entry<String, Object>> entries = payloadMap.entrySet().iterator();
         while (entries.hasNext()) {
-            Map.Entry<String, String> fieldMapPairs = entries.next();
+            Map.Entry<String, Object> fieldMapPairs = entries.next();
             String key = fieldMapPairs.getKey();
-            String value = fieldMapPairs.getValue();
-            if (!StringUtil.isEmpty(key) && !StringUtil.isEmpty(value)) {
+            Object value = fieldMapPairs.getValue();
+            if (!StringUtil.isEmpty(key) && value != null) {
                 // here we handle the cases of setting label/title/summary/visibility
                 if (key.equals("label")) {
                     requestBody.append("<label xmlns=\""
@@ -3037,7 +3036,7 @@ public class FileService extends BaseService {
         return uri;
     }
 
-    private void parseUpdationsMap(Map<String, String> updationsMap, Map<String, String> payloadMap,
+    private void parseUpdationsMap(Map<String, String> updationsMap, Map<String, Object> payloadMap,
             Map<String, String> paramsMap) {
         // here parse the entries in the updations map and create paramsMap, payloadMap appropriately.
         Iterator<Map.Entry<String, String>> entries = updationsMap.entrySet().iterator();

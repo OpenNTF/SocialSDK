@@ -39,7 +39,7 @@
 	<%
     try {
         FileService fileService = new FileService();
-        List<File> fileEntries = fileService.getMyFiles();
+        FileList fileEntries = fileService.getMyFiles();
         File fileEntry = fileEntries.get(0);
         String lock = fileEntry.getLockType();
         if ("NONE".equalsIgnoreCase(lock)) {

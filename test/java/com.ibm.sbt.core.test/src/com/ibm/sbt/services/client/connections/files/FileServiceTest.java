@@ -73,7 +73,7 @@ public class FileServiceTest extends BaseUnitTest {
 		if (fileEntries != null && !fileEntries.isEmpty()) {
 			for (File fEntry : fileEntries) {
 				assertEquals(fEntry.getCategory(), "document");
-				assertEquals(fEntry.getAuthorEntry().getName(), "Frank Adams");
+				assertEquals(fEntry.getAuthor().getName(), "Frank Adams");
 			}
 		}
 	}
@@ -347,7 +347,7 @@ public class FileServiceTest extends BaseUnitTest {
 		File fileEntry = fileService.getFile(testFileId, true);
 		String comment = "Junit Comment - Added from FileServiceTest, testAddCommentToFile";
 		Comment commentEntry;
-		commentEntry = fileService.addCommentToFile(fileEntry.getFileId(), comment, fileEntry.getAuthorEntry().getUserUuid() , null);
+		commentEntry = fileService.addCommentToFile(fileEntry.getFileId(), comment, fileEntry.getAuthor().getUserUuid() , null);
 		assertEquals(commentEntry.getComment(),
 				"Junit Comment - Added from FileServiceTest, testAddCommentToFile");
 	}

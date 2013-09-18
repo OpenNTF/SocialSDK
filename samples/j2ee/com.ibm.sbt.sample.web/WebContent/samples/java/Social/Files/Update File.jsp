@@ -42,7 +42,7 @@
   <%
       try {
           FileService fileService = new FileService();
-          List<File> fileEntries = fileService.getMyFiles();
+          FileList fileEntries = fileService.getMyFiles();
           File fileEntry = fileEntries.get(0);
           String fileId = fileEntry.getFileId();
           String shareWithUserId = Context.get().getProperty("sample.userId2");

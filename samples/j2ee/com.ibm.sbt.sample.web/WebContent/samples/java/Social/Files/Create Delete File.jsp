@@ -16,9 +16,9 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@page import="com.ibm.sbt.services.client.connections.files.model.FileCreationParameters"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.FileService"%>
-<%@page import="com.ibm.sbt.services.client.connections.files.model.CommentEntry"%>
-<%@page import="com.ibm.sbt.services.client.connections.files.model.FileEntry"%>
-<%@page import="com.ibm.sbt.services.client.connections.files.FileEntryList"%>
+<%@page import="com.ibm.sbt.services.client.connections.files.Comment"%>
+<%@page import="com.ibm.sbt.services.client.connections.files.File"%>
+<%@page import="com.ibm.sbt.services.client.connections.files.FileList"%>
 <%@page import="java.nio.charset.Charset"%>
 <%@page import="java.io.ByteArrayInputStream"%>
 <%@page import="org.w3c.dom.Document"%>
@@ -50,7 +50,7 @@
 
             Map<String, String> headers;
 
-            FileEntry entry = fileService.upload(
+            File entry = fileService.uploadFile(
                     new ByteArrayInputStream(content.getBytes(Charset.forName("UTF-8"))), id,
                     content.length(), params);
 

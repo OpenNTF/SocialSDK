@@ -105,7 +105,9 @@ public class ProfileServiceTest extends BaseUnitTest {
 	@Test
 	public void testGetColleagues() throws Exception {
 		ProfileService profileService = new ProfileService();
-		ProfileList profileEntries = profileService.getColleagues( properties.getProperty("user1"));
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put("outputType", "profile");
+		ProfileList profileEntries = (ProfileList)profileService.getColleagues( properties.getProperty("user1"), parameters);
 		if (profileEntries != null && !profileEntries.isEmpty()) {
 			for (Profile profile : profileEntries) {
 				assertNotNull(profile.getName());
@@ -116,7 +118,9 @@ public class ProfileServiceTest extends BaseUnitTest {
 	@Test
 	public void testGetColleaguesForInvalidUser() throws Exception {
 		ProfileService profileService = new ProfileService();
-		ProfileList profileEntries = profileService.getColleagues("abc@xyz.c");
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put("outputType", "profile");
+		ProfileList profileEntries = (ProfileList)profileService.getColleagues("abc@xyz.c", parameters);
 		assertEquals(0, profileEntries.size());
 		
 	}
@@ -124,7 +128,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 	@Test
 	public void testGetColleaguesConnectionEntries() throws Exception {
 		ProfileService profileService = new ProfileService();
-		ConnectionEntryList connectionEntries = profileService.getColleaguesConnectionEntries( properties.getProperty("user1"));
+		ConnectionEntryList connectionEntries = (ConnectionEntryList)profileService.getColleagues( properties.getProperty("user1"));
 		if (connectionEntries != null && !connectionEntries.isEmpty()) {
 			for (ConnectionEntry connectionEntry : connectionEntries) {
 				assertNotNull(connectionEntry.getTitle());
@@ -135,7 +139,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 	@Test
 	public void testGetColleaguesConnectionEntriesForInvalidUser() throws Exception {
 		ProfileService profileService = new ProfileService();
-		ConnectionEntryList connectionEntries = profileService.getColleaguesConnectionEntries("abc@xyz.c");
+		ConnectionEntryList connectionEntries = (ConnectionEntryList)profileService.getColleagues("abc@xyz.c");
 		assertEquals(0, connectionEntries.size());
 	}
 	
@@ -152,7 +156,9 @@ public class ProfileServiceTest extends BaseUnitTest {
 	@Test
 	public void testGetCommonColleaguesProfiles() throws Exception {
 		ProfileService profileService = new ProfileService();
-		ProfileList profileEntries = profileService.getCommonColleaguesProfiles( properties.getProperty("email1"),properties.getProperty("email2") );
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put("outputType", "profile");
+		ProfileList profileEntries = (ProfileList)profileService.getCommonColleagues( properties.getProperty("email1"),properties.getProperty("email2"),parameters );
 		if (profileEntries != null && !profileEntries.isEmpty()) {
 			for (Profile profileEntry : profileEntries) {
 				assertNotNull(profileEntry.getJobTitle());

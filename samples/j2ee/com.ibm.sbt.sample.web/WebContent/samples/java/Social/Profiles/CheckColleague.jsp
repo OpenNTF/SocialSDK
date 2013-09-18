@@ -23,7 +23,11 @@
 <%@page import="com.ibm.sbt.services.client.connections.profiles.Profile"%>
 <%@page import="com.ibm.sbt.services.client.connections.profiles.ConnectionEntry"%>
 <%@page import="com.ibm.sbt.services.client.connections.profiles.ConnectionEntryList"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.Iterator"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"	pageEncoding="ISO-8859-1"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.HashMap"%>
 <html>
 <head>
 	<title>SBT JAVA Sample - Check Colleague</title>
@@ -31,21 +35,22 @@
 </head>
 <body>
 	<%
-	try {
-	
+	try{
 		String sourceUserId = Context.get().getProperty("sample.id1");
 		String targetUserId;
 		ProfileService connProfSvc = new ProfileService();
-		ConnectionEntryList colleagues = connProfSvc.getColleaguesConnectionEntries(sourceUserId);
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put("outputType", "connection");
+		
+		ConnectionEntryList colleagues = (ConnectionEntryList)connProfSvc.getColleagues(sourceUserId, parameters);
+		
 		if(colleagues != null && ! colleagues.isEmpty()) {
-			ConnectionEntry colleague = colleagues.iterator().next();
-			targetUserId = colleague.getContributorUserId();
+			targetUserId = colleagues.get(0).getContributorUserId();
 			ConnectionEntry connection = connProfSvc.checkColleague(sourceUserId, targetUserId);
-			out.println("connection Id : "+connection.getConnectionId());
+			out.println("User's are colleagues with id's"+sourceUserId+" and "+ targetUserId+" the connection Id is : "+connection.getConnectionId());
 		}
 		else
 			out.println("no colleagues exist for the user");
-		
 	}  catch (Throwable e) {
 			out.println("<pre>");
 			out.println(e.getMessage());

@@ -1087,7 +1087,6 @@ public abstract class ClientService {
 		Handler format = findHandler(httpRequestBase, httpResponse, args.handler);
 		
 		Response response = new Response(httpClient, httpResponse, httpRequestBase, args, format);
-
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.exiting(sourceClass, "processResponse", response);
 		}

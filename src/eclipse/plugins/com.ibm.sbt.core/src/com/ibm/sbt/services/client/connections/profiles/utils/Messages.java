@@ -18,6 +18,7 @@ public class Messages {
 	public static String	ProfileException				= "Error getting profile with identifier : {0}";
 	public static String	SearchException					= "Problem occurred while searching profiles";
 	public static String	ColleaguesException				= "Problem occurred while getting colleagues of user with identifier : {0}";
+	public static String	TagsException					= "Problem occurred while getting tags of user with identifier : {0}";
 	public static String	CheckColleaguesException		= "Problem occurred in checking if two users are colleagues";
 	public static String	CommonColleaguesException		= "Problem occurred in getting common colleagues of users {0} and {1}";
 	public static String	ReportingChainException			= "Problem occurred in getting report chain of user with identifier : {0}";

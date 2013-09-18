@@ -21,48 +21,37 @@
 <%@page import="java.io.PrintWriter"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.HashMap"%>
-<%@page import="java.util.List"%>
-<%@page import="java.util.Iterator"%>
 <%@page import="com.ibm.sbt.services.client.connections.profiles.ProfileService"%>
-<%@page import="com.ibm.sbt.services.client.connections.profiles.Profile"%>
-<%@page import="com.ibm.sbt.services.client.connections.profiles.ProfileList"%>
+<%@page import="com.ibm.sbt.services.client.connections.profiles.ProfileTag"%>
+<%@page import="com.ibm.sbt.services.client.connections.profiles.ProfileTagList"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"	pageEncoding="ISO-8859-1"%>
 <html>
 <head>
-	<title>SBT JAVA Sample - Get Common Colleagues</title>
+	<title>SBT JAVA Sample - Get Tags</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 <body>
-	<div id="content">
 	<%
-		try {
-			String userId1 = Context.get().getProperty("sample.userId1");
-			String userId2 = Context.get().getProperty("sample.userId2");
-			
-			ProfileService connProfSvc = new ProfileService();
-			Map<String, String> params = new HashMap<String, String>();
-			params.put("inclMessage", "true");
-			params.put("outputType", "profile");
-	
-			ProfileList entries = (ProfileList)connProfSvc.getCommonColleagues(userId1, userId2);
-		
-			if (entries != null && !entries.isEmpty()) {
-				out.println("<b> User's colleagues </b>");
-				out.println("<br>");
-				for (Iterator iterator = entries.iterator(); iterator.hasNext();) {
-					Profile entry = (Profile) iterator.next();
-					out.println(entry.getName());
-					out.println("<br>");
-				}
-			} else {
-				out.println("No result");
-			}
-		} catch (Throwable e) {
+	try {
+		String userEmail = Context.get().getProperty("sample.email1");
+		ProfileService connProfSvc = new ProfileService();
+		Map<String, String> params = new HashMap<String, String>();
+		ProfileTagList tags = connProfSvc.getTags(userEmail, params);
+		if (tags.size() <= 0){
+				out.println("No tags to be displayed");
+		}
+		for (ProfileTag tag : tags) {
+			out.println("<b>Tag : </b> " + tag.getTerm());
+			out.println("<b>Tag Frequency: </b> " + tag.getFrequency());
+			out.println("<b>Tag Visibility :</b> " + tag.getVisibility());
+			out.println("<b>Tag Intensity :</b> " + tag.getIntensity());
+			out.println("<br>");
+		}
+	} catch (Throwable e) {
 			out.println("<pre>");
 			out.println(e.getMessage());
 			out.println("</pre>");
-		}
+	}
 	%>
-	</div>
 </body>
 </html>

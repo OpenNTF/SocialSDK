@@ -80,7 +80,7 @@ public class TagFeedHandler implements IFeedHandler {
 	}
 
 	/**
-	 * @return CommunityService
+	 * @return ProfileService
 	 */
 	@Override
 	public ProfileService getService() {

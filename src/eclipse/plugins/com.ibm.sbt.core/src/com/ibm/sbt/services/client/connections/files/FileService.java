@@ -400,7 +400,7 @@ public class FileService extends BaseService {
                 subFilters, resultType);
         Map<String, String> headers = new HashMap<String, String>();
         headers.put(Headers.ContentType, Headers.ATOM);
-//        headers.put(Headers.ContentLanguage, Headers.UTF);
+        headers.put(Headers.ContentLanguage, Headers.UTF);
 
         Object payload = this.constructPayloadForMultipleEntries(folderIds,
                 FileRequestParams.ITEMID.getFileRequestParams(), "collection");
@@ -409,8 +409,6 @@ public class FileService extends BaseService {
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageGenericException);
         }
-
-        // executePost(requestUri, params, headers, payload);
     }
 
     public Comment createComment(String fileId, String comment) throws FileServiceException, TransformerException {
@@ -576,17 +574,6 @@ public class FileService extends BaseService {
      * @throws FileServiceException
      */
     public void deleteAllFilesFromRecycleBin(String userId) throws FileServiceException {
-        // String accessType = AccessType.AUTHENTICATED.getAccessType();
-        // String category = null;
-        // SubFilters subFilters = new SubFilters();
-        // if (StringUtil.isEmpty(userId) || StringUtil.equalsIgnoreCase(userId, null)) {
-        // logger.log(Level.WARNING, Messages.InvalidArgument_3);
-        // category = Categories.MYLIBRARY.getCategory();
-        // } else {
-        // subFilters.setUserId(userId);
-        // }
-        // String view = Views.RECYCLEBIN.getViews();
-        // String resultType = ResultType.FEED.getResultType();
         String requestUri = "/files/basic/api/";
         if (StringUtil.isEmpty(userId) || StringUtil.equalsIgnoreCase(userId, null)) {
             requestUri += "myuserlibrary/view/recyclebin/feed";
@@ -1339,21 +1326,6 @@ public class FileService extends BaseService {
         return this.getFilesInMyRecycleBin(null);
     }
 
-    // content type must be specified as application/atom+xml.
-    // /basic/api/collection/{collection-id}/entry
-    // public File updateFolder(String folderId, Document updatedFolder) throws FileServiceException {
-    // if (logger.isLoggable(Level.FINEST)) {
-    // logger.entering(sourceClass, "getFolder");
-    // }
-    // String accessType = AccessType.AUTHENTICATED.getAccessType();
-    // SubFilters subFilters = new SubFilters();
-    // subFilters.setCollectionId(folderId);
-    // String resultType = ResultType.ENTRY.getResultType();
-    // String requestUri = constructUrl(BaseUrl.FILES.getBaseUrl(), accessType, null, null, null,
-    // subFilters, resultType);
-    // return (File) executeGet(requestUri, null, ClientService.FORMAT_XML, File.class).get(0);
-    // }
-
     /**
      * getFilesInMyRecycleBin
      * <p>
@@ -2034,8 +2006,6 @@ public class FileService extends BaseService {
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInLockingFile);
         }
-
-        // executePost(requestUri, params, null, null);
     }
 
     /**
@@ -2066,10 +2036,7 @@ public class FileService extends BaseService {
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInPinningFile);
         }
-
-        // executePost(requestUri, params, null, null);
     }
-
     /**
      * * pinFolder
      * <p>
@@ -2082,32 +2049,6 @@ public class FileService extends BaseService {
     public void pinFolder(String folderId) throws FileServiceException {
         this.pinFolder(folderId, null);
     }
-
-    // // /files/basic/api/myuserlibrary/document/{document-id}/version/{version-id}/media
-    // public File downloadFileWithGivenVersion(String fileId, String versionId,
-    // Map<String, String> params, Map<String, String> headers) throws FileServiceException {
-    // if (logger.isLoggable(Level.FINEST)) {
-    // logger.entering(sourceClass, "downloadFileWithGivenVersion");
-    // }
-    // if (StringUtil.isEmpty(fileId)) {
-    // throw new FileServiceException(null, Messages.InvalidArgument_2);
-    // }
-    // if (StringUtil.isEmpty(versionId)) {
-    // logger.log(Level.WARNING, Messages.InvalidArgument_9);
-    // return getFile(fileId, params, true);
-    // }
-    // String accessType = AccessType.AUTHENTICATED.getAccessType();
-    // String category = Categories.MYLIBRARY.getCategory();
-    // SubFilters subFilters = new SubFilters();
-    // subFilters.setDocumentId(fileId);
-    // subFilters.setVersionId(versionId);
-    // String resultType = ResultType.MEDIA.getResultType();
-    // String requestUri = constructUrl(BaseUrl.FILES.getBaseUrl(), accessType, category, null, null,
-    // subFilters, resultType);
-    //
-    // return (File) executeGet(requestUri, params, headers, ClientService.FORMAT_XML, File.class)
-    // .get(0);
-    // }
 
     /**
      * pinFolder
@@ -2222,7 +2163,7 @@ public class FileService extends BaseService {
         params.put(FileRequestParams.UNDELETE.getFileRequestParams(), "true");
         Map<String, String> headers = new HashMap<String, String>();
         try {
-            Response data = (Response) this.updateData(requestUri, params, headers, null, null).getData();
+            Response data = (Response) this.updateData(requestUri, params, headers, null, null);
             return (File)new FileFeedHandler().createEntity(data);
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInRestoreFile);
@@ -2270,7 +2211,7 @@ public class FileService extends BaseService {
         headers.put(Headers.ContentType, Headers.ATOM);
         headers.put(Headers.ContentLanguage, Headers.UTF);
         try {
-            super.updateData(requestUri, params, headers, payload, fileId);
+            super.createData(requestUri, params, headers, payload);
         } catch (Exception e) {
             throw new FileServiceException(e, "Error sharing the file");
         }
@@ -2445,7 +2386,7 @@ public class FileService extends BaseService {
 
 
         try {
-            Response result = (Response) this.updateData(requestUri, params, headers, payload, null).getData();
+            Response result = (Response) this.updateData(requestUri, params, headers, payload, null);
             return (Comment) new CommentFeedHandler().createEntity(result);
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInRestoreFile);
@@ -2480,7 +2421,7 @@ public class FileService extends BaseService {
                 subFilters, resultType); // we pass null value for non applicable types.
         try {
             //TODO: check get data wrapping
-            Response result = (Response) this.updateData(requestUri, params, content, null).getData();
+            Response result = (Response) this.updateData(requestUri, params, content, null);
             return (File) new FileFeedHandler().createEntity(result);
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInRestoreFile);
@@ -2629,7 +2570,7 @@ public class FileService extends BaseService {
         // }
         Document payload = this.constructPayloadForComments(updatedComment); // TODO
         try {
-            this.updateData(requestUri, null, headers, payload, null).getData();
+            this.updateData(requestUri, null, headers, payload, null);
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInRestoreFile);
         }
@@ -2654,7 +2595,7 @@ public class FileService extends BaseService {
         Document payload = this.constructPayload(fileId, payloadMap);
 
         try {
-            this.updateData(requestUri, null, headers, payload, null).getData();
+            this.updateData(requestUri, null, headers, payload, null);
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInRestoreFile);
         }
@@ -2674,7 +2615,7 @@ public class FileService extends BaseService {
         headers.put(Headers.ContentType, Headers.ATOM);
         
         try {
-            Response result = (Response) this.updateData(requestUri, null, headers, payload, null).getData();
+            Response result = (Response) this.updateData(requestUri, null, headers, payload, null);
             return (File) new FileFeedHandler().createEntity(result);
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInRestoreFile);
@@ -2756,19 +2697,7 @@ public class FileService extends BaseService {
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInUpload);
         }
-}
-
-
-
-//    private String constructEntry(String fileId, String content, String entity) {
-//        StringBuilder payload = new StringBuilder(
-//                "xmlns=\"http://www.w3.org/2005/Atom\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\"> <snx:in-ref-to rel=\"http://www.ibm.com/xmlns/prod/sn/report-item\" ref=\""
-//                        + fileId
-//                        + "\" ref-item-type=\""
-//                        + entity
-//                        + "\" /snx:in-ref-to><content type=\"text\">" + content + "</content>");
-//        return payload.toString();
-//    }
+    }
 
     /**
      * constructPayload
@@ -2790,41 +2719,6 @@ public class FileService extends BaseService {
     	FileTransformer fileTransformer = new FileTransformer();
     	String requestBody = fileTransformer.transform(payloadMap);
     	return convertToXML(requestBody);
-    	
-//        if (payloadMap == null || payloadMap.isEmpty()) {
-//            return null;
-//            // throw new FileServiceException(null, Messages.PayloadInfo_1);
-//        }
-//        StringBuilder requestBody = new StringBuilder("<entry xmlns=\"http://www.w3.org/2005/Atom\">");
-//        requestBody
-//                .append("<category term=\"document\" label=\"document\" scheme=\"tag:ibm.com,2006:td/type\"></category>");
-//        requestBody.append("<id>urn:lsid:ibm.com:td:" + fileId + "</id>");
-//        requestBody.append("<uuid xmlns=\""
-//                            + ConnectionsConstants.nameSpaceCtx.getNamespaceURI("td") + "\">" + fileId + "</uuid>");
-//        Iterator<Map.Entry<String, Object>> entries = payloadMap.entrySet().iterator();
-//        while (entries.hasNext()) {
-//            Map.Entry<String, Object> fieldMapPairs = entries.next();
-//            String key = fieldMapPairs.getKey();
-//            Object value = fieldMapPairs.getValue();
-//            if (!StringUtil.isEmpty(key) && value != null) {
-//                // here we handle the cases of setting label/title/summary/visibility
-//                if (key.equals("label")) {
-//                    requestBody.append("<label xmlns=\""
-//                            + ConnectionsConstants.nameSpaceCtx.getNamespaceURI("td") + "\">" + value
-//                            + "</label>");
-//                    requestBody.append("<title>" + value + "</title>");
-//                } else if (key.equals("summary")) {
-//                    requestBody.append("<summary type=\"text\">" + value + "</summary>");
-//                } else if (key.equals("visibility")) {
-//                    requestBody.append("<visibility xmlns=\""
-//                            + ConnectionsConstants.nameSpaceCtx.getNamespaceURI("td") + "\">" + value
-//                            + "</visibility>");
-//                }
-//            }
-//            entries.remove();
-//        }
-//        requestBody.append("</entry>");
-//        return this.convertToXML(requestBody.toString());
     }
 
     /**
@@ -2858,10 +2752,9 @@ public class FileService extends BaseService {
     	if (StringUtil.isEmpty(shareWith) || StringUtil.equalsIgnoreCase(shareWith, "null")) {
           fieldsMap.put("visibility", "private");
       } else {
-    	  fieldsMap.put("visibility", "public");
+    	  fieldsMap.put("visibility", "private");
           String parts[] = shareWith.split(",");
           if ((parts.length) != 3) {
-              // System.err.println("Invalid shareWith Argument");
               return null;
           } else {
         	  fieldsMap.put("shareWithId", parts[0]);
@@ -2871,54 +2764,7 @@ public class FileService extends BaseService {
       }
     	FolderTransformer folderTransformer = new FolderTransformer();
     	String payload = folderTransformer.transform(fieldsMap); 
-    	return convertToXML(payload.toString());
-    	
-//        String visibility = null, shareWithId = null, shareWithWhat = null, shareWithRole = null;
-//        StringBuilder payload = new StringBuilder("<entry xmlns=\"http://www.w3.org/2005/Atom\">");
-//        payload.append("<category term=\"collection\"  label=\"collection\" scheme=\"tag:ibm.com,2006:td/type\"/>");
-//
-//        if (!StringUtil.isEmpty(operation)) {
-//            if (operation.equals("update")) {
-//                payload.append("<id>" + entityId + "</id>");
-//            }
-//            // if (operation.equals("create")) {
-//            if (StringUtil.isEmpty(name)) {
-//                // TODO
-//                // System.err.println("Invalid Name");
-//                return null;
-//            }
-//            payload.append("<label xmlns=\"urn:ibm.com/td\" makeUnique=\"true\">" + name + "</label>");
-//            payload.append("<title>" + name + "</title>");
-//
-//            if (!StringUtil.isEmpty(description) || !StringUtil.equalsIgnoreCase(description, null)) {
-//                payload.append("<summary type=\"text\">" + description + "</summary>");
-//            }
-//            if (StringUtil.isEmpty(shareWith) || StringUtil.equalsIgnoreCase(shareWith, "null")) {
-//                visibility = "private";
-//                shareWith = "";
-//            } else {
-//                visibility = "public";
-//                String parts[] = shareWith.split(",");
-//                if ((parts.length) != 3) {
-//                    // System.err.println("Invalid shareWith Argument");
-//                    return null;
-//                } else {
-//                    shareWithId = parts[0];
-//                    shareWithWhat = parts[1];
-//                    shareWithRole = parts[2];
-//                }
-//                shareWith = "<member ca:id=\""
-//                        + shareWithId
-//                        + "\" xmlns=\"http://www.ibm.com/xmlns/prod/composite-applications/v1.0\" ca:type=\""
-//                        + shareWithWhat
-//                        + "\" xmlns:ca=\"http://www.ibm.com/xmlns/prod/composite-applications/v1.0\" ca:role=\""
-//                        + shareWithRole + "\"></member>";
-//            }
-//            payload.append("<visibility xmlns=\"urn:ibm.com/td\">" + visibility
-//                    + "</visibility> <sharedWith xmlns=\"urn:ibm.com/td\">" + shareWith + "</sharedWith>");
-//        }
-//        // }
-//        payload.append("</entry>");
+    	return convertToXML(payload.toString());    	
     }
 
     /**
@@ -2955,18 +2801,6 @@ public class FileService extends BaseService {
     	CommentTransformer commentTransformer = new CommentTransformer();
     	String payload = commentTransformer.transform(fieldsMap);
     	return this.convertToXML(payload.toString());
-        
-//        payload.append("<category term=\"comment\"  label=\"comment\" scheme=\"tag:ibm.com,2006:td/type\"/>");
-//
-//        if (!StringUtil.isEmpty(operation) && !operation.equals("delete")) {
-//            payload.append("<deleteWithRecord xmlns=\""
-//                    + NamespacesConnections.nameSpaceCtx.getNamespaceURI("td")
-//                    + "\">false</deleteWithRecord>");
-//        } else {
-//            payload.append("<content type=\"text/plain\">" + commentToBeAdded + "</content>");
-//        }
-//        payload.append("</entry>");
-        
     }
 
     /**
@@ -3006,13 +2840,6 @@ public class FileService extends BaseService {
     	ModerationTransformer moderationTransformer = new ModerationTransformer();
     	String payload = moderationTransformer.transform(fieldsMap);
         return this.convertToXML(payload.toString());
-        
-//        StringBuilder payload = new StringBuilder("<?xml version=\"1.0\"?> <entry ");
-//        payload.append(this.constructEntry(fileId, actionReason, entity));
-//        payload.append("<snx:moderation action=\" " + action + "\" />");
-//        payload.append("</entry> ");
-//        // System.err.println("payload in constructPayloadForModeration " + payload.toString());
-//        return this.convertToXML(payload.toString());
     }
 
     private Document constructPayloadForMultipleEntries(List<String> listOfFileIds, String multipleEntryId) throws TransformerException {
@@ -3025,19 +2852,6 @@ public class FileService extends BaseService {
     	MultipleFileTransformer mfTransformer = new MultipleFileTransformer();
     	String payload = mfTransformer.transform(listOfIds, category);
     	return this.convertToXML(payload.toString());
-//    	StringBuilder requestBody = new StringBuilder(
-//                "<?xml version=\"1.0\" encoding=\"UTF-8\"?><feed xmlns=\"http://www.w3.org/2005/Atom\">");
-//        for (String fileId : listOfIds) {
-//            requestBody.append("<entry>");
-//            if (!StringUtil.isEmpty(category) && (StringUtil.equalsIgnoreCase(category, "community"))
-//                    || StringUtil.equalsIgnoreCase(category, "collection")) {
-//                requestBody.append("<category term=\"" + category + "\" label=\"" + category
-//                        + "\" scheme=\"tag:ibm.com,2006:td/type\"></category>");
-//            }
-//            requestBody.append("<" + multipleEntryId + " xmlns=\"urn:ibm.com/td\">" + fileId + "</"
-//                    + multipleEntryId + "></entry>");
-//        }
-//        requestBody.append("</feed>");
     }
 
     /**

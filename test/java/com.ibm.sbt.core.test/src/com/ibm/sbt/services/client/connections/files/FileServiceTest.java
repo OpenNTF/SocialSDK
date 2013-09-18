@@ -29,6 +29,9 @@ import java.util.Random;
 import org.junit.Test;
 
 import com.ibm.sbt.services.BaseUnitTest;
+import com.ibm.sbt.services.client.connections.communities.Community;
+import com.ibm.sbt.services.client.connections.communities.CommunityList;
+import com.ibm.sbt.services.client.connections.communities.CommunityService;
 import com.ibm.sbt.services.client.connections.files.model.FileRequestParams;
 
 public class FileServiceTest extends BaseUnitTest {
@@ -400,6 +403,110 @@ public class FileServiceTest extends BaseUnitTest {
 			for(String file : listOfFileIds) {
 				fileService.removeFileFromFolder(folderId, file);
 			}
+		}
+	}
+	
+	@Test
+	public void testAddRemoveFileToFolders() throws Exception {
+		FileService fileService = new FileService();
+		authenticateEndpoint(fileService.getEndpoint(), USERNAME, PASSWORD);
+		FileList folders = fileService.getMyFolders();
+		List<String> listOfFolderIds = new ArrayList<String>();
+		for(File folder : folders) {
+			listOfFolderIds.add(folder.getFileId());
+		}
+		FileList listOfFiles = fileService.getMyFiles();
+		String fileId = listOfFiles.get(0).getFileId();
+		fileService.addFileToFolders(fileId, listOfFolderIds);
+		
+		// now removing file from folders. 
+		for(String folderId : listOfFolderIds) {
+			fileService.removeFileFromFolder(folderId, fileId);
+		}
+	}
+	
+	@Test
+	public void testCreateComment() throws Exception {
+		FileService fileService = new FileService();
+		authenticateEndpoint(fileService.getEndpoint(), USERNAME, PASSWORD);
+		FileList listOfFiles = fileService.getMyFiles();
+		String fileId = listOfFiles.get(0).getFileId();
+		String comment = "TestCreateComment From FileServiceTest";
+		Comment commentObject = fileService.createComment(fileId, comment);
+		assertEquals(commentObject.getComment(), comment);
+	}
+	
+	@Test
+	public void testCreateDeleteFolder() throws Exception {
+		FileService fileService = new FileService();
+		authenticateEndpoint(fileService.getEndpoint(), USERNAME, PASSWORD);
+		String name = "testCreateFolder" + System.currentTimeMillis();
+		String description = "Vimal's testCreateFolder";
+		File folder = fileService.createFolder(name, description, "");
+		assertEquals(folder.getTitle(), name);
+		
+		//now delete the folder created
+		fileService.deleteFolder(folder.getFileId());
+	}
+	
+	@Test
+	public void testDeleteComment() throws Exception {
+		FileService fileService = new FileService();
+		authenticateEndpoint(fileService.getEndpoint(), USERNAME, PASSWORD);
+		FileList listOfFiles = fileService.getMyFiles();
+		String fileId = listOfFiles.get(0).getFileId();
+		CommentList commentObject = fileService.getAllFileComments(fileId, null);
+		String commentId = commentObject.get(0).getCommentId();
+		fileService.deleteComment(fileId, commentId);
+	}
+	
+	@Test
+	public void testDeleteFileFromRecycleBin() throws Exception {
+		FileService fileService = new FileService();
+		authenticateEndpoint(fileService.getEndpoint(), USERNAME, PASSWORD);
+		FileList listOfFiles = fileService.getFilesInMyRecycleBin();
+		String fileId = listOfFiles.get(0).getFileId();
+		fileService.deleteFileFromRecycleBin(fileId);
+	}
+	
+	@Test
+	public void testGetFileShares() throws Exception {
+		FileService fileService = new FileService();
+		authenticateEndpoint(fileService.getEndpoint(), USERNAME, PASSWORD);
+		FileList listOfFiles = fileService.getFileShares();
+	}
+
+	@Test
+	public void testGetFolder() throws Exception {
+		FileService fileService = new FileService();
+		authenticateEndpoint(fileService.getEndpoint(), USERNAME, PASSWORD);
+		FileList folders = fileService.getMyFolders();
+		if(folders != null) {
+			File folder = fileService.getFolder(folders.get(0).getFileId()); 
+			assertNotNull(folder.getTitle());
+		}
+	}
+		
+	@Test
+	public void testRestoreFileFromRecycleBin() throws Exception {
+		FileService fileService = new FileService();
+		authenticateEndpoint(fileService.getEndpoint(), USERNAME, PASSWORD);
+		FileList files = fileService.getFilesInMyRecycleBin();
+		if(files != null) {
+			fileService.restoreFileFromRecycleBin(files.get(0).getFileId());
+		}
+	}
+	
+	@Test
+	public void testUpdateComment() throws Exception {
+		FileService fileService = new FileService();
+		authenticateEndpoint(fileService.getEndpoint(), USERNAME, PASSWORD);
+		FileList listOfFiles = fileService.getMyFiles();
+		String fileId = listOfFiles.get(0).getFileId();
+		Comment commentObject = fileService.createComment(fileId, "CommentCreated" + System.currentTimeMillis());
+		if(commentObject != null) {
+			String commentId = commentObject.getCommentId();
+			fileService.updateComment(fileId, commentId, commentObject.getComment()+"Vimal"); 
 		}
 	}
 }

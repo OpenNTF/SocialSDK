@@ -47,7 +47,7 @@ public class TagFeedHandler implements IFeedHandler {
 
 	/**
 	 * @param requestData
-	 * @return Profile
+	 * @return Tag
 	 */
 	@Override
 	public Tag createEntity(Response requestData) {
@@ -57,7 +57,7 @@ public class TagFeedHandler implements IFeedHandler {
 
 	/**
 	 * @param data object
-	 * @return Profile
+	 * @return Tag
 	 */
 	@Override
 	public Tag createEntityFromData(Object data) {
@@ -71,7 +71,7 @@ public class TagFeedHandler implements IFeedHandler {
 
 	/**
 	 * @param data object
-	 * @return Collection of profiles
+	 * @return TagList
 	 */
 	@Override
 	public TagList createEntityList(Response requestData) {

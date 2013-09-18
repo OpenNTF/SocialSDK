@@ -13,7 +13,7 @@
  * implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
-package com.ibm.sbt.services.client.connections.profiles.feedhandlers;
+package com.ibm.sbt.services.client.connections.profiles.feedhandler;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -23,7 +23,7 @@ import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.connections.profiles.ProfileService;
 import com.ibm.sbt.services.client.connections.profiles.Tag;
 import com.ibm.sbt.services.client.connections.profiles.TagList;
-import com.ibm.sbt.services.client.connections.profiles.ProfileXPath;
+import com.ibm.sbt.services.client.connections.profiles.model.ProfileXPath;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 
@@ -47,7 +47,7 @@ public class TagFeedHandler implements IFeedHandler {
 
 	/**
 	 * @param requestData
-	 * @return Profile
+	 * @return Tag
 	 */
 	@Override
 	public Tag createEntity(Response requestData) {
@@ -57,7 +57,7 @@ public class TagFeedHandler implements IFeedHandler {
 
 	/**
 	 * @param data object
-	 * @return Profile
+	 * @return Tag
 	 */
 	@Override
 	public Tag createEntityFromData(Object data) {
@@ -71,7 +71,7 @@ public class TagFeedHandler implements IFeedHandler {
 
 	/**
 	 * @param data object
-	 * @return Collection of profiles
+	 * @return TagList
 	 */
 	@Override
 	public TagList createEntityList(Response requestData) {

@@ -23,6 +23,7 @@ import java.util.logging.Logger;
 import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
+import com.ibm.sbt.services.client.connections.profiles.model.ProfileXPath;
 
 /**
  * @Represents Connections Profile

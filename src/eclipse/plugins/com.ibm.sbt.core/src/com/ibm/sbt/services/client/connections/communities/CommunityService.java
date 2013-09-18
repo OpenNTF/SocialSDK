@@ -477,9 +477,9 @@ public class CommunityService extends BaseService {
 		try {
 			member = (Member)getEntity(url, parameters, new MemberFeedHandler(this));
 		} catch (ClientServicesException e) {
-			throw new CommunityServiceException(e, Messages.GetMemberException, communityUuid);
+			throw new CommunityServiceException(e, Messages.GetMemberException, memberId, communityUuid);
 		} catch (Exception e) {
-			throw new CommunityServiceException(e, Messages.GetMemberException, communityUuid);
+			throw new CommunityServiceException(e, Messages.GetMemberException, memberId, communityUuid);
 		}
 		
 		return member;
@@ -496,10 +496,17 @@ public class CommunityService extends BaseService {
 	 * @throws CommunityServiceException
 	 */
 	public boolean addMember(String communityUuid, Member member) throws CommunityServiceException {
+		
 		if (StringUtil.isEmpty(communityUuid)){
 			throw new CommunityServiceException(null, Messages.NullCommunityIdUserIdOrRoleException);
 		}
-
+		String memberId = "";
+		if(StringUtil.isEmpty(member.getUserid())){
+			memberId = member.getEmail();
+		}
+		if (StringUtil.isEmpty(memberId)){
+			throw new CommunityServiceException(null, Messages.NullCommunityIdUserIdOrRoleException);
+		}
 		try {
 			if(StringUtil.isEmpty(member.getRole())){
 				member.setRole("member"); //default role is member
@@ -523,9 +530,9 @@ public class CommunityService extends BaseService {
 			int statusCode = response.getResponse().getStatusLine().getStatusCode();
 			return statusCode == HttpServletResponse.SC_CREATED;
 		} catch (ClientServicesException e) {
-			throw new CommunityServiceException(e, Messages.AddMemberException, member.getUserid(), communityUuid);
+			throw new CommunityServiceException(e, Messages.AddMemberException, memberId, communityUuid);
 		} catch (IOException e) {
-			throw new CommunityServiceException(e, Messages.AddMemberException, member.getUserid(), communityUuid);
+			throw new CommunityServiceException(e, Messages.AddMemberException, memberId, communityUuid);
 		}
 	}
 	/**
@@ -540,7 +547,14 @@ public class CommunityService extends BaseService {
 	 * @throws CommunityServiceException
 	 */
 	public void updateMember(String communityId, Member member)throws CommunityServiceException {
-		if (StringUtil.isEmpty(communityId)||StringUtil.isEmpty(member.getUserid())){
+		if (StringUtil.isEmpty(communityId)){
+			throw new CommunityServiceException(null, Messages.NullCommunityIdUserIdOrRoleException);
+		}
+		String memberId = "";
+		if(StringUtil.isEmpty(member.getUserid())){
+			memberId = member.getEmail();
+		}
+		if (StringUtil.isEmpty(memberId)){
 			throw new CommunityServiceException(null, Messages.NullCommunityIdUserIdOrRoleException);
 		}
 		Map<String, String> parameters = new HashMap<String, String>();
@@ -561,9 +575,9 @@ public class CommunityService extends BaseService {
 		try {
 			super.createData(communityUpdateMembertUrl, parameters, memberPayload);
 		} catch (ClientServicesException e) {
-			throw new CommunityServiceException(e, Messages.UpdateMemberException, member.getUserid(), member.getRole(), communityId);
+			throw new CommunityServiceException(e, Messages.UpdateMemberException, memberId, member.getRole(), communityId);
 		} catch (IOException e) {
-			throw new CommunityServiceException(e, Messages.UpdateMemberException, member.getUserid(), member.getRole(), communityId);
+			throw new CommunityServiceException(e, Messages.UpdateMemberException, memberId, member.getRole(), communityId);
 		}
 		
 	}

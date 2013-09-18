@@ -14,11 +14,11 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<%@page import="com.ibm.sbt.services.client.connections.files.CommentEntryList"%>
+<%@page import="com.ibm.sbt.services.client.connections.files.CommentList"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.FileService"%>
-<%@page import="com.ibm.sbt.services.client.connections.files.model.CommentEntry"%>
-<%@page import="com.ibm.sbt.services.client.connections.files.model.FileEntry"%>
-<%@page import="com.ibm.sbt.services.client.connections.files.FileEntryList"%>
+<%@page import="com.ibm.sbt.services.client.connections.files.Comment"%>
+<%@page import="com.ibm.sbt.services.client.connections.files.File"%>
+<%@page import="com.ibm.sbt.services.client.connections.files.FileList"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Map"%>
@@ -38,25 +38,25 @@
 	<h4>Get File Comments</h4>
 	<div id="content">
 	<%
-    try {
-        FileService fileService = new FileService();
-        FileEntryList fileEntries = fileService.getMyFiles();
-        FileEntry fileEntry = fileEntries.get(0);
-        CommentEntryList commentEntries = fileService.getAllFileComments(fileEntry.getFileId(), null);
-        if (commentEntries != null && !commentEntries.isEmpty()) {
-            for (CommentEntry commentEntry : commentEntries) {
-                out.println("Comment Id	: " + commentEntry.getCommentId() + " , ");
-                out.println("Comment : " + commentEntry.getComment());
-                out.println("<br>");
-            }
-        } else {
-            out.println("No Results");
-        }
-    } catch (Throwable e) {
-        out.println("<pre>");
-       out.println(e.getMessage());
-        out.println("</pre>");
-    }
+		try {
+			        FileService fileService = new FileService();
+			        FileList fileEntries = fileService.getMyFiles();
+			        File fileEntry = fileEntries.get(0);
+			        CommentList commentEntries = fileService.getAllFileComments(fileEntry.getFileId(), null);
+			        if (commentEntries != null && !commentEntries.isEmpty()) {
+			            for (Comment commentEntry : commentEntries) {
+			                out.println("Comment Id	: " + commentEntry.getCommentId() + " , ");
+			                out.println("Comment : " + commentEntry.getComment());
+			                out.println("<br>");
+			            }
+			        } else {
+			            out.println("No Results");
+			        }
+			    } catch (Throwable e) {
+			        out.println("<pre>");
+			       out.println(e.getMessage());
+			        out.println("</pre>");
+			    }
 	%>
 	</div>
 </body>

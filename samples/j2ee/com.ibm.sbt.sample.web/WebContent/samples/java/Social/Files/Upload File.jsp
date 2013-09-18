@@ -15,9 +15,9 @@
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@page import="com.ibm.sbt.services.client.connections.files.FileService"%>
-<%@page import="com.ibm.sbt.services.client.connections.files.model.CommentEntry"%>
-<%@page import="com.ibm.sbt.services.client.connections.files.model.FileEntry"%>
-<%@page import="com.ibm.sbt.services.client.connections.files.FileEntryList"%>
+<%@page import="com.ibm.sbt.services.client.connections.files.Comment"%>
+<%@page import="com.ibm.sbt.services.client.connections.files.File"%>
+<%@page import="com.ibm.sbt.services.client.connections.files.FileList"%>
 <%@page import="java.nio.charset.Charset"%>
 <%@page import="java.io.ByteArrayInputStream"%>
 <%@page import="java.io.PrintWriter"%>
@@ -41,7 +41,7 @@
         FileService fileService = new FileService();
         String content = "Test File Content";
         String name = "Test File " + System.nanoTime() + ".txt";
-        FileEntry entry = fileService.upload(new ByteArrayInputStream(content.getBytes(Charset.forName("UTF-8"))), name, content.length(),null);
+        File entry = fileService.uploadFile(new ByteArrayInputStream(content.getBytes(Charset.forName("UTF-8"))), name, content.length(),null);
       
         out.println("File created: id ["+entry.getFileId()+"] title [" + entry.getTitle() + "]");
       } catch (Throwable e) {

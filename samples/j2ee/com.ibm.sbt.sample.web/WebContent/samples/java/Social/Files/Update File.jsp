@@ -17,9 +17,9 @@
 <%@page import="com.ibm.sbt.services.client.connections.files.model.FileRequestPayload"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.model.FileCreationParameters"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.FileService"%>
-<%@page import="com.ibm.sbt.services.client.connections.files.model.CommentEntry"%>
-<%@page import="com.ibm.sbt.services.client.connections.files.model.FileEntry"%>
-<%@page import="com.ibm.sbt.services.client.connections.files.FileEntryList"%>
+<%@page import="com.ibm.sbt.services.client.connections.files.Comment"%>
+<%@page import="com.ibm.sbt.services.client.connections.files.File"%>
+<%@page import="com.ibm.sbt.services.client.connections.files.FileList"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Date"%>
 <%@page import="com.ibm.sbt.services.endpoints.Endpoint"%>
@@ -42,8 +42,8 @@
   <%
       try {
           FileService fileService = new FileService();
-          List<FileEntry> fileEntries = fileService.getMyFiles();
-          FileEntry fileEntry = fileEntries.get(0);
+          FileList fileEntries = fileService.getMyFiles();
+          File fileEntry = fileEntries.get(0);
           String fileId = fileEntry.getFileId();
           String shareWithUserId = Context.get().getProperty("sample.userId2");
           fileEntry = fileService.getFile(fileId, false);
@@ -62,7 +62,7 @@
           Map<String, String> payloadMap = new HashMap<String, String>();
           payloadMap.put(FileRequestPayload.LABEL.toString(), "LabelUpdateFileNew" + System.currentTimeMillis());
 
-          fileEntry = fileService.updateFileInformation(fileEntry, paramsMap, payloadMap);
+          fileEntry = fileService.updateFileMetadata(fileEntry, paramsMap, payloadMap);
 
           out.println("File Updated : " + fileEntry.getFileId());
       } catch (Throwable e) {

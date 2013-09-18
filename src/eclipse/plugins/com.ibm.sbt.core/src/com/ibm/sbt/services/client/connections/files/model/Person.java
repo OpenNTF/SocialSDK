@@ -26,9 +26,9 @@ import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 
-public class PersonEntry extends BaseEntity {
+public class Person extends BaseEntity {
 	
-	public PersonEntry(BaseService svc, DataHandler<?> dataHandler) {
+	public Person(BaseService svc, DataHandler<?> dataHandler) {
 		super(svc, dataHandler);
 	}
 	

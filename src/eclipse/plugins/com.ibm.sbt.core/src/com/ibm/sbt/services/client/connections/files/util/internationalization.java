@@ -1,4 +1,4 @@
-package com.ibm.sbt.services.client.connections.files;
+package com.ibm.sbt.services.client.connections.files.util;
 /*package com.ibm.sbt.services.client.connections.files;
 
 import java.text.MessageFormat;

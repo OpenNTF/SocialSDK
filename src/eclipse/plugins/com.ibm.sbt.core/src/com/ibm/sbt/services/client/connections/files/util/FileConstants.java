@@ -21,6 +21,8 @@ package com.ibm.sbt.services.client.connections.files.util;
  */
 public class FileConstants {
 
+	public static char SEPARATOR   = '/';
+	
 	public static String LockType_HARD	= "HARD";
 	public static String LockType_NONE	= "NONE";
     

@@ -34,7 +34,7 @@ import com.ibm.sbt.services.client.connections.communities.feedhandler.Community
 import com.ibm.sbt.services.client.connections.forums.feedhandler.TopicsFeedHandler;
 import com.ibm.sbt.services.client.connections.communities.feedhandler.InviteFeedHandler;
 import com.ibm.sbt.services.client.connections.communities.feedhandler.MemberFeedHandler;
-import com.ibm.sbt.services.client.connections.communities.tranformers.CommunityMemberTransformer;
+import com.ibm.sbt.services.client.connections.communities.transformers.CommunityMemberTransformer;
 import com.ibm.sbt.services.client.connections.communities.util.Messages;
 import com.ibm.sbt.services.client.connections.forums.ForumService;
 import com.ibm.sbt.services.client.connections.forums.TopicList;
@@ -504,7 +504,7 @@ public class CommunityService extends BaseService {
 		if(StringUtil.isEmpty(member.getUserid())){
 			memberId = member.getEmail();
 		}
-		if (StringUtil.isEmpty(memberId)){
+		if (StringUtil.isEmpty(member.getUserid())){
 			throw new CommunityServiceException(null, Messages.NullCommunityIdUserIdOrRoleException);
 		}
 		try {

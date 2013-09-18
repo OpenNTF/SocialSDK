@@ -19,6 +19,7 @@ package com.ibm.sbt.services.client.connections.profiles;
 import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
+import com.ibm.sbt.services.client.connections.profiles.model.ProfileXPath;
 
 /**
  * tag Entry Class - representing a tag associated with a Profile.

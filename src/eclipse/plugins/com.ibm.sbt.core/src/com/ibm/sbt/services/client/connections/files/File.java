@@ -21,6 +21,7 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
+import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.files.model.Author;
 import com.ibm.sbt.services.client.connections.files.model.Modifier;
 import com.ibm.sbt.services.client.connections.files.model.Person;
@@ -256,7 +257,7 @@ public class File extends BaseEntity {
 		return getService().getFile(getFileId());
     }
 
-	public Comment addComment(String comment, Map<String, String> params) throws FileServiceException {
+	public Comment addComment(String comment, Map<String, String> params) throws FileServiceException, TransformerException {
 		return this.getService().addCommentToFile(this.getFileId(), comment, this.getAuthor().getUserUuid(), params);
     }
 	
@@ -280,11 +281,11 @@ public class File extends BaseEntity {
 		this.getService().deleteFile(this.getFileId());
     }
 	
-	public void update(Map<String, String> params) throws FileServiceException {
+	public void update(Map<String, String> params) throws FileServiceException, TransformerException {
 		this.getService().updateFileMetadata(this, params);
     }
 	
-	public void save(Map<String, String> params) throws FileServiceException {
+	public void save(Map<String, String> params) throws FileServiceException, TransformerException {
 		//TODO
 		this.getService().updateFileMetadata(this, params);
     }

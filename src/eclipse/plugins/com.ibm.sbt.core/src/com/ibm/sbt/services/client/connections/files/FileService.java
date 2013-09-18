@@ -31,7 +31,7 @@ import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.base.ConnectionsConstants;
+import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.files.model.FileEntryXPath;
 import com.ibm.sbt.services.client.connections.files.FileServiceException;
 import com.ibm.sbt.services.client.connections.files.model.FileCommentParameterBuilder;
@@ -40,9 +40,14 @@ import com.ibm.sbt.services.client.connections.files.model.FileRequestParams;
 import com.ibm.sbt.services.client.connections.files.model.FileRequestPayload;
 import com.ibm.sbt.services.client.connections.files.feedHandler.*;
 import com.ibm.sbt.services.client.connections.files.model.Headers;
+import com.ibm.sbt.services.client.connections.files.transformers.CommentTransformer;
+import com.ibm.sbt.services.client.connections.files.transformers.FileTransformer;
+import com.ibm.sbt.services.client.connections.files.transformers.FolderTransformer;
+import com.ibm.sbt.services.client.connections.files.transformers.ModerationTransformer;
+import com.ibm.sbt.services.client.connections.files.transformers.MultipleFileTransformer;
 import com.ibm.sbt.services.client.connections.files.util.ContentMapFiles;
+import com.ibm.sbt.services.client.connections.files.util.FileConstants;
 import com.ibm.sbt.services.client.connections.files.util.Messages;
-import com.ibm.sbt.services.client.connections.files.util.NamespacesConnections;
 import com.ibm.sbt.services.client.ClientService.ContentStream;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.ClientService;
@@ -84,7 +89,7 @@ public class FileService extends BaseService {
 	}
     
     public void actOnCommentAwaitingApproval(String commentId, String action, String actionReason)
-            throws FileServiceException {
+            throws FileServiceException, TransformerException {
         // get thr uri from here ::
         // In the service document, locate the workspace with the <category term="comments-moderation" .../>
         // child element, and then find the collection with the <atom:category term="approval-action" .../>
@@ -116,7 +121,7 @@ public class FileService extends BaseService {
     }
 
     public void actOnFileAwaitingApproval(String fileId, String action, String actionReason)
-            throws FileServiceException {
+            throws FileServiceException, TransformerException {
         // get the uri
         // In the service document, locate the workspace with the <category term="documents-moderation" .../>
         // child element, and then find the collection with the <atom:category term="approval-action" .../>
@@ -147,7 +152,7 @@ public class FileService extends BaseService {
     }
 
     public void actOnFlaggedComment(String commentId, String action, String actionReason)
-            throws FileServiceException {
+            throws FileServiceException, TransformerException {
         // get thr uri from here ::
         // In the service document, locate the workspace with the <category term="comments-moderation" .../>
         // child element, and then find the collection with the <atom:category term="approval-action" .../>
@@ -179,7 +184,7 @@ public class FileService extends BaseService {
     }
 
     public void actOnFlaggedFile(String fileId, String action, String actionReason)
-            throws FileServiceException {
+            throws FileServiceException, TransformerException {
         // get the uri
         // In the service document, locate the workspace with the <category term="documents-moderation" .../>
         // child element, and then find the collection with the <atom:category term="approval-action" .../>
@@ -218,8 +223,9 @@ public class FileService extends BaseService {
      * @param comment - Comment to be added to the File
      * @return Comment
      * @throws FileServiceException
+     * @throws TransformerException 
      */
-    public Comment addCommentToFile(String fileId, String comment, Map<String, String> params) throws FileServiceException {
+    public Comment addCommentToFile(String fileId, String comment, Map<String, String> params) throws FileServiceException, TransformerException {
     	return this.addCommentToFile(fileId, comment, null, params);
     }
     /**
@@ -233,9 +239,10 @@ public class FileService extends BaseService {
      * @param userId - user Id of the person in whose library the file is present
      * @return Comment
      * @throws FileServiceException
+     * @throws TransformerException 
      */
     public Comment addCommentToFile(String fileId, String comment, String userId,
-            Map<String, String> params) throws FileServiceException {
+            Map<String, String> params) throws FileServiceException, TransformerException {
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         SubFilters subFilters = new SubFilters();
         String category = null;
@@ -270,9 +277,10 @@ public class FileService extends BaseService {
      * @param params - Map of Parameters. See {@link FileRequestParams} for possible values.
      * @return FileList
      * @throws FileServiceException
+     * @throws TransformerException 
      */
     public FileList addFilesToFolder(String folderId, List<String> listOfFileIds,
-            Map<String, String> params) throws FileServiceException {
+            Map<String, String> params) throws FileServiceException, TransformerException {
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         if (StringUtil.isEmpty(folderId)) {
             throw new FileServiceException(null, Messages.Invalid_CollectionId);
@@ -315,8 +323,9 @@ public class FileService extends BaseService {
      * @param fileId
      * @param folderIds - list of folder Ids to which the file needs to be added.
      * @throws FileServiceException
+     * @throws TransformerException 
      */
-    public void addFileToFolders(String fileId, List<String> folderIds) throws FileServiceException {
+    public void addFileToFolders(String fileId, List<String> folderIds) throws FileServiceException, TransformerException {
         this.addFileToFolders(fileId, folderIds, null, null);
     }
 
@@ -330,9 +339,10 @@ public class FileService extends BaseService {
      * @param folderIds - list of folder Ids to which the file needs to be added.
      * @param params
      * @throws FileServiceException
+     * @throws TransformerException 
      */
     public void addFileToFolders(String fileId, List<String> folderIds, Map<String, String> params)
-            throws FileServiceException {
+            throws FileServiceException, TransformerException {
         this.addFileToFolders(fileId, folderIds, null, params);
     }
 
@@ -346,9 +356,10 @@ public class FileService extends BaseService {
      * @param folderIds - list of folder Ids to which the file needs to be added.
      * @param userId
      * @throws FileServiceException
+     * @throws TransformerException 
      */
     public void addFileToFolders(String fileId, List<String> folderIds, String userId)
-            throws FileServiceException {
+            throws FileServiceException, TransformerException {
         this.addFileToFolders(fileId, folderIds, userId, null);
     }
 
@@ -363,9 +374,10 @@ public class FileService extends BaseService {
      * @param userId
      * @param params
      * @throws FileServiceException
+     * @throws TransformerException 
      */
     public void addFileToFolders(String fileId, List<String> folderIds, String userId,
-            Map<String, String> params) throws FileServiceException {
+            Map<String, String> params) throws FileServiceException, TransformerException {
         if (fileId == null) {
             throw new FileServiceException(null, Messages.Invalid_File);
         }
@@ -401,7 +413,7 @@ public class FileService extends BaseService {
         // executePost(requestUri, params, headers, payload);
     }
 
-    public Comment createComment(String fileId, String comment) throws FileServiceException {
+    public Comment createComment(String fileId, String comment) throws FileServiceException, TransformerException {
         return this.createComment(fileId, comment, null, null);
     }
 
@@ -416,9 +428,10 @@ public class FileService extends BaseService {
      * @param userId
      * @return
      * @throws FileServiceException
+     * @throws TransformerException 
      */
     public Comment createComment(String fileId, String comment, String userId)
-            throws FileServiceException {
+            throws FileServiceException, TransformerException {
         return this.createComment(fileId, comment, userId, null);
     }
 
@@ -434,9 +447,10 @@ public class FileService extends BaseService {
      * @param params
      * @return Comment
      * @throws FileServiceException
+     * @throws TransformerException 
      */
     public Comment createComment(String fileId, String comment, String userId, Map<String, String> params)
-            throws FileServiceException {
+            throws FileServiceException, TransformerException {
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         String category = null;
         SubFilters subFilters = new SubFilters();
@@ -466,7 +480,7 @@ public class FileService extends BaseService {
         }
     }
 
-    public File createFolder(String name) throws FileServiceException {
+    public File createFolder(String name) throws FileServiceException, TransformerException {
         return this.createFolder(name, null, null);
     }
 
@@ -482,13 +496,14 @@ public class FileService extends BaseService {
      *            in order
      * @return File
      * @throws FileServiceException
+     * @throws TransformerException 
      */
-    public File createFolder(String name, String description) throws FileServiceException {
+    public File createFolder(String name, String description) throws FileServiceException, TransformerException {
         return this.createFolder(name, description, null);
     }
 
     public File createFolder(String name, String description, String shareWith)
-            throws FileServiceException {
+            throws FileServiceException, TransformerException {
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         String view = Views.FOLDERS.getViews();
         String resultType = ResultType.FEED.getResultType();
@@ -627,7 +642,7 @@ public class FileService extends BaseService {
         params.put(FileRequestParams.DELETEFROM.getFileRequestParams(), versionLabel);
 
         try {
-            super.deleteData(requestUri, params, fileId);
+            super.deleteData(requestUri, params, null);
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInDeletingFile);
         }
@@ -678,7 +693,7 @@ public class FileService extends BaseService {
                 subFilters, resultType);
 
         try {
-            super.deleteData(requestUri, null, commentId);
+            super.deleteData(requestUri, null, null);
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInDeletingComment);
         }
@@ -690,7 +705,7 @@ public class FileService extends BaseService {
         }
         String requestUri = this.getModerationUri(fileId, "approval", "file");
         try {
-            super.deleteData(requestUri, null, fileId);
+            super.deleteData(requestUri, null, null);
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInDeletingFile);
         }
@@ -737,7 +752,7 @@ public class FileService extends BaseService {
                 null,
                 subFilters, resultType);
         try {
-            super.deleteData(requestUri, null, fileId);
+            super.deleteData(requestUri, null, null);
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInDeletingFile);
         }
@@ -790,7 +805,7 @@ public class FileService extends BaseService {
             params.put(FileRequestParams.SHAREDWITH.getFileRequestParams(), userId);
         }
         try {
-            super.deleteData(requestUri, params, fileId);
+            super.deleteData(requestUri, params, null);
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInDeletingFileShare);
         }
@@ -805,7 +820,7 @@ public class FileService extends BaseService {
             return;
         }
         try {
-            super.deleteData(requestUri, null, commentId);
+            super.deleteData(requestUri, null, null);
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInDeletingComment);
         }
@@ -820,7 +835,7 @@ public class FileService extends BaseService {
             return;
         }
         try {
-            super.deleteData(requestUri, null, fileId);
+            super.deleteData(requestUri, null, null);
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInDeletingFile);
         }
@@ -861,9 +876,10 @@ public class FileService extends BaseService {
      * @param flagWhat - If flagging file as inappropriate, flagWhat should be the string "file". If flagging
      *            a comment, then flagWhat should be the String "comment".
      * @throws FileServiceException
+     * @throws TransformerException 
      */
     public void flagAsInappropriate(String id, String flagReason, String flagWhat)
-            throws FileServiceException {
+            throws FileServiceException, TransformerException {
         if (StringUtil.isEmpty(id)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
@@ -2152,7 +2168,7 @@ public class FileService extends BaseService {
         Map<String, String> params = new HashMap<String, String>();
         params.put(FileRequestParams.ITEMID.getFileRequestParams(), fileId);
         try {
-            super.deleteData(requestUri, null, fileId);
+            super.deleteData(requestUri, params, null);
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInDeletingFile);
         }
@@ -2225,9 +2241,10 @@ public class FileService extends BaseService {
      * @param params
      * @return
      * @throws FileServiceException
+     * @throws TransformerException 
      */
     public void shareFileWithCommunities(String fileId, List<String> communityIds, Map<String, String> params)
-            throws FileServiceException {
+            throws FileServiceException, TransformerException {
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
@@ -2346,9 +2363,10 @@ public class FileService extends BaseService {
      * @param comment
      * @return
      * @throws FileServiceException
+     * @throws TransformerException 
      */
     public Comment updateComment(String fileId, String commentId, Map<String, String> params,
-            String comment) throws FileServiceException {
+            String comment) throws FileServiceException, TransformerException {
         return this.updateComment(fileId, commentId, comment, "", params);
     }
 
@@ -2361,9 +2379,10 @@ public class FileService extends BaseService {
      * @param comment
      * @return
      * @throws FileServiceException
+     * @throws TransformerException 
      */
     public Comment updateComment(String fileId, String commentId, String comment)
-            throws FileServiceException {
+            throws FileServiceException, TransformerException {
         return this.updateComment(fileId, commentId, comment, "", null);
     }
 
@@ -2377,9 +2396,10 @@ public class FileService extends BaseService {
      * @param userId
      * @return
      * @throws FileServiceException
+     * @throws TransformerException 
      */
     public Comment updateComment(String fileId, String commentId, String comment, String userId)
-            throws FileServiceException {
+            throws FileServiceException, TransformerException {
         return this.updateComment(fileId, commentId, comment, userId, null);
     }
 
@@ -2396,9 +2416,10 @@ public class FileService extends BaseService {
      * @param comment New comment String.
      * @return Comment
      * @throws FileServiceException
+     * @throws TransformerException 
      */
     public Comment updateComment(String fileId, String commentId, String comment, String userId,
-            Map<String, String> params) throws FileServiceException {
+            Map<String, String> params) throws FileServiceException, TransformerException {
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         SubFilters subFilters = new SubFilters();
         if (StringUtil.isEmpty(fileId)) {
@@ -2496,8 +2517,9 @@ public class FileService extends BaseService {
      * @param payloadMap
      * @return
      * @throws FileServiceException
+     * @throws TransformerException 
      */
-    public File updateFileMetadata(File fileEntry, Map<String, String> params) throws FileServiceException {
+    public File updateFileMetadata(File fileEntry, Map<String, String> params) throws FileServiceException, TransformerException {
         if (fileEntry == null) {
             throw new FileServiceException(null, Messages.Invalid_FileEntry);
         }
@@ -2514,9 +2536,10 @@ public class FileService extends BaseService {
      * @param updationsMap a Map of updations which need to be done to the file.
      * @return
      * @throws FileServiceException
+     * @throws TransformerException 
      */
     public File updateFileMetadata(String fileId, Map<String, String> updationsMap)
-            throws FileServiceException {
+            throws FileServiceException, TransformerException {
         Map<String, Object> payloadMap = new HashMap<String, Object>();
         Map<String, String> paramsMap = new HashMap<String, String>();
         this.parseUpdationsMap(updationsMap, payloadMap, paramsMap);
@@ -2572,9 +2595,10 @@ public class FileService extends BaseService {
      *            {@link FileRequestPayload} for possible values.
      * @return File
      * @throws FileServiceException
+     * @throws TransformerException 
      */
     public File updateFileMetadata(String fileId, Map<String, String> params,
-            Map<String, Object> payloadMap) throws FileServiceException {
+            Map<String, Object> payloadMap) throws FileServiceException, TransformerException {
         if (StringUtil.isEmpty(fileId)) {
             return new File();
         }
@@ -2588,7 +2612,7 @@ public class FileService extends BaseService {
     // Need to figure out what should be done with the label updation of comment. Connection Doc states that
     // comment updations here can be done on comment content and on label. But what is the label of the
     // comment ? Need to check this.
-    public void updateFlaggedComment(String commentId, String updatedComment) throws FileServiceException {
+    public void updateFlaggedComment(String commentId, String updatedComment) throws FileServiceException, TransformerException {
         if (StringUtil.isEmpty(commentId)) {
             throw new FileServiceException(null, Messages.Invalid_CommentId);
         }
@@ -2612,7 +2636,7 @@ public class FileService extends BaseService {
     }
 
     public void updateFlaggedFile(String fileId, Map<String, String> updationsMap/* to title, tag and content */)
-            throws FileServiceException {
+            throws FileServiceException, TransformerException {
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
@@ -2637,7 +2661,7 @@ public class FileService extends BaseService {
     }
 
     public File updateFolder(String folderId, String name, String description, String shareWith)
-            throws FileServiceException {
+            throws FileServiceException, TransformerException {
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         SubFilters subFilters = new SubFilters();
         subFilters.setCollectionId(folderId);
@@ -2736,15 +2760,15 @@ public class FileService extends BaseService {
 
 
 
-    private String constructEntry(String fileId, String content, String entity) {
-        StringBuilder payload = new StringBuilder(
-                "xmlns=\"http://www.w3.org/2005/Atom\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\"> <snx:in-ref-to rel=\"http://www.ibm.com/xmlns/prod/sn/report-item\" ref=\""
-                        + fileId
-                        + "\" ref-item-type=\""
-                        + entity
-                        + "\" /snx:in-ref-to><content type=\"text\">" + content + "</content>");
-        return payload.toString();
-    }
+//    private String constructEntry(String fileId, String content, String entity) {
+//        StringBuilder payload = new StringBuilder(
+//                "xmlns=\"http://www.w3.org/2005/Atom\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\"> <snx:in-ref-to rel=\"http://www.ibm.com/xmlns/prod/sn/report-item\" ref=\""
+//                        + fileId
+//                        + "\" ref-item-type=\""
+//                        + entity
+//                        + "\" /snx:in-ref-to><content type=\"text\">" + content + "</content>");
+//        return payload.toString();
+//    }
 
     /**
      * constructPayload
@@ -2756,43 +2780,51 @@ public class FileService extends BaseService {
      * @param payloadMap - Map of entries for which we will construct a Request Body. See
      *            {@link FileRequestPayload} for possible values.
      * @return Document
+     * @throws TransformerException 
      */
 
-    private Document constructPayload(String fileId, Map<String, Object> payloadMap) {
-        if (payloadMap == null || payloadMap.isEmpty()) {
-            return null;
-            // throw new FileServiceException(null, Messages.PayloadInfo_1);
-        }
-        StringBuilder requestBody = new StringBuilder("<entry xmlns=\"http://www.w3.org/2005/Atom\">");
-        requestBody
-                .append("<category term=\"document\" label=\"document\" scheme=\"tag:ibm.com,2006:td/type\"></category>");
-        requestBody.append("<id>urn:lsid:ibm.com:td:" + fileId + "</id>");
-        requestBody.append("<uuid xmlns=\""
-                            + ConnectionsConstants.nameSpaceCtx.getNamespaceURI("td") + "\">" + fileId + "</uuid>");
-        Iterator<Map.Entry<String, Object>> entries = payloadMap.entrySet().iterator();
-        while (entries.hasNext()) {
-            Map.Entry<String, Object> fieldMapPairs = entries.next();
-            String key = fieldMapPairs.getKey();
-            Object value = fieldMapPairs.getValue();
-            if (!StringUtil.isEmpty(key) && value != null) {
-                // here we handle the cases of setting label/title/summary/visibility
-                if (key.equals("label")) {
-                    requestBody.append("<label xmlns=\""
-                            + ConnectionsConstants.nameSpaceCtx.getNamespaceURI("td") + "\">" + value
-                            + "</label>");
-                    requestBody.append("<title>" + value + "</title>");
-                } else if (key.equals("summary")) {
-                    requestBody.append("<summary type=\"text\">" + value + "</summary>");
-                } else if (key.equals("visibility")) {
-                    requestBody.append("<visibility xmlns=\""
-                            + ConnectionsConstants.nameSpaceCtx.getNamespaceURI("td") + "\">" + value
-                            + "</visibility>");
-                }
-            }
-            entries.remove();
-        }
-        requestBody.append("</entry>");
-        return this.convertToXML(requestBody.toString());
+    private Document constructPayload(String fileId, Map<String, Object> payloadMap) throws TransformerException {
+    	
+    	payloadMap.put("category", "document");
+    	payloadMap.put("id", fileId);
+    	FileTransformer fileTransformer = new FileTransformer();
+    	String requestBody = fileTransformer.transform(payloadMap);
+    	return convertToXML(requestBody);
+    	
+//        if (payloadMap == null || payloadMap.isEmpty()) {
+//            return null;
+//            // throw new FileServiceException(null, Messages.PayloadInfo_1);
+//        }
+//        StringBuilder requestBody = new StringBuilder("<entry xmlns=\"http://www.w3.org/2005/Atom\">");
+//        requestBody
+//                .append("<category term=\"document\" label=\"document\" scheme=\"tag:ibm.com,2006:td/type\"></category>");
+//        requestBody.append("<id>urn:lsid:ibm.com:td:" + fileId + "</id>");
+//        requestBody.append("<uuid xmlns=\""
+//                            + ConnectionsConstants.nameSpaceCtx.getNamespaceURI("td") + "\">" + fileId + "</uuid>");
+//        Iterator<Map.Entry<String, Object>> entries = payloadMap.entrySet().iterator();
+//        while (entries.hasNext()) {
+//            Map.Entry<String, Object> fieldMapPairs = entries.next();
+//            String key = fieldMapPairs.getKey();
+//            Object value = fieldMapPairs.getValue();
+//            if (!StringUtil.isEmpty(key) && value != null) {
+//                // here we handle the cases of setting label/title/summary/visibility
+//                if (key.equals("label")) {
+//                    requestBody.append("<label xmlns=\""
+//                            + ConnectionsConstants.nameSpaceCtx.getNamespaceURI("td") + "\">" + value
+//                            + "</label>");
+//                    requestBody.append("<title>" + value + "</title>");
+//                } else if (key.equals("summary")) {
+//                    requestBody.append("<summary type=\"text\">" + value + "</summary>");
+//                } else if (key.equals("visibility")) {
+//                    requestBody.append("<visibility xmlns=\""
+//                            + ConnectionsConstants.nameSpaceCtx.getNamespaceURI("td") + "\">" + value
+//                            + "</visibility>");
+//                }
+//            }
+//            entries.remove();
+//        }
+//        requestBody.append("</entry>");
+//        return this.convertToXML(requestBody.toString());
     }
 
     /**
@@ -2803,61 +2835,90 @@ public class FileService extends BaseService {
      * @param shareWith
      * @param operation
      * @return
+     * @throws TransformerException 
      */
     private Document constructPayloadFolder(String name, String description, String shareWith,
-            String operation) {
+            String operation) throws TransformerException {
         return this.constructPayloadFolder(name, description, shareWith, operation, null);
     }
 
     private Document constructPayloadFolder(String name, String description, String shareWith,
-            String operation, String entityId) {
-        String visibility = null, shareWithId = null, shareWithWhat = null, shareWithRole = null;
-        StringBuilder payload = new StringBuilder("<entry xmlns=\"http://www.w3.org/2005/Atom\">");
-        payload.append("<category term=\"collection\"  label=\"collection\" scheme=\"tag:ibm.com,2006:td/type\"/>");
-
-        if (!StringUtil.isEmpty(operation)) {
-            if (operation.equals("update")) {
-                payload.append("<id>" + entityId + "</id>");
-            }
-            // if (operation.equals("create")) {
-            if (StringUtil.isEmpty(name)) {
-                // TODO
-                // System.err.println("Invalid Name");
-                return null;
-            }
-            payload.append("<label xmlns=\"urn:ibm.com/td\" makeUnique=\"true\">" + name + "</label>");
-            payload.append("<title>" + name + "</title>");
-
-            if (!StringUtil.isEmpty(description) || !StringUtil.equalsIgnoreCase(description, null)) {
-                payload.append("<summary type=\"text\">" + description + "</summary>");
-            }
-            if (StringUtil.isEmpty(shareWith) || StringUtil.equalsIgnoreCase(shareWith, "null")) {
-                visibility = "private";
-                shareWith = "";
-            } else {
-                visibility = "public";
-                String parts[] = shareWith.split(",");
-                if ((parts.length) != 3) {
-                    // System.err.println("Invalid shareWith Argument");
-                    return null;
-                } else {
-                    shareWithId = parts[0];
-                    shareWithWhat = parts[1];
-                    shareWithRole = parts[2];
-                }
-                shareWith = "<member ca:id=\""
-                        + shareWithId
-                        + "\" xmlns=\"http://www.ibm.com/xmlns/prod/composite-applications/v1.0\" ca:type=\""
-                        + shareWithWhat
-                        + "\" xmlns:ca=\"http://www.ibm.com/xmlns/prod/composite-applications/v1.0\" ca:role=\""
-                        + shareWithRole + "\"></member>";
-            }
-            payload.append("<visibility xmlns=\"urn:ibm.com/td\">" + visibility
-                    + "</visibility> <sharedWith xmlns=\"urn:ibm.com/td\">" + shareWith + "</sharedWith>");
-        }
-        // }
-        payload.append("</entry>");
-        return convertToXML(payload.toString());
+            String operation, String entityId) throws TransformerException {
+    	
+    	Map<String, Object> fieldsMap = new HashMap<String, Object>();
+    	fieldsMap.put("category", FileConstants.Category_COLLECTION);
+    	if (!StringUtil.isEmpty(operation)) {
+    		if (operation.equals("update")) { 
+    			fieldsMap.put("id", entityId);
+    		}
+    	}
+    	fieldsMap.put("label", name);
+    	fieldsMap.put("title", name);
+    	fieldsMap.put("summary", description);
+    	if (StringUtil.isEmpty(shareWith) || StringUtil.equalsIgnoreCase(shareWith, "null")) {
+          fieldsMap.put("visibility", "private");
+      } else {
+    	  fieldsMap.put("visibility", "public");
+          String parts[] = shareWith.split(",");
+          if ((parts.length) != 3) {
+              // System.err.println("Invalid shareWith Argument");
+              return null;
+          } else {
+        	  fieldsMap.put("shareWithId", parts[0]);
+        	  fieldsMap.put("shareWithWhat", parts[1]);
+        	  fieldsMap.put("shareWithRole", parts[2]);
+          }
+      }
+    	FolderTransformer folderTransformer = new FolderTransformer();
+    	String payload = folderTransformer.transform(fieldsMap); 
+    	return convertToXML(payload.toString());
+    	
+//        String visibility = null, shareWithId = null, shareWithWhat = null, shareWithRole = null;
+//        StringBuilder payload = new StringBuilder("<entry xmlns=\"http://www.w3.org/2005/Atom\">");
+//        payload.append("<category term=\"collection\"  label=\"collection\" scheme=\"tag:ibm.com,2006:td/type\"/>");
+//
+//        if (!StringUtil.isEmpty(operation)) {
+//            if (operation.equals("update")) {
+//                payload.append("<id>" + entityId + "</id>");
+//            }
+//            // if (operation.equals("create")) {
+//            if (StringUtil.isEmpty(name)) {
+//                // TODO
+//                // System.err.println("Invalid Name");
+//                return null;
+//            }
+//            payload.append("<label xmlns=\"urn:ibm.com/td\" makeUnique=\"true\">" + name + "</label>");
+//            payload.append("<title>" + name + "</title>");
+//
+//            if (!StringUtil.isEmpty(description) || !StringUtil.equalsIgnoreCase(description, null)) {
+//                payload.append("<summary type=\"text\">" + description + "</summary>");
+//            }
+//            if (StringUtil.isEmpty(shareWith) || StringUtil.equalsIgnoreCase(shareWith, "null")) {
+//                visibility = "private";
+//                shareWith = "";
+//            } else {
+//                visibility = "public";
+//                String parts[] = shareWith.split(",");
+//                if ((parts.length) != 3) {
+//                    // System.err.println("Invalid shareWith Argument");
+//                    return null;
+//                } else {
+//                    shareWithId = parts[0];
+//                    shareWithWhat = parts[1];
+//                    shareWithRole = parts[2];
+//                }
+//                shareWith = "<member ca:id=\""
+//                        + shareWithId
+//                        + "\" xmlns=\"http://www.ibm.com/xmlns/prod/composite-applications/v1.0\" ca:type=\""
+//                        + shareWithWhat
+//                        + "\" xmlns:ca=\"http://www.ibm.com/xmlns/prod/composite-applications/v1.0\" ca:role=\""
+//                        + shareWithRole + "\"></member>";
+//            }
+//            payload.append("<visibility xmlns=\"urn:ibm.com/td\">" + visibility
+//                    + "</visibility> <sharedWith xmlns=\"urn:ibm.com/td\">" + shareWith + "</sharedWith>");
+//        }
+//        // }
+//        payload.append("</entry>");
     }
 
     /**
@@ -2865,9 +2926,10 @@ public class FileService extends BaseService {
      * 
      * @param comment - comment for which a payload Document needs to be constructed.
      * @return Document - payload Document which is sent as part of the request body.
+     * @throws TransformerException 
      */
 
-    private Document constructPayloadForComments(String comment) {
+    private Document constructPayloadForComments(String comment) throws TransformerException {
         return this.constructPayloadForComments(null, comment);
     }
 
@@ -2878,21 +2940,33 @@ public class FileService extends BaseService {
      *            comment.
      * @param commentToBeAdded - plaintext comment which needs to be added to the File.
      * @return Document - payload Document which is sent as part of the request body.
+     * @throws TransformerException 
      */
 
-    private Document constructPayloadForComments(String operation, String commentToBeAdded) {
-        StringBuilder payload = new StringBuilder("<entry xmlns=\"http://www.w3.org/2005/Atom\">");
-        payload.append("<category term=\"comment\"  label=\"comment\" scheme=\"tag:ibm.com,2006:td/type\"/>");
+    private Document constructPayloadForComments(String operation, String commentToBeAdded) throws TransformerException {
 
-        if (!StringUtil.isEmpty(operation) && !operation.equals("delete")) {
-            payload.append("<deleteWithRecord xmlns=\""
-                    + NamespacesConnections.nameSpaceCtx.getNamespaceURI("td")
-                    + "\">false</deleteWithRecord>");
-        } else {
-            payload.append("<content type=\"text/plain\">" + commentToBeAdded + "</content>");
-        }
-        payload.append("</entry>");
-        return this.convertToXML(payload.toString());
+    	Map<String, Object> fieldsMap = new HashMap<String, Object>();
+    	fieldsMap.put("category", FileConstants.Category_COMMENT);
+    	if (!StringUtil.isEmpty(operation) && !operation.equals("delete")) {
+          fieldsMap.put("deleteWithRecord", "false");
+    	} else {
+    		fieldsMap.put("content", commentToBeAdded);
+    	}
+    	CommentTransformer commentTransformer = new CommentTransformer();
+    	String payload = commentTransformer.transform(fieldsMap);
+    	return this.convertToXML(payload.toString());
+        
+//        payload.append("<category term=\"comment\"  label=\"comment\" scheme=\"tag:ibm.com,2006:td/type\"/>");
+//
+//        if (!StringUtil.isEmpty(operation) && !operation.equals("delete")) {
+//            payload.append("<deleteWithRecord xmlns=\""
+//                    + NamespacesConnections.nameSpaceCtx.getNamespaceURI("td")
+//                    + "\">false</deleteWithRecord>");
+//        } else {
+//            payload.append("<content type=\"text/plain\">" + commentToBeAdded + "</content>");
+//        }
+//        payload.append("</entry>");
+        
     }
 
     /**
@@ -2902,51 +2976,68 @@ public class FileService extends BaseService {
      * @param flagReason
      * @param flagWhat
      * @return
+     * @throws TransformerException 
      */
-    private Object constructPayloadForFlagging(String fileId, String content, String entity) {
-        if (entity.equalsIgnoreCase("file")) {
+    private Object constructPayloadForFlagging(String fileId, String content, String entity) throws TransformerException {
+    	
+    	if (entity.equalsIgnoreCase("file")) {
             entity = "document";
         }
-        StringBuilder payload = new StringBuilder("<entry" + this.constructEntry(fileId, content, entity)
-                + "</entry> ");
-        // System.err.println("payload in constructPayloadForFlagging " + payload.toString());
+    	Map<String, Object> fieldsMap = new HashMap<String, Object>();
+    	fieldsMap.put("entity", entity);
+    	fieldsMap.put("fileId", fileId);
+    	fieldsMap.put("content", content);
+    	
+    	ModerationTransformer moderationTransformer = new ModerationTransformer();
+    	String payload = moderationTransformer.transform(fieldsMap);
         return this.convertToXML(payload.toString());
     }
 
     private Object constructPayloadForModeration(String fileId, String action, String actionReason,
-            String entity) {
+            String entity) throws TransformerException {
         if (entity.equalsIgnoreCase("file")) {
             entity = "document";
         }
-        StringBuilder payload = new StringBuilder("<?xml version=\"1.0\"?> <entry ");
-        payload.append(this.constructEntry(fileId, actionReason, entity));
-        payload.append("<snx:moderation action=\" " + action + "\" />");
-        payload.append("</entry> ");
-        // System.err.println("payload in constructPayloadForModeration " + payload.toString());
+        Map<String, Object> fieldsMap = new HashMap<String, Object>();
+    	fieldsMap.put("entity", entity);
+    	fieldsMap.put("fileId", fileId);
+    	fieldsMap.put("content", actionReason);
+    	fieldsMap.put("action", action);
+    	ModerationTransformer moderationTransformer = new ModerationTransformer();
+    	String payload = moderationTransformer.transform(fieldsMap);
         return this.convertToXML(payload.toString());
+        
+//        StringBuilder payload = new StringBuilder("<?xml version=\"1.0\"?> <entry ");
+//        payload.append(this.constructEntry(fileId, actionReason, entity));
+//        payload.append("<snx:moderation action=\" " + action + "\" />");
+//        payload.append("</entry> ");
+//        // System.err.println("payload in constructPayloadForModeration " + payload.toString());
+//        return this.convertToXML(payload.toString());
     }
 
-    private Document constructPayloadForMultipleEntries(List<String> listOfFileIds, String multipleEntryId) {
+    private Document constructPayloadForMultipleEntries(List<String> listOfFileIds, String multipleEntryId) throws TransformerException {
         return this.constructPayloadForMultipleEntries(listOfFileIds, multipleEntryId, null);
     }
 
     private Document constructPayloadForMultipleEntries(List<String> listOfIds, String multipleEntryId,
-            String category) {
-        StringBuilder requestBody = new StringBuilder(
-                "<?xml version=\"1.0\" encoding=\"UTF-8\"?><feed xmlns=\"http://www.w3.org/2005/Atom\">");
-        for (String fileId : listOfIds) {
-            requestBody.append("<entry>");
-            if (!StringUtil.isEmpty(category) && (StringUtil.equalsIgnoreCase(category, "community"))
-                    || StringUtil.equalsIgnoreCase(category, "collection")) {
-                requestBody.append("<category term=\"" + category + "\" label=\"" + category
-                        + "\" scheme=\"tag:ibm.com,2006:td/type\"></category>");
-            }
-            requestBody.append("<" + multipleEntryId + " xmlns=\"urn:ibm.com/td\">" + fileId + "</"
-                    + multipleEntryId + "></entry>");
-        }
-        requestBody.append("</feed>");
-        // System.err.println("requestBody " + requestBody.toString());
-        return this.convertToXML(requestBody.toString());
+            String category) throws TransformerException {
+        
+    	MultipleFileTransformer mfTransformer = new MultipleFileTransformer();
+    	String payload = mfTransformer.transform(listOfIds, category);
+    	return this.convertToXML(payload.toString());
+//    	StringBuilder requestBody = new StringBuilder(
+//                "<?xml version=\"1.0\" encoding=\"UTF-8\"?><feed xmlns=\"http://www.w3.org/2005/Atom\">");
+//        for (String fileId : listOfIds) {
+//            requestBody.append("<entry>");
+//            if (!StringUtil.isEmpty(category) && (StringUtil.equalsIgnoreCase(category, "community"))
+//                    || StringUtil.equalsIgnoreCase(category, "collection")) {
+//                requestBody.append("<category term=\"" + category + "\" label=\"" + category
+//                        + "\" scheme=\"tag:ibm.com,2006:td/type\"></category>");
+//            }
+//            requestBody.append("<" + multipleEntryId + " xmlns=\"urn:ibm.com/td\">" + fileId + "</"
+//                    + multipleEntryId + "></entry>");
+//        }
+//        requestBody.append("</feed>");
     }
 
     /**
@@ -3053,7 +3144,7 @@ public class FileService extends BaseService {
         }
     }
 
-    public void addFileToFolder(String fileId, String folderId) throws FileServiceException {
+    public void addFileToFolder(String fileId, String folderId) throws FileServiceException, TransformerException {
         List<String> c = Arrays.asList(new String[] { folderId });
         addFileToFolders(fileId, c);
     }

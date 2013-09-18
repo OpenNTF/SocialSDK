@@ -25,6 +25,10 @@ public class FileConstants {
 	
 	public static String LockType_HARD	= "HARD";
 	public static String LockType_NONE	= "NONE";
+	public static String Category	= "category";
+	public static String Category_DOCUMENT	= "document";
+	public static String Category_COMMENT	= "comment";
+	public static String Category_COLLECTION	= "collection";
     
 	
 }

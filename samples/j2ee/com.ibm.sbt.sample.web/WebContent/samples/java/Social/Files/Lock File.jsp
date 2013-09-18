@@ -37,12 +37,12 @@
 	<%
 	try {
 			FileService fileService = new FileService();
-        	List<File> fileEntries = fileService.getMyFiles();
+        	FileList fileEntries = fileService.getMyFiles();
         	File fileEntry = fileEntries.get(0);
 			String fileId = fileEntry.getFileId();
-				out.println("<b> Locking File</b>" + fileId);	
-				fileService.lock(fileId);
-				out.println("<br> File is now Locked");
+			out.println("<b> Locking File</b>" + fileId);	
+			fileService.lock(fileId);
+			out.println("<br> File is now Locked");
 		}catch (Throwable e) {
 			out.println("<pre>");
 			out.println(e.getMessage());

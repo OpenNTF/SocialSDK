@@ -6,7 +6,6 @@ import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.datahandlers.FieldEntry;
 
 public enum FileEntryXPath implements FieldEntry {
-//	Email("/a:feed/a:author/a:email"),
 	Email(".//a:entry/a:author/a:email"),
 	UserUuid(".//a:author/snx:userid"),
 	UserName(".//a:author/a:name"),
@@ -19,7 +18,6 @@ public enum FileEntryXPath implements FieldEntry {
 	FileUuid("/a:feed/a:entry/td:uuid"),
 	DownloadUrl(".//a:link[@rel=\"edit-media\"]/@href"),
 	Comment(".//a:content"),
-//	Comment("/a:feed/a:entry/a:content"),
 	Entry("/a:feed/a:entry"),
 	Uuid(".//td:uuid"),
 	Lock(".//td:lock/@type"),

@@ -20,7 +20,9 @@ import java.util.Date;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
+import com.ibm.sbt.services.client.connections.files.model.Author;
 import com.ibm.sbt.services.client.connections.files.model.FileEntryXPath;
+import com.ibm.sbt.services.client.connections.files.model.Modifier;
 
 /**
  * Comment Entry Class - representing a Comment Entry of the File.
@@ -30,7 +32,9 @@ import com.ibm.sbt.services.client.connections.files.model.FileEntryXPath;
 public class Comment extends BaseEntity {
 	private String		commentId;
 	private String		comment;
-
+	private Author		authorEntry;
+	private Modifier	modifierEntry;
+	
 	public Comment() {
 	}
 
@@ -40,6 +44,8 @@ public class Comment extends BaseEntity {
 	
 	public Comment(FileService svc, DataHandler<?> dh) {
         super(svc, dh);
+        authorEntry = new Author(getService(), this.dataHandler);
+        modifierEntry = new Modifier(getService(), this.dataHandler);
     }
 	
 	public String getCommentId() {
@@ -90,13 +96,13 @@ public class Comment extends BaseEntity {
 		return this.getAsDate(FileEntryXPath.Published);
 	}
 
-//	public String getModifier() {
-//		return this.getAsString(FileEntryXPath.NameModifier);
-//	}
-//
-//	public String getAuthor() {
-//		return this.getAsString(FileEntryXPath.);
-//	}
+	public Modifier getModifier() {
+		return modifierEntry;
+	}
+
+	public Author getAuthor() {
+		return authorEntry;
+	}
 
 	public String getLanguage() {
 		return this.getAsString(FileEntryXPath.Language);

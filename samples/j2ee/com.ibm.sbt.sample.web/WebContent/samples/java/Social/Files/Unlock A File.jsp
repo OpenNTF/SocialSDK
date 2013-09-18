@@ -34,13 +34,13 @@
 <body>	
 	<%
 	try {
-				FileService fileService = new FileService();
-        		List<File> fileEntries = fileService.getMyFiles();
-        		File fileEntry = fileEntries.get(0);
-				String fileId = fileEntry.getFileId();
-				out.println("<b> UnLocking File</b>" + fileId); 	
-				fileService.unlock(fileId);
-				out.println("<br> File is now Unlocked"); 
+			FileService fileService = new FileService();
+       		FileList fileEntries = fileService.getMyFiles();
+       		File fileEntry = fileEntries.get(0);
+			String fileId = fileEntry.getFileId();
+			out.println("<b> UnLocking File</b>" + fileId); 	
+			fileService.unlock(fileId);
+			out.println("<br> File is now Unlocked"); 
 		}catch (Throwable e) {
 			out.println("<pre>");
 			out.println(e.getMessage());

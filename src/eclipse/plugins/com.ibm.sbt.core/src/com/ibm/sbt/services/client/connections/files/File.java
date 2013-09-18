@@ -108,7 +108,7 @@ public class File extends BaseEntity {
 		return getAsString(FileEntryXPath.DownloadUrl);
 	}
 
-	public Author getAuthorEntry() {
+	public Author getAuthor() {
 		return authorEntry;
 	}
 
@@ -205,10 +205,6 @@ public class File extends BaseEntity {
 		return this.getAsString(FileEntryXPath.CommentsUrl);
 	}
 	
-//	public String getAuthor() {
-//		return this.getAsObject([ "authorName", "authorUserId", "authorEmail", "authorUserState" ]);
-//	}
-	
 	public String getVersionUuid() {
 		return this.getAsString(FileEntryXPath.VersionUuid);
 	}
@@ -273,7 +269,7 @@ public class File extends BaseEntity {
     }
 
 	public Comment addComment(String comment, Map<String, String> params) throws FileServiceException {
-		return this.getService().addCommentToFile(this.getFileId(), comment, this.getAuthorEntry().getUserUuid(), params);
+		return this.getService().addCommentToFile(this.getFileId(), comment, this.getAuthor().getUserUuid(), params);
     }
 	
 	public void pin() throws FileServiceException {
@@ -300,9 +296,10 @@ public class File extends BaseEntity {
 		this.getService().updateFileMetadata(this.getFileId(), params, payloadMap);
     }
 	
-//	public void save(Map<String, String> params, Map<String, String> payloadMap) throws FileServiceException {
-//		this.getService().updateFileInformation(this.getFileId(), params, payloadMap);
-//    }
+	public void save(Map<String, String> params, Map<String, String> payloadMap) throws FileServiceException {
+		//TODO
+		this.getService().updateFileMetadata(this.getFileId(), params, payloadMap);
+    }
 	
 	@Override
 	public FileService getService(){
@@ -314,50 +311,6 @@ public class File extends BaseEntity {
 		return (XmlDataHandler)super.getDataHandler();
 	}	
 	
-	/**
-	 * createResultFileWithData
-	 * <p>
-	 * method to create the FileEntry object for the response feed
-	 * requires a document having a entry as the root node
-	 * @param result
-	 * @return FileEntry
-	 */
-//	public static Object createResultFileWithData(Document result, Class objectType) {
-//		File file = new File();
-//		file.setData(result);
-//		if (file.getAsString(FileEntryXPath.CategoryFromEntry).equals("comment")) {
-//			file.commentEntry.setData(result);
-//		}
-//		file.getAuthorEntry().setData(result);
-//
-//		if (objectType == null) {
-//			return file.getData();
-//		} else if (objectType.equals(Comment.class)) {
-//			return file.getCommentEntry();
-//		} else if (objectType.equals(Person.class)) {
-//			return file.getAuthorEntry();
-//		}
-//		return file;
-//	}
-//	public Comment getCommentEntry() {
-//	return commentEntry.getCommentEntry();
-//}
-//
-//public void setCommentEntry(Comment commentEntry) {
-//	this.commentEntry = commentEntry;
-//}
-
-//	private void setAuthorEntry(Author authorEntry) {
-//		this.authorEntry = authorEntry;
-//	}
-//	private Node getData() {
-//		return (Node)dataHandler.getData();
-//	}
-
-//	public void setData(Document data) {
-//		dataHandler.setData(data);
-//	}
-
 //	public void setCategory(String category) {
 //		this.category = category;
 //	}

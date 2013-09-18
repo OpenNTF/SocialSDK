@@ -27,11 +27,13 @@ import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
-import com.ibm.sbt.services.client.connections.profiles.feedhandlers.ConnectionEntryFeedHandler;
-import com.ibm.sbt.services.client.connections.profiles.feedhandlers.ProfileFeedHandler;
+import com.ibm.sbt.services.client.connections.profiles.feedhandler.ConnectionEntryFeedHandler;
+import com.ibm.sbt.services.client.connections.profiles.feedhandler.ProfileFeedHandler;
+import com.ibm.sbt.services.client.connections.profiles.feedhandler.TagFeedHandler;
 import com.ibm.sbt.services.client.connections.profiles.transformers.ConnectionEntryTransformer;
 import com.ibm.sbt.services.client.connections.profiles.transformers.ProfileTransformer;
 import com.ibm.sbt.services.client.connections.profiles.utils.Messages;
+import com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants;
 import com.ibm.sbt.services.client.base.datahandlers.JsonDataHandler;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.services.client.ClientService;
@@ -160,6 +162,53 @@ public class ProfileService extends BaseService {
 		return profiles;
 	}
 
+	/** Wrapper method to get user's tags
+	   * 
+	   * @param id 
+	   *        unique identifier of the user whose colleagues are required, it can be email or userKey
+	   * @return TagList
+	   * @throws ProfileServiceException
+	   */
+	  public TagList getTags(String id) throws ProfileServiceException{
+	    return getTags(id,null);
+	  }
+	  /**
+	   * Wrapper method to get user's tags
+	   * 
+	   * @param id 
+	   *        unique identifier of the user whose colleagues are required, it can be email or userKey
+	   * @param parameters 
+	   *         list of query string parameters to pass to API
+	   * @return TagList 
+	   * @throws ProfileServiceException
+	   */
+	  public TagList getTags(String id, Map<String, String> parameters)
+	  throws ProfileServiceException{
+	
+	    if (StringUtil.isEmpty(id)){
+	      throw new ProfileServiceException(null, Messages.InvalidArgument_1);
+	    }
+	
+	    if(parameters == null)
+	      parameters = new HashMap<String, String>();
+	    String url = resolveProfileUrl(ProfileAPI.NONADMIN.getProfileEntityType(),
+	        ProfileType.TAGS.getProfileType());
+	    if(id.contains("@"))
+	      parameters.put("targetEmail", id);
+	    else
+	      parameters.put("targetKey", id);
+	    TagList tags = null;
+	    try {
+	      tags = (TagList) getEntities(url, parameters, new TagFeedHandler(this));
+	    } catch (ClientServicesException e) {
+	      throw new ProfileServiceException(e, Messages.TagsException, id);
+	    } catch (IOException e) {
+	      throw new ProfileServiceException(e, Messages.TagsException, id);
+	    }
+	
+	    return tags;
+	  }
+	  /**
 	/**
 	 * Wrapper method to get user's colleagues
 	 * 

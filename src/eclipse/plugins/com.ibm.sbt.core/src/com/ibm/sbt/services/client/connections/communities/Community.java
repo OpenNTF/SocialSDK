@@ -24,7 +24,8 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.connections.communities.CommunityList;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
-import com.ibm.sbt.services.client.connections.communities.tranformers.CommunityTransformer;
+import com.ibm.sbt.services.client.connections.communities.model.CommunityXPath;
+import com.ibm.sbt.services.client.connections.communities.transformers.CommunityTransformer;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 

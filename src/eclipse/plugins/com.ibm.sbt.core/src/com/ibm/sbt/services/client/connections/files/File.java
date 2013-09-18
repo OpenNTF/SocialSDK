@@ -26,6 +26,7 @@ import com.ibm.sbt.services.client.connections.files.model.Modifier;
 import com.ibm.sbt.services.client.connections.files.model.Person;
 import com.ibm.sbt.services.client.connections.files.util.FileConstants;
 import com.ibm.sbt.services.client.connections.files.model.FileEntryXPath;
+import com.ibm.sbt.services.client.connections.files.model.FileRequestPayload;
 
 /**
  * @Represents Connections File
@@ -36,15 +37,6 @@ public class File extends BaseEntity {
 	private Author			authorEntry;
 	private Modifier		modifierEntry;
 
-//	private String			title;
-//	private String			creatorId;
-//	private String			label;
-//	private String			lock;
-//	private String			libraryType;
-//	private String			category;
-//	private String			totalResults;
-
-	
 	public File() {
 		this(null,null);
 	}
@@ -95,10 +87,6 @@ public class File extends BaseEntity {
 	public String getLibraryType() {
 		return getAsString(FileEntryXPath.LibraryType);
 	}
-
-//	public String getCreatorId() {
-//		return creatorId;
-//	}
 
 	public String getCategory() {
 		return getAsString(FileEntryXPath.Category);
@@ -292,13 +280,13 @@ public class File extends BaseEntity {
 		this.getService().deleteFile(this.getFileId());
     }
 	
-	public void update(Map<String, String> params, Map<String, String> payloadMap) throws FileServiceException {
-		this.getService().updateFileMetadata(this.getFileId(), params, payloadMap);
+	public void update(Map<String, String> params) throws FileServiceException {
+		this.getService().updateFileMetadata(this, params);
     }
 	
-	public void save(Map<String, String> params, Map<String, String> payloadMap) throws FileServiceException {
+	public void save(Map<String, String> params) throws FileServiceException {
 		//TODO
-		this.getService().updateFileMetadata(this.getFileId(), params, payloadMap);
+		this.getService().updateFileMetadata(this, params);
     }
 	
 	@Override
@@ -311,28 +299,15 @@ public class File extends BaseEntity {
 		return (XmlDataHandler)super.getDataHandler();
 	}	
 	
-//	public void setCategory(String category) {
-//		this.category = category;
-//	}
-//	public void setLibraryType(String libraryType) {
-//		this.libraryType = libraryType;
-//	}
-//	public void setTitle(String title) {
-//		this.title = title;
-//	}
-//	public void setFileId(String fileId) {
-//		this.fileId = fileId;
-//	}
-//	public void setLabel(String label) {
-//		this.label = label;
-//	}
-//	public void setLockType(String lock) {
-//		this.lock = lock;
-//	}
-//	public void setCreatorId(String creatorId) {
-//		this.creatorId = creatorId;
-//	}
-//	private void setTotalResults(String totalResults) {
-//		this.totalResults = totalResults;
-//	}
+	public void setLabel(String label) {
+		fields.put(FileRequestPayload.LABEL.getFileRequestPayload(), label);
+	}
+	
+	public void setVisibility(String visibility) {
+		fields.put(FileRequestPayload.VISIBILITY.getFileRequestPayload(), visibility);
+	}
+	public void setSummary(String summary) {
+		fields.put(FileRequestPayload.SUMMARY.getFileRequestPayload(), summary);
+	}
+	
 }

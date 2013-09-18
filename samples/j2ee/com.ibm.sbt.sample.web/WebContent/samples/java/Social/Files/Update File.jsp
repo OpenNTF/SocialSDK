@@ -55,14 +55,11 @@
           p.sharePermission = FileCreationParameters.Permission.EDIT;
           p.shareWith.add(shareWithUserId);
           p.tags.add("TagUpdateFile");
-
           Map<String, String> paramsMap = p.buildParameters();
 
-          
-          Map<String, String> payloadMap = new HashMap<String, String>();
-          payloadMap.put(FileRequestPayload.LABEL.toString(), "LabelUpdateFileNew" + System.currentTimeMillis());
-
-          fileEntry = fileService.updateFileMetadata(fileEntry, paramsMap, payloadMap);
+          fileEntry.setLabel("LabelUpdateFileNew" + System.currentTimeMillis());
+          fileEntry.setSummary("SummaryNew" + System.currentTimeMillis());
+          fileEntry = fileService.updateFileMetadata(fileEntry, paramsMap);
 
           out.println("File Updated : " + fileEntry.getFileId());
       } catch (Throwable e) {

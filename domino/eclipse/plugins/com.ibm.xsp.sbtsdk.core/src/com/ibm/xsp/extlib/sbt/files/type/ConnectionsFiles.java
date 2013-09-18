@@ -355,7 +355,7 @@ public class ConnectionsFiles extends AbstractType {
        try {
     	  
     	    is = new FileInputStream(serverFile);
-			com.ibm.sbt.services.client.connections.files.model.FileEntry entry = svc.upload(is,name, serverFile.length(),p.buildParameters());
+			com.ibm.sbt.services.client.connections.files.File entry = svc.uploadFile(is,name, serverFile.length(),p.buildParameters());
 				 
 		}catch (FileServiceException e) {
             throw new FacesExceptionEx(e);

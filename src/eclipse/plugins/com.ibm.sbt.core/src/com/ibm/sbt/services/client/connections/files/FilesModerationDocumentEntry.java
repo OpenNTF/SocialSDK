@@ -1,4 +1,4 @@
-package com.ibm.sbt.services.client.connections.files.model;
+package com.ibm.sbt.services.client.connections.files;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

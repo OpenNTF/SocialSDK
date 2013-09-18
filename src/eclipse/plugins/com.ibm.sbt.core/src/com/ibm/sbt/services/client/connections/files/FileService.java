@@ -16,7 +16,6 @@
 
 package com.ibm.sbt.services.client.connections.files;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.StringReader;
@@ -25,33 +24,28 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
-import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
-import com.ibm.sbt.services.client.base.IFeedHandler;
+import com.ibm.sbt.services.client.connections.files.model.FileEntryXPath;
 import com.ibm.sbt.services.client.connections.files.FileServiceException;
-import com.ibm.sbt.services.client.connections.files.model.CommentEntry;
 import com.ibm.sbt.services.client.connections.files.model.FileCommentParameterBuilder;
 import com.ibm.sbt.services.client.connections.files.model.FileCommentsFeedParameterBuilder;
-import com.ibm.sbt.services.client.connections.files.model.FileEntry;
 import com.ibm.sbt.services.client.connections.files.model.FileRequestParams;
 import com.ibm.sbt.services.client.connections.files.model.FileRequestPayload;
-import com.ibm.sbt.services.client.connections.files.model.FilesModerationDocumentEntry;
+import com.ibm.sbt.services.client.connections.files.feedHandler.*;
 import com.ibm.sbt.services.client.connections.files.model.Headers;
 import com.ibm.sbt.services.client.connections.files.util.ContentMapFiles;
 import com.ibm.sbt.services.client.connections.files.util.Messages;
 import com.ibm.sbt.services.client.connections.files.util.NamespacesConnections;
 import com.ibm.sbt.services.client.ClientService.ContentStream;
 import com.ibm.sbt.services.client.Response;
-import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.ClientService;
+import com.ibm.sbt.services.client.connections.files.util.FileConstants;
 
 /**
  * FileService can be used to perform File related operations.
@@ -66,40 +60,29 @@ import com.ibm.sbt.services.client.ClientService;
  */
 public class FileService extends BaseService {
 
-    private static char SEPARATOR   = '/';
-
-    static final String sourceClass = FileService.class.getName();
-    static final Logger logger      = Logger.getLogger(sourceClass);
-
-
     /**
      * Default Constructor - 0 argument constructor Calls the Constructor of BaseService Class.
      * <p>
      * Creates FileService with Default Endpoint.
      */
     public FileService() {
-        this(DEFAULT_ENDPOINT_NAME, DEFAULT_CACHE_SIZE);
+        this(getDefaultEndpoint());
     }
 
-    /**
+	/**
      * Constructor
-     * 
-     * @param endpoint Creates fileservice with specified endpoint.
-     */
-    public FileService(String endpoint) {
-        this(endpoint, DEFAULT_CACHE_SIZE);
-    }
-
-    /**
-     * Constructor - Creates a service object with specified endpoint and cache size
+     * 		Creates a service object with specified endpoint
      * 
      * @param endpoint
-     * @param cacheSize Creates CommunityService with specified endpoint and CacheSize
      */
-    public FileService(String endpoint, int cacheSize) {
-        super(endpoint, cacheSize);
+    public FileService(String endpoint) {
+        super(endpoint);
     }
-
+    
+    private static String getDefaultEndpoint() {
+		return "connections";
+	}
+    
     public void actOnCommentAwaitingApproval(String commentId, String action, String actionReason)
             throws FileServiceException {
         // get thr uri from here ::
@@ -118,7 +101,7 @@ public class FileService extends BaseService {
         if (StringUtil.isEmpty(requestUri)) {
             SubFilters subFilters = new SubFilters();
             subFilters.setCommentId("");
-            requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(),
+            requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(),
                     AccessType.AUTHENTICATED.getAccessType(),
                     Categories.APPROVAL.getCategory(), null, Filters.ACTIONS.getFilters(), subFilters, null);
         }
@@ -128,9 +111,6 @@ public class FileService extends BaseService {
         try {
             super.updateData(requestUri, null, headers, payload, commentId);
         } catch (Exception e) {
-            if (logger.isLoggable(Level.WARNING)) {
-                logger.log(Level.WARNING, e.getMessage(), e);
-            }
             throw new FileServiceException(e, Messages.MessageExceptionInStatusChange);
         }
     }
@@ -152,7 +132,7 @@ public class FileService extends BaseService {
         if (StringUtil.isEmpty(requestUri)) {
             SubFilters subFilters = new SubFilters();
             subFilters.setDocumentsId("");
-            requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(),
+            requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(),
                     AccessType.AUTHENTICATED.getAccessType(),
                     Categories.APPROVAL.getCategory(), null, Filters.ACTIONS.getFilters(), subFilters, null);
         }
@@ -162,9 +142,6 @@ public class FileService extends BaseService {
         try {
             super.updateData(requestUri, null,  headers, payload, fileId);
         } catch (Exception e) {
-            if (logger.isLoggable(Level.WARNING)) {
-                logger.log(Level.WARNING, e.getMessage(), e);
-            }
             throw new FileServiceException(e, Messages.MessageExceptionInStatusChange);
         }
     }
@@ -187,7 +164,7 @@ public class FileService extends BaseService {
         if (StringUtil.isEmpty(requestUri)) {
             SubFilters subFilters = new SubFilters();
             subFilters.setCommentId("");
-            requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(),
+            requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(),
                     AccessType.AUTHENTICATED.getAccessType(),
                     Categories.REVIEW.getCategory(), null, Filters.ACTIONS.getFilters(), subFilters, null);
         }
@@ -197,9 +174,6 @@ public class FileService extends BaseService {
         try {
             super.updateData(requestUri, null, headers, payload, commentId);
         } catch (Exception e) {
-            if (logger.isLoggable(Level.WARNING)) {
-                logger.log(Level.WARNING, e.getMessage(), e);
-            }
             throw new FileServiceException(e, Messages.MessageExceptionInFlaggingComment);
         }
     }
@@ -221,7 +195,7 @@ public class FileService extends BaseService {
         if (StringUtil.isEmpty(requestUri)) {
             SubFilters subFilters = new SubFilters();
             subFilters.setDocumentsId("");
-            requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(),
+            requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(),
                     AccessType.AUTHENTICATED.getAccessType(),
                     Categories.REVIEW.getCategory(), null, Filters.ACTIONS.getFilters(), subFilters, null);
         }
@@ -231,18 +205,23 @@ public class FileService extends BaseService {
         try {
             super.updateData(requestUri, null, headers, payload, fileId);
         } catch (Exception e) {
-            if (logger.isLoggable(Level.WARNING)) {
-                logger.log(Level.WARNING, e.getMessage(), e);
-            }
             throw new FileServiceException(e, Messages.MesssageExceptionInFlaggingFile);
         }
     }
-
-    public CommentEntry addCommentToFile(FileEntry fe, String comment, Map<String, String> parameters) throws FileServiceException {
-        return addCommentToFile(fe.getFileId(), comment, fe.getAuthorEntry().getUserUuid(), parameters);
+    /**
+     * addCommentToFile
+     * <p>
+     * Rest API used : /files/basic/api/userlibrary/{userid}/document/{document-id}/feed <br>
+     * 
+     * @param fileId - ID of the file
+     * @param params - Map of Parameters. See {@link FileRequestParams} for possible values.
+     * @param comment - Comment to be added to the File
+     * @return Comment
+     * @throws FileServiceException
+     */
+    public Comment addCommentToFile(String fileId, String comment, Map<String, String> params) throws FileServiceException {
+    	return this.addCommentToFile(fileId, comment, null, params);
     }
-
-
     /**
      * addCommentToFile
      * <p>
@@ -252,14 +231,11 @@ public class FileService extends BaseService {
      * @param params - Map of Parameters. See {@link FileRequestParams} for possible values.
      * @param comment - Comment to be added to the File
      * @param userId - user Id of the person in whose library the file is present
-     * @return CommentEntry
+     * @return Comment
      * @throws FileServiceException
      */
-    public CommentEntry addCommentToFile(String fileId, String comment, String userId,
+    public Comment addCommentToFile(String fileId, String comment, String userId,
             Map<String, String> params) throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "addCommentToFile");
-        }
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         SubFilters subFilters = new SubFilters();
         String category = null;
@@ -267,32 +243,21 @@ public class FileService extends BaseService {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
         if (StringUtil.isEmpty(userId) || StringUtil.equalsIgnoreCase(userId, null)) {
-            throw new FileServiceException(null, Messages.Invalid_UserId);
-
+        	category = Categories.MYLIBRARY.getCategory();
         } else {
             subFilters.setUserId(userId);
-        } 
-        String authValue = "basic";
+        }
         subFilters.setFileId(fileId);
-        subFilters.setUserId(userId);
         String resultType = ResultType.FEED.getResultType();
-        String requestUri  =FileServiceURIBuilder.POST_COMMENT_TO_FILE.populateURL(accessType, category, null,
-                null,
-                subFilters, resultType);
-                
-
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null, 
+        		null, subFilters, resultType);
         Document payload = this.constructPayloadForComments(comment);
-        
         try {
             Response result = (Response) super.createData(requestUri, null, new ClientService.ContentXml(payload,"application/atom+xml"));
-            return (CommentEntry)new CommentEntryFeedHandler().createEntity(result);
+            return (Comment)new CommentFeedHandler().createEntity(result);
         } catch (Exception e) {
-            if (logger.isLoggable(Level.WARNING)) {
-                logger.log(Level.WARNING, e.getMessage(), e);
-            }
             throw new FileServiceException(e, Messages.MessageExceptionInCreatingComment);
         }
-
     }
 
     /**
@@ -303,14 +268,11 @@ public class FileService extends BaseService {
      * @param folderId ID of the Collection / Folder to which File(s) need to be added.
      * @param listOfFileIds A list of file Ids, which need to be added to the collection.
      * @param params - Map of Parameters. See {@link FileRequestParams} for possible values.
-     * @return FileEntryList
+     * @return FileList
      * @throws FileServiceException
      */
-    public FileEntryList addFilesToFolder(String folderId, List<String> listOfFileIds,
+    public FileList addFilesToFolder(String folderId, List<String> listOfFileIds,
             Map<String, String> params) throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "addFilesToFolder");
-        }
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         if (StringUtil.isEmpty(folderId)) {
             throw new FileServiceException(null, Messages.Invalid_CollectionId);
@@ -326,7 +288,7 @@ public class FileService extends BaseService {
         if (null == params) {
             params = new HashMap<String, String>();
         }
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
                 null,
                 subFilters, resultType);
         Map<String, String> headers = new HashMap<String, String>();
@@ -337,12 +299,9 @@ public class FileService extends BaseService {
         try {
             Response result;
             result = (Response) super.createData(requestUri, params, headers, payload);
-            return new FileEntryFeedHandler().createEntityList(result);
+            return new FileFeedHandler().createEntityList(result);
             
         } catch (Exception e) {
-            if (logger.isLoggable(Level.WARNING)) {
-                logger.log(Level.WARNING, e.getMessage(), e);
-            }
             throw new FileServiceException(e, Messages.MessageGenericException);
         }
     }
@@ -407,11 +366,8 @@ public class FileService extends BaseService {
      */
     public void addFileToFolders(String fileId, List<String> folderIds, String userId,
             Map<String, String> params) throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "addFileToFolders");
-        }
         if (fileId == null) {
-            throw new FileServiceException(null, Messages.Invalid_FileEntry);
+            throw new FileServiceException(null, Messages.Invalid_File);
         }
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         String category = null;
@@ -419,7 +375,6 @@ public class FileService extends BaseService {
         subFilters.setFileId(fileId);
 
         if (StringUtil.isEmpty(userId) || StringUtil.equalsIgnoreCase(userId, null)) {
-            logger.log(Level.WARNING, Messages.Invalid_UserId);
             category = Categories.MYLIBRARY.getCategory();
         } else {
             subFilters.setUserId(userId);
@@ -428,7 +383,7 @@ public class FileService extends BaseService {
         if (null == params) {
             params = new HashMap<String, String>();
         }
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
                 null,
                 subFilters, resultType);
         Map<String, String> headers = new HashMap<String, String>();
@@ -440,16 +395,13 @@ public class FileService extends BaseService {
         try {
             super.createData(requestUri, params, headers, payload);
         } catch (Exception e) {
-            if (logger.isLoggable(Level.WARNING)) {
-                logger.log(Level.WARNING, e.getMessage(), e);
-            }
             throw new FileServiceException(e, Messages.MessageGenericException);
         }
 
         // executePost(requestUri, params, headers, payload);
     }
 
-    public CommentEntry createComment(String fileId, String comment) throws FileServiceException {
+    public Comment createComment(String fileId, String comment) throws FileServiceException {
         return this.createComment(fileId, comment, null, null);
     }
 
@@ -465,7 +417,7 @@ public class FileService extends BaseService {
      * @return
      * @throws FileServiceException
      */
-    public CommentEntry createComment(String fileId, String comment, String userId)
+    public Comment createComment(String fileId, String comment, String userId)
             throws FileServiceException {
         return this.createComment(fileId, comment, userId, null);
     }
@@ -480,14 +432,11 @@ public class FileService extends BaseService {
      * @param comment
      * @param userId
      * @param params
-     * @return CommentEntry
+     * @return Comment
      * @throws FileServiceException
      */
-    public CommentEntry createComment(String fileId, String comment, String userId, Map<String, String> params)
+    public Comment createComment(String fileId, String comment, String userId, Map<String, String> params)
             throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "createComment");
-        }
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         String category = null;
         SubFilters subFilters = new SubFilters();
@@ -495,14 +444,13 @@ public class FileService extends BaseService {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
         if (StringUtil.isEmpty(userId)) {
-            logger.log(Level.WARNING, Messages.Invalid_UserId);
             category = Categories.MYLIBRARY.getCategory();
         } else {
             subFilters.setUserId(userId);
         }
         subFilters.setFileId(fileId);
         String resultType = ResultType.FEED.getResultType();
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
                 null,
                 subFilters, resultType);
        
@@ -512,16 +460,13 @@ public class FileService extends BaseService {
         try {
             Response result = (Response) super.createData(requestUri, params, headers, new ClientService.ContentXml(
                     payload, "application/atom+xml"));
-            return (CommentEntry) new CommentEntryFeedHandler().createEntity(result);
+            return (Comment) new CommentFeedHandler().createEntity(result);
         } catch (Exception e) {
-            if (logger.isLoggable(Level.WARNING)) {
-                logger.log(Level.WARNING, e.getMessage(), e);
-            }
             throw new FileServiceException(e, Messages.MessageExceptionInCreatingComment);
         }
     }
 
-    public FileEntry createFolder(String name) throws FileServiceException {
+    public File createFolder(String name) throws FileServiceException {
         return this.createFolder(name, null, null);
     }
 
@@ -535,22 +480,19 @@ public class FileService extends BaseService {
      * @param shareWith If the folder needs to be shared, specify the details in this parameter. <br>
      *            Pass Coma separated List of id, (person/community/group) or role(reader/Contributor/owner)
      *            in order
-     * @return FileEntry
+     * @return File
      * @throws FileServiceException
      */
-    public FileEntry createFolder(String name, String description) throws FileServiceException {
+    public File createFolder(String name, String description) throws FileServiceException {
         return this.createFolder(name, description, null);
     }
 
-    public FileEntry createFolder(String name, String description, String shareWith)
+    public File createFolder(String name, String description, String shareWith)
             throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "createFolder");
-        }
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         String view = Views.FOLDERS.getViews();
         String resultType = ResultType.FEED.getResultType();
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, view,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, view,
                 null, null,
                 resultType);
         Document payload = this.constructPayloadFolder(name, description, shareWith, "create");
@@ -559,11 +501,8 @@ public class FileService extends BaseService {
             Response result = (Response) super.createData(requestUri, null,
                     new ClientService.ContentXml(
                             payload, "application/atom+xml"));
-            return (FileEntry) new FileEntryFeedHandler().createEntity(result);
+            return (File) new FileFeedHandler().createEntity(result);
         } catch (Exception e) {
-            if (logger.isLoggable(Level.WARNING)) {
-                logger.log(Level.WARNING, e.getMessage(), e);
-            }
             throw new FileServiceException(e, Messages.MessageExceptionInCreatingFolder);
         }
 
@@ -578,9 +517,6 @@ public class FileService extends BaseService {
      * @throws FileServiceException
      */
     public void deleteFile(String fileId) throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "delete");
-        }
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         String category = Categories.MYLIBRARY.getCategory();
         SubFilters subFilters = new SubFilters();
@@ -589,16 +525,13 @@ public class FileService extends BaseService {
         }
         subFilters.setFileId(fileId);
         String resultType = ResultType.ENTRY.getResultType();
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
                 null,
                 subFilters, resultType);
 
         try {
             super.deleteData(requestUri, null, null);
         } catch (Exception e) {
-            if (logger.isLoggable(Level.WARNING)) {
-                logger.log(Level.WARNING, e.getMessage(), e);
-            }
             throw new FileServiceException(e, Messages.MessageExceptionInDeletingFile);
         }
 
@@ -628,9 +561,6 @@ public class FileService extends BaseService {
      * @throws FileServiceException
      */
     public void deleteAllFilesFromRecycleBin(String userId) throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "deleteAllFilesFromRecycleBin");
-        }
         // String accessType = AccessType.AUTHENTICATED.getAccessType();
         // String category = null;
         // SubFilters subFilters = new SubFilters();
@@ -652,9 +582,6 @@ public class FileService extends BaseService {
         try {
             super.deleteData(requestUri, null, null);
         } catch (Exception e) {
-            if (logger.isLoggable(Level.WARNING)) {
-                logger.log(Level.WARNING, e.getMessage(), e);
-            }
             throw new FileServiceException(e, Messages.MessageExceptionInDeletingFile);
         }
 
@@ -679,9 +606,6 @@ public class FileService extends BaseService {
      */
     public void deleteAllVersionsOfFile(String fileId, String versionLabel, Map<String, String> params)
             throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "deleteAllVersionsOfFile");
-        }
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
@@ -693,7 +617,7 @@ public class FileService extends BaseService {
         SubFilters subFilters = new SubFilters();
         subFilters.setFileId(fileId);
         String resultType = ResultType.FEED.getResultType();
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
                 null,
                 subFilters, resultType);
         if (null == params) {
@@ -705,9 +629,6 @@ public class FileService extends BaseService {
         try {
             super.deleteData(requestUri, params, fileId);
         } catch (Exception e) {
-            if (logger.isLoggable(Level.WARNING)) {
-                logger.log(Level.WARNING, e.getMessage(), e);
-            }
             throw new FileServiceException(e, Messages.MessageExceptionInDeletingFile);
         }
 
@@ -731,21 +652,17 @@ public class FileService extends BaseService {
      * <p>
      * Rest API used : /files/basic/api/userlibrary/{userid}/document/{document-id}/comment/{comment-id}/entry
      * 
-     * @param FileEntry specifies the file for which the comment needs to be deleted.
+     * @param File specifies the file for which the comment needs to be deleted.
      * @param commentId Id of the comment to be deleted.
      * @throws FileServiceException
      */
     public void deleteComment(String fileId, String commentId, String userId) throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "deleteComment");
-        }
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         SubFilters subFilters = new SubFilters();
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
         if (StringUtil.isEmpty(userId) || StringUtil.equalsIgnoreCase(userId, "null")) {
-            logger.log(Level.WARNING, Messages.Invalid_UserId);
             Categories.MYLIBRARY.getCategory();
         } else {
             subFilters.setUserId(userId);
@@ -756,16 +673,13 @@ public class FileService extends BaseService {
         subFilters.setFileId(fileId);
         subFilters.setCommentId(commentId);
         String resultType = ResultType.ENTRY.getResultType();
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
                 null,
                 subFilters, resultType);
 
         try {
             super.deleteData(requestUri, null, commentId);
         } catch (Exception e) {
-            if (logger.isLoggable(Level.WARNING)) {
-                logger.log(Level.WARNING, e.getMessage(), e);
-            }
             throw new FileServiceException(e, Messages.MessageExceptionInDeletingComment);
         }
     }
@@ -778,9 +692,6 @@ public class FileService extends BaseService {
         try {
             super.deleteData(requestUri, null, fileId);
         } catch (Exception e) {
-            if (logger.isLoggable(Level.WARNING)) {
-                logger.log(Level.WARNING, e.getMessage(), e);
-            }
             throw new FileServiceException(e, Messages.MessageExceptionInDeletingFile);
         }
     }
@@ -809,9 +720,6 @@ public class FileService extends BaseService {
      * @throws FileServiceException
      */
     public void deleteFileFromRecycleBin(String fileId, String userId) throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "deleteFileFromRecycleBin");
-        }
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
@@ -819,22 +727,18 @@ public class FileService extends BaseService {
         String category = null;
         SubFilters subFilters = new SubFilters();
         if (StringUtil.isEmpty(userId) || StringUtil.equalsIgnoreCase(userId, null)) {
-            logger.log(Level.WARNING, Messages.Invalid_UserId);
             category = Categories.MYLIBRARY.getCategory();
         } else {
             subFilters.setUserId(userId);
         }
         subFilters.setRecycleBinDocumentId(fileId);
         String resultType = ResultType.ENTRY.getResultType();
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
                 null,
                 subFilters, resultType);
         try {
             super.deleteData(requestUri, null, fileId);
         } catch (Exception e) {
-            if (logger.isLoggable(Level.WARNING)) {
-                logger.log(Level.WARNING, e.getMessage(), e);
-            }
             throw new FileServiceException(e, Messages.MessageExceptionInDeletingFile);
         }
     }
@@ -870,16 +774,13 @@ public class FileService extends BaseService {
      * @throws FileServiceException
      */
     public void deleteFileShare(String fileId, String userId) throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "deleteFileShare");
-        }
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         String category = Categories.SHARES.getCategory();
         String resultType = ResultType.FEED.getResultType();
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
                 null,
                 null,
                 resultType);
@@ -891,9 +792,6 @@ public class FileService extends BaseService {
         try {
             super.deleteData(requestUri, params, fileId);
         } catch (Exception e) {
-            if (logger.isLoggable(Level.WARNING)) {
-                logger.log(Level.WARNING, e.getMessage(), e);
-            }
             throw new FileServiceException(e, Messages.MessageExceptionInDeletingFileShare);
         }
     }
@@ -904,15 +802,11 @@ public class FileService extends BaseService {
         }
         String requestUri = this.getModerationUri(commentId, "review", "comment");
         if (StringUtil.isEmpty(requestUri)) {
-            logger.log(Level.SEVERE, Messages.Invalid_CommentId);
             return;
         }
         try {
             super.deleteData(requestUri, null, commentId);
         } catch (Exception e) {
-            if (logger.isLoggable(Level.WARNING)) {
-                logger.log(Level.WARNING, e.getMessage(), e);
-            }
             throw new FileServiceException(e, Messages.MessageExceptionInDeletingComment);
         }
     }
@@ -923,15 +817,11 @@ public class FileService extends BaseService {
         }
         String requestUri = this.getModerationUri(fileId, "review", "file");
         if (StringUtil.isEmpty(requestUri)) {
-            logger.log(Level.SEVERE, Messages.Invalid_FileId);
             return;
         }
         try {
             super.deleteData(requestUri, null, fileId);
         } catch (Exception e) {
-            if (logger.isLoggable(Level.WARNING)) {
-                logger.log(Level.WARNING, e.getMessage(), e);
-            }
             throw new FileServiceException(e, Messages.MessageExceptionInDeletingFile);
         }
     }
@@ -946,22 +836,16 @@ public class FileService extends BaseService {
      * @throws FileServiceException
      */
     public void deleteFolder(String folderId) throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "deleteFolder");
-        }
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         SubFilters subFilters = new SubFilters();
         subFilters.setCollectionId(folderId);
         String resultType = ResultType.ENTRY.getResultType();
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
                 null,
                 subFilters, resultType);
         try {
             super.deleteData(requestUri, null, null);
         } catch (Exception e) {
-            if (logger.isLoggable(Level.WARNING)) {
-                logger.log(Level.WARNING, e.getMessage(), e);
-            }
             throw new FileServiceException(e, Messages.MessageExceptionInDeleteFolder);
         }
     }
@@ -980,9 +864,6 @@ public class FileService extends BaseService {
      */
     public void flagAsInappropriate(String id, String flagReason, String flagWhat)
             throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "flagFile");
-        }
         if (StringUtil.isEmpty(id)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
@@ -991,7 +872,7 @@ public class FileService extends BaseService {
         }
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         String resultType = ResultType.REPORTS.getResultType();
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
                 null, null,
                 resultType);
         Map<String, String> headers = new HashMap<String, String>();
@@ -1001,14 +882,11 @@ public class FileService extends BaseService {
         try {
             super.updateData(requestUri, null, headers, payload, id);
         } catch (Exception e) {
-            if (logger.isLoggable(Level.WARNING)) {
-                logger.log(Level.WARNING, e.getMessage(), e);
-            }
             throw new FileServiceException(e, Messages.MessageExceptionInFlaggingInappropriate);
         }
     }
 
-    public FileEntryList getAllUserFiles(String userId) throws FileServiceException {
+    public FileList getAllUserFiles(String userId) throws FileServiceException {
         return this.getAllUserFiles(userId, null);
     }
 
@@ -1020,15 +898,12 @@ public class FileService extends BaseService {
      * 
      * @param userId
      * @param params - Map of Parameters. See {@link FileRequestParams} for possible values.
-     * @return FileEntryList
+     * @return FileList
      * @throws FileServiceException
      */
 
-    public FileEntryList getAllUserFiles(String userId, Map<String, String> params)
+    public FileList getAllUserFiles(String userId, Map<String, String> params)
             throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "getPersonLibrary");
-        }
         String accessType = AccessType.PUBLIC.getAccessType();
         SubFilters subFilters = new SubFilters();
         if (StringUtil.isEmpty(userId)) {
@@ -1036,35 +911,32 @@ public class FileService extends BaseService {
         }
         subFilters.setUserId(userId);
         String resultType = ResultType.FEED.getResultType();
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
                 null,
                 subFilters, resultType);
 
-        FileEntryList fileEntries = null;
+        FileList fileEntries = null;
         try {
-            fileEntries = (FileEntryList) getEntities(requestUri, params, new FileEntryFeedHandler());
+            fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler());
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
         return fileEntries;
     }
 
-    public CommentEntryList getCommentsAwaitingApproval(Map<String, String> params)
+    public CommentList getCommentsAwaitingApproval(Map<String, String> params)
             throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "getCommentsAwaitingApproval");
-        }
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         String category = Categories.APPROVAL.getCategory();
         String view = Views.COMMENTS.getViews();
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, view,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, view,
                 null,
                 null,
                 null);
 
-        CommentEntryList commentEntries = null;
+        CommentList commentEntries = null;
         try {
-            commentEntries = (CommentEntryList) getEntities(requestUri, params, new CommentEntryFeedHandler());
+            commentEntries = (CommentList) getEntities(requestUri, params, new CommentFeedHandler());
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
@@ -1076,10 +948,10 @@ public class FileService extends BaseService {
      * getFile
      * 
      * @param fileId - ID of the file to be fetched from the Connections Server
-     * @return FileEntry
+     * @return File
      * @throws FileServiceException
      */
-    public FileEntry getFile(String fileId) throws FileServiceException {
+    public File getFile(String fileId) throws FileServiceException {
         return this.getFile(fileId, true);
     }
 
@@ -1088,13 +960,13 @@ public class FileService extends BaseService {
      * 
      * @param fileId - ID of the file to be fetched from the Connections Server
      * @param load - a flag to determine whether the network call should be made or an empty placeholder of
-     *            the fileEntry object should be returned. load - true : network call is made to fetch the
-     *            file load - false : an empty fileEntry object is returned, and then updations can be made on
+     *            the File object should be returned. load - true : network call is made to fetch the
+     *            file load - false : an empty File object is returned, and then updations can be made on
      *            this object.
-     * @return FileEntry
+     * @return File
      * @throws FileServiceException
      */
-    public FileEntry getFile(String fileId, boolean load) throws FileServiceException {
+    public File getFile(String fileId, boolean load) throws FileServiceException {
         return this.getFile(fileId, null, load);
     }
 
@@ -1106,33 +978,30 @@ public class FileService extends BaseService {
      * @param fileId - ID of the file to be fetched from the Connections Server
      * @param parameters - Map of Parameters. See {@link FileRequestParams} for possible values.
      * @param load - a flag to determine whether the network call should be made or an empty placeholder of
-     *            the fileEntry object should be returned. load - true : network call is made to fetch the
-     *            file load - false : an empty fileEntry object is returned, and then updations can be made on
+     *            the File object should be returned. load - true : network call is made to fetch the
+     *            file load - false : an empty File object is returned, and then updations can be made on
      *            this object.
-     * @return FileEntry
+     * @return File
      * @throws FileServiceException
      */
 
-    public FileEntry getFile(String fileId, Map<String, String> parameters, boolean load)
+    public File getFile(String fileId, Map<String, String> parameters, boolean load)
             throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "getFile");
-        }
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
         String requestUri = null;
-        FileEntry file = new FileEntry(fileId);
+        File file = new File(fileId);
         if (load) {
             SubFilters subFilters = new SubFilters();
             subFilters.setFileId(fileId);
-            requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(),
+            requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(),
                     AccessType.AUTHENTICATED.getAccessType(),
                     Categories.MYLIBRARY.getCategory(), null, null, subFilters,
                     ResultType.ENTRY.getResultType());
 
             try {
-                return (FileEntry) super.getEntity(requestUri, parameters, new FileEntryFeedHandler());
+                return (File) super.getEntity(requestUri, parameters, new FileFeedHandler());
             } catch (Exception e) {
                throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
             }
@@ -1140,13 +1009,13 @@ public class FileService extends BaseService {
         return file;
     }
 
-    public FileEntry getFileAwaitingAction(String fileId) throws FileServiceException {
+    public File getFileAwaitingAction(String fileId) throws FileServiceException {
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
         String requestUri = this.getModerationUri(fileId, "approval", "file");
         try {
-            return (FileEntry) super.getEntity(requestUri, null, new FileEntryFeedHandler());
+            return (File) super.getEntity(requestUri, null, new FileFeedHandler());
         } catch (Exception e) {
            throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
@@ -1163,7 +1032,7 @@ public class FileService extends BaseService {
      * @throws FileServiceException
      */
             
-    public CommentEntryList getUserFileComment(String fileId, String userId, String commentId, boolean anonymousAccess, Map<String, String> parameters, Map<String, String> headers) throws FileServiceException {
+    public CommentList getUserFileComment(String fileId, String userId, String commentId, boolean anonymousAccess, Map<String, String> parameters, Map<String, String> headers) throws FileServiceException {
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
@@ -1185,7 +1054,7 @@ public class FileService extends BaseService {
      * @return
      * @throws FileServiceException
      */
-    public CommentEntryList getFileComment(String fileId, String commentId, Map<String, String> parameters, Map<String, String> headers) throws FileServiceException {
+    public CommentList getFileComment(String fileId, String commentId, Map<String, String> parameters, Map<String, String> headers) throws FileServiceException {
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
@@ -1204,7 +1073,7 @@ public class FileService extends BaseService {
      * @return
      * @throws FileServiceException
      */
-    public CommentEntryList getAllUserFileComments(String fileId, String userId, boolean anonymousAccess, Map<String,String> parameters) throws FileServiceException {
+    public CommentList getAllUserFileComments(String fileId, String userId, boolean anonymousAccess, Map<String,String> parameters) throws FileServiceException {
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
@@ -1221,17 +1090,14 @@ public class FileService extends BaseService {
      * @return
      * @throws FileServiceException
      */
-    public CommentEntryList getAllFileComments(String fileId, Map<String, String> parameters) throws FileServiceException {
+    public CommentList getAllFileComments(String fileId, Map<String, String> parameters) throws FileServiceException {
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
         return getFileComments(fileId, false, null, null, parameters,null);
     }
     
-    private CommentEntryList getFileComments(String fileId, boolean anonymousAccess, String userId, String commentId, Map<String, String> parameters, Map<String,String> headers) throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "getFilesComments");
-        }
+    private CommentList getFileComments(String fileId, boolean anonymousAccess, String userId, String commentId, Map<String, String> parameters, Map<String,String> headers) throws FileServiceException {
         
         String accessType = null;
         if (anonymousAccess) {
@@ -1261,14 +1127,14 @@ public class FileService extends BaseService {
             }
         }
         
-        CommentEntryList commentEntries = null;
+        CommentList commentEntries = null;
         try {
             if (parameters == null)
                 parameters = uriBuilder.getParameters();
             else
                 parameters.putAll(uriBuilder.getParameters());
             //TODO: pass in headers
-            commentEntries = (CommentEntryList) getEntities(uriBuilder.populateURL(accessType,   null, null, null, subFilters, null), parameters, headers, new CommentEntryFeedHandler());
+            commentEntries = (CommentList) getEntities(uriBuilder.populateURL(accessType,   null, null, null, subFilters, null), parameters, headers, new CommentFeedHandler());
             return commentEntries;
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
@@ -1283,7 +1149,7 @@ public class FileService extends BaseService {
      * @return
      * @throws FileServiceException
      */
-    public FileEntry getFileFromRecycleBin(String fileId) throws FileServiceException {
+    public File getFileFromRecycleBin(String fileId) throws FileServiceException {
         return this.getFileFromRecycleBin(fileId, null, null);
     }
 
@@ -1296,7 +1162,7 @@ public class FileService extends BaseService {
      * @return
      * @throws FileServiceException
      */
-    public FileEntry getFileFromRecycleBin(String fileId, String userId) throws FileServiceException {
+    public File getFileFromRecycleBin(String fileId, String userId) throws FileServiceException {
         return this.getFileFromRecycleBin(fileId, userId, null);
     }
 
@@ -1309,14 +1175,11 @@ public class FileService extends BaseService {
      * @param fileId Id of the file in recycle bin.
      * @param userId
      * @param params
-     * @return FileEntry
+     * @return File
      * @throws FileServiceException
      */
-    public FileEntry getFileFromRecycleBin(String fileId, String userId, Map<String, String> params)
+    public File getFileFromRecycleBin(String fileId, String userId, Map<String, String> params)
             throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "getFileFromRecycleBin");
-        }
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
@@ -1324,18 +1187,17 @@ public class FileService extends BaseService {
         String category = null;
         SubFilters subFilters = new SubFilters();
         if (StringUtil.isEmpty(userId) || StringUtil.equalsIgnoreCase(userId, null)) {
-            logger.log(Level.WARNING, Messages.Invalid_UserId);
             category = Categories.MYLIBRARY.getCategory();
         } else {
             subFilters.setUserId(userId);
         }
         subFilters.setRecycleBinDocumentId(fileId);
         String resultType = ResultType.ENTRY.getResultType();
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
                 null,
                 subFilters, resultType);
         try {
-            return (FileEntry) super.getEntity(requestUri, params, new FileEntryFeedHandler());
+            return (File) super.getEntity(requestUri, params, new FileFeedHandler());
         } catch (Exception e) {
            throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
@@ -1349,21 +1211,18 @@ public class FileService extends BaseService {
      * @return
      * @throws FileServiceException
      */
-    public FileEntryList getFilesAwaitingApproval(Map<String, String> params) throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "getFilesAwaitingApproval");
-        }
+    public FileList getFilesAwaitingApproval(Map<String, String> params) throws FileServiceException {
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         String category = Categories.APPROVAL.getCategory();
         String view = Views.FILES.getViews();
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, view,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, view,
                 null,
                 null,
                 null);
 
-        FileEntryList fileEntries = null;
+        FileList fileEntries = null;
         try {
-            fileEntries = (FileEntryList) getEntities(requestUri, params, new FileEntryFeedHandler());
+            fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler());
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
@@ -1381,7 +1240,7 @@ public class FileService extends BaseService {
      * @return
      * @throws FileServiceException
      */
-    public FileEntryList getFileShares() throws FileServiceException {
+    public FileList getFileShares() throws FileServiceException {
         return this.getFileShares(null);
     }
 
@@ -1396,22 +1255,19 @@ public class FileService extends BaseService {
      * @return
      * @throws FileServiceException
      */
-    public FileEntryList getFileShares(Map<String, String> params) throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "getFileShares");
-        }
+    public FileList getFileShares(Map<String, String> params) throws FileServiceException {
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         String view = Views.FILES.getViews();
         String filter = Filters.SHARED.getFilters();
         String resultType = ResultType.FEED.getResultType();
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, view,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, view,
                 filter,
                 null,
                 resultType);
 
-        FileEntryList fileEntries = null;
+        FileList fileEntries = null;
         try {
-            fileEntries = (FileEntryList) getEntities(requestUri, params, new FileEntryFeedHandler());
+            fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler());
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
@@ -1419,7 +1275,7 @@ public class FileService extends BaseService {
         return fileEntries;
     }
 
-    public FileEntryList getFilesInFolder(String folderId) throws FileServiceException {
+    public FileList getFilesInFolder(String folderId) throws FileServiceException {
         return this.getFilesInFolder(folderId, null);
     }
 
@@ -1430,15 +1286,12 @@ public class FileService extends BaseService {
      * 
      * @param folderId - uuid of the folder/collection.
      * @param params - Map of Parameters. See {@link FileRequestParams} for possible values.
-     * @return FileEntryList
+     * @return FileList
      * @throws FileServiceException
      */
 
-    public FileEntryList getFilesInFolder(String folderId, Map<String, String> params)
+    public FileList getFilesInFolder(String folderId, Map<String, String> params)
             throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "getFilesInFolder");
-        }
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         SubFilters subFilters = new SubFilters();
         if (StringUtil.isEmpty(folderId)) {
@@ -1446,13 +1299,13 @@ public class FileService extends BaseService {
         }
         subFilters.setCollectionId(folderId);
         String resultType = ResultType.FEED.getResultType();
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
                 null,
                 subFilters, resultType);
 
-        FileEntryList fileEntries = null;
+        FileList fileEntries = null;
         try {
-            fileEntries = (FileEntryList) getEntities(requestUri, params, new FileEntryFeedHandler());
+            fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler());
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
@@ -1466,13 +1319,13 @@ public class FileService extends BaseService {
      * @return
      * @throws FileServiceException
      */
-    public FileEntryList getFilesInMyRecycleBin() throws FileServiceException {
+    public FileList getFilesInMyRecycleBin() throws FileServiceException {
         return this.getFilesInMyRecycleBin(null);
     }
 
     // content type must be specified as application/atom+xml.
     // /basic/api/collection/{collection-id}/entry
-    // public FileEntry updateFolder(String folderId, Document updatedFolder) throws FileServiceException {
+    // public File updateFolder(String folderId, Document updatedFolder) throws FileServiceException {
     // if (logger.isLoggable(Level.FINEST)) {
     // logger.entering(sourceClass, "getFolder");
     // }
@@ -1482,7 +1335,7 @@ public class FileService extends BaseService {
     // String resultType = ResultType.ENTRY.getResultType();
     // String requestUri = constructUrl(BaseUrl.FILES.getBaseUrl(), accessType, null, null, null,
     // subFilters, resultType);
-    // return (FileEntry) executeGet(requestUri, null, ClientService.FORMAT_XML, FileEntry.class).get(0);
+    // return (File) executeGet(requestUri, null, ClientService.FORMAT_XML, File.class).get(0);
     // }
 
     /**
@@ -1491,26 +1344,23 @@ public class FileService extends BaseService {
      * Rest API used : /files/basic/api/myuserlibrary/view/recyclebin/feed
      * 
      * @param params - Map of Parameters. See {@link FileRequestParams} for possible values.
-     * @return FileEntryList
+     * @return FileList
      * @throws FileServiceException
      */
 
-    public FileEntryList getFilesInMyRecycleBin(Map<String, String> params) throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "getFilesInMyRecycleBin");
-        }
+    public FileList getFilesInMyRecycleBin(Map<String, String> params) throws FileServiceException {
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         String category = Categories.MYLIBRARY.getCategory();
         String view = Views.RECYCLEBIN.getViews();
         String resultType = ResultType.FEED.getResultType();
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, view,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, view,
                 null,
                 null,
                 resultType);
 
-        FileEntryList fileEntries = null;
+        FileList fileEntries = null;
         try {
-            fileEntries = (FileEntryList) getEntities(requestUri, params, new FileEntryFeedHandler());
+            fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler());
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
@@ -1524,19 +1374,16 @@ public class FileService extends BaseService {
      * Rest API Used : /files/basic/api/moderation/atomsvc
      * 
      * @return
+     * @throws FileServiceException 
      */
-    protected Document getFilesModerationServiceDocument() {
-
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "getFilesModerationServiceDocument");
-        }
+    protected Document getFilesModerationServiceDocument() throws FileServiceException {
 
         String requestUri = FileServiceURIBuilder.GET_SERVICE_DOCUMENT.populateURL(AccessType.AUTHENTICATED.toString(), null, null, null, null, null);
         Response result = null;
         try {
             result = super.retrieveData(requestUri, null);
         } catch (Exception e) {
-            logger.log(Level.SEVERE, Messages.MessageGenericException + "getFilesModerationServiceDocument()", e);
+        	throw new FileServiceException(e, Messages.MessageExceptionInFetchingServiceDocument);
         }
         return (Document) result.getData();
     }
@@ -1550,21 +1397,15 @@ public class FileService extends BaseService {
      * @throws FileServiceException 
      */
     public Document getFilesServiceDocument() throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "getFilesServiceDocument");
-        }
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         String resultType = ResultType.INTROSPECTION.getResultType();
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
                 null, null,
                 resultType);
         Object result = null;
         try {
             result = this.getClientService().get(requestUri, null, ClientService.FORMAT_XML);
         } catch (Exception e) {
-            if (logger.isLoggable(Level.WARNING)) {
-                logger.log(Level.WARNING, e.getMessage(), e);
-            }
             throw new FileServiceException(e, Messages.MessageExceptionInFetchingServiceDocument);
         }
         return (Document) result;
@@ -1575,10 +1416,10 @@ public class FileService extends BaseService {
      * <p>
      * This method calls getFilesSharedByMe(Map<String, String> params) with null params
      * 
-     * @return FileEntryList
+     * @return FileList
      * @throws FileServiceException
      */
-    public FileEntryList getFilesSharedByMe() throws FileServiceException {
+    public FileList getFilesSharedByMe() throws FileServiceException {
         return this.getFilesSharedByMe(null);
     }
 
@@ -1589,14 +1430,11 @@ public class FileService extends BaseService {
      * This method is used to get Files Shared By the person.
      * 
      * @param params - Map of Parameters. See {@link FileRequestParams} for possible values.
-     * @return FileEntryList
+     * @return FileList
      * @throws FileServiceException
      */
 
-    public FileEntryList getFilesSharedByMe(Map<String, String> params) throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "getFilesSharedWithMe");
-        }
+    public FileList getFilesSharedByMe(Map<String, String> params) throws FileServiceException {
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         String view = Views.FILES.getViews();
         String filter = Filters.SHARED.getFilters();
@@ -1605,14 +1443,14 @@ public class FileService extends BaseService {
             params = new HashMap<String, String>();
         }
         params.put(FileRequestParams.DIRECTION.getFileRequestParams(), "outbound");
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, view,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, view,
                 filter,
                 null,
                 resultType);
 
-        FileEntryList fileEntries = null;
+        FileList fileEntries = null;
         try {
-            fileEntries = (FileEntryList) getEntities(requestUri, params, new FileEntryFeedHandler());
+            fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler());
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
@@ -1625,11 +1463,11 @@ public class FileService extends BaseService {
      * <p>
      * calls getFilesSharedWithMe(Map<String, String> params) with null params
      * 
-     * @return FileEntryList
+     * @return FileList
      * @throws FileServiceException
      */
 
-    public FileEntryList getFilesSharedWithMe() throws FileServiceException {
+    public FileList getFilesSharedWithMe() throws FileServiceException {
         return this.getFilesSharedWithMe(null);
     }
 
@@ -1640,14 +1478,11 @@ public class FileService extends BaseService {
      * This method is used to get Files Shared With the person.
      * 
      * @param params - Map of Parameters. See {@link FileRequestParams} for possible values.
-     * @return FileEntryList
+     * @return FileList
      * @throws FileServiceException
      */
 
-    public FileEntryList getFilesSharedWithMe(Map<String, String> params) throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "getFilesSharedWithMe");
-        }
+    public FileList getFilesSharedWithMe(Map<String, String> params) throws FileServiceException {
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         String view = Views.FILES.getViews();
         String filter = Filters.SHARED.getFilters();
@@ -1656,14 +1491,14 @@ public class FileService extends BaseService {
             params = new HashMap<String, String>();
         }
         params.put(FileRequestParams.DIRECTION.getFileRequestParams(), "inbound");
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, view,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, view,
                 filter,
                 null,
                 resultType);
 
-        FileEntryList fileEntries = null;
+        FileList fileEntries = null;
         try {
-            fileEntries = (FileEntryList) getEntities(requestUri, params, new FileEntryFeedHandler());
+            fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler());
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
@@ -1679,10 +1514,10 @@ public class FileService extends BaseService {
      * 
      * @param fileId
      * @param versionId
-     * @return FileEntry
+     * @return File
      * @throws FileServiceException
      */
-    public FileEntry getFileWithGivenVersion(String fileId, String versionId) throws FileServiceException {
+    public File getFileWithGivenVersion(String fileId, String versionId) throws FileServiceException {
         return this.getFileWithGivenVersion(fileId, versionId, null, null);
     }
 
@@ -1703,10 +1538,10 @@ public class FileService extends BaseService {
      *            the <td:label>element of a document Atom entry.<br>
      *            > inline : Specifies whether the version content should be included in the content element
      *            of the returned Atom document. Options are true or false. The default value is false.
-     * @return FileEntry
+     * @return File
      * @throws FileServiceException
      */
-    public FileEntry getFileWithGivenVersion(String fileId, String versionId, Map<String, String> params)
+    public File getFileWithGivenVersion(String fileId, String versionId, Map<String, String> params)
             throws FileServiceException {
         return this.getFileWithGivenVersion(fileId, versionId, params, null);
     }
@@ -1735,19 +1570,15 @@ public class FileService extends BaseService {
      *            > If-None-Match : Contains an ETag response header sent by the server in a previous request
      *            to the same URL. If the ETag is still valid for the specified resource, HTTP response code
      *            304 (Not Modified) is returned.
-     * @return FileEntry
+     * @return File
      * @throws FileServiceException
      */
-    public FileEntry getFileWithGivenVersion(String fileId, String versionId, Map<String, String> params,
+    public File getFileWithGivenVersion(String fileId, String versionId, Map<String, String> params,
             Map<String, String> headers) throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "getFileWithGivenVersion");
-        }
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
         if (StringUtil.isEmpty(versionId)) {
-            logger.log(Level.WARNING, Messages.Invalid_VersionId + Messages.Message_RetrievalError);
             return this.getFile(fileId, params, true);
         }
         String accessType = AccessType.AUTHENTICATED.getAccessType();
@@ -1756,51 +1587,48 @@ public class FileService extends BaseService {
         subFilters.setFileId(fileId);
         subFilters.setVersionId(versionId);
         String resultType = ResultType.ENTRY.getResultType();
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
                 null,
                 subFilters, resultType);
 
-        FileEntry fileEntry;
+        File file;
         try {
-            fileEntry = (FileEntry) getEntity(requestUri, params, new FileEntryFeedHandler());
+            file = (File) getEntity(requestUri, params, new FileFeedHandler());
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
 
-        return fileEntry;
+        return file;
     }
 
-    public CommentEntry getFlaggedComment(String commentId) throws FileServiceException {
+    public Comment getFlaggedComment(String commentId) throws FileServiceException {
         if (StringUtil.isEmpty(commentId)) {
             throw new FileServiceException(null, Messages.Invalid_CommentId);
         }
         String requestUri = this.getModerationUri(commentId, "review", "comment");
-        CommentEntry commentEntry;
+        Comment Comment;
         try {
-            commentEntry = (CommentEntry) getEntity(requestUri, null, new CommentEntryFeedHandler());
+            Comment = (Comment) getEntity(requestUri, null, new CommentFeedHandler());
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
 
-        return commentEntry;
+        return Comment;
     }
 
     // /files/basic/api/review/comments
-    public CommentEntryList getFlaggedComments(Map<String, String> params) throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "getFlaggedComments");
-        }
+    public CommentList getFlaggedComments(Map<String, String> params) throws FileServiceException {
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         String category = Categories.REVIEW.getCategory();
         String view = Views.COMMENTS.getViews();
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, view,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, view,
                 null,
                 null,
                 null);
 
-        CommentEntryList commentEntries = null;
+        CommentList commentEntries = null;
         try {
-            commentEntries = (CommentEntryList) getEntities(requestUri, params, new FileEntryFeedHandler());
+            commentEntries = (CommentList) getEntities(requestUri, params, new FileFeedHandler());
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
@@ -1808,14 +1636,14 @@ public class FileService extends BaseService {
         return commentEntries;
     }
 
-    public FileEntry getFlaggedFile(String fileId) throws FileServiceException {
+    public File getFlaggedFile(String fileId) throws FileServiceException {
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
         String requestUri = this.getModerationUri(fileId, "review", "file");
-        FileEntry fileEntry;
+        File fileEntry;
         try {
-            fileEntry = (FileEntry) getEntity(requestUri, null, new FileEntryFeedHandler());
+            fileEntry = (File) getEntity(requestUri, null, new FileFeedHandler());
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
@@ -1834,7 +1662,7 @@ public class FileService extends BaseService {
         String filter = Filters.ACTIONS.getFilters();
         SubFilters subFilters = new SubFilters();
         subFilters.setDocumentsId(fileId);
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
                 filter,
                 subFilters, null);
         try {
@@ -1846,21 +1674,18 @@ public class FileService extends BaseService {
     }
 
     // /files/basic/api/review/documents
-    public FileEntryList getFlaggedFiles(Map<String, String> params) throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "getFlaggedFiles");
-        }
+    public FileList getFlaggedFiles(Map<String, String> params) throws FileServiceException {
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         String category = Categories.REVIEW.getCategory();
         String view = Views.FILES.getViews();
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, view,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, view,
                 null,
                 null,
                 null);
 
-        FileEntryList fileEntries = null;
+        FileList fileEntries = null;
         try {
-            fileEntries = (FileEntryList) getEntities(requestUri, params, new FileEntryFeedHandler());
+            fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler());
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
@@ -1878,20 +1703,17 @@ public class FileService extends BaseService {
      * @return
      * @throws FileServiceException
      */
-    public FileEntry getFolder(String folderId) throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "getFolder");
-        }
+    public File getFolder(String folderId) throws FileServiceException {
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         SubFilters subFilters = new SubFilters();
         subFilters.setCollectionId(folderId);
         String resultType = ResultType.ENTRY.getResultType();
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
                 null,
                 subFilters, resultType);
-        FileEntry fileEntry;
+        File fileEntry;
         try {
-            fileEntry = (FileEntry) getEntity(requestUri, null, new FileEntryFeedHandler());
+            fileEntry = (File) getEntity(requestUri, null, new FileFeedHandler());
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
@@ -1899,7 +1721,7 @@ public class FileService extends BaseService {
         return fileEntry;
     }
 
-    public FileEntryList getFoldersWithRecentlyAddedFiles() throws FileServiceException {
+    public FileList getFoldersWithRecentlyAddedFiles() throws FileServiceException {
         return this.getFoldersWithRecentlyAddedFiles(null);
     }
 
@@ -1909,26 +1731,23 @@ public class FileService extends BaseService {
      * Rest API used : /files/basic/api/collections/addedto/feed
      * 
      * @param params - Map of Parameters. See {@link FileRequestParams} for possible values.
-     * @return FileEntryList
+     * @return FileList
      * @throws FileServiceException
      */
-    public FileEntryList getFoldersWithRecentlyAddedFiles(Map<String, String> params)
+    public FileList getFoldersWithRecentlyAddedFiles(Map<String, String> params)
             throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "getFoldersWithRecentlyAddedFiles");
-        }
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         String view = Views.FOLDERS.getViews();
         String filter = Filters.ADDEDTO.getFilters();
         String resultType = ResultType.FEED.getResultType();
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, view,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, view,
                 filter,
                 null,
                 resultType);
 
-        FileEntryList fileEntries = null;
+        FileList fileEntries = null;
         try {
-            fileEntries = (FileEntryList) getEntities(requestUri, params, new FileEntryFeedHandler());
+            fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler());
         } catch (Exception e) {
             throw new FileServiceException(e,
                     Messages.MessageExceptionInReadingObject);
@@ -1943,11 +1762,11 @@ public class FileService extends BaseService {
      * calls getMyFiles(Map<String, String> params) internally with null parameters, if user has not specific
      * any params
      * 
-     * @return FileEntryList
+     * @return FileList
      * @throws FileServiceException
      */
 
-    public FileEntryList getMyFiles() throws FileServiceException {
+    public FileList getMyFiles() throws FileServiceException {
         return this.getMyFiles(null);
     }
 
@@ -1958,25 +1777,22 @@ public class FileService extends BaseService {
      * This method is used to get Files of the person.
      * 
      * @param params - Map of Parameters. See {@link FileRequestParams} for possible values.
-     * @return FileEntryList
+     * @return FileList
      * @throws FileServiceException
      */
 
-    public FileEntryList getMyFiles(Map<String, String> params) throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "getMyFiles");
-        }
+    public FileList getMyFiles(Map<String, String> params) throws FileServiceException {
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         String category = Categories.MYLIBRARY.getCategory();
         String resultType = ResultType.FEED.getResultType();
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
                 null,
                 null,
                 resultType);
 
-        FileEntryList fileEntries = null;
+        FileList fileEntries = null;
         try {
-            fileEntries = (FileEntryList) getEntities(requestUri, params, new FileEntryFeedHandler());
+            fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
@@ -1984,7 +1800,7 @@ public class FileService extends BaseService {
         return fileEntries;
     }
 
-    public FileEntryList getMyFolders() throws FileServiceException {
+    public FileList getMyFolders() throws FileServiceException {
         return this.getMyFolders(null);
     }
 
@@ -1994,22 +1810,19 @@ public class FileService extends BaseService {
      * Rest API used : /files/basic/api/collections/feed Required Parameters : creator={snx:userid}
      * 
      * @param params - Map of Parameters. See {@link FileRequestParams} for possible values.
-     * @return FileEntryList
+     * @return FileList
      * @throws FileServiceException
      */
-    public FileEntryList getMyFolders(Map<String, String> params) throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "getMyFolders");
-        }
+    public FileList getMyFolders(Map<String, String> params) throws FileServiceException {
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         String view = Views.FOLDERS.getViews();
         String resultType = ResultType.FEED.getResultType();
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, view,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, view,
                 null, null,
                 resultType);
-        FileEntryList fileEntries = null;
+        FileList fileEntries = null;
         try {
-            fileEntries = (FileEntryList) getEntities(requestUri, params, new FileEntryFeedHandler());
+            fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler());
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
@@ -2027,30 +1840,24 @@ public class FileService extends BaseService {
      * @throws FileServiceException 
      */
     public String getNonce() throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "getNonce");
-        }
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         String resultType = ResultType.NONCE.getResultType();
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
                 null, null,
                 resultType);
         Object result = null;
         try {
             result = this.getClientService().get(requestUri, null, ClientService.FORMAT_TEXT);
         } catch (Exception e) {
-            if (logger.isLoggable(Level.WARNING)) {
-                logger.log(Level.WARNING, e.getMessage(), e);
-            }
             throw new FileServiceException(e, Messages.MessageExceptionInGettingNonce);
         }
         if (result == null) {
-            logger.log(Level.SEVERE, Messages.MessageNonceValue + result);
+        	return null;
         }
         return (String)((Response) result).getData();
     }
 
-    public FileEntryList getPinnedFiles() throws FileServiceException {
+    public FileList getPinnedFiles() throws FileServiceException {
         return this.getPinnedFiles(null);
     }
 
@@ -2060,25 +1867,22 @@ public class FileService extends BaseService {
      * Rest API used : /files/basic/api/myfavorites/documents/feed
      * 
      * @param params - Map of Parameters. See {@link FileRequestParams} for possible values.
-     * @return FileEntryList
+     * @return FileList
      * @throws FileServiceException
      */
-    public FileEntryList getPinnedFiles(Map<String, String> params) throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "getPinnedFiles");
-        }
+    public FileList getPinnedFiles(Map<String, String> params) throws FileServiceException {
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         String category = Categories.PINNED.getCategory();
         String view = Views.FILES.getViews();
         String resultType = ResultType.FEED.getResultType();
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, view,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, view,
                 null,
                 null,
                 resultType);
 
-        FileEntryList fileEntries = null;
+        FileList fileEntries = null;
         try {
-            fileEntries = (FileEntryList) getEntities(requestUri, params, new FileEntryFeedHandler());
+            fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler());
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
@@ -2086,7 +1890,7 @@ public class FileService extends BaseService {
         return fileEntries;
     }
 
-    public FileEntryList getPinnedFolders() throws FileServiceException {
+    public FileList getPinnedFolders() throws FileServiceException {
         return this.getPinnedFolders(null);
     }
 
@@ -2096,24 +1900,21 @@ public class FileService extends BaseService {
      * Rest API used : /files/basic/api/myfavorites/collections/feed
      * 
      * @param params - Map of Parameters. See {@link FileRequestParams} for possible values.
-     * @return FileEntryList
+     * @return FileList
      * @throws FileServiceException
      */
-    public FileEntryList getPinnedFolders(Map<String, String> params) throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "getMyPinnedFolders");
-        }
+    public FileList getPinnedFolders(Map<String, String> params) throws FileServiceException {
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         String category = Categories.PINNED.getCategory();
         String view = Views.FOLDERS.getViews();
         String resultType = ResultType.FEED.getResultType();
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, view,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, view,
                 null,
                 null,
                 resultType);
-        FileEntryList fileEntries = null;
+        FileList fileEntries = null;
         try {
-            fileEntries = (FileEntryList) getEntities(requestUri, params, new FileEntryFeedHandler());
+            fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler());
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
@@ -2121,7 +1922,7 @@ public class FileService extends BaseService {
         return fileEntries;
     }
 
-    public FileEntryList getPublicFiles() throws FileServiceException {
+    public FileList getPublicFiles() throws FileServiceException {
         return this.getPublicFiles(null);
     }
 
@@ -2132,17 +1933,14 @@ public class FileService extends BaseService {
      * This method returns a list of Public Files.
      * 
      * @param params - Map of Parameters. See {@link FileRequestParams} for possible values.
-     * @return FileEntryList
+     * @return FileList
      * @throws FileServiceException
      */
-    public FileEntryList getPublicFiles(Map<String, String> params) throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "getPublicFiles");
-        }
+    public FileList getPublicFiles(Map<String, String> params) throws FileServiceException {
         String accessType = AccessType.PUBLIC.getAccessType();
         String view = Views.FILES.getViews();
         String resultType = ResultType.FEED.getResultType();
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, view,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, view,
                 null, null,
                 resultType);
         if (params == null) {
@@ -2150,9 +1948,9 @@ public class FileService extends BaseService {
         }
         params.put(FileRequestParams.VISIBILITY.getFileRequestParams(), "public");
 
-        FileEntryList fileEntries = null;
+        FileList fileEntries = null;
         try {
-            fileEntries = (FileEntryList) getEntities(requestUri, params, new FileEntryFeedHandler());
+            fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler());
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
@@ -2160,7 +1958,7 @@ public class FileService extends BaseService {
         return fileEntries;
     }
 
-    public FileEntryList getPublicFolders() throws FileServiceException {
+    public FileList getPublicFolders() throws FileServiceException {
         return this.getPublicFolders(null);
     }
 
@@ -2171,23 +1969,20 @@ public class FileService extends BaseService {
      * Public method. No Auth required.
      * 
      * @param params - Map of Parameters. See {@link FileRequestParams} for possible values.
-     * @return FileEntryList
+     * @return FileList
      * @throws FileServiceException
      */
 
-    public FileEntryList getPublicFolders(Map<String, String> params) throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "getPublicFileFolders");
-        }
+    public FileList getPublicFolders(Map<String, String> params) throws FileServiceException {
         String accessType = AccessType.PUBLIC.getAccessType();
         String view = Views.FOLDERS.getViews();
         String resultType = ResultType.FEED.getResultType();
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, view,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, view,
                 null, null,
                 resultType);
-        FileEntryList fileEntries = null;
+        FileList fileEntries = null;
         try {
-            fileEntries = (FileEntryList) getEntities(requestUri, params, new FileEntryFeedHandler());
+            fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler());
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
@@ -2205,9 +2000,6 @@ public class FileService extends BaseService {
      * @throws FileServiceException
      */
     public void lock(String fileId) throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "lock");
-        }
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         SubFilters subFilters = new SubFilters();
         if (StringUtil.isEmpty(fileId)) {
@@ -2217,16 +2009,13 @@ public class FileService extends BaseService {
         String resultType = ResultType.LOCK.getResultType();
         Map<String, String> params = new HashMap<String, String>();
         params.put(FileRequestParams.LOCK.getFileRequestParams(), "HARD");
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
                 null,
                 subFilters, resultType);
 
         try {
             super.createData(requestUri, params, null);
         } catch (Exception e) {
-            if (logger.isLoggable(Level.WARNING)) {
-                logger.log(Level.WARNING, e.getMessage(), e);
-            }
             throw new FileServiceException(e, Messages.MessageExceptionInLockingFile);
         }
 
@@ -2243,9 +2032,6 @@ public class FileService extends BaseService {
      * @throws FileServiceException
      */
     public void pinFile(String fileId) throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "pinFile");
-        }
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
@@ -2253,7 +2039,7 @@ public class FileService extends BaseService {
         String category = Categories.PINNED.getCategory();
         String view = Views.FILES.getViews();
         String resultType = ResultType.FEED.getResultType();
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, view,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, view,
                 null,
                 null,
                 resultType);
@@ -2262,9 +2048,6 @@ public class FileService extends BaseService {
         try {
             super.createData(requestUri, params, null);
         } catch (Exception e) {
-            if (logger.isLoggable(Level.WARNING)) {
-                logger.log(Level.WARNING, e.getMessage(), e);
-            }
             throw new FileServiceException(e, Messages.MessageExceptionInPinningFile);
         }
 
@@ -2285,7 +2068,7 @@ public class FileService extends BaseService {
     }
 
     // // /files/basic/api/myuserlibrary/document/{document-id}/version/{version-id}/media
-    // public FileEntry downloadFileWithGivenVersion(String fileId, String versionId,
+    // public File downloadFileWithGivenVersion(String fileId, String versionId,
     // Map<String, String> params, Map<String, String> headers) throws FileServiceException {
     // if (logger.isLoggable(Level.FINEST)) {
     // logger.entering(sourceClass, "downloadFileWithGivenVersion");
@@ -2306,7 +2089,7 @@ public class FileService extends BaseService {
     // String requestUri = constructUrl(BaseUrl.FILES.getBaseUrl(), accessType, category, null, null,
     // subFilters, resultType);
     //
-    // return (FileEntry) executeGet(requestUri, params, headers, ClientService.FORMAT_XML, FileEntry.class)
+    // return (File) executeGet(requestUri, params, headers, ClientService.FORMAT_XML, File.class)
     // .get(0);
     // }
 
@@ -2322,14 +2105,11 @@ public class FileService extends BaseService {
      * @throws FileServiceException
      */
     public void pinFolder(String folderId, Map<String, String> params) throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "pinFolder");
-        }
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         String category = Categories.PINNED.getCategory();
         String view = Views.FOLDERS.getViews();
         String resultType = ResultType.FEED.getResultType();
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, view,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, view,
                 null,
                 null,
                 resultType);
@@ -2340,9 +2120,6 @@ public class FileService extends BaseService {
         try {
             super.createData(requestUri, params,  null);
         } catch (Exception e) {
-            if (logger.isLoggable(Level.WARNING)) {
-                logger.log(Level.WARNING, e.getMessage(), e);
-            }
             throw new FileServiceException(e, Messages.MessageExceptionInPinningFolder);
         }
     }
@@ -2359,9 +2136,6 @@ public class FileService extends BaseService {
      * @throws FileServiceException
      */
     public void removeFileFromFolder(String folderId, String fileId) throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "removeFileFromFolder");
-        }
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         if (StringUtil.isEmpty(folderId)) {
             throw new FileServiceException(null, Messages.Invalid_CollectionId);
@@ -2372,7 +2146,7 @@ public class FileService extends BaseService {
         SubFilters subFilters = new SubFilters();
         subFilters.setCollectionId(folderId);
         String resultType = ResultType.FEED.getResultType();
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
                 null,
                 subFilters, resultType);
         Map<String, String> params = new HashMap<String, String>();
@@ -2380,9 +2154,6 @@ public class FileService extends BaseService {
         try {
             super.deleteData(requestUri, null, fileId);
         } catch (Exception e) {
-            if (logger.isLoggable(Level.WARNING)) {
-                logger.log(Level.WARNING, e.getMessage(), e);
-            }
             throw new FileServiceException(e, Messages.MessageExceptionInDeletingFile);
         }
     }
@@ -2398,7 +2169,7 @@ public class FileService extends BaseService {
      * @return
      * @throws FileServiceException
      */
-    public FileEntry restoreFileFromRecycleBin(String fileId) throws FileServiceException {
+    public File restoreFileFromRecycleBin(String fileId) throws FileServiceException {
         return this.restoreFileFromRecycleBin(fileId, null);
     }
 
@@ -2414,10 +2185,7 @@ public class FileService extends BaseService {
      * @return
      * @throws FileServiceException
      */
-    public FileEntry restoreFileFromRecycleBin(String fileId, String userId) throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "restoreFileFromRecycleBin");
-        }
+    public File restoreFileFromRecycleBin(String fileId, String userId) throws FileServiceException {
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
@@ -2425,14 +2193,13 @@ public class FileService extends BaseService {
         String category = null;
         SubFilters subFilters = new SubFilters();
         if (StringUtil.isEmpty(userId) || StringUtil.equalsIgnoreCase(userId, null)) {
-            logger.log(Level.WARNING, Messages.Invalid_UserId);
             category = Categories.MYLIBRARY.getCategory();
         } else {
             subFilters.setUserId(userId);
         }
         subFilters.setRecycleBinDocumentId(fileId);
         String resultType = ResultType.ENTRY.getResultType();
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
                 null,
                 subFilters, resultType);
         Map<String, String> params = new HashMap<String, String>();
@@ -2440,7 +2207,7 @@ public class FileService extends BaseService {
         Map<String, String> headers = new HashMap<String, String>();
         try {
             Response data = (Response) this.updateData(requestUri, params, headers, null, null).getData();
-            return (FileEntry)new FileEntryFeedHandler().createEntity(data);
+            return (File)new FileFeedHandler().createEntity(data);
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInRestoreFile);
         }
@@ -2461,9 +2228,6 @@ public class FileService extends BaseService {
      */
     public void shareFileWithCommunities(String fileId, List<String> communityIds, Map<String, String> params)
             throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "shareFileWithCommunities");
-        }
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
@@ -2477,7 +2241,7 @@ public class FileService extends BaseService {
         SubFilters subFilters = new SubFilters();
         subFilters.setFileId(fileId);
         String resultType = ResultType.FEED.getResultType();
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
                 null,
                 subFilters, resultType);
         if (null == params) {
@@ -2491,9 +2255,6 @@ public class FileService extends BaseService {
         try {
             super.updateData(requestUri, params, headers, payload, fileId);
         } catch (Exception e) {
-            if (logger.isLoggable(Level.WARNING)) {
-                logger.log(Level.WARNING, e.getMessage(), e);
-            }
             throw new FileServiceException(e, "Error sharing the file");
         }
     }
@@ -2508,9 +2269,6 @@ public class FileService extends BaseService {
      * @throws FileServiceException
      */
     public void unlock(String fileId) throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "unlock");
-        }
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         SubFilters subFilters = new SubFilters();
         if (StringUtil.isEmpty(fileId)) {
@@ -2520,15 +2278,12 @@ public class FileService extends BaseService {
         String resultType = ResultType.LOCK.getResultType();
         Map<String, String> params = new HashMap<String, String>();
         params.put(FileRequestParams.LOCK.getFileRequestParams(), "NONE");
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
                 null,
                 subFilters, resultType);
         try {
             super.createData(requestUri, params, null);
         } catch (Exception e) {
-            if (logger.isLoggable(Level.WARNING)) {
-                logger.log(Level.WARNING, e.getMessage(), e);
-            }
             throw new FileServiceException(e, "Error unlocking the file");
         }
     }
@@ -2543,9 +2298,6 @@ public class FileService extends BaseService {
      * @throws FileServiceException
      */
     public void unPinFile(String fileId) throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "unPinFile");
-        }
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
@@ -2553,7 +2305,7 @@ public class FileService extends BaseService {
         String category = Categories.PINNED.getCategory();
         String view = Views.FILES.getViews();
         String resultType = ResultType.FEED.getResultType();
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, view,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, view,
                 null,
                 null,
                 resultType);
@@ -2562,22 +2314,16 @@ public class FileService extends BaseService {
         try {
             super.deleteData(requestUri, params ,null);
         } catch (Exception e) {
-            if (logger.isLoggable(Level.WARNING)) {
-                logger.log(Level.WARNING, e.getMessage(), e);
-            }
             throw new FileServiceException(e, "Error unpinning the file");
         }
     } 
 
     public void unPinFolder(String folderId) throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "unPinFolder");
-        }
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         String category = Categories.PINNED.getCategory();
         String view = Views.FOLDERS.getViews();
         String resultType = ResultType.FEED.getResultType();
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, view,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, view,
                 null,
                 null,
                 resultType);
@@ -2586,9 +2332,6 @@ public class FileService extends BaseService {
         try {
             super.deleteData(requestUri, params, null);
         } catch (Exception e) {
-            if (logger.isLoggable(Level.WARNING)) {
-                logger.log(Level.WARNING, e.getMessage(), e);
-            }
             throw new FileServiceException(e, "Error unpinning the folder");
         }
     }
@@ -2604,7 +2347,7 @@ public class FileService extends BaseService {
      * @return
      * @throws FileServiceException
      */
-    public CommentEntry updateComment(String fileId, String commentId, Map<String, String> params,
+    public Comment updateComment(String fileId, String commentId, Map<String, String> params,
             String comment) throws FileServiceException {
         return this.updateComment(fileId, commentId, comment, "", params);
     }
@@ -2619,7 +2362,7 @@ public class FileService extends BaseService {
      * @return
      * @throws FileServiceException
      */
-    public CommentEntry updateComment(String fileId, String commentId, String comment)
+    public Comment updateComment(String fileId, String commentId, String comment)
             throws FileServiceException {
         return this.updateComment(fileId, commentId, comment, "", null);
     }
@@ -2635,7 +2378,7 @@ public class FileService extends BaseService {
      * @return
      * @throws FileServiceException
      */
-    public CommentEntry updateComment(String fileId, String commentId, String comment, String userId)
+    public Comment updateComment(String fileId, String commentId, String comment, String userId)
             throws FileServiceException {
         return this.updateComment(fileId, commentId, comment, userId, null);
     }
@@ -2647,25 +2390,21 @@ public class FileService extends BaseService {
      * <br>
      * Updates comment from someone else's file whose userid is specified
      * 
-     * @param FileEntry File for which the comment needs to be updated.
+     * @param File File for which the comment needs to be updated.
      * @param commentId Id of the comment to be updated.
      * @param params
      * @param comment New comment String.
-     * @return CommentEntry
+     * @return Comment
      * @throws FileServiceException
      */
-    public CommentEntry updateComment(String fileId, String commentId, String comment, String userId,
+    public Comment updateComment(String fileId, String commentId, String comment, String userId,
             Map<String, String> params) throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "updateComment");
-        }
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         SubFilters subFilters = new SubFilters();
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
         if (StringUtil.isEmpty(userId)) {
-            logger.log(Level.WARNING, Messages.Invalid_UserId);
             Categories.MYLIBRARY.getCategory();
         } else {
             subFilters.setUserId(userId);
@@ -2676,7 +2415,7 @@ public class FileService extends BaseService {
         subFilters.setFileId(fileId);
         subFilters.setCommentId(commentId);
         String resultType = ResultType.ENTRY.getResultType();
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
                 null,
                 subFilters, resultType);
         Map<String, String> headers = new HashMap<String, String>();
@@ -2686,7 +2425,7 @@ public class FileService extends BaseService {
 
         try {
             Response result = (Response) this.updateData(requestUri, params, headers, payload, null).getData();
-            return (CommentEntry) new CommentEntryFeedHandler().createEntity(result);
+            return (Comment) new CommentFeedHandler().createEntity(result);
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInRestoreFile);
         }
@@ -2702,11 +2441,8 @@ public class FileService extends BaseService {
      * @return
      * @throws FileServiceException
      */
-    public FileEntry updateFile(String fileId, Map<String, String> params, Object content)
+    public File updateFile(String fileId, Map<String, String> params, Object content)
             throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "updateFile");
-        }
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
@@ -2714,18 +2450,17 @@ public class FileService extends BaseService {
         String category = Categories.MYLIBRARY.getCategory();
         SubFilters subFilters = new SubFilters();
         if (StringUtil.isEmpty(fileId)) {
-            logger.log(Level.SEVERE, Messages.Invalid_FileId);
-            return new FileEntry();
+            return new File();
         }
         subFilters.setFileId(fileId);
         String resultType = ResultType.ENTRY.getResultType();
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
                 null,
                 subFilters, resultType); // we pass null value for non applicable types.
         try {
             //TODO: check get data wrapping
             Response result = (Response) this.updateData(requestUri, params, content, null).getData();
-            return (FileEntry) new FileEntryFeedHandler().createEntity(result);
+            return (File) new FileFeedHandler().createEntity(result);
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInRestoreFile);
         }
@@ -2734,69 +2469,63 @@ public class FileService extends BaseService {
     }
 
     /**
-     * updateFileInformation
+     * updateFileMetadata
      * 
-     * @param fileEntry
+     * @param File
      * @param params
      * @param requestBody
      * @return
      * @throws FileServiceException
      */
-    public FileEntry updateFileInformation(FileEntry fileEntry, Map<String, String> params,
+    public File updateFileMetadata(File fileEntry, Map<String, String> params,
             Document requestBody) throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "updateFileInformation");
-        }
         if (fileEntry == null) {
-            throw new FileServiceException(null, Messages.Invalid_FileEntry);
+            throw new FileServiceException(null, Messages.Invalid_File);
         }
         if (StringUtil.isEmpty(fileEntry.getFileId())) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
-        return this.updateFileInformation(fileEntry.getFileId(), params, requestBody);
+        return this.updateFileMetadata(fileEntry.getFileId(), params, requestBody);
     }
 
     /**
-     * updateFileInformation
+     * updateFileMetadata
      * 
-     * @param fileEntry
+     * @param File
      * @param params
      * @param payloadMap
      * @return
      * @throws FileServiceException
      */
-    public FileEntry updateFileInformation(FileEntry fileEntry, Map<String, String> params,
+    public File updateFileMetadata(File fileEntry, Map<String, String> params,
             Map<String, String> payloadMap) throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "updateFileInformation");
-        }
         if (fileEntry == null) {
             throw new FileServiceException(null, Messages.Invalid_FileEntry);
         }
         if (StringUtil.isEmpty(fileEntry.getFileId())) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
-        return this.updateFileInformation(fileEntry.getFileId(), params, payloadMap);
+        return this.updateFileMetadata(fileEntry.getFileId(), params, payloadMap);
     }
 
     /**
-     * updateFileInformation
+     * updateFileMetadata
      * 
      * @param fileId
      * @param updationsMap a Map of updations which need to be done to the file.
      * @return
      * @throws FileServiceException
      */
-    public FileEntry updateFileInformation(String fileId, Map<String, String> updationsMap)
+    public File updateFileMetadata(String fileId, Map<String, String> updationsMap)
             throws FileServiceException {
         Map<String, String> payloadMap = new HashMap<String, String>();
         Map<String, String> paramsMap = new HashMap<String, String>();
         this.parseUpdationsMap(updationsMap, payloadMap, paramsMap);
-        return this.updateFileInformation(fileId, paramsMap, payloadMap);
+        return this.updateFileMetadata(fileId, paramsMap, payloadMap);
     }
 
     /**
-     * updateFileInformation
+     * updateFileMetadata
      * <p>
      * This method is used to update the metadata/content of File in Connections. <br>
      * Rest API used : /files/basic/api/myuserlibrary/document/{document-id}/entry. <br>
@@ -2806,37 +2535,33 @@ public class FileService extends BaseService {
      * @param params - Map of Parameters. See {@link FileRequestParams} for possible values.possible values.
      * @param requestBody - Document which is passed directly as requestBody to the execute request. This
      *            method is used to update the metadata/content of File in Connections.
-     * @return FileEntry
+     * @return File
      * @throws FileServiceException
      */
-    public FileEntry updateFileInformation(String fileId, Map<String, String> params, Document requestBody)
+    public File updateFileMetadata(String fileId, Map<String, String> params, Document requestBody)
             throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "updateFileInformation");
-        }
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         String category = Categories.MYLIBRARY.getCategory();
         SubFilters subFilters = new SubFilters();
         if (StringUtil.isEmpty(fileId)) {
-            logger.log(Level.SEVERE, Messages.Invalid_FileId);
-            return new FileEntry();
+            return new File();
         }
         subFilters.setFileId(fileId);
         String resultType = ResultType.ENTRY.getResultType();
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
                 null,
                 subFilters, resultType); // we pass null value for non applicable types.
         try {
             Response result = (Response) super.updateData(requestUri, params, new ClientService.ContentXml(
                     requestBody, "application/atom+xml"), null);
-            return (FileEntry) new FileEntryFeedHandler().createEntity(result);
+            return (File) new FileFeedHandler().createEntity(result);
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInRestoreFile);
         }
     }
 
     /**
-     * updateFileInformation
+     * updateFileMetadata
      * <p>
      * This method is used to update the metadata/content of File in Connections. <br>
      * Rest API used : /files/basic/api/myuserlibrary/document/{document-id}/entry. <br>
@@ -2846,23 +2571,19 @@ public class FileService extends BaseService {
      * @param params - Map of Parameters. See {@link FileRequestParams} for possible values.
      * @param payloadMap - Map of entries for which we will construct a Request Body. See
      *            {@link FileRequestPayload} for possible values.
-     * @return FileEntry
+     * @return File
      * @throws FileServiceException
      */
-    public FileEntry updateFileInformation(String fileId, Map<String, String> params,
+    public File updateFileMetadata(String fileId, Map<String, String> params,
             Map<String, String> payloadMap) throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "updateFileInformation");
-        }
         if (StringUtil.isEmpty(fileId)) {
-            logger.log(Level.SEVERE, Messages.Invalid_FileId);
-            return new FileEntry();
+            return new File();
         }
         Document updateFilePayload = null;
         if (payloadMap != null && !payloadMap.isEmpty()) {
             updateFilePayload = this.constructPayload(fileId, payloadMap);
         }
-        return this.updateFileInformation(fileId, params, updateFilePayload);
+        return this.updateFileMetadata(fileId, params, updateFilePayload);
     }
 
     // Need to figure out what should be done with the label updation of comment. Connection Doc states that
@@ -2873,7 +2594,7 @@ public class FileService extends BaseService {
             throw new FileServiceException(null, Messages.Invalid_CommentId);
         }
         String requestUri = this.getModerationUri(commentId, "review", "comment");
-        // FileEntry fileEntry = (FileEntry) executeGet(requestUri, null, ClientService.FORMAT_XML,
+        // File File = (File) executeGet(requestUri, null, ClientService.FORMAT_XML,
         // null).get(0);
 
         // Map<String, String> payloadMap = new HashMap<String, String>();
@@ -2897,7 +2618,7 @@ public class FileService extends BaseService {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
         String requestUri = this.getModerationUri(fileId, "review", "file");
-        // FileEntry fileEntry = (FileEntry) executeGet(requestUri, null, ClientService.FORMAT_XML,
+        // File File = (File) executeGet(requestUri, null, ClientService.FORMAT_XML,
         // null).get(0);
 
         Map<String, String> payloadMap = new HashMap<String, String>();
@@ -2916,16 +2637,13 @@ public class FileService extends BaseService {
         }
     }
 
-    public FileEntry updateFolder(String folderId, String name, String description, String shareWith)
+    public File updateFolder(String folderId, String name, String description, String shareWith)
             throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "updateFolder");
-        }
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         SubFilters subFilters = new SubFilters();
         subFilters.setCollectionId(folderId);
         String resultType = ResultType.ENTRY.getResultType();
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
                 null,
                 subFilters, resultType);
         Document payload = this.constructPayloadFolder(name, description, shareWith, "update");
@@ -2934,7 +2652,7 @@ public class FileService extends BaseService {
         
         try {
             Response result = (Response) this.updateData(requestUri, null, headers, payload, null).getData();
-            return (FileEntry) new FileEntryFeedHandler().createEntity(result);
+            return (File) new FileFeedHandler().createEntity(result);
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInRestoreFile);
         }
@@ -2947,11 +2665,11 @@ public class FileService extends BaseService {
      * Rest API Used : /files/basic/api/myuserlibrary/feed <br>
      * 
      * @param file - a readable file on the server
-     * @return FileEntry
+     * @return File
      * @throws FileServiceException
      */
-    public FileEntry upload(File file) throws FileServiceException {
-        return this.upload(file, null);
+    public File uploadFile(java.io.File file) throws FileServiceException {
+        return this.uploadFile(file, null);
     }
 
     /**
@@ -2961,10 +2679,10 @@ public class FileService extends BaseService {
      * 
      * @param file - a readable file on the server
      * @param parameters - file creation parameters, can be null
-     * @return FileEntry
+     * @return File
      * @throws FileServiceException
      */
-    public FileEntry upload(File file, Map<String, String> parameters) throws FileServiceException {
+    public File uploadFile(java.io.File file, Map<String, String> parameters) throws FileServiceException {
         if (file == null) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
@@ -2974,7 +2692,7 @@ public class FileService extends BaseService {
         }
 
         try {
-            return this.upload(new FileInputStream(file), file.getName(), file.length(), parameters);
+            return this.uploadFile(new FileInputStream(file), file.getName(), file.length(), parameters);
         } catch (FileNotFoundException e) {
             throw new FileServiceException(null, Messages.MessageCannotReadFile,
                     file.getAbsolutePath());
@@ -2988,14 +2706,11 @@ public class FileService extends BaseService {
      * 
      * @param file - a readable file on the server
      * @param parameters - file creation parameters, can be null
-     * @return FileEntry
+     * @return File
      * @throws FileServiceException
      */
-    public FileEntry upload(java.io.InputStream stream, final String title, long length,
+    public File uploadFile(java.io.InputStream stream, final String title, long length,
             Map<String, String> p) throws FileServiceException {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "uploading File");
-        }
         if (stream == null) {
             throw new FileServiceException(null, Messages.Invalid_Stream);
         }
@@ -3006,7 +2721,7 @@ public class FileService extends BaseService {
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         String category = Categories.MYLIBRARY.getCategory();
         String resultType = ResultType.FEED.getResultType();
-        String requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
+        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
                 null,
                 null, resultType);
         Map<String, String> headers = new HashMap<String, String>();
@@ -3014,11 +2729,8 @@ public class FileService extends BaseService {
         try {
             Response data = (Response) super.createData(requestUri, p, headers, contentFile);
            
-            return (FileEntry)new FileEntryFeedHandler().createEntity(data);
+            return (File)new FileFeedHandler().createEntity(data);
         } catch (Exception e) {
-            if (logger.isLoggable(Level.WARNING)) {
-                logger.log(Level.WARNING, e.getMessage(), e);
-            }
             throw new FileServiceException(e, Messages.MessageExceptionInUpload);
         }
 }
@@ -3041,18 +2753,14 @@ public class FileService extends BaseService {
      * This method constructs the Atom entry document for the APIs requiring payload input. Currently this
      * method constructs payload for updating Label, Summary, Visibility, Title of the file.
      * 
-     * @param FileEntry - pass the fileEntry object to be updated
+     * @param File - pass the File object to be updated
      * @param payloadMap - Map of entries for which we will construct a Request Body. See
      *            {@link FileRequestPayload} for possible values.
      * @return Document
      */
 
     private Document constructPayload(String fileId, Map<String, String> payloadMap) {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "constructPayload");
-        }
         if (payloadMap == null || payloadMap.isEmpty()) {
-            logger.log(Level.ALL, Messages.MessageEmptyPayload);
             return null;
             // throw new FileServiceException(null, Messages.PayloadInfo_1);
         }
@@ -3104,9 +2812,6 @@ public class FileService extends BaseService {
 
     private Document constructPayloadFolder(String name, String description, String shareWith,
             String operation, String entityId) {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "constructPayloadFolder");
-        }
         String visibility = null, shareWithId = null, shareWithWhat = null, shareWithRole = null;
         StringBuilder payload = new StringBuilder("<entry xmlns=\"http://www.w3.org/2005/Atom\">");
         payload.append("<category term=\"collection\"  label=\"collection\" scheme=\"tag:ibm.com,2006:td/type\"/>");
@@ -3177,9 +2882,6 @@ public class FileService extends BaseService {
      */
 
     private Document constructPayloadForComments(String operation, String commentToBeAdded) {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "constructPayloadForComments");
-        }
         StringBuilder payload = new StringBuilder("<entry xmlns=\"http://www.w3.org/2005/Atom\">");
         payload.append("<category term=\"comment\"  label=\"comment\" scheme=\"tag:ibm.com,2006:td/type\"/>");
 
@@ -3231,9 +2933,6 @@ public class FileService extends BaseService {
 
     private Document constructPayloadForMultipleEntries(List<String> listOfIds, String multipleEntryId,
             String category) {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "constructPayloadForMultipleEntries");
-        }
         StringBuilder requestBody = new StringBuilder(
                 "<?xml version=\"1.0\" encoding=\"UTF-8\"?><feed xmlns=\"http://www.w3.org/2005/Atom\">");
         for (String fileId : listOfIds) {
@@ -3249,90 +2948,6 @@ public class FileService extends BaseService {
         requestBody.append("</feed>");
         // System.err.println("requestBody " + requestBody.toString());
         return this.convertToXML(requestBody.toString());
-    }
-
-    /**
-     * constructUrl
-     * <p>
-     * This method is used to construct the URL for the API execution. The General Pattern of the URL is :: <br>
-     * baseUrl {@link FileServiceURIBuilder} + authType(basic or oauth) + AccessType {@link AccessType} + Category
-     * {@link Categories} + View {@link Views}+ Filter {@link Filters}+ {SubFilterKey + SubFilters}*
-     * {@link SubFilters}+ resultType {@link ResultType}
-     * 
-     * @param baseUrl
-     * @param accessType
-     * @param category
-     * @param view
-     * @param filter
-     * @param subFilters
-     * @param resultType
-     * @return String
-     */
-    @SuppressWarnings("static-access")
-    private String constructUrl(String baseUrl, String accessType, String category, String view,
-            String filter, SubFilters subFilters, String resultType) {
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.entering(sourceClass, "constructUrl");
-        }
-        // here we will set the value in API after constructing the url
-        // if the user has set these values then ok. otherwise, we set the default to GetMyFiles :
-        // /files/basic/api/myuserlibrary/feed
-        StringBuilder url = new StringBuilder(baseUrl);
-        url.append(SEPARATOR).append("basic");
-        // if none of the values have been set, then we set default values here.
-        // by default here we are giving the feed of My Files
-        if (StringUtil.isEmpty(accessType) && StringUtil.isEmpty(category) && StringUtil.isEmpty(view)
-                && StringUtil.isEmpty(filter) && subFilters.isEmpty()) {
-            accessType = AccessType.AUTHENTICATED.getAccessType();
-            category = Categories.MYLIBRARY.getCategory();
-            view = Views.FILES.getViews();
-            filter = Filters.NULL.getFilters();
-        }
-
-        if (!StringUtil.isEmpty(accessType)) {
-            url = url.append(accessType);
-        }
-
-        if (!StringUtil.isEmpty(category)) {
-            url = url.append(category);
-        }
-        if (!StringUtil.isEmpty(view)) {
-            url = url.append(view);
-        }
-        if (!StringUtil.isEmpty(filter)) {
-            url = url.append(filter);
-        }
-
-        if (subFilters != null) {
-            if (!StringUtil.isEmpty(subFilters.getCollectionId())) {
-                url = url.append(subFilters.COLLECTION).append(SEPARATOR)
-                        .append(subFilters.getCollectionId());
-            }
-            if (!StringUtil.isEmpty(subFilters.getUserId())) {
-                url = url.append(subFilters.LIBRARY).append(SEPARATOR).append(subFilters.getUserId());
-            }
-            if (!StringUtil.isEmpty(subFilters.getFileId())) {
-                url = url.append(subFilters.FILE).append(SEPARATOR).append(subFilters.getFileId());
-            }
-            if (!StringUtil.isEmpty(subFilters.getCommentId())) {
-                url = url.append(subFilters.COMMENT).append(SEPARATOR).append(subFilters.getCommentId());
-            }
-            if (!StringUtil.isEmpty(subFilters.getRecycleBinDocumentId())) {
-                url = url.append(subFilters.RECYCLEBIN).append(SEPARATOR)
-                        .append(subFilters.getRecycleBinDocumentId());
-            }
-            if (!StringUtil.isEmpty(subFilters.getVersionId())) {
-                url = url.append(subFilters.VERSION).append(SEPARATOR).append(subFilters.getVersionId());
-            }
-            if (!StringUtil.isEmpty(subFilters.getDocumentsId())) {
-                url = url.append(subFilters.DOCUMENTS).append(SEPARATOR).append(subFilters.getDocumentsId());
-            }
-        }
-
-        if (!StringUtil.isEmpty(resultType)) {
-            url.append(resultType);
-        }
-        return url.toString();
     }
 
     /**
@@ -3352,7 +2967,6 @@ public class FileService extends BaseService {
             builder = factory.newDocumentBuilder();
             document = builder.parse(new InputSource(new StringReader(requestBody.toString())));
         } catch (Exception e) {
-            logger.log(Level.SEVERE, Messages.MessageGenericException + "convertToXML()", e);
             throw new RuntimeException(e);
         }
         return document;
@@ -3375,26 +2989,7 @@ public class FileService extends BaseService {
         }
         return false;
     }
-
-    /**
-     * executePost
-     * 
-     * @param requestUri - api to be executed.
-     * @param params - Map of Parameters. See {@link FileRequestParams} for possible values.
-     * @param headers - Map of Headers. See {@link Headers} for possible values.
-     * @param payload - Document which is passed directly as requestBody to the execute request. This method
-     *            is used to update the metadata/content of File in Connections.
-     * @return Document
-     * @throws FileServiceException public Document executePost(String requestUri, Map<String, String>
-     *             parameters, Map<String, String> headers, Object payload) throws FileServiceException { if
-     *             (logger.isLoggable(Level.FINEST)) { logger.entering(sourceClass, "executePost"); } Object
-     *             result = null; try { result = endpoint.getClientService().post(requestUri, parameters,
-     *             headers, payload, ClientService.FORMAT_XML); } catch (ClientServicesException exception) {
-     *             logger.log(Level.SEVERE, Messages.FileServiceException_1 + "executePost()", exception);
-     *             setStatus(); throw new FileServiceException(exception, exception.getMessage()); }
-     *             parseResult(result); return (Document) result; }
-     */
-
+  
     private String getModerationUri(String contentId, String action, String content)
             throws FileServiceException {
         FilesModerationDocumentEntry fileModDocEntry = new FilesModerationDocumentEntry(null);
@@ -3418,26 +3013,25 @@ public class FileService extends BaseService {
             } else if (action.equalsIgnoreCase("approval")) {
                 category = Categories.APPROVAL.getCategory();
             }
-            requestUri = this.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(),
+            requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(),
                     AccessType.AUTHENTICATED.getAccessType(),
                     category, null, null, subFilters, null);
         }
-        FileEntryList resultantEntries;
+        FileList resultantEntries;
         try {
-            resultantEntries = (FileEntryList) this.getEntities(requestUri, null,
-                    new FileEntryFeedHandler());
+            resultantEntries = (FileList) this.getEntities(requestUri, null,
+                    new FileFeedHandler());
         } catch (Exception e) {
            throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         } 
        
         String uri = null;
-        for (FileEntry entry : resultantEntries) {
+        for (File entry : resultantEntries) {
             if (entry.getFileId().equalsIgnoreCase(contentId)) {
                 uri = entry.getAsString(FileEntryXPath.DeleteModeration);
             }
         }
         if (StringUtil.isEmpty(uri)) {
-            logger.log(Level.SEVERE, Messages.Invalid_ContentId);
             return null;
         }
         return uri;
@@ -3456,7 +3050,6 @@ public class FileService extends BaseService {
                 payloadMap.put(key, fieldMapPairs.getValue());
             } else {
                 // these parameters currently will get ignored. check this .. TODO
-                logger.log(Level.ALL, Messages.InvalidArgument_Generic);
             }
         }
     }
@@ -3465,63 +3058,4 @@ public class FileService extends BaseService {
         List<String> c = Arrays.asList(new String[] { folderId });
         addFileToFolders(fileId, c);
     }
-
-    public FileEntry newFileEntry(Node data)  {
-        XmlDataHandler handler = new XmlDataHandler(data, ConnectionsConstants.nameSpaceCtx);
-        FileEntry fileEntry = new FileEntry(this,handler);
-        return fileEntry;
-    }
-
-
-    public CommentEntry newCommentEntry(Node data) {
-        XmlDataHandler handler = new XmlDataHandler(data, ConnectionsConstants.nameSpaceCtx);
-        CommentEntry commentEntry = new CommentEntry(this,handler);
-        return commentEntry;
-    }
-    
-    private class FileEntryFeedHandler implements IFeedHandler{
-        @Override
-        public FileEntry createEntity(Response dataHolder) {
-            return newFileEntry((Node)dataHolder.getData());
-        }
-
-        @Override
-        public FileEntry createEntityFromData(Object data) {
-            return newFileEntry((Node)data);
-        }
-
-        @Override
-        public FileEntryList createEntityList(Response dataHolder) {
-            return new FileEntryList((Response) dataHolder, FileService.this);
-        }
-
-        @Override
-        public FileService getService() {
-            return FileService.this;
-        }
-
-    }
-    private class CommentEntryFeedHandler implements IFeedHandler{
-        @Override
-        public CommentEntry createEntity(Response dataHolder) {
-            return newCommentEntry((Node)dataHolder.getData());
-        }
-
-        @Override
-        public CommentEntry createEntityFromData(Object data) {
-            return newCommentEntry((Node)data);
-        }
-
-        @Override
-        public CommentEntryList createEntityList(Response dataHolder) {
-            return new CommentEntryList((Response) dataHolder, FileService.this);
-        }
-
-        @Override
-        public FileService getService() {
-            return FileService.this;
-        }
-
-    }
-
 }

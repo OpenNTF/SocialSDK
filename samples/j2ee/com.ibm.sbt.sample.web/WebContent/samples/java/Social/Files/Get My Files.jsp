@@ -15,9 +15,9 @@
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@page import="com.ibm.sbt.services.client.connections.files.FileService"%>
-<%@page import="com.ibm.sbt.services.client.connections.files.model.CommentEntry"%>
-<%@page import="com.ibm.sbt.services.client.connections.files.model.FileEntry"%>
-<%@page import="com.ibm.sbt.services.client.connections.files.FileEntryList"%>
+<%@page import="com.ibm.sbt.services.client.connections.files.Comment"%>
+<%@page import="com.ibm.sbt.services.client.connections.files.File"%>
+<%@page import="com.ibm.sbt.services.client.connections.files.FileList"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Map"%>
@@ -39,21 +39,21 @@
 	<h4>My Files</h4>
 	<div id="content">
 	<%
-	try {		
-		FileService fileService = new FileService();
-		FileEntryList files = fileService.getMyFiles(); 
-		if(files != null && ! files.isEmpty()) {
-			for (FileEntry file : files) {
-				out.println("<a href=\"" + file.getDownloadLink() + "\"> " + file.getLabel() + "</a><br/>" );
-			}
-		} else {
-			out.println("No Results");
+		try {		
+			FileService fileService = new FileService();
+			FileList files = fileService.getMyFiles(); 
+			if(files != null && ! files.isEmpty()) {
+		for (File file : files) {
+			out.println("<a href=\"" + file.getDownloadUrl() + "\"> " + file.getLabel() + "</a><br/>" );
 		}
-	} catch (Throwable e) {
-		out.println("<pre>");
-		out.println(e.getMessage());
-		out.println("</pre>");	
-	}					
+			} else {
+		out.println("No Results");
+			}
+		} catch (Throwable e) {
+			out.println("<pre>");
+			out.println(e.getMessage());
+			out.println("</pre>");	
+		}
 	%>
 	</div>
 </body>

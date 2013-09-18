@@ -214,7 +214,8 @@ public class ProfileService extends BaseService {
 	 * 
 	 * @param id 
 	 * 		   unique identifier of the user whose colleagues are required, it can be email or userID
-	 * @return list of User's colleagues profiles
+	 * @return EntityList 
+				typecast it to ProfileList or connectionEntryList, based on outputType parameter
 	 * @throws ProfileServiceException
 	 */
 	public EntityList getColleagues(String id) throws ProfileServiceException{
@@ -230,7 +231,8 @@ public class ProfileService extends BaseService {
 	 * 		   unique identifier of the user whose colleagues are required, it can be email or userID
 	 * @param parameters 
 	 * 				list of query string parameters to pass to API
-	 * @return Profiles of User's colleagues  
+	 * @return EntityList 
+				typecast it to ProfileList or connectionEntryList, based on outputType parameter
 	 * @throws ProfileServiceException
 	 */
 	public EntityList getColleagues(String id, Map<String, String> parameters)
@@ -339,7 +341,8 @@ public class ProfileService extends BaseService {
 	 * 				 userid or email of first user
 	 * @param targetId 
 	 * 				 userid or email of second user
-	 * @return list of common colleagues profiles
+	 * @return EntityList 
+				typecast it to ProfileList or connectionEntryList, based on outputType parameter
 	 * @throws ProfileServiceException
 	 */
 	public EntityList getCommonColleagues(String sourceId, String targetId) throws ProfileServiceException{
@@ -355,7 +358,8 @@ public class ProfileService extends BaseService {
 	 * 				 userid or email of first user
 	 * @param targetId 
 	 * 				 userid or email of second user
-	 * @return list of common colleagues profiles
+	 * @return EntityList 
+				typecast it to ProfileList or connectionEntryList, based on outputType parameter
 	 * @throws ProfileServiceException
 	 */
 	public EntityList getCommonColleagues(String sourceId, String targetId,  Map<String, String> parameters) throws ProfileServiceException{

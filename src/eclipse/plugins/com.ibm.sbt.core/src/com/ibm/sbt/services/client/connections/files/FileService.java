@@ -400,7 +400,7 @@ public class FileService extends BaseService {
                 subFilters, resultType);
         Map<String, String> headers = new HashMap<String, String>();
         headers.put(Headers.ContentType, Headers.ATOM);
-        headers.put(Headers.ContentLanguage, Headers.UTF);
+//        headers.put(Headers.ContentLanguage, Headers.UTF);
 
         Object payload = this.constructPayloadForMultipleEntries(folderIds,
                 FileRequestParams.ITEMID.getFileRequestParams(), "collection");

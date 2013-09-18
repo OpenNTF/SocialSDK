@@ -51,7 +51,7 @@ public class MultipleFileTransformer extends AbstractBaseTransformer {
 			String entryXml = getTemplateContent(SOURCEPATH + "FileItemEntryTmpl.xml");
 			if(StringUtil.isNotEmpty(category)) { 
 				String categoryXml = getXMLRep(getStream(SOURCEPATH + "FileCategoryTmpl.xml"), "category", XmlTextUtil.escapeXMLChars(category));
-				entryXml = getXMLRep(entryXml, "category", categoryXml);
+				entryXml = getXMLRep(entryXml, "getCategory", categoryXml);
 			}
 			String itemXml = getXMLRep(getStream(SOURCEPATH + "FileItemIdTmpl.xml"), "fileId", XmlTextUtil.escapeXMLChars(currentElement));
 			entryXml = getXMLRep(entryXml, "getItem", itemXml);

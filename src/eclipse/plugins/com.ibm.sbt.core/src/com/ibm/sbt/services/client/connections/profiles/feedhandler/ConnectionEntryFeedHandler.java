@@ -13,7 +13,7 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-package com.ibm.sbt.services.client.connections.profiles.feedhandlers;
+package com.ibm.sbt.services.client.connections.profiles.feedhandler;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -21,7 +21,7 @@ import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.connections.profiles.ConnectionEntry;
-import com.ibm.sbt.services.client.connections.profiles.ConnectionEntryXPath;
+import com.ibm.sbt.services.client.connections.profiles.model.ConnectionEntryXPath;
 import com.ibm.sbt.services.client.connections.profiles.ConnectionEntryList;
 import com.ibm.sbt.services.client.connections.profiles.ProfileService;
 import com.ibm.sbt.services.client.Response;

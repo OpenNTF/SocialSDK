@@ -22,7 +22,7 @@ import com.ibm.sbt.services.util.XmlTextUtil;
 import com.ibm.sbt.services.client.base.transformers.AbstractBaseTransformer;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.profiles.Profile;
-import com.ibm.sbt.services.client.connections.profiles.ProfilesConstants;
+import com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants;
 
 
 /**

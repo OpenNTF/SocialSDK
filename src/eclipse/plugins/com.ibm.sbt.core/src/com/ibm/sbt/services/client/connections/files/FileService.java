@@ -27,7 +27,6 @@ import java.util.Map;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.apache.james.mime4j.field.Fields;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import com.ibm.commons.util.StringUtil;
@@ -2505,13 +2504,6 @@ public class FileService extends BaseService {
         if (StringUtil.isEmpty(fileEntry.getFileId())) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
-//        Map<String, String> payloadMap = new HashMap<String, String>();
-//        Iterator<Map.Entry<String, Object>> entries = fileEntry.getFieldsMap().entrySet().iterator();
-//        while (entries.hasNext()) {
-//            Map.Entry<String, Object> fieldMapPairs = entries.next();
-//            String key = fieldMapPairs.getKey();
-//            payloadMap.put(key, (String)(fieldMapPairs.getValue()));
-//        }
         return this.updateFileMetadata(fileEntry.getFileId(), params, fileEntry.getFieldsMap());
     }
 

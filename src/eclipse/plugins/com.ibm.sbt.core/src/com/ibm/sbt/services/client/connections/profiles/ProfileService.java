@@ -165,7 +165,7 @@ public class ProfileService extends BaseService {
 	   * 
 	   * @param id 
 	   *        unique identifier of the user whose colleagues are required, it can be email or userKey
-	   * @return ProfileTagList
+	   * @return TagList
 	   * @throws ProfileServiceException
 	   */
 	  public TagList getTags(String id) throws ProfileServiceException{
@@ -178,7 +178,7 @@ public class ProfileService extends BaseService {
 	   *        unique identifier of the user whose colleagues are required, it can be email or userKey
 	   * @param parameters 
 	   *         list of query string parameters to pass to API
-	   * @return ProfileTagList 
+	   * @return TagList 
 	   * @throws ProfileServiceException
 	   */
 	  public TagList getTags(String id, Map<String, String> parameters)

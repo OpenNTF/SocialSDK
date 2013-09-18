@@ -4,19 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
-
-import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.ConnectionsFeedXpath;
-import com.ibm.sbt.services.client.connections.files.model.CommentEntry;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
+import com.ibm.sbt.services.client.connections.files.feedHandler.*;
+import com.ibm.sbt.services.client.connections.files.model.FileEntryXPath;
 
-public class CommentEntryList extends EntityList<CommentEntry> {
+public class FileList extends EntityList<File> {
 
-	public CommentEntryList(Response requestData, BaseService service) {
-		super(requestData, service);
+	public FileList(Response requestData, FileFeedHandler feedHandler) {
+		super(requestData, feedHandler);
 	}
 	
 	@Override
@@ -30,15 +29,25 @@ public class CommentEntryList extends EntityList<CommentEntry> {
 	}
 
 	@Override
-	protected ArrayList<CommentEntry> createEntities() {
+	public FileFeedHandler getFeedHandler() {
+		return (FileFeedHandler)super.getFeedHandler();
+	}
+	
+	@Override
+	public File getEntity(Object data) {
+		return (File)super.getEntity(data);
+	}
+	
+	@Override
+	protected ArrayList<File> createEntities() {
 		XmlDataHandler dataHandler = new XmlDataHandler(getData(), ConnectionsConstants.nameSpaceCtx);
-		ArrayList<CommentEntry> commentEntries = new ArrayList<CommentEntry>();
+		ArrayList<File> fileEntries = new ArrayList<File>();
 		List<Node> entries = dataHandler.getEntries(FileEntryXPath.Entry);
 		for (Node node: entries) {
-			CommentEntry commentEntry = getService().newCommentEntry(node);
-			commentEntries.add(commentEntry);
+			File fileEntry = getEntity(node);
+			fileEntries.add(fileEntry);
 		}
-		return commentEntries;
+		return fileEntries;
 	}
 	
 	private XmlDataHandler getMetaDataHandler(){

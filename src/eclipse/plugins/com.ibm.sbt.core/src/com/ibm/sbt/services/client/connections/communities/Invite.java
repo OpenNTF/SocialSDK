@@ -3,6 +3,7 @@ package com.ibm.sbt.services.client.connections.communities;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
+import com.ibm.sbt.services.client.connections.communities.model.CommunityXPath;
 
 /**
  * This File represents Community Invites

@@ -1,0 +1,11 @@
+<entry xmlns="http://www.w3.org/2005/Atom">
+
+${getCatgeory}
+${getId}
+${getFolderLabel}
+${getTitle}
+${getSummary}
+${getVisibility}
+${getVisibilityShare}
+
+</entry>

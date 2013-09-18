@@ -385,28 +385,6 @@ public class FileServiceTest extends BaseUnitTest {
 	}
 	
 	@Test
-	public void testAddRemoveFilesToFolder() throws Exception {
-		FileService fileService = new FileService();
-		authenticateEndpoint(fileService.getEndpoint(), USERNAME, PASSWORD);
-		FileList folders = fileService.getMyFolders();
-		if(folders != null) {
-			String folderId = folders.get(0).getFileId();
-			FileList listOfFiles = fileService.getMyFiles();
-			List<String> listOfFileIds = new ArrayList<String>();
-			for(File file : listOfFiles) {
-				listOfFileIds.add(file.getFileId());
-			}
-			FileList fileList = fileService.addFilesToFolder(folderId, listOfFileIds, null);
-			assertNotNull(fileList);
-			
-			// now removing files from folder. 
-			for(String file : listOfFileIds) {
-				fileService.removeFileFromFolder(folderId, file);
-			}
-		}
-	}
-	
-	@Test
 	public void testAddRemoveFileToFolders() throws Exception {
 		FileService fileService = new FileService();
 		authenticateEndpoint(fileService.getEndpoint(), USERNAME, PASSWORD);

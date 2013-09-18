@@ -1,7 +1,7 @@
 require([ "sbt/dom", "sbt/json", "sbt/connections/ActivityStreamService", "sbt/connections/ActivityStreamConstants" ], function(dom,json,ActivityStreamService, ASConstants) {
     var acticityStreamService = new ActivityStreamService();
     var communityID = "%{name=sample.communityId|helpSnippetId=Social_Communities_Get_My_Communities}";
-    var promise = acticityStreamService.getUpdatesFromACommunity(
+    var promise = acticityStreamService.getUpdatesFromCommunity(
     	communityID,
 		{
 			count: 5

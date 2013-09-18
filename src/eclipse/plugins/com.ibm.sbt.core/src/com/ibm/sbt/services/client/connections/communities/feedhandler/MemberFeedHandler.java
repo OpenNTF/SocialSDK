@@ -21,7 +21,7 @@ import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
-import com.ibm.sbt.services.client.connections.communities.CommunityXPath;
+import com.ibm.sbt.services.client.connections.communities.model.CommunityXPath;
 import com.ibm.sbt.services.client.connections.communities.Member;
 import com.ibm.sbt.services.client.connections.communities.MemberList;
 import com.ibm.sbt.services.client.Response;

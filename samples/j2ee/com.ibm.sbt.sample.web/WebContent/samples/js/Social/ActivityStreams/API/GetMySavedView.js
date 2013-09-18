@@ -1,6 +1,6 @@
 require([ "sbt/dom", "sbt/json", "sbt/connections/ActivityStreamService", "sbt/connections/ActivityStreamConstants" ], function(dom,json,ActivityStreamService, ASConstants) {
     var acticityStreamService = new ActivityStreamService();
-    var promise = acticityStreamService.getMySavedView(
+    var promise = acticityStreamService.getMySavedItems(
 		{
 			count: 5
 		}

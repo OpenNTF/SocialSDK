@@ -38,7 +38,10 @@
 	try {
 		String userId = Context.get().getProperty("sample.userId1");
 		ProfileService connProfSvc = new ProfileService();
-		ProfileList profiles = connProfSvc.getColleagues(userId);
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put("outputType", "profile");
+			
+		ProfileList profiles = (ProfileList)connProfSvc.getColleagues(userId,parameters);
 		if(profiles != null && ! profiles.isEmpty()) {
 			for (Iterator iterator = profiles.iterator(); iterator.hasNext();) {
 					Profile profile = (Profile)iterator.next();

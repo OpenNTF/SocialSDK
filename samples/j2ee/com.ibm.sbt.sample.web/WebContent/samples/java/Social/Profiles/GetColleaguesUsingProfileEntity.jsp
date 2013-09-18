@@ -22,6 +22,8 @@
 <%@page import="com.ibm.sbt.services.client.connections.profiles.ProfileService"%>
 <%@page import="com.ibm.sbt.services.client.connections.profiles.Profile"%>
 <%@page import="com.ibm.sbt.services.client.connections.profiles.ProfileList"%>
+<%@page import="com.ibm.sbt.services.client.connections.profiles.ConnectionEntry"%>
+<%@page import="com.ibm.sbt.services.client.connections.profiles.ConnectionEntryList"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.List"%>
@@ -37,24 +39,25 @@
 	<div id="content">
 	<%
 		try {
-				String userId = Context.get().getProperty("sample.id1");
-				ProfileService connProfSvc = new ProfileService();
-				Profile profile = connProfSvc.getProfile(userId);
-				
-				if (profile != null) {
-					ProfileList colleagues = profile.getColleagues();
-					if(colleagues != null && ! colleagues.isEmpty()) {
-						for (Profile colleague : colleagues)
-						{
-						out.println("<b>Name : </b> " + colleague.getName());
+			String userId = Context.get().getProperty("sample.userId1");
+			ProfileService connProfSvc = new ProfileService();
+			Profile profile = connProfSvc.getProfile(userId);
+
+			if (profile != null) {
+				ConnectionEntryList colleagues = (ConnectionEntryList) connProfSvc
+						.getColleagues(userId);
+				if (colleagues != null && !colleagues.isEmpty()) {
+					for (ConnectionEntry colleague : colleagues) {
+						out.println("<b>Name : </b> "
+								+ colleague.getContributorName());
 						out.println("<br>");
-						}
-					} else {
-						out.println("No colleagues found for this profile");
 					}
-				} else { 
-						out.println("Profile object is null");
-					}
+				} else {
+					out.println("No colleagues found for this profile");
+				}
+			} else {
+				out.println("Profile does not exist for this user");
+			}
 		} catch (Throwable e) {
 			out.println("<pre>");
 			out.println(e.getMessage());

@@ -33,6 +33,7 @@ import com.ibm.sbt.services.client.connections.profiles.feedhandlers.ProfileTagF
 import com.ibm.sbt.services.client.connections.profiles.transformers.ConnectionEntryTransformer;
 import com.ibm.sbt.services.client.connections.profiles.transformers.ProfileTransformer;
 import com.ibm.sbt.services.client.connections.profiles.utils.Messages;
+import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.base.datahandlers.JsonDataHandler;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.services.client.ClientService;
@@ -216,8 +217,10 @@ public class ProfileService extends BaseService {
 	 * @return list of User's colleagues profiles
 	 * @throws ProfileServiceException
 	 */
-	public ProfileList getColleagues(String id) throws ProfileServiceException{
-		return getColleagues(id,null);
+	public EntityList getColleagues(String id) throws ProfileServiceException{
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put("outputType", "connection");
+		return getColleagues(id,parameters);
 	}
 
 	/**
@@ -230,7 +233,7 @@ public class ProfileService extends BaseService {
 	 * @return Profiles of User's colleagues  
 	 * @throws ProfileServiceException
 	 */
-	public ProfileList getColleagues(String id, Map<String, String> parameters)
+	public EntityList getColleagues(String id, Map<String, String> parameters)
 	throws ProfileServiceException{
 
 		if (StringUtil.isEmpty(id)){
@@ -243,66 +246,27 @@ public class ProfileService extends BaseService {
 				ProfileType.CONNECTIONS.getProfileType());
 		setIdParameter(parameters, id);
 		parameters.put("connectionType","colleague");
-		parameters.put("outputType","profile");
-
-		ProfileList profiles = null;
+		EntityList entities = null;
 		try {
-			profiles = (ProfileList) getEntities(url, parameters, new ProfileFeedHandler(this));
+			if(StringUtil.isNotEmpty(parameters.get("outputType"))){
+				if(StringUtil.equalsIgnoreCase(parameters.get("outputType"), "profile")){
+					entities = getEntities(url, parameters, new ProfileFeedHandler(this));
+				}
+				else{
+					entities = getEntities(url, parameters, new ConnectionEntryFeedHandler(this));
+				}
+			}
+			else{
+				entities = getEntities(url, parameters, new ConnectionEntryFeedHandler(this));
+			}
+
 		} catch (ClientServicesException e) {
 			throw new ProfileServiceException(e, Messages.ColleaguesException, id);
 		} catch (IOException e) {
 			throw new ProfileServiceException(e, Messages.ColleaguesException, id);
 		}
 
-		return profiles;
-	}
-
-	/**
-	 * Wrapper method to get connection entries of user's colleagues
-	 * 
-	 * @param id 
-	 * 		   unique identifier of the user whose colleagues are required, it can be email or userID
-	 * @return list of user's colleagues connection entries 
-	 * @throws ProfileServiceException
-	 */
-	public ConnectionEntryList getColleaguesConnectionEntries(String id) throws ProfileServiceException{
-		return getColleaguesConnectionEntries(id,null);
-	}
-
-	/**
-	 * Wrapper method to get connection entries of user's colleagues
-	 * 
-	 * @param id 
-	 * 		   unique identifier of the user whose colleagues are required, it can be email or userID
-	 * @param parameters 
-	 * 				list of query string parameters to pass to API
-	 * @return list of user's colleagues connection entries   
-	 * @throws ProfileServiceException
-	 */
-	public ConnectionEntryList getColleaguesConnectionEntries(String id, Map<String, String> parameters)
-	throws ProfileServiceException{
-		if (StringUtil.isEmpty(id)){
-			throw new ProfileServiceException(null, Messages.InvalidArgument_1);
-		}
-
-		if(parameters == null)
-			parameters = new HashMap<String, String>();
-		String url = resolveProfileUrl(ProfileAPI.NONADMIN.getProfileEntityType(),
-				ProfileType.CONNECTIONS.getProfileType());
-		setIdParameter(parameters, id);
-		parameters.put("connectionType","colleague");
-		parameters.put("outputType","connection");
-
-		ConnectionEntryList connectionEntries = null;
-		try {
-			connectionEntries = (ConnectionEntryList) getEntities(url, parameters, new ConnectionEntryFeedHandler(this));
-		} catch (ClientServicesException e) {
-			throw new ProfileServiceException(e, Messages.ColleaguesException, id);
-		} catch (IOException e) {
-			throw new ProfileServiceException(e, Messages.ColleaguesException, id);
-		}
-
-		return connectionEntries;
+		return entities;
 	}
 
 	/**
@@ -369,7 +333,7 @@ public class ProfileService extends BaseService {
 	}
 
 	/**
-	 * Wrapper method to get profiles of colleagues shared by two users
+	 * Wrapper method to get common colleagues of two users
 	 * 
 	 * @param sourceId 
 	 * 				 userid or email of first user
@@ -378,12 +342,14 @@ public class ProfileService extends BaseService {
 	 * @return list of common colleagues profiles
 	 * @throws ProfileServiceException
 	 */
-	public ProfileList getCommonColleaguesProfiles(String sourceId, String targetId) throws ProfileServiceException{
-		return getCommonColleaguesProfiles(sourceId, targetId, null);
+	public EntityList getCommonColleagues(String sourceId, String targetId) throws ProfileServiceException{
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put("outputType", "connection");
+		return getCommonColleagues(sourceId, targetId, parameters);
 	}
 
 	/**
-	 * Wrapper method to get profiles of colleagues shared by two users
+	 * Wrapper method to get common colleagues of two users
 	 * 
 	 * @param sourceId 
 	 * 				 userid or email of first user
@@ -392,7 +358,7 @@ public class ProfileService extends BaseService {
 	 * @return list of common colleagues profiles
 	 * @throws ProfileServiceException
 	 */
-	public ProfileList getCommonColleaguesProfiles(String sourceId, String targetId,  Map<String, String> parameters) throws ProfileServiceException{
+	public EntityList getCommonColleagues(String sourceId, String targetId,  Map<String, String> parameters) throws ProfileServiceException{
 
 		if (StringUtil.isEmpty(sourceId)) {
 			throw new ProfileServiceException(null, Messages.InvalidArgument_4);
@@ -416,79 +382,28 @@ public class ProfileService extends BaseService {
 			parameters.put(ProfilesConstants.USERID, value.toString());
 		}
 		parameters.put("connectionType","colleague");
-		parameters.put("outputType","profile");
 
-		ProfileList profiles = null;
+		EntityList entities = null;
 		try {
-			profiles = (ProfileList) getEntities(url, parameters, new ProfileFeedHandler(this));
+			if(StringUtil.isNotEmpty(parameters.get("outputType"))){
+				if(StringUtil.equalsIgnoreCase(parameters.get("outputType"), "profile")){
+					entities = getEntities(url, parameters, new ProfileFeedHandler(this));
+				}
+				else{
+					entities = getEntities(url, parameters, new ConnectionEntryFeedHandler(this));
+				}
+			}
+			else{
+				entities = getEntities(url, parameters, new ConnectionEntryFeedHandler(this));
+			}
+
 		} catch (ClientServicesException e) {
 			throw new ProfileServiceException(e, Messages.CommonColleaguesException, sourceId, targetId );
 		} catch (IOException e) {
 			throw new ProfileServiceException(e, Messages.CommonColleaguesException, sourceId, targetId);
 		}
 
-		return profiles;
-	}
-
-	/**
-	 * Wrapper method to get connection entries of colleagues shared by two users
-	 * 
-	 * @param sourceId 
-	 * 				 userid or email of first user
-	 * @param targetId 
-	 * 				 userid or email of second user
-	 * @return list of common colleagues connection entries
-	 * @throws ProfileServiceException
-	 */
-	public ConnectionEntryList getCommonColleaguesConnectionEntries(String sourceId, String targetId) throws ProfileServiceException{
-		return getCommonColleaguesConnectionEntries(sourceId, targetId, null);
-	}
-	/**
-	 * Wrapper method to get connection entries of colleagues shared by two users
-	 * 
-	 * @param sourceId 
-	 * 				 userid or email of first user
-	 * @param targetId 
-	 * 				 userid or email of second user
-	 * @return list of common colleagues connection entries
-	 * @throws ProfileServiceException
-	 */
-	public ConnectionEntryList getCommonColleaguesConnectionEntries(String sourceId, String targetId,  Map<String, String> parameters) throws ProfileServiceException{
-
-		if (StringUtil.isEmpty(sourceId)) {
-			throw new ProfileServiceException(null, Messages.InvalidArgument_4);
-		}
-		if (StringUtil.isEmpty(targetId)) {
-			throw new ProfileServiceException(null, Messages.InvalidArgument_5);
-		}
-		if(parameters == null){
-			parameters = new HashMap<String, String>();
-		}
-		String url = resolveProfileUrl(ProfileAPI.NONADMIN.getProfileEntityType(),
-				ProfileType.CONNECTIONS_IN_COMMON.getProfileType());
-		if (isEmail(sourceId)) {
-			StringBuilder value =  new StringBuilder(sourceId);
-			value = value.append(",").append(targetId);
-			parameters.put(ProfilesConstants.EMAIL, value.toString());
-		} else {
-
-			StringBuilder value =  new StringBuilder(sourceId);
-			value = value.append(",").append(targetId);
-			parameters.put(ProfilesConstants.USERID, value.toString());
-		}
-		parameters.put("connectionType","colleague");
-		parameters.put("outputType","connection");
-
-		ConnectionEntryList connectionEntries = null;
-		try {
-			connectionEntries = (ConnectionEntryList) getEntities(url, parameters, new ConnectionEntryFeedHandler(this));
-		} catch (ClientServicesException e) {
-			throw new ProfileServiceException(e, Messages.CommonColleaguesException, sourceId, targetId);
-		} catch (IOException e) {
-			throw new ProfileServiceException(e, Messages.CommonColleaguesException, sourceId, targetId);
-		}
-
-		return connectionEntries;
+		return entities;
 	}
 
 	/**

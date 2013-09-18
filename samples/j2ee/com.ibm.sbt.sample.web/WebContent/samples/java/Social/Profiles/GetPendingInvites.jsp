@@ -24,34 +24,31 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="com.ibm.sbt.services.client.connections.profiles.ProfileService"%>
-<%@page import="com.ibm.sbt.services.client.connections.profiles.Profile"%>
-<%@page import="com.ibm.sbt.services.client.connections.profiles.ProfileList"%>
+<%@page import="com.ibm.sbt.services.client.connections.profiles.ConnectionEntry"%>
+<%@page import="com.ibm.sbt.services.client.connections.profiles.ConnectionEntryList"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"	pageEncoding="ISO-8859-1"%>
 <html>
 <head>
-	<title>SBT JAVA Sample - Get Common Colleagues</title>
+	<title>SBT JAVA Sample - Get Pending Invites</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 <body>
 	<div id="content">
 	<%
 		try {
-			String userId1 = Context.get().getProperty("sample.userId1");
-			String userId2 = Context.get().getProperty("sample.userId2");
-			
+			String userId = Context.get().getProperty("sample.userId1");
 			ProfileService connProfSvc = new ProfileService();
 			Map<String, String> params = new HashMap<String, String>();
 			params.put("inclMessage", "true");
-			params.put("outputType", "profile");
-	
-			ProfileList entries = (ProfileList)connProfSvc.getCommonColleagues(userId1, userId2);
+			params.put("status","pending");
 		
-			if (entries != null && !entries.isEmpty()) {
+			ConnectionEntryList invites = (ConnectionEntryList)connProfSvc.getColleagues(userId, params);
+		
+			if (invites != null && !invites.isEmpty()) {
 				out.println("<b> User's colleagues </b>");
 				out.println("<br>");
-				for (Iterator iterator = entries.iterator(); iterator.hasNext();) {
-					Profile entry = (Profile) iterator.next();
-					out.println(entry.getName());
+				for (ConnectionEntry invite : invites){
+					out.println("<b>Invite : </b> " + invite.getTitle() +invite.getContent());
 					out.println("<br>");
 				}
 			} else {

@@ -1,0 +1,12 @@
+<entry xmlns="http://www.w3.org/2005/Atom">
+
+${getCategory}
+${getId}
+${getUuid}
+${getLabel}
+${getTitle}
+${getSummary}
+${getVisibility}
+${getItem}
+
+</entry>

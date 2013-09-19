@@ -3,8 +3,8 @@ require(["sbt/connections/FileService", "sbt/connections/controls/files/FileGrid
 	var showFileComments = function(userId, fileId) {
         var grid = new FileGrid({
              type : "fileComments",
-             userId : userId,
-             fileId : fileId
+             userid : userId,
+             documentId : fileId
         });
                  
         dom.byId("gridDiv").appendChild(grid.domNode);

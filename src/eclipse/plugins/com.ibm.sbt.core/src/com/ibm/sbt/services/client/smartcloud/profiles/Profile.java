@@ -20,6 +20,7 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
+import com.ibm.sbt.services.client.smartcloud.profiles.model.ProfileJsonPath;
 
 /**
  * This Class creates a Profile Object from Profile Service

@@ -21,6 +21,8 @@ import java.util.Map;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonObject;
 import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.smartcloud.profiles.feedhandler.ProfileFeedHandler;
+import com.ibm.sbt.services.client.smartcloud.profiles.util.Messages;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;

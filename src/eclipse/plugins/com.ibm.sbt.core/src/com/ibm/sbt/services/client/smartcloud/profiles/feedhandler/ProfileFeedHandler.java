@@ -13,12 +13,16 @@
  * implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
-package com.ibm.sbt.services.client.smartcloud.profiles;
+package com.ibm.sbt.services.client.smartcloud.profiles.feedhandler;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.datahandlers.JsonDataHandler;
+import com.ibm.sbt.services.client.smartcloud.profiles.Profile;
+import com.ibm.sbt.services.client.smartcloud.profiles.ProfileList;
+import com.ibm.sbt.services.client.smartcloud.profiles.ProfileService;
+import com.ibm.sbt.services.client.smartcloud.profiles.model.ProfileJsonPath;
 
 public class ProfileFeedHandler implements IFeedHandler{
 	private final ProfileService service;

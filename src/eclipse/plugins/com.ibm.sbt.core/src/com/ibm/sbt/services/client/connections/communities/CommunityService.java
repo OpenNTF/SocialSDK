@@ -500,12 +500,12 @@ public class CommunityService extends BaseService {
 		if (StringUtil.isEmpty(communityUuid)){
 			throw new CommunityServiceException(null, Messages.NullCommunityIdUserIdOrRoleException);
 		}
-		String memberId = "";
-		if(StringUtil.isEmpty(member.getUserid())){
-			memberId = member.getEmail();
-		}
-		if (StringUtil.isEmpty(member.getUserid())){
-			throw new CommunityServiceException(null, Messages.NullCommunityIdUserIdOrRoleException);
+		String memberId = member.getUserid();
+		if(StringUtil.isEmpty(memberId)){
+			if(StringUtil.isEmpty(member.getEmail()))
+				throw new CommunityServiceException(null, Messages.NullCommunityIdUserIdOrRoleException);
+			else
+				memberId = member.getEmail();
 		}
 		try {
 			if(StringUtil.isEmpty(member.getRole())){

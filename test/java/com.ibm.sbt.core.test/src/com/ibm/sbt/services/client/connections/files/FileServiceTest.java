@@ -419,7 +419,7 @@ public class FileServiceTest extends BaseUnitTest {
 		FileService fileService = new FileService();
 		authenticateEndpoint(fileService.getEndpoint(), USERNAME, PASSWORD);
 		String name = "testCreateFolder" + System.currentTimeMillis();
-		String description = "Vimal's testCreateFolder";
+		String description = "testCreateFolder";
 		File folder = fileService.createFolder(name, description, "");
 		assertEquals(folder.getTitle(), name);
 		
@@ -484,7 +484,7 @@ public class FileServiceTest extends BaseUnitTest {
 		Comment commentObject = fileService.createComment(fileId, "CommentCreated" + System.currentTimeMillis());
 		if(commentObject != null) {
 			String commentId = commentObject.getCommentId();
-			fileService.updateComment(fileId, commentId, commentObject.getComment()+"Vimal"); 
+			fileService.updateComment(fileId, commentId, commentObject.getComment()+ System.currentTimeMillis()); 
 		}
 	}
 }

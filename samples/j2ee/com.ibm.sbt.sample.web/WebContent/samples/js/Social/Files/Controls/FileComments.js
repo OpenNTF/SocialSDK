@@ -4,7 +4,7 @@ require(["sbt/connections/FileService", "sbt/connections/controls/files/FileGrid
         var grid = new FileGrid({
              type : "fileComments",
              userId : userId,
-             fileId : fileId
+             documentId : fileId
         });
                  
         dom.byId("gridDiv").appendChild(grid.domNode);

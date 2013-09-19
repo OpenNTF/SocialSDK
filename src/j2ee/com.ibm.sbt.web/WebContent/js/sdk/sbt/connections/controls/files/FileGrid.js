@@ -397,14 +397,14 @@ define([ "../../../declare",
          */
         getUrlParams: function() {
         	var params = { authType : this.getAuthType() };
-
-        	if (this.userid || this.userId) {
-            	params = lang.mixin(params, { userId : this.userid || this.userId });
+        	
+        	if (this.userId) {
+            	params = lang.mixin(params, { userid : this.userId });
             } 
-            if (this.fileid || this.fileId) {
-            	params = lang.mixin(params, { fileId : this.fileid || this.fileId });
+            if (this.documentId) {
+            	params = lang.mixin(params, { documentId : this.documentId });
             }
-            
+           
             return params;
         },
         

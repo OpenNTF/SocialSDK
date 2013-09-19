@@ -17,7 +17,6 @@ package com.ibm.sbt.services.client.connections.files;
 
 import java.util.HashMap;
 import com.ibm.commons.util.StringUtil;
-import com.ibm.sbt.services.client.connections.files.util.FileConstants;
 
 /**
  * Files Base URL <br>

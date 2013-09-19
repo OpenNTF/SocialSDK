@@ -25,7 +25,6 @@ import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.files.model.Author;
 import com.ibm.sbt.services.client.connections.files.model.Modifier;
 import com.ibm.sbt.services.client.connections.files.model.Person;
-import com.ibm.sbt.services.client.connections.files.util.FileConstants;
 import com.ibm.sbt.services.client.connections.files.model.FileEntryXPath;
 import com.ibm.sbt.services.client.connections.files.model.FileRequestPayload;
 

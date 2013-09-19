@@ -13,7 +13,7 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-package com.ibm.sbt.services.client.smartcloud.profiles;
+package com.ibm.sbt.services.client.smartcloud.profiles.util;
 
 /**
  * Class used to retrieve translatable message values from the associated properties file.

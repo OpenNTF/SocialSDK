@@ -21,6 +21,8 @@ import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.base.datahandlers.JsonDataHandler;
+import com.ibm.sbt.services.client.smartcloud.profiles.feedhandler.ProfileFeedHandler;
+import com.ibm.sbt.services.client.smartcloud.profiles.model.ProfileJsonPath;
 
 public class ProfileList extends EntityList<Profile> {
 	

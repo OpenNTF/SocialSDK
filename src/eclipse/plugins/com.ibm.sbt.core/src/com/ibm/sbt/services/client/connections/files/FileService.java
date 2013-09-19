@@ -45,8 +45,6 @@ import com.ibm.sbt.services.client.connections.files.transformers.FileTransforme
 import com.ibm.sbt.services.client.connections.files.transformers.FolderTransformer;
 import com.ibm.sbt.services.client.connections.files.transformers.ModerationTransformer;
 import com.ibm.sbt.services.client.connections.files.transformers.MultipleFileTransformer;
-import com.ibm.sbt.services.client.connections.files.util.ContentMapFiles;
-import com.ibm.sbt.services.client.connections.files.util.FileConstants;
 import com.ibm.sbt.services.client.connections.files.util.Messages;
 import com.ibm.sbt.services.client.ClientService.ContentStream;
 import com.ibm.sbt.services.client.Response;

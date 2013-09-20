@@ -412,7 +412,7 @@ public class ForumService extends BaseService {
 	 * @throws ForumServiceException
 	 */
 	public TopicList getForumTopics(String forumUid, Map<String, String> parameters) throws ForumServiceException {
-		String myTopicsUrl = resolveUrl(ForumType.TOPICS, FilterType.MY);
+		String myTopicsUrl = resolveUrl(ForumType.TOPICS, null);
 		TopicList topics = null;
 		if(null == parameters){
 			parameters = new HashMap<String, String>();

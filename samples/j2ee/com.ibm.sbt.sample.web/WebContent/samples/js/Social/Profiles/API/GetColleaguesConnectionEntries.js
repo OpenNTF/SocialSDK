@@ -1,6 +1,5 @@
 require([ "sbt/connections/ProfileService", "sbt/dom", "sbt/json" ], function(ProfileService,dom,json) {
-    var results = [];   
-	try {
+    try {
         var profileService = new ProfileService();
         var promise = profileService.getColleaguesConnectionEntry("%{name=sample.id1}");
         promise.then(
@@ -10,18 +9,13 @@ require([ "sbt/connections/ProfileService", "sbt/dom", "sbt/json" ], function(Pr
 	                 var profile = connectionEntries[i];	           
 	                 result.push({"Name" : profile.getTitle()}); 
 	             }  
-	        	 results.push(result);
-            	dom.setText("json", json.jsonBeanStringify(results));
+            	dom.setText("json", json.jsonBeanStringify(result));
             },
             function(error) {
-            	results.push(error);
-                dom.setText("json", json.jsonBeanStringify(results));
+                dom.setText("json", json.jsonBeanStringify(error));
             }
         );
     } catch(error) {
-    	results.push(error);
-        dom.setText("json", json.jsonBeanStringify(results));
+        dom.setText("json", json.jsonBeanStringify(error));
     }
-    
-    
 });

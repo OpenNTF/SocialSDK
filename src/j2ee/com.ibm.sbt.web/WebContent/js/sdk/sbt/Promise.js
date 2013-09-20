@@ -30,11 +30,10 @@ define(["./declare","./log"], function(declare,log) {
 	var Promise = declare(null, {	
 		
         // private
-        _rejected : false,
-        _fulfilled : false,
-        _canceled : false,
-        _callbacks : null,
-        _errbacks : null,
+        _isRejected : false,
+        _isFulfilled : false,
+        _isCanceled : false,
+        _deferreds : null,
         response : null,
         error : null,
         
@@ -49,90 +48,78 @@ define(["./declare","./log"], function(declare,log) {
                     this.fulfilled(response);
                 }
             } else {
-                this._callbacks = [];
-                this._errbacks = [];
+                this._deferreds = [];
             }
         },
         
         /*
          * Add new callbacks to the promise.
          */
-        then: function(callback, errback) {
-            if (this._fulfilled) {
-                if (callback) {
-                    callback(this.data);
-                }
-                return;
+        then: function(fulfilledHandler, errorHandler) {
+        	var promise = new Promise();
+            if (this._isFulfilled) {
+            	this._fulfilled(fulfilledHandler, errorHandler, promise, this.data);
+            } else if (this._isRejected) {
+            	this._rejected(errorHandler, promise, this.error);
+            } else {
+                this._deferreds.push([ fulfilledHandler, errorHandler, promise ]);
             }
-            if (this._rejected) {
-                if (errback) {
-                    errback(this.error);
-                }
-                return;
-            }
-            
-            if (callback) {
-                this._callbacks.push(callback);
-            }
-            if (errback) {
-                this._errbacks.push(errback);
-            }
+            return promise;
         },
 
         /*
          * Inform the deferred it may cancel its asynchronous operation.
          */
         cancel: function(reason, strict) {
-            this._canceled = true;
+            this._isCanceled = true;
         },
 
         /*
          * Checks whether the promise has been resolved.
          */
         isResolved: function() {
-            return this._rejected || this._fulfilled;
+            return this._isRejected || this._isFulfilled;
         },
 
         /*
          * Checks whether the promise has been rejected.
          */
         isRejected: function() {
-            return this._rejected;
+            return this._isRejected;
         },
 
         /*
          * Checks whether the promise has been resolved or rejected.
          */
         isFulfilled: function() {
-            return this._fulfilled;
+            return this._isFulfilled;
         },
 
         /*
          * Checks whether the promise has been canceled.
          */
         isCanceled: function() {
-            return this._canceled;
+            return this._isCanceled;
         },
 
         /*
          * Called if the promise has been fulfilled
          */
         fulfilled : function(data) {
-            if (this._canceled) {
+            if (this._isCanceled) {
                 return;
             }
             
-            this._fulfilled = true;
+            this._isFulfilled = true;
             this.data = data;
             
-            if (this._callbacks) {
-                while (this._callbacks.length > 0) {
-                    var callback = this._callbacks.shift();
-                    try {
-                        callback(data);
-                    } catch (err) {
-                        log.error("Callback error: "+err);
-                    }
+            if (this._deferreds) {
+                while (this._deferreds.length > 0) {
+                    var deferred = this._deferreds.shift();
+                    var fulfilledHandler = deferred[0];
+                    var errorHandler = deferred[1];
+                    var promise = deferred[2];
+                	this._fulfilled(fulfilledHandler, errorHandler, promise, data);
                 }
             }
         },
@@ -145,18 +132,56 @@ define(["./declare","./log"], function(declare,log) {
                 return;
             }
             
-            this._rejected = true;
+            this._isRejected = true;
             this.error = error;
             
-            if (this._errbacks) {
-                while (this._errbacks.length > 0) {
-                    var errback = this._errbacks.shift();
-                    try {
-                        errback(error);
-                    } catch (err) {
-                        var msg = err.message;
-                    }
+            if (this._deferreds) {
+                while (this._deferreds.length > 0) {
+                    var deferred = this._deferreds.shift();
+                    var errorHandler = deferred[1];
+                    var promise = deferred[2];
+                	this._rejected(errorHandler, promise, error);
                 }
+            }
+        },
+        
+        _fulfilled : function(fulfilledHandler, errorHandler, promise, data) {
+            if (fulfilledHandler) {
+            	try {
+                	var retval = fulfilledHandler(data);
+                	if (retval instanceof Promise) {
+                		retval.then(
+                			function(data) {
+                				promise.fulfilled(data);
+                			},
+                			function(error) {
+                				promise.rejected(error);
+                			}
+                		);
+                	} else {
+                		promise.fulfilled(retval);
+                	}
+            	} catch (error) {
+            		promise.rejected(error);
+            	}
+            } else {
+            	promise.fulfilled(data);
+            }
+        },
+        
+        _rejected : function(errorHandler, promise, error) {
+            if (errorHandler) {
+            	try {
+                	var retval = errorHandler(error);
+                	if (!retval) {
+                		// stop propogating errors
+                		promise.rejected(retval);
+                	}
+            	} catch (error) {
+            		promise.rejected(error);
+            	}
+            } else {
+            	promise.rejected(error);
             }
         }
 	

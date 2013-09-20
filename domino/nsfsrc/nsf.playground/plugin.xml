@@ -18,10 +18,10 @@
     <import optional="true" plugin="com.ibm.xsp.domino"/>
     <import optional="true" plugin="com.ibm.notes.java.api"/>
     <import optional="true" plugin="com.ibm.xsp.rcp"/>
+    <import optional="true" plugin="com.ibm.xsp.extlibx.bazaar"/>
+    <import optional="true" plugin="com.ibm.xsp.sbtsdk"/>
     <import optional="true" plugin="com.ibm.xsp.extlib"/>
     <import optional="true" plugin="com.ibm.xsp.sbtsdk.playground"/>
-    <import optional="true" plugin="com.ibm.xsp.sbtsdk"/>
-    <import optional="true" plugin="com.ibm.xsp.extlibx.bazaar"/>
     <!--AUTOGEN-END-BUILDER: End of automatically generated section-->
   </requires>
 </plugin>

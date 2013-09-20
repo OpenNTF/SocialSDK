@@ -317,6 +317,141 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
         	return this.service.getColleagues(this, args);
         }
     });
+    
+    /**
+     * ConnectionEntry class.
+     * 
+     * @class ConnectionEntry
+     * @namespace sbt.connections
+     */
+    var ConnectionEntry = declare(BaseEntity, {
+
+        /**
+         * 
+         * @constructor
+         * @param args
+         */
+        constructor : function(args) {            
+        },
+
+        /**
+         * Get id of the profile
+         * 
+         * @method getAuthorUserId
+         * @return {String} author id of the profile
+         * 
+         */
+        getAuthorUserId : function() {
+            return this.getAsString("authorUserid");
+        },
+        
+        /**
+         * Get id of the profile
+         * 
+         * @method getContributorUserId
+         * @return {String} contributor id of the profile
+         * 
+         */
+        getContributorUserId : function() {
+            return this.getAsString("contributorUserid");
+        },
+
+        /**
+         * Get name of the profile
+         * 
+         * @method getAuthorName
+         * @return {String} author name of the profile
+         * 
+         */
+        getAuthorName : function() {
+            return this.getAsString("authorName");
+        },
+        
+        /**
+         * Get name of the profile
+         * 
+         * @method getAuthorName
+         * @return {String} contributor name of the profile
+         * 
+         */
+        getContributorName : function() {
+            return this.getAsString("contributorName");
+        },
+
+        /**
+         * Get email of the profile
+         * 
+         * @method getAuthorEmail
+         * @return {String} contributor email of the profile
+         */
+        getAuthorEmail : function() {
+            return this.getAsString("authorEmail");
+        },
+        
+        /**
+         * Get email of the profile
+         * 
+         * @method getContributorEmail
+         * @return {String} contributor email of the profile
+         */
+        getContributorEmail : function() {
+            return this.getAsString("contributorEmail");
+        },
+
+        /**
+         * Get job title of the profile
+         * 
+         * @method getTitle
+         * @return {String} job title of the profile
+         */
+        getTitle : function() {
+            return this.getAsString("title");
+        },
+        
+        /**
+         * Get job title of the profile
+         * 
+         * @method getContent
+         * @return {String} content of the profile
+         */
+        getContent : function() {
+            return this.getAsString("content");
+        },
+
+        /**
+         * Get profile URL of the profile
+         * 
+         * @method getSelfLink
+         * @return {String} profile URL of the profile
+         */
+        
+        getSelfLink : function() {
+            return this.getAsString("selfLink");
+        },
+        
+        /**
+         * Get profile URL of the profile
+         * 
+         * @method getEditLink
+         * @return {String} profile URL of the profile
+         */
+        
+        getEditLink : function() {
+            return this.getAsString("editLink");
+        },
+        
+        /**
+         * Get profile URL of the profile
+         * 
+         * @method getUpdated
+         * @return {String} profile URL of the profile
+         */
+        
+        getUpdated : function() {
+            return this.getAsString("updated");
+        }
+
+    });
 
     /**
      * ProfileTag class.
@@ -434,6 +569,32 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
                 });
             }
             return new Profile({
+                service : service,
+                id : entryHandler.getEntityId(),
+                dataHandler : entryHandler
+            });
+        }
+    };
+    
+    /**
+     * Callbacks used when reading a feed that contains ConnectionEntries
+     */
+    var ConnectionEntriesFeedCallbacks = {
+        createEntities : function(service,data,response) {
+            return new XmlDataHandler({
+                data : data,
+                namespaces : consts.Namespaces,
+                xpath : consts.ProfileFeedXPath
+            });
+        },
+        createEntity : function(service,data,response) {
+            var entryHandler = null;
+            entryHandler = new XmlDataHandler({
+                data : data,
+                namespaces : consts.Namespaces,
+                xpath : consts.ConnectionEntryXPath
+            });
+            return new ConnectionEntry({
                 service : service,
                 id : entryHandler.getEntityId(),
                 dataHandler : entryHandler
@@ -624,6 +785,36 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
         },
         
         /**
+         * Get the colleagues for the specified profile as ConnectionEntries
+         * 
+         * @method getColleaguesConnectionEntry
+         * @param {String} id userId/email of the profile
+         * @param {Object} args Object representing various query parameters
+         *            that can be passed. The parameters must be exactly as they are
+         *            supported by IBM Connections.
+         */
+        getColleaguesConnectionEntry : function(id, args) {
+            // detect a bad request by validating required arguments
+            var idObject = this._toIdObject(id);
+            var promise = this._validateIdObject(idObject);
+            if (promise) {
+                return promise;
+            }
+            
+            var requestArgs = lang.mixin(idObject, {
+                connectionType : "colleague",
+				outputType : "connection"
+            }, args || {});
+            var options = {
+                method : "GET",
+                handleAs : "text",
+                query : requestArgs
+            };
+            var url = this.constructUrl(consts.AtomConnectionsDo, {}, {authType : this._getProfileAuthString()});
+            return this.getEntities(url, options, this.getConnectionEntryFeedCallbacks(), args);
+        },
+        
+        /**
          * Get the reporting chain for the specified person.
          * 
          * @method getReportingChain
@@ -764,6 +955,13 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
          */
         getProfileFeedCallbacks : function() {
             return ProfileFeedCallbacks;
+        },
+        
+        /*
+         * Return callbacks for a connectionEntry feed
+         */
+        getConnectionEntryFeedCallbacks : function() {
+            return ConnectionEntriesFeedCallbacks;
         },
 
         /*

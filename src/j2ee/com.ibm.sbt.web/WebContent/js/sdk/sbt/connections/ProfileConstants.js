@@ -75,6 +75,26 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         },
         
         /**
+         * XPath expressions to be used when reading a Connection Entry
+         */
+        ConnectionEntryXPath : {
+        	entry : "/a:feed/a:entry",
+        	uid : "a:id",
+        	id : "a:id",
+            updated : "a:updated",
+            authorUserid : "a:author/snx:userid",
+            contributorUserid : "a:contributor/snx:userid",
+            authorName : "a:author/snx:name",
+            contributorName : "a:contributor/snx:name",
+            authorEmail : "a:author/snx:email",
+            contributorEmail : "a:contributor/snx:email",
+            title : "a:title",
+            content : "a:content",
+            selfLink : "a:link[@rel='self']/@href", 
+            editLink : "a:link[@rel='edit']/@href", 
+        },
+        
+        /**
          * XPath expressions to be used when reading a Community Entry with VCard content
          */
         ProfileVCardXPath : {

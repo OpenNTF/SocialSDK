@@ -5,9 +5,7 @@ import java.util.logging.Logger;
 import org.w3c.dom.Document;
 import com.ibm.commons.xml.DOMUtil;
 import com.ibm.commons.xml.XMLException;
-import com.ibm.sbt.services.client.connections.files.util.ContentMapFiles;
 import com.ibm.sbt.services.client.connections.files.util.Messages;
-import com.ibm.sbt.services.client.connections.files.util.NamespacesConnections;
 
 /*
  * © Copyright IBM Corp. 2012

@@ -128,8 +128,5 @@ public class GetProfileXml {
         } finally {
             app.destroy();
         }
-		
-
-		
 	}
 }

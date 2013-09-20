@@ -13,7 +13,7 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-package com.ibm.sbt.services.client.connections.files.util;
+package com.ibm.sbt.services.client.connections.files;
 /**
  * Class used to maintain the constants used by Files API and related classes. 
  * 

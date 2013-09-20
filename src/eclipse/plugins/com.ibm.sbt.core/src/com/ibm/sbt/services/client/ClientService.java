@@ -234,7 +234,10 @@ public abstract class ClientService {
 		if (endpoint != null) {
 			String proxyinfo = endpoint.getHttpProxy();
 			if (StringUtil.isEmpty(proxyinfo)) {
-				proxyinfo = Context.get().getProperty("sbt.httpProxy");
+				Context context = Context.getUnchecked();
+		    	if (context != null) {
+					proxyinfo = Context.get().getProperty("sbt.httpProxy");
+		    	}
 			}
 			return proxyinfo;
 		}

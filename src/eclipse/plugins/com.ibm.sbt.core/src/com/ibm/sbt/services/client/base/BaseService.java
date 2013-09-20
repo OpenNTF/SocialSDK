@@ -83,11 +83,14 @@ public abstract class BaseService {
      * @throws SBTException if endpointName is not found in the environment.
      */
     private Endpoint getEnvironmentEndpoint(String endpointName){
-        String environment = Context.get().getProperty("environment");
-        if(environment!=null){
+    	Context context = Context.getUnchecked();
+    	if (context == null) {
+    		return null;
+    	}
+        String environment = context.getProperty("environment");
+        if(environment != null) {
             SBTEnvironment env = (SBTEnvironment) Context.get().getBean(environment);
             SBTEnvironment.Endpoint[] endpointsArray = env.getEndpointsArray();
-            
             for(SBTEnvironment.Endpoint endpoint : endpointsArray){
                 if(StringUtil.equals(endpointName, endpoint.getAlias())){
                     endpointName = endpoint.getName();

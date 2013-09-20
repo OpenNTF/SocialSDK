@@ -248,7 +248,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
      * @class ActivitiesService
      * @namespace sbt.connections
      */
-    var ActivitiesService = declare(BaseService, {
+    var ActivityService = declare(BaseService, {
         
         contextRootMap: {
             activities: "activities"
@@ -323,5 +323,5 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         }        
 
     });
-    return ActivitiesService;
+    return ActivityService;
 });

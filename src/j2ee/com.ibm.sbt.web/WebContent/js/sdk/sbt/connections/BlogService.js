@@ -15,7 +15,7 @@
  */
 
 /**
- * The Communities API allows application programs to retrieve blog information, subscribe to blog updates, and create or modify communities.
+ * The Blogs API allows application programs to retrieve blog information, subscribe to blog updates, and create or modify blogs.
  * 
  * @module sbt.connections.BlogService
  */

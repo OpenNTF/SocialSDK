@@ -89,6 +89,10 @@ define(["../declare","../config", "../lang", "../base/core", "../xml", "../xpath
         	this.url = url;
         },
         
+        getUrl: function(){
+            return this.url;
+        },
+        
         setAttributes: function(attributes){
         	this.attributes = attributes;
         },

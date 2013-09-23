@@ -398,6 +398,10 @@ define(["../declare","../config","../lang", "../base/core", "../xml", "../xpath"
         	this._args.url = url;
         },
         
+        getUrl: function(){
+            return this._args.url;
+        },
+        
         setAttributes: function(attributes){
         	this._args.attributes = attributes;
         },

@@ -143,10 +143,11 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
          */
         createDefaultStore: function(args) {
             var store = this._createDefaultStore(args);
-            var _args = store._args;
-            if (_args.url) {
-                _args.url = this.buildUrl(_args.url, _args, store.getEndpoint());
+            var url = store.getUrl();
+            if (url) {
+                url = this.buildUrl(url, args, store.getEndpoint());
             }
+            store.setUrl(url);
             
             return store;
         },

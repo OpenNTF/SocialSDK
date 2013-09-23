@@ -11,8 +11,8 @@ require([ "sbt/connections/FileService", "sbt/dom" ], function(FileService, dom)
 			handleError(dom, "You are not an owner of any files.");
 		} else {
 			var file = files[0];
-			dom.byId("fileId").value = file.getId();
-			if (file.getLock() == "HARD") {
+			dom.byId("fileId").value = file.getFileId();
+			if (file.getLockType() == "HARD") {
 				dom.byId("lockUnlock").innerHTML = "Unlock";
 			}
 			handleFileLoaded(file, dom);
@@ -108,7 +108,7 @@ function updateFile(fileService, file, label, summary, visibility, dom) {
 	}, function(error) {
 		handleError(dom, error);
 	});
-	displayMessage(dom, "Please wait... Updating file: " + file.getId());
+	displayMessage(dom, "Please wait... Updating file: " + file.getFileId());
 }
 
 function handleLoggedIn(fileService, dom) {	
@@ -125,18 +125,18 @@ function handleFileLoaded(file, dom) {
 		return;
 	}
 
-	dom.byId("fileId").value = file.getId();
+	dom.byId("fileId").value = file.getFileId();
 	dom.byId("label").value = file.getLabel();
 	dom.byId("summary").value = file.getSummary();
 	dom.byId("visibility").value = file.getVisibility();
 
 	currentFile = file;
 
-	displayMessage(dom, "Successfully loaded file: " + file.getId());
+	displayMessage(dom, "Successfully loaded file: " + file.getFileId());
 }
 
 function handleFileUpdated(file, dom) {
-	displayMessage(dom, "Successfully updated file: " + file.getId());
+	displayMessage(dom, "Successfully updated file: " + file.getFileId());
 }
 
 function addOnClickHandlers(fileService, dom) {
@@ -146,7 +146,7 @@ function addOnClickHandlers(fileService, dom) {
 
 	dom.byId("download").onclick = function(evt) {
 		if (currentFile) {
-			fileService.downloadFile(currentFile.getId(), currentFile.getLibraryId());
+			fileService.downloadFile(currentfile.getFileId(), currentFile.getLibraryId());
 		}
 	};
 
@@ -162,7 +162,7 @@ function addOnClickHandlers(fileService, dom) {
 	dom.byId("lockUnlock").onclick = function(evt) {
 		var id = dom.byId("fileId").value;
 		if (currentFile) {
-			if (currentFile.getLock() == "HARD" || isLocked) {
+			if (currentFile.getLockType() == "HARD" || isLocked) {
 				unlockFile(fileService, id, dom);
 			} else {
 				lockFile(fileService, id, dom);

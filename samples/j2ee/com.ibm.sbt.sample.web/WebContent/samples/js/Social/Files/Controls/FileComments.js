@@ -19,7 +19,7 @@ require(["sbt/connections/FileService", "sbt/connections/controls/files/FileGrid
 				dom.setText("content", "You are not an owner of any files.");
 			} else {
 				var file = files[0];
-				showFileComments(file.getAuthor().authorUserId, file.getId());
+				showFileComments(file.getAuthor().authorUserId, file.getFileId());
 			}
 		}, 
 		function(error) {

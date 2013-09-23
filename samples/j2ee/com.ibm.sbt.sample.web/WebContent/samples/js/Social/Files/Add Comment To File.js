@@ -18,9 +18,9 @@ require([ "sbt/connections/FileService", "sbt/dom" ], function(FileService, dom)
 			dom.setText("content", "Threre are no public files");
 		} else {
 			var file = files[0];
-			fileService.addCommentToFile(file.getAuthor().authorUserId, file.getId(), "Comment Added from JS Sample").then(function(comment) {
+			fileService.addCommentToFile(file.getAuthor().authorUserId, file.getFileId(), "Comment Added from JS Sample").then(function(comment) {
 				createRow(0);
-				dom.setText("id" + 0, comment.getId());
+				dom.setText("id" + 0, comment.getCommentId());
 				dom.setText("comment" + 0, comment.getContent());
 
 			}, function(error) {

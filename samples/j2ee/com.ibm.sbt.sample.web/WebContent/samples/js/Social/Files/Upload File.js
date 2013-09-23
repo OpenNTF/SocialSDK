@@ -19,8 +19,8 @@ function uploadFile(fileService, dom) {
 		// additional paramertes to add file metadata			
 		visibility : "public"
 	}).then(function(file) {
-		displayMessage(dom, "File with ID " + file.getId() + " uploaded successfuly");
-		dom.byId("fileId").value = file.getId();
+		displayMessage(dom, "File with ID " + file.getFileId() + " uploaded successfuly");
+		dom.byId("fileId").value = file.getFileId();
 		dom.byId("label").value = file.getLabel();
 		dom.byId("summary").value = file.getSummary();
 		dom.byId("visibility").value = file.getVisibility();

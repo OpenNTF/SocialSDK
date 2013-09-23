@@ -12,10 +12,10 @@ require(["sbt/connections/FileService", "sbt/dom"],
 	        tr.appendChild(td);
 	        td = document.createElement("td");
 	        tr.appendChild(td);
-	        td.innerHTML = file.getId();
+	        td.innerHTML = file.getFileId();
 	    };
 
-        var fileService = new FileService();
+        var fileService = new FileService();        
     	fileService.getMyFiles().then(
             function(files) {
                 if (files.length == 0) {

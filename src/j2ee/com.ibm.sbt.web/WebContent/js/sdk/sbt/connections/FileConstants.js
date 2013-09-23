@@ -18,7 +18,7 @@
  */
 define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
 
-    return lang.mixin({
+    return lang.mixin({    	
                
         /**
          * XPath expressions used when parsing a Connections Files ATOM feed
@@ -91,7 +91,8 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
 			acls : "td:permissions",
 			hitCount : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/hit']",
 			anonymousHitCount : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/anonymous_hit']",
-			tags : "a:category/@term"
+			tags : "a:category/@term",
+			category : "a:category/@label"
         },
         
 
@@ -181,21 +182,21 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          *         
          * Supports: acls, category  Note: This parameter is required., commentId, identifier, page, ps, sI, sortBy, sortOrder  
          */
-        AtomFileCommentsPublic : "/${files}/basic/anonymous/api/userlibrary/{userid}/document/{documentId}/feed?category=comment",
+        AtomFileCommentsPublic : "/${files}/basic/anonymous/api/userlibrary/{userId}/document/{documentId}/feed?category=comment",
         
         /**
          * A feed of comments associated with files to which you have access. You must authenticate this request. 
          *         
          * Supports: acls, category  Note: This parameter is required., commentId, identifier, page, ps, sI, sortBy, sortOrder  
          */
-        AtomFileCommentsMy : "/${files}/basic/api/userlibrary/{userid}/document/{documentId}/feed?category=comment",
+        AtomFileCommentsMy : "/${files}/basic/api/userlibrary/{userId}/document/{documentId}/feed?category=comment",
         
         /**
          * Adds a comment to the specified file.
          * 
          * Supports : identifier - Indicates how the document is identified in the {document-id} variable segment of the web address. By default, look up is performed with the expectation that the URL contains the value from the <td:uuid> element of a File Atom entry. Specify "label" if the URL instead contains the value from the <td:label> element of a File Atom entry. 
          */
-        AtomAddCommentToFile : "/${files}/basic/api/userlibrary/{userid}/document/{documentId}/feed",
+        AtomAddCommentToFile : "/${files}/basic/api/userlibrary/{userId}/document/{documentId}/feed",
         
         /**
          * Adds a comment to the specified file for logged in user.
@@ -233,13 +234,165 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         /**
          * Delete a file and the Atom document representation of its associated metadata from logged in user's collection.
          */
-        AtomDeleteFile :  "${files}/basic/api/myuserlibrary/document/{documentId}/entry",
+        AtomDeleteFile :  "/${files}/basic/api/myuserlibrary/document/{documentId}/entry",
         
         /**
          * Lock or unlock a file
          */
         AtomLockUnlockFile : "/${files}/basic/api/document/{documentId}/lock",
         
-       
+        /**
+         * Add the document to collections specified by atom entry or feed.
+         */
+        AtomAddFileToFolders : "/${files}/basic/api/userlibrary/{userId}/document/{documentId}/feed",
+        /**
+        * Add the document of logged in user to collections specified by atom entry or feed.
+        */
+        AtomAddMyFileToFolders : "/${files}/basic/api/myuserlibrary/document/{documentId}/feed",
+        
+        /**
+         * Create a file folder programmatically.
+         */
+        AtomCreateFolder : "/${files}/basic/api/collections/feed",
+        
+        /**
+         * Delete all files from recycle bin of specified user
+         */
+        AtomDeleteAllFilesFromRecyclebBin : "/${files}/basic/api/userlibrary/{userId}/view/recyclebin/feed",
+        
+        /**
+         * Delete all files from recycle bin of logged in user
+         */
+        AtomDeleteMyFilesFromRecyclebBin : "/${files}/basic/api/myuserlibrary/view/recyclebin/feed",
+        
+        /**
+         * Delete All Versions of a File
+         */
+        AtomDeleteAllVersionsOfAFile : "/${files}/basic/api/myuserlibrary/document/{documentId}/feed",
+        
+        /**
+         * Delete a Comment for a File
+         */
+        AtomDeleteComment : "/${files}/basic/api/userlibrary/{userId}/document/{documentId}/comment/{commentId}/entry",
+        
+        /**
+         * Delete a comment on file for logged in user         
+         */
+        AtomDeleteMyComment : "/${files}/basic/api/myuserlibrary/document/{documentId}/comment/{commentId}/entry",
+        
+        /**
+         * Purge a file from Recycle Bin
+         */
+        AtomDeleteFileFromRecycleBin : "/${files}/basic/api/userlibrary/{userId}/view/recyclebin/{documentId}/entry",
+        
+        /**
+         * Purge a file from REcycle Bin for Logged in user
+         */
+        AtomDeleteMyFileFromRecycleBin : "/${files}/basic/api/myuserlibrary/view/recyclebin/{documentId}/entry",
+        
+        /**
+         * Remove a file Share
+         */
+        AtomDeleteFileShare : "/${files}/basic/api/shares/feed",
+        
+        /**
+         * Delete a Folder
+         */
+        AtomDeleteFolder : "/${files}/basic/api/collection/{collectionId}/entry",
+        
+        /**
+         * Get Files for a user 
+         */
+        AtomGetAllUsersFiles : "/${files}/basic/anonymous/api/userlibrary/{userId}/feed",
+        
+        /**
+         * Get a comment for a file
+         */
+        AtomGetFileComment : "/${files}/basic/api/userlibrary/{userId}/document/{documentId}/comment/{commentId}/entry",
+        
+        /**
+         * Get a comment for a File for logged in user
+         */
+        AtomGetMyFileComment : "/${files}/basic/api/myuserlibrary/document/{documentId}/comment/{commentId}/entry",
+        
+        /**
+         * Get File from Recycle Bin
+         */
+        AtomGetFileFromRecycleBin : "/${files}/basic/api/userlibrary/{userId}/view/recyclebin/{documentId}/entry",
+        
+        /**
+         * Get Files Awaiting Approval
+         */
+        AtomGetFilesAwaitingApproval : "/${files}/basic/api/approval/documents",
+        
+        /**
+         * Get File Shares
+         */
+        AtomGetFileShares : "/${files}/basic/api/documents/shared/feed",
+        
+        /**
+         * Get All Files in a Folder
+         */
+        AtomGetFilesInFolder : "/${files}/basic/api/collection/{collectionId}/feed",
+        
+        /**
+         * Get Files in Recycle Bin of logged in user
+         */
+        AtomGetFilesInMyRecycleBin : "/${files}/basic/api/myuserlibrary/view/recyclebin/feed",
+        
+        /**
+         * Get file with given version
+         */
+        AtomGetFileWithGivenVersion : "/${files}/basic/api/myuserlibrary/document/{documentId}/version/{versionId}/entry",
+        
+        /**
+         * Get a folder
+         */
+        AtomGetFolder : "/${files}/basic/api/collection/{collectionId}/entry",
+        
+        /**
+         * Get Folder with Recenty Added Files
+         */
+        AtomGetFoldersWithRecentlyAddedFiles : "/${files}/basic/api/collections/addedto/feed",
+        
+        /**
+         * Get Pinned Folders
+         */
+        AtomGetPinnedFolders : "/${files}/basic/api/myfavorites/collections/feed",
+        
+        /**
+         * Get Public Folders
+         */
+        AtomGetPublicFolders : "/${files}/basic/anonymous/api/collections/feed",
+        
+        /**
+         * Pin/unpin a Folder
+         */
+        AtomPinFolder : "/${files}/basic/api/myfavorites/collections/feed",
+        
+        /**
+         * Remove File from Folder
+         */
+        AtomRemoveFileFromFolder : "/${files}/basic/api/collection/{collectionId}/feed",
+        
+        /**
+         * Restore File from Recycle Bin
+         */
+        AtomRestoreFileFromRecycleBin : "/${files}/basic/api/userlibrary/{userId}/view/recyclebin/{documentId}/entry",
+        
+        /**
+         * Share File with Community or communities
+         */
+        AtomShareFileWithCommunities : "/${files}/basic/api/myuserlibrary/document/{documentId}/feed",
+        
+       /**
+        * Update a Comment
+        */
+        AtomUpdateComment : "/${files}/basic/api/userlibrary/{userId}/document/{documentId}/comment/{commentId}/entry",
+        
+        /**
+         * Update comment of logged in user
+         */
+        AtomUpdateMyComment : "/${files}/basic/api/myuserlibrary/document/{documentId}/comment/{commentId}/entry",
     }, conn);
 });

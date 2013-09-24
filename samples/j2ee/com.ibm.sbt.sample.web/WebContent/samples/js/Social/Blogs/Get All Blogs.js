@@ -1,14 +1,14 @@
 require(["sbt/connections/BlogService", "sbt/dom"], 
     function(BlogService, dom) {
-	    var createRow = function(title, blogUuid) {
+	    var createRow = function(blog) {
 	        var table = dom.byId("blogsTable");
 	        var tr = document.createElement("tr");
 	        table.appendChild(tr);
 	        var td = document.createElement("td");
-	        td.innerHTML = title;
+	        td.innerHTML = blog.getTitle();
 	        tr.appendChild(td);
 	        td = document.createElement("td");
-	        td.innerHTML = blogUuid;
+	        td.innerHTML = blog.getBlogUuid();
 	        tr.appendChild(td);
 	    };
     
@@ -21,9 +21,7 @@ require(["sbt/connections/BlogService", "sbt/dom"],
                 } else {
                     for(var i=0; i<blogs.length; i++){
                         var blog = blogs[i];
-                        var title = blog.getTitle(); 
-                        var blogUuid = blog.getBlogUuid(); 
-                        createRow(title, blogUuid);
+                        createRow(blog);
                     }
                 }
             },

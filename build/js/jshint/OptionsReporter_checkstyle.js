@@ -220,6 +220,12 @@ module.exports = {
 
             process.stdout.write(result);
             process.stdout.write("There were "+numErrors+" errors and "+numWarnings+" warnings");
+            try {
+                process.stdout.write("creating "+sbtConfig.outputreport);
+                fs.mkdirSync(sbtConfig.outputreport);
+            } catch (e) {
+                process.stdout.write("Failed creating the folder " + e.message);
+            }
             fs.writeFileSync(sbtConfig.outputreport+"/jshint.xml", result, "utf8");
 
             process.exit((numErrors==0)?1:2);

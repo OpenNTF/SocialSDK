@@ -787,13 +787,13 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
         /**
          * Get the colleagues for the specified profile as ConnectionEntries
          * 
-         * @method getColleaguesConnectionEntry
+         * @method getColleaguesConnectionEntries
          * @param {String} id userId/email of the profile
          * @param {Object} args Object representing various query parameters
          *            that can be passed. The parameters must be exactly as they are
          *            supported by IBM Connections.
          */
-        getColleaguesConnectionEntry : function(id, args) {
+        getColleaguesConnectionEntries : function(id, args) {
             // detect a bad request by validating required arguments
             var idObject = this._toIdObject(id);
             var promise = this._validateIdObject(idObject);

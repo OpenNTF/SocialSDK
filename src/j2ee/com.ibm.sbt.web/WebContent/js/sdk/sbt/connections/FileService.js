@@ -2265,6 +2265,14 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 
 		},
 		
+		/**
+		 * Update comment created by logged in user
+		 * @param {String} fileId the ID of the file
+		 * @param {String}commentId the ID of the comment
+		 * @param {String} comment the updated comment
+		 * @param {Object} args the additional arguments
+		 * @returns
+		 */
 		updateMyComment : function(fileId, commentId, comment, args){
 			
 			return updateComment(fileId, commentId, comment, null, args);

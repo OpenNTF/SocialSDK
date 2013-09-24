@@ -53,6 +53,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @param args
          */
         constructor : function(args) {
+        	blogs : "blogs"
         },
 
         /**
@@ -152,6 +153,18 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         }
 
     });
+    
+
+    /*
+     * Method used to extract the blog uuid.
+     */
+    var extractBlogUuid = function(service, uid) {
+        if (uid && uid.indexOf("http") == 0) {
+            return service.getUrlParameter(uid, "blogUuid");
+        } else {
+            return uid;
+        }
+    };
     
     /*
      * Callbacks used when reading a feed that contains blog entries.

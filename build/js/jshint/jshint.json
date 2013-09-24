@@ -122,7 +122,7 @@
         "dupemember"                : true,  //Duplicate member
         "showevidence"              : true, //Show evidence in OptionsReporter
         "includeWarnings"           : true, //Include warnings in checkstyle options reporter
-        "outputreport"              : "../../../target/reports/jshint" //Path to output folder
+        "outputreport"              : "./target/report" //Path to output folder
     },
     "indent"        : 4         // Specify indentation spacing
 }

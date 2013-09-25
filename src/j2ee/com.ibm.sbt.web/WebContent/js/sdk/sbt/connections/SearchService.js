@@ -93,14 +93,15 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
     var ScopeFeedCallbacks = {
         createEntities : function(service,data,response) {
             return new XmlDataHandler({
-                service : service,
-                data : data,
                 namespaces : consts.Namespaces,
-                xpath : consts.SearchFeedXPath
+                xpath : consts.SearchFeedXPath,
+                service : service,
+                data : data
             });
         },
         createEntity : function(service,data,response) {
             return new Scope({
+            	namespaces : consts.Namespaces,
                 service : service,
                 data : data
             });
@@ -113,14 +114,16 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
     var ResultFeedCallbacks = {
         createEntities : function(service,data,response) {
             return new XmlDataHandler({
-                service : service,
-                data : data,
                 namespaces : consts.Namespaces,
-                xpath : consts.SearchFeedXPath
+                xpath : consts.SearchFeedXPath,
+                service : service,
+                data : data
             });
         },
         createEntity : function(service,data,response) {
             return new Result({
+            	namespaces : consts.Namespaces,
+                xpath : consts.SearchXPath,
                 service : service,
                 data : data
             });

@@ -237,6 +237,5 @@ module.exports = {
             process.stdout.write("There were no issues");
             process.exit(0);
         }
-    },
-
+    }
 };

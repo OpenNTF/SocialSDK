@@ -5,23 +5,26 @@ require([ "sbt/connections/SearchService", "sbt/dom" ],
 	
 		dom.byId("searchBtn").onclick = function(ev) {
 		dom.byId("error").style.display = "none";
-		dom.byId("peopleTable").style.display = "none";
+		dom.byId("communityTable").style.display = "none";
 		dom.byId("searching").innerHTML = "Searching...";
 		
 		var topic = dom.byId("topicInput").value;
 		
-		searchService.getPeople(topic).then(
+		var requestArgs = {
+			scope : "communities"
+		};
+		
+		searchService.getResults(topic, requestArgs).then(
 			function(results) {
 				dom.byId("searching").innerHTML = "";
 	            if (results.length == 0) {
-	            	showError("No people associated with topic: " + topic);
+	            	showError("No communities associated with topic: " + topic);
                 } else {
                     for(var i=0; i<results.length; i++){
                         var result = results[i];
-                        var author = result.getAuthor();
-                        createRow(author);
+                        createRow(result);
                     }
-                    dom.byId("peopleTable").style.display = "";
+                    dom.byId("communityTable").style.display = "";
                 }
 			},
 			function(error) {
@@ -37,15 +40,15 @@ require([ "sbt/connections/SearchService", "sbt/dom" ],
 		errorDiv.innerHTML = message;
 	};
 	
-	var createRow = function(author) {
-        var table = dom.byId("peopleTable");
+	var createRow = function(result) {
+        var table = dom.byId("communityTable");
         var tr = document.createElement("tr");
         table.appendChild(tr);
         var td = document.createElement("td");
-        td.innerHTML = author.authorName;
+        td.innerHTML = result.getTitle();
         tr.appendChild(td);
         td = document.createElement("td");
-        td.innerHTML = author.authorEmail;
+        td.innerHTML = result.getId();
         tr.appendChild(td);
     };
 }

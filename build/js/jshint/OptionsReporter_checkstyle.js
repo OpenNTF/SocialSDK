@@ -197,6 +197,16 @@ module.exports = {
         if (Object.keys(files).length > 0) {
             out.push("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
             out.push("<checkstyle version=\"4.3\">");
+        	var tocategory = function(str) {
+        		var ret = encode(str).replace(/^\s+|\s+$/g, '').replace(/\s/g, '-').replace(/\)/g,'closing-pharenheses').replace(/&.+?;/g,'').replace(/[^\w^\d-.]/g, '').toLowerCase();
+        		
+        		if (ret === 'missing-space-after-a.') {
+        			ret = 'jshint.anonymous-function'
+        		} else {
+        			ret = 'jshint.' + ret.replace(/^jshint\./, '').replace(/[.]/g, '').replace('/[-]+$/g','');
+        		}
+        		return ret;
+        	};
             for (fileName in files) {
                 if (files.hasOwnProperty(fileName)) {
                     out.push("\t<file name=\"" + fileName + "\">");
@@ -208,7 +218,7 @@ module.exports = {
                                 "column=\"" + issue.column + "\" " +
                                 "severity=\"" + issue.severity + "\" " +
                                 "message=\"" + encode(issue.message) + "\" " +
-                                "source=\"" + encode(issue.source) + "\" " +
+                                "source=\"" + tocategory(issue.source) + "\" " +
                                 "/>"
                         );
                     }
@@ -227,5 +237,6 @@ module.exports = {
             process.stdout.write("There were no issues");
             process.exit(0);
         }
-    }
+    },
+
 };

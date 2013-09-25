@@ -11,7 +11,7 @@ require([ "sbt/config", "sbt/dom" ],
 	        }
 	    };
 	        
-	    endpoint.request("/search/atom/mysearch", options).then(
+	    endpoint.request("/search/atom/search", options).then(
 	        function(response) {
 	            dom.setText("xml", response);
 	        },

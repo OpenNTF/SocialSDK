@@ -49,9 +49,7 @@
 			}
 		} catch (Throwable e) {
 			out.println("<pre>");
-			e.printStackTrace();
 			out.println("Problem Occurred while executing search query: " + e.getMessage());
-			e.printStackTrace();
 			
 		}
 	%>

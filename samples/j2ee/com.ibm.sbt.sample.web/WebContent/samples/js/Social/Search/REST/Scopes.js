@@ -4,13 +4,10 @@ require([ "sbt/config", "sbt/dom" ],
 	    
 	    var options = { 
 	        method : "GET", 
-	        handleAs : "text",
-	        query : {
-	        	constraint : "{ \"type\" : \"category\", \"values\" : [ \"Tag/dubh\" ] }"
-	        }
+	        handleAs : "text"
 	    };
 	        
-	    endpoint.request("/search/atom/search", options).then(
+	    endpoint.request("/search/atom/scopes", options).then(
 	        function(response) {
 	            dom.setText("xml", response);
 	        },

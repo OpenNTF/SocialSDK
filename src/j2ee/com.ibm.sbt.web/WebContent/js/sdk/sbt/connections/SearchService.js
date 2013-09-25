@@ -32,162 +32,104 @@
  * 
  * @module sbt.connections.SearchService
  */
-define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", "./SearchConstants", "../base/BaseService",
-         "../base/BaseEntity", "../base/XmlDataHandler" ], 
-    function(declare,config,lang,stringUtil,Promise,consts,BaseService,BaseEntity,XmlDataHandler) {
+define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", "../json", "./SearchConstants", 
+         "../base/BaseService", "../base/AtomEntity", "../base/XmlDataHandler" ], 
+    function(declare,config,lang,stringUtil,Promise,json,consts,BaseService,AtomEntity,XmlDataHandler) {
 
     /**
-     * Result class represents an entry for a result feed returned by the
+     * Scope class represents an entry for a scopes feed returned by the
+     * Connections REST API.
+     * 
+     * @class Scope
+     * @namespace sbt.connections
+     */
+    var Scope = declare(AtomEntity, {
+
+        /**
+         * Construct a Scope entity.
+         * 
+         * @constructor
+         * @param args
+         */
+        constructor : function(args) {
+        }
+
+    });
+    
+    /**
+     * Result class represents an entry for a search feed returned by the
      * Connections REST API.
      * 
      * @class Result
      * @namespace sbt.connections
      */
-    var Result = declare(BaseEntity, {
+    var Result = declare(AtomEntity, {
 
         /**
-         * Construct a Result entity.
+         * Construct a Scope entity.
          * 
          * @constructor
          * @param args
          */
         constructor : function(args) {
         },
-
+        
         /**
-         * Return the value of id from result ATOM
-         * entry document.
+         * Indicates a relative assessment of relevance for a particular search 
+         * result with respect to the search query.
          * 
-         * @method getId
-         * @return {String} ID of the result
+         * @method getRelevance
+         * @return {String} Relative assessment of relevance
          */
-        getId : function() {
-            return this.getAsString("id");
-        },
-
-        /**
-         * Return the value of IBM Connections community title from community
-         * ATOM entry document.
-         * 
-         * @method getTitle
-         * @return {String} Community title of the community
-         */
-        getTitle : function() {
-            return this.getAsString("title");
-        },
-
-        /**
-         * Sets title of IBM Connections community.
-         * 
-         * @method setTitle
-         * @param {String} title Title of the community
-         */
-        setTitle : function(title) {
-            return this.setAsString("title", title);
-        },
-
-        /**
-         * Return tags of IBM Connections community from community ATOM entry
-         * document.
-         * 
-         * @method getTags
-         * @return {Object} Array of tags of the community
-         */
-        getTags : function() {
-            return this.getAsArray("tags");
-        },
-
-        /**
-         * Set new tags to be associated with this IBM Connections community.
-         * 
-         * @method setTags
-         * @param {Object} Array of tags to be added to the community
-         */
-
-        setTags : function(tags) {
-            return this.setAsArray("tags", tags);
-        },
-
-        /**
-         * Gets an author of IBM Connections community.
-         * 
-         * @method getAuthor
-         * @return {Member} author Author of the community
-         */
-        getAuthor : function() {
-            return this.getAsObject([ "authorUserid", "authorName", "authorEmail" ]);
-        },
-
-        /**
-         * Return the value of IBM Connections community description summary
-         * from community ATOM entry document.
-         * 
-         * @method getSummary
-         * @return {String} Community description summary of the community
-         */
-        getSummary : function() {
-            return this.getAsString("summary");
-        },
-
-        /**
-         * Return the relevance score from result ATOM entry document.
-         * 
-         * @method getMemberCount
-         * @return {Number} Member count for the Community
-         */
-        getScore : function() {
+        getRelevance : function() {
             return this.getAsNumber("relevance");
-        },
-
-        /**
-         * Return the relevance rank from result ATOM entry document.
-         * 
-         * @method getMemberCount
-         * @return {Number} Member count for the Community
-         */
-        getRank : function() {
-            return this.getAsNumber("rank");
-        },
-
-        /**
-         * Return the last updated date of the IBM Connections community from
-         * community ATOM entry document.
-         * 
-         * @method getUpdated
-         * @return {Date} Last updated date of the Community
-         */
-        getUpdated : function() {
-            return this.getAsDate("updated");
         }
 
     });
     
     /*
-     * Callbacks used when reading a feed that contains result entries.
+     * Callbacks used when reading a feed that contains scope entries.
      */
-    var ResultFeedCallbacks = {
+    var ScopeFeedCallbacks = {
         createEntities : function(service,data,response) {
             return new XmlDataHandler({
-                service : service,
-                data : data,
                 namespaces : consts.Namespaces,
-                xpath : consts.SearchFeedXPath
+                xpath : consts.SearchFeedXPath,
+                service : service,
+                data : data
             });
         },
         createEntity : function(service,data,response) {
-            var entryHandler = new XmlDataHandler({
+            return new Scope({
+            	namespaces : consts.Namespaces,
                 service : service,
-                data : data,
-                namespaces : consts.Namespaces,
-                xpath : consts.SearchXPath
-            });
-            return new Result({
-                service : service,
-                dataHandler : entryHandler
+                data : data
             });
         }
     };
 
+    /*
+     * Callbacks used when reading a feed that contains search entries.
+     */
+    var ResultFeedCallbacks = {
+        createEntities : function(service,data,response) {
+            return new XmlDataHandler({
+                namespaces : consts.Namespaces,
+                xpath : consts.SearchFeedXPath,
+                service : service,
+                data : data
+            });
+        },
+        createEntity : function(service,data,response) {
+            return new Result({
+            	namespaces : consts.Namespaces,
+                xpath : consts.SearchXPath,
+                service : service,
+                data : data
+            });
+        }
+    };
+    
     /**
      * SearchService class.
      * 
@@ -229,14 +171,31 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @param query Text to search for
          * @param requestArgs
          */
-        getResults: function(query, requestArgs) {
+        getScopes: function(queryArg, requestArgs) {
             var options = {
                 method : "GET",
                 handleAs : "text",
-                query : lang.mixin({ 'query' : query } , requestArgs || {})
+                query : lang.mixin({ query : queryArg } , requestArgs || {})
             };
             
-            return this.getEntities(consts.publicSearch, options, ResultFeedCallbacks);
+            return this.getEntities(consts.AtomScopes, options, ScopeFeedCallbacks);
+        },
+        
+        /**
+         * Search Lotus Connection for public information.
+         * 
+         * @method getResults
+         * @param query Text to search for
+         * @param requestArgs
+         */
+        getResults: function(queryArg, requestArgs) {
+            var options = {
+                method : "GET",
+                handleAs : "text",
+                query : lang.mixin({ query : queryArg } , requestArgs || {})
+            };
+            
+            return this.getEntities(consts.AtomSearch, options, ResultFeedCallbacks);
         },
         
         /**
@@ -249,171 +208,119 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @param query Text to search for
          * @param requestArgs
          */
-        getMyResults: function(query, requestArgs) {
+        getMyResults: function(queryArg, requestArgs) {
             var options = {
                 method : "GET",
                 handleAs : "text",
-                query : lang.mixin({ 'query' : query } , requestArgs || {})
+                query : lang.mixin({ query : queryArg } , requestArgs || {})
             };
             
-            return this.getEntities(consts.mySearch, options, ResultFeedCallbacks);
+            return this.getEntities(consts.AtomMySearch, options, ResultFeedCallbacks);
         },
         
         /**
-         * Search Lotus Connection for public information, and then return 
-         * the people associated with the results.
+         * Search IBM Connections Profiles for people using the specified 
+         * query string and return public information.
          * 
          * @method getPeople
          * @param query Text to search for
          * @param requestArgs
          */
-        getPeople: function(query, requestArgs) {
+        getPeople: function(queryArg, requestArgs) {
             var options = {
                 method : "GET",
                 handleAs : "text",
-                query : lang.mixin({ 'query' : query } , requestArgs || {})
+                query : lang.mixin({ 
+                		query : queryArg,
+                		scope : "profiles",
+                		facet : "{\"id\": \"Person\"}"
+                	} , 
+                	requestArgs || {})
             };
             
-            return this.getEntities(consts.peopleSearch, options, ResultFeedCallbacks);
+            return this.getEntities(consts.AtomSearch, options, ResultFeedCallbacks);
         },
         
         /**
-         * Search Lotus Connections for both public information and private 
-         * information that you have access to, and then return the people 
-         * associated with the results. You must provide authentication 
-         * information in the request to retrieve this resource.
+         * Search IBM Connections Profiles for people using the specified 
+         * query string and return public information.
          * 
          * @method getMyPeople
          * @param query Text to search for
          * @param requestArgs
          */
-        getMyPeople: function(query, requestArgs) {
+        getMyPeople: function(queryArg, requestArgs) {
             var options = {
                 method : "GET",
                 handleAs : "text",
-                query : lang.mixin({ 'query' : query } , requestArgs || {})
+                query : lang.mixin({ 
+                		query : queryArg,
+                		scope : "profiles",
+                		facet : "{\"id\": \"Person\"}"
+                	} , 
+                	requestArgs || {})
             };
-            
-            return this.getEntities(consts.myPeopleSearch, options, ResultFeedCallbacks);
+                
+            return this.getEntities(consts.AtomMySearch, options, ResultFeedCallbacks);
         },
         
         /**
-         * Search Lotus Connection for public information, and then 
-         * return the tags associated with the results.
+         * Search IBM Connections for public information, tagged 
+         * with the specified tags.
          * 
-         * @method getTags
-         * @param query Text to search for
+         * @method getTagged
+         * @param tags tags to search for
          * @param requestArgs
          */
-        getTags: function(query, requestArgs) {
+        getTagged: function(tags, requestArgs) {
             var options = {
                 method : "GET",
                 handleAs : "text",
-                query : lang.mixin({ 'query' : query } , requestArgs || {})
+                query : lang.mixin({ 
+                		constraint : this._createTagConstraint(tags)
+                	} , 
+                	requestArgs || {})
             };
-            
-            return this.getEntities(consts.tagsSearch, options, ResultFeedCallbacks);
+                
+            return this.getEntities(consts.AtomSearch, options, ResultFeedCallbacks);
         },
         
         /**
-         * Search Lotus Connections for both public information and private 
-         * information that you have access to, and then return the tags associated 
-         * with the results. You must provide authentication information in the 
-         * request to retrieve this resource.
+         * Search IBM Connections for both public information and private 
+         * information that you have access to, tagged 
+         * with the specified tags.
          * 
-         * @method getMyTags
-         * @param query Text to search for
+         * @method getMyTagged
+         * @param tags Tags to search for
          * @param requestArgs
          */
-        getMyTags: function(query, requestArgs) {
+        getMyTagged: function(tags, requestArgs) {
             var options = {
                 method : "GET",
                 handleAs : "text",
-                query : lang.mixin({ 'query' : query } , requestArgs || {})
+                query : lang.mixin({ 
+            			constraint : this._createTagConstraint(tags)
+                	} , 
+                	requestArgs || {})
             };
-            
-            return this.getEntities(consts.myTagsSearch, options, ResultFeedCallbacks);
+                
+            return this.getEntities(consts.AtomMySearch, options, ResultFeedCallbacks);
         },
         
-        /**
-         * Search Lotus Connection for public information, and then return the 
-         * applications associated with the results and identify how many results 
-         * were found per application.
-         * 
-         * @method getApplications
-         * @param query Text to search for
-         * @param requestArgs
+        /*
+         * Create a contraint JSON string for the specified tags
          */
-        getApplications: function(query, requestArgs) {
-            var options = {
-                method : "GET",
-                handleAs : "text",
-                query : lang.mixin({ 'query' : query } , requestArgs || {})
-            };
-            
-            return this.getEntities(consts.sourceSearch, options, ResultFeedCallbacks);
-        },
-        
-        /**
-         * Search Lotus Connections for both public information and private 
-         * information that you have access to, and then return the applications 
-         * associated with the results and identify how many results were found 
-         * per application. You must provide authentication information in the 
-         * request to retrieve this resource.
-         * 
-         * @method getMyApplications
-         * @param query Text to search for
-         * @param requestArgs
-         */
-        getMyApplications: function(query, requestArgs) {
-            var options = {
-                method : "GET",
-                handleAs : "text",
-                query : lang.mixin({ 'query' : query } , requestArgs || {})
-            };
-            
-            return this.getEntities(consts.mySourceSearch, options, ResultFeedCallbacks);
-        },
-        
-        /**
-         * Search Lotus Connection for public information, and then 
-         * return the dates associated with the results.
-         * 
-         * @method getDates
-         * @param query Text to search for
-         * @param requestArgs
-         */
-        getDates: function(query, requestArgs) {
-            var options = {
-                method : "GET",
-                handleAs : "text",
-                query : lang.mixin({ 'query' : query } , requestArgs || {})
-            };
-            
-            return this.getEntities(consts.dateSearch, options, ResultFeedCallbacks);
-        },
-        
-        /**
-         * Search Lotus Connections for both public information and private 
-         * information that you have access to, and then return the dates 
-         * associated with the results. You must provide authentication 
-         * information in the request to retrieve this resource.
-         * 
-         * @method getMyDates
-         * @param query Text to search for
-         * @param requestArgs
-         */
-        getMyDates: function(query, requestArgs) {
-            var options = {
-                method : "GET",
-                handleAs : "text",
-                query : lang.mixin({ 'query' : query } , requestArgs || {})
-            };
-            
-            return this.getEntities(consts.myDateSearch, options, ResultFeedCallbacks);
+        _createTagConstraint: function(tags) {
+        	var jsonObj = { "type" : "category", "values" : new Array() };
+        	if (lang.isArray(tags)) {
+        		for (var i=0;i<tags.length;i++) {
+        			jsonObj.values[i] = "Tag/" + tags[i];
+        		}
+        	} else {
+        		jsonObj.values[0] = "Tag/" + tags;
+        	}
+        	return json.stringify(jsonObj);
         }
-        
-        
     });
     return SearchService;
 });

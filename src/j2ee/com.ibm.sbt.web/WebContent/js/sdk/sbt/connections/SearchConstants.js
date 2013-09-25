@@ -87,54 +87,37 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         },
         
 		/**
-         * Search IBM Connections for public information.
+         * Returns the set of supported values that can be passed to the "scope" parameter of the Search API. 
+         * Scopes relating to Connections applications that have not been installed will not be returned.
+         */
+        AtomScopes : "/${search}/atom/scopes",
+        
+        /**
+         * API call for searching IBM Connections to find content that, for example, contains a specific text 
+         * string in its title or content, or is tagged with a specific tag.
+         */
+        AtomSearch : "/${search}/atom/search",
+        
+        /**
+         * API call for searching IBM Connections to find content that, for example, contains a specific text 
+         * string in its title or content, or is tagged with a specific tag.
+         */
+        AtomMySearch : "/${search}/atom/mysearch",
+        
+		/**
+         * These API's are all deprecated
          */
         publicSearch : "/${search}/atom/search/results",
-        
-        /**
-         * Search IBM Connections for both public information and private information that you have access to.
-         */
         mySearch : "/${search}/atom/mysearch/results",
-
-		/**
-         * Search IBM Connection for public information, and then return the people associated with the results.
-         */
         peopleSearch : "/${search}/atom/search/facets/people",
-        
-        /**
-         * Search Lotus Connections for both public information and private information that you have access to, and then return the people associated with the results.
-         */
         myPeopleSearch : "/${search}/atom/mysearch/facets/people",
-
-		/**
-         * Search IBM Connection for public information, and then return the tags associated with the results.
-         */
         tagsSearch : "/${search}/atom/search/facets/tags",
-        
-        /**
-         * Search Lotus Connections for both public information and private information that you have access to, and then return the tags associated with the results.
-         */
         myTagsSearch : "/${search}/atom/mysearch/facets/tags",
-
-		/**
-         * Search IBM Connection for public information, and then return the dates associated with the results.
-         */
         dateSearch : "/${search}/atom/search/facets/date",
-        
-        /**
-         * Search Lotus Connections for both public information and private information that you have access to, and then return the dates associated with the results.
-         */
         myDateSearch : "/${search}/atom/mysearch/facets/date",
-
-		/**
-         * Search IBM Connection for public information, and then return the applications associated with the results.
-         */
         sourceSearch : "/${search}/atom/search/facets/source",
-        
-        /**
-         * Search Lotus Connections for both public information and private information that you have access to, and then return the applications associated with the results.
-         */
         mySourceSearch : "/${search}/atom/mysearch/facets/source"
+        
 
     });
 });

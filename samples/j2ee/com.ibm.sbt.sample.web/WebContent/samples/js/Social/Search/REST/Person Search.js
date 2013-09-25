@@ -6,12 +6,13 @@ require([ "sbt/config", "sbt/dom" ],
 	        method : "GET", 
 	        handleAs : "text",
 	        query : {
-	        	query : "%{name=sample.displayName1}",
-	        	scope : "Profiles"
+	        	query : "Test",
+	        	scope : "profiles",
+	        	facet : "{\"id\": \"Person\"}"
 	        }
 	    };
 	        
-	    endpoint.request("/search/atom/mysearch", options).then(
+	    endpoint.request("/search/atom/search", options).then(
 	        function(response) {
 	            dom.setText("xml", response);
 	        },

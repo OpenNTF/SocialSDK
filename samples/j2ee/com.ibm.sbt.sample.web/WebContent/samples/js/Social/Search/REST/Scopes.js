@@ -4,14 +4,10 @@ require([ "sbt/config", "sbt/dom" ],
 	    
 	    var options = { 
 	        method : "GET", 
-	        handleAs : "text",
-	        query : {
-	        	query : "%{name=sample.displayName1}",
-	        	scope : "Profiles"
-	        }
+	        handleAs : "text"
 	    };
 	        
-	    endpoint.request("/search/atom/mysearch", options).then(
+	    endpoint.request("/search/atom/scopes", options).then(
 	        function(response) {
 	            dom.setText("xml", response);
 	        },

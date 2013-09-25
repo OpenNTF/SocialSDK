@@ -1,3 +1,4 @@
+
 require([ "sbt/config", "sbt/dom" ], 
 	function(config, dom) {
 	    var endpoint = config.findEndpoint("connections");
@@ -6,8 +7,9 @@ require([ "sbt/config", "sbt/dom" ],
 	        method : "GET", 
 	        handleAs : "text",
 	        query : {
-	        	query : "%{name=sample.displayName1}",
-	        	scope : "Profiles"
+	        	query : "Test",
+	        	scope : "profiles",
+	        	facet : "{\"id\": \"Person\"}"
 	        }
 	    };
 	        

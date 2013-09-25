@@ -48,7 +48,9 @@ public class ConnectionsConstants {
             	uri = "http://purl.org/syndication/thread/1.0";
             } else if (prefix.equals("app")){
             	uri = "http://www.w3.org/2007/app";
-            } else {
+            } else if(prefix.equals("relevance")){
+            	uri = "http://a9.com/-/opensearch/extensions/relevance/1.0/";
+            }else {
 				uri = null;
 			}
 			return uri;

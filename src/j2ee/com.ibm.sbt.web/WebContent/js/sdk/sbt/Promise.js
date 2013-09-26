@@ -177,8 +177,8 @@ define(["./declare","./log"], function(declare,log) {
                 		// stop propogating errors
                 		promise.rejected(retval);
                 	}
-            	} catch (error) {
-            		promise.rejected(error);
+            	} catch (error1) {
+            		promise.rejected(error1);
             	}
             } else {
             	promise.rejected(error);

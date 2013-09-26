@@ -41,7 +41,7 @@ public class GetProfileDemonstrationSnippet extends BaseProfilesTest {
 		Assert.assertNotNull("Unable to load profile", profileName);
 		Assert.assertEquals("Frank Adams", profileName);
 		Assert.assertEquals(profile.getUserid(), getProfilePage.getProfileId());
-		Assert.assertEquals(profile.getTitle(), getProfilePage.getProfileJobTitle());
+		Assert.assertEquals(profile.getJobTitle(), getProfilePage.getProfileJobTitle());
 	}
 
 	private GetProfilePage launchSnippet() {

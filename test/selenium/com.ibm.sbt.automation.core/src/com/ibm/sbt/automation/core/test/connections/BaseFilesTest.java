@@ -31,10 +31,11 @@ import com.ibm.sbt.automation.core.test.BaseApiTest;
 import com.ibm.sbt.automation.core.test.pageobjects.ResultPage;
 import com.ibm.sbt.automation.core.utils.Trace;
 import com.ibm.sbt.security.authentication.AuthenticationException;
+import com.ibm.sbt.services.client.base.transformers.TransformerException;
+import com.ibm.sbt.services.client.connections.files.File;
 import com.ibm.sbt.services.client.connections.files.FileService;
 import com.ibm.sbt.services.client.connections.files.FileServiceException;
 import com.ibm.sbt.services.client.connections.files.model.FileCreationParameters;
-import com.ibm.sbt.services.client.connections.files.model.FileEntry;
 
 
 /** @author mwallace
@@ -43,8 +44,8 @@ import com.ibm.sbt.services.client.connections.files.model.FileEntry;
 public class BaseFilesTest extends BaseApiTest {
 
 	protected FileService fileService;
-	protected FileEntry fileEntry;
-	protected FileEntry folder;
+	protected File fileEntry;
+	protected File folder;
 	private boolean failIfAfterDeletionFails = true;
 
 	private final String[] ErrorMessages = { "Error received. Error Code", "Error, unable to load:",
@@ -89,7 +90,11 @@ public class BaseFilesTest extends BaseApiTest {
 		} catch (FileServiceException e) {
 			e.printStackTrace();
 			Assert.fail("Error creating test folder: " + e.getMessage());
+		} catch (TransformerException te) {
+			te.printStackTrace();
+			Assert.fail("Error creating test folder: " + te.getMessage());
 		}
+		
 	}
 
 	public void createFile() {
@@ -107,16 +112,19 @@ public class BaseFilesTest extends BaseApiTest {
 			p.tags.add("text");
 			Map<String, String> params = p.buildParameters();			
 			
-			fileEntry = fileService.upload(new ByteArrayInputStream(content.getBytes()), id, content.length(), params);
+			fileEntry = fileService.uploadFile(new ByteArrayInputStream(content.getBytes()), id, content.length(), params);
 
 			params = new HashMap<String, String>();
-			fileService.addCommentToFile(fileEntry, "Comment added by BaseFilesTest", params);
+			fileService.addCommentToFile(fileEntry.getFileId(), "Comment added by BaseFilesTest", params);
 
 			Trace.log("Created test file: " + fileEntry.getFileId());
 		} catch (FileServiceException fse) {
 			fileEntry = null;
 	        fse.printStackTrace();
 			Assert.fail("Error creating test file: " + fse.getMessage());
+		} catch (TransformerException te) {
+			te.printStackTrace();
+			Assert.fail("Error creating test file: " + te.getMessage());
 		}
 	}
 

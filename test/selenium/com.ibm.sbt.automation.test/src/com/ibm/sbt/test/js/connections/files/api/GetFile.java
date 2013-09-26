@@ -8,14 +8,14 @@ import org.junit.Test;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.connections.BaseFilesTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
+import com.ibm.sbt.services.client.connections.files.File;
 import com.ibm.sbt.services.client.connections.files.FileServiceException;
-import com.ibm.sbt.services.client.connections.files.model.FileEntry;
 
 public class GetFile extends BaseFilesTest {
 
 	static final String SNIPPET_ID = "Social_Files_API_GetFile";
 
-	FileEntry file;
+	File file;
 
 	@Before
 	public void init() {

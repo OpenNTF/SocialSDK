@@ -12,14 +12,14 @@ import org.openqa.selenium.WebElement;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.connections.BaseFilesTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
+import com.ibm.sbt.services.client.connections.files.Comment;
 import com.ibm.sbt.services.client.connections.files.FileServiceException;
-import com.ibm.sbt.services.client.connections.files.model.CommentEntry;
 
 public class GetPublicFileComments extends BaseFilesTest {
 
 	static final String SNIPPET_ID = "Social_Files_API_GetPublicFileComments";
 
-	private List<CommentEntry> comments;
+	private List<Comment> comments;
 
 	@Before
 	public void init() {
@@ -64,7 +64,7 @@ public class GetPublicFileComments extends BaseFilesTest {
 	}
 
 	private boolean existComments(String content) {
-		for (CommentEntry comment : comments) {
+		for (Comment comment : comments) {
 			if (content == null) {
 				if (comment.getComment() == null)
 					return true;

@@ -35,9 +35,9 @@ public class GetMyPeople extends BaseSearchTest {
         setAuthType(AuthType.AUTO_DETECT);
     }
 
-    @Test @Ignore
+    @Test
     public void testGetMyPeople() {
-        addSnippetParam("sample.searchQuery", "Test");
+        addSnippetParam("sample.searchQuery", "Frank");
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         List jsonList = previewPage.getJsonList();

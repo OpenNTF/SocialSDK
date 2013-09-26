@@ -5,7 +5,7 @@ import com.ibm.commons.xml.XMLException;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.datahandlers.FieldEntry;
 
-public enum ConnectionEntryXPath implements FieldEntry {
+public enum ColleagueConnectionXPath implements FieldEntry {
 	entry("/a:entry"),
 	id("./a:id"),
 	title("./a:title"),
@@ -22,7 +22,7 @@ public enum ConnectionEntryXPath implements FieldEntry {
 	
 	private final XPathExpression path;
 	
-	private ConnectionEntryXPath(String xpath) {
+	private ColleagueConnectionXPath(String xpath) {
 		XPathExpression xpathExpr = null;
 		try {
 			xpathExpr = DOMUtil.createXPath(xpath);

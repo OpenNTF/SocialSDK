@@ -399,7 +399,7 @@ define([ "../../../declare",
         	var params = { authType : this.getAuthType() };
         	
         	if (this.userId) {
-            	params = lang.mixin(params, { userid : this.userId });
+            	params = lang.mixin(params, { userId : this.userId });
             } 
             if (this.documentId) {
             	params = lang.mixin(params, { documentId : this.documentId });

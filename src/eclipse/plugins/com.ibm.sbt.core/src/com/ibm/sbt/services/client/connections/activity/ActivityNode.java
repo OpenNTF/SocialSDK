@@ -22,8 +22,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.derby.impl.sql.execute.DeleteCascadeResultSet;
-
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;

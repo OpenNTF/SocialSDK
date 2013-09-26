@@ -17,13 +17,10 @@
 package com.ibm.sbt.services.client.connections.activity;
 
 import java.io.InputStream;
-import java.io.ObjectInputStream.GetField;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.http.HttpStatus;
-import org.apache.http.protocol.HTTP;
-import org.apache.james.mime4j.field.Fields;
 
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.Response;

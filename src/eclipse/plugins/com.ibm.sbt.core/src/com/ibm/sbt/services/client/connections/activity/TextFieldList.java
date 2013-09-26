@@ -22,7 +22,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.Response;
-import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.activity.feedHandler.FieldFeedHandler;
 import com.ibm.sbt.services.client.connections.activity.model.ActivityXPath;

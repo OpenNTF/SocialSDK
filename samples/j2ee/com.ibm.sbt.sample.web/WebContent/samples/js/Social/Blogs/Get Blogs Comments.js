@@ -1,27 +1,27 @@
 require(["sbt/connections/BlogService", "sbt/dom"], 
     function(BlogService, dom) {
-	    var createRow = function(blog) {
+	    var createRow = function(comment) {
 	        var table = dom.byId("blogsTable");
 	        var tr = document.createElement("tr");
 	        table.appendChild(tr);
 	        var td = document.createElement("td");
-	        td.innerHTML = blog.getTitle();
+	        td.innerHTML = comment.getTitle();
 	        tr.appendChild(td);
 	        td = document.createElement("td");
-	        td.innerHTML = blog.getBlogUuid();
+	        td.innerHTML = comment.getCommentUuid();
 	        tr.appendChild(td);
 	    };
     
     	var blogService = new BlogService();
-    	blogService.getMyBlogs({ ps: 5 }).then(
-            function(blogs){
-                if (blogs.length == 0) {
-                    text = "My blogs returned no results.";
+    	blogService.getBlogsComments({ ps: 5 }).then(
+            function(comments){
+                if (comments.length == 0) {
+                    text = "All blogs returned no results.";
                     dom.setText("content", text);
                 } else {
-                    for(var i=0; i<blogs.length; i++){
-                        var blog = blogs[i];
-                        createRow(blog);
+                    for(var i=0; i<comments.length; i++){
+                        var comment = comments[i];
+                        createRow(comment);
                     }
                 }
             },

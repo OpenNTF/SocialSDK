@@ -27,10 +27,10 @@ import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
-import com.ibm.sbt.services.client.connections.profiles.feedhandler.ConnectionEntryFeedHandler;
+import com.ibm.sbt.services.client.connections.profiles.feedhandler.ColleagueConnectionFeedHandler;
 import com.ibm.sbt.services.client.connections.profiles.feedhandler.ProfileFeedHandler;
 import com.ibm.sbt.services.client.connections.profiles.feedhandler.TagFeedHandler;
-import com.ibm.sbt.services.client.connections.profiles.transformers.ConnectionEntryTransformer;
+import com.ibm.sbt.services.client.connections.profiles.transformers.ColleagueConnectionTransformer;
 import com.ibm.sbt.services.client.connections.profiles.transformers.ProfileTransformer;
 import com.ibm.sbt.services.client.connections.profiles.utils.Messages;
 import com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants;
@@ -214,7 +214,7 @@ public class ProfileService extends BaseService {
 	 * 
 	 * @param id 
 	 * 		   unique identifier of the user whose colleagues are required, it can be email or userID
-	 * @return list of User's colleagues profiles
+	 * @return Profiles of User's colleagues
 	 * @throws ProfileServiceException
 	 */
 	public ProfileList getColleagues(String id) throws ProfileServiceException{
@@ -259,28 +259,28 @@ public class ProfileService extends BaseService {
 	}
 
 	/**
-	 * Wrapper method to get connection entries of user's colleagues
+	 * Wrapper method to get colleague connections
 	 * 
 	 * @param id 
 	 * 		   unique identifier of the user whose colleagues are required, it can be email or userID
-	 * @return list of user's colleagues connection entries 
+	 * @return list of colleague connections 
 	 * @throws ProfileServiceException
 	 */
-	public ConnectionEntryList getColleaguesConnectionEntries(String id) throws ProfileServiceException{
-		return getColleaguesConnectionEntries(id,null);
+	public ColleagueConnectionList getColleagueConnections(String id) throws ProfileServiceException{
+		return getColleagueConnections(id,null);
 	}
 
 	/**
-	 * Wrapper method to get connection entries of user's colleagues
+	 * Wrapper method to get colleague connections
 	 * 
 	 * @param id 
 	 * 		   unique identifier of the user whose colleagues are required, it can be email or userID
 	 * @param parameters 
 	 * 				list of query string parameters to pass to API
-	 * @return list of user's colleagues connection entries   
+	 * @return list of colleague connections   
 	 * @throws ProfileServiceException
 	 */
-	public ConnectionEntryList getColleaguesConnectionEntries(String id, Map<String, String> parameters)
+	public ColleagueConnectionList getColleagueConnections(String id, Map<String, String> parameters)
 	throws ProfileServiceException{
 		if (StringUtil.isEmpty(id)){
 			throw new ProfileServiceException(null, Messages.InvalidArgument_1);
@@ -294,16 +294,16 @@ public class ProfileService extends BaseService {
 		parameters.put("connectionType","colleague");
 		parameters.put("outputType","connection");
 
-		ConnectionEntryList connectionEntries = null;
+		ColleagueConnectionList colleagueConnections = null;
 		try {
-			connectionEntries = (ConnectionEntryList) getEntities(url, parameters, new ConnectionEntryFeedHandler(this));
+			colleagueConnections = (ColleagueConnectionList) getEntities(url, parameters, new ColleagueConnectionFeedHandler(this));
 		} catch (ClientServicesException e) {
 			throw new ProfileServiceException(e, Messages.ColleaguesException, id);
 		} catch (IOException e) {
 			throw new ProfileServiceException(e, Messages.ColleaguesException, id);
 		}
 
-		return connectionEntries;
+		return colleagueConnections;
 	}
 
 	/**
@@ -313,10 +313,10 @@ public class ProfileService extends BaseService {
 	 * 				 userid or email of first user
 	 * @param targetId 
 	 * 				 userid or email of second user
-	 * @return ConnectionEntry 
+	 * @return ColleagueConnection
 	 * @throws ProfileServiceException
 	 */
-	public ConnectionEntry checkColleague(String sourceId, String targetId) throws ProfileServiceException{
+	public ColleagueConnection checkColleague(String sourceId, String targetId) throws ProfileServiceException{
 		return checkColleague(sourceId, targetId, null);
 	}
 	/**
@@ -328,10 +328,10 @@ public class ProfileService extends BaseService {
 	 * 				 userid or email of second user
 	 * @param parameters 
 	 * 				list of query string parameters to pass to API
-	 * @return ConnectionEntry 
+	 * @return ColleagueConnection
 	 * @throws ProfileServiceException
 	 */
-	public ConnectionEntry checkColleague(String sourceId, String targetId, Map<String, String> parameters) throws ProfileServiceException{
+	public ColleagueConnection checkColleague(String sourceId, String targetId, Map<String, String> parameters) throws ProfileServiceException{
 
 		if (StringUtil.isEmpty(sourceId)) {
 			throw new ProfileServiceException(null, Messages.InvalidArgument_4);
@@ -356,16 +356,16 @@ public class ProfileService extends BaseService {
 		}
 		parameters.put("connectionType","colleague");
 
-		ConnectionEntry connectionEntry;
+		ColleagueConnection colleagueConnection;
 		try {
-			connectionEntry = (ConnectionEntry)getEntity(url, parameters, new ConnectionEntryFeedHandler(this));
+			colleagueConnection = (ColleagueConnection)getEntity(url, parameters, new ColleagueConnectionFeedHandler(this));
 		} catch (ClientServicesException e) {
 			throw new ProfileServiceException(e, Messages.CheckColleaguesException);
 		} catch (IOException e) {
 			throw new ProfileServiceException(e, Messages.CheckColleaguesException);
 		}
 
-		return connectionEntry;
+		return colleagueConnection;
 
 	}
 
@@ -379,8 +379,8 @@ public class ProfileService extends BaseService {
 	 * @return list of common colleagues profiles
 	 * @throws ProfileServiceException
 	 */
-	public ProfileList getCommonColleaguesProfiles(String sourceId, String targetId) throws ProfileServiceException{
-		return getCommonColleaguesProfiles(sourceId, targetId, null);
+	public ProfileList getCommonColleagues(String sourceId, String targetId) throws ProfileServiceException{
+		return getCommonColleagues(sourceId, targetId, null);
 	}
 
 	/**
@@ -393,7 +393,7 @@ public class ProfileService extends BaseService {
 	 * @return list of common colleagues profiles
 	 * @throws ProfileServiceException
 	 */
-	public ProfileList getCommonColleaguesProfiles(String sourceId, String targetId,  Map<String, String> parameters) throws ProfileServiceException{
+	public ProfileList getCommonColleagues(String sourceId, String targetId,  Map<String, String> parameters) throws ProfileServiceException{
 
 		if (StringUtil.isEmpty(sourceId)) {
 			throw new ProfileServiceException(null, Messages.InvalidArgument_4);
@@ -432,29 +432,29 @@ public class ProfileService extends BaseService {
 	}
 
 	/**
-	 * Wrapper method to get connection entries of colleagues shared by two users
+	 * Wrapper method to get colleague connections
 	 * 
 	 * @param sourceId 
 	 * 				 userid or email of first user
 	 * @param targetId 
 	 * 				 userid or email of second user
-	 * @return list of common colleagues connection entries
+	 * @return list of common colleague connections
 	 * @throws ProfileServiceException
 	 */
-	public ConnectionEntryList getCommonColleaguesConnectionEntries(String sourceId, String targetId) throws ProfileServiceException{
-		return getCommonColleaguesConnectionEntries(sourceId, targetId, null);
+	public ColleagueConnectionList getCommonColleagueConnections(String sourceId, String targetId) throws ProfileServiceException{
+		return getCommonColleagueConnections(sourceId, targetId, null);
 	}
 	/**
-	 * Wrapper method to get connection entries of colleagues shared by two users
+	 * Wrapper method to get colleague connections
 	 * 
 	 * @param sourceId 
 	 * 				 userid or email of first user
 	 * @param targetId 
 	 * 				 userid or email of second user
-	 * @return list of common colleagues connection entries
+	 * @return list of common colleague connections
 	 * @throws ProfileServiceException
 	 */
-	public ConnectionEntryList getCommonColleaguesConnectionEntries(String sourceId, String targetId,  Map<String, String> parameters) throws ProfileServiceException{
+	public ColleagueConnectionList getCommonColleagueConnections(String sourceId, String targetId,  Map<String, String> parameters) throws ProfileServiceException{
 
 		if (StringUtil.isEmpty(sourceId)) {
 			throw new ProfileServiceException(null, Messages.InvalidArgument_4);
@@ -480,16 +480,16 @@ public class ProfileService extends BaseService {
 		parameters.put("connectionType","colleague");
 		parameters.put("outputType","connection");
 
-		ConnectionEntryList connectionEntries = null;
+		ColleagueConnectionList colleagueConnections = null;
 		try {
-			connectionEntries = (ConnectionEntryList) getEntities(url, parameters, new ConnectionEntryFeedHandler(this));
+			colleagueConnections = (ColleagueConnectionList) getEntities(url, parameters, new ColleagueConnectionFeedHandler(this));
 		} catch (ClientServicesException e) {
 			throw new ProfileServiceException(e, Messages.CommonColleaguesException, sourceId, targetId);
 		} catch (IOException e) {
 			throw new ProfileServiceException(e, Messages.CommonColleaguesException, sourceId, targetId);
 		}
 
-		return connectionEntries;
+		return colleagueConnections;
 	}
 
 	/**
@@ -633,11 +633,11 @@ public class ProfileService extends BaseService {
 	/**
 	 * Wrapper method to accept a Invite 
 	 * 
-	 * @param ConnectionEntry 
+	 * @param ColleagueConnection 
 	 * @throws ProfileServiceException
 	 * 
 	 */
-	public void acceptInvite(ConnectionEntry connection)throws ProfileServiceException{
+	public void acceptInvite(ColleagueConnection connection)throws ProfileServiceException{
 
 		if (connection == null) {
 			throw new ProfileServiceException(null, Messages.InvalidArgument_6);
@@ -799,8 +799,8 @@ public class ProfileService extends BaseService {
 	 * This method is used by ProfileService wrapper methods to construct request body for Add operations
 	 * @return Object
 	 */
-	protected Object constructAcceptInviteRequestBody(ConnectionEntry connectionEntry, String action) throws TransformerException {
-		ConnectionEntryTransformer transformer = new ConnectionEntryTransformer(connectionEntry);
+	protected Object constructAcceptInviteRequestBody(ColleagueConnection connectionEntry, String action) throws TransformerException {
+		ColleagueConnectionTransformer transformer = new ColleagueConnectionTransformer(connectionEntry);
 		String xml = "";
 		if(!StringUtil.isEmpty(action)){
 			xml = transformer.updateTransform(action, connectionEntry.getFieldsMap());
@@ -814,10 +814,10 @@ public class ProfileService extends BaseService {
 	 * @throws ProfileServiceException 
 	 */
 	protected Object constructSendInviteRequestBody(String inviteMsg) throws TransformerException, ProfileServiceException {
-		ConnectionEntry connectionEntry = new ConnectionEntry(this, null);
-		connectionEntry.setContent(inviteMsg);
-		ConnectionEntryTransformer transformer = new ConnectionEntryTransformer(connectionEntry);
-		String xml = transformer.createTransform(connectionEntry.getFieldsMap());
+		ColleagueConnection colleagueConnection = new ColleagueConnection(this, null);
+		colleagueConnection.setContent(inviteMsg);
+		ColleagueConnectionTransformer transformer = new ColleagueConnectionTransformer(colleagueConnection);
+		String xml = transformer.createTransform(colleagueConnection.getFieldsMap());
 		return xml;	
 	}
 

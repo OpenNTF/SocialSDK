@@ -21,8 +21,8 @@
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.sbt.services.client.connections.profiles.ProfileService"%>
 <%@page import="com.ibm.sbt.services.client.connections.profiles.Profile"%>
-<%@page import="com.ibm.sbt.services.client.connections.profiles.ConnectionEntry"%>
-<%@page import="com.ibm.sbt.services.client.connections.profiles.ConnectionEntryList"%>
+<%@page import="com.ibm.sbt.services.client.connections.profiles.ColleagueConnection"%>
+<%@page import="com.ibm.sbt.services.client.connections.profiles.ColleagueConnectionList"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"	pageEncoding="ISO-8859-1"%>
 <html>
 <head>
@@ -36,11 +36,11 @@
 		String sourceUserId = Context.get().getProperty("sample.id1");
 		String targetUserId;
 		ProfileService connProfSvc = new ProfileService();
-		ConnectionEntryList colleagues = connProfSvc.getColleaguesConnectionEntries(sourceUserId);
+		ColleagueConnectionList colleagues = connProfSvc.getColleagueConnections(sourceUserId);
 		if(colleagues != null && ! colleagues.isEmpty()) {
-			ConnectionEntry colleague = colleagues.iterator().next();
+			ColleagueConnection colleague = colleagues.iterator().next();
 			targetUserId = colleague.getContributorUserId();
-			ConnectionEntry connection = connProfSvc.checkColleague(sourceUserId, targetUserId);
+			ColleagueConnection connection = connProfSvc.checkColleague(sourceUserId, targetUserId);
 			out.println("connection Id : "+connection.getConnectionId());
 		}
 		else

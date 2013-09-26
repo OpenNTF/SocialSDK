@@ -20,9 +20,9 @@ import org.w3c.dom.Node;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.IFeedHandler;
-import com.ibm.sbt.services.client.connections.profiles.ConnectionEntry;
-import com.ibm.sbt.services.client.connections.profiles.model.ConnectionEntryXPath;
-import com.ibm.sbt.services.client.connections.profiles.ConnectionEntryList;
+import com.ibm.sbt.services.client.connections.profiles.model.ColleagueConnectionXPath;
+import com.ibm.sbt.services.client.connections.profiles.ColleagueConnection;
+import com.ibm.sbt.services.client.connections.profiles.ColleagueConnectionList;
 import com.ibm.sbt.services.client.connections.profiles.ProfileService;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
@@ -32,7 +32,7 @@ import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
  * @author Swati Singh
  *
  */
-public class ConnectionEntryFeedHandler implements IFeedHandler {
+public class ColleagueConnectionFeedHandler implements IFeedHandler {
 
 	private final ProfileService service;
 	
@@ -41,7 +41,7 @@ public class ConnectionEntryFeedHandler implements IFeedHandler {
 	 * 
 	 * @param service
 	 */
-	public ConnectionEntryFeedHandler(ProfileService service){
+	public ColleagueConnectionFeedHandler(ProfileService service){
 		this.service = service;
 	}
 	
@@ -50,7 +50,7 @@ public class ConnectionEntryFeedHandler implements IFeedHandler {
 	 * @return Profile
 	 */
 	@Override
-	public ConnectionEntry createEntity(Response requestData) {
+	public ColleagueConnection createEntity(Response requestData) {
 		Node data = (Node)requestData.getData();
 		return createEntityFromData(data);
 	}
@@ -60,21 +60,21 @@ public class ConnectionEntryFeedHandler implements IFeedHandler {
 	 * @return Profile
 	 */
 	@Override
-	public ConnectionEntry createEntityFromData(Object data) {
+	public ColleagueConnection createEntityFromData(Object data) {
 		Node node = (Node)data;
-		XPathExpression expr = (data instanceof Document) ? (XPathExpression)ConnectionEntryXPath.entry.getPath() : null;
+		XPathExpression expr = (data instanceof Document) ? (XPathExpression)ColleagueConnectionXPath.entry.getPath() : null;
 		XmlDataHandler handler = new XmlDataHandler(node, ConnectionsConstants.nameSpaceCtx, expr);
-		ConnectionEntry connectionEntry = new ConnectionEntry(service, handler);
-		return connectionEntry;
+		ColleagueConnection colleagueConnection = new ColleagueConnection(service, handler);
+		return colleagueConnection;
 	}
 
 	/**
 	 * @param data object
-	 * @return Collection of profiles
+	 * @return list of Colleague Connections 
 	 */
 	@Override
-	public ConnectionEntryList createEntityList(Response requestData) {
-		return new ConnectionEntryList((Response)requestData, this);
+	public ColleagueConnectionList createEntityList(Response requestData) {
+		return new ColleagueConnectionList((Response)requestData, this);
 	}
 
 	/**

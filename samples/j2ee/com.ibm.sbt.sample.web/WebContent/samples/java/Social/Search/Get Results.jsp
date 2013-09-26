@@ -56,7 +56,7 @@
 			}
 		} catch (Throwable e) {
 			out.println("<pre>");
-			out.println("Problem Occurred while executing search query: " + e.getMessage());
+			out.println("Problem occurred while executing search query: " + e.getMessage());
 		}
 	%>
 	</div>

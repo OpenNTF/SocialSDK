@@ -201,6 +201,24 @@ define([ "../declare", "../lang", "../log", "../stringUtil" ],
             }
         },
 
+		 /**
+         * Get the nodes array value of the specified field.
+         * 
+         * @method getAsNodesArray
+         * @param fieldName
+         * @returns
+         */
+        getAsNodesArray : function(fieldName) {
+            this._validateFieldName(fieldName, "getAsNodesArray");
+
+            if (this._fields.hasOwnProperty(fieldName)) {
+                return this._fields[fieldName];
+            } else if (this.dataHandler) {
+                return this.dataHandler.getAsNodesArray(fieldName);
+            } else {
+                return null;
+            }
+        },
         /**
          * Get an object containing the values of the specified fields.
          * 

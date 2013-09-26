@@ -169,6 +169,24 @@ define([ "../declare", "../lang", "../stringUtil", "../xml", "../xpath", "./Data
                 return this._selectArray(property);
             }
         },
+        
+        /**
+         * @method getNodesArray
+         * @param property
+         * @returns
+         */
+        getAsNodesArray : function(property) {
+            this._validateProperty(property, "getNodesArray");
+            
+            if (this._values) {
+                if (!this._values.hasOwnProperty(property)) {
+                    this._values[property] = this._selectNodesArray(property);
+                }
+                return this._values[property];    
+            } else {
+                return this._selectNodesArray(property);
+            }
+        },
 
         /**
          * @method getEntityId
@@ -330,6 +348,16 @@ define([ "../declare", "../lang", "../stringUtil", "../xml", "../xpath", "./Data
                 }
             }
             return ret;
+        },
+        
+        /*
+         * Select xpath as nodes array
+         */
+        _selectNodesArray : function(property) {
+        	if (!this.data) {
+        		return null;
+        	}
+            return xpath.selectNodes(this.data, this._getXPath(property), this.namespaces);            
         }
        
 

@@ -113,9 +113,9 @@ define(["../../../declare",
         tagsList: function(grid, item, i, items){
             var tagCount = item.getValue("tagCount");
             tagCount = parseInt(tagCount);
-            if(tagCount === 0)
+            if(tagCount === 0){
                 return "";
-            
+            }
             var resultLiRole = "listitem";
             
             var ulClass = "lotusInlinelist";
@@ -129,18 +129,18 @@ define(["../../../declare",
                 var currentTag = typeof tags === 'string' ? tags : tags[i];
                 var liStyle = "padding:0px";
                 var liClass = "lotusFirst";
-                if(i === 2 || i === tagCount - 1)
+                if(i === 2 || i === tagCount - 1){
                     liClass = "lotusLast";
-                
+                }
                 var aHref = "javascript:void(0);";
                 var aOnClick = "onclick=\"searchObject.performTagFilter('" + tags[i] + "');\"";
                 var aAlt = currentTag;
                 
-                if(item.getValue("highlightField"))
+                if(item.getValue("highlightField")){
                     var aClass = currentTag;
-                else 
+                }else{ 
                     aClass = undefined;
-                
+                }
                 var aContent = currentTag;
                 
                 var a = this.buildElement(aElement, {
@@ -151,9 +151,9 @@ define(["../../../declare",
                     content: aContent
                 });
                 var liContent = a;
-                if(i != tagCount - 1 && i != 2)
+                if(i != tagCount - 1 && i != 2){
                     liContent += ",&nbsp";
-                
+                }
                 var li = this.buildElement(liElement, {
                     content: liContent,
                     classAttr: liClass,
@@ -304,8 +304,7 @@ define(["../../../declare",
                 });
                 
                 return statusUpdateUl + "\n" + summarySpan + "\n";
-            }
-            else if(this.resultType != this.resultTypes.statusUpdates){
+            }else if(this.resultType != this.resultTypes.statusUpdates){
                 return this.buildElement(emElement, {
                     content: this._nls.noDescription,
                     classAttr: "lotusMeta"
@@ -324,7 +323,7 @@ define(["../../../declare",
                     styleAttr: "clear:both;",
                     content: divSpan
                 });
-            } else{
+            }else{
                 return "";
             }
         },
@@ -344,10 +343,11 @@ define(["../../../declare",
             case 'blogURL':
                 var aHref = item.getValue("parentageMetaURL");
                 var aContent = "";
-                if(this.componentcontains(item, "blogs:ideationblogs:idea"))
+                if(this.componentcontains(item, "blogs:ideationblogs:idea")){
                     aContent = this._nls.fromAnIdeationBlog;
-                else
+                }else{
                     aContent = this._nls.fromABlog;
+                }
                 return this.buildElement(aElement, {
                     hrefAttr: aHref,
                     content: aContent
@@ -388,8 +388,9 @@ define(["../../../declare",
                     hrefAttr: item.getValue("communityParentLink"),
                     content: this._nls.fromACommunity
                 }) + " > ";
+            }else{
+                return "";
             }
-            else return "";
         },
         /**
          * @param grid
@@ -405,16 +406,15 @@ define(["../../../declare",
             case resultTypes.activities:
                 if(this.componentContains(item, "activities:task")){
                     spanContent = this._nls.activityToDo;
-                }
-                else if(this.componentContains(item, "activities:activity") || this.componentContains(item, "activities:community_activity") || this.componentContains(item, "activities:community_activity+members") || this.componentContains(item, "activities:explicit_membership_community_activity")){
+                }else if(this.componentContains(item, "activities:activity") || this.componentContains(item, "activities:community_activity") || this.componentContains(item, "activities:community_activity+members") || this.componentContains(item, "activities:explicit_membership_community_activity")){
                     spanContent = this._nls.activity;
-                } else if(this.componentContains(item, "activities:bookmark")){
+                }else if(this.componentContains(item, "activities:bookmark")){
                     spanContent = this._nls.activityBookmark;
-                } else if(this.componentContains(item, "activities:section")){
+                }else if(this.componentContains(item, "activities:section")){
                     spanContent = this._nls.activitySection;
-                } else if(this.componentContains(item, "activities:reply")){
+                }else if(this.componentContains(item, "activities:reply")){
                     spanContent = this._nls.activityComment;
-                } else{
+                }else{
                     spanContent = this._nls.activityEntry;
                 }
                 return this.buildElement(spanElement, {
@@ -424,16 +424,15 @@ define(["../../../declare",
             case resultTypes.blogs:
                 if(this.componentContains(item, "blogs:ideationblogs:ideationblog")){
                     spanContent = this._nls.ideationBlog;
-                }
-                else if(this.componentContains(item, "blogs:ideationblogs:idea")){
+                }else if(this.componentContains(item, "blogs:ideationblogs:idea")){
                     spanContent = this._nls.idea;
-                } else if(this.componentContains(item, "blogs:ideationblogs:comment")){
+                }else if(this.componentContains(item, "blogs:ideationblogs:comment")){
                     spanContent = this._nls.ideaComment;
-                } else if(this.componentContains(item, "blogs:entry")){
+                }else if(this.componentContains(item, "blogs:entry")){
                     spanContent = this._nls.blogEntry;
-                } else if(this.componentContains(item, "blogs:comment")){
+                }else if(this.componentContains(item, "blogs:comment")){
                     spanContent = this._nls.blogComment;
-                } else{
+                }else{
                     spanContent = this._nls.blog;
                 }
                 return this.buildElement(spanElement, {
@@ -458,12 +457,12 @@ define(["../../../declare",
                         classAttr: "lotusMeta",
                         content: this._nls.community
                      });
-                } else if(this.componentContains(item, "communities:feed")){
+                }else if(this.componentContains(item, "communities:feed")){
                     return this.buildElement(spanElement, {
                         classAttr: "lotusMeta",
                         content: this._nls.feed
                      });
-                } else if(this.componentContains(item, "communities:bookmark")){
+                }else if(this.componentContains(item, "communities:bookmark")){
                     return this.buildElement(spanElement, {
                         classAttr: "lotusMeta",
                         content: this._nls.bookmark
@@ -478,9 +477,9 @@ define(["../../../declare",
             case resultTypes.forums:
                 if(this.componentContains(item, "communities:forums:forum")){
                     spanContent = this._nls.forum;
-                } else if(this.componentContains(item, "communities:forums:category")){
+                }else if(this.componentContains(item, "communities:forums:category")){
                     spanContent = this._nls.forumCategory;
-                } else{
+                }else{
                     spanContent = this._nls.forumTopic;
                 }
                 return this.buildElement(spanElement, {
@@ -502,9 +501,9 @@ define(["../../../declare",
             case resultTypes.wikis:
                 if(this.componentContains(item, "wikis:wiki")){
                     spanContent = this._nls.wikiType;
-                } else if(this.componentContains(item, "wikis:file")){
+                }else if(this.componentContains(item, "wikis:file")){
                     spanContent = this._nls.wikiFile;
-                } else{
+                }else{
                     spanContent = this._nls.wikiPage;
                 }
                 return this.buildElement(spanElement, {
@@ -521,9 +520,9 @@ define(["../../../declare",
          * @param appString
          */
         componentContains: function(item, appString){
-            if(item.getValue("primaryComponent") === appString)
+            if(item.getValue("primaryComponent") === appString){
                 return true;
-            
+            }
             for(var key in item.getValue("application")){
                 var app = item.getValue("application")[key];
                 if(app === appString){
@@ -561,24 +560,24 @@ define(["../../../declare",
         bodyCalendarLis: function(grid, item, i, items){
             var allDayEventLi = "", repeatingEventLi = "", locationLi = "";
             
-            if(item.getValue("allDayEvent") ==="true")
+            if(item.getValue("allDayEvent") ==="true"){
                 allDayEventLi = this.buildElement(liElement,{
                     roleAttr: "listitem",
                     content: this._nls.eventIsAllDay
                 });
-            
-            if(item.getValue("repeatingEvent") ==="true")
+            }
+            if(item.getValue("repeatingEvent") ==="true"){
                 allDayEventLi = this.buildElement(liElement,{
                     roleAttr: "listitem",
                     content: this._nls.eventRepeats
                 });
-            
-            if(item.getValue("location.length") > 1)
+            }
+            if(item.getValue("location.length") > 1){
                 allDayEventLi = this.buildElement(liElement,{
                     roleAttr: "listitem",
                     content: item.getValue("location")
                 });
-            
+            }
             return allDayEventLi + "\n" + repeatingEventLi + "\n" + locationLi + "\n";
         },
         
@@ -594,8 +593,7 @@ define(["../../../declare",
                 return this.buildElement(spanElement, {
                     content: spanA
                 });
-            }
-            else{
+            }else{
                 return this._substituteItem(personCardTemplate, grid, item, i, items);
             }
         },
@@ -610,10 +608,11 @@ define(["../../../declare",
          * @returns {String}
          */
         cardClass: function(grid, item, i, items){
-            if(item.getValue("authorState") != 'active')
+            if(item.getValue("authorState") != 'active'){
                 return "lotusPersonInactive";
-            else
+            }else{
                 return "vcard";
+            }
         },
         
         /**
@@ -626,14 +625,15 @@ define(["../../../declare",
          * @returns
          */
         profileBodyJobTitle: function(grid, item, i, items){
-            if(item.getValue("authorJobTitle") && item.getValue("authorJobTitle").length != 0)
+            if(item.getValue("authorJobTitle") && item.getValue("authorJobTitle").length != 0){
                 return this.buildElement(liElement, {
                     content: item.getValue("authorJobTitle")+"&nbsp;",
                     classAttr: "lotusFirst",
                     roleAttr: "listitem"
                 });
-            else
+            }else{
                 return this._nls.emptyString;
+            }
         },
         
         /**
@@ -648,15 +648,16 @@ define(["../../../declare",
                     roleAttr: "listitem",
                     classAttr: "lotusFirst"
                 });
-            }
-            else
+            }else{
                 return "";
+            }
         },
         
         bodyUpdatedLi: function(grid, item, i, items){
             var liClass = "searchDateClass";
-            if(item.getValue("authorName").length==0)
+            if(item.getValue("authorName").length==0){
                 liClass+= " lotusFirst";
+            }
             return this.buildElement(liElement, {
                 classAttr: liClass,
                 content: this.updatedLabel(grid, item, i, items)
@@ -710,21 +711,21 @@ define(["../../../declare",
                 
                 var ulContent = "";
                 
-                if(this.application ==="dogear")
+                if(this.application ==="dogear"){
                     ulContent += this.buildElement(liElement, {
                         content: this._nls.bookmarksTitle
                     }) + "\n";
-                
-                if(this.application ==="activities:bookmark")
+                }
+                if(this.application ==="activities:bookmark"){
                     ulContent += this.buildElement(liElement, {
                         content: this._nls.activitiesTitle
                     }) + "\n";
-                
-                if(this.application ==="communities:bookmark")
+                }
+                if(this.application ==="communities:bookmark"){
                     ulContent += this.buildElement(liElement, {
                         content: this._nls.communitiesTitle
                     }) + "\n";
-                
+                }
                 var spanUl = this.buildElement(ulElement, {
                     content: ulContent
                 });
@@ -751,10 +752,11 @@ define(["../../../declare",
          * @returns
          */
         commentOn: function(grid, item, i, items){
-            if(this.componentContains(item, "activities:reply"))
+            if(this.componentContains(item, "activities:reply")){
                 return this._nls.commentOn;
-            else
+            }else{
                 return this._nls.emptyString;
+            }
         },
         
         /**
@@ -767,24 +769,27 @@ define(["../../../declare",
          * @returns
          */
         ltr: function(grid, item, i, items){
-            if(this.componentContains(item, "wikis:file"))
+            if(this.componentContains(item, "wikis:file")){
                 return 'dir="' + this._nls.ltr + '"';
-            else
+            }else{
                 return this._nls.emptyString;
+            }
         },
         
         inactiveLabel: function(grid, item, i, items){
-            if(this.componentContains(item, "profiles"))
+            if(this.componentContains(item, "profiles")){
                 return this._nls.inactiveLabel;
-            else
+            }else{
                 return this._nls.emptyString;
+            }
         },
         
         colspan: function(grid, item, i, items){
-            if(!this.componentContains(item, "status_update"))
+            if(!this.componentContains(item, "status_update")){
                 return 'colspan="2"';
-            else
+            }else{
                 return '';
+            }
         },
          
         /**
@@ -802,25 +807,26 @@ define(["../../../declare",
         },
         
         summaryClass: function(grid, item, i, items){
-            if(item.getValue("authorState") === "inactive")
+            if(item.getValue("authorState") === "inactive"){
                 return "lotusDim";
-            else
+            }else{
                 return "lconnSearchComponentCategory";
+            }
         },
         
 
         summaryStyle: function(grid, item, i, items){
-            if(item.getValue("authorState") === "inactive")
+            if(item.getValue("authorState") === "inactive"){
                 return "filter: alpha(opacity = 50)";
-            else
+            }else{
                 return "";
+            }
         },
         
         getApplication: function(item){
             if(typeof item.getValue("application") === "string"){
                 return item.getValue("application");
-            }
-            else{
+            }else{
                 for(var key in item.getValue("application")){
                     var app = item.getValue("application")[key];
                     if(app.indexOf(":") ===-1){
@@ -862,7 +868,7 @@ define(["../../../declare",
                 }else{
                     return resultTypes.activities;
                 }
-            } else if (primaryComponent.indexOf("communities") === 0){
+            }else if (primaryComponent.indexOf("communities") === 0){
                 if(primaryComponent === "communities:bookmark"){
                     return resultTypes.bookmark;
                 }else{
@@ -911,11 +917,13 @@ define(["../../../declare",
             
             // Build tr, adding attributes and content.
             var trClass = undefined;
-            if(i===0)
+            if(i===0){
                 trClass = "lotusFirst";
+            }
             var tdColspan = undefined;
-            if(true)
+            if(true){
                 tdColspan = "2";
+            }
             var trContent = this.buildElement(tdElement, {
                 content: tdContent,
                 colspanAttr: tdColspan

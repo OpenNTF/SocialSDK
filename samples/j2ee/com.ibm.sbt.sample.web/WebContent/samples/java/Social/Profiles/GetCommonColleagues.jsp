@@ -43,7 +43,7 @@
 			Map<String, String> params = new HashMap<String, String>();
 			params.put("inclMessage", "true");
 	
-			ProfileList entries = connProfSvc.getCommonColleaguesProfiles(userId1, userId2);
+			ProfileList entries = connProfSvc.getCommonColleagues(userId1, userId2);
 		
 			if (entries != null && !entries.isEmpty()) {
 				out.println("<b> User's colleagues </b>");

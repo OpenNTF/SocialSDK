@@ -123,6 +123,10 @@ define([ "../../../declare",
             this._activeSortAnchor = this._sortInfo.relevance;
             this._activeSortIsDesc = true;
         },
+        
+        contextRootMap: {
+            search: "search"
+        },
 
         /**
          * Override buildUrl to add format and component

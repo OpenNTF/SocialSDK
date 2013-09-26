@@ -1,0 +1,15 @@
+<snx:field xmlns:snx="http://www.ibm.com/xmlns/prod/sn" name="${fieldname}" type="${fieldtype}" fid="${fid}" position="${position}"> 
+
+${getBookmarkLink}
+
+${getDate}
+
+${getFile}
+
+${getName}
+${getUserId}
+${getEmail}
+
+${getText}
+
+</snx:field>

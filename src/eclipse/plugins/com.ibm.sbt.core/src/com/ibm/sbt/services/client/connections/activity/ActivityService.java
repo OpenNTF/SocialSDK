@@ -69,10 +69,23 @@ public class ActivityService extends BaseService {
 		return "connections";
 	}
     
+    /**
+     * Method returns Activities of the logged in user
+     * 
+     * @return
+     * @throws ActivityServiceException
+     */
     public ActivityList getMyActivities() throws ActivityServiceException {
     	return getMyActivities(null);
     }
     
+    /**
+     * Method returns Activities of the logged in user
+     * 
+     * @param params
+     * @return
+     * @throws ActivityServiceException
+     */
     public ActivityList getMyActivities(Map<String, String> params) throws ActivityServiceException {
         String requestUri = ActivityServiceUrlBuilder.populateURL(ActivityAction.ACTIVITIES.getActivityAction());
         try {
@@ -82,10 +95,23 @@ public class ActivityService extends BaseService {
         }
     }
     
+    /**
+     * Method returns Completed Activities of the logged in user
+     * 
+     * @return
+     * @throws ActivityServiceException
+     */
     public ActivityList getCompletedActivities() throws ActivityServiceException {
     	return getCompletedActivities(null);
     }
     
+    /**
+     * Method returns Completed Activities of the logged in user
+     * 
+     * @param params
+     * @return
+     * @throws ActivityServiceException
+     */
     public ActivityList getCompletedActivities(Map<String, String> params) throws ActivityServiceException {
         String requestUri = ActivityServiceUrlBuilder.populateURL(ActivityAction.COMPLETED.getActivityAction());
         try {
@@ -95,10 +121,23 @@ public class ActivityService extends BaseService {
         }
     }
     
+    /**
+     * Method returns All Activities of the logged in user
+     * 
+     * @return
+     * @throws ActivityServiceException
+     */
     public ActivityList getAllActivities() throws ActivityServiceException {
     	return getAllActivities(null);
     }
     
+    /**
+     * Method returns All Activities of the logged in user
+     * 
+     * @param params
+     * @return
+     * @throws ActivityServiceException
+     */
     public ActivityList getAllActivities(Map<String, String> params) throws ActivityServiceException {
         String requestUri = ActivityServiceUrlBuilder.populateURL(ActivityAction.EVERYTHING.getActivityAction());
         try {
@@ -108,10 +147,23 @@ public class ActivityService extends BaseService {
         }
     }
     
+    /**
+     * Method returns Todos of the logged in user
+     * 
+     * @return
+     * @throws ActivityServiceException
+     */
     public ActivityList getAllTodos() throws ActivityServiceException {
     	return getAllTodos(null);
     }
     
+    /**
+     * Method returns Todos of the logged in user
+     * 
+     * @param params
+     * @return
+     * @throws ActivityServiceException
+     */
     public ActivityList getAllTodos(Map<String, String> params) throws ActivityServiceException {
         String requestUri = ActivityServiceUrlBuilder.populateURL(ActivityAction.TODOS.getActivityAction());
         try {
@@ -121,10 +173,22 @@ public class ActivityService extends BaseService {
         }
     }
     
+    /**
+     * Method returns Tags of the logged in user
+     * @return
+     * @throws ActivityServiceException
+     */
     public TagList getAllTags() throws ActivityServiceException {
     	return getAllTags(null);
     }
     
+    /**
+     * Method returns Tags of the logged in user
+     * 
+     * @param params
+     * @return
+     * @throws ActivityServiceException
+     */
     public TagList getAllTags(Map<String, String> params) throws ActivityServiceException {
         String requestUri = ActivityServiceUrlBuilder.populateURL(ActivityAction.TAGS.getActivityAction());
         try {
@@ -134,10 +198,23 @@ public class ActivityService extends BaseService {
         }
     }
     
+    /**
+     * Method returns Activities from Trash 
+     * 
+     * @return
+     * @throws ActivityServiceException
+     */
     public ActivityList getActivitiesInTrash() throws ActivityServiceException {
     	return getActivitiesInTrash(null);
     }
     
+    /**
+     * Method returns Activities from Trash 
+     * 
+     * @param params
+     * @return
+     * @throws ActivityServiceException
+     */
     public ActivityList getActivitiesInTrash(Map<String, String> params) throws ActivityServiceException {
         String requestUri = ActivityServiceUrlBuilder.populateURL(ActivityAction.TRASH.getActivityAction());
         try {
@@ -147,6 +224,13 @@ public class ActivityService extends BaseService {
         }
     }
     
+    /**
+     * Method to create an Activity
+     * 
+     * @param activity
+     * @return
+     * @throws ActivityServiceException
+     */
     public Activity createActivity(Activity activity) throws ActivityServiceException {
 		if (null == activity){
 			throw new ActivityServiceException(null, "Null activity");
@@ -169,6 +253,13 @@ public class ActivityService extends BaseService {
 		} 
 	}
 
+    /**
+     * Method to get an Activity
+     * 
+     * @param activityId
+     * @return
+     * @throws ActivityServiceException
+     */
     public Activity getActivity(String activityId) throws ActivityServiceException {
 		if (null == activityId){
 			throw new ActivityServiceException(null, "Null activityId");
@@ -183,6 +274,12 @@ public class ActivityService extends BaseService {
 		} 
 	}
     
+	/**
+	 * Method to update an Activity
+	 * 
+	 * @param activity
+	 * @throws ActivityServiceException
+	 */
 	public void updateActivity(Activity activity) throws ActivityServiceException {
 		if (null == activity){
 			throw new ActivityServiceException(null, "Null activity");
@@ -210,6 +307,12 @@ public class ActivityService extends BaseService {
 		} 
 	}
 	
+	/**
+	 * Method to delete an Activity
+	 * 
+	 * @param activityId
+	 * @throws ActivityServiceException
+	 */
 	public void deleteActivity(String activityId) throws ActivityServiceException {
 		if (null == activityId){
 			throw new ActivityServiceException(null, "Null activityId");
@@ -224,6 +327,13 @@ public class ActivityService extends BaseService {
 		} 
 	}
 	
+	/**
+	 * Method to get Activity from Trash
+	 * 
+	 * @param activityId
+	 * @return
+	 * @throws ActivityServiceException
+	 */
 	public Activity getActivityFromTrash(String activityId) throws ActivityServiceException {
 		if (null == activityId){
 			throw new ActivityServiceException(null, "Null activityId");
@@ -238,6 +348,12 @@ public class ActivityService extends BaseService {
 		} 
 	}
 	
+	/**
+	 * Method to restore an Activity
+	 * 
+	 * @param activityId
+	 * @throws ActivityServiceException
+	 */
 	public void restoreActivity(String activityId) throws ActivityServiceException {
 		if (StringUtil.isEmpty(activityId)){
 			throw new ActivityServiceException(null, "Null activityId");
@@ -266,6 +382,14 @@ public class ActivityService extends BaseService {
 		} 
 	}
 
+	/**
+	 * Method to add member to Activity
+	 * 
+	 * @param activityId
+	 * @param member
+	 * @return
+	 * @throws ActivityServiceException
+	 */
 	public Member addMember(String activityId, Member member) throws ActivityServiceException {
 		if (StringUtil.isEmpty(activityId)){
 			throw new ActivityServiceException(null, "Null activityId");
@@ -312,6 +436,13 @@ public class ActivityService extends BaseService {
 		} 
 	}
 	
+	/**
+	 * Method to update member in Activity
+	 * 
+	 * @param activityId
+	 * @param member
+	 * @throws ActivityServiceException
+	 */
 	public void updateMember(String activityId, Member member) throws ActivityServiceException {
 		if (null == activityId){
 			throw new ActivityServiceException(null, "Null activityId");
@@ -357,6 +488,13 @@ public class ActivityService extends BaseService {
 		} 
 	}
 	
+	/**
+	 * Method to get members 
+	 * 
+	 * @param activityId
+	 * @return
+	 * @throws ActivityServiceException
+	 */
 	public MemberList getMembers(String activityId) throws ActivityServiceException {
 		if (StringUtil.isEmpty(activityId)){
 			throw new ActivityServiceException(null, "Null activityId");
@@ -372,6 +510,14 @@ public class ActivityService extends BaseService {
 		}
 	}
 	
+	/**
+	 * Method to get member
+	 * 
+	 * @param activityId
+	 * @param memberId
+	 * @return
+	 * @throws ActivityServiceException
+	 */
 	public Member getMember(String activityId, String memberId) throws ActivityServiceException {
 		if (StringUtil.isEmpty(activityId)||StringUtil.isEmpty(memberId)){
 			throw new ActivityServiceException(null, "Null activityId / memberId");
@@ -392,6 +538,13 @@ public class ActivityService extends BaseService {
 		} 
 	}
 
+	/**
+	 * Method to delete member from Activity
+	 * 
+	 * @param activityId
+	 * @param memberId
+	 * @throws ActivityServiceException
+	 */
 	public void deleteMember(String activityId, String memberId) throws ActivityServiceException {
 		if (null == activityId){
 			throw new ActivityServiceException(null, "Null activityId");
@@ -410,6 +563,13 @@ public class ActivityService extends BaseService {
 		} 
 	}
 
+	/**
+	 * Method to create Activity node
+	 * 
+	 * @param activityNode
+	 * @return
+	 * @throws ActivityServiceException
+	 */
 	public ActivityNode createActivityNode(ActivityNode activityNode) throws ActivityServiceException {
 		if (null == activityNode){
 			throw new ActivityServiceException(null, "Null activity node");
@@ -437,6 +597,13 @@ public class ActivityService extends BaseService {
 		}
 	}
 
+	/**
+	 * Method to get Activity node
+	 * 
+	 * @param activityNodeId
+	 * @return
+	 * @throws ActivityServiceException
+	 */
 	public ActivityNode getActivityNode(String activityNodeId) throws ActivityServiceException {
 		if (null == activityNodeId){
 			throw new ActivityServiceException(null, "Null activityNodeId");
@@ -451,6 +618,12 @@ public class ActivityService extends BaseService {
 		} 
 	}
 
+	/**
+	 * Method to update Activity node
+	 * 
+	 * @param activityNode
+	 * @throws ActivityServiceException
+	 */
 	public void updateActivityNode(ActivityNode activityNode) throws ActivityServiceException {
 		if (null == activityNode){
 			throw new ActivityServiceException(null, "Null activity node");
@@ -483,6 +656,12 @@ public class ActivityService extends BaseService {
 		}
 	}
 	
+	/**
+	 * Method to restore Activity node
+	 * 
+	 * @param activityNodeId
+	 * @throws ActivityServiceException
+	 */
 	public void restoreActivityNode(String activityNodeId) throws ActivityServiceException {
 		if (StringUtil.isEmpty(activityNodeId)){
 			throw new ActivityServiceException(null, "Null activityNodeId");
@@ -511,6 +690,13 @@ public class ActivityService extends BaseService {
 		} 
 	}
 	
+	/**
+	 * Method to get Activity node from Trash
+	 * 
+	 * @param activityNodeId
+	 * @return
+	 * @throws ActivityServiceException
+	 */
 	public ActivityNode getActivityNodeFromTrash(String activityNodeId) throws ActivityServiceException {
 		if (null == activityNodeId){
 			throw new ActivityServiceException(null, "Null activityNodeId");
@@ -525,6 +711,13 @@ public class ActivityService extends BaseService {
 		} 
 	}
 
+	/**
+	 * Method to get Activity nodes from Trash
+	 * 
+	 * @param activityId
+	 * @return
+	 * @throws ActivityServiceException
+	 */
 	public ActivityNodeList getActivityNodesInTrash(String activityId) throws ActivityServiceException {
 		if (null == activityId){
 			throw new ActivityServiceException(null, "Null activityId");
@@ -539,6 +732,12 @@ public class ActivityService extends BaseService {
 		} 
 	}
 
+	/**
+	 * Method to delete Activity node
+	 * 
+	 * @param activityNodeId
+	 * @throws ActivityServiceException
+	 */
 	public void deleteActivityNode(String activityNodeId) throws ActivityServiceException {
 		if (null == activityNodeId){
 			throw new ActivityServiceException(null, "Null activityNodeId");
@@ -553,6 +752,13 @@ public class ActivityService extends BaseService {
 		} 
 	}
 
+	/**
+	 * Method to get Tags of Activity
+	 * 
+	 * @param activityId
+	 * @return
+	 * @throws ActivityServiceException
+	 */
 	public TagList getActivityTags(String activityId) throws ActivityServiceException {
 		if (null == activityId){
 			throw new ActivityServiceException(null, "Null activityId");
@@ -567,6 +773,13 @@ public class ActivityService extends BaseService {
         }
 	}
 	
+	/**
+	 * Method to get Tags of Activity Nodes
+	 * 
+	 * @param activityNodeId
+	 * @return
+	 * @throws ActivityServiceException
+	 */
 	public TagList getActivityNodeTags(String activityNodeId) throws ActivityServiceException {
 		if (null == activityNodeId){
 			throw new ActivityServiceException(null, "Null activityNodeId");

@@ -863,6 +863,16 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             });
             return forum.load(args);
         },
+        
+        getForums : function(requestArgs){
+            var options = {
+                method : "GET",
+                handleAs : "text",
+                query : requestArgs || {}
+            };
+                
+            return this.getEntities(consts.AtomForums, options, ForumFeedCallbacks);
+        },
 
         /**
          * Create a forum by sending an Atom entry document containing the 

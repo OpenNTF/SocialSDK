@@ -272,7 +272,9 @@ public class XmlDataHandler implements DataHandler<Node> {
 		Date date = null;
 		DateFormat format = DateFormat.getDateInstance(DateFormat.SHORT, locale);
 		try {
-			date = format.parse(value);
+			if(value != null) {
+				date = format.parse(value);
+			}
 		} catch(ParseException e) {
 			throw new DataHandlerException(e, "Error parsing date string");
 		}

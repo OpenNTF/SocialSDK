@@ -49,6 +49,7 @@ import com.ibm.sbt.services.client.connections.forums.ForumList;
 import com.ibm.sbt.services.client.connections.forums.ForumServiceException;
 import com.ibm.sbt.services.client.connections.forums.ForumType;
 import com.ibm.sbt.services.client.connections.forums.feedhandler.ForumsFeedHandler;
+import com.ibm.sbt.services.client.connections.search.feedhandler.ScopeFeedHandler;
 import com.ibm.sbt.services.client.connections.search.feedhandler.SearchFeedHandler;
 import com.ibm.sbt.services.util.AuthUtil;
 
@@ -81,7 +82,7 @@ public class SearchService extends BaseService {
 	}
 	
     /**
-     * Search Lotus Connection for public information.
+     * Search IBM Connection for public information.
      * 
      * @param query Text to search for
      * @return ResultList
@@ -93,7 +94,7 @@ public class SearchService extends BaseService {
 	
 	
 	/**
-	 * Search Lotus Connection for public information.
+	 * Search IBM Connection for public information.
 	 * 
 	 * @param query
 	 *            Text to search for
@@ -124,7 +125,7 @@ public class SearchService extends BaseService {
 	
 	
 	/**
-	 * Search Lotus Connections for both public information and private
+	 * Search IBM Connections for both public information and private
 	 * information that you have access to. You must provide authentication
 	 * information in the request to retrieve this resource.
 	 * 
@@ -139,7 +140,7 @@ public class SearchService extends BaseService {
 	
 	
 	/**
-	 * Search Lotus Connections for both public information and private
+	 * Search IBM Connections for both public information and private
 	 * information that you have access to. You must provide authentication
 	 * information in the request to retrieve this resource.
 	 * 
@@ -172,7 +173,7 @@ public class SearchService extends BaseService {
 	
 	
 	/**
-	 * Search Lotus Connection for public information, and then return the
+	 * Search IBM Connection for public information, and then return the
 	 * people associated with the results.
 	 * 
 	 * @param query
@@ -184,7 +185,7 @@ public class SearchService extends BaseService {
 	
 	
 	/**
-	 * Search Lotus Connection for public information, and then return the
+	 * Search IBM Connection for public information, and then return the
 	 * people associated with the results.
 	 * 
 	 * @param query
@@ -216,7 +217,7 @@ public class SearchService extends BaseService {
 	
 	
 	/**
-	 * Search Lotus Connections for both public information and private
+	 * Search IBM Connections for both public information and private
 	 * information that you have access to. You must provide authentication
 	 * information in the request to retrieve this resource.
 	 * 
@@ -229,7 +230,7 @@ public class SearchService extends BaseService {
 	
 	
 	/**
-	 * Search Lotus Connections for both public information and private
+	 * Search IBM Connections for both public information and private
 	 * information that you have access to. You must provide authentication
 	 * information in the request to retrieve this resource.
 	 * 
@@ -261,7 +262,7 @@ public class SearchService extends BaseService {
 	}
 	
 	/**
-	 * Search Lotus Connection for public information, and then return the
+	 * Search IBM Connection for public information, and then return the
 	 * tags associated with the results.
 	 * 
 	 * @param query
@@ -275,7 +276,7 @@ public class SearchService extends BaseService {
 	
 	
     /**
-     * Search Lotus Connection for public information, and then 
+     * Search IBM Connection for public information, and then 
      * return the tags associated with the results.
      * 
      * @param query Text to search for
@@ -305,7 +306,7 @@ public class SearchService extends BaseService {
 	
 	
     /**
-     * Search Lotus Connections for both public information and private 
+     * Search IBM Connections for both public information and private 
      * information that you have access to, and then return the tags associated 
      * with the results. You must provide authentication information in the 
      * request to retrieve this resource.
@@ -321,7 +322,7 @@ public class SearchService extends BaseService {
 	
 	
     /**
-     * Search Lotus Connections for both public information and private 
+     * Search IBM Connections for both public information and private 
      * information that you have access to, and then return the tags associated 
      * with the results. You must provide authentication information in the 
      * request to retrieve this resource.
@@ -355,7 +356,7 @@ public class SearchService extends BaseService {
 	
 	
 	/**
-	 * Search Lotus Connection for public information, and then return the
+	 * Search IBM Connection for public information, and then return the
 	 * applications associated with the results and identify how many results
 	 * were found per application.
 	 * 
@@ -370,7 +371,7 @@ public class SearchService extends BaseService {
 	
 	
 	/**
-	 * Search Lotus Connection for public information, and then return the
+	 * Search IBM Connection for public information, and then return the
 	 * applications associated with the results and identify how many results
 	 * were found per application.
 	 * 
@@ -404,7 +405,7 @@ public class SearchService extends BaseService {
 	
 	
 	/**
-	 * Search Lotus Connections for both public information and private
+	 * Search IBM Connections for both public information and private
 	 * information that you have access to, and then return the applications
 	 * associated with the results and identify how many results were found per
 	 * application. You must provide authentication information in the request
@@ -421,7 +422,7 @@ public class SearchService extends BaseService {
 	
 	
 	/**
-	 * Search Lotus Connections for both public information and private
+	 * Search IBM Connections for both public information and private
 	 * information that you have access to, and then return the applications
 	 * associated with the results and identify how many results were found per
 	 * application. You must provide authentication information in the request
@@ -456,7 +457,7 @@ public class SearchService extends BaseService {
 	
 	
 	/**
-	 * Search Lotus Connection for public information, and then return the dates
+	 * Search IBM Connection for public information, and then return the dates
 	 * associated with the results.
 	 * 
 	 * @param query
@@ -470,7 +471,7 @@ public class SearchService extends BaseService {
 	
 	
 	/**
-	 * Search Lotus Connection for public information, and then return the dates
+	 * Search IBM Connection for public information, and then return the dates
 	 * associated with the results.
 	 * 
 	 * @param query
@@ -502,7 +503,7 @@ public class SearchService extends BaseService {
 	
 	
 	/**
-	 * Search Lotus Connections for both public information and private
+	 * Search IBM Connections for both public information and private
 	 * information that you have access to, and then return the dates associated
 	 * with the results. You must provide authentication information in the
 	 * request to retrieve this resource.
@@ -518,7 +519,7 @@ public class SearchService extends BaseService {
 	
 	
 	/**
-	 * Search Lotus Connections for both public information and private
+	 * Search IBM Connections for both public information and private
 	 * information that you have access to, and then return the dates associated
 	 * with the results. You must provide authentication information in the
 	 * request to retrieve this resource.
@@ -549,6 +550,28 @@ public class SearchService extends BaseService {
 		return searchResults;
 		
 	}
+	
+	
+	/**
+     * Search IBM Connection for available scopes ( Applications in which search can be executed )
+     * 
+     * @method getScopes
+     * @return ScopeList
+	 * @throws SearchServiceException 
+     */
+     public ScopeList getScopes() throws SearchServiceException {
+    	ScopeList scopes;
+    	Map params = new HashMap<String,String>();
+ 		try {
+			String searchQry = resolveUrl(SearchType.SCOPE);
+			scopes = (ScopeList) getEntities(searchQry, params, new ScopeFeedHandler(this));
+		} catch (ClientServicesException e) {
+			throw new SearchServiceException(e);
+		} catch (IOException e) {
+			throw new SearchServiceException(e);
+		}
+		return scopes;
+    }
 	
 	/*
 	 * Internal service methods

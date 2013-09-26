@@ -35,7 +35,7 @@ public class GetMyResults extends BaseSearchTest {
         setAuthType(AuthType.AUTO_DETECT);
     }
 
-    @Test @Ignore
+    @Test
     public void testGetMyResults() {
         addSnippetParam("sample.searchQuery", "Test");
         

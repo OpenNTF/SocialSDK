@@ -1,5 +1,5 @@
 /*
- * Â© Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -16,7 +16,9 @@
 package com.ibm.sbt.automation.core.test.connections;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 import junit.framework.Assert;
 
@@ -28,11 +30,18 @@ import com.ibm.sbt.automation.core.test.BaseApiTest;
 import com.ibm.sbt.automation.core.utils.Trace;
 import com.ibm.sbt.security.authentication.AuthenticationException;
 import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.connections.communities.Community;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
 import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
 import com.ibm.sbt.services.client.connections.communities.Member;
 import com.ibm.sbt.services.client.connections.communities.MemberList;
+import com.ibm.sbt.services.client.connections.forums.ForumServiceException;
+import com.ibm.sbt.services.client.connections.forums.ForumTopic;
+import com.ibm.sbt.services.client.connections.forums.ForumType;
+import com.ibm.sbt.services.client.connections.forums.TopicList;
+import com.ibm.sbt.services.client.connections.forums.feedhandler.TopicsFeedHandler;
+import com.ibm.sbt.services.client.connections.forums.transformers.BaseForumTransformer;
 
 
 
@@ -151,7 +160,7 @@ public class BaseCommunitiesTest extends BaseApiTest {
             loginConnections();
             
             CommunityService communityService = getCommunityService();
-            community = communityService.getCommunity(communityUuid);
+            community = communityService.getCommunity(communityUuid+1);
             Trace.log("Got community: "+community.getCommunityUuid());
         } catch (AuthenticationException pe) {
         	if (pe.getCause() != null) {
@@ -177,7 +186,7 @@ public class BaseCommunitiesTest extends BaseApiTest {
             CommunityService communityService = getCommunityService();
             
         	long start = System.currentTimeMillis();
-            community = communityService.newCommunity();
+            community = new Community(communityService, "");
             community.setTitle(title);
             community.setCommunityType(type);
             community.setContent(content);
@@ -213,7 +222,7 @@ public class BaseCommunitiesTest extends BaseApiTest {
             try {
             	loginConnections();
                 CommunityService communityService = getCommunityService();
-                communityService.deleteCommunity(community);
+                communityService.deleteCommunity(community.getCommunityUuid());
             } catch (AuthenticationException pe) {
             	if (pe.getCause() != null) {
             		pe.getCause().printStackTrace();
@@ -257,9 +266,9 @@ public class BaseCommunitiesTest extends BaseApiTest {
     protected boolean addMember(Community community, String id, String role) {
         try {
             CommunityService communityService = getCommunityService();
-            Member member = new Member(communityService, id, null, null);
+            Member member = new Member(communityService, id);
             member.setRole(role);
-            boolean added = communityService.addMember(community.getCommunityUuid(), member.getUserid());
+            boolean added = communityService.addMember(community.getCommunityUuid(), member);
             Assert.assertTrue("Unable to add member: "+id, added);
             Trace.log("Added member: "+id);
             return added;
@@ -272,7 +281,7 @@ public class BaseCommunitiesTest extends BaseApiTest {
     protected boolean hasMember(Community community, String id) {
         try {
             CommunityService communityService = getCommunityService();
-            MemberList memberList = communityService.getMembers(community);
+            MemberList memberList = communityService.getMembers(community.getCommunityUuid());
             for (int i=0; i<memberList.size(); i++) {
             	Member member = (Member)memberList.get(i);
                 if (id.equals(member.getEmail()) || id.equals(member.getUserid())) {
@@ -284,6 +293,38 @@ public class BaseCommunitiesTest extends BaseApiTest {
         } 
         return false;
     }
+    
+	protected ForumTopic createForumTopic(Community community, ForumTopic topic) throws ForumServiceException {
+		if (null == topic){
+			throw new ForumServiceException(null,"Topic object passed was null");
+		}
+		Response result = null;
+		try {
+			CommunityService communityService = getCommunityService();
+			TopicList topicList = communityService.getForumTopics(community.getCommunityUuid());
+						
+			String forumUuid = "";
+			
+			BaseForumTransformer transformer = new BaseForumTransformer(topic);
+			Object 	payload = transformer.transform(topic.getFieldsMap());
+			
+			Map<String, String> params = new HashMap<String, String>();
+			params.put("communityUuid", community.getCommunityUuid());
+			
+			Map<String, String> headers = new HashMap<String, String>();
+			headers.put("Content-Type", "application/atom+xml");
+			
+			//String url = resolveUrl(ForumType.TOPICS,null,params);
+			//result = createData(url, null, headers,payload);
+			//topic = (ForumTopic) new TopicsFeedHandler(this).createEntity(result);
+
+		} catch (Exception e) {
+			throw new ForumServiceException(e, "error creating forum");
+		}
+
+        return topic;
+	}
+    
     
     protected void fail(String message, CommunityServiceException cse) {
     	String failure = message;

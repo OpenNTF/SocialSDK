@@ -437,6 +437,10 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
         getUrlParams: function() {
         	return { authType : this.getAuthType() };
         },
+        /**
+         * Empty context root map, can be overridden by subclasses of Grid. Represents Connections context roots.
+         */
+        contextRootMap: {},
         
         /**
          * Construct a url using the specified parameters 
@@ -455,7 +459,7 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
             if(endpoint){
                 lang.mixin(this.contextRootMap, endpoint.serviceMappings);
                 
-                if(this.contextRootMap && !util.isEmptyObject(this.contextRootMap)){
+                if(this.contextRootMap){
                     url = stringUtil.transform(url, this.contextRootMap, function(value, key){
                         if(!value){
                             return key;

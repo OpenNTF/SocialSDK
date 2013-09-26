@@ -32,7 +32,8 @@ public enum SearchType {
 	APPLICATIONS("search/facets/source"),
 	MYAPPLICATIONS("mysearch/facets/source"),
 	DATE("search/facets/date"),
-	MYDATE("mysearch/facets/date");
+	MYDATE("mysearch/facets/date"),
+	SCOPE("scopes");
 	
 	String searchType;
 	

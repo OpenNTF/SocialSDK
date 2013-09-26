@@ -20,59 +20,52 @@ import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 
-/**
- * Result model object
- * 
- * @author Manish Kataria 
- */
-
-
-public class Result extends BaseEntity{
+public class Scope extends BaseEntity{
+	
+	/**
+	 * Scope model object
+	 * 
+	 * @author Manish Kataria 
+	 */
 	
 	/**
 	 * Constructor
 	 *  
-	 * @param SearchService
+	 * @param Scope
 	 * @param ResultId
 	 */
-	public Result(SearchService searchService, String id) {
+	public Scope(SearchService searchService, String id) {
 		setService(searchService);
 		setAsString(SearchXPath.uid, id);
 	}
-
-	public Result(BaseService svc, DataHandler<?> handler) {
+	
+	public Scope(BaseService svc, DataHandler<?> handler) {
 		super(svc,handler);
 	}
 	
 	public String getId(){
-		return(getAsString(SearchXPath.uid));
+		String id = getAsString(SearchXPath.uid);
+		return id;
 	}
 	
 	public String getTitle(){
-		return(getAsString(SearchXPath.title));
-	}
-	
-	public String getTags(){
-		return(getAsString(SearchXPath.tags));
+		String id = getAsString(SearchXPath.title);
+		return id;
 	}
 	
 	public String getSummary(){
-		return(getAsString(SearchXPath.summary));
-	}
-	
-	public String getScore(){
-		return(getAsString(SearchXPath.score));
-	}
-	
-	public String getRank(){
-		return(getAsString(SearchXPath.rank));
+		String id = getAsString(SearchXPath.summary);
+		return id;
 	}
 	
 	public String getUpdated(){
-		return(getAsString(SearchXPath.updated));
+		String id = getAsString(SearchXPath.updated);
+		return id;
 	}
 	
-	public String getApplication(){
-		return(getAsString(SearchXPath.application));
+	public String getLink(){
+		String id = getAsString(SearchXPath.searchLink);
+		return id;
 	}
+
 }

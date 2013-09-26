@@ -1,0 +1,1 @@
+<snx:assignedto xmlns:snx="http://www.ibm.com/xmlns/prod/sn" name="${assignedToName}" userid="${assignedToId}"/>

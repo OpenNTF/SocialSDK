@@ -50,7 +50,9 @@ public class ConnectionsConstants {
             	uri = "http://www.w3.org/2007/app";
             } else if(prefix.equals("relevance")){
             	uri = "http://a9.com/-/opensearch/extensions/relevance/1.0/";
-            }else {
+            } else if (prefix.equals("ibmsc")){
+            	uri = "http://www.ibm.com/search/content/2010";
+            } else {
 				uri = null;
 			}
 			return uri;

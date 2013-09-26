@@ -7,7 +7,7 @@ require([ "sbt/config", "sbt/dom" ],
 	        handleAs : "text",
 	        query : {
 	        	query : "Test",
-	        	scope : "profiles",
+        		pageSize : "0",
 	        	facet : "{\"id\": \"Person\"}"
 	        }
 	    };

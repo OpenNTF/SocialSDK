@@ -14,8 +14,6 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<%@page import="com.ibm.sbt.services.client.connections.search.FacetValueList"%>
-<%@page import="com.ibm.sbt.services.client.connections.search.FacetValue"%>
 <%@page import="com.ibm.sbt.services.client.connections.search.Result"%>
 <%@page import="com.ibm.sbt.services.client.connections.search.ResultList"%>
 <%@page import="com.ibm.sbt.services.client.connections.search.SearchService"%>
@@ -32,35 +30,35 @@
 <head>
 <title>SBT JAVA Sample - Search</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" type="text/css" title="Style" href="/sbt.bootstrap211/bootstrap/css/bootstrap.css"></link>
-<link rel="stylesheet" type="text/css" title="Style" href="/sbt.bootstrap211/bootstrap/css/bootstrap-responsive.css"></link>
 </head>
 
 <body>
-	<h4>Search : Get People</h4>
-	
+	<h4>Search : Get Results By Tag</h4>
 	<div id="content">
-	<table class="table table-bordered" id="communityTable">
-		<tr class="label label-info">
-			<th>Name</th>
-			<th>Id</th>
-		</tr>
 	<%
 		try {
 			SearchService svc = new SearchService();
-			FacetValueList facetValues = svc.getPeople("test");
-			if(facetValues.size()<=0){
-				out.println("<tr><td colspan='2'>No People found</td><tr>");
+			ResultList results = svc.getResultsByTag("dubh");
+			if(results.size()<=0){
+				out.println("No results found");
 			}			
-			for (FacetValue facetValue : facetValues) {
-					out.println("<tr><td>"+facetValue.getLabel()+"</td><td>"+facetValue.getId()+"</td></tr>");
+			out.println("<br>");
+			for (Result result : results) {
+					out.println("<b>getTitle : </b> " + result.getTitle());
+					out.println("<b>getId : </b> " + result.getId());
+					out.println("<b>getTags : </b> " + result.getTags());
+					out.println("<b>getSummary : </b> " + result.getSummary());
+					out.println("<b>getScore : </b> " + result.getScore());
+					out.println("<b>getRank : </b> " + result.getRank());
+					out.println("<b>getUpdated : </b> " + result.getUpdated());
+					out.println("<b>getApplication : </b> " + result.getApplication());
+					out.println("<br>");
 			}
 		} catch (Throwable e) {
 			out.println("<pre>");
 			out.println("Problem occurred while executing search query: " + e.getMessage());
 		}
 	%>
-	</table>
 	</div>
 </body>
 </html>

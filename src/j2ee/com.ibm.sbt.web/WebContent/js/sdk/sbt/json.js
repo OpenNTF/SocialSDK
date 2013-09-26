@@ -99,10 +99,15 @@ define(['./_bridge/json', './_bridge/lang', './log', './stringUtil'], function(j
             var seen = [];
             var self = this;
             return jsonImpl.stringify(jsonObj, function(key, val) {
+                if(self._isDomNode(val)){
+                    return {};
+                }
                 if (lang.isObject(val)) {
                     if (seen.indexOf(val) >= 0 && !self._isBuiltin(val))
                         return undefined;
                     seen.push(val);
+                } else if(lang.isFunction(val)){
+                    return undefined;
                 }
                 return val;
             }, indent);
@@ -159,6 +164,10 @@ define(['./_bridge/json', './_bridge/lang', './log', './stringUtil'], function(j
                     (value instanceof Number) || 
                     (value instanceof Boolean) || 
                     lang.isArray(value));
+        },
+        
+        _isDomNode : function(value) {
+            return (value && value.nodeName && value.nodeType && typeof value.nodeType === "number" && typeof value.nodeName === "string");
         }
     };
 });

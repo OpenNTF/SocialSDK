@@ -61,22 +61,22 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         },
         
         /**
-         * XPath expressions to be used when reading a Blog Post Entry
+         * XPath expressions to be used when reading a Blog Post
          * 
-         * @property BlogEntryXPath
+         * @property PostXPath
          * @type Object
          * @for sbt.connections.BlogService
          */
-        BlogEntryXPath : {
+        PostXPath : {
             entry : "/a:entry",
             uid : "a:id",
-            blogid : "a:id",
+            blogEntryId : "a:id",
             title : "a:title",
             summary : "a:summary[@type='html']",
-            blogUrlAlternate : "a:link[@rel='alternate']/@href",
-            blogUrl : "a:link[@rel='self']/@href",
+            blogEntryUrlAlternate : "a:link[@rel='alternate']/@href",
+            blogEntryUrl : "a:link[@rel='self']/@href",
             replies : "a:link[@rel='replies']/@href",
-            blogUrl : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/recommendations']/@href",
+            recomendationsUrl : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/recommendations']/@href",
             content : "a:content[@type='html']",
             published : "a:published",
             updated : "a:updated",
@@ -93,6 +93,37 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
             sourceLinkAlternate : "a:source/a:link[@rel='alternate']/@href",
             sourceUpdated : "a:source/a:updated",
             sourceCategory : "a:source/a:link[@scheme='http://www.ibm.com/xmlns/prod/sn/type']/@term"
+        },
+        
+        /**
+         * XPath expressions to be used when reading a Blog Post Comment
+         * 
+         * @property CommentXPath
+         * @type Object
+         * @for sbt.connections.BlogService
+         */
+        CommentXPath : {
+            entry : "/a:entry",
+            uid : "a:id",
+            title : "a:title",
+            summary : "a:summary[@type='html']",
+            commentUrlAlternate : "a:link[@rel='alternate']/@href",
+            commentUrl : "a:link[@rel='self']/@href",
+            recomendationsUrl : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/recommendations']/@href",
+            content : "a:content[@type='html']",
+            published : "a:published",
+            updated : "a:updated",
+            authorUserid : "a:author/snx:userid",
+            authorName : "a:author/a:name",
+            authorEmail : "a:author/a:email",
+            authorState : "a:author/a:state",
+            trackbacktitle : "snx:trackbacktitle",
+            replyTo : "thr:in-reply-to/@source",
+            rankRecommendations : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/recommendations']",
+            sourceId : "a:source/a:id",
+            sourceTitle  : "a:source/a:title ",
+            sourceLink : "a:source/a:link[@rel='self']/@href",
+            sourceLinkAlternate : "a:source/a:link[@rel='alternate']/@href"
         },
 
         /**
@@ -129,7 +160,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.BlogService
          */
-        AtomBlogsAll : "/${blogs}/${blogHandle}/feed/blogs/atom",
+        AtomBlogsAll : "/${blogs}/${blogHomepageHandle}/feed/blogs/atom",
         
         /**
          * A feed of my blogs.
@@ -142,7 +173,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.BlogService
          */
-        AtomBlogsMy : "/${blogs}/${blogHandle}/api/blogs",
+        AtomBlogsMy : "/${blogs}/${blogHomepageHandle}/api/blogs",
         
         /**
          * A feed of all blogs posts.
@@ -155,7 +186,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.BlogService
          */
-        AtomEntriesAll : "/${blogs}/${blogHandle}/feed/entries/atom",
+        AtomEntriesAll : "/${blogs}/${blogHomepageHandle}/feed/entries/atom",
         
         /**
          * A feed of a blog's posts.
@@ -168,7 +199,74 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.BlogService
          */
-        AtomBlogEnties : "/${blogs}/${blogHandle}/feed/entries/atom"
+        AtomBlogEnties : "/${blogs}/${blogHandle}/feed/entries/atom",
+        	
+        /**
+         * A feed of a blog's comments.
+         *  
+         * Get the Blog Comments feed to see a list of comments from a blog post
+         * 
+         * Supports: page, ps, sortBy, sortOrder, search, since
+         * 
+         * @property AtomBlogComments
+         * @type String
+         * @for sbt.connections.BlogService
+         */
+        AtomBlogComments : "/${blogs}/${blogHandle}/feed/comments/atom",
 
+        /**
+         * A feed of a blog's comments.
+         *  
+         * Get the Blog Comments feed to see a list of comments from all blog post
+         * 
+         * Supports: page, ps, sortBy, sortOrder, search, since
+         * 
+         * @property AtomBlogCommentsAll
+         * @type String
+         * @for sbt.connections.BlogService
+         */
+        AtomBlogCommentsAll : "/${blogs}/${blogHomepageHandle}/feed/comments/atom",
+        
+        /**
+         * A feed of featured blogs.
+         *  
+         * Get the featured blogs feed to find the blogs that have had the most activity across
+         * all of the blogs hosted by the Blogs application in the past two weeks. 
+         * 
+         * Supports: page, ps, sortBy, sortOrder, search, since
+         * 
+         * @property AtomBlogsFeatured
+         * @type String
+         * @for sbt.connections.BlogService
+         */
+        AtomBlogsFeatured : "/${blogs}/${blogHomepageHandle}/feed/featuredblogs/atom",
+        	
+        /**
+         * A feed of featured blogs posts.
+         *  
+         * Get the featured posts feed to find the blog posts that have had the most activity across 
+         * all of the blogs hosted by the Blogs application within the past two weeks
+         * 
+         * Supports: page, ps, sortBy, sortOrder, search, since
+         * 
+         * @property AtomBlogsPostsFeatured
+         * @type String
+         * @for sbt.connections.BlogService
+         */
+        AtomBlogsPostsFeatured : "/${blogs}/${blogHomepageHandle}/feed/featured/atom",
+        
+        /**
+         * A feed of featured blogs posts.
+         *  
+         * Get a feed that includes all of the recommended blog posts 
+         * in all of the blogs hosted by the Blogs application. 
+         * 
+         * Supports: page, ps, sortBy, sortOrder, search, since
+         * 
+         * @property AtomBlogsPostsRecommended
+         * @type String
+         * @for sbt.connections.BlogService
+         */
+        AtomBlogsPostsRecommended : "/blogs/homepage/feed/recommended/atom"
     }, conn);
 });

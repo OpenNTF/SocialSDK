@@ -45,44 +45,34 @@ public class Result extends BaseEntity{
 	}
 	
 	public String getId(){
-		String id = getAsString(SearchXPath.uid);
-		return id;
+		return(getAsString(SearchXPath.uid));
 	}
 	
 	public String getTitle(){
-		String id = getAsString(SearchXPath.title);
-		return id;
+		return(getAsString(SearchXPath.title));
 	}
 	
 	public String getTags(){
-		String id = getAsString(SearchXPath.tags);
-		return id;
+		return(getAsString(SearchXPath.tags));
 	}
 	
 	public String getSummary(){
-		String id = getAsString(SearchXPath.summary);
-		return id;
+		return(getAsString(SearchXPath.summary));
 	}
 	
-	
 	public String getScore(){
-		String id = getAsString(SearchXPath.score);
-		return id;
+		return(getAsString(SearchXPath.score));
 	}
 	
 	public String getRank(){
-		String id = getAsString(SearchXPath.rank);
-		return id;
+		return(getAsString(SearchXPath.rank));
 	}
 	
 	public String getUpdated(){
-		String id = getAsString(SearchXPath.updated);
-		return id;
+		return(getAsString(SearchXPath.updated));
 	}
 	
 	public String getApplication(){
-		String id = getAsString(SearchXPath.application);
-		return id;
+		return(getAsString(SearchXPath.application));
 	}
-
 }

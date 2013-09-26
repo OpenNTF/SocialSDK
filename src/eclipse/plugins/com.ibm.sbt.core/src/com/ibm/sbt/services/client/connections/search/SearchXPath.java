@@ -45,7 +45,8 @@ public enum SearchXPath implements FieldEntry{
     objectRefDisplayName("ibmsc:field[@id='FIELD_OBJECT_REF_DISPLAY_NAME']"),
     objectRefUrl("ibmsc:field[@id='FIELD_OBJECT_REF_URL']"),
     accessControl("a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/accesscontrolled']/@term"),
-    commentsSummary("ibmsc:field[@id='commentsSummary']");
+    commentsSummary("ibmsc:field[@id='commentsSummary']"),
+    searchLink("./link");
 
 
 	private final XPathExpression path;

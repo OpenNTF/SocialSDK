@@ -46,7 +46,7 @@ public class DeleteProfile extends BaseProfilesTest {
     /* (non-Javadoc)
      * @see com.ibm.sbt.automation.core.test.BaseTest#getProperty(java.lang.String)
      */
-    @Override
+    /*@Override
     public String getProperty(String name) {
         if (TestEnvironment.PROP_BASIC_USERNAME.equals(name)) {
             return "admin";
@@ -55,6 +55,6 @@ public class DeleteProfile extends BaseProfilesTest {
             return "passw0rd";
         }
         return super.getProperty(name);
-    }
+    }*/
     
 }

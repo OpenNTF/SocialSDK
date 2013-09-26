@@ -47,7 +47,7 @@ public class BaseServiceValidation extends BaseApiTest {
                     Assert.assertEquals("pass", json.getString(property));
                 } else {
                     JsonJavaObject promise = json.getJsonObject(property);
-                    Assert.assertTrue(promise.getBoolean("_rejected"));
+                    Assert.assertTrue(promise.getBoolean("_isRejected"));
                 }
             }
         }

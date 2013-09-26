@@ -20,10 +20,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.ibm.sbt.test.js.connections.search.rest.ApplicationSearch;
-import com.ibm.sbt.test.js.connections.search.rest.DateSearch;
-import com.ibm.sbt.test.js.connections.search.rest.MyApplicationSearch;
-import com.ibm.sbt.test.js.connections.search.rest.MyDateSearch;
 import com.ibm.sbt.test.js.connections.search.rest.MyPeopleSearch;
 import com.ibm.sbt.test.js.connections.search.rest.MySearch;
 import com.ibm.sbt.test.js.connections.search.rest.MyTagSearch;
@@ -38,9 +34,7 @@ import com.ibm.sbt.test.js.connections.search.rest.TagSearch;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ Search.class, MySearch.class, PeopleSearch.class,
-		MyPeopleSearch.class, TagSearch.class, MyTagSearch.class,
-		ApplicationSearch.class, MyApplicationSearch.class, DateSearch.class,
-		MyDateSearch.class })
+		MyPeopleSearch.class, TagSearch.class, MyTagSearch.class })
 public class SearchRestTestSuite {
 	@AfterClass
 	public static void cleanup() {

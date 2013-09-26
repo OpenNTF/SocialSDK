@@ -11,14 +11,14 @@ import org.openqa.selenium.WebElement;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.connections.BaseFilesTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
+import com.ibm.sbt.services.client.connections.files.File;
 import com.ibm.sbt.services.client.connections.files.FileServiceException;
-import com.ibm.sbt.services.client.connections.files.model.FileEntry;
 
 public class GetMyFolders extends BaseFilesTest {
 
 	static final String SNIPPET_ID = "Social_Files_API_GetMyFolders";
 
-	private List<FileEntry> folders;
+	private List<File> folders;
 
 	@Before
 	public void init() {
@@ -48,7 +48,7 @@ public class GetMyFolders extends BaseFilesTest {
 	}
 
 	private boolean existsFolderWithLabel(String label) {
-		for (FileEntry entry : folders) {
+		for (File entry : folders) {
 			if (label == null) {
 				if (entry.getLabel() == null)
 					return true;

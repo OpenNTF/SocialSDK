@@ -315,16 +315,27 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
          */
         getColleagues : function(args){
         	return this.service.getColleagues(this, args);
+        },
+        /**
+         * Get colleague connections of the profile.
+         * 
+         * @method getColleagueConnections
+         * @param {Object} [args] Object representing various query parameters
+         *            that can be passed. The parameters must be exactly as they are
+         *            supported by IBM Connections.
+         */
+        getColleagueConnections : function(args){
+        	return this.service.getColleagueConnections(this, args);
         }
     });
     
     /**
-     * ConnectionEntry class.
+     * ColleagueConnection class.
      * 
      * @class ConnectionEntry
      * @namespace sbt.connections
      */
-    var ConnectionEntry = declare(BaseEntity, {
+    var ColleagueConnection = declare(BaseEntity, {
 
         /**
          * 
@@ -577,9 +588,9 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
     };
     
     /**
-     * Callbacks used when reading a feed that contains ConnectionEntries
+     * Callbacks used when reading a feed that contains ColleagueConnections
      */
-    var ConnectionEntriesFeedCallbacks = {
+    var ColleagueConnectionFeedCallbacks = {
         createEntities : function(service,data,response) {
             return new XmlDataHandler({
                 data : data,
@@ -592,9 +603,9 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
             entryHandler = new XmlDataHandler({
                 data : data,
                 namespaces : consts.Namespaces,
-                xpath : consts.ConnectionEntryXPath
+                xpath : consts.ColleagueConnectionXPath
             });
-            return new ConnectionEntry({
+            return new ColleagueConnection({
                 service : service,
                 id : entryHandler.getEntityId(),
                 dataHandler : entryHandler
@@ -785,15 +796,15 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
         },
         
         /**
-         * Get the colleagues for the specified profile as ConnectionEntries
+         * Get the colleagues for the specified profile as Collegue Connection entries
          * 
-         * @method getColleaguesConnectionEntry
+         * @method getColleagueConnections
          * @param {String} id userId/email of the profile
          * @param {Object} args Object representing various query parameters
          *            that can be passed. The parameters must be exactly as they are
          *            supported by IBM Connections.
          */
-        getColleaguesConnectionEntry : function(id, args) {
+        getColleagueConnections : function(id, args) {
             // detect a bad request by validating required arguments
             var idObject = this._toIdObject(id);
             var promise = this._validateIdObject(idObject);
@@ -811,7 +822,7 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
                 query : requestArgs
             };
             var url = this.constructUrl(consts.AtomConnectionsDo, {}, {authType : this._getProfileAuthString()});
-            return this.getEntities(url, options, this.getConnectionEntryFeedCallbacks(), args);
+            return this.getEntities(url, options, this.getColleagueConnectionFeedCallbacks(), args);
         },
         
         /**
@@ -958,10 +969,10 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
         },
         
         /*
-         * Return callbacks for a connectionEntry feed
+         * Return callbacks for a ColleagueConnection feed
          */
-        getConnectionEntryFeedCallbacks : function() {
-            return ConnectionEntriesFeedCallbacks;
+        getColleagueConnectionFeedCallbacks : function() {
+            return ColleagueConnectionFeedCallbacks;
         },
 
         /*

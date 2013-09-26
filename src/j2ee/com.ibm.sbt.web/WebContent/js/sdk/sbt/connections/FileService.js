@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+  * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -22,7 +22,25 @@
 
 define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstants", "../base/BaseService", "../base/BaseEntity", "../base/XmlDataHandler", "../config", "../util", "../xml"], 
 		function(declare, lang, stringUtil, Promise, consts, BaseService, BaseEntity, XmlDataHandler, config, util, xml) {
-
+	
+	var FolderTmpl = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns=\"http://www.w3.org/2005/Atom\">${getCategory}${getId}${getFolderLabel}${getTitle}${getSummary}${getVisibility}${getVisibilityShare}</entry>";
+	var FolderLabelTmpl = "<label xmlns=\"urn:ibm.com/td\" makeUnique=\"true\">${label}</label>";
+	var FileVisibilityShareTmpl = "<sharedWith xmlns=\"urn:ibm.com/td\"> <member xmlns=\"http://www.ibm.com/xmlns/prod/composite-applications/v1.0\" ca:type=\"${shareWithWhat}\" xmlns:ca=\"http://www.ibm.com/xmlns/prod/composite-applications/v1.0\" ca:id=\"${shareWithId}\" ca:role=\"${shareWithRole}\"/> </sharedWith>";
+	var FileFeedTmpl = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><feed xmlns=\"http://www.w3.org/2005/Atom\">${getEntries}</feed>";
+	var FileEntryTmpl = "<entry xmlns=\"http://www.w3.org/2005/Atom\">${getCategory}${getId}${getUuid}${getLabel}${getTitle}${getSummary}${getVisibility}${getItem}</entry>";
+	var FileItemEntryTmpl = "<entry>${getCategory}${getItem}</entry>";
+	var FileCommentsTmpl = "<entry xmlns=\"http://www.w3.org/2005/Atom\">${getCategory}${getDeleteComment}${getContent}</entry>";
+	var FileCategoryTmpl = "<category term=\"${category}\" label=\"${category}\" scheme=\"tag:ibm.com,2006:td/type\"/>";
+	var FileContentTmpl = "<content type=\"text/plain\">${content}</content>";
+	var FileDeleteCommentTmpl = "<deleteWithRecord xmlns=\"urn:ibm.com/td\">${deleteWithRecord}</deleteWithRecord>";
+	var FileIdTmpl = "<id>${id}</id>";	
+	var FileUuidTmpl = "<uuid xmlns=\"urn:ibm.com/td\">${uuid}</uuid>";
+	var FileLabelTmpl = "<label xmlns=\"urn:ibm.com/td\">${label}</label>";
+	var FileTitleTmpl = "<title>${title}</title>";
+	var FileSummaryTmpl = "<summary type=\"text\">${summary}</summary>";
+	var FileVisibilityTmpl = "<visibility xmlns=\"urn:ibm.com/td\">${visibility}</visibility>";
+	var FileItemIdTmpl = "<itemId xmlns=\"urn:ibm.com/td\">${fileId}</itemId>";
+	
 	/**
 	 * Comment class associated with a file comment.
 	 * 
@@ -33,14 +51,16 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 
 		/**
 		 * Returned the Comment Id
-		 * @method getId
+		 * 
+		 * @method getCommentId
 		 * @rturns {String} File Id
 		 */
-		getId : function() {
+		getCommentId : function() {
 			return this.id || this.getAsString("uid");
 		},
 		/**
 		 * Returns Comment Title
+		 * 
 		 * @method getTitle
 		 * @returns {String} title
 		 */
@@ -49,6 +69,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns the Comment Content
+		 * 
 		 * @method getContent
 		 * @returns {String} content
 		 */
@@ -57,6 +78,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns The create Date
+		 * 
 		 * @method getCreated
 		 * @returns {Date} create Date
 		 */
@@ -65,6 +87,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns The modified Date
+		 * 
 		 * @method getModified
 		 * @returns {Date} modified Date
 		 */
@@ -73,6 +96,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns the version label
+		 * 
 		 * @method getVersionLabel
 		 * @returns {String} version label
 		 */
@@ -81,6 +105,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns the updated Date
+		 * 
 		 * @method getModified
 		 * @returns {Date} modified Date
 		 */
@@ -89,6 +114,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns the published Date
+		 * 
 		 * @method getPublished
 		 * @returns {Date} modified Date
 		 */
@@ -97,6 +123,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns the modifier
+		 * 
 		 * @method getModifier
 		 * @returns {Object} modifier
 		 */
@@ -105,6 +132,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns the author
+		 * 
 		 * @method getAuthor
 		 * @returns {Object} author
 		 */
@@ -113,6 +141,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns the language
+		 * 
 		 * @method getLanguage
 		 * @returns {String} language
 		 */
@@ -121,6 +150,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns the flag for delete with record
+		 * 
 		 * @method getDeleteWithRecord
 		 * @returns {Boolean} delete with record
 		 */
@@ -139,14 +169,16 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 
 		/**
 		 * Returns the file Id
-		 * @method getId
+		 * 
+		 * @method getFileId
 		 * @returns {String} file Id
 		 */
-		getId : function() {
+		getFileId : function() {
 			return this.id || this._fields.id || this.getAsString("uid");
 		},
 		/**
 		 * Returns the label
+		 * 
 		 * @method getLabel
 		 * @returns {String} label
 		 */
@@ -155,6 +187,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns the self URL
+		 * 
 		 * @method getSelfUrl
 		 * @returns {String} self URL
 		 */
@@ -163,6 +196,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns the alternate URL
+		 * 
 		 * @method getAlternateUrl
 		 * @returns {String} alternate URL
 		 */
@@ -171,15 +205,17 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns the download URL
+		 * 
 		 * @method getDownloadUrl
 		 * @returns {String} download URL
 		 */
 		getDownloadUrl : function() {
-			return config.Properties.serviceUrl + "/files/" + this.service.endpoint.proxyPath + "/" + "connections" + "/" + this.getId() + "/" + this.getLibraryId();
+			return config.Properties.serviceUrl + "/files/" + this.service.endpoint.proxyPath + "/" + "connections" + "/" + this.getFileId() + "/" + this.getLibraryId();
 			;
 		},
 		/**
 		 * Returns the type
+		 * 
 		 * @method getType
 		 * @returns {String} type
 		 */
@@ -187,15 +223,26 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 			return this.getAsString("type");
 		},
 		/**
-		 * Returns the length
-		 * @method getLength
+		 * Returns the Category
+		 * 
+		 * @method getCategory
+		 * @returns {String} category
+		 */
+		getCategory : function() {
+			return this.getAsString("category");
+		},
+		/**
+		 * Returns the size
+		 * 
+		 * @method getSize
 		 * @returns {Number} length
 		 */
-		getLength : function() {
+		getSize : function() {
 			return this.getAsNumber("length");
 		},
 		/**
 		 * Returns the Edit Link
+		 * 
 		 * @method getEditLink
 		 * @returns {String} edit link
 		 */
@@ -204,6 +251,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns the Edit Media Link
+		 * 
 		 * @method getEditMediaLink
 		 * @returns {String} edit media link
 		 */
@@ -212,6 +260,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns the Thumbnail URL
+		 * 
 		 * @method getThumbnailUrl
 		 * @returns {String} thumbnail URL
 		 */
@@ -220,6 +269,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns the Comments URL
+		 * 
 		 * @method getCommentsUrl
 		 * @returns {String} comments URL
 		 */
@@ -228,6 +278,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns the author
+		 * 
 		 * @method getAuthor
 		 * @returns {Object} author
 		 */
@@ -236,6 +287,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns the Title
+		 * 
 		 * @method getTitle
 		 * @returns {String} title
 		 */
@@ -244,6 +296,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns the published date
+		 * 
 		 * @method getPublished
 		 * @returns {Date} published date
 		 */
@@ -252,6 +305,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns the updated date
+		 * 
 		 * @method getUpdated
 		 * @returns {Date} updated date
 		 */
@@ -260,6 +314,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns the created date
+		 * 
 		 * @method getCreated
 		 * @returns {Date} created date
 		 */
@@ -268,6 +323,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns the modified date
+		 * 
 		 * @method getModified
 		 * @returns {Date} modified date
 		 */
@@ -276,6 +332,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns the last accessed date
+		 * 
 		 * @method getLastAccessed
 		 * @returns {Date} last accessed date
 		 */
@@ -284,6 +341,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns the modifier
+		 * 
 		 * @method getModifier
 		 * @returns {Object} modifier
 		 */
@@ -292,6 +350,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns the visibility
+		 * 
 		 * @method getVisibility
 		 * @returns {String} visibility
 		 */
@@ -300,6 +359,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns the library Id
+		 * 
 		 * @method getLibraryId
 		 * @returns {String} library Id
 		 */
@@ -308,6 +368,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns the library Type
+		 * 
 		 * @method getLibraryType
 		 * @returns {String} library Type
 		 */
@@ -316,6 +377,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns the version Id
+		 * 
 		 * @method getVersionUuid
 		 * @returns {String} version Id
 		 */
@@ -324,6 +386,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns the version label
+		 * 
 		 * @method getVersionLabel
 		 * @returns {String} version label
 		 */
@@ -332,6 +395,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns the propagation
+		 * 
 		 * @method getPropagation
 		 * @returns {String} propagation
 		 */
@@ -340,6 +404,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns the recommendations Count
+		 * 
 		 * @method getRecommendationsCount
 		 * @returns {Number} recommendations Count
 		 */
@@ -348,6 +413,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns the comments Count
+		 * 
 		 * @method getCommentsCount
 		 * @returns {Number} comments Count
 		 */
@@ -356,6 +422,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns the shares Count
+		 * 
 		 * @method getSharesCount
 		 * @returns {Number} shares Count
 		 */
@@ -364,6 +431,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns the folders Count
+		 * 
 		 * @method getFoldersCount
 		 * @returns {Number} folders Count
 		 */
@@ -372,6 +440,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns the attachments Count
+		 * 
 		 * @method getAttachmentsCount
 		 * @returns {Number} attachments Count
 		 */
@@ -380,6 +449,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns the versions Count
+		 * 
 		 * @method getVersionsCount
 		 * @returns {Number} versions Count
 		 */
@@ -388,6 +458,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns the references Count
+		 * 
 		 * @method getReferencesCount
 		 * @returns {Number} references Count
 		 */
@@ -396,6 +467,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns the total Media Size
+		 * 
 		 * @method getTotalMediaSize
 		 * @returns {Number} total Media Size
 		 */
@@ -404,6 +476,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns the Summary
+		 * 
 		 * @method getSummary
 		 * @returns {String} Summary
 		 */
@@ -412,6 +485,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns the Content URL
+		 * 
 		 * @method getContentUrl
 		 * @returns {String} Content URL
 		 */
@@ -420,6 +494,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns the Content Type
+		 * 
 		 * @method getContentType
 		 * @returns {String} Content Type
 		 */
@@ -428,6 +503,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns the objectTypeId
+		 * 
 		 * @method getObjectTypeId
 		 * @returns {String} objectTypeId
 		 */
@@ -436,14 +512,16 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns the lock state
-		 * @method getLock
+		 * 
+		 * @method getLockType
 		 * @returns {String} lock state
 		 */
-		getLock : function() {
+		getLockType : function() {
 			return this.getAsString("lock");
 		},
 		/**
 		 * Returns the permission ACLs
+		 * 
 		 * @method getAcls
 		 * @returns {String} ACLs
 		 */
@@ -452,6 +530,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns the hit count
+		 * 
 		 * @method getHitCount
 		 * @returns {Number} hit count
 		 */
@@ -460,6 +539,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns the anonymous hit count
+		 * 
 		 * @method getAnonymousHitCount
 		 * @returns {Number} anonymous hit count
 		 */
@@ -468,6 +548,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Returns the tags
+		 * 
 		 * @method getTags
 		 * @returns {String} tags
 		 */
@@ -476,38 +557,49 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 		/**
 		 * Sets the label
+		 * 
 		 * @method setLabel
-		 * @param {String} label
+		 * @param {String}
+		 *            label
 		 */
 		setLabel : function(label) {
 			return this.setAsString("label", label);
 		},
 		/**
 		 * Sets the summary
+		 * 
 		 * @method setSummary
-		 * @param {String} summary
+		 * @param {String}
+		 *            summary
 		 */
 		setSummary : function(summary) {
 			return this.setAsString("summary", summary);
 		},
 		/**
 		 * Sets the visibility
+		 * 
 		 * @method setVisibility
-		 * @param {String} visibility
+		 * @param {String}
+		 *            visibility
 		 */
 		setVisibility : function(visibility) {
 			return this.setAsString("visibility", visibility);
 		},
 		/**
-		 * Loads the file object with the atom entry associated with the file. By default, a network call is made to load the atom entry document in the file object.
+		 * Loads the file object with the atom entry associated with the file.
+		 * By default, a network call is made to load the atom entry document in
+		 * the file object.
 		 * 
 		 * @method load
-		 * @param {Object} [args] Argument object
-		 * @param {Boolean} [isPublic] Optinal flag to indicate whether to load public file which does not require authentication
+		 * @param {Object}
+		 *            [args] Argument object
+		 * @param {Boolean}
+		 *            [isPublic] Optinal flag to indicate whether to load public
+		 *            file which does not require authentication
 		 */
 		load : function(args, isPublic) {
 			// detect a bad request by validating required arguments
-			var fileUuid = this.getId();
+			var fileUuid = this.getFileId();
 			var promise = this.service.validateField("fileId", fileUuid);
 			if (promise) {
 				return promise;
@@ -529,7 +621,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 				fileUuid : fileUuid
 			}, args || {});
 			var options = {
-				//handleAs : "text",
+				// handleAs : "text",
 				query : requestArgs
 			};
 
@@ -548,10 +640,11 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		 * Save this file
 		 * 
 		 * @method save
-		 * @param {Object} [args] Argument object
+		 * @param {Object}
+		 *            [args] Argument object
 		 */
 		save : function(args) {
-			if (this.getId()) {
+			if (this.getFileId()) {
 				return this.service.updateFileMetadata(this, args);
 			}
 		},
@@ -559,68 +652,87 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		 * Adds a comment to the file.
 		 * 
 		 * @method addComment
-		 * @param {String} comment the comment to be added
-		 * @param {Object} [args] Argument object. Object representing various parameters that can be passed. The parameters must be exactly as they are supported by IBM Connections like ps, sortBy
-		 * etc.
+		 * @param {String}
+		 *            comment the comment to be added
+		 * @param {Object}
+		 *            [args] Argument object. Object representing various
+		 *            parameters that can be passed. The parameters must be
+		 *            exactly as they are supported by IBM Connections like ps,
+		 *            sortBy etc.
 		 */
 		addComment : function(comment, args) {
-			return this.service.addCommentToFile(this.getAuthor().authorUserId, this.getId(), comment, args);
+			return this.service.addCommentToFile(this.getAuthor().authorUserId, this.getFileId(), comment, args);
 		},
 		/**
 		 * Pin th file, by sending a POST request to the myfavorites feed.
+		 * 
 		 * @method pin
-		 * @param {Object} [args] Argument object.
+		 * @param {Object}
+		 *            [args] Argument object.
 		 */
 		pin : function(args) {
-			return this.service.pinFile(this.getId(), args);
+			return this.service.pinFile(this.getFileId(), args);
 		},
 		/**
 		 * Unpin the file, by sending a DELETE request to the myfavorites feed.
+		 * 
 		 * @method unPin
-		 * @param {Object} [args] Argument object.
+		 * @param {Object}
+		 *            [args] Argument object.
 		 */
 		unpin : function(args) {
-			return this.service.unpinFile(this.getId(), args);
+			return this.service.unpinFile(this.getFileId(), args);
 		},
 		/**
 		 * Lock the file
+		 * 
 		 * @method lock
-		 * @param {Object} [args] Argument object
+		 * @param {Object}
+		 *            [args] Argument object
 		 */
 		lock : function(args) {
-			return this.service.lockFile(this.getId(), args);
+			return this.service.lockFile(this.getFileId(), args);
 		},
 		/**
 		 * UnLock the file
+		 * 
 		 * @method unlock
-		 * @param {Object} [args] Argument object
+		 * @param {Object}
+		 *            [args] Argument object
 		 */
 		unlock : function(args) {
-			return this.service.unlockFile(this.getId(), args);
+			return this.service.unlockFile(this.getFileId(), args);
 		},
 		/**
 		 * Deletes the file.
+		 * 
 		 * @method remove
-		 * @param {Object} [args] Argument object
+		 * @param {Object}
+		 *            [args] Argument object
 		 */
 		remove : function(args) {
-			return this.service.deleteFile(this.getId(), args);
+			return this.service.deleteFile(this.getFileId(), args);
 		},
 		/**
 		 * Update the Atom document representation of the metadata for the file
+		 * 
 		 * @method update
-		 * @param {Object} [args] Argument object. Object representing various parameters that can be passed. The parameters must be exactly as they are supported by IBM Connections like ps, sortBy
-		 * etc.
+		 * @param {Object}
+		 *            [args] Argument object. Object representing various
+		 *            parameters that can be passed. The parameters must be
+		 *            exactly as they are supported by IBM Connections like ps,
+		 *            sortBy etc.
 		 */
 		update : function(args) {
 			return this.service.updateFileMetadata(this, args);
 		},
 		/**
 		 * Downloads the file
+		 * 
 		 * @method download
 		 */
 		download : function() {
-			return this.service.downloadFile(this.getId(), this.getLibraryId());
+			return this.service.downloadFile(this.getFileId(), this.getLibraryId());
 		}
 
 	});
@@ -722,6 +834,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 
 		/**
 		 * Return the default endpoint name if client did not specify one.
+		 * 
 		 * @returns {String}
 		 */
 		getDefaultEndpointName : function() {
@@ -736,15 +849,19 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		},
 
 		/**
-		 * Callbacks used when reading a feed that contains File Comment entries.
+		 * Callbacks used when reading a feed that contains File Comment
+		 * entries.
 		 */
 		getCommentFeedCallbacks : function() {
 			return CommentCallbacks;
 		},
 
 		/**
-		 * Returns a File instance from File or JSON or String. Throws an error if the argument was neither.
-		 * @param {Object} fileOrJsonOrString The file Object or json String for File
+		 * Returns a File instance from File or JSON or String. Throws an error
+		 * if the argument was neither.
+		 * 
+		 * @param {Object}
+		 *            fileOrJsonOrString The file Object or json String for File
 		 */
 		newFile : function(fileOrJsonOrString) {
 			if (fileOrJsonOrString instanceof File) {
@@ -764,9 +881,12 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 
 		/**
 		 * Loads File with the ID passed
+		 * 
 		 * @method getFile
-		 * @param {String} FileId the Id of the file to be loaded
-		 * @param {Object} [args] Argument object
+		 * @param {String}
+		 *            FileId the Id of the file to be loaded
+		 * @param {Object}
+		 *            [args] Argument object
 		 */
 		getFile : function(fileId, args) {
 			var file = this.newFile({
@@ -780,8 +900,11 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		 * Get my files from IBM Connections
 		 * 
 		 * @method getMyFiles
-		 * @param {Object} [args] Argument object. Object representing various parameters that can be passed. The parameters must be exactly as they are supported by IBM Connections like ps, sortBy
-		 * etc.
+		 * @param {Object}
+		 *            [args] Argument object. Object representing various
+		 *            parameters that can be passed. The parameters must be
+		 *            exactly as they are supported by IBM Connections like ps,
+		 *            sortBy etc.
 		 */
 		getMyFiles : function(args) {
 			var options = {
@@ -796,8 +919,11 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		 * Get files shared with logged in user from IBM Connections
 		 * 
 		 * @method getFilesSharedWithMe
-		 * @param {Object} [args] Argument object. Object representing various parameters that can be passed. The parameters must be exactly as they are supported by IBM Connections like ps, sortBy
-		 * etc.
+		 * @param {Object}
+		 *            [args] Argument object. Object representing various
+		 *            parameters that can be passed. The parameters must be
+		 *            exactly as they are supported by IBM Connections like ps,
+		 *            sortBy etc.
 		 */
 		getFilesSharedWithMe : function(args) {
 
@@ -816,8 +942,11 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		 * Get files shared by the logged in user from IBM Connections
 		 * 
 		 * @method getFilesSharedByMe
-		 * @param {Object} [args] Argument object. Object representing various parameters that can be passed. The parameters must be exactly as they are supported by IBM Connections like ps, sortBy
-		 * etc.
+		 * @param {Object}
+		 *            [args] Argument object. Object representing various
+		 *            parameters that can be passed. The parameters must be
+		 *            exactly as they are supported by IBM Connections like ps,
+		 *            sortBy etc.
 		 */
 		getFilesSharedByMe : function(args) {
 
@@ -836,8 +965,11 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		 * Get public files from IBM Connections
 		 * 
 		 * @method getPublicFiles
-		 * @param {Object} [args] Argument object. Object representing various parameters that can be passed. The parameters must be exactly as they are supported by IBM Connections like ps, sortBy
-		 * etc.
+		 * @param {Object}
+		 *            [args] Argument object. Object representing various
+		 *            parameters that can be passed. The parameters must be
+		 *            exactly as they are supported by IBM Connections like ps,
+		 *            sortBy etc.
 		 */
 		getPublicFiles : function(args) {
 			var options = {
@@ -853,8 +985,11 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		 * Get my folders from IBM Connections
 		 * 
 		 * @method getMyFolders
-		 * @param {Object} [args] Argument object. Object representing various parameters that can be passed. The parameters must be exactly as they are supported by IBM Connections like ps, sortBy
-		 * etc.
+		 * @param {Object}
+		 *            [args] Argument object. Object representing various
+		 *            parameters that can be passed. The parameters must be
+		 *            exactly as they are supported by IBM Connections like ps,
+		 *            sortBy etc.
 		 */
 		getMyFolders : function(args) {
 			var options = {
@@ -866,72 +1001,51 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 			return this.getEntities(consts.AtomFoldersMy, options, this.getFileFeedCallbacks());
 		},
 		/**
-		 * A feed of comments associated with files to which you have access. You must authenticate this request.
+		 * A feed of comments associated with files to which you have access.
+		 * You must authenticate this request.
 		 * 
 		 * @method getMyFolders
-		 * @param {Object} [args] Argument object. Object representing various parameters that can be passed. The parameters must be exactly as they are supported by IBM Connections like ps, sortBy
-		 * etc.
+		 * @param {Object}
+		 *            [args] Argument object. Object representing various
+		 *            parameters that can be passed. The parameters must be
+		 *            exactly as they are supported by IBM Connections like ps,
+		 *            sortBy etc.
 		 */
 		getMyFileComments : function(userId, fileId, args) {
 
-			var promise = this.validateField("fileId", fileId);
-			if (!promise) {
-				promise = this.validateField("userId", userId);
-			}
-			if (promise) {
-				return promise;
-			}
-			var options = {
-				method : "GET",
-				handleAs : "text",
-				query : args || {}
-			};
-
-			var url = this.constructUrl(consts.AtomFileCommentsMy, null, {
-				userid : userId,
-				documentId : fileId
-			});
-			return this.getEntities(url, options, this.getCommentFeedCallbacks());
+			return this.getFileComments(fileId, userId, false, null, args);
 		},
 		/**
-		 * A feed of comments associated with all public files. Do not authenticate this request.
+		 * A feed of comments associated with all public files. Do not
+		 * authenticate this request.
 		 * 
 		 * @method getPublicFileComments
-		 * @param {Object} [args] Argument object. Object representing various parameters that can be passed. The parameters must be exactly as they are supported by IBM Connections like ps, sortBy
-		 * etc.
+		 * @param {Object}
+		 *            [args] Argument object. Object representing various
+		 *            parameters that can be passed. The parameters must be
+		 *            exactly as they are supported by IBM Connections like ps,
+		 *            sortBy etc.
 		 */
 		getPublicFileComments : function(userId, fileId, args) {
-
-			var promise = this.validateField("fileId", fileId);
-			if (!promise) {
-				promise = this.validateField("userId", userId);
-			}
-			if (promise) {
-				return promise;
-			}
-
-			var options = {
-				method : "GET",
-				handleAs : "text",
-				query : args || {}
-			};
-
-			var url = this.constructUrl(consts.AtomFileCommentsPublic, null, {
-				userid : userId,
-				documentId : fileId
-			});
-			return this.getEntities(url, options, this.getCommentFeedCallbacks());
+			
+			return this.getFileComments(fileId, userId, true, null, args);
 		},
 
 		/**
 		 * Adds a comment to the specified file.
 		 * 
 		 * @method addCommentToFile
-		 * @param {String} [userId] the userId for the author
-		 * @param {String} fileId the ID of the file
-		 * @param {String} comment the comment to be added
-		 * @param {Object} [args] Argument object. Object representing various parameters that can be passed. The parameters must be exactly as they are supported by IBM Connections like ps, sortBy
-		 * etc.
+		 * @param {String}
+		 *            [userId] the userId for the author
+		 * @param {String}
+		 *            fileId the ID of the file
+		 * @param {String}
+		 *            comment the comment to be added
+		 * @param {Object}
+		 *            [args] Argument object. Object representing various
+		 *            parameters that can be passed. The parameters must be
+		 *            exactly as they are supported by IBM Connections like ps,
+		 *            sortBy etc.
 		 */
 		addCommentToFile : function(userId, fileId, comment, args) {
 			var promise = this.validateField("fileId", fileId);
@@ -955,7 +1069,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 				});
 			} else {
 				url = this.constructUrl(consts.AtomAddCommentToFile, null, {
-					userid : userId,
+					userId : userId,
 					documentId : fileId
 				});
 			}
@@ -966,21 +1080,33 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		 * Adds a comment to the specified file of logged in user.
 		 * 
 		 * @method addCommentToMyFile
-		 * @param {String} fileId the ID of the file
-		 * @param {String} comment the comment to be added
-		 * @param {Object} [args] Argument object. Object representing various parameters that can be passed. The parameters must be exactly as they are supported by IBM Connections like ps, sortBy
-		 * etc.
+		 * @param {String}
+		 *            fileId the ID of the file
+		 * @param {String}
+		 *            comment the comment to be added
+		 * @param {Object}
+		 *            [args] Argument object. Object representing various
+		 *            parameters that can be passed. The parameters must be
+		 *            exactly as they are supported by IBM Connections like ps,
+		 *            sortBy etc.
 		 */
 		addCommentToMyFile : function(fileId, comment, args) {
 			return this.addCommentToFile(null, fileId, comment, args);
 		},
 
 		/**
-		 * Update the Atom document representation of the metadata for a file from logged in user's library.
+		 * Update the Atom document representation of the metadata for a file
+		 * from logged in user's library.
+		 * 
 		 * @method updateFileMetadata
-		 * @param {Object} fileOrJson file or json representing the file to be updated
-		 * @param {Object} [args] Argument object. Object representing various parameters that can be passed. The parameters must be exactly as they are supported by IBM Connections like ps, sortBy
-		 * etc.
+		 * @param {Object}
+		 *            fileOrJson file or json representing the file to be
+		 *            updated
+		 * @param {Object}
+		 *            [args] Argument object. Object representing various
+		 *            parameters that can be passed. The parameters must be
+		 *            exactly as they are supported by IBM Connections like ps,
+		 *            sortBy etc.
 		 */
 		updateFileMetadata : function(fileOrJson, args) {
 
@@ -994,20 +1120,23 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 				method : "PUT",
 				query : args || {},
 				headers : consts.AtomXmlHeaders,
-				data : this._constructPayload(file._fields, file.getId())
+				data : this._constructPayload(file._fields, file.getFileId())
 			};
 
 			var url = this.constructUrl(consts.AtomUpdateFileMetadata, null, {
-				documentId : file.getId()
+				documentId : file.getFileId()
 			});
 			return this.updateEntity(url, options, this.getFileFeedCallbacks());
 		},
 
 		/**
 		 * Pin a file, by sending a POST request to the myfavorites feed.
+		 * 
 		 * @method pinFile
-		 * @param {String} fileId ID of file which needs to be pinned
-		 * @param {Object} [args] Argument object.
+		 * @param {String}
+		 *            fileId ID of file which needs to be pinned
+		 * @param {Object}
+		 *            [args] Argument object.
 		 */
 		pinFile : function(fileId, args) {
 
@@ -1038,9 +1167,12 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 
 		/**
 		 * Unpin a file, by sending a DELETE request to the myfavorites feed.
+		 * 
 		 * @method unpinFile
-		 * @param {String} fileId ID of file which needs to be unpinned
-		 * @param {Object} [args] Argument object.
+		 * @param {String}
+		 *            fileId ID of file which needs to be unpinned
+		 * @param {Object}
+		 *            [args] Argument object.
 		 */
 		unpinFile : function(fileId, args) {
 			var promise = this.validateField("fileId", fileId);
@@ -1066,13 +1198,17 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 		/**
 		 * Add a file or files to a folder.
 		 * 
-		 * You cannot add a file from your local directory to a folder; the file must already have been uploaded to the Files application. To add a file to a folder you must be an editor of the
-		 * folder.
+		 * You cannot add a file from your local directory to a folder; the file
+		 * must already have been uploaded to the Files application. To add a
+		 * file to a folder you must be an editor of the folder.
 		 * 
 		 * @method addFilesToFolder
-		 * @param {String} folderId the Id of the folder
-		 * @param {List} fileIds list of file Ids to be added to the folder
-		 * @param {Object} [args] Argument object.
+		 * @param {String}
+		 *            folderId the Id of the folder
+		 * @param {List}
+		 *            fileIds list of file Ids to be added to the folder
+		 * @param {Object}
+		 *            [args] Argument object.
 		 */
 		addFilesToFolder : function(fileIds, folderId, args) {
 
@@ -1109,10 +1245,13 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 
 		/**
 		 * Gets the files pinned by the logged in user.
-		 * @method getMyPinnedFiles
-		 * @param {Object} [args] Argument object for the additional parameters like pageSize etc.
+		 * 
+		 * @method getPinnedFiles
+		 * @param {Object}
+		 *            [args] Argument object for the additional parameters like
+		 *            pageSize etc.
 		 */
-		getMyPinnedFiles : function(args) {
+		getPinnedFiles : function(args) {
 
 			var options = {
 				method : "GET",
@@ -1125,9 +1264,12 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 
 		/**
 		 * Delete a file.
+		 * 
 		 * @method deleteFile
-		 * @param {String} fileId Id of the file which needs to be deleted
-		 * @param {Object} [args] Argument object
+		 * @param {String}
+		 *            fileId Id of the file which needs to be deleted
+		 * @param {Object}
+		 *            [args] Argument object
 		 */
 		deleteFile : function(fileId, args) {
 
@@ -1151,9 +1293,12 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 
 		/**
 		 * Lock a file
+		 * 
 		 * @method lockFile
-		 * @param {String} fileId Id of the file which needs to be locked
-		 * @param {Object} [args] Argument object
+		 * @param {String}
+		 *            fileId Id of the file which needs to be locked
+		 * @param {Object}
+		 *            [args] Argument object
 		 */
 		lockFile : function(fileId, args) {
 			var parameters = args ? lang.mixin({}, args) : {};
@@ -1181,9 +1326,12 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 
 		/**
 		 * unlock a file
+		 * 
 		 * @method lockFile
-		 * @param {String} fileId Id of the file which needs to be unlocked
-		 * @param {Object} [args] Argument object
+		 * @param {String}
+		 *            fileId Id of the file which needs to be unlocked
+		 * @param {Object}
+		 *            [args] Argument object
 		 */
 		unlockFile : function(fileId, args) {
 			var parameters = args ? lang.mixin({}, args) : {};
@@ -1211,9 +1359,12 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 
 		/**
 		 * Uploads a new file for logged in user.
+		 * 
 		 * @method uploadFile
-		 * @param {Object} fileControlOrId The Id of html control or the html control
-		 * @param {Object} [args] The additional parameters for upload
+		 * @param {Object}
+		 *            fileControlOrId The Id of html control or the html control
+		 * @param {Object}
+		 *            [args] The additional parameters for upload
 		 */
 		uploadFile : function(fileControlOrId, args) {
 
@@ -1221,7 +1372,7 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 			if (promise) {
 				return promise;
 			}
-			promose = this.validateHTML5FileSupport();
+			promise = this.validateHTML5FileSupport();
 			if(promise){
 				return promise;
 			}			
@@ -1246,10 +1397,14 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 
 		/**
 		 * Uploads a new file for logged in user.
+		 * 
 		 * @method uploadFile
-		 * @param {Object} binaryContent The binary content of the file
-		 * @param {String} filename The name of the file
-		 * @param {Object} [args] The additional parameters for upload
+		 * @param {Object}
+		 *            binaryContent The binary content of the file
+		 * @param {String}
+		 *            filename The name of the file
+		 * @param {Object}
+		 *            [args] The additional parameters for upload
 		 */
 		uploadFileBinary : function(binaryContent, fileName, args) {
 
@@ -1264,12 +1419,14 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 			if(util.getJavaScriptLibrary().indexOf("Dojo 1.4.3") != -1) {
 				return this.createBadRequestPromise("Dojo 1.4.3 is not supported for File Upload");
 			}
-			// /files/<<endpointName>>/<<serviceType>>/fileName eg. /files/smartcloud/connections/fileName?args
+			// /files/<<endpointName>>/<<serviceType>>/fileName eg.
+			// /files/smartcloud/connections/fileName?args
 			var url = this.constructUrl(config.Properties.serviceUrl + "/files/" + this.endpoint.proxyPath + "/" + "connections" + "/" + encodeURIComponent(fileName),
 					args && args.parameters ? args.parameters : {});
 			var headers = {
 				"Content-Type" : false,
-				"Process-Data" : false, // processData = false is reaquired by jquery 
+				"Process-Data" : false, // processData = false is reaquired by
+										// jquery
 			};			
 			var options = {
 				method : "POST",
@@ -1283,48 +1440,1145 @@ define([ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstant
 
 		/**
 		 * Downloads a file.
+		 * 
 		 * @method downloadFile
-		 * @param {String} fileId The ID of the file
-		 * @param {String} libraryId The library ID of the file
+		 * @param {String}
+		 *            fileId The ID of the file
+		 * @param {String}
+		 *            libraryId The library ID of the file
 		 */
 		downloadFile : function(fileId, libraryId) {
 			var url = config.Properties.serviceUrl + "/files/" + this.endpoint.proxyPath + "/" + "connections" + "/" + fileId + "/" + libraryId;
 			window.open(url);
 		},
 
-		_constructPayloadForComment : function(isDelete, comment) {
-			var payload = "<entry xmlns=\"http://www.w3.org/2005/Atom\">";
-			payload += "<category term=\"comment\" label=\"comment\" scheme=\"tag:ibm.com,2006:td/type\"/>";
-
-			if (isDelete == true)
-				payload += "<deleteWithRecord xmlns=\"" + consts.Namespaces.td + "\">false</deleteWithRecord>";
-			else
-				payload += "<content type=\"text/plain\">" + xml.encodeXmlEntry(comment) + "</content>";
-			payload += "</entry>";
-			return payload;
+		actOnCommentAwaitingApproval : function(commentId, action, actionReason){
+			
 		},
+		actOnFileAwaitingApproval : function(fileId, action, actionReason) {
+			
+		},
+		/**
+		 * Add a file to a folder or list of folders.
+		 * 
+		 * You cannot add a file from your local directory to a folder; the file
+		 * must already have been uploaded to the Files application. To add a
+		 * file to a folder you must be an editor of the folder.
+		 * 
+		 * @method addFilesToFolder
+		 * @param {String}
+		 *            fileId the Id of the file
+		 * @param {List}
+		 *            folderIds list of folder Ids
+		 * @param {String}
+		 *            [userId] the userId of the user in case of own file
+		 * @param {Object}
+		 *            [args] Argument object.
+		 */
+		addFileToFolders : function(fileId, folderIds, userId, args) {
+			var promise = this.validateField("fileId", fileId);
+			if (!promise) {
+				promise = this.validateField("folderIds", folderIds);
+			}
+			if (promise) {
+				return promise;
+			}
+			
+			var url = null;
 
-		_constructPayload : function(payloadMap, documentId) {
-			var payload = "<entry xmlns=\"http://www.w3.org/2005/Atom\"><category term=\"document\" label=\"document\" scheme=\"tag:ibm.com,2006:td/type\"></category>";
-			payload += "<id>urn:lsid:ibm.com:td:" + xml.encodeXmlEntry(documentId) + "</id>";
-			if (payloadMap) {
-				for (key in payloadMap) {
-					var value = payloadMap[key];
-					if (key == "label") {
-						payload += "<label xmlns=\"" + consts.Namespaces.td + "\">" + xml.encodeXmlEntry(value) + "</label>";
-						payload += "<title>" + xml.encodeXmlEntry(value) + "</title>";
-					} else if (key == "summary") {
-						payload += "<summary type=\"text\">" + xml.encodeXmlEntry(value) + "</summary>";
-					} else if (key == "visibility") {
-						payload += "<visibility xmlns=\"" + consts.Namespaces.td + "\">" + xml.encodeXmlEntry(value) + "</visibility>";
-					}
+			if (!userId) {
+				url = this.constructUrl(consts.AtomAddMyFileToFolders, null, {
+					documentId : fileId
+				});
+			} else {
+				url = this.constructUrl(consts.AtomAddFileToFolders, null, {
+					userId : userId,
+					documentId : fileId
+				});
+			}			 
+
+		     var payload = this._constructPayloadForMultipleEntries(folderIds,
+		                "itemId", "collection");
+		     
+		     var options = {
+						method : "POST",
+						headers : consts.AtomXmlHeaders,
+						data : payload
+					};
+
+			var callbacks = {
+				createEntity : function(service, data, response) {				
 				}
+			};
+
+			return this.updateEntity(url, options, callbacks);
+		},
+		
+		 /**
+			 * Create a new Folder
+			 * 
+			 * @method createFolder
+			 *         <p>
+			 *         Rest API used : /files/basic/api/collections/feed
+			 * 
+			 * @param {String}
+			 *            name name of the folder to be created
+			 * @param {String}
+			 *            [description] description of the folder
+			 * @param {String}
+			 *            [shareWith] If the folder needs to be shared, specify
+			 *            the details in this parameter. <br>
+			 *            Pass Coma separated List of id,
+			 *            (person/community/group) or
+			 *            role(reader/Contributor/owner) in order
+			 * @return {Object} Folder
+			 */
+		createFolder : function(name, description, shareWith){	
+			var promise = this.validateField("folderName", name);			
+			if (promise) {
+				return promise;
+			}
+		    var url =  consts.AtomCreateFolder;		    				           
+		    var payload = this._constructPayloadFolder(name, description, shareWith, "create");
+				   
+	     
+		     var options = {
+						method : "POST",
+						headers : lang.mixin(consts.AtomXmlHeaders, {"X-Update-Nonce" : "{X-Update-Nonce}"}),
+						data : payload
+					};			
+	
+			return this.updateEntity(url, options, this.getFileFeedCallbacks());
+
+       },
+       
+       /**
+		 * Delete Files From Recycle Bin
+		 * 
+		 * @param {String}
+		 *            userId The ID of user
+		 */
+       deleteAllFilesFromRecycleBin : function(userId){ 
+    	   
+    	   var url = null;
+
+			if (!userId) {
+				url = consts.AtomDeleteMyFilesFromRecyclebBin;
+			} else {
+				url = this.constructUrl(consts.AtomDeleteAllFilesFromRecyclebBin, null, {
+					userId : userId,					
+				});
+			}		
+			var options = {
+				method : "DELETE"
+			};			
+			return this.deleteEntity(url, options, "");
+       },
+       
+       /**
+		 * Delete all Versions of a File before the given version
+		 * 
+		 * @param {String}
+		 *            fileId the ID of the file
+		 * @param {String}
+		 *            [versionLabel] The version from which all will be deleted
+		 * @param {Object}
+		 *            [args] additional arguments
+		 */
+       deleteAllVersionsOfFile : function(fileId, versionLabel, args){
+    	   
+    	   var promise = this.validateField("fileId", fileId);
+			if (!promise) {
+				promise = this.validateField("versionLabel", versionLabel);
+			}
+			if (promise) {
+				return promise;
+			}
+			
+			var requestArgs = lang.mixin({
+				category: "version",
+				deleteFrom : versionLabel
+			}, args || {});
+			
+			var options = {
+					method : "DELETE",
+					query : requestArgs,
+					headers : {
+						"X-Update-Nonce" : "{X-Update-Nonce}"
+					}
+				};
+				var url = this.constructUrl(consts.AtomDeleteAllVersionsOfAFile, null, {
+					documentId : fileId
+				});
+
+				return this.deleteEntity(url, options, fileId);
+       },
+       
+       /**
+		 * Delete a Comment for a file
+		 * 
+		 * @param {String}
+		 *            fileId the ID of the file
+		 * @param {String}
+		 *            commentId the ID of comment
+		 * @param {String}
+		 *            [userId] the ID of the user, if not provided logged in
+		 *            user is assumed
+		 * @param {Object}
+		 *            [args] the additional arguments
+		 */       
+       deleteComment : function(fileId, commentId, userId, args){
+    	   var promise = this.validateField("fileId", fileId);
+			if (!promise) {
+				promise = this.validateField("commentId", commentId);
+			}
+			if (promise) {
+				return promise;
+			}
+			
+			var url = null;
+			
+			if(userId){
+				url = this.constructUrl(consts.AtomDeleteComment, null, {
+					userId : userId,
+					documentId : fileId,
+					commentId : commentId
+				});
+			}
+			else {
+				url = this.constructUrl(consts.AtomDeleteMyComment, null, {				
+					documentId : fileId,
+					commentId : commentId
+				});
+			}
+			
+			var options = {
+					method : "DELETE",
+					query : args || {},
+					headers : {
+						"X-Update-Nonce" : "{X-Update-Nonce}"
+					}
+				};
+				
+
+			return this.deleteEntity(url, options, commentId);
+       },
+       
+       /**
+        * Delete File from RecycleBin of a user
+        * @param {String} fileId the Id of the file
+        * @param {String} [userId] the Id of the user
+        * @param {Object} args the additional arguments
+        * @returns
+        */
+       deleteFileFromRecycleBin : function(fileId, userId, args){
+    	   var promise = this.validateField("fileId", fileId);			
+			if (promise) {
+				return promise;
+			}
+			
+			var url = null;
+			
+			if(userId){
+				url = this.constructUrl(consts.AtomDeleteFileFromRecycleBin, null, {
+					userId : userId,
+					documentId : fileId,					
+				});
+			}
+			else {
+				url = this.constructUrl(consts.AtomDeleteMyFileFromRecycleBin, null, {				
+					documentId : fileId					
+				});
+			}
+			
+			var options = {
+					method : "DELETE",
+					query : args || {},
+					headers : {
+						"X-Update-Nonce" : "{X-Update-Nonce}"
+					}
+				};
+				
+			return this.deleteEntity(url, options, fileId);
+       },
+       
+       /**
+        * deletes a File Share
+        * @param {String} fileId the ID of the file
+        * @param {String} userId the ID of the user
+        * @param {Object} args the additional arguments
+        */
+       deleteFileShare : function(fileId, userId, args){
+    	   var promise = this.validateField("fileId", fileId);			
+			if (promise) {
+				return promise;
+			}
+			
+			var requestArgs = lang.mixin({
+				sharedWhat: fileId
+			}, args || {});
+			
+			if(userId){
+				requestArgs.sharedWith = userId;
+			}
+			
+			var url = consts.AtomDeleteFileShare;
+						
+			
+			var options = {
+					method : "DELETE",
+					query : requestArgs,
+					headers : {
+						"X-Update-Nonce" : "{X-Update-Nonce}"
+					}
+				};				
+
+			return this.deleteEntity(url, options, fileId);
+       },
+       
+       /**
+        * Deletes a Folder
+        * @param {String} folderId the ID of the folder
+        */
+       deleteFolder : function(folderId) {
+    	   var promise = this.validateField("folderId", folderId);
+			if (promise) {
+				return promise;
 			}
 
-			payload += "</entry>";
-			return payload;
-		}
+			var options = {
+				method : "DELETE",
+				headers : {
+					"X-Update-Nonce" : "{X-Update-Nonce}"
+				}
+			};
+			var url = this.constructUrl(consts.AtomDeleteFFolder, null, {
+				collectionId : folderId
+			});
 
+			return this.deleteEntity(url, options, folderId);
+       },
+       
+       /**
+        * Get all user Files
+        * @param {String} userId the ID of the user
+        * @param {Object} args the addtional arguments
+        * @returns {Object} Files
+        */
+       getAllUserFiles : function(userId, args){
+    	   
+    	   var promise = this.validateField("userId", userId);
+			if (promise) {
+				return promise;
+			}
+
+    	   var options = {
+   				method : "GET",
+   				handleAs : "text",
+   				query : args || {}
+   			};
+    	   
+    	   var url = this.constructUrl(consts.AtomGetAllUsersFiles, null, {
+				userId : userId
+			}); 
+
+   			return this.getEntities(url, options, this.getFileFeedCallbacks());
+       },
+       
+      /**
+       * Get file Comments
+       * @param {String} fileId the ID of the file
+       * @param {String} [userId] the ID of the user
+       * @param {Boolean} isAnnonymousAccess flag to indicate annonymous access
+       * @param {String} [commentId] the ID of the comment
+       * @param {Object} args the additional arguments
+       * @returns {Object} Comments List
+       */
+       getFileComments : function(fileId, userId, isAnnonymousAccess, commentId, args){
+    	   
+    	   var promise = this.validateField("fileId", fileId);
+			if (promise) {
+				return promise;
+			}
+    	   
+    	   var url = null;
+    	   if(commentId){
+    		   if(userId){
+    			   url = this.constructUrl(consts.AtomGetFileComment, null, {
+    					userId : userId,
+    					documentId : fileId,
+    					commentId : commentId
+    				}); 
+    		   }
+    		   else {
+    			   url = this.constructUrl(consts.AtomGetMyFileComment, null, {
+    				   	documentId : fileId,
+   						commentId : commentId
+    				}); 
+    		   }
+    	   }
+    	   else {
+    		   var promise = this.validateField("userId", userId);
+	   			if (promise) {
+	   				return promise;
+	   			}
+    		   if(isAnnonymousAccess){
+    			   url = this.constructUrl(consts.AtomFileCommentsPublic, null, {
+    					userId : userId,
+    					documentId : fileId,
+    				});  
+    		   }
+    		   else {
+    			   url = this.constructUrl(consts.AtomFileCommentsMy, null, {
+    					userId : userId,
+    					documentId : fileId,
+    				}); 
+    		   }
+    	   }
+    	   
+    	   var options = {
+   				method : "GET",
+   				handleAs : "text",
+   				query : args || {}
+   			};
+   			
+   			return this.getEntities(url, options, this.getCommentFeedCallbacks());
+       },
+       
+       /**
+        * Get Files from recycle bin
+        * @param {Object} [args] the additional arguments
+        * @returns {Object} Files
+        */
+       getFileFromRecycleBin : function(fileId, userId, args){
+    	   
+    	   var promise = this.validateField("fileId", fileId);
+  			if (promise) {
+  				return promise;
+  			}
+    	   var options = {
+   				method : "GET",
+   				handleAs : "text",
+   				query : args || {}
+   			};
+    	   var url =  this.constructUrl(consts.AtomGetFileFromRecycleBin, null, {
+				userId : userId,
+				documentId : fileId,
+			});
+    	   
+    	   var callbacks = {
+   				createEntity : function(service, data, response) {
+   					self.dataHandler = new XmlDataHandler({
+   						data : data,
+   						namespaces : consts.Namespaces,
+   						xpath : consts.FileXPath
+   					});
+   					return self;
+   				}
+   			};
+
+   			return this.getEntity(url, options, callbacks);
+       },
+       
+       /**
+        * Get Files awaiting approval
+        * @param {Object} [args] the additional arguments
+        * @returns {Object} Files
+        */
+       getFilesAwaitingApproval : function(args){
+    	   
+    	   var options = {
+   				method : "GET",
+   				handleAs : "text",
+   				query : args || {}
+   			};
+
+   			return this.getEntities(consts.AtomGetFilesAwaitingApproval, options, this.getFileFeedCallbacks());
+       },
+       
+       /**
+        * Get File Shares
+        * @param {Object} [args] the additional arguments
+        * @returns {Object} Files
+        */
+       getFileShares : function(args){
+    	   
+    	   var options = {
+      				method : "GET",
+      				handleAs : "text",
+      				query : args || {}
+      			};
+
+      		return this.getEntities(consts.AtomGetFileShares, options, this.getFileFeedCallbacks());    	   
+       },
+       
+       /**
+        * Get Files in a folder
+        * @param {String} folderId the ID of the folder
+        * @param {Object} [args] the additional arguments
+        * @returns {Object} Files
+        */
+       getFilesInFolder : function(folderId, args){
+    	   
+    	   var url =  this.constructUrl(consts.AtomGetFilesInFolder, null, {
+				collectionId : folderId				
+			});
+    	   
+    	   var options = {
+     				method : "GET",
+     				handleAs : "text",
+     				query : args || {}
+     			};
+
+     		return this.getEntities(url, options, this.getFileFeedCallbacks());    	   
+
+       },
+       
+       /**
+        * Get Files in my recycle bin
+        * @param {Object} [args] the addtional arguments
+        * @returns
+        */
+       getFilesInMyRecycleBin : function(args){
+    	   var options = {
+     				method : "GET",
+     				handleAs : "text",
+     				query : args || {}
+     			};
+
+     		return this.getEntities(consts.AtomGetFilesInMyRecycleBin, options, this.getFileFeedCallbacks());  
+       },
+       
+       /**
+        * Get a file with given version
+        * @param {String} fileId the ID of the file
+        * @param {String} versionId the ID of the version
+        * @param {Object} [args] the additional arguments
+        * @returns {Object} File 
+        */
+       getFileWithGivenVersion : function(fileId, versionId, args) {
+    	   
+    	   var promise = this.validateField("fileId", fileId);
+ 			if (promise) {
+ 				return promise;
+ 			}
+ 			if(!versionId){
+ 				return this.getFile(fileId, args);
+ 			}
+	   	   var options = {
+	  				method : "GET",
+	  				handleAs : "text",
+	  				query : args || {}
+	  			};
+	   	   var url =  this.constructUrl(consts.AtomGetFileWithGivenVersion, null, {					
+					documentId : fileId,
+					versionId : versionId
+				});
+	   	   
+	   	   var callbacks = {
+	  				createEntity : function(service, data, response) {
+	  					self.dataHandler = new XmlDataHandler({
+	  						data : data,
+	  						namespaces : consts.Namespaces,
+	  						xpath : consts.FileXPath
+	  					});
+	  					return self;
+	  				}
+	  			};
+
+  			return this.getEntity(url, options, callbacks);
+       },
+       
+       /**
+        * Get a folder
+        * @param {String} folderId the ID of the folder
+        * @returns
+        */
+       getFolder : function(folderId){
+    	   var promise = this.validateField("folderId", folderId);
+			if (promise) {
+				return promise;
+			}			
+	   	   var options = {
+	  				method : "GET",
+	  				handleAs : "text"	  				
+	  			};
+	   	   var url =  this.constructUrl(consts.AtomGetFolder, null, {					
+					collectionId : folderId					
+			});
+	   	   
+	   	   var callbacks = {
+	  				createEntity : function(service, data, response) {
+	  					self.dataHandler = new XmlDataHandler({
+	  						data : data,
+	  						namespaces : consts.Namespaces,
+	  						xpath : consts.FileXPath
+	  					});
+	  					return self;
+	  				}
+	  			};
+
+ 			return this.getEntity(url, options, callbacks);
+       },
+       
+       /**
+        * Get Folders With Recently Added Files
+        * @param {Object} [args] the additional arguents
+        * @returns {Object} List of Files
+        */
+       getFoldersWithRecentlyAddedFiles : function(args){    	       	 
+   	   
+    	   var options = {
+    				method : "GET",
+    				handleAs : "text",
+    				query : args || {}
+    			};
+
+    		return this.getEntities(consts.AtomGetFoldersWithRecentlyAddedFiles, options, this.getFileFeedCallbacks());    	   
+
+       },
+       
+       /**
+		 * Gets the folders pinned by the logged in user.
+		 * 
+		 * @method getPinnedFolders
+		 * @param {Object}
+		 *            [args] Argument object for the additional parameters like
+		 *            pageSize etc.
+		 */
+		getPinnedFolders : function(args) {
+
+			var options = {
+				method : "GET",
+				handleAs : "text",
+				query : args || {}
+			};
+
+			return this.getEntities(consts.AtomGetPinnedFolders, options, this.getFileFeedCallbacks());
+		},
+		
+		/**
+		 * Get public folders
+		 * 
+		 * @param {Object}
+		 *            [args] Additional arguments like ps, sort by, etc
+		 */
+		getPublicFolders : function(args){
+			
+			var options = {
+					method : "GET",
+					handleAs : "text",
+					query : args || {}
+				};
+
+			return this.getEntities(consts.AtomGetPublicFolders, options, this.getFileFeedCallbacks());
+		},
+		
+		/**
+		 * Pin a folder, by sending a POST request to the myfavorites feed.
+		 * 
+		 * @method pinFolder
+		 * @param {String}
+		 *            folderId ID of folder which needs to be pinned
+		 * @param {Object}
+		 *            [args] Argument object.
+		 */
+		pinFolder : function(folderId, args) {
+
+			var promise = this.validateField("folderId", folderId);
+			if (promise) {
+				return promise;
+			}
+			var parameters = args ? lang.mixin({}, args) : {};
+			parameters["itemId"] = folderId;
+
+			var options = {
+				method : "POST",
+				headers : {
+					"X-Update-Nonce" : "{X-Update-Nonce}"
+				},
+				query : parameters
+			};
+
+			var callbacks = {
+				createEntity : function(service, data, response) {					
+				}
+			};
+
+			return this.updateEntity(consts.AtomPinFolder, options, callbacks);
+
+		},
+		
+		/**
+		 * Remove a File from a Folder
+		 * 
+		 * @param {String}
+		 *            folderId the ID of the folder
+		 * @param {Stirng}
+		 *            fileId The ID of the File
+		 */
+		removeFileFromFolder : function(folderId, fileId){
+			
+			var promise = this.validateField("folderId", folderId);
+			if (promise) {
+				return promise;
+			}
+			 promise = this.validateField("fileId", fileId);
+				if (promise) {
+					return promise;
+				}
+			var parameters = args ? lang.mixin({}, args) : {};
+			parameters["itemId"] = fileId;
+			
+			var url =  this.constructUrl(consts.AtomRemoveFileFromFolder, null, {					
+				collectionId : folderId					
+			});
+			var options = {
+					method : "DELETE",
+					headers : {
+						"X-Update-Nonce" : "{X-Update-Nonce}"
+					},
+					query : parameters
+				};
+
+			return this.deleteEntity(url, options, fileId);
+			
+		},
+		
+		/**
+		 * Restore a File from Recycle Bin (trash)
+		 * 
+		 * @param {String}
+		 *            fileId the ID of the file
+		 * @param {String}
+		 *            userId the ID of the user
+		 */
+		restoreFileFromRecycleBin : function(fileId, userId){
+			
+			var promise = this.validateField("fileId", fileId);
+			if (promise) {
+				return promise;
+			}
+			promise = this.validateField("userId", userId);
+			if (promise) {
+				return promise;
+			}
+			var parameters = args ? lang.mixin({}, args) : {};
+			parameters["undelete"] = "true";
+
+			var options = {
+				method : "POST",
+				headers : {
+					"X-Update-Nonce" : "{X-Update-Nonce}"
+				},
+				query : parameters
+			};		
+			
+			 var callbacks = {
+		  				createEntity : function(service, data, response) {
+		  					self.dataHandler = new XmlDataHandler({
+		  						data : data,
+		  						namespaces : consts.Namespaces,
+		  						xpath : consts.FileXPath
+		  					});
+		  					return self;
+		  				}
+		  	};
+			 
+			 var url = this.constructUrl(consts.AtomRestoreFileFromRecycleBin, null, {					
+					userId : userId,
+					documentId : fileId
+			});
+
+
+			return this.updateEntity(url, options, callbacks);
+		},
+		
+		/**
+		 * Share a File with community(ies)
+		 * 
+		 * @param {String}
+		 *            fileId the ID of the file
+		 * @param {Object}
+		 *            communityIds The list of community IDs
+		 * @param {Object}
+		 *            args the additional arguments
+		 */
+		shareFileWithCommunities : function(fileId, communityIds, args){
+			
+			var promise = this.validateField("fileId", fileId);
+			if (!promise) {
+				promise = this.validateField("communityIds", communityIds);
+			}
+			if (promise) {
+				return promise;
+			}
+			
+			var url = this.constructUrl(consts.AtomAddMyFileToFolders, null, {
+					documentId : fileId
+			});
+				
+		     var payload = this._constructPayloadForMultipleEntries(communityIds,
+		                "itemId", "community");
+		     
+		     var options = {
+						method : "POST",
+						headers : consts.AtomXmlHeaders,
+						data : payload
+					};
+
+			var callbacks = {
+				createEntity : function(service, data, response) {				
+				}
+			};
+
+			return this.updateEntity(url, options, callbacks);
+		},
+
+		/**
+		 * Unpin a folder, by sending a DELETE request to the myfavorites feed.
+		 * 
+		 * @method unpinFolder
+		 * @param {String}
+		 *            folderId ID of folder which needs to be unpinned
+		 * @param {Object}
+		 *            [args] Argument object.
+		 */
+		unpinFolder : function(folderId, args) {
+			var promise = this.validateField("folderId", folderId);
+			if (promise) {
+				return promise;
+			}		
+			
+			var parameters = args ? lang.mixin({}, args) : {};
+			parameters["itemId"] = folderId;
+
+			var options = {
+				method : "DELETE",
+				headers : {
+					"X-Update-Nonce" : "{X-Update-Nonce}"
+				},
+				query : parameters
+			};
+
+			return this.deleteEntity(consts.AtomPinFolder, options, folderId);
+
+		},
+		
+		/**
+		 * Update comment created by logged in user
+		 * @param {String} fileId the ID of the file
+		 * @param {String}commentId the ID of the comment
+		 * @param {String} comment the updated comment
+		 * @param {Object} args the additional arguments
+		 * @returns
+		 */
+		updateMyComment : function(fileId, commentId, comment, args){
+			
+			return updateComment(fileId, commentId, comment, null, args);
+		},
+		
+		/**
+		 * updates a comment
+		 * @param {String} fileId the ID of the file
+		 * @param {String} commentId the ID of the comment
+		 * @param {String} comment the comment
+		 * @param {String} [userId] the ID of the user
+		 * @param {Object} [args] the additional arguments
+		 * @returns {Object} the updated Comment
+		 */
+		updateComment : function(fileId, commentId, comment, userId, args){
+			
+			var promise = this.validateField("fileId", fileId);
+			if (!promise) {
+				promise = this.validateField("comment", comment);
+			}
+			if (promise) {
+				return promise;
+			}
+			if (!promise) {
+				promise = this.validateField("commentId", commentId);
+			}
+			if (promise) {
+				return promise;
+			}
+			var options = {
+				method : "POST",
+				query : args || {},
+				headers : consts.AtomXmlHeaders,
+				data : this._constructPayloadForComment(false, comment)
+			};
+			var url = null;
+
+			if (!userId) {
+				url = this.constructUrl(consts.AtomUpdateMyComment, null, {
+					documentId : fileId,
+					commentId : commentId
+				});
+			} else {
+				url = this.constructUrl(consts.AtomUpdateComment, null, {
+					userId : userId,
+					documentId : fileId,
+					commentId : commentId
+				});
+			}
+			return this.updateEntity(url, options, this.getCommentFeedCallbacks());
+		},
+		
+		/**
+		 * Add a file to a folder.
+		 * 
+		 * You cannot add a file from your local directory to a folder; the file
+		 * must already have been uploaded to the Files application. To add a
+		 * file to a folder you must be an editor of the folder.
+		 * 
+		 * @method addFilesToFolder
+		 * @param {String}
+		 *            fileId the Id of the file
+		 * @param {String}
+		 *            folderId the ID of the folder
+		 * @param {String}
+		 *            [userId] the userId of the user in case of own file
+		 * @param {Object}
+		 *            [args] Argument object.
+		 */
+		addFileToFolder : function(fileId, folderId, userId, args) {
+			
+			return this.addFileToFolders(fileId, [folderId], userId, args);
+		},
+		
+		_constructPayloadFolder : function(name, description, shareWith, operation, entityId) {
+			var _this = this;
+			var shareWithId = null;
+    		var shareWithWhat = null;
+    		var shareWithRole = null;
+			if(shareWith && stringUtil.trim(shareWith) != ""){
+        		var parts = shareWith.split(",");
+        		if(parts.length == 3) {
+	        		shareWithId = parts[0];
+	        		shareWithWhat = parts[1];
+	        		shareWithRole = parts[2];
+        		}
+			}
+			var trans = function(value,key) {
+				if(key == "category"){
+					value = xml.encodeXmlEntry("collection");
+				}
+				else if(key == "id"){
+					value =  xml.encodeXmlEntry(entityId);
+				}
+				else if(key == "label"){
+					value =  xml.encodeXmlEntry(name);
+				}
+				else if(key == "title"){
+					value =  xml.encodeXmlEntry(name);
+				}
+				else if(key == "summary"){
+					value =  xml.encodeXmlEntry(description);
+				}
+				else if(key == "visibility"){
+					value =  xml.encodeXmlEntry("private");
+				}
+				else if(key == "shareWithId" && shareWithId){
+					value =  xml.encodeXmlEntry(shareWithId);
+				}
+				else if(key == "shareWithWhat" && shareWithWhat){
+					value =  xml.encodeXmlEntry(shareWithWhat);
+				}
+				else if(key == "shareWithRole" && shareWithRole){
+					value =  xml.encodeXmlEntry(shareWithRole);
+				}
+				return value;
+			};	
+			 var transformer = function(value,key) {
+	                if (key == "getCategory") {	                		        		
+	        			value = stringUtil.transform(FileCategoryTmpl, _this, trans, _this);	                   
+	                } else if (key == "getId" && entityId) {	                	
+						value = stringUtil.transform(FileIdTmpl, _this, trans, _this);				                    
+	                } else if (key == "getFolderLabel") {	                	
+						value = stringUtil.transform(FolderLabelTmpl, _this, trans, _this);							                  
+	                } else if (key == "getTitle") {	                							
+						value = stringUtil.transform(FileTitleTmpl, _this, trans, _this);	                    
+	                } else if (key == "getSummary") {	                	
+						value = stringUtil.transform(FileSummaryTmpl, _this, trans, _this);		                    
+	                } else if (key == "getVisibility") {	                	                	                	
+						value = stringUtil.transform(FileVisibilityTmpl, _this, trans, _this);
+	                } else if (key == "getVisibilityShare" && shareWithId) {	 	                	
+							value = stringUtil.transform(FileVisibilityShareTmpl, _this, trans, _this);		                			    						    			
+	                }	                
+	                return value;
+	            };
+	            var postData = stringUtil.transform(FolderTmpl, this, transformer, this);
+	            postData = this._removeExtraPlaceholders(postData);
+	            return stringUtil.trim(postData);	            
+       },
+       _constructPayloadForMultipleEntries : function(listOfIds, multipleEntryId, category) {	    
+			var payload = FileFeedTmpl;			
+			var entriesXml = "";
+			var categoryXml = "";
+			var itemXml = "";
+			var currentId = "";
+			var transformer = function(value,key) {
+				if(key == "category"){
+					value = xml.encodeXmlEntry(category);
+				}
+				else if(key == "getCategory"){
+					value = categoryXml;
+				}
+				else if(key == "fileId"){
+					value = xml.encodeXmlEntry(currentId);
+				}
+				else if(key == "getItem"){
+					value = itemXml;
+				}
+				else if(key == "getEntries"){
+					value = entriesXml;
+				}
+				return value;
+			};
+			var _this = this;
+			
+			for(var counter in listOfIds) {
+				currentId = listOfIds[counter];
+				var entryXml = FileItemEntryTmpl;
+				if(category) { 					
+					categoryXml = stringUtil.transform(FileCategoryTmpl, _this, transformer, _this);										
+				}				
+				itemXml = stringUtil.transform(FileItemIdTmpl, _this, transformer, _this);				
+				entryXml = stringUtil.transform(entryXml, _this, transformer, _this);
+				entriesXml = entriesXml + entryXml;
+			}
+			
+			if(entriesXml != ""){				
+				payload = stringUtil.transform(payload, _this, transformer, _this);
+			}
+			
+			payload = this._removeExtraPlaceholders(payload);
+			return payload;				     
+	    },
+	    _constructPayloadForComment : function(isDelete, comment) {
+			
+			var payload = FileCommentsTmpl;
+			var categoryXml = "";
+			var contentXml = "";
+			var deleteXml = "";
+			var _this = this;
+			
+			var transformer = function(value,key) {
+				if(key == "category"){
+					value = xml.encodeXmlEntry("comment");
+				}
+				else if(key == "content"){
+					value = xml.encodeXmlEntry(comment);
+				}
+				else if(key == "deleteWithRecord"){
+					value = "true";
+				}
+				else if(key == "getCategory" && categoryXml != ""){
+					value = categoryXml;
+				}
+				else if(key == "getContent" && contentXml != ""){
+					value = contentXml;
+				}
+				else if(key == "getDeleteComment" && deleteXml != ""){
+					value = deleteXml;
+				}
+				return value;
+			};
+			
+			categoryXml = stringUtil.transform(FileCategoryTmpl, _this, transformer, _this);
+			
+			contentXml = stringUtil.transform(FileContentTmpl, _this, transformer, _this);
+			if(isDelete){				
+				deleteXml = stringUtil.transform(FileDeleteCommentTmpl, _this, transformer, _this);
+			}
+					
+			payload = stringUtil.transform(payload, this, transformer, this);
+												
+			payload = this._removeExtraPlaceholders(payload);
+			return payload;
+					
+		},
+		_constructPayload : function(payloadMap, documentId) {
+			
+			var payload = FileEntryTmpl;
+			var categoryXml = "";
+			var idXml = "";
+			var uuidXml = "";
+			var labelXml = "";
+			var titleXml = "";
+			var summaryXml = "";
+			var visibilityXml = "";
+			var itemXml = "";
+			var currentValue = null;
+			var transformer = function(value,key) {
+				if(currentValue){
+					value = xml.encodeXmlEntry(currentValue);
+				}
+				else if(key == "getCategory" && categoryXml != ""){
+					value = categoryXml;
+				}
+				else if(key == "getId" && idXml != ""){
+					value = idXml;
+				}
+				else if(key == "getUuid" && uuidXml != ""){
+					value = uuidXml;
+				}
+				else if(key == "getLabel" && labelXml != ""){
+					value = labelXml;
+				}
+				else if(key == "getTitle" && titleXml != ""){
+					value = titleXml;
+				}
+				else if(key == "getSummary" && summaryXml != ""){
+					value = summaryXml;
+				}
+				else if(key == "getVisibility" && visibilityXml != ""){
+					value = visibilityXml;
+				}
+				else if(key == "getItem" && itemXml != ""){
+					value = itemXml;
+				}	
+				return value;
+			};
+			
+			for(var currentElement in payloadMap){											
+				currentValue = payloadMap[currentElement];				
+				if(currentElement.indexOf("category") != -1){					
+					categoryXml = stringUtil.transform(FileCategoryTmpl, this, transformer, this);
+				}else if(currentElement.indexOf("id") != -1){					
+					idXml = stringUtil.transform(FileIdTmpl, this, transformer, this);					
+				}else if(currentElement.indexOf("uuid") != -1){					
+					uuidXml =stringUtil.transform(FileUuidTmpl, this, transformer, this);								
+				}else if(currentElement.indexOf("label") != -1){					
+					labelXml = stringUtil.transform(FileLabelTmpl, this, transformer, this);						
+					titleXml = stringUtil.transform(FileTitleTmpl, this, transformer, this);					
+				}else if(currentElement.indexOf("summary") != -1){					
+					summaryXml = stringUtil.transform(FileSummaryTmpl, this, transformer, this);						
+				}else if(currentElement.indexOf("visibility") != -1){					
+					visibilityXml = stringUtil.transform(FileVisibilityTmpl, this, transformer, this);						
+				}else if(currentElement.contains("itemId")){					
+					itemXml += stringUtil.transform(FileItemIdTmpl, this, transformer, this);																			
+				}
+			}
+			currentValue = null;
+			
+			payload = stringUtil.transform(payload, this, transformer, this);					
+			
+			
+			payload = this._removeExtraPlaceholders(payload);
+			return payload;			
+		},
+       _removeExtraPlaceholders : function(xmlbody){
+			while(xmlbody.indexOf("${") != -1){
+				var startIndex = xmlbody.indexOf("${");
+				var endIndex = xmlbody.indexOf("}", startIndex);
+				var tempStart = xmlbody.substring(0,startIndex);
+				var tempEnd = xmlbody.substring(endIndex+1,xmlbody.length);
+				xmlbody = tempStart+tempEnd;
+			}
+			return xmlbody;
+		}
 	});
 	return FileService;
 });

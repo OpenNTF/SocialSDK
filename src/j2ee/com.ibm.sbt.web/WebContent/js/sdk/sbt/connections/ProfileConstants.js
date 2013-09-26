@@ -75,9 +75,9 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         },
         
         /**
-         * XPath expressions to be used when reading a Connection Entry
+         * XPath expressions to be used when reading a ColleagueConnection Entry
          */
-        ConnectionEntryXPath : {
+        ColleagueConnectionXPath : {
         	entry : "/a:feed/a:entry",
         	uid : "a:id",
         	id : "a:id",

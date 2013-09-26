@@ -864,6 +864,13 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             return forum.load(args);
         },
         
+        /**
+         * Retrieve a list of all forum entries, add communityUuid to the requestArgs object to get the forums related to a specific community.
+         * 
+         * @method getForums
+         * @param {Object} requestArgs Object containing the query arguments to be 
+         * sent (defined in IBM Connections Communities REST API) 
+         */
         getForums : function(requestArgs){
             var options = {
                 method : "GET",

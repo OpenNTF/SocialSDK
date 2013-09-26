@@ -1,0 +1,1 @@
+<thr:in-reply-to xmlns:thr="http://purl.org/syndication/thread/1.0" ref="${InReplyToId}" type="application/atom+xml" href="${InReplyToUrl}" source="${activityId}"/>

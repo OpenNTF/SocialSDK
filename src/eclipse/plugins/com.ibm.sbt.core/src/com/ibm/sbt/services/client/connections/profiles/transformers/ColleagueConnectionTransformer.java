@@ -21,7 +21,7 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.util.XmlTextUtil;
 import com.ibm.sbt.services.client.base.transformers.AbstractBaseTransformer;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
-import com.ibm.sbt.services.client.connections.profiles.ConnectionEntry;
+import com.ibm.sbt.services.client.connections.profiles.ColleagueConnection;
 
 
 /**
@@ -29,20 +29,20 @@ import com.ibm.sbt.services.client.connections.profiles.ConnectionEntry;
  * <p>
  * @author Swati Singh
  */
-public class ConnectionEntryTransformer  extends AbstractBaseTransformer {
+public class ColleagueConnectionTransformer  extends AbstractBaseTransformer {
 
-	private ConnectionEntry connectionEntry;
-	private String	sourcepath = "/com/ibm/sbt/services/client/connections/profiles/templates/connectionEntry/";
+	private ColleagueConnection colleagueConnection;
+	private String	sourcepath = "/com/ibm/sbt/services/client/connections/profiles/templates/ColleagueConnection/";
 	private String  inviteTmplFile = "InviteTmpl.xml"; 
 	private String status = "pending";
 
 	/*
-	 * Tranformer needs instance of ConnectionEntry 
+	 * Tranformer needs instance of ColleagueConnection 
 	 * so it can determine values which were not modified by user
 	 * hence missing in fieldsmap but required in request payload
 	 */
-	public ConnectionEntryTransformer(ConnectionEntry connectionEntry) {
-		this.connectionEntry = connectionEntry;
+	public ColleagueConnectionTransformer(ColleagueConnection colleagueConnection) {
+		this.colleagueConnection = colleagueConnection;
 	}
 	
 	public String createTransform(Map<String, Object> fieldmap)throws TransformerException{
@@ -75,15 +75,15 @@ public class ConnectionEntryTransformer  extends AbstractBaseTransformer {
 			}
 			
 			if(currentElement.equalsIgnoreCase("id")){
-				idXml = getXMLRep(getStream(sourcepath+"ConnectionEntryIdTmpl.xml"),currentElement,XmlTextUtil.escapeXMLChars(currentValue));
+				idXml = getXMLRep(getStream(sourcepath+"ColleagueConnectionIdTmpl.xml"),currentElement,XmlTextUtil.escapeXMLChars(currentValue));
 			}else if(currentElement.equalsIgnoreCase("content")){
-				contentXml = getXMLRep(getStream(sourcepath+"ConnectionEntryContentTmpl.xml"),currentElement,XmlTextUtil.escapeXMLChars(currentValue));
+				contentXml = getXMLRep(getStream(sourcepath+"ColleagueConnectionContentTmpl.xml"),currentElement,XmlTextUtil.escapeXMLChars(currentValue));
 			}else if(currentElement.equalsIgnoreCase("title")){
-				titleXml = getXMLRep(getStream(sourcepath+"ConnectionEntryTitleTmpl.xml"),currentElement,XmlTextUtil.escapeXMLChars(currentValue));
+				titleXml = getXMLRep(getStream(sourcepath+"ColleagueConnectionTitleTmpl.xml"),currentElement,XmlTextUtil.escapeXMLChars(currentValue));
 			}
 		
 		}
-		statusXml = getXMLRep(getStream(sourcepath+"ConnectionEntryCategoryStatus.xml"),"status",status);
+		statusXml = getXMLRep(getStream(sourcepath+"ColleagueConnectionCategoryStatus.xml"),"status",status);
 		xml = getXMLRep(xml, "getStatus",statusXml);
 		if(StringUtil.isNotEmpty(idXml)){
 			xml = getXMLRep(xml, "getId",idXml);

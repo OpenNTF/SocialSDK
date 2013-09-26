@@ -21,39 +21,112 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
 
     return lang.mixin(conn, {
     	
+    	ActivityNodeTypes : {
+    		Activity : "activity",
+    		Chat : "chat",
+    		Email : "email",
+    		Entry : "entry",
+    		EntryTemplate : "entrytemplate",
+    		Reply : "reply",
+    		Section : "section",
+    		ToDo : "todo"    		
+    	},
+    	
+    	ActivityNodeUrl : "/${activities}/service/atom2/activitynode?activityNodeUuid={activityNodeId}",
+    	
         /**
          * XPath expressions used when parsing a Connections Activities ATOM feed
          */
     	ActivitiesFeedXPath : conn.ConnectionsFeedXPath,
-
-        /**
-         * XPath expressions to be used when reading an activity entry
+    	
+    	PersonFieldXPath : {
+    		name : "a:name",
+    		userId : "snx:userid",
+    		email : "a:email"
+    		
+    	},
+    	
+    	FileFieldXPath : {    		
+    		url : "a:link[@rel='enclosure']/@href",
+    		type : "a:link[@rel='enclosure']/@type",
+    		size : "a:link[@rel='enclosure']/@size",
+    		length : "a:link/@length",
+    	},
+    	
+    	LinkFieldXPath : {
+    		url : "a:link/@href",
+    		title : "a:link/@title"
+    	},
+    	 
+    	TextFieldXPath : {
+    		summary : "a:summary",
+    	},    	   
+    	
+    	
+    	/**
+         * XPath expressions to be used when reading an activity Node entry
          */
-        ActivityXPath : {
-            // used by getEntityData
-            entry : "/a:entry",
-            // used by getEntityId
-            uid : "a:id",
-            // used by getters
-            id : "a:id",
-            title : "a:title",
-            updated : "a:updated",
+        ActivityNodeXPath : {   
+        	entry : "/a:entry",
+        	uid : "a:id",
+        	activityId : "snx:activity",
+        	title : "a:title",
+        	updated : "a:updated",
             published : "a:published",
-            authorUserid : "a:author/snx:userid",
-            authorName : "a:author/a:name",
-            authorEmail : "a:author/a:email",
-            contributorUserid : "a:contributor/snx:userid",
-            contributorName : "a:contributor/a:name",
-            contributorEmail : "a:contributor/a:email",
-    		content : "a:content[@type='text']",
-            tags : "a:category[not(@scheme)]/@term",
-            activity : "snx:activity",
-    		position : "snx:position",
-    		depth : "snx:depth",
-    		permissions : "snx:permissions",
-    		icon : "snx:icon",
-    		recentUpdatesUrl: "a:link[@rel='alternate']/@href",
-        },
+            categoryFlagCompleted : "a:category[@term='completed']/@label",
+            categoryFlagTemplate : "a:category[@term='template']/@label",
+            categoryFlagDelete : "a:category[@term='deleted']/@label",
+            
+            authorName : "a:author/a:name",			
+			authorUserId : "a:author/snx:userid",
+			authorEmail : "a:author/a:email",
+			authorUserState : "a:author/snx:userState",
+			authorLdapid : "a:author/snx:ldapid",
+			
+			contributorName : "a:contributor/a:name",			
+			contributorUserId : "a:contributor/snx:userid",
+			contributorEmail : "a:contributor/a:email",
+			contributorUserState : "a:contributor/snx:userState",
+			contributorLdapid : "a:contributor/snx:ldapid",
+			
+			type : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/type']/@label",
+			priority : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/priority']/@label",
+			
+			coummunityId : "snx:communityUuid",
+			communityUrl : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/container']/@href",					    	
+			
+			dueDate : "snx:duedate",
+			membersUrl : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/member-list']/@href",
+			historyUrl : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/history']/@href",
+			templatesUrl : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/templates']/@href",
+			
+			editUrl : "a:link[@rel='edit']/@href",
+			selfUrl : "a:link[@rel='self']/@href",
+			recentUpdatesUrl : "a:link[@rel='alternate']/@href",
+			
+			position : "snx:position",
+			depth : "snx:depth",
+			permissions : "snx:permissions",
+			iconUrl : "snx:icon",
+			content : "a:content",
+			tags : "a:category[not(@scheme)]/@term",
+			
+			inReplyToId : "thr:in-reply-to/@ref",
+			inReplyToUrl : "thr:in-reply-to/@href",
+			inReplyToActivity : "thr:in-reply-to/snx:activity",
+			
+			assignedToName : "snx:assignedto/@name", 
+			assignedToUserId : "snx:assignedto/@userid",
+			assignedToEmail : "snx:assignedto",
+			
+			textFields : "snx:field[@type='text']",
+			linkFields : "snx:field[@type='link']",
+			personFields : "snx:field[@type='person']",
+			dateFields : "snx:field[@type='date']",
+			fileFields : "snx:field[@type='file']"	
+					
+        },        
+        
         
 		/**
          * Search for content in all of the activities, both completed and active, that matches a specific criteria.
@@ -69,6 +142,12 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * Search for a set of completed activities that match a specific criteria.
          */
         AtomActivitiesCompleted : "${activities}/service/atom2/completed",
+        
+        AtomActivityNode :  "${activities}/service/atom2/activitynode",
+        
+        AtomActivityNodeTrash : "${activities}/service/atom2/trashednode",
+        
+        AtomCreateActivityNode : "${activities}/service/atom2/activity"
 
-    });
+    }, conn);
 });

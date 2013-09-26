@@ -17,14 +17,14 @@ require([ "sbt/connections/FileService", "sbt/dom" ], function(FileService, dom)
 			dom.setText("content", "Threre are no files in your library.");
 		} else {
 			var file = files[0];
-			fileService.getMyFileComments(file.getAuthor().authorUserId, file.getId()).then(function(comments) {
+			fileService.getMyFileComments(file.getAuthor().authorUserId, file.getFileId()).then(function(comments) {
 				if (comments.length == 0) {
 					dom.setText("content", "There are no comments for this file.");
 				} else {
 					for ( var i = 0; i < comments.length; i++) {
 						var comment = comments[i];
 						createRow(i);
-						dom.setText("id" + i, comment.getId());
+						dom.setText("id" + i, comment.getCommentId());
 						dom.setText("comment" + i, comment.getContent());
 					}
 				}

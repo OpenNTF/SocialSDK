@@ -22,7 +22,7 @@ require(["sbt/connections/FileService", "sbt/dom"],
                         var file = folders[i];
                         createRow(i);
                         dom.setText("title"+i, file.getTitle()); 
-                        dom.setText("id"+i, file.getId()); 
+                        dom.setText("id"+i, file.getFileId()); 
                     }
                 }
             },

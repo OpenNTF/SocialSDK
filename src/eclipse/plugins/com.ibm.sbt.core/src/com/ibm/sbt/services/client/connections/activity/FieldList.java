@@ -25,7 +25,6 @@ import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.base.datahandlers.FieldEntry;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
-import com.ibm.sbt.services.client.connections.activity.feedHandler.BookmarkFieldFeedHandler;
 import com.ibm.sbt.services.client.connections.activity.feedHandler.DateFieldFeedHandler;
 import com.ibm.sbt.services.client.connections.activity.feedHandler.FieldFeedHandler;
 import com.ibm.sbt.services.client.connections.activity.feedHandler.FileFieldFeedHandler;

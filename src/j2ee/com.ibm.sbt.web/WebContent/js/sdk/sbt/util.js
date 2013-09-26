@@ -24,15 +24,15 @@ define(['./lang','sbt/i18n!sbt/nls/util','./log'],function(lang, nls, log) {
 			if (args.error) {
 				try {
 					args.error(error);
-				} catch (error) {
-					log.error(nls.notifyError_catchError, error);
+				} catch (error1) {
+					log.error(nls.notifyError_catchError, error1);
 				}
 			}
 			if (args.handle) {
 				try {
 					args.handle(error);
-				} catch (error) {
-					log.error(nls.notifyError_catchError, error);
+				} catch (error2) {
+					log.error(nls.notifyError_catchError, error2);
 				}
 			}
 		} else {

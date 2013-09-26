@@ -106,8 +106,8 @@ define(["../../declare", "../../lang", "../../dom", "../../widget/_TemplatedWidg
                     } catch (ex) {
                         try {
                             value = value.apply(self, [profile]);
-                        } catch (ex) {
-                            value = "ERROR:" + key + " " + ex;
+                        } catch (ex1) {
+                            value = "ERROR:" + key + " " + ex1;
                         }
                     }
                 }

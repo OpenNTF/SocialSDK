@@ -14,8 +14,6 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<%@page import="com.ibm.sbt.services.client.connections.search.FacetValueList"%>
-<%@page import="com.ibm.sbt.services.client.connections.search.FacetValue"%>
 <%@page import="com.ibm.sbt.services.client.connections.search.Result"%>
 <%@page import="com.ibm.sbt.services.client.connections.search.ResultList"%>
 <%@page import="com.ibm.sbt.services.client.connections.search.SearchService"%>
@@ -37,23 +35,24 @@
 </head>
 
 <body>
-	<h4>Search : Get People</h4>
-	
+	<h4>Search : Community Full Text Search</h4>
 	<div id="content">
 	<table class="table table-bordered" id="communityTable">
 		<tr class="label label-info">
-			<th>Name</th>
-			<th>Id</th>
+			<th>Community Name</th>
+			<th>Community Uuid</th>
 		</tr>
 	<%
 		try {
 			SearchService svc = new SearchService();
-			FacetValueList facetValues = svc.getPeople("test");
-			if(facetValues.size()<=0){
-				out.println("<tr><td colspan='2'>No People found</td><tr>");
+			Map<String, String> requestMap = new HashMap<String, String>();
+			requestMap.put("scope", "communities");
+			ResultList results = svc.getResults("Test");
+			if(results.size()<=0){
+				out.println("<tr><td colspan='2'>No communities associated with topic: Test</td><tr>");
 			}			
-			for (FacetValue facetValue : facetValues) {
-					out.println("<tr><td>"+facetValue.getLabel()+"</td><td>"+facetValue.getId()+"</td></tr>");
+			for (Result result : results) {
+					out.println("<tr><td>"+result.getTitle()+"</td><td>"+result.getId()+"</td></tr>");
 			}
 		} catch (Throwable e) {
 			out.println("<pre>");

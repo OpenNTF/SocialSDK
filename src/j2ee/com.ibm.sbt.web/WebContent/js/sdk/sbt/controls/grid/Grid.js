@@ -93,6 +93,10 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
          */
         _regExp : new RegExp("/{2}"),
 
+        /**
+         * Empty context root map, can be overridden by subclasses of Grid. Represents Connections context roots.
+         */
+        contextRootMap: {},
         
         /**
          * Constructor method for the grid.
@@ -437,10 +441,6 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
         getUrlParams: function() {
         	return { authType : this.getAuthType() };
         },
-        /**
-         * Empty context root map, can be overridden by subclasses of Grid. Represents Connections context roots.
-         */
-        contextRootMap: {},
         
         /**
          * Construct a url using the specified parameters 
@@ -481,14 +481,13 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
             }
             if (params) {
                 for (param in params) {
-                    if (url.indexOf("?") == -1) {
-                        url += "?";
-                    } else if (url.indexOf("&") != (url.length - 1)) {
-                        url += "&";
-                    }
-                    var value = encodeURIComponent(params[param]);
-                    if (value) {
-                        url += param + "=" + value;
+                    if (params[param]) {
+                        if (url.indexOf("?") == -1) {
+                            url += "?";
+                        } else if (url.indexOf("&") != (url.length - 1)) {
+                            url += "&";
+                        }
+                        url += param + "=" + encodeURIComponent(params[param]);
                     }
                 }
             }

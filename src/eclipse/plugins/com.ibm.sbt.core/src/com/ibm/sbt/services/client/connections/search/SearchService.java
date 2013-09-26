@@ -41,14 +41,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.ibm.commons.util.StringUtil;
+import com.ibm.commons.util.io.json.JsonException;
+import com.ibm.commons.util.io.json.JsonJavaFactory;
+import com.ibm.commons.util.io.json.JsonObject;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.util.EntityUtil;
-import com.ibm.sbt.services.client.connections.forums.ForumList;
-import com.ibm.sbt.services.client.connections.forums.ForumServiceException;
-import com.ibm.sbt.services.client.connections.forums.ForumType;
-import com.ibm.sbt.services.client.connections.forums.feedhandler.ForumsFeedHandler;
+import com.ibm.sbt.services.client.connections.search.feedhandler.FacetsHandler;
 import com.ibm.sbt.services.client.connections.search.feedhandler.ScopeFeedHandler;
 import com.ibm.sbt.services.client.connections.search.feedhandler.SearchFeedHandler;
 import com.ibm.sbt.services.util.AuthUtil;
@@ -122,7 +122,42 @@ public class SearchService extends BaseService {
 		return searchResults;
 		
 	}
+
+	/**
+     * Search IBM Connections for public information, tagged with the specified tags.
+     * 
+	 * @param tag
+	 * @return
+	 * @throws SearchServiceException
+	 */
+    public ResultList getResultsByTag(String tag) throws SearchServiceException {
+    	return getResultsByTag(new String[]{ tag }, null);
+	}
 	
+    /**
+     * Search IBM Connections for public information, tagged with the specified tags.
+     * 
+     * @param tags
+     * @param parameters
+     * @return
+     * @throws SearchServiceException
+     */
+    public ResultList getResultsByTag(String[] tags, Map<String, String> parameters) throws SearchServiceException {
+		ResultList searchResults;
+		
+		if(parameters==null){
+			parameters= new HashMap<String,String>();
+		}
+		
+		try {
+			parameters.put("constraint", createTagConstraint(tags));		
+			String searchQry = resolveUrl(SearchType.PUBLIC);
+			searchResults = (ResultList) getEntities(searchQry, parameters, new SearchFeedHandler(this));
+		} catch (Exception e) {
+			throw new SearchServiceException(e);
+		} 
+		return searchResults;
+	}
 	
 	/**
 	 * Search IBM Connections for both public information and private
@@ -179,7 +214,7 @@ public class SearchService extends BaseService {
 	 * @param query
 	 *            Text to search for
 	 */
-	public ResultList getPeople(String query) throws SearchServiceException{
+	public FacetValueList getPeople(String query) throws SearchServiceException{
 		return getPeople(query, null);
 	}
 	
@@ -195,17 +230,20 @@ public class SearchService extends BaseService {
 	 * @return ResultList
 	 * @throws SearchServiceException
 	 */
-	public ResultList getPeople(String query,Map<String, String> parameters) throws SearchServiceException{
-		ResultList searchResults;
+	public FacetValueList getPeople(String query,Map<String, String> parameters) throws SearchServiceException{
+		FacetValueList searchResults;
 		
 		if(parameters==null){
 			parameters= new HashMap<String,String>();
 		}
 		
 		parameters.put("query", query);		
+		parameters.put("pageSize", "0");
+		parameters.put("facet", "{\"id\": \"Person\"}");
+
 		try {
-			String searchQry = resolveUrl(SearchType.PEOPLESEARCH);
-			searchResults = (ResultList) getEntities(searchQry, parameters, new SearchFeedHandler(this));
+			String searchQry = resolveUrl(SearchType.PUBLIC);
+			searchResults = (FacetValueList) getEntities(searchQry, parameters, new FacetsHandler(this, "Person"));
 		} catch (ClientServicesException e) {
 			throw new SearchServiceException(e);
 		} catch (IOException e) {
@@ -248,10 +286,13 @@ public class SearchService extends BaseService {
 			parameters= new HashMap<String,String>();
 		}
 		
-		parameters.put("query", query);		
+		parameters.put("query", query);	
+		parameters.put("pageSize", "0");
+		parameters.put("facet", "{\"id\": \"Person\"}");
+		
 		try {
-			String searchQry = resolveUrl(SearchType.MYPEOPLESEARCH);
-			searchResults = (ResultList) getEntities(searchQry, parameters, new SearchFeedHandler(this));
+			String searchQry = resolveUrl(SearchType.MY);
+			searchResults = (ResultList) getEntities(searchQry, parameters, new FacetsHandler(this, "Person"));
 		} catch (ClientServicesException e) {
 			throw new SearchServiceException(e);
 		} catch (IOException e) {
@@ -260,297 +301,6 @@ public class SearchService extends BaseService {
 		return searchResults;
 		
 	}
-	
-	/**
-	 * Search IBM Connection for public information, and then return the
-	 * tags associated with the results.
-	 * 
-	 * @param query
-	 *            Text to search for
-	 * @return ResultList
-	 * @throws SearchServiceException            
-	 */
-	public ResultList getTags(String query) throws SearchServiceException{
-		return getTags(query, null);
-	}
-	
-	
-    /**
-     * Search IBM Connection for public information, and then 
-     * return the tags associated with the results.
-     * 
-     * @param query Text to search for
-     * @param requestArgs
-	 * @return ResultList
-	 * @throws SearchServiceException
-     */
-	public ResultList getTags(String query,Map<String, String> parameters) throws SearchServiceException{
-		ResultList searchResults;
-		
-		if(parameters==null){
-			parameters= new HashMap<String,String>();
-		}
-		
-		parameters.put("query", query);		
-		try {
-			String searchQry = resolveUrl(SearchType.TAGSSEARCH);
-			searchResults = (ResultList) getEntities(searchQry, parameters, new SearchFeedHandler(this));
-		} catch (ClientServicesException e) {
-			throw new SearchServiceException(e);
-		} catch (IOException e) {
-			throw new SearchServiceException(e);
-		}
-		return searchResults;
-		
-	}
-	
-	
-    /**
-     * Search IBM Connections for both public information and private 
-     * information that you have access to, and then return the tags associated 
-     * with the results. You must provide authentication information in the 
-     * request to retrieve this resource.
-	 * 
-	 * @param query
-	 *            Text to search for
-	 * @return ResultList
-	 * @throws SearchServiceException
-	 */
-	public ResultList getMyTags(String query) throws SearchServiceException{
-		return getMyTags(query, null);
-	}
-	
-	
-    /**
-     * Search IBM Connections for both public information and private 
-     * information that you have access to, and then return the tags associated 
-     * with the results. You must provide authentication information in the 
-     * request to retrieve this resource.
-	 * 
-	 * @param query
-	 *            Text to search for
-	 * @param Map
-	 *            for additional parameters
-	 * @return ResultList
-	 * @throws SearchServiceException
-	 */
-	public ResultList getMyTags(String query,Map<String, String> parameters) throws SearchServiceException{
-		ResultList searchResults;
-		
-		if(parameters==null){
-			parameters= new HashMap<String,String>();
-		}
-		
-		parameters.put("query", query);		
-		try {
-			String searchQry = resolveUrl(SearchType.MYTAGSSEARCH);
-			searchResults = (ResultList) getEntities(searchQry, parameters, new SearchFeedHandler(this));
-		} catch (ClientServicesException e) {
-			throw new SearchServiceException(e);
-		} catch (IOException e) {
-			throw new SearchServiceException(e);
-		}
-		return searchResults;
-		
-	}
-	
-	
-	/**
-	 * Search IBM Connection for public information, and then return the
-	 * applications associated with the results and identify how many results
-	 * were found per application.
-	 * 
-	 * @param query
-	 *            Text to search for
-	 * @return ResultList
-	 * @throws SearchServiceException
-	 */
-	public ResultList getApplications(String query) throws SearchServiceException{
-		return getApplications(query, null);
-	}
-	
-	
-	/**
-	 * Search IBM Connection for public information, and then return the
-	 * applications associated with the results and identify how many results
-	 * were found per application.
-	 * 
-	 * @param query
-	 *            Text to search for
-	 * @param Map
-	 *            for additional parameters
-	 * @return ResultList
-	 * @throws SearchServiceException
-	 */
-	public ResultList getApplications(String query,Map<String, String> parameters) throws SearchServiceException{
-		ResultList searchResults;
-		
-		if(parameters==null){
-			parameters= new HashMap<String,String>();
-		}
-		
-		parameters.put("query", query);		
-		try {
-			String searchQry = resolveUrl(SearchType.APPLICATIONS);
-			searchResults = (ResultList) getEntities(searchQry, parameters, new SearchFeedHandler(this));
-		} catch (ClientServicesException e) {
-			throw new SearchServiceException(e);
-		} catch (IOException e) {
-			throw new SearchServiceException(e);
-		}
-		return searchResults;
-		
-	}
-	
-	
-	
-	/**
-	 * Search IBM Connections for both public information and private
-	 * information that you have access to, and then return the applications
-	 * associated with the results and identify how many results were found per
-	 * application. You must provide authentication information in the request
-	 * to retrieve this resource.
-	 * 
-	 * @param query
-	 *            Text to search for
-	 * @return ResultList
-	 * @throws SearchServiceException
-	 */
-	public ResultList getMyApplications(String query) throws SearchServiceException{
-		return getMyApplications(query, null);
-	}
-	
-	
-	/**
-	 * Search IBM Connections for both public information and private
-	 * information that you have access to, and then return the applications
-	 * associated with the results and identify how many results were found per
-	 * application. You must provide authentication information in the request
-	 * to retrieve this resource.
-	 * 
-	 * @param query
-	 *            Text to search for
-	 * @param Map
-	 *            for additional parameters
-	 * @return ResultList
-	 * @throws SearchServiceException
-	 */
-	public ResultList getMyApplications(String query,Map<String, String> parameters) throws SearchServiceException{
-		ResultList searchResults;
-		
-		if(parameters==null){
-			parameters= new HashMap<String,String>();
-		}
-		
-		parameters.put("query", query);		
-		try {
-			String searchQry = resolveUrl(SearchType.APPLICATIONS);
-			searchResults = (ResultList) getEntities(searchQry, parameters, new SearchFeedHandler(this));
-		} catch (ClientServicesException e) {
-			throw new SearchServiceException(e);
-		} catch (IOException e) {
-			throw new SearchServiceException(e);
-		}
-		return searchResults;
-		
-	}
-	
-	
-	/**
-	 * Search IBM Connection for public information, and then return the dates
-	 * associated with the results.
-	 * 
-	 * @param query
-	 *            Text to search for
-	 * @return ResultList
-	 * @throws SearchServiceException
-	 */
-	public ResultList getDates(String query) throws SearchServiceException{
-		return getDates(query, null);
-	}
-	
-	
-	/**
-	 * Search IBM Connection for public information, and then return the dates
-	 * associated with the results.
-	 * 
-	 * @param query
-	 *            Text to search for
-	 * @param Map
-	 *            for additional parameters
-	 * @return ResultList
-	 * @throws SearchServiceException
-	 */
-	public ResultList getDates(String query,Map<String, String> parameters) throws SearchServiceException{
-		ResultList searchResults;
-		
-		if(parameters==null){
-			parameters= new HashMap<String,String>();
-		}
-		
-		parameters.put("query", query);		
-		try {
-			String searchQry = resolveUrl(SearchType.DATE);
-			searchResults = (ResultList) getEntities(searchQry, parameters, new SearchFeedHandler(this));
-		} catch (ClientServicesException e) {
-			throw new SearchServiceException(e);
-		} catch (IOException e) {
-			throw new SearchServiceException(e);
-		}
-		return searchResults;
-		
-	}
-	
-	
-	/**
-	 * Search IBM Connections for both public information and private
-	 * information that you have access to, and then return the dates associated
-	 * with the results. You must provide authentication information in the
-	 * request to retrieve this resource.
-	 * 
-	 * @param query
-	 *            Text to search for
-	 * @return ResultList
-	 * @throws SearchServiceException
-	 */
-	public ResultList getMyDates(String query) throws SearchServiceException{
-		return getMyDates(query, null);
-	}
-	
-	
-	/**
-	 * Search IBM Connections for both public information and private
-	 * information that you have access to, and then return the dates associated
-	 * with the results. You must provide authentication information in the
-	 * request to retrieve this resource.
-	 * 
-	 * @param query
-	 *            Text to search for
-	 * @param Map
-	 *            for additional parameters
-	 * @return ResultList
-	 * @throws SearchServiceException
-	 */
-	public ResultList getMyDates(String query,Map<String, String> parameters) throws SearchServiceException{
-		ResultList searchResults;
-		
-		if(parameters==null){
-			parameters= new HashMap<String,String>();
-		}
-		
-		parameters.put("query", query);		
-		try {
-			String searchQry = resolveUrl(SearchType.MYDATE);
-			searchResults = (ResultList) getEntities(searchQry, parameters, new SearchFeedHandler(this));
-		} catch (ClientServicesException e) {
-			throw new SearchServiceException(e);
-		} catch (IOException e) {
-			throw new SearchServiceException(e);
-		}
-		return searchResults;
-		
-	}
-	
 	
 	/**
      * Search IBM Connection for available scopes ( Applications in which search can be executed )
@@ -571,12 +321,23 @@ public class SearchService extends BaseService {
 			throw new SearchServiceException(e);
 		}
 		return scopes;
-    }
-	
+     }
+     
 	/*
 	 * Internal service methods
 	 */
 	
+    private String createTagConstraint(String[] tags) throws JsonException {
+    	String[] tagValues = new String[tags.length];
+    	for (int i=0; i<tags.length; i++) {
+    		tagValues[i] = "Tag/" + tags[i];
+    	}
+    	
+    	JsonObject jsonObject = (JsonObject)JsonJavaFactory.instanceEx.createObject(null, null);
+    	jsonObject.putJsonProperty("type", "category");
+    	jsonObject.putJsonProperty("values", tagValues);
+    	return jsonObject.toString();
+    }
 	
 	
 	/*

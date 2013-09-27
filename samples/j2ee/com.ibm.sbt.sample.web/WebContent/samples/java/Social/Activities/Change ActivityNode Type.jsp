@@ -14,6 +14,7 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@page import="com.ibm.sbt.services.client.connections.activity.model.ActivityNodeType"%>
 <%@page import="com.ibm.sbt.services.client.connections.activity.ActivityNode"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.List"%>
@@ -44,7 +45,7 @@
 		Activity activity = activityService.getMyActivities().get(0);
 		
 		ActivityNode node = new ActivityNode(activityService, activity.getActivityId());
-		node.setEntryType("Entry");
+		node.setEntryType(ActivityNodeType.Entry.getActivityNodeType());
 		node.setTitle("Entry Created." + System.currentTimeMillis());
 		List<String> tagList = new ArrayList<String>();
 		tagList.add("tag2");
@@ -52,7 +53,7 @@
 		node.setContent("Entry Created.");
 		node = activityService.createActivityNode(node);
 		
-		activityService.changeEntryType(node.getActivityId(), "chat");
+		activityService.changeEntryType(node.getActivityId(), ActivityNodeType.Chat.getActivityNodeType());
 		out.println("Entry Type changed to Chat of : " + node.getTitle());
 	} catch (Throwable e) {
 		out.println("<pre>");

@@ -14,6 +14,7 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@page import="com.ibm.sbt.services.client.connections.activity.model.ActivityNodeType"%>
 <%@page import="com.ibm.sbt.services.client.connections.activity.ActivityNode"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.List"%>
@@ -44,7 +45,7 @@
 		Activity activity = activityService.getMyActivities().get(0);
 		
 		ActivityNode emailNode = new ActivityNode(activityService, activity.getActivityId());
-		emailNode.setEntryType("email");
+		emailNode.setEntryType(ActivityNodeType.Email.getActivityNodeType());
 		emailNode.setTitle("EmailNode from JSP " + System.currentTimeMillis());
 		List<String> tagList = new ArrayList<String>();
 		tagList.add("emailTag");

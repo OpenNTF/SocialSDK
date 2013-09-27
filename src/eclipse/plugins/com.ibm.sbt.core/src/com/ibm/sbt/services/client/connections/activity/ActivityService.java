@@ -33,7 +33,11 @@ import com.ibm.sbt.services.client.connections.activity.feedHandler.MemberFeedHa
 import com.ibm.sbt.services.client.connections.activity.feedHandler.TagFeedHandler;
 
 /**
+ * ActivityService can be used to perform operations related to Activities.
+ * <p>
+ * 
  * @author Vimal Dhupar
+ * @see http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Activities_API_ic40a&content=pdcontent
  */
 
 public class ActivityService extends BaseService {
@@ -792,5 +796,73 @@ public class ActivityService extends BaseService {
         } catch (Exception e) {
             throw new ActivityServiceException(e);
         }
+	}
+
+	/**
+	 * Method to move an existing Activity Node to a Section
+	 * 
+	 * @param activityNodeId
+	 * @param activityId
+	 * @param sectionId
+	 * @throws ActivityServiceException
+	 */
+	public void moveEntryToSection(String activityNodeId, String activityId, String sectionId) throws ActivityServiceException {
+		moveEntryToSection(activityNodeId, activityId, sectionId, null);
+	}
+	
+	/**
+	 * Method to move an existing Activity Node to a Section
+	 * 
+	 * @param activityNodeId
+	 * @param activityId
+	 * @param sectionId
+	 * @param title
+	 * @throws ActivityServiceException 
+	 */
+	public void moveEntryToSection(String activityNodeId, String activityId, String sectionId, String title) throws ActivityServiceException {
+		if (null == activityNodeId){
+			throw new ActivityServiceException(null, "Null activityNodeId");
+		}
+		if (null == activityId){
+			throw new ActivityServiceException(null, "Null activityId");
+		}
+		if (null == sectionId){
+			throw new ActivityServiceException(null, "Null sectionId");
+		}
+		ActivityNode actNode = getActivityNode(activityNodeId);
+		actNode.setInReplyTo(sectionId, actNode.getNodeUrl());
+		if(StringUtil.isEmpty(title)) {
+			title = actNode.getTitle();
+		}
+		actNode.setTitle(title);
+		updateActivityNode(actNode);
+	}
+	
+	/**
+	 * Method to change the type of Activity Node
+	 * 
+	 * @param activityNodeId
+	 * @param newType
+	 * @param activityNode
+	 * @throws ActivityServiceException
+	 */
+	public void changeEntryType(String activityNodeId, String newType, ActivityNode activityNode) throws ActivityServiceException {
+		if (null == activityNodeId){
+			throw new ActivityServiceException(null, "Null activityNodeId");
+		}
+		ActivityNode actNode = getActivityNode(activityNodeId);
+		actNode.setEntryType(newType);
+		updateActivityNode(actNode);
+	}
+	
+	/**
+	 * Method to change the type of Activity Node
+	 * @param activityNodeId
+	 * @param newType
+	 * @param activityNodeOrJson
+	 * @throws ActivityServiceException 
+	 */
+	public void changeEntryType(String activityNodeId, String newType) throws ActivityServiceException {
+		changeEntryType(activityNodeId, newType, getActivityNode(activityNodeId));
 	}
 }

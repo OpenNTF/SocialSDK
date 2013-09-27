@@ -50,7 +50,7 @@
 		Activity activity = activities.get(0);
 		
 		ActivityNode actNode = new ActivityNode(activityService, activity.getActivityId());
-		actNode.setCategory("entry");
+		actNode.setEntryType("entry");
 		actNode.setTitle("ActivityNode with Fields" + System.currentTimeMillis());
 		actNode.setContent("ActivityNodeContent");
 		Field textField1 = new TextField("Summary JSP 1");
@@ -66,7 +66,7 @@
 		actNode.setTags(tagList);
 		actNode = activityService.createActivityNode(actNode);
 		actNode = activityService.getActivityNode(actNode.getActivityId());
-		out.println("<br>Activity Node Before Updation : " + actNode.getTitle() + " , Type : " + actNode.getCategory());
+		out.println("<br>Activity Node Before Updation : " + actNode.getTitle() + " , Type : " + actNode.getEntryType());
 
 		// updating now
 		actNode.setTitle(actNode.getTitle() +"Updated");
@@ -82,7 +82,7 @@
 		actNode.setFields(updatedList);
 		activityService.updateActivityNode(actNode);
 		actNode = activityService.getActivityNode(actNode.getActivityId());
-		out.println("<br>Activity Node After Updation : " + actNode.getTitle() + " , Type : " + actNode.getCategory());
+		out.println("<br>Activity Node After Updation : " + actNode.getTitle() + " , Type : " + actNode.getEntryType());
 		
 	} catch (Throwable e) {
 		out.println("<pre>");

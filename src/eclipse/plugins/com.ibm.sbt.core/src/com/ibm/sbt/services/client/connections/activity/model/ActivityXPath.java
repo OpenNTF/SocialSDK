@@ -84,7 +84,8 @@ public enum ActivityXPath implements FieldEntry {
 	fieldLinkTitle("./link/@href"),
 	fieldPersonName("./name"),
 	fieldPersonEmail("./email"),
-	fieldPersonUserId("./snx:userid");
+	fieldPersonUserId("./snx:userid"), 
+	nodeUrl(".//a:link[@rel=\"self\"]/@href");
 	
 	private final XPathExpression path;
 	

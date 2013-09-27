@@ -46,7 +46,7 @@
 		Activity activity = activityService.getMyActivities().get(0);
 		
 		ActivityNode sectionNode = new ActivityNode(activityService, activity.getActivityId());
-		sectionNode.setCategory("Section");
+		sectionNode.setEntryType("Section");
 		sectionNode.setTitle("sectionNode from JSP " + System.currentTimeMillis());
 		sectionNode.setContent("SectionNode Content " + System.currentTimeMillis());
 		sectionNode.setPosition(2000);	

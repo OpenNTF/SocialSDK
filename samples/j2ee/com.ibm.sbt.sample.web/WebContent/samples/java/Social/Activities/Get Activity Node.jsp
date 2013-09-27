@@ -44,12 +44,12 @@
 		Activity activity = activityService.getMyActivities().get(0);
 		
 		ActivityNode actNode = new ActivityNode(activityService, activity.getActivityId());
-		actNode.setCategory("chat");
+		actNode.setEntryType("chat");
 		actNode.setTitle("ActivityNode for testing \"GET\"" + System.currentTimeMillis());
 		actNode.setContent("ActivityNodeContent");
 		actNode = activityService.createActivityNode(actNode);
 		actNode = activityService.getActivityNode(actNode.getActivityId());
-		out.println("Activity Node Fetched : " + actNode.getTitle() + " , Type : " + actNode.getCategory());
+		out.println("Activity Node Fetched : " + actNode.getTitle() + " , Type : " + actNode.getEntryType());
 	} catch (Throwable e) {
 		out.println("<pre>");
 		out.println(e.getMessage());

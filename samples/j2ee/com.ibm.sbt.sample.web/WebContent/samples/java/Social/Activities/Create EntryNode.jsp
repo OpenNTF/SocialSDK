@@ -50,7 +50,7 @@
 		Activity activity = activityService.getMyActivities().get(0);
 		
 		ActivityNode entryNode = new ActivityNode(activityService, activity.getActivityId());
-		entryNode.setCategory("Entry");
+		entryNode.setEntryType("Entry");
 		entryNode.setTitle("EntryNode from JSP " + System.currentTimeMillis());
 		List<String> tagList = new ArrayList<String>();
 		tagList.add("entryNodeTag");

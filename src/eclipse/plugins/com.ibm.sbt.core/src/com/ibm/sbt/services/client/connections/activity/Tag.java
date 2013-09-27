@@ -22,6 +22,7 @@ import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 import com.ibm.sbt.services.client.connections.activity.model.ActivityXPath;
 
 /**
+ * This class represents a Tag
  * @author Vimal Dhupar
  */
 public class Tag extends BaseEntity{

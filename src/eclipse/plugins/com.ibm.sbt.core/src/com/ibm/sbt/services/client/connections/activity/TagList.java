@@ -28,7 +28,7 @@ import com.ibm.sbt.services.client.connections.activity.feedHandler.TagFeedHandl
 import com.ibm.sbt.services.client.connections.activity.model.ActivityXPath;
 
 /**
-* @Represents Activity Tags
+* @Represents Activity TagList
 * @author Vimal Dhupar
 */
 public class TagList extends EntityList<Tag> {

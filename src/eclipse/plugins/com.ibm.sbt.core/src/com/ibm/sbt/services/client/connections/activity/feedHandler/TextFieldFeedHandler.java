@@ -27,7 +27,7 @@ import com.ibm.sbt.services.client.connections.activity.TextField;
 import com.ibm.sbt.services.client.connections.activity.model.ActivityXPath;
 
 /**
- * Feed Handler for Person Fields
+ * Feed Handler for Text Fields
  * @author Vimal Dhupar
  *
  */

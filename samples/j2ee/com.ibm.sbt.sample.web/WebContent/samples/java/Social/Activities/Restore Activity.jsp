@@ -41,10 +41,13 @@
 	try {		
 		ActivityService activityService = new ActivityService();
 		ActivityList activities = activityService.getActivitiesInTrash();
-		Activity activity = activities.get(0);
-		activityService.restoreActivity(activity.getActivityId());
-		out.println("Activity restored : " + activityService.getActivity(activity.getActivityId()).getTitle() );
-		
+		if(activities != null && !activities.isEmpty()) { 
+			Activity activity = activities.get(0);
+			activityService.restoreActivity(activity.getActivityId());
+			out.println("Activity restored : " + activityService.getActivity(activity.getActivityId()).getTitle() );
+		} else {
+			out.println("Trash is Empty. No Activity to restore");
+		}
 	} catch (Throwable e) {
 		out.println("<pre>");
 		out.println(e.getMessage());

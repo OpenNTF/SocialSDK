@@ -14,6 +14,7 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@page import="com.ibm.sbt.services.client.connections.activity.model.ActivityNodeType"%>
 <%@page import="com.ibm.sbt.services.client.connections.activity.FieldList"%>
 <%@page import="com.ibm.sbt.services.client.connections.activity.TextField"%>
 <%@page import="com.ibm.sbt.services.client.connections.activity.Field"%>
@@ -47,7 +48,7 @@
 		Activity activity = activityService.getMyActivities().get(0);
 		
 		ActivityNode actNode = new ActivityNode(activityService, activity.getActivityId());
-		actNode.setCategory("section");
+		actNode.setEntryType(ActivityNodeType.Section.getActivityNodeType());
 		actNode.setTitle("ActivityNode with Fields" + System.currentTimeMillis());
 		actNode.setContent("ActivityNodeContent");
 		
@@ -64,7 +65,7 @@
 		actNode = activityService.createActivityNode(actNode);
 		
 		actNode = activityService.getActivityNode(actNode.getActivityId());
-		out.println("Activity Node Fetched : " + actNode.getTitle() + " , Type : " + actNode.getCategory());
+		out.println("Activity Node Fetched : " + actNode.getTitle() + " , Type : " + actNode.getEntryType());
 		FieldList list = actNode.getTextFields();
 		if(list != null && !list.isEmpty()) {
 			out.println("<br>Text field " + list.get(0).getFid() + " , " + list.get(0).getName());

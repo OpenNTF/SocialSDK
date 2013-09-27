@@ -21,7 +21,11 @@ import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 import com.ibm.sbt.services.client.connections.activity.model.ActivityXPath;
-
+/**
+ * Abstract Class representing Field
+ * @author Vimal Dhupar
+ *
+ */
 public abstract class Field extends BaseEntity{
 
 	protected String TYPE ;

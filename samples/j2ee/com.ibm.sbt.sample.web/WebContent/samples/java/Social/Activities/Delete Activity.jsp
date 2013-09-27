@@ -41,9 +41,13 @@
 	try {		
 		ActivityService activityService = new ActivityService();
 		ActivityList activities = activityService.getMyActivities();
-		Activity activity = activities.get(0);
-		activityService.deleteActivity(activity.getActivityId());
-		out.println("Activity deleted : " + activity.getTitle());
+		if(activities != null && !activities.isEmpty()) {
+			Activity activity = activities.get(0);
+			activityService.deleteActivity(activity.getActivityId());
+			out.println("Activity deleted : " + activity.getTitle()); 
+		} else {
+			out.println("No Activity to delete");
+		}
 	} catch (Throwable e) {
 		out.println("<pre>");
 		out.println(e.getMessage());

@@ -46,7 +46,7 @@
 		Activity activity = activityService.getMyActivities().get(0);
 		
 		ActivityNode todoNode = new ActivityNode(activityService, activity.getActivityId());
-		todoNode.setCategory("Todo");
+		todoNode.setEntryType("Todo");
 		todoNode.setContent("Todo Node Content " + System.currentTimeMillis());
 		todoNode.setTitle("todoNode from JSP " + System.currentTimeMillis());
 		List<String> tagList = new ArrayList<String>();

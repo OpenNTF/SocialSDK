@@ -17,6 +17,7 @@
 
 package com.ibm.sbt.services.client.connections.activity;
 /**
+ * Ativity Action class used in Constructing Url 
  * @author Vimal Dhupar
  */
 public enum ActivityAction {

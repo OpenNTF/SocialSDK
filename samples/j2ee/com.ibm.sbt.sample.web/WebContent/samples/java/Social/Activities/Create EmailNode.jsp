@@ -44,7 +44,7 @@
 		Activity activity = activityService.getMyActivities().get(0);
 		
 		ActivityNode emailNode = new ActivityNode(activityService, activity.getActivityId());
-		emailNode.setCategory("email");
+		emailNode.setEntryType("email");
 		emailNode.setTitle("EmailNode from JSP " + System.currentTimeMillis());
 		List<String> tagList = new ArrayList<String>();
 		tagList.add("emailTag");

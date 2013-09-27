@@ -47,7 +47,7 @@
 		Activity activity = activityService.getMyActivities().get(0);
 		
 		ActivityNode actNode = new ActivityNode(activityService, activity.getActivityId());
-		actNode.setCategory("section");
+		actNode.setEntryType("section");
 		actNode.setTitle("ActivityNode with Fields" + System.currentTimeMillis());
 		actNode.setContent("ActivityNodeContent");
 		
@@ -64,7 +64,7 @@
 		actNode = activityService.createActivityNode(actNode);
 		
 		actNode = activityService.getActivityNode(actNode.getActivityId());
-		out.println("Activity Node Fetched : " + actNode.getTitle() + " , Type : " + actNode.getCategory());
+		out.println("Activity Node Fetched : " + actNode.getTitle() + " , Type : " + actNode.getEntryType());
 		FieldList list = actNode.getTextFields();
 		if(list != null && !list.isEmpty()) {
 			out.println("<br>Text field " + list.get(0).getFid() + " , " + list.get(0).getName());

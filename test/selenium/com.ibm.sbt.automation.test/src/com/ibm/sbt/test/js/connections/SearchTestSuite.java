@@ -23,10 +23,10 @@ import org.junit.runners.Suite.SuiteClasses;
 import com.ibm.sbt.test.js.connections.search.PeopleSearch;
 import com.ibm.sbt.test.js.connections.search.api.GetMyPeople;
 import com.ibm.sbt.test.js.connections.search.api.GetMyResults;
-import com.ibm.sbt.test.js.connections.search.api.GetMyTagged;
+import com.ibm.sbt.test.js.connections.search.api.GetMyResultsByTag;
 import com.ibm.sbt.test.js.connections.search.api.GetPeople;
 import com.ibm.sbt.test.js.connections.search.api.GetResults;
-import com.ibm.sbt.test.js.connections.search.api.GetTagged;
+import com.ibm.sbt.test.js.connections.search.api.GetResultsByTag;
 
 /**
  * @author mwallace
@@ -35,8 +35,8 @@ import com.ibm.sbt.test.js.connections.search.api.GetTagged;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ PeopleSearch.class, GetMyPeople.class,
-		GetMyResults.class, GetMyTagged.class, GetPeople.class, GetResults.class,
-		GetTagged.class })
+		GetMyResults.class, GetMyResultsByTag.class, GetPeople.class, GetResults.class,
+		GetResultsByTag.class })
 public class SearchTestSuite {
 	@AfterClass
 	public static void cleanup() {

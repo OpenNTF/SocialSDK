@@ -51,4 +51,11 @@ public class BaseSearchTest extends BaseApiTest {
         }
     }
 
+    protected void assertFacetValueValid(JsonJavaObject json) {
+        Assert.assertNull("Unexpected error detected on page", json.getString("code"));
+        Assert.assertNotNull(json.getString("getId"));
+        Assert.assertNotNull(json.getString("getLabel"));
+        Assert.assertNotNull(json.getString("getWeight"));
+    }
+
 }

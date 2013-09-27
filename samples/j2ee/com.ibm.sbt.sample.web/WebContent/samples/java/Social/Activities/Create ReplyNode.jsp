@@ -14,6 +14,7 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@page import="com.ibm.sbt.services.client.connections.activity.model.ActivityNodeType"%>
 <%@page import="com.ibm.sbt.services.client.connections.activity.FieldList"%>
 <%@page import="com.ibm.sbt.services.client.connections.activity.Field"%>
 <%@page import="com.ibm.sbt.services.client.connections.activity.ActivityNode"%>
@@ -46,13 +47,13 @@
 		Activity activity = activityService.getMyActivities().get(0);
 		
 		ActivityNode chatNode = new ActivityNode(activityService, activity.getActivityId());
-		chatNode.setEntryType("chat");
+		chatNode.setEntryType(ActivityNodeType.Chat.getActivityNodeType());
 		chatNode.setTitle("Chatting .." + System.currentTimeMillis());
 		chatNode.setContent("Jsp Content");
 		chatNode = activityService.createActivityNode(chatNode);
 		
 		ActivityNode replyNode = new ActivityNode(activityService, activity.getActivityId());
-		replyNode.setEntryType("reply");
+		replyNode.setEntryType(ActivityNodeType.Reply.getActivityNodeType());
 		replyNode.setTitle("reply to chat.." + System.currentTimeMillis());
 		
 		replyNode.setContent("Hi! Jsp" + System.currentTimeMillis());

@@ -806,8 +806,8 @@ public class ActivityService extends BaseService {
 	 * @param sectionId
 	 * @throws ActivityServiceException
 	 */
-	public void moveEntryToSection(String activityNodeId, String activityId, String sectionId) throws ActivityServiceException {
-		moveEntryToSection(activityNodeId, activityId, sectionId, null);
+	public void moveEntryToSection(String activityNodeId, String sectionId) throws ActivityServiceException {
+		moveEntryToSection(activityNodeId, sectionId, null);
 	}
 	
 	/**
@@ -819,12 +819,9 @@ public class ActivityService extends BaseService {
 	 * @param title
 	 * @throws ActivityServiceException 
 	 */
-	public void moveEntryToSection(String activityNodeId, String activityId, String sectionId, String title) throws ActivityServiceException {
+	public void moveEntryToSection(String activityNodeId, String sectionId, String title) throws ActivityServiceException {
 		if (null == activityNodeId){
 			throw new ActivityServiceException(null, "Null activityNodeId");
-		}
-		if (null == activityId){
-			throw new ActivityServiceException(null, "Null activityId");
 		}
 		if (null == sectionId){
 			throw new ActivityServiceException(null, "Null sectionId");

@@ -14,6 +14,7 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@page import="com.ibm.sbt.services.client.connections.activity.model.ActivityNodeType"%>
 <%@page import="com.ibm.sbt.services.client.connections.activity.FieldList"%>
 <%@page import="com.ibm.sbt.services.client.connections.activity.TextField"%>
 <%@page import="com.ibm.sbt.services.client.connections.activity.Field"%>
@@ -47,7 +48,7 @@
 		Activity activity = activityService.getMyActivities().get(0);
 		
 		ActivityNode actNode = new ActivityNode(activityService, activity.getActivityId());
-		actNode.setEntryType("section");
+		actNode.setEntryType(ActivityNodeType.Section.getActivityNodeType());
 		actNode.setTitle("ActivityNode with Fields" + System.currentTimeMillis());
 		actNode.setContent("ActivityNodeContent");
 		

@@ -15,8 +15,6 @@
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@page import="com.ibm.sbt.services.client.connections.activity.model.ActivityNodeType"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.FieldList"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.Field"%>
 <%@page import="com.ibm.sbt.services.client.connections.activity.ActivityNode"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.List"%>
@@ -46,13 +44,24 @@
 		ActivityService activityService = new ActivityService();
 		Activity activity = activityService.getMyActivities().get(0);
 		
+		ActivityNode node = new ActivityNode(activityService, activity.getActivityId());
+		node.setEntryType(ActivityNodeType.Entry.getActivityNodeType());
+		node.setTitle("Entry under Section.." + System.currentTimeMillis());
+		List<String> tagList = new ArrayList<String>();
+		tagList.add("tag2");
+		node.setTags(tagList);
+		node.setContent("Entry moved under Section Programmatically");
+		node = activityService.createActivityNode(node);
+		
 		ActivityNode sectionNode = new ActivityNode(activityService, activity.getActivityId());
 		sectionNode.setEntryType(ActivityNodeType.Section.getActivityNodeType());
 		sectionNode.setTitle("sectionNode from JSP " + System.currentTimeMillis());
 		sectionNode.setContent("SectionNode Content " + System.currentTimeMillis());
 		sectionNode.setPosition(2000);	
 		sectionNode = activityService.createActivityNode(sectionNode);
-		out.println("Section Node Created : " + sectionNode.getId());
+		
+		activityService.moveEntryToSection(node.getActivityId(), sectionNode.getId());
+		out.println("Entry : " + node.getTitle() + " moved to Section : " + sectionNode.getTitle());
 	} catch (Throwable e) {
 		out.println("<pre>");
 		out.println(e.getMessage());

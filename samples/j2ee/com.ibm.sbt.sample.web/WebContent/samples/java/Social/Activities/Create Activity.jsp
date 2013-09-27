@@ -42,7 +42,7 @@
 		ActivityService activityService = new ActivityService();
 		Activity activity = new Activity(activityService, "");
 		activity.setTitle("JSPActivity" + System.currentTimeMillis());
-		activity.setGoal("GoalOfActivity - " + System.currentTimeMillis());
+		activity.setContent("GoalOfActivity - " + System.currentTimeMillis());
 		List<String> tagList = new ArrayList<String>();
 		tagList.add("tag1");
 		tagList.add("tag2");

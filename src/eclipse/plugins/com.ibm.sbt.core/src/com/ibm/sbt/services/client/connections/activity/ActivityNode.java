@@ -35,6 +35,7 @@ import com.ibm.sbt.services.client.connections.activity.model.ActivityXPath;
 import com.ibm.sbt.services.client.connections.activity.transformers.ActivityTransformer;
 
 /**
+ * Activity Node Model Class representing an Activity Node Object
  * @author Vimal Dhupar
  */
 
@@ -124,6 +125,10 @@ public class ActivityNode extends Activity {
 	
 	public String getInReplyToUrl(){
 		return getAsString(ActivityXPath.inReplyToUrl);
+	}
+	
+	public String getNodeUrl() {
+		return getAsString(ActivityXPath.nodeUrl);
 	}
 	
 	private FieldList getFields(){
@@ -225,11 +230,12 @@ public class ActivityNode extends Activity {
 			String key = updatedEntry.getKey();
 			Object value = updatedEntry.getValue();
 			if(fields.containsKey(key)) {
-				newUpdatedFields.put(key + "1", value);
 				if(key.contains("field") || key.contains("tag") || key.contains("flag")) {
+					newUpdatedFields.put(key + "1", value);
 					continue;
 				}
 				else { 
+					newUpdatedFields.put(key, value);
 					fields.remove(key); 
 				}
 			} else {

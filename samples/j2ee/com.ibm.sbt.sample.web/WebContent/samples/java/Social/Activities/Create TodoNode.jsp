@@ -14,6 +14,7 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@page import="com.ibm.sbt.services.client.connections.activity.model.ActivityNodeType"%>
 <%@page import="com.ibm.sbt.services.client.connections.activity.FieldList"%>
 <%@page import="com.ibm.sbt.services.client.connections.activity.Field"%>
 <%@page import="com.ibm.sbt.services.client.connections.activity.ActivityNode"%>
@@ -46,7 +47,7 @@
 		Activity activity = activityService.getMyActivities().get(0);
 		
 		ActivityNode todoNode = new ActivityNode(activityService, activity.getActivityId());
-		todoNode.setCategory("Todo");
+		todoNode.setEntryType(ActivityNodeType.ToDo.getActivityNodeType());
 		todoNode.setContent("Todo Node Content " + System.currentTimeMillis());
 		todoNode.setTitle("todoNode from JSP " + System.currentTimeMillis());
 		List<String> tagList = new ArrayList<String>();

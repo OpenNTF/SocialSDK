@@ -52,8 +52,8 @@
 		node.setContent("Entry Created.");
 		node = activityService.createActivityNode(node);
 		
-		activityService.changeEntryType(node.getActivityId(), "Section");
-		out.println("Entry Type changed to Section of : " + node.getTitle());
+		activityService.changeEntryType(node.getActivityId(), "chat");
+		out.println("Entry Type changed to Chat of : " + node.getTitle());
 	} catch (Throwable e) {
 		out.println("<pre>");
 		out.println(e.getMessage());

@@ -149,6 +149,10 @@ public class Activity extends BaseEntity {
 		}
 	}
 	
+	/**
+	 * returns the complete id of the activity
+	 * @return
+	 */
 	public String getId() {
 		if(!StringUtil.isEmpty(this.id)) {
 			return id;
@@ -156,6 +160,10 @@ public class Activity extends BaseEntity {
 		return getAsString(ActivityXPath.Id); 
 	}
 	
+	/**
+	 * returns the extracted activity Id from the Id string
+	 * @return
+	 */
 	public String getActivityId() {
 		String id = getId();
 		int startOfId = id.lastIndexOf(":");

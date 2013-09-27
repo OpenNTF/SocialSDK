@@ -52,7 +52,7 @@
 		node.setContent("Entry Created.");
 		node = activityService.createActivityNode(node);
 		
-		activityService.changeEntryType(node.getId(), "Section");
+		activityService.changeEntryType(node.getActivityId(), "Section");
 		out.println("Entry Type changed to Section of : " + node.getTitle());
 	} catch (Throwable e) {
 		out.println("<pre>");

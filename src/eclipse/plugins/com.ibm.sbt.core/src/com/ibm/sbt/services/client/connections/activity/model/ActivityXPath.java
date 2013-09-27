@@ -15,7 +15,11 @@
  */
 
 package com.ibm.sbt.services.client.connections.activity.model;
-
+/**
+ * Enum for Activity Service X Paths
+ * @author Vimal Dhupar
+ *
+ */
 import com.ibm.commons.xml.DOMUtil;
 import com.ibm.commons.xml.XMLException;
 import com.ibm.commons.xml.xpath.XPathExpression;
@@ -84,7 +88,8 @@ public enum ActivityXPath implements FieldEntry {
 	fieldLinkTitle("./link/@href"),
 	fieldPersonName("./name"),
 	fieldPersonEmail("./email"),
-	fieldPersonUserId("./snx:userid");
+	fieldPersonUserId("./snx:userid"), 
+	nodeUrl(".//a:link[@rel=\"self\"]/@href");
 	
 	private final XPathExpression path;
 	

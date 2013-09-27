@@ -14,6 +14,7 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@page import="com.ibm.sbt.services.client.connections.activity.model.ActivityNodeType"%>
 <%@page import="com.ibm.sbt.services.client.connections.activity.BookmarkField"%>
 <%@page import="com.ibm.sbt.services.client.connections.activity.DateField"%>
 <%@page import="com.ibm.sbt.services.client.connections.activity.PersonField"%>
@@ -50,7 +51,7 @@
 		Activity activity = activityService.getMyActivities().get(0);
 		
 		ActivityNode entryNode = new ActivityNode(activityService, activity.getActivityId());
-		entryNode.setCategory("Entry");
+		entryNode.setEntryType(ActivityNodeType.Entry.getActivityNodeType());
 		entryNode.setTitle("EntryNode from JSP " + System.currentTimeMillis());
 		List<String> tagList = new ArrayList<String>();
 		tagList.add("entryNodeTag");

@@ -16,8 +16,9 @@
 package com.ibm.sbt.test.js.connections.search.api;
 
 import java.util.List;
-import org.junit.Ignore;
+
 import org.junit.Test;
+
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.connections.BaseSearchTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
@@ -27,17 +28,17 @@ import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
  *  
  * @date 25 Mar 2013
  */
-public class GetTagged extends BaseSearchTest {
+public class GetMyResultsByTag extends BaseSearchTest {
     
-    static final String SNIPPET_ID = "Social_Search_API_GetTagged";
+    static final String SNIPPET_ID = "Social_Search_API_GetMyResultsByTag";
 
-    public GetTagged() {
+    public GetMyResultsByTag() {
         setAuthType(AuthType.AUTO_DETECT);
     }
 
     @Test
-    public void testGetTags() {
-    	addSnippetParam("sample.searchTag", "dubh");
+    public void testGetMyResultsByTag() {
+        addSnippetParam("sample.searchTag", "dubh");
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         List jsonList = previewPage.getJsonList();

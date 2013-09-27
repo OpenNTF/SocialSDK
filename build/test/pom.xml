@@ -31,10 +31,8 @@
     <module>../../test/java/com.ibm.sbt.core.test</module>
     <module>stopcargo</module>
 -->
-<!-- temporarily disable test project until source is moved permanently
     <module>../../test/selenium/com.ibm.sbt.automation.core</module>
     <module>../../test/selenium/com.ibm.sbt.automation.test</module>
--->
   </modules>
 
 </project>

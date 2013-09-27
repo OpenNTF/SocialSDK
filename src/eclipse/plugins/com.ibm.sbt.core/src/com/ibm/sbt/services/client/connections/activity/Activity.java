@@ -79,7 +79,7 @@ public class Activity extends BaseEntity {
 	public Object constructPayload() throws TransformerException {
 		ActivityTransformer activityTransformer = new ActivityTransformer();
 		if(!fields.containsKey("Category"))
-			this.setCategory("activity");
+			this.setEntryType("activity");
 		return convertToXML(activityTransformer.transform(fields));
 	}
 	
@@ -143,9 +143,9 @@ public class Activity extends BaseEntity {
 		}
 	}
 	
-	public void setCategory(String category){
-		if(StringUtil.isNotEmpty(category)) {
-			setAsString(ActivityXPath.Category, category); 
+	public void setEntryType(String type){
+		if(StringUtil.isNotEmpty(type)) {
+			setAsString(ActivityXPath.Category, type); 
 		}
 	}
 	
@@ -206,7 +206,7 @@ public class Activity extends BaseEntity {
 		return getAsString(ActivityXPath.Content);
 	}
 	
-	public String getCategory() {
+	public String getEntryType() {
 		return getAsString(ActivityXPath.Category);
 	}
 	
@@ -273,7 +273,7 @@ public class Activity extends BaseEntity {
 
 	public Activity copyTo(Activity restoreActivity) throws ActivityServiceException {
 		restoreActivity.setId(this.getActivityId());
-		restoreActivity.setCategory(this.getCategory());
+		restoreActivity.setEntryType(this.getEntryType());
 		restoreActivity.setGoal(this.getContent());
 		restoreActivity.setTitle(this.getTitle());
 		restoreActivity.setCommunityUuid(this.getCommunityUuid());

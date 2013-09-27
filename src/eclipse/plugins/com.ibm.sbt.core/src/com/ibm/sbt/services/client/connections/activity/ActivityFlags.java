@@ -17,6 +17,8 @@
 
 package com.ibm.sbt.services.client.connections.activity;
 /**
+ * Activity Flags class used for Defining Flags 
+ * 
  * @author Vimal Dhupar
  */
 public enum ActivityFlags {

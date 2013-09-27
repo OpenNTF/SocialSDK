@@ -14,11 +14,14 @@
  * permissions and limitations under the License.
  */
 
-
 package com.ibm.sbt.services.client.connections.activity;
 
 import com.ibm.sbt.services.client.SBTServiceException;
 
+/**
+ * @author Vimal Dhupar
+ *
+ */
 public class ActivityServiceException extends SBTServiceException {
 
 	private static final long serialVersionUID = 1L;

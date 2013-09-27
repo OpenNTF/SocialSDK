@@ -14,6 +14,9 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@page import="com.ibm.sbt.services.client.connections.activity.FieldList"%>
+<%@page import="com.ibm.sbt.services.client.connections.activity.Field"%>
+<%@page import="com.ibm.sbt.services.client.connections.activity.ActivityNode"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
@@ -40,14 +43,23 @@
 	<%
 	try {		
 		ActivityService activityService = new ActivityService();
-		ActivityList activities = activityService.getActivitiesInTrash();
-		if(activities != null && !activities.isEmpty()) { 
-			Activity activity = activities.get(0);
-			activityService.restoreActivity(activity.getActivityId());
-			out.println("Activity restored : " + activityService.getActivity(activity.getActivityId()).getTitle() );
-		} else {
-			out.println("Trash is Empty. No Activity to restore");
-		}
+		Activity activity = activityService.getMyActivities().get(0);
+		
+		ActivityNode chatNode = new ActivityNode(activityService, activity.getActivityId());
+		chatNode.setEntryType("chat");
+		chatNode.setTitle("Chatting .." + System.currentTimeMillis());
+		chatNode.setContent("Jsp Content");
+		chatNode = activityService.createActivityNode(chatNode);
+		
+		ActivityNode replyNode = new ActivityNode(activityService, activity.getActivityId());
+		replyNode.setEntryType("reply");
+		replyNode.setTitle("reply to chat.." + System.currentTimeMillis());
+		
+		replyNode.setContent("Hi! Jsp" + System.currentTimeMillis());
+		replyNode.setInReplyTo(chatNode.getId(), chatNode.getNodeUrl());	
+
+		replyNode = activityService.createActivityNode(replyNode);
+		out.println("Reply Node Created : " + replyNode.getId());
 	} catch (Throwable e) {
 		out.println("<pre>");
 		out.println(e.getMessage());

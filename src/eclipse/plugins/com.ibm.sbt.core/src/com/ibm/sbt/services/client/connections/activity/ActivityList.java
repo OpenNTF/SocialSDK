@@ -30,6 +30,7 @@ import com.ibm.sbt.services.client.connections.activity.feedHandler.ActivityFeed
 import com.ibm.sbt.services.client.connections.activity.model.ActivityXPath;
 
 /**
+ * Activity List Class used for creating List of Activities
  * @author Vimal Dhupar
  *
  */

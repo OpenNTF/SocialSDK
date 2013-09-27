@@ -14,6 +14,7 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@page import="com.ibm.sbt.services.client.connections.activity.ActivityNode"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
@@ -40,14 +41,19 @@
 	<%
 	try {		
 		ActivityService activityService = new ActivityService();
-		ActivityList activities = activityService.getActivitiesInTrash();
-		if(activities != null && !activities.isEmpty()) { 
-			Activity activity = activities.get(0);
-			activityService.restoreActivity(activity.getActivityId());
-			out.println("Activity restored : " + activityService.getActivity(activity.getActivityId()).getTitle() );
-		} else {
-			out.println("Trash is Empty. No Activity to restore");
-		}
+		Activity activity = activityService.getMyActivities().get(0);
+		
+		ActivityNode node = new ActivityNode(activityService, activity.getActivityId());
+		node.setEntryType("Entry");
+		node.setTitle("Entry Created." + System.currentTimeMillis());
+		List<String> tagList = new ArrayList<String>();
+		tagList.add("tag2");
+		node.setTags(tagList);
+		node.setContent("Entry Created.");
+		node = activityService.createActivityNode(node);
+		
+		activityService.changeEntryType(node.getId(), "Section");
+		out.println("Entry Type changed to Section of : " + node.getTitle());
 	} catch (Throwable e) {
 		out.println("<pre>");
 		out.println(e.getMessage());

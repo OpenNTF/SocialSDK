@@ -44,7 +44,7 @@
 		Activity activity = activityService.getMyActivities().get(0);
 		
 		ActivityNode chatNode = new ActivityNode(activityService, activity.getActivityId());
-		chatNode.setCategory("chat");
+		chatNode.setEntryType("chat");
 		chatNode.setTitle("chat node created from JSP " + System.currentTimeMillis());
 		List<String> tagList = new ArrayList<String>();
 		tagList.add("tag1");

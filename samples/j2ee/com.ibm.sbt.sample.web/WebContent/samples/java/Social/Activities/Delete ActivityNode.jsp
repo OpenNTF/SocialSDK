@@ -44,7 +44,7 @@
 		Activity activity = activityService.getMyActivities().get(0);
 		
 		ActivityNode actNode = new ActivityNode(activityService, activity.getActivityId());
-		actNode.setCategory("chat");
+		actNode.setEntryType("chat");
 		actNode.setTitle("ActivityNode for Deletion" + System.currentTimeMillis());
 		actNode.setContent("ActivityNodeContent");
 		actNode = activityService.createActivityNode(actNode);

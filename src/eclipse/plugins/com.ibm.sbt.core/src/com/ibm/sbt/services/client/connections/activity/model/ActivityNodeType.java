@@ -14,31 +14,31 @@
  * permissions and limitations under the License.
  */
 
-
-package com.ibm.sbt.services.client.connections.activity;
+package com.ibm.sbt.services.client.connections.activity.model;
 /**
- * Activity Flags class used for Defining Flags 
- * 
+ * Enum for the Activity Node Types
  * @author Vimal Dhupar
+ *
  */
-public enum ActivityFlags {
+
+public enum ActivityNodeType{
 	
-	COMPLETED("completed"),
-	DELETED("deleted"),
-	TEMPLATE("template");
+	Activity("activity"),
+	Chat("chat"),
+	Email("email"),
+	Entry("entry"),
+	EntryTemplate("entrytemplate"),
+	Reply("reply"),
+	Section("section"),
+	ToDo("todo");
 	
-	String flag;
+	private final String type;
 	
-	private ActivityFlags(String flag) {
-		this.flag = flag;
-	}
-	
-	/**
-	 * Wrapper method to return Flag
-	 * <p>
-	 */
-	public String getActivityFlag(){
-		return flag;
+	private ActivityNodeType(String type) {
+		this.type = type;
 	}
 
+	public String getActivityNodeType() {
+		return type;
+	}
 }

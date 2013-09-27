@@ -18,7 +18,11 @@ package com.ibm.sbt.services.client.connections.activity;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 import com.ibm.sbt.services.client.connections.activity.model.ActivityXPath;
-
+/**
+ * Class representing the Person Field
+ * @author Vimal Dhupar
+ *
+ */
 public class PersonField extends Field{
 	
 	public PersonField() {

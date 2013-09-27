@@ -14,6 +14,7 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@page import="com.ibm.sbt.services.client.connections.activity.model.ActivityNodeType"%>
 <%@page import="com.ibm.sbt.services.client.connections.activity.ActivityNode"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.List"%>
@@ -44,12 +45,12 @@
 		Activity activity = activityService.getMyActivities().get(0);
 		
 		ActivityNode actNode = new ActivityNode(activityService, activity.getActivityId());
-		actNode.setCategory("chat");
+		actNode.setEntryType(ActivityNodeType.Chat.getActivityNodeType());
 		actNode.setTitle("ActivityNode for testing \"GET\"" + System.currentTimeMillis());
 		actNode.setContent("ActivityNodeContent");
 		actNode = activityService.createActivityNode(actNode);
 		actNode = activityService.getActivityNode(actNode.getActivityId());
-		out.println("Activity Node Fetched : " + actNode.getTitle() + " , Type : " + actNode.getCategory());
+		out.println("Activity Node Fetched : " + actNode.getTitle() + " , Type : " + actNode.getEntryType());
 	} catch (Throwable e) {
 		out.println("<pre>");
 		out.println(e.getMessage());

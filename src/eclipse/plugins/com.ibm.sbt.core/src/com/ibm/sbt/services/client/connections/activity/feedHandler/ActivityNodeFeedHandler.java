@@ -30,7 +30,7 @@ import com.ibm.sbt.services.client.connections.activity.ActivityService;
 
 
 /**
- * Feed handler for ActivityNode
+ * Feed handler for Activity Node
  * 
  * @author Vimal Dhupar
  */

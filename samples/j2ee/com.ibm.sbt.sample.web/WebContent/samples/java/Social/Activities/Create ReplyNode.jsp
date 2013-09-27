@@ -46,13 +46,21 @@
 		ActivityService activityService = new ActivityService();
 		Activity activity = activityService.getMyActivities().get(0);
 		
-		ActivityNode sectionNode = new ActivityNode(activityService, activity.getActivityId());
-		sectionNode.setEntryType(ActivityNodeType.Section.getActivityNodeType());
-		sectionNode.setTitle("sectionNode from JSP " + System.currentTimeMillis());
-		sectionNode.setContent("SectionNode Content " + System.currentTimeMillis());
-		sectionNode.setPosition(2000);	
-		sectionNode = activityService.createActivityNode(sectionNode);
-		out.println("Section Node Created : " + sectionNode.getId());
+		ActivityNode chatNode = new ActivityNode(activityService, activity.getActivityId());
+		chatNode.setEntryType(ActivityNodeType.Chat.getActivityNodeType());
+		chatNode.setTitle("Chatting .." + System.currentTimeMillis());
+		chatNode.setContent("Jsp Content");
+		chatNode = activityService.createActivityNode(chatNode);
+		
+		ActivityNode replyNode = new ActivityNode(activityService, activity.getActivityId());
+		replyNode.setEntryType(ActivityNodeType.Reply.getActivityNodeType());
+		replyNode.setTitle("reply to chat.." + System.currentTimeMillis());
+		
+		replyNode.setContent("Hi! Jsp" + System.currentTimeMillis());
+		replyNode.setInReplyTo(chatNode.getId(), chatNode.getNodeUrl());	
+
+		replyNode = activityService.createActivityNode(replyNode);
+		out.println("Reply Node Created : " + replyNode.getId());
 	} catch (Throwable e) {
 		out.println("<pre>");
 		out.println(e.getMessage());

@@ -16,6 +16,10 @@
 
 package com.ibm.sbt.services.client.connections.search;
 
+import java.util.List;
+
+import org.w3c.dom.Node;
+
 import com.ibm.commons.xml.DOMUtil;
 import com.ibm.commons.xml.XMLException;
 import com.ibm.commons.xml.xpath.XPathExpression;
@@ -24,6 +28,7 @@ import com.ibm.sbt.services.client.base.datahandlers.FieldEntry;
 public enum SearchXPath implements FieldEntry{
 	
 	entry("/a:entry"),
+	facetEntry("/feed/ibmsc:facets/ibmsc:facet"),	
 	uid("./id"),
 	title("a:title"),
 	content("a:content"),
@@ -62,7 +67,11 @@ public enum SearchXPath implements FieldEntry{
     objectRefUrl("ibmsc:field[@id='FIELD_OBJECT_REF_URL']"),
     accessControl("a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/accesscontrolled']/@term"),
     commentsSummary("ibmsc:field[@id='commentsSummary']"),
-    searchLink("./link");
+    searchLink("./link"),
+    facetId("./ibmsc:facet/ibmsc:facetvalue"),
+    facetValueId("ibmsc:facetValue/@id"),
+    facetLabel("ibmsc:facetValue/@label"),
+    facetWeight("ibmsc:facetValue/@weight");
 
 
 	private final XPathExpression path;

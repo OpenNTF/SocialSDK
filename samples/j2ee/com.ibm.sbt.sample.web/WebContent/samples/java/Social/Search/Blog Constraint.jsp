@@ -14,6 +14,10 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@page import="com.ibm.sbt.services.client.connections.search.Constraint"%>
+<%@page import="com.ibm.sbt.services.client.connections.search.Facet"%>
+<%@page import="com.ibm.sbt.services.client.connections.search.FacetList"%>
+<%@page import="com.ibm.sbt.services.client.connections.search.FacetId"%>
 <%@page import="com.ibm.sbt.services.client.connections.search.Result"%>
 <%@page import="com.ibm.sbt.services.client.connections.search.ResultList"%>
 <%@page import="com.ibm.sbt.services.client.connections.search.SearchService"%>
@@ -30,38 +34,43 @@
 <head>
 <title>SBT JAVA Sample - Search</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" type="text/css" title="Style" href="/sbt.bootstrap211/bootstrap/css/bootstrap.css"></link>
-<link rel="stylesheet" type="text/css" title="Style" href="/sbt.bootstrap211/bootstrap/css/bootstrap-responsive.css"></link>
 </head>
 
 <body>
-	<h4>Search : Community Tag Search</h4>
+	<h4>Search : Blog Constraint</h4>
 	<div id="content">
-	<table class="table table-bordered" id="communityTable">
-		<tr class="label label-info">
-			<th>Community Name</th>
-			<th>Community Uuid</th>
-		</tr>
 	<%
 		try {
 			SearchService svc = new SearchService();
-			Map<String, String> requestMap = new HashMap<String, String>();
-			requestMap.put("scope", "communities");
-			List<String>tags = new ArrayList<String>();
-			tags.add("demotag");
-			ResultList results = svc.getResultsByTag(tags,requestMap);
+			Constraint constraint = new Constraint();
+			constraint.setType("category");
+			List<String> values = new ArrayList();
+			values.add("Source/blogs");
+			//values.add("Source/profiles");
+			constraint.setValues(values);
+			List<Constraint> constraints = new ArrayList();
+			constraints.add(constraint);
+			ResultList results = svc.getResultsWithConstraint("test",constraints);
 			if(results.size()<=0){
-				out.println("<tr><td colspan='2'>No tagged communities found</td><tr>");
+				out.println("No results found");
 			}			
+			out.println("<br>");
 			for (Result result : results) {
-					out.println("<tr><td>"+result.getTitle()+"</td><td>"+result.getId()+"</td></tr>");
+					out.println("<b>getTitle : </b> " + result.getTitle());
+					out.println("<b>getId : </b> " + result.getId());
+					out.println("<b>getTags : </b> " + result.getTags());
+					out.println("<b>getSummary : </b> " + result.getSummary());
+					out.println("<b>getScore : </b> " + result.getScore());
+					out.println("<b>getRank : </b> " + result.getRank());
+					out.println("<b>getUpdated : </b> " + result.getUpdated());
+					out.println("<b>getApplication : </b> " + result.getApplication());
+					out.println("<br>");
 			}
 		} catch (Throwable e) {
 			out.println("<pre>");
-			out.println("Problem occurred while executing search query: " + e.getMessage());
+			out.println("Problem Occurred while executing search query: " + e.getMessage());
 		}
 	%>
-	</table>
 	</div>
 </body>
 </html>

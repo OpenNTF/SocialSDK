@@ -291,11 +291,49 @@ public class SearchService extends BaseService {
 	   *http://www-10.IBM.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Constraints&content=pdcontent  
        */
   	public ResultList getResultsWithConstraint(String query, List<Constraint> constraints) throws SearchServiceException{
+  		return getResultsWithConstraint(query, constraints,null);
+  	}
+      
+      
+      /**
+       * Search IBM Connection for public information with constraints
+       * A field constraint allows only results matching specific field values.
+       * 
+       * @param query Text to search for
+       * @param List<Constraint>
+       * 
+       * @return ResultList
+       * @throws SearchServiceException
+       * 
+	   *http://www-10.IBM.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Constraints&content=pdcontent  
+       */
+  	public ResultList getResultsWithConstraint(String query, List<Constraint> constraints, Map<String, String> parameters) throws SearchServiceException{
   		// We can not use a map of constraints, since there could be multiple constraints but map can have only one key named constraint
   		String formattedConstraints = generateConstraintParameter(constraints);
-  		Map<String,String> parameters = new HashMap<String, String>();
+  		if(parameters == null){
+  			parameters = new HashMap<String, String>();
+  		}
   		parameters.put("constraint", formattedConstraints.toString());
   		return getResults(query, parameters);
+  	}
+  	
+  	
+  	
+  	
+    /**
+     * Search IBM Connection for private information with constraints
+     * A field constraint allows only results matching specific field values.
+     * 
+     * @param query Text to search for
+     * @param List<Constraint>
+     * 
+     * @return ResultList
+     * @throws SearchServiceException
+     * 
+	   *http://www-10.IBM.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Constraints&content=pdcontent  
+     */
+  	public ResultList getMyResultsWithConstraint(String query, List<Constraint> constraints) throws SearchServiceException{
+  		return getMyResultsWithConstraint(query, constraints, null);
   	}
       
       
@@ -311,10 +349,12 @@ public class SearchService extends BaseService {
      * 
 	   *http://www-10.IBM.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Constraints&content=pdcontent  
      */
-  	public ResultList getMyResultsWithConstraint(String query, List<Constraint> constraints) throws SearchServiceException{
+  	public ResultList getMyResultsWithConstraint(String query, List<Constraint> constraints, Map<String, String> parameters) throws SearchServiceException{
   		// We can not use a map of constraints, since there could be multiple constraints but map can have only one key named constraint
   		String formattedConstraints = generateConstraintParameter(constraints);
-  		Map<String,String> parameters = new HashMap<String, String>();
+  		if(parameters == null){
+  			parameters = new HashMap<String, String>();
+  		}
   		parameters.put("constraint", formattedConstraints.toString());
   		return getMyResults(query, parameters);
   	}
@@ -330,7 +370,22 @@ public class SearchService extends BaseService {
 	 * @throws SearchServiceException
 	 */
 	public ResultList getResultsByTag(List<String> tags) throws SearchServiceException{
-		// High level wrapper, provides a convenient mechanism for search for tags, uses constraints internally
+		return getResultsByTag(tags,null);
+	}
+	
+	/**
+	 * Search IBM Connections for both public information and private
+	 * information that you have access to, tagged with the specified tags.
+	 * 
+	 * @param List
+	 *            of Tags to searched for
+	 * @return ResultList
+	 * @throws SearchServiceException
+	 */
+	public ResultList getResultsByTag(List<String> tags,
+			Map<String, String> parameters) throws SearchServiceException {
+		// High level wrapper, provides a convenient mechanism for search for
+		// tags, uses constraints internally
 		List<String> formattedTags = new ArrayList<String>();
 		List<Constraint> constraints = new ArrayList<Constraint>();
 		formattedTags = generateTagsConstraintParameter(tags);
@@ -338,7 +393,7 @@ public class SearchService extends BaseService {
 		constraint.setType("category");
 		constraint.setValues(formattedTags);
 		constraints.add(constraint);
-		return getResultsWithConstraint("", constraints);
+		return getResultsWithConstraint("", constraints,parameters);
 	}
 	
 	
@@ -351,6 +406,18 @@ public class SearchService extends BaseService {
      * @throws SearchServiceException
      */
 	public ResultList getMyResultsByTag(List<String> tags) throws SearchServiceException{
+		return getMyResultsByTag(tags, null);
+	}
+	
+    /**
+     * Search IBM Connection for private information with Tag constraint
+     * A field constraint allows only results matching specific field values.
+     * 
+     * @param List of Tags to searched for
+     * @return ResultList
+     * @throws SearchServiceException
+     */
+	public ResultList getMyResultsByTag(List<String> tags,Map<String, String> parameters) throws SearchServiceException{
 		// High level wrapper, provides a convenient mechanism for search for tags, uses constraints internally
 		List<String> formattedTags = new ArrayList<String>();
 		List<Constraint> constraints = new ArrayList<Constraint>();

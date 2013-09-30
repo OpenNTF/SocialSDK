@@ -206,6 +206,15 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         AtomCommunityInvitesMy : "/${communities}/service/atom/community/invites/my",
         
         /**
+         * URL to delete/create Community Invites
+         * 
+         * @property AtomCommunityInvites
+         * @type String
+         * @for sbt.connections.CommunityService
+         */
+        AtomCommunityInvites : "${communities}/service/atom/community/invites",
+        
+        /**
          * A feed of subcommunities.
          * 
          * Get a list of subcommunities associated with a community.

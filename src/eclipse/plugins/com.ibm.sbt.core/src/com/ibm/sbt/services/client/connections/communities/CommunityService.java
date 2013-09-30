@@ -375,7 +375,7 @@ public class CommunityService extends BaseService {
 	/**
      * Method to create a community invitation, user should be authenticated to perform this operation
 	 * 
-     * @method declineInvite
+     * @method createInvite
      * @param communityUuid 
 	 * 				 community Id for which invite is to be sent
 	 * @param contributorId
@@ -414,7 +414,7 @@ public class CommunityService extends BaseService {
 	/**
      * Method to accept a outstanding community invitation, user should be authenticated to perform this operation
 	 * 
-     * @method declineInvite
+     * @method acceptInvite
      * @param communityUuid 
 	 * 				 community Id for which invite is sent
 	 * @param contributorId

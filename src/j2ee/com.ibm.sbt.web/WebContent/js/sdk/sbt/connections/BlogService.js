@@ -1038,6 +1038,33 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         },
 
         /**
+         * Delete a blog, use the HTTP DELETE method.
+         * 
+         * @method deleteBlog
+         * @param {String/Object} blog id of the blog or the blog object (of the blog to be deleted)
+         * @param {Object} [args] Argument object
+         */
+        deleteBlog : function(blogUuid,args) {
+            var promise = this._validateBlogUuid(blogUuid);
+            if (promise) {
+                return promise;
+            }            
+           
+            var requestArgs = lang.mixin({}, args || {});
+            
+            var options = {
+                method : "DELETE",
+                query : requestArgs,
+                handleAs : "text"
+            };
+            var url = null;
+			url = this.constructUrl(consts.AtomBlogEditDelete, null, {
+				blogId : blogUuid
+			});
+            return this.deleteEntity(url, options, blogUuid);
+        },
+
+        /**
          * Create a blog post by sending an Atom entry document containing the 
          * new blog post.
          * 
@@ -1130,6 +1157,64 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
 				blogHandle : blogHandle
 			});
             return this.updateEntity(url, options, callbacks, args);
+        },
+
+        /**
+         * Delete a blog post, use the HTTP DELETE method.
+         * 
+         * @method deletePost
+         * @param {String/Object} blogHandle handle of the blog(of which the post is to be deleted)
+         * @param {String/Object} post id of the blog post(of the blog post to be deleted)
+         * @param {Object} [args] Argument object
+         */
+        deletePost : function(blogHandle, postId, args) {
+            var promise = this._validateUuid(postId);
+            if (promise) {
+                return promise;
+            }            
+           
+            var requestArgs = lang.mixin({}, args || {});
+            
+            var options = {
+                method : "DELETE",
+                query : requestArgs,
+                handleAs : "text"
+            };
+            var url = null;
+			url = this.constructUrl(consts.AtomBlogPostEditDelete, null, {
+				blogHandle : blogHandle,
+				postId : postId
+			});
+            return this.deleteEntity(url, options, postId);
+        },
+
+        /**
+         * Delete a blog comment, use the HTTP DELETE method.
+         * 
+         * @method deleteComment
+         * @param {String/Object} blogHandle handle of the blog(of which the post is to be deleted)
+         * @param {String/Object} comment id of the blog comment(of the blog comment to be deleted)
+         * @param {Object} [args] Argument object
+         */
+        deleteComment : function(blogHandle, commentId, args) {
+            var promise = this._validateUuid(commentId);
+            if (promise) {
+                return promise;
+            }            
+           
+            var requestArgs = lang.mixin({}, args || {});
+            
+            var options = {
+                method : "DELETE",
+                query : requestArgs,
+                handleAs : "text"
+            };
+            var url = null;
+			url = this.constructUrl(consts.AtomBlogCommentEditRemove, null, {
+				blogHandle : blogHandle,
+				commentId : commentId
+			});
+            return this.deleteEntity(url, options, commentId);
         },
         
         /**
@@ -1296,6 +1381,15 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         _validateBlogUuid : function(blogUuid) {
             if (!blogUuid || blogUuid.length == 0) {
                 return this.createBadRequestPromise("Invalid argument, expected blogUuid.");
+            }
+        },
+        
+        /*
+         * Validate a post, and return a Promise if invalid.
+         */
+        _validateUuid : function(postId) {
+            if (!postId) {
+                return this.createBadRequestPromise("Invalid argument, blog post id must be specified.");
             }
         },
         

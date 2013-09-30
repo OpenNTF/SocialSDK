@@ -29,7 +29,6 @@
 <title>SBT JAVA Sample - Accept Invite</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
-
 <body>
 	<h4>Accept Invite</h4>
 	<div id="content">
@@ -47,7 +46,6 @@
 				out.println("No invites exist to accept");
 			}
 		} catch (Throwable e) {
-		e.printStackTrace();
 			out.println("<pre>");
 			out.println(e.getMessage());
 			out.println("</pre>");

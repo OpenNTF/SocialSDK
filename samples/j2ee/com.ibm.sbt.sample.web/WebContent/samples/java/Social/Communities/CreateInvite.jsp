@@ -50,7 +50,6 @@
 				out.println("No communities exist to send invite");
 			}
 		} catch (Throwable e) {
-		e.printStackTrace();
 			out.println("<pre>");
 			out.println(e.getMessage());
 			out.println("</pre>");

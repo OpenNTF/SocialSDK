@@ -4,7 +4,9 @@ require(["sbt/dom", "sbt/connections/controls/bookmarks/BookmarkGrid"], function
     var CustomBookmarkRow = domNode.text || domNode.textContent;
 	
 	var grid = new BookmarkGrid({
-		type: "any"
+		type: "any",
+		hideSorter: true,
+		hidePager: true
 	});
 
 	 grid.renderer.template = CustomBookmarkRow;

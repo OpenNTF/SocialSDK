@@ -6,7 +6,7 @@ require(["sbt/connections/CommunityService", "sbt/dom", "sbt/json"], function(Co
         var promise = communityService.createInvite(communityUuid, id);
         promise.then(
             function(invite) {
-            	dom.setText("json", invite.getId());
+            	dom.setText("json", "Invite Id for the new invite is " + invite.getId());
             },
             function(error) {
                 dom.setText("json", json.jsonBeanStringify(error));

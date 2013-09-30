@@ -44,6 +44,7 @@
 		forum = service.getForum(forum.getForumUuid());
 			
 		forum.setTitle("Updated ForumTitle" + System.currentTimeMillis());
+		forum.setTags("tag55,tag66");
 		forum = forum.save(); 
 		out.println("Forum updated with title : " + forum.getTitle());
 		

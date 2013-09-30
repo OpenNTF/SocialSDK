@@ -40,7 +40,7 @@
 		<managed-bean-scope>application</managed-bean-scope>
 		<managed-property>
 			<property-name>endpoints</property-name>
-			<value>connections,connectionsOA2,w3connections,smartcloud,smartcloudOA2,domino,acmeAir,conAcmeApp,connectionsSSO,dropbox,twitter</value>
+			<value>connections,connectionsOA2,w3connections,smartcloud,smartcloudOA2,smartcloudBasic,domino,acmeAir,conAcmeApp,connectionsSSO,dropbox,twitter</value>
 			<!-- <value>connections,connectionsOA2,smartcloud,smartcloudOA2,domino,sametime</value> -->
 		</managed-property>
 		<managed-property>

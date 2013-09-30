@@ -1,22 +1,16 @@
 package com.ibm.sbt.services.client.connections.profiles;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+
 import org.junit.Ignore;
 import org.junit.Test;
+
 import com.ibm.sbt.services.BaseUnitTest;
-import com.ibm.sbt.services.client.connections.profiles.ProfileAdminService;
-import com.ibm.sbt.services.client.connections.profiles.ProfileService;
-import com.ibm.sbt.services.client.connections.profiles.ProfileServiceException;
-import com.ibm.sbt.services.client.connections.profiles.Profile;
-import com.ibm.sbt.services.client.connections.profiles.ProfileList;
-import com.ibm.sbt.services.client.connections.profiles.ConnectionEntryList;
-import com.ibm.sbt.services.client.connections.profiles.ConnectionEntry;;
 
 /**
  * Tests for the java connections Profile API by calling Connections server using configuration in
@@ -124,10 +118,10 @@ public class ProfileServiceTest extends BaseUnitTest {
 	@Test
 	public void testGetColleaguesConnectionEntries() throws Exception {
 		ProfileService profileService = new ProfileService();
-		ConnectionEntryList connectionEntries = profileService.getColleaguesConnectionEntries( properties.getProperty("user1"));
+		ColleagueConnectionList connectionEntries = profileService.getColleagueConnections( properties.getProperty("user1"));
 		if (connectionEntries != null && !connectionEntries.isEmpty()) {
-			for (ConnectionEntry connectionEntry : connectionEntries) {
-				assertNotNull(connectionEntry.getTitle());
+			for (ColleagueConnection Connection : connectionEntries) {
+				assertNotNull(Connection.getTitle());
 			}
 		}
 	}
@@ -135,7 +129,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 	@Test
 	public void testGetColleaguesConnectionEntriesForInvalidUser() throws Exception {
 		ProfileService profileService = new ProfileService();
-		ConnectionEntryList connectionEntries = profileService.getColleaguesConnectionEntries("abc@xyz.c");
+		ColleagueConnectionList connectionEntries = profileService.getColleagueConnections("abc@xyz.c");
 		assertEquals(0, connectionEntries.size());
 	}
 	
@@ -143,16 +137,16 @@ public class ProfileServiceTest extends BaseUnitTest {
 	@Test
 	public void testCheckColleague() throws Exception {
 		ProfileService profileService = new ProfileService();
-		ConnectionEntry connectionEntry = profileService.checkColleague(properties.getProperty("email1"), properties.getProperty("email3"));
-		assertNotNull(connectionEntry.getTitle());
-		assertNotNull(connectionEntry.getConnectionId());
+		ColleagueConnection Connection = profileService.checkColleague(properties.getProperty("email1"), properties.getProperty("email3"));
+		assertNotNull(Connection.getTitle());
+		assertNotNull(Connection.getConnectionId());
 	}
 
 
 	@Test
 	public void testGetCommonColleaguesProfiles() throws Exception {
 		ProfileService profileService = new ProfileService();
-		ProfileList profileEntries = profileService.getCommonColleaguesProfiles( properties.getProperty("email1"),properties.getProperty("email2") );
+		ProfileList profileEntries = profileService.getCommonColleagues( properties.getProperty("email1"),properties.getProperty("email2") );
 		if (profileEntries != null && !profileEntries.isEmpty()) {
 			for (Profile profileEntry : profileEntries) {
 				assertNotNull(profileEntry.getJobTitle());

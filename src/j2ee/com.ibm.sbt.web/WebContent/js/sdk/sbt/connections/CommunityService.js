@@ -30,6 +30,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
     var MemberTmpl = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:app=\"http://www.w3.org/2007/app\" xmlns:opensearch=\"http://a9.com/-/spec/opensearch/1.1/\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\"><contributor>${getEmail}${getUserid}</contributor><snx:role xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\" component=\"http://www.ibm.com/xmlns/prod/sn/communities\">${getRole}</snx:role><category term=\"person\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category></entry>";
     var EmailTmpl = "<email>${email}</email>";
     var UseridTmpl = "<snx:userid xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\">${userid}</snx:userid>";
+    var AcceptInviteTmpl = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns=\"http://www.w3.org/2005/Atom\"><contributor>${getEmail}${getUserid}</contributor></entry>";
+    var CreateInviteTmpl = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:app=\"http://www.w3.org/2007/app\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\"><category term=\"invite\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category><contributor>${getEmail}${getUserid}</contributor></entry>";
     
     /*
      * CommunityDataHandler class.
@@ -1027,7 +1029,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             };
             
             return this.getEntities(consts.AtomCommunityInvitesMy, options, this.getInviteFeedCallbacks());
-        },
+        },      
 
         /**
          * Get a list of subcommunities associated with a community.
@@ -1079,6 +1081,123 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             };
             
             return this.getEntities(consts.AtomCommunityForumTopics, options, this.getForumTopicFeedCallbacks());
+        },
+        
+        /**
+         * Decline an invite to be a member of a community, using the HTTP DELETE method.
+         * 
+         * @method declineInvite
+         * @param {String} communityUuid community id of the community whose invite is to be declined.
+         * @param {String} contributorId userId/email of the logged in user who is declining the invite.
+         * @param {Object} [args] Argument object
+         */
+        
+        declineInvite: function(communityUuid, contributorId, args) {
+        	var promise = this._validateCommunityUuid(communityUuid);
+            if (promise) {
+                return promise;
+            }            
+            promise = this._validateContributorId(contributorId);
+            if (promise) {
+                return promise;
+            }
+            var requestArgs = lang.mixin({
+                communityUuid : communityUuid                
+            }, args || {});
+            
+            var key = this.isEmail(contributorId) ? "email" : "userid";
+            requestArgs[key] = contributorId;
+            var options = {
+                method : "DELETE",
+                query : requestArgs,
+                handleAs : "text"
+            };
+            return this.deleteEntity(consts.AtomCommunityInvites, options, communityUuid);
+            
+        },
+        
+        /**
+         * Accept an invite to be a member of a community, using the HTTP POST method.
+         * 
+         * @method acceptInvite
+         * @param {String} communityUuid community id of the community whose invite is to be accepted.
+         * @param {String} contributorId userId/email of the logged in user who is accepting the invite.
+         * @param {Object} [args] Argument object
+         */
+        
+        acceptInvite: function(communityUuid, contributorId, args) {
+        	var promise = this._validateCommunityUuid(communityUuid);
+            if (promise) {
+                return promise;
+            }            
+            promise = this._validateContributorId(contributorId);
+            if (promise) {
+                return promise;
+            }
+            var requestArgs = lang.mixin({
+                communityUuid : communityUuid                
+            }, args || {});
+            
+            var options = {
+            	method : "POST",
+        		query : requestArgs,
+                headers : consts.AtomXmlHeaders,
+                data : this._constructAcceptInvitePostData(contributorId)
+            };
+            // return the community id for the community whose invite is accepted in the argument of the success promise.
+            var callbacks = {}; 
+            callbacks.createEntity = function(service,data,response) {                
+                return communityUuid;
+            };
+            return this.updateEntity(consts.AtomCommunityMembers, options, callbacks, args);
+            
+        },
+        
+        /**
+         * Create an invite to be a member of a community, using the HTTP POST method.
+         * 
+         * @method createInvite
+         * @param {String} communityUuid community id of the community for which invite is to be created.
+         * @param {String} contributorId userId/email of the user who is invited to be the member of the community.
+         * @param {Object} [args] Argument object
+         */
+        
+        createInvite: function(communityUuid, contributorId, args) {
+        	var promise = this._validateCommunityUuid(communityUuid);
+            if (promise) {
+                return promise;
+            }            
+            promise = this._validateContributorId(contributorId);
+            if (promise) {
+                return promise;
+            }
+            var requestArgs = lang.mixin({
+                communityUuid : communityUuid                
+            }, args || {});
+            
+            var options = {
+            	method : "POST",
+        		query : requestArgs,
+                headers : consts.AtomXmlHeaders,
+                data : this._constructCreateInvitePostData(contributorId)
+            };
+            // return the community id for the community whose invite is accepted in the argument of the success promise.
+            var callbacks = {};             
+            callbacks.createEntity = function(service,data,response) {
+                  var entryHandler = new CommunityDataHandler({
+                      data : data,
+                      namespaces : consts.Namespaces,
+                      xpath : consts.InviteXPath
+                  });
+                  return new Invite({
+                      service : service,
+                      id : entryHandler.getEntityId(),
+                      communityUuid : communityUuid,
+                      dataHandler : entryHandler
+                  });
+            };
+            return this.updateEntity(consts.AtomCommunityInvites, options, callbacks, args);
+            
         },
            
         /**
@@ -1445,6 +1564,15 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
 
             return communityUuid;
         },
+        
+        _toInvite : function(communityUuid, args){
+        	var invite = new Invite({
+                service : this,
+        		communityUuid : communityUuid        		
+            });
+        	invite._fields = lang.mixin({}, args);
+        	return invite;
+        },
 
         /*
          * Return a Community Member from Member or memberId. Throws an error if
@@ -1481,6 +1609,12 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         _validateCommunityUuid : function(communityUuid) {
             if (!communityUuid || communityUuid.length == 0) {
                 return this.createBadRequestPromise("Invalid argument, expected communityUuid.");
+            }
+        },
+        
+        _validateContributorId : function(contributorId) {
+        	if (!contributorId || contributorId.length == 0) {
+                return this.createBadRequestPromise("Invalid argument, expected contributorId.");
             }
         },
 
@@ -1554,6 +1688,76 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 return value;
             };
             return stringUtil.transform(MemberTmpl, member, transformer, member);
+        },
+        /*
+         * Construct post data for create invite
+         */
+        _constructCreateInvitePostData: function(contributorId){
+        	var isEmail = this.isEmail(contributorId) ? true : false;
+        	var contributorMap = {};
+        	if(isEmail){
+        		contributorMap["getEmail"] = contributorId;
+        	}else{
+        		contributorMap["getUserid"] = contributorId;
+        	}
+        	var transformer = function(value,key) {        		
+        		var returnVal = null;
+                if (key == "getEmail") {
+                	if(isEmail){
+	                    if (value) {
+	                    	returnVal = stringUtil.transform(EmailTmpl, {
+	                            "email" : value
+	                        });
+	                    }
+                	}
+                };
+                if (key == "getUserid") {
+                	if(!isEmail){
+	                    if (value) {
+	                    	returnVal = stringUtil.transform(UseridTmpl, {
+	                            "userid" : value
+	                        });
+	                    }
+                	}
+                }
+                return returnVal;
+            };
+            return stringUtil.transform(CreateInviteTmpl, contributorMap, transformer, null);
+        },
+        /*
+         * Construct post data for accept invite
+         */
+        _constructAcceptInvitePostData: function(contributorId){
+        	var isEmail = this.isEmail(contributorId) ? true : false;
+        	var contributorMap = {};
+        	if(isEmail){
+        		contributorMap["getEmail"] = contributorId;
+        	}else{
+        		contributorMap["getUserid"] = contributorId;
+        	}
+        	var transformer = function(value,key) {        		
+        		var returnVal = null;
+                if (key == "getEmail") {
+                	if(isEmail){
+	                    if (value) {
+	                    	returnVal = stringUtil.transform(EmailTmpl, {
+	                            "email" : value
+	                        });
+	                    }
+                	}
+                };
+                if (key == "getUserid") {
+                	if(!isEmail){
+	                    if (value) {
+	                    	returnVal = stringUtil.transform(UseridTmpl, {
+	                            "userid" : value
+	                        });
+	                    }
+                	}
+                }
+                return returnVal;
+            };
+            return stringUtil.transform(AcceptInviteTmpl, contributorMap, transformer, null);
         }
     });
     return CommunityService;

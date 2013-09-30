@@ -57,7 +57,7 @@
 			TopicList topics = service.getPublicForumTopics(parameters);
 			if (topics.size() > 0) {
 				String topicId = ((ForumTopic) topics.get(0)).getTopicUuid();
-				ForumReply reply = service.newReply();
+				ForumReply reply = new ForumReply(service, "");
 				reply.setTitle("Dummy Forum reply" + System.currentTimeMillis());
 				reply.setContent("Dummy Forum reply Content");
 				reply = reply.save(topicId);

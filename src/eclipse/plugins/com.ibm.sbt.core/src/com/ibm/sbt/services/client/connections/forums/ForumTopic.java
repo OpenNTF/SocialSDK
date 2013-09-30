@@ -20,6 +20,7 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 import com.ibm.sbt.services.client.connections.forums.model.BaseForumEntity;
+import com.ibm.sbt.services.client.connections.forums.model.FlagType;
 
 /**
  * Forum model object
@@ -168,5 +169,69 @@ public class ForumTopic extends BaseForumEntity{
         return getAsString(ForumsXPath.selfUrl);
     }
 	
-
+    public void pin() {
+    	
+		setAsString(ForumsXPath.flag, FlagType.PIN.getFlagType());
+	}
+    
+    public void unPin() {
+		setAsString(ForumsXPath.flag, FlagType.UNPIN.getFlagType());
+	}
+    
+    public void lock() {
+		setAsString(ForumsXPath.flag, FlagType.LOCK.getFlagType());
+	}
+    
+    public void unLock() {
+		setAsString(ForumsXPath.flag, FlagType.UNLOCK.getFlagType());
+	}
+    
+    public void markAsQuestion() {
+		setAsString(ForumsXPath.flag, FlagType.QUESTION.getFlagType());
+	}
+    
+    public void markAsNormal() {
+		setAsString(ForumsXPath.flag, FlagType.NORMAL.getFlagType());
+	}
+    
+    public boolean isPinned(){
+    	boolean pin = false;
+	    if(StringUtil.isNotEmpty(getAsString(ForumsXPath.flag))){
+	    	if(StringUtil.equalsIgnoreCase(getAsString(ForumsXPath.flag), FlagType.PIN.getFlagType())){
+	        	pin = true;
+	    	}
+	        else{
+	        	pin = false;
+	        }
+        }
+    	return pin;
+    	
+    }
+    
+    public boolean isLocked(){
+    	boolean lock = false;
+	    if(StringUtil.isNotEmpty(getAsString(ForumsXPath.flag))){
+	    	if(StringUtil.equalsIgnoreCase(getAsString(ForumsXPath.flag), FlagType.LOCK.getFlagType())){
+	    		lock = true;
+	    	}
+	        else{
+	        	lock = false;
+	        }
+        }
+    	return lock;
+    }
+    
+    public boolean isQuestion(){
+    	boolean question = false;
+	    if(StringUtil.isNotEmpty(getAsString(ForumsXPath.flag))){
+	    	if(StringUtil.equalsIgnoreCase(getAsString(ForumsXPath.flag), FlagType.QUESTION.getFlagType())){
+	    		question = true;
+	    	}
+	        else{
+	        	question = false;
+	        }
+        }
+    	return question;
+    }
+    
 }

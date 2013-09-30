@@ -54,7 +54,7 @@
 				reply.setContent("Dummy updated reply Content");
 				if(((ForumTopic)topics.get(0)).isQuestion()){
 					reply.acceptAnswer();
-					out.println("Reply is answer now for the topic " + reply.isAnswer());
+					out.println("reply was accepted as an answer " + reply.isAnswer());
 				}
 				reply = reply.save(); 
 				out.println("Reply updated with Id : " + reply.getUid() + "for Topic with ID:"+ topicId +"   "+reply.isAnswer());

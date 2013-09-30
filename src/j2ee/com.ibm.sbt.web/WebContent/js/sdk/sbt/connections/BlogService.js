@@ -58,7 +58,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         },
 
         /**
-         * Sets setHandle of IBM Connections blog.
+         * Sets Handle of IBM Connections blog.
          * 
          * @method setHandle
          * @param {String} setHandle of the blog

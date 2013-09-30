@@ -38,17 +38,16 @@
 		try {
 			ForumService svc = new ForumService();
 			ForumList forums = svc.getPublicForums();
-			Forum forum = (Forum)forums.iterator().next();
+			String forumId = forums.get(0).getUid();
 		
-			TagList tags = svc.getForumTopicsTags("c462f034-d38c-48aa-9ecb-1eee2b3025a9");
+			TagList tags = svc.getForumTopicsTags(forumId);
 			if (tags.size() <= 0) {
 				out.println("No tags to be displayed");
 			}
 			for (Tag tag : tags) {
 				out.println("<b>Tag : </b> " + tag.getTerm());
 				out.println("<b>Tag Frequency: </b> " + tag.getFrequency());
-				out.println("<b>Tag Visibility :</b> "
-						+ tag.getVisibility());
+				out.println("<b>Tag Visibility :</b> "+ tag.getVisibility());
 				out.println("<b>Tag Intensity :</b> " + tag.getIntensity());
 				out.println("<br>");
 			}

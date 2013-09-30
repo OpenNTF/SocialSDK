@@ -21,6 +21,7 @@
 <%@page import="java.util.Collection"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
+<%@page import="com.ibm.sbt.services.client.connections.forums.ForumTopic"%>
 <%@page import="com.ibm.sbt.services.client.connections.forums.TopicList"%>
 <%@page import="com.ibm.sbt.services.client.connections.forums.ReplyList"%>
 <%@page import="java.util.HashMap"%>
@@ -51,8 +52,12 @@
 				reply.setTopicUuid(topicId);
 				reply.setTitle("Dummy updated reply" + System.currentTimeMillis());
 				reply.setContent("Dummy updated reply Content");
+				if(((ForumTopic)topics.get(0)).isQuestion()){
+					reply.acceptAnswer();
+					out.println("Reply is answer now for the topic " + reply.isAnswer());
+				}
 				reply = reply.save(); 
-				out.println("Reply updated with Id : " + reply.getUid() + "for Topic with ID:"+ topicId);
+				out.println("Reply updated with Id : " + reply.getUid() + "for Topic with ID:"+ topicId +"   "+reply.isAnswer());
 			}
 			else
 				out.println("no reply found in topic");

@@ -13,31 +13,37 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-package com.ibm.sbt.services.client.connections.forums;
+package com.ibm.sbt.services.client.connections.forums.model;
 
 /**
- * Class used in constructing URL for Forums service
- * @author Manish Kataria
+ * Class used in updating/flagging topic and reply
+ * @author Swati Singh
  */
 
-public enum FilterType {
+
+public enum FlagType {
 	
-	MY("my"),
-	PUBLIC("public"),
-	RESOURCES("resources"),
-	FORUMS("forums"),
-	TOPICS("topics");
+	PIN("pinned"),
+	UNPIN("unpin"),
+	LOCK("locked"),
+	UNLOCK("unlock"),
+	QUESTION("question"),
+	NORMAL("normal"),
+	ACCEPT_ANSWER("answer"),
+	DECLINE_ANSWER("decline");
 	
-	String filterType;
+	String flagType;
 	
-	private FilterType(String filterType) {
-		this.filterType = filterType;
+	private FlagType(String flagType) {
+		this.flagType = flagType;
 	}
 	
 	/**
-	 * Wrapper method to return filter type
+	 * Wrapper method to return flagType type
 	 * <p>
 	 */
-	public String getFilterType(){return filterType;}
+	public String getFlagType(){
+		return flagType;
+	}
 
 }

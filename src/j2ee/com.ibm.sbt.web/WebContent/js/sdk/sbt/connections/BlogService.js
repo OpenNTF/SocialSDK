@@ -888,6 +888,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * Get the blog posts feed to see a list of posts for a blog .
          * 
          * @method getBlogPosts
+         * @param {String} blogHandle Handle of the blog of which posts are to be get.
          * @param {Object} [args] Object representing various parameters
          * that can be passed to get a feed of posts of a blog . The
          * parameters must be exactly as they are supported by IBM
@@ -928,6 +929,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * Get the blog comments feed to see a list of comments for a blog post .
          * 
          * @method getBlogPostComments
+         * @param {blogHandle} Handle of the blog of which Comments are to be get
          * @param {Object} [args] Object representing various parameters
          * that can be passed to get a feed of posts of a blog . The
          * parameters must be exactly as they are supported by IBM
@@ -1069,7 +1071,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * new blog post.
          * 
          * @method createPost
-         * @param {Object} post Blog post object which denotes the blog post to be created.
+         * @param {Object} postOrJson Blog post object which denotes the blog post to be created.
          * @param {Object} [args] Argument object
          */
         createPost : function(postOrJson, blogHandle, args) {
@@ -1164,7 +1166,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * 
          * @method deletePost
          * @param {String/Object} blogHandle handle of the blog(of which the post is to be deleted)
-         * @param {String/Object} post id of the blog post(of the blog post to be deleted)
+         * @param {String/Object} postId post id of the blog post(of the blog post to be deleted)
          * @param {Object} [args] Argument object
          */
         deletePost : function(blogHandle, postId, args) {
@@ -1222,7 +1224,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * new blog comment.
          * 
          * @method createComment
-         * @param {Object} post Blog comment object which denotes the comment to be created.
+         * @param {Object} commentOrJson Blog comment object which denotes the comment to be created.
          * @param {Object} [args] Argument object
          */
         createComment : function(commentOrJson, blogHandle, entryId, args) {

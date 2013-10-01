@@ -640,7 +640,52 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          */
         getSource : function() {
             return this.getAsObject([ "sourceId", "sourceTitle", "sourceLink", "sourceLinkAlternate" ]);
+        },
+
+        /**
+         * Loads the blog comment object associated with the
+         * blog. By default, a network call is made to load the atom entry
+         * document in the comment object.
+         * 
+         * @method load
+         * @param {Object} [args] Argument object
+         */
+        load : function(blogHandle, commentId, args) {
+        	try{
+            var promise = this.service._validateUuid(commentId);
+            if (promise) {
+                return promise;
+            }
+
+            var self = this;
+            var callbacks = {
+                createEntity : function(service,data,response) {
+                    self.setDataHandler(new XmlDataHandler({
+                        service :  service,
+                        data : data,
+                        namespaces : consts.Namespaces,
+                        xpath : consts.CommentXPath
+                    }));
+                    return self;
+                }
+            };
+
+            var requestArgs = lang.mixin({}, args || {});
+            var options = {
+                handleAs : "text",
+                query : requestArgs
+            };
+            var url = null;
+			url = this.service.constructUrl(consts.AtomBlogCommentEditRemove, null, {
+				blogHandle : blogHandle,
+				commentId : commentId
+			});
+        	}catch(e){
+        		console.log("Excp: "+e);
+        	}
+            return this.service.getEntity(url, options, commentId, callbacks);
         }
+
     });
     
     /*
@@ -743,7 +788,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             if (!this.endpoint) {
                 this.endpoint = config.findEndpoint(this.getDefaultEndpointName());
                 if(!this.endpoint.serviceMappings.blogHomepageHandle){
-                	this.contextRootMap.blogHomepageHandle = this.getDefaultHandle();
+                	this.endpoint.serviceMappings.blogHomepageHandle = this.getDefaultHandle();
                 }
             }
         },
@@ -1261,6 +1306,24 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
 				postId : entryId
 			});
             return this.updateEntity(url, options, callbacks, args);
+        },
+        
+        /**
+         * Retrieve a blog comment, use the edit link for the blog entry 
+         * which can be found in the my blogs feed.
+         * 
+         * @method getComment
+         * @param {String } blogHandle
+         * @param {String } commentUuid
+         * @param {Object} args Object containing the query arguments to be 
+         * sent (defined in IBM Connections Communities REST API) 
+         */
+        getComment : function(blogHandle, commentUuid, args) {
+            var comment = new Comment({
+                service : this,
+                _fields : { commentUuid : commentUuid }
+            });
+            return comment.load(blogHandle, commentUuid, args);
         },
         
         /**

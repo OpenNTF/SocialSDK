@@ -11,7 +11,7 @@ require(["sbt/connections/BlogService", "sbt/dom", "sbt/json"],
     	blogService.getBlogs({ ps: 1 }).then(
             function(blogs){
                 if (blogs.length == 0) {
-                    text = "All blogs returned no results.";
+                    text = "No Blogs found.";
                     dom.setText("content", text);
                 } else {
                         var firstBlogHandle = blogs[0].getHandle();

@@ -5,7 +5,6 @@ require(["sbt/connections/BlogService", "sbt/dom", "sbt/json"],
         var post = blogService.newPost();
         post.setTitle("Post at " + now.getTime());
         post.setContent("Post Content at " + now.getTime());
-        
     	blogService.getBlogs({ ps: 1 }).then(
             function(blogs){
                 if (blogs.length == 0) {
@@ -13,14 +12,14 @@ require(["sbt/connections/BlogService", "sbt/dom", "sbt/json"],
                     dom.setText("content", text);
                 } else {
                         var firstBlogHandle = blogs[0].getHandle();
-				        var promise = blogService.createPost(post, firstBlogHandle);
+				        var promise = blogService.createPost(post ,firstBlogHandle);
 				        promise.then(
-			        		function(post) {
-			        			post.setTitle("Post Updated at " + now.getTime());
-		        				var updatePromise = blogService.updatePost(post, firstBlogHandle);
-		        				updatePromise.then(
-	    			        		function(updatedPost) {
-	    			                    dom.setText("json", json.jsonBeanStringify(updatedPost.toJson()));
+			        		function(newPost) {
+			        			var postId = newPost.getPostUuid();
+		        				var deletePromise = blogService.deletePost(firstBlogHandle, postId);
+		        				deletePromise.then(
+	    			        		function(deletedPostId) {
+	    			                    dom.setText("json", json.jsonBeanStringify({ deletedPostId : deletedPostId }));
 	    			                },
 	    			                function(error) {
 	    			                    dom.setText("json", json.jsonBeanStringify(error));

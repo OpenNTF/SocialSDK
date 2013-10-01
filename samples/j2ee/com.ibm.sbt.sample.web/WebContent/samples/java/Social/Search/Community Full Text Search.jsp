@@ -47,7 +47,7 @@
 			SearchService svc = new SearchService();
 			Map<String, String> requestMap = new HashMap<String, String>();
 			requestMap.put("scope", "communities");
-			ResultList results = svc.getResults("Test");
+			ResultList results = svc.getResults("Test",requestMap);
 			if(results.size()<=0){
 				out.println("<tr><td colspan='2'>No communities associated with topic: Test</td><tr>");
 			}			

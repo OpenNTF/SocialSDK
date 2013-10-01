@@ -44,7 +44,7 @@ public enum ActivityXPath implements FieldEntry {
 	Category(".//a:category[@scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"]/@term"),
 	CategoryFlagDelete(".//a:category[@term=\"deleted\"]/@label"),
 	CommunityLink(".//a:link[@rel=\"http://www.ibm.com/xmlns/prod/sn/container\"]/@href"),
-	Title(".//a:title"),
+	Title("/entry/title"),
 	TotalResults("/a:feed/os:totalResults"),
 	StartIndex("/feed/os:startIndex"),
 	Published(".//a:published"),

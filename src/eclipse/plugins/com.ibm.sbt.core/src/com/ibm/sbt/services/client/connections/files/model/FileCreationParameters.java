@@ -120,7 +120,7 @@ public class FileCreationParameters {
         if (tags!=null && tags.size()>0) {
             if ( tags.size()>1) 
             throw new UnsupportedOperationException("multivalue tags args not yet supported");
-            ret.put("tags", tags.iterator().next());
+            ret.put("tag", tags.iterator().next());
         }
         if (visibility!=null) {
             ret.put("visibility", visibility.toString().toLowerCase());

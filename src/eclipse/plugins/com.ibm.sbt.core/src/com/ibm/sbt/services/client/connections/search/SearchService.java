@@ -361,6 +361,25 @@ public class SearchService extends BaseService {
      * A field constraint allows only results matching specific field values.
      * 
      * @param query Text to search for
+     * @param Constraint
+     * 
+     * @return ResultList
+     * @throws SearchServiceException
+     * 
+	   *http://www-10.IBM.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Constraints&content=pdcontent  
+     */
+	public ResultList getResultsWithConstraint(String query, Constraint constraint) throws SearchServiceException{
+		List<Constraint> constraintList = new ArrayList<Constraint>();
+		constraintList.add(constraint);
+		return getResultsWithConstraint(query, constraintList,null);
+	}
+	
+	
+    /**
+     * Search IBM Connection for public information with constraints
+     * A field constraint allows only results matching specific field values.
+     * 
+     * @param query Text to search for
      * @param List<Constraint>
      * 
      * @return ResultList

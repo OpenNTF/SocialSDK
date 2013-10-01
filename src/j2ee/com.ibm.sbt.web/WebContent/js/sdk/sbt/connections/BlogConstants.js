@@ -321,8 +321,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @property AtomBlogCommentCreate
          * @type String
          * @for sbt.connections.BlogService
-         */        
-        //AtomBlogCommentCreate : "/${blogs}/${blogHandle}/api/comments",
+         */
         AtomBlogCommentCreate : "/${blogs}/{blogHandle}/api/entrycomments/{postId}",
         
         /**
@@ -332,6 +331,6 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.BlogService
          */        
-        AtomBlogCommentEditRemove : "/${blogs}/{blogHandle}/api/comments/${commentId}"
+        AtomBlogCommentEditRemove : "/${blogs}/{blogHandle}/api/comments/{commentId}"
     }, conn);
 });

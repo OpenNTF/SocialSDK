@@ -13,10 +13,9 @@ require(["sbt/connections/BlogService", "sbt/dom", "sbt/json"],
                     dom.setText("content", text);
                 } else {
                         var firstBlogHandle = blogs[0].getHandle();
-				        var promise = blogService.getBlogPosts(firstBlogHandle,{ps: 1});
+				        var promise = blogService.createPost(post, firstBlogHandle);
 				        promise.then(
-			        		function(posts) {
-			        			post = posts[0];
+			        		function(post) {
 			        			post.setTitle("Post Updated at " + now.getTime());
 		        				var updatePromise = blogService.updatePost(post, firstBlogHandle);
 		        				updatePromise.then(

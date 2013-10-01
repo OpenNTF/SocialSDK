@@ -46,7 +46,7 @@
 		String communityId = comList.get(0).getCommunityUuid();
 		
 		ForumService service = new ForumService();
-		ForumTopic topic = service.newTopic();
+		ForumTopic topic = new ForumTopic(service, "");
 		topic.setTitle("Dummy Community based Forum Topic" + System.currentTimeMillis());
 		topic.setContent("Dummy Community based Forum Content");
 		

@@ -39,13 +39,20 @@ public enum ForumsXPath implements FieldEntry{
 	actorUserState("./author/snx:userState"),
 	title("./title"),
 	tags("./category/@term"), 
+	flag("./a:category[@scheme=\"http://www.ibm.com/xmlns/prod/sn/flags\"]/@term"),
 	content("./content"),
 	topicUrl("./link"),
 	permissions("./snx:permissions"),
 	inReplyTo("./thr:in-reply-to/@ref"),
 	selfUrl("./a:link[@rel=\"self\"]/@href"),
 	moderation("./snx:moderation/@status"),
-	threadCount("./link[@rel='replies']/@thr:count"),;
+	threadCount("./link[@rel='replies']/@thr:count"),
+	tagEntry("/app:categories/a:category"),
+	term("./@term"),
+	frequency("./@snx:frequency"),
+	intensity("./@snx:intensityBin"), 
+	visibility("./@snx:visibilityBin"),
+	;
 
 
 	private final XPathExpression path;

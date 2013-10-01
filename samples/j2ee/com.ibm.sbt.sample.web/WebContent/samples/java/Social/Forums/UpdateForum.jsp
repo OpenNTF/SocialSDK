@@ -28,7 +28,7 @@
 	pageEncoding="ISO-8859-1"%>
 <html>
 <head>
-	<title>SBT JAVA Sample - Create Forum</title>
+	<title>SBT JAVA Sample - Update Forum</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
@@ -42,13 +42,22 @@
 		Forum forum = (Forum)forums.iterator().next();
 		
 		forum = service.getForum(forum.getForumUuid());
-			
-		forum.setTitle("Updated ForumTitle" + System.currentTimeMillis());
+		long randomNumber = System.currentTimeMillis();
+		forum.setTitle("Updated ForumTitle" + randomNumber);
+	
+		List<String> tags = new ArrayList<String>();
+		tags.add("tag1_"+randomNumber);
+		tags.add("tag2_"+randomNumber);
+		forum.setTags(tags);
 		forum = forum.save(); 
 		out.println("Forum updated with title : " + forum.getTitle());
+		tags = forum.getTags();
+			for (int i = 0; i < tags.size(); i++) {
+				out.println(tags.get(i));
+				out.println("<br>");
+			}
 		
 	} catch (Exception e) {
-	e.printStackTrace();
 		out.println("<pre>");
 		out.println(e.getMessage());
 		out.println("</pre>");

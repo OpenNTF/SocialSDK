@@ -1312,9 +1312,9 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * Retrieve a blog comment, use the edit link for the blog entry 
          * which can be found in the my blogs feed.
          * 
-         * @method getBlog
-         * @param {String } commentUuid
+         * @method getComment
          * @param {String } blogHandle
+         * @param {String } commentUuid
          * @param {Object} args Object containing the query arguments to be 
          * sent (defined in IBM Connections Communities REST API) 
          */

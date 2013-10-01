@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * ï¿½ Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -97,8 +97,14 @@ public class ParameterProcessor {
 	          @Override
             public String getParameter(String parameter) {
 	              String name = ParameterProcessor.getParameterPart(parameter, "label"); 
-	              String value = finalRequest.getParameter(name);
-	              if(name == null && value == null){ // for backwards compatibility with non-labelled params...
+	              String value = null;
+	              if(name != null){
+	            	  value = finalRequest.getParameter(name);
+	              } else {
+	            	  name = ParameterProcessor.getParameterPart(parameter, "name");
+	              }
+	              
+	              if(value == null){ // for backwards compatibility with non-labelled params...
 	                  name = ParameterProcessor.getParameterPart(parameter, "name");
 	                  value = finalRequest.getParameter(name);
 	              }

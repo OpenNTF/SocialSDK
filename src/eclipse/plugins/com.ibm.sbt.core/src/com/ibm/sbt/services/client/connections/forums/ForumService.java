@@ -28,6 +28,7 @@ import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.util.EntityUtil;
 import com.ibm.sbt.services.client.connections.forums.feedhandler.ForumsFeedHandler;
 import com.ibm.sbt.services.client.connections.forums.feedhandler.RepliesFeedHandler;
+import com.ibm.sbt.services.client.connections.forums.feedhandler.TagFeedHandler;
 import com.ibm.sbt.services.client.connections.forums.feedhandler.TopicsFeedHandler;
 import com.ibm.sbt.services.client.connections.forums.transformers.BaseForumTransformer;
 import com.ibm.sbt.services.util.AuthUtil;
@@ -176,6 +177,67 @@ public class ForumService extends BaseService {
 		return forums;
 	}
 	
+	/**
+	 * This method returns the tags that have been assigned to forums
+	 * 
+	 * @return TagList
+	 * @throws ForumServiceException
+	 */
+	public TagList getForumsTags() throws ForumServiceException {
+		String tagsUrl = resolveUrl(ForumType.TAGS, FilterType.FORUMS);
+		TagList tags = null;
+		try {
+			tags = (TagList) getEntities(tagsUrl, null, new TagFeedHandler(this));
+		} catch (ClientServicesException e) {
+			throw new ForumServiceException(e);
+		} catch (IOException e) {
+			throw new ForumServiceException(e);
+		}
+
+		return tags;
+	}
+	/**
+	 * This method returns the tags that have been assigned to forum topics
+	 * 
+	 * @method getForumTopicsTags
+	 * 
+	 * @param forumUuid
+	 * @return TagList
+	 * @throws ForumServiceException
+	 */
+	public TagList getForumTopicsTags(String forumUuid) throws ForumServiceException {
+		return getForumTopicsTags(forumUuid, null);
+	}
+	/**
+	 * This method returns the tags that have been assigned to forum topics
+	 * 
+	 * @method getForumTopicsTags
+	 *  
+	 * @param forumUuid
+	 * @param parameters
+	 * @return TagList
+	 * @throws ForumServiceException
+	 */
+	public TagList getForumTopicsTags(String forumUuid, Map<String, String> parameters) throws ForumServiceException {
+		String tagsUrl = resolveUrl(ForumType.TAGS, FilterType.TOPICS);
+		if(null == parameters){
+			parameters = new HashMap<String, String>();
+		}
+		parameters.put(FORUM_UNIQUE_IDENTIFIER, forumUuid);
+		
+		TagList tags = null;
+		try {
+			tags = (TagList) getEntities(tagsUrl, parameters, new TagFeedHandler(this));
+		} catch (ClientServicesException e) {
+			throw new ForumServiceException(e);
+		} catch (IOException e) {
+			throw new ForumServiceException(e);
+		}
+
+		return tags;
+	}
+	
+	
 	// todo : missing overloaded method accepting params for getForum
 	
 	/**
@@ -204,14 +266,6 @@ public class ForumService extends BaseService {
 		return forum;
 	}
 	
-	
-	public Forum newForum() throws ForumServiceException {
-		return new Forum(this, "");
-	}
-	
-	public ForumTopic newTopic() throws ForumServiceException {
-		return new ForumTopic(this, "");
-	}
 	/**
 	 * Wrapper method to create a forum
 	 * <p>
@@ -567,6 +621,7 @@ public class ForumService extends BaseService {
 		try {
 			String url = resolveUrl(ForumType.TOPICS, null, null);
 			BaseForumTransformer transformer = new BaseForumTransformer(topic);
+		
 			Object payload = transformer.transform(topic.getFieldsMap());
 
 			Map<String, String> parameters = new HashMap<String, String>();
@@ -695,12 +750,7 @@ public class ForumService extends BaseService {
 		return reply;
 	}
 	
-	
-	public ForumReply newReply() throws ForumServiceException {
-		return new ForumReply(this, "");
-	}
 
-	
 	/**
 	 * Wrapper method to create a Reply
 	 * <p>

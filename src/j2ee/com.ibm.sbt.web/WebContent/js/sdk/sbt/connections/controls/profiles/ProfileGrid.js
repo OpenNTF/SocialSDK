@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -25,8 +25,9 @@ define([ "../../../declare",
 		 "./ProfileAction", 
 		 "../../../connections/controls/vcard/SemanticTagService", 
 		 "../../../store/parameter",
-		 "../../../connections/ProfileConstants"], 
-        function(declare, sbt, lang, Grid, ProfileGridRenderer, ProfileAction, SemanticTagService, parameter, consts) {
+		 "../../../connections/ProfileConstants",
+		 "../../../connections/CommunityConstants"], 
+        function(declare, sbt, lang, Grid, ProfileGridRenderer, ProfileAction, SemanticTagService, parameter, consts, communities) {
 
 	var sortVals = {
 			displayName: "displayName",
@@ -129,6 +130,16 @@ define([ "../../../declare",
                 rendererArgs : {
                     type : "profile"
                 }
+            },
+            "communityMembers" : {
+                storeArgs : {
+                    attributes : communities.CommunityXPath,
+                    feedXPath : communities.CommunityFeedXPath,
+                    paramSchema: ParamSchema
+                },
+                rendererArgs : {
+                    type : "profile"
+                }
             }
         },
         
@@ -196,7 +207,10 @@ define([ "../../../declare",
             }
             if (this.type == "colleagues") {
             	params = lang.mixin(params, { connectionType : "colleague" });
+            } else if (this.type == "communityMembers") {
+            	params = lang.mixin(params, { communityUuid : this.communityUuid });
             }
+            
             if (this.email) {
             	params = lang.mixin(params, { email : this.email });
             } 

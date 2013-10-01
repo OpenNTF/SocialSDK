@@ -56,6 +56,11 @@ public class ActivityNode extends Activity {
 		super(service, handler);
 	}
 	
+	@Override
+	public String getTitle() {
+		return getAsString(ActivityXPath.ActivityNodeTitle);
+	}
+	
 	public void setPosition(int position){
 		String positionStr = String.valueOf(position);
 		setAsString(ActivityXPath.Position, positionStr);

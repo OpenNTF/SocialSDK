@@ -37,7 +37,10 @@
 package com.ibm.sbt.services.client.connections.search;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import com.ibm.commons.util.StringUtil;
@@ -62,6 +65,7 @@ public class SearchService extends BaseService {
 	private static final String _basicUrl				= "atom/";
 	public static final String _oauthUrl				= "oauth/atom/";
 	
+	private static final String seperator				= ",";
 	
 	/**
 	 * Default Constructor
@@ -123,25 +127,25 @@ public class SearchService extends BaseService {
 		
 	}
 
-	/**
+/*	*//**
      * Search IBM Connections for public information, tagged with the specified tags.
      * 
 	 * @param tag
 	 * @return
 	 * @throws SearchServiceException
-	 */
+	 *//*
     public ResultList getResultsByTag(String tag) throws SearchServiceException {
     	return getResultsByTag(new String[]{ tag }, null);
 	}
 	
-    /**
+    *//**
      * Search IBM Connections for public information, tagged with the specified tags.
      * 
      * @param tags
      * @param parameters
      * @return
      * @throws SearchServiceException
-     */
+     *//*
     public ResultList getResultsByTag(String[] tags, Map<String, String> parameters) throws SearchServiceException {
 		ResultList searchResults;
 		
@@ -157,6 +161,55 @@ public class SearchService extends BaseService {
 			throw new SearchServiceException(e);
 		} 
 		return searchResults;
+	}*/
+	
+	
+	/**
+	 * Search IBM Connections for public information, tagged with the specified tags.
+	 * 
+	 * @param String
+	 *            Single tag to be search for, for multiple tags use other overloaded method
+	 * @return ResultList
+	 * @throws SearchServiceException
+	 */
+	public ResultList getResultsByTag(String tag) throws SearchServiceException{
+		List<String> taglist = new ArrayList<String>();
+		taglist.add(tag);
+		return getResultsByTag(taglist,null);
+	}
+	
+	/**
+	 * Search IBM Connections for public information, tagged with the specified tags.
+	 * 
+	 * @param List
+	 *            of Tags to searched for
+	 * @return ResultList
+	 * @throws SearchServiceException
+	 */
+	public ResultList getResultsByTag(List<String> tags) throws SearchServiceException{
+		return getResultsByTag(tags,null);
+	}
+	
+	/**
+	 * Search IBM Connections for public information, tagged with the specified tags.
+	 * 
+	 * @param List
+	 *            of Tags to searched for
+	 * @return ResultList
+	 * @throws SearchServiceException
+	 */
+	public ResultList getResultsByTag(List<String> tags,
+			Map<String, String> parameters) throws SearchServiceException {
+		// High level wrapper, provides a convenient mechanism for search for
+		// tags, uses constraints internally
+		List<String> formattedTags = new ArrayList<String>();
+		List<Constraint> constraints = new ArrayList<Constraint>();
+		formattedTags = createTagConstraint(tags);
+		Constraint constraint = new Constraint();
+		constraint.setType("category");
+		constraint.setValues(formattedTags);
+		constraints.add(constraint);
+		return getResultsWithConstraint("", constraints,parameters);
 	}
 	
 	/**
@@ -302,6 +355,64 @@ public class SearchService extends BaseService {
 		
 	}
 	
+	
+    /**
+     * Search IBM Connection for public information with constraints
+     * A field constraint allows only results matching specific field values.
+     * 
+     * @param query Text to search for
+     * @param Constraint
+     * 
+     * @return ResultList
+     * @throws SearchServiceException
+     * 
+	   *http://www-10.IBM.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Constraints&content=pdcontent  
+     */
+	public ResultList getResultsWithConstraint(String query, Constraint constraint) throws SearchServiceException{
+		List<Constraint> constraintList = new ArrayList<Constraint>();
+		constraintList.add(constraint);
+		return getResultsWithConstraint(query, constraintList,null);
+	}
+	
+	
+    /**
+     * Search IBM Connection for public information with constraints
+     * A field constraint allows only results matching specific field values.
+     * 
+     * @param query Text to search for
+     * @param List<Constraint>
+     * 
+     * @return ResultList
+     * @throws SearchServiceException
+     * 
+	   *http://www-10.IBM.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Constraints&content=pdcontent  
+     */
+	public ResultList getResultsWithConstraint(String query, List<Constraint> constraints) throws SearchServiceException{
+		return getResultsWithConstraint(query, constraints,null);
+	}
+    
+    
+    /**
+     * Search IBM Connection for public information with constraints
+     * A field constraint allows only results matching specific field values.
+     * 
+     * @param query Text to search for
+     * @param List<Constraint>
+     * 
+     * @return ResultList
+     * @throws SearchServiceException
+     * 
+	   *http://www-10.IBM.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Constraints&content=pdcontent  
+     */
+	public ResultList getResultsWithConstraint(String query, List<Constraint> constraints, Map<String, String> parameters) throws SearchServiceException{
+		// We can not use a map of constraints, since there could be multiple constraints but map can have only one key named constraint
+		String formattedConstraints = generateConstraintParameter(constraints);
+		if(parameters == null){
+			parameters = new HashMap<String, String>();
+		}
+		parameters.put("constraint", formattedConstraints.toString());
+		return getResults(query, parameters);
+	}
 	/**
      * Search IBM Connection for available scopes ( Applications in which search can be executed )
      * 
@@ -327,7 +438,7 @@ public class SearchService extends BaseService {
 	 * Internal service methods
 	 */
 	
-    private String createTagConstraint(String[] tags) throws JsonException {
+/*    private String createTagConstraint(String[] tags) throws JsonException {
     	String[] tagValues = new String[tags.length];
     	for (int i=0; i<tags.length; i++) {
     		tagValues[i] = "Tag/" + tags[i];
@@ -337,7 +448,17 @@ public class SearchService extends BaseService {
     	jsonObject.putJsonProperty("type", "category");
     	jsonObject.putJsonProperty("values", tagValues);
     	return jsonObject.toString();
-    }
+    }*/
+     
+ 	private List createTagConstraint(List<String> tags){
+		List<String> formattedTags = new ArrayList<String>();
+		String tagkey = "Tag/";
+		for (Iterator iterator = tags.iterator(); iterator.hasNext();) {
+			String tag = (String) iterator.next();
+			formattedTags.add(tagkey+tag);			
+		}
+		return formattedTags;
+	}
 	
 	
 	/*
@@ -385,5 +506,51 @@ public class SearchService extends BaseService {
 			}
 		}
 		return baseUrl.toString();
+	}
+	
+	
+	/*
+	 * Method formats the list of constraint into String as required by Search api.
+	 * 
+	 */
+	private String generateConstraintParameter(List<Constraint> constraints){
+		StringBuilder formattedConstraints = new StringBuilder();
+  		if(constraints != null){
+  			for (int constraintsCtr = 0; constraintsCtr < constraints.size(); constraintsCtr++) {
+  				Constraint constraint = (Constraint) constraints.get(constraintsCtr);
+  				StringBuilder constraintParameter = new StringBuilder("");
+  				constraintParameter.append("{\"type\":\"").append(constraint.getType()).append("\"");
+  				
+  				if(StringUtil.isNotEmpty(constraint.getId())){
+  					constraintParameter.append(",").append("\"id\":\"").append(constraint.getId()).append("\"");
+  				}
+  				
+  				// Extract all values
+  				List<String> allValues = constraint.getValues();
+  				StringBuilder values = new StringBuilder();
+  				
+  				for (int valueCtr = 0; valueCtr< allValues.size();valueCtr++) {
+  					String value = (String) allValues.get(valueCtr);
+  					if(valueCtr == 0){
+  						values.append("\"").append(value).append("\"");
+  					}else{
+  						values.append(seperator).append("\"").append(value).append("\"");
+  					}
+  					
+  				}
+  				constraintParameter.append(",").append("\"values\":[").append(values.toString()).append("]");
+  				
+  				if(StringUtil.isNotEmpty(constraint.getExactMatch())){
+  					constraintParameter.append(",").append("\"exactMatch\":\"").append(constraint.getExactMatch()).append("\"");
+  				}
+  				if(constraintsCtr > 0){
+  					formattedConstraints.append("&constraint=");
+  				}
+  				formattedConstraints.append(constraintParameter.toString());
+  			}
+  			formattedConstraints.append("}");
+  			
+  		}
+  		return formattedConstraints.toString();
 	}
 }

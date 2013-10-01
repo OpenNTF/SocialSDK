@@ -282,6 +282,30 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         AtomBlogsPostsRecommended : "/${blogs}/${blogHomepageHandle}/feed/recommended/atom",
         
         /**
+         * A feed of blogs tags.
+         *  
+         * Get a feed that includes all of the tags 
+         * in all of the blogs hosted by the Blogs application. 
+         * 
+         * @property AtomBlogsTags
+         * @type String
+         * @for sbt.connections.BlogService
+         */
+        AtomBlogsTags : "/${blogs}/${blogHomepageHandle}/feed/tags/atom",
+
+        /**
+         * A feed of blog tags.
+         *  
+         * Get a feed that includes all of the tags 
+         * in a perticular Blog. 
+         * 
+         * @property AtomBlogTags
+         * @type String
+         * @for sbt.connections.BlogService
+         */
+        AtomBlogTags : "/${blogs}/${blogHandle}/feed/tags/atom",
+        
+        /**
          * Create a Blog. 
          * 
          * @property AtomBlogCreate

@@ -24,6 +24,7 @@ import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
+import com.ibm.sbt.services.client.connections.communities.model.CommunityXPath;
 import com.ibm.sbt.services.client.connections.forums.ForumService;
 import com.ibm.sbt.services.client.connections.forums.ForumServiceException;
 import com.ibm.sbt.services.client.connections.forums.ForumsXPath;
@@ -109,6 +110,13 @@ public class BaseForumEntity extends BaseEntity {
 				   fields.put("tag" + i , tags.get(i));
 			}
 		}
+	}
+	
+	/**
+	 * @sets the tags
+	 */
+	public void setTags(String tags) {
+		setAsString(ForumsXPath.tags, tags);
 	}
 	
 	@Override

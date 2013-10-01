@@ -19,6 +19,7 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 import com.ibm.sbt.services.client.connections.forums.model.BaseForumEntity;
+import com.ibm.sbt.services.client.connections.forums.model.FlagType;
 
 /**
  * Reply model object
@@ -80,14 +81,35 @@ private String topicUuid;
    */
 	public String getPermisisons()throws ForumServiceException {
       return getAsString(ForumsXPath.permissions);
-  }
-	
-	 // returns the forumUuid user has set for save logic
-  private String getTopicUidFromService(){
-  	return topicUuid;
-  }
+	}
 
-  /**
+	// returns the forumUuid user has set for save logic
+	private String getTopicUidFromService(){
+		return topicUuid;
+	}
+
+	public void acceptAnswer() {
+		setAsString(ForumsXPath.flag, FlagType.ACCEPT_ANSWER.getFlagType());
+	}
+
+	public void declineAnswer() {
+		setAsString(ForumsXPath.flag, FlagType.DECLINE_ANSWER.getFlagType());
+	}
+	
+	public boolean isAnswer(){
+    	boolean answer = false;
+	    if(StringUtil.isNotEmpty(getAsString(ForumsXPath.flag))){
+	    	if(StringUtil.equalsIgnoreCase(getAsString(ForumsXPath.flag), FlagType.ACCEPT_ANSWER.getFlagType())){
+	    		answer = true;
+	    	}
+	        else{
+	        	answer = false;
+	        }
+        }
+    	return answer;
+    }
+	
+	/**
 	 * This method updates the IBM Connections Forum Reply on the server
 	 * 
 	 * @return

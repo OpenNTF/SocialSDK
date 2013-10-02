@@ -31,6 +31,7 @@ import com.ibm.sbt.services.client.connections.forums.feedhandler.RepliesFeedHan
 import com.ibm.sbt.services.client.connections.forums.feedhandler.TagFeedHandler;
 import com.ibm.sbt.services.client.connections.forums.feedhandler.TopicsFeedHandler;
 import com.ibm.sbt.services.client.connections.forums.transformers.BaseForumTransformer;
+import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.util.AuthUtil;
 
 
@@ -67,9 +68,19 @@ public class ForumService extends BaseService {
 	 * Constructor
 	 * 
 	 * @param endpoint
-	 *            Creates ForumService Object with specified values of endpoint
+	 *            Creates ForumService Object with the specified endpoint
 	 */
 	public ForumService(String endpoint) {
+		super(endpoint, DEFAULT_CACHE_SIZE);
+	}
+	
+	/**
+	 * Constructor
+	 * 
+	 * @param endpoint
+	 *            Creates ForumService Object with the specified endpoint
+	 */
+	public ForumService(Endpoint endpoint) {
 		super(endpoint, DEFAULT_CACHE_SIZE);
 	}
 	

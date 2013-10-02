@@ -16,8 +16,9 @@
 package com.ibm.sbt.test.js.connections.search.api;
 
 import java.util.List;
-import org.junit.Ignore;
+
 import org.junit.Test;
+
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.connections.BaseSearchTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
@@ -35,7 +36,7 @@ public class GetResults extends BaseSearchTest {
         setAuthType(AuthType.AUTO_DETECT);
     }
 
-    @Test @Ignore
+    @Test
     public void testGetResults() {
         addSnippetParam("sample.searchQuery", "Test");
         

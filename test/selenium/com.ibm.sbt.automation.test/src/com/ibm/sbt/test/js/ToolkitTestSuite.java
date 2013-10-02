@@ -26,6 +26,8 @@ import com.ibm.sbt.test.js.sbt.EndpointGet;
 import com.ibm.sbt.test.js.sbt.EndpointPost;
 import com.ibm.sbt.test.js.sbt.EndpointPut;
 import com.ibm.sbt.test.js.sbt.LangMixin;
+import com.ibm.sbt.test.js.sbt.PromiseChain;
+import com.ibm.sbt.test.js.sbt.RequireModules;
 import com.ibm.sbt.test.js.sbt.ResponseHeaders;
 import com.ibm.sbt.test.js.sbt.TransportGet;
 
@@ -35,7 +37,16 @@ import com.ibm.sbt.test.js.sbt.TransportGet;
  * @date 6 Mar 2013
  */
 @RunWith(Suite.class)
-@SuiteClasses({ EndpointDelete.class, EndpointGet.class, EndpointPut.class, EndpointPost.class, LangMixin.class, ResponseHeaders.class, TransportGet.class })
+@SuiteClasses({ 
+	EndpointDelete.class, 
+	EndpointGet.class, 
+	EndpointPut.class, 
+	EndpointPost.class, 
+	LangMixin.class, 
+	ResponseHeaders.class,
+	RequireModules.class,
+	PromiseChain.class,
+	TransportGet.class })
 public class ToolkitTestSuite {
     @AfterClass
     public static void cleanup() {

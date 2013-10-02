@@ -20,7 +20,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.ibm.sbt.test.js.connections.forums.api.GetForums;
+import com.ibm.sbt.test.js.connections.forums.api.GetAllForums;
 import com.ibm.sbt.test.js.connections.forums.api.GetMyForums;
 import com.ibm.sbt.test.js.connections.forums.api.GetPublicForums;
 
@@ -33,7 +33,7 @@ import com.ibm.sbt.test.js.connections.forums.api.GetPublicForums;
 @SuiteClasses({ 
 	GetMyForums.class, 
 	GetPublicForums.class, 
-	GetForums.class })
+	GetAllForums.class })
 public class ForumsTestSuite {
     @AfterClass
     public static void cleanup() {

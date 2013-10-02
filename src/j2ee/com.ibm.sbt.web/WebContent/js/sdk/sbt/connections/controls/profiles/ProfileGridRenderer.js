@@ -80,7 +80,7 @@ define(["../../../declare",
          
          /**
           * Generates the profile photo URL for displaying the photos of community members
-          * @method tooltip
+          * @method photoUrl
           * @param grid The Grid Dijit
           * @param item the element containing the uid
           * @param i the number of the current row

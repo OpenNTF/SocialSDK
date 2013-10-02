@@ -27,9 +27,9 @@ import com.ibm.sbt.automation.core.test.BaseAuthServiceTest;
  */
 public class MyPeopleSearch extends BaseAuthServiceTest {
 
-    @Test @Ignore
+    @Test
     public void testNoError() {
-        boolean result = checkNoError("Social_Search_REST_My_People_Search", true);
+        boolean result = checkNoError("Social_Search_REST_My_Person_Search", true);
         assertTrue(getNoErrorMsg(), result);
     }
 

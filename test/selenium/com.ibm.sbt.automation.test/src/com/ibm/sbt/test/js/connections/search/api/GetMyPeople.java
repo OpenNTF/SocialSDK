@@ -16,8 +16,9 @@
 package com.ibm.sbt.test.js.connections.search.api;
 
 import java.util.List;
-import org.junit.Ignore;
+
 import org.junit.Test;
+
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.connections.BaseSearchTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
@@ -35,14 +36,14 @@ public class GetMyPeople extends BaseSearchTest {
         setAuthType(AuthType.AUTO_DETECT);
     }
 
-    @Test @Ignore
+    @Test
     public void testGetMyPeople() {
-        addSnippetParam("sample.searchQuery", "Test");
+        addSnippetParam("sample.searchQuery", "Frank");
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         List jsonList = previewPage.getJsonList();
         for (int i=0; i<jsonList.size(); i++) {
-        	assertResultValid((JsonJavaObject)jsonList.get(i));
+        	assertFacetValueValid((JsonJavaObject)jsonList.get(i));
         }
     }
     

@@ -10,13 +10,14 @@ import junit.framework.Assert;
 import com.ibm.sbt.automation.core.utils.Trace;
 import com.ibm.sbt.security.authentication.AuthenticationException;
 import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.communities.Community;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
 import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
+import com.ibm.sbt.services.client.connections.files.File;
 import com.ibm.sbt.services.client.connections.files.FileService;
 import com.ibm.sbt.services.client.connections.files.FileServiceException;
 import com.ibm.sbt.services.client.connections.files.model.FileCreationParameters;
-import com.ibm.sbt.services.client.connections.files.model.FileEntry;
 
 public class BaseGridTestSetup extends BaseApiTest{
 	
@@ -24,10 +25,10 @@ public class BaseGridTestSetup extends BaseApiTest{
 	protected FileService fileService;
 	
 	/**fileEntry represents a Test File That will be created */
-	protected FileEntry fileEntry;
+	protected File fileEntry;
 	
 	/**folder represents a folder which will be created for testing*/
-	protected FileEntry folder;
+	protected File folder;
 	
 	/**Fail the Test if the deletion fails */
 	private boolean failIfAfterDeletionFails = true;
@@ -60,7 +61,7 @@ public class BaseGridTestSetup extends BaseApiTest{
             CommunityService communityService = getCommunityService();
             
         	long start = System.currentTimeMillis();
-            community = communityService.newCommunity();
+            community = new Community(communityService, "");
             community.setTitle(title+start);
             community.setCommunityType(type);
             community.setContent(content);
@@ -150,6 +151,9 @@ public class BaseGridTestSetup extends BaseApiTest{
 		} catch (FileServiceException e) {
 			e.printStackTrace();
 			Assert.fail("Error creating test folder: " + e.getMessage());
+		} catch (TransformerException te) {
+			te.printStackTrace();
+			Assert.fail("Error creating test folder: " + te.getMessage());
 		}
 	}
 
@@ -168,17 +172,17 @@ public class BaseGridTestSetup extends BaseApiTest{
 			p.tags.add("text");
 			Map<String, String> params = p.buildParameters();			
 			
-			fileEntry = fileService.upload(new ByteArrayInputStream(content.getBytes()), id, content.length(), params);
+			fileEntry = fileService.uploadFile(new ByteArrayInputStream(content.getBytes()), id, content.length(), params);
 			
 			//delete the file and folder so there are items in the "trash"
 			deleteFileAndQuit();
 			
 			//recreate the folder and files 
 			createFolder();
-			fileEntry = fileService.upload(new ByteArrayInputStream(content.getBytes()), id, content.length(), params);
+			fileEntry = fileService.uploadFile(new ByteArrayInputStream(content.getBytes()), id, content.length(), params);
 
 			params = new HashMap<String, String>();
-			fileService.addCommentToFile(fileEntry, "Comment added by Grid Setup", params);
+			fileService.addCommentToFile(fileEntry.getFileId(), "Comment added by Grid Setup", params);
 			fileService.pinFile(fileEntry.getFileId());
 			if(folder != null){
 				fileService.addFileToFolder(fileEntry.getFileId(), folder.getFileId());
@@ -193,6 +197,9 @@ public class BaseGridTestSetup extends BaseApiTest{
 			fileEntry = null;
 	        fse.printStackTrace();
 			Assert.fail("Error creating test file: " + fse.getMessage());
+		} catch (TransformerException te) {
+			te.printStackTrace();
+			Assert.fail("Error creating test file: " + te.getMessage());
 		}
 	}
 	

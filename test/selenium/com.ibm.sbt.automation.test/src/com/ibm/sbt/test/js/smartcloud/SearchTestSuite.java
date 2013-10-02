@@ -24,16 +24,12 @@ import org.junit.runners.Suite.SuiteClasses;
 import com.ibm.sbt.automation.core.environment.TestEnvironment;
 import com.ibm.sbt.automation.core.environment.TestEnvironmentFactory;
 import com.ibm.sbt.test.js.connections.search.PeopleSearch;
-import com.ibm.sbt.test.js.connections.search.api.GetApplications;
-import com.ibm.sbt.test.js.connections.search.api.GetDates;
-import com.ibm.sbt.test.js.connections.search.api.GetMyApplications;
-import com.ibm.sbt.test.js.connections.search.api.GetMyDates;
 import com.ibm.sbt.test.js.connections.search.api.GetMyPeople;
 import com.ibm.sbt.test.js.connections.search.api.GetMyResults;
-import com.ibm.sbt.test.js.connections.search.api.GetMyTags;
+import com.ibm.sbt.test.js.connections.search.api.GetMyResultsByTag;
 import com.ibm.sbt.test.js.connections.search.api.GetPeople;
 import com.ibm.sbt.test.js.connections.search.api.GetResults;
-import com.ibm.sbt.test.js.connections.search.api.GetTags;
+import com.ibm.sbt.test.js.connections.search.api.GetResultsByTag;
 
 /**
  * @author mwallace
@@ -41,10 +37,9 @@ import com.ibm.sbt.test.js.connections.search.api.GetTags;
  * @date 6 Mar 2013
  */
 @RunWith(Suite.class)
-@SuiteClasses({ PeopleSearch.class, GetApplications.class, GetDates.class,
-		GetMyApplications.class, GetMyDates.class, GetMyPeople.class,
-		GetMyResults.class, GetMyTags.class, GetPeople.class, GetResults.class,
-		GetTags.class })
+@SuiteClasses({ PeopleSearch.class, GetMyPeople.class,
+		GetMyResults.class, GetMyResultsByTag.class, GetPeople.class, GetResults.class,
+		GetResultsByTag.class })
 public class SearchTestSuite {
     @BeforeClass
     public static void init() {

@@ -27,7 +27,7 @@ import com.ibm.sbt.automation.core.test.BaseAuthServiceTest;
  */
 public class TagSearch extends BaseAuthServiceTest {
 
-    @Test @Ignore
+    @Test
     public void testNoError() {
         boolean result = checkNoError("Social_Search_REST_Tag_Search");
         assertTrue(getNoErrorMsg(), result);

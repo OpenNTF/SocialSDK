@@ -31,6 +31,7 @@ import com.ibm.sbt.services.client.connections.activity.feedHandler.ActivityFeed
 import com.ibm.sbt.services.client.connections.activity.feedHandler.ActivityNodeFeedHandler;
 import com.ibm.sbt.services.client.connections.activity.feedHandler.MemberFeedHandler;
 import com.ibm.sbt.services.client.connections.activity.feedHandler.TagFeedHandler;
+import com.ibm.sbt.services.endpoints.Endpoint;
 
 /**
  * ActivityService can be used to perform operations related to Activities.
@@ -51,28 +52,29 @@ public class ActivityService extends BaseService {
 	 * Constructor Creates ActivityService Object with default endpoint
 	 */
 	public ActivityService() {
-		this(getDefaultEndpoint());
+		this(DEFAULT_ENDPOINT_NAME);
 	}
 
 	/**
 	 * Constructor
 	 * 
 	 * @param endpoint
-	 *            Creates ActivityService Object with specified values of endpoint
+	 *            Creates ActivityService Object with the specified endpoint
 	 */
 	public ActivityService(String endpoint) {
 		super(endpoint);
 	}
 	
-    /**
-     * getDefaultEndpoint
-     * 		provides the name of the default endpoint
-     * @return
-     */
-    private static String getDefaultEndpoint() {
-		return "connections";
+	/**
+	 * Constructor
+	 * 
+	 * @param endpoint
+	 *            Creates ActivityService Object with the specified endpoint
+	 */
+	public ActivityService(Endpoint endpoint) {
+		super(endpoint);
 	}
-    
+	
     /**
      * Method returns Activities of the logged in user
      * 

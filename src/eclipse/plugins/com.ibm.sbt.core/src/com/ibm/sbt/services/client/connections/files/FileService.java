@@ -24,11 +24,13 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
+
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
@@ -49,6 +51,7 @@ import com.ibm.sbt.services.client.connections.files.util.Messages;
 import com.ibm.sbt.services.client.ClientService.ContentStream;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.ClientService;
+import com.ibm.sbt.services.endpoints.Endpoint;
 
 /**
  * FileService can be used to perform File related operations.
@@ -79,6 +82,16 @@ public class FileService extends BaseService {
      * @param endpoint
      */
     public FileService(String endpoint) {
+        super(endpoint);
+    }
+    
+	/**
+     * Constructor
+     * 		Creates a service object with specified endpoint
+     * 
+     * @param endpoint
+     */
+    public FileService(Endpoint endpoint) {
         super(endpoint);
     }
     

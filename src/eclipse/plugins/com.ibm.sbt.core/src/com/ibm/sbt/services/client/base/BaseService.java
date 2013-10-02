@@ -76,6 +76,27 @@ public abstract class BaseService {
         this.cacheSize = cacheSize;
     }
 
+	/**
+     * Constructor
+     * 
+     * @param endpoint
+     * @param cacheSize
+     */
+    public BaseService(Endpoint endpoint) {
+        this(endpoint, DEFAULT_CACHE_SIZE);
+    }
+
+	/**
+     * Constructor
+     * 
+     * @param endpoint
+     * @param cacheSize
+     */
+    public BaseService(Endpoint endpoint, int cacheSize) {
+        this.endpoint = endpoint;
+        this.cacheSize = cacheSize;
+    }
+
     /*
      * Check the environment to see which endpoints are available.
      * @param endpointName Requested endpoint.

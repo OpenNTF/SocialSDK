@@ -1,0 +1,149 @@
+<?xml version="1.0"?>
+<faces-config>
+	<!--  
+		Password store based on DBCredentialStore
+	-->
+	<managed-bean>
+		<managed-bean-name>CredStoreDB</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.security.credential.store.DBCredentialStore</managed-bean-class>
+		<!--  
+			Managed Property jdbcDriverClass is required to provide the driver class name, when jndi is not being used.
+			The Property can be provided in a way, mentioned below.
+		-->
+		<!-- <managed-property> 
+			<property-name>jdbcDriverClass</property-name> 
+			<value>org.apache.derby.jdbc.EmbeddedDriver</value> 
+		</managed-property> -->
+		<managed-property> 
+			<property-name>jndiName</property-name> 
+			<value>jdbc/ibmsbt-dbtokenstore</value> 
+		</managed-property>
+		<managed-property> 
+			<property-name>tableName</property-name> 
+			<value>SBTKREP</value> 
+		</managed-property>
+		<managed-bean-scope>application</managed-bean-scope>
+		<!-- Fixed OAuth Application parameters -->
+	</managed-bean>
+	
+	<!-- Default Environment -->
+	<managed-bean>
+		<managed-bean-name>defaultEnvironment</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.jslibrary.SBTEnvironment</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+		<managed-property>
+			<property-name>endpoints</property-name>
+			<value>smartcloud:connections</value>
+		</managed-property>
+	</managed-bean>
+	
+	<!-- Connections OAuth 2.0 -->
+	<managed-bean>
+		<managed-bean-name>connectionsOA2</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.services.endpoints.ConnectionsOAuth2Endpoint</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<!-- Endpoint URL -->
+		<managed-property>
+			<property-name>url</property-name>
+			<value>%{connections.ga.url}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>apiVersion</property-name>
+			<value>%{connections.ga.apiVersion}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>serviceName</property-name>
+			<value>%{connections.ga.serviceName}</value>
+		</managed-property>
+		<!-- OAuth parameters -->
+		<managed-property>
+			<property-name>appId</property-name>
+			<value>%{connections.ga.appId}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>consumerKey</property-name>
+			<value>%{connections.ga.consumerKey}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>consumerSecret</property-name>
+			<value>%{connections.ga.consumerSecret}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>authorizationURL</property-name>
+			<value>%{connections.ga.authorizationURL}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>accessTokenURL</property-name>
+			<value>%{connections.ga.accessTokenURL}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>forceTrustSSLCertificate</property-name>
+			<value>true</value>
+		</managed-property>
+	</managed-bean>
+  
+	<!--  SmartCloud OAuth 1.0 -->	
+	<managed-bean>
+		<managed-bean-name>smartcloud</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.services.endpoints.SmartCloudOAuthEndpoint</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<!-- Endpoint URL -->
+		<managed-property>
+			<property-name>url</property-name>
+			<value>%{smartcloud.url}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>apiVersion</property-name>
+			<value>%{smartcloud.apiVersion}</value>
+		</managed-property>
+		<!-- Trust the connection -->
+		<managed-property>
+			<property-name>forceTrustSSLCertificate</property-name>
+			<value>true</value>
+		</managed-property>
+		<!-- Fixed values for the registered application -->
+		<managed-property>
+			<property-name>consumerKey</property-name>
+			<value>%{smartcloud.consumerKey}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>consumerSecret</property-name>
+			<value>%{smartcloud.consumerSecret}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>requestTokenURL</property-name>
+			<value>%{smartcloud.requestTokenURL}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>authorizationURL</property-name>
+			<value>%{smartcloud.authorizationURL}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>accessTokenURL</property-name>
+			<value>%{smartcloud.accessTokenURL}</value>
+		</managed-property>	
+		<managed-property>
+			<property-name>signatureMethod</property-name>
+			<!-- <value>HMAC-SHA1</value> -->
+			<value>PLAINTEXT</value>
+		</managed-property>
+		<!-- Access to the credential store -->
+		<managed-property>
+			<property-name>credentialStore</property-name>
+			<value>CredStoreDB</value>
+		</managed-property>
+		<managed-property>
+			<property-name>serviceName</property-name>
+			<value>smartcloud</value>
+		</managed-property>
+		<managed-property>
+			<property-name>appId</property-name>
+			<value>%{smartcloud.appId}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>authenticationService</property-name>
+			<value>communities/service/atom/communities/my</value>
+		</managed-property>
+	</managed-bean>
+  
+</faces-config>

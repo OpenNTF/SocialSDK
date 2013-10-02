@@ -49,7 +49,8 @@ public enum CommunityXPath implements FieldEntry {
 	contributorEmail("./a:contributor/a:email"),
 	communityTheme("./snx:communityTheme"),
 	role("./snx:role"),
-	inviteCommunityUrl("./a:link[@rel='http://www.ibm.com/xmlns/prod/sn/community']/@href"),;
+	inviteCommunityUrl("./a:link[@rel='http://www.ibm.com/xmlns/prod/sn/community']/@href"),
+	inviteUrl("./a:link[@rel='edit']/@href");
 	
 	private final XPathExpression path;
 	

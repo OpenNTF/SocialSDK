@@ -83,6 +83,10 @@ public class Invite extends BaseEntity{
 		setAsString(CommunityXPath.title, title);
 	}
 	
+	public String getInviteUrl(){
+		return getAsString(CommunityXPath.inviteUrl);
+	}
+	
 	/**
 	 * @return the authorUid
 	 */

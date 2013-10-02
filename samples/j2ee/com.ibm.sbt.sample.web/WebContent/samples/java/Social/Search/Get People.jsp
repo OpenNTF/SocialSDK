@@ -14,6 +14,8 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@page import="com.ibm.sbt.services.client.connections.search.FacetValueList"%>
+<%@page import="com.ibm.sbt.services.client.connections.search.FacetValue"%>
 <%@page import="com.ibm.sbt.services.client.connections.search.Result"%>
 <%@page import="com.ibm.sbt.services.client.connections.search.ResultList"%>
 <%@page import="com.ibm.sbt.services.client.connections.search.SearchService"%>
@@ -30,28 +32,35 @@
 <head>
 <title>SBT JAVA Sample - Search</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" title="Style" href="/sbt.bootstrap211/bootstrap/css/bootstrap.css"></link>
+<link rel="stylesheet" type="text/css" title="Style" href="/sbt.bootstrap211/bootstrap/css/bootstrap-responsive.css"></link>
 </head>
 
 <body>
 	<h4>Search : Get People</h4>
+	
 	<div id="content">
+	<table class="table table-bordered" id="communityTable">
+		<tr class="label label-info">
+			<th>Name</th>
+			<th>Id</th>
+		</tr>
 	<%
 		try {
 			SearchService svc = new SearchService();
-			ResultList results = svc.getPeople("test");
-			if(results.size()<=0){
-				out.println("No results found");
+			FacetValueList facetValues = svc.getPeople("test");
+			if(facetValues.size()<=0){
+				out.println("<tr><td colspan='2'>No People found</td><tr>");
 			}			
-			out.println("<br>");
-			for (Result result : results) {
-					out.println("<b>People : </b> " + result.getTitle());
-					out.println("<br>");
+			for (FacetValue facetValue : facetValues) {
+					out.println("<tr><td>"+facetValue.getLabel()+"</td><td>"+facetValue.getId()+"</td></tr>");
 			}
 		} catch (Throwable e) {
 			out.println("<pre>");
-			out.println("Problem Occurred while executing search query: " + e.getMessage());
+			out.println("Problem occurred while executing search query: " + e.getMessage());
 		}
 	%>
+	</table>
 	</div>
 </body>
 </html>

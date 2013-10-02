@@ -70,7 +70,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         PostXPath : {
             entry : "/a:entry",
             uid : "a:id",
-            blogEntryId : "a:id",
+            postUuid : "a:id",
             title : "a:title",
             summary : "a:summary[@type='html']",
             blogEntryUrlAlternate : "a:link[@rel='alternate']/@href",
@@ -96,6 +96,17 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         },
         
         /**
+         * XPath expressions to be used when reading a Blog Post
+         * 
+         * @property PostXPath
+         * @type Object
+         * @for sbt.connections.BlogService
+         */
+        TagsXPath : {
+            entry : "/atom:category"
+        },
+        
+        /**
          * XPath expressions to be used when reading a Blog Post Comment
          * 
          * @property CommentXPath
@@ -105,6 +116,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         CommentXPath : {
             entry : "/a:entry",
             uid : "a:id",
+            commentUuid : "a:id",
             title : "a:title",
             summary : "a:summary[@type='html']",
             commentUrlAlternate : "a:link[@rel='alternate']/@href",
@@ -199,7 +211,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.BlogService
          */
-        AtomBlogEnties : "/${blogs}/${blogHandle}/feed/entries/atom",
+        AtomBlogEnties : "/${blogs}/{blogHandle}/feed/entries/atom",
         	
         /**
          * A feed of a blog's comments.
@@ -212,7 +224,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.BlogService
          */
-        AtomBlogComments : "/${blogs}/${blogHandle}/feed/comments/atom",
+        AtomBlogComments : "/${blogs}/{blogHandle}/feed/comments/atom",
 
         /**
          * A feed of a blog's comments.
@@ -267,6 +279,82 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.BlogService
          */
-        AtomBlogsPostsRecommended : "/blogs/homepage/feed/recommended/atom"
+        AtomBlogsPostsRecommended : "/${blogs}/${blogHomepageHandle}/feed/recommended/atom",
+        
+        /**
+         * A feed of blogs tags.
+         *  
+         * Get a feed that includes all of the tags 
+         * in all of the blogs hosted by the Blogs application. 
+         * 
+         * @property AtomBlogsTags
+         * @type String
+         * @for sbt.connections.BlogService
+         */
+        AtomBlogsTags : "/${blogs}/${blogHomepageHandle}/feed/tags/atom",
+
+        /**
+         * A feed of blog tags.
+         *  
+         * Get a feed that includes all of the tags 
+         * in a perticular Blog. 
+         * 
+         * @property AtomBlogTags
+         * @type String
+         * @for sbt.connections.BlogService
+         */
+        AtomBlogTags : "/${blogs}/${blogHandle}/feed/tags/atom",
+        
+        /**
+         * Create a Blog. 
+         * 
+         * @property AtomBlogCreate
+         * @type String
+         * @for sbt.connections.BlogService
+         */
+        AtomBlogCreate : "/${blogs}/${blogHomepageHandle}/api/blogs",
+        
+        /**
+         * Edit or remove a Blog. 
+         * 
+         * @property AtomBlogEditDelete
+         * @type String
+         * @for sbt.connections.BlogService
+         */
+        AtomBlogEditDelete : "/${blogs}/${blogHomepageHandle}/api/blogs/{blogId}",
+        /**
+         * Create, Edit or remove a Blog Post. 
+         * 
+         * @property AtomBlogPostCreate
+         * @type String
+         * @for sbt.connections.BlogService
+         */
+        AtomBlogPostCreate : "/${blogs}/{blogHandle}/api/entries",
+        
+        /**
+         * Edit or remove a Blog Post. 
+         * 
+         * @property AtomBlogPostEditDelete
+         * @type String
+         * @for sbt.connections.BlogService
+         */
+        AtomBlogPostEditDelete : "/${blogs}/{blogHandle}/api/entries/{postId}",
+        /**
+         * Create, Edit or remove a Blog Comment. 
+         * 
+         * @property AtomBlogCommentCreate
+         * @type String
+         * @for sbt.connections.BlogService
+         */
+        AtomBlogCommentCreate : "/${blogs}/{blogHandle}/api/entrycomments/{postId}",
+        
+        /**
+         * Edit or remove a Blog Comment. 
+         * 
+         * @property AtomBlogCommentEditRemove
+         * @type String
+         * @for sbt.connections.BlogService
+         */        
+        AtomBlogCommentEditRemove : "/${blogs}/{blogHandle}/api/comments/{commentId}"
     }, conn);
 });

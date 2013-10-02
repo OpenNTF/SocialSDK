@@ -90,7 +90,7 @@ define(["../../../declare",
          photoUrl: function(grid, item, i, items) {
         	 var store = grid.store;
         	 var endpoint = store.getEndpoint();
-        	 var photoUrl = endpoint.baseUrl + "/profiles/photo.do?email=" + item.email;
+        	 var photoUrl = endpoint.baseUrl + "/profiles/photo.do?email=" + item.getValue("email");
       	 
         	 return photoUrl;
          }

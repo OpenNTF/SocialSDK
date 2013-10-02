@@ -18,6 +18,7 @@ package com.ibm.sbt.services.client.smartcloud.profiles;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonObject;
 import com.ibm.sbt.services.client.base.BaseService;
@@ -26,6 +27,7 @@ import com.ibm.sbt.services.client.smartcloud.profiles.util.Messages;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.endpoints.Endpoint;
 
 /**
  * ProfileService can be used to perform Profile Related operations. This is a dedicated Service for
@@ -35,13 +37,16 @@ import com.ibm.sbt.services.client.ClientServicesException;
  * @author Vimal Dhupar
  */
 public class ProfileService extends BaseService {
+	
+	public static final String	SMARTCLOUD_DEFAULT_ENDPOINT_NAME	= "smartcloud";
+	
 	private final ProfileFeedHandler profileFeedHandler	= new ProfileFeedHandler(this);
 
 	/**
 	 * Default Constructor - 0 argument constructor Calls the Constructor of BaseService Class.
 	 */
 	public ProfileService() {
-		this(DEFAULT_ENDPOINT_NAME, DEFAULT_CACHE_SIZE);
+		this(SMARTCLOUD_DEFAULT_ENDPOINT_NAME, DEFAULT_CACHE_SIZE);
 	}
 
 	/**
@@ -59,15 +64,33 @@ public class ProfileService extends BaseService {
 	 * 
 	 * @param endpoint
 	 * @param cacheSize
-	 *            Creates ProfileService with specified values of endpoint and CacheSize
+	 *            Creates ProfileService with specified endpoint and CacheSize
 	 */
 	public ProfileService(String endpoint, int cacheSize) {
 		super(endpoint, cacheSize);
 	}
 		
-	public String getDefaultEndpointName() {
-		return "smartcloud";
+	/**
+	 * Constructor
+	 * 
+	 * @param endpoint
+	 *            Creates ProfileService with specified endpoint and a default CacheSize
+	 */
+	public ProfileService(Endpoint endpoint) {
+		this(endpoint, DEFAULT_CACHE_SIZE);
 	}
+
+	/**
+	 * Constructor
+	 * 
+	 * @param endpoint
+	 * @param cacheSize
+	 *            Creates ProfileService with specified endpoint and CacheSize
+	 */
+	public ProfileService(Endpoint endpoint, int cacheSize) {
+		super(endpoint, cacheSize);
+	}
+		
 	/**
 	 * getProfile
 	 * <p>

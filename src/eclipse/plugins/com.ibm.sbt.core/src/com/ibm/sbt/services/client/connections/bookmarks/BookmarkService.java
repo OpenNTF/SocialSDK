@@ -73,10 +73,10 @@ public class BookmarkService extends BaseService {
 	 */
 	public BookmarkList getAllBookmarks(Map<String, String> parameters) throws BookmarkServiceException {
 		try {
-			String url = BookmarkUrls.ALL.getUrl(this, parameters);
-			return (BookmarkList)getEntities(url, null, new BookmarkFeedHandler(this));
+			String url = BookmarkUrls.ALL.getUrl(this);
+			return (BookmarkList)getEntities(url, parameters, new BookmarkFeedHandler(this));
 		} catch (Exception e) {
-			throw new BookmarkServiceException(e);
+			throw new BookmarkServiceException(e, "Error retrieving all bookmarks");
 		} 
 	}
 
@@ -98,10 +98,10 @@ public class BookmarkService extends BaseService {
 	 */
 	public BookmarkList getPopularBookmarks(Map<String, String> parameters) throws BookmarkServiceException {
 		try {
-			String url = BookmarkUrls.POPULAR.getUrl(this, parameters);
-			return (BookmarkList)getEntities(url, null, new BookmarkFeedHandler(this));
+			String url = BookmarkUrls.POPULAR.getUrl(this);
+			return (BookmarkList)getEntities(url, parameters, new BookmarkFeedHandler(this));
 		} catch (Exception e) {
-			throw new BookmarkServiceException(e);
+			throw new BookmarkServiceException(e, "Error retrieving popular bookmarks");
 		} 
 	}
 	
@@ -123,10 +123,10 @@ public class BookmarkService extends BaseService {
 	 */
 	public BookmarkList getMyNotifications(Map<String, String> parameters) throws BookmarkServiceException {
 		try {
-			String url = BookmarkUrls.MYNOTIFICATIONS.getUrl(this, parameters);
-			return (BookmarkList)getEntities(url, null, new BookmarkFeedHandler(this));
+			String url = BookmarkUrls.MYNOTIFICATIONS.getUrl(this);
+			return (BookmarkList)getEntities(url, parameters, new BookmarkFeedHandler(this));
 		} catch (Exception e) {
-			throw new BookmarkServiceException(e);
+			throw new BookmarkServiceException(e, "Error retrieving my notifications");
 		} 
 	}
 	
@@ -148,10 +148,10 @@ public class BookmarkService extends BaseService {
 	 */
 	public BookmarkList getMySentNotifications(Map<String, String> parameters) throws BookmarkServiceException {
 		try {
-			String url = BookmarkUrls.MYSENTNOTIFICATIONS.getUrl(this, parameters);
-			return (BookmarkList)getEntities(url, null, new BookmarkFeedHandler(this));
+			String url = BookmarkUrls.MYSENTNOTIFICATIONS.getUrl(this);
+			return (BookmarkList)getEntities(url, parameters, new BookmarkFeedHandler(this));
 		} catch (Exception e) {
-			throw new BookmarkServiceException(e);
+			throw new BookmarkServiceException(e, "Error retrieving my sent notifications");
 		} 
 	}
 	
@@ -174,9 +174,13 @@ public class BookmarkService extends BaseService {
 //	 * @throws BookmarkServiceException
 //	 */
 //	public Bookmark getBookmark(String bookmarkUuid) throws BookmarkServiceException {
-//		return null;
+//		try {
+//			String url = BookmarkUrls.???.getUrl(this);
+//			return (Bookmark)getEntity(url, null, new BookmarkFeedHandler(this));
+//		} catch (Exception e) {
+//			throw new BookmarkServiceException(e, "Error retrieving bookmark: "+bookmarkUuid);
+//		} 
 //	}
-//	
 //	
 //	/**
 //	 * Update a bookmark.

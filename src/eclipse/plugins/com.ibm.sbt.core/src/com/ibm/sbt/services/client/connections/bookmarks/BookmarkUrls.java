@@ -13,10 +13,7 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-
 package com.ibm.sbt.services.client.connections.bookmarks;
-
-import java.util.Map;
 
 /**
  * Class used in constructing URL for Blogs service
@@ -40,7 +37,7 @@ public enum BookmarkUrls {
 	/**
 	 * Return the URL for the specified request
 	 */
-	public String getUrl(BookmarkService service, Map<String, String> requestParams) {
+	public String getUrl(BookmarkService service) {
 		return format;
 	}
 

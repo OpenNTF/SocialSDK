@@ -24,6 +24,7 @@ import com.ibm.sbt.automation.core.environment.TestEnvironment;
 import com.ibm.sbt.test.js.connections.ActivitiesRestTestSuite;
 import com.ibm.sbt.test.js.connections.ActivitiesStreamsTestSuite;
 import com.ibm.sbt.test.js.connections.ActivitiesTestSuite;
+import com.ibm.sbt.test.js.connections.BlogsTestSuite;
 import com.ibm.sbt.test.js.connections.BookmarksRestTestSuite;
 import com.ibm.sbt.test.js.connections.CommunitiesRestTestSuite;
 import com.ibm.sbt.test.js.connections.CommunitiesTestSuite;
@@ -46,6 +47,7 @@ import com.ibm.sbt.test.sample.SampleFrameworkTestSuite;
 	ActivitiesTestSuite.class,
 	ActivitiesRestTestSuite.class,
 	ActivitiesStreamsTestSuite.class,
+	BlogsTestSuite.class,
 	BookmarksRestTestSuite.class,
 	CommunitiesRestTestSuite.class, 
 	CommunitiesTestSuite.class, 

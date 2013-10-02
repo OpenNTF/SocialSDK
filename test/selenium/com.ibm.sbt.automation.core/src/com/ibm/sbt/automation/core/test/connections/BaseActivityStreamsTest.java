@@ -15,25 +15,18 @@
  */
 package com.ibm.sbt.automation.core.test.connections;
 
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import junit.framework.Assert;
-
-import org.junit.After;
-import org.junit.Before;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.BaseApiTest;
 import com.ibm.sbt.automation.core.utils.Trace;
 import com.ibm.sbt.security.authentication.AuthenticationException;
 import com.ibm.sbt.services.client.SBTServiceException;
+import com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamEntityList;
 import com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamService;
-import com.ibm.sbt.services.client.connections.activitystreams.model.ActivityStreamEntity;
-import com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamEntityList;  
+import com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamEntity;
 import com.ibm.sbt.services.client.connections.communities.Community;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
 import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
@@ -111,8 +104,8 @@ public class BaseActivityStreamsTest extends BaseApiTest {
     	CommunityService communityService = new CommunityService();
     	Community community = null;
     	try{
-			community = communityService.newCommunity();
-			community.setTitle("Test Community" + System.currentTimeMillis());
+			community = new Community(communityService, "");
+			community.setTitle(this.getClass().getName() + "#" + this.hashCode() + " Community - " + System.currentTimeMillis());
 			community.setContent("Test Community created to test Activity Streams");
 			community.setTags(tags);
 			String communityId = communityService.createCommunity(community);

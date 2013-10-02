@@ -33,10 +33,10 @@ import com.ibm.sbt.automation.core.test.pageobjects.ResultPage;
  */
 public class PeopleSearch extends BaseAuthServiceTest {
 	
-    @Test @Ignore
+    @Test
     public void testPeopleSearch() {
     	PeopleSearchPage searchPage = launchSnippet();
-        boolean success = searchPage.peopleSearch("Test");
+        boolean success = searchPage.peopleSearch("Frank");
         Assert.assertTrue("No results when search for people", success);
     }
 

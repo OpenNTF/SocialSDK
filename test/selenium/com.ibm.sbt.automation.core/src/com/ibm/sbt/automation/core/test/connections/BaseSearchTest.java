@@ -31,26 +31,31 @@ public class BaseSearchTest extends BaseApiTest {
         setAuthType(AuthType.AUTO_DETECT);
     }
     
-    protected void assertResultValid(JsonJavaObject json, boolean hasScore) {
-    	assertResultValid(json, hasScore, false);
+    protected void assertResultValid(JsonJavaObject json, boolean hasRelevance) {
+    	assertResultValid(json, hasRelevance, false);
     }
     
     protected void assertResultValid(JsonJavaObject json) {
     	assertResultValid(json, false, false);
     }
     
-    protected void assertResultValid(JsonJavaObject json, boolean hasScore, boolean hasContent) {
+    protected void assertResultValid(JsonJavaObject json, boolean hasRelevance, boolean hasContent) {
         Assert.assertNull("Unexpected error detected on page", json.getString("code"));
         Assert.assertNotNull(json.getString("getTitle"));
-        if (hasScore) {
-        	Assert.assertNotNull(json.getString("getScore"));
-        } else {
-            Assert.assertNotNull(json.getString("getRank"));
-        }
+        if (hasRelevance) {
+        	Assert.assertNotNull(json.getString("getRelevance"));
+        } 
         Assert.assertNotNull(json.getString("getUpdated"));
         if (hasContent) {
         	Assert.assertNotNull(json.getString("getContent"));
         }
+    }
+
+    protected void assertFacetValueValid(JsonJavaObject json) {
+        Assert.assertNull("Unexpected error detected on page", json.getString("code"));
+        Assert.assertNotNull(json.getString("getId"));
+        Assert.assertNotNull(json.getString("getLabel"));
+        Assert.assertNotNull(json.getString("getWeight"));
     }
 
 }

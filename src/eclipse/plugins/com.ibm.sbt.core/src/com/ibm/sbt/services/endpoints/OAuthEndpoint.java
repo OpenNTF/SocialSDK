@@ -30,6 +30,7 @@ import com.ibm.commons.runtime.RuntimeConstants;
 import com.ibm.commons.runtime.util.UrlUtil;
 import com.ibm.commons.util.PathUtil;
 import com.ibm.commons.util.StringUtil;
+import com.ibm.sbt.security.authentication.AuthenticationException;
 import com.ibm.sbt.security.authentication.oauth.OAuthException;
 import com.ibm.sbt.security.authentication.oauth.consumer.AccessToken;
 import com.ibm.sbt.security.authentication.oauth.consumer.HMACOAuth1Handler;
@@ -39,6 +40,7 @@ import com.ibm.sbt.security.authentication.oauth.consumer.servlet.OAClientAuthen
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.endpoints.js.JSReference;
 import com.ibm.sbt.util.SBTException;
+
 import org.apache.http.Header;
 
 /**
@@ -60,6 +62,14 @@ public class OAuthEndpoint extends AbstractEndpoint {
 	protected OAuthEndpoint(OAuth1Handler handler) {
 		this.oAuthHandler = handler;
 	}
+	
+    public boolean login(String user) throws ClientServicesException {
+    	this.oAuthHandler.setUserId(user);
+    	if (isAuthenticated()) {
+    		return isAuthenticationValid();
+    	}
+    	return false;
+    }	
 	
 	@Override
 	public void checkValid() throws SBTException {

@@ -18,7 +18,9 @@ package com.ibm.sbt.services.client.base;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandlerException;
@@ -90,8 +92,9 @@ public class BaseEntity {
 	 * @param fieldName
 	 * @param value
 	 */
-	public void setAsString(FieldEntry field, String value) {
+	public BaseEntity setAsString(FieldEntry field, String value) {
 		fields.put(field.getName(), value);
+		return this;
 	}
 	/**
 	 * This method updates the value of a field. Used to create or update an entity.
@@ -100,8 +103,9 @@ public class BaseEntity {
 	 * @param value
 	 */
 	
-	public void setAsString(String field, String value) {
+	public BaseEntity setAsString(String field, String value) {
 		fields.put(field , value);
+		return this;
 	}
 	/**
 	 * Returns the value of a field as an int
@@ -173,12 +177,92 @@ public class BaseEntity {
 		if (fields.containsKey(field.getName())){
 			return (Date)fields.get(field.getName());
 		}
-		if (dataHandler != null)
+		if (dataHandler != null) {
 			try {
 				return dataHandler.getAsDate(field);
 			} catch (DataHandlerException e) {
 			}
+		}
 		throw new NullPointerException(StringUtil.format("Field {0} was not found or had no value",field.getName()));
+	}
+	
+	/**
+	 * Returns the value of a field as a date
+	 * 
+	 * @param field
+	 * @return
+	 */
+	public Date getAsDate(String fieldName){
+		if (fields.containsKey(fieldName)){
+			return (Date)fields.get(fieldName);
+		}
+		if (dataHandler != null) {
+			try {
+				return dataHandler.getAsDate(fieldName);
+			} catch (DataHandlerException e) {
+			}
+		}
+		throw new NullPointerException(StringUtil.format("Field {0} was not found or had no value",fieldName));
+	}
+	
+	/**
+	 * Returns the value of a field as a map
+	 * 
+	 * @param field
+	 * @return
+	 */
+	public Map<String, String> getAsMap(FieldEntry[] fields){
+		Map<String, String> map = new HashMap<String, String>();
+		for (FieldEntry field : fields) {
+			map.put(field.getName(), getAsString(field));
+		}
+		return map;
+	}
+	
+	/**
+	 * Returns the value of a field as a map
+	 * 
+	 * @param field
+	 * @return
+	 */
+	public Map<String, String> getAsMap(String[] fieldNames){
+		Map<String, String> map = new HashMap<String, String>();
+		for (String fieldName : fieldNames) {
+			map.put(fieldName, getAsString(fieldName));
+		}
+		return map;
+	}
+	
+	/**
+	 * Returns the value of a field as a map
+	 * 
+	 * @param field
+	 * @return
+	 */
+	public String[] getAsArray(FieldEntry field){
+		if (fields.containsKey(field.getName())){
+			return (String[])fields.get(field.getName());
+		}
+		if (dataHandler != null) {
+			return dataHandler.getAsArray(field.getName());
+		}
+		throw new NullPointerException(StringUtil.format("Field {0} was not found or had no value",field.getName()));
+	}
+	
+	/**
+	 * Returns the value of a field as a map
+	 * 
+	 * @param field
+	 * @return
+	 */
+	public String[] getAsArray(String fieldName){
+		if (fields.containsKey(fieldName)){
+			return (String[])fields.get(fieldName);
+		}
+		if (dataHandler != null) {
+			return dataHandler.getAsArray(fieldName);
+		}
+		throw new NullPointerException(StringUtil.format("Field {0} was not found or had no value",fieldName));
 	}
 	
 	/**
@@ -197,8 +281,9 @@ public class BaseEntity {
 	 * @param fieldName
 	 * @param value
 	 */
-	public void setAsFloat(String fieldName, float value){
+	public BaseEntity setAsFloat(String fieldName, float value){
 		fields.put(fieldName, new Float(value));
+		return this;
 	}
 	
 	/**
@@ -207,8 +292,9 @@ public class BaseEntity {
 	 * @param fieldName
 	 * @param value
 	 */
-	public void setAsBoolean(String fieldName, boolean value){
+	public BaseEntity setAsBoolean(String fieldName, boolean value){
 		fields.put(fieldName, new Boolean(value));
+		return this;
 	}
 	
 	/**
@@ -217,8 +303,31 @@ public class BaseEntity {
 	 * @param fieldName
 	 * @param value
 	 */
-	public void setAsDate(String fieldName, Date value){
+	public BaseEntity setAsDate(String fieldName, Date value){
 		fields.put(fieldName, value);
+		return this;
+	}
+	
+	/**
+	 * Receives an array as the value of a field and stores it as an array on the internal map 
+	 * 
+	 * @param fieldName
+	 * @param value
+	 */
+	public BaseEntity setAsArray(String fieldName, String[] value){
+		fields.put(fieldName, value);
+		return this;
+	}
+	
+	/**
+	 * Receives an array as the value of a field and stores it as an array on the internal map 
+	 * 
+	 * @param fieldName
+	 * @param value
+	 */
+	public BaseEntity setAsArray(FieldEntry field, String[] value){
+		fields.put(field.getName(), value);
+		return this;
 	}
 	
 	/**

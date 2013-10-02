@@ -25,14 +25,6 @@ public enum SearchType {
 	
 	PUBLIC("search"),
 	MY("mysearch"),
-	PEOPLESEARCH("search/facets/people"),
-	MYPEOPLESEARCH("mysearch/facets/people"),
-	TAGSSEARCH("search/facets/tags"),
-	MYTAGSSEARCH("mysearch/facets/tags"),
-	APPLICATIONS("search/facets/source"),
-	MYAPPLICATIONS("mysearch/facets/source"),
-	DATE("search/facets/date"),
-	MYDATE("mysearch/facets/date"),
 	SCOPE("scopes");
 	
 	String searchType;

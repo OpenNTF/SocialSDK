@@ -27,6 +27,9 @@ public class Messages {
 	public static String	CommunityBookmarksException				= "Problem occurred while fetching bookmarks of Community with id : {0}";
 	public static String	CommunityForumTopicsException			= "Problem occurred while fetching forum topics of Community with id : {0}";
 	public static String	CommunityInvitationsException			= "Problem occurred while fetching invitations";
+	public static String	CreateInvitationException				= "Problem occurred while creating invitation";
+	public static String	AcceptInvitationException				= "Problem occurred while accepting invitation";
+	public static String	DeclineInvitationException				= "Problem occurred while declining invitation";
 	public static String	CreateCommunityException				= "Error creating community";
 	public static String	CreateCommunityPayloadException			= "Error creating community Payload";
 	public static String	UpdateCommunityException				= "Error updating community";

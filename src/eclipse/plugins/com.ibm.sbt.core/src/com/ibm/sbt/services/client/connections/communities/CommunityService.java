@@ -31,11 +31,14 @@ import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.base.util.EntityUtil;
 import com.ibm.sbt.services.client.connections.communities.feedhandler.BookmarkFeedHandler;
 import com.ibm.sbt.services.client.connections.communities.feedhandler.CommunityFeedHandler;
+import com.ibm.sbt.services.client.connections.forums.feedhandler.ForumsFeedHandler;
 import com.ibm.sbt.services.client.connections.forums.feedhandler.TopicsFeedHandler;
 import com.ibm.sbt.services.client.connections.communities.feedhandler.InviteFeedHandler;
 import com.ibm.sbt.services.client.connections.communities.feedhandler.MemberFeedHandler;
 import com.ibm.sbt.services.client.connections.communities.transformers.CommunityMemberTransformer;
+import com.ibm.sbt.services.client.connections.communities.transformers.InviteTransformer;
 import com.ibm.sbt.services.client.connections.communities.util.Messages;
+import com.ibm.sbt.services.client.connections.forums.Forum;
 import com.ibm.sbt.services.client.connections.forums.ForumService;
 import com.ibm.sbt.services.client.connections.forums.TopicList;
 import com.ibm.sbt.services.client.Response;
@@ -355,7 +358,7 @@ public class CommunityService extends BaseService {
 		if(null == parameters){
 			parameters = new HashMap<String, String>();
 		}		
-		String requestUrl = resolveCommunityUrl(CommunityEntity.COMMUNITY.getCommunityEntityType(),	CommunityType.INVITES.getCommunityType());
+		String requestUrl = resolveCommunityUrl(CommunityEntity.COMMUNITY.getCommunityEntityType(),	CommunityType.MYINVITES.getCommunityType());
 		InviteList invites = null;
 		try {
 			invites = (InviteList) getEntities(requestUrl, parameters, new InviteFeedHandler(this));
@@ -367,6 +370,123 @@ public class CommunityService extends BaseService {
 		}
 		
 		return invites;
+	}
+	
+	/**
+     * Method to create a community invitation, user should be authenticated to perform this operation
+	 * 
+     * @method createInvite
+     * @param communityUuid 
+	 * 				 community Id for which invite is to be sent
+	 * @param contributorId
+	 *				 user id of contributor
+     * @return pending invites for the authenticated user
+     */
+	
+	public Invite createInvite(String communityUuid, String contributorId) throws CommunityServiceException {
+		
+		if (StringUtil.isEmpty(communityUuid)){
+			throw new CommunityServiceException(null, Messages.NullCommunityIdException);
+		}
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
+		String inviteUrl = resolveCommunityUrl(CommunityEntity.COMMUNITY.getCommunityEntityType(),
+				CommunityType.INVITES.getCommunityType());
+		Object communityPayload;
+		Member member = new Member(this, contributorId);
+		try {
+			communityPayload = new InviteTransformer().transform(member.getFieldsMap());
+		} catch (TransformerException e) {
+			throw new CommunityServiceException(e, Messages.CreateCommunityPayloadException);
+		}
+		Invite invite = null;
+		
+		try {
+			Response result = super.createData(inviteUrl, parameters, communityPayload);
+			invite = (Invite) new InviteFeedHandler(this).createEntity(result);
+
+		} catch (Exception e) {
+			throw new CommunityServiceException(e, Messages.CreateInvitationException);
+		}
+		return invite;
+	}
+	
+	/**
+     * Method to accept a outstanding community invitation, user should be authenticated to perform this operation
+	 * 
+     * @method acceptInvite
+     * @param communityUuid 
+	 * 				 community Id for which invite is sent
+	 * @param contributorId
+	 *				 user id of contributor
+     * @return boolean
+     */
+	
+	public boolean acceptInvite(String communityUuid, String contributorId) throws CommunityServiceException {
+		
+		if (StringUtil.isEmpty(communityUuid)){
+			throw new CommunityServiceException(null, Messages.NullCommunityIdException);
+		}
+		boolean success = true;
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
+		String inviteUrl = resolveCommunityUrl(CommunityEntity.COMMUNITY.getCommunityEntityType(),
+				CommunityType.MEMBERS.getCommunityType());
+	
+		Object communityPayload;
+		
+		Member member = new Member(this, contributorId);
+		try {
+			communityPayload = new CommunityMemberTransformer().transform(member.getFieldsMap());
+		} catch (TransformerException e) {
+			success = false;
+			throw new CommunityServiceException(e, Messages.CreateCommunityPayloadException);
+		}
+		
+		try {
+			super.createData(inviteUrl, parameters, communityPayload);
+		} catch (Exception e) {
+			success = false;
+			throw new CommunityServiceException(e, Messages.AcceptInvitationException);
+		} 
+		return success;
+		
+	}
+	
+	/**
+     * Method to decline a outstanding community invitation, user should be authenticated to perform this operation
+	 * 
+     * @method declineInvite
+     * @param communityUuid 
+	 * 				 community Id for which invite is sent
+	 * @param contributorId
+	 *				 user id of contributor
+     * @return boolean
+     */
+	
+	public boolean declineInvite(String communityUuid, String contributorId) throws CommunityServiceException {
+		
+		if (StringUtil.isEmpty(communityUuid)){
+			throw new CommunityServiceException(null, Messages.NullCommunityIdException);
+		}
+		boolean success = true;
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
+		if(EntityUtil.isEmail(contributorId)){
+			parameters.put("email", contributorId);
+		}
+		else{
+			parameters.put("userid", contributorId);	
+		}
+		String inviteUrl = resolveCommunityUrl(CommunityEntity.COMMUNITY.getCommunityEntityType(),CommunityType.INVITES.getCommunityType());
+		
+		try {
+			super.deleteData(inviteUrl, parameters, communityUuid);
+		} catch (Exception e) {
+			success = false;
+			throw new CommunityServiceException(e, Messages.DeclineInvitationException);
+		}
+		return success;
 	}
 
 	/**

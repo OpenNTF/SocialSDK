@@ -33,8 +33,8 @@
  * @module sbt.connections.SearchService
  */
 define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", "../json", "./SearchConstants", 
-         "../base/BaseService", "../base/AtomEntity", "../base/XmlDataHandler" ], 
-    function(declare,config,lang,stringUtil,Promise,json,consts,BaseService,AtomEntity,XmlDataHandler) {
+         "../base/BaseService", "../base/BaseEntity", "../base/AtomEntity", "../base/XmlDataHandler" ], 
+    function(declare,config,lang,stringUtil,Promise,json,consts,BaseService,BaseEntity,AtomEntity,XmlDataHandler) {
 
     /**
      * Scope class represents an entry for a scopes feed returned by the
@@ -87,6 +87,66 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
 
     });
     
+    /**
+     * FacetValue class represents an entry for a search facet returned by the
+     * Connections REST API.
+     * 
+     * @class FacetValue
+     * @namespace sbt.connections
+     */
+    var FacetValue = declare(BaseEntity, {
+
+        /**
+         * Construct an FacetValue.
+         * 
+         * @constructor
+         * @param args
+         */
+        constructor : function(args) {
+        	// create XML data handler
+        	this.dataHandler = new XmlDataHandler({
+                service : args.service,
+                data : args.data,
+                namespaces : lang.mixin(consts.Namespaces, args.namespaces || {}),
+                xpath : lang.mixin(consts.FacetValueXPath, args.xpath || this.xpath || {})
+            });
+        	this.id = this.getAsString("uid");
+        },
+        
+        /**
+         * Return the value of id from facet entry.
+         * 
+         * @method getId
+         * @return {String} ID of the facet entry
+         */
+        getId : function() {
+            var id = this.getAsString("id");
+            var parts = id.split("/");
+            return (parts.length == 1) ? parts[0] : parts[1];
+        },
+
+        /**
+         * Return the value of label from facet entry.
+         * 
+         * @method getLabel
+         * @return {String} Facet entry label
+         */
+        getLabel : function() {
+            return this.getAsString("label");
+        },
+
+        /**
+         * Return the value of weigth from facet entry.
+         * 
+         * @method getWeight
+         * @return {Number} Facet entry weight
+         */
+        getWeight : function() {
+            return this.getAsNumber("weight");
+        }
+
+    });
+    
     /*
      * Callbacks used when reading a feed that contains scope entries.
      */
@@ -124,6 +184,32 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             return new Result({
             	namespaces : consts.Namespaces,
                 xpath : consts.SearchXPath,
+                service : service,
+                data : data
+            });
+        }
+    };
+    
+    /*
+     * Callbacks used when reading a feed that contains search facets.
+     */
+    var FacetsCallbacks = {
+        createEntities : function(service,data,response) {
+        	var xpathExprs = lang.mixin({}, consts.SingleFacetXPath);
+        	// facet param looks like this "{"id": "Person"}"
+        	var facet = json.parse(response.options.query.facet);
+        	xpathExprs.entries = xpathExprs.entries.replace("{facet.id}", facet.id);
+            return new XmlDataHandler({
+                namespaces : consts.Namespaces,
+                xpath : xpathExprs,
+                service : service,
+                data : data
+            });
+        },
+        createEntity : function(service,data,response) {
+            return new FacetValue({
+            	namespaces : consts.Namespaces,
+                xpath : consts.FacetValueXPath,
                 service : service,
                 data : data
             });
@@ -219,52 +305,6 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         },
         
         /**
-         * Search IBM Connections Profiles for people using the specified 
-         * query string and return public information.
-         * 
-         * @method getPeople
-         * @param query Text to search for
-         * @param requestArgs
-         */
-        getPeople: function(queryArg, requestArgs) {
-            var options = {
-                method : "GET",
-                handleAs : "text",
-                query : lang.mixin({ 
-                		query : queryArg,
-                		scope : "profiles",
-                		facet : "{\"id\": \"Person\"}"
-                	} , 
-                	requestArgs || {})
-            };
-            
-            return this.getEntities(consts.AtomSearch, options, ResultFeedCallbacks);
-        },
-        
-        /**
-         * Search IBM Connections Profiles for people using the specified 
-         * query string and return public information.
-         * 
-         * @method getMyPeople
-         * @param query Text to search for
-         * @param requestArgs
-         */
-        getMyPeople: function(queryArg, requestArgs) {
-            var options = {
-                method : "GET",
-                handleAs : "text",
-                query : lang.mixin({ 
-                		query : queryArg,
-                		scope : "profiles",
-                		facet : "{\"id\": \"Person\"}"
-                	} , 
-                	requestArgs || {})
-            };
-                
-            return this.getEntities(consts.AtomMySearch, options, ResultFeedCallbacks);
-        },
-        
-        /**
          * Search IBM Connections for public information, tagged 
          * with the specified tags.
          * 
@@ -272,7 +312,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @param tags tags to search for
          * @param requestArgs
          */
-        getTagged: function(tags, requestArgs) {
+        getResultsByTag: function(tags, requestArgs) {
             var options = {
                 method : "GET",
                 handleAs : "text",
@@ -290,11 +330,11 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * information that you have access to, tagged 
          * with the specified tags.
          * 
-         * @method getMyTagged
+         * @method getMyResultsByTag
          * @param tags Tags to search for
          * @param requestArgs
          */
-        getMyTagged: function(tags, requestArgs) {
+        getMyResultsByTag: function(tags, requestArgs) {
             var options = {
                 method : "GET",
                 handleAs : "text",
@@ -305,6 +345,52 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             };
                 
             return this.getEntities(consts.AtomMySearch, options, ResultFeedCallbacks);
+        },
+        
+        /**
+         * Search IBM Connections Profiles for people using the specified 
+         * query string and return public information.
+         * 
+         * @method getPeople
+         * @param query Text to search for
+         * @param requestArgs
+         */
+        getPeople: function(queryArg, requestArgs) {
+            var options = {
+                method : "GET",
+                handleAs : "text",
+                query : lang.mixin({ 
+                		query : queryArg,
+                		pageSize : "0",
+                		facet : "{\"id\": \"Person\"}"
+                	} , 
+                	requestArgs || {})
+            };
+            
+            return this.getEntities(consts.AtomSearch, options, FacetsCallbacks);
+        },
+        
+        /**
+         * Search IBM Connections Profiles for people using the specified 
+         * query string and return public information.
+         * 
+         * @method getMyPeople
+         * @param query Text to search for
+         * @param requestArgs
+         */
+        getMyPeople: function(queryArg, requestArgs) {
+            var options = {
+                method : "GET",
+                handleAs : "text",
+                query : lang.mixin({ 
+                		query : queryArg,
+                		pageSize : "0",
+                		facet : "{\"id\": \"Person\"}"
+                	} , 
+                	requestArgs || {})
+            };
+                
+            return this.getEntities(consts.AtomMySearch, options, FacetsCallbacks);
         },
         
         /*

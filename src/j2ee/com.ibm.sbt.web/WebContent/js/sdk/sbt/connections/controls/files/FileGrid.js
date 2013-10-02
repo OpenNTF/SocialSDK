@@ -279,6 +279,10 @@ define([ "../../../declare",
 
         },
         
+        contextRootMap: {
+            files: "files"
+        },
+        
         /**
          * The default grid, if no options are selected
          */
@@ -365,10 +369,6 @@ define([ "../../../declare",
               
         },
         
-        contextRootMap: {
-            files: "files"
-        },
-        
         /**
          * Override buildUrl to add direction, userId and fileId
          * 
@@ -399,7 +399,7 @@ define([ "../../../declare",
         	var params = { authType : this.getAuthType() };
         	
         	if (this.userId) {
-            	params = lang.mixin(params, { userid : this.userId });
+            	params = lang.mixin(params, { userId : this.userId });
             } 
             if (this.documentId) {
             	params = lang.mixin(params, { documentId : this.documentId });
@@ -593,7 +593,7 @@ define([ "../../../declare",
 	            
 	        	//we use the array of ids, and not the array of elements
 	        	//because as we remove a class from an element, the array of elements will dynamically reduce
-	        	this.renderer._hitch(args,this.fileService.getMyPinnedFiles().then(
+	        	this.renderer._hitch(args,this.fileService.getPinnedFiles().then(
 	        		function(files) {
 	        			for(var k=0;k<args.ids.length;k++){
 	        				for(var i=0;i<files.length;i++){

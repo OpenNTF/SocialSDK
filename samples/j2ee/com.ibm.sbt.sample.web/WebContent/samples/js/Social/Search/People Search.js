@@ -11,15 +11,14 @@ require([ "sbt/connections/SearchService", "sbt/dom" ],
 		var topic = dom.byId("topicInput").value;
 		
 		searchService.getPeople(topic).then(
-			function(results) {
+			function(facets) {
 				dom.byId("searching").innerHTML = "";
-	            if (results.length == 0) {
+	            if (facets.length == 0) {
 	            	showError("No people associated with topic: " + topic);
                 } else {
-                    for(var i=0; i<results.length; i++){
-                        var result = results[i];
-                        var author = result.getAuthor();
-                        createRow(author);
+                    for(var i=0; i<facets.length; i++){
+                        var facet = facets[i];
+                        createRow(facet);
                     }
                     dom.byId("peopleTable").style.display = "";
                 }
@@ -37,15 +36,15 @@ require([ "sbt/connections/SearchService", "sbt/dom" ],
 		errorDiv.innerHTML = message;
 	};
 	
-	var createRow = function(author) {
+	var createRow = function(facet) {
         var table = dom.byId("peopleTable");
         var tr = document.createElement("tr");
         table.appendChild(tr);
         var td = document.createElement("td");
-        td.innerHTML = author.authorName;
+        td.innerHTML = facet.getLabel();
         tr.appendChild(td);
         td = document.createElement("td");
-        td.innerHTML = author.authorEmail;
+        td.innerHTML = facet.getId();
         tr.appendChild(td);
     };
 }

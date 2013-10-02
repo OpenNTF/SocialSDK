@@ -17,10 +17,12 @@
 define(["../../../declare",
         "../../../lang",
         "../../../text!./templates/SearchBoxTemplate.html",
+        "../../../text!./templates/SearchSuggestTemplate.html",
         "../../../text!./templates/PopUpTemplate.html",
+        "../../../text!./templates/SuggestPopUpTemplate.html",
         "../ConnectionsGridRenderer",
         "../../../i18n!./nls/SearchBoxRenderer"], 
-        function(declare,lang, template, PopUpTemplate, ConnectionsGridRenderer,nls){
+        function(declare,lang, template, SuggestTemplate, PopUpTemplate, SuggestionPopUp, ConnectionsGridRenderer,nls){
 	/**
 	 * @class SearchBoxRenderer
 	 * @namespace sbt.connections.controls.search
@@ -43,17 +45,22 @@ define(["../../../declare",
 		 * @method getDomeNode
 		 * @returns The Search Box Dom Node 
 		 */
-		getDomNode: function(){
-			var domStr = this._substituteItems(template, this);
-			template = domStr;
+		getDomNode: function(SearchBox){
 			
-			var div = null;
-			if(typeof template =="string"){
-				var wrapper= document.createElement('div');
-				wrapper.innerHTML= template;
-				div= wrapper.firstChild;
+			var htmlTemplate = "";
+			
+			if(SearchBox.searchSuggest == "on"){
+				var domStr = this._substituteItems(SuggestTemplate, this);
+				SuggestTemplate = domStr;
+				htmlTemplate = SuggestTemplate;
+			}else{
+				var domStr = this._substituteItems(template, this);
+				template = domStr;
+				htmlTemplate = template;
 			}
-			return div;	
+
+			var div = this._convertToDomNode(htmlTemplate);
+			return div.firstChild;	
 		},
 		
 		/**
@@ -67,13 +74,7 @@ define(["../../../declare",
 			var domstr = this._substituteItems(PopUpTemplate, this);
 			PopUpTemplate = domstr;
 			
-			var div = null;
-			if(typeof PopUpTemplate =="string"){
-				var wrapper= document.createElement('div');
-				wrapper.innerHTML= PopUpTemplate;
-				wrapper.tabIndex = 0;
-				div= wrapper;
-			}
+			var div = this._convertToDomNode(PopUpTemplate);
 			return div;	
 		},
 		
@@ -95,20 +96,44 @@ define(["../../../declare",
 		 * @param searchBox The SearchBox class
 		 * @param el The searchBox Element
 		 */
+		_appsPopUp: null,
 		renderPopUp: function(searchBox,el){
-			var popUp = this.getPopUpNode();
-			this._doAttachEvents(searchBox,popUp,{});
-			el.appendChild(popUp);
-			popUp.firstChild.focus();
 			
+			if(!this._appsPopUp){
+				this._appsPopUp = this.getPopUpNode();
+				this._doAttachEvents(searchBox,this._appsPopUp,{});	
+			}
+			
+			el.appendChild(this._appsPopUp);
+			this._appsPopUp.firstChild.focus();
+			return this._appsPopUp;
 		},
+		
+		
+		_suggestionPopUp: null,
+		renderSuggestionPopUp: function(searchBox,el){
+			
+			if(!this._suggestionPopUp){
+				this._suggestionPopUp= this._convertToDomNode(SuggestionPopUp);
+				this._suggestionPopUp = this._suggestionPopUp.firstElementChild;
+			}
+			
+			el.appendChild(this._suggestionPopUp);
+			return el.lastChild;
+		},
+		
+	
 		
 		/**
 		 * Removes the applications pop up
 		 * @param searchBoxElement The searchBox HTML Element
 		 */
-		removePopUp: function(searchBoxElement){
-			searchBoxElement.removeChild(searchBoxElement.children[1]);
+		removePopUp: function(searchBoxElement,popUp){
+			searchBoxElement.removeChild(popUp);
+		},
+		
+		removeSuggestionPopUp: function(searchBoxElement,popUpElement){
+			searchBoxElement.removeChild(popUpElement);
 		},
 		
 		/**
@@ -123,6 +148,23 @@ define(["../../../declare",
 					nls.selectedApplication = selectedApplication;
 				}
 			}
+		},
+		
+		/**
+		 * Converts a HTML String to a DOM Node
+		 * @method _convertToDomNode
+		 * @param template the html string to be converted to a DOM node
+		 * @returns A DOM Node 
+		 */
+		_convertToDomNode: function(template){
+			var div = null;
+			if(typeof template =="string"){
+				var wrapper= document.createElement('div');
+				wrapper.innerHTML= template;
+				wrapper.tabIndex = 0;
+				div= wrapper;
+			}
+			return div;	
 		},
 		
 		/**

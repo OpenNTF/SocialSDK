@@ -58,8 +58,8 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 		 */
 		postCreate: function(args){
 			this.createDefaultRenderer(args);
-			this.domNode = this.renderer.getDomNode();
-			this.renderer.render(this,this.domNode,{});		
+			this.domNode = this.renderer.getDomNode(this);
+			this.renderer.render(this,this.domNode,{});	
 		},
 		/**
 		 * Creates a SearchBoxRenderer and sets it as the renderer for this class.
@@ -164,6 +164,13 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 			this.searchBoxAction.onKeyPress(element, obj, event, this);
 		},
 		
+			suggest: function(element, obj, event){
+			if(this.searchSuggest == "on"){
+				this.searchBoxAction.suggest(event, this);
+			}			
+		},
+		
+		
 		/**SearchBoxAction contains functions to handle events
 		 * this should be overridden to change the action 
 		 * of the event handler function  */
@@ -216,8 +223,18 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 			 * @method renderPopUp 
 			 * @param self Context
 			 */
+			_appsPopUp: null,
 			renderPopUp: function(self){
-				self.renderer.renderPopUp(self,self.domNode);
+				
+				if(this._suggestionPopUp ){
+					for(var i=0;i<self.domNode.children.length;i++){
+						if(self.domNode.children[i] === this._suggestionPopUp){
+							self.renderer.removeSuggestionPopUp(self.domNode,this._suggestionPopUp);
+						}
+					}
+				}
+				this._appsPopUp = self.renderer.renderPopUp(self,self.domNode);
+				
 			},
 			
 			/**
@@ -226,7 +243,7 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 			 * @param self Context 
 			 */
 			removePopUp: function(self){
-				self.renderer.removePopUp(self.domNode);
+				self.renderer.removePopUp(self.domNode,this._appsPopUp);
 			},
 			
 			/**
@@ -238,9 +255,20 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 			 * @param self Context
 			 */
 			setSelectedApplication: function(element,object,event,self){
+				this.removeHighlight(element, object, event);
 				self.selectedApplication = element.children[1].textContent;
-				self.renderer.removePopUp(self.domNode);
+				self.renderer.removePopUp(self.domNode,this._appsPopUp);
 				self.renderer.changeSelectedApplication(element.children[1].textContent);
+			},
+			
+			_suggestionPopUp: null,
+			setSuggestedSearch: function(event,popUp,context){
+				var value = event.target.textContent;
+				var input = document.getElementById("com.ibm.sbt.search.input");
+				input.value = value;
+				this.searchQuery = value;
+				popUp.innerHTML = "";
+				context.renderer.removeSuggestionPopUp(context.domNode,popUp);
 			},
 			
 			/**
@@ -276,14 +304,64 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 			},
 			
 			/**
+			 * Provides a suggestion as to what the user is trying to search for
+			 * @method suggest
+			 * @param event the event
+			 * @param context the context this
+			 */
+			suggest: function(event,context){
+				var applicationParam = context.selectedApplication.toLocaleLowerCase();
+            	applicationParam = applicationParam.replace(/ /g,'');
+				var inputBox = event.target;
+				var query = inputBox.value;
+				var popUp = context.renderer.renderSuggestionPopUp(context,context.domNode);
+				this._suggestionPopUp = popUp;
+				popUp.innerHTML = "";
+				var requestArgs = {"component": applicationParam};
+				searchService = new SearchService();
+			    var promise = searchService.getMyResults(query,requestArgs);
+
+		        promise.then(
+		            function(results) {
+		            	
+		            	for(var i=0;i<results.length;i++){
+		            		var row = document.createElement("tr");
+		            		var data = document.createElement("td");
+		            		data.innerHTML = results[i].getTitle();
+		            		data.style = "cursor:pointer";
+		            		data.onclick = function (event) { 
+		            			
+		            			context.searchBoxAction.setSuggestedSearch(event,popUp,context);
+		            		};    		
+		            		row.appendChild(data);
+		            		popUp.appendChild(row);
+		            	}
+
+		            },
+		            function(error) {
+		                console.log(error);
+		            }
+		        );
+			},
+			
+			/**
 			 * When the user clicks the search button 
 			 * @method search
 			 * @param event The Event
 			 */
 			search: function(event,context){
 				
+				if(this._suggestionPopUp ){
+					for(var i=0;i<context.domNode.children.length;i++){
+						if(context.domNode.children[i] === this._suggestionPopUp){
+							context.renderer.removeSuggestionPopUp(context.domNode,this._suggestionPopUp);
+						}
+					}
+				}
+				
 				var applicationParam = context.selectedApplication.toLocaleLowerCase();
             	applicationParam = applicationParam.replace(/ /g,'');
+            	
 				
             	//if this control is going to retrieve the search results from the server
 				if(context.type == "full"){
@@ -304,8 +382,7 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 			                console.log(error);
 			            }
 			        );
-			        
-				} else {
+				}else {
 					//use another component to retrieve
 					var evt = document.createEvent("Event");
 	            	evt.initEvent("searchReadyEvent",true,true);

@@ -160,7 +160,7 @@ public class BaseCommunitiesTest extends BaseApiTest {
             loginConnections();
             
             CommunityService communityService = getCommunityService();
-            community = communityService.getCommunity(communityUuid+1);
+            community = communityService.getCommunity(communityUuid);
             Trace.log("Got community: "+community.getCommunityUuid());
         } catch (AuthenticationException pe) {
         	if (pe.getCause() != null) {

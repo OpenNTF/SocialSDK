@@ -34,11 +34,23 @@ define([ "../../../declare",
        		recent: "3" 
 	};
 	
+	var communityMembersSortVals = {
+			displayName: "displayName",
+       		created: "created" 
+	};
+	
 	var ParamSchema = {
 		pageNumber: parameter.oneBasedInteger("page"),	
 		pageSize: parameter.oneBasedInteger("ps"),
 		sortBy: parameter.sortField("sortBy",sortVals),
-		sortOrder: parameter.sortOrder("sortOrder")						
+		sortOrder: parameter.sortOrder("sortOrder")
+	};
+	
+	var CommunityMembersParamSchema = {
+		pageNumber: parameter.oneBasedInteger("page"),	
+		pageSize: parameter.oneBasedInteger("ps"),
+		sortBy: parameter.sortField("sortBy", communityMembersSortVals),
+		sortOrder: parameter.sortOrder("sortOrder")
 	};
 	
     /**
@@ -133,12 +145,13 @@ define([ "../../../declare",
             },
             "communityMembers" : {
                 storeArgs : {
-                    attributes : communities.CommunityXPath,
+                	url : communities.AtomCommunityMembers,
+                    attributes : communities.MemberXPath,
                     feedXPath : communities.CommunityFeedXPath,
-                    paramSchema: ParamSchema
+                    paramSchema: CommunityMembersParamSchema
                 },
                 rendererArgs : {
-                    type : "profile"
+                    type : "communityMembers"
                 }
             }
         },
@@ -162,25 +175,45 @@ define([ "../../../declare",
         constructor: function(args){
         	if(args.type == "peopleManaged" || args.type == "reportingChain" || args.type == "profile") {
         		this.hideSorter = true;
-        	}
+        	} 	
         	
             var nls = this.renderer.nls;
-            this._sortInfo = {
-                displayName: { 
-                    title: nls.displayName, 
-                    sortMethod: "sortByDisplayName",
-                    sortParameter: "displayName" 
-                },
-                recent: {
-                	title: nls.recent, 
-                    sortMethod: "sortByRecent",
-                    sortParameter: "recent"   
-                }
-               
-            };
 
-            this._activeSortAnchor = this._sortInfo.recent;
-            this._activeSortIsDesc = false;
+            if (args.type == "communityMembers") {
+            	
+            	this._sortInfo = {
+       	                displayName: { 
+       	                    title: nls.displayName, 
+       	                    sortMethod: "sortByDisplayName",
+       	                    sortParameter: "displayName" 
+       	                },
+       	                recent: {
+       	                	title: nls.created, 
+       	                    sortMethod: "sortByCreated",
+       	                    sortParameter: "created"   
+       	                }
+       	               
+            	};
+       		 	this._activeSortAnchor = this._sortInfo.created;
+       		 	this._activeSortIsDesc = false;
+            } else {
+            	this._sortInfo = {
+            			displayName: { 
+            				title: nls.displayName, 
+            				sortMethod: "sortByDisplayName",
+            				sortParameter: "displayName" 
+            			},
+            			recent: {
+            				title: nls.recent, 
+            				sortMethod: "sortByRecent",
+            				sortParameter: "recent"   
+            			}
+               
+            	};
+            	this._activeSortAnchor = this._sortInfo.recent;
+                this._activeSortIsDesc = false;
+            }
+            
         },
         
         contextRootMap: {
@@ -210,7 +243,7 @@ define([ "../../../declare",
             } else if (this.type == "communityMembers") {
             	params = lang.mixin(params, { communityUuid : this.communityUuid });
             }
-            
+         
             if (this.email) {
             	params = lang.mixin(params, { email : this.email });
             } 
@@ -291,6 +324,10 @@ define([ "../../../declare",
 
         sortByRecent: function(el, data, ev){
         	this._sort("recent", true, el, data, ev);
+        },
+        
+        sortByCreated: function(el, data, ev){
+        	this._sort("created", true, el, data, ev);
         }
 
         // Internals

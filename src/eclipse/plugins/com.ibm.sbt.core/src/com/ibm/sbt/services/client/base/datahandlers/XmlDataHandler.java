@@ -23,7 +23,9 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
 import org.w3c.dom.Node;
+
 import com.ibm.commons.xml.DOMUtil;
 import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.XMLException;
@@ -84,7 +86,40 @@ public class XmlDataHandler implements DataHandler<Node> {
 	public List<Node> getEntries(String path) {
 		return getEntries(getXPathQuery(path));
 	}
+
+	/* (non-Javadoc)
+	 * @see com.ibm.sbt.services.client.base.datahandlers.DataHandler#getAsArray(com.ibm.sbt.services.client.base.datahandlers.FieldEntry)
+	 */
+	@Override
+	public String[] getAsArray(FieldEntry path) {
+		return getAsArray((XPathExpression)path.getPath());
+	}
 	
+	/* (non-Javadoc)
+	 * @see com.ibm.sbt.services.client.base.datahandlers.DataHandler#getAsArray(java.lang.String)
+	 */
+	@Override
+	public String[] getAsArray(String path) {
+		return getAsArray(getXPathQuery(path));
+	}
+	
+	/*
+	 * This method returns a list of nodes from an XPathExpression
+	 */
+	private String[] getAsArray(XPathExpression xpathExpression) {
+		List<String> list = new ArrayList<String>();
+		String[] results = null;
+		if (data instanceof Node) {
+			XResult xResult = null;
+			try {
+				xResult = getEntryResults(data, xpathExpression);
+			} catch (XPathException e) {
+			}
+			results = xResult.getValues();
+		}
+		return results;
+	}
+
 	/*
 	 * This method returns a list of nodes from an XPathExpression
 	 */

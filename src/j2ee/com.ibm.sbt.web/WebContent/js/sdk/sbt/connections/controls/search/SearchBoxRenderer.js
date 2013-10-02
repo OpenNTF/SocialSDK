@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -21,8 +21,11 @@ define(["../../../declare",
         "../../../text!./templates/PopUpTemplate.html",
         "../../../text!./templates/SuggestPopUpTemplate.html",
         "../ConnectionsGridRenderer",
-        "../../../i18n!./nls/SearchBoxRenderer"], 
-        function(declare,lang, template, SuggestTemplate, PopUpTemplate, SuggestionPopUp, ConnectionsGridRenderer,nls){
+        "../../../i18n!./nls/SearchBoxRenderer",
+        "../../../text!./templates/MemberListItemTemplate.html",
+        "../../../text!./templates/MemberListTemplate.html"], 
+        function(declare,lang, template, SuggestTemplate, PopUpTemplate, SuggestionPopUp, ConnectionsGridRenderer,nls,
+        		MemberListItemTemplate, MemberListTemplate){
 	/**
 	 * @class SearchBoxRenderer
 	 * @namespace sbt.connections.controls.search
@@ -79,6 +82,36 @@ define(["../../../declare",
 		},
 		
 		/**
+		 * Converts the HTML member list item template into a DOM node.
+		 * Creates a div and sets it's inner html to be the member list item template
+		 * @method getMemberListItemNode
+		 * @returns the applications list pop up DOM Node
+		 */
+		getMemberListItemNode: function(){
+			
+			var domstr = this._substituteItems(MemberListItemTemplate, this);
+			MemberListItemTemplate = domstr;
+			
+			var div = this._convertToDomNode(MemberListItemTemplate);
+			return div;	
+		},
+		
+		/**
+		 * Converts the HTML member list template into a DOM node.
+		 * Creates a div and sets it's inner html to be the member list template
+		 * @method getMemberListItemNode
+		 * @returns the applications list pop up DOM Node
+		 */
+		getMemberListNode: function(){
+			
+			var domstr = this._substituteItems(MemberListTemplate, this);
+			MemberListTemplate = domstr;
+			
+			var div = this._convertToDomNode(MemberListTemplate);
+			return div;	
+		},
+		
+		/**
 		 * Attaches events to the template 
 		 * @method render
 		 * @param searchBox
@@ -107,6 +140,41 @@ define(["../../../declare",
 			el.appendChild(this._appsPopUp);
 			this._appsPopUp.firstChild.focus();
 			return this._appsPopUp;
+		},
+		
+		/**
+		 * renders a member list item
+		 * @method renderMemberListItem
+		 * @param memberName The member name to display
+		 */
+		_appsMemberListItem: null,
+		renderMemberListItem: function(memberName){
+			// Get node
+			this._appsMemberListItem = this.getMemberListItemNode();
+			// Attach event listeners
+			this._doAttachEvents(searchBox,this._appsMemberListItem,{});	
+			// Insert the member name
+			this._appsMemberListItem.querySelector('#memberName').innerHTML = memberName;
+			// Add it to the list
+			this._appsMemberList.appendChild(this._appsMemberListItem);
+			this._appsMemberListItem.firstChild.focus();
+			
+			return this._appsMemberListItem;
+		},
+		/**
+		 * renders the member list
+		 * @method renderMemberList
+		 */
+		_appsMemberList: null,
+		renderMemberList: function(el){
+			
+			if(!this._appsMemberList){
+				this._appsMemberList = this.getMemberListNode();
+			}
+			
+			el.appendChild(this._appsMemberList);
+			this._appsMemberList.firstChild.focus();
+			return this._appsMemberList;
 		},
 		
 		

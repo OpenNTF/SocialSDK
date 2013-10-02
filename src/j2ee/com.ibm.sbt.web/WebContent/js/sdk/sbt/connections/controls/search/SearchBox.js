@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -59,7 +59,13 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 		postCreate: function(args){
 			this.createDefaultRenderer(args);
 			this.domNode = this.renderer.getDomNode(this);
-			this.renderer.render(this,this.domNode,{});	
+			this.renderer.render(this,this.domNode,{});
+			
+			
+			if (this.memberList) {
+				// Create member list
+				this.renderer.renderMemberList(this.domNode);
+			}
 		},
 		/**
 		 * Creates a SearchBoxRenderer and sets it as the renderer for this class.
@@ -112,6 +118,17 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 			this.searchBoxAction.setSelectedApplication(element,object,event,this);
 		},
 		
+		/**
+		 * Closes a member item (by removing it from its parent; the member list)
+		 * @method closeMemberItem
+		 * @param element  The member list item
+		 * @param object 
+		 * @param event  The Event 
+		 */
+		closeMemberItem: function(element,object,event){
+			element.parentNode.removeChild(element);
+		},
+
 		/**
 		 * When the user hovers over an application in the applications pop up, the background gets highlighted
 		 * @method displayHighlight
@@ -265,8 +282,19 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 			setSuggestedSearch: function(event,popUp,context){
 				var value = event.target.textContent;
 				var input = document.getElementById("com.ibm.sbt.search.input");
-				input.value = value;
+				
 				this.searchQuery = value;
+				
+				if (context.memberList) {
+					input.value = "";
+					
+					// Create member list item
+					context.renderer.renderMemberListItem(value);
+
+				} else {
+					input.value = value;
+				}
+				
 				popUp.innerHTML = "";
 				context.renderer.removeSuggestionPopUp(context.domNode,popUp);
 			},

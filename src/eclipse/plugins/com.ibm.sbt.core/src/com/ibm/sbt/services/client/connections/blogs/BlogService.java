@@ -32,6 +32,7 @@ import com.ibm.sbt.services.client.connections.blogs.feedhandler.CommentsFeedHan
 import com.ibm.sbt.services.client.connections.blogs.feedhandler.PostsFeedHandler;
 import com.ibm.sbt.services.client.connections.blogs.feedhandler.TagFeedHandler;
 import com.ibm.sbt.services.client.connections.blogs.transformers.BaseBlogTransformer;
+import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.util.AuthUtil;
 
 
@@ -51,6 +52,34 @@ public class BlogService extends BaseService {
 	public static final String OAUTH_URL				= "oauth/atom/";
 
 	public static String BLOG_HANDLE 					= "homepage";
+	
+	/**
+	 * Constructor Creates BlogService Object with default endpoint
+	 */
+	public BlogService() {
+		this(DEFAULT_ENDPOINT_NAME);
+	}
+
+	/**
+	 * Constructor
+	 * 
+	 * @param endpoint
+	 *            Creates BlogService Object with the specified endpoint
+	 */
+	public BlogService(String endpoint) {
+		super(endpoint);
+	}
+	
+	/**
+	 * Constructor
+	 * 
+	 * @param endpoint
+	 *            Creates BlogService Object with the specified endpoint
+	 */
+	public BlogService(Endpoint endpoint) {
+		super(endpoint);
+	}
+	
 	/**
 	 * This method returns the all blogs
 	 * 

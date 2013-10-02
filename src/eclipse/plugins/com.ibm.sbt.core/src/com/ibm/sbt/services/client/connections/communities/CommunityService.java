@@ -43,6 +43,7 @@ import com.ibm.sbt.services.client.connections.forums.ForumService;
 import com.ibm.sbt.services.client.connections.forums.TopicList;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.ClientService;
+import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.util.AuthUtil;
 
 /**
@@ -93,6 +94,27 @@ public class CommunityService extends BaseService {
 	 *            Creates CommunityService with specified endpoint and CacheSize
 	 */
 	public CommunityService(String endpoint, int cacheSize) {
+		super(endpoint, cacheSize);
+	}
+
+	/**
+	 * Constructor - Creates CommunityService Object with a specified endpoint
+	 * 
+	 * @param endpoint
+	 *            Creates CommunityService with specified endpoint and a default CacheSize
+	 */
+	public CommunityService(Endpoint endpoint) {
+		this(endpoint, DEFAULT_CACHE_SIZE);
+	}
+
+	/**
+	 * Constructor - Creates CommunityService Object with specified endpoint and cache size
+	 * 
+	 * @param endpoint
+	 * @param cacheSize
+	 *            Creates CommunityService with specified endpoint and CacheSize
+	 */
+	public CommunityService(Endpoint endpoint, int cacheSize) {
 		super(endpoint, cacheSize);
 	}
 

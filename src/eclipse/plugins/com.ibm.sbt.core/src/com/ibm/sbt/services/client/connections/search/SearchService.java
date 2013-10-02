@@ -54,6 +54,7 @@ import com.ibm.sbt.services.client.base.util.EntityUtil;
 import com.ibm.sbt.services.client.connections.search.feedhandler.FacetsHandler;
 import com.ibm.sbt.services.client.connections.search.feedhandler.ScopeFeedHandler;
 import com.ibm.sbt.services.client.connections.search.feedhandler.SearchFeedHandler;
+import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.util.AuthUtil;
 
 public class SearchService extends BaseService {
@@ -79,9 +80,19 @@ public class SearchService extends BaseService {
 	 * Constructor
 	 * 
 	 * @param endpoint
-	 *            Creates SearchService Object with specified values of endpoint
+	 *            Creates SearchService Object with the specified endpoint
 	 */
 	public SearchService(String endpoint) {
+		super(endpoint, DEFAULT_CACHE_SIZE);
+	}
+	
+	/**
+	 * Constructor
+	 * 
+	 * @param endpoint
+	 *            Creates SearchService Object with the specified endpoint
+	 */
+	public SearchService(Endpoint endpoint) {
 		super(endpoint, DEFAULT_CACHE_SIZE);
 	}
 	

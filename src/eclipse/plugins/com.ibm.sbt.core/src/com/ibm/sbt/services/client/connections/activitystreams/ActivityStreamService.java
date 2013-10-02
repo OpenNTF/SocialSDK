@@ -31,6 +31,7 @@ import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.activitystreams.transformers.ActivityStreamTransformer;
+import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.util.AuthUtil;
 
 
@@ -82,12 +83,21 @@ public class ActivityStreamService extends BaseService {
 	 * Constructor
 	 * 
 	 * @param endpoint
-	 *            Creates ActivityStreamService Object with specified values of endpoint
+	 *            Creates ActivityStreamService Object with the specified endpoint
 	 */
 	public ActivityStreamService(String endpoint) {
 		super(endpoint, DEFAULT_CACHE_SIZE);
 	}
 	
+	/**
+	 * Constructor
+	 * 
+	 * @param endpoint
+	 *            Creates ActivityStreamService Object with the specified endpoint
+	 */
+	public ActivityStreamService(Endpoint endpoint) {
+		super(endpoint, DEFAULT_CACHE_SIZE);
+	}
 	
 	/**
 	 * Returns updates from ActivityStream service

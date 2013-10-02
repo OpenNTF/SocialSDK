@@ -26,7 +26,8 @@ define({
       altEmail: "Alternate Email",
       clickToEmail: "Click here to email the user, using their alternate email address",
       ariaVcard: "Press control and enter for the business card",
-      role: "Role"
+      role: "Role",
+      created: "Created"
   }
 });
 

@@ -256,7 +256,14 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.CommunityService
          */
-        AtomCommunityForumTopics : "/${communities}/service/atom/community/forum/topics"
-
+        AtomCommunityForumTopics : "/${communities}/service/atom/community/forum/topics",
+        
+        /**
+         * Get a feed of a Community's bookmarks. Requires a url parameter of the form communityUuid=xxx
+         * @property AtomCommunityBookmarks
+         * @type String
+         * @for sbt.connections.CommunityService
+         */
+        AtomCommunityBookmarks : "/${communities}/service/atom/community/bookmarks"        
     }, conn);
 });

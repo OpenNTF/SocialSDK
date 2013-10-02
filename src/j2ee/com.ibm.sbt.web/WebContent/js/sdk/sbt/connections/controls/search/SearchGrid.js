@@ -140,6 +140,10 @@ define([ "../../../declare",
         buildUrl: function(url, args, endpoint) {
             var params = { format : this.format };
             
+            if(url.indexOf("?") != -1){
+            	url = url.substring(0, url.indexOf("?"));
+            }
+            
             if (this.query) {
             	params = lang.mixin(params, this.query);
             }

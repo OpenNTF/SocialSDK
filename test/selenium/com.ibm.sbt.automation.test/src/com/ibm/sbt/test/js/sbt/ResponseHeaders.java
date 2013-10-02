@@ -35,7 +35,6 @@ public class ResponseHeaders extends BaseCommunitiesTest {
     public void testResponseHeaders() {
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         JsonJavaObject json = previewPage.getJson();
-        Assert.assertEquals("IBM_HTTP_Server", json.getString("Server"));
         Assert.assertNotNull(json.getString("Location"));
         Assert.assertNotNull(json.getString("url"));
         Assert.assertNotNull(json.getString("options"));

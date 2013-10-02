@@ -61,11 +61,11 @@ public class BaseProfilesTest extends BaseApiTest {
 
     protected void validate(Profile profile, JsonJavaObject json) {
         Assert.assertEquals(profile.getUserid(), json.getString("getUserid"));
-        Assert.assertEquals(profile.getDisplayName(), json.getString("getName"));
+        Assert.assertEquals(profile.getName(), json.getString("getName"));
         Assert.assertEquals(profile.getEmail(), json.getString("getEmail"));
         Assert.assertEquals(profile.getThumbnailUrl(), json.getString("getThumbnailUrl"));
-        Assert.assertEquals(profile.getTitle(), json.getString("getJobTitle"));
+        Assert.assertEquals(profile.getJobTitle(), json.getString("getJobTitle"));
         Assert.assertEquals(StringUtil.isEmpty(profile.getDepartment()), StringUtil.isEmpty(json.getString("getDepartment")));
-        Assert.assertEquals(profile.getPhoneNumber(), json.getString("getTelephoneNumber"));
+        Assert.assertEquals(profile.getTelephoneNumber(), json.getString("getTelephoneNumber"));
     }
 }

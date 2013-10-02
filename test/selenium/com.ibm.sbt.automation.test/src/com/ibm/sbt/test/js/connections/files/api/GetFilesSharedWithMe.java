@@ -11,14 +11,14 @@ import org.openqa.selenium.WebElement;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.connections.BaseFilesTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
+import com.ibm.sbt.services.client.connections.files.File;
 import com.ibm.sbt.services.client.connections.files.FileServiceException;
-import com.ibm.sbt.services.client.connections.files.model.FileEntry;
 
 public class GetFilesSharedWithMe extends BaseFilesTest {
 
 	static final String SNIPPET_ID = "Social_Files_API_GetFilesSharedWithMe";
 
-	private List<FileEntry> files;
+	private List<File> files;
 
 	@Before
 	public void init() {
@@ -52,7 +52,7 @@ public class GetFilesSharedWithMe extends BaseFilesTest {
 	}
 
 	private boolean existsSharedFileWithLabel(String label) {
-		for (FileEntry entry : files) {
+		for (File entry : files) {
 			if (label == null) {
 				if (entry.getLabel() == null)
 					return true;

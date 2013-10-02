@@ -20,6 +20,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.ibm.sbt.test.js.connections.communities.GetCommunityForumTopics;
 import com.ibm.sbt.test.js.connections.communities.api.AddCommunityMember;
 import com.ibm.sbt.test.js.connections.communities.api.Community;
 import com.ibm.sbt.test.js.connections.communities.api.CommunityCreateBody;
@@ -27,15 +28,17 @@ import com.ibm.sbt.test.js.connections.communities.api.CommunityEntryDataHandler
 import com.ibm.sbt.test.js.connections.communities.api.CommunityFeedDataHandler;
 import com.ibm.sbt.test.js.connections.communities.api.CommunityInvitesFeedDataHandler;
 import com.ibm.sbt.test.js.connections.communities.api.CommunityMembersFeedDataHandler;
+import com.ibm.sbt.test.js.connections.communities.api.CreateCommunity;
 import com.ibm.sbt.test.js.connections.communities.api.CreateCommunityInvalidTitle;
 import com.ibm.sbt.test.js.connections.communities.api.CreateCommunityJson;
 import com.ibm.sbt.test.js.connections.communities.api.CreateCommunityLoadIt;
-import com.ibm.sbt.test.js.connections.communities.api.CreateCommunity;
 import com.ibm.sbt.test.js.connections.communities.api.CreateCommunityNew;
+import com.ibm.sbt.test.js.connections.communities.api.CreateForumTopic;
 import com.ibm.sbt.test.js.connections.communities.api.CrudCommunity;
 import com.ibm.sbt.test.js.connections.communities.api.DeleteCommunity;
 import com.ibm.sbt.test.js.connections.communities.api.GetCommunity;
 import com.ibm.sbt.test.js.connections.communities.api.GetCommunityMembers;
+import com.ibm.sbt.test.js.connections.communities.api.GetForumTopics;
 import com.ibm.sbt.test.js.connections.communities.api.GetMyCommunities;
 import com.ibm.sbt.test.js.connections.communities.api.GetMyInvites;
 import com.ibm.sbt.test.js.connections.communities.api.GetPublicCommunities;
@@ -46,7 +49,6 @@ import com.ibm.sbt.test.js.connections.communities.api.RemoveCommunityMember;
 import com.ibm.sbt.test.js.connections.communities.api.UpdateCommunity;
 import com.ibm.sbt.test.js.connections.communities.api.UpdateCommunityJson;
 import com.ibm.sbt.test.js.connections.communities.api.UpdateCommunityTags;
-import com.ibm.sbt.test.js.connections.communities.api.ValidateBaseCommunitiesTest;
 
 /**
  * @author mwallace
@@ -84,6 +86,10 @@ import com.ibm.sbt.test.js.connections.communities.api.ValidateBaseCommunitiesTe
     NewSaveCommunity.class,
     GetSaveCommunity.class,
     CrudCommunity.class,
+    
+    //GetCommunityForumTopics.class,
+    //GetForumTopics.class,
+    //CreateForumTopic.class,
     
     AddCommunityMember.class,
     RemoveCommunityMember.class

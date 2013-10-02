@@ -27,8 +27,8 @@ import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.activity.feedHandler.MemberFeedHandler;
 
 /**
+ * Member list class used for creating a list of Activity Members
  * @author Vimal Dhupar
- *
  */
 public class MemberList extends EntityList<Member> {
 

@@ -14,7 +14,7 @@ require([ "sbt/connections/SearchService", "sbt/dom" ],
 			scope : "communities"
 		};
 		
-		searchService.getTagged(tag, requestArgs).then(
+		searchService.getResultsByTag(tag, requestArgs).then(
 			function(results) {
 				dom.byId("searching").innerHTML = "";
 	            if (results.length == 0) {

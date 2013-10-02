@@ -26,6 +26,7 @@ import com.ibm.sbt.services.client.connections.forums.ForumReply;
 import com.ibm.sbt.services.client.connections.forums.ForumService;
 import com.ibm.sbt.services.client.connections.forums.ForumTopic;
 import com.ibm.sbt.services.client.connections.forums.model.BaseForumEntity;
+import com.ibm.sbt.services.client.connections.forums.model.FlagType;
 
 
 /**
@@ -64,8 +65,25 @@ public class BaseForumTransformer extends AbstractBaseTransformer {
 		String tagsXml = "";
 		String contentXml = "";
 		String titleXml = "";
+		String flagXml = "";
 		
-				
+		boolean removeFlag = false;		
+		if( entity instanceof ForumTopic){
+			if(((ForumTopic)entity).isPinned() == true){
+				((ForumTopic)entity).pin();
+			}
+			if(((ForumTopic)entity).isLocked() == true){
+				((ForumTopic)entity).lock();
+			}
+			if(((ForumTopic)entity).isQuestion() == true){
+				((ForumTopic)entity).markAsQuestion();
+			}
+		}
+		if( entity instanceof ForumReply){
+			if(((ForumReply)entity).isAnswer() == true){
+				((ForumReply)entity).acceptAnswer();
+			}
+		}
 	for(Map.Entry<String, Object> xmlEntry : fieldmap.entrySet()){
 			
 			String currentElement = xmlEntry.getKey(); 
@@ -82,6 +100,16 @@ public class BaseForumTransformer extends AbstractBaseTransformer {
 			if(currentElement.equalsIgnoreCase("title")){
 				titleXml = getXMLRep(getStream(sourcepath+"TitleTemplate.xml"),currentElement,XmlTextUtil.escapeXMLChars(currentValue));
 			}
+			if(currentElement.equalsIgnoreCase("flag")){
+				if(StringUtil.equalsIgnoreCase(currentValue, FlagType.PIN.getFlagType()) || StringUtil.equalsIgnoreCase(currentValue, FlagType.LOCK.getFlagType()) 
+						|| StringUtil.equalsIgnoreCase(currentValue, FlagType.QUESTION.getFlagType())
+							|| StringUtil.equalsIgnoreCase(currentValue, FlagType.ACCEPT_ANSWER.getFlagType())){
+					flagXml = getXMLRep(getStream(sourcepath+"FlagTmpl.xml"),currentElement,XmlTextUtil.escapeXMLChars(currentValue));
+				}
+				else{
+					removeFlag = true;
+				}
+			}
 			
 		}
 		if(StringUtil.isNotEmpty(titleXml)){
@@ -94,6 +122,14 @@ public class BaseForumTransformer extends AbstractBaseTransformer {
 		
 		if(StringUtil.isNotEmpty(tagsXml)){
 			xml = getXMLRep(xml, "getTags",tagsXml);
+		}
+		
+		if(StringUtil.isNotEmpty(flagXml)){
+			if(removeFlag == true){
+				xml = getXMLRep(xml, "getFlags","");
+			}else{
+				xml = getXMLRep(xml, "getFlags",flagXml);
+			}
 		}
 		
 		if(entity instanceof Forum){

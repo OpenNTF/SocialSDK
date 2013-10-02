@@ -39,6 +39,33 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         SearchFeedXPath : conn.ConnectionsFeedXPath,
 
         /**
+         * XPath expressions used when parsing a Connections Search facets feed
+         * that only contains a single facet
+         */
+        SingleFacetXPath : {
+            // used by getEntitiesDataArray
+            entries : "/a:feed/ibmsc:facets/ibmsc:facet[@id='{facet.id}']/ibmsc:facetValue"
+            // used by getSummary
+            //totalResults : "",
+            //startIndex : "",
+            //itemsPerPage : ""
+        },
+
+        /**
+         * XPath expressions used when parsing a Connections Search facet
+         */
+        FacetValueXPath : {
+            // used by getEntityData
+            entry : "/ibmsc:facetValue",
+            // used by getEntityId
+            uid : "@id",
+            // used by getters
+            id : "@id",
+            label : "@label",
+            weight : "@weight"
+        },
+
+        /**
          * XPath expressions to be used when reading a search result
          */
         SearchXPath : {

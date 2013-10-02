@@ -4,6 +4,7 @@ ${getTitle}
 ${getContent}
 ${getCategory}
 ${getReference}
+${getFlags}
 ${getTags}
 </entry>
 

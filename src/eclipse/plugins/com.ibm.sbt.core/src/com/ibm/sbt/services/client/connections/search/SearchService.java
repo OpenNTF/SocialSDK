@@ -37,18 +37,21 @@
 package com.ibm.sbt.services.client.connections.search;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import com.ibm.commons.util.StringUtil;
+import com.ibm.commons.util.io.json.JsonException;
+import com.ibm.commons.util.io.json.JsonJavaFactory;
+import com.ibm.commons.util.io.json.JsonObject;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.util.EntityUtil;
-import com.ibm.sbt.services.client.connections.forums.ForumList;
-import com.ibm.sbt.services.client.connections.forums.ForumServiceException;
-import com.ibm.sbt.services.client.connections.forums.ForumType;
-import com.ibm.sbt.services.client.connections.forums.feedhandler.ForumsFeedHandler;
+import com.ibm.sbt.services.client.connections.search.feedhandler.FacetsHandler;
 import com.ibm.sbt.services.client.connections.search.feedhandler.ScopeFeedHandler;
 import com.ibm.sbt.services.client.connections.search.feedhandler.SearchFeedHandler;
 import com.ibm.sbt.services.util.AuthUtil;
@@ -62,6 +65,7 @@ public class SearchService extends BaseService {
 	private static final String _basicUrl				= "atom/";
 	public static final String _oauthUrl				= "oauth/atom/";
 	
+	private static final String seperator				= ",";
 	
 	/**
 	 * Default Constructor
@@ -122,7 +126,91 @@ public class SearchService extends BaseService {
 		return searchResults;
 		
 	}
+
+/*	*//**
+     * Search IBM Connections for public information, tagged with the specified tags.
+     * 
+	 * @param tag
+	 * @return
+	 * @throws SearchServiceException
+	 *//*
+    public ResultList getResultsByTag(String tag) throws SearchServiceException {
+    	return getResultsByTag(new String[]{ tag }, null);
+	}
 	
+    *//**
+     * Search IBM Connections for public information, tagged with the specified tags.
+     * 
+     * @param tags
+     * @param parameters
+     * @return
+     * @throws SearchServiceException
+     *//*
+    public ResultList getResultsByTag(String[] tags, Map<String, String> parameters) throws SearchServiceException {
+		ResultList searchResults;
+		
+		if(parameters==null){
+			parameters= new HashMap<String,String>();
+		}
+		
+		try {
+			parameters.put("constraint", createTagConstraint(tags));		
+			String searchQry = resolveUrl(SearchType.PUBLIC);
+			searchResults = (ResultList) getEntities(searchQry, parameters, new SearchFeedHandler(this));
+		} catch (Exception e) {
+			throw new SearchServiceException(e);
+		} 
+		return searchResults;
+	}*/
+	
+	
+	/**
+	 * Search IBM Connections for public information, tagged with the specified tags.
+	 * 
+	 * @param String
+	 *            Single tag to be search for, for multiple tags use other overloaded method
+	 * @return ResultList
+	 * @throws SearchServiceException
+	 */
+	public ResultList getResultsByTag(String tag) throws SearchServiceException{
+		List<String> taglist = new ArrayList<String>();
+		taglist.add(tag);
+		return getResultsByTag(taglist,null);
+	}
+	
+	/**
+	 * Search IBM Connections for public information, tagged with the specified tags.
+	 * 
+	 * @param List
+	 *            of Tags to searched for
+	 * @return ResultList
+	 * @throws SearchServiceException
+	 */
+	public ResultList getResultsByTag(List<String> tags) throws SearchServiceException{
+		return getResultsByTag(tags,null);
+	}
+	
+	/**
+	 * Search IBM Connections for public information, tagged with the specified tags.
+	 * 
+	 * @param List
+	 *            of Tags to searched for
+	 * @return ResultList
+	 * @throws SearchServiceException
+	 */
+	public ResultList getResultsByTag(List<String> tags,
+			Map<String, String> parameters) throws SearchServiceException {
+		// High level wrapper, provides a convenient mechanism for search for
+		// tags, uses constraints internally
+		List<String> formattedTags = new ArrayList<String>();
+		List<Constraint> constraints = new ArrayList<Constraint>();
+		formattedTags = createTagConstraint(tags);
+		Constraint constraint = new Constraint();
+		constraint.setType("category");
+		constraint.setValues(formattedTags);
+		constraints.add(constraint);
+		return getResultsWithConstraint("", constraints,parameters);
+	}
 	
 	/**
 	 * Search IBM Connections for both public information and private
@@ -179,7 +267,7 @@ public class SearchService extends BaseService {
 	 * @param query
 	 *            Text to search for
 	 */
-	public ResultList getPeople(String query) throws SearchServiceException{
+	public FacetValueList getPeople(String query) throws SearchServiceException{
 		return getPeople(query, null);
 	}
 	
@@ -195,17 +283,20 @@ public class SearchService extends BaseService {
 	 * @return ResultList
 	 * @throws SearchServiceException
 	 */
-	public ResultList getPeople(String query,Map<String, String> parameters) throws SearchServiceException{
-		ResultList searchResults;
+	public FacetValueList getPeople(String query,Map<String, String> parameters) throws SearchServiceException{
+		FacetValueList searchResults;
 		
 		if(parameters==null){
 			parameters= new HashMap<String,String>();
 		}
 		
 		parameters.put("query", query);		
+		parameters.put("pageSize", "0");
+		parameters.put("facet", "{\"id\": \"Person\"}");
+
 		try {
-			String searchQry = resolveUrl(SearchType.PEOPLESEARCH);
-			searchResults = (ResultList) getEntities(searchQry, parameters, new SearchFeedHandler(this));
+			String searchQry = resolveUrl(SearchType.PUBLIC);
+			searchResults = (FacetValueList) getEntities(searchQry, parameters, new FacetsHandler(this, "Person"));
 		} catch (ClientServicesException e) {
 			throw new SearchServiceException(e);
 		} catch (IOException e) {
@@ -248,10 +339,13 @@ public class SearchService extends BaseService {
 			parameters= new HashMap<String,String>();
 		}
 		
-		parameters.put("query", query);		
+		parameters.put("query", query);	
+		parameters.put("pageSize", "0");
+		parameters.put("facet", "{\"id\": \"Person\"}");
+		
 		try {
-			String searchQry = resolveUrl(SearchType.MYPEOPLESEARCH);
-			searchResults = (ResultList) getEntities(searchQry, parameters, new SearchFeedHandler(this));
+			String searchQry = resolveUrl(SearchType.MY);
+			searchResults = (ResultList) getEntities(searchQry, parameters, new FacetsHandler(this, "Person"));
 		} catch (ClientServicesException e) {
 			throw new SearchServiceException(e);
 		} catch (IOException e) {
@@ -261,297 +355,64 @@ public class SearchService extends BaseService {
 		
 	}
 	
-	/**
-	 * Search IBM Connection for public information, and then return the
-	 * tags associated with the results.
-	 * 
-	 * @param query
-	 *            Text to search for
-	 * @return ResultList
-	 * @throws SearchServiceException            
-	 */
-	public ResultList getTags(String query) throws SearchServiceException{
-		return getTags(query, null);
-	}
-	
 	
     /**
-     * Search IBM Connection for public information, and then 
-     * return the tags associated with the results.
+     * Search IBM Connection for public information with constraints
+     * A field constraint allows only results matching specific field values.
      * 
      * @param query Text to search for
-     * @param requestArgs
-	 * @return ResultList
-	 * @throws SearchServiceException
+     * @param Constraint
+     * 
+     * @return ResultList
+     * @throws SearchServiceException
+     * 
+	   *http://www-10.IBM.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Constraints&content=pdcontent  
      */
-	public ResultList getTags(String query,Map<String, String> parameters) throws SearchServiceException{
-		ResultList searchResults;
-		
-		if(parameters==null){
-			parameters= new HashMap<String,String>();
-		}
-		
-		parameters.put("query", query);		
-		try {
-			String searchQry = resolveUrl(SearchType.TAGSSEARCH);
-			searchResults = (ResultList) getEntities(searchQry, parameters, new SearchFeedHandler(this));
-		} catch (ClientServicesException e) {
-			throw new SearchServiceException(e);
-		} catch (IOException e) {
-			throw new SearchServiceException(e);
-		}
-		return searchResults;
-		
+	public ResultList getResultsWithConstraint(String query, Constraint constraint) throws SearchServiceException{
+		List<Constraint> constraintList = new ArrayList<Constraint>();
+		constraintList.add(constraint);
+		return getResultsWithConstraint(query, constraintList,null);
 	}
 	
 	
     /**
-     * Search IBM Connections for both public information and private 
-     * information that you have access to, and then return the tags associated 
-     * with the results. You must provide authentication information in the 
-     * request to retrieve this resource.
-	 * 
-	 * @param query
-	 *            Text to search for
-	 * @return ResultList
-	 * @throws SearchServiceException
-	 */
-	public ResultList getMyTags(String query) throws SearchServiceException{
-		return getMyTags(query, null);
+     * Search IBM Connection for public information with constraints
+     * A field constraint allows only results matching specific field values.
+     * 
+     * @param query Text to search for
+     * @param List<Constraint>
+     * 
+     * @return ResultList
+     * @throws SearchServiceException
+     * 
+	   *http://www-10.IBM.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Constraints&content=pdcontent  
+     */
+	public ResultList getResultsWithConstraint(String query, List<Constraint> constraints) throws SearchServiceException{
+		return getResultsWithConstraint(query, constraints,null);
 	}
-	
-	
+    
+    
     /**
-     * Search IBM Connections for both public information and private 
-     * information that you have access to, and then return the tags associated 
-     * with the results. You must provide authentication information in the 
-     * request to retrieve this resource.
-	 * 
-	 * @param query
-	 *            Text to search for
-	 * @param Map
-	 *            for additional parameters
-	 * @return ResultList
-	 * @throws SearchServiceException
-	 */
-	public ResultList getMyTags(String query,Map<String, String> parameters) throws SearchServiceException{
-		ResultList searchResults;
-		
-		if(parameters==null){
-			parameters= new HashMap<String,String>();
+     * Search IBM Connection for public information with constraints
+     * A field constraint allows only results matching specific field values.
+     * 
+     * @param query Text to search for
+     * @param List<Constraint>
+     * 
+     * @return ResultList
+     * @throws SearchServiceException
+     * 
+	   *http://www-10.IBM.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Constraints&content=pdcontent  
+     */
+	public ResultList getResultsWithConstraint(String query, List<Constraint> constraints, Map<String, String> parameters) throws SearchServiceException{
+		// We can not use a map of constraints, since there could be multiple constraints but map can have only one key named constraint
+		String formattedConstraints = generateConstraintParameter(constraints);
+		if(parameters == null){
+			parameters = new HashMap<String, String>();
 		}
-		
-		parameters.put("query", query);		
-		try {
-			String searchQry = resolveUrl(SearchType.MYTAGSSEARCH);
-			searchResults = (ResultList) getEntities(searchQry, parameters, new SearchFeedHandler(this));
-		} catch (ClientServicesException e) {
-			throw new SearchServiceException(e);
-		} catch (IOException e) {
-			throw new SearchServiceException(e);
-		}
-		return searchResults;
-		
+		parameters.put("constraint", formattedConstraints.toString());
+		return getResults(query, parameters);
 	}
-	
-	
-	/**
-	 * Search IBM Connection for public information, and then return the
-	 * applications associated with the results and identify how many results
-	 * were found per application.
-	 * 
-	 * @param query
-	 *            Text to search for
-	 * @return ResultList
-	 * @throws SearchServiceException
-	 */
-	public ResultList getApplications(String query) throws SearchServiceException{
-		return getApplications(query, null);
-	}
-	
-	
-	/**
-	 * Search IBM Connection for public information, and then return the
-	 * applications associated with the results and identify how many results
-	 * were found per application.
-	 * 
-	 * @param query
-	 *            Text to search for
-	 * @param Map
-	 *            for additional parameters
-	 * @return ResultList
-	 * @throws SearchServiceException
-	 */
-	public ResultList getApplications(String query,Map<String, String> parameters) throws SearchServiceException{
-		ResultList searchResults;
-		
-		if(parameters==null){
-			parameters= new HashMap<String,String>();
-		}
-		
-		parameters.put("query", query);		
-		try {
-			String searchQry = resolveUrl(SearchType.APPLICATIONS);
-			searchResults = (ResultList) getEntities(searchQry, parameters, new SearchFeedHandler(this));
-		} catch (ClientServicesException e) {
-			throw new SearchServiceException(e);
-		} catch (IOException e) {
-			throw new SearchServiceException(e);
-		}
-		return searchResults;
-		
-	}
-	
-	
-	
-	/**
-	 * Search IBM Connections for both public information and private
-	 * information that you have access to, and then return the applications
-	 * associated with the results and identify how many results were found per
-	 * application. You must provide authentication information in the request
-	 * to retrieve this resource.
-	 * 
-	 * @param query
-	 *            Text to search for
-	 * @return ResultList
-	 * @throws SearchServiceException
-	 */
-	public ResultList getMyApplications(String query) throws SearchServiceException{
-		return getMyApplications(query, null);
-	}
-	
-	
-	/**
-	 * Search IBM Connections for both public information and private
-	 * information that you have access to, and then return the applications
-	 * associated with the results and identify how many results were found per
-	 * application. You must provide authentication information in the request
-	 * to retrieve this resource.
-	 * 
-	 * @param query
-	 *            Text to search for
-	 * @param Map
-	 *            for additional parameters
-	 * @return ResultList
-	 * @throws SearchServiceException
-	 */
-	public ResultList getMyApplications(String query,Map<String, String> parameters) throws SearchServiceException{
-		ResultList searchResults;
-		
-		if(parameters==null){
-			parameters= new HashMap<String,String>();
-		}
-		
-		parameters.put("query", query);		
-		try {
-			String searchQry = resolveUrl(SearchType.APPLICATIONS);
-			searchResults = (ResultList) getEntities(searchQry, parameters, new SearchFeedHandler(this));
-		} catch (ClientServicesException e) {
-			throw new SearchServiceException(e);
-		} catch (IOException e) {
-			throw new SearchServiceException(e);
-		}
-		return searchResults;
-		
-	}
-	
-	
-	/**
-	 * Search IBM Connection for public information, and then return the dates
-	 * associated with the results.
-	 * 
-	 * @param query
-	 *            Text to search for
-	 * @return ResultList
-	 * @throws SearchServiceException
-	 */
-	public ResultList getDates(String query) throws SearchServiceException{
-		return getDates(query, null);
-	}
-	
-	
-	/**
-	 * Search IBM Connection for public information, and then return the dates
-	 * associated with the results.
-	 * 
-	 * @param query
-	 *            Text to search for
-	 * @param Map
-	 *            for additional parameters
-	 * @return ResultList
-	 * @throws SearchServiceException
-	 */
-	public ResultList getDates(String query,Map<String, String> parameters) throws SearchServiceException{
-		ResultList searchResults;
-		
-		if(parameters==null){
-			parameters= new HashMap<String,String>();
-		}
-		
-		parameters.put("query", query);		
-		try {
-			String searchQry = resolveUrl(SearchType.DATE);
-			searchResults = (ResultList) getEntities(searchQry, parameters, new SearchFeedHandler(this));
-		} catch (ClientServicesException e) {
-			throw new SearchServiceException(e);
-		} catch (IOException e) {
-			throw new SearchServiceException(e);
-		}
-		return searchResults;
-		
-	}
-	
-	
-	/**
-	 * Search IBM Connections for both public information and private
-	 * information that you have access to, and then return the dates associated
-	 * with the results. You must provide authentication information in the
-	 * request to retrieve this resource.
-	 * 
-	 * @param query
-	 *            Text to search for
-	 * @return ResultList
-	 * @throws SearchServiceException
-	 */
-	public ResultList getMyDates(String query) throws SearchServiceException{
-		return getMyDates(query, null);
-	}
-	
-	
-	/**
-	 * Search IBM Connections for both public information and private
-	 * information that you have access to, and then return the dates associated
-	 * with the results. You must provide authentication information in the
-	 * request to retrieve this resource.
-	 * 
-	 * @param query
-	 *            Text to search for
-	 * @param Map
-	 *            for additional parameters
-	 * @return ResultList
-	 * @throws SearchServiceException
-	 */
-	public ResultList getMyDates(String query,Map<String, String> parameters) throws SearchServiceException{
-		ResultList searchResults;
-		
-		if(parameters==null){
-			parameters= new HashMap<String,String>();
-		}
-		
-		parameters.put("query", query);		
-		try {
-			String searchQry = resolveUrl(SearchType.MYDATE);
-			searchResults = (ResultList) getEntities(searchQry, parameters, new SearchFeedHandler(this));
-		} catch (ClientServicesException e) {
-			throw new SearchServiceException(e);
-		} catch (IOException e) {
-			throw new SearchServiceException(e);
-		}
-		return searchResults;
-		
-	}
-	
-	
 	/**
      * Search IBM Connection for available scopes ( Applications in which search can be executed )
      * 
@@ -571,12 +432,33 @@ public class SearchService extends BaseService {
 			throw new SearchServiceException(e);
 		}
 		return scopes;
-    }
-	
+     }
+     
 	/*
 	 * Internal service methods
 	 */
 	
+/*    private String createTagConstraint(String[] tags) throws JsonException {
+    	String[] tagValues = new String[tags.length];
+    	for (int i=0; i<tags.length; i++) {
+    		tagValues[i] = "Tag/" + tags[i];
+    	}
+    	
+    	JsonObject jsonObject = (JsonObject)JsonJavaFactory.instanceEx.createObject(null, null);
+    	jsonObject.putJsonProperty("type", "category");
+    	jsonObject.putJsonProperty("values", tagValues);
+    	return jsonObject.toString();
+    }*/
+     
+ 	private List createTagConstraint(List<String> tags){
+		List<String> formattedTags = new ArrayList<String>();
+		String tagkey = "Tag/";
+		for (Iterator iterator = tags.iterator(); iterator.hasNext();) {
+			String tag = (String) iterator.next();
+			formattedTags.add(tagkey+tag);			
+		}
+		return formattedTags;
+	}
 	
 	
 	/*
@@ -624,5 +506,51 @@ public class SearchService extends BaseService {
 			}
 		}
 		return baseUrl.toString();
+	}
+	
+	
+	/*
+	 * Method formats the list of constraint into String as required by Search api.
+	 * 
+	 */
+	private String generateConstraintParameter(List<Constraint> constraints){
+		StringBuilder formattedConstraints = new StringBuilder();
+  		if(constraints != null){
+  			for (int constraintsCtr = 0; constraintsCtr < constraints.size(); constraintsCtr++) {
+  				Constraint constraint = (Constraint) constraints.get(constraintsCtr);
+  				StringBuilder constraintParameter = new StringBuilder("");
+  				constraintParameter.append("{\"type\":\"").append(constraint.getType()).append("\"");
+  				
+  				if(StringUtil.isNotEmpty(constraint.getId())){
+  					constraintParameter.append(",").append("\"id\":\"").append(constraint.getId()).append("\"");
+  				}
+  				
+  				// Extract all values
+  				List<String> allValues = constraint.getValues();
+  				StringBuilder values = new StringBuilder();
+  				
+  				for (int valueCtr = 0; valueCtr< allValues.size();valueCtr++) {
+  					String value = (String) allValues.get(valueCtr);
+  					if(valueCtr == 0){
+  						values.append("\"").append(value).append("\"");
+  					}else{
+  						values.append(seperator).append("\"").append(value).append("\"");
+  					}
+  					
+  				}
+  				constraintParameter.append(",").append("\"values\":[").append(values.toString()).append("]");
+  				
+  				if(StringUtil.isNotEmpty(constraint.getExactMatch())){
+  					constraintParameter.append(",").append("\"exactMatch\":\"").append(constraint.getExactMatch()).append("\"");
+  				}
+  				if(constraintsCtr > 0){
+  					formattedConstraints.append("&constraint=");
+  				}
+  				formattedConstraints.append(constraintParameter.toString());
+  			}
+  			formattedConstraints.append("}");
+  			
+  		}
+  		return formattedConstraints.toString();
 	}
 }

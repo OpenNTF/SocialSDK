@@ -44,12 +44,17 @@
 		ForumTopic topic = (ForumTopic)topicList.iterator().next();
 		
 		topic = service.getForumTopic(topic.getTopicUuid());
-		topic.setTitle("Updated Topic Title123" + System.currentTimeMillis());
+		topic = topic.load();
+		topic.setTitle("updated title");
+		topic.setContent("updated with newContent");
 		topic = topic.save();  
-		out.println("Forum updated with title : " + topic.getTitle());
+		out.println("Forum Topic updated with title : " + topic.getTitle()+"<br>");
+		out.println("is topic pinned : " + topic.isPinned()+"<br>");
+		out.println("is topic locked : " + topic.isLocked()+"<br>");
+		out.println("is topic a question : " + topic.isQuestion()+"<br>");
+	
 		
 	} catch (Exception e) {
-	e.printStackTrace();
 		out.println("<pre>");
 		out.println(e.getMessage());
 		out.println("</pre>");

@@ -48,6 +48,8 @@ public interface DataHandler<DataType> {
 	public Object getData();
 	public Long getAsLong(String fieldName);
 	public Long getAsLong(FieldEntry fieldName);
+	public String[] getAsArray(String fieldName);
+	public String[] getAsArray(FieldEntry fieldName);
 	
 }
 

@@ -21,12 +21,15 @@ import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.AtomEntity;
 import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.connections.bookmarks.model.BookmarkXPath;
 
 /**
  * @author mwallace
  *
  */
 public class Bookmark extends AtomEntity {
+	
+	static final private String ID_PREFIX = "tag:dogear.ibm.com,2005:link:";
 
 	/**
 	 * Construct a Bookmark instance.
@@ -45,15 +48,29 @@ public class Bookmark extends AtomEntity {
 	 * @return
 	 */
 	public String getBookmarkUuid() {
-		return null;
+		String id = getId();
+		if (id != null) {
+			id = id.substring(ID_PREFIX.length());
+		}
+		return id;
 	}
 
+	/**
+	 * Return the click count.
+	 * 
+	 * @return
+	 */
 	public long getClickCount() {
-		return 0L;
+		return getAsLong(BookmarkXPath.clickCount);
 	}
 	
+	/**
+	 * Return the link count.
+	 * 
+	 * @return
+	 */
 	public long getLinkCount() {
-		return 0L;
+		return getAsLong(BookmarkXPath.linkCount);
 	}
 	
 }

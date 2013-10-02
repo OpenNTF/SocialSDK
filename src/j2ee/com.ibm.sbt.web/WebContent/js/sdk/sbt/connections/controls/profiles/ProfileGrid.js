@@ -182,17 +182,16 @@ define([ "../../../declare",
             if (args.type == "communityMembers") {
             	
             	this._sortInfo = {
-       	                displayName: { 
-       	                    title: nls.displayName, 
-       	                    sortMethod: "sortByDisplayName",
-       	                    sortParameter: "displayName" 
-       	                },
+            			displayName: { 
+            				title: nls.displayName, 
+       	                    sortMethod: "sortByTitle",
+       	                    sortParameter: "title"   
+            			},
        	                recent: {
        	                	title: nls.created, 
        	                    sortMethod: "sortByCreated",
        	                    sortParameter: "created"   
        	                }
-       	               
             	};
        		 	this._activeSortAnchor = this._sortInfo.created;
        		 	this._activeSortIsDesc = false;
@@ -310,12 +309,13 @@ define([ "../../../declare",
          */
         getSortInfo: function() {
         	return {
-                active: {
-                    anchor: this._activeSortAnchor,
-                    isDesc: this._activeSortIsDesc
-                },
-                list: [this._sortInfo.displayName, this._sortInfo.recent]
+        		active: {
+        			anchor: this._activeSortAnchor,
+        			isDesc: this._activeSortIsDesc
+        		},
+        		list: [this._sortInfo.displayName, this._sortInfo.recent]
             };
+        	
         },
                 
         sortByDisplayName: function(el, data, ev){
@@ -328,6 +328,10 @@ define([ "../../../declare",
         
         sortByCreated: function(el, data, ev){
         	this._sort("created", true, el, data, ev);
+        },
+        
+        sortByTitle: function(el, data, ev){
+        	this._sort("title", true, el, data, ev);
         }
 
         // Internals

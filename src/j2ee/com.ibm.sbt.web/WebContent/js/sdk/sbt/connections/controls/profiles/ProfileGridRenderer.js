@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -22,8 +22,9 @@ define(["../../../declare",
         "../../../i18n!./nls/ProfileGridRenderer",
         "../../../text!./templates/ProfileRow.html",
         "../../../text!./templates/SharedConnectionsRow.html",
-        "../../../text!./templates/StatusUpdateRow.html"], 
-        function(declare, ConnectionsGridRenderer, nls, profileTemplate, sharedConnTemplate, statusUpdateTemplate) {
+        "../../../text!./templates/StatusUpdateRow.html",
+        "../../../text!./templates/CommunityMemberRow.html"], 
+        function(declare, ConnectionsGridRenderer, nls, profileTemplate, sharedConnTemplate, statusUpdateTemplate, communityMemberTemplate) {
 		
     /**
      * @class ProfileGridRenderer
@@ -43,8 +44,10 @@ define(["../../../declare",
          constructor: function(args) {
              if (args.type == "profile") {
                  this.template = profileTemplate;
-             }else if(args.type == "statusUpdates"){
+             } else if(args.type == "statusUpdates"){
             	 this.template = statusUpdateTemplate;
+             } else if (args.type == "communityMembers") {
+            	 this.template = communityMemberTemplate;
              }
          },
 
@@ -73,8 +76,24 @@ define(["../../../declare",
              if (grid.profileAction) {
                  return grid.profileAction.getTooltip(item);
              }
-         }
+         },
          
+         /**
+          * Generates the profile photo URL for displaying the photos of community members
+          * @method photoUrl
+          * @param grid The Grid Dijit
+          * @param item the element containing the uid
+          * @param i the number of the current row
+          * @param items all of the items in the grid row
+          * @returns A profile photo URL for retrieving a user's profile picture
+          */
+         photoUrl: function(grid, item, i, items) {
+        	 var store = grid.store;
+        	 var endpoint = store.getEndpoint();
+        	 var photoUrl = endpoint.baseUrl + "/profiles/photo.do?email=" + item.getValue("email");
+      	 
+        	 return photoUrl;
+         }
     });
     
     return ProfileGridRenderer;

@@ -272,7 +272,7 @@ public class FileService extends BaseService {
         Document payload = this.constructPayloadForComments(comment);
         try {
             Response result = (Response) super.createData(requestUri, null, new ClientService.ContentXml(payload,"application/atom+xml"));
-            return (Comment)new CommentFeedHandler().createEntity(result);
+            return (Comment)new CommentFeedHandler(this).createEntity(result);
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInCreatingComment);
         }
@@ -318,7 +318,7 @@ public class FileService extends BaseService {
         try {
             Response result;
             result = (Response) super.createData(requestUri, params, headers, payload);
-            return new FileFeedHandler().createEntityList(result);
+            return new FileFeedHandler(this).createEntityList(result);
             
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageGenericException);
@@ -525,7 +525,7 @@ public class FileService extends BaseService {
             Response result = (Response) super.createData(requestUri, null,
                     new ClientService.ContentXml(
                             payload, "application/atom+xml"));
-            return (File) new FileFeedHandler().createEntity(result);
+            return (File) new FileFeedHandler(this).createEntity(result);
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInCreatingFolder);
         }
@@ -931,7 +931,7 @@ public class FileService extends BaseService {
 
         FileList fileEntries = null;
         try {
-            fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler());
+            fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
@@ -1015,7 +1015,7 @@ public class FileService extends BaseService {
                     ResultType.ENTRY.getResultType());
 
             try {
-                return (File) super.getEntity(requestUri, parameters, new FileFeedHandler());
+                return (File) super.getEntity(requestUri, parameters, new FileFeedHandler(this));
             } catch (Exception e) {
                throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
             }
@@ -1029,7 +1029,7 @@ public class FileService extends BaseService {
         }
         String requestUri = this.getModerationUri(fileId, "approval", "file");
         try {
-            return (File) super.getEntity(requestUri, null, new FileFeedHandler());
+            return (File) super.getEntity(requestUri, null, new FileFeedHandler(this));
         } catch (Exception e) {
            throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
@@ -1211,7 +1211,7 @@ public class FileService extends BaseService {
                 null,
                 subFilters, resultType);
         try {
-            return (File) super.getEntity(requestUri, params, new FileFeedHandler());
+            return (File) super.getEntity(requestUri, params, new FileFeedHandler(this));
         } catch (Exception e) {
            throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
@@ -1236,7 +1236,7 @@ public class FileService extends BaseService {
 
         FileList fileEntries = null;
         try {
-            fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler());
+            fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
@@ -1281,7 +1281,7 @@ public class FileService extends BaseService {
 
         FileList fileEntries = null;
         try {
-            fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler());
+            fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
@@ -1319,7 +1319,7 @@ public class FileService extends BaseService {
 
         FileList fileEntries = null;
         try {
-            fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler());
+            fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
@@ -1359,7 +1359,7 @@ public class FileService extends BaseService {
 
         FileList fileEntries = null;
         try {
-            fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler());
+            fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
@@ -1449,7 +1449,7 @@ public class FileService extends BaseService {
 
         FileList fileEntries = null;
         try {
-            fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler());
+            fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
@@ -1497,7 +1497,7 @@ public class FileService extends BaseService {
 
         FileList fileEntries = null;
         try {
-            fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler());
+            fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
@@ -1592,7 +1592,7 @@ public class FileService extends BaseService {
 
         File file;
         try {
-            file = (File) getEntity(requestUri, params, new FileFeedHandler());
+            file = (File) getEntity(requestUri, params, new FileFeedHandler(this));
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
@@ -1627,7 +1627,7 @@ public class FileService extends BaseService {
 
         CommentList commentEntries = null;
         try {
-            commentEntries = (CommentList) getEntities(requestUri, params, new FileFeedHandler());
+            commentEntries = (CommentList) getEntities(requestUri, params, new FileFeedHandler(this));
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
@@ -1642,7 +1642,7 @@ public class FileService extends BaseService {
         String requestUri = this.getModerationUri(fileId, "review", "file");
         File fileEntry;
         try {
-            fileEntry = (File) getEntity(requestUri, null, new FileFeedHandler());
+            fileEntry = (File) getEntity(requestUri, null, new FileFeedHandler(this));
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
@@ -1684,7 +1684,7 @@ public class FileService extends BaseService {
 
         FileList fileEntries = null;
         try {
-            fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler());
+            fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
@@ -1712,7 +1712,7 @@ public class FileService extends BaseService {
                 subFilters, resultType);
         File fileEntry;
         try {
-            fileEntry = (File) getEntity(requestUri, null, new FileFeedHandler());
+            fileEntry = (File) getEntity(requestUri, null, new FileFeedHandler(this));
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
@@ -1746,7 +1746,7 @@ public class FileService extends BaseService {
 
         FileList fileEntries = null;
         try {
-            fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler());
+            fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
         } catch (Exception e) {
             throw new FileServiceException(e,
                     Messages.MessageExceptionInReadingObject);
@@ -1821,7 +1821,7 @@ public class FileService extends BaseService {
                 resultType);
         FileList fileEntries = null;
         try {
-            fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler());
+            fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
@@ -1881,7 +1881,7 @@ public class FileService extends BaseService {
 
         FileList fileEntries = null;
         try {
-            fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler());
+            fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
@@ -1913,7 +1913,7 @@ public class FileService extends BaseService {
                 resultType);
         FileList fileEntries = null;
         try {
-            fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler());
+            fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
@@ -1949,7 +1949,7 @@ public class FileService extends BaseService {
 
         FileList fileEntries = null;
         try {
-            fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler());
+            fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
@@ -1981,7 +1981,7 @@ public class FileService extends BaseService {
                 resultType);
         FileList fileEntries = null;
         try {
-            fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler());
+            fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
@@ -2175,7 +2175,7 @@ public class FileService extends BaseService {
         Map<String, String> headers = new HashMap<String, String>();
         try {
             Response data = (Response) this.updateData(requestUri, params, headers, null, null);
-            return (File)new FileFeedHandler().createEntity(data);
+            return (File)new FileFeedHandler(this).createEntity(data);
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInRestoreFile);
         }
@@ -2433,7 +2433,7 @@ public class FileService extends BaseService {
         try {
             //TODO: check get data wrapping
             Response result = (Response) this.updateData(requestUri, params, content, null);
-            return (File) new FileFeedHandler().createEntity(result);
+            return (File) new FileFeedHandler(this).createEntity(result);
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInRestoreFile);
         }
@@ -2528,7 +2528,7 @@ public class FileService extends BaseService {
         try {
             Response result = (Response) super.updateData(requestUri, params, new ClientService.ContentXml(
                     requestBody, "application/atom+xml"), null);
-            return (File) new FileFeedHandler().createEntity(result);
+            return (File) new FileFeedHandler(this).createEntity(result);
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInRestoreFile);
         }
@@ -2627,7 +2627,7 @@ public class FileService extends BaseService {
         
         try {
             Response result = (Response) this.updateData(requestUri, null, headers, payload, null);
-            return (File) new FileFeedHandler().createEntity(result);
+            return (File) new FileFeedHandler(this).createEntity(result);
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInRestoreFile);
         }
@@ -2704,7 +2704,7 @@ public class FileService extends BaseService {
         try {
             Response data = (Response) super.createData(requestUri, p, headers, contentFile);
            
-            return (File)new FileFeedHandler().createEntity(data);
+            return (File)new FileFeedHandler(this).createEntity(data);
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInUpload);
         }
@@ -2935,7 +2935,7 @@ public class FileService extends BaseService {
         FileList resultantEntries;
         try {
             resultantEntries = (FileList) this.getEntities(requestUri, null,
-                    new FileFeedHandler());
+                    new FileFeedHandler(this));
         } catch (Exception e) {
            throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         } 

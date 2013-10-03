@@ -15,8 +15,11 @@
  */
 package com.ibm.sbt.services.client.connections.communities;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Handler;
@@ -24,9 +27,13 @@ import java.util.logging.Handler;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.http.Header;
+import org.apache.http.HttpEntity;
 
 import com.ibm.commons.util.StringUtil;
+import com.ibm.commons.util.io.StreamUtil;
+import com.ibm.commons.util.io.TraceOutputStream;
 import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.client.ClientService.ContentStream;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
@@ -38,6 +45,7 @@ import com.ibm.sbt.services.client.connections.files.Categories;
 import com.ibm.sbt.services.client.connections.files.File;
 import com.ibm.sbt.services.client.connections.files.FileList;
 import com.ibm.sbt.services.client.connections.files.FileService;
+import com.ibm.sbt.services.client.connections.files.FileServiceException;
 import com.ibm.sbt.services.client.connections.files.FileServiceURIBuilder;
 import com.ibm.sbt.services.client.connections.files.ResultType;
 import com.ibm.sbt.services.client.connections.files.SubFilters;
@@ -848,8 +856,29 @@ public class CommunityService extends BaseService {
 		return comBaseUrl.toString();
 	}
 	
-	public long downloadCommunityFile(java.io.OutputStream stream, final String fileId, final String communityId, Map<String, String> params) throws CommunityServiceException {
-		// To get single file from community : files/basic/api/communitylibrary/ebb7852b-0caf-46f1-a04a-054b4808bbe1/document/023118f5-8c06-4e47-bbba-39446db5fdcd/entry
+	public FileList getCommunityFiles(String communityId, HashMap<String, String> params) throws CommunityServiceException {
+		String accessType = AccessType.AUTHENTICATED.getAccessType();
+		SubFilters subFilters = new SubFilters();
+        if (StringUtil.isEmpty(communityId)) {
+        	throw new CommunityServiceException(null, Messages.NullCommunityIdUserIdOrRoleException);
+        }
+        if(null == params){
+			 params = new HashMap<String, String>();
+		}
+        subFilters.setCommunityLibraryId(communityId);
+        String resultType = ResultType.FEED.getResultType();
+		String requestUrl = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
+                null, subFilters, resultType); 
+		try {
+			return (FileList) super.getEntities(requestUrl, params, new FileFeedHandler(new FileService())); 
+		} catch (ClientServicesException e) {
+			throw new CommunityServiceException(e, Messages.MyCommunityFilesException);
+		} catch (IOException e) {
+			throw new CommunityServiceException(e, Messages.MyCommunityFilesException);
+		}
+	}
+	
+	public long downloadCommunityFile(java.io.OutputStream ostream, final String fileId, final String communityId, Map<String, String> params) throws CommunityServiceException {
 		String accessType = AccessType.AUTHENTICATED.getAccessType();
 		SubFilters subFilters = new SubFilters();
         if (StringUtil.isEmpty(communityId)) {
@@ -875,7 +904,7 @@ public class CommunityService extends BaseService {
 			throw new CommunityServiceException(e, Messages.DownloadCommunitiesException);
 		}
 		// now we have the file.. we need to download it.. 
-		// To download a file : /files/basic/api/library/934f4302-fe88-4b7f-947a-b0ccb40bf9c6/document/023118f5-8c06-4e47-bbba-39446db5fdcd/media
+		
 		SubFilters downloadFilters = new SubFilters();
 		downloadFilters.setLibraryId(file.getLibraryId());
 		downloadFilters.setFileId(file.getFileId());
@@ -884,18 +913,35 @@ public class CommunityService extends BaseService {
                 null, downloadFilters, resultType); 
 		Map<String, String> headers = new HashMap<String, String>();
 		headers.put("content-type", "application/octet-stream");
-		Response responseStream = null;
+		Response response = null;
 		try {
-			responseStream = this.getClientService().get(requestUrl, params, headers, ClientService.FORMAT_INPUTSTREAM);
+			response = this.getClientService().get(requestUrl, params, headers, ClientService.FORMAT_INPUTSTREAM);
 		} catch (ClientServicesException e) {
 			throw new CommunityServiceException(e, Messages.DownloadCommunitiesException);
 		} 
-		InputStream istream = (InputStream) responseStream.getData();
-		// convert to output stream and return no of bytes.
-		return 0;
+		InputStream istream = (InputStream) response.getData();
+		long noOfBytes = 0;
+		try {
+			if (istream != null) {
+				noOfBytes = StreamUtil.copyStream(istream, ostream);
+				ostream.flush();
+			}
+		} catch (IllegalStateException e) {
+				e.printStackTrace();
+		} catch (IOException e) {
+				e.printStackTrace();
+		}
+		return noOfBytes;
 	}
 	
-	public void uploadFile(java.io.File file, String communityId) throws CommunityServiceException {
+	public void uploadFile(InputStream iStream, String communityId, final String title, long length) throws CommunityServiceException {
+		if (iStream == null) {
+            throw new CommunityServiceException(null, "null stream");
+        }
+        if (title == null) {
+            throw new CommunityServiceException(null, "null name");
+        }
+        ContentStream contentFile = new ContentStream(iStream, length, title);
 		String accessType = AccessType.AUTHENTICATED.getAccessType();
 		SubFilters subFilters = new SubFilters();
         if (StringUtil.isEmpty(communityId)) {
@@ -906,7 +952,7 @@ public class CommunityService extends BaseService {
 		String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
                 null, subFilters, resultType); 
 	    try {
-	    	createData(requestUri, null, null, file);
+	    	createData(requestUri, null, null, contentFile);
 	    } catch (ClientServicesException e) {
 			throw new CommunityServiceException(e, Messages.UploadCommunitiesException);
 		} catch (IOException e) {

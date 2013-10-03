@@ -63,6 +63,14 @@ public class OAuthEndpoint extends AbstractEndpoint {
 		this.oAuthHandler = handler;
 	}
 	
+	/**
+	 * Force login of the specified user using the cached credentials if available.
+	 * If not cached credential are available or these are invalid the login will fail.
+	 * 
+	 * @param user
+	 * @return true if the specified user was logged in using their cached credentials
+	 * @throws ClientServicesException
+	 */
     public boolean login(String user) throws ClientServicesException {
     	this.oAuthHandler.setUserId(user);
     	if (isAuthenticated()) {

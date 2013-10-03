@@ -42,6 +42,9 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
         /**Selected row is used for keyboard navigation in the applications pop up*/
 		_selectedRow : -1,
 		
+		/** This list is used to keep track of selected members **/
+		_members : [],
+		
         /**
          * @method constructor The constructor for the SearchBox class
          * @param args
@@ -117,17 +120,6 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 		setSelectedApplication: function(element,object,event){
 			this.searchBoxAction.setSelectedApplication(element,object,event,this);
 		},
-		
-		/**
-		 * Closes a member item (by removing it from its parent; the member list)
-		 * @method closeMemberItem
-		 * @param element  The member list item
-		 * @param object 
-		 * @param event  The Event 
-		 */
-		closeMemberItem: function(element,object,event){
-			element.parentNode.removeChild(element);
-		},
 
 		/**
 		 * When the user hovers over an application in the applications pop up, the background gets highlighted
@@ -138,6 +130,44 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 		 */
 		displayHighlight: function(element,object,event){
 			this.searchBoxAction.highLight(element,object,event);
+		},
+		
+		/**
+		 * Closes a member item (by removing it from its parent; the member list)
+		 * @method closeMemberItem
+		 * @param element  The member list item
+		 * @param object 
+		 * @param event  The Event 
+		 */
+		closeMemberItem: function(element,object,event){
+			// Get parent node
+			var parent = element.parentNode;
+			
+			// Fetch children
+			var children = parent.childNodes;
+			
+			// Get the member name
+			var memberName = "";	
+			for (var i = 0; i < children.length; i++) {
+				if (children[i].id == "memberName") {
+					memberName = children[i].innerHTML;
+					break;
+				}
+		    }
+			
+			// Get the element to remove
+			var id = memberName.replace(" ", "-");
+			var item = document.getElementById(id);
+			
+			// Remove member from list
+			for (var i = 0; i < this._members.length; i++) {
+				if (this._members[i] == memberName) {
+					delete this._members[i];
+				}
+			}
+			
+			// Remove it
+			item.parentNode.removeChild(item);
 		},
 		
 		/**
@@ -289,7 +319,7 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 					input.value = "";
 					
 					// Create member list item
-					context.renderer.renderMemberListItem(value);
+					context.renderer.renderMemberListItem(context, value);
 
 				} else {
 					input.value = value;

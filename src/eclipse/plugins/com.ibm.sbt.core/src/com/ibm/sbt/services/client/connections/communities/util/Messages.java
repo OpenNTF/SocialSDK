@@ -23,6 +23,7 @@ public class Messages {
 	public static String	CommunityException						= "Error getting community with id: {0}";
 	public static String	CommunityMembersException				= "Problem occurred while fetching members of a community with id: {0}";
 	public static String	MyCommunitiesException					= "Problem occurred while fetching My communities";
+	public static String	MyCommunityFilesException				= "Problem occurred while fetching community files";
 	public static String	UploadCommunitiesException				= "Problem occurred while uploading file to communities";
 	public static String	DownloadCommunitiesException			= "Problem occurred while downloading file from communities";
 	public static String	SubCommunitiesException					= "Problem occurred while fetching Sub communities of Community with id : {0}";

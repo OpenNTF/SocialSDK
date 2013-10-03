@@ -26,6 +26,8 @@ import com.ibm.sbt.services.client.base.datahandlers.FieldEntry;
  */
 public enum BookmarkXPath implements FieldEntry {
 	
+	href("a:link[not(@ref)]/@href"),
+	linkid("snx:link/@linkid"),
 	clickCount("snx:clickcount"),
 	linkCount("snx:linkcount");
 

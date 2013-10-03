@@ -48,13 +48,18 @@ public class Bookmark extends AtomEntity {
 	 * @return
 	 */
 	public String getBookmarkUuid() {
-		String id = getId();
-		if (id != null) {
-			id = id.substring(ID_PREFIX.length());
-		}
-		return id;
+		return getAsString(BookmarkXPath.linkid);
 	}
 
+	/**
+	 * Return the href.
+	 * 
+	 * @return
+	 */
+	public String getHref() {
+		return getAsString(BookmarkXPath.href);
+	}
+	
 	/**
 	 * Return the click count.
 	 * 

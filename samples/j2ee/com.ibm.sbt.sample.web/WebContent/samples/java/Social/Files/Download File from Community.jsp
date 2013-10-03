@@ -14,6 +14,8 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@page import="java.io.FileOutputStream"%>
+<%@page import="java.io.OutputStream"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.FileList"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.CommunityList"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
@@ -41,12 +43,10 @@
 	    	communityId = communities.get(0).getCommunityUuid();
 	    }
 	    
-    	FileList listFiles = service.downloadCommunityFiles(communityId, null);
-	    if(listFiles != null && !listFiles.isEmpty()) {
-	    	for(File file : listFiles) {
-	    		out.println(file.getLabel() + "\t\t<a href=\"" + file.getDownloadUrl() + "\">  Download </a><br/>" );
-	    	}
-	    }
+	    OutputStream ostream = new FileOutputStream("tempFile");
+    	long noOfBytes = service.downloadCommunityFile(ostream, "023118f5-8c06-4e47-bbba-39446db5fdcd", "ebb7852b-0caf-46f1-a04a-054b4808bbe1", null);
+	    out.println("File Downloaded in ostream");
+
     } catch (Throwable e) {
       out.println("<pre>");
       out.println(e.getMessage());

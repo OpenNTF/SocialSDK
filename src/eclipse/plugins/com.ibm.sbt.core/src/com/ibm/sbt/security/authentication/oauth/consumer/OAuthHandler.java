@@ -16,9 +16,11 @@ package com.ibm.sbt.security.authentication.oauth.consumer;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.http.HttpStatus;
+
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.util.UrlUtil;
 import com.ibm.commons.util.PathUtil;
@@ -33,6 +35,7 @@ public abstract class OAuthHandler {
 	private boolean	showOAuthFlow;
 	private String	version;
 	private String	serverUrl;
+	private String userId;
 
 	/**
 	 * Do all steps in the OAuth flow before the Authorization step.
@@ -215,5 +218,17 @@ public abstract class OAuthHandler {
 		}
 		return null;
 	}
-	
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public String getUserId() {
+		if (this.userId != null) {
+			return this.userId;
+		}
+		Context context = Context.getUnchecked();
+		return (context == null) ? null : context.getCurrentUserId();
+	}
+		
 }

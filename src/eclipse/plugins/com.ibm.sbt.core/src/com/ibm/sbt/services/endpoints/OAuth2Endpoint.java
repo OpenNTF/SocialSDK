@@ -8,12 +8,14 @@ import org.apache.http.HttpRequest;
 import org.apache.http.HttpRequestInterceptor;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.HttpContext;
+
 import com.ibm.commons.Platform;
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.RuntimeConstants;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.security.authentication.oauth.OAuthException;
 import com.ibm.sbt.security.authentication.oauth.consumer.AccessToken;
+import com.ibm.sbt.security.authentication.oauth.consumer.OAuth1Handler;
 import com.ibm.sbt.security.authentication.oauth.consumer.OAuth2Handler;
 import com.ibm.sbt.security.authentication.oauth.consumer.servlet.OAClientAuthentication;
 import com.ibm.sbt.services.client.ClientServicesException;
@@ -30,8 +32,32 @@ import com.ibm.sbt.util.SBTException;
 
 public class OAuth2Endpoint extends AbstractEndpoint {
 
-	protected OAuth2Handler	oAuthHandler	= new OAuth2Handler();
+	protected OAuth2Handler	oAuthHandler;
 
+	public OAuth2Endpoint(){
+		this.oAuthHandler = new OAuth2Handler();
+	}
+	
+	protected OAuth2Endpoint(OAuth2Handler handler) {
+		this.oAuthHandler = handler;
+	}
+	
+	/**
+	 * Force login of the specified user using the cached credentials if available.
+	 * If not cached credential are available or these are invalid the login will fail.
+	 * 
+	 * @param user
+	 * @return true if the specified user was logged in using their cached credentials
+	 * @throws ClientServicesException
+	 */
+    public boolean login(String user) throws ClientServicesException {
+    	this.oAuthHandler.setUserId(user);
+    	if (isAuthenticated()) {
+    		return isAuthenticationValid();
+    	}
+    	return false;
+    }	
+	
 	@Override
 	public void checkValid() throws SBTException {
 		super.checkValid();

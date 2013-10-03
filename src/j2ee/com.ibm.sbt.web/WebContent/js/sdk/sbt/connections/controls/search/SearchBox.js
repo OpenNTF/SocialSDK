@@ -161,8 +161,9 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 			
 			// Remove member from list
 			for (var i = 0; i < this._members.length; i++) {
-				if (this._members[i] == memberName) {
+				if (this._members[i].name == memberName) {
 					delete this._members[i];
+					break;
 				}
 			}
 			
@@ -315,11 +316,14 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 				
 				this.searchQuery = value;
 				
+				// Member list feature enabled
 				if (context.memberList) {
+					// We don't want to display the suggested search term (instead
+					// we will just add it to the members list - see below)
 					input.value = "";
 					
 					// Create member list item
-					context.renderer.renderMemberListItem(context, value);
+					context.renderer.renderMemberListItem(context, value, "");
 
 				} else {
 					input.value = value;
@@ -430,11 +434,22 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 				    var self = context;
 			        promise.then(
 			            function(results) {
-			            	var evt = document.createEvent("Event");
-			            	evt.initEvent("searchResultEvent",true,true);
-			            	evt.results = results;
-			            	self.domNode.dispatchEvent(evt);
-			            	evt = null;
+			            	if (context.memberList == false) {
+			            		var evt = document.createEvent("Event");
+			            		evt.initEvent("searchResultEvent",true,true);
+			            		evt.results = results;
+			            		self.domNode.dispatchEvent(evt);
+			            		evt = null;			   
+			            	} else {
+			            		// If the member list feature is enabled then we need
+			            		// to use a different search result event since we want the
+			            		// members to be added to the members list and NOT
+			            		// just displayed in the results table
+			            		for(var i = 0; i < results.length; i++) {
+			            			// Render each item in the search results
+			            			context.renderer.renderMemberListItem(context, results[i].getTitle(), results[i].getId());
+			            		}			
+			            	}
 			            },
 			            function(error) {
 			                console.log(error);

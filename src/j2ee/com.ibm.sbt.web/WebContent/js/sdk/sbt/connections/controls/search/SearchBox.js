@@ -162,7 +162,8 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 			// Remove member from list
 			for (var i = 0; i < this._members.length; i++) {
 				if (this._members[i].name == memberName) {
-					delete this._members[i];
+					delete this._members[i].name;
+					delete this._members[i].id;
 					break;
 				}
 			}

@@ -14,51 +14,13 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<%@page import="com.ibm.sbt.services.client.connections.files.File"%>
-<%@page import="java.io.FileOutputStream"%>
-<%@page import="org.apache.commons.fileupload.FileUploadBase.InvalidContentTypeException"%>
-<%@page import="com.ibm.commons.util.StringUtil"%>
-<%@page import="javax.activation.MimetypesFileTypeMap"%>
-<%@page import="org.apache.commons.fileupload.FileItem"%>
-<%@page import="org.apache.commons.fileupload.servlet.ServletFileUpload"%>
-<%@page import="org.apache.commons.fileupload.disk.DiskFileItemFactory"%>
-<%@page import="java.io.IOException"%>
-<%@page import="org.apache.commons.fileupload.FileItemFactory"%>
-<%@page import="com.ibm.commons.util.io.StreamUtil"%>
-<%@page import="java.io.OutputStream"%>
-<%@page import="org.apache.http.Header"%>
-<%@page import="java.io.InputStream"%>
-<%@page import="org.apache.http.HttpEntity"%>
-<%@page import="java.net.URLConnection"%>
-<%@page import="java.net.URL"%>
-<%@page import="com.ibm.sbt.service.basic.ProxyService"%>
-<%@page import="org.apache.http.HttpResponse"%>
-<%@page import="com.ibm.sbt.services.client.ClientService.Content"%>
-<%@page import="org.apache.http.impl.client.DefaultHttpClient"%>
-<%@page import="com.ibm.sbt.services.client.ClientService.Args"%>
-<%@page import="org.apache.http.client.methods.HttpGet"%>
-<%@page import="com.ibm.sbt.services.client.connections.ConnectionsService"%>
-<%@page import="com.ibm.sbt.services.client.ClientService"%>
-<%@page import="com.ibm.sbt.service.basic.ConnectionsFileProxyService"%>
-<%@page import="com.ibm.sbt.services.client.connections.files.feedHandler.FileFeedHandler"%>
-<%@page import="com.ibm.sbt.services.client.Response"%>
-<%@page import="java.util.Map"%>
-<%@page import="com.ibm.sbt.services.client.ClientService.ContentStream"%>
-<%@page import="com.ibm.sbt.services.client.connections.communities.CommunityList"%>
-<%@page import="java.util.List"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="com.ibm.sbt.services.client.connections.communities.Community"%>
-<%@page import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
-<%@page import="com.ibm.sbt.services.client.connections.files.FileService"%>
-<%@page import="com.ibm.sbt.services.client.connections.files.Comment"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.FileList"%>
-<%@page import="java.nio.charset.Charset"%>
-<%@page import="java.io.ByteArrayInputStream"%>
-<%@page import="java.io.PrintWriter"%>
+<%@page import="com.ibm.sbt.services.client.connections.communities.CommunityList"%>
+<%@page import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
+<%@page import="com.ibm.sbt.services.client.connections.files.File"%>
+<%@page import="com.ibm.commons.util.StringUtil"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
-<%@page import="java.util.HashMap"%>
-<%@page import="java.util.Collection"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
   pageEncoding="ISO-8859-1"%>
 <html>

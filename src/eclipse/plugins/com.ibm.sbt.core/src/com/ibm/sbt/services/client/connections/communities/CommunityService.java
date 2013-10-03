@@ -16,8 +16,10 @@
 package com.ibm.sbt.services.client.connections.communities;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Handler;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -32,6 +34,8 @@ import com.ibm.sbt.services.client.base.util.EntityUtil;
 import com.ibm.sbt.services.client.connections.communities.feedhandler.BookmarkFeedHandler;
 import com.ibm.sbt.services.client.connections.communities.feedhandler.CommunityFeedHandler;
 import com.ibm.sbt.services.client.connections.files.AccessType;
+import com.ibm.sbt.services.client.connections.files.Categories;
+import com.ibm.sbt.services.client.connections.files.File;
 import com.ibm.sbt.services.client.connections.files.FileList;
 import com.ibm.sbt.services.client.connections.files.FileService;
 import com.ibm.sbt.services.client.connections.files.FileServiceURIBuilder;
@@ -844,30 +848,51 @@ public class CommunityService extends BaseService {
 		return comBaseUrl.toString();
 	}
 	
-	public FileList downloadCommunityFiles(String communityId, HashMap<String, String> parameters) throws CommunityServiceException {
+	public long downloadCommunityFile(java.io.OutputStream stream, final String fileId, final String communityId, Map<String, String> params) throws CommunityServiceException {
+		// To get single file from community : files/basic/api/communitylibrary/ebb7852b-0caf-46f1-a04a-054b4808bbe1/document/023118f5-8c06-4e47-bbba-39446db5fdcd/entry
 		String accessType = AccessType.AUTHENTICATED.getAccessType();
 		SubFilters subFilters = new SubFilters();
         if (StringUtil.isEmpty(communityId)) {
         	throw new CommunityServiceException(null, Messages.NullCommunityIdUserIdOrRoleException);
         }
-        subFilters.setCommunityCollectionId(communityId);
-        String resultType = ResultType.FEED.getResultType();
-		
+        if (StringUtil.isEmpty(fileId)) {
+        	throw new CommunityServiceException(null, Messages.NullFileId);
+        }
+        if(null == params){
+			 params = new HashMap<String, String>();
+		}
+        subFilters.setCommunityLibraryId(communityId);
+        subFilters.setFileId(fileId);
+        String resultType = ResultType.ENTRY.getResultType();
 		String requestUrl = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
                 null, subFilters, resultType); 
-		
-		FileList files = null;
-		if(null == parameters){
-			 parameters = new HashMap<String, String>();
-		}
+		File file = null;
 		try {
-			files = (FileList) getEntities(requestUrl, parameters, new FileFeedHandler(new FileService()));
+			file = (File) super.getEntity(requestUrl, params, new FileFeedHandler(new FileService())); 
 		} catch (ClientServicesException e) {
 			throw new CommunityServiceException(e, Messages.DownloadCommunitiesException);
 		} catch (IOException e) {
 			throw new CommunityServiceException(e, Messages.DownloadCommunitiesException);
 		}
-		return files;
+		// now we have the file.. we need to download it.. 
+		// To download a file : /files/basic/api/library/934f4302-fe88-4b7f-947a-b0ccb40bf9c6/document/023118f5-8c06-4e47-bbba-39446db5fdcd/media
+		SubFilters downloadFilters = new SubFilters();
+		downloadFilters.setLibraryId(file.getLibraryId());
+		downloadFilters.setFileId(file.getFileId());
+		resultType = ResultType.MEDIA.getResultType();
+		requestUrl = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
+                null, downloadFilters, resultType); 
+		Map<String, String> headers = new HashMap<String, String>();
+		headers.put("content-type", "application/octet-stream");
+		Response responseStream = null;
+		try {
+			responseStream = this.getClientService().get(requestUrl, params, headers, ClientService.FORMAT_INPUTSTREAM);
+		} catch (ClientServicesException e) {
+			throw new CommunityServiceException(e, Messages.DownloadCommunitiesException);
+		} 
+		InputStream istream = (InputStream) responseStream.getData();
+		// convert to output stream and return no of bytes.
+		return 0;
 	}
 	
 	public void uploadFile(java.io.File file, String communityId) throws CommunityServiceException {

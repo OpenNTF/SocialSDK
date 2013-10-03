@@ -92,8 +92,8 @@ define(["../../../declare",
 			var domstr = this._substituteItems(MemberListItemTemplate, this);
 			MemberListItemTemplate = domstr;
 			
-			var div = this._convertToDomNode(MemberListItemTemplate);
-			return div;	
+			var span = this._convertToDomNodeInline(MemberListItemTemplate);
+			return span;	
 		},
 		
 		/**
@@ -146,12 +146,16 @@ define(["../../../declare",
 		 * renders a member list item
 		 * @method renderMemberListItem
 		 * @param memberName The member name to display
+		 * @param memberId The member's profile id - this acts as a unique identifier (needed when, for example,
+		 * 					  creating a new community)
 		 */
 		_appsMemberListItem: null,
-		renderMemberListItem: function(searchBox, memberName){
+		renderMemberListItem: function(searchBox, memberName, memberId){
 			// Make sure that the member hasn't already been selected
-			if (searchBox._members.indexOf(memberName) > -1) {
-				return null;
+			for (var i = 0; i < searchBox._members.length; i++) {
+				if (searchBox._members[i].name == memberName) {
+					return null;
+				}
 			}
 			
 			// Get node
@@ -160,7 +164,8 @@ define(["../../../declare",
 			// Insert the member name
 			this._appsMemberListItem.querySelector("#memberName").innerHTML = memberName;
 			
-			// Set ID
+			// Set ID (the ID is needed so we can later retrieve the parent container
+			// and close / destroy the member item
 			var idVal = memberName.replace(" ", "-");
 			this._appsMemberListItem.querySelector(".lotusFilters").setAttribute("id", idVal); 
 			
@@ -174,7 +179,10 @@ define(["../../../declare",
 			this._doAttachEvents(searchBox,this._appsMemberListItem,{});	
 			
 			// Keep track of the added member
-			searchBox._members.push(memberName);
+			var member = new Object();
+			member.name = memberName;
+			member.id = memberId;
+			searchBox._members.push(member);
 			
 			return this._appsMemberListItem;
 		},
@@ -186,11 +194,16 @@ define(["../../../declare",
 		renderMemberList: function(el){
 			
 			if(!this._appsMemberList){
+				// Generate the DOM object representing the member list
 				this._appsMemberList = this.getMemberListNode();
 			}
 			
+			// Append the list to the parent
 			el.appendChild(this._appsMemberList);
+		
+			// Request focus
 			this._appsMemberList.firstChild.focus();
+			
 			return this._appsMemberList;
 		},
 		
@@ -236,7 +249,7 @@ define(["../../../declare",
 		},
 		
 		/**
-		 * Converts a HTML String to a DOM Node
+		 * Converts a HTML String to a DOM Node, wrapping a div around it
 		 * @method _convertToDomNode
 		 * @param template the html string to be converted to a DOM node
 		 * @returns A DOM Node 
@@ -245,6 +258,24 @@ define(["../../../declare",
 			var div = null;
 			if(typeof template =="string"){
 				var wrapper= document.createElement('div');
+				wrapper.innerHTML= template;
+				wrapper.tabIndex = 0;
+				div= wrapper;
+			}
+			return div;	
+		},
+		
+		/**
+		 * Converts a HTML String to a DOM Node, making it an inline element
+		 * by wrapping a span around it
+		 * @method _convertToDomNode
+		 * @param template the html string to be converted to a DOM node
+		 * @returns A DOM Node 
+		 */
+		_convertToDomNodeInline: function(template){
+			var div = null;
+			if(typeof template =="string"){
+				var wrapper= document.createElement('span');
 				wrapper.innerHTML= template;
 				wrapper.tabIndex = 0;
 				div= wrapper;

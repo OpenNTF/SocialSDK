@@ -88,7 +88,6 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 	protected String 			signatureMethod;
 	protected boolean			forceTrustSSLCertificate;
 	protected AccessToken 		accessTokenObject;
-	private String 				userId;
 	
 	public OAuth1Handler() {
 		this.expireThreshold = EXPIRE_THRESHOLD;
@@ -1028,18 +1027,6 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 		}
 
 		return createToken(getAppId(), getServiceName(), this, getUserId());
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-	
-	public String getUserId() {
-		if (this.userId != null) {
-			return this.userId;
-		}
-		Context context = Context.get();
-		return context.getCurrentUserId();
 	}
 
 	public String getApplicationPage() {

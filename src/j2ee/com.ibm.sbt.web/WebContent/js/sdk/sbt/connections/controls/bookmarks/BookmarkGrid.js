@@ -17,8 +17,9 @@ define(["../../../declare",
         "../../../controls/grid/Grid",
         "../../../store/parameter",
         "../../../connections/BookmarkConstants",
+        "../../../connections/CommunityConstants",
         "./BookmarkGridRenderer"], 
-    function(declare,Grid,parameter,consts,BookmarkGridRenderer){
+    function(declare,Grid,parameter,consts,communityConstants,BookmarkGridRenderer){
 	
 	/**
 	 * Sorting values
@@ -54,6 +55,15 @@ define(["../../../declare",
 	                    paramSchema : ParamSchema
 	                },
 	                rendererArgs : null
+	            },
+	            "community": {
+	                storeArgs : {
+                        url : communityConstants.AtomCommunityBookmarks,
+                        attributes : consts.BookmarkXPath,
+                        feedXPath : consts.BookmarkFeedXPath,
+                        paramSchema : ParamSchema
+                    },
+                    rendererArgs : null
 	            }
 	     },
 	        
@@ -101,6 +111,8 @@ define(["../../../declare",
 	    		 urlParams = { access: "private"};
 	    	 }else if(this.type == "public") {
 	    		 urlParams = {access: "public"};
+	    	 }else if(this.type == "community"){
+	    	     urlParams = {communityUuid: this.communityUuid};
 	    	 }else{
 	    		 urlParams = {access: "any"};
 	    	 }

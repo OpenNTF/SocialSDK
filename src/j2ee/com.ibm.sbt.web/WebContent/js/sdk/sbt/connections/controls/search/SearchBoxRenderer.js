@@ -148,16 +148,33 @@ define(["../../../declare",
 		 * @param memberName The member name to display
 		 */
 		_appsMemberListItem: null,
-		renderMemberListItem: function(memberName){
+		renderMemberListItem: function(searchBox, memberName){
+			// Make sure that the member hasn't already been selected
+			if (searchBox._members.indexOf(memberName) > -1) {
+				return null;
+			}
+			
 			// Get node
 			this._appsMemberListItem = this.getMemberListItemNode();
-			// Attach event listeners
-			this._doAttachEvents(searchBox,this._appsMemberListItem,{});	
+		
 			// Insert the member name
-			this._appsMemberListItem.querySelector('#memberName').innerHTML = memberName;
+			this._appsMemberListItem.querySelector("#memberName").innerHTML = memberName;
+			
+			// Set ID
+			var idVal = memberName.replace(" ", "-");
+			this._appsMemberListItem.querySelector(".lotusFilters").setAttribute("id", idVal); 
+			
 			// Add it to the list
 			this._appsMemberList.appendChild(this._appsMemberListItem);
+			
+			// Request focus
 			this._appsMemberListItem.firstChild.focus();
+			
+			// Attach event listeners
+			this._doAttachEvents(searchBox,this._appsMemberListItem,{});	
+			
+			// Keep track of the added member
+			searchBox._members.push(memberName);
 			
 			return this._appsMemberListItem;
 		},

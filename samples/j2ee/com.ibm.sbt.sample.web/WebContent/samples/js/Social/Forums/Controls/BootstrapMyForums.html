@@ -1,0 +1,19 @@
+<script type="text/template" id="myForums">
+<tr class="${rowClass} alert alert-success" uuid="${id}" width="100%">
+<td style="width:20px;" class="img-rounded"><div class="lconnSprite lconnSprite-iconForumsItem16"> </div></td>
+	<td>
+		<h4 style="max-width:700px">
+		<span class=".glyphicon .glyphicon-list-alt">
+			<h3><a title="${tooltip}" class="lotusBreakWord" href="${forumURL}" data-dojo-attach-event="onclick: handleClick" >
+                    ${title}
+            </a><span class="label label-default" style="background-color:red;">New</span></h3>
+
+		</span>
+		</h4>
+	</td><td></td>
+    <td>&nbsp;&nbsp;&nbsp;<span class="badge">${threadCount}</span></span></td>
+    <td></td>
+    <td>${getDateLabel} <br /><a title="${nls.viewProfile}" href="" data-dojo-attach-event="onclick: viewAuthorProfile">${authorName}</a></td>
+</tr>
+</script>
+<div id="gridDiv"></div>

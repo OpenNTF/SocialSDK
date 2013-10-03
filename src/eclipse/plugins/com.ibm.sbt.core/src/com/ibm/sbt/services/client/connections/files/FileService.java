@@ -483,7 +483,7 @@ public class FileService extends BaseService {
         try {
             Response result = (Response) super.createData(requestUri, params, headers, new ClientService.ContentXml(
                     payload, "application/atom+xml"));
-            return (Comment) new CommentFeedHandler().createEntity(result);
+            return (Comment) new CommentFeedHandler(this).createEntity(result);
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInCreatingComment);
         }
@@ -950,7 +950,7 @@ public class FileService extends BaseService {
 
         CommentList commentEntries = null;
         try {
-            commentEntries = (CommentList) getEntities(requestUri, params, new CommentFeedHandler());
+            commentEntries = (CommentList) getEntities(requestUri, params, new CommentFeedHandler(this));
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
@@ -1148,7 +1148,7 @@ public class FileService extends BaseService {
             else
                 parameters.putAll(uriBuilder.getParameters());
             //TODO: pass in headers
-            commentEntries = (CommentList) getEntities(uriBuilder.populateURL(accessType,   null, null, null, subFilters, null), parameters, headers, new CommentFeedHandler());
+            commentEntries = (CommentList) getEntities(uriBuilder.populateURL(accessType,   null, null, null, subFilters, null), parameters, headers, new CommentFeedHandler(this));
             return commentEntries;
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
@@ -1607,7 +1607,7 @@ public class FileService extends BaseService {
         String requestUri = this.getModerationUri(commentId, "review", "comment");
         Comment Comment;
         try {
-            Comment = (Comment) getEntity(requestUri, null, new CommentFeedHandler());
+            Comment = (Comment) getEntity(requestUri, null, new CommentFeedHandler(this));
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
@@ -2398,7 +2398,7 @@ public class FileService extends BaseService {
 
         try {
             Response result = (Response) this.updateData(requestUri, params, headers, payload, null);
-            return (Comment) new CommentFeedHandler().createEntity(result);
+            return (Comment) new CommentFeedHandler(this).createEntity(result);
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInRestoreFile);
         }

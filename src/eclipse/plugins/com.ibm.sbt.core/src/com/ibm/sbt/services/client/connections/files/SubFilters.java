@@ -34,6 +34,8 @@ public class SubFilters {
 	public static String	LIBRARY		= "/userlibrary";
 	public static String	RECYCLEBIN	= "/view/recyclebin";
 	public static String	VERSION		= "/version";
+	public static String 	COMMUNITYCOLLECTION = "/communitycollection";
+	public static String 	COMMUNITYLIBRARY = "/communitylibrary";
 
 	private String			userId;
 	private String			fileId;
@@ -42,6 +44,8 @@ public class SubFilters {
 	private String			collectionId;
 	private String			recycleBinDocumentId;
 	private String			versionId;
+	private String			communityCollectionId;
+	private String			communityLibraryId;
 
 	public SubFilters() {
 	}
@@ -108,5 +112,21 @@ public class SubFilters {
 			return true;
 		}
 		return false;
+	}
+
+	public void setCommunityCollectionId(String communityCollectionId) {
+		this.communityCollectionId = communityCollectionId;
+	}
+
+	public String getCommunityCollectionId() {
+		return communityCollectionId;
+	}
+
+	public void setCommunityLibraryId(String communityLibraryId) {
+		this.communityLibraryId = communityLibraryId;
+	}
+
+	public String getCommunityLibraryId() {
+		return communityLibraryId;
 	}
 }

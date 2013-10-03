@@ -159,6 +159,12 @@ public enum FileServiceURIBuilder {
             if (!StringUtil.isEmpty(subFilters.getDocumentsId())) {
                 url = url.append(subFilters.DOCUMENTS).append(FileConstants.SEPARATOR).append(subFilters.getDocumentsId());
             }
+            if (!StringUtil.isEmpty(subFilters.getCommunityCollectionId())) {
+                url = url.append(subFilters.COMMUNITYCOLLECTION).append(FileConstants.SEPARATOR).append(subFilters.getCommunityCollectionId());
+            }
+            if (!StringUtil.isEmpty(subFilters.getCommunityLibraryId())) {
+                url = url.append(subFilters.COMMUNITYLIBRARY).append(FileConstants.SEPARATOR).append(subFilters.getCommunityLibraryId());
+            }
         }
 
         if (!StringUtil.isEmpty(resultType)) {

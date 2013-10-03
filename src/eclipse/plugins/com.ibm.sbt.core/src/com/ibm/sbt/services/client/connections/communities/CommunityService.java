@@ -31,6 +31,13 @@ import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.base.util.EntityUtil;
 import com.ibm.sbt.services.client.connections.communities.feedhandler.BookmarkFeedHandler;
 import com.ibm.sbt.services.client.connections.communities.feedhandler.CommunityFeedHandler;
+import com.ibm.sbt.services.client.connections.files.AccessType;
+import com.ibm.sbt.services.client.connections.files.FileList;
+import com.ibm.sbt.services.client.connections.files.FileService;
+import com.ibm.sbt.services.client.connections.files.FileServiceURIBuilder;
+import com.ibm.sbt.services.client.connections.files.ResultType;
+import com.ibm.sbt.services.client.connections.files.SubFilters;
+import com.ibm.sbt.services.client.connections.files.feedHandler.FileFeedHandler;
 import com.ibm.sbt.services.client.connections.forums.feedhandler.ForumsFeedHandler;
 import com.ibm.sbt.services.client.connections.forums.feedhandler.TopicsFeedHandler;
 import com.ibm.sbt.services.client.connections.communities.feedhandler.InviteFeedHandler;
@@ -835,5 +842,50 @@ public class CommunityService extends BaseService {
 		}
 
 		return comBaseUrl.toString();
+	}
+	
+	public FileList downloadCommunityFiles(String communityId, HashMap<String, String> parameters) throws CommunityServiceException {
+		String accessType = AccessType.AUTHENTICATED.getAccessType();
+		SubFilters subFilters = new SubFilters();
+        if (StringUtil.isEmpty(communityId)) {
+        	throw new CommunityServiceException(null, Messages.NullCommunityIdUserIdOrRoleException);
+        }
+        subFilters.setCommunityCollectionId(communityId);
+        String resultType = ResultType.FEED.getResultType();
+		
+		String requestUrl = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
+                null, subFilters, resultType); 
+		
+		FileList files = null;
+		if(null == parameters){
+			 parameters = new HashMap<String, String>();
+		}
+		try {
+			files = (FileList) getEntities(requestUrl, parameters, new FileFeedHandler(new FileService()));
+		} catch (ClientServicesException e) {
+			throw new CommunityServiceException(e, Messages.DownloadCommunitiesException);
+		} catch (IOException e) {
+			throw new CommunityServiceException(e, Messages.DownloadCommunitiesException);
+		}
+		return files;
+	}
+	
+	public void uploadFile(java.io.File file, String communityId) throws CommunityServiceException {
+		String accessType = AccessType.AUTHENTICATED.getAccessType();
+		SubFilters subFilters = new SubFilters();
+        if (StringUtil.isEmpty(communityId)) {
+        	throw new CommunityServiceException(null, Messages.NullCommunityIdUserIdOrRoleException);
+        }
+        subFilters.setCommunityLibraryId(communityId);
+        String resultType = ResultType.FEED.getResultType();
+		String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
+                null, subFilters, resultType); 
+	    try {
+	    	createData(requestUri, null, null, file);
+	    } catch (ClientServicesException e) {
+			throw new CommunityServiceException(e, Messages.UploadCommunitiesException);
+		} catch (IOException e) {
+			throw new CommunityServiceException(e, Messages.UploadCommunitiesException);
+		}
 	}
 }

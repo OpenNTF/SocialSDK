@@ -95,7 +95,7 @@ function(dom, ProfileGrid, ProfileRendererMixin, CommunityService, lang, SearchB
             			for(var i = 0; i < profiles.length; i++) {
             				var profile = profiles[i];	           
             				var email = profile.getEmail();	 
-            				alert("about to add " + email);
+//            				alert("about to add " + email);
                     	    community.addMember({ id: email }, {});
        	             	}
             		},
@@ -105,8 +105,17 @@ function(dom, ProfileGrid, ProfileRendererMixin, CommunityService, lang, SearchB
                     }
             );
         }
-        
+
+        // Create the community
         communityService.createCommunity(community, {});
+        
+        // Hide creation form
+        var msg = document.getElementById("communityCreationForm");
+        msg.style.display = "none";
+        
+        // Display success message
+        var msg = document.getElementById("confirmationMessage");
+        msg.style.display = "block";
     };
    
 });

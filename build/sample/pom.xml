@@ -24,6 +24,7 @@
     <module>../../samples/j2ee/acme.social.sample.ear</module>
     <module>../../samples/j2ee/helloworld.webapp</module>
     <module>../../samples/j2ee/smartcloud.webapp</module>
+    <module>../../samples/j2ee/grantaccess.webapp</module>
     <!-- sample java projects -->
     <module>../../samples/java/sbt.sample.app</module>
   </modules>

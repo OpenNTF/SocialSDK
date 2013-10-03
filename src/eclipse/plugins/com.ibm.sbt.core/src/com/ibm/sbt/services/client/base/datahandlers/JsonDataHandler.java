@@ -23,6 +23,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+
 import com.ibm.commons.util.io.json.JsonJavaObject;
 
 /**
@@ -145,7 +146,6 @@ public class JsonDataHandler implements DataHandler<JsonJavaObject>{
 	 * @return list of entries
 	 */
 	public List<JsonJavaObject> getAsList(String path){
-		
 		List<JsonJavaObject> jsonList = new ArrayList<JsonJavaObject>();
 		
 		if(path.contains("/")){
@@ -164,6 +164,39 @@ public class JsonDataHandler implements DataHandler<JsonJavaObject>{
 			}
 		}
 		return jsonList;
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.ibm.sbt.services.client.base.datahandlers.DataHandler#getAsArray(com.ibm.sbt.services.client.base.datahandlers.FieldEntry)
+	 */
+	@Override
+	public String[] getAsArray(FieldEntry field) {
+		return getAsArray((String)field.getPath());
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.ibm.sbt.services.client.base.datahandlers.DataHandler#getAsArray(java.lang.String)
+	 */
+	@Override
+	public String[] getAsArray(String path) {
+		List<String> strList = new ArrayList<String>();
+		
+		if(path.contains("/")){
+			JsonJavaObject object = (JsonJavaObject) getNestedObject(path);
+			String pathinfo = path.substring(path.lastIndexOf("/")+1,path.length());
+			if(containsKey(object,pathinfo)){
+				for (Object obj : (List)object.get(pathinfo)) {
+					strList.add((String)obj);
+				}
+			}else{
+				return null;
+			}
+		}else{
+			for (Object obj : (List)data.get(path)) {
+				strList.add((String)obj);
+			}
+		}
+		return strList.toArray(new String[strList.size()]);
 	}
 	
 	/**

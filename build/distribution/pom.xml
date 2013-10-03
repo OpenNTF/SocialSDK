@@ -96,6 +96,9 @@
             <copy tofile="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps/smartcloud.webapp.war" 
                 file="${project.root}/samples/j2ee/smartcloud.webapp/target/smartcloud.webapp-1.0.0.war"/>
             
+            <copy tofile="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps/grantaccess.webapp.war" 
+                file="${project.root}/samples/j2ee/grantaccess.webapp/target/grantaccess.webapp-1.0.0.war"/>
+            
             <copy tofile="${project.target.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps/acme.sample.webapp.war" 
                 file="${project.root}/samples/j2ee/acme.sample.webapp/target/acme.sample.webapp-1.0.0.war"/>
                 

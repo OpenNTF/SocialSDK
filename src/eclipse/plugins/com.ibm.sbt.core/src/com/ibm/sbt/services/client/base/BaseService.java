@@ -110,7 +110,7 @@ public abstract class BaseService {
     	}
         String environment = context.getProperty("environment");
         if(environment != null) {
-            SBTEnvironment env = (SBTEnvironment) Context.get().getBean(environment);
+            SBTEnvironment env = (SBTEnvironment) context.getBean(environment);
             SBTEnvironment.Endpoint[] endpointsArray = env.getEndpointsArray();
             for(SBTEnvironment.Endpoint endpoint : endpointsArray){
                 if(StringUtil.equals(endpointName, endpoint.getAlias())){

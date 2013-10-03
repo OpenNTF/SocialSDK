@@ -3,9 +3,10 @@ require(["sbt/dom",
          "sbt/connections/controls/bootstrap/ProfileRendererMixin",
          "sbt/connections/CommunityService",
          "sbt/lang",
-         "sbt/connections/controls/search/SearchBox"], 
+         "sbt/connections/controls/search/SearchBox",
+         "sbt/connections/ProfileService"], 
 
-function(dom, ProfileGrid, ProfileRendererMixin, CommunityService, lang, SearchBox) {
+function(dom, ProfileGrid, ProfileRendererMixin, CommunityService, lang, SearchBox, ProfileService) {
     // Search logic
 	var searchBox = new SearchBox({
 		type:"full",
@@ -46,76 +47,66 @@ function(dom, ProfileGrid, ProfileRendererMixin, CommunityService, lang, SearchB
 	
 	// Community service logic
 	var communityService = new CommunityService(); 
-	
-//	var grid = new ProfileGrid({
-//        type : "colleagues",
-//        email : "%{name=sample.email1}",
-//    });
-//    
-//    lang.mixin(grid.renderer, ProfileRendererMixin);
-//    
-//  
-//
-//    grid.update();
-//    
-//    dom.byId("selectedBtn").onclick = function(evt) {
-//        
-//    	var profiles = grid.getSelected();
-//        
-//        var title = document.getElementById("titleTextField").value;
-//        
-//        if(!title || !title.length > 0){
-//        	dom.byId("success").style.display = "none";
-//            dom.byId("error").style.display = "";
-//            dom.setText("error", "You Must Enter A Title For The Community");
-//        	return;
-//        }
-//        var content = document.getElementById("contentTextField").value;
-//        var tags = document.getElementById("tagsTextField").value;
-//        
-//        var community = communityService.getCommunity({ loadIt : false }); 
-//        community.setTitle(title);
-//        
-//        if(content && content.length > 0){
-//        	community.setContent(content);	
-//        }
-//        if(tags && tags.length > 0){
-//        	community.setTags(tags);
-//        }
-//        
-//        communityService.createCommunity(community, {               
-//            load : function(community) { 
-//            	dom.byId("success").style.display = "";
-//	            dom.byId("error").style.display = "none";
-//	            dom.setText("success", "Successfully Created Community");
-//                
-//                if(profiles && profiles.length > 0){
-//                	for(var i=0;i<profiles.length;i++){
-//                		var email = profiles[i].data.getValue("email");
-//                		community.addMember({id : email},{       
-//                		   load : function(member){
-//                			   dom.byId("success").style.display = "";
-//	        		            dom.byId("error").style.display = "none";
-//	        		            dom.setText("success", "Successfully Created Community "+ title+ " And " +
-//	        		            		"Added Selected Users");
-//                		   },
-//                		   error : function(error){
-//                			   dom.byId("success").style.display = "none";
-//	        		            dom.byId("error").style.display = "";
-//	        		            dom.setText("error", "Community Created But Could Not Add Users");
-//                		   }
-//                		});
-//                	}
-//                }  
-//            },
-//            error : function(error) {
-//            	dom.byId("success").style.display = "none";
-//	            dom.byId("error").style.display = "";
-//	            dom.setText("error", "Could Not Create Community");
-//            }
-//        });
-//        
-//        
-//    };
+    
+    dom.byId("btnCreateCommunity").onclick = function(evt) {
+        
+        var title = document.getElementById("titleTextField").value;
+    
+        if(!title || !title.length > 0){
+        	document.getElementById("titleError").innerHTML = "You must enter a title for your community";
+        	return;
+        } else {
+        	document.getElementById("titleError").innerHTML = "";
+        }
+        
+        var content = document.getElementById("contentTextField").value;
+        if(!content || !content.length > 0){
+        	document.getElementById("contentError").innerHTML = "You must specify your community content";
+        	return;
+        } else {
+        	document.getElementById("contentError").innerHTML = "";
+        }
+        
+        var tags = document.getElementById("tagsTextField").value;
+        if(!tags || !tags.length > 0){
+        	document.getElementById("tagsError").innerHTML = "You must specify some tags for your community";
+        	return;
+        } else {
+        	document.getElementById("tagsError").innerHTML = "";
+        }
+        
+        // Create a new community and configure it
+        var community = communityService.newCommunity();
+        community.setTitle(title);
+        community.setContent(content);	
+        community.setTags(tags);
+        
+        // Add members to the community
+        for (var i = 0; i < searchBox._members.length; i++) {
+        	var member = searchBox._members[i];
+        	
+        	// Get the member's email address
+            var profileService = new ProfileService();
+            var query = { userid : member.id };
+            var promise = profileService.search(query);
+
+            promise.then(
+            		function(profiles) {
+            			for(var i = 0; i < profiles.length; i++) {
+            				var profile = profiles[i];	           
+            				var email = profile.getEmail();	 
+            				alert("about to add " + email);
+                    	    community.addMember({ id: email }, {});
+       	             	}
+            		},
+            		
+                    function(error) {
+                    	alert("ERROR: " + error);
+                    }
+            );
+        }
+        
+        communityService.createCommunity(community, {});
+    };
    
 });

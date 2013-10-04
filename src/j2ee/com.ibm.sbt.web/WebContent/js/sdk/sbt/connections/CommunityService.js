@@ -752,6 +752,142 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         }
 
     });
+    
+    
+    /**
+     * Event class represents an entry for an Events feed returned by the Connections REST API.
+     * 
+     * @class Event
+     * @namespace sbt.connections
+     */
+    var Event = declare(BaseEntity, {
+
+        /**
+         * Constructor for Event.
+         * 
+         * @constructor
+         * @param args
+         */
+        constructor : function(args) {
+            this.inherited(arguments, [ args ]);
+        },
+
+        /**
+         * Return the community UUID.
+         * 
+         * @method getCommunityUuid
+         * @return {String} communityUuid
+         */
+        getCommunityUuid : function() {
+            return this.getAsString("communityUuid");
+        },
+        
+        /**
+         * Return the id of the event.
+         * 
+         * @method getId
+         * @return {String} id
+         */
+        
+        getId: function() {
+            return this.getAsString("uid");
+        },
+
+        /**
+         * Return the community event title.
+         * 
+         * @method getTitle
+         * @return {String} Community event title
+         */
+
+        getTitle : function() {
+            return this.getAsString("title");
+        },
+
+        /**
+         * Set the community event title.
+         * 
+         * @method setTitle
+         * @param {String} Community event title
+         */
+
+        setTitle : function(name) {
+            return this.setAsString("title", name);
+        },
+
+        /**
+         * Return the community event summary.
+         * 
+         * @method getSummary
+         * @return {String} Community event summary
+         */
+        getSummary : function() {
+            return this.getAsString("summary");
+        },
+
+        /**
+         * Set the community event summary.
+         * 
+         * @method setSummary
+         * @return {String} Community event summary
+         */
+        setSummary : function(summary) {
+            return this.setAsString("summary", summary);
+        },
+        
+        getEventAtomUrl : function(){
+            return this.getAsString("eventAtomUrl");
+        },
+        
+        getDetailedEvent : function(){
+            return this.service.getDetailedEvent(this.getEventAtomUrl());
+        },
+        
+        getContent : function(){
+            return this.getAsString("content");
+        },
+        
+        getLocation : function(){
+            return this.getAsString("location");
+        },
+
+        /**
+         * Gets an author of IBM Connections community event.
+         * 
+         * @method getAuthor
+         * @return {Member} author Author of the community event
+         */
+        getAuthor : function() {
+            if (!this._author) {
+                this._author = {
+                    userid : this.getAsString("authorUserid"),
+                    name : this.getAsString("authorName"),
+                    email : this.getAsString("authorEmail"),
+                    authorState : this.getAsString("authorState")
+                };
+            }
+            return this._author;
+        },
+
+        /**
+         * Gets a contributor of IBM Connections community event.
+         * 
+         * @method getContributor
+         * @return {Member} contributor Contributor of the community event
+         */
+        getContributor : function() {
+            if (!this._contributor) {
+                this._contributor = {
+                    userid : this.getAsString("contributorUserid"),
+                    name : this.getAsString("contributorName")
+                };
+            }
+            return this._contributor;
+        }
+
+    });
+    
+    
 
     /*
      * Method used to extract the community uuid for an id url.
@@ -824,6 +960,49 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 xpath : consts.InviteXPath
             });
             return new Invite({
+                service : service,
+                id : entryHandler.getEntityId(),
+                dataHandler : entryHandler
+            });
+        }
+    };
+    
+    /*
+     * Callbacks used when reading a feed that contains Event entries.
+     */
+    var ConnectionsEventFeedCallbacks = {
+        createEntities : function(service,data,response) {
+            return new XmlDataHandler({
+                service :  service,
+                data : data,
+                namespaces : consts.Namespaces,
+                xpath : consts.CommunityFeedXPath
+            });
+        },
+        createEntity : function(service,data,response) {
+            var entryHandler = new XmlDataHandler({
+                service :  service,
+                data : data,
+                namespaces : consts.Namespaces,
+                xpath : consts.EventXPath
+            });
+            return new Event({
+                service : service,
+                id : entryHandler.getEntityId(),
+                dataHandler : entryHandler
+            });
+        }
+    };
+    
+    var ConnectionsEventCallbacks = {
+        createEntity : function(service,data,response) {
+            var entryHandler = new XmlDataHandler({
+                service :  service,
+                data : data,
+                namespaces : consts.Namespaces,
+                xpath : consts.EventXPath
+            });
+            return new Event({
                 service : service,
                 id : entryHandler.getEntityId(),
                 dataHandler : entryHandler
@@ -1009,6 +1188,31 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             }
             
             return member.load(args);
+        },
+        
+        /**
+         * Get the Events for a community. See {{#crossLink "CommunityConstants/AtomCommunityEvents:attribute"}}{{/crossLink}} for a listing of url parameters.
+         * @param args
+         * @returns
+         */
+        getCommunityEvents : function(args){
+            var options = {
+                method : "GET",
+                handleAs : "text",
+                query : args || {}
+            };
+                
+            return this.getEntities(consts.AtomCommunityEvents, options, this.getEventFeedCallbacks());
+        },
+        
+        getDetailedEvent : function(url){
+            var options = {
+                method : "GET",
+                handleAs : "text",
+                query : {}
+            };
+                
+            return this.getEntity(this.endpoint.proxy.rewriteUrl("unusedBaseUrl", url, this.endpoint.proxyPath), options, "derp", this.getEventCallbacks());
         },
 
         /**
@@ -1519,6 +1723,17 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          */
         getInviteFeedCallbacks: function() {
             return ConnectionsInviteFeedCallbacks;
+        },
+        
+        /*
+         * Callbacks used when reading a feed that contains Event entries.
+         */
+        getEventFeedCallbacks: function() {
+            return ConnectionsEventFeedCallbacks;
+        },
+        
+        getEventCallbacks: function(){
+            return ConnectionsEventCallbacks;
         },
 
         /*

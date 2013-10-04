@@ -27,6 +27,7 @@ import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.util.EntityUtil;
 import com.ibm.sbt.services.client.connections.forums.feedhandler.ForumsFeedHandler;
+import com.ibm.sbt.services.client.connections.forums.feedhandler.RecommendationFeedHandler;
 import com.ibm.sbt.services.client.connections.forums.feedhandler.RepliesFeedHandler;
 import com.ibm.sbt.services.client.connections.forums.feedhandler.TagFeedHandler;
 import com.ibm.sbt.services.client.connections.forums.feedhandler.TopicsFeedHandler;
@@ -52,6 +53,7 @@ public class ForumService extends BaseService {
 	public static final String _oauthUrl				= "oauth/atom/";
 	private static final String FORUM_UNIQUE_IDENTIFIER = "forumUuid";
 	private static final String TOPIC_UNIQUE_IDENTIFIER = "topicUuid";
+	private static final String POST_UNIQUE_IDENTIFIER  = "postUuid";
 	private static final String REPLY_UNIQUE_IDENTIFIER = "replyUuid";
 	private static final String COMM_UNIQUE_IDENTIFIER	= "communityUuid";
 	public static final String CREATE_OP 				= "create";
@@ -533,7 +535,83 @@ public class ForumService extends BaseService {
 		return topic;
 	}
 	
+	/**
+	 * Wrapper method to get list of recommendations for a ForumTopic or ForumReply
+	 * This API works for Connections 4.5 or above
+	 * <p>
+	 * User should be authenticated to call this method
+	 * @param postUuid
+	 * @return RecommendationList
+	 * @throws ForumServiceException
+	 */
+	public RecommendationList getRecommendations(String postUuid) throws ForumServiceException{
+		
+		String recommendationsUrl = resolveUrl(ForumType.RECOMMENDATIONS, FilterType.ENTRIES);
+		RecommendationList recommendations = null;
+		Map<String, String> parameters = new HashMap<String, String>();
+		
+		parameters.put(POST_UNIQUE_IDENTIFIER, postUuid);
+		try {
+			recommendations = (RecommendationList) getEntities(recommendationsUrl, parameters, new RecommendationFeedHandler(this));
+		} catch (Exception e) {
+			throw new ForumServiceException(e);
+		} 
+
+		return recommendations;
+		
+	}
 	
+	/**
+	 * Wrapper method to create a recommendation,This API works for Connections 4.5 or above
+	 * <p>
+	 * User should be authenticated to call this method
+	 * @param postUuid
+	 * @return Recommendation
+	 * @throws ForumServiceException
+	 */
+	public Recommendation createRecommendation(String postUuid) throws ForumServiceException{
+		
+		String recommendationsUrl = resolveUrl(ForumType.RECOMMENDATIONS, FilterType.ENTRIES);
+		Map<String, String> parameters = new HashMap<String, String>();
+		
+		parameters.put(POST_UNIQUE_IDENTIFIER, postUuid);
+		Response result = null;
+		Recommendation recommendation;
+		String payload = "<entry xmlns='http://www.w3.org/2005/Atom'><category scheme='http://www.ibm.com/xmlns/prod/sn/type' term='recommendation'></category></entry>";
+		try {
+			result = createData(recommendationsUrl, parameters, null,payload);
+			recommendation = (Recommendation) new RecommendationFeedHandler(this).createEntity(result);
+
+		} catch (Exception e) {
+			throw new ForumServiceException(e);
+		} 
+		return recommendation;
+		
+	}
+	/**
+	 * Wrapper method to delete a recommendation,This API works for Connections 4.5 or above
+	 * <p>
+	 * User should be authenticated to call this method
+	 * @param postUuid
+	 * @return boolean
+	 * @throws ForumServiceException
+	 */
+	public boolean deleteRecommendation(String postUuid) throws ForumServiceException{
+		
+		String recommendationsUrl = resolveUrl(ForumType.RECOMMENDATIONS, FilterType.ENTRIES);
+		Map<String, String> parameters = new HashMap<String, String>();
+		
+		parameters.put(POST_UNIQUE_IDENTIFIER, postUuid);
+		boolean success = true;
+		try {
+			deleteData(recommendationsUrl, parameters, postUuid);
+		} catch (Exception e) {
+			success = false;
+			throw new ForumServiceException(e);
+		} 
+		return success;
+		
+	}
 	/**
 	 * Wrapper method to create a Topic
 	 * <p>
@@ -606,7 +684,6 @@ public class ForumService extends BaseService {
 			Map<String, String> headers = new HashMap<String, String>();
 			headers.put("Content-Type", "application/atom+xml");
 			String postUrl = resolveUrl(ForumType.TOPICS,null,null);
-			System.out.println("url "+postUrl);
 			result = createData(postUrl, params, headers,payload);
 			topic = (ForumTopic) new TopicsFeedHandler(this).createEntity(result);
 

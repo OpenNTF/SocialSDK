@@ -15,6 +15,9 @@
  */
 package com.ibm.sbt.services.client.connections.forums;
 
+import java.util.Arrays;
+import java.util.List;
+
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
@@ -29,20 +32,20 @@ import com.ibm.sbt.services.client.connections.forums.model.FlagType;
  */
 
 public class ForumReply extends BaseForumEntity{
-	
-private String topicUuid;
-	
+
+	private String topicUuid;
+
 	public String getTopicUuid(){
 		String topicId = "";
 		try {
 			topicId = getAsString(ForumsXPath.inReplyTo);
 		} catch (Exception e) {}
-	 	if(StringUtil.isEmpty(topicId)){
-	 		topicId = topicUuid;
-	 	}
+		if(StringUtil.isEmpty(topicId)){
+			topicId = topicUuid;
+		}
 		return extractForumUuid(topicId);
 	}
-	
+
 	public void setTopicUuid(String topicId) {
 		this.topicUuid = topicId;
 	}
@@ -51,39 +54,54 @@ private String topicUuid;
 		super(svc, handler);
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public ForumReply(ForumService forumsService, String id) {
 		super(forumsService,id);
 	}
-	
+
 	/*
 	 * This method returns uid of reply
 	 */
 	public String getReplyUuid() throws ForumServiceException{
 		return super.getUid();
 	}
-	
+
 	public void setReplyUuid(String forumUuid) {
-        setAsString(ForumsXPath.uid, forumUuid);
-    }
-	
-	
-	public String getReplyUrl() throws ForumServiceException{
-	      return getAsString(ForumsXPath.selfUrl);
-	}
-          
-  /**
-   * Return the permissions of the IBM Connections Forum Reply from
-   * forum ATOM entry document.
-   * 
-   * @method getPermisisons
-   * @return {String} Permissions of the Forum Reply
-   */
-	public String getPermisisons()throws ForumServiceException {
-      return getAsString(ForumsXPath.permissions);
+		setAsString(ForumsXPath.uid, forumUuid);
 	}
 
-	// returns the forumUuid user has set for save logic
+
+	public String getReplyUrl() throws ForumServiceException{
+		return getAsString(ForumsXPath.selfUrl);
+	}
+	/**
+	 * This works for Connections 4.5 or above
+	 */
+	public Recommendation like() throws ForumServiceException {
+		return getService().createRecommendation(getReplyUuid());
+	}
+	/**
+	 * This works for Connections 4.5 or above
+	 */
+	public boolean unLike() throws ForumServiceException {
+		return getService().deleteRecommendation(getReplyUuid());
+	}
+
+	public String getRecommendationCount(){
+		return getAsString(ForumsXPath.RecommendationCount);
+	}
+
+	/**
+	 * Return the permissions of the IBM Connections Forum Reply from
+	 * forum ATOM entry document.
+	 * 
+	 * @method getPermisisons
+	 * @return {String} Permissions of the Forum Reply
+	 */
+	public String getPermisisons()throws ForumServiceException {
+		return getAsString(ForumsXPath.permissions);
+	}
+
 	private String getTopicUidFromService(){
 		return topicUuid;
 	}
@@ -95,20 +113,20 @@ private String topicUuid;
 	public void declineAnswer() {
 		setAsString(ForumsXPath.flag, FlagType.DECLINE_ANSWER.getFlagType());
 	}
-	
+
 	public boolean isAnswer(){
-    	boolean answer = false;
-	    if(StringUtil.isNotEmpty(getAsString(ForumsXPath.flag))){
-	    	if(StringUtil.equalsIgnoreCase(getAsString(ForumsXPath.flag), FlagType.ACCEPT_ANSWER.getFlagType())){
-	    		answer = true;
-	    	}
-	        else{
-	        	answer = false;
-	        }
-        }
-    	return answer;
-    }
-	
+		boolean answer = false;
+		if(StringUtil.isNotEmpty(getAsString(ForumsXPath.flag))){
+			List<String> flags =  Arrays.asList(getDataHandler().getAsString(ForumsXPath.flag).split(" "));
+			for (int i = 0; i < flags.size(); i++) {
+				if(StringUtil.equalsIgnoreCase(flags.get(i), FlagType.ACCEPT_ANSWER.getFlagType())){
+					answer = true;
+				}
+			}
+		}
+		return answer;
+	}
+
 	/**
 	 * This method updates the IBM Connections Forum Reply on the server
 	 * 
@@ -138,23 +156,23 @@ private String topicUuid;
 			return getService().getForumReply(getUid());
 		}
 	}
-	
+
 	public void remove() throws ForumServiceException {
-	   	getService().removeForumReply(getUid());
+		getService().removeForumReply(getUid());
 	}
-	
+
 	/**
 	 * This method loads the forum reply
 	 * 
 	 * @return
 	 * @throws ForumServiceException
 	 */
-	
+
 	public ForumReply load() throws ForumServiceException
-    {
+	{
 		return getService().getForumReply(getUid());
-    }
-	
-	
-	
+	}
+
+
+
 }

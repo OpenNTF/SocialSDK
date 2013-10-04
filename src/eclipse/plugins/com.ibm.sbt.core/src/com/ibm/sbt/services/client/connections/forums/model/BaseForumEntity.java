@@ -72,12 +72,24 @@ public class BaseForumEntity extends BaseEntity {
 		return new Author(super.dataHandler);
 	}
 	
+	public Contributor getContributor(){
+		return new Contributor(super.dataHandler);
+	}
+	
 	public String getUpdated(){
 		return getAsString(ForumsXPath.updated);
 	}
 	
 	public String getTitle(){
 		return getAsString(ForumsXPath.title);
+	}
+	
+	public String createdBy(){
+		return this.getAuthor().getName();
+	}
+	
+	public String updatedBy(){
+		return this.getContributor().getName();
 	}
 	
 	

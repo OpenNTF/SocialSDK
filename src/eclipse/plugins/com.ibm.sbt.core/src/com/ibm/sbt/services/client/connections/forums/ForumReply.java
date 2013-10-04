@@ -35,6 +35,12 @@ public class ForumReply extends BaseForumEntity{
 
 	private String topicUuid;
 
+	/**
+	 * To get Uuid of Topic to which the Reply is posted
+	 * 
+	 * @method getTopicUuid
+	 * @return String
+	 */
 	public String getTopicUuid(){
 		String topicId = "";
 		try {
@@ -46,21 +52,29 @@ public class ForumReply extends BaseForumEntity{
 		return extractForumUuid(topicId);
 	}
 
+	/**
+	 * Sets TopicUuid of the Reply
+	 * 
+	 * @method getTopicUuid
+	 * @return String
+	 */
 	public void setTopicUuid(String topicId) {
 		this.topicUuid = topicId;
 	}
 
 	public ForumReply(BaseService svc, DataHandler<?> handler) {
 		super(svc, handler);
-		// TODO Auto-generated constructor stub
 	}
 
 	public ForumReply(ForumService forumsService, String id) {
 		super(forumsService,id);
 	}
 
-	/*
-	 * This method returns uid of reply
+	/**
+	 * To get Uuid of Forum Reply
+	 * 
+	 * @method getReplyUuid
+	 * @return String
 	 */
 	public String getReplyUuid() throws ForumServiceException{
 		return super.getUid();
@@ -70,23 +84,39 @@ public class ForumReply extends BaseForumEntity{
 		setAsString(ForumsXPath.uid, forumUuid);
 	}
 
-
+	/**
+	 * To get Url of Reply
+	 * 
+	 * @method getReplyUrl
+	 * @return String
+	 */
 	public String getReplyUrl() throws ForumServiceException{
 		return getAsString(ForumsXPath.selfUrl);
 	}
 	/**
-	 * This works for Connections 4.5 or above
+	 * to Like/Recommend a Reply, supported on Connections 4.5 or above
+	 * 
+	 * @method like
+	 * @return Recommendation
 	 */
 	public Recommendation like() throws ForumServiceException {
 		return getService().createRecommendation(getReplyUuid());
 	}
 	/**
-	 * This works for Connections 4.5 or above
+	 * to unLike/unRecommend a Reply, supported on Connections 4.5 or above
+	 * 
+	 * @method unLike
+	 * @return boolean
 	 */
 	public boolean unLike() throws ForumServiceException {
 		return getService().deleteRecommendation(getReplyUuid());
 	}
-
+	/**
+	 * Returns the recommendation count for the topic, supported on Connections 4.5 or above
+	 * 
+	 * @method getRecommendationCount
+	 * @return {String} recommendation count
+	 */
 	public String getRecommendationCount(){
 		return getAsString(ForumsXPath.RecommendationCount);
 	}
@@ -105,15 +135,28 @@ public class ForumReply extends BaseForumEntity{
 	private String getTopicUidFromService(){
 		return topicUuid;
 	}
-
+	/**
+	 * Accept a Reply as Answer to a Topic Question
+	 * 
+	 * @method acceptAnswer
+	 */
 	public void acceptAnswer() {
 		setAsString(ForumsXPath.flag, FlagType.ACCEPT_ANSWER.getFlagType());
 	}
-
+	/**
+	 * Decline a Reply as Answer to a Topic Question
+	 * 
+	 * @method declineAnswer
+	 */
 	public void declineAnswer() {
 		setAsString(ForumsXPath.flag, FlagType.DECLINE_ANSWER.getFlagType());
 	}
-
+	/**
+	 * Check if Reply is accepted as answer
+	 * 
+	 * @method isAnswer
+	 * @return boolean
+	 */
 	public boolean isAnswer(){
 		boolean answer = false;
 		if(StringUtil.isNotEmpty(getAsString(ForumsXPath.flag))){
@@ -130,7 +173,7 @@ public class ForumReply extends BaseForumEntity{
 	/**
 	 * This method updates the IBM Connections Forum Reply on the server
 	 * 
-	 * @return
+	 * @return ForumReply
 	 * @throws ForumServiceException
 	 */
 	public ForumReply save() throws ForumServiceException{
@@ -139,7 +182,7 @@ public class ForumReply extends BaseForumEntity{
 	/**
 	 * This method creates/updates the IBM Connections Forum Topic on the server
 	 * 
-	 * @return
+	 * @return ForumReply
 	 * @throws ForumServiceException
 	 */
 	public ForumReply save(String topicId) throws ForumServiceException{
@@ -156,7 +199,11 @@ public class ForumReply extends BaseForumEntity{
 			return getService().getForumReply(getUid());
 		}
 	}
-
+	/**
+	 * This method removes the forum reply
+	 * 
+	 * @throws ForumServiceException
+	 */
 	public void remove() throws ForumServiceException {
 		getService().removeForumReply(getUid());
 	}
@@ -164,10 +211,9 @@ public class ForumReply extends BaseForumEntity{
 	/**
 	 * This method loads the forum reply
 	 * 
-	 * @return
+	 * @return ForumReply
 	 * @throws ForumServiceException
 	 */
-
 	public ForumReply load() throws ForumServiceException
 	{
 		return getService().getForumReply(getUid());

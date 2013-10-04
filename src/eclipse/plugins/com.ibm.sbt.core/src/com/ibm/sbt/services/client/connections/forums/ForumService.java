@@ -27,7 +27,7 @@ import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.util.EntityUtil;
 import com.ibm.sbt.services.client.connections.forums.feedhandler.ForumsFeedHandler;
-import com.ibm.sbt.services.client.connections.forums.feedhandler.RecommendationFeedHandler;
+import com.ibm.sbt.services.client.connections.forums.feedhandler.RecommendationsFeedHandler;
 import com.ibm.sbt.services.client.connections.forums.feedhandler.RepliesFeedHandler;
 import com.ibm.sbt.services.client.connections.forums.feedhandler.TagFeedHandler;
 import com.ibm.sbt.services.client.connections.forums.feedhandler.TopicsFeedHandler;
@@ -547,12 +547,12 @@ public class ForumService extends BaseService {
 	public RecommendationList getRecommendations(String postUuid) throws ForumServiceException{
 		
 		String recommendationsUrl = resolveUrl(ForumType.RECOMMENDATIONS, FilterType.ENTRIES);
-		RecommendationList recommendations = null;
+		RecommendationList recommendations;
 		Map<String, String> parameters = new HashMap<String, String>();
 		
 		parameters.put(POST_UNIQUE_IDENTIFIER, postUuid);
 		try {
-			recommendations = (RecommendationList) getEntities(recommendationsUrl, parameters, new RecommendationFeedHandler(this));
+			recommendations = (RecommendationList) getEntities(recommendationsUrl, parameters, new RecommendationsFeedHandler(this));
 		} catch (Exception e) {
 			throw new ForumServiceException(e);
 		} 
@@ -575,12 +575,13 @@ public class ForumService extends BaseService {
 		Map<String, String> parameters = new HashMap<String, String>();
 		
 		parameters.put(POST_UNIQUE_IDENTIFIER, postUuid);
-		Response result = null;
+		Response result;
 		Recommendation recommendation;
+		// not using transformer, as the payload to be sent is constant
 		String payload = "<entry xmlns='http://www.w3.org/2005/Atom'><category scheme='http://www.ibm.com/xmlns/prod/sn/type' term='recommendation'></category></entry>";
 		try {
 			result = createData(recommendationsUrl, parameters, null,payload);
-			recommendation = (Recommendation) new RecommendationFeedHandler(this).createEntity(result);
+			recommendation = (Recommendation) new RecommendationsFeedHandler(this).createEntity(result);
 
 		} catch (Exception e) {
 			throw new ForumServiceException(e);
@@ -602,15 +603,12 @@ public class ForumService extends BaseService {
 		Map<String, String> parameters = new HashMap<String, String>();
 		
 		parameters.put(POST_UNIQUE_IDENTIFIER, postUuid);
-		boolean success = true;
 		try {
 			deleteData(recommendationsUrl, parameters, postUuid);
+			return true;
 		} catch (Exception e) {
-			success = false;
 			throw new ForumServiceException(e);
 		} 
-		return success;
-		
 	}
 	/**
 	 * Wrapper method to create a Topic

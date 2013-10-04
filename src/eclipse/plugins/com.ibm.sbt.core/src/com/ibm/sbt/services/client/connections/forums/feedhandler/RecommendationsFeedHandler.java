@@ -33,7 +33,7 @@ import com.ibm.sbt.services.client.connections.forums.RecommendationList;
  * @author Swati Singh
  *
  */
-public class RecommendationFeedHandler implements IFeedHandler {
+public class RecommendationsFeedHandler implements IFeedHandler {
 
 	private final ForumService service;
 
@@ -42,7 +42,7 @@ public class RecommendationFeedHandler implements IFeedHandler {
 	 *
 	 * @param service
 	 */
-	public RecommendationFeedHandler(ForumService service){
+	public RecommendationsFeedHandler(ForumService service){
 		this.service = service;
 	}
 

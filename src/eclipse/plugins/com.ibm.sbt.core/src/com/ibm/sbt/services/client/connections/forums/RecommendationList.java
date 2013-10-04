@@ -21,7 +21,8 @@ import java.util.List;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
-import com.ibm.sbt.services.client.connections.forums.feedhandler.RecommendationFeedHandler;
+import com.ibm.sbt.services.client.base.ConnectionsFeedXpath;
+import com.ibm.sbt.services.client.connections.forums.feedhandler.RecommendationsFeedHandler;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
@@ -32,7 +33,7 @@ import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 */
 public class RecommendationList extends EntityList<Recommendation> {
 
-	public RecommendationList(Response requestData, RecommendationFeedHandler feedHandler) {
+	public RecommendationList(Response requestData, RecommendationsFeedHandler feedHandler) {
 		super(requestData, feedHandler);
 	}
 
@@ -47,8 +48,8 @@ public class RecommendationList extends EntityList<Recommendation> {
 	}
 
 	@Override
-	public RecommendationFeedHandler getFeedHandler() {
-		return (RecommendationFeedHandler)super.getFeedHandler();
+	public RecommendationsFeedHandler getFeedHandler() {
+		return (RecommendationsFeedHandler)super.getFeedHandler();
 	}
 
 	@Override
@@ -68,28 +69,28 @@ public class RecommendationList extends EntityList<Recommendation> {
 		return recommendations;
 	}
 
+	private XmlDataHandler getMetaDataHandler(){
+		return new XmlDataHandler(getData(), ConnectionsConstants.nameSpaceCtx);
+	}
+	
 	@Override
 	public int getTotalResults() {
-		// TODO Auto-generated method stub
-		return 0;
+		return getMetaDataHandler().getAsInt(ConnectionsFeedXpath.TotalResults);
 	}
 
 	@Override
 	public int getStartIndex() {
-		// TODO Auto-generated method stub
-		return 0;
+		return getMetaDataHandler().getAsInt(ConnectionsFeedXpath.StartIndex);
 	}
 
 	@Override
 	public int getItemsPerPage() {
-		// TODO Auto-generated method stub
-		return 0;
+		return getMetaDataHandler().getAsInt(ConnectionsFeedXpath.ItemsPerPage);
 	}
 
 	@Override
 	public int getCurrentPage() {
-		// TODO Auto-generated method stub
-		return 0;
+		return getMetaDataHandler().getAsInt(ConnectionsFeedXpath.CurrentPage);
 	}
 
 }

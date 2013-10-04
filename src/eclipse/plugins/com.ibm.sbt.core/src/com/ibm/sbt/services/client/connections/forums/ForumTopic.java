@@ -44,7 +44,7 @@ public class ForumTopic extends BaseForumEntity{
 		super(forumsService,id);
 	}
 
-	/*
+	/**
 	 * This method returns uid of topic
 	 */
 	public String getTopicUuid() throws ForumServiceException{
@@ -171,61 +171,109 @@ public class ForumTopic extends BaseForumEntity{
 	public String getTopicUrl(){
 		return getAsString(ForumsXPath.selfUrl);
 	}
-
+	/**
+	 * Returns the total recommendation count for the thread, supported on Connections 4.5 or above
+	 * 
+	 * @method getThreadRecommendationCount
+	 * @return {String} total recommendation count
+	 */
 	public String getThreadRecommendationCount(){
 		return getAsString(ForumsXPath.ThreadRecommendationCount);
 	}
-
+	/**
+	 * Returns the recommendation count for the topic, supported on Connections 4.5 or above
+	 * 
+	 * @method getRecommendationCount
+	 * @return {String} recommendation count
+	 */
 	public String getRecommendationCount(){
 		return getAsString(ForumsXPath.RecommendationCount);
 	}
-
+	/**
+	 * Returns the replied count for the topic
+	 * 
+	 * @method getRepliesCount
+	 * @return {String} replies count
+	 */
 	public String getRepliesCount(){
 		return getAsString(ForumsXPath.threadCount);
 	}
-
+	/**
+	 * Pins a topic
+	 * @method pin
+	 */
 	public void pin() {
 
 		setAsString(ForumsXPath.flag, FlagType.PIN.getFlagType());
 	}
-
+	/**
+	 * un-pin a topic
+	 * @method unPin
+	 */
 	public void unPin() {
 		setAsString(ForumsXPath.flag, FlagType.UNPIN.getFlagType());
 	}
-
+	/**
+	 * locks a topic
+	 * @method lock
+	 */
 	public void lock() {
 		setAsString(ForumsXPath.flag, FlagType.LOCK.getFlagType());
 	}
-
+	/**
+	 * unlock a topic
+	 * @method unLock
+	 */
 	public void unLock() {
 		setAsString(ForumsXPath.flag, FlagType.UNLOCK.getFlagType());
 	}
 	/**
-	 * This works for Connections 4.5 or above
+	 * to Like/Recommend a Topic, supported on Connections 4.5 or above
+	 * 
+	 * @method like
+	 * @return Recommendation
 	 */
 	public Recommendation like() throws ForumServiceException {
 		return getService().createRecommendation(getTopicUuid());
 	}
 	/**
-	 * This works for Connections 4.5 or above
+	 * to unLike/unRecommend a Topic, supported on Connections 4.5 or above
+	 * 
+	 * @method unLike
+	 * @return boolean
 	 */
 	public boolean unLike() throws ForumServiceException {
 		return getService().deleteRecommendation(getTopicUuid());
 	}
-
+	/**
+	 * Mark a Topic as question
+	 * 
+	 * @method markAsQuestion
+	 */
 	public void markAsQuestion() {
 		setAsString(ForumsXPath.flag, FlagType.QUESTION.getFlagType());
 	}
-
+	/**
+	 * Reopen a topic as question
+	 * 
+	 * @method ReopenQuestion
+	 */
 	public void ReopenQuestion() {
 		setAsString(ForumsXPath.flag, FlagType.REOPENQUESTION.getFlagType());
 	}
-
-
+	/**
+	 * Mark a Topic as Normal Topic
+	 * 
+	 * @method markAsNormal
+	 */
 	public void markAsNormal() {
 		setAsString(ForumsXPath.flag, FlagType.NORMAL.getFlagType());
 	}
-
+	/**
+	 * Check if a Topic is pinned
+	 * 
+	 * @method isPinned
+	 */
 	public boolean isPinned(){
 		boolean pin = false;
 		if(StringUtil.isNotEmpty(getAsString(ForumsXPath.flag))){
@@ -239,7 +287,11 @@ public class ForumTopic extends BaseForumEntity{
 		return pin;
 
 	}
-
+	/**
+	 * Check if a Topic is locked
+	 * 
+	 * @method isLocked
+	 */
 	public boolean isLocked(){
 		boolean lock = false;
 		if(StringUtil.isNotEmpty(getAsString(ForumsXPath.flag))){
@@ -252,7 +304,11 @@ public class ForumTopic extends BaseForumEntity{
 		}
 		return lock;
 	}
-
+	/**
+	 * Check if a Topic is a question
+	 * 
+	 * @method isQuestion
+	 */
 	public boolean isQuestion(){
 		boolean question = false;
 		if(StringUtil.isNotEmpty(getAsString(ForumsXPath.flag))){
@@ -265,7 +321,11 @@ public class ForumTopic extends BaseForumEntity{
 		}
 		return question;
 	}
-
+	/**
+	 * Check if a Topic is answered
+	 * 
+	 * @method isAnswered
+	 */
 	public boolean isAnswered(){
 		boolean answered = false;
 		if(StringUtil.isNotEmpty(getAsString(ForumsXPath.flag))){

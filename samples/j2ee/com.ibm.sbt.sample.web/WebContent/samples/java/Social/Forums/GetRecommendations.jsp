@@ -42,11 +42,12 @@
 			ForumService svc = new ForumService();
 			TopicList forums = svc.getMyForumTopics();
 			ForumTopic topic = (ForumTopic)forums.iterator().next();
-			RecommendationList users = svc.getRecommendations(topic.getTopicUuid());
-			if(users.size()>0){
-				out.println("<b>List of users who recommended this post</b>");
-				for(Recommendation user :users)
-				out.println("<b>Name: </b>" + user.getName()+"<br>");
+			RecommendationList recommendations = svc.getRecommendations(topic.getTopicUuid());
+			
+			if(recommendations.size()>0){
+				out.println("<b>List of users who recommended this thread</b>"+topic.getRecommendationCount());
+				for(Recommendation recommendation :recommendations)
+				out.println("<b>Name: </b>" + recommendation.getName()+"<br>");
 			}
 			else{
 				out.println("No recommendations for the post with id" + topic.getTopicUuid());
@@ -54,7 +55,7 @@
 		} catch (Throwable e) {
 			out.println("<pre>");
 			out.println("Problem Occurred while fetching forum: " + e.getMessage());
-				
+			out.println("</pre>");	
 		}
 	%>
 	</div>

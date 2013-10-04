@@ -105,7 +105,6 @@ function(dom, ProfileGrid, ProfileRendererMixin, CommunityService, lang, SearchB
                     community.load().then(
                         function(community) { 
                             var communityUuid = community.getCommunityUuid();
-                            
                             // Add community members
                             for (var i = 0; i < searchBox._members.length; i++) {
                             	var member = searchBox._members[i];

@@ -19,32 +19,14 @@
  * 
  * @module sbt.connections.ConnectionsConstants
  */
-define([], function() {
+define([ "../lang", "../base/BaseConstants" ], function(lang, base) {
 
-    return {
+    return lang.mixin(base, {
 
         /**
          * Error code used for a bad request
          */
         BadRequest : 400,
-
-        /**
-         * Namespaces to be used when reading the Connections ATOM field
-         */
-		Namespaces : {
-			o : "http://ns.opensocial.org/2008/opensocial",
-			app : "http://www.w3.org/2007/app",
-			thr : "http://purl.org/syndication/thread/1.0",
-			fh : "http://purl.org/syndication/history/1.0",
-			snx : "http://www.ibm.com/xmlns/prod/sn",
-			opensearch : "http://a9.com/-/spec/opensearch/1.1/",
-			a : "http://www.w3.org/2005/Atom",
-			h : "http://www.w3.org/1999/xhtml",
-			td : "urn:ibm.com/td",
-			relevance : "http://a9.com/-/opensearch/extensions/relevance/1.0/",
-			ibmsc : "http://www.ibm.com/search/content/2010",
-			xhtml : "http://www.w3.org/1999/xhtml"
-		},
 
         /**
 		 * XPath expressions used when parsing a Connections ATOM feed
@@ -59,20 +41,12 @@ define([], function() {
         },
 
         /**
-         * 
-         */
-        AtomXmlHeaders : {
-            "Content-Type" : "application/atom+xml"
-        },
-        
-        /**
          * AuthType variable values for endpoint
          */
         AuthTypes : {
         	OAuth : "oauth",
         	Basic : "basic"
         }
-        
 
-    };
+    });
 });

@@ -33,7 +33,7 @@ define([ "../declare", "../lang", "../stringUtil", "./BaseConstants", "./BaseEnt
     var AtomEntity = declare(BaseEntity, {
     	
     	contentType : "html",
-    	categoryScheme : "",
+    	categoryScheme : "http://www.ibm.com/xmlns/prod/sn/type",
 
         /**
          * Construct an AtomEntity.

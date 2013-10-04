@@ -23,6 +23,8 @@ public class ConnectionsFileProxyService extends AbstractFileProxyService {
 	private static final String UPLOAD_URL = "/files/basic/api/myuserlibrary/feed"; // TODO set as property on endpoint
 	private static final String DOWNLOAD_URL = "/files/basic/api/library/{0}/document/{1}/media";
 
+	public static final String FILEPROXYNAME = "connections";
+	
 	@Override
 	protected Content getFileContent(File file, long length, String name) {
 		Content content;

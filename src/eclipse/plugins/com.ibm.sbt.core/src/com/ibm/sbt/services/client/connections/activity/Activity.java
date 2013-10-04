@@ -173,7 +173,11 @@ public class Activity extends BaseEntity {
 	}
 	
 	public String getTitle() {
-		return getAsString(ActivityXPath.Title);
+		String title = getAsString(ActivityXPath.Title);
+		if(StringUtil.isEmpty(title)) {
+			title = getAsString(ActivityXPath.ActivityNodeTitle);
+		}
+		return title;
 	}
 	
 	public String getUpdated() {

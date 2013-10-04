@@ -140,36 +140,7 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 		 * @param event  The Event 
 		 */
 		closeMemberItem: function(element,object,event){
-			// Get parent node
-			var parent = element.parentNode;
-			
-			// Fetch children
-			var children = parent.childNodes;
-			
-			// Get the member name
-			var memberName = "";	
-			for (var i = 0; i < children.length; i++) {
-				if (children[i].id == "memberName") {
-					memberName = children[i].innerHTML;
-					break;
-				}
-		    }
-			
-			// Get the element to remove
-			var id = memberName.replace(" ", "-");
-			var item = document.getElementById(id);
-			
-			// Remove member from list
-			for (var i = 0; i < this._members.length; i++) {
-				if (this._members[i].name == memberName) {
-					delete this._members[i].name;
-					delete this._members[i].id;
-					break;
-				}
-			}
-			
-			// Remove it
-			item.parentNode.removeChild(item);
+			this.searchBoxAction.closeMemberItem(this, element,object,event);
 		},
 		
 		/**
@@ -265,6 +236,47 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 				}else if(event.key == "Tab"){
 					self._selectedRow = -1;
 				}	
+			},
+			
+			/**
+			 * Closes a member item (by removing it from its parent; the member list)
+			 * @method closeMemberItem
+			 * @param context
+			 * @param element  The member list item
+			 * @param object 
+			 * @param event  The Event 
+			 */
+			closeMemberItem: function(context, element,object,event){
+				// Get parent node
+				var parent = element.parentNode;
+				
+				// Fetch children
+				var children = parent.childNodes;
+				
+				// Get the member name
+				var memberName = "";	
+				for (var i = 0; i < children.length; i++) {
+					if (children[i].id == "memberName") {
+						memberName = children[i].innerHTML;
+						break;
+					}
+			    }
+				
+				// Get the element to remove
+				var id = memberName.replace(" ", "-");
+				var item = document.getElementById(id);
+				
+				// Remove member from list
+				for (var i = 0; i < context._members.length; i++) {
+					if (context._members[i].name == memberName) {
+						delete context._members[i].name;
+						delete context._members[i].id;
+						break;
+					}
+				}
+				
+				// Remove it
+				item.parentNode.removeChild(item);
 			},
 			
 			/**

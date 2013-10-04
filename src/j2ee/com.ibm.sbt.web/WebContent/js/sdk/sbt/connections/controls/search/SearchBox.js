@@ -313,8 +313,9 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 			_suggestionPopUp: null,
 			setSuggestedSearch: function(event,popUp,context){
 				var value = event.target.textContent;
+				var id = event.target.id;
 				var input = document.getElementById("com.ibm.sbt.search.input");
-				
+
 				this.searchQuery = value;
 				
 				// Member list feature enabled
@@ -324,7 +325,7 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 					input.value = "";
 					
 					// Create member list item
-					context.renderer.renderMemberListItem(context, value, "");
+					context.renderer.renderMemberListItem(context, value, id);
 
 				} else {
 					input.value = value;
@@ -391,6 +392,7 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 		            		var row = document.createElement("tr");
 		            		var data = document.createElement("td");
 		            		data.innerHTML = results[i].getTitle();
+		            		data.id = results[i].getId();
 		            		data.style = "cursor:pointer";
 		            		data.onclick = function (event) { 
 		            			

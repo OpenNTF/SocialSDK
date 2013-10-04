@@ -33,27 +33,24 @@ import com.ibm.sbt.services.client.connections.activity.Activity;
  * 
  * @date 6 Mar 2013
  */
-public class GetMyActivities extends BaseActivitiesTest {
+public class GetActivitiesInTrash extends BaseActivitiesTest {
 
-    static final String SNIPPET_ID = "Social_Activities_API_GetMyActivities";
+    static final String SNIPPET_ID = "Social_Activities_API_GetActivitiesInTrash";
     
     Activity activity;
 
    	@Before
    	public void init() {
-   		activity = createActivity();		
-   	}
-
-   	@After
-   	public void destroy() {		
+   		activity = createActivity();	
    		deleteActivity(activity.getActivityId());
    	}
+   
    	
     @Test
-    public void testGetMyActivities() {
+    public void testGetActivitiesInTrash() {
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         List jsonList = previewPage.getJsonList();
-        Assert.assertFalse("Get my activities returned no activities", jsonList.isEmpty());
+        Assert.assertFalse("Get activities In Trash returned no activities", jsonList.isEmpty());
     }
 
 }

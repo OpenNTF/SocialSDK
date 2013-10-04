@@ -27,33 +27,39 @@ import com.ibm.sbt.automation.core.test.BaseApiTest;
 import com.ibm.sbt.automation.core.test.connections.BaseActivitiesTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 import com.ibm.sbt.services.client.connections.activity.Activity;
+import com.ibm.sbt.services.client.connections.activity.ActivityNode;
 
 /**
  * @author mwallace
  * 
  * @date 6 Mar 2013
  */
-public class GetMyActivities extends BaseActivitiesTest {
+public class GetActivityNodeTags extends BaseActivitiesTest {
 
-    static final String SNIPPET_ID = "Social_Activities_API_GetMyActivities";
+    static final String SNIPPET_ID = "Social_Activities_API_GetActivityNodeTags";
     
     Activity activity;
-
+    ActivityNode activityNode;
+    
    	@Before
    	public void init() {
-   		activity = createActivity();		
-   	}
-
-   	@After
-   	public void destroy() {		
-   		deleteActivity(activity.getActivityId());
+   		activity = createActivity();	
+   		activityNode = createActivityNode(activity.getActivityId(), "Entry");
+   		addSnippetParam("sample.activityNodeId", activityNode.getActivityId());	
    	}
    	
+   	@After
+	public void destroy() {
+		deleteActivityNode(activityNode.getActivityId());
+		deleteActivity(activity.getActivityId());		
+	}
+   
+   	
     @Test
-    public void testGetMyActivities() {
+    public void testGetActivityNodeTags() {
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         List jsonList = previewPage.getJsonList();
-        Assert.assertFalse("Get my activities returned no activities", jsonList.isEmpty());
+        Assert.assertFalse("No Tags found for activity Node", jsonList.isEmpty());
     }
 
 }

@@ -21,39 +21,41 @@ import junit.framework.Assert;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
-import com.ibm.sbt.automation.core.test.BaseApiTest;
 import com.ibm.sbt.automation.core.test.connections.BaseActivitiesTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 import com.ibm.sbt.services.client.connections.activity.Activity;
+
 
 /**
  * @author mwallace
  * 
  * @date 6 Mar 2013
  */
-public class GetMyActivities extends BaseActivitiesTest {
+public class GetAllTags extends BaseActivitiesTest {
 
-    static final String SNIPPET_ID = "Social_Activities_API_GetMyActivities";
+    static final String SNIPPET_ID = "Social_Activities_API_GetAllTags";
     
     Activity activity;
-
+    
    	@Before
    	public void init() {
-   		activity = createActivity();		
-   	}
-
-   	@After
-   	public void destroy() {		
-   		deleteActivity(activity.getActivityId());
+   		activity = createActivity();	   		   		
    	}
    	
+   	@After
+	public void destroy() {		
+		deleteActivity(activity.getActivityId());		
+	}
+   
+   	
     @Test
-    public void testGetMyActivities() {
+    public void testGetAllTags() {
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         List jsonList = previewPage.getJsonList();
-        Assert.assertFalse("Get my activities returned no activities", jsonList.isEmpty());
+        Assert.assertFalse("No Tags found", jsonList.isEmpty());
     }
 
 }

@@ -23,6 +23,7 @@ package com.ibm.sbt.services.client.connections.bookmarks;
 public enum BookmarkUrls {
 	
 	ALL("dogear/atom"),
+	APP("dogear/api/app"),
 	POPULAR("dogear/atom/popular"),
 	MYNOTIFICATIONS("dogear/atom/mynotifications"),
 	MYSENTNOTIFICATIONS("dogear/atom/mysentnotifications");

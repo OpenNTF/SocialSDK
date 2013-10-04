@@ -864,4 +864,24 @@ public class ActivityService extends BaseService {
 	public void changeEntryType(String activityNodeId, String newType) throws ActivityServiceException {
 		changeEntryType(activityNodeId, newType, getActivityNode(activityNodeId));
 	}
+	
+	/**
+	 * Method to get all activity nodes of an activity
+	 * @param activityId
+	 * @return
+	 * @throws ActivityServiceException
+	 */
+	public ActivityNodeList getActivityNodes(String activityId) throws ActivityServiceException {
+		if (null == activityId){
+			throw new ActivityServiceException(null, "Null activityId");
+		}
+		String requestUri = ActivityServiceUrlBuilder.populateURL(ActivityAction.ACTIVITY.getActivityAction());
+		try {
+			Map<String, String> params = new HashMap<String, String>();
+			params.put("activityUuid", activityId);
+        	return (ActivityNodeList) getEntities(requestUri, params, new ActivityNodeFeedHandler(this));
+		} catch (Exception e) {
+			throw new ActivityServiceException(e);
+		} 
+	}
 }

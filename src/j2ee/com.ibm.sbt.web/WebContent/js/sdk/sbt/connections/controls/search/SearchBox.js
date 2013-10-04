@@ -248,29 +248,37 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 			 */
 			closeMemberItem: function(context, element,object,event){
 				// Get parent node
-				var parent = element.parentNode;
-				
-				// Fetch children
-				var children = parent.childNodes;
-				
-				// Get the member name
-				var memberName = "";	
-				for (var i = 0; i < children.length; i++) {
-					if (children[i].id == "memberName") {
-						memberName = children[i].innerHTML;
-						break;
-					}
-			    }
-				
-				// Get the element to remove
-				var id = memberName.replace(" ", "-");
-				var item = document.getElementById(id);
+				var item = event.target.parentNode;
+
+				// Prepare HTML for comparison
+				var memberNode = item.parentNode;
+				var memberNodeHtml = memberNode.innerHTML;
+				memberNodeHtml = memberNodeHtml.replace(/\s+/g, '');
+				memberNodeHtml = memberNodeHtml.replace(/ /g, '');
 				
 				// Remove member from list
 				for (var i = 0; i < context._members.length; i++) {
-					if (context._members[i].name == memberName) {
-						delete context._members[i].name;
-						delete context._members[i].id;
+					var member = context._members[i];
+					var html = member.html;
+					
+					// Skip null entries (null entries represent entries that have been deleted)
+					if (html == null) {
+						continue;
+					}
+					
+					// Remove dojo action listeners
+					html = html.replace(/data-dojo-attach-event=".*"/, "");
+					html = html.replace(/data-dojo-attach-event='.*'/, "");
+					
+					// Remove whitespace
+					html = html.replace(/\s+/g, '');
+					html = html.replace(/ /g, ' ');
+					
+					// Compare strings
+					if (html == memberNodeHtml) {
+						// Delete objects by setting their properties to null
+						context._members[i].html = null;
+						context._members[i].id = null;
 						break;
 					}
 				}

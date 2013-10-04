@@ -78,7 +78,7 @@ public class ActivityService extends BaseService {
     /**
      * Method returns Activities of the logged in user
      * 
-     * @return
+     * @return ActivityList
      * @throws ActivityServiceException
      */
     public ActivityList getMyActivities() throws ActivityServiceException {
@@ -89,7 +89,7 @@ public class ActivityService extends BaseService {
      * Method returns Activities of the logged in user
      * 
      * @param params
-     * @return
+     * @return ActivityList
      * @throws ActivityServiceException
      */
     public ActivityList getMyActivities(Map<String, String> params) throws ActivityServiceException {
@@ -104,7 +104,7 @@ public class ActivityService extends BaseService {
     /**
      * Method returns Completed Activities of the logged in user
      * 
-     * @return
+     * @return ActivityList
      * @throws ActivityServiceException
      */
     public ActivityList getCompletedActivities() throws ActivityServiceException {
@@ -115,7 +115,7 @@ public class ActivityService extends BaseService {
      * Method returns Completed Activities of the logged in user
      * 
      * @param params
-     * @return
+     * @return ActivityList
      * @throws ActivityServiceException
      */
     public ActivityList getCompletedActivities(Map<String, String> params) throws ActivityServiceException {
@@ -130,7 +130,7 @@ public class ActivityService extends BaseService {
     /**
      * Method returns All Activities of the logged in user
      * 
-     * @return
+     * @return ActivityList
      * @throws ActivityServiceException
      */
     public ActivityList getAllActivities() throws ActivityServiceException {
@@ -141,7 +141,7 @@ public class ActivityService extends BaseService {
      * Method returns All Activities of the logged in user
      * 
      * @param params
-     * @return
+     * @return ActivityList
      * @throws ActivityServiceException
      */
     public ActivityList getAllActivities(Map<String, String> params) throws ActivityServiceException {
@@ -156,7 +156,7 @@ public class ActivityService extends BaseService {
     /**
      * Method returns Todos of the logged in user
      * 
-     * @return
+     * @return ActivityList
      * @throws ActivityServiceException
      */
     public ActivityList getAllTodos() throws ActivityServiceException {
@@ -167,7 +167,7 @@ public class ActivityService extends BaseService {
      * Method returns Todos of the logged in user
      * 
      * @param params
-     * @return
+     * @return ActivityList
      * @throws ActivityServiceException
      */
     public ActivityList getAllTodos(Map<String, String> params) throws ActivityServiceException {
@@ -181,7 +181,7 @@ public class ActivityService extends BaseService {
     
     /**
      * Method returns Tags of the logged in user
-     * @return
+     * @return TagList
      * @throws ActivityServiceException
      */
     public TagList getAllTags() throws ActivityServiceException {
@@ -192,7 +192,7 @@ public class ActivityService extends BaseService {
      * Method returns Tags of the logged in user
      * 
      * @param params
-     * @return
+     * @return TagList
      * @throws ActivityServiceException
      */
     public TagList getAllTags(Map<String, String> params) throws ActivityServiceException {
@@ -207,7 +207,7 @@ public class ActivityService extends BaseService {
     /**
      * Method returns Activities from Trash 
      * 
-     * @return
+     * @return ActivityList
      * @throws ActivityServiceException
      */
     public ActivityList getActivitiesInTrash() throws ActivityServiceException {
@@ -218,7 +218,7 @@ public class ActivityService extends BaseService {
      * Method returns Activities from Trash 
      * 
      * @param params
-     * @return
+     * @return ActivityList
      * @throws ActivityServiceException
      */
     public ActivityList getActivitiesInTrash(Map<String, String> params) throws ActivityServiceException {
@@ -234,7 +234,7 @@ public class ActivityService extends BaseService {
      * Method to create an Activity
      * 
      * @param activity
-     * @return
+     * @return Activity
      * @throws ActivityServiceException
      */
     public Activity createActivity(Activity activity) throws ActivityServiceException {
@@ -263,7 +263,7 @@ public class ActivityService extends BaseService {
      * Method to get an Activity
      * 
      * @param activityId
-     * @return
+     * @return Activity
      * @throws ActivityServiceException
      */
     public Activity getActivity(String activityId) throws ActivityServiceException {
@@ -337,7 +337,7 @@ public class ActivityService extends BaseService {
 	 * Method to get Activity from Trash
 	 * 
 	 * @param activityId
-	 * @return
+	 * @return Activity
 	 * @throws ActivityServiceException
 	 */
 	public Activity getActivityFromTrash(String activityId) throws ActivityServiceException {
@@ -393,7 +393,7 @@ public class ActivityService extends BaseService {
 	 * 
 	 * @param activityId
 	 * @param member
-	 * @return
+	 * @return Member
 	 * @throws ActivityServiceException
 	 */
 	public Member addMember(String activityId, Member member) throws ActivityServiceException {
@@ -498,7 +498,7 @@ public class ActivityService extends BaseService {
 	 * Method to get members 
 	 * 
 	 * @param activityId
-	 * @return
+	 * @return MemberList
 	 * @throws ActivityServiceException
 	 */
 	public MemberList getMembers(String activityId) throws ActivityServiceException {
@@ -521,7 +521,7 @@ public class ActivityService extends BaseService {
 	 * 
 	 * @param activityId
 	 * @param memberId
-	 * @return
+	 * @return Member
 	 * @throws ActivityServiceException
 	 */
 	public Member getMember(String activityId, String memberId) throws ActivityServiceException {
@@ -573,7 +573,7 @@ public class ActivityService extends BaseService {
 	 * Method to create Activity node
 	 * 
 	 * @param activityNode
-	 * @return
+	 * @return ActivityNode
 	 * @throws ActivityServiceException
 	 */
 	public ActivityNode createActivityNode(ActivityNode activityNode) throws ActivityServiceException {
@@ -607,7 +607,7 @@ public class ActivityService extends BaseService {
 	 * Method to get Activity node
 	 * 
 	 * @param activityNodeId
-	 * @return
+	 * @return ActivityNode
 	 * @throws ActivityServiceException
 	 */
 	public ActivityNode getActivityNode(String activityNodeId) throws ActivityServiceException {
@@ -700,7 +700,7 @@ public class ActivityService extends BaseService {
 	 * Method to get Activity node from Trash
 	 * 
 	 * @param activityNodeId
-	 * @return
+	 * @return ActivityNode
 	 * @throws ActivityServiceException
 	 */
 	public ActivityNode getActivityNodeFromTrash(String activityNodeId) throws ActivityServiceException {
@@ -721,7 +721,7 @@ public class ActivityService extends BaseService {
 	 * Method to get Activity nodes from Trash
 	 * 
 	 * @param activityId
-	 * @return
+	 * @return ActivityNodeList
 	 * @throws ActivityServiceException
 	 */
 	public ActivityNodeList getActivityNodesInTrash(String activityId) throws ActivityServiceException {
@@ -762,7 +762,7 @@ public class ActivityService extends BaseService {
 	 * Method to get Tags of Activity
 	 * 
 	 * @param activityId
-	 * @return
+	 * @return TagList
 	 * @throws ActivityServiceException
 	 */
 	public TagList getActivityTags(String activityId) throws ActivityServiceException {
@@ -783,7 +783,7 @@ public class ActivityService extends BaseService {
 	 * Method to get Tags of Activity Nodes
 	 * 
 	 * @param activityNodeId
-	 * @return
+	 * @return TagList
 	 * @throws ActivityServiceException
 	 */
 	public TagList getActivityNodeTags(String activityNodeId) throws ActivityServiceException {
@@ -863,5 +863,25 @@ public class ActivityService extends BaseService {
 	 */
 	public void changeEntryType(String activityNodeId, String newType) throws ActivityServiceException {
 		changeEntryType(activityNodeId, newType, getActivityNode(activityNodeId));
+	}
+	
+	/**
+	 * Method to get all activity nodes of an activity
+	 * @param activityId
+	 * @return ActivityNodeList
+	 * @throws ActivityServiceException
+	 */
+	public ActivityNodeList getActivityNodes(String activityId) throws ActivityServiceException {
+		if (null == activityId){
+			throw new ActivityServiceException(null, "Null activityId");
+		}
+		String requestUri = ActivityServiceUrlBuilder.populateURL(ActivityAction.ACTIVITY.getActivityAction());
+		try {
+			Map<String, String> params = new HashMap<String, String>();
+			params.put("activityUuid", activityId);
+        	return (ActivityNodeList) getEntities(requestUri, params, new ActivityNodeFeedHandler(this));
+		} catch (Exception e) {
+			throw new ActivityServiceException(e);
+		} 
 	}
 }

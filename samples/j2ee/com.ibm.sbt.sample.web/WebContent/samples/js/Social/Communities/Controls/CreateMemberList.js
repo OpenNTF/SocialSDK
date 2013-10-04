@@ -64,6 +64,7 @@ function(dom, ProfileGrid, ProfileRendererMixin, CommunityService, lang, SearchB
         
         // Get community content
         var content = document.getElementById("contentTextField").value;
+        
         // The content is required. Make sure that the user entered one. If not, display an
         // error message and return
         if(!content || !content.length > 0){
@@ -104,7 +105,9 @@ function(dom, ProfileGrid, ProfileRendererMixin, CommunityService, lang, SearchB
         		function(community) { 
                     community.load().then(
                         function(community) { 
+                        	// Get community ID
                             var communityUuid = community.getCommunityUuid();
+                            
                             // Add community members
                             for (var i = 0; i < searchBox._members.length; i++) {
                             	var member = searchBox._members[i];
@@ -127,11 +130,6 @@ function(dom, ProfileGrid, ProfileRendererMixin, CommunityService, lang, SearchB
                     handleError(dom, error);
                 }
             );
-        
-  
-        // Add members to the community
-      
-       
     };
    
 });

@@ -50,8 +50,11 @@ function(dom, ProfileGrid, ProfileRendererMixin, CommunityService, lang, SearchB
     
     dom.byId("btnCreateCommunity").onclick = function(evt) {
         
+    	// Get the community title
         var title = document.getElementById("titleTextField").value;
     
+        // The title is required. Make sure that the user entered one. If not, display an
+        // error message and return
         if(!title || !title.length > 0){
         	document.getElementById("titleError").innerHTML = "You must enter a title for your community";
         	return;
@@ -59,7 +62,10 @@ function(dom, ProfileGrid, ProfileRendererMixin, CommunityService, lang, SearchB
         	document.getElementById("titleError").innerHTML = "";
         }
         
+        // Get community content
         var content = document.getElementById("contentTextField").value;
+        // The content is required. Make sure that the user entered one. If not, display an
+        // error message and return
         if(!content || !content.length > 0){
         	document.getElementById("contentError").innerHTML = "You must specify your community content";
         	return;
@@ -67,7 +73,11 @@ function(dom, ProfileGrid, ProfileRendererMixin, CommunityService, lang, SearchB
         	document.getElementById("contentError").innerHTML = "";
         }
         
+        // Get community tags
         var tags = document.getElementById("tagsTextField").value;
+        
+        // At least one tag is required. Make sure that the user entered one. If not, display an
+        // error message and return
         if(!tags || !tags.length > 0){
         	document.getElementById("tagsError").innerHTML = "You must specify some tags for your community";
         	return;
@@ -81,41 +91,48 @@ function(dom, ProfileGrid, ProfileRendererMixin, CommunityService, lang, SearchB
         community.setContent(content);	
         community.setTags(tags);
         
-        // Add members to the community
-        for (var i = 0; i < searchBox._members.length; i++) {
-        	var member = searchBox._members[i];
-        	
-        	// Get the member's email address
-            var profileService = new ProfileService();
-            var query = { userid : member.id };
-            var promise = profileService.search(query);
-
-            promise.then(
-            		function(profiles) {
-            			for(var i = 0; i < profiles.length; i++) {
-            				var profile = profiles[i];	           
-            				var email = profile.getEmail();	 
-//            				alert("about to add " + email);
-                    	    community.addMember({ id: email }, {});
-       	             	}
-            		},
-            		
-                    function(error) {
-                    	alert("ERROR: " + error);
-                    }
-            );
-        }
-
-        // Create the community
-        communityService.createCommunity(community, {});
-        
         // Hide creation form
         var msg = document.getElementById("communityCreationForm");
         msg.style.display = "none";
         
-        // Display success message
-        var msg = document.getElementById("confirmationMessage");
+        // Load waiting dialog
+        var msg = document.getElementById("communityWaitMessage");
         msg.style.display = "block";
+
+ 		 // Create the community
+        communityService.createCommunity(community).then(  
+        		function(community) { 
+                    community.load().then(
+                        function(community) { 
+                            var communityUuid = community.getCommunityUuid();
+                            
+                            // Add community members
+                            for (var i = 0; i < searchBox._members.length; i++) {
+                            	var member = searchBox._members[i];
+                            	communityService.addMember( communityUuid, member.id, {});
+                            }
+                            // Hide wait message
+                            var msg = document.getElementById("communityWaitMessage");
+                            msg.style.display = "none";
+                            
+                            // Display success message
+                            var msg = document.getElementById("confirmationMessage");
+                            msg.style.display = "block";
+                        },
+                        function(error) {
+                            alert(error);
+                        }
+                    );
+                },
+                function(error) {
+                    handleError(dom, error);
+                }
+            );
+        
+  
+        // Add members to the community
+      
+       
     };
    
 });

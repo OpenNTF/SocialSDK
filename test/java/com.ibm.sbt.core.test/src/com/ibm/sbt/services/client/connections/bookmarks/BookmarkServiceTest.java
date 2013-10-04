@@ -71,6 +71,23 @@ public class BookmarkServiceTest {
 	}
 	
 	@Test
+	public void testGetMyBookmarks() {
+		try {
+			BookmarkService service = createBookmarkService();
+			Map<String, String> params = new HashMap<String, String>();
+			params.put("email", "fadams@renovations.com");
+			BookmarkList list = service.getAllBookmarks();
+			assertNotNull("Expected non null BookmarkList", list);
+			for (Bookmark bookmark : list) {
+				assertValid(bookmark);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail("Error calling BookmarkService.getAllBookmarks() caused by: "+e.getMessage());
+		}
+	}
+	
+	@Test
 	public void testGetPopularBookmarks() {
 		try {
 			BookmarkService service = createBookmarkService();

@@ -29,7 +29,7 @@
 	pageEncoding="ISO-8859-1"%>
 <html>
 <head>
-	<title>SBT JAVA Sample</title>
+	<title>Get Activity Nodes of an Activity</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
@@ -40,7 +40,7 @@
 	try {		
 		ActivityService activityService = new ActivityService();
 		ActivityList activities = activityService.getMyActivities();
-		if(activities != null && ! activities.isEmpty()) {
+		if(activities != null && !activities.isEmpty()) {
 			ActivityNodeList listNodes = activityService.getActivityNodes(activities.get(0).getActivityId()); 
 			if(listNodes != null && !listNodes.isEmpty()) {
 				for (ActivityNode activityNode : listNodes) {

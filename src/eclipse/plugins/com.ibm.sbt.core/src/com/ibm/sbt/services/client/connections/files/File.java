@@ -17,7 +17,12 @@ package com.ibm.sbt.services.client.connections.files;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
+import com.ibm.commons.runtime.Context;
+import com.ibm.commons.runtime.util.UrlUtil;
 import com.ibm.commons.util.StringUtil;
+import com.ibm.sbt.service.basic.ConnectionsFileProxyService;
 import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
@@ -93,7 +98,14 @@ public class File extends BaseEntity {
 	}
 
 	public String getDownloadUrl() {
-		return getAsString(FileEntryXPath.DownloadUrl);
+		String proxypath = this.getService().getEndpoint().getProxyPath("connections");
+		String fileId = this.getFileId();
+		String libId = this.getLibraryId();
+		HttpServletRequest req = Context.get().getHttpRequest();
+		String sbtServiceUrl = UrlUtil.getContextUrl(req);
+		String url =  sbtServiceUrl + "/service" +  FileServiceURIBuilder.FILES.getBaseUrl() + 
+						FileConstants.SEPARATOR + proxypath + "/" + ConnectionsFileProxyService.FILEPROXYNAME + "/" + fileId + "/" + libId;
+		return url;
 	}
 
 	public Author getAuthor() {

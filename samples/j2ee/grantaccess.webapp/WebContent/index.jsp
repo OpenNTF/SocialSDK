@@ -117,7 +117,7 @@
 			} else {
 				%><table><%
 				for (String user : users) {
-					%><tr><td><%=user%> is a member of <%=Users.getCommunityMembershipCount(user)%> communities on SmartCloud</td></tr><%
+					%><tr><td><%=user%> is a member of <%=Users.getCommunityMembershipCount(user)%> communities.</td></tr><%
 				}
 				%></table><%				
 			}

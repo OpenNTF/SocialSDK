@@ -914,21 +914,6 @@ public class ProfileService extends BaseService {
 		return proBaseUrl.toString();
 	}
 
-	/*
-	 * Method to check if the userid is email
-	 * <p>
-	 * Current check is based on finding @ in the userid.
-	 * 
-	 * @param userId
-	 * @return boolean
-	 */
-	protected boolean isEmail(String userId) {
-		if (StringUtil.isEmpty(userId)) {
-			return false;
-		}
-		return userId.contains("@");
-	}
-
 	protected void setIdParameter(Map<String, String>parameters, String id){
 		if (isEmail(id)) {
 			parameters.put(ProfilesConstants.EMAIL, id);

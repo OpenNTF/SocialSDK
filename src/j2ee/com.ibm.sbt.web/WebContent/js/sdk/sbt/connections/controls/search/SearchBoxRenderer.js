@@ -85,15 +85,16 @@ define(["../../../declare",
 		 * Converts the HTML member list item template into a DOM node.
 		 * Creates a div and sets it's inner html to be the member list item template
 		 * @method getMemberListItemNode
+		 * @param memberName The name to display
 		 * @returns the applications list pop up DOM Node
 		 */
-		getMemberListItemNode: function(){
-			
+		getMemberListItemNode: function(memberName){
 			var domstr = this._substituteItems(MemberListItemTemplate, this);
-			MemberListItemTemplate = domstr;
+			domstr = this._substituteMemberName(domstr, memberName);
 			
-			var span = this._convertToDomNodeInline(MemberListItemTemplate);
-			return span;	
+			var obj = this._convertToDomNodeNoWrapper(domstr);
+			
+			return obj;	
 		},
 		
 		/**
@@ -151,38 +152,29 @@ define(["../../../declare",
 		 */
 		_appsMemberListItem: null,
 		renderMemberListItem: function(searchBox, memberName, memberId){
+			// Get node
+			this._appsMemberListItem = this.getMemberListItemNode(memberName);
+			
+			// Create member object for storage
+			var newMember = new Object();
+			newMember.html = this._appsMemberListItem.innerHTML;
+			newMember.id = memberId;
 			// Make sure that the member hasn't already been selected
 			for (var i = 0; i < searchBox._members.length; i++) {
-				if (searchBox._members[i].name == memberName) {
-					return null;
+				var member = searchBox._members[i];
+				if (member.html == newMember.html) {
+					return;
 				}
 			}
 			
-			// Get node
-			this._appsMemberListItem = this.getMemberListItemNode();
-		
-			// Insert the member name
-			this._appsMemberListItem.querySelector("#memberName").innerHTML = memberName;
-			
-			// Set ID (the ID is needed so we can later retrieve the parent container
-			// and close / destroy the member item
-			var idVal = memberName.replace(" ", "-");
-			this._appsMemberListItem.querySelector(".lotusFilters").setAttribute("id", idVal); 
-			
 			// Add it to the list
 			this._appsMemberList.appendChild(this._appsMemberListItem);
-			
-			// Request focus
-			this._appsMemberListItem.firstChild.focus();
 			
 			// Attach event listeners
 			this._doAttachEvents(searchBox,this._appsMemberListItem,{});	
 			
 			// Keep track of the added member
-			var member = new Object();
-			member.name = memberName;
-			member.id = memberId;
-			searchBox._members.push(member);
+			searchBox._members.push(newMember);
 			
 			return this._appsMemberListItem;
 		},
@@ -266,21 +258,20 @@ define(["../../../declare",
 		},
 		
 		/**
-		 * Converts a HTML String to a DOM Node, making it an inline element
-		 * by wrapping a span around it
+		 * Converts a HTML String to a DOM Node, without wrapping a div around it
 		 * @method _convertToDomNode
 		 * @param template the html string to be converted to a DOM node
 		 * @returns A DOM Node 
 		 */
-		_convertToDomNodeInline: function(template){
+		_convertToDomNodeNoWrapper: function(template){
 			var div = null;
 			if(typeof template =="string"){
-				var wrapper= document.createElement('span');
+				var wrapper= document.createElement('div');
 				wrapper.innerHTML= template;
 				wrapper.tabIndex = 0;
 				div= wrapper;
 			}
-			return div;	
+			return div.firstChild;	
 		},
 		
 		/**
@@ -312,6 +303,19 @@ define(["../../../declare",
 			}
 			//if no more strings to substitute return the final string	
 			return text;
+		},
+		
+		/**
+		 * Override _substituteMemberName as there are only NLS strings to be substituted 
+		 * no XPath values, functions etc. This function substitutes the member name in the template
+		 * with the actual member item name.
+		 * @method _substituteMemberName
+		 * @param template
+		 * @param renderer
+		 * @returns
+		 */
+		_substituteMemberName: function(template,memberName){
+			return template.replace("${memberName}", memberName);
 		}
 	});
 	

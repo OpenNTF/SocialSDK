@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -25,19 +25,32 @@ define([ "../../../declare",
 		 "./ProfileAction", 
 		 "../../../connections/controls/vcard/SemanticTagService", 
 		 "../../../store/parameter",
-		 "../../../connections/ProfileConstants"], 
-        function(declare, sbt, lang, Grid, ProfileGridRenderer, ProfileAction, SemanticTagService, parameter, consts) {
+		 "../../../connections/ProfileConstants",
+		 "../../../connections/CommunityConstants"], 
+        function(declare, sbt, lang, Grid, ProfileGridRenderer, ProfileAction, SemanticTagService, parameter, consts, communities) {
 
 	var sortVals = {
 			displayName: "displayName",
        		recent: "3" 
 	};
 	
+	var communityMembersSortVals = {
+			displayName: "displayName",
+       		created: "created" 
+	};
+	
 	var ParamSchema = {
 		pageNumber: parameter.oneBasedInteger("page"),	
 		pageSize: parameter.oneBasedInteger("ps"),
 		sortBy: parameter.sortField("sortBy",sortVals),
-		sortOrder: parameter.sortOrder("sortOrder")						
+		sortOrder: parameter.sortOrder("sortOrder")
+	};
+	
+	var CommunityMembersParamSchema = {
+		pageNumber: parameter.oneBasedInteger("page"),	
+		pageSize: parameter.oneBasedInteger("ps"),
+		sortBy: parameter.sortField("sortBy", communityMembersSortVals),
+		sortOrder: parameter.sortOrder("sortOrder")
 	};
 	
     /**
@@ -129,6 +142,17 @@ define([ "../../../declare",
                 rendererArgs : {
                     type : "profile"
                 }
+            },
+            "communityMembers" : {
+                storeArgs : {
+                	url : communities.AtomCommunityMembers,
+                    attributes : communities.MemberXPath,
+                    feedXPath : communities.CommunityFeedXPath,
+                    paramSchema: CommunityMembersParamSchema
+                },
+                rendererArgs : {
+                    type : "communityMembers"
+                }
             }
         },
         
@@ -151,25 +175,44 @@ define([ "../../../declare",
         constructor: function(args){
         	if(args.type == "peopleManaged" || args.type == "reportingChain" || args.type == "profile") {
         		this.hideSorter = true;
-        	}
+        	} 	
         	
             var nls = this.renderer.nls;
-            this._sortInfo = {
-                displayName: { 
-                    title: nls.displayName, 
-                    sortMethod: "sortByDisplayName",
-                    sortParameter: "displayName" 
-                },
-                recent: {
-                	title: nls.recent, 
-                    sortMethod: "sortByRecent",
-                    sortParameter: "recent"   
-                }
-               
-            };
 
-            this._activeSortAnchor = this._sortInfo.recent;
-            this._activeSortIsDesc = false;
+            if (args.type == "communityMembers") {
+            	
+            	this._sortInfo = {
+            			displayName: { 
+            				title: nls.displayName, 
+       	                    sortMethod: "sortByTitle",
+       	                    sortParameter: "title"   
+            			},
+       	                recent: {
+       	                	title: nls.created, 
+       	                    sortMethod: "sortByCreated",
+       	                    sortParameter: "created"   
+       	                }
+            	};
+       		 	this._activeSortAnchor = this._sortInfo.created;
+       		 	this._activeSortIsDesc = false;
+            } else {
+            	this._sortInfo = {
+            			displayName: { 
+            				title: nls.displayName, 
+            				sortMethod: "sortByDisplayName",
+            				sortParameter: "displayName" 
+            			},
+            			recent: {
+            				title: nls.recent, 
+            				sortMethod: "sortByRecent",
+            				sortParameter: "recent"   
+            			}
+               
+            	};
+            	this._activeSortAnchor = this._sortInfo.recent;
+                this._activeSortIsDesc = false;
+            }
+            
         },
         
         contextRootMap: {
@@ -196,7 +239,10 @@ define([ "../../../declare",
             }
             if (this.type == "colleagues") {
             	params = lang.mixin(params, { connectionType : "colleague" });
+            } else if (this.type == "communityMembers") {
+            	params = lang.mixin(params, { communityUuid : this.communityUuid });
             }
+         
             if (this.email) {
             	params = lang.mixin(params, { email : this.email });
             } 
@@ -263,12 +309,13 @@ define([ "../../../declare",
          */
         getSortInfo: function() {
         	return {
-                active: {
-                    anchor: this._activeSortAnchor,
-                    isDesc: this._activeSortIsDesc
-                },
-                list: [this._sortInfo.displayName, this._sortInfo.recent]
+        		active: {
+        			anchor: this._activeSortAnchor,
+        			isDesc: this._activeSortIsDesc
+        		},
+        		list: [this._sortInfo.displayName, this._sortInfo.recent]
             };
+        	
         },
                 
         sortByDisplayName: function(el, data, ev){
@@ -277,6 +324,14 @@ define([ "../../../declare",
 
         sortByRecent: function(el, data, ev){
         	this._sort("recent", true, el, data, ev);
+        },
+        
+        sortByCreated: function(el, data, ev){
+        	this._sort("created", true, el, data, ev);
+        },
+        
+        sortByTitle: function(el, data, ev){
+        	this._sort("title", true, el, data, ev);
         }
 
         // Internals

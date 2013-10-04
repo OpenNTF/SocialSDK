@@ -32,6 +32,7 @@ import javax.sql.DataSource;
 
 import com.ibm.commons.runtime.Application;
 import com.ibm.commons.util.StringUtil;
+import com.ibm.sbt.jslibrary.SBTEnvironment;
 import com.ibm.sbt.security.credential.store.CredentialStore;
 import com.ibm.sbt.security.credential.store.CredentialStoreException;
 import com.ibm.sbt.security.credential.store.CredentialStoreFactory;
@@ -39,6 +40,8 @@ import com.ibm.sbt.security.credential.store.DBCredentialStore;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.connections.communities.CommunityList;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
+import com.ibm.sbt.services.endpoints.ConnectionsOAuth2Endpoint;
+import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
 import com.ibm.sbt.services.endpoints.SmartCloudOAuthEndpoint;
 
@@ -62,9 +65,11 @@ public class Users {
 			}
 			Connection connection = getConnection();
 			try {
-				PreparedStatement stmt = connection.prepareStatement("SELECT USERID FROM "+store.getTableName()+" WHERE APPID = ?");
+				PreparedStatement stmt = connection.prepareStatement("SELECT USERID FROM "+store.getTableName()+" WHERE APPID = ? AND SERVICENAME = ?");
 				try {
 					stmt.setString(1, store.findApplicationName());
+					stmt.setString(2, "localga");
+					
 					ResultSet rs = stmt.executeQuery();
 					try {
 						while(rs.next()) {
@@ -88,7 +93,7 @@ public class Users {
 	static public int getCommunityMembershipCount(String user) {
 		int ret = -1;
 		try {
-			SmartCloudOAuthEndpoint endpoint = createEndpoint(user);
+			Endpoint endpoint = createEndpoint(user);
 			if (endpoint != null) {
 				CommunityService service = new CommunityService(endpoint);
 			
@@ -101,27 +106,74 @@ public class Users {
 		return ret;
 	}
 	
-	static private SmartCloudOAuthEndpoint createEndpoint(String user) throws ClientServicesException {
-		SmartCloudOAuthEndpoint endpoint = (SmartCloudOAuthEndpoint)EndpointFactory.getEndpoint("smartcloud");
-		SmartCloudOAuthEndpoint cloned = new SmartCloudOAuthEndpoint();
-		cloned.setApiVersion(endpoint.getApiVersion());
-		cloned.setUrl(endpoint.getUrl());
-		cloned.setForceTrustSSLCertificate(endpoint.isForceTrustSSLCertificate());
-		cloned.setConsumerKey(endpoint.getConsumerKey());
-		cloned.setConsumerSecret(endpoint.getConsumerSecret());
-		cloned.setRequestTokenURL(endpoint.getRequestTokenURL());
-		cloned.setAuthorizationURL(endpoint.getAuthorizationURL());
-		cloned.setAccessTokenURL(endpoint.getAccessTokenURL());
-		cloned.setSignatureMethod(endpoint.getSignatureMethod());
-		cloned.setCredentialStore(endpoint.getCredentialStore());
-		cloned.setServiceName(endpoint.getServiceName());
-		cloned.setAppId(endpoint.getAppId());
-		cloned.setAuthenticationService(endpoint.getAuthenticationService());
-		if (cloned.login(user)) {
-			return cloned;
+	static private Endpoint createEndpoint(String user) throws ClientServicesException {
+		Endpoint endpoint = getEndpoint("connections");
+		if (endpoint instanceof SmartCloudOAuthEndpoint) {
+			SmartCloudOAuthEndpoint smartcloud = (SmartCloudOAuthEndpoint)endpoint;
+			SmartCloudOAuthEndpoint cloned = new SmartCloudOAuthEndpoint();
+			cloned.setApiVersion(smartcloud.getApiVersion());
+			cloned.setUrl(smartcloud.getUrl());
+			cloned.setForceTrustSSLCertificate(smartcloud.isForceTrustSSLCertificate());
+			cloned.setConsumerKey(smartcloud.getConsumerKey());
+			cloned.setConsumerSecret(smartcloud.getConsumerSecret());
+			cloned.setRequestTokenURL(smartcloud.getRequestTokenURL());
+			cloned.setAuthorizationURL(smartcloud.getAuthorizationURL());
+			cloned.setAccessTokenURL(smartcloud.getAccessTokenURL());
+			cloned.setSignatureMethod(smartcloud.getSignatureMethod());
+			cloned.setCredentialStore(smartcloud.getCredentialStore());
+			cloned.setServiceName(smartcloud.getServiceName());
+			cloned.setAppId(smartcloud.getAppId());
+			cloned.setAuthenticationService(smartcloud.getAuthenticationService());
+			if (cloned.login(user)) {
+				return cloned;
+			}
 		}
+		if (endpoint instanceof ConnectionsOAuth2Endpoint) {
+			ConnectionsOAuth2Endpoint connections = (ConnectionsOAuth2Endpoint)endpoint;
+			ConnectionsOAuth2Endpoint cloned = new ConnectionsOAuth2Endpoint();
+			cloned.setApiVersion(connections.getApiVersion());
+			cloned.setUrl(connections.getUrl());
+			cloned.setForceTrustSSLCertificate(connections.isForceTrustSSLCertificate());
+			cloned.setConsumerKey(connections.getConsumerKey());
+			cloned.setConsumerSecret(connections.getConsumerSecret());
+			cloned.setAuthorizationURL(connections.getAuthorizationURL());
+			cloned.setAccessTokenURL(connections.getAccessTokenURL());
+			cloned.setCredentialStore(connections.getCredentialStore());
+			cloned.setServiceName(connections.getServiceName());
+			cloned.setAppId(connections.getAppId());
+			cloned.setAuthenticationService(connections.getAuthenticationService());
+			if (cloned.login(user)) {
+				return cloned;
+			}
+		}
+		
 		return null;
 	}
+	
+	/*
+	 * Return the endpoint with the specified alias
+	 */
+    static private Endpoint getEndpoint(String endpointName){
+    	com.ibm.commons.runtime.Context context = com.ibm.commons.runtime.Context.getUnchecked();
+    	if (context == null) {
+    		return null;
+    	}
+        String environment = context.getProperty("environment");
+        environment = (environment == null) ? "defaultEnvironment" : environment;
+        if(environment != null) {
+            SBTEnvironment env = (SBTEnvironment) context.getBean(environment);
+            SBTEnvironment.Endpoint[] endpointsArray = env.getEndpointsArray();
+            for(SBTEnvironment.Endpoint endpoint : endpointsArray){
+                if(StringUtil.equals(endpointName, endpoint.getAlias())){
+                    endpointName = endpoint.getName();
+                    break;
+                } else if (StringUtil.equals(endpointName, endpoint.getName())){
+                    break;
+                }
+            }
+        }
+        return EndpointFactory.getEndpoint(endpointName);
+    }
 	
 	/*
 	 * Load the DB Drivers

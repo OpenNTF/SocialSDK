@@ -15,8 +15,10 @@
  */
 package com.ibm.sbt.services.client.connections.bookmarks;
 
+import java.util.HashMap;
 import java.util.Map;
 
+import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.connections.bookmarks.feedhandler.BookmarkFeedHandler;
 import com.ibm.sbt.services.endpoints.Endpoint;
@@ -77,6 +79,41 @@ public class BookmarkService extends BaseService {
 			return (BookmarkList)getEntities(url, parameters, new BookmarkFeedHandler(this));
 		} catch (Exception e) {
 			throw new BookmarkServiceException(e, "Error retrieving all bookmarks");
+		} 
+	}
+
+	/**
+	 * Return a list of specified users bookmarks. 
+	 * 
+	 * @param id
+	 * @return List of specified users bookmarks.
+	 * @throws BookmarkServiceException
+	 */
+	public BookmarkList getBookmarks(String id) throws BookmarkServiceException {
+		return getBookmarks(id, null);
+	}
+
+	/**
+	 * Return a list of specified users bookmarks. You can search for a set of bookmarks that match a specific criteria by providing input parameters on the request.
+	 * 
+	 * @return List of specified users bookmarks.
+	 * @throws BookmarkServiceException
+	 */
+	public BookmarkList getBookmarks(String id, Map<String, String> parameters) throws BookmarkServiceException {
+		if (StringUtil.isEmpty(id)) {
+			throw new BookmarkServiceException(null, "Error retrieving bookmarks because invalid id was specified");
+		}
+		
+		try {
+			if (parameters == null) {
+				parameters = new HashMap<String, String>();
+			}
+			parameters.put(isEmail(id) ? "email" : "userid", id);
+			
+			String url = BookmarkUrls.APP.getUrl(this);
+			return (BookmarkList)getEntities(url, parameters, new BookmarkFeedHandler(this));
+		} catch (Exception e) {
+			throw new BookmarkServiceException(e, "Error retrieving bookmarks");
 		} 
 	}
 

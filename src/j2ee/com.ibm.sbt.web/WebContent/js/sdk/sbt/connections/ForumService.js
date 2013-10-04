@@ -18,7 +18,7 @@
  * The Forums application of IBM® Connections enables a team to discuss issues that are pertinent to their work. 
  * The Forums API allows application programs to create new forums, and to read and modify existing forums.
  * 
- * @module sbt.connections.ForumsService
+ * @module sbt.connections.ForumService
  */
 define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", "./ForumConstants", "../base/BaseService",
          "../base/AtomEntity", "../base/XmlDataHandler" ], 
@@ -33,7 +33,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
 	var ReplyTmpl = "<thr:in-reply-to xmlns:thr=\"http://purl.org/syndication/thread/1.0\" ref=\"urn:lsid:ibm.com:forum:${getTopicUuid}\" type=\"application/atom+xml\" href=\"\"></thr:in-reply-to>";
 	
     /**
-     * Forum class represents an entry for a forums feed returned by the
+     * Forum class represents an entry from a Forums feed returned by the
      * Connections REST API.
      * 
      * @class Forum

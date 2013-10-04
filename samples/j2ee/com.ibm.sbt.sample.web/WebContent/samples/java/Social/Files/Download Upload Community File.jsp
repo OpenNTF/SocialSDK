@@ -45,21 +45,19 @@
 	    String communityId = "";
 	    if(communities != null && ! communities.isEmpty())  {
 	    	communityId = communities.get(0).getCommunityUuid();
-	    }
-	    FileList list = service.getCommunityFiles(communityId, null);
-	    String fileId = "";
-	    if(list != null && ! list.isEmpty()) {
-	    	fileId = list.get(0).getFileId();
-	    }
-	    OutputStream ostream = new ByteArrayOutputStream();
-    	long noOfBytes = service.downloadCommunityFile(ostream, fileId, communityId, null);
-	    out.println("File Downloaded in ostream = " + noOfBytes + "\nFile Name = " + list.get(0).getTitle());
-
-		InputStream istream = new ByteArrayInputStream(((ByteArrayOutputStream)ostream).toByteArray());
-		String newFileName = "TestCommUpload"+System.currentTimeMillis();
-		service.uploadFile(istream, communityId, newFileName, noOfBytes);
-		out.println("File Uploaded as " + newFileName);
-
+		    FileList list = service.getCommunityFiles(communityId, null);
+		    String fileId = "";
+		    if(list != null && ! list.isEmpty()) {
+		    	fileId = list.get(0).getFileId();
+			    OutputStream ostream = new ByteArrayOutputStream();
+		    	long noOfBytes = service.downloadCommunityFile(ostream, fileId, communityId, null);
+			    out.println("File Downloaded in ostream = " + noOfBytes + "\nFile Name = " + list.get(0).getTitle());
+				InputStream istream = new ByteArrayInputStream(((ByteArrayOutputStream)ostream).toByteArray());
+				String newFileName = "TestCommUpload"+System.currentTimeMillis();
+				service.uploadFile(istream, communityId, newFileName, noOfBytes);
+				out.println("File Uploaded as " + newFileName);
+			}
+		}
     } catch (Throwable e) {
       out.println("<pre>");
       out.println(e.getMessage());

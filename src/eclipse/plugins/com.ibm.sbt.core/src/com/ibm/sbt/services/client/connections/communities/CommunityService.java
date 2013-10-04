@@ -15,23 +15,18 @@
  */
 package com.ibm.sbt.services.client.connections.communities;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Handler;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.http.Header;
-import org.apache.http.HttpEntity;
 
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.StreamUtil;
-import com.ibm.commons.util.io.TraceOutputStream;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.ClientService.ContentStream;
 import com.ibm.sbt.services.client.base.BaseService;
@@ -41,23 +36,20 @@ import com.ibm.sbt.services.client.base.util.EntityUtil;
 import com.ibm.sbt.services.client.connections.communities.feedhandler.BookmarkFeedHandler;
 import com.ibm.sbt.services.client.connections.communities.feedhandler.CommunityFeedHandler;
 import com.ibm.sbt.services.client.connections.files.AccessType;
-import com.ibm.sbt.services.client.connections.files.Categories;
 import com.ibm.sbt.services.client.connections.files.File;
 import com.ibm.sbt.services.client.connections.files.FileList;
 import com.ibm.sbt.services.client.connections.files.FileService;
-import com.ibm.sbt.services.client.connections.files.FileServiceException;
 import com.ibm.sbt.services.client.connections.files.FileServiceURIBuilder;
 import com.ibm.sbt.services.client.connections.files.ResultType;
 import com.ibm.sbt.services.client.connections.files.SubFilters;
 import com.ibm.sbt.services.client.connections.files.feedHandler.FileFeedHandler;
-import com.ibm.sbt.services.client.connections.forums.feedhandler.ForumsFeedHandler;
+import com.ibm.sbt.services.client.connections.files.model.Headers;
 import com.ibm.sbt.services.client.connections.forums.feedhandler.TopicsFeedHandler;
 import com.ibm.sbt.services.client.connections.communities.feedhandler.InviteFeedHandler;
 import com.ibm.sbt.services.client.connections.communities.feedhandler.MemberFeedHandler;
 import com.ibm.sbt.services.client.connections.communities.transformers.CommunityMemberTransformer;
 import com.ibm.sbt.services.client.connections.communities.transformers.InviteTransformer;
 import com.ibm.sbt.services.client.connections.communities.util.Messages;
-import com.ibm.sbt.services.client.connections.forums.Forum;
 import com.ibm.sbt.services.client.connections.forums.ForumService;
 import com.ibm.sbt.services.client.connections.forums.TopicList;
 import com.ibm.sbt.services.client.Response;
@@ -856,6 +848,13 @@ public class CommunityService extends BaseService {
 		return comBaseUrl.toString();
 	}
 	
+	/**
+	 * Method to get a list of Community Files
+	 * @param communityId
+	 * @param params
+	 * @return
+	 * @throws CommunityServiceException
+	 */
 	public FileList getCommunityFiles(String communityId, HashMap<String, String> params) throws CommunityServiceException {
 		String accessType = AccessType.AUTHENTICATED.getAccessType();
 		SubFilters subFilters = new SubFilters();
@@ -878,7 +877,16 @@ public class CommunityService extends BaseService {
 		}
 	}
 	
-	public long downloadCommunityFile(java.io.OutputStream ostream, final String fileId, final String communityId, Map<String, String> params) throws CommunityServiceException {
+	/**
+	 * Method to download a community file
+	 * @param ostream
+	 * @param fileId
+	 * @param communityId
+	 * @param params
+	 * @return
+	 * @throws CommunityServiceException
+	 */
+	public long downloadCommunityFile(OutputStream ostream, final String fileId, final String communityId, Map<String, String> params) throws CommunityServiceException {
 		String accessType = AccessType.AUTHENTICATED.getAccessType();
 		SubFilters subFilters = new SubFilters();
         if (StringUtil.isEmpty(communityId)) {
@@ -904,7 +912,6 @@ public class CommunityService extends BaseService {
 			throw new CommunityServiceException(e, Messages.DownloadCommunitiesException);
 		}
 		// now we have the file.. we need to download it.. 
-		
 		SubFilters downloadFilters = new SubFilters();
 		downloadFilters.setLibraryId(file.getLibraryId());
 		downloadFilters.setFileId(file.getFileId());
@@ -912,7 +919,7 @@ public class CommunityService extends BaseService {
 		requestUrl = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
                 null, downloadFilters, resultType); 
 		Map<String, String> headers = new HashMap<String, String>();
-		headers.put("content-type", "application/octet-stream");
+		headers.put(Headers.ContentType, Headers.BINARY);
 		Response response = null;
 		try {
 			response = this.getClientService().get(requestUrl, params, headers, ClientService.FORMAT_INPUTSTREAM);
@@ -927,13 +934,21 @@ public class CommunityService extends BaseService {
 				ostream.flush();
 			}
 		} catch (IllegalStateException e) {
-				e.printStackTrace();
+			throw new CommunityServiceException(e, Messages.DownloadCommunitiesException);
 		} catch (IOException e) {
-				e.printStackTrace();
+			throw new CommunityServiceException(e, Messages.DownloadCommunitiesException);
 		}
 		return noOfBytes;
 	}
 	
+	/**
+	 * Method to upload a File to Community
+	 * @param iStream
+	 * @param communityId
+	 * @param title
+	 * @param length
+	 * @throws CommunityServiceException
+	 */
 	public void uploadFile(InputStream iStream, String communityId, final String title, long length) throws CommunityServiceException {
 		if (iStream == null) {
             throw new CommunityServiceException(null, "null stream");

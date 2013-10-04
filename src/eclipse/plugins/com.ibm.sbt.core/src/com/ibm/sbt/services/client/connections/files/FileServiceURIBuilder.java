@@ -136,12 +136,22 @@ public enum FileServiceURIBuilder {
         }
 
         if (subFilters != null) {
+        	
+        	if (!StringUtil.isEmpty(subFilters.getCommunityCollectionId())) {
+                url = url.append(subFilters.COMMUNITYCOLLECTION).append(FileConstants.SEPARATOR).append(subFilters.getCommunityCollectionId());
+            }
+            if (!StringUtil.isEmpty(subFilters.getCommunityLibraryId())) {
+                url = url.append(subFilters.COMMUNITYLIBRARY).append(FileConstants.SEPARATOR).append(subFilters.getCommunityLibraryId());
+            }
             if (!StringUtil.isEmpty(subFilters.getCollectionId())) {
                 url = url.append(subFilters.COLLECTION).append(FileConstants.SEPARATOR)
                         .append(subFilters.getCollectionId());
             }
             if (!StringUtil.isEmpty(subFilters.getUserId())) {
-                url = url.append(subFilters.LIBRARY).append(FileConstants.SEPARATOR).append(subFilters.getUserId());
+                url = url.append(subFilters.USERLIBRARY).append(FileConstants.SEPARATOR).append(subFilters.getUserId());
+            }
+            if (!StringUtil.isEmpty(subFilters.getLibraryId())) {
+                url = url.append(subFilters.LIBRARY).append(FileConstants.SEPARATOR).append(subFilters.getLibraryId());
             }
             if (!StringUtil.isEmpty(subFilters.getFileId())) {
                 url = url.append(subFilters.FILE).append(FileConstants.SEPARATOR).append(subFilters.getFileId());

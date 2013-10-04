@@ -42,7 +42,7 @@ public class AccessToken implements Serializable {
     private String tokenName;
     private String accessToken;
     private String tokenSecret;
-    private String refreshSecret;
+    private String refreshToken;
     
     private Date expiresIn;
     private Date authorizationExpiresIn;
@@ -63,6 +63,7 @@ public class AccessToken implements Serializable {
 	    this.authorizationExpiresIn = authorizationExpiresIn;
 	    this.sessionHandle = sessionHandle;
     }
+	
     public AccessToken(String appId, String serviceName, String consumerKey, String accessToken, String tokenSecret, String userId, Date expiresIn, Date authorizationExpiresIn, String sessionHandle) {
         this(appId, serviceName, consumerKey, accessToken, tokenSecret, userId, null, null, expiresIn, authorizationExpiresIn, sessionHandle);
     }
@@ -76,9 +77,8 @@ public class AccessToken implements Serializable {
 	    this.tokenSecret = tokenSecret;
         this.userId = userId;
 	    this.expiresIn = expiresIn;
-	    this.refreshSecret = refreshToken;
+	    this.refreshToken = refreshToken;
     }
-    
     
 	public boolean isExpired() {
 	    return isExpired(0);
@@ -142,6 +142,13 @@ public class AccessToken implements Serializable {
 
 	public String getTokenName() {
 		return tokenName == null ? "" : tokenName;
+	}
+	
+	/**
+	 * @return the refreshToken
+	 */
+	public String getRefreshToken() {
+		return refreshToken;
 	}
 	
 	@Override

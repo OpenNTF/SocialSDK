@@ -702,7 +702,7 @@ public class OAuth2Handler extends OAuthHandler {
     			url.append('&');
     			url.append(Configuration.OAUTH2_REFRESH_TOKEN);
     			url.append('=');
-    			url.append(URLEncoder.encode(refreshToken, "UTF-8"));
+    			url.append(URLEncoder.encode(token.getRefreshToken(), "UTF-8"));
     			method = new HttpGet(url.toString());
     			HttpResponse httpResponse =client.execute(method);
     			responseCode = httpResponse.getStatusLine().getStatusCode();

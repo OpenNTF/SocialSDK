@@ -35,6 +35,7 @@ import com.ibm.sbt.test.js.connections.ProfilesRestTestSuite;
 import com.ibm.sbt.test.js.connections.ProfilesTestSuite;
 import com.ibm.sbt.test.js.connections.SearchRestTestSuite;
 import com.ibm.sbt.test.js.connections.SearchTestSuite;
+import com.ibm.sbt.test.js.connections.WikisTestSuite;
 import com.ibm.sbt.test.sample.SampleFrameworkTestSuite;
 
 /**
@@ -58,6 +59,7 @@ import com.ibm.sbt.test.sample.SampleFrameworkTestSuite;
 	ProfilesTestSuite.class,
 	SearchRestTestSuite.class, 
 	SearchTestSuite.class, 
+	WikisTestSuite.class,
 	SampleFrameworkTestSuite.class })
 public class ConnectionsTestSuite {
 	@AfterClass

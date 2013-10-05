@@ -1,17 +1,34 @@
 require(["sbt/connections/ForumService", "sbt/dom"], 
     function(ForumService,dom) {
-        var createRow = function(forumTitle, topicTitle, replyTitle) {
+		var forumToString = function(forum) {
+			return (!forum) ? "" : forum.getTitle() + " [uuid=" + forum.getForumUuid() + "]";
+		};
+
+		var topicToString = function(topic) {
+			return (!topic) ? "" : topic.getTitle() + 
+					" [uuid=" + topic.getTopicUuid() + 
+					", pinned=" + topic.isPinned() +
+					", locked=" + topic.isLocked() +
+					", question=" + topic.isQuestion() +
+					", answered=" + topic.isAnswered() + "]";
+		};
+
+		var replyToString = function(reply) {
+			return (!reply) ? "" : reply.getTitle() + " [uuid=" + reply.getReplyUuid() + "]";
+		};
+		
+        var createRow = function(forum, topic, reply) {
             var table = dom.byId("forumsTable");
             var tr = document.createElement("tr");
             table.appendChild(tr);
             var td = document.createElement("td");
-            td.innerHTML = forumTitle;
+            td.innerHTML = forumToString(forum);
             tr.appendChild(td);
             td = document.createElement("td");
-            td.innerHTML = topicTitle;
+            td.innerHTML = topicToString(topic);
             tr.appendChild(td);
             td = document.createElement("td");
-            td.innerHTML = replyTitle;
+            td.innerHTML = replyToString(reply);
             tr.appendChild(td);
         };
 
@@ -22,24 +39,21 @@ require(["sbt/connections/ForumService", "sbt/dom"],
                     text = "You do not have any forums.";
                 } else {
                     var forum = forums[0];
-                    var forumTitle = forum.getTitle(); 
-                    createRow(forumTitle, "", "");
+                    createRow(forum, null, null);
                     
                     var forumUuid = forum.getForumUuid();
                     forumService.getForumTopics(forumUuid).then(
                     	function(topics) {
-                    		if (topics.length > 0) {
-                                var topic = topics[0];
-                                var topicTitle = topic.getTitle(); 
-                                createRow("", topicTitle, "");
+                    		for(var i=0; i<topics.length; i++) {
+                                var topic = topics[i];
+                                createRow(null, topic, null);
                                 
                                 var topicUuid = topic.getTopicUuid();
                                 forumService.getForumReplies(topicUuid).then(
                                 	function(replies) {
                                 		for(var i=0; i<replies.length; i++){
                                             var reply = replies[i];
-                                            var replyContent = reply.getContent(); 
-                                            createRow("", "", replyContent);
+                                            createRow(null, null, reply);
                                         }
                                 	},
                                 	function(error) {

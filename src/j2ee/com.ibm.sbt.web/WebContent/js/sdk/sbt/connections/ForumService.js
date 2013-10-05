@@ -31,6 +31,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
 	var CommunityTmpl = "<snx:communityUuid xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\">${getCommunityUuid}</snx:communityUuid>";
 	var TopicTmpl = "<thr:in-reply-to xmlns:thr=\"http://purl.org/syndication/thread/1.0\" ref=\"urn:lsid:ibm.com:forum:${getForumUuid}\" type=\"application/atom+xml\" href=\"\"></thr:in-reply-to>";
 	var ReplyTmpl = "<thr:in-reply-to xmlns:thr=\"http://purl.org/syndication/thread/1.0\" ref=\"urn:lsid:ibm.com:forum:${getTopicUuid}\" type=\"application/atom+xml\" href=\"\"></thr:in-reply-to>";
+	var FlagTmpl = "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/flags\" term=\"${flag}\"></category>";
 	
     /**
      * Forum class represents an entry from a Forums feed returned by the
@@ -250,6 +251,25 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         },
 
         /**
+         * Return extra entry data to be included in post data for this entity.
+         * 
+         * @returns {String}
+         */
+        createEntryData : function() {
+        	var entryData = "";
+        	if (this.isPinned()) {
+        		entryData += stringUtil.transform(FlagTmpl, this, function(v,k) { return consts.FlagPinned; }, this);
+        	}
+        	if (this.isLocked()) {
+        		entryData += stringUtil.transform(FlagTmpl, this, function(v,k) { return consts.FlagLocked; }, this);
+        	}
+        	if (this.isQuestion()) {
+        		entryData += stringUtil.transform(FlagTmpl, this, function(v,k) { return consts.FlagQuestion; }, this);
+        	}
+            return stringUtil.trim(entryData);
+        },
+
+        /**
          * Return the value of id from Forum Topic ATOM
          * entry document.
          * 
@@ -309,6 +329,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * 
          * @method setCommunityUuid
          * @param {String} communityUuid Community Uuid of the forum
+         * @return {ForumTopic}
          */
         setCommunityUuid : function(communityUuid) {
             return this.setAsString("communityUuid", communityUuid);
@@ -336,6 +357,109 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             return this.getAsString("permissions");
         },
                 
+        /**
+         * True if you want the topic to be added to the top of the forum thread.
+         * 
+         * @method isPinned
+         * @return {Boolean} 
+         */
+        isPinned : function() {
+        	return this.getAsBoolean("pinned");
+        },
+        
+        /**
+         * Set to true if you want the topic to be added to the top of the forum thread.
+         * 
+         * @method setPinned
+         * @param pinned
+         * @return {ForumTopic} 
+         */
+        setPinned : function(pinned) {
+        	return this.setAsBoolean("pinned", pinned);
+        },
+        
+        /**
+         * If true, indicates that the topic is locked. 
+         * 
+         * @method isLocked
+         * @return {Boolean} 
+         */
+        isLocked : function() {
+        	return this.getAsBoolean("locked");
+        },
+        
+        /**
+         * Set to true, indicates that the topic is locked. 
+         * 
+         * @method isLocked
+         * @param located
+         * @return {ForumTopic} 
+         */
+        setLocked : function(locked) {
+        	return this.setAsBoolean("locked", locked);
+        },
+        
+        /**
+         * If true, indicates that the topic is a question. 
+         * 
+         * @method isQuestion
+         * @return {Boolean} 
+         */
+        isQuestion : function() {
+        	return this.getAsBoolean("question");
+        },
+        
+        /**
+         * Set to true, indicates that the topic is a question. 
+         * 
+         * @method setQuestion
+         * @param question
+         * @return {Boolean} 
+         */
+        setQuestion : function(question) {
+        	return this.setAsBoolean("question", question);
+        },
+        
+        /**
+         * If true, indicates that the topic is a question that has been answered.
+         * 
+         * @method isAnswered
+         * @return {Boolean} 
+         */
+        isAnswered : function() {
+        	return this.getAsBoolean("answered");
+        },
+        
+        /**
+         * If true, this forum topic has not been recommended by the current user.
+         * 
+         * @method isNotRecommendedByCurrentUser
+         * @returns {Boolean}
+         */
+        isNotRecommendedByCurrentUser : function() {
+        	return this.getAsBoolean("notRecommendedByCurrentUser");
+        },
+        
+        /**
+         * Return an array containing the tags for this forum topic.
+         * 
+         * @method getTags
+         * @return {Array}
+         */
+        getTags : function() {
+        	return this.getAsArray("tags");
+        },
+        
+        /**
+         * Return an array containing the tags for this forum topic.
+         * 
+         * @method setTags
+         * @param {Array}
+         */
+        setTags : function(tags) {
+        	return this.setAsArray("tags", tags);
+        },
+        
         /**
          * Get a list for forum replies that includes the replies in this topic.
          * 
@@ -763,6 +887,23 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             };
             
             return this.getEntities(consts.AtomForumsMy, options, ForumFeedCallbacks);
+        },      
+        
+        /**
+         * Get a feed that includes the topics that the authenticated user created in stand-alone forums and in forums associated 
+         * with communities to which the user belongs.
+         * 
+         * @method getMyForums
+         * @param requestArgs
+         */
+        getMyTopics: function(requestArgs) {
+            var options = {
+                method : "GET",
+                handleAs : "text",
+                query : requestArgs || {}
+            };
+            
+            return this.getEntities(consts.AtomTopicsMy, options, ForumTopicFeedCallbacks);
         },      
         
         /**

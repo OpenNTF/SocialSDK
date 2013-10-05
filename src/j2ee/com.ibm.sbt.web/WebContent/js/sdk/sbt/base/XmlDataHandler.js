@@ -326,10 +326,14 @@ define([ "../declare", "../lang", "../stringUtil", "../xml", "../xpath", "./Data
          */
         _selectBoolean : function(property) {
         	if (!this.data) {
-        		return null;
+        		return false;
         	}
-            var text = this._selectText(property);
-            return text ? true : false;
+            var nodes = xpath.selectNodes(this.data, this._getXPath(property), this.namespaces);
+            var ret = false;
+            if (nodes) {
+           		ret = (nodes.length > 0);
+            }
+            return ret;
         },
         
         /*

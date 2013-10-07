@@ -1,0 +1,74 @@
+<div id="communityCreationForm">
+<div class="lotusHeader"><h1>Create a new community</h1></div>
+
+<form class="lotusForm" method="post" action="javascript:;" aria-live="assertive">
+	<fieldset>
+		<table class="lotusFormTable" cellpadding="0" cellspacing="0" border="0" role="presentation"><tbody>
+			<tr>
+				<td></td>
+				<td class="lotusFormError" id="titleError"></td>
+				<td></td>
+			</tr>
+			<tr class="lotusFormFieldRow">
+				<td width="15%" class="lotusFormLabel"><label for="titleTextField"><span class="lotusFormRequired">*</span>Title:</label></td>
+				<td><input class="lotusText" type="text" id="titleTextField" name="titleTextField" value="" aria-required="true" /></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td class="lotusFormError" id="contentError"></td>
+				<td></td>
+			</tr>
+			<tr class="lotusFormFieldRow">
+				<td width="15%" class="lotusFormLabel"><label for="contentTextField"><span class="lotusFormRequired">*</span>Content:</label></td>
+				<td><input class="lotusText" type="text" id="contentTextField" name="contentTextField" value="" aria-required="true" /></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td class="lotusFormError" id="tagsError"></td>
+				<td></td>
+			</tr>
+			<tr class="lotusFormFieldRow">
+				<td width="15%" class="lotusFormLabel"><label for="tagsTextField"><span class="lotusFormRequired">*</span>Tags:</label></td>
+				<td><input class="lotusText" type="text" id="tagsTextField" name="tagsTextField" value="" aria-required="true" /></td>
+			</tr>
+			<tr class="lotusFormFieldRow">
+				<td width="15%" class="lotusFormLabel"><label for="tags">Members:</label></td>
+				<td>
+					<div class="controls">
+						<div role="search" id="searchBox"></div>
+						<div id="results"></div>
+						<div id="gridDiv"></div>
+					</div>
+				</td>
+			</tr>
+			<tr class="lotusFormFieldRow">
+				<td width="15%"></td>
+				<td role="radiogroup" aria-labelledby="privacy">
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td colspan="3" class="lotusFormFooter">
+					<input id="btnCreateCommunity" type="submit" value="Save" class="lotusFormButton" /> 
+					<input type="submit" value="Delete" class="lotusFormButton lotusBtnDisabled" aria-disabled="true" /> 
+					<a href="javascript:;" class="lotusAction">Cancel</a>
+				</td>
+			</tr>
+		</tbody></table>
+	</fieldset>
+</form>
+</div>
+
+<div class="lotusMessage lotusWarning" role="status" id="communityWaitMessage" style="display: none;">
+	<span>Creating your community...please wait.</span>
+</div>
+
+<div class="lotusMessage lotusConfirm" role="status" id="confirmationMessage" style="display: none;">
+	<span>Your community has been created.</span>
+</div>
+
+
+
+
+
+
+

@@ -21,6 +21,26 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
 
     return lang.mixin(conn, {
     	
+    	/**
+    	 * Term value when a forum topic is pinned 
+    	 */
+    	FlagPinned : "pinned",
+    	
+    	/**
+    	 * Term value when a forum topic is locked 
+    	 */
+    	FlagLocked : "locked",
+    	
+    	/**
+    	 * Term value when a forum topic is a question 
+    	 */
+    	FlagQuestion : "question",
+    	
+    	/**
+    	 * Term value when a forum topic is an answered question 
+    	 */
+    	FlagAnswered : "answered",
+    	    	
         /**
          * XPath expressions used when parsing a Connections Forums ATOM feed
          */
@@ -29,79 +49,42 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         /**
          * XPath expressions to be used when reading an forum entry
          */
-        ForumXPath : {
-            // used by getEntityData
-            entry : "/a:entry",
-            // used by getEntityId
-            uid : "a:id",
-            // used by getters
-            id : "a:id",
-            title : "a:title",
-            updated : "a:updated",
-            published : "a:published",
-            authorUserid : "a:author/snx:userid",
-            authorName : "a:author/a:name",
-            authorEmail : "a:author/a:email",
-            contributorUserid : "a:contributor/snx:userid",
-            contributorName : "a:contributor/a:name",
-            contributorEmail : "a:contributor/a:email",
-    		content : "a:content[@type='text']",
+    	ForumXPath : lang.mixin({
+            forumUuid : "a:id",
+            content : "a:content[@type='text']",
             moderation : "snx:moderation/@status",
             threadCount: "a:link[@rel='replies']/@thr:count",	
             forumUrl : "a:link[@rel='alternate']/@href",
-            communityUuid : "snx:communityUuid",
-            forumUuid : "a:id"
-        },
+            communityUuid : "snx:communityUuid"
+        }, conn.AtomEntryXPath),
         
         /**
          * XPath expressions to be used when reading an forum topic entry
          */
-        ForumTopicXPath : {
-            // used by getEntityData
-            entry : "/a:entry",
-            // used by getEntityId
-            uid : "a:id",
-            // used by getters
-            id : "a:id",
-            title : "a:title",
-            updated : "a:updated",
-            published : "a:published",
-            authorUserid : "a:author/snx:userid",
-            authorName : "a:author/a:name",
-            authorEmail : "a:author/a:email",
-    		content : "a:content[@type='text']",
-            permissions : "snx:permissions",
-            alternateUrl : "a:link[@rel='alternate']/@href",
-            communityUuid : "snx:communityUuid",
-            topicForumTitle: "/a:feed/a:title",
-            threadCount: "a:link[@rel='replies']/@thr:count",
+        ForumTopicXPath : lang.mixin({
             topicUuid : "a:id",
-        	forumUuid : "thr:in-reply-to/@ref",	
-        },
+            forumUuid : "thr:in-reply-to/@ref",	
+        	tags : "a:category[not(@scheme)]/@term",
+        	permissions : "snx:permissions",
+            communityUuid : "snx:communityUuid",
+            threadCount: "a:link[@rel='replies']/@thr:count",
+            locked: "a:category[@term='locked' and @scheme='http://www.ibm.com/xmlns/prod/sn/flags']",
+            pinned: "a:category[@term='pinned' and @scheme='http://www.ibm.com/xmlns/prod/sn/flags']",
+            question: "a:category[@term='question' and @scheme='http://www.ibm.com/xmlns/prod/sn/flags']",
+            answered: "a:category[@term='answered' and @scheme='http://www.ibm.com/xmlns/prod/sn/flags']",
+            notRecommendedByCurrentUser: "a:category[@term='NotRecommendedByCurrentUser']",
+            threadRecommendationCount: "a:category[@term='ThreadRecommendationCount']/@label"
+        }, conn.AtomEntryXPath),
         
         /**
          * XPath expressions to be used when reading an forum reply entry
          */
-        ForumReplyXPath : {
-            // used by getEntityData
-            entry : "/a:entry",
-            // used by getEntityId
-            uid : "a:id",
-            // used by getters
-            id : "a:id",
-            title : "a:title",
-            updated : "a:updated",
-            published : "a:published",
-            authorUserid : "a:author/snx:userid",
-            authorName : "a:author/a:name",
-            authorEmail : "a:author/a:email",
-    		content : "a:content[@type='html']",
-            permissions : "snx:permissions",
-            alternateUrl : "a:link[@rel='alternate']/@href",
-            communityUuid : "snx:communityUuid",
+        ForumReplyXPath : lang.mixin({
             replyUuid : "a:id",
         	topicUuid : "thr:in-reply-to/@ref",
-        },
+            permissions : "snx:permissions",
+            communityUuid : "snx:communityUuid"
+        }, conn.AtomEntryXPath),
         
         /**
 		 * Edit link for a forum entry.  

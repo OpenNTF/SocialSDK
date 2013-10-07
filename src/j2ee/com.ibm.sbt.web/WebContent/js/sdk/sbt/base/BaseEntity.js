@@ -226,11 +226,18 @@ define([ "../declare", "../lang", "../log", "../stringUtil" ],
          * @param fieldNames
          * @returns
          */
-        getAsObject : function(fieldNames) {
+        getAsObject : function(fieldNames, objectNames) {
             var obj = {};
             for (var i=0; i<fieldNames.length; i++) {
                 this._validateFieldName(fieldNames[i], "getAsObject");
-                obj[fieldNames[i]] = this.getAsString(fieldNames[i]);
+                var fieldValue = this.getAsString(fieldNames[i]);
+                if (fieldValue) {
+                    if (objectNames) {
+                    	obj[objectNames[i]] = fieldValue;
+                    } else {
+                    	obj[fieldNames[i]] = fieldValue;
+                    }
+                }
             }
             return obj;
         },

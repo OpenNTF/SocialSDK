@@ -154,7 +154,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @param {Object} args
          */
         getTopics : function(args) {
-        	return this.service.getForumTopics(this.getForumUuid(), args);
+        	return this.service.getTopics(this.getForumUuid(), args);
         },
         
         /**
@@ -461,7 +461,26 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         },
         
         /**
-         * Get a list for forum replies that includes the replies in this topic.
+         * Return the recommendations url of the forum topic.
+         * 
+         * @method getEditUrl
+         * @return {String} Edit url
+         */
+        getRecommendationsUrl : function() {
+            return this.getAsString("recommendationsUrl");
+        },
+
+        /**
+         * Get a list for forum recommendations that includes the recommendations for this forum topic.
+         * 
+         * @method getRecommendations
+         */
+        getRecommendations : function(args) {
+        	return this.service.getForumRecommendations(this.getTopicUuid(), args);
+        },
+        
+        /**
+         * Get a list for forum replies that includes the replies for this forum topic.
          * 
          * @method getReplies
          */
@@ -716,6 +735,50 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
     });
     
     /**
+     * ForumMember class represents an entry for a forums member feed returned by the
+     * Connections REST API.
+     * 
+     * @class ForumMember
+     * @namespace sbt.connections
+     */
+    var ForumMember = declare(AtomEntity, {
+
+    	categoryScheme : null,
+    	
+        /**
+         * Construct a Forum Tag entity.
+         * 
+         * @constructor
+         * @param args
+         */
+        constructor : function(args) {
+        }
+    
+    });
+    
+    /**
+     * ForumRecommendation class represents an entry for a forums recommendation feed returned by the
+     * Connections REST API.
+     * 
+     * @class ForumTag
+     * @namespace sbt.connections
+     */
+    var ForumRecommendation = declare(AtomEntity, {
+
+    	categoryScheme : null,
+    	
+        /**
+         * Construct a Forum Tag entity.
+         * 
+         * @constructor
+         * @param args
+         */
+        constructor : function(args) {
+        }
+    
+    });
+    
+    /**
      * ForumTag class represents an entry for a forums tag feed returned by the
      * Connections REST API.
      * 
@@ -941,19 +1004,19 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         /**
          * Get a list for forum topics that includes the topics in the specified forum.
          * 
-         * @method getForumTopics
+         * @method getTopics
          * @param forumUuid
          * @param args
          * @returns
          */
-        getForumTopics: function(forumUuid, args) {
+        getForumTopics: function(forumUuid, requestArgs) {
             var promise = this._validateForumUuid(forumUuid);
             if (promise) {
                 return promise;
             }
             
-            var requestArgs = lang.mixin(
-            	{ forumUuid : forumUuid }, args || {});
+            var requestArgs = lang.mixin({ forumUuid : forumUuid }, args || {});
+            
             var options = {
                 method : "GET",
                 handleAs : "text",
@@ -964,9 +1027,34 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         },
         
         /**
+         * Get a list for forum recommendations that includes the recommendations in the specified post.
+         * 
+         * @method getRecommendations
+         * @param postUuid
+         * @param args
+         * @returns
+         */
+        getForumRecommendations: function(postUuid, args) {
+            var promise = this._validatePostUuid(postUuid);
+            if (promise) {
+                return promise;
+            }
+            
+            var requestArgs = lang.mixin({ postUuid : postUuid }, args || {});
+            
+            var options = {
+                method : "GET",
+                handleAs : "text",
+                query : requestArgs
+            };
+            
+            return this.getEntities(consts.AtomRecommendationEntries, options, ForumRecommendationFeedCallbacks);
+        },
+        
+        /**
          * Get a list for forum replies that includes the replies in the specified topic.
          * 
-         * @method getForumReplies
+         * @method getReplies
          * @param topicUuid
          * @param args
          * @returns
@@ -977,8 +1065,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 return promise;
             }
             
-            var requestArgs = lang.mixin(
-            	{ topicUuid : topicUuid }, args || {});
+            var requestArgs = lang.mixin({ topicUuid : topicUuid }, args || {});
+            
             var options = {
                 method : "GET",
                 handleAs : "text",
@@ -1412,6 +1500,15 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         _validateForumUuid : function(forumUuid) {
             if (!forumUuid || forumUuid.length == 0) {
                 return this.createBadRequestPromise("Invalid argument, expected forumUuid.");
+            }
+        },
+        
+        /*
+         * Validate a post UUID, and return a Promise if invalid.
+         */
+        _validatePostUuid : function(postUuid) {
+            if (!postUuid || postUuid.length == 0) {
+                return this.createBadRequestPromise("Invalid argument, expected postUuid.");
             }
         },
         

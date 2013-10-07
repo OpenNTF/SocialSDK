@@ -76,9 +76,17 @@ function(config, CommunityService, dom, stringUtil, SearchBox) {
         var communityService = new CommunityService(); 
         
         // Invite potential members to the community
-        for (var i = 0; i < potentialMembers.length; i++) {
-        	communityService.createInvite(communityId, potentialMembers[i].email, {});
+        var invitationString = "";
+        for (var i = 0; i < searchBox._members.length; i++) {
+        	communityService.createInvite(communityId, searchBox._members[i].id, {});
+        	invitationString += searchBox._members[i].name + ", ";
         }
+        
+        invitationString = invitationString.substring(0, invitationString.length - 3);
+        
+        // Display success message and hide input form
+        dom.byId("success").innerHTML = "Successfully invited " + invitationString + " to your community";
+        dom.byId("invitationForm").style.display = "none";
     }
 });
 

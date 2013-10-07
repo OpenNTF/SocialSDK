@@ -75,11 +75,15 @@ function(config, CommunityService, dom, stringUtil, SearchBox) {
     	// Community service logic
         var communityService = new CommunityService(); 
         
-        // Invite potential members to the community
         var invitationString = "";
+        
+        // Invite potential members to the community
         for (var i = 0; i < searchBox._members.length; i++) {
-        	communityService.createInvite(communityId, searchBox._members[i].id, {});
-        	invitationString += searchBox._members[i].name + ", ";
+        	if (searchBox._members[i].id == null) {
+        		continue;
+        	}
+        	communityService.createInvite(communityId, searchBox._members[i].id);
+            invitationString += searchBox._members[i].name + ", ";
         }
         
         invitationString = invitationString.substring(0, invitationString.length - 3);

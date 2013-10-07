@@ -33,8 +33,6 @@ import com.ibm.sbt.services.client.connections.forums.model.FlagType;
 
 public class ForumReply extends BaseForumEntity{
 
-	private String topicUuid;
-
 	/**
 	 * To get Uuid of Topic to which the Reply is posted
 	 * 
@@ -47,7 +45,7 @@ public class ForumReply extends BaseForumEntity{
 			topicId = getAsString(ForumsXPath.inReplyTo);
 		} catch (Exception e) {}
 		if(StringUtil.isEmpty(topicId)){
-			topicId = topicUuid;
+			topicId = (String) fields.get("topicUuid");
 		}
 		return extractForumUuid(topicId);
 	}
@@ -59,7 +57,7 @@ public class ForumReply extends BaseForumEntity{
 	 * @return String
 	 */
 	public void setTopicUuid(String topicId) {
-		this.topicUuid = topicId;
+		fields.put("topicUuid", topicId);
 	}
 
 	public ForumReply(BaseService svc, DataHandler<?> handler) {
@@ -131,10 +129,6 @@ public class ForumReply extends BaseForumEntity{
 	public String getPermisisons()throws ForumServiceException {
 		return getAsString(ForumsXPath.permissions);
 	}
-
-	private String getTopicUidFromService(){
-		return topicUuid;
-	}
 	/**
 	 * Accept a Reply as Answer to a Topic Question
 	 * 
@@ -186,10 +180,11 @@ public class ForumReply extends BaseForumEntity{
 	 * @throws ForumServiceException
 	 */
 	public ForumReply save(String topicId) throws ForumServiceException{
+		String topicUuid = (String) fields.get("topicUuid");
 		if(StringUtil.isEmpty(getUid())){
-			if(StringUtil.isEmpty(topicId) && StringUtil.isNotEmpty(getTopicUidFromService())){ // if a topicId was not provided but was set using setTopicUuid method
-				topicId = getTopicUidFromService();
-			}else if(StringUtil.isEmpty(topicId) && StringUtil.isEmpty(getTopicUidFromService())){ // Can not create reply without topicUuid
+			if(StringUtil.isEmpty(topicId) && StringUtil.isNotEmpty(topicUuid)){ // if a topicId was not provided but was set using setTopicUuid method
+				topicId = topicUuid;
+			}else if(StringUtil.isEmpty(topicId) && StringUtil.isEmpty(topicUuid)){ // Can not create reply without topicUuid
 				throw new ForumServiceException(new Exception("No Parent Topic ID mentioned while creating Forum Reply")); 
 			}
 			return getService().createForumReply(this,topicId);

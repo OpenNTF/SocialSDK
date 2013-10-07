@@ -56,7 +56,8 @@ public class ForumService extends BaseService {
 	private static final String POST_UNIQUE_IDENTIFIER  = "postUuid";
 	private static final String REPLY_UNIQUE_IDENTIFIER = "replyUuid";
 	private static final String COMM_UNIQUE_IDENTIFIER	= "communityUuid";
-	public static final String CREATE_OP 				= "create";
+	public static final String  CREATE_OP 				= "create";
+	private static final double APIVERSION 			= 4.5;
 	
 	/**
 	 * Default Constructor
@@ -537,7 +538,7 @@ public class ForumService extends BaseService {
 	
 	/**
 	 * Wrapper method to get list of recommendations for a ForumTopic or ForumReply
-	 * This API works for Connections 4.5 or above
+	 * API Supported on Connections 4.5 or above
 	 * <p>
 	 * User should be authenticated to call this method
 	 * @param postUuid
@@ -545,7 +546,13 @@ public class ForumService extends BaseService {
 	 * @throws ForumServiceException
 	 */
 	public RecommendationList getRecommendations(String postUuid) throws ForumServiceException{
-		
+		// check api version, if not 4.5 or above then throw unsupported exception
+		if(StringUtil.isNotEmpty(this.endpoint.getApiVersion())){
+			double apiVersion = Double.parseDouble(this.endpoint.getApiVersion());
+			if(APIVERSION > apiVersion ){
+				throw new UnsupportedOperationException("This API is only supported on connections 4.5 or above");
+			}
+		}
 		String recommendationsUrl = resolveUrl(ForumType.RECOMMENDATIONS, FilterType.ENTRIES);
 		RecommendationList recommendations;
 		Map<String, String> parameters = new HashMap<String, String>();
@@ -562,7 +569,7 @@ public class ForumService extends BaseService {
 	}
 	
 	/**
-	 * Wrapper method to create a recommendation,This API works for Connections 4.5 or above
+	 * Wrapper method to create a recommendation, API Supported on Connections 4.5 or above
 	 * <p>
 	 * User should be authenticated to call this method
 	 * @param postUuid
@@ -570,7 +577,13 @@ public class ForumService extends BaseService {
 	 * @throws ForumServiceException
 	 */
 	public Recommendation createRecommendation(String postUuid) throws ForumServiceException{
-		
+		// check api version, if not 4.5 or above then throw unsupported exception
+		if(StringUtil.isNotEmpty(this.endpoint.getApiVersion())){
+			double apiVersion = Double.parseDouble(this.endpoint.getApiVersion());
+			if(APIVERSION > apiVersion ){
+				throw new UnsupportedOperationException("This API is only supported on connections 4.5 or above");
+			}
+		}
 		String recommendationsUrl = resolveUrl(ForumType.RECOMMENDATIONS, FilterType.ENTRIES);
 		Map<String, String> parameters = new HashMap<String, String>();
 		
@@ -590,7 +603,7 @@ public class ForumService extends BaseService {
 		
 	}
 	/**
-	 * Wrapper method to delete a recommendation,This API works for Connections 4.5 or above
+	 * Wrapper method to delete a recommendation, API Supported on Connections 4.5 or above
 	 * <p>
 	 * User should be authenticated to call this method
 	 * @param postUuid
@@ -598,7 +611,13 @@ public class ForumService extends BaseService {
 	 * @throws ForumServiceException
 	 */
 	public boolean deleteRecommendation(String postUuid) throws ForumServiceException{
-		
+		// check api version, if not 4.5 or above then throw unsupported exception
+		if(StringUtil.isNotEmpty(this.endpoint.getApiVersion())){
+			double apiVersion = Double.parseDouble(this.endpoint.getApiVersion());
+			if(APIVERSION > apiVersion ){
+				throw new UnsupportedOperationException("This API is only supported on connections 4.5 or above");
+			}
+		}
 		String recommendationsUrl = resolveUrl(ForumType.RECOMMENDATIONS, FilterType.ENTRIES);
 		Map<String, String> parameters = new HashMap<String, String>();
 		

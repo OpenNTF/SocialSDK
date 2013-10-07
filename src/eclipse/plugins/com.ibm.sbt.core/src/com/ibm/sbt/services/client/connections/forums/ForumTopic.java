@@ -33,11 +33,8 @@ import com.ibm.sbt.services.client.connections.forums.model.FlagType;
 
 public class ForumTopic extends BaseForumEntity{
 
-	private String forumUuid;
-
 	public ForumTopic(BaseService svc, DataHandler<?> handler) {
 		super(svc, handler);
-		// TODO Auto-generated constructor stub
 	}
 
 	public ForumTopic(ForumService forumsService, String id) {
@@ -45,7 +42,7 @@ public class ForumTopic extends BaseForumEntity{
 	}
 
 	/**
-	 * This method returns uid of topic
+	 * This method returns Uuid of topic
 	 */
 	public String getTopicUuid() throws ForumServiceException{
 		return super.getUid();
@@ -146,7 +143,7 @@ public class ForumTopic extends BaseForumEntity{
 		} catch (Exception e) {}
 
 		if(StringUtil.isEmpty(forumId)){
-			forumId = forumUuid;
+			forumId = (String) fields.get("forumUuid");
 		}
 		return extractForumUuid(forumId);
 	}
@@ -158,7 +155,7 @@ public class ForumTopic extends BaseForumEntity{
 	 * @param {String} forumUuid Id of the forum
 	 */
 	public void setForumUuid(String forumUuid) {
-		this.forumUuid = forumUuid;
+		fields.put("forumUuid", forumUuid);
 	}
 
 	/**
@@ -203,7 +200,6 @@ public class ForumTopic extends BaseForumEntity{
 	 * @method pin
 	 */
 	public void pin() {
-
 		setAsString(ForumsXPath.flag, FlagType.PIN.getFlagType());
 	}
 	/**

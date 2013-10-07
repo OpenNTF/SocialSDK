@@ -82,7 +82,7 @@ define([ "../config" ], function(sbt) {
     		categoryTerm : "a:category/@term",
             editUrl : "a:link[@rel='edit']/@href",
             selfUrl : "a:link[@rel='self']/@href",
-            alternateUrl : "a:link[@rel='alternate']/@href",
+            alternateUrl : "a:link[@rel='alternate']/@href"
         },
         
 	    /**

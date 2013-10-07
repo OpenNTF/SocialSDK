@@ -73,7 +73,8 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
             question: "a:category[@term='question' and @scheme='http://www.ibm.com/xmlns/prod/sn/flags']",
             answered: "a:category[@term='answered' and @scheme='http://www.ibm.com/xmlns/prod/sn/flags']",
             notRecommendedByCurrentUser: "a:category[@term='NotRecommendedByCurrentUser']",
-            threadRecommendationCount: "a:category[@term='ThreadRecommendationCount']/@label"
+            threadRecommendationCount: "a:category[@term='ThreadRecommendationCount']/@label",
+            recommendationsUrl : "a:link[@rel='recommendations']/@href",
         }, conn.AtomEntryXPath),
         
         /**
@@ -141,7 +142,12 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         /**
          * Get a category document that lists the tags that have been assigned to forum topics. 
          */
-        AtomTagsTopics : "/atom/tags/topics"
+        AtomTagsTopics : "/atom/tags/topics",
+        
+        /**
+         * Get a feed that includes all of the recommendations for a specific forum post.
+         */
+        AtomRecommendationEntries : "/${forums}/atom/recommendation/entries"
 
     });
 });

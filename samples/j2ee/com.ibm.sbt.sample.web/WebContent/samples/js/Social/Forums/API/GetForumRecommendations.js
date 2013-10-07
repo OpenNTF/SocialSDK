@@ -1,13 +1,9 @@
 require([ "sbt/dom", "sbt/json", "sbt/connections/ForumService" ], function(dom,json,ForumService) {
         var forumService = new ForumService();
-        var promise = forumService.getMyTopics({
-                asc : true,
-                page : 1,
-                ps : 10
-            });
+        var promise = forumService.getForumRecomendations("%{name=ForumService.postUuid}");
         promise.then(
-            function(forums) {
-                dom.setText("json", json.jsonBeanStringify(forums));
+            function(recomendations) {
+                dom.setText("json", json.jsonBeanStringify(recomendations));
             },
             function(error) {
                 dom.setText("json", json.jsonBeanStringify(error));

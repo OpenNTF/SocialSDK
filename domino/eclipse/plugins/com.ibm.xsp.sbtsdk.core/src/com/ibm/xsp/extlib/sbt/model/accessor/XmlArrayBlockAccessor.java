@@ -33,7 +33,7 @@ import com.ibm.commons.xml.DOMUtil;
 import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.XMLException;
 import com.ibm.commons.xml.XResult;
-//import com.ibm.commons.xml.io.XmlSerializer;
+import com.ibm.commons.xml.io.XmlSerializer;
 import com.ibm.xsp.extlib.sbt.model.RestDataBlockAccessor;
 import com.ibm.xsp.extlib.sbt.model.RestDataSource;
 
@@ -73,7 +73,7 @@ public abstract class XmlArrayBlockAccessor extends RestDataBlockAccessor {
         public void writeExternal(ObjectOutput out) throws IOException {
             super.writeExternal(out);
             try {
-//                XmlSerializer.writeDOMObject(out, doc);
+                XmlSerializer.writeDOMObject(out, doc);
             } catch(Throwable ex) {
                 throw new AbstractIOException(ex);
             }
@@ -82,7 +82,7 @@ public abstract class XmlArrayBlockAccessor extends RestDataBlockAccessor {
         public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
             super.readExternal(in);
             try {
-//                this.doc = XmlSerializer.readDOMObject(in);
+                this.doc = XmlSerializer.readDOMObject(in);
                 this.nodes = null;
             } catch(Throwable ex) {
                 throw new AbstractIOException(ex);

@@ -34,7 +34,7 @@ function(dom, ProfileGrid, ProfileRendererMixin, CommunityService, lang) {
         var content = document.getElementById("contentTextField").value;
         var tags = document.getElementById("tagsTextField").value;
         
-        var community = communityService.getCommunity({ loadIt : false }); 
+        var community = communityService.newCommunity(); 
         community.setTitle(title);
         
         if(content && content.length > 0){
@@ -55,10 +55,10 @@ function(dom, ProfileGrid, ProfileRendererMixin, CommunityService, lang) {
                 		var email = profiles[i].data.getValue("email");
                 		community.addMember({id : email},{       
                 		   load : function(member){
-                			   dom.byId("success").style.display = "";
+                			   dom.byId("success").style.display = "block";
 	        		            dom.byId("error").style.display = "none";
-	        		            dom.setText("success", "Successfully Created Community "+ title+ " And " +
-	        		            		"Added Selected Users");
+	        		            dom.setText("success", "Successfully created community "+ title+ " and " +
+	        		            		"added selected users");
                 		   },
                 		   error : function(error){
                 			   dom.byId("success").style.display = "none";
@@ -75,8 +75,11 @@ function(dom, ProfileGrid, ProfileRendererMixin, CommunityService, lang) {
 	            dom.setText("error", "Could Not Create Community");
             }
         });
-        
-        
+        if(!profiles || profiles.length == 0){
+        	dom.byId("success").style.display = "block";
+	        dom.byId("error").style.display = "none";
+	        dom.setText("success", "Successfully created community \""+ title + "\"");
+        }
     };
    
 });

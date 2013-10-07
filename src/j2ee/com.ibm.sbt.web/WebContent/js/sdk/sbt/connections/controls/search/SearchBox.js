@@ -279,6 +279,7 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 						// Delete objects by setting their properties to null
 						context._members[i].html = null;
 						context._members[i].id = null;
+						context._members[i].name = null;
 						break;
 					}
 				}

@@ -28,7 +28,7 @@
       <!-- main content starts -->
       <div class="hero-unit">
         <h3>Grant Access Sample</h3>
-        <p>This sample demonstrates...</p>
+        <p>This sample demonstrates how to check if logged on user has granted access for this application to access their IBM Connections data.</p>
         <p class="text-info">User Principal: <code><%= request.getUserPrincipal() %></code></p>
         
         <div id="grantAccessDiv" style="display: none;">
@@ -117,7 +117,7 @@
 			} else {
 				%><table><%
 				for (String user : users) {
-					%><tr><td><%=user%> is a member of <%=Users.getCommunityMembershipCount(user)%> communities on SmartCloud</td></tr><%
+					%><tr><td><%=user%> is a member of <%=Users.getCommunityMembershipCount(user)%> communities.</td></tr><%
 				}
 				%></table><%				
 			}

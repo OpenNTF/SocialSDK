@@ -50,10 +50,9 @@
 		topic = topic.save(); 
 		out.println("Topic created with Id : " + topic.getUid() + "for Forum with Id :"+forumId );
 	} catch (Exception e) {
-	e.printStackTrace();
-	//	out.println("<pre>");
-		//out.println(e.getMessage());
-		//out.println("</pre>");
+		out.println("<pre>");
+		out.println(e.getMessage());
+		out.println("</pre>");
 	}
 	%>
 	</div>

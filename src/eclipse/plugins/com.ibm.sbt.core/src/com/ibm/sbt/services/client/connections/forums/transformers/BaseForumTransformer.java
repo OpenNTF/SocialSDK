@@ -25,6 +25,7 @@ import com.ibm.sbt.services.client.connections.forums.Forum;
 import com.ibm.sbt.services.client.connections.forums.ForumReply;
 import com.ibm.sbt.services.client.connections.forums.ForumService;
 import com.ibm.sbt.services.client.connections.forums.ForumTopic;
+import com.ibm.sbt.services.client.connections.forums.ForumsXPath;
 import com.ibm.sbt.services.client.connections.forums.model.BaseForumEntity;
 import com.ibm.sbt.services.client.connections.forums.model.FlagType;
 
@@ -46,46 +47,56 @@ public class BaseForumTransformer extends AbstractBaseTransformer {
 	 * so it can determine values which were not modified by user
 	 * hence missing in fieldsmap but required in request payload
 	 */
-	
+
 	public BaseForumTransformer(BaseForumEntity entity, String method) {
 		this.entity = entity;
 		this.serviceOp = method;
 	}
-	
+
 	public BaseForumTransformer(BaseForumEntity entity) {
 		this(entity,"");
 	}
 
 	@Override
 	public String transform(Map<String, Object> fieldmap) throws TransformerException {
-		
+
 		String xml = getTemplateContent(sourcepath+"BaseEntryTmpl.xml");
 		String categoryXml = getTemplateContent(sourcepath+"CategoryTmpl.xml");
-		
-		String tagsXml = "";
+
+		String tagsXml    = "";
 		String contentXml = "";
-		String titleXml = "";
-		String flagXml = "";
-		
+		String titleXml   = "";
+		String flagXml    = "";
+		String answered   = "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/flags\" term=\"answered\"></category>";
+		String answer     = "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/flags\" term=\"answer\"></category>";
+		String pinned     = "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/flags\" term=\"pinned\"></category>";
+		String locked     = "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/flags\" term=\"locked\"></category>";
+		String question   = "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/flags\" term=\"question\"></category>";
+
+
 		boolean removeFlag = false;		
 		if( entity instanceof ForumTopic){
 			if(((ForumTopic)entity).isPinned() == true){
-				((ForumTopic)entity).pin();
+				flagXml = getXMLRep(getStream(sourcepath+"FlagTmpl.xml"),ForumsXPath.flag.getName(),FlagType.PIN.getFlagType());
 			}
 			if(((ForumTopic)entity).isLocked() == true){
-				((ForumTopic)entity).lock();
+				flagXml += getXMLRep(getStream(sourcepath+"FlagTmpl.xml"),ForumsXPath.flag.getName(),FlagType.LOCK.getFlagType());
 			}
 			if(((ForumTopic)entity).isQuestion() == true){
-				((ForumTopic)entity).markAsQuestion();
+				flagXml += getXMLRep(getStream(sourcepath+"FlagTmpl.xml"),ForumsXPath.flag.getName(),FlagType.QUESTION.getFlagType());
+			}
+			if(((ForumTopic)entity).isAnswered() == true){
+				flagXml += getXMLRep(getStream(sourcepath+"FlagTmpl.xml"),ForumsXPath.flag.getName(),FlagType.ANSWERED.getFlagType());
 			}
 		}
 		if( entity instanceof ForumReply){
 			if(((ForumReply)entity).isAnswer() == true){
-				((ForumReply)entity).acceptAnswer();
+				flagXml += getXMLRep(getStream(sourcepath+"FlagTmpl.xml"),ForumsXPath.flag.getName(),FlagType.ACCEPT_ANSWER.getFlagType());
 			}
 		}
-	for(Map.Entry<String, Object> xmlEntry : fieldmap.entrySet()){
-			
+
+		for(Map.Entry<String, Object> xmlEntry : fieldmap.entrySet()){
+
 			String currentElement = xmlEntry.getKey(); 
 			String currentValue = "";
 			if(xmlEntry.getValue() != null){
@@ -103,27 +114,39 @@ public class BaseForumTransformer extends AbstractBaseTransformer {
 			if(currentElement.equalsIgnoreCase("flag")){
 				if(StringUtil.equalsIgnoreCase(currentValue, FlagType.PIN.getFlagType()) || StringUtil.equalsIgnoreCase(currentValue, FlagType.LOCK.getFlagType()) 
 						|| StringUtil.equalsIgnoreCase(currentValue, FlagType.QUESTION.getFlagType())
-							|| StringUtil.equalsIgnoreCase(currentValue, FlagType.ACCEPT_ANSWER.getFlagType())){
-					flagXml = getXMLRep(getStream(sourcepath+"FlagTmpl.xml"),currentElement,XmlTextUtil.escapeXMLChars(currentValue));
+						|| StringUtil.equalsIgnoreCase(currentValue, FlagType.ACCEPT_ANSWER.getFlagType())){
+					flagXml += getXMLRep(getStream(sourcepath+"FlagTmpl.xml"),currentElement,XmlTextUtil.escapeXMLChars(currentValue));
 				}
-				else{
-					removeFlag = true;
+				if(StringUtil.equalsIgnoreCase(currentValue, FlagType.REOPENQUESTION.getFlagType())){
+					flagXml = StringUtil.replace(flagXml, answered, ""); 
+				}
+				else if(StringUtil.equalsIgnoreCase(currentValue, FlagType.UNPIN.getFlagType())){
+					flagXml = StringUtil.replace(flagXml, pinned, ""); 
+				}
+				else if(StringUtil.equalsIgnoreCase(currentValue, FlagType.UNLOCK.getFlagType())){
+					flagXml = StringUtil.replace(flagXml, locked, ""); 
+				}
+				else if(StringUtil.equalsIgnoreCase(currentValue, FlagType.NORMAL.getFlagType())){
+					flagXml = StringUtil.replace(flagXml, question, ""); 
+				}
+				else if(StringUtil.equalsIgnoreCase(currentValue, FlagType.DECLINE_ANSWER.getFlagType())){
+					flagXml = StringUtil.replace(flagXml, answer, ""); 
 				}
 			}
-			
+
 		}
 		if(StringUtil.isNotEmpty(titleXml)){
 			xml = getXMLRep(xml, "getTitle",titleXml);
 		}
-		
+
 		if(StringUtil.isNotEmpty(contentXml)){
 			xml = getXMLRep(xml, "getContent",contentXml);
 		}
-		
+
 		if(StringUtil.isNotEmpty(tagsXml)){
 			xml = getXMLRep(xml, "getTags",tagsXml);
 		}
-		
+
 		if(StringUtil.isNotEmpty(flagXml)){
 			if(removeFlag == true){
 				xml = getXMLRep(xml, "getFlags","");
@@ -131,7 +154,7 @@ public class BaseForumTransformer extends AbstractBaseTransformer {
 				xml = getXMLRep(xml, "getFlags",flagXml);
 			}
 		}
-		
+
 		if(entity instanceof Forum){
 			categoryXml = getXMLRep(categoryXml, "forum-type", "forum-forum");
 		}else if(entity instanceof ForumTopic){
@@ -142,8 +165,8 @@ public class BaseForumTransformer extends AbstractBaseTransformer {
 			referenceXml = getXMLRep(referenceXml, "topicId", ((ForumReply)entity).getTopicUuid());
 			if(StringUtil.isNotEmpty(serviceOp)){
 				if(StringUtil.equalsIgnoreCase(serviceOp, ForumService.CREATE_OP)){// checking if the request is a create call
-						referenceXml = getXMLRep(referenceXml, "topicId", ((ForumReply)entity).getTopicUuid());
-						xml = getXMLRep(xml, "getReference", referenceXml);
+					referenceXml = getXMLRep(referenceXml, "topicId", ((ForumReply)entity).getTopicUuid());
+					xml = getXMLRep(xml, "getReference", referenceXml);
 				}
 			}
 		}
@@ -152,5 +175,5 @@ public class BaseForumTransformer extends AbstractBaseTransformer {
 		return xml;
 	}
 
-	
+
 }

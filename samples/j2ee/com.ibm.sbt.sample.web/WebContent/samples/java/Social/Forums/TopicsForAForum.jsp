@@ -36,7 +36,7 @@
 </head>
 
 <body>
-	<h4>Topics for a partuclar Forum</h4>
+	<h4>Topics for a Forum</h4>
 	<div id="content">
 	<%
 		try {
@@ -45,17 +45,22 @@
 			ForumList forums = svc.getPublicForums();
 			Forum forum = (Forum)forums.iterator().next();
 			TopicList topics = svc.getForumTopics(forum.getForumUuid());
-			for (BaseForumEntity entry : topics) {
-				Author author = entry.getAuthor();
-				out.println("uid of forum :"+entry.getUid()+"<br>");
-				out.println("date published :"+entry.getPublished()+"<br>");
-				out.println("date updated : "+entry.getUpdated()+"<br>");
-				out.println("author name : "+author.getName()+"<br>");
-				out.println("author state : "+author.getState()+"<br>");
-				out.println("author email : "+author.getEmail()+"<br>");
-				out.println("author uid : "+author.getUid()+"<br>");
-				out.println("forum title : "+entry.getTitle()+"<br>");
-				out.println("<br><br><br>");
+			if(topics.size() > 0){
+				for (BaseForumEntity entry : topics) {
+					Author author = entry.getAuthor();
+					out.println("uid of forum :"+entry.getUid()+"<br>");
+					out.println("date published :"+entry.getPublished()+"<br>");
+					out.println("date updated : "+entry.getUpdated()+"<br>");
+					out.println("author name : "+author.getName()+"<br>");
+					out.println("author state : "+author.getState()+"<br>");
+					out.println("author email : "+author.getEmail()+"<br>");
+					out.println("author uid : "+author.getUid()+"<br>");
+					out.println("forum title : "+entry.getTitle()+"<br>");
+					out.println("<br><br>");
+				}
+			}
+			else{
+				out.println("No topics exist for this forum");
 			}
 		} catch (Throwable e) {
 			out.println("<pre>");

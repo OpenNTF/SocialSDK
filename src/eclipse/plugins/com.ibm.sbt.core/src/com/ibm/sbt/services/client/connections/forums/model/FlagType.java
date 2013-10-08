@@ -30,7 +30,10 @@ public enum FlagType {
 	QUESTION("question"),
 	NORMAL("normal"),
 	ACCEPT_ANSWER("answer"),
-	DECLINE_ANSWER("decline");
+	DECLINE_ANSWER("decline"),
+	REOPENQUESTION("reopen_question"),
+	ANSWERED("answered"),
+	;
 	
 	String flagType;
 	

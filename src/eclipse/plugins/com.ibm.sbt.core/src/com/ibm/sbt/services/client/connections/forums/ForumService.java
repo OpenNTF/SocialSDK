@@ -27,6 +27,7 @@ import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.util.EntityUtil;
 import com.ibm.sbt.services.client.connections.forums.feedhandler.ForumsFeedHandler;
+import com.ibm.sbt.services.client.connections.forums.feedhandler.RecommendationsFeedHandler;
 import com.ibm.sbt.services.client.connections.forums.feedhandler.RepliesFeedHandler;
 import com.ibm.sbt.services.client.connections.forums.feedhandler.TagFeedHandler;
 import com.ibm.sbt.services.client.connections.forums.feedhandler.TopicsFeedHandler;
@@ -52,9 +53,11 @@ public class ForumService extends BaseService {
 	public static final String _oauthUrl				= "oauth/atom/";
 	private static final String FORUM_UNIQUE_IDENTIFIER = "forumUuid";
 	private static final String TOPIC_UNIQUE_IDENTIFIER = "topicUuid";
+	private static final String POST_UNIQUE_IDENTIFIER  = "postUuid";
 	private static final String REPLY_UNIQUE_IDENTIFIER = "replyUuid";
 	private static final String COMM_UNIQUE_IDENTIFIER	= "communityUuid";
-	public static final String CREATE_OP 				= "create";
+	public static final String  CREATE_OP 				= "create";
+	private static final double APIVERSION 			= 4.5;
 	
 	/**
 	 * Default Constructor
@@ -533,7 +536,99 @@ public class ForumService extends BaseService {
 		return topic;
 	}
 	
+	/**
+	 * Wrapper method to get list of recommendations for a ForumTopic or ForumReply
+	 * API Supported on Connections 4.5 or above
+	 * <p>
+	 * User should be authenticated to call this method
+	 * @param postUuid
+	 * @return RecommendationList
+	 * @throws ForumServiceException
+	 */
+	public RecommendationList getRecommendations(String postUuid) throws ForumServiceException{
+		// check api version, if not 4.5 or above then throw unsupported exception
+		if(StringUtil.isNotEmpty(this.endpoint.getApiVersion())){
+			double apiVersion = Double.parseDouble(this.endpoint.getApiVersion());
+			if(APIVERSION > apiVersion ){
+				throw new UnsupportedOperationException("This API is only supported on connections 4.5 or above");
+			}
+		}
+		String recommendationsUrl = resolveUrl(ForumType.RECOMMENDATIONS, FilterType.ENTRIES);
+		RecommendationList recommendations;
+		Map<String, String> parameters = new HashMap<String, String>();
+		
+		parameters.put(POST_UNIQUE_IDENTIFIER, postUuid);
+		try {
+			recommendations = (RecommendationList) getEntities(recommendationsUrl, parameters, new RecommendationsFeedHandler(this));
+		} catch (Exception e) {
+			throw new ForumServiceException(e);
+		} 
+
+		return recommendations;
+		
+	}
 	
+	/**
+	 * Wrapper method to create a recommendation, API Supported on Connections 4.5 or above
+	 * <p>
+	 * User should be authenticated to call this method
+	 * @param postUuid
+	 * @return Recommendation
+	 * @throws ForumServiceException
+	 */
+	public Recommendation createRecommendation(String postUuid) throws ForumServiceException{
+		// check api version, if not 4.5 or above then throw unsupported exception
+		if(StringUtil.isNotEmpty(this.endpoint.getApiVersion())){
+			double apiVersion = Double.parseDouble(this.endpoint.getApiVersion());
+			if(APIVERSION > apiVersion ){
+				throw new UnsupportedOperationException("This API is only supported on connections 4.5 or above");
+			}
+		}
+		String recommendationsUrl = resolveUrl(ForumType.RECOMMENDATIONS, FilterType.ENTRIES);
+		Map<String, String> parameters = new HashMap<String, String>();
+		
+		parameters.put(POST_UNIQUE_IDENTIFIER, postUuid);
+		Response result;
+		Recommendation recommendation;
+		// not using transformer, as the payload to be sent is constant
+		String payload = "<entry xmlns='http://www.w3.org/2005/Atom'><category scheme='http://www.ibm.com/xmlns/prod/sn/type' term='recommendation'></category></entry>";
+		try {
+			result = createData(recommendationsUrl, parameters, null,payload);
+			recommendation = (Recommendation) new RecommendationsFeedHandler(this).createEntity(result);
+
+		} catch (Exception e) {
+			throw new ForumServiceException(e);
+		} 
+		return recommendation;
+		
+	}
+	/**
+	 * Wrapper method to delete a recommendation, API Supported on Connections 4.5 or above
+	 * <p>
+	 * User should be authenticated to call this method
+	 * @param postUuid
+	 * @return boolean
+	 * @throws ForumServiceException
+	 */
+	public boolean deleteRecommendation(String postUuid) throws ForumServiceException{
+		// check api version, if not 4.5 or above then throw unsupported exception
+		if(StringUtil.isNotEmpty(this.endpoint.getApiVersion())){
+			double apiVersion = Double.parseDouble(this.endpoint.getApiVersion());
+			if(APIVERSION > apiVersion ){
+				throw new UnsupportedOperationException("This API is only supported on connections 4.5 or above");
+			}
+		}
+		String recommendationsUrl = resolveUrl(ForumType.RECOMMENDATIONS, FilterType.ENTRIES);
+		Map<String, String> parameters = new HashMap<String, String>();
+		
+		parameters.put(POST_UNIQUE_IDENTIFIER, postUuid);
+		try {
+			deleteData(recommendationsUrl, parameters, postUuid);
+			return true;
+		} catch (Exception e) {
+			throw new ForumServiceException(e);
+		} 
+	}
 	/**
 	 * Wrapper method to create a Topic
 	 * <p>
@@ -606,7 +701,6 @@ public class ForumService extends BaseService {
 			Map<String, String> headers = new HashMap<String, String>();
 			headers.put("Content-Type", "application/atom+xml");
 			String postUrl = resolveUrl(ForumType.TOPICS,null,null);
-			System.out.println("url "+postUrl);
 			result = createData(postUrl, params, headers,payload);
 			topic = (ForumTopic) new TopicsFeedHandler(this).createEntity(result);
 

@@ -30,12 +30,11 @@
 	
 <html>
 <head>
-<title>SBT JAVA Sample - Get Forum By Id</title>
+<title>SBT JAVA Sample - Get Recommendations</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
 <body>
-	<h4>Topic by ID</h4>
 	<div id="content">
 	<%
 		try {
@@ -43,14 +42,7 @@
 			ForumService svc = new ForumService();
 			TopicList forums = svc.getMyForumTopics();
 			ForumTopic topic = (ForumTopic)forums.iterator().next();
-			ForumTopic retrievedtopic = svc.getForumTopic(topic.getUid()); 
-			String title = retrievedtopic.getTitle();
-			out.println("<b>Title is: </b>" + title);
-			out.println("is topic pinned : " + topic.isPinned()+"<br>");
-			out.println("is topic locked : " + topic.isLocked()+"<br>");
-			out.println("is topic a question : " + topic.isQuestion()+"<br>");
-	
-			RecommendationList recommendations = retrievedtopic.getRecommendations();
+			RecommendationList recommendations = svc.getRecommendations(topic.getTopicUuid());
 			
 			if(recommendations.size()>0){
 				out.println("<b>List of users who recommended this thread</b>"+topic.getRecommendationCount());
@@ -58,7 +50,7 @@
 				out.println("<b>Name: </b>" + recommendation.getName()+"<br>");
 			}
 			else{
-				out.println("There are no recommendations for this topic");
+				out.println("No recommendations for the post with id" + topic.getTopicUuid());
 			}
 		} catch (Throwable e) {
 			out.println("<pre>");

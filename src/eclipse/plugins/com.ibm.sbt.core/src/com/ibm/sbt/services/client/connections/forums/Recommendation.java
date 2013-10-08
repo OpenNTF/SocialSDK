@@ -19,36 +19,45 @@ package com.ibm.sbt.services.client.connections.forums;
 import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
+import com.ibm.sbt.services.client.connections.forums.model.Author;
 
 /**
- * tag Entry Class - representing a tag associated with a Forum.
+ * Recommendation Entry Class - represents forum Recommendation Atom entry.
  *
  * @author Swati Singh
  */
-public class Tag extends BaseEntity{
+public class Recommendation extends BaseEntity{
 
 
-	public Tag(BaseService svc, DataHandler<?> handler) {
+	public Recommendation(BaseService svc, DataHandler<?> handler) {
 		super(svc,handler);
 	}
 
-	public String getTerm() {
-		return getAsString(ForumsXPath.term);
+	public String getId() {
+		return getAsString(ForumsXPath.uid);
 	}
 
-	public void setTerm(String term) {
-		setAsString(ForumsXPath.term,term);
+	public String getTitle() {
+		return getAsString(ForumsXPath.title);
 	}
 
-	public int getFrequency(){
-		return getAsInt(ForumsXPath.frequency);
+	public Author getAuthor(){
+		return new Author(super.dataHandler);
 	}
-	public int getIntensity() {
-		return getAsInt(ForumsXPath.intensity);
-	}
-
-	public int getVisibility() {
-		return getAsInt(ForumsXPath.visibility);
+	
+	public String getName() {
+		return this.getAuthor().getName();
 	}
 
+	public String getEmail() {
+		return this.getAuthor().getEmail();
+	}
+	
+	public String getUserId() {
+		return this.getAuthor().getUid();
+	}
+	
+	public String getUserState() {
+		return this.getAuthor().getState();
+	}
 }

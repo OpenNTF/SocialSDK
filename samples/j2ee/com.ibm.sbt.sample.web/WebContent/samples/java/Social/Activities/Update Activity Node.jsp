@@ -14,6 +14,7 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@page import="com.ibm.sbt.services.client.connections.activity.model.ActivityNodeContentType"%>
 <%@page import="com.ibm.sbt.services.client.connections.activity.model.ActivityNodeType"%>
 <%@page import="com.ibm.sbt.services.client.connections.activity.DateField"%>
 <%@page import="com.ibm.sbt.services.client.connections.activity.FieldList"%>
@@ -54,6 +55,7 @@
 		actNode.setEntryType(ActivityNodeType.Entry.getActivityNodeType());
 		actNode.setTitle("ActivityNode with Fields" + System.currentTimeMillis());
 		actNode.setContent("ActivityNodeContent");
+		actNode.setContentType(ActivityNodeContentType.Html.getActivityNodeContentType());
 		Field textField1 = new TextField("Summary JSP 1");
 		textField1.setFieldName("MyTextField1");
 		Field textField2 = new TextField("Summary JSP 2");

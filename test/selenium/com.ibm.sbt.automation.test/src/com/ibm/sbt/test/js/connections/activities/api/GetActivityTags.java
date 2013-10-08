@@ -17,7 +17,7 @@ package com.ibm.sbt.test.js.connections.activities.api;
 
 import java.util.List;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 
 import org.junit.After;
 import org.junit.Before;
@@ -53,7 +53,7 @@ public class GetActivityTags extends BaseActivitiesTest {
 	}
    
    	
-    @Ignore
+    @Test
     public void testGetActivityTags() {
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         List jsonList = previewPage.getJsonList();

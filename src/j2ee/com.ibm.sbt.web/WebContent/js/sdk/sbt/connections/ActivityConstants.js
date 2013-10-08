@@ -33,12 +33,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang, conn) {
 			Section : "section",
 			ToDo : "todo"
 		},
-
-		/**
-		 * Template to create URL to retrieve activity node
-		 */
-		ActivityNodeUrl : "/activities/service/atom2/activitynode?activityNodeUuid={activityNodeId}",
-
+		
 		/**
 		 * XPath expressions used when parsing a Connections Activities ATOM feed
 		 */

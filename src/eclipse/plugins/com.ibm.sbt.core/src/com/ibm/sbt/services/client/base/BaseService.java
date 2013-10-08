@@ -110,7 +110,7 @@ public abstract class BaseService {
     	}
         String environment = context.getProperty("environment");
         if(environment != null) {
-            SBTEnvironment env = (SBTEnvironment) Context.get().getBean(environment);
+            SBTEnvironment env = (SBTEnvironment) context.getBean(environment);
             SBTEnvironment.Endpoint[] endpointsArray = env.getEndpointsArray();
             for(SBTEnvironment.Endpoint endpoint : endpointsArray){
                 if(StringUtil.equals(endpointName, endpoint.getAlias())){
@@ -405,19 +405,19 @@ public abstract class BaseService {
 	 */
    public Response updateData(String serviceUrl, Map<String, String> parameters, Map<String, String> headers, Object content,
 	            String nameParameterId) throws ClientServicesException, IOException {
-	        String uniqueId = "";
-	        if (nameParameterId != null) {
-	            uniqueId = parameters.get(nameParameterId);
-	        }
+        String uniqueId = "";
+        if (nameParameterId != null) {
+            uniqueId = parameters.get(nameParameterId);
+        }
 
-	        headers.put("Content-Type", "application/atom+xml");
-	        Response result = getClientService().put(serviceUrl, parameters, headers, content, dataFormat);
-	        if (cacheSize > 0 && nameParameterId != null) {
-	            addDataToCache(uniqueId, content);
-	        }
+        headers.put("Content-Type", "application/atom+xml");
+        Response result = getClientService().put(serviceUrl, parameters, headers, content, dataFormat);
+        if (cacheSize > 0 && nameParameterId != null) {
+            addDataToCache(uniqueId, content);
+        }
 
-	        return result;
-	    }
+        return result;
+    }
 
 	
 	/**
@@ -459,4 +459,15 @@ public abstract class BaseService {
 		// to check if cache is full , remove if full using LRU algorithm
 		cache.put(key, content);
 	}
+	
+	/**
+	 * Return true if the id as email address
+	 * 
+	 * @param id
+	 * @return
+	 */
+	protected boolean isEmail(String id) {
+		return (id == null) ? false : id.contains("@");
+	}
+	
 }

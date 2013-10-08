@@ -82,7 +82,6 @@ public class OAuth2Handler extends OAuthHandler {
 	private String serviceName;
 	private String consumerKey;
 	private String consumerSecret;
-	private String userid;
 	private String applicationPage;
 	private int expireThreshold;
 	private boolean forceTrustSSLCertificate;
@@ -538,7 +537,7 @@ public class OAuth2Handler extends OAuthHandler {
             login = true;
         }
 
-        String userId = context.getCurrentUserId();
+        String userId = getUserId();
 
         // Look for a token in the store
     	// If the user is anonymous, then the token might had been stored in the session
@@ -586,7 +585,7 @@ public class OAuth2Handler extends OAuthHandler {
     	readConsumerToken();
     	
         if(StringUtil.isEmpty(userId)) {
-            userId = context.getCurrentUserId();
+            userId = getUserId();
             // Anonymous is not valid
             if(StringUtil.isEmpty(userId)) {
                 return null;
@@ -629,7 +628,7 @@ public class OAuth2Handler extends OAuthHandler {
     	readConsumerToken();
     	
         if(StringUtil.isEmpty(userId)) {
-            userId = context.getCurrentUserId();
+            userId = getUserId();
             if(StringUtil.isEmpty(userId)) {
                 return;
             }
@@ -644,7 +643,7 @@ public class OAuth2Handler extends OAuthHandler {
      	        CredentialStore credStore = CredentialStoreFactory.getCredentialStore(getCredentialStore());
      	        if(credStore!=null) {
      	        	// Find the token for this user
-     	        	credStore.remove(getServiceName(), ACCESS_TOKEN_STORE_TYPE, context.getCurrentUserId());
+     	        	credStore.remove(getServiceName(), ACCESS_TOKEN_STORE_TYPE, getUserId());
      	        }
         	 } catch (CredentialStoreException cse) {
  				throw new OAuthException(cse, "Error trying to delete Token.");
@@ -702,7 +701,7 @@ public class OAuth2Handler extends OAuthHandler {
     			url.append('&');
     			url.append(Configuration.OAUTH2_REFRESH_TOKEN);
     			url.append('=');
-    			url.append(URLEncoder.encode(refreshToken, "UTF-8"));
+    			url.append(URLEncoder.encode(token.getRefreshToken(), "UTF-8"));
     			method = new HttpGet(url.toString());
     			HttpResponse httpResponse =client.execute(method);
     			responseCode = httpResponse.getStatusLine().getStatusCode();
@@ -741,7 +740,7 @@ public class OAuth2Handler extends OAuthHandler {
 								// if the token is already present, and was expired due to which we have fetched a new 
 								// token, then we remove the token from the store first and then add this new token.
 								deleteToken();
-								credStore.store(getServiceName(), ACCESS_TOKEN_STORE_TYPE, context.getCurrentUserId(), token);
+								credStore.store(getServiceName(), ACCESS_TOKEN_STORE_TYPE, getUserId(), token);
 							}
 			            } else {
 			            	AnonymousCredentialStore.storeCredentials(context, token, getAppId(), getServiceName()); // Store the token for anonymous user
@@ -763,15 +762,6 @@ public class OAuth2Handler extends OAuthHandler {
 		return credStore;
     }
 
-	public void setUserid(String userid) {
-		this.userid = userid;
-	}
-
-	public String getUserid() {
-		return userid;
-	}
-	
-	
 	/*
 	 *  This method starts the Oauth2.0 Dance process. 
 	 *  1. Make the call to fetch the authorization token.
@@ -791,7 +781,6 @@ public class OAuth2Handler extends OAuthHandler {
 			Platform.getInstance().log(e1);
 		}
 		setClient_uri(callbackurl);
-		setUserid(Context.get().getCurrentUserId());
 		
 		// Store the Oauth handler in session object
 		context.getSessionMap().put(Configuration.OAUTH2_HANDLER, this);
@@ -881,7 +870,7 @@ public class OAuth2Handler extends OAuthHandler {
                         getConsumerKey(),
                         getAccessToken(),
                         getConsumerSecret(),
-                        getUserid(),
+                        getUserId(),
                         expiresIn,
                         getRefreshToken()
             );

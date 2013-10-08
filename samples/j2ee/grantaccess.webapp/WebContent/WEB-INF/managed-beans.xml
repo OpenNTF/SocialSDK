@@ -33,7 +33,7 @@
 		<managed-bean-scope>application</managed-bean-scope>
 		<managed-property>
 			<property-name>endpoints</property-name>
-			<value>smartcloud:connections</value>
+			<value>connectionsOA2:connections</value>
 		</managed-property>
 	</managed-bean>
 	
@@ -79,6 +79,11 @@
 		<managed-property>
 			<property-name>forceTrustSSLCertificate</property-name>
 			<value>true</value>
+		</managed-property>
+		<!-- Access to the credential store -->
+		<managed-property>
+			<property-name>credentialStore</property-name>
+			<value>CredStoreDB</value>
 		</managed-property>
 	</managed-bean>
   

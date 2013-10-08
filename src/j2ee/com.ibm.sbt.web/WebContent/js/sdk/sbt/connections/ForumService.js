@@ -18,7 +18,7 @@
  * The Forums application of IBM® Connections enables a team to discuss issues that are pertinent to their work. 
  * The Forums API allows application programs to create new forums, and to read and modify existing forums.
  * 
- * @module sbt.connections.ForumsService
+ * @module sbt.connections.ForumService
  */
 define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", "./ForumConstants", "../base/BaseService",
          "../base/AtomEntity", "../base/XmlDataHandler" ], 
@@ -31,9 +31,10 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
 	var CommunityTmpl = "<snx:communityUuid xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\">${getCommunityUuid}</snx:communityUuid>";
 	var TopicTmpl = "<thr:in-reply-to xmlns:thr=\"http://purl.org/syndication/thread/1.0\" ref=\"urn:lsid:ibm.com:forum:${getForumUuid}\" type=\"application/atom+xml\" href=\"\"></thr:in-reply-to>";
 	var ReplyTmpl = "<thr:in-reply-to xmlns:thr=\"http://purl.org/syndication/thread/1.0\" ref=\"urn:lsid:ibm.com:forum:${getTopicUuid}\" type=\"application/atom+xml\" href=\"\"></thr:in-reply-to>";
+	var FlagTmpl = "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/flags\" term=\"${flag}\"></category>";
 	
     /**
-     * Forum class represents an entry for a forums feed returned by the
+     * Forum class represents an entry from a Forums feed returned by the
      * Connections REST API.
      * 
      * @class Forum
@@ -153,7 +154,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @param {Object} args
          */
         getTopics : function(args) {
-        	return this.service.getForumTopics(this.getForumUuid(), args);
+        	return this.service.getTopics(this.getForumUuid(), args);
         },
         
         /**
@@ -250,6 +251,25 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         },
 
         /**
+         * Return extra entry data to be included in post data for this entity.
+         * 
+         * @returns {String}
+         */
+        createEntryData : function() {
+        	var entryData = "";
+        	if (this.isPinned()) {
+        		entryData += stringUtil.transform(FlagTmpl, this, function(v,k) { return consts.FlagPinned; }, this);
+        	}
+        	if (this.isLocked()) {
+        		entryData += stringUtil.transform(FlagTmpl, this, function(v,k) { return consts.FlagLocked; }, this);
+        	}
+        	if (this.isQuestion()) {
+        		entryData += stringUtil.transform(FlagTmpl, this, function(v,k) { return consts.FlagQuestion; }, this);
+        	}
+            return stringUtil.trim(entryData);
+        },
+
+        /**
          * Return the value of id from Forum Topic ATOM
          * entry document.
          * 
@@ -309,6 +329,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * 
          * @method setCommunityUuid
          * @param {String} communityUuid Community Uuid of the forum
+         * @return {ForumTopic}
          */
         setCommunityUuid : function(communityUuid) {
             return this.setAsString("communityUuid", communityUuid);
@@ -337,7 +358,129 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         },
                 
         /**
-         * Get a list for forum replies that includes the replies in this topic.
+         * True if you want the topic to be added to the top of the forum thread.
+         * 
+         * @method isPinned
+         * @return {Boolean} 
+         */
+        isPinned : function() {
+        	return this.getAsBoolean("pinned");
+        },
+        
+        /**
+         * Set to true if you want the topic to be added to the top of the forum thread.
+         * 
+         * @method setPinned
+         * @param pinned
+         * @return {ForumTopic} 
+         */
+        setPinned : function(pinned) {
+        	return this.setAsBoolean("pinned", pinned);
+        },
+        
+        /**
+         * If true, indicates that the topic is locked. 
+         * 
+         * @method isLocked
+         * @return {Boolean} 
+         */
+        isLocked : function() {
+        	return this.getAsBoolean("locked");
+        },
+        
+        /**
+         * Set to true, indicates that the topic is locked. 
+         * 
+         * @method isLocked
+         * @param located
+         * @return {ForumTopic} 
+         */
+        setLocked : function(locked) {
+        	return this.setAsBoolean("locked", locked);
+        },
+        
+        /**
+         * If true, indicates that the topic is a question. 
+         * 
+         * @method isQuestion
+         * @return {Boolean} 
+         */
+        isQuestion : function() {
+        	return this.getAsBoolean("question");
+        },
+        
+        /**
+         * Set to true, indicates that the topic is a question. 
+         * 
+         * @method setQuestion
+         * @param question
+         * @return {Boolean} 
+         */
+        setQuestion : function(question) {
+        	return this.setAsBoolean("question", question);
+        },
+        
+        /**
+         * If true, indicates that the topic is a question that has been answered.
+         * 
+         * @method isAnswered
+         * @return {Boolean} 
+         */
+        isAnswered : function() {
+        	return this.getAsBoolean("answered");
+        },
+        
+        /**
+         * If true, this forum topic has not been recommended by the current user.
+         * 
+         * @method isNotRecommendedByCurrentUser
+         * @returns {Boolean}
+         */
+        isNotRecommendedByCurrentUser : function() {
+        	return this.getAsBoolean("notRecommendedByCurrentUser");
+        },
+        
+        /**
+         * Return an array containing the tags for this forum topic.
+         * 
+         * @method getTags
+         * @return {Array}
+         */
+        getTags : function() {
+        	return this.getAsArray("tags");
+        },
+        
+        /**
+         * Return an array containing the tags for this forum topic.
+         * 
+         * @method setTags
+         * @param {Array}
+         */
+        setTags : function(tags) {
+        	return this.setAsArray("tags", tags);
+        },
+        
+        /**
+         * Return the recommendations url of the forum topic.
+         * 
+         * @method getEditUrl
+         * @return {String} Edit url
+         */
+        getRecommendationsUrl : function() {
+            return this.getAsString("recommendationsUrl");
+        },
+
+        /**
+         * Get a list for forum recommendations that includes the recommendations for this forum topic.
+         * 
+         * @method getRecommendations
+         */
+        getRecommendations : function(args) {
+        	return this.service.getForumRecommendations(this.getTopicUuid(), args);
+        },
+        
+        /**
+         * Get a list for forum replies that includes the replies for this forum topic.
          * 
          * @method getReplies
          */
@@ -592,6 +735,50 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
     });
     
     /**
+     * ForumMember class represents an entry for a forums member feed returned by the
+     * Connections REST API.
+     * 
+     * @class ForumMember
+     * @namespace sbt.connections
+     */
+    var ForumMember = declare(AtomEntity, {
+
+    	categoryScheme : null,
+    	
+        /**
+         * Construct a Forum Tag entity.
+         * 
+         * @constructor
+         * @param args
+         */
+        constructor : function(args) {
+        }
+    
+    });
+    
+    /**
+     * ForumRecommendation class represents an entry for a forums recommendation feed returned by the
+     * Connections REST API.
+     * 
+     * @class ForumTag
+     * @namespace sbt.connections
+     */
+    var ForumRecommendation = declare(AtomEntity, {
+
+    	categoryScheme : null,
+    	
+        /**
+         * Construct a Forum Tag entity.
+         * 
+         * @constructor
+         * @param args
+         */
+        constructor : function(args) {
+        }
+    
+    });
+    
+    /**
      * ForumTag class represents an entry for a forums tag feed returned by the
      * Connections REST API.
      * 
@@ -766,6 +953,23 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         },      
         
         /**
+         * Get a feed that includes the topics that the authenticated user created in stand-alone forums and in forums associated 
+         * with communities to which the user belongs.
+         * 
+         * @method getMyForums
+         * @param requestArgs
+         */
+        getMyTopics: function(requestArgs) {
+            var options = {
+                method : "GET",
+                handleAs : "text",
+                query : requestArgs || {}
+            };
+            
+            return this.getEntities(consts.AtomTopicsMy, options, ForumTopicFeedCallbacks);
+        },      
+        
+        /**
          * Get a feed that includes all stand-alone and forum forums created in the enterprise.
          * 
          * @method getAllForums
@@ -800,19 +1004,19 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         /**
          * Get a list for forum topics that includes the topics in the specified forum.
          * 
-         * @method getForumTopics
+         * @method getTopics
          * @param forumUuid
          * @param args
          * @returns
          */
-        getForumTopics: function(forumUuid, args) {
+        getForumTopics: function(forumUuid, requestArgs) {
             var promise = this._validateForumUuid(forumUuid);
             if (promise) {
                 return promise;
             }
             
-            var requestArgs = lang.mixin(
-            	{ forumUuid : forumUuid }, args || {});
+            var requestArgs = lang.mixin({ forumUuid : forumUuid }, args || {});
+            
             var options = {
                 method : "GET",
                 handleAs : "text",
@@ -823,9 +1027,34 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         },
         
         /**
+         * Get a list for forum recommendations that includes the recommendations in the specified post.
+         * 
+         * @method getRecommendations
+         * @param postUuid
+         * @param args
+         * @returns
+         */
+        getForumRecommendations: function(postUuid, args) {
+            var promise = this._validatePostUuid(postUuid);
+            if (promise) {
+                return promise;
+            }
+            
+            var requestArgs = lang.mixin({ postUuid : postUuid }, args || {});
+            
+            var options = {
+                method : "GET",
+                handleAs : "text",
+                query : requestArgs
+            };
+            
+            return this.getEntities(consts.AtomRecommendationEntries, options, ForumRecommendationFeedCallbacks);
+        },
+        
+        /**
          * Get a list for forum replies that includes the replies in the specified topic.
          * 
-         * @method getForumReplies
+         * @method getReplies
          * @param topicUuid
          * @param args
          * @returns
@@ -836,8 +1065,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 return promise;
             }
             
-            var requestArgs = lang.mixin(
-            	{ topicUuid : topicUuid }, args || {});
+            var requestArgs = lang.mixin({ topicUuid : topicUuid }, args || {});
+            
             var options = {
                 method : "GET",
                 handleAs : "text",
@@ -1271,6 +1500,15 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         _validateForumUuid : function(forumUuid) {
             if (!forumUuid || forumUuid.length == 0) {
                 return this.createBadRequestPromise("Invalid argument, expected forumUuid.");
+            }
+        },
+        
+        /*
+         * Validate a post UUID, and return a Promise if invalid.
+         */
+        _validatePostUuid : function(postUuid) {
+            if (!postUuid || postUuid.length == 0) {
+                return this.createBadRequestPromise("Invalid argument, expected postUuid.");
             }
         },
         

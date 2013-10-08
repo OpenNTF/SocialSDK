@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012,2013
+ * ï¿½ Copyright IBM Corp. 2012,2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -159,9 +159,9 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * search  Well-formed full text search query. Performs a text search on community titles and descriptions.
          * since   Includes in the resulting feed all communities updated after a specified date. Specify the date using a date-time value that conforms to RFC3339. Use an upper case "T" to separate the date and time, and an uppercase "Z" in the absence of a numeric time zone offset. For example: 2009-01-04T20:32:31.171Z.
          * sortField   Order in which to sort the results. Options are:
-         *                                          lastmod – Sorts the results by last modified date.
-         *                                          name – Sorts the results by entry name.
-         *                                          count – Sorts the results by relevance.
+         *                                          lastmod ï¿½ Sorts the results by last modified date.
+         *                                          name ï¿½ Sorts the results by entry name.
+         *                                          count ï¿½ Sorts the results by relevance.
          * tag Returns communities with the specified tag. Search by one tag at a time.
          * userid  Unique ID that represents a specific person.
          */
@@ -256,7 +256,14 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.CommunityService
          */
-        AtomCommunityForumTopics : "/${communities}/service/atom/community/forum/topics"
-
+        AtomCommunityForumTopics : "/${communities}/service/atom/community/forum/topics",
+        
+        /**
+         * Get a feed of a Community's bookmarks. Requires a url parameter of the form communityUuid=xxx
+         * @property AtomCommunityBookmarks
+         * @type String
+         * @for sbt.connections.CommunityService
+         */
+        AtomCommunityBookmarks : "/${communities}/service/atom/community/bookmarks"        
     }, conn);
 });

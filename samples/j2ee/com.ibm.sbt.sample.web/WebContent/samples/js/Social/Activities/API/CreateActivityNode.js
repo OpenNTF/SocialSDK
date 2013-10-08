@@ -1,7 +1,7 @@
 require([ "sbt/dom", "sbt/json", "sbt/connections/ActivityService" ], function(dom,json,ActivityService) {
         var activitiesService = new ActivityService();
         var activityNode = activitiesService.newActivityNode({
-        	"activityId" : "%{name=sample.activityId|helpSnippetId=Social_Activities_API_CreateActivityNode}",
+        	"activityId" : "%{name=sample.activityId|helpSnippetId=Social_Activities_API_CreateActivity}",
         	"title" : "Entry Created By JS Snippet "+ new Date(), 
         	"type" : "Entry", 
         	"content" : "Section Created By JS Snippet "+ new Date(),

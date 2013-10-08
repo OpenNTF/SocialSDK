@@ -17,7 +17,7 @@ package com.ibm.sbt.test.js.connections.activities.api;
 
 import java.util.List;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 
 import org.junit.After;
 import org.junit.Before;

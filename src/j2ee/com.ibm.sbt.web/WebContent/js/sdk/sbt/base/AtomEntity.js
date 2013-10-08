@@ -149,7 +149,9 @@ define([ "../declare", "../lang", "../stringUtil", "./BaseConstants", "./BaseEnt
          * @return {Member} author Author of the Forum Reply
          */
         getAuthor : function() {
-            return this.getAsObject([ "authorUserid", "authorName", "authorEmail" ]);
+            return this.getAsObject(
+            		[ "authorUserid", "authorName", "authorEmail", "authorUserState" ],
+            		[ "userid", "name", "email", "userState" ]);
         },
 
         /**
@@ -159,7 +161,9 @@ define([ "../declare", "../lang", "../stringUtil", "./BaseConstants", "./BaseEnt
          * @return {Member} contributor Contributor of the forum
          */
         getContributor : function() {
-            return this.getAsObject([ "contributorUserid", "contributorName", "contributorEmail" ]);
+            return this.getAsObject(
+            		[ "contributorUserid", "contributorName", "contributorEmail", "contributorUserState" ],
+            		[ "userid", "name", "email", "userState" ]);
         },
         
         /**

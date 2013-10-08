@@ -1,6 +1,6 @@
 require([ "sbt/dom", "sbt/json", "sbt/connections/ActivityService" ], function(dom,json,ActivityService) {
         var activitiesService = new ActivityService();
-        var activityNodeId = "%{name=sample.activityNodeId|helpSnippetId=Social_Activities_API_GetActivityNodeTags}";
+        var activityNodeId = "%{name=sample.activityNodeId|helpSnippetId=Social_Activities_API_CreateActivityNode}";
         var promise = activitiesService.getActivityNodeTags(activityNodeId, {
                 asc : true,
                 page : 1,

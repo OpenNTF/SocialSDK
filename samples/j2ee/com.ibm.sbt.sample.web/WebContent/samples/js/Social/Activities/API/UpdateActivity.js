@@ -6,7 +6,7 @@ require([ "sbt/dom", "sbt/json", "sbt/connections/ActivityService", "sbt/connect
     	"title" : "New Title Updated by JS Snippet on "+ new Date(),  
     	"type" : ActivityConstants.ActivityNodeTypes.Activity
     });	
-	activityService.updateActivity("%{name=sample.activityId|helpSnippetId=Social_Activities_API_UpdateActivity}", activity).then(
+	activityService.updateActivity("%{name=sample.activityId|helpSnippetId=Social_Activities_API_CreateActivity}", activity).then(
 			function(activity) {
 				dom.setText("json", json.jsonBeanStringify(activity));
 			}, function(error) {

@@ -379,22 +379,38 @@ define(
 				constructor : function(args) {
 				},
 
-				/**
-				 * Return the value of id from result ATOM entry document.
-				 * 
-				 * @method getId
-				 * @return {String} ID of the activity
-				 */
-				getActivityId : function() {
-					var id = this.id || this._fields.id || this.getAsString("uid");
+				_extractId : function(id) {
 					if (id) {
-						var index = id.indexOf("urn:lsid:ibm.com:oa:");
+						var prefix = "urn:lsid:ibm.com:oa:";
+						var index = id.indexOf(prefix);
 						if (index != -1) {
-							var len = "urn:lsid:ibm.com:oa:".length;
+							var len = prefix.length;
 							id = id.substring(index + len);
 						}
 					}
 					return id;
+				},
+
+				/**
+				 * Returns the ID
+				 * @method getId
+				 * @returns {String} Id
+				 */
+				getId : function() {
+					var _id = this.id || this._fields.id || this.getAsString("uid");
+					this.id = _id;
+					this._fields.id = _id;
+					return _id;
+				},
+
+				/**
+				 * Return the value of id from result ATOM entry document.
+				 * 
+				 * @method getActivityId
+				 * @return {String} ID of the activity
+				 */
+				getActivityId : function() {
+					return this._extractId(this.getId());
 				},
 
 				/**
@@ -738,7 +754,7 @@ define(
 					return this.setAsString("communityLink", communityLink);
 				},
 
-				copyFields : function(activity) {
+				_copyFields : function(activity) {
 					this.setCommunityId(this._fields.communityId || activity.getCommunityId());
 					this.setCommunityLink(this._fields.communityLink || activity.getCommunityLink());
 					this.setCompleted(this._fields.completed || activity.getCompleted());
@@ -750,6 +766,114 @@ define(
 					this.setTemplate(this._fields.template || activity.getTemplate());
 					this.setTitle(this._fields.title || activity.getTitle());
 					this.setEntryType(this._fields.entryType || activity.getEntryType());
+				},
+
+				/**
+				 * Creates an activity, sends an Atom entry document containing the new activity to the user's My Activities feed.
+				 * 
+				 * @method create
+				 * @returns {Object} Activity
+				 */
+				create : function() {
+					return this.service.createActivity(this);
+				},
+
+				/**
+				 * updates an activity, send a replacement Atom Entry document containing the modified activity to the existing activity's edit URL
+				 * @method update
+				 * @returns {Object} activity
+				 */
+				update : function() {
+					return this.service.updateActivity(this.getActivityId(), this);
+				},
+
+				/**
+				 * Deletes an activity entry, sends an HTTP DELETE method to the edit web address specified for the node.
+				 * 
+				 * @method deleteActivity
+				 */
+				deleteActivity : function() {
+					return this.service.deleteActivity(this.getActivityId());
+				},
+
+				/**
+				 * Restores a deleted activity, use a HTTP PUT request. This moves the activity from the trash feed to the user's My Activities feed.
+				 * 
+				 * @method restore
+				 */
+				restore : function() {
+					return this.service.restoreActivity(this.getActivityId());
+				},
+
+				/**
+				 * Adds a member to the access control list of an activity, sends an Atom entry document containing the new member to the access control list
+				 * feed. You can only add one member per post.
+				 * @method addMember
+				 * @param {Object} memberOrJson
+				 */
+				addMember : function(memberOrJson) {
+					return this.service.addMember(this.getActivityId(), memberOrJson);
+				},
+
+				/**
+				 * Removes a member from the acl list for an application, use the HTTP DELETE method.
+				 * @method removeMember
+				 * @param {String} memberId
+				 */
+				removeMember : function(memberId) {
+					return this.service.deleteMember(this.getActivityId(), memberId);
+				},
+
+				/**
+				 * Updates a member in the access control list for an application, sends a replacement member entry document in Atom format to the existing ACL
+				 * node's edit web address.
+				 * @method updateMember
+				 * @param {Object} memberOrJson
+				 */
+				updateMember : function(memberOrJson) {
+					return this.service.updateMember(this.getActivityId(), memberOrJson);
+				},
+
+				/**
+				 * Retrieves a member from the access control list for a application, use the edit link found in the member entry in the ACL list feed.
+				 * @method getMember
+				 * @param {String} memberId
+				 * @returns {Object} Member
+				 */
+				getMember : function(memberId) {
+					return this.service.getMember(this.getActivityId(), memberId);
+				},
+
+				/**
+				 * Retrieves activity members from the access control list for a application, use the edit link found in the member entry in the ACL list feed.
+				 * @method getMembers
+				 * @param {Object} [requestArgs] the optional arguments
+				 * @returns {Array} members
+				 */
+				getMembers : function(requestArgs) {
+					return this.service.getMembers(this.getActivityId(), requestArgs);
+				},
+
+				/**
+				 * Creats an entry in an activity, such as a to-do item or to add a reply to another entry, send an Atom entry document containing the new
+				 * activity node of the appropriate type to the parent activity's node list.
+				 * 
+				 * @mehtod createActivityNode
+				 * @param {Object} activityNodeOrJson
+				 * @returns {Object} ActivityNode
+				 */
+				createActivityNode : function(activityNodeOrJson) {
+					return this.service.createActivityNode(this.getActivityId(), activityNodeOrJson);
+				},
+
+				/**
+				 * Returns the tags for given actiivity
+				 * @method getActivityTags
+				 * @param {Object} [requestArgs] the optional arguments
+				 * @returns {Array} tags
+				 */
+				getActivityTags : function(requestArgs) {
+					return this.service.getActivityTags(this.getActivityId(), requestArgs);
 				}
 			});
 
@@ -772,19 +896,11 @@ define(
 				/**
 				 * Return the value of id from result ATOM entry document.
 				 * 
-				 * @method getId
+				 * @method getActivityNodeId
 				 * @return {String} ID of the result
 				 */
 				getActivityNodeId : function() {
-					var id = this.id || this._fields.id || this.getAsString("uid");
-					if (id) {
-						var index = id.indexOf("urn:lsid:ibm.com:oa:");
-						if (index != -1) {
-							var len = "urn:lsid:ibm.com:oa:".length;
-							id = id.substring(index + len);
-						}
-					}
-					return id;
+					return this._extractId(this.getId());
 				},
 
 				/**
@@ -835,14 +951,13 @@ define(
 				 * @param inReplyToUrl
 				 * @param inReplyToActivity
 				 */
-				setInReplyTo : function(inReplyToId) {
+				setInReplyTo : function(inReplyToId, inReplyToUrl) {
 					var id = "urn:lsid:ibm.com:oa:" + inReplyToId;
 					var inReplyTo = {
 						"inReplyToId" : id,
-						"inReplyToUrl" : this.service.endpoint.baseUrl + stringUtil.replace(consts.ActivityNodeUrl, {
-							"activityNodeId" : inReplyToId
-						})
+						"inReplyToUrl" : inReplyToUrl
 					};
+
 					return this.setAsObject(inReplyTo);
 				},
 
@@ -871,10 +986,11 @@ define(
 				},
 
 				/**
-				 * 
-				 * @param assignedToUserId
-				 * @param assignedToName
-				 * @param assignedToEmail
+				 * Sets Assigned to in fields for creating playload
+				 * @method setAssignedTo
+				 * @param {String} assignedToUserId
+				 * @param {String} assignedToName
+				 * @param {String} assignedToEmail
 				 * @returns
 				 */
 				setAssignedTo : function(assignedToUserId, assignedToName, assignedToEmail) {
@@ -887,7 +1003,7 @@ define(
 				},
 
 				/**
-				 * 
+				 * returns Text Fields in Activity node feed
 				 * @returns {Array} textFields
 				 */
 				getTextFields : function() {
@@ -916,8 +1032,8 @@ define(
 				},
 
 				/**
-				 * 
-				 * @param {TextField} textField
+				 * Adds a test field
+				 * @param {Object} textField
 				 * @returns
 				 */
 				addTextField : function(textField) {
@@ -930,7 +1046,7 @@ define(
 				},
 
 				/**
-				 * 
+				 * returns Date Fields in Activity node feed
 				 * @returns {Array} dateFields
 				 */
 				getDateFields : function() {
@@ -952,6 +1068,11 @@ define(
 					return dateFields;
 				},
 
+				/**
+				 * adds a DateField
+				 * @param {Object} DateField
+				 * @returns
+				 */
 				addDateField : function(dateField) {
 					if (this._fields["fields"]) {
 						this._fields["fields"].push(dateField);
@@ -962,7 +1083,7 @@ define(
 				},
 
 				/**
-				 * 
+				 * returns Link Fields in Activity node feed
 				 * @returns {Array} linkFields
 				 */
 				getLinkFields : function() {
@@ -991,6 +1112,11 @@ define(
 					return linkFields;
 				},
 
+				/**
+				 * Adds a LinkField
+				 * @param {Object} LinkField
+				 * @returns
+				 */
 				addLinkField : function(linkField) {
 					if (this._fields["fields"]) {
 						this._fields["fields"].push(linkField);
@@ -1001,7 +1127,7 @@ define(
 				},
 
 				/**
-				 * 
+				 * returns Person Fields in Activity node feed
 				 * @returns {Array} personFields
 				 */
 				getPersonFields : function() {
@@ -1031,6 +1157,11 @@ define(
 					return personFields;
 				},
 
+				/**
+				 * adds a person fields to activity node
+				 * @param {Object} PersonField
+				 * @returns
+				 */
 				addPersonField : function(personField) {
 					if (this._fields["fields"]) {
 						this._fields["fields"].push(personField);
@@ -1041,7 +1172,7 @@ define(
 				},
 
 				/**
-				 * 
+				 * returns File Fields in Activity node feed
 				 * @returns {Array} fileFields
 				 */
 				getFileFields : function() {
@@ -1072,7 +1203,8 @@ define(
 				},
 
 				/**
-				 * 
+				 * returns all fields in activity nodes feed
+				 * @returns {Array} fields
 				 */
 				getFields : function() {
 					var fields = [];
@@ -1108,8 +1240,8 @@ define(
 					this._fields["fields"] = fields;
 				},
 
-				copyFields : function(activityNode) {
-					Activity.prototype.copyFields.call(this, activityNode);
+				_copyFields : function(activityNode) {
+					Activity.prototype._copyFields.call(this, activityNode);
 					this.setActivityId(this._fields.activityId || activityNode.getActivityId());
 					if (!this._fields.assignedToUserId) {
 						this.setAssignedTo(activityNode.getAssignedToUserId(), activityNode.getAssignedToName(), activityNode.getAssignedToEmail());
@@ -1119,6 +1251,76 @@ define(
 					}
 					this.setFields(this._fields.fields || activityNode.getFields());
 					this.setPosition(activityNode.getPosition());
+				},
+
+				/**
+				 * Creats an entry in an activity, such as a to-do item or to add a reply to another entry, send an Atom entry document containing the new
+				 * activity node of the appropriate type to the parent activity's node list.
+				 * 
+				 * @mehtod create
+				 * @param {String} activityId
+				 * @returns {Object} ActivityNode
+				 */
+				create : function(activityId) {
+					return this.service.createActivityNode(activityId, this);
+				},
+
+				/**
+				 * updates an activity node entry, sends a replacement Atom entry document containing the modified activity node to the existing activity's edit
+				 * web address.
+				 * @method update
+				 * @returns {Object} activityNode
+				 */
+				update : function() {
+					return this.service.updateActivityNode(this.getActivityNodeId(), this);
+				},
+
+				/**
+				 * Deletes an activity node entry, sends an HTTP DELETE method to the edit web address specified for the node.
+				 * 
+				 * @method deleteActivityNode
+				 */
+				deleteActivityNode : function() {
+					return this.service.deleteActivityNode(this.getActivityNodeId());
+				},
+				/**
+				 * Restores a deleted entry to an activity, sends a HTTP PUT request to the edit web address for the node defined in the trash feed. This moves
+				 * the entry from the trash feed to the user's activity node list.
+				 * 
+				 * @method restoreActivityNode
+				 */
+				restore : function() {
+					return this.service.restoreActivityNode(this.getActivityNodeId());
+				},
+				/**
+				 * Changes certain activity entries from one type to another.
+				 * 
+				 * <pre> 
+				 * <b>The following types of entries can be changed to other types:</b>
+				 * chat
+				 * email
+				 * entry
+				 * reply
+				 * todo<
+				 * /pre>
+				 * 
+				 * @method changeEntryType
+				 * @param {String} newType
+				 * @returns {Object} ActivityNode
+				 */
+				changeEntryType : function(newType) {
+					return this.service.changeEntryType(this.getActivityNodeId(), newType, this);
+				},
+				/**
+				 * Moves a standard entry or a to-do entry to a section in an activity, send an updated Atom entry document to the parent activity's node list.
+				 * 
+				 * @method moveToSection
+				 * @param {String} sectionId
+				 * @param {String} [newTitle]
+				 * @returns {Object} ActivityNode
+				 */
+				moveToSection : function(sectionId, newTitle) {
+					return this.service.moveEntryToSection(this.getActivityNodeId(), sectionId, newTitle);
 				}
 
 			});
@@ -1133,7 +1335,7 @@ define(
 				/**
 				 * Return the value of id from result ATOM entry document.
 				 * 
-				 * @method getId
+				 * @method getMemberId
 				 * @return {String} ID of the result
 				 */
 				getMemberId : function() {
@@ -1148,73 +1350,182 @@ define(
 					return id;
 				},
 
+				/**
+				 * Returns member name
+				 * @method getName
+				 * @returns {String} name
+				 */
 				getName : function() {
 					return this.getAsString("name");
 				},
 
+				/**
+				 * Sets name in fields
+				 * @method setName
+				 * @param {String} name
+				 */
 				setName : function(name) {
 					return this.setAsString("name", name);
 				},
 
+				/**
+				 * Get Email
+				 * @method getEmail
+				 * @returns {String} email
+				 */
 				getEmail : function() {
 					return this.getAsString("email");
 				},
 
+				/**
+				 * Set Email
+				 * @method setEmail
+				 * @param {String} email
+				 * @returns
+				 */
 				setEmail : function(email) {
 					return this.setAsString("email", email);
 				},
 
+				/**
+				 * get user ID
+				 * @method getUserId
+				 * @returns {String} userId
+				 */
 				getUserId : function() {
 					return this.getAsString("userId");
 				},
 
+				/**
+				 * Set user ID
+				 * @method setUserId
+				 * @param {String} userId
+				 */
 				setUserId : function(userId) {
 					return this.setAsString("userId", userId);
 				},
 
+				/**
+				 * get role
+				 * @method getRole
+				 * @returns {String} role
+				 */
 				getRole : function() {
 					return this.getAsString("role");
 				},
 
+				/**
+				 * @method setRole
+				 * @param {String} role
+				 * @returns
+				 */
 				setRole : function(role) {
 					return this.setAsString("role", role);
 				},
 
+				/**
+				 * getUserState
+				 * @method getUserState
+				 * @returns {String} userState
+				 */
 				getUserState : function() {
 					return this.getAsString("userState");
 				},
 
+				/**
+				 * get title
+				 * @method getTitle
+				 * @returns {String} title
+				 */
 				getTitle : function() {
 					return this.getAsString("title");
 				},
 
+				/**
+				 * getUpdated
+				 * @method getUpdated
+				 * @returns {String} updated
+				 */
 				getUpdated : function() {
 					return this.getAsDate("updated");
 				},
 
+				/**
+				 * getSummary
+				 * @method getSummary
+				 * @returns {String} summary
+				 */
 				getSummary : function() {
 					return this.getAsString("summary");
 				},
 
+				/**
+				 * getEditUrl
+				 * @method getEditUrl
+				 * @returns {String} editUrl
+				 */
 				getEditUrl : function() {
 					this.getAsString("editUrl");
 				},
 
+				/**
+				 * getCategory
+				 * @method getCategory
+				 * @returns {String} category
+				 */
 				getCategory : function() {
 					this.getAsString("category");
 				},
 
+				/**
+				 * setCategory
+				 * @method setCategory
+				 * @param {String} category
+				 */
 				setCategory : function(category) {
 					this.setAsString("category", category);
 				},
 
+				/**
+				 * getPermissions
+				 * @method getPermissions
+				 * @returns {Array} permissions
+				 */
 				getPermissions : function() {
 					var permissions = this.getAsString("permissions");
 					if (permissions) {
 						return permissions.split(", ");
 					}
 					return permissions;
-				}
+				},
+				/**
+				 * Adds a member to the access control list of an activity, sends an Atom entry document containing the new member to the access control list
+				 * feed. You can only add one member per post.
+				 * @method addToActivity
+				 * @param {String} activityId
+				 */
+				addToActivity : function(actvitiyId) {
+					return this.service.addMember(actvitiyId, this);
+				},
+
+				/**
+				 * Removes a member from the acl list for an application, use the HTTP DELETE method.
+				 * @method removeFromActivity
+				 * @param {String} activityId
+				 */
+				removeFromActivity : function(activityId) {
+					return this.service.deleteMember(activityId, this.getMemberId());
+				},
+
+				/**
+				 * Updates a member in the access control list for an application, sends a replacement member entry document in Atom format to the existing ACL
+				 * node's edit web address.
+				 * @method updateInActivity
+				 * @param {String} activityId
+				 */
+				updateInActivity : function(activityId) {
+					return this.service.updateMember(activityId, this);
+				},
 
 			});
 
@@ -1343,9 +1654,11 @@ define(
 			};
 
 			/**
-			 * ActivitiesService class.
+			 * ActivityService class which provides wrapper APIs to the Activities application of IBM® Connections which enables a team to collect, organize,
+			 * share, and reuse work related to a project goal. The Activities API allows application programs to create new activities, and to read and modify
+			 * existing activities.
 			 * 
-			 * @class ActivitiesService
+			 * @class ActivityService
 			 * @namespace sbt.connections
 			 */
 			var ActivityService = declare(BaseService, {
@@ -1368,6 +1681,7 @@ define(
 
 				/**
 				 * Return the default endpoint name if client did not specify one.
+				 * @method getDefaultEndpointName
 				 * @returns {String}
 				 */
 				getDefaultEndpointName : function() {
@@ -1412,7 +1726,7 @@ define(
 				 * Search for a set of completed activities that match a specific criteria.
 				 * 
 				 * @method getCompletedActivities
-				 * @param requestArgs
+				 * @param {Object} [requestArgs] The optional arguments
 				 * @returns {Array} Activity array
 				 */
 				getCompletedActivities : function(requestArgs) {
@@ -1426,15 +1740,15 @@ define(
 				},
 
 				/**
-				 * Get an activity node.
+				 * Retrieve an activity node entry, uses the edit link found in the corresponding activity node in the user's My Activities feed.
 				 * 
 				 * @method getActivityNode
 				 * @param {String} activityNodeId the ID of Activity Node
 				 * @returns {Object} ActivityNode
 				 */
 				getActivityNode : function(activityNodeId) {
-					var promise = this.validateField("activityNodeId", activityNodeId);															
-					if(promise){
+					var promise = this.validateField("activityNodeId", activityNodeId);
+					if (promise) {
 						return promise;
 					}
 					var requestArgs = {
@@ -1449,15 +1763,15 @@ define(
 				},
 
 				/**
-				 * Get an activity .
+				 * Retrieve an activity entry, uses the edit link found in the corresponding activity node in the user's My Activities feed.
 				 * 
 				 * @method getActivity
 				 * @param {String} activityId the ID of Activity
 				 * @returns {Object} Activity
 				 */
 				getActivity : function(activityId) {
-					var promise = this.validateField("activityId", activityId);															
-					if(promise){
+					var promise = this.validateField("activityId", activityId);
+					if (promise) {
 						return promise;
 					}
 					var requestArgs = {
@@ -1472,17 +1786,20 @@ define(
 				},
 
 				/**
+				 * Creats an entry in an activity, such as a to-do item or to add a reply to another entry, send an Atom entry document containing the new
+				 * activity node of the appropriate type to the parent activity's node list.
+				 * 
 				 * @mehtod createActivityNode
-				 * @param activityId
-				 * @param activityNodeOrJson
+				 * @param {String} activityId
+				 * @param {Object} activityNodeOrJson
 				 * @returns {Object} ActivityNode
 				 */
 				createActivityNode : function(activityId, activityNodeOrJson) {
-					var promise = this.validateField("activityId", activityId);										
+					var promise = this.validateField("activityId", activityId);
 					if (promise) {
-						promise = this.validateField("activityNodeOrJson", activityNodeOrJson);			
+						promise = this.validateField("activityNodeOrJson", activityNodeOrJson);
 					}
-					if(promise){
+					if (promise) {
 						return promise;
 					}
 					var activityNode = this.newActivityNode(activityNodeOrJson);
@@ -1503,12 +1820,14 @@ define(
 				},
 
 				/**
+				 * Creates an activity, sends an Atom entry document containing the new activity to the user's My Activities feed.
+				 * 
 				 * @method createActivity
-				 * @param activityOrJson
+				 * @param {Object} activityOrJson
 				 * @returns {Object} Activity
 				 */
 				createActivity : function(activityOrJson) {
-					var promise = this.validateField("activityOrJson", activityOrJson);										
+					var promise = this.validateField("activityOrJson", activityOrJson);
 					if (promise) {
 						return promise;
 					}
@@ -1526,29 +1845,29 @@ define(
 				},
 
 				/**
+				 * updates an activity node entry, sends a replacement Atom entry document containing the modified activity node to the existing activity's edit
+				 * web address.
 				 * @method updateActivityNode
-				 * @param activityNodeId
-				 * @param activityNodeOrJson
+				 * @param {String} activityNodeId
+				 * @param {Object} activityNodeOrJson
 				 * @returns {Object} activityNode
 				 */
 				updateActivityNode : function(activityNodeId, activityNodeOrJson) {
-					var promise = this.validateField("activityNodeId", activityNodeId);					
+					var promise = this.validateField("activityNodeId", activityNodeId);
 					if (promise) {
-						promise = this.validateField("activityNodeOrJson", activityNodeOrJson);		
+						promise = this.validateField("activityNodeOrJson", activityNodeOrJson);
 					}
 					if (promise) {
 						return promise;
 					}
-					
+
 					var newActivityNode = this.newActivityNode(activityNodeOrJson);
 					var promise = new Promise();
 					var _this = this;
 					this.getActivityNode(activityNodeId).then(function(originalActivityNode) {
 						return originalActivityNode;
-					}, function(error) {
-						promise.rejected(error);
 					}).then(function(originalActivityNode) {
-						newActivityNode.copyFields(originalActivityNode);
+						newActivityNode._copyFields(originalActivityNode);
 						var payload = _this._constructPayloadActivityNode(newActivityNode._fields);
 						var requestArgs = {
 							"activityNodeUuid" : activityNodeId
@@ -1572,21 +1891,32 @@ define(
 					return promise;
 				},
 				/**
+				 * Changes certain activity entries from one type to another.
+				 * 
+				 * <pre> 
+				 * <b>The following types of entries can be changed to other types:</b>
+				 * chat
+				 * email
+				 * entry
+				 * reply
+				 * todo<
+				 * /pre>
+				 * 
 				 * @method changeEntryType
-				 * @param activityNodeId
-				 * @param newType
-				 * @param activityNodeOrJson
+				 * @param {String} activityNodeId
+				 * @param {String} newType
+				 * @param {Object} activityNodeOrJson
 				 * @returns {Object} ActivityNode
 				 */
 				changeEntryType : function(activityNodeId, newType, activityNodeOrJson) {
-					var promise = this.validateField("activityNodeId", activityNodeId);					
+					var promise = this.validateField("activityNodeId", activityNodeId);
 					if (promise) {
-						promise = this.validateField("newType", newType);		
+						promise = this.validateField("newType", newType);
 					}
 					if (promise) {
-						promise = this.validateField("activityNodeOrJson", activityNodeOrJson);		
+						promise = this.validateField("activityNodeOrJson", activityNodeOrJson);
 					}
-					if(promise) {
+					if (promise) {
 						return promise;
 					}
 					var activityNode = null;
@@ -1600,34 +1930,50 @@ define(
 				},
 
 				/**
+				 * Moves a standard entry or a to-do entry to a section in an activity, send an updated Atom entry document to the parent activity's node list.
+				 * 
 				 * @method moveEntryToSection
-				 * @param activityNodeId				
-				 * @param sectionId
+				 * @param {String} activityNodeId
+				 * @param {String} sectionId
 				 * @param {String} [newTitle]
 				 * @returns {Object} ActivityNode
 				 */
 				moveEntryToSection : function(activityNodeId, sectionId, newTitle) {
-					var promise = this.validateField("activityNodeId", activityNodeId);					
+					var _this = this;
+					var promise = this.validateField("activityNodeId", activityNodeId);
 					if (promise) {
-						promise = this.validateField("sectionId", sectionId);		
+						promise = this.validateField("sectionId", sectionId);
 					}
 					if (promise) {
 						return promise;
 					}
-					var newActivityNode = this.newActivityNode(activityNodeId);
-					newActivityNode.setInReplyTo(sectionId);
-					if (newTitle) {
-						newActivityNode.setTitle(newTitle);
-					}
-					return this.updateActivityNode(activityNodeId, newActivityNode);
+					promise = new Promise();
+					this.getActivityNode(sectionId).then(function(sectionNode) {
+						return sectionNode;
+					}).then(function(sectionNode) {
+						var newActivityNode = _this.newActivityNode(activityNodeId);
+						newActivityNode.setInReplyTo(sectionId, sectionNode.getSelfUrl());
+						if (newTitle) {
+							newActivityNode.setTitle(newTitle);
+						}
+						_this.updateActivityNode(activityNodeId, newActivityNode).then(function(activityNode) {
+							promise.fulfilled(activityNode);
+						}, function(error) {
+							promise.rejected(error);
+						});
+					});
+					return promise;
+
 				},
 
 				/**
+				 * Deletes an activity node entry, sends an HTTP DELETE method to the edit web address specified for the node.
+				 * 
 				 * @method deleteActivityNode
-				 * @param activityNodeId
+				 * @param {String} activityNodeId
 				 */
 				deleteActivityNode : function(activityNodeId) {
-					var promise = this.validateField("activityNodeId", activityNodeId);					
+					var promise = this.validateField("activityNodeId", activityNodeId);
 					if (promise) {
 						return promise;
 					}
@@ -1644,11 +1990,13 @@ define(
 				},
 
 				/**
+				 * Deletes an activity entry, sends an HTTP DELETE method to the edit web address specified for the node.
+				 * 
 				 * @method deleteActivity
-				 * @param activityId
+				 * @param {String} activityId
 				 */
 				deleteActivity : function(activityId) {
-					var promise = this.validateField("activityId", activityId);					
+					var promise = this.validateField("activityId", activityId);
 					if (promise) {
 						return promise;
 					}
@@ -1656,26 +2004,26 @@ define(
 				},
 
 				/**
+				 * Restores a deleted activity, use a HTTP PUT request. This moves the activity from the trash feed to the user's My Activities feed.
+				 * 
 				 * @method restoreActivity
-				 * @param activityId
+				 * @param {String} activityId
 				 */
 				restoreActivity : function(activityId) {
-					var promise = this.validateField("activityId", activityId);					
+					var promise = this.validateField("activityId", activityId);
 					if (promise) {
 						return promise;
 					}
 					var _this = this;
-					var promise = new Promise();
+					promise = new Promise();
 					this.getActivityNodeFromTrash(activityId).then(function(deleted) {
 						return deleted;
-					}, function(error) {
-						promise.rejected(error);
 					}).then(function(deleted) {
 						if (deleted.isDeleted() == false) {
 							promise.rejected("Activity is not in Trash");
 						} else {
 							var restored = _this.newActivity(activityId);
-							restored.copyFields(deleted);
+							restored._copyFields(deleted);
 
 							var requestArgs = {
 								"activityNodeUuid" : activityId
@@ -1702,11 +2050,14 @@ define(
 				},
 
 				/**
+				 * Restores a deleted entry to an activity, sends a HTTP PUT request to the edit web address for the node defined in the trash feed. This moves
+				 * the entry from the trash feed to the user's activity node list.
+				 * 
 				 * @method restoreActivityNode
-				 * @param activityNodeId
+				 * @param {String} activityNodeId
 				 */
 				restoreActivityNode : function(activityNodeId) {
-					var promise = this.validateField("activityNodeId", activityNodeId);					
+					var promise = this.validateField("activityNodeId", activityNodeId);
 					if (promise) {
 						return promise;
 					}
@@ -1714,14 +2065,12 @@ define(
 					var promise = new Promise();
 					this.getActivityNodeFromTrash(activityNodeId).then(function(deletedNode) {
 						return deletedNode;
-					}, function(error) {
-						promise.rejected(error);
 					}).then(function(deletedNode) {
 						if (deletedNode.isDeleted() == false) {
 							promise.rejected("Activity Node is not in Trash");
 						} else {
 							var restoredNode = _this.newActivityNode(activityNodeId);
-							restoredNode.copyFields(deletedNode);
+							restoredNode._copyFields(deletedNode);
 
 							var requestArgs = {
 								"activityNodeUuid" : activityNodeId
@@ -1748,12 +2097,14 @@ define(
 				},
 
 				/**
+				 * Retrieves and activity node from trash
+				 * 
 				 * @method getActivityNodeFromTrash
-				 * @param activityNodeId
+				 * @param {String} activityNodeId
 				 * @returns {Object} ActivityNode
 				 */
 				getActivityNodeFromTrash : function(activityNodeId) {
-					var promise = this.validateField("activityNodeId", activityNodeId);					
+					var promise = this.validateField("activityNodeId", activityNodeId);
 					if (promise) {
 						return promise;
 					}
@@ -1770,11 +2121,12 @@ define(
 
 				/**
 				 * Returns a ActivityNode instance from ActivityNode or JSON or String. Throws an error if the argument was neither.
+				 * 
 				 * @method newActivityNode
 				 * @param {Object} activityNodeOrJsonOrString The ActivityNode Object or json String for ActivityNode
 				 */
 				newActivityNode : function(activityNodeOrJsonOrString) {
-					var promise = this.validateField("activityNodeOrJsonOrString", activityNodeOrJsonOrString);					
+					var promise = this.validateField("activityNodeOrJsonOrString", activityNodeOrJsonOrString);
 					if (promise) {
 						return promise;
 					}
@@ -1794,14 +2146,15 @@ define(
 				},
 
 				/**
+				 * Gets All activity nodes in trash which match given criteria
 				 * @method getActivityNodesInTrash
-				 * @param activityId
-				 * @param requestArgs
+				 * @param {String} activityId
+				 * @param {Object} [requestArgs] optional arguments
 				 * @returns {Array} ActivityNode list
 				 */
 				getActivityNodesInTrash : function(activityId, requestArgs) {
 
-					var promise = this.validateField("activityId", activityId);					
+					var promise = this.validateField("activityId", activityId);
 					if (promise) {
 						return promise;
 					}
@@ -1824,7 +2177,7 @@ define(
 				 * @param {Object} activityOrJsonOrString The Activity Object or json String for Activity
 				 */
 				newActivity : function(activityOrJsonOrString) {
-					var promise = this.validateField("activityOrJsonOrString", activityOrJsonOrString);					
+					var promise = this.validateField("activityOrJsonOrString", activityOrJsonOrString);
 					if (promise) {
 						return promise;
 					}
@@ -1844,8 +2197,10 @@ define(
 				},
 
 				/**
+				 * Search for a set of to-do items that match a specific criteria.
+				 * 
 				 * @method getAllToDos
-				 * @param requestArgs
+				 * @param {Object} [requestArgs] the optional arguments
 				 * @returns {Array} ActivityNode Array
 				 */
 				getAllToDos : function(requestArgs) {
@@ -1859,8 +2214,9 @@ define(
 				},
 
 				/**
+				 * Search for a set of tags that match a specific criteria.
 				 * @method getAllTags
-				 * @param requestArgs
+				 * @param {Object} [requestArgs] the optional arguments
 				 * @returns {Array}
 				 */
 				getAllTags : function(requestArgs) {
@@ -1874,8 +2230,10 @@ define(
 				},
 
 				/**
+				 * Search for sctivities in trash which math a specif criteria
+				 * 
 				 * @method getActivitiesInTrash
-				 * @param requestArgs
+				 * @param {Object} [requestArgs] the optional arguments
 				 * @returns {Array} activities
 				 */
 				getActivitiesInTrash : function(requestArgs) {
@@ -1890,9 +2248,10 @@ define(
 				},
 
 				/**
+				 * updates an activity, send a replacement Atom Entry document containing the modified activity to the existing activity's edit URL
 				 * @method updateActivity
-				 * @param activityId
-				 * @param activityOrJson
+				 * @param {String} activityId
+				 * @param {Object} activityOrJson
 				 * @returns {Object} activity
 				 */
 				updateActivity : function(activityId, activityOrJson) {
@@ -1907,9 +2266,10 @@ define(
 				},
 
 				/**
+				 * Returns the tags for given actiivity
 				 * @method getActivityTags
-				 * @param activityId
-				 * @param requestArgs
+				 * @param {String} activityId
+				 * @param {Object} [requestArgs] the optional arguments
 				 * @returns {Array} tags
 				 */
 				getActivityTags : function(activityId, requestArgs) {
@@ -1933,9 +2293,10 @@ define(
 				},
 
 				/**
+				 * Returns the tags for given actiivity node.
 				 * @method getActivityNodeTags
 				 * @param activityNodeId
-				 * @param requestArgs
+				 * @param {Object} [requestArgs] the optional arguments
 				 * @returns {Array} tags
 				 */
 				getActivityNodeTags : function(activityNodeId, requestArgs) {
@@ -1958,9 +2319,10 @@ define(
 				},
 
 				/**
+				 * Retrieves activity members from the access control list for a application, use the edit link found in the member entry in the ACL list feed.
 				 * @method getMembers
-				 * @param activityId
-				 * @param requestArgs
+				 * @param {String} activityId
+				 * @param {Object} [requestArgs] the optional arguments
 				 * @returns {Array} members
 				 */
 				getMembers : function(activityId, requestArgs) {
@@ -1982,10 +2344,11 @@ define(
 				},
 
 				/**
+				 * Retrieves a member from the access control list for a application, use the edit link found in the member entry in the ACL list feed.
 				 * @method getMember
-				 * @param activityId
-				 * @param memberId
-				 * @returns {Object} member
+				 * @param {String} activityId
+				 * @param {String} memberId
+				 * @returns {Object} Member
 				 */
 				getMember : function(activityId, memberId) {
 
@@ -2009,9 +2372,11 @@ define(
 				},
 
 				/**
+				 * Adds a member to the access control list of an activity, sends an Atom entry document containing the new member to the access control list
+				 * feed. You can only add one member per post.
 				 * @method addMember
-				 * @param activityId
-				 * @param memberOrJson
+				 * @param {String} activityId
+				 * @param {Object} memberOrJson
 				 */
 				addMember : function(activityId, memberOrJson) {
 					var promise = this.validateField("memberOrJson", memberOrJson);
@@ -2051,9 +2416,11 @@ define(
 				},
 
 				/**
+				 * Updates a member in the access control list for an application, sends a replacement member entry document in Atom format to the existing ACL
+				 * node's edit web address.
 				 * @method updateMember
-				 * @param activityId
-				 * @param memberOrJson
+				 * @param {String} activityId
+				 * @param {Object} memberOrJson
 				 */
 				updateMember : function(activityId, memberOrJson) {
 					var promise = this.validateField("memberOrJson", memberOrJson);
@@ -2105,9 +2472,10 @@ define(
 				},
 
 				/**
+				 * Removes a member from the acl list for an application, use the HTTP DELETE method.
 				 * @method deleteMember
-				 * @param activityId
-				 * @param memberId
+				 * @param {String} activityId
+				 * @param {String} memberId
 				 */
 				deleteMember : function(activityId, memberId) {
 					var promise = this.validateField("activityId", activityId);

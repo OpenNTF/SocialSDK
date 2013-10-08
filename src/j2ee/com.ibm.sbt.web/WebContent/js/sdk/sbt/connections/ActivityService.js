@@ -1796,7 +1796,7 @@ define(
 				 */
 				createActivityNode : function(activityId, activityNodeOrJson) {
 					var promise = this.validateField("activityId", activityId);
-					if (promise) {
+					if (!promise) {
 						promise = this.validateField("activityNodeOrJson", activityNodeOrJson);
 					}
 					if (promise) {
@@ -1854,7 +1854,7 @@ define(
 				 */
 				updateActivityNode : function(activityNodeId, activityNodeOrJson) {
 					var promise = this.validateField("activityNodeId", activityNodeId);
-					if (promise) {
+					if (!promise) {
 						promise = this.validateField("activityNodeOrJson", activityNodeOrJson);
 					}
 					if (promise) {
@@ -1910,10 +1910,10 @@ define(
 				 */
 				changeEntryType : function(activityNodeId, newType, activityNodeOrJson) {
 					var promise = this.validateField("activityNodeId", activityNodeId);
-					if (promise) {
+					if (!promise) {
 						promise = this.validateField("newType", newType);
 					}
-					if (promise) {
+					if (!promise) {
 						promise = this.validateField("activityNodeOrJson", activityNodeOrJson);
 					}
 					if (promise) {
@@ -1941,7 +1941,7 @@ define(
 				moveEntryToSection : function(activityNodeId, sectionId, newTitle) {
 					var _this = this;
 					var promise = this.validateField("activityNodeId", activityNodeId);
-					if (promise) {
+					if (!promise) {
 						promise = this.validateField("sectionId", sectionId);
 					}
 					if (promise) {
@@ -2256,8 +2256,8 @@ define(
 				 */
 				updateActivity : function(activityId, activityOrJson) {
 					var promise = this.validateField("activityId", activityId);
-					if (promise) {
-						romise = this.validateField("activityOrJson", activityOrJson);
+					if (!promise) {
+						promise = this.validateField("activityOrJson", activityOrJson);
 					}
 					if (promise) {
 						return promise;
@@ -2353,7 +2353,7 @@ define(
 				getMember : function(activityId, memberId) {
 
 					var promise = this.validateField("memberId", memberId);
-					if (promise) {
+					if (!promise) {
 						promise = this.validateField("activityId", activityId);
 					}
 					if (promise) {
@@ -2380,7 +2380,7 @@ define(
 				 */
 				addMember : function(activityId, memberOrJson) {
 					var promise = this.validateField("memberOrJson", memberOrJson);
-					if (promise) {
+					if (!promise) {
 						promise = this.validateField("activityId", activityId);
 					}
 					if (promise) {
@@ -2424,7 +2424,7 @@ define(
 				 */
 				updateMember : function(activityId, memberOrJson) {
 					var promise = this.validateField("memberOrJson", memberOrJson);
-					if (promise) {
+					if (!promise) {
 						promise = this.validateField("activityId", activityId);
 					}
 					if (promise) {
@@ -2479,7 +2479,7 @@ define(
 				 */
 				deleteMember : function(activityId, memberId) {
 					var promise = this.validateField("activityId", activityId);
-					if (promise) {
+					if (!promise) {
 						promise = this.validateField("memberId", memberId);
 					}
 					if (promise) {

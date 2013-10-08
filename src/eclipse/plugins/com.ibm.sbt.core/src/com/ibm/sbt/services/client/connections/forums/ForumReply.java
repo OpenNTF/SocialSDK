@@ -81,7 +81,16 @@ public class ForumReply extends BaseForumEntity{
 	public void setReplyUuid(String forumUuid) {
 		setAsString(ForumsXPath.uid, forumUuid);
 	}
-
+	/**
+	 * This method returns Recommendations for the IBM Connections forum Reply
+	 * 
+	 * @return
+	 * @throws ForumServiceException
+	 */
+	public RecommendationList getRecommendations() throws ForumServiceException
+	{
+		return getService().getRecommendations(getUid());
+	}
 	/**
 	 * To get Url of Reply
 	 * 

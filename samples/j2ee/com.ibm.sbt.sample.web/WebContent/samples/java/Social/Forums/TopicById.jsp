@@ -17,6 +17,8 @@
 <%@page import="com.ibm.sbt.services.client.connections.forums.ForumTopic"%>
 <%@page import="com.ibm.sbt.services.client.connections.forums.ForumService"%>
 <%@page import="com.ibm.sbt.services.client.connections.forums.TopicList"%>
+<%@page import="com.ibm.sbt.services.client.connections.forums.Recommendation"%>
+<%@page import="com.ibm.sbt.services.client.connections.forums.RecommendationList"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
@@ -41,9 +43,23 @@
 			ForumService svc = new ForumService();
 			TopicList forums = svc.getMyForumTopics();
 			ForumTopic topic = (ForumTopic)forums.iterator().next();
-			ForumTopic retrievedtopic = svc.getForumTopic(topic.getTopicUuid()); 
+			ForumTopic retrievedtopic = svc.getForumTopic(topic.getUid()); 
 			String title = retrievedtopic.getTitle();
 			out.println("<b>Title is: </b>" + title);
+			out.println("is topic pinned : " + topic.isPinned()+"<br>");
+			out.println("is topic locked : " + topic.isLocked()+"<br>");
+			out.println("is topic a question : " + topic.isQuestion()+"<br>");
+	
+			RecommendationList recommendations = retrievedtopic.getRecommendations();
+			
+			if(recommendations.size()>0){
+				out.println("<b>List of users who recommended this thread</b>"+topic.getRecommendationCount());
+				for(Recommendation recommendation :recommendations)
+				out.println("<b>Name: </b>" + recommendation.getName()+"<br>");
+			}
+			else{
+				out.println("There are no recommendations for this topic");
+			}
 		} catch (Throwable e) {
 			e.printStackTrace();
 			out.println("<pre>");

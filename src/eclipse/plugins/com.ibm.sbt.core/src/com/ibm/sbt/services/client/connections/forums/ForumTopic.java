@@ -115,7 +115,16 @@ public class ForumTopic extends BaseForumEntity{
 		return getService().getForumReplies(getUid());
 	}
 
-
+	/**
+	 * This method returns Recommendations for the IBM Connections forum Topic
+	 * 
+	 * @return
+	 * @throws ForumServiceException
+	 */
+	public RecommendationList getRecommendations() throws ForumServiceException
+	{
+		return getService().getRecommendations(getUid());
+	}
 	/**
 	 * Return the permissions of the IBM Connections forum topic from forum ATOM
 	 * entry document.

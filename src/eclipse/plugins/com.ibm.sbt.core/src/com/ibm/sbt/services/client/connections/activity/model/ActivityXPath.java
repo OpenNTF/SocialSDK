@@ -56,6 +56,7 @@ public enum ActivityXPath implements FieldEntry {
 	Permissions(".//snx:permissions"), 
 	Icon(".//snx:icon"), 
 	Content(".//a:content"),
+	ContentType(".//a:content/@type"),
 	DueDate(".//snx:duedate"),
 	CommunityUuid(".//snx:communityUuid"),
 	Theme(".//snx:themeId"),

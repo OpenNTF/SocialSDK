@@ -92,8 +92,16 @@ public class ActivityTransformer extends AbstractBaseTransformer {
 			if(currentElement.contains("tag")){
 				tagsXml += getXMLRep(getStream(SOURCEPATH + "TagTmpl.xml"), "tag", XmlTextUtil.escapeXMLChars(currentValue));
 			}
-			if(currentElement.contains("Content")){
+			if(currentElement.contains("Content") && !currentElement.equals("ContentType")){
 				contentXml += getXMLRep(getStream(SOURCEPATH + "ContentTmpl.xml"), "Content", XmlTextUtil.escapeXMLChars(currentValue));
+				String type = "";
+				if(fieldmap.containsKey("ContentType")) {
+					type = fieldmap.get("ContentType").toString(); 
+				}
+				if(StringUtil.isEmpty(type)) {
+					type = "text";
+				}
+				contentXml = getXMLRep(contentXml, "ContentType", XmlTextUtil.escapeXMLChars(type));
 			}
 			if(currentElement.contains("Title")){
 				titleXml += getXMLRep(getStream(SOURCEPATH + "TitleTmpl.xml"), "Title", XmlTextUtil.escapeXMLChars(currentValue));

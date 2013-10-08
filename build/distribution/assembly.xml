@@ -91,7 +91,7 @@
       </includes>
       <binaries>
         <outputDirectory>sbtsdk/samples/jar</outputDirectory>
-        <outputFileNameMapping>${module.artifactId}-${project.version}.${module.extension}</outputFileNameMapping>
+        <outputFileNameMapping>${module.artifactId}-${project.version}.${buildLabel}.${module.extension}</outputFileNameMapping>
         <unpack>false</unpack>
       </binaries>
     </moduleSet>

@@ -23,6 +23,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
 import com.ibm.sbt.automation.core.environment.TestEnvironment;
 import com.ibm.sbt.automation.core.environment.TestEnvironmentFactory;
+import com.ibm.sbt.test.js.smartcloud.ActivitiesTestSuite;
 import com.ibm.sbt.test.js.smartcloud.SearchRestTestSuite;
 import com.ibm.sbt.test.js.smartcloud.SearchTestSuite;
 import com.ibm.sbt.test.js.smartcloud.CommunitiesTestSuite;
@@ -40,7 +41,7 @@ import com.ibm.sbt.test.sample.SampleFrameworkTestSuite;
 @SuiteClasses({ CommunitiesTestSuite.class, FilesTestSuite.class,
 		ProfilesTestSuite.class, ProfilesGridTestSuite.class,
 		SearchTestSuite.class, /*SearchRestTestSuite.class,*/
-		SampleFrameworkTestSuite.class })
+		SampleFrameworkTestSuite.class, ActivitiesTestSuite.class })
 public class SmartCloudTestSuite {
 	@BeforeClass
 	public static void init() {

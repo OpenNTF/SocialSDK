@@ -61,10 +61,9 @@
 				out.println("There are no recommendations for this topic");
 			}
 		} catch (Throwable e) {
-			e.printStackTrace();
 			out.println("<pre>");
 			out.println("Problem Occurred while fetching forum: " + e.getMessage());
-				
+			out.println("</pre>");	
 		}
 	%>
 	</div>

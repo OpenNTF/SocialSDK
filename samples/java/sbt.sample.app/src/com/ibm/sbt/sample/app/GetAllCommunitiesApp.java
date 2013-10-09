@@ -16,7 +16,9 @@
 package com.ibm.sbt.sample.app;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
+
 import com.ibm.commons.runtime.Application;
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.RuntimeFactory;
@@ -100,6 +102,10 @@ public class GetAllCommunitiesApp {
             Application.destroy(application);
     }
     
+    public CommunityService getCommunityService(){
+        return this.communityService;
+    }
+    
     /**
      * Get a list of public communities.
      * @return Collection of public communities
@@ -128,14 +134,29 @@ public class GetAllCommunitiesApp {
 	    GetAllCommunitiesApp app = new GetAllCommunitiesApp();
 		
 	    try {
-            Collection<Community> communities = app.getPublicCommunities();
+	        CommunityService communityService = app.getCommunityService();
+            Collection<Community> communities = communityService.getPublicCommunities();
+            HashMap<String, String> parameters = new HashMap<String, String>();
+            parameters.put("ps", "100"); //100 members will be retrieved at a time. Max is 10,000.
             for (Iterator<Community> iter = communities.iterator(); iter.hasNext(); ) {
                 Community community = iter.next();
-                MemberList members = app.getCommunityMembers(community);
+                boolean moreMembers = true;
+                int page = 1;
+                
                 System.out.println(community.getTitle());
-                for (int i=0; i<members.getTotalResults(); i++) {
-                    System.out.println("    " + members.get(i).getEmail());
-                }
+                do{
+                    parameters.put("page", Integer.toString(page));
+                    MemberList members = communityService.getMembers(community.getCommunityUuid(), parameters);
+                    for (int i=0; i<members.size(); i++) {
+                        System.out.println("    " + members.get(i).getEmail());
+                    }
+                    if((members.getStartIndex() + members.getItemsPerPage()) <= members.getTotalResults()){
+                        moreMembers = true;
+                        page++;
+                    }else{
+                        moreMembers=false;
+                    }
+                }while(moreMembers);
             }
         } catch (CommunityServiceException e) {
             e.printStackTrace();

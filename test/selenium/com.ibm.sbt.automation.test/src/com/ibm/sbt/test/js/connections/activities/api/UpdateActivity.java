@@ -34,7 +34,7 @@ public class UpdateActivity extends BaseActivitiesTest {
 	public void testUpdateActivity() {
 		JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
 		JsonJavaObject json = previewPage.getJson();
-		String activityId = json.getAsString("getActivityId");
+		String activityId = json.getAsString("getActivityUuid");
 		Assert.assertNotNull(activityId);
 		Assert.assertTrue("Title not updated successfuly", json.getAsString("getTitle").startsWith("New Title Updated by JS Snippet"));
 		Assert.assertEquals(activity.getActivityId(), activityId);

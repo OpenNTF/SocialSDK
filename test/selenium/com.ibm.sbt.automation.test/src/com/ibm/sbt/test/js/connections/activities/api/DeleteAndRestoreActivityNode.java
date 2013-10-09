@@ -34,7 +34,7 @@ public class DeleteAndRestoreActivityNode extends BaseActivitiesTest {
 	}
 	
 	@Test
-	public void testDeleteAndRestoreActivity() {
+	public void testDeleteAndRestoreActivityNode() {
 		JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
 		JsonJavaObject json = previewPage.getJson();
 		Assert.assertEquals(json.getAsInt("status"), 204);

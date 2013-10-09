@@ -33,10 +33,10 @@ public class CreateActivityNode extends BaseActivitiesTest {
 	}
 
 	@Test
-	public void testCreateActivity() {
+	public void testCreateActivityNode() {
 		JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
 		JsonJavaObject json = previewPage.getJson();
-		activityNodeId = json.getAsString("getActivityNodeId");
+		activityNodeId = json.getAsString("getActivityNodeUuid");
 		Assert.assertNotNull(activityNodeId);
 	}
 }

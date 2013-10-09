@@ -30,7 +30,9 @@ import com.ibm.sbt.test.js.connections.activities.api.DeleteAndRestoreActivityNo
 import com.ibm.sbt.test.js.connections.activities.api.GetActivitiesInTrash;
 import com.ibm.sbt.test.js.connections.activities.api.GetActivity;
 import com.ibm.sbt.test.js.connections.activities.api.GetActivityMember;
+import com.ibm.sbt.test.js.connections.activities.api.GetActivityNode;
 import com.ibm.sbt.test.js.connections.activities.api.GetActivityNodeTags;
+import com.ibm.sbt.test.js.connections.activities.api.GetActivityNodes;
 import com.ibm.sbt.test.js.connections.activities.api.GetActivityNodesInTrash;
 import com.ibm.sbt.test.js.connections.activities.api.GetActivityTags;
 import com.ibm.sbt.test.js.connections.activities.api.GetAllActivities;
@@ -71,7 +73,9 @@ import com.ibm.sbt.test.js.connections.activities.api.UpdateActivityNode;
 	MoveActivityNodeToSection.class,
 	UpdateActivity.class,
 	UpdateActivityMember.class,
-	UpdateActivityNode.class})
+	UpdateActivityNode.class,
+	GetActivityNode.class,
+	GetActivityNodes.class})
 public class ActivitiesTestSuite {
 	@AfterClass
 	public static void cleanup() {

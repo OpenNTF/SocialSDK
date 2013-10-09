@@ -80,7 +80,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang, conn) {
 		ActivityNodeXPath : {
 			entry : "/a:entry",
 			uid : "a:id",
-			activityId : "snx:activity",
+			activityUuid : "snx:activity",
 			title : "a:title",
 			updated : "a:updated",
 			published : "a:published",
@@ -100,10 +100,10 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang, conn) {
 			contributorUserState : "a:contributor/snx:userState",
 			contributorLdapid : "a:contributor/snx:ldapid",
 
-			entryType : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/type']/@label",
+			type : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/type']/@label",
 			priority : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/priority']/@label",
 
-			coummunityId : "snx:communityUuid",
+			coummunityUuid : "snx:communityUuid",
 			communityUrl : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/container']/@href",
 
 			dueDate : "snx:duedate",
@@ -147,7 +147,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang, conn) {
 			frequency : "@snx:frequency",
 			entries : "app:categories/a:category",
 			uid : "@term",
-			bin : "snx:bin"
+			bin : "@snx:bin"
 		},
 
 		/**
@@ -194,6 +194,11 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang, conn) {
 		 * Get Activity node feed
 		 */
 		AtomActivityNode : "${activities}/service/atom2/activitynode",
+		
+		/**
+		 * Get feed of all Activity Nodes in an Activity
+		 */
+		AtomActivityNodes : "${activities}/service/atom2/descendants", //?nodeUuid="
 
 		/**
 		 * Get Activity Node feed from Trash
@@ -218,7 +223,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang, conn) {
 		/**
 		 * Get a member for an activity
 		 */
-		AtomActivitiesMember : "${activities}/service/atom2/acl?activityUuid={activityId}&amp;memberid={memberId}",
+		AtomActivitiesMember : "${activities}/service/atom2/acl?activityUuid={activityUuid}&amp;memberid={memberId}",
 
 		/**
 		 * Get all tags for an activity

@@ -15,16 +15,12 @@
  */
 package com.ibm.sbt.test.js.connections.activities.api;
 
-import static org.junit.Assert.assertTrue;
-
 import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.ibm.sbt.automation.core.test.BaseAuthServiceTest;
-import com.ibm.sbt.automation.core.test.BaseTest.AuthType;
 import com.ibm.sbt.automation.core.test.connections.BaseActivitiesTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 import com.ibm.sbt.services.client.connections.activity.Activity;

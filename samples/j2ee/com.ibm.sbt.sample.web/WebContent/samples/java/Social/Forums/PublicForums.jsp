@@ -53,7 +53,7 @@
 				out.println("author name : "+author.getName());
 				out.println("author state : "+author.getState());
 				out.println("author email : "+author.getEmail());
-				out.println("author uid : "+author.getUid());
+				out.println("author uid : "+author.getUserid());
 				out.println("forum title : "+entry.getTitle());
 				out.println("<br><br>");
 			}

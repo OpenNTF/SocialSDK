@@ -27,6 +27,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
 	var CategoryForum = "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/type\" term=\"forum-forum\"></category>";
 	var CategoryTopic = "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/type\" term=\"forum-topic\"></category>";
 	var CategoryReply = "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/type\" term=\"forum-reply\"></category>";
+	var CategoryRecommendation = "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/type\" term=\"recommendation\"></category>";
     
 	var CommunityTmpl = "<snx:communityUuid xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\">${getCommunityUuid}</snx:communityUuid>";
 	var TopicTmpl = "<thr:in-reply-to xmlns:thr=\"http://purl.org/syndication/thread/1.0\" ref=\"urn:lsid:ibm.com:forum:${getForumUuid}\" type=\"application/atom+xml\" href=\"\"></thr:in-reply-to>";
@@ -156,7 +157,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         getTopics : function(args) {
         	return this.service.getTopics(this.getForumUuid(), args);
         },
-        
+
         /**
          * Loads the forum object with the atom entry associated with the
          * forum. By default, a network call is made to load the atom entry
@@ -463,8 +464,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         /**
          * Return the recommendations url of the forum topic.
          * 
-         * @method getEditUrl
-         * @return {String} Edit url
+         * @method getRecommendationsUrl
+         * @return {String} Recommendations url
          */
         getRecommendationsUrl : function() {
             return this.getAsString("recommendationsUrl");
@@ -485,7 +486,28 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @method getReplies
          */
         getReplies : function(args) {
-        	return this.service.getForumReplies(this.getTopicUuid(), args);
+        	return this.service.getForumTopicReplies(this.getTopicUuid(), args);
+        },
+        
+        /**
+         * To like this topic in a stand-alone forum, create forum recommendation to the forum topic resources.
+         * 
+         * @method deleteRecommendation
+         * @param args
+         */
+        createRecommendation : function(args) {
+            return this.service.createForumRecommendation(this.getTopicUuid(), args);
+        },
+        
+        /**
+         * Delete a recommendation of this topic in the forum.
+         * Only the user who have already recommended the post can delete it's own recommendation.
+         * 
+         * @method deleteRecommendation
+         * @param args
+         */
+        deleteRecommendation : function(args) {
+            return this.service.deleteForumRecommendation(this.getTopicUuid(), args);
         },
         
         /**
@@ -590,11 +612,12 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         	if (!this.getTopicUuid()) {
         		return "";
         	}
-            var transformer = function(value,key) {
-                return value;
-            };
-            var postData = stringUtil.transform(ReplyTmpl, this, transformer, this);
-            return stringUtil.trim(postData);
+        	var entryData = "";
+        	if (this.isAnswer()) {
+        		entryData += stringUtil.transform(FlagTmpl, this, function(v,k) { return consts.FlagAnswer; }, this);
+        	}
+        	entryData += stringUtil.transform(ReplyTmpl, this, function(v,k) { return v; }, this);
+            return stringUtil.trim(entryData);
         },
 
         /**
@@ -624,7 +647,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * entry document.
          * 
          * @method getTopicUuid
-         * @return {String} ID of the forum topic
+         * @return {String} ID of the forum reply
          */
         getTopicUuid : function() {
             var uid = this.getAsString("topicUuid");
@@ -632,13 +655,34 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         },
 
         /**
-         * Sets id of IBM Connections forum.
+         * Sets id of IBM Connections forum reply.
          * 
          * @method setTopicUuid
          * @param {String} topicUuid Id of the forum topic
          */
         setTopicUuid : function(topicUuid) {
             return this.setAsString("topicUuid", topicUuid);
+        },
+        
+        /**
+         * Return the value of id of the post that this is a repy to.
+         * 
+         * @method getReplyToPostUuid
+         * @returns {String} postUuid Id of the forum post
+         */
+        getReplyToPostUuid : function() {
+        	var uid = this.getAsString("replyTo");
+        	return extractForumUuid(uid);
+        },
+
+        /**
+         * Sets the value of id of the post that this is a repy to.
+         * 
+         * @method setReplyToPostUuid
+         * @param {String} postUuid Id of the forum post
+         */
+        setReplyToPostUuid : function(postUuid) {
+        	return this.setAsString("replyTo", postUuid);
         },
 
         /**
@@ -664,6 +708,86 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         },
         
         /**
+         * If true, indicates that the reply is an accepted answer.
+         * 
+         * @method isAnswered
+         * @return {Boolean} 
+         */
+        isAnswer : function() {
+        	return this.getAsBoolean("answer");
+        },
+        
+        /**
+         * Set to true, indicates that the reply is an accepted answer. 
+         * 
+         * @method setAnswer
+         * @param answer
+         * @return {Boolean} 
+         */
+        setAnswer : function(answer) {
+        	return this.setAsBoolean("answer", answer);
+        },
+        
+        /**
+         * If true, this forum reply has not been recommended by the current user.
+         * 
+         * @method isNotRecommendedByCurrentUser
+         * @returns {Boolean}
+         */
+        isNotRecommendedByCurrentUser : function() {
+        	return this.getAsBoolean("notRecommendedByCurrentUser");
+        },
+        
+        /**
+         * Return the recommendations url of the forum reply.
+         * 
+         * @method getRecommendationsUrl
+         * @return {String} Recommendations url
+         */
+        getRecommendationsUrl : function() {
+            return this.getAsString("recommendationsUrl");
+        },
+
+        /**
+         * Get a list for forum recommendations that includes the recommendations for this forum reply.
+         * 
+         * @method getRecommendations
+         */
+        getRecommendations : function(args) {
+        	return this.service.getForumRecommendations(this.getReplyUuid(), args);
+        },
+        
+        /**
+         * Get a list for forum replies that includes the replies for this forum reply.
+         * 
+         * @method getReplies
+         */
+        getReplies : function(args) {
+        	return this.service.getForumReplyReplies(this.getReplyUuid(), args);
+        },
+        
+        /**
+         * To like this reply in a stand-alone forum, create forum recommendation to the forum reply resources.
+         * 
+         * @method deleteRecommendation
+         * @param args
+         */
+        createRecommendation : function(args) {
+            return this.service.createForumRecommendation(this.getReplyUuid(), args);
+        },
+        
+        /**
+         * Delete a recommendation of this reply in the forum.
+         * Only the user who have already recommended the post can delete it's own recommendation.
+         * 
+         * @method deleteRecommendation
+         * @param args
+         */
+        deleteRecommendation : function(args) {
+            return this.service.deleteForumRecommendation(this.getReplyUuid(), args);
+        },
+        
+        /**
          * Loads the forum reply object with the atom entry associated with the
          * forum reply. By default, a network call is made to load the atom entry
          * document in the forum reply object.
@@ -673,8 +797,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          */
         load : function(args) {
             // detect a bad request by validating required arguments
-            var topicUuid = this.getReplyUuid();
-            var promise = this.service._validateReplyUuid(topicUuid);
+            var replyUuid = this.getReplyUuid();
+            var promise = this.service._validateReplyUuid(replyUuid);
             if (promise) {
                 return promise;
             }
@@ -765,7 +889,9 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
      */
     var ForumRecommendation = declare(AtomEntity, {
 
-    	categoryScheme : null,
+    	xpath : consts.ForumRecommendationXPath,
+    	contentType : "text",
+    	categoryScheme : CategoryRecommendation,
     	
         /**
          * Construct a Forum Tag entity.
@@ -774,8 +900,53 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @param args
          */
         constructor : function(args) {
-        }
+        },
     
+        /**
+         * Return the value of title from ATOM entry document.
+         * 
+         * @method getTitle
+         * @return {String} ATOM entry title
+         */
+        getTitle : function() {
+            return this.getAsString("title") || "liked";
+        },
+
+	    /**
+	     * Return the value of IBM Connections recommendation ID from recommendation ATOM
+	     * entry document.
+	     * 
+	     * @method getRecommendationUuid
+	     * @return {String} ID of the recommendation topic
+	     */
+	    getRecommendationUuid : function() {
+	        var uid = this.getAsString("id");
+            return extractForumUuid(uid);
+	    },
+
+        /**
+         * Return the value of IBM Connections post ID from recommendation ATOM
+         * entry document.
+         * 
+         * @method getPostUuid
+         * @return {String} ID of the forum post
+         */
+        getPostUuid : function() {
+        	var postUuid = this.getAsString("postUuid");
+            return this.service.getUrlParameter(postUuid, "postUuid") || postUuid;
+        },
+        
+        /**
+         * Set the value of IBM Connections post ID from recommendation ATOM
+         * entry document.
+         * 
+         * @method setPostUuid
+         * @return {String} ID of the forum post
+         */
+        setPostUuid : function(postUuid) {
+            return this.setAsString("postUuid", postUuid);
+        }        
+
     });
     
     /**
@@ -871,6 +1042,27 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         }
     };
 
+    /*
+     * Callbacks used when reading a feed that contains forum recommendation entries.
+     */
+    var ForumRecommendationFeedCallbacks = {
+        createEntities : function(service,data,response) {
+            return new XmlDataHandler({
+                service : service,
+                data : data,
+                namespaces : consts.Namespaces,
+                xpath : consts.ForumsFeedXPath
+            });
+        },
+        createEntity : function(service,data,response) {
+            return new ForumRecommendation({
+                service : service,
+                data : data
+            });
+        }
+    };
+
+    
     /**
      * ForumsService class.
      * 
@@ -940,13 +1132,13 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * Get a feed that includes forums created by the authenticated user or associated with communities to which the user belongs.
          * 
          * @method getMyForums
-         * @param requestArgs
+         * @param args
          */
-        getMyForums: function(requestArgs) {
+        getMyForums: function(args) {
             var options = {
                 method : "GET",
                 handleAs : "text",
-                query : requestArgs || {}
+                query : args || {}
             };
             
             return this.getEntities(consts.AtomForumsMy, options, ForumFeedCallbacks);
@@ -989,13 +1181,13 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * Get a feed that includes all stand-alone and forum forums created in the enterprise.
          * 
          * @method getAllForums
-         * @param requestArgs
+         * @param args
          */
-        getPublicForums: function(requestArgs) {
+        getPublicForums: function(args) {
             var options = {
                 method : "GET",
                 handleAs : "text",
-                query : requestArgs || {}
+                query : args || {}
             };
             
             return this.getEntities(consts.AtomForumsPublic, options, ForumFeedCallbacks);
@@ -1009,7 +1201,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @param args
          * @returns
          */
-        getForumTopics: function(forumUuid, requestArgs) {
+        getForumTopics: function(forumUuid, args) {
             var promise = this._validateForumUuid(forumUuid);
             if (promise) {
                 return promise;
@@ -1054,12 +1246,12 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         /**
          * Get a list for forum replies that includes the replies in the specified topic.
          * 
-         * @method getReplies
+         * @method getForumTopicReplies
          * @param topicUuid
          * @param args
          * @returns
          */
-        getForumReplies: function(topicUuid, args) {
+        getForumTopicReplies: function(topicUuid, args) {
             var promise = this._validateTopicUuid(topicUuid);
             if (promise) {
                 return promise;
@@ -1077,6 +1269,68 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         },
         
         /**
+         * Get a list for forum replies that includes the replies in the specified reply.
+         * 
+         * @method getForumReplyReplies
+         * @param replyUuid
+         * @param args
+         * @returns
+         */
+        getForumReplyReplies: function(replyUuid, args) {
+            var promise = this._validateReplyUuid(replyUuid);
+            if (promise) {
+                return promise;
+            }
+            
+            var requestArgs = lang.mixin({ replyUuid : replyUuid }, args || {});
+            
+            var options = {
+                method : "GET",
+                handleAs : "text",
+                query : requestArgs
+            };
+            
+            return this.getEntities(consts.AtomReplies, options, ForumReplyFeedCallbacks);
+        },
+        
+        /**
+         * Get a list for forum replies that includes the replies in the specified post.
+         * The post uuid must be specified in the args as either:
+         *     { topicUuid : "<topicUuid>" } or { replyUuid : "<replyUuid>" } 
+         * 
+         * @method getForumReplies
+         * @param topicUuid
+         * @param args
+         * @returns
+         */
+        getForumReplies: function(args) {
+            var options = {
+                method : "GET",
+                handleAs : "text",
+                query : args
+            };
+            
+            return this.getEntities(consts.AtomReplies, options, ForumReplyFeedCallbacks);
+        },
+        
+        /**
+         * Retrieve a list of all forum entries, add communityUuid to the requestArgs object to get the forums related to a specific community.
+         * 
+         * @method getForums
+         * @param {Object} requestArgs Object containing the query arguments to be 
+         * sent (defined in IBM Connections Communities REST API) 
+         */
+        getForums : function(requestArgs) {
+            var options = {
+                method : "GET",
+                handleAs : "text",
+                query : requestArgs || {}
+            };
+                
+            return this.getEntities(consts.AtomForums, options, ForumFeedCallbacks);
+        },
+
+        /**
          * Retrieve a forum entry, use the edit link for the forum entry 
          * which can be found in the my communities feed.
          * 
@@ -1093,23 +1347,6 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             return forum.load(args);
         },
         
-        /**
-         * Retrieve a list of all forum entries, add communityUuid to the requestArgs object to get the forums related to a specific community.
-         * 
-         * @method getForums
-         * @param {Object} requestArgs Object containing the query arguments to be 
-         * sent (defined in IBM Connections Communities REST API) 
-         */
-        getForums : function(requestArgs){
-            var options = {
-                method : "GET",
-                handleAs : "text",
-                query : requestArgs || {}
-            };
-                
-            return this.getEntities(consts.AtomForums, options, ForumFeedCallbacks);
-        },
-
         /**
          * Create a forum by sending an Atom entry document containing the 
          * new forum to the My Forums resource.
@@ -1453,7 +1690,79 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             
             return this.deleteEntity(consts.AtomReply, options, replyUuid);
         },
+
+        /**
+         * Retrieve complete information about recommendations to a post(topic/reply) in a stand-alone forum.
+         * 
+         * @method getForumRecommendation
+         * @param postUuid
+         * @param args
+         */
+        getForumRecommendation : function(postUuid, args) {
+            var forumRecommendation = new ForumRecommendation({
+                service : this,
+                _fields : { postUuid : postUuid }
+            });
+            return forumRecommendation.load(args);
+        },
         
+        /**
+         * To like a post(topic/reply) in a stand-alone forum, create forum recommendation to the forum topic/reply resources.
+         * 
+         * @method createForumRecommendation
+         * @param recommendationOrJson
+         * @param args
+         */
+        createForumRecommendation : function(recommendationOrJson, args) {
+            var forumRecommendation = this._toForumRecommendation(recommendationOrJson);
+            var promise = this._validateForumRecommendation(forumRecommendation, false, args);
+            if (promise) {
+                return promise;
+            }
+
+            var callbacks = {};
+            callbacks.createEntity = function(service,data,response) {
+                forumRecommendation.setData(data);
+                return forumRecommendation;
+            };
+
+            var options = {
+                method : "POST",
+                query : args || { postUuid : forumRecommendation.getPostUuid() },
+                headers : consts.AtomXmlHeaders,
+                data : forumRecommendation.createPostData()
+            };
+            
+            return this.updateEntity(consts.AtomRecommendationEntries, options, callbacks, args);
+        },
+        
+        /**
+         * Delete a recommendation of a post(topic or reply) in a forum.
+         * Only the user who have already recommended the post can delete it's own recommendation.
+         * 
+         * @method deleteForumRecommendation
+         * @param postUuid
+         * @param args
+         */
+        deleteForumRecommendation : function(postUuid, args) {
+            var promise = this._validatePostUuid(postUuid);
+            if (promise) {
+                return promise;
+            }            
+           
+            var requestArgs = lang.mixin({
+            	postUuid : postUuid
+            }, args || {});
+            
+            var options = {
+                method : "DELETE",
+                query : requestArgs,
+                handleAs : "text"
+            };
+            
+            return this.deleteEntity(consts.AtomRecommendationEntries, options, postUuid);
+        },
+
         //
         // Internals
         //
@@ -1491,6 +1800,18 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             }
             if (checkUuid && !forumReply.getReplyUuid()) {
                 return this.createBadRequestPromise("Invalid argument, forum reply with UUID must be specified.");
+            }
+        },
+        
+        /*
+         * Validate a forum recommendation and return a Promise if invalid.
+         */
+        _validateForumRecommendation : function(forumRecommendation,checkUuid) {
+            if (!forumRecommendation || !forumRecommendation.getPostUuid()) {
+                return this.createBadRequestPromise("Invalid argument, forum recommendation with postUuid must be specified.");
+            }
+            if (checkUuid && !forumRecommendation.getRecommendationUuid()) {
+                return this.createBadRequestPromise("Invalid argument, forum recommendation with UUID must be specified.");
             }
         },
         
@@ -1586,6 +1907,36 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 return new ForumReply({
                     service : this,
                     _fields : lang.mixin({}, replyOrJsonOrString)
+                });
+            }
+        },
+        
+        /*
+         * Return a ForumRecommendation instance from ForumRecommendation, ForumTopic, 
+         * ForumReply or JSON or String. Throws an error if the argument was neither.
+         */
+        _toForumRecommendation : function(entityOrJsonOrString) {
+            if (entityOrJsonOrString instanceof ForumRecommendation) {
+                return entityOrJsonOrString;
+            } else {
+                if (lang.isString(entityOrJsonOrString)) {
+                	entityOrJsonOrString = {
+                        postUuid : entityOrJsonOrString
+                    };
+                }
+                if (entityOrJsonOrString instanceof ForumTopic) {
+                	entityOrJsonOrString = {
+                        postUuid : entityOrJsonOrString.getTopicUuid()
+                    };
+                }
+                if (entityOrJsonOrString instanceof ForumReply) {
+                	entityOrJsonOrString = {
+                        postUuid : entityOrJsonOrString.getReplyUuid()
+                    };
+                }
+                return new ForumRecommendation({
+                    service : this,
+                    _fields : lang.mixin({}, entityOrJsonOrString)
                 });
             }
         }

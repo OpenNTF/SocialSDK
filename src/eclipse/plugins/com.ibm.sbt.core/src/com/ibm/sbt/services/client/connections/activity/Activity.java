@@ -127,10 +127,18 @@ public class Activity extends BaseEntity {
 		setAsString(ActivityXPath.Content, goal);
 	}
 	
-	public void setContent(String goal){
-		setGoal(goal);
+	/**
+	 * Method fetches the Content Type
+	 * @param content
+	 */
+	public void setContent(String content){
+		setGoal(content);
 	}
 	
+	/**
+	 * Method allows you to set the Content Type while creating an Activity(Node)
+	 * @param type
+	 */
 	public void setContentType(String type){
 		if(type != null) {
 			setAsString(ActivityXPath.ContentType, type);

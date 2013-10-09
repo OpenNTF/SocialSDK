@@ -92,7 +92,7 @@ public class ActivityTransformer extends AbstractBaseTransformer {
 			if(currentElement.contains("tag")){
 				tagsXml += getXMLRep(getStream(SOURCEPATH + "TagTmpl.xml"), "tag", XmlTextUtil.escapeXMLChars(currentValue));
 			}
-			if(currentElement.contains("Content") && !currentElement.equals("ContentType")){
+			if(currentElement.contains("Content") && !StringUtil.equals(currentElement, "ContentType")){
 				contentXml += getXMLRep(getStream(SOURCEPATH + "ContentTmpl.xml"), "Content", XmlTextUtil.escapeXMLChars(currentValue));
 				String type = "";
 				if(fieldmap.containsKey("ContentType")) {
@@ -118,7 +118,7 @@ public class ActivityTransformer extends AbstractBaseTransformer {
 			if(currentElement.contains("DueDate")){
 				dueDateXml = getXMLRep(getStream(SOURCEPATH+ "DueDateTmpl.xml"), "DueDate", XmlTextUtil.escapeXMLChars(currentValue));
 			}
-			if(currentElement.contains("position") || currentElement.equalsIgnoreCase("position")){
+			if(currentElement.contains("position") || StringUtil.equalsIgnoreCase(currentElement, "position")){
 				positionXml += getXMLRep(getStream(SOURCEPATH + "PositionTmpl.xml"), "position", XmlTextUtil.escapeXMLChars(currentValue));
 			}
 			if(currentElement.contains("assignedToId") || currentElement.contains("assignedToName")){

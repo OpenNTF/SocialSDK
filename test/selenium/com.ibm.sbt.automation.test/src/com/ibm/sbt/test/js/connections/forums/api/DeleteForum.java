@@ -32,46 +32,30 @@ public class DeleteForum extends BaseForumsTest {
     static final String SNIPPET_ID = "Social_Forums_API_DeleteForum";
 
     @Test
-    public void testDeleteCommunity() {
-        addSnippetParam("ForumService.forumUuid", "");
+    public void testDeleteForum() {
+    	addSnippetParam("ForumService.forumUuid", forum.getForumUuid());
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         JsonJavaObject json = previewPage.getJson();
         Assert.assertNull("Unexpected error detected on page", json.getString("code"));
-        //Assert.assertEquals(forum.getForumUuid(), json.getString("forumUuid"));
-        
-        // forum has already been deleted
-        //forum = null;
-    }
-    
-    @Test
-    public void testConfirmDeleteCommunity() {
-    	addSnippetParam("ForumService.forumUuid", "");
-        
-        JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
-        JsonJavaObject json = previewPage.getJson();
-        Assert.assertNull("Unexpected error detected on page", json.getString("code"));
-        //Assert.assertEquals(forum.getForumUuid(), json.getString("forumUuid"));
+        Assert.assertEquals(forum.getForumUuid(), json.getString("forumUuid"));
         
         //forum = getForum(forum.getForumUuid(), false);
         //Assert.assertNull("Deleted forum is still available", forum);
-
-        // forum has already been deleted
-        //forum = null;
     }
     
     @Test
-    public void testDeleteCommunityError() {
+    public void testDeleteForumError() {
     	addSnippetParam("ForumService.forumUuid", "Foo");
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         JsonJavaObject json = previewPage.getJson();
         Assert.assertEquals(404, json.getInt("code"));
-        Assert.assertEquals("The referenced forum does not exist.", json.getString("message"));
+        Assert.assertEquals("CLFRV0008E: Error, unable to find object with uuid: Foo", json.getString("message"));
     }
     
     @Test
-    public void testDeleteCommunityInvalidArg() {
+    public void testDeleteForumInvalidArg() {
         setAuthType(AuthType.NONE);
     	addSnippetParam("ForumService.forumUuid", "");
         

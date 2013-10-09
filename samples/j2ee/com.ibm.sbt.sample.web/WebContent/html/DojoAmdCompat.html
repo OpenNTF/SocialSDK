@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%;">
+
+<head>
+<meta charset="utf-8">
+<title>Dojo Require Sample</title>
+<link href="images/sbt.png" rel="shortcut icon">
+<!--  
+<script type="text/javascript">
+var djConfig = {
+	    parseOnLoad: true,
+	    locale: 'en'
+	};
+</script>
+<script type="text/javascript" src="/sbt.dojo143/dojo/dojo.js"></script> 
+-->
+
+<script type="text/javascript">
+djConfig={
+	baseUrl: 'https://qs.renovations.com:444/connections/resources/web/dojo/',
+	localizationComplete: true
+}; 
+</script>
+<script src="https://qs.renovations.com:444/connections/resources/web/_js?include=dojo.dojo.js~&etag=20130801.182141&lang=en&country=ie" type="text/javascript"></script>
+</head>
+
+<body>
+	<div id="content"></div>
+	
+	<script type="text/javascript">
+	dojo.registerModulePath('sbt','/sbt/js/sdk/sbt');
+    dojo.registerModulePath('sbt._bridge','/sbt/js/sdk/_bridges/dojo');
+    dojo.registerModulePath('sbt.widget','/sbt/js/sdk/dojo');
+    
+    dojo.require('sbt._bridge.amdcompat');
+    
+    define('sbt/config',['sbt/ErrorTransport','sbt/Endpoint','sbt/Proxy','sbt/_bridge/Transport','sbt/authenticator/Basic'],function(ErrorTransport,Endpoint,Proxy,Transport,Basic){
+        var sbt = {};
+        sbt.Properties={"libraryUrl":"https:\/\/localhost:8443\/sbt.sample.web\/library","serviceUrl":"https:\/\/localhost:8443\/sbt.sample.web\/service","sbtUrl":"https:\/\/localhost:8443\/sbt\/js\/sdk"};
+        sbt.Endpoints={
+            'connections':new Endpoint({"authType":"basic","platform":"connections","authenticator":new Basic({"url":"https:\/\/localhost:8443\/sbt\/js\/sdk"}),"proxyPath":"connections","isAuthenticated":true,"transport":new Transport({}),"serviceMappings": {},"name":"connections","authenticationErrorCode":401,"baseUrl":"https:\/\/qs.renovations.com:444","apiVersion":"4.5","proxy":new Proxy({proxyUrl:'https://localhost:8443/sbt.sample.web/service/proxy'})})
+        };
+        sbt.findEndpoint=function(endpointName) {
+            return this.Endpoints[endpointName];
+        };
+        return sbt;
+    });
+    
+    require([ "sbt/config", "sbt/lang", "sbt/dom" ], 
+   	    function(config,lang,dom) {
+   	    
+        var endpoint = config.findEndpoint("connections");
+
+   	    endpoint.request("/communities/service/atom/communities/all", { method : "GET" }).then(
+   	        function(response) {
+   	            dom.setText("content", response);
+   	        }, 
+   	        function(error) {
+   	            dom.setText("content", error);
+   	        }
+   	    );
+   	    
+   	});
+	</script>
+
+</body>
+</html>

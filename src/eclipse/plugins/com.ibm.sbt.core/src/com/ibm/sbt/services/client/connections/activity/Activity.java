@@ -127,8 +127,22 @@ public class Activity extends BaseEntity {
 		setAsString(ActivityXPath.Content, goal);
 	}
 	
-	public void setContent(String goal){
-		setGoal(goal);
+	/**
+	 * Method fetches the Content Type
+	 * @param content
+	 */
+	public void setContent(String content){
+		setGoal(content);
+	}
+	
+	/**
+	 * Method allows you to set the Content Type while creating an Activity(Node)
+	 * @param type
+	 */
+	public void setContentType(String type){
+		if(type != null) {
+			setAsString(ActivityXPath.ContentType, type);
+		}
 	}
 	
 	public void setCommunityUuid(String communityUuid){
@@ -218,6 +232,10 @@ public class Activity extends BaseEntity {
 		return getAsString(ActivityXPath.Content);
 	}
 	
+	public String getContentType() {
+		return getAsString(ActivityXPath.ContentType);
+	}
+	
 	public String getEntryType() {
 		return getAsString(ActivityXPath.Category);
 	}
@@ -287,6 +305,7 @@ public class Activity extends BaseEntity {
 		restoreActivity.setId(this.getActivityId());
 		restoreActivity.setEntryType(this.getEntryType());
 		restoreActivity.setGoal(this.getContent());
+		restoreActivity.setContentType(this.getContentType());
 		restoreActivity.setTitle(this.getTitle());
 		restoreActivity.setCommunityUuid(this.getCommunityUuid());
 		restoreActivity.setCommunityLink(this.getCommunityLink());

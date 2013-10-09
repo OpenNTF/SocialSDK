@@ -7,5 +7,12 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/com.ibm.sbt.core"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/com.ibm.commons"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/com.ibm.commons.xml"/>
+	<classpathentry kind="lib" path="/com.ibm.sbt.libs.java/lib/commons-codec-1.3.jar"/>
+	<classpathentry kind="lib" path="/com.ibm.sbt.libs.java/lib/commons-fileupload-1.2.2.jar"/>
+	<classpathentry kind="lib" path="/com.ibm.sbt.libs.java/lib/commons-io-2.4.jar"/>
+	<classpathentry kind="lib" path="/com.ibm.sbt.libs.java/lib/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="/com.ibm.sbt.libs.java/lib/httpclient-4.2.1.jar"/>
+	<classpathentry kind="lib" path="/com.ibm.sbt.libs.java/lib/httpcore-4.2.1.jar"/>
+	<classpathentry kind="lib" path="/com.ibm.sbt.libs.java/lib/httpmime-4.2.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -78,8 +78,15 @@ function updateTopic(topic, title, content, tags, question, pinned, locked, dom)
     topic.setLocked(locked);
     topic.setQuestion(question);
     topic.update().then(               
-        function(topicUuid) {
-            handleTopicUpdated(topic, dom);
+        function(topic) {
+        	topic.load().then(
+                function(topic) { 
+                    handleTopicUpdated(topic, dom);
+                },
+                function(error) {
+                    handleError(dom, error);
+                }
+            );
         },
         function(error) {
             handleError(dom, error);
@@ -92,7 +99,7 @@ function deleteTopic(topic, dom) {
     
     topic.remove().then(               
         function() { 
-            handleTopicRemoved(community, dom);
+            handleTopicRemoved(topic, dom);
         },
         function(error) {
             handleError(dom, error);
@@ -103,7 +110,7 @@ function deleteTopic(topic, dom) {
 function handleTopicCreated(topic, dom) {
     if (!topic) {
     	resetTopic(dom);
-        displayMessage(dom, "Unable to load topic."); 
+        displayMessage(dom, "Unable to create topic."); 
         return;
     }
     
@@ -119,19 +126,24 @@ function handleTopicCreated(topic, dom) {
     dom.byId("topicPin").disabled = false;
     
     currentTopic = topic;
+    
+    resetButtons(dom);
 
     displayMessage(dom, "Successfully created topic: " + topic.getTopicUuid());
 }
 
 function handleTopicRemoved(topic, dom) {
-	resetTopic(dom);
-    
     currentTopic = null;
 
+	resetTopic(dom);
+	resetButtons(dom);
+	
     displayMessage(dom, "Successfully deleted topic: " + topic.getTopicUuid());
 }
 
 function handleTopicUpdated(topic, dom) {
+	resetButtons(dom);
+	
     displayMessage(dom, "Successfully updated topic: " + topic.getTopicUuid());
 }
 
@@ -162,8 +174,28 @@ function addOnClickHandlers(forumService, dom) {
     };
 }
 
+function resetButtons(dom) {
+	var startBtn = dom.byId("startBtn");
+	var deleteBtn = dom.byId("deleteBtn");
+	var updateBtn = dom.byId("updateBtn");
+	var likeBtn = dom.byId("likeBtn");
+	
+	if (currentTopic) {
+		deleteBtn.disabled = false;
+		updateBtn.disabled = false;
+		likeBtn.innerHTML = currentTopic.isNotRecommendedByCurrentUser() ? "Like" : "Unlike";
+		likeBtn.disabled = false;
+	} else {
+		deleteBtn.disabled = true;
+		updateBtn.disabled = true;
+		likeBtn.innerHTML = "Like Topic";
+		likeBtn.disabled = true;
+	}
+}
+
 function resetTopic(dom) {
     dom.byId("topicUuid").value = "";
+    dom.byId("communityUuid").value = "";
     dom.byId("topicTitle").value = "";
     dom.byId("topicContent").value = "";
     dom.byId("topicTags").value = "";

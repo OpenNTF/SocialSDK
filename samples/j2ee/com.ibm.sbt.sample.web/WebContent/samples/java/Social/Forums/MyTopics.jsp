@@ -52,7 +52,7 @@
 				out.println("author name : "+author.getName()+"<br>");
 				out.println("author state : "+author.getState()+"<br>");
 				out.println("author email : "+author.getEmail()+"<br>");
-				out.println("author uid : "+author.getUid()+"<br>");
+				out.println("author uid : "+author.getUserid()+"<br>");
 				out.println("forum title : "+entry.getTitle()+"<br>");
 				out.println("<br><br><br>");
 			}

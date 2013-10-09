@@ -1,5 +1,5 @@
-require(["sbt/connections/ForumService", "sbt/dom"], 
-    function(ForumService,dom) {
+require(["sbt/connections/ForumService", "sbt/dom", "sbt/lang"], 
+    function(ForumService,dom,lang) {
 		var forumToString = function(forum) {
 			return (!forum) ? "" : forum.getTitle() + " [uuid=" + forum.getForumUuid() + "]";
 		};
@@ -14,62 +14,99 @@ require(["sbt/connections/ForumService", "sbt/dom"],
 		};
 
 		var replyToString = function(reply) {
-			return (!reply) ? "" : reply.getTitle() + " [uuid=" + reply.getReplyUuid() + "]";
+			return (!reply) ? "" : lang.trim(reply.getContent()) + " [uuid=" + reply.getReplyUuid() + "]";
 		};
 		
-        var createRow = function(forum, topic, reply) {
-            var table = dom.byId("forumsTable");
-            var tr = document.createElement("tr");
-            table.appendChild(tr);
-            var td = document.createElement("td");
-            td.innerHTML = forumToString(forum);
-            tr.appendChild(td);
-            td = document.createElement("td");
-            td.innerHTML = topicToString(topic);
-            tr.appendChild(td);
-            td = document.createElement("td");
-            td.innerHTML = replyToString(reply);
-            tr.appendChild(td);
+        var addForumReply = function(forumReply, postUuid, forumService, ul) {
+        	// only display replies to the specified post
+        	if (postUuid != forumReply.getReplyToPostUuid()) {
+        		return;
+        	}
+        	
+            var li = document.createElement("li");
+            li.innerHTML = replyToString(forumReply);
+            ul.appendChild(li);
+            
+            ul = document.createElement("ul");
+            li.appendChild(ul);
+            
+            getForumReplies({ replyUuid: forumReply.getReplyUuid() }, forumService, ul);
+        };
+        
+        var addForumTopic = function(forumTopic, forumService, ul) {
+            var li = document.createElement("li");
+            li.innerHTML = topicToString(forumTopic);
+            ul.appendChild(li);
+            
+            ul = document.createElement("ul");
+            li.appendChild(ul);
+            
+            getForumReplies({ topicUuid : forumTopic.getTopicUuid() }, forumService, ul);
+        };
+        
+        var addForum = function(forum, forumService) {
+        	var ul = dom.byId("forums");
+            var li = document.createElement("li");
+            li.innerHTML = forumToString(forum);
+            ul.appendChild(li);
+            
+            ul = document.createElement("ul");
+            li.appendChild(ul);
+            
+            getForumTopics(forum, forumService, ul);
+        };
+        
+		var getForumReplies = function(args, forumService, ul) {
+            forumService.getForumReplies(args).then(
+            	function(replies) {
+            		for(var i=0; i<replies.length; i++) {
+                        var reply = replies[i];
+                        var postUuid = args.topicUuid || args.replyUuid;
+                        addForumReply(reply, postUuid, forumService, ul);
+                    }
+            	},
+            	function(error) {
+            		displayError(error);
+            	}
+            );
+        };
+		
+		var getForumTopics = function(forum, forumService, ul) {
+            var forumUuid = forum.getForumUuid();
+            forumService.getForumTopics(forumUuid).then(
+            	function(topics) {
+            		for(var i=0; i<topics.length; i++) {
+                        var topic = topics[i];
+                        addForumTopic(topic, forumService, ul);
+                    }
+            	},
+            	function(error) {
+            		displayError(error);
+            	}
+            );
+        };
+		
+        var displayMessage = function(message) {
+        	dom.setText("info", message);
+        };
+
+        var displayError = function(error) {
+        	dom.setText("error", error.message);
         };
 
         var forumService = new ForumService();
         forumService.getMyForums().then(
             function(forums) {
                 if (forums.length == 0) {
-                    text = "You do not have any forums.";
+                	displayMessage("You do not have any forums.");
                 } else {
-                    var forum = forums[0];
-                    createRow(forum, null, null);
-                    
-                    var forumUuid = forum.getForumUuid();
-                    forumService.getForumTopics(forumUuid).then(
-                    	function(topics) {
-                    		for(var i=0; i<topics.length; i++) {
-                                var topic = topics[i];
-                                createRow(null, topic, null);
-                                
-                                var topicUuid = topic.getTopicUuid();
-                                forumService.getForumReplies(topicUuid).then(
-                                	function(replies) {
-                                		for(var i=0; i<replies.length; i++){
-                                            var reply = replies[i];
-                                            createRow(null, null, reply);
-                                        }
-                                	},
-                                	function(error) {
-                                		dom.setText("content", "Error code:" +  error.code + ", message:" + error.message);
-                                	}
-                                );
-                            }
-                    	},
-                    	function(error) {
-                    		dom.setText("content", "Error code:" +  error.code + ", message:" + error.message);
-                    	}
-                    );
+                	for (var i in forums) {
+                		addForum(forums[i], forumService);
+                	}
                 }
             },
             function(error) {
-                dom.setText("content", "Error code:" +  error.code + ", message:" + error.message);
+            	displayError(error);
             }       
     	);
     }

@@ -774,8 +774,32 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @param args
          */
         constructor : function(args) {
-        }
+        },
     
+	    /**
+	     * Return the value of IBM Connections recommendation ID from recommendation ATOM
+	     * entry document.
+	     * 
+	     * @method getRecommendationUuid
+	     * @return {String} ID of the recommendation topic
+	     */
+	    getRecommendationUuid : function() {
+	        var uid = this.getAsString("id");
+            return extractForumUuid(uid);
+	    },
+
+        /**
+         * Return the value of IBM Connections post ID from recommendation ATOM
+         * entry document.
+         * 
+         * @method getPostUuid
+         * @return {String} ID of the forum post
+         */
+        getPostUuid : function() {
+            var selfUrl = this.getSelfUrl();
+            return this.service.getUrlParameter(selfUrl, "postUuid");
+        },
+
     });
     
     /**
@@ -871,6 +895,27 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         }
     };
 
+    /*
+     * Callbacks used when reading a feed that contains forum recommendation entries.
+     */
+    var ForumRecommendationFeedCallbacks = {
+        createEntities : function(service,data,response) {
+            return new XmlDataHandler({
+                service : service,
+                data : data,
+                namespaces : consts.Namespaces,
+                xpath : consts.ForumsFeedXPath
+            });
+        },
+        createEntity : function(service,data,response) {
+            return new ForumRecommendation({
+                service : service,
+                data : data
+            });
+        }
+    };
+
+    
     /**
      * ForumsService class.
      * 
@@ -940,13 +985,13 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * Get a feed that includes forums created by the authenticated user or associated with communities to which the user belongs.
          * 
          * @method getMyForums
-         * @param requestArgs
+         * @param args
          */
-        getMyForums: function(requestArgs) {
+        getMyForums: function(args) {
             var options = {
                 method : "GET",
                 handleAs : "text",
-                query : requestArgs || {}
+                query : args || {}
             };
             
             return this.getEntities(consts.AtomForumsMy, options, ForumFeedCallbacks);
@@ -989,13 +1034,13 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * Get a feed that includes all stand-alone and forum forums created in the enterprise.
          * 
          * @method getAllForums
-         * @param requestArgs
+         * @param args
          */
-        getPublicForums: function(requestArgs) {
+        getPublicForums: function(args) {
             var options = {
                 method : "GET",
                 handleAs : "text",
-                query : requestArgs || {}
+                query : args || {}
             };
             
             return this.getEntities(consts.AtomForumsPublic, options, ForumFeedCallbacks);
@@ -1009,7 +1054,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @param args
          * @returns
          */
-        getForumTopics: function(forumUuid, requestArgs) {
+        getForumTopics: function(forumUuid, args) {
             var promise = this._validateForumUuid(forumUuid);
             if (promise) {
                 return promise;

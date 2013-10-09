@@ -119,19 +119,24 @@ function handleTopicCreated(topic, dom) {
     dom.byId("topicPin").disabled = false;
     
     currentTopic = topic;
+    
+    resetButtons(dom);
 
     displayMessage(dom, "Successfully created topic: " + topic.getTopicUuid());
 }
 
 function handleTopicRemoved(topic, dom) {
-	resetTopic(dom);
-    
     currentTopic = null;
 
+	resetTopic(dom);
+	resetButtons(dom);
+	
     displayMessage(dom, "Successfully deleted topic: " + topic.getTopicUuid());
 }
 
 function handleTopicUpdated(topic, dom) {
+	resetButtons(dom);
+	
     displayMessage(dom, "Successfully updated topic: " + topic.getTopicUuid());
 }
 
@@ -160,6 +165,25 @@ function addOnClickHandlers(forumService, dom) {
             updateTopic(currentTopic, title.value, content.value, tags.value, question.checked, pin.checked, lock.checked, dom);
         }
     };
+}
+
+function resetButtons(dom) {
+	var startBtn = dom.byId("startBtn");
+	var deleteBtn = dom.byId("deleteBtn");
+	var updateBtn = dom.byId("updateBtn");
+	var likeBtn = dom.byId("likeBtn");
+	
+	if (currentTopic) {
+		deleteBtn.disabled = false;
+		updateBtn.disabled = false;
+		likeBtn.innerHTML = currentTopic.isNotRecommendedByCurrentUser() ? "Like Topic" : "Unlike Topic";
+		likeBtn.disabled = false;
+	} else {
+		deleteBtn.disabled = true;
+		updateBtn.disabled = true;
+		likeBtn.innerHTML = "Like Topic";
+		likeBtn.disabled = true;
+	}
 }
 
 function resetTopic(dom) {

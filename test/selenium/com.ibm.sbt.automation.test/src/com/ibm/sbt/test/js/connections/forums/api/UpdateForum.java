@@ -21,6 +21,7 @@ import org.junit.Test;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.connections.BaseForumsTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
+import com.ibm.sbt.services.client.connections.forums.Forum;
 
 /**
  * @author mwallace
@@ -36,7 +37,7 @@ public class UpdateForum extends BaseForumsTest {
         String updatedTitle = "Updated Title - " + System.currentTimeMillis();
         String updatedContent = "Updated Content - " + System.currentTimeMillis();
         
-        //addSnippetParam("ForumService.forumUuid", forum.getForumUuid());
+        addSnippetParam("ForumService.forumUuid", forum.getForumUuid());
         addSnippetParam("ForumService.forumTitle", updatedTitle);
         addSnippetParam("ForumService.forumContent", updatedContent);
         
@@ -44,31 +45,10 @@ public class UpdateForum extends BaseForumsTest {
         JsonJavaObject json = previewPage.getJson();
         Assert.assertNull("Unexpected error detected on page", json.getString("code"));
         
-        //Assert.assertEquals(forum.getForumUuid(), json.getString("getForumUuid"));
-        Assert.assertEquals(updatedTitle, json.getString("getTitle"));
-        Assert.assertEquals(updatedContent, json.getString("getContent"));
-    }
-    
-    @Test
-    public void testUpdateForumDuplicate(){
-    	if (environment.isSmartCloud()) {
-    		return;
-    	}
-    	
-        String duplicateTitle = "Duplicate Title - " + System.currentTimeMillis();
-        String updatedContent = "Updated Content - " + System.currentTimeMillis();
-        //Forum forum2 = createForum(duplicateTitle, "public", "Content for duplicate test", "duplicate");
-        
-        //addSnippetParam("ForumService.forumUuid", forum.getForumUuid());
-        addSnippetParam("ForumService.forumTitle", duplicateTitle);
-        addSnippetParam("ForumService.forumContent", updatedContent);
-
-        JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
-        JsonJavaObject json = previewPage.getJson();
-        Assert.assertEquals(409, json.getInt("code"));
-        Assert.assertEquals("A forum with the requested name already exists, choose a different name and resubmit.", json.getString("message"));
-        
-		//deleteForum(forum2);
+        Forum uforum = getForum(forum.getForumUuid());
+        Assert.assertEquals(forum.getForumUuid(), json.getString("getForumUuid"));
+        Assert.assertEquals(updatedTitle, uforum.getTitle());
+        Assert.assertEquals(updatedContent, uforum.getContent());
     }
     
     @Test
@@ -80,7 +60,7 @@ public class UpdateForum extends BaseForumsTest {
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         JsonJavaObject json = previewPage.getJson();
         Assert.assertEquals(404, json.getInt("code"));
-        Assert.assertEquals("The referenced forum does not exist.", json.getString("message"));
+        Assert.assertEquals("CLFRV0008E: Error, unable to find object with uuid: Foo", json.getString("message"));
     }
     
 }

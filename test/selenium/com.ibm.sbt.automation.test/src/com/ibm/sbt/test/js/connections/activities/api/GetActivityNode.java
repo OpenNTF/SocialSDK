@@ -13,20 +13,24 @@ import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 import com.ibm.sbt.services.client.connections.activity.Activity;
 import com.ibm.sbt.services.client.connections.activity.ActivityNode;
 
-public class GetActivity extends BaseActivitiesTest {
+public class GetActivityNode extends BaseActivitiesTest {
 
-	static final String SNIPPET_ID = "Social_Activities_API_GetActivity";
+	static final String SNIPPET_ID = "Social_Activities_API_GetActivityNode";
 
 	Activity activity;
+	ActivityNode activityNode;
 
 	@Before
 	public void init() {
 		activity = createActivity();
 		addSnippetParam("sample.activityId", activity.getActivityId());
+		activityNode = createActivityNode(activity.getActivityId(), "Entry");
+		addSnippetParam("sample.activityNodeId", activityNode.getActivityId());
 	}
 
 	@After
 	public void destroy() {
+		deleteActivityNode(activityNode.getActivityId());
 		deleteActivity(activity.getActivityId());
 	}
 
@@ -34,7 +38,7 @@ public class GetActivity extends BaseActivitiesTest {
 	public void testGetActivity() {
 		JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
 		JsonJavaObject json = previewPage.getJson();
-		String activityId = json.getAsString("getActivityUuid");
-		Assert.assertNotNull(activityId);
+		String activityNodeId = json.getAsString("getActivityNodeUuid");
+		Assert.assertNotNull(activityNodeId);
 	}
 }

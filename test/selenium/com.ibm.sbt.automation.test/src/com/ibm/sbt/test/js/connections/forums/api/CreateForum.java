@@ -29,7 +29,7 @@ import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
  */
 public class CreateForum extends BaseForumsTest {
     
-    static final String SNIPPET_ID = "Social_Communities_API_CreateForum";
+    static final String SNIPPET_ID = "Social_Forums_API_CreateForum";
 
     public CreateForum() {
         createForum = false;
@@ -40,9 +40,7 @@ public class CreateForum extends BaseForumsTest {
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         JsonJavaObject json = previewPage.getJson();
         Assert.assertNull("Unexpected error detected on page", json.getString("code"));
-
-        String forumUuid = json.getString("getForumUuid");
-        Assert.assertNotNull(forumUuid);
+        assertForumProperties(json);
     }
     
 }

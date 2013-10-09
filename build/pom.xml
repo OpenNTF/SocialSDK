@@ -97,7 +97,8 @@
    				<include>**/*.png</include>
               </includes>
             </resource>
-          </webResources>        
+          </webResources> 
+          <outputFileNameMapping>@{artifactId}@.@{extension}@</outputFileNameMapping>       
         </configuration>
       </plugin>
       <plugin>

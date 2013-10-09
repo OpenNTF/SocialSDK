@@ -590,11 +590,12 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         	if (!this.getTopicUuid()) {
         		return "";
         	}
-            var transformer = function(value,key) {
-                return value;
-            };
-            var postData = stringUtil.transform(ReplyTmpl, this, transformer, this);
-            return stringUtil.trim(postData);
+        	var entryData = "";
+        	if (this.isAnswer()) {
+        		entryData += stringUtil.transform(FlagTmpl, this, function(v,k) { return consts.FlagAnswer; }, this);
+        	}
+        	entryData += stringUtil.transform(ReplyTmpl, this, function(v,k) { return v; }, this);
+            return stringUtil.trim(entryData);
         },
 
         /**
@@ -664,6 +665,37 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         },
         
         /**
+         * If true, indicates that the reply is an accepted answer.
+         * 
+         * @method isAnswered
+         * @return {Boolean} 
+         */
+        isAnswer : function() {
+        	return this.getAsBoolean("answer");
+        },
+        
+        /**
+         * Set to true, indicates that the reply is an accepted answer. 
+         * 
+         * @method setAnswer
+         * @param answer
+         * @return {Boolean} 
+         */
+        setAnswer : function(answer) {
+        	return this.setAsBoolean("answer", answer);
+        },
+        
+        /**
+         * If true, this forum reply has not been recommended by the current user.
+         * 
+         * @method isNotRecommendedByCurrentUser
+         * @returns {Boolean}
+         */
+        isNotRecommendedByCurrentUser : function() {
+        	return this.getAsBoolean("notRecommendedByCurrentUser");
+        },
+        
+        /**
          * Loads the forum reply object with the atom entry associated with the
          * forum reply. By default, a network call is made to load the atom entry
          * document in the forum reply object.
@@ -673,8 +705,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          */
         load : function(args) {
             // detect a bad request by validating required arguments
-            var topicUuid = this.getReplyUuid();
-            var promise = this.service._validateReplyUuid(topicUuid);
+            var replyUuid = this.getReplyUuid();
+            var promise = this.service._validateReplyUuid(replyUuid);
             if (promise) {
                 return promise;
             }
@@ -774,8 +806,32 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @param args
          */
         constructor : function(args) {
-        }
+        },
     
+	    /**
+	     * Return the value of IBM Connections recommendation ID from recommendation ATOM
+	     * entry document.
+	     * 
+	     * @method getRecommendationUuid
+	     * @return {String} ID of the recommendation topic
+	     */
+	    getRecommendationUuid : function() {
+	        var uid = this.getAsString("id");
+            return extractForumUuid(uid);
+	    },
+
+        /**
+         * Return the value of IBM Connections post ID from recommendation ATOM
+         * entry document.
+         * 
+         * @method getPostUuid
+         * @return {String} ID of the forum post
+         */
+        getPostUuid : function() {
+            var selfUrl = this.getSelfUrl();
+            return this.service.getUrlParameter(selfUrl, "postUuid");
+        },
+
     });
     
     /**
@@ -871,6 +927,27 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         }
     };
 
+    /*
+     * Callbacks used when reading a feed that contains forum recommendation entries.
+     */
+    var ForumRecommendationFeedCallbacks = {
+        createEntities : function(service,data,response) {
+            return new XmlDataHandler({
+                service : service,
+                data : data,
+                namespaces : consts.Namespaces,
+                xpath : consts.ForumsFeedXPath
+            });
+        },
+        createEntity : function(service,data,response) {
+            return new ForumRecommendation({
+                service : service,
+                data : data
+            });
+        }
+    };
+
+    
     /**
      * ForumsService class.
      * 
@@ -940,13 +1017,13 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * Get a feed that includes forums created by the authenticated user or associated with communities to which the user belongs.
          * 
          * @method getMyForums
-         * @param requestArgs
+         * @param args
          */
-        getMyForums: function(requestArgs) {
+        getMyForums: function(args) {
             var options = {
                 method : "GET",
                 handleAs : "text",
-                query : requestArgs || {}
+                query : args || {}
             };
             
             return this.getEntities(consts.AtomForumsMy, options, ForumFeedCallbacks);
@@ -989,13 +1066,13 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * Get a feed that includes all stand-alone and forum forums created in the enterprise.
          * 
          * @method getAllForums
-         * @param requestArgs
+         * @param args
          */
-        getPublicForums: function(requestArgs) {
+        getPublicForums: function(args) {
             var options = {
                 method : "GET",
                 handleAs : "text",
-                query : requestArgs || {}
+                query : args || {}
             };
             
             return this.getEntities(consts.AtomForumsPublic, options, ForumFeedCallbacks);
@@ -1009,7 +1086,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @param args
          * @returns
          */
-        getForumTopics: function(forumUuid, requestArgs) {
+        getForumTopics: function(forumUuid, args) {
             var promise = this._validateForumUuid(forumUuid);
             if (promise) {
                 return promise;

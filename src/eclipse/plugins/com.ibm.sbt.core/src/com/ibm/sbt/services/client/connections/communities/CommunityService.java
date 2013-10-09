@@ -949,7 +949,7 @@ public class CommunityService extends BaseService {
 	 * @param length
 	 * @throws CommunityServiceException
 	 */
-	public void uploadFile(InputStream iStream, String communityId, final String title, long length) throws CommunityServiceException {
+	public File uploadFile(InputStream iStream, String communityId, final String title, long length) throws CommunityServiceException {
 		if (iStream == null) {
             throw new CommunityServiceException(null, "null stream");
         }
@@ -967,7 +967,8 @@ public class CommunityService extends BaseService {
 		String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
                 null, subFilters, resultType); 
 	    try {
-	    	createData(requestUri, null, null, contentFile);
+	    	Response data = (Response) super.createData(requestUri, null, null, contentFile);
+	    	return (File)new FileFeedHandler(new FileService()).createEntity(data);
 	    } catch (ClientServicesException e) {
 			throw new CommunityServiceException(e, Messages.UploadCommunitiesException);
 		} catch (IOException e) {

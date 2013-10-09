@@ -1,1 +1,1 @@
-<content type="text">${Content}</content>
+<content type="${ContentType}">${Content}</content>

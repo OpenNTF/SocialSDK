@@ -23,6 +23,7 @@ import org.junit.Test;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.connections.BaseForumsTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
+import com.ibm.sbt.services.client.connections.forums.Forum;
 
 /**
  * @author mwallace
@@ -39,12 +40,14 @@ public class GetForum extends BaseForumsTest {
 
     @Test
     public void testGetForum() {
-        //addSnippetParam("ForumService.forumUuid", forum.getForumUuid());
+        addSnippetParam("ForumService.forumUuid", forum.getForumUuid());
+        
+        Forum aforum = getForum(forum.getForumUuid());
+        Assert.assertNotNull(aforum);
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
-        List jsonList = previewPage.getJsonList();
-        //assertForumValid((JsonJavaObject)jsonList.get(0));
-        //Assert.assertEquals(forum.getForumUuid(), ((JsonJavaObject)jsonList.get(1)).getString("entityId"));
+        JsonJavaObject json = previewPage.getJson();
+        assertForumValid((JsonJavaObject)json);
     }
     
     @Test
@@ -52,10 +55,9 @@ public class GetForum extends BaseForumsTest {
         addSnippetParam("ForumService.forumUuid", "Foo");
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
-        List jsonList = previewPage.getJsonList();
-        JsonJavaObject json = (JsonJavaObject)jsonList.get(0);
+        JsonJavaObject json = previewPage.getJson();
         Assert.assertEquals(404, json.getInt("code"));
-        Assert.assertEquals("The forum which this resource or page is associated with does not exist.", json.getString("message"));
+        Assert.assertEquals("CLFRV0008E: Error, unable to find object with uuid: Foo", json.getString("message"));
     }
     
     @Test
@@ -63,8 +65,7 @@ public class GetForum extends BaseForumsTest {
         addSnippetParam("ForumService.forumUuid", "");
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
-        List jsonList = previewPage.getJsonList();
-        JsonJavaObject json = (JsonJavaObject)jsonList.get(0);
+        JsonJavaObject json = previewPage.getJson();
         Assert.assertEquals(400, json.getInt("code"));
         Assert.assertEquals("Invalid argument, expected forumUuid.", json.getString("message"));
     }

@@ -15,9 +15,14 @@
  */
 package com.ibm.sbt.test.js.connections.forums.api;
 
+import java.util.List;
+
+import org.junit.Assert;
 import org.junit.Test;
 
+import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.BaseApiTest;
+import com.ibm.sbt.automation.core.test.connections.BaseForumsTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 
 /**
@@ -25,7 +30,7 @@ import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
  * 
  * @date 6 Mar 2013
  */
-public class GetMyForums extends BaseApiTest {
+public class GetMyForums extends BaseForumsTest {
 
     static final String SNIPPET_ID = "Social_Forums_API_GetMyForums";
     
@@ -36,8 +41,12 @@ public class GetMyForums extends BaseApiTest {
     @Test
     public void testGetMyForums() {
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
-        //List jsonList = previewPage.getJsonList();
-        // TODO create some forums
+        List jsonList = previewPage.getJsonList();
+        Assert.assertFalse(jsonList.isEmpty());
+        for (int i=0; i<jsonList.size(); i++) {
+            JsonJavaObject json = (JsonJavaObject)jsonList.get(i);
+            assertForumGetters(json);
+        }
     }
 
 }

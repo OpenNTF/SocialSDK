@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%;">
+
+<head>
+<meta charset="utf-8">
+<title>Dojo Require Sample</title>
+<link href="images/sbt.png" rel="shortcut icon">
+<!--  
+<script type="text/javascript">
+var djConfig = {
+	    parseOnLoad: true,
+	    locale: 'en'
+	};
+</script>
+<script type="text/javascript" src="/sbt.dojo143/dojo/dojo.js"></script> 
+-->
+
+<script type="text/javascript">
+djConfig={
+	baseUrl: 'https://qs.renovations.com:444/connections/resources/web/dojo/',
+	localizationComplete: true
+}; 
+</script>
+<script src="https://qs.renovations.com:444/connections/resources/web/_js?include=dojo.dojo.js~&etag=20130801.182141&lang=en&country=ie" type="text/javascript"></script>
+</head>
+
+<body>
+	<div id="content"></div>
+	
+	<script type="text/javascript">
+	dojo.registerModulePath('sbt','https://localhost:8443/sbt/js/sdk/sbt');
+    dojo.registerModulePath('sbt._bridge','/sbt/js/sdk/_bridges/dojo');
+    dojo.registerModulePath('sbt.widget','/sbt/js/sdk/dojo');
+    
+    dojo.require('sbt._bridge.amdcompat');
+    dojo.require('sbt.Endpoint');
+    dojo.require('sbt.Proxy');
+    dojo.require('sbt._bridge.Transport');
+    dojo.require('sbt.authenticator.Basic');
+	
+	dojo.declare("sbt.config", [], {
+		Endpoints: {
+			'connections':new sbt.Endpoint({
+				"authType":"basic",
+				"proxyPath":"connections",
+				"authenticator":new sbt.authenticator.Basic({"url":"https:\/\/localhost:8443\/sbt\/js\/sdk"}),
+				"isAuthenticated":false,
+				"transport":new sbt._bridge.Transport({}),
+				"name":"connections",
+				"authenticationErrorCode":401,
+				"apiVersion":"4.5",
+				"baseUrl":"https:\/\/vhost0839.dc1.on.ca.compute.ihost.com:444",
+				"proxy":new sbt.Proxy({proxyUrl:'https://localhost:8443/sbt.proxy/service/proxy'})
+			})
+		},
+		findEndpoint: function(endpointName) {
+			return this.Endpoints[endpointName];
+		}
+	});
+	
+	dojo.require("sbt.lang");
+	dojo.require("sbt.dom");
+	dojo.require("sbt.json");
+	dojo.require("sbt.xml");
+	
+	var config = sbt.config;
+	var lang = sbt.lang;
+	var dom = sbt.dom;
+	var json = sbt.json;
+	var xml = sbt.xml;
+	
+    var options = { 
+        method : "GET"
+    };
+    
+    var endpoint = new sbt.Endpoint({
+		"authType":"basic",
+		"proxyPath":"connections",
+		"authenticator":new sbt.authenticator.Basic({"url":"https:\/\/localhost:8443\/sbt\/js\/sdk"}),
+		"isAuthenticated":false,
+		"transport":new sbt._bridge.Transport({}),
+		"name":"connections",
+		"authenticationErrorCode":401,
+		"apiVersion":"4.5",
+		"baseUrl":"https:\/\/vhost0839.dc1.on.ca.compute.ihost.com:444",
+		"proxy":new sbt.Proxy({proxyUrl:'https://localhost:8443/sbt.proxy/service/proxy'})
+	});
+    var promise = endpoint.request("/communities/service/atom/communities/all", options);
+    
+    var results = [];
+    promise.then(
+        function(data) {
+            results.push({data : data || "<empty>"});
+            dom.setText("content", json.jsonBeanStringify(results));
+        }, 
+        function(error) {
+            results.push(error);
+            dom.setText("content", json.jsonBeanStringify(results));
+        }
+    );    
+    promise.response.then(
+        function(response) {
+            results.push(response);
+            dom.setText("content", json.jsonBeanStringify(results));
+        }, function(response) {
+            results.push(response);
+            dom.setText("content", json.jsonBeanStringify(results));
+        }
+    );	
+	</script>
+
+</body>
+</html>

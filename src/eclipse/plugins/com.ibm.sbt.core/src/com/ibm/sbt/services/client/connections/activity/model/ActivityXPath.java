@@ -41,7 +41,7 @@ public enum ActivityXPath implements FieldEntry {
 	OwnerId(".//contributor/snx:userid[@snx:role=\"owner\"]"),
 	FileName("/a:feed/a:entry/a:title"),
 	FileUuid("/a:feed/a:entry/td:uuid"),
-	Entry("/a:feed/a:entry"),
+	Entry("/a:feed/a:entry | /a:entry"),
 	Category(".//a:category[@scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"]/@term"),
 	CategoryFlagDelete(".//a:category[@term=\"deleted\"]/@label"),
 	CommunityLink(".//a:link[@rel=\"http://www.ibm.com/xmlns/prod/sn/container\"]/@href"),

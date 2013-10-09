@@ -1,8 +1,10 @@
 require(["sbt/dom", "sbt/connections/controls/search/SearchBox", "sbt/connections/controls/search/SearchGrid"], function(dom, SearchBox,SearchGrid) {
-        var searchBox = new SearchBox({
-        	type:"part"
-        });
         
+	    var searchBox = new SearchBox({
+        	type:"part",
+        	searchSuggest: "on"
+        });
+                
         dom.byId("searchBox").appendChild(searchBox.domNode);
         
         searchBox.domNode.addEventListener("searchResultEvent",function(event){
@@ -17,6 +19,8 @@ require(["sbt/dom", "sbt/connections/controls/search/SearchBox", "sbt/connection
     		});
     		dom.byId("gridDiv").appendChild(grid.domNode);
     		grid.update();
-   	
-        },false);        
+        	
+        },false);
+        
+        
 });

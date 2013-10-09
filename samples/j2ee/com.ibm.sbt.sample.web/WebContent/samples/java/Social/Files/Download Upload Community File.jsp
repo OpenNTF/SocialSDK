@@ -14,10 +14,10 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@page import="com.ibm.sbt.services.client.connections.files.File"%>
 <%@page import="com.ibm.commons.util.io.StreamUtil"%>
 <%@page import="java.io.ByteArrayInputStream"%>
 <%@page import="java.io.InputStream"%>
-<%@page import="java.io.File"%>
 <%@page import="java.io.ByteArrayOutputStream"%>
 <%@page import="java.io.FileOutputStream"%>
 <%@page import="java.io.OutputStream"%>
@@ -54,9 +54,14 @@
 			    out.println("File Downloaded in ostream = " + noOfBytes + "\nFile Name = " + list.get(0).getTitle());
 				InputStream istream = new ByteArrayInputStream(((ByteArrayOutputStream)ostream).toByteArray());
 				String newFileName = "TestCommUpload"+System.currentTimeMillis();
-				service.uploadFile(istream, communityId, newFileName, noOfBytes);
-				out.println("File Uploaded as " + newFileName);
+				File fileUploaded = service.uploadFile(istream, communityId, newFileName, noOfBytes);
+				out.println("File Uploaded as : " + fileUploaded.getTitle()); 
+				out.println("File's Url " + fileUploaded.getDownloadUrl());
+			} else {
+				out.println("No Files to be Downloaded");
 			}
+		} else {
+			out.println("No Communities");
 		}
     } catch (Throwable e) {
       out.println("<pre>");

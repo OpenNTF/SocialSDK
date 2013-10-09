@@ -22,6 +22,11 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
     return lang.mixin(conn, {
     	
     	/**
+    	 * Term value when a forum reply is an accepted answer 
+    	 */
+    	FlagAnswer : "answer",
+    	
+    	/**
     	 * Term value when a forum topic is pinned 
     	 */
     	FlagPinned : "pinned",
@@ -84,7 +89,9 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
             replyUuid : "a:id",
         	topicUuid : "thr:in-reply-to/@ref",
             permissions : "snx:permissions",
-            communityUuid : "snx:communityUuid"
+            communityUuid : "snx:communityUuid",
+            answer: "a:category[@term='answer' and @scheme='http://www.ibm.com/xmlns/prod/sn/flags']",
+            notRecommendedByCurrentUser: "a:category[@term='NotRecommendedByCurrentUser']"
         }, conn.AtomEntryXPath),
         
         /**

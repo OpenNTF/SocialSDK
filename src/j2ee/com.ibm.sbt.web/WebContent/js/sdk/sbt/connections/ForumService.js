@@ -590,11 +590,12 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         	if (!this.getTopicUuid()) {
         		return "";
         	}
-            var transformer = function(value,key) {
-                return value;
-            };
-            var postData = stringUtil.transform(ReplyTmpl, this, transformer, this);
-            return stringUtil.trim(postData);
+        	var entryData = "";
+        	if (this.isAnswer()) {
+        		entryData += stringUtil.transform(FlagTmpl, this, function(v,k) { return consts.FlagAnswer; }, this);
+        	}
+        	entryData += stringUtil.transform(ReplyTmpl, this, function(v,k) { return v; }, this);
+            return stringUtil.trim(entryData);
         },
 
         /**
@@ -664,6 +665,37 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         },
         
         /**
+         * If true, indicates that the reply is an accepted answer.
+         * 
+         * @method isAnswered
+         * @return {Boolean} 
+         */
+        isAnswer : function() {
+        	return this.getAsBoolean("answer");
+        },
+        
+        /**
+         * Set to true, indicates that the reply is an accepted answer. 
+         * 
+         * @method setAnswer
+         * @param answer
+         * @return {Boolean} 
+         */
+        setAnswer : function(answer) {
+        	return this.setAsBoolean("answer", answer);
+        },
+        
+        /**
+         * If true, this forum reply has not been recommended by the current user.
+         * 
+         * @method isNotRecommendedByCurrentUser
+         * @returns {Boolean}
+         */
+        isNotRecommendedByCurrentUser : function() {
+        	return this.getAsBoolean("notRecommendedByCurrentUser");
+        },
+        
+        /**
          * Loads the forum reply object with the atom entry associated with the
          * forum reply. By default, a network call is made to load the atom entry
          * document in the forum reply object.
@@ -673,8 +705,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          */
         load : function(args) {
             // detect a bad request by validating required arguments
-            var topicUuid = this.getReplyUuid();
-            var promise = this.service._validateReplyUuid(topicUuid);
+            var replyUuid = this.getReplyUuid();
+            var promise = this.service._validateReplyUuid(replyUuid);
             if (promise) {
                 return promise;
             }

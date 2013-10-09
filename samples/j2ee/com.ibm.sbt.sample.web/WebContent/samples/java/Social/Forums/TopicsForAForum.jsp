@@ -36,7 +36,7 @@
 </head>
 
 <body>
-	<h4>Topics for a partuclar Forum</h4>
+	<h4>Topics for a particular Forum</h4>
 	<div id="content">
 	<%
 		try {

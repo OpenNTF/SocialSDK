@@ -16,21 +16,15 @@
 package com.ibm.sbt.sample.app;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 
-import com.ibm.commons.runtime.Application;
-import com.ibm.commons.runtime.Context;
-import com.ibm.commons.runtime.RuntimeFactory;
-import com.ibm.commons.runtime.impl.app.RuntimeFactoryStandalone;
 import com.ibm.sbt.services.client.connections.communities.Community;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
 import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
-import com.ibm.sbt.services.client.connections.communities.Member;
 import com.ibm.sbt.services.client.connections.communities.MemberList;
 import com.ibm.sbt.services.endpoints.BasicEndpoint;
 import com.ibm.sbt.services.endpoints.ConnectionsBasicEndpoint;
-import com.ibm.sbt.services.endpoints.EndpointFactory;
-import com.ibm.sbt.services.client.base.BaseService;
 
 /**
  * @author mwallace, Francis
@@ -78,17 +72,30 @@ public class CommunityServiceApp {
 		String user = args[1];
 		String password = args[2];
 	    CommunityServiceApp app = new CommunityServiceApp(url, user, password);
-		
+		HashMap<String, String> parameters = new HashMap<String, String>();
+		parameters.put("ps", "100"); //100 members will be retrieved at a time. Max is 10,000.
 	    try {
 	    	CommunityService communityService = app.getCommunityService();
             Collection<Community> communities = communityService.getPublicCommunities();
             for (Iterator<Community> iter = communities.iterator(); iter.hasNext(); ) {
                 Community community = iter.next();
-                MemberList members = communityService.getMembers(community.getCommunityUuid());
+                boolean moreMembers = true;
+                int page = 1;
+                
                 System.out.println(community.getTitle());
-                for (int i=0; i<members.getTotalResults(); i++) {
-                    System.out.println("    " + members.get(i).getEmail());
-                }
+                do{
+                    parameters.put("page", Integer.toString(page));
+                    MemberList members = communityService.getMembers(community.getCommunityUuid(), parameters);
+                    for (int i=0; i<members.size(); i++) {
+                        System.out.println("    " + members.get(i).getEmail());
+                    }
+                    if((members.getStartIndex() + members.getItemsPerPage()) <= members.getTotalResults()){
+                        moreMembers = true;
+                        page++;
+                    }else{
+                        moreMembers=false;
+                    }
+                }while(moreMembers);
             }
         } catch (CommunityServiceException e) {
             e.printStackTrace();

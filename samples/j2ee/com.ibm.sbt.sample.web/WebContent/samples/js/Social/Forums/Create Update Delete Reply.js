@@ -34,7 +34,7 @@ function handleMyTopics(topics, forumService, dom) {
     dom.byId("topicTitle").value = currentTopic.getTitle();
     dom.byId("topicUuid").value = currentTopic.getTopicUuid();
 
-    resetReply(dom);
+    resetReply(null, dom);
     
     addOnClickHandlers(forumService, dom);
     
@@ -95,39 +95,85 @@ function deleteReply(reply, dom) {
     );
 }
 
+function createRecommendation(reply, dom) {
+    displayMessage(dom, "Please wait... Creating forum reply recommendation: " + reply.getReplyUuid());
+    
+    reply.createRecommendation().then(  
+        function(recommendation) { 
+        	reply.load().then(
+                function(reply) { 
+                    handleRecommendationCreated(reply, dom);
+                },
+                function(error) {
+                    handleError(dom, error);
+                }
+            );
+        },
+        function(error) {
+            handleError(dom, error);
+        }
+    );
+}
+
+function deleteRecommendation(reply, dom) {
+    displayMessage(dom, "Please wait... Deleting forum reply recommendation: " + reply.getReplyUuid());
+    
+    reply.deleteRecommendation().then(               
+        function() { 
+        	reply.load().then(
+                function(reply) { 
+                	handleRecommendationRemoved(reply, dom);
+                },
+                function(error) {
+                    handleError(dom, error);
+                }
+            );
+        },
+        function(error) {
+            handleError(dom, error);
+        }
+    );
+}
+
 function handleReplyCreated(reply, dom) {
+    currentReply = reply;
+	resetReply(reply, dom);
+    resetButtons(dom);
+
     if (!reply) {
-    	resetReply(dom);
         displayMessage(dom, "Unable to create reply."); 
         return;
     }
-    
-    dom.byId("replyUuid").value = reply.getReplyUuid();
-    dom.byId("replyTitle").value = reply.getTitle();
-    dom.byId("replyContent").value = reply.getContent();
-    dom.byId("replyAnswer").checked = reply.isAnswer();
-    dom.byId("replyAnswer").disabled = false;
-    
-    currentReply = reply;
-    
-    resetButtons(dom);
-
     displayMessage(dom, "Successfully created reply: " + reply.getReplyUuid());
 }
 
 function handleReplyRemoved(reply, dom) {
     currentReply = null;
-
-	resetTopic(dom);
+	resetReply(null, dom);
 	resetButtons(dom);
 	
     displayMessage(dom, "Successfully deleted reply: " + reply.getReplyUuid());
 }
 
 function handleReplyUpdated(reply, dom) {
+	resetReply(reply, dom);
 	resetButtons(dom);
 	
     displayMessage(dom, "Successfully updated reply: " + reply.getReplyUuid());
+}
+
+function handleRecommendationCreated(reply, dom) {
+	resetReply(reply, dom);
+	resetButtons(dom);
+	
+    displayMessage(dom, "Successfully added recommendation to reply: " + reply.getReplyUuid());
+}
+
+function handleRecommendationRemoved(reply, dom) {
+	resetReply(reply, dom);
+	resetButtons(dom);
+	
+    displayMessage(dom, "Successfully removed recommendation from reply: " + reply.getReplyUuid());
 }
 
 function addOnClickHandlers(forumService, dom) {
@@ -150,10 +196,18 @@ function addOnClickHandlers(forumService, dom) {
             updateReply(currentReply, title.value, content.value, answer.checked, dom);
         }
     };
+    dom.byId("likeBtn").onclick = function(evt) {
+        if (currentReply) {
+        	if (currentReply.isNotRecommendedByCurrentUser()) {
+        		createRecommendation(currentReply, dom);
+        	} else {
+        		deleteRecommendation(currentReply, dom);
+        	}
+        }
+    };
 }
 
 function resetButtons(dom) {
-	var createBtn = dom.byId("createBtn");
 	var deleteBtn = dom.byId("deleteBtn");
 	var updateBtn = dom.byId("updateBtn");
 	var likeBtn = dom.byId("likeBtn");
@@ -171,12 +225,22 @@ function resetButtons(dom) {
 	}
 }
 
-function resetReply(dom) {
-    dom.byId("replyUuid").value = "";
-    dom.byId("replyTitle").value = "";
-    dom.byId("replyContent").value = "";
-    dom.byId("replyAnswer").checked = false;
-    dom.byId("replyAnswer").disabled = true;
+function resetReply(reply, dom) {
+	if (reply) {
+	    dom.byId("replyUuid").value = reply.getReplyUuid();
+	    dom.byId("replyTitle").value = reply.getTitle();
+	    dom.byId("replyContent").value = reply.getContent();
+	    dom.byId("replyAnswer").checked = reply.isAnswer();
+	    dom.byId("replyAnswer").disabled = false;
+	    dom.byId("replyNRBCU").checked = reply.isNotRecommendedByCurrentUser();
+	} else {
+	    dom.byId("replyUuid").value = "";
+	    dom.byId("replyTitle").value = "";
+	    dom.byId("replyContent").value = "";
+	    dom.byId("replyAnswer").checked = false;
+	    dom.byId("replyAnswer").disabled = true;
+	    dom.byId("replyNRBCU").checked = true;
+	}
 }
 
 function displayMessage(dom, msg) {

@@ -1,0 +1,45 @@
+<div id="communityCreationForm">
+<div class="lotusHeader"><h1>Invite members</h1></div>
+
+<div class="lotusMessage lotusConfirm" role="status" id="error" style="display: none;">
+</div>
+
+<div class="lotusMessage lotusWarning" role="status" id="success" style="display: none;">
+</div>
+<div id="invitationForm">
+	<form class="lotusForm" method="post" action="javascript:;" aria-live="assertive">
+		<fieldset>
+			<table class="lotusFormTable" cellpadding="0" cellspacing="0" border="0" role="presentation">
+				<tbody>
+					<tr class="lotusFormFieldRow">
+						<td width="15%" class="lotusFormLabel"><label for="titleTextField"><span class="lotusFormRequired">*</span>Community ID:</label></td>
+						<td><input class="lotusText" readonly="readonly" type="text" id="communityId" name="communityId" value="" aria-required="true" /></td>
+					</tr>
+					<tr class="lotusFormFieldRow">
+						<td width="15%" class="lotusFormLabel"><label for="contentTextField"><span class="lotusFormRequired">*</span>Content:</label></td>
+						<td><input class="lotusText" type="text" readonly="readonly" id="contentTextField" name="contentTextField" value="" aria-required="true" /></td>
+					</tr>
+					<tr class="lotusFormFieldRow">
+						<td width="15%" class="lotusFormLabel"><label for="tags">Community Title:</label></td>
+						<td><input class="lotusText" type="text" id="communityTitle" name="communityTitle" value="" aria-required="true" /></td>
+					</tr>
+					<tr>
+						<td width="15%" class="lotusFormLabel"><label for="tags">Members:</label></td>
+						<td>
+							<div class="controls">
+								<div role="search" id="searchBox"></div>
+								<div id="results"></div>
+								<div id="gridDiv"></div>
+							</div>
+						</td>
+					</tr>	
+					<tr>
+						<td colspan="3" class="lotusFormFooter">
+							<input id="btnInvite" type="submit" value="Invite" class="lotusFormButton" />
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</fieldset>
+	</form>
+</div>

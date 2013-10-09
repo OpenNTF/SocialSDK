@@ -34,7 +34,7 @@ function handleMyForums(forums, forumService, dom) {
     dom.byId("forumTitle").value = currentForum.getTitle();
     dom.byId("forumUuid").value = currentForum.getForumUuid();
 
-    resetTopic(dom);
+    resetTopic(null, dom);
     
     addOnClickHandlers(forumService, dom);
     
@@ -78,8 +78,15 @@ function updateTopic(topic, title, content, tags, question, pinned, locked, dom)
     topic.setLocked(locked);
     topic.setQuestion(question);
     topic.update().then(               
-        function(topicUuid) {
-            handleTopicUpdated(topic, dom);
+        function(topic) {
+        	topic.load().then(
+                function(topic) { 
+                    handleTopicUpdated(topic, dom);
+                },
+                function(error) {
+                    handleError(dom, error);
+                }
+            );
         },
         function(error) {
             handleError(dom, error);
@@ -92,7 +99,7 @@ function deleteTopic(topic, dom) {
     
     topic.remove().then(               
         function() { 
-            handleTopicRemoved(community, dom);
+            handleTopicRemoved(topic, dom);
         },
         function(error) {
             handleError(dom, error);
@@ -100,39 +107,86 @@ function deleteTopic(topic, dom) {
     );
 }
 
-function handleTopicCreated(topic, dom) {
+function createRecommendation(topic, dom) {
+    displayMessage(dom, "Please wait... Creating forum topic recommendation: " + topic.getTopicUuid());
+    
+    topic.createRecommendation().then(  
+        function(recommendation) { 
+        	topic.load().then(
+                function(topic) { 
+                    handleRecommendationCreated(topic, dom);
+                },
+                function(error) {
+                    handleError(dom, error);
+                }
+            );
+        },
+        function(error) {
+            handleError(dom, error);
+        }
+    );
+}
+
+function deleteRecommendation(topic, dom) {
+    displayMessage(dom, "Please wait... Deleting forum topic recommendation: " + topic.getTopicUuid());
+    
+    topic.deleteRecommendation().then(               
+        function() { 
+        	topic.load().then(
+                function(topic) { 
+                	handleRecommendationRemoved(topic, dom);
+                },
+                function(error) {
+                    handleError(dom, error);
+                }
+            );
+        },
+        function(error) {
+            handleError(dom, error);
+        }
+    );
+}
+
+function handleTopicCreated(topic, dom) {   
+    currentTopic = topic;
+    resetTopic(topic, dom);
+    resetButtons(dom);
+
     if (!topic) {
-    	resetTopic(dom);
-        displayMessage(dom, "Unable to load topic."); 
+        displayMessage(dom, "Unable to create topic."); 
         return;
     }
-    
-    dom.byId("topicUuid").value = topic.getTopicUuid();
-    dom.byId("communityUuid").value = topic.getCommunityUuid();
-    dom.byId("topicTitle").value = topic.getTitle();
-    dom.byId("topicContent").value = topic.getContent();
-    dom.byId("topicTags").value = topic.getTags().join();
-    dom.byId("topicQuestion").checked = topic.isQuestion();
-    dom.byId("topicLock").checked = topic.isLocked();
-    dom.byId("topicLock").disabled = false;
-    dom.byId("topicPin").checked = topic.isPinned();
-    dom.byId("topicPin").disabled = false;
-    
-    currentTopic = topic;
 
     displayMessage(dom, "Successfully created topic: " + topic.getTopicUuid());
 }
 
 function handleTopicRemoved(topic, dom) {
-	resetTopic(dom);
-    
     currentTopic = null;
-
+	resetTopic(null, dom);
+	resetButtons(dom);
+	
     displayMessage(dom, "Successfully deleted topic: " + topic.getTopicUuid());
 }
 
 function handleTopicUpdated(topic, dom) {
+	resetTopic(topic, dom);
+	resetButtons(dom);
+	
     displayMessage(dom, "Successfully updated topic: " + topic.getTopicUuid());
+}
+
+function handleRecommendationCreated(topic, dom) {
+	resetTopic(topic, dom);
+	resetButtons(dom);
+	
+    displayMessage(dom, "Successfully added recommendation to topic: " + topic.getTopicUuid());
+}
+
+function handleRecommendationRemoved(topic, dom) {
+	resetTopic(topic, dom);
+	resetButtons(dom);
+	
+    displayMessage(dom, "Successfully removed recommendation from topic: " + topic.getTopicUuid());
 }
 
 function addOnClickHandlers(forumService, dom) {
@@ -160,18 +214,62 @@ function addOnClickHandlers(forumService, dom) {
             updateTopic(currentTopic, title.value, content.value, tags.value, question.checked, pin.checked, lock.checked, dom);
         }
     };
+    dom.byId("likeBtn").onclick = function(evt) {
+        if (currentTopic) {
+        	if (currentTopic.isNotRecommendedByCurrentUser()) {
+        		createRecommendation(currentTopic, dom);
+        	} else {
+        		deleteRecommendation(currentTopic, dom);
+        	}
+        }
+    };
 }
 
-function resetTopic(dom) {
-    dom.byId("topicUuid").value = "";
-    dom.byId("topicTitle").value = "";
-    dom.byId("topicContent").value = "";
-    dom.byId("topicTags").value = "";
-    dom.byId("topicQuestion").checked = false;
-    dom.byId("topicLock").checked = false;
-    dom.byId("topicLock").disabled = true;
-    dom.byId("topicPin").checked = false;
-    dom.byId("topicPin").disabled = true;
+function resetButtons(dom) {
+	var deleteBtn = dom.byId("deleteBtn");
+	var updateBtn = dom.byId("updateBtn");
+	var likeBtn = dom.byId("likeBtn");
+	
+	if (currentTopic) {
+		deleteBtn.disabled = false;
+		updateBtn.disabled = false;
+		likeBtn.innerHTML = currentTopic.isNotRecommendedByCurrentUser() ? "Like" : "Unlike";
+		likeBtn.disabled = false;
+	} else {
+		deleteBtn.disabled = true;
+		updateBtn.disabled = true;
+		likeBtn.innerHTML = "Like Topic";
+		likeBtn.disabled = true;
+	}
+}
+
+function resetTopic(topic, dom) {
+	if (topic) {
+	    dom.byId("topicUuid").value = topic.getTopicUuid();
+	    dom.byId("communityUuid").value = topic.getCommunityUuid();
+	    dom.byId("topicTitle").value = topic.getTitle();
+	    dom.byId("topicContent").value = topic.getContent();
+	    dom.byId("topicTags").value = topic.getTags().join();
+	    dom.byId("topicQuestion").checked = topic.isQuestion();
+	    dom.byId("topicLock").checked = topic.isLocked();
+	    dom.byId("topicLock").disabled = false;
+	    dom.byId("topicPin").checked = topic.isPinned();
+	    dom.byId("topicPin").disabled = false;
+	    dom.byId("topicNRBCU").checked = topic.isNotRecommendedByCurrentUser();
+	} else {
+	    dom.byId("topicUuid").value = "";
+	    dom.byId("communityUuid").value = "";
+	    dom.byId("topicTitle").value = "";
+	    dom.byId("topicContent").value = "";
+	    dom.byId("topicTags").value = "";
+	    dom.byId("topicQuestion").checked = false;
+	    dom.byId("topicLock").checked = false;
+	    dom.byId("topicLock").disabled = true;
+	    dom.byId("topicPin").checked = false;
+	    dom.byId("topicPin").disabled = true;
+	    dom.byId("topicNRBCU").checked = true;
+	}
+	
 }
 
 function displayMessage(dom, msg) {

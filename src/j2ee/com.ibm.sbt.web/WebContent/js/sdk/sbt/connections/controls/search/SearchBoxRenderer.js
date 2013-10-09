@@ -159,6 +159,7 @@ define(["../../../declare",
 			var newMember = new Object();
 			newMember.html = this._appsMemberListItem.innerHTML;
 			newMember.id = memberId;
+			newMember.name = memberName;
 			// Make sure that the member hasn't already been selected
 			for (var i = 0; i < searchBox._members.length; i++) {
 				var member = searchBox._members[i];

@@ -25,7 +25,7 @@
         <div style="height:4px"></div>
     	<label class="control-label">Community Id:</label>
         <div class="controls">
-            <input id="communityUuid" type="text" placeholder="Community Id" style="width:400px"></input>
+            <input id="communityUuid" type="text" placeholder="Community Id" style="width:400px" disabled="disabled"></input>
         </div>
         <div style="height:4px"></div>
         <label class="control-label">Title:</label>
@@ -47,12 +47,14 @@
         	<label><input id="topicQuestion" type="checkbox"/> Question</label>
         	<label><input id="topicPin" type="checkbox" disabled="true"/> Pin</label>
         	<label><input id="topicLock" type="checkbox" disabled="true"/> Lock</label>
+        	<label><input id="topicNRBCU" type="checkbox" disabled="true"/> Not Recommended By Current User</label>
         </div>
         <div style="height:8px"></div>
         <div class="controls">
-	    	<button class="btn" id="startBtn">Start Topic</button>
-	    	<button class="btn" id="updateBtn">Update Topic</button>
-	        <button class="btn" id="deleteBtn">Delete Topic</button>
+	    	<button class="btn" id="startBtn">Start</button>
+	    	<button class="btn" id="updateBtn">Update</button>
+	        <button class="btn" id="deleteBtn">Delete</button>
+	        <button class="btn" id="likeBtn">Like</button>
         </div>
         <input id="entry" type="hidden"></input>
     </div>

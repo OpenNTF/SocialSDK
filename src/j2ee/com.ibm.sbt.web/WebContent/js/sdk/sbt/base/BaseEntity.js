@@ -103,7 +103,10 @@ define([ "../declare", "../lang", "../log", "../stringUtil" ],
          * @returns true if this entity has been loaded
          */
         isLoaded : function() {
-            return this.dataHandler ? true : false;
+        	if (this.dataHandler) {
+        		return this.dataHandler.getData() ? true : false;
+        	}
+            return false;
         },
         
         /**

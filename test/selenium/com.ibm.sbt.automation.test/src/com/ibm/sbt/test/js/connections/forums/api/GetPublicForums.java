@@ -15,8 +15,12 @@
  */
 package com.ibm.sbt.test.js.connections.forums.api;
 
+import java.util.List;
+
+import org.junit.Assert;
 import org.junit.Test;
 
+import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.connections.BaseForumsTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 
@@ -36,8 +40,12 @@ public class GetPublicForums extends BaseForumsTest {
     @Test
     public void testGetCompletedForums() {
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
-        //List jsonList = previewPage.getJsonList();
-        // TODO create some forums
+        List jsonList = previewPage.getJsonList();
+        Assert.assertFalse(jsonList.isEmpty());
+        for (int i=0; i<jsonList.size(); i++) {
+            JsonJavaObject json = (JsonJavaObject)jsonList.get(i);
+            assertForumGetters(json);
+        }
     }
 
 }

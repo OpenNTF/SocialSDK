@@ -20,9 +20,13 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.ibm.sbt.test.js.connections.forums.api.CreateForum;
+import com.ibm.sbt.test.js.connections.forums.api.DeleteForum;
 import com.ibm.sbt.test.js.connections.forums.api.GetAllForums;
+import com.ibm.sbt.test.js.connections.forums.api.GetForum;
 import com.ibm.sbt.test.js.connections.forums.api.GetMyForums;
 import com.ibm.sbt.test.js.connections.forums.api.GetPublicForums;
+import com.ibm.sbt.test.js.connections.forums.api.UpdateForum;
 
 /**
  * @author mwallace
@@ -33,7 +37,11 @@ import com.ibm.sbt.test.js.connections.forums.api.GetPublicForums;
 @SuiteClasses({ 
 	GetMyForums.class, 
 	GetPublicForums.class, 
-	GetAllForums.class })
+	GetAllForums.class,
+	CreateForum.class,
+	GetForum.class,
+	UpdateForum.class,
+	DeleteForum.class})
 public class ForumsTestSuite {
     @AfterClass
     public static void cleanup() {

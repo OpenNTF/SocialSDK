@@ -746,7 +746,7 @@ public class ProfileService extends BaseService {
 	
 	public String getMyUserId()throws ProfileServiceException{
 		String id = "";
-		String peopleApiUrl ="/connections/opensocial/basic/rest/people/@me/";
+		String peopleApiUrl ="/{connections}/opensocial/basic/rest/people/@me/";
 		try {
 			Response feed = getClientService().get(peopleApiUrl);
 			JsonDataHandler dataHandler = new JsonDataHandler((JsonJavaObject)feed.getData());

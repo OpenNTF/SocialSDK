@@ -426,27 +426,36 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 	
 			        promise.then(
 			            function(results) {
-			            	
-			            	for(var i=0;i<results.length;i++){
-			            		var row = document.createElement("tr");
-			            		var data = document.createElement("td");
-			            		data.innerHTML = results[i].getTitle();
-			            		data.id = results[i].getId();
-			            		data.style = "cursor:pointer";
-			            		data.onclick = function (event) { 
-			            			
-			            			context.searchBoxAction.setSuggestedSearch(event,popUp,context);
-			            		};    		
-			            		row.appendChild(data);
-			            		popUp.appendChild(row);
-			            	}
-	
+			            	context.searchBoxAction.handleSuggestResult(results,context,popUp);
 			            },
 			            function(error) {
 			                console.log(error);
 			            }
 		        );
 			}
+			},
+			
+			/**
+			 * 
+			 * @method handleSuggestResult
+			 * @param results the results from the suggested search
+			 * @param context the This of the outer class
+			 * @param popUp the popUp Element where results are displayed 
+			 */
+			handleSuggestResult: function(results,context,popUp){
+				for(var i=0;i<results.length;i++){
+            		var row = document.createElement("tr");
+            		var data = document.createElement("td");
+            		data.innerHTML = results[i].getTitle();
+            		data.id = results[i].getId();
+            		data.style = "cursor:pointer";
+            		data.onclick = function (event) { 
+            			
+            			context.searchBoxAction.setSuggestedSearch(event,popUp,context);
+            		};    		
+            		row.appendChild(data);
+            		popUp.appendChild(row);
+            	}
 			},
 			
 			/**

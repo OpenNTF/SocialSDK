@@ -753,21 +753,7 @@ define(
 				setCommunityUrl : function(communityUrl) {
 					return this.setAsString("communityUrl", communityUrl);
 				},
-
-				_copyFields : function(activity) {
-					this.setCommunityUuid(this._fields.communityUuid || activity.getCommunityUuid());
-					this.setCommunityUrl(this._fields.communityUrl || activity.getCommunityUrl());
-					this.setCompleted(this._fields.completed || activity.isCompleted());
-					this.setContent(this._fields.content || activity.getContent());
-					this.setDueDate(this._fields.dueDate || activity.getDueDate());
-					this.setIconUrl(this._fields.iconUrl || activity.getIconUrl());
-					this.setPosition(this._fields.position || activity.getPosition());
-					this.setTags(this._fields.tags || activity.getTags());
-					this.setTemplate(this._fields.template || activity.isTemplate());
-					this.setTitle(this._fields.title || activity.getTitle());
-					this.setType(this._fields.type || activity.getType());
-				},
-
+				
 				/**
 				 * Creates an activity, sends an Atom entry document containing the new activity to the user's My Activities feed.
 				 * 
@@ -1234,20 +1220,7 @@ define(
 				setFields : function(fields) {
 					this._fields["fields"] = fields;
 				},
-
-				_copyFields : function(activityNode) {
-					Activity.prototype._copyFields.call(this, activityNode);
-					this.setActivityUuid(this._fields.activityUuid || activityNode.getActivityUuid());
-					if (!this._fields.assignedToUserId) {
-						this.setAssignedTo(activityNode.getAssignedToUserId(), activityNode.getAssignedToName(), activityNode.getAssignedToEmail());
-					}
-					if (!this._fields.inReplyToId) {
-						this.setInReplyTo(activityNode.getInReplyToId(), activityNode.getInReplyToUrl());
-					}
-					this.setFields(this._fields.fields || activityNode.getFields());
-					this.setPosition(activityNode.getPosition());
-				},
-
+				
 				/**
 				 * Creats an entry in an activity, such as a to-do item or to add a reply to another entry, send an Atom entry document containing the new
 				 * activity node of the appropriate type to the parent activity's node list.
@@ -1942,7 +1915,8 @@ define(
 						update();
 					} else {
 						this.getActivityNode(uuid).then(function(originalActivityNode) {
-							activityOrActivityNode._copyFields(originalActivityNode);
+							activityOrActivityNode.data = originalActivityNode.data;
+							activityOrActivityNode.dataHandler = originalActivityNode.dataHandler;							
 							update();
 						}, function(error) {
 							promise.rejected(error);
@@ -2520,23 +2494,32 @@ define(
 
 				/**
 				 * Returns a Member instance from Member or JSON or String. Throws an error if the argument was neither.
-				 * 
+				 * @method newMember
 				 * @param {Object} memberOrJsonOrString The Member Object or json String for Member
 				 */
 				newMember : function(memberOrJsonOrString) {
-					if (memberOrJsonOrString instanceof Member) {
-						return memberOrJsonOrString;
-					} else {
-						if (lang.isString(memberOrJsonOrString)) {
-							memberOrJsonOrString = {
-								id : memberOrJsonOrString
-							};
-						}
-						return new Member({
-							service : this,
-							_fields : lang.mixin({}, memberOrJsonOrString)
-						});
-					}
+					if (memberOrJsonOrString) {
+		                if (memberOrJsonOrString instanceof Member) {
+		                    return memberOrJsonOrString;
+		                }
+		                var member = new Member({
+		                    service : this
+		                });
+		                if (lang.isString(memberOrJsonOrString)) {
+		                    if (this.isEmail(memberOrJsonOrString)) {
+		                        member.setEmail(memberOrJsonOrString);
+		                    } else {
+		                        member.setUserId(memberOrJsonOrString);
+		                    }
+		                } else {
+		                	if(memberOrJsonOrString.id && !memberOrJsonOrString.userId && !memberOrJsonOrString.email){
+		                		this.isEmail(memberOrJsonOrString.id) ? memberOrJsonOrString.email = memberOrJsonOrString.id : memberOrJsonOrString.userId = memberOrJsonOrString.id;
+		                		delete memberOrJsonOrString.id;
+		                	}
+		                    member._fields = lang.mixin({}, memberOrJsonOrString);
+		                }
+		                return member;
+		            }
 				},
 
 				_constructPayloadMember : function(member) {

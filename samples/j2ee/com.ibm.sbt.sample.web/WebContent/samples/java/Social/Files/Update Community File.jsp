@@ -1,5 +1,5 @@
 <!-- /*
- * © Copyright IBM Corp. 2012
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -38,31 +38,29 @@
   pageEncoding="ISO-8859-1"%>
 <html>
 <head>
-<title>SBT JAVA Sample - Add Community Member</title>
+<title>SBT JAVA Sample - Update Community File</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
 <body>
-  <h4>Upload File</h4>
+  <h4>Update Community File</h4>
   <div id="content">
     <%
       try {
         CommunityService commService = new CommunityService();
-        String content = "Test File Content";
-        String name = "Test File " + System.nanoTime() + ".txt";
-		String newFileName = "TestCommUpload" + System.currentTimeMillis();
 		CommunityList communities = commService.getMyCommunities();
-	    String communityId = "";
+
 	    if(communities != null && ! communities.isEmpty())  {
-	    	communityId = communities.get(0).getCommunityUuid();
-	    	out.println("Community Name : " + communities.get(0).getTitle());
+	    	String communityId = communities.get(0).getCommunityUuid();
+	    	
+	    	String content = "Test File Content";
+	 		String newFileName = "TestCommUpload" + System.currentTimeMillis();
 			File fileUploaded = commService.uploadFile(new ByteArrayInputStream(content.getBytes(Charset.forName("UTF-8"))), communityId, newFileName, content.length());
-            out.println("File created: id ["+fileUploaded.getFileId()+"] title [" + fileUploaded.getTitle() + "]");
             
 	        //update Community File's metadata 
             FileService fileService = new FileService();
             FileList files = fileService.getCommunityFiles(communityId, null);
-            if(files != null && ! files.isEmpty())  { 
+            if(files != null && ! files.isEmpty())  {
             	File fileEntry = files.get(0);
             	String communityLibraryId = fileEntry.getLibraryId(); 
             	fileEntry.setLabel(fileEntry.getLabel()+"UPDATED");

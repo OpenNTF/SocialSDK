@@ -244,7 +244,7 @@ define(["../../../declare",
 		},
 		
 		/**
-		 * remmove the list of suggestions that appeas when searching
+		 * remove the list of suggestions that appeas when searching
 		 * @method removeSuggestionPopUp
 		 * @param searchBoxElement The DOM Node that represents the search box
 		 * @param popUpElement the DOM node pop up

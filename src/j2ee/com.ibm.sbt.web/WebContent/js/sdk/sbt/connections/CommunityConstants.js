@@ -171,7 +171,14 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
             communityLink : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/container']/@href",
             eventAtomInstances : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/calendar/event/instances']/@href",
             eventAtomAttendees : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/calendar/event/attend']/@href",
-            eventAtomFollowers : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/calendar/event/follow']/@href"
+            eventAtomFollowers : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/calendar/event/follow']/@href",
+            frequency : "snx:recurrence/@frequency",
+            interval : "snx:recurrence/@interval",
+            until : "snx:recurrence/snx:until",
+            allDay : "snx:recurrence/snx:allday",
+            startDate : "snx:recurrence/snx:startDate",
+            endDate : "snx:recurrence/snx:endDate",
+            byDay : "snx:recurrence/snx:byDay"
         },
 
         /**
@@ -307,7 +314,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.CommunityService
          */
-        AtomCommunityEvents : "/${communities}/calendar/atom/calendar/event?calendarUuid=8cf0c846-84c0-4b05-9190-a68064cc763f&startDate=2013-10-03T15%3A27%3A00Z&lang=en",
+        AtomCommunityEvents : "/${communities}/calendar/atom/calendar/event",
         
         /**
          * Get full atom event.

@@ -59,6 +59,15 @@ define([ "../declare", "../lang" ], function(declare,lang) {
         },
         
         /**
+         * Called to get the handler data.
+         * 
+         * @param data
+         */
+        getData : function() {
+        	return this.data;
+        },
+        
+        /**
          * @method getAsString
          * @param data
          * @returns

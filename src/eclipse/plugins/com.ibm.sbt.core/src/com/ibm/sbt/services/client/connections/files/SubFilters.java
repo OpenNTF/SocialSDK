@@ -31,17 +31,23 @@ public class SubFilters {
 	public static String	DOCUMENTS	= "/documents";
 	public static String	COMMENT		= "/comment";
 	public static String	COLLECTION	= "/collection";
-	public static String	LIBRARY		= "/userlibrary";
+	public static String	USERLIBRARY	= "/userlibrary";
+	public static String	LIBRARY		= "/library";
 	public static String	RECYCLEBIN	= "/view/recyclebin";
 	public static String	VERSION		= "/version";
+	public static String 	COMMUNITYCOLLECTION = "/communitycollection";
+	public static String 	COMMUNITYLIBRARY = "/communitylibrary";
 
 	private String			userId;
+	private String			libraryId;
 	private String			fileId;
 	private String			documentsId;
 	private String			commentId;
 	private String			collectionId;
 	private String			recycleBinDocumentId;
 	private String			versionId;
+	private String			communityCollectionId;
+	private String			communityLibraryId;
 
 	public SubFilters() {
 	}
@@ -108,5 +114,29 @@ public class SubFilters {
 			return true;
 		}
 		return false;
+	}
+
+	public void setCommunityCollectionId(String communityCollectionId) {
+		this.communityCollectionId = communityCollectionId;
+	}
+
+	public String getCommunityCollectionId() {
+		return communityCollectionId;
+	}
+
+	public void setCommunityLibraryId(String communityLibraryId) {
+		this.communityLibraryId = communityLibraryId;
+	}
+
+	public String getCommunityLibraryId() {
+		return communityLibraryId;
+	}
+
+	public void setLibraryId(String libraryId) {
+		this.libraryId = libraryId;
+	}
+
+	public String getLibraryId() {
+		return libraryId;
 	}
 }

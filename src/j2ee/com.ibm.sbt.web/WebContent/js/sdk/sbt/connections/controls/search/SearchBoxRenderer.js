@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -21,8 +21,11 @@ define(["../../../declare",
         "../../../text!./templates/PopUpTemplate.html",
         "../../../text!./templates/SuggestPopUpTemplate.html",
         "../ConnectionsGridRenderer",
-        "../../../i18n!./nls/SearchBoxRenderer"], 
-        function(declare,lang, template, SuggestTemplate, PopUpTemplate, SuggestionPopUp, ConnectionsGridRenderer,nls){
+        "../../../i18n!./nls/SearchBoxRenderer",
+        "../../../text!./templates/MemberListItemTemplate.html",
+        "../../../text!./templates/MemberListTemplate.html"], 
+        function(declare,lang, template, SuggestTemplate, PopUpTemplate, SuggestionPopUp, ConnectionsGridRenderer,nls,
+        		MemberListItemTemplate, MemberListTemplate){
 	/**
 	 * @class SearchBoxRenderer
 	 * @namespace sbt.connections.controls.search
@@ -79,6 +82,37 @@ define(["../../../declare",
 		},
 		
 		/**
+		 * Converts the HTML member list item template into a DOM node.
+		 * Creates a div and sets it's inner html to be the member list item template
+		 * @method getMemberListItemNode
+		 * @param memberName The name to display
+		 * @returns the applications list pop up DOM Node
+		 */
+		getMemberListItemNode: function(memberName){
+			var domstr = this._substituteItems(MemberListItemTemplate, this);
+			domstr = this._substituteMemberName(domstr, memberName);
+			
+			var obj = this._convertToDomNodeNoWrapper(domstr);
+			
+			return obj;	
+		},
+		
+		/**
+		 * Converts the HTML member list template into a DOM node.
+		 * Creates a div and sets it's inner html to be the member list template
+		 * @method getMemberListItemNode
+		 * @returns the applications list pop up DOM Node
+		 */
+		getMemberListNode: function(){
+			
+			var domstr = this._substituteItems(MemberListTemplate, this);
+			MemberListTemplate = domstr;
+			
+			var div = this._convertToDomNode(MemberListTemplate);
+			return div;	
+		},
+		
+		/**
 		 * Attaches events to the template 
 		 * @method render
 		 * @param searchBox
@@ -107,6 +141,63 @@ define(["../../../declare",
 			el.appendChild(this._appsPopUp);
 			this._appsPopUp.firstChild.focus();
 			return this._appsPopUp;
+		},
+		
+		/**
+		 * renders a member list item
+		 * @method renderMemberListItem
+		 * @param memberName The member name to display
+		 * @param memberId The member's profile id - this acts as a unique identifier (needed when, for example,
+		 * 					  creating a new community)
+		 */
+		_appsMemberListItem: null,
+		renderMemberListItem: function(searchBox, memberName, memberId){
+			// Get node
+			this._appsMemberListItem = this.getMemberListItemNode(memberName);
+			
+			// Create member object for storage
+			var newMember = new Object();
+			newMember.html = this._appsMemberListItem.innerHTML;
+			newMember.id = memberId;
+			newMember.name = memberName;
+			// Make sure that the member hasn't already been selected
+			for (var i = 0; i < searchBox._members.length; i++) {
+				var member = searchBox._members[i];
+				if (member.html == newMember.html) {
+					return;
+				}
+			}
+			
+			// Add it to the list
+			this._appsMemberList.appendChild(this._appsMemberListItem);
+			
+			// Attach event listeners
+			this._doAttachEvents(searchBox,this._appsMemberListItem,{});	
+			
+			// Keep track of the added member
+			searchBox._members.push(newMember);
+			
+			return this._appsMemberListItem;
+		},
+		/**
+		 * renders the member list
+		 * @method renderMemberList
+		 */
+		_appsMemberList: null,
+		renderMemberList: function(el){
+			
+			if(!this._appsMemberList){
+				// Generate the DOM object representing the member list
+				this._appsMemberList = this.getMemberListNode();
+			}
+			
+			// Append the list to the parent
+			el.appendChild(this._appsMemberList);
+		
+			// Request focus
+			this._appsMemberList.firstChild.focus();
+			
+			return this._appsMemberList;
 		},
 		
 		
@@ -151,7 +242,7 @@ define(["../../../declare",
 		},
 		
 		/**
-		 * Converts a HTML String to a DOM Node
+		 * Converts a HTML String to a DOM Node, wrapping a div around it
 		 * @method _convertToDomNode
 		 * @param template the html string to be converted to a DOM node
 		 * @returns A DOM Node 
@@ -165,6 +256,23 @@ define(["../../../declare",
 				div= wrapper;
 			}
 			return div;	
+		},
+		
+		/**
+		 * Converts a HTML String to a DOM Node, without wrapping a div around it
+		 * @method _convertToDomNode
+		 * @param template the html string to be converted to a DOM node
+		 * @returns A DOM Node 
+		 */
+		_convertToDomNodeNoWrapper: function(template){
+			var div = null;
+			if(typeof template =="string"){
+				var wrapper= document.createElement('div');
+				wrapper.innerHTML= template;
+				wrapper.tabIndex = 0;
+				div= wrapper;
+			}
+			return div.firstChild;	
 		},
 		
 		/**
@@ -196,6 +304,19 @@ define(["../../../declare",
 			}
 			//if no more strings to substitute return the final string	
 			return text;
+		},
+		
+		/**
+		 * Override _substituteMemberName as there are only NLS strings to be substituted 
+		 * no XPath values, functions etc. This function substitutes the member name in the template
+		 * with the actual member item name.
+		 * @method _substituteMemberName
+		 * @param template
+		 * @param renderer
+		 * @returns
+		 */
+		_substituteMemberName: function(template,memberName){
+			return template.replace("${memberName}", memberName);
 		}
 	});
 	

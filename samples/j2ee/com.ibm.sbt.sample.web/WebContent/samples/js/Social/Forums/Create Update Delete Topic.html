@@ -1,0 +1,61 @@
+<div id="error" style="display:none;" class="alert alert-error"></div>
+<div id="success" style="" class="alert alert-success"></div>
+<div class="form-horizontal">
+    <legend>Forum Topic Details</legend>
+    <div class="control-group">
+    	<label class="control-label">Forum Title:</label>
+        <div class="controls">
+            <input id="forumTitle" type="text" placeholder="Forum Title" style="width:400px"></input>
+        </div>
+        <div style="height:4px"></div>
+    	<label class="control-label">Forum Id:</label>
+        <div class="controls">
+            <input id="forumUuid" type="text" placeholder="Forum Id" style="width:400px"></input>
+        </div>
+        <div style="height:8px"></div>
+        <div class="controls">
+	    	<button class="btn btn-primary" id="refreshBtn">Refresh</button>
+        </div>
+    </div>
+    <div class="control-group">
+    	<label class="control-label">Forum Topic Id:</label>
+        <div class="controls">
+            <input id="topicUuid" type="text" placeholder="Forum Topic Id" style="width:400px"></input>
+        </div>
+        <div style="height:4px"></div>
+    	<label class="control-label">Community Id:</label>
+        <div class="controls">
+            <input id="communityUuid" type="text" placeholder="Community Id" style="width:400px" disabled="disabled"></input>
+        </div>
+        <div style="height:4px"></div>
+        <label class="control-label">Title:</label>
+        <div class="controls">
+            <input id="topicTitle" type="text" placeholder="Title" style="width:400px"></input>
+        </div>
+        <div style="height:4px"></div>
+        <label class="control-label">Content:</label>
+        <div class="controls">
+            <input id="topicContent" type="text" placeholder="Content" style="width:400px"></input>
+        </div>
+        <div style="height:4px"></div>
+        <label class="control-label">Tags:</label>
+        <div class="controls">
+            <input id="topicTags" type="text" placeholder="Tags" style="width:400px"></input>
+        </div>
+        <div style="height:4px"></div>
+        <div class="controls">
+        	<label><input id="topicQuestion" type="checkbox"/> Question</label>
+        	<label><input id="topicPin" type="checkbox" disabled="true"/> Pin</label>
+        	<label><input id="topicLock" type="checkbox" disabled="true"/> Lock</label>
+        	<label><input id="topicNRBCU" type="checkbox" disabled="true"/> Not Recommended By Current User</label>
+        </div>
+        <div style="height:8px"></div>
+        <div class="controls">
+	    	<button class="btn" id="startBtn">Start</button>
+	    	<button class="btn" id="updateBtn">Update</button>
+	        <button class="btn" id="deleteBtn">Delete</button>
+	        <button class="btn" id="likeBtn">Like</button>
+        </div>
+        <input id="entry" type="hidden"></input>
+    </div>
+</div>

@@ -2733,9 +2733,7 @@ public class FileService extends BaseService {
             return new File();
         }
         Document updateFilePayload = null;
-        if (payloadMap != null && !payloadMap.isEmpty()) {
-            updateFilePayload = this.constructPayload(fileId, payloadMap);
-        }
+        updateFilePayload = this.constructPayload(fileId, payloadMap);
         return this.updateFileMetadata(fileId, params, updateFilePayload);
     }
     

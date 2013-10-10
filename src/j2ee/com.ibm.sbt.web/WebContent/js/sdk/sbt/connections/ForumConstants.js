@@ -22,6 +22,11 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
     return lang.mixin(conn, {
     	
     	/**
+    	 * Term value with a forum recommendation 
+    	 */
+    	FlagAnswer : "recommendation",
+    	
+    	/**
     	 * Term value when a forum reply is an accepted answer 
     	 */
     	FlagAnswer : "answer",
@@ -79,7 +84,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
             answered: "a:category[@term='answered' and @scheme='http://www.ibm.com/xmlns/prod/sn/flags']",
             notRecommendedByCurrentUser: "a:category[@term='NotRecommendedByCurrentUser']",
             threadRecommendationCount: "a:category[@term='ThreadRecommendationCount']/@label",
-            recommendationsUrl : "a:link[@rel='recommendations']/@href",
+            recommendationsUrl : "a:link[@rel='recommendations']/@href"
         }, conn.AtomEntryXPath),
         
         /**
@@ -91,7 +96,13 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
             permissions : "snx:permissions",
             communityUuid : "snx:communityUuid",
             answer: "a:category[@term='answer' and @scheme='http://www.ibm.com/xmlns/prod/sn/flags']",
-            notRecommendedByCurrentUser: "a:category[@term='NotRecommendedByCurrentUser']"
+            replyTo: "thr:in-reply-to/@ref",
+            notRecommendedByCurrentUser: "a:category[@term='NotRecommendedByCurrentUser']",
+            recommendationsUrl : "a:link[@rel='recommendations']/@href"
+        }, conn.AtomEntryXPath),
+        
+        ForumRecommendationXPath : lang.mixin({
+            postUuid : "a:link[@rel='self']/@href"
         }, conn.AtomEntryXPath),
         
         /**

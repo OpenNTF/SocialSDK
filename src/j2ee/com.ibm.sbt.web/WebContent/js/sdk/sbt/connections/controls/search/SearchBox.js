@@ -53,10 +53,6 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
          */
 		constructor: function(args){
 			lang.mixin(this, args);
-			
-			if(args.application && args.application != ""){
-				this.selectedApplication = args.application;
-			}
 		},
 		/**
 		 * function is called after this class has been constructed

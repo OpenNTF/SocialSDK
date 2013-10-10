@@ -63,7 +63,7 @@ define(["../../../declare",
 			
 			var htmlTemplate = "";
 			
-			if(SearchBox.application){
+			if(SearchBox.predefinedSearch){
 				var domStr = this._substituteItems(SingleApplicationSearch, this);
 				SingleApplicationSearch = domStr;
 				htmlTemplate = SingleApplicationSearch;
@@ -221,7 +221,7 @@ define(["../../../declare",
 		renderSuggestionPopUp: function(searchBox,el){
 			
 			if(!this._suggestionPopUp){
-				if(searchBox.application){
+				if(searchBox.predefinedSearch){
 					this._suggestionPopUp= this._convertToDomNode(SingleSearchPopUp);
 				}else{
 					this._suggestionPopUp= this._convertToDomNode(SuggestionPopUp);

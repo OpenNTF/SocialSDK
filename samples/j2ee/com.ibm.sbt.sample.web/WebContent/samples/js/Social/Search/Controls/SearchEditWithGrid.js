@@ -5,7 +5,7 @@ require(["sbt/dom", "sbt/connections/controls/search/SearchBox", "sbt/connection
         
         dom.byId("searchBox").appendChild(searchBox.domNode);
         
-        searchBox.domNode.addEventListener("searchReadyEvent",function(event){
+        searchBox.domNode.addEventListener("searchResultEvent",function(event){
         	if(!event){
         		event = window.event;
         	}

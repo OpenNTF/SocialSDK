@@ -17,10 +17,15 @@ package com.ibm.sbt.test.js.connections.activities.api;
 
 import java.util.List;
 
+import org.junit.Assert;
+
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.ibm.sbt.automation.core.test.connections.BaseActivitiesTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
+import com.ibm.sbt.services.client.connections.activity.Activity;
 
 /**
  * @author mwallace
@@ -31,16 +36,25 @@ public class GetAllActivities extends BaseActivitiesTest {
 
     static final String SNIPPET_ID = "Social_Activities_API_GetAllActivities";
     
-    public GetAllActivities() {
-        setAuthType(AuthType.AUTO_DETECT);
-    }
+    Activity activity;
+
+	@Before
+	public void init() {
+		activity = createActivity();		
+	}
+
+	@After
+	public void destroy() {		
+		deleteActivity(activity.getActivityId());
+	}
+       
 
     @Test
     public void testGetAllActivities() {
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         List jsonList = previewPage.getJsonList();
-        // TODO create soem activities
-        //Assert.assertFalse("Get my activities returned no activities", jsonList.isEmpty());
+       
+        Assert.assertFalse("Get all activities returned no activities", jsonList.isEmpty());
     }
 
 }

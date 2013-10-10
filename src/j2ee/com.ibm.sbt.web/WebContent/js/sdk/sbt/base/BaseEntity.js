@@ -176,7 +176,7 @@ define([ "../declare", "../lang", "../log", "../stringUtil" ],
         getAsBoolean : function(fieldName) {
             this._validateFieldName(fieldName, "getAsBoolean");
 
-            if (this._fields[fieldName] == undefined) {
+            if (this.dataHandler && this._fields[fieldName] == undefined) {
                 return this.dataHandler.getAsBoolean(fieldName);
             } else if (this.dataHandler) {
                 return this._fields[fieldName];

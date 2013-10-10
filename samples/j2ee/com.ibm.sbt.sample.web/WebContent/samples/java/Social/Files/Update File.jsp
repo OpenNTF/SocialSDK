@@ -43,25 +43,29 @@
       try {
           FileService fileService = new FileService();
           FileList fileEntries = fileService.getMyFiles();
-          File fileEntry = fileEntries.get(0);
-          String fileId = fileEntry.getFileId();
-          String shareWithUserId = Context.get().getProperty("sample.userId2");
-          fileEntry = fileService.getFile(fileId, false);
-
-          out.println("<b> Updating File </b>");
-          out.println("<br>");
-
-          FileCreationParameters p = new FileCreationParameters();
-          p.sharePermission = FileCreationParameters.Permission.EDIT;
-          p.shareWith.add(shareWithUserId);
-          p.tags.add("TagUpdateFile");
-          Map<String, String> paramsMap = p.buildParameters();
-
-          fileEntry.setLabel("LabelUpdateFileNew" + System.currentTimeMillis());
-          fileEntry.setSummary("SummaryNew" + System.currentTimeMillis());
-          fileEntry = fileService.updateFileMetadata(fileEntry, paramsMap);
-
-          out.println("File Updated : " + fileEntry.getFileId());
+          if(fileEntries != null) { 
+			  File fileEntry = fileEntries.get(0);
+	          String fileId = fileEntry.getFileId();
+	          String shareWithUserId = Context.get().getProperty("sample.userId2");
+	          fileEntry = fileService.getFile(fileId, false);
+	
+	          out.println("<b> Updating File </b>");
+	          out.println("<br>");
+	
+	          FileCreationParameters p = new FileCreationParameters();
+	          p.sharePermission = FileCreationParameters.Permission.EDIT;
+	          p.shareWith.add(shareWithUserId);
+	          p.tags.add("TagUpdateFile");
+	          Map<String, String> paramsMap = p.buildParameters();
+	
+	          fileEntry.setLabel("LabelUpdateFileNew" + System.currentTimeMillis());
+	          fileEntry.setSummary("SummaryNew" + System.currentTimeMillis());
+	          fileEntry = fileService.updateFileMetadata(fileEntry, paramsMap);
+	
+	          out.println("File Updated : " + fileEntry.getFileId());
+          } else {
+        	  out.println("No Files to be updated");
+          }
       } catch (Throwable e) {
           out.println("<pre>");
           out.println(e.getMessage());

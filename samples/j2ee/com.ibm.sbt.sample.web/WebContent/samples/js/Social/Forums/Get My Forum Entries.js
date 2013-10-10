@@ -1,61 +1,112 @@
-require(["sbt/connections/ForumService", "sbt/dom"], 
-    function(ForumService,dom) {
-        var createRow = function(forumTitle, topicTitle, replyTitle) {
-            var table = dom.byId("forumsTable");
-            var tr = document.createElement("tr");
-            table.appendChild(tr);
-            var td = document.createElement("td");
-            td.innerHTML = forumTitle;
-            tr.appendChild(td);
-            td = document.createElement("td");
-            td.innerHTML = topicTitle;
-            tr.appendChild(td);
-            td = document.createElement("td");
-            td.innerHTML = replyTitle;
-            tr.appendChild(td);
+require(["sbt/connections/ForumService", "sbt/dom", "sbt/lang"], 
+    function(ForumService,dom,lang) {
+		var forumToString = function(forum) {
+			return (!forum) ? "" : forum.getTitle() + " [uuid=" + forum.getForumUuid() + "]";
+		};
+
+		var topicToString = function(topic) {
+			return (!topic) ? "" : topic.getTitle() + 
+					" [uuid=" + topic.getTopicUuid() + 
+					", pinned=" + topic.isPinned() +
+					", locked=" + topic.isLocked() +
+					", question=" + topic.isQuestion() +
+					", answered=" + topic.isAnswered() + "]";
+		};
+
+		var replyToString = function(reply) {
+			return (!reply) ? "" : lang.trim(reply.getContent()) + " [uuid=" + reply.getReplyUuid() + "]";
+		};
+		
+        var addForumReply = function(forumReply, postUuid, forumService, ul) {
+        	// only display replies to the specified post
+        	if (postUuid != forumReply.getReplyToPostUuid()) {
+        		return;
+        	}
+        	
+            var li = document.createElement("li");
+            li.innerHTML = replyToString(forumReply);
+            ul.appendChild(li);
+            
+            ul = document.createElement("ul");
+            li.appendChild(ul);
+            
+            getForumReplies({ replyUuid: forumReply.getReplyUuid() }, forumService, ul);
+        };
+        
+        var addForumTopic = function(forumTopic, forumService, ul) {
+            var li = document.createElement("li");
+            li.innerHTML = topicToString(forumTopic);
+            ul.appendChild(li);
+            
+            ul = document.createElement("ul");
+            li.appendChild(ul);
+            
+            getForumReplies({ topicUuid : forumTopic.getTopicUuid() }, forumService, ul);
+        };
+        
+        var addForum = function(forum, forumService) {
+        	var ul = dom.byId("forums");
+            var li = document.createElement("li");
+            li.innerHTML = forumToString(forum);
+            ul.appendChild(li);
+            
+            ul = document.createElement("ul");
+            li.appendChild(ul);
+            
+            getForumTopics(forum, forumService, ul);
+        };
+        
+		var getForumReplies = function(args, forumService, ul) {
+            forumService.getForumReplies(args).then(
+            	function(replies) {
+            		for(var i=0; i<replies.length; i++) {
+                        var reply = replies[i];
+                        var postUuid = args.topicUuid || args.replyUuid;
+                        addForumReply(reply, postUuid, forumService, ul);
+                    }
+            	},
+            	function(error) {
+            		displayError(error);
+            	}
+            );
+        };
+		
+		var getForumTopics = function(forum, forumService, ul) {
+            var forumUuid = forum.getForumUuid();
+            forumService.getForumTopics(forumUuid).then(
+            	function(topics) {
+            		for(var i=0; i<topics.length; i++) {
+                        var topic = topics[i];
+                        addForumTopic(topic, forumService, ul);
+                    }
+            	},
+            	function(error) {
+            		displayError(error);
+            	}
+            );
+        };
+		
+        var displayMessage = function(message) {
+        	dom.setText("info", message);
+        };
+
+        var displayError = function(error) {
+        	dom.setText("error", error.message);
         };
 
         var forumService = new ForumService();
         forumService.getMyForums().then(
             function(forums) {
                 if (forums.length == 0) {
-                    text = "You do not have any forums.";
+                	displayMessage("You do not have any forums.");
                 } else {
-                    var forum = forums[0];
-                    var forumTitle = forum.getTitle(); 
-                    createRow(forumTitle, "", "");
-                    
-                    var forumUuid = forum.getForumUuid();
-                    forumService.getForumTopics(forumUuid).then(
-                    	function(topics) {
-                    		if (topics.length > 0) {
-                                var topic = topics[0];
-                                var topicTitle = topic.getTitle(); 
-                                createRow("", topicTitle, "");
-                                
-                                var topicUuid = topic.getTopicUuid();
-                                forumService.getForumReplies(topicUuid).then(
-                                	function(replies) {
-                                		for(var i=0; i<replies.length; i++){
-                                            var reply = replies[i];
-                                            var replyContent = reply.getContent(); 
-                                            createRow("", "", replyContent);
-                                        }
-                                	},
-                                	function(error) {
-                                		dom.setText("content", "Error code:" +  error.code + ", message:" + error.message);
-                                	}
-                                );
-                            }
-                    	},
-                    	function(error) {
-                    		dom.setText("content", "Error code:" +  error.code + ", message:" + error.message);
-                    	}
-                    );
+                	for (var i in forums) {
+                		addForum(forums[i], forumService);
+                	}
                 }
             },
             function(error) {
-                dom.setText("content", "Error code:" +  error.code + ", message:" + error.message);
+            	displayError(error);
             }       
     	);
     }

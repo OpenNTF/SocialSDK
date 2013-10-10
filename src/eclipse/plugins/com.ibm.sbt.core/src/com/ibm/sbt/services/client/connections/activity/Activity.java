@@ -127,8 +127,22 @@ public class Activity extends BaseEntity {
 		setAsString(ActivityXPath.Content, goal);
 	}
 	
-	public void setContent(String goal){
-		setGoal(goal);
+	/**
+	 * Method fetches the Content Type
+	 * @param content
+	 */
+	public void setContent(String content){
+		setGoal(content);
+	}
+	
+	/**
+	 * Method allows you to set the Content Type while creating an Activity(Node)
+	 * @param type
+	 */
+	public void setContentType(String type){
+		if(type != null) {
+			setAsString(ActivityXPath.ContentType, type);
+		}
 	}
 	
 	public void setCommunityUuid(String communityUuid){
@@ -173,7 +187,11 @@ public class Activity extends BaseEntity {
 	}
 	
 	public String getTitle() {
-		return getAsString(ActivityXPath.Title);
+		String title = getAsString(ActivityXPath.Title);
+		if(StringUtil.isEmpty(title)) {
+			title = getAsString(ActivityXPath.ActivityNodeTitle);
+		}
+		return title;
 	}
 	
 	public String getUpdated() {
@@ -212,6 +230,10 @@ public class Activity extends BaseEntity {
 	
 	public String getContent() {
 		return getAsString(ActivityXPath.Content);
+	}
+	
+	public String getContentType() {
+		return getAsString(ActivityXPath.ContentType);
 	}
 	
 	public String getEntryType() {
@@ -283,6 +305,7 @@ public class Activity extends BaseEntity {
 		restoreActivity.setId(this.getActivityId());
 		restoreActivity.setEntryType(this.getEntryType());
 		restoreActivity.setGoal(this.getContent());
+		restoreActivity.setContentType(this.getContentType());
 		restoreActivity.setTitle(this.getTitle());
 		restoreActivity.setCommunityUuid(this.getCommunityUuid());
 		restoreActivity.setCommunityLink(this.getCommunityLink());

@@ -45,6 +45,7 @@ public enum ForumsXPath implements FieldEntry{
 	permissions("./snx:permissions"),
 	inReplyTo("./thr:in-reply-to/@ref"),
 	selfUrl("./a:link[@rel=\"self\"]/@href"),
+	alternateUrl("./a:link[@rel=\"alternate\"]/@href"),
 	moderation("./snx:moderation/@status"),
 	threadCount("./link[@rel='replies']/@thr:count"),
 	tagEntry("/app:categories/a:category"),

@@ -92,8 +92,16 @@ public class ActivityTransformer extends AbstractBaseTransformer {
 			if(currentElement.contains("tag")){
 				tagsXml += getXMLRep(getStream(SOURCEPATH + "TagTmpl.xml"), "tag", XmlTextUtil.escapeXMLChars(currentValue));
 			}
-			if(currentElement.contains("Content")){
+			if(currentElement.contains("Content") && !StringUtil.equals(currentElement, "ContentType")){
 				contentXml += getXMLRep(getStream(SOURCEPATH + "ContentTmpl.xml"), "Content", XmlTextUtil.escapeXMLChars(currentValue));
+				String type = "";
+				if(fieldmap.containsKey("ContentType")) {
+					type = fieldmap.get("ContentType").toString(); 
+				}
+				if(StringUtil.isEmpty(type)) {
+					type = "text";
+				}
+				contentXml = getXMLRep(contentXml, "ContentType", XmlTextUtil.escapeXMLChars(type));
 			}
 			if(currentElement.contains("Title")){
 				titleXml += getXMLRep(getStream(SOURCEPATH + "TitleTmpl.xml"), "Title", XmlTextUtil.escapeXMLChars(currentValue));
@@ -110,7 +118,7 @@ public class ActivityTransformer extends AbstractBaseTransformer {
 			if(currentElement.contains("DueDate")){
 				dueDateXml = getXMLRep(getStream(SOURCEPATH+ "DueDateTmpl.xml"), "DueDate", XmlTextUtil.escapeXMLChars(currentValue));
 			}
-			if(currentElement.contains("position") || currentElement.equalsIgnoreCase("position")){
+			if(currentElement.contains("position") || StringUtil.equalsIgnoreCase(currentElement, "position")){
 				positionXml += getXMLRep(getStream(SOURCEPATH + "PositionTmpl.xml"), "position", XmlTextUtil.escapeXMLChars(currentValue));
 			}
 			if(currentElement.contains("assignedToId") || currentElement.contains("assignedToName")){

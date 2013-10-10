@@ -1,5 +1,5 @@
 <!-- /*
- * © Copyright IBM Corp. 2012
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -15,7 +15,6 @@
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@page import="com.ibm.commons.util.StringUtil"%>
-<%@page import="com.ibm.sbt.services.client.connections.communities.model.CommunityXPath"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.CommentList"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.CommunityList"%>
 <%@page import="java.io.ByteArrayOutputStream"%>
@@ -36,32 +35,28 @@
   pageEncoding="ISO-8859-1"%>
 <html>
 <head>
-<title>SBT JAVA Sample - Add Community Member</title>
+<title>SBT JAVA Sample - Add and Get Community File Comments</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
 <body>
-  <h4>Upload File</h4>
+  <h4>Add and Get Community File Comments</h4>
   <div id="content">
     <%
       try {
         CommunityService commService = new CommunityService();
-        String content = "Test File Content";
-        String name = "Test File " + System.nanoTime() + ".txt";
-		String newFileName = "TestCommUpload" + System.currentTimeMillis();
 		CommunityList communities = commService.getMyCommunities();
-	    String communityId = "";
+
 	    if(communities != null && ! communities.isEmpty())  {
-	    	communityId = communities.get(0).getCommunityUuid();
-	    	out.println("Community Name : " + communities.get(0).getTitle());
+	    	String communityId = communities.get(0).getCommunityUuid();
+	    	
+	    	String content = "Test File Content";
+			String newFileName = "TestCommUpload" + System.currentTimeMillis();
 			File fileUploaded = commService.uploadFile(new ByteArrayInputStream(content.getBytes(Charset.forName("UTF-8"))), communityId, newFileName, content.length());
-            out.println("File created: id ["+fileUploaded.getFileId()+"] title [" + fileUploaded.getTitle() + "]");
             
             // adding comment to community file
             FileService fileService = new FileService();
-			for(int i=0;i<5;i++) {            
-            	fileService.addCommentToCommunityFile(fileUploaded.getFileId(), "JSP Added community file comment"+System.currentTimeMillis(), communityId, null);
-			}
+          	fileService.addCommentToCommunityFile(fileUploaded.getFileId(), "JSP Added community file comment"+System.currentTimeMillis(), communityId, null);
 			
             // Get All community File Comments
            CommentList comments = fileService.getAllCommunityFileComments(fileUploaded.getFileId(), communityId, null);

@@ -72,6 +72,7 @@ import com.ibm.sbt.plugin.SbtCoreLogger;
 import com.ibm.sbt.service.debug.ProxyDebugUtil;
 import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
+import com.ibm.sbt.services.endpoints.SmartCloudFormEndpoint;
 import com.ibm.sbt.services.util.SSLUtil;
 
 /**
@@ -1087,6 +1088,18 @@ public abstract class ClientService {
 			forceAuthentication(args);
 			return null;
 		}
+		
+		// Smartcloud platform returns 200 with a login page when authentication is required particularly in case of form based authentication
+		// To handle this we check the content type of response from Smartcloud. It should never be text/html except in case it is returning a login form
+		if(httpResponse.getStatusLine().getStatusCode() == HttpServletResponse.SC_OK && endpoint instanceof SmartCloudFormEndpoint){
+			Header[] value = httpResponse.getHeaders("Content-Type");
+			String headerValue = value[0].getValue();
+			if(StringUtil.equals(headerValue, "text/html")){
+				forceAuthentication(args);
+				return null;
+			}
+		}
+		
 		Handler format = findHandler(httpRequestBase, httpResponse, args.handler);
 		
 		Response response = new Response(httpClient, httpResponse, httpRequestBase, args, format);

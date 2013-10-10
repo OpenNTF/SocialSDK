@@ -31,6 +31,7 @@ import com.ibm.sbt.security.authentication.AuthenticationException;
 import com.ibm.sbt.services.endpoints.BasicEndpoint;
 import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
+import com.ibm.sbt.services.endpoints.FormEndpoint;
 
 
 public class BasicAuthCredsHandler extends AbstractServiceHandler {
@@ -73,6 +74,31 @@ public class BasicAuthCredsHandler extends AbstractServiceHandler {
 					basicendpoint.setUser(user);
 		    		basicendpoint.setPassword(pswd);
 		    		basicendpoint.writeToStore();
+		    		if(getCallerType(pathInfo).equals(JS_APP)){
+		    			generateCloseScript(request, response, AUTH_ACCEPTED);
+		    		}else if(getCallerType(pathInfo).equals(JAVA_APP)){
+		    			redirectToJavaApp(request, response, AUTH_ACCEPTED );
+		    		}
+				}else{
+					response.setStatus(401);
+					if(getCallerType(pathInfo).equals(JS_APP)){
+		    			generateCloseScript(request, response, AUTH_DECLINED);
+		    		}else if(getCallerType(pathInfo).equals(JAVA_APP)){
+		    			redirectToJavaApp(request, response, AUTH_DECLINED);
+		    		}
+				}
+			} catch (AuthenticationException e) {
+				Platform.getInstance().log("PasswordException in BasicAuthCredsHandler"+e);
+			}
+    	}else if(endpoint instanceof FormEndpoint){
+    		String user = request.getParameter(USER_NAME);
+    		String pswd = request.getParameter(PASSWORD);
+    		FormEndpoint scendpoint = (FormEndpoint)endpoint;
+    		try {
+				if(scendpoint.login(user, pswd))
+				{
+					scendpoint.setUser(user);
+					scendpoint.setPassword(pswd);
 		    		if(getCallerType(pathInfo).equals(JS_APP)){
 		    			generateCloseScript(request, response, AUTH_ACCEPTED);
 		    		}else if(getCallerType(pathInfo).equals(JAVA_APP)){

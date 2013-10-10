@@ -2070,13 +2070,10 @@ define(
 					promise = new Promise();
 					this.getActivityNodeFromTrash(activityUuid).then(function(deleted) {
 						return deleted;
-					}).then(function(deleted) {
-						if (deleted.isDeleted() == false) {
+					}).then(function(activity) {
+						if (!activity.isDeleted()) {
 							promise.rejected("Activity is not in Trash");
-						} else {
-							var restored = _this.newActivity(activityUuid);
-							restored._copyFields(deleted);
-
+						} else {							
 							var requestArgs = {
 								"activityNodeUuid" : activityUuid
 							};
@@ -2084,7 +2081,7 @@ define(
 								method : "PUT",
 								headers : consts.AtomXmlHeaders,
 								query : requestArgs,
-								data : _this._constructPayloadActivityNode(restored)
+								data : _this._constructPayloadActivityNode(activity)
 							};
 							var callbacks = {
 								createEntity : function(service, data, response) {
@@ -2117,13 +2114,10 @@ define(
 					var promise = new Promise();
 					this.getActivityNodeFromTrash(activityNodeUuid).then(function(deletedNode) {
 						return deletedNode;
-					}).then(function(deletedNode) {
-						if (deletedNode.isDeleted() == false) {
+					}).then(function(activityNode) {
+						if (!activityNode.isDeleted()) {
 							promise.rejected("Activity Node is not in Trash");
-						} else {
-							var restoredNode = _this.newActivityNode(activityNodeUuid);
-							restoredNode._copyFields(deletedNode);
-
+						} else {							
 							var requestArgs = {
 								"activityNodeUuid" : activityNodeUuid
 							};
@@ -2131,7 +2125,7 @@ define(
 								method : "PUT",
 								headers : consts.AtomXmlHeaders,
 								query : requestArgs,
-								data : _this._constructPayloadActivityNode(restoredNode)
+								data : _this._constructPayloadActivityNode(activityNode)
 							};
 							var callbacks = {
 								createEntity : function(service, data, response) {

@@ -225,6 +225,9 @@ define([ "../declare", "../lang", "../stringUtil", "./BaseConstants", "./BaseEnt
          */
         createPostData : function() {
             var transformer = function(value,key) {
+            	if (key == "getContent" && this.contentType == "html") {
+            		value = (value && lang.isString(value)) ? value.replace(/</g,"&lt;").replace(/>/g,"&gt;") : value; 
+            	}
                 return value;
             };
             var postData = stringUtil.transform(EntryTmpl, this, transformer, this);

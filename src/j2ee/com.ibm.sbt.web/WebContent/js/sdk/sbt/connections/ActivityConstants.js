@@ -56,7 +56,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang, conn) {
 			url : "a:link[@rel='enclosure']/@href",
 			type : "a:link[@rel='enclosure']/@type",
 			size : "a:link[@rel='enclosure']/@size",
-			length : "a:link/@length",
+			length : "a:link/@length"
 		},
 
 		/**
@@ -71,7 +71,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang, conn) {
 		 * XPath expressions for Text Fields
 		 */
 		TextFieldXPath : {
-			summary : "a:summary",
+			summary : "a:summary"
 		},
 
 		/**

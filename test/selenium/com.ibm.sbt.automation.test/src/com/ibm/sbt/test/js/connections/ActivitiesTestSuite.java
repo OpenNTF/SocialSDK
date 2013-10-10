@@ -20,9 +20,30 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.ibm.sbt.test.js.connections.activities.api.AddMemberToActivity;
+import com.ibm.sbt.test.js.connections.activities.api.ChangeActivityNodeType;
+import com.ibm.sbt.test.js.connections.activities.api.CreateActivity;
+import com.ibm.sbt.test.js.connections.activities.api.CreateActivityNode;
+import com.ibm.sbt.test.js.connections.activities.api.DeleteActivityMember;
+import com.ibm.sbt.test.js.connections.activities.api.DeleteAndRestoreActivity;
+import com.ibm.sbt.test.js.connections.activities.api.DeleteAndRestoreActivityNode;
+import com.ibm.sbt.test.js.connections.activities.api.GetActivitiesInTrash;
+import com.ibm.sbt.test.js.connections.activities.api.GetActivity;
+import com.ibm.sbt.test.js.connections.activities.api.GetActivityMember;
+import com.ibm.sbt.test.js.connections.activities.api.GetActivityNode;
+import com.ibm.sbt.test.js.connections.activities.api.GetActivityNodeTags;
+import com.ibm.sbt.test.js.connections.activities.api.GetActivityNodes;
+import com.ibm.sbt.test.js.connections.activities.api.GetActivityNodesInTrash;
+import com.ibm.sbt.test.js.connections.activities.api.GetActivityTags;
 import com.ibm.sbt.test.js.connections.activities.api.GetAllActivities;
+import com.ibm.sbt.test.js.connections.activities.api.GetAllTags;
+import com.ibm.sbt.test.js.connections.activities.api.GetAllToDos;
 import com.ibm.sbt.test.js.connections.activities.api.GetCompletedActivities;
 import com.ibm.sbt.test.js.connections.activities.api.GetMyActivities;
+import com.ibm.sbt.test.js.connections.activities.api.MoveActivityNodeToSection;
+import com.ibm.sbt.test.js.connections.activities.api.UpdateActivity;
+import com.ibm.sbt.test.js.connections.activities.api.UpdateActivityMember;
+import com.ibm.sbt.test.js.connections.activities.api.UpdateActivityNode;
 
 /**
  * @author mwallace
@@ -30,9 +51,33 @@ import com.ibm.sbt.test.js.connections.activities.api.GetMyActivities;
  * @date 6 Mar 2013
  */
 @RunWith(Suite.class)
-@SuiteClasses({ GetMyActivities.class, GetCompletedActivities.class, GetAllActivities.class })
+@SuiteClasses({ 
+	GetMyActivities.class, 
+	GetCompletedActivities.class, 
+	GetAllActivities.class,
+	AddMemberToActivity.class,
+	ChangeActivityNodeType.class,
+	CreateActivity.class,
+	CreateActivityNode.class,
+	DeleteActivityMember.class,
+	DeleteAndRestoreActivity.class,
+	DeleteAndRestoreActivityNode.class,
+	GetActivitiesInTrash.class,
+	GetActivity.class,
+	GetActivityMember.class,
+	GetActivityNodesInTrash.class,
+	GetActivityNodeTags.class,
+	//GetActivityTags.class,	
+	GetAllTags.class,
+	GetAllToDos.class,	
+	MoveActivityNodeToSection.class,
+	UpdateActivity.class,
+	UpdateActivityMember.class,
+	UpdateActivityNode.class,
+	GetActivityNode.class,
+	GetActivityNodes.class})
 public class ActivitiesTestSuite {
-    @AfterClass
-    public static void cleanup() {
-    }
+	@AfterClass
+	public static void cleanup() {
+	}
 }

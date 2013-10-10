@@ -27,6 +27,9 @@ require(["sbt/connections/ForumService", "sbt/dom"],
         var forumService = new ForumService();
         forumService.getMyTopics().then(
         	function(topics) {
+        		if (topics.length == 0) {
+        			dom.setText("content", "You have no topics.");
+        		}
         		for(var i=0; i<topics.length; i++) {
                     var topic = topics[i];
                     createRow(topic);

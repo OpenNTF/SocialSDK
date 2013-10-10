@@ -63,6 +63,8 @@
 	          fileEntry = fileService.updateFileMetadata(fileEntry, paramsMap);
 	
 	          out.println("File Updated : " + fileEntry.getFileId());
+          } else {
+        	  out.println("No Files to be updated");
           }
       } catch (Throwable e) {
           out.println("<pre>");

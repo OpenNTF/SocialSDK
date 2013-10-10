@@ -868,6 +868,36 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             }
             return this._author;
         },
+        
+        /**
+         * Gets the recurrence information of the event.
+         * 
+         * Recurrence information object consists of:
+         * frequency - 'daily' or 'weekly'
+         * interval - Week interval. Value is int between 1 and 5.
+         * until - The end date of the repeating event.
+         * allDay - 1 if an all day event, 0 otherwise.
+         * startDate - Start time of the event
+         * endDate - End time of the event
+         * byDay - Days of the week this event occurs, possible values are: SU,MO,TU,WE,TH,FR,SA
+         * 
+         * @method getRecurrence
+         * @return {Object} An object containing the above recurrence information of the community event.
+         */
+        getRecurrence : function() {
+            if (!this._recurrence) {
+                this._recurrence = {
+                    frequency : this.getAsString("frequency"),
+                    interval : this.getAsString("interval"),
+                    until : this.getAsString("until"),
+                    allDay : this.getAsString("allDay"),
+                    startDate : this.getAsString("startDate"),
+                    endDate : this.getAsString("endDate"),
+                    byDay : this.getAsString("byDay")
+                };
+            }
+            return this._recurrence;
+        },
 
         /**
          * Gets a contributor of IBM Connections community event.
@@ -1191,11 +1221,24 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         },
         
         /**
-         * Get the Events for a community. See {{#crossLink "CommunityConstants/AtomCommunityEvents:attribute"}}{{/crossLink}} for a listing of url parameters.
-         * @param args
+         * Get the Events for a community. See {{#crossLink "CommunityConstants/AtomCommunityEvents:attribute"}}{{/crossLink}} for a complete listing of parameters.
+         * 
+         * @param communityId The uuid of the Community.
+         * @param startDate Include events that end after this date.
+         * @param endDate Include events that end before this date.
+         * @param args url parameters.
+         * 
          * @returns
          */
-        getCommunityEvents : function(args){
+        getCommunityEvents : function(communityId, startDate, endDate, args){
+        	args = args || {};
+        	args.calendarUuid = communityId;
+        	if(startDate){
+        		args.startDate = startDate;
+        	}
+        	if(endDate){
+        		args.endDate = endDate;
+        	}
             var options = {
                 method : "GET",
                 handleAs : "text",

@@ -127,10 +127,22 @@
         var postData = {
             snippet: getSnippet(),
             debug: debug,
-            jsLibId: getJsLibId(),
-            env: getEnv(),
-            themeId: getThemeId()
+            jsLibId: getJsLibId()
         }; // base of a get request
+        if(getEnv()){
+            postData.env = getEnv();
+        }
+        if(getThemeId()){
+            postData.themeId = getThemeId();
+        }
+        $.extend(postData, getSubstitutionParams()); // add sub params
+        if(postData.missingParams){
+            displayMissingParamsMessage(postData.missingParams);
+            return;
+        }
+        else{
+            hideMissingParamsMessage();
+        }
         
         var newLink = previewPage + "?" + createQuery(postData, "&");
         
@@ -140,14 +152,6 @@
             cssData: css
          }); // add html etc
         
-        $.extend(postData, getSubstitutionParams()); // add sub params
-        if(postData.missingParams){
-            displayMissingParamsMessage(postData.missingParams);
-            return;
-        }
-        else{
-            hideMissingParamsMessage();
-        }
         $.post(previewPage, postData, function(data) {
                 var wrapper = $(".iframeWrapper");
                 wrapper.find(frame).remove();

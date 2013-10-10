@@ -35,7 +35,7 @@ public class Author {
 		this.dataHandler = dataHandler;
 	}
 	
-	public String getUid() {
+	public String getUserid() {
 		return dataHandler.getAsString(ForumsXPath.actorUserid);
 	}
 

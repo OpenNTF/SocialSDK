@@ -18,12 +18,15 @@
  */
 define([ "../config" ], function(sbt) {
     return {
+    	/**
+    	 * Error codes used by the SBT based service implementations.
+    	 */
         sbtErrorCodes : {
             badRequest : 400
         },
     
         /**
-         * Namespaces to be used when reading and ATOM feed
+         * Namespaces to be used when reading the Connections ATOM field
          */
 		Namespaces : {
 			o : "http://ns.opensocial.org/2008/opensocial",
@@ -37,9 +40,11 @@ define([ "../config" ], function(sbt) {
 			td : "urn:ibm.com/td",
 			relevance : "http://a9.com/-/opensearch/extensions/relevance/1.0/",
 			ibmsc : "http://www.ibm.com/search/content/2010",
-			xhtml : "http://www.w3.org/1999/xhtml"
+			xhtml : "http://www.w3.org/1999/xhtml",
+			spelling : "http://a9.com/-/opensearch/extensions/spelling/1.0/",
+			ca : "http://www.ibm.com/xmlns/prod/composite-applications/v1.0 namespace"
 		},
-
+        
 	    /**
 		 * XPath expressions used when parsing an ATOM feed
 		 */
@@ -65,17 +70,19 @@ define([ "../config" ], function(sbt) {
             title : "a:title",
             updated : "a:updated",
             published : "a:published",
-            authorUserid : "a:author/snx:userid",
             authorName : "a:author/a:name",
             authorEmail : "a:author/a:email",
-            contributorUserid : "a:contributor/snx:userid",
+            authorUserid : "a:author/snx:userid",
+            authorUserState : "a:author/snx:userState",
             contributorName : "a:contributor/a:name",
             contributorEmail : "a:contributor/a:email",
+            contributorUserid : "a:contributor/snx:userid",
+            contributorUserState : "a:contributor/snx:userState",
     		content : "a:content[@type='html']",
     		categoryTerm : "a:category/@term",
             editUrl : "a:link[@rel='edit']/@href",
             selfUrl : "a:link[@rel='self']/@href",
-            alternateUrl : "a:link[@rel='alternate']/@href",
+            alternateUrl : "a:link[@rel='alternate']/@href"
         },
         
 	    /**

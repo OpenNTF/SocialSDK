@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -42,6 +42,9 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
         /**Selected row is used for keyboard navigation in the applications pop up*/
 		_selectedRow : -1,
 		
+		/** This list is used to keep track of selected members **/
+		_members : [],
+		
         /**
          * @method constructor The constructor for the SearchBox class
          * @param args
@@ -59,7 +62,13 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 		postCreate: function(args){
 			this.createDefaultRenderer(args);
 			this.domNode = this.renderer.getDomNode(this);
-			this.renderer.render(this,this.domNode,{});	
+			this.renderer.render(this,this.domNode,{});
+			
+			
+			if (this.memberList) {
+				// Create member list
+				this.renderer.renderMemberList(this.domNode);
+			}
 		},
 		/**
 		 * Creates a SearchBoxRenderer and sets it as the renderer for this class.
@@ -111,7 +120,7 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 		setSelectedApplication: function(element,object,event){
 			this.searchBoxAction.setSelectedApplication(element,object,event,this);
 		},
-		
+
 		/**
 		 * When the user hovers over an application in the applications pop up, the background gets highlighted
 		 * @method displayHighlight
@@ -121,6 +130,17 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 		 */
 		displayHighlight: function(element,object,event){
 			this.searchBoxAction.highLight(element,object,event);
+		},
+		
+		/**
+		 * Closes a member item (by removing it from its parent; the member list)
+		 * @method closeMemberItem
+		 * @param element  The member list item
+		 * @param object 
+		 * @param event  The Event 
+		 */
+		closeMemberItem: function(element,object,event){
+			this.searchBoxAction.closeMemberItem(this, element,object,event);
 		},
 		
 		/**
@@ -219,6 +239,56 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 			},
 			
 			/**
+			 * Closes a member item (by removing it from its parent; the member list)
+			 * @method closeMemberItem
+			 * @param context
+			 * @param element  The member list item
+			 * @param object 
+			 * @param event  The Event 
+			 */
+			closeMemberItem: function(context, element,object,event){
+				// Get parent node
+				var item = event.target.parentNode;
+
+				// Prepare HTML for comparison
+				var memberNode = item.parentNode;
+				var memberNodeHtml = memberNode.innerHTML;
+				memberNodeHtml = memberNodeHtml.replace(/\s+/g, '');
+				memberNodeHtml = memberNodeHtml.replace(/ /g, '');
+				
+				// Remove member from list
+				for (var i = 0; i < context._members.length; i++) {
+					var member = context._members[i];
+					var html = member.html;
+					
+					// Skip null entries (null entries represent entries that have been deleted)
+					if (html == null) {
+						continue;
+					}
+					
+					// Remove dojo action listeners
+					html = html.replace(/data-dojo-attach-event=".*"/, "");
+					html = html.replace(/data-dojo-attach-event='.*'/, "");
+					
+					// Remove whitespace
+					html = html.replace(/\s+/g, '');
+					html = html.replace(/ /g, ' ');
+					
+					// Compare strings
+					if (html == memberNodeHtml) {
+						// Delete objects by setting their properties to null
+						context._members[i].html = null;
+						context._members[i].id = null;
+						context._members[i].name = null;
+						break;
+					}
+				}
+				
+				// Remove it
+				item.parentNode.removeChild(item);
+			},
+			
+			/**
 			 * Opens the pop up showing a list of applications
 			 * @method renderPopUp 
 			 * @param self Context
@@ -264,9 +334,24 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 			_suggestionPopUp: null,
 			setSuggestedSearch: function(event,popUp,context){
 				var value = event.target.textContent;
+				var id = event.target.id;
 				var input = document.getElementById("com.ibm.sbt.search.input");
-				input.value = value;
+
 				this.searchQuery = value;
+				
+				// Member list feature enabled
+				if (context.memberList) {
+					// We don't want to display the suggested search term (instead
+					// we will just add it to the members list - see below)
+					input.value = "";
+					
+					// Create member list item
+					context.renderer.renderMemberListItem(context, value, id);
+
+				} else {
+					input.value = value;
+				}
+				
 				popUp.innerHTML = "";
 				context.renderer.removeSuggestionPopUp(context.domNode,popUp);
 			},
@@ -328,6 +413,7 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 		            		var row = document.createElement("tr");
 		            		var data = document.createElement("td");
 		            		data.innerHTML = results[i].getTitle();
+		            		data.id = results[i].getId();
 		            		data.style = "cursor:pointer";
 		            		data.onclick = function (event) { 
 		            			
@@ -372,11 +458,22 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 				    var self = context;
 			        promise.then(
 			            function(results) {
-			            	var evt = document.createEvent("Event");
-			            	evt.initEvent("searchResultEvent",true,true);
-			            	evt.results = results;
-			            	self.domNode.dispatchEvent(evt);
-			            	evt = null;
+			            	if (context.memberList == false) {
+			            		var evt = document.createEvent("Event");
+			            		evt.initEvent("searchResultEvent",true,true);
+			            		evt.results = results;
+			            		self.domNode.dispatchEvent(evt);
+			            		evt = null;			   
+			            	} else {
+			            		// If the member list feature is enabled then we need
+			            		// to use a different search result event since we want the
+			            		// members to be added to the members list and NOT
+			            		// just displayed in the results table
+			            		for(var i = 0; i < results.length; i++) {
+			            			// Render each item in the search results
+			            			context.renderer.renderMemberListItem(context, results[i].getTitle(), results[i].getId());
+			            		}			
+			            	}
 			            },
 			            function(error) {
 			                console.log(error);

@@ -23,6 +23,9 @@ public class Messages {
 	public static String	CommunityException						= "Error getting community with id: {0}";
 	public static String	CommunityMembersException				= "Problem occurred while fetching members of a community with id: {0}";
 	public static String	MyCommunitiesException					= "Problem occurred while fetching My communities";
+	public static String	MyCommunityFilesException				= "Problem occurred while fetching community files";
+	public static String	UploadCommunitiesException				= "Problem occurred while uploading file to communities";
+	public static String	DownloadCommunitiesException			= "Problem occurred while downloading file from communities";
 	public static String	SubCommunitiesException					= "Problem occurred while fetching Sub communities of Community with id : {0}";
 	public static String	CommunityBookmarksException				= "Problem occurred while fetching bookmarks of Community with id : {0}";
 	public static String	CommunityForumTopicsException			= "Problem occurred while fetching forum topics of Community with id : {0}";
@@ -34,6 +37,7 @@ public class Messages {
 	public static String	CreateCommunityPayloadException			= "Error creating community Payload";
 	public static String	UpdateCommunityException				= "Error updating community";
 	public static String	NullCommunityIdUserIdOrRoleException	= "Community Id or userid or role was null";
+	public static String	NullFileId								= "File Id was null";
 	public static String	NullCommunityIdOrUserIdException		= "Community Id or userid was null";
 	public static String	GetMemberException						= "Error geting member {0} in community with Id {1}";
 	public static String	AddMemberException						= "Error adding member {0} to community {1}";

@@ -45,6 +45,8 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 		/** This list is used to keep track of selected members **/
 		_members : [],
 		
+		
+		
         /**
          * @method constructor The constructor for the SearchBox class
          * @param args
@@ -184,7 +186,7 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 			this.searchBoxAction.onKeyPress(element, obj, event, this);
 		},
 		
-			suggest: function(element, obj, event){
+		suggest: function(element, obj, event){
 			if(this.searchSuggest == "on"){
 				this.searchBoxAction.suggest(event, this);
 			}			
@@ -195,6 +197,12 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 		 * this should be overridden to change the action 
 		 * of the event handler function  */
 		searchBoxAction : {
+			
+			_appsPopUp: null,
+			
+			_suggestionPopUp: null,
+			
+			_searchInput: null,
 			
 			/**
 			 * Handles keyboard navigation 
@@ -293,7 +301,6 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 			 * @method renderPopUp 
 			 * @param self Context
 			 */
-			_appsPopUp: null,
 			renderPopUp: function(self){
 				
 				if(this._suggestionPopUp ){
@@ -328,14 +335,14 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 				this.removeHighlight(element, object, event);
 				self.selectedApplication = element.children[1].textContent;
 				self.renderer.removePopUp(self.domNode,this._appsPopUp);
-				self.renderer.changeSelectedApplication(element.children[1].textContent);
+				self.renderer.changeSelectedApplication(element.children[1].textContent,element.children[0].children[0]);
 			},
 			
-			_suggestionPopUp: null,
+			
 			setSuggestedSearch: function(event,popUp,context){
 				var value = event.target.textContent;
 				var id = event.target.id;
-				var input = document.getElementById("com.ibm.sbt.search.input");
+				var input = this._searchInput;
 
 				this.searchQuery = value;
 				
@@ -395,39 +402,57 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 			 * @param context the context this
 			 */
 			suggest: function(event,context){
+				
 				var applicationParam = context.selectedApplication.toLocaleLowerCase();
             	applicationParam = applicationParam.replace(/ /g,'');
-				var inputBox = event.target;
+				
+            	var inputBox = event.target;
+				this._searchInput = inputBox;
+				
 				var query = inputBox.value;
 				var popUp = context.renderer.renderSuggestionPopUp(context,context.domNode);
 				this._suggestionPopUp = popUp;
+				
 				popUp.innerHTML = "";
+				
 				var requestArgs = {"component": applicationParam};
-				searchService = new SearchService();
-			    var promise = searchService.getMyResults(query,requestArgs);
-
-		        promise.then(
-		            function(results) {
-		            	
-		            	for(var i=0;i<results.length;i++){
-		            		var row = document.createElement("tr");
-		            		var data = document.createElement("td");
-		            		data.innerHTML = results[i].getTitle();
-		            		data.id = results[i].getId();
-		            		data.style = "cursor:pointer";
-		            		data.onclick = function (event) { 
-		            			
-		            			context.searchBoxAction.setSuggestedSearch(event,popUp,context);
-		            		};    		
-		            		row.appendChild(data);
-		            		popUp.appendChild(row);
-		            	}
-
-		            },
-		            function(error) {
-		                console.log(error);
-		            }
+				if(query && query != ""){
+					
+					searchService = new SearchService();
+				    var promise = searchService.getMyResults(query,requestArgs);
+	
+			        promise.then(
+			            function(results) {
+			            	context.searchBoxAction.handleSuggestResult(results,context,popUp);
+			            },
+			            function(error) {
+			                console.log(error);
+			            }
 		        );
+			}
+			},
+			
+			/**
+			 * 
+			 * @method handleSuggestResult
+			 * @param results the results from the suggested search
+			 * @param context the This of the outer class
+			 * @param popUp the popUp Element where results are displayed 
+			 */
+			handleSuggestResult: function(results,context,popUp){
+				for(var i=0;i<results.length;i++){
+            		var row = document.createElement("tr");
+            		var data = document.createElement("td");
+            		data.innerHTML = results[i].getTitle();
+            		data.id = results[i].getId();
+            		data.style = "cursor:pointer";
+            		data.onclick = function (event) { 
+            			
+            			context.searchBoxAction.setSuggestedSearch(event,popUp,context);
+            		};    		
+            		row.appendChild(data);
+            		popUp.appendChild(row);
+            	}
 			},
 			
 			/**
@@ -458,13 +483,7 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 				    var self = context;
 			        promise.then(
 			            function(results) {
-			            	if (context.memberList == false) {
-			            		var evt = document.createEvent("Event");
-			            		evt.initEvent("searchResultEvent",true,true);
-			            		evt.results = results;
-			            		self.domNode.dispatchEvent(evt);
-			            		evt = null;			   
-			            	} else {
+			            	if (context.memberList) {
 			            		// If the member list feature is enabled then we need
 			            		// to use a different search result event since we want the
 			            		// members to be added to the members list and NOT
@@ -472,7 +491,13 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 			            		for(var i = 0; i < results.length; i++) {
 			            			// Render each item in the search results
 			            			context.renderer.renderMemberListItem(context, results[i].getTitle(), results[i].getId());
-			            		}			
+			            		}	   
+			            	} else {
+			            		var evt = document.createEvent("Event");
+			            		evt.initEvent("searchResultEvent",true,true);
+			            		evt.results = results;
+			            		self.domNode.dispatchEvent(evt);
+			            		evt = null;				
 			            	}
 			            },
 			            function(error) {
@@ -482,7 +507,7 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 				}else {
 					//use another component to retrieve
 					var evt = document.createEvent("Event");
-	            	evt.initEvent("searchReadyEvent",true,true);
+	            	evt.initEvent("searchResultEvent",true,true);
 	            	evt.selectedApplication = applicationParam;
 	            	evt.searchQuery = context.searchQuery;
 	            	

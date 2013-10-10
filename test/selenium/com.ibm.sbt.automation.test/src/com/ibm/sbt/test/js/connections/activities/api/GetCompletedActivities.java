@@ -15,16 +15,15 @@
  */
 package com.ibm.sbt.test.js.connections.activities.api;
 
-import static org.junit.Assert.assertTrue;
-
 import java.util.List;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
-import com.ibm.sbt.automation.core.test.BaseAuthServiceTest;
-import com.ibm.sbt.automation.core.test.BaseTest.AuthType;
 import com.ibm.sbt.automation.core.test.connections.BaseActivitiesTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
+import com.ibm.sbt.services.client.connections.activity.Activity;
 
 /**
  * @author mwallace
@@ -35,15 +34,24 @@ public class GetCompletedActivities extends BaseActivitiesTest {
 
     static final String SNIPPET_ID = "Social_Activities_API_GetCompletedActivities";
     
-    public GetCompletedActivities() {
-        setAuthType(AuthType.AUTO_DETECT);
-    }
+    Activity activity;
+
+	@Before
+	public void init() {
+		activity = createActivity();	
+		// TODO update activity to completed
+	}
+
+	@After
+	public void destroy() {		
+		deleteActivity(activity.getActivityId());
+	}
 
     @Test
     public void testGetCompletedActivities() {
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         List jsonList = previewPage.getJsonList();
-        // TODO create soem activities
+        // TODO create some activities
         //Assert.assertFalse("Get my activities returned no activities", jsonList.isEmpty());
     }
 

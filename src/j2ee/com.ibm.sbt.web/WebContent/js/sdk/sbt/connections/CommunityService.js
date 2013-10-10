@@ -840,7 +840,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         },
         
         getDetailedEvent : function(){
-            return this.service.getDetailedEvent(this.getEventAtomUrl());
+            return this.service.getDetailedEvent(this.getEventAtomUrl(), this.getId());
         },
         
         getContent : function(){
@@ -1248,14 +1248,20 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             return this.getEntities(consts.AtomCommunityEvents, options, this.getEventFeedCallbacks());
         },
         
-        getDetailedEvent : function(url){
+        /**
+         * Used to get an event from the Events Feed
+         * @param url - The url gotten from the rel=self link in an entry from the Community Events feed.
+         * @param eventId - Used as an identifier when caching the response
+         * @returns
+         */
+        getDetailedEvent : function(url, eventId){
             var options = {
                 method : "GET",
                 handleAs : "text",
                 query : {}
             };
                 
-            return this.getEntity(this.endpoint.proxy.rewriteUrl("unusedBaseUrl", url, this.endpoint.proxyPath), options, "derp", this.getEventCallbacks());
+            return this.getEntity(this.endpoint.proxy.rewriteUrl("baseUrl", url, this.endpoint.proxyPath), options, eventId, this.getEventCallbacks());
         },
 
         /**

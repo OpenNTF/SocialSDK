@@ -290,7 +290,7 @@ public class FileService extends BaseService {
      * @param fileId
      * @param comment
      * @param communityId
-     * @return
+     * @return Comment
      * @throws FileServiceException
      * @throws TransformerException
      */
@@ -308,7 +308,7 @@ public class FileService extends BaseService {
      * @param comment
      * @param communityId
      * @param params
-     * @return
+     * @return Comment
      * @throws FileServiceException
      * @throws TransformerException
      */
@@ -341,7 +341,7 @@ public class FileService extends BaseService {
 	 * Method to get a list of Community Files
 	 * @param communityId
 	 * @param params
-	 * @return
+	 * @return FileList
 	 * @throws CommunityServiceException
 	 */
 	public FileList getCommunityFiles(String communityId, HashMap<String, String> params) throws FileServiceException {
@@ -366,13 +366,16 @@ public class FileService extends BaseService {
 		}
 	}
     
-	///files/basic/api/library/facc4497-eaa8-42f5-91de-fd9515a00ae2/document/a51b5ff8-9f78-4fe5-994a-9cd658846e9e/entry
 	/**
 	 * Method to update Community File's Metadata
+	 * <p>
+	 * Rest API used : 
+	 * /files/basic/api/library/<communityLibraryId>/document/<fileId>/entry
+	 * <p>
 	 * @param fileEntry
 	 * @param communityLibraryId
 	 * @param params
-	 * @return
+	 * @return File
 	 * @throws FileServiceException
 	 * @throws TransformerException
 	 */
@@ -1291,7 +1294,7 @@ public class FileService extends BaseService {
      * <p>
      * @param fileId
      * @param communityId
-     * @return
+     * @return CommentList
      * @throws FileServiceException
      */
     public CommentList getAllCommunityFileComments(String fileId, String communityId) throws FileServiceException {
@@ -1307,7 +1310,7 @@ public class FileService extends BaseService {
      * @param fileId
      * @param communityId
      * @param parameters
-     * @return
+     * @return CommentList
      * @throws FileServiceException
      */
     public CommentList getAllCommunityFileComments(String fileId, String communityId, Map<String, String> parameters) throws FileServiceException {

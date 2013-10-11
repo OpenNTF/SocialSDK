@@ -19,14 +19,18 @@
  * 
  * @module sbt.connections.ProfileService
  */
-define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConstants", "../base/BaseService", "../base/BaseEntity", "../base/XmlDataHandler", "../base/VCardDataHandler", "../Cache", "../util"  ], function(
-        declare,lang,config,stringUtil,consts,BaseService,BaseEntity,XmlDataHandler, VCardDataHandler, Cache, util) {
+define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConstants", "../base/BaseService", "../base/BaseEntity", "../base/AtomEntity", "../base/XmlDataHandler", "../base/VCardDataHandler", "../Cache", "../util"  ], function(
+        declare,lang,config,stringUtil,consts,BaseService,BaseEntity,AtomEntity,XmlDataHandler, VCardDataHandler, Cache, util) {
 
 	var updateProfileXmlTemplate = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns:app=\"http://www.w3.org/2007/app\" xmlns:thr=\"http://purl.org/syndication/thread/1.0\" xmlns:fh=\"http://purl.org/syndication/history/1.0\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\" xmlns:opensearch=\"http://a9.com/-/spec/opensearch/1.1/\" xmlns=\"http://www.w3.org/2005/Atom\"><category term=\"profile\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category><content type=\"text\">\nBEGIN:VCARD\nVERSION:2.1\n${jobTitle}${address}${telephoneNumber}${building}${floor}END:VCARD\n</content></entry>";
     var updateProfileAttributeTemplate = "${attributeName}:${attributeValue}\n";
     var updateProfileAddressTemplate = "ADR;WORK:;;${streetAddress},${extendedAddress};${locality};${region};${postalCode};${countryName}\n";
     var createProfileTemplate = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns:app=\"http://www.w3.org/2007/app\" xmlns:thr=\"http://purl.org/syndication/thread/1.0\" xmlns:fh=\"http://purl.org/syndication/history/1.0\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\" xmlns:opensearch=\"http://a9.com/-/spec/opensearch/1.1/\" xmlns=\"http://www.w3.org/2005/Atom\"><category term=\"profile\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category><content type=\"application/xml\"><person xmlns=\"http://ns.opensocial.org/2008/opensocial\"><com.ibm.snx_profiles.attrib>${guid}${email}${uid}${distinguishedName}${displayName}${givenNames}${surname}${userState}</com.ibm.snx_profiles.attrib></person></content></entry>";
     var createProfileAttributeTemplate = "<entry><key>${attributeName}</key><value><type>text</type><data>${attributeValue}</data></value></entry>";
+    
+    var CategoryConnection = "<category term=\"connection\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\" />";
+    var CategoryConnectionType = "<category term=\"${getConnectionType}\" scheme=\"http://www.ibm.com/xmlns/prod/sn/connection/type\" />";
+    var CategoryStatus = "<category term=\"${getStatus}\" scheme=\"http://www.ibm.com/xmlns/prod/sn/status\" />";
    
     var OAuthString = "/oauth";
     var basicAuthString = "";
@@ -305,6 +309,7 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
         update : function(args) {
         	return this.service.updateProfile(this, args);
         },
+        
         /**
          * Get colleagues of the profile.
          * 
@@ -527,6 +532,102 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
     });
     
     /**
+     * Invite class.
+     * 
+     * @class Invite
+     * @namespace sbt.connections
+     */
+    var Invite = declare(AtomEntity, {
+
+    	xpath : consts.InviteXPath,
+    	contentType : "html",
+    	categoryScheme : CategoryConnection,
+    	    	
+        /**
+         * 
+         * @constructor
+         * @param args
+         */
+        constructor : function(args) {            
+        },
+        
+        /**
+         * Return extra entry data to be included in post data for this entity.
+         * 
+         * @returns {String}
+         */
+        createEntryData : function() {
+        	var entryData = "";
+        	entryData += stringUtil.transform(CategoryConnectionType, this, function(v,k) { return v; }, this);
+        	entryData += stringUtil.transform(CategoryStatus, this, function(v,k) { return v; }, this);
+            return stringUtil.trim(entryData);
+        },
+        
+        /**
+         * Return the connection type associated with this invite. 
+         * 
+         * @method getConnectionType
+         * @return {String} status
+         */
+        getConnectionType : function() {
+        	var connectionType = this.getAsString("connectionType");
+        	return connectionType || consts.TypeColleague;
+        },
+                
+        /**
+         * Set the connection type associated with this invite. 
+         * 
+         * @method setConnectionType
+         * @param {String} status
+         */
+        setConnectionType : function(connectionType) {
+        	return this.setAsString("connectionType", connectionType);
+        },
+                
+        /**
+         * Return the status associated with this invite. 
+         * 
+         * @method getStatus
+         * @return {String} status
+         */
+        getStatus : function() {
+        	var status = this.getAsString("status");
+        	return status || consts.StatusPending;
+        },
+        
+        /**
+         * Set the status associated with this invite. 
+         * 
+         * @method setStatus
+         * @param {String} status
+         */
+        setStatus : function(status) {
+        	return this.setAsString("status", status);
+        },
+        
+        /**
+         * Return the connection id associated with this invite. 
+         * 
+         * @method getConnectionId
+         * @return {String} connectionId
+         */
+        getConnectionId : function() {
+        	return this.getAsString("connectionId");
+        },
+        
+        /**
+         * Set connection id associated with this invite. 
+         * 
+         * @method setConnectionId
+         * @param connectionId
+         * @return {Invite} 
+         */
+        setConnectionId : function(connectionId) {
+        	return this.setAsString("connectionId", connectionId);
+        }
+    });
+    
+    /**
      * Callbacks used when reading an entry that contains a Profile.
      */
     var ProfileCallbacks = {
@@ -684,6 +785,17 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
         newProfile : function(args) {
             return this._toProfile(args);
         },
+
+        /**
+         * Create a Invite object with the specified data.
+         * 
+         * @method newInvite
+         * @param {Object} args Object containing the fields for the 
+         *            new Invite 
+         */
+         newInvite : function(args) {
+             return this._toInvite(args);
+         },
 
         /**
          * Get the profile of a user.
@@ -961,6 +1073,48 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
 			return this.updateEntity(url, options, callbacks);			
 		},
         
+        /**
+         * Invite a person to become your colleague.
+         * 
+         * @method inviteColleague
+         * @param id
+         * @param inviteOrJson
+         * @param args
+         */
+		createInvite : function(id, inviteOrJson, args) {
+            // detect a bad request by validating required arguments
+            var idObject = this._toIdObject(id);
+            var promise = this._validateIdObject(idObject);
+            if (promise) {
+                return promise;
+            }
+            
+            var invite = this._toInvite(inviteOrJson);
+
+            var callbacks = {};
+            callbacks.createEntity = function(service,data,response) {
+                invite.setData(data);
+                var connectionId = this.getLocationParameter(response, "connectionId");
+                invite.setConnectionId(connectionId);
+                return invite;
+            };
+
+            var requestArgs = lang.mixin(idObject, args || {});
+            var options = {
+                method : "POST",
+                query : requestArgs,
+                headers : consts.AtomXmlHeaders,
+                data : invite.createPostData()
+            };
+            
+            var url = this.constructUrl(consts.AtomConnectionsDo, {}, {authType : this._getProfileAuthString()});
+            return this.updateEntity(url, options, callbacks, args);
+        },
+
+        //
+        // Internals
+        //
+        
         /*
          * Return callbacks for a profile feed
          */
@@ -988,7 +1142,7 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
         getProfileTagFeedCallbacks : function() {
             return ProfileTagFeedCallbacks;
         },
-
+        
         /*
          * Convert profile or key to id object
          */
@@ -1078,6 +1232,26 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
                 return new Profile({
                     service : this,
                     _fields : lang.mixin({}, profileJson)
+                });
+            }
+        },
+        
+        /*
+         * Return a Invite instance from Invite or JSON or String. Throws
+         * an error if the argument was neither.
+         */
+        _toInvite : function(inviteOrJsonOrString,args) {
+            if (inviteOrJsonOrString instanceof Invite) {
+                return inviteOrJsonOrString;
+            } else {
+            	if (lang.isString(inviteOrJsonOrString)) {
+            		inviteOrJsonOrString = {
+            			content : inviteOrJsonOrString
+            		};
+                } 
+                return new Invite({
+                    service : this,
+                    _fields : lang.mixin({}, inviteOrJsonOrString)
                 });
             }
         },

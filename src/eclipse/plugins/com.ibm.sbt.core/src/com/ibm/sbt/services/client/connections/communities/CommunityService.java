@@ -39,6 +39,7 @@ import com.ibm.sbt.services.client.connections.files.AccessType;
 import com.ibm.sbt.services.client.connections.files.File;
 import com.ibm.sbt.services.client.connections.files.FileList;
 import com.ibm.sbt.services.client.connections.files.FileService;
+import com.ibm.sbt.services.client.connections.files.FileServiceException;
 import com.ibm.sbt.services.client.connections.files.FileServiceURIBuilder;
 import com.ibm.sbt.services.client.connections.files.ResultType;
 import com.ibm.sbt.services.client.connections.files.SubFilters;
@@ -856,24 +857,11 @@ public class CommunityService extends BaseService {
 	 * @throws CommunityServiceException
 	 */
 	public FileList getCommunityFiles(String communityId, HashMap<String, String> params) throws CommunityServiceException {
-		String accessType = AccessType.AUTHENTICATED.getAccessType();
-		SubFilters subFilters = new SubFilters();
-        if (StringUtil.isEmpty(communityId)) {
-        	throw new CommunityServiceException(null, Messages.NullCommunityIdUserIdOrRoleException);
-        }
-        if(null == params){
-			 params = new HashMap<String, String>();
-		}
-        subFilters.setCommunityLibraryId(communityId);
-        String resultType = ResultType.FEED.getResultType();
-		String requestUrl = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
-                null, subFilters, resultType); 
+		FileService fileService = new FileService();
 		try {
-			return (FileList) super.getEntities(requestUrl, params, new FileFeedHandler(new FileService())); 
-		} catch (ClientServicesException e) {
-			throw new CommunityServiceException(e, Messages.MyCommunityFilesException);
-		} catch (IOException e) {
-			throw new CommunityServiceException(e, Messages.MyCommunityFilesException);
+			return fileService.getCommunityFiles(communityId, params);
+		} catch (FileServiceException e) {
+			throw new CommunityServiceException(e);
 		}
 	}
 	

@@ -176,12 +176,12 @@ define([ "../declare", "../lang", "../log", "../stringUtil" ],
         getAsBoolean : function(fieldName) {
             this._validateFieldName(fieldName, "getAsBoolean");
 
-            if (this.dataHandler && this._fields[fieldName] == undefined) {
-                return this.dataHandler.getAsBoolean(fieldName);
-            } else if (this.dataHandler) {
+            if (this._fields.hasOwnProperty(fieldName)) {
                 return this._fields[fieldName];
+            } else if (this.dataHandler) {
+                return this.dataHandler.getAsBoolean(fieldName);
             } else {
-                return null;
+                return false;
             }
         },
 

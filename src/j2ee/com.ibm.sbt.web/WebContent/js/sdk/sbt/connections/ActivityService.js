@@ -29,7 +29,7 @@ define(
 					+ "xmlns:xhtml=\"http://www.w3.org/1999/xhtml\" xmlns:thr=\"http://purl.org/syndication/thread/1.0\">"
 					+ "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/type\" term=\"${type}\" label=\"${type}\" /> "
 					+ "<content type=\"html\">${content}</content><title type=\"text\">${title}</title>"
-					+ "${getPosition}${getCommunity}$s}${getCompleted}${getCompleted}${getDueDate}${getInReplyTo}${getAssignedTo}${getIcon}"
+					+ "${getPosition}${getCommunity}${getTags}${getCompleted}${getCompleted}${getDueDate}${getInReplyTo}${getAssignedTo}${getIcon}"
 					+ "${getFields}</entry>";
 			var PositionTmpl = "<snx:position>${position}</snx:position>";
 			var CommunityTmpl = "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/type\" term=\"community_activity\" label=\"Community Activity\"/><snx:communityUuid>${coummunityUuid}</communityUuid>"

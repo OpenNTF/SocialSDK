@@ -45,13 +45,17 @@ import com.ibm.sbt.services.client.connections.files.ResultType;
 import com.ibm.sbt.services.client.connections.files.SubFilters;
 import com.ibm.sbt.services.client.connections.files.feedHandler.FileFeedHandler;
 import com.ibm.sbt.services.client.connections.files.model.Headers;
+import com.ibm.sbt.services.client.connections.forums.feedhandler.ForumsFeedHandler;
 import com.ibm.sbt.services.client.connections.forums.feedhandler.TopicsFeedHandler;
 import com.ibm.sbt.services.client.connections.communities.feedhandler.InviteFeedHandler;
 import com.ibm.sbt.services.client.connections.communities.feedhandler.MemberFeedHandler;
 import com.ibm.sbt.services.client.connections.communities.transformers.CommunityMemberTransformer;
 import com.ibm.sbt.services.client.connections.communities.transformers.InviteTransformer;
 import com.ibm.sbt.services.client.connections.communities.util.Messages;
+import com.ibm.sbt.services.client.connections.forums.ForumList;
 import com.ibm.sbt.services.client.connections.forums.ForumService;
+import com.ibm.sbt.services.client.connections.forums.ForumServiceException;
+import com.ibm.sbt.services.client.connections.forums.ForumTopic;
 import com.ibm.sbt.services.client.connections.forums.TopicList;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.ClientService;
@@ -344,6 +348,47 @@ public class CommunityService extends BaseService {
 		return getForumTopics(communityUuid, null);
 	}
 	/**
+	 * Wrapper method to get forums of a community .
+	 * 
+	 * @param communityUuid 
+	 * 				 Uuid of Community for which forums are to be fetched
+	 * @return ForumList 
+	 * @throws CommunityServiceException
+	 */
+	public ForumList getForums(String communityUuid) throws CommunityServiceException {
+		return getForums(communityUuid, null);
+	}
+	/**
+	 * Wrapper method to get forums of a community .
+	 * 
+	 * @param communityUuid 
+	 * 				 Uuid of Community for which forums are to be fetched
+	 * @param query parameters
+	 * @return ForumList 
+	 * @throws CommunityServiceException
+	 */
+	public ForumList getForums(String communityUuid, Map<String, String> parameters) throws CommunityServiceException {
+		
+		if (StringUtil.isEmpty(communityUuid)){
+			throw new CommunityServiceException(null, Messages.NullCommunityIdException);
+		}
+		if(null == parameters){
+			parameters = new HashMap<String, String>();
+		}		
+		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
+		ForumList forums = null;
+		try {
+			ForumService svc = new ForumService(this.endpoint);
+			
+			forums = svc.getAllForums(parameters);
+		}catch (Exception e) {
+			throw new CommunityServiceException(e, Messages.CommunityForumTopicsException, communityUuid);
+		} 
+		
+		return forums;
+	}
+	
+	/**
 	 * Wrapper method to get forum topics of a community .
 	 * 
 	 * @param communityUuid 
@@ -373,7 +418,30 @@ public class CommunityService extends BaseService {
 		
 		return forumTopics;
 	}
-	
+	/**
+	 * Wrapper method to create a Topic for default Forum of a Community
+	 * <p>
+	 * User should be authenticated to call this method
+	 * @param ForumTopic
+	 * @return Topic
+	 * @throws ForumServiceException
+	 */
+	public ForumTopic createForumTopic(ForumTopic topic, String communityId)throws CommunityServiceException {
+		try {
+			ForumService svc = new ForumService(this.endpoint);
+			
+			return svc.createCommunityForumTopic(topic, communityId);
+		}catch (Exception e) {
+			throw new CommunityServiceException(e, Messages.CreateCommunityForumTopicException, communityId);
+		} 
+	}
+	/**
+     * Get a list of the outstanding community invitations of the currently authenticated 
+     * user or provide parameters to search for a subset of those invitations.
+     * 
+     * @method getMyInvites
+     * @return pending invites for the authenticated user
+     */
 	public InviteList getMyInvites() throws CommunityServiceException {
 		return getMyInvites(null);
 	}

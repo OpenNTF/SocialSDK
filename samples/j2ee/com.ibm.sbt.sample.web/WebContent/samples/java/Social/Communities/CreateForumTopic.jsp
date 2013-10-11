@@ -40,6 +40,7 @@
 		
 		CommunityService comService = new CommunityService();
 		CommunityList comList = comService.getMyCommunities();
+		if(comList.size() > 0 ){
 		String communityId = comList.get(0).getCommunityUuid();
 		ForumTopic topic = new ForumTopic(new ForumService(), "");
 		topic.setTitle("Dummy Community based Forum Topic" + System.currentTimeMillis());
@@ -48,6 +49,10 @@
 		out.println("Topic created with Id : " + createdTopic.getTopicUuid() + "for Community with Id :"+communityId +"<br>");
 		out.println("Topic Title : " + createdTopic.getTitle()+"<br>");
 		out.println("Topic Content : " + createdTopic.getContent()+"<br>");
+		}
+		else{
+			out.println("No Community exist to create forum topic");
+		}
 	} catch (Exception e) {
 		out.println("<pre>");
 		out.println(e.getMessage());

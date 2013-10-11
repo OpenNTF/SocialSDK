@@ -1230,15 +1230,27 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * 
          * @returns
          */
-        getCommunityEvents : function(communityId, startDate, endDate, args){
-        	args = args || {};
-        	args.calendarUuid = communityId;
-        	if(startDate){
-        		args.startDate = startDate;
-        	}
-        	if(endDate){
-        		args.endDate = endDate;
-        	}
+        getCommunityEvents : function(communityUuid, startDate, endDate, args){
+        	var promise = this._validateCommunityUuid(communityUuid) || this._validateDateTimes(startDate, endDate);
+            if (promise) {
+                return promise;
+            }
+            var requiredArgs = {
+                calendarUuid : communityUuid
+            };
+            if(startDate){
+                lang.mixin(requiredArgs, {
+                    startDate : startDate
+                });
+            } 
+            if(endDate){
+                lang.mixin(requiredArgs, {
+                    endDate : endDate
+                });
+            }
+            
+            args = lang.mixin(args, requiredArgs);
+            
             var options = {
                 method : "GET",
                 handleAs : "text",
@@ -1873,6 +1885,14 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         _validateCommunityUuid : function(communityUuid) {
             if (!communityUuid || communityUuid.length == 0) {
                 return this.createBadRequestPromise("Invalid argument, expected communityUuid.");
+            }
+        },
+        /**
+         * Validate that the date-time is not empty, return a promise if invalid
+         */
+        _validateDateTimes : function(startDate, endDate){
+            if ((!startDate || startDate.length === 0) && (!endDate || endDate.length === 0)) {
+                return this.createBadRequestPromise("Invalid date arguments, expected either a startDate, endDate or both as parameters.");
             }
         },
         

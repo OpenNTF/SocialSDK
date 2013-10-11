@@ -5,10 +5,9 @@ require(["sbt/dom", "sbt/connections/controls/search/SearchBox","sbt/connections
         	selectedApplication: "communities",	
         	memberList: true,
         	predefinedSearch: true,
-        	constraint: {type:"field",id:"title" } 
+        	constraint: {type:"field",id:"title"},
         });
                 
         dom.byId("searchBox").appendChild(searchBox.domNode);
-        
-        console.log("!");
+
 });

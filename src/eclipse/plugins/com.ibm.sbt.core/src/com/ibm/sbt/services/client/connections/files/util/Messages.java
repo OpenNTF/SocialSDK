@@ -66,7 +66,9 @@ public class Messages {
     public static String MessageExceptionInDeleteFolder            = "Error deleting the folder";
     public static String MessageExceptionInDeletingFileShare       = "Error removing the sharing";
     public static String MessageExceptionInDeletingComment         = "Error deleting the comment";
+    public static String MessageExceptionInUpdatingComment         = "Error updating the comment";
     public static String MessageExceptionInDeletingFile            = "Error deleting the file";
+    public static String MessageExceptionInDownloadingFile         = "Error downloading the file";
     public static String MessageExceptionInCreatingFolder          = "Error creating the folder";
     public static String MessageExceptionInCreatingComment         = "Error creating the comment";
     public static String MesssageExceptionInFlaggingFile           = "Error flagging the file";

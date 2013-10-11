@@ -1,0 +1,7 @@
+{
+    "code": 400,
+    "message": "Invalid argument, member with userid or email must be specified.",
+    "fileName": "https://localhost:8443/sbt.dojo180/dojo/dojo.js.uncompressed.js",
+    "lineNumber": 753,
+    "columnNumber": 0
+}

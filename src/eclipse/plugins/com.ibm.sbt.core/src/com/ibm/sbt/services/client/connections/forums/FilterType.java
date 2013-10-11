@@ -26,7 +26,8 @@ public enum FilterType {
 	PUBLIC("public"),
 	RESOURCES("resources"),
 	FORUMS("forums"),
-	TOPICS("topics");
+	TOPICS("topics"),
+	ENTRIES("entries");
 	
 	String filterType;
 	

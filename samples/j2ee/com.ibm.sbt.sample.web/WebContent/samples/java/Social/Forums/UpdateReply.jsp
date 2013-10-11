@@ -53,11 +53,11 @@
 				reply.setTitle("Dummy updated reply" + System.currentTimeMillis());
 				reply.setContent("Dummy updated reply Content");
 				if(((ForumTopic)topics.get(0)).isQuestion()){
-					reply.acceptAnswer();
+					reply.setAnswer(true);
 					out.println("reply was accepted as an answer " + reply.isAnswer());
 				}
 				reply = reply.save(); 
-				out.println("Reply updated with Id : " + reply.getUid() + "for Topic with ID:"+ topicId +"   "+reply.isAnswer());
+				out.println("Reply updated with Id : " + reply.getUid() + " for Topic with ID: "+ topicId +"   "+reply.isAnswer());
 			}
 			else
 				out.println("no reply found in topic");

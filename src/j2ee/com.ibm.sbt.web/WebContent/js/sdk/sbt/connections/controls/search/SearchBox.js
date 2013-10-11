@@ -414,14 +414,14 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 				
 				popUp.innerHTML = "";
 				
-				var requestArgs = {};
-				
+				var requestArgs = {};	
 				if(context.constraint){
-					requestArgs = {"component": applicationParam, constraint: context.constraint };
+					var jsonString = JSON.stringify(context.constraint);
+					requestArgs = {"component": applicationParam, constraint:jsonString};
 				}else{
 					requestArgs = {"component": applicationParam};
 				}
-	
+				
 				if(query && query != ""){
 					
 					searchService = new SearchService();
@@ -485,7 +485,8 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 					var requestArgs = {};
 					
 					if(context.constraint){
-						requestArgs = {"component": applicationParam, constraint: context.constraint }; 
+						var jsonString = JSON.stringify(context.constraint);
+						requestArgs = {"component": applicationParam, constraint:jsonString};
 					}else{
 						requestArgs = {"component": applicationParam};
 					}

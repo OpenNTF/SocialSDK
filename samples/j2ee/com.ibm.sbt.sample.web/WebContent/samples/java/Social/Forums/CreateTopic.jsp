@@ -29,7 +29,7 @@
 	pageEncoding="ISO-8859-1"%>
 <html>
 <head>
-	<title>SBT JAVA Sample - Create Forum</title>
+	<title>SBT JAVA Sample - Create Topic</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
@@ -50,10 +50,9 @@
 		topic = topic.save(); 
 		out.println("Topic created with Id : " + topic.getUid() + "for Forum with Id :"+forumId );
 	} catch (Exception e) {
-	e.printStackTrace();
-	//	out.println("<pre>");
-		//out.println(e.getMessage());
-		//out.println("</pre>");
+		out.println("<pre>");
+		out.println(e.getMessage());
+		out.println("</pre>");
 	}
 	%>
 	</div>

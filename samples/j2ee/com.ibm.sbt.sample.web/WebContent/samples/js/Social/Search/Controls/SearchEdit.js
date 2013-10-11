@@ -2,7 +2,7 @@ require(["sbt/dom", "sbt/connections/controls/search/SearchBox"], function(dom, 
         
 	    var searchBox = new SearchBox({
         	type:"full",
-        	constraint: "title"
+        	constraint: {type:"field",id:"title" }
         });
                 
         dom.byId("searchBox").appendChild(searchBox.domNode);

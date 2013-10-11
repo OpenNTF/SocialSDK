@@ -365,6 +365,51 @@ public class FileService extends BaseService {
 			throw new FileServiceException(e, Messages.MyCommunityFilesException);
 		}
 	}
+	
+	/**
+	 * Method to get a Community File
+	 * @param communityId
+	 * @param fileId
+	 * @return File
+	 * @throws FileServiceException
+	 */
+	public File getCommunityFile(String communityId, String fileId) throws FileServiceException {
+		return getCommunityFile(communityId, fileId, null);
+	}
+	
+	/**
+	 * Method to get a Community File
+	 * @param communityId
+	 * @param fileId
+	 * @param params
+	 * @return File
+	 * @throws FileServiceException
+	 */
+	public File getCommunityFile(String communityId, String fileId, HashMap<String, String> params) throws FileServiceException {
+		String accessType = AccessType.AUTHENTICATED.getAccessType();
+		SubFilters subFilters = new SubFilters();
+		if (StringUtil.isEmpty(fileId)) {
+        	throw new FileServiceException(null, Messages.Invalid_FileId);
+        }
+		if (StringUtil.isEmpty(communityId)) {
+        	throw new FileServiceException(null, Messages.Invalid_CommunityId);
+        }
+        if(null == params){
+			 params = new HashMap<String, String>();
+		}
+        subFilters.setCommunityLibraryId(communityId);
+        subFilters.setFileId(fileId);
+        String resultType = ResultType.ENTRY.getResultType();
+		String requestUrl = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
+                null, subFilters, resultType); 
+		try {
+			return (File) super.getEntity(requestUrl, params, new FileFeedHandler(this)); 
+		} catch (ClientServicesException e) {
+			throw new FileServiceException(e, Messages.MyCommunityFilesException);
+		} catch (IOException e) {
+			throw new FileServiceException(e, Messages.MyCommunityFilesException);
+		}
+	}
     
 	/**
 	 * Method to update Community File's Metadata

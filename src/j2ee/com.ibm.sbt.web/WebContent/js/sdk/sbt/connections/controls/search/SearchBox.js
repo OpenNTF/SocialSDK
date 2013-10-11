@@ -415,7 +415,14 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 				
 				popUp.innerHTML = "";
 				
-				var requestArgs = {"component": applicationParam};
+				var requestArgs = {};
+				
+				if(context.constraint){
+					requestArgs = {"component": applicationParam, constraint: context.constraint };
+				}else{
+					requestArgs = {"component": applicationParam};
+				}
+	
 				if(query && query != ""){
 					
 					searchService = new SearchService();
@@ -476,7 +483,14 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 				
             	//if this control is going to retrieve the search results from the server
 				if(context.type == "full"){
-					var requestArgs = {"component": applicationParam};
+					var requestArgs = {};
+					
+					if(context.constraint){
+						requestArgs = {"component": applicationParam, constraint: context.constraint }; 
+					}else{
+						requestArgs = {"component": applicationParam};
+					}
+					
 					searchService = new SearchService();
 				    var promise = searchService.getMyResults(context.searchQuery,requestArgs);
 				    

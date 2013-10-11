@@ -79,6 +79,10 @@ public class BaseCommunitiesTest extends BaseApiTest {
     	deleteCommunity(community);
     	community = null;
     	destroyContext();
+    	
+    	if (environment.isDebugTransport()) {
+    		saveTestDataAndResults();
+    	}
     }
     
     protected String createCommunityName() {

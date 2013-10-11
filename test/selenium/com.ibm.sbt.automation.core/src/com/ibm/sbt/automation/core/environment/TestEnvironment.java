@@ -121,6 +121,7 @@ public abstract class TestEnvironment {
     static final public String PROP_FIREBUG_ENABLED             = "firebug.enabled"; //$NON-NLS-1$
     static final public String PROP_ENABLE_MOCKTRANSPORT        = "enable.mocktransport"; //$NON-NLS-1$
     static final public String PROP_ENABLE_DEBUGTRANSPORT       = "enable.debugtransport"; //$NON-NLS-1$
+    static final public String PROP_ENABLE_OVERWRITETESTDATA    = "enabled.overwritetestdata"; //$NON-NLS-1$
 
     private static final String PROP_OVERRIDE_CONNECTIONS_BE    = "connections.override.url"; //$NON-NLS-1$
     private static final String PROP_OVERRIDE_SMARTCLOUD_BE     = "smartcloud.override.url"; //$NON-NLS-1$
@@ -235,6 +236,14 @@ public abstract class TestEnvironment {
      */
     public boolean isDebugTransport() {
     	return properties.getProperty(PROP_ENABLE_DEBUGTRANSPORT, "false").equals("true");
+    }
+
+    /**
+     * Return true if test data should be overwritten.
+     * @return
+     */
+    public boolean isOverwriteTestdata() {
+    	return properties.getProperty(PROP_ENABLE_OVERWRITETESTDATA, "false").equals("true");
     }
 
     /**

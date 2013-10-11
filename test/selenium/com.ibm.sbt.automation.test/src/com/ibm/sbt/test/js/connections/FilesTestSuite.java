@@ -23,6 +23,7 @@ import org.junit.runners.Suite.SuiteClasses;
 import com.ibm.sbt.test.js.connections.files.GetMyFileComments;
 import com.ibm.sbt.test.js.connections.files.LoadUpdateLockPinDeleteFile;
 import com.ibm.sbt.test.js.connections.files.UploadFile;
+import com.ibm.sbt.test.js.connections.files.UploadNewVersion;
 import com.ibm.sbt.test.js.connections.files.api.AddCommentToFile;
 import com.ibm.sbt.test.js.connections.files.api.AddFilesToFolder;
 import com.ibm.sbt.test.js.connections.files.api.DeleteFile;
@@ -69,7 +70,8 @@ import com.ibm.sbt.test.js.connections.files.api.UpdateFile;
 		com.ibm.sbt.test.js.connections.files.GetPublicFileComments.class,
 		com.ibm.sbt.test.js.connections.files.GetPublicFiles.class,
 		LoadUpdateLockPinDeleteFile.class,
-		UploadFile.class
+		UploadFile.class,
+		UploadNewVersion.class
     })
 public class FilesTestSuite {
     @AfterClass

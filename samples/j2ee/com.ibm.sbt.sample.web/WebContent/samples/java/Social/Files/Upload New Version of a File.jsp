@@ -1,5 +1,5 @@
 <!-- /*
- * © Copyright IBM Corp. 2012
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -40,7 +40,7 @@
   pageEncoding="ISO-8859-1"%>
 <html>
 <head>
-<title>SBT JAVA Sample - Upload New Version</title>
+<title>SBT JAVA Sample - Upload New Version of File and Community File</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 

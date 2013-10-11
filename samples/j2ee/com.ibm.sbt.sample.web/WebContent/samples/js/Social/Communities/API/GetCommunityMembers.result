@@ -1,0 +1,138 @@
+[{
+    "service": {
+        "endpoint": {
+            "authType": "basic",
+            "platform": "connections",
+            "authenticator": {
+                "url": "https://localhost:8443/sbt/js/sdk"
+            },
+            "proxyPath": "connections",
+            "isAuthenticated": true,
+            "transport": {
+                "_inherited": {
+                    "p": 1
+                },
+                "index": 1
+            },
+            "serviceMappings": {},
+            "name": "connections",
+            "authenticationErrorCode": 401,
+            "baseUrl": "https://qs.renovations.com:444",
+            "apiVersion": "4.0",
+            "proxy": {
+                "proxyUrl": "https://localhost:8443/sbt.sample.web/service/proxy"
+            }
+        }
+    },
+    "id": "0F19F8AD-37EA-6033-8525-7BBF005634B5",
+    "communityUuid": "a61f520b-31a9-4aa4-991b-265ca892896f",
+    "dataHandler": {
+        "data": {},
+        "namespaces": {
+            "o": "http://ns.opensocial.org/2008/opensocial",
+            "app": "http://www.w3.org/2007/app",
+            "thr": "http://purl.org/syndication/thread/1.0",
+            "fh": "http://purl.org/syndication/history/1.0",
+            "snx": "http://www.ibm.com/xmlns/prod/sn",
+            "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+            "a": "http://www.w3.org/2005/Atom",
+            "h": "http://www.w3.org/1999/xhtml",
+            "td": "urn:ibm.com/td",
+            "relevance": "http://a9.com/-/opensearch/extensions/relevance/1.0/",
+            "ibmsc": "http://www.ibm.com/search/content/2010",
+            "xhtml": "http://www.w3.org/1999/xhtml",
+            "spelling": "http://a9.com/-/opensearch/extensions/spelling/1.0/",
+            "ca": "http://www.ibm.com/xmlns/prod/composite-applications/v1.0 namespace"
+        },
+        "xpath": {
+            "entry": "/a:entry",
+            "uid": "a:contributor/snx:userid",
+            "userid": "a:contributor/snx:userid",
+            "name": "a:contributor/a:name",
+            "email": "a:contributor/a:email",
+            "role": "snx:role"
+        },
+        "_values": {
+            "uid": "0F19F8AD-37EA-6033-8525-7BBF005634B5",
+            "role": "owner",
+            "name": "Frank Adams",
+            "userid": "0F19F8AD-37EA-6033-8525-7BBF005634B5",
+            "email": "fadams@renovations.com"
+        }
+    },
+    "getCommunityUuid": "a61f520b-31a9-4aa4-991b-265ca892896f",
+    "getName": "Frank Adams",
+    "getUserid": "0F19F8AD-37EA-6033-8525-7BBF005634B5",
+    "getEmail": "fadams@renovations.com",
+    "getRole": "owner",
+    "isLoaded": true
+},
+{
+    "service": {
+        "endpoint": {
+            "authType": "basic",
+            "platform": "connections",
+            "authenticator": {
+                "url": "https://localhost:8443/sbt/js/sdk"
+            },
+            "proxyPath": "connections",
+            "isAuthenticated": true,
+            "transport": {
+                "_inherited": {
+                    "p": 1
+                },
+                "index": 1
+            },
+            "serviceMappings": {},
+            "name": "connections",
+            "authenticationErrorCode": 401,
+            "baseUrl": "https://qs.renovations.com:444",
+            "apiVersion": "4.0",
+            "proxy": {
+                "proxyUrl": "https://localhost:8443/sbt.sample.web/service/proxy"
+            }
+        }
+    },
+    "id": "70855A57-719D-FC49-8525-7BBF0055FAD4",
+    "communityUuid": "a61f520b-31a9-4aa4-991b-265ca892896f",
+    "dataHandler": {
+        "data": {},
+        "namespaces": {
+            "o": "http://ns.opensocial.org/2008/opensocial",
+            "app": "http://www.w3.org/2007/app",
+            "thr": "http://purl.org/syndication/thread/1.0",
+            "fh": "http://purl.org/syndication/history/1.0",
+            "snx": "http://www.ibm.com/xmlns/prod/sn",
+            "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+            "a": "http://www.w3.org/2005/Atom",
+            "h": "http://www.w3.org/1999/xhtml",
+            "td": "urn:ibm.com/td",
+            "relevance": "http://a9.com/-/opensearch/extensions/relevance/1.0/",
+            "ibmsc": "http://www.ibm.com/search/content/2010",
+            "xhtml": "http://www.w3.org/1999/xhtml",
+            "spelling": "http://a9.com/-/opensearch/extensions/spelling/1.0/",
+            "ca": "http://www.ibm.com/xmlns/prod/composite-applications/v1.0 namespace"
+        },
+        "xpath": {
+            "entry": "/a:entry",
+            "uid": "a:contributor/snx:userid",
+            "userid": "a:contributor/snx:userid",
+            "name": "a:contributor/a:name",
+            "email": "a:contributor/a:email",
+            "role": "snx:role"
+        },
+        "_values": {
+            "uid": "70855A57-719D-FC49-8525-7BBF0055FAD4",
+            "role": "member",
+            "name": "Bill Jordan",
+            "userid": "70855A57-719D-FC49-8525-7BBF0055FAD4",
+            "email": "bjordan@renovations.com"
+        }
+    },
+    "getCommunityUuid": "a61f520b-31a9-4aa4-991b-265ca892896f",
+    "getName": "Bill Jordan",
+    "getUserid": "70855A57-719D-FC49-8525-7BBF0055FAD4",
+    "getEmail": "bjordan@renovations.com",
+    "getRole": "member",
+    "isLoaded": true
+}]

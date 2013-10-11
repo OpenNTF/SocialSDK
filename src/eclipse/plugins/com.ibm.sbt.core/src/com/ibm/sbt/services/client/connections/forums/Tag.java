@@ -19,7 +19,6 @@ package com.ibm.sbt.services.client.connections.forums;
 import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
-import com.ibm.sbt.services.client.connections.profiles.model.ProfileXPath;
 
 /**
  * tag Entry Class - representing a tag associated with a Forum.
@@ -34,22 +33,22 @@ public class Tag extends BaseEntity{
 	}
 
 	public String getTerm() {
-		return getAsString(ProfileXPath.term);
+		return getAsString(ForumsXPath.term);
 	}
 
 	public void setTerm(String term) {
-		setAsString(ProfileXPath.term,term);
+		setAsString(ForumsXPath.term,term);
 	}
 
 	public int getFrequency(){
-		return getAsInt(ProfileXPath.frequency);
+		return getAsInt(ForumsXPath.frequency);
 	}
 	public int getIntensity() {
-		return getAsInt(ProfileXPath.intensity);
+		return getAsInt(ForumsXPath.intensity);
 	}
 
 	public int getVisibility() {
-		return getAsInt(ProfileXPath.visibility);
+		return getAsInt(ForumsXPath.visibility);
 	}
 
 }

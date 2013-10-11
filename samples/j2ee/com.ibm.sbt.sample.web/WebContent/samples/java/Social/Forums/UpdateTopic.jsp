@@ -30,7 +30,7 @@
 	pageEncoding="ISO-8859-1"%>
 <html>
 <head>
-	<title>SBT JAVA Sample - Create Forum</title>
+	<title>SBT JAVA Sample - Update Topic</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
@@ -47,13 +47,12 @@
 		topic = topic.load();
 		topic.setTitle("updated title");
 		topic.setContent("updated with newContent");
+		topic.setLocked(true);
 		topic = topic.save();  
 		out.println("Forum Topic updated with title : " + topic.getTitle()+"<br>");
 		out.println("is topic pinned : " + topic.isPinned()+"<br>");
 		out.println("is topic locked : " + topic.isLocked()+"<br>");
 		out.println("is topic a question : " + topic.isQuestion()+"<br>");
-	
-		
 	} catch (Exception e) {
 		out.println("<pre>");
 		out.println(e.getMessage());

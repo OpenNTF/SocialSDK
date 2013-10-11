@@ -98,6 +98,14 @@ public class ApplicationEndpoint implements Endpoint {
     	return null;
     }
     
+    /* (non-Javadoc)
+     * @see com.ibm.sbt.services.endpoints.Endpoint#isUseProxy()
+     */
+    @Override
+    public boolean isUseProxy() {
+    	return false;
+    }
+    
     @Override
 	public JSReference getAuthenticator(String endpointName, String sbtUrl) {
     	return null;

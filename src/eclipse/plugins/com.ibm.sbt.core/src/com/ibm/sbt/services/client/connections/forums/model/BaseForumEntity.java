@@ -38,9 +38,9 @@ import com.ibm.sbt.services.client.connections.forums.model.Author;
 
 
 public class BaseForumEntity extends BaseEntity {
-	
+
 	private final String FORUMID = "urn:lsid:ibm.com:forum:";
-	
+
 	/**
 	 * Constructor
 	 *  
@@ -55,7 +55,7 @@ public class BaseForumEntity extends BaseEntity {
 	public BaseForumEntity(BaseService svc, DataHandler<?> handler) {
 		super(svc,handler);
 	}
-	
+
 	public String getUid(){
 		String id = getAsString(ForumsXPath.uid);
 		if(StringUtil.startsWithIgnoreCase(id, FORUMID)){
@@ -63,81 +63,94 @@ public class BaseForumEntity extends BaseEntity {
 		}
 		return id;
 	}
-	
+
 	public String getPublished(){
 		return getAsString(ForumsXPath.published);
-		
+
 	}
 	public Author getAuthor(){
 		return new Author(super.dataHandler);
 	}
-	
+
+	public Contributor getContributor(){
+		return new Contributor(super.dataHandler);
+	}
+
 	public String getUpdated(){
 		return getAsString(ForumsXPath.updated);
 	}
-	
+
+	public String createdBy(){
+		return this.getAuthor().getName();
+	}
+
+	public String updatedBy(){
+		return this.getContributor().getName();
+	}
+
+
 	public String getTitle(){
 		return getAsString(ForumsXPath.title);
 	}
-	
-	
+
+
 	public void setTitle(String title) {
 		setAsString(ForumsXPath.title, title);
 	}
-	
+
 	public String getContent(){
 		return getAsString(ForumsXPath.content);
 	}
-	
+
 	public void setContent(String content) {
 		setAsString(ForumsXPath.content, content);
 	}
-	
+
 	/**
 	 * @return the list of Tags
 	 */
-	
+
 	public List<String> getTags() {
 		return (List<String>) Arrays.asList(getDataHandler().getAsString(ForumsXPath.tags).split(" "));
 	}
-	
+
 	/**
 	 * @sets the tags
 	 */
 	public void setTags(List<String> tags) {
 		if(!tags.isEmpty()){
 			for (int i = 0; i < tags.size(); i++){
-				   fields.put("tag" + i , tags.get(i));
+				fields.put("tag" + i , tags.get(i));
 			}
 		}
 	}
-	
+
 	/**
 	 * @sets the tags
 	 */
 	public void setTags(String tags) {
 		setAsString(ForumsXPath.tags, tags);
 	}
-	
+
 	@Override
 	public ForumService getService(){
 		return (ForumService)super.getService();
 	}
-	
+
 	@Override
 	public XmlDataHandler getDataHandler(){
 		return (XmlDataHandler)super.getDataHandler();
 	}
-	
-    /*
-     * Method used to extract the forum uuid for an id string.
-     */
+
+	/*
+	 * Method used to extract the forum uuid for an id string.
+	 */
 	public String extractForumUuid(String uid) {
-        if (StringUtil.isNotEmpty(uid) && uid.indexOf(FORUMID) == 0) {
-            return uid.substring(FORUMID.length());
-        } else {
-            return uid;
-        }
-    }; 
+		if (StringUtil.isNotEmpty(uid) && StringUtil.startsWithIgnoreCase(uid, FORUMID)) {
+			return uid.substring(FORUMID.length());
+		} else {
+			return uid;
+		}
+	}; 
 
 }

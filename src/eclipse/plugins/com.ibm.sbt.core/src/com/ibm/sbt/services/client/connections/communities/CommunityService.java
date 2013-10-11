@@ -376,7 +376,7 @@ public class CommunityService extends BaseService {
 			parameters = new HashMap<String, String>();
 		}		
 		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
-		ForumList forums = null;
+		ForumList forums;
 		try {
 			ForumService svc = new ForumService(this.endpoint);
 			forums = svc.getAllForums(parameters);
@@ -405,7 +405,7 @@ public class CommunityService extends BaseService {
 		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
 		String requestUrl = resolveCommunityUrl(CommunityEntity.COMMUNITY.getCommunityEntityType(),	CommunityType.FORUMTOPICS.getCommunityType());
 		
-		TopicList forumTopics = null;
+		TopicList forumTopics;
 		try {
 			forumTopics = (TopicList) getEntities(requestUrl, parameters, new TopicsFeedHandler(new ForumService()));
 		}catch (ClientServicesException e) {

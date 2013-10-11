@@ -1,0 +1,65 @@
+<div id="error" style="display:none;" class="alert alert-error"></div>
+<div id="success" style="" class="alert alert-success"></div>
+
+<br/>
+<input type="file" id="your-files"></input>
+<button class="btn btn-primary" id="uploadBtn">Upload New Version</button>	 
+<p>
+	<div class="form-horizontal">
+    <legend>File Details</legend>
+     <div class="control-group">
+    	<label class="control-label">File Id:</label>
+        <div class="controls">
+            <input id="fileId" type="text" placeholder="File Id" style="width:400px"></input>
+        </div>
+        <div style="height:4px"></div>
+        <label class="control-label">Label:</label>
+        <div class="controls">
+            <input id="label" disabled="disabled" type="text" placeholder="Label" style="width:400px"></input>
+        </div>
+        <div style="height:4px"></div>
+        <label class="control-label">Summary:</label>
+        <div class="controls">
+            <input id="summary" disabled="disabled" type="text" placeholder="Summary" style="width:400px"></input>
+        </div>
+        <div style="height:4px"></div>
+        <label class="control-label">Visibility:</label>
+        <div class="controls">
+             <select id="visibility" placeholder="visibility" style="width:400px">
+            	<option value="" selected="selected"></option>
+            	<option value="private">private</option>
+            	<option value="public">public</option>
+            </select>
+        </div>   
+        <div style="height:4px"></div>
+        <label class="control-label">Tags:</label>
+        <div class="controls">
+            <input id="tags" type="text" placeholder="tags" style="width:400px"></input>
+        </div>  
+         <div style="height:4px"></div>
+        <label class="control-label">Remove Tags:</label>
+        <div class="controls">
+            <input id="removeTags" type="text" placeholder="removeTags" style="width:400px"></input>
+        </div>     
+         <div style="height:4px"></div>
+        <label class="control-label">Share With:</label>
+        <div class="controls">
+            <input id="shareWith" type="text" placeholder="shareWith" style="width:400px"></input>
+        </div> 
+        <div style="height:4px"></div>
+        <label class="control-label">Share Permission:</label>
+        <div class="controls">
+            <select id="sharePermission"  style="width:400px">
+            	<option selected="selected" value=""></option>
+            	<option value="View">View</option>
+            	<option value="Edit">Edit</option>
+            </select>
+        </div>               
+        <div style="height:8px"></div>
+        <div class="controls">
+	    	<button class="btn" id="loadBtn">Load</button>
+	    	<button class="btn" id="updateBtn">Update</button>
+	    </div>
+        <div style="height:8px"></div>
+        <div id="note" class="alert alert-error">Note: This Sample will not work on browsers which do not support HTML 5 File API.</div>
+</p>

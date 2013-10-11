@@ -66,6 +66,14 @@ public class JavaScriptPreviewPage extends BaseResultPage {
     }
     
     /**
+     * Return the contents of the json div
+     */
+    public String getJsonContent() {
+        WebElement webElement = getWebElement();
+        return webElement.findElement(By.id("json")).getText();
+    }
+    
+    /**
      * Return the contents of the json div as a JSON object
      */
     public JsonJavaObject getJson() {

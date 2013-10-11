@@ -44,22 +44,22 @@ public class GetActivityNodesInTrash extends BaseActivitiesTest {
    	@Before
    	public void init() {
    		activity = createActivity();	
+   		addSnippetParam("sample.activityId", activity.getActivityId());	
    		activityNode = createActivityNode(activity.getActivityId(), "Entry");
    		deleteActivityNode(activityNode.getActivityId());	
    	}
    	
    	@After
 	public void destroy() {		
-		//deleteActivity(activity.getActivityId());		
+		deleteActivity(activity.getActivityId());		
 	}
    
    	
     @Test
     public void testGetActivityNodesInTrash() {
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
-        List jsonList = previewPage.getJsonList();
-        // TODO check why not working on smartcloud
-      //  Assert.assertFalse("Get activity nodes In Trash returned no activities nodes", jsonList.isEmpty());
+        List jsonList = previewPage.getJsonList();        
+        Assert.assertFalse("Get activity nodes In Trash returned no activities nodes", jsonList.isEmpty());
     }
 
 }

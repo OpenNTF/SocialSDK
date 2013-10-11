@@ -379,12 +379,10 @@ public class CommunityService extends BaseService {
 		ForumList forums = null;
 		try {
 			ForumService svc = new ForumService(this.endpoint);
-			
 			forums = svc.getAllForums(parameters);
 		}catch (Exception e) {
 			throw new CommunityServiceException(e, Messages.CommunityForumTopicsException, communityUuid);
 		} 
-		
 		return forums;
 	}
 	
@@ -429,7 +427,6 @@ public class CommunityService extends BaseService {
 	public ForumTopic createForumTopic(ForumTopic topic, String communityId)throws CommunityServiceException {
 		try {
 			ForumService svc = new ForumService(this.endpoint);
-			
 			return svc.createCommunityForumTopic(topic, communityId);
 		}catch (Exception e) {
 			throw new CommunityServiceException(e, Messages.CreateCommunityForumTopicException, communityId);

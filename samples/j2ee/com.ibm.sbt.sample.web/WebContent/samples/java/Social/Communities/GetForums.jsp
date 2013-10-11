@@ -26,7 +26,7 @@
 	pageEncoding="ISO-8859-1"%>
 <html>
 <head>
-<title>SBT JAVA Sample - Get Community Forums</title>
+<title>SBT JAVA Sample - Get Forums</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 

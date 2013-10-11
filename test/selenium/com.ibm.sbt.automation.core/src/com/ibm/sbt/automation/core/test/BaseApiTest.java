@@ -15,9 +15,13 @@
  */
 package com.ibm.sbt.automation.core.test;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.List;
 
+import org.junit.Rule;
 import org.junit.After;
+import org.junit.rules.TestName;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -49,9 +53,12 @@ import com.ibm.sbt.services.endpoints.EndpointFactory;
  * @date 5 Mar 2013
  */
 public class BaseApiTest extends BaseTest {
+	
+	@Rule public TestName name = new TestName();
 
     private Application application;
     private Context context;
+    private String snippetId;
     
     public BaseApiTest() {
         RuntimeFactory runtimeFactory = new RuntimeFactoryStandalone() {
@@ -136,10 +143,77 @@ public class BaseApiTest extends BaseTest {
      * @return
      */
     protected JavaScriptPreviewPage executeSnippet(String snippetId, long delay) {
+    	this.snippetId = snippetId;
         ResultPage resultPage = launchSnippet(snippetId, authType, delay);
         JavaScriptPreviewPage previewPage = new JavaScriptPreviewPage(resultPage);
         Trace.log(previewPage.getText());
         return previewPage;
+    }
+    
+    protected void saveTestDataAndResults() {
+    	String fileBase = getSnippetFile();
+    	File testData = getTestDataDir();
+    	
+    	WebDriver webDriver = environment.getWebDriver();
+    	
+    	WebElement jsonElement = webDriver.findElement(By.id("json"));
+        String jsonText = jsonElement.getText();
+        writeFile(testData, fileBase + ".result", jsonText);
+        
+    	WebElement mockDataElement = webDriver.findElement(By.id("mockData"));
+        String mockDataText = mockDataElement.getText();
+        writeFile(testData, fileBase + ".mock", mockDataText);
+    }
+    
+	protected void writeFile(File folder, String fileName, String contents) {
+		try {
+			if (StringUtil.isEmpty(contents)) {
+				return;
+			}
+			
+			File file = (new File(folder, fileName)).getAbsoluteFile();
+			if (file.exists()) {
+				if (!environment.isOverwriteTestdata()) {
+					return;
+				} else {
+					file.delete();
+				}
+			}
+			file.createNewFile();
+			FileOutputStream fos = new FileOutputStream(file);
+			fos.write(contents.getBytes());
+			fos.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	protected File getTestDataDir() {
+    	try {
+    		String currentDir = System.getProperty("user.dir");
+    		String samplesJsBase = environment.getProperty("samples.js.base");
+    		String snippetPath = getSnippetPath();
+    		return new File(currentDir + File.separatorChar + samplesJsBase + File.separatorChar + snippetPath);
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    		return null;
+    	}
+    }
+	
+	protected String getSnippetPath() {
+		int index = snippetId.indexOf("API_");
+		String snippetPath = snippetId.substring(0, index+3);
+		return snippetPath.replace('_', File.separatorChar);
+	}
+
+	protected String getSnippetFile() {
+		int index = snippetId.indexOf("API_");
+		String snippetFile = snippetId.substring(index+4);
+		return snippetFile.replace('_', ' ');
+	}
+
+    protected String getTestFileBase() {
+    	return this.getClass().getCanonicalName() + "." + name.getMethodName();
     }
     
     /**

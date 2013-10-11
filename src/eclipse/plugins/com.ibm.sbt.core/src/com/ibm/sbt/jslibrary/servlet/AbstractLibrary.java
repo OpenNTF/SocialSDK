@@ -347,7 +347,7 @@ abstract public class AbstractLibrary {
 			jsonEndpoint.putJsonProperty(PROP_SERVICE_MAPPINGS, endpoint.getServiceMappings());
 
 			// configure endpoint to use proxy
-			if (useProxy(endpoint)) {
+			if (endpoint.isUseProxy()) {
 				JsonReference proxyRef = createProxyRef(request, endpoint, endpointName);
 				if (proxyRef != null) {
 					jsonEndpoint.putJsonProperty(PROP_PROXY, proxyRef);
@@ -854,16 +854,6 @@ abstract public class AbstractLibrary {
 	}
 
 	/*
-	 * Return true if we should use the proxy with the specified endpoint
-	 */
-	protected boolean useProxy(Endpoint endpoint) {
-		if (endpoint instanceof GadgetEndpoint || endpoint instanceof GadgetOAuthEndpoint) {
-			return false;
-		}
-		return true;
-	}
-
-	/*
 	 * 
 	 */
 	protected boolean useGadgetTransport(Endpoint endpoint) {
@@ -918,7 +908,7 @@ abstract public class AbstractLibrary {
 	protected JsonReference createProxyRef(LibraryRequest request, Endpoint endpoint, String logicalName)
 			throws LibraryException {
 		// define the proxy URL
-		if (useProxy(endpoint)) {
+		if (endpoint.isUseProxy()) {
 			String proxyUrl = PathUtil.concat(request.getServiceUrl(), endpoint.getProxyHandlerPath(), '/');
 			return new JsonReference("new Proxy({proxyUrl:'" + proxyUrl + "'})");
 		}

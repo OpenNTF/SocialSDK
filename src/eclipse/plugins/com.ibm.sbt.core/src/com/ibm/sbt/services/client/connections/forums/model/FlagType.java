@@ -24,13 +24,10 @@ package com.ibm.sbt.services.client.connections.forums.model;
 public enum FlagType {
 	
 	PIN("pinned"),
-	UNPIN("unpin"),
 	LOCK("locked"),
-	UNLOCK("unlock"),
 	QUESTION("question"),
-	NORMAL("normal"),
-	ACCEPT_ANSWER("answer"),
-	DECLINE_ANSWER("decline");
+	ANSWER("answer"),
+	ANSWERED("answered");
 	
 	String flagType;
 	

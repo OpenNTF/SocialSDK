@@ -260,11 +260,12 @@ public class ForumService extends BaseService {
 	 * @throws ForumServiceException
 	 */
 	public RecommendationList getRecommendations(String postUuid) throws ForumServiceException{
-		// check api version, if not 4.5 or above then throw unsupported exception
+		// check api version, if not 4.5 or above then throw unsupported operation exception
 		if(StringUtil.isNotEmpty(this.endpoint.getApiVersion())){
 			double apiVersion = Double.parseDouble(this.endpoint.getApiVersion());
 			if(APIVERSION > apiVersion ){
-				throw new UnsupportedOperationException("This API is only supported on connections 4.5 or above");
+				UnsupportedOperationException ex = new UnsupportedOperationException("This API is only supported on connections 4.5 or above");
+				throw new ForumServiceException(ex);
 			}
 		}
 		String recommendationsUrl = resolveUrl(ForumType.RECOMMENDATIONS, FilterType.ENTRIES);
@@ -291,7 +292,7 @@ public class ForumService extends BaseService {
 	 * @throws ForumServiceException
 	 */
 	public Recommendation createRecommendation(String postUuid) throws ForumServiceException{
-		// check api version, if not 4.5 or above then throw unsupported exception
+		// check api version, if not 4.5 or above then throw unsupported operation exception
 		if(StringUtil.isNotEmpty(this.endpoint.getApiVersion())){
 			double apiVersion = Double.parseDouble(this.endpoint.getApiVersion());
 			if(APIVERSION > apiVersion ){
@@ -325,11 +326,13 @@ public class ForumService extends BaseService {
 	 * @throws ForumServiceException
 	 */
 	public boolean deleteRecommendation(String postUuid) throws ForumServiceException{
-		// check api version, if not 4.5 or above then throw unsupported exception
+		// check api version, if not 4.5 or above then throw unsupported operation exception
 		if(StringUtil.isNotEmpty(this.endpoint.getApiVersion())){
 			double apiVersion = Double.parseDouble(this.endpoint.getApiVersion());
 			if(APIVERSION > apiVersion ){
-				throw new UnsupportedOperationException("This API is only supported on connections 4.5 or above");
+				UnsupportedOperationException ex = new UnsupportedOperationException("This API is only supported on connections 4.5 or above");
+				throw new ForumServiceException(ex);
+		
 			}
 		}
 		String recommendationsUrl = resolveUrl(ForumType.RECOMMENDATIONS, FilterType.ENTRIES);

@@ -59,11 +59,23 @@ public class ForumReply extends BaseForumEntity{
 	public void setTopicUuid(String topicId) {
 		fields.put("topicUuid", topicId);
 	}
-
+	
+	/**
+	 * Constructor
+	 *  
+	 * @param BaseService
+	 * @param DataHandler
+	 */
 	public ForumReply(BaseService svc, DataHandler<?> handler) {
 		super(svc, handler);
 	}
-
+	
+	/**
+	 * Constructor
+	 *  
+	 * @param ForumService
+	 * @param id
+	 */
 	public ForumReply(ForumService forumsService, String id) {
 		super(forumsService,id);
 	}
@@ -78,13 +90,19 @@ public class ForumReply extends BaseForumEntity{
 		return super.getUid();
 	}
 
+	/**
+	 * Sets the Uuid of Forum Reply
+	 *
+	 * @method setReplyUuid
+	 * @param {String} Uuid of forum
+	 */
 	public void setReplyUuid(String forumUuid) {
 		setAsString(ForumsXPath.uid, forumUuid);
 	}
 	/**
 	 * This method returns Recommendations for the IBM Connections forum Reply
 	 *
-	 * @return
+	 * @return RecommendationList
 	 * @throws ForumServiceException
 	 */
 	public RecommendationList getRecommendations() throws ForumServiceException
@@ -161,6 +179,7 @@ public class ForumReply extends BaseForumEntity{
 			for (int i = 0; i < flags.size(); i++) {
 				if(StringUtil.equalsIgnoreCase(flags.get(i), FlagType.ANSWER.getFlagType())){
 					answer = true;
+					break;
 				}
 			}
 		}

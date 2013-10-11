@@ -54,6 +54,8 @@ public class ForumTopic extends BaseForumEntity{
 
 	/**
 	 * This method returns Uuid of topic
+	 * 
+	 * @return {String} topicUuid
 	 */
 	public String getTopicUuid() throws ForumServiceException{
 		return super.getUid();
@@ -62,7 +64,7 @@ public class ForumTopic extends BaseForumEntity{
 	/**
 	 * This method creates/updates the IBM Connections Forum Topic on the server
 	 *
-	 * @return
+	 * @return ForumTopic
 	 * @throws ForumServiceException
 	 */
 	public ForumTopic save(String forumId) throws ForumServiceException{
@@ -83,7 +85,7 @@ public class ForumTopic extends BaseForumEntity{
 	/**
 	 * This method updates the IBM Connections Forum Topic on the server
 	 *
-	 * @return
+	 * @return ForumTopic
 	 * @throws ForumServiceException
 	 */
 	public ForumTopic save() throws ForumServiceException{
@@ -93,7 +95,6 @@ public class ForumTopic extends BaseForumEntity{
 	/**
 	 * This method deletes the IBM Connections forum on the server
 	 *
-	 * @return
 	 * @throws ForumServiceException
 	 */
 
@@ -104,7 +105,7 @@ public class ForumTopic extends BaseForumEntity{
 	/**
 	 * This method loads the IBM Connections Forum Topic
 	 *
-	 * @return
+	 * @return ForumTopic
 	 * @throws ForumServiceException
 	 */
 
@@ -117,7 +118,7 @@ public class ForumTopic extends BaseForumEntity{
 	/**
 	 * This method returns Replies for this IBM Connections forum Topic
 	 *
-	 * @return
+	 * @return ReplyList
 	 * @throws ForumServiceException
 	 */
 
@@ -129,7 +130,7 @@ public class ForumTopic extends BaseForumEntity{
 	/**
 	 * This method returns Recommendations for the IBM Connections forum Topic
 	 *
-	 * @return
+	 * @return RecommendationList
 	 * @throws ForumServiceException
 	 */
 	public RecommendationList getRecommendations() throws ForumServiceException
@@ -140,7 +141,7 @@ public class ForumTopic extends BaseForumEntity{
 	 * Return the permissions of the IBM Connections forum topic from forum ATOM
 	 * entry document.
 	 *
-	 * @return
+	 * @return String
 	 * @throws ForumServiceException
 	 */
 
@@ -217,7 +218,9 @@ public class ForumTopic extends BaseForumEntity{
 	}
 	/**
 	 * Set to true if you want the topic to be added to the top of the forum thread.
+	 * 
 	 * @method setPinned
+	 * @param pinned
 	 */
 	public void setPinned(boolean pinned) {
 		setAsBoolean(FlagType.PIN.getFlagType(), pinned);
@@ -225,8 +228,9 @@ public class ForumTopic extends BaseForumEntity{
 	
 	/**
 	 * Set to true, indicates that the topic is locked. 
+	 * 
 	 * @method setLocked
-	 * @param lock
+	 * @param locked
 	 */
 	public void setLocked(boolean locked) {
 		setAsBoolean(FlagType.LOCK.getFlagType(), locked);
@@ -273,6 +277,7 @@ public class ForumTopic extends BaseForumEntity{
 	 * Check if a Topic is pinned
 	 *
 	 * @method isPinned
+	 * @return boolean
 	 */
 	public boolean isPinned(){
 		boolean pin = false;
@@ -281,6 +286,7 @@ public class ForumTopic extends BaseForumEntity{
 			for (int i = 0; i < flags.size(); i++) {
 				if(StringUtil.equalsIgnoreCase(flags.get(i), FlagType.PIN.getFlagType())){
 					pin = true;
+					break;
 				}
 			}
 		}
@@ -291,6 +297,7 @@ public class ForumTopic extends BaseForumEntity{
 	 * Check if a Topic is locked
 	 *
 	 * @method isLocked
+	 * @return boolean
 	 */
 	public boolean isLocked(){
 		boolean lock = false;
@@ -299,6 +306,7 @@ public class ForumTopic extends BaseForumEntity{
 			for (int i = 0; i < flags.size(); i++) {
 				if(StringUtil.equalsIgnoreCase(flags.get(i), FlagType.LOCK.getFlagType())){
 					lock = true;
+					break;
 				}
 			}
 		}
@@ -308,6 +316,7 @@ public class ForumTopic extends BaseForumEntity{
 	 * Check if a Topic is a question
 	 *
 	 * @method isQuestion
+	 * @return boolean
 	 */
 	public boolean isQuestion(){
 		boolean question = false;
@@ -316,6 +325,7 @@ public class ForumTopic extends BaseForumEntity{
 			for (int i = 0; i < flags.size(); i++) {
 				if(StringUtil.equalsIgnoreCase(flags.get(i), FlagType.QUESTION.getFlagType())){
 					question = true;
+					break;
 				}
 			}
 		}
@@ -325,6 +335,7 @@ public class ForumTopic extends BaseForumEntity{
 	 * Check if a Topic is answered
 	 *
 	 * @method isAnswered
+	 * @return boolean
 	 */
 	public boolean isAnswered(){
 		boolean answered = false;
@@ -333,6 +344,7 @@ public class ForumTopic extends BaseForumEntity{
 			for (int i = 0; i < flags.size(); i++) {
 				if(StringUtil.equalsIgnoreCase(flags.get(i), FlagType.ANSWERED.getFlagType())){
 					answered = true;
+					break;
 				}
 			}
 		}

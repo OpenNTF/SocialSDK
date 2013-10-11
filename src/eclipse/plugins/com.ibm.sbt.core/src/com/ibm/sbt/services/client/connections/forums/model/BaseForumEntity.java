@@ -146,7 +146,7 @@ public class BaseForumEntity extends BaseEntity {
 	 * Method used to extract the forum uuid for an id string.
 	 */
 	public String extractForumUuid(String uid) {
-		if (StringUtil.isNotEmpty(uid) && uid.indexOf(FORUMID) == 0) {
+		if (StringUtil.isNotEmpty(uid) && StringUtil.startsWithIgnoreCase(uid, FORUMID)) {
 			return uid.substring(FORUMID.length());
 		} else {
 			return uid;

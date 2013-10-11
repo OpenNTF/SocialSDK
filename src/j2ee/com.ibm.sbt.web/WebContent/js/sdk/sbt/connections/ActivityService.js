@@ -1514,8 +1514,8 @@ define(
 				},
 
 				/**
-				 * Loads the Member object with the atom entry part with the activity. By default, a network call is made to load the atom entry
-				 * document in the Member object.
+				 * Loads the Member object with the atom entry part with the activity. By default, a network call is made to load the atom entry document in the
+				 * Member object.
 				 * 
 				 * @method load
 				 * @param {Stirng} activityUuid The Activity ID
@@ -2537,7 +2537,7 @@ define(
 
 					return this.deleteEntity(consts.AtomActivitiesMembers, options, memberId);
 				},
-				
+
 				_toMember : function(memberOrJsonOrString) {
 					if (memberOrJsonOrString) {
 						if (memberOrJsonOrString instanceof Member) {
@@ -2547,19 +2547,11 @@ define(
 							service : this
 						});
 						if (lang.isString(memberOrJsonOrString)) {
-							if (this.isEmail(memberOrJsonOrString)) {
-								member.setEmail(memberOrJsonOrString);
-							} else {
-								member.setUserId(memberOrJsonOrString);
-							}
-						} else {
-							if (memberOrJsonOrString.id && !memberOrJsonOrString.userId && !memberOrJsonOrString.email) {
-								this.isEmail(memberOrJsonOrString.id) ? memberOrJsonOrString.email = memberOrJsonOrString.id
-										: memberOrJsonOrString.userId = memberOrJsonOrString.id;
-								delete memberOrJsonOrString.id;
-							}
-							member._fields = lang.mixin({}, memberOrJsonOrString);
+							memberOrJsonOrString = {
+								id : memberOrJsonOrString
+							};
 						}
+						member._fields = lang.mixin({}, memberOrJsonOrString);
 						return member;
 					}
 				},

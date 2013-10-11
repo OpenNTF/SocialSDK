@@ -66,6 +66,7 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     private boolean forceTrustSSLCertificate;
     private String httpProxy;
     private boolean allowClientAccess = true;
+    private boolean useProxy = true;
     
     protected Map<String, Object> clientParams = new HashMap<String, Object>();
     
@@ -193,6 +194,22 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
 	 */
 	public void setAllowClientAccess(boolean allowClientAccess) {
 		this.allowClientAccess = allowClientAccess;
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.ibm.sbt.services.endpoints.Endpoint#isUseProxy()
+	 */
+	@Override
+	public boolean isUseProxy() {
+		return useProxy;
+	}
+	
+	/**
+	 * Set to true if this endpoint should use the proxy.
+	 * @param useProxy
+	 */
+	public void setUseProxy(boolean useProxy) {
+		this.useProxy = useProxy;
 	}
     
     @Override

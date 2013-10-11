@@ -30,6 +30,7 @@ import com.ibm.sbt.test.js.connections.activities.api.DeleteAndRestoreActivityNo
 import com.ibm.sbt.test.js.connections.activities.api.GetActivitiesInTrash;
 import com.ibm.sbt.test.js.connections.activities.api.GetActivity;
 import com.ibm.sbt.test.js.connections.activities.api.GetActivityMember;
+import com.ibm.sbt.test.js.connections.activities.api.GetActivityMembers;
 import com.ibm.sbt.test.js.connections.activities.api.GetActivityNode;
 import com.ibm.sbt.test.js.connections.activities.api.GetActivityNodeTags;
 import com.ibm.sbt.test.js.connections.activities.api.GetActivityNodes;
@@ -65,6 +66,7 @@ import com.ibm.sbt.test.js.connections.activities.api.UpdateActivityNode;
 	GetActivitiesInTrash.class,
 	GetActivity.class,
 	GetActivityMember.class,
+	GetActivityMembers.class,
 	GetActivityNodesInTrash.class,
 	GetActivityNodeTags.class,
 	//GetActivityTags.class,	

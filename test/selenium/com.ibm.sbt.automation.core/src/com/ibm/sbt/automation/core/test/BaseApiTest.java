@@ -165,11 +165,13 @@ public class BaseApiTest extends BaseTest {
         writeFile(testData, fileBase + ".mock", mockDataText);
     }
     
-	protected void writeFile(File folder, String fileName, String mockDataText) {
+	protected void writeFile(File folder, String fileName, String contents) {
 		try {
-			System.out.println(folder.getAbsolutePath());
+			if (StringUtil.isEmpty(contents)) {
+				return;
+			}
+			
 			File file = (new File(folder, fileName)).getAbsoluteFile();
-			System.out.println(folder.getAbsolutePath());
 			if (file.exists()) {
 				if (!environment.isOverwriteTestdata()) {
 					return;
@@ -177,10 +179,9 @@ public class BaseApiTest extends BaseTest {
 					file.delete();
 				}
 			}
-			System.out.println(file.getAbsoluteFile());
 			file.createNewFile();
 			FileOutputStream fos = new FileOutputStream(file);
-			fos.write(mockDataText.getBytes());
+			fos.write(contents.getBytes());
 			fos.close();
 		} catch (Exception e) {
 			e.printStackTrace();

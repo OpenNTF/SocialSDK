@@ -159,6 +159,8 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
             // used by getEntityId
             uid : "a:id",
             // used by getters
+            eventUuid : "snx:eventUuid",
+            eventInstUuid : "snx:eventInstUuid",
             title : "a:title",
             eventAtomUrl : "a:link[@rel='self']/@href",
             content : "a:content[@type='html']",
@@ -326,6 +328,6 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.CommunityService
          */
-        AtomCommunityEvent : "/${communities}/calendar/atom_form/calendar/event"
+        AtomCommunityEvent : "/${communities}/calendar/atom/calendar/event"
     }, conn);
 });

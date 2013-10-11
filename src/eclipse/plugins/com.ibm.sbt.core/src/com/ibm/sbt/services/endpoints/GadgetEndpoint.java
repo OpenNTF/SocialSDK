@@ -27,6 +27,13 @@ import com.ibm.sbt.services.endpoints.js.JSReference;
  * @author mwallace
  */
 public class GadgetEndpoint extends AbstractEndpoint {
+	
+	/**
+	 * Default constructor for GadgetEndpoint
+	 */
+	public GadgetEndpoint() {
+		setUseProxy(false);
+	}
 
 	/*
 	 * (non-Javadoc)

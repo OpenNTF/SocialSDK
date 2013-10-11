@@ -87,10 +87,16 @@ public interface Endpoint {
     public String getLabel();
     
     /**
-     * 
-     * @return
+     * Return true if this endpoint can be used from the client.
+     * @return true if this endpoint can be used from the client.
      */
     public boolean isAllowClientAccess();
+    
+    /**
+     * Return true if this endpoint should use the proxy.
+     * @return true if this endpoint should use the proxy.
+     */
+    public boolean isUseProxy();
     
     /**
      * Gets the error code for authentication failure.

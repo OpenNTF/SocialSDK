@@ -30,6 +30,7 @@ import com.ibm.sbt.services.client.connections.forums.feedhandler.ForumsFeedHand
 import com.ibm.sbt.services.client.connections.forums.feedhandler.RepliesFeedHandler;
 import com.ibm.sbt.services.client.connections.forums.feedhandler.TagFeedHandler;
 import com.ibm.sbt.services.client.connections.forums.feedhandler.TopicsFeedHandler;
+import com.ibm.sbt.services.client.connections.forums.feedhandler.RecommendationsFeedHandler; 
 import com.ibm.sbt.services.client.connections.forums.transformers.BaseForumTransformer;
 import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.util.AuthUtil;
@@ -43,7 +44,7 @@ import com.ibm.sbt.services.util.AuthUtil;
  */
 
 public class ForumService extends BaseService {
-	
+
 	/**
 	 * Used in constructing REST APIs
 	 */
@@ -53,17 +54,18 @@ public class ForumService extends BaseService {
 	private static final String FORUM_UNIQUE_IDENTIFIER = "forumUuid";
 	private static final String TOPIC_UNIQUE_IDENTIFIER = "topicUuid";
 	private static final String REPLY_UNIQUE_IDENTIFIER = "replyUuid";
+	private static final String POST_UNIQUE_IDENTIFIER  = "postUuid"; 
 	private static final String COMM_UNIQUE_IDENTIFIER	= "communityUuid";
 	public static final String CREATE_OP 				= "create";
-	
+	private static final double APIVERSION       		= 4.5; 
 	/**
 	 * Default Constructor
 	 */
-	
+
 	public ForumService() {
 		this(DEFAULT_ENDPOINT_NAME);
 	}
-	
+
 	/**
 	 * Constructor
 	 * 
@@ -73,7 +75,7 @@ public class ForumService extends BaseService {
 	public ForumService(String endpoint) {
 		super(endpoint, DEFAULT_CACHE_SIZE);
 	}
-	
+
 	/**
 	 * Constructor
 	 * 
@@ -83,7 +85,7 @@ public class ForumService extends BaseService {
 	public ForumService(Endpoint endpoint) {
 		super(endpoint, DEFAULT_CACHE_SIZE);
 	}
-	
+
 	/** This method returns the all forums
 	 * 
 	 * @return
@@ -91,9 +93,9 @@ public class ForumService extends BaseService {
 	 */
 	public ForumList getAllForums() throws ForumServiceException{
 		return getAllForums(null);
-		
+
 	}
-	
+
 	/**
 	 * This method returns the all forums
 	 * 
@@ -103,7 +105,7 @@ public class ForumService extends BaseService {
 	 */
 	public ForumList getAllForums(Map<String, String> parameters) throws ForumServiceException {
 		ForumList forums;
-		
+
 		if(null == parameters){
 			parameters = new HashMap<String, String>();
 		}
@@ -117,7 +119,7 @@ public class ForumService extends BaseService {
 		}
 		return forums;
 	}
-	
+
 	/**
 	 * This method returns the public forums
 	 * 
@@ -126,7 +128,7 @@ public class ForumService extends BaseService {
 	 */
 	public ForumList getPublicForums() throws ForumServiceException{
 		return getPublicForums(null);
-		
+
 	}
 
 	/**
@@ -138,7 +140,7 @@ public class ForumService extends BaseService {
 	 */
 	public ForumList getPublicForums(Map<String, String> parameters) throws ForumServiceException {
 		ForumList forums;
-		
+
 		if(null == parameters){
 			parameters = new HashMap<String, String>();
 		}
@@ -152,8 +154,8 @@ public class ForumService extends BaseService {
 		}
 		return forums;
 	}
-	
-	
+
+
 	/**
 	 * This method returns the my forums
 	 * 
@@ -187,7 +189,7 @@ public class ForumService extends BaseService {
 
 		return forums;
 	}
-	
+
 	/**
 	 * This method returns the tags that have been assigned to forums
 	 * 
@@ -235,7 +237,7 @@ public class ForumService extends BaseService {
 			parameters = new HashMap<String, String>();
 		}
 		parameters.put(FORUM_UNIQUE_IDENTIFIER, forumUuid);
-		
+
 		TagList tags = null;
 		try {
 			tags = (TagList) getEntities(tagsUrl, parameters, new TagFeedHandler(this));
@@ -247,10 +249,106 @@ public class ForumService extends BaseService {
 
 		return tags;
 	}
-	
-	
+
+	/**
+	 * Wrapper method to get list of recommendations for a ForumTopic or ForumReply
+	 * API Supported on Connections 4.5 or above
+	 * <p>
+	 * User should be authenticated to call this method
+	 * @param postUuid
+	 * @return RecommendationList
+	 * @throws ForumServiceException
+	 */
+	public RecommendationList getRecommendations(String postUuid) throws ForumServiceException{
+		// check api version, if not 4.5 or above then throw unsupported operation exception
+		if(StringUtil.isNotEmpty(this.endpoint.getApiVersion())){
+			double apiVersion = Double.parseDouble(this.endpoint.getApiVersion());
+			if(APIVERSION > apiVersion ){
+				UnsupportedOperationException ex = new UnsupportedOperationException("This API is only supported on connections 4.5 or above");
+				throw new ForumServiceException(ex);
+			}
+		}
+		String recommendationsUrl = resolveUrl(ForumType.RECOMMENDATIONS, FilterType.ENTRIES);
+		RecommendationList recommendations;
+		Map<String, String> parameters = new HashMap<String, String>();
+
+		parameters.put(POST_UNIQUE_IDENTIFIER, postUuid);
+		try {
+			recommendations = (RecommendationList) getEntities(recommendationsUrl, parameters, new RecommendationsFeedHandler(this));
+		} catch (Exception e) {
+			throw new ForumServiceException(e);
+		}
+
+		return recommendations;
+
+	}
+
+	/**
+	 * Wrapper method to create a recommendation, API Supported on Connections 4.5 or above
+	 * <p>
+	 * User should be authenticated to call this method
+	 * @param postUuid
+	 * @return Recommendation
+	 * @throws ForumServiceException
+	 */
+	public Recommendation createRecommendation(String postUuid) throws ForumServiceException{
+		// check api version, if not 4.5 or above then throw unsupported operation exception
+		if(StringUtil.isNotEmpty(this.endpoint.getApiVersion())){
+			double apiVersion = Double.parseDouble(this.endpoint.getApiVersion());
+			if(APIVERSION > apiVersion ){
+				throw new UnsupportedOperationException("This API is only supported on connections 4.5 or above");
+			}
+		}
+		String recommendationsUrl = resolveUrl(ForumType.RECOMMENDATIONS, FilterType.ENTRIES);
+		Map<String, String> parameters = new HashMap<String, String>();
+
+		parameters.put(POST_UNIQUE_IDENTIFIER, postUuid);
+		Response result;
+		Recommendation recommendation;
+		// not using transformer, as the payload to be sent is constant
+		String payload = "<entry xmlns='http://www.w3.org/2005/Atom'><category scheme='http://www.ibm.com/xmlns/prod/sn/type' term='recommendation'></category></entry>";
+		try {
+			result = createData(recommendationsUrl, parameters, null,payload);
+			recommendation = (Recommendation) new RecommendationsFeedHandler(this).createEntity(result);
+
+		} catch (Exception e) {
+			throw new ForumServiceException(e);
+		}
+		return recommendation;
+
+	}
+	/**
+	 * Wrapper method to delete a recommendation, API Supported on Connections 4.5 or above
+	 * <p>
+	 * User should be authenticated to call this method
+	 * @param postUuid
+	 * @return boolean
+	 * @throws ForumServiceException
+	 */
+	public boolean deleteRecommendation(String postUuid) throws ForumServiceException{
+		// check api version, if not 4.5 or above then throw unsupported operation exception
+		if(StringUtil.isNotEmpty(this.endpoint.getApiVersion())){
+			double apiVersion = Double.parseDouble(this.endpoint.getApiVersion());
+			if(APIVERSION > apiVersion ){
+				UnsupportedOperationException ex = new UnsupportedOperationException("This API is only supported on connections 4.5 or above");
+				throw new ForumServiceException(ex);
+		
+			}
+		}
+		String recommendationsUrl = resolveUrl(ForumType.RECOMMENDATIONS, FilterType.ENTRIES);
+		Map<String, String> parameters = new HashMap<String, String>();
+
+		parameters.put(POST_UNIQUE_IDENTIFIER, postUuid);
+		try {
+			deleteData(recommendationsUrl, parameters, postUuid);
+			return true;
+		} catch (Exception e) {
+			throw new ForumServiceException(e);
+		}
+	}
+
 	// todo : missing overloaded method accepting params for getForum
-	
+
 	/**
 	 * Wrapper method to get a Stand-alone forum
 	 * <p>
@@ -276,7 +374,7 @@ public class ForumService extends BaseService {
 
 		return forum;
 	}
-	
+
 	/**
 	 * Wrapper method to create a forum
 	 * <p>
@@ -295,10 +393,10 @@ public class ForumService extends BaseService {
 		try {
 			BaseForumTransformer transformer = new BaseForumTransformer(forum);
 			Object 	payload = transformer.transform(forum.getFieldsMap());
-			
+
 			Map<String, String> headers = new HashMap<String, String>();
 			headers.put("Content-Type", "application/atom+xml");
-			
+
 			String url = resolveUrl(ForumType.FORUMS,null,null);
 			result = createData(url, null, headers, payload);
 			forum = (Forum) new ForumsFeedHandler(this).createEntity(result);
@@ -307,10 +405,10 @@ public class ForumService extends BaseService {
 			throw new ForumServiceException(e, "error creating forum");
 		}
 
-        return forum;
+		return forum;
 	}
-	
-	
+
+
 	/**
 	 * Wrapper method to update a forum
 	 * <p>
@@ -329,20 +427,20 @@ public class ForumService extends BaseService {
 			Map<String, String> parameters = new HashMap<String, String>();
 
 			parameters.put(FORUM_UNIQUE_IDENTIFIER, forum.getUid());
-			
+
 			BaseForumTransformer transformer = new BaseForumTransformer(forum);
 			Object payload = transformer.transform(forum.getFieldsMap());
-			
+
 			String url = resolveUrl(ForumType.FORUM,null,null);
-			
+
 			return updateData(url, parameters, payload, FORUM_UNIQUE_IDENTIFIER);
 		} catch (Exception e) {
 			throw new ForumServiceException(e, "error updating forum");
 		}
-		
+
 	}
-	
-	
+
+
 	/**
 	 * Wrapper method to delete a forum
 	 * <p>
@@ -355,7 +453,7 @@ public class ForumService extends BaseService {
 	public void removeForum(Forum forum) throws ForumServiceException {
 		removeForum(forum.getUid());
 	}
-	
+
 	/**
 	 * Wrapper method to delete a forum
 	 * <p>
@@ -375,14 +473,14 @@ public class ForumService extends BaseService {
 
 			parameters.put(FORUM_UNIQUE_IDENTIFIER, forumUuid);
 			String deleteForumUrl = resolveUrl(ForumType.FORUM,null,parameters);
-			
+
 			super.deleteData(deleteForumUrl, parameters, FORUM_UNIQUE_IDENTIFIER);
 		} catch (Exception e) {
 			throw new ForumServiceException(e,"error deleting forum");
 		} 	
-		
+
 	}
-	
+
 	/**
 	 * This method returns the public topics
 	 * 
@@ -416,10 +514,10 @@ public class ForumService extends BaseService {
 
 		return topics;
 	}
-	
-	
-	
-	
+
+
+
+
 	/**
 	 * This method returns the my topics
 	 * 
@@ -453,10 +551,10 @@ public class ForumService extends BaseService {
 
 		return topics;
 	}
-	
-	
-	
-	
+
+
+
+
 	/**
 	 * This method returns the topics for a particular forum
 	 * 
@@ -467,8 +565,8 @@ public class ForumService extends BaseService {
 	public TopicList getForumTopics(String forumUid) throws ForumServiceException {
 		return getForumTopics(forumUid, null);
 	}
-	
-	
+
+
 	/**
 	 * This method returns the topics for a particular forum
 	 * 
@@ -482,7 +580,7 @@ public class ForumService extends BaseService {
 		if(null == parameters){
 			parameters = new HashMap<String, String>();
 		}
-		
+
 		parameters.put(FORUM_UNIQUE_IDENTIFIER, forumUid);
 		try {
 			topics = (TopicList) getEntities(myTopicsUrl, parameters, new TopicsFeedHandler(this));
@@ -494,7 +592,7 @@ public class ForumService extends BaseService {
 
 		return topics;
 	}
-	
+
 	/**
 	 * This method returns topic
 	 * 
@@ -505,9 +603,9 @@ public class ForumService extends BaseService {
 	public ForumTopic getForumTopic(String topicId) throws ForumServiceException {
 		return getForumTopic(topicId, null);
 	}
-	
-	
-	
+
+
+
 	/**
 	 * This method returns topic
 	 * 
@@ -532,8 +630,8 @@ public class ForumService extends BaseService {
 
 		return topic;
 	}
-	
-	
+
+
 	/**
 	 * Wrapper method to create a Topic
 	 * <p>
@@ -543,10 +641,10 @@ public class ForumService extends BaseService {
 	 * @throws ForumServiceException
 	 */
 	public ForumTopic createForumTopic(ForumTopic topic) throws ForumServiceException {
-		  return createForumTopic(topic,topic.getForumUuid());
+		return createForumTopic(topic,topic.getForumUuid());
 	}
-	
-	
+
+
 	/**
 	 * Wrapper method to create a Topic
 	 * <p>
@@ -563,13 +661,13 @@ public class ForumService extends BaseService {
 		try {
 			BaseForumTransformer transformer = new BaseForumTransformer(topic);
 			Object 	payload = transformer.transform(topic.getFieldsMap());
-			
+
 			Map<String, String> params = new HashMap<String, String>();
 			params.put(FORUM_UNIQUE_IDENTIFIER, forumId);
-			
+
 			Map<String, String> headers = new HashMap<String, String>();
 			headers.put("Content-Type", "application/atom+xml");
-			
+
 			String url = resolveUrl(ForumType.TOPICS,null,params);
 			result = createData(url, null, headers,payload);
 			topic = (ForumTopic) new TopicsFeedHandler(this).createEntity(result);
@@ -578,11 +676,11 @@ public class ForumService extends BaseService {
 			throw new ForumServiceException(e, "error creating forum");
 		}
 
-        return topic;
+		return topic;
 	}
-	
-	
-	
+
+
+
 	/**
 	 * Wrapper method to create a Topic for default Forum of a Community
 	 * <p>
@@ -606,7 +704,6 @@ public class ForumService extends BaseService {
 			Map<String, String> headers = new HashMap<String, String>();
 			headers.put("Content-Type", "application/atom+xml");
 			String postUrl = resolveUrl(ForumType.TOPICS,null,null);
-			System.out.println("url "+postUrl);
 			result = createData(postUrl, params, headers,payload);
 			topic = (ForumTopic) new TopicsFeedHandler(this).createEntity(result);
 
@@ -614,9 +711,9 @@ public class ForumService extends BaseService {
 			throw new ForumServiceException(e, "error creating forum");
 		}
 
-        return topic;
+		return topic;
 	}
-		
+
 	/**
 	 * Wrapper method to update a topic
 	 * <p>
@@ -632,15 +729,15 @@ public class ForumService extends BaseService {
 		try {
 			String url = resolveUrl(ForumType.TOPICS, null, null);
 			BaseForumTransformer transformer = new BaseForumTransformer(topic);
-		
+
 			Object payload = transformer.transform(topic.getFieldsMap());
 
 			Map<String, String> parameters = new HashMap<String, String>();
 			parameters.put(TOPIC_UNIQUE_IDENTIFIER, topic.getUid());
-			
+
 			Map<String, String> headers = new HashMap<String, String>();
 			headers.put("Content-Type", "application/atom+xml");
-			
+
 			getClientService().put(url, parameters,headers, payload,ClientService.FORMAT_NULL);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -648,7 +745,7 @@ public class ForumService extends BaseService {
 		}
 
 	}
-	
+
 	/**
 	 * Wrapper method to delete a topic
 	 * <p>
@@ -661,7 +758,7 @@ public class ForumService extends BaseService {
 	public void removeForumTopic(ForumTopic topic) throws ForumServiceException {
 		removeForum(topic.getUid());
 	}
-	
+
 	/**
 	 * Wrapper method to delete a topic
 	 * <p>
@@ -684,10 +781,10 @@ public class ForumService extends BaseService {
 		} catch (Exception e) {
 			throw new ForumServiceException(e,"error deleting forum");
 		} 	
-		
+
 	}
-	
-	
+
+
 	/**
 	 * This method returns all of the replies for a specific forum topic
 	 * 
@@ -722,7 +819,7 @@ public class ForumService extends BaseService {
 
 		return replies;
 	}
-	
+
 	/**
 	 * This method returns reply
 	 * 
@@ -733,9 +830,9 @@ public class ForumService extends BaseService {
 	public ForumReply getForumReply(String replyId) throws ForumServiceException {
 		return getForumReply(replyId, null);
 	}
-	
-	
-	
+
+
+
 	/**
 	 * This method returns reply
 	 * @param replyId
@@ -760,7 +857,7 @@ public class ForumService extends BaseService {
 
 		return reply;
 	}
-	
+
 
 	/**
 	 * Wrapper method to create a Reply
@@ -771,10 +868,10 @@ public class ForumService extends BaseService {
 	 * @throws ForumServiceException
 	 */
 	public ForumReply createForumReply(ForumReply reply) throws ForumServiceException {
-	      return createForumReply(reply, reply.getTopicUuid());
+		return createForumReply(reply, reply.getTopicUuid());
 	}
-	
-	
+
+
 	/**
 	 * Wrapper method to create a Reply
 	 * <p>
@@ -796,9 +893,9 @@ public class ForumService extends BaseService {
 			BaseForumTransformer transformer = new BaseForumTransformer(reply, CREATE_OP);
 			Object 	payload = transformer.transform(reply.getFieldsMap());
 			Map<String, String> params = new HashMap<String, String>();
-			
+
 			params.put(TOPIC_UNIQUE_IDENTIFIER, topicId);
-			
+
 			Map<String, String> headers = new HashMap<String, String>();
 			headers.put("Content-Type", "application/atom+xml");
 			String url = resolveUrl(ForumType.REPLIES,null,null);
@@ -809,10 +906,10 @@ public class ForumService extends BaseService {
 			throw new ForumServiceException(e, "error creating forum reply");
 		}
 
-        return reply;
+		return reply;
 	}
-	
-	
+
+
 	/**
 	 * Wrapper method to update a Reply
 	 * <p>
@@ -830,7 +927,7 @@ public class ForumService extends BaseService {
 			Object 	payload = transformer.transform(reply.getFieldsMap());
 			Map<String, String> params = new HashMap<String, String>();
 			params.put(REPLY_UNIQUE_IDENTIFIER, reply.getUid());
-			
+
 			Map<String, String> headers = new HashMap<String, String>();
 			headers.put("Content-Type", "application/atom+xml");
 			String url = resolveUrl(ForumType.REPLY,null,null);
@@ -841,7 +938,7 @@ public class ForumService extends BaseService {
 		}
 
 	}
-	
+
 	/**
 	 * Wrapper method to delete a forum reply
 	 * <p>
@@ -854,7 +951,7 @@ public class ForumService extends BaseService {
 	public void removeForumReply(ForumReply reply) throws ForumServiceException {
 		removeForum(reply.getUid());
 	}
-	
+
 	/**
 	 * Wrapper method to delete a forum reply
 	 * <p>
@@ -874,19 +971,19 @@ public class ForumService extends BaseService {
 
 			parameters.put(REPLY_UNIQUE_IDENTIFIER, replyUuid);
 			String deleteReplyUrl = resolveUrl(ForumType.REPLY,null,null);
-			
+
 			super.deleteData(deleteReplyUrl, parameters, REPLY_UNIQUE_IDENTIFIER);
 		} catch (Exception e) {
 			throw new ForumServiceException(e,"error deleting forum reply");
 		} 	
-		
+
 	}
-	
+
 	/*
 	 * Util methods
 	 */
-	
-	
+
+
 	/*
 	 * Method to generate appropriate REST URLs
 	 * 
@@ -901,20 +998,20 @@ public class ForumService extends BaseService {
 	 */
 	protected String resolveUrl(ForumType forumType, FilterType filterType, Map<String, String> params) {
 		StringBuilder baseUrl = new StringBuilder(_baseUrl);
-		
+
 		if (AuthUtil.INSTANCE.getAuthValue(endpoint).equalsIgnoreCase(ConnectionsConstants.OAUTH)) {
 			baseUrl.append(_oauthUrl);
 		}else{
 			baseUrl.append(_basicUrl);
 		}
-		
+
 		// todo : Add oauth logic
 		if(filterType != null){
 			baseUrl.append(forumType.getForumType()).append(ConnectionsConstants.SEPARATOR).append(filterType.getFilterType());
 		}else{
 			baseUrl.append(forumType.getForumType());
 		}
-		
+
 		// Add required parameters
 		if (null != params && params.size() > 0) {
 			baseUrl.append(ConnectionsConstants.INIT_URL_PARAM);

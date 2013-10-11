@@ -22,7 +22,12 @@
 define([ "../declare", "../lang", "../stringUtil", "./BaseConstants", "./BaseEntity", "./XmlDataHandler" ], 
     function(declare,lang,stringUtil,BaseConstants,BaseEntity,XmlDataHandler) {
 
-    var EntryTmpl = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:app=\"http://www.w3.org/2007/app\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\"><title type=\"text\">${getTitle}</title><content type=\"${contentType}\">${getContent}</content>${categoryScheme}${createEntryData}</entry>";
+    var EntryTmpl = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
+    				"<entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:app=\"http://www.w3.org/2007/app\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\">" +
+    					"<title type=\"text\">${getTitle}</title>" +
+    					"<content type=\"${contentType}\">${getContent}</content>" +
+    					"${categoryScheme}${createEntryData}" + 
+    				"</entry>";
 
     /**
      * AtomEntity class represents an entry from an IBM Connections ATOM feed.
@@ -225,6 +230,9 @@ define([ "../declare", "../lang", "../stringUtil", "./BaseConstants", "./BaseEnt
          */
         createPostData : function() {
             var transformer = function(value,key) {
+            	if (key == "getContent" && this.contentType == "html") {
+            		value = (value && lang.isString(value)) ? value.replace(/</g,"&lt;").replace(/>/g,"&gt;") : value; 
+            	}
                 return value;
             };
             var postData = stringUtil.transform(EntryTmpl, this, transformer, this);

@@ -394,5 +394,25 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * Update comment of logged in user
          */
         AtomUpdateMyComment : "/${files}/basic/api/myuserlibrary/document/{documentId}/comment/{commentId}/entry",
+        
+        /**
+         * Add Comment To Community File
+         */
+        AtomAddCommentToCommunityFile : "/${files}/basic/api/communitylibrary/{communityId}/document/{documentId}/feed",
+        
+        /**
+         * Get All Files in a Community
+         */
+        AtomGetAllFilesInCommunity : "/${files}/basic/api/communitylibrary/{communityId}/feed",
+        
+        /**
+         * Get Community File
+         */
+        AtomGetCommunityFile : "/${files}/basic/api/communitylibrary/{communityId}/document/{documentId}/entry",
+       
+        /**
+         * Update metadata of community File
+         */
+        AtomUpdateCommunityFileMetadata : "/${files}/basic/api/library/{libraryId}/document/{documentId}/entry"
     }, conn);
 });

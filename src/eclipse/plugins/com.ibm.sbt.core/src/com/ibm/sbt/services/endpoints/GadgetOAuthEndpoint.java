@@ -32,6 +32,13 @@ public class GadgetOAuthEndpoint extends AbstractEndpoint {
 	private String _serviceName;
 
 	/**
+	 * Default constructor for GadgetEndpoint
+	 */
+	public GadgetOAuthEndpoint() {
+		setUseProxy(false);
+	}
+
+	/**
 	 * @return the serviceName
 	 */
 	public String getServiceName() {

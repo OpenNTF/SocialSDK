@@ -2879,7 +2879,7 @@ public class FileService extends BaseService {
      */
     private File uploadNewVersion(String requestUri, ContentStream stream, Map<String, String> params, Map<String, String> headers) throws ClientServicesException, IOException {
     	//TODO: check get data wrapping
-        Response result = (Response) this.updateData(requestUri, params, headers, stream, null);
+        Response result = (Response) this.updateData(requestUri, params, stream, null);
         return (File) new FileFeedHandler(this).createEntity(result);
     }
     

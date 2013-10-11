@@ -29,7 +29,7 @@ define(
 					+ "xmlns:xhtml=\"http://www.w3.org/1999/xhtml\" xmlns:thr=\"http://purl.org/syndication/thread/1.0\">"
 					+ "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/type\" term=\"${type}\" label=\"${type}\" /> "
 					+ "<content type=\"html\">${content}</content><title type=\"text\">${title}</title>"
-					+ "${getPosition}${getCommunity}${getTags}${getCompleted}${getCompleted}${getDueDate}${getInReplyTo}${getAssignedTo}${getIcon}"
+					+ "${getPosition}${getCommunity}$s}${getCompleted}${getCompleted}${getDueDate}${getInReplyTo}${getAssignedTo}${getIcon}"
 					+ "${getFields}</entry>";
 			var PositionTmpl = "<snx:position>${position}</snx:position>";
 			var CommunityTmpl = "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/type\" term=\"community_activity\" label=\"Community Activity\"/><snx:communityUuid>${coummunityUuid}</communityUuid>"
@@ -753,7 +753,29 @@ define(
 				setCommunityUrl : function(communityUrl) {
 					return this.setAsString("communityUrl", communityUrl);
 				},
-				
+
+				/**
+				 * Loads the Activity object with the atom entry associated with the activity. By default, a network call is made to load the atom entry
+				 * document in the activity object.
+				 * 
+				 * @method load
+				 */
+				load : function() {
+					var promise = this.service.validateField("activityUuid", this.getActivityUuid());
+					if (promise) {
+						return promise;
+					}
+					var requestArgs = {
+						"activityNodeUuid" : this.getActivityUuid()
+					};
+					var options = {
+						method : "GET",
+						handleAs : "text",
+						query : requestArgs
+					};
+					return this.service.getEntity(consts.AtomActivityNode, options, this.getActivityUuid(), ActivityFeedCallbacks);
+				},
+
 				/**
 				 * Creates an activity, sends an Atom entry document containing the new activity to the user's My Activities feed.
 				 * 
@@ -1220,7 +1242,28 @@ define(
 				setFields : function(fields) {
 					this._fields["fields"] = fields;
 				},
-				
+
+				/**
+				 * Loads the ActivityNode object with the atom entry associated with the activity node. By default, a network call is made to load the atom
+				 * entry document in the ActivityNode object.
+				 * 
+				 * @method load
+				 */
+				load : function() {
+					var promise = this.service.validateField("activityNodeUuid", this.getActivityNodeUuid());
+					if (promise) {
+						return promise;
+					}
+					var requestArgs = {
+						"activityNodeUuid" : this.getActivityNodeUuid()
+					};
+					var options = {
+						method : "GET",
+						handleAs : "text",
+						query : requestArgs
+					};
+					return this.service.getEntity(consts.AtomActivityNode, options, this.getActivityNodeUuid(), ActivityNodeFeedCallbacks);
+				},
 				/**
 				 * Creats an entry in an activity, such as a to-do item or to add a reply to another entry, send an Atom entry document containing the new
 				 * activity node of the appropriate type to the parent activity's node list.
@@ -1468,6 +1511,34 @@ define(
 						return permissions.split(", ");
 					}
 					return permissions;
+				},
+
+				/**
+				 * Loads the Member object with the atom entry part with the activity. By default, a network call is made to load the atom entry
+				 * document in the Member object.
+				 * 
+				 * @method load
+				 * @param {Stirng} activityUuid The Activity ID
+				 */
+				load : function(activityUuid) {
+
+					var promise = this.service.validateField("memberId", this.getMemberId());
+					if (!promise) {
+						promise = this.service.validateField("activityUuid", activityUuid);
+					}
+					if (promise) {
+						return promise;
+					}
+					var options = {
+						method : "GET",
+						handleAs : "text"
+					};
+
+					var url = this.service.constructUrl(consts.AtomActivitiesMember, null, {
+						"activityUuid" : activityUuid,
+						"memberId" : this.getMemberId()
+					});
+					return this.service.getEntity(url, options, this.getMemberId(), MemberFeedCallbacks);
 				},
 				/**
 				 * Adds a member to the access control list of an activity, sends an Atom entry document containing the new member to the access control list
@@ -1744,15 +1815,8 @@ define(
 					if (promise) {
 						return promise;
 					}
-					var requestArgs = {
-						"activityNodeUuid" : activityNodeUuid
-					};
-					var options = {
-						method : "GET",
-						handleAs : "text",
-						query : requestArgs
-					};
-					return this.getEntity(consts.AtomActivityNode, options, activityNodeUuid, ActivityNodeFeedCallbacks);
+					var activityNode = this.newActivityNode(activityNodeUuid);
+					return activityNode.load();
 				},
 
 				/**
@@ -1767,15 +1831,8 @@ define(
 					if (promise) {
 						return promise;
 					}
-					var requestArgs = {
-						"activityNodeUuid" : activityUuid
-					};
-					var options = {
-						method : "GET",
-						handleAs : "text",
-						query : requestArgs
-					};
-					return this.getEntity(consts.AtomActivityNode, options, activityUuid, ActivityFeedCallbacks);
+					var activity = this.newActivity(activityUuid);
+					return activity.load();
 				},
 
 				/**
@@ -1895,7 +1952,7 @@ define(
 					var _this = this;
 					var uuid = extractId(activityOrActivityNode.getUuid());
 					var update = function() {
-						var payload = _this._constructPayloadActivityNode(activityOrActivityNode);						
+						var payload = _this._constructPayloadActivityNode(activityOrActivityNode);
 						var requestArgs = {
 							"activityNodeUuid" : uuid
 						};
@@ -1914,9 +1971,7 @@ define(
 					if (activityOrActivityNode.isLoaded()) {
 						update();
 					} else {
-						this.getActivityNode(uuid).then(function(originalActivityNode) {
-							activityOrActivityNode.data = originalActivityNode.data;
-							activityOrActivityNode.dataHandler = originalActivityNode.dataHandler;							
+						activityOrActivityNode.load().then(function() {
 							update();
 						}, function(error) {
 							promise.rejected(error);
@@ -1982,8 +2037,7 @@ define(
 					if (sectionNode.isLoaded()) {
 						update();
 					} else {
-						this.getActivityNode(sectionNode.getActivityNodeUuid()).then(function(node) {
-							sectionNode = node;
+						sectionNode.load().then(function() {
 							update();
 						}, function(error) {
 							promise.rejected(error);
@@ -2047,7 +2101,7 @@ define(
 					}).then(function(activity) {
 						if (!activity.isDeleted()) {
 							promise.rejected("Activity is not in Trash");
-						} else {							
+						} else {
 							var requestArgs = {
 								"activityNodeUuid" : activityUuid
 							};
@@ -2091,7 +2145,7 @@ define(
 					}).then(function(activityNode) {
 						if (!activityNode.isDeleted()) {
 							promise.rejected("Activity Node is not in Trash");
-						} else {							
+						} else {
 							var requestArgs = {
 								"activityNodeUuid" : activityNodeUuid
 							};
@@ -2366,16 +2420,8 @@ define(
 					if (promise) {
 						return promise;
 					}
-					var options = {
-						method : "GET",
-						handleAs : "text"
-					};
-
-					var url = this.constructUrl(consts.AtomActivitiesMember, null, {
-						"activityUuid" : activityUuid,
-						"memberId" : memberId
-					});
-					return this.getEntity(url, options, memberId, MemberFeedCallbacks);
+					var member = this._toMember(memberId);
+					return member.load(activityUuid);
 				},
 
 				/**
@@ -2393,7 +2439,7 @@ define(
 					if (promise) {
 						return promise;
 					}
-					var member = this.newMember(memberOrJson);
+					var member = this._toMember(memberOrJson);
 					promise = this._validateMember(member, false, true);
 					if (promise) {
 						return promise;
@@ -2436,7 +2482,7 @@ define(
 					if (promise) {
 						return promise;
 					}
-					var member = this.newMember(memberOrJson);
+					var member = this._toMember(memberOrJson);
 					promise = this._validateMember(member, true, true);
 					if (promise) {
 						return promise;
@@ -2491,6 +2537,32 @@ define(
 
 					return this.deleteEntity(consts.AtomActivitiesMembers, options, memberId);
 				},
+				
+				_toMember : function(memberOrJsonOrString) {
+					if (memberOrJsonOrString) {
+						if (memberOrJsonOrString instanceof Member) {
+							return memberOrJsonOrString;
+						}
+						var member = new Member({
+							service : this
+						});
+						if (lang.isString(memberOrJsonOrString)) {
+							if (this.isEmail(memberOrJsonOrString)) {
+								member.setEmail(memberOrJsonOrString);
+							} else {
+								member.setUserId(memberOrJsonOrString);
+							}
+						} else {
+							if (memberOrJsonOrString.id && !memberOrJsonOrString.userId && !memberOrJsonOrString.email) {
+								this.isEmail(memberOrJsonOrString.id) ? memberOrJsonOrString.email = memberOrJsonOrString.id
+										: memberOrJsonOrString.userId = memberOrJsonOrString.id;
+								delete memberOrJsonOrString.id;
+							}
+							member._fields = lang.mixin({}, memberOrJsonOrString);
+						}
+						return member;
+					}
+				},
 
 				/**
 				 * Returns a Member instance from Member or JSON or String. Throws an error if the argument was neither.
@@ -2498,28 +2570,7 @@ define(
 				 * @param {Object} memberOrJsonOrString The Member Object or json String for Member
 				 */
 				newMember : function(memberOrJsonOrString) {
-					if (memberOrJsonOrString) {
-		                if (memberOrJsonOrString instanceof Member) {
-		                    return memberOrJsonOrString;
-		                }
-		                var member = new Member({
-		                    service : this
-		                });
-		                if (lang.isString(memberOrJsonOrString)) {
-		                    if (this.isEmail(memberOrJsonOrString)) {
-		                        member.setEmail(memberOrJsonOrString);
-		                    } else {
-		                        member.setUserId(memberOrJsonOrString);
-		                    }
-		                } else {
-		                	if(memberOrJsonOrString.id && !memberOrJsonOrString.userId && !memberOrJsonOrString.email){
-		                		this.isEmail(memberOrJsonOrString.id) ? memberOrJsonOrString.email = memberOrJsonOrString.id : memberOrJsonOrString.userId = memberOrJsonOrString.id;
-		                		delete memberOrJsonOrString.id;
-		                	}
-		                    member._fields = lang.mixin({}, memberOrJsonOrString);
-		                }
-		                return member;
-		            }
+					return this._toMember(memberOrJsonOrString);
 				},
 
 				_constructPayloadMember : function(member) {

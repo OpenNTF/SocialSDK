@@ -871,62 +871,16 @@ public class CommunityService extends BaseService {
 	 * @param fileId
 	 * @param communityId
 	 * @param params
-	 * @return
+	 * @return long
 	 * @throws CommunityServiceException
 	 */
 	public long downloadCommunityFile(OutputStream ostream, final String fileId, final String communityId, Map<String, String> params) throws CommunityServiceException {
-		String accessType = AccessType.AUTHENTICATED.getAccessType();
-		SubFilters subFilters = new SubFilters();
-        if (StringUtil.isEmpty(communityId)) {
-        	throw new CommunityServiceException(null, Messages.NullCommunityIdUserIdOrRoleException);
-        }
-        if (StringUtil.isEmpty(fileId)) {
-        	throw new CommunityServiceException(null, Messages.NullFileId);
-        }
-        if(null == params){
-			 params = new HashMap<String, String>();
-		}
-        subFilters.setCommunityLibraryId(communityId);
-        subFilters.setFileId(fileId);
-        String resultType = ResultType.ENTRY.getResultType();
-		String requestUrl = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
-                null, subFilters, resultType); 
-		File file = null;
+		FileService svc = new FileService();
 		try {
-			file = (File) super.getEntity(requestUrl, params, new FileFeedHandler(new FileService())); 
-		} catch (ClientServicesException e) {
-			throw new CommunityServiceException(e, Messages.DownloadCommunitiesException);
-		} catch (IOException e) {
-			throw new CommunityServiceException(e, Messages.DownloadCommunitiesException);
-		}
-		// now we have the file.. we need to download it.. 
-		SubFilters downloadFilters = new SubFilters();
-		downloadFilters.setLibraryId(file.getLibraryId());
-		downloadFilters.setFileId(file.getFileId());
-		resultType = ResultType.MEDIA.getResultType();
-		requestUrl = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
-                null, downloadFilters, resultType); 
-		Map<String, String> headers = new HashMap<String, String>();
-		headers.put(Headers.ContentType, Headers.BINARY);
-		Response response = null;
-		try {
-			response = this.getClientService().get(requestUrl, params, headers, ClientService.FORMAT_INPUTSTREAM);
-		} catch (ClientServicesException e) {
+			return svc.downloadCommunityFile(ostream, fileId, communityId, params);
+		} catch (FileServiceException e) {
 			throw new CommunityServiceException(e, Messages.DownloadCommunitiesException);
 		} 
-		InputStream istream = (InputStream) response.getData();
-		long noOfBytes = 0;
-		try {
-			if (istream != null) {
-				noOfBytes = StreamUtil.copyStream(istream, ostream);
-				ostream.flush();
-			}
-		} catch (IllegalStateException e) {
-			throw new CommunityServiceException(e, Messages.DownloadCommunitiesException);
-		} catch (IOException e) {
-			throw new CommunityServiceException(e, Messages.DownloadCommunitiesException);
-		}
-		return noOfBytes;
 	}
 	
 	/**
@@ -938,28 +892,10 @@ public class CommunityService extends BaseService {
 	 * @throws CommunityServiceException
 	 */
 	public File uploadFile(InputStream iStream, String communityId, final String title, long length) throws CommunityServiceException {
-		if (iStream == null) {
-            throw new CommunityServiceException(null, "null stream");
-        }
-        if (title == null) {
-            throw new CommunityServiceException(null, "null name");
-        }
-        ContentStream contentFile = new ContentStream(iStream, length, title);
-		String accessType = AccessType.AUTHENTICATED.getAccessType();
-		SubFilters subFilters = new SubFilters();
-        if (StringUtil.isEmpty(communityId)) {
-        	throw new CommunityServiceException(null, Messages.NullCommunityIdUserIdOrRoleException);
-        }
-        subFilters.setCommunityLibraryId(communityId);
-        String resultType = ResultType.FEED.getResultType();
-		String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
-                null, subFilters, resultType); 
-	    try {
-	    	Response data = (Response) super.createData(requestUri, null, null, contentFile);
-	    	return (File)new FileFeedHandler(new FileService()).createEntity(data);
-	    } catch (ClientServicesException e) {
-			throw new CommunityServiceException(e, Messages.UploadCommunitiesException);
-		} catch (IOException e) {
+		FileService svc = new FileService();
+		try {
+			return svc.uploadCommunityFile(iStream, communityId, title, length);
+		} catch (FileServiceException e) {
 			throw new CommunityServiceException(e, Messages.UploadCommunitiesException);
 		}
 	}

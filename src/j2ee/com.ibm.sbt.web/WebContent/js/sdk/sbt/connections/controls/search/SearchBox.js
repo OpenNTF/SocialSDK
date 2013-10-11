@@ -417,7 +417,7 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 				var requestArgs = {};
 				
 				if(context.constraint){
-					requestArgs = {"component": applicationParam, "constraint":'constraint={"type":"field","id":'+context.constraint+'}' };
+					requestArgs = {"component": applicationParam, constraint: context.constraint };
 				}else{
 					requestArgs = {"component": applicationParam};
 				}
@@ -485,7 +485,7 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 					var requestArgs = {};
 					
 					if(context.constraint){
-						requestArgs = {"component": applicationParam, "constraint":'constraint={"type":"field","id":'+context.constraint+'}' };
+						requestArgs = {"component": applicationParam, constraint: context.constraint };
 					}else{
 						requestArgs = {"component": applicationParam};
 					}

@@ -1,0 +1,62 @@
+<div role="main" id="main">
+	<form class="lotusForm" method="post" action="javascript:;" aria-live="assertive" id="invitationForm">
+		<fieldset>
+			<legend>Network invitation</legend>
+			<table class="lotusFormTable" cellpadding="0" cellspacing="0" border="0" role="presentation">
+				<tbody>
+					<tr class="lotusFormFieldRow">
+						<td><img id="profilePic" class="lconnProfilePortrait" alt="Profile photo" src=""></td>
+						<td>
+						<div class="lotusHeader"><h1>Invite <span id="name1"></span> to be your network contact</h1></div>
+						<label for="message">Include a message with your invitation</label><br/>
+						<textarea cols="40" rows="4" id="message">I'd like to add you to my Connections network contacts list</textarea>
+						</td>
+					</tr>
+					<tr class="lotusFormFieldRow">
+						<td></td>
+						<td>
+							<label for="tagInput">Add tags for <span id="name2"></span>:</label><br/>
+							<div class="controls">
+					            <div class="input-append">
+					                <input id="tagInput" size="16" type="text" placeholder="Tags" value="Tags">
+					                <button id="btnSearch" class="btn" type="button">Search</button>
+					                <br/>
+					                <div class="lotusHeader">
+					               		<span id="tags"></span>
+					                </div>
+					            </div>
+					            <div id="searching"></div>
+				        	</div>
+						</td>
+					</tr>
+					<tr class="lotusFormFieldRow">
+						<td></td>
+						<td>
+						<input type="checkbox" id="follow" value="Also follow"> <label for="follow">Also follow</label>
+						<p>
+						Receive updates about people you are following<br/>
+						on the Home page and in an email summary.<br/>
+						For more information, see <a href="#">Following people</a>.
+						</p>
+						</td>
+					</tr>
+					<tr class="lotusFormFieldRow">
+						<td width="15%"></td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr>
+						<td colspan="2" class="lotusFormFooter">
+						<input id="btnSendInvitation" type="submit" value="Send invitation" class="lotusFormButton" />
+						<input type="submit" value="Cancel" class="lotusFormButton" />
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</fieldset>
+	</form>
+	
+	<div class="lotusMessage lotusConfirm" role="status" id="confirmationMessage" style="display: none;">
+	Invitation sent!
+	</div>
+</div>
+

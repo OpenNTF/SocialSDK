@@ -150,12 +150,13 @@ define(["../../../declare",
 	        	this.renderer.headerTemplate = this.renderer.forumHeader;
 	        	this.store.setAttributes(consts.ForumXPath);
 	        	this.hideBreadCrumb = true;
+	        	var endpoint = this.store.getEndpoint();
 	        	
 	        	if(this.params.type == "my"){
-	        		var url = this.buildUrl(consts.AtomForumsMy, {});
+	        		var url = this.buildUrl(consts.AtomForumsMy, {},endpoint);
 	        		this.store.setUrl(url);
 	        	}else{
-	        		var url = this.buildUrl(consts.AtomForumsPublic, {});
+	        		var url = this.buildUrl(consts.AtomForumsPublic, {},endpoint);
 	        		this.store.setUrl(url);
 	        	}
 
@@ -181,14 +182,14 @@ define(["../../../declare",
 	        	this.renderer.breadCrumb = this.renderer.topicBreadCrumb;
 	        	this.store.setAttributes(consts.ForumTopicXPath);
 	        	this.hideBreadCrumb = false;
-	        	
+	        	var endpoint = this.store.getEndpoint();
 	        	        	
 	        	if(this.params.type=="myTopics"){
 	        		var url = this.buildUrl(consts.AtomTopicsMy, {});
 	        		this.store.setUrl(url);
 	        		this.hideBreadCrumb = true;
 	        	}else{
-	        		var url = this.buildUrl(consts.AtomTopics+"?forumUuid="+this._forumID, {});
+	        		var url = this.buildUrl(consts.AtomTopics+"?forumUuid="+this._forumID, {}, endpoint);
 	        		this.store.setUrl(url);
 	        	}
 	        	
@@ -201,7 +202,7 @@ define(["../../../declare",
 	        	this.renderer.headerTemplate = this.renderer.replyHeader;
 	        	this.store.setAttributes(consts.ForumReplyXPath);
 	        	this.hideBreadCrumb = false;
-	        	
+	        	var endpoint = this.store.getEndpoint();
 	        	if(this.params.type=="myTopics"){
 	        		this.renderer.breadCrumb = this.renderer.myTopicsBreadCrumb;
 	        	}else{
@@ -209,7 +210,7 @@ define(["../../../declare",
 	        	}
 	        	
 	        	
-	        	var url = this.buildUrl(consts.AtomReplies+"?topicUuid="+topicId,{});
+	        	var url = this.buildUrl(consts.AtomReplies+"?topicUuid="+topicId,{},endpoint);
 	        	this.store.setUrl(url);
 	        	
 	        	this.update(null);

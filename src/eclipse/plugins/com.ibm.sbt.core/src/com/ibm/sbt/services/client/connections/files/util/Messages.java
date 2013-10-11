@@ -29,6 +29,8 @@ public class Messages {
     public static String Invalid_File                              = "Invalid Argument : File to be uploaded";
     public static String Invalid_CommentId                         = "Invalid Input parameter : CommentId";
     public static String Invalid_CommunityId                       = "Invalid Input parameter : CommunityId";
+    public static String Invalid_CommunityLibraryId                = "Invalid Input parameter : CommunityLibraryId";
+    public static String MyCommunityFilesException				   = "Problem occurred while fetching community files";
     public static String Invalid_ContentId                         = "Invalid Input parameter : ContentId";
     public static String Invalid_VersionId                         = "Invalid Input parameter : versionId.";
     public static String Message_RetrievalError                    = "Retrieving Atom Entry document of the original File.";
@@ -50,6 +52,7 @@ public class Messages {
     public static String MessagePutDataInObject                    = "Setting the fetched Json Data to the Entry Object";
     public static String MessageGetResult                          = "get method, returning the result : ";
     public static String MessageExceptionInUpload                  = "Error uploading the file";
+    public static String MessageExceptionInUpdate	               = "Error updating the file";
     public static String Invalid_Name                              = "A null name was passed";
     public static String Invalid_Stream                            = "A null stream was passed";
     public static String MessageCannotReadFile                     = "Cannot open the file {0}";

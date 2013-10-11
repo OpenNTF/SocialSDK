@@ -17,12 +17,13 @@
 /**
  * Social Business Toolkit SDK. 
  * 
- * Implementation of a transport which returns mock data.
+ * Implementation of a transport which writes the response to the DOM.
  */
 define([ "./declare", "./lang", "./dom", "./json", "./stringUtil", "sbt/_bridge/Transport" ], function(declare, lang, dom, json, stringUtil, Transport) {
     return declare(Transport, {
         
     	responseMap : {},
+    	index : 0,
     	
         /*
          * Create a response object
@@ -58,12 +59,15 @@ define([ "./declare", "./lang", "./dom", "./json", "./stringUtil", "sbt/_bridge/
         		
         		var text = "<script type='text/template' status='"+status+
         					"' id='"+id+
+        					"' index='"+this.index+
         		            "' handleAs='"+handleAs+
         		            "' method='"+method+
         		            "' location='"+location+
         		            "' error='"+isError+
         		            "'>\n"+response+"\n</script>";
         		pre.appendChild(dom.createTextNode(text));
+        		
+        		this.index++;
         	}
         	
         	return retval;

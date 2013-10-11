@@ -101,6 +101,9 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
             recommendationsUrl : "a:link[@rel='recommendations']/@href"
         }, conn.AtomEntryXPath),
         
+        /**
+         * XPath expressions to be used when reading an forum recommendation entry
+         */
         ForumRecommendationXPath : lang.mixin({
             postUuid : "a:link[@rel='self']/@href"
         }, conn.AtomEntryXPath),

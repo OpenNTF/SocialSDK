@@ -36,6 +36,16 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         ProfileFeedXPath : conn.ConnectionsFeedXPath,
 
         /**
+         * Connection type colleague
+         */
+        TypeColleague : "colleague",
+        
+        /**
+         * Status flag
+         */
+        StatusPending : "pending",
+        
+        /**
          * XPath expressions to be used when reading a Profile Entry
          */
         ProfileXPath : {
@@ -155,6 +165,14 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
             contributorUserid : "a:userid",
             contributorEmail : "a:email"
         },
+        
+        /**
+         * XPath expressions to be used when reading an invite entry
+         */
+        InviteXPath : lang.mixin({
+            connectionType: "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/connection/type']/@term",
+            status: "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/status']/@term"
+        }, conn.AtomEntryXPath),
         
         /**
          * XML elements to be used when creating a Profile Entry

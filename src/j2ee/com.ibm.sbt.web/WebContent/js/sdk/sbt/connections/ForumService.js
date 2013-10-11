@@ -20,8 +20,7 @@
  * 
  * @module sbt.connections.ForumService
  */
-define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", "./ForumConstants", "../base/BaseService",
-         "../base/AtomEntity", "../base/XmlDataHandler" ], 
+define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", "./ForumConstants", "../base/BaseService", "../base/AtomEntity", "../base/XmlDataHandler" ], 
     function(declare,config,lang,stringUtil,Promise,consts,BaseService,AtomEntity,XmlDataHandler) {
 	
 	var CategoryForum = "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/type\" term=\"forum-forum\"></category>";

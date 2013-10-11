@@ -788,9 +788,31 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @method getId
          * @return {String} id
          */
-        
-        getId: function() {
+        getId : function() {
             return this.getAsString("uid");
+        },
+        
+        /**
+         * The Uuid of the event. This is per event rather than per event instance. 
+         * 
+         * e.g. if an event spans multiple days it will have multiple instances, yet each even will have the same Uuid.
+         * @method getEventUuid
+         * @return {String} Uuid of the event.
+         */
+        getEventUuid : function(){
+            return this.getAsString("eventUuid");
+        },
+        
+        /**
+         * The event instance uuid. This is per event instance, rather than per event. 
+         * e.g. if an event spans multiple days each day will have its own eventInstUuid.
+         * 
+         * Can be used with the{{#crossLink "CommunityService/getEvent:method"}}{{/crossLink}} method to retrieve event instances.
+         * @method getEventInstUuid
+         * @return {String} Uuid of the event instance.
+         */
+        getEventInstUuid : function(){
+            return this.getAsString("eventInstUuid");
         },
 
         /**
@@ -839,8 +861,12 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             return this.getAsString("eventAtomUrl");
         },
         
-        getDetailedEvent : function(){
-            return this.service.getDetailedEvent(this.getEventAtomUrl(), this.getId());
+        /**
+         * Get the full event description, with content.
+         * @returns
+         */
+        getFullEvent : function(){
+            return this.service.getEvent(this.getEventInstUuid());
         },
         
         getContent : function(){
@@ -1223,6 +1249,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         /**
          * Get the Events for a community. See {{#crossLink "CommunityConstants/AtomCommunityEvents:attribute"}}{{/crossLink}} for a complete listing of parameters.
          * 
+         * These results do not include all details of the event, such as content. However summaries are available.
+         * 
          * @param communityId The uuid of the Community.
          * @param startDate Include events that end after this date.
          * @param endDate Include events that end before this date.
@@ -1261,19 +1289,23 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         },
         
         /**
-         * Used to get an event from the Events Feed
-         * @param url - The url gotten from the rel=self link in an entry from the Community Events feed.
-         * @param eventId - Used as an identifier when caching the response
+         * Used to get the event with the given eventInstUuid. 
+         * 
+         * This will include all details of the event, including its content. 
+         * 
+         * @param eventInstUuid - The id of the event, also used as an identifier when caching the response
          * @returns
          */
-        getDetailedEvent : function(url, eventId){
+        getEvent : function(eventInstUuid){
             var options = {
                 method : "GET",
                 handleAs : "text",
-                query : {}
+                query : {
+                    eventInstUuid: eventInstUuid
+                }
             };
                 
-            return this.getEntity(this.endpoint.proxy.rewriteUrl("baseUrl", url, this.endpoint.proxyPath), options, eventId, this.getEventCallbacks());
+            return this.getEntity(consts.AtomCommunityEvent, options, eventInstUuid, this.getEventCallbacks());
         },
 
         /**

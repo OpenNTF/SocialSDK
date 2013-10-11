@@ -12,7 +12,7 @@ require([ "sbt/dom", "sbt/json", "sbt/connections/CommunityService" ], function(
           var detailedEvents = [];
           var i;
           for(i=0; i < events.length; i++){
-              events[i].getDetailedEvent().then( // we need an extra network request to populate all event information, e.g. its content
+              events[i].getFullEvent().then( // we need an extra network request to populate all event information, e.g. its content
                   function(event){
                       detailedEvents.push(event);
                       return i;

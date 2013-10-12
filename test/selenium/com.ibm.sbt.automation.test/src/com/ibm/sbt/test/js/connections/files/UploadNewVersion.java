@@ -13,15 +13,13 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-package com.ibm.sbt.test.js.connections.profiles.api;
+package com.ibm.sbt.test.js.connections.files;
 
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
-
-import javax.imageio.ImageIO;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -35,25 +33,29 @@ import com.ibm.sbt.automation.core.environment.TestEnvironment;
 import com.ibm.sbt.automation.core.test.connections.BaseFilesTest;
 import com.ibm.sbt.automation.core.test.pageobjects.BaseResultPage;
 import com.ibm.sbt.automation.core.test.pageobjects.ResultPage;
+import com.ibm.sbt.automation.core.utils.Trace;
 
-/**
+/** 
  * 
- * @author VineetKanwal
+ * @author VineetKanwal 
  * 
  **/
-public class UpdateProfilePhoto extends BaseFilesTest {
-	File file;	
+public class UploadNewVersion extends BaseFilesTest {
+	File file;
+	String fileId;
 
 	@Before
 	public void init() {
 		try {
-			file = new File("JSProfilePicUpdate" + System.currentTimeMillis()
-					+ ".jpg");
-			BufferedImage image = new BufferedImage(100, 100,
-					BufferedImage.TYPE_INT_RGB);
-			Graphics g = image.getGraphics();
-			g.drawString("Hello World!!!", 10, 20);
-			ImageIO.write(image, "jpg", file);			
+			createFile();
+			addSnippetParam("sample.uploadNewVersionFileId", fileEntry.getFileId());
+			file = new File("JSUpdateNewVersionTest " + System.currentTimeMillis() + ".txt");
+			file.createNewFile();
+			Trace.log("Created test file: " + file.getAbsolutePath());
+			BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+			writer.write("JS Update Version File Test File");
+			writer.flush();
+			writer.close();
 		} catch (FileNotFoundException e) {
 			Assert.fail("Error creating test file: " + e.getMessage());
 			e.printStackTrace();
@@ -67,6 +69,7 @@ public class UpdateProfilePhoto extends BaseFilesTest {
 	@After
 	public void destroy() {
 		try {
+			deleteFileAndQuit();
 			if (file != null) {
 				file.delete();
 			}
@@ -77,82 +80,66 @@ public class UpdateProfilePhoto extends BaseFilesTest {
 	}
 
 	@Test
-	public void testUpdateProfilePhoto() {
+	public void testUpdateFile() {
 		// Disabling for Dojo 1.4.3 which does not support FormData
-		String jsLib = System.getProperty(TestEnvironment.PROP_JAVASCRIPT_LIB);
-		if (StringUtil.isEmpty(jsLib)) {
-			jsLib = environment
-					.getProperty(TestEnvironment.PROP_JAVASCRIPT_LIB);
-		}
-		if ("dojo143".equalsIgnoreCase(jsLib)) {
-			return;
-		}
-		UpdateProfilePhotoPage crudPage = launchSnippet();
-		boolean uploaded = crudPage.updateProfilePhoto();
-		Assert.assertTrue("Unable toupdate profile photo", uploaded);				
+        String jsLib = System.getProperty(TestEnvironment.PROP_JAVASCRIPT_LIB);
+        if (StringUtil.isEmpty(jsLib)) {
+            jsLib = environment.getProperty(TestEnvironment.PROP_JAVASCRIPT_LIB);
+        }
+        if("dojo143".equalsIgnoreCase(jsLib)){
+        	return;
+        }
+		UpdateFilePage crudPage = launchSnippet();
+		boolean updated = crudPage.uploadNewVersion();
+		Assert.assertTrue("Unable to update the file", updated);		
 	}
 
-	/*
-	 * (non-Javadoc)
+	/* (non-Javadoc)
 	 * 
-	 * @see
-	 * com.ibm.sbt.automation.core.test.BaseTest#getAuthenticatedCondition()
-	 */
+	 * @see com.ibm.sbt.automation.core.test.BaseTest#getAuthenticatedCondition() */
 	@Override
 	public String getAuthenticatedCondition() {
 		return "idWithText";
 	}
 
-	/*
-	 * (non-Javadoc)
+	/* (non-Javadoc)
 	 * 
-	 * @see com.ibm.sbt.automation.core.test.BaseTest#getAuthenticatedMatch()
-	 */
+	 * @see com.ibm.sbt.automation.core.test.BaseTest#getAuthenticatedMatch() */
 	@Override
 	public String getAuthenticatedMatch() {
-		return "uploadBtn";
+		return "updateBtn";
 	}
 
 	// Internals
 
-	private UpdateProfilePhotoPage launchSnippet() {
-		ResultPage resultPage = launchSnippet("Social_Profiles_Update_Profile_Photo");
+	private UpdateFilePage launchSnippet() {
+		ResultPage resultPage = launchSnippet("Social_Files_Upload_New_Version");
 
-		return new UpdateProfilePhotoPage(resultPage);
+		return new UpdateFilePage(resultPage);
 	}
 
-	/*
-	 * Page object for the Connections_Communities_Create_Update_Delete_File
-	 * snippet
-	 */
-	class UpdateProfilePhotoPage extends BaseResultPage {
+	/* Page object for the Social_Communities_Create_Update_Delete_File snippet */
+	class UpdateFilePage extends BaseResultPage {
 
 		private ResultPage delegate;
 
-		public UpdateProfilePhotoPage(ResultPage delegate) {
+		public UpdateFilePage(ResultPage delegate) {
 			this.delegate = delegate;
 
 			setWebDriver(delegate.getWebDriver());
 		}
 
-		/*
-		 * (non-Javadoc)
+		/* (non-Javadoc)
 		 * 
-		 * @see
-		 * com.ibm.sbt.automation.core.test.pageobjects.ResultPage#getText()
-		 */
+		 * @see com.ibm.sbt.automation.core.test.pageobjects.ResultPage#getText() */
 		@Override
 		public String getText() {
 			return delegate.getText();
 		}
 
-		/*
-		 * (non-Javadoc)
+		/* (non-Javadoc)
 		 * 
-		 * @see
-		 * com.ibm.sbt.automation.core.test.pageobjects.ResultPage#getWebElement
-		 * ()
-		 */
+		 * @see com.ibm.sbt.automation.core.test.pageobjects.ResultPage#getWebElement () */
 		@Override
 		public WebElement getWebElement() {
 			return delegate.getWebElement();
@@ -167,15 +154,20 @@ public class UpdateProfilePhoto extends BaseFilesTest {
 			WebElement resultEl = getWebElement();
 			return resultEl.findElement(By.id("error"));
 		}
-		
+
+		public WebElement getFileId() {
+			WebElement resultEl = getWebElement();
+			return resultEl.findElement(By.id("fileId"));
+		}
+
 		public WebElement getFileControl() {
 			WebElement resultEl = getWebElement();
 			return resultEl.findElement(By.id("your-files"));
 		}
 
-		public WebElement getUpdateBtn() {
+		public WebElement getUploadBtn() {
 			WebElement resultEl = getWebElement();
-			return resultEl.findElement(By.id("updateBtn"));
+			return resultEl.findElement(By.id("uploadBtn"));
 		}
 
 		public void setFile() {
@@ -183,22 +175,19 @@ public class UpdateProfilePhoto extends BaseFilesTest {
 			fileCotrol.sendKeys(file.getAbsolutePath());
 		}
 
-		public void clickUpdate() {
-			getUpdateBtn().click();
+		public void clickUpload() {
+			getUploadBtn().click();
 		}
 
-		/**
-		 * Update the current file and return the true if successful and
-		 * otherwise return false
-		 */
-		public boolean updateProfilePhoto() {
+		/** Update the current file and return the true if successful and otherwise return false */
+		public boolean uploadNewVersion() {
 			setFile();
-			clickUpdate();
-			WebElement webElement = waitForText("success", "Profile Photo updated successfuly", 50);
+			clickUpload();
+			WebElement webElement = waitForText("success", "File with ID", 50);
 
 			String text = webElement.getText();
 
-			boolean result = text.startsWith("Profile Photo updated successfuly");			
+			boolean result = text.startsWith("File with ID");			
 
 			return result;
 		}

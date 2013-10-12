@@ -15,8 +15,8 @@
  */
 package com.ibm.sbt.test.js.connections.files;
 
-import junit.framework.Assert;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -178,7 +178,7 @@ public class LoadUpdateLockPinDeleteFile extends BaseFilesTest {
 
 		public void setFileVisibility(String visibility) {
 			WebElement fileVisibility = getFileVisibility();
-			fileVisibility.clear();
+			//fileVisibility.clear();
 			fileVisibility.sendKeys(visibility);
 		}
 

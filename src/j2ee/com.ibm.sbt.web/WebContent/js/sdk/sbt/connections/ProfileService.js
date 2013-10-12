@@ -1052,7 +1052,7 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
 			var formData = new FormData();
 			formData.append("file", file);
 			var requestArgs = lang.mixin(idObject, args || {});		
-			var url = this.constructUrl(config.Properties.serviceUrl + "/files/" + this.endpoint.proxyPath + "/" + "connections" + "/" + encodeURIComponent(file.name),
+			var url = this.constructUrl(config.Properties.serviceUrl + "/files/" + this.endpoint.proxyPath + "/" + "connections" + "/" +  "UpdateProfilePhoto" + "/" + encodeURIComponent(file.name),
 					args && args.parameters ? args.parameters : {});
 			var headers = {
 				"Content-Type" : false,

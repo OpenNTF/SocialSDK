@@ -104,7 +104,7 @@ public class File extends BaseEntity {
 		HttpServletRequest req = Context.get().getHttpRequest();
 		String sbtServiceUrl = UrlUtil.getContextUrl(req);
 		String url =  sbtServiceUrl + "/service" +  FileServiceURIBuilder.FILES.getBaseUrl() + 
-						FileConstants.SEPARATOR + proxypath + "/" + ConnectionsFileProxyService.FILEPROXYNAME + "/" + fileId + "/" + libId;
+						FileConstants.SEPARATOR + proxypath + "/" + ConnectionsFileProxyService.FILEPROXYNAME + "/" + "DownloadFile" + "/" + fileId + "/" + libId;
 		return url;
 	}
 

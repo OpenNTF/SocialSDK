@@ -33,6 +33,7 @@ import javax.sql.DataSource;
 import com.ibm.commons.runtime.Application;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.jslibrary.SBTEnvironment;
+import com.ibm.sbt.security.authentication.oauth.consumer.OAuth1Handler;
 import com.ibm.sbt.security.credential.store.CredentialStore;
 import com.ibm.sbt.security.credential.store.CredentialStoreException;
 import com.ibm.sbt.security.credential.store.CredentialStoreFactory;
@@ -43,6 +44,8 @@ import com.ibm.sbt.services.client.connections.communities.CommunityService;
 import com.ibm.sbt.services.endpoints.ConnectionsOAuth2Endpoint;
 import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
+import com.ibm.sbt.services.endpoints.OAuth2Endpoint;
+import com.ibm.sbt.services.endpoints.OAuthEndpoint;
 import com.ibm.sbt.services.endpoints.SmartCloudOAuthEndpoint;
 
 /**
@@ -68,7 +71,7 @@ public class Users {
 				PreparedStatement stmt = connection.prepareStatement("SELECT USERID FROM "+store.getTableName()+" WHERE APPID = ? AND SERVICENAME = ?");
 				try {
 					stmt.setString(1, store.findApplicationName());
-					stmt.setString(2, "localga");
+					stmt.setString(2, getServiceName());
 					
 					ResultSet rs = stmt.executeQuery();
 					try {
@@ -148,6 +151,20 @@ public class Users {
 		}
 		
 		return null;
+	}
+	
+	/*
+	 * Return the service name to use.
+	 */
+	static private String getServiceName() {
+		Endpoint endpoint = getEndpoint("connecitons");
+		if (endpoint instanceof OAuth2Endpoint) {
+			return ((OAuth2Endpoint)endpoint).getServiceName();
+		}
+		if (endpoint instanceof OAuthEndpoint) {
+			return ((OAuthEndpoint)endpoint).getServiceName();
+		}
+		throw new IllegalStateException("This sample only works with an OAuth endpoint");
 	}
 	
 	/*

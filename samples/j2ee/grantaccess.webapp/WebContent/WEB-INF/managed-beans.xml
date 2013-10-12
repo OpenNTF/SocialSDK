@@ -33,7 +33,7 @@
 		<managed-bean-scope>application</managed-bean-scope>
 		<managed-property>
 			<property-name>endpoints</property-name>
-			<value>connectionsOA2:connections</value>
+			<value>smartcloud:connections</value>
 		</managed-property>
 	</managed-bean>
 	
@@ -45,36 +45,36 @@
 		<!-- Endpoint URL -->
 		<managed-property>
 			<property-name>url</property-name>
-			<value>%{connections.ga.url}</value>
+			<value>%{connections.url}</value>
 		</managed-property>
 		<managed-property>
 			<property-name>apiVersion</property-name>
-			<value>%{connections.ga.apiVersion}</value>
+			<value>%{connections.apiVersion}</value>
 		</managed-property>
 		<managed-property>
 			<property-name>serviceName</property-name>
-			<value>%{connections.ga.serviceName}</value>
+			<value>%{connections.serviceName}</value>
 		</managed-property>
 		<!-- OAuth parameters -->
 		<managed-property>
 			<property-name>appId</property-name>
-			<value>%{connections.ga.appId}</value>
+			<value>%{connections.appId}</value>
 		</managed-property>
 		<managed-property>
 			<property-name>consumerKey</property-name>
-			<value>%{connections.ga.consumerKey}</value>
+			<value>%{connections.consumerKey}</value>
 		</managed-property>
 		<managed-property>
 			<property-name>consumerSecret</property-name>
-			<value>%{connections.ga.consumerSecret}</value>
+			<value>%{connections.consumerSecret}</value>
 		</managed-property>
 		<managed-property>
 			<property-name>authorizationURL</property-name>
-			<value>%{connections.ga.authorizationURL}</value>
+			<value>%{connections.authorizationURL}</value>
 		</managed-property>
 		<managed-property>
 			<property-name>accessTokenURL</property-name>
-			<value>%{connections.ga.accessTokenURL}</value>
+			<value>%{connections.accessTokenURL}</value>
 		</managed-property>
 		<managed-property>
 			<property-name>forceTrustSSLCertificate</property-name>

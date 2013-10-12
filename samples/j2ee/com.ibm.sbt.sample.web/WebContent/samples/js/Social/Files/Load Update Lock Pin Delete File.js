@@ -25,14 +25,15 @@ function loadFile(fileService, dom) {
 	currentFile = null;
 	var fileId = dom.byId("fileId").value;
 	if (fileId) {
-		fileService.getFile(fileId).then(function(file) {
+		fileService.getFile(fileId, {includeTags : true}).then(function(file) {
 			handleFileLoaded(file, dom);
 		}, function(error) {
 			handleError(dom, error);
 		});
 	} else {
 		fileService.getMyFiles({
-			ps : 1
+			ps : 1,
+			includeTags : true
 		}).then(function(files) {
 			var file = (!files || files.length == 0) ? null : files[0];
 			handleFileLoaded(file, dom);
@@ -129,7 +130,12 @@ function handleFileLoaded(file, dom) {
 	dom.byId("label").value = file.getLabel();
 	dom.byId("summary").value = file.getSummary();
 	dom.byId("visibility").value = file.getVisibility();
-
+	var tagsStr = "";
+	var tags = file.getTags();
+	for(var counter in tags){
+		tagsStr = tagsStr + tagsStr == "" ? ", " : "" + tags[counter];
+	}
+	dom.byId("tags").value = tagsStr;
 	currentFile = file;
 
 	displayMessage(dom, "Successfully loaded file: " + file.getFileId());

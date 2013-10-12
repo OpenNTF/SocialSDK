@@ -22,17 +22,19 @@ public class ConnectionsFileProxyService extends AbstractFileProxyService {
 
 	private static final String UPLOAD_URL = "/files/basic/api/myuserlibrary/feed"; // TODO set as property on endpoint
 	private static final String DOWNLOAD_URL = "/files/basic/api/library/{0}/document/{1}/media";
+	private static final String UPDATE_URL = "/files/basic/api/myuserlibrary/document/{0}/media";
 
 	public static final String FILEPROXYNAME = "connections";
-	
+
 	@Override
 	protected Content getFileContent(File file, long length, String name) {
 		Content content;
 		String contentType = null;
-		int dot = fileNameOrId.lastIndexOf('.');
+		String fileName = parameters.get("FileName");
+		int dot = fileName.lastIndexOf('.');
 		String ext = null;
 		if (dot > -1) {
-			ext = fileNameOrId.substring(dot + 1); // add one for the dot!
+			ext = fileName.substring(dot + 1); // add one for the dot!
 		}
 		if (!StringUtil.isEmpty(ext)) {
 			if (ext.equalsIgnoreCase("jpg")) {
@@ -49,7 +51,7 @@ public class ConnectionsFileProxyService extends AbstractFileProxyService {
 	protected String getRequestURI(String method, String authType, Map<String, String[]> params) throws ServletException {
 		if ("POST".equalsIgnoreCase(method)) {
 			return UPLOAD_URL;
-		} else if ("PUT".equalsIgnoreCase(method)) {
+		} else if ("PUT".equalsIgnoreCase(method) && Operations.UPDATE_PROFILE_PHOTO.toString().equals(operation)) {
 			// return PROFILE_PIC_UPLOAD_URL;
 			StringBuilder profileUrl = new StringBuilder("/profiles");
 			if (AuthUtil.INSTANCE.getAuthValue(endpoint).equalsIgnoreCase("oauth")) {
@@ -57,14 +59,18 @@ public class ConnectionsFileProxyService extends AbstractFileProxyService {
 			}
 			profileUrl.append("/").append("photo.do");
 			return profileUrl.toString();
+		} else if ("PUT".equalsIgnoreCase(method) && Operations.UPLOAD_NEW_VERSION.toString().equals(operation)) {
+			return StringUtil.format(UPDATE_URL, parameters.get("FileId"));
 		} else if ("GET".equalsIgnoreCase(method)) {
-			if (fileNameOrId == null) {
+			String fileName = parameters.get("FileName");
+			String libraryId = parameters.get("LibraryId");
+			if (fileName == null) {
 				throw new ServletException("File ID is required in URL for download.");
 			}
 			if (libraryId == null) {
 				throw new ServletException("Library ID is required in URL for download");
 			}
-			return StringUtil.format(DOWNLOAD_URL, libraryId, fileNameOrId);
+			return StringUtil.format(DOWNLOAD_URL, libraryId, fileName);
 		}
 		return null;
 	}
@@ -80,6 +86,37 @@ public class ConnectionsFileProxyService extends AbstractFileProxyService {
 			return ClientService.FORMAT_NULL;
 		}
 		return ClientService.FORMAT_XML;
+	}
+
+	@Override
+	protected void getParameters(String[] tokens) throws ServletException {
+		if(operation == null){
+			return;
+		}
+		if(Operations.UPLOAD_FILE.toString().equals(operation)){
+			if(tokens.length < 6) {
+				throw new ServletException("Invalid url for File Download");
+			}
+			parameters.put("FileName", tokens[5]);
+		}
+		else if(Operations.DOWNLOAD_FILE.toString().equals(operation)){
+			if(tokens.length < 7) {
+				throw new ServletException("Invalid url for File Download");
+			}
+			parameters.put("FileId", tokens[5]);
+			parameters.put("LibraryId", tokens[6]);
+		}
+		else if(Operations.UPDATE_PROFILE_PHOTO.toString().equals(operation)){
+			parameters.put("FileName", tokens[5]);
+		}
+		else if(Operations.UPLOAD_NEW_VERSION.toString().equals(operation)) {
+			if(tokens.length < 7) {
+				throw new ServletException("Invalid url for Upload New Version of File");
+			}
+			parameters.put("FileId", tokens[5]);
+			parameters.put("FileName", tokens[6]);
+		}
+		
 	}
 
 }

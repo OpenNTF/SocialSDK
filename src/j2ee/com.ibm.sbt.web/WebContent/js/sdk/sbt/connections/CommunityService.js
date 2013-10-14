@@ -752,6 +752,198 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         }
 
     });
+    
+    
+    /**
+     * Event class represents an entry for an Events feed returned by the Connections REST API.
+     * 
+     * @class Event
+     * @namespace sbt.connections
+     */
+    var Event = declare(BaseEntity, {
+
+        /**
+         * Constructor for Event.
+         * 
+         * @constructor
+         * @param args
+         */
+        constructor : function(args) {
+            this.inherited(arguments, [ args ]);
+        },
+
+        /**
+         * Return the community UUID.
+         * 
+         * @method getCommunityUuid
+         * @return {String} communityUuid
+         */
+        getCommunityUuid : function() {
+            return this.getAsString("communityUuid");
+        },
+        
+        /**
+         * Return the id of the event.
+         * 
+         * @method getId
+         * @return {String} id
+         */
+        getId : function() {
+            return this.getAsString("uid");
+        },
+        
+        /**
+         * The Uuid of the event. This is per event rather than per event instance. 
+         * 
+         * e.g. if an event spans multiple days it will have multiple instances, yet each even will have the same Uuid.
+         * @method getEventUuid
+         * @return {String} Uuid of the event.
+         */
+        getEventUuid : function(){
+            return this.getAsString("eventUuid");
+        },
+        
+        /**
+         * The event instance uuid. This is per event instance, rather than per event. 
+         * e.g. if an event spans multiple days each day will have its own eventInstUuid.
+         * 
+         * Can be used with the{{#crossLink "CommunityService/getEvent:method"}}{{/crossLink}} method to retrieve event instances.
+         * @method getEventInstUuid
+         * @return {String} Uuid of the event instance.
+         */
+        getEventInstUuid : function(){
+            return this.getAsString("eventInstUuid");
+        },
+
+        /**
+         * Return the community event title.
+         * 
+         * @method getTitle
+         * @return {String} Community event title
+         */
+
+        getTitle : function() {
+            return this.getAsString("title");
+        },
+
+        /**
+         * Set the community event title.
+         * 
+         * @method setTitle
+         * @param {String} Community event title
+         */
+
+        setTitle : function(name) {
+            return this.setAsString("title", name);
+        },
+
+        /**
+         * Return the community event summary.
+         * 
+         * @method getSummary
+         * @return {String} Community event summary
+         */
+        getSummary : function() {
+            return this.getAsString("summary");
+        },
+
+        /**
+         * Set the community event summary.
+         * 
+         * @method setSummary
+         * @return {String} Community event summary
+         */
+        setSummary : function(summary) {
+            return this.setAsString("summary", summary);
+        },
+        
+        getEventAtomUrl : function(){
+            return this.getAsString("eventAtomUrl");
+        },
+        
+        /**
+         * Get the full event description, with content.
+         * @returns
+         */
+        getFullEvent : function(){
+            return this.service.getEvent(this.getEventInstUuid());
+        },
+        
+        getContent : function(){
+            return this.getAsString("content");
+        },
+        
+        getLocation : function(){
+            return this.getAsString("location");
+        },
+
+        /**
+         * Gets an author of IBM Connections community event.
+         * 
+         * @method getAuthor
+         * @return {Member} author Author of the community event
+         */
+        getAuthor : function() {
+            if (!this._author) {
+                this._author = {
+                    userid : this.getAsString("authorUserid"),
+                    name : this.getAsString("authorName"),
+                    email : this.getAsString("authorEmail"),
+                    authorState : this.getAsString("authorState")
+                };
+            }
+            return this._author;
+        },
+        
+        /**
+         * Gets the recurrence information of the event.
+         * 
+         * Recurrence information object consists of:
+         * frequency - 'daily' or 'weekly'
+         * interval - Week interval. Value is int between 1 and 5.
+         * until - The end date of the repeating event.
+         * allDay - 1 if an all day event, 0 otherwise.
+         * startDate - Start time of the event
+         * endDate - End time of the event
+         * byDay - Days of the week this event occurs, possible values are: SU,MO,TU,WE,TH,FR,SA
+         * 
+         * @method getRecurrence
+         * @return {Object} An object containing the above recurrence information of the community event.
+         */
+        getRecurrence : function() {
+            if (!this._recurrence) {
+                this._recurrence = {
+                    frequency : this.getAsString("frequency"),
+                    interval : this.getAsString("interval"),
+                    until : this.getAsString("until"),
+                    allDay : this.getAsString("allDay"),
+                    startDate : this.getAsString("startDate"),
+                    endDate : this.getAsString("endDate"),
+                    byDay : this.getAsString("byDay")
+                };
+            }
+            return this._recurrence;
+        },
+
+        /**
+         * Gets a contributor of IBM Connections community event.
+         * 
+         * @method getContributor
+         * @return {Member} contributor Contributor of the community event
+         */
+        getContributor : function() {
+            if (!this._contributor) {
+                this._contributor = {
+                    userid : this.getAsString("contributorUserid"),
+                    name : this.getAsString("contributorName")
+                };
+            }
+            return this._contributor;
+        }
+
+    });
+    
+    
 
     /*
      * Method used to extract the community uuid for an id url.
@@ -824,6 +1016,49 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 xpath : consts.InviteXPath
             });
             return new Invite({
+                service : service,
+                id : entryHandler.getEntityId(),
+                dataHandler : entryHandler
+            });
+        }
+    };
+    
+    /*
+     * Callbacks used when reading a feed that contains Event entries.
+     */
+    var ConnectionsEventFeedCallbacks = {
+        createEntities : function(service,data,response) {
+            return new XmlDataHandler({
+                service :  service,
+                data : data,
+                namespaces : consts.Namespaces,
+                xpath : consts.CommunityFeedXPath
+            });
+        },
+        createEntity : function(service,data,response) {
+            var entryHandler = new XmlDataHandler({
+                service :  service,
+                data : data,
+                namespaces : consts.Namespaces,
+                xpath : consts.EventXPath
+            });
+            return new Event({
+                service : service,
+                id : entryHandler.getEntityId(),
+                dataHandler : entryHandler
+            });
+        }
+    };
+    
+    var ConnectionsEventCallbacks = {
+        createEntity : function(service,data,response) {
+            var entryHandler = new XmlDataHandler({
+                service :  service,
+                data : data,
+                namespaces : consts.Namespaces,
+                xpath : consts.EventXPath
+            });
+            return new Event({
                 service : service,
                 id : entryHandler.getEntityId(),
                 dataHandler : entryHandler
@@ -1009,6 +1244,68 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             }
             
             return member.load(args);
+        },
+        
+        /**
+         * Get the Events for a community. See {{#crossLink "CommunityConstants/AtomCommunityEvents:attribute"}}{{/crossLink}} for a complete listing of parameters.
+         * 
+         * These results do not include all details of the event, such as content. However summaries are available.
+         * 
+         * @param communityId The uuid of the Community.
+         * @param startDate Include events that end after this date.
+         * @param endDate Include events that end before this date.
+         * @param args url parameters.
+         * 
+         * @returns
+         */
+        getCommunityEvents : function(communityUuid, startDate, endDate, args){
+        	var promise = this._validateCommunityUuid(communityUuid) || this._validateDateTimes(startDate, endDate);
+            if (promise) {
+                return promise;
+            }
+            var requiredArgs = {
+                calendarUuid : communityUuid
+            };
+            if(startDate){
+                lang.mixin(requiredArgs, {
+                    startDate : startDate
+                });
+            } 
+            if(endDate){
+                lang.mixin(requiredArgs, {
+                    endDate : endDate
+                });
+            }
+            
+            args = lang.mixin(args, requiredArgs);
+            
+            var options = {
+                method : "GET",
+                handleAs : "text",
+                query : args || {}
+            };
+                
+            return this.getEntities(consts.AtomCommunityEvents, options, this.getEventFeedCallbacks());
+        },
+        
+        /**
+         * Used to get the event with the given eventInstUuid. 
+         * 
+         * This will include all details of the event, including its content. 
+         * 
+         * @param eventInstUuid - The id of the event, also used as an identifier when caching the response
+         * @returns
+         */
+        getEvent : function(eventInstUuid){
+            var options = {
+                method : "GET",
+                handleAs : "text",
+                query : {
+                    eventInstUuid: eventInstUuid
+                }
+            };
+                
+            return this.getEntity(consts.AtomCommunityEvent, options, eventInstUuid, this.getEventCallbacks());
         },
 
         /**
@@ -1520,6 +1817,17 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         getInviteFeedCallbacks: function() {
             return ConnectionsInviteFeedCallbacks;
         },
+        
+        /*
+         * Callbacks used when reading a feed that contains Event entries.
+         */
+        getEventFeedCallbacks: function() {
+            return ConnectionsEventFeedCallbacks;
+        },
+        
+        getEventCallbacks: function(){
+            return ConnectionsEventCallbacks;
+        },
 
         /*
          * Callbacks used when reading an entry that contains a Community.
@@ -1609,6 +1917,14 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         _validateCommunityUuid : function(communityUuid) {
             if (!communityUuid || communityUuid.length == 0) {
                 return this.createBadRequestPromise("Invalid argument, expected communityUuid.");
+            }
+        },
+        /**
+         * Validate that the date-time is not empty, return a promise if invalid
+         */
+        _validateDateTimes : function(startDate, endDate){
+            if ((!startDate || startDate.length === 0) && (!endDate || endDate.length === 0)) {
+                return this.createBadRequestPromise("Invalid date arguments, expected either a startDate, endDate or both as parameters.");
             }
         },
         

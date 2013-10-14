@@ -25,6 +25,10 @@ import java.util.Map;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
+import com.ibm.commons.util.StringUtil;
+import com.ibm.sbt.services.client.ClientService;
+import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.client.smartcloud.SmartCloudService;
 /**
  * Bean that provides a Smartcloud Form based authentication.
  * @author Manish Kataria
@@ -47,7 +51,16 @@ public class SmartCloudFormEndpoint extends FormEndpoint {
 	}
 	
 	@Override
-	public String getFormUrl(){
-		return SC_FORM_PAGE;
+	public String getLoginFormUrl(){
+		if(StringUtil.isEmpty(super.getLoginFormUrl())){
+			return SC_FORM_PAGE;
+		}else{
+			return super.getLoginFormUrl();
+		}
 	}
+	
+    @Override
+	public ClientService getClientService() throws ClientServicesException {
+    	return new SmartCloudService(this);
+    }
 }

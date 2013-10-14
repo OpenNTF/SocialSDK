@@ -1083,21 +1083,17 @@ public abstract class ClientService {
 				SbtCoreLogger.SBT.traceDebugp(this, "processResponse", msg);
 			}
 		}
-		if ((httpResponse.getStatusLine().getStatusCode() == HttpServletResponse.SC_UNAUTHORIZED) || 
-			(endpoint != null && endpoint.getAuthenticationErrorCode() == statusCode)) {
+		
+
+		if(isResponseRequireAuthentication(httpResponse)){
 			forceAuthentication(args);
 			return null;
 		}
 		
-		// Smartcloud platform returns 200 with a login page when authentication is required particularly in case of form based authentication
-		// To handle this we check the content type of response from Smartcloud. It should never be text/html except in case it is returning a login form
-		if(httpResponse.getStatusLine().getStatusCode() == HttpServletResponse.SC_OK && endpoint instanceof SmartCloudFormEndpoint){
-			Header[] value = httpResponse.getHeaders("Content-Type");
-			String headerValue = value[0].getValue();
-			if(StringUtil.equals(headerValue, "text/html")){
-				forceAuthentication(args);
-				return null;
-			}
+		if ((httpResponse.getStatusLine().getStatusCode() == HttpServletResponse.SC_UNAUTHORIZED) || 
+			(endpoint != null && endpoint.getAuthenticationErrorCode() == statusCode)) {
+			forceAuthentication(args);
+			return null;
 		}
 		
 		Handler format = findHandler(httpRequestBase, httpResponse, args.handler);
@@ -1114,6 +1110,15 @@ public abstract class ClientService {
 		if (statusCode >= 200 && statusCode < 300) {
 			return true;
 		}
+		return false;
+	}
+	// Each endpoint provides its implementation whether an authentication is required based on response.
+	protected boolean isResponseRequireAuthentication(HttpResponse httpResponse){
+		int statusCode = httpResponse.getStatusLine().getStatusCode();
+		if ((httpResponse.getStatusLine().getStatusCode() == HttpServletResponse.SC_UNAUTHORIZED) || 
+				(endpoint != null && endpoint.getAuthenticationErrorCode() == statusCode)) {
+				return true;
+			}
 		return false;
 	}
 

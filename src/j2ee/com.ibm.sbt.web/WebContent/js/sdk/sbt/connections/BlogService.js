@@ -179,6 +179,28 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         },
 
         /**
+         * Return tags of IBM Connections community from community ATOM entry
+         * document.
+         * 
+         * @method getTags
+         * @return {Object} Array of tags of the community
+         */
+        getTags : function() {
+            return this.getAsArray("tags");
+        },
+
+        /**
+         * Set new tags to be associated with this IBM Connections community.
+         * 
+         * @method setTags
+         * @param {Object} Array of tags to be added to the community
+         */
+
+        setTags : function(tags) {
+            return this.setAsArray("tags", tags);
+        },
+
+        /**
          * Loads the blog object with the atom entry associated with the
          * blog. By default, a network call is made to load the atom entry
          * document in the blog object.
@@ -651,7 +673,6 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @param {Object} [args] Argument object
          */
         load : function(blogHandle, commentId, args) {
-        	try{
             var promise = this.service._validateUuid(commentId);
             if (promise) {
                 return promise;
@@ -680,12 +701,49 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
 				blogHandle : blogHandle,
 				commentId : commentId
 			});
-        	}catch(e){
-        		console.log("Excp: "+e);
-        	}
             return this.service.getEntity(url, options, commentId, callbacks);
         }
 
+    });
+    
+
+    /**
+     * Tag class.
+     * 
+     * @class Tag
+     * @namespace sbt.connections
+     */
+    var Tag = declare(BaseEntity, {
+
+        /**
+         * 
+         * @constructor
+         * @param args
+         */
+        constructor : function(args) {            
+        },
+
+        /**
+         * Get term of the tag
+         * 
+         * @method getTerm
+         * @return {String} term of the tag
+         * 
+         */
+        getTerm : function() {
+            return this.getAsString("term");
+        },
+        
+        /**
+         * Get frequency of the tag
+         * 
+         * @method getFrequency
+         * @return {Number} frequency of the tag
+         * 
+         */
+        getFrequency : function() {
+            return this.getAsNumber("frequency");
+        }
     });
     
     /*
@@ -709,6 +767,57 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             });
             return new Blog({
                 service : service,
+                dataHandler : entryHandler
+            });
+        }
+    };
+
+    /*
+     * Callbacks used when reading a feed that contains forum recommendation entries.
+     */
+    var RecommendPostCallbacks = {
+        createEntities : function(service,data,response) {
+            return new XmlDataHandler({
+                service : service,
+                data : data,
+                namespaces : consts.Namespaces,
+                xpath : consts.ForumsFeedXPath
+            });
+        },
+        createEntity : function(service,data,response) {
+        	 var entryHandler = new XmlDataHandler({
+                 service :  service,
+                 data : data,
+                 namespaces : consts.Namespaces,
+                 xpath : consts.PostXPath
+             });
+             return new Post({
+                 service : service,
+                 dataHandler : entryHandler
+             });
+        }
+    };;
+    
+    /*
+     * Callbacks used when reading a feed that contains blog entries.
+     */
+    var ConnectionsTagsFeedCallbacks = {
+		createEntities : function(service,data,response) {
+            return new XmlDataHandler({
+                data : data,
+                namespaces : consts.Namespaces,
+                xpath : consts.TagsXPath
+            });
+        },
+        createEntity : function(service,data,response) {
+            var entryHandler = new XmlDataHandler({
+                data : data,
+                namespaces : consts.Namespaces,
+                xpath : consts.TagsXPath
+            });
+            return new Tag({
+                service : service,
+                id : entryHandler.getEntityId(),
                 dataHandler : entryHandler
             });
         }
@@ -1197,13 +1306,64 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 headers : consts.AtomXmlHeaders,
                 data : this._constructPostPostData(post)
             };
-            var postId = post.getPostUuid();
             var url = null;
 			url = this.constructUrl(consts.AtomBlogPostEditDelete, null, {
 				postId : post.getPostUuid(),
 				blogHandle : blogHandle
 			});
             return this.updateEntity(url, options, callbacks, args);
+        },
+
+        /**
+         * Recommend a post
+         * 
+         * @method recommendPost
+         * @param {String} postId Id of post
+         * @param {String} blogHandle Id of post
+         */
+        recommendPost : function(postId, blogHandle) {
+            var promise = this._validateUuid(postId);
+            if (promise) {
+                return promise;
+            }
+            
+            var options = {
+                method : "POST",
+                headers : consts.AtomXmlHeaders
+            };
+            var url = null;
+			url = this.constructUrl(consts.AtomRecommendPost, null, {
+				postId : postId,
+				blogHandle : blogHandle
+			});
+			
+            return this.updateEntity(url, options, this.getRecommendPostCallbacks());
+        },
+
+        /**
+         * Unrecommend a post
+         * 
+         * @method unRecommendPost
+         * @param {String} postId Id of post
+         * @param {String} blogHandle Id of post
+         */
+        unRecommendPost : function(postId, blogHandle) {
+            var promise = this._validateUuid(postId);
+            if (promise) {
+                return promise;
+            }
+            
+            var options = {
+                method : "DELETE",
+                headers : consts.AtomXmlHeaders
+            };
+            var url = null;
+			url = this.constructUrl(consts.AtomRecommendPost, null, {
+				postId : postId,
+				blogHandle : blogHandle
+			});
+			
+            return this.deleteEntity(url, options, postId);
         },
 
         /**
@@ -1325,6 +1485,47 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             });
             return comment.load(blogHandle, commentUuid, args);
         },
+
+        /**
+         * Get the tags feed to see a list of the tags for all blogs.
+         * 
+         * @method getBlogsTags
+         * @param {Object} [args] Object representing various parameters. 
+         * The parameters must be exactly as they are supported by IBM
+         * Connections.
+         */
+        getBlogsTags : function(args) {
+            var options = {
+                method : "GET",
+                handleAs : "text",
+                query : args || {}
+            };
+            
+            return this.getEntities(consts.AtomBlogsTags, options, this.getTagsFeedCallbacks(), args);
+        },
+
+        /**
+         * Get the tags feed to see a list of the tags for a perticular blog.
+         * 
+         * @method getBlogTags
+         * @param {String} blogHandle handle of the blog
+         * @param {Object} [args] Object representing various parameters
+         * that can be passed to get a feed of blog tags. The
+         * parameters must be exactly as they are supported by IBM
+         * Connections.
+         */
+        getBlogTags : function(blogHandle, args) {
+            var options = {
+                method : "GET",
+                handleAs : "text",
+                query : args || {}
+            };
+            var url = null;
+			url = this.constructUrl(consts.AtomBlogTags, null, {
+				blogHandle : blogHandle
+			});
+            return this.getEntities(url, options, this.getTagsFeedCallbacks(), args);
+        },
         
         /**
          * Create a Blog object with the specified data.
@@ -1364,6 +1565,20 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          */
         getBlogFeedCallbacks: function() {
             return ConnectionsBlogFeedCallbacks;
+        },
+        
+        /*
+         * Callbacks used when reading a feed that contains Blog entries.
+         */
+        getTagsFeedCallbacks: function() {
+            return ConnectionsTagsFeedCallbacks;
+        },
+        
+        /*
+         * Callbacks used when reading a feed that contains Blog entries.
+         */
+        getRecommendPostCallbacks: function() {
+            return RecommendPostCallbacks;
         },
         
         /*

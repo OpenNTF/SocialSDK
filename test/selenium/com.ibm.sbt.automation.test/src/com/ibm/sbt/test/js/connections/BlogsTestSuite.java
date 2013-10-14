@@ -31,11 +31,15 @@ import com.ibm.sbt.test.js.connections.blogs.api.GetBlogComments;
 import com.ibm.sbt.test.js.connections.blogs.api.GetBlogPosts;
 import com.ibm.sbt.test.js.connections.blogs.api.GetBlogs;
 import com.ibm.sbt.test.js.connections.blogs.api.GetBlogsComments;
+import com.ibm.sbt.test.js.connections.blogs.api.GetBlogsTags;
 import com.ibm.sbt.test.js.connections.blogs.api.GetComment;
 import com.ibm.sbt.test.js.connections.blogs.api.GetFeaturedBlogs;
 import com.ibm.sbt.test.js.connections.blogs.api.GetMyBlogs;
+import com.ibm.sbt.test.js.connections.blogs.api.RecommendPost;
+import com.ibm.sbt.test.js.connections.blogs.api.UnRecommendPost;
 import com.ibm.sbt.test.js.connections.blogs.api.UpdateBlog;
 import com.ibm.sbt.test.js.connections.blogs.api.UpdatePost;
+import com.ibm.sbt.test.js.connections.blogs.api.GetBlogTags;
 
 
 /**
@@ -60,7 +64,11 @@ import com.ibm.sbt.test.js.connections.blogs.api.UpdatePost;
 	UpdatePost.class,
 	DeleteComment.class,
 	DeletePost.class,
-	DeleteBlog.class
+	DeleteBlog.class,
+//	GetBlogTags.class, commented out for now because there is an open question regarding this with API team. tags added to a post are not found in all blog tags feed.
+	GetBlogsTags.class,
+	RecommendPost.class,
+	UnRecommendPost.class
 })
 public class BlogsTestSuite {
     @AfterClass

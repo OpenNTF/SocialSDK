@@ -98,13 +98,17 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         /**
          * XPath expressions to be used when reading a Blog Post
          * 
-         * @property PostXPath
+         * @property TagsXPath
          * @type Object
          * @for sbt.connections.BlogService
          */
         TagsXPath : {
-            entry : "/atom:category"
-        },
+//			entries : "/categories/a:category",
+        	entries : "app:categories/a:category",
+			term : "@term",
+			frequency : "@snx:frequency",
+			uid : "@term"
+		},
         
         /**
          * XPath expressions to be used when reading a Blog Post Comment
@@ -303,7 +307,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.BlogService
          */
-        AtomBlogTags : "/${blogs}/${blogHandle}/feed/tags/atom",
+        AtomBlogTags : "/${blogs}/{blogHandle}/feed/tags/atom",
         
         /**
          * Create a Blog. 
@@ -355,6 +359,15 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.BlogService
          */        
-        AtomBlogCommentEditRemove : "/${blogs}/{blogHandle}/api/comments/{commentId}"
+        AtomBlogCommentEditRemove : "/${blogs}/{blogHandle}/api/comments/{commentId}",
+        
+        /**
+         * Recommend or Unrecommend a Blog Post. 
+         * 
+         * @property AtomRecommendPost
+         * @type String
+         * @for sbt.connections.BlogService
+         */ 
+        AtomRecommendPost : "/blogs/{blogHandle}/api/recommend/entries/{postId}"
     }, conn);
 });

@@ -21,8 +21,8 @@ import com.ibm.commons.runtime.servlet.ServletFactory;
 import com.ibm.sbt.security.authentication.oauth.consumer.servlet.OA2Callback;
 import com.ibm.sbt.security.authentication.oauth.consumer.servlet.OACallback;
 import com.ibm.sbt.security.authentication.oauth.consumer.servlet.OAClientAuthentication;
+import com.ibm.sbt.service.core.handlers.AuthCredsHandler;
 import com.ibm.sbt.service.core.handlers.AuthenticationHandler;
-import com.ibm.sbt.service.core.handlers.BasicAuthCredsHandler;
 import com.ibm.sbt.service.core.handlers.EmailHandler;
 import com.ibm.sbt.service.core.handlers.FileHandler;
 import com.ibm.sbt.service.core.handlers.PingHandler;
@@ -45,8 +45,8 @@ public class ServiceServlet extends ServletDispatcher {
 		// Register the default servlets
 		register(new ServletFactory.PathInfoFactory(PingHandler.class, PingHandler.URL_PATH));
 		register(new ServletFactory.PathInfoFactory(ProxyHandler.class, ProxyHandler.URL_PATH));
-		register(new ServletFactory.PathInfoFactory(BasicAuthCredsHandler.class,
-				BasicAuthCredsHandler.URL_PATH));
+		register(new ServletFactory.PathInfoFactory(AuthCredsHandler.class,
+				AuthCredsHandler.URL_PATH));
 		register(new ServletFactory.PathInfoFactory(OACallback.class, OACallback.URL_PATH));
 		register(new ServletFactory.PathInfoFactory(OAClientAuthentication.class,
 				OAClientAuthentication.URL_PATH));

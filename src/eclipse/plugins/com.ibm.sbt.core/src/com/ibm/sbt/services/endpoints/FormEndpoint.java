@@ -44,7 +44,7 @@ import com.ibm.commons.runtime.util.UrlUtil;
 import com.ibm.commons.util.PathUtil;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.security.authentication.AuthenticationException;
-import com.ibm.sbt.service.core.handlers.BasicAuthCredsHandler;
+import com.ibm.sbt.service.core.handlers.AuthCredsHandler;
 import com.ibm.sbt.service.core.servlet.ServiceServlet;
 import com.ibm.sbt.service.debug.ProxyDebugUtil;
 import com.ibm.sbt.services.client.ClientServicesException;
@@ -61,11 +61,20 @@ public abstract class FormEndpoint extends AbstractEndpoint {
 	private String user;
 	private String password;
 	
+	// provides form page url where login should be performed
+	public  String loginFormUrl;
 	// For already authenticated users use this cookie cache, these cookies are persisted after initial form based authentication
 	private String cookieCache;
 
 	public String getCookieCache() {
 		return cookieCache;
+	}
+	public String getLoginFormUrl() {
+		return loginFormUrl;
+	}
+
+	public void setLoginFormUrl(String loginFormUrl) {
+		this.loginFormUrl = loginFormUrl;
 	}
 
 	/*
@@ -128,10 +137,10 @@ public abstract class FormEndpoint extends AbstractEndpoint {
 		setPassword(password);
 
 		try {
-			if(!(getFormUrl().startsWith("/"))){
+			if(!(getLoginFormUrl().startsWith("/"))){
 				requestUrl = requestUrl.concat("/");
 			}
-			requestUrl = requestUrl.concat(getFormUrl());
+			requestUrl = requestUrl.concat(getLoginFormUrl());
 			BasicCookieStore cookieStore = new BasicCookieStore();
 			DefaultHttpClient httpClient = new DefaultHttpClient();
 			
@@ -182,7 +191,7 @@ public abstract class FormEndpoint extends AbstractEndpoint {
             	   	String endPointName = authPage.substring(authPage.indexOf("=")+1, authPage.length());
                 	String baseUrl = UrlUtil.getBaseUrl(((HttpServletRequest)context.getHttpRequest()));
                 	String servletPath = ServiceServlet.getServletPath();
-                	String basicProxyUrl = BasicAuthCredsHandler.URL_PATH;
+                	String basicProxyUrl = AuthCredsHandler.URL_PATH;
                     
                 	//constructing proxy action url
                 	String postToProxy = PathUtil.concat(baseUrl, servletPath, '/');
@@ -204,7 +213,7 @@ public abstract class FormEndpoint extends AbstractEndpoint {
                        
                     
             	} catch (IOException e) {
-            		throw new ClientServicesException(null,"Authentication page not found. Could not redirect to login page");
+            		throw new ClientServicesException(e,"Authentication page not found. Could not redirect to login page");
             	}
             } else {
             	throw new ClientServicesException(null,"Authentication page is empty in the basic authentication bean");
@@ -229,7 +238,6 @@ public abstract class FormEndpoint extends AbstractEndpoint {
 	 * Should be overriden by specific endpoints like Smartcloudformendpoint or Connectionsformendpoint etc.
 	 * Implementation should provide Url where the form needs to be submitted.
 	 */
-	public abstract String getFormUrl();
 	
 	public String getUser() {
 		return user;

@@ -1,5 +1,5 @@
 /*
-R * © Copyright IBM Corp. 2012
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -34,11 +34,11 @@ import com.ibm.sbt.services.endpoints.EndpointFactory;
 import com.ibm.sbt.services.endpoints.FormEndpoint;
 
 
-public class BasicAuthCredsHandler extends AbstractServiceHandler {
+public class AuthCredsHandler extends AbstractServiceHandler {
 
 	private static final long serialVersionUID = 1L;
 	
-	public static final String URL_PATH = "basicAuth";
+	public static final String URL_PATH = "authHandler";
 	public static final String MODE_MAINWINDOW			= "mainWindow";
     public static final String MODE_POPUP				= "popup";
     public static final String AUTH_ACCEPTED			= "accepted";

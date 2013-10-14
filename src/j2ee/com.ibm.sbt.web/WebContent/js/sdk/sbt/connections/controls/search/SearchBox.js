@@ -43,7 +43,7 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 		_selectedRow : -1,
 		
 		/** This list is used to keep track of selected members **/
-		_members : [],
+		members : [],
 		
 		
 		
@@ -265,8 +265,8 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 				memberNodeHtml = memberNodeHtml.replace(/ /g, '');
 				
 				// Remove member from list
-				for (var i = 0; i < context._members.length; i++) {
-					var member = context._members[i];
+				for (var i = 0; i < context.members.length; i++) {
+					var member = context.members[i];
 					var html = member.html;
 					
 					// Skip null entries (null entries represent entries that have been deleted)
@@ -285,9 +285,9 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 					// Compare strings
 					if (html == memberNodeHtml) {
 						// Delete objects by setting their properties to null
-						context._members[i].html = null;
-						context._members[i].id = null;
-						context._members[i].name = null;
+						context.members[i].html = null;
+						context.members[i].id = null;
+						context.members[i].name = null;
 						break;
 					}
 				}

@@ -171,8 +171,8 @@ define(["../../../declare",
 			newMember.id = memberId;
 			newMember.name = memberName;
 			// Make sure that the member hasn't already been selected
-			for (var i = 0; i < searchBox._members.length; i++) {
-				var member = searchBox._members[i];
+			for (var i = 0; i < searchBox.members.length; i++) {
+				var member = searchBox.members[i];
 				if (member.html == newMember.html) {
 					return;
 				}
@@ -185,7 +185,7 @@ define(["../../../declare",
 			this._doAttachEvents(searchBox,this._appsMemberListItem,{});	
 			
 			// Keep track of the added member
-			searchBox._members.push(newMember);
+			searchBox.members.push(newMember);
 			
 			return this._appsMemberListItem;
 		},

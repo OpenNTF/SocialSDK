@@ -38,7 +38,7 @@ public class AuthCredsHandler extends AbstractServiceHandler {
 
 	private static final long serialVersionUID = 1L;
 	
-	public static final String URL_PATH = "authHandler";
+	public static final String URL_PATH = "basicAuth";
 	public static final String MODE_MAINWINDOW			= "mainWindow";
     public static final String MODE_POPUP				= "popup";
     public static final String AUTH_ACCEPTED			= "accepted";

@@ -461,13 +461,9 @@
 			<value>%{smartcloud.form.url}</value>
 		</managed-property>
 		<managed-property>
-			<property-name>apiVersion</property-name>
-			<value>%{smartcloud.form.apiVersion}</value>
-		</managed-property>
-		<managed-property>
 			<property-name>credentialStore</property-name>
 			<value>CredStore</value>
-		</managed-property>
+		</managed-property> 
 		<managed-property>
 			<property-name>authenticationPage</property-name>
 			<value>/sbt/loginForm.html?endpoint=smartcloudForm</value>

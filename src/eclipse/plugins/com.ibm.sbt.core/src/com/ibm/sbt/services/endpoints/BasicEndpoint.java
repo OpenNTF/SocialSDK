@@ -43,7 +43,7 @@ import com.ibm.sbt.security.authentication.password.consumer.UserPassword;
 import com.ibm.sbt.security.credential.store.CredentialStore;
 import com.ibm.sbt.security.credential.store.CredentialStoreException;
 import com.ibm.sbt.security.credential.store.CredentialStoreFactory;
-import com.ibm.sbt.service.core.handlers.BasicAuthCredsHandler;
+import com.ibm.sbt.service.core.handlers.AuthCredsHandler;
 import com.ibm.sbt.service.core.servlet.ServiceServlet;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.endpoints.js.JSReference;
@@ -158,7 +158,7 @@ public class BasicEndpoint extends AbstractEndpoint {
             	   	String endPointName = authPage.substring(authPage.indexOf("=")+1, authPage.length());
                 	String baseUrl = UrlUtil.getBaseUrl(((HttpServletRequest)context.getHttpRequest()));
                 	String servletPath = ServiceServlet.getServletPath();
-                	String basicProxyUrl = BasicAuthCredsHandler.URL_PATH;
+                	String basicProxyUrl = AuthCredsHandler.URL_PATH;
                     
                 	//constructing proxy action url
                 	String postToProxy = PathUtil.concat(baseUrl, servletPath, '/');

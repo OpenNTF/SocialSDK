@@ -425,7 +425,12 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 				
 				if(query && query != ""){
 					
-					searchService = new SearchService();
+					if(context.endpoint){
+						searchService = new SearchService({endpoint:context.endpoint});
+					}else{
+						searchService = new SearchService();
+					}
+					
 				    var promise = searchService.getMyResults(query,requestArgs);
 	
 			        promise.then(
@@ -492,7 +497,11 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 						requestArgs = {"component": applicationParam};
 					}
 					
-					searchService = new SearchService();
+					if(context.endpoint){
+						searchService = new SearchService({endpoint:context.endpoint});
+					}else{
+						searchService = new SearchService();
+					}
 				    var promise = searchService.getMyResults(context.searchQuery,requestArgs);
 				    
 				    var self = context;

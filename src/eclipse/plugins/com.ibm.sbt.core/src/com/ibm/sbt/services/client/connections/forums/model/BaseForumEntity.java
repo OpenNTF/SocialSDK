@@ -87,8 +87,8 @@ public class BaseForumEntity extends BaseEntity {
 		return new Contributor(super.dataHandler);
 	}
 
-	public Date getUpdated(){
-		return getAsDate(ForumsXPath.updated);
+	public String getUpdated(){
+		return getAsString(ForumsXPath.updated);
 	}
 
 	public String createdBy(){

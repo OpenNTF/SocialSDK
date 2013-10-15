@@ -1125,8 +1125,10 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @param args
          */
         constructor : function(args) {
-            if (!this.endpoint) {
+            if (!args.endpoint) {
                 this.endpoint = config.findEndpoint(this.getDefaultEndpointName());
+            } else {
+            	this.endpoint = args.endpoint;
             }
         },
 

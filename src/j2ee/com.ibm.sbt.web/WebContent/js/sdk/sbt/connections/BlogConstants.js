@@ -368,6 +368,6 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.BlogService
          */ 
-        AtomRecommendPost : "/blogs/{blogHandle}/api/recommend/entries/{postId}"
+        AtomRecommendPost : "/${blogs}/{blogHandle}/api/recommend/entries/{postId}"
     }, conn);
 });

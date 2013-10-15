@@ -185,6 +185,25 @@ public class ForumReply extends BaseForumEntity{
 		}
 		return answer;
 	}
+	/**
+	 * Check if Reply is deleted
+	 *
+	 * @method isDeleted
+	 * @return boolean
+	 */
+	public boolean isDeleted(){
+		boolean answer = false;
+		if(StringUtil.isNotEmpty(getAsString(ForumsXPath.flag))){
+			List<String> flags = Arrays.asList(getDataHandler().getAsString(ForumsXPath.flag).split(" "));
+			for (int i = 0; i < flags.size(); i++) {
+				if(StringUtil.equalsIgnoreCase(flags.get(i), FlagType.DELETED.getFlagType())){
+					answer = true;
+					break;
+				}
+			}
+		}
+		return answer;
+	}
 
 	/**
 	 * This method updates the IBM Connections Forum Reply on the server

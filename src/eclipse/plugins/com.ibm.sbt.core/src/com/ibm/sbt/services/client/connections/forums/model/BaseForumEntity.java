@@ -17,7 +17,6 @@ package com.ibm.sbt.services.client.connections.forums.model;
  */
 
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import com.ibm.commons.util.StringUtil;
@@ -25,7 +24,6 @@ import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
-import com.ibm.sbt.services.client.connections.communities.model.CommunityXPath;
 import com.ibm.sbt.services.client.connections.forums.ForumService;
 import com.ibm.sbt.services.client.connections.forums.ForumServiceException;
 import com.ibm.sbt.services.client.connections.forums.ForumsXPath;
@@ -64,7 +62,12 @@ public class BaseForumEntity extends BaseEntity {
 	public BaseForumEntity(ForumService forumsService) {
 		setService(forumsService);
 	}
-	
+	/**
+	 * To get Uuid of Forum Entity
+	 *
+	 * @method getUid
+	 * @return String
+	 */
 	public String getUid(){
 		String id = getAsString(ForumsXPath.uid);
 		if(StringUtil.isNotEmpty(id)){

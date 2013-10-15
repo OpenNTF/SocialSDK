@@ -942,7 +942,9 @@ define(
 				},
 
 				/**
-				 * Get community files from IBM Connections
+				 * Get community files from IBM Connections (community files refer to
+				 * files which the user uploaded to the community. Calling this function
+				 * will not list files that have been shared with this community).
 				 * 
 				 * @method getCommunityFiles
 				 * @param {Object} [args] Argument object. Object representing various parameters that can be passed. The parameters must be exactly as they are

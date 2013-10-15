@@ -1,4 +1,5 @@
 var selectedSmartCloudCommunityUuid = null;
+var fileToShare = null;
 require(["sbt/connections/FileService", 
          "sbt/dom",
          "sbt/connections/CommunityService",
@@ -62,6 +63,15 @@ require(["sbt/connections/FileService",
 		var btnShareFile = dom.byId("shareFile");
 		btnShareFile.onclick = function(evt) {
 			// Share file
+			var smartCloudFileService = new FileService({
+				endpoint: config.findEndpoint("smartcloud")
+			});
+			
+			// Download file
+			fileToShare.download();
+			
+//			smartCloudFileService.shareFileWithCommunities(fileId, selectedSmartCloudCommunityUuid, {});
+//			shareFileWithCommunities : function(fileId, communityIds, args)
 			
 			// Close dialog box
 			closeDialog();
@@ -96,11 +106,12 @@ require(["sbt/connections/FileService",
                         var action = dom.byId("action"+i);
                         action.innerHTML = "<input id=\"btnShare" + i + "\" value=\"Share\" class=\"btn btn-primary\" type=\"submit\">";
                         var btnShare = dom.byId("btnShare" + i);
-                       
+                        
                         btnShare.onclick = function(evt) {
                         	var dialog = document.getElementById("shareDialog");
                         	dialog.style.display = "block";
                         	document.getElementById("fileToShare").innerHTML = file.getTitle();
+                        	fileToShare = file;
                         };
 
                     }

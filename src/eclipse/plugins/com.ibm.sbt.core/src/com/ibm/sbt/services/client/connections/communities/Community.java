@@ -26,6 +26,8 @@ import com.ibm.sbt.services.client.connections.communities.CommunityList;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.communities.model.CommunityXPath;
 import com.ibm.sbt.services.client.connections.communities.transformers.CommunityTransformer;
+import com.ibm.sbt.services.client.connections.forums.ForumList;
+import com.ibm.sbt.services.client.connections.forums.TopicList;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 
@@ -345,7 +347,24 @@ public class Community extends BaseEntity {
 	public CommunityList getSubCommunities() throws CommunityServiceException {
 	   	return getService().getSubCommunities(getCommunityUuid());
 	}
-	
+	/**
+	 * This method gets the forums of a community
+	 * 
+	 * @return Forums  of the given Community 
+	 * @throws CommunityServiceException
+	 */
+	public ForumList getForums() throws CommunityServiceException {
+	   	return getService().getForums(getCommunityUuid());
+	}
+	/**
+	 * This method gets the forum topics of a community
+	 * 
+	 * @return Forum topics of the given Community 
+	 * @throws CommunityServiceException
+	 */
+	public TopicList getForumTopics() throws CommunityServiceException {
+	   	return getService().getForumTopics(getCommunityUuid());
+	}
 	/**
 	 * This method gets the subcommunities of a community
 	 * 

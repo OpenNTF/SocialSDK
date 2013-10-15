@@ -17,6 +17,7 @@ package com.ibm.sbt.services.client.connections.forums.model;
  */
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import com.ibm.commons.util.StringUtil;
@@ -55,11 +56,21 @@ public class BaseForumEntity extends BaseEntity {
 	public BaseForumEntity(BaseService svc, DataHandler<?> handler) {
 		super(svc,handler);
 	}
-
+	/**
+	 * Constructor
+	 *  
+	 * @param ForumService
+	 */
+	public BaseForumEntity(ForumService forumsService) {
+		setService(forumsService);
+	}
+	
 	public String getUid(){
 		String id = getAsString(ForumsXPath.uid);
-		if(StringUtil.startsWithIgnoreCase(id, FORUMID)){
-			id = id.substring(FORUMID.length());
+		if(StringUtil.isNotEmpty(id)){
+			if(StringUtil.startsWithIgnoreCase(id, FORUMID)){
+				id = id.substring(FORUMID.length());
+			}
 		}
 		return id;
 	}
@@ -76,8 +87,8 @@ public class BaseForumEntity extends BaseEntity {
 		return new Contributor(super.dataHandler);
 	}
 
-	public String getUpdated(){
-		return getAsString(ForumsXPath.updated);
+	public Date getUpdated(){
+		return getAsDate(ForumsXPath.updated);
 	}
 
 	public String createdBy(){

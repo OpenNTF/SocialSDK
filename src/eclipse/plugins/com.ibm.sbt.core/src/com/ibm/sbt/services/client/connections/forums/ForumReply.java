@@ -109,6 +109,26 @@ public class ForumReply extends BaseForumEntity{
 	{
 		return getService().getRecommendations(getUid());
 	}
+	 /**
+     * Return the value of id of the post that this is a reply to.
+     * 
+     * @method getReplyToPostUuid
+     * @returns {String} postUuid Id of the forum post
+     */
+	public String getReplyToPostUuid() throws ForumServiceException {
+    	return extractForumUuid(getAsString(ForumsXPath.inReplyTo));
+    }
+
+    /**
+     * Sets the value of id of the post that this is a reply to.
+     * 
+     * @method setReplyToPostUuid
+     * @param {String} postUuid Id of the forum post
+     */
+    public void setReplyToPostUuid(String postUuid) {
+    	setAsString(ForumsXPath.inReplyTo, postUuid);
+    }
+    
 	/**
 	 * To get Url of Reply
 	 *

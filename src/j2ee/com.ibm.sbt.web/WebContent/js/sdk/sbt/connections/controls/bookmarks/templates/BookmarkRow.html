@@ -9,15 +9,15 @@
 			<a href=""  data-dojo-attach-event="onclick: handleClick" title="${tooltip}">${title}</a>
 		</h4>
 		
-		<div class="lotusMeta">
+		<div class="lotusMeta" role="list">
 			<a title="${authorName}" href="javascript;" data-dojo-attach-event="onclick: viewAuthorProfile">${authorName}</a>
 
-			<span aria-hidden="true" role="img" class="lotusDivider">|</span> <span
+			<span aria-hidden="true" role="img" alt="Image divider" class="lotusDivider">|</span> <span
 				class="Date localizedDone" 
 				title="${updated}">${updated}</span>
 
 
-			<span aria-hidden="true" role="img" class="lotusDivider">|</span> <span
+			<span aria-hidden="true" alt="Image divider" role="img" class="lotusDivider">|</span> <span
 				role="listitem"> <span role="list" class="lotusTags">
 					${nls.tags} <span role="listitem"> 
 					${tagsAnchors}</span>

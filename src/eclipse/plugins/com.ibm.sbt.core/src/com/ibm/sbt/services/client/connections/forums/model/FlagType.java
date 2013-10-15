@@ -27,6 +27,7 @@ public enum FlagType {
 	LOCK("locked"),
 	QUESTION("question"),
 	ANSWER("answer"),
+	DELETED("deleted"),
 	ANSWERED("answered");
 	
 	String flagType;

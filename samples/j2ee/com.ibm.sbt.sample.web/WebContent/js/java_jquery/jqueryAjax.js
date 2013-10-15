@@ -90,7 +90,7 @@
 
             setSnippet(snippet);
             var theme = getThemeId();
-            ajaxRefresh(snippet, theme);
+            ajaxRefresh(snippet, theme, getEnv());
         };
         
         var setLeafBehaviour = function(){

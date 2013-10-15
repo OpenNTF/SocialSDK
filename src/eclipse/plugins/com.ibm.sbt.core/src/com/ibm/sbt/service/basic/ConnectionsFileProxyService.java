@@ -30,7 +30,7 @@ public class ConnectionsFileProxyService extends AbstractFileProxyService {
 	protected Content getFileContent(File file, long length, String name) {
 		Content content;
 		String contentType = null;
-		if (Operations.UPDATE_PROFILE_PHOTO.equals(operation)) {
+		if (Operations.UPDATE_PROFILE_PHOTO.toString().equals(operation)) {
 			String fileName = parameters.get("FileName");
 			int dot = fileName.lastIndexOf('.');
 			String ext = null;

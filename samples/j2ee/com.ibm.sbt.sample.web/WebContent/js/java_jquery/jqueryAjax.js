@@ -11,10 +11,12 @@
     function ajaxRefresh(snippet, themeId, env, callback){
         // refresh snippet with java_snippet.jsp
         var parameters = "?snippet=" + snippet;
-        if(themeId!=null && themeId!="")
+        if(themeId!=null && themeId!=""){
             parameters = parameters + "&themeId=" + themeId + "&env=" + env;
-        if(!env)
+        }
+        if(!env){
             setEnv(env="defaultEnvironment");
+        }
         parameters = parameters + "&env=" + env + "&lang=java";
         var snippetQuery = snippetPage + parameters;
         if(callback){
@@ -52,8 +54,9 @@
     }
     
     function setEnv(env){
-        if(env)
+        if(env){
             $("body").data("env", env);
+        }
     }
 
     function setEnvFromUrl(url){
@@ -87,7 +90,7 @@
 
             setSnippet(snippet);
             var theme = getThemeId();
-            ajaxRefresh(snippet, theme);
+            ajaxRefresh(snippet, theme, getEnv());
         };
         
         var setLeafBehaviour = function(){

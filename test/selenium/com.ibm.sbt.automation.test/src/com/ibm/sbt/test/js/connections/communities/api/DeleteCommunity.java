@@ -54,7 +54,10 @@ public class DeleteCommunity extends BaseCommunitiesTest {
         Assert.assertEquals(community.getCommunityUuid(), json.getString("communityUuid"));
         
         community = getCommunity(community.getCommunityUuid(), false);
-        Assert.assertNull("Delete community is still available", community);
+        if (community != null) {
+        	String flag = community.getAsString("a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/flags']/@term");
+            Assert.assertEquals("Delete community is still available", "deleted", flag);
+        }
         
         // community has already been deleted
         community = null;

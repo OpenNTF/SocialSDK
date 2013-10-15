@@ -185,7 +185,7 @@ define(["../../../declare",
 	        	var endpoint = this.store.getEndpoint();
 	        	        	
 	        	if(this.params.type=="myTopics"){
-	        		var url = this.buildUrl(consts.AtomTopicsMy, {});
+	        		var url = this.buildUrl(consts.AtomTopicsMy, {},endpoint);
 	        		this.store.setUrl(url);
 	        		this.hideBreadCrumb = true;
 	        	}else{

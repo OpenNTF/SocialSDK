@@ -149,7 +149,38 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
             authorUserid : "a:author/snx:userid",
             authorName : "a:author/a:name",
             contributorUserid : "a:contributor/snx:userid",
-            contributorName : "a:contributor/a:name"
+            contributorName : "a:contributor/a:name",
+            communityUuid : "snx:communityUuid"
+        },
+        
+        EventXPath : {
+            // used by getEntityData
+            entry : "/a:entry",
+            // used by getEntityId
+            uid : "a:id",
+            // used by getters
+            eventUuid : "snx:eventUuid",
+            eventInstUuid : "snx:eventInstUuid",
+            title : "a:title",
+            eventAtomUrl : "a:link[@rel='self']/@href",
+            content : "a:content[@type='html']",
+            location : "snx:location",
+            authorUserid : "a:author/snx:userid",
+            authorName : "a:author/a:name",
+            authorEmail : "a:author/a:email",
+            authorState : "a:author/snx:userState",
+            updated : "a:updated",
+            communityLink : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/container']/@href",
+            eventAtomInstances : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/calendar/event/instances']/@href",
+            eventAtomAttendees : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/calendar/event/attend']/@href",
+            eventAtomFollowers : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/calendar/event/follow']/@href",
+            frequency : "snx:recurrence/@frequency",
+            interval : "snx:recurrence/@interval",
+            until : "snx:recurrence/snx:until",
+            allDay : "snx:recurrence/snx:allday",
+            startDate : "snx:recurrence/snx:startDate",
+            endDate : "snx:recurrence/snx:endDate",
+            byDay : "snx:recurrence/snx:byDay"
         },
 
         /**
@@ -264,6 +295,39 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.CommunityService
          */
-        AtomCommunityBookmarks : "/${communities}/service/atom/community/bookmarks"        
+        AtomCommunityBookmarks : "/${communities}/service/atom/community/bookmarks",
+        
+        /**
+         * Get a feed of a Community's events.
+         * 
+         * Required url parameters: 
+         *   calendarUuid - The uuid of the community to get events from.
+         *   
+         *   startDate and/or endDate. At least one of these must be present. Format is any date-time that conforms to rfc3339. 
+         *   startDate - Include events that end after this date.
+         *   endDate - Include events that end before this date.
+         *   
+         * Optional Url parameters
+         *   page - Page number, specifies the page to be returned. Default value is page 1.
+         *   ps - Page size. Number of entries to return per page. Defaule value is 10, max is 100.
+         *   tags - Tag filter, only return events with these tags. Multiple tags are separated using +, e.g. tag1+tag2
+         *   
+         * @property AtomCommunityEvents
+         * @type String
+         * @for sbt.connections.CommunityService
+         */
+        AtomCommunityEvents : "/${communities}/calendar/atom/calendar/event",
+        
+        /**
+         * Get full atom event.
+         * 
+         * Required url parameters: 
+         *   eventInstUuid - The uuid of the event, gotten from the AtomCommunityEvents feed.
+         *   
+         * @property AtomCommunityEvent
+         * @type String
+         * @for sbt.connections.CommunityService
+         */
+        AtomCommunityEvent : "/${communities}/calendar/atom/calendar/event"
     }, conn);
 });

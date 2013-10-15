@@ -1,0 +1,19 @@
+<script type="text/template" id="publicBookmarksRow">
+<tr class="${rowClass}">
+<td width="100%" >
+     <div class="alert">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+     <h1>${title}</h1>
+     <p>Tags: ${tagsAnchors}</p>
+	<span class="label">Author: ${authorName} (<a title="${authorName}" href="javascript;" data-dojo-attach-event="onclick: viewAuthorProfile">view profile</a>)</span>
+     <p>
+     <a class="btn btn-primary btn-large" data-dojo-attach-event="onclick: handleClick" title="${tooltip}">
+     Visit website!
+     </a>
+     </p>
+     </div>
+</td>
+</tr>
+</script>
+
+<div id="gridDiv">

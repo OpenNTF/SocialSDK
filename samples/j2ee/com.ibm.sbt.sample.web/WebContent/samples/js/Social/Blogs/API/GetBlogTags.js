@@ -6,24 +6,21 @@ require(["sbt/connections/BlogService", "sbt/dom", "sbt/json"],
         blog.setTitle("Blog at " + now.getTime());
         blog.setHandle("BlogHandle " + now.getTime());
         blog.setTags(['testTag1', 'testTag2']);
-        
     	blogService.createBlog(blog).then(
             function(blog){
-		        var promise = blogService.getBlogTags(blog.getHandle());
-		        promise.then(
-		        		function(tags) {
-		                    dom.setText("json", json.jsonBeanStringify(tags));
-		                },
-		                function(error) {
-		                    dom.setText("json", json.jsonBeanStringify(error));
-		                }
-		        );
-            },
-            function(error){
-                dom.setText("content", "Error code:" +  error.code + ", message:" + error.message);
-            }   
-    	);
-					        
-					        
+		        return blog.getHandle();
+            }
+		).then(
+	    	function(blogHandle) {
+	    		return blogService.getBlogTags(blog.getHandle());
+	        }
+	    ).then(
+			function(tags) {
+	            dom.setText("json", json.jsonBeanStringify(tags));
+	        },
+	        function(error) {
+	            dom.setText("json", json.jsonBeanStringify(error));
+	        }
+        );		       					        
     }
 );

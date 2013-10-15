@@ -85,14 +85,6 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 			}
 			operation = pathTokens[4];
 			getParameters(pathTokens);
-//			fileNameOrId = pathTokens[5];
-//			if (fileNameOrId == null) {
-//				writeErrorResponse(HttpServletResponse.SC_BAD_REQUEST, "File Name not provided.", new String[] {}, new String[] {}, response, request);
-//				return;
-//			}
-//			if (pathTokens.length == 7) {
-//				libraryId = pathTokens[6];
-//			}
 			method = request.getMethod();
 			requestURI = getRequestURI(request.getMethod(), AuthUtil.INSTANCE.getAuthValue(endpoint), request.getParameterMap());
 			return;
@@ -122,7 +114,7 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 					@SuppressWarnings("unchecked")
 					List<FileItem> fileItems = upload.parseRequest(request);
 					if (fileItems.size() == 0) {
-						writeErrorResponse(HttpServletResponse.SC_BAD_REQUEST, "No File Item found in Mulpart Form data", new String[] {}, new String[] {}, response, request);
+						writeErrorResponse(HttpServletResponse.SC_BAD_REQUEST, "No File Item found in Multipart Form data", new String[] {}, new String[] {}, response, request);
 						return;
 					}
 					for (FileItem uploadedFile : fileItems) {

@@ -30,17 +30,19 @@ public class ConnectionsFileProxyService extends AbstractFileProxyService {
 	protected Content getFileContent(File file, long length, String name) {
 		Content content;
 		String contentType = null;
-		String fileName = parameters.get("FileName");
-		int dot = fileName.lastIndexOf('.');
-		String ext = null;
-		if (dot > -1) {
-			ext = fileName.substring(dot + 1); // add one for the dot!
-		}
-		if (!StringUtil.isEmpty(ext)) {
-			if (ext.equalsIgnoreCase("jpg")) {
-				contentType = "image/jpeg"; // content-type should be image/jpeg for file extension jpg
-			} else {
-				contentType = "image/" + ext;
+		if (Operations.UPDATE_PROFILE_PHOTO.equals(operation)) {
+			String fileName = parameters.get("FileName");
+			int dot = fileName.lastIndexOf('.');
+			String ext = null;
+			if (dot > -1) {
+				ext = fileName.substring(dot + 1); // add one for the dot!
+			}
+			if (!StringUtil.isEmpty(ext)) {
+				if (ext.equalsIgnoreCase("jpg")) {
+					contentType = "image/jpeg"; // content-type should be image/jpeg for file extension jpg
+				} else {
+					contentType = "image/" + ext;
+				}
 			}
 		}
 		content = new ContentFile(file, contentType);
@@ -90,33 +92,30 @@ public class ConnectionsFileProxyService extends AbstractFileProxyService {
 
 	@Override
 	protected void getParameters(String[] tokens) throws ServletException {
-		if(operation == null){
+		if (operation == null) {
 			return;
 		}
-		if(Operations.UPLOAD_FILE.toString().equals(operation)){
-			if(tokens.length < 6) {
+		if (Operations.UPLOAD_FILE.toString().equals(operation)) {
+			if (tokens.length < 6) {
 				throw new ServletException("Invalid url for File Download");
 			}
 			parameters.put("FileName", tokens[5]);
-		}
-		else if(Operations.DOWNLOAD_FILE.toString().equals(operation)){
-			if(tokens.length < 7) {
+		} else if (Operations.DOWNLOAD_FILE.toString().equals(operation)) {
+			if (tokens.length < 7) {
 				throw new ServletException("Invalid url for File Download");
 			}
 			parameters.put("FileId", tokens[5]);
 			parameters.put("LibraryId", tokens[6]);
-		}
-		else if(Operations.UPDATE_PROFILE_PHOTO.toString().equals(operation)){
+		} else if (Operations.UPDATE_PROFILE_PHOTO.toString().equals(operation)) {
 			parameters.put("FileName", tokens[5]);
-		}
-		else if(Operations.UPLOAD_NEW_VERSION.toString().equals(operation)) {
-			if(tokens.length < 7) {
+		} else if (Operations.UPLOAD_NEW_VERSION.toString().equals(operation)) {
+			if (tokens.length < 7) {
 				throw new ServletException("Invalid url for Upload New Version of File");
 			}
 			parameters.put("FileId", tokens[5]);
 			parameters.put("FileName", tokens[6]);
 		}
-		
+
 	}
 
 }

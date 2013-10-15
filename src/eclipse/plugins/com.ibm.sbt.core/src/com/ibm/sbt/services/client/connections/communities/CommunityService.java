@@ -922,7 +922,7 @@ public class CommunityService extends BaseService {
 	 * @throws CommunityServiceException
 	 */
 	public FileList getCommunityFiles(String communityId, HashMap<String, String> params) throws CommunityServiceException {
-		FileService fileService = new FileService();
+		FileService fileService = new FileService(this.endpoint);
 		try {
 			return fileService.getCommunityFiles(communityId, params);
 		} catch (FileServiceException e) {
@@ -940,7 +940,7 @@ public class CommunityService extends BaseService {
 	 * @throws CommunityServiceException
 	 */
 	public long downloadCommunityFile(OutputStream ostream, final String fileId, final String communityId, Map<String, String> params) throws CommunityServiceException {
-		FileService svc = new FileService();
+		FileService svc = new FileService(this.endpoint);
 		try {
 			return svc.downloadCommunityFile(ostream, fileId, communityId, params);
 		} catch (FileServiceException e) {
@@ -957,7 +957,7 @@ public class CommunityService extends BaseService {
 	 * @throws CommunityServiceException
 	 */
 	public File uploadFile(InputStream iStream, String communityId, final String title, long length) throws CommunityServiceException {
-		FileService svc = new FileService();
+		FileService svc = new FileService(this.endpoint);
 		try {
 			return svc.uploadCommunityFile(iStream, communityId, title, length);
 		} catch (FileServiceException e) {

@@ -24,7 +24,6 @@ import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
-import com.ibm.sbt.services.client.connections.communities.model.CommunityXPath;
 import com.ibm.sbt.services.client.connections.forums.ForumService;
 import com.ibm.sbt.services.client.connections.forums.ForumServiceException;
 import com.ibm.sbt.services.client.connections.forums.ForumsXPath;
@@ -55,11 +54,26 @@ public class BaseForumEntity extends BaseEntity {
 	public BaseForumEntity(BaseService svc, DataHandler<?> handler) {
 		super(svc,handler);
 	}
-
+	/**
+	 * Constructor
+	 *  
+	 * @param ForumService
+	 */
+	public BaseForumEntity(ForumService forumsService) {
+		setService(forumsService);
+	}
+	/**
+	 * To get Uuid of Forum Entity
+	 *
+	 * @method getUid
+	 * @return String
+	 */
 	public String getUid(){
 		String id = getAsString(ForumsXPath.uid);
-		if(StringUtil.startsWithIgnoreCase(id, FORUMID)){
-			id = id.substring(FORUMID.length());
+		if(StringUtil.isNotEmpty(id)){
+			if(StringUtil.startsWithIgnoreCase(id, FORUMID)){
+				id = id.substring(FORUMID.length());
+			}
 		}
 		return id;
 	}

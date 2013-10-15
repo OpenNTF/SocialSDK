@@ -81,6 +81,14 @@ public class ForumReply extends BaseForumEntity{
 	}
 
 	/**
+	 * Constructor
+	 *  
+	 * @param ForumService
+	 */
+	public ForumReply(ForumService forumsService) {
+		super(forumsService);
+	}
+	/**
 	 * To get Uuid of Forum Reply
 	 *
 	 * @method getReplyUuid

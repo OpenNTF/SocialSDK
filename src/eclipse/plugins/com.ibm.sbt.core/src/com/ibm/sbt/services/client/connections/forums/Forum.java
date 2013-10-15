@@ -47,7 +47,14 @@ public class Forum extends BaseForumEntity {
 	public Forum(BaseService svc, DataHandler<?> handler) {
 		super(svc,handler);
 	}
-	
+	/**
+	 * Constructor
+	 *  
+	 * @param ForumService
+	 */
+	public Forum(ForumService forumsService) {
+		super(forumsService);
+	}
 
 	public void setForumUuid(String forumUuid) {
         setAsString(ForumsXPath.uid, forumUuid);

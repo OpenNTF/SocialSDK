@@ -40,7 +40,6 @@ public class UnRecommendPost extends BaseApiTest {
     public void testUnRecommendPost() {
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         JsonJavaObject json = previewPage.getJson();
-        System.out.println("aaaaaaaaaaaa "+json.getString("status"));
         Assert.assertTrue(json.getString("status").equals("204.0"));
     }
     

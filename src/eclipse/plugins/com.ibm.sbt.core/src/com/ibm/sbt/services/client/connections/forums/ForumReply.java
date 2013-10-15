@@ -192,17 +192,17 @@ public class ForumReply extends BaseForumEntity{
 	 * @return boolean
 	 */
 	public boolean isDeleted(){
-		boolean answer = false;
+		boolean deleted = false;
 		if(StringUtil.isNotEmpty(getAsString(ForumsXPath.flag))){
 			List<String> flags = Arrays.asList(getDataHandler().getAsString(ForumsXPath.flag).split(" "));
 			for (int i = 0; i < flags.size(); i++) {
 				if(StringUtil.equalsIgnoreCase(flags.get(i), FlagType.DELETED.getFlagType())){
-					answer = true;
+					deleted = true;
 					break;
 				}
 			}
 		}
-		return answer;
+		return deleted;
 	}
 
 	/**

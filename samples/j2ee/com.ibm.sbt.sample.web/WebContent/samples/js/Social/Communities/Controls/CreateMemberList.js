@@ -3,10 +3,9 @@ require(["sbt/dom",
          "sbt/connections/controls/bootstrap/ProfileRendererMixin",
          "sbt/connections/CommunityService",
          "sbt/lang",
-         "sbt/connections/controls/search/SearchBox",
-         "sbt/connections/ProfileService"], 
+         "sbt/connections/controls/search/SearchBox"], 
 
-function(dom, ProfileGrid, ProfileRendererMixin, CommunityService, lang, SearchBox, ProfileService) {
+function(dom, ProfileGrid, ProfileRendererMixin, CommunityService, lang, SearchBox) {
     // Search logic
 	var searchBox = new SearchBox({
 		type:"full",

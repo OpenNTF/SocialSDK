@@ -63,11 +63,11 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         /**
          * XPath expressions to be used when reading a Blog Post
          * 
-         * @property PostXPath
+         * @property BlogPostXPath
          * @type Object
          * @for sbt.connections.BlogService
          */
-        PostXPath : {
+        BlogPostXPath : {
             entry : "/a:entry",
             uid : "a:id",
             postUuid : "a:id",
@@ -325,7 +325,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.BlogService
          */
-        AtomBlogEditDelete : "/${blogs}/${blogHomepageHandle}/api/blogs/{blogId}",
+        AtomBlogEditDelete : "/${blogs}/${blogHomepageHandle}/api/blogs/{blogUuid}",
         /**
          * Create, Edit or remove a Blog Post. 
          * 
@@ -342,7 +342,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.BlogService
          */
-        AtomBlogPostEditDelete : "/${blogs}/{blogHandle}/api/entries/{postId}",
+        AtomBlogPostEditDelete : "/${blogs}/{blogHandle}/api/entries/{postUuid}",
         /**
          * Create, Edit or remove a Blog Comment. 
          * 
@@ -350,7 +350,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.BlogService
          */
-        AtomBlogCommentCreate : "/${blogs}/{blogHandle}/api/entrycomments/{postId}",
+        AtomBlogCommentCreate : "/${blogs}/{blogHandle}/api/entrycomments/{postUuid}",
         
         /**
          * Edit or remove a Blog Comment. 
@@ -359,15 +359,15 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.BlogService
          */        
-        AtomBlogCommentEditRemove : "/${blogs}/{blogHandle}/api/comments/{commentId}",
+        AtomBlogCommentEditRemove : "/${blogs}/{blogHandle}/api/comments/{commentUuid}",
         
         /**
          * Recommend or Unrecommend a Blog Post. 
          * 
-         * @property AtomRecommendPost
+         * @property AtomRecommendBlogPost
          * @type String
          * @for sbt.connections.BlogService
          */ 
-        AtomRecommendPost : "/${blogs}/{blogHandle}/api/recommend/entries/{postId}"
+        AtomRecommendBlogPost : "/${blogs}/{blogHandle}/api/recommend/entries/{postuuid}"
     }, conn);
 });

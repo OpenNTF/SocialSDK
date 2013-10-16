@@ -34,6 +34,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
+import com.ibm.commons.runtime.mime.MIME;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.StreamUtil;
 import com.ibm.sbt.services.client.base.BaseService;
@@ -53,6 +54,7 @@ import com.ibm.sbt.services.client.connections.files.transformers.FolderTransfor
 import com.ibm.sbt.services.client.connections.files.transformers.ModerationTransformer;
 import com.ibm.sbt.services.client.connections.files.transformers.MultipleFileTransformer;
 import com.ibm.sbt.services.client.connections.files.util.Messages;
+import com.ibm.sbt.services.client.ClientService.Content;
 import com.ibm.sbt.services.client.ClientService.ContentStream;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
@@ -2814,10 +2816,12 @@ public class FileService extends BaseService {
         String resultType = ResultType.ENTRY.getResultType();
         String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
                 null, subFilters, resultType); // we pass null value for non applicable types.
-        ContentStream contentFile = new ContentStream(iStream, title);
+        Content contentFile = getContentObject(title, iStream);
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("X-Update-Nonce", getNonce()); // required if the content type is text/plain
         try {
             //TODO: check get data wrapping
-            Response result = (Response) this.updateData(requestUri, params, contentFile, null);
+            Response result = (Response) this.updateData(requestUri, params, headers, contentFile, null);
             return (File) new FileFeedHandler(this).createEntity(result);
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInUpdate);
@@ -2860,9 +2864,11 @@ public class FileService extends BaseService {
         String resultType = ResultType.ENTRY.getResultType();
 		String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
                 null, subFilters, resultType); 
-        ContentStream contentFile = new ContentStream(iStream, title);
+		ContentStream contentFile = (ContentStream) getContentObject(title, iStream);
+		Map<String, String> headers = new HashMap<String, String>();
+        headers.put("X-Update-Nonce", getNonce()); // required if the content type is text/plain
         try {
-            return uploadNewVersion(requestUri, contentFile, params, null);
+            return uploadNewVersion(requestUri, contentFile, params, headers);
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInUpload);
         }
@@ -2879,7 +2885,7 @@ public class FileService extends BaseService {
      */
     private File uploadNewVersion(String requestUri, ContentStream stream, Map<String, String> params, Map<String, String> headers) throws ClientServicesException, IOException {
     	//TODO: check get data wrapping
-        Response result = (Response) this.updateData(requestUri, params, stream, null);
+        Response result = (Response) this.updateData(requestUri, params, headers, stream, null);
         return (File) new FileFeedHandler(this).createEntity(result);
     }
     
@@ -2899,7 +2905,7 @@ public class FileService extends BaseService {
         if (title == null) {
             throw new FileServiceException(null, "null name");
         }
-        ContentStream contentFile = new ContentStream(iStream, length, title);
+        Content contentFile = getContentObject(title, iStream, length);
 		String accessType = AccessType.AUTHENTICATED.getAccessType();
 		SubFilters subFilters = new SubFilters();
         if (StringUtil.isEmpty(communityId)) {
@@ -2909,9 +2915,11 @@ public class FileService extends BaseService {
         String resultType = ResultType.FEED.getResultType();
 		String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
                 null, subFilters, resultType); 
+		Map<String, String> headers = new HashMap<String, String>();
+        headers.put("X-Update-Nonce", getNonce()); // required if the content type is text/plain
 	    try {
-	    	Response data = (Response) super.createData(requestUri, null, null, contentFile);
-	    	return (File)new FileFeedHandler(new FileService()).createEntity(data);
+	    	Response data = (Response) super.createData(requestUri, null, headers, contentFile);
+	    	return (File)new FileFeedHandler(this).createEntity(data);
 	    } catch (ClientServicesException e) {
 			throw new FileServiceException(e, Messages.MessageExceptionInUpload);
 		} catch (IOException e) {
@@ -3183,7 +3191,7 @@ public class FileService extends BaseService {
         if (title == null) {
             throw new FileServiceException(null, Messages.Invalid_Name);
         }
-        ContentStream contentFile = new ContentStream(stream, length, title);
+        Content contentFile = getContentObject(title, stream, length);
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         String category = Categories.MYLIBRARY.getCategory();
         String resultType = ResultType.FEED.getResultType();
@@ -3191,7 +3199,7 @@ public class FileService extends BaseService {
                 null,
                 null, resultType);
         Map<String, String> headers = new HashMap<String, String>();
-        headers.put("content-type", "application/atom+xml");
+        headers.put("X-Update-Nonce", getNonce()); // required if the content type is text/plain
         try {
             Response data = (Response) super.createData(requestUri, p, headers, contentFile);
            
@@ -3201,6 +3209,24 @@ public class FileService extends BaseService {
         }
     }
 
+    private String getMimeType(String title) {
+    	return MIME.getMIMETypeFromExtension(MIME.getFileExtension(title));
+    }
+    
+    private Content getContentObject(String title, InputStream stream, long length) {
+    	Content contentFile;
+		if(StringUtil.isNotEmpty(getMimeType(title))) {
+			contentFile = new ContentStream(title, stream, length, getMimeType(title));
+		} else {
+			contentFile = new ContentStream(stream, length, title);
+		}
+		return contentFile; 
+    }
+    
+    private Content getContentObject(String title, InputStream stream) {
+    	return getContentObject(title, stream, -1);
+    }
+    
     /**
      * constructPayload
      * <p>

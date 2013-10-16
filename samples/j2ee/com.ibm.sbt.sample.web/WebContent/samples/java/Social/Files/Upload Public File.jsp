@@ -30,7 +30,7 @@
   pageEncoding="ISO-8859-1"%>
 <html>
 <head>
-<title>SBT JAVA Sample - Add Community Member</title>
+<title>SBT JAVA Sample - Upload File</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 

@@ -48,6 +48,7 @@ import com.ibm.sbt.service.core.handlers.AuthCredsHandler;
 import com.ibm.sbt.service.core.servlet.ServiceServlet;
 import com.ibm.sbt.service.debug.ProxyDebugUtil;
 import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.endpoints.js.JSReference;
 import com.ibm.sbt.services.util.SSLUtil;
 
 /**
@@ -274,4 +275,17 @@ public abstract class FormEndpoint extends AbstractEndpoint {
 		}
 		return proxyinfo;
 	}
+	
+    @Override
+    public JSReference getAuthenticator(String endpointName, String sbtUrl) {
+    	JSReference reference = new JSReference("sbt/authenticator/Basic");
+    	reference.getProperties().put("url", sbtUrl);
+    	
+    	return reference;
+    }
+    
+    @Override
+    public String getAuthType() {
+     	return "form";
+    }
 }

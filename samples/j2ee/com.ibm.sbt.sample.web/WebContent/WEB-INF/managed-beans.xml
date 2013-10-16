@@ -608,7 +608,7 @@
 		<!-- Endpoint URL -->
 		<managed-property>
 			<property-name>url</property-name>
-			<value>%{twitter.url=https://api.twitter.com}</value>
+			<value>%{name=twitter.url|value=https://api.twitter.com}</value>
 		</managed-property>
 
 		<!-- Trust the connection -->
@@ -633,15 +633,15 @@
 		</managed-property>
 		<managed-property>
 			<property-name>requestTokenURL</property-name>
-			<value>%{twitter.requestTokenURL=https://api.twitter.com/oauth/request_token}</value>
+			<value>%{name=twitter.requestTokenURL|value=https://api.twitter.com/oauth/request_token}</value>
 		</managed-property>
 		<managed-property>
 			<property-name>authorizationURL</property-name>
-			<value>%{twitter.authorizeURL=https://api.twitter.com/oauth/authorize}</value>
+			<value>%{name=twitter.authorizeURL|value=https://api.twitter.com/oauth/authorize}</value>
 		</managed-property>
 		<managed-property>
 			<property-name>accessTokenURL</property-name>
-			<value>%{twitter.accessTokenURL=https://api.twitter.com/oauth/access_token}</value>
+			<value>%{name=twitter.accessTokenURL|value=https://api.twitter.com/oauth/access_token}</value>
 		</managed-property>		
 		<managed-property>
 			<property-name>signatureMethod</property-name>
@@ -673,7 +673,7 @@
 		<!-- Endpoint URL -->
 		<managed-property>
 			<property-name>url</property-name>
-			<value>%{dropbox.url=https://api.dropbox.com}</value>
+			<value>%{name=dropbox.url|value=https://api.dropbox.com}</value>
 		</managed-property>
 
 		<!-- Trust the connection -->
@@ -691,15 +691,15 @@
 		</managed-property>
 		<managed-property>
 			<property-name>requestTokenURL</property-name>
-			<value>%{dropbox.requestTokenURL=https://api.dropbox.com/1/oauth/request_token}</value>
+			<value>%{name=dropbox.requestTokenURL|value=https://api.dropbox.com/1/oauth/request_token}</value>
 		</managed-property>
 		<managed-property>
 			<property-name>authorizationURL</property-name>
-			<value>%{dropbox.authorizeURL=https://www.dropbox.com/1/oauth/authorize}</value>
+			<value>%{name=dropbox.authorizeURL|value=https://www.dropbox.com/1/oauth/authorize}</value>
 		</managed-property>
 		<managed-property>
 			<property-name>accessTokenURL</property-name>
-			<value>%{dropbox.accessTokenURL=https://api.dropbox.com/1/oauth/access_token}</value>
+			<value>%{name=dropbox.accessTokenURL|value=https://api.dropbox.com/1/oauth/access_token}</value>
 		</managed-property>		
 		<managed-property>
 			<property-name>signatureMethod</property-name>

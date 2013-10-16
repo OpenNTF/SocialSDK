@@ -441,7 +441,15 @@ define([ "../../declare", "../../dom", "../../lang", "../../widget/grid/_GridRen
                     }
                 }
             }
-        }
+        },
+        
+        getProfileUrl: function(grid,id){
+        	var endpoint = grid.store.getEndpoint();
+        	var profileURL = "/${profiles}/html/profileView.do?userid="+id;
+        	profileURL = grid.constructUrl(profileURL,{},{},endpoint);
+        	profileURL = endpoint.baseUrl+profileURL;
+        	return profileURL;
+        },
         
     });
     

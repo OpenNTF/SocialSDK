@@ -180,9 +180,12 @@ define(["../../../declare", "../../../stringUtil", "../../../i18n", "../../../la
                  }
                  return tagsStr;
              }
-         }
+         },
          
-         // Internals
+         getUserProfileHref: function(grid,item,i,items){
+        	 return this.getProfileUrl(grid,item.getValue("authorUserid"));
+         }
+
          
     });
     

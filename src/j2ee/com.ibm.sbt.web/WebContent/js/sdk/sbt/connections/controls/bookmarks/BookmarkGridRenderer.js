@@ -81,6 +81,10 @@ define(["../../../declare", "../../../i18n",
 	                 }
 	                 return tagsStr;
 	             }
+	         },
+	         
+	         getUserProfileHref: function(grid,item,i,items){
+	        	 return this.getProfileUrl(grid,item.getValue("authorId"));
 	         }
 			
 		});

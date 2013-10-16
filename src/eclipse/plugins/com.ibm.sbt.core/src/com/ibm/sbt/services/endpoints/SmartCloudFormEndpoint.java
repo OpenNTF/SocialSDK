@@ -63,4 +63,9 @@ public class SmartCloudFormEndpoint extends FormEndpoint {
 	public ClientService getClientService() throws ClientServicesException {
     	return new SmartCloudService(this);
     }
+    
+    @Override
+    public String getAuthType() {
+     	return "form"; 
+    }
 }

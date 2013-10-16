@@ -189,6 +189,15 @@ var Endpoint = declare(null, {
 
 		var self = this;
 		this.transport.request(qurl, options).response.then(function(response) {
+			
+			// Check for form based authentication
+			if(self.authType == "form"){
+				var authRequiredFlag = self._isAuthRequiredFormBasedEP(response, options);
+					if(authRequiredFlag){
+						self._authenticate(url, options, promise);
+					}
+			}
+			
 			promise.fulfilled(response.data);
 			promise.response.fulfilled(response);
 		}, function(error) {
@@ -570,6 +579,18 @@ var Endpoint = declare(null, {
 		}
 		return promise;
 	},
+	
+	/*
+	 * Method ensures we trigger authentication for Smartcloud when response code is 200 and content is login page
+	 */
+	_isAuthRequiredFormBasedEP : function (response, options){
+		if(response.status == 200 && response.getHeader("Content-Type") == "text/html"){
+			return true;
+		}else{
+			return false;
+		}
+	},
+	
     getErrorMessage: function(error) {    	
         var text = error.responseText || (error.response&&error.response.text) ;
         if (text) {

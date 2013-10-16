@@ -43,7 +43,7 @@
 		ForumList forums = service.getMyForums();
 		String forumId = ((Forum)forums.get(0)).getForumUuid();
 		
-		ForumTopic topic = new ForumTopic(service, "");
+		ForumTopic topic = new ForumTopic(service);
 		topic.setTitle("Dummy Topic" + System.currentTimeMillis());
 		topic.setContent("Dummy Topic Content");
 		topic.setForumUuid(forumId);

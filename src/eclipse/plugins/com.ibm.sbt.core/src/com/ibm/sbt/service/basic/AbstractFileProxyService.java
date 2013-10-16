@@ -121,7 +121,7 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 						InputStream uploadedFileContent = uploadedFile.getInputStream();
 						File file = convertInputStreamToFile(uploadedFileContent, uploadedFile.getSize());
 						Map<String, String[]> params = request.getParameterMap() != null ? request.getParameterMap() : new HashMap<String, String[]>();
-						Content content = getFileContent(file, length, parameters.get("FileName"));
+						Content content = getFileContent(file, uploadedFile.getContentType());
 						Map<String, String> headers = createHeaders();
 
 						xhr(request, response, url.getPath(), params, headers, content, getFormat());
@@ -177,7 +177,7 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 
 	protected abstract Map<String, String> createHeaders();
 
-	protected abstract Content getFileContent(File file, long length, String name);
+	protected abstract Content getFileContent(File file, String contentType);
 
 	private boolean addParameter(StringBuilder b, boolean first, String name, String value) throws ClientServicesException {
 		try {
@@ -263,6 +263,7 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 		if (content != null) {
 			content.initRequestContent(httpClient, method, args);
 		}
+		endpoint.updateHeaders(httpClient, method);
 		HttpResponse clientResponse = httpClient.execute(method);
 
 		if ("get".equalsIgnoreCase(smethod) && (clientResponse.getStatusLine().getStatusCode() == HttpServletResponse.SC_UNAUTHORIZED)

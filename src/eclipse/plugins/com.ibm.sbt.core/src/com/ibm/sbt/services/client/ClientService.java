@@ -1090,11 +1090,11 @@ public abstract class ClientService {
 			return null;
 		}
 		
-		if ((httpResponse.getStatusLine().getStatusCode() == HttpServletResponse.SC_UNAUTHORIZED) || 
+/*		if ((httpResponse.getStatusLine().getStatusCode() == HttpServletResponse.SC_UNAUTHORIZED) || 
 			(endpoint != null && endpoint.getAuthenticationErrorCode() == statusCode)) {
 			forceAuthentication(args);
 			return null;
-		}
+		}*/
 		
 		Handler format = findHandler(httpRequestBase, httpResponse, args.handler);
 		

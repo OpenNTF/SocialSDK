@@ -24,7 +24,7 @@ public enum AuthUtil {
 	
 	public final String OAUTH 		= "oauth";
 	public final String BASIC 		= "basic";
-	
+	public final String FORM 		= "form"; 
 
 	/*
 	 * @param endpoint
@@ -49,6 +49,8 @@ public enum AuthUtil {
 			authValue = OAUTH;
 		} else if (authType.equalsIgnoreCase("basic")) {
 			authValue = BASIC;
+		} else if (authType.equalsIgnoreCase("form")) {
+			authValue = FORM;
 		}
 		return authValue;
 

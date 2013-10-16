@@ -25,6 +25,7 @@
 <%@page import="com.ibm.sbt.services.client.connections.forums.ForumList"%>
 <%@page import="com.ibm.sbt.services.client.connections.forums.TopicList"%>
 <%@page import="com.ibm.sbt.services.client.connections.forums.ReplyList"%>
+<%@page import="com.ibm.sbt.services.client.connections.forums.ForumReply"%>
 <%@page import="java.util.*"%>
 
 				
@@ -50,10 +51,11 @@
 				ReplyList replies = svc.getForumReplies(topic.getTopicUuid());
 				if(replies.size()>0){
 					for (BaseForumEntity reply : replies) {
-						out.println("reply title : "+reply.getTitle());
+						out.println("reply title : "+reply.getTitle()+"<br>");
+						out.println("replied on Post with Id : "+((ForumReply)reply).getReplyToPostUuid()+"<br>");
 						out.println("<br><br>");
 					}
-				}
+				} 
 				else
 					out.println("no reply found in topic");
 			}else

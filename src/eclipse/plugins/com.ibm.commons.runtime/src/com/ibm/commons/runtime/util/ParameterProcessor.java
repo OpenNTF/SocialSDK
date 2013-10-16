@@ -36,6 +36,7 @@ public class ParameterProcessor {
     
     static final String DELIM_START = "%{"; //$NON-NLS-1$
     static final String DELIM_END   = "}"; //$NON-NLS-1$
+    static final Pattern PARAMETER_PATTERN = Pattern.compile("%\\{(.*?)\\}");
     
     static ParameterProvider defaultProvider;
 
@@ -65,15 +66,17 @@ public class ParameterProcessor {
     }
     
     public static List<String> getParameters(String input){
-        Pattern paramsPattern = Pattern.compile("%\\{(.*?)\\}");
-        Matcher paramsMatcher = paramsPattern.matcher(input);
+        Matcher paramsMatcher = PARAMETER_PATTERN.matcher(input);
         ArrayList<String> result = new ArrayList<String>();
         while(paramsMatcher.find()){
             result.add(paramsMatcher.group(1));
         }
         return result;
     }
-    
+    /*
+     * The default provider. Checks the Context and Application for parameter values.
+     * @return
+     */
     public static ParameterProvider getDefaultProvider(){
         if(defaultProvider != null)
             return defaultProvider;
@@ -81,8 +84,7 @@ public class ParameterProcessor {
         final Application application = Application.getUnchecked();
         defaultProvider = new ParameterProvider() {
             @Override
-            public String getParameter(String parameter) {
-                String name = ParameterProcessor.getParameterPart(parameter, "name");
+            public String getParameter(String name) {
                 if (context != null) {
                     return context.getProperty(name);
                 }
@@ -91,22 +93,18 @@ public class ParameterProcessor {
         };
         return defaultProvider;
     }
-    
+    /*
+     * A provider which will get values from the HttpRequest, and store values in the HttpSession.
+     * @param finalRequest
+     * @param finalSession
+     * @param finalSnippetName
+     * @return
+     */
     public static ParameterProvider getWebProvider(final HttpServletRequest finalRequest, final HttpSession finalSession, final String finalSnippetName){
         return ParameterProcessor.getDefaultProvider(new ParameterProvider() {
               @Override
-            public String getParameter(String parameter) {
-                  String name = ParameterProcessor.getParameterPart(parameter, "label"); 
-                  String value = null;
-                  if(name != null){
-                      value = finalRequest.getParameter(name);
-                  } else {
-                      name = ParameterProcessor.getParameterPart(parameter, "name");
-                  }
-                  
-                  if(value == null){ // for backwards compatibility with non-labelled params...
-                      value = finalRequest.getParameter(name);
-                  }
+            public String getParameter(String name) {
+                  String value = finalRequest.getParameter(name);
                   
                   String storeKey = finalSnippetName + "_" + name; // store per snippet
                   
@@ -114,12 +112,8 @@ public class ParameterProcessor {
                       value = (String) finalSession.getAttribute(storeKey); //check if there is a stored param
                   }
                   
-                  if(value == null){
-                      value = ParameterProcessor.getParameterPart(parameter, "value"); // check if a default value was specified.
-                  }
-                  
                   if (value != null){
-                      finalSession.setAttribute(storeKey, value);
+                      finalSession.setAttribute(storeKey, value); //store the param
                   }
                   
                   return value;
@@ -128,6 +122,11 @@ public class ParameterProcessor {
         
     }
 
+    /*
+     * Use this to use the defaultProvider as backup to your own. If the provider given as argument fails to find a parameter value, the defaultProvider will try.
+     * @param provider
+     * @return
+     */
     public static ParameterProvider getDefaultProvider(final ParameterProvider provider){
         final ParameterProvider defaultProvider = getDefaultProvider();
         ParameterProvider result = new ParameterProvider() {
@@ -274,21 +273,28 @@ public class ParameterProcessor {
 
     /*
      * Process a parameter with one of the following formats:
-     *      name[=value]
+     *      name
      *      name=xxx[|value=xxx][|label=xxx][|idHelpSnippet=snippet_id][|required=boolean]
      */
-    private static String processParameter(String name, ParameterProvider provider) {
-        if(name.contains("|") || name.contains("=")){
-            return provider.getParameter(name);
+    private static String processParameter(String parameter, ParameterProvider provider) {
+        if(parameter.contains("|") || parameter.contains("=")){
+            String name = ParameterProcessor.getParameterPart(parameter, "label"); 
+            if(name == null){
+                name = ParameterProcessor.getParameterPart(parameter, "name");
+            }
+            String defaultValue = ParameterProcessor.getParameterPart(parameter, "value"); // the parameter may have a default value
+            String providerValue = provider.getParameter(name);
+            
+            return providerValue != null ? providerValue : defaultValue;
         }
         else{
-            return provider.getParameter(name);
+            return provider.getParameter(parameter); // just pass whole parameter, should look like %{name}
         }
     }
     
     /**
      * Gets the specified part out of a parameter of format
-     *    name[=value][|label=xxx][|idHelpSnippet=snippet_id][|required]
+     *    name=xxx[|value=xxx][|label=xxx][|idHelpSnippet=snippet_id][|required]
      *    
      *    If a part is followed by '=' then the part after '=' is returned, else it just returns the part.
      *    Here the parameter is already split into name=value sections.

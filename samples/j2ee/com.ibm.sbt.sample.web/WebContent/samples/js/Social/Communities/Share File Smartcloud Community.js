@@ -28,7 +28,7 @@ require(["sbt/connections/FileService",
 		communityService.getMyCommunities().then(
 	            function(communities) {
 	                if (communities.length == 0) {
-	                    text = "You are not a member of any communities.";
+	                    dom.byId("community").innerHTML = "You are not a member of any communities.";
 	                } else {
 	                	var commList = document.getElementById("commList");
 	                    for(var i=0; i<communities.length; i++){
@@ -62,6 +62,17 @@ require(["sbt/connections/FileService",
 		// Set action listener for the file sharing button in the modal dialog
 		var btnShareFile = dom.byId("shareFile");
 		btnShareFile.onclick = function(evt) {
+	       // Display first part of sharing dialog
+            var download = document.getElementById("download");
+            download.style.display = "block";
+            
+            var footer = document.getElementById("dialogFooter");
+            footer.style.display = "block";
+			
+			// Hide wait message
+            var msg = document.getElementById("confirmationMessage");
+            msg.style.display = "none";
+			
 			// Share file
 			var smartCloudFileService = new FileService({
 				endpoint: config.findEndpoint("smartcloud")
@@ -70,8 +81,32 @@ require(["sbt/connections/FileService",
 			// Download file
 			fileToShare.download();
 			
-//			smartCloudFileService.shareFileWithCommunities(fileId, selectedSmartCloudCommunityUuid, {});
-//			shareFileWithCommunities : function(fileId, communityIds, args)
+			// Hide sharing dialog
+			download.style.display = "none";
+            footer.style.display = "none";
+			
+			 // Display upload dialog
+            var msg = document.getElementById("upload");
+            msg.style.display = "block";
+			
+			// "your-files" is the ID of the HTML5 File Control. Refer to Upload File.html
+            smartCloudFileService.uploadFile("your-files", {
+				// additional parameters to add file metadata			
+				visibility : "public"
+			}).then(function(file) {
+				alert("TEST!!!");
+	            // Display success message
+	            var msg = document.getElementById("confirmationMessage");
+	            msg.style.display = "block";
+//	            file.getFileId();
+//	            shareFileWithCommunities : function(fileId, communityIds, args) 
+				
+			}, function(error) {
+				// TODO remove alert
+				alert(error);
+//				handleError(dom, error);
+//				dom.byId("loading").style.visibility = "hidden";
+			});
 			
 			// Close dialog box
 			closeDialog();

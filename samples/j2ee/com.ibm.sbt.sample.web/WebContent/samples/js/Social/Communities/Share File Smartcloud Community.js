@@ -91,15 +91,17 @@ require(["sbt/connections/FileService",
             msg.style.display = "block";
 		};
 	
-        var createRow = function(i) {
+        var createRow = function(i, file) {
             var table = dom.byId("filesTable");
             var tr = document.createElement("tr");
             table.appendChild(tr);
             var td = document.createElement("td");
             td.setAttribute("id", "title"+i);
+            td.innerHTML = file.getTitle();
             tr.appendChild(td);
             td = document.createElement("td");
             td.setAttribute("id", "id"+i);
+            td.innerHTML = file.getFileId();
             tr.appendChild(td);
             td = document.createElement("td");
             td.setAttribute("id", "action"+i);
@@ -114,9 +116,8 @@ require(["sbt/connections/FileService",
                 } else {
                     for(var i=0; i<files.length; i++){
                         var file = files[i];
-                        createRow(i);
-                        dom.setText("title"+i, file.getTitle()); 
-                        dom.setText("id"+i, file.getFileId()); 
+                        createRow(i, file);
+                
                         var action = dom.byId("action"+i);
                         action.innerHTML = "<input id=\"btnShare" + i + "\" value=\"Share\" class=\"btn btn-primary\" type=\"submit\">";
                         var btnShare = dom.byId("btnShare" + i);

@@ -14,49 +14,46 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@page import="com.ibm.sbt.services.client.connections.communities.CommunityList"%>
+<%@page import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
 <%@page import="com.ibm.sbt.services.client.connections.forums.ForumTopic"%>
-<%@page import="com.ibm.sbt.services.client.connections.forums.ForumReply"%>
 <%@page import="com.ibm.sbt.services.client.connections.forums.ForumService"%>
 <%@page import="com.ibm.sbt.services.client.connections.forums.ForumList"%>
 <%@page import="com.ibm.sbt.services.client.connections.forums.Forum"%>
 <%@page import="java.util.Collection"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
-<%@page import="com.ibm.sbt.services.client.connections.forums.TopicList"%>
-<%@page import="com.ibm.sbt.services.client.connections.forums.ReplyList"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
-<%@page 
-	language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@page language="java" contentType="text/html; charset=ISO-8859-1"	pageEncoding="ISO-8859-1"%>
 <html>
 <head>
-	<title>SBT JAVA Sample - Create Reply</title>
+	<title>SBT JAVA Sample - Create Community Forum Topic</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
 <body>	
-	<h4>Create Reply</h4>
 	<div id="content">
 	<%
 	try {
-		ForumService service = new ForumService();
-		TopicList topics = service.getMyForumTopics();
-		if(topics.size()>0){
-			String topicId = ((ForumTopic)topics.get(0)).getTopicUuid();
-			ForumReply reply = new ForumReply(service);
-			reply.setTitle("Dummy reply" + System.currentTimeMillis());
-			reply.setContent("Dummy reply Content");
-			reply.setReplyToPostUuid("4bc13d0d-9dc9-4762-a1f1-f5cda41fbd35");
-			
-			reply = reply.save(topicId); 
-			out.println("Reply created with Id : " + reply.getUid() + "for Topic with ID:"+ topicId);
+		
+		CommunityService comService = new CommunityService();
+		CommunityList comList = comService.getMyCommunities();
+		if(comList.size() > 0 ){
+		String communityId = comList.get(0).getCommunityUuid();
+		ForumTopic topic = new ForumTopic(new ForumService(), "");
+		topic.setTitle("Dummy Community based Forum Topic" + System.currentTimeMillis());
+		topic.setContent("Dummy Community based Forum Content");
+		ForumTopic createdTopic = comService.createForumTopic(topic, communityId);
+		out.println("Topic created with Id : " + createdTopic.getTopicUuid() + "for Community with Id :"+communityId +"<br>");
+		out.println("Topic Title : " + createdTopic.getTitle()+"<br>");
+		out.println("Topic Content : " + createdTopic.getContent()+"<br>");
 		}
-		else
-		out.println("No topics exist to reply on");
+		else{
+			out.println("No Community exist to create forum topic");
+		}
 	} catch (Exception e) {
-	
 		out.println("<pre>");
 		out.println(e.getMessage());
 		out.println("</pre>");

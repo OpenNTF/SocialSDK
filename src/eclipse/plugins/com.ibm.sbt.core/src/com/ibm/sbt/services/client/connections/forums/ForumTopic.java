@@ -51,7 +51,15 @@ public class ForumTopic extends BaseForumEntity{
 	public ForumTopic(ForumService forumsService, String id) {
 		super(forumsService,id);
 	}
-
+	/**
+     * Constructor
+     *
+     * @param ForumService
+     * @param id
+     */
+    public ForumTopic(ForumService forumsService) {
+            super(forumsService);
+    }
 	/**
 	 * This method returns Uuid of topic
 	 * 

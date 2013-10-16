@@ -45,9 +45,11 @@
 		TopicList topics = service.getMyForumTopics();
 		if(topics.size()>0){
 			String topicId = ((ForumTopic)topics.get(0)).getTopicUuid();
-			ForumReply reply = new ForumReply(service, "");
+			ForumReply reply = new ForumReply(service);
 			reply.setTitle("Dummy reply" + System.currentTimeMillis());
 			reply.setContent("Dummy reply Content");
+			reply.setReplyToPostUuid("4bc13d0d-9dc9-4762-a1f1-f5cda41fbd35");
+			
 			reply = reply.save(topicId); 
 			out.println("Reply created with Id : " + reply.getUid() + "for Topic with ID:"+ topicId);
 		}

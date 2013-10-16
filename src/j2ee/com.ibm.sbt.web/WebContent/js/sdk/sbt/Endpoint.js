@@ -591,17 +591,6 @@ var Endpoint = declare(null, {
 		}
 	},
 	
-	/*
-	 * Check for ensuring we trigger authentication when 200 is response code and content is login page
-	 */
-	_isAuthRequiredFormBasedEP : function (response, options){
-		if(response.status == 200 && response.getHeader("Content-Type") == "text/html"){
-			return true;
-		}else{
-			return false;
-		}
-	},
-	
     getErrorMessage: function(error) {    	
         var text = error.responseText || (error.response&&error.response.text) ;
         if (text) {

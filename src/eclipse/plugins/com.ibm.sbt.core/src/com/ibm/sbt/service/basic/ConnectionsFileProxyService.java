@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.ServletException;
 
+import com.ibm.commons.runtime.mime.MIME;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientService.Content;
@@ -29,12 +30,13 @@ public class ConnectionsFileProxyService extends AbstractFileProxyService {
 	public static final String FILEPROXYNAME = "connections";
 	
 	@Override
-	protected Content getFileContent(File file, long length, String contentType) {
-		Content content;
-		content = new ContentFile(file, contentType);
+	protected Content getFileContent(File file, long length, String fileName) {
+		String fileExt = MIME.getFileExtension(fileName);
+		String contentType = MIME.getMIMETypeFromExtension(fileExt);
+		contentType = (StringUtil.isEmpty(contentType)) ? MIMETYPE_DEFAULT : contentType;
+		Content content = new ContentFile(file, contentType);
 		return content;
 	}
-
 
 	@Override
 	protected String getRequestURI(String method, String authType, Map<String, String[]> params) throws ServletException {

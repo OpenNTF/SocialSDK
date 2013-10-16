@@ -32,6 +32,7 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientService.Args;
 import com.ibm.sbt.services.client.ClientService.Content;
+import com.ibm.sbt.services.client.ClientService.ContentFile;
 import com.ibm.sbt.services.client.ClientService.Handler;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.endpoints.Endpoint;
@@ -68,6 +69,9 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 	protected String method = null;
 
 	private Long length = 0L;
+	
+	protected static String MIMETYPE_DEFAULT = "application/octet-stream";
+	protected static String MIMETYPE_UNKNOWN = "unknown/unknown";
 
 	protected abstract String getRequestURI(String smethod, String authType, Map<String, String[]> params) throws ServletException;
 
@@ -118,7 +122,14 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 						InputStream uploadedFileContent = uploadedFile.getInputStream();
 						File file = convertInputStreamToFile(uploadedFileContent, uploadedFile.getSize());
 						Map<String, String[]> params = request.getParameterMap() != null ? request.getParameterMap() : new HashMap<String, String[]>();
-						Content content = getFileContent(file,  length, uploadedFile.getContentType());
+						
+						String contentType = uploadedFile.getContentType();
+						Content content = null;
+						if (StringUtil.isEmpty(contentType) || MIMETYPE_UNKNOWN.equalsIgnoreCase(contentType)) {
+							content = getFileContent(file, length, parameters.get("FileName"));
+						} else {
+							content = new ContentFile(file, contentType);
+						}
 						
 						Map<String, String> headers = createHeaders();
 
@@ -171,7 +182,7 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 
 	protected abstract Map<String, String> createHeaders();
 
-	protected abstract Content getFileContent(File file, long length, String contentType);
+	protected abstract Content getFileContent(File file, long length, String name);
 
 	private boolean addParameter(StringBuilder b, boolean first, String name, String value) throws ClientServicesException {
 		try {

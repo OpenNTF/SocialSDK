@@ -2818,7 +2818,7 @@ public class FileService extends BaseService {
                 null, subFilters, resultType); // we pass null value for non applicable types.
         Content contentFile = getContentObject(title, iStream);
         Map<String, String> headers = new HashMap<String, String>();
-        headers.put("X-Update-Nonce", getNonce()); // required if the content type is text/plain
+        headers.put("X-Update-Nonce", getNonce()); // It is not clearly documented which Content Type requires Nonce, thus adding nonce in header for all upload requests. 
         try {
             //TODO: check get data wrapping
             Response result = (Response) this.updateData(requestUri, params, headers, contentFile, null);
@@ -2866,7 +2866,7 @@ public class FileService extends BaseService {
                 null, subFilters, resultType); 
 		ContentStream contentFile = (ContentStream) getContentObject(title, iStream);
 		Map<String, String> headers = new HashMap<String, String>();
-        headers.put("X-Update-Nonce", getNonce()); // required if the content type is text/plain
+        headers.put("X-Update-Nonce", getNonce()); // It is not clearly documented which Content Type requires Nonce, thus adding nonce in header for all upload requests. 
         try {
             return uploadNewVersion(requestUri, contentFile, params, headers);
         } catch (Exception e) {
@@ -2916,7 +2916,7 @@ public class FileService extends BaseService {
 		String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
                 null, subFilters, resultType); 
 		Map<String, String> headers = new HashMap<String, String>();
-        headers.put("X-Update-Nonce", getNonce()); // required if the content type is text/plain
+        headers.put("X-Update-Nonce", getNonce()); // It is not clearly documented which Content Type requires Nonce, thus adding nonce in header for all upload requests. 
 	    try {
 	    	Response data = (Response) super.createData(requestUri, null, headers, contentFile);
 	    	return (File)new FileFeedHandler(this).createEntity(data);
@@ -3199,7 +3199,7 @@ public class FileService extends BaseService {
                 null,
                 null, resultType);
         Map<String, String> headers = new HashMap<String, String>();
-        headers.put("X-Update-Nonce", getNonce()); // required if the content type is text/plain
+        headers.put("X-Update-Nonce", getNonce()); // It is not clearly documented which Content Type requires Nonce, thus adding nonce in header for all upload requests. 
         try {
             Response data = (Response) super.createData(requestUri, p, headers, contentFile);
            

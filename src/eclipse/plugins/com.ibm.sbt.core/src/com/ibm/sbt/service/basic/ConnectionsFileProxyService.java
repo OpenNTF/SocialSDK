@@ -27,13 +27,14 @@ public class ConnectionsFileProxyService extends AbstractFileProxyService {
 	private static final String X_UPDATE_NONCE = "x-update-nonce";
 
 	public static final String FILEPROXYNAME = "connections";
-
+	
 	@Override
-	protected Content getFileContent(File file, String contentType) {
+	protected Content getFileContent(File file, long length, String contentType) {
 		Content content;
 		content = new ContentFile(file, contentType);
 		return content;
 	}
+
 
 	@Override
 	protected String getRequestURI(String method, String authType, Map<String, String[]> params) throws ServletException {
@@ -48,17 +49,21 @@ public class ConnectionsFileProxyService extends AbstractFileProxyService {
 			profileUrl.append("/").append("photo.do");
 			return profileUrl.toString();
 		} else if ("PUT".equalsIgnoreCase(method) && Operations.UPLOAD_NEW_VERSION.toString().equals(operation)) {
-			return StringUtil.format(UPDATE_URL, parameters.get("FileId"));
+			String fileId = parameters.get("FileId");
+			if (fileId == null) {
+				throw new ServletException("File ID is required in URL for upload new version.");
+			}
+			return StringUtil.format(UPDATE_URL,fileId);
 		} else if ("GET".equalsIgnoreCase(method)) {
-			String fileName = parameters.get("FileName");
+			String fileId = parameters.get("FileId");
 			String libraryId = parameters.get("LibraryId");
-			if (fileName == null) {
+			if (fileId == null) {
 				throw new ServletException("File ID is required in URL for download.");
 			}
 			if (libraryId == null) {
 				throw new ServletException("Library ID is required in URL for download");
 			}
-			return StringUtil.format(DOWNLOAD_URL, libraryId, fileName);
+			return StringUtil.format(DOWNLOAD_URL, libraryId, fileId);
 		}
 		return null;
 	}

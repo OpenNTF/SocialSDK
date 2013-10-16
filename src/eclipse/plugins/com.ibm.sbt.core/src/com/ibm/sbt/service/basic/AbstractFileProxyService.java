@@ -95,10 +95,7 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 	protected abstract void getParameters(String[] tokens) throws ServletException;
 
 	@Override
-	public void serviceProxy(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		InputStream inputStream = request.getInputStream();
-		request.getHeaderNames(); // ("Content-Type");
-		OutputStream out = null;
+	public void serviceProxy(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {			
 		try {
 			initProxy(request, response);
 			String smethod = request.getMethod();
@@ -121,7 +118,8 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 						InputStream uploadedFileContent = uploadedFile.getInputStream();
 						File file = convertInputStreamToFile(uploadedFileContent, uploadedFile.getSize());
 						Map<String, String[]> params = request.getParameterMap() != null ? request.getParameterMap() : new HashMap<String, String[]>();
-						Content content = getFileContent(file, uploadedFile.getContentType());
+						Content content = getFileContent(file,  length, uploadedFile.getContentType());
+						
 						Map<String, String> headers = createHeaders();
 
 						xhr(request, response, url.getPath(), params, headers, content, getFormat());
@@ -138,11 +136,7 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 				writeErrorResponse("Unexpected Exception", new String[] { "exception" }, new String[] { e.toString() }, response, request);
 			}
 		} finally {
-			termProxy(request, response);
-			inputStream.close();
-			if (out != null) {
-				out.close();
-			}
+			termProxy(request, response);				
 		}
 	}
 
@@ -177,7 +171,7 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 
 	protected abstract Map<String, String> createHeaders();
 
-	protected abstract Content getFileContent(File file, String contentType);
+	protected abstract Content getFileContent(File file, long length, String contentType);
 
 	private boolean addParameter(StringBuilder b, boolean first, String name, String value) throws ClientServicesException {
 		try {

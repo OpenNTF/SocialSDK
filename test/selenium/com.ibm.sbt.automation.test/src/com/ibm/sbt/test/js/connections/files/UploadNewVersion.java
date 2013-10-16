@@ -79,16 +79,17 @@ public class UploadNewVersion extends BaseFilesTest {
 		}
 	}
 
+	@Override
+	protected boolean isEnvironmentValid() {
+		// Disabling for Dojo 1.4.3 which does not support FormData
+		if (environment.isLibrary("dojo") && !environment.isLibraryVersionGreatherThan("160")) return false;
+		//disabling for smartcloud
+		if (environment.isSmartCloud()) return false;
+		return super.isEnvironmentValid() ;
+	}
+	
 	@Test
 	public void testUpdateFile() {
-		// Disabling for Dojo 1.4.3 which does not support FormData
-        String jsLib = System.getProperty(TestEnvironment.PROP_JAVASCRIPT_LIB);
-        if (StringUtil.isEmpty(jsLib)) {
-            jsLib = environment.getProperty(TestEnvironment.PROP_JAVASCRIPT_LIB);
-        }
-        if("dojo143".equalsIgnoreCase(jsLib)){
-        	return;
-        }
 		UpdateFilePage crudPage = launchSnippet();
 		boolean updated = crudPage.uploadNewVersion();
 		Assert.assertTrue("Unable to update the file", updated);		

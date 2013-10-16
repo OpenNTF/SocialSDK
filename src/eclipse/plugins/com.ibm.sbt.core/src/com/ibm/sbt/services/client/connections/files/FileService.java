@@ -3209,10 +3209,24 @@ public class FileService extends BaseService {
         }
     }
 
+    /**
+     * Method to get the MIME type of the file to be uploaded, from the extension of the file
+     * @param title
+     * @return String 
+     */
     private String getMimeType(String title) {
     	return MIME.getMIMETypeFromExtension(MIME.getFileExtension(title));
     }
     
+    /**
+     * Method to create the content object based on the mime type. 
+     * Content type is set using the getMimeType method. In case the mime type cannot be found from the extension, 
+     * then default mime type is set by ClientService , which is "binary/octet-stream"
+     * @param title
+     * @param stream
+     * @param length
+     * @return Content
+     */
     private Content getContentObject(String title, InputStream stream, long length) {
     	Content contentFile;
 		if(StringUtil.isNotEmpty(getMimeType(title))) {
@@ -3223,6 +3237,14 @@ public class FileService extends BaseService {
 		return contentFile; 
     }
     
+    /**
+     * Method to create the content object based on the mime type. 
+     * Content type is set using the getMimeType method. In case the mime type cannot be found from the extension, 
+     * then default mime type is set by ClientService , which is "binary/octet-stream"
+     * @param title
+     * @param stream
+     * @return Content
+     */
     private Content getContentObject(String title, InputStream stream) {
     	return getContentObject(title, stream, -1);
     }

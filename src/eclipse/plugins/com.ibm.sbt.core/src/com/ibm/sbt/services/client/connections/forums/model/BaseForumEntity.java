@@ -51,15 +51,30 @@ public class BaseForumEntity extends BaseEntity {
 		setService(forumsService);
 		setAsString(ForumsXPath.uid, id);
 	}
+	/**
+     * Constructor
+     *
+     * @param ForumService
+     */
+    public BaseForumEntity(ForumService forumsService) {
+            setService(forumsService);
+    }
 
 	public BaseForumEntity(BaseService svc, DataHandler<?> handler) {
 		super(svc,handler);
 	}
-
+	/**
+    * To get Uuid of Forum Entity
+	*
+	* @method getUid
+	* @return String
+	*/ 
 	public String getUid(){
 		String id = getAsString(ForumsXPath.uid);
-		if(StringUtil.startsWithIgnoreCase(id, FORUMID)){
-			id = id.substring(FORUMID.length());
+		if(StringUtil.isNotEmpty(id)){
+			if(StringUtil.startsWithIgnoreCase(id, FORUMID)){
+				id = id.substring(FORUMID.length());
+			}
 		}
 		return id;
 	}

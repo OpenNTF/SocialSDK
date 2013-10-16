@@ -50,8 +50,14 @@
 				ReplyList replies = svc.getForumReplies(topic.getTopicUuid());
 				if(replies.size()>0){
 					ForumReply reply = (ForumReply)replies.iterator().next();
-					ForumReply retrievedReply = svc.getForumReply(reply.getReplyUuid()); 
-					out.println("reply title : "+retrievedReply.getTitle());
+					
+					if(!reply.isDeleted()){
+						ForumReply retrievedReply = svc.getForumReply(reply.getReplyUuid()); 
+						out.println("reply title : "+retrievedReply.getTitle());
+					}
+					else{
+						out.println("reply with Id is deleted : "+reply.getReplyUuid());
+					}
 				}
 				else
 					out.println("no reply found in topic");

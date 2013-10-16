@@ -7,15 +7,12 @@ require(["sbt/connections/FileService",
          "sbt/Endpoint"], 
          
     function(FileService,dom, CommunityService, config, Endpoint) {
-		// TODO: Remove hardcoded ID
-		var communityId = "c57821be-1511-4ba3-8284-cb773513a24b";
-		
+		var communityId = "%{name=sample.communityId|helpSnippetId=Social_Communities_Share_File_Smartcloud_Community}";
+	
 		// Community Service
 		var communityService = new CommunityService({
 			endpoint: config.findEndpoint("smartcloud")
 		});
-		
-		endpoint = config.findEndpoint("smartcloud");
 		
 		// Set action listener for the dropdown box which lists
 		// the user's SmartCloud communities
@@ -43,7 +40,7 @@ require(["sbt/connections/FileService",
 	                }
 	            },
 	            function(error) {
-	                dom.setText("content", "Error code:" +  error.code + ", message:" + error.message);
+	            	handleError(dom, error);
 	            }       
 	    	);
 		
@@ -59,25 +56,31 @@ require(["sbt/connections/FileService",
 			closeDialog();
 		};
 		
+		dom.byId("uploadBtn").onclick = function(evt) {
+			// Share file
+			var smartCloudFileService = new FileService({
+				endpoint : "smartcloud"
+			}); 
+			uploadFile(smartCloudFileService, dom);
+
+			// Close dialog box
+			closeDialog();
+		};
+		
 		// Set action listener for the file sharing button in the modal dialog
 		var btnShareFile = dom.byId("shareFile");
 		btnShareFile.onclick = function(evt) {
-	       // Display first part of sharing dialog
-            var download = document.getElementById("download");
-            download.style.display = "block";
-            
-            var footer = document.getElementById("dialogFooter");
-            footer.style.display = "block";
+	        // Display first part of sharing dialog
+	        var download = document.getElementById("download");
+	        download.style.display = "block";
+	        
+	        var footer = document.getElementById("dialogFooter");
+	        footer.style.display = "block";
 			
 			// Hide wait message
             var msg = document.getElementById("confirmationMessage");
             msg.style.display = "none";
-			
-			// Share file
-			var smartCloudFileService = new FileService({
-				endpoint: config.findEndpoint("smartcloud")
-			});
-			
+
 			// Download file
 			fileToShare.download();
 			
@@ -88,28 +91,6 @@ require(["sbt/connections/FileService",
 			 // Display upload dialog
             var msg = document.getElementById("upload");
             msg.style.display = "block";
-			
-			// "your-files" is the ID of the HTML5 File Control. Refer to Upload File.html
-            smartCloudFileService.uploadFile("your-files", {
-				// additional parameters to add file metadata			
-				visibility : "public"
-			}).then(function(file) {
-				alert("TEST!!!");
-	            // Display success message
-	            var msg = document.getElementById("confirmationMessage");
-	            msg.style.display = "block";
-//	            file.getFileId();
-//	            shareFileWithCommunities : function(fileId, communityIds, args) 
-				
-			}, function(error) {
-				// TODO remove alert
-				alert(error);
-//				handleError(dom, error);
-//				dom.byId("loading").style.visibility = "hidden";
-			});
-			
-			// Close dialog box
-			closeDialog();
 		};
 	
         var createRow = function(i) {
@@ -153,13 +134,57 @@ require(["sbt/connections/FileService",
                 }
             },
             function(error) {
-                dom.setText("content", "Error code:" +  error.code + ", message:" + error.message);
+            	handleError(dom, error);
             }       
     	);
     }
 );
 
+function uploadFile(fileService, dom) {
+	dom.byId("loading").style.visibility = "visible";
+	fileService.uploadFile("your-files", {
+		// additional parameters to add file metadata			
+		visibility : "private"
+	}).then(function(file) {
+
+        // Display success message
+        var msg = document.getElementById("confirmationMessage");
+        msg.style.display = "block";
+        
+		// Share file with SmartCloud community
+        alert(selectedSmartCloudCommunityUuid);
+        fileService.shareFileWithCommunities(file.getFileId(), [selectedSmartCloudCommunityUuid]).then(function(data) {
+        	 dom.byId("loading").style.visibility = "hidden";
+             
+             // Display first part of sharing dialog
+             var download = document.getElementById("download");
+             download.style.display = "block";
+             
+             var footer = document.getElementById("dialogFooter");
+             footer.style.display = "block";
+             
+             var upload = document.getElementById("upload");
+             upload.style.display = "none";
+
+    	}, function(error) {
+    		handleError(dom, error);
+    	});         
+        
+       
+        
+	}, function(error) {
+		// TODO remove alert
+		alert(error);
+//				handleError(dom, error);
+//				dom.byId("loading").style.visibility = "hidden";
+	});
+}
+
 function closeDialog() {
 	var dialog = document.getElementById("shareDialog");
 	dialog.style.display = "none";
+}
+
+function handleError(dom, error) {
+	dom.setText("error", "Error: " + error.message);
 }

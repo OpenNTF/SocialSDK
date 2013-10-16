@@ -8,7 +8,7 @@ require(["sbt/connections/BlogService", "sbt/dom"],
 	        td.innerHTML = post.getTitle();
 	        tr.appendChild(td);
 	        td = document.createElement("td");
-	        td.innerHTML = post.getPostUuid();
+	        td.innerHTML = post.getBlogPostUuid();
 	        tr.appendChild(td);
 	    };
     

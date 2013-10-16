@@ -20,8 +20,8 @@
  * @module sbt.connections.BlogService
  */
 define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", "./BlogConstants", "../base/BaseService",
-         "../base/BaseEntity", "../base/XmlDataHandler" ], 
-    function(declare,config,lang,stringUtil,Promise,consts,BaseService,BaseEntity,XmlDataHandler) {
+         "../base/BaseEntity", "../base/XmlDataHandler",  "../base/Tag"], 
+    function(declare,config,lang,stringUtil,Promise,consts,BaseService,BaseEntity,XmlDataHandler, Tag) {
 	
 	var BlogTmpl = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:app=\"http://www.w3.org/2007/app\"  xmlns:thr=\"http://purl.org/syndication/thread/1.0\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\"><title type=\"text\">${getTitle}</title><snx:timezone>${getTimezone}</snx:timezone><snx:handle>${getHandle}</snx:handle><summary type=\"html\">${getSummary}</summary>${getTags}</entry>";
 	var BlogPostTmpl = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:app=\"http://www.w3.org/2007/app\"  xmlns:thr=\"http://purl.org/syndication/thread/1.0\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\"><title type=\"text\">${getTitle}</title><content type=\"html\">${getContent}</content>${getTags}</entry>";
@@ -75,12 +75,12 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @return {String} ID of the blog
          */
         getBlogUuid : function() {
-        	var blogIdPrefix = "urn:lsid:ibm.com:blogs:blog-";
-        	var blogId = this.getAsString("blogUuid");
-        	if(blogId && blogId.indexOf(blogIdPrefix) != -1){
-            	blogId = blogId.substring(blogIdPrefix.length, blogId.length);
+        	var blogUuidPrefix = "urn:lsid:ibm.com:blogs:blog-";
+        	var blogUuid = this.getAsString("blogUuid");
+        	if(blogUuid && blogUuid.indexOf(blogUuidPrefix) != -1){
+        		blogUuid = blogUuid.substring(blogUuidPrefix.length, blogUuid.length);
         	}
-            return blogId;
+            return blogUuid;
         },
 
         /**
@@ -243,13 +243,13 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
     });
 
     /**
-     * Post class represents a post for a Blogs feed returned by the
+     * BlogPost class represents a post for a Blogs feed returned by the
      * Connections REST API.
      * 
-     * @class Post
+     * @class BlogPost
      * @namespace sbt.connections
      */
-    var Post = declare(BaseEntity, {
+    var BlogPost = declare(BaseEntity, {
 
         /**
          * Construct a Blog Post.
@@ -264,25 +264,25 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * Return the value of IBM Connections blog post ID
          * entry document.
          * 
-         * @method getPostUuid
+         * @method getBlogPostUuid
          * @return {String} ID of the blog post
          */
-        getPostUuid : function() {
-        	var postIdPrefix = "urn:lsid:ibm.com:blogs:entry-";
-        	var postId = this.getAsString("postUuid");
-        	if(postId && postId.indexOf(postIdPrefix) != -1){
-        		postId = postId.substring(postIdPrefix.length, postId.length);
+        getBlogPostUuid : function() {
+        	var postUuidPrefix = "urn:lsid:ibm.com:blogs:entry-";
+        	var postUuid = this.getAsString("postUuid");
+        	if(postUuid && postUuid.indexOf(postUuidPrefix) != -1){
+        		postUuid = postUuid.substring(postUuidPrefix.length, postUuid.length);
         	}
-            return postId;
+            return postUuid;
         },
 
         /**
          * Sets id of IBM Connections blog post Id.
          * 
-         * @method setPostUuid
-         * @param {String} PostUuid of the blog post
+         * @method setBlogPostUuid
+         * @param {String} BlogPostUuid of the blog post
          */
-        setPostUuid : function(postUuid) {
+        setBlogPostUuid : function(postUuid) {
             return this.setAsString("postUuid", postUuid);
         },
 
@@ -485,12 +485,12 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @return {String} comment of the blog post
          */
         getCommentUuid : function() {
-        	var commentIdPrefix = "urn:lsid:ibm.com:blogs:comment-";
-        	var commentId = this.getAsString("commentUuid");
-        	if(commentId && commentId.indexOf(commentIdPrefix) != -1){
-        		commentId = commentId.substring(commentIdPrefix.length, commentId.length);
+        	var commentUuidPrefix = "urn:lsid:ibm.com:blogs:comment-";
+        	var commentUuid = this.getAsString("commentUuid");
+        	if(commentUuid && commentUuid.indexOf(commentUuidPrefix) != -1){
+        		commentUuid = commentUuid.substring(commentUuidPrefix.length, commentUuid.length);
         	}
-            return commentId;
+            return commentUuid;
         },
 
         /**
@@ -672,8 +672,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @method load
          * @param {Object} [args] Argument object
          */
-        load : function(blogHandle, commentId, args) {
-            var promise = this.service._validateUuid(commentId);
+        load : function(blogHandle, commentUuid, args) {
+            var promise = this.service._validateUuid(commentUuid);
             if (promise) {
                 return promise;
             }
@@ -699,51 +699,11 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             var url = null;
 			url = this.service.constructUrl(consts.AtomBlogCommentEditRemove, null, {
 				blogHandle : blogHandle,
-				commentId : commentId
+				commentUuid : commentUuid
 			});
-            return this.service.getEntity(url, options, commentId, callbacks);
+            return this.service.getEntity(url, options, commentUuid, callbacks);
         }
 
-    });
-    
-
-    /**
-     * Tag class.
-     * 
-     * @class Tag
-     * @namespace sbt.connections
-     */
-    var Tag = declare(BaseEntity, {
-
-        /**
-         * 
-         * @constructor
-         * @param args
-         */
-        constructor : function(args) {            
-        },
-
-        /**
-         * Get term of the tag
-         * 
-         * @method getTerm
-         * @return {String} term of the tag
-         * 
-         */
-        getTerm : function() {
-            return this.getAsString("term");
-        },
-        
-        /**
-         * Get frequency of the tag
-         * 
-         * @method getFrequency
-         * @return {Number} frequency of the tag
-         * 
-         */
-        getFrequency : function() {
-            return this.getAsNumber("frequency");
-        }
     });
     
     /*
@@ -775,7 +735,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
     /*
      * Callbacks used when reading a feed that contains forum recommendation entries.
      */
-    var RecommendPostCallbacks = {
+    var RecommendBlogPostCallbacks = {
         createEntities : function(service,data,response) {
             return new XmlDataHandler({
                 service : service,
@@ -789,9 +749,9 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                  service :  service,
                  data : data,
                  namespaces : consts.Namespaces,
-                 xpath : consts.PostXPath
+                 xpath : consts.BlogPostXPath
              });
-             return new Post({
+             return new BlogPost({
                  service : service,
                  dataHandler : entryHandler
              });
@@ -840,9 +800,9 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 service :  service,
                 data : data,
                 namespaces : consts.Namespaces,
-                xpath : consts.PostXPath
+                xpath : consts.BlogPostXPath
             });
-            return new Post({
+            return new BlogPost({
                 service : service,
                 dataHandler : entryHandler
             });
@@ -1185,10 +1145,10 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 headers : consts.AtomXmlHeaders,
                 data : this._constructBlogPostData(blog)
             };
-            var blogId = blog.getBlogUuid();
+            var blogUuid = blog.getBlogUuid();
             var url = null;
 			url = this.constructUrl(consts.AtomBlogEditDelete, null, {
-				blogId : blogId
+				blogUuid : blogUuid
 			});
             return this.updateEntity(url, options, callbacks, args);
         },
@@ -1215,7 +1175,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             };
             var url = null;
 			url = this.constructUrl(consts.AtomBlogEditDelete, null, {
-				blogId : blogUuid
+				blogUuid : blogUuid
 			});
             return this.deleteEntity(url, options, blogUuid);
         },
@@ -1229,7 +1189,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @param {Object} [args] Argument object
          */
         createPost : function(postOrJson, blogHandle, args) {
-            var post = this._toPost(postOrJson);
+            var post = this._toBlogPost(postOrJson);
             var promise = this._validateBlog(post, false, args);
             if (promise) {
                 return promise;
@@ -1242,7 +1202,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                         service :  service,
                         data : data,
                         namespaces : consts.Namespaces,
-                        xpath : consts.PostXPath
+                        xpath : consts.BlogPostXPath
                     });
             		post.setDataHandler(dataHandler);
             	}
@@ -1254,7 +1214,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 method : "POST",
                 query : args || {},
                 headers : consts.AtomXmlHeaders,
-                data : this._constructPostPostData(post)
+                data : this._constructBlogPostPostData(post)
             };
             var url = null;
             url = this.constructUrl(consts.AtomBlogPostCreate, null, {
@@ -1272,29 +1232,29 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * the existing tags, and send them all back with the new tag in the update request.
          * 
          * @method updateBost
-         * @param {Object} post Post object
+         * @param {Object} post BlogPost object
          * @param {Object} [args] Argument object
          */
         updatePost : function(postOrJson, blogHandle, args) {
-            var post = this._toPost(postOrJson);
-            var promise = this._validatePost(post, true, args);
+            var post = this._toBlogPost(postOrJson);
+            var promise = this._validateBlogPost(post, true, args);
             if (promise) {
                 return promise;
             }
             
             var callbacks = {};
             callbacks.createEntity = function(service,data,response) {
-            	var postUuid = post.getPostUuid();
+            	var postUuid = post.getBlogPostUuid();
             	if (data) {
             		var dataHandler = new XmlDataHandler({
                         service :  service,
                         data : data,
                         namespaces : consts.Namespaces,
-                        xpath : consts.PostXPath
+                        xpath : consts.BlogPostXPath
                     });
             		post.setDataHandler(dataHandler);
             	}
-            	post.setPostUuid(postUuid);
+            	post.setBlogPostUuid(postUuid);
                 return post;
             };
 
@@ -1304,11 +1264,11 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 method : "PUT",
                 query : requestArgs,
                 headers : consts.AtomXmlHeaders,
-                data : this._constructPostPostData(post)
+                data : this._constructBlogPostPostData(post)
             };
             var url = null;
 			url = this.constructUrl(consts.AtomBlogPostEditDelete, null, {
-				postId : post.getPostUuid(),
+				postUuid : post.getBlogPostUuid(),
 				blogHandle : blogHandle
 			});
             return this.updateEntity(url, options, callbacks, args);
@@ -1318,11 +1278,11 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * Recommend a post
          * 
          * @method recommendPost
-         * @param {String} postId Id of post
+         * @param {String} postUuid Id of post
          * @param {String} blogHandle Id of post
          */
-        recommendPost : function(postId, blogHandle) {
-            var promise = this._validateUuid(postId);
+        recommendPost : function(postUuid, blogHandle) {
+            var promise = this._validateUuid(postUuid);
             if (promise) {
                 return promise;
             }
@@ -1332,23 +1292,23 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 headers : consts.AtomXmlHeaders
             };
             var url = null;
-			url = this.constructUrl(consts.AtomRecommendPost, null, {
-				postId : postId,
+			url = this.constructUrl(consts.AtomRecommendBlogPost, null, {
+				postuuid : postUuid,
 				blogHandle : blogHandle
 			});
 			
-            return this.updateEntity(url, options, this.getRecommendPostCallbacks());
+            return this.updateEntity(url, options, this.getRecommendBlogPostCallbacks());
         },
 
         /**
          * Unrecommend a post
          * 
          * @method unRecommendPost
-         * @param {String} postId Id of post
+         * @param {String} postUuid Id of post
          * @param {String} blogHandle Id of post
          */
-        unRecommendPost : function(postId, blogHandle) {
-            var promise = this._validateUuid(postId);
+        unrecommendPost : function(postUuid, blogHandle) {
+            var promise = this._validateUuid(postUuid);
             if (promise) {
                 return promise;
             }
@@ -1358,12 +1318,12 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 headers : consts.AtomXmlHeaders
             };
             var url = null;
-			url = this.constructUrl(consts.AtomRecommendPost, null, {
-				postId : postId,
+			url = this.constructUrl(consts.AtomRecommendBlogPost, null, {
+				postuuid : postUuid,
 				blogHandle : blogHandle
 			});
 			
-            return this.deleteEntity(url, options, postId);
+            return this.deleteEntity(url, options, postUuid);
         },
 
         /**
@@ -1371,11 +1331,11 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * 
          * @method deletePost
          * @param {String/Object} blogHandle handle of the blog(of which the post is to be deleted)
-         * @param {String/Object} postId post id of the blog post(of the blog post to be deleted)
+         * @param {String/Object} postUuid post id of the blog post(of the blog post to be deleted)
          * @param {Object} [args] Argument object
          */
-        deletePost : function(blogHandle, postId, args) {
-            var promise = this._validateUuid(postId);
+        deletePost : function(blogHandle, postUuid, args) {
+            var promise = this._validateUuid(postUuid);
             if (promise) {
                 return promise;
             }            
@@ -1390,9 +1350,9 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             var url = null;
 			url = this.constructUrl(consts.AtomBlogPostEditDelete, null, {
 				blogHandle : blogHandle,
-				postId : postId
+				postUuid : postUuid
 			});
-            return this.deleteEntity(url, options, postId);
+            return this.deleteEntity(url, options, postUuid);
         },
 
         /**
@@ -1403,8 +1363,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @param {String/Object} comment id of the blog comment(of the blog comment to be deleted)
          * @param {Object} [args] Argument object
          */
-        deleteComment : function(blogHandle, commentId, args) {
-            var promise = this._validateUuid(commentId);
+        deleteComment : function(blogHandle, commentUuid, args) {
+            var promise = this._validateUuid(commentUuid);
             if (promise) {
                 return promise;
             }            
@@ -1419,9 +1379,9 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             var url = null;
 			url = this.constructUrl(consts.AtomBlogCommentEditRemove, null, {
 				blogHandle : blogHandle,
-				commentId : commentId
+				commentUuid : commentUuid
 			});
-            return this.deleteEntity(url, options, commentId);
+            return this.deleteEntity(url, options, commentUuid);
         },
         
         /**
@@ -1432,7 +1392,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @param {Object} commentOrJson Blog comment object which denotes the comment to be created.
          * @param {Object} [args] Argument object
          */
-        createComment : function(commentOrJson, blogHandle, entryId, args) {
+        createComment : function(commentOrJson, blogHandle, postUuid, args) {
             var comment = this._toComment(commentOrJson);
             var promise = this._validateComment(comment);
             if (promise) {
@@ -1458,12 +1418,12 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 method : "POST",
                 query : args || {},
                 headers : consts.AtomXmlHeaders,
-                data : this._constructCommentPostData(comment)
+                data : this._constructCommentBlogPostData(comment)
             };
             var url = null;
 			url = this.constructUrl(consts.AtomBlogCommentCreate, null, {
 				blogHandle : blogHandle,
-				postId : entryId
+				postUuid : postUuid
 			});
             return this.updateEntity(url, options, callbacks, args);
         },
@@ -1541,12 +1501,12 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         /**
          * Create a Blog Post object with the specified data.
          * 
-         * @method newPost
+         * @method newBlogPost
          * @param {Object} args Object containing the fields for the 
          * new post 
          */
-        newPost : function(args) {
-            return this._toPost(args);
+        newBlogPost : function(args) {
+            return this._toBlogPost(args);
         },
         
         /**
@@ -1577,8 +1537,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         /*
          * Callbacks used when reading a feed that contains Blog entries.
          */
-        getRecommendPostCallbacks: function() {
-            return RecommendPostCallbacks;
+        getRecommendBlogPostCallbacks: function() {
+            return RecommendBlogPostCallbacks;
         },
         
         /*
@@ -1616,11 +1576,11 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         },
         
         /*
-         * Return a Post instance from Post or JSON or String. Throws
+         * Return a BlogPost instance from BlogPost or JSON or String. Throws
          * an error if the argument was neither.
          */
-        _toPost : function(postOrJsonOrString) {
-            if (postOrJsonOrString instanceof Post) {
+        _toBlogPost : function(postOrJsonOrString) {
+            if (postOrJsonOrString instanceof BlogPost) {
                 return postOrJsonOrString;
             } else {
                 if (lang.isString(postOrJsonOrString)) {
@@ -1628,7 +1588,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                         postUuid : postOrJsonOrString
                     };
                 }
-                return new Post({
+                return new BlogPost({
                     service : this,
                     _fields : lang.mixin({}, postOrJsonOrString)
                 });
@@ -1667,8 +1627,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         /*
          * Validate a post, and return a Promise if invalid.
          */
-        _validateUuid : function(postId) {
-            if (!postId) {
+        _validateUuid : function(postUuid) {
+            if (!postUuid) {
                 return this.createBadRequestPromise("Invalid argument, blog post id must be specified.");
             }
         },
@@ -1676,11 +1636,11 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         /*
          * Validate a post, and return a Promise if invalid.
          */
-        _validatePost : function(post,checkUuid) {
+        _validateBlogPost : function(post,checkUuid) {
             if (!post || !post.getTitle()) {
                 return this.createBadRequestPromise("Invalid argument, blog post with title must be specified.");
             }
-            if (checkUuid && !post.getPostUuid()) {
+            if (checkUuid && !post.getBlogPostUuid()) {
                 return this.createBadRequestPromise("Invalid argument, blog post with UUID must be specified.");
             }
         },
@@ -1730,7 +1690,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         /*
          * Construct a post data for a Blog Post
          */
-        _constructPostPostData : function(post) {
+        _constructBlogPostPostData : function(post) {
             var transformer = function(value,key) {
                 if (key == "getTags") {
                     var tags = value;
@@ -1751,7 +1711,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         /*
          * Construct a post data for a Blog Post
          */
-        _constructCommentPostData : function(comment) {
+        _constructCommentBlogPostData : function(comment) {
             var transformer = function(value,key) {
                 return value;
             };

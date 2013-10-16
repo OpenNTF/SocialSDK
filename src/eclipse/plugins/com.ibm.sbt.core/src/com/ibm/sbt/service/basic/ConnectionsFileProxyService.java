@@ -24,27 +24,13 @@ public class ConnectionsFileProxyService extends AbstractFileProxyService {
 	private static final String DOWNLOAD_URL = "/files/basic/api/library/{0}/document/{1}/media";
 	private static final String UPDATE_URL = "/files/basic/api/myuserlibrary/document/{0}/media";
 
+	private static final String X_UPDATE_NONCE = "x-update-nonce";
+
 	public static final String FILEPROXYNAME = "connections";
 
 	@Override
-	protected Content getFileContent(File file, long length, String name) {
+	protected Content getFileContent(File file, String contentType) {
 		Content content;
-		String contentType = null;
-		if (Operations.UPDATE_PROFILE_PHOTO.toString().equals(operation)) {
-			String fileName = parameters.get("FileName");
-			int dot = fileName.lastIndexOf('.');
-			String ext = null;
-			if (dot > -1) {
-				ext = fileName.substring(dot + 1); // add one for the dot!
-			}
-			if (!StringUtil.isEmpty(ext)) {
-				if (ext.equalsIgnoreCase("jpg")) {
-					contentType = "image/jpeg"; // content-type should be image/jpeg for file extension jpg
-				} else {
-					contentType = "image/" + ext;
-				}
-			}
-		}
 		content = new ContentFile(file, contentType);
 		return content;
 	}
@@ -79,12 +65,14 @@ public class ConnectionsFileProxyService extends AbstractFileProxyService {
 
 	@Override
 	protected Map<String, String> createHeaders() {
-		return new HashMap<String, String>();
+		Map<String, String> headers = new HashMap<String, String>();
+		headers.put(X_UPDATE_NONCE, "");
+		return headers;
 	}
 
 	@Override
 	protected Handler getFormat() {
-		if ("PUT".equalsIgnoreCase(method)) {
+		if ("PUT".equalsIgnoreCase(method) && Operations.UPDATE_PROFILE_PHOTO.toString().equals(operation)) {
 			return ClientService.FORMAT_NULL;
 		}
 		return ClientService.FORMAT_XML;

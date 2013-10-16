@@ -15,8 +15,15 @@
  */
 package com.ibm.sbt.services.client.smartcloud;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.http.Header;
+import org.apache.http.HttpResponse;
+
+import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.endpoints.Endpoint;
+import com.ibm.sbt.services.endpoints.SmartCloudFormEndpoint;
 
 /**
  * SmartCloud service.
@@ -31,5 +38,19 @@ public class SmartCloudService extends ClientService {
 	}
 	public SmartCloudService(String endpointName) {
 		super(endpointName);
+	}
+	@Override
+	protected boolean isResponseRequireAuthentication(HttpResponse httpResponse){
+		// Smartcloud platform returns 200 with a login page when authentication is required particularly in case of form based authentication
+		// To handle this we check the content type of response from Smartcloud. It should never be text/html except in case it is returning a login form
+		if(httpResponse.getStatusLine().getStatusCode() == HttpServletResponse.SC_OK && endpoint instanceof SmartCloudFormEndpoint){
+			Header[] value = httpResponse.getHeaders("Content-Type");
+			String headerValue = value[0].getValue();
+			if(StringUtil.equals(headerValue, "text/html")){
+				return true;
+			}
+		}
+		return false;
+		
 	}
 }

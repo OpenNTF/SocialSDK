@@ -37,7 +37,7 @@
 	<%
 	try {
 		ForumService service = new ForumService();
-		Forum forum = new Forum(service, "");
+		Forum forum = new Forum(service);
 		forum.setTitle("Test forum 1ab" + System.currentTimeMillis());
 		forum.setContent("Test forum created by Create Forum Java snippet");
 		List<String> tags = new ArrayList<String>();

@@ -43,8 +43,17 @@ public class Forum extends BaseForumEntity {
 	public Forum(ForumService forumsService, String id) {
 		super(forumsService,id);
 	}
+	
+	/**
+     * Constructor
+     *
+     * @param ForumService
+     */
+    public Forum(ForumService forumsService) {
+            super(forumsService);
+    }
 
-	public Forum(BaseService svc, DataHandler<?> handler) {
+    public Forum(BaseService svc, DataHandler<?> handler) {
 		super(svc,handler);
 	}
 	

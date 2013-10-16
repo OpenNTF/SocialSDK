@@ -30,8 +30,7 @@ public class DefaultProxyEndpointServiceProvider extends ProxyEndpointServicePro
 		try {
 			proxyEndpointService = (ProxyEndpointService) Class.forName(fileProxyMap.get(serviceType)).newInstance();
 		} catch (InstantiationException e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);			
 		} catch (IllegalAccessException e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
 		} catch (ClassNotFoundException e) {

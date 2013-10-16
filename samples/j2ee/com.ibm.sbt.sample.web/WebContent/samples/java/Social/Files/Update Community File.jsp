@@ -54,7 +54,7 @@
 	    	String communityId = communities.get(0).getCommunityUuid();
 	    	
 	    	String content = "Test File Content";
-	 		String newFileName = "TestCommUpload" + System.currentTimeMillis();
+	 		String newFileName = "TestCommUpload" + System.currentTimeMillis() +".txt";
 			File fileUploaded = commService.uploadFile(new ByteArrayInputStream(content.getBytes(Charset.forName("UTF-8"))), communityId, newFileName, content.length());
             
 	        //update Community File's metadata 

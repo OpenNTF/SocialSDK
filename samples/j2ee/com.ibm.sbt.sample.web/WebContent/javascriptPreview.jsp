@@ -101,7 +101,7 @@
   <body class="<%=Util.getBodyClass(request, theme)%>" style="width: 90%; height: 100%;">
     <div id="content"></div>
     <div id="loading" style="visibility: hidden;">
-        <img src="/sbt.sample.web/images/progressIndicator.gif">
+        <img src="/sbt.sample.web/images/progressIndicator.gif" alt="Loading...">
     </div>
     <div id="_jsErrors">
     </div>

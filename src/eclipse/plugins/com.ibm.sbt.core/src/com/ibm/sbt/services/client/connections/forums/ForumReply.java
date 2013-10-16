@@ -79,6 +79,14 @@ public class ForumReply extends BaseForumEntity{
 	public ForumReply(ForumService forumsService, String id) {
 		super(forumsService,id);
 	}
+	/**
+     * Constructor
+     *
+     * @param ForumService
+     */
+    public ForumReply(ForumService forumsService) {
+            super(forumsService);
+    }
 
 	/**
 	 * To get Uuid of Forum Reply
@@ -109,6 +117,26 @@ public class ForumReply extends BaseForumEntity{
 	{
 		return getService().getRecommendations(getUid());
 	}
+	 /**
+     * Return the value of id of the post that this is a reply to.
+     * 
+     * @method getReplyToPostUuid
+     * @returns {String} postUuid Id of the forum post
+     */
+	public String getReplyToPostUuid() throws ForumServiceException {
+    	return extractForumUuid(getAsString(ForumsXPath.inReplyTo));
+    }
+
+    /**
+     * Sets the value of id of the post that this is a reply to.
+     * 
+     * @method setReplyToPostUuid
+     * @param {String} postUuid Id of the forum post
+     */
+    public void setReplyToPostUuid(String postUuid) {
+    	setAsString(ForumsXPath.inReplyTo, postUuid);
+    }
+    
 	/**
 	 * To get Url of Reply
 	 *
@@ -184,6 +212,25 @@ public class ForumReply extends BaseForumEntity{
 			}
 		}
 		return answer;
+	}
+	/**
+	 * Check if Reply is deleted
+	 *
+	 * @method isDeleted
+	 * @return boolean
+	 */
+	public boolean isDeleted(){
+		boolean deleted = false;
+		if(StringUtil.isNotEmpty(getAsString(ForumsXPath.flag))){
+			List<String> flags = Arrays.asList(getDataHandler().getAsString(ForumsXPath.flag).split(" "));
+			for (int i = 0; i < flags.size(); i++) {
+				if(StringUtil.equalsIgnoreCase(flags.get(i), FlagType.DELETED.getFlagType())){
+					deleted = true;
+					break;
+				}
+			}
+		}
+		return deleted;
 	}
 
 	/**

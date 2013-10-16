@@ -72,6 +72,7 @@ import com.ibm.sbt.plugin.SbtCoreLogger;
 import com.ibm.sbt.service.debug.ProxyDebugUtil;
 import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
+import com.ibm.sbt.services.endpoints.SmartCloudFormEndpoint;
 import com.ibm.sbt.services.util.SSLUtil;
 
 /**
@@ -1082,11 +1083,19 @@ public abstract class ClientService {
 				SbtCoreLogger.SBT.traceDebugp(this, "processResponse", msg);
 			}
 		}
+		
+
+		if(isResponseRequireAuthentication(httpResponse)){
+			forceAuthentication(args);
+			return null;
+		}
+		
 		if ((httpResponse.getStatusLine().getStatusCode() == HttpServletResponse.SC_UNAUTHORIZED) || 
 			(endpoint != null && endpoint.getAuthenticationErrorCode() == statusCode)) {
 			forceAuthentication(args);
 			return null;
 		}
+		
 		Handler format = findHandler(httpRequestBase, httpResponse, args.handler);
 		
 		Response response = new Response(httpClient, httpResponse, httpRequestBase, args, format);
@@ -1101,6 +1110,15 @@ public abstract class ClientService {
 		if (statusCode >= 200 && statusCode < 300) {
 			return true;
 		}
+		return false;
+	}
+	// Each endpoint provides its implementation whether an authentication is required based on response.
+	protected boolean isResponseRequireAuthentication(HttpResponse httpResponse){
+		int statusCode = httpResponse.getStatusLine().getStatusCode();
+		if ((httpResponse.getStatusLine().getStatusCode() == HttpServletResponse.SC_UNAUTHORIZED) || 
+				(endpoint != null && endpoint.getAuthenticationErrorCode() == statusCode)) {
+				return true;
+			}
 		return false;
 	}
 

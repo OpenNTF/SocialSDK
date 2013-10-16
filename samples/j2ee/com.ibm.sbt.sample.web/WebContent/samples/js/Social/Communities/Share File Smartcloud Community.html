@@ -1,27 +1,43 @@
-<table class="table table-bordered" id="filesTable">
-	<tr class="label label-info">
-		<th>Title</th>
-		<th>Id</th>
-		<th>Action</th>
-	</tr>
-</table>
-
- <div class="modal" id="shareDialog" style="display: none;">
-	<div class="modal-header">
-		<button type="button" id="btnX" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	   	<h3>Share this file with a community on SmartCloud</h3>
+<div role="main">
+	<div id="note" class="alert alert-error">Note: This Sample will not work on browsers which do not support HTML 5 File API.</div>
+	<div id="error" style="display:none;" class="alert alert-error"></div>
+	<div class="lotusMessage lotusConfirm" role="status" id="confirmationMessage" style="display: none;">
+		<span>Your file has been shared.</span>
 	</div>
-	<div class="modal-body">
-		<p>
-			<strong>File to share:</strong> <span id="fileToShare"></span>
-		</p>
-		<p>
-			<strong>Community:</strong>
-			<select id="commList"></select>
-		</p>
-	</div>
-	<div class="modal-footer">
-	    <a href="#" id="closeDialog" class="btn">Close</a>
-	    <a href="#" id="shareFile" class="btn btn-primary">Share</a>
+	
+	<table class="table table-bordered" id="filesTable">
+		<tr class="label label-info">
+			<th>Title</th>
+			<th>Id</th>
+			<th>Action</th>
+		</tr>
+	</table>
+	
+	 <div class="modal" id="shareDialog" style="display: none;">
+		<div class="modal-header">
+			<button type="button" id="btnX" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		   	<h3>Share this file with a community on SmartCloud</h3>
+		</div>
+		<div class="modal-body">
+			<div id="download">
+				<p>
+					<strong>File to share:</strong> <span id="fileToShare"></span>
+				</p>
+				<p>
+					<strong id="community">Community:</strong>
+					<select id="commList"></select>
+				</p>
+			</div>
+			<div id="upload" style="display: none;">
+				<p>Please select the file you just downloaded and click the "Upload File" button
+				(it will automatically be shared with your selected SmartCloud community)</p>
+				<input type="file" id="your-files"></input>
+				<button class="btn btn-primary" id="uploadBtn">Upload File</button>	 
+			</div>
+		</div>
+		<div class="modal-footer" id="dialogFooter">
+		    <a href="#" id="closeDialog" class="btn">Close</a>
+		    <a href="#" id="shareFile" class="btn btn-primary">Share</a>
+		</div>
 	</div>
 </div>

@@ -10,9 +10,7 @@ require(["sbt/connections/FileService",
 		var communityId = "%{name=sample.communityId|helpSnippetId=Social_Communities_Share_File_Smartcloud_Community}";
 	
 		// Community Service
-		var communityService = new CommunityService({
-			endpoint: config.findEndpoint("smartcloud")
-		});
+		var communityService = new CommunityService({ endpoint: "smartcloud" }); 
 		
 		// Set action listener for the dropdown box which lists
 		// the user's SmartCloud communities

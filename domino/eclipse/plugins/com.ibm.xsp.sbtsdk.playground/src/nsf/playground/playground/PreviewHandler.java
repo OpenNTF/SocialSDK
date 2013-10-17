@@ -1,10 +1,13 @@
 package nsf.playground.playground;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.ibm.commons.runtime.RuntimeConstants;
 import com.ibm.commons.util.PathUtil;
@@ -21,6 +24,7 @@ import com.ibm.xsp.context.DojoLibraryFactory;
  */
 public abstract class PreviewHandler {
 
+	
 	protected static class EnvParameterProvider implements com.ibm.commons.runtime.util.ParameterProcessor.ParameterProvider {
 		SBTEnvironment env;
 		EnvParameterProvider(SBTEnvironment env) {
@@ -28,7 +32,10 @@ public abstract class PreviewHandler {
 		}
 		public String getParameter(String name) {
 			if(env!=null) {
-				return env.getPropertyValueByName(name);
+				String value = env.getPropertyValueByName(name);
+				if(value!=null) {
+					return value;
+				}
 			}
 			return null;
 		}

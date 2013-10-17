@@ -41,10 +41,15 @@ public class SmartCloudPeopleDataProvider extends AbstractPeopleDataProvider {
         
         //SmartCloudFiles subscriber id
         String smartCloudSubscriberId;
+       String  smartCloudSubscriberEmail;
+       String smartCloudDisplayName;
     }
     private static PeopleData EMPTY_DATA = new PeopleData(); 
     
     private final String SUBSCRIBER_ID = "smartCloudSubscriberId";
+    private final String EMAIL_ID = "smartCloudSubscriberEmail";
+    private final String DISPLAY_NAME = "smartCloudDisplayName";
+    
 
     private PeopleData getPeopleData(PersonImpl person) {
         String id = person.getId();
@@ -92,6 +97,9 @@ public class SmartCloudPeopleDataProvider extends AbstractPeopleDataProvider {
 			        JsonNavigator jsonUtil = new JsonNavigator(result);
 			        PeopleData data = new PeopleData();
 			        data.smartCloudSubscriberId = jsonUtil.stringValue("subscriberid");
+			        data.smartCloudSubscriberEmail=jsonUtil.stringValue("email");
+			        data.smartCloudDisplayName=jsonUtil.stringValue("name");
+			        
 			        return data;
 			    }
 			}
@@ -120,6 +128,9 @@ public class SmartCloudPeopleDataProvider extends AbstractPeopleDataProvider {
         if(SUBSCRIBER_ID.equals(key)){
             return String.class;
         }
+        if(EMAIL_ID.equals(key)){
+            return String.class;
+        }
         return null;
     }
 
@@ -131,6 +142,14 @@ public class SmartCloudPeopleDataProvider extends AbstractPeopleDataProvider {
         if(SUBSCRIBER_ID.equals(key) && person.isAuthenticatedUser()){
             return getPeopleData(person).smartCloudSubscriberId;
         }
+        if(EMAIL_ID.equals(key) && person.isAuthenticatedUser()){
+            return getPeopleData(person).smartCloudSubscriberEmail;
+        }
+        
+        if(DISPLAY_NAME.equals(key) && person.isAuthenticatedUser()){
+            return getPeopleData(person).smartCloudDisplayName;
+        }
+
         return null;
     }
 
@@ -138,6 +157,8 @@ public class SmartCloudPeopleDataProvider extends AbstractPeopleDataProvider {
     public void enumerateProperties(Set<String> propNames) {
         super.enumerateProperties(propNames);
         propNames.add(SUBSCRIBER_ID);
+        propNames.add(EMAIL_ID);       
+        propNames.add(DISPLAY_NAME);
     }
     
     /* (non-Javadoc)

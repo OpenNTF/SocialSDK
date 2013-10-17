@@ -4,11 +4,13 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.io.StringWriter;
+import java.util.Map;
 
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import lotus.domino.Document;
 import lotus.domino.NotesException;
@@ -82,6 +84,7 @@ public class PreviewJavaHandler extends PreviewHandler {
 	}
 	
 	protected void execRequest(HttpServletRequest req, HttpServletResponse resp, RequestParams requestParams) throws ServletException, IOException {
+		HttpSession session = req.getSession();
 		resp.setContentType("text/html");
 		resp.setStatus(HttpServletResponse.SC_OK);
 
@@ -99,6 +102,16 @@ public class PreviewJavaHandler extends PreviewHandler {
 		String envName = options.getString("env");
 		PlaygroundEnvironment env = dataAccess.getEnvironment(envName);
 		env.prepareEndpoints();
+
+		// Push the dynamic parameters to the user session
+		JsonJavaObject p = options.getAsObject("params");
+		if(p!=null) {
+			for(Map.Entry<String, Object> e: p.entrySet()) {
+				String name = e.getKey();
+				String value = e.getValue().toString();
+				env.pushSessionParams(name, value);
+			}
+		}
 		
 		String serverUrl = composeServerUrl(req);
 		String dbUrl = composeDatabaseUrl(req,serverUrl);

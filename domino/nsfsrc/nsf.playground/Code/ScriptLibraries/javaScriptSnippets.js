@@ -33,7 +33,8 @@ function createSnippet() {
 		pageGlobal.documentationPanel.innerHTML = "";
 	}
 	
-	dojo.byId("preview").src = pageGlobal._previewFrame;	
+	createPropertyPanel(null);
+	selectStack(pageGlobal.previewParams);
 	updateLabel(null);
 	updateNavSelection();
 }
@@ -47,6 +48,7 @@ function loadSnippet(id) {
 		if(r.status=="ok") {
 			pageGlobal.id = id;
 			pageGlobal.unid = r.unid;
+			pageGlobal.params = r.params;
 			if(pageGlobal.htmlEditor) pageGlobal.htmlEditor.setValue(r.html);
 			if(pageGlobal.jsEditor) pageGlobal.jsEditor.setValue(r.js);
 			if(pageGlobal.cssEditor) pageGlobal.cssEditor.setValue(r.css);
@@ -61,9 +63,15 @@ function loadSnippet(id) {
 			} else {
 				selectTab(pageGlobal.tabHtml);
 			}
+			createPropertyPanel(pageGlobal.params);
+			if(pageGlobal.previewStack) {
+				selectStack(pageGlobal.previewParams);
+			}
 			updateLabel(r);
 			updateNavSelection();
-			runCode(false);
+			if(shouldAutoExec(pageGlobal.params)) {
+				runCode(false);
+			}
 		} else {
 			alert("Error:\n"+r.msg);
 		}
@@ -72,6 +80,11 @@ function loadSnippet(id) {
 function selectTab(tab) {
 	var tc = dijit.byId(pageGlobal.tabContainer);
 	var pn = dijit.byId(tab);
+	tc.selectChild(pn);
+}
+function selectStack(stack) {
+	var tc = dijit.byId(pageGlobal.previewStack);
+	var pn = dijit.byId(stack);
 	tc.selectChild(pn);
 }
 
@@ -88,6 +101,7 @@ function runCode(debug) {
 			b.innerHTML = "<span>Loading...</span>";
 		} catch(e) {} 
 	}
+	
 
 	// Compose the HTML code
 	var html = pageGlobal.htmlEditor.getValue();
@@ -98,10 +112,16 @@ function runCode(debug) {
 	// Get the current environment
 	var env = dojo.byId(pageGlobal.cbEnv).value;
 	var lib = dojo.byId(pageGlobal.cbLibrary).selectedIndex;
+	var params = gatherParams();
 	var options = {
 		env: env,
 		debug: debug,
-		lib: lib
+		lib: lib,
+		params: params
+	}
+
+	if(pageGlobal.previewStack) {
+		selectStack(pageGlobal.previewPreview);
 	}
 	
 	// And update the frame by executing a post to a servlet

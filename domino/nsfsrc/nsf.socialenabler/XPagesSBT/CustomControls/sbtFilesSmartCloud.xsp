@@ -7,6 +7,7 @@
 	@Endpoint("smartcloud").authenticate(true);
 }}]]>
 	</xp:this.beforePageLoad>
+	
 	<!-- Log In Button -->
 	<xp:this.data>
 		<xe:fileServiceData var="fileServiceData1" serviceUrl="files/basic/cmis/repository">
@@ -16,14 +17,14 @@
 			<xe:this.urlParameters>
 				<xe:urlParameter name="subscriberId">
 					<xe:this.value>
-						<![CDATA[${javascript:return userBean.lotusLiveSubscriberId;
+						<![CDATA[${javascript:return userBean.smartCloudSubscriberId;
 						}]]>
 					</xe:this.value>
 				</xe:urlParameter>
 			</xe:this.urlParameters>
 		</xe:fileServiceData>
 	</xp:this.data>
-
+					
 	<xe:djContentPane id="djContentPane4"
 		partialRefresh="#{javascript:compositeData.ajaxUpdate}"
 		style="overflow-x:hidden; overflow-y:hidden">

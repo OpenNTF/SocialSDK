@@ -111,67 +111,72 @@ public class BaseEntity {
 	 * Returns the value of a field as an int
 	 * 
 	 * @param field
-	 * @return
+	 * @return int
+	 * 			returns -1, if the field doesn't exist
 	 */
 	public int getAsInt(FieldEntry field){
 		if (fields.containsKey(field.getName())){
 			return (Integer)fields.get(field.getName());
 		}
-		if (dataHandler != null)
+		if (dataHandler != null){
 			return dataHandler.getAsInt(field);
-		throw new NullPointerException(StringUtil.format("Field {0} was not found or had no value",field.getName()));
+		}
+		return -1;
 	}
 	
 	/**
 	 * Returns the value of a field as a long
 	 * 
 	 * @param field
-	 * @return
+	 * @return returns null, if the field doesn't exist
 	 */
 	public Long getAsLong(FieldEntry field){
 		if (fields.containsKey(field.getName())){
 			return (Long)fields.get(field.getName());
 		}
-		if (dataHandler != null)
+		if (dataHandler != null){
 			return dataHandler.getAsLong(field);
-		throw new NullPointerException(StringUtil.format("Field {0} was not found or had no value",field.getName()));
+		}
+		return null;
 	}
 	
 	/**
 	 * Returns the value of a field as a float
 	 * 
 	 * @param field
-	 * @return
+	 * @return returns -1, if the field doesn't exist
 	 */
 	public float getAsFloat(FieldEntry field){
 		if (fields.containsKey(field.getName())){
 			return (Float)fields.get(field.getName());
 		}
-		if (dataHandler != null)
+		if (dataHandler != null){
 			return dataHandler.getAsFloat(field);
-		throw new NullPointerException(StringUtil.format("Field {0} was not found or had no value",field.getName()));
+		}
+		return -1;
 	}
 	
 	/**
 	 * Returns the value of a field as a boolean
 	 * 
 	 * @param field
-	 * @return
+	 * @return returns false, if the field doesn't exist
 	 */
 	public boolean getAsBoolean(FieldEntry field){
 		if (fields.containsKey(field.getName())){
 			return (Boolean)fields.get(field.getName());
 		}
-		if (dataHandler != null)
+		if (dataHandler != null){
 			return dataHandler.getAsBoolean(field);
-		throw new NullPointerException(StringUtil.format("Field {0} was not found or had no value",field.getName()));
+		}
+		return false;
 	}
 	
 	/**
 	 * Returns the value of a field as a date
 	 * 
 	 * @param field
-	 * @return
+	 * @return returns null, if the field doesn't exist
 	 */
 	public Date getAsDate(FieldEntry field){
 		if (fields.containsKey(field.getName())){
@@ -183,14 +188,14 @@ public class BaseEntity {
 			} catch (DataHandlerException e) {
 			}
 		}
-		throw new NullPointerException(StringUtil.format("Field {0} was not found or had no value",field.getName()));
+		return null;
 	}
 	
 	/**
 	 * Returns the value of a field as a date
 	 * 
 	 * @param field
-	 * @return
+	 * @return returns null, if the field doesn't exist
 	 */
 	public Date getAsDate(String fieldName){
 		if (fields.containsKey(fieldName)){
@@ -202,7 +207,7 @@ public class BaseEntity {
 			} catch (DataHandlerException e) {
 			}
 		}
-		throw new NullPointerException(StringUtil.format("Field {0} was not found or had no value",fieldName));
+		return null;
 	}
 	
 	/**

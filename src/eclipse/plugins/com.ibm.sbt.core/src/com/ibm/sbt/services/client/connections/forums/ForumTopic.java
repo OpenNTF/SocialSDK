@@ -132,7 +132,7 @@ public class ForumTopic extends BaseForumEntity{
 
 	public ReplyList getReplies() throws ForumServiceException
 	{
-		return getService().getForumReplies(getUid());
+		return getService().getForumTopicReplies(getUid());
 	}
 
 	/**

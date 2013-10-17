@@ -5,6 +5,8 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import nsf.playground.environments.PlaygroundEnvironment;
 
@@ -17,6 +19,14 @@ import lotus.domino.ViewNavigator;
 
 import com.ibm.commons.runtime.util.URLEncoding;
 import com.ibm.commons.util.StringUtil;
+import com.ibm.jscript.InterpretException;
+import com.ibm.jscript.std.ArrayObject;
+import com.ibm.jscript.std.ArrayPrototype.Array;
+import com.ibm.jscript.std.ObjectObject;
+import com.ibm.jscript.std.FunctionObject.FBSActivationObject;
+import com.ibm.jscript.types.FBSDefaultObject;
+import com.ibm.jscript.types.FBSString;
+import com.ibm.jscript.types.FBSValue;
 import com.ibm.sbt.playground.assets.AssetNode;
 import com.ibm.sbt.playground.assets.CategoryNode;
 import com.ibm.sbt.playground.assets.Node;
@@ -24,6 +34,7 @@ import com.ibm.sbt.playground.assets.RootNode;
 import com.ibm.sbt.playground.dojo.JsonTreeRenderer;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.ibm.xsp.model.domino.wrapped.DominoDocument;
+import com.ibm.xsp.util.JavaScriptUtil;
 
 /**
  * Base class for beans managing assets.
@@ -209,5 +220,40 @@ public abstract class AssetBean {
 		} finally {
 			nav.recycle();
 		}
+	}
+	
+    private static Pattern paramsPattern = Pattern.compile("%\\{(.*?)\\}");
+    
+	public FBSDefaultObject extractParams(String[] ss) throws InterpretException {
+		PlaygroundEnvironment env = PlaygroundEnvironment.getCurrentEnvironment();
+		
+		ArrayObject params = new ArrayObject(JavaScriptUtil.getJSContext());
+		if(ss!=null) {
+			for(int i=0; i<ss.length; i++) {
+			    Matcher paramsMatcher = paramsPattern.matcher(ss[i]);
+			    while(paramsMatcher.find()){
+			    	String s = paramsMatcher.group(1);
+			    	String[] all = StringUtil.splitString(s, '|', true);
+					FBSDefaultObject o = new ObjectObject(JavaScriptUtil.getJSContext());
+			    	for(int j=0; j<all.length; j++) {
+			    		String[] p = StringUtil.splitString(all[j], '=', true);
+			    		if(p.length==1) {
+			    			o.put("name", FBSString.get(p[0]));
+			    		} else if(p.length>1) {
+			    			o.put(p[0],FBSString.get(p[1]));
+			    		}
+			    	}
+			    	FBSString propName = (FBSString)o.get("name");
+			    	if(propName!=null) {
+			    		String v = env.getPropertyValueByName(propName.stringValue());
+			    		if(StringUtil.isNotEmpty(v)) {
+			    			o.put("value", FBSString.get(v));
+			    		}
+		    		}
+			    	params.addArrayValue(o);
+			    }
+			}
+		}
+		return params;
 	}
 }

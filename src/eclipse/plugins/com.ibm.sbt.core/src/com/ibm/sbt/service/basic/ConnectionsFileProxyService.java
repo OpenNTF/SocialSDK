@@ -24,11 +24,12 @@ public class ConnectionsFileProxyService extends AbstractFileProxyService {
 	private static final String UPLOAD_URL = "/files/basic/api/myuserlibrary/feed"; // TODO set as property on endpoint
 	private static final String DOWNLOAD_URL = "/files/basic/api/library/{0}/document/{1}/media";
 	private static final String UPDATE_URL = "/files/basic/api/myuserlibrary/document/{0}/media";
+	private static final String UPDATE_COMMUNITY_LOGO = "/communities/service/html/image";
 
 	private static final String X_UPDATE_NONCE = "x-update-nonce";
 
 	public static final String FILEPROXYNAME = "connections";
-	
+
 	@Override
 	protected Content getFileContent(File file, long length, String fileName) {
 		String fileExt = MIME.getFileExtension(fileName);
@@ -55,7 +56,7 @@ public class ConnectionsFileProxyService extends AbstractFileProxyService {
 			if (fileId == null) {
 				throw new ServletException("File ID is required in URL for upload new version.");
 			}
-			return StringUtil.format(UPDATE_URL,fileId);
+			return StringUtil.format(UPDATE_URL, fileId);
 		} else if ("GET".equalsIgnoreCase(method)) {
 			String fileId = parameters.get("FileId");
 			String libraryId = parameters.get("LibraryId");
@@ -66,6 +67,8 @@ public class ConnectionsFileProxyService extends AbstractFileProxyService {
 				throw new ServletException("Library ID is required in URL for download");
 			}
 			return StringUtil.format(DOWNLOAD_URL, libraryId, fileId);
+		} else if ("PUT".equalsIgnoreCase(method) && Operations.UPDATE_COMMUNITY_LOGO.toString().equals(operation)) {
+			return UPDATE_COMMUNITY_LOGO;
 		}
 		return null;
 	}
@@ -79,7 +82,7 @@ public class ConnectionsFileProxyService extends AbstractFileProxyService {
 
 	@Override
 	protected Handler getFormat() {
-		if ("PUT".equalsIgnoreCase(method) && Operations.UPDATE_PROFILE_PHOTO.toString().equals(operation)) {
+		if ("PUT".equalsIgnoreCase(method) && (Operations.UPDATE_PROFILE_PHOTO.toString().equals(operation) || Operations.UPDATE_COMMUNITY_LOGO.toString().equals(operation))) {
 			return ClientService.FORMAT_NULL;
 		}
 		return ClientService.FORMAT_XML;
@@ -92,7 +95,7 @@ public class ConnectionsFileProxyService extends AbstractFileProxyService {
 		}
 		if (Operations.UPLOAD_FILE.toString().equals(operation)) {
 			if (tokens.length < 6) {
-				throw new ServletException("Invalid url for File Download");
+				throw new ServletException("Invalid url for File Upload");
 			}
 			parameters.put("FileName", tokens[5]);
 		} else if (Operations.DOWNLOAD_FILE.toString().equals(operation)) {
@@ -109,6 +112,11 @@ public class ConnectionsFileProxyService extends AbstractFileProxyService {
 			}
 			parameters.put("FileId", tokens[5]);
 			parameters.put("FileName", tokens[6]);
+		} else if (Operations.UPDATE_COMMUNITY_LOGO.toString().equals(operation)) {
+			if (tokens.length < 6) {
+				throw new ServletException("Invalid url for Update Community Logo");
+			}
+			parameters.put("FileName", tokens[5]);
 		}
 
 	}

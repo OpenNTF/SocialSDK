@@ -524,6 +524,12 @@ abstract public class AbstractLibrary {
 
 		StringBuilder sb = new StringBuilder();
 		int indentationLevel = 1;
+		
+		if (request.isInitJs()) {
+			sb.append(generateProvide()).append(newLine());
+			sb.append("(function() {").append(newLine());
+		}
+		
 		// make sure the library is only defined once (open if)
 		sb.append("if(typeof _sbt=='undefined' || window._sbt_bridge_compat){").append(newLine());
 		indent(sb).append("_sbt=0;").append(newLine());
@@ -540,24 +546,23 @@ abstract public class AbstractLibrary {
 			String[] requireModules = getRequireModules();
 
 			indentationLevel++;
-			sb.append(generateModuleBlock(request, registerModules, registerExtModules, requireModules,
-					indentationLevel));
+			sb.append(generateModuleBlock(request, registerModules, registerExtModules, requireModules, indentationLevel));
 			indentationLevel--;
 
 			indent(sb).append("} else {").append(newLine());
 			closeElse = true;
 			isInnerBlock = true;
 		}
+		
 		// register the module paths and required modules
 		String[][] registerModulesAmd = getRegisterModulesAmd();
-		String[][] registerExtModulesAmd = StringUtil.isNotEmpty(request.getToolkitExtUrl()) ? getRegisterExtModulesAmd(request)
-				: null;
+		String toolkitExtUrl = request.getToolkitExtUrl();
+		String[][] registerExtModulesAmd = StringUtil.isNotEmpty(toolkitExtUrl) ? getRegisterExtModulesAmd(request) : null;
 		String[] requireModulesAmd = getRequireModulesAmd();
 		if (isInnerBlock) {
 			indentationLevel++;
 		}
-		sb.append(generateModuleBlock(request, registerModulesAmd, registerExtModulesAmd, requireModulesAmd,
-				indentationLevel));
+		sb.append(generateModuleBlock(request, registerModulesAmd, registerExtModulesAmd, requireModulesAmd, indentationLevel));
 		if (isInnerBlock) {
 			indentationLevel--;
 		}
@@ -565,8 +570,13 @@ abstract public class AbstractLibrary {
 			indent(sb).append("}").append(newLine());
 		}
 		sb.append(generateSbtConfigDefine(request, endpoints, properties, indentationLevel));
+		
 		sb.append("}").append(newLine());
 
+		if (request.isInitJs()) {
+			sb.append("})();").append(newLine());
+		}
+		
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.exiting(sourceClass, "generateJavaScript", sb.toString());
 		}
@@ -1064,13 +1074,17 @@ abstract public class AbstractLibrary {
 	 *            TODO
 	 * @return
 	 */
-	abstract protected String generateRegisterModulePath(LibraryRequest request, String moduleName,
-			String moduleUrl);
+	abstract protected String generateRegisterModulePath(LibraryRequest request, String moduleName, String moduleUrl);
 
 	/**
 	 * @return
 	 */
 	abstract protected String generateRequire(String module);
+
+	/**
+	 * @return
+	 */
+	abstract protected String generateProvide();
 
 	//
 	// Internals

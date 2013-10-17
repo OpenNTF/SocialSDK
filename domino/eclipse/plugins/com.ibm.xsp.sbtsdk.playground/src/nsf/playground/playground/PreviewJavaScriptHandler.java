@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.io.StringReader;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -23,6 +24,7 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.ReaderInputStream;
 import com.ibm.commons.util.io.json.JsonJavaFactory;
 import com.ibm.commons.util.io.json.JsonJavaObject;
+import com.ibm.commons.util.io.json.JsonObject;
 import com.ibm.commons.util.io.json.JsonParser;
 import com.ibm.sbt.playground.extension.JavaScriptPreviewExtension;
 import com.ibm.sbt.playground.extension.PlaygroundExtensionFactory;
@@ -129,11 +131,11 @@ public class PreviewJavaScriptHandler extends PreviewHandler {
 		env.prepareEndpoints();
 
 		// Push the dynamic parameters to the user session
-		JsonJavaObject p = options.getAsObject("params");
+		JsonObject p = (JsonObject)options.get("params");
 		if(p!=null) {
-			for(Map.Entry<String, Object> e: p.entrySet()) {
-				String name = e.getKey();
-				String value = e.getValue().toString();
+			for(Iterator<String> it= p.getJsonProperties(); it.hasNext(); ) {
+				String name = it.next();
+				String value = (String)p.getJsonProperty(name);
 				env.pushSessionParams(name, value);
 			}
 		}

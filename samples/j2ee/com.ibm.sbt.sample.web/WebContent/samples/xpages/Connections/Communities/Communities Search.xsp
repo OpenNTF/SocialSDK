@@ -158,11 +158,9 @@ print(viewScope.tag);
 							<xp:this.value>
 	<![CDATA[#{javascript:
 	var svc = new com.ibm.sbt.services.client.connections.communities.CommunityService();
-	var params = new com.ibm.sbt.services.client.connections.communities.CommunityParams();
 	print("repeat tag=" + viewScope.tag);
 	if (viewScope.tag!="") { 
-		params.setTag(viewScope.tag);
-		var relevantCommunties = svc.getPublicCommunities(params.getParameterMap());
+		var relevantCommunties = svc.getPublicCommunities(viewScope.tag);
 		return relevantCommunties;
 	} else {
 		return null;

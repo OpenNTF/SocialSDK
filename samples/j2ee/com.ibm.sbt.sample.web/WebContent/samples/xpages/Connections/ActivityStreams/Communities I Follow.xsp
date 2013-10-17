@@ -18,7 +18,7 @@
 							<xp:this.value>
 	<![CDATA[#{javascript:
 	var svc = new com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamService();
-	return svc.getUpdatesFromCommunitiesIFollow();
+	return svc.getAllUpdates();
 }]]></xp:this.value>
 							<xp:div>
 								<xp:table style="width:350px">

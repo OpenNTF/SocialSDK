@@ -26,8 +26,11 @@ define([ "../../../declare",
 		 "../../../connections/controls/vcard/SemanticTagService", 
 		 "../../../store/parameter",
 		 "../../../connections/ProfileConstants",
-		 "../../../connections/CommunityConstants"], 
-        function(declare, sbt, lang, Grid, ProfileGridRenderer, ProfileAction, SemanticTagService, parameter, consts, communities) {
+		 "../../../connections/CommunityConstants",
+		 "sbt/connections/CommunityService",
+		 "sbt/connections/CommunityConstants"], 
+        function(declare, sbt, lang, Grid, ProfileGridRenderer, ProfileAction, SemanticTagService, parameter, consts, communities,
+        		CommunityService, CommunityConstants) {
 
 	var sortVals = {
 			displayName: "displayName",
@@ -300,6 +303,135 @@ define([ "../../../declare",
                 
                 this.profileAction.execute(data, { grid : this.grid }, ev);
             }
+        },
+        
+        /**
+         * In the grid HTML an element can have an event attached 
+         * using dojo-attach-event="onClick: editMember".
+         * This method is the handler for the onclick event fired when
+         * clicking the "edit member" link on a member row.
+         * @method handleClick
+         * @param el the element that fired the event
+         * @param data all of the items from the current row of the grid. 
+         * @param ev the event 
+         */
+        editMember: function(el, data, ev) {
+         	var rbOwnerId = "rbOwner" + data.uid;
+         	var rbMemberId = "rbMember" + data.uid;
+
+        	var communityService = new CommunityService();
+        	communityService.getMembers(this.communityUuid).then(
+        	        function(members) {
+        	        	for (var i = 0; i < members.length; i++) {
+        	        		var member = members[i];
+        	        		if (member.getUserid() == data.uid) {
+        	        			if(!document.getElementById(rbOwnerId).checked && member.getRole() == "owner") {
+        	        				document.getElementById(rbOwnerId).checked = 'checked';
+        	        			} else {
+        	        				document.getElementById(rbMemberId).checked = 'checked';
+        	        			}
+        	        			break;
+        	        		}
+        	        	}
+        	          	var id = "editMember" + data.userid;
+        	            document.getElementById(id).style.display = "block";
+        	        },
+        	        function(error) {
+        	            console.log(error);
+        	        }
+        	);
+        },
+        
+        /**
+         * In the grid HTML an element can have an event attached 
+         * using dojo-attach-event="onClick: closeEditForm".
+         * This method is the handler for the onclick event fired when
+         * clicking the "cancel" link on the edit member form.
+         * @method handleClick
+         * @param el the element that fired the event
+         * @param data all of the items from the current row of the grid. 
+         * @param ev the event 
+         */
+        closeEditForm: function(el, data, ev) {
+        	var id = "editMember" + data.uid;
+            document.getElementById(id).style.display = "none";
+        },
+        
+        /**
+         * In the grid HTML an element can have an event attached 
+         * using dojo-attach-event="onClick: saveMemberChanges".
+         * This method is the handler for the onclick event fired when
+         * clicking the "save" link on the edit member form.
+         * @method handleClick
+         * @param el the element that fired the event
+         * @param data all of the items from the current row of the grid. 
+         * @param ev the event 
+         */
+        saveMemberChanges: function(el, data, ev) {
+        	var id = "role" + data.uid;
+        	var rbOwnerId = "rbOwner" + data.uid;
+        	var roleSpan = document.getElementById(id);
+        	var communityService = new CommunityService();
+        	communityService.getMembers(this.communityUuid).then(
+        	        function(members) {
+        	        	for (var i = 0; i < members.length; i++) {
+        	        		var member = members[i];
+        	        		if (member.getUserid() == data.uid) {
+        	        			if(document.getElementById(rbOwnerId).checked) {
+        	        				member.setRole(CommunityConstants.Owner);
+        	        				roleSpan.innerHTML = CommunityConstants.Owner;
+        	        			} else {
+        	        				member.setRole(CommunityConstants.Member);
+        	        				roleSpan.innerHTML = CommunityConstants.Member;
+        	        			}
+        	        			break;
+        	        		}
+        	        	}
+        	     
+        	        	id = "editMember" + data.uid;
+        	            document.getElementById(id).style.display = "none";
+        	        },
+        	        function(error) {
+        	            console.log(error);
+        	        }
+        	);
+        },
+        
+        /**
+         * In the grid HTML an element can have an event attached 
+         * using dojo-attach-event="onClick: removeMember".
+         * This method is the handler for for the onclick event fired when
+         * clicking the "remove member" link on a member row.
+         * @method handleClick
+         * @param el the element that fired the event
+         * @param data all of the items from the current row of the grid. 
+         * @param ev the event 
+         */
+        removeMember: function(el, data, ev) {
+        	var communityService = new CommunityService();
+      
+        	communityService.getMembers(this.communityUuid).then(
+        	        function(members) {
+        	        	var id = "member" + data.uid;
+        	        	for (var i = 0; i < members.length; i++) {
+        	        		var member = members[i];
+        	        		if (member.getUserid() == data.uid) {
+	        	        		// Remove member
+	        	        		communityService.removeMember(this.communityUuid, member.getUserid());
+	        	        		
+	        	        		// Remove row from table displaying the member
+	        	        		 var row = document.getElementById(rowid);
+	        	        		 row.parentNode.removeChild(row);
+        	        		}
+        	        	}
+        	     
+        	        	id = "editMember" + data.uid;
+        	            document.getElementById(id).style.display = "none";
+        	        },
+        	        function(error) {
+        	            console.log(error);
+        	        }
+        	);
         },
         
         /**

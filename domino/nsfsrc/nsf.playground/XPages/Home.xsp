@@ -8,7 +8,7 @@
 		<xp:dojoModule name="dijit.layout.ContentPane"></xp:dojoModule>
 		<xp:dojoModule name="dijit.layout.AccordionContainer"></xp:dojoModule>
 	</xp:this.resources>
-	<xc:ccOneUIStylesFixes></xc:ccOneUIStylesFixes>	
+	<xc:ccOneUIStylesFixes></xc:ccOneUIStylesFixes>
 	<xc:ccLayout navigationPath="/Home">
 		<div class="gsBody" role="region" aria-label="content">
 			<div id="tab2" dojoType="dijit.layout.ContentPane" title="Home">
@@ -39,7 +39,8 @@
 											capabilities to your applications.</p>
 										<p class="gsIcons">
 											<a href="http://bit.ly/ibmsbtcommunity">
-												<img src="home_arrow.png" alt=""></img>
+												<xp:image url="/home_arrow.png" id="image1">
+												</xp:image>
 												Connect to the IBM Social Business Toolkit Community
 											</a>
 										</p>
@@ -56,7 +57,8 @@
 										<p class="gsIcons">
 											<a
 												href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Social+Business+Toolkit+SDK+documentation#action=openDocument&amp;res_title=Installing_the_SDK_Playground_SDK1.0&amp;content=pdcontent">
-												<img src="home_arrow.png" alt=""></img>
+												<xp:image url="/home_arrow.png" id="image2">
+												</xp:image>
 												Playground Documentation
 											</a>
 										</p>
@@ -133,7 +135,8 @@
 												never expected.</p>
 											<p class="gsIcons">
 												<a href="http://bit.ly/ibmsbtcommunity">
-													<img src="home_arrow.png" alt=""></img>
+													<xp:image url="/home_arrow.png" id="image3">
+													</xp:image>
 													Connect to the IBM Social Business Toolkit Community
 												</a>
 											</p>
@@ -220,8 +223,9 @@
 											SDK.</p>
 										<p class="gsIcons">
 											<a href="http://bit.ly/ibmsbtcommunity">
-												<img src="home_arrow.png" alt=""></img>
-													Connect to the IBM Social Business Toolkit Community
+												<xp:image url="/home_arrow.png" id="image4">
+												</xp:image>
+												Connect to the IBM Social Business Toolkit Community
 											</a>
 										</p>
 									</td>
@@ -242,7 +246,8 @@
 											freely downloaded and used.</p>
 										<p class="gsIcons">
 											<a href="http://ibmsbt.openntf.org/">
-												<img src="home_arrow.png" alt=""></img>
+												<xp:image url="/home_arrow.png" id="image5">
+												</xp:image>
 												Social Business Toolkit SDK on OpenNTF
 											</a>
 										</p>
@@ -267,8 +272,10 @@
 											hosted on
 											Greenhouse. Greenhouse accounts are free.</p>
 										<p class="gsIcons">
-											<a href="https://greenhouse.lotus.com/wpsgh/wcm/myconnect/ghcontent/lotus+greenhouse+next+site/home/labs/ibm+social+business+toolkit">
-												<img src="home_arrow.png" alt=""></img>
+											<a
+												href="https://greenhouse.lotus.com/wpsgh/wcm/myconnect/ghcontent/lotus+greenhouse+next+site/home/labs/ibm+social+business+toolkit">
+												<xp:image url="/home_arrow.png" id="image6">
+												</xp:image>
 												IBM Greenhouse - Social Business Toolkit
 											</a>
 										</p>

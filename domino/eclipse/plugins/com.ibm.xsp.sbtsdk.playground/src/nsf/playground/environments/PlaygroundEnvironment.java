@@ -5,12 +5,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
+
 import nsf.playground.beans.DataAccessBean;
 import nsf.playground.extension.Endpoints;
 
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.jslibrary.SBTEnvironment;
 import com.ibm.sbt.playground.extension.PlaygroundExtensionFactory;
+import com.ibm.xsp.context.FacesContextEx;
 
 /**
  * This is an extended environment class holding extra playground specific information
@@ -18,6 +22,8 @@ import com.ibm.sbt.playground.extension.PlaygroundExtensionFactory;
  *
  */
 public class PlaygroundEnvironment extends SBTEnvironment {
+
+	public static final String SESSION_PARAMETERS_MAP	 = "sessionParamsMap";
 	
 	public static PlaygroundEnvironment getCurrentEnvironment() {
 		return getCurrentEnvironment(null);
@@ -119,6 +125,33 @@ public class PlaygroundEnvironment extends SBTEnvironment {
 		List<Endpoints> endpoints = PlaygroundExtensionFactory.getExtensions(Endpoints.class);
 		for(int i=0; i<endpoints.size(); i++) {
 			endpoints.get(i).prepareEndpoints(this);
+		}
+	}
+	
+	
+	public String getPropertyValueByName(String name) {
+		FacesContext context = FacesContext.getCurrentInstance();
+		if(context!=null) {
+			Map<String,String> map = (Map<String,String>)context.getExternalContext().getSessionMap().get(SESSION_PARAMETERS_MAP);
+			if(map!=null) {
+				String value = map.get(name);
+				if(value!=null) {
+					return value;
+				}
+			}
+		}
+		return super.getPropertyValueByName(name);
+	}
+
+	public void pushSessionParams(String name, String value) {
+		FacesContext context = FacesContext.getCurrentInstance();
+		if(context!=null) {
+			Map<String,String> map = (Map<String,String>)context.getExternalContext().getSessionMap().get(SESSION_PARAMETERS_MAP);
+			if(map==null) {
+				map = new HashMap<String, String>();
+				context.getExternalContext().getSessionMap().put(SESSION_PARAMETERS_MAP, map);
+			}
+			map.put(name, value);
 		}
 	}
 }

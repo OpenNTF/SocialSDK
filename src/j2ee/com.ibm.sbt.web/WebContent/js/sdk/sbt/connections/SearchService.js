@@ -251,17 +251,17 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         },
         
         /**
-         * Search Lotus Connection for public information.
+         * Returns the set of supported values that can be passed to the "scope" parameter of the Search API. 
+         * Scopes relating to Connections applications that have not been installed will not be returned.
          * 
-         * @method getResults
-         * @param query Text to search for
+         * @method getScopes
          * @param requestArgs
          */
-        getScopes: function(queryArg, requestArgs) {
+        getScopes: function(requestArgs) {
             var options = {
                 method : "GET",
                 handleAs : "text",
-                query : lang.mixin({ query : queryArg } , requestArgs || {})
+                query : requestArgs || {}
             };
             
             return this.getEntities(consts.AtomScopes, options, ScopeFeedCallbacks);

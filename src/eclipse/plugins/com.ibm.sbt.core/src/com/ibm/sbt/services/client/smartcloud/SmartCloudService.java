@@ -49,8 +49,11 @@ public class SmartCloudService extends ClientService {
 			if(StringUtil.equals(headerValue, "text/html")){
 				return true;
 			}
+		}else{
+			// In non form endpoint scenarios fall back to original implementation in clientservice
+			return super.isResponseRequireAuthentication(httpResponse);
 		}
 		return false;
-		
 	}
+
 }

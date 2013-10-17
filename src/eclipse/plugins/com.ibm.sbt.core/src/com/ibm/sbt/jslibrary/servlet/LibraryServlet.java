@@ -189,7 +189,7 @@ public class LibraryServlet extends BaseToolkitServlet {
 
             AbstractLibrary library = createLibrary(request);
             if (library == null) {
-                service400(req, resp, "Unable to handle request for {0} version:{1}", request.getJsLib(), request.getJsVersion());
+                service400(req, resp, "Unable to handle request for library={0}, version={1}", request.getJsLib(), request.getJsVersion());
             } else {
                 // handle the request
                 library.doGet(request);

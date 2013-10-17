@@ -1,0 +1,83 @@
+<!-- 
+/*
+ * � Copyright IBM Corp. 2012
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at:
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+ * implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */ -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+
+<link href="/sbt.bootstrap211/bootstrap/css/bootstrap.css" rel="stylesheet">
+<link href="/sbt.bootstrap211/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad : true
+	};
+</script>
+
+<script type="text/javascript" src="/sbt.dojo143/dojo/dojo.js"></script>
+</head>
+<body>
+
+	<h3>Get My Communties</h3>
+
+	<table class="table table-bordered" id="communitiesTable">
+		<tr class="label label-info">
+			<th>Title</th>
+			<th>Id</th>
+		</tr>
+	</table>
+	
+	<script>
+	dojo.registerModulePath('sbt.library','/sbt.sample.web/library');
+	var dj = dojo;
+	dj.require('sbt.library.init');
+
+	require(["sbt/connections/CommunityService", "sbt/dom"], 
+	    function(CommunityService,dom) {
+	        var createRow = function(title, communityUuid) {
+	            var table = dom.byId("communitiesTable");
+	            var tr = document.createElement("tr");
+	            table.appendChild(tr);
+	            var td = document.createElement("td");
+	            td.innerHTML = title;
+	            tr.appendChild(td);
+	            td = document.createElement("td");
+	            td.innerHTML = communityUuid;
+	            tr.appendChild(td);
+	        };
+
+	        var communityService = new CommunityService();
+	    	communityService.getMyCommunities().then(
+	            function(communities) {
+	                if (communities.length == 0) {
+	                    text = "You are not a member of any communities.";
+	                } else {
+	                    for(var i=0; i<communities.length; i++){
+	                        var community = communities[i];
+	                        var title = community.getTitle(); 
+	                        var communityUuid = community.getCommunityUuid(); 
+	                        createRow(title, communityUuid);
+	                    }
+	                }
+	            },
+	            function(error) {
+	                dom.setText("content", "Error code:" +  error.code + ", message:" + error.message);
+	            }       
+	    	);
+	    }
+	);
+	</script>
+</body>

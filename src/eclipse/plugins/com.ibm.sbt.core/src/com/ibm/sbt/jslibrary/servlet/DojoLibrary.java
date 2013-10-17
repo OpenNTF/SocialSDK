@@ -208,6 +208,14 @@ public class DojoLibrary extends AbstractLibrary {
 		sb.append("dojo.require('").append(module).append("')").append(";").append(newLine());
 		return sb.toString();
 	}
+	
+	/* (non-Javadoc)
+	 * @see com.ibm.sbt.jslibrary.servlet.AbstractLibrary#generateProvide()
+	 */
+	@Override
+	protected String generateProvide() {
+		return "dojo.provide(\"sbt.library.init\");";
+	}
 
 	/*
 	 * (non-Javadoc)

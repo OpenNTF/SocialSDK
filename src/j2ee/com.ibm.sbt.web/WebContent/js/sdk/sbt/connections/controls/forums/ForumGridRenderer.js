@@ -226,7 +226,7 @@ define(["../../../declare",
 	         },
 	    	
 	         getUserProfileHref: function(grid,item,i,items){
-	        	 return this.getProfileUrl(grid,item.getValue("authorId"));
+	        	 return this.getProfileUrl(grid,item.getValue("authorUserid"));
 	         }
 	    });
 	

@@ -29,10 +29,14 @@ if(u) {
 	}
 	var u = @Endpoint("connections").getUserIdentity()
 	if(u) {
-		var p = {userid:userBean.lcId}
-		var svc = new sbt.ConnectionsService("/profiles/atom/profile.do")
-		var msg = svc.get(p,"xml");
-		viewScope.text = msg.getXMLString(false)
+		var profileService=new com.ibm.sbt.services.client.connections.profiles.ProfileService();
+		var profile=profileService.getProfile(u);
+				
+		viewScope.profileUrl = profile.getProfileUrl();
+		viewScope.thumbNailUrl = profile.getThumbnailUrl();
+		
+		print(viewScope.profileUrl);
+		print(viewScope.thumbNailUrl);
 	}
 } catch(e) {
 	viewScope.text = I18n.format("\nException thrown\n\n{0}",e.toString())
@@ -41,7 +45,13 @@ if(u) {
 		</xp:button>
 		<br />
 		<pre>
-			<xp:text escape="true" id="computedField1" value="#{viewScope.text}"
+		<xp:label value="Profile URL :" id="label2"></xp:label>
+		<xp:text escape="true" id="computedField1" value="#{viewScope.profileUrl}"
+				style="font-family:Courier;">
+			</xp:text>
+			<br></br>
+			<xp:label value="ThumbNailUrl: " id="label1"></xp:label>
+			<xp:text escape="false" id="computedField2" value="#{viewScope.thumbNailUrl}"
 				style="font-family:Courier;">
 			</xp:text>
 		</pre>

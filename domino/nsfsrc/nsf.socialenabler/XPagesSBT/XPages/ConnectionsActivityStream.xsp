@@ -131,6 +131,35 @@
 												id="computedField3">
 											</xp:text>
 			</xp:tabPanel>
+			<xp:tabPanel id="tabPanel3">
+					<xp:this.label><![CDATA[#{javascript:return "Create a new Community"}]]></xp:this.label>
+					<xe:djContentPane id="djContentPane3"
+						partialRefresh="true">
+						</xe:djContentPane>
+						<xp:button value="Create a new community" id="button1">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete">
+							<xp:this.action><![CDATA[#{javascript:
+							var communityService = new com.ibm.sbt.services.client.connections.communities.CommunityService();
+							var community =  new com.ibm.sbt.services.client.connections.communities.Community(communityService, "");
+							community.setTitle("Test Community 1ab" + java.lang.System.currentTimeMillis());
+							community.setContent("Test Community updated by Update Community XPage snippet");
+							community.setCommunityType("private");
+							var tags = new java.util.ArrayList();
+							tags.add("tag1"); 
+							tags.add("tag2"); 
+							community.setTags(tags);
+							community = community.save(); 
+							
+							getComponent("computedField4").setValue(community.getCommunityUrl());
+
+    	}]]></xp:this.action>
+						</xp:eventHandler></xp:button>
+						<xp:text escape="true"
+												id="computedField4">
+											</xp:text>
+										
+			</xp:tabPanel>
 			</xp:tabbedPanel>
 		</xp:panel>
 	</xc:OneUILayout>

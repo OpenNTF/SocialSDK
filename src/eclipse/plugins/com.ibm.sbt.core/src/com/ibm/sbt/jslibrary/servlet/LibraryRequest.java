@@ -55,6 +55,7 @@ public class LibraryRequest {
     protected String toolkitExtUrl;
     protected String toolkitExtJsUrl;
     protected String jsLibraryUrl;
+    protected boolean init_js;
     protected boolean debug;
     protected boolean debugTransport;
     protected boolean mockTransport;
@@ -62,6 +63,7 @@ public class LibraryRequest {
     protected SBTEnvironment environment;
 
     // List of the default endpoints being added by default.
+    public static final String INIT_JS = "/init.js";
     public static final String DEFAULT_JSLIB = "dojo";
     public static final String DEFAULT_VERSION = "1.4";
     public static final Boolean DEFAULT_DEBUG = false;
@@ -236,6 +238,13 @@ public class LibraryRequest {
     }
     
     /**
+	 * @return the js
+	 */
+	public boolean isInitJs() {
+		return init_js;
+	}
+    
+    /**
      * 
      * @return
      */
@@ -333,8 +342,11 @@ public class LibraryRequest {
      * @throws IOException
      */
     protected void readFromRequest(HttpServletRequest req, SBTEnvironment defaultEnvironment) throws ServletException, IOException {
+    	String pathInfo = req.getPathInfo();
+    	System.out.println("XXXXXXXX PATH INFO : "+pathInfo);
+    	init_js = INIT_JS.equalsIgnoreCase(pathInfo);
         jsLib = readString(req, PARAM_JSLIB, getDefaultJsLib());
-        jsVersion = readString(req, PARAM_JSVERSION, "dojo".equals(jsLib) ? getDefaultJsVersion() : "");
+        jsVersion = readString(req, PARAM_JSVERSION, DEFAULT_JSLIB.equals(jsLib) ? getDefaultJsVersion() : "");
         debug = Boolean.parseBoolean(readString(req, PARAM_DEBUG, getDefaultDebug()));
         debugTransport = Boolean.parseBoolean(readString(req, PARAM_DEBUG_TRANSPORT, getDefaultDebugTransport()));
         mockTransport = Boolean.parseBoolean(readString(req, PARAM_MOCK_TRANSPORT, getDefaultMockTransport()));

@@ -343,7 +343,6 @@ public class LibraryRequest {
      */
     protected void readFromRequest(HttpServletRequest req, SBTEnvironment defaultEnvironment) throws ServletException, IOException {
     	String pathInfo = req.getPathInfo();
-    	System.out.println("XXXXXXXX PATH INFO : "+pathInfo);
     	init_js = INIT_JS.equalsIgnoreCase(pathInfo);
         jsLib = readString(req, PARAM_JSLIB, getDefaultJsLib());
         jsVersion = readString(req, PARAM_JSVERSION, DEFAULT_JSLIB.equals(jsLib) ? getDefaultJsVersion() : "");

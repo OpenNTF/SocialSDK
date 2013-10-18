@@ -43,7 +43,7 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 		members : [],
 		
 		/**The result the user has chosen from the search suggestions */
-		selectedResultItem : {text:"",id:""},
+		_selectedResultItem : {text:"",id:""},
 		
 		/*Selected row is used for keyboard navigation in the applications pop up*/
 		_selectedRow : -1,
@@ -61,6 +61,20 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 				this.searchBoxAction._setPrimaryComponent(this.selectedApplication,this);
 			}
 		},
+		
+		getSelectedResult: function(){
+			return this._selectedResultItem;
+		},
+		
+		setSelectedResult: function(name,id){
+			if(name){
+				this._selectedResultItem.name = name;
+			}
+			if(id){
+				this._selectedResultItem.id = id;
+			}
+		},
+		
 		/**
 		 * function is called after this class has been constructed
 		 * the functions in the post create need to be called after the class has been
@@ -485,8 +499,8 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
             		data.onclick = function (event) { 
             			
             			context.searchBoxAction.setSuggestedSearch(event,popUp,context);
-            			context.selectedResultItem.text = title;
-            			context.selectedResultItem.id = id;
+            			context._selectedResultItem.text = title;
+            			context._selectedResultItem.id = id;
             		};    		
             		row.appendChild(data);
             		popUp.appendChild(row);

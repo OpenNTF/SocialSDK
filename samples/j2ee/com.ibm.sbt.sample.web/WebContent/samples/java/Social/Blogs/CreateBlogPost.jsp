@@ -18,7 +18,7 @@
 	import="com.ibm.sbt.services.client.connections.blogs.BlogService"%>
 <%@page import="com.ibm.sbt.services.client.connections.blogs.BlogList"%>
 <%@page import="com.ibm.sbt.services.client.connections.blogs.Blog"%>
-<%@page import="com.ibm.sbt.services.client.connections.blogs.Post"%>
+<%@page import="com.ibm.sbt.services.client.connections.blogs.BlogPost"%>
 <%@page import="java.util.Collection"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
@@ -42,7 +42,7 @@
 			BlogList blogs = service.getBlogs();
 			if(blogs.size()>0){
 				String blogHandle = ((Blog)blogs.get(0)).getHandle();
-				Post post = new Post(service, "");
+				BlogPost post = new BlogPost(service, "");
 				Long random = System.currentTimeMillis();
 				post.setTitle("Test Blog Post" + random);
 				post.setContent("Test Blog Post Content");

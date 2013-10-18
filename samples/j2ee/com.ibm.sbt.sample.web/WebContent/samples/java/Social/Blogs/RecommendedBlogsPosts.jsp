@@ -19,7 +19,7 @@
 
 <%@page import="com.ibm.sbt.services.client.connections.blogs.BlogService"%>
 <%@page import="com.ibm.sbt.services.client.connections.blogs.model.BaseBlogEntity"%>
-<%@page import="com.ibm.sbt.services.client.connections.blogs.PostList"%>
+<%@page import="com.ibm.sbt.services.client.connections.blogs.BlogPostList"%>
 <%@page import="com.ibm.sbt.services.client.connections.blogs.model.Author"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.sbt.services.client.connections.activitystreams.model.Reply"%>
@@ -39,7 +39,7 @@
 	<%
 		try {
 			BlogService service = new BlogService();
-			PostList entries = service.GetRecommendedBlogsPosts();
+			BlogPostList entries = service.GetRecommendedBlogsPosts();
 
 			if (entries.size() <= 0)
 				out.println("No updates to be displayed");

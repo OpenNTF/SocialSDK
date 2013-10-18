@@ -74,6 +74,9 @@ define(["../../../declare",
 			}
 
 			var div = this._convertToDomNode(htmlTemplate);
+			var temp = div.getElementsByTagName("input");
+			var input = temp[0];
+			SearchBox._searchInput = input;
 			return div;	
 		},
 		

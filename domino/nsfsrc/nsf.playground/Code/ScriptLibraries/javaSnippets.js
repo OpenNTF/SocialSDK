@@ -25,7 +25,8 @@ function createSnippet() {
 		pageGlobal.documentationPanel.innerHTML = "";
 	}
 	
-	dojo.byId("preview").src = pageGlobal._previewFrame;	
+	createPropertyPanel(null);
+	selectStack(pageGlobal.previewParams);
 	updateLabel(null);
 	updateNavSelection();
 }
@@ -43,6 +44,10 @@ function loadSnippet(id) {
 			if(pageGlobal.propertiesEditor) pageGlobal.propertiesEditor.setValue(r.properties);
 			if(pageGlobal.documentationPanel) pageGlobal.documentationPanel.innerHTML = r.documentation;
 			selectTab(pageGlobal.tabJsp);
+			createPropertyPanel(pageGlobal.params);
+			if(pageGlobal.previewStack) {
+				selectStack(pageGlobal.previewParams);
+			}
 			updateLabel(r);
 			updateNavSelection();
 			runCode(false);
@@ -54,6 +59,11 @@ function loadSnippet(id) {
 function selectTab(tab) {
 	var tc = dijit.byId(pageGlobal.tabContainer);
 	var pn = dijit.byId(tab);
+	tc.selectChild(pn);
+}
+function selectStack(stack) {
+	var tc = dijit.byId(pageGlobal.previewStack);
+	var pn = dijit.byId(stack);
 	tc.selectChild(pn);
 }
 
@@ -73,10 +83,15 @@ function runCode(debug) {
 	
 	// Get the current environment
 	var env = dojo.byId(pageGlobal.cbEnv).value;
-	
+	var params = gatherParams();
 	var options = {
 		env: env,
-		debug: debug
+		debug: debug,
+		params: params
+	}
+
+	if(pageGlobal.previewStack) {
+		selectStack(pageGlobal.previewPreview);
 	}
 	
 	// And update the frame by executing a post to a servlet

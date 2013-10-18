@@ -13,7 +13,7 @@
     -->
   <managed-bean>
     <managed-bean-name>PasswordStore</managed-bean-name>
-    <managed-bean-class>com.ibm.sbt.security.authentication.password.consumer.UserPassword
+    <managed-bean-class>com.ibm.sbt.security.credential.store.MemoryStore
 		</managed-bean-class>
     <managed-bean-scope>application</managed-bean-scope>
   </managed-bean>
@@ -56,11 +56,11 @@
     </managed-property>
     <managed-property>
       <property-name>consumerKey</property-name>
-      <value/>
+      <value></value>
     </managed-property>
     <managed-property>
       <property-name>consumerSecret</property-name>
-      <value/>
+      <value></value>
     </managed-property>
     <managed-property>
       <property-name>signatureMethod</property-name>
@@ -72,7 +72,7 @@
    -->
   <managed-bean>
     <managed-bean-name>twitter</managed-bean-name>
-    <managed-bean-class>com.ibm.xsp.extlib.sbt.services.client.endpoints.TwitterEndpoint
+    <managed-bean-class>com.ibm.sbt.services.endpoints.TwitterOAuthEndpoint
 		</managed-bean-class>
     <managed-bean-scope>application</managed-bean-scope>
     <!-- Endpoint URL -->
@@ -107,11 +107,11 @@
     </managed-property>
     <managed-property>
       <property-name>consumerKey</property-name>
-      <value/>
+      <value></value>
     </managed-property>
     <managed-property>
       <property-name>consumerSecret</property-name>
-      <value/>
+      <value></value>
     </managed-property>
     <managed-property>
       <property-name>signatureMethod</property-name>
@@ -119,7 +119,7 @@
     </managed-property>
     <managed-property>
       <property-name>applicationAccessToken</property-name>
-      <value/>
+      <value></value>
     </managed-property>
   </managed-bean>
   <!--
@@ -157,11 +157,11 @@
     </managed-property>
     <managed-property>
       <property-name>consumerKey</property-name>
-      <value/>
+      <value></value>
     </managed-property>
     <managed-property>
       <property-name>consumerSecret</property-name>
-      <value/>
+      <value></value>
     </managed-property>
     <managed-property>
       <property-name>appId</property-name>
@@ -216,11 +216,15 @@
     </managed-property>
     <managed-property>
       <property-name>consumerKey</property-name>
-      <value/>
+      <value></value>
     </managed-property>
     <managed-property>
       <property-name>consumerSecret</property-name>
-      <value/>
+      <value></value>
+    </managed-property>
+    <managed-property>
+      <property-name>appId</property-name>
+      <value>XPagesSBT</value>
     </managed-property>
   </managed-bean>
   <!--
@@ -232,9 +236,8 @@
 		</managed-bean-class>
     <managed-bean-scope>session</managed-bean-scope>
     <managed-property>
-      <property-name>url</property-name>
-      <!--        <value>https://qs.renovations.com:444</value>-->
-      <value>https://greenhouse.lotus.com</value>
+    <property-name>url</property-name>
+       <value>https://greenhouse.lotus.com</value>
     </managed-property>
     <managed-property>
       <property-name>authenticationService</property-name>
@@ -306,14 +309,14 @@
     </managed-property>
     <managed-property>
       <property-name>authenticationPage</property-name>
-      <value>/openntf/XPagesSbt.nsf/_BasicLogin?endpoint=w3Connections</value>
+      <value>_BasicLogin?endpoint=tapStageConnections4</value>
     </managed-property>
   </managed-bean>
   <!--
   		Greenhouse Sametime 
    -->
   <managed-bean>
-    <managed-bean-name>sametime</managed-bean-name>
+    <managed-bean-name>greenhouseSametime</managed-bean-name>
     <managed-bean-class>com.ibm.sbt.services.endpoints.SametimeBasicEndpoint
 		</managed-bean-class>
     <managed-bean-scope>session</managed-bean-scope>
@@ -364,10 +367,6 @@
     <managed-property>
       <property-name>url</property-name>
       <value>http://projects.openntf.org</value>
-    </managed-property>
-    <managed-property>
-      <property-name>credentialStore</property-name>
-      <value>PwdStore</value>
     </managed-property>
     <managed-property>
       <property-name>authenticationPage</property-name>

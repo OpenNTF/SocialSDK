@@ -2,6 +2,7 @@
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
 	xmlns:xe="http://www.ibm.com/xsp/coreex">
 	<xp:this.resources>
+		<xp:script src="/commonSnippets.js" clientSide="true"></xp:script>
 		<xp:script src="/javaSnippets.js" clientSide="true"></xp:script>
 		<xp:dojoModule name="dojo.hash"></xp:dojoModule>
 		<xp:dojoModule name="extlib.codemirror.lib.codemirror"></xp:dojoModule>
@@ -19,6 +20,9 @@
 	jspEditor:			null,	// Java editor ID
 	propertiesEditor:	null,	// Properties editor
 	documentationPanel: null, 	// Documentation panel
+	previewStack: 		null,	// Preview stack container
+	previewPreview:		null,	// Preview panel
+	previewParams: 		null,	// Dynamic params panel
 	
 	// IFrame content
 	_previewFrame:	null,
@@ -73,6 +77,7 @@ if(doc) {	o = {		status:			"ok",		id:				snippetId,		unid:			doc.getUniversa
 		properties:		doc.getItemValueString("properties"),
 		documentation:	doc.getItemValueString("documentation")
 	}
+	o.params = snippetBean.extractParams([o.html,o.js,o.css]);
 	return o;}o = {	status:		"error",	msg:		"Cannot open document with id "+id}return o;]]></xe:this.script>
 				</xe:remoteMethod>
 			</xe:this.methods>
@@ -155,6 +160,10 @@ if(doc) {	o = {		status:			"ok",		id:				snippetId,		unid:			doc.getUniversa
 									<xe:basicLeafNode label="Run"
 										styleClass="dijitEditorIcon dijitEditorIconViewSource"
 										onClick="runCode(false)">
+									</xe:basicLeafNode>
+									<xe:basicLeafNode label="Edit Parameters"
+										styleClass="dijitEditorIcon dijitEditorIconViewSource"
+										onClick="showParams()">
 									</xe:basicLeafNode>
 								</xe:this.treeNodes>
 							</xe:toolbar>

@@ -4,11 +4,14 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.io.StringWriter;
+import java.util.Iterator;
+import java.util.Map;
 
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import lotus.domino.Document;
 import lotus.domino.NotesException;
@@ -27,6 +30,7 @@ import com.ibm.commons.util.PathUtil;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonJavaFactory;
 import com.ibm.commons.util.io.json.JsonJavaObject;
+import com.ibm.commons.util.io.json.JsonObject;
 import com.ibm.commons.util.io.json.JsonParser;
 import com.ibm.sbt.jslibrary.SBTEnvironment;
 import com.ibm.xsp.model.domino.DominoUtils;
@@ -82,6 +86,7 @@ public class PreviewJavaHandler extends PreviewHandler {
 	}
 	
 	protected void execRequest(HttpServletRequest req, HttpServletResponse resp, RequestParams requestParams) throws ServletException, IOException {
+		HttpSession session = req.getSession();
 		resp.setContentType("text/html");
 		resp.setStatus(HttpServletResponse.SC_OK);
 
@@ -99,6 +104,16 @@ public class PreviewJavaHandler extends PreviewHandler {
 		String envName = options.getString("env");
 		PlaygroundEnvironment env = dataAccess.getEnvironment(envName);
 		env.prepareEndpoints();
+
+		// Push the dynamic parameters to the user session
+		JsonObject p = (JsonObject)options.get("params");
+		if(p!=null) {
+			for(Iterator<String> it= p.getJsonProperties(); it.hasNext(); ) {
+				String name = it.next();
+				String value = (String)p.getJsonProperty(name);
+				env.pushSessionParams(name, value);
+			}
+		}
 		
 		String serverUrl = composeServerUrl(req);
 		String dbUrl = composeDatabaseUrl(req,serverUrl);

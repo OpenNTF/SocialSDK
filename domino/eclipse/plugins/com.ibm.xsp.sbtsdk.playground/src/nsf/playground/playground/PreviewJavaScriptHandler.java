@@ -4,12 +4,15 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.io.StringReader;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import nsf.playground.beans.DataAccessBean;
 import nsf.playground.environments.PlaygroundEnvironment;
@@ -21,6 +24,7 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.ReaderInputStream;
 import com.ibm.commons.util.io.json.JsonJavaFactory;
 import com.ibm.commons.util.io.json.JsonJavaObject;
+import com.ibm.commons.util.io.json.JsonObject;
 import com.ibm.commons.util.io.json.JsonParser;
 import com.ibm.sbt.playground.extension.JavaScriptPreviewExtension;
 import com.ibm.sbt.playground.extension.PlaygroundExtensionFactory;
@@ -102,6 +106,7 @@ public class PreviewJavaScriptHandler extends PreviewHandler {
 	}
 
 	protected void execRequest(HttpServletRequest req, HttpServletResponse resp, RequestParams requestParams) throws ServletException, IOException {
+		HttpSession session = req.getSession();
 		resp.setContentType("text/html");
 
 		String sOptions = requestParams.sOptions;
@@ -113,6 +118,7 @@ public class PreviewJavaScriptHandler extends PreviewHandler {
 		
 		Properties properties = new Properties();
 		try {
+			// Pass the properties from the file
 			if(StringUtil.isNotEmpty(requestParams.properties)) {
 				properties.load(new ReaderInputStream(new StringReader(requestParams.properties)));
 			}
@@ -123,6 +129,16 @@ public class PreviewJavaScriptHandler extends PreviewHandler {
 		String envName = options.getString("env");
 		PlaygroundEnvironment env = dataAccess.getEnvironment(envName);
 		env.prepareEndpoints();
+
+		// Push the dynamic parameters to the user session
+		JsonObject p = (JsonObject)options.get("params");
+		if(p!=null) {
+			for(Iterator<String> it= p.getJsonProperties(); it.hasNext(); ) {
+				String name = it.next();
+				String value = (String)p.getJsonProperty(name);
+				env.pushSessionParams(name, value);
+			}
+		}
 		
 		String serverUrl = composeServerUrl(req);
 		String dbUrl = composeDatabaseUrl(req,serverUrl);

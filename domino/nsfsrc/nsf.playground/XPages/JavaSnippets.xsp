@@ -2,7 +2,7 @@
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
 	xmlns:xe="http://www.ibm.com/xsp/coreex">
 	<xp:this.resources>
-		<xp:script src="/properties.js" clientSide="true"></xp:script>
+		<xp:script src="/commonSnippets.js" clientSide="true"></xp:script>
 		<xp:script src="/javaSnippets.js" clientSide="true"></xp:script>
 		<xp:dojoModule name="dojo.hash"></xp:dojoModule>
 		<xp:dojoModule name="extlib.codemirror.lib.codemirror"></xp:dojoModule>

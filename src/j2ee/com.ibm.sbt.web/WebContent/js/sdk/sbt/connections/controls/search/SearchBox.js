@@ -74,7 +74,7 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 				this._selectedResultItem.id = id;
 			}
 		},
-		
+		 
 		/**
 		 * function is called after this class has been constructed
 		 * the functions in the post create need to be called after the class has been

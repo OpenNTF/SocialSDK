@@ -26,13 +26,13 @@ import com.ibm.sbt.services.client.connections.blogs.model.BaseBlogEntityList;
  * @author Swati Singh
  */
 
-public class PostList extends BaseBlogEntityList  {
+public class BlogPostList extends BaseBlogEntityList  {
 
-	public PostList(Response requestData, BaseService service) {
+	public BlogPostList(Response requestData, BaseService service) {
 		super(requestData, service);
 	}
 	
-	public PostList(Response requestData, BlogsFeedHandler feedHandler) {
+	public BlogPostList(Response requestData, BlogsFeedHandler feedHandler) {
 		super(requestData, feedHandler);
 	}
 

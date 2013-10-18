@@ -15,8 +15,8 @@
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@page import="com.ibm.sbt.services.client.connections.blogs.BlogService"%>
-<%@page import="com.ibm.sbt.services.client.connections.blogs.Post"%>
-<%@page import="com.ibm.sbt.services.client.connections.blogs.PostList"%>
+<%@page import="com.ibm.sbt.services.client.connections.blogs.BlogPost"%>
+<%@page import="com.ibm.sbt.services.client.connections.blogs.BlogPostList"%>
 <%@page import="java.util.Collection"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
@@ -38,8 +38,8 @@
 	<%
 	try {
 		BlogService service = new BlogService();
-		PostList entries = service.getBlogsPosts();
-		Post post = (Post)entries.get(0);
+		BlogPostList entries = service.getBlogsPosts();
+		BlogPost post = (BlogPost)entries.get(0);
 		post.setTitle("Updated Test Blog title");
 		post.setContent("Updated Test Blog Post Content");
 		service.updateBlogPost(post, "test");

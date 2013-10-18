@@ -785,39 +785,89 @@ public class ForumService extends BaseService {
 	}
 
 
-	/**
-	 * This method returns all of the replies for a specific forum topic
-	 * 
-	 * @param topicUuid
-	 * @return ReplyList
-	 * @throws ForumServiceException
-	 */
-	public ReplyList getForumReplies(String topicUuid) throws ForumServiceException {
-		return getForumReplies(topicUuid,null);
-	}
-
-	/**
-	 * This method returns all of the replies for a specific forum topic
-	 * 
-	 * @param topicUuid
-	 * @param parameters
-	 * @return ReplyList
-	 * @throws ForumServiceException
-	 */
-	public ReplyList getForumReplies(String topicUuid, Map<String, String> parameters) throws ForumServiceException {
+	private ReplyList getReplies(Map<String, String> parameters) throws ForumServiceException {
+		if (parameters != null){
+			if(StringUtil.isEmpty(parameters.get(TOPIC_UNIQUE_IDENTIFIER)) && 
+					StringUtil.isEmpty(parameters.get(REPLY_UNIQUE_IDENTIFIER))){
+					throw new ForumServiceException(null, "null post Uuid");
+			}
+		}
 		String myRepliesUrl = resolveUrl(ForumType.REPLIES, null);
 		ReplyList replies = null;
 		if(null == parameters){
 			parameters = new HashMap<String, String>();
 		}
-		parameters.put(TOPIC_UNIQUE_IDENTIFIER, topicUuid);
 		try {
 			replies = (ReplyList) getEntities(myRepliesUrl, parameters, new RepliesFeedHandler(this));
 		} catch (Exception e) {
-			throw new ForumServiceException(e,"error getting topic replies");
+			throw new ForumServiceException(e,"error getting forum replies");
 		} 
 
 		return replies;
+	}
+	 /**
+     * Get a list for forum replies that includes the replies in the specified post.
+     * The post uuid must be specified in the parametetrs as either:
+     * topicUuid or replyUuid 
+     * 
+	 * @param parameters
+	 * @return ReplyList
+	 * @throws ForumServiceException
+	 */
+	public ReplyList getForumReplies(Map<String, String> parameters) throws ForumServiceException {
+		
+		return getReplies(parameters);
+	}
+	/**
+     * Get a list for forum replies that includes the replies of a Forum Topic.
+     * 
+     * @param topicUuid
+	 * @return ReplyList
+	 * @throws ForumServiceException
+	 */
+	public ReplyList getForumTopicReplies(String topicUuid) throws ForumServiceException {
+		return getForumTopicReplies(topicUuid, null);
+	}
+	 /**
+     * Get a list for forum replies that includes the replies of a Forum Topic.
+     * 
+     * @param topicUuid
+	 * @param parameters
+	 * @return ReplyList
+	 * @throws ForumServiceException
+	 */
+	public ReplyList getForumTopicReplies(String topicUuid, Map<String, String> parameters) throws ForumServiceException {
+		if(null == parameters){
+			parameters = new HashMap<String, String>();
+		}
+		parameters.put(TOPIC_UNIQUE_IDENTIFIER, topicUuid);
+		return getReplies(parameters);
+		
+	}
+	/**
+     * Get a list for forum replies that includes the replies of a Forum Reply.
+     * 
+     * @param topicUuid
+	 * @return ReplyList
+	 * @throws ForumServiceException
+	 */
+	public ReplyList getForumReplyReplies(String replyUuid) throws ForumServiceException {
+		return getForumReplyReplies(replyUuid, null);
+	}
+	/**
+     * Get a list for forum replies that includes the replies of a Forum Reply.
+     * 
+     * @param replyUuid
+	 * @param parameters
+	 * @return ReplyList
+	 * @throws ForumServiceException
+	 */
+	public ReplyList getForumReplyReplies(String replyUuid, Map<String, String> parameters) throws ForumServiceException {
+		if(null == parameters){
+			parameters = new HashMap<String, String>();
+		}
+		parameters.put(REPLY_UNIQUE_IDENTIFIER, replyUuid);
+		return getReplies(parameters);
 	}
 
 	/**

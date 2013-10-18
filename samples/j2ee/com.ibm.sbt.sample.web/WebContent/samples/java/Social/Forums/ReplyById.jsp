@@ -47,7 +47,7 @@
 			TopicList topics = svc.getMyForumTopics();
 			if(topics.size()>0){
 				ForumTopic topic = (ForumTopic)topics.iterator().next();
-				ReplyList replies = svc.getForumReplies(topic.getTopicUuid());
+				ReplyList replies = svc.getForumTopicReplies(topic.getTopicUuid());
 				if(replies.size()>0){
 					ForumReply reply = (ForumReply)replies.iterator().next();
 					

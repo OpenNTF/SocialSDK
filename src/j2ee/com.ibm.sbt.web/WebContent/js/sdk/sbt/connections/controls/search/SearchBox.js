@@ -51,6 +51,8 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 		/*used to check that search results that are displayed are from the application the user selected */
 		_primaryComponent: "all",
 		
+		_searchInput: null,
+		
         /**
          * @method constructor The constructor for the SearchBox class
          * @param args
@@ -60,6 +62,22 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 			if(this.selectedApplication != "allconnections"){
 				this.searchBoxAction._setPrimaryComponent(this.selectedApplication,this);
 			}
+		},
+		
+		setInputValue: function(value){
+			this._searchInput.value = value;
+		},
+		
+		getInputValue: function(){
+			return this._searchInput.value;
+		},
+		
+		disableSearchInput: function(){
+			this._searchInput.disabled = true;
+		},
+		
+		enableSearchInput: function(){
+			this._searchInput.disabled = false;
 		},
 		
 		getSelectedResult: function(){
@@ -494,7 +512,6 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
             		var id = results[i].getId();
             		data.innerHTML = title;
             		data.id = results[i].getId();
-            		console.log(results[i].getCategoryTerms());
             		data.style = "cursor:pointer";
             		data.onclick = function (event) { 
             			

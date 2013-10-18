@@ -2,11 +2,22 @@
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
 	xmlns:xe="http://www.ibm.com/xsp/coreex">
 	<xp:this.resources>
-		<xp:script src="http://priand64.swg.usma.ibm.com/osplayground/gadgets/js/container:embedded-experiences.js?c=1&amp;debug=1&amp;container=default" clientSide="true"></xp:script>
-		<xp:script src="/gadgetSnippets.js" clientSide="true"></xp:script>
+		<xp:script
+			src="/.ibmxspres/domino/osplayground/gadgets/js/container:embedded-experiences:open-views:actions.js?c=1&amp;debug=1&amp;container=default"
+			clientSide="true">
+		</xp:script>
+		<xp:dojoModulePath prefix="explorer"
+			url="/.ibmxspres/domino/osplayground/explorer">
+		</xp:dojoModulePath>
+		<xp:dojoModulePath prefix="playground"
+			url="/modules">
+		</xp:dojoModulePath>
+		<xp:dojoModule name="playground.gadgetSnippets"></xp:dojoModule>
 		<xp:dojoModule name="dojo.hash"></xp:dojoModule>
 		<xp:dojoModule name="extlib.codemirror.lib.codemirror"></xp:dojoModule>
-		<xp:styleSheet href="/.ibmxspres/.extlib/codemirror/lib/codemirror.css"></xp:styleSheet>
+		<xp:styleSheet
+			href="/.ibmxspres/.extlib/codemirror/lib/codemirror.css">
+		</xp:styleSheet>
 	</xp:this.resources>
 
 	<xc:ccMainPageResources></xc:ccMainPageResources>
@@ -37,25 +48,6 @@
 	tabJson:		'#{id:tabJson}',
 	codeDialog:		'#{id:codeDialog}'
 }
-dojo.addOnLoad(function() {
-   dojo.connect(window, "onresize", resize);
-   resize();
-});
-dojo.addOnLoad(function() {
-   initOSContainer();
-});
-
-function prepend(h,f) {
-	return function() {
-		if(f) {
-			f.apply(this,arguments);
-		}
-		if(h) {
-			h.apply(this,arguments);
-		}
-	};
-}
-XSP._partialRefresh = prepend(XSP._partialRefresh,updateNavSelection);
 ]]></xp:this.value>
 	</xp:scriptBlock>
 
@@ -112,7 +104,7 @@ return o;]]></xe:this.script>
 					<xp:dojoAttribute name="design" value="sidebar"></xp:dojoAttribute>
 				</xe:this.dojoAttributes>
 				<xe:djBorderPane id="djBorderPane3" region="leading"
-					splitter="true" style="width:280px">
+					splitter="true" style="width:180px">
 					<xp:div id="leftRefresh" style="height: 100%">
 						<xc:ccAssetTree type="gadget"></xc:ccAssetTree>
 					</xp:div>
@@ -229,7 +221,7 @@ if(doc) {
 								<xe:this.treeNodes>
 									<xe:basicLeafNode label="Run"
 										styleClass="dijitEditorIcon dijitEditorIconViewSource"
-										onClick="runCode(false)">
+										onClick="dojo.publish('runCode', false);">
 									</xe:basicLeafNode>
 								</xe:this.treeNodes>
 							</xe:toolbar>
@@ -246,33 +238,14 @@ if(doc) {
 					</xe:djBorderContainer>
 				</xe:djBorderPane>
 				<xe:djBorderPane id="djBorderPane1" region="right"
-					splitter="true" style="width:280px">
-					<div id="asgadget" style="height: 100%; width: 100%;">
+					splitter="true" style="width:1px">
+					<div id="asgadget"
+						style="height: 100%; width: 100%;">
 					</div>
 				</xe:djBorderPane>
 			</xe:djBorderContainer>
 		</xc:ccLayout>
 	</xp:form>
-
-	<xp:scriptBlock>
-		<xp:this.value><![CDATA[function loadFromHash() {
-	if(dojo.hash()) {
-		var obj = dojo.queryToObject(dojo.hash());
-		if(obj.snippet) {
-			setTimeout(function() {loadSnippet(obj.snippet)});
-		} 
-	} else {
-		createSnippet();
-	}
-}
-dojo.addOnLoad( function() {	
-	dojo.subscribe("/dojo/hashchange",loadFromHash);
-	if(dojo.hash()) {
-		loadFromHash()
-	}
-})
-]]></xp:this.value>
-	</xp:scriptBlock>
 
 	<xe:dialog id="snippetDialog" title="Save Gadget">
 		<xp:panel id="panel1" style="padding: 5px">
@@ -299,7 +272,8 @@ return "You don't have enough rights to edit and save this gadget"}]]></xe:this.
 										</xp:saveDocument>
 										<xp:executeScript>
 											<xp:this.script><![CDATA[#{javascript:getComponent("snippetDialog").hide('widgetContainer1')
-var s = "loadSnippet('"+document1.getDocument().getUniversalID()+"');"
+//TODO is this really the only option?  This is pretty ugly
+var s = "dojo.publish('com.ibm.xsp.playground.loadsnippet','" + document1.getDocument().getUniversalID() + "');";
 view.postScript(s)}]]></xp:this.script>
 										</xp:executeScript>
 									</xp:actionGroup>

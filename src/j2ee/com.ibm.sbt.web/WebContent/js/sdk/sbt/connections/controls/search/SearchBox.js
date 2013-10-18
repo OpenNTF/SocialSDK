@@ -31,21 +31,25 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 		renderer: null,
         
 		/** The Application the user will select for example files, wikis etc, initially set to all */
-        selectedApplication: "allconnections",        	
+        selectedApplication: "allconnections",       	
         
         /** The phrase the user will search for */
         searchQuery: "",
         
         /** Search Service, used to perform the search */
         searchService: null,
-        
-        /**Selected row is used for keyboard navigation in the applications pop up*/
-		_selectedRow : -1,
-		
+
 		/** This list is used to keep track of selected members **/
 		members : [],
 		
+		/**The result the user has chosen from the search suggestions */
+		selectedResultItem : {text:"",id:""},
 		
+		/*Selected row is used for keyboard navigation in the applications pop up*/
+		_selectedRow : -1,
+		
+		/*used to check that search results that are displayed are from the application the user selected */
+		_primaryComponent: "all",
 		
         /**
          * @method constructor The constructor for the SearchBox class
@@ -53,19 +57,21 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
          */
 		constructor: function(args){
 			lang.mixin(this, args);
+			if(this.selectedApplication != "allconnections"){
+				this.searchBoxAction._setPrimaryComponent(this.selectedApplication,this);
+			}
 		},
 		/**
 		 * function is called after this class has been constructed
 		 * the functions in the post create need to be called after the class has been
 		 * instantiated so parameters in the dijit base classes can be initialised. 
-		 * @method postCreate
+		 * @method postCreate 
 		 * @param args
 		 */
 		postCreate: function(args){
 			this.createDefaultRenderer(args);
 			this.domNode = this.renderer.getDomNode(this);
 			this.renderer.render(this,this.domNode,{});
-			
 			
 			if (this.memberList) {
 				// Create member list
@@ -336,6 +342,7 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 				self.selectedApplication = element.children[1].textContent;
 				self.renderer.removePopUp(self.domNode,this._appsPopUp);
 				self.renderer.changeSelectedApplication(element.children[1].textContent,element.children[0].children[0]);
+				this._setPrimaryComponent(self.selectedApplication,self);
 			},
 			
 			
@@ -344,7 +351,8 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 				var id = event.target.id;
 				var input = this._searchInput;
 
-				this.searchQuery = value;
+				context.searchQuery = value;
+				
 				
 				// Member list feature enabled
 				if (context.memberList) {
@@ -435,7 +443,20 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 	
 			        promise.then(
 			            function(results) {
-			            	context.searchBoxAction.handleSuggestResult(results,context,popUp);
+			            	if(context._primaryComponent != "all"){
+				            	//filter Results
+				            	var newResults = [];
+				            	for(var i=0;i<results.length;i++){
+				            		var terms = results[i].getCategoryTerms();
+				            		if(terms[1] == context._primaryComponent){
+				            			 newResults.push(results[i]);
+				            		}
+				            	}
+				            	context.searchBoxAction.handleSuggestResult(newResults,context,popUp);
+			            	}else{
+			            		context.searchBoxAction.handleSuggestResult(results,context,popUp);
+			            	}
+			            	
 			            },
 			            function(error) {
 			                console.log(error);
@@ -455,16 +476,22 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 				for(var i=0;i<results.length;i++){
             		var row = document.createElement("tr");
             		var data = document.createElement("td");
-            		data.innerHTML = results[i].getTitle();
+            		var title = results[i].getTitle();
+            		var id = results[i].getId();
+            		data.innerHTML = title;
             		data.id = results[i].getId();
+            		console.log(results[i].getCategoryTerms());
             		data.style = "cursor:pointer";
             		data.onclick = function (event) { 
             			
             			context.searchBoxAction.setSuggestedSearch(event,popUp,context);
+            			context.selectedResultItem.text = title;
+            			context.selectedResultItem.id = id;
             		};    		
             		row.appendChild(data);
             		popUp.appendChild(row);
             	}
+				
 			},
 			
 			/**
@@ -473,6 +500,8 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 			 * @param event The Event
 			 */
 			search: function(event,context){
+				
+				
 				
 				if(this._suggestionPopUp ){
 					for(var i=0;i<context.domNode.children.length;i++){
@@ -507,19 +536,36 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 				    var self = context;
 			        promise.then(
 			            function(results) {
+			            	var newResults = [];
+			            	if(context._primaryComponent != "all"){
+				            	//filter Results
+				            	
+				            	for(var i=0;i<results.length;i++){
+				            		var terms = results[i].getCategoryTerms();
+				            		if(terms[1] == context._primaryComponent){
+				            			 newResults.push(results[i]);
+				            		}
+				            	}	
+			            	}else{
+			            		for(var i=0;i<results.length;i++){
+			            			newResults.push(results[i]);
+			            		}
+			            	}
+			            	
+			            	
 			            	if (context.memberList) {
 			            		// If the member list feature is enabled then we need
 			            		// to use a different search result event since we want the
 			            		// members to be added to the members list and NOT
 			            		// just displayed in the results table
-			            		for(var i = 0; i < results.length; i++) {
+			            		for(var i = 0; i < newResults.length; i++) {
 			            			// Render each item in the search results
-			            			context.renderer.renderMemberListItem(context, results[i].getTitle(), results[i].getId());
+			            			context.renderer.renderMemberListItem(context, newResults[i].getTitle(), results[i].getId());
 			            		}	   
 			            	} else {
 			            		var evt = document.createEvent("Event");
 			            		evt.initEvent("searchResultEvent",true,true);
-			            		evt.results = results;
+			            		evt.results = newResults;
 			            		self.domNode.dispatchEvent(evt);
 			            		evt = null;				
 			            	}
@@ -540,7 +586,45 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 				}
 				
 			},
-		}
+			
+			_setPrimaryComponent: function(selectedApplication,self){
+				switch(selectedApplication.toLowerCase()){
+				case "communities":
+					self._primaryComponent = "communities:entry";
+					break;
+				case "files":
+					self._primaryComponent = "files";
+					break;
+				case "profiles":
+					self._primaryComponent = "profiles";
+					break;
+				case "wikis":
+					self._primaryComponent = "wikis:page";
+					break;
+				case "bookmarks":
+					self._primaryComponent = "dogear";
+					break;
+				case "forums":
+					self._primaryComponent = "forums";
+					break;
+				case "activities":
+					self._primaryComponent = "activities";
+					break;
+				case "status Updates":
+					self._primaryComponent = "status_updates";
+					break;
+				case "blogs":
+					self._primaryComponent = "blogs";
+					break;
+				case "all connections":
+					self._primaryComponent = "all";
+					break;
+				}
+			}
+		
+		},
+		
+		
 	});
 
 	return SearchBox;

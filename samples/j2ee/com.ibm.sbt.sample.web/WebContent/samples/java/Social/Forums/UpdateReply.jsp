@@ -46,7 +46,7 @@
 		TopicList topics = service.getMyForumTopics();
 		if(topics.size()>0){
 			String topicId = topics.get(0).getUid();
-			ReplyList replies = service.getForumReplies(topicId);
+			ReplyList replies = service.getForumTopicReplies(topicId);
 			if(replies.size()>0){
 				ForumReply reply = (ForumReply)replies.iterator().next();
 				reply.setTopicUuid(topicId);
@@ -66,6 +66,7 @@
 			out.println("no topic found in forum");
 		
 	} catch (Exception e) {
+	e.printStackTrace();
 		out.println("<pre>");
 		out.println(e.getMessage());
 		out.println("</pre>");

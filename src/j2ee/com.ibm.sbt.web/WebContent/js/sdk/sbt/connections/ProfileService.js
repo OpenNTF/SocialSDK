@@ -1026,7 +1026,7 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
 			if (promise) {
 				return promise;
 			}
-			promose = this.validateHTML5FileSupport();
+			promise = this.validateHTML5FileSupport();
 			if(promise){
 				return promise;
 			}			

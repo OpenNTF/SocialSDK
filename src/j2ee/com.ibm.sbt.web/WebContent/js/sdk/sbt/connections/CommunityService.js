@@ -20,8 +20,8 @@
  * @module sbt.connections.CommunityService
  */
 define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", "./CommunityConstants", "../base/BaseService",
-         "../base/BaseEntity", "../base/XmlDataHandler", "./ForumService" ], 
-    function(declare,config,lang,stringUtil,Promise,consts,BaseService,BaseEntity,XmlDataHandler,ForumService) {
+         "../base/BaseEntity", "../base/XmlDataHandler", "./ForumService", "../pathUtil" ], 
+    function(declare,config,lang,stringUtil,Promise,consts,BaseService,BaseEntity,XmlDataHandler,ForumService,pathUtil) {
 
     var CommunityTmpl = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:app=\"http://www.w3.org/2007/app\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\"><title type=\"text\">${getTitle}</title><content type=\"html\">${getContent}</content><category term=\"community\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category>${getTags}<snx:communityType>${getCommunityType}</snx:communityType><snx:isExternal>false</snx:isExternal>${getCommunityUuid}${getCommunityTheme}</entry>";
     var CategoryTmpl = "<category term=\"${tag}\"></category>";
@@ -1779,15 +1779,14 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
 		 * Updates the Logo picture of a community
 		 * @method updateCommunityLogo
 		 * @param {Object} fileControlOrId The Id of html control or the html control
-		 * @param communityUuid the Uuid of community
-		 * @returns
+		 * @param {String} communityUuid the Uuid of community
 		 */
 		updateCommunityLogo : function(fileControlOrId, communityUuid) {
 			var promise = this.validateField("File Control Or Id", fileControlOrId);
 			if (promise) {
 				return promise;
 			}
-			promose = this.validateHTML5FileSupport();
+			promise = this.validateHTML5FileSupport();
 			if (promise) {
 				return promise;
 			}
@@ -1797,16 +1796,12 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
 			}
 
 			var files = null;
-			if (typeof fileControlOrId == "string") {
-				var fileControl = document.getElementById(fileControlOrId);
-				filePath = fileControl.value;
-				files = fileControl.files;
-			} else if (typeof fileControlOrId == "object") {
-				filePath = fileControlOrId.value;
-				files = fileControlOrId.files;
-			} else {
+			var fileControl = this.getFileControl(fileControlOrId);
+			if(!fileControl){
 				return this.createBadRequestPromise("File Control or ID is required");
 			}
+			filePath = fileControl.value;
+			files = fileControl.files;
 
 			if (files.length != 1) {
 				return this.createBadRequestPromise("Only one file needs to be provided to this API");
@@ -1818,8 +1813,16 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
 			var requestArgs = {
 				"communityUuid" : communityUuid
 			};
-			var url = config.Properties.serviceUrl + "/files/" + this.endpoint.proxyPath + "/" + "connections" + "/" + "UpdateCommunityLogo" + "/"
-					+ encodeURIComponent(file.name);
+			var url = this.constructUrl(consts.AtomUpdateCommunityLogo, null, {
+				endpointName : this.endpoint.proxyPath,
+				fileName : encodeURIComponent(file.name)
+			});
+			if (this.endpoint.proxy) {
+                url = config.Properties.serviceUrl + url;
+            } else {
+            	return this.createBadRequestPromise("File Proxy is required to run this API");
+            }
+					
 			var headers = {
 				"Content-Type" : false,
 				"Process-Data" : false //processData = false is reaquired by jquery

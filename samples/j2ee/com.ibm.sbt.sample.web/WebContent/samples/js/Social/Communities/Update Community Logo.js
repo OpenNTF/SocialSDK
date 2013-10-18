@@ -9,7 +9,7 @@ function addOnClickHandlers(communityService, dom) {
 	};
 }
 
-function handleLoggedIn(communityService, dom) {	
+function handleLoggedIn(communityService, dom) {
 	loadCommunity(communityService, dom);
 
 	addOnClickHandlers(communityService, dom);
@@ -20,7 +20,7 @@ function updateCommunityLogo(communityService, communityId, dom) {
 	dom.byId("loading").style.visibility = "visible";
 	dom.setText('status', '');
 
-	// "your-files" is the ID of the HTML5 File Control. Refer to Update Community Photo.html
+	// "your-files" is the ID of the HTML5 File Control. Refer to Update Community Logo.html
 	communityService.updateCommunityLogo("your-files", communityId).then(function() {
 		communityService.getCommunity(communityId).then(function(community) {
 			var url = community.getLogoUrl();
@@ -63,8 +63,14 @@ function loadCommunity(communityService, dom) {
 		ps : 1
 	}).then(function(communities) {
 		var community = (!communities || communities.length == 0) ? null : communities[0];
-		currentCommunity = community;
-		displayMessage(dom, "Successfully loaded community ID: " + community.getCommunityUuid() + ", Title: " + community.getTitle());
+		if (community) {
+			currentCommunity = community;
+			displayMessage(dom, "Successfully loaded community ID: " + community.getCommunityUuid() + ", Title: " + community.getTitle());
+		}
+		else {
+			displayMessage(dom, "No Communites found for user");
+			dom.byId("updateBtn").disabled = "disabled";
+		}
 	}, function(error) {
 		handleError(dom, error);
 	});

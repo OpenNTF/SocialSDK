@@ -664,7 +664,42 @@ public class CommunityService extends BaseService {
 			throw new CommunityServiceException(e, Messages.UpdateCommunityException);
 		}
 	}
-	
+	/**
+	 * Wrapper method to update Community Logo, supported for connections
+	 * 
+	 * @param File
+	 * 			image to be uploaded as Community Logo
+	 * @param communityId
+	 * @throws CommunityServiceException
+	 */
+	public void updateCommunityLogo(java.io.File file, String communityId) throws CommunityServiceException{
+
+		try {
+			Map<String, String> parameters = new HashMap<String, String>();
+			parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityId);
+			String name = file.getName();
+			int dot = StringUtil.lastIndexOfIgnoreCase(name, ".");
+			String ext = "";
+			if (dot > -1) {
+				ext = name.substring(dot + 1); // add one for the dot!
+			}
+			if (!StringUtil.isEmpty(ext)) {
+				Map<String, String> headers = new HashMap<String, String>();
+				if (StringUtil.equalsIgnoreCase(ext,"jpg")) {
+					headers.put("Content-Type", "image/jpeg");	// content-type should be image/jpeg for file extension - jpeg/jpg
+				} else {
+					headers.put("Content-Type", "image/" + ext);
+				}
+				// the url doesn't have atom in base 
+				String url = "/communities/service/html/image";
+				getClientService().put(url, parameters, headers, file, ClientService.FORMAT_NULL);
+				
+			}
+		} catch (ClientServicesException e) {
+			throw new CommunityServiceException(e, Messages.UpdateCommunityLogoException);
+		}
+	}
+
 	/**
 	 * Wrapper method to get member of a community.
 	 * <p> 

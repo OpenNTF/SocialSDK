@@ -37,6 +37,7 @@ public class Messages {
 	public static String	CreateCommunityException				= "Error creating community";
 	public static String	CreateCommunityPayloadException			= "Error creating community Payload";
 	public static String	UpdateCommunityException				= "Error updating community";
+	public static String	UpdateCommunityLogoException			= "Error updating community logo";
 	public static String	NullCommunityIdUserIdOrRoleException	= "Community Id or userid or role was null";
 	public static String	NullFileId								= "File Id was null";
 	public static String	NullCommunityIdOrUserIdException		= "Community Id or userid was null";

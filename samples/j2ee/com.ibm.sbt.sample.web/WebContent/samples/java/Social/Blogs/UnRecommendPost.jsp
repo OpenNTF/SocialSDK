@@ -47,7 +47,7 @@
 			BlogPostList posts = service.getBlogPosts(blog.getHandle());
 			if(posts.size()>0){
 				String postId = posts.get(0).getUid();
-				service.unRecommendPost(blog.getHandle(), postId);
+				service.unrecommendPost(blog.getHandle(), postId);
 				out.println("un-recommended post with id"+ postId);
 			}
 			else{

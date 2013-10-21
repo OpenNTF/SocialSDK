@@ -40,6 +40,7 @@ function loadSnippet(id) {
 		if(r.status=="ok") {
 			pageGlobal.id = id;
 			pageGlobal.unid = r.unid;
+			pageGlobal.params = r.params;
 			if(pageGlobal.xPagesEditor) pageGlobal.xPagesEditor.setValue(r.xPages);
 			if(pageGlobal.propertiesEditor) pageGlobal.propertiesEditor.setValue(r.properties);
 			if(pageGlobal.documentationPanel) pageGlobal.documentationPanel.innerHTML = r.documentation;

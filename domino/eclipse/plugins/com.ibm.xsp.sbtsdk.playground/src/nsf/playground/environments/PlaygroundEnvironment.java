@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 
 import nsf.playground.beans.DataAccessBean;
 import nsf.playground.extension.Endpoints;
@@ -14,7 +13,6 @@ import nsf.playground.extension.Endpoints;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.jslibrary.SBTEnvironment;
 import com.ibm.sbt.playground.extension.PlaygroundExtensionFactory;
-import com.ibm.xsp.context.FacesContextEx;
 
 /**
  * This is an extended environment class holding extra playground specific information
@@ -151,7 +149,9 @@ public class PlaygroundEnvironment extends SBTEnvironment {
 				map = new HashMap<String, String>();
 				context.getExternalContext().getSessionMap().put(SESSION_PARAMETERS_MAP, map);
 			}
-			map.put(name, value);
+			if(StringUtil.isNotEmpty(value)) {
+				map.put(name, value);
+			}
 		}
 	}
 }

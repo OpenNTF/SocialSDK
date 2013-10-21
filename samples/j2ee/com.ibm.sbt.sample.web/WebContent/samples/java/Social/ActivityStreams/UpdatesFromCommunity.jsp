@@ -22,6 +22,8 @@
 <%@page import="com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamEntity"%>
 <%@page import="com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamEntityList"%>
 <%@page import="com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamService"%>
+<%@page import="com.ibm.sbt.services.client.connections.communities.CommunityList"%>
+<%@page import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Iterator"%>
 <html>
@@ -35,12 +37,21 @@
 	<h4>Updates from Community</h4>
 	<div id="content">
 	<%
-		try {
-			ActivityStreamService _service = new ActivityStreamService();
-			ActivityStreamEntityList _entries = _service.getUpdatesFromCommunity(Context.get().getProperty("sample.communityId"));
+	try {
 
-			if (_entries.size() <= 0)
+		// Fetch list of my communities, we need to community uuid for making call in ActivityStreamService.
+		CommunityService comService = new CommunityService();
+		CommunityList listOfCommunities = comService.getMyCommunities();
+		if(listOfCommunities.size()<=0){
+			out.println("You are not owner of any community");
+		}else{
+		
+			ActivityStreamService _service = new ActivityStreamService();
+			ActivityStreamEntityList _entries = _service.getUpdatesFromCommunity(listOfCommunities.get(0).getCommunityUuid());
+
+			if (_entries.size() <= 0){
 				out.println("No updates to be displayed");
+			}
 
 			for (ActivityStreamEntity entry : _entries) {
 				out.print("<br><br>");
@@ -62,6 +73,7 @@
 				}
 				
 			}
+		}
 		} catch (Throwable e) {
 			out.println("<pre>");
 			e.printStackTrace(new PrintWriter(out));

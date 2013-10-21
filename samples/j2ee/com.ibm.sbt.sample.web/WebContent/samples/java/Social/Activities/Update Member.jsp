@@ -56,19 +56,21 @@
 						break;
 					}
 				}
-			if(memberToBeUpdated != null) {
-				if(memberToBeUpdated.getRole() == "member") {
-					memberToBeUpdated.setRole("author");
-				} else { 
-					memberToBeUpdated.setRole("member"); 
+				if(memberToBeUpdated != null) {
+					if(memberToBeUpdated.getRole() == "member") {
+						memberToBeUpdated.setRole("author");
+					} else { 
+						memberToBeUpdated.setRole("member"); 
+					}
+					activityService.updateMember(activity.getActivityId(), memberToBeUpdated);
+					out.println("Member updated : " + memberToBeUpdated.getName());
+				} else {
+					out.println("No members other than owner. Member cant be updated");
 				}
-				activityService.updateMember(activity.getActivityId(), memberToBeUpdated);
-				out.println("Member updated : " + memberToBeUpdated.getName());
-			} else {
-				out.println("No members other than owner. Member cant be updated");
-			}
-		} 
-	}	
+			} 
+		} else {
+			out.println("No Activities Found");
+		}
 	} catch (Throwable e) {
 		out.println("<pre>");
 		out.println(e.getMessage());

@@ -42,18 +42,22 @@
 	<%
 	try {		
 		ActivityService activityService = new ActivityService();
-		Activity activity = activityService.getMyActivities().get(0);
+		ActivityList activities = activityService.getMyActivities();
 		
-		ActivityNode chatNode = new ActivityNode(activityService, activity.getActivityId());
-		chatNode.setEntryType(ActivityNodeType.Chat.getActivityNodeType());
-		chatNode.setTitle("chat node created from JSP " + System.currentTimeMillis());
-		List<String> tagList = new ArrayList<String>();
-		tagList.add("tag1");
-		tagList.add("tag2");
-		chatNode.setTags(tagList);
-		chatNode.setContent("chat node content");
-		chatNode = activityService.createActivityNode(chatNode);
-		out.println("Chat Node Created : " + chatNode.getId());
+		if(activities != null && !activities.isEmpty()) {
+			ActivityNode chatNode = new ActivityNode(activityService, activities.get(0).getActivityId());
+			chatNode.setEntryType(ActivityNodeType.Chat.getActivityNodeType());
+			chatNode.setTitle("chat node created from JSP " + System.currentTimeMillis());
+			List<String> tagList = new ArrayList<String>();
+			tagList.add("tag1");
+			tagList.add("tag2");
+			chatNode.setTags(tagList);
+			chatNode.setContent("chat node content");
+			chatNode = activityService.createActivityNode(chatNode);
+			out.println("Chat Node Created : " + chatNode.getId());
+		} else {
+			out.println("No Activites Found");
+		}
 	} catch (Throwable e) {
 		out.println("<pre>");
 		out.println(e.getMessage());

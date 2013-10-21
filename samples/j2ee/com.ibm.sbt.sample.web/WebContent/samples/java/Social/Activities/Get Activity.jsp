@@ -38,7 +38,7 @@
 	try {		
 		ActivityService activityService = new ActivityService();
 		ActivityList activities = activityService.getMyActivities();
-		if(null != activities) {
+		if(null != activities && !activities.isEmpty()) {
 			Activity activity = activityService.getActivity(activities.get(0).getActivityId());
 			out.println(activity.getTitle());
 		} else {

@@ -42,19 +42,23 @@
 	<%
 	try {		
 		ActivityService activityService = new ActivityService();
-		Activity activity = activityService.getMyActivities().get(0);
+		ActivityList activities = activityService.getMyActivities();
 		
-		ActivityNode node = new ActivityNode(activityService, activity.getActivityId());
-		node.setEntryType(ActivityNodeType.Entry.getActivityNodeType());
-		node.setTitle("Entry Created." + System.currentTimeMillis());
-		List<String> tagList = new ArrayList<String>();
-		tagList.add("tag2");
-		node.setTags(tagList);
-		node.setContent("Entry Created.");
-		node = activityService.createActivityNode(node);
-		
-		activityService.changeEntryType(node.getActivityId(), ActivityNodeType.Chat.getActivityNodeType());
-		out.println("Entry Type changed to Chat of : " + node.getTitle());
+		if(activities != null && !activities.isEmpty()) {
+			ActivityNode node = new ActivityNode(activityService, activities.get(0).getActivityId());
+			node.setEntryType(ActivityNodeType.Entry.getActivityNodeType());
+			node.setTitle("Entry Created." + System.currentTimeMillis());
+			List<String> tagList = new ArrayList<String>();
+			tagList.add("tag2");
+			node.setTags(tagList);
+			node.setContent("Entry Created.");
+			node = activityService.createActivityNode(node);
+			
+			activityService.changeEntryType(node.getActivityId(), ActivityNodeType.Chat.getActivityNodeType());
+			out.println("Entry Type changed to Chat of : " + node.getTitle());
+		} else {
+			out.println("No Activites Found");
+		}
 	} catch (Throwable e) {
 		out.println("<pre>");
 		out.println(e.getMessage());

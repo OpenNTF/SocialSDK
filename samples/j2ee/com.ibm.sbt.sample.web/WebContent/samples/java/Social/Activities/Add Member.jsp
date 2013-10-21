@@ -44,7 +44,8 @@
 		String memberId = "";
 		String activityId = "";
 		if(activities != null && ! activities.isEmpty()) {
-			Member memberToBeAdded = new Member(activityService, "26356FD1-CDC8-67D2-4825-7A7000256C06");
+			String id = Context.get().getProperty("sample.userId2");
+			Member memberToBeAdded = new Member(activityService, id);
 			memberToBeAdded = activityService.addMember(activities.get(0).getActivityId(), memberToBeAdded);
 			out.println("Member Added ");
 			if(memberToBeAdded != null) {

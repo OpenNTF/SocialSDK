@@ -40,13 +40,11 @@
 	try {		
 		ActivityService activityService = new ActivityService();
 		ActivityList activities = activityService.getMyActivities();
-		Activity act = null;
-		Member mem = null;
 		if(activities != null && ! activities.isEmpty()) {
-			act = activities.get(0);
+			Activity act = activities.get(0);
 			MemberList members = activityService.getMembers(act.getActivityId());
 			if(members != null && ! members.isEmpty()) {
-				mem = members.get(0);
+				Member mem = activityService.getMember(act.getActivityId(), members.get(0).getMemberId()); 
 				out.println("Member Name : " + mem.getName());
 				out.println("Member Email : " + mem.getEmail());
 				out.println("Member Id : " + mem.getUserid());

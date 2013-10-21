@@ -40,14 +40,18 @@
 	<%
 	try {		
 		ActivityService activityService = new ActivityService();
-		ActivityList activities = activityService.getMyActivities();
-		if(activities != null && !activities.isEmpty()) {
-			Activity activity = activities.get(0);
-			activityService.deleteActivity(activity.getActivityId());
-			out.println("Activity deleted : " + activity.getTitle()); 
-		} else {
-			out.println("No Activity to delete");
-		}
+		//Create Activity
+		Activity activity = new Activity(activityService, "");
+		activity.setTitle("ActivityForDeletion" + System.currentTimeMillis());
+		activity.setContent("ActivityForDeletion - " + System.currentTimeMillis());
+		List<String> tagList = new ArrayList<String>();
+		tagList.add("ActivityForDeletion");
+		activity.setTags(tagList);
+		activity.setDueDate(new Date());
+		activity = activityService.createActivity(activity);
+		//Delete Activity
+		activityService.deleteActivity(activity.getActivityId());
+		out.println("Activity deleted : " + activity.getTitle()); 
 	} catch (Throwable e) {
 		out.println("<pre>");
 		out.println(e.getMessage());

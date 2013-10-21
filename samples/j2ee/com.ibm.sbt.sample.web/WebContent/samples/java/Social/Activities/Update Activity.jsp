@@ -42,22 +42,24 @@
 		ActivityService activityService = new ActivityService();
 		ActivityList activities = activityService.getMyActivities();
 		
-		Activity activity = activities.get(0);
-		
-		out.println("Activity before updation : " + activity.getTitle());
-		
-		activity.setTitle("UpdatedBySample" + System.currentTimeMillis());
-		activity.setGoal("GoalOfActivity updated - " + System.currentTimeMillis());
-		
-		List<String> tagList = new ArrayList<String>();
-		tagList.add("tag123");
-		tagList.add("tagabc");
-		activity.setTags(tagList);
-		activity.setDueDate(new Date());
-		
-		activityService.updateActivity(activity);
-		out.println("Activity after updation : " + activityService.getActivity(activity.getActivityId()).getTitle() );
-		
+		if(activities != null && !activities.isEmpty()) {
+			Activity activity = activities.get(0);
+
+			out.println("Activity before updation : " + activity.getTitle());
+			activity.setTitle("UpdatedBySample" + System.currentTimeMillis());
+			activity.setGoal("GoalOfActivity updated - " + System.currentTimeMillis());
+			
+			List<String> tagList = new ArrayList<String>();
+			tagList.add("tag123");
+			tagList.add("tagabc");
+			activity.setTags(tagList);
+			activity.setDueDate(new Date());
+			
+			activityService.updateActivity(activity);
+			out.println("Activity after updation : " + activityService.getActivity(activity.getActivityId()).getTitle() );
+		}  else {
+			out.println("No Activites Found");
+		}
 	} catch (Throwable e) {
 		out.println("<pre>");
 		out.println(e.getMessage());

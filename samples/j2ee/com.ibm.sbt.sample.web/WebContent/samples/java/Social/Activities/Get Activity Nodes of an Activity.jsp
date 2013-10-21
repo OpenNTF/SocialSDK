@@ -50,7 +50,7 @@
 				out.println("No Activity Nodes");
 			}
 		} else {
-			out.println("No Results");
+			out.println("No Activities Found");
 		}
 	} catch (Throwable e) {
 		out.println("<pre>");

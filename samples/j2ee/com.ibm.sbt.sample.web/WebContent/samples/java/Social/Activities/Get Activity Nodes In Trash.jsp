@@ -42,11 +42,15 @@
 		ActivityList activities = activityService.getMyActivities();
 		if(activities != null && ! activities.isEmpty()) {
 			ActivityNodeList listNodes = activityService.getActivityNodesInTrash(activities.get(0).getActivityId()); 
-			for (ActivityNode activityNode : listNodes) {
-				out.println(activityNode.getTitle());
+			if(listNodes != null && ! listNodes.isEmpty()) {
+				for (ActivityNode activityNode : listNodes) {
+					out.println(activityNode.getTitle());
+				}
+			} else {
+				out.println("No Activity Nodes Found");
 			}
 		} else {
-			out.println("No Results");
+			out.println("No Activities Found");
 		}
 	} catch (Throwable e) {
 		out.println("<pre>");

@@ -42,26 +42,30 @@
 	<%
 	try {		
 		ActivityService activityService = new ActivityService();
-		Activity activity = activityService.getMyActivities().get(0);
+		ActivityList activities = activityService.getMyActivities();
 		
-		ActivityNode node = new ActivityNode(activityService, activity.getActivityId());
-		node.setEntryType(ActivityNodeType.Entry.getActivityNodeType());
-		node.setTitle("Entry under Section.." + System.currentTimeMillis());
-		List<String> tagList = new ArrayList<String>();
-		tagList.add("tag2");
-		node.setTags(tagList);
-		node.setContent("Entry moved under Section Programmatically");
-		node = activityService.createActivityNode(node);
-		
-		ActivityNode sectionNode = new ActivityNode(activityService, activity.getActivityId());
-		sectionNode.setEntryType(ActivityNodeType.Section.getActivityNodeType());
-		sectionNode.setTitle("sectionNode from JSP " + System.currentTimeMillis());
-		sectionNode.setContent("SectionNode Content " + System.currentTimeMillis());
-		sectionNode.setPosition(2000);	
-		sectionNode = activityService.createActivityNode(sectionNode);
-		
-		activityService.moveEntryToSection(node.getActivityId(), sectionNode.getId());
-		out.println("Entry : " + node.getTitle() + " moved to Section : " + sectionNode.getTitle());
+		if(activities != null && !activities.isEmpty()) {
+			ActivityNode node = new ActivityNode(activityService, activities.get(0).getActivityId());
+			node.setEntryType(ActivityNodeType.Entry.getActivityNodeType());
+			node.setTitle("Entry under Section.." + System.currentTimeMillis());
+			List<String> tagList = new ArrayList<String>();
+			tagList.add("tag2");
+			node.setTags(tagList);
+			node.setContent("Entry moved under Section Programmatically");
+			node = activityService.createActivityNode(node);
+			
+			ActivityNode sectionNode = new ActivityNode(activityService, activities.get(0).getActivityId());
+			sectionNode.setEntryType(ActivityNodeType.Section.getActivityNodeType());
+			sectionNode.setTitle("sectionNode from JSP " + System.currentTimeMillis());
+			sectionNode.setContent("SectionNode Content " + System.currentTimeMillis());
+			sectionNode.setPosition(2000);	
+			sectionNode = activityService.createActivityNode(sectionNode);
+			
+			activityService.moveEntryToSection(node.getActivityId(), sectionNode.getId());
+			out.println("Entry : " + node.getTitle() + " moved to Section : " + sectionNode.getTitle());
+		}  else {
+			out.println("No Activites Found");
+		}
 	} catch (Throwable e) {
 		out.println("<pre>");
 		out.println(e.getMessage());

@@ -942,7 +942,9 @@ define(
 				},
 
 				/**
-				 * Get community files from IBM Connections
+				 * Get community files from IBM Connections (community files refer to
+				 * files which the user uploaded to the community. Calling this function
+				 * will not list files that have been shared with this community).
 				 * 
 				 * @method getCommunityFiles
 				 * @param {Object} [args] Argument object. Object representing various parameters that can be passed. The parameters must be exactly as they are
@@ -2392,7 +2394,7 @@ define(
 						return promise;
 					}
 
-					var url = this.constructUrl(consts.AtomAddMyFileToFolders, null, {
+					var url = this.constructUrl(consts.AtomShareFileWithCommunities, null, {
 						documentId : fileId
 					});
 
@@ -2406,6 +2408,7 @@ define(
 
 					var callbacks = {
 						createEntity : function(service, data, response) {
+							return response;
 						}
 					};
 
@@ -2570,8 +2573,7 @@ define(
 						}
 						return value;
 					};
-					var postData = stringUtil.transform(FolderTmpl, this, transformer, this);
-					postData = this._removeExtraPlaceholders(postData);
+					var postData = stringUtil.transform(FolderTmpl, this, transformer, this);					
 					return stringUtil.trim(postData);
 				},
 				_constructPayloadForMultipleEntries : function(listOfIds, multipleEntryId, category) {
@@ -2609,9 +2611,7 @@ define(
 
 					if (entriesXml != "") {
 						payload = stringUtil.transform(payload, _this, transformer, _this);
-					}
-
-					payload = this._removeExtraPlaceholders(payload);
+					}					
 					return payload;
 				},
 				_constructPayloadForComment : function(isDelete, comment) {

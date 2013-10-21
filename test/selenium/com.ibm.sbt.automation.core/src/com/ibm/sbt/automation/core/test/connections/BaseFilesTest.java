@@ -20,36 +20,40 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import junit.framework.Assert;
+import org.junit.After;
+import org.junit.Assert;
 
-import com.ibm.commons.runtime.Application;
-import com.ibm.commons.runtime.Context;
-import com.ibm.commons.runtime.RuntimeFactory;
-import com.ibm.commons.runtime.impl.app.RuntimeFactoryStandalone;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.automation.core.test.BaseApiTest;
 import com.ibm.sbt.automation.core.test.pageobjects.ResultPage;
 import com.ibm.sbt.automation.core.utils.Trace;
 import com.ibm.sbt.security.authentication.AuthenticationException;
+import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
+import com.ibm.sbt.services.client.connections.communities.Community;
+import com.ibm.sbt.services.client.connections.communities.CommunityService;
+import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
 import com.ibm.sbt.services.client.connections.files.File;
 import com.ibm.sbt.services.client.connections.files.FileService;
 import com.ibm.sbt.services.client.connections.files.FileServiceException;
 import com.ibm.sbt.services.client.connections.files.model.FileCreationParameters;
 
-
-/** @author mwallace
+/**
+ * @author mwallace
  * 
- * @date 13 Mar 2013 */
+ * @date 13 Mar 2013
+ */
 public class BaseFilesTest extends BaseApiTest {
 
 	protected FileService fileService;
 	protected File fileEntry;
 	protected File folder;
+	protected CommunityService communityService;
+	protected Community community;
 	private boolean failIfAfterDeletionFails = true;
 
-	private final String[] ErrorMessages = { "Error received. Error Code", "Error, unable to load:",
-			"Caused by: com.ibm.sbt.services.client.ClientServicesException", "Exception occurred", "Caused by:", "HTTP Status 500", "HTTP Status 404" };
+	private final String[] ErrorMessages = { "Error received. Error Code", "Error, unable to load:", "Caused by: com.ibm.sbt.services.client.ClientServicesException", "Exception occurred",
+			"Caused by:", "HTTP Status 500", "HTTP Status 404" };
 	private String noErrorMsg = null;
 
 	public BaseFilesTest() {
@@ -65,11 +69,18 @@ public class BaseFilesTest extends BaseApiTest {
 		this.failIfAfterDeletionFails = failIfAfterDeletionFails;
 	}
 
+	protected CommunityService getCommunityService() {
+		if (communityService == null) {
+			communityService = new CommunityService(getEndpointName());
+		}
+		return communityService;
+	}
+
 	protected FileService getFileService() {
 		try {
 			loginConnections();
 		} catch (AuthenticationException e) {
-			Assert.fail("Error logging in to Connections " + e.getMessage());
+			fail("Error logging in to Connections ", e);
 			e.printStackTrace();
 			return null;
 		}
@@ -80,21 +91,97 @@ public class BaseFilesTest extends BaseApiTest {
 		}
 		return fileService;
 	}
+
+	public void createCommunity() {		
+
+		String type = "public";
+		if (environment.isSmartCloud()) {
+			type = "private";
+		}
+		String name = createCommunityName();
+		// System.out.println(name);
+		community = createCommunity(name, type, name, "tag1,tag2,tag3");
+
+	}
+
+	protected String createCommunityName() {
+		return this.getClass().getName() + "#" + this.hashCode() + " Community - " + System.currentTimeMillis();
+	}
+
 	
+	  protected Community createCommunity(String title, String type, String content, String tags) {
+	    	return createCommunity(title, type, content, tags, true);
+	    }
+	    
+	    protected Community createCommunity(String title, String type, String content, String tags, boolean retry) {
+	        Community community = null;
+	        try {
+	            loginConnections();
+	            CommunityService communityService = getCommunityService();
+	            
+	        	long start = System.currentTimeMillis();
+	            community = new Community(communityService, "");
+	            community.setTitle(title);
+	            community.setCommunityType(type);
+	            community.setContent(content);
+	            community.setTags(tags);
+	            String communityUuid = communityService.createCommunity(community);
+	            community = communityService.getCommunity(communityUuid);
+	            
+	            long duration = System.currentTimeMillis() - start;
+	            Trace.log("Created test community: "+communityUuid + " took "+duration+"(ms)");
+	        } catch (AuthenticationException pe) {
+	        	if (pe.getCause() != null) {
+	        		pe.getCause().printStackTrace();
+	        	}
+	            fail("Error authenicating: " , pe);
+	        } catch (CommunityServiceException cse) {
+	        	// TODO remove this when we upgrade the QSI
+	        	Throwable t = cse.getCause();
+	        	if (t instanceof ClientServicesException) {
+	        		ClientServicesException csex = (ClientServicesException)t;
+	        		int statusCode = csex.getResponseStatusCode();
+	        		if (statusCode == 500 && retry) {
+	        			return createCommunity(title + " (retry)", type, content, tags, false);
+	        		}
+	        	}
+	            fail("Error creating test community with title: '"+title+"'", cse);
+	        } 
+	        
+	        return community;
+	    }
+	    
+	    protected void fail(String message, Exception cse) {
+	    	String failure = message;
+	    	
+	    	Throwable cause = cse.getCause();
+	    	if (cause != null) {
+	    		cause.printStackTrace();
+	    		failure += ", " + cause.getMessage();
+	    	} else {
+	    		cse.printStackTrace();
+	    		failure += ", " + cse.getMessage();
+	    	}
+	    	
+	    	Assert.fail(failure);
+	    }
+
+	   
+
 	public void createFolder() {
 		setFailIfAfterDeletionFails(true);
 		fileService = getFileService();
 		try {
-			folder = fileService.createFolder("TestFolder");		
-			Trace.log("Created test folder: " + folder.getFileId());			
+			folder = fileService.createFolder("TestFolder");
+			Trace.log("Created test folder: " + folder.getFileId());
 		} catch (FileServiceException e) {
 			e.printStackTrace();
-			Assert.fail("Error creating test folder: " + e.getMessage());
+			fail("Error creating test folder: ", e);
 		} catch (TransformerException te) {
 			te.printStackTrace();
-			Assert.fail("Error creating test folder: " + te.getMessage());
+			fail("Error creating test folder: ", te);
 		}
-		
+
 	}
 
 	public void createFile() {
@@ -105,13 +192,12 @@ public class BaseFilesTest extends BaseApiTest {
 			String content = "Content uploaded by Create Delete File java sample";
 			String id = "File" + System.currentTimeMillis() + ".txt";
 
-			
 			FileCreationParameters p = new FileCreationParameters();
 			p.visibility = FileCreationParameters.Visibility.PUBLIC;
 			p.tags = new ArrayList<String>();
 			p.tags.add("text");
-			Map<String, String> params = p.buildParameters();			
-			
+			Map<String, String> params = p.buildParameters();
+
 			fileEntry = fileService.uploadFile(new ByteArrayInputStream(content.getBytes()), id, content.length(), params);
 
 			params = new HashMap<String, String>();
@@ -120,22 +206,24 @@ public class BaseFilesTest extends BaseApiTest {
 			Trace.log("Created test file: " + fileEntry.getFileId());
 		} catch (FileServiceException fse) {
 			fileEntry = null;
-	        fse.printStackTrace();
-			Assert.fail("Error creating test file: " + fse.getMessage());
+			fse.printStackTrace();
+			fail("Error creating test file: ", fse);
 		} catch (TransformerException te) {
 			te.printStackTrace();
-			Assert.fail("Error creating test file: " + te.getMessage());
+			fail("Error creating test file: ", te);
 		}
 	}
 
 	public void deleteFileAndQuit() {
+		fileService = getFileService();
+		communityService = getCommunityService();
 		if (fileEntry != null) {
 			try {
 				fileService.deleteFile(fileEntry.getFileId());
 			} catch (FileServiceException fse) {
 				fileEntry = null;
 				if (failIfAfterDeletionFails()) {
-					Assert.fail("Error deleting test file: " + fse.getMessage());
+					fail("Error deleting test file: ", fse);
 					fse.printStackTrace();
 				}
 			}
@@ -146,9 +234,17 @@ public class BaseFilesTest extends BaseApiTest {
 			} catch (FileServiceException fse) {
 				folder = null;
 				if (failIfAfterDeletionFails()) {
-					Assert.fail("Error deleting test folder: " + fse.getMessage());
+					fail("Error deleting test folder: ", fse);
 					fse.printStackTrace();
 				}
+			}
+		}
+		if(community != null) {
+			try {
+				communityService.deleteCommunity(community.getCommunityUuid());
+			} catch (CommunityServiceException e) {
+				fail("Error deleting test community: ", e);
+				e.printStackTrace();
 			}
 		}
 
@@ -160,8 +256,10 @@ public class BaseFilesTest extends BaseApiTest {
 		return containsNoError(text);
 	}
 
-	/** @param snippetId
-	 * @return */
+	/**
+	 * @param snippetId
+	 * @return
+	 */
 	protected String executeSnippet1(String snippetId) {
 		ResultPage resultPage = launchSnippet(snippetId, authType);
 		String text = resultPage.getText();
@@ -175,11 +273,12 @@ public class BaseFilesTest extends BaseApiTest {
 	}
 
 	/*
-	 * Return true if the result page contains no error message. */
+	 * Return true if the result page contains no error message.
+	 */
 	protected boolean containsNoError(String result) {
-		boolean retVal = true;	
+		boolean retVal = true;
 		if (StringUtil.isEmpty(result)) {
-			noErrorMsg  = "Empty result was returned for: " + getSnippetId();
+			noErrorMsg = "Empty result was returned for: " + getSnippetId();
 			retVal = false;
 		} else {
 			for (int i = 0; i < ErrorMessages.length; i++) {
@@ -194,12 +293,12 @@ public class BaseFilesTest extends BaseApiTest {
 		}
 		return retVal;
 	}
-	
+
 	/**
-     * @return the noErrorMsg
-     */
-    public String getNoErrorMsg() {
-        return noErrorMsg;
-    }
+	 * @return the noErrorMsg
+	 */
+	public String getNoErrorMsg() {
+		return noErrorMsg;
+	}
 
 }

@@ -68,7 +68,7 @@ public class GetPublicFiles extends BaseFilesTest {
 				Assert.assertTrue("snippet loaded file not found in list", existsFileWithLabel(fileJsonObj.getString("getLabel")));
 			}
 		} catch (Exception ex) {
-			fail(previewPage.getJson().getJsonObject("cause").getString("message"));
+			fail(previewPage.getJson().getJsonObject("cause").getString("message"), ex);
 		}
 	}
 

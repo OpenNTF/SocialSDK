@@ -21,8 +21,8 @@
 <%@page import="com.ibm.sbt.services.client.connections.blogs.model.BaseBlogEntity"%>
 <%@page import="com.ibm.sbt.services.client.connections.blogs.BlogList"%>
 <%@page import="com.ibm.sbt.services.client.connections.blogs.Blog"%>
-<%@page import="com.ibm.sbt.services.client.connections.blogs.PostList"%>
-<%@page import="com.ibm.sbt.services.client.connections.blogs.Post"%>
+<%@page import="com.ibm.sbt.services.client.connections.blogs.BlogPostList"%>
+<%@page import="com.ibm.sbt.services.client.connections.blogs.BlogPost"%>
 <%@page import="com.ibm.sbt.services.client.connections.blogs.model.Author"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.sbt.services.client.connections.activitystreams.model.Reply"%>
@@ -44,10 +44,10 @@
 			BlogList blogs = service.getBlogs();
 			Blog blog = (Blog)blogs.get(0);
 			
-			PostList posts = service.getBlogPosts(blog.getHandle());
+			BlogPostList posts = service.getBlogPosts(blog.getHandle());
 			if(posts.size()>0){
 				String postId = posts.get(0).getUid();
-				service.unRecommendPost(blog.getHandle(), postId);
+				service.unrecommendPost(blog.getHandle(), postId);
 				out.println("un-recommended post with id"+ postId);
 			}
 			else{

@@ -23,7 +23,7 @@ import com.ibm.sbt.services.client.base.transformers.AbstractBaseTransformer;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.blogs.Blog;
 import com.ibm.sbt.services.client.connections.blogs.Comment;
-import com.ibm.sbt.services.client.connections.blogs.Post;
+import com.ibm.sbt.services.client.connections.blogs.BlogPost;
 import com.ibm.sbt.services.client.connections.blogs.model.BaseBlogEntity;
 
 

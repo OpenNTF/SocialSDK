@@ -9,6 +9,10 @@ import com.ibm.xsp.extlib.javacompiler.JavaSourceClassLoader;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 
 public class JavaSnippetBean extends nsf.playground.beans.JavaSnippetBean {
+
+	// Define this flag to support parameter processing
+	// In this case, it defines a class loader per request, which might be resource consuming!
+	public static boolean DYNAMIC_PAGES = false;
 	
 	public static boolean DEBUG = false;
 
@@ -20,7 +24,6 @@ public class JavaSnippetBean extends nsf.playground.beans.JavaSnippetBean {
 			return (Class<JspFragment>)loader.loadClass(jspClassName);
 		}
 		return null;
-//		return null;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -32,12 +35,15 @@ public class JavaSnippetBean extends nsf.playground.beans.JavaSnippetBean {
 			f = (Class<JspFragment>)loader.addClass(jspClassName, source);
 		}
 		return f;
-//		return null;
 	}
+
+	// We don't want to share the class loader as the snippets can be modified, and
+	// the parameters generate different classes
+	private static final boolean SHARED_CLASS_LOADER = !DYNAMIC_PAGES;
 
 	private JavaSourceClassLoader getSourceClassLoader() {
 		Map<String,Object> scope = ExtLibUtil.getApplicationScope();
-		JavaSourceClassLoader loader = (JavaSourceClassLoader)scope.get("playground.java.loader");
+		JavaSourceClassLoader loader = SHARED_CLASS_LOADER ? (JavaSourceClassLoader)scope.get("playground.java.loader") : null;
 		if(loader==null) {
 			synchronized(this) {
 				loader = (JavaSourceClassLoader)scope.get("playground.java.loader");
@@ -54,7 +60,7 @@ public class JavaSnippetBean extends nsf.playground.beans.JavaSnippetBean {
 						"com.ibm.pvc.servlet.jsp"
 					};
 					loader = new JavaSourceClassLoader(FacesContextEx.getCurrentInstance().getContextClassLoader(),null,bundles);
-					if(!DEBUG) {
+					if(SHARED_CLASS_LOADER && !DEBUG) {
 						scope.put("playground.java.loader",loader);
 					}
 				}

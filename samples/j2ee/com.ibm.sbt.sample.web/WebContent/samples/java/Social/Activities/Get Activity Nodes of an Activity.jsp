@@ -34,7 +34,7 @@
 </head>
 
 <body>
-	<h4>Activity Service API</h4>
+	<h4>Get Activity Nodes of an Activity</h4>
 	<div id="content">
 	<%
 	try {		

@@ -29,7 +29,7 @@ import com.ibm.sbt.services.client.connections.blogs.model.BlogXPath;
  */
 
 
-public class Post extends BaseBlogEntity {
+public class BlogPost extends BaseBlogEntity {
 	
 	/**
 	 * Constructor
@@ -37,11 +37,11 @@ public class Post extends BaseBlogEntity {
 	 * @param BlogService
 	 * @param BlogId
 	 */
-	public Post(BlogService blogService, String id) {
+	public BlogPost(BlogService blogService, String id) {
 		super(blogService,id);
 	}
 
-	public Post(BaseService svc, DataHandler<?> handler) {
+	public BlogPost(BaseService svc, DataHandler<?> handler) {
 		super(svc,handler);
 	}
 	
@@ -78,11 +78,11 @@ public class Post extends BaseBlogEntity {
 		return getAsString(BlogXPath.hitCount);
 	}
 	
-	public Post save(String blogHandle) throws BlogServiceException{
+	public BlogPost save(String blogHandle) throws BlogServiceException{
 		return getService().createBlogPost(this, blogHandle);
 	}
 	
-	public Post load(String blogHandle, String postId)throws BlogServiceException{
+	public BlogPost load(String blogHandle, String postId)throws BlogServiceException{
 		return getService().getBlogPost(blogHandle, postId);
 	}
 	

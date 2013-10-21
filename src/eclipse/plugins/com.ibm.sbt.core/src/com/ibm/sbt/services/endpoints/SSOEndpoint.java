@@ -22,7 +22,6 @@ import java.net.URLEncoder;
 import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.core.Cookie;
 
 import org.apache.http.HttpException;
 import org.apache.http.HttpRequest;
@@ -39,7 +38,7 @@ import com.ibm.commons.runtime.util.UrlUtil;
 import com.ibm.commons.util.PathUtil;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.security.authentication.AuthenticationException;
-import com.ibm.sbt.service.core.handlers.BasicAuthCredsHandler;
+import com.ibm.sbt.service.core.handlers.AuthCredsHandler;
 import com.ibm.sbt.service.core.servlet.ServiceServlet;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.endpoints.js.JSReference;
@@ -81,7 +80,7 @@ public class SSOEndpoint extends AbstractEndpoint {
               	   	String endPointName = authPage.substring(authPage.indexOf("=")+1, authPage.length());
                   	String baseUrl = UrlUtil.getBaseUrl(((HttpServletRequest)context.getHttpRequest()));
                   	String servletPath = ServiceServlet.getServletPath();
-                  	String basicProxyUrl = BasicAuthCredsHandler.URL_PATH;
+                  	String basicProxyUrl = AuthCredsHandler.URL_PATH;
                       
                   	//constructing proxy action url
                   	String postToProxy = PathUtil.concat(baseUrl, servletPath, '/');

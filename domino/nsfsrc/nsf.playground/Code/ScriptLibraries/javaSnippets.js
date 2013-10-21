@@ -40,6 +40,7 @@ function loadSnippet(id) {
 		if(r.status=="ok") {
 			pageGlobal.id = id;
 			pageGlobal.unid = r.unid;
+			pageGlobal.params = r.params;
 			if(pageGlobal.jspEditor) pageGlobal.jspEditor.setValue(r.jsp);
 			if(pageGlobal.propertiesEditor) pageGlobal.propertiesEditor.setValue(r.properties);
 			if(pageGlobal.documentationPanel) pageGlobal.documentationPanel.innerHTML = r.documentation;
@@ -72,7 +73,7 @@ function selectStack(stack) {
  */
 function runCode(debug) {
 	if(pageGlobal._loadingFrame) {
-		// This can fail is the iFrame was redirected to a different domain
+		// This can fail if the iFrame was redirected to a different domain
 		// ex: OAuth dance
 		try {
 			var iDoc = window.frames['preview'].document;

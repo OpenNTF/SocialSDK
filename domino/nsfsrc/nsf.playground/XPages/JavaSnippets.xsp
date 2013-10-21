@@ -77,7 +77,7 @@ if(doc) {	o = {		status:			"ok",		id:				snippetId,		unid:			doc.getUniversa
 		properties:		doc.getItemValueString("properties"),
 		documentation:	doc.getItemValueString("documentation")
 	}
-	o.params = snippetBean.extractParams([o.html,o.js,o.css]);
+	o.params = snippetBean.extractParams([o.jsp]);
 	return o;}o = {	status:		"error",	msg:		"Cannot open document with id "+id}return o;]]></xe:this.script>
 				</xe:remoteMethod>
 			</xe:this.methods>

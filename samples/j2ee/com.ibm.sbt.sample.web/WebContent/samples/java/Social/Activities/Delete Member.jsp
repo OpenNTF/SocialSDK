@@ -49,7 +49,7 @@
 			MemberList members = activityService.getMembers(activity.getActivityId());
 			String memberToBeDeleted = "" ;
 			for(Member mem : members) {
-				if(mem.getRole() != "owner") {
+				if(!StringUtil.equalsIgnoreCase(mem.getRole(), "owner")) {
 					memberToBeDeleted = mem.getMemberId();
 					break;
 				}

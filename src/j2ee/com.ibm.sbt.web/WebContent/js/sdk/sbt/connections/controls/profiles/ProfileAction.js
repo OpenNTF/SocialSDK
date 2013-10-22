@@ -72,7 +72,7 @@ function(declare, GridAction, CommunityService, CommunityConstants) {
         },
         
         /**
-         * The execute function is called from the removeMember function
+         * The removeMember function is called from the removeMember function
          * and removes members from the community specified by currentCommunity
          * @method removeMember
          * @param grid The grid to update after the member has been removed.
@@ -87,7 +87,7 @@ function(declare, GridAction, CommunityService, CommunityConstants) {
       
         
         /**
-         * The execute function is called from the editMember function
+         * The displayEditMemberForm function is called from the editMember function
          * and displays the edit members form.
          * @method displayEditMemberForm
          * @param grid The grid to update.
@@ -102,7 +102,31 @@ function(declare, GridAction, CommunityService, CommunityConstants) {
         displayEditMemberForm: function(grid, el, data, ev, communityUuid) {
          	var container = document.createElement("div");
          	
-         	_initTable(container);
+        	var table = document.createElement("table");
+         	container.appendChild(table);
+         	
+         	var tbody = document.createElement("tbody");
+         	table.appendChild(tbody);
+         	
+         	var tr0 = document.createElement("tr");
+         	tbody.appendChild(tr0);
+         	
+         	var td0 = document.createElement("td");
+         	td0.setAttribute("style", "vertical-align: middle; padding: 0px 14px; width: 45px; font-weight: bold;");
+         	td0.innerHTML = "Role:";
+         	tr0.appendChild(td0);
+         	
+         	var td1 = document.createElement("td");
+         	tr0.appendChild(td1);
+         	
+         	var table2 = document.createElement("table");
+         	td1.appendChild(table2);
+         	
+         	var tbody2 = document.createElement("tbody");
+         	td1.appendChild(tbody2);
+        	
+         	var tr1 = document.createElement("tr");
+         	tbody2.appendChild(tr1);
          	
          	var tr2 = document.createElement("tr");
          	tbody2.appendChild(tr2);
@@ -155,7 +179,7 @@ function(declare, GridAction, CommunityService, CommunityConstants) {
          	ctrTd0.class = "lotusFormFooter";
          	ctrTr.appendChild(ctrTd0);
          	
-         	var btnSave = _initSaveActionListener(el, rbOwner);
+         	var btnSave = _initSaveActionListener(el, rbOwner, communityUuid, data, grid);
          	
          	var btnClose = _initCloseActionListener(el, container);
          	
@@ -187,15 +211,7 @@ function(declare, GridAction, CommunityService, CommunityConstants) {
         	);
         },
         
-        
-        /**
-         * The execute function is called from the removeMember function
-         * and removes members from the community specified by currentCommunity
-         * @method closeEditForm
-         */
-        closeEditForm: function() {
-        	alert("closed");
-        },
+
         
     });
     
@@ -244,7 +260,7 @@ function(declare, GridAction, CommunityService, CommunityConstants) {
     /**
      * Initializes the action listeners for the close button
      * (contained in the "edit members" form).
-     * @method _initSaveActionListener
+     * @method _initCloseActionListener
      * @param el The element that fired the event
      * @param container	The container which contains the "edit members" form 
      * 					(this is what we will close / remove).
@@ -266,8 +282,11 @@ function(declare, GridAction, CommunityService, CommunityConstants) {
      * @method _initSaveActionListener
      * @param el The element that fired the event
      * @param rbOwner
+     * @param communityUuid
+     * @param grid
+     * @param data
      */
-    function _initSaveActionListener(el, rbOwner) {
+    function _initSaveActionListener(el, rbOwner, communityUuid, data, grid) {
     	var btnSave = document.createElement("input");
      	btnSave.type = "button";
      	btnSave.setAttribute("class", "lotusFormButton");
@@ -286,20 +305,18 @@ function(declare, GridAction, CommunityService, CommunityConstants) {
         	        			}
         	
         	        			// Update community
-        	        			communityService.addMember(member).then(
-        	        					function(member) {
-       
-        	        					},
-        	        					function(error) {
-        	        						console.log(error);
-        	        					}
-        	        			);
-        	        			el.parentNode.removeChild(container);
-        	        			grid.update(null);
+        	        			 var promise = communityService.updateMember(communityUuid, member);        
+        	        		        promise.then(
+        	        		            function(data) {
+        	        	        			grid.update(null);
+        	        		            },
+        	        		            function(error) {
+        	        		                console.log(error);
+        	        		            }
+        	        		        );
         	        			break;
         	        		}
         	        	}
-
         	        },
         	        function(error) {
         	            console.log(error);
@@ -328,42 +345,6 @@ function(declare, GridAction, CommunityService, CommunityConstants) {
      	return btnRemoveMember;
     }
     
-    /**
-     * Initializes the first several components for 
-     * the table used to display the "edit members" form.
-     * @method _initTable
-     * @param container The container to which to attached the table.
-     */
-    function _initTable(container) {
-    	var table = document.createElement("table");
-     	container.appendChild(table);
-     	
-     	var tbody = document.createElement("tbody");
-     	table.appendChild(tbody);
-     	
-     	var tr0 = document.createElement("tr");
-     	tbody.appendChild(tr0);
-     	
-     	var td0 = document.createElement("td");
-     	td0.setAttribute("style", "vertical-align: middle; padding: 0px 14px; width: 45px; font-weight: bold;");
-     	td0.innerHTML = "Role:";
-     	tr0.appendChild(td0);
-     	
-     	var td1 = document.createElement("td");
-     	tr0.appendChild(td1);
-     	
-     	var table2 = document.createElement("table");
-     	td1.appendChild(table2);
-     	
-     	var tbody2 = document.createElement("tbody");
-     	td1.appendChild(tbody2);
-    	
-     	var tr1 = document.createElement("tr");
-     	tbody2.appendChild(tr1);
-     	
-     	return tr1;
-    }
-
     return ProfileAction;
 });
 

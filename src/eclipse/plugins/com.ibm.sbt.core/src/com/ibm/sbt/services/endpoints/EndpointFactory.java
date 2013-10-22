@@ -18,6 +18,7 @@ package com.ibm.sbt.services.endpoints;
 
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.util.StringUtil;
+import com.ibm.sbt.jslibrary.SBTEnvironment;
 import com.ibm.sbt.util.SBTException;
 
 
@@ -110,5 +111,26 @@ public class EndpointFactory {
             return ep.getLabel();
         }
         return null;
+    }
+    
+    public static Endpoint getEndpointFromEnvironment(String endpointName, String environment){
+    	Context context = Context.getUnchecked();
+    	if (context == null) {
+    		return null;
+    	}
+        if (environment == null )  environment = context.getProperty("environment");
+        if(environment != null) {
+            SBTEnvironment env = (SBTEnvironment) context.getBean(environment);
+            SBTEnvironment.Endpoint[] endpointsArray = env.getEndpointsArray();
+            for(SBTEnvironment.Endpoint endpoint : endpointsArray){
+                if(StringUtil.equals(endpointName, endpoint.getAlias())){
+                    endpointName = endpoint.getName();
+                    break;
+                } else if (StringUtil.equals(endpointName, endpoint.getName())){
+                    break;
+                }
+            }
+        }
+        return EndpointFactory.getEndpoint(endpointName);
     }
 }

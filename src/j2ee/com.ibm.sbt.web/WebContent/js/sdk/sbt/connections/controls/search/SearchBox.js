@@ -53,6 +53,8 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 		
 		_searchInput: null,
 		
+		
+		
         /**
          * @method constructor The constructor for the SearchBox class
          * @param args
@@ -450,10 +452,11 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 				this._searchInput = inputBox;
 				
 				var query = inputBox.value;
+				if(context.wildcard){
+					query = query+"*";
+				}
 				var popUp = context.renderer.renderSuggestionPopUp(context,context.domNode);
-				this._suggestionPopUp = popUp;
-				
-				popUp.innerHTML = "";
+				this._suggestionPopUp = popUp;								
 				
 				var requestArgs = {};	
 				if(context.constraint){
@@ -471,8 +474,22 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 						searchService = new SearchService();
 					}
 					
-				    var promise = searchService.getMyResults(query,requestArgs);
-	
+					var promise;
+					
+					//if userIsAuthenticated parameter is being used,
+					//check if user is authenticated search public & private , if not search only public
+					//cannot use if(context.auth) to check if the auth parameter exists because it may be set to false
+					if(context.userIsAuthenticated != null){
+						if(context.userIsAuthenticated === false){
+							promise = searchService.getResults(query,requestArgs);
+						}else if(context.userIsAuthenticated === true){
+							promise = searchService.getMyResults(query,requestArgs);
+						}
+					}else{
+						//search private and public and ask user to authenticate
+						promise = searchService.getMyResults(query,requestArgs);
+					}
+				    
 			        promise.then(
 			            function(results) {
 			            	if(context._primaryComponent != "all"){
@@ -505,6 +522,7 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 			 * @param popUp the popUp Element where results are displayed 
 			 */
 			handleSuggestResult: function(results,context,popUp){
+				popUp.innerHTML = "";
 				for(var i=0;i<results.length;i++){
             		var row = document.createElement("tr");
             		var data = document.createElement("td");
@@ -531,9 +549,6 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 			 * @param event The Event
 			 */
 			search: function(event,context){
-				
-				
-				
 				if(this._suggestionPopUp ){
 					for(var i=0;i<context.domNode.children.length;i++){
 						if(context.domNode.children[i] === this._suggestionPopUp){
@@ -562,9 +577,29 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 					}else{
 						searchService = new SearchService();
 					}
-				    var promise = searchService.getMyResults(context.searchQuery,requestArgs);
-				    
-				    var self = context;
+					
+					var query = context.searchQuery;
+					if(context.wildcard){
+						query = query+"*";
+					}
+					var self = context;
+				   
+					var promise;
+					
+					//if userIsAuthenticated parameter is being used,
+					//check if user is authenticated search public & private , if not search only public
+					//cannot use if(context.auth) to check if the auth parameter exists because it may be set to false
+					if(context.userIsAuthenticated != null){
+						if(context.userIsAuthenticated === false){
+							promise = searchService.getResults(query,requestArgs);
+						}else if(context.userIsAuthenticated === true){
+							promise = searchService.getMyResults(query,requestArgs);
+						}
+					}else{
+						//search private and public and ask user to authenticate
+						promise = searchService.getMyResults(query,requestArgs);
+					}
+
 			        promise.then(
 			            function(results) {
 			            	var newResults = [];

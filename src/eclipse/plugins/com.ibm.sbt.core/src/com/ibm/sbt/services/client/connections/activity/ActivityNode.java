@@ -56,6 +56,12 @@ public class ActivityNode extends Activity {
 		super(service, handler);
 	}
 	
+	/**
+	 * Method to specify the Position of the section within the activity.
+	 * @see http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+
+	 * 		Documentation#action=openDocument&res_title=Section_content_ic40a&content=pdcontent
+	 * @param position
+	 */
 	public void setPosition(int position){
 		String positionStr = String.valueOf(position);
 		setAsString(ActivityXPath.Position, positionStr);

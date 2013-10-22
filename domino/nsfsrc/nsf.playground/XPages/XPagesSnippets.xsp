@@ -86,7 +86,7 @@ if(doc) {
 		properties:		doc.getItemValueString("properties"),
 		documentation:	doc.getItemValueString("documentation")
 	}
-	o.params = snippetBean.extractParams([o.html,o.js,o.css]);
+	o.params = snippetBean.extractParams([o.xPages]);
 	return o;
 }
 o = {

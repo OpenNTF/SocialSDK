@@ -23,11 +23,10 @@ import com.ibm.xsp.context.DojoLibraryFactory;
  * @author priand
  */
 public abstract class PreviewHandler {
-
 	
-	protected static class EnvParameterProvider implements com.ibm.commons.runtime.util.ParameterProcessor.ParameterProvider {
+	public static class EnvParameterProvider implements com.ibm.commons.runtime.util.ParameterProcessor.ParameterProvider {
 		SBTEnvironment env;
-		EnvParameterProvider(SBTEnvironment env) {
+		public EnvParameterProvider(SBTEnvironment env) {
 			this.env = env;
 		}
 		public String getParameter(String name) {

@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 import java.io.Serializable;
 import java.io.StringWriter;
 import java.util.Iterator;
-import java.util.Map;
 
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
@@ -134,8 +133,6 @@ public class PreviewJavaHandler extends PreviewHandler {
 		} catch(NotesException ex) {
 			throw new ServletException(ex);
 		}
-		
-
 		
 		PrintWriter pw = resp.getWriter();
 		

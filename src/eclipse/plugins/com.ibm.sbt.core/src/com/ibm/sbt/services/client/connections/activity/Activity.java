@@ -59,6 +59,10 @@ public class Activity extends BaseEntity {
 		setId(activityId);
 	}
 	
+	public Activity(ActivityService service) {
+		this.setService(service);
+	}
+	
 	public Activity(String activityId) {
 		setId(activityId);
 	}

@@ -24,13 +24,15 @@ define([ "../../../declare",
          
 function(declare, GridAction, CommunityService, CommunityConstants) {
 
+	
+	
     /**
      * @class ProfileAction
      * @namespace sbt.connections.controls.profiles
      * @module sbt.connections.controls.profiles.ProfileAction
      */
     var ProfileAction = declare(GridAction, {
-        
+    	
     	/**Strings used in the actions */
         nls: {
             tooltip: "Go to ${name}",
@@ -99,7 +101,15 @@ function(declare, GridAction, CommunityService, CommunityConstants) {
          * @param data The data row from which the event was fired.
          */
         displayEditMemberForm: function(grid, el, data, ev, communityUuid) {
+        	// If the form is already displayed, exit
+        	var containerID = "editMemberContainer" + data.uid;
+        	if (document.getElementById(containerID)) {
+        		return;
+        	}
+        	
          	var container = document.createElement("div");
+         	
+         	container.id = containerID;
          	
         	var table = document.createElement("table");
          	container.appendChild(table);
@@ -180,7 +190,7 @@ function(declare, GridAction, CommunityService, CommunityConstants) {
          	
          	var btnSave = _initSaveActionListener(el, rbOwner, communityUuid, data, grid);
          	
-         	var btnClose = _initCloseActionListener(el, container);
+         	var btnClose = _initCloseActionListener(el, container, data.uid);
          	
          	var btnRemoveMember = _initRemoveActionListener(grid, communityUuid, data);
          	

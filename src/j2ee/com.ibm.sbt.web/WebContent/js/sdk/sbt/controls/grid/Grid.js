@@ -289,6 +289,39 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
             }
         },
         
+        show10ItemsPerPage: function(el, data, ev) {
+        	this.showItemsPerPage(el, data, ev, 10);
+        },
+        
+        show25ItemsPerPage: function(el, data, ev) {
+        	this.showItemsPerPage(el, data, ev, 25);
+        },
+        
+        show50ItemsPerPage: function(el, data, ev) {
+        	this.showItemsPerPage(el, data, ev, 50);
+        },
+        
+        show100ItemsPerPage: function(el, data, ev) {
+        	this.showItemsPerPage(el, data, ev, 100);
+        },
+        
+        /**
+         * Show "count" items per page
+         * @method - showItemsPerPage
+         * @param el - The element that fired the event, typically an anchor 
+         * @param data - the data associated with element
+         * @param ev - the event, for example onClick
+         * @param count - the number of items to display per page
+         */
+        showItemsPerPage: function(el, data, ev, count) {
+        	this._stopEvent(ev);
+        	if (this.store) {
+        		this.pageSize = count;
+        		this.update(null);
+        	}
+        },
+        
+        
         /**
          * Move forward to the next page of grid rows
          * @method - nextPage

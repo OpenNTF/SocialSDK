@@ -40,7 +40,7 @@
 	<%
 	try {		
 		ActivityService activityService = new ActivityService();
-		Activity activity = new Activity(activityService, "");
+		Activity activity = new Activity(activityService);
 		activity.setTitle("JSPActivity" + System.currentTimeMillis());
 		activity.setContent("GoalOfActivity - " + System.currentTimeMillis());
 		List<String> tagList = new ArrayList<String>();

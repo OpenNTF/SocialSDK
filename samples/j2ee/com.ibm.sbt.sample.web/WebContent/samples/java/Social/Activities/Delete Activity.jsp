@@ -41,7 +41,7 @@
 	try {		
 		ActivityService activityService = new ActivityService();
 		//Create Activity
-		Activity activity = new Activity(activityService, "");
+		Activity activity = new Activity(activityService);
 		activity.setTitle("ActivityForDeletion" + System.currentTimeMillis());
 		activity.setContent("ActivityForDeletion - " + System.currentTimeMillis());
 		List<String> tagList = new ArrayList<String>();

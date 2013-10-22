@@ -107,6 +107,6 @@
 			</xe:djTabContainer>
 		</xe:formRow>
 	</xe:formTable>
-	<xe:dumpObject loaded="true" id="dumpObject1" title="document"
+	<xe:dumpObject loaded="false" id="dumpObject1" title="document"
 		value="#{document1}" />
 </xp:view>

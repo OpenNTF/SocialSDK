@@ -187,7 +187,7 @@ function(declare, GridAction, CommunityService, CommunityConstants) {
          	ctrTd0.setAttribute("style", "text-align: left;");
          	ctrTd0.class = "lotusFormFooter";
          	ctrTr.appendChild(ctrTd0);
-         	
+
          	var btnSave = _initSaveActionListener(el, rbOwner, communityUuid, data, grid);
          	
          	var btnClose = _initCloseActionListener(el, container, data.uid);

@@ -47,7 +47,7 @@ import com.ibm.sbt.services.util.SSLUtil;
 public abstract class AbstractFileProxyService extends ProxyEndpointService {
 
 	protected enum Operations {
-		UPLOAD_FILE("UploadFile"), DOWNLOAD_FILE("DownloadFile"), UPDATE_PROFILE_PHOTO("UpdateProfilePhoto"), UPLOAD_NEW_VERSION("UploadNewVersion");
+		UPLOAD_FILE("UploadFile"), DOWNLOAD_FILE("DownloadFile"), UPDATE_PROFILE_PHOTO("UpdateProfilePhoto"), UPLOAD_NEW_VERSION("UploadNewVersion"), UPDATE_COMMUNITY_LOGO("UpdateCommunityLogo");
 
 		private Operations(final String text) {
 			this.text = text;

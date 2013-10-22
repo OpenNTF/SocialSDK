@@ -804,13 +804,11 @@ public class CommunityService extends BaseService {
 		if (StringUtil.isEmpty(communityId)){
 			throw new CommunityServiceException(null, Messages.NullCommunityIdUserIdOrRoleException);
 		}
-		String memberId = "";
-		if(StringUtil.isEmpty(member.getUserid())){
+		String memberId = member.getUserid();
+		if(StringUtil.isEmpty(memberId)){
 			memberId = member.getEmail();
-		} else {
-			memberId = member.getUserid();
 		}
-		
+
 		if (StringUtil.isEmpty(memberId)){
 			throw new CommunityServiceException(null, Messages.NullCommunityIdUserIdOrRoleException);
 		}

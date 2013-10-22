@@ -24,36 +24,71 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 	 */
 	var SearchBox = declare(_TemplatedWidget,{
 		
-		/** Loading template */
+		// TODO why is type not listed here? what does that parameter mean?
+		
+		/** 
+		 * TODO The "Loading" string needs to be externalied into nls. This should be in the renderer?
+		 * Loading template 
+		 */
 		templateString: "<div><strong> Loading... </strong></div>",
         
-		/** The Renderer For this control */
+		/**
+		 * The Renderer For this control 
+		 */
 		renderer: null,
         
-		/** The Application the user will select for example files, wikis etc, initially set to all */
+		/** 
+		 * The Application the user will select for example files, wikis etc, initially set to all 
+		 */
         selectedApplication: "allconnections",       	
         
-        /** The phrase the user will search for */
+        /** 
+         * TODO should this be public?
+         * The phrase the user will search for.
+         */
         searchQuery: "",
         
-        /** Search Service, used to perform the search */
+        /** 
+         * Search type, valid values are 'private' || 'public' (defaut value is 'private')
+         */
+        searchType: "private",
+
+        /** 
+         * Search suffix, will be appended to every search query 
+         */
+        searchSuffix: null,
+
+        /** 
+         * Search Service, used to perform the search 
+         */
         searchService: null,
 
-		/** This list is used to keep track of selected members **/
-		members : [],
+		/** 
+		 * 	TODO  Better pattern is to set is during postMixInProperties 
+		 * This list is used to keep track of selected members 
+		 */
+		members: [],
 		
-		/**The result the user has chosen from the search suggestions */
+		/**
+		 * 	TODO  Better pattern is to set is during postMixInProperties 
+		 * The result the user has chosen from the search suggestions 
+		 */
 		_selectedResultItem : {text:"",id:""},
 		
-		/*Selected row is used for keyboard navigation in the applications pop up*/
+		/*
+		 * Selected row is used for keyboard navigation in the applications pop up
+		 */
 		_selectedRow : -1,
 		
-		/*used to check that search results that are displayed are from the application the user selected */
+		/* 
+		 * Used to check that search results that are displayed are from the application the user selected 
+		 */
 		_primaryComponent: "all",
 		
+		/*
+		 * 
+		 */
 		_searchInput: null,
-		
-		
 		
         /**
          * @method constructor The constructor for the SearchBox class
@@ -65,27 +100,59 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 				this.searchBoxAction._setPrimaryComponent(this.selectedApplication,this);
 			}
 		},
-		
+
+		/**
+		 * TODO Document Me 
+		 */
 		setInputValue: function(value){
 			this._searchInput.value = value;
 		},
 		
+		/**
+		 * Invoked before rendering occurs, and before any dom nodes are created.
+		 * This is the place to change the widget properties before it is rendered.
+		 */
+		postMixInProperties : function() {
+		},
+		
+		/**
+		 * TODO Document Me 
+		 */
 		getInputValue: function(){
 			return this._searchInput.value;
 		},
 		
-		disableSearchInput: function(){
-			this._searchInput.disabled = true;
+		/**
+		 * Set the disabled state of the input control for the SearchBox.
+		 * 
+		 * @param disabled True to disable the input control
+		 * @return this
+		 */
+		setInputDisabled: function(disabled) {
+			this._searchInput.disabled = disabled;
+			return this;
 		},
 		
-		enableSearchInput: function(){
-			this._searchInput.disabled = false;
+		/**
+		 * Return the disabled state of the input control for the SearchBox.
+		 * 
+		 * @return True is the input control is disabled and otherwise false
+		 */
+		isInputDisabled: function(){
+			return this._searchInput.disabled;
 		},
 		
+		/**
+		 * TODO Document Me 
+		 */
 		getSelectedResult: function(){
 			return this._selectedResultItem;
 		},
 		
+		/**
+		 * TODO is this needed
+		 * TODO Document Me 
+		 */
 		setSelectedResult: function(name,id){
 			if(name){
 				this._selectedResultItem.name = name;
@@ -96,7 +163,7 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 		},
 		 
 		/**
-		 * function is called after this class has been constructed
+		 * Function is called after this class has been constructed
 		 * the functions in the post create need to be called after the class has been
 		 * instantiated so parameters in the dijit base classes can be initialised. 
 		 * @method postCreate 
@@ -112,6 +179,7 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 				this.renderer.renderMemberList(this.domNode);
 			}
 		},
+		
 		/**
 		 * Creates a SearchBoxRenderer and sets it as the renderer for this class.
 		 * @method CreateDefaultRenderer
@@ -138,6 +206,7 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 		 * @param event the blur event
 		 */
 		handleBlur: function(element,obj,event){
+			// TODO why two seperate calls to removePopUp, logic looks overly complex here
 			//For Keyboard Accessibility, this only needs to work for firefox(accessible path) if other browsers 
 			//do not support this property that is okay
 			if(event.explicitOriginalTarget){
@@ -226,16 +295,23 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 			this.searchBoxAction.onKeyPress(element, obj, event, this);
 		},
 		
+		/**
+		 * TODO Document Me
+		 * @param element
+		 * @param obj
+		 * @param event
+		 */
 		suggest: function(element, obj, event){
 			if(this.searchSuggest == "on"){
 				this.searchBoxAction.suggest(event, this);
 			}			
 		},
 		
-		
-		/**SearchBoxAction contains functions to handle events
+		/**
+		 * SearchBoxAction contains functions to handle events
 		 * this should be overridden to change the action 
-		 * of the event handler function  */
+		 * of the event handler function  
+		 */
 		searchBoxAction : {
 			
 			_appsPopUp: null,
@@ -298,6 +374,8 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 				// Get parent node
 				var item = event.target.parentNode;
 
+				// TODO if someone overrides the renderer will this work?
+				
 				// Prepare HTML for comparison
 				var memberNode = item.parentNode;
 				var memberNodeHtml = memberNode.innerHTML;
@@ -342,7 +420,7 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 			 * @param self Context
 			 */
 			renderPopUp: function(self){
-				
+				// TODO shouldn't this just pass thru to the renderer?
 				if(this._suggestionPopUp ){
 					for(var i=0;i<self.domNode.children.length;i++){
 						if(self.domNode.children[i] === this._suggestionPopUp){
@@ -351,7 +429,6 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 					}
 				}
 				this._appsPopUp = self.renderer.renderPopUp(self,self.domNode);
-				
 			},
 			
 			/**
@@ -379,7 +456,13 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 				this._setPrimaryComponent(self.selectedApplication,self);
 			},
 			
-			
+			/**
+			 * TODO Document Me
+			 * 
+			 * @param event
+			 * @param popUp
+			 * @param context
+			 */
 			setSuggestedSearch: function(event,popUp,context){
 				var value = event.target.textContent;
 				var id = event.target.id;
@@ -443,8 +526,8 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 			 * @param event the event
 			 * @param context the context this
 			 */
+			// TODO What is the difference between suggest and search?
 			suggest: function(event,context){
-				
 				var applicationParam = context.selectedApplication.toLocaleLowerCase();
             	applicationParam = applicationParam.replace(/ /g,'');
 				
@@ -452,8 +535,8 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 				this._searchInput = inputBox;
 				
 				var query = inputBox.value;
-				if(context.wildcard){
-					query = query+"*";
+				if(context.searchSuffix) {
+					query = query + context.searchSuffix;
 				}
 				var popUp = context.renderer.renderSuggestionPopUp(context,context.domNode);
 				this._suggestionPopUp = popUp;								
@@ -466,8 +549,9 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 					requestArgs = {"component": applicationParam};
 				}
 				
+				// TODO the && is not needed. Why do all the previous stuff if empty query is ignored?
 				if(query && query != ""){
-					
+					// TODO This should only happen once!
 					if(context.endpoint){
 						searchService = new SearchService({endpoint:context.endpoint});
 					}else{
@@ -475,21 +559,11 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 					}
 					
 					var promise;
-					
-					//if userIsAuthenticated parameter is being used,
-					//check if user is authenticated search public & private , if not search only public
-					//cannot use if(context.auth) to check if the auth parameter exists because it may be set to false
-					if(context.userIsAuthenticated != null){
-						if(context.userIsAuthenticated === false){
-							promise = searchService.getResults(query,requestArgs);
-						}else if(context.userIsAuthenticated === true){
-							promise = searchService.getMyResults(query,requestArgs);
-						}
-					}else{
-						//search private and public and ask user to authenticate
-						promise = searchService.getMyResults(query,requestArgs);
+					if (context.searchType == "private") {
+						promise = searchService.getMyResults(query, requestArgs);
+					} else {
+						promise = searchService.getResults(query, requestArgs);
 					}
-				    
 			        promise.then(
 			            function(results) {
 			            	if(context._primaryComponent != "all"){
@@ -510,8 +584,8 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 			            function(error) {
 			                console.log(error);
 			            }
-		        );
-			}
+			        );
+				}
 			},
 			
 			/**
@@ -522,6 +596,7 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 			 * @param popUp the popUp Element where results are displayed 
 			 */
 			handleSuggestResult: function(results,context,popUp){
+				// TODO should the renderer handle this?
 				popUp.innerHTML = "";
 				for(var i=0;i<results.length;i++){
             		var row = document.createElement("tr");
@@ -532,7 +607,6 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
             		data.id = results[i].getId();
             		data.style = "cursor:pointer";
             		data.onclick = function (event) { 
-            			
             			context.searchBoxAction.setSuggestedSearch(event,popUp,context);
             			context._selectedResultItem.text = title;
             			context._selectedResultItem.id = id;
@@ -559,7 +633,6 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 				
 				var applicationParam = context.selectedApplication.toLocaleLowerCase();
             	applicationParam = applicationParam.replace(/ /g,'');
-            	
 				
             	//if this control is going to retrieve the search results from the server
 				if(context.type == "full"){
@@ -579,27 +652,17 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 					}
 					
 					var query = context.searchQuery;
-					if(context.wildcard){
-						query = query+"*";
+					if(context.searchSuffix) {
+						query = query + context.searchSuffix;
 					}
 					var self = context;
 				   
 					var promise;
-					
-					//if userIsAuthenticated parameter is being used,
-					//check if user is authenticated search public & private , if not search only public
-					//cannot use if(context.auth) to check if the auth parameter exists because it may be set to false
-					if(context.userIsAuthenticated != null){
-						if(context.userIsAuthenticated === false){
-							promise = searchService.getResults(query,requestArgs);
-						}else if(context.userIsAuthenticated === true){
-							promise = searchService.getMyResults(query,requestArgs);
-						}
-					}else{
-						//search private and public and ask user to authenticate
-						promise = searchService.getMyResults(query,requestArgs);
+					if (context.searchType == "private") {
+						promise = searchService.getMyResults(query, requestArgs);
+					} else {
+						promise = searchService.getResults(query, requestArgs);
 					}
-
 			        promise.then(
 			            function(results) {
 			            	var newResults = [];
@@ -652,7 +715,8 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 				}
 				
 			},
-			
+
+			// TODO this needs to be eliminated
 			_setPrimaryComponent: function(selectedApplication,self){
 				switch(selectedApplication.toLowerCase()){
 				case "communities":
@@ -688,8 +752,7 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 				}
 			}
 		
-		},
-		
+		}
 		
 	});
 

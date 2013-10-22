@@ -1919,8 +1919,9 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 return this.createBadRequestPromise("Invalid argument, expected communityUuid.");
             }
         },
-        /**
-         * Validate that the date-time is not empty, return a promise if invalid
+        
+        /*
+         * Validate that the date-time is not empty, return a promise if invalid.
          */
         _validateDateTimes : function(startDate, endDate){
             if ((!startDate || startDate.length === 0) && (!endDate || endDate.length === 0)) {
@@ -1928,6 +1929,9 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             }
         },
         
+        /*
+         * Validate the contributor id, and return a Promise if invalid.
+         */
         _validateContributorId : function(contributorId) {
         	if (!contributorId || contributorId.length == 0) {
                 return this.createBadRequestPromise("Invalid argument, expected contributorId.");

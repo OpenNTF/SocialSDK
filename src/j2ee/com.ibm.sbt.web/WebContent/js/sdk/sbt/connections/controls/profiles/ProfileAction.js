@@ -83,7 +83,6 @@ function(declare, GridAction, CommunityService, CommunityConstants) {
         removeMember: function(grid, currentCommunity, data) {
         	_removeMember(grid, currentCommunity, data);
         },
-        
       
         
         /**
@@ -210,9 +209,6 @@ function(declare, GridAction, CommunityService, CommunityConstants) {
         	        }
         	);
         },
-        
-
-        
     });
     
     /**

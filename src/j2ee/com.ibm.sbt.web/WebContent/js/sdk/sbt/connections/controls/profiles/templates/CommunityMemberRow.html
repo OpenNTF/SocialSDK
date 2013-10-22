@@ -22,6 +22,13 @@
 		<div>
 			<div>${nls.role}:&nbsp;${role}</div>
 			<div>${nls.email}&nbsp;<strong><a alt="${nls.clickToEmail}" href="mailto:${email}">${email}</a></strong></div>
+			<div>
+				<strong>
+					<a alt="${nls.edit}" data-dojo-attach-event="onclick: editMember" href="javascript:void(0);">${nls.edit}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+					<a alt="${nls.remove}" data-dojo-attach-event="onclick: removeMember" href="javascript:void(0);">${nls.remove}</a>
+				</strong>
+			</div>
+		
 		</div>
 	</td>
 </tr>

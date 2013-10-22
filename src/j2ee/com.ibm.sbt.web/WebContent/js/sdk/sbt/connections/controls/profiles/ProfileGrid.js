@@ -26,8 +26,10 @@ define([ "../../../declare",
 		 "../../../connections/controls/vcard/SemanticTagService", 
 		 "../../../store/parameter",
 		 "../../../connections/ProfileConstants",
-		 "../../../connections/CommunityConstants"], 
-        function(declare, sbt, lang, Grid, ProfileGridRenderer, ProfileAction, SemanticTagService, parameter, consts, communities) {
+		 "../../../connections/CommunityConstants",
+		 "sbt/connections/CommunityService"], 
+        function(declare, sbt, lang, Grid, ProfileGridRenderer, ProfileAction, SemanticTagService, parameter, consts, communities,
+        		CommunityService) {
 
 	var sortVals = {
 			displayName: "displayName",
@@ -295,11 +297,45 @@ define([ "../../../declare",
          */
         handleClick: function(el, data, ev) {
             if (this.profileAction) {
-            	console.log(data);
                 this._stopEvent(ev);
                 
                 this.profileAction.execute(data, { grid : this.grid }, ev);
             }
+        },
+        
+        /**
+         * In the grid HTML an element can have an event attached 
+         * using dojo-attach-event="onClick: editMember".
+         * This method is the handler for the onclick event fired when
+         * clicking the "edit member" link on a member row.
+         * @method editMember
+         * @param el the element that fired the event
+         * @param data all of the items from the current row of the grid. 
+         * @param ev the event 
+         */
+        editMember: function(el, data, ev) {
+        	if (this.profileAction) {
+                this._stopEvent(ev);
+   
+                this.profileAction.displayEditMemberForm(this, el, data, ev, this.communityUuid);
+        	}
+        },
+        
+        /**
+         * In the grid HTML an element can have an event attached 
+         * using dojo-attach-event="onClick: removeMember".
+         * This method is the handler for for the onclick event fired when
+         * clicking the "remove member" link on a member row.
+         * @method handleClick
+         * @param el the element that fired the event
+         * @param data all of the items from the current row of the grid. 
+         * @param ev the event 
+         */
+        removeMember: function(el, data, ev) {
+        	if (this.profileAction) {
+                this._stopEvent(ev);
+                this.profileAction.removeMember(this, this.communityUuid, data);
+        	}
         },
         
         /**

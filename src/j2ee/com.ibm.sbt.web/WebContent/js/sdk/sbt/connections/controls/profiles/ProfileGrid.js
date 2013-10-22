@@ -334,7 +334,6 @@ define([ "../../../declare",
         removeMember: function(el, data, ev) {
         	if (this.profileAction) {
                 this._stopEvent(ev);
-                var communityService = new CommunityService();
                 this.profileAction.removeMember(this, this.communityUuid, data);
         	}
         },

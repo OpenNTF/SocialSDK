@@ -10,16 +10,27 @@ if(p) {
 		if(env) {
 			env.prepareEndpoints();
 		}
+		var params = opt.params;
+		if(params) {
+			for(var n in params) {
+				if(params.hasOwnProperty(n)) {
+					env.pushSessionParams(n,params[n]);
+				}
+			}
+		}
 	}
+	
 	var exception;
 	var id = p.id;
 	var doc = database.getDocumentByUNID(id)
 	if(doc) {
 		var xpages = doc.getItemValueString("XPages");
+		xpages = xpagesSnippetBean.processParameters(env,xpages);
+		
 		var pageName = "playground/"+id+"_"+doc.getLastModified().toJavaDate().getTime();
 		try {
 			dynamicXPagesBean.compile(pageName,xpages);
-			context.redirectToPage(pageName);
+			context.redirectToPage(pageName,false);
 		} catch(e) {
 			exception = e;
 		}

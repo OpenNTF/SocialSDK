@@ -16,9 +16,9 @@
 /**
  * 
  */
-define(["../../declare", "../../config", "../../widget/_TemplatedWidget", "../../stringUtil", "../../json", 
+define(["../../declare", "../../config", "../../lang", "../../widget/_TemplatedWidget", "../../stringUtil", "../../json", 
         "../../text!./templates/WidgetFrame.html", "../../i18n!sbt/connections/controls/nls/WidgetWrapper" ], 
-        function(declare, config, _TemplatedWidget, stringUtil, JSON, frameTemplate, nls) {
+        function(declare, config, lang, _TemplatedWidget, stringUtil, JSON, frameTemplate, nls) {
 
     /**
      * Base class for wrapped widgets. 
@@ -87,6 +87,17 @@ define(["../../declare", "../../config", "../../widget/_TemplatedWidget", "../..
         	    this.iframeNode.src = config.Properties.sbtUrl + this.frameContent;
         	}
         },
+        
+        /**
+         * Get an object with the transformations to be performed on the template. Subclasses should override this to provide values for any substitution variables in their templates.
+         * 
+         * @method getTransformObject
+         * @returns {Object}
+         */
+        getTransformObject: function(){
+            return {};
+        },
+        
         /**
          * After the widget has been created AND added to the dom. 
          * 
@@ -96,28 +107,14 @@ define(["../../declare", "../../config", "../../widget/_TemplatedWidget", "../..
          */
         startup: function() {
             this.inherited(arguments);
-            if(!config.Properties["loginUi"])
-                config.Properties["loginUi"] = "popup";
             if (this.frameContent) {
                 var iframe = (this.iframeNode.contentWindow || this.iframeNode.contentDocument);
-                if (iframe.document)
+                if (iframe.document){
                     iframe = iframe.document;
-
-                var proxyUrl = this._endpoint.proxy.proxyUrl + "/" + this._endpoint.proxyPath;
-                var connectionsUrl = this._endpoint.baseUrl;
-                
-                var libraryParams = window.location.search ? window.location.search : "?";
-                var libraryUrl = config.Properties.libraryUrl + libraryParams;
-                
+                }
                 if(this.defaultTemplate){
-                    var templateReplacements = {
-                        args: JSON.stringify(this.args),
-                        proxyUrl: proxyUrl,
-                        connectionsUrl: connectionsUrl,
-                        libraryUrl: libraryUrl,
-                        sbtProps: JSON.stringify(config.Properties)
-                    };
-                    this.defaultTemplate = stringUtil.transform(this.defaultTemplate, templateReplacements, function(value, key){
+                    
+                    this.defaultTemplate = stringUtil.transform(this.defaultTemplate, this.getTransformObject(), function(value, key){
                         if(!value){
                             return "${" + key + "}";
                         }

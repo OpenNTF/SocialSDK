@@ -85,27 +85,31 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../connectio
             var configUtil = new _SbtAsConfigUtil(this.xhrHandler);
             
             args.xhrHandler = this.xhrHandler;
-            if(args.activityStreamNode)
+            if(args.activityStreamNode){
                 this.wrapDomNode(args.activityStreamNode);
-            
+            }
             var self = this;
             
             configUtil.buildSbtConfig(args).then(function(cfg){
                 if(args.sideNavNode && Object.keys(cfg.views).length > 1){
-                    new com.ibm.social.as.gadget.viewnav.ASGadgetViewSideNav({
-                        configObject : cfg
-                    }, dom.byId(args.sideNavNode));
+                    if(com.ibm.social.as.nav){
+                        new com.ibm.social.as.nav.ASSideNav({
+                            configObject : cfg
+                        }, dom.byId(args.sideNavNode));
+                    }else{
+                        new com.ibm.social.as.gadget.viewnav.ASGadgetViewSideNav({
+                            configObject : cfg
+                        }, dom.byId(args.sideNavNode));
+                    }
                 }
-                if(args.activityStreamNode)
+                if(args.activityStreamNode){
+                    window.activityStreamConfig = cfg;
                     new com.ibm.social.as.ActivityStream({
                         configObject: cfg,
                         domNode: args.activityStreamNode,
                         isGadget: false,
                         selectedState: true
                     });
-                if(args.shareBoxNode){
-                    args.boardId = cfg.boardId;
-                    self.inputForm = new _InputForm(args);
                 }
             });
             
@@ -117,10 +121,12 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../connectio
          * @method mixinXhrHandler
          */
         mixinXhrHandler: function(){
-            if(com.ibm.social.as.util.xhr.XhrHandler.init !== undefined)
+            if(com.ibm.social.as.util.xhr.XhrHandler.init !== undefined){
                 com.ibm.social.as.util.xhr.XhrHandler.init(this.xhrHandler);
-            else
+            }
+            else{
                 lang.mixin(com.ibm.social.as.util.AbstractHelper.prototype, this.xhrHandler);
+            }
         },
         
         /**

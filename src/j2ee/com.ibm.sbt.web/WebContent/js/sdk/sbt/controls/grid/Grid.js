@@ -17,8 +17,8 @@
 /**
  * 
  */
-define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil", "../../widget/grid/_Grid", "./ViewProfileAction", "../../util"], 
-        function(declare, lang, itemFactory, stringUtil, _Grid, ViewProfileAction, util) {
+define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil", "../../widget/grid/_Grid", "../../util"], 
+        function(declare, lang, itemFactory, stringUtil, _Grid, util) {
 
     /**
      * @class grid
@@ -67,16 +67,6 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
          * Selected rows are the rows of the grid that have been selected by checking a check box 
          */
         selectedRows: null,
-        
-        /**
-         * The base URL for the profiles application 
-         */
-        baseProfilesUrl: "/profiles",
-        
-        /**
-         * Action to open a profile
-         */
-        viewProfileAction: new ViewProfileAction(),
         
         /*
          * TODO remove this?
@@ -324,21 +314,6 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
                 }
                 this._doQuery(this.store, options);
             }
-        },
-        
-        /**
-         * In the grid HTML an element can have an event attached 
-         * using dojo-attach-event="onClick: handleClick".
-         * This method is the handler for the onclick event.
-         * This function is for viewing a profile.  
-         * @method handleClick
-         * @param el the element that fired the event
-         * @param data all of the items from the current row of the grid. 
-         * @param ev the event 
-         */
-        viewAuthorProfile: function(el, data, ev){
-        	this._stopEvent(ev);
-        	this.viewProfileAction.openAuthorProfile(data, this.store,this.baseProfilesUrl);
         },
         
         /**

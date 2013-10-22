@@ -55,6 +55,10 @@ define(["../../../declare",
 	                 return grid.activitiesAction.getTooltip(item);
 	             }
 	         },
+	         
+	         getUserProfileHref: function(grid,item,i,items){
+	        	 return this.getProfileUrl(grid,item.getValue("authorUserId"));
+	         }
 	    	
 	    });
 	

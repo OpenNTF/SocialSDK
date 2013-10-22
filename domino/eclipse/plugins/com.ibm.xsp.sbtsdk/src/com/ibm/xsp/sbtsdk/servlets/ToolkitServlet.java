@@ -69,7 +69,7 @@ public class ToolkitServlet extends LibraryServlet {
 			params.setServiceUrl(serviceUrl);
 			
 			// Calculate the library servlet URL
-			String libraryUrl = RuntimeConstants.get().getBaseLibraryUrl(getHttpRequest());
+			String libraryUrl = UrlUtil.getRequestUrl(getHttpRequest());
 			params.setLibraryUrl(libraryUrl);
 			
 			super.init(params);

@@ -557,8 +557,6 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 					requestArgs = {"component": applicationParam};
 				}
 				
-				lang.mixin(requestArgs, context.searchArgs);
-				
 				// TODO the && is not needed. Why do all the previous stuff if empty query is ignored?
 				if(query && query != ""){
 					// TODO This should only happen once!
@@ -651,7 +649,6 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 					}else{
 						requestArgs = {"component": applicationParam};
 					}
-					lang.mixin(requestArgs, context.searchArgs);
 					
 					if(context.endpoint){
 						searchService = new SearchService({endpoint:context.endpoint});

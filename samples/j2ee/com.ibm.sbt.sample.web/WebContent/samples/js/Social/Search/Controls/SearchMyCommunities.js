@@ -3,13 +3,12 @@ require([ "sbt/dom", "sbt/connections/controls/search/SearchBox", "sbt/config",
 	function(dom, SearchBox, config, SearchGrid) {
 
 	var endpoint = config.findEndpoint("connections");
-	var isAuthenticated = endpoint.isAuthenticated;
 
 	var searchBox = new SearchBox({
 		type : "full",
-		searchType : isAuthenticated ? "my" : "public",
-		searchSuffix : "*",
-		searchSuggest : "on"
+		searchSuggest : "on",
+		searchArgs : { scope: "communities" },
+		constraint : { type: "field", id: "title", exactMatch: false }
 	});
 
 	dom.byId("searchBox").appendChild(searchBox.domNode);

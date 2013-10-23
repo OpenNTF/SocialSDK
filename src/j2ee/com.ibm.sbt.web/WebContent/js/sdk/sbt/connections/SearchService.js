@@ -275,6 +275,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @param requestArgs
          */
         getResults: function(queryArg, requestArgs) {
+        	requestArgs = this._stringifyRequestArgs(requestArgs);
             var options = {
                 method : "GET",
                 handleAs : "text",
@@ -295,6 +296,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @param requestArgs
          */
         getMyResults: function(queryArg, requestArgs) {
+        	requestArgs = this._stringifyRequestArgs(requestArgs);
             var options = {
                 method : "GET",
                 handleAs : "text",
@@ -391,6 +393,29 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             };
                 
             return this.getEntities(consts.AtomMySearch, options, FacetsCallbacks);
+        },
+        
+        //
+        // Internals
+        //
+        
+        /*
+         * 
+         */
+        _stringifyRequestArgs: function(requestArgs) {
+            if (!requestArgs) {
+                return null;
+            }
+            var _requestArgs = {};
+            for(var name in requestArgs){
+                var value = requestArgs[name];
+                if (lang.isObject(value)) {
+                	_requestArgs[name] = json.stringify(value);
+                } else {
+                	_requestArgs[name] = value;
+                }
+            }
+            return _requestArgs;
         },
         
         /*

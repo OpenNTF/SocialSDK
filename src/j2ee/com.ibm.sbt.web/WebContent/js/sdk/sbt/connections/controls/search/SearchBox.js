@@ -49,14 +49,19 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
         searchQuery: "",
         
         /** 
-         * Search type, valid values are 'private' || 'public' (defaut value is 'private')
+         * Search type, valid values are 'my' || 'public' (defaut value is 'my')
          */
-        searchType: "private",
+        searchType: "my",
 
         /** 
          * Search suffix, will be appended to every search query 
          */
         searchSuffix: null,
+        
+        /**
+         * Search arguments, will be added to each search request
+         */
+        searchArgs: null,
 
         /** 
          * Search Service, used to perform the search 
@@ -541,7 +546,7 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 				var popUp = context.renderer.renderSuggestionPopUp(context,context.domNode);
 				this._suggestionPopUp = popUp;								
 				
-				var requestArgs = {};	
+				var requestArgs = context.searchArgs || {};	
 				if(context.constraint){
 					var jsonString = JSON.stringify(context.constraint);
 					requestArgs = {"component": applicationParam, constraint:jsonString};
@@ -559,7 +564,7 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 					}
 					
 					var promise;
-					if (context.searchType == "private") {
+					if (context.searchType == "my") {
 						promise = searchService.getMyResults(query, requestArgs);
 					} else {
 						promise = searchService.getResults(query, requestArgs);
@@ -636,8 +641,7 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 				
             	//if this control is going to retrieve the search results from the server
 				if(context.type == "full"){
-					var requestArgs = {};
-					
+					var requestArgs = context.searchArgs || {};
 					if(context.constraint){
 						var jsonString = JSON.stringify(context.constraint);
 						requestArgs = {"component": applicationParam, constraint:jsonString};
@@ -658,7 +662,7 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 					var self = context;
 				   
 					var promise;
-					if (context.searchType == "private") {
+					if (context.searchType == "my") {
 						promise = searchService.getMyResults(query, requestArgs);
 					} else {
 						promise = searchService.getResults(query, requestArgs);

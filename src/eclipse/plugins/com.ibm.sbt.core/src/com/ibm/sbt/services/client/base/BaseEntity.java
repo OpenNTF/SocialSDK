@@ -320,7 +320,9 @@ public class BaseEntity {
 	 * @param value
 	 */
 	public BaseEntity setAsArray(String fieldName, String[] value){
-		fields.put(fieldName, value);
+		for(int i=0; i < value.length; i++){
+			fields.put(fieldName+i, value);
+		}
 		return this;
 	}
 	
@@ -331,7 +333,9 @@ public class BaseEntity {
 	 * @param value
 	 */
 	public BaseEntity setAsArray(FieldEntry field, String[] value){
-		fields.put(field.getName(), value);
+		for(int i=0; i < value.length; i++){
+			fields.put(field.getName()+i, value[i]);
+		}
 		return this;
 	}
 	

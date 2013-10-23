@@ -107,8 +107,8 @@ public class BaseBlogEntity extends BaseEntity {
 	 * @return the list of Tags
 	 */
 	
-	public List<String> getTags() {
-		return (List<String>) Arrays.asList(getDataHandler().getAsString(BlogXPath.tags).split(" "));
+	public List<String> getTags() {//TODO: Change return type to Array
+		return (List<String>) Arrays.asList(getDataHandler().getAsArray(BlogXPath.tags));
 	}
 	
 	/**

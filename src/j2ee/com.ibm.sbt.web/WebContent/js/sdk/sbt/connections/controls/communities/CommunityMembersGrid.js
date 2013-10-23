@@ -303,21 +303,33 @@ define([ "../../../declare",
             }
         },
         
-        /**
-         * In the grid HTML an element can have an event attached 
-         * using dojo-attach-event="onClick: editMember".
-         * This method is the handler for the onclick event fired when
-         * clicking the "edit member" link on a member row.
-         * @method editMember
-         * @param el the element that fired the event
-         * @param data all of the items from the current row of the grid. 
-         * @param ev the event 
-         */
-        editMember: function(el, data, ev) {
+        updateMember: function(el, data, ev) {
         	if (this.communityMembersAction) {
                 this._stopEvent(ev);
    
-                this.communityMembersAction.displayEditMemberForm(this, el, data, ev, this.communityUuid);
+                this.communityMembersAction.updateMember(this, el, data, ev, this.communityUuid);
+        	}
+        },
+        
+        removeMember: function(el, data, ev) {
+        	if (this.communityMembersAction) {
+                this._stopEvent(ev);
+   
+                this.communityMembersAction.removeMember(this, el, data, ev, this.communityUuid);
+        	}
+        },
+        
+        closeEditForm: function(el, data, ev) {
+        	if (this.communityMembersAction) {
+                this._stopEvent(ev);
+                this.communityMembersAction.closeEditForm(this, el, data, ev);
+        	}
+        },
+        
+        openEditForm: function(el, data, ev) {
+        	if (this.communityMembersAction) {
+                this._stopEvent(ev);
+                this.communityMembersAction.openEditForm(data);
         	}
         },
         

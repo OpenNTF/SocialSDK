@@ -142,7 +142,7 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
                 url = this.buildUrl(url, args, store.getEndpoint());
             }
             store.setUrl(url);
-            
+
             return store;
         },
         
@@ -293,6 +293,19 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
         
         show100ItemsPerPage: function(el, data, ev) {
         	this.showItemsPerPage(el, data, ev, 100);
+        },
+        
+        /**
+         * Creates the feed for the content that is currently shown.
+         * @method - createFeed
+         * @param el - The element that fired the event, typically an anchor 
+         * @param data - the data associated with element
+         * @param ev - the event, for example onClick
+         */
+        createFeed: function(el, data, ev) {
+        	var url = this.store.getUrl();
+        	window.open(url, "_new");
+        	alert(feed);
         },
         
         /**

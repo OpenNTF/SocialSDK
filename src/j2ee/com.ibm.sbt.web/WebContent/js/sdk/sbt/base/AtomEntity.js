@@ -23,9 +23,10 @@ define([ "../declare", "../lang", "../stringUtil", "./BaseConstants", "./BaseEnt
     function(declare,lang,stringUtil,BaseConstants,BaseEntity,XmlDataHandler) {
 
     var EntryTmpl = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-    				"<entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:app=\"http://www.w3.org/2007/app\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\">" +
+    				"<entry xmlns=\"http://www.w3.org/2005/Atom\" ${createNamespaces}>" +
     					"<title type=\"text\">${getTitle}</title>" +
     					"<content type=\"${contentType}\">${getContent}</content>" +
+    					"<summary type=\"text\">${getSummary}</summary>" +
     					"${categoryScheme}${createEntryData}" + 
     				"</entry>";
 
@@ -246,6 +247,18 @@ define([ "../declare", "../lang", "../stringUtil", "./BaseConstants", "./BaseEnt
          */
         createEntryData : function() {
         	return "";
+        },
+        
+        createNamespaces : function() {
+        	if (!this.dataHandler) {
+        		return "";
+        	}
+        	var namespaceData = "";
+        	var namespaces = this.dataHandler.namespaces;
+        	for (prefix in namespaces) {
+        		namespaceData += "xmlns:"+prefix+"=\"" + namespaces[prefix] + "\" ";
+        	}
+        	return namespaceData;
         }
 
     });

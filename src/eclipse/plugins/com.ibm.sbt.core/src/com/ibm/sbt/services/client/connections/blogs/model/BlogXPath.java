@@ -46,7 +46,7 @@ public enum BlogXPath implements FieldEntry{
 	summary("./summary"),
 	updated("./updated"),
 	snxRank("./snx:rank"),
-	tags("./category/@term"),
+	tags("./category[not(@scheme)]/@term"),
 	tagEntry("/app:categories/a:category"),
 	targetEmail("app:categories/snx:targetEmail"),
 	numberOfContributors("/app:categories/@snx:numberOfContributors"),

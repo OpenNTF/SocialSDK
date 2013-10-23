@@ -472,7 +472,10 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 				var value = event.target.textContent;
 				var id = event.target.id;
 				var input = this._searchInput;
-
+				
+    			context._selectedResultItem.text = value;
+    			context._selectedResultItem.id = id;
+    			
 				context.searchQuery = value;
 				
 				
@@ -554,6 +557,8 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 					requestArgs = {"component": applicationParam};
 				}
 				
+				lang.mixin(requestArgs, context.searchArgs);
+				
 				// TODO the && is not needed. Why do all the previous stuff if empty query is ignored?
 				if(query && query != ""){
 					// TODO This should only happen once!
@@ -613,8 +618,6 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
             		data.style = "cursor:pointer";
             		data.onclick = function (event) { 
             			context.searchBoxAction.setSuggestedSearch(event,popUp,context);
-            			context._selectedResultItem.text = title;
-            			context._selectedResultItem.id = id;
             		};    		
             		row.appendChild(data);
             		popUp.appendChild(row);
@@ -648,6 +651,7 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 					}else{
 						requestArgs = {"component": applicationParam};
 					}
+					lang.mixin(requestArgs, context.searchArgs);
 					
 					if(context.endpoint){
 						searchService = new SearchService({endpoint:context.endpoint});

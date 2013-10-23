@@ -1,7 +1,8 @@
 require([ "sbt/config","sbt/dom" ], function(config,dom) {
 	var endpoint = config.findEndpoint("connections");
     
-    var url = "/wikis/basic/api/wikis/public";
+	var wikiLabel = "%{name=WikiService.wikiLabel|helpSnippetId=Social_Wikis_Get_My_Wikis}";
+    var url = "/wikis/basic/api/wiki/" + encodeURIComponent(wikiLabel) + "/mypages";
     
     var options = { 
         method : "GET", 

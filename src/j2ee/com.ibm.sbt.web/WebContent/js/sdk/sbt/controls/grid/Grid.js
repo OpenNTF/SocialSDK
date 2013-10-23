@@ -98,6 +98,7 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
             lang.mixin(this, args);
             
             this.selectedRows = [];
+  
             
             if (!this.store) {
                 if (args && args.storeArgs) {
@@ -296,16 +297,19 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
         },
         
         /**
-         * Creates the feed for the content that is currently shown.
-         * @method - createFeed
+         * Displays the feed for the content that is currently shown.
+         * @method - viewFeed
          * @param el - The element that fired the event, typically an anchor 
          * @param data - the data associated with element
          * @param ev - the event, for example onClick
          */
-        createFeed: function(el, data, ev) {
-        	var url = this.store.getUrl();
+        viewFeed: function(el, data, ev) {
+        	var endpoint = this.store.getEndpoint();
+        	var proxy = endpoint.proxy;
+        	var baseUrl = endpoint.baseUrl;
+        	var proxyPath = endpoint.proxyPath;
+        	var url = proxy.rewriteUrl(baseUrl, this.store.getUrl(), proxyPath);
         	window.open(url, "_new");
-        	alert(feed);
         },
         
         /**

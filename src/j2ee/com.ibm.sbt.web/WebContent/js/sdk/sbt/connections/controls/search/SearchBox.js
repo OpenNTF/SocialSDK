@@ -549,12 +549,15 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 				var popUp = context.renderer.renderSuggestionPopUp(context,context.domNode);
 				this._suggestionPopUp = popUp;								
 				
-				var requestArgs = context.searchArgs || {};	
+				var requestArgs;
 				if(context.constraint){
 					var jsonString = JSON.stringify(context.constraint);
 					requestArgs = {"component": applicationParam, constraint:jsonString};
 				}else{
 					requestArgs = {"component": applicationParam};
+				}
+				if(context.searchArgs){
+					lang.mixin(requestArgs,context.searchArgs);	
 				}
 				
 				// TODO the && is not needed. Why do all the previous stuff if empty query is ignored?
@@ -642,14 +645,16 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 				
             	//if this control is going to retrieve the search results from the server
 				if(context.type == "full"){
-					var requestArgs = context.searchArgs || {};
+					var requestArgs;
 					if(context.constraint){
 						var jsonString = JSON.stringify(context.constraint);
 						requestArgs = {"component": applicationParam, constraint:jsonString};
 					}else{
 						requestArgs = {"component": applicationParam};
 					}
-					
+					if(context.searchArgs){
+						lang.mixin(requestArgs,context.searchArgs);	
+					}
 					if(context.endpoint){
 						searchService = new SearchService({endpoint:context.endpoint});
 					}else{

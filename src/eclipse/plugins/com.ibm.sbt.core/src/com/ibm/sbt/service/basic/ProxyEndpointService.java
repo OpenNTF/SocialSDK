@@ -15,6 +15,9 @@
  */
 package com.ibm.sbt.service.basic;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -161,7 +164,7 @@ public class ProxyEndpointService extends ProxyService {
 				String url = null;
                 String endpointUrl = endpoint.getUrl();
 				if (pathInfo.substring(startProxyUrl+1).startsWith("http")) {
-				    url = pathInfo.substring(startProxyUrl+1).replaceFirst("\\/", "://");
+				    url = pathInfo.substring(startProxyUrl+1).replaceAll(" ", "%20").replaceFirst("\\/", "://");
 				    /*
 	                if (!url.startsWith(endpointUrl)) {
 	                    throw new ServletException(StringUtil.format(
@@ -169,7 +172,8 @@ public class ProxyEndpointService extends ProxyService {
 	                }
 	                */
 				} else {
-				    url = endpointUrl + pathInfo.substring(startProxyUrl);
+					pathInfo = pathInfo.substring(startProxyUrl).replaceAll(" ", "%20");
+				    url = endpointUrl + pathInfo;
 				}
 				requestURI = url;
 				return;

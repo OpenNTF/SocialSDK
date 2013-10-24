@@ -22,6 +22,7 @@ import com.ibm.sbt.services.util.XmlTextUtil;
 import com.ibm.sbt.services.client.base.transformers.AbstractBaseTransformer;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.communities.Community;
+import com.ibm.sbt.services.client.connections.communities.model.CommunityXPath;
 
 
 /**
@@ -59,13 +60,13 @@ public class CommunityTransformer extends AbstractBaseTransformer {
 			if(xmlEntry.getValue() != null){
 				currentValue = xmlEntry.getValue().toString();
 			}
-			if(currentElement.contains("tag")){
+			if(currentElement.contains(CommunityXPath.tags.toString())){
 				tagsXml += getXMLRep(getStream(sourcepath+"CategoryTmpl.xml"),"tag",XmlTextUtil.escapeXMLChars(currentValue));
-			}else if(currentElement.equalsIgnoreCase("content")){
+			}else if(currentElement.equalsIgnoreCase(CommunityXPath.content.toString())){
 				contentXml = getXMLRep(getStream(sourcepath+"CommunityContentTemplate.xml"),currentElement,XmlTextUtil.escapeXMLChars(currentValue));
-			}else if(currentElement.equalsIgnoreCase("title")){
+			}else if(currentElement.equalsIgnoreCase(CommunityXPath.title.toString())){
 				titleXml = getXMLRep(getStream(sourcepath+"CommunityTitleTemplate.xml"),currentElement,XmlTextUtil.escapeXMLChars(currentValue));
-			}else if(currentElement.equalsIgnoreCase("communityType")){
+			}else if(currentElement.equalsIgnoreCase(CommunityXPath.communityType.toString())){
 				typeXml = getXMLRep(getStream(sourcepath+"CommunityTypeTemplate.xml"),currentElement,XmlTextUtil.escapeXMLChars(currentValue));
 			}
 			

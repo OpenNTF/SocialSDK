@@ -46,7 +46,7 @@
 			if(members.getTotalResults() > 1){
 				Member member = members.iterator().next();	
 				communityService.removeMember(community.getCommunityUuid(), member.getUserid());
-				out.println("<b> Member Removed : "+ member.getUserid() +" from community "+community.getCommunityUuid());
+				out.println("<b> Member Removed : </b>"+ member.getUserid() +" from community "+community.getCommunityUuid());
 			}
 			else
 			 	out.println("<b> Not enough members to remove from community with Id: "+community.getCommunityUuid());

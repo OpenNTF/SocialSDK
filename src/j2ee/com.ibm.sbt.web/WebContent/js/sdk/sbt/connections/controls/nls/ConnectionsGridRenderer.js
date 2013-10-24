@@ -30,7 +30,8 @@ define({
       show25Items : "Show 25 items",
       show50Items : "Show 50 items",
       show100Items : "Show 100 items",
-      items : "items"
+      items : "items",
+      feed : "${nls.feed}"
   }
 });
 

@@ -16,10 +16,10 @@
 
 /**
  * 
- * @module sbt.base.Tag
+ * @module sbt.connections.Tag
  * @author Rajmeet Bal
  */
-define(["../declare", "./BaseEntity" ], 
+define(["../declare", "../base/BaseEntity" ], 
     function(declare, BaseEntity) {
 
 	 /**

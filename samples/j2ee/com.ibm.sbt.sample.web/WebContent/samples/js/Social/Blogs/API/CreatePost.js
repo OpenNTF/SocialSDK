@@ -9,19 +9,16 @@ require(["sbt/connections/BlogService", "sbt/dom", "sbt/json"],
         
     	blogService.getBlogs({ ps: 1 }).then(
             function(blogs){
-                return blogs[0].getHandle();
+            	post.setBlogHandle(blogs[0].getHandle());
+                return blogService.createPost(post);
             }
         ).then(
-            function(firstBlogHandle){
-                return blogService.createPost(post, firstBlogHandle)
-            }
-        ).then(
-    		function(post) {
-                dom.setText("json", json.jsonBeanStringify(post.toJson()));
-            },
-            function(error) {
-                dom.setText("json", json.jsonBeanStringify(error));
-            }
-        );
+    			function(post) {
+                    dom.setText("json", json.jsonBeanStringify(post.toJson()));
+                },
+                function(error) {
+                    dom.setText("json", json.jsonBeanStringify(error));
+                }
+         );
 	}
 );

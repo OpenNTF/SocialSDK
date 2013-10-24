@@ -22,13 +22,48 @@
 		<div>
 			<div>${nls.role}:&nbsp;${role}</div>
 			<div>${nls.email}&nbsp;<strong><a alt="${nls.clickToEmail}" href="mailto:${email}">${email}</a></strong></div>
-			<div>
-				<strong>
-					<a alt="${nls.edit}" data-dojo-attach-event="onclick: editMember" href="javascript:void(0);">${nls.edit}</a>&nbsp;&nbsp;&nbsp;&nbsp;
-					<a alt="${nls.remove}" data-dojo-attach-event="onclick: removeMember" href="javascript:void(0);">${nls.remove}</a>
-				</strong>
+			<strong>
+				<a alt="${nls.edit}" data-dojo-attach-event="onclick: openEditForm" href="javascript:void(0);">${nls.edit}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+				<a alt="${nls.remove}" data-dojo-attach-event="onclick: removeMember" href="javascript:void(0);">${nls.remove}</a>
+			</strong>
+			<div id="editTable${uid}" style="display: none;">
+				<table>
+					<tbody>
+						<tr>
+							<td style="vertical-align: middle; padding: 0px 14px; width: 45px; font-weight: bold;">
+								${nls.role}:
+							</td>
+							<td>
+								<table>
+									<tbody>
+										<tr>
+											<td>
+												<input id="rbOwner" type="radio" name="role" value="owner" /><label for="rbOwner">${nls.owner}</label>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<input id="rbMember" type="radio" name="role" value="role" /><label for="rbMember">${nls.member}</label>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<table>
+					<tbody>
+						<tr>
+							<td style="text-align: left;" class="lotusFormFooter">
+								<button class="lotusFormButton" data-dojo-attach-event="onclick: updateMember">${nls.save}</button>
+								<button class="lotusFormButton" data-dojo-attach-event="onclick: closeEditForm">${nls.cancel}</button>
+								<button class="lotusFormButton" data-dojo-attach-event="onclick: removeMember">${nls.remove}</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
-		
 		</div>
 	</td>
 </tr>

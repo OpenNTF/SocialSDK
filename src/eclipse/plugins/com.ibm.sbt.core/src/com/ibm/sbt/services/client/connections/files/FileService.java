@@ -528,7 +528,7 @@ public class FileService extends BaseService {
 	 * @throws FileServiceException
 	 */
 	public long downloadFile(OutputStream ostream, final String fileId, final String libraryId, Map<String, String> params, boolean isPublic) throws FileServiceException {
-		File file = !isPublic ? getFile(fileId) : getPublicFile(fileId, libraryId, null, true);
+		File file = !isPublic ? getFile(fileId) : getPublicFile(fileId, libraryId, null);
 		// now we have the file.. we need to download it.. 
 		String accessType = !isPublic ? AccessType.AUTHENTICATED.getAccessType() : AccessType.PUBLIC.getAccessType();
 		String category = !isPublic ? Categories.MYLIBRARY.getCategory() : null;
@@ -1354,38 +1354,30 @@ public class FileService extends BaseService {
      * 
      * @param fileId - ID of the file to be fetched from the Connections Server
      * @param libraryId - ID of the library to which the public file belongs
-     * @param parameters - Map of Parameters. See {@link FileRequestParams} for possible values.
-     * @param load - a flag to determine whether the network call should be made or an empty placeholder of
-     *            the File object should be returned. load - true : network call is made to fetch the
-     *            file load - false : an empty File object is returned, and then updations can be made on
-     *            this object.
+     * @param parameters - Map of Parameters. See {@link FileRequestParams} for possible values.    
      * @return File
      * @throws FileServiceException
      */
 
-    public File getPublicFile(String fileId, String libraryId, Map<String, String> parameters, boolean load)
+    public File getPublicFile(String fileId, String libraryId, Map<String, String> parameters)
             throws FileServiceException {
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
-        String requestUri = null;
-        File file = new File(fileId);
-        if (load) {
-            SubFilters subFilters = new SubFilters();
-            subFilters.setFileId(fileId);
-            subFilters.setLibraryId(libraryId);
-            requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(),
+        String requestUri = null;              
+        SubFilters subFilters = new SubFilters();
+        subFilters.setFileId(fileId);
+        subFilters.setLibraryId(libraryId);
+        requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(),
                     AccessType.PUBLIC.getAccessType(),
                     null, null, null, subFilters,
                     ResultType.ENTRY.getResultType());
 
-            try {
-                return (File) super.getEntity(requestUri, parameters, new FileFeedHandler(this));
-            } catch (Exception e) {
-               throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
-            }
-        }
-        return file;
+        try {
+           return (File) super.getEntity(requestUri, parameters, new FileFeedHandler(this));
+        } catch (Exception e) {
+          throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
+        }        
     }
 
     public File getFileAwaitingAction(String fileId) throws FileServiceException {

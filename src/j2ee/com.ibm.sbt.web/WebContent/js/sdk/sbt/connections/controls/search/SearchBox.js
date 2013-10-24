@@ -209,6 +209,9 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 		 * @param event the blur event
 		 */
 		handleBlur: function(element,obj,event){
+			if(!event){
+				event = window.event;
+			}
 			// TODO why two seperate calls to removePopUp, logic looks overly complex here
 			//For Keyboard Accessibility, this only needs to work for firefox(accessible path) if other browsers 
 			//do not support this property that is okay
@@ -232,6 +235,9 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 		 * @param event  The Event 
 		 */
 		setSelectedApplication: function(element,object,event){
+			if(!event){
+				event = window.event;
+			}
 			this.searchBoxAction.setSelectedApplication(element,object,event,this);
 		},
 
@@ -243,6 +249,9 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 		 * @param event The event
 		 */
 		displayHighlight: function(element,object,event){
+			if(!event){
+				event = window.event;
+			}
 			this.searchBoxAction.highLight(element,object,event);
 		},
 		
@@ -254,6 +263,9 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 		 * @param event  The Event 
 		 */
 		closeMemberItem: function(element,object,event){
+			if(!event){
+				event = window.event;
+			}
 			this.searchBoxAction.closeMemberItem(this, element,object,event);
 		},
 		
@@ -266,6 +278,9 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 		 * @param event The Event
 		 */
 		removeHighlight: function(element,object,event){
+			if(!event){
+				event = window.event;
+			}
 			this.searchBoxAction.removeHighlight(element,object,event);
 		},
 		
@@ -275,6 +290,9 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 		 * @param event The Event 
 		 */
 		setSearchQuery: function(element,object,event){
+			if(!event){
+				event = window.event;
+			}
 			this.searchBoxAction.setSearchQuery(event,this);
 		},
 		
@@ -284,6 +302,9 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 		 * @param event The event
 		 */
 		search: function(element,object,event){
+			if(!event){
+				event = window.event;
+			}
 			this.searchBoxAction.search(event,this);
 		},
 		
@@ -295,6 +316,9 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 		 * @param event the Event
 		 */
 		onKeyPress: function(element, obj, event){
+			if(!event){
+				event = window.event;
+			}
 			this.searchBoxAction.onKeyPress(element, obj, event, this);
 		},
 		
@@ -305,6 +329,9 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 		 * @param event
 		 */
 		suggest: function(element, obj, event){
+			if(!event){
+				event = window.event;
+			}
 			if(this.searchSuggest == "on"){
 				this.searchBoxAction.suggest(event, this);
 			}			
@@ -605,7 +632,9 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 			 */
 			handleSuggestResult: function(results,context,popUp,searchType){
 				// TODO should the renderer handle this?
-				popUp.innerHTML = "";
+				while (popUp.firstChild) { 
+				    popUp.removeChild(popUp.firstChild); 
+				}
 				for(var i=0;i<results.length;i++){
             		var row = document.createElement("tr");
             		var data = document.createElement("td");
@@ -618,7 +647,7 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
             		}
             		data.innerHTML = title;
             		data.id = id;
-            		data.style = "cursor:pointer";
+            		data.setAttribute("style","cursor:pointer");
             		data.onclick = function (event) { 
             			context.searchBoxAction.setSuggestedSearch(event,popUp,context);
             		};    		

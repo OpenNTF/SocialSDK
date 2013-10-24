@@ -155,8 +155,8 @@ public class Community extends BaseEntity {
 	 * @return the list of Tags
 	 */
 	
-	public List<String> getTags() {
-		return (List<String>) Arrays.asList(getDataHandler().getAsString(CommunityXPath.tags).split(" "));
+	public List<String> getTags() {//TODO: change return type to String[]
+		return (List<String>) Arrays.asList(getDataHandler().getAsArray(CommunityXPath.tags));
 	}
 	
 	/**

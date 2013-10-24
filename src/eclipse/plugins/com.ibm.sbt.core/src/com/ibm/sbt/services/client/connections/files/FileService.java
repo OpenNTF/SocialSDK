@@ -495,6 +495,8 @@ public class FileService extends BaseService {
 	 * Method to download a File 
 	 * @param ostream - output stream which contains the binary content of the file
 	 * @param fileId
+	 * @param libraryId - required in case of public files
+	 * @param isPublic - flag to indicate public file
 	 * @return long - no of bytes
 	 * @throws FileServiceException
 	 */
@@ -521,6 +523,7 @@ public class FileService extends BaseService {
 	 * @param fileId
 	 * @param libraryId - required in case of public file
 	 * @param params
+	 * @param isPublic - flag to indicate public file
 	 * @return long - no of bytes
 	 * @throws FileServiceException
 	 */

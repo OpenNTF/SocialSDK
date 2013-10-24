@@ -31,9 +31,7 @@
 <title>SBT JAVA Sample - Get Forum By Id</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
-
 <body>
-	<h4>Get Forums</h4>
 	<div id="content">
 	<%
 		try {
@@ -47,6 +45,7 @@
 		} catch (Throwable e) {
 			out.println("<pre>");
 			out.println("Problem Occurred while fetching forum: " + e.getMessage());
+			out.println("</pre>");
 				
 		}
 	%>

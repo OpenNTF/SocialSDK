@@ -29,8 +29,12 @@ define({
       role: "Role",
       created: "Created",
       edit: "Edit",
-      remove: "Remove"
-  }
+      remove: "Remove",
+      save: "Save",
+      cancel: "Close",
+      member: "Member",
+      owner: "Owner"
+   }
 });
 
   

@@ -132,6 +132,8 @@ define(
 						 */
 						updateMember : function(grid, el, data, ev, communityUuid) {
 							var communityService = new CommunityService();
+							var rbOwnerId = "rbOwner" + data.uid;
+							var rbOwner = document.getElementById(rbOwnerId);
 							communityService.getMembers(communityUuid).then(
 									function(members) {
 										for ( var i = 0; i < members.length; i++) {

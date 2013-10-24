@@ -46,7 +46,21 @@ define([ "../lang", "../base/BaseConstants" ], function(lang, base) {
         AuthTypes : {
         	OAuth : "oauth",
         	Basic : "basic"
-        }
+        },
+        
+        /**
+         * XPath expressions to be used when reading a Connections entity
+         * 
+         * @property TagsXPath
+         * @type Object
+         * @for sbt.connections.Tag
+         */
+        TagsXPath : {
+        	entries : "app:categories/a:category",
+			term : "@term",
+			frequency : "@snx:frequency",
+			uid : "@term"
+		}
 
     });
 });

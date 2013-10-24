@@ -197,7 +197,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * Gets an author of IBM Connections community.
          * 
          * @method getAuthor
-         * @return {Member} author Author of the community
+         * @return {Object} Author of the community
          */
         getAuthor : function() {
             return this.getAsObject([ "authorUserid", "authorName", "authorEmail" ]);
@@ -207,7 +207,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * Gets a contributor of IBM Connections community.
          * 
          * @method getContributor
-         * @return {Member} contributor Contributor of the community
+         * @return {Object} Contributor of the community
          */
         getContributor : function() {
             return this.getAsObject([ "contributorUserid", "contributorName", "contributorEmail" ]);
@@ -663,7 +663,10 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @return {String} communityUuid
          */
         getCommunityUuid : function() {
-            return this.communityUuid;
+        	if (!this.communityUuid) {
+				this.communityUuid = this.service.getUrlParameter(this.getAsString("communityUrl"), "communityUuid");
+			} 
+			return this.communityUuid;
         },
         
         /**
@@ -723,7 +726,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * Gets an author of IBM Connections community invite.
          * 
          * @method getAuthor
-         * @return {Member} author Author of the community invite
+         * @return {Object} Author of the community invite
          */
         getAuthor : function() {
             if (!this._author) {
@@ -739,7 +742,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * Gets a contributor of IBM Connections community invite.
          * 
          * @method getContributor
-         * @return {Member} contributor Contributor of the community invite
+         * @return {Object} Contributor of the community invite
          */
         getContributor : function() {
             if (!this._contributor) {
@@ -881,7 +884,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * Gets an author of IBM Connections community event.
          * 
          * @method getAuthor
-         * @return {Member} author Author of the community event
+         * @return {Object} Author of the community event
          */
         getAuthor : function() {
             if (!this._author) {

@@ -479,6 +479,17 @@ public class FileService extends BaseService {
 		}
 		return noOfBytes;
 	}
+	
+	/**
+	 * Method to download a File of logged in user 
+	 * @param ostream - output stream which contains the binary content of the file
+	 * @param fileId 
+	 * @return long - no of bytes
+	 * @throws FileServiceException
+	 */
+	 public long downloadFile(OutputStream ostream, final String fileId) throws FileServiceException {
+		 return this.downloadFile(ostream, fileId, null, false);
+	 }
     
 	/**
 	 * Method to download a File 
@@ -489,6 +500,19 @@ public class FileService extends BaseService {
 	 */
 	public long downloadFile(OutputStream ostream, final String fileId, final String libraryId, boolean isPublic) throws FileServiceException {
 		return downloadFile(ostream, fileId, libraryId, null, isPublic);
+	}
+	
+	/**
+	 * Method to download a File of logged in user
+	 * @param ostream - output stream which contains the binary content of the file
+	 * @param fileId
+	 * @param libraryId - required in case of public file
+	 * @param params
+	 * @return long - no of bytes
+	 * @throws FileServiceException
+	 */
+	public long downloadFile(OutputStream ostream, final String fileId, Map<String, String> params) throws FileServiceException {
+		return this.downloadFile(ostream, fileId, null, params, false);
 	}
 	
 	/**

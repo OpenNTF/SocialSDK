@@ -130,7 +130,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
 		/**
 		 * 
 		 */
-		AtomFileInstancePublic : "${files}/basic/anonymous/api/myuserlibrary/document/{documentId}/entry",
+		AtomFileInstancePublic : "${files}/basic/anonymous/api/library/{libraryId}/document/{documentId}/entry",
 
         /**
          * A feed of files of which the authenticated user owns.

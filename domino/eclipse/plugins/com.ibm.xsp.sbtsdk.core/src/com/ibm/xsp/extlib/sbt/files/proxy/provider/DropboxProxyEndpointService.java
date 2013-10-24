@@ -23,7 +23,7 @@ import com.ibm.sbt.services.endpoints.EndpointFactory;
 import com.ibm.xsp.FacesExceptionEx;
 import com.ibm.xsp.extlib.sbt.files.type.AbstractType;
 import com.ibm.xsp.extlib.sbt.services.client.DropboxService;
-import com.ibm.xsp.extlib.sbt.services.client.endpoints.DropboxEndpoint;
+import com.ibm.sbt.services.endpoints.DropboxEndpoint;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.ibm.xsp.util.URLEncoding;
 

@@ -58,7 +58,7 @@ import com.ibm.xsp.extlib.sbt.files.FileServiceData;
 import com.ibm.xsp.extlib.sbt.files.FileServiceData.FileServiceAccessor;
 import com.ibm.xsp.extlib.sbt.model.RestDataBlockAccessor;
 import com.ibm.xsp.extlib.sbt.services.client.DropboxService;
-import com.ibm.xsp.extlib.sbt.services.client.endpoints.DropboxEndpoint;
+import com.ibm.sbt.services.endpoints.DropboxEndpoint;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.ibm.xsp.util.URLEncoding;
 

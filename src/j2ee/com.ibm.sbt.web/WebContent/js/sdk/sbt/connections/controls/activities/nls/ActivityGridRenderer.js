@@ -20,6 +20,7 @@ define({
     	updatedBy: "Updated by",
     	modified: "Last Updated",
     	dueDate: "Due Date",
-    	name: "Name"
+    	name: "Name",
+        feed : "Feed for these Activities"
     }
 });

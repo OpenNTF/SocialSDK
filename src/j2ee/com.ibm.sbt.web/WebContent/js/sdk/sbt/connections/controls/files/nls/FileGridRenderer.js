@@ -36,6 +36,7 @@ define({
       edit: "Edit",
       files:"Files",
       ariaCheckbox: "checkbox",
-      ariaVcard: "ariaCheckbox"
+      ariaVcard: "ariaCheckbox",
+      feed : "Feed for these Files"
   }
 });

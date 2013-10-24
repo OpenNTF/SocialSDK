@@ -98,6 +98,7 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
             lang.mixin(this, args);
             
             this.selectedRows = [];
+  
             
             if (!this.store) {
                 if (args && args.storeArgs) {
@@ -142,7 +143,7 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
                 url = this.buildUrl(url, args, store.getEndpoint());
             }
             store.setUrl(url);
-            
+
             return store;
         },
         
@@ -293,6 +294,22 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
         
         show100ItemsPerPage: function(el, data, ev) {
         	this.showItemsPerPage(el, data, ev, 100);
+        },
+        
+        /**
+         * Displays the feed for the content that is currently shown.
+         * @method - viewFeed
+         * @param el - The element that fired the event, typically an anchor 
+         * @param data - the data associated with element
+         * @param ev - the event, for example onClick
+         */
+        viewFeed: function(el, data, ev) {
+        	var endpoint = this.store.getEndpoint();
+        	var proxy = endpoint.proxy;
+        	var baseUrl = endpoint.baseUrl;
+        	var proxyPath = endpoint.proxyPath;
+        	var url = proxy.rewriteUrl(baseUrl, this.store.getUrl(), proxyPath);
+        	window.open(url, "_new");
         },
         
         /**

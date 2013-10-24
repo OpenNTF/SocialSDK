@@ -150,7 +150,8 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
             authorName : "a:author/a:name",
             contributorUserid : "a:contributor/snx:userid",
             contributorName : "a:contributor/a:name",
-            communityUuid : "snx:communityUuid"
+            communityUuid : "snx:communityUuid",
+            communityUrl : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/community']/@href"
         },
         
         EventXPath : {

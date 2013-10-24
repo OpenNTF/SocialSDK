@@ -27,7 +27,8 @@ define({
       clickToEmail: "Click here to email the user, using their alternate email address",
       ariaVcard: "Press control and enter for the business card",
       role: "Role",
-      created: "Created"
+      created: "Created",
+      feed : "Feed for these Profiles"
   }
 });
 

@@ -723,7 +723,7 @@ define(
 				 * @return {String} communityUuid
 				 */
 				getCommunityUuid : function() {
-					return this.communityUuid;
+					return this.service.getUrlParameter(this.getAsString("communityUrl"), "communityUuid");
 				},
 
 				/**

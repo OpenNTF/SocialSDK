@@ -89,9 +89,12 @@ public class UpdateCommunityLogo extends BaseCommunitiesTest {
 		if ("dojo143".equalsIgnoreCase(jsLib)) {
 			return;
 		}
-		UpdateCommunityLogoPage crudPage = launchSnippet();
+		UpdateCommunityLogoPage crudPage = launchSnippet();		
+		WebElement webElement = waitForText("success", "Successfully loaded community ID", 20);
+		String successMessage = webElement.getText();		
+		Assert.assertTrue(successMessage.contains("Successfully loaded community ID"));
 		boolean uploaded = crudPage.updateCommunityLogo();
-		Assert.assertTrue("Unable toupdate community logo", uploaded);
+		Assert.assertTrue("Unable to update community logo", uploaded);
 	}
 
 	/*

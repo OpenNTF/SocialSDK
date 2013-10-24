@@ -91,6 +91,9 @@ public class UploadNewVersion extends BaseFilesTest {
 	@Test
 	public void testUpdateFile() {
 		UpdateFilePage crudPage = launchSnippet();
+		WebElement webElement = waitForText("success", "Successfully loaded file:", 50);
+		String successMessage = webElement.getText();		
+		Assert.assertTrue(successMessage.contains("Successfully loaded file:"));
 		boolean updated = crudPage.uploadNewVersion();
 		Assert.assertTrue("Unable to update the file", updated);		
 	}
@@ -145,6 +148,7 @@ public class UploadNewVersion extends BaseFilesTest {
 		public WebElement getWebElement() {
 			return delegate.getWebElement();
 		}
+				
 
 		public WebElement getSuccess() {
 			WebElement resultEl = getWebElement();
@@ -172,18 +176,22 @@ public class UploadNewVersion extends BaseFilesTest {
 		}
 
 		public void setFile() {
+			System.out.println("setFile called");
 			WebElement fileCotrol = getFileControl();
 			fileCotrol.sendKeys(file.getAbsolutePath());
+			clickUpload();
 		}
 
 		public void clickUpload() {
+			System.out.println("clickUpload called");
 			getUploadBtn().click();
+			
 		}
 
 		/** Update the current file and return the true if successful and otherwise return false */
 		public boolean uploadNewVersion() {
-			setFile();
-			clickUpload();
+			System.out.println("uploadNewVersion called");
+			setFile();			
 			WebElement webElement = waitForText("success", "File with ID", 50);
 
 			String text = webElement.getText();

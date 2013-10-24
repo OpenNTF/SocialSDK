@@ -12,13 +12,9 @@ require(["sbt/connections/BlogService", "sbt/dom", "sbt/json"],
 		    tr.appendChild(td);
 		};
 	    var blogService = new BlogService(); 
-		blogService.getBlogs({ ps: 1 }).then(   //getting first blog by setting page size to 1
-	        function(blogs){
-	        	return blogs[0].getHandle();
-	        }
-		).then(
-			function(firstBlogHandle){
-				return blogService.getBlogComments(firstBlogHandle, { ps: 5 })
+		blogService.getBlogs({ ps: 1 }).then(
+			function(blogs){
+				return blogService.getBlogComments(blogs[0].getHandle(), { ps: 5 })
 	        }
 		).then(
 	        function(comments){

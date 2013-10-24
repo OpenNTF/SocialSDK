@@ -7,11 +7,7 @@ require(["sbt/connections/BlogService", "sbt/dom", "sbt/json"],
         blog.setHandle("BlogHandle " + now.getTime());
         blog.setTags(['testTag1', 'testTag2']);
     	blogService.createBlog(blog).then(
-            function(blog){
-		        return blog.getHandle();
-            }
-		).then(
-	    	function(blogHandle) {
+	    	function(blog) {
 	    		return blogService.getBlogTags(blog.getHandle());
 	        }
 	    ).then(

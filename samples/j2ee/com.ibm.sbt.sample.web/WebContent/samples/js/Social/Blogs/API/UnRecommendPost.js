@@ -7,26 +7,20 @@ require(["sbt/connections/BlogService", "sbt/dom", "sbt/json"],
         var post = blogService.newBlogPost();
         post.setTitle("BlogPost at " + now.getTime());
         post.setContent("BlogPost Content at " + now.getTime());
-        var blogHandle;
-        var blogPostId;
         
     	blogService.getBlogs({ ps: 1 }).then(
             function(blogs){
-            	return blogs[0].getHandle();
+            	post.setBlogHandle(blogs[0].getHandle());
+            	return blogService.createPost(post);
             }
     	).then(
-			function(firstBlogHandle){
-				blogHandle = firstBlogHandle;
-				return blogService.createPost(post, blogHandle);
+			function(){
+				return blogService.getRecommendedPosts();
             }
     	).then(
-			function(createdPost){
-				blogPostId = createdPost.getBlogPostUuid();
-				return blogService.recommendPost(blogPostId, blogHandle);
-            }
-    	).then(
-			function() {
-				var unRecommendPromise = blogService.unrecommendPost(blogPostId, blogHandle);
+			function(recommendedPosts) {
+				try{
+				var unRecommendPromise = blogService.unrecommendPost(recommendedPosts[0]);
 				unRecommendPromise.then(
 				function(){
 	    			var returnOjject = {};
@@ -37,6 +31,9 @@ require(["sbt/connections/BlogService", "sbt/dom", "sbt/json"],
                     dom.setText("json", json.jsonBeanStringify(error));
                 }
     			);
+				}catch(e){
+					console.log("Exxc : "+e);
+				}
             }
 		);
 	

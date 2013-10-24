@@ -7,20 +7,14 @@ require(["sbt/connections/BlogService", "sbt/dom", "sbt/json"],
         var post = blogService.newBlogPost();
         post.setTitle("BlogPost at " + now.getTime());
         post.setContent("BlogPost Content at " + now.getTime());
-        var blogHandle;
-        
     	blogService.getBlogs({ ps: 1 }).then(
-            function(blogs){
-            	return blogs[0].getHandle();
-            }
-    	).then(
-			function(firstBlogHandle){
-				blogHandle = firstBlogHandle;
-				return blogService.createPost(post, blogHandle);
+			function(blogs){
+            	post.setBlogHandle(blogs[0].getHandle());
+				return blogService.createPost(post);
             }
     	).then(
 			function(createdPost){
-				return blogService.recommendPost(createdPost.getBlogPostUuid(), blogHandle);
+				return blogService.recommendPost(createdPost);
             }
     	).then(
     			function(recommendedPost) {

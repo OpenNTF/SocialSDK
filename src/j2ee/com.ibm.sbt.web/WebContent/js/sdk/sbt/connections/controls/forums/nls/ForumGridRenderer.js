@@ -29,6 +29,7 @@ define({
     	author: "Author",
     	date: "Date",
     	back:"Back",
-    	noResults: "There are no results"
+    	noResults: "There are no results",
+        feed : "Feed for these Forums"
     }
 });

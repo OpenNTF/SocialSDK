@@ -52,8 +52,7 @@
 		} catch (Throwable e) {
 			out.println("<pre>");
 			out.println("Problem Occurred while fetching my forums: " + e.getMessage());
-			e.printStackTrace();
-			
+			out.println("</pre>");
 		}
 	%>
 	</div>

@@ -31,18 +31,18 @@
 </head>
 
 <body>
-	<h4>Delete Forum</h4>
+	<h4>Remove Forum</h4>
 	<div id="content">
 	<%
 		try {
 			ForumService service = new ForumService();
 			ForumList forums = service.getMyForums();
 			if(forums != null && !forums.isEmpty()){
-		Forum forum = (Forum)forums.iterator().next();
-		out.println("<b> Forum Title : "+forum.getTitle());
-		forum.remove();	
-		out.println("<b> Forum Removed : "+forum.getForumUuid());
-		out.println("<br>");
+				Forum forum = (Forum)forums.iterator().next();
+				out.println("<b> Forum Title : </b>"+forum.getTitle());
+				forum.remove();	
+				out.println("<b> Forum Removed : </b>"+forum.getForumUuid());
+				out.println("<br>");
 			}
 			else
 			 	out.println("<b> No Forums exist for removal ");

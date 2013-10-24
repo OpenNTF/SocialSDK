@@ -30,7 +30,7 @@
 <html>
 
 <head>
-<title>SBT JAVA Sample - AS</title>
+<title>SBT JAVA Sample - Public Forums</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
@@ -59,7 +59,7 @@
 			}
 		} catch (Throwable e) {
 			out.println("<pre>");
-			e.printStackTrace(new PrintWriter(out));
+			out.println("Problem Occurred while fetching Public Forums: " + e.getMessage());
 			out.println("</pre>");
 		}
 	%>

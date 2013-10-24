@@ -210,7 +210,7 @@ define(
 				 * Gets an author of IBM Connections community.
 				 * 
 				 * @method getAuthor
-				 * @return {Member} author Author of the community
+				 * @return {Object} author of the community
 				 */
 				getAuthor : function() {
 					return this.getAsObject([ "authorUserid", "authorName",
@@ -221,7 +221,7 @@ define(
 				 * Gets a contributor of IBM Connections community.
 				 * 
 				 * @method getContributor
-				 * @return {Member} contributor Contributor of the community
+				 * @return {Object} contributor of the community
 				 */
 				getContributor : function() {
 					return this.getAsObject([ "contributorUserid",
@@ -723,7 +723,10 @@ define(
 				 * @return {String} communityUuid
 				 */
 				getCommunityUuid : function() {
-					return this.service.getUrlParameter(this.getAsString("communityUrl"), "communityUuid");
+					if (!this.communityUuid) {
+						this.communityUuid = this.service.getUrlParameter(this.getAsString("communityUrl"), "communityUuid");
+					} 
+					return this.communityUuid;
 				},
 
 				/**
@@ -784,7 +787,7 @@ define(
 				 * Gets an author of IBM Connections community invite.
 				 * 
 				 * @method getAuthor
-				 * @return {Member} author Author of the community invite
+				 * @return {Object} author of the community invite
 				 */
 				getAuthor : function() {
 					if (!this._author) {
@@ -800,7 +803,7 @@ define(
 				 * Gets a contributor of IBM Connections community invite.
 				 * 
 				 * @method getContributor
-				 * @return {Member} contributor Contributor of the community
+				 * @return {Object} contributor of the community
 				 *         invite
 				 */
 				getContributor : function() {
@@ -952,7 +955,7 @@ define(
 				 * Gets an author of IBM Connections community event.
 				 * 
 				 * @method getAuthor
-				 * @return {Member} author Author of the community event
+				 * @return {Object} author of the community event
 				 */
 				getAuthor : function() {
 					if (!this._author) {

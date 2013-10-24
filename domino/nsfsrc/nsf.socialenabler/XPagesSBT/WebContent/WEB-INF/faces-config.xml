@@ -22,7 +22,7 @@
 	-->
   <managed-bean>
     <managed-bean-name>facebook</managed-bean-name>
-    <managed-bean-class>com.ibm.xsp.extlib.sbt.services.client.endpoints.FacebookEndpoint
+    <managed-bean-class>com.ibm.sbt.services.endpoints.FacebookEndpoint
 		</managed-bean-class>
     <managed-bean-scope>application</managed-bean-scope>
     <managed-property>
@@ -127,7 +127,7 @@
    -->
   <managed-bean>
     <managed-bean-name>dropbox</managed-bean-name>
-    <managed-bean-class>com.ibm.xsp.extlib.sbt.services.client.endpoints.DropboxEndpoint
+    <managed-bean-class>com.ibm.sbt.services.endpoints.DropboxEndpoint
 		</managed-bean-class>
     <managed-bean-scope>application</managed-bean-scope>
     <!-- Endpoint URL -->
@@ -181,7 +181,7 @@
    -->
   <managed-bean>
     <managed-bean-name>smartcloud</managed-bean-name>
-    <managed-bean-class>com.ibm.xsp.extlib.sbt.services.client.endpoints.SmartCloudFilesEndpoint
+    <managed-bean-class>com.ibm.sbt.services.endpoints.SmartCloudOAuthEndpoint
 		</managed-bean-class>
     <managed-bean-scope>application</managed-bean-scope>
     <!-- Endpoint URL -->

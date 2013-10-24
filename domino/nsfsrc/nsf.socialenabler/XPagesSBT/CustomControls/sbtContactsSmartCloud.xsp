@@ -4,7 +4,7 @@
 	<xp:this.data>
 		<xe:objectData var="objectData1">
 			<xe:this.createObject><![CDATA[#{javascript:var ep = @Endpoint("smartcloud");
-var svc = new sbt.SmartCloudContactsService(ep);
+var svc = new com.ibm.sbt.services.client.smartcloud.SmartCloudService(ep);
 var profileService = new com.ibm.sbt.services.client.smartcloud.profiles.ProfileService("smartcloud");
 var contactsList= profileService.getMyContacts();
 return parseSmartCloudContacts(contactsList);

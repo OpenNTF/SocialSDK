@@ -37,7 +37,7 @@ import com.ibm.sbt.test.controls.grid.communities.PublicCommunitiesGrid;
  * @date 6 Mar 2013
  */
 @RunWith(Suite.class)
-@SuiteClasses({ CommunityMembersGrid.class, BootstrapCommunitiesGrid.class, CommunityActionGrid.class, CustomTemplateCommunity.class, MyCommunitiesGrid.class,OneClickToJoin.class, PublicCommunitiesDijit.class,
+@SuiteClasses({BootstrapCommunitiesGrid.class, CommunityMembersGrid.class, CommunityActionGrid.class, CustomTemplateCommunity.class, MyCommunitiesGrid.class,OneClickToJoin.class, PublicCommunitiesDijit.class,
         PublicCommunitiesGrid.class })
 public class CommunitiesGridTestSuite {
 	private static BaseGridTestSetup setup ;

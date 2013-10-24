@@ -49,6 +49,7 @@ import com.ibm.sbt.services.client.connections.forums.feedhandler.ForumsFeedHand
 import com.ibm.sbt.services.client.connections.forums.feedhandler.TopicsFeedHandler;
 import com.ibm.sbt.services.client.connections.communities.feedhandler.InviteFeedHandler;
 import com.ibm.sbt.services.client.connections.communities.feedhandler.MemberFeedHandler;
+import com.ibm.sbt.services.client.connections.communities.model.CommunityXPath;
 import com.ibm.sbt.services.client.connections.communities.transformers.CommunityMemberTransformer;
 import com.ibm.sbt.services.client.connections.communities.transformers.InviteTransformer;
 import com.ibm.sbt.services.client.connections.communities.util.Messages;
@@ -651,6 +652,15 @@ public class CommunityService extends BaseService {
 			parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, community.getCommunityUuid());
 			String updateUrl = resolveCommunityUrl(CommunityEntity.COMMUNITY.getCommunityEntityType(),	CommunityType.INSTANCE.getCommunityType());
 			Object communityPayload;
+			if(community.getFieldsMap().get(CommunityXPath.title)== null)
+				community.setTitle(community.getTitle());
+			if(community.getFieldsMap().get(CommunityXPath.content)== null)
+				community.setContent(community.getContent());
+			if(community.getFieldsMap().get(CommunityXPath.communityType)== null)
+				community.setCommunityType(community.getCommunityType());
+			if(!community.getFieldsMap().toString().contains(CommunityXPath.tags.toString()))
+				community.setTags(community.getTags());
+			
 			try {
 				communityPayload = community.constructCreateRequestBody();
 			} catch (TransformerException e) {

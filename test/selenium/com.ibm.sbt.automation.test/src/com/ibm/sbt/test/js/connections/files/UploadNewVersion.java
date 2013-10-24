@@ -28,8 +28,6 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.ibm.commons.util.StringUtil;
-import com.ibm.sbt.automation.core.environment.TestEnvironment;
 import com.ibm.sbt.automation.core.test.connections.BaseFilesTest;
 import com.ibm.sbt.automation.core.test.pageobjects.BaseResultPage;
 import com.ibm.sbt.automation.core.test.pageobjects.ResultPage;
@@ -91,6 +89,9 @@ public class UploadNewVersion extends BaseFilesTest {
 	@Test
 	public void testUpdateFile() {
 		UpdateFilePage crudPage = launchSnippet();
+		WebElement webElement = waitForText("success", "Successfully loaded file:", 50);
+		String successMessage = webElement.getText();		
+		Assert.assertTrue(successMessage.contains("Successfully loaded file:"));
 		boolean updated = crudPage.uploadNewVersion();
 		Assert.assertTrue("Unable to update the file", updated);		
 	}
@@ -145,6 +146,7 @@ public class UploadNewVersion extends BaseFilesTest {
 		public WebElement getWebElement() {
 			return delegate.getWebElement();
 		}
+				
 
 		public WebElement getSuccess() {
 			WebElement resultEl = getWebElement();
@@ -171,19 +173,20 @@ public class UploadNewVersion extends BaseFilesTest {
 			return resultEl.findElement(By.id("uploadBtn"));
 		}
 
-		public void setFile() {
+		public void setFile() {			
 			WebElement fileCotrol = getFileControl();
-			fileCotrol.sendKeys(file.getAbsolutePath());
+			fileCotrol.sendKeys(file.getAbsolutePath());			
 		}
 
 		public void clickUpload() {
-			getUploadBtn().click();
+			getUploadBtn().click();			
 		}
 
 		/** Update the current file and return the true if successful and otherwise return false */
-		public boolean uploadNewVersion() {
+		public boolean uploadNewVersion() {			
 			setFile();
 			clickUpload();
+			
 			WebElement webElement = waitForText("success", "File with ID", 50);
 
 			String text = webElement.getText();

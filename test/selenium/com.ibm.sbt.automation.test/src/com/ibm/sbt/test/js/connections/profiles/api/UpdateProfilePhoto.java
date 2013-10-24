@@ -30,8 +30,6 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.ibm.commons.util.StringUtil;
-import com.ibm.sbt.automation.core.environment.TestEnvironment;
 import com.ibm.sbt.automation.core.test.connections.BaseFilesTest;
 import com.ibm.sbt.automation.core.test.pageobjects.BaseResultPage;
 import com.ibm.sbt.automation.core.test.pageobjects.ResultPage;
@@ -76,18 +74,19 @@ public class UpdateProfilePhoto extends BaseFilesTest {
 		}
 	}
 
-	@Test
-	public void testUpdateProfilePhoto() {
+	@Override
+	protected boolean isEnvironmentValid() {
 		// Disabling for Dojo 1.4.3 which does not support FormData
-		String jsLib = System.getProperty(TestEnvironment.PROP_JAVASCRIPT_LIB);
-		if (StringUtil.isEmpty(jsLib)) {
-			jsLib = environment
-					.getProperty(TestEnvironment.PROP_JAVASCRIPT_LIB);
-		}
-		if ("dojo143".equalsIgnoreCase(jsLib)) {
-			return;
-		}
+		if (environment.isLibrary("dojo") && !environment.isLibraryVersionGreatherThan("160")) return false;		
+		return super.isEnvironmentValid() ;
+	}
+	
+	@Test
+	public void testUpdateProfilePhoto() {		
 		UpdateProfilePhotoPage crudPage = launchSnippet();
+		WebElement webElement = waitForText("success", "Profile Loaded", 20);
+		String successMessage = webElement.getText();		
+		Assert.assertTrue(successMessage.contains("Profile Loaded"));
 		boolean uploaded = crudPage.updateProfilePhoto();
 		Assert.assertTrue("Unable toupdate profile photo", uploaded);				
 	}
@@ -116,8 +115,7 @@ public class UpdateProfilePhoto extends BaseFilesTest {
 	// Internals
 
 	private UpdateProfilePhotoPage launchSnippet() {
-		ResultPage resultPage = launchSnippet("Social_Profiles_Update_Profile_Photo");
-
+		ResultPage resultPage = launchSnippet("Social_Profiles_Update_Profile_Photo");		
 		return new UpdateProfilePhotoPage(resultPage);
 	}
 

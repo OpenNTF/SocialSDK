@@ -1748,10 +1748,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
 		 * @param {Object} memberOrJson
 		 */
 		updateMember : function(communityUuid, memberOrJson, args) {
-			var promise = this.validateField("memberOrJson", memberOrJson);
-			if (!promise) {
-				promise = this.validateField("communityUuid", communityUuid);
-			}
+			var promise = this.validateField("communityUuid", communityUuid);
 			if (promise) {
 				return promise;
 			}

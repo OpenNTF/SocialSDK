@@ -40,8 +40,7 @@
 			BlogService svc = new BlogService();
 			Blog blog = (Blog)svc.getBlogs().get(0);
 			String blogHandle = blog.getHandle();
-			
-			TagList tags = svc.getBlogTags("TestHandle1382086008520");
+			TagList tags = svc.getBlogTags(blogHandle);
 			if (tags.size() <= 0) {
 				out.println("No tags to be displayed");
 			}

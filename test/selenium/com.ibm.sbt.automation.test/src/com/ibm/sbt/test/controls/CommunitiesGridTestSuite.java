@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -24,6 +24,7 @@ import org.junit.runners.Suite.SuiteClasses;
 import com.ibm.sbt.automation.core.test.BaseGridTestSetup;
 import com.ibm.sbt.test.controls.grid.communities.BootstrapCommunitiesGrid;
 import com.ibm.sbt.test.controls.grid.communities.CommunityActionGrid;
+import com.ibm.sbt.test.controls.grid.communities.CommunityMembersGrid;
 import com.ibm.sbt.test.controls.grid.communities.CustomTemplateCommunity;
 import com.ibm.sbt.test.controls.grid.communities.MyCommunitiesGrid;
 import com.ibm.sbt.test.controls.grid.communities.OneClickToJoin;
@@ -36,7 +37,7 @@ import com.ibm.sbt.test.controls.grid.communities.PublicCommunitiesGrid;
  * @date 6 Mar 2013
  */
 @RunWith(Suite.class)
-@SuiteClasses({ BootstrapCommunitiesGrid.class, CommunityActionGrid.class, CustomTemplateCommunity.class, MyCommunitiesGrid.class,OneClickToJoin.class, PublicCommunitiesDijit.class,
+@SuiteClasses({ CommunityMembersGrid.class, BootstrapCommunitiesGrid.class, CommunityActionGrid.class, CustomTemplateCommunity.class, MyCommunitiesGrid.class,OneClickToJoin.class, PublicCommunitiesDijit.class,
         PublicCommunitiesGrid.class })
 public class CommunitiesGridTestSuite {
 	private static BaseGridTestSetup setup ;

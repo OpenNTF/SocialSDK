@@ -156,7 +156,7 @@ public class Community extends BaseEntity {
 	 */
 	
 	public List<String> getTags() {
-		return (List<String>) Arrays.asList(getDataHandler().getAsString(CommunityXPath.tags).split(" "));
+		return (List<String>) Arrays.asList(getDataHandler().getAsArray(CommunityXPath.tags));
 	}
 	
 	/**
@@ -165,7 +165,7 @@ public class Community extends BaseEntity {
 	public void setTags(List<String> tags) {
 		if(!tags.isEmpty()){
 			for (int i = 0; i < tags.size(); i++){
-				   fields.put("tag" + i , tags.get(i));
+				   fields.put((CommunityXPath.tags).toString() + i , tags.get(i));
 			}
 		}
 	}

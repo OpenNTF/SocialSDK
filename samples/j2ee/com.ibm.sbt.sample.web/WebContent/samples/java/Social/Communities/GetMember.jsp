@@ -44,14 +44,14 @@
 		MemberList members = communityService.getMembers(communityId);
 		if(members != null && !members.isEmpty()){
 			for(Member member : members){
-				out.println("<b> Member Name: "+ member.getName()+"<br>");
-				out.println("<b> Member Email: "+ member.getEmail()+"<br>");
-				out.println("<b> Member Role: "+ member.getRole()+"<br>");
-				out.println("<b> Member associated with Id: "+ member.getCommunityUuid()+"<br>");
+				out.println("<b> Member Name: </b>"+ member.getName()+"<br>");
+				out.println("<b> Member Email: </b>"+ member.getEmail()+"<br>");
+				out.println("<b> Member Role: </b>"+ member.getRole()+"<br>");
+				out.println("<b> Member associated with Id: </b>"+ member.getCommunityUuid()+"<br>");
 			}
 		}
 		else
-			 	out.println("<b> Not enough members");
+			 	out.println("<b> Not enough members </b>");
 		
 		
 	} catch (Throwable e) {

@@ -71,7 +71,7 @@ define([ "../../declare", "../../dom", "../../lang", "../../widget/grid/_GridRen
               for (var i=0; i<items.length; i++) {
                   this.renderItem(grid, tbody, data, items[i], i, items);
               }
-             
+              this.renderFooter(grid, el, items, data);
            }
         },
         
@@ -92,6 +92,30 @@ define([ "../../declare", "../../dom", "../../lang", "../../widget/grid/_GridRen
                     node = this._toDom(domStr, el.ownerDocument);
                 } else {
                     node = this.pagerTemplate.cloneNode(true);
+                }
+                el.appendChild(node);
+                
+                this._doAttachEvents(grid, el, data);
+            }
+        },
+        
+        /**
+         * Checks if a footerTemplate exists ,if so, the HTML template is converted to
+         * a DOM node, and attached to the body.
+         * @method - renderFooter
+         * @param grid - the grid
+         * @param el - the current element
+         * @param items - the items in the current element
+         * @param data - the data associated with the current element
+         */
+        renderFooter : function(grid,el,items,data) {
+            if (this.footerTemplate && !grid.hidePager) {
+                var node;
+                if (this._isString(this.footerTemplate)) {
+                    var domStr = this._substituteItems(this.footerTemplate, grid, this, items, data);
+                    node = this._toDom(domStr, el.ownerDocument);
+                } else {
+                    node = this.footerTemplate.cloneNode(true);
                 }
                 el.appendChild(node);
                 
@@ -441,7 +465,15 @@ define([ "../../declare", "../../dom", "../../lang", "../../widget/grid/_GridRen
                     }
                 }
             }
-        }
+        },
+        
+        getProfileUrl: function(grid,id){
+        	var endpoint = grid.store.getEndpoint();
+        	var profileURL = "/${profiles}/html/profileView.do?userid="+id;
+        	profileURL = grid.constructUrl(profileURL,{},{},endpoint);
+        	profileURL = endpoint.baseUrl+profileURL;
+        	return profileURL;
+        },
         
     });
     

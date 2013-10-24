@@ -27,6 +27,10 @@ define([ "../_bridge/declare",
     var _TemplatedWidget = declare([ dijit._Widget, dijit._Templated ], {
         
         _blankGif: dijit._Widget.prototype._blankGif,
+        
+        _place: function(node, refNode, pos) {
+        	dojo.place(node, refNode, pos);
+        },
 
         _stopEvent: function(event) {
             dojo.stopEvent(event);

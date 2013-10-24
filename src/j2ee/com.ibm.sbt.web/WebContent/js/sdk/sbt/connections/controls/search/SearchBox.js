@@ -15,8 +15,8 @@
  */
 
 define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_TemplatedWidget", "./SearchBoxRenderer",
-        "../../SearchService"], 
-		function(declare, lang, dom, _TemplatedWidget, SearchBoxRenderer,SearchService){
+        "../../SearchService", "../../CommunityService"], 
+		function(declare, lang, dom, _TemplatedWidget, SearchBoxRenderer,SearchService,CommunityService){
 	/**
 	 * @class SearchBox
 	 * @namespace sbt.connections.controls.search
@@ -24,33 +24,75 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 	 */
 	var SearchBox = declare(_TemplatedWidget,{
 		
-		/** Loading template */
+		// TODO why is type not listed here? what does that parameter mean?
+		
+		/** 
+		 * TODO The "Loading" string needs to be externalied into nls. This should be in the renderer?
+		 * Loading template 
+		 */
 		templateString: "<div><strong> Loading... </strong></div>",
         
-		/** The Renderer For this control */
+		/**
+		 * The Renderer For this control 
+		 */
 		renderer: null,
         
-		/** The Application the user will select for example files, wikis etc, initially set to all */
+		/** 
+		 * The Application the user will select for example files, wikis etc, initially set to all 
+		 */
         selectedApplication: "allconnections",       	
         
-        /** The phrase the user will search for */
+        /** 
+         * TODO should this be public?
+         * The phrase the user will search for.
+         */
         searchQuery: "",
         
-        /** Search Service, used to perform the search */
-        searchService: null,
+        /** 
+         * Search type, valid values are 'my' || 'public' (defaut value is 'my')
+         */
+        searchType: "my",
 
-		/** This list is used to keep track of selected members **/
-		members : [],
+        /** 
+         * Search suffix, will be appended to every search query 
+         */
+        searchSuffix: null,
+        
+        /**
+         * Search arguments, will be added to each search request
+         */
+        searchArgs: null,
+
+        /** 
+         * Search Service, used to perform the search 
+         */
+        searchService: null,
+        
+        /**
+         * Community service to perform searches on my Communities
+         */
+        communityService: null,
+
+		/** 
+		 * 	TODO  Better pattern is to set is during postMixInProperties 
+		 * This list is used to keep track of selected members 
+		 */
+		members: [],
 		
-		/**The result the user has chosen from the search suggestions */
+		/**
+		 * 	TODO  Better pattern is to set is during postMixInProperties 
+		 * The result the user has chosen from the search suggestions 
+		 */
 		_selectedResultItem : {text:"",id:""},
 		
-		/*Selected row is used for keyboard navigation in the applications pop up*/
+		/*
+		 * Selected row is used for keyboard navigation in the applications pop up
+		 */
 		_selectedRow : -1,
 		
-		/*used to check that search results that are displayed are from the application the user selected */
-		_primaryComponent: "all",
-		
+		/*
+		 * 
+		 */
 		_searchInput: null,
 		
         /**
@@ -59,31 +101,61 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
          */
 		constructor: function(args){
 			lang.mixin(this, args);
-			if(this.selectedApplication != "allconnections"){
-				this.searchBoxAction._setPrimaryComponent(this.selectedApplication,this);
-			}
+			
 		},
-		
+
+		/**
+		 * TODO Document Me 
+		 */
 		setInputValue: function(value){
 			this._searchInput.value = value;
 		},
 		
+		/**
+		 * Invoked before rendering occurs, and before any dom nodes are created.
+		 * This is the place to change the widget properties before it is rendered.
+		 */
+		postMixInProperties : function() {
+		},
+		
+		/**
+		 * TODO Document Me 
+		 */
 		getInputValue: function(){
 			return this._searchInput.value;
 		},
 		
-		disableSearchInput: function(){
-			this._searchInput.disabled = true;
+		/**
+		 * Set the disabled state of the input control for the SearchBox.
+		 * 
+		 * @param disabled True to disable the input control
+		 * @return this
+		 */
+		setInputDisabled: function(disabled) {
+			this._searchInput.disabled = disabled;
+			return this;
 		},
 		
-		enableSearchInput: function(){
-			this._searchInput.disabled = false;
+		/**
+		 * Return the disabled state of the input control for the SearchBox.
+		 * 
+		 * @return True is the input control is disabled and otherwise false
+		 */
+		isInputDisabled: function(){
+			return this._searchInput.disabled;
 		},
 		
+		/**
+		 * TODO Document Me 
+		 */
 		getSelectedResult: function(){
 			return this._selectedResultItem;
 		},
 		
+		/**
+		 * TODO is this needed
+		 * TODO Document Me 
+		 */
 		setSelectedResult: function(name,id){
 			if(name){
 				this._selectedResultItem.name = name;
@@ -94,7 +166,7 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 		},
 		 
 		/**
-		 * function is called after this class has been constructed
+		 * Function is called after this class has been constructed
 		 * the functions in the post create need to be called after the class has been
 		 * instantiated so parameters in the dijit base classes can be initialised. 
 		 * @method postCreate 
@@ -110,6 +182,7 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 				this.renderer.renderMemberList(this.domNode);
 			}
 		},
+		
 		/**
 		 * Creates a SearchBoxRenderer and sets it as the renderer for this class.
 		 * @method CreateDefaultRenderer
@@ -136,6 +209,7 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 		 * @param event the blur event
 		 */
 		handleBlur: function(element,obj,event){
+			// TODO why two seperate calls to removePopUp, logic looks overly complex here
 			//For Keyboard Accessibility, this only needs to work for firefox(accessible path) if other browsers 
 			//do not support this property that is okay
 			if(event.explicitOriginalTarget){
@@ -224,16 +298,23 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 			this.searchBoxAction.onKeyPress(element, obj, event, this);
 		},
 		
+		/**
+		 * TODO Document Me
+		 * @param element
+		 * @param obj
+		 * @param event
+		 */
 		suggest: function(element, obj, event){
 			if(this.searchSuggest == "on"){
 				this.searchBoxAction.suggest(event, this);
 			}			
 		},
 		
-		
-		/**SearchBoxAction contains functions to handle events
+		/**
+		 * SearchBoxAction contains functions to handle events
 		 * this should be overridden to change the action 
-		 * of the event handler function  */
+		 * of the event handler function  
+		 */
 		searchBoxAction : {
 			
 			_appsPopUp: null,
@@ -296,6 +377,8 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 				// Get parent node
 				var item = event.target.parentNode;
 
+				// TODO if someone overrides the renderer will this work?
+				
 				// Prepare HTML for comparison
 				var memberNode = item.parentNode;
 				var memberNodeHtml = memberNode.innerHTML;
@@ -340,7 +423,7 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 			 * @param self Context
 			 */
 			renderPopUp: function(self){
-				
+				// TODO shouldn't this just pass thru to the renderer?
 				if(this._suggestionPopUp ){
 					for(var i=0;i<self.domNode.children.length;i++){
 						if(self.domNode.children[i] === this._suggestionPopUp){
@@ -349,7 +432,6 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 					}
 				}
 				this._appsPopUp = self.renderer.renderPopUp(self,self.domNode);
-				
 			},
 			
 			/**
@@ -374,15 +456,24 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 				self.selectedApplication = element.children[1].textContent;
 				self.renderer.removePopUp(self.domNode,this._appsPopUp);
 				self.renderer.changeSelectedApplication(element.children[1].textContent,element.children[0].children[0]);
-				this._setPrimaryComponent(self.selectedApplication,self);
+				
 			},
 			
-			
+			/**
+			 * TODO Document Me
+			 * 
+			 * @param event
+			 * @param popUp
+			 * @param context
+			 */
 			setSuggestedSearch: function(event,popUp,context){
 				var value = event.target.textContent;
 				var id = event.target.id;
 				var input = this._searchInput;
-
+				
+    			context._selectedResultItem.text = value;
+    			context._selectedResultItem.id = id;
+    			
 				context.searchQuery = value;
 				
 				
@@ -441,8 +532,8 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 			 * @param event the event
 			 * @param context the context this
 			 */
+			// TODO What is the difference between suggest and search?
 			suggest: function(event,context){
-				
 				var applicationParam = context.selectedApplication.toLocaleLowerCase();
             	applicationParam = applicationParam.replace(/ /g,'');
 				
@@ -450,51 +541,59 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 				this._searchInput = inputBox;
 				
 				var query = inputBox.value;
+				if(context.searchSuffix) {
+					query = query + context.searchSuffix;
+				}
 				var popUp = context.renderer.renderSuggestionPopUp(context,context.domNode);
-				this._suggestionPopUp = popUp;
+				this._suggestionPopUp = popUp;								
 				
-				popUp.innerHTML = "";
-				
-				var requestArgs = {};	
+				var requestArgs;
 				if(context.constraint){
 					var jsonString = JSON.stringify(context.constraint);
 					requestArgs = {"component": applicationParam, constraint:jsonString};
 				}else{
 					requestArgs = {"component": applicationParam};
 				}
+				if(context.searchArgs){
+					lang.mixin(requestArgs,context.searchArgs);	
+				}
 				
+				// TODO the && is not needed. Why do all the previous stuff if empty query is ignored?
 				if(query && query != ""){
-					
+					// TODO This should only happen once!
 					if(context.endpoint){
 						searchService = new SearchService({endpoint:context.endpoint});
 					}else{
 						searchService = new SearchService();
 					}
 					
-				    var promise = searchService.getMyResults(query,requestArgs);
-	
+					var promise;
+					if (context.searchType == "my") {
+						promise = searchService.getMyResults(query, requestArgs);
+					} else if (context.searchType == "myCommunities"){
+						
+						var args = {search:query};
+						if(context.endpoint){
+							communityService = new CommunityService({endpoint:context.endpoint});
+						}else{
+							communityService = new CommunityService();
+						}						
+						
+						promise = communityService.getMyCommunities(args);
+					}	else {
+					
+						promise = searchService.getResults(query, requestArgs);
+					}
 			        promise.then(
 			            function(results) {
-			            	if(context._primaryComponent != "all"){
-				            	//filter Results
-				            	var newResults = [];
-				            	for(var i=0;i<results.length;i++){
-				            		var terms = results[i].getCategoryTerms();
-				            		if(terms[1] == context._primaryComponent){
-				            			 newResults.push(results[i]);
-				            		}
-				            	}
-				            	context.searchBoxAction.handleSuggestResult(newResults,context,popUp);
-			            	}else{
-			            		context.searchBoxAction.handleSuggestResult(results,context,popUp);
-			            	}
-			            	
+			            	context.searchBoxAction.handleSuggestResult(results,context,popUp,context.searchType);
 			            },
+			            
 			            function(error) {
 			                console.log(error);
 			            }
-		        );
-			}
+			        );
+				}
 			},
 			
 			/**
@@ -504,20 +603,24 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 			 * @param context the This of the outer class
 			 * @param popUp the popUp Element where results are displayed 
 			 */
-			handleSuggestResult: function(results,context,popUp){
+			handleSuggestResult: function(results,context,popUp,searchType){
+				// TODO should the renderer handle this?
+				popUp.innerHTML = "";
 				for(var i=0;i<results.length;i++){
             		var row = document.createElement("tr");
             		var data = document.createElement("td");
             		var title = results[i].getTitle();
-            		var id = results[i].getId();
+            		var id="";
+            		if(searchType=="myCommunities"){
+            			id = results[i].getCommunityUuid();
+            		}else{
+            		    id = results[i].getId();
+            		}
             		data.innerHTML = title;
-            		data.id = results[i].getId();
+            		data.id = id;
             		data.style = "cursor:pointer";
             		data.onclick = function (event) { 
-            			
             			context.searchBoxAction.setSuggestedSearch(event,popUp,context);
-            			context._selectedResultItem.text = title;
-            			context._selectedResultItem.id = id;
             		};    		
             		row.appendChild(data);
             		popUp.appendChild(row);
@@ -531,9 +634,6 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 			 * @param event The Event
 			 */
 			search: function(event,context){
-				
-				
-				
 				if(this._suggestionPopUp ){
 					for(var i=0;i<context.domNode.children.length;i++){
 						if(context.domNode.children[i] === this._suggestionPopUp){
@@ -544,46 +644,50 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 				
 				var applicationParam = context.selectedApplication.toLocaleLowerCase();
             	applicationParam = applicationParam.replace(/ /g,'');
-            	
 				
             	//if this control is going to retrieve the search results from the server
 				if(context.type == "full"){
-					var requestArgs = {};
-					
+					var requestArgs;
 					if(context.constraint){
 						var jsonString = JSON.stringify(context.constraint);
 						requestArgs = {"component": applicationParam, constraint:jsonString};
 					}else{
 						requestArgs = {"component": applicationParam};
 					}
-					
+					if(context.searchArgs){
+						lang.mixin(requestArgs,context.searchArgs);	
+					}
 					if(context.endpoint){
 						searchService = new SearchService({endpoint:context.endpoint});
 					}else{
 						searchService = new SearchService();
 					}
-				    var promise = searchService.getMyResults(context.searchQuery,requestArgs);
-				    
-				    var self = context;
+					
+					var query = context.searchQuery;
+					if(context.searchSuffix) {
+						query = query + context.searchSuffix;
+					}
+					var self = context;
+				   
+					var promise;
+					if (context.searchType == "my") {
+						promise = searchService.getMyResults(query, requestArgs);
+					} else if (context.searchType == "myCommunities"){
+						
+						var args = {search:query};
+						if(context.endpoint){
+							communityService = new CommunityService({endpoint:context.endpoint});
+						}else{
+							communityService = new CommunityService();
+						}						
+						
+						promise = communityService.getMyCommunities(args);
+					}	else {
+					
+						promise = searchService.getResults(query, requestArgs);
+					}
 			        promise.then(
 			            function(results) {
-			            	var newResults = [];
-			            	if(context._primaryComponent != "all"){
-				            	//filter Results
-				            	
-				            	for(var i=0;i<results.length;i++){
-				            		var terms = results[i].getCategoryTerms();
-				            		if(terms[1] == context._primaryComponent){
-				            			 newResults.push(results[i]);
-				            		}
-				            	}	
-			            	}else{
-			            		for(var i=0;i<results.length;i++){
-			            			newResults.push(results[i]);
-			            		}
-			            	}
-			            	
-			            	
 			            	if (context.memberList) {
 			            		// If the member list feature is enabled then we need
 			            		// to use a different search result event since we want the
@@ -591,12 +695,17 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 			            		// just displayed in the results table
 			            		for(var i = 0; i < newResults.length; i++) {
 			            			// Render each item in the search results
-			            			context.renderer.renderMemberListItem(context, newResults[i].getTitle(), results[i].getId());
+			            			if(context.searchType="myCommunities"){
+			            				context.renderer.renderMemberListItem(context, newResults[i].getTitle(), results[i].getCommunityUuid());
+			            			}else{
+			            				context.renderer.renderMemberListItem(context, newResults[i].getTitle(), results[i].getId());
+			            			}
+			            			
 			            		}	   
 			            	} else {
 			            		var evt = document.createEvent("Event");
 			            		evt.initEvent("searchResultEvent",true,true);
-			            		evt.results = newResults;
+			            		evt.results = results;
 			            		self.domNode.dispatchEvent(evt);
 			            		evt = null;				
 			            	}
@@ -617,44 +726,8 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 				}
 				
 			},
-			
-			_setPrimaryComponent: function(selectedApplication,self){
-				switch(selectedApplication.toLowerCase()){
-				case "communities":
-					self._primaryComponent = "communities:entry";
-					break;
-				case "files":
-					self._primaryComponent = "files";
-					break;
-				case "profiles":
-					self._primaryComponent = "profiles";
-					break;
-				case "wikis":
-					self._primaryComponent = "wikis:page";
-					break;
-				case "bookmarks":
-					self._primaryComponent = "dogear";
-					break;
-				case "forums":
-					self._primaryComponent = "forums";
-					break;
-				case "activities":
-					self._primaryComponent = "activities";
-					break;
-				case "status Updates":
-					self._primaryComponent = "status_updates";
-					break;
-				case "blogs":
-					self._primaryComponent = "blogs";
-					break;
-				case "all connections":
-					self._primaryComponent = "all";
-					break;
-				}
-			}
 		
-		},
-		
+		}
 		
 	});
 

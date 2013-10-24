@@ -52,7 +52,7 @@ function(declare, Grid, parameter, ActivityGridRenderer, ActivityAction, consts)
 	            "my" : {
 	                storeArgs : {
 	                    url : consts.AtomActivitiesMy,
-	                    attributes : consts.ActivityXPath,
+	                    attributes : consts.ActivityNodeXPath,
 	                    feedXPath : consts.ActivitiesFeedXPath,
 	                    paramSchema: ParamSchema
 	                },

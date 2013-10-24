@@ -25,11 +25,9 @@
 <%@page import="com.ibm.sbt.services.client.connections.activitystreams.model.Reply"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Iterator"%>
-
 <html>
-
 <head>
-<title>SBT JAVA Sample - AS</title>
+<title>SBT JAVA Sample - My Topics</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
@@ -58,7 +56,7 @@
 			}
 		} catch (Throwable e) {
 			out.println("<pre>");
-			e.printStackTrace(new PrintWriter(out));
+			out.println("Problem Occurred while fetching My Topics: " + e.getMessage());
 			out.println("</pre>");
 		}
 	%>

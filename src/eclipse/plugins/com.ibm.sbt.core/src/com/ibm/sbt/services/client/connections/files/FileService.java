@@ -479,33 +479,64 @@ public class FileService extends BaseService {
 		}
 		return noOfBytes;
 	}
+	
+	/**
+	 * Method to download a File of logged in user 
+	 * @param ostream - output stream which contains the binary content of the file
+	 * @param fileId 
+	 * @return long - no of bytes
+	 * @throws FileServiceException
+	 */
+	 public long downloadFile(OutputStream ostream, final String fileId) throws FileServiceException {
+		 return this.downloadFile(ostream, fileId, null, false);
+	 }
     
 	/**
 	 * Method to download a File 
 	 * @param ostream - output stream which contains the binary content of the file
 	 * @param fileId
+	 * @param libraryId - required in case of public files
+	 * @param isPublic - flag to indicate public file
 	 * @return long - no of bytes
 	 * @throws FileServiceException
 	 */
-	public long downloadFile(OutputStream ostream, final String fileId) throws FileServiceException {
-		return downloadFile(ostream, fileId, null);
+	public long downloadFile(OutputStream ostream, final String fileId, final String libraryId, boolean isPublic) throws FileServiceException {
+		return downloadFile(ostream, fileId, libraryId, null, isPublic);
+	}
+	
+	/**
+	 * Method to download a File of logged in user
+	 * @param ostream - output stream which contains the binary content of the file
+	 * @param fileId
+	 * @param libraryId - required in case of public file
+	 * @param params
+	 * @return long - no of bytes
+	 * @throws FileServiceException
+	 */
+	public long downloadFile(OutputStream ostream, final String fileId, Map<String, String> params) throws FileServiceException {
+		return this.downloadFile(ostream, fileId, null, params, false);
 	}
 	
 	/**
 	 * Method to download a File 
 	 * @param ostream - output stream which contains the binary content of the file
 	 * @param fileId
+	 * @param libraryId - required in case of public file
 	 * @param params
+	 * @param isPublic - flag to indicate public file
 	 * @return long - no of bytes
 	 * @throws FileServiceException
 	 */
-	public long downloadFile(OutputStream ostream, final String fileId, Map<String, String> params) throws FileServiceException {
-		File file = getFile(fileId);
+	public long downloadFile(OutputStream ostream, final String fileId, final String libraryId, Map<String, String> params, boolean isPublic) throws FileServiceException {
+		File file = !isPublic ? getFile(fileId) : getPublicFile(fileId, libraryId, null);
 		// now we have the file.. we need to download it.. 
-		String accessType = AccessType.AUTHENTICATED.getAccessType();
-		String category = Categories.MYLIBRARY.getCategory();
+		String accessType = !isPublic ? AccessType.AUTHENTICATED.getAccessType() : AccessType.PUBLIC.getAccessType();
+		String category = !isPublic ? Categories.MYLIBRARY.getCategory() : null;
 		SubFilters downloadFilters = new SubFilters();
 		downloadFilters.setFileId(file.getFileId());
+		if(libraryId != null){
+			downloadFilters.setLibraryId(libraryId);
+		}
 		String resultType = ResultType.MEDIA.getResultType();
 		String requestUrl = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
                 null, downloadFilters, resultType); 
@@ -1314,6 +1345,39 @@ public class FileService extends BaseService {
             }
         }
         return file;
+    }
+    
+    /**
+     * getPublicFile
+     * <p>
+     * Rest API for getting files :- /files/basic/api/myuserlibrary/document/{document-id}/entry
+     * 
+     * @param fileId - ID of the file to be fetched from the Connections Server
+     * @param libraryId - ID of the library to which the public file belongs
+     * @param parameters - Map of Parameters. See {@link FileRequestParams} for possible values.    
+     * @return File
+     * @throws FileServiceException
+     */
+
+    public File getPublicFile(String fileId, String libraryId, Map<String, String> parameters)
+            throws FileServiceException {
+        if (StringUtil.isEmpty(fileId)) {
+            throw new FileServiceException(null, Messages.Invalid_FileId);
+        }
+        String requestUri = null;              
+        SubFilters subFilters = new SubFilters();
+        subFilters.setFileId(fileId);
+        subFilters.setLibraryId(libraryId);
+        requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(),
+                    AccessType.PUBLIC.getAccessType(),
+                    null, null, null, subFilters,
+                    ResultType.ENTRY.getResultType());
+
+        try {
+           return (File) super.getEntity(requestUri, parameters, new FileFeedHandler(this));
+        } catch (Exception e) {
+          throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
+        }        
     }
 
     public File getFileAwaitingAction(String fileId) throws FileServiceException {

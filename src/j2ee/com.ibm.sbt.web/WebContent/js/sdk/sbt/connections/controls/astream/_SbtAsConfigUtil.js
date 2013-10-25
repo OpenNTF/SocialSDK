@@ -13,7 +13,7 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-define(["../../../declare", "../../../config"], function(declare, config){
+define(["../../../declare", "../../../config", "../../../url"], function(declare, config, Url){
     /*
      * @class sbt.controls.astream._SbtAsConfigUtil A helper module for building ActivityStream config objects.
      */
@@ -27,28 +27,6 @@ define(["../../../declare", "../../../config"], function(declare, config){
          */
         constructor: function(xhrHandler){
             this.xhrHandler = xhrHandler;
-        },
-        
-        getUrlSegment: function(url, segment) {
-            // regexp (?:(scheme):)? // (domain) (?:(port):)? (path)? (?: \? (query_string))? (?: # (fragment))?
-            var urlRegExp = /^(?:([A-z]+):)?\/\/([\w.-]+)(?::(\d{0,5}))?([\w.\/-]*)?(?:\?([\w-]*))?(?:#(.*))?$/;
-            var urlSegments = {
-                'url': 0,
-                'scheme': 1,
-                'domain': 2,
-                'port': 3,
-                'path': 4,
-                'query': 5,
-                'fragment': 6
-            };
-            
-            if(urlSegments[segment] === undefined)
-                throw "Url segment not defined.";
-            var index = urlSegments[segment];
-            
-            var result = urlRegExp.exec(url);
-            
-            return result[index];
         },
         
         /**
@@ -65,8 +43,9 @@ define(["../../../declare", "../../../config"], function(declare, config){
             if(index !== -1){
                 relativeUrl = microbloggingUrl.slice(index + fullProxy.length);
             }
-            else
-                relativeUrl = this.getUrlSegment(microbloggingUrl, "path");
+            else{
+                relativeUrl = new Url(microbloggingUrl).getPath();
+            }
             var serviceUrl = relativeUrl + "/" + this.xhrHandler.endpoint.authType + "/rest/people/@me/@self";
             
             this.xhrHandler.xhrGet({

@@ -50,19 +50,11 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * XPath expressions to be used when reading a wiki entry
          */
         WikiXPath : lang.mixin({
-        	communityUuid : "snx:communityUuid",
+            communityUuid : "snx:communityUuid",
             themeName : "td:themeName",
             librarySize : "td:librarySize",
             libraryQuota : "td:libraryQuota",
-            totalRemovedSize : "td:totalRemovedSize",
-            recommendations : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/recommendations']",
-            comment : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/comment']",
-            hit : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/hit']",
-            anonymous_hit : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/anonymous_hit']",
-            share : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/share']",
-            collections : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/collections']",
-            attachments : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/attachments']",
-            versions : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/versions']"
+            totalRemovedSize : "td:totalRemovedSize"
         }, BaseWikiXPath, conn.AtomEntryXPath),
         
         /**
@@ -73,7 +65,15 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
             versionUuid : "td:versionUuid",
             versionLabel : "td:versionLabel",
             propagation : "td:propagation",
-            totalMediaSize : "td:totalMediaSize"
+            totalMediaSize : "td:totalMediaSize",
+            recommendations : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/recommendations']",
+            comment : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/comment']",
+            hit : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/hit']",
+            anonymous_hit : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/anonymous_hit']",
+            share : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/share']",
+            collections : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/collections']",
+            attachments : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/attachments']",
+            versions : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/versions']"            
         }, BaseWikiXPath, conn.AtomEntryXPath),
         
 		/**
@@ -129,7 +129,12 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         /**
          * Returns a wiki page after authenticating the request.
          */
-        WikiPageEntry : "/{wikis}/{authType}/api/wiki/{wikiLabel}/page/{pageLabel}/entry"
+        WikiPageEntry : "/{wikis}/{authType}/api/wiki/{wikiLabel}/page/{pageLabel}/entry",
+        
+        /**
+         * Post to this feed to create a wiki page.
+         */
+        WikiFeed : "/{wikis}/{authType}/api/wiki/{wikiLabel}/feed"
         
     });
 });

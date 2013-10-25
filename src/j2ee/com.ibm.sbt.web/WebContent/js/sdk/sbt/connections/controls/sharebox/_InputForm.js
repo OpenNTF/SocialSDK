@@ -41,7 +41,10 @@ define(["sbt/declare", "sbt/json", "sbt/connections/controls/_ConnectionsWidget"
                             "UBLOG_RELATIVE_PATH" : "/basic/rest/ublog/",
                             isASGadget : false
                         }, dojo.byId(args.shareBoxNode));
-                        dojo.empty(self.inputForm.attachActionButtonNode);
+                        if(self.inputForm.attachActionButtonNode){
+                            dojo.empty(self.inputForm.attachActionButtonNode);
+                        }
+                        
                         self.modifyPostFunction();
                     }
                 },

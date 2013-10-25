@@ -473,7 +473,7 @@ define([ "../../declare", "../../dom", "../../lang", "../../widget/grid/_GridRen
         	profileURL = grid.constructUrl(profileURL,{},{},endpoint);
         	profileURL = endpoint.baseUrl+profileURL;
         	return profileURL;
-        },
+        }
         
     });
     

@@ -1,5 +1,4 @@
 var currentWiki = null;
-var currentWiki = null;
 
 require(["sbt/config", "sbt/connections/WikiService", "sbt/dom"], function(config, WikiService, dom) {
     dom.setText("success", "Please wait... Loading your wikis");
@@ -35,8 +34,10 @@ function handleMyWikis(wikis, wikiService, dom) {
     resetWiki(currentWiki, dom);
     
     addOnClickHandlers(wikiService, dom);
+
+    showMyWikis(wikis, dom);
     
-    displayMessage(dom, "Successfully loaded your wiki: " + wikis[0].getWikiUuid());
+    displayMessage(dom, "Successfully loaded your wiki: " + wikis[0].getLabel());
 }
 
 function startWiki(wikiService, title, summary, tags, label, dom) {
@@ -44,7 +45,6 @@ function startWiki(wikiService, title, summary, tags, label, dom) {
     
     currentWiki = null;
     var wiki = wikiService.newWiki(); 
-    wiki.setWikiUuid(currentWiki.getWikiUuid());
     wiki.setTitle(title);
     wiki.setSummary(summary);
     wiki.setTags(tags);
@@ -67,7 +67,7 @@ function startWiki(wikiService, title, summary, tags, label, dom) {
 }
 
 function updateWiki(wiki, title, summary, tags, dom) {
-    displayMessage(dom, "Please wait... Updating wiki: " + wiki.getWikiUuid());
+    displayMessage(dom, "Please wait... Updating wiki: " + wiki.getLabel());
     
     wiki.setTitle(title);
     wiki.setSummary(summary);
@@ -90,7 +90,7 @@ function updateWiki(wiki, title, summary, tags, dom) {
 }
 
 function deleteWiki(wiki, dom) {
-    displayMessage(dom, "Please wait... Deleting wiki: " + wiki.getWikiUuid());
+    displayMessage(dom, "Please wait... Deleting wiki: " + wiki.getLabel());
     
     wiki.remove().then(               
         function() { 
@@ -112,7 +112,7 @@ function handleWikiCreated(wiki, dom) {
         return;
     }
 
-    displayMessage(dom, "Successfully created wiki: " + wiki.getWikiUuid());
+    displayMessage(dom, "Successfully created wiki: " + wiki.getLabel());
 }
 
 function handleWikiRemoved(wiki, dom) {
@@ -120,28 +120,14 @@ function handleWikiRemoved(wiki, dom) {
 	resetWiki(null, dom);
 	resetButtons(dom);
 	
-    displayMessage(dom, "Successfully deleted wiki: " + wiki.getWikiUuid());
+    displayMessage(dom, "Successfully deleted wiki: " + wiki.getLabel());
 }
 
 function handleWikiUpdated(wiki, dom) {
 	resetWiki(wiki, dom);
 	resetButtons(dom);
 	
-    displayMessage(dom, "Successfully updated wiki: " + wiki.getWikiUuid());
-}
-
-function handleRecommendationCreated(wiki, dom) {
-	resetWiki(wiki, dom);
-	resetButtons(dom);
-	
-    displayMessage(dom, "Successfully added recommendation to wiki: " + wiki.getWikiUuid());
-}
-
-function handleRecommendationRemoved(wiki, dom) {
-	resetWiki(wiki, dom);
-	resetButtons(dom);
-	
-    displayMessage(dom, "Successfully removed recommendation from wiki: " + wiki.getWikiUuid());
+    displayMessage(dom, "Successfully updated wiki: " + wiki.getLabel());
 }
 
 function addOnClickHandlers(wikiService, dom) {
@@ -183,7 +169,7 @@ function resetButtons(dom) {
 
 function resetWiki(wiki, dom) {
 	if (wiki) {
-	    dom.byId("wikiUuid").value = wiki.getWikiUuid();
+	    dom.byId("wikiUuid").value = wiki.getUuid();
 	    dom.byId("wikiLabel").value = wiki.getLabel();
 	    dom.byId("wikiTitle").value = wiki.getTitle();
 	    dom.byId("wikiSummary").value = wiki.getSummary();
@@ -224,3 +210,40 @@ function clearError(dom) {
     
     dom.byId("error").style.display = "none";
 }
+
+function showMyWikis(wikis, dom) {
+    var tableBody = dom.byId("wikisTableBody");
+    while (tableBody.childNodes[0]) {
+        dom.destroy(tableBody.childNodes[0]);
+    }
+    
+    for(var i=0; i<wikis.length; i++){
+        var wiki = wikis[i];
+        createRow(wiki, dom);
+    }
+}
+
+function createRow(wiki, dom) {
+    var title = wiki.getTitle(); 
+    var uuid = wiki.getUuid(); 
+    var label = wiki.getLabel(); 
+    var summary = wiki.getSummary();
+    var tags = wiki.getTags();
+	
+    var tableBody = dom.byId("wikisTableBody");
+    var tr = document.createElement("tr");
+    tableBody.appendChild(tr);
+    var td = document.createElement("td");
+    td.innerHTML = title;
+    tr.appendChild(td);
+    td = document.createElement("td");
+    td.innerHTML = label;
+    tr.appendChild(td);
+    td = document.createElement("td");
+    td.innerHTML = summary;
+    tr.appendChild(td);
+    td = document.createElement("td");
+    td.innerHTML = tags.join();
+    tr.appendChild(td);
+}
+

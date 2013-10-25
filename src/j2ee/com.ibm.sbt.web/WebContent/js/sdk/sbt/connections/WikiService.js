@@ -31,7 +31,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
 	var PermissionsTmpl = "<td:permissions>${getPermissions}</td:permissions>";
 	var CategoryTmpl = "<category term=\"${tag}\" label=\"${tag}\"></category>";
 	
-    /*
+    /**
      * Wiki class represents an entry for a Wiki or Wiki Page feed returned by the
      * Connections REST API.
      * 
@@ -40,6 +40,14 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
      */
     var BaseWikiEntity = declare(AtomEntity, {
     	
+    	/**
+    	 * Set to true to include the label in the post data when 
+    	 * performing an update or create operation. By default the 
+    	 * label is not sent which will keep it in synch with the
+    	 * Wiki or WikiPage title. 
+    	 */
+    	includeLabelInPost : false,
+    	
         /**
          * Construct a BaseWikiEntity entity.
          * 
@@ -47,6 +55,33 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @param args
          */
         constructor : function(args) {
+        },
+        
+        /**
+         * Return extra entry data to be included in post data for this entity.
+         * 
+         * @returns {String}
+         */
+        createEntryData : function() {
+        	var postData = "";
+            var transformer = function(value,key) {
+                return value;
+            };
+        	if (this.getLabel() && this.includeLabelInPost) {
+                postData += stringUtil.transform(LabelTmpl, this, transformer, this);
+        	}
+        	if (this.getPermissions()) {
+                postData += stringUtil.transform(PermissionsTmpl, this, transformer, this);
+        	}
+        	if (this.getTags()) {
+        		var tags = this.getTags();
+                for (var tag in tags) {
+                	postData += stringUtil.transform(CategoryTmpl, {
+                        "tag" : tags[tag]
+                    });
+                }
+        	}
+            return stringUtil.trim(postData);
         },
         
         /**
@@ -190,33 +225,6 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         },
         
         /**
-         * Return extra entry data to be included in post data for this entity.
-         * 
-         * @returns {String}
-         */
-        createEntryData : function() {
-        	var postData = "";
-            var transformer = function(value,key) {
-                return value;
-            };
-        	if (this.getLabel()) {
-                postData += stringUtil.transform(LabelTmpl, this, transformer, this);
-        	}
-        	if (this.getPermissions()) {
-                postData += stringUtil.transform(PermissionsTmpl, this, transformer, this);
-        	}
-        	if (this.getTags()) {
-        		var tags = this.getTags();
-                for (var tag in tags) {
-                	postData += stringUtil.transform(CategoryTmpl, {
-                        "tag" : tags[tag]
-                    });
-                }
-        	}
-            return stringUtil.trim(postData);
-        },
-        
-        /**
          * Return the community’s unique ID if this wiki belongs to a community.
          * 
          * @method getCommunityUuid
@@ -231,7 +239,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * 
          * @method setCommunityUuid
          * @param {String} communityUuid Community Uuid of the forum
-         * @return {ForumTopic}
+         * @return {Wiki}
          */
         setCommunityUuid : function(communityUuid) {
             return this.setAsString("communityUuid", communityUuid);
@@ -370,6 +378,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
     	xpath : consts.WikiPageXPath,
     	contentType : "html",
     	categoryScheme : CategoryWikiPage,
+    	wikiLabel : null,
     	
         /**
          * Construct a Wiki entity.
@@ -378,6 +387,32 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @param args
          */
         constructor : function(args) {
+        },
+        
+        /**
+         * Return the wiki label associated with this Wiki Page.
+         * 
+         * @method getWikiLabel
+         * @return {String} wiki label
+         */
+        getWikiLabel : function() {
+        	if (this.wikiLabel) {
+        		return this.wikiLabel;
+        	} else {
+        		
+        	}
+        },
+
+        /**
+         * Set the wiki label associated with this Wiki Page.
+         * 
+         * @method setWikiLabel
+         * @param {String} wiki label
+         * @return {WikiPage}
+         */
+        setWikiLabel : function(wikiLabel) {
+        	this.wikiLabel = wikiLabel;
+            return this;
         },
         
         /**
@@ -521,7 +556,12 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         load : function(args) {
             // detect a bad request by validating required arguments
             var label = this.getLabel();
-            var promise = this.service._validateWikiLabel(label);
+            var promise = this.service._validatePageLabel(label);
+            if (promise) {
+                return promise;
+            }
+            var wikiLabel = this.getWikiLabel();
+            promise = this.service._validateWikiLabel(wikiLabel);
             if (promise) {
                 return promise;
             }
@@ -540,7 +580,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 query : args || {}
             };
             
-            var url = this.service.constructUrl(consts.WikiEntry, null, { "wikiLabel" : encodeURIComponent(label) });
+            var urlParams =  { "pageLabel" : encodeURIComponent(label), "wikiLabel" : encodeURIComponent(wikiLabel) };
+            var url = this.service.constructUrl(consts.WikiPageEntry, null, urlParams);
                 
             return this.service.getEntity(url, options, label, callbacks);
         },
@@ -623,12 +664,6 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 namespaces : consts.Namespaces,
                 xpath : consts.WikiFeedXPath
             });
-        },
-        createEntity : function(service,data,response) {
-            return new WikiPage({
-                service : service,
-                data : data
-            });
         }
     };
     
@@ -638,18 +673,6 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
     var WikiCallbacks = {
         createEntity : function(service,data,response) {
             return new Wiki({
-                service : service,
-                data : data
-            });
-        }
-    };
-    
-    /*
-     * Callbacks used when reading an entry that contains wiki page.
-     */
-    var WikiPageCallbacks = {
-        createEntity : function(service,data,response) {
-            return new WikiPage({
                 service : service,
                 data : data
             });
@@ -817,9 +840,19 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 query : requestArgs || {}
             };
             
+            var callbacks = lang.mixin(WikiPageFeedCallbacks, {
+                createEntity : function(service,data,response) {
+                    return new WikiPage({
+                        service : service,
+                        wikiLabel : wikiLabel,
+                        data : data
+                    });
+                }
+            });
+            
             var url = this.constructUrl(consts.WikiRecycleBin, null, { "wikiLabel" : encodeURIComponent(wikiLabel) });
             
-            return this.getEntities(url, options, WikiPageFeedCallbacks);
+            return this.getEntities(url, options, callbacks);
         },
                 
         /**
@@ -841,9 +874,19 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 query : requestArgs || {}
             };
             
+            var callbacks = lang.mixin(WikiPageFeedCallbacks, {
+                createEntity : function(service,data,response) {
+                    return new WikiPage({
+                        service : service,
+                        wikiLabel : wikiLabel,
+                        data : data
+                    });
+                }
+            });
+                
             var url = this.constructUrl(consts.WikiMyPages, null, { "wikiLabel" : encodeURIComponent(wikiLabel) });
             
-            return this.getEntities(url, options, WikiPageFeedCallbacks);
+            return this.getEntities(url, options, callbacks);
         },
                 
         /**
@@ -865,9 +908,19 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 query : requestArgs || {}
             };
             
+            var callbacks = lang.mixin(WikiPageFeedCallbacks, {
+                createEntity : function(service,data,response) {
+                    return new WikiPage({
+                        service : service,
+                        wikiLabelOrId : wikiLabelOrId,
+                        data : data
+                    });
+                }
+            });
+                    
             var url = this.constructUrl(consts.WikiRecycleBin, null, { "wikiLabelOrId" : encodeURIComponent(wikiLabelOrId) });
             
-            return this.getEntities(url, options, WikiPageFeedCallbacks);
+            return this.getEntities(url, options, callbacks);
         },
         
         /**
@@ -982,8 +1035,13 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @param wikiLabel Value of the <td:label> element or the <id> element of the wiki.
          * @param requestArgs
          */
-        getWikiPage: function(pageUuid, requestArgs) {
-        	throw new Error("Not implemented yet!");
+        getWikiPage: function(wikiLabel, pageLabel, requestArgs) {
+            var wikiPage = new WikiPage({
+                service : this,
+                wikiLabel : wikiLabel,
+                _fields : { label : pageLabel }
+            });
+            return wikiPage.load(requestArgs);
         },
         
         /**
@@ -994,7 +1052,28 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @param requestArgs
          */
         createWikiPage: function(pageOrJson, requestArgs) {
-        	throw new Error("Not implemented yet!");
+            var wikiPage = this._toWikiPage(pageOrJson);
+            var promise = this._validateWikiPage(wikiPage, false, requestArgs);
+            if (promise) {
+                return promise;
+            }
+
+            var callbacks = {};
+            callbacks.createEntity = function(service,data,response) {
+                wiki.setData(data);
+                return wiki;
+            };
+
+            var options = {
+                method : "POST",
+                query : requestArgs || {},
+                headers : consts.AtomXmlHeaders,
+                data : wikiPage.createPostData()
+            };
+            
+            var url = this.constructUrl(consts.WikiFeed, null, { "wikiLabel" : encodeURIComponent(wikiPage.getWikiLabel()) });
+            
+            return this.updateEntity(url, options, callbacks, requestArgs);
         },
                 
         /**
@@ -1005,18 +1084,59 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @param requestArgs
          */
         updateWikiPage: function(pageOrJson, requestArgs) {
-        	throw new Error("Not implemented yet!");
+            var wikiPage = this._toWikiPage(pageOrJson);
+            var promise = this._validateWikiPage(wikiPage, true, requestArgs);
+            if (promise) {
+                return promise;
+            }
+            
+            var callbacks = {};
+            callbacks.createEntity = function(service,data,response) {
+            	wikiPage.setData(data);
+                return wikiPage;
+            };
+
+            var options = {
+                method : "PUT",
+                query : requestArgs || {},
+                headers : consts.AtomXmlHeaders,
+                data : wikiPage.createPostData()
+            };
+            
+            var urlParams =  { "pageLabel" : encodeURIComponent(wikiPage.getLabel()), "wikiLabel" : encodeURIComponent(wikiPage.getWikiLabel()) };
+            var url = this.constructUrl(consts.WikiPageEntry, null, urlParams);
+            
+            return this.updateEntity(url, options, callbacks, requestArgs);
         },
                 
         /**
          * Delete a wiki page.
          * 
          * @method deleteWikiPage
-         * @param pageOrJson
+         * @param wikiLabel
+         * @param pageLabel
          * @param requestArgs
          */
-        deleteWikiPage: function(pageOrJson, requestArgs) {
-        	throw new Error("Not implemented yet!");
+        deleteWikiPage: function(wikiLabel, pageLabel, requestArgs) {
+            var promise = this._validateWikiLabel(wikiLabel);
+            if (promise) {
+                return promise;
+            }            
+            promise = this._validatePageLabel(pageLabel);
+            if (promise) {
+                return promise;
+            }            
+           
+            var options = {
+                method : "DELETE",
+                query : requestArgs || {},
+                handleAs : "text"
+            };
+            
+            var urlParams =  { "pageLabel" : encodeURIComponent(label), "wikiLabel" : encodeURIComponent(wikiLabel) };
+            var url = this.constructUrl(consts.WikiPageEntry, null, urlParams);
+            
+            return this.deleteEntity(url, options, wikiLabel);
         },
                 
         //
@@ -1055,7 +1175,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         },
         
         /*
-         * Validate a wiki and return a Promise if invalid.
+         * Validate a Wiki and return a Promise if invalid.
          */
         _validateWiki : function(wiki,checkLabel) {
             if (!wiki || !wiki.getTitle()) {
@@ -1067,11 +1187,35 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         },
         
         /*
+         * Validate a WikiPage and return a Promise if invalid.
+         */
+        _validateWikiPage : function(wikiPage,checkLabels) {
+            if (!wikiPage || !wikiPage.getTitle()) {
+                return this.createBadRequestPromise("Invalid argument, wiki page with title must be specified.");
+            }
+            if (checkLabels && !wikiPage.getLabel()) {
+                return this.createBadRequestPromise("Invalid argument, wiki page with label must be specified.");
+            }
+            if (checkLabels && !wikiPage.getWikiLabel()) {
+                return this.createBadRequestPromise("Invalid argument, wiki page with wiki label must be specified.");
+            }
+        },
+        
+        /*
          * Validate a wiki label, and return a Promise if invalid.
          */
         _validateWikiLabel : function(wikiLabel) {
             if (!wikiLabel || wikiLabel.length == 0) {
                 return this.createBadRequestPromise("Invalid argument, expected wiki label.");
+            }
+        },
+        
+        /*
+         * Validate a wiki page label, and return a Promise if invalid.
+         */
+        _validatePageLabel : function(pageLabel) {
+            if (!pageLabel || pageLabel.length == 0) {
+                return this.createBadRequestPromise("Invalid argument, expected wiki page label.");
             }
         },
         
@@ -1094,12 +1238,32 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             } else {
                 if (lang.isString(wikiOrJsonOrString)) {
                     wikiOrJsonOrString = {
-                        wikiUuid : wikiOrJsonOrString
+                        handle : wikiOrJsonOrString
                     };
                 }
                 return new Wiki({
                     service : this,
                     _fields : lang.mixin({}, wikiOrJsonOrString)
+                });
+            }
+        },
+        
+        /*
+         * Return a WikiPage instance from WikiPage or JSON or String. Throws
+         * an error if the argument was neither.
+         */
+        _toWikiPage : function(pageOrJsonOrString) {
+            if (pageOrJsonOrString instanceof WikiPage) {
+                return pageOrJsonOrString;
+            } else {
+                if (lang.isString(pageOrJsonOrString)) {
+                	pageOrJsonOrString = {
+                        handle : pageOrJsonOrString
+                    };
+                }
+                return new WikiPage({
+                    service : this,
+                    _fields : lang.mixin({}, pageOrJsonOrString)
                 });
             }
         }

@@ -5,10 +5,10 @@ require(["sbt/connections/CommunityService", "sbt/dom"],
             var tr = document.createElement("tr");
             table.appendChild(tr);
             var td = document.createElement("td");
-            td.innerHTML = title;
+            td.appendChild(document.createTextNode(title));
             tr.appendChild(td);
             td = document.createElement("td");
-            td.innerHTML = communityUuid;
+            td.appendChild(document.createTextNode(communityUuid));
             tr.appendChild(td);
         };
 

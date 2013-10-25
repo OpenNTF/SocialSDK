@@ -28,8 +28,11 @@ define(['./declare'], function(declare){
     **/
     var url = declare(null, {
         /*
-         * Stores the matches for the url
-         */
+        Holds the parts of the url after URL_RE parses the url.
+
+        @property _resultStore 
+        @type Array
+        **/
         _resultStore: [],
         
         /*

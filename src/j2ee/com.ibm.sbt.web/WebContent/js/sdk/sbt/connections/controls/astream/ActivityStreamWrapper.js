@@ -13,7 +13,7 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-define(["../../../declare", "../../../config", "../../../util", "../../../lang", "../../../connections/controls/WidgetWrapper", "../../../text!../../../connections/controls/astream/templates/ActivityStreamContent.html"], function(declare, config, util, lang, WidgetWrapper, defaultTemplate) {
+define(["../../../declare", "../../../url", "../../../config", "../../../util", "../../../lang", "../../../connections/controls/WidgetWrapper", "../../../text!../../../connections/controls/astream/templates/ActivityStreamContent.html"], function(declare, Url, config, util, lang, WidgetWrapper, defaultTemplate) {
 
     /**
      * The wrapper for the ActivityStream.
@@ -40,11 +40,8 @@ define(["../../../declare", "../../../config", "../../../util", "../../../lang",
         getTransformObject: function(){
             var proxyUrl = this._endpoint.proxy.proxyUrl + "/" + this._endpoint.proxyPath;
             var connectionsUrl = this._endpoint.baseUrl;
-            var libUrl = config.Properties.libraryUrl;
-            var libraryQueryIndex = libUrl.indexOf("?");
-            
-            var baseLibUrl = libUrl.substring(0, libraryQueryIndex);
-            var libQuery = libUrl.substring(libraryQueryIndex + 1);
+            var libUrl = new Url(config.Properties.libraryUrl);
+            var libQuery = libUrl.getQuery();
             var libQueryObj = util.splitQuery(libQuery, "&");
             
             lang.mixin(libQueryObj, {
@@ -52,7 +49,7 @@ define(["../../../declare", "../../../config", "../../../util", "../../../lang",
                 ver: "1.4.3"
             });
             libQuery = util.createQuery(libQueryObj, "&");
-            libUrl = baseLibUrl + "?" + libQuery;
+            libUrl.setQuery(libQuery);
             
             var connectionsSideNav = "~com.ibm.social.as.gadget.viewnav.ASGadgetViewSideNav.js";
             var cssUrl = connectionsUrl + "/${connections}/resources/web/com.ibm.social.as/css/activityStream.css";
@@ -63,14 +60,14 @@ define(["../../../declare", "../../../config", "../../../util", "../../../lang",
             
             var sbtProps = lang.mixin({}, config.Properties);
             lang.mixin(sbtProps, {
-                libraryUrl: libUrl,
+                libraryUrl: libUrl.getUrl(),
                 loginUi: "popup"
             });
             var templateReplacements = {
                 args: JSON.stringify(this.args),
                 proxyUrl: proxyUrl,
                 connectionsUrl: connectionsUrl,
-                libraryUrl: libUrl,
+                libraryUrl: libUrl.getUrl(),
                 sbtProps: JSON.stringify(sbtProps),
                 connectionsASNav: connectionsSideNav,
                 cssUrl: cssUrl

@@ -6,7 +6,7 @@ define(['./declare'], function(declare){
         'SCHEME': 1,
         'COLON1': 2,
         'SLASHES': 3,
-        'USER': 24,
+        'USER': 4,
         'COLON2':5,
         'PASSWORD': 6,
         'AT': 7,

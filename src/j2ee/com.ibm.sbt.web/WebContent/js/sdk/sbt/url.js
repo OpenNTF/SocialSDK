@@ -1,4 +1,4 @@
-define(['./declare', './util', './stringUtil'], function(declare, util, stringUtil){
+define(['./declare'], function(declare){
     // regexp    /^(?:(scheme)(:))?(\/\/)(?:(userna)(:)(passwo)(@))?(domain  )(?:(:)(port   ))?(path      )?(?:(\?)(query ))?(?:(#)(fr))?$/
     var URL_RE = /^(?:([A-z]+)(:))?(\/\/)(?:([^?#]*)(:)([^?#]*)(@))?([\w.\-]+)(?:(:)(\d{0,5}))?([\w.\/\-]+)?(?:(\?)([^?#]*))?(?:(#)(.*))?$/;
     var URL_RE_GROUPS = {

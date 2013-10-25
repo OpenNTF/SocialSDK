@@ -21,7 +21,7 @@ define(['./declare'], function(declare){
     };
     
     /**
-    A class for representing urls. After creation if you want to set properties, make sure to use the set methods. 
+    A class for representing urls.
 
     @class url 
     @constructor

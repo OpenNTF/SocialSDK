@@ -108,7 +108,7 @@ public class BaseBlogEntity extends BaseEntity {
 	 */
 	
 	public List<String> getTags() {
-		return (List<String>) Arrays.asList(getDataHandler().getAsString(BlogXPath.tags).split(" "));
+		return (List<String>) Arrays.asList(getDataHandler().getAsArray(BlogXPath.tags));
 	}
 	
 	/**
@@ -117,7 +117,7 @@ public class BaseBlogEntity extends BaseEntity {
 	public void setTags(List<String> tags) {
 		if(!tags.isEmpty()){
 			for (int i = 0; i < tags.size(); i++){
-				   fields.put("tag" + i , tags.get(i));
+				   fields.put(BlogXPath.tags.toString() + i , tags.get(i));
 			}
 		}
 	}

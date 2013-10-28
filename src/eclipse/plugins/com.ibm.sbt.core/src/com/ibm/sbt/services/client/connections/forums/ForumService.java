@@ -26,7 +26,6 @@ import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.util.EntityUtil;
-import com.ibm.sbt.services.client.connections.communities.model.CommunityXPath;
 import com.ibm.sbt.services.client.connections.forums.feedhandler.ForumsFeedHandler;
 import com.ibm.sbt.services.client.connections.forums.feedhandler.RepliesFeedHandler;
 import com.ibm.sbt.services.client.connections.forums.feedhandler.TagFeedHandler;

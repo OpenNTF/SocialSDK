@@ -17,8 +17,8 @@
 /**
  * 
  */
-define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil", "../../widget/grid/_Grid", "./ViewProfileAction", "../../util"], 
-        function(declare, lang, itemFactory, stringUtil, _Grid, ViewProfileAction, util) {
+define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil", "../../widget/grid/_Grid", "../../util"], 
+        function(declare, lang, itemFactory, stringUtil, _Grid, util) {
 
     /**
      * @class grid
@@ -68,16 +68,6 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
          */
         selectedRows: null,
         
-        /**
-         * The base URL for the profiles application 
-         */
-        baseProfilesUrl: "/profiles",
-        
-        /**
-         * Action to open a profile
-         */
-        viewProfileAction: new ViewProfileAction(),
-        
         /*
          * TODO remove this?
          */
@@ -108,6 +98,7 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
             lang.mixin(this, args);
             
             this.selectedRows = [];
+  
             
             if (!this.store) {
                 if (args && args.storeArgs) {
@@ -152,7 +143,7 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
                 url = this.buildUrl(url, args, store.getEndpoint());
             }
             store.setUrl(url);
-            
+
             return store;
         },
         
@@ -289,6 +280,55 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
             }
         },
         
+        show10ItemsPerPage: function(el, data, ev) {
+        	this.showItemsPerPage(el, data, ev, 10);
+        },
+        
+        show25ItemsPerPage: function(el, data, ev) {
+        	this.showItemsPerPage(el, data, ev, 25);
+        },
+        
+        show50ItemsPerPage: function(el, data, ev) {
+        	this.showItemsPerPage(el, data, ev, 50);
+        },
+        
+        show100ItemsPerPage: function(el, data, ev) {
+        	this.showItemsPerPage(el, data, ev, 100);
+        },
+        
+        /**
+         * Displays the feed for the content that is currently shown.
+         * @method - viewFeed
+         * @param el - The element that fired the event, typically an anchor 
+         * @param data - the data associated with element
+         * @param ev - the event, for example onClick
+         */
+        viewFeed: function(el, data, ev) {
+        	var endpoint = this.store.getEndpoint();
+        	var proxy = endpoint.proxy;
+        	var baseUrl = endpoint.baseUrl;
+        	var proxyPath = endpoint.proxyPath;
+        	var url = proxy.rewriteUrl(baseUrl, this.store.getUrl(), proxyPath);
+        	window.open(url, "_new");
+        },
+        
+        /**
+         * Show "count" items per page
+         * @method - showItemsPerPage
+         * @param el - The element that fired the event, typically an anchor 
+         * @param data - the data associated with element
+         * @param ev - the event, for example onClick
+         * @param count - the number of items to display per page
+         */
+        showItemsPerPage: function(el, data, ev, count) {
+        	this._stopEvent(ev);
+        	if (this.store) {
+        		this.pageSize = count;
+        		this.update(null);
+        	}
+        },
+        
+        
         /**
          * Move forward to the next page of grid rows
          * @method - nextPage
@@ -324,21 +364,6 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
                 }
                 this._doQuery(this.store, options);
             }
-        },
-        
-        /**
-         * In the grid HTML an element can have an event attached 
-         * using dojo-attach-event="onClick: handleClick".
-         * This method is the handler for the onclick event.
-         * This function is for viewing a profile.  
-         * @method handleClick
-         * @param el the element that fired the event
-         * @param data all of the items from the current row of the grid. 
-         * @param ev the event 
-         */
-        viewAuthorProfile: function(el, data, ev){
-        	this._stopEvent(ev);
-        	this.viewProfileAction.openAuthorProfile(data, this.store,this.baseProfilesUrl);
         },
         
         /**

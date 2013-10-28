@@ -40,7 +40,7 @@ public class GetBlogsPosts extends BaseApiTest {
     public void testGetBlogsPosts() {
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         List jsonList = previewPage.getJsonList();
-        Assert.assertFalse("GetPublicActivityStream returned no results", jsonList.isEmpty());
+        Assert.assertFalse("GetBlogsPosts returned no results", jsonList.isEmpty());
     }
 
 }

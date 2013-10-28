@@ -30,6 +30,7 @@ define({
       updatedBy : "Updated by",
       sortByRelevance : "Relevance",
       sortByDate: "Date",
+      feed : "Feed for these search results",
       
       
       /**

@@ -1,0 +1,29 @@
+<div dojoattachpoint="pagingFooter" class="lotusPaging" style="">
+	<ul dojoattachpoint="itemsPerPageList"
+		class="lotusLeft lotusInlinelist">
+		Show:
+		<li class="lotusFirst itemsPerPageLink">
+			<a href="javascript: void(0)" title="${nls.show10Items}" aria-pressed="false"
+				role="button" data-dojo-attach-event="onclick: show10ItemsPerPage">10</a>
+		</li>
+		<li class="itemsPerPageLink">
+			<a href="javascript: void(0)"
+				title="${nls.show25Items}" data-dojo-attach-event="onclick: show25ItemsPerPage"
+				aria-pressed="false" role="button">25</a>
+		</li>
+		<li class="itemsPerPageLink">
+			<a href="javascript: void(0)" title="${nls.show50Items}" data-dojo-attach-event="onclick: show50ItemsPerPage"
+			aria-pressed="false" role="button">50</a>
+		</li>
+		<li class="itemsPerPageLink">
+			<a href="javascript: void(0)" title="${nls.show100Items}" data-dojo-attach-event="onclick: show100ItemsPerPage"
+			aria-pressed="false" role="button">100</a>
+		</li> ${nls.items}
+	</ul>
+	<div>
+		<div data-dojo-attach-event="catCenterPagingBottom" class=""></div>
+	</div>
+</div>
+<div class="lotusFeeds" id="lconn_communities_catalog_widgets_PlacesFeedWidget_0" widgetid="lconn_communities_catalog_widgets_PlacesFeedWidget_0">
+	<a href="javascript: void(0)" data-dojo-attach-event="onclick: viewFeed" class="lotusFeed lotusAction" target="_self">${nls.feed}</a>
+</div>

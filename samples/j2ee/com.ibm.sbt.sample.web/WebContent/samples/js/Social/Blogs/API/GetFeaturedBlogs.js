@@ -5,24 +5,18 @@ require(["sbt/connections/BlogService", "sbt/dom", "sbt/json"],
         var now = new Date();
         blog.setTitle("Blog at " + now.getTime());
         blog.setHandle("BlogHandle " + now.getTime());
-        
+        blog.setTags(['testTag1', 'testTag2']);
     	blogService.createBlog(blog).then(
-            function(blog){
-		        var promise = blogService.getFeaturedBlogs({ ps: 5 });
-		        promise.then(
-		        		function(blogs) {
-		                    dom.setText("json", json.jsonBeanStringify(blogs));
-		                },
-		                function(error) {
-		                    dom.setText("json", json.jsonBeanStringify(error));
-		                }
-		        );
+	    	function() {
+	    		return blogService.getFeaturedBlogs({ ps: 5 });
+	        }
+	    ).then(
+    		function(blogs) {
+                dom.setText("json", json.jsonBeanStringify(blogs));
             },
-            function(error){
-                dom.setText("content", "Error code:" +  error.code + ", message:" + error.message);
-            }   
-    	);
-					        
-					        
+            function(error) {
+                dom.setText("json", json.jsonBeanStringify(error));
+            }
+        );		       					        
     }
 );

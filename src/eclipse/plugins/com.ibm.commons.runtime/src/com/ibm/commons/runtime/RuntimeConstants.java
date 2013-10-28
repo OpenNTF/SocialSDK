@@ -113,20 +113,9 @@ public abstract class RuntimeConstants {
         b.append(getConstant(RuntimeConstants.SERVICE_BASEURL));
         return b;
     }
-    public StringBuilder appendBaseLibraryUrl(StringBuilder b, Context context) {
-        HttpServletRequest request = (HttpServletRequest)context.getHttpRequest();
-        UrlUtil.appendBaseUrl(b, request);
-        b.append(getConstant(RuntimeConstants.LIBRARY_BASEURL));
-        return b;
-    }
     public String getBaseProxyUrl(HttpServletRequest request) {
     	StringBuilder b = new StringBuilder();
     	appendBaseProxyUrl(b, request);
-    	return b.toString();
-    }
-    public String getBaseLibraryUrl(HttpServletRequest request) {
-    	StringBuilder b = new StringBuilder();
-    	appendBaseLibraryUrl(b, request);
     	return b.toString();
     }
     public StringBuilder appendBaseProxyUrl(StringBuilder b, HttpServletRequest request) {
@@ -134,9 +123,4 @@ public abstract class RuntimeConstants {
         b.append(getConstant(RuntimeConstants.SERVICE_BASEURL));
         return b;
     }	
-    public StringBuilder appendBaseLibraryUrl(StringBuilder b, HttpServletRequest request) {
-        UrlUtil.appendBaseUrl(b, request);
-        b.append(getConstant(RuntimeConstants.LIBRARY_BASEURL));
-        return b;
-    }
 }

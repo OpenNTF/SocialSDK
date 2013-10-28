@@ -39,8 +39,9 @@ define(["../../../declare",
         "../../../text!./templates/ul.html",
         "../../../text!./templates/span.html",
         "../../../text!./templates/img.html",
-        "../../../text!./templates/em.html"],
-        function(declare, ConnectionsGridRenderer, lang, stringUtil, i18n, nls, bookmarkBodyTemplate, calendarBodyTemplate, communityBodyTemplate, defaultBodyTemplate, defaultHeaderTemplate, defaultSummaryTemplate, profileBodyTemplate, profileHeaderTemplate, personCardTemplate, statusUpdateExtraHeaderTemplate, statusUpdateHeaderTemplate, aElement, tdElement, trElement, liElement, ulElement, spanElement, imgElement, emElement) {
+        "../../../text!./templates/em.html",
+        "../../../text!./templates/div.html"],
+        function(declare, ConnectionsGridRenderer, lang, stringUtil, i18n, nls, bookmarkBodyTemplate, calendarBodyTemplate, communityBodyTemplate, defaultBodyTemplate, defaultHeaderTemplate, defaultSummaryTemplate, profileBodyTemplate, profileHeaderTemplate, personCardTemplate, statusUpdateExtraHeaderTemplate, statusUpdateHeaderTemplate, aElement, tdElement, trElement, liElement, ulElement, spanElement, imgElement, emElement, divElement) {
 
     /**
      * @class SearchGridRenderer
@@ -317,13 +318,12 @@ define(["../../../declare",
             if(item.getValue("commentsSummary").length > 0 && this.resultType != this.resultTypes.statusUpdates){
                 var divSpan = this.buildElement(spanElement, {
                     classAttr: "lotusMeta lconnSearchHighlight",
-                    content: this._nls.comment + item.getValue("commentSummary")
+                    content: this._nls.comment + item.getValue("commentsSummary")
                 });
                 return this.buildElement(divElement, {
                     styleAttr: "clear:both;",
                     content: divSpan
                 });
-            }else{
                 return "";
             }
         },

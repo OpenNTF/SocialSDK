@@ -25,7 +25,13 @@ define({
       nextPage : "Next Page",
       pagingResults : "${start} - ${end} of ${totalCount}",
       sortBy : "Sort by:",
-      msgNoData : "Please wait..."
+      msgNoData : "Please wait...",
+      show10Items : "Show 10 items",
+      show25Items : "Show 25 items",
+      show50Items : "Show 50 items",
+      show100Items : "Show 100 items",
+      items : "items",
+      feed : "${nls.feed}"
   }
 });
 

@@ -35,7 +35,7 @@
 </head>
 
 <body>
-	<h4>Delete Reply</h4>
+	<h4>Remove Reply</h4>
 	<div id="content">
 	<%
 		try {
@@ -56,7 +56,6 @@
 		}else
 			out.println("no topic found in forum");
 		} catch (Throwable e) {
-		e.printStackTrace();
 			out.println("<pre>");
 			out.println(e.getMessage());
 			out.println("</pre>");

@@ -19,6 +19,26 @@
  */
 define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
 
+    /**
+     * XPath expressions to be used when reading a wiki or wiki page entry
+     */
+    var BaseWikiXPath = lang.mixin({
+    	uuid : "td:uuid",
+    	label : "td:label",
+    	permissions : "td:permissions",
+    	tags : "a:category[not(@scheme)]/@term",
+        modifierName : "td:modifier/a:name",
+        modifierEmail : "td:modifier/a:email",
+        modifierUserid : "td:modifier/snx:userid",
+        modifierUserState : "td:modifier/snx:userState",
+        created : "td:created",
+        modified : "td:modified",
+        member : "ca:member",
+        memberId : "ca:member/@ca:id",
+        memberType : "ca:member/@ca:type",
+        memberRole : "ca:member/@ca:role"
+    }, conn.AtomEntryXPath);
+	
     return lang.mixin(conn, {
     	
         /**
@@ -27,18 +47,34 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         WikiFeedXPath : conn.ConnectionsFeedXPath,
 
         /**
-         * XPath expressions to be used when reading a search result
+         * XPath expressions to be used when reading a wiki entry
          */
         WikiXPath : lang.mixin({
-        	wikiUuid : "a:id",
-        	sharedWith : "a:sharedWith",
-        	permissions : "td:permissions",
-        	communityUuid : "snx:communityUuid",
-        	member : "ca:member",
-        	memberId : "ca:id",
-        	memberType : "ca:type",
-        	memberRole : "ca:role"
-        }, conn.AtomEntryXPath),
+            communityUuid : "snx:communityUuid",
+            themeName : "td:themeName",
+            librarySize : "td:librarySize",
+            libraryQuota : "td:libraryQuota",
+            totalRemovedSize : "td:totalRemovedSize"
+        }, BaseWikiXPath, conn.AtomEntryXPath),
+        
+        /**
+         * XPath expressions to be used when reading a wiki page entry
+         */
+        WikiPageXPath : lang.mixin({
+            lastAccessed : "td:lastAccessed",
+            versionUuid : "td:versionUuid",
+            versionLabel : "td:versionLabel",
+            propagation : "td:propagation",
+            totalMediaSize : "td:totalMediaSize",
+            recommendations : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/recommendations']",
+            comment : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/comment']",
+            hit : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/hit']",
+            anonymous_hit : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/anonymous_hit']",
+            share : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/share']",
+            collections : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/collections']",
+            attachments : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/attachments']",
+            versions : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/versions']"            
+        }, BaseWikiXPath, conn.AtomEntryXPath),
         
 		/**
          * This returns a feed of wikis to which the authenticated user has access. 
@@ -73,17 +109,32 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
 		/**
          * This returns a feed of the pages in a given wiki. 
          */
-        WikisGet : "/{wikis}/{authType}/anonymous/api/wiki/{wiki-label}/feed",
+        WikiPages : "/{wikis}/{authType}/anonymous/api/wiki/{wikiLabel}/feed",
         
 		/**
          * Get a feed that lists all of the pages in a specific wiki that have been added or edited by the authenticated user. 
          */
-        WikisMyPages : "/{wikis}/{authType}/api/wiki/{wiki-label}/mypages",
+        WikiMyPages : "/{wikis}/{authType}/api/wiki/{wikiLabel}/mypages",
         
 		/**
          * This returns a feed that lists the pages that have been deleted from wikis and are currently stored in the trash.  
          */
-        WikisRecycleBin : "/{wikis}/{authType}/anonymous/api/wiki/{wiki-label-or-ID}/recyclebin/feed"     
+        WikiRecycleBin : "/{wikis}/{authType}/anonymous/api/wiki/{wikiLabelOrId}/recyclebin/feed",
+        
+        /**
+         * Retrieve an Atom document of a wiki.
+         */
+        WikiEntry : "/{wikis}/{authType}/api/wiki/{wikiLabel}/entry",
+        
+        /**
+         * Returns a wiki page after authenticating the request.
+         */
+        WikiPageEntry : "/{wikis}/{authType}/api/wiki/{wikiLabel}/page/{pageLabel}/entry",
+        
+        /**
+         * Post to this feed to create a wiki page.
+         */
+        WikiFeed : "/{wikis}/{authType}/api/wiki/{wikiLabel}/feed"
         
     });
 });

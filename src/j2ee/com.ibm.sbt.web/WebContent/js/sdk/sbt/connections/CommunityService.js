@@ -20,8 +20,8 @@
  * @module sbt.connections.CommunityService
  */
 define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", "./CommunityConstants", "../base/BaseService",
-         "../base/BaseEntity", "../base/XmlDataHandler", "./ForumService" ], 
-    function(declare,config,lang,stringUtil,Promise,consts,BaseService,BaseEntity,XmlDataHandler,ForumService) {
+         "../base/BaseEntity", "../base/XmlDataHandler", "./ForumService", "../pathUtil" ], 
+    function(declare,config,lang,stringUtil,Promise,consts,BaseService,BaseEntity,XmlDataHandler,ForumService,pathUtil) {
 
     var CommunityTmpl = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:app=\"http://www.w3.org/2007/app\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\"><title type=\"text\">${getTitle}</title><content type=\"html\">${getContent}</content><category term=\"community\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category>${getTags}<snx:communityType>${getCommunityType}</snx:communityType><snx:isExternal>false</snx:isExternal>${getCommunityUuid}${getCommunityTheme}</entry>";
     var CategoryTmpl = "<category term=\"${tag}\"></category>";
@@ -197,7 +197,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * Gets an author of IBM Connections community.
          * 
          * @method getAuthor
-         * @return {Member} author Author of the community
+         * @return {Object} Author of the community
          */
         getAuthor : function() {
             return this.getAsObject([ "authorUserid", "authorName", "authorEmail" ]);
@@ -207,7 +207,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * Gets a contributor of IBM Connections community.
          * 
          * @method getContributor
-         * @return {Member} contributor Contributor of the community
+         * @return {Object} Contributor of the community
          */
         getContributor : function() {
             return this.getAsObject([ "contributorUserid", "contributorName", "contributorEmail" ]);
@@ -663,7 +663,10 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @return {String} communityUuid
          */
         getCommunityUuid : function() {
-            return this.communityUuid;
+        	if (!this.communityUuid) {
+				this.communityUuid = this.service.getUrlParameter(this.getAsString("communityUrl"), "communityUuid");
+			} 
+			return this.communityUuid;
         },
         
         /**
@@ -723,7 +726,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * Gets an author of IBM Connections community invite.
          * 
          * @method getAuthor
-         * @return {Member} author Author of the community invite
+         * @return {Object} Author of the community invite
          */
         getAuthor : function() {
             if (!this._author) {
@@ -739,7 +742,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * Gets a contributor of IBM Connections community invite.
          * 
          * @method getContributor
-         * @return {Member} contributor Contributor of the community invite
+         * @return {Object} Contributor of the community invite
          */
         getContributor : function() {
             if (!this._contributor) {
@@ -881,7 +884,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * Gets an author of IBM Connections community event.
          * 
          * @method getAuthor
-         * @return {Member} author Author of the community event
+         * @return {Object} Author of the community event
          */
         getAuthor : function() {
             if (!this._author) {
@@ -1739,6 +1742,50 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             
             return this.updateEntity(consts.AtomCommunityMembers, options, callbacks, args);
         },
+        
+		/**
+		 * Updates a member in the access control list for an application, sends a replacement member entry document in Atom format to the existing ACL
+		 * node's edit web address.
+		 * @method updateMember
+		 * @param {String} activityUuid
+		 * @param {Object} memberOrJson
+		 */
+		updateMember : function(communityUuid, memberOrJson, args) {
+			var promise = this.validateField("communityUuid", communityUuid);
+			if (promise) {
+				return promise;
+			}
+			var member = this._toMember(memberOrJson);
+			promise = this._validateMember(member, true, true);
+			if (promise) {
+				return promise;
+			}
+
+			var payload = this._constructMemberPostData(member);
+			var requestArgs = {
+	                communityUuid : communityUuid
+	        };
+	        var key = member.getEmail() ? "email" : "userid";
+	        var value = member.getEmail() ? member.getEmail() : member.getUserid();
+	        requestArgs[key] = value;
+	        requestArgs = lang.mixin(requestArgs, args || {});
+
+			var options = {
+				method : "PUT",
+				headers : consts.AtomXmlHeaders,
+				query : requestArgs,
+				data : payload
+			};
+
+			var callbacks = {
+				createEntity : function(service, data, response) {
+					return response;
+				}
+			};
+
+			return this.updateEntity(consts.AtomCommunityMembers, options, callbacks);
+
+		},
 
         /**
          * Remove member of a community
@@ -1775,6 +1822,74 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             return this.deleteEntity(consts.AtomCommunityMembers, options, value);
         },
         
+        /**
+		 * Updates the Logo picture of a community
+		 * @method updateCommunityLogo
+		 * @param {Object} fileControlOrId The Id of html control or the html control
+		 * @param {String} communityUuid the Uuid of community
+		 */
+		updateCommunityLogo : function(fileControlOrId, communityUuid) {
+			var promise = this.validateField("File Control Or Id", fileControlOrId);
+			if (promise) {
+				return promise;
+			}
+			promise = this.validateHTML5FileSupport();
+			if (promise) {
+				return promise;
+			}
+			promise = this.validateField("CommunityUuid", communityUuid);
+			if (promise) {
+				return promise;
+			}
+
+			var files = null;
+			var fileControl = this.getFileControl(fileControlOrId);
+			if(!fileControl){
+				return this.createBadRequestPromise("File Control or ID is required");
+			}
+			filePath = fileControl.value;
+			files = fileControl.files;
+
+			if (files.length != 1) {
+				return this.createBadRequestPromise("Only one file needs to be provided to this API");
+			}
+
+			var file = files[0];
+			var formData = new FormData();
+			formData.append("file", file);
+			var requestArgs = {
+				"communityUuid" : communityUuid
+			};
+			var url = this.constructUrl(consts.AtomUpdateCommunityLogo, null, {
+				endpointName : this.endpoint.proxyPath,
+				fileName : encodeURIComponent(file.name)
+			});
+			if (this.endpoint.proxy) {
+                url = config.Properties.serviceUrl + url;
+            } else {
+            	return this.createBadRequestPromise("File Proxy is required to run this API");
+            }
+					
+			var headers = {
+				"Content-Type" : false,
+				"Process-Data" : false //processData = false is reaquired by jquery
+			};
+			var options = {
+				method : "PUT",
+				headers : headers,
+				query : requestArgs,
+				data : formData
+			};
+			var callbacks = {
+				createEntity : function(service, data, response) {
+					return data; // Since this API does not return any response in case of success, returning empty data
+				}
+			};
+
+			return this.updateEntity(url, options, callbacks);
+		},
+		
+       
         /*
          * Callbacks used when reading a feed that contains Community entries.
          */
@@ -2000,6 +2115,9 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                             "userid" : value
                         });
                     }
+                }
+                if(key == "getRole") {
+                	value = member.getRole();
                 }
                 return value;
             };

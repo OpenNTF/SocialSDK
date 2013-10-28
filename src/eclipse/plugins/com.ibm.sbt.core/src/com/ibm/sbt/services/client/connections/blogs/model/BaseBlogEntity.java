@@ -42,21 +42,31 @@ public class BaseBlogEntity extends BaseEntity {
 	private final String POSTID = "urn:lsid:ibm.com:blogs:entry-";
 	private final String COMMENTID = "urn:lsid:ibm.com:blogs:comment-";
 	
-	/**
-	 * Constructor
-	 *  
-	 * @param ForumService
-	 * @param ForumId
-	 */
+	 /**
+     * Constructor
+     *
+     * @param BlogService
+     * @param id
+     */
 	public BaseBlogEntity(BlogService blogService, String id) {
 		setService(blogService);
 		setAsString(BlogXPath.uid, id);
 	}
-
+	 /**
+     * Constructor
+     *
+     * @param BlogService
+     * @param DataHandler
+     */
 	public BaseBlogEntity(BaseService svc, DataHandler<?> handler) {
 		super(svc,handler);
 	}
-	
+	/**
+	* Returns the Uuid of the Blog,post or comment
+	*
+	* @method getUid
+	* @return uuid
+	*/
 	public String getUid(){
 		String id = getAsString(BlogXPath.uid);
 		if(StringUtil.startsWithIgnoreCase(id, BLOGID)){
@@ -70,50 +80,84 @@ public class BaseBlogEntity extends BaseEntity {
 		}
 		return id;
 	}
-	
+    /**
+	* Returns the published date
+	*
+	* @method getPublished
+	* @return Published date
+	*/
 	public String getPublished(){
 		return getAsString(BlogXPath.published);
 		
 	}
+	/**
+	* Gets an author of IBM Connections Blog.
+	*
+	* @method getAuthor
+	* @return Author
+	*/
 	public Author getAuthor(){
 		return new Author(super.dataHandler);
 	}
-	
+	  /**
+	* Returns the updated date
+	*
+	* @method getUpdated
+	* @return Updated date
+	*/
 	public String getUpdated(){
 		return getAsString(BlogXPath.updated);
 	}
-	
+	/**
+	* Returns the title
+	*
+	* @method getTitle
+	* @return title
+	*/
 	public String getTitle(){
 		return getAsString(BlogXPath.title);
 	}
-
+	 /**
+	* Returns the alternate url
+	*
+	* @method getAlternateUrl
+	* @return alternate url
+	*/
 	public String getAlternateUrl() throws BlogServiceException{
 		return getAsString(BlogXPath.alternateUrl);
 	}
-	
-
-	
+	/**
+	* Return the Recommendations count
+	*
+	* @method getRecomendationsCount
+	* @return {String} recommendations Count
+	*/
 	public String getRecommendationsCount() throws BlogServiceException{
 		return getAsString(BlogXPath.recommendationsCount);
 	}
-	
-	
+	/**sets the title
+    *
+    * @method setTitle()
+    *
+    * @param title
+    */
 	public void setTitle(String title) {
 		setAsString(BlogXPath.title, title);
 	}
-	
-
-	/**
-	 * @return the list of Tags
-	 */
-	
+	/**Returns the list of Tags
+    *
+    * @method getTags()
+    * @return the list of Tags
+    */
 	public List<String> getTags() {
 		return (List<String>) Arrays.asList(getDataHandler().getAsString(BlogXPath.tags).split(" "));
 	}
-	
-	/**
-	 * @sets the tags
-	 */
+	/**sets the tags
+    *
+    * @method setTags()
+    *
+    * @param List of Tags
+    */
 	public void setTags(List<String> tags) {
 		if(!tags.isEmpty()){
 			for (int i = 0; i < tags.size(); i++){
@@ -135,7 +179,7 @@ public class BaseBlogEntity extends BaseEntity {
     /*
      * Method used to extract the blog uuid for an id string.
      */
-	public String extractBlogUuid(String uid) {
+	private String extractBlogUuid(String uid) {
         if (StringUtil.isNotEmpty(uid) && uid.indexOf(BLOGID) == 0) {
             return uid.substring(BLOGID.length());
         } else {

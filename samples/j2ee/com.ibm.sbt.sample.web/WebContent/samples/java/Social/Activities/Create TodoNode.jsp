@@ -34,34 +34,38 @@
 	pageEncoding="ISO-8859-1"%>
 <html>
 <head>
-	<title>SBT JAVA Sample</title>
+	<title>Create Todo Node</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
 <body>
-	<h4>Activity Service API</h4>
+	<h4>Create Todo Node</h4>
 	<div id="content">
 	<%
 	try {		
 		ActivityService activityService = new ActivityService();
-		Activity activity = activityService.getMyActivities().get(0);
+		ActivityList activities = activityService.getMyActivities();
 		
-		ActivityNode todoNode = new ActivityNode(activityService, activity.getActivityId());
-		todoNode.setEntryType(ActivityNodeType.ToDo.getActivityNodeType());
-		todoNode.setContent("Todo Node Content " + System.currentTimeMillis());
-		todoNode.setTitle("todoNode from JSP " + System.currentTimeMillis());
-		List<String> tagList = new ArrayList<String>();
-		tagList.add("todoNodeTag");
-		todoNode.setTags(tagList);
-		todoNode.setPosition(1000);
-		todoNode.setDueDate(new Date()); 
-		
-		todoNode.setAssignedTo("Frank Adams", "0EE5A7FA-3434-9A59-4825-7A7000278DAA");
-		//todoNode.setIcon();
-
-		todoNode.setInReplyTo("urn:lsid:ibm.com:oa:2b87fab8-4526-4636-9ec0-39aff6902ed5", "https://qs.renovations.com:444/activities/service/atom2/forms/activitynode?activityNodeUuid=2b87fab8-4526-4636-9ec0-39aff6902ed5");		
-		todoNode = activityService.createActivityNode(todoNode);
-		out.println("Todo Node Created : " + todoNode.getId());
+		if(activities != null && !activities.isEmpty()) {	
+			ActivityNode todoNode = new ActivityNode(activityService, activities.get(0).getActivityId());
+			todoNode.setEntryType(ActivityNodeType.ToDo.getActivityNodeType());
+			todoNode.setContent("Todo Node Content " + System.currentTimeMillis());
+			todoNode.setTitle("todoNode from JSP " + System.currentTimeMillis());
+			List<String> tagList = new ArrayList<String>();
+			tagList.add("todoNodeTag");
+			todoNode.setTags(tagList);
+			todoNode.setPosition(1000);
+			todoNode.setDueDate(new Date()); 
+			
+			String assignedToName = Context.get().getProperty("sample.displayName1");
+			String assignedToId = Context.get().getProperty("sample.userId1");
+			todoNode.setAssignedTo(assignedToName, assignedToId);
+	
+			todoNode = activityService.createActivityNode(todoNode);
+			out.println("Todo Node Created : " + todoNode.getId());
+		}  else {
+			out.println("No Activites Found");
+		}
 	} catch (Throwable e) {
 		out.println("<pre>");
 		out.println(e.getMessage());

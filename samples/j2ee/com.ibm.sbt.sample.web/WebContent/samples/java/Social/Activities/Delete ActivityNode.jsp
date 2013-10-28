@@ -32,25 +32,29 @@
 	pageEncoding="ISO-8859-1"%>
 <html>
 <head>
-	<title>SBT JAVA Sample</title>
+	<title>Delete Activity Node</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
 <body>
-	<h4>Activity Service API</h4>
+	<h4>Delete Activity Node</h4>
 	<div id="content">
 	<%
 	try {		
 		ActivityService activityService = new ActivityService();
-		Activity activity = activityService.getMyActivities().get(0);
+		ActivityList activities = activityService.getMyActivities();
 		
-		ActivityNode actNode = new ActivityNode(activityService, activity.getActivityId());
-		actNode.setEntryType(ActivityNodeType.Chat.getActivityNodeType());
-		actNode.setTitle("ActivityNode for Deletion" + System.currentTimeMillis());
-		actNode.setContent("ActivityNodeContent");
-		actNode = activityService.createActivityNode(actNode);
-		activityService.deleteActivityNode(actNode.getActivityId());
-		out.println("Activity Node Created and Deleted : " + actNode.getTitle());
+		if(activities != null && !activities.isEmpty()) {
+			ActivityNode actNode = new ActivityNode(activityService, activities.get(0).getActivityId());
+			actNode.setEntryType(ActivityNodeType.Chat.getActivityNodeType());
+			actNode.setTitle("ActivityNode for Deletion" + System.currentTimeMillis());
+			actNode.setContent("ActivityNodeContent");
+			actNode = activityService.createActivityNode(actNode);
+			activityService.deleteActivityNode(actNode.getActivityId());
+			out.println("Activity Node Created and Deleted : " + actNode.getTitle());
+		}  else {
+			out.println("No Activites Found");
+		}
 	} catch (Throwable e) {
 		out.println("<pre>");
 		out.println(e.getMessage());

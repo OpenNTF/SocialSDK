@@ -34,33 +34,37 @@
 	pageEncoding="ISO-8859-1"%>
 <html>
 <head>
-	<title>SBT JAVA Sample</title>
+	<title>Create Reply Node</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
 <body>
-	<h4>Activity Service API</h4>
+	<h4>Create Reply Node</h4>
 	<div id="content">
 	<%
 	try {		
 		ActivityService activityService = new ActivityService();
-		Activity activity = activityService.getMyActivities().get(0);
+		ActivityList activities = activityService.getMyActivities();
 		
-		ActivityNode chatNode = new ActivityNode(activityService, activity.getActivityId());
-		chatNode.setEntryType(ActivityNodeType.Chat.getActivityNodeType());
-		chatNode.setTitle("Chatting .." + System.currentTimeMillis());
-		chatNode.setContent("Jsp Content");
-		chatNode = activityService.createActivityNode(chatNode);
-		
-		ActivityNode replyNode = new ActivityNode(activityService, activity.getActivityId());
-		replyNode.setEntryType(ActivityNodeType.Reply.getActivityNodeType());
-		replyNode.setTitle("reply to chat.." + System.currentTimeMillis());
-		
-		replyNode.setContent("Hi! Jsp" + System.currentTimeMillis());
-		replyNode.setInReplyTo(chatNode.getId(), chatNode.getNodeUrl());	
-
-		replyNode = activityService.createActivityNode(replyNode);
-		out.println("Reply Node Created : " + replyNode.getId());
+		if(activities != null && !activities.isEmpty()) {
+			ActivityNode chatNode = new ActivityNode(activityService, activities.get(0).getActivityId());
+			chatNode.setEntryType(ActivityNodeType.Chat.getActivityNodeType());
+			chatNode.setTitle("Chatting .." + System.currentTimeMillis());
+			chatNode.setContent("Jsp Content");
+			chatNode = activityService.createActivityNode(chatNode);
+			
+			ActivityNode replyNode = new ActivityNode(activityService, activities.get(0).getActivityId());
+			replyNode.setEntryType(ActivityNodeType.Reply.getActivityNodeType());
+			replyNode.setTitle("reply to chat.." + System.currentTimeMillis());
+			
+			replyNode.setContent("Hi! Jsp" + System.currentTimeMillis());
+			replyNode.setInReplyTo(chatNode.getId(), chatNode.getNodeUrl());	
+	
+			replyNode = activityService.createActivityNode(replyNode);
+			out.println("Reply Node Created : " + replyNode.getId());
+		} else {
+			out.println("No Activites Found");
+		}
 	} catch (Throwable e) {
 		out.println("<pre>");
 		out.println(e.getMessage());

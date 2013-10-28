@@ -33,28 +33,32 @@
 	pageEncoding="ISO-8859-1"%>
 <html>
 <head>
-	<title>SBT JAVA Sample</title>
+	<title>Create Email Node</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
 <body>
-	<h4>Activity Service API</h4>
+	<h4>Create Email Node</h4>
 	<div id="content">
 	<%
 	try {		
 		ActivityService activityService = new ActivityService();
-		Activity activity = activityService.getMyActivities().get(0);
+		ActivityList activities = activityService.getMyActivities();
 		
-		ActivityNode emailNode = new ActivityNode(activityService, activity.getActivityId());
-		emailNode.setEntryType(ActivityNodeType.Email.getActivityNodeType());
-		emailNode.setTitle("EmailNode from JSP " + System.currentTimeMillis());
-		emailNode.setContent("TEXT Content");
-		emailNode.setContentType(ActivityNodeContentType.Text.getActivityNodeContentType());
-		List<String> tagList = new ArrayList<String>();
-		tagList.add("emailTag");
-		emailNode.setTags(tagList);
-		emailNode = activityService.createActivityNode(emailNode);
-		out.println("Email Node Created : " + emailNode.getId());
+		if(activities != null && !activities.isEmpty()) {
+			ActivityNode emailNode = new ActivityNode(activityService, activities.get(0).getActivityId());
+			emailNode.setEntryType(ActivityNodeType.Email.getActivityNodeType());
+			emailNode.setTitle("EmailNode from JSP " + System.currentTimeMillis());
+			emailNode.setContent("TEXT Content");
+			emailNode.setContentType(ActivityNodeContentType.Text.getActivityNodeContentType());
+			List<String> tagList = new ArrayList<String>();
+			tagList.add("emailTag");
+			emailNode.setTags(tagList);
+			emailNode = activityService.createActivityNode(emailNode);
+			out.println("Email Node Created : " + emailNode.getId());
+		} else {
+			out.println("No Activites Found");
+		}
 	} catch (Throwable e) {
 		out.println("<pre>");
 		out.println(e.getMessage());

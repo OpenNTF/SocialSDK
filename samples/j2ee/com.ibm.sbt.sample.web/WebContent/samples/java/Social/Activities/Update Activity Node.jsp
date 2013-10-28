@@ -37,55 +37,58 @@
 	pageEncoding="ISO-8859-1"%>
 <html>
 <head>
-	<title>SBT JAVA Sample</title>
+	<title>Update Activity Node</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
 <body>
-	<h4>Activity Service API</h4>
+	<h4>Update Activity Node</h4>
 	<div id="content">
 	<%
 	try {		
 		ActivityService activityService = new ActivityService();
 		ActivityList activities = activityService.getMyActivities();
 		
-		Activity activity = activities.get(0);
-		
-		ActivityNode actNode = new ActivityNode(activityService, activity.getActivityId());
-		actNode.setEntryType(ActivityNodeType.Entry.getActivityNodeType());
-		actNode.setTitle("ActivityNode with Fields" + System.currentTimeMillis());
-		actNode.setContent("ActivityNodeContent");
-		actNode.setContentType(ActivityNodeContentType.Html.getActivityNodeContentType());
-		Field textField1 = new TextField("Summary JSP 1");
-		textField1.setFieldName("MyTextField1");
-		Field textField2 = new TextField("Summary JSP 2");
-		textField2.setFieldName("MyTextField2");
-		List<Field> fieldList = new ArrayList<Field>();
-		fieldList.add(textField1);
-		fieldList.add(textField2);
-		actNode.setFields(fieldList);
-		List<String> tagList = new ArrayList<String>();
-		tagList.add("ABCTag");
-		actNode.setTags(tagList);
-		actNode = activityService.createActivityNode(actNode);
-		out.println("<br>Activity Node Before Updation : " + actNode.getTitle() + " , Type : " + actNode.getEntryType());
-
-		// updating now
-		actNode.setTitle(actNode.getTitle() +"Updated");
-		FieldList list = actNode.getTextFields();
-		if(list != null && !list.isEmpty()) {
-			list.get(0).setFieldName(list.get(0).getName()+"Updated");
+		if(activities != null && !activities.isEmpty()) {
+			Activity activity = activities.get(0);
+			
+			ActivityNode actNode = new ActivityNode(activityService, activity.getActivityId());
+			actNode.setEntryType(ActivityNodeType.Entry.getActivityNodeType());
+			actNode.setTitle("ActivityNode with Fields" + System.currentTimeMillis());
+			actNode.setContent("ActivityNodeContent");
+			actNode.setContentType(ActivityNodeContentType.Html.getActivityNodeContentType());
+			Field textField1 = new TextField("Summary JSP 1");
+			textField1.setFieldName("MyTextField1");
+			Field textField2 = new TextField("Summary JSP 2");
+			textField2.setFieldName("MyTextField2");
+			List<Field> fieldList = new ArrayList<Field>();
+			fieldList.add(textField1);
+			fieldList.add(textField2);
+			actNode.setFields(fieldList);
+			List<String> tagList = new ArrayList<String>();
+			tagList.add("ABCTag");
+			actNode.setTags(tagList);
+			actNode = activityService.createActivityNode(actNode);
+			out.println("<br>Activity Node Before Updation : " + actNode.getTitle() + " , Type : " + actNode.getEntryType());
+	
+			// updating now
+			actNode.setTitle(actNode.getTitle() +"Updated");
+			FieldList list = actNode.getTextFields();
+			if(list != null && !list.isEmpty()) {
+				list.get(0).setFieldName(list.get(0).getName()+"Updated");
+			}
+			Field dateField = new DateField(new Date());
+			dateField.setFieldName("MyDateFieldUP");
+			List<Field> updatedList = new ArrayList<Field>();
+			updatedList.add(dateField);
+			updatedList.add(list.get(0));
+			actNode.setFields(updatedList);
+			activityService.updateActivityNode(actNode);
+			actNode = activityService.getActivityNode(actNode.getActivityId());
+			out.println("<br>Activity Node After Updation : " + actNode.getTitle() + " , Type : " + actNode.getEntryType());
+		}  else {
+			out.println("No Activites Found");
 		}
-		Field dateField = new DateField(new Date());
-		dateField.setFieldName("MyDateFieldUP");
-		List<Field> updatedList = new ArrayList<Field>();
-		updatedList.add(dateField);
-		updatedList.add(list.get(0));
-		actNode.setFields(updatedList);
-		activityService.updateActivityNode(actNode);
-		actNode = activityService.getActivityNode(actNode.getActivityId());
-		out.println("<br>Activity Node After Updation : " + actNode.getTitle() + " , Type : " + actNode.getEntryType());
-		
 	} catch (Throwable e) {
 		out.println("<pre>");
 		out.println(e.getMessage());

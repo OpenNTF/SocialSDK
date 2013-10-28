@@ -30,34 +30,36 @@
 	pageEncoding="ISO-8859-1"%>
 <html>
 <head>
-	<title>SBT JAVA Sample</title>
+	<title>Update Activity</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
 <body>
-	<h4>Activity Service API</h4>
+	<h4>Update Activity</h4>
 	<div id="content">
 	<%
 	try {		
 		ActivityService activityService = new ActivityService();
 		ActivityList activities = activityService.getMyActivities();
 		
-		Activity activity = activities.get(0);
-		
-		out.println("Activity before updation : " + activity.getTitle());
-		
-		activity.setTitle("UpdatedBySample" + System.currentTimeMillis());
-		activity.setGoal("GoalOfActivity updated - " + System.currentTimeMillis());
-		
-		List<String> tagList = new ArrayList<String>();
-		tagList.add("tag123");
-		tagList.add("tagabc");
-		activity.setTags(tagList);
-		activity.setDueDate(new Date());
-		
-		activityService.updateActivity(activity);
-		out.println("Activity after updation : " + activityService.getActivity(activity.getActivityId()).getTitle() );
-		
+		if(activities != null && !activities.isEmpty()) {
+			Activity activity = activities.get(0);
+
+			out.println("Activity before updation : " + activity.getTitle());
+			activity.setTitle("UpdatedBySample" + System.currentTimeMillis());
+			activity.setGoal("GoalOfActivity updated - " + System.currentTimeMillis());
+			
+			List<String> tagList = new ArrayList<String>();
+			tagList.add("tag123");
+			tagList.add("tagabc");
+			activity.setTags(tagList);
+			activity.setDueDate(new Date());
+			
+			activityService.updateActivity(activity);
+			out.println("Activity after updation : " + activityService.getActivity(activity.getActivityId()).getTitle() );
+		}  else {
+			out.println("No Activites Found");
+		}
 	} catch (Throwable e) {
 		out.println("<pre>");
 		out.println(e.getMessage());

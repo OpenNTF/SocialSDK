@@ -32,29 +32,33 @@
 	pageEncoding="ISO-8859-1"%>
 <html>
 <head>
-	<title>SBT JAVA Sample</title>
+	<title>Change Activity Node Type</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
 <body>
-	<h4>Activity Service API</h4>
+	<h4>Change Activity Node Type</h4>
 	<div id="content">
 	<%
 	try {		
 		ActivityService activityService = new ActivityService();
-		Activity activity = activityService.getMyActivities().get(0);
+		ActivityList activities = activityService.getMyActivities();
 		
-		ActivityNode node = new ActivityNode(activityService, activity.getActivityId());
-		node.setEntryType(ActivityNodeType.Entry.getActivityNodeType());
-		node.setTitle("Entry Created." + System.currentTimeMillis());
-		List<String> tagList = new ArrayList<String>();
-		tagList.add("tag2");
-		node.setTags(tagList);
-		node.setContent("Entry Created.");
-		node = activityService.createActivityNode(node);
-		
-		activityService.changeEntryType(node.getActivityId(), ActivityNodeType.Chat.getActivityNodeType());
-		out.println("Entry Type changed to Chat of : " + node.getTitle());
+		if(activities != null && !activities.isEmpty()) {
+			ActivityNode node = new ActivityNode(activityService, activities.get(0).getActivityId());
+			node.setEntryType(ActivityNodeType.Entry.getActivityNodeType());
+			node.setTitle("Entry Created." + System.currentTimeMillis());
+			List<String> tagList = new ArrayList<String>();
+			tagList.add("tag2");
+			node.setTags(tagList);
+			node.setContent("Entry Created.");
+			node = activityService.createActivityNode(node);
+			
+			activityService.changeEntryType(node.getActivityId(), ActivityNodeType.Chat.getActivityNodeType());
+			out.println("Entry Type changed to Chat of : " + node.getTitle());
+		} else {
+			out.println("No Activites Found");
+		}
 	} catch (Throwable e) {
 		out.println("<pre>");
 		out.println(e.getMessage());

@@ -46,21 +46,42 @@ public class ActivityNode extends Activity {
 	
 	public ActivityNode() {
 	}
-
+	
+	/**
+	 * Constructor 
+	 * @param service
+	 * @param activityId
+	 */
 	public ActivityNode(ActivityService service, String activityId) {
 		super.setService(service);
 		super.setId(activityId);
 	}
 	
+	/**
+	 * Constructor 
+	 * @param service
+	 * @param handler
+	 */
 	public ActivityNode(ActivityService service, XmlDataHandler handler) {
 		super(service, handler);
 	}
 	
+	/**
+	 * Method to specify the Position of the section within the activity.
+	 * @see http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+
+	 * 		Documentation#action=openDocument&res_title=Section_content_ic40a&content=pdcontent
+	 * @param position
+	 */
 	public void setPosition(int position){
 		String positionStr = String.valueOf(position);
 		setAsString(ActivityXPath.Position, positionStr);
 	}
 	
+	/**
+	 * Method to set the "assigned to" parameter, to assign the entry to a person.
+	 * @param assignedToName
+	 * @param assignedToId
+	 */
 	public void setAssignedTo(String assignedToName, String assignedToId){
 		if(StringUtil.isNotEmpty(assignedToId)) {
 			setAsString(ActivityXPath.assignedToId, assignedToId); 
@@ -70,6 +91,11 @@ public class ActivityNode extends Activity {
 		}
 	}
 	
+	/**
+	 * Method to set the "in reply to" parameter, to set the parent entry.
+	 * @param sectionId
+	 * @param sectionUrl
+	 */
 	public void setInReplyTo(String sectionId, String sectionUrl){
 		if(StringUtil.isNotEmpty(sectionId)) {
 			setAsString(ActivityXPath.inReplyToId, sectionId); 
@@ -80,10 +106,19 @@ public class ActivityNode extends Activity {
 		setAsString(ActivityXPath.inReplyToActivityId, getId());
 	}
 	
+	/**
+	 * Method to set the Icon
+	 * @param icon
+	 */
 	public void setIcon(String icon) {
 		setAsString(ActivityXPath.Icon, icon);
 	}
 	
+	/**
+	 * Method to set Fields. This method takes a list of Fields. 
+	 * {@link Field}
+	 * @param fieldList
+	 */
 	public void setFields(List<Field> fieldList){
 		// before setting new fields, we need to count how many fields exist in the fieldmap.
 		// then we need to add new fields, instead of overwriting them.
@@ -95,6 +130,10 @@ public class ActivityNode extends Activity {
 		}
 	}
 	
+	/**
+	 * @param flds
+	 * @return
+	 */
 	private int noOfFields(Map<String, Object> flds) {
 		int count = 0; 
 		for(Map.Entry<String, Object> xmlEntry : flds.entrySet()){
@@ -105,28 +144,55 @@ public class ActivityNode extends Activity {
 		return count;
 	}
 
+	/**
+	 * Method to set Fields. This method takes a single Field. 
+	 * {@link Field}
+	 * @param singleField
+	 */
 	public void setField(Field singleField){ 
 		List<Field> list = new ArrayList<Field>();
 		list.add(singleField);
 		setFields(list);
 	}
 	
+	/**
+	 * Method returns the Name of the person to whom the Entry is assigned.
+	 * @return String 
+	 * @throws ActivityServiceException
+	 */
 	public String getAssignedToName() throws ActivityServiceException{
 		return getAsString(ActivityXPath.assignedToName);
 	}
 	
+	/**
+	 * Method returns the Id of the person to whom the Entry is assigned.
+	 * @return String
+	 * @throws ActivityServiceException
+	 */
 	public String getAssignedToId() throws ActivityServiceException{
 		return getAsString(ActivityXPath.assignedToId);
 	}
 	
+	/**
+	 * Method returns the Id of the parent entry.
+	 * @return String
+	 */
 	public String getInReplyToId(){
 		return getAsString(ActivityXPath.inReplyToId);
 	}
 	
+	/**
+	 * Method returns the Url of the parent entry.
+	 * @return String 
+	 */
 	public String getInReplyToUrl(){
 		return getAsString(ActivityXPath.inReplyToUrl);
 	}
 	
+	/**
+	 * Method returns the activity node's url.
+	 * @return
+	 */
 	public String getNodeUrl() {
 		return getAsString(ActivityXPath.nodeUrl);
 	}
@@ -135,30 +201,50 @@ public class ActivityNode extends Activity {
 		return fieldElements;
 	}
 	
+	/**
+	 * Method returns a List of Text Fields.
+	 * @return FieldList
+	 */
 	public FieldList getTextFields(){
 		TextFieldFeedHandler txtHandler = new TextFieldFeedHandler(getService());
 		Response response = new Response(getDataHandler().getData());
 		return txtHandler.createEntityList(response);
 	}
 	
+	/**
+	 * Method returns a List of Date Fields.
+	 * @return FieldList
+	 */
 	public FieldList getDateFields(){
 		DateFieldFeedHandler dateHandler = new DateFieldFeedHandler(getService());
 		Response response = new Response(getDataHandler().getData());
 		return dateHandler.createEntityList(response);
 	}
 	
+	/**
+	 * Method returns a List of Person Fields.
+	 * @return FieldList
+	 */
 	public FieldList getPersonFields(){
 		PersonFieldFeedHandler personHandler = new PersonFieldFeedHandler(getService());
 		Response response = new Response(getDataHandler().getData());
 		return personHandler.createEntityList(response);
 	}
 	
+	/**
+	 * Method returns a List of Bookmark Fields.
+	 * @return FieldList
+	 */
 	public FieldList getBookmarkFields(){
 		BookmarkFieldFeedHandler bookmarkHandler = new BookmarkFieldFeedHandler(getService());
 		Response response = new Response(getDataHandler().getData());
 		return bookmarkHandler.createEntityList(response);
 	}
 	
+	/**
+	 * Method returns a List of File Fields.
+	 * @return FieldList
+	 */
 	private FieldList getFileFields(){
 		FileFieldFeedHandler fileHandler = new FileFieldFeedHandler(getService());
 		Response response = new Response(getDataHandler().getData());
@@ -192,6 +278,11 @@ public class ActivityNode extends Activity {
 		return convertToXML(activityTransformer.transform(fields));
 	} 
 	
+	/**
+	 * @param restoreNode
+	 * @return ActivityNode
+	 * @throws ActivityServiceException
+	 */
 	public ActivityNode copyTo(ActivityNode restoreNode)
 			throws ActivityServiceException {
 		super.copyTo(restoreNode);
@@ -224,6 +315,9 @@ public class ActivityNode extends Activity {
 		return restoreNode;
 	}
 
+	/**
+	 * @param updatedFields
+	 */
 	public void addToFieldMap(Map<String, Object> updatedFields) {
 		Map<String, Object> newUpdatedFields = new HashMap<String, Object>();
 		for(Map.Entry<String, Object> updatedEntry : updatedFields.entrySet()){

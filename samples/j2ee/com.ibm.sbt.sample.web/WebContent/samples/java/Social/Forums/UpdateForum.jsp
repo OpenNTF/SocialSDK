@@ -43,11 +43,10 @@
 			Forum forum = (Forum)forums.get(0);
 			long randomNumber = System.currentTimeMillis();
 			forum.setTitle("Updated ForumTitle" + randomNumber);
-		
 			List<String> tags = new ArrayList<String>();
 			tags.add("tag1_"+randomNumber);
 			tags.add("tag2_"+randomNumber);
-		//	forum.setTags(tags);
+			forum.setTags(tags);
 			forum = forum.save(); 
 			out.println("Forum updated with title : " + forum.getTitle());
 			tags = forum.getTags();
@@ -61,7 +60,6 @@
 		}
 		
 	} catch (Exception e) {
-		e.printStackTrace();
 		out.println("<pre>");
 		out.println(e.getMessage());
 		out.println("</pre>");

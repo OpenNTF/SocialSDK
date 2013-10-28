@@ -29,12 +29,12 @@
 	pageEncoding="ISO-8859-1"%>
 <html>
 <head>
-	<title>SBT JAVA Sample</title>
+	<title>Get Activity Nodes in Trash</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
 <body>
-	<h4>Activity Service API</h4>
+	<h4>Get Activity Nodes in Trash</h4>
 	<div id="content">
 	<%
 	try {		
@@ -42,11 +42,15 @@
 		ActivityList activities = activityService.getMyActivities();
 		if(activities != null && ! activities.isEmpty()) {
 			ActivityNodeList listNodes = activityService.getActivityNodesInTrash(activities.get(0).getActivityId()); 
-			for (ActivityNode activityNode : listNodes) {
-				out.println(activityNode.getTitle());
+			if(listNodes != null && ! listNodes.isEmpty()) {
+				for (ActivityNode activityNode : listNodes) {
+					out.println(activityNode.getTitle());
+				}
+			} else {
+				out.println("No Activity Nodes Found");
 			}
 		} else {
-			out.println("No Results");
+			out.println("No Activities Found");
 		}
 	} catch (Throwable e) {
 		out.println("<pre>");

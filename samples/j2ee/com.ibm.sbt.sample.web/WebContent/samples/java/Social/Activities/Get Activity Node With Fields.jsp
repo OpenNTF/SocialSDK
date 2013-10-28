@@ -35,41 +35,45 @@
 	pageEncoding="ISO-8859-1"%>
 <html>
 <head>
-	<title>SBT JAVA Sample</title>
+	<title>Get Activity Nodes with Fields</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
 <body>
-	<h4>Activity Service API</h4>
+	<h4>Get Activity Nodes with Fields</h4>
 	<div id="content">
 	<%
 	try {		
 		ActivityService activityService = new ActivityService();
-		Activity activity = activityService.getMyActivities().get(0);
+		ActivityList activities = activityService.getMyActivities();
 		
-		ActivityNode actNode = new ActivityNode(activityService, activity.getActivityId());
-		actNode.setEntryType(ActivityNodeType.Section.getActivityNodeType());
-		actNode.setTitle("ActivityNode with Fields" + System.currentTimeMillis());
-		actNode.setContent("ActivityNodeContent");
-		
-		Field textField1 = new TextField("Summary JSP 1");
-		textField1.setFieldName("MyTextField1");
-		Field textField2 = new TextField("Summary JSP 2");
-		textField2.setFieldName("MyTextField2");
-		
-		List<Field> fieldList = new ArrayList<Field>();
-		fieldList.add(textField1);
-		fieldList.add(textField2);
-		actNode.setFields(fieldList);
-		
-		actNode = activityService.createActivityNode(actNode);
-		
-		actNode = activityService.getActivityNode(actNode.getActivityId());
-		out.println("Activity Node Fetched : " + actNode.getTitle() + " , Type : " + actNode.getEntryType());
-		FieldList list = actNode.getTextFields();
-		if(list != null && !list.isEmpty()) {
-			out.println("<br>Text field " + list.get(0).getFid() + " , " + list.get(0).getName());
-			out.println(" summary " +((TextField)list.get(0)).getTextSummary());
+		if(activities != null && !activities.isEmpty()) {
+			ActivityNode actNode = new ActivityNode(activityService, activities.get(0).getActivityId());
+			actNode.setEntryType(ActivityNodeType.Section.getActivityNodeType());
+			actNode.setTitle("ActivityNode with Fields" + System.currentTimeMillis());
+			actNode.setContent("ActivityNodeContent");
+			
+			Field textField1 = new TextField("Summary JSP 1");
+			textField1.setFieldName("MyTextField1");
+			Field textField2 = new TextField("Summary JSP 2");
+			textField2.setFieldName("MyTextField2");
+			
+			List<Field> fieldList = new ArrayList<Field>();
+			fieldList.add(textField1);
+			fieldList.add(textField2);
+			actNode.setFields(fieldList);
+			
+			actNode = activityService.createActivityNode(actNode);
+			
+			actNode = activityService.getActivityNode(actNode.getActivityId());
+			out.println("Activity Node Fetched : " + actNode.getTitle() + " , Type : " + actNode.getEntryType());
+			FieldList list = actNode.getTextFields();
+			if(list != null && !list.isEmpty()) {
+				out.println("<br>Text field " + list.get(0).getFid() + " , " + list.get(0).getName());
+				out.println(" summary " +((TextField)list.get(0)).getTextSummary());
+			}  else {
+				out.println("No Activites Found");
+			}
 		}
 	} catch (Throwable e) {
 		out.println("<pre>");

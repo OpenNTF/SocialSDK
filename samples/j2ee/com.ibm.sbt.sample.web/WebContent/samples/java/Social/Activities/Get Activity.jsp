@@ -27,18 +27,18 @@
 	pageEncoding="ISO-8859-1"%>
 <html>
 <head>
-	<title>SBT JAVA Sample</title>
+	<title>Get Activity</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
 <body>
-	<h4>Activity Service API</h4>
+	<h4>Get Activity</h4>
 	<div id="content">
 	<%
 	try {		
 		ActivityService activityService = new ActivityService();
 		ActivityList activities = activityService.getMyActivities();
-		if(null != activities) {
+		if(null != activities && !activities.isEmpty()) {
 			Activity activity = activityService.getActivity(activities.get(0).getActivityId());
 			out.println(activity.getTitle());
 		} else {

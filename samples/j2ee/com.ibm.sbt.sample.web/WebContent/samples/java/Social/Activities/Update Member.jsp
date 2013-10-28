@@ -33,12 +33,12 @@
 	pageEncoding="ISO-8859-1"%>
 <html>
 <head>
-	<title>SBT JAVA Sample</title>
+	<title>Update Member</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
 <body>
-	<h4>Activity Service API</h4>
+	<h4>Update Member</h4>
 	<div id="content">
 	<%
 	try {		
@@ -56,19 +56,21 @@
 						break;
 					}
 				}
-			if(memberToBeUpdated != null) {
-				if(memberToBeUpdated.getRole() == "member") {
-					memberToBeUpdated.setRole("author");
-				} else { 
-					memberToBeUpdated.setRole("member"); 
+				if(memberToBeUpdated != null) {
+					if(memberToBeUpdated.getRole() == "member") {
+						memberToBeUpdated.setRole("author");
+					} else { 
+						memberToBeUpdated.setRole("member"); 
+					}
+					activityService.updateMember(activity.getActivityId(), memberToBeUpdated);
+					out.println("Member updated : " + memberToBeUpdated.getName());
+				} else {
+					out.println("No members other than owner. Member cant be updated");
 				}
-				activityService.updateMember(activity.getActivityId(), memberToBeUpdated);
-				out.println("Member updated : " + memberToBeUpdated.getName());
-			} else {
-				out.println("No members other than owner. Member cant be updated");
-			}
-		} 
-	}	
+			} 
+		} else {
+			out.println("No Activities Found");
+		}
 	} catch (Throwable e) {
 		out.println("<pre>");
 		out.println(e.getMessage());

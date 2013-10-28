@@ -17,7 +17,7 @@
 /**
  * 
  */
-define([ "../../_bridge/declare", "dojo/_base/lang", "dojo/string", "dojo/dom-construct", "dijit/_WidgetBase" ,'dojo/dom-class'], 
+define([ "../../_bridge/declare", "dojo/_base/lang", "dojo/string", "dojo/dom-construct", "dijit/_WidgetBase", "dojo/dom-class"], 
          function(declare, lang, string, domConstruct, _WidgetBase, domClass) {
 
     /*

@@ -371,6 +371,16 @@ define(
 				getLibraryId : function() {
 					return this.getAsString("libraryId");
 				},
+				
+				/**
+				 * Sets the library Id
+				 * 
+				 * @method setLibraryId
+				 * @param libaryId
+				 */
+				setLibraryId : function(libraryId) {
+					return this.setAsString("libraryId", libraryId);
+				},
 				/**
 				 * Returns the library Type
 				 * 
@@ -620,6 +630,12 @@ define(
 					if (promise) {
 						return promise;
 					}
+					if(isPublic) {
+						promise = this.service.validateField("libraryId", this.getLibraryId());
+						if (promise) {
+							return promise;
+						}
+					}
 
 					var self = this;
 					var callbacks = {
@@ -641,14 +657,18 @@ define(
 						query : requestArgs
 					};
 
-					if (!url) {
-						url = consts.AtomFileInstance;
+					if (!url) {						
 						if (isPublic) {
-							url = consts.AtomFileInstancePublic;
+							url = this.service.constructUrl(consts.AtomFileInstancePublic, null, {
+								"documentId" : fileUuid,
+								"libraryId" : this.getLibraryId()
+							});
 						}
-						url = this.service.constructUrl(url, null, {
-							"documentId" : fileUuid
-						});
+						else {
+							url = this.service.constructUrl(consts.AtomFileInstance, null, {
+								"documentId" : fileUuid							
+							});
+						}
 					}
 					return this.service.getEntity(url, options, fileUuid, callbacks);
 				},

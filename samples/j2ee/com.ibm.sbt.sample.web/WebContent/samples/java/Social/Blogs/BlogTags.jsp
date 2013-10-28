@@ -40,7 +40,6 @@
 			BlogService svc = new BlogService();
 			Blog blog = (Blog)svc.getBlogs().get(0);
 			String blogHandle = blog.getHandle();
-			
 			TagList tags = svc.getBlogTags(blogHandle);
 			if (tags.size() <= 0) {
 				out.println("No tags to be displayed");
@@ -48,8 +47,7 @@
 			for (Tag tag : tags) {
 				out.println("<b>Tag : </b> " + tag.getTerm());
 				out.println("<b>Tag Frequency: </b> " + tag.getFrequency());
-				out.println("<b>Tag Visibility :</b> "
-						+ tag.getVisibility());
+				out.println("<b>Tag Visibility :</b> "+ tag.getVisibility());
 				out.println("<b>Tag Intensity :</b> " + tag.getIntensity());
 				out.println("<br>");
 			}

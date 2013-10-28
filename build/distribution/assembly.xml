@@ -141,6 +141,7 @@
         <include>**/*.*</include>
       </includes>
     </fileSet>
+    <!-- 
     <fileSet>
       <directory>../../build/js/target/report</directory>
       <outputDirectory>sbtsdk/reports</outputDirectory>
@@ -148,6 +149,7 @@
         <include>*.xml</include>
       </includes>
     </fileSet>
+    -->
     <fileSet>
       <directory>${build.target}/doc</directory>
       <outputDirectory>sbtsdk</outputDirectory>

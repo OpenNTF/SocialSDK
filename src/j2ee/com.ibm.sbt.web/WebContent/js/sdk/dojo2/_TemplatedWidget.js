@@ -28,6 +28,10 @@ define([ "../_bridge/declare",
         
         _blankGif: dijit._WidgetBase.prototype._blankGif,
 
+        _place: function(node, refNode, pos) {
+        	domConstruct.place(node, refNode, pos);
+        },
+        
         _stopEvent: function(event) {
             dojo.stopEvent(event);
         },

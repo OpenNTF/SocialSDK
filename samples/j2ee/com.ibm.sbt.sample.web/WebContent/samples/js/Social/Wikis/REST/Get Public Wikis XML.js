@@ -5,7 +5,8 @@ require([ "sbt/config","sbt/dom" ], function(config,dom) {
     
     var options = { 
         method : "GET", 
-        handleAs : "text"
+        handleAs : "text",
+        query : { includeTags:true, acls:true }
     };
     
     endpoint.request(url, options).then(

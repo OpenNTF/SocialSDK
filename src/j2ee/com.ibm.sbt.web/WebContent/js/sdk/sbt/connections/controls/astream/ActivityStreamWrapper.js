@@ -13,10 +13,10 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-define(["../../../declare", "../../../connections/controls/WidgetWrapper", "../../../text!../../../connections/controls/astream/templates/ActivityStreamContent.html"], function(declare, WidgetWrapper, defaultTemplate) {
+define(["../../../declare", "../../../url", "../../../config", "../../../util", "../../../lang", "../../../connections/controls/WidgetWrapper", "../../../text!../../../connections/controls/astream/templates/ActivityStreamContent.html"], function(declare, Url, config, util, lang, WidgetWrapper, defaultTemplate) {
 
     /**
-     * The wrapper for the ActivityStream. 
+     * The wrapper for the ActivityStream.
      * This class just has to provide its own template and the args it receives back to to the WidgetWrapper, which will take care of everything else.
      * 
      * @class sbt.controls.astream.ActivityStreamWrapper
@@ -30,6 +30,52 @@ define(["../../../declare", "../../../connections/controls/WidgetWrapper", "../.
          * @type String
          */
         defaultTemplate: defaultTemplate,
+        
+        /**
+         * Overriding the method in WidgetWrapper for providing the substitutions for variables in the template.
+         * 
+         * @method getTransformObject
+         * @returns {Object}
+         */
+        getTransformObject: function(){
+            var proxyUrl = this._endpoint.proxy.proxyUrl + "/" + this._endpoint.proxyPath;
+            var connectionsUrl = this._endpoint.baseUrl;
+            var libUrl = new Url(config.Properties.libraryUrl);
+            var libQuery = libUrl.getQuery();
+            var libQueryObj = util.splitQuery(libQuery, "&");
+            
+            lang.mixin(libQueryObj, {
+                lib: "dojo",
+                ver: "1.4.3"
+            });
+            libQuery = util.createQuery(libQueryObj, "&");
+            libUrl.setQuery(libQuery);
+            
+            var connectionsSideNav = "~com.ibm.social.as.gadget.viewnav.ASGadgetViewSideNav.js";
+            var cssUrl = connectionsUrl + "/${connections}/resources/web/com.ibm.social.as/css/activityStream.css";
+            if(this._endpoint.name == "w3connections"){
+                connectionsSideNav = "~com.ibm.social.as.nav.ASSideNav.js";
+                cssUrl = connectionsUrl + "/${connections}/resources/web/_lconnappstyles/gen4/activityStream.css?version=oneui3&rtl=false";
+            }
+            
+            var sbtProps = lang.mixin({}, config.Properties);
+            lang.mixin(sbtProps, {
+                libraryUrl: libUrl.getUrl(),
+                loginUi: "popup"
+            });
+            var templateReplacements = {
+                args: JSON.stringify(this.args),
+                proxyUrl: proxyUrl,
+                connectionsUrl: connectionsUrl,
+                libraryUrl: libUrl.getUrl(),
+                sbtProps: JSON.stringify(sbtProps),
+                connectionsASNav: connectionsSideNav,
+                cssUrl: cssUrl
+            };
+            
+            
+            return templateReplacements;
+        },
         
         /**
          * Store the args so that they can be substituted into the defaultTemplate.

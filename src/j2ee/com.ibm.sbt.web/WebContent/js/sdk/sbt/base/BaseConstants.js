@@ -54,7 +54,7 @@ define([ "../config" ], function(sbt) {
 	        // used by getSummary
 	        totalResults : "/a:feed/opensearch:totalResults",
 	        startIndex : "/a:feed/opensearch:startIndex",
-	        itemsPerPage : "/a:feed/opensearch:itemsPerPage",
+	        itemsPerPage : "/a:feed/opensearch:itemsPerPage"
 	    },
 	
         /**
@@ -79,6 +79,7 @@ define([ "../config" ], function(sbt) {
             contributorUserid : "a:contributor/snx:userid",
             contributorUserState : "a:contributor/snx:userState",
     		content : "a:content[@type='html']",
+    		summary : "a:summary[@type='text']",
     		categoryTerm : "a:category/@term",
             editUrl : "a:link[@rel='edit']/@href",
             selfUrl : "a:link[@rel='self']/@href",

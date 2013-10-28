@@ -39,9 +39,9 @@
 		CommunityList communities = communityService.getMyCommunities();
 		if(communities != null && !communities.isEmpty()){
 			Community community = communities.iterator().next();
-			out.println("<b> Community Title : "+community.getTitle());
+			out.println("<b> Community Title : </b>"+community.getTitle());
 			community.remove();	
-			out.println("<b> Community Removed : "+community.getCommunityUuid());
+			out.println("<b> Community Removed : </b>"+community.getCommunityUuid());
 			out.println("<br>");
 		}
 		else

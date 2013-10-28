@@ -21,8 +21,9 @@ define([ "../../declare", "../../controls/grid/GridRenderer",
         "../../text!../../controls/grid/templates/GridPager.html", 
         "../../text!../../controls/grid/templates/GridSorter.html",
         "../../text!../../controls/grid/templates/SortAnchor.html",
-        "../../i18n!./nls/ConnectionsGridRenderer" ],
-        function(declare, GridRenderer, GridPager, GridSorter, SortAnchor, nls) {
+        "../../i18n!./nls/ConnectionsGridRenderer",
+        "../../text!../../controls/grid/templates/GridFooter.html"],
+        function(declare, GridRenderer, GridPager, GridSorter, SortAnchor, nls, GridFooter) {
 
     /**
      * @module sbt.connections.controls.ConnectionsGridRenderer
@@ -51,6 +52,8 @@ define([ "../../declare", "../../controls/grid/GridRenderer",
         descendingSortClass : "lotusActiveSort lotusDescending",
         /**The HTML template to use to show paging (moving forward and backward through sets of results)*/
         pagerTemplate : GridPager,
+        /**The HTML template to use to show the grid footer */
+        footerTemplate : GridFooter,
         /**The HTML template to show sorting options*/
         sortTemplate : GridSorter,
         /**The HTML template for sort Anchors*/

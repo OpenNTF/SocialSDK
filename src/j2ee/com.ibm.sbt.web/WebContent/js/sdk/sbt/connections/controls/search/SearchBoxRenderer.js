@@ -44,6 +44,8 @@ define(["../../../declare",
 		
 		_suggestionPopUp: null,
 		
+		_suggestionContainer: null,
+		
 		/**
 		 * SearchBoxRenderer class constructor function
 		 * @method constructor
@@ -74,9 +76,15 @@ define(["../../../declare",
 			}
 
 			var div = this._convertToDomNode(htmlTemplate);
+			
+			this._suggestionContainer = document.createElement("div");
+			this._suggestionContainer.setAttribute("style", "position:relative;broder:none");
+			div.appendChild(this._suggestionContainer);
+			
 			var temp = div.getElementsByTagName("input");
 			var input = temp[0];
 			SearchBox._searchInput = input;
+			
 			return div;	
 		},
 		
@@ -232,9 +240,8 @@ define(["../../../declare",
 				}
 				
 			}
-			
-			el.appendChild(this._suggestionPopUp);
-			return el.lastChild;
+			this._suggestionContainer.appendChild(this._suggestionPopUp);
+			return this._suggestionContainer.firstChild;
 		},
 		
 		/**
@@ -244,7 +251,7 @@ define(["../../../declare",
 		 * @param popUp The DOM node that represents the popup that displays the list of applications on connections
 		 */
 		removePopUp: function(searchBoxElement,popUp){
-			searchBoxElement.removeChild(popUp);
+			searchBoxElement.removeChild(popUp); 
 		},
 		
 		/**
@@ -254,7 +261,7 @@ define(["../../../declare",
 		 * @param popUpElement the DOM node pop up
 		 */
 		removeSuggestionPopUp: function(searchBoxElement,popUpElement){
-			searchBoxElement.removeChild(popUpElement);
+			this._suggestionContainer.removeChild(popUpElement);
 		},
 		
 		/**

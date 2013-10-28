@@ -149,6 +149,41 @@ define(['./lang','sbt/i18n!sbt/nls/util','./log'],function(lang, nls, log) {
 	        }
 	        return pairs.join(delim);
 	    },
+	    
+	    /**
+         * Takes a query string and returns an equivalent object mapping.
+         * e.g.
+         * splitQuery("height=100,width=200", ",")
+         * 
+         * returns {height: 100, width: 200}
+         * 
+         * @method splitQuery
+         * 
+         * @param {String} query A query string, e.g. "height=100,width=200"
+         * @param {String} delimiter The string which delimits the queries
+         */
+	    splitQuery: function(query, delimiter){
+	        var i;
+	        var result = {};
+	        var part;
+	        var parts;
+	        var length;
+	        
+	        query = query.replace("?", "");
+	        parts = query.split(delimiter);
+	        length = parts.length;
+	        
+	        for (i = 0; i < length; i++) {
+	            if(!parts[i]){
+	                continue;
+	            }
+                part = parts[i].split('=');
+                result[part[0]] = part[1];
+            }
+	        
+	        return result;
+	    },
+	    
 	    /**
 	     * Returns the JavaScript Library and version used
 	     * @returns {String} JavaScript Library with version

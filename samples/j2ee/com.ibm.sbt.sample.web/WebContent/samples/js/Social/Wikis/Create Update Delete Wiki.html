@@ -1,0 +1,65 @@
+<div id="error" style="display:none;" class="alert alert-error"></div>
+<div id="success" style="" class="alert alert-success"></div>
+<div class="form-horizontal">
+    <legend>Wiki Details</legend>
+    <div class="control-group">
+        <label class="control-label">UUID:</label>
+        <div class="controls">
+            <input id="wikiUuid" type="text" placeholder="UUID" style="width:400px" disabled="true"></input>
+        </div>
+        <div style="height:4px"></div>
+        <label class="control-label">Label:</label>
+        <div class="controls">
+            <input id="wikiLabel" type="text" placeholder="Label" style="width:400px" disabled="true"></input>
+        </div>
+        <div style="height:4px"></div>
+        <label class="control-label">Title:</label>
+        <div class="controls">
+            <input id="wikiTitle" type="text" placeholder="Title" style="width:400px"></input>
+        </div>
+        <div style="height:4px"></div>
+        <label class="control-label">Summary:</label>
+        <div class="controls">
+            <input id="wikiSummary" type="text" placeholder="Summary" style="width:400px"></input>
+        </div>
+        <div style="height:4px"></div>
+        <label class="control-label">Tags:</label>
+        <div class="controls">
+            <input id="wikiTags" type="text" placeholder="Tags" style="width:400px"></input>
+        </div>
+        <!-- 
+        <div style="height:4px"></div>
+        <label class="control-label">Read access:</label>
+        <div class="controls">
+        	<label><input id="readPublic" type="radio"/> All users</label>
+        	<label><input id="readMemberOnly" type="radio"/> Wiki members only</label>
+        </div>
+        <div style="height:4px"></div>
+        <label class="control-label">Write access:</label>
+        <div class="controls">
+        	<label><input id="authenticatedUsers" type="radio"/> All logged in users</label>
+        	<label><input id="editorAndOwners" type="radio"/> Wiki editors and owners only</label>
+        </div>
+		-->
+        <div style="height:8px"></div>
+        <div class="controls">
+	    	<button class="btn" id="startBtn">Start</button>
+	    	<button class="btn" id="updateBtn">Update</button>
+	        <button class="btn" id="deleteBtn">Delete</button>
+	        <button class="btn btn-primary" id="refreshBtn">Refresh</button>
+        </div>
+        <input id="entry" type="hidden"></input>
+    </div>
+    <legend>My Wikis</legend>
+    <div class="control-group">
+	    <table class="table table-bordered" id="wikisTable">
+			<thead class="label label-info">
+				<th>Title</th>
+				<th>Label</th>
+				<th>Summary</th>
+				<th>Tags</th>
+			</thead>
+			<tbody id="wikisTableBody"></tbody>
+		</table>
+    </div>
+</div>

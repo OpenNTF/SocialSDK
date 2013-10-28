@@ -205,7 +205,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         /**
          * Update this forum
          * 
-         * @method remove
+         * @method update
          * @param {Object} [args] Argument object
          */
         update : function(args) {
@@ -215,7 +215,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         /**
          * Save this forum
          * 
-         * @method remove
+         * @method save
          * @param {Object} [args] Argument object
          */
         save : function(args) {
@@ -557,7 +557,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         /**
          * Update this forum topic
          * 
-         * @method remove
+         * @method update
          * @param {Object} [args] Argument object
          */
         update : function(args) {
@@ -567,7 +567,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         /**
          * Save this forum topic
          * 
-         * @method remove
+         * @method save
          * @param {Object} [args] Argument object
          */
         save : function(args) {
@@ -834,7 +834,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         /**
          * Update this forum reply
          * 
-         * @method remove
+         * @method update
          * @param {Object} [args] Argument object
          */
         update : function(args) {
@@ -844,7 +844,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         /**
          * Save this forum reply
          * 
-         * @method remove
+         * @method save
          * @param {Object} [args] Argument object
          */
         save : function(args) {

@@ -155,14 +155,14 @@ public class LibraryRequestParams {
 	/**
 	 * @param _libraryUrl the libraryUrl to set
 	 */
-	public void setLibraryUrl(String _libraryUrl) {
-		this._libraryUrl = _libraryUrl;
+	public void setLibraryUrl(String libraryUrl) {
+		this._libraryUrl = libraryUrl;
 	}
 
 	/**
 	 * @param _jsLibraryUrl the jsLibraryUrl to set
 	 */
-	public void setJsLibraryUrl(String _jsLibraryUrl) {
-		this._jsLibraryUrl = _jsLibraryUrl;
+	public void setJsLibraryUrl(String jsLibraryUrl) {
+		this._jsLibraryUrl = jsLibraryUrl;
 	}
 }

@@ -52,6 +52,17 @@ define(["../../declare"], function(declare) {
          execute: function(item, opts, event) {
             dojo.stopEvent(event);
          },
+         
+         /**
+          * Action to view the user's profile in connections. 
+          * When the user clicks on a link to a person's profile
+          * the HREF will have the URL and redirect the user to the person's
+          * profile, if this action needs to be changed it can be overridden using this function
+          *@method viewUserProfile 
+          */
+         viewUserProfile: function(){
+        	 //do nothing by default
+         }
 
     });
     

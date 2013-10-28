@@ -99,7 +99,7 @@ define(["../../../declare", "../../../config", "../../../stringUtil", "../../../
          */
         xhrGet: function(args){
             this.modifyUrl(args);
-            return this.endpoint.xhr("GET", args);
+            return this.xhr("GET", args);
         },
         
         /*
@@ -108,7 +108,7 @@ define(["../../../declare", "../../../config", "../../../stringUtil", "../../../
          */
         xhrPost: function(args){
             this.modifyUrl(args);
-            return this.endpoint.xhr("POST", args);
+            return this.xhr("POST", args);
         },
         
         /*
@@ -117,7 +117,7 @@ define(["../../../declare", "../../../config", "../../../stringUtil", "../../../
          */
         xhrPut: function(args){
             this.modifyUrl(args);
-            return this.endpoint.xhr("PUT", args);
+            return this.xhr("PUT", args);
         },
         
         /*
@@ -126,7 +126,7 @@ define(["../../../declare", "../../../config", "../../../stringUtil", "../../../
          */
         xhrDelete: function(args){
             this.modifyUrl(args);
-            return this.endpoint.xhr("DELETE", args);
+            return this.xhr("DELETE", args);
         },
         
         /*
@@ -135,7 +135,15 @@ define(["../../../declare", "../../../config", "../../../stringUtil", "../../../
          */
         xhrHead: function(args){
             this.modifyUrl(args);
-            return this.endpoint("HEAD", args);
+            return this.xhr("HEAD", args);
+        },
+        
+        /*
+         * An xhrHandler needs to have an xhr function to use the xhr handler init in connections >= 4.5
+         */
+        xhr: function(method, args){
+            this.modifyUrl(args);
+            return this.endpoint.xhr(method, args);
         }
     });
     

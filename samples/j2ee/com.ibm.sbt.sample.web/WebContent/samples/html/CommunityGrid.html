@@ -1,0 +1,51 @@
+<!-- 
+/*
+ * � Copyright IBM Corp. 2012
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at:
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+ * implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */ -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+
+<link href="/sbt.bootstrap211/bootstrap/css/bootstrap.css" rel="stylesheet">
+<link href="/sbt.bootstrap211/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad : true
+	};
+</script>
+
+<script type="text/javascript" src="/sbt.dojo143/dojo/dojo.js"></script>
+</head>
+<body>
+
+	<h3>Public Communities</h3>
+
+	<div id="gridDiv" ></div>
+	
+	<script>
+	dojo.registerModulePath('sbt.library','/sbt.sample.web/library');
+	var dj = dojo;
+	dj.require('sbt.library.init');
+
+	require(["sbt/dom", "sbt/connections/controls/communities/CommunityGrid"], function(dom, CommunityGrid) {
+	    var grid = new CommunityGrid();
+	           
+	    dom.byId("gridDiv").appendChild(grid.domNode);
+	             
+	    grid.update();
+	});
+	</script>
+</body>

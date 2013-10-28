@@ -31,10 +31,8 @@
 	pageEncoding="ISO-8859-1"%>
 <html>
 <head>
-	<title>SBT JAVA Sample - Create Forum</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
-
 <body>	
 	<h4>Create Forum Topic For Community</h4>
 	<div id="content">
@@ -53,10 +51,9 @@
 		service.createCommunityForumTopic(topic,communityId);
 		out.println("Topic created with Id : " + topic.getUid() + "for Community with Id :"+communityId );
 	} catch (Exception e) {
-	e.printStackTrace();
-	//	out.println("<pre>");
-		//out.println(e.getMessage());
-		//out.println("</pre>");
+		out.println("<pre>");
+		out.println(e.getMessage());
+		out.println("</pre>");
 	}
 	%>
 	</div>

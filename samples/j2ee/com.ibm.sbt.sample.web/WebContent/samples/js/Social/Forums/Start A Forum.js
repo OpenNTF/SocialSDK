@@ -18,7 +18,7 @@ require(["sbt/dom",
 function addStartForumBehaviour(forumGrid, forumService, dom) {
 	var actionBtn = dom.byId("actionBtn");
     actionBtn.onclick = function(evt) {
-    	var title = prompt("Please enter a title for the new form", "");
+    	var title = prompt("Please enter a title for the new forum", "");
         if (title) {
         	var forum = forumService.newForum(); 
             forum.setTitle(title);

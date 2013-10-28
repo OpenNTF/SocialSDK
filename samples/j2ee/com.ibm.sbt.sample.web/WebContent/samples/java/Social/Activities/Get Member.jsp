@@ -29,24 +29,22 @@
 	pageEncoding="ISO-8859-1"%>
 <html>
 <head>
-	<title>SBT JAVA Sample</title>
+	<title>Get Member</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
 <body>
-	<h4>Activity Service API</h4>
+	<h4>Get Member</h4>
 	<div id="content">
 	<%
 	try {		
 		ActivityService activityService = new ActivityService();
 		ActivityList activities = activityService.getMyActivities();
-		Activity act = null;
-		Member mem = null;
 		if(activities != null && ! activities.isEmpty()) {
-			act = activities.get(0);
+			Activity act = activities.get(0);
 			MemberList members = activityService.getMembers(act.getActivityId());
 			if(members != null && ! members.isEmpty()) {
-				mem = members.get(0);
+				Member mem = activityService.getMember(act.getActivityId(), members.get(0).getMemberId()); 
 				out.println("Member Name : " + mem.getName());
 				out.println("Member Email : " + mem.getEmail());
 				out.println("Member Id : " + mem.getUserid());

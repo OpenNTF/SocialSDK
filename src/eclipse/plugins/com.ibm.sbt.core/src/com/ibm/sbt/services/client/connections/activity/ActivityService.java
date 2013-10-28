@@ -535,7 +535,7 @@ public class ActivityService extends BaseService {
 			if(EntityUtil.isEmail(memberId)){
 				params.put("email", memberId);
 			}else{
-				params.put("userid", memberId);
+				params.put("memberId", memberId);
 			}
 			
         	return (Member) getEntity(requestUri, params, new MemberFeedHandler(this));

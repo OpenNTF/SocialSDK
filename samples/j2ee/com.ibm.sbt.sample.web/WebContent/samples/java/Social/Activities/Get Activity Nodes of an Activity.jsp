@@ -34,7 +34,7 @@
 </head>
 
 <body>
-	<h4>Activity Service API</h4>
+	<h4>Get Activity Nodes of an Activity</h4>
 	<div id="content">
 	<%
 	try {		
@@ -50,7 +50,7 @@
 				out.println("No Activity Nodes");
 			}
 		} else {
-			out.println("No Results");
+			out.println("No Activities Found");
 		}
 	} catch (Throwable e) {
 		out.println("<pre>");

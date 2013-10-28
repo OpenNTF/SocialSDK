@@ -34,25 +34,29 @@
 	pageEncoding="ISO-8859-1"%>
 <html>
 <head>
-	<title>SBT JAVA Sample</title>
+	<title>Create Section Node</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
 <body>
-	<h4>Activity Service API</h4>
+	<h4>Create Section Node</h4>
 	<div id="content">
 	<%
 	try {		
 		ActivityService activityService = new ActivityService();
-		Activity activity = activityService.getMyActivities().get(0);
+		ActivityList activities = activityService.getMyActivities();
 		
-		ActivityNode sectionNode = new ActivityNode(activityService, activity.getActivityId());
-		sectionNode.setEntryType(ActivityNodeType.Section.getActivityNodeType());
-		sectionNode.setTitle("sectionNode from JSP " + System.currentTimeMillis());
-		sectionNode.setContent("SectionNode Content " + System.currentTimeMillis());
-		sectionNode.setPosition(2000);	
-		sectionNode = activityService.createActivityNode(sectionNode);
-		out.println("Section Node Created : " + sectionNode.getId());
+		if(activities != null && !activities.isEmpty()) {
+			ActivityNode sectionNode = new ActivityNode(activityService, activities.get(0).getActivityId());
+			sectionNode.setEntryType(ActivityNodeType.Section.getActivityNodeType());
+			sectionNode.setTitle("sectionNode from JSP " + System.currentTimeMillis());
+			sectionNode.setContent("SectionNode Content " + System.currentTimeMillis());
+			sectionNode.setPosition(2000);	
+			sectionNode = activityService.createActivityNode(sectionNode);
+			out.println("Section Node Created : " + sectionNode.getId());
+		}  else {
+			out.println("No Activites Found");
+		}
 	} catch (Throwable e) {
 		out.println("<pre>");
 		out.println(e.getMessage());

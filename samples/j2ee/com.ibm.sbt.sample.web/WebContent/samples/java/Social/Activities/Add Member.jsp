@@ -30,12 +30,12 @@
 	pageEncoding="ISO-8859-1"%>
 <html>
 <head>
-	<title>SBT JAVA Sample</title>
+	<title>Add Member to an Activity</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
 <body>
-	<h4>Activity Service API</h4>
+	<h4>Add Member to an Activity</h4>
 	<div id="content">
 	<%
 	try {		
@@ -44,7 +44,8 @@
 		String memberId = "";
 		String activityId = "";
 		if(activities != null && ! activities.isEmpty()) {
-			Member memberToBeAdded = new Member(activityService, "26356FD1-CDC8-67D2-4825-7A7000256C06");
+			String id = Context.get().getProperty("sample.userId2");
+			Member memberToBeAdded = new Member(activityService, id);
 			memberToBeAdded = activityService.addMember(activities.get(0).getActivityId(), memberToBeAdded);
 			out.println("Member Added ");
 			if(memberToBeAdded != null) {

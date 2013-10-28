@@ -144,6 +144,10 @@ public class BasicEndpoint extends AbstractEndpoint {
 
     @Override
 	public void authenticate(boolean force) throws ClientServicesException {
+    	if ((HttpServletRequest)Context.get().getHttpRequest() == null) {
+    		//cannot serve redirects. TODO: add a flag for this and let the 401 trough
+    		throw new ClientServicesException(null,"cannot authenticate basic endpoint out of a container, set uername and password properties");
+    	}
         if(force || !isAuthenticated()) {
             String authPage = getAuthenticationPage();
          	Context context = Context.get();

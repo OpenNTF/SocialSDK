@@ -101,13 +101,13 @@ public class BaseForumTransformer extends AbstractBaseTransformer {
 			if(xmlEntry.getValue() != null){
 				currentValue = xmlEntry.getValue().toString();
 			}
-			if(currentElement.contains("tag")){
+			if(currentElement.contains(ForumsXPath.tags.toString())){
 				tagsXml += getXMLRep(getStream(sourcepath+"CategoryTagTmpl.xml"),"tag",XmlTextUtil.escapeXMLChars(currentValue));
 			}
-			if(currentElement.equalsIgnoreCase("content")){
+			if(currentElement.equalsIgnoreCase(ForumsXPath.content.toString())){
 				contentXml = getXMLRep(getStream(sourcepath+"ContentTemplate.xml"),currentElement,XmlTextUtil.escapeXMLChars(currentValue));
 			}
-			if(currentElement.equalsIgnoreCase("title")){
+			if(currentElement.equalsIgnoreCase(ForumsXPath.title.toString())){
 				titleXml = getXMLRep(getStream(sourcepath+"TitleTemplate.xml"),currentElement,XmlTextUtil.escapeXMLChars(currentValue));
 			}
 			if(currentElement.equalsIgnoreCase(FlagType.PIN.getFlagType())){

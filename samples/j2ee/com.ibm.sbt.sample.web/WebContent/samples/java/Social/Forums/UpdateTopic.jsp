@@ -41,18 +41,23 @@
 	try {
 		ForumService service = new ForumService();
 		TopicList topicList = service.getMyForumTopics();
-		ForumTopic topic = (ForumTopic)topicList.iterator().next();
-		
-		topic = service.getForumTopic(topic.getTopicUuid());
-		topic = topic.load();
-		topic.setTitle("updated title");
-		topic.setContent("updated with newContent");
-		topic.setLocked(true);
-		topic = topic.save();  
-		out.println("Forum Topic updated with title : " + topic.getTitle()+"<br>");
-		out.println("is topic pinned : " + topic.isPinned()+"<br>");
-		out.println("is topic locked : " + topic.isLocked()+"<br>");
-		out.println("is topic a question : " + topic.isQuestion()+"<br>");
+		if(topicList.size() > 0){
+			ForumTopic topic = (ForumTopic)topicList.iterator().next();
+			
+			topic = service.getForumTopic(topic.getTopicUuid());
+			topic = topic.load();
+			topic.setTitle("updated title");
+			topic.setContent("updated with newContent");
+			topic.setLocked(true);
+			topic = topic.save();  
+			out.println("Forum Topic updated with title : " + topic.getTitle()+"<br>");
+			out.println("is topic pinned : " + topic.isPinned()+"<br>");
+			out.println("is topic locked : " + topic.isLocked()+"<br>");
+			out.println("is topic a question : " + topic.isQuestion()+"<br>");
+		}
+		else{
+			out.println("No Topics exist");
+		}
 	} catch (Exception e) {
 		out.println("<pre>");
 		out.println(e.getMessage());

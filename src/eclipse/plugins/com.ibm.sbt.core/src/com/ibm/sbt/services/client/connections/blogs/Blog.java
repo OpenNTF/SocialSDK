@@ -41,58 +41,102 @@ public class Blog extends BaseBlogEntity {
 	public Blog(BlogService blogService, String id) {
 		super(blogService,id);
 	}
-
+	/**
+     * Constructor
+     *
+     * @param BlogService
+     * @param DataHandler
+     */
 	public Blog(BaseService svc, DataHandler<?> handler) {
 		super(svc,handler);
 	}
-	
-
-	public void setBlogUuid(String forumUuid) {
-        setAsString(BlogXPath.uid, forumUuid);
+   /**
+	* Sets id of IBM Connections blog.
+	*
+	* @method setBlogUuid
+	* @param blogUuid of the blog
+	*/
+	public void setBlogUuid(String blogUuid) {
+        setAsString(BlogXPath.uid, blogUuid);
     }
-	
-	
-	/*
-	 * This method returns uid of blog
-	 */
+    /**
+	* Return the value of IBM Connections blog UuiD from blog ATOM
+	* entry document.
+	*
+	* @method getBlogUuid
+	* @return blogUuid of the blog
+	*/
 	public String getBlogUuid() throws BlogServiceException{
 		return super.getUid();
 	}
-	
+	/**
+	* Returns the Blog handle
+	*
+	* @method getHandle
+	* @return Blog handle
+	*/
 	public String getHandle() throws BlogServiceException{
 		return getAsString(BlogXPath.handle);
 	}
-	
+	/**
+	* Sets the Blog hanlde
+	*
+	* @method setHandle
+	* @param handle
+	*/
 	public void setHandle(String handle) {
         setAsString(BlogXPath.handle, handle);
     }
-	
+	/**
+	* Returns the Blog timeZone
+	*
+	* @method getTimeZone
+	* @return {String} Blog TimeZone
+	*/
 	public String getTimeZone() throws BlogServiceException{
 		return getAsString(BlogXPath.timeZone);
 	}
-	
+	/**
+	* Sets the Blog timezone
+	*
+	* @method setTimeZone
+	* @param timeZone
+	*/
 	public void setTimeZone(String handle) {
         setAsString(BlogXPath.timeZone, handle);
     }
-	
-
+	/**
+	* Returns the summary of the Blog
+	*
+	* @method getSummary
+	* @return {String} Blog summary
+	*/
 	public String getSummary() throws BlogServiceException{
 		return getAsString(BlogXPath.summary);
 	}
-	
+	/**
+	* Sets the summary of the Blog
+	*
+	* @method setSummary
+	* @param summary
+	*/
 	public void setSummary(String summary) {
         setAsString(BlogXPath.summary, summary);
     }
 	/**
 	 * This method creates the blog on the server
 	 * 
-	 * @return
+	 * @return Blog
 	 * @throws BlogServiceException
 	 */
 	public Blog save() throws BlogServiceException{
 		return getService().createBlog(this);
 	}
-	
+	/**
+     * This method removes the blog on the server
+     *
+     * @throws BlogServiceException
+     */
     public void remove() throws BlogServiceException{
 		getService().removeBlog(getUid());
 	}

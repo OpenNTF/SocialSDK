@@ -348,6 +348,8 @@ public abstract class BaseService {
 	        }
 	        if (data == null) {
 	            dataHolder = getClientService().get(url, parameters, headers, dataFormat);
+	            //in case of 401 errors  client service returns null
+	            if (dataHolder == null) return null;
 	            data = dataHolder.getData();
 	            if (cacheSize > 0 && nameParameterId != null) {
 	                addDataToCache(uniqueId, data);

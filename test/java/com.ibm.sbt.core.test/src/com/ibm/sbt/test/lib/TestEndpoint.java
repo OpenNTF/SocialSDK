@@ -1,4 +1,5 @@
-package lib;
+package com.ibm.sbt.test.lib;
+
 
 import org.junit.After;
 import org.junit.Before;

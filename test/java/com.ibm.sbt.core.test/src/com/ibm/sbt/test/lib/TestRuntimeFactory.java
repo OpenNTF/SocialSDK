@@ -1,4 +1,5 @@
-package lib;
+package com.ibm.sbt.test.lib;
+
 
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;

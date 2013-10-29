@@ -4,31 +4,19 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import lib.TestEnvironment;
-
-import org.junit.Ignore;
 import com.ibm.sbt.services.BaseUnitTest;
 import com.ibm.sbt.services.client.ClientServicesException;
-import com.ibm.sbt.services.client.connections.communities.Community;
-import com.ibm.sbt.services.client.connections.communities.CommunityService;
-import com.ibm.sbt.services.client.connections.communities.MemberList;
-import com.ibm.sbt.services.client.connections.communities.Member;
-import com.ibm.sbt.services.client.connections.communities.CommunityList;
-import com.ibm.sbt.services.client.connections.communities.BookmarkList;
-import com.ibm.sbt.services.client.connections.communities.Bookmark;
-import com.ibm.sbt.services.client.connections.communities.Invite;
-import com.ibm.sbt.services.client.connections.communities.InviteList;
-import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
 import com.ibm.sbt.services.client.connections.forums.TopicList;
 import com.ibm.sbt.services.client.connections.forums.model.BaseForumEntity;
+import com.ibm.sbt.test.lib.TestEnvironment;
 
 /**
  * Tests for the java connections Communities API a test class provides its own

@@ -1,4 +1,5 @@
-package lib;
+package com.ibm.sbt.test.lib;
+
 
 import com.ibm.sbt.services.client.ClientService.Args;
 import com.ibm.sbt.services.client.ClientServicesException;

@@ -1,3 +1,4 @@
+package com.ibm.sbt.test.lib;
 /*
  * © Copyright IBM Corp. 2013
  * 
@@ -14,7 +15,7 @@
  * permissions and limitations under the License.
  */
 
-package lib;
+
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -191,7 +192,6 @@ public class MockSerializer {
 		} catch (XMLException e) {
 			throw new IOException(e);
 		}
-		System.out.println("CONVERTED NODE TO " + w.toString("UTF-8"));
 		return w.toString("UTF-8");
 
 	}
@@ -225,7 +225,6 @@ public class MockSerializer {
 		os.close();
 		base64OutputStream.flush();
 		base64OutputStream.close();
-		System.out.println("CONVERTED OBJECT TO " + w.toString("UTF-8"));
 		return w.toString("UTF-8");
 	}
 

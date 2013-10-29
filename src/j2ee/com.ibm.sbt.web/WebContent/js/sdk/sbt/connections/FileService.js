@@ -1498,7 +1498,7 @@ define(
 							+ "/" + encodeURIComponent(fileName), args && args.parameters ? args.parameters : {});
 					var headers = {
 						"Content-Type" : false,
-						"Process-Data" : false, // processData = false is reaquired by jquery
+						"Process-Data" : false // processData = false is reaquired by jquery
 					};
 					var options = {
 						method : "POST",

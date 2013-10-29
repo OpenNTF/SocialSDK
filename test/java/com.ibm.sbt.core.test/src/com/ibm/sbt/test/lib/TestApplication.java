@@ -1,4 +1,5 @@
-package lib;
+package com.ibm.sbt.test.lib;
+
 
 import java.io.InputStream;
 import java.util.HashMap;

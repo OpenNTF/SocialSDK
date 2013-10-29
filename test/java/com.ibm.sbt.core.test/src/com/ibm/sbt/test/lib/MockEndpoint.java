@@ -1,3 +1,4 @@
+package com.ibm.sbt.test.lib;
 /*
  * © Copyright IBM Corp. 2013
  * 
@@ -14,7 +15,7 @@
  * permissions and limitations under the License.
  */
 
-package lib;
+
 
 import org.apache.http.impl.client.DefaultHttpClient;
 
@@ -35,7 +36,7 @@ public class MockEndpoint extends BasicEndpoint {
 	private String mockMode;
 
 	public MockEndpoint() {
-		super();
+		super();		
 	}
 
 	public MockEndpoint(Endpoint endpoint) {

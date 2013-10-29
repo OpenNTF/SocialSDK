@@ -1,4 +1,5 @@
-package lib;
+package com.ibm.sbt.test.lib;
+
 
 import static org.junit.Assert.*;
 
@@ -35,7 +36,8 @@ public class TestEnvironment {
 			parsed = "Recording";
 		}
 		if (parsed == null) throw new MockingException(null, "Unrecognized mode "+mode+ " use one of [pass, mocked, record]");
-		
+		System.out.println("Setting environment " + environment+parsed+"Environment");
+
 		System.setProperty("environment", environment+parsed+"Environment");
 		
 		

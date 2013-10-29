@@ -146,7 +146,7 @@
 
 	<managed-bean>
 		<managed-bean-name>connectionsMock</managed-bean-name>
-		<managed-bean-class>lib.MockEndpoint</managed-bean-class>
+		<managed-bean-class>com.ibm.sbt.test.lib.MockEndpoint</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 		<managed-property>
 			<property-name>mockMode</property-name>
@@ -160,7 +160,7 @@
 
 	<managed-bean>
 		<managed-bean-name>connectionsRec</managed-bean-name>
-		<managed-bean-class>lib.MockEndpoint</managed-bean-class>
+		<managed-bean-class>com.ibm.sbt.test.lib.MockEndpoint</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 		<managed-property>
 			<property-name>mockMode</property-name>
@@ -174,7 +174,7 @@
 
 	<managed-bean>
 		<managed-bean-name>connections</managed-bean-name>
-		<managed-bean-class>lib.MockEndpoint</managed-bean-class>
+		<managed-bean-class>com.ibm.sbt.test.lib.MockEndpoint</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 		<managed-property>
 			<property-name>mockMode</property-name>
@@ -223,7 +223,7 @@
 
 	<managed-bean>
 		<managed-bean-name>smartcloudMock</managed-bean-name>
-		<managed-bean-class>lib.MockEndpoint</managed-bean-class>
+		<managed-bean-class>com.ibm.sbt.test.lib.MockEndpoint</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 		<managed-property>
 			<property-name>mockMode</property-name>
@@ -237,7 +237,7 @@
 
 	<managed-bean>
 		<managed-bean-name>smartcloudRec</managed-bean-name>
-		<managed-bean-class>lib.MockEndpoint</managed-bean-class>
+		<managed-bean-class>com.ibm.sbt.test.lib.MockEndpoint</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 		<managed-property>
 			<property-name>mockMode</property-name>
@@ -251,7 +251,7 @@
 
 	<managed-bean>
 		<managed-bean-name>smartcloud</managed-bean-name>
-		<managed-bean-class>lib.MockEndpoint</managed-bean-class>
+		<managed-bean-class>com.ibm.sbt.test.lib.MockEndpoint</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 		<managed-property>
 			<property-name>mockMode</property-name>

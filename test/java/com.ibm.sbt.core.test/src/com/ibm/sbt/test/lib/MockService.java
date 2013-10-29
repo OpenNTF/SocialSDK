@@ -1,3 +1,4 @@
+package com.ibm.sbt.test.lib;
 /*
  * © Copyright IBM Corp. 2013
  * 
@@ -14,7 +15,7 @@
  * permissions and limitations under the License.
  */
 
-package lib;
+
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -56,7 +57,7 @@ public class MockService extends ClientService {
 	protected HttpResponse executeRequest(HttpClient httpClient,
 			HttpRequestBase httpRequestBase, Args args)
 			throws ClientServicesException {
-
+		System.out.println("SERVING REQUEST IN MODE " + this.mode);
 		switch (this.mode) {
 		case REPLAY:
 			return serializer.replayResponse();

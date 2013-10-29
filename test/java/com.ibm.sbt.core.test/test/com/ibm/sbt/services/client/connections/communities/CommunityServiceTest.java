@@ -64,7 +64,7 @@ public class CommunityServiceTest extends BaseUnitTest {
 
 		Community retrieved = communityService.getCommunity(community
 				.getCommunityUuid());
-		assertEquals(community.getTitle(), retrieved.getTitle());
+		Assert.assertTrue(retrieved.getTitle().startsWith("JavaTestCommunity"));
 		assertEquals(community.getContent(), retrieved.getContent());
 		assertEquals(community.getTags(), retrieved.getTags());
 

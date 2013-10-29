@@ -58,9 +58,7 @@ import com.ibm.commons.runtime.Context;
 import com.ibm.commons.util.io.base64.Base64OutputStream;
 import com.ibm.commons.xml.DOMUtil;
 import com.ibm.commons.xml.XMLException;
-import com.ibm.sbt.jslibrary.SBTEnvironment;
 import com.ibm.sbt.services.client.ClientServicesException;
-import com.ibm.sbt.services.endpoints.BasicEndpoint;
 import com.ibm.sbt.services.endpoints.Endpoint;
 
 /**

@@ -1,8 +1,6 @@
 package com.ibm.sbt.test.lib;
 
 
-import static org.junit.Assert.*;
-
 import com.ibm.commons.runtime.Context;
 
 public class TestEnvironment {

@@ -74,11 +74,13 @@ public class CommunityTransformer extends AbstractBaseTransformer {
 		if(StringUtil.isNotEmpty(titleXml)){
 			xml = getXMLRep(xml, "getTitle",titleXml);
 		}
-		
 		if(StringUtil.isNotEmpty(contentXml)){
 			xml = getXMLRep(xml, "getContent",contentXml);
 		}
-		
+		else{ // need to provide empty content in payload, in case it is not set
+			contentXml = getXMLRep(getStream(sourcepath+"CommunityContentTemplate.xml"),"content","");
+			xml = getXMLRep(xml, "getContent",contentXml);
+		}
 		if(StringUtil.isNotEmpty(tagsXml)){
 			xml = getXMLRep(xml, "getTags",tagsXml);
 		}
@@ -96,6 +98,7 @@ public class CommunityTransformer extends AbstractBaseTransformer {
 			}else{ // for update scenario
 				typeXml = getXMLRep(getStream(sourcepath+"CommunityTypeTemplate.xml"),"communityType",community.getCommunityType());
 			}
+			xml = getXMLRep(xml, "getCommunityType",typeXml);
 		}
 		
 		xml = removeExtraPlaceholders(xml);

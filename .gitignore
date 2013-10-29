@@ -12,8 +12,6 @@ target/
 *.swp
 *~.nib
 local.properties
-mockData/
-*.mock
 #.settings/
 .loadpath
 

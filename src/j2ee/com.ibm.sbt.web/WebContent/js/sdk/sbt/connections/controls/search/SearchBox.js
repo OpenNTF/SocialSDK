@@ -754,7 +754,7 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 	            	evt = null;
 				}
 				
-			},
+			}
 		
 		}
 		

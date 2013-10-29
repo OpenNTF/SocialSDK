@@ -136,12 +136,16 @@ public class MockSerializer {
 			out.write("<headers>");
 			Header[] allHeaders = response.getAllHeaders();
 			out.write(serialize(allHeaders));
-			out.write("</headers>\n<data><![CDATA[");
-			String serializedEntity = serialize(response.getEntity()
+			String serializedEntity = null;
+			if (response.getEntity()!=null) {
+				out.write("</headers>\n<data><![CDATA[");
+			 serializedEntity = serialize(response.getEntity()
 					.getContent());
-
 			out.write(serializedEntity);
 			out.write("]]></data>\n</response>");
+			} else {
+				out.write("</headers>\n</response>");
+			}
 			out.flush();
 			out.close();
 			writeData(out.toString());
@@ -159,6 +163,8 @@ public class MockSerializer {
 		BasicHttpResponse r = new BasicHttpResponse(new ProtocolVersion("HTTP",
 				1, 0), statusCode, reasonPhrase);
 		r.setHeaders(allHeaders);
+
+		if (serializedEntity!=null) {
 		BasicHttpEntity e = new BasicHttpEntity();
 		// TODO: use content-encoding header
 		try {
@@ -174,6 +180,7 @@ public class MockSerializer {
 		}
 		e.setContentLength(serializedEntity.length());
 		r.setEntity(e);
+		}
 		return r;
 	}
 
@@ -252,11 +259,12 @@ public class MockSerializer {
 			Node data = (Node) DOMUtil.evaluateXPath(r, "./data")
 					.getSingleNode();
 			String entity = null;
+			if (data!= null ) {
 			if (data.getFirstChild() == null)
 				entity = "";
 			else
 				entity = ((CharacterData) data.getFirstChild()).getData();
-
+			}
 			Iterator<Node> hIt = (Iterator<Node>) DOMUtil.evaluateXPath(
 					headers, "./header").getNodeIterator();
 			ArrayList<Header> allHeaders = new ArrayList<Header>();

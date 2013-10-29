@@ -22,7 +22,7 @@ public class TestEnvironment {
 	}
 	
 	private static void selectEnvironment() {
-		String mode = System.getProperty("testMode","passthrough");
+		String mode = System.getProperty("testMode","pass");
 		String environment = enableSmartcloud ? "smartcloud":"connections";
 		String parsed = null;
 		if (mode.equalsIgnoreCase("pass")) {

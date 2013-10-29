@@ -127,7 +127,7 @@
    -->
   <managed-bean>
     <managed-bean-name>dropbox</managed-bean-name>
-    <managed-bean-class>com.ibm.sbt.services.endpoints.DropboxEndpoint
+    <managed-bean-class>com.ibm.sbt.services.endpoints.DropBoxOAuthEndpoint
 		</managed-bean-class>
     <managed-bean-scope>application</managed-bean-scope>
     <!-- Endpoint URL -->

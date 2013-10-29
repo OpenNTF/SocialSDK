@@ -4,7 +4,7 @@
 requirejs.config({
        paths: {
            'jquery' : '//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery',
-           'jquery/ui' : '//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui',
+           'jquery/ui' : '//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui'
         },
         shim : {
             'jquery/ui' : {

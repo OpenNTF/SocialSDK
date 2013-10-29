@@ -212,7 +212,7 @@ public class CommunityServiceTest extends BaseUnitTest {
 		community.setContent("test Content");
 		communityService.updateCommunity(community);
 		community = community.load();
-		Assert.assertNotEquals(oldTitle, community.getTitle());
+		Assert.assertNotSame(oldTitle, community.getTitle());
 		assertEquals("test Content", community.getContent());
 	}
 

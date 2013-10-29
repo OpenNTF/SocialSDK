@@ -117,7 +117,7 @@ public class LibraryServlet extends BaseToolkitServlet {
     //
     static final String DEFAULT_TOOLKIT_URL = "%local_server%/sbt"; //$NON-NLS-1$
     static final String DEFAULT_TOOLKIT_EXT_URL = null;
-    static final String DEFAULT_JS_LIBRARY_URL = null;
+    static final String DEFAULT_JS_LIBRARY_URL = "%local_server%/sbt/js/libs"; //$NON-NLS-1$
     static final String DEFAULT_JAVASCRIPT_PATH = "/js/sdk"; //$NON-NLS-1$
     static final String DEFAULT_SERVICE_URL = "%local_application%/service"; //$NON-NLS-1$
     static final String DEFAULT_LIBRARY_URL = "%local_application%/library";

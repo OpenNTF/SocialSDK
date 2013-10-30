@@ -43,9 +43,9 @@ public class CommunityMembersGrid extends BaseCommunitiesGridTest {
     
     @Before
     public void initCommunity() {
-    	addSnippetParam("sample.userId3", community.getCommunityUuid());	
+    	addSnippetParam("sample.userId3", getCommunityUuid());	
     	try {
-    		community.addMember(new Member(communityService, "AmyBlanks@renovations.com"));  
+    		addMember(new Member(getCommunityService(), "AmyBlanks@renovations.com"));  
     	} catch(Exception e) {
     		e.printStackTrace();
     	}
@@ -53,6 +53,6 @@ public class CommunityMembersGrid extends BaseCommunitiesGridTest {
     
     @After
     public void destroyCommunity() {
-    	deleteCommunityAndQuit();
+    	destroy();
     }
 }

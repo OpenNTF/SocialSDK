@@ -18,8 +18,10 @@ package com.ibm.commons.runtime.impl.app;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
 import com.ibm.commons.runtime.Application;
 import com.ibm.commons.runtime.impl.AbstractContext;
+import com.ibm.commons.util.StringUtil;
 
 /**
  * @author Mark Wallace
@@ -98,6 +100,12 @@ public class ContextStandalone extends AbstractContext {
 	@Override
 	protected Map<String, Object> createRequestCookieMap() {
 		return new HashMap<String, Object>();
+	}
+
+	@Override
+	public String getProperty(String propertyName) {
+		String property = System.getProperty(propertyName);
+		return StringUtil.isEmpty(property)?getProperty(propertyName,null):property;
 	}
 
 }

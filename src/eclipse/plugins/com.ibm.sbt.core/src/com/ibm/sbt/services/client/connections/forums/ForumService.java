@@ -427,7 +427,13 @@ public class ForumService extends BaseService {
 			Map<String, String> parameters = new HashMap<String, String>();
 
 			parameters.put(FORUM_UNIQUE_IDENTIFIER, forum.getUid());
-
+			if(forum.getFieldsMap().get(ForumsXPath.title)== null)
+				forum.setTitle(forum.getTitle());
+			if(forum.getFieldsMap().get(ForumsXPath.content)== null)
+				forum.setContent(forum.getContent());
+			if(!forum.getFieldsMap().toString().contains(ForumsXPath.tags.toString()))
+				forum.setTags(forum.getTags());
+			
 			BaseForumTransformer transformer = new BaseForumTransformer(forum);
 			Object payload = transformer.transform(forum.getFieldsMap());
 
@@ -728,6 +734,13 @@ public class ForumService extends BaseService {
 		}
 		try {
 			String url = resolveUrl(ForumType.TOPICS, null, null);
+			if(topic.getFieldsMap().get(ForumsXPath.title)== null)
+				topic.setTitle(topic.getTitle());
+			if(topic.getFieldsMap().get(ForumsXPath.content)== null)
+				topic.setContent(topic.getContent());
+			if(!topic.getFieldsMap().toString().contains(ForumsXPath.tags.toString()))
+				topic.setTags(topic.getTags());
+			
 			BaseForumTransformer transformer = new BaseForumTransformer(topic);
 
 			Object payload = transformer.transform(topic.getFieldsMap());
@@ -973,6 +986,14 @@ public class ForumService extends BaseService {
 			throw new ForumServiceException(null,"Reply object passed was null");
 		}
 		try {
+			
+			if(reply.getFieldsMap().get(ForumsXPath.title)== null)
+				reply.setTitle(reply.getTitle());
+			if(reply.getFieldsMap().get(ForumsXPath.content)== null)
+				reply.setContent(reply.getContent());
+			if(!reply.getFieldsMap().toString().contains(ForumsXPath.tags.toString()))
+				reply.setTags(reply.getTags());
+			
 			BaseForumTransformer transformer = new BaseForumTransformer(reply);
 			Object 	payload = transformer.transform(reply.getFieldsMap());
 			Map<String, String> params = new HashMap<String, String>();

@@ -427,6 +427,35 @@ public class FileService extends BaseService {
 	}
 	
 	/**
+	 * Method to get a list of Files shared with the Community
+	 * @param communityId
+	 * @param params
+	 * @return FileList
+	 * @throws FileServiceException
+	 */
+	public FileList getCommunitySharedFiles(String communityId, HashMap<String, String> params) throws FileServiceException {
+		String accessType = AccessType.AUTHENTICATED.getAccessType();
+		SubFilters subFilters = new SubFilters();
+        if (StringUtil.isEmpty(communityId)) {
+        	throw new FileServiceException(null, Messages.Invalid_CommunityId);
+        }
+        if(null == params){
+			 params = new HashMap<String, String>();
+		}
+        subFilters.setCommunityCollectionId(communityId);
+        String resultType = ResultType.FEED.getResultType();
+		String requestUrl = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
+                null, subFilters, resultType); 
+		try {
+			return (FileList) super.getEntities(requestUrl, params, new FileFeedHandler(this)); 
+		} catch (ClientServicesException e) {
+			throw new FileServiceException(e, Messages.MyCommunitySharedFilesException);
+		} catch (IOException e) {
+			throw new FileServiceException(e, Messages.MyCommunitySharedFilesException);
+		}
+	}
+	
+	/**
 	 * Method to download a community file
 	 * @param ostream - output stream which contains the binary content of the file
 	 * @param fileId

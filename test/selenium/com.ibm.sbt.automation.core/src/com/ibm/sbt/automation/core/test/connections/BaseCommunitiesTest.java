@@ -34,6 +34,7 @@ import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.connections.communities.Community;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
 import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
+import com.ibm.sbt.services.client.connections.communities.Invite;
 import com.ibm.sbt.services.client.connections.communities.Member;
 import com.ibm.sbt.services.client.connections.communities.MemberList;
 import com.ibm.sbt.services.client.connections.forums.ForumServiceException;
@@ -85,6 +86,15 @@ public class BaseCommunitiesTest extends BaseApiTest {
     	}
     }
     
+    protected Invite createInvite(Community community, String userid) {
+    	try {
+    		return communityService.createInvite(community.getCommunityUuid(), userid);
+    	} catch (CommunityServiceException cse) {
+    		fail("Error creating invite",cse);
+    	}
+    	return null;
+    }
+    
     protected String createCommunityName() {
     	return this.getClass().getName() + "#" + this.hashCode() + " Community - " + System.currentTimeMillis();
     }
@@ -123,6 +133,14 @@ public class BaseCommunitiesTest extends BaseApiTest {
         	Assert.assertTrue("Expect match "+email+" <> "+json.getString("getEmail"), email.equalsIgnoreCase(json.getString("getEmail")));
         }
         Assert.assertEquals(role, json.getString("getRole"));
+    }
+    
+    protected void assertInviteValid(JsonJavaObject json, Invite invite) {
+        Assert.assertNull("Unexpected error detected on page", json.getString("code"));
+        Assert.assertEquals(invite.getCommunityUuid(), json.getString("getCommunityUuid"));
+        //Assert.assertEquals(invite.getTitle(), json.getString("getTitle"));
+        //Assert.assertEquals(invite.getContributor().getName(), json.getAsObject("getCommunityUuid").getAsString("name"));
+        //Assert.assertEquals(invite.getContributor().getUserid(), json.getAsObject("getCommunityUuid").getAsString("userid"));
     }
     
     protected Community getLastCreatedCommunity() {

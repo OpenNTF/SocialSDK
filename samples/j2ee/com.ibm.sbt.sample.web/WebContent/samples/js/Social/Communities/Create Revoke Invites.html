@@ -1,0 +1,58 @@
+<div role="main">
+	<div id="error" style="display:none;" class="alert alert-error"></div>
+	<div id="success" style="" class="alert alert-success"></div>
+	<div class="form-horizontal">
+	    <legend>Invite Details</legend>
+	    <div class="control-group">
+	    	<label class="control-label">Community Title:</label>
+	        <div class="controls">
+	            <input id="communityTitle" type="text" placeholder="Community Title" style="width:400px" disabled="true"></input>
+	        </div>
+	        <div style="height:4px"></div>
+	    	<label class="control-label">Invite Id:</label>
+	        <div class="controls">
+	            <input id="inviteId" type="text" placeholder="Invite Id" style="width:400px" disabled="true"></input>
+	        </div>
+	        <div style="height:4px"></div>
+	        <label class="control-label">Title:</label>
+	        <div class="controls">
+	            <input id="inviteTitle" type="text" placeholder="Title" style="width:400px"></input>
+	        </div>
+	        <div style="height:4px"></div>
+	        <label class="control-label">User Id:</label>
+	        <div class="controls">
+	            <input id="inviteUserid" type="text" placeholder="User Id" style="width:400px"></input>
+	        </div>
+	        <div style="height:4px"></div>
+	        <label class="control-label">Email:</label>
+	        <div class="controls">
+	            <input id="inviteEmail" type="text" placeholder="Email" style="width:400px"></input>
+	        </div>
+	        <div style="height:4px"></div>
+	        <label class="control-label">Invitee Id:</label>
+	        <div class="controls">
+	            <input id="inviteeId" type="text" placeholder="Invitee Id" style="width:400px" disabled="true"></input>
+	        </div>
+	        <div style="height:8px"></div>
+	        <div class="controls">
+		    	<button class="btn btn-primary" id="refreshBtn">Refresh</button>
+		    	<button class="btn" id="inviteBtn">Send Invite</button>
+	        </div>
+	        <input id="entry" type="hidden"></input>
+	    </div>
+	</div>
+</div>
+<div role="main">
+	<table class="table table-bordered" id="invitesTable">
+		<thead>
+			<tr class="label label-info">
+				<th>Title</th>
+				<th>Name</th>
+				<th>User Id</th>
+				<th>Invitee Id</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody id="invitesTableBody"></tbody>
+	</table>
+</div>

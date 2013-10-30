@@ -964,7 +964,7 @@ public class CommunityService extends BaseService {
 	 * Method to get a list of Community Files
 	 * @param communityId
 	 * @param params
-	 * @return
+	 * @return FileList
 	 * @throws CommunityServiceException
 	 */
 	public FileList getCommunityFiles(String communityId, HashMap<String, String> params) throws CommunityServiceException {

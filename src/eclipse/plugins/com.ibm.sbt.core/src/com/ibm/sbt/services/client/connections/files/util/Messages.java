@@ -31,6 +31,7 @@ public class Messages {
     public static String Invalid_CommunityId                       = "Invalid Input parameter : CommunityId";
     public static String Invalid_CommunityLibraryId                = "Invalid Input parameter : CommunityLibraryId";
     public static String MyCommunityFilesException				   = "Problem occurred while fetching community files";
+    public static String MyCommunitySharedFilesException		   = "Problem occurred while fetching community shared files";
     public static String Invalid_ContentId                         = "Invalid Input parameter : ContentId";
     public static String Invalid_VersionId                         = "Invalid Input parameter : versionId.";
     public static String Message_RetrievalError                    = "Retrieving Atom Entry document of the original File.";

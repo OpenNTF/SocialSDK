@@ -22,8 +22,8 @@ import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
 import com.ibm.xsp.FacesExceptionEx;
 import com.ibm.xsp.extlib.sbt.files.type.AbstractType;
+import com.ibm.xsp.extlib.sbt.files.type.DropboxFiles;
 import com.ibm.xsp.extlib.sbt.services.client.DropboxService;
-import com.ibm.xsp.extlib.sbt.services.client.endpoints.DropboxEndpoint;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.ibm.xsp.util.URLEncoding;
 
@@ -91,17 +91,9 @@ public class DropboxProxyEndpointService extends ProxyEndpointService {
         } catch (IOException e) {
             throw new FacesExceptionEx(e, "Failed to encode URI string: {0}", path);
         }
-        String href = ExtLibUtil.concatPath(getDropBoxApiVersion(bean), "files/dropbox", '/');
+        String href = ExtLibUtil.concatPath(DropboxFiles.VERSION_1, "files/dropbox", '/');
         href = ExtLibUtil.concatPath(href, path, '/');
         return href;
-    }
-    
-    public String getDropBoxApiVersion(Endpoint ep){
-        if(StringUtil.equals(DropboxEndpoint.DEFAULT_API_VERSION, ((DropboxEndpoint)ep).getApiVersion())){
-            return "1";//latestAPI;
-        }
-        return ((DropboxEndpoint)ep).getApiVersion();
-        
     }
 	
 

@@ -14,6 +14,7 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@page import="com.ibm.sbt.services.client.connections.files.FileService"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.File"%>
 <%@page import="com.ibm.commons.util.io.StreamUtil"%>
 <%@page import="java.io.ByteArrayInputStream"%>
@@ -41,11 +42,13 @@
     <%
     try {
 	    CommunityService service = new CommunityService();
+	    FileService serviceFs = new FileService();
 	    CommunityList communities = service.getMyCommunities();
+	    
 	    if(communities != null && ! communities.isEmpty())  {
 	    	String communityId = communities.get(0).getCommunityUuid();
 		    out.println("<br>Getting Community Owned Files<br>");
-	    	FileList list = service.getCommunityFiles(communityId, null);
+	    	FileList list = serviceFs.getCommunityFiles(communityId, null);
 		    String fileId = "";
 		    if(list != null && ! list.isEmpty()) {
 		    	for (File fileEntry : list) {
@@ -55,8 +58,9 @@
 				out.println("No Files in Community Library");
 			}
 		    
+		   
 		    out.println("<br>Getting Files Shared with the Community<br>");
-	    	list = service.getCommunitySharedFiles(communityId, null);
+	    	list = serviceFs.getCommunitySharedFiles(communityId, null);
 		    if(list != null && ! list.isEmpty()) {
 		    	for (File fileEntry : list) {
 					out.println("<a href=\"" + fileEntry.getDownloadUrl() + "\"> " + fileEntry.getLabel() + "</a><br/>" );

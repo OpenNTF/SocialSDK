@@ -73,6 +73,7 @@
         <include>com.ibm.sbt.sample:helloworld.webapp</include>
         <include>com.ibm.sbt.sample:smartcloud.webapp</include>
         <include>com.ibm.sbt.sample:grantaccess.webapp</include>
+        <include>com.ibm.sbt.sample:sso.sample.webapp</include>
       </includes>
       <binaries>
         <outputDirectory>sbtsdk/samples/war</outputDirectory>

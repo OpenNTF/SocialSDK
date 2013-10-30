@@ -23,7 +23,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
 
     return lang.mixin({
     	
-    	BookmarksFeedXPath : conn.ConnectionsFeedXPath,
+    	BookmarkFeedXPath : conn.ConnectionsFeedXPath,
     	
         /**
          * XPath expressions
@@ -33,12 +33,25 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @for sbt.connections.CommunityService
          */
         BookmarkXPath : {
+        	entry : "/a:entry",
+        	uid : "a:id",
+            BookmarkUuid: "a:id",
             title: "a:title",
+            privateFlag: "a:category[@term='private' and @scheme='http://www.ibm.com/xmlns/prod/sn/flags']",
+            categoryType: "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/type']/@term",
+            content: "a:content",
             updated: "a:updated",
+            published: "a:published",
+            link: "a:link[not(@rel)]/@href",
+            linkEdit: "a:link[@rel='edit']/@href",
+            linkSame: "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/same']/@href",
             url: "a:link[1]/@href",
             authorId:"a:author/snx:userid",
             authorName: "a:author/a:name",
+            authorEmail: "a:author/a:email",
+            authorUri: "a:author/a:uri",
             tags : "a:category[not(@scheme)]/@term",
+            clickcount: "snx:clickcount",
         },
 
         /**
@@ -50,6 +63,50 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          */
         AtomBookmarksAll : "/${dogear}/atom",
 
+        /**
+         * A feed of popular bookmarks.
+         *  
+         * @property AtomBookmarkssAll
+         * @type String
+         * @for sbt.connections.BoomarkService
+         */
+        AtomBookmarksPopular : "/${dogear}/atom/popular",
+
+        /**
+         * A feed of bookmarks that others notified me about.
+         *  
+         * @property AtomBookmarkssAll
+         * @type String
+         * @for sbt.connections.BoomarkService
+         */
+        AtomBookmarksMyNotifications : "/${dogear}/atom/mynotifications",
+
+        /**
+         * A feed of bookmarks about which I notified others.
+         *  
+         * @property AtomBookmarkssAll
+         * @type String
+         * @for sbt.connections.BoomarkService
+         */
+        AtomBookmarksINotifiedMySentNotifications : "/${dogear}/atom/mysentnotifications",
+
+        /**
+         * A feed of all bookmark tags.
+         *  
+         * @property AtomBookmarksTags
+         * @type String
+         * @for sbt.connections.BoomarkService
+         */
+        AtomBookmarksTags : "/${dogear}/tags",
+
+        /**
+         * create delete or update a bookmark.
+         *  
+         * @property AtomBookmarkCreateUpdateDelete
+         * @type String
+         * @for sbt.connections.BoomarkService
+         */
+        AtomBookmarkCreateUpdateDelete : "/${dogear}/api/app"
 
     }, conn);
 });

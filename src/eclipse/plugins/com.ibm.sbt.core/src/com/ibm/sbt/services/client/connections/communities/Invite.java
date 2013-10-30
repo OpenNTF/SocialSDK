@@ -14,7 +14,7 @@ import com.ibm.sbt.services.client.connections.communities.model.CommunityXPath;
 public class Invite extends BaseEntity{
 
 	private String communityUuid;
-
+	private String inviteeUuid;
 
 	public Invite(CommunityService communityService, String id) {
 		setService(communityService);
@@ -38,8 +38,31 @@ public class Invite extends BaseEntity{
     	//extract the community id from /communities/service/atom/community?communityUuid=33320ce4-058b-4066-95de-efbb44825773
     	communityId = communityId.substring(communityId.indexOf("=")+1,communityId.length());
     	return communityId;
-}
+	}
 	
+	/**
+	 * @return the inviteeUuid
+	 */
+	public String getInviteeUuid() {
+		if (this.inviteeUuid == null) {
+			String id = getAsString(CommunityXPath.id);
+			String communityId = getCommunityUuid();
+			if (id != null && communityId != null) {
+				int index = id.indexOf(communityId);
+				inviteeUuid = id.substring(index + communityId.length() + 1);
+			}
+		}
+		return inviteeUuid;
+	}
+
+	/**
+	 * @param inviteeUuid the inviteeUuid to set
+	 */
+	public Invite setInviteeUuid(String inviteeUuid) {
+		this.inviteeUuid = inviteeUuid;
+		return this;
+	}
+
 	/**
 	 * getId
 	 * 

@@ -2,11 +2,14 @@ require(["sbt/connections/CommunityService", "sbt/dom", "sbt/json"], function(Co
     try {
         var communityService = new CommunityService();
         var communityUuid = "%{name=sample.communityId|helpSnippetId=Social_Communities_Get_My_Communities}";
-        var id = "%{name=sample.id2|helpSnippetId=Social_Profiles_Get_Profile}";        
-        var promise = communityService.createInvite(communityUuid, id);
+        var userid = "%{name=sample.id2|helpSnippetId=Social_Profiles_Get_Profile}"; 
+        var invite = communityService.newInvite();
+        invite.setCommunityUuid(communityUuid);
+        invite.setUserid(userid);
+        var promise = communityService.createInvite(invite);
         promise.then(
             function(invite) {
-            	dom.setText("json", "Invite Id for the new invite is " + invite.getId());
+            	dom.setText("json", json.jsonBeanStringify(invite));
             },
             function(error) {
                 dom.setText("json", json.jsonBeanStringify(error));

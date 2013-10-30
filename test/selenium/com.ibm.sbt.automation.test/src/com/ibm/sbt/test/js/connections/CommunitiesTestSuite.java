@@ -34,8 +34,10 @@ import com.ibm.sbt.test.js.connections.communities.api.CreateCommunityJson;
 import com.ibm.sbt.test.js.connections.communities.api.CreateCommunityLoadIt;
 import com.ibm.sbt.test.js.connections.communities.api.CreateCommunityNew;
 import com.ibm.sbt.test.js.connections.communities.api.CreateForumTopic;
+import com.ibm.sbt.test.js.connections.communities.api.CreateInvite;
 import com.ibm.sbt.test.js.connections.communities.api.CrudCommunity;
 import com.ibm.sbt.test.js.connections.communities.api.DeleteCommunity;
+import com.ibm.sbt.test.js.connections.communities.api.GetAllInvites;
 import com.ibm.sbt.test.js.connections.communities.api.GetCommunity;
 import com.ibm.sbt.test.js.connections.communities.api.GetCommunityMembers;
 import com.ibm.sbt.test.js.connections.communities.api.GetForumTopics;
@@ -46,6 +48,7 @@ import com.ibm.sbt.test.js.connections.communities.api.GetSaveCommunity;
 import com.ibm.sbt.test.js.connections.communities.api.GetSubCommunities;
 import com.ibm.sbt.test.js.connections.communities.api.NewSaveCommunity;
 import com.ibm.sbt.test.js.connections.communities.api.RemoveCommunityMember;
+import com.ibm.sbt.test.js.connections.communities.api.RemoveInvite;
 import com.ibm.sbt.test.js.connections.communities.api.UpdateCommunity;
 import com.ibm.sbt.test.js.connections.communities.api.UpdateCommunityJson;
 import com.ibm.sbt.test.js.connections.communities.api.UpdateCommunityTags;
@@ -68,6 +71,7 @@ import com.ibm.sbt.test.js.connections.communities.api.UpdateCommunityTags;
     GetPublicCommunities.class,
     GetMyCommunities.class, 
     GetMyInvites.class, 
+    GetAllInvites.class,
     GetCommunityMembers.class, 
     GetSubCommunities.class,
 
@@ -86,6 +90,9 @@ import com.ibm.sbt.test.js.connections.communities.api.UpdateCommunityTags;
     NewSaveCommunity.class,
     GetSaveCommunity.class,
     CrudCommunity.class,
+    
+    CreateInvite.class,
+    RemoveInvite.class,
     
     //GetCommunityForumTopics.class,
     //GetForumTopics.class,

@@ -977,22 +977,6 @@ public class CommunityService extends BaseService {
 	}
 	
 	/**
-	 * Method to get a list of Files shared with the Community
-	 * @param communityId
-	 * @param params
-	 * @return FileList
-	 * @throws CommunityServiceException
-	 */
-	public FileList getCommunitySharedFiles(String communityId, HashMap<String, String> params) throws CommunityServiceException {
-		FileService fileService = new FileService(this.endpoint);
-		try {
-			return fileService.getCommunitySharedFiles(communityId, params);
-		} catch (FileServiceException e) {
-			throw new CommunityServiceException(e);
-		}
-	}
-	
-	/**
 	 * Method to download a community file
 	 * @param ostream
 	 * @param fileId

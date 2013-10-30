@@ -429,6 +429,16 @@ public class FileService extends BaseService {
 	/**
 	 * Method to get a list of Files shared with the Community
 	 * @param communityId
+	 * @return FileList
+	 * @throws FileServiceException
+	 */
+	public FileList getCommunitySharedFiles(String communityId) throws FileServiceException {
+		return getCommunitySharedFiles(communityId, null); 
+	}
+	
+	/**
+	 * Method to get a list of Files shared with the Community
+	 * @param communityId
 	 * @param params
 	 * @return FileList
 	 * @throws FileServiceException

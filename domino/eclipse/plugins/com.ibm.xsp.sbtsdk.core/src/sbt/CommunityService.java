@@ -1,11 +1,11 @@
 /*
- * © Copyright IBM Corp. 2010
+ * © Copyright IBM Corp. 2011
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
  * You may obtain a copy of the License at:
  * 
- * http://www.apache.org/licenses/LICENSE-2.0 
+ * http://www.apache.org/licenses/LICENSE-2.0
  * 
  * Unless required by applicable law or agreed to in writing, software 
  * distributed under the License is distributed on an "AS IS" BASIS, 
@@ -18,20 +18,19 @@ package sbt;
 import com.ibm.sbt.services.endpoints.Endpoint;
 
 
-/**
- * Connections service.
- * @author Philippe Riand
- */
-public class ConnectionsService extends com.ibm.sbt.services.client.connections.ConnectionsService {
-	public ConnectionsService() {
+public class CommunityService extends com.ibm.sbt.services.client.connections.communities.CommunityService {
+	
+	public CommunityService() {
+		super(DEFAULT_ENDPOINT_NAME, DEFAULT_CACHE_SIZE);
 	}
 
-	public ConnectionsService(Endpoint endpoint) {
-		super(endpoint);
+	
+	public CommunityService(String endpointName) {
+		super(endpointName, DEFAULT_CACHE_SIZE);
+	}
+	
+	public CommunityService(Endpoint endpoint) {
+		super(endpoint, DEFAULT_CACHE_SIZE);
 	}
 
-	public ConnectionsService(String endpointName) {
-		super(endpointName);
-	}   
-    
 }

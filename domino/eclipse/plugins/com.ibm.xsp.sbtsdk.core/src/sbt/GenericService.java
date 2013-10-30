@@ -24,7 +24,12 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  */
 public class GenericService extends com.ibm.sbt.services.client.GenericService{
 
-    public GenericService(Endpoint endpoint, String serviceUrl) {
-        super(endpoint.getLabel());
-    }    
+	public GenericService() {
+    }
+    public GenericService(Endpoint endpoint) {
+        super(endpoint);
+    }
+    public GenericService(String endpointName) {
+        super(endpointName);
+    }   
 }

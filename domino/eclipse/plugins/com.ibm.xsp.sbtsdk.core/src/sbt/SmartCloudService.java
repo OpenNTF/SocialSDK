@@ -23,12 +23,14 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  */
 public class SmartCloudService extends com.ibm.sbt.services.client.smartcloud.SmartCloudService {
 
-    /**
-     * @param endpoint
-     * @param serviceUrl
-     */
+	public SmartCloudService() {
+	}
     public SmartCloudService(Endpoint endpoint) {
         super(endpoint);
     }
+    
+    public SmartCloudService(String endpointName) {
+		super(endpointName);
+	}
 
 }

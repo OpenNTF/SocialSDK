@@ -24,15 +24,6 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  */
 public class DropboxService extends com.ibm.xsp.extlib.sbt.services.client.DropboxService {
 
-//
-//    /**
-//     * @param endpoint
-//     * @param serviceUrl
-//     */
-//    public DropboxService(Endpoint endpoint, String serviceUrl) {
-//        super(endpoint, serviceUrl);
-//    }
-    
     public DropboxService(Endpoint endpoint) {
         super(endpoint);
     }  

@@ -17,21 +17,42 @@ package com.ibm.sbt.test.controls.grid.communities;
 
 import static org.junit.Assert.assertTrue;
 
-import org.junit.Ignore;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
-import com.ibm.sbt.automation.core.test.BaseGridTest;
+import com.ibm.sbt.automation.core.test.connections.BaseCommunitiesGridTest;
+import com.ibm.sbt.services.client.connections.communities.Member;
 
 /**
  * @author Benjamin Jakobus
  * 
  * @date 24 Oct 2013
  */
-public class CommunityMembersGrid extends BaseGridTest {
+public class CommunityMembersGrid extends BaseCommunitiesGridTest {
 
-    @Test 
-    public void testGrid() {
-        assertTrue("Expected the test to generate a grid", checkGrid("Social_Communities_Controls_CommunityMembers",true,true));
+    public CommunityMembersGrid() {
+        setAuthType(AuthType.AUTO_DETECT);
     }
     
+    @Test
+    public void testCreateCommunity() {
+    	// Check grid
+    	assertTrue("Expected the test to generate a grid", checkGrid("Social_Communities_Controls_CommunityMembers",true,true));
+    }
+    
+    @Before
+    public void initCommunity() {
+    	addSnippetParam("sample.userId3", getCommunityUuid());	
+    	try {
+    		addMember(new Member(getCommunityService(), "AmyBlanks@renovations.com"));  
+    	} catch(Exception e) {
+    		e.printStackTrace();
+    	}
+    }
+    
+    @After
+    public void destroyCommunity() {
+    	destroy();
+    }
 }

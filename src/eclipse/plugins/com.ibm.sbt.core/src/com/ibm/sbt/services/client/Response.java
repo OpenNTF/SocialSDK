@@ -17,6 +17,8 @@
 package com.ibm.sbt.services.client;
 
 import java.io.IOException;
+
+import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpRequestBase;
@@ -38,10 +40,12 @@ public class Response {
 	private HttpClient httpClient;
 	private Handler handler;
 	private Args args;
+	private Header[] headers;
 	
 	public Response(HttpClient httpClient, HttpResponse response, HttpRequestBase request, Args args, Handler handler) throws ClientServicesException {
 		this.httpClient = httpClient;
 		this.response = response;
+		this.headers = response.getAllHeaders();
 		this.request = request;
 		this.handler = handler;
 		this.args = args;
@@ -50,6 +54,9 @@ public class Response {
 	
 	public Response(Object data){
 		this.data = data;
+	}
+	public void setHeaders(Header[] h) {
+		this.headers = h;
 	}
 	
 	public Object getData(){
@@ -81,5 +88,10 @@ public class Response {
 			throw new ClientServicesException(e);
 		}
 
+	}
+
+	public Header[] getResponseHeaders() {
+		// TODO Auto-generated method stub
+		return headers;
 	}
 }

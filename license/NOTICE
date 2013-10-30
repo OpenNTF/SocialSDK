@@ -70,9 +70,592 @@ Available from http://archive.apache.org/dist/httpcomponents/
    This project contains annotations derived from JCIP-ANNOTATIONS
    Copyright (c) 2005 Brian Goetz and Tim Peierls. See http://www.jcip.net
 
-Dojo 1.8 
-Licensed under either the terms of the modified BSD license or the Academic Free License version 2.1
-Available from http://dojotoolkit.org/
+_______________________________________________________
+
+DOJO TOOLKIT: The Program includes the Dojo Toolkit 1.8 software which IBM
+obtained under the terms and conditions of the following license:
+ 
+Copyright (c) 2005-2013, The Dojo Foundation
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+  * Redistributions of source code must retain the above copyright notice, this
+    list of conditions and the following disclaimer.
+  * Redistributions in binary form must reproduce the above copyright notice,
+    this list of conditions and the following disclaimer in the documentation
+    and/or other materials provided with the distribution.
+  * Neither the name of the Dojo Foundation nor the names of its contributors
+    may be used to endorse or promote products derived from this software
+    without specific prior written permission.
+ 
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+======================================================================
+APACHE CODE. The Program includes all or portions of the following 
+software which IBM obtained under the terms and conditions of the Apache License Version 
+2.0, January 2004.  This software may also consist of voluntary contributions made by 
+many individuals to the Apache Software Foundation.  For more information on the Apache 
+Software Foundation, please see http://www.apache.org:
+
+*	OpenAjax.js  Open Ajax hub 1.0 library
+*	Util/less  Less.js 1.1.4 library
+
+IBM is required to provide you, as the recipient of such software, 
+with a copy of the following license notice from the Apache Software 
+Foundation:  
+
+Apache License
+Version 2.0, January 2004
+http://www.apache.org/licenses/
+
+TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+
+1. Definitions.
+
+"License" shall mean the terms and conditions for use, reproduction, 
+and distribution as defined by Sections 1 through 9 of this document.
+
+"Licensor" shall mean the copyright owner or entity authorized by the 
+copyright owner that is granting the License.
+
+"Legal Entity" shall mean the union of the acting entity and all other 
+entities that control, are controlled by, or are under common control 
+with that entity. For the purposes of this definition, "control" means 
+(i) the power, direct or indirect, to cause the direction or 
+management of such entity, whether by contract or otherwise, or (ii) 
+ownership of fifty percent (50%) or more of the outstanding shares, or 
+(iii) beneficial ownership of such entity.
+
+"You" (or "Your") shall mean an individual or Legal Entity exercising 
+permissions granted by this License.
+
+"Source" form shall mean the preferred form for making modifications, 
+including but not limited to software source code, documentation 
+source, and configuration files.
+
+"Object" form shall mean any form resulting from mechanical 
+transformation or translation of a Source form, including but not 
+limited to compiled object code, generated documentation, and 
+conversions to other media types.
+
+"Work" shall mean the work of authorship, whether in Source or Object 
+form, made available under the License, as indicated by a copyright 
+notice that is included in or attached to the work (an example is 
+provided in the Appendix below).
+
+"Derivative Works" shall mean any work, whether in Source or Object 
+form, that is based on (or derived from) the Work and for which the 
+editorial revisions, annotations, elaborations, or other modifications 
+represent, as a whole, an original work of authorship. For the 
+purposes of this License, Derivative Works shall not include works 
+that remain separable from, or merely link (or bind by name) to the 
+interfaces of, the Work and Derivative Works thereof.
+
+"Contribution" shall mean any work of authorship, including the 
+original version of the Work and any modifications or additions to 
+that Work or Derivative Works thereof, that is intentionally submitted 
+to Licensor for inclusion in the Work by the copyright owner or by an 
+individual or Legal Entity authorized to submit on behalf of the 
+copyright owner. For the purposes of this definition, "submitted" 
+means any form of electronic, verbal, or written communication sent to 
+the Licensor or its representatives, including but not limited to 
+communication on electronic mailing lists, source code control 
+systems, and issue tracking systems that are managed by, or on behalf 
+of, the Licensor for the purpose of discussing and improving the Work, 
+but excluding communication that is conspicuously marked or otherwise 
+designated in writing by the copyright owner as "Not a Contribution."
+
+"Contributor" shall mean Licensor and any individual or Legal Entity 
+on behalf of whom a Contribution has been received by Licensor and 
+subsequently incorporated within the Work.
+
+2. Grant of Copyright License. Subject to the terms and conditions of 
+this License, each Contributor hereby grants to You a perpetual, 
+worldwide, non-exclusive, no-charge, royalty-free, irrevocable 
+copyright license to reproduce, prepare Derivative Works of, publicly 
+display, publicly perform, sublicense, and distribute the Work and 
+such Derivative Works in Source or Object form.
+
+3. Grant of Patent License. Subject to the terms and conditions of 
+this License, each Contributor hereby grants to You a perpetual, 
+worldwide, non-exclusive, no-charge, royalty-free, irrevocable (except 
+as stated in this section) patent license to make, have made,  use, 
+offer to sell, sell, import, and otherwise transfer the Work, where 
+such license applies only to those patent claims licensable by such 
+Contributor that are necessarily infringed by their Contribution(s) 
+alone or by combination of their Contribution(s) with the Work to 
+which such Contribution(s) was submitted. If You institute patent 
+litigation against any entity (including a cross-claim or counterclaim 
+in a lawsuit) alleging that the Work or a Contribution incorporated 
+within the Work constitutes direct or contributory patent 
+infringement, then any patent licenses granted to You under this 
+License for that Work shall terminate as of the date such litigation 
+is filed.
+
+4. Redistribution. You may reproduce and distribute copies of the Work 
+or Derivative Works thereof in any medium, with or without 
+modifications, and in Source or Object form, provided that You meet 
+the following conditions:
+
+     (a) You must give any other recipients of the Work or Derivative 
+     Works a copy of this License; and
+
+     (b) You must cause any modified files to carry prominent notices 
+     stating that You changed the files; and
+
+     (c) You must retain, in the Source form of any Derivative Works 
+     that You distribute, all copyright, patent, trademark, and 
+     attribution notices from the Source form of the Work, excluding 
+     those notices that do not pertain to any part of the Derivative 
+     Works; and
+
+     (d) If the Work includes a "NOTICE" text file as part of its 
+     distribution, then any Derivative Works that You distribute must 
+     include a readable copy of the attribution notices contained 
+     within such NOTICE file, excluding those notices that do not 
+     pertain to any part of the Derivative Works, in at least one of 
+     the following places: within a NOTICE text file distributed as 
+     part of the Derivative Works; within the Source form or 
+     documentation, if provided along with the Derivative Works; or, 
+     within a display generated by the Derivative Works, if and 
+     wherever such third-party notices normally appear. The contents 
+     of the NOTICE file are for informational purposes only and do not 
+     modify the License. You may add Your own attribution notices 
+     within Derivative Works that You distribute, alongside or as an 
+     addendum to the NOTICE text from the Work, provided that such 
+     additional attribution notices cannot be construed as modifying 
+     the License.
+
+You may add Your own copyright statement to Your modifications and may 
+provide additional or different license terms and conditions for use, 
+reproduction, or distribution of Your modifications, or for any such 
+Derivative Works as a whole, provided Your use, reproduction, and 
+distribution of the Work otherwise complies with the conditions stated 
+in this License.
+
+5. Submission of Contributions. Unless You explicitly state otherwise, 
+any Contribution intentionally submitted for inclusion in the Work by 
+You to the Licensor shall be under the terms and conditions of this 
+License, without any additional terms or conditions.  Notwithstanding 
+the above, nothing herein shall supersede or modify the terms of any 
+separate license agreement you may have executed with Licensor 
+regarding such Contributions.
+
+6. Trademarks. This License does not grant permission to use the trade 
+names, trademarks, service marks, or product names of the Licensor, 
+except as required for reasonable and customary use in describing the 
+origin of the Work and reproducing the content of the NOTICE file.
+
+7. Disclaimer of Warranty. Unless required by applicable law or agreed 
+to in writing, Licensor provides the Work (and each Contributor 
+provides its Contributions) on an "AS IS" BASIS, WITHOUT WARRANTIES OR 
+CONDITIONS OF ANY KIND, either express or implied, including, without 
+limitation, any warranties or conditions of TITLE, NON-INFRINGEMENT, 
+MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE. You are solely 
+responsible for determining the appropriateness of using or 
+redistributing the Work and assume any risks associated with Your 
+exercise of permissions under this License.
+
+8. Limitation of Liability. In no event and under no legal theory, 
+whether in tort (including negligence), contract, or otherwise, unless 
+required by applicable law (such as deliberate and grossly negligent 
+acts) or agreed to in writing, shall any Contributor be liable to You 
+for damages, including any direct, indirect, special, incidental, or 
+consequential damages of any character arising as a result of this 
+License or out of the use or inability to use the Work (including but 
+not limited to damages for loss of goodwill, work stoppage, computer 
+failure or malfunction, or any and all other commercial damages or 
+losses), even if such Contributor has been advised of the possibility 
+of such damages.
+
+9. Accepting Warranty or Additional Liability. While redistributing 
+the Work or Derivative Works thereof, You may choose to offer, and 
+charge a fee for, acceptance of support, warranty, indemnity, or other 
+liability obligations and/or rights consistent with this License. 
+However, in accepting such obligations, You may act only on Your own 
+behalf and on Your sole responsibility, not on behalf of any other 
+Contributor, and only if You agree to indemnify, defend, and hold each 
+Contributor harmless for any liability incurred by, or claims asserted 
+against, such Contributor by reason of your accepting any such 
+warranty or additional liability.
+
+END OF APACHE NOTICES AND INFORMATION
+
+======================================================================
+CSS Styles from Yahoo Widget Library.  The Program includes all or portions of the 
+following software which was obtained under the terms and conditions of the BSD License.
+
+CSS Styles from  Yahoo Widget Library Library
+Copyright (c) 2006, Yahoo! Inc.
+ All rights reserved.
+ Redistribution and use of this software in source and binary forms, with or without 
+modification, are permitted provided that the following conditions are met:
+ * Redistributions of source code must retain the above copyright notice, this list of 
+conditions and the following disclaimer. 
+* Redistributions in binary form must reproduce the above copyright notice, this list of 
+conditions and the following disclaimer in the 
+documentation and/or other materials provided with the distribution.
+ * Neither the name of Yahoo! Inc. nor the names of its contributors may be used to 
+endorse or promote products derived from this software without 
+specific prior written permission of Yahoo! Inc. 
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY 
+EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
+MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL 
+THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT 
+OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) 
+HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR 
+TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS 
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+
+END OF CSS Styles from Yahoo Widget Library NOTICES AND INFORMATION
+
+======================================================================
+Firebug Lite Files.  The Program includes all or portions of the following 
+software which was obtained under the terms and conditions of the 
+BSD License.
+
+firebug.html, firebug.js, errIcon.png, infoIcon.png, warningIcon.png:
+		  Distributed under the terms of the BSD License (see below)
+
+Copyright (c) 2006-2007, Joe Hewitt
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+  * Redistributions of source code must retain the above copyright notice, this
+	list of conditions and the following disclaimer.
+  * Redistributions in binary form must reproduce the above copyright notice,
+	this list of conditions and the following disclaimer in the documentation
+	and/or other materials provided with the distribution.
+  * Neither the name of the Dojo Foundation nor the names of its contributors
+	may be used to endorse or promote products derived from this software
+	without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+END OF FIREBUG LITE FILES NOTICES AND INFORMATION
+
+======================================================================
+Unicode CLDR Data Files.  The Program includes data files
+which were obtained under the terms and conditions of the following license.
+ 
+
+UNICODE, INC. LICENSE AGREEMENT - DATA FILES AND SOFTWARE
+
+Unicode Data Files include all data files under the directories 
+http://www.unicode.org/Public/, http://www.unicode.org/reports/, 
+and http://www.unicode.org/cldr/data/ . 
+Unicode Software includes any source code published in the Unicode Standard or under the 
+directories http://www.unicode.org/Public/, http://www.unicode.org/reports/, and 
+http://www.unicode.org/cldr/data/.
+
+NOTICE TO USER: Carefully read the following legal agreement. BY DOWNLOADING, INSTALLING, 
+COPYING OR OTHERWISE USING UNICODE INC.'S DATA FILES ("DATA FILES"), AND/OR SOFTWARE 
+("SOFTWARE"), YOU UNEQUIVOCALLY ACCEPT, AND AGREE TO BE BOUND BY, ALL OF THE TERMS AND 
+CONDITIONS OF THIS AGREEMENT. IF YOU DO NOT AGREE, DO NOT DOWNLOAD, INSTALL, COPY, 
+DISTRIBUTE OR USE THE DATA FILES OR SOFTWARE.
+
+COPYRIGHT AND PERMISSION NOTICE
+Copyright (c) 1991-2007 Unicode, Inc. All rights reserved. Distributed under the Terms of 
+Use in http://www.unicode.org/copyright.html.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of the 
+Unicode data files and any associated  documentation (the "Data Files") or Unicode 
+software and any associated documentation (the "Software") to deal in the Data Files or 
+Software without restriction, including without limitation the rights to use, copy, 
+modify, merge, publish, distribute, and/or sell 
+copies of the Data Files or Software, and to permit persons to whom the Data Files or 
+Software are furnished to do so, provided  that (a) the above copyright notice(s) and 
+this permission notice appear with all copies of the Data Files or Software, (b) both the 
+above copyright notice(s) and this permission notice appear in associated documentation, 
+and (c) there is clear notice in each modified Data File or in the Software as well as in 
+the documentation associated with the Data File(s) or Software that the data or software 
+has been modified.
+THE DATA FILES AND SOFTWARE ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS 
+OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
+PARTICULAR PURPOSE AND NONINFRINGEMENT OF THIRD PARTY RIGHTS. IN NO EVENT SHALL THE 
+COPYRIGHT HOLDER OR HOLDERS INCLUDED IN THIS NOTICE BE LIABLE FOR ANY CLAIM, OR ANY 
+SPECIAL INDIRECT OR CONSEQUENTIAL DAMAGES, OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS 
+OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS 
+ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THE DATA FILES OR 
+SOFTWARE.
+Except as contained in this notice, the name of a copyright holder shall not be used in 
+advertising or otherwise to promote the sale, use or other dealings in these Data Files 
+or Software without prior written authorization of the copyright holder.
+
+END OF UNICODE CLDR DATA FILES NOTICES AND INFORMATION
+
+======================================================================
+Json.php  is used in a number of test cases and redistributed under terms of the New BSD 
+License.  Note that this content is not governed by the JSON license (good vs evil) from 
+JSON.org (http://www.json.org/license.html). 
+copyright (c) 2005 Michal Migurski
+
+
+dojox/lang/functional.js - parts of this module (most notably lamda, constFun, invoke, 
+pluck, and partial) are based on work by Oliver Steele 
+(http://osteele.com/sources/javascript/functional/functional.js)
+which was published under MIT License
+
+Javascript language helper functions: The Program includes all or portions of the 
+following software which was obtained under the terms and conditions of the MIT 
+License.
+
+dojox/lang/functional.js
+Copyright (c) 2007 Oliver Steele
+
+util/buildscripts/jslib/packer/base2.js, Packer.js, Word.js
+Copyright (c) 2007 Dean Edwards
+
+Dojox/highlight/_base2.js
+Copyright (c) 2006 Ivan Sagalaev
+
+The MIT License
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of 
+this software and associated documentation files (the "Software"), to deal in 
+the Software without restriction, including without limitation the rights to 
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of 
+the Software, and to permit persons to whom the Software is furnished to do so, 
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all 
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS 
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR 
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER 
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN 
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+END OF Javascript language helper functions   
+
+======================================================================
+The following license covers ICU4J.  No parts of ICU4J ship with Dojo; however, 
+the Hebrew date support is ported from ICU4J (as a derivative work):
+ICU License - ICU 1.8.1 and later
+
+COPYRIGHT AND PERMISSION NOTICE
+
+Copyright (c) 1995-2009 International Business Machines Corporation and others
+
+All rights reserved.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of 
+this software and associated documentation files (the "Software"), to deal in 
+the Software without restriction, including without limitation the rights to 
+use, copy, modify, merge, publish, distribute, and/or sell copies of the 
+Software, and to permit persons to whom the Software is furnished to do so, 
+provided that the above copyright notice(s) and this permission notice appear in 
+all copies of the Software and that both the above copyright notice(s) and this 
+permission notice appear in supporting documentation.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS 
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT OF THIRD PARTY RIGHTS. IN NO EVENT 
+SHALL THE COPYRIGHT HOLDER OR HOLDERS INCLUDED IN THIS NOTICE BE LIABLE FOR ANY 
+CLAIM, OR ANY SPECIAL INDIRECT OR CONSEQUENTIAL DAMAGES, OR ANY DAMAGES 
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF 
+CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+Except as contained in this notice, the name of a copyright holder shall not be 
+used in advertising or otherwise to promote the sale, use or other dealings in 
+this Software without prior written authorization of the copyright holder.
+
+All trademarks and registered trademarks mentioned herein are the property of 
+their respective owners.
+
+======================================================================
+The following license covers US map data in <dojo-directory>/dojox/geo/charting 
+
+	Are there legal restrictions on access or use of the data?
+
+		Access_Constraints: None 
+		Use_Constraints: 
+			None. Acknowledgment of the National Atlas of the United 
+States 
+			of America and (or) the U.S. Geological Survey would be 
+			appreciated in products derived from these data. 
+
+	1. Who distributes the data set? (Distributor 1 of 1)
+
+		Earth Science Information Center, U.S. Geological Survey
+		507 National Center
+		Reston, VA 20192
+
+		1-888-ASK-USGS (1-888-275-8747) (voice)
+
+
+		Contact_Instructions: 
+			In addition to the address above there are other ESIC 
+offices throughout the 	
+			country. A full list of these offices is at 
+			<http://mapping.usgs.gov/esic/esic_index.html>. 
+
+	2. What's the catalog number I need to order this data set?
+
+	3. What legal disclaimers am I supposed to read?
+
+		Although these data have been processed successfully on a 
+computer system 
+		at the U.S. Geological Survey, no warranty expressed or implied 
+is made by the U.S. Geological Survey regarding
+		the utility of the data on any other system, nor shall the act of 
+distribution constitute any such warranty. No
+		responsibility is assumed by the U.S. Geological Survey in the 
+use of these data.
+
+	4. How can I download or order the data?
+
+		Availability in digital form:
+			
+		Data format: ESRI Shapefile  
+		Network links: <http://nationalatlas.gov/atlasftp.html>
+ 
+		Data format: SDTS  
+		Network links: <http://nationalatlas.gov/atlasftp.html>
+ 
+
+		Cost to order the data: 
+
+		There is no charge for the online option. For National Atlas 
+files ordered on CD-ROM 
+		there is a base price of $45.00 per disc, a handling fee of 
+$5.00, and a per-file 
+		charge based on file size. The charge for files less than 10 
+megabytes in size is 
+		$1.00. The charge for files that range in size from 10 to 150 
+megabytes is $7.50. The 
+		charge for files of 150 megabytes or larger is $15.00. The charge 
+is $7.50 for the 
+		Major Roads of the United States data set.
+
+
+		Special instructions:
+
+			To order files on CD-ROM, please see 
+<http://nationalatlas.gov/atlasftp.html#q12>. 
+
+======================================================================
+The following license covers non US map data in <dojo-
+directory>/dojox/geo/charting 
+
+
+Public Domain. All versions of Natural Earth raster + vector map data found on 
+this website are in the public domain.
+You may use the maps in any manner, including modifying the content and design, 
+electronic dissemination, and offset
+printing. The primary authors, Tom Patterson and Nathaniel Vaughn Kelso, and all 
+other contributors renounce all
+financial claim to the maps and invites you to use them for personal, 
+educational, and commercial purposes.
+
+No permission is needed to use Natural Earth. Crediting the authors is 
+unnecessary.
+
+However, if you wish to cite the map data, simply use one of the following.
+
+Short text: Made with Natural Earth.
+
+Long text: Made with Natural Earth. Free vector and raster map data @ 
+naturalearthdata.com.
+
+All users of Natural Earth are highly encouraged to read about data sources and 
+manipulation in the Data Creation section.
+
+The authors provide Natural Earth as a public service and are not responsible 
+for any problems relating to accuracy,
+content, design, and how it is used. If you find an error or omission, please 
+report it for future updates.
+
+The authors used data from The Washington Post, here is their release:
+
+    Natural Earth is hereby granted a non-exclusive license to use the data 
+being provided by The Washington Post for
+    the sole purpose of creating a world base map.  The Washington Post makes no 
+claims as to the completeness, accuracy
+    or content of the data, and makes no representation of any kind, including, 
+but not limited to, any warranty as to
+    the accuracy or fitness of the data for a particular use (nor shall the act 
+of distribution constitute any such
+    warranty). No responsibility is assumed by The Washington Post for any 
+claims arising out of Natural Earths use of
+    the data.
+
+The authors used river and lake data (for Europe only) from the European 
+Commission, Joint Research Centre, Institute
+for Environment and Sustainability, here is their release:
+
+    Natural Earth is hereby granted a non-exclusive license to use the data 
+being provided by European Commission, Joint
+    Research Centre, Institute for Environment and Sustainability (JRC IES) for 
+the sole purpose of creating a world
+    base map. The EC JRC IES makes no claims as to the completeness, accuracy or 
+content of the data, and makes no
+    representation of any kind, including, but not limited to, any warranty as 
+to the accuracy or fitness of the data
+    for a particular use (nor shall the act of distribution constitute any such 
+warranty). No responsibility is assumed
+    by EC JRC IES for any claims arising out of Natural Earths use of the data.
+
+The authors used road transportation data (for North America only) from XNR 
+Productions, here is their release:
+
+    Natural Earth is hereby granted a non-exclusive license to use the data 
+being provided by XNR Productions for the
+    sole purpose of creating a world base map. XNR makes no claims as to the 
+completeness, accuracy or content of the
+    data, and makes no representation of any kind, including, but not limited 
+to, any warranty as to the accuracy or
+    fitness of the data for a particular use (nor shall the act of distribution 
+constitute any such warranty). No
+    responsibility is assumed by XNR for any claims arising out of Natural 
+Earths use of the data.
+
+Happy mapping!
+
+======================================================================
+The following will be added to the notices file for Shrinksafe (and called out 
+in the DOU for Dojo):
+
+The Mozilla Public License Version 1.1 covers the optional Shrinksafe build 
+tool, and Mozilla Rhino 1.7r2 which is redistributed with that tool.  Shrinksafe 
+contains modified files from Mozilla Rhino covered under Mozilla Public License 
+Version 1.1.  The source code for these modifications has been made available at 
+the public Dojo svn repository at http://www.dojotoolkit.org.  
+
+The Shrinksafe tool requires use of Mozilla Rhino 1.6r7 or higher in order to 
+run.  We are relying on the separate DD Checklist already approved for the Rhino 
+1.7R2 jar. The version of Rhino that will be redistributed with the Shrinksafe 
+package by default is the approved version of Mozilla Rhino 1.7r2.
+
+
+END OF DOJO TOOLKIT NOTICES AND INFORMATION
+_______________________________________________________
 
 Dojo 1.6 (Subset - the "dojo/_base/_loader/loader.js" is included to support older AMD function)
 Licensed under either the terms of the modified BSD license or the Academic Free License version 2.1

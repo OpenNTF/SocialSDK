@@ -26,6 +26,7 @@ import com.ibm.sbt.test.js.connections.ActivitiesStreamsTestSuite;
 import com.ibm.sbt.test.js.connections.ActivitiesTestSuite;
 import com.ibm.sbt.test.js.connections.BlogsTestSuite;
 import com.ibm.sbt.test.js.connections.BookmarksRestTestSuite;
+import com.ibm.sbt.test.js.connections.BookmarksTestSuite;
 import com.ibm.sbt.test.js.connections.CommunitiesRestTestSuite;
 import com.ibm.sbt.test.js.connections.CommunitiesTestSuite;
 import com.ibm.sbt.test.js.connections.FilesTestSuite;
@@ -49,6 +50,7 @@ import com.ibm.sbt.test.sample.SampleFrameworkTestSuite;
 	ActivitiesRestTestSuite.class,
 	ActivitiesStreamsTestSuite.class,
 	BlogsTestSuite.class,
+	BookmarksTestSuite.class,
 	BookmarksRestTestSuite.class,
 	CommunitiesRestTestSuite.class, 
 	CommunitiesTestSuite.class, 

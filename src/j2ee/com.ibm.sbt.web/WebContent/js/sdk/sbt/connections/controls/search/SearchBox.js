@@ -494,8 +494,18 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 			 * @param context
 			 */
 			setSuggestedSearch: function(event,popUp,context){
-				var value = event.target.textContent;
-				var id = event.target.id;
+				var targetElement;
+				var value;
+				if(!event){
+					event = window.event;
+					targetElement = event.srcElement;
+					value = targetElement.innerText;
+				}else{
+					targetElement = event.target;
+					value = targetElement.textContent;
+				}
+			 
+				var id = targetElement.id;
 				var input = this._searchInput;
 				
     			context._selectedResultItem.text = value;
@@ -517,7 +527,9 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 					input.value = value;
 				}
 				
-				popUp.innerHTML = "";
+				while (popUp.firstChild) { 
+				    popUp.removeChild(popUp.firstChild); 
+				}
 				context.renderer.removeSuggestionPopUp(context.domNode,popUp);
 			},
 			

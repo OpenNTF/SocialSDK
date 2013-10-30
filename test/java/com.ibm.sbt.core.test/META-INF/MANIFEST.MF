@@ -6,5 +6,4 @@ Bundle-Version: 1.0.0
 Bundle-Vendor: IBM
 Fragment-Host: com.ibm.sbt.core
 Require-Bundle: org.junit
-Import-Package: org.apache.http.impl.client,
- com.ibm.sbt.sample.app
+Import-Package: org.apache.http.impl.client

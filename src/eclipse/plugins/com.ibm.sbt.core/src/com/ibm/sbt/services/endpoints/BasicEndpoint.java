@@ -144,6 +144,9 @@ public class BasicEndpoint extends AbstractEndpoint {
 
     @Override
 	public void authenticate(boolean force) throws ClientServicesException {
+    	if ((HttpServletRequest)Context.get().getHttpRequest() == null) {
+    		return;
+    	}
         if(force || !isAuthenticated()) {
             String authPage = getAuthenticationPage();
          	Context context = Context.get();

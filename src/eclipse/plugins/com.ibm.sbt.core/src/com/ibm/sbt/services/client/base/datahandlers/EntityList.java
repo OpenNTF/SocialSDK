@@ -46,7 +46,12 @@ public abstract class EntityList<Entity extends BaseEntity> extends AbstractList
 	public EntityList(Response requestData, IFeedHandler feedHandler) {
 		this.requestData = requestData;
         this.feedHandler = feedHandler;
+        //in case of 401 errors  client service returns null
+        if (requestData!=null)
 		this.entities = createEntities();
+        else {
+        	this.entities = null;
+        }
     }
 	
 	//TO REMOVE

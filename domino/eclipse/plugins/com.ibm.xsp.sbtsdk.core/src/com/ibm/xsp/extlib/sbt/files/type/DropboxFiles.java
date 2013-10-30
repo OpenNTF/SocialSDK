@@ -58,7 +58,7 @@ import com.ibm.xsp.extlib.sbt.files.FileServiceData;
 import com.ibm.xsp.extlib.sbt.files.FileServiceData.FileServiceAccessor;
 import com.ibm.xsp.extlib.sbt.model.RestDataBlockAccessor;
 import com.ibm.xsp.extlib.sbt.services.client.DropboxService;
-import com.ibm.xsp.extlib.sbt.services.client.endpoints.DropboxEndpoint;
+import com.ibm.sbt.services.endpoints.DropBoxOAuthEndpoint;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.ibm.xsp.util.URLEncoding;
 
@@ -90,7 +90,7 @@ public class DropboxFiles extends AbstractType {
         } catch (IOException e) {
             throw new FacesExceptionEx(e, "Failed to encode URI string: {0}", path);
         }
-        String href = ExtLibUtil.concatPath(getDropBoxApiVersion(bean), "files/dropbox", '/');
+        String href = ExtLibUtil.concatPath(VERSION_1, "files/dropbox", '/');
         href = ExtLibUtil.concatPath(href, path, '/');
         return href;
     }
@@ -120,12 +120,12 @@ public class DropboxFiles extends AbstractType {
     public void createFolder(Endpoint endpoint, String folderName) {
         //https://api.dropbox.com/<version>/fileops/create_folder
         try {
-            DropboxService svc = (DropboxService)createClientService(endpoint, ExtLibUtil.concatPath(getDropBoxApiVersion(endpoint), "fileops/create_folder", '/'));
+            DropboxService svc = (DropboxService)createClientService(endpoint, ExtLibUtil.concatPath(VERSION_1, "fileops/create_folder", '/'));
             HashMap<String, String> params = new HashMap<String, String>();
             params.put("root", "dropbox");
             params.put("path", folderName);
 
-            svc.post(getDropBoxApiVersion(endpoint)+"/fileops/create_folder", params,null);
+            svc.post(VERSION_1+"/fileops/create_folder", params,null);
             
         } catch (ClientServicesException e) {
             throw new FacesExceptionEx(e, "Failed to create folder named \'{0}\'", folderName);
@@ -144,9 +144,9 @@ public class DropboxFiles extends AbstractType {
             params.put("root", "dropbox");
             rowId = URLDecoder.decode(rowId, "UTF-8");
             params.put("path", rowId);
-            ClientService svc = createClientService(authBean, ExtLibUtil.concatPath(getDropBoxApiVersion(authBean), "fileops/delete", '/'));
+            ClientService svc = createClientService(authBean, ExtLibUtil.concatPath(VERSION_1, "fileops/delete", '/'));
 
-            svc.post(getDropBoxApiVersion(authBean)+"/fileops/delete", params,null);
+            svc.post("/"+VERSION_1+"/fileops/delete", params,null);
 
         } catch (ClientServicesException e) {
             throw new FacesExceptionEx(e, "Failed to delete file with ID \'{0}\'", rowId);
@@ -294,7 +294,7 @@ public class DropboxFiles extends AbstractType {
                 name = ExtLibUtil.concatPath(path, name, '/');
             }
             name = ExtLibUtil.concatPath(uploadUrl, name, '/');
-            String uploadURL = getDropBoxApiVersion(authBean) + name;
+            String uploadURL = VERSION_1 + name;
             DropboxService svc = (DropboxService)createClientService(authBean, uploadURL);
             svc.setMimeForUpload(MIME.getMIMETypeFromExtension(ext));            
             
@@ -321,14 +321,7 @@ public class DropboxFiles extends AbstractType {
     public String getDefaultEndpoint() {
         return EndpointFactory.getEndpointName(EndpointFactory.SERVER_DROPBOX);
     }
-    
-    public String getDropBoxApiVersion(Endpoint ep){
-        if(StringUtil.equals(DropboxEndpoint.DEFAULT_API_VERSION, ((DropboxEndpoint)ep).getApiVersion())){
-            return latestAPI;
-        }
-        return ((DropboxEndpoint)ep).getApiVersion();
-        
-    }
+
 
     /* (non-Javadoc)
      * @see com.ibm.xsp.extlib.sbt.files.type.AbstractType#getServiceUrl(com.ibm.xsp.extlib.sbt.files.FileServiceData.FileServiceAccessor)
@@ -337,7 +330,7 @@ public class DropboxFiles extends AbstractType {
     public String getServiceUrl() {
         if(accessor != null){
             Endpoint ep = accessor.findEndpointBean();
-            String v = getDropBoxApiVersion(ep);
+            String v = VERSION_1;
             String[] split = SVC_URL_1.split("/");
             StringBuffer buffer = new StringBuffer(v + "/");
             for(int i = 1; i < split.length; i++){

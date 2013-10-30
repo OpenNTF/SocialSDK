@@ -1,11 +1,11 @@
 /*
- * © Copyright IBM Corp. 2010
+ * © Copyright IBM Corp. 2011
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
  * You may obtain a copy of the License at:
  * 
- * http://www.apache.org/licenses/LICENSE-2.0 
+ * http://www.apache.org/licenses/LICENSE-2.0
  * 
  * Unless required by applicable law or agreed to in writing, software 
  * distributed under the License is distributed on an "AS IS" BASIS, 
@@ -17,21 +17,18 @@ package sbt;
 
 import com.ibm.sbt.services.endpoints.Endpoint;
 
+public class ActivityStreamService extends com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamService{
 
-/**
- * Connections service.
- * @author Philippe Riand
- */
-public class ConnectionsService extends com.ibm.sbt.services.client.connections.ConnectionsService {
-	public ConnectionsService() {
+	public ActivityStreamService() {
+		super(DEFAULT_ENDPOINT_NAME);
 	}
 
-	public ConnectionsService(Endpoint endpoint) {
+	public ActivityStreamService(String endpointName) {
+		super(endpointName);
+	}
+	
+	public ActivityStreamService(Endpoint endpoint) {
 		super(endpoint);
 	}
-
-	public ConnectionsService(String endpointName) {
-		super(endpointName);
-	}   
-    
+	
 }

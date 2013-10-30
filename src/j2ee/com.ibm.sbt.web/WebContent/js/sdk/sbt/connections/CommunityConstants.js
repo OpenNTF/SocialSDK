@@ -143,6 +143,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
             // used by getEntityId
             uid : "a:id",
             // used by getters
+            inviteUuid : "a:id",
             title : "a:title",
             content : "a:content[@type='text']",
             updated : "a:updated",
@@ -151,7 +152,8 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
             contributorUserid : "a:contributor/snx:userid",
             contributorName : "a:contributor/a:name",
             communityUuid : "snx:communityUuid",
-            communityUrl : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/community']/@href"
+            communityUrl : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/community']/@href",
+            editUrl : "a:link[@rel='edit']/@href"
         },
         
         EventXPath : {
@@ -329,6 +331,16 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.CommunityService
          */
-        AtomCommunityEvent : "/${communities}/calendar/atom/calendar/event"
+        AtomCommunityEvent : "/${communities}/calendar/atom/calendar/event",
+        
+        /**
+         * Obtain a full representation of the invitations as an Atom entry document.
+         * 
+         * @property AtomCommunityInvites
+         * @type String
+         * @for sbt.connections.CommunityService
+         */
+        AtomCommunityInvites : "/${communities}/service/atom/community/invites"
+        
     }, conn);
 });

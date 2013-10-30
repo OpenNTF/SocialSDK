@@ -30,7 +30,6 @@ Export-Package: com.ibm.xsp.extlib.component.connections,
  com.ibm.xsp.extlib.sbt.resources,
  com.ibm.xsp.extlib.sbt.sametime,
  com.ibm.xsp.extlib.sbt.services.client,
- com.ibm.xsp.extlib.sbt.services.client.endpoints,
  com.ibm.xsp.extlib.sbt.twitter,
  com.ibm.xsp.extlib.sbt.user,
  sbt

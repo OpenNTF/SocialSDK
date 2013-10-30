@@ -61,7 +61,7 @@ import com.ibm.xsp.extlib.sbt.files.FileEntry;
 import com.ibm.xsp.extlib.sbt.files.FileServiceData;
 import com.ibm.xsp.extlib.sbt.files.FileServiceData.FileServiceAccessor;
 import com.ibm.xsp.extlib.sbt.model.RestDataBlockAccessor;
-import com.ibm.xsp.extlib.sbt.services.client.SmartCloudService;
+import com.ibm.sbt.services.client.smartcloud.SmartCloudService;
 import com.ibm.xsp.util.ManagedBeanUtil;
 
 /**
@@ -72,7 +72,7 @@ import com.ibm.xsp.util.ManagedBeanUtil;
  */
 public class SmartCloudFiles extends AbstractType {
 
-    public static final String LOTUS_LIVE_SUBSCRIBER_ID = "smartCloudSubscriberId";
+    public static final String SMARTCLOUD_SUBSCRIBER_ID = "smartCloudSubscriberId";
     public static final String SERVICE_URL              = "files/basic/cmis/repository";
     public static final String TYPE                     = "smartcloud";
 
@@ -175,7 +175,7 @@ public class SmartCloudFiles extends AbstractType {
     }
 
     protected String getRepositoryID() {
-        String subId = (String) UserBean.get().getPerson().getField(LOTUS_LIVE_SUBSCRIBER_ID);
+        String subId = (String) UserBean.get().getPerson().getField(SMARTCLOUD_SUBSCRIBER_ID);
         if(StringUtil.isEmpty(subId)){
             if(ExtlibCoreLogger.SBT.isErrorEnabled()){
                 ExtlibCoreLogger.SBT.errorp(this, "getRepositoryID", "SmartCloud subscriber ID is null. Repository IDs will not be resolved. Ensure that the \"extlib.people.provider\" property has been set in the application's xsp.properties (e.g. \nextlib.people.provider=smartcloud\nor some variation of this must be set in xsp.properties)");
@@ -198,7 +198,9 @@ public class SmartCloudFiles extends AbstractType {
             throws ClientServicesException {
         authenticate(accessor);
         HandlerXml xml = new HandlerXml();
-        Document document = (Document) svc.get("files/basic/cmis/repository",params,xml).getData();
+        //p!20108978/folderc/snx:files?skipCount=0&maxItems=15
+        String userId= (String)UserBean.get().getPerson().getField(SMARTCLOUD_SUBSCRIBER_ID);
+        Document document = (Document) svc.get("files/basic/cmis/repository/p!"+userId+"/folderc/snx:files?",params,xml).getData();
 
         ArrayList<FileEntry> entries = new ArrayList<FileEntry>();
         // Extract the content from the ATOM feed...
@@ -211,7 +213,7 @@ public class SmartCloudFiles extends AbstractType {
             for (int i = 0; i < mynav.getCount(); i++) {
                 FileEntry entry = new FileEntry();
                 DataNavigator nav = mynav.get(i);
-                entry.setUserId((String) UserBean.get().getPerson().getField(LOTUS_LIVE_SUBSCRIBER_ID));
+                entry.setUserId(userId);
                 entry.setTitle(nav.stringValue("title"));
                 entry.setUpdated(nav.dateValue("updated"));
                 entry.setPublished(nav.dateValue("published"));

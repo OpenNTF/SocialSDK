@@ -156,7 +156,7 @@ define(['./declare', '../util', '../Promise', './jquery'], function(declare, uti
 		    var settings = {
 		        type: method,
 		        data: xhrData,
-		        dataType: args.handleAs,		       
+		        dataType: args.handleAs		       
 		    };
 		    if(method== "GET"){ // to ensure each time fresh feed is retrieved with network call
 		    	settings.cache = false;

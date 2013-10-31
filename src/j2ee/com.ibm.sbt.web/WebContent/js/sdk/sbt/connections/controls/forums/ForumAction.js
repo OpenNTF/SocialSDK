@@ -25,7 +25,7 @@ define([ "../../../declare", "../../../controls/grid/GridAction","../../../i18n!
     var ForumAction = declare(GridAction, {
         
     	nls: {
-            tooltip: "Go to {title}",
+            tooltip: "Go to {title}"
         },
        
     	

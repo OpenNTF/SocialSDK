@@ -124,7 +124,7 @@ define([ "../declare", "../lang", "../stringUtil", "../config", "../Promise", ".
          */
     	getId: function(){
 			return this.dataHandler.data.id;
-		},
+		}
     	
       
     });

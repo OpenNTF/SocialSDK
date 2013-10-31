@@ -13,20 +13,12 @@
 			<xp:callback xp:key="LeftColumn" facetName="LeftColumn"
 				id="callback1">
 			</xp:callback>
-			<xp:span xp:key="PlaceBarName" id="callback2"
-				style="display:inline-block; vertical-align:middle;font-style:italic;font-weight:bold;padding-left:2.0em;padding-top:12.0px">
-				<span id="CurrentLabel"></span>
-			</xp:span>
-			<xp:callback xp:key="PlaceBarActions"
-				facetName="PlaceBarActions" id="callback3">
-			</xp:callback>
 		</xe:this.facets>
 		<xe:this.configuration>
 			<xe:applicationConfiguration legalLogoAlt="IBM Corp."
 				navigationPath="${javascript:compositeData.navigationPath}"
 				defaultNavigationPath="${javascript:compositeData.defaultNavigationPath}"
 				productLogoHeight="29px" productLogoWidth="77px"
-				placeBarName="#{javascript:compositeData.title}"
 				productLogoStyle="margin-left:-15px" mastHeader="true">
 				<xe:this.bannerApplicationLinks>
 					<xe:basicLeafNode label="Home" selected="true"

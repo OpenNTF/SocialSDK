@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- © Copyright IBM Corp. 2010                                          -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     --> 
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   --> 
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        --> 
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<faces-config>
+
+	<faces-config-extension>
+		<namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+		<default-prefix>xe</default-prefix>
+	</faces-config-extension>
+
+    <component>
+        <description>This control loads the desired Connections resources within the page. If the resources are not loaded, then none of the Connections widgets will be rendered.</description>
+        <display-name>Connections Client</display-name>
+        <component-type>com.ibm.xsp.extlib.connections.ConnectionsClient</component-type>
+        <component-class>com.ibm.xsp.extlib.component.connections.UIConnectionsClient</component-class>
+
+        <group-type-ref>com.ibm.xsp.extlib.group.sbt.endpoint</group-type-ref>
+        
+        <property>
+            <description>Specifies if the client script for the profiles business card should be loaded.</description>
+            <display-name>Profiles Business Card</display-name>
+            <property-name>profilesBusinessCard</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Specifies if the client script for the communities business card should be loaded.</description>
+            <display-name>Communities Business Card</display-name>
+            <property-name>communitiesBusinessCard</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Client side script that is executed right after the definition SemTagSvcConfig, if this variable has to be programatically updated.</description>
+            <display-name>Service Initialization script</display-name>
+            <property-name>initSvcConfigScript</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Specifies if the Dojo runtime should be loaded from Connections. This should be set to true uniquely if Dojo is not already loaded by the XPages runtime.</description>
+            <display-name>Load Dojo Runtime</display-name>
+            <property-name>loadDojo</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Specifies if the Oneui CSS should be loaded from Connections. This should be set to true uniquely if the CSS are not already loaded by the XPages runtime.</description>
+            <display-name>Load OneUI CSS</display-name>
+            <property-name>loadCSS</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <component-extension>
+            <base-component-type>javax.faces.Component</base-component-type>
+            <component-family>com.ibm.xsp.extlib.connections.Connections</component-family>
+            <renderer-type>com.ibm.xsp.extlib.connections.ConnectionsClient</renderer-type>
+            <tag-name>connectionsClient</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <!-- TODO this category not localized -->
+                <category>Social Business Toolkit</category>
+            </designer-extension>
+        </component-extension>   
+    </component>
+        
+    <component>
+        <description>This control instanciates a Dojo dijit in relation ship with the Connections client. It does not render if no Connections client already rendered in the page.</description>
+        <display-name>Connections Widget</display-name>
+        <component-type>com.ibm.xsp.extlib.ConnectionsWidget</component-type>
+        <component-class>com.ibm.xsp.extlib.component.connections.UIConnectionsWidget</component-class>
+               
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.Widget</base-component-type>
+            <component-family>com.ibm.xsp.extlib.Connections</component-family>
+            <renderer-type>com.ibm.xsp.extlib.UIConnectionsWidget</renderer-type>
+            <tag-name>connectionsWidget</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Social Business Toolkit</category>
+            </designer-extension>
+        </component-extension>   
+    </component>
+
+</faces-config>

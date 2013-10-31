@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
-	xmlns:xe="http://www.ibm.com/xsp/coreex"
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
 	xmlns:xc="http://www.ibm.com/xsp/custom" dojoTheme="true">
 
 	<xp:this.afterPageLoad><![CDATA[#{javascript:view.setPageTitle(optionsBean.getApplicationTitle("Playground"))
 if(compositeData.wholePage)view.setStyle("overflow: hidden");}]]></xp:this.afterPageLoad>
 
 	<xe:keepSessionAlive id="keepSessionAlive1"></xe:keepSessionAlive>
- 	<xc:DevelopmentWarning loaded="false"></xc:DevelopmentWarning>
+	<xc:DevelopmentWarning loaded="false"></xc:DevelopmentWarning>
 	<xc:SSLWarning loaded="${javascript:optionsBean.checkSSLWarning()}"></xc:SSLWarning>
 	<xe:applicationLayout id="appLayout">
 		<xe:this.facets>
@@ -15,8 +14,7 @@ if(compositeData.wholePage)view.setStyle("overflow: hidden");}]]></xp:this.after
 				<xe:dynamicContent id="dynamicContent1"
 					defaultFacet="#{javascript:optionsBean.getBanner()}">
 					<xe:this.facets>
-						<xc:ccSmartCloudTestNavBar
-							xp:key="SmartCloudTest">
+						<xc:ccSmartCloudTestNavBar xp:key="SmartCloudTest">
 						</xc:ccSmartCloudTestNavBar>
 					</xe:this.facets>
 				</xe:dynamicContent>
@@ -24,56 +22,21 @@ if(compositeData.wholePage)view.setStyle("overflow: hidden");}]]></xp:this.after
 			<xp:callback xp:key="LeftColumn" facetName="LeftColumn"
 				id="callback1">
 			</xp:callback>
-			<xp:span xp:key="PlaceBarName" id="callback2"
-				style="display:inline-block; vertical-align:middle;font-style:italic;font-weight:bold;padding-left:2.0em;padding-top:12.0px">
-				<span id="CurrentLabel"></span>
-			</xp:span>
-			<xp:callback xp:key="PlaceBarActions"
-				facetName="PlaceBarActions" id="callback3">
+			<xp:callback xp:key="PlaceBarActions" facetName="PlaceBarActions"
+				id="callback3">
 			</xp:callback>
+			<xp:panel xp:key="MastFooter" styleClass="mastFooter" style="text-align:center; margin-bottom: 5px;">
+				<xc:ApacheLicense></xc:ApacheLicense>
+			</xp:panel>
 		</xe:this.facets>
 		<xe:this.configuration>
 			<xe:applicationConfiguration legalLogoAlt="IBM Corp."
 				navigationPath="${javascript:compositeData.navigationPath}"
 				defaultNavigationPath="${javascript:compositeData.defaultNavigationPath}"
 				productLogoHeight="29px" productLogoWidth="77px"
-				placeBarName="#{javascript:compositeData.title}"
-				productLogoStyle="margin-left:-15px" footer="false">
+				productLogoStyle="margin-left:-15px" footer="false" placeBar="false"
+				titleBar="false" legal="false">
 				<xe:this.bannerApplicationLinks>
-					<xe:basicLeafNode label="Home" selected="true"
-						href="/">
-					</xe:basicLeafNode>
-					<xe:basicLeafNode label="developerWorks"
-						href="https://www.ibm.com/developerworks/mydeveloperworks/groups/service/html/communityview?communityUuid=0f357879-ccee-4927-98c1-7bb88d5dc81f&amp;lang=en">
-					</xe:basicLeafNode>
-					<xe:basicLeafNode label="Greenhouse"
-						href="https://greenhouse.lotus.com/wpsgh/wcm/connect/lotus+greenhouse/lotus+greenhouse+next+site/home/labs/ibm+social+business+toolkit">
-					</xe:basicLeafNode>
-					<xe:basicLeafNode label="OpenNTF"
-						href="http://www.openntf.org/">
-					</xe:basicLeafNode>
-					<xe:basicLeafNode
-						label="Application Development Wiki"
-						href="http://www-10.lotus.com/ldd/appdevwiki.nsf">
-					</xe:basicLeafNode>
-					<xe:basicLeafNode label="IBM Connections Wiki"
-						href="http://www-10.lotus.com/ldd/lcwiki.nsf">
-					</xe:basicLeafNode>
-					<xe:basicLeafNode label="IBM SmartCloud Wiki"
-						href="http://www-10.lotus.com/ldd/bhwiki.nsf">
-					</xe:basicLeafNode>
-				</xe:this.bannerApplicationLinks>
-				<xe:this.bannerUtilityLinks>
-					<xe:userTreeNode></xe:userTreeNode>
-					<xe:loginTreeNode></xe:loginTreeNode>
-				</xe:this.bannerUtilityLinks>
-				<xe:this.placeBarActions>
-					<xe:pageTreeNode
-						loaded="${javascript:userBean.accessLevel>=4}"
-						page="/ManageJavaScriptSnippetsByCategory.xsp" label="Manage">
-					</xe:pageTreeNode>
-				</xe:this.placeBarActions>
-				<xe:this.titleBarTabs>
 					<xe:pageTreeNode selection="/Home" label="Home"
 						page="/Home.xsp">
 					</xe:pageTreeNode>
@@ -97,7 +60,40 @@ if(compositeData.wholePage)view.setStyle("overflow: hidden");}]]></xp:this.after
 						loaded="${javascript:optionsBean.explorerEnabled}"
 						page="/Explorer.xsp" selection="/Explorer">
 					</xe:pageTreeNode>
-				</xe:this.titleBarTabs>
+					<xe:pageTreeNode
+						loaded="${javascript:userBean.accessLevel>=4}"
+						page="/ManageJavaScriptSnippetsByCategory.xsp" label="Manage">
+					</xe:pageTreeNode>
+					<xe:basicContainerNode label="External Links">
+						<xe:basicLeafNode label="Home" selected="true"
+							href="/">
+						</xe:basicLeafNode>
+						<xe:basicLeafNode label="developerWorks"
+							href="https://www.ibm.com/developerworks/mydeveloperworks/groups/service/html/communityview?communityUuid=0f357879-ccee-4927-98c1-7bb88d5dc81f&amp;lang=en">
+						</xe:basicLeafNode>
+						<xe:basicLeafNode label="Greenhouse"
+							href="https://greenhouse.lotus.com/wpsgh/wcm/connect/lotus+greenhouse/lotus+greenhouse+next+site/home/labs/ibm+social+business+toolkit">
+						</xe:basicLeafNode>
+						<xe:basicLeafNode label="OpenNTF"
+							href="http://www.openntf.org/">
+						</xe:basicLeafNode>
+						<xe:basicLeafNode
+							label="Application Development Wiki"
+							href="http://www-10.lotus.com/ldd/appdevwiki.nsf">
+						</xe:basicLeafNode>
+						<xe:basicLeafNode label="IBM Connections Wiki"
+							href="http://www-10.lotus.com/ldd/lcwiki.nsf">
+						</xe:basicLeafNode>
+						<xe:basicLeafNode label="IBM SmartCloud Wiki"
+							href="http://www-10.lotus.com/ldd/bhwiki.nsf">
+						</xe:basicLeafNode>
+					</xe:basicContainerNode>
+				</xe:this.bannerApplicationLinks>
+				<xe:this.bannerUtilityLinks>
+					<xe:userTreeNode></xe:userTreeNode>
+					<xe:loginTreeNode></xe:loginTreeNode>
+				</xe:this.bannerUtilityLinks>
+				<xe:this.titleBarTabs></xe:this.titleBarTabs>
 				<xe:this.banner><![CDATA[#{javascript:!optionsBean.getBanner()}]]></xe:this.banner>
 				<xe:this.mastHeader><![CDATA[#{javascript:optionsBean.getBanner()}]]></xe:this.mastHeader>
 			</xe:applicationConfiguration>

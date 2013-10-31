@@ -83,104 +83,114 @@ if(doc) {	o = {		status:			"ok",		id:				snippetId,		unid:			doc.getUniversa
 			</xe:this.methods>
 		</xe:jsonRpcService>
 		<xc:ccLayout navigationPath="/JavaSnippets"
-			title="#{javascript:optionsBean.getApplicationTitle('Java Snippets')}" wholePage="true">
-			<xp:this.facets>
-				<xp:panel id="PlaceBarActions"
-					xp:key="PlaceBarActions">
-					<xc:ccEnvironmentComboBox></xc:ccEnvironmentComboBox>
-				</xp:panel>
-			</xp:this.facets>
+			title="#{javascript:optionsBean.getApplicationTitle('Java Snippets')}"
+			wholePage="true">
+
+			<!--  Main Page -->
 			<xe:djBorderContainer id="djTabContainer1"
 				style="width:100%; height:100%;" liveSplitters="true">
 				<xe:this.dojoAttributes>
 					<xp:dojoAttribute name="design" value="sidebar"></xp:dojoAttribute>
 				</xe:this.dojoAttributes>
+
+				<!--  Left tree -->
 				<xe:djBorderPane id="djBorderPane3" region="leading"
-					splitter="true" style="width:280px">
-					<xp:div id="leftRefresh" style="height: 100%">
-						<xc:ccAssetTree type="javaSnippet"></xc:ccAssetTree>
-					</xp:div>
+					splitter="true" style="width:300px">
+					<xe:djBorderContainer id="djBorderContainer2"
+						style="width: 100%">
+						<xe:djBorderPane id="djBorderPane1" region="top">
+							<xc:ccEnvironmentComboBox></xc:ccEnvironmentComboBox>
+						</xe:djBorderPane>
+						<xe:djBorderPane id="djBorderPane5" region="center">
+							<xc:ccAssetTree type="javaSnippet"></xc:ccAssetTree>
+						</xe:djBorderPane>
+					</xe:djBorderContainer>
 				</xe:djBorderPane>
-				<xe:djBorderPane id="djBorderPane2" region="center">
+				<!--  /Left tree -->
+
+				<!--  Body of the playground -->
+				<xe:djBorderPane id="djBorderPane2" region="leading"
+					splitter="true" style="width:45%">
+
+					<!--  Code tabs and associated toolbars-->
 					<xe:djBorderContainer id="djBorderContainer1"
 						liveSplitters="true">
 						<xe:this.dojoAttributes>
-							<xp:dojoAttribute name="gutters"
-								value="false">
+							<xp:dojoAttribute name="gutters" value="false">
 							</xp:dojoAttribute>
 						</xe:this.dojoAttributes>
-						<xe:djBorderPane region="top">
-							<xe:toolbar id="toolbar1">
-								<xe:this.treeNodes>
-									<xe:basicLeafNode
-										label="For security reasons, because of their server side nature, Java snippets cannot be edited">
-									</xe:basicLeafNode>
-								</xe:this.treeNodes>
-							</xe:toolbar>
+
+						<!-- Java Code Tab Container -->
+						<xe:djBorderPane region="top"
+							style="padding: 5px 0 0 0; height: 65%; overflow: hidden" splitter="true">
+							<xp:div style="border: 1px solid #AAAAAA; height: 99%;">
+								<xc:PlaygroundTabJsp readOnly="true">
+								</xc:PlaygroundTabJsp>
+							</xp:div>
 						</xe:djBorderPane>
-						<xe:djBorderPane region="top" splitter="true"
-							style="height:55%">
-							<xe:djTabContainer id="tabContainer"
+						<!-- /Java Code Tab Container -->
+						
+						<!-- Other Code Tab Container -->
+						<xe:djBorderPane region="center" style="padding:0px">
+							<xe:djTabContainer id="djTabContainer2"
 								style="width: 100%; height: 100%; border: none">
-								<xe:djTabPane id="tabJsp" title="Jsp"
-									onShow="pageGlobal.jspEditor.refresh()">
-									<xp:div
-										style="border: 1px solid #AAAAAA; height: 100%">
-										<xc:PlaygroundTabJsp
-											readOnly="true">
-										</xc:PlaygroundTabJsp>
-									</xp:div>
-								</xe:djTabPane>
-								<xe:djTabPane id="djTabProperties"
-									title="Properties"
+								<xe:djTabPane id="djTabProperties" title="Properties"
 									onShow="pageGlobal.propertiesEditor.refresh()">
-									<xp:div
-										style="border: 1px solid #AAAAAA; height: 100%">
+									<xp:div style="border: 1px solid #AAAAAA; height: 100%">
 										<xc:PlaygroundTabProperties
 											readOnly="true">
 										</xc:PlaygroundTabProperties>
 									</xp:div>
 								</xe:djTabPane>
-								<xe:djTabPane id="djTabDocumentation"
-									title="Documentation">
-									<xp:div
-										style="border: 1px solid #AAAAAA; height: 100%">
+								<xe:djTabPane id="djTabDocumentation" title="Documentation">
+									<xp:div style="border: 1px solid #AAAAAA; height: 100%">
 										<xc:PlaygroundTabDocumentation
 											readOnly="true">
 										</xc:PlaygroundTabDocumentation>
 									</xp:div>
 								</xe:djTabPane>
-								</xe:djTabContainer>
+							</xe:djTabContainer>
 						</xe:djBorderPane>
-						<xe:djBorderPane region="top"
-							splitter="false">
-							<xe:toolbar id="toolbar2"
-								style="display: inline-block">
+						<!-- /Other Code Tab Container -->
+
+					</xe:djBorderContainer>
+					<!--  /Code tabs and associated toolbars-->
+
+				</xe:djBorderPane>
+				<!--  /Body of the playground -->
+								
+				<!--  Preview area-->
+				<xe:djBorderPane region="center" style="padding:0px; overflow: hidden;">
+					<xe:djBorderContainer>
+						<xe:this.dojoAttributes>
+							<xp:dojoAttribute name="gutters" value="false">
+							</xp:dojoAttribute>
+						</xe:this.dojoAttributes>
+						
+						<xe:djBorderPane region="top" style="padding:0px; overflow: hidden;">
+							<xe:toolbar id="toolbar2" style="display: inline-block">
 								<xe:this.treeNodes>
 									<xe:basicLeafNode label="Run"
-										styleClass="dijitEditorIcon dijitEditorIconViewSource"
 										onClick="runCode(false)">
 									</xe:basicLeafNode>
 									<xe:basicLeafNode label="Edit Parameters"
-										styleClass="dijitEditorIcon dijitEditorIconViewSource"
 										onClick="showParams()">
 									</xe:basicLeafNode>
 								</xe:this.treeNodes>
 							</xe:toolbar>
 						</xe:djBorderPane>
-						<xe:djBorderPane region="center"
-							style="border: 1px solid #AAAAAA;">
+						<xe:djBorderPane region="center" style="padding:0px; overflow: hidden;">
 							<xp:div style="height: 100%">
 								<xc:SnippetsPreviewPane></xc:SnippetsPreviewPane>
 							</xp:div>
 						</xe:djBorderPane>
-						<xe:djBorderPane region="bottom"
-							splitter="false">
-							<xc:ApacheLicense></xc:ApacheLicense>
-							</xe:djBorderPane>
 					</xe:djBorderContainer>
 				</xe:djBorderPane>
+				<!--  /Body of the playground -->
+				
 			</xe:djBorderContainer>
+			<!--  /Main Page -->
+
 		</xc:ccLayout>
 	</xp:form>
 

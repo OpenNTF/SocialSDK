@@ -29,7 +29,7 @@ define([ "../../../declare", "../../../stringUtil", "../../../controls/grid/Grid
         
     	/**Strings*/
         nls: {
-            tooltip: "Click to download ${title}",
+            tooltip: "Click to download ${title}"
         },
        
         /**Constructor function

@@ -48,9 +48,9 @@ function gatherParams() {
 
 // Create the dynamic panel for properties
 function createPropertyPanel(params) {
-	require(["dojo/dom-construct"], function(dom){
-		dom.empty("params");
+	require(["dojo/dom-style","dojo/dom-construct"], function(domStyle,dom){
 		if(params && params.length) {
+			dom.empty("previewParams");
 			var html = "<table>";
 			html += "<tr><td colspan='2' style='font-weight:bold'>Parameters</td></tr>";
 			for(var i=0; i<params.length; i++) {
@@ -62,16 +62,18 @@ function createPropertyPanel(params) {
 				html += "</td></tr>";
 			}
 			html += "</table>";
-			dojo.byId("params").innerHTML = html;
+			dojo.byId("previewParams").innerHTML = html;
 			for(var i=0; i<params.length; i++) {
 				var p = params[i];
 				if(p.value) {
 					dojo.byId("__"+p.name).value = p.value;
 				}
 			}
+			domStyle.set("previewEmpty","display","none");
+			domStyle.set("previewParams","display","block");
 		} else {
-			var html = "<span style='font-style:italic;color:rgb(192,192,192)'>Click the Preview button above to preview your snippet</span>";
-			dojo.byId("params").innerHTML = html;
+			domStyle.set("previewEmpty","display","block");
+			domStyle.set("previewParams","display","none");
 		}
 	});	
 }

@@ -47,9 +47,9 @@ return true;]]></xp:this.onkeypress>
 				</span>
 			</xp:span>
 		</xe:djBorderPane>
-		<xe:djBorderPane style="overflow:auto; height: 100%"
-			region="center">
-			<xp:div id="widgetContainer1" style="overflow:auto; height: 100%">
+		<xe:djBorderPane
+			region="center" style="overflow: hidden;">
+			<xp:div id="widgetContainer1" styleClass="assetTreeContainer" style="width: 100%; height: 100%; overflow-x: hidden; overflow-y: auto">
 				<xp:scriptBlock id="scriptBlock1">
 					<xp:this.value><![CDATA[dojo.addOnLoad(function() {
 	var assetsData = #{javascript:
@@ -91,7 +91,7 @@ return true;]]></xp:this.onkeypress>
 	if(!assetsData[0].children || assetsData[0].children.length==0) {
 		dojo.style('emptyTree',{display:'block'});
 	}
-});]]></xp:this.value>				</xp:scriptBlock>				<div id="assetsTree"></div>
+});]]></xp:this.value>				</xp:scriptBlock>				<div id="assetsTree" style="overflow: none;"></div>
 				<div id="emptyTree" style='display:none'>
 					The current filtering options don't match any snippets.<br/>Please select a different environment.
 				</div>

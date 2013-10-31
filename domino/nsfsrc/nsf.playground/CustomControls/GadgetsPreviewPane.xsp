@@ -1,5 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
-	<div id="osgadget" style="width:100%; height:100%">
-	</div>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:div id="previewStack"
+		style="width:99%; height:99%; margin-top: 5px; border: 1px solid #AAAAAA; overflow: hidden;">
+		<xp:div id="previewPreview" style="padding:4px;">
+			<div id="osgadget">
+			</div>
+		</xp:div>
+	</xp:div>
+	<xp:span id="label" styleClass="framelabel">Result</xp:span>
+ <!-- 
+	<xe:djStackContainer id="previewStack"
+		style="width:99%; height:99%; margin-top: 5px; border: 1px solid #AAAAAA; overflow: hidden;">
+		<xe:djStackPane id="previewParams" style="padding:12px;">
+			<div id="previewEmpty">
+				<p style="font-style:italic;color:rgb(192,192,192)">
+					There is no parameters for this snippet.
+					<br />
+					Click the Run button above to execute the code.
+				</p>
+			</div>
+			<div id="previewParams">
+			</div>
+		</xe:djStackPane>
+		<xe:djStackPane id="previewPreview" style="padding:4px;">
+			<div id="osgadget"
+				style="width:99%; height:99%; margin-top: 5px; border: 1px solid #AAAAAA; overflow: hidden;">
+			</div>
+		</xe:djStackPane>
+	</xe:djStackContainer>
+	<xp:span id="label" styleClass="framelabel">Result</xp:span>
+ -->	
 </xp:view>

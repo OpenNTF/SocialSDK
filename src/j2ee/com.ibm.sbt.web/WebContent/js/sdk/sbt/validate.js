@@ -96,6 +96,6 @@ define([ "./log", "./stringUtil", "sbt/i18n!sbt/nls/validate","./util" ],
 					}
 					return true;
 
-				},
+				}
 			};
 		});

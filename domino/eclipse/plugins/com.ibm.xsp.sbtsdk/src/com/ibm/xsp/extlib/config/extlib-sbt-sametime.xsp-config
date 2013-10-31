@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- © Copyright IBM Corp. 2010, 2011                                    -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     -->
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        -->
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<faces-config>
+
+	<faces-config-extension>
+		<namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+		<default-prefix>xe</default-prefix>
+	</faces-config-extension>
+
+    <component>
+        <description>This control loads the desired Sametime resources within the page. If the resources are not loaded, then none of the Sametime widgets will be rendered.</description>
+        <display-name>Sametime Client</display-name>
+        <component-type>com.ibm.xsp.extlib.sametime.SametimeClient</component-type>
+        <component-class>com.ibm.xsp.extlib.component.sametime.UISametimeClient</component-class>
+
+        <group-type-ref>com.ibm.xsp.extlib.group.sbt.endpoint</group-type-ref>
+        
+        <property>
+            <description>Indicates if the client should auto login the user.</description>
+            <display-name>Auto Login</display-name>
+            <property-name>autoLogin</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Login status text displayed by sametime after the login happened. It defaults to I am available.</description>
+            <display-name>Login Status</display-name>
+            <property-name>loginStatus</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <localizable>true</localizable>
+                <designer-extension>
+                    <category>basics</category>
+                    <!-- (tag to indicate that this property is localizable, 
+                    but not all properties named loginStatus 
+                    should be considered localizable -->
+                    <tags>
+                        localizable-text
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Indicates that the runtime should automatically use the tunnelURI capability of Sametime 8.5.2 to managethe same origin problem. The requested HTML file is then provided by the XPages runtime.</description>
+            <display-name>Auto Tunnel URI</display-name>
+            <property-name>autoTunnelURI</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Specifies the script to load, whenever it is simply the livename control or the full set of widgets.</description>
+            <display-name>Client JavaScript File To Load</display-name>
+            <property-name>clientScriptFile</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <!--  TODO the value here is not a path to a file in the NSF - it is one of 3 possible options
+                indicating the range of features that will be available in the Sametime Client.
+                Consider changing the display-name and description to make this clearer. -->
+                <designer-extension>
+                    <category>basics</category>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        basecomp
+                        livename
+                        widgets
+                    </editor-parameter>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Specifies a piece of client JavaScript that will be used to initialize the stproxyConfig object. This piece of script will be executed right after the config object is created and initialized with the default values</description>
+            <display-name>Init Proxy Script</display-name>
+            <property-name>initProxyScript</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <!-- TODO is this an event? -->
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Indicates that the including application already has included the OpenAJAX Hub and Sametime should not included it a second time.</description>
+            <display-name>No Hub</display-name>
+            <property-name>noHub</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <!-- TODO Since there is a negative in the name, the description
+                seems self-contradictory - reword it to make it clearer. -->
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Specifies the locale in which Sametime should run, affecting the display of texts. When not specified, it uses the XPage locale.</description>
+            <display-name>Lang</display-name>
+            <property-name>lang</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <!-- TODO class type should change from String to Locale,
+                so can use locale picker and so correct locale
+                strings are displayed - simplified chinese (zh_CN) vs
+                traditional chinese zh_TW,
+                might also have to convert the locale between Java locale
+                and Dojo locale types. -->
+                <designer-extension>
+                    <category>basics</category>
+                    <tags>
+                        todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>If set to true, the code will automatically attempt to connect to Sametime via the UIM client, rather than the Sametime Proxy Server.</description>
+            <display-name>Connect Client</display-name>
+            <property-name>connectClient</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <!-- TODO description - what's a UIM client? IM is instant messaging, what's UIM? -->
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+               
+        <component-extension>
+            <base-component-type>javax.faces.Component</base-component-type>
+            <component-family>com.ibm.xsp.extlib.Sametime</component-family>
+            <renderer-type>com.ibm.xsp.extlib.sametime.SametimeClient</renderer-type>
+            <tag-name>sametimeClient</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Social Business Toolkit</category>
+            </designer-extension>
+        </component-extension>   
+    </component>
+        
+    <component>
+        <!-- TODO should update SpellCheckTest to verify Sametime capitalized, since its an IBM product name. -->
+        <!-- TODO 2nd sentence has double negative - reword to make clearer.  -->
+        <description>This control instanciate a Dojo dijit in relationship with the sametime client. It does not render if no sametime client already rendered in the page.</description>
+        <display-name>Sametime Widget</display-name>
+        <component-type>com.ibm.xsp.extlib.SametimeWidget</component-type>
+        <component-class>com.ibm.xsp.extlib.component.sametime.UISametimeWidget</component-class>
+               
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.Widget</base-component-type>
+            <component-family>com.ibm.xsp.extlib.Sametime</component-family>
+            <renderer-type>com.ibm.xsp.extlib.UISametimeWidget</renderer-type>
+            <tag-name>sametimeWidget</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Social Business Toolkit</category>
+            </designer-extension>
+        </component-extension>   
+    </component>
+
+</faces-config>

@@ -53,7 +53,7 @@ define(["../stringUtil", "../config"], function(stringUtil, config) {
                 v = 0;
             }
             return param.key + "=" + v;
-        },
+        }
 
     };
     

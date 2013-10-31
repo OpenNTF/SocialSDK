@@ -942,7 +942,7 @@ define(["../../../declare",
             
             return this.buildElement(trElement, {
                 content: trContent,
-                classAttr: trClass,
+                classAttr: trClass
             });
         },
         

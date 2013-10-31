@@ -250,7 +250,7 @@ define(["../../../declare",
 	            	params = lang.mixin(params, { direction : this.direction });
 	            } 
 	            return this.constructUrl(url, urlParams, {}, endpoint);
-	        },
+	        }
 	        
 
 		});

@@ -1567,7 +1567,7 @@ define(
 				 */
 				updateInActivity : function(activityUuid) {
 					return this.service.updateMember(activityUuid, this);
-				},
+				}
 
 			});
 

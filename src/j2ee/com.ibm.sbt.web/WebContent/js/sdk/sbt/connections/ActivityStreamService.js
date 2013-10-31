@@ -124,7 +124,7 @@ define([ "../declare", "../lang", "../stringUtil", "../config", "../Promise", ".
          */
     	getId: function(){
 			return this.dataHandler.data.id;
-		},
+		}
     	
       
     });
@@ -638,7 +638,7 @@ define([ "../declare", "../lang", "../stringUtil", "../config", "../Promise", ".
             if (!userId || userId.length == 0) {
                 return this.createBadRequestPromise("Invalid argument, expected userId.");
             }
-        },
+        }
 
     });
     return ActivityStreamService;

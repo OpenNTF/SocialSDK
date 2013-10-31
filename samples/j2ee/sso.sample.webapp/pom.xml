@@ -32,4 +32,5 @@
 			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
+	<packaging>war</packaging>
 </project>

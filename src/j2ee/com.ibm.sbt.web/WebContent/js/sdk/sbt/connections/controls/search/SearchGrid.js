@@ -98,7 +98,7 @@ define([ "../../../declare",
                 rendererArgs : {
                     type : "apps"
                 }
-            },
+            }
         },
 
         defaultOption : "all",

@@ -265,7 +265,7 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
 	                }
             	}else{
             		var options = { 
-	                		start : 0, count : this.pageSize,
+	                		start : 0, count : this.pageSize
 	                };
             	}
             if (this.data) {
@@ -554,7 +554,7 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
         _filter: function(args, data){
         	var options = {
         			start: 0, count: this.pageSize,
-                    sort: [{ attribute: this._activeSortAnchor.sortParameter  }],
+                    sort: [{ attribute: this._activeSortAnchor.sortParameter  }]
                 };        	
         	options.sort[0].descending = this._activeSortIsDesc;
         	

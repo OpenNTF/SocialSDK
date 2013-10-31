@@ -14,6 +14,7 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@page import="com.ibm.sbt.services.client.connections.files.FileService"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.File"%>
 <%@page import="com.ibm.commons.util.io.StreamUtil"%>
 <%@page import="java.io.ByteArrayInputStream"%>
@@ -36,21 +37,22 @@
 </head>
 
 <body>
-  <h4>Download File</h4>
+  <h4>Download Upload Community File</h4>
   <div id="content">
     <%
     try {
 	    CommunityService service = new CommunityService();
+	    FileService serviceFS = new FileService();
 	    CommunityList communities = service.getMyCommunities();
 	    String communityId = "";
 	    if(communities != null && ! communities.isEmpty())  {
 	    	communityId = communities.get(0).getCommunityUuid();
-		    FileList list = service.getCommunityFiles(communityId, null);
+		    FileList list = serviceFS.getCommunityFiles(communityId, null);
 		    String fileId = "";
 		    if(list != null && ! list.isEmpty()) {
 		    	fileId = list.get(0).getFileId();
 			    OutputStream ostream = new ByteArrayOutputStream();
-		    	long noOfBytes = service.downloadCommunityFile(ostream, fileId, communityId, null);
+		    	long noOfBytes = serviceFS.downloadCommunityFile(ostream, fileId, list.get(0).getLibraryId());
 			    out.println("File Downloaded in ostream = " + noOfBytes + "\nFile Name = " + list.get(0).getTitle());
 				InputStream istream = new ByteArrayInputStream(((ByteArrayOutputStream)ostream).toByteArray());
 				String newFileName = "TestCommUpload"+System.currentTimeMillis();

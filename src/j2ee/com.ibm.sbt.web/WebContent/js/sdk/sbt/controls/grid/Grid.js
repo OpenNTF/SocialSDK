@@ -265,7 +265,7 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
 	                }
             	}else{
             		var options = { 
-	                		start : 0, count : this.pageSize,
+	                		start : 0, count : this.pageSize
 	                };
             	}
             if (this.data) {

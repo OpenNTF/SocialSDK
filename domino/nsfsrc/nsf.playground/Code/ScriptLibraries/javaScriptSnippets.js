@@ -54,15 +54,6 @@ function loadSnippet(id) {
 			if(pageGlobal.cssEditor) pageGlobal.cssEditor.setValue(r.css);
 			if(pageGlobal.propertiesEditor) pageGlobal.propertiesEditor.setValue(r.properties);
 			if(pageGlobal.documentationPanel) pageGlobal.documentationPanel.innerHTML = r.documentation;
-			if(r.js.length>5) {
-				selectTab(pageGlobal.tabJs);
-			} else if(r.html.length>5) {
-				selectTab(pageGlobal.tabHtml);
-			} else if(r.css.length>5) {
-				selectTab(pageGlobal.tabCss);
-			} else {
-				selectTab(pageGlobal.tabHtml);
-			}
 			createPropertyPanel(pageGlobal.params);
 			if(pageGlobal.previewStack) {
 				selectStack(pageGlobal.previewParams);

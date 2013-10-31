@@ -26,3 +26,22 @@ input.searchbox {
     background-color: #fff;
     overflow: hidden;
 }
+.assetTreeContainer .dijitTree {
+	overflow: hidden;
+}
+
+.framelabel {
+    border: 1px solid #F1F1F1;
+    border-radius: 1px 1px 1px 1px;
+    color: #777777;
+    display: inline-block;
+    text-align: center;
+    line-height: 22px;
+    height: 22px;
+    padding: 0 6px;
+    position: absolute;
+    top: 7px;
+    right: 20px;
+    z-index: 30;
+    opacity: 0.8;
+}

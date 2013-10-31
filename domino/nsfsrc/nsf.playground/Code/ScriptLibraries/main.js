@@ -15,6 +15,23 @@ dojo.addOnLoad(function() {
    	}
 });
 
+function toggleMaximize(pane) {
+	require(["dojo/window","dojo/dom-geometry","dojo/dom-style"], function(win,domGeom,domStyle){
+		var scrollRoot = (dojo.doc.compatMode == 'BackCompat') ? dojo.body() : dojo.doc.documentElement;
+		var w = 1600; //scrollRoot.clientWidth;
+		var h = 800; //scrollRoot.clientHeight;
+		var p = domGeom.position(pane.parentNode);
+		domStyle.set( pane, {
+			position: "absolute",
+			top: "-"+p.y+"px",
+			left: "-"+p.x+"px",
+			zIndex: 0,
+			width: w+"px",
+			height: h+"px"
+		});
+	});
+}
+
 /**
  * Resize the main border container when the window is resized
  * This is required as it should substract the size of the headers and footers
@@ -34,17 +51,17 @@ function resize() {
 		var h = windowHeight();
 		if(domClass.contains(win.body(),"lotusui30")) {
 			var hd = eltHeight("#nav_bar_include")+eltHeight(".lotusBanner")+eltHeight(".lotusTitleBar2")+eltHeight(".lotusTitleBar")+eltHeight(".lotusPlaceBar");
-			var ft = eltHeight(".lotusFooter")+eltHeight(".lotusLegal");
+			var ft = eltHeight(".mastFooter")+eltHeight(".lotusFooter")+eltHeight(".lotusLegal");
 			dojo.query(".lotusMain").style("height",(h-hd-ft)+"px");
 			//console.log("h="+h+", hd="+hd+", ft="+ft+", result="+(h-hd-ft-25))
 			dijit.byId(pageGlobal.borderContainer).resize()
 		} else if(domClass.contains(win.body(),"dbootstrap")) {
 			var hd = eltHeight("#nav_bar_include")+eltHeight(".lotusBanner")+eltHeight(".lotusTitleBar2")+eltHeight(".lotusTitleBar")+eltHeight(".lotusPlaceBar");
-			var ft = eltHeight(".lotusFooter")+eltHeight(".lotusLegal");
+			var ft = eltHeight(".mastFooter")+eltHeight(".lotusFooter")+eltHeight(".lotusLegal");
 			dojo.query(".container-fluid").style("height",(h-hd-ft)+"px");
 			dojo.query(".row-fluid").style("height","100%");
 			dojo.query(".span12").style("height","100%");
-			console.log("h="+h+", hd="+hd+", ft="+ft+", result="+(h-hd-ft-25))
+			//console.log("h="+h+", hd="+hd+", ft="+ft+", result="+(h-hd-ft-25))
 			dijit.byId(pageGlobal.borderContainer).resize()
 		}
 	});

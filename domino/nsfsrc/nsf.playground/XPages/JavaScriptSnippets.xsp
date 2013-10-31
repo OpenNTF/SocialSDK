@@ -38,8 +38,6 @@
 	snippetsTree:	'assetsTree',
 	tabContainer:	'#{id:tabContainer}',
 	tabHtml:		'#{id:tabHtml}',
-	tabJs:			'#{id:tabJs}',
-	tabCss:			'#{id:tabCss}',
 	codeDialog:		'#{id:codeDialog}',
 	cbLibrary:		'#{id:comboLibrary}'
 }
@@ -91,45 +89,60 @@ if(doc) {	o = {		status:			"ok",		id:				snippetId,		unid:			doc.getUniversa
 		<xc:ccLayout navigationPath="/JavaScriptSnippets"
 			title="#{javascript:optionsBean.getApplicationTitle('JavaScript Snippets')}"
 			wholePage="true">
-			<xp:this.facets>
-				<xp:panel id="PlaceBarActions" xp:key="PlaceBarActions">
-					<xp:comboBox id="comboLibrary" value="#{sessionScope.javaScriptLibrary}"
-						defaultValue="#{javascript:return
-								snippetBean.getDefaultJavaScriptLibrary()}">
-						<xp:selectItems>
-							<xp:this.value><![CDATA[#{javascript:snippetBean.getJavaScriptLibraries()}]]></xp:this.value>
-						</xp:selectItems>
-						<xp:eventHandler event="onchange" submit="true"
-							refreshMode="complete">
-						</xp:eventHandler></xp:comboBox>
-					<xc:ccEnvironmentComboBox></xc:ccEnvironmentComboBox>
-				</xp:panel>
-			</xp:this.facets>
+
+			<!--  Main Page -->
 			<xe:djBorderContainer id="djTabContainer1"
 				style="width:100%; height:100%;" liveSplitters="true">
 				<xe:this.dojoAttributes>
 					<xp:dojoAttribute name="design" value="sidebar"></xp:dojoAttribute>
 				</xe:this.dojoAttributes>
+
+				<!--  Left tree -->
 				<xe:djBorderPane id="djBorderPane3" region="leading"
 					splitter="true" style="width:300px">
-					<xp:div id="leftRefresh" style="height: 100%">
-						<xc:ccAssetTree type="snippet"></xc:ccAssetTree>
-					</xp:div>
-				</xe:djBorderPane>
-				<xe:djBorderPane id="djBorderPane2" region="center">
 					<xe:djBorderContainer id="djBorderContainer1"
-						liveSplitters="true">
+						style="width: 100%">
+						<xe:djBorderPane id="djBorderPane1" region="top">
+							<xc:ccEnvironmentComboBox></xc:ccEnvironmentComboBox>
+						</xe:djBorderPane>
+						<xe:djBorderPane id="djBorderPane4" region="top">
+							<xp:comboBox id="comboLibrary" value="#{sessionScope.javaScriptLibrary}"
+								defaultValue="#{javascript:return
+								snippetBean.getDefaultJavaScriptLibrary()}"
+								style="width:85%; margin-top:5px">
+								<xp:selectItems>
+									<xp:this.value><![CDATA[#{javascript:snippetBean.getJavaScriptLibraries()}]]></xp:this.value>
+								</xp:selectItems>
+								<xp:eventHandler event="onchange" submit="true"
+									refreshMode="complete">
+								</xp:eventHandler>
+							</xp:comboBox>
+						</xe:djBorderPane>
+						<xe:djBorderPane id="djBorderPane5" region="center">
+							<xc:ccAssetTree type="snippet"></xc:ccAssetTree>
+						</xe:djBorderPane>
+					</xe:djBorderContainer>
+				</xe:djBorderPane>
+
+				<!--  Body of the playground -->
+				<xe:djBorderPane id="djBorderPane2" region="leading"
+					splitter="true" style="width:45%">
+
+					<!--  Code tabs and associated toolbars-->
+					<xe:djBorderContainer id="codePanel">
 						<xe:this.dojoAttributes>
 							<xp:dojoAttribute name="gutters" value="false">
 							</xp:dojoAttribute>
 						</xe:this.dojoAttributes>
-						<xe:djBorderPane region="top">
+
+						<!-- Action buttons toolbar -->
+						<xe:djBorderPane region="top" style="padding:0px">
 							<xe:toolbar id="toolbar1">
 								<xe:this.treeNodes>
 									<xe:basicLeafNode label="New Snippet"
-										styleClass="dijitIconNewTask" href="#">
+										href="#">
 									</xe:basicLeafNode>
-									<xe:basicLeafNode label="Save" styleClass="dijitIconSave"
+									<xe:basicLeafNode label="Save" 
 										loaded="${javascript:userBean.canCreateDocs}">
 										<xe:this.onClick><![CDATA[if("#{userBean.canCreateDocs}"!="true") {
 	alert("You are not allowed to save a document. Please authenticate with a different user.");
@@ -142,7 +155,7 @@ if(pageGlobal.unid) {
 }]]></xe:this.onClick>
 									</xe:basicLeafNode>
 									<xe:basicLeafNode label="Save As..."
-										styleClass="dijitIconSave" loaded="${javascript:userBean.canCreateDocs}">
+										loaded="${javascript:userBean.canCreateDocs}">
 										<xe:this.onClick><![CDATA[if("#{userBean.canCreateDocs}"!="true") {
 	alert("You are not allowed to save a document. Please authenticate with a different user.");
 	return;
@@ -150,7 +163,7 @@ if(pageGlobal.unid) {
 XSP.openDialog("#{id:snippetDialog}")]]></xe:this.onClick>
 									</xe:basicLeafNode>
 									<xe:basicLeafNode label="Delete Snippet..."
-										styleClass="dijitIconDelete" loaded="${javascript:userBean.canCreateDocs}">
+										loaded="${javascript:userBean.canCreateDocs}">
 										<xe:this.onClick><![CDATA[if("#{userBean.canCreateDocs}"!="true") {
 	alert("You are not allowed to delete a document. Please authenticate with a different user.");
 	return;
@@ -159,6 +172,12 @@ if(confirm("This operation cannot be undone.\nDo you really want to delete this 
 	fireOnClick('#{id:deleteLink}');	
 }]]></xe:this.onClick>
 									</xe:basicLeafNode>
+									<!--
+										<xe:basicLeafNode label="Maximize"
+										styleClass="dijitIconDelete">
+										<xe:this.onClick><![CDATA[toggleMaximize(dojo.byId("#{id:codePanel}"));]]></xe:this.onClick>
+										</xe:basicLeafNode>
+									-->
 								</xe:this.treeNodes>
 							</xe:toolbar>
 							<xp:link escape="true" text="Edit..." id="deleteLink"
@@ -176,8 +195,19 @@ if(doc) {
 								</xp:eventHandler>
 							</xp:link>
 						</xe:djBorderPane>
-						<xe:djBorderPane region="top" splitter="true"
-							style="height:55%">
+						<!-- /Action buttons toolbar -->
+
+						<!-- JS Code Tab Container -->
+						<xe:djBorderPane region="top"
+							style="padding: 5px 0 0 0; height: 65%; overflow: hidden" splitter="true">
+							<xp:div style="border: 1px solid #AAAAAA; height: 99%;">
+								<xc:PlaygroundTabJavaScript></xc:PlaygroundTabJavaScript>
+							</xp:div>
+						</xe:djBorderPane>
+						<!-- /JS Code Tab Container -->
+
+						<!-- Other Code Tab Container -->
+						<xe:djBorderPane region="center" style="padding:0px">
 							<xe:djTabContainer id="tabContainer"
 								style="width: 100%; height: 100%; border: none">
 								<xe:djTabPane id="tabHtml" title="HTML"
@@ -186,65 +216,67 @@ if(doc) {
 										<xc:PlaygroundTabHtml></xc:PlaygroundTabHtml>
 									</xp:div>
 								</xe:djTabPane>
-								<xe:djTabPane id="tabJs" title="JavaScript"
-									onShow="pageGlobal.jsEditor.refresh()">
-									<xp:div style="border: 1px solid #AAAAAA; height: 100%">
-										<xc:PlaygroundTabJavaScript></xc:PlaygroundTabJavaScript>
-									</xp:div>
-								</xe:djTabPane>
-								<xe:djTabPane id="tabCss" title="CSS"
+								<xe:djTabPane id="djTabPane3" title="CSS"
 									onShow="pageGlobal.cssEditor.refresh()">
 									<xp:div style="border: 1px solid #AAAAAA; height: 100%">
 										<xc:PlaygroundTabCss></xc:PlaygroundTabCss>
 									</xp:div>
 								</xe:djTabPane>
-								<xe:djTabPane id="djTabProperties" title="Properties"
+								<xe:djTabPane id="djTabPane4" title="Properties"
 									onShow="pageGlobal.propertiesEditor.refresh()">
 									<xp:div style="border: 1px solid #AAAAAA; height: 100%">
 										<xc:PlaygroundTabProperties></xc:PlaygroundTabProperties>
 									</xp:div>
 								</xe:djTabPane>
-								<xe:djTabPane id="djTabDocumentation" title="Documentation">
+								<xe:djTabPane id="djTabPane5" title="Documentation">
 									<xp:div style="border: 1px solid #AAAAAA; height: 100%">
 										<xc:PlaygroundTabDocumentation></xc:PlaygroundTabDocumentation>
 									</xp:div>
 								</xe:djTabPane>
 							</xe:djTabContainer>
 						</xe:djBorderPane>
-						<xe:djBorderPane region="top" splitter="false">
-							<xe:toolbar id="toolbar2" style="display: inline-block">
+						<!-- /Other Code Tab Container -->
+
+					</xe:djBorderContainer>
+					<!--  /Code tabs and associated toolbars-->
+
+				</xe:djBorderPane>
+				<!--  /Body of the playground -->
+
+				<!--  Preview area-->
+				<xe:djBorderPane region="center" style="padding:0px; overflow: hidden;">
+					<xe:djBorderContainer>
+						<xe:this.dojoAttributes>
+							<xp:dojoAttribute name="gutters" value="false">
+							</xp:dojoAttribute>
+						</xe:this.dojoAttributes>
+						<xe:djBorderPane region="top" style="padding:0px; overflow: hidden;">
+							<xe:toolbar id="toolbar2">
 								<xe:this.treeNodes>
 									<xe:basicLeafNode label="Run"
-										styleClass="dijitEditorIcon dijitEditorIconViewSource"
 										onClick="runCode(false)">
 									</xe:basicLeafNode>
 									<xe:basicLeafNode label="Debug"
-										styleClass="dijitEditorIcon dijitEditorIconViewSource"
 										onClick="runCode(true)">
 									</xe:basicLeafNode>
 									<xe:basicLeafNode label="Show Generated HTML"
-										styleClass="dijitEditorIcon dijitEditorIconViewSource"
 										onClick="showCode()">
 									</xe:basicLeafNode>
 									<xe:basicLeafNode label="Edit Parameters"
-										styleClass="dijitEditorIcon dijitEditorIconViewSource"
 										onClick="showParams()">
 									</xe:basicLeafNode>
 								</xe:this.treeNodes>
 							</xe:toolbar>
 						</xe:djBorderPane>
-						<xe:djBorderPane region="center"
-							style="border: 1px solid #AAAAAA;">
-							<xp:div style="height: 100%">
-								<xc:SnippetsPreviewPane></xc:SnippetsPreviewPane>
-							</xp:div>
-						</xe:djBorderPane>
-						<xe:djBorderPane region="bottom" splitter="false">
-							<xc:ApacheLicense></xc:ApacheLicense>
+						<xe:djBorderPane region="center" style="padding:0px; overflow: hidden;">
+							<xc:SnippetsPreviewPane></xc:SnippetsPreviewPane>
 						</xe:djBorderPane>
 					</xe:djBorderContainer>
 				</xe:djBorderPane>
+				<!--  /Preview area-->
+
 			</xe:djBorderContainer>
+
 		</xc:ccLayout>
 	</xp:form>
 
@@ -392,5 +424,5 @@ codeEditor.setValue(_codeData);
 		<input type="hidden" name="fm_properties" id="properties" />
 		<input type="hidden" name="fm_options" id="options" />
 	</form>
- 
+
 </xp:view>

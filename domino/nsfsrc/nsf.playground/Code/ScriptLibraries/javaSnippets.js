@@ -44,14 +44,15 @@ function loadSnippet(id) {
 			if(pageGlobal.jspEditor) pageGlobal.jspEditor.setValue(r.jsp);
 			if(pageGlobal.propertiesEditor) pageGlobal.propertiesEditor.setValue(r.properties);
 			if(pageGlobal.documentationPanel) pageGlobal.documentationPanel.innerHTML = r.documentation;
-			selectTab(pageGlobal.tabJsp);
 			createPropertyPanel(pageGlobal.params);
 			if(pageGlobal.previewStack) {
 				selectStack(pageGlobal.previewParams);
 			}
 			updateLabel(r);
 			updateNavSelection();
-			runCode(false);
+			if(shouldAutoExec(pageGlobal.params)) {
+				runCode(false);
+			}
 		} else {
 			alert("Error:\n"+r.msg);
 		}

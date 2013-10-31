@@ -466,57 +466,27 @@ public class FileService extends BaseService {
 	}
 	
 	/**
-	 * Method to download a community file
+	 * Method to download a community file. A community file is a public file.
 	 * @param ostream - output stream which contains the binary content of the file
 	 * @param fileId
-	 * @param communityId
+	 * @param libraryId - Library Id of which the file is a part. This value can be obtained by using File's getLibraryId method.
 	 * @return
 	 * @throws FileServiceException
 	 */
-	public long downloadCommunityFile(OutputStream ostream, final String fileId, final String communityId) throws FileServiceException {
-		return downloadCommunityFile(ostream, fileId, communityId, null);
+	public long downloadCommunityFile(OutputStream ostream, final String fileId, final String libraryId) throws FileServiceException {
+		return downloadCommunityFile(ostream, fileId, libraryId, null);
 	}
 	/**
-	 * Method to download a community file
+	 * Method to download a community file. A community file is a public file. 
 	 * @param ostream - output stream which contains the binary content of the file
 	 * @param fileId
-	 * @param communityId
+	 * @param libraryId - Library Id of which the file is a part. This value can be obtained by using File's getLibraryId method.
 	 * @param params
 	 * @return long 
 	 * @throws FileServiceException
 	 */
-	public long downloadCommunityFile(OutputStream ostream, final String fileId, final String communityId, Map<String, String> params) throws FileServiceException {
-		File file = getCommunityFile(communityId, fileId);
-		// now we have the file.. we need to download it.. 
-		String accessType = AccessType.AUTHENTICATED.getAccessType();
-		SubFilters downloadFilters = new SubFilters();
-		downloadFilters.setLibraryId(file.getLibraryId());
-		downloadFilters.setFileId(file.getFileId());
-		String resultType = ResultType.MEDIA.getResultType();
-		String requestUrl = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
-                null, downloadFilters, resultType); 
-		
-		Map<String, String> headers = new HashMap<String, String>();
-		headers.put(Headers.ContentType, Headers.BINARY);
-		Response response = null;
-		try {
-			response = this.getClientService().get(requestUrl, params, headers, ClientService.FORMAT_INPUTSTREAM);
-		} catch (ClientServicesException e) {
-			throw new FileServiceException(e, Messages.MessageExceptionInDownloadingFile);
-		} 
-		InputStream istream = (InputStream) response.getData();
-		long noOfBytes = 0;
-		try {
-			if (istream != null) {
-				noOfBytes = StreamUtil.copyStream(istream, ostream);
-				ostream.flush();
-			}
-		} catch (IllegalStateException e) {
-			throw new FileServiceException(e, Messages.MessageExceptionInDownloadingFile);
-		} catch (IOException e) {
-			throw new FileServiceException(e, Messages.MessageExceptionInDownloadingFile);
-		}
-		return noOfBytes;
+	public long downloadCommunityFile(OutputStream ostream, final String fileId, final String libraryId, Map<String, String> params) throws FileServiceException {
+		return downloadFile(ostream, fileId, libraryId, params, true);
 	}
 	
 	/**

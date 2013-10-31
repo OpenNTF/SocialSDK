@@ -35,7 +35,7 @@ define(
 
 						/** Strings used in the actions */
 						nls : {
-							tooltip : "Go to ${name}",
+							tooltip : "Go to ${name}"
 						},
 
 						/**

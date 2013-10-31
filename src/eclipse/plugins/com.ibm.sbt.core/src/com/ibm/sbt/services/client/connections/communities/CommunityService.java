@@ -980,15 +980,15 @@ public class CommunityService extends BaseService {
 	 * Method to download a community file
 	 * @param ostream
 	 * @param fileId
-	 * @param communityId
+	 * @param libraryId - Library Id of which the file is a part. This value can be obtained by using File's getLibraryId method.
 	 * @param params
 	 * @return long
 	 * @throws CommunityServiceException
 	 */
-	public long downloadCommunityFile(OutputStream ostream, final String fileId, final String communityId, Map<String, String> params) throws CommunityServiceException {
+	public long downloadCommunityFile(OutputStream ostream, final String fileId, final String libraryId, Map<String, String> params) throws CommunityServiceException {
 		FileService svc = new FileService(this.endpoint);
 		try {
-			return svc.downloadCommunityFile(ostream, fileId, communityId, params);
+			return svc.downloadCommunityFile(ostream, fileId, libraryId, params);
 		} catch (FileServiceException e) {
 			throw new CommunityServiceException(e, Messages.DownloadCommunitiesException);
 		} 

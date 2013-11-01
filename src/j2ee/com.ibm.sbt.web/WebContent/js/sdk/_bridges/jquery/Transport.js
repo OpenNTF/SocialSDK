@@ -198,24 +198,34 @@ define(['./declare', '../util', '../Promise', './jquery'], function(declare, uti
 		    }
 		},
 		handleSuccess: function(args, data, textStatus, jqXHR) {
-		    if (args.handle) {
+		    if (args.handle || args.load) {
                 var _ioArgs = {
                     'args' : args,
                     'headers' : util.getAllResponseHeaders(jqXHR),
                     '_ioargs' : { xhr : jqXHR }
                 };
-		        args.handle(data, _ioArgs);
+                if (args.handle) {
+                	args.handle(data, _ioArgs);
+                }
+                if (args.load) {
+                	args.load(data, _ioArgs);
+                }
 		    }
 		},
 		handleError: function(args, jqXHR, textStatus, errorThrown) {
 			var error = this.createError(jqXHR, textStatus, errorThrown, args.handleAs);
-            if (args.handle) {
+            if (args.handle || args.error) {
                 var _ioArgs = {
                     'args' : args,
                     'headers' : util.getAllResponseHeaders(jqXHR),
                     '_ioargs' : { xhr : jqXHR }
                 };
-		        args.handle(error, _ioArgs);
+                if (args.handle) {
+                	args.handle(error, _ioArgs);
+                }
+                if (args.load) {
+                	args.load(error, _ioArgs);
+                }
             }
 		},
 		createError: function(jqXHR, textStatus, errorThrown, type) {

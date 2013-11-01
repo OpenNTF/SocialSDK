@@ -10,6 +10,7 @@
     <title>Social Business Toolkit - Grant Access</title>
     <link href="images/sbt.png" rel="shortcut icon">
 
+	<!-- 
 	<script type="text/javascript">
 	var djConfig = {
 	    parseOnLoad: true,
@@ -18,7 +19,26 @@
 	</script>
 	<script type="text/javascript" src="/sbt.dojo180/dojo/dojo.js.uncompressed.js"></script>
 	<script type="text/javascript" src="/grantaccess.webapp/library?lib=dojo&amp;ver=1.8.0"></script>
-
+ 	-->
+ 
+	<script type="text/javascript" src="/sbt/js/libs/require.js"></script>
+	<script type="text/javascript">
+	requirejs.config({
+	       paths: {
+	           'jquery' : '//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery',
+	           'jquery/ui' : '//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui'
+	        },
+	        shim : {
+	            'jquery/ui' : {
+	                deps : [ 'jquery' ],
+	                exports : '$'
+	            }
+	        }
+	    });
+	</script>
+	<link rel="stylesheet" type="text/css" title="Style" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/themes/base/jquery-ui.css">
+	<script type="text/javascript" src="/grantaccess.webapp/library?lib=jquery&amp;ver=1.9.1"></script>
+ 
     <link href="/sbt.bootstrap211/bootstrap/css/bootstrap-sbt.css" rel="stylesheet"></link>
     <link href="/sbt.bootstrap211/bootstrap/css/bootstrap-responsive.css" rel="stylesheet"></link>
   </head>

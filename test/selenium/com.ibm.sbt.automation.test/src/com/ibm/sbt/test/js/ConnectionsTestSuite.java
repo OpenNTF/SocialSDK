@@ -30,6 +30,7 @@ import com.ibm.sbt.test.js.connections.BookmarksTestSuite;
 import com.ibm.sbt.test.js.connections.CommunitiesRestTestSuite;
 import com.ibm.sbt.test.js.connections.CommunitiesTestSuite;
 import com.ibm.sbt.test.js.connections.FilesTestSuite;
+import com.ibm.sbt.test.js.connections.FollowTestSuite;
 import com.ibm.sbt.test.js.connections.ForumsRestTestSuite;
 import com.ibm.sbt.test.js.connections.ForumsTestSuite;
 import com.ibm.sbt.test.js.connections.ProfilesRestTestSuite;
@@ -62,6 +63,7 @@ import com.ibm.sbt.test.sample.SampleFrameworkTestSuite;
 	SearchRestTestSuite.class, 
 	SearchTestSuite.class, 
 	WikisTestSuite.class,
+	FollowTestSuite.class,
 	SampleFrameworkTestSuite.class })
 public class ConnectionsTestSuite {
 	@AfterClass

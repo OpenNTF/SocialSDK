@@ -849,6 +849,16 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         },
 
         /**
+         * Return the last updated date of the ATOM entry document.
+         * 
+         * @method getUpdated
+         * @return {Date} Last updated date of the entry
+         */
+        getUpdated : function() {
+            return this.getAsDate("updated");
+        },
+        
+        /**
          * Gets an author of IBM Connections community invite.
          * 
          * @method getAuthor

@@ -248,8 +248,10 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
 		 */
     	FollowedResourceFeedXPath : conn.ConnectionsFeedXPath,
     	
+        /**
+         * XPath expressions to be used when reading a followed resource entry
+         */
     	FollowedResourceXPath : lang.mixin({
-            id : "a:id",
             followedResourceUuid : "a:id",
             categoryType : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/type']/@term",
             source : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/source']/@term",

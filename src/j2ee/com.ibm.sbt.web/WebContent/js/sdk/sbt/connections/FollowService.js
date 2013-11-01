@@ -187,7 +187,27 @@ define(
 				 */
 				setCategoryType : function(categoryType) {
 					return this.setAsString("categoryType", categoryType);
-				}
+				},
+
+		        /**
+		         * Start following
+		         * 
+		         * @method startFollowing
+		         * @param {Object} [args] Argument object
+		         */
+		        startFollowing : function(args) {
+		            return this.service.startFollowing(this, args);
+		        },
+
+		        /**
+		         * Stop following
+		         * 
+		         * @method stopFollowing
+		         * @param {Object} [args] Argument object
+		         */
+		        stopFollowing : function(args) {
+		            return this.service.stopFollowing(this, args);
+		        }
 
 			});
 			

@@ -16,7 +16,7 @@ require(["sbt/connections/CommunityService", "sbt/dom"],
     	communityService.getPublicCommunities({ ps: 5 }).then(
             function(communities){
                 if (communities.length == 0) {
-                    text = "You are not a member of any communities.";
+                    text = "There are no public communities.";
                     dom.setText("content", text);
                 } else {
                     for(var i=0; i<communities.length; i++){

@@ -149,10 +149,10 @@ define([ "../declare", "../lang", "../stringUtil", "./BaseConstants", "./BaseEnt
         },
 
         /**
-         * Gets an author of IBM Connections Forum Reply.
+         * Gets an author of the ATOM entry
          * 
          * @method getAuthor
-         * @return {Member} author Author of the Forum Reply
+         * @return {Member} author Author of the ATOM entry
          */
         getAuthor : function() {
             return this.getAsObject(
@@ -161,10 +161,10 @@ define([ "../declare", "../lang", "../stringUtil", "./BaseConstants", "./BaseEnt
         },
 
         /**
-         * Gets a contributor of IBM Connections forum.
+         * Gets a contributor of the ATOM entry
          * 
          * @method getContributor
-         * @return {Member} contributor Contributor of the forum
+         * @return {Member} contributor Contributor of the ATOM entry
          */
         getContributor : function() {
             return this.getAsObject(
@@ -173,22 +173,20 @@ define([ "../declare", "../lang", "../stringUtil", "./BaseConstants", "./BaseEnt
         },
         
         /**
-         * Return the published date of the IBM Connections Forum Reply from
-         * Forum Reply ATOM entry document.
+         * Return the published date of the ATOM entry document.
          * 
          * @method getPublished
-         * @return {Date} Published date of the Forum Reply
+         * @return {Date} Published date of the entry
          */
         getPublished : function() {
             return this.getAsDate("published");
         },
 
         /**
-         * Return the last updated date of the IBM Connections Forum Reply from
-         * Forum Reply ATOM entry document.
+         * Return the last updated date of the ATOM entry document.
          * 
          * @method getUpdated
-         * @return {Date} Last updated date of the Forum Reply
+         * @return {Date} Last updated date of the entry
          */
         getUpdated : function() {
             return this.getAsDate("updated");

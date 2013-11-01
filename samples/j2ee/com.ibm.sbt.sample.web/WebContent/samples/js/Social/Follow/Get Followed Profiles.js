@@ -1,7 +1,6 @@
 require(["sbt/connections/FollowService", "sbt/connections/FollowConstants", "sbt/dom"], 
 	    function(FollowService, consts, dom) {
 		    var createRow = function(followedResource) {
-		    	console.log("followedResource "+followedResource);
 		        var table = dom.byId("followedResourcesTable");
 		        var tr = document.createElement("tr");
 		        table.appendChild(tr);

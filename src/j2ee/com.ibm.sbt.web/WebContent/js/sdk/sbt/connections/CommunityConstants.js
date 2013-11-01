@@ -151,6 +151,8 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
             authorName : "a:author/a:name",
             contributorUserid : "a:contributor/snx:userid",
             contributorName : "a:contributor/a:name",
+            contributorEmail : "a:contributor/a:email",
+            contributorUserState : "a:contributor/snx:userState",
             communityUuid : "snx:communityUuid",
             communityUrl : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/community']/@href",
             editUrl : "a:link[@rel='edit']/@href"

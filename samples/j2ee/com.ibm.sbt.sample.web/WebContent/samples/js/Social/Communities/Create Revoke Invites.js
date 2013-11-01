@@ -86,13 +86,13 @@ function createRow(invite, dom) {
     }
 }
 
-function createInvite(communityService, title, email, userid, dom) {
-    displayMessage(dom, "Please wait... Creating invite: " + title);
+function createInvite(communityService, email, userid, dom) {
+    displayMessage(dom, "Please wait... Creating invite: " + (userid || email));
     
     currentInvite = null;
     var invite = communityService.newInvite(); 
     invite.setCommunityUuid(currentCommunity.getCommunityUuid());
-    invite.setTitle(title);
+    // you need to provide a valid email or userid 
     invite.setEmail(email);
     invite.setUserid(userid);
     communityService.createInvite(invite).then(  
@@ -161,11 +161,10 @@ function addOnClickHandlers(communityService, dom) {
         handleInviteLoaded(null, dom);
     };
     dom.byId("inviteBtn").onclick = function(evt) {
-        dom.byId("inviteId").value = "";
-        var title = dom.byId("inviteTitle");       
+        dom.byId("inviteId").value = "";      
         var email = dom.byId("inviteEmail");        
         var userid = dom.byId("inviteUserid");        
-        createInvite(communityService, title.value, email.value, userid.value, dom);
+        createInvite(communityService, email.value, userid.value, dom);
     };
 }
 

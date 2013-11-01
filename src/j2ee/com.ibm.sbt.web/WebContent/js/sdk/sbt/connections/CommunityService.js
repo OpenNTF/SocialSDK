@@ -1043,7 +1043,6 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @method setTitle
          * @param {String} Community event title
          */
-
         setTitle : function(name) {
             return this.setAsString("title", name);
         },
@@ -1068,6 +1067,11 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             return this.setAsString("summary", summary);
         },
         
+        /**
+         * return the atom event url.
+         * 
+         * @returns
+         */
         getEventAtomUrl : function(){
             return this.getAsString("eventAtomUrl");
         },
@@ -1080,10 +1084,18 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             return this.service.getEvent(this.getEventInstUuid());
         },
         
+        /**
+         * 
+         * @returns
+         */
         getContent : function(){
             return this.getAsString("content");
         },
         
+        /**
+         * 
+         * @returns
+         */
         getLocation : function(){
             return this.getAsString("location");
         },
@@ -1316,6 +1328,9 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         }
     };
     
+    /*
+     * Callbacks used when reading an feed that contains community events.
+     */
     var ConnectionsForumTopicFeedCallbacks = {
         createEntities : function(service,data,response) {
             return new XmlDataHandler({
@@ -1400,7 +1415,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 query : args || {}
             };
             
-            return this.getEntities(consts.AtomCommunitiesAll, options, this.getCommunityFeedCallbacks());
+            return this.getEntities(consts.AtomCommunitiesAll, options, this._getCommunityFeedCallbacks());
         },
 
         /**
@@ -1421,7 +1436,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 query : args || {}
             };
             
-            return this.getEntities(consts.AtomCommunitiesMy, options, this.getCommunityFeedCallbacks());
+            return this.getEntities(consts.AtomCommunitiesMy, options, this._getCommunityFeedCallbacks());
         },
 
         /**
@@ -1448,7 +1463,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 handleAs : "text",
                 query : requestArgs
             };
-            var callbacks = this.getMemberFeedCallbacks(communityUuid);
+            var callbacks = this._getMemberFeedCallbacks(communityUuid);
             
             return this.getEntities(consts.AtomCommunityMembers, options, callbacks);
         },
@@ -1516,7 +1531,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 query : args || {}
             };
                 
-            return this.getEntities(consts.AtomCommunityEvents, options, this.getEventFeedCallbacks());
+            return this.getEntities(consts.AtomCommunityEvents, options, this._getEventFeedCallbacks());
         },
         
         /**
@@ -1536,7 +1551,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 }
             };
                 
-            return this.getEntity(consts.AtomCommunityEvent, options, eventInstUuid, this.getEventCallbacks());
+            return this.getEntity(consts.AtomCommunityEvent, options, eventInstUuid, this._getEventCallbacks());
         },
 
         /**
@@ -1553,7 +1568,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 query : args || {}
             };
             
-            return this.getEntities(consts.AtomCommunityInvitesMy, options, this.getInviteFeedCallbacks());
+            return this.getEntities(consts.AtomCommunityInvitesMy, options, this._getInviteFeedCallbacks());
         },      
 
         /**
@@ -1579,7 +1594,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 query : requestArgs
             };
             
-            return this.getEntities(consts.AtomCommunityInvites, options, this.getInviteFeedCallbacks());
+            return this.getEntities(consts.AtomCommunityInvites, options, this._getInviteFeedCallbacks());
         },      
 
         /**
@@ -1606,7 +1621,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 query : requestArgs
             };
             
-            return this.getEntities(consts.AtomCommunitySubCommunities, options, this.getCommunityFeedCallbacks());
+            return this.getEntities(consts.AtomCommunitySubCommunities, options, this._getCommunityFeedCallbacks());
         },
 
         /**
@@ -1631,7 +1646,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 query : requestArgs
             };
             
-            return this.getEntities(consts.AtomCommunityForumTopics, options, this.getForumTopicFeedCallbacks());
+            return this.getEntities(consts.AtomCommunityForumTopics, options, this._getForumTopicFeedCallbacks());
         },
         
         /**
@@ -2146,21 +2161,21 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         /*
          * Callbacks used when reading a feed that contains Community entries.
          */
-        getCommunityFeedCallbacks: function() {
+        _getCommunityFeedCallbacks: function() {
             return ConnectionsCommunityFeedCallbacks;
         },
 
         /*
          * Callbacks used when reading a feed that contains forum topic entries.
          */
-        getForumTopicFeedCallbacks: function() {
+        _getForumTopicFeedCallbacks: function() {
             return ConnectionsForumTopicFeedCallbacks;
         },
 
         /*
          * Callbacks used when reading a feed that contains Member entries.
          */
-        getMemberFeedCallbacks: function(communityUuid) {
+        _getMemberFeedCallbacks: function(communityUuid) {
             var self = this;
             return lang.mixin({
                 createEntity : function(service,data,response) {
@@ -2182,18 +2197,21 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         /*
          * Callbacks used when reading a feed that contains Invite entries.
          */
-        getInviteFeedCallbacks: function() {
+        _getInviteFeedCallbacks: function() {
             return ConnectionsInviteFeedCallbacks;
         },
         
         /*
          * Callbacks used when reading a feed that contains Event entries.
          */
-        getEventFeedCallbacks: function() {
+        _getEventFeedCallbacks: function() {
             return ConnectionsEventFeedCallbacks;
         },
         
-        getEventCallbacks: function(){
+        /*
+         * Callbacks used when reading a entry that contains an Event.
+         */
+        _getEventCallbacks: function(){
             return ConnectionsEventCallbacks;
         },
 

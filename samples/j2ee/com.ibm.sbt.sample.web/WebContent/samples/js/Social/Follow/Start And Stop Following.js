@@ -1,25 +1,10 @@
 require([  "sbt/connections/FollowService", "sbt/connections/CommunityService", "sbt/connections/FollowConstants", "sbt/dom"],
 	function(FollowService, CommunityService, consts, dom) {
 		var communityService = new CommunityService();
-	    var promise = communityService.getPublicCommunities({ps : 1}); // getting 1 public community
+	    var promise = communityService.getPublicCommunities({ps : 1}); // getting 1 public community. There should be atleast one existing public activity
 	    promise.then(
-	        function(communities) {
-	        	if (communities.length == 0) { // if there is no public community found, create one.
-	        		var community = communityService.newCommunity(); 
-	                var now = new Date();
-	                community.setTitle("CreateCommunity.js " + now.getTime());
-	                community.setContent("Test community created: " + now);
-	                communityService.createCommunity(community).then(
-		        		function(community) {
-		                    return community;
-		                }
-	                );
-	            } else { //  if there is a public community found
-	                return communities[0];
-	            }
-	        }
-		).then(
-			function(community) {  // we have a public community
+			function(communities) {  // we have a public community
+				community = communities[0];
 				var followService = new FollowService();
 				//returning followed resource by passing resource param to getFollowedResources()
 				//this will return one entry if community is followed, otherwise it will return 0 entries

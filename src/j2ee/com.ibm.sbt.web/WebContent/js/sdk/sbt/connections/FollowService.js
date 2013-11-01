@@ -39,11 +39,13 @@
 define(
 		[ "../declare", "../config", "../lang", "../stringUtil", "../Promise",
 				"./FollowConstants", "../base/BaseService",
-				"../base/BaseEntity", "../base/XmlDataHandler" ],
+				"../base/AtomEntity", "../base/XmlDataHandler" ],
 		function(declare, config, lang, stringUtil, Promise, consts,
-				BaseService, BaseEntity, XmlDataHandler) {
+				BaseService, AtomEntity, XmlDataHandler) {
 			
-			var followTmpl = "<entry><category term=\"${getSource}\" scheme=\"http://www.ibm.com/xmlns/prod/sn/source\"></category><category term=\"${getResourceType}\" scheme=\"http://www.ibm.com/xmlns/prod/sn/resource-type\"></category><category term=\"${getResourceId}\" scheme=\"http://www.ibm.com/xmlns/prod/sn/resource-id\"></category></entry>";
+			var SourceTmpl = "<category term=\"${getSource}\" scheme=\"http://www.ibm.com/xmlns/prod/sn/source\"></category>";
+			var ResourceTypeTmpl = "<category term=\"${getResourceType}\" scheme=\"http://www.ibm.com/xmlns/prod/sn/resource-type\"></category>";
+			var ResourceIdTmpl = "<category term=\"${getResourceId}\" scheme=\"http://www.ibm.com/xmlns/prod/sn/resource-id\"></category>";
 
 			/**
 			 * FollowedResource class represents an entry for a resource followed by logged in user.
@@ -51,7 +53,9 @@ define(
 			 * @class FollowedResource
 			 * @namespace sbt.connections
 			 */
-			var FollowedResource = declare(BaseEntity, {
+			var FollowedResource = declare(AtomEntity, {
+				
+				xpath : consts.FollowedResourceXPath,
 
 				/**
 				 * Construct a FollowedResource entity.
@@ -62,6 +66,24 @@ define(
 				constructor : function(args) {
 				},
 
+		        /**
+		         * Return extra entry data to be included in post data for this entity.
+		         * 
+		         * @returns {String}
+		         */
+		        createEntryData : function() {
+		        	var postData = "";
+		            var transformer = function(value,key) {
+		                return value;
+		            };
+	            	postData += stringUtil.transform(SourceTmpl, this, transformer, this);
+	            	postData += stringUtil.transform(ResourceTypeTmpl, this, transformer, this);
+	                if (this.getResourceId()) {
+	                	postData += stringUtil.transform(ResourceIdTmpl, this, transformer, this);
+	                }
+		            return stringUtil.trim(postData);
+		        },
+		        
 				/**
 				 * Return the value of IBM Connections followed resource ID from
 				 * resource ATOM entry document.
@@ -81,28 +103,7 @@ define(
 				 * @param {String} followedResourceUuid Id of the followed resource
 				 */
 				setFollowedResourceUuid : function(followedResourceUuid) {
-					return this.setAsString("followedResourced", followedResourceUuid);
-				},
-
-				/**
-				 * Return the value of IBM Connections followed resource title.
-				 * 
-				 * @method getTitle
-				 * @return {String} Followed resource title
-				 */
-				getTitle : function() {
-					return this.getAsString("title");
-				},
-
-				/**
-				 * Sets title of IBM Connections followed resource.
-				 * 
-				 * @method setTitle
-				 * @param {String}
-				 *            title Title of the followed resource
-				 */
-				setTitle : function(title) {
-					return this.setAsString("title", title);
+					return this.setAsString("followedResourceUuid", followedResourceUuid);
 				},
 
 				/**
@@ -212,54 +213,22 @@ define(
 			});
 			
 		    /*
-		     * Callbacks used when reading a feed that contains forum recommendation entries.
-		     */
-		    var ConnectionsFollowFeedCallbacks = {
-		        createEntities : function(service,data,response) {
-		            return new XmlDataHandler({
-		                service : service,
-		                data : data,
-		                namespaces : consts.Namespaces,
-		                xpath : consts.FollowedResourceFeedXPath
-		            });
-		        },
-		        createEntity : function(service,data,response) {
-		        	 var entryHandler = new XmlDataHandler({
-		                 service :  service,
-		                 data : data,
-		                 namespaces : consts.Namespaces,
-		                 xpath : consts.FollowedResourceXPath
-		             });
-		             return new FollowedResource({
-		                 service : service,
-		                 dataHandler : entryHandler
-		             });
-		        }
-		    };
-			
-			 /*
 		     * Callbacks used when reading a feed that contains followed resource entries.
 		     */
-		    var ConnectionsFollowedResourceFeedCallbacks = {
+		    var FollowResourceFeedCallbacks = {
 		        createEntities : function(service,data,response) {
 		            return new XmlDataHandler({
-		                service :  service,
+		                service : service,
 		                data : data,
 		                namespaces : consts.Namespaces,
 		                xpath : consts.FollowedResourceFeedXPath
 		            });
 		        },
 		        createEntity : function(service,data,response) {
-		            var entryHandler = new XmlDataHandler({
-		                service :  service,
-		                data : data,
-		                namespaces : consts.Namespaces,
-		                xpath : consts.FollowedResourceXPath
-		            });
-		            return new FollowedResource({
-		                service : service,
-		                dataHandler : entryHandler
-		            });
+		             return new FollowedResource({
+		                 service : service,
+		                 data : data
+		             });
 		        }
 		    };
 		    
@@ -385,7 +354,7 @@ define(
 				            url = this.constructUrl(consts.AtomFollowAPI, null, {
 				            	service : this._getServiceName(source)
 							});
-							return this.getEntities(url, options, this.getFollowedResourceFeedCallbacks());
+							return this.getEntities(url, options, this._getFollowedResourceFeedCallbacks());
 						},
 
 				        /**
@@ -405,15 +374,21 @@ define(
 			                var options = {
 			                    method : "POST",
 			                    headers : consts.AtomXmlHeaders,
-			                    data : this._constructFollowResourcePostData(followedResource)
+			                    data : followedResource.createPostData()
 			                };
 							
+			                var callbacks = {};
+			                callbacks.createEntity = function(service,data,response) {
+			                	followedResource.setData(data);
+			                    return followedResource;
+			                };
+			                
 							var url = null;
 				            url = this.constructUrl(consts.AtomFollowAPI, null, {
 				            	service : this._getServiceName(followedResource.getSource())
 							});
 			                
-			                return this.updateEntity(url, options, this.getFollowFeedCallbacks());
+			                return this.updateEntity(url, options, callbacks);
 			            },
 
 				        /**
@@ -425,7 +400,7 @@ define(
 				         */
 						stopFollowing : function(followedResourceOrJson, args) {
 							var followedResource = this._toFollowedResource(followedResourceOrJson);
-				            var promise = this._validateFollowedResource(followedResource, false, args);
+				            var promise = this._validateFollowedResource(followedResource, true);
 				            if (promise) {
 				                return promise;
 				            }
@@ -441,8 +416,8 @@ define(
 			                    headers : consts.AtomXmlHeaders,
 			                    query : requestArgs
 			                };
-			                var url = null;
-			    			url = this.constructUrl(consts.AtomStopFollowAPI, null, {
+				            
+			                var url = this.constructUrl(consts.AtomStopFollowAPI, null, {
 				            	service : this._getServiceName(followedResource.getSource()),
 				            	resourceId : followedResource.getFollowedResourceUuid()
 			    			});
@@ -464,28 +439,23 @@ define(
 						 * Callbacks used when reading a feed that contains
 						 * followed resource entries.
 						 */
-						getFollowedResourceFeedCallbacks : function() {
-							return ConnectionsFollowedResourceFeedCallbacks;
-						},
-
-						/*
-						 * Callbacks used when reading a feed that contains
-						 * followed resource entries.
-						 */
-						getFollowFeedCallbacks : function() {
-							return ConnectionsFollowFeedCallbacks;
+						_getFollowedResourceFeedCallbacks : function() {
+							return FollowResourceFeedCallbacks;
 						},
 
 				        /*
 				         * Validate a blog, and return a Promise if invalid.
 				         */
-						_validateFollowedResource : function(followedResource) {
+						_validateFollowedResource : function(followedResource, checkUuid) {
 				            if (!followedResource || !followedResource.getSource()) {
 				                return this.createBadRequestPromise("Invalid argument, resource with source must be specified.");
 				            }
 				            if (!followedResource.getResourceType()) {
 				                return this.createBadRequestPromise("Invalid argument, resource with resourseType must be specified.");
 				            }
+				            if (checkUuid && !followedResource.getFollowedResourceUuid()) {
+				                return this.createBadRequestPromise("Invalid argument, resource with UUID must be specified.");
+				            }				            
 				        },
 
 				        /*
@@ -497,24 +467,6 @@ define(
 				            }
 				        },
 
-						/*
-						 * Construct a post data for a ollowed resource 
-						 */
-						
-						_constructFollowResourcePostData : function(followedResource) {
-							var transformer = function(value, key) {
-								if (key == "getSource" && !value) {
-									value = followedResource.getSource();
-								} else if (key == "getResourceType" && !value) {
-									value = followedResource.setCategoryResourceType();
-								} else if (key == "getResourceId" && !value) {
-									value = followedResource.getResourceId();
-								}
-								return value;
-							};
-							var postData = stringUtil.transform(followTmpl, followedResource, transformer, followedResource);
-							return stringUtil.trim(postData);
-						},
 						/*
 				         * Return a Followed Resource instance from FollowedResource or JSON or String. Throws
 				         * an error if the argument was neither.
@@ -534,7 +486,8 @@ define(
 				                });
 				            }
 				        },
-						/*
+						
+				        /*
 				         * Return a Followed Resource instance from FollowedResource or JSON or String. Throws
 				         * an error if the argument was neither.
 				         */

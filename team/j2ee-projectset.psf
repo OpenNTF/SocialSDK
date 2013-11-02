@@ -19,8 +19,9 @@
 <project reference="1.0,https://github.com/OpenNTF/SocialSDK.git,master,samples/j2ee/com.ibm.sbt.sample.web"/>
 <project reference="1.0,https://github.com/OpenNTF/SocialSDK.git,master,src/j2ee/com.ibm.sbt.web"/>
 <project reference="1.0,https://github.com/OpenNTF/SocialSDK.git,master,samples/j2ee/helloworld.webapp"/>
-<project reference="1.0,https://github.com/OpenNTF/SocialSDK.git,master,samples/java/sbt.sample.app"/>
 <project reference="1.0,https://github.com/OpenNTF/SocialSDK.git,master,samples/j2ee/smartcloud.webapp"/>
 <project reference="1.0,https://github.com/OpenNTF/SocialSDK.git,master,samples/j2ee/social.helloworld.webapp"/>
+<project reference="1.0,https://github.com/OpenNTF/SocialSDK.git,master,samples/j2ee/grantaccess.webapp"/>
+<project reference="1.0,https://github.com/OpenNTF/SocialSDK.git,master,samples/j2ee/mysocial.webapp"/>
 </provider>
 </psf>

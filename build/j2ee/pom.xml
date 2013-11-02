@@ -21,5 +21,6 @@
     <module>../../src/eclipse/plugins/com.ibm.sbt.core</module>
     <!-- web module projects -->
     <module>../../src/j2ee/com.ibm.sbt.web</module>
+	<module>../../src/j2ee/com.ibm.sbt.proxy.web</module>
   </modules>
 </project>

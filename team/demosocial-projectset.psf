@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<psf version="2.0">
+<provider id="org.eclipse.egit.core.GitProvider">
+<project reference="1.0,https://github.com/OpenNTF/SocialSDK.git,master,src/eclipse/plugins/com.ibm.commons"/>
+<project reference="1.0,https://github.com/OpenNTF/SocialSDK.git,master,src/eclipse/plugins/com.ibm.commons.runtime"/>
+<project reference="1.0,https://github.com/OpenNTF/SocialSDK.git,master,src/eclipse/plugins/com.ibm.commons.xml"/>
+<project reference="1.0,https://github.com/OpenNTF/SocialSDK.git,master,src/eclipse/plugins/com.ibm.sbt.core"/>
+<project reference="1.0,https://github.com/OpenNTF/SocialSDK.git,master,src/j2ee/com.ibm.sbt.web"/>
+<project reference="1.0,https://github.com/OpenNTF/SocialSDK.git,master,src/j2ee/com.ibm.sbt.proxy.web"/>
+<project reference="1.0,https://github.com/OpenNTF/SocialSDK.git,master,samples/j2ee/demosocial.webapp"/>
+</provider>
+</psf>

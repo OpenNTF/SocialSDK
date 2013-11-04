@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-package com.ibm.xsp.extlib.component.connections;
+package com.ibm.xsp.extlib.component.sbt;
 
 import javax.faces.component.UIComponentBase;
 import javax.faces.context.FacesContext;
@@ -30,7 +30,7 @@ import com.ibm.xsp.stylekit.ThemeControl;
  * This component generates what is needed to access the Connections services.
  * </p>
  */
-public class UIConnectionsClient extends UIComponentBase implements ThemeControl {
+public class UISbtClient extends UIComponentBase implements ThemeControl {
 
     // Test if the client is enabled
     private static final String ATTR_CONNECTIONS_ENABLED       = "extlib.connections.enabled"; 
@@ -46,9 +46,9 @@ public class UIConnectionsClient extends UIComponentBase implements ThemeControl
         }
     }
     
-    public static final String COMPONENT_TYPE = "com.ibm.xsp.extlib.connections.ConnectionsClient"; //$NON-NLS-1$
-    public static final String RENDERER_TYPE = "com.ibm.xsp.extlib.connections.ConnectionsClient"; // $NON-NLS-1$
-    public static final String COMPONENT_FAMILY = "com.ibm.xsp.extlib.connections.Connections"; //$NON-NLS-1$
+    public static final String COMPONENT_TYPE = "com.ibm.xsp.extlib.sbt.SbtClient"; //$NON-NLS-1$
+    public static final String RENDERER_TYPE = "com.ibm.xsp.extlib.sbt.SbtClient"; // $NON-NLS-1$
+    public static final String COMPONENT_FAMILY = "com.ibm.xsp.extlib.sbt.Sbt"; //$NON-NLS-1$
 
     private String endpoint;
     
@@ -65,7 +65,7 @@ public class UIConnectionsClient extends UIComponentBase implements ThemeControl
     // !Not published is xsp-config on purpose!
     private Boolean debug;
         
-    public UIConnectionsClient() {
+    public UISbtClient() {
         setRendererType(RENDERER_TYPE);
     }
 
@@ -75,7 +75,7 @@ public class UIConnectionsClient extends UIComponentBase implements ThemeControl
     }
 
     public String getStyleKitFamily() {
-        return "Connections.Client"; // $NON-NLS-1$
+        return "Sbt.Client"; // $NON-NLS-1$
     }
     
     public String getEndpoint() {

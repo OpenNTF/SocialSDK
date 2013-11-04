@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-package com.ibm.xsp.extlib.component.connections;
+package com.ibm.xsp.extlib.component.sbt;
 
 import com.ibm.xsp.extlib.component.dojo.UIDojoWidget;
 import com.ibm.xsp.stylekit.ThemeControl;
@@ -27,13 +27,13 @@ import com.ibm.xsp.stylekit.ThemeControl;
  * uniquely if the Connections client is enabled.
  * </p>
  */
-public class UIConnectionsWidget extends UIDojoWidget implements ThemeControl {
+public class UISbtWidget extends UIDojoWidget implements ThemeControl {
     
-    public static final String COMPONENT_TYPE = "com.ibm.xsp.extlib.ConnectionsWidget"; //$NON-NLS-1$
-    public static final String RENDERER_TYPE = "com.ibm.xsp.extlib.UIConnectionsWidget"; // $NON-NLS-1$
-    public static final String COMPONENT_FAMILY = "com.ibm.xsp.extlib.Connections"; //$NON-NLS-1$
+    public static final String COMPONENT_TYPE = "com.ibm.xsp.extlib.SbtWidget"; //$NON-NLS-1$
+    public static final String RENDERER_TYPE = "com.ibm.xsp.extlib.UISbtWidget"; // $NON-NLS-1$
+    public static final String COMPONENT_FAMILY = "com.ibm.xsp.extlib.Sbt"; //$NON-NLS-1$
 
-    public UIConnectionsWidget() {
+    public UISbtWidget() {
         setRendererType(RENDERER_TYPE);
     }
 
@@ -44,7 +44,7 @@ public class UIConnectionsWidget extends UIDojoWidget implements ThemeControl {
 
     @Override
     public String getStyleKitFamily() {
-        return "Connections.Widget"; // $NON-NLS-1$
+        return "Sbt.Widget"; // $NON-NLS-1$
     }
     
 //    @Override

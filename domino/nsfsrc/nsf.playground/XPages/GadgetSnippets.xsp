@@ -3,7 +3,7 @@
 	xmlns:xe="http://www.ibm.com/xsp/coreex">
 	<xp:this.resources>
 		<xp:script
-			src="/.ibmxspres/domino/osplayground/gadgets/js/container:embedded-experiences:open-views:actions.js?c=1&amp;debug=1&amp;container=default"
+			src="/.ibmxspres/domino/osplayground/gadgets/js/container:embedded-experiences:open-views:actions:selection.js?c=1&amp;debug=1&amp;container=default"
 			clientSide="true">
 		</xp:script>
 		<xp:dojoModulePath prefix="explorer"
@@ -15,9 +15,9 @@
 		<xp:dojoModule name="playground.gadgetSnippets"></xp:dojoModule>
 		<xp:dojoModule name="dojo.hash"></xp:dojoModule>
 		<xp:dojoModule name="extlib.codemirror.lib.codemirror"></xp:dojoModule>
-		<xp:styleSheet
-			href="/.ibmxspres/.extlib/codemirror/lib/codemirror.css">
-		</xp:styleSheet>
+		<xp:styleSheet href="/.ibmxspres/.extlib/codemirror/lib/codemirror.css"></xp:styleSheet>
+		<xp:styleSheet href="/.ibmxspres/.sbtsdk/bootstrap/css/bootstrap.min.css"></xp:styleSheet>
+		<xp:styleSheet href="/gadget.css"></xp:styleSheet>
 	</xp:this.resources>
 
 	<xc:ccMainPageResources></xc:ccMainPageResources>

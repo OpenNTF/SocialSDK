@@ -129,3 +129,28 @@ function fireOnClick(target){
 		}
 	}
 }
+
+/**
+ * Attach an event to hode/show a label
+ */
+function attachLabel(editor,label) {
+	require(["dojo/on","dojo/_base/fx"], function(on,fx){
+		on(editor.parentNode,"mouseover", function() {
+			fx.fadeOut({node:label}).play();
+		});
+		on(editor.parentNode,"mouseout", function() {
+			fx.fadeIn({node:label}).play();
+		});
+	});	
+}
+
+/**
+ * Show the documentation panel
+ */
+function _showDocumentation(show) {
+	if(pageGlobal.resultStack) {
+		var sc = dijit.byId(pageGlobal.resultStack);
+		var pn = sc.getChildren()[show ? 1 : 0];
+		sc.selectChild(pn);
+	}
+}

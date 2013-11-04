@@ -7,13 +7,14 @@
 	</xp:inputTextarea>
 	<xp:span id="label" styleClass="framelabel">HTML</xp:span>
 	<xp:scriptBlock>
-		<xp:this.value><![CDATA[pageGlobal.htmlEditor = CodeMirror.fromTextArea(dojo.byId('#{id:htmlEditor}'),
+		<xp:this.value><![CDATA[var editor = dojo.byId('#{id:htmlEditor}');
+pageGlobal.htmlEditor = CodeMirror.fromTextArea(editor,
 {
 	mode:"xml",
 	readOnly: #{javascript:compositeData.readOnly||false},
 	htmlMode: true,
 	lineNumbers: true
 });
-]]></xp:this.value>
+attachLabel(editor,'#{id:label}');]]></xp:this.value>
 	</xp:scriptBlock>
 </xp:view>

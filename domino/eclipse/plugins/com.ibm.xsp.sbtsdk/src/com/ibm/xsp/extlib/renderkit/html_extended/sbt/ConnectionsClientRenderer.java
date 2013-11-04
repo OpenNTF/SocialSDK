@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-package com.ibm.xsp.extlib.renderkit.html_extended.connections;
+package com.ibm.xsp.extlib.renderkit.html_extended.sbt;
 
 import java.io.IOException;
 

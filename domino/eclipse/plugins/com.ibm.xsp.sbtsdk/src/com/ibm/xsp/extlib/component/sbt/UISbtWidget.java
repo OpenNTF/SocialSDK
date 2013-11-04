@@ -44,7 +44,7 @@ public class UISbtWidget extends UIDojoWidget implements ThemeControl {
 
     @Override
     public String getStyleKitFamily() {
-        return "Connections.Widget"; // $NON-NLS-1$
+        return "Sbt.Widget"; // $NON-NLS-1$
     }
     
 //    @Override

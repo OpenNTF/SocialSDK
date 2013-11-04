@@ -32,7 +32,7 @@ import com.ibm.xsp.resource.DojoModuleResource;
  * @author Philippe Riand
  */
 
-public class ConnectionsWidgetRenderer extends DojoWidgetRenderer {
+public class SbtWidgetRenderer extends DojoWidgetRenderer {
 
     @Override
     public void encodeBegin(FacesContext context, UIComponent component) throws IOException {

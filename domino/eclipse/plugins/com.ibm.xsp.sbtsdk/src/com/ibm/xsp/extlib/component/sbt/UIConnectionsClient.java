@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-package com.ibm.xsp.extlib.component.connections;
+package com.ibm.xsp.extlib.component.sbt;
 
 import javax.faces.component.UIComponentBase;
 import javax.faces.context.FacesContext;

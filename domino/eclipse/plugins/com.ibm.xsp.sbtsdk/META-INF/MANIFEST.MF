@@ -39,9 +39,9 @@ Require-Bundle: org.eclipse.core.runtime,
  com.ibm.pvc.servlet.jsp,
  com.ibm.xsp.designer
 Bundle-ActivationPolicy: lazy
-Export-Package: com.ibm.xsp.extlib.component.connections,
- com.ibm.xsp.extlib.component.facebook,
+Export-Package: com.ibm.xsp.extlib.component.facebook,
  com.ibm.xsp.extlib.component.sametime,
+ com.ibm.xsp.extlib.component.sbt,
  com.ibm.xsp.extlib.component.util,
  com.ibm.xsp.extlib.config,
  com.ibm.xsp.extlib.minifier,

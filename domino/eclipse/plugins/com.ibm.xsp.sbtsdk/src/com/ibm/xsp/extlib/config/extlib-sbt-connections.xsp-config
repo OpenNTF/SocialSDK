@@ -27,7 +27,7 @@
         <description>This control loads the desired Connections resources within the page. If the resources are not loaded, then none of the Connections widgets will be rendered.</description>
         <display-name>Connections Client</display-name>
         <component-type>com.ibm.xsp.extlib.connections.ConnectionsClient</component-type>
-        <component-class>com.ibm.xsp.extlib.component.connections.UIConnectionsClient</component-class>
+        <component-class>com.ibm.xsp.extlib.component.sbt.UIConnectionsClient</component-class>
 
         <group-type-ref>com.ibm.xsp.extlib.group.sbt.endpoint</group-type-ref>
         
@@ -104,7 +104,7 @@
         <description>This control instanciates a Dojo dijit in relation ship with the Connections client. It does not render if no Connections client already rendered in the page.</description>
         <display-name>Connections Widget</display-name>
         <component-type>com.ibm.xsp.extlib.ConnectionsWidget</component-type>
-        <component-class>com.ibm.xsp.extlib.component.connections.UIConnectionsWidget</component-class>
+        <component-class>com.ibm.xsp.extlib.component.sbt.UIConnectionsWidget</component-class>
                
         <component-extension>
             <base-component-type>com.ibm.xsp.extlib.dojo.Widget</base-component-type>

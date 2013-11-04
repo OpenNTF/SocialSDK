@@ -23,7 +23,7 @@ import javax.faces.context.FacesContext;
 
 import com.ibm.xsp.component.UIViewRootEx;
 import com.ibm.xsp.dojo.FacesDojoComponent;
-import com.ibm.xsp.extlib.component.connections.UIConnectionsClient;
+import com.ibm.xsp.extlib.component.sbt.UIConnectionsClient;
 import com.ibm.xsp.extlib.renderkit.dojo.DojoWidgetRenderer;
 import com.ibm.xsp.extlib.resources.ExtLibResources;
 import com.ibm.xsp.resource.DojoModuleResource;

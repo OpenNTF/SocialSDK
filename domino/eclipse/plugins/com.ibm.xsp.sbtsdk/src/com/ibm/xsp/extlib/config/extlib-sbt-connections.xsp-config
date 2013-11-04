@@ -26,7 +26,7 @@
     <component>
         <description>This control loads the desired Connections resources within the page. If the resources are not loaded, then none of the Connections widgets will be rendered.</description>
         <display-name>Connections Client</display-name>
-        <component-type>com.ibm.xsp.extlib.connections.ConnectionsClient</component-type>
+        <component-type>com.ibm.xsp.extlib.sbt.SbtClient</component-type>
         <component-class>com.ibm.xsp.extlib.component.sbt.UISbtClient</component-class>
 
         <group-type-ref>com.ibm.xsp.extlib.group.sbt.endpoint</group-type-ref>
@@ -89,9 +89,9 @@
         
         <component-extension>
             <base-component-type>javax.faces.Component</base-component-type>
-            <component-family>com.ibm.xsp.extlib.connections.Connections</component-family>
-            <renderer-type>com.ibm.xsp.extlib.connections.ConnectionsClient</renderer-type>
-            <tag-name>connectionsClient</tag-name>
+            <component-family>com.ibm.xsp.extlib.sbt.Sbt</component-family>
+            <renderer-type>com.ibm.xsp.extlib.sbt.SbtClient</renderer-type>
+            <tag-name>sbtClient</tag-name>
             <designer-extension>
                 <in-palette>true</in-palette>
                 <!-- TODO this category not localized -->
@@ -103,14 +103,14 @@
     <component>
         <description>This control instanciates a Dojo dijit in relation ship with the Connections client. It does not render if no Connections client already rendered in the page.</description>
         <display-name>Connections Widget</display-name>
-        <component-type>com.ibm.xsp.extlib.ConnectionsWidget</component-type>
+        <component-type>com.ibm.xsp.extlib.SbtWidget</component-type>
         <component-class>com.ibm.xsp.extlib.component.sbt.UISbtWidget</component-class>
                
         <component-extension>
             <base-component-type>com.ibm.xsp.extlib.dojo.Widget</base-component-type>
-            <component-family>com.ibm.xsp.extlib.Connections</component-family>
-            <renderer-type>com.ibm.xsp.extlib.UIConnectionsWidget</renderer-type>
-            <tag-name>connectionsWidget</tag-name>
+            <component-family>com.ibm.xsp.extlib.Sbt</component-family>
+            <renderer-type>com.ibm.xsp.extlib.UISbtWidget</renderer-type>
+            <tag-name>sbtWidget</tag-name>
             <designer-extension>
                 <in-palette>true</in-palette>
                 <category>Social Business Toolkit</category>

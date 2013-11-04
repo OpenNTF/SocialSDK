@@ -29,9 +29,9 @@ import com.ibm.xsp.stylekit.ThemeControl;
  */
 public class UISbtWidget extends UIDojoWidget implements ThemeControl {
     
-    public static final String COMPONENT_TYPE = "com.ibm.xsp.extlib.ConnectionsWidget"; //$NON-NLS-1$
-    public static final String RENDERER_TYPE = "com.ibm.xsp.extlib.UIConnectionsWidget"; // $NON-NLS-1$
-    public static final String COMPONENT_FAMILY = "com.ibm.xsp.extlib.Connections"; //$NON-NLS-1$
+    public static final String COMPONENT_TYPE = "com.ibm.xsp.extlib.SbtWidget"; //$NON-NLS-1$
+    public static final String RENDERER_TYPE = "com.ibm.xsp.extlib.UISbtWidget"; // $NON-NLS-1$
+    public static final String COMPONENT_FAMILY = "com.ibm.xsp.extlib.Sbt"; //$NON-NLS-1$
 
     public UISbtWidget() {
         setRendererType(RENDERER_TYPE);

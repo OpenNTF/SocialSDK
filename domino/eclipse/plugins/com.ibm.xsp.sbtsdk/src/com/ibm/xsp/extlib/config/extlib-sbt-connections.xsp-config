@@ -24,8 +24,8 @@
 	</faces-config-extension>
 
     <component>
-        <description>This control loads the desired Connections resources within the page. If the resources are not loaded, then none of the Connections widgets will be rendered.</description>
-        <display-name>Connections Client</display-name>
+        <description>This control loads the desired SBT resources within the page. If the resources are not loaded, then none of the SBT widgets will be rendered.</description>
+        <display-name>SBT Client</display-name>
         <component-type>com.ibm.xsp.extlib.sbt.SbtClient</component-type>
         <component-class>com.ibm.xsp.extlib.component.sbt.UISbtClient</component-class>
 
@@ -101,8 +101,8 @@
     </component>
         
     <component>
-        <description>This control instanciates a Dojo dijit in relation ship with the Connections client. It does not render if no Connections client already rendered in the page.</description>
-        <display-name>Connections Widget</display-name>
+        <description>This control instanciates a Dojo dijit in relation ship with the SBT client. It does not render if no SBT client already rendered in the page.</description>
+        <display-name>SBT Widget</display-name>
         <component-type>com.ibm.xsp.extlib.SbtWidget</component-type>
         <component-class>com.ibm.xsp.extlib.component.sbt.UISbtWidget</component-class>
                

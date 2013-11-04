@@ -75,7 +75,7 @@ public class UISbtClient extends UIComponentBase implements ThemeControl {
     }
 
     public String getStyleKitFamily() {
-        return "Connections.Client"; // $NON-NLS-1$
+        return "Sbt.Client"; // $NON-NLS-1$
     }
     
     public String getEndpoint() {

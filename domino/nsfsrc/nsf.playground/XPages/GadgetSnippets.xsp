@@ -290,7 +290,7 @@ if(doc) {
 					<xp:this.querySaveDocument><![CDATA[#{javascript:return snippetBean.querySave(document1)}]]></xp:this.querySaveDocument>
 				</xp:dominoDocument>
 			</xp:this.data>
-			<xe:formTable id="formTable2" formTitle="Open Social Gadget">
+			<xe:formTable id="formTable2" formTitle="OpenSocial Gadget">
 				<xe:this.formDescription><![CDATA[#{javascript:if(document1.isEditable()) {
 	return "Enter there the data for your gadget";
 }

@@ -35,7 +35,7 @@ import com.ibm.sbt.services.endpoints.EndpointFactory;
 import com.ibm.xsp.FacesExceptionEx;
 import com.ibm.xsp.ajax.AjaxUtil;
 import com.ibm.xsp.component.UIViewRootEx2;
-import com.ibm.xsp.extlib.component.sbt.UIConnectionsClient;
+import com.ibm.xsp.extlib.component.sbt.UISbtClient;
 import com.ibm.xsp.extlib.renderkit.html_extended.FacesRendererEx;
 import com.ibm.xsp.extlib.resources.ExtLibResources;
 import com.ibm.xsp.extlib.sbt.connections.proxy.ConnectionsProxyHandler;
@@ -62,14 +62,14 @@ public class ConnectionsClientRenderer extends FacesRendererEx {
             return;
         }
 	    
-        UIConnectionsClient ctClient = (UIConnectionsClient)component;
+        UISbtClient ctClient = (UISbtClient)component;
 
         // Ensure that the dojo theme is loaded
         UIViewRootEx2 rootEx = (UIViewRootEx2)context.getViewRoot();
         rootEx.setDojoTheme(true);
 
         // Make the client enabled
-        UIConnectionsClient.enableClient(rootEx, true);
+        UISbtClient.enableClient(rootEx, true);
         
         // Find the Connections Endpoint
         String endpointName = ctClient.getEndpoint();
@@ -113,14 +113,14 @@ public class ConnectionsClientRenderer extends FacesRendererEx {
     //
     // Profiles
     //
-    protected void writeProfilesConfig(FacesContext context, UIViewRootEx2 rootEx, UIConnectionsClient ctClient, Endpoint ctServer, String endpointName) throws IOException {
+    protected void writeProfilesConfig(FacesContext context, UIViewRootEx2 rootEx, UISbtClient ctClient, Endpoint ctServer, String endpointName) throws IOException {
     }
     
 
     //
     // Communities
     //
-    protected void writeCommunitiesConfig(FacesContext context, UIViewRootEx2 rootEx, UIConnectionsClient ctClient, Endpoint ctServer, String endpointName) throws IOException {
+    protected void writeCommunitiesConfig(FacesContext context, UIViewRootEx2 rootEx, UISbtClient ctClient, Endpoint ctServer, String endpointName) throws IOException {
         try {
             // Create the configuration object and the corresponding script
             JsonObject semConfig = createCommunitiesSemConfig(context, ctClient, ctServer, endpointName);
@@ -141,7 +141,7 @@ public class ConnectionsClientRenderer extends FacesRendererEx {
             throw new FacesExceptionEx(ex);
         }
     }
-    protected JsonObject createCommunitiesSemConfig(FacesContext context, UIConnectionsClient ctClient, Endpoint ctServer, String endpointName) throws IOException {
+    protected JsonObject createCommunitiesSemConfig(FacesContext context, UISbtClient ctClient, Endpoint ctServer, String endpointName) throws IOException {
         // Get the proxy object in memory
         JsonObject proxyConfig = new JsonJavaObject();
         String baseUrl = PathUtil.concat(ctServer.getUrl(),"communities",'/');
@@ -154,7 +154,7 @@ public class ConnectionsClientRenderer extends FacesRendererEx {
         return proxyConfig;
     }
     
-    protected String getProxyUrl(FacesContext context, UIConnectionsClient ctClient, Endpoint ctServer, String endpointName) {
+    protected String getProxyUrl(FacesContext context, UISbtClient ctClient, Endpoint ctServer, String endpointName) {
     	 Context ctx = Context.getUnchecked();
          return ProxyEndpointService.getProxyUrlForEndpoint(ctx, ConnectionsProxyHandler.URL_PATH,endpointName, null);
     }
@@ -162,7 +162,7 @@ public class ConnectionsClientRenderer extends FacesRendererEx {
     //
     // Semantic tag service
     //
-    protected void addSemanticTagResource(FacesContext context, UIViewRootEx2 rootEx, UIConnectionsClient ctClient, Endpoint ctServer, String endpointName, boolean inclProfiles, boolean inclCommunities) throws IOException {
+    protected void addSemanticTagResource(FacesContext context, UIViewRootEx2 rootEx, UISbtClient ctClient, Endpoint ctServer, String endpointName, boolean inclProfiles, boolean inclCommunities) throws IOException {
         String connSrvUrl = PathUtil.concat(ctServer.getUrl(),PROFILES_SEMANTICTAGSERVLET,'/');
         StringBuilder b = new StringBuilder(128);
         b.append(connSrvUrl);

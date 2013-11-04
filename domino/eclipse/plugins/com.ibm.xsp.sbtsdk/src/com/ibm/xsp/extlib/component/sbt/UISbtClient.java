@@ -46,9 +46,9 @@ public class UISbtClient extends UIComponentBase implements ThemeControl {
         }
     }
     
-    public static final String COMPONENT_TYPE = "com.ibm.xsp.extlib.connections.ConnectionsClient"; //$NON-NLS-1$
-    public static final String RENDERER_TYPE = "com.ibm.xsp.extlib.connections.ConnectionsClient"; // $NON-NLS-1$
-    public static final String COMPONENT_FAMILY = "com.ibm.xsp.extlib.connections.Connections"; //$NON-NLS-1$
+    public static final String COMPONENT_TYPE = "com.ibm.xsp.extlib.sbt.SbtClient"; //$NON-NLS-1$
+    public static final String RENDERER_TYPE = "com.ibm.xsp.extlib.sbt.SbtClient"; // $NON-NLS-1$
+    public static final String COMPONENT_FAMILY = "com.ibm.xsp.extlib.sbt.Sbt"; //$NON-NLS-1$
 
     private String endpoint;
     

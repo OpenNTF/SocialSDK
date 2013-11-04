@@ -19,13 +19,13 @@
 <faces-config>
   <render-kit>
     <renderer>
-      <component-family>com.ibm.xsp.extlib.connections.Connections</component-family>
-      <renderer-type>com.ibm.xsp.extlib.connections.ConnectionsClient</renderer-type>
+      <component-family>com.ibm.xsp.extlib.sbt.Sbt</component-family>
+      <renderer-type>com.ibm.xsp.extlib.sbt.SbtClient</renderer-type>
       <renderer-class>com.ibm.xsp.extlib.renderkit.html_extended.connections.ConnectionsClientRenderer</renderer-class>
     </renderer>
     <renderer>
-      <component-family>com.ibm.xsp.extlib.Connections</component-family>
-      <renderer-type>com.ibm.xsp.extlib.UIConnectionsWidget</renderer-type>
+      <component-family>com.ibm.xsp.extlib.Sbt</component-family>
+      <renderer-type>com.ibm.xsp.extlib.UISbtWidget</renderer-type>
       <renderer-class>com.ibm.xsp.extlib.renderkit.html_extended.connections.ConnectionsWidgetRenderer</renderer-class>
     </renderer>
   </render-kit>

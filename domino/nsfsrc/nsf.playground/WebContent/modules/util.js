@@ -54,14 +54,13 @@ define(['dojo/dom', 'dijit/registry'], function(dom, registry) {
 		updateEditorContent : function(r, id) {
 			pageGlobal.id = id;
 			pageGlobal.unid = r.unid;
-			if(pageGlobal.gadgetEditor) { pageGlobal.gadgetEditor.setValue(r.gadget); this.selectTab(pageGlobal.tabGadget); }
+			if(pageGlobal.gadgetEditor) { pageGlobal.gadgetEditor.setValue(r.gadget); }
 			if(pageGlobal.htmlEditor) pageGlobal.htmlEditor.setValue(r.html);
 			if(pageGlobal.jsEditor) pageGlobal.jsEditor.setValue(r.js);
 			if(pageGlobal.cssEditor) pageGlobal.cssEditor.setValue(r.css);
 			if(pageGlobal.jsonEditor) pageGlobal.jsonEditor.setValue(r.json);
 			if(pageGlobal.propertiesEditor) pageGlobal.propertiesEditor.setValue(r.properties);
 			if(pageGlobal.documentationPanel) pageGlobal.documentationPanel.innerHTML = r.documentation;
-			this.selectTab(pageGlobal.tabGadget);
 			this.updateLabel(r);
 			this.updateNavSelection();
 		},
@@ -76,7 +75,6 @@ define(['dojo/dom', 'dijit/registry'], function(dom, registry) {
 			pageGlobal.unid = "";
 			if(pageGlobal.gadgetEditor) {
 				pageGlobal.gadgetEditor.setValue("");
-				this.selectTab(pageGlobal.tabGadget);
 			}
 			if(pageGlobal.htmlEditor) {
 				pageGlobal.htmlEditor.setValue("");

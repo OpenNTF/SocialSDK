@@ -27,7 +27,7 @@ public class SBTConfig {
 		return concat(files, new String[] {
 				"com/ibm/xsp/extlib/config/extlib-sbt.xsp-config", // $NON-NLS-1$
                 "com/ibm/xsp/extlib/config/extlib-sbt-sametime.xsp-config", // $NON-NLS-1$
-                "com/ibm/xsp/extlib/config/extlib-sbt-connections.xsp-config", // $NON-NLS-1$
+                "com/ibm/xsp/extlib/config/extlib-sbt-sbt.xsp-config", // $NON-NLS-1$
                 "com/ibm/xsp/extlib/config/extlib-sbt-util.xsp-config", // $NON-NLS-1$
 		});
 	}
@@ -36,7 +36,7 @@ public class SBTConfig {
 		return concat(files, new String[] {
 				"com/ibm/xsp/extlib/config/extlib-sbt-faces-config.xml", // $NON-NLS-1$
                 "com/ibm/xsp/extlib/config/extlib-sbt-sametime-faces-config.xml", // $NON-NLS-1$
-                "com/ibm/xsp/extlib/config/extlib-sbt-connections-faces-config.xml", // $NON-NLS-1$
+                "com/ibm/xsp/extlib/config/extlib-sbt-sbt-faces-config.xml", // $NON-NLS-1$
 		});
 	}
 	

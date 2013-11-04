@@ -27,13 +27,13 @@ import com.ibm.xsp.stylekit.ThemeControl;
  * uniquely if the Connections client is enabled.
  * </p>
  */
-public class UIConnectionsWidget extends UIDojoWidget implements ThemeControl {
+public class UISbtWidget extends UIDojoWidget implements ThemeControl {
     
     public static final String COMPONENT_TYPE = "com.ibm.xsp.extlib.ConnectionsWidget"; //$NON-NLS-1$
     public static final String RENDERER_TYPE = "com.ibm.xsp.extlib.UIConnectionsWidget"; // $NON-NLS-1$
     public static final String COMPONENT_FAMILY = "com.ibm.xsp.extlib.Connections"; //$NON-NLS-1$
 
-    public UIConnectionsWidget() {
+    public UISbtWidget() {
         setRendererType(RENDERER_TYPE);
     }
 

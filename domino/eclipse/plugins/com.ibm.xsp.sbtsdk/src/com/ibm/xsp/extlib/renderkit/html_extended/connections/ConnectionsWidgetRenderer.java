@@ -23,7 +23,7 @@ import javax.faces.context.FacesContext;
 
 import com.ibm.xsp.component.UIViewRootEx;
 import com.ibm.xsp.dojo.FacesDojoComponent;
-import com.ibm.xsp.extlib.component.sbt.UIConnectionsClient;
+import com.ibm.xsp.extlib.component.sbt.UISbtClient;
 import com.ibm.xsp.extlib.renderkit.dojo.DojoWidgetRenderer;
 import com.ibm.xsp.extlib.resources.ExtLibResources;
 import com.ibm.xsp.resource.DojoModuleResource;
@@ -36,21 +36,21 @@ public class ConnectionsWidgetRenderer extends DojoWidgetRenderer {
 
     @Override
     public void encodeBegin(FacesContext context, UIComponent component) throws IOException {
-        if(UIConnectionsClient.isClientEnabled((UIViewRootEx)context.getViewRoot())) {
+        if(UISbtClient.isClientEnabled((UIViewRootEx)context.getViewRoot())) {
             super.encodeBegin(context, component);
         }
     }
 
     @Override
     public void encodeEnd(FacesContext context, UIComponent component) throws IOException {
-        if(UIConnectionsClient.isClientEnabled((UIViewRootEx)context.getViewRoot())) {
+        if(UISbtClient.isClientEnabled((UIViewRootEx)context.getViewRoot())) {
             super.encodeEnd(context, component);
         }
     }
 
     @Override
     public boolean getRendersChildren() {
-        if(UIConnectionsClient.isClientEnabled((UIViewRootEx)FacesContext.getCurrentInstance().getViewRoot())) {
+        if(UISbtClient.isClientEnabled((UIViewRootEx)FacesContext.getCurrentInstance().getViewRoot())) {
             return super.getRendersChildren();
         }
         return true;
@@ -58,7 +58,7 @@ public class ConnectionsWidgetRenderer extends DojoWidgetRenderer {
     
     @Override
     public void encodeChildren(FacesContext context, UIComponent component) throws IOException {
-        if(UIConnectionsClient.isClientEnabled((UIViewRootEx)context.getViewRoot())) {
+        if(UISbtClient.isClientEnabled((UIViewRootEx)context.getViewRoot())) {
             super.encodeChildren(context, component);
         }
     }

@@ -30,7 +30,7 @@ import com.ibm.xsp.stylekit.ThemeControl;
  * This component generates what is needed to access the Connections services.
  * </p>
  */
-public class UIConnectionsClient extends UIComponentBase implements ThemeControl {
+public class UISbtClient extends UIComponentBase implements ThemeControl {
 
     // Test if the client is enabled
     private static final String ATTR_CONNECTIONS_ENABLED       = "extlib.connections.enabled"; 
@@ -65,7 +65,7 @@ public class UIConnectionsClient extends UIComponentBase implements ThemeControl
     // !Not published is xsp-config on purpose!
     private Boolean debug;
         
-    public UIConnectionsClient() {
+    public UISbtClient() {
         setRendererType(RENDERER_TYPE);
     }
 

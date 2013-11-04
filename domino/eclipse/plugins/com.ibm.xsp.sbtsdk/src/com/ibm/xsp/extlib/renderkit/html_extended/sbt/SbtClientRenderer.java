@@ -48,7 +48,7 @@ import com.ibm.xsp.resource.StyleSheetResource;
  * @author Philippe Riand
  */
 
-public class ConnectionsClientRenderer extends FacesRendererEx {
+public class SbtClientRenderer extends FacesRendererEx {
 
     public static final String PROFILES_SEMANTICTAGSERVLET      = "/profiles/ibm_semanticTagServlet/javascript/semanticTagService.js"; // $NON-NLS-1$
     public static final String COMMUNITIES_DOJO                 = "/communities/javascript/build/dojo/dojo.js"; // $NON-NLS-1$

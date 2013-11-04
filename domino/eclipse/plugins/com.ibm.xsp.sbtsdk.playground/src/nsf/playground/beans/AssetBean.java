@@ -206,11 +206,11 @@ public abstract class AssetBean {
 		View v = db.getView("AllSnippets");
 		ViewNavigator nav = v.createViewNavFromCategory(getAssetForm());
 		try {
-			nav.setMaxLevel(0);
+			nav.setMaxLevel(1);
 			//nav.setCacheSize(128);
 			List<String> categories = new ArrayList<String>();
 			for(ViewEntry ve=nav.getFirst(); ve!=null; ve=nav.getNext(ve)) {
-				categories.add((String)ve.getColumnValues().get(0));
+				categories.add((String)ve.getColumnValues().get(1));
 			}
 			return categories.toArray(new String[categories.size()]);
 		} finally {

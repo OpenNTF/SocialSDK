@@ -29,6 +29,7 @@ Require-Bundle: org.eclipse.core.runtime,
  com.ibm.designer.runtime,
  com.ibm.xsp.core,
  com.ibm.xsp.extsn,
+ com.ibm.xsp.designer,
  com.ibm.xsp.domino,
  com.ibm.commons.runtime;visibility:=reexport,
  com.ibm.sbt.libs;visibility:=reexport,
@@ -36,8 +37,7 @@ Require-Bundle: org.eclipse.core.runtime,
  com.ibm.sbt.playground;visibility:=reexport,
  com.ibm.xsp.extlib,
  com.ibm.sbt.web,
- com.ibm.pvc.servlet.jsp,
- com.ibm.xsp.designer
+ com.ibm.pvc.servlet.jsp
 Bundle-ActivationPolicy: lazy
 Export-Package: com.ibm.xsp.extlib.component.facebook,
  com.ibm.xsp.extlib.component.sametime,

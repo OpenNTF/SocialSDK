@@ -21,12 +21,12 @@
     <renderer>
       <component-family>com.ibm.xsp.extlib.sbt.Sbt</component-family>
       <renderer-type>com.ibm.xsp.extlib.sbt.SbtClient</renderer-type>
-      <renderer-class>com.ibm.xsp.extlib.renderkit.html_extended.sbt.ConnectionsClientRenderer</renderer-class>
+      <renderer-class>com.ibm.xsp.extlib.renderkit.html_extended.sbt.SbtClientRenderer</renderer-class>
     </renderer>
     <renderer>
       <component-family>com.ibm.xsp.extlib.Sbt</component-family>
       <renderer-type>com.ibm.xsp.extlib.UISbtWidget</renderer-type>
-      <renderer-class>com.ibm.xsp.extlib.renderkit.html_extended.sbt.ConnectionsWidgetRenderer</renderer-class>
+      <renderer-class>com.ibm.xsp.extlib.renderkit.html_extended.sbt.SbtWidgetRenderer</renderer-class>
     </renderer>
   </render-kit>
 </faces-config>

@@ -35,7 +35,7 @@ import com.ibm.sbt.services.endpoints.EndpointFactory;
 import com.ibm.xsp.FacesExceptionEx;
 import com.ibm.xsp.ajax.AjaxUtil;
 import com.ibm.xsp.component.UIViewRootEx2;
-import com.ibm.xsp.extlib.component.connections.UIConnectionsClient;
+import com.ibm.xsp.extlib.component.sbt.UIConnectionsClient;
 import com.ibm.xsp.extlib.renderkit.html_extended.FacesRendererEx;
 import com.ibm.xsp.extlib.resources.ExtLibResources;
 import com.ibm.xsp.extlib.sbt.connections.proxy.ConnectionsProxyHandler;

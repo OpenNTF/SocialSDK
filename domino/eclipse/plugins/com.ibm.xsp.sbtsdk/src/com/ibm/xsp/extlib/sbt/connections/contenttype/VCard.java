@@ -26,7 +26,7 @@ import javax.faces.context.ResponseWriter;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.xsp.application.ViewHandlerEx;
 import com.ibm.xsp.component.UIViewRootEx;
-import com.ibm.xsp.extlib.component.connections.UIConnectionsClient;
+import com.ibm.xsp.extlib.component.sbt.UIConnectionsClient;
 import com.ibm.xsp.extlib.resources.ExtLibResources;
 import com.ibm.xsp.extlib.sbt.resources.SBTResources;
 import com.ibm.xsp.renderkit.ContentTypeRenderer;

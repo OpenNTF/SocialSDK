@@ -80,7 +80,7 @@ public class Member extends BaseEntity {
 	 * @return id
 	 */
 	public String getUserid() {
-		return getAsString(CommunityXPath.contributorUid);
+		return getAsString(CommunityXPath.contributorUserid);
 	}
 
 	/**
@@ -111,7 +111,7 @@ public class Member extends BaseEntity {
 	 * @set id
 	 */
 	public void setUserid(String id) {
-		setAsString(CommunityXPath.contributorUid, id);
+		setAsString(CommunityXPath.contributorUserid, id);
 	}
 	
 	/**

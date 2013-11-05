@@ -96,6 +96,15 @@ public class JspCompiler {
 		return javaSource.toString();
 	}
 
+	public static String cleanCode(String source) throws FacesException {
+		// remove the initial copyright comment
+		int start = StringUtil.indexOfIgnoreCase(source, "<!DOCTYPE");
+		if(start>=0) {
+			return source.substring(start).trim();
+		}
+		return source;
+	}
+	
 	public static String extractBody(String source) throws FacesException {
 		int start = StringUtil.indexOfIgnoreCase(source, "<body>");
 		int end = StringUtil.indexOfIgnoreCase(source, "</body>");

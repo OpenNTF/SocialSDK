@@ -10,35 +10,6 @@ function updateLabel(r) {
 	}
 }
 
-/**
- * Create a new snippet 
- */
-function createSnippet() {
-	pageGlobal.id = "";
-	pageGlobal.unid = "";
-	if(pageGlobal.htmlEditor) {
-		pageGlobal.htmlEditor.setValue("");
-		selectTab(pageGlobal.tabHtml);
-	}
-	if(pageGlobal.jsEditor) {
-		pageGlobal.jsEditor.setValue("");
-	}
-	if(pageGlobal.cssEditor) {
-		pageGlobal.cssEditor.setValue("");
-	}
-	if(pageGlobal.propertiesEditor) {
-		pageGlobal.propertiesEditor.setValue("");
-	}
-	if(pageGlobal.documentationPanel) {
-		pageGlobal.documentationPanel.innerHTML = "";
-	}
-	
-	createPropertyPanel(null);
-	selectStack(pageGlobal.previewParams);
-	updateLabel(null);
-	updateNavSelection();
-}
-
 
 /**
  * Extract the AMD module from the JS code
@@ -73,8 +44,10 @@ function showDocumentation(show) {
 			dojo.empty("jsdoclist");
 			for(var i=0; i<a.length; i++) {
 				var url = docUrl(a[i])
-				var li = dojo.create("li", {} , "jsdoclist");
-				var lk = dojo.create("a", {href: url, target: 'blank', innerHTML: a[i]} , li);
+				if(url) {
+					var li = dojo.create("li", {} , "jsdoclist");
+					var lk = dojo.create("a", {href: url, target: 'blank', innerHTML: a[i]} , li);
+				}
 			}
 			dojo.style("jsdoc","display","block");
 		} else {
@@ -82,6 +55,37 @@ function showDocumentation(show) {
 		}
 	}
 	_showDocumentation(show);
+}
+
+
+/**
+ * Create a new snippet 
+ */
+function createSnippet() {
+	showDocumentation(false);
+	pageGlobal.id = "";
+	pageGlobal.unid = "";
+	if(pageGlobal.htmlEditor) {
+		pageGlobal.htmlEditor.setValue("");
+		selectTab(pageGlobal.tabHtml);
+	}
+	if(pageGlobal.jsEditor) {
+		pageGlobal.jsEditor.setValue("");
+	}
+	if(pageGlobal.cssEditor) {
+		pageGlobal.cssEditor.setValue("");
+	}
+	if(pageGlobal.propertiesEditor) {
+		pageGlobal.propertiesEditor.setValue("");
+	}
+	if(pageGlobal.documentationPanel) {
+		pageGlobal.documentationPanel.innerHTML = "";
+	}
+	
+	createPropertyPanel(null);
+	selectStack(pageGlobal.previewParams);
+	updateLabel(null);
+	updateNavSelection();
 }
 
 /**

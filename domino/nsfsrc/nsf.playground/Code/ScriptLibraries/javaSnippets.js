@@ -9,10 +9,68 @@ function updateLabel(r) {
 	}
 }
 
+
+/**
+ * Extract the java imports from the Java code
+ */
+function extractJavaImports(js) {
+	var a = [];
+	if(js) {
+		var rx = /<%@\s*page\s+import\s*=\s*['"]([^'"]*)['"]/g;
+		for(var m=rx.exec(js); m; m=rx.exec(js)) {
+			var dep = m[1].split(',');
+			for(var i=0; i<dep.length; i++) {
+				a.push(XSP.trim(dep[i]));
+			}
+		}
+	}
+	return a;
+}
+
+function docUrl(s) {
+	if(XSP.startsWith(s,"com.ibm.commons") || XSP.startsWith(s,"com.ibm.sbt")) {
+		var urlRoot = "http://infolib.lotus.com/resources/social_business_toolkit/javadoc/index.html?";
+		if(XSP.endsWith(s,".*")) {
+			s = s.substring(0,s.length-2)+"/package-summary";
+		}
+		return urlRoot+s.replace(/\./g,"/")+".html";
+	}
+	if(XSP.startsWith(s,"java.")) {
+		var urlRoot = "http://docs.oracle.com/javase/6/docs/api/index.html?";
+		if(XSP.endsWith(s,".*")) {
+			s = s.substring(0,s.length-2)+"/package-summary";
+		}
+		return urlRoot+s.replace(/\./g,"/")+".html";
+	}
+	
+	return null;
+}
+
+function showDocumentation(show) {
+	if(show) {
+		var a = extractJavaImports(pageGlobal.jspEditor.getValue());
+		if(a.length) {
+			dojo.empty("javadoclist");
+			for(var i=0; i<a.length; i++) {
+				var url = docUrl(a[i]);
+				if(url) {
+					var li = dojo.create("li", {} , "javadoclist");
+					var lk = dojo.create("a", {href: url, target: 'blank', innerHTML: a[i]} , li);
+				}
+			}
+			dojo.style("javadoc","display","block");
+		} else {
+			dojo.style("javadoc","display","none");
+		}
+	}
+	_showDocumentation(show);
+}
+
 /**
  * Create a new snippet 
  */
 function createSnippet() {
+	showDocumentation(false);
 	pageGlobal.id = "";
 	pageGlobal.unid = "";
 	if(pageGlobal.jspEditor) {
@@ -35,13 +93,14 @@ function createSnippet() {
  * Load a snippet from the server using a JSON RPC call. 
  */
 function loadSnippet(id) {
+	showDocumentation(false);
 	var deferred = server.loadSnippet(id)
 	deferred.addCallback(function(r) {
 		if(r.status=="ok") {
 			pageGlobal.id = id;
 			pageGlobal.unid = r.unid;
 			pageGlobal.params = r.params;
-			if(pageGlobal.jspEditor) pageGlobal.jspEditor.setValue(r.jsp);
+			if(pageGlobal.jspEditor) pageGlobal.jspEditor.setValue(cleanSnippet(r.jsp));
 			if(pageGlobal.propertiesEditor) pageGlobal.propertiesEditor.setValue(r.properties);
 			if(pageGlobal.documentationPanel) pageGlobal.documentationPanel.innerHTML = r.documentation;
 			createPropertyPanel(pageGlobal.params);
@@ -57,6 +116,16 @@ function loadSnippet(id) {
 			alert("Error:\n"+r.msg);
 		}
 	});	
+}
+function cleanSnippet(source) {
+	if(false) { // How to parse the doc with this?
+		var s = source.search(/<body>/i);
+		var e = source.search(/<\/body>/i);
+		if(s>=0 && e>=s+6) {
+			return XSP.trim(source.substring(s+6,e));
+		}
+	}
+	return source;
 }
 function selectTab(tab) {
 	var tc = dijit.byId(pageGlobal.tabContainer);

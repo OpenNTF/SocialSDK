@@ -3,10 +3,6 @@
 	xmlns:xe="http://www.ibm.com/xsp/coreex">
 	<xe:djStackContainer id="previewStack"
 		style="width:99%; height:99%; border: 1px solid #AAAAAA; overflow: hidden;">
-		<xe:this.onMouseEnter><![CDATA[require(["dojo/_base/fx"], function(fx){dojo.fadeOut({node:'#{id:label}'}).play();});
-]]></xe:this.onMouseEnter>
-		<xe:this.onMouseLeave><![CDATA[require(["dojo/_base/fx"], function(fx){dojo.fadeIn({node:'#{id:label}'}).play();});
-]]></xe:this.onMouseLeave>
 		<xe:djStackPane id="previewParams" style="padding:12px;">
 			<div id="previewEmpty">
 				<p style="font-style:italic;color:rgb(192,192,192)">
@@ -23,7 +19,6 @@
 			</iframe>
 		</xe:djStackPane>
 	</xe:djStackContainer>
-	<xp:span id="label" styleClass="framelabel">Result</xp:span>
 	<xp:scriptBlock id="scriptBlock1">
 		<xp:this.value><![CDATA[pageGlobal.previewStack = '#{id:previewStack}';
 pageGlobal.previewPreview = '#{id:previewPreview}';

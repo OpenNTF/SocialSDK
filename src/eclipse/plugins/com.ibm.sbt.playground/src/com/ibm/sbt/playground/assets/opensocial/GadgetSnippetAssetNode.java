@@ -16,7 +16,13 @@
 package com.ibm.sbt.playground.assets.opensocial;
 
 import java.io.IOException;
+import java.util.List;
 
+import com.ibm.commons.util.StringUtil;
+import com.ibm.commons.util.io.json.JsonException;
+import com.ibm.commons.util.io.json.JsonJavaFactory;
+import com.ibm.commons.util.io.json.JsonJavaObject;
+import com.ibm.commons.util.io.json.JsonParser;
 import com.ibm.sbt.playground.assets.Asset;
 import com.ibm.sbt.playground.assets.AssetNode;
 import com.ibm.sbt.playground.assets.CategoryNode;
@@ -44,11 +50,65 @@ public class GadgetSnippetAssetNode extends AssetNode {
 	@Override
 	public Asset createAsset(VFSFile root) throws IOException {
 		VFSFile parent = getParentFile(root);
-		String xml = loadResource(parent,"xml");
-		String docHtml = loadResource(parent,"doc.html");
-		GadgetSnippet s = (GadgetSnippet)new GadgetSnippet();
-		s.setXml(xml);
-		s.setDocHtml(docHtml);
-		return s;
+
+		// Look for a spec.json
+		String spec = loadFile(parent,"spec.json");
+		if(StringUtil.isNotEmpty(spec)) {
+			GadgetSnippet s = (GadgetSnippet)new GadgetSnippet();
+			try {
+				JsonJavaObject o=(JsonJavaObject)JsonParser.fromJson(JsonJavaFactory.instanceEx2, spec);
+				String t = o.getAsString("title");
+				s.setTitle(t);
+				//boolean isDefault = o.getBoolean("isDefault");
+				String ag = getFirstString(o,"gadget");
+				if(ag!=null) {
+					s.setGadgetXml(loadFile(parent, ag));
+				}
+				String ah = getFirstString(o,"htmlFiles");
+				if(ah!=null) {
+					s.setHtml(loadFile(parent, ah));
+				}
+				String ac = getFirstString(o,"cssFiles");
+				if(ac!=null) {
+					s.setCss(loadFile(parent, ac));
+				}
+				String aj = getFirstString(o,"jsFiles");
+				if(aj!=null) {
+					s.setJs(loadFile(parent,aj));
+				}
+				String ap = getFirstString(o,"eeDataModel");
+				if(ap!=null) {
+					s.setJson(loadFile(parent,ap));
+				}
+				return s;
+			} catch (JsonException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return null;
 	}
+	private String getFirstString(JsonJavaObject o, String prop) {
+		Object p = o.get(prop);
+		if(p instanceof List<?>) {
+			List<?> l = (List<?>)p;
+			if(l.size()>0) {
+				return (String)l.get(0);
+			}
+		}
+		if(p instanceof String) {
+			return (String)p;
+		}
+		return null;
+	}
+	
+//	public Asset createAsset(VFSFile root) throws IOException {
+//		VFSFile parent = getParentFile(root);
+//		String xml = loadResource(parent,"xml");
+//		String docHtml = loadResource(parent,"doc.html");
+//		GadgetSnippet s = (GadgetSnippet)new GadgetSnippet();
+//		s.setXml(xml);
+//		s.setDocHtml(docHtml);
+//		return s;
+//	}
 }

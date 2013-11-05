@@ -35,20 +35,17 @@ public class AssetBrowser {
 
 	private VFSFile rootDirectory;
 	private NodeFactory factory;
-	private String[] extensions;
 	private String[] runtimes;
 	private String jsLibId;
 	
 	public AssetBrowser(VFSFile rootDirectory, NodeFactory factory) {
 		this.rootDirectory = rootDirectory;
 		this.factory = factory;
-		this.extensions = factory.getAssetExtensions();
 	}
 	
 	public AssetBrowser(VFSFile rootDirectory, NodeFactory factory, String[] runtimes, String jsLibId) {
         this.rootDirectory = rootDirectory;
         this.factory = factory;
-        this.extensions = factory.getAssetExtensions();
         this.runtimes = runtimes;
         this.jsLibId = jsLibId;
     }
@@ -78,23 +75,23 @@ public class AssetBrowser {
 		for(VFSFile s: children) {
 			if(s.isFolder()) {
 				CategoryNode cn = factory.createCategoryNode(node, s.getName());
-				if(includeNode(cn.readGlobalProperties(s.getVFS()))){
-				    node.getChildren().add(cn);
-				    browseDirectory(s,cn,cb);
+				if(cn!=null) {
+					if(includeNode(cn.readGlobalProperties(s.getVFS()))){
+					    node.getChildren().add(cn);
+					    browseDirectory(s,cn,cb);
+					}
 				}
 			} else if(s.isFile()) {
-				String ext = getExtension(s.getName(), extensions);
-				if(ext!=null) {
-					String fileName = getNameWithoutExtension(s.getName(), ext);
-					if(!snippets.contains(fileName)) {
-						AssetNode sn = factory.createAssetNode(node,fileName);
+				String snippetName = factory.getSnippetName(s);
+				if(StringUtil.isNotEmpty(snippetName) && !snippets.contains(snippetName)) {
+					AssetNode sn = factory.createAssetNode(node,snippetName);
+					if(sn!=null) {
 						Properties p = new Properties();
 						sn.readProperties(s.getVFS(), sn, p);
 						if(includeNode(p)){
 						    node.getChildren().add(sn);
-						    snippets.add(fileName);
+						    snippets.add(snippetName);
 						}
-                        
 					}
 				}
 			}
@@ -186,34 +183,5 @@ public class AssetBrowser {
                 return true;
         }
         return false;
-    }
-    
-    protected boolean isExtension(String ext) {
-		if(extensions!=null) {
-			for(int i=0; i<extensions.length; i++) {
-				if(extensions[i].equals(ext)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}	
-    protected String getExtension(String name, String[] exts) {
-        if (exts != null) {
-            for (int i=0; i<exts.length; i++) {
-                if (name.endsWith(exts[i])) {
-                    return exts[i];
-                }
-            }
-        } else {
-            int pos = name.lastIndexOf('.');
-            if(pos>=0) {
-                return name.substring(pos+1);
-            }
-        }
-        return null;
-    }
-    protected String getNameWithoutExtension(String name, String ext) {
-        return name.substring(0, name.length() - (ext.length() + 1));
     }
 }

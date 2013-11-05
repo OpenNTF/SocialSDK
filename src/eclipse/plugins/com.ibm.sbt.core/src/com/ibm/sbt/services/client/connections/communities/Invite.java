@@ -12,9 +12,18 @@ import com.ibm.sbt.services.client.connections.communities.model.CommunityXPath;
  */
 
 public class Invite extends BaseEntity{
-
+	 /**
+     * The UUID of the community associated with this Invite
+     */
 	private String communityUuid;
+	/**
+     * The UUID if the invitee associated with this Invite
+     */
 	private String inviteeUuid;
+	
+	public Invite(CommunityService communityService) {
+		setService(communityService);
+	}
 
 	public Invite(CommunityService communityService, String id) {
 		setService(communityService);
@@ -25,7 +34,35 @@ public class Invite extends BaseEntity{
 	{
 		super(svc,handler);
 	}
-	
+	/**
+     * Return the value of IBM Connections invite ID from invite ATOM
+     * entry document.
+     * 
+     * @method getInviteUuid
+     * @return {String} Invite ID of the invite
+     */
+    public String getInviteUuid() {
+        String id = getAsString(CommunityXPath.id);
+        if(StringUtil.isNotEmpty(id)){
+        	return extractInviteUuid(id);
+        }
+        return id;
+    }
+    /**
+     * Sets id of IBM Connections invite.
+     * 
+     * @method setInviteUuid
+     * @param {String} inviteUuid Id of the invite
+     */
+    public void setInviteUuid(String inviteUuid) {
+        setAsString(CommunityXPath.id, inviteUuid);
+    }
+	/**
+     * Return the community UUID.
+     * 
+     * @method getCommunityUuid
+     * @return {String} communityUuid
+     */
 	public String getCommunityUuid(){
     	String communityId = "";
     	try {
@@ -39,30 +76,70 @@ public class Invite extends BaseEntity{
     	communityId = communityId.substring(communityId.indexOf("=")+1,communityId.length());
     	return communityId;
 	}
-	
+	/**
+     * Set the community UUID.
+     * 
+     * @method setCommunityUuid
+     */
+    public void setCommunityUuid(String communityUuid) {
+		this.communityUuid = communityUuid;
+    }
 	/**
 	 * @return the inviteeUuid
 	 */
 	public String getInviteeUuid() {
-		if (this.inviteeUuid == null) {
-			String id = getAsString(CommunityXPath.id);
-			String communityId = getCommunityUuid();
-			if (id != null && communityId != null) {
-				int index = id.indexOf(communityId);
-				inviteeUuid = id.substring(index + communityId.length() + 1);
-			}
-		}
-		return inviteeUuid;
+        	String inviteUuid = this.getInviteUuid();
+        	this.inviteeUuid = extractInviteeUuid(inviteUuid, this.getCommunityUuid());
+        	return this.inviteeUuid;
+	
 	}
 
 	/**
 	 * @param inviteeUuid the inviteeUuid to set
 	 */
-	public Invite setInviteeUuid(String inviteeUuid) {
+	public void setInviteeUuid(String inviteeUuid) {
 		this.inviteeUuid = inviteeUuid;
-		return this;
 	}
-
+	 /**
+     * Set the user id of the invitee.
+     * 
+     * @method setUserid
+     * @return {String} userid
+     */
+    public void setUserid(String userid) {
+        setAsString(CommunityXPath.contributorUserid, userid);
+    }
+    
+    /**
+     * Return the user id of the invitee.
+     * 
+     * @method getUserid
+     * @return {String} userid
+     */
+    public String getUserid () {
+    	return getAsString(CommunityXPath.contributorUserid);
+    
+    }
+    
+    /**
+     * Set the email of the invitee.
+     * 
+     * @method setEmail
+     * @return {String} email
+     */
+    public void setEmail(String email) {
+    	setAsString(CommunityXPath.contributorEmail, email);
+    }
+    
+    /**
+     * Return the email of the invitee.
+     * 
+     * @method getEmail
+     * @return {String} email
+     */
+    public String getEmail() {
+		return getAsString(CommunityXPath.contributorEmail);
+    }
 	/**
 	 * getId
 	 * 
@@ -71,7 +148,6 @@ public class Invite extends BaseEntity{
 	public String getId() {
 		return getAsString(CommunityXPath.id);
 	}
-	
 	/**
 	 * getTitle
 	 * 
@@ -82,6 +158,12 @@ public class Invite extends BaseEntity{
 	}
 
 	/**
+	 * Method sets the Invite title
+	 */	
+	public void setTitle(String title) {
+		setAsString(CommunityXPath.title, title);
+	}
+	/**
 	 * Returns the content
 	 * 
 	 * @return content
@@ -89,7 +171,6 @@ public class Invite extends BaseEntity{
 	public String getContent() {
 		return getAsString(CommunityXPath.content);
 	}
-
 	/**
 	 * @sets the content
 	 * 
@@ -98,23 +179,48 @@ public class Invite extends BaseEntity{
 	public void setContent(String content) {
 		setAsString(CommunityXPath.content, content);
 	}
-	
-	/**
-	 * Method sets the Invite title
-	 */	
-	public void setTitle(String title) {
-		setAsString(CommunityXPath.title, title);
-	}
-	
+	 /**
+     * Returns the invite Url.
+     * 
+     * @method getInviteUrl
+     * @return {String} inviteUrl
+     */
 	public String getInviteUrl(){
 		return getAsString(CommunityXPath.inviteUrl);
 	}
-	
+	 /**
+     * Returns the community Url.
+     * 
+     * @method getCommunityUrl
+     * @return {String} communityUrl
+     */
+	public String getCommunityUrl(){
+		return getAsString(CommunityXPath.inviteCommunityUrl);
+	}
+    /**
+     * Save this invite
+     * 
+     * @method remove
+     * @param {Object} [args] Argument object
+     */
+    public Invite save() throws CommunityServiceException{
+		return getService().createInvite(this);
+    }        
+	/**
+	 * This method deletes the community on the server
+	 * 
+	 * @return
+	 * @throws CommunityServiceException
+	 */
+
+	public void remove() throws CommunityServiceException {
+	   	getService().declineInvite(communityUuid, inviteeUuid);
+	}
 	/**
 	 * @return the authorUid
 	 */
 	public Member getAuthor(){
-		Member author = new Member(getService(), getAsString(CommunityXPath.authorUid));
+		Member author = new Member(getService(), getAsString(CommunityXPath.authorUserid));
 		author.setName(getAsString(CommunityXPath.authorName));
 		author.setEmail(getAsString(CommunityXPath.authorEmail));
 		return author;
@@ -124,7 +230,7 @@ public class Invite extends BaseEntity{
 	 * @return the ContributorId
 	 */
 	public Member getContributor(){
-		Member contributor = new Member(getService(), getAsString(CommunityXPath.contributorUid));
+		Member contributor = new Member(getService(), getAsString(CommunityXPath.contributorUserid));
 		contributor.setName(getAsString(CommunityXPath.contributorName));
 		contributor.setEmail(getAsString(CommunityXPath.contributorEmail));
 		return contributor;
@@ -135,4 +241,34 @@ public class Invite extends BaseEntity{
 	public CommunityService getService(){
 		return (CommunityService)super.getService();
 	}
+	
+	 /*
+     * Method used to extract the invite uuid for an id url.
+     */
+	private String extractInviteUuid(String uid) {
+		if (StringUtil.isNotEmpty(uid) && StringUtil.startsWithIgnoreCase(uid, "urn:lsid:ibm.com:communities:invite-")) {
+			return uid.substring("urn:lsid:ibm.com:communities:invite-".length());
+		} else {
+			return uid;
+		}
+	}
+	
+	 /*
+     * Method used to extract the invitee uuid for an id url.
+     */
+    private String extractInviteeUuid(String uid, String communityUuid) {
+    	if (StringUtil.isNotEmpty(uid) && uid.indexOf(communityUuid) == 0) {
+    		
+    	return uid.substring(communityUuid.length()+1);
+    	}
+    	else{
+    		return uid;
+    	}
+//          
+//    	if (uid!=null && uid.indexOf(communityUuid) == 0) {
+//            return uid.substring(communityUuid.length() + 1);
+//        } else {
+//            return uid;
+//        }
+    }
 }

@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
-	<xp:div id="previewStack"
-		style="width:99%; height:99%; margin-top: 5px; border: 1px solid #AAAAAA; overflow: hidden;">
-		<xp:div id="previewPreview" style="padding:4px;">
+	<xe:djStackContainer id="previewStack"
+		style="width:99%; height:99%; border: 1px solid #AAAAAA; overflow: hidden;">
+		<xe:djStackPane id="djStackPane1" style="padding:12px;">
+			<div id="previewEmpty">
+				<p style="font-style:italic;color:rgb(192,192,192)">
+					Click the Run button above to execute the gadget.
+				</p>
+			</div>
+			<div id="previewParams"></div>
+		</xe:djStackPane>
+		<xe:djStackPane id="previewPreview" style="padding:4px;" styleClass="bootstrap-scoped">
 			<div id="osgadget">
 			</div>
-		</xp:div>
-	</xp:div>
+		</xe:djStackPane>
+	</xe:djStackContainer>
+	<xp:scriptBlock id="scriptBlock1">
+		<xp:this.value><![CDATA[pageGlobal.previewStack = '#{id:previewStack}';
+pageGlobal.previewPreview = '#{id:previewPreview}';
+]]></xp:this.value>
+	</xp:scriptBlock>
 </xp:view>

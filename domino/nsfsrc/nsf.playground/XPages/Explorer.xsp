@@ -71,6 +71,7 @@ function prepend(h,f) {
 				<xe:djBorderContainer id="djBorderContainer1"
 					style="width: 100%">
 					<xe:djBorderPane id="djBorderPane1" region="top">
+						Environments:<br />
 						<xc:ccEnvironmentComboBox></xc:ccEnvironmentComboBox>
 					</xe:djBorderPane>
 					<xe:djBorderPane id="djBorderPane5" region="center">
@@ -103,8 +104,10 @@ return apiBean.loadAPI(e);
 												</xc:ccExplorerAPIEntry>
 											</xp:repeat>
 										</xp:panel>
-										<xp:panel xp:key="empty" style="font-style:italic;color:rgb(192,192,192); padding: 10px;">
-											Please, select an API in the navigator to see its content and
+										<xp:panel xp:key="empty"
+											style="font-style:italic;color:rgb(192,192,192); padding: 10px;">
+											Please, select an API in the navigator to see its
+											content and
 											experiment it.
 										</xp:panel>
 									</xp:this.facets>

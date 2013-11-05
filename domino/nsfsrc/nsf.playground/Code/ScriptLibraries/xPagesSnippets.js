@@ -9,6 +9,10 @@ function updateLabel(r) {
 	}
 }
 
+function showDocumentation(show) {
+	_showDocumentation(show);
+}
+
 /**
  * Create a new snippet 
  */

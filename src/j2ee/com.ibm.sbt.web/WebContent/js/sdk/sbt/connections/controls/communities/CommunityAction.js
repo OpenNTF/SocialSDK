@@ -28,7 +28,7 @@ define([ "../../../declare", "../../../controls/grid/GridAction", "../../../stri
     var CommunityAction = declare(GridAction, {
         
         nls: {
-            tooltip: "Go to {title}"
+            tooltip: "{title}"
         },
        
         /**

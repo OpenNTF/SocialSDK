@@ -77,11 +77,17 @@ public abstract class AssetBean {
 				String apisSearch = (String)ExtLibUtil.getViewScope().get("assetSearch");
 				if(StringUtil.isNotEmpty(apisSearch)) {
 					v.FTSearch(apisSearch);
-					ViewEntryCollection col = v.getAllEntriesByKey(getAssetForm());
+					//ViewEntryCollection col = v.getAllEntriesByKey(getAssetForm());
+					ViewEntryCollection col = v.getAllEntries();
 					for(ViewEntry e=col.getFirstEntry(); e!=null; e=col.getNextEntry()) {
 						Vector<?> values = e.getColumnValues();
 						String notesUnid = e.getUniversalID();
 						// 2 type
+						String type = (String)values.get(0);
+						if(!StringUtil.equals(type, getAssetForm())) {
+							// Ignore if it is not of the right type
+							continue;
+						}
 						String cat = (String)values.get(1);
 						String name = (String)values.get(2);
 						String jspUrl = (String)values.get(3);

@@ -30,6 +30,7 @@ if(p) {
 		var pageName = "playground/"+id+"_"+doc.getLastModified().toJavaDate().getTime();
 		try {
 			dynamicXPagesBean.compile(pageName,xpages);
+			facesContext.getRequestParameters().setProperty('xsp.error.page.default','true');
 			context.redirectToPage(pageName,false);
 		} catch(e) {
 			exception = e;

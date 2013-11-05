@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xp:div
+		style="width:99%; height:99%; margin-top: 5px; padding-left: 5px; border: 1px solid #AAAAAA; overflow: hidden;">
+
+		<div id="summarydoc">
+			<h3>Summary</h3>
+			<xc:PlaygroundTabDocumentation></xc:PlaygroundTabDocumentation>
+		</div>
+	</xp:div>
+</xp:view>

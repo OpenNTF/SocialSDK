@@ -6,10 +6,9 @@
  -->	
 	<xp:div id="documentationPanel">
 	</xp:div>
-	<xp:span id="label" styleClass="framelabel">Documentation</xp:span>
 	<xp:scriptBlock>
 		<xp:this.value><![CDATA[var editor = dojo.byId('#{id:documentationPanel}');
 pageGlobal.documentationPanel = editor;
-attachLabel(editor,'#{id:label}');]]></xp:this.value>
+]]></xp:this.value>
 	</xp:scriptBlock>
 </xp:view>

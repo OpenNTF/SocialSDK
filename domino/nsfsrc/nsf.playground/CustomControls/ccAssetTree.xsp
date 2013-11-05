@@ -30,8 +30,9 @@
 			</span>
 			<xp:span id="widgetContainer2" loaded="${javascript:database.isFTIndexed()}"
 				styleClass="lotusSearch">
-				<xp:inputText id="search1" value="#{viewScope.assetSearch}"
-					styleClass="searchbox">
+				<xp:inputText id="search1"
+					value="#{viewScope.assetSearch}" styleClass="searchbox"
+					size="30">
 					<xp:this.onkeypress><![CDATA[var kc=event.keyCode?event.keyCode:event.which;
 if(kc==13){dojo.byId('#{id:linkSearch1}').click(); return false;}
 return true;]]></xp:this.onkeypress>

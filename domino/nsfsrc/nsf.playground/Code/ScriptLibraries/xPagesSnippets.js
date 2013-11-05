@@ -17,6 +17,7 @@ function showDocumentation(show) {
  * Create a new snippet 
  */
 function createSnippet() {
+	showDocumentation(false);
 	pageGlobal.id = "";
 	pageGlobal.unid = "";
 	if(pageGlobal.xPagesEditor) {
@@ -39,6 +40,7 @@ function createSnippet() {
  * Load a snippet from the server using a JSON RPC call. 
  */
 function loadSnippet(id) {
+	showDocumentation(false);
 	var deferred = server.loadSnippet(id)
 	deferred.addCallback(function(r) {
 		if(r.status=="ok") {

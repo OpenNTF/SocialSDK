@@ -234,13 +234,6 @@ if(doc) {
 										<xc:PlaygroundTabProperties></xc:PlaygroundTabProperties>
 									</xp:div>
 								</xe:djTabPane>
-<!-- 								
-								<xe:djTabPane id="djTabPane5" title="Documentation">
-									<xp:div style="border: 1px solid #AAAAAA; height: 100%">
-										<xc:PlaygroundTabDocumentation></xc:PlaygroundTabDocumentation>
-									</xp:div>									
-								</xe:djTabPane>
- -->								
 							</xe:djTabContainer>
 						</xe:djBorderPane>
 						<!-- /Other Code Tab Container -->

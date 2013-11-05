@@ -148,9 +148,9 @@ define(["../../../declare", "../../../stringUtil", "../../../i18n", "../../../la
          displayRestricted: function(grid, item, i, items) {
         	 var communityType = item.getValue("communityType");
              if (communityType == undefined || communityType != "publicInviteOnly") {
-                 return "display: none";
+                 return "display: none;";
              } else {
-                 return "";
+                 return "display: inline-block;";
              }
          },
          

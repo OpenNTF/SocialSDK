@@ -169,7 +169,7 @@ define(["../../../declare", "../../../stringUtil", "../../../i18n", "../../../la
              } else {
                  var tagsStr = "";
                  if (lang.isArray(tags)) {
-                     for (var i=1; i<tags.length; i++) {
+                     for (var i=0; i<tags.length; i++) {
                          tagsStr += this._substitute(this.tagAnchorTemplate, { tagName : tags[i] });
                          if (i+1 < tags.length) {
                              tagsStr += ", ";

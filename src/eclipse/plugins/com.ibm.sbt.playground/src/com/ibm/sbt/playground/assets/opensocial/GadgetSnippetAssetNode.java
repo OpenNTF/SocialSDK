@@ -56,8 +56,8 @@ public class GadgetSnippetAssetNode extends AssetNode {
 		if(StringUtil.isNotEmpty(spec)) {
 			GadgetSnippet s = (GadgetSnippet)new GadgetSnippet();
 			try {
-				JsonJavaObject o=(JsonJavaObject)JsonParser.fromJson(JsonJavaFactory.instanceEx2, spec);
-				String t = o.getAsString("title");
+				JsonJavaObject o=(JsonJavaObject)JsonParser.fromJson(JsonJavaFactory.instanceEx, spec);
+				String t = o.getString("title");
 				s.setTitle(t);
 				//boolean isDefault = o.getBoolean("isDefault");
 				String ag = getFirstString(o,"gadget");

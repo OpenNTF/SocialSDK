@@ -29,7 +29,7 @@ define([ "../../../declare", "../../../controls/grid/GridAction" ],
         
     	/**Strings used in the actions */
         nls: {
-            tooltip: "",
+            tooltip: ""
         },
         
         /**ProfileTagAction Constructor function

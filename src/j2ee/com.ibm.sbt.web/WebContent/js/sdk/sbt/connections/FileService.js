@@ -1314,10 +1314,10 @@ define(
 						collectionId : folderId
 					});
 
-					var char = "?";
+					var separatorChar = "?";
 					for ( var counter in fileIds) {
-						url += char + "itemId=" + fileIds[counter];
-						char = "&";
+						url += separatorChar + "itemId=" + fileIds[counter];
+						separatorChar = "&";
 					}
 
 					var callbacks = {
@@ -1581,7 +1581,7 @@ define(
 							args && args.parameters ? args.parameters : {});
 					var headers = {
 						"Content-Type" : false,
-						"Process-Data" : false, // processData = false is reaquired by jquery
+						"Process-Data" : false  // processData = false is reaquired by jquery
 					};
 					var options = {
 						method : "PUT",
@@ -1620,20 +1620,20 @@ define(
 					var url = this.constructUrl(consts.AtomFileInstance, null, {
 						documentId : fileId
 					});
-					var char = "?";
+					var separatorChar = "?";
 					if (args && args.tags) {
 						var tags = args.tags.split(",");
 						for ( var counter in tags) {
-							url += char + "tag=" + stringUtil.trim(tags[counter]);
-							char = "&";
+							url += separatorChar + "tag=" + stringUtil.trim(tags[counter]);
+							separatorChar = "&";
 						}
 						delete args.tags;
 					}
 					if (args && args.removeTags) {
 						var removeTags = args.removeTags.split(",");
 						for ( var counter in removeTags) {
-							url += char + "removeTag=" + stringUtil.trim(removeTags[counter]);
-							char = "&";
+							url += separatorChar + "removeTag=" + stringUtil.trim(removeTags[counter]);
+							separatorChar = "&";
 						}
 						delete args.removeTags;
 					}
@@ -1762,7 +1762,7 @@ define(
 						url = consts.AtomDeleteMyFilesFromRecyclebBin;
 					} else {
 						url = this.constructUrl(consts.AtomDeleteAllFilesFromRecyclebBin, null, {
-							userId : userId,
+							userId : userId
 						});
 					}
 					var options = {
@@ -1868,7 +1868,7 @@ define(
 					if (userId) {
 						url = this.constructUrl(consts.AtomDeleteFileFromRecycleBin, null, {
 							userId : userId,
-							documentId : fileId,
+							documentId : fileId
 						});
 					} else {
 						url = this.constructUrl(consts.AtomDeleteMyFileFromRecycleBin, null, {
@@ -2014,12 +2014,12 @@ define(
 						if (isAnnonymousAccess) {
 							url = this.constructUrl(consts.AtomFileCommentsPublic, null, {
 								userId : userId,
-								documentId : fileId,
+								documentId : fileId
 							});
 						} else {
 							url = this.constructUrl(consts.AtomFileCommentsMy, null, {
 								userId : userId,
-								documentId : fileId,
+								documentId : fileId
 							});
 						}
 					}
@@ -2076,7 +2076,7 @@ define(
 					};
 					var url = this.constructUrl(consts.AtomGetFileFromRecycleBin, null, {
 						userId : userId,
-						documentId : fileId,
+						documentId : fileId
 					});
 
 					var callbacks = {

@@ -1,0 +1,60 @@
+<script type="text/template" id="communityRow">
+<tr class="${rowClass}" >
+	<td class=lotusFirstCell>
+			<span dojoAttachPoint="placeLinkNode">
+				<a href="javascript: void(0)" target="_self" title="${tooltip}" dojoAttachPoint="placeTitleLink" data-dojo-attach-event="onclick: handleClick">${title}</a>
+			</span>
+			<span class="lotusType commType" dojoAttachPoint="sourceTypePlaceHolder"></span>
+			<span style="display: none" class=lotusDivider role=presentation dojoAttachPoint="sourceTypeSectionDevider">|</span>
+			<span style="display: none" class="lotusType commType" dojoAttachPoint="moderatedIconNode">
+				<img style="display: inline" class="lconnSprite lconnSprite-iconModeratedCommunity16" title="${nls.moderated}" alt="${nls.moderated}" src="${blankGif}">
+				${nls.moderated} 
+			</span>
+			<span style="display: none" class="lotusType commType" dojoAttachPoint="restrictedIconNode">
+				<img style="display: inline" class="iconsStates16 iconsStates16-CheckedOut" title="${nls.restricted}" alt="${nls.restricted}" src="${blankGif}">
+				${nls.restricted} 
+			</span>
+	</td>
+</tr>
+</script>
+<script type="text/template" id="pagingHeader">
+<div class="lotusPaging" dojoAttachPoint="pagingHeader">
+	<div class="lotusLeft" dojoAttachPoint="showingResultsMessage">${pagingResults}</div>
+	<ul class="lotusRight lotusInlinelist">
+		<li class="lotusFirst prevPageLink">
+			<a style="${hidePreviousLink}" title="${nls.previousPage}" href="javascript: void(0)" data-dojo-attach-event="onclick: prevPage">${nls.previous}</a>
+			<span style="${hidePreviousLabel}">${nls.previous}</span>
+		</li>
+		<li class="nextPageLink">
+			<a style="${hideNextLink}" title="${nls.nextPage}" href="javascript: void(0)" data-dojo-attach-event="onclick: nextPage">${nls.next}</a>
+			<span style="${hideNextLabel}">${nls.next}</span>
+		</li>
+	</ul>
+</div>
+</script>
+<script type="text/template" id="pagingFooter">
+<div dojoattachpoint="pagingFooter" class="lotusPaging" style="">
+	<ul dojoattachpoint="itemsPerPageList"
+		class="lotusLeft lotusInlinelist">
+		Show:
+		<li class="lotusFirst itemsPerPageLink">
+			<a href="javascript: void(0)" title="${nls.show10Items}" aria-pressed="false"
+				role="button" data-dojo-attach-event="onclick: show10ItemsPerPage">10</a>
+		</li>
+		<li class="itemsPerPageLink">
+			<a href="javascript: void(0)"
+				title="${nls.show25Items}" data-dojo-attach-event="onclick: show25ItemsPerPage"
+				aria-pressed="false" role="button">25</a>
+		</li>
+		<li class="itemsPerPageLink">
+			<a href="javascript: void(0)" title="${nls.show50Items}" data-dojo-attach-event="onclick: show50ItemsPerPage"
+			aria-pressed="false" role="button">50</a>
+		</li>
+		<li class="itemsPerPageLink">
+			<a href="javascript: void(0)" title="${nls.show100Items}" data-dojo-attach-event="onclick: show100ItemsPerPage"
+			aria-pressed="false" role="button">100</a>
+		</li> ${nls.items}
+	</ul>
+</div>
+</script>
+<div style="margin:10px"><div id="gridDiv" style="width:300px;"></div></div>

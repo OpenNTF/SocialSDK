@@ -42,9 +42,17 @@
 			if(communities.size()>0){
 				String communityId = communities.get(0).getCommunityUuid();
 				String userId = Context.get().getProperty("sample.userId2");
-				Invite invite = svc.createInvite(communityId, userId);
-				out.println("Invite created for community "+invite.getCommunityUuid());
-				out.println("Invite created for user "+invite.getContributor().getName());
+				Invite invite = new Invite(svc);
+				invite.setCommunityUuid(communityId);
+				invite.setUserid(userId);
+				invite = svc.createInvite(invite);
+				out.println("Invite created for community with id"+invite.getCommunityUuid()+"<br>");
+				out.println("Invite Id "+ invite.getInviteUuid()+"<br>");
+				out.println("Invite Url "+ invite.getInviteUrl()+"<br>");
+				out.println("Community Url "+ invite.getCommunityUrl()+"<br>");
+				out.println("Invite sent to user with name "+invite.getContributor().getName()+"<br>");
+				out.println("Invite sent to user with userid "+invite.getContributor().getUserid()+"<br>");
+				out.println("Invite sent to user with email "+invite.getContributor().getEmail()+"<br>");
 			}
 			else{
 				out.println("No communities exist to send invite");

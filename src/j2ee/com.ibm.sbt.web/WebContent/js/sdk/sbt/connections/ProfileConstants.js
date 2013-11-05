@@ -101,7 +101,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
             title : "a:title",
             content : "a:content",
             selfLink : "a:link[@rel='self']/@href", 
-            editLink : "a:link[@rel='edit']/@href", 
+            editLink : "a:link[@rel='edit']/@href"
         },
         
         /**

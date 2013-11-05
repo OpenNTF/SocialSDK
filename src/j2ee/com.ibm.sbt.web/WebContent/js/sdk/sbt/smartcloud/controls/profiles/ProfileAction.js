@@ -28,7 +28,7 @@ define([ "../../../declare", "../../../controls/grid/GridAction", "dojo/string" 
         
     	/**Strings used in the actions */
         nls: {
-            tooltip: "Go to ${name}",
+            tooltip: "Go to ${name}"
         },
         
         /**ProfileAction Constructor function

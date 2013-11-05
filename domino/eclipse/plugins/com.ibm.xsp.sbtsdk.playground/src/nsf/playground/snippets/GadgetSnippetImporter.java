@@ -7,8 +7,8 @@ import nsf.playground.beans.GadgetSnippetBean;
 import com.ibm.sbt.playground.assets.Asset;
 import com.ibm.sbt.playground.assets.AssetNode;
 import com.ibm.sbt.playground.assets.NodeFactory;
-import com.ibm.sbt.playground.assets.xpages.XPagesSnippet;
-import com.ibm.sbt.playground.assets.xpages.XPagesSnippetNodeFactory;
+import com.ibm.sbt.playground.assets.opensocial.GadgetSnippet;
+import com.ibm.sbt.playground.assets.opensocial.GadgetSnippetNodeFactory;
 import com.ibm.sbt.playground.vfs.VFSFile;
 
 /**
@@ -35,12 +35,12 @@ public class GadgetSnippetImporter extends AssetImporter {
 	}
 
 	protected NodeFactory getNodeFactory() {
-		return new XPagesSnippetNodeFactory();
+		return new GadgetSnippetNodeFactory();
 	}
 
 	@Override
 	protected void saveAsset(ImportSource source, VFSFile root, AssetNode node, Asset asset) throws Exception {
-		XPagesSnippet snippet = (XPagesSnippet)asset;
+		GadgetSnippet snippet = (GadgetSnippet)asset;
 		Document doc = getDatabase().createDocument();
 		try {
 			setItemValue(doc,"Form", FORM);
@@ -52,7 +52,11 @@ public class GadgetSnippetImporter extends AssetImporter {
 			setItemValue(doc,"Description", snippet.getProperty("description"));
 			setItemValue(doc,"Tags", snippet.getProperty("tags"));
 			setItemValue(doc,"ImportSource", source.getName());
-			setItemValueRichText(doc,"XPages", snippet.getXsp());
+			setItemValueRichText(doc,"Gadget", snippet.getGadgetXml());
+			setItemValueRichText(doc,"Html", snippet.getHtml());
+			setItemValueRichText(doc,"Css", snippet.getCss());
+			setItemValueRichText(doc,"JavaScript", snippet.getJs());
+			setItemValueRichText(doc,"Json", snippet.getJson());
 			snippet.getProperties().remove("endpoints");
 			snippet.getProperties().remove("description");
 			setItemValueRichText(doc,"Properties", snippet.getPropertiesAsString());

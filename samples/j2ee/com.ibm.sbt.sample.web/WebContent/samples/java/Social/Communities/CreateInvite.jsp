@@ -44,8 +44,7 @@
 				String userId = Context.get().getProperty("sample.userId2");
 				Invite invite = new Invite(svc);
 				invite.setCommunityUuid(communityId);
-				//invite.setUserid("");
-				invite.setEmail("ajones100@janet.iris.com");
+				invite.setUserid(userId);
 				invite = svc.createInvite(invite);
 				out.println("Invite created for community with id"+invite.getCommunityUuid()+"<br>");
 				out.println("Invite Id "+ invite.getInviteUuid()+"<br>");

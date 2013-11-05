@@ -207,7 +207,7 @@ public class Invite extends BaseEntity{
 		return getService().createInvite(this);
     }        
 	/**
-	 * This method deletes the community on the server
+	 * This method removes or revokes the invite on the server
 	 * 
 	 * @return
 	 * @throws CommunityServiceException
@@ -217,7 +217,8 @@ public class Invite extends BaseEntity{
 	   	getService().declineInvite(communityUuid, inviteeUuid);
 	}
 	/**
-	 * @return the authorUid
+	 * @method getAuthor
+	 * @return Author
 	 */
 	public Member getAuthor(){
 		Member author = new Member(getService(), getAsString(CommunityXPath.authorUserid));
@@ -227,7 +228,8 @@ public class Invite extends BaseEntity{
 	}
 	
 	/**
-	 * @return the ContributorId
+	 * @method getContributor
+	 * @return Contributor
 	 */
 	public Member getContributor(){
 		Member contributor = new Member(getService(), getAsString(CommunityXPath.contributorUserid));
@@ -264,11 +266,5 @@ public class Invite extends BaseEntity{
     	else{
     		return uid;
     	}
-//          
-//    	if (uid!=null && uid.indexOf(communityUuid) == 0) {
-//            return uid.substring(communityUuid.length() + 1);
-//        } else {
-//            return uid;
-//        }
     }
 }

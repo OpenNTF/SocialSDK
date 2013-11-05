@@ -54,14 +54,14 @@ public abstract class AssetNode extends Node {
 	 */
 	public Asset load(VFSFile root) throws IOException {
 		Asset s = createAsset(root);
-
-		s.setUnid(getUnid());
-
-		// Read the properties, starting from the most global ones
-		Properties p = new Properties();
-		readProperties(root.getVFS(), this, p);
-		s.init(p);
-
+		if(s!=null) {
+			s.setUnid(getUnid());
+	
+			// Read the properties, starting from the most global ones
+			Properties p = new Properties();
+			readProperties(root.getVFS(), this, p);
+			s.init(p);
+		}
 		return s;
 	}
 	protected void readProperties(VFS vfs, Node node, Properties p) throws IOException {
@@ -107,9 +107,17 @@ public abstract class AssetNode extends Node {
 	
 	protected String loadResource(VFSFile parent, String ext) throws IOException {
 		String s = getName() + "." + ext;
-		VFSFile f = parent.getFile(s);
-		if(f!=null) {
-			InputStream is = f.getInputStream();
+		return loadFile(parent, s);
+	}
+
+	protected String loadFile(VFSFile parent, String fileName) throws IOException {
+		VFSFile f = parent.getFile(fileName);
+		return loadFile(f);
+	}
+
+	protected String loadFile(VFSFile file) throws IOException {
+		if(file!=null) {
+			InputStream is = file.getInputStream();
 			if(is!=null) {
 				try {
 					return StreamUtil.readString(is);

@@ -104,13 +104,15 @@ if(doc) {	o = {		status:			"ok",		id:				snippetId,		unid:			doc.getUniversa
 					<xe:djBorderContainer id="djBorderContainer1"
 						style="width: 100%">
 						<xe:djBorderPane id="djBorderPane1" region="top">
+							Environments:<br/>
 							<xc:ccEnvironmentComboBox></xc:ccEnvironmentComboBox>
 						</xe:djBorderPane>
 						<xe:djBorderPane id="djBorderPane4" region="top">
+							JavaScript Libraries:<br/>
 							<xp:comboBox id="comboLibrary" value="#{sessionScope.javaScriptLibrary}"
 								defaultValue="#{javascript:return
 								snippetBean.getDefaultJavaScriptLibrary()}"
-								style="width:85%; margin-top:5px">
+								style="width:85%">
 								<xp:selectItems>
 									<xp:this.value><![CDATA[#{javascript:snippetBean.getJavaScriptLibraries()}]]></xp:this.value>
 								</xp:selectItems>
@@ -300,7 +302,7 @@ if(doc) {
 								</xe:djBorderPane>
 								<xe:djBorderPane region="center"
 									style="padding:0px; overflow: hidden;">
-									<xc:ccSnippetDoc></xc:ccSnippetDoc>
+									<xc:PanelDocJavaScript></xc:PanelDocJavaScript>
 								</xe:djBorderPane>
 							</xe:djBorderContainer>
 						</xe:djStackPane>

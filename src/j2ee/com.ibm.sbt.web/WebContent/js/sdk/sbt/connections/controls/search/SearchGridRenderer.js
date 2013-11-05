@@ -995,7 +995,7 @@ define(["../../../declare",
                "aria-live": "assertive"
              }, lotusUiDiv);
            this._create("span", {
-               innerHTML: this._nls.empty,
+               innerHTML: this._nls.empty
              }, lotusEmptyDiv);
         },
         

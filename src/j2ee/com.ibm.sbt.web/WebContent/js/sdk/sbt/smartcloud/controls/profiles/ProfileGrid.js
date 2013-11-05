@@ -77,7 +77,7 @@ define([ "../../../declare",
                     attributes : ProfileXPath,
                     paramSchema : ParamSchema,
                     feedXPath : FeedXPath,
-                    namespaces : Namespaces,
+                    namespaces : Namespaces
                 },
                 rendererArgs : {
                     type : "contacts"
@@ -89,7 +89,7 @@ define([ "../../../declare",
 	                attributes : ProfileXPath,
 	                paramSchema : ParamSchema,
 	                feedXPath : FeedXPath,
-	                namespaces : Namespaces,
+	                namespaces : Namespaces
 	            },
 	            rendererArgs : {
 	                type : "friends"
@@ -164,7 +164,7 @@ define([ "../../../declare",
         	}
         	
         	this.inherited(arguments);
-        },
+        }
         
     });
 

@@ -29,7 +29,7 @@ define([ "../../../declare", "../../../controls/grid/GridAction" ],
         
     	/**Strings used in the actions */
         nls: {
-            tooltip: "Go to ${name}",
+            tooltip: "Go to ${name}"
         },
         
         /**ProfileAction Constructor function

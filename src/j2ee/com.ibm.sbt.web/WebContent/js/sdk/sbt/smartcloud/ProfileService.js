@@ -466,7 +466,7 @@ define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscr
             if (!profileId || profileId.length == 0) {
                 return this.createBadRequestPromise("Invalid argument, expected userid");
             }
-        },
+        }
    	});
 	return ProfileService;
 });

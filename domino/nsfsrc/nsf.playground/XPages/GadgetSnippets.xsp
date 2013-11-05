@@ -301,7 +301,7 @@ if(doc) {
 								</xe:djBorderPane>
 								<xe:djBorderPane region="center"
 									style="padding:0px; overflow: hidden;">
-									<xc:ccSnippetDoc></xc:ccSnippetDoc>
+									<xc:PanelDocJavaScript></xc:PanelDocJavaScript>
 								</xe:djBorderPane>
 							</xe:djBorderContainer>
 						</xe:djStackPane>

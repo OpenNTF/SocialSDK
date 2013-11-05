@@ -81,6 +81,7 @@ import com.ibm.sbt.services.util.AuthUtil;
 
 public class CommunityService extends BaseService {
 	private static final String COMMUNITY_UNIQUE_IDENTIFIER = "communityUuid";
+	private static final String USERID 						= "userid";
 	/**
 	 * Used in constructing REST APIs
 	 */
@@ -471,6 +472,32 @@ public class CommunityService extends BaseService {
 		
 		return invites;
 	}
+	/**
+     * Retrieve a community invite.
+     * 
+     * @method getInvite
+     * @param {String} communityUuid
+     * @param (String} inviteUuid
+     */
+	public Invite getInvite(String communityUuid, String inviteUuid)throws CommunityServiceException{
+		if (StringUtil.isEmpty(communityUuid) || StringUtil.isEmpty(inviteUuid)){
+			throw new CommunityServiceException(null, Messages.getInviteException);
+		}
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
+		parameters.put(USERID, inviteUuid); // the parameter name should be inviteUuid, this is a bug on connections
+		String url = resolveCommunityUrl(CommunityEntity.COMMUNITY.getCommunityEntityType(),
+				CommunityType.INVITES.getCommunityType());
+		Invite invite;
+		try {
+			invite = (Invite)getEntity(url, parameters, new InviteFeedHandler(this));
+		} catch (Exception e) {
+			throw new CommunityServiceException(e, Messages.CommunityInvitationsException);
+		}
+		
+		return invite;
+		
+	}
 	
 	/**
      * Method to create a community invitation, user should be authenticated to perform this operation
@@ -483,28 +510,25 @@ public class CommunityService extends BaseService {
      * @return pending invites for the authenticated user
      */
 	
-	public Invite createInvite(String communityUuid, String contributorId) throws CommunityServiceException {
+	public Invite createInvite(Invite invite) throws CommunityServiceException {
 		
-		if (StringUtil.isEmpty(communityUuid)){
+		if (StringUtil.isEmpty(invite.getCommunityUuid())){
 			throw new CommunityServiceException(null, Messages.NullCommunityIdException);
 		}
 		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
+		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, invite.getCommunityUuid());
 		String inviteUrl = resolveCommunityUrl(CommunityEntity.COMMUNITY.getCommunityEntityType(),
 				CommunityType.INVITES.getCommunityType());
 		Object communityPayload;
-		Member member = new Member(this, contributorId);
 		try {
-			communityPayload = new InviteTransformer().transform(member.getFieldsMap());
+			communityPayload = new InviteTransformer().transform(invite.getFieldsMap());
 		} catch (TransformerException e) {
 			throw new CommunityServiceException(e, Messages.CreateCommunityPayloadException);
 		}
-		Invite invite = null;
 		
 		try {
 			Response result = super.createData(inviteUrl, parameters, communityPayload);
 			invite = (Invite) new InviteFeedHandler(this).createEntity(result);
-
 		} catch (Exception e) {
 			throw new CommunityServiceException(e, Messages.CreateInvitationException);
 		}

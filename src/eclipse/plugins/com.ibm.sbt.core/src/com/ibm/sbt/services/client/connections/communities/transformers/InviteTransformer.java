@@ -22,6 +22,7 @@ import com.ibm.sbt.services.util.XmlTextUtil;
 import com.ibm.sbt.services.client.base.transformers.AbstractBaseTransformer;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.base.util.EntityUtil;
+import com.ibm.sbt.services.client.connections.communities.model.CommunityXPath;
 
 
 /**
@@ -48,13 +49,14 @@ public class InviteTransformer extends AbstractBaseTransformer {
 			if(xmlEntry.getValue() != null){
 				currentValue = xmlEntry.getValue().toString();
 			}
-			if(currentElement.equalsIgnoreCase("title")){
+			if(currentElement.equalsIgnoreCase(CommunityXPath.title.toString())){
 				titleXml = getXMLRep(getStream(sourcepath+"CommunityTitleTemplate.xml"),currentElement,XmlTextUtil.escapeXMLChars(currentValue));
+				xml = getXMLRep(xml, "getTitle",titleXml);
 			}
-			if(currentElement.equalsIgnoreCase("contributorEmail")){
+			if(currentElement.equalsIgnoreCase(CommunityXPath.contributorEmail.toString())){
 				xml = getXMLRep(xml,currentElement,XmlTextUtil.escapeXMLChars(currentValue));
 			}
-			if(currentElement.equalsIgnoreCase("contributorUid")){
+			if(currentElement.equalsIgnoreCase(CommunityXPath.contributorUserid.toString())){
 				xml = getXMLRep(xml,currentElement,XmlTextUtil.escapeXMLChars(currentValue));
 			}
 			if (EntityUtil.isEmail(currentValue)) {
@@ -64,9 +66,6 @@ public class InviteTransformer extends AbstractBaseTransformer {
 				String useridXml = getXMLRep(getStream(sourcepath+ "UseridTmpl.xml"), "userid", currentValue);
 				xml = getXMLRep(xml, "getUserid", useridXml);
 			}
-		}
-		if(StringUtil.isNotEmpty(titleXml)){
-			xml = getXMLRep(xml, "getTitle",titleXml);
 		}
 		xml = removeExtraPlaceholders(xml);
 		return xml;

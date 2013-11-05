@@ -88,7 +88,10 @@ public class BaseCommunitiesTest extends BaseApiTest {
     
     protected Invite createInvite(Community community, String userid) {
     	try {
-    		return communityService.createInvite(community.getCommunityUuid(), userid);
+    		Invite invite = new Invite(communityService);
+    		invite.setCommunityUuid(community.getCommunityUuid());
+    		invite.setUserid(userid);
+    		return communityService.createInvite(invite);
     	} catch (CommunityServiceException cse) {
     		fail("Error creating invite",cse);
     	}

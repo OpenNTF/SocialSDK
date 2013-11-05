@@ -15,13 +15,13 @@
  */
 package com.ibm.sbt.playground.assets.jssnippets;
 
+import com.ibm.sbt.playground.assets.AbstractNodeFactory;
 import com.ibm.sbt.playground.assets.AssetNode;
 import com.ibm.sbt.playground.assets.CategoryNode;
-import com.ibm.sbt.playground.assets.NodeFactory;
 import com.ibm.sbt.playground.assets.RootNode;
 
 
-public class JSSnippetNodeFactory implements NodeFactory {
+public class JSSnippetNodeFactory extends AbstractNodeFactory {
 	
 	public static final String[] EXTENSIONS = new String[]{"doc.html","html","js","css"};
 	

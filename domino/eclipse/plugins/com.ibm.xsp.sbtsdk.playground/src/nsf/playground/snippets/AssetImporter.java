@@ -44,6 +44,8 @@ public abstract class AssetImporter {
 			return new JavaSnippetImporter(db);
 		} else if(StringUtil.equals(type, XPagesSnippetImporter.TYPE)) {
 			return new XPagesSnippetImporter(db);
+		} else if(StringUtil.equals(type, GadgetSnippetImporter.TYPE)) {
+			return new GadgetSnippetImporter(db);
 		} else if(StringUtil.equals(type, APIImporter.TYPE)) {
 			return new APIImporter(db);
 		}
@@ -128,7 +130,7 @@ public abstract class AssetImporter {
 				action.updateTask(StringUtil.format("Importing Asset: {0}", node.getPath()));
 			}
 			Asset asset = loadAsset(source, root, (AssetNode) node);
-			if(shouldImport(asset)) {
+			if(asset!=null && shouldImport(asset)) {
 				saveAsset(source, root, (AssetNode)node, asset);
 				count++;
 			}

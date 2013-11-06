@@ -12,8 +12,9 @@
 		<version>2.0.0-SNAPSHOT</version>
 	</parent>
 	<modules>
-
+	<module>com.ibm.sbt.libs</module>
 	<module>com.ibm.sbt.libs.domino</module>
+	<module>com.ibm.sbt.libs.j2ee</module>
 	</modules>
 	
 

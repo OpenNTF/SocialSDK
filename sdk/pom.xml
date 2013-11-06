@@ -15,10 +15,6 @@
 		<module>com.ibm.sbt.core</module>
 		<module>com.ibm.sbt.web</module>
 		<module>com.ibm.sbt.proxy.web</module>
-		<module>com.ibm.sbt.domino.feature</module>
-		<module>com.ibm.sbt.domino.updatesite</module>
-		<module>com.ibm.xsp.sbtsdk</module>
-		<module>com.ibm.sbt.target</module>
 	</modules>
 
 

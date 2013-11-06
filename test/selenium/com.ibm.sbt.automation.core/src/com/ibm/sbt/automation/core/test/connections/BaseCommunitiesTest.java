@@ -119,12 +119,12 @@ public class BaseCommunitiesTest extends BaseApiTest {
         Assert.assertEquals(community.getLogoUrl(), json.getString("getLogoUrl"));
         Assert.assertEquals(community.getMemberCount(), json.getInt("getMemberCount"));
         Assert.assertEquals(community.getCommunityType(), json.getString("getCommunityType"));
-        Assert.assertEquals(community.getAuthor().getName(), json.getJsonObject("getAuthor").getString("authorName"));
-        Assert.assertEquals(community.getAuthor().getEmail(), json.getJsonObject("getAuthor").getString("authorEmail"));
-        Assert.assertEquals(community.getAuthor().getUserid(), json.getJsonObject("getAuthor").getString("authorUserid"));
-        Assert.assertEquals(community.getContributor().getName(), json.getJsonObject("getContributor").getString("contributorName"));
-        Assert.assertEquals(community.getContributor().getEmail(), json.getJsonObject("getContributor").getString("contributorEmail"));
-        Assert.assertEquals(community.getContributor().getUserid(), json.getJsonObject("getContributor").getString("contributorUserid"));
+        Assert.assertEquals(community.getAuthor().getName(), json.getJsonObject("getAuthor").getString("name"));
+        Assert.assertEquals(community.getAuthor().getEmail(), json.getJsonObject("getAuthor").getString("email"));
+        Assert.assertEquals(community.getAuthor().getUserid(), json.getJsonObject("getAuthor").getString("userid"));
+        Assert.assertEquals(community.getContributor().getName(), json.getJsonObject("getContributor").getString("name"));
+        Assert.assertEquals(community.getContributor().getEmail(), json.getJsonObject("getContributor").getString("email"));
+        Assert.assertEquals(community.getContributor().getUserid(), json.getJsonObject("getContributor").getString("userid"));
     }
     
     protected void assertMemberValid(JsonJavaObject json, String communityUuid, String name, String userid, String email, String role) {

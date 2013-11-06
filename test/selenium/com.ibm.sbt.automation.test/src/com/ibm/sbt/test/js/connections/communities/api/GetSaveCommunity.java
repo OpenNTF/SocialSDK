@@ -43,22 +43,8 @@ public class GetSaveCommunity extends BaseCommunitiesTest {
         Assert.assertEquals(3, jsonList.size());
 
         JsonJavaObject json = (JsonJavaObject)jsonList.get(2);
-        
         community = getCommunity(json.getString("getCommunityUuid"));
-        
-        Assert.assertEquals(community.getCommunityUuid(), json.getString("getCommunityUuid"));
-        Assert.assertEquals(community.getTitle(), json.getString("getTitle"));
-        Assert.assertEquals(community.getSummary(), json.getString("getSummary"));
-        Assert.assertEquals(community.getCommunityUrl(), json.getString("getCommunityUrl"));
-        Assert.assertEquals(community.getLogoUrl(), json.getString("getLogoUrl"));
-        Assert.assertEquals(community.getMemberCount(), json.getInt("getMemberCount"));
-        Assert.assertEquals(community.getCommunityType(), json.getString("getCommunityType"));
-        Assert.assertEquals(community.getAuthor().getName(), json.getJsonObject("getAuthor").getString("authorName"));
-        Assert.assertEquals(community.getAuthor().getEmail(), json.getJsonObject("getAuthor").getString("authorEmail"));
-        Assert.assertEquals(community.getAuthor().getUserid(), json.getJsonObject("getAuthor").getString("authorUserid"));
-        Assert.assertEquals(community.getContributor().getName(), json.getJsonObject("getContributor").getString("contributorName"));
-        Assert.assertEquals(community.getContributor().getEmail(), json.getJsonObject("getContributor").getString("contributorEmail"));
-        Assert.assertEquals(community.getContributor().getUserid(), json.getJsonObject("getContributor").getString("contributorUserid"));
+        assertCommunityValid(json);
     }
   
     /* (non-Javadoc)

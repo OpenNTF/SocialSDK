@@ -174,7 +174,16 @@ public class Community extends BaseEntity {
 	 * @sets the tags
 	 */
 	public void setTags(String tags) {
-		setAsString(CommunityXPath.tags, tags);
+		if(StringUtil.isNotEmpty(tags) && tags.contains(" ")){
+			tags = StringUtil.replace(tags, " ", ",");
+			setTags(Arrays.asList(StringUtil.splitString(tags, ',')));
+		}
+		else if(StringUtil.isNotEmpty(tags) && tags.contains(",")){
+			setTags(Arrays.asList(StringUtil.splitString(tags, ',')));
+		}
+		else{
+			setAsString(CommunityXPath.tags, tags);
+		}
 	}
 	
 	/**

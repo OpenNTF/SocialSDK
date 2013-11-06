@@ -175,8 +175,8 @@ public class Community extends BaseEntity {
 	 */
 	public void setTags(String tags) {
 		if(StringUtil.isNotEmpty(tags) && tags.contains(" ")){
-			tags = StringUtil.replace(tags, " ", ",");
-			setTags(Arrays.asList(StringUtil.splitString(tags, ',')));
+			tags = tags.trim();
+			setTags(Arrays.asList(StringUtil.splitString(tags, ' ')));
 		}
 		else if(StringUtil.isNotEmpty(tags) && tags.contains(",")){
 			setTags(Arrays.asList(StringUtil.splitString(tags, ',')));

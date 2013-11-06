@@ -19,17 +19,12 @@
 			<layout>p2</layout>
 			<url>http://download.eclipse.org/releases/juno/</url>
 		</repository>
-	
-		<repository>
-			<id>notes</id>
-			<layout>p2</layout>
-			<url>http://dubgsa.ibm.com/gsa/dubgsa/home/m/w/mwdu1054/web/public/repository/p2</url>
-		</repository>
 	</repositories>
 
 	<modules>
 		<module>libraries</module>
 		<module>deps</module>
+		<module>commons</module>
 		<module>sdk</module>
 	</modules>
 

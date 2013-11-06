@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: J2EE specific libraries
 Bundle-SymbolicName: com.ibm.sbt.libs.j2ee
-Bundle-Version: 1.0.0
+Bundle-Version: 2.0.0.qualifier
 Bundle-Vendor: IBM
 Fragment-Host: com.ibm.sbt.libs;bundle-version="1.0.0"
 Bundle-ClassPath: lib/apache-mime4j-0.6.jar,
@@ -12,6 +12,7 @@ Bundle-ClassPath: lib/apache-mime4j-0.6.jar,
  lib/httpmime-4.2.1.jar,
  lib/commons-io-2.4.jar,
  lib/commons-fileupload-1.2.2.jar,
+ lib/commons-logging-1.1.1.jar,
  .
 Export-Package: org.apache.commons.codec,
  org.apache.commons.codec.binary,

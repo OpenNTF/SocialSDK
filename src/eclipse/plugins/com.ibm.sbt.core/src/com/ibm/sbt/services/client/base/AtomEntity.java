@@ -69,8 +69,8 @@ public class AtomEntity extends BaseEntity {
      * @method setTitle
      * @param {String} title ATOM entry title
      */
-    public AtomEntity setTitle(String title) {
-        return (AtomEntity)this.setAsString(AtomXPath.title, title);
+    public void setTitle(String title) {
+        this.setAsString(AtomXPath.title, title);
     }
     
     /**
@@ -89,8 +89,8 @@ public class AtomEntity extends BaseEntity {
      * @method setSummary
      * @param {String} title ATOM entry summary
      */
-    public AtomEntity setSummary(String summary) {
-        return (AtomEntity)this.setAsString(AtomXPath.summary, summary);
+    public void setSummary(String summary) {
+        this.setAsString(AtomXPath.summary, summary);
     }
     
     /**
@@ -109,8 +109,8 @@ public class AtomEntity extends BaseEntity {
      * @method setContent
      * @param {String} content
      */
-    public AtomEntity setContent(String content) {
-        return (AtomEntity)this.setAsString(AtomXPath.content, content);
+    public void setContent(String content) {
+        this.setAsString(AtomXPath.content, content);
     }
 
     /**
@@ -130,8 +130,8 @@ public class AtomEntity extends BaseEntity {
      * @param {Object} Array of categories to be added to the ATOM entry
      */
 
-    public AtomEntity setCategoryTerms(String[] categoryTerms) {
-        return (AtomEntity)this.setAsArray(AtomXPath.categoryTerm, categoryTerms);
+    public void setCategoryTerms(String[] categoryTerms) {
+        this.setAsArray(AtomXPath.categoryTerm, categoryTerms);
     }
 
     /**

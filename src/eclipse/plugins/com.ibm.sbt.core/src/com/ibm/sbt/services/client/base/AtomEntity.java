@@ -16,7 +16,6 @@
 package com.ibm.sbt.services.client.base;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 import org.w3c.dom.Node;
@@ -40,7 +39,7 @@ public class AtomEntity extends BaseEntity {
 	 * @param namespaceCtx
 	 * @param xpathExpression
 	 */
-	public AtomEntity(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
+	public AtomEntity(BaseService<? extends AtomEntity> service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
 		super(service, new XmlDataHandler(node, namespaceCtx, xpathExpression));
 	}
 	

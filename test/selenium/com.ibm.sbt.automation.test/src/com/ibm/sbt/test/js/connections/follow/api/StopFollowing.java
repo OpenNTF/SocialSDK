@@ -40,7 +40,7 @@ public class StopFollowing extends BaseApiTest {
     public void testStopFollowing() {
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         JsonJavaObject json = previewPage.getJson();
-        Assert.assertNotNull(json.getString("stoppedFollowingResource"));
+        Assert.assertEquals(json.getString("stopFollowMessage"), "successful");
     }
     
 }

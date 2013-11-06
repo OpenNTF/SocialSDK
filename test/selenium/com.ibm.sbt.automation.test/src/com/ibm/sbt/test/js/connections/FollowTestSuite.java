@@ -22,6 +22,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
 import com.ibm.sbt.test.js.connections.follow.api.GetFollowedResources;
 import com.ibm.sbt.test.js.connections.follow.api.StartFollowing;
+import com.ibm.sbt.test.js.connections.follow.api.StartFollowingInvalidResourceId;
 import com.ibm.sbt.test.js.connections.follow.api.StopFollowing;
 
 
@@ -34,7 +35,8 @@ import com.ibm.sbt.test.js.connections.follow.api.StopFollowing;
 @SuiteClasses({ 
 	GetFollowedResources.class,
 	StartFollowing.class,
-	StopFollowing.class
+	StopFollowing.class,
+	StartFollowingInvalidResourceId.class
 })
 public class FollowTestSuite {
     @AfterClass

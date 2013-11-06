@@ -150,7 +150,7 @@ public class BaseBlogEntity extends BaseEntity {
     * @return the list of Tags
     */
 	public List<String> getTags() {
-		return (List<String>) Arrays.asList(getDataHandler().getAsString(BlogXPath.tags).split(" "));
+		return (List<String>) Arrays.asList(getDataHandler().getAsArray(BlogXPath.tags));
 	}
 	/**sets the tags
     *
@@ -161,7 +161,7 @@ public class BaseBlogEntity extends BaseEntity {
 	public void setTags(List<String> tags) {
 		if(!tags.isEmpty()){
 			for (int i = 0; i < tags.size(); i++){
-				   fields.put("tag" + i , tags.get(i));
+				   fields.put(BlogXPath.tags.toString() + i , tags.get(i));
 			}
 		}
 	}

@@ -1,4 +1,0 @@
-<sharedWith xmlns="urn:ibm.com/td">
-<member xmlns="http://www.ibm.com/xmlns/prod/composite-applications/v1.0" ca:type="${shareWithWhat}" 
-xmlns:ca="http://www.ibm.com/xmlns/prod/composite-applications/v1.0" ca:id="${shareWithId}" ca:role="${shareWithRole}"/>
-</sharedWith>

@@ -1,8 +1,0 @@
-"object": {
-    "summary": "${objectSummary}",
-    "objectType": "${objectType}",
-    "id": "${objectId}",
-    "displayName": "${objectDisplayName}",
-    "published": "${objectPublished}",
-    "url": "${objectUrl}"
-}

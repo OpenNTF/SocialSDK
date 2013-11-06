@@ -1,7 +1,0 @@
-<entry xmlns="http://www.w3.org/2005/Atom" xmlns:snx="http://www.ibm.com/xmlns/prod/sn">
-
-${getRef}
-${getContent}
-${getModerationAction}
-
-</entry>

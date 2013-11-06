@@ -82,7 +82,7 @@ define([ "../../../declare",
                     paramSchema : ParamSchema
                 },
                 rendererArgs : null
-            },
+            }
         },
         
         /**

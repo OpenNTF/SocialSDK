@@ -1,0 +1,7 @@
+"generator": {
+    ${imageUrl},
+    "id": "${generatorId}",
+    "displayName": "${generatorName}",
+    "url": "${generatorUrl}"
+
+}

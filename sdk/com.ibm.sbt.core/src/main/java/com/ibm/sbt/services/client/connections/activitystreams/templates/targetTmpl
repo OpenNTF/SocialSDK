@@ -1,0 +1,8 @@
+"target": {
+    ${connState},
+    "objectType": "${targetType}",
+    "id": "${targetId}",
+    "displayName": "${targetName}",
+    "url": "${targetUrl}",
+    "summary" : "${targetSummary}"
+}

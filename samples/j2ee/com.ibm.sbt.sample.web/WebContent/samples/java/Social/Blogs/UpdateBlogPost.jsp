@@ -17,6 +17,8 @@
 <%@page import="com.ibm.sbt.services.client.connections.blogs.BlogService"%>
 <%@page import="com.ibm.sbt.services.client.connections.blogs.BlogPost"%>
 <%@page import="com.ibm.sbt.services.client.connections.blogs.BlogPostList"%>
+<%@page import="com.ibm.sbt.services.client.connections.blogs.Blog"%>
+<%@page import="com.ibm.sbt.services.client.connections.blogs.BlogList"%>
 <%@page import="java.util.Collection"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
@@ -28,23 +30,34 @@
 	pageEncoding="ISO-8859-1"%>
 <html>
 <head>
-	<title>SBT JAVA Sample - Create Blog Post</title>
+	<title>SBT JAVA Sample - Update Blog Post</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
 <body>	
-	<h4>Create Blog Post</h4>
+	<h4>Update Blog Post</h4>
 	<div id="content">
 	<%
 	try {
 		BlogService service = new BlogService();
-		BlogPostList entries = service.getBlogsPosts();
-		BlogPost post = (BlogPost)entries.get(0);
-		post.setTitle("Updated Test Blog title");
-		post.setContent("Updated Test Blog Post Content");
-		service.updateBlogPost(post, "test");
-		out.println("Blog Post created with title : " + post.getTitle());
-	
+		BlogList blogs = service.getMyBlogs();
+		if (blogs.size()> 0){
+			String handle = ((Blog)blogs.get(0)).getHandle();
+			BlogPostList entries = service.getBlogPosts(handle);
+			if(entries.size() > 0){
+				BlogPost post = (BlogPost)entries.get(0);
+				post.setTitle("Updated Test Blog title");
+				post.setContent("Updated Test Blog Post Content");
+				service.updateBlogPost(post, "test");
+				out.println("Blog Post updated with title : " + post.getTitle());
+			}
+			else{
+				out.println("no entries exist to make an update");
+			}
+		}
+		else{
+			out.println("User's blogs does not exist");
+		}
 	} catch (Exception e) {
 		out.println("<pre>");
 		out.println(e.getMessage());

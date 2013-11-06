@@ -28,22 +28,25 @@
 	pageEncoding="ISO-8859-1"%>
 <html>
 <head>
-	<title>SBT JAVA Sample - Create Blog</title>
+	<title>SBT JAVA Sample - Update Blog</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
-
 <body>	
-	<h4>Create Blog Post</h4>
 	<div id="content">
 	<%
 	try {
 		BlogService service = new BlogService();
-		BlogList entries = service.getBlogs();
-		Blog blog = (Blog)entries.get(0);
-		blog.setTitle("Updated Test Blog title");
-		blog.setSummary("updated summary");
-		service.updateBlog(blog);
-		out.println("Blog updated with title : " + blog.getTitle());
+		BlogList entries = service.getMyBlogs();
+		if (entries.size()> 0){
+			Blog blog = (Blog)entries.get(0);
+			blog.setTitle("Updated Test Blog title");
+			blog.setSummary("updated summary");
+			service.updateBlog(blog);
+			out.println("Blog updated with title : " + blog.getTitle());
+		}
+		else{
+			out.println("No Blog exist to make an update");
+		}
 	
 	} catch (Exception e) {
 		out.println("<pre>");

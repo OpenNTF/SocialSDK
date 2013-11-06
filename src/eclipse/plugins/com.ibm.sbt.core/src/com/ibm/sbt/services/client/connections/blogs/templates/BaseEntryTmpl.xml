@@ -6,6 +6,7 @@ ${getTimeZone}
 ${getHandle}
 ${getReplyTo}
 ${getFlag}
+${getSummary}
 ${getContent}
 </entry>
 

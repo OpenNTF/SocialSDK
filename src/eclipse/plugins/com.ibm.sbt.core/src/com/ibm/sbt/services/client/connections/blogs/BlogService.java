@@ -31,6 +31,7 @@ import com.ibm.sbt.services.client.connections.blogs.feedhandler.BlogsFeedHandle
 import com.ibm.sbt.services.client.connections.blogs.feedhandler.CommentsFeedHandler;
 import com.ibm.sbt.services.client.connections.blogs.feedhandler.BlogPostsFeedHandler;
 import com.ibm.sbt.services.client.connections.blogs.feedhandler.TagFeedHandler;
+import com.ibm.sbt.services.client.connections.blogs.model.BlogXPath;
 import com.ibm.sbt.services.client.connections.blogs.transformers.BaseBlogTransformer;
 import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.util.AuthUtil;
@@ -480,6 +481,13 @@ public class BlogService extends BaseService {
 			throw new BlogServiceException(null,"null blog");
 		}
 		try {
+			if(blog.getFieldsMap().get(BlogXPath.title)== null)
+				blog.setTitle(blog.getTitle());
+			if(blog.getFieldsMap().get(BlogXPath.summary)== null)
+				blog.setSummary(blog.getSummary());
+			if(!blog.getFieldsMap().toString().contains(BlogXPath.tags.toString()))
+				blog.setTags(blog.getTags());
+
 			BaseBlogTransformer transformer = new BaseBlogTransformer(blog);
 			Object 	payload = transformer.transform(blog.getFieldsMap());
 			
@@ -641,6 +649,13 @@ public class BlogService extends BaseService {
 			throw new BlogServiceException(null,"null post");
 		}
 		try {
+			if(post.getFieldsMap().get(BlogXPath.title)== null)
+				post.setTitle(post.getTitle());
+			if(post.getFieldsMap().get(BlogXPath.content)== null)
+				post.setContent(post.getContent());
+			if(!post.getFieldsMap().toString().contains(BlogXPath.tags.toString()))
+				post.setTags(post.getTags());
+
 			BaseBlogTransformer transformer = new BaseBlogTransformer(post);
 			Object 	payload = transformer.transform(post.getFieldsMap());
 			
@@ -670,14 +685,12 @@ public class BlogService extends BaseService {
 		if (StringUtil.isEmpty(postUuid)){
 			throw new BlogServiceException(null, "null post id");
 		}
-
 		try {
 			String deletePostUrl = resolveUrl(blogHandle, FilterType.UPDATE_REMOVE_POST, postUuid);
 			getClientService().delete(deletePostUrl);
 		} catch (Exception e) {
 			throw new BlogServiceException(e,"error deleting post");
 		} 	
-		
 	}
 	
 

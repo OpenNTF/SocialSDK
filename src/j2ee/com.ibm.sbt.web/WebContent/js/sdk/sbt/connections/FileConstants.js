@@ -406,6 +406,11 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         AtomGetAllFilesInCommunity : "/${files}/basic/api/communitylibrary/{communityId}/feed",
         
         /**
+         * Get All Folders in a Community
+         */
+        AtomGetAllFoldersInCommunity : "/${files}/basic/api/communitycollections/{communityId}/feed",
+        
+        /**
          * Get Community File
          */
         AtomGetCommunityFile : "/${files}/basic/api/communitylibrary/{communityId}/document/{documentId}/entry",

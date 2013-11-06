@@ -26,21 +26,21 @@ import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 /**
  * @author rajmeetbal
  *  
- * @date 06 Nov 2013
+ * @date 30 Sep 2013
  */
-public class StartFollowingInvalidResourceId extends BaseApiTest {
+public class StartFollowingCommunity extends BaseApiTest {
     
-    static final String SNIPPET_ID = "Social_Follow_API_StartFollowingInvalidResourceId";
+    static final String SNIPPET_ID = "Social_Follow_API_StartFollowingCommunity";
 
-    public StartFollowingInvalidResourceId() {
+    public StartFollowingCommunity() {
         setAuthType(AuthType.AUTO_DETECT);
     }
 
     @Test
-    public void testStartFollowingInvalidResourceId() {
+    public void testStartFollowingCommunity() {
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         JsonJavaObject json = previewPage.getJson();
-        Assert.assertEquals(json.getString("message"), "Invalid argument, resource with source must be specified.");
+        Assert.assertEquals(json.getString("startFollowMessage"), "successful");
     }
     
 }

@@ -28,19 +28,19 @@ import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
  *  
  * @date 30 Sep 2013
  */
-public class StartFollowing extends BaseApiTest {
+public class StopFollowingCommunity extends BaseApiTest {
     
-    static final String SNIPPET_ID = "Social_Follow_API_StartFollowing";
+    static final String SNIPPET_ID = "Social_Follow_API_StopFollowingCommunity";
 
-    public StartFollowing() {
+    public StopFollowingCommunity() {
         setAuthType(AuthType.AUTO_DETECT);
     }
-
+    
     @Test
-    public void testStartFollowing() {
+    public void testStopFollowingCommunity() {
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         JsonJavaObject json = previewPage.getJson();
-        Assert.assertNotNull(json.getString("uid"));
+        Assert.assertEquals(json.getString("stopFollowMessage"), "successful");
     }
     
 }

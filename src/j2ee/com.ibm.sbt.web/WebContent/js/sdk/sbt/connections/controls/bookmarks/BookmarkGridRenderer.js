@@ -68,7 +68,7 @@ define(["../../../declare", "../../../i18n",
 	             if (tags == undefined) {
 	                 return "";
 	             } else {
-	                 var tagsStr = "";
+	                 var tagsStr = nls.noTags;
 	                 if (lang.isArray(tags)) {
 	                     for (var i=0; i<tags.length; i++) {
 	                         tagsStr += this._substitute(this.tagAnchorTemplate, { tagName : tags[i] });

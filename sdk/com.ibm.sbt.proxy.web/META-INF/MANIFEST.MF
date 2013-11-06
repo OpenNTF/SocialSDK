@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: SBT Proxy
+Bundle-SymbolicName: com.ibm.sbt.proxy.web;singleton:=true
+Bundle-Version: 2.0.0.qualifier
+Bundle-Vendor: IBM
+Require-Bundle: com.ibm.commons,
+ com.ibm.commons.xml,
+ com.ibm.commons.runtime,
+ com.ibm.sbt.libs,
+ com.ibm.sbt.core
+Bundle-ClassPath: .
+Import-Package: javax.servlet,
+ javax.servlet.http,
+ javax.mail,
+ javax.mail.internet

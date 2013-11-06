@@ -69,6 +69,15 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         Member : "member",
         
         /**
+         * Namespaces to be used when reading the Communities ATOM entry or feed
+         */
+        CommunityNamespaces : {
+			a : "http://www.w3.org/2005/Atom",
+			app : "http://www.w3.org/2007/app",
+			snx : "http://www.ibm.com/xmlns/prod/sn"
+		},
+        
+        /**
          * XPath expressions used when parsing a Connections Communities ATOM feed
          * 
          * @property CommunityFeedXPath
@@ -84,32 +93,17 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type Object
          * @for sbt.connections.CommunityService
          */
-        CommunityXPath : {
-            // used by getEntityData
-            entry : "/a:entry",
-            // used by getEntityId
-            uid : "a:id",
-            // used by getters
+        CommunityXPath : lang.mixin({
             communityUuid : "a:id",
             communityTheme : "snx:communityTheme",
-            title : "a:title",
-            summary : "a:summary[@type='text']",
             communityUrl : "a:link[@rel='alternate']/@href",
             communityAtomUrl : "a:link[@rel='self']/@href",
             logoUrl : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/logo']/@href",
             tags : "a:category[not(@scheme)]/@term",
-            content : "a:content[@type='html']",
             memberCount : "snx:membercount",
             communityType : "snx:communityType",
-            published : "a:published",
-            updated : "a:updated",
-            authorUserid : "a:author/snx:userid",
-            authorName : "a:author/a:name",
-            authorEmail : "a:author/a:email",
-            contributorUserid : "a:contributor/snx:userid",
-            contributorName : "a:contributor/a:name",
-            contributorEmail : "a:contributor/a:email"
-        },
+            isExternal : "snx:isExternal"
+        }, conn.AtomEntryXPath),
         
         /**
          * XPath expressions to be used when reading a Community Member Entry

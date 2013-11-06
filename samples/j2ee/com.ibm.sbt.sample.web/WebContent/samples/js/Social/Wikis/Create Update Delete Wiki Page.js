@@ -164,7 +164,7 @@ function addOnClickHandlers(wikiService, dom) {
         var summary = dom.byId("wikiPageSummary");
         var tags = dom.byId("wikiPageTags");
         var label = dom.byId("wikiPageLabel");
-        startWiki(wikiService, title.value, summary.value, tags.value.split(","), label.value, dom);
+        createWikiPage(wikiService, title.value, summary.value, tags.value.split(","), label.value, dom);
     };
     dom.byId("deleteBtn").onclick = function(evt) {
         if (currentWiki) {

@@ -26,7 +26,7 @@ define([ "../config" ], function(sbt) {
         },
     
         /**
-         * Namespaces to be used when reading the Connections ATOM field
+         * Namespaces to be used when reading the Connections ATOM entry or feed
          */
 		Namespaces : {
 			o : "http://ns.opensocial.org/2008/opensocial",

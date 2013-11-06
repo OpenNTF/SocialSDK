@@ -27,9 +27,10 @@ define([ "../declare", "../lang", "../stringUtil", "./BaseConstants", "./BaseEnt
     					"<title type=\"text\">${getTitle}</title>" +
     					"<content type=\"${contentType}\">${getContent}</content>" +
     					"<summary type=\"text\">${getSummary}</summary>" +
-    					"${categoryScheme}${createEntryData}" + 
+    					"${categoryScheme}${getTags}${createEntryData}" + 
     				"</entry>";
-
+    var CategoryTmpl = "<category term=\"${tag}\"></category>";
+    
     /**
      * AtomEntity class represents an entry from an IBM Connections ATOM feed.
      * 
@@ -49,11 +50,23 @@ define([ "../declare", "../lang", "../stringUtil", "./BaseConstants", "./BaseEnt
          */
         constructor : function(args) {
         	// create XML data handler
-        	this.dataHandler = new XmlDataHandler({
-                service : args.service,
-                data : args.data,
-                namespaces : lang.mixin(BaseConstants.Namespaces, args.namespaces || {}),
-                xpath : lang.mixin({}, BaseConstants.AtomEntryXPath, args.xpath || this.xpath || {})
+        	this.dataHandler = this.createDataHandler(args.service, args.data,
+        		args.namespaces || this.namespaces || BaseConstants.Namespaces,
+                args.xpath || this.xpath || BaseConstants.AtomEntryXPath
+            );
+        },
+        
+        /**
+         * Create the DataHandler for this entity.
+         * 
+         * @method createDataHandler
+         */
+        createDataHandler : function(service, data, namespaces, xpath) {
+        	return new XmlDataHandler({
+                service : service,
+                data : data,
+                namespaces : namespaces,
+                xpath : xpath
             });
         },
         
@@ -225,12 +238,22 @@ define([ "../declare", "../lang", "../stringUtil", "./BaseConstants", "./BaseEnt
         /**
          * Create ATOM entry XML
          * 
+         * @method createPostData
          * @returns
          */
         createPostData : function() {
             var transformer = function(value,key) {
             	if (key == "getContent" && this.contentType == "html") {
             		value = (value && lang.isString(value)) ? value.replace(/</g,"&lt;").replace(/>/g,"&gt;") : value; 
+            	}
+            	if (key == "getTags") {
+                    var tags = value;
+                    value = "";
+                    for (var tag in tags) {
+                        value += stringUtil.transform(CategoryTmpl, {
+                            "tag" : tags[tag]
+                        });
+                    }
             	}
                 return value;
             };
@@ -239,14 +262,20 @@ define([ "../declare", "../lang", "../stringUtil", "./BaseConstants", "./BaseEnt
         },
         
         /**
-         * Return extra entry data to be included in post data for this entity.
+         * Return extra entry data to be included in post data for this ATOM entry.
          * 
+         * @method createEntryData
          * @returns {String}
          */
         createEntryData : function() {
         	return "";
         },
         
+        /**
+         * return namespaces for this ATOM entry.
+         * 
+         * @method createNamespaces
+         */
         createNamespaces : function() {
         	if (!this.dataHandler) {
         		return "";
@@ -254,7 +283,9 @@ define([ "../declare", "../lang", "../stringUtil", "./BaseConstants", "./BaseEnt
         	var namespaceData = "";
         	var namespaces = this.dataHandler.namespaces;
         	for (prefix in namespaces) {
-        		namespaceData += "xmlns:"+prefix+"=\"" + namespaces[prefix] + "\" ";
+        		if (prefix != "a") { // ATOM automatically included
+        			namespaceData += "xmlns:"+prefix+"=\"" + namespaces[prefix] + "\" ";
+        		}
         	}
         	return namespaceData;
         }

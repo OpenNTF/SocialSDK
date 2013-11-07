@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<responses>
+<response statusCode="200" statusReason="OK">
+<headers>
+    <header>
+        <name><![CDATA[Date]]></name>
+        <value><![CDATA[Thu, 07 Nov 2013 09:38:43 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-Powered-By]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-LConn-Auth]]></name>
+        <value><![CDATA[false]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-UA-Compatible]]></name>
+        <value><![CDATA[IE=EmulateIE7]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Last-Modified]]></name>
+        <value><![CDATA[Thu, 07 Nov 2013 09:38:43 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken=PUBjyRNSiMicDeydwCeSe/gUuml0fCDnccXoWVT0q2G+DB9N76HWlKqqf16uAHfzzNbPAEwptZNqH4INVmo/KyOJwRcmaZYIHW6qMsaWqiSnnoONNOeWPNzOVhjHbAXgyNVu+Z7c4oaxpsqHYzYe4Wwtaiu5GX1TlgSbpofbB7B6coN9ik2nPZhmlRvipNQ2y7hL0foIb6UhwN2+/LCf3IUc/YAk1jgjH4C8lPIHUypv6ZF0FmKyy8mxpdGXaA/KStdm/ujfrbSN07lkfddhCtyrtr9ocGeO6hPIeOQYNnx+Aucg4i8u+rcgnrcfaAsZDETkgxXipmMunpY6JIQiyg==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=N3u8XnlL229qxc7nYJvfK/z8ZOd8RAtdRp5W7lvKjS7KE2zogNtbjyZZmIHMPmLjh3RFGlFGbwt6XGKKwShRiBCdNqBSWHJ/B8Ed6+I9FXiJXKWmX+lw5aNI2Z+iTmpEhH1zwopl13V9HdYR50XtlZfdeiafKosR8/Iqa27ezpvp2h3auL7RRJVrkVC11f2R3c4/Zx2SMTBpb7KBqs8LsRQTp3xIreOU1KAFAo60SNa7/v/88naF/pTRcFgeClQjIlp/XCj4HuIkGKQH/ktzpbbXLidwc5112RTQcd79Va5L7xdjTVlwPJ8lIyrKpkSRNjOMwlEuZhgaoz9YSkk7YK2X02q/j5W4G0a5n2MXK75GWyFt/rDtZ/TjLpYUOkt0J9BaRnS34kE/uLAmU3o+rTwe19qz3jO3oGCn0X1K8MxghNYdBLvLVSj7CN5JVO0ycRh6+gnRX21owzTTUuxwbBADtfzESCjFX8TS5H+phyLK0pSCZe4noqi8/+BPjDRWmwTmJSldpRc9Z64GHCO8B2VLAN/B5GjINQQboIpizVtu4mmrqu6yrioPwoiY2VbkItuBSIa8g37v7UI3ohrXD3ER0V2qod2cICtlfjNuQwOV1amncTW3mmUCLFQllcfrcQ/rKfTocadC7ScyArxNKA==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LCSESSIONID=0000p7bcDzw9d8_OnViDxixdtGE:180t512oj; Path=/; HttpOnly]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Expires]]></name>
+        <value><![CDATA[Thu, 01 Dec 1994 16:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Cache-Control]]></name>
+        <value><![CDATA[private, must-revalidate, max-age=0, no-cache=set-cookie]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Length]]></name>
+        <value><![CDATA[8741]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Keep-Alive]]></name>
+        <value><![CDATA[timeout=10, max=100]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Connection]]></name>
+        <value><![CDATA[Keep-Alive]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Type]]></name>
+        <value><![CDATA[application/atom+xml; charset=UTF-8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header></headers>
+<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><feed xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:td="urn:ibm.com/td" xmlns="http://www.w3.org/2005/Atom"><id>urn:lsid:ibm.com:td:collections</id><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/files/basic/api/collections/feed" rel="self"></link><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/files/app/folders/" rel="alternate"></link><title type="text">Folders Feed</title><author><name>Frank Adams</name><snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid><email>fadams@renovations.com</email><snx:userState>active</snx:userState></author><updated>2013-11-07T09:38:43.338Z</updated><generator version="4.5.0.0" uri="http://www.ibm.com/xmlns/prod/sn">IBM Connections - Files</generator><opensearch:totalResults>4</opensearch:totalResults><entry><id>urn:lsid:ibm.com:td:8d00f9fc-6bdd-4134-aac8-c743c7eeb877</id><td:uuid>8d00f9fc-6bdd-4134-aac8-c743c7eeb877</td:uuid><td:label>TestFolder</td:label><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/item">1</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/user">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/group">0</snx:rank><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/files/basic/api/collection/8d00f9fc-6bdd-4134-aac8-c743c7eeb877/entry" rel="self"></link><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/files/app/folder/8d00f9fc-6bdd-4134-aac8-c743c7eeb877/" rel="alternate" type="text/html"></link><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/files/basic/api/collection/8d00f9fc-6bdd-4134-aac8-c743c7eeb877/entry" rel="edit"></link><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/files/basic/api/collection/8d00f9fc-6bdd-4134-aac8-c743c7eeb877/feed" rel="files"></link><category term="collection" scheme="tag:ibm.com,2006:td/type" label="collection"></category><author><name>Frank Adams</name><snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid><email>fadams@renovations.com</email><snx:userState>active</snx:userState></author><td:modifier><name>Frank Adams</name><snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid><email>fadams@renovations.com</email><snx:userState>active</snx:userState></td:modifier><title type="text">TestFolder</title><published>2013-10-23T16:46:52.211Z</published><updated>2013-10-29T16:42:30.204Z</updated><td:created>2013-10-23T16:46:52.211Z</td:created><td:modified>2013-10-29T16:42:30.204Z</td:modified><summary type="text"></summary><td:visibility>private</td:visibility><td:type>personal</td:type><content type="application/atom+xml" src="https://vhost0839.dc1.on.ca.compute.ihost.com:444/files/basic/api/collection/8d00f9fc-6bdd-4134-aac8-c743c7eeb877/feed"></content></entry><entry><id>urn:lsid:ibm.com:td:2d28a7a0-0ee4-46d2-8e4d-2dc79488da71</id><td:uuid>2d28a7a0-0ee4-46d2-8e4d-2dc79488da71</td:uuid><td:label>Vimal'sJSP Folder 123</td:label><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/item">1</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/user">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/group">0</snx:rank><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/files/basic/api/collection/2d28a7a0-0ee4-46d2-8e4d-2dc79488da71/entry" rel="self"></link><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/files/app/folder/2d28a7a0-0ee4-46d2-8e4d-2dc79488da71/" rel="alternate" type="text/html"></link><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/files/basic/api/collection/2d28a7a0-0ee4-46d2-8e4d-2dc79488da71/entry" rel="edit"></link><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/files/basic/api/collection/2d28a7a0-0ee4-46d2-8e4d-2dc79488da71/feed" rel="files"></link><category term="collection" scheme="tag:ibm.com,2006:td/type" label="collection"></category><author><name>Frank Adams</name><snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid><email>fadams@renovations.com</email><snx:userState>active</snx:userState></author><td:modifier><name>Frank Adams</name><snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid><email>fadams@renovations.com</email><snx:userState>active</snx:userState></td:modifier><title type="text">Vimal'sJSP Folder 123</title><published>2013-10-10T11:15:39.759Z</published><updated>2013-10-29T16:42:30.208Z</updated><td:created>2013-10-10T11:15:39.759Z</td:created><td:modified>2013-10-29T16:42:30.208Z</td:modified><summary type="text">123 description</summary><td:visibility>private</td:visibility><td:type>personal</td:type><content type="application/atom+xml" src="https://vhost0839.dc1.on.ca.compute.ihost.com:444/files/basic/api/collection/2d28a7a0-0ee4-46d2-8e4d-2dc79488da71/feed"></content></entry><entry><id>urn:lsid:ibm.com:td:c6b56368-2714-47b0-b483-9b10feecf1b2</id><td:uuid>c6b56368-2714-47b0-b483-9b10feecf1b2</td:uuid><td:label>Vimal'sJSP Folder 123_1</td:label><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/item">1</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/user">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/group">0</snx:rank><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/files/basic/api/collection/c6b56368-2714-47b0-b483-9b10feecf1b2/entry" rel="self"></link><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/files/app/folder/c6b56368-2714-47b0-b483-9b10feecf1b2/" rel="alternate" type="text/html"></link><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/files/basic/api/collection/c6b56368-2714-47b0-b483-9b10feecf1b2/entry" rel="edit"></link><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/files/basic/api/collection/c6b56368-2714-47b0-b483-9b10feecf1b2/feed" rel="files"></link><category term="collection" scheme="tag:ibm.com,2006:td/type" label="collection"></category><author><name>Frank Adams</name><snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid><email>fadams@renovations.com</email><snx:userState>active</snx:userState></author><td:modifier><name>Frank Adams</name><snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid><email>fadams@renovations.com</email><snx:userState>active</snx:userState></td:modifier><title type="text">Vimal'sJSP Folder 123</title><published>2013-10-17T06:59:19.643Z</published><updated>2013-10-29T16:42:30.211Z</updated><td:created>2013-10-17T06:59:19.643Z</td:created><td:modified>2013-10-29T16:42:30.211Z</td:modified><summary type="text">123 description</summary><td:visibility>private</td:visibility><td:type>personal</td:type><content type="application/atom+xml" src="https://vhost0839.dc1.on.ca.compute.ihost.com:444/files/basic/api/collection/c6b56368-2714-47b0-b483-9b10feecf1b2/feed"></content></entry><entry><id>urn:lsid:ibm.com:td:d0837d5e-fb89-4ca2-915f-9c1e205fcd75</id><td:uuid>d0837d5e-fb89-4ca2-915f-9c1e205fcd75</td:uuid><td:label>sample</td:label><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/item">1</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/user">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/group">0</snx:rank><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/files/basic/api/collection/d0837d5e-fb89-4ca2-915f-9c1e205fcd75/entry" rel="self"></link><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/files/app/folder/d0837d5e-fb89-4ca2-915f-9c1e205fcd75/" rel="alternate" type="text/html"></link><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/files/basic/api/collection/d0837d5e-fb89-4ca2-915f-9c1e205fcd75/entry" rel="edit"></link><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/files/basic/api/collection/d0837d5e-fb89-4ca2-915f-9c1e205fcd75/feed" rel="files"></link><category term="collection" scheme="tag:ibm.com,2006:td/type" label="collection"></category><author><name>Frank Adams</name><snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid><email>fadams@renovations.com</email><snx:userState>active</snx:userState></author><td:modifier><name>Frank Adams</name><snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid><email>fadams@renovations.com</email><snx:userState>active</snx:userState></td:modifier><title type="text">sample</title><published>2013-09-10T13:40:53.049Z</published><updated>2013-10-29T16:42:30.214Z</updated><td:created>2013-09-10T13:40:53.049Z</td:created><td:modified>2013-10-29T16:42:30.214Z</td:modified><summary type="text"></summary><td:visibility>private</td:visibility><td:type>personal</td:type><content type="application/atom+xml" src="https://vhost0839.dc1.on.ca.compute.ihost.com:444/files/basic/api/collection/d0837d5e-fb89-4ca2-915f-9c1e205fcd75/feed"></content></entry></feed>]]></data>
+</response>
+<response statusCode="200" statusReason="OK">
+<headers>
+    <header>
+        <name><![CDATA[Date]]></name>
+        <value><![CDATA[Thu, 07 Nov 2013 09:38:43 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-Powered-By]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-LConn-Auth]]></name>
+        <value><![CDATA[false]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-UA-Compatible]]></name>
+        <value><![CDATA[IE=EmulateIE7]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Location]]></name>
+        <value><![CDATA[https://vhost0839.dc1.on.ca.compute.ihost.com:444/files/basic/api/library/8d00f9fc-6bdd-4134-aac8-c743c7eeb877/entry]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Last-Modified]]></name>
+        <value><![CDATA[Tue, 29 Oct 2013 16:42:30 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken=PUBjyRNSiMicDeydwCeSe/gUuml0fCDnccXoWVT0q2G+DB9N76HWlKqqf16uAHfzzNbPAEwptZNqH4INVmo/KyOJwRcmaZYIHW6qMsaWqiSnnoONNOeWPNzOVhjHbAXgyNVu+Z7c4oaxpsqHYzYe4Wwtaiu5GX1TlgSbpofbB7B6coN9ik2nPZhmlRvipNQ2y7hL0foIb6UhwN2+/LCf3IUc/YAk1jgjH4C8lPIHUypv6ZF0FmKyy8mxpdGXaA/KStdm/ujfrbSN07lkfddhCtyrtr9ocGeO6hPIeOQYNnx+Aucg4i8u+rcgnrcfaAsZDETkgxXipmMunpY6JIQiyg==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=N3u8XnlL229qxc7nYJvfK/z8ZOd8RAtdRp5W7lvKjS7KE2zogNtbjyZZmIHMPmLjh3RFGlFGbwt6XGKKwShRiBCdNqBSWHJ/B8Ed6+I9FXiJXKWmX+lw5aNI2Z+iTmpEhH1zwopl13V9HdYR50XtlZfdeiafKosR8/Iqa27ezpvp2h3auL7RRJVrkVC11f2R3c4/Zx2SMTBpb7KBqs8LsRQTp3xIreOU1KAFAo60SNa7/v/88naF/pTRcFgeClQjIlp/XCj4HuIkGKQH/ktzpbbXLidwc5112RTQcd79Va5L7xdjTVlwPJ8lIyrKpkSRNjOMwlEuZhgaoz9YSkk7YK2X02q/j5W4G0a5n2MXK75GWyFt/rDtZ/TjLpYUOkt0J9BaRnS34kE/uLAmU3o+rTwe19qz3jO3oGCn0X1K8MxghNYdBLvLVSj7CN5JVO0ycRh6+gnRX21owzTTUuxwbBADtfzESCjFX8TS5H+phyLK0pSCZe4noqi8/+BPjDRWmwTmJSldpRc9Z64GHCO8B2VLAN/B5GjINQQboIpizVtu4mmrqu6yrioPwoiY2VbkItuBSIa8g37v7UI3ohrXD3ER0V2qod2cICtlfjNuQwOV1amncTW3mmUCLFQllcfrcQ/rKfTocadC7ScyArxNKA==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LCSESSIONID=00000J0HhIwgY7NfvDlp37nwelp:180t512oj; Path=/; HttpOnly]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Expires]]></name>
+        <value><![CDATA[Thu, 01 Dec 1994 16:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Cache-Control]]></name>
+        <value><![CDATA[private, must-revalidate, max-age=0, no-cache=set-cookie]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Keep-Alive]]></name>
+        <value><![CDATA[timeout=10, max=100]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Connection]]></name>
+        <value><![CDATA[Keep-Alive]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Transfer-Encoding]]></name>
+        <value><![CDATA[chunked]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Type]]></name>
+        <value><![CDATA[application/atom+xml;type=entry;charset=UTF-8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header></headers>
+<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><entry xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:td="urn:ibm.com/td" xmlns="http://www.w3.org/2005/Atom"><id>urn:lsid:ibm.com:td:8d00f9fc-6bdd-4134-aac8-c743c7eeb877</id><td:uuid>8d00f9fc-6bdd-4134-aac8-c743c7eeb877</td:uuid><td:label>TestFolder</td:label><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/item">1</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/user">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/group">0</snx:rank><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/files/basic/api/collection/8d00f9fc-6bdd-4134-aac8-c743c7eeb877/entry" rel="self"></link><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/files/app/folder/8d00f9fc-6bdd-4134-aac8-c743c7eeb877/" rel="alternate" type="text/html"></link><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/files/basic/api/collection/8d00f9fc-6bdd-4134-aac8-c743c7eeb877/entry" rel="edit"></link><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/files/basic/api/collection/8d00f9fc-6bdd-4134-aac8-c743c7eeb877/feed" rel="files"></link><category term="collection" scheme="tag:ibm.com,2006:td/type" label="collection"></category><author><name>Frank Adams</name><snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid><email>fadams@renovations.com</email><snx:userState>active</snx:userState></author><td:modifier><name>Frank Adams</name><snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid><email>fadams@renovations.com</email><snx:userState>active</snx:userState></td:modifier><title type="text">TestFolder</title><published>2013-10-23T16:46:52.211Z</published><updated>2013-10-29T16:42:30.204Z</updated><td:created>2013-10-23T16:46:52.211Z</td:created><td:modified>2013-10-29T16:42:30.204Z</td:modified><summary type="text"></summary><td:visibility>private</td:visibility><td:type>personal</td:type><content type="application/atom+xml" src="https://vhost0839.dc1.on.ca.compute.ihost.com:444/files/basic/api/collection/8d00f9fc-6bdd-4134-aac8-c743c7eeb877/feed"></content></entry>]]></data>
+</response>
+</responses>

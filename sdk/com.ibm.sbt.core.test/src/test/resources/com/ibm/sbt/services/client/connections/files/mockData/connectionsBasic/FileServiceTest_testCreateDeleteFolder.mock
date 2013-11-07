@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<responses>
+<response statusCode="201" statusReason="Created">
+<headers>
+    <header>
+        <name><![CDATA[Date]]></name>
+        <value><![CDATA[Thu, 07 Nov 2013 09:38:37 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-Powered-By]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-LConn-Auth]]></name>
+        <value><![CDATA[false]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-UA-Compatible]]></name>
+        <value><![CDATA[IE=EmulateIE7]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Location]]></name>
+        <value><![CDATA[https://vhost0839.dc1.on.ca.compute.ihost.com:444/files/basic/api/collection/cdc3b15a-0b44-44b3-90b9-6a0bc664b7e0/entry]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Last-Modified]]></name>
+        <value><![CDATA[Thu, 07 Nov 2013 09:38:37 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[ETag]]></name>
+        <value><![CDATA["cdc3b15a-0b44-44b3-90b9-6a0bc664b7e0:modified=1383817117967:updated=1383817118113"]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken=PUBjyRNSiMicDeydwCeSe/gUuml0fCDnccXoWVT0q2G+DB9N76HWlKqqf16uAHfzzNbPAEwptZNqH4INVmo/KyOJwRcmaZYIHW6qMsaWqiSnnoONNOeWPNzOVhjHbAXgyNVu+Z7c4oaxpsqHYzYe4Wwtaiu5GX1TlgSbpofbB7B6coN9ik2nPZhmlRvipNQ2y7hL0foIb6UhwN2+/LCf3IUc/YAk1jgjH4C8lPIHUypv6ZF0FmKyy8mxpdGXaA/KStdm/ujfrbSN07lkfddhCtyrtr9ocGeO6hPIeOQYNnx+Aucg4i8u+rcgnrcfaAsZDETkgxXipmMunpY6JIQiyg==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=N3u8XnlL229qxc7nYJvfK/z8ZOd8RAtdRp5W7lvKjS7KE2zogNtbjyZZmIHMPmLjh3RFGlFGbwt6XGKKwShRiBCdNqBSWHJ/B8Ed6+I9FXiJXKWmX+lw5aNI2Z+iTmpEhH1zwopl13V9HdYR50XtlZfdeiafKosR8/Iqa27ezpvp2h3auL7RRJVrkVC11f2R3c4/Zx2SMTBpb7KBqs8LsRQTp3xIreOU1KAFAo60SNa7/v/88naF/pTRcFgeClQjIlp/XCj4HuIkGKQH/ktzpbbXLidwc5112RTQcd79Va5L7xdjTVlwPJ8lIyrKpkSRNjOMwlEuZhgaoz9YSkk7YK2X02q/j5W4G0a5n2MXK75GWyFt/rDtZ/TjLpYUOkt0J9BaRnS34kE/uLAmU3o+rTwe19qz3jO3oGCn0X1K8MxghNYdBLvLVSj7CN5JVO0ycRh6+gnRX21owzTTUuxwbBADtfzESCjFX8TS5H+phyLK0pSCZe4noqi8/+BPjDRWmwTmJSldpRc9Z64GHCO8B2VLAN/B5GjINQQboIpizVtu4mmrqu6yrioPwoiY2VbkItuBSIa8g37v7UI3ohrXD3ER0V2qod2cICtlfjNuQwOV1amncTW3mmUCLFQllcfrcQ/rKfTocadC7ScyArxNKA==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LCSESSIONID=000054LgVOBwuTLOY01pSVXN14E:180t512oj; Path=/; HttpOnly]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Expires]]></name>
+        <value><![CDATA[Thu, 01 Dec 1994 16:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Cache-Control]]></name>
+        <value><![CDATA[private, must-revalidate, max-age=0, no-cache=set-cookie]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Keep-Alive]]></name>
+        <value><![CDATA[timeout=10, max=100]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Connection]]></name>
+        <value><![CDATA[Keep-Alive]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Transfer-Encoding]]></name>
+        <value><![CDATA[chunked]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Type]]></name>
+        <value><![CDATA[application/atom+xml;type=entry;charset=UTF-8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header></headers>
+<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><entry xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:td="urn:ibm.com/td" xmlns="http://www.w3.org/2005/Atom"><id>urn:lsid:ibm.com:td:cdc3b15a-0b44-44b3-90b9-6a0bc664b7e0</id><td:uuid>cdc3b15a-0b44-44b3-90b9-6a0bc664b7e0</td:uuid><td:label>testCreateFolder</td:label><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/item">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/user">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/group">0</snx:rank><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/files/basic/api/collection/cdc3b15a-0b44-44b3-90b9-6a0bc664b7e0/entry" rel="self"></link><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/files/app/folder/cdc3b15a-0b44-44b3-90b9-6a0bc664b7e0/" rel="alternate" type="text/html"></link><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/files/basic/api/collection/cdc3b15a-0b44-44b3-90b9-6a0bc664b7e0/entry" rel="edit"></link><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/files/basic/api/collection/cdc3b15a-0b44-44b3-90b9-6a0bc664b7e0/feed" rel="files"></link><category term="collection" scheme="tag:ibm.com,2006:td/type" label="collection"></category><author><name>Frank Adams</name><snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid><email>***REMOVED***@renovations.com</email><snx:userState>active</snx:userState></author><td:modifier><name>Frank Adams</name><snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid><email>***REMOVED***@renovations.com</email><snx:userState>active</snx:userState></td:modifier><title type="text">testCreateFolder</title><published>2013-11-07T09:38:37.967Z</published><updated>2013-11-07T09:38:38.113Z</updated><td:created>2013-11-07T09:38:37.967Z</td:created><td:modified>2013-11-07T09:38:37.967Z</td:modified><summary type="text">testCreateFolder</summary><td:visibility>private</td:visibility><td:type>personal</td:type><content type="application/atom+xml" src="https://vhost0839.dc1.on.ca.compute.ihost.com:444/files/basic/api/collection/cdc3b15a-0b44-44b3-90b9-6a0bc664b7e0/feed"></content><td:notifications><td:filesAdded>on</td:filesAdded></td:notifications></entry>]]></data>
+</response>
+<response statusCode="204" statusReason="No Content">
+<headers>
+    <header>
+        <name><![CDATA[Date]]></name>
+        <value><![CDATA[Thu, 07 Nov 2013 09:38:38 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-Powered-By]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-LConn-Auth]]></name>
+        <value><![CDATA[false]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-UA-Compatible]]></name>
+        <value><![CDATA[IE=EmulateIE7]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Length]]></name>
+        <value><![CDATA[0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken=PUBjyRNSiMicDeydwCeSe/gUuml0fCDnccXoWVT0q2G+DB9N76HWlKqqf16uAHfzzNbPAEwptZNqH4INVmo/KyOJwRcmaZYIHW6qMsaWqiSnnoONNOeWPNzOVhjHbAXgyNVu+Z7c4oaxpsqHYzYe4Wwtaiu5GX1TlgSbpofbB7B6coN9ik2nPZhmlRvipNQ2y7hL0foIb6UhwN2+/LCf3IUc/YAk1jgjH4C8lPIHUypv6ZF0FmKyy8mxpdGXaA/KStdm/ujfrbSN07lkfddhCtyrtr9ocGeO6hPIeOQYNnx+Aucg4i8u+rcgnrcfaAsZDETkgxXipmMunpY6JIQiyg==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=N3u8XnlL229qxc7nYJvfK/z8ZOd8RAtdRp5W7lvKjS7KE2zogNtbjyZZmIHMPmLjh3RFGlFGbwt6XGKKwShRiBCdNqBSWHJ/B8Ed6+I9FXiJXKWmX+lw5aNI2Z+iTmpEhH1zwopl13V9HdYR50XtlZfdeiafKosR8/Iqa27ezpvp2h3auL7RRJVrkVC11f2R3c4/Zx2SMTBpb7KBqs8LsRQTp3xIreOU1KAFAo60SNa7/v/88naF/pTRcFgeClQjIlp/XCj4HuIkGKQH/ktzpbbXLidwc5112RTQcd79Va5L7xdjTVlwPJ8lIyrKpkSRNjOMwlEuZhgaoz9YSkk7YK2X02q/j5W4G0a5n2MXK75GWyFt/rDtZ/TjLpYUOkt0J9BaRnS34kE/uLAmU3o+rTwe19qz3jO3oGCn0X1K8MxghNYdBLvLVSj7CN5JVO0ycRh6+gnRX21owzTTUuxwbBADtfzESCjFX8TS5H+phyLK0pSCZe4noqi8/+BPjDRWmwTmJSldpRc9Z64GHCO8B2VLAN/B5GjINQQboIpizVtu4mmrqu6yrioPwoiY2VbkItuBSIa8g37v7UI3ohrXD3ER0V2qod2cICtlfjNuQwOV1amncTW3mmUCLFQllcfrcQ/rKfTocadC7ScyArxNKA==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LCSESSIONID=0000VOKBDu6EcoJ2nErIjthI88A:180t512oj; Path=/; HttpOnly]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Expires]]></name>
+        <value><![CDATA[Thu, 01 Dec 1994 16:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Cache-Control]]></name>
+        <value><![CDATA[private, must-revalidate, max-age=0, no-cache=set-cookie]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Keep-Alive]]></name>
+        <value><![CDATA[timeout=10, max=100]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Connection]]></name>
+        <value><![CDATA[Keep-Alive]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header></headers>
+</response>
+</responses>

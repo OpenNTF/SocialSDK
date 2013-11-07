@@ -45,3 +45,16 @@ input.searchbox {
     z-index: 30;
     opacity: 0.8;
 }
+
+.iconTabEmpty{ 
+	background-image: url(diamond.png);	
+	background-position: 0 0; 
+	width: 7px; 
+	height: 10px
+} 
+.iconTabFull{ 
+	background-image: url(diamond.png);	
+	background-position: -7px 0; 
+	width: 7px; 
+	height: 10px; 
+}

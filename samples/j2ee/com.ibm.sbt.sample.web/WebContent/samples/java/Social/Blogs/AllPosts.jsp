@@ -20,6 +20,7 @@
 <%@page import="com.ibm.sbt.services.client.connections.blogs.BlogService"%>
 <%@page import="com.ibm.sbt.services.client.connections.blogs.model.BaseBlogEntity"%>
 <%@page import="com.ibm.sbt.services.client.connections.blogs.BlogPostList"%>
+<%@page import="com.ibm.sbt.services.client.connections.blogs.BlogPost"%>
 <%@page import="com.ibm.sbt.services.client.connections.blogs.model.Author"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.sbt.services.client.connections.activitystreams.model.Reply"%>
@@ -29,25 +30,30 @@
 <html>
 
 <head>
-<title>SBT JAVA Sample - Recommended Blog Posts</title>
+<title>SBT JAVA Sample - Blogs Posts</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
 <body>
-	<h4>Recommended Blogs Posts</h4>
+	<h4>All Posts</h4>
 	<div id="content">
 	<%
 		try {
 			BlogService service = new BlogService();
-			BlogPostList entries = service.GetRecommendedBlogsPosts();
+			BlogPostList entries = service.getAllPosts();
 
 			if (entries.size() <= 0)
 				out.println("No updates to be displayed");
 
 			for (BaseBlogEntity entry : entries) {
-				Author author = entry.getAuthor();
+				
 				out.println("Post title : "+entry.getTitle());
-				out.println("uid of blog :"+entry.getUid());
+				Author author = entry.getAuthor();
+				out.println("uid of post :"+entry.getUid());
+				out.println("replies url :"+((BlogPost)entry).getRepliesUrl());
+				out.println("hits :"+((BlogPost)entry).getHitCount());
+				out.println("recommedations :"+((BlogPost)entry).getRecommendationsCount());
+				out.println("comments :"+((BlogPost)entry).getCommentCount());
 				out.println("date published :"+entry.getPublished());
 				out.println("date updated : "+entry.getUpdated());
 				out.println("author name : "+author.getName());

@@ -20,13 +20,16 @@
  * @module sbt.connections.CommunityService
  */
 define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", "./CommunityConstants", "../base/BaseService",
-         "../base/BaseEntity", "../base/XmlDataHandler", "./ForumService", "../pathUtil" ], 
-    function(declare,config,lang,stringUtil,Promise,consts,BaseService,BaseEntity,XmlDataHandler,ForumService,pathUtil) {
+         "../base/AtomEntity", "../base/BaseEntity", "../base/XmlDataHandler", "./ForumService", "../pathUtil" ], 
+    function(declare,config,lang,stringUtil,Promise,consts,BaseService,AtomEntity,BaseEntity,XmlDataHandler,ForumService,pathUtil) {
 
-    var CommunityTmpl = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:app=\"http://www.w3.org/2007/app\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\"><title type=\"text\">${getTitle}</title><content type=\"html\">${getContent}</content><category term=\"community\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category>${getTags}<snx:communityType>${getCommunityType}</snx:communityType><snx:isExternal>false</snx:isExternal>${getCommunityUuid}${getCommunityTheme}</entry>";
+	var CategoryCommunity = "<category term=\"community\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category>";
+    //var CommunityTmpl = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:app=\"http://www.w3.org/2007/app\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\"><title type=\"text\">${getTitle}</title><content type=\"html\">${getContent}</content><category term=\"community\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category>${getTags}<snx:communityType>${getCommunityType}</snx:communityType><snx:isExternal>false</snx:isExternal>${getCommunityUuid}${getCommunityTheme}</entry>";
     var CategoryTmpl = "<category term=\"${tag}\"></category>";
-    var CommunityUuidTmpl = "<snx:communityUuid xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\">${communityUuid}</snx:communityUuid>";
-    var CommunityThemeTmpl = "<snx:communityTheme xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\" snx:uuid=\"default\">${ommunityTheme}</snx:communityTheme>";
+    var IsExternalTmpl = "<snx:isExternal>${isExternal}</snx:isExternal>"
+    var CommunityTypeTmpl = "<snx:communityType>${getCommunityType}</snx:communityType>";
+    var CommunityUuidTmpl = "<snx:communityUuid xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\">${getCommunityUuid}</snx:communityUuid>";
+    var CommunityThemeTmpl = "<snx:communityTheme xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\" snx:uuid=\"default\">${getCommunityTheme}</snx:communityTheme>";
     var MemberTmpl = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:app=\"http://www.w3.org/2007/app\" xmlns:opensearch=\"http://a9.com/-/spec/opensearch/1.1/\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\"><contributor>${getEmail}${getUserid}</contributor><snx:role xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\" component=\"http://www.ibm.com/xmlns/prod/sn/communities\">${getRole}</snx:role><category term=\"person\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category></entry>";
     var EmailTmpl = "<email>${email}</email>";
     var UseridTmpl = "<snx:userid xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\">${userid}</snx:userid>";
@@ -55,8 +58,13 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
      * @class Community
      * @namespace sbt.connections
      */
-    var Community = declare(BaseEntity, {
+    var Community = declare(AtomEntity, {
 
+    	xpath : consts.CommunityXPath,
+    	namespaces : consts.CommunityNamespaces,
+    	contentType : "html",
+    	categoryScheme : CategoryCommunity,
+    	    	
         /**
          * Construct a Community entity.
          * 
@@ -64,6 +72,68 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @param args
          */
         constructor : function(args) {
+        },
+
+        /**
+         * Create the DataHandler for this entity.
+         * 
+         * @method createDataHandler
+         */
+        createDataHandler : function(service, data, namespaces, xpath) {
+        	return new CommunityDataHandler({
+                service : service,
+                data : data,
+                namespaces : namespaces,
+                xpath : xpath
+            });
+        },
+        
+        /**
+         * Return extra entry data to be included in post data for this entity.
+         * 
+         * @returns {String}
+         */
+        createEntryData : function() {
+        	var postData = "";
+            var transformer = function(value,key) {
+                return value;
+            };
+            postData += stringUtil.transform(CommunityTypeTmpl, this, transformer, this);
+            postData += stringUtil.transform(IsExternalTmpl, this, transformer, this);
+        	if (this.getCommunityUuid()) {
+                postData += stringUtil.transform(CommunityUuidTmpl, this, transformer, this);
+        	}
+        	if (this.getCommunityTheme()) {
+                postData += stringUtil.transform(CommunityThemeTmpl, this, transformer, this);
+        	}
+            return stringUtil.trim(postData);
+        },
+        
+        /*
+         * Construct a post data for a Community
+         */
+        _constructCommunityPostData : function(community) {
+            var transformer = function(value,key) {
+                if (key == "getTags") {
+                    var tags = value;
+                    value = "";
+                    for (var tag in tags) {
+                        value += stringUtil.transform(CategoryTmpl, {
+                            "tag" : tags[tag]
+                        });
+                    }
+                } else if (key == "getCommunityType" && !value) {
+                    value = consts.Restricted;
+                } else if (key == "getCommunityUuid" && value) {
+                    value = stringUtil.transform(CommunityUuidTmpl, { "communityUuid" : value });
+                } else if (key == "getCommunityTheme" && value) {
+                    value = stringUtil.transform(CommunityThemeTmpl, { "communityTheme" : value });
+                }
+                return value;
+            };
+            
+            var postData = stringUtil.transform(CommunityTmpl, community, transformer, community);
+            return stringUtil.trim(postData);
         },
 
         /**
@@ -89,27 +159,6 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         },
 
         /**
-         * Return the value of IBM Connections community title from community
-         * ATOM entry document.
-         * 
-         * @method getTitle
-         * @return {String} Community title of the community
-         */
-        getTitle : function() {
-            return this.getAsString("title");
-        },
-
-        /**
-         * Sets title of IBM Connections community.
-         * 
-         * @method setTitle
-         * @param {String} title Title of the community
-         */
-        setTitle : function(title) {
-            return this.setAsString("title", title);
-        },
-
-        /**
          * Return the community type of the IBM Connections community from
          * community ATOM entry document.
          * 
@@ -117,7 +166,11 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @return {String} Type of the Community
          */
         getCommunityType : function() {
-            return this.getAsString("communityType");
+            var type = this.getAsString("communityType");
+            if (!type) {
+            	type = consts.Restricted;
+            }
+            return type;
         },
 
         /**
@@ -152,24 +205,24 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         },
 
         /**
-         * Return the value of IBM Connections community description from
+         * Return the external of the IBM Connections community from
          * community ATOM entry document.
          * 
-         * @method getContent
-         * @return {String} Community description of the community
+         * @method isExternal
+         * @return {Boolean} External flag of the Community
          */
-        getContent : function() {
-            return this.getAsString("content");
+        isExternal : function() {
+            return this.getAsBoolean("isExternal");
         },
 
         /**
-         * Sets description of IBM Connections community.
+         * Set the external flag of the IBM Connections community.
          * 
-         * @method setContent
-         * @param {String} content Description of the community
+         * @method setExternal
+         * @param {Boolean} External flag of the Community
          */
-        setContent : function(content) {
-            return this.setAsString("content", content);
+        setExternal : function(external) {
+            return this.setAsBoolean("isExternal", external);
         },
 
         /**
@@ -192,37 +245,6 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
 
         setTags : function(tags) {
             return this.setAsArray("tags", tags);
-        },
-
-        /**
-         * Gets an author of IBM Connections community.
-         * 
-         * @method getAuthor
-         * @return {Object} Author of the community
-         */
-        getAuthor : function() {
-            return this.getAsObject([ "authorUserid", "authorName", "authorEmail" ]);
-        },
-
-        /**
-         * Gets a contributor of IBM Connections community.
-         * 
-         * @method getContributor
-         * @return {Object} Contributor of the community
-         */
-        getContributor : function() {
-            return this.getAsObject([ "contributorUserid", "contributorName", "contributorEmail" ]);
-        },
-
-        /**
-         * Return the value of IBM Connections community description summary
-         * from community ATOM entry document.
-         * 
-         * @method getSummary
-         * @return {String} Community description summary of the community
-         */
-        getSummary : function() {
-            return this.getAsString("summary");
         },
 
         /**
@@ -256,28 +278,6 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          */
         getMemberCount : function() {
             return this.getAsNumber("memberCount");
-        },
-
-        /**
-         * Return the published date of the IBM Connections community from
-         * community ATOM entry document.
-         * 
-         * @method getPublished
-         * @return {Date} Published date of the Community
-         */
-        getPublished : function() {
-            return this.getAsDate("published");
-        },
-
-        /**
-         * Return the last updated date of the IBM Connections community from
-         * community ATOM entry document.
-         * 
-         * @method getUpdated
-         * @return {Date} Last updated date of the Community
-         */
-        getUpdated : function() {
-            return this.getAsDate("updated");
         },
 
         /**
@@ -407,19 +407,14 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             var self = this;
             var callbacks = {
                 createEntity : function(service,data,response) {
-                    self.setDataHandler(new CommunityDataHandler({
-                        service :  service,
-                        data : data,
-                        namespaces : consts.Namespaces,
-                        xpath : consts.CommunityXPath
-                    }));
+                	self.setData(data);
                     return self;
                 }
             };
 
-            var requestArgs = lang.mixin({
-                communityUuid : communityUuid
-            }, args || {});
+            var requestArgs = lang.mixin(
+            	{ communityUuid : communityUuid }, 
+            	args || {});
             var options = {
                 handleAs : "text",
                 query : requestArgs
@@ -1212,15 +1207,9 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             });
         },
         createEntity : function(service,data,response) {
-            var entryHandler = new CommunityDataHandler({
-                service :  service,
-                data : data,
-                namespaces : consts.Namespaces,
-                xpath : consts.CommunityXPath
-            });
             return new Community({
                 service : service,
-                dataHandler : entryHandler
+                data : data
             });
         }
     };
@@ -1314,16 +1303,9 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
      */
     var ConnectionsCommunityCallbacks = {
         createEntity : function(service,data,response) {
-            var entryHandler = new CommunityDataHandler({
-                service :  service,
-                data : data,
-                namespaces : consts.Namespaces,
-                xpath : consts.CommunityXPath
-            });
             return new Community({
                 service : service,
-                id : entryHandler.getEntityId(),
-                dataHandler : entryHandler
+                data : data
             });
         }
     };
@@ -1726,7 +1708,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 method : "POST",
                 query : args || {},
                 headers : consts.AtomXmlHeaders,
-                data : this._constructCommunityPostData(community)
+                data : community.createPostData()
             };
             
             return this.updateEntity(consts.AtomCommunitiesMy, options, callbacks, args);
@@ -1756,13 +1738,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             	// preserve the communityUuid
             	var communityUuid = community.getCommunityUuid();
             	if (data) {
-            		var dataHandler = new CommunityDataHandler({
-                        service :  service,
-                        data : data,
-                        namespaces : consts.Namespaces,
-                        xpath : consts.CommunityXPath
-                    });
-                	community.setDataHandler(dataHandler);
+                	community.setData(data);
             	}
             	community.setCommunityUuid(communityUuid);
                 return community;
@@ -1776,7 +1752,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 method : "PUT",
                 query : requestArgs,
                 headers : consts.AtomXmlHeaders,
-                data : this._constructCommunityPostData(community)
+                data : community.createPostData()
             };
             
             return this.updateEntity(consts.AtomCommunityInstance, options, callbacks, args);
@@ -2375,33 +2351,6 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             if (!member || (!member.getUserid() && !member.getEmail())) {
                 return this.createBadRequestPromise("Invalid argument, member with userid or email must be specified.");
             }
-        },
-
-        /*
-         * Construct a post data for a Community
-         */
-        _constructCommunityPostData : function(community) {
-            var transformer = function(value,key) {
-                if (key == "getTags") {
-                    var tags = value;
-                    value = "";
-                    for (var tag in tags) {
-                        value += stringUtil.transform(CategoryTmpl, {
-                            "tag" : tags[tag]
-                        });
-                    }
-                } else if (key == "getCommunityType" && !value) {
-                    value = consts.Restricted;
-                } else if (key == "getCommunityUuid" && value) {
-                    value = stringUtil.transform(CommunityUuidTmpl, { "communityUuid" : value });
-                } else if (key == "getCommunityTheme" && value) {
-                    value = stringUtil.transform(CommunityThemeTmpl, { "communityTheme" : value });
-                }
-                return value;
-            };
-            
-            var postData = stringUtil.transform(CommunityTmpl, community, transformer, community);
-            return stringUtil.trim(postData);
         },
 
         /*

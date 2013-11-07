@@ -77,6 +77,17 @@ define([ "../_bridge/declare",
             }
         },
         
+        _doAttachPoints: function(scope,el){
+       	 var nodes = (el.all || el.getElementsByTagName("*"));
+	            for (var i in nodes) {
+	                var attachPoint = (nodes[i].getAttribute) ? nodes[i].getAttribute("data-dojo-attach-point") : null;
+	                if (attachPoint) {
+	                	
+	                	var att = nodes[i].getAttribute("data-dojo-attach-point");
+	                	scope[att] = el;
+	                }
+	            }
+       },      
         _doAttachEvents: function(el, scope) {
             var nodes = (el.all || el.getElementsByTagName("*"));
             for (var i in nodes) {

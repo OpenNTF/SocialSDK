@@ -1,7 +1,7 @@
 require(["sbt/dom", "sbt/config", "sbt/connections/controls/wrappers/FileGridWrapper"], function(dom, config, FileGridWrapper) {
     config.Properties["loginUi"] = "popup"; // Popup login is the most suitable for iframes.
     var fileGridWrapper = new FileGridWrapper({
-        type : "library",
+        type : "myFiles",
         pinFile: true
     });
     

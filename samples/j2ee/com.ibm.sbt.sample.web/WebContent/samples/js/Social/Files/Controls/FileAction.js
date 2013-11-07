@@ -1,6 +1,6 @@
 require(["sbt/dom", "sbt/connections/controls/files/FileGrid"], function(dom, FileGrid) {
         var grid = new FileGrid({
-	         type : "library"
+	         type : "myFiles"
 	    });
         
         grid.fileAction = {

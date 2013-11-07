@@ -9,7 +9,7 @@
             <span role="listitem"> 
                 <span class="vcard" dojoAttachPoint="vcardNode">
   						<a aria-label="${nls.ariaVcard}" href="${getUserProfileHref}" data-dojo-attach-event="onclick: viewUserProfile" class="fn url">${authorName}</a>
-  						<span data-dojo-attach-point="idNode" class="x-lconn-userid" style="display: none;">${authorUid}</span>
+  						<span data-dojo-attach-point="idNode" class="x-lconn-userid" style="display: none;">${authorUserId}</span>
 					</span>
 					 ${_nls.created} ${createdLabel} | ${itemCount} ${_nls.files}
             </span>
@@ -18,18 +18,18 @@
     <td style="padding-right: 20px;">
         <a class="lconnPinnedToggle _folderPinned" href="#" topic="lconn/files/folders/myfavorites/toggle" role="button"
         title="${nls.pin}" aria-label="${nls.pin}"
-        uid="${uuid}">
+        uid="${uid}">
             <img src="images/blank.gif"
             alt="" class="lconnSprite lconnSprite-iconPinned16-off"
             style="margin-top: 1px;">
             <span class="lotusAltText">${_nls.pin}</span>
         </a>
     </td>
-    <td style="padding-right: 30px;" class="lotusNowrap" title="${shareLabel}">
+    <td style="padding-right: 30px;" class="lotusNowrap" >
     <a href="${folderUrl}" aria-label="${shareLabel}">
         <img src="images/blank.gif"
         class="lconnSprite lconnSprite-icon${visibilityLabel}16"
-        alt="" title=""
+        alt="" title="${shareLabel}"
         style="margin-top: 1px;">
         <span class="lotusAltText">${shareLabel}</span></a></td>
  

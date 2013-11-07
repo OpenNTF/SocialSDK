@@ -15,6 +15,7 @@
 		<module>com.ibm.sbt.core</module>
 		<module>com.ibm.sbt.web</module>
 		<module>com.ibm.sbt.proxy.web</module>
+		<module>com.ibm.sbt.core.test</module>
 	</modules>
 
 

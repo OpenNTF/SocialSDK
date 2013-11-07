@@ -18,7 +18,6 @@ package com.ibm.sbt.services.client.base;
 
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import com.ibm.commons.util.StringUtil;
@@ -33,7 +32,7 @@ import com.ibm.sbt.services.client.base.datahandlers.FieldEntry;
  */
 public class BaseEntity {
 
-	private BaseService svc;
+	private BaseService<? extends BaseEntity> svc;
 	protected DataHandler<?> dataHandler;
     protected Map<String, Object> fields = new HashMap<String, Object>();
 
@@ -45,7 +44,7 @@ public class BaseEntity {
 	 * @param svc
 	 * @param dataHandler
 	 */
-	public BaseEntity(BaseService svc, DataHandler<?> dataHandler) {
+	public BaseEntity(BaseService<? extends BaseEntity> svc, DataHandler<?> dataHandler) {
 		this.svc = svc;
 		this.dataHandler = dataHandler;
 	}
@@ -92,9 +91,8 @@ public class BaseEntity {
 	 * @param fieldName
 	 * @param value
 	 */
-	public BaseEntity setAsString(FieldEntry field, String value) {
+	public void setAsString(FieldEntry field, String value) {
 		fields.put(field.getName(), value);
-		return this;
 	}
 	/**
 	 * This method updates the value of a field. Used to create or update an entity.
@@ -103,9 +101,8 @@ public class BaseEntity {
 	 * @param value
 	 */
 	
-	public BaseEntity setAsString(String field, String value) {
+	public void setAsString(String field, String value) {
 		fields.put(field , value);
-		return this;
 	}
 	/**
 	 * Returns the value of a field as an int
@@ -286,9 +283,8 @@ public class BaseEntity {
 	 * @param fieldName
 	 * @param value
 	 */
-	public BaseEntity setAsFloat(String fieldName, float value){
+	public void setAsFloat(String fieldName, float value){
 		fields.put(fieldName, new Float(value));
-		return this;
 	}
 	
 	/**
@@ -297,9 +293,8 @@ public class BaseEntity {
 	 * @param fieldName
 	 * @param value
 	 */
-	public BaseEntity setAsBoolean(String fieldName, boolean value){
+	public void setAsBoolean(String fieldName, boolean value){
 		fields.put(fieldName, new Boolean(value));
-		return this;
 	}
 	
 	/**
@@ -308,9 +303,8 @@ public class BaseEntity {
 	 * @param fieldName
 	 * @param value
 	 */
-	public BaseEntity setAsDate(String fieldName, Date value){
+	public void setAsDate(String fieldName, Date value){
 		fields.put(fieldName, value);
-		return this;
 	}
 	
 	/**
@@ -319,9 +313,8 @@ public class BaseEntity {
 	 * @param fieldName
 	 * @param value
 	 */
-	public BaseEntity setAsArray(String fieldName, String[] value){
+	public void setAsArray(String fieldName, String[] value){
 		fields.put(fieldName, value);
-		return this;
 	}
 	
 	/**
@@ -330,9 +323,8 @@ public class BaseEntity {
 	 * @param fieldName
 	 * @param value
 	 */
-	public BaseEntity setAsArray(FieldEntry field, String[] value){
+	public void setAsArray(FieldEntry field, String[] value){
 		fields.put(field.getName(), value);
-		return this;
 	}
 	
 	/**
@@ -364,7 +356,7 @@ public class BaseEntity {
 	 *  
 	 * @return service
 	 */
-	public BaseService getService(){
+	public BaseService<? extends BaseEntity> getService(){
 		return svc;
 	}
 	
@@ -372,7 +364,7 @@ public class BaseEntity {
 	 * 
 	 * @set service
 	 */
-	public void setService(BaseService service){
+	public void setService(BaseService<? extends BaseEntity> service){
 		this.svc = service;
 	}
 	

@@ -22,6 +22,7 @@ import com.ibm.sbt.playground.assets.CategoryNode;
 import com.ibm.sbt.playground.assets.Node;
 import com.ibm.sbt.playground.assets.NodeFactory;
 import com.ibm.sbt.playground.assets.RootNode;
+import com.ibm.sbt.playground.assets.javasnippets.JavaSnippet;
 import com.ibm.sbt.playground.vfs.FileVFS;
 import com.ibm.sbt.playground.vfs.GitVFS;
 import com.ibm.sbt.playground.vfs.VFS;
@@ -305,7 +306,12 @@ public abstract class AssetImporter {
 //        RichTextItem rti = doc.createRichTextItem(name);
 //        rti.appendText(v);
 	}
-
+	protected void setItemValues(Document doc, String name, String value) throws Exception {
+		if(StringUtil.isNotEmpty(value)) {
+			String[] t = StringUtil.splitString(value, ',');
+			setItemValue(doc, name, t);
+		}
+	}
 	protected Object toDominoType(Object v) throws Exception {
 		if(v.getClass().isArray()) {
 			int length=Array.getLength(v);

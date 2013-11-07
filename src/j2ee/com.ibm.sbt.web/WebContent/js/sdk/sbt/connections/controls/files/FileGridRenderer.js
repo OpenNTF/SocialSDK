@@ -206,9 +206,9 @@ define(["../../../declare",
           * @returns A String to be used as a label for the "likes icon"
           */
          recommendationLabel : function(grid, item, i, items) {
-            if (item.getValue('recommendationCount') == 0) {
+            if (item.getValue('recommendationsCount') == 0) {
                 return this._nls.noLikes;
-            } else if (item.getValue('recommendationCount') == 1) {
+            } else if (item.getValue('recommendationsCount') == 1) {
                 return this._nls.oneLike;
             } else {
                 return stringUtil.replace(this._nls.nLikes, item);
@@ -225,7 +225,7 @@ define(["../../../declare",
         },
         
         getUserProfileHref: function(grid,item,i,items){
-       	 return this.getProfileUrl(grid,item.getValue("authorUid"));
+       	 return this.getProfileUrl(grid,item.getValue("authorUserId"));
         }
 
        

@@ -1,6 +1,6 @@
 require(["sbt/dom", "sbt/lang", "sbt/connections/controls/files/FileGrid", "sbt/connections/controls/bootstrap/FileRendererMixin"], function(dom,lang, FileGrid,FileRendererMixin ) {
         var grid = new FileGrid({
-	         type : "library",
+	         type : "myFiles",
 	         pinFile: true
 	    });
        

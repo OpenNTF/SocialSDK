@@ -105,7 +105,7 @@ public class MockSerializer {
 		}
 		Document doc;
 		try {
-			System.out.println("PATH IS " + path);
+
 			doc = DOMUtil.createDocument(getClass().getResourceAsStream(path),
 					false);
 

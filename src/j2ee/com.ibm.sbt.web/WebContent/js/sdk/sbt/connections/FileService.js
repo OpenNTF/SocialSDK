@@ -1056,10 +1056,11 @@ define(
 
 					return this.getEntities(consts.AtomFoldersMy, options, this.getFileFeedCallbacks());
 				},
+				
 				/**
 				 * A feed of comments associated with files to which you have access. You must authenticate this request.
 				 * 
-				 * @method getMyFolders
+				 * @method getMyFileComments
 				 * @param {Object} [args] Argument object. Object representing various parameters that can be passed. The parameters must be exactly as they are
 				 * supported by IBM Connections like ps, sortBy etc.
 				 */

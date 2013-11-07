@@ -45,7 +45,7 @@ public class CommunityMembersGrid extends BaseCommunitiesGridTest {
     public void initCommunity() {
     	addSnippetParam("sample.userId3", getCommunityUuid());	
     	try {
-    		addMember(new Member(getCommunityService(), "AmyBlanks@renovations.com"));  
+    		addMember(new Member(getCommunityService(), "sample.userId3"));  
     	} catch(Exception e) {
     		e.printStackTrace();
     	}

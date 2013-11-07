@@ -98,6 +98,12 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
             lang.mixin(this, args);
             
             this.selectedRows = [];
+            
+            if (args.containerType) {
+            	if (args.containerType == "ul") {
+            		this.templatePath = dojo.moduleUrl("sbt", "controls/grid/templates/UnorderedList.html");
+            	}
+            }
   
             
             if (!this.store) {
@@ -117,11 +123,18 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
             
             if (!this.renderer) {
                 if (args && args.rendererArgs) {
+                	args.rendererArgs = lang.mixin(args.rendererArgs, args);
                     this.renderer = this.createDefaultRenderer(args.rendererArgs);
                 } else if (this.options) {
                     var rendererArgs = this.options[this.defaultOption].rendererArgs;
                     if (args && args.type && this.options.hasOwnProperty(args.type)) {
                         rendererArgs = this.options[args.type].rendererArgs;
+                    }
+                    
+                    if (rendererArgs == null) {
+                    	rendererArgs = lang.mixin({}, args);
+                    } else {
+                    	rendererArgs = lang.mixin(rendererArgs, args);
                     }
 
                     this.renderer = this.createDefaultRenderer(rendererArgs);

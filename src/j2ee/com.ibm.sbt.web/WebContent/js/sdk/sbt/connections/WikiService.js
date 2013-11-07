@@ -715,11 +715,20 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * Create a Wiki object with the specified data.
          * 
          * @method newWiki
-         * @param {Object} args Object containing the fields for the 
-         * new Wiki 
+         * @param {Object} args Object containing the fields for the new Wiki 
          */
         newWiki : function(args) {
             return this._toWiki(args);
+        },
+        
+        /**
+         * Create a Wiki Page object with the specified data.
+         * 
+         * @method newWikiPage
+         * @param {Object} args Object containing the fields for the new Wiki Page
+         */
+        newWikiPage : function(args) {
+            return this._toWikiPage(args);
         },
         
         /**

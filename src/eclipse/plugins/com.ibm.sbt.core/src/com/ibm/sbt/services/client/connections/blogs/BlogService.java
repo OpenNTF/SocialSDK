@@ -19,12 +19,7 @@ package com.ibm.sbt.services.client.connections.blogs;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.w3c.dom.Node;
-
 import com.ibm.commons.util.StringUtil;
-import com.ibm.commons.xml.DOMUtil;
-import com.ibm.commons.xml.XMLException;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;

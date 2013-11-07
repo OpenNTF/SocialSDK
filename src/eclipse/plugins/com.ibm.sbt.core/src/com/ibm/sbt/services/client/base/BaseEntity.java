@@ -32,7 +32,7 @@ import com.ibm.sbt.services.client.base.datahandlers.FieldEntry;
  */
 public class BaseEntity {
 
-	private BaseService<? extends BaseEntity> svc;
+	private BaseService svc;
 	protected DataHandler<?> dataHandler;
     protected Map<String, Object> fields = new HashMap<String, Object>();
 
@@ -44,7 +44,7 @@ public class BaseEntity {
 	 * @param svc
 	 * @param dataHandler
 	 */
-	public BaseEntity(BaseService<? extends BaseEntity> svc, DataHandler<?> dataHandler) {
+	public BaseEntity(BaseService svc, DataHandler<?> dataHandler) {
 		this.svc = svc;
 		this.dataHandler = dataHandler;
 	}
@@ -356,7 +356,7 @@ public class BaseEntity {
 	 *  
 	 * @return service
 	 */
-	public BaseService<? extends BaseEntity> getService(){
+	public BaseService getService(){
 		return svc;
 	}
 	
@@ -364,7 +364,7 @@ public class BaseEntity {
 	 * 
 	 * @set service
 	 */
-	public void setService(BaseService<? extends BaseEntity> service){
+	public void setService(BaseService service){
 		this.svc = service;
 	}
 	

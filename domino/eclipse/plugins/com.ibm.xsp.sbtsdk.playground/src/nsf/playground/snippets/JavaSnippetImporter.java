@@ -1,5 +1,7 @@
 package nsf.playground.snippets;
 
+import java.util.Vector;
+
 import lotus.domino.Database;
 import lotus.domino.Document;
 import nsf.playground.beans.JavaSnippetBean;
@@ -50,7 +52,7 @@ public class JavaSnippetImporter extends AssetImporter {
 			setItemValue(doc,"Name", node.getName());
 			setItemValue(doc,"Description", snippet.getProperty("description"));
 			setItemValue(doc,"FilterRuntimes", snippet.getProperty("runtimes"));
-			setItemValue(doc,"Tags", snippet.getProperty("tags"));
+			setItemValues(doc,"Tags", snippet.getProperty("tags"));
 			setItemValue(doc,"ImportSource", source.getName());
 			setItemValueRichText(doc,"Jsp", snippet.getJsp());
 			snippet.getProperties().remove("endpoints");

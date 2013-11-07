@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="85257AA80077A28B" version="9.0" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="75a" sequence="12" unid="DDD579994DF4813485257C1A0069E5FF">
+<noteinfo noteid="75a" sequence="16" unid="DDD579994DF4813485257C1A0069E5FF">
 <created><datetime>20131105T141641,59-05</datetime></created>
-<modified><datetime>20131105T141651,13-05</datetime></modified>
-<revised><datetime>20131105T141651,12-05</datetime></revised>
-<lastaccessed><datetime>20131105T141651,13-05</datetime></lastaccessed>
+<modified><datetime>20131105T141652,31-05</datetime></modified>
+<revised><datetime>20131105T141652,30-05</datetime></revised>
+<lastaccessed><datetime>20131105T141652,31-05</datetime></lastaccessed>
 <addedtofile><datetime>20131105T141641,60-05</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></updatedby>
+<wassignedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></wassignedby>
 <item name="$Flags"><text>gC~4;</text></item>
 
 
 <item name="$FileNames" sign="true"><text>PanelDocXPages_1.xsp</text></item>
 
 
-
-
 <item name="$TITLE" sign="true"><text>PanelDocGadget.xsp</text></item>
-<item name="$DesignerVersion" sign="true"><text>8.5.3</text></item>
+<item name="$DesignerVersion"><text>8.5</text></item>
+
+
+
+
 </note>

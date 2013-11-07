@@ -7,7 +7,6 @@ import nsf.playground.snippets.AssetImporter;
 
 import com.ibm.commons.Platform;
 import com.ibm.domino.xsp.module.nsf.platform.NotesPlatform;
-import com.ibm.sbt.playground.extension.PlaygroundExtensionFactory;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 
 /**

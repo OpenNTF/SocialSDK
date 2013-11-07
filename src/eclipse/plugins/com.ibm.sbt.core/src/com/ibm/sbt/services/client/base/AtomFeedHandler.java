@@ -20,6 +20,7 @@ import org.w3c.dom.Node;
 
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.datahandlers.AtomEntityList;
+import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 
 /**
  * @author Mario Duarte
@@ -27,9 +28,9 @@ import com.ibm.sbt.services.client.base.datahandlers.AtomEntityList;
  */
 public abstract class AtomFeedHandler<T extends AtomEntity> implements IFeedHandler<T> {
 
-	private BaseService<T> service;
+	private BaseService service;
 	
-	public AtomFeedHandler(BaseService<T> service) {
+	public AtomFeedHandler(BaseService service) {
 		this.service = service;
 	}
 	
@@ -45,15 +46,15 @@ public abstract class AtomFeedHandler<T extends AtomEntity> implements IFeedHand
 	}
 
 	@Override
-	public AtomEntityList<T> createEntityList(Response dataHolder) {
+	public EntityList<T> createEntityList(Response dataHolder) {
 		return new AtomEntityList<T>(dataHolder, this);
 	}
 
 	@Override
-	public BaseService<T> getService() {
+	public BaseService getService() {
 		return service;
 	}
 
-	protected abstract T newEntity(BaseService<T> service, Node node);
+	protected abstract T newEntity(BaseService service, Node node);
 
 }

@@ -54,6 +54,6 @@ public interface IFeedHandler<T extends BaseEntity> {
 	 * 
 	 * @return the Service
 	 */
-	public BaseService<T> getService();
+	public BaseService getService();
 	
 }

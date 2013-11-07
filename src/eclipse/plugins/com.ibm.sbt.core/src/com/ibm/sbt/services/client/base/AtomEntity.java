@@ -39,7 +39,7 @@ public class AtomEntity extends BaseEntity {
 	 * @param namespaceCtx
 	 * @param xpathExpression
 	 */
-	public AtomEntity(BaseService<? extends AtomEntity> service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
+	public AtomEntity(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
 		super(service, new XmlDataHandler(node, namespaceCtx, xpathExpression));
 	}
 	

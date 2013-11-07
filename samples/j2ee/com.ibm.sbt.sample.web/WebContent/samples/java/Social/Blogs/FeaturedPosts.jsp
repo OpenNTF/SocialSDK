@@ -19,41 +19,31 @@
 
 <%@page import="com.ibm.sbt.services.client.connections.blogs.BlogService"%>
 <%@page import="com.ibm.sbt.services.client.connections.blogs.model.BaseBlogEntity"%>
-<%@page import="com.ibm.sbt.services.client.connections.blogs.CommentList"%>
-<%@page import="com.ibm.sbt.services.client.connections.blogs.Comment"%>
+<%@page import="com.ibm.sbt.services.client.connections.blogs.BlogPostList"%>
 <%@page import="com.ibm.sbt.services.client.connections.blogs.model.Author"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.sbt.services.client.connections.activitystreams.model.Reply"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Iterator"%>
-
 <html>
-
 <head>
-<title>SBT JAVA Sample - Blogs Comments</title>
+<title>SBT JAVA Sample - Featured Posts</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
-
 <body>
-	<h4>Blogs Comments</h4>
 	<div id="content">
 	<%
 		try {
 			BlogService service = new BlogService();
-			CommentList entries = service.getBlogsComments();
+			BlogPostList entries = service.getFeaturedPosts();
 
 			if (entries.size() <= 0)
 				out.println("No updates to be displayed");
 
 			for (BaseBlogEntity entry : entries) {
 				Author author = entry.getAuthor();
-				out.println("Comment title : "+entry.getTitle());
-				out.println("Comment content :"+((Comment)entry).getContent());
-				out.println("id of post on which comment is posted :"+((Comment)entry).getPostUuid());
-				out.println("reply to url :"+((Comment)entry).getInReplyTo());
-				out.println("recommendation count :"+((Comment)entry).getRecommendationsCount());
-				out.println("Trackbacktitle :"+((Comment)entry).getTrackbacktitle());
-				out.println("uid of comment :"+entry.getUid());
+				out.println("Post title : "+entry.getTitle());
+				out.println("uid of blog :"+entry.getUid());
 				out.println("date published :"+entry.getPublished());
 				out.println("date updated : "+entry.getUpdated());
 				out.println("author name : "+author.getName());

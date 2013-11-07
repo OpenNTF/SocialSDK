@@ -29,7 +29,7 @@
 	pageEncoding="ISO-8859-1"%>
 <html>
 <head>
-<title>SBT JAVA Sample - Blogs Tags</title>
+<title>SBT JAVA Sample - All Tags</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 <body>
@@ -37,7 +37,7 @@
 		try {
 			BlogService svc = new BlogService();
 			Map<String, String> params = new HashMap<String, String>();
-			TagList tags = svc.getBlogsTags();
+			TagList tags = svc.getAllTags();
 			if (tags.size() <= 0) {
 				out.println("No tags to be displayed");
 			}

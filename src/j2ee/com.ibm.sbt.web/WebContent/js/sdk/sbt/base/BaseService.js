@@ -156,7 +156,7 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
 	                    promise.summary = feedHandler.getSummary();
 	                    promise.fulfilled(entities);
                     } catch (cause) {
-                    	var error = new Error("Invalid response");
+                    	var error = new Error("Error parsing response caused by: "+cause);
                     	error.cause = cause;
                     	promise.rejected(error);
                     }

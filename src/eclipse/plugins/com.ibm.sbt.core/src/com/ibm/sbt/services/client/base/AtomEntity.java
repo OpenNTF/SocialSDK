@@ -16,7 +16,6 @@
 package com.ibm.sbt.services.client.base;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 import org.w3c.dom.Node;
@@ -40,7 +39,7 @@ public class AtomEntity extends BaseEntity {
 	 * @param namespaceCtx
 	 * @param xpathExpression
 	 */
-	public AtomEntity(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
+	public AtomEntity(BaseService<? extends AtomEntity> service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
 		super(service, new XmlDataHandler(node, namespaceCtx, xpathExpression));
 	}
 	
@@ -70,8 +69,8 @@ public class AtomEntity extends BaseEntity {
      * @method setTitle
      * @param {String} title ATOM entry title
      */
-    public AtomEntity setTitle(String title) {
-        return (AtomEntity)this.setAsString(AtomXPath.title, title);
+    public void setTitle(String title) {
+        this.setAsString(AtomXPath.title, title);
     }
     
     /**
@@ -90,8 +89,8 @@ public class AtomEntity extends BaseEntity {
      * @method setSummary
      * @param {String} title ATOM entry summary
      */
-    public AtomEntity setSummary(String summary) {
-        return (AtomEntity)this.setAsString(AtomXPath.summary, summary);
+    public void setSummary(String summary) {
+        this.setAsString(AtomXPath.summary, summary);
     }
     
     /**
@@ -110,8 +109,8 @@ public class AtomEntity extends BaseEntity {
      * @method setContent
      * @param {String} content
      */
-    public AtomEntity setContent(String content) {
-        return (AtomEntity)this.setAsString(AtomXPath.content, content);
+    public void setContent(String content) {
+        this.setAsString(AtomXPath.content, content);
     }
 
     /**
@@ -131,8 +130,8 @@ public class AtomEntity extends BaseEntity {
      * @param {Object} Array of categories to be added to the ATOM entry
      */
 
-    public AtomEntity setCategoryTerms(String[] categoryTerms) {
-        return (AtomEntity)this.setAsArray(AtomXPath.categoryTerm, categoryTerms);
+    public void setCategoryTerms(String[] categoryTerms) {
+        this.setAsArray(AtomXPath.categoryTerm, categoryTerms);
     }
 
     /**

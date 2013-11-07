@@ -1,37 +1,29 @@
 require(["sbt/dom",
-         "sbt/connections/FileService"],
+         "sbt/connections/FileService",
+         "sbt/connections/controls/files/FileGrid"],
 
-      function(dom, FileService) {
-        var communityId = "%{name=sample.communityId}";
+function(dom, FileService, FileGrid) {
+	var communityId = "%{name=sample.communityId}";
+	
+	var grid = new FileGrid({type : "folders", category : "community", userId : communityId});
+	
+    dom.byId("gridDiv").appendChild(grid.domNode);
+
+    grid.update();
     
-    var createRow = function(i, file) {
-        var table = dom.byId("filesTable");
-        var tr = document.createElement("tr");
-        table.appendChild(tr);
-        var td = document.createElement("td");
-        td.innerHTML = file.getTitle();
-        tr.appendChild(td);
-        td = document.createElement("td");
-        td.innerHTML = file.getFileId();
-        tr.appendChild(td);
-    };
-
     var fileService = new FileService();
-        fileService.getCommunityFolders(communityId).then(
-        function(files) {
-            if (files.length == 0) {
-                    dom.setText("content", "No files have been shared with this community.");
-            } else {
-                for(var i=0; i<files.length; i++){
-                    var file = files[i];
-                    createRow(i, file);         
-                }
-            }
-        },
-        function(error) {
-                handleError(dom, error);
-        }
-        );
+	fileService.getMyFiles().then(
+		function(files) {
+			if (files.length > 0) {
+				var file = files[0];
+				showFileComments(file.getAuthor().authorUserId, file.getFileId());
+			} 
+		}, 
+		function(error) {
+			console.log(error.message);
+		}
+	); 
+ 
 });
 
 function handleError(dom, error) {

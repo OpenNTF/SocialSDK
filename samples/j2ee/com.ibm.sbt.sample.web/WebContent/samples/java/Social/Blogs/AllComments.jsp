@@ -19,8 +19,8 @@
 
 <%@page import="com.ibm.sbt.services.client.connections.blogs.BlogService"%>
 <%@page import="com.ibm.sbt.services.client.connections.blogs.model.BaseBlogEntity"%>
-<%@page import="com.ibm.sbt.services.client.connections.blogs.BlogPostList"%>
-<%@page import="com.ibm.sbt.services.client.connections.blogs.BlogPost"%>
+<%@page import="com.ibm.sbt.services.client.connections.blogs.CommentList"%>
+<%@page import="com.ibm.sbt.services.client.connections.blogs.Comment"%>
 <%@page import="com.ibm.sbt.services.client.connections.blogs.model.Author"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.sbt.services.client.connections.activitystreams.model.Reply"%>
@@ -28,32 +28,29 @@
 <%@page import="java.util.Iterator"%>
 
 <html>
-
 <head>
-<title>SBT JAVA Sample - Blogs Posts</title>
+<title>SBT JAVA Sample - Blogs Comments</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
-
 <body>
-	<h4>Blogs Posts</h4>
 	<div id="content">
 	<%
 		try {
 			BlogService service = new BlogService();
-			BlogPostList entries = service.getBlogsPosts();
+			CommentList entries = service.getAllComments();
 
 			if (entries.size() <= 0)
 				out.println("No updates to be displayed");
 
 			for (BaseBlogEntity entry : entries) {
-				
-				out.println("Post title : "+entry.getTitle());
 				Author author = entry.getAuthor();
-				out.println("uid of post :"+entry.getUid());
-				out.println("replies url :"+((BlogPost)entry).getRepliesUrl());
-				out.println("hits :"+((BlogPost)entry).getHitCount());
-				out.println("recommedations :"+((BlogPost)entry).getRecommendationsCount());
-				out.println("comments :"+((BlogPost)entry).getCommentCount());
+				out.println("Comment title : "+entry.getTitle());
+				out.println("Comment content :"+((Comment)entry).getContent());
+				out.println("id of post on which comment is posted :"+((Comment)entry).getPostUuid());
+				out.println("reply to url :"+((Comment)entry).getInReplyTo());
+				out.println("recommendation count :"+((Comment)entry).getRecommendationsCount());
+				out.println("Trackbacktitle :"+((Comment)entry).getTrackbacktitle());
+				out.println("uid of comment :"+entry.getUid());
 				out.println("date published :"+entry.getPublished());
 				out.println("date updated : "+entry.getUpdated());
 				out.println("author name : "+author.getName());

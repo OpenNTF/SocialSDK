@@ -27,19 +27,16 @@
 <%@page import="java.util.Iterator"%>
 
 <html>
-
 <head>
-<title>SBT JAVA Sample - Featured Blog Posts</title>
+<title>SBT JAVA Sample - Recommended Posts</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
-
 <body>
-	<h4>Featured Blogs Posts</h4>
 	<div id="content">
 	<%
 		try {
 			BlogService service = new BlogService();
-			BlogPostList entries = service.GetFeaturedBlogsPosts();
+			BlogPostList entries = service.getRecommendedPosts();
 
 			if (entries.size() <= 0)
 				out.println("No updates to be displayed");

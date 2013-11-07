@@ -50,7 +50,7 @@ public class GadgetSnippetImporter extends AssetImporter {
 			setItemValue(doc,"Name", node.getName());
 			setItemValue(doc,"FilterRuntimes", snippet.getProperty("runtimes"));
 			setItemValue(doc,"Description", snippet.getProperty("description"));
-			setItemValue(doc,"Tags", snippet.getProperty("tags"));
+			setItemValues(doc,"Tags", snippet.getProperty("tags"));
 			setItemValue(doc,"ImportSource", source.getName());
 			setItemValueRichText(doc,"Gadget", snippet.getGadgetXml());
 			setItemValueRichText(doc,"Html", snippet.getHtml());

@@ -1058,23 +1058,6 @@ define(
 				},
 				
 				/**
-				 * Get community folders from IBM Connections
-				 * 
-				 * @method getCommunityFolders
-				 * @param {Object} [args] Argument object. Object representing various parameters that can be passed. The parameters must be exactly as they are
-				 * supported by IBM Connections like ps, sortBy etc.
-				 */
-				getCommunityFolders : function(args) {
-					var options = {
-						method : "GET",
-						handleAs : "text",
-						query : args || {}
-					};
-
-					return this.getEntities(consts.AtomGetAllFoldersInCommunity, options, this.getFileFeedCallbacks());
-				},
-				
-				/**
 				 * A feed of comments associated with files to which you have access. You must authenticate this request.
 				 * 
 				 * @method getMyFileComments

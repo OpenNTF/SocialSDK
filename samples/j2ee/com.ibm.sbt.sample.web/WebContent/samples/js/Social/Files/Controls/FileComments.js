@@ -2,7 +2,7 @@ require(["sbt/connections/FileService", "sbt/connections/controls/files/FileGrid
 	
 	var showFileComments = function(userId, fileId) {
         var grid = new FileGrid({
-             type : "fileComments",
+             type : "myFileComments",
              userId : userId,
              documentId : fileId
         });

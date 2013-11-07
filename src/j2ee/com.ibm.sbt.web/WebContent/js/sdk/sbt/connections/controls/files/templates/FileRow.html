@@ -3,7 +3,7 @@
         <input value="${title}" name="${title}" aria-label="${nls.ariaCheckbox}" data-dojo-attach-event="onclick: handleCheckBox" type="checkbox" class="lotusCheckbox">
     </td>
     <td class=lotusNowrap>
-        <a title="Download ${title}" href="${downloadUrl}" class="lconnDownloadable lconnDownloadableIcon">
+        <a title="Download ${title}" href="${editMediaLink}" class="lconnDownloadable lconnDownloadableIcon">
             <img alt="" src="images/blank.gif" class="lconn-ftype32 lconn-ftype32-${ftype}"><span class="lotusAltText" title="">${_nls.download}</span>
         </a>
     </td>
@@ -16,7 +16,7 @@
                 <li class="lotusFirst" title="">
                     <span class="vcard" dojoAttachPoint="vcardNode">
   						<a aria-label="${nls.ariaVcard}" href="${getUserProfileHref}" data-dojo-attach-event="onclick: viewUserProfile" class="fn url">${authorName}</a>
-  						<span data-dojo-attach-point="idNode" class="x-lconn-userid" style="display: none;">${authorUid}</span>
+  						<span data-dojo-attach-point="idNode" class="x-lconn-userid" style="display: none;">${authorUserId}</span>
 					</span>
                 ${_nls.created} ${createdLabel}
                 </li>
@@ -24,7 +24,7 @@
                     ${hitCount} ${_nls.downloads}
                 </li>
                 <li>
-                    ${commentCount} ${_nls.comments}
+                    ${commentsCount} ${_nls.comments}
                 </li>
             </ul>
         </div>
@@ -34,7 +34,7 @@
         <div>
             <div class="lotusLike">
                 <a class="lotusLikeCount lotusLikeSimple" title="${recommendationLabel}" aria-label="${recommendationLabel}">
-                    <img src="images/blank.gif" class="lotusIconLike" alt="">${recommendationCount}
+                    <img src="images/blank.gif" class="lotusIconLike" alt="">${recommendationsCount}
                 </a>
             </div>
         </div>
@@ -42,12 +42,12 @@
     </td>
     <td style="padding-right: 25px;" title="Pin this file">
         <a class="lconnPinnedToggle _filePinned" href="javascript:" topic="lconn/files/files/myfavorites/toggle" data-dojo-attach-event="onclick: doPinFile" role="button" aria-label="${nls.pin}" >
-            <img src="images/blank.gif" alt="${nls.pin}" id ="${uuid}" class="${pinFileOnOrOff}" />
+            <img src="images/blank.gif" alt="${nls.pin}" id ="${uid}" class="${pinFileOnOrOff}" />
         </a>
     </td>
     <td style="padding-right: 25px;" class="lotusNowrap" title="${shareLabel}">
-        <a aria-label="${shareLabel}" href="${fileUrl}?section=share">
-            <img src="images/blank.gif" class="lconnSprite lconnSprite-icon${visibilityLabel}16" alt="" title="" style="margin-top: 1px;">
+        <a aria-label="${shareLabel}" href="${selfUrl}?section=share">
+            <img src="images/blank.gif" class="lconnSprite lconnSprite-icon${visibilityLabel}16" alt="" title="${shareLabel}" style="margin-top: 1px;">
             <span class="lotusAltText">${shareLabel}</span>
         </a>
     </td>

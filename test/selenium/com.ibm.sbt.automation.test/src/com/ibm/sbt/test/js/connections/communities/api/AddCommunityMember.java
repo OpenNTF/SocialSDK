@@ -44,7 +44,7 @@ public class AddCommunityMember extends BaseCommunitiesTest {
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         JsonJavaObject json = previewPage.getJson();
         Assert.assertNull("Unexpected error detected on page", json.getString("code"));
-        Assert.assertEquals(id2, json.getString("id"));
+        Assert.assertEquals(id2, json.getString("getId"));
         Assert.assertEquals("member", json.getString("getRole"));
         if (!environment.isSmartCloud()) {
         	Assert.assertTrue(getProperty("sample.email2").equalsIgnoreCase(json.getString("getEmail")));

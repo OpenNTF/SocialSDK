@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%;">
+  
+  <head>
+    <link rel="stylesheet" type="text/css" title="Style" href="https://qs.renovations.com:444/connections/resources/web/_style?include=com.ibm.lconn.core.styles.oneui3/base/package3.css"></link>   
+    <link rel="stylesheet" type="text/css" title="Style" href="https://qs.renovations.com:444/connections/resources/web/_style?include=com.ibm.lconn.core.styles.oneui3/sprites.css"></link>
+    <link rel="stylesheet" type="text/css" title="Style" href="https://qs.renovations.com:444/connections/resources/web/_lconntheme/default.css?version=oneui3&rtl=false"></link>
+    <link rel="stylesheet" type="text/css" title="Style" href="https://qs.renovations.com:444/connections/resources/web/_lconnappstyles/default/search.css?version=oneui3&rtl=false"></link>
+    
+    <script type="text/javascript">
+	var djConfig = {
+	    parseOnLoad: true,
+	    locale: 'en'
+	};
+	</script>
+	
+	<script type="text/javascript" src="/sbt.dojo143/dojo/dojo.js"></script>
+
+    <script type="text/javascript" src="/sbt.sample.web/library?lib=dojo&ver=1.4.3"></script>
+  </head>
+
+  <body class="lotusui30_body lotusui30_fonts lotusui30" style="width: 90%; height: 100%;">
+	<div id="searchNode" class="lotusSearch"></div>
+	<div id="results"></div>
+
+	<script>
+	require(["sbt/dom", "sbt/connections/controls/search/SearchBox"], function(dom, SearchBox) {
+        
+	    var searchBox = new SearchBox({
+        	type:"full",
+        	constraint: { type:"field",id:"title" } 
+        });
+                
+        dom.byId("searchNode").appendChild(searchBox.domNode);
+        
+        searchBox.domNode.addEventListener("searchResultEvent",function(event){
+        	if(!event){
+        		event = window.event;
+        	}
+        	var resultDiv = dom.byId("results");
+        	resultDiv.innerHTML = "";
+        	//Create a table to display results
+        	var table = document.createElement("table");
+        	if(event.results.length >0){
+        		for(var i=0;i<event.results.length;i++){
+	        		var title = event.results[i].getTitle();
+	        		var row = document.createElement("tr");
+	        		var data = document.createElement("td");
+	        		row.innerHTML = title;
+	        		row.appendChild(data);
+	        		table.appendChild(row);
+        		}
+        	}else{
+        		var row = document.createElement("tr");
+        		var data = document.createElement("td");
+        		row.innerHTML = "Your Search Returned No Results";
+        		row.appendChild(data);
+        		table.appendChild(row);
+        	}
+        	
+        	
+        	resultDiv.appendChild(table);
+        	
+        },false);
+        
+	});
+	</script>
+
+
+    
+  </body>
+</html>

@@ -1,9 +1,9 @@
 require(['dojo/on', 'dojo/ready', 'playground/widgets/gadgetarea/PlaygroundGadgetArea', 
          'dojo/dom-construct', 'dojo/dom-class',
-         'dojo/_base/event', 'dojo/query', 'dojo/NodeList-manipulate', 
+         'dojo/_base/event', 'dojo/query', 'playground/securityToken', 'dojo/hash', 'dojo/NodeList-manipulate', 
          'dojo/NodeList-dom', 'dojo/NodeList-traverse'], 
          function(on, ready, PlaygroundGadgetArea, domConstruct, domClass,
-        		 event, query) {
+        		 event, query, securityToken, hash) {
 	
 	//TODO this is duplicated :(
 	function updateNavSelection() {
@@ -63,15 +63,22 @@ require(['dojo/on', 'dojo/ready', 'playground/widgets/gadgetarea/PlaygroundGadge
 	}
 	
 	ready(function() {
-		on(window, 'onresize', resize);
+		on(window, 'resize', resize);
 		resize();
 
 		//Don't like the fact that there is this pageGlobal variable, hopefully
 		//we can get rid of it at some point
-		var gadgetArea = new PlaygroundGadgetArea(pageGlobal);
-		domConstruct.place(gadgetArea.domNode, 'osgadget', 'replace');
-		gadgetArea.startup();
-		
+		securityToken.get().then(function(response) {
+			var gadgetArea = new PlaygroundGadgetArea(pageGlobal);
+			domConstruct.place(gadgetArea.domNode, 'osgadget', 'replace');
+			gadgetArea.startup();
+			gadgetArea.updateContainerSecurityToken(response.token, response.ttl);
+			if(hash()) {
+				gadgetArea.loadFromHash()
+			}
+		}, function(error) {
+			console.error(error);
+		});
 		query('html').on('click', function(e) {
 			query('.dropdown-menu').parent().removeClass('open');
 		});

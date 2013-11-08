@@ -648,7 +648,7 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 				    popUp.removeChild(popUp.firstChild); 
 				}
 				for(var i=0;i<results.length;i++){
-            		//var row = document.createElement("tr");
+					//var row = document.createElement("tr");
             		var data = document.createElement("li");
             		var title = results[i].getTitle();
             		var id="";
@@ -659,7 +659,8 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
             		}
             		data.innerHTML = title;
             		data.id = id;
-            		//data.setAttribute("style","cursor:pointer");
+            		data.setAttribute("class", "dijitMenuItem");
+            		data.setAttribute("style", "width:350px;overflow: hidden;");
             		data.onclick = function (event) { 
             			context.searchBoxAction.setSuggestedSearch(event,popUp,context);
             		};    		

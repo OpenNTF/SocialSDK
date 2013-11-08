@@ -43,7 +43,7 @@ public class FileAddComment extends BaseFilesTest {
 		assertEquals(fileEntry.getAuthor().getUserUuid(), json.getJsonObject("getModifier").getString("modifierUserId"));
 		assertEquals(fileEntry.getAuthor().getUserState(), json.getJsonObject("getModifier").getString("modifierUserState"));
 		assertEquals("en", json.getString("getLanguage"));
-		assertEquals("true", json.getString("getDeleteWithRecord"));
+		assertEquals("false", json.getString("getDeleteWithRecord"));
 	}
 
 }

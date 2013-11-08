@@ -27,8 +27,11 @@ define([ "../declare", "../lang", "../stringUtil", "./BaseConstants", "./BaseEnt
     					"<title type=\"text\">${getTitle}</title>" +
     					"<content type=\"${contentType}\">${getContent}</content>" +
     					"<summary type=\"text\">${getSummary}</summary>" +
+    					"<contributor>${getEmail}${getUserid}</contributor>" +
     					"${categoryScheme}${getTags}${createEntryData}" + 
     				"</entry>";
+    var EmailTmpl = "<email>${email}</email>";
+    var UseridTmpl = "<snx:userid xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\">${userid}</snx:userid>";
     var CategoryTmpl = "<category term=\"${tag}\"></category>";
     
     /**
@@ -246,14 +249,18 @@ define([ "../declare", "../lang", "../stringUtil", "./BaseConstants", "./BaseEnt
             	if (key == "getContent" && this.contentType == "html") {
             		value = (value && lang.isString(value)) ? value.replace(/</g,"&lt;").replace(/>/g,"&gt;") : value; 
             	}
-            	if (key == "getTags") {
+            	if (key == "getTags" && value) {
                     var tags = value;
                     value = "";
                     for (var tag in tags) {
-                        value += stringUtil.transform(CategoryTmpl, {
-                            "tag" : tags[tag]
-                        });
+                        value += stringUtil.transform(CategoryTmpl, { "tag" : tags[tag] });
                     }
+            	}
+            	if (key == "getEmail" && value) {
+                    value = stringUtil.transform(EmailTmpl, { "email" : value });
+            	}
+            	if (key == "getUserid" && value) {
+                    value = stringUtil.transform(UseridTmpl, { "userid" : value });
             	}
                 return value;
             };

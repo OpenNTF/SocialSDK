@@ -10,7 +10,6 @@ import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import lotus.domino.Document;
 import lotus.domino.NotesException;
@@ -79,7 +78,7 @@ public class PreviewJavaHandler extends PreviewHandler {
 	        execRequest(req, resp, requestParams);
 		} else {
 			PrintWriter pw = resp.getWriter();
-			pw.println("Social Business Tooolkit Playground - Java Snippet Preview Servlet");
+			pw.println("Social Business Toolkit Playground - Java Snippet Preview Servlet");
 			pw.flush();
 		}
 	}

@@ -648,8 +648,8 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 				    popUp.removeChild(popUp.firstChild); 
 				}
 				for(var i=0;i<results.length;i++){
-            		var row = document.createElement("tr");
-            		var data = document.createElement("td");
+            		//var row = document.createElement("tr");
+            		var data = document.createElement("li");
             		var title = results[i].getTitle();
             		var id="";
             		if(searchType=="myCommunities"){
@@ -659,12 +659,12 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
             		}
             		data.innerHTML = title;
             		data.id = id;
-            		data.setAttribute("style","cursor:pointer");
+            		//data.setAttribute("style","cursor:pointer");
             		data.onclick = function (event) { 
             			context.searchBoxAction.setSuggestedSearch(event,popUp,context);
             		};    		
-            		row.appendChild(data);
-            		popUp.appendChild(row);
+            		//row.appendChild(data);
+            		popUp.appendChild(data);
             	}
 				
 			},

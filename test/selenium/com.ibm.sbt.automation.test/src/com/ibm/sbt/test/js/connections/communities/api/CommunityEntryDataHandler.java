@@ -40,8 +40,8 @@ public class CommunityEntryDataHandler extends BaseApiTest {
         Assert.assertEquals("http://communities.ibm.com:2006/service/atom/community/instance?communityUuid=07c9947b-bdf3-4106-95d5-949bd5e0fd9f", json.getString("communityUuid")); 
         Assert.assertEquals("Public Community 2", json.getString("title"));
         Assert.assertEquals("This is a test public community", json.getString("summary"));
-        Assert.assertEquals("https://qs.renovations.com:444/communities/service/html/communityview?communityUuid=07c9947b-bdf3-4106-95d5-949bd5e0fd9f", json.getString("communityUrl"));
-        Assert.assertEquals("https://qs.renovations.com:444/communities/service/atom/community/instance?communityUuid=07c9947b-bdf3-4106-95d5-949bd5e0fd9f", json.getString("communityAtomUrl"));
+        Assert.assertEquals("https://qs.renovations.com:444/communities/service/html/communityview?communityUuid=07c9947b-bdf3-4106-95d5-949bd5e0fd9f", json.getString("alternateUrl"));
+        Assert.assertEquals("https://qs.renovations.com:444/communities/service/atom/community/instance?communityUuid=07c9947b-bdf3-4106-95d5-949bd5e0fd9f", json.getString("selfUrl"));
         Assert.assertEquals("https://qs.renovations.com:444/communities/service/html/image?communityUuid=07c9947b-bdf3-4106-95d5-949bd5e0fd9f&lastMod=1364454917628", json.getString("logoUrl"));
         //TODO: fix after domino 90 switch Assert.assertEquals(new String[] { "community","tag1","tag2","tag3" }, json.getAsArray("tags").toArray());
         Assert.assertEquals("<p dir=\"ltr\">\r\n\t\tThis is a test public community</p>", json.getString("content"));

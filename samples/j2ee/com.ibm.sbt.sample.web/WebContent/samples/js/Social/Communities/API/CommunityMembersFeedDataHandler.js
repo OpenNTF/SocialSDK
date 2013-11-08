@@ -31,9 +31,9 @@ require([ "sbt/base/XmlDataHandler", "sbt/lang", "sbt/dom", "sbt/json", "sbt/xml
 function getResults(dataHandler) {
     return {
         "getEntityId" : dataHandler.getEntityId(),
-        "userid" : dataHandler.getAsString("userid"),
-        "email" : dataHandler.getAsString("email"),
-        "name" : dataHandler.getAsString("name"),
+        "userid" : dataHandler.getAsString("contributorUserid"),
+        "email" : dataHandler.getAsString("contributorEmail"),
+        "name" : dataHandler.getAsString("contributorName"),
         "role" : dataHandler.getAsString("role")
     };
 }

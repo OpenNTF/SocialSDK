@@ -37,10 +37,6 @@ define(['dojo/_base/declare', 'explorer/widgets/gadgetarea/GadgetArea', 'dojo/on
 		    on(this.getExplorerContainer(), 'setpreferences', function(site, url, prefs) {
 		    	self.prefDialog.setPrefs(prefs);
 		    });
-			
-          	if(hash()) {
-          		this.loadFromHash()
-          	}
           },
           
           /**

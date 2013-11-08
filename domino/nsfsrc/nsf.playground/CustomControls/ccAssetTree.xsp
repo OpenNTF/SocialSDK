@@ -36,7 +36,11 @@
 					<xp:this.onkeypress><![CDATA[var kc=event.keyCode?event.keyCode:event.which;
 if(kc==13){dojo.byId('#{id:linkSearch1}').click(); return false;}
 return true;]]></xp:this.onkeypress>
-				</xp:inputText>
+					<xp:this.attrs>
+						<xp:attr name="placeholder"
+							value="Find Snippets">
+						</xp:attr>
+					</xp:this.attrs></xp:inputText>
 				<span title="Submit search">
 					<xp:link escape="true" id="linkSearch1">
 						<xp:image id="image1" alt="Submit search" url="/search.png">

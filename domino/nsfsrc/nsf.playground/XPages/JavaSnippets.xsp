@@ -76,7 +76,7 @@ if(e) {
 if(doc) {	o = {		status:			"ok",		id:				snippetId,		unid:			doc.getUniversalID(),
 		category:		doc.getItemValueString("category"),		author:			doc.getAuthors().get(0),		name:			doc.getItemValueString("name"),		tags:			doc.getItemValueString("tags"),		jsp:			nsf.playground.jsp.JspCompiler.cleanCode(doc.getItemValueString("jsp")),
 		properties:		doc.getItemValueString("properties"),
-		documentation:	doc.getItemValueString("documentation")
+		documentation:	doc.getItemValueString("documentation") || doc.getItemValueString("description") 
 	}
 	o.params = snippetBean.extractParams([o.jsp]);
 	return o;}o = {	status:		"error",	msg:		"Cannot open document with id "+id}return o;]]></xe:this.script>
@@ -235,6 +235,9 @@ if(doc) {	o = {		status:			"ok",		id:				snippetId,		unid:			doc.getUniversa
 		<xp:this.value><![CDATA[function loadFromHash() {
 	if(dojo.hash()) {
 		var obj = dojo.queryToObject(dojo.hash());
+		if(obj.env) {
+			dojo.byId(pageGlobal.cbEnv).value = obj.env;
+		}
 		if(obj.snippet) {
 			setTimeout(function() {loadSnippet(obj.snippet)});
 		} 

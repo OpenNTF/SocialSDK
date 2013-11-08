@@ -86,7 +86,7 @@ if(doc) {
 		tags:			doc.getItemValueString("tags"),
 		xPages:			doc.getItemValueString("XPages"),
 		properties:		doc.getItemValueString("properties"),
-		documentation:	doc.getItemValueString("documentation")
+		documentation:	doc.getItemValueString("documentation") || doc.getItemValueString("description") 
 	}
 	o.params = snippetBean.extractParams([o.xPages]);
 	return o;
@@ -252,6 +252,9 @@ return o;]]></xe:this.script>
 		<xp:this.value><![CDATA[function loadFromHash() {
 	if(dojo.hash()) {
 		var obj = dojo.queryToObject(dojo.hash());
+		if(obj.env) {
+			dojo.byId(pageGlobal.cbEnv).value = obj.env;
+		}
 		if(obj.snippet) {
 			setTimeout(function() {loadSnippet(obj.snippet)});
 		} 

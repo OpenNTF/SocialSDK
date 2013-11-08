@@ -21,6 +21,7 @@ import com.ibm.sbt.services.util.XmlTextUtil;
 import com.ibm.sbt.services.client.base.transformers.AbstractBaseTransformer;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.base.util.EntityUtil;
+import com.ibm.sbt.services.client.connections.communities.model.CommunityXPath;
 
 /**
  * CommunityMemberTransformer provides helper methods for construction of Communities Member XML payload. 
@@ -48,9 +49,9 @@ public class CommunityMemberTransformer extends AbstractBaseTransformer {
 			if (currentElement.contains("role")) {
 				roleXml = getXMLRep(getStream(sourcepath + "Role.xml"),currentElement,XmlTextUtil.escapeXMLChars(currentValue));
 				templateXml = getXMLRep(templateXml, "getRole", roleXml);
-			} else if (currentElement.equalsIgnoreCase("id") || currentElement.equalsIgnoreCase("userid")
-					|| currentElement.equalsIgnoreCase("contributorUid") ||currentElement.equalsIgnoreCase("contributorEmail"))  {
-				// check if user provided email or userid and select the template accodingly
+			} else if (currentElement.equalsIgnoreCase(CommunityXPath.contributorUserid.toString()) 
+						||currentElement.equalsIgnoreCase(CommunityXPath.contributorEmail.toString()))  {
+				// check if user provided email or userid and select the template accordingly
 				if (EntityUtil.isEmail(currentValue)) {
 					useridXml = getXMLRep(getStream(sourcepath+ "EmailTmpl.xml"), "email", currentValue);
 					templateXml = getXMLRep(templateXml, "getEmail", useridXml);

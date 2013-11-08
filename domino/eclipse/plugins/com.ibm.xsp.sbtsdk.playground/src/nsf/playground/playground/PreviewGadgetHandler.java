@@ -93,7 +93,7 @@ public class PreviewGadgetHandler extends PreviewHandler {
 		}
 		
 		PrintWriter pw = resp.getWriter();
-		pw.println("Social Business Tooolkit Playground - OpenSocial Gadget Snippet Preview Servlet");
+		pw.println("Social Business Toolkit Playground - OpenSocial Gadget Snippet Preview Servlet");
 		pw.flush();
 		
 		// Return the different parts of the gadget

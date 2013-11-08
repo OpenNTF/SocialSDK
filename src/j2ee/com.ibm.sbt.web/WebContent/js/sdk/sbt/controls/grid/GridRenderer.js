@@ -67,21 +67,18 @@ define([ "../../declare", "../../dom", "../../lang", "../../widget/grid/_GridRen
            else {
               this.renderPager(grid, el, items, data);
               this.renderSorter(grid, el, data);
-              
+              var container = null;
               if (!this.containerType || this.containerType == "grid") {
-	              var tbody = this.renderTable(grid, el, items, data);
-	              for (var i=0; i<items.length; i++) {
-	                  this.renderItem(grid, tbody, data, items[i], i, items);
-	              }
+            	  container = this.renderTable(grid, el, items, data);
               } else {
             	  if (this.containerType == "ul") {
-            		  var ul = this.renderUnorderedList(grid, el, items, data);
-            		  
-            		  for (var i=0; i<items.length; i++) {
-    	                  this.renderItem(grid, ul, data, items[i], i, items);
-    	              }
+            		  container = this.renderUnorderedList(grid, el, items, data);
+            	  } else if (this.containerType = "ol") {
+            		  container = this.renderOrderedList(grid, el, items, data);
             	  }
-            	  
+              }
+              for (var i=0; i<items.length; i++) {
+                  this.renderItem(grid, container, data, items[i], i, items);
               }
               this.renderFooter(grid, el, items, data);
            }
@@ -195,10 +192,26 @@ define([ "../../declare", "../../dom", "../../lang", "../../widget/grid/_GridRen
          */
         renderUnorderedList: function(grid, el, items, data) {       	
             var ul = this._create("ul", {
-               // summary:this.nls.summary
                 role:"presentation"
             }, el);
             return ul;
+        },
+        
+        /***
+         * Creates an ordered list.
+         * 
+         * @method - renderOrderedList
+         * @param grid - the grid
+         * @param el - the current element
+         * @param items - all of the items in the current row
+         * @param data - the data associated with the current row
+         * @returns - A table body element, that is attached to a table
+         */
+        renderOrderedList: function(grid, el, items, data) {       	
+            var ol = this._create("ol", {
+                role:"presentation"
+            }, el);
+            return ol;
         },
         
         /**

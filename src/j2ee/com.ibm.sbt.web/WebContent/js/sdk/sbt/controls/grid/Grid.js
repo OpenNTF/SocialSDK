@@ -121,7 +121,7 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
             
             if (!this.renderer) {
                 if (args && args.rendererArgs) {
-                	args.rendererArgs = lang.mixin(args.rendererArgs, args);
+                	args.rendererArgs = lang.mixin(args.rendererArgs, {containerType : args.containerType});
                     this.renderer = this.createDefaultRenderer(args.rendererArgs);
                 } else if (this.options) {
                     var rendererArgs = this.options[this.defaultOption].rendererArgs;
@@ -130,9 +130,9 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
                     }
                     
                     if (rendererArgs == null) {
-                    	rendererArgs = lang.mixin({}, args);
+                    	rendererArgs = lang.mixin({}, {containerType : args.containerType});
                     } else {
-                    	rendererArgs = lang.mixin(rendererArgs, args);
+                    	rendererArgs = lang.mixin(rendererArgs, {containerType : args.containerType});
                     }
 
                     this.renderer = this.createDefaultRenderer(rendererArgs);

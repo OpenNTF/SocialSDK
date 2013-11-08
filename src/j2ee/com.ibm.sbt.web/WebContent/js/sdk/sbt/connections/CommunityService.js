@@ -20,22 +20,19 @@
  * @module sbt.connections.CommunityService
  */
 define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", "./CommunityConstants", "../base/BaseService",
-         "../base/AtomEntity", "../base/BaseEntity", "../base/XmlDataHandler", "./ForumService", "../pathUtil" ], 
-    function(declare,config,lang,stringUtil,Promise,consts,BaseService,AtomEntity,BaseEntity,XmlDataHandler,ForumService,pathUtil) {
+         "../base/AtomEntity", "../base/XmlDataHandler", "./ForumService", "../pathUtil" ], 
+    function(declare,config,lang,stringUtil,Promise,consts,BaseService,AtomEntity,XmlDataHandler,ForumService,pathUtil) {
 
 	var CategoryCommunity = "<category term=\"community\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category>";
-    //var CommunityTmpl = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:app=\"http://www.w3.org/2007/app\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\"><title type=\"text\">${getTitle}</title><content type=\"html\">${getContent}</content><category term=\"community\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category>${getTags}<snx:communityType>${getCommunityType}</snx:communityType><snx:isExternal>false</snx:isExternal>${getCommunityUuid}${getCommunityTheme}</entry>";
-    var CategoryTmpl = "<category term=\"${tag}\"></category>";
-    var IsExternalTmpl = "<snx:isExternal>${isExternal}</snx:isExternal>"
+	var CategoryMember = "<category term=\"person\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category>";
+	var CategoryInvite = "<category term=\"invite\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category>";
+	var CategoryEvent = "<category term=\"event\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category>";
+    
+	var IsExternalTmpl = "<snx:isExternal>${isExternal}</snx:isExternal>"
     var CommunityTypeTmpl = "<snx:communityType>${getCommunityType}</snx:communityType>";
     var CommunityUuidTmpl = "<snx:communityUuid xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\">${getCommunityUuid}</snx:communityUuid>";
     var CommunityThemeTmpl = "<snx:communityTheme xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\" snx:uuid=\"default\">${getCommunityTheme}</snx:communityTheme>";
-    var MemberTmpl = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:app=\"http://www.w3.org/2007/app\" xmlns:opensearch=\"http://a9.com/-/spec/opensearch/1.1/\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\"><contributor>${getEmail}${getUserid}</contributor><snx:role xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\" component=\"http://www.ibm.com/xmlns/prod/sn/communities\">${getRole}</snx:role><category term=\"person\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category></entry>";
-    var EmailTmpl = "<email>${email}</email>";
-    var UseridTmpl = "<snx:userid xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\">${userid}</snx:userid>";
-    var TitleTmpl = "<title type=\"text\">${title}</title>";
-    var ContentTmpl = "<content type=\"text\">${content}</content>";
-    var InviteTmpl = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:app=\"http://www.w3.org/2007/app\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\"><category term=\"invite\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category>${getTitle}${getContent}<contributor>${getEmail}${getUserid}</contributor></entry>";
+    var RoleTmpl = "<snx:role xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\" component=\"http://www.ibm.com/xmlns/prod/sn/communities\">${getRole}</snx:role>";
     
     /*
      * CommunityDataHandler class.
@@ -109,33 +106,6 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             return stringUtil.trim(postData);
         },
         
-        /*
-         * Construct a post data for a Community
-         */
-        _constructCommunityPostData : function(community) {
-            var transformer = function(value,key) {
-                if (key == "getTags") {
-                    var tags = value;
-                    value = "";
-                    for (var tag in tags) {
-                        value += stringUtil.transform(CategoryTmpl, {
-                            "tag" : tags[tag]
-                        });
-                    }
-                } else if (key == "getCommunityType" && !value) {
-                    value = consts.Restricted;
-                } else if (key == "getCommunityUuid" && value) {
-                    value = stringUtil.transform(CommunityUuidTmpl, { "communityUuid" : value });
-                } else if (key == "getCommunityTheme" && value) {
-                    value = stringUtil.transform(CommunityThemeTmpl, { "communityTheme" : value });
-                }
-                return value;
-            };
-            
-            var postData = stringUtil.transform(CommunityTmpl, community, transformer, community);
-            return stringUtil.trim(postData);
-        },
-
         /**
          * Return the value of IBM Connections community ID from community ATOM
          * entry document.
@@ -253,9 +223,10 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * 
          * @method getCommunityUrl
          * @return {String} Community URL of the community
+         * @deprecated Use getAlternateUrl instead
          */
         getCommunityUrl : function() {
-            return this.getAsString("communityUrl");
+            return this.getAlternateUrl();
         },
 
         /**
@@ -466,8 +437,12 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
      * @class Member
      * @namespace sbt.connections
      */
-    var Member = declare(BaseEntity, {
+    var Member = declare(AtomEntity, {
 
+    	xpath : consts.MemberXPath,
+    	namespaces : consts.CommunityNamespaces,
+    	categoryScheme : CategoryMember,
+    	    	
         /**
          * The UUID of the community associated with this Member
          */
@@ -486,6 +461,20 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         },
 
         /**
+         * Return extra entry data to be included in post data for this entity.
+         * 
+         * @returns {String}
+         */
+        createEntryData : function() {
+        	var postData = "";
+            var transformer = function(value,key) {
+                return value;
+            };
+            postData += stringUtil.transform(RoleTmpl, this, transformer, this);
+            return stringUtil.trim(postData);
+        },
+        
+        /**
          * Return the community UUID.
          * 
          * @method getCommunityUuid
@@ -503,7 +492,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          */
 
         getName : function() {
-            return this.getAsString("name");
+            return this.getAsString("contributorName");
         },
 
         /**
@@ -514,7 +503,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          */
 
         setName : function(name) {
-            return this.setAsString("name", name);
+            return this.setAsString("contributorName", name);
         },
 
         /**
@@ -524,7 +513,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @return {String} Community member userId
          */
         getUserid : function() {
-            return this.getAsString("userid");
+            return this.getAsString("contributorUserid");
         },
 
         /**
@@ -534,7 +523,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @return {String} Community member userId
          */
         setUserid : function(userid) {
-            return this.setAsString("userid", userid);
+            return this.setAsString("contributorUserid", userid);
         },
 
         /**
@@ -544,7 +533,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @return {String} Community member email
          */
         getEmail : function() {
-            return this.getAsString("email");
+            return this.getAsString("contributorEmail");
         },
 
         /**
@@ -555,7 +544,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          */
 
         setEmail : function(email) {
-            return this.setAsString("email", email);
+            return this.setAsString("contributorEmail", email);
         },
 
         /**
@@ -598,12 +587,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             var self = this;
             var callbacks = {
                 createEntity : function(service,data,response) {
-                    self.setDataHandler(new XmlDataHandler({
-                        data : data,
-                        namespaces : consts.Namespaces,
-                        xpath : consts.MemberXPath
-                    }));
-                    self.id = self.dataHandler.getEntityId();
+                    self.setData(data);
                     return self;
                 }
             };
@@ -646,18 +630,17 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
      * @class Invite
      * @namespace sbt.connections
      */
-    var Invite = declare(BaseEntity, {
+    var Invite = declare(AtomEntity, {
 
+    	xpath : consts.InviteXPath,
+    	namespaces : consts.CommunityNamespaces,
+    	categoryScheme : CategoryInvite,
+    	    	
         /**
          * The UUID of the community associated with this Invite
          */
         communityUuid : null,
 
-        /**
-         * The userid of the invitee
-         */
-        userid : null,
-        
         /**
          * The UUID if the invitee associated with this Invite
          */
@@ -752,8 +735,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @return {String} userid
          */
         setUserid : function(userid) {
-			this.userid = userid;
-			return this;
+        	return this.setAsString("contributorUserid", userid);
         },
         
         /**
@@ -763,10 +745,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @return {String} userid
          */
         getUserid : function() {
-        	if (!this.userid && this.getContributor()) {
-				this.userid = this.getContributor().userid || null;
-			} 
-			return this.userid;
+        	return this.getAsString("contributorUserid");
         },
         
         /**
@@ -776,8 +755,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @return {String} email
          */
         setEmail : function(email) {
-			this.email = email;
-			return this;
+        	return this.setAsString("contributorEmail", email);
         },
         
         /**
@@ -787,94 +765,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @return {String} email
          */
         getEmail : function() {
-        	if (!this.email && this.getContributor()) {
-				this.email = this.getContributor().email || null;
-			} 
-			return this.email;
-        },
-        
-        /**
-         * Return the id of the invite.
-         * 
-         * @method getId
-         * @return {String} id
-         */
-        getId: function() {
-    		return this.getAsString("uid");
-    	},
-
-        /**
-         * Return the community invite title.
-         * 
-         * @method getTitle
-         * @return {String} Community invite title
-         */
-        getTitle : function() {
-            return this.getAsString("title");
-        },
-
-        /**
-         * Set the community invite title.
-         * 
-         * @method setTitle
-         * @param {String} Community invite title
-         */
-        setTitle : function(name) {
-            return this.setAsString("title", name);
-        },
-
-        /**
-         * Return the community invite content.
-         * 
-         * @method getId
-         * @return {String} Community invite content
-         */
-        getContent : function() {
-            return this.getAsString("content");
-        },
-
-        /**
-         * Set the community invite content.
-         * 
-         * @method getId
-         * @return {String} Community invite content
-         */
-        setContent : function(userid) {
-            return this.setAsString("content", userid);
-        },
-
-        /**
-         * Return the last updated date of the ATOM entry document.
-         * 
-         * @method getUpdated
-         * @return {Date} Last updated date of the entry
-         */
-        getUpdated : function() {
-            return this.getAsDate("updated");
-        },
-        
-        /**
-         * Gets an author of IBM Connections community invite.
-         * 
-         * @method getAuthor
-         * @return {Object} Author of the community invite
-         */
-        getAuthor : function() {
-            return this.getAsObject(
-            		[ "authorUserid", "authorName" ],
-            		[ "userid", "name" ]);
-        },
-
-        /**
-         * Gets a contributor of IBM Connections community invite.
-         * 
-         * @method getContributor
-         * @return {Object} Contributor of the community invite
-         */
-        getContributor : function() {
-            return this.getAsObject(
-            		[ "contributorUserid", "contributorName", "contributorEmail", "contributorUserState" ],
-            		[ "userid", "name", "email", "userState" ]);
+        	return this.getAsString("contributorEmail");
         },
         
         /**
@@ -901,12 +792,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             var self = this;
             var callbacks = {
                 createEntity : function(service,data,response) {
-                    self.setDataHandler(new XmlDataHandler({
-                        service :  service,
-                        data : data,
-                        namespaces : consts.Namespaces,
-                        xpath : consts.InviteXPath
-                    }));
+                    self.setData(data);
                     return self;
                 }
             };
@@ -966,8 +852,12 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
      * @class Event
      * @namespace sbt.connections
      */
-    var Event = declare(BaseEntity, {
+    var Event = declare(AtomEntity, {
 
+    	xpath : consts.EventXPath,
+    	namespaces : consts.CommunityNamespaces,
+    	categoryScheme : CategoryEvent,
+    	    	
         /**
          * Constructor for Event.
          * 
@@ -975,7 +865,6 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @param args
          */
         constructor : function(args) {
-            this.inherited(arguments, [ args ]);
         },
 
         /**
@@ -986,16 +875,6 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          */
         getCommunityUuid : function() {
             return this.getAsString("communityUuid");
-        },
-        
-        /**
-         * Return the id of the event.
-         * 
-         * @method getId
-         * @return {String} id
-         */
-        getId : function() {
-            return this.getAsString("uid");
         },
         
         /**
@@ -1022,47 +901,6 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         },
 
         /**
-         * Return the community event title.
-         * 
-         * @method getTitle
-         * @return {String} Community event title
-         */
-
-        getTitle : function() {
-            return this.getAsString("title");
-        },
-
-        /**
-         * Set the community event title.
-         * 
-         * @method setTitle
-         * @param {String} Community event title
-         */
-        setTitle : function(name) {
-            return this.setAsString("title", name);
-        },
-
-        /**
-         * Return the community event summary.
-         * 
-         * @method getSummary
-         * @return {String} Community event summary
-         */
-        getSummary : function() {
-            return this.getAsString("summary");
-        },
-
-        /**
-         * Set the community event summary.
-         * 
-         * @method setSummary
-         * @return {String} Community event summary
-         */
-        setSummary : function(summary) {
-            return this.setAsString("summary", summary);
-        },
-        
-        /**
          * return the atom event url.
          * 
          * @returns
@@ -1083,36 +921,10 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * 
          * @returns
          */
-        getContent : function(){
-            return this.getAsString("content");
-        },
-        
-        /**
-         * 
-         * @returns
-         */
         getLocation : function(){
             return this.getAsString("location");
         },
 
-        /**
-         * Gets an author of IBM Connections community event.
-         * 
-         * @method getAuthor
-         * @return {Object} Author of the community event
-         */
-        getAuthor : function() {
-            if (!this._author) {
-                this._author = {
-                    userid : this.getAsString("authorUserid"),
-                    name : this.getAsString("authorName"),
-                    email : this.getAsString("authorEmail"),
-                    authorState : this.getAsString("authorState")
-                };
-            }
-            return this._author;
-        },
-        
         /**
          * Gets the recurrence information of the event.
          * 
@@ -1141,22 +953,6 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 };
             }
             return this._recurrence;
-        },
-
-        /**
-         * Gets a contributor of IBM Connections community event.
-         * 
-         * @method getContributor
-         * @return {Member} contributor Contributor of the community event
-         */
-        getContributor : function() {
-            if (!this._contributor) {
-                this._contributor = {
-                    userid : this.getAsString("contributorUserid"),
-                    name : this.getAsString("contributorName")
-                };
-            }
-            return this._contributor;
         }
 
     });
@@ -1197,7 +993,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
     /*
      * Callbacks used when reading a feed that contains Community entries.
      */
-    var ConnectionsCommunityFeedCallbacks = {
+    var CommunityFeedCallbacks = {
         createEntities : function(service,data,response) {
             return new CommunityDataHandler({
                 service :  service,
@@ -1217,7 +1013,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
     /*
      * Callbacks used when reading a feed that contains Member entries.
      */
-    var ConnectionsMemberFeedCallbacks = {
+    var MemberFeedCallbacks = {
         createEntities : function(service,data,response) {
             return new XmlDataHandler({
                 service :  service,
@@ -1231,7 +1027,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
     /*
      * Callbacks used when reading a feed that contains Invite entries.
      */
-    var ConnectionsInviteFeedCallbacks = {
+    var InviteFeedCallbacks = {
         createEntities : function(service,data,response) {
             return new XmlDataHandler({
                 service :  service,
@@ -1241,16 +1037,9 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             });
         },
         createEntity : function(service,data,response) {
-            var entryHandler = new XmlDataHandler({
-                service :  service,
-                data : data,
-                namespaces : consts.Namespaces,
-                xpath : consts.InviteXPath
-            });
             return new Invite({
                 service : service,
-                id : entryHandler.getEntityId(),
-                dataHandler : entryHandler
+                data : data
             });
         }
     };
@@ -1258,7 +1047,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
     /*
      * Callbacks used when reading a feed that contains Event entries.
      */
-    var ConnectionsEventFeedCallbacks = {
+    var EventFeedCallbacks = {
         createEntities : function(service,data,response) {
             return new XmlDataHandler({
                 service :  service,
@@ -1268,40 +1057,17 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             });
         },
         createEntity : function(service,data,response) {
-            var entryHandler = new XmlDataHandler({
-                service :  service,
-                data : data,
-                namespaces : consts.Namespaces,
-                xpath : consts.EventXPath
-            });
             return new Event({
                 service : service,
-                id : entryHandler.getEntityId(),
-                dataHandler : entryHandler
+                data : data
             });
         }
     };
     
-    var ConnectionsEventCallbacks = {
-        createEntity : function(service,data,response) {
-            var entryHandler = new XmlDataHandler({
-                service :  service,
-                data : data,
-                namespaces : consts.Namespaces,
-                xpath : consts.EventXPath
-            });
-            return new Event({
-                service : service,
-                id : entryHandler.getEntityId(),
-                dataHandler : entryHandler
-            });
-        }
-    };
-
     /*
      * Callbacks used when reading an entry that contains a Community.
      */
-    var ConnectionsCommunityCallbacks = {
+    var CommunityCallbacks = {
         createEntity : function(service,data,response) {
             return new Community({
                 service : service,
@@ -1311,9 +1077,9 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
     };
     
     /*
-     * Callbacks used when reading an feed that contains community events.
+     * Callbacks used when reading an feed that contains community forum topics.
      */
-    var ConnectionsForumTopicFeedCallbacks = {
+    var ForumTopicFeedCallbacks = {
         createEntities : function(service,data,response) {
             return new XmlDataHandler({
                 service :  service,
@@ -1397,7 +1163,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 query : args || {}
             };
             
-            return this.getEntities(consts.AtomCommunitiesAll, options, this._getCommunityFeedCallbacks());
+            return this.getEntities(consts.AtomCommunitiesAll, options, CommunityFeedCallbacks);
         },
 
         /**
@@ -1418,7 +1184,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 query : args || {}
             };
             
-            return this.getEntities(consts.AtomCommunitiesMy, options, this._getCommunityFeedCallbacks());
+            return this.getEntities(consts.AtomCommunitiesMy, options, CommunityFeedCallbacks);
         },
 
         /**
@@ -1445,7 +1211,16 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 handleAs : "text",
                 query : requestArgs
             };
-            var callbacks = this._getMemberFeedCallbacks(communityUuid);
+            
+            var callbacks = lang.mixin({
+                createEntity : function(service,data,response) {
+                    return new Member({
+                        service : service,
+                        communityUuid : communityUuid,
+                        data : data
+                    });
+                }
+            }, MemberFeedCallbacks);
             
             return this.getEntities(consts.AtomCommunityMembers, options, callbacks);
         },
@@ -1513,7 +1288,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 query : args || {}
             };
                 
-            return this.getEntities(consts.AtomCommunityEvents, options, this._getEventFeedCallbacks());
+            return this.getEntities(consts.AtomCommunityEvents, options, EventFeedCallbacks);
         },
         
         /**
@@ -1533,7 +1308,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 }
             };
                 
-            return this.getEntity(consts.AtomCommunityEvent, options, eventInstUuid, this._getEventCallbacks());
+            return this.getEntity(consts.AtomCommunityEvent, options, eventInstUuid, EventFeedCallbacks);
         },
 
         /**
@@ -1550,7 +1325,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 query : args || {}
             };
             
-            return this.getEntities(consts.AtomCommunityInvitesMy, options, this._getInviteFeedCallbacks());
+            return this.getEntities(consts.AtomCommunityInvitesMy, options, InviteFeedCallbacks);
         },      
 
         /**
@@ -1576,7 +1351,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 query : requestArgs
             };
             
-            return this.getEntities(consts.AtomCommunityInvites, options, this._getInviteFeedCallbacks());
+            return this.getEntities(consts.AtomCommunityInvites, options, InviteFeedCallbacks);
         },      
 
         /**
@@ -1603,7 +1378,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 query : requestArgs
             };
             
-            return this.getEntities(consts.AtomCommunitySubCommunities, options, this._getCommunityFeedCallbacks());
+            return this.getEntities(consts.AtomCommunitySubCommunities, options, CommunityFeedCallbacks);
         },
 
         /**
@@ -1628,7 +1403,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 query : requestArgs
             };
             
-            return this.getEntities(consts.AtomCommunityForumTopics, options, this._getForumTopicFeedCallbacks());
+            return this.getEntities(consts.AtomCommunityForumTopics, options, ForumTopicFeedCallbacks);
         },
         
         /**
@@ -1819,7 +1594,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 method : "POST",
                 query : requestArgs,
                 headers : consts.AtomXmlHeaders,
-                data : this._constructMemberPostData(member)
+                data : member.createPostData()
             };
             
             return this.updateEntity(consts.AtomCommunityMembers, options, callbacks, args);
@@ -1843,7 +1618,6 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
 				return promise;
 			}
 
-			var payload = this._constructMemberPostData(member);
 			var requestArgs = {
 	                communityUuid : communityUuid
 	        };
@@ -1856,7 +1630,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
 				method : "PUT",
 				headers : consts.AtomXmlHeaders,
 				query : requestArgs,
-				data : payload
+				data : member.createPostData()
 			};
 
 			var callbacks = {
@@ -1935,12 +1709,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
 
             var callbacks = {};
             callbacks.createEntity = function(service,data,response) {
-            	var dataHandler = new XmlDataHandler({
-            		data : data, 
-            		namespaces : consts.Namespaces, 
-            		xpath : consts.InviteXPath 
-            	});
-                invite.setDataHandler(dataHandler);
+                invite.setData(data);
                 return invite;
             };
 
@@ -1952,7 +1721,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 method : "POST",
                 query : requestArgs,
                 headers : consts.AtomXmlHeaders,
-                data : this._constructInvitePostData(invite)
+                data : invite.createPostData()
             };
             
             return this.updateEntity(consts.AtomCommunityInvites, options, callbacks, args);
@@ -2008,12 +1777,13 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             	method : "POST",
         		query : requestArgs,
                 headers : consts.AtomXmlHeaders,
-                data : this._constructInvitePostData(invite)
+                data : invite.createPostData()
             };
             
             // return the community id for the community whose invite is accepted in the argument of the success promise.
             var callbacks = {}; 
-            callbacks.createEntity = function(service,data,response) {                
+            callbacks.createEntity = function(service,data,response) { 
+            	invite.setData(data);
                 return invite;
             };
             
@@ -2134,70 +1904,6 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
 		// Internals
 		//
        
-        /*
-         * Callbacks used when reading a feed that contains Community entries.
-         */
-        _getCommunityFeedCallbacks: function() {
-            return ConnectionsCommunityFeedCallbacks;
-        },
-
-        /*
-         * Callbacks used when reading a feed that contains forum topic entries.
-         */
-        _getForumTopicFeedCallbacks: function() {
-            return ConnectionsForumTopicFeedCallbacks;
-        },
-
-        /*
-         * Callbacks used when reading a feed that contains Member entries.
-         */
-        _getMemberFeedCallbacks: function(communityUuid) {
-            var self = this;
-            return lang.mixin({
-                createEntity : function(service,data,response) {
-                    var entryHandler = new CommunityDataHandler({
-                        data : data,
-                        namespaces : consts.Namespaces,
-                        xpath : consts.MemberXPath
-                    });
-                    return new Member({
-                        service : service,
-                        id : entryHandler.getEntityId(),
-                        communityUuid : communityUuid,
-                        dataHandler : entryHandler
-                    });
-                }
-            }, ConnectionsMemberFeedCallbacks);
-        },
-
-        /*
-         * Callbacks used when reading a feed that contains Invite entries.
-         */
-        _getInviteFeedCallbacks: function() {
-            return ConnectionsInviteFeedCallbacks;
-        },
-        
-        /*
-         * Callbacks used when reading a feed that contains Event entries.
-         */
-        _getEventFeedCallbacks: function() {
-            return ConnectionsEventFeedCallbacks;
-        },
-        
-        /*
-         * Callbacks used when reading a entry that contains an Event.
-         */
-        _getEventCallbacks: function(){
-            return ConnectionsEventCallbacks;
-        },
-
-        /*
-         * Callbacks used when reading an entry that contains a Community.
-         */
-        getCommunityCallbacks: function() {
-            return ConnectionsCommunityCallbacks;
-        },
-        
         /*
          * Return a Community instance from Community or JSON or String. Throws
          * an error if the argument was neither.
@@ -2351,64 +2057,6 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             if (!member || (!member.getUserid() && !member.getEmail())) {
                 return this.createBadRequestPromise("Invalid argument, member with userid or email must be specified.");
             }
-        },
-
-        /*
-         * Construct a post data for a Member
-         */
-        _constructMemberPostData : function(member) {
-            var transformer = function(value,key) {
-                if (key == "getEmail") {
-                    if (value) {
-                        value = stringUtil.transform(EmailTmpl, {
-                            "email" : value
-                        });
-                    }
-                }
-                if (key == "getUserid") {
-                    if (value) {
-                        value = stringUtil.transform(UseridTmpl, {
-                            "userid" : value
-                        });
-                    }
-                }
-                if(key == "getRole") {
-                	value = member.getRole();
-                }
-                return value;
-            };
-            return stringUtil.transform(MemberTmpl, member, transformer, member);
-        },
-        
-        /*
-         * Construct post data for an invite
-         */
-        _constructInvitePostData: function(invite){
-        	var transformer = function(value,key) {        		
-        		var returnVal = null;
-                if (key == "getTitle" && invite.getTitle()) {
-                   	returnVal = stringUtil.transform(TitleTmpl, {
-                           "title" : invite.getTitle()
-                    });
-                };
-                if (key == "getContent" && invite.getContent()) {
-                   	returnVal = stringUtil.transform(ContentTmpl, {
-                           "content" : invite.getContent()
-                    });
-                };
-                if (key == "getEmail" && invite.getEmail()) {
-                   	returnVal = stringUtil.transform(EmailTmpl, {
-                           "email" : invite.getEmail()
-                    });
-                };
-                if (key == "getUserid" && invite.getUserid()) {
-                   	returnVal = stringUtil.transform(UseridTmpl, {
-                           "userid" : invite.getUserid()
-                    });
-                }
-                return returnVal;
-            };
-            return stringUtil.transform(InviteTmpl, invite, transformer, null);
         }
 
     });

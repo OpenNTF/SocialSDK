@@ -19,14 +19,15 @@
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
 <%@page	import="com.ibm.sbt.services.client.connections.communities.Community"%>
+<%@page	import="com.ibm.sbt.services.client.connections.communities.CommunityList"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
-<%@page import="com.ibm.sbt.services.client.connections.communities.Bookmark"%>
-<%@page	import="com.ibm.sbt.services.client.connections.communities.BookmarkList"%>
+<%@page import="com.ibm.sbt.services.client.connections.bookmarks.Bookmark"%>
+<%@page	import="com.ibm.sbt.services.client.connections.bookmarks.BookmarkList"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <html>
 <head>
-<title>SBT JAVA Sample - Get Community by ID</title>
+<title>Community Bookmarks</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
@@ -35,25 +36,31 @@
 	<div id="content">
 	<%
 		try {
-			CommunityService communityService = new CommunityService();
-			Collection<Community> communities = communityService.getPublicCommunities();
-			Community community = communities.iterator().next();
-			
-			BookmarkList bookmarks = communityService.getBookmarks(community.getCommunityUuid());
-			if(bookmarks.getTotalResults() > 0 ){
-				out.println("<br>Listing Bookmarks of a Community <br>");
-				for (Bookmark bookmark : bookmarks) {
-					out.println("<b>Bookmarks Title : </b> " + bookmark.getTitle());
-					out.println("<br>");
-				}
-			}
-			else
-				out.println("No Bookmarks found for this Community");			
-		} catch (Throwable e) {
-			out.println("<pre>");
-			out.println(e.getMessage());
-			out.println("</pre>");
-		}
+                CommunityService communityService = new CommunityService();
+                CommunityList communities = communityService.getPublicCommunities();
+                if(communities.size() > 0){
+                        Community community = communities.get(0);
+                        BookmarkList bookmarks = communityService.getBookmarks(community.getCommunityUuid());
+                        if(bookmarks.getTotalResults() > 0 ){
+                                out.println("<br>Listing Bookmarks of a Community <br>");
+                                for (Bookmark bookmark : bookmarks) {
+                                        out.println("Title : " + bookmark.getTitle()+"<br>");
+                                        out.println("href : " + bookmark.getHref()+"<br>");
+                                        out.println("Content : " + bookmark.getContent()+"<br>");
+                                        out.println("<br>");
+                                }
+                        }
+                        else
+                                out.println("No Bookmarks found for this Community");        
+                }
+                else{
+                        out.println("No Communities exist");        
+                }                
+        } catch (Throwable e) {
+                out.println("<pre>");
+                out.println(e.getMessage());
+                out.println("</pre>");
+        }
 	%>
 	</div>
 </body>

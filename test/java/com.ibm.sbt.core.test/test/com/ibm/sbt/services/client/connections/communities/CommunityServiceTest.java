@@ -14,6 +14,8 @@ import org.junit.Test;
 
 import com.ibm.sbt.services.BaseUnitTest;
 import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.client.connections.bookmarks.Bookmark;
+import com.ibm.sbt.services.client.connections.bookmarks.BookmarkList;
 import com.ibm.sbt.services.client.connections.forums.TopicList;
 import com.ibm.sbt.services.client.connections.forums.model.BaseForumEntity;
 import com.ibm.sbt.test.lib.TestEnvironment;

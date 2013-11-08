@@ -33,7 +33,8 @@ import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.base.util.EntityUtil;
-import com.ibm.sbt.services.client.connections.communities.feedhandler.BookmarkFeedHandler;
+import com.ibm.sbt.services.client.connections.bookmarks.BookmarkList;
+import com.ibm.sbt.services.client.connections.bookmarks.BookmarkService;
 import com.ibm.sbt.services.client.connections.communities.feedhandler.CommunityFeedHandler;
 import com.ibm.sbt.services.client.connections.files.AccessType;
 import com.ibm.sbt.services.client.connections.files.File;
@@ -332,16 +333,14 @@ public class CommunityService extends BaseService {
 		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
 		String requestUrl = resolveCommunityUrl(CommunityEntity.COMMUNITY.getCommunityEntityType(),
 				CommunityType.BOOKMARKS.getCommunityType());
-		
-		BookmarkList bookmarks = null;
+		BookmarkList bookmarks;
 		try {
-			bookmarks = (BookmarkList) getEntities(requestUrl, parameters, new BookmarkFeedHandler(this));
-		} catch (ClientServicesException e) {
+			BookmarkService svc = new BookmarkService(this.endpoint);
+			bookmarks = svc.getAllBookmarks(parameters);
+
+		} catch (Exception e) {
 			throw new CommunityServiceException(e, Messages.CommunityBookmarksException, communityUuid);
-		} catch (IOException e) {
-			throw new CommunityServiceException(e, Messages.CommunityBookmarksException, communityUuid);
-		}
-		
+		} 
 		return bookmarks;
 
 	}

@@ -100,9 +100,7 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
             this.selectedRows = [];
             
             if (args.containerType) {
-            	if (args.containerType == "ul") {
-            		this.templatePath = dojo.moduleUrl("sbt", "controls/grid/templates/UnorderedList.html");
-            	}
+            	this.containerTyp = args.containerType;
             }
   
             

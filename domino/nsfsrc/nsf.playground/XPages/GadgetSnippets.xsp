@@ -91,7 +91,7 @@ if(doc) {
 		css:			doc.getItemValueString("css"),
 		json:			doc.getItemValueString("json"),
 		properties:		doc.getItemValueString("properties"),
-		documentation:	doc.getItemValueString("documentation")
+		documentation:	doc.getItemValueString("documentation") || doc.getItemValueString("description") 
 	}
 	return o;
 }

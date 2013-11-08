@@ -664,7 +664,6 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
             		data.onclick = function (event) { 
             			context.searchBoxAction.setSuggestedSearch(event,popUp,context);
             		};    		
-            		//row.appendChild(data);
             		popUp.appendChild(data);
             	}
 				

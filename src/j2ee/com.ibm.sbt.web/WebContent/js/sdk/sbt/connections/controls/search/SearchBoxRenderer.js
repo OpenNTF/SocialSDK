@@ -63,7 +63,7 @@ define(["../../../declare",
 		 */
 		getDomNode: function(SearchBox){
 			
-			var htmlTemplate = "";
+			var htmlTemplate = ""; 
 			
 			if(SearchBox.predefinedSearch){
 				var domStr = this._substituteItems(SingleApplicationSearch, this);

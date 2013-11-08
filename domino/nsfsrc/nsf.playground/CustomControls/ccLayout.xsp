@@ -25,69 +25,71 @@ if(compositeData.wholePage)view.setStyle("overflow: hidden");}]]></xp:this.after
 			<xp:callback xp:key="PlaceBarActions" facetName="PlaceBarActions"
 				id="callback3">
 			</xp:callback>
-			<xp:panel xp:key="MastFooter" styleClass="mastFooter" style="text-align:center; margin-bottom: 5px;">
+			<xp:panel xp:key="MastFooter" styleClass="mastFooter"
+				style="text-align:center; margin-bottom: 5px;">
 				<xc:ApacheLicense></xc:ApacheLicense>
 			</xp:panel>
 		</xe:this.facets>
 		<xe:this.configuration>
-			<xe:applicationConfiguration legalLogoAlt="IBM Corp."
-				navigationPath="${javascript:compositeData.navigationPath}"
+			<xe:applicationConfiguration
+				legalLogoAlt="IBM Corp." navigationPath="${javascript:compositeData.navigationPath}"
 				defaultNavigationPath="${javascript:compositeData.defaultNavigationPath}"
-				productLogoHeight="29px" productLogoWidth="77px"
-				productLogoStyle="margin-left:-15px" footer="false" placeBar="false"
-				titleBar="false" legal="false">
+				productLogoHeight="29px" productLogoWidth="77px" productLogoStyle="margin-left:-15px"
+				footer="false" placeBar="false" titleBar="false" legal="false">
 				<xe:this.bannerApplicationLinks>
 					<xe:pageTreeNode selection="/Home" label="Home"
 						page="/Home.xsp">
 					</xe:pageTreeNode>
 					<xe:pageTreeNode label="JavaScript Snippets"
-						loaded="${javascript:optionsBean.javaScriptSnippetsEnabled}"
-						page="/JavaScriptSnippets.xsp" selection="/JavaScriptSnippets">
+						loaded="${javascript:optionsBean.javaScriptSnippetsEnabled}" page="/JavaScriptSnippets.xsp"
+						selection="/JavaScriptSnippets">
 					</xe:pageTreeNode>
 					<xe:pageTreeNode label="Java Snippets"
-						loaded="${javascript:optionsBean.javaSnippetsEnabled}"
-						page="/JavaSnippets.xsp" selection="/JavaSnippets">
+						loaded="${javascript:optionsBean.javaSnippetsEnabled}" page="/JavaSnippets.xsp"
+						selection="/JavaSnippets">
 					</xe:pageTreeNode>
 					<xe:pageTreeNode label="OpenSocial Gadgets"
-						loaded="${javascript:optionsBean.gadgetSnippetsEnabled}"
-						page="/GadgetSnippets.xsp" selection="/GadgetSnippets">
+						loaded="${javascript:optionsBean.gadgetSnippetsEnabled}" page="/GadgetSnippets.xsp"
+						selection="/GadgetSnippets">
 					</xe:pageTreeNode>
 					<xe:pageTreeNode label="XPages Snippets"
-						loaded="${javascript:optionsBean.xpagesSnippetsEnabled}"
-						page="/XPagesSnippets.xsp" selection="/XPagesSnippets">
+						loaded="${javascript:optionsBean.xpagesSnippetsEnabled}" page="/XPagesSnippets.xsp"
+						selection="/XPagesSnippets">
 					</xe:pageTreeNode>
 					<xe:pageTreeNode label="API Explorer"
-						loaded="${javascript:optionsBean.explorerEnabled}"
-						page="/Explorer.xsp" selection="/Explorer">
+						loaded="${javascript:optionsBean.explorerEnabled}" page="/Explorer.xsp"
+						selection="/Explorer">
 					</xe:pageTreeNode>
-					<xe:pageTreeNode
-						loaded="${javascript:userBean.accessLevel>=4}"
+					<xe:basicContainerNode label="Documentation">
+						<xe:this.children>
+							<xe:basicLeafNode label="IBM developerWorks"
+								href="https://developer.ibm.com/social/">
+							</xe:basicLeafNode>
+							<xe:basicLeafNode label="IBM Social Toolkit SDK"
+								selected="true"
+								href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Social+Business+Toolkit+SDK+documentation#action=openDocument&amp;content=catcontent&amp;ct=prodDoc">
+							</xe:basicLeafNode>
+							<xe:basicLeafNode label="SDK JavaScript Documentation"
+								href="http://infolib.lotus.com/resources/social_business_toolkit/jsdoc">
+							</xe:basicLeafNode>
+							<xe:basicLeafNode label="SDK Java Documentation"
+								href="http://infolib.lotus.com/resources/social_business_toolkit/javadoc/index.html">
+							</xe:basicLeafNode>
+							<xe:separatorTreeNode></xe:separatorTreeNode>
+							<xe:basicLeafNode label="Application Development Wiki"
+								href="http://www-10.lotus.com/ldd/appdevwiki.nsf">
+							</xe:basicLeafNode>
+							<xe:basicLeafNode label="IBM SmartCloud Wiki"
+								href="http://www-10.lotus.com/ldd/bhwiki.nsf">
+							</xe:basicLeafNode>
+							<xe:basicLeafNode label="IBM Connections Wiki"
+								href="http://www-10.lotus.com/ldd/lcwiki.nsf">
+							</xe:basicLeafNode>
+						</xe:this.children>
+					</xe:basicContainerNode>
+					<xe:pageTreeNode loaded="${javascript:userBean.accessLevel>=4}"
 						page="/ManageJavaScriptSnippetsByCategory.xsp" label="Manage">
 					</xe:pageTreeNode>
-					<xe:basicContainerNode label="External Links">
-						<xe:basicLeafNode label="Home" selected="true"
-							href="/">
-						</xe:basicLeafNode>
-						<xe:basicLeafNode label="developerWorks"
-							href="https://www.ibm.com/developerworks/mydeveloperworks/groups/service/html/communityview?communityUuid=0f357879-ccee-4927-98c1-7bb88d5dc81f&amp;lang=en">
-						</xe:basicLeafNode>
-						<xe:basicLeafNode label="Greenhouse"
-							href="https://greenhouse.lotus.com/wpsgh/wcm/connect/lotus+greenhouse/lotus+greenhouse+next+site/home/labs/ibm+social+business+toolkit">
-						</xe:basicLeafNode>
-						<xe:basicLeafNode label="OpenNTF"
-							href="http://www.openntf.org/">
-						</xe:basicLeafNode>
-						<xe:basicLeafNode
-							label="Application Development Wiki"
-							href="http://www-10.lotus.com/ldd/appdevwiki.nsf">
-						</xe:basicLeafNode>
-						<xe:basicLeafNode label="IBM Connections Wiki"
-							href="http://www-10.lotus.com/ldd/lcwiki.nsf">
-						</xe:basicLeafNode>
-						<xe:basicLeafNode label="IBM SmartCloud Wiki"
-							href="http://www-10.lotus.com/ldd/bhwiki.nsf">
-						</xe:basicLeafNode>
-					</xe:basicContainerNode>
 				</xe:this.bannerApplicationLinks>
 				<xe:this.bannerUtilityLinks>
 					<xe:userTreeNode></xe:userTreeNode>

@@ -6,7 +6,6 @@ import java.io.Serializable;
 import java.io.StringReader;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 
 import javax.servlet.ServletException;
@@ -100,7 +99,7 @@ public class PreviewJavaScriptHandler extends PreviewHandler {
 	        execRequest(req, resp, requestParams);
 		} else {
 			PrintWriter pw = resp.getWriter();
-			pw.println("Social Business Tooolkit Playground - JavaScript Snippet Preview Servlet");
+			pw.println("Social Business Toolkit Playground - JavaScript Snippet Preview Servlet");
 			pw.flush();
 		}
 	}

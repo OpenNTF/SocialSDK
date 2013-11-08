@@ -19,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.ibm.sbt.automation.core.test.connections.BaseCommunitiesGridTest;
@@ -36,6 +37,7 @@ public class CommunityMembersGrid extends BaseCommunitiesGridTest {
     }
     
     @Test
+    @Ignore
     public void testCreateCommunity() {
     	// Check grid
     	assertTrue("Expected the test to generate a grid", checkGrid("Social_Communities_Controls_CommunityMembers",true,true));

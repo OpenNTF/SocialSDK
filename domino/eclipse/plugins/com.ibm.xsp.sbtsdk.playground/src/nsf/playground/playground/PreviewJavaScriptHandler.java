@@ -105,7 +105,6 @@ public class PreviewJavaScriptHandler extends PreviewHandler {
 	}
 
 	protected void execRequest(HttpServletRequest req, HttpServletResponse resp, RequestParams requestParams) throws ServletException, IOException {
-		HttpSession session = req.getSession();
 		resp.setContentType("text/html");
 
 		String sOptions = requestParams.sOptions;

@@ -71,7 +71,7 @@ define([ "../../declare", "../../dom", "../../lang", "../../widget/grid/_GridRen
               if (!this.containerType || this.containerType == "table") {
             	  container = this.renderTable(grid, el, items, data);
               } else {
-            	  container = this.renderList(grid, el, this.containerType);  
+            	  container = this.renderList(grid, el, this.containerType, "");  
               }
               for (var i=0; i<items.length; i++) {
                   this.renderItem(grid, container, data, items[i], i, items);
@@ -183,12 +183,14 @@ define([ "../../declare", "../../dom", "../../lang", "../../widget/grid/_GridRen
          * @param grid - the grid
          * @param el - the current element
          * @param listType - the type of list to render: ul or ol
+         * @param listClass - the class for the list
          * @param data - the data associated with the current row
          * @returns - A list element (either ul or ol)
          */
-        renderList: function(grid, el, listType) {       	
+        renderList: function(grid, el, listType, listClass) {       	
             var ol = this._create(listType, {
-                role:"presentation"
+                role:"presentation",
+                class:listClass
             }, el);
             return ol;
         },

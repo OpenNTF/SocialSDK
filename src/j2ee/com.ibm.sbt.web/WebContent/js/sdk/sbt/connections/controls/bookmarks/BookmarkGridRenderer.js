@@ -41,7 +41,7 @@ define(["../../../declare", "../../../i18n",
 				if (args && args.containerType) {
 					if (args.containerType == "ol" || args.containerType == "ul") {
 						this.template = BookmarkListItem;
-					} else if (args.containerType == "grid") {
+					} else if (args.containerType == "table") {
 						this.template = BookmarkRow;
 					}
 				} else {

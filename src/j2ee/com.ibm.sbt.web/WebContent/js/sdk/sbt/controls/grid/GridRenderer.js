@@ -68,7 +68,7 @@ define([ "../../declare", "../../dom", "../../lang", "../../widget/grid/_GridRen
               this.renderPager(grid, el, items, data);
               this.renderSorter(grid, el, data);
               var container = null;
-              if (!this.containerType || this.containerType == "grid") {
+              if (!this.containerType || this.containerType == "table") {
             	  container = this.renderTable(grid, el, items, data);
               } else {
             	  if (this.containerType == "ul") {

@@ -108,8 +108,8 @@ function(dom, ProfileGrid, ProfileRendererMixin, CommunityService, lang, SearchB
                             var communityUuid = community.getCommunityUuid();
                             
                             // Add community members
-                            for (var i = 0; i < searchBox._members.length; i++) {
-                            	var member = searchBox._members[i];
+                            for (var i = 0; i < searchBox.members.length; i++) {
+                            	var member = searchBox.members[i];
                             	communityService.addMember( communityUuid, member.id, {});
                             }
                             // Hide wait message

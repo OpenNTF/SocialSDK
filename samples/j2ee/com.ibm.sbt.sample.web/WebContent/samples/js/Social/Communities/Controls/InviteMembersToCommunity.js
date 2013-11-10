@@ -78,12 +78,12 @@ function(config, CommunityService, dom, stringUtil, SearchBox) {
         var invitationString = "";
         
         // Invite potential members to the community
-        for (var i = 0; i < searchBox._members.length; i++) {
-        	if (searchBox._members[i].id == null) {
+        for (var i = 0; i < searchBox.members.length; i++) {
+        	if (searchBox.members[i].id == null) {
         		continue;
         	}
-        	communityService.createInvite(communityId, searchBox._members[i].id);
-            invitationString += searchBox._members[i].name + ", ";
+        	communityService.createInvite(communityId, searchBox.members[i].id);
+            invitationString += searchBox.members[i].name + ", ";
         }
         
         invitationString = invitationString.substring(0, invitationString.length - 3);

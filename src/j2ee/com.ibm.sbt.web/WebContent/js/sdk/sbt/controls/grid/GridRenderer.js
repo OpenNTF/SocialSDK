@@ -71,11 +71,7 @@ define([ "../../declare", "../../dom", "../../lang", "../../widget/grid/_GridRen
               if (!this.containerType || this.containerType == "table") {
             	  container = this.renderTable(grid, el, items, data);
               } else {
-            	  if (this.containerType == "ul") {
-            		  container = this.renderUnorderedList(grid, el, items, data);
-            	  } else if (this.containerType = "ol") {
-            		  container = this.renderOrderedList(grid, el, items, data);
-            	  }
+            	  container = this.renderList(grid, el, this.containerType);  
               }
               for (var i=0; i<items.length; i++) {
                   this.renderItem(grid, container, data, items[i], i, items);
@@ -181,34 +177,17 @@ define([ "../../declare", "../../dom", "../../lang", "../../widget/grid/_GridRen
         },
         
         /***
-         * Creates an unordered list.
-         * 
-         * @method - renderUnorderedList
-         * @param grid - the grid
-         * @param el - the current element
-         * @param items - all of the items in the current row
-         * @param data - the data associated with the current row
-         * @returns - A table body element, that is attached to a table
-         */
-        renderUnorderedList: function(grid, el, items, data) {       	
-            var ul = this._create("ul", {
-                role:"presentation"
-            }, el);
-            return ul;
-        },
-        
-        /***
          * Creates an ordered list.
          * 
-         * @method - renderOrderedList
+         * @method - renderList
          * @param grid - the grid
          * @param el - the current element
-         * @param items - all of the items in the current row
+         * @param listType - the type of list to render: ul or ol
          * @param data - the data associated with the current row
-         * @returns - A table body element, that is attached to a table
+         * @returns - A list element (either ul or ol)
          */
-        renderOrderedList: function(grid, el, items, data) {       	
-            var ol = this._create("ol", {
+        renderList: function(grid, el, listType) {       	
+            var ol = this._create(listType, {
                 role:"presentation"
             }, el);
             return ol;

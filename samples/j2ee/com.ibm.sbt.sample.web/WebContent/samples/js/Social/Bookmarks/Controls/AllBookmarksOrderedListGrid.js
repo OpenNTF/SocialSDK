@@ -2,7 +2,7 @@ require(["sbt/dom", "sbt/connections/controls/bookmarks/BookmarkGrid"], function
     
 	var grid = new BookmarkGrid({
 		type: "any",
-		containerType : "ol"
+		rendererArgs : { containerType : "ol" }
 	});
 
     dom.byId("gridDiv").appendChild(grid.domNode);

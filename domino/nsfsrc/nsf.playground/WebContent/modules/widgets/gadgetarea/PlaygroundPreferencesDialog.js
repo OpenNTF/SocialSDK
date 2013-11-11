@@ -1,33 +1,22 @@
 /**
  * The Playground preferences dialog.
+ *We override this module because we need to place the backdrop div inside the a bootstrap scopped div.
  *
  * @module playground/widgets/gadgetarea/PlaygroundPreferencesDialog
- * @augments explorer/widgets/gadgetarea/PreferencesDialog
+ * @augments module:explorer/widgets/gadgetarea/PreferencesDialog
  */
-define(['dojo/_base/declare', 'explorer/widgets/gadgetarea/PreferencesDialog', 'dojo/dom-construct', 'dojo/dom-class',
-        'dojo/query', 'dojo/NodeList-manipulate', 'dojo/NodeList-dom'],
+define(['dojo/_base/declare', 'explorer/widgets/gadgetarea/PreferencesDialog', 'dojo/dom-construct', 'dojo/dom-class'],
         function(declare, PreferencesDialog, domConstruct, domClass, query) {
   return declare('PlaygroundPreferencesDialog', [ PreferencesDialog ], {
 	    /**
 	     * Shows the ModalDialog in the dom.
 	     *
-	     * @memberof module:explorer/widgets/ModalDialog#
+	     * @memberof module:playground/widgets/gadgetarea/PlaygroundPreferencesDialog#
 	     */
 	    show : function() {
 	      domClass.remove(this.domNode, 'hide');
 	      domClass.add(this.domNode, 'in');
 	      domConstruct.place('<div class="modal-backdrop fade in"></div>', this.domNode.parentNode, 'last');
-	    },
-
-	    /**
-	     * Hides the ModalDialog in the dom.
-	     *
-	     * @memberof module:explorer/widgets/ModalDialog#
-	     */
-	    hide : function() {
-	      domClass.add(this.domNode, 'hide');
-	      domClass.remove(this.domNode, 'in');
-	      query('div.modal-backdrop').remove();
 	    }
   });
 });

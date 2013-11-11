@@ -67,9 +67,14 @@ define([ "../../declare", "../../dom", "../../lang", "../../widget/grid/_GridRen
            else {
               this.renderPager(grid, el, items, data);
               this.renderSorter(grid, el, data);
-              var tbody = this.renderTable(grid, el, items, data);
+              var container = null;
+              if (!this.containerType || this.containerType == "table") {
+            	  container = this.renderTable(grid, el, items, data);
+              } else {
+            	  container = this.renderList(grid, el, this.containerType, "");  
+              }
               for (var i=0; i<items.length; i++) {
-                  this.renderItem(grid, tbody, data, items[i], i, items);
+                  this.renderItem(grid, container, data, items[i], i, items);
               }
               this.renderFooter(grid, el, items, data);
            }
@@ -169,6 +174,25 @@ define([ "../../declare", "../../dom", "../../lang", "../../widget/grid/_GridRen
             }, el);
             var tbody = this._create("tbody", null, table);
             return tbody;
+        },
+        
+        /***
+         * Creates an ordered list.
+         * 
+         * @method - renderList
+         * @param grid - the grid
+         * @param el - the current element
+         * @param listType - the type of list to render: ul or ol
+         * @param listClass - the class for the list
+         * @param data - the data associated with the current row
+         * @returns - A list element (either ul or ol)
+         */
+        renderList: function(grid, el, listType, listClass) {       	
+            var ol = this._create(listType, {
+                role:"presentation",
+                class:listClass
+            }, el);
+            return ol;
         },
         
         /**

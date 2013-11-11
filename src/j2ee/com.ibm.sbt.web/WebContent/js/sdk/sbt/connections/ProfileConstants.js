@@ -34,6 +34,10 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * XPath expressions used when parsing a Connections Profiles ATOM feed
          */
         ProfileFeedXPath : conn.ConnectionsFeedXPath,
+        /**
+         * Namespace expressions used when parsing a Connections Profiles ATOM feed
+         */
+        ProfileNamespaces : conn.Namespaces,
 
         /**
          * Connection type colleague
@@ -48,18 +52,12 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         /**
          * XPath expressions to be used when reading a Profile Entry
          */
-        ProfileXPath : {
-            // used by getEntityData
-            entry : "/a:feed/a:entry",
-            // used by getEntityId
-            uid : "a:contributor/snx:userid",
-            // used by getters
-            id : "a:id",
+        ProfileXPath : lang.mixin(conn.AtomEntryXPath,{   
+        	uid : "a:contributor/snx:userid",// overwriting this for ProfileService
+            entry : "/a:feed/a:entry",// overwriting this for ProfileService 
             userid : "a:contributor/snx:userid",
             name : "a:contributor/a:name",
-            email : "a:contributor/a:email",
-            title : "a:title",
-            updated : "a:updated",
+            email : "a:contributor/a:email",            
             altEmail : "a:content/h:div/h:span/h:div[@class='x-groupwareMail']", // TODO do we need this? it's a dupe of groupwareMail
             photoUrl : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/image']/@href", 
             fnUrl : "a:content/h:div/h:span/h:div/h:a[@class='fn url']/@href",
@@ -76,13 +74,12 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
             postalCode : "a:content/h:div/h:span/h:div/h:span[@class='postal-code']",
             region : "a:content/h:div/h:span/h:div/h:span[@class='region']",
             countryName : "a:content/h:div/h:span/h:div/h:div[@class='country-name']",
-            summary : "a:summary",
             groupwareMail : "a:content/h:div/h:span/h:div[@class='x-groupwareMail']",
             blogUrl : "a:content/h:div/h:span/h:div/h:a[@class='x-blog-url url']/@href",
             role : "a:content/h:div/h:span/h:div[@class='role']",
             managerUid : "a:content/h:div/h:span/h:div[@class='x-manager-uid']",
             isManager : "a:content/h:div/h:span/h:div[@class='x-is-manager']"
-        },
+    	}),	
         
         /**
          * XPath expressions to be used when reading a ColleagueConnection Entry

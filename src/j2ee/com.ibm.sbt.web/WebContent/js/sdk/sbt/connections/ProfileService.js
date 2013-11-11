@@ -21,7 +21,8 @@
  */
 define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConstants", "../base/BaseService", "../base/BaseEntity", "../base/AtomEntity", "../base/XmlDataHandler", "../base/VCardDataHandler", "../Cache", "../util"  ], function(
         declare,lang,config,stringUtil,consts,BaseService,BaseEntity,AtomEntity,XmlDataHandler, VCardDataHandler, Cache, util) {
-
+	
+	var CategoryProfile = "<category term=\"profile\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category>";
 	var updateProfileXmlTemplate = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns:app=\"http://www.w3.org/2007/app\" xmlns:thr=\"http://purl.org/syndication/thread/1.0\" xmlns:fh=\"http://purl.org/syndication/history/1.0\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\" xmlns:opensearch=\"http://a9.com/-/spec/opensearch/1.1/\" xmlns=\"http://www.w3.org/2005/Atom\"><category term=\"profile\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category><content type=\"text\">\nBEGIN:VCARD\nVERSION:2.1\n${jobTitle}${address}${telephoneNumber}${building}${floor}END:VCARD\n</content></entry>";
     var updateProfileAttributeTemplate = "${attributeName}:${attributeValue}\n";
     var updateProfileAddressTemplate = "ADR;WORK:;;${streetAddress},${extendedAddress};${locality};${region};${postalCode};${countryName}\n";
@@ -42,16 +43,27 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
      * @class Profile
      * @namespace sbt.connections
      */
-    var Profile = declare(BaseEntity, {
+    
+    /*
+     * ProfileDataHandler class.
+     */
+   
+    
+    
+    var Profile = declare(AtomEntity, {
 
-        /**
+    	xpath : consts.ProfileXPath,
+    	namespaces : consts.ProfileNamespaces,    	
+    	categoryScheme : CategoryProfile,
+    	
+    	/**
          * 
          * @constructor
          * @param args
          */
         constructor : function(args) {            
         },
-
+      
         /**
          * Get id of the profile
          * 
@@ -272,14 +284,22 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
 
             var self = this;
             var callbacks = {
-                createEntity : function(service,data,response) {
-                    self.dataHandler = new XmlDataHandler({
-                        data : data,
-                        namespaces : consts.Namespaces,
-                        xpath : consts.ProfileXPath
-                    });
-                    self.id = self.dataHandler.getEntityId();
-                    return self;
+                createEntity : function(service,data,response) {            	        	
+            	  if (response.args && response.args.format == "vcard") {
+                      self.dataHandler = new VCardDataHandler({
+                          data : data,
+                          namespaces : consts.Namespaces,
+                          xpath : consts.ProfileVCardXPath
+                      });
+                  } else {
+                	  self.dataHandler = new XmlDataHandler({
+                          data : data,
+                          namespaces : consts.Namespaces,
+                          xpath : consts.ProfileXPath
+                      });
+                  }                
+            	  self.setData(data);
+                  return self;
                 }
             };
             var requestArgs = {};
@@ -632,24 +652,24 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
      */
     var ProfileCallbacks = {
         createEntity : function(service,data,response) {
-            var entryHandler = null;
-            if (response.args && response.args.format == "vcard") {
-                entryHandler = new VCardDataHandler({
-                    data : data,
-                    namespaces : consts.Namespaces,
-                    xpath : consts.ProfileVCardXPath
-                });
-            } else {
-                entryHandler = new XmlDataHandler({
-                    data : data,
-                    namespaces : consts.Namespaces,
-                    xpath : consts.ProfileXPath
-                });
-            }
             return new Profile({
                 service : service,
-                id : entryHandler.getEntityId(),
-                dataHandler : entryHandler
+                data : data,
+                createDataHandler : function(service, data, namespaces, xpath) {            	
+              	  if (response.args && response.args.format == "vcard") {
+                        return new VCardDataHandler({
+                            data : data,
+                            namespaces : consts.Namespaces,
+                            xpath : consts.ProfileVCardXPath
+                        });
+                    } else {
+                        return new XmlDataHandler({
+                            data : data,
+                            namespaces : consts.Namespaces,
+                            xpath : consts.ProfileXPath
+                        });
+                    }
+                  }
             });
         }
     };
@@ -665,25 +685,25 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
                 xpath : consts.ProfileFeedXPath
             });
         },
-        createEntity : function(service,data,response) {
-            var entryHandler = null;
-            if (response.args && response.args.format == "vcard") {
-                entryHandler = new VCardDataHandler({
-                    data : data,
-                    namespaces : consts.Namespaces,
-                    xpath : consts.ProfileVCardXPath
-                });
-            } else {
-                entryHandler = new XmlDataHandler({
-                    data : data,
-                    namespaces : consts.Namespaces,
-                    xpath : consts.ProfileXPath
-                });
-            }
+        createEntity : function(service,data,response) {            
             return new Profile({
                 service : service,
-                id : entryHandler.getEntityId(),
-                dataHandler : entryHandler
+                data: data,
+                createDataHandler : function(service, data, namespaces, xpath) {            	
+            	  if (response.args && response.args.format == "vcard") {
+                      return new VCardDataHandler({
+                          data : data,
+                          namespaces : consts.Namespaces,
+                          xpath : consts.ProfileVCardXPath
+                      });
+                  } else {
+                      return new XmlDataHandler({
+                          data : data,
+                          namespaces : consts.Namespaces,
+                          xpath : consts.ProfileXPath
+                      });
+                  }
+                }
             });
         }
     };

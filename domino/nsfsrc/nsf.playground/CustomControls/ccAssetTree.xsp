@@ -87,7 +87,11 @@ return true;]]></xp:this.onkeypress>
 	});
 	navTree.onClick = function(item){
 		if(item.url) {
-			dojo.hash("#{javascript:compositeData.pname||'snippet'}="+item.jspUrl);
+			var h = "#{javascript:compositeData.pname||'snippet'}="+item.jspUrl;
+			if(h==dojo.hash()) {
+				dojo.hash("");
+			}
+			dojo.hash(h);
 		}
 	};
 	// Suppress the wide out effect

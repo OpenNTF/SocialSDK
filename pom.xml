@@ -26,6 +26,7 @@
 		<module>deps</module>
 		<module>commons</module>
 		<module>sdk</module>
+		<module>samples</module>
 	</modules>
 
 	<build>

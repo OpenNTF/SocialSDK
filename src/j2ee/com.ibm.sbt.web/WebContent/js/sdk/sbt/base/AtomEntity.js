@@ -24,12 +24,12 @@ define([ "../declare", "../lang", "../stringUtil", "./BaseConstants", "./BaseEnt
 
     var EntryTmpl = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
     				"<entry xmlns=\"http://www.w3.org/2005/Atom\" ${createNamespaces}>" +
-    					"<title type=\"text\">${getTitle}</title>" +
-    					"<content type=\"${contentType}\">${getContent}</content>" +
-    					"<summary type=\"text\">${getSummary}</summary>" +
-    					"<contributor>${getEmail}${getUserid}</contributor>" +
-    					"${categoryScheme}${getTags}${createEntryData}" + 
+    					"${categoryScheme}${createTitle}${createContent}${createSummary}${createContributor}${createTags}${createEntryData}" + 
     				"</entry>";
+	var TitleTmpl = "<title type=\"text\">${title}</title>";
+	var ContentTmpl = "<content type=\"${contentType}\">${content}</content>";
+	var SummaryTmpl = "<summary type=\"text\">${summary}</summary>";
+	var ContributorTmpl = "<contributor>${contributor}</contributor>";
     var EmailTmpl = "<email>${email}</email>";
     var UseridTmpl = "<snx:userid xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\">${userid}</snx:userid>";
     var CategoryTmpl = "<category term=\"${tag}\"></category>";
@@ -168,7 +168,7 @@ define([ "../declare", "../lang", "../stringUtil", "./BaseConstants", "./BaseEnt
          * Gets an author of the ATOM entry
          * 
          * @method getAuthor
-         * @return {Member} author Author of the ATOM entry
+         * @return {Object} author Author of the ATOM entry
          */
         getAuthor : function() {
             return this.getAsObject(
@@ -180,12 +180,22 @@ define([ "../declare", "../lang", "../stringUtil", "./BaseConstants", "./BaseEnt
          * Gets a contributor of the ATOM entry
          * 
          * @method getContributor
-         * @return {Member} contributor Contributor of the ATOM entry
+         * @return {Object} contributor Contributor of the ATOM entry
          */
         getContributor : function() {
             return this.getAsObject(
             		[ "contributorUserid", "contributorName", "contributorEmail", "contributorUserState" ],
             		[ "userid", "name", "email", "userState" ]);
+        },
+        
+        /**
+         * Sets the contributor of the ATOM entry
+         * 
+         * @method setContributor
+         * @return {Object} contributor Contributor of the ATOM entry
+         */
+        setContributor : function(contributor) {
+            return this.setAsObject(contributor);
         },
         
         /**
@@ -245,27 +255,97 @@ define([ "../declare", "../lang", "../stringUtil", "./BaseConstants", "./BaseEnt
          * @returns
          */
         createPostData : function() {
-            var transformer = function(value,key) {
-            	if (key == "getContent" && this.contentType == "html") {
-            		value = (value && lang.isString(value)) ? value.replace(/</g,"&lt;").replace(/>/g,"&gt;") : value; 
-            	}
-            	if (key == "getTags" && value) {
-                    var tags = value;
-                    value = "";
-                    for (var tag in tags) {
-                        value += stringUtil.transform(CategoryTmpl, { "tag" : tags[tag] });
-                    }
-            	}
-            	if (key == "getEmail" && value) {
-                    value = stringUtil.transform(EmailTmpl, { "email" : value });
-            	}
-            	if (key == "getUserid" && value) {
-                    value = stringUtil.transform(UseridTmpl, { "userid" : value });
-            	}
-                return value;
-            };
-            var postData = stringUtil.transform(EntryTmpl, this, transformer, this);
+            var postData = stringUtil.transform(EntryTmpl, this, function(v,k) { return v; }, this);
             return stringUtil.trim(postData);
+        },
+        
+        /**
+         * Return title element to be included in post data for this ATOM entry.
+         * 
+         * @method createTitle
+         * @returns {String}
+         */
+        createTitle : function() {
+        	var title = this.getTitle();
+        	if (title) {
+        		if (this.contentType == "html") {
+            		title = (title && lang.isString(title)) ? title.replace(/</g,"&lt;").replace(/>/g,"&gt;") : title; 
+            	}
+        		return stringUtil.transform(TitleTmpl, { "title" : title });
+        	}
+        	return "";
+        },
+        
+        /**
+         * Return content element to be included in post data for this ATOM entry.
+         * 
+         * @method createContent
+         * @returns {String}
+         */
+        createContent : function() {
+        	var content = this.getContent();
+        	if (content) {
+        		return stringUtil.transform(ContentTmpl, { "contentType" : this.contentType, "content" : content });
+        	}
+        	return "";
+        },
+        
+        /**
+         * Return summary element to be included in post data for this ATOM entry.
+         * 
+         * @method createSummary
+         * @returns {String}
+         */
+        createSummary : function() {
+        	var summary = this.getContent();
+        	if (summary) {
+        		return stringUtil.transform(SummaryTmpl, { "summary" : summary });
+        	}
+        	return "";
+        },
+        
+        /**
+         * Return contributor element to be included in post data for this ATOM entry.
+         * 
+         * @method createContributor
+         * @returns {String}
+         */
+        createContributor : function() {
+        	var contributor = this.getContributor();
+        	if (contributor) {
+        		var value = "";
+        		var email = contributor.email || ((this.getEmail) ? this.getEmail() : null);
+        		if (email) {
+                    value += stringUtil.transform(EmailTmpl, { "email" : email });
+            	}
+        		var userid = contributor.userid || ((this.getUserid) ? this.getUserid() : null);
+            	if (userid) {
+                    value += stringUtil.transform(UseridTmpl, { "userid" : userid });
+            	}
+            	if (value.length > 0) {
+            		value = stringUtil.transform(ContributorTmpl, { "contributor" : value });
+            	}
+            	return value;
+        	}
+        	return "";
+        },
+        
+        /**
+         * Return tags elements to be included in post data for this ATOM entry.
+         * 
+         * @method createTags
+         * @returns {String}
+         */
+        createTags : function() {
+            var tags = this.getTags();
+            if (tags) {
+                var value = "";
+                for (var tag in tags) {
+                    value += stringUtil.transform(CategoryTmpl, { "tag" : tags[tag] });
+                }
+                return value;
+            }
+        	return "";
         },
         
         /**

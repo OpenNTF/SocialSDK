@@ -4,33 +4,17 @@
 
 	<artifactId>sso.sample.webapp</artifactId>
 	<parent>
-		<groupId>com.ibm.sbt.sample</groupId>
-		<artifactId>sample.parent</artifactId>
-		<version>1.0.0</version>
-		<relativePath>../../../build/sample</relativePath>
+		<groupId>com.ibm.sbt</groupId>
+		<artifactId>com.ibm.samples.j2ee</artifactId>
+		<version>2.0.0-SNAPSHOT</version>
 	</parent>
 	
+	<packaging>war</packaging>
 	<dependencies>
 		<dependency>
-			<groupId>com.ibm.sbt.sdk</groupId>
-			<artifactId>com.ibm.commons</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>com.ibm.sbt.sdk</groupId>
-			<artifactId>com.ibm.commons.xml</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>com.ibm.sbt.sdk</groupId>
-			<artifactId>com.ibm.commons.runtime</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>com.ibm.sbt.sdk</groupId>
+			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.sbt.core</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+			<version>2.0.0-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
-	<packaging>war</packaging>
 </project>

@@ -76,19 +76,20 @@ require(['dojo/on', 'dojo/ready', 'playground/widgets/gadgetarea/PlaygroundGadge
 			if(hash()) {
 				gadgetArea.loadFromHash()
 			}
+			query('html').on('click', function(e) {
+				query('.dropdown-menu').parent().removeClass('open');
+			});
+			var dropDownMenuParents = query('.dropdown-menu').parent('div,.dropdown-parent');
+			dropDownMenuParents.on('click', function(e) {
+				if(!domClass.contains(e.currentTarget, 'open')) {
+					domClass.add(e.currentTarget, 'open');
+					event.stop(e);
+				}
+			});
 		}, function(error) {
 			console.error(error);
 		});
-		query('html').on('click', function(e) {
-			query('.dropdown-menu').parent().removeClass('open');
-		});
-		var dropDownMenuParents = query('.dropdown-menu').parent('div,.dropdown-parent');
-		dropDownMenuParents.on('click', function(e) {
-			if(!domClass.contains(e.currentTarget, 'open')) {
-				domClass.add(e.currentTarget, 'open');
-				event.stop(e);
-			}
-		});
+
 	});
 	
 	function prepend(h,f) {

@@ -16,6 +16,7 @@
 		<module>com.ibm.sbt.web</module>
 		<module>com.ibm.sbt.proxy.web</module>
 		<module>com.ibm.sbt.core.test</module>
+		<module>sbt.sso.webapp-archetype</module>
 	</modules>
 
 </project>

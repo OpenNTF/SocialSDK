@@ -98,6 +98,10 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
             lang.mixin(this, args);
             
             this.selectedRows = [];
+            
+            if (args.containerType) {
+            	this.containerTyp = args.containerType;
+            }
   
             
             if (!this.store) {

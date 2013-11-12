@@ -17,6 +17,7 @@
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 
+<%@page import="com.ibm.commons.util.StringUtil"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.sbt.services.client.connections.activitystreams.model.Reply"%>
 <%@page import="com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamEntity"%>
@@ -52,7 +53,13 @@
 					out.println("<br>"+entry.getAttachment().getUrl());
 					}
 				}
-				out.println("<br>"+entry.getEventTitle());
+				
+				
+				if(StringUtil.isNotEmpty(entry.getEventTitle())){
+					out.println("<br>"+entry.getEventTitle());
+				}else{
+					out.println("<br>"+entry.getShortTitle());
+				}
 			
 				if(entry.getNumComments()>0){
 					out.println("Number of comments was "+entry.getNumComments());

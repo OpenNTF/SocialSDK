@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xc:OneUILayout navigationPath="/Facebook/ClientAPI" title="Facebook Client API" connection="facebook">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftFacebook></xc:LeftFacebook>
+			</xp:panel>
+		</xp:this.facets>	
+	
+		<xp:div style="font-weight:bold;">
+
+			<xe:facebookClient></xe:facebookClient> 
+			
+			<xe:facebookLoginButton perms="email,user_checkins">Login with Facebook</xe:facebookLoginButton>
+		
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+		
+			<xp:button value="Show Login Status" id="button1">
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script><![CDATA[
+					FB.api('/me/permissions', function(response){
+					console.log(response.data[0]);					
+					})
+		FB.getLoginStatus(function(response) {
+		
+			if (response.authResponse) {
+				if(response.authResponse.userID)
+					alert("User is logged in");				
+			} else {
+				alert("User is not logged in");
+			}
+		}, true);]]>
+					</xp:this.script>
+				</xp:eventHandler>
+			</xp:button>
+		
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+		
+			<xp:button value="Show current User" id="button2">
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script><![CDATA[
+		FB.api('/me', function(user) {
+			if(user != null) {
+				var image = document.getElementById('image');
+				image.src = 'http://graph.facebook.com/' + user.id + '/picture';
+				var name = document.getElementById('name');
+				name.innerHTML = user.name
+			}
+		});
+					]]></xp:this.script>
+				</xp:eventHandler>
+			</xp:button>
+		
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			
+			<img id="image"/>
+			<div id="name"></div>
+
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			
+			<xp:button value="Post" id="button3">
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script><![CDATA[			
+FB.ui(
+   {
+     method: 'feed',
+     name: 'XPages rocks',
+     link: 'http://xpages.info',
+     picture: 'http://xpages.info/XPagesHome.nsf/xpagesp.png',
+     caption: 'Check out XPages.info',
+     description: 'XPages.info is THE home page for XPages developers',
+     message: 'Trying the OpenNTF Social Enabler project'
+   },
+   function(response) {
+     if (response && response.post_id) {
+       alert('Post was published.');
+     } else {
+       alert('Post was not published.');
+     }
+   }
+ );			
+					]]></xp:this.script>
+				</xp:eventHandler>
+			</xp:button>
+		</xp:div>
+	</xc:OneUILayout>
+</xp:view>

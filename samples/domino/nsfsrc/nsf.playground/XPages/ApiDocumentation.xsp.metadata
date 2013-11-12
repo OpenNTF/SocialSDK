@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="85257AA80077A28B" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="5fe" sequence="9" unid="AED7DF49EC96E55085257B7300717C8E">
+<created><datetime dst="true">20130522T163934,54-04</datetime></created>
+<modified><datetime dst="true">20130522T173509,61-04</datetime></modified>
+<revised><datetime dst="true">20130522T173509,60-04</datetime></revised>
+<lastaccessed><datetime dst="true">20130522T173509,61-04</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20130522T163934,57-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></updatedby>
+<wassignedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></wassignedby>
+<item name="$TITLE"><text>ApiDocumentation.xsp</text></item>
+<item name="$Flags"><text>gC~4K</text></item>
+
+
+
+<item name="$DesignerVersion"><text>8.5.1</text></item>
+
+
+
+
+<item name="$FileNames" sign="true"><text>ApiDocumentation.xsp</text></item></note>

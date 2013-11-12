@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xc:OneUILayout navigationPath="/Facebook/Plugins" title="Facebook Plugins" connection="facebook">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftFacebook></xc:LeftFacebook>
+			</xp:panel>
+		</xp:this.facets>	
+	
+		<xp:div style="font-weight:bold;">
+			
+			<xp:br></xp:br>		
+			
+			<xe:facebookClient></xe:facebookClient> 
+	
+			<xe:facebookLikeButton 
+				href="#{javascript:context.getUrl()}">
+			</xe:facebookLikeButton>
+
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+
+			<xe:facebookComments 
+				href="#{javascript:'http://heidloff.net'}"
+				numPosts="5">
+			</xe:facebookComments>
+
+		</xp:div>
+	</xc:OneUILayout>
+</xp:view>
+

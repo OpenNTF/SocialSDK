@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="85257AA80077A28B" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="63a" sequence="8" unid="F31DA9DB2E2A855B85257B730072FF3E">
+<created><datetime dst="true">20130522T165604,46-04</datetime></created>
+<modified><datetime dst="true">20130522T172503,58-04</datetime></modified>
+<revised><datetime dst="true">20130522T172503,57-04</datetime></revised>
+<lastaccessed><datetime dst="true">20130522T172503,58-04</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20130522T165604,47-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></updatedby>
+<wassignedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></wassignedby>
+<item name="$Flags"><text>34567Cg~[</text></item>
+<item name="$TITLE"><text>doc/OptionsBean.java</text></item>
+
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+
+<item name="$FileNames" sign="true"><text>doc/OptionsBean.java</text></item>
+
+</note>

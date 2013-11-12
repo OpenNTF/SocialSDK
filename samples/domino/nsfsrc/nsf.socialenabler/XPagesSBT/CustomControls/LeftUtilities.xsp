@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xe:navigator id="outline">
+		<xe:this.treeNodes>
+			<xe:pageTreeNode page="UtilUserBean"
+			   label="User Bean" selection="/Util/UserBean">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="UtilFunctions"
+			   label="@Functions" selection="/Util/Functions">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="UtilJsonNavigator"
+			   label="JSON DataNavigator" selection="/Util/JsonNavigator">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="UtilXmlNavigator"
+			   label="XML DataNavigator" selection="/Util/XmlNavigator">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="UtilHttpHeader"
+			   label="HTTP Header (CORS)" selection="/Util/HttpHeader">
+			</xe:pageTreeNode>
+		</xe:this.treeNodes>
+	</xe:navigator>
+</xp:view>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config>
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/custom</namespace-uri>
+    <default-prefix>xc</default-prefix>
+  </faces-config-extension>
+  <composite-component>
+    <component-type>sbtLoginDialog</component-type>
+    <composite-name>sbtLoginDialog</composite-name>
+    <composite-file>/sbtLoginDialog.xsp</composite-file>
+    <composite-extension>
+      <designer-extension>
+        <in-palette>true</in-palette>
+      </designer-extension>
+    </composite-extension>
+    <property>
+      <property-name>label</property-name>
+      <property-class>string</property-class>
+      <display-name>Label</display-name>
+    </property>
+    <property>
+      <property-name>endpoint</property-name>
+      <property-class>string</property-class>
+    </property>
+    <property>
+      <property-name>dialogTitle</property-name>
+      <property-class>string</property-class>
+    </property>
+  </composite-component>
+</faces-config>

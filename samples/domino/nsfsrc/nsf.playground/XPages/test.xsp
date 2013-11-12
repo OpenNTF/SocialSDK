@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+
+	<xp:button value="Test!" id="button1">
+		<xp:eventHandler event="onclick" submit="true"
+			refreshMode="complete">
+			<xp:this.action><![CDATA[#{javascript:var className = "xsp.mypage"
+var pageName = "Mypage.xsp"
+var pageContent =  "<?xml version='1.0' encoding='UTF-8'?>"
++"<xp:view xmlns:xp='http://www.ibm.com/xsp/core' xmlns:xe='http://www.ibm.com/xsp/coreex'"
++"	xmlns:xc='http://www.ibm.com/xsp/custom'>"
++"	Hello, World!"
++"</xp:view>";
+dynamicXPagesBean.compile(pageName,pageContent)
+context.redirectToPage("mypage");}]]></xp:this.action>
+		</xp:eventHandler></xp:button>
+	<xp:br></xp:br>
+	</xp:view>

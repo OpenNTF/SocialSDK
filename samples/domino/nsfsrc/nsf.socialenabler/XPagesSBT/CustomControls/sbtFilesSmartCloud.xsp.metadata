@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="80257B9C00399D4F" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="28e" sequence="10" unid="D406E7696A9FE5B280257B9C0039AD90">
+<created><datetime dst="true">20130702T112959,84+01</datetime></created>
+<modified><datetime dst="true">20130702T113009,64+01</datetime></modified>
+<revised><datetime dst="true">20130702T113009,63+01</datetime></revised>
+<lastaccessed><datetime dst="true">20130702T113009,64+01</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20130702T113000,93+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=A Admin/O=ibm</name></updatedby>
+<wassignedby><name>CN=A Admin/O=ibm</name></wassignedby>
+<item name="$Flags"><text>gC~4;</text></item>
+<item name="$TITLE" sign="true"><text>sbtFilesSmartCloud.xsp</text></item>
+
+
+
+
+<item name="$FileNames" sign="true"><text>sbtFilesSmartCloud.xsp</text></item>
+
+<item name="$DesignerVersion"><text>8.5.1</text></item>
+
+
+
+
+</note>

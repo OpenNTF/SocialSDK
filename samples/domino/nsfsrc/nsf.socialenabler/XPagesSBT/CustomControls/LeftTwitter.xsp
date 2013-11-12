@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	
+	<xe:navigator id="outline">
+		<xe:this.treeNodes>
+			<xe:pageTreeNode page="Twitter" label="Tweets"
+				selection="/Twitter/Tweets">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="TwitterSearch" label="Twitter Search"
+				selection="/Twitter/TwitterSearch">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="TwitterOAuth" label="OAuth Dance"
+				selection="/Twitter/OAuthDance">
+			</xe:pageTreeNode>
+		</xe:this.treeNodes>
+	</xe:navigator>
+</xp:view>

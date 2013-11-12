@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -44,6 +44,7 @@ public class CommunityCreateBody extends BaseApiTest {
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         List jsonList = previewPage.getJsonList();
         Assert.assertFalse(jsonList.isEmpty());
+
         Assert.assertEquals(RequestBody, ((JsonJavaObject)jsonList.get(0)).getString("requestBody"));
         Assert.assertEquals(RequestBody, ((JsonJavaObject)jsonList.get(1)).getString("requestBody"));
     }

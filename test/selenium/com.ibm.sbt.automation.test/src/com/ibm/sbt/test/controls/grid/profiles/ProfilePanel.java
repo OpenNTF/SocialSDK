@@ -28,7 +28,7 @@ public class ProfilePanel extends BaseTest {
 
     @Test
     public void testProfilePanel() {
-        assertTrue("Expected the test to generate a grid", checkPanel("Social_Profiles_Controls_ProfilePanel"));
+        assertTrue("Expected the test to generate a grid", checkPanel("Social_Profiles_Controls_Profile_Panel"));
     }																
 
     /**

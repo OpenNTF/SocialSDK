@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	<style type="text/css">
+		.viewPort {
+			width: 345px;
+			height: 439px;
+			background-color: #C5CCD3;
+			overflow-y: hidden;
+			display: inline;
+		}
+		.viewPort3 {
+			width: 501px;
+			height: 294px;
+			background-color: #C5CCD3;
+			overflow-y: hidden;
+			display: inline;
+		}
+		.iDate {
+			position:absolute;
+			top:255px;
+			padding-left:185px;
+			font-family:Helvetica;
+			font-weight:bold;
+			font-size:10pt;
+			display:block;
+		}
+		.phoneTable {
+			float:left;
+		}
+		.landscapeTable {
+			margin-left:20px;
+			margin-top:92px;
+		}
+		#bottom {
+			-webkit-box-reflect:below 5px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.5, transparent), to(white));
+		}
+	</style>
+	<xp:div>
+		
+		<xp:table cellpadding="0" cellspacing="0" border="0"
+			styleClass="phoneTable"
+			>
+			<xp:tr>
+				<xp:td colspan="3" style="position:relative">
+					<xp:image style="position:relative; bottom: -2px;" url="/iph_top.jpg" id="image1"></xp:image>					
+				</xp:td>
+			</xp:tr>
+			<xp:tr>
+				<xp:td>
+					<xp:image url="/iph_left.jpg" id="image2">
+					</xp:image>
+				</xp:td>
+				<xp:td>
+				
+					<iframe class="viewPort" id="iFrame" frameborder="0"
+						src="${javascript:@FullUrl(compositeData.page)+'?platform=iphone'}">
+					</iframe>
+				</xp:td>
+				<xp:td>
+					<xp:image url="/iph_right.jpg" id="image3"></xp:image>
+				</xp:td>
+			</xp:tr>
+			<xp:tr>
+				<xp:td colspan="3">
+					<xp:image url="/iph_bottom.jpg" style="position:relative; top:-3px;" id="image4"></xp:image>
+				</xp:td>
+			</xp:tr>
+		</xp:table>
+		<xp:table cellpadding="0" cellspacing="0" border="0"
+			styleClass="phoneTable landscapeTable"
+			>
+			<xp:tr>
+				<xp:td rowspan="3">
+					<xp:image url="/iph_top_l.jpg" id="image6"></xp:image>
+				</xp:td>
+				<xp:td>
+					<xp:image url="/iph_right_l.jpg" id="image5"></xp:image>
+				</xp:td>
+				<xp:td rowspan="3">
+					<xp:image url="/iph_bottom_l.jpg" id="image7"></xp:image>
+				</xp:td>
+			</xp:tr>
+			<xp:tr>
+				<xp:td>
+					<iframe class="viewPort3" id="iframe1" frameborder="0"
+						src="${javascript:@FullUrl(compositeData.page)+'?platform=iphone'}">
+					</iframe>
+				</xp:td>
+			</xp:tr>
+			<xp:tr>
+				<xp:td>
+					<xp:image url="/iph_left_l.jpg" style="margin-top:-4px;" id="image8"></xp:image>
+				</xp:td>
+			</xp:tr>
+		</xp:table>
+	</xp:div>
+</xp:view>

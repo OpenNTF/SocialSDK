@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xp:this.resources>
+		<xp:dojoModule name="extlib.dijit.ExtLib"></xp:dojoModule>
+		<xp:dojoModule name="extlib.dijit.Loading"></xp:dojoModule>
+	</xp:this.resources>
+	<xp:this.beforePageLoad><![CDATA[#{javascript:@Endpoint('as').getOAuthProvider().acquireToken(true)}]]></xp:this.beforePageLoad>
+	<xc:OneUILayout navigationPath="/SBT/ActivityStreamsXml" title="Social Business Toolkit Activity Streams XML" connection="as">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftSBT></xc:LeftSBT>
+			</xp:panel>
+		</xp:this.facets>
+	
+		<xp:panel id="mainPanel">
+			<xc:WarningSBTUsage></xc:WarningSBTUsage>
+			<xp:tabbedPanel id="tabbedPanel1">
+				<xp:tabPanel label="Activity Stream View" id="tabPanel1">
+					<xe:djContentPane id="djContentPane1"
+						partialRefresh="true">
+						<xe:dataView rows="10" id="dataView1"
+							value="#{activityStreams1}" columnTitles="true" var="entry"
+							collapsibleDetail="true" detailsOnClient="true">
+							<xe:this.data>
+								<xe:activityStreamsData
+									var="activityStreams1"
+									serviceUrl="/vulcan/shindig/rest/activitystreams"
+									endpoint="as" format="atom">
+								</xe:activityStreamsData>
+							</xe:this.data>
+							<xe:this.summaryColumn>
+								<xe:viewSummaryColumn
+									columnTitle="Content" value="#{xpath:entry:title}">
+								</xe:viewSummaryColumn>
+							</xe:this.summaryColumn>
+							<xe:this.extraColumns>
+								<xe:viewExtraColumn
+									columnTitle="Published" value="#{xpath:entry:published}">
+								</xe:viewExtraColumn>
+								<xe:viewExtraColumn
+									columnTitle="Updated" value="#{xpath:entry:updated}">
+								</xe:viewExtraColumn>
+							</xe:this.extraColumns>
+							<xp:this.facets>
+								<xe:pagerDetail id="pagerDetail1"
+									xp:key="pagerTopLeft">
+								</xe:pagerDetail>
+								<xp:pager layout="Previous Group Next"
+									id="pager3" xp:key="pagerTopRight" partialRefresh="true"
+									partialExecute="true">
+								</xp:pager>
+								<xp:panel id="panel2" xp:key="detail">
+									<xp:text escape="true"
+										id="computedField2">
+										<xp:this.value><![CDATA[#{xpath:entry:body}]]></xp:this.value>
+									</xp:text>
+									<xe:listInline id="list1">
+										<xp:link escape="true"
+											text="#{xpath:entry:activity:object/title}"
+											value="#{xpath:entry:activity:object/link}" id="label2" />
+										<xp:label value="#{xpath:entry:activity:verb}"
+											id="label3" />
+										<xp:link escape="true"
+											text="#{xpath:entry:activity:target/title}"
+											value="#{xpath:entry:activity:target/link}" id="label1" />
+									</xe:listInline>
+									<xp:link escape="true"
+										text="See XML Content" id="link3"
+										style="font-style:italic">
+										<xp:eventHandler event="onclick"
+											submit="false">
+											<xp:this.script><![CDATA[XSP.openTooltipDialog("#{id:tooltipDialog1}",'#{id:link3}')]]></xp:this.script>
+										</xp:eventHandler>
+									</xp:link>
+									<xe:tooltipDialog
+										id="tooltipDialog1" title="XML content for the entry">
+										<xp:div
+											style="overflow: auto; height: 250px; width: 600px;">
+											<pre>
+												<xp:text escape="true"
+													id="computedField3"
+													value="#{javascript:entry.getXMLString(false)}">
+												</xp:text>
+											</pre>
+										</xp:div>
+									</xe:tooltipDialog>
+								</xp:panel>
+							</xp:this.facets>
+						</xe:dataView>
+					</xe:djContentPane>
+				</xp:tabPanel>
+				<xp:tabPanel label="As XML/Atom Text" id="tabPanel2">
+					<xp:button value="Read 5 activity stream entries using the ATOM format" id="button1">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete">
+							<xp:this.action><![CDATA[#{javascript:var p = {
+	startIndex: 1,
+	count: 5,
+	format: 'atom'
+}
+var svc = new sbt.ActivityStreamsService(@Endpoint('as'),"/vulcan/shindig/rest/activitystreams")
+var doc = svc.get(p);
+viewScope.text = doc.getXMLString(false)
+}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:button>
+					<br />
+					<pre>
+						<xp:text escape="true" id="computedField1" value="#{viewScope.text}"
+							style="font-family:Courier;">
+						</xp:text>
+					</pre>
+				</xp:tabPanel>
+			</xp:tabbedPanel>
+		</xp:panel>
+	</xc:OneUILayout>
+</xp:view>
+

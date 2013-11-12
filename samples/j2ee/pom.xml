@@ -10,7 +10,7 @@
 		<version>2.0.0-SNAPSHOT</version>
 	</parent>
 	<modules>
-		<module>sso.sample.webapp</module>
+	
 	</modules>
 
 </project>

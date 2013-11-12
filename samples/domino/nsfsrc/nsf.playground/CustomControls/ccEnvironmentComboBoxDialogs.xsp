@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xe:dialog id="customEnvDialog" title="Custom Environment"
+		styleClass="EnvDialog">
+		<xp:panel style="margin-left:10px; margin-right: 5px;">
+			<xp:this.data>
+				<xp:dominoDocument var="document1" formName="Environment">
+					<xp:this.postNewDocument><![CDATA[#{javascript:var env = dataAccess.getCustomEnvironment();
+dataAccess.writeEnvironment(env,document1);}]]></xp:this.postNewDocument>
+				</xp:dominoDocument>
+			</xp:this.data>
+			<xe:dialogContent id="dialogContent1" style="height: 65em; width: 75em;" >
+				<xe:dynamicContent id="dynp" defaultFacet="${javascript:sessionScope.envDlg||'wizard'}"
+					partialEvents="true">
+					<xp:this.facets>
+						<xc:ccEnvironmentForm xp:key="editor"
+							editbean="true"></xc:ccEnvironmentForm>
+						<xc:ccEnvironmentWizard xp:key="wizard"></xc:ccEnvironmentWizard>
+					</xp:this.facets>
+				</xe:dynamicContent>
+			</xe:dialogContent>
+			<xe:dialogButtonBar id="dialogButtonBar1">
+				<xp:panel id="panel1">
+					<xe:linksList id="linksList1" style="float:left">
+						<xe:this.treeNodes>
+							<xe:basicLeafNode label="Simple Mode"
+								submitValue="wizard">
+							</xe:basicLeafNode>
+							<xe:basicLeafNode label="Advanced Mode"
+								submitValue="editor">
+							</xe:basicLeafNode>
+						</xe:this.treeNodes>
+						<xp:eventHandler event="onItemClick"
+							submit="true" refreshMode="complete">
+							<xe:this.action><![CDATA[#{javascript:sessionScope.envDlg=context.getSubmittedValue()
+sessionScope.envCat=''
+sessionScope.envGroup=''
+getComponent('dynp').show(sessionScope.envDlg)}]]></xe:this.action>
+						</xp:eventHandler></xe:linksList>
+					<xp:button value="Save" id="button4">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete">
+							<xp:this.action><![CDATA[#{javascript:var env = dataAccess.getCustomEnvironment();
+dataAccess.readEnvironment(env,document1.getDocument(true));
+if(true) {
+	context.reloadPage();
+} else {
+	var dlg = getComponent('customEnvDialog')
+	dlg.hide();
+}
+}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:button>
+					<xp:button value="Cancel" id="button6">
+						<xp:eventHandler event="onclick" submit="false">
+							<xp:this.script><![CDATA[XSP.closeDialog('#{id:customEnvDialog}')]]></xp:this.script>
+						</xp:eventHandler>
+					</xp:button>
+				</xp:panel>
+			</xe:dialogButtonBar>
+		</xp:panel>
+	</xe:dialog>
+
+	<xe:tooltipDialog id="envTooltipDialog" title="Environment">
+		<xp:panel style="max-width: 450px; margin-left:10px; margin-right: 5px;">
+			<xp:this.data>
+				<xp:dominoDocument var="document1" formName="Environment"
+					action="openDocument">
+					<xp:this.documentId><![CDATA[#{javascript:var e = dataAccess.getEnvironment(sessionScope.environment)
+return e!=null ? e.getNoteID() : null}]]></xp:this.documentId>
+					<xp:this.postOpenDocument><![CDATA[#{javascript:if(sessionScope.environment==dataAccess.CUSTOM) {
+	var env = dataAccess.getCustomEnvironment();
+	document1.replaceItemValue("Name",env.getName());
+	document1.replaceItemValue("Description",env.getDescription());
+}
+}]]></xp:this.postOpenDocument>
+				</xp:dominoDocument>
+			</xp:this.data>
+			<xp:text escape="true" id="computedField1" value="#{document1.Name}"
+				style="font-weight:bold;font-style:italic">
+			</xp:text>
+			<br />
+			<xp:inputRichText id="inputRichText1" value="#{document1.Description}"
+				readonly="true">
+			</xp:inputRichText>
+		</xp:panel>
+	</xe:tooltipDialog>
+
+</xp:view>

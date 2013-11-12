@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xc:OneUILayout navigationPath="/Util/HttpHeader" title="Http Header (CORS)">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftUtilities></xc:LeftUtilities>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:panel id="main">
+			<xe:httpHeader id="httpHeader1" loaded="false">
+				<xe:this.headers>
+					<xp:parameter name="Access-Control-Allow-Origin"
+						value="*">
+					</xp:parameter>
+				</xe:this.headers>
+			</xe:httpHeader>
+			<xp:br></xp:br>
+			This page shows the use of the httpHeader component to set custom HTTP headers to the page.<xp:br></xp:br>
+			
+			<xp:checkBox text="Set CORS Http Headers" id="checkBox1"></xp:checkBox>
+			<xp:br></xp:br>
+			<xp:button value="Call External Services" id="button1">
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script><![CDATA[//var url = "http://search.twitter.com/search.json?q=%23xpages&result_type=recent&count=5&callback=?"
+var url = "http://search.twitter.com/search.json?q=%23xpage"
+
+var xhr = new XMLHttpRequest();
+xhr.open("GET", url, true);
+xhr.onreadystatechange = function(){
+  if ( xhr.readyState == 4 ) {
+	var e = dojo.byId("SvcResult");
+    if ( xhr.status == 200 ) {
+      e.innerHTML = "My Name is: " + xhr.responseText;
+    } else {
+      e.innerHTML = "ERROR";
+    }
+  }
+};
+xhr.send(null);  
+/*
+var xhr = new XMLHttpRequest();
+xhr.open("get", url, false);
+xhr.onreadystatechange =function(){ 
+	if (http.readyState == 4) {
+		var textout = xhr.responseText;
+		var e = dojo.byId("SvcResult");
+		e.innerHTML = textout;
+		alert("out="+textout)  
+	}
+};
+xhr.send(null)
+*/
+/*
+dojo.xhrGet({
+	url: url,
+	handleAs: "text",
+	load: function(data) {
+		var e = dojo.byId("SvcResult");
+		e.innerHTML = data;
+	},
+	error: function(error) {
+		var e = dojo.byId("SvcResult");
+		e.innerHTML = error;
+	}
+});
+*/]]></xp:this.script>
+				</xp:eventHandler></xp:button>
+			<xp:button value="Call External Services" id="button2">
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script><![CDATA[//var url = "http://search.twitter.com/search.json?q=%23xpages&result_type=recent&count=5&callback=?"
+var url = "http://search.twitter.com/search.json?q=%23xpages"
+dojo.xhrGet({
+	url: url,
+	handleAs: "text",
+	load: function(data) {
+		var e = dojo.byId("SvcResult");
+		e.innerHTML = data;
+	},
+	error: function(error) {
+		var e = dojo.byId("SvcResult");
+		e.innerHTML = error;
+	}
+});
+]]></xp:this.script>
+				</xp:eventHandler></xp:button><xp:br></xp:br>
+			<xp:br></xp:br>
+			Result:
+			<xp:br></xp:br>
+			<pre id="SvcResult">
+			</pre>
+			</xp:panel>
+	</xc:OneUILayout>
+</xp:view>

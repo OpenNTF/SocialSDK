@@ -5,5 +5,5 @@ Bundle-SymbolicName: com.ibm.sbt.core.test
 Bundle-Version: 2.0.0.qualifier
 Bundle-Vendor: IBM
 Fragment-Host: com.ibm.sbt.core
-Require-Bundle: org.junit
+Require-Bundle: org.junit;bundle-version="4.0.0"
 Import-Package: org.apache.http.impl.client

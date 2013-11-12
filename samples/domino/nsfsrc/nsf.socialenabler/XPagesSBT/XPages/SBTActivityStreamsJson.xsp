@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xp:this.resources>
+		<xp:dojoModule name="extlib.dijit.ExtLib"></xp:dojoModule>
+		<xp:dojoModule name="extlib.dijit.Loading"></xp:dojoModule>
+	</xp:this.resources>
+	<xp:this.beforePageLoad><![CDATA[#{javascript:@Endpoint('as').getOAuthProvider().acquireToken(true)}]]></xp:this.beforePageLoad>
+	<xc:OneUILayout navigationPath="/SBT/ActivityStreams" title="Social Business Toolkit Activity Streams JSON" connection="as">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftSBT></xc:LeftSBT>
+			</xp:panel>
+		</xp:this.facets>
+	
+		<xp:panel id="mainPanel">
+			<xc:WarningSBTUsage></xc:WarningSBTUsage>
+			<xp:button value="Add an Activity" id="button3">
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script><![CDATA[XSP.openDialog('#{id:activityDialog}')]]></xp:this.script>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:tabbedPanel id="tabbedPanel1">
+				<xp:tabPanel label="Activity Stream View" id="tabPanel1">
+					<xe:djContentPane id="djContentPane1"
+						partialRefresh="true">
+						<xe:dataView rows="10" id="dataView1"
+							value="#{activityStreams1}" columnTitles="true" var="entry"
+							collapsibleDetail="true" detailsOnClient="true">
+							<xe:this.data>
+								<xe:activityStreamsData
+									var="activityStreams1" serviceUrl="/vulcan/shindig/rest/activitystreams"
+									endpoint="as">
+								</xe:activityStreamsData>
+							</xe:this.data>
+							<xe:this.summaryColumn>
+								<xe:viewSummaryColumn
+									columnTitle="Content" columnName="title">
+								</xe:viewSummaryColumn>
+							</xe:this.summaryColumn>
+							<xe:this.extraColumns>
+								<xe:viewExtraColumn
+									columnTitle="Date">
+									<xe:this.converter>
+										<xp:convertDateTime></xp:convertDateTime>
+									</xe:this.converter>
+									<xe:this.value><![CDATA[#{javascript:if(entry.postedTime) {
+	return new java.util.Date(parseInt(entry.postedTime));
+}
+return null;}]]></xe:this.value>
+								</xe:viewExtraColumn>
+							</xe:this.extraColumns>
+							<xp:this.facets>
+								<xe:pagerDetail id="pagerDetail1"
+									xp:key="pagerTopLeft">
+								</xe:pagerDetail>
+								<xp:pager layout="Previous Group Next"
+									id="pager3" xp:key="pagerTopRight" partialRefresh="true"
+									partialExecute="true">
+								</xp:pager>
+								<xp:panel id="panel2" xp:key="detail">
+									<xp:text escape="true"
+										id="computedField2">
+										<xp:this.value><![CDATA[#{entry.body}]]></xp:this.value>
+									</xp:text>
+									<xe:listInline id="list1">
+										<xp:link escape="true"
+											text="#{entry.object.displayName}"
+											value="#{entry.object.link}" id="label2" />
+										<xp:label value="#{entry.verb}"
+											id="label3" />
+										<xp:link escape="true"
+											text="#{entry.target.displayName}"
+											value="#{entry.target.link}" id="label1" />
+									</xe:listInline>
+									<xp:link escape="true"
+										text="See JSON Content" id="link3"
+										style="font-style:italic">
+										<xp:eventHandler event="onclick"
+											submit="false">
+											<xp:this.script><![CDATA[XSP.openTooltipDialog("#{id:tooltipDialog1}",'#{id:link3}')]]></xp:this.script>
+										</xp:eventHandler>
+									</xp:link>
+									<xe:tooltipDialog
+										id="tooltipDialog1" title="JSON content for the entry">
+										<xp:div
+											style="overflow: auto; height: 250px; width: 600px;">
+											<pre>
+												<xp:text escape="true"
+													id="computedField3"
+													value="#{javascript:toJson(entry,false)}">
+												</xp:text>
+											</pre>
+										</xp:div>
+									</xe:tooltipDialog>
+								</xp:panel>
+							</xp:this.facets>
+						</xe:dataView>
+					</xe:djContentPane>
+				</xp:tabPanel>
+				<xp:tabPanel label="As JSON Text" id="tabPanel2">
+					<xp:button value="Read 5 activity stream entries as JSON" id="button1">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete">
+							<xp:this.action><![CDATA[#{javascript:var p = {
+	startIndex: 1,
+	count: 5
+}
+var svc = new sbt.ActivityStreamsService(@Endpoint('as'),"/vulcan/shindig/rest/activitystreams")
+var msg = svc.get(p,"json");
+viewScope.text = toJson(msg,false)
+}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:button>
+					<br />
+					<pre>
+						<xp:text escape="true" id="computedField1" value="#{viewScope.text}"
+							style="font-family:Courier;">
+						</xp:text>
+					</pre>
+				</xp:tabPanel>
+			</xp:tabbedPanel>
+		</xp:panel>
+		<xe:dialog id="activityDialog" title="New Activity">
+			<xp:panel>
+				<xp:this.data>
+
+					<xe:objectData var="objectData1">
+						<xe:this.createObject><![CDATA[#{javascript:return {
+    "postedTime":0,						
+	"title":"An event has occurred",
+	"actor":{
+		"id":"ae8ba4c0-9825-102f-989e-c0e3f204291e",
+		"displayName": userBean.email
+	},
+	"body":"",
+	"object":{
+		"id":"",
+		"displayName":"",
+		"link":@AbsoluteUrl(view.getRequestUrl()),
+		"objectType":"type"
+	},
+	"target":{
+		"id":"",
+		"displayName":"",
+		"link":@AbsoluteUrl(view.getRequestUrl()),
+		"objectType":"type"
+	}
+}
+}]]></xe:this.createObject>
+						<xe:this.saveObject><![CDATA[#{javascript:var svc = new sbt.ActivityStreamsService(@Endpoint('as'),"/vulcan/shindig/rest/activitystreams")
+value.postedTime = (new Date()).getTime()
+var msg = svc.post(value);
+}]]></xe:this.saveObject>
+					</xe:objectData>
+				</xp:this.data>
+				<xp:panel id="formPanel" style='padding: 10px'>
+					<xe:formTable id="formTable1"
+						formDescription="Enter here the data for your new activity"
+						labelWidth="20%" formTitle="Enter an new activity">
+						<xe:formRow id="formRow3" label="Title:">
+							<xp:inputText id="inputText3" value="#{objectData1.title}"
+								size="40" required="true">
+							</xp:inputText>
+						</xe:formRow>
+						<xe:formRow id="formRow2" label="Body:">
+							<xp:inputTextarea id="inputTextarea1" value="#{objectData1.body}"
+								cols="80" rows="3" required="true">
+							</xp:inputTextarea>
+						</xe:formRow>
+						<hr />
+						<xe:formRow id="formRow4" label="Event Id:">
+							<xp:inputText id="inputText1" value="#{objectData1.object.id}"
+								size="40" required="true">
+							</xp:inputText>
+						</xe:formRow>
+						<xe:formRow id="formRow5" label="Event Name:">
+							<xp:inputText id="inputText2" value="#{objectData1.object.displayName}"
+								size="40" required="true">
+							</xp:inputText>
+						</xe:formRow>
+						<xe:formRow id="formRow1" label="Verb:">
+							<xp:comboBox value="#{objectData1.verb}" id="comboBox1">
+								<xp:selectItem itemLabel="Post" itemValue="post"></xp:selectItem>
+								<xp:selectItem itemLabel="Updated" itemValue="updated"></xp:selectItem>
+								<xp:selectItem itemLabel="Share" itemValue="share"></xp:selectItem>
+							</xp:comboBox>
+						</xe:formRow>
+					</xe:formTable>
+				</xp:panel>
+				<xe:dialogButtonBar>
+					<xp:button value="Ok" id="button15" styleClass="lotusFormButton">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete">
+							<xp:this.action>
+								<xp:actionGroup>
+									<xp:saveDocument
+										var="objectData1">
+									</xp:saveDocument>
+
+									<xp:executeScript>
+
+										<xp:this.script><![CDATA[#{javascript:context.reloadPage()
+}]]></xp:this.script>
+									</xp:executeScript>
+								</xp:actionGroup>
+							</xp:this.action>
+							<xp:this.onStart><![CDATA[XSP.startAjaxLoading()]]></xp:this.onStart>
+							<xp:this.onComplete><![CDATA[XSP.endAjaxLoading()]]></xp:this.onComplete>
+							<xp:this.onError><![CDATA[XSP.endAjaxLoading()]]></xp:this.onError>
+						</xp:eventHandler>
+					</xp:button>
+					<xp:link id="button17" text="Cancel" styleClass="lotusAction">
+						<xp:eventHandler event="onclick" submit="true"
+							immediate="true">
+							<xp:this.action>
+								<xp:actionGroup>
+									<xp:executeScript>
+										<xp:this.script><![CDATA[#{javascript:var c = getComponent("activityDialog")
+c.hide()}]]></xp:this.script>
+									</xp:executeScript>
+								</xp:actionGroup>
+							</xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+				</xe:dialogButtonBar>
+			</xp:panel>
+		</xe:dialog>
+		<br />
+	</xc:OneUILayout>
+</xp:view>
+

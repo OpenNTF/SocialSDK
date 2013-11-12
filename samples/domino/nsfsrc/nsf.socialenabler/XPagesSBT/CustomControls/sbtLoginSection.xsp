@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xp:link escape="true" id="link1">
+		<xp:this.text><![CDATA[#{javascript:return compositeData.label||"Login"}]]></xp:this.text>
+		<xp:eventHandler event="onclick" submit="true"
+			refreshMode="partial" refreshId="loginPanel">
+			<xp:this.action><![CDATA[#{javascript:var c = getComponent("dynamicContent1")
+if(c.getCurrentFacet()=="login") {
+	c.hide();
+} else {
+	c.show("login");
+}}]]></xp:this.action>
+		</xp:eventHandler>
+	</xp:link>
+	<xp:panel id="loginPanel">
+		<xe:dynamicContent id="dynamicContent1">
+			<xp:this.facets>
+				<xp:panel xp:key="login">
+					<xp:div styleClass="lotusLogin lotusLoginForm">
+						<xp:div styleClass="lotusLoginContent">
+							<xc:sbtLoginPanel loginButton="true"
+								endpoint="#{javascript:compositeData.endpoint}">
+							</xc:sbtLoginPanel>
+						</xp:div>
+					</xp:div>
+				</xp:panel>
+			</xp:this.facets>
+		</xe:dynamicContent>
+	</xp:panel>
+</xp:view>

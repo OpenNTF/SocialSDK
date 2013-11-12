@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xp:this.pageTitle><![CDATA[#{javascript:return I18n.format("SBT Demo: {0} [{1}]",
+	@RightBack(@Left(context.getUrl(), '.xsp'), '/'),
+	@Name('[CN]', database.getServer())
+)
+}]]></xp:this.pageTitle>
+	<xc:sbtLoginPage></xc:sbtLoginPage>
+</xp:view>
+

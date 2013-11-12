@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex" publish="false">
+
+	<xp:panel>
+<xe:formTable disableRequiredMarks="false"
+			id="memberDetailsFormTable" disableErrorSummary="true"
+			style="display:inline-block;width:65%;" labelWidth="120px">
+
+			<xe:formRow label="Email:" labelPosition="left">
+				<xp:inputText id="fldEmail" style="width:98%;">
+					<xp:this.value><![CDATA[#{javascript:
+						var connProfSvc = new com.ibm.sbt.services.client.connections.profiles.ProfileService();
+						var myProfile = connProfSvc.getProfile(@Endpoint("connections").getUserIdentity());
+						return myProfile.getEmail();}]]></xp:this.value>
+				</xp:inputText>
+			</xe:formRow>
+
+			<xe:formRow label="Department:" labelPosition="left">
+				<xp:inputText id="fldDepartment" style="width:98%;">
+					<xp:this.value><![CDATA[#{javascript:
+						var connProfSvc = new com.ibm.sbt.services.client.connections.profiles.ProfileService();
+						var myProfile = connProfSvc.getProfile(@Endpoint("connections").getUserIdentity());
+						return myProfile.getDepartment();}]]></xp:this.value>
+				</xp:inputText>
+			</xe:formRow>
+
+			<xe:formRow label="Location:" labelPosition="left">
+				<xp:inputText id="fldLocation" style="width:98%;">
+					<xp:this.value><![CDATA[#{javascript:
+						var connProfSvc = new com.ibm.sbt.services.client.connections.profiles.ProfileService();
+						var myProfile = connProfSvc.getProfile(@Endpoint("connections").getUserIdentity());
+						return myProfile.getAddress();}]]></xp:this.value>
+				</xp:inputText>
+			</xe:formRow>
+
+			<xe:formRow label="Phone:" labelPosition="left">
+				<xp:inputText id="fldPhone" style="width:98%;">
+					<xp:this.value><![CDATA[#{javascript:
+						var connProfSvc = new com.ibm.sbt.services.client.connections.profiles.ProfileService();
+						var myProfile = connProfSvc.getProfile(@Endpoint("connections").getUserIdentity());
+						return myProfile.getPhoneNumber();}]]></xp:this.value>
+				</xp:inputText>
+			</xe:formRow>
+
+			<xe:formRow label="Job title:" labelPosition="left">
+				<xp:inputText id="fldJobTitle" style="width:98%;">
+					<xp:this.value><![CDATA[#{javascript:
+						var connProfSvc = new com.ibm.sbt.services.client.connections.profiles.ProfileService();
+						var myProfile = connProfSvc.getProfile(@Endpoint("connections").getUserIdentity());
+						return myProfile.getTitle();}]]></xp:this.value>
+				</xp:inputText>
+			</xe:formRow>
+			<xe:formRow label=" Connections Id:" labelPosition="left">
+				<xp:inputText id="inputText1" style="width:98%;">
+					<xp:this.value><![CDATA[#{javascript:
+						var connProfSvc = new com.ibm.sbt.services.client.connections.profiles.ProfileService();
+						var myProfile = connProfSvc.getProfile(@Endpoint("connections").getUserIdentity());
+						return myProfile.getId();}]]></xp:this.value>
+				</xp:inputText>
+			</xe:formRow>
+
+			<xe:formRow labelPosition="left" label="Photo:">
+				<xp:table cellspacing="0" cellpadding="0" border="0">
+					<xp:tr>
+						<xp:td>
+							<xp:image id="image2" height="118px"
+								width="118px" alt="" title="">
+								<xp:this.url><![CDATA[#{javascript:
+						var connProfSvc = new com.ibm.sbt.services.client.connections.profiles.ProfileService();
+						var myProfile = connProfSvc.getProfile(@Endpoint("connections").getUserIdentity());
+						return myProfile.getThumbnailUrl();}]]></xp:this.url>
+							</xp:image>
+						</xp:td>
+						<xp:td style="width:110px">
+							<xp:label
+								value="The photo must be in GIF, JPEG, or PNG format. Maximum size is 130px x 130px."
+								id="label2">
+							</xp:label>
+						</xp:td>
+					</xp:tr>
+				</xp:table>
+			</xe:formRow>
+		</xe:formTable>
+	</xp:panel>
+
+</xp:view>

@@ -1,0 +1,52 @@
+[{
+    "code": 404,
+    "cause": {
+        "fileName": "https://localhost:8443/sbt.dojo180/dojo/dojo.js.uncompressed.js",
+        "lineNumber": 15568,
+        "columnNumber": 0,
+        "message": "Unable to load https://localhost:8443/sbt.sample.web/service/proxy/connections/communities/service/atom/community/instance?communityUuid=Foo&dojo.preventCache=1381488125209 status: 404",
+        "stack": ".cache[\"dojo/errors/create\"]/</</ErrorCtor@https://localhost:8443/sbt.dojo180/dojo/dojo.js.uncompressed.js:15568\nhandleResponse@https://localhost:8443/sbt.dojo180/dojo/dojo.js.uncompressed.js:11409\nonLoad@https://localhost:8443/sbt.dojo180/dojo/dojo.js.uncompressed.js:11433\n",
+        "response": {
+            "url": "https://localhost:8443/sbt.sample.web/service/proxy/connections/communities/service/atom/community/instance?communityUuid=Foo&dojo.preventCache=1381488125209",
+            "options": {
+                "headers": {},
+                "handleAs": "text",
+                "ioArgs": {
+                    "args": {
+                        "url": "https://localhost:8443/sbt.sample.web/service/proxy/connections/communities/service/atom/community/instance?communityUuid=Foo",
+                        "handleAs": "text",
+                        "preventCache": true
+                    },
+                    "url": "https://localhost:8443/sbt.sample.web/service/proxy/connections/communities/service/atom/community/instance?communityUuid=Foo&dojo.preventCache=1381488125209",
+                    "query": null,
+                    "handleAs": "text",
+                    "xhr": {}
+                }
+            },
+            "status": 404,
+            "text": "\n\n\n\n\n\n\n\n\n\n\n\n<error xmlns=\"http://www.ibm.com/xmlns/prod/sn\">\n\t<code>404</code>\n\t<message>\n\t\t\n\t\t\t\n\t\t\t\t\n\t\t\t\tThe community which this resource or page is associated with does not exist.\n\t\t\t\n\t\t\t\n\t\t\t\n\t\t\n\t\t\n\t</message>\n \t<trace>\n \t\t\n\t</trace>\n</error>\n",
+            "data": "\n\n\n\n\n\n\n\n\n\n\n\n<error xmlns=\"http://www.ibm.com/xmlns/prod/sn\">\n\t<code>404</code>\n\t<message>\n\t\t\n\t\t\t\n\t\t\t\t\n\t\t\t\tThe community which this resource or page is associated with does not exist.\n\t\t\t\n\t\t\t\n\t\t\t\n\t\t\n\t\t\n\t</message>\n \t<trace>\n \t\t\n\t</trace>\n</error>\n"
+        }
+    },
+    "response": {
+        "url": "https://localhost:8443/sbt.sample.web/service/proxy/connections/communities/service/atom/community/instance",
+        "options": {
+            "handleAs": "text",
+            "query": {
+                "communityUuid": "Foo"
+            }
+        },
+        "data": {
+            "code": 404,
+            "message": "The community which this resource or page is associated with does not exist.",
+            "fileName": "https://localhost:8443/sbt.dojo180/dojo/dojo.js.uncompressed.js",
+            "lineNumber": 499,
+            "columnNumber": 0
+        },
+        "status": 404
+    },
+    "message": "The community which this resource or page is associated with does not exist.",
+    "fileName": "https://localhost:8443/sbt.dojo180/dojo/dojo.js.uncompressed.js",
+    "lineNumber": 499,
+    "columnNumber": 0
+}]

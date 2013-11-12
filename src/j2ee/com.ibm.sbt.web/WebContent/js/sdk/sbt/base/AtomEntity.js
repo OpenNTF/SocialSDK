@@ -268,9 +268,6 @@ define([ "../declare", "../lang", "../stringUtil", "./BaseConstants", "./BaseEnt
         createTitle : function() {
         	var title = this.getTitle();
         	if (title) {
-        		if (this.contentType == "html") {
-            		title = (title && lang.isString(title)) ? title.replace(/</g,"&lt;").replace(/>/g,"&gt;") : title; 
-            	}
         		return stringUtil.transform(TitleTmpl, { "title" : title });
         	}
         	return "";
@@ -285,6 +282,9 @@ define([ "../declare", "../lang", "../stringUtil", "./BaseConstants", "./BaseEnt
         createContent : function() {
         	var content = this.getContent();
         	if (content) {
+        		if (this.contentType == "html") {
+        			content = (content && lang.isString(content)) ? content.replace(/</g,"&lt;").replace(/>/g,"&gt;") : content; 
+            	}
         		return stringUtil.transform(ContentTmpl, { "contentType" : this.contentType, "content" : content });
         	}
         	return "";
@@ -297,7 +297,7 @@ define([ "../declare", "../lang", "../stringUtil", "./BaseConstants", "./BaseEnt
          * @returns {String}
          */
         createSummary : function() {
-        	var summary = this.getContent();
+        	var summary = this.getSunmmary();
         	if (summary) {
         		return stringUtil.transform(SummaryTmpl, { "summary" : summary });
         	}

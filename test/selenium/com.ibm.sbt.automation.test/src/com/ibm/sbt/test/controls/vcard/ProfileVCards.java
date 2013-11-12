@@ -12,7 +12,7 @@ public class ProfileVCards extends BaseVCardTest{
 
 	@Test
 	public void testProfileVCards() {
-		assertTrue("Expected to find the card attachpoints and trigger the appearance of the vcards on the page", super.checkProfileVCards("Social_Profiles_Controls_ProfileVCards"));
+		assertTrue("Expected to find the card attachpoints and trigger the appearance of the vcards on the page", super.checkProfileVCards("Social_Profiles_Controls_Profile_VCards"));
 	}
 	
 }

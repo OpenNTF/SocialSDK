@@ -34,7 +34,7 @@ public class ProfileSearch extends BaseGridTest {
 
     @Test
     public void testSearchGrid() {
-        assertTrue("Expected the test to generate a grid", checkGrid("Social_Profiles_Controls_ProfileSearch",true));
+        assertTrue("Expected the test to generate a grid", checkGrid("Social_Profiles_Controls_Profile_Search",true));
     }																
 
 }

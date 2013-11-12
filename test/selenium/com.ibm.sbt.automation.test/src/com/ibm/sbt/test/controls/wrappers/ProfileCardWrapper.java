@@ -4,7 +4,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import com.ibm.sbt.automation.core.test.BaseWrapperTest;
 /*
- * © Copyright IBM Corp. 2012
+ * ï¿½ Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -26,6 +26,6 @@ import com.ibm.sbt.automation.core.test.BaseWrapperTest;
 public class ProfileCardWrapper extends BaseWrapperTest {
     @Test
     public void testProfileCardWrapper() {
-        assertTrue("Expected to find a fully functional VCard in an iframe", checkProfileCardWrapper("Social_Profiles_Controls_ProfileVCardWrapper"));
+        assertTrue("Expected to find a fully functional VCard in an iframe", checkProfileCardWrapper("Social_Profiles_Controls_Profile_VCard_Wrapper"));
     }
 }

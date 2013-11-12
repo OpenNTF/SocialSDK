@@ -32,7 +32,7 @@ public class OneClickToJoin extends BaseGridTest {
 	
     @Test 
     public void testGrid() {
-        assertTrue("Expected the test to generate a grid", checkGrid("Social_Communities_Controls_OneClickToJoin"));
+        assertTrue("Expected the test to generate a grid", checkGrid("Social_Communities_Controls_One_Click_To_Join"));
         
     }
     

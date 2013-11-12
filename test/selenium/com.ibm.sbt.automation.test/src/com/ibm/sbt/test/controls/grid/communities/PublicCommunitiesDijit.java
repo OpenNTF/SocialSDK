@@ -30,7 +30,7 @@ public class PublicCommunitiesDijit extends BaseGridTest {
 
     @Test
     public void testGrid() {
-        assertTrue("Expected the test to generate a grid", checkGrid("Social_Communities_Controls_PublicCommunitiesDijit"));
+        assertTrue("Expected the test to generate a grid", checkGrid("Social_Communities_Controls_Public_Communities_Dijit"));
     }
     
     @Override

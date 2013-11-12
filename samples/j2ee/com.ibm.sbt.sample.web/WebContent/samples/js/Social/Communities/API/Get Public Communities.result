@@ -1,0 +1,308 @@
+[{
+    "service": {
+        "endpoint": {
+            "authType": "basic",
+            "platform": "connections",
+            "authenticator": {
+                "url": "https://localhost:8443/sbt/js/sdk"
+            },
+            "proxyPath": "connections",
+            "isAuthenticated": false,
+            "transport": {
+                "_inherited": {
+                    "p": 1
+                },
+                "index": 1
+            },
+            "serviceMappings": {},
+            "name": "connections",
+            "authenticationErrorCode": 401,
+            "baseUrl": "https://qs.renovations.com:444",
+            "apiVersion": "4.0",
+            "proxy": {
+                "proxyUrl": "https://localhost:8443/sbt.sample.web/service/proxy"
+            }
+        },
+        "forumService": {}
+    },
+    "dataHandler": {
+        "data": {},
+        "namespaces": {
+            "o": "http://ns.opensocial.org/2008/opensocial",
+            "app": "http://www.w3.org/2007/app",
+            "thr": "http://purl.org/syndication/thread/1.0",
+            "fh": "http://purl.org/syndication/history/1.0",
+            "snx": "http://www.ibm.com/xmlns/prod/sn",
+            "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+            "a": "http://www.w3.org/2005/Atom",
+            "h": "http://www.w3.org/1999/xhtml",
+            "td": "urn:ibm.com/td",
+            "relevance": "http://a9.com/-/opensearch/extensions/relevance/1.0/",
+            "ibmsc": "http://www.ibm.com/search/content/2010",
+            "xhtml": "http://www.w3.org/1999/xhtml",
+            "spelling": "http://a9.com/-/opensearch/extensions/spelling/1.0/",
+            "ca": "http://www.ibm.com/xmlns/prod/composite-applications/v1.0 namespace"
+        },
+        "xpath": {
+            "entry": "/a:entry",
+            "uid": "a:id",
+            "communityUuid": "a:id",
+            "communityTheme": "snx:communityTheme",
+            "title": "a:title",
+            "summary": "a:summary[@type='text']",
+            "communityUrl": "a:link[@rel='alternate']/@href",
+            "communityAtomUrl": "a:link[@rel='self']/@href",
+            "logoUrl": "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/logo']/@href",
+            "tags": "a:category[not(@scheme)]/@term",
+            "content": "a:content[@type='html']",
+            "memberCount": "snx:membercount",
+            "communityType": "snx:communityType",
+            "published": "a:published",
+            "updated": "a:updated",
+            "authorUserid": "a:author/snx:userid",
+            "authorName": "a:author/a:name",
+            "authorEmail": "a:author/a:email",
+            "contributorUserid": "a:contributor/snx:userid",
+            "contributorName": "a:contributor/a:name",
+            "contributorEmail": "a:contributor/a:email"
+        },
+        "_values": {
+            "communityUuid": "http://communities.ibm.com:2006/service/atom/community/instance?communityUuid=c4f08ee9-33ea-4ce7-9b76-ea030a5649e5",
+            "title": "Test Community1381487997269",
+            "communityType": "public",
+            "communityTheme": "",
+            "content": "",
+            "tags": [
+                "demotag"
+            ],
+            "authorUserid": "0F19F8AD-37EA-6033-8525-7BBF005634B5",
+            "authorName": "Frank Adams",
+            "authorEmail": "fadams@renovations.com",
+            "contributorUserid": "0F19F8AD-37EA-6033-8525-7BBF005634B5",
+            "contributorName": "Frank Adams",
+            "contributorEmail": "fadams@renovations.com",
+            "summary": "Test Community updated by Update Community Java snippet",
+            "communityUrl": "https://qs.renovations.com:444/communities/service/html/communityview?communityUuid=c4f08ee9-33ea-4ce7-9b76-ea030a5649e5",
+            "logoUrl": "https://qs.renovations.com:444/communities/service/html/image?communityUuid=c4f08ee9-33ea-4ce7-9b76-ea030a5649e5&lastMod=1381487980983",
+            "memberCount": 1,
+            "published": "2013-10-11T10:39:40.983Z",
+            "updated": "2013-10-11T10:40:00.381Z"
+        }
+    },
+    "getCommunityUuid": "c4f08ee9-33ea-4ce7-9b76-ea030a5649e5",
+    "getTitle": "Test Community1381487997269",
+    "getCommunityType": "public",
+    "getCommunityTheme": "",
+    "getContent": "",
+    "getTags": [
+        "demotag"
+    ],
+    "getAuthor": {
+        "authorUserid": "0F19F8AD-37EA-6033-8525-7BBF005634B5",
+        "authorName": "Frank Adams",
+        "authorEmail": "fadams@renovations.com"
+    },
+    "getContributor": {
+        "contributorUserid": "0F19F8AD-37EA-6033-8525-7BBF005634B5",
+        "contributorName": "Frank Adams",
+        "contributorEmail": "fadams@renovations.com"
+    },
+    "getSummary": "Test Community updated by Update Community Java snippet",
+    "getCommunityUrl": "https://qs.renovations.com:444/communities/service/html/communityview?communityUuid=c4f08ee9-33ea-4ce7-9b76-ea030a5649e5",
+    "getLogoUrl": "https://qs.renovations.com:444/communities/service/html/image?communityUuid=c4f08ee9-33ea-4ce7-9b76-ea030a5649e5&lastMod=1381487980983",
+    "getMemberCount": 1,
+    "getPublished": "2013-10-11T10:39:40.983Z",
+    "getUpdated": "2013-10-11T10:40:00.381Z",
+    "getForumTopics": {
+        "response": null,
+        "isResolved": false,
+        "isRejected": false,
+        "isFulfilled": false,
+        "isCanceled": false
+    },
+    "getSubCommunities": {
+        "isResolved": false,
+        "isRejected": false,
+        "isFulfilled": false,
+        "isCanceled": false
+    },
+    "getMembers": {
+        "isResolved": false,
+        "isRejected": false,
+        "isFulfilled": false,
+        "isCanceled": false
+    },
+    "getMember": {
+        "error": {
+            "code": 400,
+            "message": "Invalid argument 'undefined', expected valid entity identifier."
+        },
+        "isResolved": true,
+        "isRejected": true,
+        "isFulfilled": false,
+        "isCanceled": false
+    },
+    "getForums": {
+        "isResolved": false,
+        "isRejected": false,
+        "isFulfilled": false,
+        "isCanceled": false
+    },
+    "isLoaded": true
+},
+{
+    "service": {
+        "endpoint": {
+            "authType": "basic",
+            "platform": "connections",
+            "authenticator": {
+                "url": "https://localhost:8443/sbt/js/sdk"
+            },
+            "proxyPath": "connections",
+            "isAuthenticated": false,
+            "transport": {
+                "_inherited": {
+                    "p": 1
+                },
+                "index": 1
+            },
+            "serviceMappings": {},
+            "name": "connections",
+            "authenticationErrorCode": 401,
+            "baseUrl": "https://qs.renovations.com:444",
+            "apiVersion": "4.0",
+            "proxy": {
+                "proxyUrl": "https://localhost:8443/sbt.sample.web/service/proxy"
+            }
+        },
+        "forumService": {}
+    },
+    "dataHandler": {
+        "data": {},
+        "namespaces": {
+            "o": "http://ns.opensocial.org/2008/opensocial",
+            "app": "http://www.w3.org/2007/app",
+            "thr": "http://purl.org/syndication/thread/1.0",
+            "fh": "http://purl.org/syndication/history/1.0",
+            "snx": "http://www.ibm.com/xmlns/prod/sn",
+            "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+            "a": "http://www.w3.org/2005/Atom",
+            "h": "http://www.w3.org/1999/xhtml",
+            "td": "urn:ibm.com/td",
+            "relevance": "http://a9.com/-/opensearch/extensions/relevance/1.0/",
+            "ibmsc": "http://www.ibm.com/search/content/2010",
+            "xhtml": "http://www.w3.org/1999/xhtml",
+            "spelling": "http://a9.com/-/opensearch/extensions/spelling/1.0/",
+            "ca": "http://www.ibm.com/xmlns/prod/composite-applications/v1.0 namespace"
+        },
+        "xpath": {
+            "entry": "/a:entry",
+            "uid": "a:id",
+            "communityUuid": "a:id",
+            "communityTheme": "snx:communityTheme",
+            "title": "a:title",
+            "summary": "a:summary[@type='text']",
+            "communityUrl": "a:link[@rel='alternate']/@href",
+            "communityAtomUrl": "a:link[@rel='self']/@href",
+            "logoUrl": "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/logo']/@href",
+            "tags": "a:category[not(@scheme)]/@term",
+            "content": "a:content[@type='html']",
+            "memberCount": "snx:membercount",
+            "communityType": "snx:communityType",
+            "published": "a:published",
+            "updated": "a:updated",
+            "authorUserid": "a:author/snx:userid",
+            "authorName": "a:author/a:name",
+            "authorEmail": "a:author/a:email",
+            "contributorUserid": "a:contributor/snx:userid",
+            "contributorName": "a:contributor/a:name",
+            "contributorEmail": "a:contributor/a:email"
+        },
+        "_values": {
+            "communityUuid": "http://communities.ibm.com:2006/service/atom/community/instance?communityUuid=0ec2cead-258d-4291-bc05-75b7683e3161",
+            "title": "com.ibm.sbt.test.js.connections.communities.api.GetPublicCommunities#1192511252 Community - 1381488071085",
+            "communityType": "public",
+            "communityTheme": "",
+            "content": "",
+            "tags": [
+                "tag1",
+                "tag2",
+                "tag3"
+            ],
+            "authorUserid": "0F19F8AD-37EA-6033-8525-7BBF005634B5",
+            "authorName": "Frank Adams",
+            "authorEmail": "fadams@renovations.com",
+            "contributorUserid": "0F19F8AD-37EA-6033-8525-7BBF005634B5",
+            "contributorName": "Frank Adams",
+            "contributorEmail": "fadams@renovations.com",
+            "summary": "com.ibm.sbt.test.js.connections.communities.api.GetPublicCommunities#1192511252 Community - 1381488071085",
+            "communityUrl": "https://qs.renovations.com:444/communities/service/html/communityview?communityUuid=0ec2cead-258d-4291-bc05-75b7683e3161",
+            "logoUrl": "https://qs.renovations.com:444/communities/service/html/image?communityUuid=0ec2cead-258d-4291-bc05-75b7683e3161&lastMod=1381488074143",
+            "memberCount": 1,
+            "published": "2013-10-11T10:41:14.143Z",
+            "updated": "2013-10-11T10:41:15.338Z"
+        }
+    },
+    "getCommunityUuid": "0ec2cead-258d-4291-bc05-75b7683e3161",
+    "getTitle": "com.ibm.sbt.test.js.connections.communities.api.GetPublicCommunities#1192511252 Community - 1381488071085",
+    "getCommunityType": "public",
+    "getCommunityTheme": "",
+    "getContent": "",
+    "getTags": [
+        "tag1",
+        "tag2",
+        "tag3"
+    ],
+    "getAuthor": {
+        "authorUserid": "0F19F8AD-37EA-6033-8525-7BBF005634B5",
+        "authorName": "Frank Adams",
+        "authorEmail": "fadams@renovations.com"
+    },
+    "getContributor": {
+        "contributorUserid": "0F19F8AD-37EA-6033-8525-7BBF005634B5",
+        "contributorName": "Frank Adams",
+        "contributorEmail": "fadams@renovations.com"
+    },
+    "getSummary": "com.ibm.sbt.test.js.connections.communities.api.GetPublicCommunities#1192511252 Community - 1381488071085",
+    "getCommunityUrl": "https://qs.renovations.com:444/communities/service/html/communityview?communityUuid=0ec2cead-258d-4291-bc05-75b7683e3161",
+    "getLogoUrl": "https://qs.renovations.com:444/communities/service/html/image?communityUuid=0ec2cead-258d-4291-bc05-75b7683e3161&lastMod=1381488074143",
+    "getMemberCount": 1,
+    "getPublished": "2013-10-11T10:41:14.143Z",
+    "getUpdated": "2013-10-11T10:41:15.338Z",
+    "getForumTopics": {
+        "response": null,
+        "isResolved": false,
+        "isRejected": false,
+        "isFulfilled": false,
+        "isCanceled": false
+    },
+    "getSubCommunities": {
+        "isResolved": false,
+        "isRejected": false,
+        "isFulfilled": false,
+        "isCanceled": false
+    },
+    "getMembers": {
+        "isResolved": false,
+        "isRejected": false,
+        "isFulfilled": false,
+        "isCanceled": false
+    },
+    "getMember": {
+        "error": {
+            "code": 400,
+            "message": "Invalid argument 'undefined', expected valid entity identifier."
+        },
+        "isResolved": true,
+        "isRejected": true,
+        "isFulfilled": false,
+        "isCanceled": false
+    },
+    "getForums": {
+        "isResolved": false,
+        "isRejected": false,
+        "isFulfilled": false,
+        "isCanceled": false
+    },
+    "isLoaded": true
+}]

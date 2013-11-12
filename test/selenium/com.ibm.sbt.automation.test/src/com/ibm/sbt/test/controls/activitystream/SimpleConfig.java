@@ -4,7 +4,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import com.ibm.sbt.automation.core.test.BaseActivityStreamTest;
 /*
- * © Copyright IBM Corp. 2012
+ * ï¿½ Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -27,7 +27,7 @@ public class SimpleConfig extends BaseActivityStreamTest {
 	
 	@Test
 	public void testActivityStream() {
-		assertTrue("Expected the ActivityStream to generate a news node", checkActivityStream("Social_ActivityStreams_Controls_SimpleConfig"));
+		assertTrue("Expected the ActivityStream to generate a news node", checkActivityStream("Social_ActivityStreams_Controls_Simple_Config"));
 	}
 	
 }

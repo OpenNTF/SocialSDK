@@ -29,7 +29,7 @@ public class MyActiveFolders extends BaseGridTest {
 
     @Test
     public void myActiveFoldersTest() {
-        assertTrue("Expected the test to generate a grid", checkGrid("Social_Files_Controls_MyActiveFolders",true,true));
+        assertTrue("Expected the test to generate a grid", checkGrid("Social_Files_Controls_My_Active_Folders",true,true));
     }
 
 }

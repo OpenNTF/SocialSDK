@@ -1,0 +1,32 @@
+<script type='text/template' status='404' id='https://localhost:8443/sbt.sample.web/service/proxy/connections/communities/service/atom/community/instance' index='0' handleAs='text' method='GET' location='' error='true'>
+
+
+
+
+
+
+
+
+
+
+
+
+<error xmlns="http://www.ibm.com/xmlns/prod/sn">
+ <code>404</code>
+ <message>
+  
+   
+    
+    The community which this resource or page is associated with does not exist.
+   
+   
+   
+  
+  
+ </message>
+  <trace>
+   
+ </trace>
+</error>
+
+</script>

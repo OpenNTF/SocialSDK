@@ -1,0 +1,133 @@
+[{
+    "service": {
+        "endpoint": {
+            "authType": "basic",
+            "platform": "connections",
+            "authenticator": {
+                "url": "https://localhost:8443/sbt/js/sdk"
+            },
+            "proxyPath": "connections",
+            "isAuthenticated": true,
+            "transport": {
+                "_inherited": {
+                    "p": 1
+                },
+                "index": 4
+            },
+            "serviceMappings": {},
+            "name": "connections",
+            "authenticationErrorCode": 401,
+            "baseUrl": "https://qs.renovations.com:444",
+            "apiVersion": "4.0",
+            "proxy": {
+                "proxyUrl": "https://localhost:8443/sbt.sample.web/service/proxy"
+            }
+        },
+        "forumService": {}
+    },
+    "getCommunityUuid": "43e76c05-c994-4894-880c-49757ceb4bb2",
+    "getTitle": "CreateCommunity Test 1381488243004",
+    "getCommunityType": "public",
+    "getCommunityTheme": null,
+    "getContent": "Create community test content: 1381488243004 - 1",
+    "getTags": [
+        "tag1",
+        "tag2",
+        "tag3"
+    ],
+    "getAuthor": {},
+    "getContributor": {},
+    "getForumTopics": {
+        "isResolved": false,
+        "isRejected": false,
+        "isFulfilled": false,
+        "isCanceled": false
+    },
+    "getSubCommunities": {
+        "isResolved": false,
+        "isRejected": false,
+        "isFulfilled": false,
+        "isCanceled": false
+    },
+    "getMembers": {
+        "isResolved": false,
+        "isRejected": false,
+        "isFulfilled": false,
+        "isCanceled": false
+    },
+    "getMember": {
+        "error": {
+            "code": 400,
+            "message": "Invalid argument 'undefined', expected valid entity identifier."
+        },
+        "isResolved": true,
+        "isRejected": true,
+        "isFulfilled": false,
+        "isCanceled": false
+    },
+    "getForums": {
+        "isResolved": false,
+        "isRejected": false,
+        "isFulfilled": false,
+        "isCanceled": false
+    },
+    "isLoaded": false
+},
+{
+    "code": 409,
+    "cause": {
+        "fileName": "https://localhost:8443/sbt.dojo180/dojo/dojo.js.uncompressed.js",
+        "lineNumber": 15568,
+        "columnNumber": 0,
+        "message": "Unable to load https://localhost:8443/sbt.sample.web/service/proxy/connections/communities/service/atom/communities/my status: 409",
+        "stack": ".cache[\"dojo/errors/create\"]/</</ErrorCtor@https://localhost:8443/sbt.dojo180/dojo/dojo.js.uncompressed.js:15568\nhandleResponse@https://localhost:8443/sbt.dojo180/dojo/dojo.js.uncompressed.js:11409\nonLoad@https://localhost:8443/sbt.dojo180/dojo/dojo.js.uncompressed.js:11433\n",
+        "response": {
+            "url": "https://localhost:8443/sbt.sample.web/service/proxy/connections/communities/service/atom/communities/my",
+            "options": {
+                "headers": {
+                    "Content-Type": "application/atom+xml"
+                },
+                "method": "POST",
+                "handleAs": "text",
+                "ioArgs": {
+                    "args": {
+                        "url": "https://localhost:8443/sbt.sample.web/service/proxy/connections/communities/service/atom/communities/my",
+                        "handleAs": "text",
+                        "headers": {
+                            "Content-Type": "application/atom+xml"
+                        },
+                        "postData": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:app=\"http://www.w3.org/2007/app\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\"><title type=\"text\">CreateCommunity Test 1381488243004</title><content type=\"html\">Create community test content: 1381488243004 - 1</content><category term=\"community\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category><category term=\"tag1\"></category><category term=\"tag2\"></category><category term=\"tag3\"></category><snx:communityType>public</snx:communityType><snx:isExternal>false</snx:isExternal></entry>"
+                    },
+                    "url": "https://localhost:8443/sbt.sample.web/service/proxy/connections/communities/service/atom/communities/my",
+                    "query": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:app=\"http://www.w3.org/2007/app\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\"><title type=\"text\">CreateCommunity Test 1381488243004</title><content type=\"html\">Create community test content: 1381488243004 - 1</content><category term=\"community\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category><category term=\"tag1\"></category><category term=\"tag2\"></category><category term=\"tag3\"></category><snx:communityType>public</snx:communityType><snx:isExternal>false</snx:isExternal></entry>",
+                    "handleAs": "text",
+                    "xhr": {}
+                },
+                "data": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:app=\"http://www.w3.org/2007/app\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\"><title type=\"text\">CreateCommunity Test 1381488243004</title><content type=\"html\">Create community test content: 1381488243004 - 1</content><category term=\"community\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category><category term=\"tag1\"></category><category term=\"tag2\"></category><category term=\"tag3\"></category><snx:communityType>public</snx:communityType><snx:isExternal>false</snx:isExternal></entry>"
+            },
+            "status": 409,
+            "text": "\n\n\n\n\n\n\n\n\n\n\n\n<error xmlns=\"http://www.ibm.com/xmlns/prod/sn\">\n\t<code>409</code>\n\t<message>\n\t\t\n\t\t\t\n\t\t\t\t\n\t\t\t\tA community with the requested name already exists, choose a different name and resubmit.\n\t\t\t\n\t\t\t\n\t\t\t\n\t\t\n\t\t\n\t</message>\n \t<trace>\n \t\t\n\t</trace>\n</error>\n",
+            "data": "\n\n\n\n\n\n\n\n\n\n\n\n<error xmlns=\"http://www.ibm.com/xmlns/prod/sn\">\n\t<code>409</code>\n\t<message>\n\t\t\n\t\t\t\n\t\t\t\t\n\t\t\t\tA community with the requested name already exists, choose a different name and resubmit.\n\t\t\t\n\t\t\t\n\t\t\t\n\t\t\n\t\t\n\t</message>\n \t<trace>\n \t\t\n\t</trace>\n</error>\n"
+        }
+    },
+    "response": {
+        "url": "https://localhost:8443/sbt.sample.web/service/proxy/connections/communities/service/atom/communities/my",
+        "options": {
+            "method": "POST",
+            "query": {},
+            "data": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:app=\"http://www.w3.org/2007/app\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\"><title type=\"text\">CreateCommunity Test 1381488243004</title><content type=\"html\">Create community test content: 1381488243004 - 1</content><category term=\"community\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category><category term=\"tag1\"></category><category term=\"tag2\"></category><category term=\"tag3\"></category><snx:communityType>public</snx:communityType><snx:isExternal>false</snx:isExternal></entry>"
+        },
+        "data": {
+            "code": 409,
+            "message": "A community with the requested name already exists, choose a different name and resubmit.",
+            "fileName": "https://localhost:8443/sbt.dojo180/dojo/dojo.js.uncompressed.js",
+            "lineNumber": 499,
+            "columnNumber": 0
+        },
+        "status": 409
+    },
+    "message": "A community with the requested name already exists, choose a different name and resubmit.",
+    "fileName": "https://localhost:8443/sbt.dojo180/dojo/dojo.js.uncompressed.js",
+    "lineNumber": 499,
+    "columnNumber": 0
+}]

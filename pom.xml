@@ -21,18 +21,6 @@
 					<name>notes-platform</name>
 				</property>
 			</activation>
-			<repositories>
-				<repository>
-					<id>notes</id>
-					<layout>p2</layout>
-					<url>${notes-platform}</url>
-				</repository>
-				<repository>
-					<id>eclipse</id>
-					<layout>p2</layout>
-					<url>http://download.eclipse.org/releases/juno/</url>
-				</repository>
-			</repositories>
 			<modules>
 				<module>xpages</module>
 			</modules>
@@ -42,18 +30,18 @@
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
-			<repositories>
-				<repository>
-					<id>eclipse</id>
-					<layout>p2</layout>
-					<url>http://download.eclipse.org/releases/juno/</url>
-				</repository>
-			</repositories>
+
 		</profile>
 	</profiles>
 
 
-
+	<repositories>
+		<repository>
+			<id>eclipse</id>
+			<layout>p2</layout>
+			<url>http://download.eclipse.org/releases/juno/</url>
+		</repository>
+	</repositories>
 	<modules>
 		<module>libraries</module>
 		<module>deps</module>

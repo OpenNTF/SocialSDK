@@ -6,6 +6,14 @@
 
 	<version>2.0.0-SNAPSHOT</version>
 
+	<repositories>
+		<repository>
+			<id>notes</id>
+			<layout>p2</layout>
+			<url>${notes-platform}</url>
+		</repository>
+	</repositories>
+
 	<parent>
 		<artifactId>com.ibm.sbt</artifactId>
 		<groupId>com.ibm.sbt</groupId>

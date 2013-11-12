@@ -362,9 +362,9 @@ define([ "../declare", "../lang", "../stringUtil", "./BaseConstants", "./BaseEnt
          * @returns {String}
          */
         createTags : function() {
-            var tags = this.getTags();
-            if (tags) {
+        	if (this.getTags && this.getTags()) {
                 var value = "";
+        		var tags = this.getTags();
                 for (var tag in tags) {
                     value += stringUtil.transform(CategoryTmpl, { "tag" : tags[tag] });
                 }
@@ -393,7 +393,8 @@ define([ "../declare", "../lang", "../stringUtil", "./BaseConstants", "./BaseEnt
         	var namespaces = this.dataHandler ? this.dataHandler.namespaces : this.namespaces;
         	for (prefix in namespaces) {
         		if (prefix != "a") { // ATOM automatically included
-        			namespaceData += "xmlns:"+prefix+"=\"" + namespaces[prefix] + "\" ";
+        			namespaceData += (namespaceData.length > 0) ? " " : "";
+        			namespaceData += "xmlns:"+prefix+"=\"" + namespaces[prefix] + "\"";
         		}
         	}
         	return namespaceData;

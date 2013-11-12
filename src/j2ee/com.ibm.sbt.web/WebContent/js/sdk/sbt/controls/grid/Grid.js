@@ -99,11 +99,6 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
             
             this.selectedRows = [];
             
-            if (args && args.containerType) {
-            	this.containerType = args.containerType;
-            }
-  
-            
             if (!this.store) {
                 if (args && args.storeArgs) {
                     this._storeArgs = args.storeArgs;

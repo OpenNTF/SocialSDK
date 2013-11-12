@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.ibm.com/xsp/core xsdxp://localhost/xsp~core.xsd
+http://www.ibm.com/xsp/custom xsdxp://localhost/xsp~custom.xsd"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xc:OneUILayout navigationPath="/SmartCloud/MyCommunities" title="My SmartCloudCommunities">
+		<xc:sbtSmartCloudCommunities communityType="myCommunities"></xc:sbtSmartCloudCommunities>
+		<xp:this.facets>
+			<xc:LeftSmartCloud xp:key="LeftColumn"></xc:LeftSmartCloud>
+		</xp:this.facets></xc:OneUILayout></xp:view>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xc:OneUILayout navigationPath="/Home" title="Home">
+		<xp:div style="font-weight:bold;text-align:center;font-size:24pt">
+			<xp:label value="Welcome to XPages Social Enabler"
+				id="label5" style="font-size:24pt;font-weight:bold">
+			</xp:label>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+		</xp:div>
+	</xc:OneUILayout>
+</xp:view>
+

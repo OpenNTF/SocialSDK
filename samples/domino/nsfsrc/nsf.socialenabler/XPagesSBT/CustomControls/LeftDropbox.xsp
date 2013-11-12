@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xe:navigator id="outline">
+		<xe:this.treeNodes>
+			<xe:pageTreeNode page="DropboxFiles"
+				label="Files" selection="/Dropbox/Files">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="DropboxOAuth"
+				label="OAuth Dance" selection="/Dropbox/OAuthDance">
+			</xe:pageTreeNode>
+		</xe:this.treeNodes>
+	</xe:navigator>
+</xp:view>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xp:this.beforePageLoad><![CDATA[#{javascript:viewScope.endpoint = param.endpoint||compositeData.defaultEndpoint||"connections"}]]></xp:this.beforePageLoad>
+	<xp:div styleClass="lotusLogin lotusLoginForm">
+		<xp:div styleClass="lotusLoginBox">
+			<xp:div styleClass="lotusLoginContent">
+				<xp:div>
+					<h1>
+						<xp:text escape="true" id="computedField1">
+							<xp:this.value><![CDATA[#{javascript:var ep = @Endpoint(viewScope.endpoint)
+var tg = ep.getLabel()||viewScope.endpoint
+return I18n.format("Login to {0}",tg)}]]></xp:this.value>
+						</xp:text>
+					</h1>
+					<h2>
+						Enter your user name and password and then
+						click Login
+					</h2>
+					<xp:br />
+					<xp:br />
+					<xc:sbtLoginPanel endpoint="#{viewScope.endpoint}"
+						loginButton="true">
+					</xc:sbtLoginPanel>
+				</xp:div>
+			</xp:div>
+		</xp:div>
+	</xp:div>
+</xp:view>

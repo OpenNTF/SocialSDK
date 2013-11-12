@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xc:OneUILayout navigationPath="/Util/Functions" title="@Functions">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftUtilities></xc:LeftUtilities>
+			</xp:panel>
+		</xp:this.facets>	
+		<xp:panel id="main">
+			<xp:table>
+				<xp:tr>
+					<xp:td>
+					@Endpoint("connections").getUrl()
+					</xp:td>
+					<xp:td>
+						<xp:text escape="true" id="computedField1">
+							<xp:this.value><![CDATA[#{javascript:@Endpoint("connections").getUrl()}]]></xp:this.value>
+						</xp:text>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>
+					Current User
+					</xp:td>
+					<xp:td>
+						<xp:text escape="true" id="computedField4"
+							value="#{javascript:@UserName()}">
+
+						</xp:text>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>
+					@IdentityFromId('facebook','CN=Frank Adams/O=renovations')
+					</xp:td>
+					<xp:td>
+						<xp:text escape="true" id="computedField2"
+							value="#{javascript:@IdentityFromId('facebook','CN=Frank Adams/O=renovations')}">
+						</xp:text>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>
+					@IdentityFromId('facebook','fadams@facebook.com')
+					</xp:td>
+					<xp:td>
+						<xp:text escape="true" id="computedField3"
+							value="#{javascript:@IdFromIdentity('facebook','fadams@facebook.com')}">
+						</xp:text>
+					</xp:td>
+				</xp:tr>
+			</xp:table>
+		</xp:panel>
+	</xc:OneUILayout>
+</xp:view>

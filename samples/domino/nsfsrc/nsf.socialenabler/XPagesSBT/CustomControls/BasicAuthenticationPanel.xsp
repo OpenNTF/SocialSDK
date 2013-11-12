@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	<xp:panel rendered="#{javascript:compositeData.endpoint}">
+		<xp:text escape="true" id="computedField1">
+			<xp:this.value><![CDATA[#{javascript:var ep = @Endpoint(compositeData.endpoint)
+if(ep.isAuthenticated()) {
+	return I18n.format("Authenticated as: {0}, ",ep.getUserIdentity())
+} else {
+	return "Not authenticated, "
+}}]]></xp:this.value>
+		</xp:text>
+		<xp:link escape="true" id="link1">
+			<xp:this.text><![CDATA[#{javascript:var ep = @Endpoint(compositeData.endpoint)
+return ep.isAuthenticated() ? "Logout" : "Login";
+}]]></xp:this.text>
+			<xp:eventHandler event="onclick" submit="true"
+				refreshMode="complete">
+				<xp:this.action><![CDATA[#{javascript:var ep = @Endpoint(compositeData.endpoint)
+if(ep.isAuthenticated()) {
+	ep.logout();
+} else {
+	ep.authenticate(true);
+}
+
+}]]></xp:this.action>
+			</xp:eventHandler></xp:link>
+	</xp:panel>
+</xp:view>

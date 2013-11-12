@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+		
+		<xp:viewPanel rows="30" id="viewPanel2" var="profile">
+			<xp:this.facets>
+				<xp:pager partialRefresh="true"
+					layout="Previous Group Next" xp:key="headerPager" id="pager2">
+				</xp:pager>
+			</xp:this.facets>
+	<xp:this.value><![CDATA[#{javascript:
+                var connProfSvc = new com.ibm.sbt.services.client.connections.profiles.ProfileService();
+		var params = new java.util.HashMap();
+		params.put("name","Frank");
+		var profiles = connProfSvc.searchProfiles(params);
+		return profiles;}]]></xp:this.value>
+			<xp:viewColumn columnName="DisplayName" id="viewColumn5"
+				value="#{javascript:profile.getDisplayName();}">
+				<xp:viewColumnHeader value="Description"
+					id="viewColumnHeader1">
+				</xp:viewColumnHeader>
+			</xp:viewColumn>
+			<xp:viewColumn columnName="Id" id="viewColumn1"
+				value="#{javascript:profile.getUserid();}">
+				<xp:viewColumnHeader value="Connections Id"
+					id="viewColumnHeader2">
+				</xp:viewColumnHeader>
+			</xp:viewColumn>
+		</xp:viewPanel>
+		
+</xp:view>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+
+	<xp:label value="Note: " id="label1" style="font-weight:bold"></xp:label>
+	<xp:label value="The Social Business Toolkit samples work against the toolkit currently (September 2011) deployed on Greenhouse. However the SBT REST APIs will change." id="label2"></xp:label>
+	<br></br><br></br>
+	
+</xp:view>

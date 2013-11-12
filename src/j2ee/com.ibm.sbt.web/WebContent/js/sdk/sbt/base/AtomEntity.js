@@ -52,11 +52,18 @@ define([ "../declare", "../lang", "../stringUtil", "./BaseConstants", "./BaseEnt
          * @param args
          */
         constructor : function(args) {
-        	// create XML data handler
-        	this.dataHandler = this.createDataHandler(args.service, args.data,
-        		args.namespaces || this.namespaces || BaseConstants.Namespaces,
-                args.xpath || this.xpath || BaseConstants.AtomEntryXPath
-            );
+        	if (args.data) {
+	        	// create XML data handler
+	        	this.dataHandler = this.createDataHandler(
+	        		args.service, args.data || null, args.response || null,
+	        		args.namespaces || this.namespaces || BaseConstants.Namespaces,
+	                args.xpath || this.xpath || BaseConstants.AtomEntryXPath
+	            );
+        	} else {
+        		this.service = args.service || this.service;
+        		this.namespaces = args.namespaces || this.namespaces || BaseConstants.Namespaces;
+        		this.xpath = args.xpath || this.xpath || BaseConstants.AtomEntryXPath;
+        	}
         },
         
         /**
@@ -64,7 +71,7 @@ define([ "../declare", "../lang", "../stringUtil", "./BaseConstants", "./BaseEnt
          * 
          * @method createDataHandler
          */
-        createDataHandler : function(service, data, namespaces, xpath) {
+        createDataHandler : function(service, data, response, namespaces, xpath) {
         	return new XmlDataHandler({
                 service : service,
                 data : data,
@@ -73,6 +80,24 @@ define([ "../declare", "../lang", "../stringUtil", "./BaseConstants", "./BaseEnt
             });
         },
         
+        /**
+         * Called to set the entity data after the entity
+         * was loaded. This will cause the existing fields to be cleared.
+         * 
+         * @param data
+         */
+        setData : function(data, response) {
+        	// create XML data handler
+    		this.dataHandler = this.createDataHandler(
+    			this.service, 
+    			data, response || null,
+        		this.namespaces || BaseConstants.Namespaces,
+                this.xpath || BaseConstants.AtomEntryXPath
+            );
+        	
+        	this.inherited(arguments);
+        },
+                
         /**
          * Return the value of id from ATOM entry document.
          * 
@@ -297,7 +322,7 @@ define([ "../declare", "../lang", "../stringUtil", "./BaseConstants", "./BaseEnt
          * @returns {String}
          */
         createSummary : function() {
-        	var summary = this.getSunmmary();
+        	var summary = this.getSummary();
         	if (summary) {
         		return stringUtil.transform(SummaryTmpl, { "summary" : summary });
         	}
@@ -364,11 +389,8 @@ define([ "../declare", "../lang", "../stringUtil", "./BaseConstants", "./BaseEnt
          * @method createNamespaces
          */
         createNamespaces : function() {
-        	if (!this.dataHandler) {
-        		return "";
-        	}
         	var namespaceData = "";
-        	var namespaces = this.dataHandler.namespaces;
+        	var namespaces = this.dataHandler ? this.dataHandler.namespaces : this.namespaces;
         	for (prefix in namespaces) {
         		if (prefix != "a") { // ATOM automatically included
         			namespaceData += "xmlns:"+prefix+"=\"" + namespaces[prefix] + "\" ";

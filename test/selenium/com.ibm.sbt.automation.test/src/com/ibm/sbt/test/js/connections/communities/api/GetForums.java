@@ -29,11 +29,11 @@ import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
  *  
  * @date 25 Mar 2013
  */
-public class GetForumTopics extends BaseCommunitiesTest {
+public class GetForums extends BaseCommunitiesTest {
     
-    static final String SNIPPET_ID = "Social_Communities_API_GetForumTopics";
+    static final String SNIPPET_ID = "Social_Communities_API_GetForums";
 
-    public GetForumTopics() {
+    public GetForums() {
         setAuthType(AuthType.AUTO_DETECT);
     }
 
@@ -43,8 +43,8 @@ public class GetForumTopics extends BaseCommunitiesTest {
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         List jsonList = previewPage.getJsonList();
-        //Assert.assertEquals(community.getTitle(), ((JsonJavaObject)jsonList.get(0)).getString("Community Title"));
-        //Assert.assertEquals(community.getCommunityUuid(), ((JsonJavaObject)((List)jsonList.get(1)).get(0)).getString("getCommunityUuid"));
+        Assert.assertEquals(community.getTitle(), ((JsonJavaObject)jsonList.get(0)).getString("Community Title"));
+        Assert.assertEquals(community.getCommunityUuid(), ((JsonJavaObject)((List)jsonList.get(1)).get(0)).getString("getCommunityUuid"));
     }
     
 }

@@ -28,7 +28,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
 	var CategoryInvite = "<category term=\"invite\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category>";
 	var CategoryEvent = "<category term=\"event\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category>";
     
-	var IsExternalTmpl = "<snx:isExternal>${isExternal}</snx:isExternal>"
+	var IsExternalTmpl = "<snx:isExternal>${isExternal}</snx:isExternal>";
     var CommunityTypeTmpl = "<snx:communityType>${getCommunityType}</snx:communityType>";
     var CommunityUuidTmpl = "<snx:communityUuid xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\">${getCommunityUuid}</snx:communityUuid>";
     var CommunityThemeTmpl = "<snx:communityTheme xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\" snx:uuid=\"default\">${getCommunityTheme}</snx:communityTheme>";
@@ -59,7 +59,6 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
 
     	xpath : consts.CommunityXPath,
     	namespaces : consts.CommunityNamespaces,
-    	contentType : "html",
     	categoryScheme : CategoryCommunity,
     	    	
         /**
@@ -76,7 +75,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * 
          * @method createDataHandler
          */
-        createDataHandler : function(service, data, namespaces, xpath) {
+        createDataHandler : function(service, data, response, namespaces, xpath) {
         	return new CommunityDataHandler({
                 service : service,
                 data : data,
@@ -377,8 +376,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
 
             var self = this;
             var callbacks = {
-                createEntity : function(service,data,response) {
-                	self.setData(data);
+                createEntity : function(service, data, response) {
+                	self.setData(data, response);
                     return self;
                 }
             };
@@ -586,8 +585,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
 
             var self = this;
             var callbacks = {
-                createEntity : function(service,data,response) {
-                    self.setData(data);
+                createEntity : function(service, data, response) {
+                    self.setData(data, response);
                     return self;
                 }
             };
@@ -791,8 +790,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
 
             var self = this;
             var callbacks = {
-                createEntity : function(service,data,response) {
-                    self.setData(data);
+                createEntity : function(service, data, response) {
+                    self.setData(data, response);
                     return self;
                 }
             };
@@ -1005,7 +1004,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         createEntity : function(service,data,response) {
             return new Community({
                 service : service,
-                data : data
+                data : data,
+                response: response
             });
         }
     };
@@ -1039,7 +1039,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         createEntity : function(service,data,response) {
             return new Invite({
                 service : service,
-                data : data
+                data : data,
+                response: response
             });
         }
     };
@@ -1059,7 +1060,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         createEntity : function(service,data,response) {
             return new Event({
                 service : service,
-                data : data
+                data : data,
+                response: response
             });
         }
     };
@@ -1071,7 +1073,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         createEntity : function(service,data,response) {
             return new Community({
                 service : service,
-                data : data
+                data : data,
+                response: response
             });
         }
     };
@@ -1088,10 +1091,10 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 xpath : consts.CommunityFeedXPath
             });
         },
-        createEntity : function(service,data,response) {
+        createEntity : function(service, data, response) {
         	var forumService = service.getForumService();
         	var forumTopic = forumService.newForumTopic({});
-        	forumTopic.setData(data);
+        	forumTopic.setData(data, response);
             return forumTopic;
         }
     };
@@ -1217,7 +1220,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                     return new Member({
                         service : service,
                         communityUuid : communityUuid,
-                        data : data
+                        data : data,
+                        response: response
                     });
                 }
             }, MemberFeedCallbacks);
@@ -1509,11 +1513,11 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             }
             
             var callbacks = {};
-            callbacks.createEntity = function(service,data,response) {
+            callbacks.createEntity = function(service, data, response) {
             	// preserve the communityUuid
             	var communityUuid = community.getCommunityUuid();
             	if (data) {
-                	community.setData(data);
+                	community.setData(data, response);
             	}
             	community.setCommunityUuid(communityUuid);
                 return community;
@@ -1708,8 +1712,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             }
 
             var callbacks = {};
-            callbacks.createEntity = function(service,data,response) {
-                invite.setData(data);
+            callbacks.createEntity = function(service, data, response) {
+                invite.setData(data, response);
                 return invite;
             };
 
@@ -1782,8 +1786,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             
             // return the community id for the community whose invite is accepted in the argument of the success promise.
             var callbacks = {}; 
-            callbacks.createEntity = function(service,data,response) { 
-            	invite.setData(data);
+            callbacks.createEntity = function(service, data, response) { 
+            	invite.setData(data, response);
                 return invite;
             };
             
@@ -1813,10 +1817,10 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             }
 
             var callbacks = {};
-            callbacks.createEntity = function(service,data,response) {
+            callbacks.createEntity = function(service, data, response) {
                 var topicUuid = this.getLocationParameter(response, "topicUuid");
                 forumTopic.setTopicUuid(topicUuid);
-                forumTopic.setData(data);
+                forumTopic.setData(data, response);
                 return forumTopic;
             };
 

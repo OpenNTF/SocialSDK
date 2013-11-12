@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -15,36 +15,37 @@
  */
 package com.ibm.sbt.test.js.connections.communities.api;
 
-import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Test;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.connections.BaseCommunitiesTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
+import com.ibm.sbt.services.client.connections.communities.Member;
 
 /**
  * @author mwallace
- *  
- * @date 25 Mar 2013
+ * 
+ * @date 5 Mar 2013
  */
-public class GetForumTopics extends BaseCommunitiesTest {
-    
-    static final String SNIPPET_ID = "Social_Communities_API_GetForumTopics";
+public class RemoveMember extends BaseCommunitiesTest {
 
-    public GetForumTopics() {
-        setAuthType(AuthType.AUTO_DETECT);
-    }
+    static final String SNIPPET_ID = "Social_Communities_API_RemoveMember";
 
     @Test
-    public void testGetForumTopics() {
+    public void testRemoveMember() {
+    	String id = getProperty("sample.email2");
+    	if (environment.isSmartCloud()) {
+    		id = getProperty("smartcloud.id2");
+    	}
+        addMember(community, id, "member");
+            	
         addSnippetParam("sample.communityId", community.getCommunityUuid());
+        addSnippetParam("sample.id2", id);
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
-        List jsonList = previewPage.getJsonList();
-        //Assert.assertEquals(community.getTitle(), ((JsonJavaObject)jsonList.get(0)).getString("Community Title"));
-        //Assert.assertEquals(community.getCommunityUuid(), ((JsonJavaObject)((List)jsonList.get(1)).get(0)).getString("getCommunityUuid"));
+        JsonJavaObject json = previewPage.getJson();
+        Assert.assertFalse("Remove member failed", hasMember(community, getProperty("sample.email2")));
     }
-    
+
 }

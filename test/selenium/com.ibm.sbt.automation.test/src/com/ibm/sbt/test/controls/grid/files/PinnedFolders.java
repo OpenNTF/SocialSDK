@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -29,7 +29,7 @@ public class PinnedFolders extends BaseGridTest {
 
     @Test
     public void pinnedFoldersTest() {
-        assertTrue("Expected the test to generate a grid", checkGrid("Social_Files_Controls_PinnedFolders"));
+        assertTrue("Expected the test to generate a grid", checkGrid("Social_Files_Controls_Pinned_Folders"));
     }
 
 }

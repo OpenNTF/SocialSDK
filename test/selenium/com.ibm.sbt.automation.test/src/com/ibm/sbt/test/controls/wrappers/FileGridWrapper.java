@@ -4,7 +4,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import com.ibm.sbt.automation.core.test.BaseWrapperTest;
 /*
- * © Copyright IBM Corp. 2012
+ * ï¿½ Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -27,7 +27,7 @@ public class FileGridWrapper extends BaseWrapperTest {
 
     @Test
     public void testFileGridWrapper() {
-        assertTrue("Expected the test to generate a grid in an iframe", checkFileGridWrapper("Social_Files_Controls_FileGridWrapper"));
+        assertTrue("Expected the test to generate a grid in an iframe", checkFileGridWrapper("Social_Files_Controls_File_Grid_Wrapper"));
     }
 
 }

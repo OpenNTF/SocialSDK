@@ -40,7 +40,7 @@ public class CommunityMembersGrid extends BaseCommunitiesGridTest {
     @Ignore
     public void testCreateCommunity() {
     	// Check grid
-    	assertTrue("Expected the test to generate a grid", checkGrid("Social_Communities_Controls_CommunityMembers",true,true));
+    	assertTrue("Expected the test to generate a grid", checkGrid("Social_Communities_Controls_Community_Members",true,true));
     }
     
     @Before

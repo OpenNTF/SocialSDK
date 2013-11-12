@@ -31,7 +31,7 @@ public class MyCommunitiesGrid extends BaseGridTest {
 
     @Test @Ignore
     public void testGrid() {
-        assertTrue("Expected the test to generate a grid", checkGrid("Social_Communities_Controls_MyCommunitiesGrid",true,true));
+        assertTrue("Expected the test to generate a grid", checkGrid("Social_Communities_Controls_My_Communities_Grid",true,true));
     }
     
 }

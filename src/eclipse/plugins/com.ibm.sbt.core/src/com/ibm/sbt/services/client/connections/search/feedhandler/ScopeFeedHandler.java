@@ -61,9 +61,7 @@ public class ScopeFeedHandler implements IFeedHandler{
 	public BaseEntity createEntityFromData(Object data) {
 		Node node = (Node)data;
 		XPathExpression expr = (data instanceof Document) ? (XPathExpression)SearchXPath.entry.getPath() : null;
-		XmlDataHandler handler = new XmlDataHandler(node, ConnectionsConstants.nameSpaceCtx, expr);
-		Scope result = new Scope(service, handler);
-		return result;
+		return new Scope(service, node, ConnectionsConstants.nameSpaceCtx, expr);
 	}
 
 	@Override

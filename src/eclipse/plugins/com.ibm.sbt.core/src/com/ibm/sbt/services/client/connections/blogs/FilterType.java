@@ -35,7 +35,7 @@ public enum FilterType {
 	BLOG_COMMENTS("feed/comments/atom"),
 	BLOG_TAGS("feed/tags/atom"),
 	CREATE_BLOG("api/blogs"),
-	UPDATE_REMOVE_BLOG("api/blogs/"),
+	GET_UPDATE_REMOVE_BLOG("api/blogs/"),
 	BLOG_POST("feed/entry/atom"),
 	CREATE_BLOG_POST("api/entries"),
 	UPDATE_REMOVE_POST("api/entries/"),

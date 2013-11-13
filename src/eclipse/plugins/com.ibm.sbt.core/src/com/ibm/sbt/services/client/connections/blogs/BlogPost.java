@@ -127,7 +127,11 @@ public class BlogPost extends BaseBlogEntity {
      * @return {String} Blog handle of the blog post
      */
 	public String getBlogHandle() throws BlogServiceException{
-		return extractBlogHandle(getAsString(BlogXPath.alternateUrl));
+		if(StringUtil.isNotEmpty(getAsString(BlogXPath.alternateUrl)))
+			return extractBlogHandle(getAsString(BlogXPath.alternateUrl));
+		else{
+			return getAsString(BlogXPath.handle);
+		}
 	}
 	/**
      * Sets blog handle of IBM Connections blog post.
@@ -172,12 +176,7 @@ public class BlogPost extends BaseBlogEntity {
      * @throws BlogServiceException
      */
     public void remove() throws BlogServiceException{
-    	if(StringUtil.isNotEmpty(getBlogHandle())){
     		getService().removeBlogPost(getPostUuid(), getBlogHandle());
-    	}
-    	else{
-    		getService().removeBlogPost(getPostUuid(), getAsString(BlogXPath.handle));
-    	}
 	}
 	
 	/*

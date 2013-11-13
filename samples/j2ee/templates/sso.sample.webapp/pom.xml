@@ -3,13 +3,15 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>sso.sample.webapp</artifactId>
+
+	<packaging>war</packaging>
+
 	<parent>
 		<groupId>com.ibm.sbt</groupId>
-		<artifactId>com.ibm.samples.j2ee</artifactId>
+		<artifactId>com.ibm.samples.templates</artifactId>
 		<version>2.0.0-SNAPSHOT</version>
 	</parent>
-	
-	<packaging>war</packaging>
+
 	<dependencies>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>

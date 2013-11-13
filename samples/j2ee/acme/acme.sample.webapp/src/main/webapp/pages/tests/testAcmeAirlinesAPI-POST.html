@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Tests the Data Controller</title>
+
+<link rel='stylesheet' href='/sbt.dojo180/dojo/resources/dojo.css'
+	type='text/css' />
+
+<link rel='stylesheet' href='/sbt.dojo180/dijit/themes/dijit.css'
+	type='text/css' />
+<link rel='stylesheet' href='/sbt.dojo180/dijit/themes/claro/claro.css'
+	type='text/css' />
+
+<script type="text/javascript" src="/sbt.dojo180/dojo/dojo.js"
+	data-dojo-config="async: true, isDebug: true"></script>
+
+</head>
+<body>
+	<script>
+		require(
+				[ "dojo/_base/xhr", "dojo/on", "dojo/dom", "dojo/json",
+						"dojo/_base/array", "dojo/domReady!" ],
+				function(xhr, on, dom, json, array) {
+					function testAirportCode() {
+						xhr
+								.get({
+									url : "http://localhost:8080/acme.social.sample.dataapp/rest/api/airportcodes",
+									load : function(data) {
+										dom.byId("content").innerHTML = "";
+										var n = json.parse(data);
+										var airportCodes = n.airports;
+
+										array.forEach(airportCodes, function(
+												entry) {
+											var city = entry.city;
+											var state = entry.state;
+											var code = entry.code;
+											var output = city + " " + state
+													+ " " + code + "<br/>";
+											dom.byId("content").innerHTML = dom
+													.byId("content").innerHTML
+													+ output;
+
+										});
+
+									},
+									preventCache : true
+								});
+
+					}
+
+					
+
+					/**
+					 * the following are the onclick activations
+					 */
+					on(dom.byId("testAirportCodeB"), "click", testAirportCode);
+					
+					
+				});
+					
+	</script>
+
+	
+	<button id='testAirportCodeB'>Tests the Airport Codes - GET</button>
+	<p />
+	City
+	<input type='text' id='airportcodecity' />
+	</br>
+	<button id='testAirportCodeByCityB'>Tests the Airport Code By
+		City - GET</button>
+	<p />
+	
+	<hr>
+<p id="content"></p>
+
+</body>
+</html>

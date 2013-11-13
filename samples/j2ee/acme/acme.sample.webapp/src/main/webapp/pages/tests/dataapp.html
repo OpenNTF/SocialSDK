@@ -1,0 +1,500 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Tests the Data Controller</title>
+
+<link rel='stylesheet' href='/sbt.dojo180/dojo/resources/dojo.css'
+	type='text/css' />
+
+<link rel='stylesheet' href='/sbt.dojo180/dijit/themes/dijit.css'
+	type='text/css' />
+<link rel='stylesheet' href='/sbt.dojo180/dijit/themes/claro/claro.css'
+	type='text/css' />
+
+<script type="text/javascript" src="/sbt.dojo180/dojo/dojo.js"
+	data-dojo-config="async: true, isDebug: true"></script>
+
+</head>
+<body>
+	<script>
+		require(
+				[ "dojo/_base/xhr", "dojo/on", "dojo/dom", "dojo/json",
+						"dojo/_base/array", "dojo/domReady!" ],
+				function(xhr, on, dom, json, array) {
+					function testAirportCode() {
+						xhr
+								.get({
+									url : "http://localhost:8080/acme.social.sample.dataapp/rest/api/airportcodes",
+									load : function(data) {
+										dom.byId("content").innerHTML = "";
+										var n = json.parse(data);
+										var airportCodes = n.airports;
+
+										array.forEach(airportCodes, function(
+												entry) {
+											var city = entry.city;
+											var state = entry.state;
+											var code = entry.code;
+											var output = city + " " + state
+													+ " " + code + "<br/>";
+											dom.byId("content").innerHTML = dom
+													.byId("content").innerHTML
+													+ output;
+
+										});
+
+									},
+									preventCache : true
+								});
+
+					}
+
+					function testAirportCodeByCity() {
+						var city = dom.byId("airportcodecity").value;
+						var endpoint = "http://localhost:8080/acme.social.sample.dataapp/rest/api/airportcodebycity/"
+								+ city;
+						console.log(endpoint);
+						xhr.get({
+							url : endpoint,
+							load : function(data) {
+								dom.byId("content").innerHTML = "";
+
+								var entry = json.parse(data);
+								var code = entry.code;
+								var output = code + "<br/>";
+								dom.byId("content").innerHTML = output;
+
+							},
+							preventCache : true
+						});
+
+					}
+					
+					function testAirportCodeByCityAndState() {
+						var city = dom.byId("airportcodecitystate-city").value;
+						var state = dom.byId("airportcodecitystate-state").value;
+						var endpoint = "http://localhost:8080/acme.social.sample.dataapp/rest/api/airportcodebycityandsate/"
+								+ city + "/" + state;
+						console.log(endpoint);
+						xhr.get({
+							url : endpoint,
+							load : function(data) {
+								dom.byId("content").innerHTML = "";
+
+								var entry = json.parse(data);
+								var code = entry.code;
+								var output = code + "<br/>";
+								dom.byId("content").innerHTML = output;
+
+							},
+							preventCache : true
+						});
+
+					}
+
+					function testFlightsAll() {
+						var endpoint = "http://localhost:8080/acme.social.sample.dataapp/rest/api/flights/all/";
+						xhr.get({
+							url : endpoint,
+							load : function(data) {
+								dom.byId("content").innerHTML = "";
+								var n = json.parse(data);
+								console.log(n);
+								var flights = n.flights;
+
+								array.forEach(flights, function(
+										entry) {
+									var output = "";
+									
+									var flight = entry.Flight;
+									output += flight + " ";
+									
+									var depart = entry.Depart;
+									output += depart + " ";
+									
+									var arrive = entry.Arrive;
+									output += arrive + " ";
+									
+									var time = entry.Time;
+									output += time + " ";
+									
+									var flightTime = entry.FlightTime;
+									output += flightTime + " ";
+									
+									output += "<br/>";
+									dom.byId("content").innerHTML = dom
+											.byId("content").innerHTML
+											+ output;
+
+								});
+
+							},
+							preventCache : true
+						});
+
+					}
+					
+					function testFlightDetails() {
+						var flightNumber = dom.byId("flightnumber").value;
+						var endpoint = "http://localhost:8080/acme.social.sample.dataapp/rest/api/flight/"
+								+ flightNumber;
+						console.log(endpoint);
+						xhr.get({
+							url : endpoint,
+							load : function(data) {
+								var entry = json.parse(data);
+								var output = "";
+								
+								var flight = entry.Flight;
+								output += flight + " ";
+								
+								var depart = entry.Depart;
+								output += depart + " ";
+								
+								var arrive = entry.Arrive;
+								output += arrive + " ";
+								
+								var time = entry.Time;
+								output += time + " ";
+								
+								var flightTime = entry.FlightTime;
+								output += flightTime + " ";
+								
+								output += "<br/>";
+								dom.byId("content").innerHTML = dom
+										.byId("content").innerHTML
+										+ output;
+
+							},
+							preventCache : true
+						});
+
+					}
+					
+					function testLogout() {
+						var endpoint = "http://localhost:8080/acme.social.sample.dataapp/rest/api/logout/";
+						
+						xhr.get({
+							url : endpoint,
+							load : function(data) {
+								var entry = json.parse(data);
+								var output = "";
+								
+								var res = entry.result;
+								output += res + " ";
+								
+								output += "<br/>";
+								dom.byId("content").innerHTML = dom
+										.byId("content").innerHTML
+										+ output;
+
+							},
+							preventCache : true
+						});
+
+					}
+					
+					function testMOTD() {
+						var endpoint = "http://localhost:8080/acme.social.sample.dataapp/rest/api/messageofday/";
+						
+						xhr.get({
+							url : endpoint,
+							load : function(data) {
+								var entry = json.parse(data);
+								var output = "";
+								
+								var res = entry.msg;
+								output += res + " ";
+								
+								output += "<br/>";
+								dom.byId("content").innerHTML = dom
+										.byId("content").innerHTML
+										+ output;
+
+							},
+							preventCache : true
+						});
+
+					}
+					
+					function testFCAll(){
+						var endpoint = "http://localhost:8080/acme.social.sample.dataapp/rest/api/fc/all";
+						xhr.get({
+							url : endpoint,
+							load : function(data) {
+								dom.byId("content").innerHTML = "";
+								var n = json.parse(data);
+								
+								var flights = n.controller;
+
+								array.forEach(flights, function(
+										entry) {
+									var output = "";
+									
+									var flight = entry.Flight;
+									output += flight + " ";
+									
+									var state = entry.State;
+									output += state + " ";
+								
+									output += "<br/>";
+									dom.byId("content").innerHTML = dom
+											.byId("content").innerHTML
+											+ output;
+
+								});
+
+							},
+							preventCache : true
+						});
+						
+					}
+					
+					function testFCSpecific() {
+						var flightId = dom.byId("flightnumberSpecificFC").value;
+						var endpoint = "http://localhost:8080/acme.social.sample.dataapp/rest/api/fc/" + flightId;
+						
+						xhr.get({
+							url : endpoint,
+							load : function(data) {
+								var entry = json.parse(data);
+								var output = "";
+								
+								var res = entry.status
+								output += res + " ";
+								
+								output += "<br/>";
+								dom.byId("content").innerHTML = dom
+										.byId("content").innerHTML
+										+ output;
+
+							},
+							preventCache : true
+						});
+
+					}
+					
+				
+					function testMyFlights(){
+						var endpoint = "http://localhost:8080/acme.social.sample.dataapp/rest/basic/api/myflights/";
+						
+						xhr.get({
+							url : endpoint,
+							load : function(data) {
+								var n = json.parse(data);
+								var output = "";
+								
+								var res = n.result;
+								
+								if(res == "success"){
+									var flts = n.myflights;
+
+									array.forEach(flts, function(
+											entry) {
+										var output = "";
+										
+										var flight = entry.FlightId;
+										output += flight + " ";
+										
+										var userId = entry.UserId;
+										output += userId + " ";
+										
+										var approverId = entry.ApproverId;
+										output += approverId + " ";
+										
+										var reason = entry.Reason;
+										output += reason + " ";
+										
+										var state = entry.UserId;
+										output += state + " ";
+									
+										output += "<br/>";
+										dom.byId("content").innerHTML = dom
+												.byId("content").innerHTML
+												+ output;
+
+									});
+									
+									
+									
+									output += res + " ";
+									
+									
+									
+									
+									
+									output += "<br/>";
+									dom.byId("content").innerHTML = dom
+											.byId("content").innerHTML
+											+ output;
+									
+									
+									
+									
+									
+								} else{
+									dom.byId("content").innerHTML = "not logged in or invalid request";
+								}
+								
+
+							},
+							preventCache : true
+						});
+					}
+					
+					function testAllFlightRequests(){
+						/*
+						 *This is the one where it uses the parameters in order to acces s the email ids
+						 */ 
+						var flightNumber = dom.byId('allFlightRequestsParam').value; 
+						
+						var endpoint = "http://localhost:8080/acme.social.sample.dataapp/rest/basic/api/allflightrequests"; 
+						
+						xhr.get({
+							url : endpoint,
+							content : {
+								flightId : flightNumber
+							},
+							load : function(data) {
+								var n = json.parse(data);
+																
+								var customers = n.customers;
+
+									array.forEach(customers, function(entry) {
+										var output = "";
+										
+										var flightId = entry.FlightId;
+										output += flightId + " ";
+										var userId = entry.UserId;
+										output += userId + " ";
+										var approverId = entry.ApproverId;
+										output += approverId + " ";
+										var reason = entry.Reason;
+										output += reason + " ";
+										var state = entry.state;
+										output += state + " ";
+										
+										output += " <br/>";
+										dom.byId("content").innerHTML = dom.byId("content").innerHTML + output;
+
+									});
+
+							},
+							preventCache : true
+						});
+						
+					}
+					
+					
+					function testGetReason() {
+						///api/myflightreason
+						var fn = dom.byId('getReasonFlightNumber').value;
+						var uid = dom.byId('getReasonUserId').value;
+
+						var endpoint = "http://localhost:8080/acme.social.sample.dataapp/rest/basic/api/myflightreason";
+
+						xhr
+								.get({ 
+									url : endpoint,
+									content : {
+										flightId : fn, 
+										userId : uid
+									},
+									load : function(data) {
+										var n = json.parse(data);
+										console.log(n);
+										dom.byId("content").innerHTML = n.reason;
+									},
+									preventCache : true
+								});
+					}
+
+					/**
+					 * the following are the onclick activations
+					 */
+					on(dom.byId("testAirportCodeB"), "click", testAirportCode);
+					on(dom.byId("testAirportCodeByCityB"), "click",
+							testAirportCodeByCity);
+					on(dom.byId("testAirportCodeByCityAndStateB"), "click",
+							testAirportCodeByCityAndState);
+					on(dom.byId("testFlightsAllB"), "click", testFlightsAll);
+					on(dom.byId("testFlightDetailsB"), "click",
+							testFlightDetails);
+					on(dom.byId("testLogoutB"), "click", testLogout);
+					on(dom.byId("testMOTDB"), "click", testMOTD);
+					on(dom.byId("testFCAllB"), "click", testFCAll);
+					on(dom.byId("testFCSpecificB"), "click", testFCSpecific);
+					on(dom.byId("testMyFlightsB"), "click", testMyFlights);
+					on(dom.byId("testAllFlightRequestsB"), "click", testAllFlightRequests);
+					on(dom.byId("testGetReasonB"),"click",testGetReason);
+					
+				});
+					
+	</script>
+
+	
+	<button id='testAirportCodeB'>Tests the Airport Codes - GET</button>
+	<p />
+	City
+	<input type='text' id='airportcodecity' />
+	</br>
+	<button id='testAirportCodeByCityB'>Tests the Airport Code By
+		City - GET</button>
+	<p />
+	City
+	<input type='text' id='airportcodecitystate-city' />
+	</br>
+	state
+	<input type='text' id='airportcodecitystate-state' />
+	</br>
+	<button id='testAirportCodeByCityAndStateB'>Tests the Airport Code By
+		City and State- GET</button>
+	<p />
+	
+	<button id='testFlightsAllB'>Tests getting all the Flights - GET</button>
+	<p />
+	
+	Flight Number
+	<input type='text' id='flightnumber' />
+	</br>
+	<button id='testFlightDetailsB'>Tests the flight details - GET</button>
+	<p />
+	
+	<button id='testLogoutB'>Tests the logout - GET</button>
+	<p />
+
+	<button id='testMOTDB'>Tests the Message of the Day - GET</button>
+	<p />
+	
+	<button id='testFCAllB'>Tests the Flight Controller for All - GET</button>
+	<p />
+	
+	Flight Number
+	<input type='text' id='flightnumberSpecificFC' />
+	</br>
+	<button id='testFCSpecificB'>Tests the flight controller's specific flight details - GET</button>
+	<p />
+	
+	<button id='testMyFlightsB'>Tests the retrieving of my flights details - GET</button>
+	<p />
+	
+	Flight Number
+	<input type='text' id='allFlightRequestsParam' />
+	<button id='testAllFlightRequestsB'>Tests the retrieving of customer flight details - GET</button>
+	<p />
+	
+	Flight Number
+	<input type='text' id='getReasonFlightNumber' />
+	
+	User Id	
+	<input type='text' id='getReasonUserId' />
+	<button id='testGetReasonB'>Tests the Get of the Reason - GET</button>
+	<p />
+	
+	<hr>
+<p id="content"></p>
+
+</body>
+</html>

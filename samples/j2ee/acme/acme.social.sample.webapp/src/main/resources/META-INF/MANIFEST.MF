@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Acme Airelines Webapp
+Bundle-SymbolicName: acme.social.sample.webapp
+Bundle-Version: 1.0.0.qualifier
+Require-Bundle: com.ibm.commons;bundle-version="1.0.0",
+ com.ibm.commons.runtime;bundle-version="1.0.0",
+ com.ibm.commons.xml;bundle-version="1.0.0",
+ com.ibm.sbt.core;bundle-version="1.0.0",
+ com.ibm.sbt.libs;bundle-version="1.0.0"

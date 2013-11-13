@@ -183,5 +183,11 @@
 
 
 	</build>
-
+ <scm>
+	<connection>scm:git:https://github.com/LorenzoBoccaccia/SocialSDK.git</connection>
+	<url>https://github.com/LorenzoBoccaccia/SocialSDK.git</url>
+	<developerConnection>scm:git:git@github.com:LorenzoBoccaccia/SocialSDK.git</developerConnection>
+	
+	
+  </scm>
 </project>

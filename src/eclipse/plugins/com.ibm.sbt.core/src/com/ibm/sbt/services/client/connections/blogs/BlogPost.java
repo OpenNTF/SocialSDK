@@ -16,6 +16,7 @@
 
 package com.ibm.sbt.services.client.connections.blogs;
 
+import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 import com.ibm.sbt.services.client.connections.blogs.model.BaseBlogEntity;
@@ -118,14 +119,39 @@ public class BlogPost extends BaseBlogEntity {
 	public String getHitCount() throws BlogServiceException{
 		return getAsString(BlogXPath.hitCount);
 	}
+	
+	 /**
+     * Return the bloghandle of the blog post.
+     * 
+     * @method getBlogHandle
+     * @return {String} Blog handle of the blog post
+     */
+	public String getBlogHandle() throws BlogServiceException{
+		return extractBlogHandle(getAsString(BlogXPath.alternateUrl));
+	}
+	/**
+     * Sets blog handle of IBM Connections blog post.
+     * 
+     * @method setBlogHandle
+     * @param {String} blogHandle of the blog post's blog
+     */
+	public void setBlogHandle(String handle)throws BlogServiceException{
+		setAsString(BlogXPath.handle, handle);
+	}
 	/**
 	* Save this blog post
 	*
 	* @method save
 	* @param blogHandle
 	*/
-	public BlogPost save(String blogHandle) throws BlogServiceException{
-		return getService().createBlogPost(this, blogHandle);
+	public BlogPost save() throws BlogServiceException{
+		if(StringUtil.isEmpty(getPostUuid())){
+			return getService().createBlogPost(this, getAsString(BlogXPath.handle));
+		}
+		else{
+			return getService().updateBlogPost(this, getBlogHandle());
+		}
+		
 	}
 	/**
 	* Loads the blog post object with the atom entry associated with the
@@ -136,10 +162,34 @@ public class BlogPost extends BaseBlogEntity {
 	* @param blogHandle
 	* @param postUuid
 	*/
-	public BlogPost load(String blogHandle, String postId)throws BlogServiceException{
-		return getService().getBlogPost(blogHandle, postId);
+	public BlogPost load()throws BlogServiceException{
+		return getService().getBlogPost(getBlogHandle(), getPostUuid());
 	}
 	
+	/**
+     * This method removes the blogPost on the server
+     *
+     * @throws BlogServiceException
+     */
+    public void remove() throws BlogServiceException{
+    	if(StringUtil.isNotEmpty(getBlogHandle())){
+    		getService().removeBlogPost(getPostUuid(), getBlogHandle());
+    	}
+    	else{
+    		getService().removeBlogPost(getPostUuid(), getAsString(BlogXPath.handle));
+    	}
+	}
+	
+	/*
+     * Extract Blog handle from comment source url
+     */
+    private String extractBlogHandle(String url) {
+    	String urlSuffix = "/entry/";
+    	url = url.substring(0,url.indexOf(urlSuffix));
+    	String bloghandle = url.substring(url.lastIndexOf("/")+1,url.length());
+    	return bloghandle;
+    	
+    }
 	
 
 }

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * ï¿½ Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -191,12 +191,11 @@ public class SnippetServlet extends BaseHttpServlet {
 		for (int i = 0; i < children.size(); i++) {
 			Node node = children.get(i);
 			if (node.isAsset()) {
-				JSSnippetNode snippetNode = (JSSnippetNode) node;
-				sb.append("  <snippet name=\"").append(snippetNode.getName()).append("\"\n");
-				sb.append("           level=\"").append(snippetNode.getLevel()).append("\"\n");
-				sb.append("           path=\"").append(snippetNode.getPath()).append("\"\n");
-				sb.append("           unid=\"").append(snippetNode.getUnid()).append("\"\n");
-				sb.append("           url=\"").append(snippetNode.getUrl(request)).append("\"/>\n");
+				sb.append("  <snippet name=\"").append(node.getName()).append("\"\n");
+				sb.append("           level=\"").append(node.getLevel()).append("\"\n");
+				sb.append("           path=\"").append(node.getPath()).append("\"\n");
+				sb.append("           unid=\"").append(node.getUnid()).append("\"\n");
+				sb.append("           url=\"").append(node.getJspUrl()).append("\"/>\n");
 			}
 		}
 		sb.append("</snippets>\n");

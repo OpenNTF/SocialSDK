@@ -38,13 +38,22 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         },
         
         /**
+         * Namespaces to be used when reading the Blogs ATOM entry or feed
+         */
+        BlogNamespaces : {
+			a : "http://www.w3.org/2005/Atom",
+			app : "http://www.w3.org/2007/app",
+			snx : "http://www.ibm.com/xmlns/prod/sn"
+		},
+        
+        /**
          * XPath expressions to be used when reading a Blog
          * 
          * @property BlogXPath
          * @type Object
          * @for sbt.connections.BlogService
          */
-        BlogXPath : lang.mixin(conn.AtomEntryXPath, {
+        BlogXPath : lang.mixin({}, conn.AtomEntryXPath, {
             blogUuid : "a:id",
             handle : "snx:handle",
             timezone : "snx:timezone",
@@ -62,7 +71,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type Object
          * @for sbt.connections.BlogService
          */
-        BlogPostXPath : lang.mixin(conn.AtomEntryXPath, {
+        BlogPostXPath : lang.mixin({}, conn.AtomEntryXPath, {
             postUuid : "a:id",
             replies : "a:link[@rel='replies']/@href",
             recomendationsUrl : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/recommendations']/@href",
@@ -85,7 +94,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type Object
          * @for sbt.connections.BlogService
          */
-        CommentXPath : lang.mixin(conn.AtomEntryXPath, {
+        CommentXPath : lang.mixin({}, conn.AtomEntryXPath, {
             commentUuid : "a:id",
             commentUrl : "a:link[@rel='self']/@href",
             recomendationsUrl : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/recommendations']/@href",
@@ -108,7 +117,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type Object
          * @for sbt.connections.BlogService
          */
-        RecommendersXPath : lang.mixin(conn.AtomEntryXPath, {
+        RecommendersXPath : lang.mixin({}, conn.AtomEntryXPath, {
             recommenderUuid : "a:id",
             category : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/type']/@term"            
         }),

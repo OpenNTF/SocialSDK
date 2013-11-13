@@ -3,6 +3,10 @@
 	<name>com.ibm.sbt.proxy.web</name>
 	<comment></comment>
 	<projects>
+		<project>com.ibm.commons</project>
+		<project>com.ibm.commons.runtime</project>
+		<project>com.ibm.sbt.core</project>
+		<project>com.ibm.commons.xml</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

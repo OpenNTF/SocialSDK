@@ -2,6 +2,12 @@
 <projectDescription>
 	<name>com.ibm.sbt.web</name>
 	<comment></comment>
+	<projects>
+		<project>com.ibm.commons</project>
+		<project>com.ibm.commons.runtime</project>
+		<project>com.ibm.sbt.core</project>
+		<project>com.ibm.commons.xml</project>
+	</projects>
 	<buildSpec>
 		<buildCommand>
 			<name>org.eclipse.wst.jsdt.core.javascriptValidator</name>

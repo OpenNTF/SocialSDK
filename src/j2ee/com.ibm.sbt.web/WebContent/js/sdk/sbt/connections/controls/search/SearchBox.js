@@ -648,7 +648,6 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 				    popUp.removeChild(popUp.firstChild); 
 				}
 				for(var i=0;i<results.length;i++){
-					//var row = document.createElement("tr");
             		var data = document.createElement("li");
             		var title = results[i].getTitle();
             		var id="";

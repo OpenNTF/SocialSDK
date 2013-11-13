@@ -20,14 +20,13 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.ibm.sbt.test.js.base.CommunityEntryDataHandler;
+import com.ibm.sbt.test.js.base.CommunityFeedDataHandler;
+import com.ibm.sbt.test.js.base.CommunityInvitesFeedDataHandler;
+import com.ibm.sbt.test.js.base.CommunityMembersFeedDataHandler;
 import com.ibm.sbt.test.js.connections.communities.GetCommunityForumTopics;
-import com.ibm.sbt.test.js.connections.communities.api.AddCommunityMember;
+import com.ibm.sbt.test.js.connections.communities.api.AddMember;
 import com.ibm.sbt.test.js.connections.communities.api.Community;
-import com.ibm.sbt.test.js.connections.communities.api.CommunityCreateBody;
-import com.ibm.sbt.test.js.connections.communities.api.CommunityEntryDataHandler;
-import com.ibm.sbt.test.js.connections.communities.api.CommunityFeedDataHandler;
-import com.ibm.sbt.test.js.connections.communities.api.CommunityInvitesFeedDataHandler;
-import com.ibm.sbt.test.js.connections.communities.api.CommunityMembersFeedDataHandler;
 import com.ibm.sbt.test.js.connections.communities.api.CreateCommunity;
 import com.ibm.sbt.test.js.connections.communities.api.CreateCommunityInvalidTitle;
 import com.ibm.sbt.test.js.connections.communities.api.CreateCommunityJson;
@@ -39,7 +38,8 @@ import com.ibm.sbt.test.js.connections.communities.api.CrudCommunity;
 import com.ibm.sbt.test.js.connections.communities.api.DeleteCommunity;
 import com.ibm.sbt.test.js.connections.communities.api.GetAllInvites;
 import com.ibm.sbt.test.js.connections.communities.api.GetCommunity;
-import com.ibm.sbt.test.js.connections.communities.api.GetCommunityMembers;
+import com.ibm.sbt.test.js.connections.communities.api.GetForums;
+import com.ibm.sbt.test.js.connections.communities.api.GetMembers;
 import com.ibm.sbt.test.js.connections.communities.api.GetForumTopics;
 import com.ibm.sbt.test.js.connections.communities.api.GetMyCommunities;
 import com.ibm.sbt.test.js.connections.communities.api.GetMyInvites;
@@ -47,7 +47,7 @@ import com.ibm.sbt.test.js.connections.communities.api.GetPublicCommunities;
 import com.ibm.sbt.test.js.connections.communities.api.GetSaveCommunity;
 import com.ibm.sbt.test.js.connections.communities.api.GetSubCommunities;
 import com.ibm.sbt.test.js.connections.communities.api.NewSaveCommunity;
-import com.ibm.sbt.test.js.connections.communities.api.RemoveCommunityMember;
+import com.ibm.sbt.test.js.connections.communities.api.RemoveMember;
 import com.ibm.sbt.test.js.connections.communities.api.RemoveInvite;
 import com.ibm.sbt.test.js.connections.communities.api.UpdateCommunity;
 import com.ibm.sbt.test.js.connections.communities.api.UpdateCommunityJson;
@@ -60,19 +60,13 @@ import com.ibm.sbt.test.js.connections.communities.api.UpdateCommunityTags;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ 
-    CommunityCreateBody.class,
-    CommunityEntryDataHandler.class, 
-    CommunityFeedDataHandler.class, 
-    CommunityInvitesFeedDataHandler.class,
-    CommunityMembersFeedDataHandler.class,
-    
     //ValidateBaseCommunitiesTest.class,
 
     GetPublicCommunities.class,
     GetMyCommunities.class, 
     GetMyInvites.class, 
     GetAllInvites.class,
-    GetCommunityMembers.class, 
+    GetMembers.class, 
     GetSubCommunities.class,
 
     GetCommunity.class, 
@@ -94,12 +88,13 @@ import com.ibm.sbt.test.js.connections.communities.api.UpdateCommunityTags;
     CreateInvite.class,
     RemoveInvite.class,
     
-    //GetCommunityForumTopics.class,
-    //GetForumTopics.class,
-    //CreateForumTopic.class,
+    GetCommunityForumTopics.class,
+    GetForums.class,
+    GetForumTopics.class,
+    CreateForumTopic.class,
     
-    AddCommunityMember.class,
-    RemoveCommunityMember.class
+    AddMember.class,
+    RemoveMember.class
 })
 public class CommunitiesTestSuite {
     @AfterClass

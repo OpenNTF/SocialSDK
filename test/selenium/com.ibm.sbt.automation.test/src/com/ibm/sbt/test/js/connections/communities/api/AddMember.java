@@ -39,7 +39,7 @@ public class AddMember extends BaseCommunitiesTest {
     		id2 = getProperty("smartcloud.id2");
     	}
     	
-        addSnippetParam("sample.communityId", community.getCommunityUuid());
+        addSnippetParam("CommunityService.communityUuid", community.getCommunityUuid());
         addSnippetParam("sample.id2", id2);
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
@@ -55,7 +55,7 @@ public class AddMember extends BaseCommunitiesTest {
 
     @Test
     public void testAddMemberError1() {
-        addSnippetParam("sample.communityId", community.getCommunityUuid());
+        addSnippetParam("CommunityService.communityUuid", community.getCommunityUuid());
         addSnippetParam("sample.id2", "12345");
             
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
@@ -76,7 +76,7 @@ public class AddMember extends BaseCommunitiesTest {
     		id1 = getProperty("smartcloud.id1");
     	}
     	
-        addSnippetParam("sample.communityId", community.getCommunityUuid());
+        addSnippetParam("CommunityService.communityUuid", community.getCommunityUuid());
         addSnippetParam("sample.id2", id1);
             
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
@@ -89,7 +89,7 @@ public class AddMember extends BaseCommunitiesTest {
     @Test
     public void testAddMemberErrorInvalid() {
         setAuthType(AuthType.NONE);
-        addSnippetParam("sample.communityId", community.getCommunityUuid());
+        addSnippetParam("CommunityService.communityUuid", community.getCommunityUuid());
         addSnippetParam("sample.id2", "");
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);

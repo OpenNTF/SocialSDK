@@ -37,7 +37,7 @@ public class DemoSnippet extends BaseApiTest {
     
     @Test
     public void testDemoSnippet() {
-        addSnippetParam("sample.communityId", "foo");
+        addSnippetParam("CommunityService.communityUuid", "foo");
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         JsonJavaObject json = previewPage.getJson();

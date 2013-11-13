@@ -39,7 +39,7 @@ public class GetCommunity extends BaseCommunitiesTest {
 
     @Test
     public void testGetCommunity() {
-        addSnippetParam("sample.communityId", community.getCommunityUuid());
+        addSnippetParam("CommunityService.communityUuid", community.getCommunityUuid());
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         List jsonList = previewPage.getJsonList();
@@ -49,7 +49,7 @@ public class GetCommunity extends BaseCommunitiesTest {
     
     @Test
     public void testGetCommunityError() {
-        addSnippetParam("sample.communityId", "Foo");
+        addSnippetParam("CommunityService.communityUuid", "Foo");
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         List jsonList = previewPage.getJsonList();
@@ -60,7 +60,7 @@ public class GetCommunity extends BaseCommunitiesTest {
     
     @Test
     public void testGetCommunityInvalidArg() {
-        addSnippetParam("sample.communityId", "");
+        addSnippetParam("CommunityService.communityUuid", "");
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         List jsonList = previewPage.getJsonList();

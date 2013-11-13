@@ -107,7 +107,8 @@ function handleMembersLoaded(members, dom) {
         dom.destroy(select.childNodes[0]);
     }
     for(var i = 0; i < members.length; i++) {
-        var node = dom.create("option", { value: members[i].getUserid(), innerHTML: members[i].getEmail() || members[i].getName() }, select);
+        var node = dom.create("option", { value: members[i].getUserid() }, select);
+        node.appendChild(dom.createTextNode(members[i].getEmail() || members[i].getName()));
     }
     
     currentMembers = members;

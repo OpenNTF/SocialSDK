@@ -24,7 +24,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         /**
          * Namespaces to be used when reading the Search ATOM feed
          */
-        Namespaces : {
+        SearchNamespaces : {
             a : "http://www.w3.org/2005/Atom",
             ibmsc : "http://www.ibm.com/search/content/2010",
             opensearch : "http://a9.com/-/spec/opensearch/1.1/",
@@ -66,24 +66,18 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         },
 
         /**
+         * XPath expressions to be used when reading a scope
+         */
+        ScopeXPath : lang.mixin({}, conn.AtomEntryXPath, {
+            link : "link"
+        }),
+        
+        /**
          * XPath expressions to be used when reading a search result
          */
-        SearchXPath : {
-            // used by getEntityData
-            entry : "/a:entry",
-            // used by getEntityId
-            uid : "a:id",
-            // used by getters
-            title : "a:title",
-            content : "a:content",
-            updated : "a:updated",
-            authorUserid : "a:author/snx:userid",
-            authorName : "a:author/a:name",
-            authorEmail : "a:author/a:email",
+        SearchXPath : lang.mixin({}, conn.AtomEntryXPath, {
             rank : "snx:rank",
             relevance : "relevance:score",
-            summary : "a:summary",
-            authorState : "a:author/snx:userState",
             type : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/type']/@term",
             application : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/component']/@term",
             applicationCount : "count(a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/component']/@term)",
@@ -111,7 +105,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
             objectRefUrl : "ibmsc:field[@id='FIELD_OBJECT_REF_URL']",
             accessControl : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/accesscontrolled']/@term",
             commentsSummary : "ibmsc:field[@id='commentsSummary']"
-        },
+        }),
         
 		/**
          * Returns the set of supported values that can be passed to the "scope" parameter of the Search API. 

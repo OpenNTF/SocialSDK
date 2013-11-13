@@ -29,7 +29,7 @@ public class MyFilesDijit extends BaseGridTest {
 
     @Test
     public void myFilesDijitTest() {
-        assertTrue("Expected the test to generate a grid", checkGrid("Social_Files_Controls_MyFilesDijit"));
+        assertTrue("Expected the test to generate a grid", checkGrid("Social_Files_Controls_My_Files_Dijit"));
     }
 
     @Override

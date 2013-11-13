@@ -27,7 +27,7 @@ public class PublicFolders extends BaseGridTest {
 
     @Test
     public void publicFoldersTest() {
-        assertTrue("Expected the test to generate a grid", checkGrid("Social_Files_Controls_PublicFolders",true,true));
+        assertTrue("Expected the test to generate a grid", checkGrid("Social_Files_Controls_Public_Folders",true,true));
     }
 
 }

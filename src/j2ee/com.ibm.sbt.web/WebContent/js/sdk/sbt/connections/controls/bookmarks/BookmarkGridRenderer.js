@@ -19,8 +19,9 @@ define(["../../../declare", "../../../i18n",
         "../../../text!../../../connections/controls/bookmarks/templates/BookmarkRow.html",
         "../../../text!../../../connections/controls/bookmarks/templates/TagAnchor.html",
         "../../../i18n!../../../connections/controls/bookmarks/nls/BookmarkGridRenderer",
-        "../../../lang"], 
-        function(declare, i18n,  ConnectionsGridRenderer, BookmarkRow,TagAnchor, nls, lang ) {
+        "../../../lang",
+        "../../../text!../../../connections/controls/bookmarks/templates/BookmarkListItem.html"], 
+        function(declare, i18n,  ConnectionsGridRenderer, BookmarkRow,TagAnchor, nls, lang, BookmarkListItem) {
 
 		/**
 		* @class BookmarkGridRenderer
@@ -37,7 +38,15 @@ define(["../../../declare", "../../../i18n",
 			 * @param args
 			 */
 			constructor: function(args){
-				this.template = BookmarkRow;
+				if (args && args.containerType) {
+					if (args.containerType == "ol" || args.containerType == "ul") {
+						this.template = BookmarkListItem;
+					} else if (args.containerType == "table") {
+						this.template = BookmarkRow;
+					}
+				} else {
+					this.template = BookmarkRow;
+				}
 				this.tagAnchorTemplate = TagAnchor;
 			},
 			
@@ -68,7 +77,7 @@ define(["../../../declare", "../../../i18n",
 	             if (tags == undefined) {
 	                 return "";
 	             } else {
-	                 var tagsStr = "";
+	                 var tagsStr = nls.noTags;
 	                 if (lang.isArray(tags)) {
 	                     for (var i=0; i<tags.length; i++) {
 	                         tagsStr += this._substitute(this.tagAnchorTemplate, { tagName : tags[i] });

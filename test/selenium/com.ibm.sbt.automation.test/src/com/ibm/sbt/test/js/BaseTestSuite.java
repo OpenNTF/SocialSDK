@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -28,6 +28,10 @@ import com.ibm.sbt.test.js.base.BaseServiceGetEntities;
 import com.ibm.sbt.test.js.base.BaseServiceGetEntity;
 import com.ibm.sbt.test.js.base.BaseServiceUpdateEntity;
 import com.ibm.sbt.test.js.base.BaseServiceValidation;
+import com.ibm.sbt.test.js.base.CommunityEntryDataHandler;
+import com.ibm.sbt.test.js.base.CommunityFeedDataHandler;
+import com.ibm.sbt.test.js.base.CommunityInvitesFeedDataHandler;
+import com.ibm.sbt.test.js.base.CommunityMembersFeedDataHandler;
 import com.ibm.sbt.test.js.base.VCardDataHandler;
 
 /**
@@ -44,7 +48,12 @@ import com.ibm.sbt.test.js.base.VCardDataHandler;
     BaseServiceDeleteEntity.class,
     BaseServiceUpdateEntity.class,
     BaseServiceGetEntities.class, 
-    VCardDataHandler.class })
+    VCardDataHandler.class,
+    CommunityEntryDataHandler.class, 
+    CommunityFeedDataHandler.class, 
+    CommunityInvitesFeedDataHandler.class,
+    CommunityMembersFeedDataHandler.class,
+})
 public class BaseTestSuite {
     @AfterClass
     public static void cleanup() {

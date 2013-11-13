@@ -331,7 +331,20 @@ define([ "../declare", "../lang", "../stringUtil", "../xml", "../xpath", "./Data
             var nodes = xpath.selectNodes(this.data, this._getXPath(property), this.namespaces);
             var ret = false;
             if (nodes) {
-           		ret = (nodes.length > 0);
+           		if (nodes.length == 1) {
+           			// handle case were node has text value equal true/false
+           			var text = stringUtil.trim(nodes[0].text || nodes[0].textContent);
+           			if (text) {
+           				text = text.toLowerCase();
+           				if ("false" == text) {
+           					return false;
+           				}
+           				if ("true" == text) {
+           					return true;
+           				}
+           			}
+           		}
+            	ret = (nodes.length > 0);
             }
             return ret;
         },

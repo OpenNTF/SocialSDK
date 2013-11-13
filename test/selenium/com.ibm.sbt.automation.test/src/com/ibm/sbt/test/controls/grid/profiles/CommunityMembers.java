@@ -33,7 +33,7 @@ public class CommunityMembers extends BaseGridTest {
 
     @Test
     public void colleaguesGridTest() {
-        assertTrue("Expected the test to generate a grid", checkGrid("Social_Profiles_Controls_CommunityMembers",true,true));
+        assertTrue("Expected the test to generate a grid", checkGrid("Social_Profiles_Controls_Community_Members",true,true));
     }
 
 }

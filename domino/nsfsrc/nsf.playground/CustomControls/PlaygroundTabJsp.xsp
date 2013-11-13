@@ -18,6 +18,7 @@ pageGlobal.jspEditor = CodeMirror.fromTextArea(editor,
 	readOnly: #{javascript:compositeData.readOnly||false},
 	lineNumbers: true
 });
+attachTabIcon(pageGlobal.tabJsp,pageGlobal.jspEditor);
 attachLabel(editor,'#{id:label}');]]></xp:this.value>
 	</xp:scriptBlock>
 </xp:view>

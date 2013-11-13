@@ -15,6 +15,8 @@ pageGlobal.htmlEditor = CodeMirror.fromTextArea(editor,
 	htmlMode: true,
 	lineNumbers: true
 });
+attachTabIcon(pageGlobal.tabHtml,pageGlobal.htmlEditor);
 attachLabel(editor,'#{id:label}');]]></xp:this.value>
 	</xp:scriptBlock>
+	
 </xp:view>

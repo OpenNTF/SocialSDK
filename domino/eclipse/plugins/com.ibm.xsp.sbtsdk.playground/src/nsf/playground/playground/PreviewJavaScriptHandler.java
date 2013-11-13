@@ -6,7 +6,6 @@ import java.io.Serializable;
 import java.io.StringReader;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 
 import javax.servlet.ServletException;
@@ -100,13 +99,12 @@ public class PreviewJavaScriptHandler extends PreviewHandler {
 	        execRequest(req, resp, requestParams);
 		} else {
 			PrintWriter pw = resp.getWriter();
-			pw.println("Social Business Tooolkit Playground - JavaScript Snippet Preview Servlet");
+			pw.println("Social Business Toolkit Playground - JavaScript Snippet Preview Servlet");
 			pw.flush();
 		}
 	}
 
 	protected void execRequest(HttpServletRequest req, HttpServletResponse resp, RequestParams requestParams) throws ServletException, IOException {
-		HttpSession session = req.getSession();
 		resp.setContentType("text/html");
 
 		String sOptions = requestParams.sOptions;
@@ -349,6 +347,16 @@ public class PreviewJavaScriptHandler extends PreviewHandler {
 			pw.print("\"");
 		}
 		pw.println(">");
+		pw.print("<div  id='_jsErrors'>");
+		pw.print("</div>");
+		pw.print("<script type='text/javascript'>");
+		pw.print("  window.onerror = function(msg, url, linenumber) {");
+		pw.print("    var d =  document.createElement('div');");
+		pw.print("    d.innerHTML += 'Unhandled error: '+msg.replace('<', '&lt;').replace('>', '&gt;')+'<br> in page: '+url+'<br>at: '+linenumber;");
+		pw.print("    document.getElementById('_jsErrors').appendChild(d);");
+		pw.print("    return true;");
+		pw.print("  }");
+		pw.print("</script>");
 
 		// Extension: body starts
 		for(int i=0; i<pgExtensions.size(); i++) {
@@ -358,11 +366,7 @@ public class PreviewJavaScriptHandler extends PreviewHandler {
 		pw.println(html);
 		if(StringUtil.isNotEmpty(js)) {
 			String s =   "<script>\n"
-						+"try {\n"
 						+js
-						+"} catch(e) {;\n"
-						+"  document.getElementById('content').innerHTML = 'Exception:'+e.toString();"
-						+"}\n"
 						+"</script>\n";
 			pw.println(s);
 		}		
@@ -374,7 +378,7 @@ public class PreviewJavaScriptHandler extends PreviewHandler {
 		
 		pw.println("</body>");
 		pw.println("</html>");
-		
+	    		
 		pw.flush();
 		pw.close();
 	}	

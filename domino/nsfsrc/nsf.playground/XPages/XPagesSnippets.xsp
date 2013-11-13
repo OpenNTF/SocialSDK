@@ -35,6 +35,7 @@
 	snippetsTree:	'assetsTree',
 	tabContainer:	'#{id:tabContainer}',
 	tabXPages:		'#{id:tabXPages}',
+	tabProperties:	'#{id:tabProperties}',
 	codeDialog:		'#{id:codeDialog}',
 	resultStack:	'#{id:resultStack}'	
 }
@@ -85,7 +86,7 @@ if(doc) {
 		tags:			doc.getItemValueString("tags"),
 		xPages:			doc.getItemValueString("XPages"),
 		properties:		doc.getItemValueString("properties"),
-		documentation:	doc.getItemValueString("documentation")
+		documentation:	doc.getItemValueString("documentation") || doc.getItemValueString("description") 
 	}
 	o.params = snippetBean.extractParams([o.xPages]);
 	return o;
@@ -164,8 +165,12 @@ return o;]]></xe:this.script>
 						<xe:djBorderPane region="center" style="padding:0px">
 							<xe:djTabContainer id="tabContainer"
 								style="width: 100%; height: 100%; border: none">
-								<xe:djTabPane id="djTabProperties" title="Properties"
+								<xe:djTabPane id="tabProperties" title="Properties"
 									onShow="pageGlobal.propertiesEditor.refresh()">
+									<xe:this.dojoAttributes>
+										<xp:dojoAttribute name="iconClass" value="iconTabEmpty">
+										</xp:dojoAttribute>
+									</xe:this.dojoAttributes>
 									<xp:div style="border: 1px solid #AAAAAA; height: 100%">
 										<xc:PlaygroundTabProperties
 											readOnly="true">
@@ -247,6 +252,9 @@ return o;]]></xe:this.script>
 		<xp:this.value><![CDATA[function loadFromHash() {
 	if(dojo.hash()) {
 		var obj = dojo.queryToObject(dojo.hash());
+		if(obj.env) {
+			dojo.byId(pageGlobal.cbEnv).value = obj.env;
+		}
 		if(obj.snippet) {
 			setTimeout(function() {loadSnippet(obj.snippet)});
 		} 

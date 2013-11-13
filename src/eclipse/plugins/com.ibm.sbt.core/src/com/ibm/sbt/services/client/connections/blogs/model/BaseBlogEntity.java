@@ -19,15 +19,18 @@ package com.ibm.sbt.services.client.connections.blogs.model;
 import java.util.Arrays;
 import java.util.List;
 
+import org.w3c.dom.Node;
+
 import com.ibm.commons.util.StringUtil;
+import com.ibm.commons.xml.xpath.XPathExpression;
+import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.blogs.BlogService;
 import com.ibm.sbt.services.client.connections.blogs.BlogServiceException;
-import com.ibm.sbt.services.client.connections.blogs.model.BlogXPath;
-import com.ibm.sbt.services.client.connections.blogs.model.Author;
 
 /**
  * Base model object to be used with Blogs, Posts and Comments
@@ -97,7 +100,8 @@ public class BaseBlogEntity extends BaseEntity {
 	* @return Author
 	*/
 	public Author getAuthor(){
-		return new Author(super.dataHandler);
+		return new Author(getService(),new XmlDataHandler((Node)this.getDataHandler().getData(), 
+	    		ConnectionsConstants.nameSpaceCtx, (XPathExpression)AtomXPath.author.getPath()));
 	}
 	  /**
 	* Returns the updated date

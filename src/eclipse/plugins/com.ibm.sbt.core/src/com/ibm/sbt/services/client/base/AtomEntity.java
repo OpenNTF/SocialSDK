@@ -16,14 +16,13 @@
 package com.ibm.sbt.services.client.base;
 
 import java.util.Date;
-import java.util.Map;
 
 import org.w3c.dom.Node;
 
 import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
-import com.ibm.sbt.services.client.base.datahandlers.FieldEntry;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
+import com.ibm.sbt.services.client.connections.common.Person;
 
 /**
  * @author mwallace
@@ -41,6 +40,16 @@ public class AtomEntity extends BaseEntity {
 	 */
 	public AtomEntity(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
 		super(service, new XmlDataHandler(node, namespaceCtx, xpathExpression));
+	}
+	
+	/**
+	 * Construct an AtomEntity instance.
+	 * 
+	 * @param service
+	 * @param dataHandler
+	 */
+	public AtomEntity(BaseService service, XmlDataHandler dataHandler) {
+		super(service, dataHandler);
 	}
 	
     /**
@@ -117,7 +126,7 @@ public class AtomEntity extends BaseEntity {
      * Return array of category terms from ATOM entry document.
      * 
      * @method getTags
-     * @return {Object} Array of categories of the ATOM entry
+     * @return {Object} Array of categories of the ATOM entry document
      */
     public String[] getCategoryTerms() {
     	return getAsArray(AtomXPath.categoryTerm);
@@ -127,7 +136,7 @@ public class AtomEntity extends BaseEntity {
      * Set new category terms to be associated with this ATOM entry document.
      * 
      * @method setCategories
-     * @param {Object} Array of categories to be added to the ATOM entry
+     * @param {Object} Array of categories to be added to the ATOM entry document
      */
 
     public void setCategoryTerms(String[] categoryTerms) {
@@ -135,44 +144,42 @@ public class AtomEntity extends BaseEntity {
     }
 
     /**
-     * Gets an author of IBM Connections Forum Reply.
+     * Gets a author from ATOM entry document.
      * 
      * @method getAuthor
-     * @return {Member} author Author of the Forum Reply
+     * @return {Member} author of the ATOM entry document
      */
-    public Map<String, String> getAuthor() {
-    	FieldEntry[] entries = new FieldEntry[] { AtomXPath.authorUserid, AtomXPath.authorName, AtomXPath.authorEmail };
-        return this.getAsMap(entries);
+    public Person getAuthor() {
+    	return new Person(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
+    			ConnectionsConstants.nameSpaceCtx, (XPathExpression)AtomXPath.author.getPath()));
     }
 
     /**
-     * Gets a contributor of IBM Connections forum.
+     * Gets a contributor from ATOM entry document.
      * 
      * @method getContributor
-     * @return {Member} contributor Contributor of the forum
+     * @return {Member} contributor of the ATOM entry document
      */
-    public Map<String, String> getContributor() {
-    	FieldEntry[] entries = new FieldEntry[] { AtomXPath.contributorUserid, AtomXPath.contributorName, AtomXPath.contributorEmail };
-        return this.getAsMap(entries);
+    public Person getContributor() {
+    	return new Person(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
+    			ConnectionsConstants.nameSpaceCtx, (XPathExpression)AtomXPath.contributor.getPath()));
     }
     
     /**
-     * Return the published date of the IBM Connections Forum Reply from
-     * Forum Reply ATOM entry document.
+     * Return the published date from ATOM entry document.
      * 
      * @method getPublished
-     * @return {Date} Published date of the Forum Reply
+     * @return {Date} Published date of the ATOM entry document
      */
     public Date getPublished() {
         return this.getAsDate(AtomXPath.published);
     }
 
     /**
-     * Return the last updated date of the IBM Connections Forum Reply from
-     * Forum Reply ATOM entry document.
+     * Return the last updated date from ATOM entry document.
      * 
      * @method getUpdated
-     * @return {Date} Last updated date of the Forum Reply
+     * @return {Date} Last updated date of the ATOM entry document
      */
     public Date getUpdated() {
         return this.getAsDate(AtomXPath.updated);

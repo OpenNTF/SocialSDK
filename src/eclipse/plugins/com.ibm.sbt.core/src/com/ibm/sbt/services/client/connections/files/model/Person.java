@@ -20,23 +20,25 @@ package com.ibm.sbt.services.client.connections.files.model;
  * 
  * @author Vimal Dhupar
  */
-import org.w3c.dom.Node;
-
-import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 
-public class Person extends BaseEntity {
-	
+@Deprecated
+public class Person extends com.ibm.sbt.services.client.connections.common.Person {
+
 	public Person(BaseService svc, DataHandler<?> dataHandler) {
 		super(svc, dataHandler);
 	}
 	
-	public Node getData() {
-		return (Node)dataHandler.getData();
-	}
-
-	public void setData(Node data) {
-		dataHandler.setData(data);
-	}
+//	public Person(BaseService svc, DataHandler<?> dataHandler) {
+//		super(svc, dataHandler);
+//	}
+//	
+//	public Node getData() {
+//		return (Node)dataHandler.getData();
+//	}
+//
+//	public void setData(Node data) {
+//		dataHandler.setData(data);
+//	}
 }

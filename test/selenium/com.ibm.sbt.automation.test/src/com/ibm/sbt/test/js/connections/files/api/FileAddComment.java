@@ -37,11 +37,11 @@ public class FileAddComment extends BaseFilesTest {
 		if (!StringUtil.isEmpty(fileEntry.getAuthor().getEmail())) {
 			assertEquals(fileEntry.getAuthor().getEmail(), json.getJsonObject("getAuthor").getString("authorEmail"));
 		}
-		assertEquals(fileEntry.getAuthor().getUserState(), json.getJsonObject("getAuthor").getString("authorUserState"));
+		assertEquals(fileEntry.getAuthor().getState(), json.getJsonObject("getAuthor").getString("authorUserState"));
 		assertEquals("Re: " + fileEntry.getTitle(), json.getString("getTitle"));
 		assertEquals("1", json.getString("getVersionLabel"));
 		assertEquals(fileEntry.getAuthor().getUserUuid(), json.getJsonObject("getModifier").getString("modifierUserId"));
-		assertEquals(fileEntry.getAuthor().getUserState(), json.getJsonObject("getModifier").getString("modifierUserState"));
+		assertEquals(fileEntry.getAuthor().getState(), json.getJsonObject("getModifier").getString("modifierUserState"));
 		assertEquals("en", json.getString("getLanguage"));
 		assertEquals("true", json.getString("getDeleteWithRecord"));
 	}

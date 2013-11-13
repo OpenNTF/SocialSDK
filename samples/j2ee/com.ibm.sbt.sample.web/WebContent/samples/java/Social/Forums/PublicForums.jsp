@@ -21,7 +21,7 @@
 <%@page import="com.ibm.sbt.services.client.connections.forums.model.BaseForumEntity"%>
 <%@page import="com.ibm.sbt.services.client.connections.forums.TopicList"%>
 <%@page import="com.ibm.sbt.services.client.connections.forums.ForumList"%>
-<%@page import="com.ibm.sbt.services.client.connections.forums.model.Author"%>
+<%@page import="com.ibm.sbt.services.client.connections.common.Person"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.sbt.services.client.connections.activitystreams.model.Reply"%>
 <%@page import="java.util.List"%>
@@ -46,14 +46,14 @@
 				out.println("No updates to be displayed");
 
 			for (BaseForumEntity entry : _entries) {
-				Author author = entry.getAuthor();
+				Person author = entry.getAuthor();
 				out.println("uid of forum :"+entry.getUid());
 				out.println("date published :"+entry.getPublished());
 				out.println("date updated : "+entry.getUpdated());
 				out.println("author name : "+author.getName());
 				out.println("author state : "+author.getState());
 				out.println("author email : "+author.getEmail());
-				out.println("author uid : "+author.getUserid());
+				out.println("author uid : "+author.getId());
 				out.println("forum title : "+entry.getTitle());
 				out.println("<br><br>");
 			}

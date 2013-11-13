@@ -21,7 +21,7 @@
 <%@page import="com.ibm.sbt.services.client.connections.blogs.model.BaseBlogEntity"%>
 <%@page import="com.ibm.sbt.services.client.connections.blogs.BlogPostList"%>
 <%@page import="com.ibm.sbt.services.client.connections.blogs.BlogPost"%>
-<%@page import="com.ibm.sbt.services.client.connections.blogs.model.Author"%>
+<%@page import="com.ibm.sbt.services.client.connections.common.Person"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.sbt.services.client.connections.activitystreams.model.Reply"%>
 <%@page import="java.util.List"%>
@@ -48,7 +48,7 @@
 			for (BaseBlogEntity entry : entries) {
 				
 				out.println("Post title : "+entry.getTitle());
-				Author author = entry.getAuthor();
+				Person author = entry.getAuthor();
 				out.println("uid of post :"+entry.getUid());
 				out.println("replies url :"+((BlogPost)entry).getRepliesUrl());
 				out.println("hits :"+((BlogPost)entry).getHitCount());
@@ -59,7 +59,7 @@
 				out.println("author name : "+author.getName());
 				out.println("author state : "+author.getState());
 				out.println("author email : "+author.getEmail());
-				out.println("author uid : "+author.getUid());
+				out.println("author uid : "+author.getId());
 				out.println("<br><br>");
 			}
 		} catch (Throwable e) {

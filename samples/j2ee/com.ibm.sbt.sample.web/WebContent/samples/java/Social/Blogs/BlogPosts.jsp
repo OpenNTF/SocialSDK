@@ -22,7 +22,7 @@
 <%@page import="com.ibm.sbt.services.client.connections.blogs.BlogPostList"%>
 <%@page import="com.ibm.sbt.services.client.connections.blogs.BlogPost"%>
 <%@page import="com.ibm.sbt.services.client.connections.blogs.Blog"%>
-<%@page import="com.ibm.sbt.services.client.connections.blogs.model.Author"%>
+<%@page import="com.ibm.sbt.services.client.connections.common.Person"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.sbt.services.client.connections.activitystreams.model.Reply"%>
 <%@page import="java.util.List"%>
@@ -58,11 +58,11 @@
 				out.println("comments :"+((BlogPost)entry).getCommentCount());
 				out.println("date published :"+entry.getPublished());
 				out.println("date updated : "+entry.getUpdated());
-				Author author = entry.getAuthor();
+				Person author = entry.getAuthor();
 				out.println("author name : "+author.getName());
 				out.println("author state : "+author.getState());
 				out.println("author email : "+author.getEmail());
-				out.println("author uid : "+author.getUid());
+				out.println("author uid : "+author.getId());
 				out.println("<br><br>");
 			}
 		} catch (Throwable e) {

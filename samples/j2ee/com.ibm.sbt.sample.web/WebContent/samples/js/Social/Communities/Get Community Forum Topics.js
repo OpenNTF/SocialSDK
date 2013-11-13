@@ -9,21 +9,21 @@ require(["sbt/connections/CommunityService", "sbt/dom"],
             var tr = document.createElement("tr");
             table.appendChild(tr);
             var td = document.createElement("td");
-            td.innerHTML = title;
+            td.appendChild(dom.createTextNode(title));
             tr.appendChild(td);
             td = document.createElement("td");
-            td.innerHTML = forumUuid;
+            td.appendChild(dom.createTextNode(forumUuid));
             tr.appendChild(td);
             td = document.createElement("td");
-            td.innerHTML = communityUuid;
+            td.appendChild(dom.createTextNode(communityUuid));
             tr.appendChild(td);
         };
 
         var communityService = new CommunityService();
-        communityService.getForumTopics("%{sample.communityId}").then(
+        communityService.getForumTopics("%{name=CommunityService.communityUuid|helpSnippetId=Social_Communities_Get_My_Communities}").then(
             function(topics) {
                 if (topics.length == 0) {
-                    text = "Community does not have any forums topics.";
+                	dom.setText("content", "Community does not have any forums topics.");
                 } else {
                     for(var i=0; i<topics.length; i++){
                         var topic = topics[i];

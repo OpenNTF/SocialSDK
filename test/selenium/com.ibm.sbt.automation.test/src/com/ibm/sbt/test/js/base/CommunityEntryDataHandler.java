@@ -29,7 +29,7 @@ import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
  */
 public class CommunityEntryDataHandler extends BaseApiTest {
     
-    static final String SNIPPET_ID = "Social_Communities_API_CommunityEntryDataHandler";
+    static final String SNIPPET_ID = "Toolkit_Base_CommunityEntryDataHandler";
 
     @Test
     public void testCommunityEntryDataHandler() {

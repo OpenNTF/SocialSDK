@@ -3,7 +3,7 @@ require([ "sbt/dom", "sbt/json", "sbt/connections/CommunityService" ], function(
   var startDate = new Date();
   startDate.setDate(startDate.getDate()-10);
   
-  var promise = communityService.getCommunityEvents("%{name=sample.communityId|label=communityId|helpSnippetId=Social_Communities_Get_My_Communities}", startDate.toISOString());
+  var promise = communityService.getCommunityEvents("%{name=CommunityService.communityUuid|label=communityId|helpSnippetId=Social_Communities_Get_My_Communities}", startDate.toISOString());
   promise.then(
       function(events) {
           if(events.length === 0){

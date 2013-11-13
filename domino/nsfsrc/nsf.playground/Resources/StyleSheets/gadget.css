@@ -26,18 +26,22 @@
 }
 
 .gadgetModal.tab {
-	left: 20%;
+	left: 22%;
 	width: 90%;
 	height: 90%;
 }
 
 .gadgetModal.sidebar {
 	left: 55%;
-	width: 20%;
+	width: 22%;
 	height: 90%;
 }
 
 .gadgetModal .modal-body {
 	max-height: none;
 	height: 90%;
+}
+
+.bootstrap-scoped .modal.fade.in {
+    top: 33%;
 }

@@ -474,7 +474,7 @@ public class BlogService extends BaseService {
 		if(StringUtil.isEmpty(blogUuid)){
 			throw new BlogServiceException(null, "null blogUuid");
 		}
-		String getBlogUrl = resolveUrl(BLOG_HANDLE, FilterType.UPDATE_REMOVE_BLOG, blogUuid);
+		String getBlogUrl = resolveUrl(BLOG_HANDLE, FilterType.GET_UPDATE_REMOVE_BLOG, blogUuid);
 		Blog blog;
 		try {
 			blog = (Blog)getEntity(getBlogUrl, null, new BlogsFeedHandler(this));
@@ -508,7 +508,7 @@ public class BlogService extends BaseService {
 			Map<String, String> headers = new HashMap<String, String>();
 			headers.put("Content-Type", "application/atom+xml");
 			
-			String updateBlogUrl = resolveUrl(BLOG_HANDLE, FilterType.UPDATE_REMOVE_BLOG, blog.getUid());
+			String updateBlogUrl = resolveUrl(BLOG_HANDLE, FilterType.GET_UPDATE_REMOVE_BLOG, blog.getUid());
 			// not using super.updateData, as unique id needs to be provided, along with passing params, since no params
 			//is passed, it'll throw NPE in BaseService updateData - check with Manish
 			getClientService().put(updateBlogUrl, null,headers, payload,ClientService.FORMAT_NULL);
@@ -533,7 +533,7 @@ public class BlogService extends BaseService {
 			throw new BlogServiceException(null, "null blog Uuid");
 		}
 		try {
-			String deleteBlogUrl = resolveUrl(BLOG_HANDLE, FilterType.UPDATE_REMOVE_BLOG, blogUuid);
+			String deleteBlogUrl = resolveUrl(BLOG_HANDLE, FilterType.GET_UPDATE_REMOVE_BLOG, blogUuid);
 			getClientService().delete(deleteBlogUrl);
 		} catch (Exception e) {
 			throw new BlogServiceException(e,"error deleting blog");

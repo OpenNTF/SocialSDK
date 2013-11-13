@@ -5,10 +5,9 @@
   <packaging>ear</packaging>
 
   <parent>
-    <groupId>com.ibm.sbt.sample</groupId>
-    <artifactId>sample.parent</artifactId>
-    <version>1.0.0</version>
-    <relativePath>../../../build/sample</relativePath>
+    <groupId>com.ibm.sbt</groupId>
+    <version>2.0.0-SNAPSHOT</version>
+    <artifactId>com.ibm.samples.acme</artifactId>
   </parent>
 
   <build>
@@ -20,32 +19,33 @@
         <configuration>
           <modules>
             <webModule>
-              <groupId>com.ibm.sbt.sample</groupId>
+              <groupId>com.ibm.sbt</groupId>
               <artifactId>acme.social.sample.dataapp</artifactId>
               <contextRoot>/acme.social.sample.dataapp</contextRoot>
             </webModule>
             <webModule>
-              <groupId>com.ibm.sbt.sample</groupId>
+              <groupId>com.ibm.sbt</groupId>
               <artifactId>acme.social.sample.webapp</artifactId>
               <contextRoot>/acme.social.sample.webapp</contextRoot>
             </webModule>
             <webModule>
-              <groupId>com.ibm.sbt.sample</groupId>
+              <groupId>com.ibm.sbt</groupId>
               <artifactId>acme.sample.webapp</artifactId>
               <contextRoot>/acme.sample.webapp</contextRoot>
             </webModule>
             <webModule>
-              <groupId>com.ibm.sbt.sdk</groupId>
-              <artifactId>sbt</artifactId>
+              <groupId>com.ibm.sbt</groupId>
+              <artifactId>com.ibm.sbt.web</artifactId>
               <contextRoot>/sbt</contextRoot>
             </webModule>
             <webModule>
-              <groupId>com.ibm.sbt.sdk</groupId>
+              <groupId>com.ibm.sbt</groupId>
               <artifactId>sbt.dojo180</artifactId>
               <contextRoot>/sbt.dojo180</contextRoot>
             </webModule>
           </modules>
           <generateApplicationXml>true</generateApplicationXml>
+          <version>6</version>
         </configuration>
       </plugin>
     </plugins>
@@ -53,34 +53,40 @@
 
   <dependencies>
     <dependency>
-      <groupId>com.ibm.sbt.sdk</groupId>
+      <groupId>com.ibm.sbt</groupId>
       <artifactId>sbt.dojo180</artifactId>
-      <version>1.0.0</version>
+      <version>2.0.0-SNAPSHOT</version>
       <type>war</type>
     </dependency>
     <dependency>
-      <groupId>com.ibm.sbt.sdk</groupId>
-      <artifactId>sbt</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
+      <groupId>com.ibm.sbt</groupId>
+      <artifactId>com.ibm.sbt.web</artifactId>
+      <version>2.0.0-SNAPSHOT</version>
       <type>war</type>
     </dependency>
     <dependency>
-      <groupId>com.ibm.sbt.sample</groupId>
+      <groupId>com.ibm.sbt</groupId>
       <artifactId>acme.social.sample.dataapp</artifactId>
-      <version>1.0.0</version>
+      <version>2.0.0-SNAPSHOT</version>
       <type>war</type>
     </dependency>
     <dependency>
-      <groupId>com.ibm.sbt.sample</groupId>
+      <groupId>com.ibm.sbt</groupId>
       <artifactId>acme.sample.webapp</artifactId>
-      <version>1.0.0</version>
+      <version>2.0.0-SNAPSHOT</version>
       <type>war</type>
     </dependency>
     <dependency>
-      <groupId>com.ibm.sbt.sample</groupId>
+      <groupId>com.ibm.sbt</groupId>
       <artifactId>acme.social.sample.webapp</artifactId>
-      <version>1.0.0</version>
+      <version>2.0.0-SNAPSHOT</version>
       <type>war</type>
+    </dependency>
+        <dependency>
+      <groupId>javax</groupId>
+      <artifactId>javaee-api</artifactId>
+      <version>6.0</version>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
 </project>

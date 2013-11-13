@@ -18,7 +18,7 @@
  */
 define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
 
-    return lang.mixin(conn, {
+    return lang.mixin({
         
         /**
          * Default size for the profile cache
@@ -34,6 +34,10 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * XPath expressions used when parsing a Connections Profiles ATOM feed
          */
         ProfileFeedXPath : conn.ConnectionsFeedXPath,
+        /**
+         * Namespace expressions used when parsing a Connections Profiles ATOM feed
+         */
+        ProfileNamespaces : conn.Namespaces,
 
         /**
          * Connection type colleague
@@ -48,18 +52,12 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         /**
          * XPath expressions to be used when reading a Profile Entry
          */
-        ProfileXPath : {
-            // used by getEntityData
-            entry : "/a:feed/a:entry",
-            // used by getEntityId
-            uid : "a:contributor/snx:userid",
-            // used by getters
-            id : "a:id",
+        ProfileXPath : lang.mixin({},conn.AtomEntryXPath,{   
+        	uid : "a:contributor/snx:userid",// overwriting this for ProfileService
+            entry : "/a:feed/a:entry",// overwriting this for ProfileService 
             userid : "a:contributor/snx:userid",
             name : "a:contributor/a:name",
-            email : "a:contributor/a:email",
-            title : "a:title",
-            updated : "a:updated",
+            email : "a:contributor/a:email",            
             altEmail : "a:content/h:div/h:span/h:div[@class='x-groupwareMail']", // TODO do we need this? it's a dupe of groupwareMail
             photoUrl : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/image']/@href", 
             fnUrl : "a:content/h:div/h:span/h:div/h:a[@class='fn url']/@href",
@@ -76,51 +74,33 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
             postalCode : "a:content/h:div/h:span/h:div/h:span[@class='postal-code']",
             region : "a:content/h:div/h:span/h:div/h:span[@class='region']",
             countryName : "a:content/h:div/h:span/h:div/h:div[@class='country-name']",
-            summary : "a:summary",
             groupwareMail : "a:content/h:div/h:span/h:div[@class='x-groupwareMail']",
             blogUrl : "a:content/h:div/h:span/h:div/h:a[@class='x-blog-url url']/@href",
             role : "a:content/h:div/h:span/h:div[@class='role']",
             managerUid : "a:content/h:div/h:span/h:div[@class='x-manager-uid']",
             isManager : "a:content/h:div/h:span/h:div[@class='x-is-manager']"
-        },
+    	}),	
         
         /**
          * XPath expressions to be used when reading a ColleagueConnection Entry
          */
-        ColleagueConnectionXPath : {
-        	entry : "/a:feed/a:entry",
-        	uid : "a:id",
-        	id : "a:id",
-            updated : "a:updated",
-            authorUserid : "a:author/snx:userid",
-            contributorUserid : "a:contributor/snx:userid",
-            authorName : "a:author/snx:name",
-            contributorName : "a:contributor/snx:name",
-            authorEmail : "a:author/snx:email",
-            contributorEmail : "a:contributor/snx:email",
-            title : "a:title",
-            content : "a:content",
-            selfLink : "a:link[@rel='self']/@href", 
-            editLink : "a:link[@rel='edit']/@href"
-        },
+        ColleagueConnectionXPath : lang.mixin({}, conn.AtomEntryXPath, {
+        	entry : "/a:feed/a:entry"          
+        }),
         
         /**
          * XPath expressions to be used when reading a Community Entry with VCard content
          */
-        ProfileVCardXPath : {
+        ProfileVCardXPath : lang.mixin({}, conn.AtomEntryXPath, {
             // used by getEntityData
             entry : "/a:feed/a:entry",
             // used by getEntityId
             uid : "a:contributor/snx:userid",
             // used by parseVCard
-            vcard : "a:content",
-            // used by getters
-            id : "a:id",
+            vcard : "a:content",           
             userid : "a:contributor/snx:userid",
             name : "a:contributor/a:name",
-            email : "a:contributor/a:email",
-            title : "a:title",
-            updated : "a:updated",
+            email : "a:contributor/a:email",           
             altEmail : "EMAIL;X_GROUPWARE_MAIL", // TODO do we need this? it's a dupe of groupwareMail
             photoUrl : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/image']/@href",
             fnUrl : "URL",
@@ -138,9 +118,8 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
             postalCode : "a:content/h:div/h:span/h:div/h:span[@class='postal-code']",
             region : "a:content/h:div/h:span/h:div/h:span[@class='region']",
             countryName : "a:content/h:div/h:span/h:div/h:div[@class='country-name']",
-            summary : "a:summary",
             groupwareMail : "EMAIL;X_GROUPWARE_MAIL"
-        },
+        }),
         
         /**
          * XPath expressions to be used when reading a Profile Tag feed
@@ -169,10 +148,10 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         /**
          * XPath expressions to be used when reading an invite entry
          */
-        InviteXPath : lang.mixin({
+        InviteXPath : lang.mixin({}, conn.AtomEntryXPath, {
             connectionType: "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/connection/type']/@term",
             status: "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/status']/@term"
-        }, conn.AtomEntryXPath),
+        }),
         
         /**
          * XML elements to be used when creating a Profile Entry
@@ -244,5 +223,5 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          */
         AdminAtomProfileEntryDo : "/${profiles}/admin/atom/profileEntry.do"
         
-    });
+    },conn);
 });

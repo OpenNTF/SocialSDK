@@ -27,9 +27,10 @@ import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
  *  
  * @date 25 Mar 2013
  */
-public class AddCommunityMember extends BaseCommunitiesTest {
+public class AddMember extends BaseCommunitiesTest {
     
-    static final String SNIPPET_ID = "Social_Communities_API_AddCommunityMember";
+    static final String SNIPPET_ID = "Social_Communities_API_Add"
+    		+ "Member";
 
     @Test
     public void testAddMember() {

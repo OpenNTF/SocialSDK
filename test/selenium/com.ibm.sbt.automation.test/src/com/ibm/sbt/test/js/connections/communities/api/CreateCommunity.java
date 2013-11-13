@@ -31,12 +31,12 @@ public class CreateCommunity extends BaseCommunitiesTest {
     
     static final String SNIPPET_ID = "Social_Communities_API_CreateCommunity";
 
-    public CreateCommunity() {
-        createCommunity = false;
-    }
-
     @Test
     public void testCreateCommunity() {
+    	String name = createCommunityName();
+    	addSnippetParam("CommunityService.title", name);
+    	addSnippetParam("CommunityService.content", name);
+    	
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         JsonJavaObject json = previewPage.getJson();
         Assert.assertNull("Unexpected error detected on page", json.getString("code"));
@@ -45,5 +45,19 @@ public class CreateCommunity extends BaseCommunitiesTest {
         community = getCommunity(communityUuid);
         assertCommunityValid(json);
     }
+
+    /*
+    @Test
+    public void testCreateCommunityInvalidTitle() {
+    	String name = community.getTitle();
+    	addSnippetParam("CommunityService.title", name);
+    	addSnippetParam("CommunityService.content", name);
+    	
+        JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
+        JsonJavaObject json = previewPage.getJson();
+        String message = json.getString("message");
+        Assert.assertEquals("A community with the requested name already exists, choose a different name and resubmit.", message);
+    }
+    */
     
 }

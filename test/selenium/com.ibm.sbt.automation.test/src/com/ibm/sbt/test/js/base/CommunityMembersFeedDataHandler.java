@@ -13,7 +13,7 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-package com.ibm.sbt.test.js.connections.communities.api;
+package com.ibm.sbt.test.js.base;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
-import com.ibm.sbt.automation.core.test.connections.BaseCommunitiesTest;
+import com.ibm.sbt.automation.core.test.BaseApiTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 
 /**
@@ -29,22 +29,21 @@ import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
  *  
  * @date 25 Mar 2013
  */
-public class GetForumTopics extends BaseCommunitiesTest {
+public class CommunityMembersFeedDataHandler extends BaseApiTest {
     
-    static final String SNIPPET_ID = "Social_Communities_API_GetForumTopics";
-
-    public GetForumTopics() {
-        setAuthType(AuthType.AUTO_DETECT);
-    }
+    static final String SNIPPET_ID = "Social_Communities_API_CommunityMembersFeedDataHandler";
 
     @Test
-    public void testGetForumTopics() {
-        addSnippetParam("sample.communityId", community.getCommunityUuid());
-        
+    public void testCommunityFeedDataHandler() {
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         List jsonList = previewPage.getJsonList();
-        //Assert.assertEquals(community.getTitle(), ((JsonJavaObject)jsonList.get(0)).getString("Community Title"));
-        //Assert.assertEquals(community.getCommunityUuid(), ((JsonJavaObject)((List)jsonList.get(1)).get(0)).getString("getCommunityUuid"));
+        Assert.assertEquals(5, jsonList.size());
+        JsonJavaObject json = (JsonJavaObject)jsonList.get(0);
+        Assert.assertEquals("0EE5A7FA-3434-9A59-4825-7A7000278DAA", json.getString("getEntityId"));
+        Assert.assertEquals("0EE5A7FA-3434-9A59-4825-7A7000278DAA", json.getString("userid")); 
+        Assert.assertEquals("frankadams@renovations.com", json.getString("email"));
+        Assert.assertEquals("Frank Adams", json.getString("name"));
+        Assert.assertEquals("owner", json.getString("role"));
     }
-    
+
 }

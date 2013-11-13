@@ -40,11 +40,11 @@ public class CreateForumTopic extends BaseCommunitiesTest {
     @Test
     public void testCreateForumTopic() {
         addSnippetParam("sample.communityId", community.getCommunityUuid());
+    	addSnippetParam("CommunityService.topicTitle", "ForumTopic"+community.getTitle());
+    	addSnippetParam("CommunityService.topicContent", "ForumTopic"+community.getTitle());
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
-        List jsonList = previewPage.getJsonList();
-        assertCommunityValid((JsonJavaObject)jsonList.get(0));
-        Assert.assertEquals(community.getCommunityUuid(), ((JsonJavaObject)jsonList.get(1)).getString("entityId"));
+        JsonJavaObject json = previewPage.getJson();
     }
     
 }

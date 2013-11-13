@@ -141,10 +141,4 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         
 
     });
-});     myDateSearch : "/${search}/atom/mysearch/facets/date",
-        sourceSearch : "/${search}/atom/search/facets/source",
-        mySourceSearch : "/${search}/atom/mysearch/facets/source"
-        
-
-    });
 });

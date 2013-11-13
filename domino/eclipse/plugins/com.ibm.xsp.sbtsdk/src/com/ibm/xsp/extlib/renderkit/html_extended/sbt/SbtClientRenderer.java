@@ -22,6 +22,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 
 import com.ibm.commons.runtime.Context;
+import com.ibm.commons.runtime.RuntimeConstants;
 import com.ibm.commons.util.PathUtil;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonException;
@@ -54,6 +55,7 @@ public class SbtClientRenderer extends FacesRendererEx {
     public static final String COMMUNITIES_DOJO                 = "/communities/javascript/build/dojo/dojo.js"; // $NON-NLS-1$
     //public static final String COMMUNITIES_SEMANTICTAGSERVLET   = "/communities/javascript/build/dojo/semanticTagService.js"; // $NON-NLS-1$
     public static final String COMMUNITIES_SEMANTICTAGSERVLET   = PROFILES_SEMANTICTAGSERVLET;
+    public static final String SBTLIBRARY = RuntimeConstants.get().getConstant(RuntimeConstants.LIBRARY_BASEURL);
     
     @Override
     public void encodeBegin(FacesContext context, UIComponent component) throws IOException {
@@ -98,6 +100,9 @@ public class SbtClientRenderer extends FacesRendererEx {
             // Add the semantic tag resource
             addSemanticTagResource(context, rootEx, ctClient, ctServer, endpointName, inclProfiles, inclCommunities);
         }
+
+        String sbtlib_dojo = SBTLIBRARY + "?lib=dojo";
+        rootEx.addEncodeResource(new ScriptResource(sbtlib_dojo, true));
 
         // Required by the profiles card code...
         //dijit._Widget,dijit._Templated,dijit._Container,dijit.form.ComboBox                

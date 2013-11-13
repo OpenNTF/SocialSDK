@@ -69,6 +69,15 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         Member : "member",
         
         /**
+         * Namespaces to be used when reading the Communities ATOM entry or feed
+         */
+        CommunityNamespaces : {
+			a : "http://www.w3.org/2005/Atom",
+			app : "http://www.w3.org/2007/app",
+			snx : "http://www.ibm.com/xmlns/prod/sn"
+		},
+        
+        /**
          * XPath expressions used when parsing a Connections Communities ATOM feed
          * 
          * @property CommunityFeedXPath
@@ -84,32 +93,15 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type Object
          * @for sbt.connections.CommunityService
          */
-        CommunityXPath : {
-            // used by getEntityData
-            entry : "/a:entry",
-            // used by getEntityId
-            uid : "a:id",
-            // used by getters
+        CommunityXPath : lang.mixin({}, conn.AtomEntryXPath, {
             communityUuid : "a:id",
             communityTheme : "snx:communityTheme",
-            title : "a:title",
-            summary : "a:summary[@type='text']",
-            communityUrl : "a:link[@rel='alternate']/@href",
-            communityAtomUrl : "a:link[@rel='self']/@href",
             logoUrl : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/logo']/@href",
             tags : "a:category[not(@scheme)]/@term",
-            content : "a:content[@type='html']",
             memberCount : "snx:membercount",
             communityType : "snx:communityType",
-            published : "a:published",
-            updated : "a:updated",
-            authorUserid : "a:author/snx:userid",
-            authorName : "a:author/a:name",
-            authorEmail : "a:author/a:email",
-            contributorUserid : "a:contributor/snx:userid",
-            contributorName : "a:contributor/a:name",
-            contributorEmail : "a:contributor/a:email"
-        },
+            isExternal : "snx:isExternal"
+        }),
         
         /**
          * XPath expressions to be used when reading a Community Member Entry
@@ -118,17 +110,11 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type Object
          * @for sbt.connections.CommunityService
          */
-        MemberXPath : {
-            // used by getEntityData
-            entry : "/a:entry",
-            // used by getEntityId
+        MemberXPath : lang.mixin({}, conn.AtomEntryXPath, {
+        	id : "a:contributor/snx:userid",
             uid : "a:contributor/snx:userid",
-            // used by getters
-            userid : "a:contributor/snx:userid",
-            name : "a:contributor/a:name",
-            email : "a:contributor/a:email",
             role : "snx:role"
-        },
+        }),
 
         /**
          * XPath expressions to be used when reading a Community Invite Entry
@@ -137,44 +123,23 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type Object
          * @for sbt.connections.CommunityService
          */
-        InviteXPath : {
-            // used by getEntityData
-            entry : "/a:entry",
-            // used by getEntityId
-            uid : "a:id",
-            // used by getters
+        InviteXPath : lang.mixin({}, conn.AtomEntryXPath, {
             inviteUuid : "a:id",
-            title : "a:title",
-            content : "a:content[@type='text']",
-            updated : "a:updated",
-            authorUserid : "a:author/snx:userid",
-            authorName : "a:author/a:name",
-            contributorUserid : "a:contributor/snx:userid",
-            contributorName : "a:contributor/a:name",
-            contributorEmail : "a:contributor/a:email",
-            contributorUserState : "a:contributor/snx:userState",
             communityUuid : "snx:communityUuid",
-            communityUrl : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/community']/@href",
-            editUrl : "a:link[@rel='edit']/@href"
-        },
+            communityUrl : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/community']/@href"
+        }),
         
-        EventXPath : {
-            // used by getEntityData
-            entry : "/a:entry",
-            // used by getEntityId
-            uid : "a:id",
-            // used by getters
+        /**
+         * XPath expressions to be used when reading a Community Event Entry
+         * 
+         * @property EventXPath
+         * @type Object
+         * @for sbt.connections.CommunityService
+         */
+        EventXPath : lang.mixin({}, conn.AtomEntryXPath, {
             eventUuid : "snx:eventUuid",
             eventInstUuid : "snx:eventInstUuid",
-            title : "a:title",
-            eventAtomUrl : "a:link[@rel='self']/@href",
-            content : "a:content[@type='html']",
             location : "snx:location",
-            authorUserid : "a:author/snx:userid",
-            authorName : "a:author/a:name",
-            authorEmail : "a:author/a:email",
-            authorState : "a:author/snx:userState",
-            updated : "a:updated",
             communityLink : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/container']/@href",
             eventAtomInstances : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/calendar/event/instances']/@href",
             eventAtomAttendees : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/calendar/event/attend']/@href",
@@ -186,22 +151,8 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
             startDate : "snx:recurrence/snx:startDate",
             endDate : "snx:recurrence/snx:endDate",
             byDay : "snx:recurrence/snx:byDay"
-        },
+        }),
 
-        /**
-         * asc  Specifies whether the results should be displayed in ascending order. Options are true or false.
-         * email   Internet email address. Search for communities of which the user you specify by email address is a member.
-         * ps  Page size. Specify the number of entries to return per page.
-         * search  Well-formed full text search query. Performs a text search on community titles and descriptions.
-         * since   Includes in the resulting feed all communities updated after a specified date. Specify the date using a date-time value that conforms to RFC3339. Use an upper case "T" to separate the date and time, and an uppercase "Z" in the absence of a numeric time zone offset. For example: 2009-01-04T20:32:31.171Z.
-         * sortField   Order in which to sort the results. Options are:
-         *                                          lastmod � Sorts the results by last modified date.
-         *                                          name � Sorts the results by entry name.
-         *                                          count � Sorts the results by relevance.
-         * tag Returns communities with the specified tag. Search by one tag at a time.
-         * userid  Unique ID that represents a specific person.
-         */
-        
         /**
          * A feed of all public communities.
          *  

@@ -43,6 +43,10 @@ function gatherParams() {
 			params[n] = v;
 		}
 	}
+	if(dojo.hash()) {
+		var obj = dojo.queryToObject(dojo.hash());
+		dojo.mixin(params,obj);
+	}
 	return params;
 }
 

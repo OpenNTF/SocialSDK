@@ -32,11 +32,15 @@
 				styleClass="lotusSearch">
 				<xp:inputText id="search1"
 					value="#{viewScope.assetSearch}" styleClass="searchbox"
-					size="30">
+					size="20">
 					<xp:this.onkeypress><![CDATA[var kc=event.keyCode?event.keyCode:event.which;
 if(kc==13){dojo.byId('#{id:linkSearch1}').click(); return false;}
 return true;]]></xp:this.onkeypress>
-				</xp:inputText>
+					<xp:this.attrs>
+						<xp:attr name="placeholder"
+							value="Find Snippets">
+						</xp:attr>
+					</xp:this.attrs></xp:inputText>
 				<span title="Submit search">
 					<xp:link escape="true" id="linkSearch1">
 						<xp:image id="image1" alt="Submit search" url="/search.png">
@@ -83,7 +87,11 @@ return true;]]></xp:this.onkeypress>
 	});
 	navTree.onClick = function(item){
 		if(item.url) {
-			dojo.hash("#{javascript:compositeData.pname||'snippet'}="+item.jspUrl);
+			var h = "#{javascript:compositeData.pname||'snippet'}="+item.jspUrl;
+			if(h==dojo.hash()) {
+				dojo.hash("");
+			}
+			dojo.hash(h);
 		}
 	};
 	// Suppress the wide out effect
@@ -97,6 +105,22 @@ return true;]]></xp:this.onkeypress>
 					The current filtering options don't match any snippets.<br/>Please select a different environment.
 				</div>
 			</xp:div>
+		</xe:djBorderPane>
+		<xe:djBorderPane region="bottom" loaded="false" style="height:15em">
+			<xp:section id="section3" header="Tags" style="width:100%">
+				<xe:tagCloud rendererType="com.ibm.xsp.extlib.OneUITagCloud"
+					alternateText="{0} Entries" sliderVisible="true">
+					<xe:this.cloudData>
+						<xe:dominoViewCloudData cacheMode="auto"
+							cacheRefreshInterval="120" viewName="AllTags"
+							maxTagLimit="25" linkMetaSeparator="~"
+							linkTargetPage="/Domino_ViewUserProfile.xsp"
+							linkRequestParam="name">
+
+						</xe:dominoViewCloudData>
+					</xe:this.cloudData>
+				</xe:tagCloud>
+			</xp:section>
 		</xe:djBorderPane>
 	</xe:djBorderContainer>
 </xp:view>

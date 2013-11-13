@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -23,6 +23,7 @@ import org.junit.runners.Suite.SuiteClasses;
 import com.ibm.sbt.automation.core.environment.TestEnvironment;
 import com.ibm.sbt.automation.core.environment.TestEnvironmentFactory;
 import com.ibm.sbt.test.java.smartcloud.CommunitiesTestSuite;
+
 import com.ibm.sbt.test.java.smartcloud.FilesTestSuite;
 import com.ibm.sbt.test.java.smartcloud.ProfilesTestSuite;
 

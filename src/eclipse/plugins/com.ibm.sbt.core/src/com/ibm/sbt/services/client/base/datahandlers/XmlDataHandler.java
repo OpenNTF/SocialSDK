@@ -18,6 +18,7 @@ package com.ibm.sbt.services.client.base.datahandlers;
 
 import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -311,7 +312,13 @@ public class XmlDataHandler implements DataHandler<Node> {
 				date = format.parse(value);
 			}
 		} catch(ParseException e) {
-			throw new DataHandlerException(e, "Error parsing date string");
+			// Dates from search service work with below format
+			// Example of such a date is : 2012-09-05T16:15:25+08:00
+			format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX",locale);
+			try {
+				date = format.parse(value);
+			} catch (ParseException e1) {
+			}
 		}
 		return date;
 	}
@@ -329,6 +336,13 @@ public class XmlDataHandler implements DataHandler<Node> {
 		try {
 			date = format.parse(value);
 		} catch(ParseException e) {
+			// Dates from search service work with below format
+			// Example of such a date is : 2012-09-05T16:15:25+08:00
+			format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX",locale);
+			try {
+				date = format.parse(value);
+			} catch (ParseException e1) {
+			}
 		}
 		return date;
 	}

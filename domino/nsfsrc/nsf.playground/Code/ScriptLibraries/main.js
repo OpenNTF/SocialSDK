@@ -154,3 +154,17 @@ function _showDocumentation(show) {
 		sc.selectChild(pn);
 	}
 }
+
+/**
+ * Set an icon to code mirror tab
+ */
+function attachTabIcon(tabId,cm) {
+	if(tabId) {
+		cm.on('change', function() {
+			function isEmpty(cm) {
+				return (cm.lineCount() === 1) && (cm.getLine(0) === "");
+			}
+			dijit.byId(tabId).set('iconClass',isEmpty(cm)?'iconTabEmpty':'iconTabFull');
+		});
+	} 
+}

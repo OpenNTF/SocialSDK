@@ -84,7 +84,7 @@ define([ "../_bridge/declare",
 	                if (attachPoint) {
 	                	
 	                	var att = nodes[i].getAttribute("data-dojo-attach-point");
-	                	scope[att] = el;
+	                	scope[att] = nodes[i];
 	                }
 	            }
        },      

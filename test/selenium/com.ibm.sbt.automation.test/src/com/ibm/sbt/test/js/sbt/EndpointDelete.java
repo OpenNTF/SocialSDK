@@ -35,7 +35,7 @@ public class EndpointDelete extends BaseCommunitiesTest {
     
     @Test
     public void testEndpointDelete() {
-        addSnippetParam("sample.communityId", community.getCommunityUuid());
+        addSnippetParam("CommunityService.communityUuid", community.getCommunityUuid());
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         List jsonList = previewPage.getJsonList();

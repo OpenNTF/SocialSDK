@@ -36,7 +36,7 @@ public class BaseServiceDeleteEntity extends BaseCommunitiesTest {
     
     @Test @Ignore
     public void testDeleteEntity() {
-        addSnippetParam("sample.communityId", community.getCommunityUuid());
+        addSnippetParam("CommunityService.communityUuid", community.getCommunityUuid());
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         List jsonList = previewPage.getJsonList();

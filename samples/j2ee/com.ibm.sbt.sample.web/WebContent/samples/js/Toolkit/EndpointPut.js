@@ -11,7 +11,7 @@ require([ "sbt/config", "sbt/lang", "sbt/dom", "sbt/json", "sbt/xml", "sbt/strin
         communityType : "public",
         title : title,
         content : content,
-        communityUuid : "%{name=sample.communityId|helpSnippetId=Social_Communities_Get_My_Communities}"
+        communityUuid : "%{name=CommunityService.communityUuid|helpSnippetId=Social_Communities_Get_My_Communities}"
     };
     var putData = stringUtil.transform(CommunityTmpl, communityJson);
     
@@ -21,7 +21,7 @@ require([ "sbt/config", "sbt/lang", "sbt/dom", "sbt/json", "sbt/xml", "sbt/strin
             "Content-Type" : "application/atom+xml"
         },
         query : {
-            communityUuid : "%{name=sample.communityId|helpSnippetId=Social_Communities_Get_My_Communities}"
+            communityUuid : "%{name=CommunityService.communityUuid|helpSnippetId=Social_Communities_Get_My_Communities}"
         },
         data : putData
     };

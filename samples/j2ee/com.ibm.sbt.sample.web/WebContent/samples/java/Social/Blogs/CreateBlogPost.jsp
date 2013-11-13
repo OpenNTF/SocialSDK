@@ -39,7 +39,7 @@
 		<%
 	try {
 			BlogService service = new BlogService();
-			BlogList blogs = service.getBlogs();
+			BlogList blogs = service.getMyBlogs();
 			if(blogs.size()>0){
 				String blogHandle = ((Blog)blogs.get(0)).getHandle();
 				BlogPost post = new BlogPost(service, "");

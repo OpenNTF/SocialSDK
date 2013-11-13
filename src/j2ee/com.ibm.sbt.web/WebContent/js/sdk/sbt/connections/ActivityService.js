@@ -21,37 +21,39 @@
  * @module sbt.connections.ActivityService
  */
 define(
-		[ "../declare", "../config", "../lang", "../stringUtil", "../Promise", "./ActivityConstants", "../base/BaseService", "../base/BaseEntity",
-				"../base/XmlDataHandler", "../xml" ],
-		function(declare, config, lang, stringUtil, Promise, consts, BaseService, BaseEntity, XmlDataHandler, xml) {
+		[ "../declare", "../config", "../lang", "../stringUtil", "../Promise", "./ActivityConstants", "../base/BaseService", "../base/AtomEntity",
+				"../base/BaseEntity", "../base/XmlDataHandler", "../xml" ],
+		function(declare, config, lang, stringUtil, Promise, consts, BaseService, AtomEntity, BaseEntity, XmlDataHandler, xml) {
 
-			var ActivityNodeTmpl = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:app=\"http://www.w3.org/2007/app\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\" "
-					+ "xmlns:xhtml=\"http://www.w3.org/1999/xhtml\" xmlns:thr=\"http://purl.org/syndication/thread/1.0\">"
-					+ "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/type\" term=\"${type}\" label=\"${type}\" /> "
-					+ "<content type=\"html\">${content}</content><title type=\"text\">${title}</title>"
-					+ "${getPosition}${getCommunity}${getTags}${getCompleted}${getCompleted}${getDueDate}${getInReplyTo}${getAssignedTo}${getIcon}"
-					+ "${getFields}</entry>";
-			var PositionTmpl = "<snx:position>${position}</snx:position>";
-			var CommunityTmpl = "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/type\" term=\"community_activity\" label=\"Community Activity\"/><snx:communityUuid>${coummunityUuid}</communityUuid>"
-					+ "<link rel=\"http://www.ibm.com/xmlns/prod/sn/container\" type=\"application/atom+xml\" href=\"${communityUrl}\"/>";
-			var TagTmpl = "<category term=\"${tag}\" /> ";
+			// var ActivityNodeTmpl = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns=\"http://www.w3.org/2005/Atom\"
+			// xmlns:app=\"http://www.w3.org/2007/app\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\" "
+			// + "xmlns:xhtml=\"http://www.w3.org/1999/xhtml\" xmlns:thr=\"http://purl.org/syndication/thread/1.0\">"
+			// + "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/type\" term=\"${type}\" label=\"${type}\" /> "
+			// + "<content type=\"html\">${content}</content><title type=\"text\">${title}</title>"
+			// + "${getPosition}${getCommunity}${getTags}${getCompleted}${getCompleted}${getDueDate}${getInReplyTo}${getAssignedTo}${getIcon}"
+			// + "${getFields}</entry>";
+			var ActivityCategory = "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/type\" term=\"${getType}\" label=\"${getType}\" />";
+			var PositionTmpl = "<snx:position>${getPosition}</snx:position>";
+			var CommunityTmpl = "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/type\" term=\"community_activity\" label=\"Community Activity\"/><snx:communityUuid>${getCommunityUuid}</communityUuid>"
+					+ "<link rel=\"http://www.ibm.com/xmlns/prod/sn/container\" type=\"application/atom+xml\" href=\"${getCommunityUrl}\"/>";
+			// var TagTmpl = "<category term=\"${tag}\" /> ";
 			var CompletedTmpl = "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/flags\" term=\"completed\"/>";
 			var TemplateTmpl = "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/flags\" term=\"template\"/>";
-			var DueDateTmpl = "<snx:duedate>${dueDate}</duedate>";
-			var InReplytoTmpl = "<thr:in-reply-to ref=\"${inReplyToId}\" type=\"application/atom+xml\" href=\"${inReplyToUrl}\" source=\"${activityUuid}\" />";
+			var DueDateTmpl = "<snx:duedate>${getDueDate}</duedate>";
+			var InReplytoTmpl = "<thr:in-reply-to ref=\"${getInReplyToId}\" type=\"application/atom+xml\" href=\"${getInReplyToUrl}\" source=\"${getActivityUuid}\" />";
 			var FieldTmpl = "<snx:field name=\"${name}\" fid=\"${fid}\" position=\"${position}\" type=\"${type}\">${getText}${getPerson}${getDate}${getLink}${getFile}</snx:field>";
 			var TextFieldTmpl = "<summary type=\"text\">${summary}</summary>";
 			var PersonFieldTmpl = "<name>${personName}</name> <email>{email}</email> <snx:userid>${userId}</snx:userid>";
 			var LinkFieldTmpl = "<link href=\"${url\}\" title=\"${title}\" />";
 			var DateFieldTmpl = "${date}";
-			var IconTmpl = "<snx:icon>${iconUrl}</snx:icon>";
-			var AssignedToTmpl = "<snx:assignedto name=\"${name}\" userid=\"${userId}\">${email}</snx:assignedto>";
-			var MemberTmpl = "<?xml version=\"1.0\" encoding=\"UTF-8\"?> <entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:app=\"http://www.w3.org/2007/app\" xmlns:opensearch=\"http://a9.com/-/spec/opensearch/1.1/\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\"> "
-					+ "<contributor> ${getEmail} ${getUserid} </contributor> ${getRole} ${getCategory} </entry>";
-			var RoleTmpl = "<snx:role xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\" component=\"http://www.ibm.com/xmlns/prod/sn/activities\">${role}</snx:role>";
-			var EmailTmpl = "<email>${email}</email>";
-			var UseridTmpl = "<snx:userid xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\">${userid}</snx:userid>";
-			var CategoryTmpl = "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/type\" term=\"${category}\" label=\"${category}\" />";
+			var IconTmpl = "<snx:icon>${getIconUrl}</snx:icon>";
+			var AssignedToTmpl = "<snx:assignedto name=\"${getAssignedToName}\" userid=\"${getAssignedToUserId}\">${getAssignedToEmail}</snx:assignedto>";
+//			var MemberTmpl = "<?xml version=\"1.0\" encoding=\"UTF-8\"?> <entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:app=\"http://www.w3.org/2007/app\" xmlns:opensearch=\"http://a9.com/-/spec/opensearch/1.1/\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\"> "
+//					+ "<contributor> ${getEmail} ${getUserid} </contributor> ${getRole} ${getCategory} </entry>";
+			var RoleTmpl = "<snx:role xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\" component=\"http://www.ibm.com/xmlns/prod/sn/activities\">${getRole}</snx:role>";
+//			var EmailTmpl = "<email>${email}</email>";
+//			var UseridTmpl = "<snx:userid xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\">${userid}</snx:userid>";
+			var MemberCategory = "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/type\" term=\"${getCategory}\" label=\"${getCategory}\" />";
 
 			var extractId = function(id, token) {
 				if (id) {
@@ -62,6 +64,12 @@ define(
 					}
 				}
 				return id;
+			};
+
+			var transformer = function(value, key) {
+				if (value) {
+					return value;
+				}
 			};
 
 			/**
@@ -379,7 +387,12 @@ define(
 			 * @class Activity
 			 * @namespace sbt.connections
 			 */
-			var Activity = declare(BaseEntity, {
+			var Activity = declare(AtomEntity, {
+
+				xpath : consts.ActivityNodeXPath,
+				namespaces : consts.ActivityNamespaces,
+				contentType : "html",
+				categoryScheme : null,
 
 				/**
 				 * Construct an Activity entity.
@@ -391,12 +404,20 @@ define(
 				},
 
 				/**
+				 * Sets template for category Scheme
+				 */
+				setCategoryScheme : function() {
+					this.categoryScheme = stringUtil.transform(ActivityCategory, this, transformer, this);
+				},
+							
+
+				/**
 				 * Returns the ID
 				 * @method getUuid
 				 * @returns {String} Uuid
 				 */
 				getUuid : function() {
-					var _id = this.id || this._fields.id || this.getAsString("uid");
+					var _id = this.id || this._fields.id || this.getId();
 					this.id = _id;
 					this._fields.id = _id;
 					return _id;
@@ -413,62 +434,23 @@ define(
 				},
 
 				/**
-				 * Returns Activity Node Title
+				 * Returns the Author LdapId
 				 * 
-				 * @method getTitle
-				 * @returns {String} title
+				 * @method getAuthorLdapId
+				 * @returns {Stirng} authorLdapId
 				 */
-				getTitle : function() {
-					return this.getAsString("title");
+				getAuthorLdapId : function() {
+					return this.getAsString("authorLdapid");
 				},
 
 				/**
-				 * Sets Activity Node Title
+				 * Returns the contributor LdapId
 				 * 
-				 * @method setTitle
-				 * @param {String} title
-				 */
-				setTitle : function(title) {
-					return this.setAsString("title", title);
-				},
-
-				/**
-				 * Returns the updated Date
-				 * 
-				 * @method getModified
-				 * @returns {Date} modified Date
-				 */
-				getUpdated : function() {
-					return this.getAsDate("updated");
-				},
-				/**
-				 * Returns the published Date
-				 * 
-				 * @method getPublished
-				 * @returns {Date} modified Date
-				 */
-				getPublished : function() {
-					return this.getAsDate("published");
-				},
-
-				/**
-				 * Returns the author
-				 * 
-				 * @method getAuthor
-				 * @returns {Object} author
-				 */
-				getAuthor : function() {
-					return this.getAsObject([ "authorName", "authorUserId", "authorEmail", "authorUserState", "authorLdapid" ]);
-				},
-
-				/**
-				 * Returns the contributor
-				 * 
-				 * @method getContributor
+				 * @method getContributorLdapId
 				 * @returns {Object} contributor
 				 */
-				getContributor : function() {
-					return this.getAsObject([ "contributorName", "contributorUserId", "contributorEmail", "contributorUserState", "contributorLdapid" ]);
+				getContributorLdapId : function() {
+					return this.getAsString("contributorLdapid");
 				},
 
 				/**
@@ -567,36 +549,6 @@ define(
 				 */
 				getTemplatesUrl : function() {
 					return this.getAsString("templatesUrl");
-				},
-
-				/**
-				 * Returns Activity Node Edit Url
-				 * 
-				 * @method getEditUrl
-				 * @returns {String} editUrl
-				 */
-				getEditUrl : function() {
-					return this.getAsString("editUrl");
-				},
-
-				/**
-				 * Returns Activity Node Self Url
-				 * 
-				 * @method getSelfUrl
-				 * @returns {String} selfUrl
-				 */
-				getSelfUrl : function() {
-					return this.getAsString("selfUrl");
-				},
-
-				/**
-				 * Returns Activity Node Alternate Url
-				 * 
-				 * @method getAlternateUrl
-				 * @returns {String} alternateUrl
-				 */
-				getAlternateUrl : function() {
-					return this.getAsString("alternateUrl");
 				},
 
 				/**
@@ -702,24 +654,6 @@ define(
 				},
 
 				/**
-				 * Returns Activity Node Content
-				 * 
-				 * @method getContent
-				 * @returns {String} content
-				 */
-				getContent : function() {
-					return this.getAsString("content");
-				},
-
-				/**
-				 * @method setContent
-				 * @param content
-				 */
-				setContent : function(content) {
-					return this.setAsString("content", content);
-				},
-
-				/**
 				 * getCommunityUuid
 				 * @method getCommunityUuid
 				 * @returns {String} communityUuid
@@ -772,8 +706,15 @@ define(
 						method : "GET",
 						handleAs : "text",
 						query : requestArgs
+					};					
+					var self = this;
+					var callbacks = {
+						createEntity : function(service, data, response) {														
+							self.setData(data, response);
+							return self;
+						}
 					};
-					return this.service.getEntity(consts.AtomActivityNode, options, this.getActivityUuid(), ActivityFeedCallbacks);
+					return this.service.getEntity(consts.AtomActivityNode, options, this.getActivityUuid(), callbacks);
 				},
 
 				/**
@@ -882,6 +823,77 @@ define(
 				 */
 				getActivityTags : function(requestArgs) {
 					return this.service.getActivityTags(this.getActivityUuid(), requestArgs);
+				},
+				/**
+		         * Return contributor element to be included in post data for this ATOM entry.
+		         * 
+		         * @method createContributor
+		         * @returns {String}
+		         */
+		        createContributor : function() {
+		        	return "";
+		        },
+				
+				/**
+				* Return extra entry data to be included in post data for this ATOM entry.
+				* 
+				* @method createEntryData
+				* @returns {String}
+				*/
+				createEntryData : function() {
+					var postData = "";
+					if (this.getPosition && this.getPosition()) {
+						postData += stringUtil.transform(PositionTmpl, this, transformer, this);
+					}
+					if (this.getCommunityUuid && this.getCommunityUuid()) {
+						postData += stringUtil.transform(CommunityTmpl, this, transformer, this);
+					}
+					if (this.isCompleted && this.isCompleted()) {
+						postData += CompletedTmpl;
+					}
+					if (this.getDueDate && this.getDueDate()) {
+						postData += stringUtil.transform(DueDateTmpl, this, transformer, this);
+					}
+					if (this.getInReplyToId && this.getInReplyToId()) {
+						postData += stringUtil.transform(InReplytoTmpl, this, transformer, this);
+					}
+					if (this.getAssignedToUserId && this.getAssignedToUserId()) {
+						postData += stringUtil.transform(AssignedToTmpl, this, transformer, this);
+					}
+					if (this.getIconUrl && this.getIconUrl()) {
+						postData += stringUtil.transform(IconTmpl, this, transformer, this);
+					}
+					if (this.isTemplate && this.isTemplate()) {
+						postData += TemplateTmpl;
+					}
+
+					if (this.getFields && this.getFields().length > 0) {
+						var fields = this.getFields();
+						for ( var counter in fields) {
+							var field = fields[counter];
+							var innerXml = "";
+							var trans = function(value, key) {
+								if (field[key]) {
+									value = xml.encodeXmlEntry(field[key]);
+								} else if (innerXml != "") {
+									value = innerXml;
+								}
+								return value;
+							};
+							var tmpl = TextFieldTmpl;
+							if (field.type == "person") {
+								tmpl = PersonFieldTmpl;
+							} else if (field.type == "link") {
+								tmpl = LinkFieldTmpl;
+							} else if (field.type == "date") {
+								tmpl = DateFieldTmpl;
+							}
+							innerXml = stringUtil.transform(tmpl, this, trans, this);
+							postData += stringUtil.transform(FieldTmpl, this, trans, this);
+						}
+					}
+
+					return postData;
 				}
 			});
 
@@ -1261,8 +1273,15 @@ define(
 						method : "GET",
 						handleAs : "text",
 						query : requestArgs
+					};					
+					var self = this;
+					var callbacks = {
+						createEntity : function(service, data, response) {							
+							self.setData(data, response);						
+							return self;
+						}
 					};
-					return this.service.getEntity(consts.AtomActivityNode, options, this.getActivityNodeUuid(), ActivityNodeFeedCallbacks);
+					return this.service.getEntity(consts.AtomActivityNode, options, this.getActivityNodeUuid(), callbacks);
 				},
 				/**
 				 * Creats an entry in an activity, such as a to-do item or to add a reply to another entry, send an Atom entry document containing the new
@@ -1333,7 +1352,7 @@ define(
 				 */
 				moveToSection : function(sectionId, newTitle) {
 					return this.service.moveEntryToSection(this, sectionId);
-				}
+				}			
 
 			});
 
@@ -1343,16 +1362,19 @@ define(
 			 * @class Member
 			 * @namespace sbt.connections
 			 */
-			var Member = declare(BaseEntity, {
-
-				/**
-				 * Get the value of ID from ATOM entry document
-				 * @method getId
-				 * @returns {String} ID
+			var Member = declare(AtomEntity, {
+				
+				xpath : consts.MemberXPath,
+		    	namespaces : consts.ActivityNamespaces,
+		    	categoryScheme : null,
+		    	
+		    	/**
+				 * Sets template for category Scheme
 				 */
-				getId : function() {
-					return this.id || this._fields.id || this.getAsString("uid");
+				setCategoryScheme : function() {
+					this.categoryScheme = stringUtil.transform(MemberCategory, this, transformer, this);
 				},
+				
 				/**
 				 * Return the member Id
 				 * 
@@ -1361,62 +1383,7 @@ define(
 				 */
 				getMemberId : function() {
 					return extractId(this.getId(), "&memberid=");
-				},
-
-				/**
-				 * Returns member name
-				 * @method getName
-				 * @returns {String} name
-				 */
-				getName : function() {
-					return this.getAsString("name");
-				},
-
-				/**
-				 * Sets name in fields
-				 * @method setName
-				 * @param {String} name
-				 */
-				setName : function(name) {
-					return this.setAsString("name", name);
-				},
-
-				/**
-				 * Get Email
-				 * @method getEmail
-				 * @returns {String} email
-				 */
-				getEmail : function() {
-					return this.getAsString("email");
-				},
-
-				/**
-				 * Set Email
-				 * @method setEmail
-				 * @param {String} email
-				 * @returns
-				 */
-				setEmail : function(email) {
-					return this.setAsString("email", email);
-				},
-
-				/**
-				 * get user ID
-				 * @method getUserId
-				 * @returns {String} userId
-				 */
-				getUserId : function() {
-					return this.getAsString("userId");
-				},
-
-				/**
-				 * Set user ID
-				 * @method setUserId
-				 * @param {String} userId
-				 */
-				setUserId : function(userId) {
-					return this.setAsString("userId", userId);
-				},
+				},				
 
 				/**
 				 * Get role
@@ -1436,52 +1403,20 @@ define(
 				setRole : function(role) {
 					return this.setAsString("role", role);
 				},
-
+				
 				/**
-				 * Get UserState
-				 * @method getUserState
-				 * @returns {String} userState
+				 * getPermissions
+				 * @method getPermissions
+				 * @returns {Array} permissions
 				 */
-				getUserState : function() {
-					return this.getAsString("userState");
+				getPermissions : function() {
+					var permissions = this.getAsString("permissions");
+					if (permissions) {
+						return permissions.split(", ");
+					}
+					return permissions;
 				},
-
-				/**
-				 * Get title
-				 * @method getTitle
-				 * @returns {String} title
-				 */
-				getTitle : function() {
-					return this.getAsString("title");
-				},
-
-				/**
-				 * Get Updated
-				 * @method getUpdated
-				 * @returns {String} updated
-				 */
-				getUpdated : function() {
-					return this.getAsDate("updated");
-				},
-
-				/**
-				 * Get Summary
-				 * @method getSummary
-				 * @returns {String} summary
-				 */
-				getSummary : function() {
-					return this.getAsString("summary");
-				},
-
-				/**
-				 * Get EditUrl
-				 * @method getEditUrl
-				 * @returns {String} editUrl
-				 */
-				getEditUrl : function() {
-					this.getAsString("editUrl");
-				},
-
+				
 				/**
 				 * getCategory
 				 * @method getCategory
@@ -1499,19 +1434,49 @@ define(
 				setCategory : function(category) {
 					this.setAsString("category", category);
 				},
+				
+				 /**
+		         * Return title element to be included in post data for this ATOM entry.
+		         * 
+		         * @method createTitle
+		         * @returns {String}
+		         */
+		        createTitle : function() {
+		        	return "";
+		        },
+		        
 
-				/**
-				 * getPermissions
-				 * @method getPermissions
-				 * @returns {Array} permissions
-				 */
-				getPermissions : function() {
-					var permissions = this.getAsString("permissions");
-					if (permissions) {
-						return permissions.split(", ");
-					}
-					return permissions;
-				},
+		        /**
+		         * Return content element to be included in post data for this ATOM entry.
+		         * 
+		         * @method createContent
+		         * @returns {String}
+		         */
+		        createContent : function() {
+		        	return "";
+		        },
+		        
+		        /**
+		         * Return summary element to be included in post data for this ATOM entry.
+		         * 
+		         * @method createSummary
+		         * @returns {String}
+		         */
+		        createSummary : function() {
+		        	return "";
+		        },
+		        
+		        /**
+		         * Return extra entry data to be included in post data for this entity.
+		         * 
+		         * @returns {String}
+		         */
+		        createEntryData : function() {
+		        	var postData = "";		            
+		            postData += stringUtil.transform(RoleTmpl, this, transformer, this);
+		            return stringUtil.trim(postData);
+		        },
+
 
 				/**
 				 * Loads the Member object with the atom entry part with the activity. By default, a network call is made to load the atom entry document in the
@@ -1538,7 +1503,27 @@ define(
 						"activityUuid" : activityUuid,
 						"memberId" : this.getMemberId()
 					});
-					return this.service.getEntity(url, options, this.getMemberId(), MemberFeedCallbacks);
+					
+					var self = this;
+					var callbacks = {
+						createEntity : function(service, data, response) {
+							var entry = null;
+							if (typeof data == "object") {
+								entry = data;
+							} else {
+								var feedHandler = new XmlDataHandler({
+									data : data,
+									namespaces : consts.ActivityNamespaces,
+									xpath : consts.MemberXPath
+								});
+								entry = feedHandler.data;
+							}
+							self.setData(entry, response);					
+							return self;
+						}
+					};
+					
+					return this.service.getEntity(url, options, this.getMemberId(), callbacks);
 				},
 				/**
 				 * Adds a member to the access control list of an activity, sends an Atom entry document containing the new member to the access control list
@@ -1641,20 +1626,14 @@ define(
 					return new XmlDataHandler({
 						service : service,
 						data : data,
-						namespaces : consts.Namespaces,
+						namespaces : consts.ActivityNamespaces,
 						xpath : consts.ActivitiesFeedXPath
 					});
 				},
 				createEntity : function(service, data, response) {
-					var entryHandler = new XmlDataHandler({
-						service : service,
-						data : data,
-						namespaces : consts.Namespaces,
-						xpath : consts.ActivityNodeXPath
-					});
 					return new Activity({
 						service : service,
-						dataHandler : entryHandler
+						data : data
 					});
 				}
 			};
@@ -1667,30 +1646,25 @@ define(
 					return new XmlDataHandler({
 						service : service,
 						data : data,
-						namespaces : consts.Namespaces,
+						namespaces : consts.ActivityNamespaces,
 						xpath : consts.ActivitiesFeedXPath
 					});
 				},
 				createEntity : function(service, data, response) {
-					var entry = null;
+					/*var entry = null;
 					if (typeof data == "object") {
 						entry = data;
 					} else {
 						var feedHandler = new XmlDataHandler({
 							data : data,
-							namespaces : consts.Namespaces,
+							namespaces : consts.ActivityNamespaces,
 							xpath : consts.ActivityNodeXPath
 						});
 						entry = feedHandler.data;
-					}
-					var entryHandler = new XmlDataHandler({
-						data : entry,
-						namespaces : consts.Namespaces,
-						xpath : consts.ActivityNodeXPath
-					});
+					} */
 					return new ActivityNode({
 						service : service,
-						dataHandler : entryHandler
+						data : data
 					});
 				}
 			};
@@ -1854,7 +1828,8 @@ define(
 					}
 					var activityNode = this.newActivityNode(activityNodeOrJson);
 					activityNode.setActivityUuid(activityUuid);
-					var payload = this._constructPayloadActivityNode(activityNode);
+					activityNode.setCategoryScheme();
+					var payload = activityNode.createPostData();// this._constructPayloadActivityNode(activityNode);
 					var requestArgs = {
 						"activityUuid" : activityUuid
 					};
@@ -1883,7 +1858,8 @@ define(
 					}
 					var activity = this.newActivity(activityOrJson);
 					activity.setType(consts.ActivityNodeTypes.Activity);
-					var payload = this._constructPayloadActivityNode(activity);
+					activity.setCategoryScheme();
+					var payload = activity.createPostData();// this._constructPayloadActivityNode(activity);
 
 					var options = {
 						method : "POST",
@@ -1952,7 +1928,8 @@ define(
 					var _this = this;
 					var uuid = extractId(activityOrActivityNode.getUuid());
 					var update = function() {
-						var payload = _this._constructPayloadActivityNode(activityOrActivityNode);
+						activityOrActivityNode.setCategoryScheme();
+						var payload = activityOrActivityNode.createPostData(); // _this._constructPayloadActivityNode(activityOrActivityNode);
 						var requestArgs = {
 							"activityNodeUuid" : uuid
 						};
@@ -1971,7 +1948,9 @@ define(
 					if (activityOrActivityNode.isLoaded()) {
 						update();
 					} else {
+						var fields = activityOrActivityNode._fields;
 						activityOrActivityNode.load().then(function() {
+							activityOrActivityNode._fields = fields;
 							update();
 						}, function(error) {
 							promise.rejected(error);
@@ -2105,11 +2084,13 @@ define(
 							var requestArgs = {
 								"activityNodeUuid" : activityUuid
 							};
+							activity.setCategoryScheme();
 							var options = {
 								method : "PUT",
 								headers : consts.AtomXmlHeaders,
 								query : requestArgs,
-								data : _this._constructPayloadActivityNode(activity)
+								data : activity.createPostData()
+							// _this._constructPayloadActivityNode(activity)
 							};
 							var callbacks = {
 								createEntity : function(service, data, response) {
@@ -2149,11 +2130,13 @@ define(
 							var requestArgs = {
 								"activityNodeUuid" : activityNodeUuid
 							};
+							activityNode.setCategoryScheme();
 							var options = {
 								method : "PUT",
 								headers : consts.AtomXmlHeaders,
 								query : requestArgs,
-								data : _this._constructPayloadActivityNode(activityNode)
+								data : activityNode.createPostData()
+							// _this._constructPayloadActivityNode(activityNode)
 							};
 							var callbacks = {
 								createEntity : function(service, data, response) {
@@ -2397,7 +2380,7 @@ define(
 						return this.createBadRequestPromise("Invalid argument, member with ID must be specified.");
 					}
 					if (checkUserIdOrEmail) {
-						var id = member.getUserId() || member.getEmail();
+						var id = member.getContributor().userid || member.getContributor().email;
 						if (!id) {
 							return this.createBadRequestPromise("Invalid argument, member with User ID or Email must be specified.");
 						}
@@ -2447,7 +2430,8 @@ define(
 					if (!member.getRole()) {
 						member.setRole("member");
 					}
-					var payload = this._constructPayloadMember(member);
+					member.setCategoryScheme();
+					var payload = member.createPostData(); // this._constructPayloadMember(member);
 					var requestArgs = {
 						"activityUuid" : activityUuid
 					};
@@ -2487,8 +2471,8 @@ define(
 					if (promise) {
 						return promise;
 					}
-
-					var payload = this._constructPayloadMember(member);
+					member.setCategoryScheme();
+					var payload = member.createPostData();
 					var requestArgs = {
 						"activityUuid" : activityUuid,
 						"memberid" : member.getMemberId()
@@ -2546,9 +2530,9 @@ define(
 						var member = new Member({
 							service : this
 						});
-						if (lang.isString(memberOrJsonOrString)) {
-							memberOrJsonOrString = {
-								id : memberOrJsonOrString
+						if (lang.isString(memberOrJsonOrString)) {							
+							memberOrJsonOrString = {									
+								id : memberOrJsonOrString									
 							};
 						}
 						member._fields = lang.mixin({}, memberOrJsonOrString);
@@ -2563,206 +2547,7 @@ define(
 				 */
 				newMember : function(memberOrJsonOrString) {
 					return this._toMember(memberOrJsonOrString);
-				},
-
-				_constructPayloadMember : function(member) {
-					var _this = this;
-
-					var transformer = function(value, key) {
-						var tmpl = null;
-						var transformValue = null;
-						var trans = function(value, key) {
-							return xml.encodeXmlEntry(transformValue);
-						};
-						if (key == "getEmail" && member.getEmail()) {
-							tmpl = EmailTmpl;
-							transformValue = member.getEmail();
-						} else if (key == "getUserid" && member.getUserId()) {
-							tmpl = UseridTmpl;
-							transformValue = member.getUserId();
-						} else if (key == "getRole" && member.getRole()) {
-							tmpl = RoleTmpl;
-							transformValue = member.getRole();
-						} else if (key == "getCategory" && member.getCategory()) {
-							tmpl = CategoryTmpl;
-							transformValue = member.getCategory();
-						}
-						if (tmpl) {
-							value = stringUtil.transform(tmpl, _this, trans, _this);
-						}
-						return value;
-					};
-					return stringUtil.transform(MemberTmpl, this, transformer, this);
-				},
-
-				_constructPayloadActivityNode : function(activityNode) {
-
-					var fieldsXml = "";
-					var inReplyToXml = "";
-					var positionXml = "";
-					var communityXml = "";
-					var tagsXml = "";
-					var completedXml = "";
-					var templateXml = "";
-					var dueDateXml = "";
-					var iconXml = "";
-					var assignedToXml = "";
-
-					var transformer = function(value, key) {
-						if (key == "title" && activityNode.getTitle()) {
-							value = xml.encodeXmlEntry(activityNode.getTitle());
-						} else if (key == "content" && activityNode.getContent()) {
-							value = xml.encodeXmlEntry(activityNode.getContent());
-						} else if (key == "type" && activityNode.getType()) {
-							value = xml.encodeXmlEntry(activityNode.getType());
-						} else if (key == "getFields" && fieldsXml != "") {
-							value = fieldsXml;
-						} else if (key == "getInReplyTo" && inReplyToXml != "") {
-							value = inReplyToXml;
-						} else if (key == "getPosition" && positionXml != "") {
-							value = positionXml;
-						} else if (key == "getCommunity" && communityXml != "") {
-							value = communityXml;
-						} else if (key == "getTags" && tagsXml != "") {
-							value = tagsXml;
-						} else if (key == "getTemplate" && templateXml != "") {
-							value = templateXml;
-						} else if (key == "getCompleted" && completedXml != "") {
-							value = completedXml;
-						} else if (key == "getDueDate" && dueDateXml != "") {
-							value = dueDateXml;
-						} else if (key == "getIcon" && iconXml != "") {
-							value = iconXml;
-						} else if (key == "getAssignedTo" && assignedToXml != "") {
-							value = assignedToXml;
-						}
-						return value;
-					};
-
-					if (activityNode.getFields && activityNode.getFields().length > 0) {
-						var fields = activityNode.getFields();
-						for ( var counter in fields) {
-							var field = fields[counter];
-							var innerXml = "";
-							var trans = function(value, key) {
-								if (field[key]) {
-									value = xml.encodeXmlEntry(field[key]);
-								} else if (innerXml != "") {
-									value = innerXml;
-								}
-								return value;
-							};
-							var tmpl = TextFieldTmpl;
-							if (field.type == "person") {
-								tmpl = PersonFieldTmpl;
-							} else if (field.type == "link") {
-								tmpl = LinkFieldTmpl;
-							} else if (field.type == "date") {
-								tmpl = DateFieldTmpl;
-							}
-							innerXml = stringUtil.transform(tmpl, this, trans, this);
-							fieldsXml = fieldsXml + stringUtil.transform(FieldTmpl, this, trans, this);
-						}
-					}
-
-					if (activityNode.getPosition()) {
-						var trans = function(value, key) {
-							if (key == "position") {
-								value = activityNode.getPosition();
-							}
-							return value;
-						};
-						positionXml = stringUtil.transform(PositionTmpl, this, trans, this);
-					}
-
-					if (activityNode.getCommunityUrl()) {
-						var trans = function(value, key) {
-							if (key == "communityUrl") {
-								value = activityNode.getCommunityUrl();
-							}
-							if (key == "communityUuid") {
-								value = activityNode.getCommunityUuid();
-							}
-							return value;
-						};
-						communityXml = stringUtil.transform(CommunityTmpl, this, trans, this);
-					}
-
-					if (activityNode.isCompleted()) {
-						completedXml = CompletedTmpl;
-					}
-
-					if (activityNode.isTemplate()) {
-						templateXml = TemplateTmpl;
-					}
-
-					if (activityNode.getDueDate()) {
-						var trans = function(value, key) {
-							if (key == "dueDate") {
-								value = activityNode.getDueDate();
-							}
-							return value;
-						};
-						dueDateXml = stringUtil.transform(DueDateTmpl, this, trans, this);
-					}
-
-					if (activityNode.getIconUrl()) {
-						var trans = function(value, key) {
-							if (key == "iconUrl") {
-								value = activityNode.getIconUrl();
-							}
-							return value;
-						};
-						iconXml = stringUtil.transform(IconTmpl, this, trans, this);
-					}
-
-					if (activityNode.getTags()) {
-						var tags = activityNode.getTags();
-						for ( var counter in tags) {
-							var tag = tags[counter];
-							var trans = function(value, key) {
-								if (key == "tag") {
-									value = tag;
-								}
-								return value;
-							};
-							tagsXml = tagsXml + stringUtil.transform(TagTmpl, this, trans, this);
-						}
-					}
-
-					if (activityNode.getInReplyToId && activityNode.getInReplyToId()) {
-						if (activityNode.getInReplyToId().indexOf(activityNode.getActivityUuid()) == -1) {
-							var trans = function(value, key) {
-								if (key == "inReplyToId") {
-									value = activityNode.getInReplyToId();
-								} else if (key == "inReplyToUrl") {
-									value = activityNode.getInReplyToUrl();
-								} else if (key == "activityUuid") {
-									value = activityNode.getActivityUuid();
-								}
-								return value;
-							};
-							inReplyToXml = stringUtil.transform(InReplytoTmpl, this, trans, this);
-						}
-					}
-
-					if (activityNode.getAssignedToUserId && activityNode.getAssignedToUserId()) {
-						var trans = function(value, key) {
-							if (key == "name") {
-								value = activityNode.getAssignedToName();
-							} else if (key == "userId") {
-								value = activityNode.getAssignedToUserId();
-							} else if (key == "email") {
-								value = activityNode.getAssignedToEmail();
-							}
-							return value;
-						};
-						assignedToxml = stringUtil.transform(AssignedToTmpl, this, trans, this);
-					}
-
-					var payload = stringUtil.transform(ActivityNodeTmpl, this, transformer, this);
-					return payload;
-				}
+				}					
 			});
 			return ActivityService;
 		});

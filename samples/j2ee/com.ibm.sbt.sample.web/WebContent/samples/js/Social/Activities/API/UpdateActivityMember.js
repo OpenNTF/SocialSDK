@@ -2,7 +2,7 @@ require([ "sbt/dom", "sbt/json", "sbt/connections/ActivityService" ], function(d
         var activitiesService = new ActivityService();        
         var member = activitiesService.newMember({     
         	"id" : "%{name=sample.memberId|helpSnippetId=Social_Activities_API_GetActivityMembers}",
-        	"userId" : "%{name=sample.userId2|helpSnippetId=Social_Activities_API_GetActivityMembers}",
+        	"contributorUserid" : "%{name=sample.userId2|helpSnippetId=Social_Activities_API_GetActivityMembers}",
         	"role" : "reader",
         	"category" : "person"
         });

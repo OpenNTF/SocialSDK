@@ -29,7 +29,7 @@ public class FileAction extends BaseGridTest {
 
     @Test
     public void fileActionTest() {
-        assertTrue("Expected the test to generate a grid", checkGrid("Social_Files_Controls_FileAction",true,true));
+        assertTrue("Expected the test to generate a grid", checkGrid("Social_Files_Controls_File_Action",true,true));
     }
 
 }

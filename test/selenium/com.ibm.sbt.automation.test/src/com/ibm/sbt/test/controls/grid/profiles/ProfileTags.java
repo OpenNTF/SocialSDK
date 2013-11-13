@@ -42,12 +42,12 @@ public class ProfileTags extends BaseTest {
 
     @Test
     public void testTaggedBy() {
-        assertTrue("Expected the test to generate a list", checkList("Social_Profiles_Controls_ProfileTaggedBy"));
+        assertTrue("Expected the test to generate a list", checkList("Social_Profiles_Controls_Profile_Tagged_By"));
     }																
 
     @Test
     public void testTagsFor() {
-        assertTrue("Expected the test to generate a list", checkList("Social_Profiles_Controls_ProfileTagsFor"));
+        assertTrue("Expected the test to generate a list", checkList("Social_Profiles_Controls_Profile_Tags_For"));
     }																
 
     /**

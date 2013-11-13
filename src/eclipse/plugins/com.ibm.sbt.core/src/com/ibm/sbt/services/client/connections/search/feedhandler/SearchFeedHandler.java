@@ -62,8 +62,8 @@ public class SearchFeedHandler implements IFeedHandler{
 	public BaseEntity createEntityFromData(Object data) {
 		Node node = (Node)data;
 		XPathExpression expr = (data instanceof Document) ? (XPathExpression)SearchXPath.entry.getPath() : null;
-		XmlDataHandler handler = new XmlDataHandler(node, ConnectionsConstants.nameSpaceCtx, expr);
-		Result result = new Result(service, handler);
+		//XmlDataHandler handler = new XmlDataHandler(node, ConnectionsConstants.nameSpaceCtx, expr);
+		Result result = new Result(service, (Node)data, ConnectionsConstants.nameSpaceCtx, expr);
 		return result;
 	}
 

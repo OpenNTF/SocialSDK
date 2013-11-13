@@ -14,6 +14,7 @@ pageGlobal.xPagesEditor = CodeMirror.fromTextArea(editor,
 	readOnly: #{javascript:compositeData.readOnly||false},
 	lineNumbers: true
 });
+attachTabIcon(pageGlobal.tabXPages,pageGlobal.xPagesEditor);
 attachLabel(editor,'#{id:label}');]]></xp:this.value>
 	</xp:scriptBlock>
 </xp:view>

@@ -2,12 +2,11 @@ require([ "sbt/dom", "sbt/json", "sbt/connections/CommunityService" ], function(
     var communityService = new CommunityService();
     var communityId = "%{sample.communityId}";
     var forumUuid = "%{sample.forumId}";
-    forumTopic.setForumUuid(forumUuid);
     var now = new Date();
     var forumTopic = {
     	forumUuid : forumUuid,
-    	title : "Test forum topic " + now.getTime(),
-    	content : "Test forum topic created: " + now
+    	title : "%{name=CommunityService.topicTitle}",
+    	content : "%{name=CommunityService.topicContent}"
     };
     var promise = communityService.createForumTopic(communityId, forumTopic);
     promise.then(

@@ -28,9 +28,7 @@
 <%@page import="com.ibm.sbt.services.client.connections.activitystreams.model.Reply"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Iterator"%>
-
 <html>
-
 <head>
 <title>SBT JAVA Sample - Remove Blog Post</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -46,12 +44,10 @@
 			
 			BlogPostList posts = service.getBlogPosts(blog.getHandle());
 			if(posts.size()>0){
-			//	String postId = posts.get(0).getUid();
 				BlogPost post = (BlogPost)posts.get(0);
 				out.println("title of Post to be remove:"+post.getTitle()+"<br>");
 				out.println("blog handle of post to be removed:"+post.getBlogHandle()+"<br>");
 				post.remove();
-				
 			}
 			else{
 				out.println("No post exists");

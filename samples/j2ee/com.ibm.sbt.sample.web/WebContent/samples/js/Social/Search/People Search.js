@@ -6,13 +6,14 @@ require([ "sbt/connections/SearchService", "sbt/dom" ],
 		dom.byId("searchBtn").onclick = function(ev) {
 		dom.byId("error").style.display = "none";
 		dom.byId("peopleTable").style.display = "none";
-		dom.byId("searching").innerHTML = "Searching...";
+		dom.byId("searching").appendChild(dom.createTextNode("Searching..."));
 		
 		var topic = dom.byId("topicInput").value;
 		
 		searchService.getPeople(topic).then(
 			function(facets) {
-				dom.byId("searching").innerHTML = "";
+				var searching = dom.byId("searching");
+				while(searching.firstChild) searching.removeChild(searching.firstChild);
 	            if (facets.length == 0) {
 	            	showError("No people associated with topic: " + topic);
                 } else {
@@ -24,7 +25,7 @@ require([ "sbt/connections/SearchService", "sbt/dom" ],
                 }
 			},
 			function(error) {
-				dom.byId("searching").innerHTML = "";
+				dom.byId("searching").appendChild(dom.createTextNode(""));
 				showError(error.message);
 			}
 		);
@@ -33,7 +34,7 @@ require([ "sbt/connections/SearchService", "sbt/dom" ],
 	var showError = function(message) {
 		var errorDiv = dom.byId("error");
 		errorDiv.style.display = "";
-		errorDiv.innerHTML = message;
+		errorDiv.appendChild(dom.createTextNode(message));
 	};
 	
 	var createRow = function(facet) {
@@ -41,10 +42,10 @@ require([ "sbt/connections/SearchService", "sbt/dom" ],
         var tr = document.createElement("tr");
         table.appendChild(tr);
         var td = document.createElement("td");
-        td.innerHTML = facet.getLabel();
+        td.appendChild(dom.createTextNode(facet.getLabel()));
         tr.appendChild(td);
         td = document.createElement("td");
-        td.innerHTML = facet.getId();
+        td.appendChild(dom.createTextNode(facet.getId()));
         tr.appendChild(td);
     };
 }

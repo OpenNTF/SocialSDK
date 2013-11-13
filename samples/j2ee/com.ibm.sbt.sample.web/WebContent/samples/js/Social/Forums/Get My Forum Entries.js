@@ -24,7 +24,7 @@ require(["sbt/connections/ForumService", "sbt/dom", "sbt/lang"],
         	}
         	
             var li = document.createElement("li");
-            li.innerHTML = replyToString(forumReply);
+            li.appendChild(dom.createTextNode(replyToString(forumReply)));
             ul.appendChild(li);
             
             ul = document.createElement("ul");
@@ -35,7 +35,7 @@ require(["sbt/connections/ForumService", "sbt/dom", "sbt/lang"],
         
         var addForumTopic = function(forumTopic, forumService, ul) {
             var li = document.createElement("li");
-            li.innerHTML = topicToString(forumTopic);
+            li.appendChild(dom.createTextNode(topicToString(forumTopic)));
             ul.appendChild(li);
             
             ul = document.createElement("ul");
@@ -47,7 +47,7 @@ require(["sbt/connections/ForumService", "sbt/dom", "sbt/lang"],
         var addForum = function(forum, forumService) {
         	var ul = dom.byId("forums");
             var li = document.createElement("li");
-            li.innerHTML = forumToString(forum);
+            li.appendChild(dom.createTextNode(forumToString(forum)));
             ul.appendChild(li);
             
             ul = document.createElement("ul");

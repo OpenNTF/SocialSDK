@@ -40,6 +40,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
     var Blog = declare(AtomEntity, {
 
     xpath : consts.BlogXPath,
+    namespaces : consts.BlogNamespaces,
     categoryScheme : CategoryBlog,
         /**
          * Construct a Blog entity.
@@ -217,6 +218,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
     var BlogPost = declare(AtomEntity, {
 
     	xpath : consts.BlogPostXPath,
+    	namespaces : consts.BlogPostNamespaces,
     	
         /**
          * Construct a Blog Post.
@@ -452,6 +454,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
     var Comment = declare(AtomEntity, {
     	
     	xpath : consts.CommentXPath,
+    	namespaces : consts.BlogNamespaces,
 
         /**
          * Construct a Blog Post Comment.
@@ -671,6 +674,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
 
     	xpath : consts.RecommendersXPath,
     	categoryScheme : CategoryPerson,
+    	namespaces : consts.BlogNamespaces,
     	
         /**
          * Construct a Blog Post Recommender.

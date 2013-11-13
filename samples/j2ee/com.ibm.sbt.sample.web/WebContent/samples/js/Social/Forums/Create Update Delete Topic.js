@@ -233,12 +233,14 @@ function resetButtons(dom) {
 	if (currentTopic) {
 		deleteBtn.disabled = false;
 		updateBtn.disabled = false;
-		likeBtn.innerHTML = currentTopic.isNotRecommendedByCurrentUser() ? "Like" : "Unlike";
+		while(likeBtn.firstChild) likeBtn.removeChild(likeBtn.firstChild);
+		likeBtn.appendChild(dom.createTextNode(currentTopic.isNotRecommendedByCurrentUser() ? "Like" : "Unlike"));
 		likeBtn.disabled = false;
 	} else {
 		deleteBtn.disabled = true;
 		updateBtn.disabled = true;
-		likeBtn.innerHTML = "Like Topic";
+		while(likeBtn.firstChild) likeBtn.removeChild(likeBtn.firstChild);
+		likeBtn.appendChild(dom.createTextNode("Like Topic"));
 		likeBtn.disabled = true;
 	}
 }

@@ -1,6 +1,6 @@
 function setText(id,text) {
     var node = document.getElementById(id);
-    node.innerHTML = text;        
+    node.appendChild(dom.createTextNode(text));        
 }
 
 var results = "";

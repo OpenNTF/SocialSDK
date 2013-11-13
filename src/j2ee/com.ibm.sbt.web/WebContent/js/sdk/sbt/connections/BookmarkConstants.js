@@ -32,18 +32,11 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type Object
          * @for sbt.connections.CommunityService
          */
-        BookmarkXPath : {
-        	entry : "/a:entry",
-        	uid : "a:id",
+        BookmarkXPath : lang.mixin({}, conn.AtomEntryXPath, {
             BookmarkUuid: "a:id",
-            title: "a:title",
             privateFlag: "a:category[@term='private' and @scheme='http://www.ibm.com/xmlns/prod/sn/flags']",
             categoryType: "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/type']/@term",
-            content: "a:content",
-            updated: "a:updated",
-            published: "a:published",
             link: "a:link[not(@rel)]/@href",
-            linkEdit: "a:link[@rel='edit']/@href",
             linkSame: "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/same']/@href",
             url: "a:link[1]/@href",
             authorId:"a:author/snx:userid",
@@ -52,7 +45,15 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
             authorUri: "a:author/a:uri",
             tags : "a:category[not(@scheme)]/@term",
             clickcount: "snx:clickcount",
-        },
+        }),
+        
+        /**
+         * Namespaces to be used when reading the Bookmarks ATOM entry or feed
+         */
+        BookmarkNamespaces : {
+			a : "http://www.w3.org/2005/Atom",
+			snx : "http://www.ibm.com/xmlns/prod/sn"
+		},
 
         /**
          * A feed of all bookmarks.

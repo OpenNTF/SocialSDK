@@ -40,7 +40,6 @@
 			BlogService service = new BlogService();
 			BlogList blogs = service.getBlogs();
 			Blog blog = (Blog)blogs.get(0);
-			
 			Blog fetched_blog = service.getBlog(blog.getBlogUuid());
 			if(StringUtil.isNotEmpty(fetched_blog.getHandle())){
 				out.println("Blog title : "+fetched_blog.getTitle()+"<br>");
@@ -52,7 +51,6 @@
 				out.println("No blog exists");
 			}
 		} catch (Throwable e) {
-			e.printStackTrace();
 			out.println("<pre>");
 			out.println(e.getMessage());
 			out.println("</pre>");

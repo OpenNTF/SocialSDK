@@ -15,6 +15,15 @@
 
 	<profiles>
 		<profile>
+			<id>lite</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<modules>
+				<module>commons</module>
+			</modules>
+		</profile>
+		<profile>
 			<id>full</id>
 			<activation>
 				<property>
@@ -25,13 +34,7 @@
 				<module>xpages</module>
 			</modules>
 		</profile>
-		<profile>
-			<id>lite</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
 
-		</profile>
 	</profiles>
 
 
@@ -45,7 +48,6 @@
 	<modules>
 		<module>libraries</module>
 		<module>deps</module>
-		<module>commons</module>
 		<module>sdk</module>
 		<module>samples</module>
 	</modules>

@@ -28,9 +28,9 @@ import com.ibm.sbt.services.client.connections.communities.Member;
  * 
  * @date 5 Mar 2013
  */
-public class RemoveCommunityMember extends BaseCommunitiesTest {
+public class RemoveMember extends BaseCommunitiesTest {
 
-    static final String SNIPPET_ID = "Social_Communities_API_RemoveCommunityMember";
+    static final String SNIPPET_ID = "Social_Communities_API_RemoveMember";
 
     @Test
     public void testRemoveMember() {

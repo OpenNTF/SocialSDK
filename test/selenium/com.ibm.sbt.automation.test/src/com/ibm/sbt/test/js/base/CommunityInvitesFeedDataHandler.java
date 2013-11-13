@@ -13,7 +13,7 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-package com.ibm.sbt.test.js.connections.communities.api;
+package com.ibm.sbt.test.js.base;
 
 import java.util.List;
 

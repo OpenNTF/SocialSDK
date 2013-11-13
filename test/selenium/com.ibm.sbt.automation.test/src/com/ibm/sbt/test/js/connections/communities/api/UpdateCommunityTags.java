@@ -35,7 +35,7 @@ public class UpdateCommunityTags extends BaseCommunitiesTest {
     
     @Test
     public void testUpdateTags() {
-        addSnippetParam("sample.communityId", community.getCommunityUuid());
+        addSnippetParam("CommunityService.communityUuid", community.getCommunityUuid());
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         JsonJavaObject json = previewPage.getJson();

@@ -39,7 +39,7 @@ public class GetForums extends BaseCommunitiesTest {
 
     @Test
     public void testGetForums() {
-        addSnippetParam("sample.communityId", community.getCommunityUuid());
+        addSnippetParam("CommunityService.communityUuid", community.getCommunityUuid());
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         List jsonList = previewPage.getJsonList();

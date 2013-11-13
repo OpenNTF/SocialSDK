@@ -39,7 +39,7 @@ public class CreateForumTopic extends BaseCommunitiesTest {
 
     @Test
     public void testCreateForumTopic() {
-        addSnippetParam("sample.communityId", community.getCommunityUuid());
+        addSnippetParam("CommunityService.communityUuid", community.getCommunityUuid());
     	addSnippetParam("CommunityService.topicTitle", "ForumTopic"+community.getTitle());
     	addSnippetParam("CommunityService.topicContent", "ForumTopic"+community.getTitle());
         

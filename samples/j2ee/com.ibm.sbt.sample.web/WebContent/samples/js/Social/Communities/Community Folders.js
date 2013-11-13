@@ -3,7 +3,7 @@ require(["sbt/dom",
          "sbt/connections/controls/files/FileGrid"],
 
 function(dom, FileService, FileGrid) {
-	var communityId = "%{name=sample.communityId}";
+	var communityId = "%{name=CommunityService.communityUuid|helpSnippetId=Social_Communities_Get_My_Communities}";
 	
 	var grid = new FileGrid({type : "folders", category : "community", userId : communityId});
 	

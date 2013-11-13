@@ -40,7 +40,7 @@ public class RemoveMember extends BaseCommunitiesTest {
     	}
         addMember(community, id, "member");
             	
-        addSnippetParam("sample.communityId", community.getCommunityUuid());
+        addSnippetParam("CommunityService.communityUuid", community.getCommunityUuid());
         addSnippetParam("sample.id2", id);
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);

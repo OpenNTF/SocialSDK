@@ -180,7 +180,7 @@ public class BlogPost extends BaseBlogEntity {
 	}
 	
 	/*
-     * Extract Blog handle from comment source url
+     * Extract Blog handle from BlogPost alternate url
      */
     private String extractBlogHandle(String url) {
     	String urlSuffix = "/entry/";

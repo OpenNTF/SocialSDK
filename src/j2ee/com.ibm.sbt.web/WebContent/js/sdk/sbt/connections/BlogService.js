@@ -27,6 +27,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
 	var BlogPostTmpl = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:app=\"http://www.w3.org/2007/app\"  xmlns:thr=\"http://purl.org/syndication/thread/1.0\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\"><title type=\"text\">${getTitle}</title><content type=\"html\">${getContent}</content>${getTags}</entry>";
 	var BlogCommentTmpl = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:app=\"http://www.w3.org/2007/app\"  xmlns:thr=\"http://purl.org/syndication/thread/1.0\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\"><content type=\"html\">${getContent}</content></entry>";
 	CategoryTmpl = "<category term=\"${tag}\"></category>";
+	var CategoryBlog = "<category term=\"blog\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category>";
+	var CategoryPerson = "<category term=\"person\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category>";
     
     /**
      * Blog class represents an entry for a Blogs feed returned by the
@@ -38,7 +40,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
     var Blog = declare(AtomEntity, {
 
     xpath : consts.BlogXPath,
-    
+    categoryScheme : CategoryBlog,
         /**
          * Construct a Blog entity.
          * 
@@ -668,6 +670,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
     var Recommender = declare(AtomEntity, {
 
     	xpath : consts.RecommendersXPath,
+    	categoryScheme : CategoryPerson,
     	
         /**
          * Construct a Blog Post Recommender.

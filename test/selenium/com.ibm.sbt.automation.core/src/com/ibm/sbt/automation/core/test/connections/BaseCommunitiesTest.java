@@ -60,7 +60,6 @@ public class BaseCommunitiesTest extends BaseApiTest {
     protected CommunityService communityService;
     protected Community community;
     
-    
     protected String CommunityEventEntry =
     		"<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
 		    "<entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:atom=\"http://www.w3.org/2005/Atom\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\" xmlns:thr=\"http://purl.org/syndication/thread/1.0\">" +

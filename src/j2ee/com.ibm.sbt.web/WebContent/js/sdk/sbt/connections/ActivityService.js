@@ -1639,7 +1639,7 @@ define(
 					});
 				},
 				createEntity : function(service, data, response) {
-					/*var entry = null;
+					var entry = null;
 					if (typeof data == "object") {
 						entry = data;
 					} else {
@@ -1649,10 +1649,10 @@ define(
 							xpath : consts.ActivityNodeXPath
 						});
 						entry = feedHandler.data;
-					} */
+					} 
 					return new ActivityNode({
 						service : service,
-						data : data
+						data : entry
 					});
 				}
 			};

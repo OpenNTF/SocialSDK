@@ -22,7 +22,7 @@
 	import="com.ibm.sbt.services.client.connections.forums.TopicList"%>
 <%@page import="com.ibm.sbt.services.client.connections.forums.Forum"%>
 <%@page
-	import="com.ibm.sbt.services.client.connections.forums.model.Author"%>
+	import="com.ibm.sbt.services.client.connections.common.Person"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
@@ -52,14 +52,14 @@
 				TopicList topics = svc.getForumTopics(forum.getForumUuid());
 				if (topics.size() > 0) {
 					for (BaseForumEntity entry : topics) {
-						Author author = entry.getAuthor();
+						Person author = entry.getAuthor();
 						out.println("uid of forum :" + entry.getUid() + "<br>");
 						out.println("date published :" + entry.getPublished() + "<br>");
 						out.println("date updated : " + entry.getUpdated() + "<br>");
 						out.println("author name : " + author.getName() + "<br>");
 						out.println("author state : " + author.getState()+ "<br>");
 						out.println("author email : " + author.getEmail()+ "<br>");
-						out.println("author uid : " + author.getUserid() + "<br>");
+						out.println("author uid : " + author.getId() + "<br>");
 						out.println("forum title : " + entry.getTitle()	+ "<br>");
 						out.println("<br><br>");
 					}

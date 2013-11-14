@@ -40,7 +40,7 @@ public class CreateInvite extends BaseCommunitiesTest {
     		id2 = getProperty("smartcloud.id2");
     	}
     	
-        addSnippetParam("sample.communityId", community.getCommunityUuid());
+        addSnippetParam("CommunityService.communityUuid", community.getCommunityUuid());
         addSnippetParam("sample.id2", id2);
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
@@ -59,7 +59,7 @@ public class CreateInvite extends BaseCommunitiesTest {
     		id2 = getProperty("smartcloud.id2");
     	}
     	
-        addSnippetParam("sample.communityId", "foobar");
+        addSnippetParam("CommunityService.communityUuid", "foobar");
         addSnippetParam("sample.id2", id2);
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
@@ -70,7 +70,7 @@ public class CreateInvite extends BaseCommunitiesTest {
 
     @Test
     public void testCreateInviteInvalidUserid() {
-        addSnippetParam("sample.communityId", community.getCommunityUuid());
+        addSnippetParam("CommunityService.communityUuid", community.getCommunityUuid());
         addSnippetParam("sample.id2", "foo");
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
@@ -86,7 +86,7 @@ public class CreateInvite extends BaseCommunitiesTest {
     		id2 = getProperty("smartcloud.id2");
     	}
     	
-        addSnippetParam("sample.communityId", "");
+        addSnippetParam("CommunityService.communityUuid", "");
         addSnippetParam("sample.id2", id2);
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
@@ -97,7 +97,7 @@ public class CreateInvite extends BaseCommunitiesTest {
 
     @Test
     public void testCreateInviteNoUserid() {
-        addSnippetParam("sample.communityId", community.getCommunityUuid());
+        addSnippetParam("CommunityService.communityUuid", community.getCommunityUuid());
         addSnippetParam("sample.id2", "");
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);

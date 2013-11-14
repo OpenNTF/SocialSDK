@@ -2,7 +2,7 @@ require(["sbt/dom",
          "sbt/connections/FileService"], 
 
       function(dom, FileService) {
-	var communityId = "%{name=sample.communityId}";
+	var communityId = "%{name=CommunityService.communityUuid|helpSnippetId=Social_Communities_Get_My_Communities}";
     
     var createRow = function(i, file) {
         var table = dom.byId("filesTable");

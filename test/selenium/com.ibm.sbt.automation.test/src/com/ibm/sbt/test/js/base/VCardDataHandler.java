@@ -54,7 +54,7 @@ public class VCardDataHandler extends BaseApiTest {
         Assert.assertEquals("Building1", json.getString("X_BUILDING"));
         Assert.assertEquals("Floor1", json.getString("X_FLOOR"));
         Assert.assertEquals("Office1", json.getString("X_OFFICE_NUMBER"));
-        Assert.assertEquals("Profile information for Frank Adams", json.getString("a:summary"));
+        Assert.assertEquals("Profile information for Frank Adams", json.getString("a:summary[@type='text']"));
         Assert.assertEquals("fadams@gmail.com", json.getString("EMAIL;X_GROUPWARE_MAIL"));
     }
 

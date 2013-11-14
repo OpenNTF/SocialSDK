@@ -36,7 +36,7 @@ public class GetSaveCommunity extends BaseCommunitiesTest {
 
     @Test
     public void testGetSaveCommunity() {
-        addSnippetParam("sample.communityId", community.getCommunityUuid());
+        addSnippetParam("CommunityService.communityUuid", community.getCommunityUuid());
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         List jsonList = previewPage.getJsonList();

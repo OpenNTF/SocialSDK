@@ -62,7 +62,21 @@ public class SbtEndpoints extends Endpoints {
 		}, new Group[] {
 				new Group("OAuth 1", new String[] {"Sma_URL","Sma_OA_ConsumerKey","Sma_OA_ConsumerSecret","Sma_OA_RequestTokenURL","Sma_OA_AuthorizationURL","Sma_OA_AccessTokenURL"}, "# Make SmartCloud OAuth 1 the default server for Connections\nsbt.endpoint.connections=smartcloudOA\nsbt.endpoint.smartcloud=smartcloudOA"),
 				new Group("OAuth 2", new String[] {"Sma_URL","Sma_OA2_ConsumerKey","Sma_OA2_ConsumerSecret","Sma_OA2_AuthorizationURL","Sma_OA2_AccessTokenURL"}, "# Make SmartCloud OAuth 2 the default server for Connections\nsbt.endpoint.connections=smartcloudOA2\nsbt.endpoint.smartcloud=smartcloudOA2",1),
-		}, null),
+		}, null,
+		new PropertyValues[] {
+			   new PropertyValues("Test - C1", new String[] {
+					"https://apps.na.collabservtest.lotus.com", // Sma_URL
+					"", // Sma_OA_ConsumerKey
+					"", // Sma_OA_ConsumerSecret
+					"https://apps.na.collabservtest.lotus.com/manage/oauth/getRequestToken", // Sma_OA_RequestTokenURL
+					"https://apps.na.collabservtest.lotus.com/manage/oauth/authorizeToken", // Sma_OA_AuthorizationURL
+					"https://apps.na.collabservtest.lotus.com/manage/oauth/getAccessToken", // Sma_OA_AccessTokenURL
+					"", // Sma_OA2_ConsumerKey
+					"", // Sma_OA2_ConsumerSecret
+					"https://apps.na.collabservtest.lotus.com/manage/oauth2/authorize", // Sma_OA2_AuthorizationURL
+					"https://apps.na.collabservtest.lotus.com/manage/oauth2/token" // Sma_OA2_AccessTokenURL
+			   })
+		}),
 		new Category("domino","IBM Domino", "IBM Domino", new Property[] {
 				new Property("Dom_URL", "URL"),
 		}, new Group[] {

@@ -20,13 +20,13 @@
         <configuration>
           <modules>
             <webModule>
-              <groupId>com.ibm.samples.snippets</groupId>
+              <groupId>com.ibm.sbt</groupId>
               <artifactId>sbt.sample.web</artifactId>
               <contextRoot>/sbt.sample.web</contextRoot>
             </webModule>
             <webModule>
               <groupId>com.ibm.sbt</groupId>
-              <artifactId>com.ibm.sbt.war</artifactId>
+              <artifactId>com.ibm.sbt.web</artifactId>
               <contextRoot>/sbt</contextRoot>
             </webModule>
             <webModule>

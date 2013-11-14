@@ -41,6 +41,10 @@ public class CrudCommunity extends BaseCommunitiesTest {
 
     @Test
     public void testCrudCommunity() {
+    	String name = createCommunityName();
+    	addSnippetParam("CommunityService.title", name);
+    	addSnippetParam("CommunityService.content", name);
+    	
         JavaScriptPreviewPage previewPage = executeSnippet(CREATE_SNIPPET_ID);
         JsonJavaObject json = previewPage.getJson();
         Assert.assertNull("Unexpected error detected on page", json.getString("code"));

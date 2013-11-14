@@ -24,19 +24,11 @@ define(
 		[ "../declare", "../config", "../lang", "../stringUtil", "../Promise", "./ActivityConstants", "../base/BaseService", "../base/AtomEntity",
 				"../base/BaseEntity", "../base/XmlDataHandler", "../xml" ],
 		function(declare, config, lang, stringUtil, Promise, consts, BaseService, AtomEntity, BaseEntity, XmlDataHandler, xml) {
-
-			// var ActivityNodeTmpl = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns=\"http://www.w3.org/2005/Atom\"
-			// xmlns:app=\"http://www.w3.org/2007/app\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\" "
-			// + "xmlns:xhtml=\"http://www.w3.org/1999/xhtml\" xmlns:thr=\"http://purl.org/syndication/thread/1.0\">"
-			// + "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/type\" term=\"${type}\" label=\"${type}\" /> "
-			// + "<content type=\"html\">${content}</content><title type=\"text\">${title}</title>"
-			// + "${getPosition}${getCommunity}${getTags}${getCompleted}${getCompleted}${getDueDate}${getInReplyTo}${getAssignedTo}${getIcon}"
-			// + "${getFields}</entry>";
+			
 			var ActivityCategory = "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/type\" term=\"${getType}\" label=\"${getType}\" />";
 			var PositionTmpl = "<snx:position>${getPosition}</snx:position>";
 			var CommunityTmpl = "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/type\" term=\"community_activity\" label=\"Community Activity\"/><snx:communityUuid>${getCommunityUuid}</communityUuid>"
-					+ "<link rel=\"http://www.ibm.com/xmlns/prod/sn/container\" type=\"application/atom+xml\" href=\"${getCommunityUrl}\"/>";
-			// var TagTmpl = "<category term=\"${tag}\" /> ";
+					+ "<link rel=\"http://www.ibm.com/xmlns/prod/sn/container\" type=\"application/atom+xml\" href=\"${getCommunityUrl}\"/>";			
 			var CompletedTmpl = "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/flags\" term=\"completed\"/>";
 			var TemplateTmpl = "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/flags\" term=\"template\"/>";
 			var DueDateTmpl = "<snx:duedate>${getDueDate}</duedate>";
@@ -48,11 +40,7 @@ define(
 			var DateFieldTmpl = "${date}";
 			var IconTmpl = "<snx:icon>${getIconUrl}</snx:icon>";
 			var AssignedToTmpl = "<snx:assignedto name=\"${getAssignedToName}\" userid=\"${getAssignedToUserId}\">${getAssignedToEmail}</snx:assignedto>";
-//			var MemberTmpl = "<?xml version=\"1.0\" encoding=\"UTF-8\"?> <entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:app=\"http://www.w3.org/2007/app\" xmlns:opensearch=\"http://a9.com/-/spec/opensearch/1.1/\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\"> "
-//					+ "<contributor> ${getEmail} ${getUserid} </contributor> ${getRole} ${getCategory} </entry>";
 			var RoleTmpl = "<snx:role xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\" component=\"http://www.ibm.com/xmlns/prod/sn/activities\">${getRole}</snx:role>";
-//			var EmailTmpl = "<email>${email}</email>";
-//			var UseridTmpl = "<snx:userid xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\">${userid}</snx:userid>";
 			var MemberCategory = "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/type\" term=\"${getCategory}\" label=\"${getCategory}\" />";
 
 			var extractId = function(id, token) {

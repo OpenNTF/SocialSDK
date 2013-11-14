@@ -43,6 +43,6 @@ public class GetActivityMember extends BaseActivitiesTest {
 	public void testGetActivityMember() {
 		JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
 		JsonJavaObject json = previewPage.getJson();
-		Assert.assertEquals(json.getAsString("getUserId"), id);
+		Assert.assertEquals(json.getAsObject("getContributor").getAsString("userid"), id);
 	}
 }

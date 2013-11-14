@@ -201,6 +201,8 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
                  this.update();
               }
            }
+           
+           this.selectedRows = [];
         },
         
         /**
@@ -208,6 +210,8 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
          * @method - update
          */
         update: function(data) {
+        	this.selectedRows = [];
+        	
            if (arguments.length > 0) {
               this.data = data;
            }

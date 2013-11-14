@@ -5,10 +5,10 @@ require(["sbt/connections/BookmarkService", "sbt/dom"],
 	        var tr = document.createElement("tr");
 	        table.appendChild(tr);
 	        var td = document.createElement("td");
-	        td.innerHTML = bookmark.getTitle();
+	        td.appendChild(dom.createTextNode(bookmark.getTitle()));
 	        tr.appendChild(td);
 	        td = document.createElement("td");
-	        td.innerHTML = bookmark.getUrl();
+	        td.appendChild(dom.createTextNode(bookmark.getUrl()));
 	        tr.appendChild(td);
 	    };
 	    var userID = "%{name=sample.id1}";

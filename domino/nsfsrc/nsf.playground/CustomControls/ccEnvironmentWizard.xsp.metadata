@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="85257AA80077A28B" version="9.0" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="70a" sequence="253" unid="F90DB5DC51C2B16B85257BE300711654">
+<noteinfo noteid="70a" sequence="364" unid="F90DB5DC51C2B16B85257BE300711654">
 <created><datetime dst="true">20130911T163512,84-04</datetime></created>
-<modified><datetime dst="true">20130912T164909,59-04</datetime></modified>
-<revised><datetime dst="true">20130912T164909,58-04</datetime></revised>
-<lastaccessed><datetime dst="true">20130912T164909,59-04</datetime></lastaccessed>
+<modified><datetime>20131113T175837,24-05</datetime></modified>
+<revised><datetime>20131113T175837,23-05</datetime></revised>
+<lastaccessed><datetime>20131113T175837,24-05</datetime></lastaccessed>
 <addedtofile><datetime dst="true">20130911T163512,86-04</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></updatedby>
 <wassignedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></wassignedby>

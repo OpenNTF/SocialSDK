@@ -12,10 +12,7 @@
 	<modules>
 		<module>acme</module>
 		<module>templates</module>
-		<!-- 
 		<module>snippets</module>
-		
-		 -->
 	</modules>
 
 </project>

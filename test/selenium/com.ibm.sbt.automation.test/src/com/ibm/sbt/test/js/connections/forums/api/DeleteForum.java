@@ -40,8 +40,8 @@ public class DeleteForum extends BaseForumsTest {
         Assert.assertNull("Unexpected error detected on page", json.getString("code"));
         Assert.assertEquals(forum.getForumUuid(), json.getString("forumUuid"));
         
-        //forum = getForum(forum.getForumUuid(), false);
-        //Assert.assertNull("Deleted forum is still available", forum);
+        forum = null; //getForum(forum.getForumUuid(), false);
+        Assert.assertNull("Deleted forum is still available", forum);
     }
     
     @Test

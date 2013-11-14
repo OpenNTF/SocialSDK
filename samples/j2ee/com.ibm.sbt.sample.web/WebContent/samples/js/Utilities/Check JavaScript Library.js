@@ -1,8 +1,9 @@
 // This snippet shows you how to test the underlying JavaScript library
 // It just use straight JS so the result can be used to load the SDK library 
 function update(text) {
-    document.getElementById('content').innerHTML = "You are using: <span style='font-weight: bold'>"+text+"</span>";
-}
+	var textNode = document.createTextNode(text);
+    document.getElementById('json').appendChild(textNode);
+   }
 
 if(window.dojo) {
 	if(dojo.version) {

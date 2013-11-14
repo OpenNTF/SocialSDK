@@ -101,11 +101,11 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
             
             if (!this.store) {
                 if (args && args.storeArgs) {
-                    this._storeArgs = args.storeArgs;
+                    this._storeArgs = lang.mixin({}, args.storeArgs);
                     this._storeArgs.endpoint = this.endpoint;
                     this.store = this.createDefaultStore(args.storeArgs);
                 } else if (this.options) {
-                    this._storeArgs = this.options[this.defaultOption].storeArgs;
+                    this._storeArgs = lang.mixin({}, this.options[this.defaultOption].storeArgs);
                     this._storeArgs.endpoint = this.endpoint;
                     if (args && args.type && this.options.hasOwnProperty(args.type)) {
                         lang.mixin(this._storeArgs, this.options[args.type].storeArgs); 

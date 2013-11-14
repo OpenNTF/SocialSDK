@@ -20,7 +20,7 @@ function(dom, ProfileGrid, ProfileRendererMixin, CommunityService, lang, SearchB
 			event = window.event;
 		}
 		var resultDiv = dom.byId("results");
-		resultDiv.innerHTML = "";
+		dom.setText(resultDiv, "");
 		//Create a table to display results
 		var table = document.createElement("table");
 		if(event.results.length >0){
@@ -28,14 +28,14 @@ function(dom, ProfileGrid, ProfileRendererMixin, CommunityService, lang, SearchB
 				var title = event.results[i].getTitle();
 				var row = document.createElement("tr");
 				var data = document.createElement("td");
-				row.innerHTML = title;
+				dom.setText(row, title);
 				row.appendChild(data);
 				table.appendChild(row);
 			}
 		} else {
 			var row = document.createElement("tr");
 			var data = document.createElement("td");
-			row.innerHTML = "Your Search Returned No Results";
+			dom.setText(row, "Your Search Returned No Results");
 			row.appendChild(data);
 			table.appendChild(row);
 		}
@@ -55,10 +55,12 @@ function(dom, ProfileGrid, ProfileRendererMixin, CommunityService, lang, SearchB
         // The title is required. Make sure that the user entered one. If not, display an
         // error message and return
         if(!title || !title.length > 0){
-        	document.getElementById("titleError").innerHTML = "You must enter a title for your community";
+        	var el = document.getElementById("titleError");
+        	dom.setText(el, "You must enter a title for your community");
         	return;
         } else {
-        	document.getElementById("titleError").innerHTML = "";
+        	var el = document.getElementById("titleError");
+        	dom.setText(el, "");
         }
         
         // Get community content
@@ -67,10 +69,12 @@ function(dom, ProfileGrid, ProfileRendererMixin, CommunityService, lang, SearchB
         // The content is required. Make sure that the user entered one. If not, display an
         // error message and return
         if(!content || !content.length > 0){
-        	document.getElementById("contentError").innerHTML = "You must specify your community content";
+        	var el = document.getElementById("contentError");
+        	dom.setText(el, "You must specify your community content");
         	return;
         } else {
-        	document.getElementById("contentError").innerHTML = "";
+        	var el = document.getElementById("contentError");
+        	dom.setText(el, "");
         }
         
         // Get community tags
@@ -79,10 +83,12 @@ function(dom, ProfileGrid, ProfileRendererMixin, CommunityService, lang, SearchB
         // At least one tag is required. Make sure that the user entered one. If not, display an
         // error message and return
         if(!tags || !tags.length > 0){
-        	document.getElementById("tagsError").innerHTML = "You must specify some tags for your community";
+        	var el = document.getElementById("tagsError");
+        	dom.setText(el, "You must specify some tags for your community");
         	return;
         } else {
-        	document.getElementById("tagsError").innerHTML = "";
+        	var el = document.getElementById("tagsError");
+        	dom.setText(el, "");
         }
         
         // Create a new community and configure it

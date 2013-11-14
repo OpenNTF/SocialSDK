@@ -55,12 +55,10 @@ function(dom, ProfileGrid, ProfileRendererMixin, CommunityService, lang, SearchB
         // The title is required. Make sure that the user entered one. If not, display an
         // error message and return
         if(!title || !title.length > 0){
-        	var el = document.getElementById("titleError");
-        	dom.setText(el, "You must enter a title for your community");
+        	dom.setText("titleError", "You must enter a title for your community");
         	return;
         } else {
-        	var el = document.getElementById("titleError");
-        	dom.setText(el, "");
+        	dom.setText("titleError", "");
         }
         
         // Get community content
@@ -69,12 +67,10 @@ function(dom, ProfileGrid, ProfileRendererMixin, CommunityService, lang, SearchB
         // The content is required. Make sure that the user entered one. If not, display an
         // error message and return
         if(!content || !content.length > 0){
-        	var el = document.getElementById("contentError");
-        	dom.setText(el, "You must specify your community content");
+        	dom.setText("contentError", "You must specify your community content");
         	return;
         } else {
-        	var el = document.getElementById("contentError");
-        	dom.setText(el, "");
+        	dom.setText("contentError", "");
         }
         
         // Get community tags
@@ -83,12 +79,10 @@ function(dom, ProfileGrid, ProfileRendererMixin, CommunityService, lang, SearchB
         // At least one tag is required. Make sure that the user entered one. If not, display an
         // error message and return
         if(!tags || !tags.length > 0){
-        	var el = document.getElementById("tagsError");
-        	dom.setText(el, "You must specify some tags for your community");
+        	dom.setText("tagsError", "You must specify some tags for your community");
         	return;
         } else {
-        	var el = document.getElementById("tagsError");
-        	dom.setText(el, "");
+        	dom.setText("tagsError", "");
         }
         
         // Create a new community and configure it

@@ -24,6 +24,7 @@ import com.ibm.sbt.test.js.base.CommunityEntryDataHandler;
 import com.ibm.sbt.test.js.base.CommunityFeedDataHandler;
 import com.ibm.sbt.test.js.base.CommunityInvitesFeedDataHandler;
 import com.ibm.sbt.test.js.base.CommunityMembersFeedDataHandler;
+import com.ibm.sbt.test.js.connections.communities.GetCommunityEvents;
 import com.ibm.sbt.test.js.connections.communities.GetCommunityForumTopics;
 import com.ibm.sbt.test.js.connections.communities.api.AddMember;
 import com.ibm.sbt.test.js.connections.communities.api.Community;
@@ -38,6 +39,7 @@ import com.ibm.sbt.test.js.connections.communities.api.CrudCommunity;
 import com.ibm.sbt.test.js.connections.communities.api.DeleteCommunity;
 import com.ibm.sbt.test.js.connections.communities.api.GetAllInvites;
 import com.ibm.sbt.test.js.connections.communities.api.GetCommunity;
+import com.ibm.sbt.test.js.connections.communities.api.GetCommunityEvent;
 import com.ibm.sbt.test.js.connections.communities.api.GetForums;
 import com.ibm.sbt.test.js.connections.communities.api.GetMembers;
 import com.ibm.sbt.test.js.connections.communities.api.GetForumTopics;
@@ -68,6 +70,7 @@ import com.ibm.sbt.test.js.connections.communities.api.UpdateCommunityTags;
     GetAllInvites.class,
     GetMembers.class, 
     GetSubCommunities.class,
+    GetCommunityEvents.class,
 
     GetCommunity.class, 
     Community.class,
@@ -84,6 +87,8 @@ import com.ibm.sbt.test.js.connections.communities.api.UpdateCommunityTags;
     NewSaveCommunity.class,
     GetSaveCommunity.class,
     CrudCommunity.class,
+    //com.ibm.sbt.test.js.connections.communities.api.GetCommunityEvents.class,
+    //GetCommunityEvent.class,
     
     CreateInvite.class,
     RemoveInvite.class,

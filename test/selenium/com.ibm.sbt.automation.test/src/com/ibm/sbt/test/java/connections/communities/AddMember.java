@@ -30,7 +30,7 @@ public class AddMember extends BaseAuthJavaServiceTest {
 
     @Test
     public void runTest() {
-        boolean result = checkNoError("Social_Communities_AddMember");
+        boolean result = checkNoError("Social_Communities_Add_Member");
         assertTrue(getNoErrorMsg(), result);
     }
 

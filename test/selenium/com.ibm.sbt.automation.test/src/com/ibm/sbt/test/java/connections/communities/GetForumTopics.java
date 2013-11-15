@@ -30,7 +30,7 @@ public class GetForumTopics extends BaseAuthJavaServiceTest {
 
     @Test
     public void runTest() {
-        boolean result = checkNoError("Social_Communities_GetForumTopics");
+        boolean result = checkNoError("Social_Communities_Get_Forum_Topics");
         assertTrue(getNoErrorMsg(), result);
     }
 

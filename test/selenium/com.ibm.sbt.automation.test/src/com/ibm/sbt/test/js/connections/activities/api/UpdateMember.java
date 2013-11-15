@@ -13,9 +13,9 @@ import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 import com.ibm.sbt.services.client.connections.activity.Activity;
 import com.ibm.sbt.services.client.connections.activity.Member;
 
-public class UpdateActivityMember extends BaseActivitiesTest {
+public class UpdateMember extends BaseActivitiesTest {
 	
-	static final String SNIPPET_ID = "Social_Activities_API_UpdateActivityMember";
+	static final String SNIPPET_ID = "Social_Activities_API_UpdateMember";
 	
 	Activity activity;
 	String id;

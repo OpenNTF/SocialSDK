@@ -12,9 +12,9 @@ import com.ibm.sbt.automation.core.test.connections.BaseActivitiesTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 import com.ibm.sbt.services.client.connections.activity.Activity;
 
-public class AddMemberToActivity extends BaseActivitiesTest {
+public class AddMember extends BaseActivitiesTest {
 	
-	static final String SNIPPET_ID = "Social_Activities_API_AddMemberToActivity";
+	static final String SNIPPET_ID = "Social_Activities_API_AddMember";
 	
 	Activity activity;
 

@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2013
+ * � Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -13,7 +13,7 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-package com.ibm.sbt.test.controls.grid.forum;
+package com.ibm.sbt.test.controls.grid.bookmarks;
 
 import static org.junit.Assert.assertTrue;
 
@@ -23,18 +23,14 @@ import com.ibm.sbt.automation.core.test.BaseGridTest;
 
 /**
  * @author David Ryan
- * @date 20 August 2013
+ * 
+ * @date 15 November 2013
  */
-public class PublicForums extends BaseGridTest {
+public class BootstrapMyBookmarks extends BaseGridTest {
 
-	@Override
-	protected boolean isEnvironmentValid() {
-		return super.isEnvironmentValid() && !environment.isSmartCloud();
-	}
-	
     @Test
-    public void publicForumsTest() {
-        assertTrue("Expected the test to generate a grid", checkGrid("Social_Forums_Controls_Public_Forums",false,false));
+    public void testGrid() {
+        assertTrue("Expected the test to generate a grid", checkGrid("Social_Bookmarks_Controls_Bootstrap_My_Bookmarks",true,true));
     }
-
+    
 }

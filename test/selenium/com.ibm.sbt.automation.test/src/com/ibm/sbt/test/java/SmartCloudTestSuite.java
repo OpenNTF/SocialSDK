@@ -24,6 +24,7 @@ import com.ibm.sbt.automation.core.environment.TestEnvironment;
 import com.ibm.sbt.automation.core.environment.TestEnvironmentFactory;
 import com.ibm.sbt.test.java.smartcloud.CommunitiesTestSuite;
 
+import com.ibm.sbt.test.java.smartcloud.ActivitiesTestSuite;
 import com.ibm.sbt.test.java.smartcloud.FilesTestSuite;
 import com.ibm.sbt.test.java.smartcloud.ProfilesTestSuite;
 
@@ -33,7 +34,7 @@ import com.ibm.sbt.test.java.smartcloud.ProfilesTestSuite;
  * @date 12 Mar 2013
  */
 @RunWith(Suite.class)
-@SuiteClasses({ CommunitiesTestSuite.class, FilesTestSuite.class, ProfilesTestSuite.class })
+@SuiteClasses({ CommunitiesTestSuite.class, FilesTestSuite.class, ProfilesTestSuite.class, ActivitiesTestSuite.class})
 public class SmartCloudTestSuite {
     @BeforeClass
     public static void init() {

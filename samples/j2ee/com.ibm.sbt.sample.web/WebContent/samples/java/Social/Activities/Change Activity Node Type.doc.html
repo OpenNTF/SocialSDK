@@ -1,0 +1,12 @@
+Demonstrates the usage of the Change Entry Type method. This method can be used to change the Type of an Activity Node.
+
+The following types of entries can be changed to other types:
+chat
+email
+entry
+reply
+todo
+
+Things to keep in mind when converting entry types:
+- When you convert an entry into a reply entry, you cannot associate the reply with an activity or a section directly. It must be associated with an existing activity entry.
+- When you convert an entry into a to-do entry, if you do not provide values for the <snx:assignedto> and <snx:duedate> elements, the Assigned To and Due Date fields will be empty.

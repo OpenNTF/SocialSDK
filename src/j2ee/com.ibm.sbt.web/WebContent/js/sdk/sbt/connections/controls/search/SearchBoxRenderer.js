@@ -63,7 +63,7 @@ define(["../../../declare",
 		 */
 		getDomNode: function(SearchBox){
 			
-			var htmlTemplate = "";
+			var htmlTemplate = ""; 
 			
 			if(SearchBox.predefinedSearch){
 				var domStr = this._substituteItems(SingleApplicationSearch, this);
@@ -77,8 +77,7 @@ define(["../../../declare",
 
 			var div = this._convertToDomNode(htmlTemplate);
 			
-			this._suggestionContainer = document.createElement("div");
-			this._suggestionContainer.setAttribute("style", "position:relative; border:none;");
+			this._suggestionContainer = document.createElement("span");
 			div.appendChild(this._suggestionContainer);
 			
 			var temp = div.getElementsByTagName("input");

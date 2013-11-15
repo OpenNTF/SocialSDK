@@ -7,30 +7,31 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.connections.BaseActivitiesTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 import com.ibm.sbt.services.client.connections.activity.Activity;
 import com.ibm.sbt.services.client.connections.activity.Member;
 
-public class DeleteActivityMember extends BaseActivitiesTest {
+public class GetMember extends BaseActivitiesTest {
 	
-	static final String SNIPPET_ID = "Social_Activities_API_DeleteActivityMember";
+	static final String SNIPPET_ID = "Social_Activities_API_GetMember";
 	
 	Activity activity;
-	String memberId;
+	String id;
+	Member member;
 
 	@Before
 	public void init() {
 		activity = createActivity();
 		addSnippetParam("sample.activityId", activity.getActivityId());
 		
-		String id2 = getProperty("sample.id2");
+		id = getProperty("sample.id2");
     	if (environment.isSmartCloud()) {
-    		id2 = getProperty("smartcloud.id2");
+    		id = getProperty("smartcloud.id2");
     	}
-    	Member member = addMember(activity.getActivityId(), id2);  
-    	memberId = member.getMemberId();
-    	addSnippetParam("sample.memberId", member.getMemberId());             
+    	member = addMember(activity.getActivityId(), id);  
+    	addSnippetParam("sample.memberId", member.getMemberId());    
 	}
 	
 	@After
@@ -39,9 +40,9 @@ public class DeleteActivityMember extends BaseActivitiesTest {
 	}
 	
 	@Test
-	public void testDeleteActivityMember() {
+	public void testGetActivityMember() {
 		JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
-		String content = previewPage.getText();
-		Assert.assertEquals(memberId, content.trim());
+		JsonJavaObject json = previewPage.getJson();
+		Assert.assertEquals(json.getAsString("getUserId"), id);
 	}
 }

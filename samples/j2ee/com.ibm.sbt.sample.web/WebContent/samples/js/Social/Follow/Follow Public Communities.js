@@ -26,14 +26,14 @@ function createRow(community, followService, FollowConstants, dom) {
     var tr = document.createElement("tr");
     table.appendChild(tr);
     var td = document.createElement("td");
-    td.innerHTML = community.getTitle();
+    td.appendChild(dom.createTextNode(community.getTitle()));
     tr.appendChild(td);
     td = document.createElement("td");
-    td.innerHTML = community.getCommunityUuid();
+    td.appendChild(dom.createTextNode(community.getCommunityUuid()));
     tr.appendChild(td);
     td = document.createElement("td");
     var followBtn = document.createElement("button");
-    followBtn.innerHTML = "Checking...";
+    dom.setText(followBtn, "Checking...");
     followBtn.setAttribute("class", "btn");
     td.appendChild(followBtn);
     tr.appendChild(td);
@@ -50,11 +50,11 @@ function createRow(community, followService, FollowConstants, dom) {
     promise.then(
 		function(followedResources) {	
 			if (followedResources.length == 0) {
-				followBtn.innerHTML = "Follow";
+				dom.setText(followBtn, "Follow");
 			} else {
 				var uuid = followedResources[0].getFollowedResourceUuid();
 				followedResource.setFollowedResourceUuid(uuid);
-				followBtn.innerHTML = "Unfollow";
+				dom.setText(followBtn, "Unfollow");
 			}
 		},
     	function(error) {
@@ -72,7 +72,7 @@ function createRow(community, followService, FollowConstants, dom) {
     	}
     	promise.then(
         	function(followedResource) {
-        		followBtn.innerHTML = (followBtn.innerHTML == "Follow") ? "Unfollow" : "Follow";
+        		dom.setText(followBtn, (followBtn.innerHTML == "Follow") ? "Unfollow" : "Follow");
         	},
         	function(error) {
         		handleError(dom, error);

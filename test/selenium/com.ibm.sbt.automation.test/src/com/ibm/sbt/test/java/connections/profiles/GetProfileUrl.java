@@ -32,7 +32,7 @@ public class GetProfileUrl extends BaseJavaServiceTest {
     public void runTest() {
         String expected = getProperty("sample.profileUrl1");
 
-        boolean result = checkExpected("Social_Profiles_GetProfileUrl", expected);
+        boolean result = checkExpected("Social_Profiles_Get_Profile_Url", expected);
         assertTrue(getExpectedErrorMsg(), result);
     }
 

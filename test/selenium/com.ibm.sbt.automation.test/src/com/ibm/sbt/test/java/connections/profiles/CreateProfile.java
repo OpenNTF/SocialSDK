@@ -23,14 +23,14 @@ import org.junit.Test;
 import com.ibm.sbt.automation.core.test.BaseJavaServiceTest;
 
 /**
- * @author mkataria
- * @date Feb 8, 2013
+ * @author swati singh
+ * @date Nov 15, 2013
  */
-public class GetDisplayName extends BaseJavaServiceTest {
+public class CreateProfile extends BaseJavaServiceTest {
 
     @Test
     public void runTest() {
-        boolean result = checkNoError("Social_Profiles_GetDisplayName");
+        boolean result = checkNoError("Social_Profiles_Create_Profile");
         assertTrue(getNoErrorMsg(), result);
     }
 

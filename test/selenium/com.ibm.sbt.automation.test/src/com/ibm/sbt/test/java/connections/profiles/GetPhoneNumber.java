@@ -30,7 +30,7 @@ public class GetPhoneNumber extends BaseJavaServiceTest {
 
     @Test
     public void runTest() {
-        boolean result = checkNoError("Social_Profiles_GetPhoneNumber");
+        boolean result = checkNoError("Social_Profiles_Get_Phone_Number");
         assertTrue(getNoErrorMsg(), result);
     }
 

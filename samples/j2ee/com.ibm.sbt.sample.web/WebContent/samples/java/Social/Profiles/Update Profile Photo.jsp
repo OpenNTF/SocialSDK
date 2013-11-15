@@ -37,20 +37,10 @@ org.apache.commons.fileupload.disk.DiskFileItemFactory,org.apache.commons.fileup
 			FileItem fileItem = (FileItem)upload.parseRequest(request).get(0);
 			//convert FileItem to File instance ,using converToFile method
 			File file = convertToFile(fileItem);
-			
-			String mimetype = new MimetypesFileTypeMap().getContentType(file);
-			String type = StringUtil.splitString(mimetype,'/')[0];
-			// check if file is of type image
-			if (StringUtil.equalsIgnoreCase(type,"image")) {
-				//Create ProfileService instance and call updateProfilePhoto wrapper function to update Profile Pic
-				ProfileService profileService = new ProfileService();
-				String id = profileService.getMyUserId();
-				profileService.updateProfilePhoto(file, id);
-			} else {
-				request.setAttribute("message", "File selected is not an image file");
-				request.setAttribute("success", "false");
-				return;
-			}
+			//Create ProfileService instance and call updateProfilePhoto wrapper function to update Profile Pic
+			ProfileService profileService = new ProfileService();
+			String id = profileService.getMyUserId();
+			profileService.updateProfilePhoto(file, id);
 			request.setAttribute("message", "File uploaded successfully");
 			request.setAttribute("success", "true");
 		} catch (Exception ex) {

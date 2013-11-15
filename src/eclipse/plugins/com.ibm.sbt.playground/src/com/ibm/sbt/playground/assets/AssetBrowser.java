@@ -74,7 +74,8 @@ public class AssetBrowser {
 		VFSFile[] children = file.getChildren();
 		for(VFSFile s: children) {
 			if(s.isFolder()) {
-				CategoryNode cn = factory.createCategoryNode(node, s.getName());
+				String categoryName = s.getName();
+				CategoryNode cn = factory.createCategoryNode(node, categoryName);
 				if(cn!=null) {
 					if(includeNode(cn.readGlobalProperties(s.getVFS()))){
 					    node.getChildren().add(cn);
@@ -89,7 +90,7 @@ public class AssetBrowser {
 						Properties p = new Properties();
 						sn.readProperties(s.getVFS(), sn, p);
 						if(includeNode(p)){
-						    node.getChildren().add(sn);
+						    sn.getParent().getChildren().add(sn);
 						    snippets.add(snippetName);
 						}
 					}
@@ -102,19 +103,20 @@ public class AssetBrowser {
 	        if(nodeParent != null){
 	            nodeParent.getChildren().remove(node);
 	        }
+	    } else {
+			// Sort the samples alphabetically
+			(new QuickSort.JavaList(node.getChildren()) {
+				@Override
+				public int compare(Object o1, Object o2) {
+					Node n1 = (Node)o1;
+					Node n2 = (Node)o2;
+					if(n1.isCategory()&&n2.isAsset()) return 1;
+					if(n2.isCategory()&&n1.isAsset()) return -1;
+					return StringUtil.compareToIgnoreCase(n1.getName(), n2.getName());
+				}
+				
+			}).sort();
 	    }
-		// Sort the samples alphabetically
-		(new QuickSort.JavaList(node.getChildren()) {
-			@Override
-			public int compare(Object o1, Object o2) {
-				Node n1 = (Node)o1;
-				Node n2 = (Node)o2;
-				if(n1.isCategory()&&n2.isAsset()) return 1;
-				if(n2.isCategory()&&n1.isAsset()) return -1;
-				return StringUtil.compareToIgnoreCase(n1.getName(), n2.getName());
-			}
-			
-		}).sort();
 	}
 	
 	protected boolean includeNode(Properties properties){

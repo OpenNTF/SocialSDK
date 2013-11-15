@@ -16,9 +16,9 @@ import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 import com.ibm.sbt.services.client.connections.files.File;
 import com.ibm.sbt.services.client.connections.files.FileServiceException;
 
-public class GetMyPinnedFiles extends BaseFilesTest {
+public class GetPinnedFiles extends BaseFilesTest {
 
-	static final String SNIPPET_ID = "Social_Files_API_GetMyPinnedFiles";
+	static final String SNIPPET_ID = "Social_Files_API_GetPinnedFiles";
 
 	static final String SNIPPET_ID_PIN = "Social_Files_API_PinFile";
 

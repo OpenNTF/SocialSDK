@@ -13,7 +13,7 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-package com.ibm.sbt.test.java;
+package com.ibm.sbt.test.java.connections;
 
 import org.junit.AfterClass;
 import org.junit.runner.RunWith;
@@ -21,22 +21,23 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import com.ibm.sbt.automation.core.environment.TestEnvironment;
-import com.ibm.sbt.test.java.connections.ActivitiesTestSuite;
-import com.ibm.sbt.test.java.connections.ActivityStreamsTestSuite;
-import com.ibm.sbt.test.java.connections.CommunitiesTestSuite;
-import com.ibm.sbt.test.java.connections.FilesTestSuite;
-import com.ibm.sbt.test.java.connections.ProfilesTestSuite;
-import com.ibm.sbt.test.java.connections.SearchTestSuite;
-import com.ibm.sbt.test.java.connections.ForumsTestSuite;
+import com.ibm.sbt.test.java.connections.search.BlogConstraint;
+import com.ibm.sbt.test.java.connections.search.CommunityFullText;
+import com.ibm.sbt.test.java.connections.search.CommunityTagSearch;
+import com.ibm.sbt.test.java.connections.search.GetPeople;
+import com.ibm.sbt.test.java.connections.search.GetResults;
+import com.ibm.sbt.test.java.connections.search.GetResultsByTag;
+import com.ibm.sbt.test.java.connections.search.GetScopes;
 
 /**
- * @author mwallace
+ * @author mkataria
  * 
- * @date 12 Mar 2013
+ * @date Nov 14 2013
  */
 @RunWith(Suite.class)
-@SuiteClasses({ ActivityStreamsTestSuite.class, CommunitiesTestSuite.class, FilesTestSuite.class, ProfilesTestSuite.class, ActivitiesTestSuite.class, SearchTestSuite.class,,ForumsTestSuite.class })
-public class ConnectionsTestSuite {
+@SuiteClasses({ BlogConstraint.class, CommunityFullText.class, CommunityTagSearch.class, GetPeople.class, GetResults.class, GetResultsByTag.class,
+        GetScopes.class }) 
+public class SearchTestSuite {
     @AfterClass
     public static void cleanup() {
         TestEnvironment.cleanup();

@@ -13,9 +13,9 @@ import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 import com.ibm.sbt.services.client.connections.activity.Activity;
 import com.ibm.sbt.services.client.connections.activity.ActivityNode;
 
-public class MoveActivityNodeToSection extends BaseActivitiesTest {
+public class MoveEntryToSection extends BaseActivitiesTest {
 	
-	static final String SNIPPET_ID = "Social_Activities_API_MoveActivityNodeToSection";
+	static final String SNIPPET_ID = "Social_Activities_API_MoveEntryToSection";
 	
 	Activity activity;
 	ActivityNode sectionActivityNode;

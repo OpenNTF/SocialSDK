@@ -1,7 +1,5 @@
 package com.ibm.sbt.test.js.connections.activities.api;
 
-import java.util.List;
-
 import org.junit.Assert;
 
 import org.junit.After;
@@ -9,31 +7,30 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.connections.BaseActivitiesTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 import com.ibm.sbt.services.client.connections.activity.Activity;
 import com.ibm.sbt.services.client.connections.activity.Member;
 
-public class GetActivityMembers extends BaseActivitiesTest {
+public class DeleteMember extends BaseActivitiesTest {
 	
-	static final String SNIPPET_ID = "Social_Activities_API_GetActivityMembers";
+	static final String SNIPPET_ID = "Social_Activities_API_DeleteMember";
 	
 	Activity activity;
-	String id;
-	Member member;
+	String memberId;
 
 	@Before
 	public void init() {
 		activity = createActivity();
 		addSnippetParam("sample.activityId", activity.getActivityId());
 		
-		id = getProperty("sample.id2");
+		String id2 = getProperty("sample.id2");
     	if (environment.isSmartCloud()) {
-    		id = getProperty("smartcloud.id2");
+    		id2 = getProperty("smartcloud.id2");
     	}
-    	member = addMember(activity.getActivityId(), id);  
-    	addSnippetParam("sample.memberId", member.getMemberId());    
+    	Member member = addMember(activity.getActivityId(), id2);  
+    	memberId = member.getMemberId();
+    	addSnippetParam("sample.memberId", member.getMemberId());             
 	}
 	
 	@After
@@ -42,9 +39,9 @@ public class GetActivityMembers extends BaseActivitiesTest {
 	}
 	
 	@Test
-	public void testGetActivityMembers() {
+	public void testDeleteActivityMember() {
 		JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
-		 List jsonList = previewPage.getJsonList();
-	     Assert.assertFalse("No members for activity ", jsonList.isEmpty());
+		String content = previewPage.getText();
+		Assert.assertEquals(memberId, content.trim());
 	}
 }

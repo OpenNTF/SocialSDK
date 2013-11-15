@@ -23,7 +23,9 @@ import com.ibm.sbt.services.client.connections.files.File;
 import com.ibm.sbt.services.client.connections.files.FileService;
 import com.ibm.sbt.services.client.connections.files.FileServiceException;
 import com.ibm.sbt.services.client.connections.files.model.FileCreationParameters;
-import com.ibm.sbt.services.client.connections.bookmarks.BookmarkService;
+import com.ibm.sbt.services.client.connections.forums.Forum;
+import com.ibm.sbt.services.client.connections.forums.ForumService;
+import com.ibm.sbt.services.client.connections.forums.ForumServiceException;
 
 public class BaseGridTestSetup extends BaseApiTest{
 	
@@ -52,15 +54,44 @@ public class BaseGridTestSetup extends BaseApiTest{
 	/**The Id of the test activity */
 	private String testActivityID;
 	
-	/**The bookmark service used to create test bookmarks */
-	private BookmarkService bookmarkService;
+	private ForumService fourmService;
 	
-	/**Test bookmark id */
-	private String testBookmarkID;
+	private String testForumID;
 	
 	/**Constructor*/
 	public BaseGridTestSetup(){
 		
+	}
+	
+	public void createForum(){
+		try {
+			loginConnections();
+		} catch (AuthenticationException e) {
+			e.printStackTrace();
+		}
+		fourmService = new ForumService();
+		Forum forum = new Forum(fourmService);
+		forum.setTitle("Test forum 1ab" + System.currentTimeMillis());
+		forum.setContent("Test forum created by Create Forum Java snippet");
+		List<String> tags = new ArrayList<String>();
+		tags.add("tag1"); 
+		tags.add("tag2"); 
+		forum.setTags(tags);
+		try {
+			forum = forum.save();
+			testForumID = forum.getUid();
+		} catch (ForumServiceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+	}
+	
+	public void deleteForum(){
+		try {
+			this.fourmService.removeForum(testForumID);
+		} catch (ForumServiceException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void createBookmark(){

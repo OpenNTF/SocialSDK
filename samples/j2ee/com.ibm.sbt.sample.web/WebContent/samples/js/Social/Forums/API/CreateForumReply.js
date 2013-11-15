@@ -1,12 +1,14 @@
 require(["sbt/connections/ForumService", "sbt/dom", "sbt/json"], 
     function(ForumService, dom, json) {
-        var forumService = new ForumService();  
-        var topicUuid = "%{name=ForumService.topicUuid}";
+    	var topicUuid = "%{name=ForumService.topicUuid|helpSnippetId=Social_Forums_Get_My_Forum_Entries}";
+        var replyTitle = "%{name=ForumService.replyTitle|required=false}" || "Test forum reply " + (new Date()).getTime();
+        var replyContent = "%{name=ForumService.replyContent|required=false}" || "Test forum reply content " + (new Date()).getTime();
+
+    	var forumService = new ForumService();  
         var forumReply = forumService.newForumReply(); 
         forumReply.setTopicUuid(topicUuid);
-        var now = new Date();
-        forumReply.setTitle("Test forum reply " + now.getTime());
-        forumReply.setContent("Test forum reply created: " + now);
+        forumReply.setTitle(replyTitle);
+        forumReply.setContent(replyContent);
         var promise = forumService.createForumReply(forumReply);
         promise.then(
             function(forumReply) {

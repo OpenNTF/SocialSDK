@@ -21,53 +21,56 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
+import com.ibm.sbt.automation.core.test.BaseTest.AuthType;
 import com.ibm.sbt.automation.core.test.connections.BaseForumsTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 import com.ibm.sbt.services.client.connections.forums.Forum;
+import com.ibm.sbt.services.client.connections.forums.ForumReply;
+import com.ibm.sbt.services.client.connections.forums.ForumTopic;
 
 /**
  * @author mwallace
  *  
  * @date 25 Mar 2013
  */
-public class GetForum extends BaseForumsTest {
+public class GetForumReply extends BaseForumsTest {
     
-    static final String SNIPPET_ID = "Social_Forums_API_GetForum";
+    static final String SNIPPET_ID = "Social_Forums_API_GetForumReply";
 
-    public GetForum() {
+    public GetForumReply() {
         setAuthType(AuthType.AUTO_DETECT);
     }
 
     @Test
-    public void testGetForum() {
-        addSnippetParam("ForumService.forumUuid", forum.getForumUuid());
-        
-        Forum aforum = getForum(forum.getForumUuid());
-        Assert.assertNotNull(aforum);
+    public void testGetForumReply() {
+    	String title = createForumTopicName();
+    	ForumTopic forumTopic = createForumTopic(forum, title, title);
+    	ForumReply forumReply = createForumReply(forumTopic, title, title);
+        addSnippetParam("ForumService.replyUuid", forumReply.getReplyUuid());
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         JsonJavaObject json = previewPage.getJson();
-        assertForumValid(forum, (JsonJavaObject)json);
+        assertForumReplyValid(forumReply, (JsonJavaObject)json);
     }
     
     @Test
-    public void testGetForumError() {
-        addSnippetParam("ForumService.forumUuid", "Foo");
+    public void testGetForumReplyError() {
+        addSnippetParam("ForumService.replyUuid", "Foo");
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         JsonJavaObject json = previewPage.getJson();
         Assert.assertEquals(404, json.getInt("code"));
-        Assert.assertEquals("CLFRV0008E: Error, unable to find object with uuid: Foo", json.getString("message"));
+        Assert.assertEquals("No existing forum found. Please contact your system administrator.", json.getString("message"));
     }
     
     @Test
-    public void testGetForumInvalidArg() {
-        addSnippetParam("ForumService.forumUuid", "");
+    public void testGetForumReplyInvalidArg() {
+        addSnippetParam("ForumService.replyUuid", "");
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         JsonJavaObject json = previewPage.getJson();
         Assert.assertEquals(400, json.getInt("code"));
-        Assert.assertEquals("Invalid argument, expected forumUuid.", json.getString("message"));
+        Assert.assertEquals("Invalid argument, expected replyUuid.", json.getString("message"));
     }
     
 }

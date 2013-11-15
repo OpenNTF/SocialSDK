@@ -27,12 +27,20 @@ import com.ibm.sbt.test.js.connections.forums.GetMyForumEntries;
 import com.ibm.sbt.test.js.connections.forums.GetMyTopicsRecommendations;
 import com.ibm.sbt.test.js.connections.forums.StartAForum;
 import com.ibm.sbt.test.js.connections.forums.api.CreateForum;
+import com.ibm.sbt.test.js.connections.forums.api.CreateForumReply;
+import com.ibm.sbt.test.js.connections.forums.api.CreateForumTopic;
 import com.ibm.sbt.test.js.connections.forums.api.DeleteForum;
+import com.ibm.sbt.test.js.connections.forums.api.DeleteForumReply;
+import com.ibm.sbt.test.js.connections.forums.api.DeleteForumTopic;
 import com.ibm.sbt.test.js.connections.forums.api.GetAllForums;
 import com.ibm.sbt.test.js.connections.forums.api.GetForum;
+import com.ibm.sbt.test.js.connections.forums.api.GetForumReply;
+import com.ibm.sbt.test.js.connections.forums.api.GetForumTopic;
 import com.ibm.sbt.test.js.connections.forums.api.GetMyForums;
 import com.ibm.sbt.test.js.connections.forums.api.GetPublicForums;
 import com.ibm.sbt.test.js.connections.forums.api.UpdateForum;
+import com.ibm.sbt.test.js.connections.forums.api.UpdateForumReply;
+import com.ibm.sbt.test.js.connections.forums.api.UpdateForumTopic;
 
 /**
  * @author mwallace
@@ -52,10 +60,22 @@ import com.ibm.sbt.test.js.connections.forums.api.UpdateForum;
 	GetMyForums.class,
 	GetPublicForums.class, 
 	GetAllForums.class,
+	
 	CreateForum.class,
 	GetForum.class,
 	UpdateForum.class,
-	DeleteForum.class})
+	DeleteForum.class,
+	
+	CreateForumTopic.class,
+	GetForumTopic.class,
+	UpdateForumTopic.class,
+	DeleteForumTopic.class,
+	
+	CreateForumReply.class,
+	GetForumReply.class,
+	UpdateForumReply.class,
+	DeleteForumReply.class
+})
 public class ForumsTestSuite {
     @AfterClass
     public static void cleanup() {

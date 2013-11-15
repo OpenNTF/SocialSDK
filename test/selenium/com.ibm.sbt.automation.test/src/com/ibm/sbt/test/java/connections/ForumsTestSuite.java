@@ -13,7 +13,7 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-package com.ibm.sbt.test.java;
+package com.ibm.sbt.test.java.connections;
 
 import org.junit.AfterClass;
 import org.junit.runner.RunWith;
@@ -21,22 +21,21 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import com.ibm.sbt.automation.core.environment.TestEnvironment;
-import com.ibm.sbt.test.java.connections.ActivitiesTestSuite;
-import com.ibm.sbt.test.java.connections.ActivityStreamsTestSuite;
-import com.ibm.sbt.test.java.connections.CommunitiesTestSuite;
-import com.ibm.sbt.test.java.connections.FilesTestSuite;
-import com.ibm.sbt.test.java.connections.ProfilesTestSuite;
-import com.ibm.sbt.test.java.connections.SearchTestSuite;
-import com.ibm.sbt.test.java.connections.ForumsTestSuite;
+import com.ibm.sbt.test.java.connections.forums.*;
+
 
 /**
- * @author mwallace
+ * @author mkataria
  * 
- * @date 12 Mar 2013
+ * @date Nov 14 2013
  */
 @RunWith(Suite.class)
-@SuiteClasses({ ActivityStreamsTestSuite.class, CommunitiesTestSuite.class, FilesTestSuite.class, ProfilesTestSuite.class, ActivitiesTestSuite.class, SearchTestSuite.class,,ForumsTestSuite.class })
-public class ConnectionsTestSuite {
+@SuiteClasses({ CreateCommunityForumReply.class, CreateCommunityForumTopic.class, CreateForum.class, CreateReply.class, CreateTopic.class, ForumById.class,
+	ForumTopicsTags.class,ForumsTags.class,GetMyForumEntities.class,GetRecommendations.class,
+	MyForums.class,MyTopics.class,PublicForums.class,RemoveForum.class, RemoveReply.class,RemoveTopic.class,
+	RepliesForATopic.class,ReplyById.class, TopicById.class,TopicsForAForum.class,UpdateForum.class,UpdateReply.class,
+	UpdateTopic.class }) 
+public class ForumsTestSuite {
     @AfterClass
     public static void cleanup() {
         TestEnvironment.cleanup();

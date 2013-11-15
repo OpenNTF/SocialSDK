@@ -38,11 +38,11 @@ public class ForumGridTestSuite {
 	@BeforeClass
 	public static void setup(){
 		setup = new BaseGridTestSetup();
-		setup.createCommunity("TestCommunity", "public", "content", "TestTag, tag2", false);
+		setup.createForum();
 	}
 	
 	@AfterClass
     public static void cleanup() {
-		setup.deleteCommunity();
+		setup.deleteForum();
     }
 }

@@ -19,7 +19,7 @@
 <%@page
 	import="com.ibm.sbt.services.client.connections.forums.ForumService"%>
 <%@page
-	import="com.ibm.sbt.services.client.connections.forums.model.Author"%>
+	import="com.ibm.sbt.services.client.connections.common.Person"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>

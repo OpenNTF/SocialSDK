@@ -164,7 +164,7 @@ public class BaseForumsTest extends BaseApiTest {
         Assert.assertEquals(forum.getForumUrl(), json.getString("getForumUrl"));
         Assert.assertEquals(forum.getAuthor().getName(), json.getJsonObject("getAuthor").getString("name"));
         Assert.assertEquals(forum.getAuthor().getEmail(), json.getJsonObject("getAuthor").getString("email"));
-        Assert.assertEquals(forum.getAuthor().getUserid(), json.getJsonObject("getAuthor").getString("userid"));
+        Assert.assertEquals(forum.getAuthor().getId(), json.getJsonObject("getAuthor").getString("userid"));
         //Assert.assertEquals(forum.getContributor().getName(), json.getJsonObject("getContributor").getString("name"));
         //Assert.assertEquals(forum.getContributor().getEmail(), json.getJsonObject("getContributor").getString("email"));
         //Assert.assertEquals(forum.getContributor().getUserid(), json.getJsonObject("getContributor").getString("userid"));
@@ -180,7 +180,7 @@ public class BaseForumsTest extends BaseApiTest {
         Assert.assertEquals(StringUtil.trim(forumTopic.getContent()), json.getString("getContent"));
         Assert.assertEquals(forumTopic.getAuthor().getName(), json.getJsonObject("getAuthor").getString("name"));
         Assert.assertEquals(forumTopic.getAuthor().getEmail(), json.getJsonObject("getAuthor").getString("email"));
-        Assert.assertEquals(forumTopic.getAuthor().getUserid(), json.getJsonObject("getAuthor").getString("userid"));
+        Assert.assertEquals(forumTopic.getAuthor().getId(), json.getJsonObject("getAuthor").getString("userid"));
     }
     
     protected void assertForumReplyValid(ForumReply forumReply, JsonJavaObject json) {
@@ -192,7 +192,7 @@ public class BaseForumsTest extends BaseApiTest {
         Assert.assertEquals(StringUtil.trim(forumReply.getContent()), json.getString("getContent"));
         Assert.assertEquals(forumReply.getAuthor().getName(), json.getJsonObject("getAuthor").getString("name"));
         Assert.assertEquals(forumReply.getAuthor().getEmail(), json.getJsonObject("getAuthor").getString("email"));
-        Assert.assertEquals(forumReply.getAuthor().getUserid(), json.getJsonObject("getAuthor").getString("userid"));
+        Assert.assertEquals(forumReply.getAuthor().getId(), json.getJsonObject("getAuthor").getString("userid"));
     }
     
     protected void assertForumGetters(JsonJavaObject json) {

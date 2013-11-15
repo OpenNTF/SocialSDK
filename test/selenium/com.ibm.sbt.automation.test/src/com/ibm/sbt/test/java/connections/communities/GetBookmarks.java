@@ -19,17 +19,17 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import com.ibm.sbt.automation.core.test.BaseAuthJavaServiceTest;
+import com.ibm.sbt.automation.core.test.BaseJavaServiceTest;
 
 /**
  * @author mkataria
  * @date Feb 8, 2013
  */
-public class CreateCommunity extends BaseAuthJavaServiceTest {
+public class GetBookmarks extends BaseJavaServiceTest {
 
     @Test
     public void runTest() {
-        boolean result = checkNoError("Social_Communities_Create_Community");
+        boolean result = checkNoError("Social_Communities_Get_Bookmarks");
         assertTrue(getNoErrorMsg(), result);
     }
 

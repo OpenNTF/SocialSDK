@@ -93,15 +93,12 @@ define([ "../../../declare",
          * This is the default grid that will be created if no 
          * arguments are given.
          */
-        defaultOption: "colleagues",
+        defaultOption: "communityMembers",
         
         /**Constructor function
          * @method constructor
          * */
         constructor: function(args){
-        	if(args.type == "peopleManaged" || args.type == "reportingChain" || args.type == "profile") {
-        		this.hideSorter = true;
-        	} 	
         	
             var nls = this.renderer.nls;
 
@@ -141,9 +138,7 @@ define([ "../../../declare",
             
         },
         
-        contextRootMap: {
-            profiles: "profiles"
-        },
+   
         
         /**
          * Override buildUrl to add outputType, format and email/userid's

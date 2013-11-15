@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2012
+ * � Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -25,11 +25,11 @@ import com.ibm.sbt.automation.core.test.BaseAuthJavaServiceTest;
  * @author Vimal Dhupar
  * @date Nov 15, 2013
  */
-public class UploadFile extends BaseAuthJavaServiceTest {
+public class DownloadUploadCommunityFile extends BaseAuthJavaServiceTest {
 
     @Test
     public void runTest() {
-        boolean result = checkNoError("Social_Files_Upload_File");
+        boolean result = checkNoError("Social_Files_Get_Community_Files");
         assertTrue(getNoErrorMsg(), result);
     }
 

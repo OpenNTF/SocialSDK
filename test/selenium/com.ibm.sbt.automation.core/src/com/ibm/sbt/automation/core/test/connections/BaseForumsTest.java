@@ -59,7 +59,7 @@ public class BaseForumsTest extends BaseApiTest {
     
     @After
     public void deleteForumAndQuit() {
-    	//deleteForum(forum);
+    	deleteForum(forum);
     	forum = null;
     	destroyContext();
     }

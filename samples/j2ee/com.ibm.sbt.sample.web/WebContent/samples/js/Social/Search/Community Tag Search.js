@@ -6,7 +6,7 @@ require([ "sbt/connections/SearchService", "sbt/dom" ],
 		dom.byId("searchBtn").onclick = function(ev) {
 		dom.byId("error").style.display = "none";
 		dom.byId("communityTable").style.display = "none";
-		dom.byId("searching").innerHTML = "Searching...";
+		dom.byId("searching").appendChild(dom.createTextNode("Searching..."));
 		
 		var tag = dom.byId("tagInput").value;
 		
@@ -16,7 +16,8 @@ require([ "sbt/connections/SearchService", "sbt/dom" ],
 		
 		searchService.getResultsByTag(tag, requestArgs).then(
 			function(results) {
-				dom.byId("searching").innerHTML = "";
+				var searching = dom.byId("searching");
+				while(searching.firstChild) searching.removeChild(searching.firstChild);
 	            if (results.length == 0) {
 	            	showError("No communities associated with tag: " + topic);
                 } else {
@@ -28,7 +29,7 @@ require([ "sbt/connections/SearchService", "sbt/dom" ],
                 }
 			},
 			function(error) {
-				dom.byId("searching").innerHTML = "";
+				dom.byId("searching").appendChild(dom.createTextNode(""));
 				showError(error.message);
 			}
 		);
@@ -37,7 +38,7 @@ require([ "sbt/connections/SearchService", "sbt/dom" ],
 	var showError = function(message) {
 		var errorDiv = dom.byId("error");
 		errorDiv.style.display = "";
-		errorDiv.innerHTML = message;
+		errorDiv.appendChild(dom.createTextNode(message));
 	};
 	
 	var createRow = function(result) {
@@ -45,10 +46,10 @@ require([ "sbt/connections/SearchService", "sbt/dom" ],
         var tr = document.createElement("tr");
         table.appendChild(tr);
         var td = document.createElement("td");
-        td.innerHTML = result.getTitle();
+        td.appendChild(dom.createTextNode(result.getTitle()));
         tr.appendChild(td);
         td = document.createElement("td");
-        td.innerHTML = result.getId();
+        td.appendChild(dom.createTextNode(result.getId()));
         tr.appendChild(td);
     };
 }

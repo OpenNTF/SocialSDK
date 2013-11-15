@@ -1,6 +1,6 @@
 require([ "sbt/dom", "sbt/json", "sbt/connections/CommunityService" ], function(dom,json,CommunityService) {
     var communityService = new CommunityService();
-    var communityId = "%{name=sample.communityId|helpSnippetId=Social_Communities_Get_My_Communities}";
+    var communityId = "%{name=CommunityService.communityUuid|helpSnippetId=Social_Communities_Get_My_Communities}";
     var promise = communityService.getSubCommunities(communityId, {    
             asc : true,
             email : "%{name=sample.email1}",

@@ -88,9 +88,6 @@ define(['dojo/_base/declare', 'explorer/widgets/gadgetarea/GadgetArea', 'dojo/on
         	  gadgetSpecService.getGadgetSpec(id).then(function(r) {
         		  util.updateEditorContent(r, id);
         		  self.runCode(false);
-            	  if(domClass.contains(self.gadgetToolbar.domNode, 'hide')) {
-            		  domClass.remove(self.gadgetToolbar.domNode, 'hide');
-            	  }
         	  }, 
         	  function(error) {
         		  alert("Error:\n"+error.msg);
@@ -149,6 +146,9 @@ define(['dojo/_base/declare', 'explorer/widgets/gadgetarea/GadgetArea', 'dojo/on
         	  }, function(error) {
         		  alert(error);
         	  });
+        	  if(domClass.contains(this.gadgetToolbar.domNode, 'hide')) {
+        		  domClass.remove(this.gadgetToolbar.domNode, 'hide');
+        	  }
           },
           
           addMenuItems: function() {

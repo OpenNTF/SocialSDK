@@ -38,10 +38,10 @@ require([ "sbt/base/XmlDataHandler", "sbt/lang", "sbt/dom", "sbt/json",
             var options = {
                 method : "GET",
                 handleAs : "text",
-                query : { communityUuid : "%{name=sample.communityId}" }
+                query : { communityUuid : "%{name=CommunityService.communityUuid|helpSnippetId=Social_Communities_Get_My_Communities}" }
             };
             var url = baseService.constructUrl(consts.AtomCommunityInstance, {}, {authType : ""});
-            var promise = baseService.getEntity(url, options, "%{name=sample.communityId}", entityCallbacks, args);
+            var promise = baseService.getEntity(url, options, "%{name=CommunityService.communityUuid|helpSnippetId=Social_Communities_Get_My_Communities}", entityCallbacks, args);
             promise.then(
                 function(response) {
                     results.push(response);

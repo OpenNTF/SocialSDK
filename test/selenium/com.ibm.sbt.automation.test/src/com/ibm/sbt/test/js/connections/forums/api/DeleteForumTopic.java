@@ -15,44 +15,41 @@
  */
 package com.ibm.sbt.test.js.connections.forums.api;
 
-import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Test;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.connections.BaseForumsTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
-import com.ibm.sbt.services.client.connections.forums.Forum;
+import com.ibm.sbt.services.client.connections.forums.ForumTopic;
 
 /**
  * @author mwallace
  *  
- * @date 25 Mar 2013
+ * @date 19 Mar 2013
  */
-public class GetForum extends BaseForumsTest {
+public class DeleteForumTopic extends BaseForumsTest {
     
-    static final String SNIPPET_ID = "Social_Forums_API_GetForum";
-
-    public GetForum() {
-        setAuthType(AuthType.AUTO_DETECT);
-    }
+    static final String SNIPPET_ID = "Social_Forums_API_DeleteForumTopic";
 
     @Test
-    public void testGetForum() {
-        addSnippetParam("ForumService.forumUuid", forum.getForumUuid());
-        
-        Forum aforum = getForum(forum.getForumUuid());
-        Assert.assertNotNull(aforum);
+    public void testDeleteForumTopic() {
+    	String title = createForumTopicName();
+    	ForumTopic forumTopic = createForumTopic(forum, title, title);
+        addSnippetParam("ForumService.topicUuid", forumTopic.getTopicUuid());
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         JsonJavaObject json = previewPage.getJson();
-        assertForumValid(forum, (JsonJavaObject)json);
+        Assert.assertNull("Unexpected error detected on page", json.getString("code"));
+        Assert.assertEquals(forumTopic.getTopicUuid(), json.getString("topicUuid"));
+        
+        forumTopic = getForumTopic(forumTopic.getTopicUuid(), false);
+        Assert.assertNull("Deleted forum topic is still available", forumTopic);
     }
     
     @Test
-    public void testGetForumError() {
-        addSnippetParam("ForumService.forumUuid", "Foo");
+    public void testDeleteForumTopicError() {
+    	addSnippetParam("ForumService.topicUuid", "Foo");
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         JsonJavaObject json = previewPage.getJson();
@@ -61,13 +58,14 @@ public class GetForum extends BaseForumsTest {
     }
     
     @Test
-    public void testGetForumInvalidArg() {
-        addSnippetParam("ForumService.forumUuid", "");
+    public void testDeleteForumTopicInvalidArg() {
+        setAuthType(AuthType.NONE);
+    	addSnippetParam("ForumService.topicUuid", "");
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         JsonJavaObject json = previewPage.getJson();
         Assert.assertEquals(400, json.getInt("code"));
-        Assert.assertEquals("Invalid argument, expected forumUuid.", json.getString("message"));
+        Assert.assertEquals("Invalid argument, expected topicUuid.", json.getString("message"));
     }
-    
+
 }

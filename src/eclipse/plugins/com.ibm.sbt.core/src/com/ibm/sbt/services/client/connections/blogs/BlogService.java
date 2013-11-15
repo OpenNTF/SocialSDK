@@ -468,7 +468,12 @@ public class BlogService extends BaseService {
 
         return blog;
 	}
-	
+	/**
+	 * Wrapper method to get a Blog 
+	 * 
+	 * @param Blog
+	 * @throws BlogServiceException
+	 */
 	public Blog getBlog(String blogUuid) throws BlogServiceException {
 	
 		if(StringUtil.isEmpty(blogUuid)){

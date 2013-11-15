@@ -22,14 +22,14 @@ import org.junit.Test;
 import com.ibm.sbt.automation.core.test.BaseAuthJavaServiceTest;
 
 /**
- * @author mkataria
- * @date Feb 8, 2013
+ * @author swati singh
+ * @date Nov 15, 2013
  */
-public class CreateCommunity extends BaseAuthJavaServiceTest {
+public class UpdateCommunityLogo extends BaseAuthJavaServiceTest {
 
     @Test
     public void runTest() {
-        boolean result = checkNoError("Social_Communities_Create_Community");
+        boolean result = checkNoError("Social_Communities_Update_Community_Logo");
         assertTrue(getNoErrorMsg(), result);
     }
 

@@ -34,8 +34,11 @@
 			String userId = Context.get().getProperty("sample.id1");
 			ProfileService connProfSvc = new ProfileService();
 			Profile profile = connProfSvc.getProfile(userId);
-			if(StringUtil.isNotEmpty(profile.getUserid())){
-				out.println(profile.getName());
+			if(profile == null){
+				out.println("Get User Name: "+profile.getName());
+			}
+			else{
+				out.println("Profile not found ");
 			}
 		} catch (Throwable e) {
 			out.println("<pre>");

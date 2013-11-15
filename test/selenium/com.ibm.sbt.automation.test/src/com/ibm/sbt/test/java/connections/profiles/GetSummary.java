@@ -26,13 +26,12 @@ import com.ibm.sbt.automation.core.test.BaseJavaServiceTest;
  * @author mkataria
  * @date Feb 8, 2013
  */
-public class GetThumbnailUrl extends BaseJavaServiceTest {
+public class GetSummary extends BaseJavaServiceTest {
 
     @Test
     public void runTest() {
-        String expected = getProperty("sample.thumbnailUrl1");
-        boolean result = checkExpected("Social_Profiles_Get_Thumbnail_Url", expected);
-        assertTrue(getExpectedErrorMsg(), result);
+        boolean result = checkNoError("Social_Profiles_Get_Summary");
+        assertTrue(getNoErrorMsg(), result);
     }
 
 }

@@ -32,15 +32,12 @@
 	<%
 	try {
 				
-		String userId =  Context.get().getProperty("sample.id1");
 		ProfileService connProfSvc = new ProfileService();
-		Profile profile = connProfSvc.getProfile(userId);
-		if(StringUtil.isNotEmpty(profile.getUserid())){
-			profile.setTelephoneNumber("7777779");
+		Profile profile = connProfSvc.getMyProfile();
+			profile.setTelephoneNumber("91"+System.currentTimeMillis());
 			connProfSvc.updateProfile(profile);
-			profile = connProfSvc.getProfile(userId);
+			profile = connProfSvc.getMyProfile();
 			out.println("Updated telephone number: "+ profile.getTelephoneNumber());
-		}
 	} catch (Throwable e) {
 			out.println("<pre>");
 			out.println(e.getMessage());

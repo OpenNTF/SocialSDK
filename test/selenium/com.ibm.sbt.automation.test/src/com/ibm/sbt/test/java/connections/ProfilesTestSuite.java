@@ -21,15 +21,26 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import com.ibm.sbt.automation.core.environment.TestEnvironment;
-import com.ibm.sbt.test.java.connections.profiles.GetAbout;
-import com.ibm.sbt.test.java.connections.profiles.GetDisplayName;
-import com.ibm.sbt.test.java.connections.profiles.GetId;
+import com.ibm.sbt.test.java.connections.profiles.CheckColleague;
+import com.ibm.sbt.test.java.connections.profiles.CreateProfile;
+import com.ibm.sbt.test.java.connections.profiles.GetColleagues;
+import com.ibm.sbt.test.java.connections.profiles.GetColleaguesUsingProfileEntity;
+import com.ibm.sbt.test.java.connections.profiles.GetCommonColleagues;
+import com.ibm.sbt.test.java.connections.profiles.GetSummary;
+import com.ibm.sbt.test.java.connections.profiles.GetTags;
+import com.ibm.sbt.test.java.connections.profiles.GetName;
+import com.ibm.sbt.test.java.connections.profiles.GetMyProfile;
+import com.ibm.sbt.test.java.connections.profiles.GetPeopleManaged;
 import com.ibm.sbt.test.java.connections.profiles.GetPhoneNumber;
 import com.ibm.sbt.test.java.connections.profiles.GetProfileUrl;
 import com.ibm.sbt.test.java.connections.profiles.GetPronunciationUrl;
+import com.ibm.sbt.test.java.connections.profiles.GetReportingChain;
 import com.ibm.sbt.test.java.connections.profiles.GetThumbnailUrl;
 import com.ibm.sbt.test.java.connections.profiles.GetTitle;
-import com.ibm.sbt.test.java.connections.profiles.UpdatePhoneNumber;
+import com.ibm.sbt.test.java.connections.profiles.SearchProfiles;
+import com.ibm.sbt.test.java.connections.profiles.SendInvite;
+import com.ibm.sbt.test.java.connections.profiles.UpdateProfile;
+import com.ibm.sbt.test.java.connections.profiles.UpdateProfilePhoto;
 
 /**
  * @author mwallace
@@ -37,8 +48,9 @@ import com.ibm.sbt.test.java.connections.profiles.UpdatePhoneNumber;
  * @date 6 Mar 2013
  */
 @RunWith(Suite.class)
-@SuiteClasses({ GetAbout.class, GetDisplayName.class, GetId.class, GetPhoneNumber.class, GetProfileUrl.class, GetPronunciationUrl.class,
-        GetThumbnailUrl.class, GetTitle.class, UpdatePhoneNumber.class })
+@SuiteClasses({ CheckColleague.class, CreateProfile.class, GetColleagues.class, GetColleaguesUsingProfileEntity.class, GetCommonColleagues.class,
+	GetSummary.class, GetTags.class, GetPeopleManaged.class, GetReportingChain.class, SearchProfiles.class, SendInvite.class, UpdateProfilePhoto.class,GetName.class, GetMyProfile.class, GetPhoneNumber.class, GetProfileUrl.class, GetPronunciationUrl.class,
+        GetThumbnailUrl.class, GetTitle.class, UpdateProfile.class })
 public class ProfilesTestSuite {
     @AfterClass
     public static void cleanup() {

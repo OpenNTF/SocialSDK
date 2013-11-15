@@ -23,14 +23,14 @@ import org.junit.Test;
 import com.ibm.sbt.automation.core.test.BaseJavaServiceTest;
 
 /**
- * @author mkataria
- * @date Feb 8, 2013
+ * @author swati singh
+ * @date Nov 15, 2013
  */
-public class GetAbout extends BaseJavaServiceTest {
+public class GetReportingChain extends BaseJavaServiceTest {
 
     @Test
     public void runTest() {
-        boolean result = checkNoError("Social_Profiles_GetAbout");
+        boolean result = checkNoError("Social_Profiles_Get_Reporting_Chain");
         assertTrue(getNoErrorMsg(), result);
     }
 

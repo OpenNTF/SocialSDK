@@ -20,19 +20,18 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import com.ibm.sbt.automation.core.test.BaseJavaServiceTest;
+import com.ibm.sbt.automation.core.test.BaseAuthJavaServiceTest;
 
 /**
  * @author mkataria
  * @date Feb 8, 2013
  */
-public class GetThumbnailUrl extends BaseJavaServiceTest {
+public class UpdateProfile extends BaseAuthJavaServiceTest {
 
     @Test
     public void runTest() {
-        String expected = getProperty("sample.thumbnailUrl1");
-        boolean result = checkExpected("Social_Profiles_Get_Thumbnail_Url", expected);
-        assertTrue(getExpectedErrorMsg(), result);
+        boolean result = checkNoError("Social_Profiles_Update_Profile");
+        assertTrue(getNoErrorMsg(), result);
     }
 
 }

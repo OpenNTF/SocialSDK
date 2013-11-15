@@ -22,8 +22,8 @@ import org.junit.Test;
 import com.ibm.sbt.automation.core.test.BaseAuthJavaServiceTest;
 
 /**
- * @author mkataria
- * @date Feb 8, 2013
+ * @author Vimal Dhupar
+ * @date Nov 15, 2013
  */
 public class GetFileComments extends BaseAuthJavaServiceTest {
 

@@ -22,14 +22,14 @@ import org.junit.Test;
 import com.ibm.sbt.automation.core.test.BaseAuthJavaServiceTest;
 
 /**
- * @author mkataria
- * @date Feb 8, 2013
+ * @author Vimal Dhupar
+ * @date Nov 15, 2013
  */
-public class DeleteFile extends BaseAuthJavaServiceTest {
+public class GetCommunityFiles extends BaseAuthJavaServiceTest {
 
     @Test
     public void runTest() {
-        boolean result = checkNoError("Social_Files_Delete_File");
+        boolean result = checkNoError("Social_Files_Download_Upload_Community_File");
         assertTrue(getNoErrorMsg(), result);
     }
 

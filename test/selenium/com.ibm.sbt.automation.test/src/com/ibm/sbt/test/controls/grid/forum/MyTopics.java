@@ -1,3 +1,4 @@
+
 /*
  * � Copyright IBM Corp. 2013
  * 
@@ -23,18 +24,13 @@ import com.ibm.sbt.automation.core.test.BaseGridTest;
 
 /**
  * @author David Ryan
- * @date 20 August 2013
+ * @date 15 November 2013
  */
-public class PublicForums extends BaseGridTest {
+public class MyTopics extends BaseGridTest {
 
-	@Override
-	protected boolean isEnvironmentValid() {
-		return super.isEnvironmentValid() && !environment.isSmartCloud();
-	}
-	
     @Test
-    public void publicForumsTest() {
-        assertTrue("Expected the test to generate a grid", checkGrid("Social_Forums_Controls_Public_Forums",false,false));
+    public void myTopicsTest() {
+        assertTrue("Expected the test to generate a grid", checkGrid("Social_Forums_Controls_My_Topics",false,false));
     }
 
 }

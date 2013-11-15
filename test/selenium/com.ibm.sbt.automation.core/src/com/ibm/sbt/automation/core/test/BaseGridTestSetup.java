@@ -2,7 +2,9 @@ package com.ibm.sbt.automation.core.test;
 
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import junit.framework.Assert;
@@ -11,6 +13,9 @@ import com.ibm.sbt.automation.core.utils.Trace;
 import com.ibm.sbt.security.authentication.AuthenticationException;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
+import com.ibm.sbt.services.client.connections.activity.Activity;
+import com.ibm.sbt.services.client.connections.activity.ActivityService;
+import com.ibm.sbt.services.client.connections.activity.ActivityServiceException;
 import com.ibm.sbt.services.client.connections.communities.Community;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
 import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
@@ -18,6 +23,7 @@ import com.ibm.sbt.services.client.connections.files.File;
 import com.ibm.sbt.services.client.connections.files.FileService;
 import com.ibm.sbt.services.client.connections.files.FileServiceException;
 import com.ibm.sbt.services.client.connections.files.model.FileCreationParameters;
+import com.ibm.sbt.services.client.connections.bookmarks.BookmarkService;
 
 public class BaseGridTestSetup extends BaseApiTest{
 	
@@ -40,9 +46,72 @@ public class BaseGridTestSetup extends BaseApiTest{
 	 * this is stored so that the community can be deleted later. */
 	private String testCommunityID;
 	
+	/**The Activity Service Used to create activities  */
+	private ActivityService activityService;
+	
+	/**The Id of the test activity */
+	private String testActivityID;
+	
+	/**The bookmark service used to create test bookmarks */
+	private BookmarkService bookmarkService;
+	
+	/**Test bookmark id */
+	private String testBookmarkID;
+	
 	/**Constructor*/
 	public BaseGridTestSetup(){
 		
+	}
+	
+	public void createBookmark(){
+		
+		try {
+			loginConnections();
+		} catch (AuthenticationException e) {
+			e.printStackTrace();
+		}
+		super.launchSnippet("Social_Bookmarks_API_CreateBookmark",this.authType.AUTO_DETECT);
+		
+	}
+	
+	public void deleteBookmark(){
+		//TODO Implement when this is implemented in the Java API
+	}
+	
+	public void createActivity(){
+		try {
+			loginConnections();
+		} catch (AuthenticationException e1) {
+			e1.printStackTrace();
+		}
+		try {
+			this.activityService = new ActivityService();
+			Activity activity = new Activity(activityService);
+			activity.setTitle("JSPActivity" + System.currentTimeMillis());
+			activity.setContent("GoalOfActivity - " + System.currentTimeMillis());
+			List<String> tagList = new ArrayList<String>();
+			tagList.add("tag1");
+			tagList.add("tag2");
+			activity.setTags(tagList);
+			activity.setDueDate(new Date());
+			activity = activityService.createActivity(activity);
+			this.testActivityID = activity.getActivityId();
+		} catch (ActivityServiceException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void deleteActivity(){
+		if(this.activityService ==  null){
+			this.activityService = new ActivityService();
+		}else if (this.activityService != null){
+			try {
+				this.activityService.deleteActivity(testActivityID);
+				System.out.println("Activty Deleted");
+			} catch (ActivityServiceException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	/**

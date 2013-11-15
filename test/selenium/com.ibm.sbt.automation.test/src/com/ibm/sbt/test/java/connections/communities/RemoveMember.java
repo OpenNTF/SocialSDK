@@ -29,7 +29,7 @@ public class RemoveMember extends BaseAuthJavaServiceTest {
 
     @Test
     public void runTest() {
-        boolean result = checkNoError("Social_Communities_RemoveMember");
+        boolean result = checkNoError("Social_Communities_Remove_Member");
         assertTrue(getNoErrorMsg(), result);
     }
 

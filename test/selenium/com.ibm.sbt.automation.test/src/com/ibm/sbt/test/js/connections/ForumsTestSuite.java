@@ -20,6 +20,12 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.ibm.sbt.test.js.connections.forums.CreateUpdateDeleteReply;
+import com.ibm.sbt.test.js.connections.forums.CreateUpdateDeleteTopic;
+import com.ibm.sbt.test.js.connections.forums.GetMyAnsweredTopics;
+import com.ibm.sbt.test.js.connections.forums.GetMyForumEntries;
+import com.ibm.sbt.test.js.connections.forums.GetMyTopicsRecommendations;
+import com.ibm.sbt.test.js.connections.forums.StartAForum;
 import com.ibm.sbt.test.js.connections.forums.api.CreateForum;
 import com.ibm.sbt.test.js.connections.forums.api.DeleteForum;
 import com.ibm.sbt.test.js.connections.forums.api.GetAllForums;
@@ -35,7 +41,15 @@ import com.ibm.sbt.test.js.connections.forums.api.UpdateForum;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ 
-	GetMyForums.class, 
+	CreateUpdateDeleteReply.class,
+	CreateUpdateDeleteTopic.class,
+	GetMyAnsweredTopics.class,
+	GetMyForumEntries.class,
+	com.ibm.sbt.test.js.connections.forums.GetMyForums.class,
+	com.ibm.sbt.test.js.connections.forums.GetMyTopics.class,
+	GetMyTopicsRecommendations.class,
+	StartAForum.class,
+	GetMyForums.class,
 	GetPublicForums.class, 
 	GetAllForums.class,
 	CreateForum.class,

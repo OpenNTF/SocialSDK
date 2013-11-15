@@ -7,7 +7,7 @@ require(["sbt/connections/FileService",
          "sbt/Endpoint"], 
          
     function(FileService,dom, CommunityService, config, Endpoint) {
-		var communityId = "%{name=sample.communityId|helpSnippetId=Social_Communities_Share_File_Smartcloud_Community}";
+		var communityId = "%{name=CommunityService.communityUuid|helpSnippetId=Social_Communities_Share_File_Smartcloud_Community}";
 	
 		// Community Service
 		var communityService = new CommunityService({ endpoint: "smartcloud" }); 
@@ -23,7 +23,7 @@ require(["sbt/connections/FileService",
 		communityService.getMyCommunities().then(
 	            function(communities) {
 	                if (communities.length == 0) {
-	                    dom.byId("community").innerHTML = "You are not a member of any communities.";
+	                    dom.setText("community", "You are not a member of any communities.");
 	                } else {
 	                	var commList = document.getElementById("commList");
 	                    for(var i=0; i<communities.length; i++){
@@ -32,7 +32,7 @@ require(["sbt/connections/FileService",
 	                        var communityUuid = community.getCommunityUuid(); 
 	                        var option = document.createElement("option");
 	                        option.value = communityUuid;
-	                        option.innerHTML = title;
+	                        optiontd.appendChild(dom.createTextNode(title));
 	                        commList.appendChild(option);
 	                    }
 	                }
@@ -97,11 +97,11 @@ require(["sbt/connections/FileService",
             table.appendChild(tr);
             var td = document.createElement("td");
             td.setAttribute("id", "title"+i);
-            td.innerHTML = file.getTitle();
+            tdtd.appendChild(dom.createTextNode(file.getTitle()));
             tr.appendChild(td);
             td = document.createElement("td");
             td.setAttribute("id", "id"+i);
-            td.innerHTML = file.getFileId();
+            tdtd.appendChild(dom.createTextNode(file.getFileId()));
             tr.appendChild(td);
             td = document.createElement("td");
             td.setAttribute("id", "action"+i);
@@ -125,7 +125,7 @@ require(["sbt/connections/FileService",
                         btnShare.onclick = function(evt) {
                         	var dialog = document.getElementById("shareDialog");
                         	dialog.style.display = "block";
-                        	document.getElementById("fileToShare").innerHTML = file.getTitle();
+                        	dom.setText("fileToShare", file.getTitle());
                         	fileToShare = file;
                         };
 

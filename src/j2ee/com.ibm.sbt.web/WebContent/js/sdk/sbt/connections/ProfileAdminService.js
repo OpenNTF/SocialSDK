@@ -51,7 +51,7 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
             lang.mixin(requestArgs, args || {});
             
             var callbacks = {};            
-            callbacks.createEntity = function(service,data,response) {                
+            callbacks.createEntity = function(service,data,response) {            	
                 return profile;
             };        
             
@@ -59,7 +59,7 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
                     method : "POST",
                     query : requestArgs,
                     headers : consts.AtomXmlHeaders,
-                    data : this._constructProfilePutData(profile)
+                    data : profile.createPostData()
                 };   
             
             return this.updateEntity(consts.AdminAtomProfileDo, options, callbacks, args);

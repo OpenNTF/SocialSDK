@@ -5,10 +5,10 @@ require(["sbt/connections/ForumService", "sbt/dom"],
             var tr = document.createElement("tr");
             table.appendChild(tr);
             var td = document.createElement("td");
-            td.innerHTML = recommendation.getPostUuid();
+            td.appendChild(dom.createTextNode(recommendation.getPostUuid()));
             tr.appendChild(td);
             td = document.createElement("td");
-            td.innerHTML = recommendation.getAuthor().name;
+            td.appendChild(dom.createTextNode(recommendation.getAuthor().name));
             tr.appendChild(td);
         };
 

@@ -56,6 +56,29 @@ delete sessionScope.envGroup}]]></xp:this.action>
 
 				</xp:comboBox>
 			</xe:formRow>
+			<xe:formRow id='formRow2'>
+				<xp:this.rendered><![CDATA[#{javascript:cat && group}]]></xp:this.rendered>
+				<xe:linksList id="linksList1">
+					<xe:this.treeNodes>
+						<xe:basicLeafNode label="Default Values"
+							submitValue="0">
+						</xe:basicLeafNode>
+						<xe:repeatTreeNode
+							value="#{javascript:cat.getPropertyValues()}" var="propValue">
+							<xe:this.children>
+								<xe:basicLeafNode
+									label="#{javascript:propValue.getName()}"
+									submitValue="#{javascript:propValue.getName()}">
+								</xe:basicLeafNode>
+							</xe:this.children>
+						</xe:repeatTreeNode>
+					</xe:this.treeNodes>
+					<xp:eventHandler event="onItemClick" submit="true"
+						refreshMode="complete">
+						<xe:this.action><![CDATA[#{javascript:var v = context.getSubmittedValue()
+dataAccess.loadProperties(document1,cat,v);}]]></xe:this.action>
+					</xp:eventHandler></xe:linksList>
+			</xe:formRow>
 			<xp:repeat var="prop" repeatControls="true">
 				<xp:this.value><![CDATA[#{javascript:optionsBean.getEnvironmentCategories().getAllProperties()}]]></xp:this.value>
 				<xe:formRow label='${javascript:prop.getLabel()}'

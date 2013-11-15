@@ -399,7 +399,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         	if (this.wikiLabel) {
         		return this.wikiLabel;
         	} else {
-        		
+        		return this.getAsString("label");
         	}
         },
 

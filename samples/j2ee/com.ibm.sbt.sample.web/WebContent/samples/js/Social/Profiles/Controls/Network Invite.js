@@ -6,14 +6,13 @@ require(["sbt/dom",
          "sbt/connections/SearchService",
          "sbt/connections/ActivityStreamService"],
 function(dom, ProfileService, SearchService, ActivityStreamService) {
-		// TODO: Don't hardcode! EdBlanks@renovations.com
-		var profileId = "04F26086-1A63-D244-4825-7A70002586FA";
+		var profileId = "%{name=sample.userId1|helpSnippetId=Social_Profiles_Get_Profile}";
 		
 		var profileService = new ProfileService();
 		profileService.getProfile(profileId).then(function(profile) {
 		dom.byId("profilePic").src = profile.getThumbnailUrl();
-		dom.byId("name1").innerHTML = profile.getName();
-		dom.byId("name2").innerHTML = profile.getName();
+		dom.setText("name1", profile.getName());
+		dom.setText("name2", profile.getName());
 	}, function(error) {
 		alert(error);
 	});
@@ -39,7 +38,7 @@ function(dom, ProfileService, SearchService, ActivityStreamService) {
 	                
 				},
 				function(error) {
-					dom.byId("searching").innerHTML = "";
+					dom.setText("searching", "");
 					showError(error.message);
 				}
 			);
@@ -84,8 +83,7 @@ function(dom, ProfileService, SearchService, ActivityStreamService) {
         a.setAttribute("class", "lotusFilter");      
         a.href = "javascript:;";      	
             	
-        a.innerHTML = result.getTitle();      
-        
+        dom.setText(a, result.getTitle());
         tags.appendChild(span);      	
         span.appendChild(a);
     };

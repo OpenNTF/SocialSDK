@@ -23,9 +23,9 @@ import com.ibm.sbt.automation.core.test.BaseGridTest;
 
 /**
  * @author David Ryan
- * @date 20 August 2013
+ * @date 15 November 2013
  */
-public class PublicForums extends BaseGridTest {
+public class BootstrapPublicForums extends BaseGridTest {
 
 	@Override
 	protected boolean isEnvironmentValid() {
@@ -34,7 +34,7 @@ public class PublicForums extends BaseGridTest {
 	
     @Test
     public void publicForumsTest() {
-        assertTrue("Expected the test to generate a grid", checkGrid("Social_Forums_Controls_Public_Forums",false,false));
+        assertTrue("Expected the test to generate a grid", checkGrid("Social_Forums_Controls_Bootstrap_Public_Forums",false,false));
     }
 
 }

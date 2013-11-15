@@ -13,9 +13,9 @@ import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 import com.ibm.sbt.services.client.connections.activity.Activity;
 import com.ibm.sbt.services.client.connections.activity.ActivityNode;
 
-public class ChangeActivityNodeType extends BaseActivitiesTest {
+public class ChangeEntryType extends BaseActivitiesTest {
 	
-	static final String SNIPPET_ID = "Social_Activities_API_ChangeActivityNodeType";
+	static final String SNIPPET_ID = "Social_Activities_API_ChangeEntryType";
 	
 	Activity activity;
 	ActivityNode activityNode;

@@ -40,6 +40,8 @@
 			BlogService service = new BlogService();
 			BlogList blogs = service.getBlogs();
 			Blog blog = (Blog)blogs.get(0);
+			// above blog entity is used to get the blogUuid
+			// so that it can be used in showcasing how to ise the getBlog wrapper which requires a blogUuid  
 			Blog fetched_blog = service.getBlog(blog.getBlogUuid());
 			if(StringUtil.isNotEmpty(fetched_blog.getHandle())){
 				out.println("Blog title : "+fetched_blog.getTitle()+"<br>");

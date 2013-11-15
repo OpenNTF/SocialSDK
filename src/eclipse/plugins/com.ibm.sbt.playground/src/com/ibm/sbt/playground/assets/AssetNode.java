@@ -90,10 +90,7 @@ public abstract class AssetNode extends Node {
 		}
 	}
 	
-	
-	
 	public abstract Asset createAsset(VFSFile root) throws IOException;
-
 	
 	protected VFSFile getParentFile(VFSFile root) throws IOException {
 		if(getParent()!=null) {

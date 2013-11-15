@@ -72,14 +72,16 @@ public class BaseBlogEntity extends BaseEntity {
 	*/
 	public String getUid(){
 		String id = getAsString(BlogXPath.uid);
-		if(StringUtil.startsWithIgnoreCase(id, BLOGID)){
-			id = id.substring(BLOGID.length());
-		}
-		else if(StringUtil.startsWithIgnoreCase(id, POSTID)){
-			id = id.substring(POSTID.length());
-		}
-		else{
-			id = id.substring(COMMENTID.length());
+		if(StringUtil.isNotEmpty(id)){
+			if(StringUtil.startsWithIgnoreCase(id, BLOGID)){
+				id = id.substring(BLOGID.length());
+			}
+			else if(StringUtil.startsWithIgnoreCase(id, POSTID)){
+				id = id.substring(POSTID.length());
+			}
+			else{
+				id = id.substring(COMMENTID.length());
+			}
 		}
 		return id;
 	}

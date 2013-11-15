@@ -7,7 +7,7 @@ require(["sbt/connections/FileService",
          "sbt/Endpoint"], 
          
     function(FileService,dom, CommunityService, config, Endpoint) {
-		var communityId = "%{name=sample.communityId|helpSnippetId=Social_Communities_Share_File_Smartcloud_Community}";
+		var communityId = "%{name=CommunityService.communityUuid|helpSnippetId=Social_Communities_Share_File_Smartcloud_Community}";
 	
 		// Community Service
 		var communityService = new CommunityService({ endpoint: "smartcloud" }); 

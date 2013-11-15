@@ -20,7 +20,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.ibm.sbt.test.js.connections.profiles.rest.ReadName;
 import com.ibm.sbt.test.js.connections.profiles.rest.ReadNameAndEmail;
 import com.ibm.sbt.test.js.connections.profiles.rest.ReadProfilePhoto;
 import com.ibm.sbt.test.js.connections.profiles.rest.ReadProfileXml;
@@ -32,7 +31,7 @@ import com.ibm.sbt.test.js.connections.profiles.rest.ReadResponseHeaders;
  * @date 6 Mar 2013
  */
 @RunWith(Suite.class)
-@SuiteClasses({ ReadName.class, ReadNameAndEmail.class, ReadProfilePhoto.class, ReadProfileXml.class, ReadResponseHeaders.class })
+@SuiteClasses({ ReadNameAndEmail.class, ReadProfilePhoto.class, ReadProfileXml.class, ReadResponseHeaders.class })
 public class ProfilesRestTestSuite {
     @AfterClass
     public static void cleanup() {

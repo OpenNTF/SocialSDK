@@ -57,8 +57,8 @@ define([ "../../../declare",
 	
     /**
      * @class ProfileGrid
-     * @namespace sbt.connections.controls.profiles
-     * @module sbt.connections.controls.profiles.ProfileGrid
+     * @namespace sbt.connections.controls.communities
+     * @module sbt.connections.controls.communities.CommunityMembersGrid
      */
     var CommunityMembersGrid = declare(Grid, {
     	
@@ -69,82 +69,6 @@ define([ "../../../declare",
     	 * the atom store and grid renderer.
     	 */
         options : {
-            "profile" : {
-                storeArgs : {
-                    url : consts.AtomProfileDo,
-                    attributes : consts.ProfileXPath,
-                    feedXPath : consts.ProfileFeedXPath,
-                    paramSchema: ParamSchema
-                },
-                rendererArgs : {
-                    type : "profile"
-                }
-            },
-            "colleagues" : {
-                storeArgs : {
-                     url : consts.AtomConnectionsDo,
-                     attributes : consts.ProfileXPath,
-                     feedXPath : consts.ProfileFeedXPath,
-                     paramSchema: ParamSchema
-                },
-                rendererArgs : {
-                    type : "profile"
-                }
-            },
-            "connectionsInCommon" : {
-                storeArgs : {
-                    url : consts.AtomConnectionsInCommonDo,
-                    attributes : consts.ProfileXPath,
-                    feedXPath : consts.ProfileFeedXPath,
-                    paramSchema: ParamSchema
-                },
-                rendererArgs : {
-                    type : "profile"
-                }
-            },
-            "peopleManaged" : {
-                storeArgs : {
-                    url : consts.AtomPeopleManagedDo,
-                    attributes : consts.ProfileXPath,
-                    feedXPath : consts.ProfileFeedXPath,
-                    paramSchema: ParamSchema
-                },
-                rendererArgs : {
-                    type : "profile"
-                }
-            },
-            "reportingChain" : {
-                storeArgs : {
-                    url : consts.AtomReportingChainDo,
-                    attributes : consts.ProfileXPath,
-                    feedXPath : consts.ProfileFeedXPath,
-                    paramSchema: ParamSchema
-                },
-                rendererArgs : {
-                    type : "profile"
-                }
-            },
-            "search" : {
-                storeArgs : {
-                    url : consts.AtomSearchDo,
-                    attributes : consts.ProfileXPath,
-                    feedXPath : consts.ProfileFeedXPath,
-                    paramSchema: ParamSchema
-                },
-                rendererArgs : {
-                    type : "profile"
-                }
-            },
-            "dynamic" : {
-                storeArgs : {
-                    attributes : consts.ProfileXPath,
-                    feedXPath : consts.ProfileFeedXPath,
-                    paramSchema: ParamSchema
-                },
-                rendererArgs : {
-                    type : "profile"
-                }
-            },
             "communityMembers" : {
                 storeArgs : {
                 	url : communities.AtomCommunityMembers,

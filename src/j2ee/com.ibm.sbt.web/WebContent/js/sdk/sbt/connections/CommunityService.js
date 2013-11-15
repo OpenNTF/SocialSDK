@@ -909,14 +909,6 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         },
         
         /**
-         * Get the full event description, with content.
-         * @returns
-         */
-        getFullEvent : function(){
-            return this.service.getEvent(this.getEventInstUuid());
-        },
-        
-        /**
          * 
          * @returns
          */
@@ -940,20 +932,49 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @return {Object} An object containing the above recurrence information of the community event.
          */
         getRecurrence : function() {
-            if (!this._recurrence) {
-                this._recurrence = {
-                    frequency : this.getAsString("frequency"),
-                    interval : this.getAsString("interval"),
-                    until : this.getAsString("until"),
-                    allDay : this.getAsString("allDay"),
-                    startDate : this.getAsString("startDate"),
-                    endDate : this.getAsString("endDate"),
-                    byDay : this.getAsString("byDay")
-                };
-            }
-            return this._recurrence;
-        }
+            return this.getAsObject(
+            		[ "frequency", "interval", "until", "allDay", "startDate", "endDate", "byDay" ],
+            		[ "frequency", "interval", "until", "allDay", "startDate", "endDate", "byDay" ]);
+        },
 
+        /**
+         * Get the full event description, with content.
+         * @deprecated Use CommunityEvent.load
+         */
+        getFullEvent : function() {
+            return load();
+        },
+        
+        /**
+         * Load the content for this community event instance.
+         * 
+         * @method load
+         */
+        load : function(args) {
+            // detect a bad request by validating required arguments
+            var eventInstUuid = this.getEventInstUuid();
+            var promise = this.service._validateEventInstUuid(eventInstUuid);
+            if (promise) {
+                return promise;
+            }
+
+            var self = this;
+            var callbacks = {
+                createEntity : function(service,data,response) {
+                    self.setData(data);
+                    return self;
+                }
+            };
+
+            var options = {
+                method : "GET",
+                handleAs : "text",
+                query : lang.mixin({ eventInstUuid : eventInstUuid }, args || {})
+            };
+            
+            return this.service.getEntity(consts.AtomCommunityEvent, options, eventInstUuid, callbacks);
+        }
+        
     });
 
     /*
@@ -1098,8 +1119,6 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             return forumTopic;
         }
     };
-
-    // TODO test all action methods work with args == undefined
 
     /**
      * CommunityService class.
@@ -1296,23 +1315,26 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         },
         
         /**
-         * Used to get the event with the given eventInstUuid. 
+         * @deprecated Use CommunityService.getCommunityEvent instead
+         */
+        getEvent : function(eventInstUuid) {
+        	return this.getCommunityEvent(eventInstUuid);
+        },
+        
+        /**
+         * Used to get the event with the given eventInstUuid, this will include all details of the event, 
+         * including its content. 
          * 
-         * This will include all details of the event, including its content. 
-         * 
-         * @param eventInstUuid - The id of the event, also used as an identifier when caching the response
+         * @method getCommunityEvent
+         * @param eventInstUuid id of the event to be returned
          * @returns
          */
-        getEvent : function(eventInstUuid){
-            var options = {
-                method : "GET",
-                handleAs : "text",
-                query : {
-                    eventInstUuid: eventInstUuid
-                }
-            };
-                
-            return this.getEntity(consts.AtomCommunityEvent, options, eventInstUuid, EventFeedCallbacks);
+        getCommunityEvent : function(eventInstUuid, requestArgs) {
+            var event = new Event({
+                service : this,
+                _fields : { eventInstUuid : eventInstUuid }
+            });
+            return event.load(requestArgs);
         },
 
         /**
@@ -2057,9 +2079,18 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         /*
          * Validate a member, and return a Promise if invalid.
          */
-        _validateMember : function(member,args) {
+        _validateMember : function(member) {
             if (!member || (!member.getUserid() && !member.getEmail())) {
                 return this.createBadRequestPromise("Invalid argument, member with userid or email must be specified.");
+            }
+        },
+        
+        /*
+         * Validate an event inst uuid, and return a Promise if invalid.
+         */
+        _validateEventInstUuid : function(eventInstUuid) {
+            if (!eventInstUuid || eventInstUuid.length == 0) {
+                return this.createBadRequestPromise("Invalid argument, expected event inst uuid.");
             }
         }
 

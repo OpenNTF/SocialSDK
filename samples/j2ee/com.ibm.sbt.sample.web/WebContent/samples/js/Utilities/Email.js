@@ -1,4 +1,4 @@
-require(['sbt/emailService'], function(email) {
+require(['sbt/emailService', 'sbt/dom'], function(email, dom) {
     var to = [];
     var cc = [];
     var bcc = [];
@@ -11,9 +11,9 @@ require(['sbt/emailService'], function(email) {
             input.value = '';
             array.push(email);
             var addedAddresses = document.getElementById(addAddressId);
-            var html = addedAddresses.innerHTML;
-            html = html + '<span class="label label-info">' + array[array.length - 1] + '</span>';
-            addedAddresses.innerHTML = html; 
+            var span = dom.create("span", null, addedAddresses);      
+            dom.setText(span, array[array.length - 1]);
+            dom.setAttr(span, "class", "label label-info");
         };
     };
     
@@ -28,9 +28,10 @@ require(['sbt/emailService'], function(email) {
           content: mimeContentInput.value
       });
       var addedMimeParts = document.getElementById('addedMimeParts');
-      var html = addedMimeParts.innerHTML;
-      html = html + '<span class="label label-info">' + mimeTypeInput.value + '</span>';
-      addedMimeParts.innerHTML = html;
+      var span = dom.create("span", null, addedMimeParts);      
+      dom.setText(span, mimeTypeInput.value);
+      dom.setAttr(span, "class", "label label-info");
+    
       mimeTypeInput.value = '';
       mimeContentInput.value = '';
     };
@@ -54,7 +55,7 @@ require(['sbt/emailService'], function(email) {
                 var errorElement = document.getElementById('error');
                 errorElement.setAttribute('style', 'display:none;');
                 if(response.message || (response.error && response.error.length != 0)) {
-                	errorElement.innerHTML = response.message || response.error[0].message;
+                	dom.setText(errorElement, response.message || response.error[0].message);                	
                     errorElement.setAttribute('style', '');
                 } else {
                     successElement.setAttribute('style', '');
@@ -64,7 +65,7 @@ require(['sbt/emailService'], function(email) {
             	//This will only be executed if there is an error with the request to 
             	//the server to send all the emails.
             	var errorElement = document.getElementById('error');
-            	errorElement.innerHTML = error.message || 'There was an error sending the email.';
+            	dom.setText(errorElement, error.message || 'There was an error sending the email.');            	
             	errorElement.setAttribute('style', '');
             });
     };

@@ -1,5 +1,7 @@
 package com.ibm.sbt.test.js.connections.activities.api;
 
+import java.util.List;
+
 import org.junit.Assert;
 
 import org.junit.After;
@@ -13,9 +15,9 @@ import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 import com.ibm.sbt.services.client.connections.activity.Activity;
 import com.ibm.sbt.services.client.connections.activity.Member;
 
-public class GetActivityMember extends BaseActivitiesTest {
+public class GetMembers extends BaseActivitiesTest {
 	
-	static final String SNIPPET_ID = "Social_Activities_API_GetActivityMember";
+	static final String SNIPPET_ID = "Social_Activities_API_GetMembers";
 	
 	Activity activity;
 	String id;
@@ -40,9 +42,9 @@ public class GetActivityMember extends BaseActivitiesTest {
 	}
 	
 	@Test
-	public void testGetActivityMember() {
+	public void testGetActivityMembers() {
 		JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
-		JsonJavaObject json = previewPage.getJson();
-		Assert.assertEquals(json.getAsString("getUserId"), id);
+		 List jsonList = previewPage.getJsonList();
+	     Assert.assertFalse("No members for activity ", jsonList.isEmpty());
 	}
 }

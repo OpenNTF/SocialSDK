@@ -22,7 +22,6 @@ import com.ibm.sbt.playground.assets.CategoryNode;
 import com.ibm.sbt.playground.assets.Node;
 import com.ibm.sbt.playground.assets.NodeFactory;
 import com.ibm.sbt.playground.assets.RootNode;
-import com.ibm.sbt.playground.assets.javasnippets.JavaSnippet;
 import com.ibm.sbt.playground.vfs.FileVFS;
 import com.ibm.sbt.playground.vfs.GitVFS;
 import com.ibm.sbt.playground.vfs.VFS;

@@ -29,7 +29,7 @@ public class GetPublicCommunities extends BaseJavaServiceTest {
 
     @Test
     public void runTest() {
-        boolean result = checkNoError("Social_Communities_GetPublicCommunities");
+        boolean result = checkNoError("Social_Communities_Get_Public_Communities");
         assertTrue(getNoErrorMsg(), result);
     }
 

@@ -1,5 +1,7 @@
+package com.ibm.sbt.test.java.connections.communities;
+
 /*
- * � Copyright IBM Corp. 2013
+ * � Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -13,7 +15,6 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-package com.ibm.sbt.test.java.connections.communities;
 
 import static org.junit.Assert.assertTrue;
 
@@ -22,14 +23,14 @@ import org.junit.Test;
 import com.ibm.sbt.automation.core.test.BaseAuthJavaServiceTest;
 
 /**
- * @author mkataria
- * @date Feb 8, 2013
+ * @author swati singh
+ * @date Nov 15, 2013
  */
-public class CreateCommunity extends BaseAuthJavaServiceTest {
+public class AcceptInvite extends BaseAuthJavaServiceTest {
 
     @Test
     public void runTest() {
-        boolean result = checkNoError("Social_Communities_Create_Community");
+        boolean result = checkNoError("Social_Communities_Accept_Invite");
         assertTrue(getNoErrorMsg(), result);
     }
 

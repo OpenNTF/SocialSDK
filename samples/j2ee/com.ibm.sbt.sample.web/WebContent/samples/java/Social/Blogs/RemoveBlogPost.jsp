@@ -50,7 +50,7 @@
 				post.remove();
 			}
 			else{
-				out.println("No post exists");
+				out.println("No Blog post exists");
 			}
 		} catch (Throwable e) {
 			out.println("<pre>");

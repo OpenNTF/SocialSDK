@@ -1,7 +1,7 @@
 require([ "sbt/dom", "sbt/json", "sbt/connections/CommunityService" ], function(dom,json,CommunityService) {
     var communityService = new CommunityService();
-    var communityId = "%{sample.communityId}";
-    var forumUuid = "%{sample.forumId}";
+    var communityId = "%{name=CommunityService.communityUuid|helpSnippetId=Social_Communities_Get_My_Communities}";
+    var forumUuid = "%{name=CommunityService.forumUuid}";
     var now = new Date();
     var forumTopic = {
     	forumUuid : forumUuid,

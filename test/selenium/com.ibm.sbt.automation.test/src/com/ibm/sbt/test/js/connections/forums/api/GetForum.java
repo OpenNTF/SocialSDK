@@ -47,7 +47,7 @@ public class GetForum extends BaseForumsTest {
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         JsonJavaObject json = previewPage.getJson();
-        assertForumValid((JsonJavaObject)json);
+        assertForumValid(forum, (JsonJavaObject)json);
     }
     
     @Test

@@ -1,7 +1,7 @@
 require(["sbt/connections/CommunityService", "sbt/dom", "sbt/json"], 
     function(CommunityService, dom, json) {
     	var communityService = new CommunityService();	
-    	var communityUuid = "%{name=sample.communityId2|helpSnippetId=Social_Communities_Get_My_Communities}";	
+    	var communityUuid = "%{name=CommunityService.communityUuid2|helpSnippetId=Social_Communities_Get_My_Communities}";	
         var promise = communityService.deleteCommunity(communityUuid);
         promise.then(
             function(communityUuid) {

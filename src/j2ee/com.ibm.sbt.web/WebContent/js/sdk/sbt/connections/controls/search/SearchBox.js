@@ -659,7 +659,12 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
             		data.innerHTML = title;
             		data.id = id;
             		data.setAttribute("class", "dijitMenuItem");
-            		data.setAttribute("style", "width:350px;overflow: hidden;");
+            		if(context.popUpStyle){
+            			data.setAttribute("style", context.popUpStyle);
+            		}else{
+            			data.setAttribute("style", "width:350px;overflow: hidden;");
+            		}
+            		
             		data.onclick = function (event) { 
             			context.searchBoxAction.setSuggestedSearch(event,popUp,context);
             		};    		

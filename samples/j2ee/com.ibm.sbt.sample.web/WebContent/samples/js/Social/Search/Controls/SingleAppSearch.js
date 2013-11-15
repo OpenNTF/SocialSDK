@@ -12,7 +12,8 @@ require(["sbt/dom", "sbt/connections/controls/search/SearchBox","sbt/connections
         	searchSuffix : "*",
 			constraint: {type:"field",id:"title"},
 			searchArgs: {scope:"communities",scope:"personalOnly"}, 
-			searchType:"myCommunities"
+			searchType:"myCommunities",
+			popUpStyle: "width:350px;overflow: hidden;"
         });
 
         dom.byId("searchBox").appendChild(searchBox.domNode);

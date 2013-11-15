@@ -29,7 +29,7 @@ public class GetMyCommunities extends BaseAuthJavaServiceTest {
 
     @Test
     public void runTest() {
-        boolean result = checkNoError("Social_Communities_GetMyCommunities");
+        boolean result = checkNoError("Social_Communities_Get_My_Communities");
         assertTrue(getNoErrorMsg(), result);
     }
 

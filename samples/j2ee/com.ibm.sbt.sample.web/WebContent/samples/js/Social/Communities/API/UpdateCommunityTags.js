@@ -1,7 +1,7 @@
 require(["sbt/connections/CommunityService", "sbt/dom", "sbt/json"], 
     function(CommunityService,dom,json) {
     	var communityService = new CommunityService();	
-    	var promise = communityService.getCommunity("%{name=sample.communityId|helpSnippetId=Social_Communities_Get_My_Communities}");
+    	var promise = communityService.getCommunity("%{name=CommunityService.communityUuid|helpSnippetId=Social_Communities_Get_My_Communities}");
     	promise.then(
     		function(community) {
     			community.setTags(["newtag1", "newtag2", "newtag3"]);

@@ -11,8 +11,7 @@ require(["sbt/dom", "sbt/connections/controls/search/SearchBox", "sbt/connection
         	if(!event){
         		event = window.event;
         	}
-        	document.getElementById("gridDiv").innerHTML = "";
-
+        	dom.setText("gridDiv", "");
     		var grid = new SearchGrid({
     			type: "all",
     			query : { component : event.selectedApplication, query : event.searchQuery }

@@ -2,7 +2,7 @@ require(["sbt/dom", "sbt/connections/controls/bookmarks/BookmarkGrid"], function
     
 	var grid = new BookmarkGrid({
 		type: "community",
-		communityUuid: "%{name=sample.communityId|label=communityId|helpSnippetId=Social_Communities_Get_My_Communities}"
+		communityUuid: "%{name=CommunityService.communityUuid|label=communityId|helpSnippetId=Social_Communities_Get_My_Communities}"
 	});
 
     dom.byId("gridDiv").appendChild(grid.domNode);

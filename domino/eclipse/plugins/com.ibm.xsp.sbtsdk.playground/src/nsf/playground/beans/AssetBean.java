@@ -179,6 +179,9 @@ public abstract class AssetBean {
 		return assetId;
 	}
 	private CategoryNode findCategory(RootNode node, String cat) {
+		if(StringUtil.isEmpty(cat)) {
+			return node;
+		}
 		String[] cats = StringUtil.splitString(cat, '/');
 		return findCategory(node, cats, 0);
 	}

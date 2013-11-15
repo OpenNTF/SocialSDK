@@ -3,7 +3,7 @@ require([ "sbt/connections/CommunityService", "sbt/connections/CommunityConstant
         var communityService = new CommunityService();
         var communityJson = {
             type : consts.Public,
-            communityUuid : "%{name=sample.communityId|helpSnippetId=Social_Communities_Get_My_Communities}",
+            communityUuid : "%{name=CommunityService.communityUuid|helpSnippetId=Social_Communities_Get_My_Communities}",
             communityType : "public",
             title : "%{name=sample.communityTitle}",
             content : "%{name=sample.communityContent}",

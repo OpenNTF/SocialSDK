@@ -20,13 +20,15 @@
  * @module sbt.connections.BlogService
  */
 define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", "./BlogConstants", "../base/BaseService",
-         "../base/BaseEntity", "../base/XmlDataHandler",  "./Tag"], 
-    function(declare,config,lang,stringUtil,Promise,consts,BaseService,BaseEntity,XmlDataHandler, Tag) {
+         "../base/AtomEntity", "../base/XmlDataHandler",  "./Tag"], 
+    function(declare,config,lang,stringUtil,Promise,consts,BaseService,AtomEntity,XmlDataHandler, Tag) {
 	
 	var BlogTmpl = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:app=\"http://www.w3.org/2007/app\"  xmlns:thr=\"http://purl.org/syndication/thread/1.0\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\"><title type=\"text\">${getTitle}</title><snx:timezone>${getTimezone}</snx:timezone><snx:handle>${getHandle}</snx:handle><summary type=\"html\">${getSummary}</summary>${getTags}</entry>";
 	var BlogPostTmpl = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:app=\"http://www.w3.org/2007/app\"  xmlns:thr=\"http://purl.org/syndication/thread/1.0\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\"><title type=\"text\">${getTitle}</title><content type=\"html\">${getContent}</content>${getTags}</entry>";
 	var BlogCommentTmpl = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:app=\"http://www.w3.org/2007/app\"  xmlns:thr=\"http://purl.org/syndication/thread/1.0\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\"><content type=\"html\">${getContent}</content></entry>";
 	CategoryTmpl = "<category term=\"${tag}\"></category>";
+	var CategoryBlog = "<category term=\"blog\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category>";
+	var CategoryPerson = "<category term=\"person\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category>";
     
     /**
      * Blog class represents an entry for a Blogs feed returned by the
@@ -35,8 +37,11 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
      * @class Blog
      * @namespace sbt.connections
      */
-    var Blog = declare(BaseEntity, {
+    var Blog = declare(AtomEntity, {
 
+    xpath : consts.BlogXPath,
+    namespaces : consts.BlogNamespaces,
+    categoryScheme : CategoryBlog,
         /**
          * Construct a Blog entity.
          * 
@@ -94,58 +99,6 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         },
 
         /**
-         * Return the value of IBM Connections blog title from blog
-         * ATOM entry document.
-         * 
-         * @method getTitle
-         * @return {String} Blog title of the blog
-         */
-        getTitle : function() {
-            return this.getAsString("title");
-        },
-
-        /**
-         * Sets title of IBM Connections blog.
-         * 
-         * @method setTitle
-         * @param {String} title Title of the blog
-         */
-        setTitle : function(title) {
-            return this.setAsString("title", title);
-        },
-
-        /**
-         * Gets an author of IBM Connections Blog.
-         * 
-         * @method getAuthor
-         * @return {Member} Author of the blog
-         */
-        getAuthor : function() {
-            return this.getAsObject([ "authorUserid", "authorName", "authorEmail" ]);
-        },
-
-        /**
-         * Return the value of IBM Connections blog description summary
-         * from blog ATOM entry document.
-         * 
-         * @method getSummary
-         * @return {String} Blog description summary of the blog
-         */
-        getSummary : function() {
-            return this.getAsString("summary");
-        },
-
-        /**
-         * Sets description of IBM Connections blog.
-         * 
-         * @method setSummary
-         * @param {String} title Summary of the blog
-         */
-        setSummary : function(title) {
-            return this.setAsString("summary", summary);
-        },
-
-        /**
          * Return the value of IBM Connections blog URL from blog ATOM
          * entry document.
          * 
@@ -153,29 +106,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @return {String} Blog URL of the blog
          */
         getBlogUrl : function() {
-            return this.getAsString("blogUrl");
-        },
-
-        /**
-         * Return the published date of the IBM Connections blog from
-         * blog ATOM entry document.
-         * 
-         * @method getPublished
-         * @return {Date} Published date of the Blog
-         */
-        getPublished : function() {
-            return this.getAsDate("published");
-        },
-
-        /**
-         * Return the last updated date of the IBM Connections blog from
-         * blog ATOM entry document.
-         * 
-         * @method getUpdated
-         * @return {Date} Last updated date of the Blog
-         */
-        getUpdated : function() {
-            return this.getAsDate("updated");
+            return this.getAsString("alternateUrl");
         },
 
         /**
@@ -284,8 +215,11 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
      * @class BlogPost
      * @namespace sbt.connections
      */
-    var BlogPost = declare(BaseEntity, {
+    var BlogPost = declare(AtomEntity, {
 
+    	xpath : consts.BlogPostXPath,
+    	namespaces : consts.BlogPostNamespaces,
+    	
         /**
          * Construct a Blog Post.
          * 
@@ -332,7 +266,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         	if(blogHandle){
         		return blogHandle;
         	}
-        	var blogEntryUrlAlternate = this.getAsString("blogEntryUrlAlternate");
+        	var blogEntryUrlAlternate = this.getAsString("alternateUrl");
         	blogHandle = this.service._extractBlogHandle(blogEntryUrlAlternate);
             return blogHandle;
         },
@@ -345,70 +279,6 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          */
         setBlogHandle : function(blogHandle) {
             return this.setAsString("blogHandle", blogHandle);
-        },
-
-        /**
-         * Return the value of IBM Connections blog title from blog post
-         * ATOM entry document.
-         * 
-         * @method getTitle
-         * @return {String} Blog title of the blog post
-         */
-        getTitle : function() {
-            return this.getAsString("title");
-        },
-
-        /**
-         * Sets title of IBM Connections blog post.
-         * 
-         * @method setTitle
-         * @param {String} title Title of the blog post
-         */
-        setTitle : function(title) {
-            return this.setAsString("title", title);
-        },
-
-        /**
-         * Gets an author of IBM Connections Blog post.
-         * 
-         * @method getAuthor
-         * @return {Object} Author of the blog post
-         */
-        getAuthor : function() {
-            return this.getAsObject([ "authorUserid", "authorName", "authorEmail", "authorState" ]);
-        },
-
-        /**
-         * Return the value of IBM Connections blog post description summary
-         * from blog ATOM entry document.
-         * 
-         * @method getSummary
-         * @return {String} Blog post description summary of the blog
-         */
-        getSummary : function() {
-            return this.getAsString("summary");
-        },
-
-        /**
-         * Return the value of IBM Connections blog post URL from blog ATOM
-         * entry document.
-         * 
-         * @method getSelfUrl
-         * @return {String} Blog URL of the blog
-         */
-        getSelfUrl : function() {
-            return this.getAsString("blogEntryUrl");
-        },
-        
-        /**
-         * Return the value of IBM Connections blog post alternate URL from blog ATOM
-         * entry document.
-         * 
-         * @method getAlternateUrl
-         * @return {String} Blog URL of the blog
-         */
-        getAlternateUrl : function() {
-            return this.getAsString("blogEntryUrlAlternate");
         },
         
         /**
@@ -442,49 +312,6 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
 
         setTags : function(tags) {
             return this.setAsArray("tags", tags);
-        },
-
-        /**
-         * Return the published date of the IBM Connections blog post from
-         * blog ATOM entry document.
-         * 
-         * @method getPublished
-         * @return {Date} Published date of the Blog post
-         */
-        getPublished : function() {
-            return this.getAsDate("published");
-        },
-
-        /**
-         * Return the last updated date of the IBM Connections blog post from
-         * blog ATOM entry document.
-         * 
-         * @method getUpdated
-         * @return {Date} Last updated date of the Blog post
-         */
-        getUpdated : function() {
-            return this.getAsDate("updated");
-        },
-        
-        /**
-         * Return the content of the IBM Connections blog post from
-         * blog ATOM entry document.
-         * 
-         * @method getContent
-         * @return {String} content of the Blog
-         */
-        getContent : function() {
-            return this.getAsString("content");
-        },
-
-        /**
-         * Sets content of IBM Connections blog post.
-         * 
-         * @method setContent
-         * @param {String} content Content of the blog post
-         */
-        setContent : function(content) {
-            return this.setAsString("content", content);
         },
         
         /**
@@ -624,7 +451,10 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
      * @class Comment
      * @namespace sbt.connections
      */
-    var Comment = declare(BaseEntity, {
+    var Comment = declare(AtomEntity, {
+    	
+    	xpath : consts.CommentXPath,
+    	namespaces : consts.BlogNamespaces,
 
         /**
          * Construct a Blog Post Comment.
@@ -659,113 +489,6 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          */
         setCommentUuid : function(CommentUuid) {
             return this.setAsString("CommentUuid", CommentUuid);
-        },
-
-        /**
-         * Return the value of IBM Connections blog title from blog post comment
-         * ATOM entry document.
-         * 
-         * @method getTitle
-         * @return {String} Blog title of the blog post comment
-         */
-        getTitle : function() {
-            return this.getAsString("title");
-        },
-
-        /**
-         * Sets title of IBM Connections blog post comment.
-         * 
-         * @method setTitle
-         * @param {String} title Title of the blog post comment
-         */
-        setTitle : function(title) {
-            return this.setAsString("title", title);
-        },
-
-        /**
-         * Gets an author of IBM Connections Blog post comment.
-         * 
-         * @method getAuthor
-         * @return {Object} Author of the blog post comment
-         */
-        getAuthor : function() {
-            return this.getAsObject([ "authorUserid", "authorName", "authorEmail", "authorState" ]);
-        },
-
-        /**
-         * Return the value of IBM Connections blog post comment description summary
-         * from blog ATOM entry document.
-         * 
-         * @method getSummary
-         * @return {String} Blog post comment description summary of the blog
-         */
-        getSummary : function() {
-            return this.getAsString("summary");
-        },
-
-        /**
-         * Return the value of IBM Connections blog post comment URL from blog ATOM
-         * entry document.
-         * 
-         * @method getSelfUrl
-         * @return {String} Blog URL of the blog post comment
-         */
-        getSelfUrl : function() {
-            return this.getAsString("commentUrl");
-        },
-        
-        /**
-         * Return the value of IBM Connections blog post comment alternate URL from blog ATOM
-         * entry document.
-         * 
-         * @method getAlternateUrl
-         * @return {String} Blog URL of the blog post comment
-         */
-        getAlternateUrl : function() {
-            return this.getAsString("commentUrlAlternate");
-        },
-
-        /**
-         * Return the published date of the IBM Connections blog post comment from
-         * blog ATOM entry document.
-         * 
-         * @method getPublished
-         * @return {Date} Published date of the Blog post comment
-         */
-        getPublished : function() {
-            return this.getAsDate("published");
-        },
-
-        /**
-         * Return the last updated date of the IBM Connections blog post comment from
-         * blog ATOM entry document.
-         * 
-         * @method getUpdated
-         * @return {Date} Last updated date of the Blog post comment
-         */
-        getUpdated : function() {
-            return this.getAsDate("updated");
-        },
-        
-        /**
-         * Return the content of the IBM Connections blog post comment from
-         * blog ATOM entry document.
-         * 
-         * @method getContent
-         * @return {String} content of the Blog post comment
-         */
-        getContent : function() {
-            return this.getAsString("content");
-        },
-        
-        /**
-         * Sets content of IBM Connections blog post comment.
-         * 
-         * @method setContent
-         * @param {String} content Content of the blog post comment
-         */
-        setContent : function(content) {
-            return this.setAsString("content", content);
         },
         
         /**
@@ -841,7 +564,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         	if(blogHandle){
         		return blogHandle;
         	}
-        	var commentUrlAlternate = this.getAsString("commentUrlAlternate");
+        	var commentUrlAlternate = this.getAsString("alternateUrl");
         	var blogHandle = this.service._extractBlogHandle(commentUrlAlternate);
             return blogHandle;
         },
@@ -947,8 +670,12 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
      * @class Recommender
      * @namespace sbt.connections
      */
-    var Recommender = declare(BaseEntity, {
+    var Recommender = declare(AtomEntity, {
 
+    	xpath : consts.RecommendersXPath,
+    	categoryScheme : CategoryPerson,
+    	namespaces : consts.BlogNamespaces,
+    	
         /**
          * Construct a Blog Post Recommender.
          * 
@@ -971,49 +698,6 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         		recommenderUuid = recommenderUuid.substring(recommenderUuidPrefix.length, recommenderUuid.length);
         	}
             return recommenderUuid;
-        },
-
-        /**
-         * Return the value of title from blog post recommender
-         * ATOM entry document.
-         * 
-         * @method getTitle
-         * @return {String} Blog title of the blog post comment
-         */
-        getTitle : function() {
-            return this.getAsString("title");
-        },
-
-        /**
-         * Gets contributor details of IBM Connections Blog post recommender.
-         * 
-         * @method getContributor
-         * @return {Object} Contributor of the blog post recommendation
-         */
-        getContributor : function() {
-            return this.getAsObject([ "contributorUserid", "contributorName", "contributorEmail", "contributorState" ]);
-        },
-
-        /**
-         * Return the value of IBM Connections blog post recommender description summary
-         * from blog ATOM entry document.
-         * 
-         * @method getSummary
-         * @return {String} Blog post recommender description summary
-         */
-        getSummary : function() {
-            return this.getAsString("summary");
-        },
-
-        /**
-         * Return the last updated date of the IBM Connections blog post recommender from
-         * blog ATOM entry document.
-         * 
-         * @method getUpdated
-         * @return {Date} Last updated date of the Blog post recommender
-         */
-        getUpdated : function() {
-            return this.getAsDate("updated");
         }
 
     });
@@ -1031,17 +715,11 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             });
         },
         createEntity : function(service,data,response) {
-            var entryHandler = new XmlDataHandler({
-                service :  service,
-                data : data,
-                namespaces : consts.Namespaces,
-                xpath : consts.BlogXPath
-            });
             return new Blog({
                 service : service,
-                dataHandler : entryHandler
+                data : data
             });
-        }
+       }
     };
 
     /*
@@ -1057,18 +735,12 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             });
         },
         createEntity : function(service,data,response) {
-        	 var entryHandler = new XmlDataHandler({
-                 service :  service,
-                 data : data,
-                 namespaces : consts.Namespaces,
-                 xpath : consts.BlogPostXPath
-             });
-             return new BlogPost({
-                 service : service,
-                 dataHandler : entryHandler
-             });
-        }
-    };;
+            return new BlogPost({
+                service : service,
+                data : data
+            });
+       }
+    };
     
     /*
      * Callbacks used when reading a feed that contains blog entries.
@@ -1108,17 +780,11 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             });
         },
         createEntity : function(service,data,response) {
-            var entryHandler = new XmlDataHandler({
-                service :  service,
-                data : data,
-                namespaces : consts.Namespaces,
-                xpath : consts.BlogPostXPath
-            });
             return new BlogPost({
                 service : service,
-                dataHandler : entryHandler
+                data : data
             });
-        }
+       }
     };
     
     /*
@@ -1135,17 +801,11 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             });
         },
         createEntity : function(service,data,response) {
-            var entryHandler = new XmlDataHandler({
-                service :  service,
-                data : data,
-                namespaces : consts.Namespaces,
-                xpath : consts.RecommendersXPath
-            });
             return new Recommender({
                 service : service,
-                dataHandler : entryHandler
+                data : data
             });
-        }
+       }
     };
     /*
      * Callbacks used when reading a feed that contains blog entries.
@@ -1160,17 +820,11 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             });
         },
         createEntity : function(service,data,response) {
-            var entryHandler = new XmlDataHandler({
-                service :  service,
-                data : data,
-                namespaces : consts.Namespaces,
-                xpath : consts.CommentXPath
-            });
             return new Comment({
                 service : service,
-                dataHandler : entryHandler
+                data : data
             });
-        }
+       }
     };
     /**
      * BlogService class.

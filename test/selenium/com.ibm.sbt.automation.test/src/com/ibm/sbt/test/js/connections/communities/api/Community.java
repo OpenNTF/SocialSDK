@@ -41,7 +41,7 @@ public class Community extends BaseCommunitiesTest {
     public void testCommunity() {
         AuthType authType = environment.isSmartCloud() ? AuthType.AUTO_DETECT : AuthType.NONE;
         setAuthType(authType);
-        addSnippetParam("sample.communityId", community.getCommunityUuid());
+        addSnippetParam("CommunityService.communityUuid", community.getCommunityUuid());
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         List jsonList = previewPage.getJsonList();

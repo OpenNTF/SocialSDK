@@ -42,7 +42,7 @@ public class UpdateCommunityJson extends BaseCommunitiesTest {
         String updatedTitle = "Updated Title - " + System.currentTimeMillis();
         String updatedContent = "Updated Content - " + System.currentTimeMillis();
         
-        addSnippetParam("sample.communityId", community.getCommunityUuid());
+        addSnippetParam("CommunityService.communityUuid", community.getCommunityUuid());
         addSnippetParam("sample.communityTitle", updatedTitle);
         addSnippetParam("sample.communityContent", updatedContent);
         
@@ -65,7 +65,7 @@ public class UpdateCommunityJson extends BaseCommunitiesTest {
         String updatedContent = "Updated Content - " + System.currentTimeMillis();
         Community community2 = createCommunity(duplicateTitle, "public", "Content for duplicate test", "duplicate");
         
-        addSnippetParam("sample.communityId", community.getCommunityUuid());
+        addSnippetParam("CommunityService.communityUuid", community.getCommunityUuid());
         addSnippetParam("sample.communityTitle", duplicateTitle);
         addSnippetParam("sample.communityContent", updatedContent);
 
@@ -79,7 +79,7 @@ public class UpdateCommunityJson extends BaseCommunitiesTest {
     
     @Test
     public void testUpdateCommunityError() {
-        addSnippetParam("sample.communityId", "Foo");
+        addSnippetParam("CommunityService.communityUuid", "Foo");
         addSnippetParam("sample.communityTitle", "Foo");
         addSnippetParam("sample.communityContent", "Foo");
         

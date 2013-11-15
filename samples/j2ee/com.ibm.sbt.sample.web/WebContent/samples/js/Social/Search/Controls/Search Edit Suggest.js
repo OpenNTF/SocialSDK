@@ -11,8 +11,7 @@ require(["sbt/dom", "sbt/connections/controls/search/SearchBox"], function(dom, 
         	if(!event){
         		event = window.event;
         	}
-        	var resultDiv = dom.byId("results");
-        	resultDiv.innerHTML = "";
+        	dom.setText(resultDiv, "");
         	//Create a table to display results
         	var table = document.createElement("table");
         	if(event.results.length >0){
@@ -20,14 +19,14 @@ require(["sbt/dom", "sbt/connections/controls/search/SearchBox"], function(dom, 
 	        		var title = event.results[i].getTitle();
 	        		var row = document.createElement("tr");
 	        		var data = document.createElement("td");
-	        		row.innerHTML = title;
+	        		dom.setText(row, title);
 	        		row.appendChild(data);
 	        		table.appendChild(row);
         		}
         	}else{
         		var row = document.createElement("tr");
         		var data = document.createElement("td");
-        		row.innerHTML = "Your Search Returned No Results";
+        		dom.setText(row, "Your Search Returned No Results");
         		row.appendChild(data);
         		table.appendChild(row);
         	}

@@ -5,10 +5,10 @@ require(["sbt/connections/FollowService", "sbt/connections/FollowConstants", "sb
 	        var tr = document.createElement("tr");
 	        table.appendChild(tr);
 	        var td = document.createElement("td");
-	        td.innerHTML = followedResource.getTitle();
+	        td.appendChild(dom.createTextNode(followedResource.getTitle()));
 	        tr.appendChild(td);
 	        td = document.createElement("td");
-	        td.innerHTML = followedResource.getFollowedResourceUuid();
+	        td.appendChild(dom.createTextNode(followedResource.getFollowedResourceUuid()));
 	        tr.appendChild(td);
 	    };
     

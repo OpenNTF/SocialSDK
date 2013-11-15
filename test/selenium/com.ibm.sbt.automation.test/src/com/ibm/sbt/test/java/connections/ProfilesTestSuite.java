@@ -21,15 +21,11 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import com.ibm.sbt.automation.core.environment.TestEnvironment;
-import com.ibm.sbt.test.java.connections.profiles.GetSummary;
-import com.ibm.sbt.test.java.connections.profiles.GetName;
-import com.ibm.sbt.test.java.connections.profiles.GetMyProfile;
 import com.ibm.sbt.test.java.connections.profiles.GetPhoneNumber;
 import com.ibm.sbt.test.java.connections.profiles.GetProfileUrl;
 import com.ibm.sbt.test.java.connections.profiles.GetPronunciationUrl;
 import com.ibm.sbt.test.java.connections.profiles.GetThumbnailUrl;
 import com.ibm.sbt.test.java.connections.profiles.GetTitle;
-import com.ibm.sbt.test.java.connections.profiles.UpdateProfile;
 
 /**
  * @author mwallace
@@ -37,8 +33,8 @@ import com.ibm.sbt.test.java.connections.profiles.UpdateProfile;
  * @date 6 Mar 2013
  */
 @RunWith(Suite.class)
-@SuiteClasses({ GetSummary.class, GetName.class, GetMyProfile.class, GetPhoneNumber.class, GetProfileUrl.class, GetPronunciationUrl.class,
-        GetThumbnailUrl.class, GetTitle.class, UpdateProfile.class })
+@SuiteClasses({ GetPhoneNumber.class, GetProfileUrl.class, GetPronunciationUrl.class,
+        GetThumbnailUrl.class, GetTitle.class})
 public class ProfilesTestSuite {
     @AfterClass
     public static void cleanup() {

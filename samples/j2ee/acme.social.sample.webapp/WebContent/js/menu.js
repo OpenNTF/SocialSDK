@@ -3,8 +3,9 @@
  */
 define(['acme/widgets/HomeWidget', 'acme/widgets/CheckInWidget', 'acme/widgets/FlightStatusWidget',
         'acme/widgets/ServicesWidget', 'acmesocial/widgets/FlightsWidget', 'acmesocial/widgets/MyFlightsWidget',
-        'dojo/domReady!'], 
-        function(HomeWidget, CheckInWidget, FlightStatusWidget, ServicesWidget, FlightsWidget, MyFlightsWidget){
+        'acmesocial/widgets/gadgets/airlines/GadgetFlightsWidget', 'dojo/domReady!'], 
+        function(HomeWidget, CheckInWidget, FlightStatusWidget, ServicesWidget, FlightsWidget, MyFlightsWidget,
+        		GadgetFlightsWidget){
     return [ {
         name : "Home",
         active : true,
@@ -12,7 +13,8 @@ define(['acme/widgets/HomeWidget', 'acme/widgets/CheckInWidget', 'acme/widgets/F
     }, {
         name : "Flights",
         active : false,
-        widget : FlightsWidget
+        widget : FlightsWidget,
+        gadgetWidget : GadgetFlightsWidget
     }, { 
         name : "My Flights",
         active : false,

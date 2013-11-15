@@ -21,11 +21,13 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import com.ibm.sbt.automation.core.environment.TestEnvironment;
+import com.ibm.sbt.test.java.connections.ActivitiesTestSuite;
 import com.ibm.sbt.test.java.connections.ActivityStreamsTestSuite;
 import com.ibm.sbt.test.java.connections.CommunitiesTestSuite;
 import com.ibm.sbt.test.java.connections.FilesTestSuite;
 import com.ibm.sbt.test.java.connections.ProfilesTestSuite;
 import com.ibm.sbt.test.java.connections.SearchTestSuite;
+import com.ibm.sbt.test.java.connections.ForumsTestSuite;
 
 /**
  * @author mwallace
@@ -33,7 +35,7 @@ import com.ibm.sbt.test.java.connections.SearchTestSuite;
  * @date 12 Mar 2013
  */
 @RunWith(Suite.class)
-@SuiteClasses({ ActivityStreamsTestSuite.class, CommunitiesTestSuite.class, FilesTestSuite.class, ProfilesTestSuite.class, SearchTestSuite.class })
+@SuiteClasses({ ActivityStreamsTestSuite.class, CommunitiesTestSuite.class, FilesTestSuite.class, ProfilesTestSuite.class, ActivitiesTestSuite.class, SearchTestSuite.class,,ForumsTestSuite.class })
 public class ConnectionsTestSuite {
     @AfterClass
     public static void cleanup() {

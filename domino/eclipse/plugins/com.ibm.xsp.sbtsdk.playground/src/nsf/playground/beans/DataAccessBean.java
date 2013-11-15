@@ -18,6 +18,7 @@ import nsf.playground.environments.PlaygroundEnvironment;
 import nsf.playground.extension.Endpoints;
 import nsf.playground.extension.Endpoints.Category;
 import nsf.playground.extension.Endpoints.Property;
+import nsf.playground.extension.Endpoints.PropertyValues;
 
 import com.ibm.commons.util.QuickSort;
 import com.ibm.commons.util.StringUtil;
@@ -75,9 +76,16 @@ public abstract class DataAccessBean {
 	public synchronized PlaygroundEnvironment getEnvironment(String name) throws IOException {
 		updateCache();
 		if(!StringUtil.isEmpty(name)) {
-			PlaygroundEnvironment e = environments.get(name);
-			if(e!=null) {
-				return e;
+			if(StringUtil.equals(name,CUSTOM)) {
+				PlaygroundEnvironment e = getCustomEnvironment();
+				if(e!=null) {
+					return e;
+				}
+			} else {
+				PlaygroundEnvironment e = environments.get(name);
+				if(e!=null) {
+					return e;
+				}
 			}
 		}
 		return findPreferredEnvironment();
@@ -93,9 +101,16 @@ public abstract class DataAccessBean {
 				}
 			}
 			if(StringUtil.isNotEmpty(envName)) {
-				PlaygroundEnvironment e = environments.get(envName);
-				if(e!=null) {
-					return e;
+				if(StringUtil.equals(envName,CUSTOM)) {
+					PlaygroundEnvironment e = getCustomEnvironment();
+					if(e!=null) {
+						return e;
+					}
+				} else {
+					PlaygroundEnvironment e = environments.get(envName);
+					if(e!=null) {
+						return e;
+					}
 				}
 			}
 			return findPreferredEnvironment();
@@ -179,10 +194,6 @@ public abstract class DataAccessBean {
 					}
 				}
 			}
-			environments.put(CUSTOM, getCustomEnvironment());
-			if(TRACE) {
-				System.out.println("Loading environment: "+CUSTOM);
-			}
 			
 			(new QuickSort.JavaList(allEnvs)).sort();
 			allEnvs.add(CUSTOM); // Always the last one...
@@ -216,16 +227,16 @@ public abstract class DataAccessBean {
 		return readEnvironment(env, d);
 	}
 	public PlaygroundEnvironment readEnvironment(PlaygroundEnvironment env, Document d) throws NotesException, IOException {
-		env.setNoteID(d.getNoteID());
-		env.setName(d.getItemValueString("Name"));
-		env.setDescription(d.getItemValueString("Description"));
-		String runtimes = d.getItemValueString("Runtimes");
+		env.setNoteID(StringUtil.trim(d.getNoteID()));
+		env.setName(StringUtil.trim(d.getItemValueString("Name")));
+		env.setDescription(StringUtil.trim(d.getItemValueString("Description")));
+		String runtimes = StringUtil.trim(d.getItemValueString("Runtimes"));
 		if(StringUtil.isNotEmpty(runtimes)) {
 			env.setRuntimes(runtimes);
 		}
-		env.setProperties(d.getItemValueString("Properties"));
+		env.setProperties(StringUtil.trim(d.getItemValueString("Properties")));
 		
-		boolean def = StringUtil.equals(d.getItemValueString("Preferred"),"1");
+		boolean def = StringUtil.equals(StringUtil.trim(d.getItemValueString("Preferred")),"1");
 		if(def) {
 			env.setPreferred(true);
 		}
@@ -241,7 +252,7 @@ public abstract class DataAccessBean {
 					if(props!=null) {
 						for(int k=0; k<props.length; k++) {
 							Property p = props[k];
-							env.putField(p.getName(), d.getItemValueString(p.getName()));
+							env.putField(p.getName(), StringUtil.trim(d.getItemValueString(p.getName())));
 						}
 					}
 				}
@@ -270,5 +281,23 @@ public abstract class DataAccessBean {
 			}
 		}
 		return env;
+	}
+	public void loadProperties(DominoDocument d, Category cat, String name) throws NotesException, IOException {
+		if(cat==null) {
+			return;
+		}
+		boolean isDefault = StringUtil.isEmpty(name) || StringUtil.equals(name, "0");
+		PropertyValues pv = isDefault? null : cat.getPropertyValues(name);
+		Property[] allp = cat.getProperties();
+		for(int i=0; i<allp.length; i++) {
+			Property p = allp[i];
+			if(pv==null) {
+				String v = p.getDefaultValue();
+				d.replaceItemValue(p.getName(), v);
+			} else {
+				String v = pv.getValues()[i];
+				d.replaceItemValue(p.getName(), v);
+			}
+		}
 	}
 }

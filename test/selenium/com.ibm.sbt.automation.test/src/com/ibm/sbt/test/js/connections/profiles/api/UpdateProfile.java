@@ -33,7 +33,7 @@ import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 public class UpdateProfile extends BaseProfilesTest {
     
     static final String SNIPPET_ID = "Social_Profiles_API_UpdateProfile"; 
-    static final String SNIPPET_ID2 = "Social_Profiles_API_UpdateProfilePattern2"; 
+    static final String SNIPPET_ID2 = "Social_Profiles_API_UpdateProfileJson"; 
 	
     @Test
     public void testUpdateProfile() { 	    	

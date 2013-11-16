@@ -118,8 +118,8 @@ require(["sbt/connections/FileService",
                         var file = files[i];
                         createRow(i, file);
                 
-                        var action = dom.byId("action"+i);
-                        action.innerHTML = "<input id=\"btnShare" + i + "\" value=\"Share\" class=\"btn btn-primary\" type=\"submit\">";
+                        var actionID = "action" + i;
+                        dom.setText(actionID, "<input id=\"btnShare" + i + "\" value=\"Share\" class=\"btn btn-primary\" type=\"submit\">");
                         var btnShare = dom.byId("btnShare" + i);
                         
                         btnShare.onclick = function(evt) {

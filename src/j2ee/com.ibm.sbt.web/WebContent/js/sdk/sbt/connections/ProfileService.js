@@ -1219,38 +1219,6 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
         },
         
         /*
-         * Constructs update profile request body.
-         */
-        _constructProfilePostData : function(profile) {
-            var transformer = function(value,key) {
-                if (key == "address") {                	
-                	value = profile.service._isAddressSet(profile) ? stringUtil.transform(updateProfileAddressTemplate, {"streetAddress" : profile._fields["streetAddress"], 
-                	"extendedAddress" : profile._fields["extendedAddress"], "locality" : profile._fields["locality"], "region" : profile._fields["region"],
-                	"postalCode" : profile._fields["postalCode"], "countryName" : profile._fields["countryName"]}) : null;
-                } 
-                else{                	
-                	value = (profile._fields[key])? stringUtil.transform(updateProfileAttributeTemplate, {"attributeName" : consts.ProfileVCardXPath[key], "attributeValue" : profile._fields[key]}) : null;
-                	
-                }
-                return value;
-            };
-            return stringUtil.transform(updateProfileXmlTemplate, profile, transformer, profile);
-        },
-        
-        /*
-         * Constructs update profile request body.
-         */
-        _constructProfilePutData : function(profile) {
-            var transformer = function(value,key) {
-            	if(profile._fields[key]){
-	                value = stringUtil.transform(createProfileAttributeTemplate, {"attributeName" : consts.profileCreateAttributes[key], "attributeValue" : profile._fields[key]});
-	                return value;
-            	}
-            };
-            return stringUtil.transform(createProfileTemplate, profile, transformer, profile);
-        },
-
-        /*
          * Validate a Profile object
          */
         _validateProfile : function(profile) {

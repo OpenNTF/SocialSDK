@@ -14,7 +14,9 @@
     width: auto;
 }
    </style>
-
+	<xp:this.resources>
+		<xp:bundle var="xstr" src="strings.properties"></xp:bundle>
+	</xp:this.resources>
    <xe:applicationLayout id="oneUILayout1">
       <xe:this.facets>
 		<xp:callback xp:key="LeftColumn" facetName="LeftColumn"
@@ -51,6 +53,9 @@
          		</xe:basicLeafNode>
          	</xe:this.bannerApplicationLinks>
          	<xe:this.bannerUtilityLinks>
+         	    <xe:basicLeafNode>
+         		<xp:this.label><![CDATA[#{javascript:xstr.getString("app.version")}]]></xp:this.label>
+         		</xe:basicLeafNode>
          		<xe:userTreeNode></xe:userTreeNode>
          		<xe:loginTreeNode></xe:loginTreeNode>
          	</xe:this.bannerUtilityLinks>

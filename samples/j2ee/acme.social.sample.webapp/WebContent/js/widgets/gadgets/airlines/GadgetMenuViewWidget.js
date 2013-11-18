@@ -2,7 +2,7 @@
  * The menu list view for the gadget.
  */
 define(['dojo/_base/declare', 'dijit/_WidgetBase', 'dojo/query', 'acme/widgets/MenuViewWidget', 
-        'acme/widgets/gadgets/airlines/GadgetMenuWidget', 'dojo/NodeList-manipulate'], 
+        'acmesocial/widgets/gadgets/airlines/GadgetMenuWidget', 'dojo/NodeList-manipulate'], 
          function(declare, _WidgetBase, query, MenuViewWidget, GadgetMenuWidget, arrayUtil) {
              return declare('GadgetMenuViewWidget', [MenuViewWidget], {
                  //The element containing the menu items

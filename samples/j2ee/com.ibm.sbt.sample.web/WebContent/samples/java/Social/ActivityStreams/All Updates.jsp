@@ -54,12 +54,12 @@
 					}
 				}
 				
-				
 				if(StringUtil.isNotEmpty(entry.getEventTitle())){
 					out.println("<br>"+entry.getEventTitle());
 				}else{
 					out.println("<br>"+entry.getShortTitle());
 				}
+				
 			
 				if(entry.getNumComments()>0){
 					out.println("Number of comments was "+entry.getNumComments());

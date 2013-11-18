@@ -29,7 +29,7 @@ public class SearchByTag extends BaseAuthJavaServiceTest {
 
     @Test
     public void runTest() {
-        boolean result = checkNoError("Social_ActivityStreams_SearchByTag");
+        boolean result = checkNoError("Social_ActivityStreams_Search_By_Tag");
         assertTrue(getNoErrorMsg(), result);
     }
 

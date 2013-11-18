@@ -41,7 +41,7 @@ public abstract class EntityList<Entity extends BaseEntity> extends AbstractList
 	private IFeedHandler<Entity> feedHandler;
 	
 	//TO REMOVE
-	private BaseService<Entity> service;
+	private BaseService service;
 	
 	public EntityList(Response requestData, IFeedHandler<Entity> feedHandler) {
 		this.requestData = requestData;
@@ -55,7 +55,7 @@ public abstract class EntityList<Entity extends BaseEntity> extends AbstractList
     }
 	
 	//TO REMOVE
-	public EntityList(Response requestData, BaseService<Entity> service) {
+	public EntityList(Response requestData, BaseService service) {
 		this.requestData = requestData;
         this.service = service;
 		this.entities = createEntities();
@@ -134,7 +134,7 @@ public abstract class EntityList<Entity extends BaseEntity> extends AbstractList
 	}
 	*/
 	
-	public BaseService<Entity> getService() {
+	public BaseService getService() {
 		return service;
 	}
 

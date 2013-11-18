@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * ï¿½ Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -40,7 +40,7 @@ public class FileServiceTest extends BaseUnitTest {
 
 	public final static String	TEST_CONTENT			= "This is a sample Content in the Test File. "
 																+ "Used mainly for Testing the Upload functionality of the FileService Connections API."
-																+ "Test Input : ddsfafw4t547£%*£^U£^JUL&><\03242";
+																+ "Test Input : ddsfafw4t547ï¿½%*ï¿½^Uï¿½^JUL&><\03242";
 	public final static String	TEST_NAME				= "FS_TestUpload.txt";
 
 
@@ -358,7 +358,7 @@ public class FileServiceTest extends BaseUnitTest {
 		File fileEntry = fileService.getFile(testFileId, true);
 		String comment = "Junit Comment - Added from FileServiceTest, testAddCommentToFile";
 		Comment commentEntry;
-		commentEntry = fileService.addCommentToFile(fileEntry.getFileId(), comment, fileEntry.getAuthor().getUserUuid() , null);
+		commentEntry = fileService.addCommentToFile(fileEntry.getFileId(), comment, fileEntry.getAuthor().getId() , null);
 		assertEquals(commentEntry.getComment(),
 				"Junit Comment - Added from FileServiceTest, testAddCommentToFile");
 	}

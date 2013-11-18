@@ -68,28 +68,23 @@ require(["sbt/controls/grid/Grid",
                         "class": "lotusTitle",
                      }, td);
                      var a = dom.create("a", {
-                        "href": "javascript:;",
-                        innerHTML: this.getValue(item, "title")
+                        "href": "javascript:;"
                      }, h4);
+                     a.appendChild(dom.createTextNode(this.getValue(item, "title")));
                      var div = dom.create("div", {
                         "class": "lotusMeta",
                      }, td);
                      var ul = dom.create("ul", {
                         "class": "lotusInlinelist",
                      }, div);
-                    // var liPeople = dom.create("ul", {
-                    //    "class": "lotusInlinelist",
-                    // }, ul);
-                     var liUpdatedBy = dom.create("li", {
-                        innerHTML: "Updated by "
-                     }, ul);
+                     
+                     var liUpdatedBy = dom.create("li", {}, ul);
+                     liUpdatedBy.appendChild(dom.createTextNode("Updated By "));
+                     
                      var aUpdatedBy = dom.create("a", {
-                        "class": "lotusPerson",
-                        innerHTML: this.getValue(item, "contributorName")
+                        "class": "lotusPerson"
                      }, liUpdatedBy);
-                    // var liUpdatedWhen = dom.create("ul", {
-                      //  innerHTML: this.getValue(item, "updated")
-                    // }, ul);
+                     aUpdatedBy.appendChild(dom.createTextNode(this.getValue(item, "contributorName")));
                  },
                  getValue: function(item, name) {
                      if (item.hasOwnProperty(name)) {

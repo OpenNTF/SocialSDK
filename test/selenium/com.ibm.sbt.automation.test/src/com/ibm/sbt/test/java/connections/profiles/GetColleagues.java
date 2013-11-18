@@ -26,11 +26,11 @@ import com.ibm.sbt.automation.core.test.BaseJavaServiceTest;
  * @author mkataria
  * @date Feb 8, 2013
  */
-public class GetAbout extends BaseJavaServiceTest {
+public class GetColleagues extends BaseJavaServiceTest {
 
     @Test
     public void runTest() {
-        boolean result = checkNoError("Social_Profiles_GetAbout");
+        boolean result = checkNoError("Social_Profiles_Get_Colleagues");
         assertTrue(getNoErrorMsg(), result);
     }
 

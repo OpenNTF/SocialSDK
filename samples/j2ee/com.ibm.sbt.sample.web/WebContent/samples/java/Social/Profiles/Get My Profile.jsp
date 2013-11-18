@@ -25,31 +25,24 @@
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"	pageEncoding="ISO-8859-1"%>
 <html>
 <head>
-	<title>SBT JAVA Sample - Get Id</title>
+	<title>SBT JAVA Sample - Get My Profile</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 <body>
 	<div id="content">
 	<%
-	try {
-			String userId = Context.get().getProperty("sample.id1");
-			ProfileService connProfSvc = new ProfileService(); 
-			Profile profile = connProfSvc.getProfile(userId);
-			if (profile != null) {
-				if(StringUtil.isNotEmpty(profile.getUserid())){
-					out.println(profile.getUserid());
-				}else {
-					out.println("No information found");
-				}
-			}
-			else {
-					out.println("error encountered in getting required Profile information");
-			}
-		} catch (Throwable e) {
-			out.println("<pre>");
-			out.println(e.getMessage());
-			out.println("</pre>");
-		}
+	 try {
+         ProfileService connProfSvc = new ProfileService();
+         Profile profile = connProfSvc.getMyProfile();
+         out.println("my UserId "+profile.getUserid()+"<br>");
+         out.println("my Job Title "+profile.getJobTitle()+"<br>");
+         out.println("summary "+profile.getSummary()+"<br>");
+         
+ 	} catch (Throwable e) {
+         out.println("<pre>");
+         out.println(e.getMessage());
+         out.println("</pre>");
+ 	}
 	%>
 	</div>
 </body>

@@ -912,8 +912,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          */
         getSource : function(){
             return this.getAsObject(
-                    [ "sourceId", "sourceTitle", "sourceLink"],
-                    [ "sourceId", "sourceTitle", "sourceLink"]);
+                    [ "id", "title", "link"],
+                    [ "id", "title", "link"]);
         },
         
         /**
@@ -943,7 +943,17 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          */
         getCommunityLink : function(){
             this.getAsString("communityLink");
-        }        
+        },
+        
+        /**
+         * Return the community UUID.
+         * 
+         * @method getCommunityUuid
+         * @return {String} communityUuid
+         */
+        getCommunityUuid : function() {
+            return this.getAsString("communityUuid");
+        }
     });
     
     /**
@@ -1182,22 +1192,6 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             }
         };
         
-        var ConnectionsEventCallbacks = {
-                createEntity : function(service,data,response) {
-                    var entryHandler = new XmlDataHandler({
-                        service :  service,
-                        data : data,
-                        namespaces : consts.Namespaces,
-                        xpath : consts.EventXPath
-                    });
-                    return new Event({
-                        service : service,
-                        id : entryHandler.getEntityId(),
-                        dataHandler : entryHandler
-                    });
-                }
-            };
-    
     /*
      * Callbacks used when reading an entry that contains a Community.
      */

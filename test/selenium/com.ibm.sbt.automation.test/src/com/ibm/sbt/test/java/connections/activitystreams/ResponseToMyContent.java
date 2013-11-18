@@ -1,3 +1,11 @@
+package com.ibm.sbt.test.java.connections.activitystreams;
+
+import static org.junit.Assert.assertTrue;
+
+import org.junit.Test;
+
+import com.ibm.sbt.automation.core.test.BaseAuthJavaServiceTest;
+
 /*
  * � Copyright IBM Corp. 2013
  * 
@@ -13,23 +21,16 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-package com.ibm.sbt.test.java.connections.activitystreams;
-
-import static org.junit.Assert.assertTrue;
-
-import org.junit.Test;
-
-import com.ibm.sbt.automation.core.test.BaseAuthJavaServiceTest;
 
 /**
  * @author mkataria
  * @date Jan 10, 2013
  */
-public class UpdatesFromSpecificCommunity extends BaseAuthJavaServiceTest {
+public class ResponseToMyContent extends BaseAuthJavaServiceTest {
 
     @Test
     public void runTest() {
-        boolean result = checkNoError("Social_ActivityStreams_Updates_From_Community");
+        boolean result = checkNoError("Social_ActivityStreams_Response_To_My_Content");
         assertTrue(getNoErrorMsg(), result);
     }
 

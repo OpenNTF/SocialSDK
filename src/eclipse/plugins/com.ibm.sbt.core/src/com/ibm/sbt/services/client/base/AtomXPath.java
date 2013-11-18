@@ -32,14 +32,9 @@ public enum AtomXPath implements FieldEntry {
 	singleEntry("/a:entry"),
 	id("./id"),
 	title("./title"),
-	authorName("./author/name"),
-	authorEmail("./author/email"),
-	authorUserid("./author/snx:userid"),
-	authorUserState("./author/snx:userState"),
-	contributorName("./contributor/name"),
-	contributorEmail("./contributor/email"),
-	contributorUserid("./contributor/snx:userid"),
-	contributorUserState("./contributor/snx:userState"),
+	contributor("./contributor"),
+	author("./author"),
+	modifier("./td:modifier"),
 	published("./published"),
 	summary("./summary"),
 	updated("./updated"),
@@ -49,7 +44,13 @@ public enum AtomXPath implements FieldEntry {
 	repliesUrl("./a:link[@rel='replies']/@href"),
 	editUrl("./a:link[@rel='replies']/@href"),
 	selfUrl("./a:link[@rel='edit']/@href"),
-	alternateUrl("./a:link[@rel='alternate']/@href");
+	alternateUrl("./a:link[@rel='alternate']/@href"),
+	
+	personName("./name"),
+	personEmail("./email"),
+	personUserid("./snx:userid"),
+	personUserState("./snx:userState"),
+	;
 	
 	private final XPathExpression path;
 	

@@ -20,7 +20,7 @@
 <%@page import="com.ibm.sbt.services.client.connections.blogs.BlogService"%>
 <%@page import="com.ibm.sbt.services.client.connections.blogs.model.BaseBlogEntity"%>
 <%@page import="com.ibm.sbt.services.client.connections.blogs.BlogPostList"%>
-<%@page import="com.ibm.sbt.services.client.connections.blogs.model.Author"%>
+<%@page import="com.ibm.sbt.services.client.connections.common.Person"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.sbt.services.client.connections.activitystreams.model.Reply"%>
 <%@page import="java.util.List"%>
@@ -41,7 +41,7 @@
 				out.println("No updates to be displayed");
 
 			for (BaseBlogEntity entry : entries) {
-				Author author = entry.getAuthor();
+				Person author = entry.getAuthor();
 				out.println("Post title : "+entry.getTitle());
 				out.println("uid of blog :"+entry.getUid());
 				out.println("date published :"+entry.getPublished());
@@ -49,7 +49,7 @@
 				out.println("author name : "+author.getName());
 				out.println("author state : "+author.getState());
 				out.println("author email : "+author.getEmail());
-				out.println("author uid : "+author.getUid());
+				out.println("author uid : "+author.getId());
 				out.println("<br><br>");
 			}
 		} catch (Throwable e) {

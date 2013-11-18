@@ -8,7 +8,7 @@ require(["sbt/connections/CommunityService", "sbt/dom"],
 	        td.appendChild(dom.createTextNode(event.getTitle()));
 	        tr.appendChild(td);
 	        td = document.createElement("td");
-	        td.appendChild(dom.createTextNode(event.getEventInstUuid()));
+	        td.appendChild(dom.createTextNode(event.getEventUuid()));
 	        tr.appendChild(td);
 	    };
     
@@ -24,14 +24,7 @@ require(["sbt/connections/CommunityService", "sbt/dom"],
 	                dom.setText("content", "There are no events scheduled after: "+startDate);
 	            }
 	            for (var i=0; i < events.length; i++) {
-	                events[i].load().then( 
-	                    function(event) {
-	                    	createRow(event);
-	                    },
-	                    function(error) {
-	                        dom.setText("content", "Error code:" +  error.code + ", message:" + error.message);
-	                    }
-	                );
+	                createRow(events[i]);
 	            }
 	        },
 	        function(error) {

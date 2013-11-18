@@ -11,9 +11,9 @@ import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.connections.BaseFilesTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 
-public class UpdateFile extends BaseFilesTest {
+public class UpdateFileMetadata extends BaseFilesTest {
 
-	static final String SNIPPET_ID = "Social_Files_API_UpdateFile";
+	static final String SNIPPET_ID = "Social_Files_API_UpdateFileMetadata";
 
 	static final String SNIPPET_ID_FILE = "Social_Files_API_FileUpdate";
 

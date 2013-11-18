@@ -23,10 +23,10 @@ import com.ibm.sbt.automation.core.test.BaseActivityStreamTest;
  * @author Francis 
  * @date 26 Mar 2013
  */
-public class AdvancedConfig extends BaseActivityStreamTest {
+public class HomepageConfig extends BaseActivityStreamTest {
 	@Test
 	public void testActivityStream() {
-		assertTrue("Expected the ActivityStream to generate a news node", checkActivityStream("Social_ActivityStreams_Controls_Advanced_Config"));
+		assertTrue("Expected the ActivityStream to generate a news node", checkActivityStream("Social_ActivityStreams_Controls_Homepage_Config"));
 	}
 	
 }

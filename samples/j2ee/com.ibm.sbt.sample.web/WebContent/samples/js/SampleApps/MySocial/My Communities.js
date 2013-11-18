@@ -4,7 +4,9 @@ require([ "sbt/dom", "sbt/connections/controls/communities/CommunityGrid" ], fun
 		hidePager : true,
 		hideSorter : true
 	});
-	communityGrid.renderer.template = dom.byId("MyCommunitiesTmpl").innerHTML;
+	
+	var domNode = dom.byId("MyCommunitiesTmpl");
+	communityGrid.renderer.template = domNode.text || domNode.textContent;
 
 	communityGrid.renderer.renderTable = function(grid, el, items, data) {
 		var div = dom.create("div", {
@@ -17,8 +19,8 @@ require([ "sbt/dom", "sbt/connections/controls/communities/CommunityGrid" ], fun
 		
 		var h3 = dom.create("h3", {
 			"class" : "h3",
-			innerHTML : '<a href="">My Communities</a>'
 		}, headingDiv);
+		dom.setText(h3, '<a href="">My Communities</a>');
 
 		var ul = this._create("ul", {
 			"class" : "files list"

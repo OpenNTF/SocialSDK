@@ -30,8 +30,7 @@ public class GetPronunciationUrl extends BaseJavaServiceTest {
 
     @Test
     public void runTest() {
-        String expected = getProperty("sample.pronunciationUrl1");
-        boolean result = checkExpected("Social_Profiles_GetPronunciationUrl", expected);
+        boolean result = checkNoError("Social_Profiles_Get_Pronunciation_Url");
         assertTrue(getExpectedErrorMsg(), result);
     }
 

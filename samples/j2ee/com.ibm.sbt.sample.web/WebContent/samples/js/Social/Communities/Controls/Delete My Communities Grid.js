@@ -41,7 +41,7 @@ function deleteCommunities(grid, communityService, dom, communities) {
 	var community = communities.pop();
 	if (!community) {
 		dom.byId("deleteBtn").disabled = false;
-		dom.byId("statusDiv").innerHTML = "Communities deleted";
+		dom.setText("statusDiv","Communities deleted");
 		grid.refresh();
 		return;
 	}
@@ -50,17 +50,19 @@ function deleteCommunities(grid, communityService, dom, communities) {
     var communityUuid = extractCommunityUuid(communityService, uid);
     var title = community.data.getValue("title");
     
-    var statusDiv = dom.byId("statusDiv");
-    statusDiv.innerHTML = "Deleting community: "+title;
+    var str = "Deleting community: "+title;
+    dom.setText("statusDiv",str);
     
     communityService.deleteCommunity(communityUuid).then(
         function(communityUuid) {
-        	statusDiv.innerHTML = "Sucessfully deleted community: "+title;
+        	var str = "Sucessfully deleted community: "+title;
+        	dom.setText("statusDiv",str);
         	deleteCommunities(grid, communityService, dom, communities);
         }, function(error) {
             alert("Unable to delete '"+ title + "' aborting operation.");
     		dom.byId("deleteBtn").disabled = false;
-    		dom.byId("statusDiv").innerHTML = "Unable to delete '"+ title + "' aborting operation.";
+    		var str = "Unable to delete '"+ title + "' aborting operation.";
+    		dom.setText("statusDiv",str);
     		grid.refresh();
         }
     );

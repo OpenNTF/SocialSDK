@@ -47,7 +47,7 @@
 								<xe:tooltipDialog id="tooltipDialog1" title="JSON content for the entry">
 									<xp:div style="overflow: auto; height: 250px; width: 600px;">
 										<pre>
-											<xp:text escape="true" id="computedField3" value="#{javascript:toJson(entry,false)}">
+											<xp:text escape="true" id="computedField3" value="#{javascript:nsf.JsonService.toJson(entry)}">
 											</xp:text>
 										</pre>
 									</xp:div>

@@ -204,9 +204,10 @@ define([ "../../declare", "../../dom", "../../lang", "../../widget/grid/_GridRen
          */
         renderLoading: function(grid, el) {
            var div = this._create("div", {
-              "class": this.loadingClass,
-              innerHTML: this.nls.loading
+              "class": this.loadingClass
            }, el, "only");
+           dom.setText(div,this.nls.loading);
+           
            var img = this._create("img", {
               "class": this.loadingImgClass,
               src: this._blankGif,
@@ -226,10 +227,10 @@ define([ "../../declare", "../../dom", "../../lang", "../../widget/grid/_GridRen
            }
            var ediv = this._create("div", {
              "class": this.emptyClass,
-             innerHTML: this.nls.empty,
              role: "document",
              tabIndex: 0
            }, el, "only");
+           dom.setText(ediv,this.nls.empty);
            //dijit.setWaiState(ediv, "label", this.nls.empty);
         },
         
@@ -244,10 +245,11 @@ define([ "../../declare", "../../dom", "../../lang", "../../widget/grid/_GridRen
             }
            var ediv = this._create("div", {
               "class": this.errorClass,
-              innerHTML: error,
               role: "alert",
               tabIndex: 0
             }, el, "only");
+           
+           dom.setText(ediv, error);
         },
         
         /**

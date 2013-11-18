@@ -157,6 +157,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
             parentEventId : "snx:parentEvent",
             parentEventLink : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/calendar/event/parentevent']/@href",
             communityLink : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/container']/@href",
+            communityUuid : "snx:communityUuid",
             eventAtomInstances : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/calendar/event/instances']/@href",
             eventAtomAttendees : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/calendar/event/attend']/@href",
             eventAtomFollowers : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/calendar/event/follow']/@href",

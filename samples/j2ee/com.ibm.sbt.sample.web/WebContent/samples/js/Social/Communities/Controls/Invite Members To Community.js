@@ -82,8 +82,13 @@ function(config, CommunityService, dom, stringUtil, SearchBox) {
         	if (searchBox.members[i].id == null) {
         		continue;
         	}
-        	communityService.createInvite(communityId, searchBox.members[i].id);
-            invitationString += searchBox.members[i].name + ", ";
+        	var invite = communityService.newInvite();
+            invite.setCommunityUuid(communityId);
+            invite.setUserid(searchBox.members[i].id);
+            
+        	communityService.createInvite(invite);
+        	
+        	invitationString += searchBox.members[i].name + ", ";
         }
         
         invitationString = invitationString.substring(0, invitationString.length - 3);

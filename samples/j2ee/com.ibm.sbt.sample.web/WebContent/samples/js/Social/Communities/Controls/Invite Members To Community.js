@@ -29,8 +29,8 @@ function(config, CommunityService, dom, stringUtil, SearchBox) {
 			event = window.event;
 		}
 		// Component for displaying search results
-		var resultDiv = dom.byId("results");
-		resultDiv.innerHTML = "";
+
+		dom.setText("resultDiv","");
 		
 		//Create a table to display results
 		var table = document.createElement("table");
@@ -39,14 +39,14 @@ function(config, CommunityService, dom, stringUtil, SearchBox) {
 				var title = event.results[i].getTitle();
 				var row = document.createElement("tr");
 				var data = document.createElement("td");
-				row.innerHTML = title;
+				row.appendChild(dom.createTextNode(title));
 				row.appendChild(data);
 				table.appendChild(row);
 			}
 		} else {
 			var row = document.createElement("tr");
 			var data = document.createElement("td");
-			row.innerHTML = "Your search returned no results";
+			row.appendChild(dom.createTextNode("Your search returned no results"));
 			row.appendChild(data);
 			table.appendChild(row);
 		}
@@ -89,7 +89,8 @@ function(config, CommunityService, dom, stringUtil, SearchBox) {
         invitationString = invitationString.substring(0, invitationString.length - 3);
         
         // Display success message and hide input form
-        dom.byId("success").innerHTML = "Successfully invited " + invitationString + " to your community";
+        var str =  "Successfully invited " + invitationString + " to your community";
+        dom.setText("success",str);
         dom.byId("invitationForm").style.display = "none";
     }
 });

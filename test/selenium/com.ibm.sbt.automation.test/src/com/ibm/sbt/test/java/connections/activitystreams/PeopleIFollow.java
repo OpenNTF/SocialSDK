@@ -29,7 +29,7 @@ public class PeopleIFollow extends BaseAuthJavaServiceTest {
 
     @Test
     public void runTest() {
-        boolean result = checkNoError("Social_ActivityStreams_PeopleIFollow");
+        boolean result = checkNoError("Social_ActivityStreams_People_I_Follow");
         assertTrue(getNoErrorMsg(), result);
     }
 

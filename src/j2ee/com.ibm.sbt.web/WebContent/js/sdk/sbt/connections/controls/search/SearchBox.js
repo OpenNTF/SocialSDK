@@ -656,7 +656,7 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
             		}else{
             		    id = results[i].getId();
             		}
-            		data.innerHTML = title;
+            		dom.setText(data, title);
             		data.id = id;
 
             		data.onclick = function (event) { 

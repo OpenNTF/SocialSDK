@@ -10,10 +10,10 @@ import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.connections.BaseFilesTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 
-public class PinFileAndRemovePinFromFile extends BaseFilesTest {
+public class PinFileAndUnpinFile extends BaseFilesTest {
 
 	static final String SNIPPET_ID_PIN = "Social_Files_API_PinFile";
-	static final String SNIPPET_ID_REMOVE_PIN = "Social_Files_API_RemovePinFromFile";
+	static final String SNIPPET_ID_REMOVE_PIN = "Social_Files_API_UnpinFile";
 
 	static final String SNIPPET_ID_PIN_FILE = "Social_Files_API_FilePin";
 	static final String SNIPPET_ID_REMOVE_PIN_FILE = "Social_Files_API_FileUnpin";

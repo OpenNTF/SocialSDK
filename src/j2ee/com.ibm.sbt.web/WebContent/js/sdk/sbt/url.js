@@ -4,19 +4,19 @@ define(['./declare'], function(declare){
     var URL_RE_GROUPS = {
         'URL': 0,
         'SCHEME': 1,
-        'COLON1': 2,
-        'SLASHES': 3,
+        'SCHEME_COLON': 2,
+        'SCHEME_SLASHES': 3,
         'USER': 4,
-        'COLON2':5,
+        'PASSWORD_COLON':5,
         'PASSWORD': 6,
-        'AT': 7,
+        'USER_AT': 7,
         'HOSTNAME': 8,
-        'COLON3':9,
+        'PORT_COLON':9,
         'PORT': 10,
         'PATH': 11,
-        'QUESTION':12,
+        'QUERY_QUESTION':12,
         'QUERY': 13,
-        'HASHSIGN': 14,
+        'FRAGMENT_HASH': 14,
         'FRAGMENT': 15
     };
     
@@ -34,6 +34,19 @@ define(['./declare'], function(declare){
         @type Array
         **/
         _resultStore: [],
+        
+        /*
+         * Ensures that, when setting a value, the required delimiter is before it, and when setting a value null, the relevant delimiter is not before it.
+         * 
+         * e.g. setQuery(query). If there was no ? in the url then the url will still not have one when you set the query. It needsto be set in this case. If there was one and you set it null, it needs to be removed.
+         */
+        _ensureDelimiter: function(urlPart, delimGroupNum, delim){
+            if(!urlPart && this._resultStore[delimGroupNum]){// if we are setting port empty, ensure there is no : before the port.
+                this._resultStore[delimGroupNum] = undefined;
+            }else if(urlPart && !this._resultStore[delimGroupNum]){// if we are setting port not empty, ensure there is a : before the port.
+                this._resultStore[delimGroupNum] = delim;
+            } 
+        },
         
         /*
         @method constructor
@@ -69,8 +82,16 @@ define(['./declare'], function(declare){
         /**
         @method setScheme
         @param scheme {String}
+        @param keepSlashes {Boolean} If true, keep the // even if the scheme is set empty. e.g. //ibm.com is a valid url
         **/
-        setScheme: function(scheme){
+        setScheme: function(scheme, keepSlashes){
+            this._ensureDelimiter(scheme, URL_RE_GROUPS.SCHEME_COLON, ':');
+            if(!keepSlashes || scheme){ // If they want to keep slashes and the scheme provided is empty, do not do the ensure part.
+                this._ensureDelimiter(scheme, URL_RE_GROUPS.SCHEME_SLASHES, '//'); 
+            }else{ // they want to keep slashes and the scheme provided is empty
+                this._resultStore[URL_RE_GROUPS.SCHEME_SLASHES] = '//';
+            }
+            
             this._resultStore[URL_RE_GROUPS.SCHEME] = scheme;
         },
         
@@ -87,6 +108,7 @@ define(['./declare'], function(declare){
         @param user {String}
         **/
         setUser: function(user){
+            this._ensureDelimiter(user, URL_RE_GROUPS.USER_AT, '@');
             this._resultStore[URL_RE_GROUPS.USER] = user;
         },
         
@@ -103,6 +125,7 @@ define(['./declare'], function(declare){
         @param password {String}
         **/
         setPassword: function(password){
+            this._ensureDelimiter(password, URL_RE_GROUPS.PASSWORD_COLON, ':');
             this._resultStore[URL_RE_GROUPS.PASSWORD] = password;
         },
         
@@ -135,6 +158,7 @@ define(['./declare'], function(declare){
         @param port {Number}
         **/
         setPort: function(port){
+            this._ensureDelimiter(port, URL_RE_GROUPS.PORT_COLON, ':');
             this._resultStore[URL_RE_GROUPS.PORT] = port;
         },
         
@@ -151,6 +175,7 @@ define(['./declare'], function(declare){
         @param query {String}
         **/
         setQuery: function(query){
+            this._ensureDelimiter(query, URL_RE_GROUPS.QUERY_QUESTION, '?');
             this._resultStore[URL_RE_GROUPS.QUERY] = query;
         },
         
@@ -167,6 +192,7 @@ define(['./declare'], function(declare){
         @param fragment {String}
         **/
         setFragment: function(fragment){
+            this._ensureDelimiter(fragment, URL_RE_GROUPS.FRAGMENT_HASH, '#');
             this._resultStore[URL_RE_GROUPS.FRAGMENT] = fragment;
         },
         

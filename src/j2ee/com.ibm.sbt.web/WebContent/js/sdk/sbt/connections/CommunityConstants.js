@@ -140,17 +140,33 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
             eventUuid : "snx:eventUuid",
             eventInstUuid : "snx:eventInstUuid",
             location : "snx:location",
+            allDay : "snx:allday",
+            selfLink : "a:link[@rel='self']/@href",
+            sourceId : "a:source/a:id",
+            sourceTitle : "a:source/a:title",
+            sourceLink : "a:source/a:link[@rel='self']/@href",
+            attendLink : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/calendar/event/attend']/@href",
+            followLink : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/calendar/event/follow']/@href",
+            followed : "snx:followed",
+            attended : "snx:attended",
+            attendeesAtomUrl : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/calendar/event/attendees']/@href",
+            containerLink : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/container']/@href",
+            instStartDate : "snx:startDate",
+            instEndDate : "snx:endDate",
+            repeats : "snx:repeats",
+            parentEventId : "snx:parentEvent",
+            parentEventLink : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/calendar/event/parentevent']/@href",
             communityLink : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/container']/@href",
+            communityUuid : "snx:communityUuid",
             eventAtomInstances : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/calendar/event/instances']/@href",
             eventAtomAttendees : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/calendar/event/attend']/@href",
             eventAtomFollowers : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/calendar/event/follow']/@href",
             frequency : "snx:recurrence/@frequency",
             interval : "snx:recurrence/@interval",
             until : "snx:recurrence/snx:until",
-            allDay : "snx:recurrence/snx:allday",
+            byDay : "snx:recurrence/snx:byDay",
             startDate : "snx:recurrence/snx:startDate",
-            endDate : "snx:recurrence/snx:endDate",
-            byDay : "snx:recurrence/snx:byDay"
+            endDate : "snx:recurrence/snx:endDate"
         }),
 
         /**
@@ -254,15 +270,18 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         AtomCommunityBookmarks : "/${communities}/service/atom/community/bookmarks",
         
         /**
-         * Get a feed of a Community's events.
+         * Get a feed of a Community's Events or EventInsts. 
          * 
-         * Required url parameters: 
+         * Required url parameters for Events feed: 
          *   calendarUuid - The uuid of the community to get events from.
          *   
          *   startDate and/or endDate. At least one of these must be present. Format is any date-time that conforms to rfc3339. 
          *   startDate - Include events that end after this date.
          *   endDate - Include events that end before this date.
          *   
+         * Required url parameters for EventInsts feed:
+         *     eventInstUuid - The uuid of the EventInst, gotten from the Events feed.
+         * 
          * Optional Url parameters
          *   page - Page number, specifies the page to be returned. Default value is page 1.
          *   ps - Page size. Number of entries to return per page. Defaule value is 10, max is 100.
@@ -275,16 +294,26 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         AtomCommunityEvents : "/${communities}/calendar/atom/calendar/event",
         
         /**
-         * Get full atom event.
+         * Parameters: 
+         *   type - Mandatory parameter, must be 'attend' or 'follow', used to get and update event followers and attendees
+         *   eventUuid - The uuid of the event that you want to follow or attend.
+         *   eventInstUuid - The uuid of the event instance that you want to follow or attend.
          * 
-         * Required url parameters: 
-         *   eventInstUuid - The uuid of the event, gotten from the AtomCommunityEvents feed.
-         *   
-         * @property AtomCommunityEvent
+         * @property AtomCommunityEventAttend
          * @type String
          * @for sbt.connections.CommunityService
          */
-        AtomCommunityEvent : "/${communities}/calendar/atom/calendar/event",
+        AtomCommunityEventAttend : "/${communities}/calendar/atom/calendar/event/attendees",
+        
+        /**
+         * Parameters: 
+         *   eventInstUuid - The uuid of the event instance that you want to get the comments of.
+         * 
+         * @property AtomCommunityEventComments
+         * @type String
+         * @for sbt.connections.CommunityService
+         */
+        AtomCommunityEventComments : "/${communities}/calendar/atom/calendar/event/comment",
         
         /**
          * Obtain a full representation of the invitations as an Atom entry document.

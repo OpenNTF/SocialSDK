@@ -16,21 +16,19 @@
 package com.ibm.sbt.test.java.connections.activitystreams;
 
 import static org.junit.Assert.assertTrue;
-
+import org.junit.Ignore;
 import org.junit.Test;
-
 import com.ibm.sbt.automation.core.test.BaseAuthJavaServiceTest;
 
 /**
  * @author mkataria
- * @date Jan 10, 2013
+ * @date Jan 24, 2013
  */
-public class UpdatesFromSpecificCommunity extends BaseAuthJavaServiceTest {
+public class AllUpdates extends BaseAuthJavaServiceTest {
 
-    @Test
+    @Test @Ignore
     public void runTest() {
-        boolean result = checkNoError("Social_ActivityStreams_Updates_From_Community");
+        boolean result = checkNoError("Social_ActivityStreams_All_Updates");
         assertTrue(getNoErrorMsg(), result);
     }
-
 }

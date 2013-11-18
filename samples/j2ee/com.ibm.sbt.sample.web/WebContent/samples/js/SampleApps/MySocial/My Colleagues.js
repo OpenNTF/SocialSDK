@@ -6,7 +6,10 @@ require([ "sbt/dom", "sbt/lang", "sbt/connections/controls/profiles/ProfileGrid"
 		hidePager : true,
 		pageSize : 6
 	});
-	grid.renderer.template = dom.byId("profileRow").innerHTML;
+	
+	var domNode = dom.byId("profileRow");
+	grid.renderer.template = domNode.text || domNode.textContent;
+	
 	grid.renderer.renderTable = function(grid, el, items, data) {
 		var div = dom.create("div", {
 			"class" : "span3"
@@ -18,8 +21,8 @@ require([ "sbt/dom", "sbt/lang", "sbt/connections/controls/profiles/ProfileGrid"
 		
 		var h3 = dom.create("h3", {
 			"class" : "h3",
-			innerHTML : "<a href=''>My Network</a>"
 		}, headingDiv);
+		dom.setText(h3, "<a href=''>My Network</a>");
 
 		var ul = dom.create("ul", {
 			"class" : "network"

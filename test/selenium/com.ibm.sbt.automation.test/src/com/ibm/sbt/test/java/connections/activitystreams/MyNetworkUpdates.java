@@ -30,7 +30,7 @@ public class MyNetworkUpdates extends BaseAuthJavaServiceTest {
 
     @Test @Ignore
     public void runTest() {
-        boolean result = checkNoError("Social_ActivityStreams_MyNetwork");
+        boolean result = checkNoError("Social_ActivityStreams_My_Network");
         assertTrue(getNoErrorMsg(), result);
     }
 

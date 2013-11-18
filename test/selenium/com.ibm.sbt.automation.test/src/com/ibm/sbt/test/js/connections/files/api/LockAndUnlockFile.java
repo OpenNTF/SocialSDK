@@ -13,10 +13,10 @@ import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 public class LockAndUnlockFile extends BaseFilesTest {
 
 	static final String SNIPPET_ID_LOCK = "Social_Files_API_LockFile";
-	static final String SNIPPET_ID_UNLOCK = "Social_Files_API_UnLockFile";
+	static final String SNIPPET_ID_UNLOCK = "Social_Files_API_UnlockFile";
 
 	static final String SNIPPET_ID_LOCK_FILE = "Social_Files_API_FileLock";
-	static final String SNIPPET_ID_UNLOCK_FILE = "Social_Files_API_FileUnLock";
+	static final String SNIPPET_ID_UNLOCK_FILE = "Social_Files_API_FileUnlock";
 
 	@Before
 	public void init() {
@@ -41,7 +41,7 @@ public class LockAndUnlockFile extends BaseFilesTest {
 	}
 
 	@Test
-	public void testFileLockUnlock() {
+	public void testFileLockUnlock() {	
 		JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID_LOCK_FILE);
 		JsonJavaObject json = previewPage.getJson();
 		assertEquals("Success", json.getString("status"));

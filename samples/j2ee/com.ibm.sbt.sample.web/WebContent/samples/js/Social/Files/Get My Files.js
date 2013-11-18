@@ -7,12 +7,12 @@ require(["sbt/connections/FileService", "sbt/dom"],
 	        var td = document.createElement("td");
 	        var a = document.createElement("a");
 	        a.href = file.getDownloadUrl();
-	        a.innerHTML = file.getTitle();
+	        a.appendChild(document.createTextNode(file.getTitle()));
 	        td.appendChild(a);
 	        tr.appendChild(td);
 	        td = document.createElement("td");
 	        tr.appendChild(td);
-	        td.innerHTML = file.getFileId();
+	        td.appendChild(document.createTextNode(file.getFileId()));	       
 	    };
 
         var fileService = new FileService();        

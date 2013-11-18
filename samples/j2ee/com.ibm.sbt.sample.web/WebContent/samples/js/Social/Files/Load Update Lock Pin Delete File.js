@@ -13,7 +13,7 @@ require([ "sbt/connections/FileService", "sbt/dom" ], function(FileService, dom)
 			var file = files[0];
 			dom.byId("fileId").value = file.getFileId();
 			if (file.getLockType() == "HARD") {
-				dom.byId("lockUnlock").innerHTML = "Unlock";
+				dom.setText("lockUnlock","Unlock");
 			}
 			handleFileLoaded(file, dom);
 			handleLoggedIn(fileService, dom);
@@ -45,7 +45,7 @@ function loadFile(fileService, dom) {
 
 function lockFile(fileService, id, dom) {
 	fileService.lockFile(id).then(function(status) {
-		dom.byId("lockUnlock").innerHTML = "Unlock";
+		dom.setText("lockUnlock","Unlock");
 		displayMessage(dom, "Successfully Locked file: " + id);
 		isLocked = true;
 	}, function(error) {
@@ -55,7 +55,7 @@ function lockFile(fileService, id, dom) {
 
 function unlockFile(fileService, id, dom) {
 	fileService.unlockFile(id).then(function(status) {
-		dom.byId("lockUnlock").innerHTML = "Lock";
+		dom.setText("lockUnlock","Lock");
 		displayMessage(dom, "Successfully Unlocked file: " + id);
 		isLocked = false;
 	}, function(error) {
@@ -65,24 +65,24 @@ function unlockFile(fileService, id, dom) {
 
 function pinFile(fileService, id, dom) {
 	fileService.pinFile(id).then(function(status) {
-		dom.byId("pinUnPin").innerHTML = "UnPin";
+		dom.setText("pinUnPin",  "UnPin");
 		displayMessage(dom, "Successfully Pinned file: " + id);
 		isPinned = true;
 	}, function(error) {
 		handleError(dom, error);
-		dom.byId("pinUnPin").innerHTML = "UnPin";
+		dom.setText("pinUnPin",  "UnPin");
 		isPinned = true;
 	});
 }
 
 function unPinFile(fileService, id, dom) {
 	fileService.unpinFile(id).then(function(status) {
-		dom.byId("pinUnPin").innerHTML = "Pin";
+		dom.setText("pinUnPin",  "Pin");
 		displayMessage(dom, "Successfully removed pin from file: " + id);
 		isPinned = false;
 	}, function(error) {
 		handleError(dom, error);
-		dom.byId("pinUnPin").innerHTML = "Pin";
+		dom.setText("pinUnPin",  "Pin");
 		isPinned = false;
 	});
 }
@@ -152,7 +152,7 @@ function addOnClickHandlers(fileService, dom) {
 
 	dom.byId("download").onclick = function(evt) {
 		if (currentFile) {
-			fileService.downloadFile(currentfile.getFileId(), currentFile.getLibraryId());
+			fileService.downloadFile(currentFile.getFileId(), currentFile.getLibraryId());
 		}
 	};
 

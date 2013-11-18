@@ -30,7 +30,7 @@ public class GetTitle extends BaseJavaServiceTest {
 
     @Test
     public void runTest() {
-        boolean result = checkNoError("Social_Profiles_GetTitle");
+        boolean result = checkNoError("Social_Profiles_Get_Title");
         assertTrue(getNoErrorMsg(), result);
     }
 

@@ -23,14 +23,14 @@ import org.junit.Test;
 import com.ibm.sbt.automation.core.test.BaseAuthJavaServiceTest;
 
 /**
- * @author mkataria
+ * @author swati singh
  * @date Feb 8, 2013
  */
-public class UpdatePhoneNumber extends BaseAuthJavaServiceTest {
+public class UpdateProfilePhoto extends BaseAuthJavaServiceTest {
 
     @Test
     public void runTest() {
-        boolean result = checkNoError("Social_Profiles_Update_Phone_Number");
+        boolean result = checkNoError("Social_Profiles_Update_Profile_Photo");
         assertTrue(getNoErrorMsg(), result);
     }
 

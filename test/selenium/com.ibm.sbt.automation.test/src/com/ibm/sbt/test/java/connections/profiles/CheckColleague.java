@@ -20,17 +20,17 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import com.ibm.sbt.automation.core.test.BaseAuthJavaServiceTest;
+import com.ibm.sbt.automation.core.test.BaseJavaServiceTest;
 
 /**
- * @author mkataria
- * @date Feb 8, 2013
+ * @author swati singh
+ * @date Nov 15, 2013
  */
-public class UpdatePhoneNumber extends BaseAuthJavaServiceTest {
+public class CheckColleague extends BaseJavaServiceTest {
 
     @Test
     public void runTest() {
-        boolean result = checkNoError("Social_Profiles_Update_Phone_Number");
+        boolean result = checkNoError("Social_Profiles_Check_Colleague");
         assertTrue(getNoErrorMsg(), result);
     }
 

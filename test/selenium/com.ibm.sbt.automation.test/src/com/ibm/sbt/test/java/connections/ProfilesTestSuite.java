@@ -21,11 +21,21 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import com.ibm.sbt.automation.core.environment.TestEnvironment;
+import com.ibm.sbt.test.java.connections.profiles.CheckColleague;
+import com.ibm.sbt.test.java.connections.profiles.GetColleaguesByProfileEntity;
+import com.ibm.sbt.test.java.connections.profiles.GetColleagues;
+import com.ibm.sbt.test.java.connections.profiles.GetMyProfile;
+import com.ibm.sbt.test.java.connections.profiles.GetName;
+import com.ibm.sbt.test.java.connections.profiles.GetPeopleManaged;
+import com.ibm.sbt.test.java.connections.profiles.GetReportingChain;
 import com.ibm.sbt.test.java.connections.profiles.GetPhoneNumber;
 import com.ibm.sbt.test.java.connections.profiles.GetProfileUrl;
 import com.ibm.sbt.test.java.connections.profiles.GetPronunciationUrl;
 import com.ibm.sbt.test.java.connections.profiles.GetThumbnailUrl;
 import com.ibm.sbt.test.java.connections.profiles.GetTitle;
+import com.ibm.sbt.test.java.connections.profiles.SearchProfiles;
+import com.ibm.sbt.test.java.connections.profiles.UpdatePhoneNumber;
+import com.ibm.sbt.test.java.connections.profiles.UpdateProfilePhoto;
 
 /**
  * @author mwallace
@@ -33,7 +43,8 @@ import com.ibm.sbt.test.java.connections.profiles.GetTitle;
  * @date 6 Mar 2013
  */
 @RunWith(Suite.class)
-@SuiteClasses({ GetPhoneNumber.class, GetProfileUrl.class, GetPronunciationUrl.class,
+@SuiteClasses({ CheckColleague.class, GetColleaguesByProfileEntity.class, GetColleagues.class, GetMyProfile.class, GetPhoneNumber.class, GetName.class,
+	GetPeopleManaged.class, GetReportingChain.class, GetName.class, SearchProfiles.class, UpdatePhoneNumber.class, UpdateProfilePhoto.class, GetProfileUrl.class, GetPronunciationUrl.class,
         GetThumbnailUrl.class, GetTitle.class})
 public class ProfilesTestSuite {
     @AfterClass

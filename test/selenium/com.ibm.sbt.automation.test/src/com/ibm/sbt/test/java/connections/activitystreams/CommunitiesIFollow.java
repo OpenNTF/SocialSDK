@@ -28,7 +28,7 @@ public class CommunitiesIFollow extends BaseAuthJavaServiceTest {
 
     @Test @Ignore
     public void runTest() {
-        boolean result = checkNoError("Social_ActivityStreams_CommunitiesIFollow");
+        boolean result = checkNoError("Social_ActivityStreams_Communities_I_Follow");
         assertTrue(getNoErrorMsg(), result);
     }
 }

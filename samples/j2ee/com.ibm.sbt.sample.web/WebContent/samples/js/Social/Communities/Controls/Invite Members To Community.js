@@ -30,7 +30,7 @@ function(config, CommunityService, dom, stringUtil, SearchBox) {
 		}
 		// Component for displaying search results
 		var resultDiv = dom.byId("results");
-		resultDiv.innerHTML = "";
+		dom.setText(resultDiv, "");
 		
 		//Create a table to display results
 		var table = document.createElement("table");
@@ -39,14 +39,14 @@ function(config, CommunityService, dom, stringUtil, SearchBox) {
 				var title = event.results[i].getTitle();
 				var row = document.createElement("tr");
 				var data = document.createElement("td");
-				row.innerHTML = title;
+				dom.setText(row, title);
 				row.appendChild(data);
 				table.appendChild(row);
 			}
 		} else {
 			var row = document.createElement("tr");
 			var data = document.createElement("td");
-			row.innerHTML = "Your search returned no results";
+			dom.setText(row, "Your search returned no results");
 			row.appendChild(data);
 			table.appendChild(row);
 		}
@@ -82,14 +82,19 @@ function(config, CommunityService, dom, stringUtil, SearchBox) {
         	if (searchBox.members[i].id == null) {
         		continue;
         	}
-        	communityService.createInvite(communityId, searchBox.members[i].id);
-            invitationString += searchBox.members[i].name + ", ";
+        	var invite = communityService.newInvite();
+            invite.setCommunityUuid(communityId);
+            invite.setUserid(searchBox.members[i].id);
+            
+        	communityService.createInvite(invite);
+        	
+        	invitationString += searchBox.members[i].name + ", ";
         }
         
         invitationString = invitationString.substring(0, invitationString.length - 3);
         
         // Display success message and hide input form
-        dom.byId("success").innerHTML = "Successfully invited " + invitationString + " to your community";
+        dom.setText("success", "Successfully invited " + invitationString + " to your community");
         dom.byId("invitationForm").style.display = "none";
     }
 });

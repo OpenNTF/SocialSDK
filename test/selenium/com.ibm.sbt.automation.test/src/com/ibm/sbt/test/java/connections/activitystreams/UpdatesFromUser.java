@@ -25,11 +25,11 @@ import com.ibm.sbt.automation.core.test.BaseAuthJavaServiceTest;
  * @author mkataria
  * @date Jan 10, 2013
  */
-public class UpdatesFromSpecificCommunity extends BaseAuthJavaServiceTest {
+public class UpdatesFromUser extends BaseAuthJavaServiceTest {
 
     @Test
     public void runTest() {
-        boolean result = checkNoError("Social_ActivityStreams_Updates_From_Community");
+        boolean result = checkNoError("Social_ActivityStreams_Updates_From_User");
         assertTrue(getNoErrorMsg(), result);
     }
 

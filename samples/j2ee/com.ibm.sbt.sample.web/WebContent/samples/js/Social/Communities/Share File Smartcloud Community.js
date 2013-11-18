@@ -151,7 +151,6 @@ function uploadFile(fileService, dom) {
         msg.style.display = "block";
         
 		// Share file with SmartCloud community
-        alert(selectedSmartCloudCommunityUuid);
         fileService.shareFileWithCommunities(file.getFileId(), [selectedSmartCloudCommunityUuid]).then(function(data) {
         	 dom.byId("loading").style.visibility = "hidden";
              
@@ -172,10 +171,7 @@ function uploadFile(fileService, dom) {
        
         
 	}, function(error) {
-		// TODO remove alert
-		alert(error);
-//				handleError(dom, error);
-//				dom.byId("loading").style.visibility = "hidden";
+		console.log(error);
 	});
 }
 

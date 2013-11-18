@@ -218,7 +218,6 @@ public class FlightsServlet extends HttpServlet {
     }
     
     private void getUsersForFlight(String flightId, HttpServletRequest req, HttpServletResponse resp) {
-        final String method = "getUsers";
         writeJsonArrayResponse(MyFlights.getInstance().getUsers(flightId), resp);
     }
     

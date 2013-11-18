@@ -2,8 +2,8 @@
  * Widget for an individual flight row.
  */
 define(['require', 'dojo/_base/declare', 'dojo/query', 'acme/widgets/FlightRowWidget', 'acme/flights', 'acme/templateUtils',
-        'acmesocial/login', 'acmesocial/email', 'acmesocial/activitystream', 'sbt/connections/controls/profiles/ColleagueGrid' ],
-        function(require, declare, query, FlightRowWidget, flights, templateUtils, login, email, activitystream, ColleagueGrid) {
+        'acmesocial/login', 'acmesocial/email', 'acmesocial/activitystream'],
+        function(require, declare, query, FlightRowWidget, flights, templateUtils, login, email, activitystream) {
             return declare('FlightRowWidget', [ FlightRowWidget ], {
                 
                 postCreate : function() {
@@ -12,28 +12,38 @@ define(['require', 'dojo/_base/declare', 'dojo/query', 'acme/widgets/FlightRowWi
                         self.bookFlight.call(self, e);
                     });
                    
-                    var gridDiv = query('div', this.domNode);
-                    if (gridDiv && gridDiv.length > 0) {
-                        var self = this;
-                        var successCallback = function(users) {
-                            //if (!users || users.length == 0) {
-                            //    return;
-                            //}
-                            try {
-                            var grid = new ColleagueGrid({
-                                type: "dynamic",
-                                hideViewAll: true,
-                                rendererArgs: { template: templateUtils.getTemplateString("#flightColleagues") },
-                                email: login.getUserEmail(),
-                                targetEmails: users
-                            });
-                            gridDiv[0].appendChild(grid.domNode);
-                            } catch (error) {
-                                var msg = error.message;
+                    var url = require.toUrl('acmesocial');
+                    //We cannot support Dijits across domains yet due to the use of the Dojo text plugin
+                    //making XHR calls.
+                    //When the module path is on the same domain as the page than require.toUrl
+                    //will return something like /path/to/modules.  When it is on a different domain
+                    //it will return something like http://domain/path/to/module.
+                    if(url.indexOf('/') === 0 && url.charAt(1) !== '/'){
+                    	require(['sbt/connections/controls/profiles/ColleagueGrid'], function(ColleagueGrid) {
+                    		var gridDiv = query('div', self.domNode);
+                            if (gridDiv && gridDiv.length > 0) {
+                                var successCallback = function(users) {
+                                    //if (!users || users.length == 0) {
+                                    //    return;
+                                    //}
+                                    try {
+                                    var grid = new ColleagueGrid({
+                                        type: "dynamic",
+                                        hideViewAll: true,
+                                        rendererArgs: { template: templateUtils.getTemplateString("#flightColleagues") },
+                                        email: login.getUserEmail(),
+                                        targetEmails: users
+                                    });
+                                    gridDiv[0].appendChild(grid.domNode);
+                                    } catch (error) {
+                                        var msg = error.message;
+                                    }
+                                };
+                                flights.getUsersForFlight({flightId: self.Flight, loadCallback: successCallback});
                             }
-                        };
-                        flights.getUsersForFlight({flightId: this.Flight, loadCallback: successCallback});
+                    	});
                     }
+                    
                 },
                 
                 /**

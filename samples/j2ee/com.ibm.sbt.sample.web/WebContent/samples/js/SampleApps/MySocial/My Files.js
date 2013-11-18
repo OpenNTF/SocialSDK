@@ -5,7 +5,9 @@ require(["sbt/dom", "sbt/connections/controls/files/FileGrid"], function(dom, Fi
 		hideSorter : true,
 		hidePager : true
 	});
-	grid.renderer.template = dom.byId("fileRow").innerHTML;
+	
+	var domNode = dom.byId("fileRow");
+	grid.renderer.template = domNode.text || domNode.textContent;
 
 	grid.renderer.renderTable = function(grid, el, items, data) {
 		var div = dom.create("div", {
@@ -18,8 +20,8 @@ require(["sbt/dom", "sbt/connections/controls/files/FileGrid"], function(dom, Fi
 	
 		var h3 = dom.create("h3", {
 			"class" : "h3",
-			innerHTML : '<a href="">My Files</a>'
 		}, headingDiv);
+		dom.setText(h3, '<a href="">My Files</a>');
 
 		var ul = dom.create("ul", {
 			style : "list-style:none outside none;margin: 0;"

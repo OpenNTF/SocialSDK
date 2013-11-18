@@ -30,8 +30,7 @@ public class GetThumbnailUrl extends BaseJavaServiceTest {
 
     @Test
     public void runTest() {
-        String expected = getProperty("sample.thumbnailUrl1");
-        boolean result = checkExpected("Social_Profiles_GetThumbnailUrl", expected);
+        boolean result = checkNoError("Social_Profiles_Get_Thumbnail_Url");
         assertTrue(getExpectedErrorMsg(), result);
     }
 

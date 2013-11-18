@@ -24,7 +24,10 @@ import org.junit.runners.Suite.SuiteClasses;
  * @author priand
  */
 @RunWith(Suite.class)
-@SuiteClasses({ CheckJavaScriptLibrary.class })
+@SuiteClasses({ CheckJavaScriptLibrary.class,
+	Logging.class,
+	XmlParser.class,
+	XpathEngine.class})
 public class UtilitiesTestSuite {
     @AfterClass
     public static void cleanup() {

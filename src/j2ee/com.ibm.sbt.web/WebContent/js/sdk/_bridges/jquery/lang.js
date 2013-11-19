@@ -144,6 +144,15 @@ define(["has", "./jquery"],function(has) {
         },
         trim: function(str) {
             return jQuery.trim(str);
+        },
+        getObject: function(name, create, context) {
+        	var parts = name.split(".");
+        	var p, i = 0;
+        	context = context || window;
+			while(context && (p = parts[i++])) {
+				context = (p in context ? context[p] : (create ? context[p] = {} : undefined));
+			}
+			return context;
         }
 	};
 });

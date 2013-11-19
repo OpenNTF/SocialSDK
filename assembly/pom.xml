@@ -1,251 +1,307 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.ibm.sbt</groupId>
-  <artifactId>sbt.build</artifactId>
-  <version>1.0.0</version>
-  <packaging>pom</packaging>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+  <artifactId>distribution</artifactId>
+	<packaging>pom</packaging>
 
-  <properties>
-    <maven.build.timestamp.format>yyyyMMdd-HHmm</maven.build.timestamp.format>
-    <project.build.sourceEncoding>Cp1252</project.build.sourceEncoding>
-    <tycho-version>0.16.0</tycho-version>
-    <code.source>1.6</code.source>
-    <code.target>1.6</code.target>
-    <forceContextQualifier>${buildLabel}</forceContextQualifier>
-    <unqualifiedVersion>${buildLabel}</unqualifiedVersion>
-    <workingDir>${user.dir}/../../</workingDir>
-    <build.target>${workingDir}/target</build.target>
-    <build.output>${workingDir}/kit</build.output>
-    
-  </properties>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>sonatype-public-repository</id>
+			<url>https://oss.sonatype.org/content/groups/public</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</pluginRepository>
+	</pluginRepositories>
 
-  <repositories>
-    <repository>
-      <id>notes853GSA</id>
-      <layout>p2</layout>
-      <url>http://dubgsa.ibm.com/gsa/dubgsa/home/m/w/mwdu1054/web/public/repository/p2</url>
-    </repository>
-   </repositories>
+	<parent>
+		<groupId>com.ibm.sbt</groupId>
+		<artifactId>com.ibm.sbt</artifactId>
+		<version>2.0.0-SNAPSHOT</version>
+	</parent>
 
-  <modules>
-    <module>plugins</module>
-    <module>prereq</module>
-    <module>sdk</module>
-    <module>domino</module>
-    <module>js</module>
-    <module>sample</module>
-    <module>reporting</module>
-    <module>test</module>
-    <module>distribution</module>
-  </modules>
-
-  <build>
-    <sourceDirectory>src</sourceDirectory>
-    <scriptSourceDirectory>js</scriptSourceDirectory>
-    <testSourceDirectory>test</testSourceDirectory>
-    <resources>
-      <resource>
-        <directory>src</directory>
-      </resource>
-    </resources>
-    <testResources>
-      <testResource>
-        <directory>test</directory>
-      </testResource>
-    </testResources>
-    <plugins>
-	  <plugin>
+	<build>
+	<plugins>
+		<plugin>
+			<groupId>com.googlecode.maven-download-plugin</groupId>
+			<artifactId>maven-download-plugin</artifactId>
+			<version>1.0.0</version>
+			<executions>
+				<execution>
+					<id>download-tomcat-7</id>
+					<phase>generate-resources</phase>
+					<goals>
+						<goal>wget</goal>
+					</goals>
+					<configuration>
+						<url>http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.30/bin/apache-tomcat-7.0.30.zip</url>
+						<unpack>true</unpack>
+						<outputDirectory>${project.build.directory}/tomcat/unzip</outputDirectory>
+						<md5>3a1fd1825202631e6c43461fa018c4f6</md5>
+					</configuration>
+				</execution>
+			</executions>
+		</plugin>
+	      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <version>2.4</version>
-        <configuration>
-          <excludes>
-            <exclude>**/*.java</exclude>
-          </excludes>
-        </configuration>
-      </plugin>
-	  <plugin>
-        <!-- set source code level to 1.6 -->
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>2.3.2</version>
-        <configuration>
-          <source>${code.source}</source>
-          <target>${code.target}</target>
-        </configuration>
-      </plugin>
-      <plugin>
-        <!-- configure default web content for war packaging -->
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-war-plugin</artifactId>
-        <version>2.2</version>
-        <configuration>
-          <webXml>WebContent/WEB-INF/web.xml</webXml>  
-          <webResources>
-            <resource>
-              <directory>WebContent</directory>
-              <includes>
-                <include>**/*.jsp</include>
-                <include>**/*.jspf</include>
-                <include>**/*.js</include>
-                <include>**/*.css</include>
-                <include>**/*.properties</include>
-                <include>**/*.html</include>
-   				<include>**/*.xml</include>
-   				<include>**/*.gif</include>
-   				<include>**/*.jpeg</include>
-   				<include>**/*.jpg</include>
-   				<include>**/*.png</include>
-              </includes>
-            </resource>
-          </webResources> 
-          <outputFileNameMapping>@{artifactId}@.@{extension}@</outputFileNameMapping>       
-        </configuration>
-      </plugin>
-      <plugin>
-        <!-- enable tycho build extension -->
-        <groupId>org.eclipse.tycho</groupId>
-        <artifactId>tycho-maven-plugin</artifactId>
-        <version>${tycho-version}</version>
-        <extensions>true</extensions>
-      </plugin>
-      <plugin>
-        <!-- enable tycho packaging extension -->
-        <groupId>org.eclipse.tycho</groupId>
-        <artifactId>tycho-packaging-plugin</artifactId>
-        <version>${tycho-version}</version>
-      </plugin>
-      <plugin>
-        <!-- set source code level to 1.6 -->
-        <groupId>org.eclipse.tycho</groupId>
-        <artifactId>tycho-compiler-plugin</artifactId>
-        <version>${tycho-version}</version>
-        <configuration>
-          <source>${code.source}</source>
-          <target>${code.target}</target>
-          <encoding>UTF-8</encoding>
-        </configuration>
-      </plugin>    
-      <plugin>
-        <!-- target platform configuration -->	  
-        <groupId>org.eclipse.tycho</groupId>
-        <artifactId>target-platform-configuration</artifactId>
-        <version>${tycho-version}</version>
-        <configuration>
-          <filters>
-            <!-- work around Equinox bug 348045 -->
-            <filter>
-             <type>p2-installable-unit</type>
-             <id>org.eclipse.equinox.servletbridge.extensionbundle</id>
-             <removeAll />
-		    </filter>
-		  </filters>          
-		  <environments>
-            <environment>
-              <os>linux</os>
-              <ws>gtk</ws>
-              <arch>x86</arch>
-            </environment>
-            <environment>
-              <os>linux</os>
-              <ws>gtk</ws>
-              <arch>x86_64</arch>
-            </environment>
-            <environment>
-              <os>win32</os>
-              <ws>win32</ws>
-              <arch>x86</arch>
-            </environment>
-            <environment>
-              <os>win32</os>
-              <ws>win32</ws>
-              <arch>x86_64</arch>
-            </environment>
-            <environment>
-              <os>macosx</os>
-              <ws>cocoa</ws>
-              <arch>x86_64</arch>
-            </environment>
-          </environments>
-        </configuration>
-      </plugin>
-      <!-- tycho test setup -->
-      <plugin>
-        <groupId>org.eclipse.tycho</groupId>
-        <artifactId>tycho-surefire-plugin</artifactId>
-        <version>${tycho-version}</version>
-      </plugin>
-        <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-report-plugin</artifactId>
-        <version>2.13</version>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>2.8</version>
         <executions>
           <execution>
-            <goals><goal>report-only</goal></goals>
-            <phase>post-integration-test</phase>
-          </execution>
-        </executions>
-        <configuration>
-        
-        </configuration>
-      </plugin>
-			<plugin>
-        <!-- javadoc configuration -->	  
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <version>2.9</version>
-        <executions>
-          <execution>
-            <phase>prepare-package</phase>
+            <id>copy</id>
+            <phase>package</phase>
             <goals>
-              <goal>aggregate</goal>
+              <goal>copy</goal>
             </goals>
-            <inherited>false</inherited>
+            <configuration>
+              <artifactItems>
+           		<artifactItem>
+							<groupId>commons-logging</groupId>
+							<artifactId>commons-logging</artifactId>
+							<type>jar</type>
+							<overWrite>false</overWrite>
+							<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/lib</outputDirectory>
+						</artifactItem>
+             	<artifactItem>
+						<groupId>com.ibm.sbt</groupId>
+						<artifactId>sbt.dojo180</artifactId>
+						<version>2.0.0-SNAPSHOT</version>
+						<type>war</type>
+						<overWrite>true</overWrite>
+						<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps</outputDirectory>
+						<destFileName>sbt.dojo180.war</destFileName>
+					</artifactItem>
+					<artifactItem>
+						<groupId>com.ibm.sbt</groupId>
+						<artifactId>sbt.jquery182</artifactId>
+						<version>2.0.0-SNAPSHOT</version>
+						<type>war</type>
+						<overWrite>true</overWrite>
+						<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps</outputDirectory>
+						<destFileName>sbt.jquery182.war</destFileName>
+					</artifactItem>
+					<artifactItem>
+						<groupId>com.ibm.sbt</groupId>
+						<artifactId>sbt.bootstrap211</artifactId>
+						<version>2.0.0-SNAPSHOT</version>
+						<type>war</type>
+						<overWrite>true</overWrite>
+						<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps</outputDirectory>
+						<destFileName>sbt.bootstrap211.war</destFileName>
+					</artifactItem>
+					<artifactItem>
+						<groupId>com.ibm.sbt</groupId>
+						<artifactId>sbt.sample.web</artifactId>
+						<version>2.0.0-SNAPSHOT</version>
+						<type>war</type>
+						<overWrite>true</overWrite>
+						<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps</outputDirectory>
+						<destFileName>sbt.sample.web.war</destFileName>
+					</artifactItem>
+					
+					
+					
+						<artifactItem>
+						<groupId>com.ibm.sbt</groupId>
+						<artifactId>com.ibm.sbt.landing</artifactId>
+						<version>2.0.0-SNAPSHOT</version>
+						<type>war</type>
+						<overWrite>true</overWrite>
+						<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps</outputDirectory>
+						<destFileName>ROOT.war</destFileName>
+					</artifactItem>
+
+					<artifactItem>
+						<groupId>com.ibm.sbt</groupId>
+						<artifactId>acme.social.sample.dataapp</artifactId>
+						<version>2.0.0-SNAPSHOT</version>
+						<type>war</type>
+						<overWrite>true</overWrite>
+						<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps</outputDirectory>
+						<destFileName>acme.social.sample.dataapp.war</destFileName>
+					</artifactItem>
+					<artifactItem>
+						<groupId>com.ibm.sbt</groupId>
+						<artifactId>acme.social.sample.webapp</artifactId>
+						<version>2.0.0-SNAPSHOT</version>
+						<type>war</type>
+						<overWrite>true</overWrite>
+						<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps</outputDirectory>
+						<destFileName>acme.social.sample.webapp.war</destFileName>
+					</artifactItem>
+					<artifactItem>
+						<groupId>com.ibm.sbt</groupId>
+						<artifactId>helloworld.webapp</artifactId>
+						<version>2.0.0-SNAPSHOT</version>
+						<type>war</type>
+						<overWrite>true</overWrite>
+						<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps</outputDirectory>
+						<destFileName>helloworld.webapp.war</destFileName>
+					</artifactItem>
+					
+					
+					
+					
+				
+
+					<artifactItem>
+						<groupId>com.ibm.sbt</groupId>
+						<artifactId>smartcloud.webapp</artifactId>
+						<version>2.0.0-SNAPSHOT</version>
+						<type>war</type>
+						<overWrite>true</overWrite>
+						<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps</outputDirectory>
+						<destFileName>smartcloud.webapp.war</destFileName>
+					</artifactItem>
+					<artifactItem>
+						<groupId>com.ibm.sbt</groupId>
+						<artifactId>grantaccess.webapp</artifactId>
+						<version>2.0.0-SNAPSHOT</version>
+						<type>war</type>
+						<overWrite>true</overWrite>
+						<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps</outputDirectory>
+						<destFileName>grantaccess.webapp.war</destFileName>
+					</artifactItem>
+					<artifactItem>
+						<groupId>com.ibm.sbt</groupId>
+						<artifactId>acme.sample.webapp</artifactId>
+						<version>2.0.0-SNAPSHOT</version>
+						<type>war</type>
+						<overWrite>true</overWrite>
+						<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps</outputDirectory>
+						<destFileName>acme.sample.webapp.war</destFileName>
+					</artifactItem>
+					
+             
+             
+             
+             
+						<artifactItem>
+								<groupId>com.ibm.sbt</groupId>
+								<artifactId>com.ibm.sbt.web</artifactId>
+								<version>2.0.0-SNAPSHOT</version>
+								<type>war</type>
+								<overWrite>true</overWrite>
+								<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps</outputDirectory>
+								<destFileName>sbt.war</destFileName>
+							</artifactItem>
+					<artifactItem>
+						<groupId>com.ibm.sbt</groupId>
+						<artifactId>com.ibm.commons</artifactId>
+						<version>2.0.0-SNAPSHOT</version>
+						<type>jar</type>
+						<overWrite>true</overWrite>
+						<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/lib</outputDirectory>
+					</artifactItem>
+					<artifactItem>
+						<groupId>com.ibm.sbt</groupId>
+						<artifactId>com.ibm.commons.runtime</artifactId>
+						<version>2.0.0-SNAPSHOT</version>
+						<type>jar</type>
+						<overWrite>true</overWrite>
+						<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/lib</outputDirectory>
+					</artifactItem>
+					<artifactItem>
+						<groupId>com.ibm.sbt</groupId>
+						<artifactId>com.ibm.commons.xml</artifactId>
+						<version>2.0.0-SNAPSHOT</version>
+						<type>jar</type>
+						<overWrite>true</overWrite>
+						<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/lib</outputDirectory>
+					</artifactItem>
+	
+             
+             
+             
+             
+             
+             
+              </artifactItems>
+              <outputDirectory>${project.build.directory}/wars</outputDirectory>
+              <overWriteReleases>false</overWriteReleases>
+              <overWriteSnapshots>true</overWriteSnapshots>
+            </configuration>
           </execution>
         </executions>
-        <configuration>
-          <aggregate>true</aggregate>
-          <failOnError>false</failOnError>
-  		    <excludePackageNames>com.sun.*:com.ibm.commons.*:com.ibm.sbt.core.*:com.ibm.sbt.plugin.*:com.ibm.sbt.jslibrray.*:com.ibm.sbt.proxy.*:com.ibm.sbt.security.*:*.util.*:com.ibm.sbt.portlet.*:com.ibm.sbt.playground.*:demo.*:acme.*</excludePackageNames>
-          <destDir>javadoc</destDir>		  
-        </configuration>	    
-	    </plugin>
-    </plugins>
-    <!--
-    <pluginManagement>
-      <plugins>-->
-        <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
-        <!--<plugin>
-          <groupId>org.eclipse.m2e</groupId>
-          <artifactId>lifecycle-mapping</artifactId>
-          <version>1.0.0</version>
-          <configuration>
-            <lifecycleMappingMetadata>
-              <pluginExecutions>
-                <pluginExecution>
-                  <pluginExecutionFilter>
-                    <groupId>
-                      org.apache.maven.plugins
-                    </groupId>
-                    <artifactId>
-                      maven-ear-plugin
-                    </artifactId>
-                    <versionRange>[2.8,)</versionRange>
-                    <goals>
-                      <goal>
-                        generate-application-xml
-                      </goal>
-                    </goals>
-                  </pluginExecutionFilter>
-                  <action>
-                    <ignore></ignore>
-                  </action>
-                </pluginExecution>
-              </pluginExecutions>
-            </lifecycleMappingMetadata>
-          </configuration>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-  -->
-  </build>
+      </plugin>
+		<plugin>
+			<artifactId>maven-antrun-plugin</artifactId>
+			<version>1.7</version>
+			<executions>
+				<execution>
+					<phase>package</phase>
+					<configuration>
+						<target>
+							<!-- Package Tomcat -->
+							<delete
+								dir="${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps/ROOT" />
+
+
+
+							<copy
+								todir="${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/conf"
+								file="./../samples/config/sbt.properties" />
+
+
+							<copy
+								file="./../libraries/com.ibm.sbt.libs.java/lib/com.ibm.sbt.javamail-1.4.5.jar"
+								todir="${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/lib" />
+
+
+							<copy
+								todir="${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/conf">
+								<fileset dir="platform/tomcat">
+									<include name="keystore" />
+									<include name="context.xml" />
+									<include name="tomcat-users.xml" />
+									<include name="server.xml" />
+								</fileset>
+							</copy>
+
+							<zip basedir="${project.build.directory}/tomcat/unzip"
+								destfile="${project.build.directory}/tomcat/apache-tomcat-7.0.30-sbt.zip"
+								compress="true" />
+							<delete dir="${project.build.directory}/tomcat/unzip" />
+
+						</target>
+					</configuration>
+					<goals>
+						<goal>run</goal>
+					</goals>
+				</execution>
+			</executions>
+		</plugin>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-assembly-plugin</artifactId>
+			<version>2.3</version>
+			<executions>
+				<execution>
+					<phase>package</phase>
+					<goals>
+						<goal>single</goal>
+					</goals>
+					<configuration>
+						<descriptor>assembly.xml</descriptor>
+						<finalName>sbtsdk-${project.version}</finalName>
+						<appendAssemblyId>false</appendAssemblyId>
+						<outputDirectory>${project.build.directory}</outputDirectory>
+					</configuration>
+				</execution>
+			</executions>
+		</plugin>
+	</plugins>
+	
+</build>
+<dependencies>
+	<dependency>
+		<groupId>commons-logging</groupId>
+		<artifactId>commons-logging</artifactId>
+		<version>1.1.1</version>
+	</dependency>
+</dependencies>
+
 </project>

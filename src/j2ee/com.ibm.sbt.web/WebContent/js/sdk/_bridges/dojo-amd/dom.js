@@ -33,6 +33,9 @@ define(['dojo/dom','dojo/_base/window', 'dojo/dom-construct', 'dojo/dom-class'],
         destroy: function(node) {
             return domConstruct.destroy(node);
         },
+        toDom: function(template, parent) {
+            return domConstruct.toDom(template, parent);
+        },
 		removeAll: function(node) {
 			node = this.byId(node);
 			if(node) {
@@ -58,6 +61,12 @@ define(['dojo/dom','dojo/_base/window', 'dojo/dom-construct', 'dojo/dom-class'],
 				}
 			}
             return node;
-		}	
+		},
+		addClass: function(node, className) {
+			return domClass.add(node, className);
+		},
+		removeClass: function(node, className) {
+			return domClass.remove(node, className);
+		}
 	};
 });

@@ -28,26 +28,18 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpRequestBase;
-import org.apache.http.message.BasicHttpResponse;
 
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.StreamUtil;
 import com.ibm.designer.runtime.util.MIME;
-import com.ibm.jscript.std.ObjectObject;
-import com.ibm.sbt.service.core.handlers.FileHandler;
 import com.ibm.sbt.services.client.ClientService;
-import com.ibm.sbt.services.client.ClientService.Args;
 import com.ibm.sbt.services.client.ClientService.HandlerInputStream;
 import com.ibm.sbt.services.client.ClientService.HandlerJson;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.endpoints.AbstractEndpoint;
+import com.ibm.sbt.services.endpoints.DropBoxOAuthEndpoint;
 import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
 import com.ibm.sbt.util.DataNavigator;
@@ -58,7 +50,6 @@ import com.ibm.xsp.extlib.sbt.files.FileServiceData;
 import com.ibm.xsp.extlib.sbt.files.FileServiceData.FileServiceAccessor;
 import com.ibm.xsp.extlib.sbt.model.RestDataBlockAccessor;
 import com.ibm.xsp.extlib.sbt.services.client.DropboxService;
-import com.ibm.xsp.extlib.sbt.services.client.endpoints.DropboxEndpoint;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.ibm.xsp.util.URLEncoding;
 
@@ -75,6 +66,7 @@ public class DropboxFiles extends AbstractType {
     public static final String VERSION_0 = "0";
     public static final String VERSION_1 = "1";
     private String latestAPI = VERSION_1;
+    public static final String DEFAULT_API_VERSION = "1";
 
     /**
      * Returns a url that allows the caller to download a file
@@ -323,11 +315,12 @@ public class DropboxFiles extends AbstractType {
     }
     
     public String getDropBoxApiVersion(Endpoint ep){
-        if(StringUtil.equals(DropboxEndpoint.DEFAULT_API_VERSION, ((DropboxEndpoint)ep).getApiVersion())){
-            return latestAPI;
-        }
-        return ((DropboxEndpoint)ep).getApiVersion();
-        
+//        if(StringUtil.equals(DEFAULT_API_VERSION, ((DropBoxOAuthEndpoint)ep).getApiVersion())){
+//            return latestAPI;
+//        }
+//        return ((DropBoxOAuthEndpoint)ep).getApiVersion();
+    	//return default as 1 for now as TokenStore does not support version numnber
+        return DEFAULT_API_VERSION;
     }
 
     /* (non-Javadoc)

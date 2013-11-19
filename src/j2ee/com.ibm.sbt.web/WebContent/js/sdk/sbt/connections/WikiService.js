@@ -73,14 +73,6 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         	if (this.getPermissions()) {
                 postData += stringUtil.transform(PermissionsTmpl, this, transformer, this);
         	}
-        	if (this.getTags()) {
-        		var tags = this.getTags();
-                for (var tag in tags) {
-                	postData += stringUtil.transform(CategoryTmpl, {
-                        "tag" : tags[tag]
-                    });
-                }
-        	}
             return stringUtil.trim(postData);
         },
         

@@ -34,6 +34,9 @@ define([],function() {
         destroy: function(node) {
             return dojo.destroy(node);
         },
+        toDom: function(frag, doc) {
+            return dojo._toDom(frag, doc);
+        },
 		removeAll: function(id) {
 			var node = this.byId(id);
 			if(node) {
@@ -64,6 +67,12 @@ define([],function() {
 				}
 			}
 			return node;
-		}	
+		},
+		addClass: function(node, className) {
+			return dojo.addClass(node, className);
+		},
+		removeClass: function(node, className) {
+			return dojo.removeClass(node, className);
+		}
 	};
 });

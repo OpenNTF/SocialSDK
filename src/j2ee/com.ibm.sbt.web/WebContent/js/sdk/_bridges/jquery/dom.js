@@ -39,6 +39,9 @@ define(['./jquery'], function() {
 		destroy: function(node) {
 		    jQuery(node).remove();
 		},
+        toDom: function(frag, doc) {
+            return jQuery.parseHTML(frag, doc);
+        },
         removeAll: function(id) {
             var node = this.byId(id);
             if (node) {
@@ -66,6 +69,12 @@ define(['./jquery'], function() {
                 }
             }
             return node;
-        }   
+        },
+		addClass: function(node, className) {
+			return jQuery(node).addClass(className);
+		},
+		removeClass: function(node, className) {
+			return jQuery(node).removeClass(className);
+		}  
 	};
 });

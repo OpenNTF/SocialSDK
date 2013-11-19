@@ -17,8 +17,7 @@
 /**
  * 
  */
-define([ "../_bridge/declare",
-         "dijit/_Widget", "dijit/_Templated"], 
+define([ "../_bridge/declare", "dijit/_Widget", "dijit/_Templated"], 
         function(declare, _Widget, _Templated) {
 
     /**

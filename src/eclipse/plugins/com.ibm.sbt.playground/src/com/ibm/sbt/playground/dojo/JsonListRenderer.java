@@ -30,19 +30,9 @@ import com.ibm.sbt.playground.assets.RootNode;
 /**
  * Helper class that generates a JSON data set out of the snippet list, to populate a Dojo tree.
  */
-public class JsonTreeRenderer {
-	
-	private boolean flat;	// Flat generation, for FT search results
+public class JsonListRenderer {
 
-	public JsonTreeRenderer() {
-	}
-	
-	public boolean isFlat() {
-		return flat;
-	}
-
-	public void setFlat(boolean flat) {
-		this.flat = flat;
+	public JsonListRenderer() {
 	}
 
 	//
@@ -126,62 +116,51 @@ public class JsonTreeRenderer {
 	}
 
 	protected void generateNodeHier(JsonWriter jw, Node node) throws IOException {
+		jw.startArrayItem();
 			generateNodeEntryHier(jw, node);
+		jw.endArrayItem();
 	}
 	
 	protected void generateNodeEntryHier(JsonWriter jw, Node node) throws IOException {
-		boolean generate = !isFlat() || node instanceof AssetNode || node instanceof RootNode;
-		if(generate) {
-			jw.startArrayItem();
-			jw.startObject();
-				jw.startProperty("id");
-					String id = (node instanceof RootNode) ? "_root" : node.getUnid();
-					jw.outStringLiteral(id);
+		jw.startObject();
+			jw.startProperty("id");
+				String id = (node instanceof RootNode) ? "_root" : node.getUnid();
+				jw.outStringLiteral(id);
+			jw.endProperty();
+			jw.startProperty("name");
+				String name = (node instanceof RootNode) ? "_root" : node.getName();
+				jw.outStringLiteral(name);
+			jw.endProperty();
+			if(node instanceof AssetNode) {
+				jw.startProperty("url");
+					jw.outStringLiteral(((AssetNode)node).getUnid());
 				jw.endProperty();
-				jw.startProperty("name");
-					String name = (node instanceof RootNode) ? "_root" : node.getName();
-					jw.outStringLiteral(name);
+			}
+			if(StringUtil.isNotEmpty(node.getTooltip())) {
+				jw.startProperty("tooltip");
+					jw.outStringLiteral(node.getTooltip());
 				jw.endProperty();
+			}
+			if(StringUtil.isNotEmpty(node.getJspUrl())) {
 				if(node instanceof AssetNode) {
-					jw.startProperty("url");
-						jw.outStringLiteral(((AssetNode)node).getUnid());
+					jw.startProperty("jspUrl");
+						jw.outStringLiteral((node).getJspUrl());
 					jw.endProperty();
 				}
-				if(StringUtil.isNotEmpty(node.getTooltip())) {
-					jw.startProperty("tooltip");
-						jw.outStringLiteral(node.getTooltip());
-					jw.endProperty();
-				}
-				if(StringUtil.isNotEmpty(node.getJspUrl())) {
-					if(node instanceof AssetNode) {
-						jw.startProperty("jspUrl");
-							jw.outStringLiteral((node).getJspUrl());
-						jw.endProperty();
-					}
-				}
-				if(node instanceof CategoryNode) {
-					CategoryNode cn = (CategoryNode)node;
-					List<Node> children = cn.getChildren();
-					if(!children.isEmpty()) {
-						jw.startProperty("children");
-							jw.startArray();
-								for(Node c: children) {
-									generateNodeHier(jw, c);
-								}
-							jw.endArray();
-						jw.endProperty();
-					}
-				}
-			jw.endArrayItem();
-			jw.endObject();
-		} else {
+			}
 			if(node instanceof CategoryNode) {
 				CategoryNode cn = (CategoryNode)node;
 				List<Node> children = cn.getChildren();
-				for(Node c: children) {
-					generateNodeHier(jw, c);
+				if(!children.isEmpty()) {
+					jw.startProperty("children");
+						jw.startArray();
+							for(Node c: children) {
+								generateNodeHier(jw, c);
+							}
+						jw.endArray();
+					jw.endProperty();
 				}
 			}
-		}
+		jw.endObject();
 	}	
 }

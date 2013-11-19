@@ -46,31 +46,27 @@ function docUrl(s) {
 	return null;
 }
 
-function showDocumentation(show) {
-	if(show) {
-		var a = extractJavaImports(pageGlobal.jspEditor.getValue());
-		if(a.length) {
-			dojo.empty("javadoclist");
-			for(var i=0; i<a.length; i++) {
-				var url = docUrl(a[i]);
-				if(url) {
-					var li = dojo.create("li", {} , "javadoclist");
-					var lk = dojo.create("a", {href: url, target: 'blank', innerHTML: a[i]} , li);
-				}
+function updateDocumentation() {
+	var a = extractJavaImports(pageGlobal.jspEditor.getValue());
+	if(a.length) {
+		dojo.empty("javadoclist");
+		for(var i=0; i<a.length; i++) {
+			var url = docUrl(a[i]);
+			if(url) {
+				var li = dojo.create("li", {} , "javadoclist");
+				var lk = dojo.create("a", {href: url, target: 'blank', innerHTML: a[i]} , li);
 			}
-			dojo.style("javadoc","display","block");
-		} else {
-			dojo.style("javadoc","display","none");
 		}
+		dojo.style("javadoc","display","block");
+	} else {
+		dojo.style("javadoc","display","none");
 	}
-	_showDocumentation(show);
 }
 
 /**
  * Create a new snippet 
  */
 function createSnippet() {
-	showDocumentation(false);
 	pageGlobal.id = "";
 	pageGlobal.unid = "";
 	if(pageGlobal.jspEditor) {
@@ -87,13 +83,13 @@ function createSnippet() {
 	selectStack(pageGlobal.previewParams);
 	updateLabel(null);
 	updateNavSelection();
+	updateDocumentation();
 }
 
 /**
  * Load a snippet from the server using a JSON RPC call. 
  */
 function loadSnippet(id) {
-	showDocumentation(false);
 	var deferred = server.loadSnippet(id)
 	deferred.addCallback(function(r) {
 		if(r.status=="ok") {
@@ -109,6 +105,7 @@ function loadSnippet(id) {
 			}
 			updateLabel(r);
 			updateNavSelection();
+			updateDocumentation();
 			if(shouldAutoExec(pageGlobal.params)) {
 				runCode(false);
 			}

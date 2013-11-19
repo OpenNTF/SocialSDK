@@ -80,6 +80,18 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 		members: [],
 		
 		/**
+		 * @property searchSuggest
+		 * @deprecated This property will be removed in the Social SDK Version 2. 
+		 */
+		searchSuggest: null,
+		
+		/**
+		 * @property memberList
+		 * @deprecated This property will be removed in the Social SDK Version 2. 
+		 */
+		memberList:null,
+		
+		/**
 		 * 	TODO  Better pattern is to set is during postMixInProperties 
 		 * The result the user has chosen from the search suggestions 
 		 */

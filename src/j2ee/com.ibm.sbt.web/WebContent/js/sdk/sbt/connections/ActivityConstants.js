@@ -18,7 +18,17 @@
  */
 define([ "../lang", "./ConnectionsConstants" ], function(lang, conn) {
 
-	return lang.mixin(conn, {
+	return lang.mixin({
+
+		/**
+		* Namespaces to be used when reading the Activities ATOM entry or feed
+		*/
+		ActivityNamespaces : {	
+			a 	:  conn.Namespaces.a,
+			app : conn.Namespaces.app,
+			thr :  conn.Namespaces.thr,			
+			snx :  conn.Namespaces.snx			
+		},
 
 		/**
 		 * Map to store all possible types of activity node entry types
@@ -33,7 +43,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang, conn) {
 			Section : "section",
 			ToDo : "todo"
 		},
-		
+
 		/**
 		 * XPath expressions used when parsing a Connections Activities ATOM feed
 		 */
@@ -74,30 +84,20 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang, conn) {
 			summary : "a:summary"
 		},
 
+		
 		/**
 		 * XPath expressions to be used when reading an activity Node entry
+		 * 
 		 */
-		ActivityNodeXPath : {
-			entry : "/a:entry",
-			uid : "a:id",
+		ActivityNodeXPath :  lang.mixin({}, conn.AtomEntryXPath, {
+
 			activityUuid : "snx:activity",
-			title : "a:title",
-			updated : "a:updated",
-			published : "a:published",
+
 			categoryFlagCompleted : "a:category[@term='completed']/@label",
 			categoryFlagTemplate : "a:category[@term='template']/@label",
 			categoryFlagDelete : "a:category[@term='deleted']/@label",
 
-			authorName : "a:author/a:name",
-			authorUserId : "a:author/snx:userid",
-			authorEmail : "a:author/a:email",
-			authorUserState : "a:author/snx:userState",
 			authorLdapid : "a:author/snx:ldapid",
-
-			contributorName : "a:contributor/a:name",
-			contributorUserId : "a:contributor/snx:userid",
-			contributorEmail : "a:contributor/a:email",
-			contributorUserState : "a:contributor/snx:userState",
 			contributorLdapid : "a:contributor/snx:ldapid",
 
 			type : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/type']/@label",
@@ -111,15 +111,10 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang, conn) {
 			historyUrl : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/history']/@href",
 			templatesUrl : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/templates']/@href",
 
-			editUrl : "a:link[@rel='edit']/@href",
-			selfUrl : "a:link[@rel='self']/@href",
-			recentUpdatesUrl : "a:link[@rel='alternate']/@href",
-
 			position : "snx:position",
 			depth : "snx:depth",
 			permissions : "snx:permissions",
 			iconUrl : "snx:icon",
-			content : "a:content",
 
 			tags : "a:category[not(@scheme)]/@term",
 
@@ -137,7 +132,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang, conn) {
 			dateFields : "snx:field[@type='date']",
 			fileFields : "snx:field[@type='file']"
 
-		},
+		}),
 
 		/**
 		 * XPath expressions to be used when reading an Tag Node entry
@@ -149,26 +144,22 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang, conn) {
 			uid : "@term",
 			bin : "@snx:bin"
 		},
-
+		
 		/**
-		 * XPath expressions to be used when reading an Member Node entry
-		 */
-		MemberXPath : {			
-			uid : "a:id",
-			entry : "a:feed/a:entry",
-			name : "a:contributor/a:name",
-			email : "a:contributor/a:email",
-			userId : "a:contributor/snx:userid",
-			role : "a:contributor/snx:role",
-			userState : "a:contributor/snx:userState",
-			title : "a:title",
-			updated : "a:updated",
-			summary : "a:summary",
-			editUrl : "a:link[@rel='edit']/@href",
-			category : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/type']/@term",
-			role : "snx:role",
-			permissions : "snx:permissions"
-		},
+         * XPath expressions to be used when reading a Community Member Entry
+         * 
+         * @property MemberXPath
+         * @type Object
+         * @for sbt.connections.ActivityService
+         */
+        MemberXPath : lang.mixin({}, conn.AtomEntryXPath, {
+        	entry : "a:feed/a:entry",
+        	id : "a:id",
+            uid : "a:id",
+            role : "snx:role",
+            permissions : "snx:permissions",
+            category : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/type']/@term"
+        }),
 
 		/**
 		 * Search for content in all of the activities, both completed and active, that matches a specific criteria.
@@ -194,11 +185,11 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang, conn) {
 		 * Get Activity node feed
 		 */
 		AtomActivityNode : "${activities}/service/atom2/activitynode",
-		
+
 		/**
 		 * Get feed of all Activity Nodes in an Activity
 		 */
-		AtomActivityNodes : "${activities}/service/atom2/descendants", //?nodeUuid="
+		AtomActivityNodes : "${activities}/service/atom2/descendants", // ?nodeUuid="
 
 		/**
 		 * Get Activity Node feed from Trash
@@ -219,7 +210,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang, conn) {
 		 * Get a feed of Activity Members
 		 */
 		AtomActivitiesMembers : "${activities}/service/atom2/acl",
-		
+
 		/**
 		 * Get a member for an activity
 		 */

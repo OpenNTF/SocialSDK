@@ -91,7 +91,7 @@ public class EndpointFactory {
                 throw new SBTException(null,"Invalid ServerBean implementation for bean {0} is instance of {1}",beanName,o.getClass()); 
             }
             else{
-            	((AbstractEndpoint)o).setName(name);
+            	((AbstractEndpoint)o).setName(beanName);
             }
             return (Endpoint)o;
         }

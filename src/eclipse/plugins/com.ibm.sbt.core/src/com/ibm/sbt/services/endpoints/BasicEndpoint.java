@@ -155,6 +155,11 @@ public class BasicEndpoint extends AbstractEndpoint {
             String authPage = getAuthenticationPage();
          	Context context = Context.get();
             if(StringUtil.isNotEmpty(authPage)) {
+            	// to ignore if the authentication page value contains endpoint parameter, we are now making use of this.getName() to get the endpoint name
+            	// and no need to explicitly set in authentication page value
+            	if(authPage.contains("?endpoint=") || authPage.contains("?") ){
+            		authPage = authPage.substring(0, authPage.indexOf(("?")));
+            	}
             	try{
             		if(!UrlUtil.isAbsoluteUrl(authPage)){
             			authPage = UrlUtil.makeUrlAbsolute((HttpServletRequest)context.getHttpRequest(), authPage);

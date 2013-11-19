@@ -42,7 +42,7 @@
 	tabProperties:	'#{id:tabProperties}',
 	codeDialog:		'#{id:codeDialog}',
 	cbLibrary:		'#{id:comboLibrary}',
-	resultStack:	'#{id:resultStack}'	
+	docContainer:	'#{id:docContainer}'	
 }
 dojo.addOnLoad(function() {
    dojo.connect(window, "onresize", resize);
@@ -179,14 +179,8 @@ if(confirm("This operation cannot be undone.\nDo you really want to delete this 
 }]]></xe:this.onClick>
 									</xe:basicLeafNode>
 									<xe:basicLeafNode label="API Documentation"
-										onClick="showDocumentation(true)">
+										onClick="toggleDocumentation()">
 									</xe:basicLeafNode>
-									<!--
-										<xe:basicLeafNode label="Maximize"
-										styleClass="dijitIconDelete">
-										<xe:this.onClick><![CDATA[toggleMaximize(dojo.byId("#{id:codePanel}"));]]></xe:this.onClick>
-										</xe:basicLeafNode>
-									-->
 								</xe:this.treeNodes>
 							</xe:toolbar>
 							<xp:link escape="true" text="Edit..." id="deleteLink"
@@ -264,60 +258,37 @@ if(doc) {
 				<!--  Preview area-->
 				<xe:djBorderPane region="center"
 					style="padding:0px; overflow: hidden; width: 100%; height: 100%">
-					<xe:djStackContainer id="resultStack"
-						style="overflow: hidden; padding: 0px;">
-						<xe:djStackPane id="previewPane" style="padding: 0px;">
-							<xe:djBorderContainer style="width: 100%; height: 100%">
-								<xe:this.dojoAttributes>
-									<xp:dojoAttribute name="gutters" value="false">
-									</xp:dojoAttribute>
-								</xe:this.dojoAttributes>
-								<xe:djBorderPane region="top"
-									style="padding:0px; overflow: hidden;">
-									<xe:toolbar id="toolbar2">
-										<xe:this.treeNodes>
-											<xe:basicLeafNode label="Run" onClick="runCode(false)">
-											</xe:basicLeafNode>
-											<xe:basicLeafNode label="Debug" onClick="runCode(true)">
-											</xe:basicLeafNode>
-											<xe:basicLeafNode label="Show Generated HTML"
-												onClick="showCode()">
-											</xe:basicLeafNode>
-											<xe:basicLeafNode label="Edit Parameters"
-												onClick="showParams()">
-											</xe:basicLeafNode>
-										</xe:this.treeNodes>
-									</xe:toolbar>
-								</xe:djBorderPane>
-								<xe:djBorderPane region="center"
-									style="padding:0px; padding-top: 5px; overflow: hidden;">
-									<xc:SnippetsPreviewPane></xc:SnippetsPreviewPane>
-								</xe:djBorderPane>
-							</xe:djBorderContainer>
-						</xe:djStackPane>
-						<xe:djStackPane id="documentationPane" style="padding: 0px;">
-							<xe:djBorderContainer style="width: 100%; height: 100%">
-								<xe:this.dojoAttributes>
-									<xp:dojoAttribute name="gutters" value="false">
-									</xp:dojoAttribute>
-								</xe:this.dojoAttributes>
-								<xe:djBorderPane region="top"
-									style="padding:0px; overflow: hidden;">
-									<xe:toolbar id="toolbar3">
-										<xe:this.treeNodes>
-											<xe:basicLeafNode label="&lt; Back"
-												onClick="showDocumentation(false)">
-											</xe:basicLeafNode>
-										</xe:this.treeNodes>
-									</xe:toolbar>
-								</xe:djBorderPane>
-								<xe:djBorderPane region="center"
-									style="padding:0px; overflow: hidden;">
-									<xc:PanelDocJavaScript></xc:PanelDocJavaScript>
-								</xe:djBorderPane>
-							</xe:djBorderContainer>
-						</xe:djStackPane>
-					</xe:djStackContainer>
+					<xe:djBorderContainer style="width: 100%; height: 100%">
+						<xe:this.dojoAttributes>
+							<xp:dojoAttribute name="gutters" value="false">
+							</xp:dojoAttribute>
+						</xe:this.dojoAttributes>
+						<xe:djBorderPane region="top"
+							style="padding:0px; overflow: hidden;">
+							<xe:toolbar id="toolbar2">
+								<xe:this.treeNodes>
+									<xe:basicLeafNode label="Run" onClick="runCode(false)">
+									</xe:basicLeafNode>
+									<xe:basicLeafNode label="Debug" onClick="runCode(true)">
+									</xe:basicLeafNode>
+									<xe:basicLeafNode label="Show Generated HTML"
+										onClick="showCode()">
+									</xe:basicLeafNode>
+									<xe:basicLeafNode label="Edit Parameters"
+										onClick="showParams()">
+									</xe:basicLeafNode>
+								</xe:this.treeNodes>
+							</xe:toolbar>
+						</xe:djBorderPane>
+						<xe:djBorderPane region="center"
+							style="padding:0px; padding-top: 5px; overflow: hidden;">
+							<xc:SnippetsPreviewPane></xc:SnippetsPreviewPane>
+						</xe:djBorderPane>
+						<xe:djBorderPane region="bottom" id="docContainer" splitter="true"
+							style="padding:0px; overflow: hidden; display: none; height: 30%;">
+							<xc:PanelDocJavaScript></xc:PanelDocJavaScript>
+						</xe:djBorderPane>
+					</xe:djBorderContainer>
 				</xe:djBorderPane>
 				<!--  /Preview area-->
 

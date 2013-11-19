@@ -20,6 +20,7 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<modules>
+				<module>commons</module>
 				<module>libraries</module>
 				<module>deps</module>
 				<module>sdk</module>
@@ -35,6 +36,7 @@
 				</property>
 			</activation>
 			<modules>
+				<module>commons</module>
 				<module>libraries</module>
 				<module>deps</module>
 				<module>sdk</module>

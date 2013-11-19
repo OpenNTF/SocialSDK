@@ -8,6 +8,7 @@
 		<xp:dojoModule name="dijit.Tooltip"></xp:dojoModule>
 	</xp:this.resources>
 
+	<xp:this.beforePageLoad><![CDATA[#{javascript:viewScope.assetSearch = context.getUrlParameter("search")}]]></xp:this.beforePageLoad>
 	<xe:djBorderContainer style="height: 100%">
 		<xe:djBorderPane region="top">
 			<span title="Expand All" style="margin-left:3px;margin-right:3px">

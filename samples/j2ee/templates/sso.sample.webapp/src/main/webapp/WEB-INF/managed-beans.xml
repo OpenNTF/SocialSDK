@@ -55,7 +55,7 @@
 		<managed-bean-scope>session</managed-bean-scope>
 		<managed-property>
 			<property-name>url</property-name>
-			<value>https://www.ibm.com/developerworks</value> 
+			<value>https://ralbz3166.raleigh.ibm.com</value> 
 		</managed-property>
 		<!-- Trust the connection -->
 		<managed-property>
@@ -64,7 +64,7 @@
 		</managed-property>
 		<managed-property>
 		<property-name>serviceMaps</property-name>
-		<value>communities:community/groups</value>
+		<!-- <value>communities:community/groups</value>  -->
 		</managed-property>
 	</managed-bean>
 

@@ -30,10 +30,10 @@ function onLoginPageLoad() {
     var argsMap = getArgsMap();// get map of query string arguments
     if(argsMap.loginUi == "popup"){
         var ssoStrings = window.globalSSOStrings;
-    	document.getElementById('reloginMessage').innerHTML = decodeURIComponent(ssoStrings.message);
+    	document.getElementById('reloginMessage').appendChild(document.createTextNode(decodeURIComponent(ssoStrings.message)));
     	document.getElementById('ssoLoginFormOK').value = decodeURIComponent(ssoStrings.relogin_button_text);
     }else{
-    	document.getElementById('reloginMessage').innerHTML = decodeURIComponent(argsMap.message);
+    	document.getElementById('reloginMessage').appendChild(document.createTextNode(decodeURIComponent(argsMap.message)));
     	document.getElementById('ssoLoginFormOK').value = decodeURIComponent(argsMap.relogin_button_text);
     }
 

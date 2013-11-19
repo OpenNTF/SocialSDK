@@ -33,7 +33,7 @@
 								<include>**/ConnectionsTestSuite.java</include>
 								<include>**/SmartCloudTestSuite.java</include>
 							</includes>
-							 <testClassesDirectory>${project.build.outputDirectory}</testClassesDirectory>
+							<testClassesDirectory>${project.build.outputDirectory}</testClassesDirectory>
 						</configuration>
 					</execution>
 				</executions>
@@ -43,18 +43,20 @@
 						<artifactId>surefire-junit4</artifactId>
 						<version>2.11</version>
 					</dependency>
-					
+
 				</dependencies>
 			</plugin>
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-surefire-plugin</artifactId>
 				<version>${tycho-version}</version>
-				<configuration><skipTests>true</skipTests></configuration>
+				<configuration>
+					<skipTests>true</skipTests>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>

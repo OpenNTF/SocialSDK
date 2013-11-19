@@ -20,7 +20,11 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<modules>
-				<module>commons</module>
+				<module>libraries</module>
+				<module>deps</module>
+				<module>sdk</module>
+				<module>samples</module>
+				<module>assembly</module>
 			</modules>
 		</profile>
 		<profile>
@@ -31,6 +35,12 @@
 				</property>
 			</activation>
 			<modules>
+				<module>libraries</module>
+				<module>deps</module>
+				<module>sdk</module>
+				<module>samples</module>
+				<module>assembly</module>
+
 				<module>xpages</module>
 			</modules>
 		</profile>
@@ -45,12 +55,7 @@
 			<url>http://download.eclipse.org/releases/juno/</url>
 		</repository>
 	</repositories>
-	<modules>
-		<module>libraries</module>
-		<module>deps</module>
-		<module>sdk</module>
-		<module>samples</module>
-	</modules>
+
 
 	<build>
 		<plugins>
@@ -183,11 +188,11 @@
 
 
 	</build>
- <scm>
-	<connection>scm:git:https://github.com/LorenzoBoccaccia/SocialSDK.git</connection>
-	<url>https://github.com/LorenzoBoccaccia/SocialSDK.git</url>
-	<developerConnection>scm:git:git@github.com:LorenzoBoccaccia/SocialSDK.git</developerConnection>
-	
-	
-  </scm>
+	<scm>
+		<connection>scm:git:https://github.com/LorenzoBoccaccia/SocialSDK.git</connection>
+		<url>https://github.com/LorenzoBoccaccia/SocialSDK.git</url>
+		<developerConnection>scm:git:git@github.com:LorenzoBoccaccia/SocialSDK.git</developerConnection>
+
+
+	</scm>
 </project>

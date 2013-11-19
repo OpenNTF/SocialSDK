@@ -165,10 +165,6 @@
 			<value>CredStore</value>
 		</managed-property>
 		<managed-property>
-			<property-name>authenticationPage</property-name>
-			<value>/sbt/loginForm.html?endpoint=connections</value>
-		</managed-property>
-		<managed-property>
 			<property-name>authenticationService</property-name>
 			<value>communities/service/atom/communities/my</value>
 		</managed-property>
@@ -195,10 +191,6 @@
         <managed-property>
             <property-name>credentialStore</property-name>
             <value>CredStore</value>
-        </managed-property>
-        <managed-property>
-            <property-name>authenticationPage</property-name>
-            <value>/sbt/loginForm.html?endpoint=connections</value>
         </managed-property>
         <managed-property>
             <property-name>authenticationService</property-name>

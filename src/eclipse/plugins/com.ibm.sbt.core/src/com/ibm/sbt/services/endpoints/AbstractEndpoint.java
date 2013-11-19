@@ -53,6 +53,7 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
 
     private Map<String, String> serviceMappings = new HashMap<String, String>();
     private String url;
+    private String name;
     private String label;
     private String dialogLoginPage;
     private String loginPage;
@@ -157,7 +158,13 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     public void setUrl(String url) {
         this.url = url;
     }
-
+    
+	public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
     @Override
 	public String getLabel() {
         return label;

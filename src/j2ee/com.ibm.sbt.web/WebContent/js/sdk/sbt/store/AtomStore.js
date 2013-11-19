@@ -17,9 +17,9 @@
 /**
  * @module sbt.store.AtomStore
  */
-define(["../declare","../config","../lang", "../base/core", "../xml", "../xpath", "../itemFactory",
+define(["../declare","../config","../lang", "../base/core", "../xml", "../xpath", "../itemFactory", "../Promise",
         "dojo/_base/Deferred", "dojo/promise/Promise", "dojo/store/util/QueryResults", "dojox/html/entities"], 
-        function(declare,config,lang, core, xml, xpath, itemFactory, Deferred, Promise, QueryResults, entities) {
+        function(declare, config, lang, core, xml, xpath, itemFactory, SbtPromise, Deferred, Promise, QueryResults, entities) {
   
     /**
      * @class sbt.store.AtomStore
@@ -47,6 +47,7 @@ define(["../declare","../config","../lang", "../base/core", "../xml", "../xpath"
         attributes : core.entryXPath,
         namespaces : core.namespaces,
         paramSchema: {},
+        total: new SbtPromise(),
         
         /**
          * Constructor for the AtomStore promise.
@@ -190,12 +191,15 @@ define(["../declare","../config","../lang", "../base/core", "../xml", "../xpath"
                             self._options.onComplete.call(self._options.scope || self, self.items, self._options);
                         }
                         // invoke callbacks
-                        self._fulfilled(self.totalResults);
+                        self.total.fulfilled(self.totalResults);
+                        self._fulfilled(self.items);
                     } catch (error) {
+                    	self.total._rejected(error);
                         self._rejected(error);
                     }
                 },
                 error : function(error) {
+                	self.total._rejected(error);
                     self._rejected(error);
                 }
             });
@@ -414,7 +418,6 @@ define(["../declare","../config","../lang", "../base/core", "../xml", "../xpath"
          */
         query: function(query, options) {
             var results = new AtomStorePromise(this._args, query, options);
-            results.total = results;
             return QueryResults(results);
         }
     });

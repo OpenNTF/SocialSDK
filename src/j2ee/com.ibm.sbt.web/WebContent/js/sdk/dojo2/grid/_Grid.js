@@ -29,14 +29,14 @@ define([ "../../declare", "../../store/AtomStore", "dojo/_base/lang", "dojo/_bas
         
         /*
          * Creates an instance of an atom store.
-         * @param args - atom store arguments - such as url and attributes
-         * @returns {AtomStore} - an instance of an atom store
          */
         _createDefaultStore: function(args) {
             return new AtomStore(args);
         },        
         
-        /*retrieves the data from the Atom Store*/
+        /* 
+         * Retrieves the data from the Atom Store
+         */
         _doQuery: function(store, options, query) {
             query = query || {};
             var self = this;

@@ -64,6 +64,10 @@ public abstract class AssetBean {
 	public String getSnippetsAsJson() throws NotesException, IOException {
 		RootNode root = readSnippetsNodes();
 		JsonTreeRenderer r = new JsonTreeRenderer();
+		String apisSearch = (String)ExtLibUtil.getViewScope().get("assetSearch");
+		if(StringUtil.isNotEmpty(apisSearch)) {
+			r.setFlat(true);
+		}
 		return r.generateAsStringHier(root,true);
 	}
 	protected RootNode readSnippetsNodes() throws NotesException {

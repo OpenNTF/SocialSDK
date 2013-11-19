@@ -60,15 +60,15 @@ function onLoginPageLoad() {
     }
     if(window.globalLoginFormStrings){
         var loginForm = window.globalLoginFormStrings;
-    	document.getElementById('wrongCredsMessage').innerHTML = loginForm.wrong_creds_message;
-    	document.getElementById('basicLoginFormUsername').innerHTML = loginForm.username;
-    	document.getElementById('basicLoginFormPassword').innerHTML = loginForm.password;
+    	document.getElementById('wrongCredsMessage').appendChild(document.createTextNode(loginForm.wrong_creds_message));
+    	document.getElementById('basicLoginFormUsername').appendChild(document.createTextNode(loginForm.username));
+    	document.getElementById('basicLoginFormPassword').appendChild(document.createTextNode(loginForm.password));
     	document.getElementById('basicLoginFormOK').value = loginForm.login_ok;
     	document.getElementById('basicLoginFormCancel').value = loginForm.login_cancel;
     }else{
-		document.getElementById('wrongCredsMessage').innerHTML = decodeURIComponent(argsMap.wrong_creds_message);
-		document.getElementById('basicLoginFormUsername').innerHTML = decodeURIComponent(argsMap.username);
-		document.getElementById('basicLoginFormPassword').innerHTML = decodeURIComponent(argsMap.password);
+        document.getElementById('wrongCredsMessage').appendChild(document.createTextNode(decodeURIComponent(argsMap.wrong_creds_message)));
+        document.getElementById('basicLoginFormUsername').appendChild(document.createTextNode(decodeURIComponent(argsMap.username)));
+        document.getElementById('basicLoginFormPassword').appendChild(document.createTextNode(decodeURIComponent(argsMap.password)));
 		document.getElementById('basicLoginFormOK').value = decodeURIComponent(argsMap.login_ok);
     	document.getElementById('basicLoginFormCancel').value = decodeURIComponent(argsMap.login_cancel);
 	}

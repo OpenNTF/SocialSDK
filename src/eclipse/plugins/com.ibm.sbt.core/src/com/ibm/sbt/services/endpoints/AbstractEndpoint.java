@@ -158,10 +158,17 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     public void setUrl(String url) {
         this.url = url;
     }
-    
+    /**
+     * returns the Endpoint bean name
+     * 
+     */
 	public String getName() {
         return name;
     }
+	 /**
+     * sets the Endpoint beanName, used in EndPointFactory class to set the name of Endpoint bean
+     * 
+     */
     public void setName(String name) {
         this.name = name;
     }

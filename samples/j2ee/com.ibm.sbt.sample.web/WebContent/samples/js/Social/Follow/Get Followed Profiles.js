@@ -16,7 +16,7 @@ require(["sbt/connections/FollowService", "sbt/connections/FollowConstants", "sb
 	    	followService.getFollowedResources(consts.ProfilesSource, consts.ProfilesResourceType, { ps: 5 }).then(
 	            function(followedResources){
 	                if (followedResources.length == 0) {
-	                    text = "Followed Communities returned no results.";
+	                    text = "Followed Profiles returned no results.";
 	                    dom.setText("content", text);
 	                } else {
 	                    for(var i=0; i<followedResources.length; i++){

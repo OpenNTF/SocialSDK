@@ -1,7 +1,6 @@
 require(["sbt/connections/BlogService", "sbt/dom"], 
     function(BlogService, dom) {
 	    var createRow = function(post) {
-	    	console.log("post.getSource().toSource() "+post.getSource().toSource());
 	        var table = dom.byId("blogsTable");
 	        var tr = document.createElement("tr");
 	        table.appendChild(tr);

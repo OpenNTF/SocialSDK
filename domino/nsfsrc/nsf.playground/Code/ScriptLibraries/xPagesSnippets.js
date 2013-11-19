@@ -9,15 +9,13 @@ function updateLabel(r) {
 	}
 }
 
-function showDocumentation(show) {
-	_showDocumentation(show);
+function updateDocumentation() {
 }
 
 /**
  * Create a new snippet 
  */
 function createSnippet() {
-	showDocumentation(false);
 	pageGlobal.id = "";
 	pageGlobal.unid = "";
 	if(pageGlobal.xPagesEditor) {
@@ -34,13 +32,13 @@ function createSnippet() {
 	selectStack(pageGlobal.previewParams);
 	updateLabel(null);
 	updateNavSelection();
+	updateDocumentation();
 }
 
 /**
  * Load a snippet from the server using a JSON RPC call. 
  */
 function loadSnippet(id) {
-	showDocumentation(false);
 	var deferred = server.loadSnippet(id)
 	deferred.addCallback(function(r) {
 		if(r.status=="ok") {
@@ -56,6 +54,7 @@ function loadSnippet(id) {
 			}
 			updateLabel(r);
 			updateNavSelection();
+			updateDocumentation();
 			if(shouldAutoExec(pageGlobal.params)) {
 				runCode(false);
 			}

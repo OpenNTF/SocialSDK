@@ -147,11 +147,11 @@ function attachLabel(editor,label) {
 /**
  * Show the documentation panel
  */
-function _showDocumentation(show) {
-	if(pageGlobal.resultStack) {
-		var sc = dijit.byId(pageGlobal.resultStack);
-		var pn = sc.getChildren()[show ? 1 : 0];
-		sc.selectChild(pn);
+function toggleDocumentation() {
+	if(pageGlobal.docContainer) {
+		var show = dojo.style(pageGlobal.docContainer,"display")=="none";
+		dojo.style(pageGlobal.docContainer,"display",show?"inline":"none");
+		dijit.byId(pageGlobal.docContainer).getParent().resize();
 	}
 }
 

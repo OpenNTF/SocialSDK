@@ -283,18 +283,50 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
             }
         },
         
+        /**
+         * Helper method to display 10 items per page
+         * 
+         * @method show10ItemsPerPage
+         * @param el
+         * @param data
+         * @param event
+         */
         show10ItemsPerPage: function(el, data, ev) {
         	this.showItemsPerPage(el, data, ev, 10);
         },
         
+        /**
+         * Helper method to display 25 items per page
+         * 
+         * @method show25ItemsPerPage
+         * @param el
+         * @param data
+         * @param event
+         */
         show25ItemsPerPage: function(el, data, ev) {
         	this.showItemsPerPage(el, data, ev, 25);
         },
         
+        /**
+         * Helper method to display 50 items per page
+         * 
+         * @method show50ItemsPerPage
+         * @param el
+         * @param data
+         * @param event
+         */
         show50ItemsPerPage: function(el, data, ev) {
         	this.showItemsPerPage(el, data, ev, 50);
         },
         
+        /**
+         * Helper method to display 100 items per page
+         * 
+         * @method show100ItemsPerPage
+         * @param el
+         * @param data
+         * @param event
+         */
         show100ItemsPerPage: function(el, data, ev) {
         	this.showItemsPerPage(el, data, ev, 100);
         },

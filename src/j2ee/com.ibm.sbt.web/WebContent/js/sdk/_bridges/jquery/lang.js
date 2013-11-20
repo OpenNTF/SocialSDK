@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * ï¿½ Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -153,6 +153,9 @@ define(["has", "./jquery"],function(has) {
 				context = (p in context ? context[p] : (create ? context[p] = {} : undefined));
 			}
 			return context;
+        },
+        hitch: function(scope, fun){
+        	return $.proxy(fun, scope);
         }
 	};
 });

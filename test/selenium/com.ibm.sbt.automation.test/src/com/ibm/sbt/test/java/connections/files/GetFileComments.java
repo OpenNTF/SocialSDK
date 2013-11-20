@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -22,8 +22,8 @@ import org.junit.Test;
 import com.ibm.sbt.automation.core.test.BaseAuthJavaServiceTest;
 
 /**
- * @author mkataria
- * @date Feb 8, 2013
+ * @author Vimal Dhupar
+ * @date Nov 15, 2013
  */
 public class GetFileComments extends BaseAuthJavaServiceTest {
 

@@ -170,7 +170,7 @@ function(declare, Grid, parameter, ActivityGridRenderer, ActivityAction, consts)
          */
         createDefaultRenderer : function(args) {
             return new ActivityGridRenderer(args);
-        },
+        }
 				
 	});
 	

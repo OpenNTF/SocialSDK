@@ -22,7 +22,21 @@ define(["../../../declare", "../../../url", "../../../config", "../../../util", 
      * @class sbt.controls.astream.ActivityStreamWrapper
      */
     var ActivityStreamWrapper = declare([ WidgetWrapper ], {
-
+        /**
+         * The url of the css you want to use as the ActivityStream css. This is if on your connections server the css is in a non-default location.
+         * @property cssUrl
+         * @type String
+         */
+        cssUrl : "",
+        
+        /**
+         * If the side navigation dijit on the Connections server is using a custom js class.
+         * 
+         * @property sideNavClassName
+         * @type String
+         */
+        sideNavClassName : "",
+        
         /**
          * Set the html template which will go inside the iframe.
          * 
@@ -42,7 +56,10 @@ define(["../../../declare", "../../../url", "../../../config", "../../../util", 
             var connectionsUrl = this._endpoint.baseUrl;
             var libUrl = new Url(config.Properties.libraryUrl);
             var libQuery = libUrl.getQuery();
-            var libQueryObj = util.splitQuery(libQuery, "&");
+            var libQueryObj = {};
+            if(libQuery){
+                libQueryObj = util.splitQuery(libQuery, "&");
+            }
             
             lang.mixin(libQueryObj, {
                 lib: "dojo",
@@ -53,9 +70,15 @@ define(["../../../declare", "../../../url", "../../../config", "../../../util", 
             
             var connectionsSideNav = "~com.ibm.social.as.gadget.viewnav.ASGadgetViewSideNav.js";
             var cssUrl = connectionsUrl + "/${connections}/resources/web/com.ibm.social.as/css/activityStream.css";
-            if(this._endpoint.name == "w3connections"){
-                connectionsSideNav = "~com.ibm.social.as.nav.ASSideNav.js";
-                cssUrl = connectionsUrl + "/${connections}/resources/web/_lconnappstyles/gen4/activityStream.css?version=oneui3&rtl=false";
+            if(this.cssUrl){
+                cssUrl = connectionsUrl + this.cssUrl;
+            }
+            if(this.sideNavClassName){
+                if(this.sideNavClassName.lastIndexOf(".js") != this.sideNavClassName.length - 3){
+                    connectionsSideNav = "~" + this.sideNavClassName + ".js";
+                }else{
+                    connectionsSideNav = "~" + this.sideNavClassName;
+                }
             }
             
             var sbtProps = lang.mixin({}, config.Properties);
@@ -112,6 +135,12 @@ define(["../../../declare", "../../../url", "../../../config", "../../../util", 
          */
         constructor: function(args){
             this.args = args;
+            if(args.cssUrl){
+                this.cssUrl = args.cssUrl;
+            }
+            if(args.sideNavClassName){
+                this.sideNavClassName = args.sideNavClassName;
+            }
         }
         
     });

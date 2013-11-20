@@ -28,7 +28,7 @@ define([ "../../declare", "../../controls/grid/GridAction" ],
         
     	/**Strings used in the actions */
         nls: {
-            tooltip: "View All",
+            tooltip: "View All"
         },
         
         /**ViewAllAction Constructor function

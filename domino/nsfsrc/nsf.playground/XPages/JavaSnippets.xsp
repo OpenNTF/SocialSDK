@@ -34,8 +34,9 @@
 	viewNavPanel:	'#{id:panelView}',
 	snippetsTree:	'assetsTree',
 	tabContainer:	'#{id:tabContainer}',
-	tabJsp:			'#{id:tabJsp}',
+	tabProperties:	'#{id:tabProperties}',
 	codeDialog:		'#{id:codeDialog}',
+	docContainer:	'#{id:docContainer}'	
 }
 dojo.addOnLoad(function() {
    dojo.connect(window, "onresize", resize);
@@ -73,9 +74,9 @@ if(e) {
 	doc = database.getDocumentByUNID(snippetId);
 }
 if(doc) {	o = {		status:			"ok",		id:				snippetId,		unid:			doc.getUniversalID(),
-		category:		doc.getItemValueString("category"),		author:			doc.getAuthors().get(0),		name:			doc.getItemValueString("name"),		tags:			doc.getItemValueString("tags"),		jsp:			nsf.playground.jsp.JspCompiler.extractBody(doc.getItemValueString("jsp")),
+		category:		doc.getItemValueString("category"),		author:			doc.getAuthors().get(0),		name:			doc.getItemValueString("name"),		tags:			doc.getItemValueString("tags"),		jsp:			nsf.playground.jsp.JspCompiler.cleanCode(doc.getItemValueString("jsp")),
 		properties:		doc.getItemValueString("properties"),
-		documentation:	doc.getItemValueString("documentation")
+		documentation:	doc.getItemValueString("documentation") || doc.getItemValueString("description") 
 	}
 	o.params = snippetBean.extractParams([o.jsp]);
 	return o;}o = {	status:		"error",	msg:		"Cannot open document with id "+id}return o;]]></xe:this.script>
@@ -99,6 +100,8 @@ if(doc) {	o = {		status:			"ok",		id:				snippetId,		unid:			doc.getUniversa
 					<xe:djBorderContainer id="djBorderContainer2"
 						style="width: 100%">
 						<xe:djBorderPane id="djBorderPane1" region="top">
+							Environments:
+							<br />
 							<xc:ccEnvironmentComboBox></xc:ccEnvironmentComboBox>
 						</xe:djBorderPane>
 						<xe:djBorderPane id="djBorderPane5" region="center">
@@ -120,33 +123,42 @@ if(doc) {	o = {		status:			"ok",		id:				snippetId,		unid:			doc.getUniversa
 							</xp:dojoAttribute>
 						</xe:this.dojoAttributes>
 
+						<!-- Action buttons toolbar -->
+						<xe:djBorderPane region="top" style="padding:0px">
+							<xe:toolbar id="toolbar1">
+								<xe:this.treeNodes>
+									<xe:basicLeafNode label="API Documentation"
+										onClick="toggleDocumentation()">
+									</xe:basicLeafNode>
+								</xe:this.treeNodes>
+							</xe:toolbar>
+						</xe:djBorderPane>
+						<!-- /Action buttons toolbar -->
+
 						<!-- Java Code Tab Container -->
 						<xe:djBorderPane region="top"
-							style="padding: 5px 0 0 0; height: 65%; overflow: hidden" splitter="true">
+							style="padding: 5px 0 0 0; height: 65%; overflow: hidden"
+							splitter="true">
 							<xp:div style="border: 1px solid #AAAAAA; height: 99%;">
 								<xc:PlaygroundTabJsp readOnly="true">
 								</xc:PlaygroundTabJsp>
 							</xp:div>
 						</xe:djBorderPane>
 						<!-- /Java Code Tab Container -->
-						
+
 						<!-- Other Code Tab Container -->
 						<xe:djBorderPane region="center" style="padding:0px">
 							<xe:djTabContainer id="djTabContainer2"
 								style="width: 100%; height: 100%; border: none">
-								<xe:djTabPane id="djTabProperties" title="Properties"
+								<xe:djTabPane id="tabProperties" title="Properties"
 									onShow="pageGlobal.propertiesEditor.refresh()">
 									<xp:div style="border: 1px solid #AAAAAA; height: 100%">
+										<xe:this.dojoAttributes>
+											<xp:dojoAttribute name="iconClass" value="iconTabEmpty">
+											</xp:dojoAttribute>
+										</xe:this.dojoAttributes>
 										<xc:PlaygroundTabProperties
-											readOnly="true">
-										</xc:PlaygroundTabProperties>
-									</xp:div>
-								</xe:djTabPane>
-								<xe:djTabPane id="djTabDocumentation" title="Documentation">
-									<xp:div style="border: 1px solid #AAAAAA; height: 100%">
-										<xc:PlaygroundTabDocumentation
-											readOnly="true">
-										</xc:PlaygroundTabDocumentation>
+											readOnly="true"></xc:PlaygroundTabProperties>
 									</xp:div>
 								</xe:djTabPane>
 							</xe:djTabContainer>
@@ -158,20 +170,20 @@ if(doc) {	o = {		status:			"ok",		id:				snippetId,		unid:			doc.getUniversa
 
 				</xe:djBorderPane>
 				<!--  /Body of the playground -->
-								
+
 				<!--  Preview area-->
-				<xe:djBorderPane region="center" style="padding:0px; overflow: hidden;">
-					<xe:djBorderContainer>
+				<xe:djBorderPane region="center"
+					style="padding:0px; overflow: hidden; width: 100%; height: 100%">
+					<xe:djBorderContainer style="width: 100%; height: 100%">
 						<xe:this.dojoAttributes>
 							<xp:dojoAttribute name="gutters" value="false">
 							</xp:dojoAttribute>
 						</xe:this.dojoAttributes>
-						
-						<xe:djBorderPane region="top" style="padding:0px; overflow: hidden;">
+						<xe:djBorderPane region="top"
+							style="padding:0px; overflow: hidden;">
 							<xe:toolbar id="toolbar2" style="display: inline-block">
 								<xe:this.treeNodes>
-									<xe:basicLeafNode label="Run"
-										onClick="runCode(false)">
+									<xe:basicLeafNode label="Run" onClick="runCode(false)">
 									</xe:basicLeafNode>
 									<xe:basicLeafNode label="Edit Parameters"
 										onClick="showParams()">
@@ -179,15 +191,18 @@ if(doc) {	o = {		status:			"ok",		id:				snippetId,		unid:			doc.getUniversa
 								</xe:this.treeNodes>
 							</xe:toolbar>
 						</xe:djBorderPane>
-						<xe:djBorderPane region="center" style="padding:0px; overflow: hidden;">
-							<xp:div style="height: 100%">
-								<xc:SnippetsPreviewPane></xc:SnippetsPreviewPane>
-							</xp:div>
+						<xe:djBorderPane region="center"
+							style="padding:0px; padding-top: 5px; overflow: hidden;">
+							<xc:SnippetsPreviewPane></xc:SnippetsPreviewPane>
+						</xe:djBorderPane>
+						<xe:djBorderPane region="bottom" id="docContainer" splitter="true"
+							style="padding:0px; overflow: hidden; display: none; height: 30%;">
+							<xc:PanelDocJava></xc:PanelDocJava>
 						</xe:djBorderPane>
 					</xe:djBorderContainer>
 				</xe:djBorderPane>
-				<!--  /Body of the playground -->
-				
+				<!--  /Preview area-->
+
 			</xe:djBorderContainer>
 			<!--  /Main Page -->
 
@@ -198,6 +213,9 @@ if(doc) {	o = {		status:			"ok",		id:				snippetId,		unid:			doc.getUniversa
 		<xp:this.value><![CDATA[function loadFromHash() {
 	if(dojo.hash()) {
 		var obj = dojo.queryToObject(dojo.hash());
+		if(obj.env) {
+			dojo.byId(pageGlobal.cbEnv).value = obj.env;
+		}
 		if(obj.snippet) {
 			setTimeout(function() {loadSnippet(obj.snippet)});
 		} 

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -53,7 +53,7 @@ public class GetMember extends BaseCommunitiesTest {
     		id = getProperty("smartcloud.id1");
     	}
     	
-    	addSnippetParam("sample.communityId", community.getCommunityUuid());
+    	addSnippetParam("CommunityService.communityUuid", community.getCommunityUuid());
     	addSnippetParam("sample.id1", id);  
     	
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
@@ -65,7 +65,7 @@ public class GetMember extends BaseCommunitiesTest {
     
     @Test
     public void testGetMemberError() {
-    	addSnippetParam("sample.communityId", community.getCommunityUuid());
+    	addSnippetParam("CommunityService.communityUuid", community.getCommunityUuid());
     	addSnippetParam("sample.id1", "foo");  
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
@@ -77,7 +77,7 @@ public class GetMember extends BaseCommunitiesTest {
     
     @Test
     public void testGetMemberInvalidArg() {
-    	addSnippetParam("sample.communityId", community.getCommunityUuid());
+    	addSnippetParam("CommunityService.communityUuid", community.getCommunityUuid());
     	addSnippetParam("sample.id1", "");  
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);

@@ -147,10 +147,24 @@ function attachLabel(editor,label) {
 /**
  * Show the documentation panel
  */
-function _showDocumentation(show) {
-	if(pageGlobal.resultStack) {
-		var sc = dijit.byId(pageGlobal.resultStack);
-		var pn = sc.getChildren()[show ? 1 : 0];
-		sc.selectChild(pn);
+function toggleDocumentation() {
+	if(pageGlobal.docContainer) {
+		var show = dojo.style(pageGlobal.docContainer,"display")=="none";
+		dojo.style(pageGlobal.docContainer,"display",show?"inline":"none");
+		dijit.byId(pageGlobal.docContainer).getParent().resize();
 	}
+}
+
+/**
+ * Set an icon to code mirror tab
+ */
+function attachTabIcon(tabId,cm) {
+	if(tabId) {
+		cm.on('change', function() {
+			function isEmpty(cm) {
+				return (cm.lineCount() === 1) && (cm.getLine(0) === "");
+			}
+			dijit.byId(tabId).set('iconClass',isEmpty(cm)?'iconTabEmpty':'iconTabFull');
+		});
+	} 
 }

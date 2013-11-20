@@ -17,8 +17,8 @@
 package com.ibm.sbt.services.client.base.datahandlers;
 
 import java.util.AbstractList;
-import java.util.ArrayList;
 import java.util.List;
+
 import org.apache.http.Header;
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
@@ -35,15 +35,15 @@ import com.ibm.sbt.services.client.base.IFeedHandler;
 public abstract class EntityList<Entity extends BaseEntity> extends AbstractList<Entity> implements ResponseProvider {
 
 	private final Response requestData;
-	private final ArrayList<Entity> entities;
+	private final List<Entity> entities;
 	
 	//Make it final
-	private IFeedHandler feedHandler;
+	private IFeedHandler<Entity> feedHandler;
 	
 	//TO REMOVE
 	private BaseService service;
 	
-	public EntityList(Response requestData, IFeedHandler feedHandler) {
+	public EntityList(Response requestData, IFeedHandler<Entity> feedHandler) {
 		this.requestData = requestData;
         this.feedHandler = feedHandler;
         //in case of 401 errors  client service returns null
@@ -61,7 +61,7 @@ public abstract class EntityList<Entity extends BaseEntity> extends AbstractList
 		this.entities = createEntities();
     }
 	
-	abstract protected ArrayList<Entity> createEntities();
+	abstract protected List<Entity> createEntities();
 	
 	@Override
 	public Object getData() {
@@ -120,11 +120,11 @@ public abstract class EntityList<Entity extends BaseEntity> extends AbstractList
 		return requestData.getRequest();
 	}
 	
-	public IFeedHandler getFeedHandler() {
+	public IFeedHandler<Entity> getFeedHandler() {
 		return feedHandler;
 	}
 	
-	protected BaseEntity getEntity(Object data){
+	protected Entity getEntity(Object data){
 		return getFeedHandler().createEntityFromData(data);
 	}
 	

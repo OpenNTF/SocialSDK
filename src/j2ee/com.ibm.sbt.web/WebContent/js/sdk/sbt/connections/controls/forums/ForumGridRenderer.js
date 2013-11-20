@@ -190,7 +190,7 @@ define(["../../../declare",
 		             "class": this.emptyClass,
 		             innerHTML: "<h2>" + this.nls.noResults +"</h2>",
 		             role: "document",
-		             tabIndex: 0,
+		             tabIndex: 0
 		           }, el, "only");
 	           
 	           this._doAttachEvents(grid, el, data);

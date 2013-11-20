@@ -12,7 +12,7 @@ public class ProfileVCardEmail extends BaseVCardTest{
 	
 	@Test
 	public void testProfileVCardEmail() {
-		assertTrue("Expected to trigger the vcard's appearance by hovering and clicking", checkProfileVCard("Social_Profiles_Controls_ProfileVCardEmail"));
+		assertTrue("Expected to trigger the vcard's appearance by hovering and clicking", checkProfileVCard("Social_Profiles_Controls_Profile_VCard_Email"));
 	}
 	
 }

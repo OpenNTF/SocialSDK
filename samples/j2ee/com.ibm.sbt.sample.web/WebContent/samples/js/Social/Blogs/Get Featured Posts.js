@@ -5,10 +5,10 @@ require(["sbt/connections/BlogService", "sbt/dom"],
 	        var tr = document.createElement("tr");
 	        table.appendChild(tr);
 	        var td = document.createElement("td");
-	        td.innerHTML = post.getTitle();
+	        dom.setText(td, post.getTitle());
 	        tr.appendChild(td);
 	        td = document.createElement("td");
-	        td.innerHTML = post.getBlogPostUuid();
+	        dom.setText(td, post.getBlogPostUuid());
 	        tr.appendChild(td);
 	    };
     

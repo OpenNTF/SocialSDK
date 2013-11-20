@@ -79,7 +79,7 @@ define(["./lang", "./xpath", "./base/core"], function(lang, xpath, core) {
                 }
             }
             return attribs;
-        },
+        }
         
     };
     

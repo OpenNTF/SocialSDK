@@ -12,7 +12,7 @@ public class CommunityVCard extends BaseVCardTest{
 	
 	@Test
 	public void testCommunityVCard() {
-		assertTrue("Expected to find the Community vCard on the page", checkCommunityVCard("Social_Communities_Controls_CommunityVCard"));
+		assertTrue("Expected to find the Community vCard on the page", checkCommunityVCard("Social_Communities_Controls_Community_VCard"));
 	}
 	
 }

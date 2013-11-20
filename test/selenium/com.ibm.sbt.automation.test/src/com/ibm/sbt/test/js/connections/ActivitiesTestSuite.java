@@ -20,17 +20,17 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.ibm.sbt.test.js.connections.activities.api.AddMemberToActivity;
-import com.ibm.sbt.test.js.connections.activities.api.ChangeActivityNodeType;
+import com.ibm.sbt.test.js.connections.activities.api.AddMember;
+import com.ibm.sbt.test.js.connections.activities.api.ChangeEntryType;
 import com.ibm.sbt.test.js.connections.activities.api.CreateActivity;
 import com.ibm.sbt.test.js.connections.activities.api.CreateActivityNode;
-import com.ibm.sbt.test.js.connections.activities.api.DeleteActivityMember;
+import com.ibm.sbt.test.js.connections.activities.api.DeleteMember;
 import com.ibm.sbt.test.js.connections.activities.api.DeleteAndRestoreActivity;
 import com.ibm.sbt.test.js.connections.activities.api.DeleteAndRestoreActivityNode;
 import com.ibm.sbt.test.js.connections.activities.api.GetActivitiesInTrash;
 import com.ibm.sbt.test.js.connections.activities.api.GetActivity;
-import com.ibm.sbt.test.js.connections.activities.api.GetActivityMember;
-import com.ibm.sbt.test.js.connections.activities.api.GetActivityMembers;
+import com.ibm.sbt.test.js.connections.activities.api.GetMember;
+import com.ibm.sbt.test.js.connections.activities.api.GetMembers;
 import com.ibm.sbt.test.js.connections.activities.api.GetActivityNode;
 import com.ibm.sbt.test.js.connections.activities.api.GetActivityNodeTags;
 import com.ibm.sbt.test.js.connections.activities.api.GetActivityNodes;
@@ -41,9 +41,9 @@ import com.ibm.sbt.test.js.connections.activities.api.GetAllTags;
 import com.ibm.sbt.test.js.connections.activities.api.GetAllToDos;
 import com.ibm.sbt.test.js.connections.activities.api.GetCompletedActivities;
 import com.ibm.sbt.test.js.connections.activities.api.GetMyActivities;
-import com.ibm.sbt.test.js.connections.activities.api.MoveActivityNodeToSection;
+import com.ibm.sbt.test.js.connections.activities.api.MoveEntryToSection;
 import com.ibm.sbt.test.js.connections.activities.api.UpdateActivity;
-import com.ibm.sbt.test.js.connections.activities.api.UpdateActivityMember;
+import com.ibm.sbt.test.js.connections.activities.api.UpdateMember;
 import com.ibm.sbt.test.js.connections.activities.api.UpdateActivityNode;
 
 /**
@@ -56,25 +56,25 @@ import com.ibm.sbt.test.js.connections.activities.api.UpdateActivityNode;
 	GetMyActivities.class, 
 	GetCompletedActivities.class, 
 	GetAllActivities.class,
-	AddMemberToActivity.class,
-	ChangeActivityNodeType.class,
+	AddMember.class,
+	ChangeEntryType.class,
 	CreateActivity.class,
 	CreateActivityNode.class,
-	DeleteActivityMember.class,
+	DeleteMember.class,
 	DeleteAndRestoreActivity.class,
 	DeleteAndRestoreActivityNode.class,
 	GetActivitiesInTrash.class,
 	GetActivity.class,
-	GetActivityMember.class,
-	GetActivityMembers.class,
+	GetMember.class,
+	GetMembers.class,
 	GetActivityNodesInTrash.class,
 	GetActivityNodeTags.class,
 	//GetActivityTags.class,	
 	GetAllTags.class,
 	GetAllToDos.class,	
-	MoveActivityNodeToSection.class,
+	MoveEntryToSection.class,
 	UpdateActivity.class,
-	UpdateActivityMember.class,
+	UpdateMember.class,
 	UpdateActivityNode.class,
 	GetActivityNode.class,
 	GetActivityNodes.class})

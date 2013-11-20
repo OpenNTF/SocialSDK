@@ -3,20 +3,22 @@
 	xmlns:xe="http://www.ibm.com/xsp/coreex">
 	<xp:this.resources>
 		<xp:script
-			src="/.ibmxspres/domino/osplayground/gadgets/js/container:embedded-experiences:open-views:actions:selection.js?c=1&amp;debug=1&amp;container=default"
+			src="/.ibmxspres/domino/osplayground/gadgets/js/container:embedded-experiences:open-views:actions:selection.js?c=1&amp;debug=1&amp;container=playground"
 			clientSide="true">
 		</xp:script>
+		<xp:script src="/commonSnippets.js" clientSide="true"></xp:script>
+		<xp:script src="/gadgetSnippets.js" clientSide="true"></xp:script>
 		<xp:dojoModulePath prefix="explorer"
 			url="/.ibmxspres/domino/osplayground/explorer">
 		</xp:dojoModulePath>
-		<xp:dojoModulePath prefix="playground"
-			url="/modules">
+		<xp:dojoModulePath prefix="playground" url="/modules">
 		</xp:dojoModulePath>
 		<xp:dojoModule name="playground.gadgetSnippets"></xp:dojoModule>
 		<xp:dojoModule name="dojo.hash"></xp:dojoModule>
 		<xp:dojoModule name="extlib.codemirror.lib.codemirror"></xp:dojoModule>
 		<xp:styleSheet href="/.ibmxspres/.extlib/codemirror/lib/codemirror.css"></xp:styleSheet>
-		<xp:styleSheet href="/.ibmxspres/.sbtsdk/bootstrap/css/bootstrap.min.css"></xp:styleSheet>
+		<xp:styleSheet
+			href="/.ibmxspres/.sbtsdk/bootstrap/css/bootstrap-scoped.min.css"></xp:styleSheet>
 		<xp:styleSheet href="/gadget.css"></xp:styleSheet>
 	</xp:this.resources>
 
@@ -46,8 +48,14 @@
 	tabJs:			'#{id:tabJs}',
 	tabCss:			'#{id:tabCss}',
 	tabJson:		'#{id:tabJson}',
-	codeDialog:		'#{id:codeDialog}'
+	tabProperties:	'#{id:tabProperties}',
+	codeDialog:		'#{id:codeDialog}',
+	docContainer:	'#{id:docContainer}'	
 }
+dojo.addOnLoad(function() {
+   dojo.connect(window, "onresize", resize);
+   resize();
+});
 ]]></xp:this.value>
 	</xp:scriptBlock>
 
@@ -83,7 +91,7 @@ if(doc) {
 		css:			doc.getItemValueString("css"),
 		json:			doc.getItemValueString("json"),
 		properties:		doc.getItemValueString("properties"),
-		documentation:	doc.getItemValueString("documentation")
+		documentation:	doc.getItemValueString("documentation") || doc.getItemValueString("description") 
 	}
 	return o;
 }
@@ -117,7 +125,7 @@ return o;]]></xe:this.script>
 					</xe:djBorderContainer>
 				</xe:djBorderPane>
 				<!--  /Left tree -->
-				
+
 				<!--  Body of the playground -->
 				<xe:djBorderPane id="djBorderPane2" region="leading"
 					splitter="true" style="width:45%">
@@ -133,8 +141,7 @@ return o;]]></xe:this.script>
 						<xe:djBorderPane region="top" style="padding:0px">
 							<xe:toolbar id="toolbar1">
 								<xe:this.treeNodes>
-									<xe:basicLeafNode label="New Gadget"
-										href="#">
+									<xe:basicLeafNode label="New Gadget" href="#">
 									</xe:basicLeafNode>
 									<xe:basicLeafNode label="Save"
 										loaded="${javascript:userBean.canCreateDocs}">
@@ -166,6 +173,9 @@ if(confirm("This operation cannot be undone.\nDo you really want to delete this 
 	fireOnClick('#{id:deleteLink}');	
 }]]></xe:this.onClick>
 									</xe:basicLeafNode>
+									<xe:basicLeafNode label="API Documentation"
+										onClick="toggleDocumentation()">
+									</xe:basicLeafNode>
 								</xe:this.treeNodes>
 							</xe:toolbar>
 							<xp:link escape="true" text="Edit..." id="deleteLink"
@@ -184,52 +194,69 @@ if(doc) {
 							</xp:link>
 						</xe:djBorderPane>
 						<!-- /Action buttons toolbar -->
-						
+
 						<!-- Gadget.xml Code Tab Container -->
 						<xe:djBorderPane region="top"
-							style="padding: 5px 0 0 0; height: 65%; overflow: hidden" splitter="true">
+							style="padding: 5px 0 0 0; height: 65%; overflow: hidden"
+							splitter="true">
 							<xp:div style="border: 1px solid #AAAAAA; height: 99%;">
 								<xc:PlaygroundTabGadget></xc:PlaygroundTabGadget>
 							</xp:div>
 						</xe:djBorderPane>
 						<!-- /Gadget.xml Code Tab Container -->
-						
+
+						<!-- Other Code Tab Container -->
 						<xe:djBorderPane region="center" style="padding:0px">
 							<xe:djTabContainer id="tabContainer"
 								style="width: 100%; height: 100%; border: none">
-								<xe:djTabPane id="djTabPane1" title="HTML"
+								<xe:djTabPane id="tabHtml" title="HTML"
 									onShow="pageGlobal.htmlEditor.refresh()">
+									<xe:this.dojoAttributes>
+										<xp:dojoAttribute name="iconClass" value="iconTabEmpty">
+										</xp:dojoAttribute>
+									</xe:this.dojoAttributes>
 									<xp:div style="border: 1px solid #AAAAAA; height: 100%">
 										<xc:PlaygroundTabHtml></xc:PlaygroundTabHtml>
 									</xp:div>
 								</xe:djTabPane>
 								<xe:djTabPane id="tabJs" title="JavaScript"
 									onShow="pageGlobal.jsEditor.refresh()">
+									<xe:this.dojoAttributes>
+										<xp:dojoAttribute name="iconClass" value="iconTabEmpty">
+										</xp:dojoAttribute>
+									</xe:this.dojoAttributes>
 									<xp:div style="border: 1px solid #AAAAAA; height: 100%">
 										<xc:PlaygroundTabJavaScript></xc:PlaygroundTabJavaScript>
 									</xp:div>
 								</xe:djTabPane>
 								<xe:djTabPane id="tabCss" title="CSS"
 									onShow="pageGlobal.cssEditor.refresh()">
+									<xe:this.dojoAttributes>
+										<xp:dojoAttribute name="iconClass" value="iconTabEmpty">
+										</xp:dojoAttribute>
+									</xe:this.dojoAttributes>
 									<xp:div style="border: 1px solid #AAAAAA; height: 100%">
 										<xc:PlaygroundTabCss></xc:PlaygroundTabCss>
 									</xp:div>
 								</xe:djTabPane>
 								<xe:djTabPane id="tabJson" title="JSON Payload"
 									onShow="pageGlobal.jsonEditor.refresh()">
+									<xe:this.dojoAttributes>
+										<xp:dojoAttribute name="iconClass" value="iconTabEmpty">
+										</xp:dojoAttribute>
+									</xe:this.dojoAttributes>
 									<xp:div style="border: 1px solid #AAAAAA; height: 100%">
 										<xc:PlaygroundTabJson></xc:PlaygroundTabJson>
 									</xp:div>
 								</xe:djTabPane>
-								<xe:djTabPane id="djTabProperties" title="Properties"
+								<xe:djTabPane id="tabProperties" title="Properties"
 									onShow="pageGlobal.propertiesEditor.refresh()">
+									<xe:this.dojoAttributes>
+										<xp:dojoAttribute name="iconClass" value="iconTabEmpty">
+										</xp:dojoAttribute>
+									</xe:this.dojoAttributes>
 									<xp:div style="border: 1px solid #AAAAAA; height: 100%">
 										<xc:PlaygroundTabProperties></xc:PlaygroundTabProperties>
-									</xp:div>
-								</xe:djTabPane>
-								<xe:djTabPane id="djTabDocumentation" title="Documentation">
-									<xp:div style="border: 1px solid #AAAAAA; height: 100%">
-										<xc:PlaygroundTabDocumentation></xc:PlaygroundTabDocumentation>
 									</xp:div>
 								</xe:djTabPane>
 							</xe:djTabContainer>
@@ -243,42 +270,48 @@ if(doc) {
 				<!--  /Body of the playground -->
 
 				<!--  Preview area-->
-				<xe:djBorderPane region="center" style="padding:0px; overflow: hidden;">
-					<xe:djBorderContainer>
+				<xe:djBorderPane region="center"
+					style="padding:0px; overflow: hidden; width: 100%; height: 100%">
+					<xe:djBorderContainer style="width: 100%; height: 100%">
 						<xe:this.dojoAttributes>
 							<xp:dojoAttribute name="gutters" value="false">
 							</xp:dojoAttribute>
 						</xe:this.dojoAttributes>
-						<xe:djBorderPane region="top" style="padding:0px; overflow: hidden;">
-							<xe:toolbar id="toolbar2" style="display: inline-block">
+						<xe:djBorderPane region="top"
+							style="padding:0px; overflow: hidden;">
+							<xe:toolbar id="toolbar2">
 								<xe:this.treeNodes>
 									<xe:basicLeafNode label="Run"
-										onClick="dojo.publish('runCode', false);">
+										onClick="dojo.publish('runCode',false);">
 									</xe:basicLeafNode>
 								</xe:this.treeNodes>
 							</xe:toolbar>
 						</xe:djBorderPane>
-						<xe:djBorderPane region="center" style="padding:0px; overflow: hidden;">
+						<xe:djBorderPane region="center"
+							style="padding:0px; padding-top: 5px; overflow: hidden;">
 							<xp:div style="height: 100%">
 								<xc:GadgetsPreviewPane></xc:GadgetsPreviewPane>
 							</xp:div>
 						</xe:djBorderPane>
+						<xe:djBorderPane region="bottom" id="docContainer"  splitter="true"
+							style="padding:0px; overflow: hidden; display: none; height: 30%;">
+							<xc:PanelDocGadget></xc:PanelDocGadget>
+						</xe:djBorderPane>
 					</xe:djBorderContainer>
 				</xe:djBorderPane>
 				<!--  /Preview area-->
-				
+
 				<!--  ActivityStreams area-->
 				<xe:djBorderPane id="djBorderPane1" region="right"
-					splitter="true" style="width:1px">
-					<div id="asgadget"
-						style="height: 100%; width: 100%;">
+					splitter="true" style="width:1px" loaded="false">
+					<div id="asgadget" style="height: 100%; width: 100%;">
 					</div>
 				</xe:djBorderPane>
 				<!--  /ActivityStreams area-->
-				
+
 			</xe:djBorderContainer>
 			<!--  /Main Page -->
-			
+
 		</xc:ccLayout>
 	</xp:form>
 
@@ -382,8 +415,7 @@ dojo.byId('#{id:htmlDlgEditor}').value = pageGlobal.htmlEditor.getValue();]]></x
 		</xp:panel>
 	</xe:dialog>
 
-	<form id="PreviewForm"
-		action="#{javascript:@FullUrl('/xsp/preview/gadgetsnippet')}"
+	<form id="PreviewForm" action="#{javascript:@FullUrl('/xsp/preview/gadgetsnippet')}"
 		method="post" target="preview">
 		<input type="hidden" name="fm_gadgetid" id="gadgetid" />
 		<input type="hidden" name="fm_gadget" id="input1" />

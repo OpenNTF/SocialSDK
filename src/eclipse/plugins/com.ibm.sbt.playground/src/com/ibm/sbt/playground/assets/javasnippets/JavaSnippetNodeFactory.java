@@ -15,13 +15,13 @@
  */
 package com.ibm.sbt.playground.assets.javasnippets;
 
+import com.ibm.sbt.playground.assets.AbstractNodeFactory;
 import com.ibm.sbt.playground.assets.AssetNode;
 import com.ibm.sbt.playground.assets.CategoryNode;
-import com.ibm.sbt.playground.assets.NodeFactory;
 import com.ibm.sbt.playground.assets.RootNode;
 
 
-public class JavaSnippetNodeFactory implements NodeFactory {
+public class JavaSnippetNodeFactory extends AbstractNodeFactory {
 	
 	public static final JavaSnippetNodeFactory instance = new JavaSnippetNodeFactory();
 	

@@ -5,10 +5,10 @@ require(["sbt/connections/BookmarkService", "sbt/dom"],
 	        var tr = document.createElement("tr");
 	        table.appendChild(tr);
 	        var td = document.createElement("td");
-	        td.innerHTML = tag.getTerm();
+	        td.appendChild(dom.createTextNode(tag.getTerm()));
 	        tr.appendChild(td);
 	        td = document.createElement("td");
-	        td.innerHTML = tag.getFrequency();
+	        td.appendChild(dom.createTextNode(tag.getFrequency()));
 	        tr.appendChild(td);
 	    };
     

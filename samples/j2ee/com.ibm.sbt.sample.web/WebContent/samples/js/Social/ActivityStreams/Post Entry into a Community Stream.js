@@ -1,6 +1,6 @@
 require(["sbt/connections/ActivityStreamService", "sbt/connections/ActivityStreamConstants", "sbt/dom"], 
     function(ActivityStreamService, ASConstants, dom) {
-		var communityID = "%{name=sample.communityId|helpSnippetId=Social_Communities_Get_My_Communities}";
+		var communityID = "%{name=CommunityService.communityUuid|helpSnippetId=Social_Communities_Get_My_Communities}";
     	var activityStreamService = new ActivityStreamService();
     	var postData = { //creating post data
     			actor:{

@@ -54,6 +54,9 @@ define([],function() {
         },
         trim: function(str) {
             return dojo.trim(str);
+        },
+        getObject: function(name, create, context) {
+            return dojo.getObject(name, create, context);
         }
 	};
 });

@@ -72,7 +72,7 @@ public class PreviewGadgetHandler extends PreviewHandler {
 					emit(resp,requestParams.html,"text/html;charset=utf-8");
 					return;
 				}
-				if(StringUtil.endsWithIgnoreCase(fileName,".xml")) {
+				if(StringUtil.endsWithIgnoreCase(fileName,".css")) {
 					emit(resp,requestParams.css,"text/css;charset=utf-8");
 					return;
 				}
@@ -81,7 +81,7 @@ public class PreviewGadgetHandler extends PreviewHandler {
 					return;
 				}
 				if(StringUtil.endsWithIgnoreCase(fileName,".json")) {
-					emit(resp,requestParams.js,"application/json;charset=utf-8");
+					emit(resp,requestParams.json,"application/json;charset=utf-8");
 					return;
 				}
 			} else {
@@ -93,7 +93,7 @@ public class PreviewGadgetHandler extends PreviewHandler {
 		}
 		
 		PrintWriter pw = resp.getWriter();
-		pw.println("Social Business Tooolkit Playground - OpenSocial Gadget Snippet Preview Servlet");
+		pw.println("Social Business Toolkit Playground - OpenSocial Gadget Snippet Preview Servlet");
 		pw.flush();
 		
 		// Return the different parts of the gadget

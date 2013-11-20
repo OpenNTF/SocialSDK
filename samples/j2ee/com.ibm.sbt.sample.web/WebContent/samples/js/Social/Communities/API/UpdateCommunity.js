@@ -2,7 +2,7 @@ require([ "sbt/connections/CommunityService", "sbt/connections/CommunityConstant
     try {
         var communityService = new CommunityService();
         var community = communityService.newCommunity();
-        community.setCommunityUuid("%{name=sample.communityId|helpSnippetId=Social_Communities_Get_My_Communities}").setCommunityType("public").setTitle("%{name=sample.communityTitle}").setContent("%{name=sample.communityContent}");
+        community.setCommunityUuid("%{name=CommunityService.communityUuid|helpSnippetId=Social_Communities_Get_My_Communities}").setCommunityType("public").setTitle("%{name=sample.communityTitle}").setContent("%{name=sample.communityContent}");
         var promise = communityService.updateCommunity(community);
         promise.then(function(response) {
             dom.setText("json", json.jsonBeanStringify(response));

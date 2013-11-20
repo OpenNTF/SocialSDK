@@ -10,35 +10,6 @@ function updateLabel(r) {
 	}
 }
 
-/**
- * Create a new snippet 
- */
-function createSnippet() {
-	pageGlobal.id = "";
-	pageGlobal.unid = "";
-	if(pageGlobal.htmlEditor) {
-		pageGlobal.htmlEditor.setValue("");
-		selectTab(pageGlobal.tabHtml);
-	}
-	if(pageGlobal.jsEditor) {
-		pageGlobal.jsEditor.setValue("");
-	}
-	if(pageGlobal.cssEditor) {
-		pageGlobal.cssEditor.setValue("");
-	}
-	if(pageGlobal.propertiesEditor) {
-		pageGlobal.propertiesEditor.setValue("");
-	}
-	if(pageGlobal.documentationPanel) {
-		pageGlobal.documentationPanel.innerHTML = "";
-	}
-	
-	createPropertyPanel(null);
-	selectStack(pageGlobal.previewParams);
-	updateLabel(null);
-	updateNavSelection();
-}
-
 
 /**
  * Extract the AMD module from the JS code
@@ -66,29 +37,58 @@ function docUrl(s) {
 	return null;
 }
 
-function showDocumentation(show) {
-	if(show) {
-		var a = extractAMDModules(pageGlobal.jsEditor.getValue());
-		if(a.length) {
-			dojo.empty("jsdoclist");
-			for(var i=0; i<a.length; i++) {
-				var url = docUrl(a[i])
+function updateDocumentation() {
+	var a = extractAMDModules(pageGlobal.jsEditor.getValue());
+	if(a.length) {
+		dojo.empty("jsdoclist");
+		for(var i=0; i<a.length; i++) {
+			var url = docUrl(a[i])
+			if(url) {
 				var li = dojo.create("li", {} , "jsdoclist");
 				var lk = dojo.create("a", {href: url, target: 'blank', innerHTML: a[i]} , li);
 			}
-			dojo.style("jsdoc","display","block");
-		} else {
-			dojo.style("jsdoc","display","none");
 		}
+		dojo.style("jsdoc","display","block");
+	} else {
+		dojo.style("jsdoc","display","none");
 	}
-	_showDocumentation(show);
+}
+
+
+/**
+ * Create a new snippet 
+ */
+function createSnippet() {
+	pageGlobal.id = "";
+	pageGlobal.unid = "";
+	if(pageGlobal.htmlEditor) {
+		pageGlobal.htmlEditor.setValue("");
+		selectTab(pageGlobal.tabHtml);
+	}
+	if(pageGlobal.jsEditor) {
+		pageGlobal.jsEditor.setValue("");
+	}
+	if(pageGlobal.cssEditor) {
+		pageGlobal.cssEditor.setValue("");
+	}
+	if(pageGlobal.propertiesEditor) {
+		pageGlobal.propertiesEditor.setValue("");
+	}
+	if(pageGlobal.documentationPanel) {
+		pageGlobal.documentationPanel.innerHTML = "";
+	}
+	
+	createPropertyPanel(null);
+	selectStack(pageGlobal.previewParams);
+	updateLabel(null);
+	updateNavSelection();
+	updateDocumentation();
 }
 
 /**
  * Load a snippet from the server using a JSON RPC call. 
  */
 function loadSnippet(id) {
-	showDocumentation(false);
 	var deferred = server.loadSnippet(id)
 	deferred.addCallback(function(r) {
 		if(r.status=="ok") {
@@ -106,6 +106,7 @@ function loadSnippet(id) {
 			}
 			updateLabel(r);
 			updateNavSelection();
+			updateDocumentation();
 			if(shouldAutoExec(pageGlobal.params)) {
 				runCode(false);
 			}

@@ -52,6 +52,16 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @param args
          */
         constructor : function(args) {
+        },
+        
+        /**
+         * Return the scope search link.
+         * 
+         * @method getLink
+         * @return {String} Scope link
+         */
+        getLink : function() {
+        	return this.getAsString("link");
         }
 
     });

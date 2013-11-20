@@ -9,13 +9,13 @@ require(["sbt/connections/ForumService", "sbt/dom"],
             var tr = document.createElement("tr");
             table.appendChild(tr);
             var td = document.createElement("td");
-            td.innerHTML = title;
+            td.appendChild(dom.createTextNode(title));
             tr.appendChild(td);
             td = document.createElement("td");
-            td.innerHTML = forumUuid;
+            td.appendChild(dom.createTextNode(forumUuid));
             tr.appendChild(td);
             td = document.createElement("td");
-            td.innerHTML = communityUuid;
+            td.appendChild(dom.createTextNode(communityUuid || "<none>"));
             tr.appendChild(td);
         };
 

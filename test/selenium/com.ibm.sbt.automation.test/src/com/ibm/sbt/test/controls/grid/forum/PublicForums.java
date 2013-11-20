@@ -27,9 +27,14 @@ import com.ibm.sbt.automation.core.test.BaseGridTest;
  */
 public class PublicForums extends BaseGridTest {
 
+	@Override
+	protected boolean isEnvironmentValid() {
+		return super.isEnvironmentValid() && !environment.isSmartCloud();
+	}
+	
     @Test
     public void publicForumsTest() {
-        assertTrue("Expected the test to generate a grid", checkGrid("Social_Forums_Controls_PublicForums",false,false));
+        assertTrue("Expected the test to generate a grid", checkGrid("Social_Forums_Controls_Public_Forums",false,false));
     }
 
 }

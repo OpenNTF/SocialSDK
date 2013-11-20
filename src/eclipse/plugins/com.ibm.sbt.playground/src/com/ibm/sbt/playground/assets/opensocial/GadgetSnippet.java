@@ -24,9 +24,15 @@ import com.ibm.sbt.playground.assets.Asset;
  */
 public class GadgetSnippet extends Asset {
 
-	private String xml;
+	private String title;
+
+	private String gadgetXml;
+	private String html;
     private String docHtml;
-	
+	private String js;
+	private String css;
+	private String json;
+		
 	public GadgetSnippet() {
 	}
 
@@ -36,12 +42,26 @@ public class GadgetSnippet extends Asset {
     public void setTheme(String theme) {
 		setProperty("theme",theme);
     }
-	
-	public String getXml() {
-		return xml;
+
+	public String getTitle() {
+		return title;
 	}
-	public void setXml(String xml) {
-		this.xml = xml;
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getGadgetXml() {
+		return gadgetXml;
+	}
+	public void setGadgetXml(String gadgetXml) {
+		this.gadgetXml = gadgetXml;
+	}
+
+	public String getHtml() {
+		return html;
+	}
+	public void setHtml(String html) {
+		this.html = html;
 	}
 
     public String getDocHtml() {
@@ -50,4 +70,25 @@ public class GadgetSnippet extends Asset {
     public void setDocHtml(String docHtml) {
         this.docHtml = docHtml;
     }
+
+	public String getJs() {
+		return js;
+	}
+	public void setJs(String js) {
+		this.js = js;
+	}
+
+	public String getCss() {
+		return css;
+	}
+	public void setCss(String css) {
+		this.css = css;
+	}
+
+	public String getJson() {
+		return json;
+	}
+	public void setJson(String json) {
+		this.json = json;
+	}
 }

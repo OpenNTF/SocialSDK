@@ -1,4 +1,4 @@
-.gadgetMenuDropDown { 
+.bootstrap-scoped .gadgetMenuDropDown { 
 	right: 0; 
 	left: auto;
 }
@@ -23,4 +23,25 @@
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     line-height: 20px;
     color: #777777;
+}
+
+.gadgetModal.tab {
+	left: 22%;
+	width: 90%;
+	height: 90%;
+}
+
+.gadgetModal.sidebar {
+	left: 55%;
+	width: 22%;
+	height: 90%;
+}
+
+.gadgetModal .modal-body {
+	max-height: none;
+	height: 90%;
+}
+
+.bootstrap-scoped .modal.fade.in {
+    top: 33%;
 }

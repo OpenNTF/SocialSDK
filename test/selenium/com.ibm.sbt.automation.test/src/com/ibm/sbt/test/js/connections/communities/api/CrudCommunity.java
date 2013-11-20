@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -41,6 +41,10 @@ public class CrudCommunity extends BaseCommunitiesTest {
 
     @Test
     public void testCrudCommunity() {
+    	String name = createCommunityName();
+    	addSnippetParam("CommunityService.title", name);
+    	addSnippetParam("CommunityService.content", name);
+    	
         JavaScriptPreviewPage previewPage = executeSnippet(CREATE_SNIPPET_ID);
         JsonJavaObject json = previewPage.getJson();
         Assert.assertNull("Unexpected error detected on page", json.getString("code"));
@@ -48,13 +52,13 @@ public class CrudCommunity extends BaseCommunitiesTest {
         community = getCommunity(communityUuid);
         assertCommunityValid(json);
         
-        addSnippetParam("sample.communityId", community.getCommunityUuid());
+        addSnippetParam("CommunityService.communityUuid", community.getCommunityUuid());
         previewPage = executeSnippet(GET_SNIPPET_ID);
         List jsonList = previewPage.getJsonList();
         assertCommunityValid((JsonJavaObject)jsonList.get(0));
         Assert.assertEquals(community.getCommunityUuid(), ((JsonJavaObject)jsonList.get(1)).getString("entityId"));
         
-        addSnippetParam("sample.communityId2", community.getCommunityUuid());
+        addSnippetParam("CommunityService.communityUuid2", community.getCommunityUuid());
         previewPage = executeSnippet(DELETE_SNIPPET_ID);
         json = previewPage.getJson();
         Assert.assertNull("Unexpected error detected on page", json.getString("code"));

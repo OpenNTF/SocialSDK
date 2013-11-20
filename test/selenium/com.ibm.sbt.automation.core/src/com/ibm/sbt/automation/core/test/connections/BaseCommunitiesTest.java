@@ -15,10 +15,15 @@
  */
 package com.ibm.sbt.automation.core.test.connections;
 
+import java.text.DateFormat;
+import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.TimeZone;
 
 import junit.framework.Assert;
 
@@ -39,9 +44,7 @@ import com.ibm.sbt.services.client.connections.communities.Member;
 import com.ibm.sbt.services.client.connections.communities.MemberList;
 import com.ibm.sbt.services.client.connections.forums.ForumServiceException;
 import com.ibm.sbt.services.client.connections.forums.ForumTopic;
-import com.ibm.sbt.services.client.connections.forums.ForumType;
 import com.ibm.sbt.services.client.connections.forums.TopicList;
-import com.ibm.sbt.services.client.connections.forums.feedhandler.TopicsFeedHandler;
 import com.ibm.sbt.services.client.connections.forums.transformers.BaseForumTransformer;
 
 
@@ -56,6 +59,14 @@ public class BaseCommunitiesTest extends BaseApiTest {
     protected boolean createCommunity = true;
     protected CommunityService communityService;
     protected Community community;
+    
+    protected String CommunityEventEntry =
+    		"<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
+		    "<entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:atom=\"http://www.w3.org/2005/Atom\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\" xmlns:thr=\"http://purl.org/syndication/thread/1.0\">" +
+			      "<title xmlns:atom=\"http://www.w3.org/2005/Atom\" type=\"text\">{0}</title>" +
+			      "<snx:startDate xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\">{1}</snx:startDate>" +
+			      "<snx:endDate xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\">{2}</snx:endDate>" +
+		    "</entry>";    		
 
     public BaseCommunitiesTest() {
         setAuthType(AuthType.AUTO_DETECT);
@@ -86,9 +97,32 @@ public class BaseCommunitiesTest extends BaseApiTest {
     	}
     }
     
+    protected boolean createEvent(Community community, String title, Date start, Date end) {
+    	try {
+    		TimeZone tz = TimeZone.getTimeZone("UTC");
+    		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mmZ");
+    		df.setTimeZone(tz);
+    		
+    		String entry = MessageFormat.format(CommunityEventEntry, title, df.format(start), df.format(end));
+    		System.out.println(entry);
+    		CommunityService communityService = getCommunityService();
+    		Map<String, String> params = new HashMap<String, String>();
+    		params.put("communityUuid", community.getCommunityUuid());
+    		Response response = communityService.createData("/communities/calendar/atom/calendar/event", params, entry);
+    		int statusCode = response.getResponse().getStatusLine().getStatusCode();
+    		return statusCode == 200;
+    	} catch (Exception e) {
+    		Assert.fail("Error creating event caused by: "+e.getMessage());
+    	}
+    	return false;
+    }
+    
     protected Invite createInvite(Community community, String userid) {
     	try {
-    		return communityService.createInvite(community.getCommunityUuid(), userid);
+    		Invite invite = new Invite(communityService);
+    		invite.setCommunityUuid(community.getCommunityUuid());
+    		invite.setUserid(userid);
+    		return communityService.createInvite(invite);
     	} catch (CommunityServiceException cse) {
     		fail("Error creating invite",cse);
     	}
@@ -116,12 +150,12 @@ public class BaseCommunitiesTest extends BaseApiTest {
         Assert.assertEquals(community.getLogoUrl(), json.getString("getLogoUrl"));
         Assert.assertEquals(community.getMemberCount(), json.getInt("getMemberCount"));
         Assert.assertEquals(community.getCommunityType(), json.getString("getCommunityType"));
-        Assert.assertEquals(community.getAuthor().getName(), json.getJsonObject("getAuthor").getString("authorName"));
-        Assert.assertEquals(community.getAuthor().getEmail(), json.getJsonObject("getAuthor").getString("authorEmail"));
-        Assert.assertEquals(community.getAuthor().getUserid(), json.getJsonObject("getAuthor").getString("authorUserid"));
-        Assert.assertEquals(community.getContributor().getName(), json.getJsonObject("getContributor").getString("contributorName"));
-        Assert.assertEquals(community.getContributor().getEmail(), json.getJsonObject("getContributor").getString("contributorEmail"));
-        Assert.assertEquals(community.getContributor().getUserid(), json.getJsonObject("getContributor").getString("contributorUserid"));
+        Assert.assertEquals(community.getAuthor().getName(), json.getJsonObject("getAuthor").getString("name"));
+        Assert.assertEquals(community.getAuthor().getEmail(), json.getJsonObject("getAuthor").getString("email"));
+        Assert.assertEquals(community.getAuthor().getUserid(), json.getJsonObject("getAuthor").getString("userid"));
+        Assert.assertEquals(community.getContributor().getName(), json.getJsonObject("getContributor").getString("name"));
+        Assert.assertEquals(community.getContributor().getEmail(), json.getJsonObject("getContributor").getString("email"));
+        Assert.assertEquals(community.getContributor().getUserid(), json.getJsonObject("getContributor").getString("userid"));
     }
     
     protected void assertMemberValid(JsonJavaObject json, String communityUuid, String name, String userid, String email, String role) {

@@ -9,11 +9,7 @@ require([ "sbt/config", "sbt/lang", "sbt/dom", "sbt/json", "sbt/xml" ],
     
     var options = { 
         method: "GET" , 
-        handleAs : "text",
-        query : {
-            email : "%{name=sample.email1}"
-        },
-        loginUi : "dialog"
+        handleAs : "text"
     };
     
     endpoint.request(url, options).then(

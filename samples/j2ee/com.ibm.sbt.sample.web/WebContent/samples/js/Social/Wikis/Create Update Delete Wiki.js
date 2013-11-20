@@ -234,16 +234,16 @@ function createRow(wiki, dom) {
     var tr = document.createElement("tr");
     tableBody.appendChild(tr);
     var td = document.createElement("td");
-    td.innerHTML = title;
+    td.appendChild(dom.createTextNode(title));
     tr.appendChild(td);
     td = document.createElement("td");
-    td.innerHTML = label;
+    td.appendChild(dom.createTextNode(label));
     tr.appendChild(td);
     td = document.createElement("td");
-    td.innerHTML = summary;
+    td.appendChild(dom.createTextNode(summary));
     tr.appendChild(td);
     td = document.createElement("td");
-    td.innerHTML = tags.join();
+    td.appendChild(dom.createTextNode(tags.join()));
     tr.appendChild(td);
 }
 

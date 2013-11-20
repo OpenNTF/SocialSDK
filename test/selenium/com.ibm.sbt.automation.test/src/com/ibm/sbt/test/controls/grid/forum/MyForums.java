@@ -29,7 +29,7 @@ public class MyForums extends BaseGridTest {
 
     @Test
     public void myForumsTest() {
-        assertTrue("Expected the test to generate a grid", checkGrid("Social_Forums_Controls_MyForums",false,false));
+        assertTrue("Expected the test to generate a grid", checkGrid("Social_Forums_Controls_My_Forums",false,false));
     }
 
 }

@@ -65,7 +65,7 @@ public class ForumTopic extends BaseForumEntity{
 	 * 
 	 * @return {String} topicUuid
 	 */
-	public String getTopicUuid() throws ForumServiceException{
+	public String getTopicUuid() {
 		return super.getUid();
 	}
 
@@ -75,7 +75,7 @@ public class ForumTopic extends BaseForumEntity{
 	 * @return ForumTopic
 	 * @throws ForumServiceException
 	 */
-	public ForumTopic save(String forumId) throws ForumServiceException{
+	public ForumTopic save(String forumId) throws ForumServiceException {
 		if(StringUtil.isEmpty(getUid())){
 			if(StringUtil.isEmpty(forumId) && StringUtil.isNotEmpty(getForumUuid())){ // if a forumId was not provided but was set using setForumUuid method
 				forumId = getForumUuid();
@@ -96,7 +96,7 @@ public class ForumTopic extends BaseForumEntity{
 	 * @return ForumTopic
 	 * @throws ForumServiceException
 	 */
-	public ForumTopic save() throws ForumServiceException{
+	public ForumTopic save() throws ForumServiceException {
 		return save("");
 	}
 
@@ -203,8 +203,8 @@ public class ForumTopic extends BaseForumEntity{
 	 * @method getThreadRecommendationCount
 	 * @return {String} total recommendation count
 	 */
-	public String getThreadRecommendationCount(){
-		return getAsString(ForumsXPath.ThreadRecommendationCount);
+	public long getThreadRecommendationCount(){
+		return getAsLong(ForumsXPath.ThreadRecommendationCount);
 	}
 	/**
 	 * Returns the recommendation count for the topic, supported on Connections 4.5 or above

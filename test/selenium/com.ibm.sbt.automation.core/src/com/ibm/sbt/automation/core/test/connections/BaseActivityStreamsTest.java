@@ -17,12 +17,16 @@ package com.ibm.sbt.automation.core.test.connections;
 
 import java.util.List;
 
+import org.junit.After;
+import org.junit.Before;
+
 import junit.framework.Assert;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.BaseApiTest;
 import com.ibm.sbt.automation.core.utils.Trace;
 import com.ibm.sbt.security.authentication.AuthenticationException;
+import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.SBTServiceException;
 import com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamEntityList;
 import com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamService;
@@ -42,9 +46,36 @@ public class BaseActivityStreamsTest extends BaseApiTest {
     protected ActivityStreamService activityStreamService;
     protected ActivityStreamEntity asEntry;
     protected boolean postEntry = true;
+    protected boolean createCommunity = true;
+    protected CommunityService communityService;
+    protected Community community;
 
     public BaseActivityStreamsTest() {
         setAuthType(AuthType.AUTO_DETECT);
+    }
+    
+    @Before
+    public void createCommunity() {
+        createContext();
+        if (createCommunity) {
+        	String type = "public";
+        	if (environment.isSmartCloud()) {
+        		type = "private";
+        	}
+        	String name = createCommunityName();
+            community = createCommunity(name, type, name, "tag1,tag2,tag3");
+        }
+    }
+    
+    @After
+    public void deleteCommunityAndQuit() {
+    	deleteCommunity(community);
+    	community = null;
+    	destroyContext();
+    	
+    	if (environment.isDebugTransport()) {
+    		saveTestDataAndResults();
+    	}
     }
     
     protected ActivityStreamService getActivityStreamService() {
@@ -163,5 +194,120 @@ public class BaseActivityStreamsTest extends BaseApiTest {
 			Assert.fail("SBTServiceException: " + e.getMessage());
 		}
     }
+    
+    protected String createCommunityName() {
+    	return this.getClass().getName() + "#" + this.hashCode() + " Community - " + System.currentTimeMillis();
+    }
+    
+    protected Community createCommunity(String title, String type, String content, String tags) {
+    	return createCommunity(title, type, content, tags, true);
+    }
+    
+    protected Community createCommunity(String title, String type, String content, String tags, boolean retry) {
+        Community community = null;
+        try {
+            loginConnections();
+            CommunityService communityService = getCommunityService();
+            
+        	long start = System.currentTimeMillis();
+            community = new Community(communityService, "");
+            community.setTitle(title);
+            community.setCommunityType(type);
+            community.setContent(content);
+            community.setTags(tags);
+            String communityUuid = communityService.createCommunity(community);
+            community = communityService.getCommunity(communityUuid);
+            
+            long duration = System.currentTimeMillis() - start;
+            Trace.log("Created test community: "+communityUuid + " took "+duration+"(ms)");
+        } catch (AuthenticationException pe) {
+        	if (pe.getCause() != null) {
+        		pe.getCause().printStackTrace();
+        	}
+            Assert.fail("Error authenicating: " + pe.getMessage());
+        } catch (CommunityServiceException cse) {
+        	// TODO remove this when we upgrade the QSI
+        	Throwable t = cse.getCause();
+        	if (t instanceof ClientServicesException) {
+        		ClientServicesException csex = (ClientServicesException)t;
+        		int statusCode = csex.getResponseStatusCode();
+        		if (statusCode == 500 && retry) {
+        			return createCommunity(title + " (retry)", type, content, tags, false);
+        		}
+        	}
+            fail("Error creating test community with title: '"+title+"'", cse);
+        } 
+        
+        return community;
+    }
+
+    protected void deleteCommunity(Community community) {
+        if (community != null) {
+            try {
+            	loginConnections();
+                CommunityService communityService = getCommunityService();
+                communityService.deleteCommunity(community.getCommunityUuid());
+            } catch (AuthenticationException pe) {
+            	if (pe.getCause() != null) {
+            		pe.getCause().printStackTrace();
+            	}
+                Assert.fail("Error authenicating: " + pe.getMessage());
+            } catch (CommunityServiceException cse) {
+                community = null;
+            	// check if community delete failed because
+            	// community was already deleted
+            	Throwable t = cse.getCause();
+            	if (t instanceof ClientServicesException) {
+            		ClientServicesException csex = (ClientServicesException)t;
+            		int statusCode = csex.getResponseStatusCode();
+            		if (statusCode == 404) {
+            			Trace.log(this.getClass().getName() + " attempt to delete already deleted Community: " + csex.getLocalizedMessage());
+            			return;
+            		}
+            	}
+                fail("Error deleting community "+community, cse);
+            }
+        }
+    }
+    
+    protected void deleteCommunity(String communityId) {
+        if (communityId != null) {
+            try {
+            	loginConnections();
+                CommunityService communityService = getCommunityService();
+                communityService.deleteCommunity(communityId);
+            } catch (AuthenticationException pe) {
+            	if (pe.getCause() != null) {
+            		pe.getCause().printStackTrace();
+            	}
+                Assert.fail("Error authenicating: " + pe.getMessage());
+            } catch (CommunityServiceException cse) {
+                fail("Error deleting community "+communityId, cse);
+            }
+        }
+    }
+    
+    protected CommunityService getCommunityService() {
+        if (communityService == null) {
+            communityService = new CommunityService(getEndpointName());
+        }
+        return communityService;
+    }
+    
+    protected void fail(String message, CommunityServiceException cse) {
+    	String failure = message;
+    	
+    	Throwable cause = cse.getCause();
+    	if (cause != null) {
+    		cause.printStackTrace();
+    		failure += ", " + cause.getMessage();
+    	} else {
+    		cse.printStackTrace();
+    		failure += ", " + cse.getMessage();
+    	}
+    	
+    	Assert.fail(failure);
+    }
+
 
 }

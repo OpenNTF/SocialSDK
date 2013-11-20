@@ -38,6 +38,7 @@ public class GetUpdatesFromACommunity extends BaseActivityStreamsTest {
     
     @Test
     public void testGetUpdatesFromACommunity() {
+    	addSnippetParam("CommunityService.communityUuid", community.getCommunityUuid());
     	String commId = getProperty("CommunityService.communityUuid");
     	createEntry("urn:lsid:lconn.ibm.com:communities.community:"+commId, "@all", "@all");
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);

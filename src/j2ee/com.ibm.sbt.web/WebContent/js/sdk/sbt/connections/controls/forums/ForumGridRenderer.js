@@ -16,7 +16,7 @@
 
 define(["../../../declare",
         "../ConnectionsGridRenderer",
-        "../../../i18n",
+        "../../../i18n", "../../../dom",
         "../../../text!./templates/ForumRow.html",
         "../../../text!./templates/TableHeader.html",
         "../../../text!./templates/TopicRow.html",
@@ -28,7 +28,7 @@ define(["../../../declare",
         "../../../text!./templates/MyTopicsBreadCrumb.html",
         "../../../i18n!./nls/ForumGridRenderer"], 
 
-    function(declare, ConnectionsGridRenderer, i18n, ForumRow, tableHeader, TopicRow, 
+    function(declare, ConnectionsGridRenderer, i18n, dom, ForumRow, tableHeader, TopicRow, 
     		TopicHeader, ReplyTemplate, ReplyHeader,ReplyBreadCrumb,TopicBreadCrumb, 
     		MyTopicsBreadCrumb, nls){
 		
@@ -188,10 +188,10 @@ define(["../../../declare",
 	           
 	           var ediv = this._create("div", {
 		             "class": this.emptyClass,
-		             innerHTML: "<h2>" + this.nls.noResults +"</h2>",
 		             role: "document",
 		             tabIndex: 0
 		           }, el, "only");
+	           ediv.appendChild(dom.createTextNode("<h2>" + this.nls.noResults +"</h2>"));
 	           
 	           this._doAttachEvents(grid, el, data);
 	        },

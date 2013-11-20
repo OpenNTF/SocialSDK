@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -57,6 +57,9 @@ define([],function() {
         },
         getObject: function(name, create, context) {
             return dojo.getObject(name, create, context);
+        },
+        hitch: function(scope, fun){
+        	return dojo.hitch(scope, fun);
         }
 	};
 });

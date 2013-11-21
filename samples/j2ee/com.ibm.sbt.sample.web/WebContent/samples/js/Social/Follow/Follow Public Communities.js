@@ -65,14 +65,15 @@ function createRow(community, followService, FollowConstants, dom) {
     followBtn.onclick = function(evt) {
     	clearError(dom);
     	var promise = null;
-    	if (followBtn.innerHTML == "Follow") {
+    	var text = followBtn.text || followBtn.textContent;
+    	if (text == "Follow") {
     		promise = followService.startFollowing(followedResource);
     	} else {
     		promise = followService.stopFollowing(followedResource);
     	}
     	promise.then(
         	function(followedResource) {
-        		if (dom.getText(follow) == "Follow") {
+        		if (text == "Follow") {
         			dom.setText(followBtn, "Unfollow");
         		} else {
         			dom.setText(followBtn, "Follow");

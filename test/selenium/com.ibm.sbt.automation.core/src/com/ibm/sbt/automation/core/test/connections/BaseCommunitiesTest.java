@@ -97,6 +97,15 @@ public class BaseCommunitiesTest extends BaseApiTest {
     	}
     }
     
+    public void deleteCommunity() {
+    	deleteCommunity(community);
+    	community = null;
+    }
+    
+    public Community getCommunity() {
+    	return community;
+    }
+    
     protected boolean createEvent(Community community, String title, Date start, Date end) {
     	try {
     		TimeZone tz = TimeZone.getTimeZone("UTC");

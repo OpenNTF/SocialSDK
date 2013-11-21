@@ -2,9 +2,9 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Derby Dependencies
 Bundle-SymbolicName: com.ibm.sbt.libs.derby
-Bundle-Version: 1.0.0
+Bundle-Version: 2.0.0.qualifier
 Bundle-Vendor: IBM
-Fragment-Host: com.ibm.sbt.libs;bundle-version="1.0.0"
+Fragment-Host: com.ibm.sbt.libs
 Bundle-ClassPath: lib/derby.jar,
  lib/derbyclient.jar,
  lib/derbytools.jar,

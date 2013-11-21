@@ -22,7 +22,6 @@
 	<modules>
 		<module>com.ibm.sbt.domino.feature</module>
 		<module>com.ibm.sbt.domino.updatesite</module>
-		<module>com.ibm.sbt.target</module>
 		<module>com.ibm.xsp.sbtsdk</module>
 	</modules>
 

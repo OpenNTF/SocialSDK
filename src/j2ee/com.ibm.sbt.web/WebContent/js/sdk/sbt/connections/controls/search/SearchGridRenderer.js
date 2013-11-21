@@ -19,6 +19,7 @@
  */
 define(["../../../declare",
         "../ConnectionsGridRenderer",
+        "sbt/dom",
         "../../../lang", "../../../stringUtil", "../../../i18n",
         "../../../i18n!./nls/SearchGridRenderer",
         "../../../text!./templates/BookmarkBody.html",
@@ -985,18 +986,17 @@ define(["../../../declare",
                this._destroy(el.childNodes[0]);
            }
            var lotusUiDiv = this._create("div", { // here purely so a parent of the empty div has the lotusui class...
-             "class": "lotusui lconnSearchResults",
-             innerHTML: ""
+             "class": "lotusui lconnSearchResults"
            }, el);
+           dom.setText(lotusUiDiv, "");
            var lotusEmptyDiv = this._create("div", {
                "class": this.emptyClass,
-               innerHTML: "",
                "aria-relevant": "all",
                "aria-live": "assertive"
              }, lotusUiDiv);
-           this._create("span", {
-               innerHTML: this._nls.empty
-             }, lotusEmptyDiv);
+           dom.setText(lotusEmptyDiv, "");
+           var span = this._create("span", {}, lotusEmptyDiv);
+           dom.setText(span, this._nls.empty);
         },
         
         tableClass: "lotusTable lconnSearchResults"

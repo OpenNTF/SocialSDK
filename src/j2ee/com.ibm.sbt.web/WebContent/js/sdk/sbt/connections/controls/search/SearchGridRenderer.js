@@ -19,7 +19,7 @@
  */
 define(["../../../declare",
         "../ConnectionsGridRenderer",
-        "sbt/dom",
+        "../../../dom",
         "../../../lang", "../../../stringUtil", "../../../i18n",
         "../../../i18n!./nls/SearchGridRenderer",
         "../../../text!./templates/BookmarkBody.html",
@@ -42,7 +42,7 @@ define(["../../../declare",
         "../../../text!./templates/img.html",
         "../../../text!./templates/em.html",
         "../../../text!./templates/div.html"],
-        function(declare, ConnectionsGridRenderer, lang, stringUtil, i18n, nls, bookmarkBodyTemplate, calendarBodyTemplate, communityBodyTemplate, defaultBodyTemplate, defaultHeaderTemplate, defaultSummaryTemplate, profileBodyTemplate, profileHeaderTemplate, personCardTemplate, statusUpdateExtraHeaderTemplate, statusUpdateHeaderTemplate, aElement, tdElement, trElement, liElement, ulElement, spanElement, imgElement, emElement, divElement) {
+        function(declare, ConnectionsGridRenderer, dom, lang, stringUtil, i18n, nls, bookmarkBodyTemplate, calendarBodyTemplate, communityBodyTemplate, defaultBodyTemplate, defaultHeaderTemplate, defaultSummaryTemplate, profileBodyTemplate, profileHeaderTemplate, personCardTemplate, statusUpdateExtraHeaderTemplate, statusUpdateHeaderTemplate, aElement, tdElement, trElement, liElement, ulElement, spanElement, imgElement, emElement, divElement) {
 
     /**
      * @class SearchGridRenderer

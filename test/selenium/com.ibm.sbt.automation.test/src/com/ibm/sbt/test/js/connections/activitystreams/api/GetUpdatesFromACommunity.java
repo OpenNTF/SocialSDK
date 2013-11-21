@@ -17,10 +17,13 @@ package com.ibm.sbt.test.js.connections.activitystreams.api;
 
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.ibm.sbt.automation.core.test.connections.BaseActivityStreamsTest;
+import com.ibm.sbt.automation.core.test.connections.BaseCommunitiesTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 
 /**
@@ -29,6 +32,8 @@ import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
  * @date 08 May 2013
  */
 public class GetUpdatesFromACommunity extends BaseActivityStreamsTest {
+	
+	private BaseCommunitiesTest communitiesTest = new BaseCommunitiesTest();
     
     static final String SNIPPET_ID = "Social_ActivityStreams_API_GetUpdatesFromACommunity";
 
@@ -36,10 +41,22 @@ public class GetUpdatesFromACommunity extends BaseActivityStreamsTest {
         setAuthType(AuthType.AUTO_DETECT);
     }
     
+    @Before
+    public void createCommunity() {
+    	communitiesTest.createCommunity();
+    }
+    
+    @After
+    public void deleteCommunity() {
+    	communitiesTest.deleteCommunity();
+    }
+
     @Test
     public void testGetUpdatesFromACommunity() {
-    	String commId = getProperty("sample.communityId");
+    	String commId = communitiesTest.getCommunity().getCommunityUuid();
     	createEntry("urn:lsid:lconn.ibm.com:communities.community:"+commId, "@all", "@all");
+    	
+    	addSnippetParam("sample.communityId", commId);
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         List jsonList = previewPage.getJsonList();
         Assert.assertFalse("GetUpdatesFromACommunity returned no results", jsonList.isEmpty());

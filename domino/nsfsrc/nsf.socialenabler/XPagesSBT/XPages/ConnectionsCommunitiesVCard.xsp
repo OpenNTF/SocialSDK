@@ -8,9 +8,9 @@
 			</xp:panel>
 		</xp:this.facets>	
 		<xc:WarningConnectionsVersion></xc:WarningConnectionsVersion>
-		<xe:connectionsClient id="connectionsClient1"
+		<xe:sbtClient id="sbtClient1"
 			communitiesBusinessCard="true">
-		</xe:connectionsClient>
+		</xe:sbtClient>
 		The SBT plug-in provides a simple, secure, proxy server that can be enabled for the Connections services.
 		For this, be sure that you have the proxyEnabled property set to true in the Endpoint.<xp:br/>
 		You can also use the Domino proxy server as explained here:&#160;
@@ -75,7 +75,7 @@ viewScope.cTitle = entry.getStringValue("title")
 								</xp:td>
 							</xp:tr>
 						</xp:table>
-						<xe:connectionsWidget id="connectionsWidget1"
+						<xe:sbtWidget id="sbtWidget1"
 							dojoType="extlib.dijit.CommunitiesVCard">
 							<xe:this.dojoAttributes>
 								<xp:dojoAttribute name="name"
@@ -88,7 +88,7 @@ viewScope.cTitle = entry.getStringValue("title")
 									value="">
 								</xp:dojoAttribute>
 							</xe:this.dojoAttributes>
-						</xe:connectionsWidget>
+						</xe:sbtWidget>
 					</xp:panel>
 				</xp:td>
 			</xp:tr>

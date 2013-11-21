@@ -9,9 +9,9 @@
 			</xp:panel>
 		</xp:this.facets>
 		<xc:WarningConnectionsVersion></xc:WarningConnectionsVersion>
-		<xe:connectionsClient id="connectionsClient1"
+		<xe:sbtClient id="sbtClient1"
 			profilesBusinessCard="true">
-		</xe:connectionsClient>
+		</xe:sbtClient>
 		<xp:button id="button1">
 			<xp:this.value><![CDATA[#{javascript:var u = @Endpoint("connections").getUserIdentity()
 if(u) {
@@ -66,7 +66,7 @@ if(u) {
 		<xp:br />
 		<xp:span style="font-weight:bold">By user id</xp:span>
 		<xp:br />
-		<xe:connectionsWidget id="connectionsWidget1"
+		<xe:sbtWidget id="sbtWidget1"
 			dojoType="extlib.dijit.ProfilesVCard">
 			<xe:this.dojoAttributes>
 				<xp:dojoAttribute name="userName"
@@ -76,10 +76,10 @@ if(u) {
 					value="#{javascript:return userBean.lcId}">
 				</xp:dojoAttribute>
 			</xe:this.dojoAttributes>
-		</xe:connectionsWidget>
+		</xe:sbtWidget>
 		<xp:br />
 		<xp:span style="font-weight:bold">By email address</xp:span>
-		<xe:connectionsWidget id="connectionsWidget2"
+		<xe:sbtWidget id="sbtWidget2"
 			dojoType="extlib.dijit.ProfilesVCardInline">
 			<xe:this.dojoAttributes>
 				<xp:dojoAttribute name="userName"
@@ -89,7 +89,7 @@ if(u) {
 					value="#{javascript:return userBean.email}">
 				</xp:dojoAttribute>
 			</xe:this.dojoAttributes>
-		</xe:connectionsWidget>
+		</xe:sbtWidget>
 
 	</xc:OneUILayout>
 </xp:view>

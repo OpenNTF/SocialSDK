@@ -108,7 +108,11 @@ public class BaseApiTest extends BaseTest {
     @After
     public void destroyContext() {
         if (context != null) {
-            Context.destroy(context);
+        	try {
+        		Context.destroy(context);
+        	} catch (IllegalStateException ise) {
+        		// can ignore this
+        	}
             context = null;
         }
     }

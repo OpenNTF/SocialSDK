@@ -63,8 +63,7 @@ public class ForumsFeedHandler implements IFeedHandler  {
 	public BaseEntity createEntityFromData(Object data) {
 		Node node = (Node)data;
 		XPathExpression expr = (data instanceof Document) ? (XPathExpression)ForumsXPath.singleEntry.getPath() : null;
-		XmlDataHandler handler = new XmlDataHandler(node, ConnectionsConstants.nameSpaceCtx, expr);
-		BaseForumEntity forum = new Forum(service, handler);
+		BaseForumEntity forum = new Forum(service, (Node)data, ConnectionsConstants.nameSpaceCtx, expr);
 		return forum;
 	}
 

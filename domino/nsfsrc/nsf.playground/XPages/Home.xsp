@@ -90,7 +90,7 @@
 
 										<p>
 											After you select an environment, click
-											Connections->Profiles->Get Display Name. If you are in the
+											Social->Profiles->Get Profile. If you are in the
 											Greenhouse environment, enter your Greenhouse login
 											credentials when prompted. When JavaScript code appears in
 											the code pane, modify Line 2 of the code to replace the

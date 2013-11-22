@@ -18,7 +18,9 @@ package com.ibm.sbt.services.client.connections.forums;
 
 import org.w3c.dom.Node;
 
+import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
+import com.ibm.sbt.services.client.base.AtomEntity;
 import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.BaseService;
@@ -32,21 +34,22 @@ import com.ibm.sbt.services.client.connections.forums.model.Author;
  *
  * @author Swati Singh
  */
-public class Recommendation extends BaseEntity{
+public class Recommendation extends AtomEntity{
 
 
-	public Recommendation(BaseService svc, DataHandler<?> handler) {
-		super(svc,handler);
+	public Recommendation(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
+		super(service, node, namespaceCtx, xpathExpression);
 	}
 
-	public String getId() {
+/*	public String getId() {
 		return getAsString(ForumsXPath.uid);
 	}
 
 	public String getTitle() {
 		return getAsString(ForumsXPath.title);
-	}
+	}*/
 
+	@Override
 	public Author getAuthor(){
 		return new Author(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
     		ConnectionsConstants.nameSpaceCtx, (XPathExpression)AtomXPath.author.getPath()));

@@ -46,6 +46,26 @@ public class AtomEntity extends BaseEntity {
 	 * Construct an AtomEntity instance.
 	 * 
 	 * @param service
+	 */
+	public AtomEntity(BaseService service) {
+		super(service, null);
+	}
+	/**
+	 * Construct an AtomEntity instance.
+	 * 
+	 * @param service
+	 * @param id
+	 */
+	public AtomEntity(BaseService service, String id) {
+		super(service, null);
+		setAsString(AtomXPath.id, id);
+		
+	}
+	
+	/**
+	 * Construct an AtomEntity instance.
+	 * 
+	 * @param service
 	 * @param dataHandler
 	 */
 	public AtomEntity(BaseService service, XmlDataHandler dataHandler) {

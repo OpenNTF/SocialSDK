@@ -59,8 +59,8 @@ public class RepliesFeedHandler extends ForumsFeedHandler  {
 	public BaseEntity createEntityFromData(Object data) {
 		Node node = (Node)data;
 		XPathExpression expr = (data instanceof Document) ? (XPathExpression)ForumsXPath.singleEntry.getPath() : null;
-		XmlDataHandler handler = new XmlDataHandler(node, ConnectionsConstants.nameSpaceCtx, expr);
-		BaseForumEntity forum = new ForumReply(getService(), handler);
+//		XmlDataHandler handler = new XmlDataHandler(node, ConnectionsConstants.nameSpaceCtx, expr);
+		BaseForumEntity forum = new ForumReply(getService(), (Node)data, ConnectionsConstants.nameSpaceCtx, expr);
 		return forum;
 	}
 

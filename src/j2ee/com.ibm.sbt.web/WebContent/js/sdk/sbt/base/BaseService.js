@@ -67,13 +67,19 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
          * @param {Object} args Arguments for this service.
          */
         constructor : function(args) {
-            // create an endpoint if name was specified
-            if (args && args.endpoint) {
-                this.endpoint = config.findEndpoint(args.endpoint);
+        	args = args || {};
+        	
+            // set endpoint if specified in args
+            if (args.endpoint) {
+            	if (lang.isString(args.endpoint)) {
+            		this.endpoint = config.findEndpoint(args.endpoint);
+            	} else {
+            		this.endpoint = args.endpoint;
+            	}
             }
 
             // optionally create a cache
-            if (args && args.cacheSize) {
+            if (args.cacheSize) {
                 this._cache = new Cache(args.cacheSize);
             }
         },

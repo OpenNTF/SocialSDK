@@ -22,7 +22,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
 import com.ibm.sbt.test.js.connections.profiles.api.CheckProfileCache;
 import com.ibm.sbt.test.js.connections.profiles.api.CreateProfile;
-import com.ibm.sbt.test.js.connections.profiles.api.CreateTags;
+import com.ibm.sbt.test.js.connections.profiles.api.UpdateTags;
 import com.ibm.sbt.test.js.connections.profiles.api.DeleteProfile;
 import com.ibm.sbt.test.js.connections.profiles.api.GetCachedProfile;
 import com.ibm.sbt.test.js.connections.profiles.api.GetColleagues;
@@ -71,7 +71,7 @@ import com.ibm.sbt.test.js.connections.profiles.api.UpdateProfilePhoto;
     UpdateProfileDemonstrationSnippet.class,
     CheckProfileCache.class,
     UpdateProfilePhoto.class,
-    CreateTags.class
+    UpdateTags.class
     })
 public class ProfilesTestSuite {
     @AfterClass

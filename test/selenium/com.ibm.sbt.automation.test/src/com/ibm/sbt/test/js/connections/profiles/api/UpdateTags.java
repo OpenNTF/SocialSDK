@@ -32,12 +32,12 @@ import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
  *  
  * @date 20 Nov 2013
  */
-public class CreateTags extends BaseProfilesTest {
+public class UpdateTags extends BaseProfilesTest {
     
-    static final String SNIPPET_ID = "Social_Profiles_API_CreateTags"; 
+    static final String SNIPPET_ID = "Social_Profiles_API_UpdateTags"; 
 	
     @Test
-    public void testCreateTagsUsingEmail() {    
+    public void testUpdateTagsUsingEmail() {    
     	addSnippetParam("sample.email1", "FrankAdams@renovations.com");
     	addSnippetParam("sample.email2", "BillJordan@renovations.com");
     	JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);       
@@ -50,7 +50,7 @@ public class CreateTags extends BaseProfilesTest {
     } 
     
     @Test
-    public void testCreateTagsInvalidSourceUser() {    
+    public void testUpdateTagsInvalidSourceUser() {    
     	addSnippetParam("sample.email1", "");
     	addSnippetParam("sample.email2", "04F26086-1A63-D244-4825-7A70002586FA");
             
@@ -60,7 +60,7 @@ public class CreateTags extends BaseProfilesTest {
     }
     
     @Test
-    public void testCreateTagsInvalidTargetUser() {    
+    public void testUpdateTagsInvalidTargetUser() {    
     	addSnippetParam("sample.email1", "0EE5A7FA-3434-9A59-4825-7A7000278DAA");
     	addSnippetParam("sample.email2", "");
             

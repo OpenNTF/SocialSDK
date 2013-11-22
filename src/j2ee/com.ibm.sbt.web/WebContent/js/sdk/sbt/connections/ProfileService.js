@@ -1069,15 +1069,16 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
         },
         
         /**
-         * Create profile tags.
+         * Update profile tags. When you update profile tags, the existing tag information added by you is replaced with the new tag information.
+         * To avoid this, retrieve the tags that you want to retain first, and send them back with this request. 
          * 
-         * @method createTags
+         * @method updateTags
          * @param {Array} tags
          * @param {String} targetEmailOrUserId email address or userid of the person whose profile you want to apply the tags to
          * @param {String} sourceEmailOrUserId email address or useridof the creator of the tags
          * @param args
          */
-		createTags : function(tags, targetEmailOrUserId, sourceEmailOrUserId, args) {
+        updateTags : function(tags, targetEmailOrUserId, sourceEmailOrUserId, args) {
             // detect a bad request by validating required arguments
 			var promise = this._validateProfileId(targetEmailOrUserId);
             if (promise) {

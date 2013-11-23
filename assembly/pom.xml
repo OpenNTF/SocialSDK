@@ -4,46 +4,13 @@
 	<artifactId>distribution</artifactId>
 	<packaging>pom</packaging>
 
-	<pluginRepositories>
-		<pluginRepository>
-			<id>sonatype-public-repository</id>
-			<url>https://oss.sonatype.org/content/groups/public</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-		</pluginRepository>
-	</pluginRepositories>
+	<properties>
+		<workingDir>${project.build.directory}</workingDir>
+		<finalAssemblyFolder>
+			${workingDir}
+		</finalAssemblyFolder>
+	</properties>
 
-	<profiles>
-
-		<profile>
-			<id>gitzmo</id>
-			<activation>
-				<property>
-					<name>workingDir</name>
-				</property>
-			</activation>
-			<properties>
-				<finalAssmeblyFolder>
-					${workingDir}/kit
-				</finalAssmeblyFolder>
-			</properties>
-		</profile>
-		<profile>
-			<id>default</id>
-			<activation>
-				<activeByDefault></activeByDefault>
-			</activation>
-			<properties>
-				<finalAssmeblyFolder>
-					${project.build.directory}
-				</finalAssmeblyFolder>
-			</properties>
-		</profile>
-	</profiles>
 
 	<parent>
 		<groupId>com.ibm.sbt</groupId>

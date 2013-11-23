@@ -53,19 +53,6 @@
 			</repositories>
 		</profile>
 
-		<profile>
-			<id>labelledBuild</id>
-			<activation>
-				<property>
-					<name>buildLabel</name>
-				</property>
-			</activation>
-			<properties>
-				<maven.build.timestamp.format>yyyyMMdd-HHmm</maven.build.timestamp.format>
-				<forceContextQualifier>${buildLabel}</forceContextQualifier>
-				<unqualifiedVersion>${buildLabel}</unqualifiedVersion>
-			</properties>
-		</profile>
 	</profiles>
 
 

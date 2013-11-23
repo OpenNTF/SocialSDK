@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-  <artifactId>distribution</artifactId>
+	<artifactId>distribution</artifactId>
 	<packaging>pom</packaging>
 
 	<pluginRepositories>
@@ -17,6 +17,31 @@
 		</pluginRepository>
 	</pluginRepositories>
 
+	<profiles>
+		<profile>
+			<id>default</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<finalAssmeblyFolder>
+					${project.build.directory}
+				</finalAssmeblyFolder>
+			</properties>
+		</profile>
+				<profile>
+			<id>gitzmo</id>
+			<activation>
+				<property><name>workingDir</name></property>
+			</activation>
+			<properties>
+				<finalAssmeblyFolder>
+					${workingDir}/kit
+				</finalAssmeblyFolder>
+			</properties>
+		</profile>
+	</profiles>
+
 	<parent>
 		<groupId>com.ibm.sbt</groupId>
 		<artifactId>com.ibm.sbt</artifactId>
@@ -24,284 +49,284 @@
 	</parent>
 
 	<build>
-	<plugins>
-		<plugin>
-			<groupId>com.googlecode.maven-download-plugin</groupId>
-			<artifactId>maven-download-plugin</artifactId>
-			<version>1.0.0</version>
-			<executions>
-				<execution>
-					<id>download-tomcat-7</id>
-					<phase>generate-resources</phase>
-					<goals>
-						<goal>wget</goal>
-					</goals>
-					<configuration>
-						<url>http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.30/bin/apache-tomcat-7.0.30.zip</url>
-						<unpack>true</unpack>
-						<outputDirectory>${project.build.directory}/tomcat/unzip</outputDirectory>
-						<md5>3a1fd1825202631e6c43461fa018c4f6</md5>
-					</configuration>
-				</execution>
-			</executions>
-		</plugin>
-	      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-dependency-plugin</artifactId>
-        <version>2.8</version>
-        <executions>
-          <execution>
-            <id>copy</id>
-            <phase>package</phase>
-            <goals>
-              <goal>copy</goal>
-            </goals>
-            <configuration>
-              <artifactItems>
-           		<artifactItem>
-							<groupId>commons-logging</groupId>
-							<artifactId>commons-logging</artifactId>
-							<type>jar</type>
-							<overWrite>false</overWrite>
-							<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/lib</outputDirectory>
-						</artifactItem>
-             	<artifactItem>
-						<groupId>com.ibm.sbt</groupId>
-						<artifactId>sbt.dojo180</artifactId>
-						<version>2.0.0-SNAPSHOT</version>
-						<type>war</type>
-						<overWrite>true</overWrite>
-						<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps</outputDirectory>
-						<destFileName>sbt.dojo180.war</destFileName>
-					</artifactItem>
-					<artifactItem>
-						<groupId>com.ibm.sbt</groupId>
-						<artifactId>sbt.jquery182</artifactId>
-						<version>2.0.0-SNAPSHOT</version>
-						<type>war</type>
-						<overWrite>true</overWrite>
-						<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps</outputDirectory>
-						<destFileName>sbt.jquery182.war</destFileName>
-					</artifactItem>
-					<artifactItem>
-						<groupId>com.ibm.sbt</groupId>
-						<artifactId>sbt.bootstrap211</artifactId>
-						<version>2.0.0-SNAPSHOT</version>
-						<type>war</type>
-						<overWrite>true</overWrite>
-						<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps</outputDirectory>
-						<destFileName>sbt.bootstrap211.war</destFileName>
-					</artifactItem>
-					<artifactItem>
-						<groupId>com.ibm.sbt</groupId>
-						<artifactId>sbt.sample.web</artifactId>
-						<version>2.0.0-SNAPSHOT</version>
-						<type>war</type>
-						<overWrite>true</overWrite>
-						<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps</outputDirectory>
-						<destFileName>sbt.sample.web.war</destFileName>
-					</artifactItem>
-					
-					
-					
-						<artifactItem>
-						<groupId>com.ibm.sbt</groupId>
-						<artifactId>com.ibm.sbt.landing</artifactId>
-						<version>2.0.0-SNAPSHOT</version>
-						<type>war</type>
-						<overWrite>true</overWrite>
-						<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps</outputDirectory>
-						<destFileName>ROOT.war</destFileName>
-					</artifactItem>
-
-					<artifactItem>
-						<groupId>com.ibm.sbt</groupId>
-						<artifactId>acme.social.sample.dataapp</artifactId>
-						<version>2.0.0-SNAPSHOT</version>
-						<type>war</type>
-						<overWrite>true</overWrite>
-						<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps</outputDirectory>
-						<destFileName>acme.social.sample.dataapp.war</destFileName>
-					</artifactItem>
-					<artifactItem>
-						<groupId>com.ibm.sbt</groupId>
-						<artifactId>acme.social.sample.webapp</artifactId>
-						<version>2.0.0-SNAPSHOT</version>
-						<type>war</type>
-						<overWrite>true</overWrite>
-						<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps</outputDirectory>
-						<destFileName>acme.social.sample.webapp.war</destFileName>
-					</artifactItem>
-					<artifactItem>
-						<groupId>com.ibm.sbt</groupId>
-						<artifactId>helloworld.webapp</artifactId>
-						<version>2.0.0-SNAPSHOT</version>
-						<type>war</type>
-						<overWrite>true</overWrite>
-						<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps</outputDirectory>
-						<destFileName>helloworld.webapp.war</destFileName>
-					</artifactItem>
-					
-					
-					
-					
-				
-
-					<artifactItem>
-						<groupId>com.ibm.sbt</groupId>
-						<artifactId>smartcloud.webapp</artifactId>
-						<version>2.0.0-SNAPSHOT</version>
-						<type>war</type>
-						<overWrite>true</overWrite>
-						<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps</outputDirectory>
-						<destFileName>smartcloud.webapp.war</destFileName>
-					</artifactItem>
-					<artifactItem>
-						<groupId>com.ibm.sbt</groupId>
-						<artifactId>grantaccess.webapp</artifactId>
-						<version>2.0.0-SNAPSHOT</version>
-						<type>war</type>
-						<overWrite>true</overWrite>
-						<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps</outputDirectory>
-						<destFileName>grantaccess.webapp.war</destFileName>
-					</artifactItem>
-					<artifactItem>
-						<groupId>com.ibm.sbt</groupId>
-						<artifactId>acme.sample.webapp</artifactId>
-						<version>2.0.0-SNAPSHOT</version>
-						<type>war</type>
-						<overWrite>true</overWrite>
-						<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps</outputDirectory>
-						<destFileName>acme.sample.webapp.war</destFileName>
-					</artifactItem>
-					
-             
-             
-             
-             
-						<artifactItem>
-								<groupId>com.ibm.sbt</groupId>
-								<artifactId>com.ibm.sbt.web</artifactId>
-								<version>2.0.0-SNAPSHOT</version>
-								<type>war</type>
-								<overWrite>true</overWrite>
-								<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps</outputDirectory>
-								<destFileName>sbt.war</destFileName>
-							</artifactItem>
-					<artifactItem>
-						<groupId>com.ibm.sbt</groupId>
-						<artifactId>com.ibm.commons</artifactId>
-						<version>2.0.0-SNAPSHOT</version>
-						<type>jar</type>
-						<overWrite>true</overWrite>
-						<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/lib</outputDirectory>
-					</artifactItem>
-					<artifactItem>
-						<groupId>com.ibm.sbt</groupId>
-						<artifactId>com.ibm.commons.runtime</artifactId>
-						<version>2.0.0-SNAPSHOT</version>
-						<type>jar</type>
-						<overWrite>true</overWrite>
-						<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/lib</outputDirectory>
-					</artifactItem>
-					<artifactItem>
-						<groupId>com.ibm.sbt</groupId>
-						<artifactId>com.ibm.commons.xml</artifactId>
-						<version>2.0.0-SNAPSHOT</version>
-						<type>jar</type>
-						<overWrite>true</overWrite>
-						<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/lib</outputDirectory>
-					</artifactItem>
-	
-             
-             
-             
-             
-             
-             
-              </artifactItems>
-              <outputDirectory>${project.build.directory}/wars</outputDirectory>
-              <overWriteReleases>false</overWriteReleases>
-              <overWriteSnapshots>true</overWriteSnapshots>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-		<plugin>
-			<artifactId>maven-antrun-plugin</artifactId>
-			<version>1.7</version>
-			<executions>
-				<execution>
-					<phase>package</phase>
-					<configuration>
-						<target>
-							<!-- Package Tomcat -->
-							<delete
-								dir="${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps/ROOT" />
+		<plugins>
+			<plugin>
+				<groupId>com.googlecode.maven-download-plugin</groupId>
+				<artifactId>maven-download-plugin</artifactId>
+				<version>1.0.0</version>
+				<executions>
+					<execution>
+						<id>download-tomcat-7</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>wget</goal>
+						</goals>
+						<configuration>
+							<url>http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.30/bin/apache-tomcat-7.0.30.zip</url>
+							<unpack>true</unpack>
+							<outputDirectory>${project.build.directory}/tomcat/unzip</outputDirectory>
+							<md5>3a1fd1825202631e6c43461fa018c4f6</md5>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.8</version>
+				<executions>
+					<execution>
+						<id>copy</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>commons-logging</groupId>
+									<artifactId>commons-logging</artifactId>
+									<type>jar</type>
+									<overWrite>false</overWrite>
+									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/lib</outputDirectory>
+								</artifactItem>
+								<artifactItem>
+									<groupId>com.ibm.sbt</groupId>
+									<artifactId>sbt.dojo180</artifactId>
+									<version>2.0.0-SNAPSHOT</version>
+									<type>war</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps</outputDirectory>
+									<destFileName>sbt.dojo180.war</destFileName>
+								</artifactItem>
+								<artifactItem>
+									<groupId>com.ibm.sbt</groupId>
+									<artifactId>sbt.jquery182</artifactId>
+									<version>2.0.0-SNAPSHOT</version>
+									<type>war</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps</outputDirectory>
+									<destFileName>sbt.jquery182.war</destFileName>
+								</artifactItem>
+								<artifactItem>
+									<groupId>com.ibm.sbt</groupId>
+									<artifactId>sbt.bootstrap211</artifactId>
+									<version>2.0.0-SNAPSHOT</version>
+									<type>war</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps</outputDirectory>
+									<destFileName>sbt.bootstrap211.war</destFileName>
+								</artifactItem>
+								<artifactItem>
+									<groupId>com.ibm.sbt</groupId>
+									<artifactId>sbt.sample.web</artifactId>
+									<version>2.0.0-SNAPSHOT</version>
+									<type>war</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps</outputDirectory>
+									<destFileName>sbt.sample.web.war</destFileName>
+								</artifactItem>
 
 
 
-							<copy
-								todir="${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/conf"
-								file="./../samples/config/sbt.properties" />
+								<artifactItem>
+									<groupId>com.ibm.sbt</groupId>
+									<artifactId>com.ibm.sbt.landing</artifactId>
+									<version>2.0.0-SNAPSHOT</version>
+									<type>war</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps</outputDirectory>
+									<destFileName>ROOT.war</destFileName>
+								</artifactItem>
+
+								<artifactItem>
+									<groupId>com.ibm.sbt</groupId>
+									<artifactId>acme.social.sample.dataapp</artifactId>
+									<version>2.0.0-SNAPSHOT</version>
+									<type>war</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps</outputDirectory>
+									<destFileName>acme.social.sample.dataapp.war</destFileName>
+								</artifactItem>
+								<artifactItem>
+									<groupId>com.ibm.sbt</groupId>
+									<artifactId>acme.social.sample.webapp</artifactId>
+									<version>2.0.0-SNAPSHOT</version>
+									<type>war</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps</outputDirectory>
+									<destFileName>acme.social.sample.webapp.war</destFileName>
+								</artifactItem>
+								<artifactItem>
+									<groupId>com.ibm.sbt</groupId>
+									<artifactId>helloworld.webapp</artifactId>
+									<version>2.0.0-SNAPSHOT</version>
+									<type>war</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps</outputDirectory>
+									<destFileName>helloworld.webapp.war</destFileName>
+								</artifactItem>
 
 
-							<copy
-								file="./../libraries/com.ibm.sbt.libs.java/lib/com.ibm.sbt.javamail-1.4.5.jar"
-								todir="${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/lib" />
 
 
-							<copy
-								todir="${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/conf">
-								<fileset dir="platform/tomcat">
-									<include name="keystore" />
-									<include name="context.xml" />
-									<include name="tomcat-users.xml" />
-									<include name="server.xml" />
-								</fileset>
-							</copy>
 
-							<zip basedir="${project.build.directory}/tomcat/unzip"
-								destfile="${project.build.directory}/tomcat/apache-tomcat-7.0.30-sbt.zip"
-								compress="true" />
-							<delete dir="${project.build.directory}/tomcat/unzip" />
 
-						</target>
-					</configuration>
-					<goals>
-						<goal>run</goal>
-					</goals>
-				</execution>
-			</executions>
-		</plugin>
-		<plugin>
-			<groupId>org.apache.maven.plugins</groupId>
-			<artifactId>maven-assembly-plugin</artifactId>
-			<version>2.3</version>
-			<executions>
-				<execution>
-					<phase>package</phase>
-					<goals>
-						<goal>single</goal>
-					</goals>
-					<configuration>
-						<descriptor>assembly.xml</descriptor>
-						<finalName>sbtsdk-${project.version}</finalName>
-						<appendAssemblyId>false</appendAssemblyId>
-						<outputDirectory>${project.build.directory}</outputDirectory>
-					</configuration>
-				</execution>
-			</executions>
-		</plugin>
-	</plugins>
-	
-</build>
-<dependencies>
-	<dependency>
-		<groupId>commons-logging</groupId>
-		<artifactId>commons-logging</artifactId>
-		<version>1.1.1</version>
-	</dependency>
-</dependencies>
+								<artifactItem>
+									<groupId>com.ibm.sbt</groupId>
+									<artifactId>smartcloud.webapp</artifactId>
+									<version>2.0.0-SNAPSHOT</version>
+									<type>war</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps</outputDirectory>
+									<destFileName>smartcloud.webapp.war</destFileName>
+								</artifactItem>
+								<artifactItem>
+									<groupId>com.ibm.sbt</groupId>
+									<artifactId>grantaccess.webapp</artifactId>
+									<version>2.0.0-SNAPSHOT</version>
+									<type>war</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps</outputDirectory>
+									<destFileName>grantaccess.webapp.war</destFileName>
+								</artifactItem>
+								<artifactItem>
+									<groupId>com.ibm.sbt</groupId>
+									<artifactId>acme.sample.webapp</artifactId>
+									<version>2.0.0-SNAPSHOT</version>
+									<type>war</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps</outputDirectory>
+									<destFileName>acme.sample.webapp.war</destFileName>
+								</artifactItem>
+
+
+
+
+
+								<artifactItem>
+									<groupId>com.ibm.sbt</groupId>
+									<artifactId>com.ibm.sbt.web</artifactId>
+									<version>2.0.0-SNAPSHOT</version>
+									<type>war</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps</outputDirectory>
+									<destFileName>sbt.war</destFileName>
+								</artifactItem>
+								<artifactItem>
+									<groupId>com.ibm.sbt</groupId>
+									<artifactId>com.ibm.commons</artifactId>
+									<version>2.0.0-SNAPSHOT</version>
+									<type>jar</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/lib</outputDirectory>
+								</artifactItem>
+								<artifactItem>
+									<groupId>com.ibm.sbt</groupId>
+									<artifactId>com.ibm.commons.runtime</artifactId>
+									<version>2.0.0-SNAPSHOT</version>
+									<type>jar</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/lib</outputDirectory>
+								</artifactItem>
+								<artifactItem>
+									<groupId>com.ibm.sbt</groupId>
+									<artifactId>com.ibm.commons.xml</artifactId>
+									<version>2.0.0-SNAPSHOT</version>
+									<type>jar</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/lib</outputDirectory>
+								</artifactItem>
+
+
+
+
+
+
+
+							</artifactItems>
+							<outputDirectory>${project.build.directory}/wars</outputDirectory>
+							<overWriteReleases>false</overWriteReleases>
+							<overWriteSnapshots>true</overWriteSnapshots>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.7</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<configuration>
+							<target>
+								<!-- Package Tomcat -->
+								<delete
+									dir="${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/webapps/ROOT" />
+
+
+
+								<copy
+									todir="${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/conf"
+									file="./../samples/config/sbt.properties" />
+
+
+								<copy
+									file="./../libraries/com.ibm.sbt.libs.java/lib/com.ibm.sbt.javamail-1.4.5.jar"
+									todir="${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/lib" />
+
+
+								<copy
+									todir="${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.30/conf">
+									<fileset dir="platform/tomcat">
+										<include name="keystore" />
+										<include name="context.xml" />
+										<include name="tomcat-users.xml" />
+										<include name="server.xml" />
+									</fileset>
+								</copy>
+
+								<zip basedir="${project.build.directory}/tomcat/unzip"
+									destfile="${project.build.directory}/tomcat/apache-tomcat-7.0.30-sbt.zip"
+									compress="true" />
+								<delete dir="${project.build.directory}/tomcat/unzip" />
+
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.3</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<descriptor>assembly.xml</descriptor>
+							<finalName>sbtsdk-${project.version}</finalName>
+							<appendAssemblyId>false</appendAssemblyId>
+							<outputDirectory>${finalAssemblyFolder}</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+	</dependencies>
 
 </project>

@@ -26,10 +26,16 @@ define([ "../../declare", "../../data/AtomReadStore", "../../widget/_TemplatedWi
 
         templatePath: dojo.moduleUrl("sbt", "controls/grid/templates/Grid.html"),
      
+        /*
+         * Creates an instance of an atom store.
+         */
         _createDefaultStore: function(args) {
             return new AtomReadStore(args);
         },        
         
+        /* 
+         * Retrieves the data from the Atom Store
+         */
         _doQuery: function(store, options) {
             var self = this;
             

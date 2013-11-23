@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -38,11 +38,11 @@ public class ForumGridTestSuite {
 	@BeforeClass
 	public static void setup(){
 		setup = new BaseGridTestSetup();
-		setup.createCommunity("TestCommunity", "public", "content", "TestTag, tag2", false);
+		setup.createForum();
 	}
 	
 	@AfterClass
     public static void cleanup() {
-		setup.deleteCommunity();
+		setup.deleteForum();
     }
 }

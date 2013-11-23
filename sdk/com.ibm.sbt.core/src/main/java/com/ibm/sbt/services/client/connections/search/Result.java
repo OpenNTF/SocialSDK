@@ -16,9 +16,12 @@
 
 package com.ibm.sbt.services.client.connections.search;
 
-import com.ibm.sbt.services.client.base.BaseEntity;
+import org.w3c.dom.Node;
+
+import com.ibm.commons.xml.NamespaceContext;
+import com.ibm.commons.xml.xpath.XPathExpression;
+import com.ibm.sbt.services.client.base.AtomEntity;
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 
 /**
  * Result model object
@@ -27,39 +30,28 @@ import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
  */
 
 
-public class Result extends BaseEntity{
+public class Result extends AtomEntity{
 	
-	/**
-	 * Constructor
-	 *  
-	 * @param SearchService
-	 * @param ResultId
-	 */
-	public Result(SearchService searchService, String id) {
-		setService(searchService);
-		setAsString(SearchXPath.uid, id);
-	}
-
-	public Result(BaseService svc, DataHandler<?> handler) {
-		super(svc,handler);
+	public Result(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
+		super(service, node, namespaceCtx, xpathExpression);
 	}
 	
-	public String getId(){
-		return(getAsString(SearchXPath.uid));
-	}
 	
-	public String getTitle(){
-		return(getAsString(SearchXPath.title));
-	}
-	
+    /**
+     * Returns tags associated with search results
+     * @return String
+     */
 	public String getTags(){
 		return(getAsString(SearchXPath.tags));
 	}
 	
-	public String getSummary(){
-		return(getAsString(SearchXPath.summary));
-	}
 	
+    /**
+     * Relevance ranking of the search result. 
+     * This is a relative score of an individual search result. 
+	 * Values typically range between 0 and 1, but values greater than 1 can result and should be considered equivalent to a score of 1     
+     * @return String
+     */
 	public String getScore(){
 		return(getAsString(SearchXPath.score));
 	}
@@ -68,10 +60,10 @@ public class Result extends BaseEntity{
 		return(getAsString(SearchXPath.rank));
 	}
 	
-	public String getUpdated(){
-		return(getAsString(SearchXPath.updated));
-	}
-	
+	/**
+	 * Identifies the IBM® Connections application in which the result was found
+	 * @return String
+	 */
 	public String getApplication(){
 		return(getAsString(SearchXPath.application));
 	}

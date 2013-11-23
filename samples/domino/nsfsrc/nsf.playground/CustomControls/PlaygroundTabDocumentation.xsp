@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+<!-- 
 	<xp:div id="documentationPanel" style="width:100%; height:100%; overflow-y: auto">
 	</xp:div>
-	<xp:span id="label" styleClass="framelabel">Documentation</xp:span>
+ -->	
+	<xp:div id="documentationPanel">
+	</xp:div>
 	<xp:scriptBlock>
-		<xp:this.value><![CDATA[pageGlobal.documentationPanel = dojo.byId('#{id:documentationPanel}');
+		<xp:this.value><![CDATA[var editor = dojo.byId('#{id:documentationPanel}');
+pageGlobal.documentationPanel = editor;
 ]]></xp:this.value>
 	</xp:scriptBlock>
 </xp:view>

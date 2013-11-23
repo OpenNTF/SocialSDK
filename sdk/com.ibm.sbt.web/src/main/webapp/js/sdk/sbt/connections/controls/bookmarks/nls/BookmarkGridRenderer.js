@@ -20,6 +20,7 @@ define({
     	tags : "Tags: ",
         date: "Date",
         popularity: "Popularity",
-        feed : "Feed for these Bookmarks"
+        feed : "Feed for these Bookmarks",
+        noTags : "No tags"
     }
 });

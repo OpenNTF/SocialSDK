@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -19,7 +19,7 @@ import org.junit.AfterClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
-import com.ibm.sbt.test.controls.activitystream.AdvancedConfig;
+import com.ibm.sbt.test.controls.activitystream.HomepageConfig;
 import com.ibm.sbt.test.controls.activitystream.CommunityRecentUpdates;
 import com.ibm.sbt.test.controls.activitystream.CommunityStatusUpdates;
 import com.ibm.sbt.test.controls.activitystream.MultipleViews;
@@ -33,7 +33,7 @@ import com.ibm.sbt.test.controls.activitystream.SimpleStreamAllExtensions;
  * @date 15 Apr 2013
  */
 @RunWith(Suite.class)
-@SuiteClasses({ AdvancedConfig.class, CommunityRecentUpdates.class, CommunityStatusUpdates.class, MultipleViews.class, SimpleConfig.class, SimpleStream.class, SimpleStreamAllExtensions.class})
+@SuiteClasses({ HomepageConfig.class, CommunityRecentUpdates.class, CommunityStatusUpdates.class, MultipleViews.class, SimpleConfig.class, SimpleStream.class, SimpleStreamAllExtensions.class})
 public class ActivityStreamTestSuite {
     @AfterClass
     public static void cleanup() {

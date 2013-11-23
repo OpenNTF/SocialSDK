@@ -13,6 +13,7 @@ import junit.framework.Assert;
 import org.junit.After;
 import org.junit.Before;
 
+import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.BaseApiTest;
 import com.ibm.sbt.automation.core.test.BaseTest.AuthType;
@@ -22,6 +23,7 @@ import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.connections.forums.Forum;
 import com.ibm.sbt.services.client.connections.forums.ForumList;
+import com.ibm.sbt.services.client.connections.forums.ForumReply;
 import com.ibm.sbt.services.client.connections.forums.ForumService;
 import com.ibm.sbt.services.client.connections.forums.ForumServiceException;
 import com.ibm.sbt.services.client.connections.forums.ForumTopic;
@@ -59,13 +61,91 @@ public class BaseForumsTest extends BaseApiTest {
     
     @After
     public void deleteForumAndQuit() {
-    	//deleteForum(forum);
+    	deleteForum(forum);
     	forum = null;
     	destroyContext();
     }
     
+    protected ForumTopic createForumTopic(Forum forum, String title, String content) {
+    	ForumService forumService = getForumService();
+    	
+    	ForumTopic forumTopic = new ForumTopic(forumService);
+    	forumTopic.setForumUuid(forum.getForumUuid());
+    	forumTopic.setTitle(title);
+    	forumTopic.setContent(content);
+    	
+    	try {
+    		return forumService.createForumTopic(forumTopic);
+    	} catch (ForumServiceException fse) {
+    		fail("Error creating forum topic", fse);
+    	}
+    	
+    	return null;
+    }
+    
+    protected ForumTopic getForumTopic(String topicUuid, boolean failOnError) {
+    	ForumService forumService = getForumService();
+    	
+    	try {
+    		return forumService.getForumTopic(topicUuid);
+    	} catch (ForumServiceException fse) {
+    		if (failOnError) {
+    			fail("Error retrieving forum topic", fse);
+    		}
+    	}
+    	
+    	return null;
+    }
+    
+    protected ForumReply getForumReply(String replyUuid, boolean failOnError) {
+    	ForumService forumService = getForumService();
+    	
+    	try {
+    		return forumService.getForumReply(replyUuid);
+    	} catch (ForumServiceException fse) {
+    		if (failOnError) {
+    			fail("Error retrieving forum reply", fse);
+    		}
+    	}
+    	
+    	return null;
+    }
+    
+    protected ForumReply createForumReply(ForumTopic forumTopic, String title, String content) {
+    	ForumService forumService = getForumService();
+    	
+    	ForumReply forumReply = new ForumReply(forumService);
+    	forumReply.setTopicUuid(forumTopic.getTopicUuid());
+    	forumReply.setTitle(title);
+    	forumReply.setContent(content);
+    	
+    	try {
+    		return forumService.createForumReply(forumReply);
+    	} catch (ForumServiceException fse) {
+    		fail("Error creating forum reply", fse);
+    	}
+    	
+    	return null;
+    }
+    
+    protected ForumReply getForumReply(String replyUuid) {
+    	ForumService forumService = getForumService();
+    	
+    	try {
+    		return forumService.getForumReply(replyUuid);
+    	} catch (ForumServiceException fse) {
+    		fail("Error retrieving forum reply", fse);
+    	}
+    	
+    	return null;
+    }
+    
     protected String createForumName() {
     	return this.getClass().getName() + "#" + this.hashCode() + " Forum - " + System.currentTimeMillis();
+    }
+    
+    protected String createForumTopicName() {
+    	return this.getClass().getName() + "#" + this.hashCode() + " Forum Topic - " + System.currentTimeMillis();
     }
     
     protected ForumService getForumService() {
@@ -75,7 +155,7 @@ public class BaseForumsTest extends BaseApiTest {
         return forumService;
     }
     
-    protected void assertForumValid(JsonJavaObject json) {
+    protected void assertForumValid(Forum forum, JsonJavaObject json) {
         Assert.assertNull("Unexpected error detected on page", json.getString("code"));
         Assert.assertEquals(forum.getForumUuid(), json.getString("getForumUuid"));
         Assert.assertEquals(forum.getTitle(), json.getString("getTitle"));
@@ -84,10 +164,35 @@ public class BaseForumsTest extends BaseApiTest {
         Assert.assertEquals(forum.getForumUrl(), json.getString("getForumUrl"));
         Assert.assertEquals(forum.getAuthor().getName(), json.getJsonObject("getAuthor").getString("name"));
         Assert.assertEquals(forum.getAuthor().getEmail(), json.getJsonObject("getAuthor").getString("email"));
-        Assert.assertEquals(forum.getAuthor().getUserid(), json.getJsonObject("getAuthor").getString("userid"));
+        Assert.assertEquals(forum.getAuthor().getId(), json.getJsonObject("getAuthor").getString("userid"));
         //Assert.assertEquals(forum.getContributor().getName(), json.getJsonObject("getContributor").getString("name"));
         //Assert.assertEquals(forum.getContributor().getEmail(), json.getJsonObject("getContributor").getString("email"));
         //Assert.assertEquals(forum.getContributor().getUserid(), json.getJsonObject("getContributor").getString("userid"));
+    }
+    
+    protected void assertForumTopicValid(ForumTopic forumTopic, JsonJavaObject json) {
+        Assert.assertNull("Unexpected error detected on page", json.getString("code"));
+        Assert.assertEquals(forumTopic.getForumUuid(), json.getString("getForumUuid"));
+        Assert.assertEquals(forumTopic.getTopicUuid(), json.getString("getTopicUuid"));
+        Assert.assertEquals(forumTopic.getThreadRecommendationCount(), json.getLong("getThreadRecommendationCount"));
+        Assert.assertEquals(forumTopic.getTopicUuid(), json.getString("getTopicUuid"));
+        Assert.assertEquals(forumTopic.getTitle(), json.getString("getTitle"));
+        Assert.assertEquals(StringUtil.trim(forumTopic.getContent()), json.getString("getContent"));
+        Assert.assertEquals(forumTopic.getAuthor().getName(), json.getJsonObject("getAuthor").getString("name"));
+        Assert.assertEquals(forumTopic.getAuthor().getEmail(), json.getJsonObject("getAuthor").getString("email"));
+        Assert.assertEquals(forumTopic.getAuthor().getId(), json.getJsonObject("getAuthor").getString("userid"));
+    }
+    
+    protected void assertForumReplyValid(ForumReply forumReply, JsonJavaObject json) {
+        Assert.assertNull("Unexpected error detected on page", json.getString("code"));
+        Assert.assertEquals(forumReply.getTopicUuid(), json.getString("getTopicUuid"));
+        Assert.assertEquals(forumReply.getReplyUuid(), json.getString("getReplyUuid"));
+        Assert.assertEquals(forumReply.getTopicUuid(), json.getString("getTopicUuid"));
+        Assert.assertEquals(forumReply.getTitle(), json.getString("getTitle"));
+        Assert.assertEquals(StringUtil.trim(forumReply.getContent()), json.getString("getContent"));
+        Assert.assertEquals(forumReply.getAuthor().getName(), json.getJsonObject("getAuthor").getString("name"));
+        Assert.assertEquals(forumReply.getAuthor().getEmail(), json.getJsonObject("getAuthor").getString("email"));
+        Assert.assertEquals(forumReply.getAuthor().getId(), json.getJsonObject("getAuthor").getString("userid"));
     }
     
     protected void assertForumGetters(JsonJavaObject json) {
@@ -124,6 +229,59 @@ public class BaseForumsTest extends BaseApiTest {
         Assert.assertNotNull(json.getString("moderation"));
         Assert.assertNotNull(json.getString("threadCount"));
         Assert.assertNotNull(json.getString("forumUrl"));
+    }
+    
+    protected void assertForumTopicProperties(JsonJavaObject json) {
+        Assert.assertNull("Unexpected error detected on page", json.getString("code"));
+        Assert.assertNotNull(json.getString("topicUuid"));
+        Assert.assertNotNull(json.getString("forumUuid"));
+        //Assert.assertNotNull(json.getString("tags"));
+        Assert.assertNotNull(json.getString("permissions"));
+        Assert.assertNotNull(json.getString("threadCount"));
+        Assert.assertNotNull(json.getString("notRecommendedByCurrentUser"));
+        Assert.assertNotNull(json.getString("threadRecommendationCount"));
+        Assert.assertNotNull(json.getString("recommendationsUrl"));
+        Assert.assertNotNull(json.getString("entry"));
+        Assert.assertNotNull(json.getString("uid"));
+        Assert.assertNotNull(json.getString("id"));
+        Assert.assertNotNull(json.getString("title"));
+        Assert.assertNotNull(json.getString("updated"));
+        Assert.assertNotNull(json.getString("published"));
+        Assert.assertNotNull(json.getString("authorName"));
+        Assert.assertNotNull(json.getString("authorEmail"));
+        Assert.assertNotNull(json.getString("authorUserid"));
+        Assert.assertNotNull(json.getString("authorUserState"));
+        Assert.assertNotNull(json.getString("content"));
+        Assert.assertNotNull(json.getString("categoryTerm"));
+        Assert.assertNotNull(json.getString("editUrl"));
+        Assert.assertNotNull(json.getString("selfUrl"));
+        Assert.assertNotNull(json.getString("alternateUrl"));        
+    }
+    
+    protected void assertForumReplyProperties(JsonJavaObject json) {
+        Assert.assertNull("Unexpected error detected on page", json.getString("code"));
+        Assert.assertNotNull(json.getString("topicUuid"));
+        Assert.assertNotNull(json.getString("replyUuid"));
+        //Assert.assertNotNull(json.getString("tags"));
+        Assert.assertNotNull(json.getString("permissions"));
+        Assert.assertNotNull(json.getString("replyTo"));
+        Assert.assertNotNull(json.getString("notRecommendedByCurrentUser"));
+        Assert.assertNotNull(json.getString("recommendationsUrl"));
+        Assert.assertNotNull(json.getString("entry"));
+        Assert.assertNotNull(json.getString("uid"));
+        Assert.assertNotNull(json.getString("id"));
+        Assert.assertNotNull(json.getString("title"));
+        Assert.assertNotNull(json.getString("updated"));
+        Assert.assertNotNull(json.getString("published"));
+        Assert.assertNotNull(json.getString("authorName"));
+        Assert.assertNotNull(json.getString("authorEmail"));
+        Assert.assertNotNull(json.getString("authorUserid"));
+        Assert.assertNotNull(json.getString("authorUserState"));
+        Assert.assertNotNull(json.getString("content"));
+        Assert.assertNotNull(json.getString("categoryTerm"));
+        Assert.assertNotNull(json.getString("editUrl"));
+        Assert.assertNotNull(json.getString("selfUrl"));
+        Assert.assertNotNull(json.getString("alternateUrl"));        
     }
     
     protected void assertMemberValid(JsonJavaObject json, String forumUuid, String name, String userid, String email, String role) {
@@ -310,16 +468,16 @@ public class BaseForumsTest extends BaseApiTest {
         return topic;
 	}
         
-    protected void fail(String message, ForumServiceException cse) {
+    protected void fail(String message, ForumServiceException fse) {
     	String failure = message;
     	
-    	Throwable cause = cse.getCause();
+    	Throwable cause = fse.getCause();
     	if (cause != null) {
     		cause.printStackTrace();
     		failure += ", " + cause.getMessage();
     	} else {
-    		cse.printStackTrace();
-    		failure += ", " + cse.getMessage();
+    		fse.printStackTrace();
+    		failure += ", " + fse.getMessage();
     	}
     	
     	Assert.fail(failure);

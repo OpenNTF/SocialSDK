@@ -42,9 +42,7 @@
 				<module>sdk</module>
 				<module>samples</module>
 				<module>assembly</module>
-
 				<module>xpages</module>
-				<module>com.ibm.sbt.p2</module>
 			</modules>
 			<repositories>
 				<repository>

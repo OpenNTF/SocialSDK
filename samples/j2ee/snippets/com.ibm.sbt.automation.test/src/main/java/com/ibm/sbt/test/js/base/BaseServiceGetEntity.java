@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -41,7 +41,7 @@ public class BaseServiceGetEntity extends BaseCommunitiesTest {
     
     @Test
     public void testGetEntityInvalid() {
-        addSnippetParam("sample.communityId", "foo");
+        addSnippetParam("CommunityService.communityUuid", "foo");
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         List jsonList = previewPage.getJsonList();
         Assert.assertFalse(jsonList.isEmpty());
@@ -52,7 +52,7 @@ public class BaseServiceGetEntity extends BaseCommunitiesTest {
 
     @Test
     public void testGetEntityNull() {
-        addSnippetParam("sample.communityId", "");
+        addSnippetParam("CommunityService.communityUuid", "");
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         List jsonList = previewPage.getJsonList();
         Assert.assertFalse(jsonList.isEmpty());
@@ -67,7 +67,7 @@ public class BaseServiceGetEntity extends BaseCommunitiesTest {
     	createCommunity = true;
     	createCommunity();
     	
-        addSnippetParam("sample.communityId", community.getCommunityUuid());
+        addSnippetParam("CommunityService.communityUuid", community.getCommunityUuid());
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         List jsonList = previewPage.getJsonList();
         Assert.assertEquals(2, jsonList.size());

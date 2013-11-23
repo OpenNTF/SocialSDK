@@ -30,7 +30,7 @@ public class CustomTemplateCommunity extends BaseGridTest {
 
     @Test
     public void testGrid() {
-        assertTrue("Expected the test to generate a grid", checkGrid("Social_Communities_Controls_CustomTemplateCommunity",true,true));
+        assertTrue("Expected the test to generate a grid", checkGrid("Social_Communities_Controls_Custom_Template_Community",true,true));
     }
 
 }

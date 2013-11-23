@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -33,7 +33,7 @@ public class DeleteCommunity extends BaseCommunitiesTest {
 
     @Test
     public void testDeleteCommunity() {
-        addSnippetParam("sample.communityId2", community.getCommunityUuid());
+        addSnippetParam("CommunityService.communityUuid2", community.getCommunityUuid());
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         JsonJavaObject json = previewPage.getJson();
@@ -46,7 +46,7 @@ public class DeleteCommunity extends BaseCommunitiesTest {
     
     @Test
     public void testConfirmDeleteCommunity() {
-        addSnippetParam("sample.communityId2", community.getCommunityUuid());
+        addSnippetParam("CommunityService.communityUuid2", community.getCommunityUuid());
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         JsonJavaObject json = previewPage.getJson();
@@ -65,7 +65,7 @@ public class DeleteCommunity extends BaseCommunitiesTest {
     
     @Test
     public void testDeleteCommunityError() {
-        addSnippetParam("sample.communityId2", "Foo");
+        addSnippetParam("CommunityService.communityUuid2", "Foo");
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         JsonJavaObject json = previewPage.getJson();
@@ -76,7 +76,7 @@ public class DeleteCommunity extends BaseCommunitiesTest {
     @Test
     public void testDeleteCommunityInvalidArg() {
         setAuthType(AuthType.NONE);
-        addSnippetParam("sample.communityId2", "");
+        addSnippetParam("CommunityService.communityUuid2", "");
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         JsonJavaObject json = previewPage.getJson();

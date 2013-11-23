@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -29,6 +29,7 @@ import com.ibm.sbt.test.js.connections.profiles.api.GetPeopleManaged;
 import com.ibm.sbt.test.js.connections.profiles.api.GetProfile;
 import com.ibm.sbt.test.js.connections.profiles.api.GetProfileDemonstrationSnippet;
 import com.ibm.sbt.test.js.connections.profiles.api.GetReportingChain;
+import com.ibm.sbt.test.js.connections.profiles.api.ProfileCreatePostData;
 import com.ibm.sbt.test.js.connections.profiles.api.ProfileEntryDataHandler;
 import com.ibm.sbt.test.js.connections.profiles.api.ProfileEntryHCardFull;
 import com.ibm.sbt.test.js.connections.profiles.api.ProfileEntryHCardLite;
@@ -39,6 +40,7 @@ import com.ibm.sbt.test.js.connections.profiles.api.Search;
 import com.ibm.sbt.test.js.connections.profiles.api.UpdateProfile;
 import com.ibm.sbt.test.js.connections.profiles.api.CreateAndDeleteProfile;
 import com.ibm.sbt.test.js.connections.profiles.api.UpdateProfileDemonstrationSnippet;
+import com.ibm.sbt.test.js.connections.profiles.api.UpdateProfilePhoto;
 
 /**
  * @author mwallace
@@ -53,6 +55,7 @@ import com.ibm.sbt.test.js.connections.profiles.api.UpdateProfileDemonstrationSn
     ProfileEntryVCardLite.class, 
     ProfileEntryHCardFull.class, 
     ProfileEntryHCardLite.class,
+    ProfileCreatePostData.class,
     GetProfile.class,
     GetCachedProfile.class,
     GetColleagues.class,
@@ -65,7 +68,8 @@ import com.ibm.sbt.test.js.connections.profiles.api.UpdateProfileDemonstrationSn
     Search.class,
     GetProfileDemonstrationSnippet.class,
     UpdateProfileDemonstrationSnippet.class,
-    CheckProfileCache.class
+    CheckProfileCache.class,
+    UpdateProfilePhoto.class
     })
 public class ProfilesTestSuite {
     @AfterClass

@@ -7,12 +7,14 @@
 	</xp:inputTextarea>
 	<xp:span id="label" styleClass="framelabel">JavaScript</xp:span>
 	<xp:scriptBlock>
-		<xp:this.value><![CDATA[pageGlobal.jsEditor = CodeMirror.fromTextArea(dojo.byId('#{id:jsEditor}'),
+		<xp:this.value><![CDATA[var editor = dojo.byId('#{id:jsEditor}');
+pageGlobal.jsEditor = CodeMirror.fromTextArea(editor,
 {
 	mode:"javascript",
 	readOnly: #{javascript:compositeData.readOnly||false},
 	lineNumbers: true
 });
-]]></xp:this.value>
+attachTabIcon(pageGlobal.tabJavaScript,pageGlobal.jsEditor);
+attachLabel(editor,'#{id:label}');]]></xp:this.value>
 	</xp:scriptBlock>
 </xp:view>

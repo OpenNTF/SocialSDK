@@ -15,26 +15,28 @@
  */
 package com.ibm.sbt.playground.assets.opensocial;
 
+import com.ibm.commons.util.PathUtil;
+import com.ibm.commons.util.StringUtil;
+import com.ibm.sbt.playground.assets.AbstractNodeFactory;
 import com.ibm.sbt.playground.assets.AssetNode;
 import com.ibm.sbt.playground.assets.CategoryNode;
-import com.ibm.sbt.playground.assets.NodeFactory;
 import com.ibm.sbt.playground.assets.RootNode;
+import com.ibm.sbt.playground.vfs.VFSFile;
 
+public class GadgetSnippetNodeFactory extends AbstractNodeFactory {
 
-public class GadgetSnippetNodeFactory implements NodeFactory {
-	
-	public static final GadgetSnippetNodeFactory instance = new GadgetSnippetNodeFactory();
-	
-	public static final String[] EXTENSIONS = new String[]{"xml"};
-	
+	public static final GadgetSnippetNodeFactory instance=new GadgetSnippetNodeFactory();
+
+	public static final String[] EXTENSIONS=new String[] { "xml" };
+
 	public GadgetSnippetNodeFactory() {
 	}
-	
+
 	@Override
 	public String[] getAssetExtensions() {
 		return EXTENSIONS;
 	}
-	
+
 	@Override
 	public RootNode createRootNode() {
 		return new RootNode();
@@ -44,7 +46,16 @@ public class GadgetSnippetNodeFactory implements NodeFactory {
 	public CategoryNode createCategoryNode(CategoryNode parent, String name) {
 		return new CategoryNode(parent, name);
 	}
-	
+
+	@Override
+	public String getSnippetName(VFSFile s) {
+		if(StringUtil.equals(s.getName(), "spec.json")) {
+			String name=s.getParent().getNameWithoutExtension();
+			return name;
+		}
+		return null;
+	}
+
 	@Override
 	public AssetNode createAssetNode(CategoryNode parent, String name) {
 		return new GadgetSnippetAssetNode(parent, name);

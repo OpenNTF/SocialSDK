@@ -16,11 +16,16 @@
 
 package com.ibm.sbt.services.client.connections.search;
 
+import org.w3c.dom.Node;
+
+import com.ibm.commons.xml.NamespaceContext;
+import com.ibm.commons.xml.xpath.XPathExpression;
+import com.ibm.sbt.services.client.base.AtomEntity;
 import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 
-public class Scope extends BaseEntity{
+public class Scope extends AtomEntity{
 	
 	/**
 	 * Scope model object
@@ -28,41 +33,15 @@ public class Scope extends BaseEntity{
 	 * @author Manish Kataria 
 	 */
 	
+
+	public Scope(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
+		super(service, node, namespaceCtx, xpathExpression);
+	}
+	
 	/**
-	 * Constructor
-	 *  
-	 * @param Scope
-	 * @param ResultId
+	 * Link to use to display the search result in the IBM Connections user interface. Not provided for bookmarks
+	 * @return String
 	 */
-	public Scope(SearchService searchService, String id) {
-		setService(searchService);
-		setAsString(SearchXPath.uid, id);
-	}
-	
-	public Scope(BaseService svc, DataHandler<?> handler) {
-		super(svc,handler);
-	}
-	
-	public String getId(){
-		String id = getAsString(SearchXPath.uid);
-		return id;
-	}
-	
-	public String getTitle(){
-		String id = getAsString(SearchXPath.title);
-		return id;
-	}
-	
-	public String getSummary(){
-		String id = getAsString(SearchXPath.summary);
-		return id;
-	}
-	
-	public String getUpdated(){
-		String id = getAsString(SearchXPath.updated);
-		return id;
-	}
-	
 	public String getLink(){
 		String id = getAsString(SearchXPath.searchLink);
 		return id;

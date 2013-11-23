@@ -10,7 +10,7 @@ require([ "sbt/config", "sbt/_bridge/Transport", "sbt/lang", "sbt/dom", "sbt/jso
         method: "GET" , 
         handleAs : "text",
         query : {
-            communityUuid : "%{name=sample.communityId|helpSnippetId=Social_Communities_Get_My_Communities}"
+            communityUuid : "%{name=CommunityService.communityUuid|helpSnippetId=Social_Communities_Get_My_Communities}"
         }
     };
     

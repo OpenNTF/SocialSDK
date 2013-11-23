@@ -44,6 +44,8 @@ public abstract class AssetImporter {
 			return new JavaSnippetImporter(db);
 		} else if(StringUtil.equals(type, XPagesSnippetImporter.TYPE)) {
 			return new XPagesSnippetImporter(db);
+		} else if(StringUtil.equals(type, GadgetSnippetImporter.TYPE)) {
+			return new GadgetSnippetImporter(db);
 		} else if(StringUtil.equals(type, APIImporter.TYPE)) {
 			return new APIImporter(db);
 		}
@@ -128,7 +130,7 @@ public abstract class AssetImporter {
 				action.updateTask(StringUtil.format("Importing Asset: {0}", node.getPath()));
 			}
 			Asset asset = loadAsset(source, root, (AssetNode) node);
-			if(shouldImport(asset)) {
+			if(asset!=null && shouldImport(asset)) {
 				saveAsset(source, root, (AssetNode)node, asset);
 				count++;
 			}
@@ -303,7 +305,12 @@ public abstract class AssetImporter {
 //        RichTextItem rti = doc.createRichTextItem(name);
 //        rti.appendText(v);
 	}
-
+	protected void setItemValues(Document doc, String name, String value) throws Exception {
+		if(StringUtil.isNotEmpty(value)) {
+			String[] t = StringUtil.splitString(value, ',');
+			setItemValue(doc, name, t);
+		}
+	}
 	protected Object toDominoType(Object v) throws Exception {
 		if(v.getClass().isArray()) {
 			int length=Array.getLength(v);

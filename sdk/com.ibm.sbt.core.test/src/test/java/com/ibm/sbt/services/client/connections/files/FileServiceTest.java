@@ -40,7 +40,7 @@ public class FileServiceTest extends BaseUnitTest {
 
 	public final static String	TEST_CONTENT			= "This is a sample Content in the Test File. "
 																+ "Used mainly for Testing the Upload functionality of the FileService Connections API."
-																+ "Test Input : ddsfafw4t547£%*£^U£^JUL&><\03242";
+																+ "Test Input : ddsfafw4t547ï¿½%*ï¿½^Uï¿½^JUL&><\03242";
 	public final static String	TEST_NAME				= "FS_TestUpload.txt";
 
 
@@ -243,7 +243,6 @@ public class FileServiceTest extends BaseUnitTest {
 		}
 	}
 
-	@Ignore
 	@Test
 	public void testGetFilesComments() throws Exception {
 		//TODO: fix for smartcloud
@@ -273,8 +272,7 @@ public class FileServiceTest extends BaseUnitTest {
 		}
 	}
 
-	@Ignore
-	@Test
+	@Test @Ignore
 	public void testUpdateFileMetadata() throws Exception {
 		FileService fileService = new FileService();
 
@@ -360,7 +358,7 @@ public class FileServiceTest extends BaseUnitTest {
 		File fileEntry = fileService.getFile(testFileId, true);
 		String comment = "Junit Comment - Added from FileServiceTest, testAddCommentToFile";
 		Comment commentEntry;
-		commentEntry = fileService.addCommentToFile(fileEntry.getFileId(), comment, fileEntry.getAuthor().getUserUuid() , null);
+		commentEntry = fileService.addCommentToFile(fileEntry.getFileId(), comment, fileEntry.getAuthor().getId() , null);
 		assertEquals(commentEntry.getComment(),
 				"Junit Comment - Added from FileServiceTest, testAddCommentToFile");
 	}
@@ -489,7 +487,7 @@ public class FileServiceTest extends BaseUnitTest {
 			assertNotNull(folder.getTitle());
 		}
 	}
-	@Ignore
+		
 	@Test
 	public void testRestoreFileFromRecycleBin() throws Exception {
 		FileService fileService = new FileService();

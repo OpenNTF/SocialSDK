@@ -67,9 +67,14 @@ define([ "../../declare", "../../dom", "../../lang", "../../widget/grid/_GridRen
            else {
               this.renderPager(grid, el, items, data);
               this.renderSorter(grid, el, data);
-              var tbody = this.renderTable(grid, el, items, data);
+              var container = null;
+              if (!this.containerType || this.containerType == "table") {
+            	  container = this.renderTable(grid, el, items, data);
+              } else {
+            	  container = this.renderList(grid, el, this.containerType, "");  
+              }
               for (var i=0; i<items.length; i++) {
-                  this.renderItem(grid, tbody, data, items[i], i, items);
+                  this.renderItem(grid, container, data, items[i], i, items);
               }
               this.renderFooter(grid, el, items, data);
            }
@@ -171,6 +176,25 @@ define([ "../../declare", "../../dom", "../../lang", "../../widget/grid/_GridRen
             return tbody;
         },
         
+        /***
+         * Creates an ordered list.
+         * 
+         * @method - renderList
+         * @param grid - the grid
+         * @param el - the current element
+         * @param listType - the type of list to render: ul or ol
+         * @param listClass - the class for the list
+         * @param data - the data associated with the current row
+         * @returns - A list element (either ul or ol)
+         */
+        renderList: function(grid, el, listType, listClass) {       	
+            var ol = this._create(listType, {
+                role:"presentation",
+                class:listClass
+            }, el);
+            return ol;
+        },
+        
         /**
          * Creates a DIV and attaches it to the current element
          * Then creates the loading image and attaches it to the DIV 
@@ -180,9 +204,10 @@ define([ "../../declare", "../../dom", "../../lang", "../../widget/grid/_GridRen
          */
         renderLoading: function(grid, el) {
            var div = this._create("div", {
-              "class": this.loadingClass,
-              innerHTML: this.nls.loading
+              "class": this.loadingClass
            }, el, "only");
+           dom.setText(div,this.nls.loading);
+           
            var img = this._create("img", {
               "class": this.loadingImgClass,
               src: this._blankGif,
@@ -202,10 +227,10 @@ define([ "../../declare", "../../dom", "../../lang", "../../widget/grid/_GridRen
            }
            var ediv = this._create("div", {
              "class": this.emptyClass,
-             innerHTML: this.nls.empty,
              role: "document",
              tabIndex: 0
            }, el, "only");
+           dom.setText(ediv,this.nls.empty);
            //dijit.setWaiState(ediv, "label", this.nls.empty);
         },
         
@@ -220,10 +245,11 @@ define([ "../../declare", "../../dom", "../../lang", "../../widget/grid/_GridRen
             }
            var ediv = this._create("div", {
               "class": this.errorClass,
-              innerHTML: error,
               role: "alert",
               tabIndex: 0
             }, el, "only");
+           
+           dom.setText(ediv, error);
         },
         
         /**

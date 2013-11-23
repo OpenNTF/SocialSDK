@@ -1,7 +1,7 @@
 package com.ibm.sbt.test.java.connections.profiles;
 
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -30,8 +30,7 @@ public class GetPronunciationUrl extends BaseJavaServiceTest {
 
     @Test
     public void runTest() {
-        String expected = getProperty("sample.pronunciationUrl1");
-        boolean result = checkExpected("Social_Profiles_GetPronunciationUrl", expected);
+        boolean result = checkNoError("Social_Profiles_Get_Pronunciation_Url");
         assertTrue(getExpectedErrorMsg(), result);
     }
 

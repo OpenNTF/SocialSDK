@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -21,9 +21,12 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import com.ibm.sbt.automation.core.environment.TestEnvironment;
+import com.ibm.sbt.test.controls.ActivitiesGridTestSuite;
 import com.ibm.sbt.test.controls.ActivityStreamTestSuite;
+import com.ibm.sbt.test.controls.BookmarksGridTestSuite;
 import com.ibm.sbt.test.controls.CommunitiesGridTestSuite;
 import com.ibm.sbt.test.controls.FilesGridTestSuite;
+import com.ibm.sbt.test.controls.ForumGridTestSuite;
 import com.ibm.sbt.test.controls.GridTestSuite;
 import com.ibm.sbt.test.controls.ProfilesGridTestSuite;
 import com.ibm.sbt.test.controls.VCardTestSuite;
@@ -38,8 +41,8 @@ import com.ibm.sbt.test.controls.grid.profiles.ProfileTags;
  * @date 12 Mar 2013
  */
 @RunWith(Suite.class)
-@SuiteClasses({ GridTestSuite.class, CommunitiesGridTestSuite.class,
-		FilesGridTestSuite.class, ProfilesGridTestSuite.class,
+@SuiteClasses({ GridTestSuite.class, ActivitiesGridTestSuite.class,BookmarksGridTestSuite.class,CommunitiesGridTestSuite.class,
+		FilesGridTestSuite.class, ForumGridTestSuite.class, ProfilesGridTestSuite.class,
 		VCardTestSuite.class, ActivityStreamTestSuite.class,
 		WrapperTestSuite.class })
 public class ControlsTestSuite {

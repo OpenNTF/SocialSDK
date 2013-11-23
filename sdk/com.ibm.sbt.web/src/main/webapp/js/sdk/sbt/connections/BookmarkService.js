@@ -21,12 +21,13 @@
  * @module sbt.connections.BookmarkService
  */
 define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", "./BookmarkConstants", "../base/BaseService",
-         "../base/BaseEntity", "../base/XmlDataHandler",  "./Tag"], 
-    function(declare,config,lang,stringUtil,Promise,consts,BaseService,BaseEntity,XmlDataHandler, Tag) {
+         "../base/AtomEntity", "../base/XmlDataHandler",  "./Tag"], 
+    function(declare,config,lang,stringUtil,Promise,consts,BaseService,AtomEntity,XmlDataHandler, Tag) {
     
 	var BookmarkTmpl = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns=\"http://www.w3.org/2005/Atom\"><title type=\"text\">${getTitle}</title><category scheme=\"http://www.ibm.com/xmlns/prod/sn/type\" term=\"bookmark\"/><link href='${getUrl}'/>${isPrivate}<content type=\"html\">${getContent}</content>${getTags}</entry>";
 	var CategoryPrivateFlag = "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/flags\" term=\"private\" />"
 	CategoryTmpl = "<category term=\"${tag}\"></category>";
+	var CategoryBookmark = "<category term=\"bookmark\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category>";
 	
     /**
      * Bookmark class represents an entry for a Bookmarks feed returned by the
@@ -35,8 +36,11 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
      * @class Bookmark
      * @namespace sbt.connections
      */
-    var Bookmark = declare(BaseEntity, {
+    var Bookmark = declare(AtomEntity, {
 
+    	xpath : consts.BookmarkXPath,
+    	namespaces : consts.BookmarkNamespaces,
+        categoryScheme : CategoryBookmark,
         /**
          * Construct a Bookmark entity.
          * 
@@ -65,27 +69,6 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          */
         setBookmarkUuid : function(BookmarkUuid) {
             return this.setAsString("BookmarkUuid", BookmarkUuid);
-        },
-
-        /**
-         * Return the value of IBM Connections bookmark title from bookmark
-         * ATOM entry document.
-         * 
-         * @method getTitle
-         * @return {String} bookmark title of the bookmark
-         */
-        getTitle : function() {
-            return this.getAsString("title");
-        },
-
-        /**
-         * Sets title of IBM Connections bookmark.
-         * 
-         * @method setTitle
-         * @param {String} title Title of the bookmark
-         */
-        setTitle : function(title) {
-            return this.setAsString("title", title);
         },
 
         /**
@@ -127,26 +110,6 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          */
         setUrl : function(link) {
             return this.setAsString("link", link);
-        },
-        
-        /**
-         * Return the description of the IBM Connections bookmark.
-         * 
-         * @method getContent
-         * @return {String} description of the bookmark
-         */
-        getContent : function() {
-            return this.getAsString("content");
-        },
-
-        /**
-         * Sets description of IBM Connections bookmark post.
-         * 
-         * @method setContent
-         * @param {String} description Content of the bookmark
-         */
-        setContent : function(content) {
-            return this.setAsString("content", content);
         },
         
         /**
@@ -197,28 +160,6 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          */
         getAuthor : function() {
             return this.getAsObject([ "authorId", "authorName", "authorEmail", "authorUri" ]);
-        },
-
-        /**
-         * Return the published date of the IBM Connections bookmark from
-         * bookmark ATOM entry document.
-         * 
-         * @method getPublished
-         * @return {Date} Published date of the Bookmark
-         */
-        getPublished : function() {
-            return this.getAsDate("published");
-        },
-
-        /**
-         * Return the last updated date of the IBM Connections bookmark from
-         * bookmark ATOM entry document.
-         * 
-         * @method getUpdated
-         * @return {Date} Last updated date of the Bookmark
-         */
-        getUpdated : function() {
-            return this.getAsDate("updated");
         },
 
         /**
@@ -331,17 +272,11 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             });
         },
         createEntity : function(service,data,response) {
-            var entryHandler = new XmlDataHandler({
-                service :  service,
-                data : data,
-                namespaces : consts.Namespaces,
-                xpath : consts.BookmarkXPath
-            });
             return new Bookmark({
                 service : service,
-                dataHandler : entryHandler
+                data : data
             });
-        }
+       }
     };
     
     /*

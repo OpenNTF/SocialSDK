@@ -12,7 +12,7 @@
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Tue, 19 Nov 2013 10:11:31 GMT]]></value>
+        <value><![CDATA[Sat, 23 Nov 2013 12:24:01 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[p3p]]></name>
@@ -44,7 +44,7 @@
     </header>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Tue, 19 Nov 2013 10:11:31 GMT]]></value>
+        <value><![CDATA[Sat, 23 Nov 2013 12:24:01 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Content-Length]]></name>
@@ -56,7 +56,7 @@
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=S3T3WOjIeF+IoJPhS4+f/7nLnR8qcYnkzIGRH3/LAmCIjVZiyiSsqQGWu3utUzft8srGvqpR+5JJ64Dq5MzWzbIA4Wyn09hn1NCo095Hs/BZqncgWDg/n5Wx+ocC4icKVySAejT46ZQXPh5uVBUjjyHEcTSNTIU7eAfmFOMgSJQgVPCG4UusDcJVN93LjgLaGbwwNKrNPyemrMvOZMKjfXn7MNzA9ohVmyN7GB07w6o5Uw+B+XD2CRL/87IUWpOu0NKX577fpHvc/dx+cMLBjG6BbZINQLFGv1Thc7Lx35RbIM2AUCARIOsKGT/EKB/YiFFzs0W8MOqJnKMiQ3hwXccaMtkxjIZpoak+/XzC6HRcKMX96Jz96Ttiqb6CiUbqUUqeNk01CGYwuCsmQ6F1qaticcwOnR1QhB3nGmavVNEx5cS2xlq/ASMxQ7vgDfHFxGepWWTRlm62u059ItBBF0ZRVSQ7ApDNuuDs3o9zGrh/sSkCEeWp+9cIwvuH/B57ptZKwYrCilTkJefKJVz3kTWP6tCd9pRgDO+U2lGES5yBh7bwAHjQHsU7ZMfXNmsq5TCwnGfSlxiJbYH9KJ7fVp6JSA5tb28gLvnIQ2O3HT4AiI9KC1UF7X0AKVjvDySOYWmhQ30jkx4EwD4q/9KteouVY8UTeCCcorv9rahNACFVznNKUKr0u/5abUh4obaW72dgX4i8QnAgBRXDFQooguBkfohnBxpT2stXVJJ4NYycOON76IM6/J4SgXJUv7HhLLeglJidxsbmEyFNsPrjrg==;Secure; Path=/]]></value>
+        <value><![CDATA[LtpaToken2=zqbOwdpyIfVyhQc0AOiP6zIADn+S8MTvpVT+AwlKR42yxmlKI3LjgY6q+9EtPGdnL5+riPxxwNbgAxUkLCQkXjK4PqLy4przMbU6diOyVctXOxhV47uwfUSaCHHW3eD0uuVFnd3jfh0Qn+7THSlVJsuYjrYOXj1lgKKuyiTea7VgIF7X/pIokqImnX8d3iqr10nLmb2HyK8nXzWoFw4pxXWbwVSXd1zgHabnL+KUjaMenq/yfuCrh5uVugoRfUiOGQSmBDRBo5WYQxysOKF43er/BrhYmi7f+Sfq4e91N0ScvI/Fios0Ni7xlTo3cNF7t4gc3JnEJz/kkIgyv6uvD4vmX2jV7L9rDa7hJeRncvtVPnqBAEphXg/zmQhgyNwtDDCsY4AO4B4gRj0VdmXZSTJA6ZnT8W+Mm73Jg34TP3tru8A0E+lNbTtwEpOfhBJwi/xqx8TgLeG5y8ZpY7PCPGNH6wCmUl9V5yBdMikX2Y8AdpZseH0mBX2fIyqslrhuffs4W28584u6x95OK8Hvanjh4X8mtpPCYK40AGn2NdZojZWxQXkgjfxsvRalmdEEPjMGeGnTlsyCKXL0lULXeayaDqxKHLJcy2gKTWj0qkpwLL4YfJ02hnU+JlvMtRtdYiv+P87++WTbfPCVfrnp95aRpV6p6dZy8yleZQrbh5g8MiZ4WGcBdh+fnGtx/iC0f63remflD1DBq0G7QsVX1F1qmip9FYoI6tz6CIBOcWjrtHrYZKorcUaT6nYPK75zmbB6X1N1rdGavqOUB7XcFA==;Secure; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
@@ -64,29 +64,29 @@
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[csrf_token=978d198d-9495-4bcd-845c-88f0e7488c72;Secure; Path=/]]></value>
+        <value><![CDATA[csrf_token=192905f6-e66b-4bc7-887b-8758a31f1d1b;Secure; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[csrf_token_forum=214ab136-10e4-47e1-97b6-720fb0cf422a;Secure; Path=/]]></value>
+        <value><![CDATA[csrf_token_forum=d10f5b9b-c830-4d49-ac28-6f620e8fdfef;Secure; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[JSESSIONID=00008ksBFsgNAFghVhHkLfO84fe:1882ds7uc;Secure; Path=/]]></value>
+        <value><![CDATA[JSESSIONID=0000E-ZMunMyHgqw0lIWRyOBe0Z:1882dmlce;Secure; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[user_lang=ZW5fVVM%3D-MjA1NDc1NzQ%3D;Secure; Domain=na.collabserv.com; Path=/; Expires=Wed, 20-Nov-13 10:11:31 GMT;Secure;]]></value>
+        <value><![CDATA[user_lang=ZW5fVVM%3D-MjA1NDc1NzQ%3D;Secure; Domain=na.collabserv.com; Path=/; Expires=Sun, 24-Nov-13 12:24:01 GMT;Secure;]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[BIGipServerE3B-AC-9081-fe=2250444554.31011.0000;Secure; Path=/]]></value>
+        <value><![CDATA[BIGipServerE3B-AC-9081-fe=2267221770.31011.0000;Secure; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
         <value><![CDATA[BIGipServerE3B-WebSEAL-80-fe=2317356298.20480.0000;secure; path=/]]></value>
     </header></headers>
-<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><feed xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:td="urn:ibm.com/td" xmlns="http://www.w3.org/2005/Atom"><id>urn:lsid:ibm.com:td:collections</id><link href="https://apps.na.collabserv.com/files/basic/api/collections/feed" rel="self"></link><link href="https://apps.na.collabserv.com/files/app/folders/" rel="alternate"></link><title type="text">Folders Feed</title><author><name>Frank Adams</name><snx:userid>20547574</snx:userid><snx:orgId>20542369</snx:orgId><snx:orgName>IBM Test - SDK Renovations</snx:orgName><email></email><snx:userState>active</snx:userState></author><updated>2013-11-19T10:11:31.474Z</updated><generator version="4.5.0.0" uri="http://www.ibm.com/xmlns/prod/sn">IBM Connections - Files</generator><opensearch:totalResults>3534</opensearch:totalResults><link href="https://apps.na.collabserv.com/files/basic/api/collections/feed?&amp;sI=11" rel="next"></link><entry><id>urn:lsid:ibm.com:td:c5ff7ef0-77d5-11e0-95ec-f0a60a050301</id><td:uuid>c5ff7ef0-77d5-11e0-95ec-f0a60a050301</td:uuid><td:label>0 - Introducción al Curso</td:label><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/item">3</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/user">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/group">0</snx:rank><link href="https://apps.na.collabserv.com/files/basic/api/collection/c5ff7ef0-77d5-11e0-95ec-f0a60a050301/entry" rel="self"></link><link href="https://apps.na.collabserv.com/files/app/folder/c5ff7ef0-77d5-11e0-95ec-f0a60a050301/" rel="alternate" type="text/html"></link><link href="https://apps.na.collabserv.com/files/basic/api/collection/c5ff7ef0-77d5-11e0-95ec-f0a60a050301/entry" rel="edit"></link><link href="https://apps.na.collabserv.com/files/basic/api/collection/c5ff7ef0-77d5-11e0-95ec-f0a60a050301/feed" rel="files"></link><category term="collection" scheme="tag:ibm.com,2006:td/type" label="collection"></category><author><name>Oscar Ferraro Nobile</name><snx:userid>20273873</snx:userid><snx:orgId>20167923</snx:orgId><snx:orgName>Fundación Evolución</snx:orgName><email></email><snx:userState>active</snx:userState></author><td:modifier><name>Oscar Ferraro Nobile</name><snx:userid>20273873</snx:userid><snx:orgId>20167923</snx:orgId><snx:orgName>Fundación Evolución</snx:orgName><email></email><snx:userState>active</snx:userState></td:modifier><title type="text">0 - Introducción al Curso</title><published>2011-05-06T12:41:25.471Z</published><updated>2011-06-07T21:42:13.021Z</updated><td:created>2011-05-06T12:41:25.471Z</td:created><td:modified>2011-06-07T21:42:13.021Z</td:modified><summary type="text">Los invitamos a recorrer estos cuatro archivos:
+<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><feed xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:td="urn:ibm.com/td" xmlns="http://www.w3.org/2005/Atom"><id>urn:lsid:ibm.com:td:collections</id><link href="https://apps.na.collabserv.com/files/basic/api/collections/feed" rel="self"></link><link href="https://apps.na.collabserv.com/files/app/folders/" rel="alternate"></link><title type="text">Folders Feed</title><author><name>Frank Adams</name><snx:userid>20547574</snx:userid><snx:orgId>20542369</snx:orgId><snx:orgName>IBM Test - SDK Renovations</snx:orgName><email></email><snx:userState>active</snx:userState></author><updated>2013-11-23T12:24:01.524Z</updated><generator version="4.5.0.0" uri="http://www.ibm.com/xmlns/prod/sn">IBM Connections - Files</generator><opensearch:totalResults>3546</opensearch:totalResults><link href="https://apps.na.collabserv.com/files/basic/api/collections/feed?&amp;sI=11" rel="next"></link><entry><id>urn:lsid:ibm.com:td:c5ff7ef0-77d5-11e0-95ec-f0a60a050301</id><td:uuid>c5ff7ef0-77d5-11e0-95ec-f0a60a050301</td:uuid><td:label>0 - Introducción al Curso</td:label><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/item">3</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/user">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/group">0</snx:rank><link href="https://apps.na.collabserv.com/files/basic/api/collection/c5ff7ef0-77d5-11e0-95ec-f0a60a050301/entry" rel="self"></link><link href="https://apps.na.collabserv.com/files/app/folder/c5ff7ef0-77d5-11e0-95ec-f0a60a050301/" rel="alternate" type="text/html"></link><link href="https://apps.na.collabserv.com/files/basic/api/collection/c5ff7ef0-77d5-11e0-95ec-f0a60a050301/entry" rel="edit"></link><link href="https://apps.na.collabserv.com/files/basic/api/collection/c5ff7ef0-77d5-11e0-95ec-f0a60a050301/feed" rel="files"></link><category term="collection" scheme="tag:ibm.com,2006:td/type" label="collection"></category><author><name>Oscar Ferraro Nobile</name><snx:userid>20273873</snx:userid><snx:orgId>20167923</snx:orgId><snx:orgName>Fundación Evolución</snx:orgName><email></email><snx:userState>active</snx:userState></author><td:modifier><name>Oscar Ferraro Nobile</name><snx:userid>20273873</snx:userid><snx:orgId>20167923</snx:orgId><snx:orgName>Fundación Evolución</snx:orgName><email></email><snx:userState>active</snx:userState></td:modifier><title type="text">0 - Introducción al Curso</title><published>2011-05-06T12:41:25.471Z</published><updated>2011-06-07T21:42:13.021Z</updated><td:created>2011-05-06T12:41:25.471Z</td:created><td:modified>2011-06-07T21:42:13.021Z</td:modified><summary type="text">Los invitamos a recorrer estos cuatro archivos:
 - 1- Descripción del curso: aquí encontrarán la información general del mismo, objetivos, contenidos, etc.
 - 2- Qué es Lotus Live: presentación general del espacio virtual donde se realizan presentaciones sincrónicas online y se accede a los archivos y foros.
 - 3- Acceso a archivos y foros en Lotus Live: aquí se muestran los espacios donde encontrarán los archivos correspondientes a cada clase y el acceso al espacio de foros, que se encuentra dentro de la opción Comunidades.

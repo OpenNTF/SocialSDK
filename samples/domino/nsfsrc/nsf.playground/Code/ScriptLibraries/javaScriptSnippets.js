@@ -10,6 +10,51 @@ function updateLabel(r) {
 	}
 }
 
+
+/**
+ * Extract the AMD module from the JS code
+ */
+function extractAMDModules(js) {
+	var a = [];
+	if(js) {
+		var rx = /require\s*\(\s*\[\s*((?:,?\s*['"][^'"]*['"]\s*)*)\]/g;
+		for(var m=rx.exec(js); m; m=rx.exec(js)) {
+			var dep = m[1];
+			var rx2 = /['"]([^'"]*)['"]/g;
+			for(var m2=rx2.exec(dep); m2; m2=rx2.exec(dep)) {
+				a.push(m2[1]);
+			}
+		}
+	}
+	return a;
+}
+
+function docUrl(s) {
+	if(XSP.startsWith(s,"sbt/")) {
+		var urlRoot = "http://infolib.lotus.com/resources/social_business_toolkit/jsdoc/modules/"
+		return urlRoot+s.replace(/\//g,".")+".html";
+	}
+	return null;
+}
+
+function updateDocumentation() {
+	var a = extractAMDModules(pageGlobal.jsEditor.getValue());
+	if(a.length) {
+		dojo.empty("jsdoclist");
+		for(var i=0; i<a.length; i++) {
+			var url = docUrl(a[i])
+			if(url) {
+				var li = dojo.create("li", {} , "jsdoclist");
+				var lk = dojo.create("a", {href: url, target: 'blank', innerHTML: a[i]} , li);
+			}
+		}
+		dojo.style("jsdoc","display","block");
+	} else {
+		dojo.style("jsdoc","display","none");
+	}
+}
+
+
 /**
  * Create a new snippet 
  */
@@ -37,6 +82,7 @@ function createSnippet() {
 	selectStack(pageGlobal.previewParams);
 	updateLabel(null);
 	updateNavSelection();
+	updateDocumentation();
 }
 
 /**
@@ -60,6 +106,7 @@ function loadSnippet(id) {
 			}
 			updateLabel(r);
 			updateNavSelection();
+			updateDocumentation();
 			if(shouldAutoExec(pageGlobal.params)) {
 				runCode(false);
 			}

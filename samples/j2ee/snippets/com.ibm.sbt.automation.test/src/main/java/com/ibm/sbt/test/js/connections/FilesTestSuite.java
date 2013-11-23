@@ -33,12 +33,12 @@ import com.ibm.sbt.test.js.connections.files.api.GetFilesSharedByMe;
 import com.ibm.sbt.test.js.connections.files.api.GetFilesSharedWithMe;
 import com.ibm.sbt.test.js.connections.files.api.GetMyFiles;
 import com.ibm.sbt.test.js.connections.files.api.GetMyFolders;
-import com.ibm.sbt.test.js.connections.files.api.GetMyPinnedFiles;
+import com.ibm.sbt.test.js.connections.files.api.GetPinnedFiles;
 import com.ibm.sbt.test.js.connections.files.api.GetPublicFileComments;
 import com.ibm.sbt.test.js.connections.files.api.GetPublicFiles;
 import com.ibm.sbt.test.js.connections.files.api.LockAndUnlockFile;
-import com.ibm.sbt.test.js.connections.files.api.PinFileAndRemovePinFromFile;
-import com.ibm.sbt.test.js.connections.files.api.UpdateFile;
+import com.ibm.sbt.test.js.connections.files.api.PinFileAndUnpinFile;
+import com.ibm.sbt.test.js.connections.files.api.UpdateFileMetadata;
 
 /**
  * @author Vineet Kanwal
@@ -54,12 +54,12 @@ import com.ibm.sbt.test.js.connections.files.api.UpdateFile;
 		GetFilesSharedWithMe.class,
 		GetMyFiles.class,
 		GetMyFolders.class,
-		GetMyPinnedFiles.class,
+		GetPinnedFiles.class,
 		GetPublicFileComments.class,
 		GetPublicFiles.class,
-		PinFileAndRemovePinFromFile.class,
+		PinFileAndUnpinFile.class,
 		LockAndUnlockFile.class,
-		UpdateFile.class,
+		UpdateFileMetadata.class,
 		GetFile.class,
 		com.ibm.sbt.test.js.connections.files.AddCommentToFile.class,
 		com.ibm.sbt.test.js.connections.files.GetFilesSharedByMe.class,

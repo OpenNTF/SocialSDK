@@ -19,15 +19,18 @@ package com.ibm.sbt.services.client.connections.blogs.model;
 import java.util.Arrays;
 import java.util.List;
 
+import org.w3c.dom.Node;
+
 import com.ibm.commons.util.StringUtil;
+import com.ibm.commons.xml.xpath.XPathExpression;
+import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.blogs.BlogService;
 import com.ibm.sbt.services.client.connections.blogs.BlogServiceException;
-import com.ibm.sbt.services.client.connections.blogs.model.BlogXPath;
-import com.ibm.sbt.services.client.connections.blogs.model.Author;
 
 /**
  * Base model object to be used with Blogs, Posts and Comments
@@ -69,14 +72,16 @@ public class BaseBlogEntity extends BaseEntity {
 	*/
 	public String getUid(){
 		String id = getAsString(BlogXPath.uid);
-		if(StringUtil.startsWithIgnoreCase(id, BLOGID)){
-			id = id.substring(BLOGID.length());
-		}
-		else if(StringUtil.startsWithIgnoreCase(id, POSTID)){
-			id = id.substring(POSTID.length());
-		}
-		else{
-			id = id.substring(COMMENTID.length());
+		if(StringUtil.isNotEmpty(id)){
+			if(StringUtil.startsWithIgnoreCase(id, BLOGID)){
+				id = id.substring(BLOGID.length());
+			}
+			else if(StringUtil.startsWithIgnoreCase(id, POSTID)){
+				id = id.substring(POSTID.length());
+			}
+			else{
+				id = id.substring(COMMENTID.length());
+			}
 		}
 		return id;
 	}
@@ -97,7 +102,8 @@ public class BaseBlogEntity extends BaseEntity {
 	* @return Author
 	*/
 	public Author getAuthor(){
-		return new Author(super.dataHandler);
+		return new Author(getService(),new XmlDataHandler((Node)this.getDataHandler().getData(), 
+	    		ConnectionsConstants.nameSpaceCtx, (XPathExpression)AtomXPath.author.getPath()));
 	}
 	  /**
 	* Returns the updated date
@@ -150,7 +156,7 @@ public class BaseBlogEntity extends BaseEntity {
     * @return the list of Tags
     */
 	public List<String> getTags() {
-		return (List<String>) Arrays.asList(getDataHandler().getAsString(BlogXPath.tags).split(" "));
+		return (List<String>) Arrays.asList(getDataHandler().getAsArray(BlogXPath.tags));
 	}
 	/**sets the tags
     *
@@ -161,7 +167,7 @@ public class BaseBlogEntity extends BaseEntity {
 	public void setTags(List<String> tags) {
 		if(!tags.isEmpty()){
 			for (int i = 0; i < tags.size(); i++){
-				   fields.put("tag" + i , tags.get(i));
+				   fields.put(BlogXPath.tags.toString() + i , tags.get(i));
 			}
 		}
 	}

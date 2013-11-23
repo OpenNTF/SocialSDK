@@ -12,7 +12,7 @@
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Tue, 19 Nov 2013 10:11:32 GMT]]></value>
+        <value><![CDATA[Sat, 23 Nov 2013 12:24:03 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[p3p]]></name>
@@ -44,7 +44,7 @@
     </header>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Tue, 19 Nov 2013 10:11:33 GMT]]></value>
+        <value><![CDATA[Sat, 23 Nov 2013 12:24:04 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Content-Length]]></name>
@@ -56,7 +56,7 @@
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=S3T3WOjIeF+IoJPhS4+f/7nLnR8qcYnkzIGRH3/LAmCIjVZiyiSsqQGWu3utUzft8srGvqpR+5JJ64Dq5MzWzbIA4Wyn09hn1NCo095Hs/BZqncgWDg/n5Wx+ocC4icK3I0eUjicmk4lKRwuuRopz+0OWud4lqxmbD1nEk3YKBdP7nkLnVd1zr9tblZwrUzYEl8MUhcemKp0mn7ID4XRP2LFaNW51bUHq8bIcea3Suje01RnRRsc+uMzziROJoe4bgNvkSDSKauZZthlkOm+rp8vPdLx4yFHIkgp54iHSPCW4ClIrgjJqx67W7+rImiWKrkWKH4DWwnyweEAptqYfwdlexkE54IkgpD4vBLNoB6h1LSxgZKoKykaqjTelbikm7Xji2b5I9cuLtF4KogPWw+DR8Hmsk250fa2PvAx2Eh6vtNdBPpTH5LcvSsoJL41+GqFndjYH5135xW9HjcJKv4S8bqXdB5C70F8nQD3YjkSc8DXuN68Q8HRaTG+ScSFvWIetpyYPY5HCJ1Q83m/Mbg3XZNeaYWbK1iTwr0GulUHbrKM3F+4TVdVRa/jmKqT4MtvAYaSd+44U133+4eivuwCYKvrlRwhnPsGL1aygH2n+v0YVq8M24EVCubwrTA9GWAhpbPdKHJmulYYWiA4ibDAg27UTLb8USc6dFr/dQp3SjzGkFLhVj0x5h+nd2V+eOnNZPGQ/QYnLN4iu6kJsSUXszyy1GIYUQQdD1/AW3nK9iJJUvAuVIJq4DSK/8Kh+WKnQxkeiSwyrEM0OvgHbg==;Secure; Path=/]]></value>
+        <value><![CDATA[LtpaToken2=zqbOwdpyIfVyhQc0AOiP6zIADn+S8MTvpVT+AwlKR42yxmlKI3LjgY6q+9EtPGdnL5+riPxxwNbgAxUkLCQkXjK4PqLy4przMbU6diOyVctXOxhV47uwfUSaCHHW3eD0FxWisu4KqWQwHOpfG2xeMOhsfXqxNW32uuxYmrWRJyt+a/AF5EsJypYmaMREMAtghlpSg1AJlOG2ylLqHPmQOH706afY8E8BLsFMSEkV+bJVdIMYMBzSpPl/qzq2KlG7NaRLfnfov0cieRlMIPUelOM1zWGraac0KU8O7of0MBl26A39PfKvv1mYJcAHLLlz6OUevB4xEuEd/1eTtkT3Og0ASKRC6Jyw6kQrpqeX7TMenFodzWKdmXaoZcOJ5/lkJTlF3GTFpWXKhP4vD3i4VulEBUZK1DJ6QRB+0cAWrGI1dDmBbTqbKEJUeEs23DzG9OEnxzQdQieSTErRb8/cqOeyZoviBcOyWhWoJL5j7pvOgkr0Yhy2yo3zUtEWDII7GD9Hg3wpPPF4hnHE6IkTqyLO3R8v4NejY57GBk5hnbYcmpeWe3EtlApK/xt8CHtxDG9IYuKecuzXEP2NyDU2QS6jN5/IJLXAW7qrm8BabvwB/f2HAwanAMovSkosUun5eOoHegC8HKG1OURo7LvZTTKfKlLZrNg14k9Ady1Fl+PNLIiisUosu66aThyyD2pW6oe9QTc5inUxSVAKMY5dbD8EquqzKe5qUCWj8Z3L4XYMVn8G7EqyhTEHImG/rJ3TMUjzf2wfXhdshdjohTx+IA==;Secure; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
@@ -64,28 +64,28 @@
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[csrf_token=a82a2d4c-60b2-4fb6-a609-ba4c5a0f6fcb;Secure; Path=/]]></value>
+        <value><![CDATA[csrf_token=7173fd97-9fb3-448a-8181-403ee4492a9e;Secure; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[csrf_token_forum=6164f985-0602-4fc9-b3f5-b3e995a5a0bd;Secure; Path=/]]></value>
+        <value><![CDATA[csrf_token_forum=87824ab3-c0a2-40e9-8dc9-7d7b8b9e115b;Secure; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[JSESSIONID=0000AdKBp6f6jUqiLnvm9LaUp9k:1881566u4;Secure; Path=/]]></value>
+        <value><![CDATA[JSESSIONID=0000qhVxh1YHkDYVl3EKs_Fgo01:1882ds7uc;Secure; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[user_lang=ZW5fVVM%3D-MjA1NDc1NzQ%3D;Secure; Domain=na.collabserv.com; Path=/; Expires=Wed, 20-Nov-13 10:11:32 GMT;Secure;]]></value>
+        <value><![CDATA[user_lang=ZW5fVVM%3D-MjA1NDc1NzQ%3D;Secure; Domain=na.collabserv.com; Path=/; Expires=Sun, 24-Nov-13 12:24:03 GMT;Secure;]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[BIGipServerE3B-AC-9081-fe=2233667338.31011.0000;Secure; Path=/]]></value>
+        <value><![CDATA[BIGipServerE3B-AC-9081-fe=2250444554.31011.0000;Secure; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[BIGipServerE3B-WebSEAL-80-fe=2334133514.20480.0000;secure; path=/]]></value>
+        <value><![CDATA[BIGipServerE3B-WebSEAL-80-fe=2317356298.20480.0000;secure; path=/]]></value>
     </header></headers>
-<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><feed xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:td="urn:ibm.com/td" xmlns="http://www.w3.org/2005/Atom"><id>urn:lsid:ibm.com:td:collections</id><link href="https://apps.na.collabserv.com/files/basic/api/collections/addedto/feed" rel="self"></link><link href="https://apps.na.collabserv.com/files/app/folders/addedto" rel="alternate"></link><title type="text">Folders Added To Feed</title><author><name>Frank Adams</name><snx:userid>20547574</snx:userid><snx:orgId>20542369</snx:orgId><snx:orgName>IBM Test - SDK Renovations</snx:orgName><email></email><snx:userState>active</snx:userState></author><updated>2013-11-19T10:11:32.973Z</updated><generator version="4.5.0.0" uri="http://www.ibm.com/xmlns/prod/sn">IBM Connections - Files</generator><opensearch:totalResults>1</opensearch:totalResults><entry><id>urn:lsid:ibm.com:td:7b95c07c-3cd1-4693-971e-4c817d9a9ffd</id><td:uuid>7b95c07c-3cd1-4693-971e-4c817d9a9ffd</td:uuid><td:label>Vimal's Folder for try.lotuslive</td:label><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/item">1</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/user">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/group">0</snx:rank><link href="https://apps.na.collabserv.com/files/basic/api/collection/7b95c07c-3cd1-4693-971e-4c817d9a9ffd/entry" rel="self"></link><link href="https://apps.na.collabserv.com/files/app/folder/7b95c07c-3cd1-4693-971e-4c817d9a9ffd/" rel="alternate" type="text/html"></link><link href="https://apps.na.collabserv.com/files/basic/api/collection/7b95c07c-3cd1-4693-971e-4c817d9a9ffd/entry" rel="edit"></link><link href="https://apps.na.collabserv.com/files/basic/api/collection/7b95c07c-3cd1-4693-971e-4c817d9a9ffd/feed" rel="files"></link><category term="collection" scheme="tag:ibm.com,2006:td/type" label="collection"></category><author><name>Frank Adams</name><snx:userid>20547574</snx:userid><snx:orgId>20542369</snx:orgId><snx:orgName>IBM Test - SDK Renovations</snx:orgName><email></email><snx:userState>active</snx:userState></author><td:modifier><name>Frank Adams</name><snx:userid>20547574</snx:userid><snx:orgId>20542369</snx:orgId><snx:orgName>IBM Test - SDK Renovations</snx:orgName><email></email><snx:userState>active</snx:userState></td:modifier><title type="text">Vimal's Folder for try.lotuslive</title><published>2013-02-21T11:43:44.806Z</published><updated>2013-02-21T12:32:16.331Z</updated><td:created>2013-02-21T11:43:44.806Z</td:created><td:modified>2013-02-21T12:32:16.331Z</td:modified><summary type="text"></summary><td:visibility>private</td:visibility><td:type>personal</td:type><content type="application/atom+xml" src="https://apps.na.collabserv.com/files/basic/api/collection/7b95c07c-3cd1-4693-971e-4c817d9a9ffd/feed"></content><td:policy><td:organizationPublic>true</td:organizationPublic><td:contentFollowing>true</td:contentFollowing></td:policy><snx:isExternal>true</snx:isExternal><snx:orgId>20542369</snx:orgId><snx:orgName>IBM Test - SDK Renovations</snx:orgName></entry></feed>]]></data>
+<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><feed xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:td="urn:ibm.com/td" xmlns="http://www.w3.org/2005/Atom"><id>urn:lsid:ibm.com:td:collections</id><link href="https://apps.na.collabserv.com/files/basic/api/collections/addedto/feed" rel="self"></link><link href="https://apps.na.collabserv.com/files/app/folders/addedto" rel="alternate"></link><title type="text">Folders Added To Feed</title><author><name>Frank Adams</name><snx:userid>20547574</snx:userid><snx:orgId>20542369</snx:orgId><snx:orgName>IBM Test - SDK Renovations</snx:orgName><email></email><snx:userState>active</snx:userState></author><updated>2013-11-23T12:24:03.980Z</updated><generator version="4.5.0.0" uri="http://www.ibm.com/xmlns/prod/sn">IBM Connections - Files</generator><opensearch:totalResults>1</opensearch:totalResults><entry><id>urn:lsid:ibm.com:td:7b95c07c-3cd1-4693-971e-4c817d9a9ffd</id><td:uuid>7b95c07c-3cd1-4693-971e-4c817d9a9ffd</td:uuid><td:label>Vimal's Folder for try.lotuslive</td:label><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/item">1</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/user">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/group">0</snx:rank><link href="https://apps.na.collabserv.com/files/basic/api/collection/7b95c07c-3cd1-4693-971e-4c817d9a9ffd/entry" rel="self"></link><link href="https://apps.na.collabserv.com/files/app/folder/7b95c07c-3cd1-4693-971e-4c817d9a9ffd/" rel="alternate" type="text/html"></link><link href="https://apps.na.collabserv.com/files/basic/api/collection/7b95c07c-3cd1-4693-971e-4c817d9a9ffd/entry" rel="edit"></link><link href="https://apps.na.collabserv.com/files/basic/api/collection/7b95c07c-3cd1-4693-971e-4c817d9a9ffd/feed" rel="files"></link><category term="collection" scheme="tag:ibm.com,2006:td/type" label="collection"></category><author><name>Frank Adams</name><snx:userid>20547574</snx:userid><snx:orgId>20542369</snx:orgId><snx:orgName>IBM Test - SDK Renovations</snx:orgName><email></email><snx:userState>active</snx:userState></author><td:modifier><name>Frank Adams</name><snx:userid>20547574</snx:userid><snx:orgId>20542369</snx:orgId><snx:orgName>IBM Test - SDK Renovations</snx:orgName><email></email><snx:userState>active</snx:userState></td:modifier><title type="text">Vimal's Folder for try.lotuslive</title><published>2013-02-21T11:43:44.806Z</published><updated>2013-02-21T12:32:16.331Z</updated><td:created>2013-02-21T11:43:44.806Z</td:created><td:modified>2013-02-21T12:32:16.331Z</td:modified><summary type="text"></summary><td:visibility>private</td:visibility><td:type>personal</td:type><content type="application/atom+xml" src="https://apps.na.collabserv.com/files/basic/api/collection/7b95c07c-3cd1-4693-971e-4c817d9a9ffd/feed"></content><td:policy><td:organizationPublic>true</td:organizationPublic><td:contentFollowing>true</td:contentFollowing></td:policy><snx:isExternal>true</snx:isExternal><snx:orgId>20542369</snx:orgId><snx:orgName>IBM Test - SDK Renovations</snx:orgName></entry></feed>]]></data>
 </response>
 </responses>

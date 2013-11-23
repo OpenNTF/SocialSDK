@@ -29,7 +29,7 @@ public class FileComments extends BaseGridTest {
 
     @Test
     public void fileCommentsTest() {
-        assertTrue("Expected the test to generate a grid", checkGrid("Social_Files_Controls_FileComments",true));
+        assertTrue("Expected the test to generate a grid", checkGrid("Social_Files_Controls_File_Comments",true));
     }
 
 }

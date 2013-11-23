@@ -77,8 +77,7 @@ define(["../../../declare",
 
 			var div = this._convertToDomNode(htmlTemplate);
 			
-			this._suggestionContainer = document.createElement("div");
-			this._suggestionContainer.setAttribute("style", "position:relative;broder:none");
+			this._suggestionContainer = document.createElement("span");
 			div.appendChild(this._suggestionContainer);
 			
 			var temp = div.getElementsByTagName("input");

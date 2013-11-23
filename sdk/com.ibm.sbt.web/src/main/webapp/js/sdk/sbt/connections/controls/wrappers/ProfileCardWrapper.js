@@ -13,7 +13,7 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-define(["../../../declare", "../../../connections/controls/WidgetWrapper", "../../../text!../templates/ProfileCardWrapperContent.html"], function(declare, WidgetWrapper, defaultTemplate) {
+define(["../../../declare", "../../../config", "../../../util", "../../../lang", "../../../url", "../../../connections/controls/WidgetWrapper", "../../../text!../templates/ProfileCardWrapperContent.html"], function(declare, config, util, lang, Url, WidgetWrapper, defaultTemplate) {
 
     /**
      * The wrapper for the ActivityStream. 
@@ -30,6 +30,40 @@ define(["../../../declare", "../../../connections/controls/WidgetWrapper", "../.
          * @type String
          */
         defaultTemplate: defaultTemplate,
+        
+        /**
+         * Overriding the method in WidgetWrapper for providing the substitutions for variables in the template.
+         * 
+         * @method getTransformObject
+         * @returns {Object}
+         */
+        getTransformObject: function(){
+            var connectionsUrl = this._endpoint.baseUrl;
+            var libUrl = new Url(config.Properties.libraryUrl);
+            var libQuery = libUrl.getQuery();
+            var libQueryObj = util.splitQuery(libQuery, "&");
+            
+            lang.mixin(libQueryObj, {
+                lib: "dojo",
+                ver: "1.8.0"
+            });
+            libQuery = util.createQuery(libQueryObj, "&");
+            libUrl.setQuery(libQuery);
+            
+            var sbtProps = lang.mixin({}, config.Properties);
+            lang.mixin(sbtProps, {
+                libraryUrl: libUrl.getUrl(),
+                loginUi: "popup"
+            });
+            var templateReplacements = {
+                args: JSON.stringify(this.args),
+                connectionsUrl: connectionsUrl,
+                libraryUrl: libUrl.getUrl(),
+                sbtProps: JSON.stringify(sbtProps)
+            };
+            
+            return templateReplacements;
+        },
         
         /**
          * Store the args so that they can be substituted into the defaultTemplate.

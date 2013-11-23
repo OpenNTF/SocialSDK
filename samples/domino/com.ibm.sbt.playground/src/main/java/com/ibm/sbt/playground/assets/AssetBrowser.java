@@ -35,20 +35,17 @@ public class AssetBrowser {
 
 	private VFSFile rootDirectory;
 	private NodeFactory factory;
-	private String[] extensions;
 	private String[] runtimes;
 	private String jsLibId;
 	
 	public AssetBrowser(VFSFile rootDirectory, NodeFactory factory) {
 		this.rootDirectory = rootDirectory;
 		this.factory = factory;
-		this.extensions = factory.getAssetExtensions();
 	}
 	
 	public AssetBrowser(VFSFile rootDirectory, NodeFactory factory, String[] runtimes, String jsLibId) {
         this.rootDirectory = rootDirectory;
         this.factory = factory;
-        this.extensions = factory.getAssetExtensions();
         this.runtimes = runtimes;
         this.jsLibId = jsLibId;
     }
@@ -77,24 +74,25 @@ public class AssetBrowser {
 		VFSFile[] children = file.getChildren();
 		for(VFSFile s: children) {
 			if(s.isFolder()) {
-				CategoryNode cn = factory.createCategoryNode(node, s.getName());
-				if(includeNode(cn.readGlobalProperties(s.getVFS()))){
-				    node.getChildren().add(cn);
-				    browseDirectory(s,cn,cb);
+				String categoryName = s.getName();
+				CategoryNode cn = factory.createCategoryNode(node, categoryName);
+				if(cn!=null) {
+					if(includeNode(cn.readGlobalProperties(s.getVFS()))){
+					    node.getChildren().add(cn);
+					    browseDirectory(s,cn,cb);
+					}
 				}
 			} else if(s.isFile()) {
-				String ext = getExtension(s.getName(), extensions);
-				if(ext!=null) {
-					String fileName = getNameWithoutExtension(s.getName(), ext);
-					if(!snippets.contains(fileName)) {
-						AssetNode sn = factory.createAssetNode(node,fileName);
+				String snippetName = factory.getSnippetName(s);
+				if(StringUtil.isNotEmpty(snippetName) && !snippets.contains(snippetName)) {
+					AssetNode sn = factory.createAssetNode(node,snippetName);
+					if(sn!=null) {
 						Properties p = new Properties();
 						sn.readProperties(s.getVFS(), sn, p);
 						if(includeNode(p)){
-						    node.getChildren().add(sn);
-						    snippets.add(fileName);
+						    sn.getParent().getChildren().add(sn);
+						    snippets.add(snippetName);
 						}
-                        
 					}
 				}
 			}
@@ -105,19 +103,20 @@ public class AssetBrowser {
 	        if(nodeParent != null){
 	            nodeParent.getChildren().remove(node);
 	        }
+	    } else {
+			// Sort the samples alphabetically
+			(new QuickSort.JavaList(node.getChildren()) {
+				@Override
+				public int compare(Object o1, Object o2) {
+					Node n1 = (Node)o1;
+					Node n2 = (Node)o2;
+					if(n1.isCategory()&&n2.isAsset()) return 1;
+					if(n2.isCategory()&&n1.isAsset()) return -1;
+					return StringUtil.compareToIgnoreCase(n1.getName(), n2.getName());
+				}
+				
+			}).sort();
 	    }
-		// Sort the samples alphabetically
-		(new QuickSort.JavaList(node.getChildren()) {
-			@Override
-			public int compare(Object o1, Object o2) {
-				Node n1 = (Node)o1;
-				Node n2 = (Node)o2;
-				if(n1.isCategory()&&n2.isAsset()) return 1;
-				if(n2.isCategory()&&n1.isAsset()) return -1;
-				return StringUtil.compareToIgnoreCase(n1.getName(), n2.getName());
-			}
-			
-		}).sort();
 	}
 	
 	protected boolean includeNode(Properties properties){
@@ -186,34 +185,5 @@ public class AssetBrowser {
                 return true;
         }
         return false;
-    }
-    
-    protected boolean isExtension(String ext) {
-		if(extensions!=null) {
-			for(int i=0; i<extensions.length; i++) {
-				if(extensions[i].equals(ext)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}	
-    protected String getExtension(String name, String[] exts) {
-        if (exts != null) {
-            for (int i=0; i<exts.length; i++) {
-                if (name.endsWith(exts[i])) {
-                    return exts[i];
-                }
-            }
-        } else {
-            int pos = name.lastIndexOf('.');
-            if(pos>=0) {
-                return name.substring(pos+1);
-            }
-        }
-        return null;
-    }
-    protected String getNameWithoutExtension(String name, String ext) {
-        return name.substring(0, name.length() - (ext.length() + 1));
     }
 }

@@ -44,7 +44,7 @@ public class PreviewXPagesHandler extends PreviewHandler {
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		PrintWriter pw = resp.getWriter();
-		pw.println("Social Business Tooolkit Playground - XPages Snippet Preview Servlet");
+		pw.println("Social Business Toolkit Playground - XPages Snippet Preview Servlet");
 		pw.flush();
 	}
 }

@@ -24,12 +24,16 @@ define([ "../declare", "../lang", "../stringUtil", "./BaseConstants", "./BaseEnt
 
     var EntryTmpl = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
     				"<entry xmlns=\"http://www.w3.org/2005/Atom\" ${createNamespaces}>" +
-    					"<title type=\"text\">${getTitle}</title>" +
-    					"<content type=\"${contentType}\">${getContent}</content>" +
-    					"<summary type=\"text\">${getSummary}</summary>" +
-    					"${categoryScheme}${createEntryData}" + 
+    					"${categoryScheme}${createTitle}${createContent}${createSummary}${createContributor}${createTags}${createEntryData}" + 
     				"</entry>";
-
+	var TitleTmpl = "<title type=\"text\">${title}</title>";
+	var ContentTmpl = "<content type=\"${contentType}\">${content}</content>";
+	var SummaryTmpl = "<summary type=\"text\">${summary}</summary>";
+	var ContributorTmpl = "<contributor>${contributor}</contributor>";
+    var EmailTmpl = "<email>${email}</email>";
+    var UseridTmpl = "<snx:userid xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\">${userid}</snx:userid>";
+    var CategoryTmpl = "<category term=\"${tag}\"></category>";
+    
     /**
      * AtomEntity class represents an entry from an IBM Connections ATOM feed.
      * 
@@ -48,15 +52,52 @@ define([ "../declare", "../lang", "../stringUtil", "./BaseConstants", "./BaseEnt
          * @param args
          */
         constructor : function(args) {
-        	// create XML data handler
-        	this.dataHandler = new XmlDataHandler({
-                service : args.service,
-                data : args.data,
-                namespaces : lang.mixin(BaseConstants.Namespaces, args.namespaces || {}),
-                xpath : lang.mixin({}, BaseConstants.AtomEntryXPath, args.xpath || this.xpath || {})
+        	if (args.data) {
+	        	// create XML data handler
+	        	this.dataHandler = this.createDataHandler(
+	        		args.service, args.data || null, args.response || null,
+	        		args.namespaces || this.namespaces || BaseConstants.Namespaces,
+	                args.xpath || this.xpath || BaseConstants.AtomEntryXPath
+	            );
+        	} else {
+        		this.service = args.service || this.service;
+        		this.namespaces = args.namespaces || this.namespaces || BaseConstants.Namespaces;
+        		this.xpath = args.xpath || this.xpath || BaseConstants.AtomEntryXPath;
+        	}
+        },
+        
+        /**
+         * Create the DataHandler for this entity.
+         * 
+         * @method createDataHandler
+         */
+        createDataHandler : function(service, data, response, namespaces, xpath) {
+        	return new XmlDataHandler({
+                service : service,
+                data : data,
+                namespaces : namespaces,
+                xpath : xpath
             });
         },
         
+        /**
+         * Called to set the entity data after the entity
+         * was loaded. This will cause the existing fields to be cleared.
+         * 
+         * @param data
+         */
+        setData : function(data, response) {
+        	// create XML data handler
+    		this.dataHandler = this.createDataHandler(
+    			this.service, 
+    			data, response || null,
+        		this.namespaces || BaseConstants.Namespaces,
+                this.xpath || BaseConstants.AtomEntryXPath
+            );
+        	
+        	this.inherited(arguments);
+        },
+                
         /**
          * Return the value of id from ATOM entry document.
          * 
@@ -152,7 +193,7 @@ define([ "../declare", "../lang", "../stringUtil", "./BaseConstants", "./BaseEnt
          * Gets an author of the ATOM entry
          * 
          * @method getAuthor
-         * @return {Member} author Author of the ATOM entry
+         * @return {Object} author Author of the ATOM entry
          */
         getAuthor : function() {
             return this.getAsObject(
@@ -164,12 +205,22 @@ define([ "../declare", "../lang", "../stringUtil", "./BaseConstants", "./BaseEnt
          * Gets a contributor of the ATOM entry
          * 
          * @method getContributor
-         * @return {Member} contributor Contributor of the ATOM entry
+         * @return {Object} contributor Contributor of the ATOM entry
          */
         getContributor : function() {
             return this.getAsObject(
             		[ "contributorUserid", "contributorName", "contributorEmail", "contributorUserState" ],
             		[ "userid", "name", "email", "userState" ]);
+        },
+        
+        /**
+         * Sets the contributor of the ATOM entry
+         * 
+         * @method setContributor
+         * @return {Object} contributor Contributor of the ATOM entry
+         */
+        setContributor : function(contributor) {
+            return this.setAsObject(contributor);
         },
         
         /**
@@ -225,36 +276,126 @@ define([ "../declare", "../lang", "../stringUtil", "./BaseConstants", "./BaseEnt
         /**
          * Create ATOM entry XML
          * 
+         * @method createPostData
          * @returns
          */
         createPostData : function() {
-            var transformer = function(value,key) {
-            	if (key == "getContent" && this.contentType == "html") {
-            		value = (value && lang.isString(value)) ? value.replace(/</g,"&lt;").replace(/>/g,"&gt;") : value; 
-            	}
-                return value;
-            };
-            var postData = stringUtil.transform(EntryTmpl, this, transformer, this);
+            var postData = stringUtil.transform(EntryTmpl, this, function(v,k) { return v; }, this);
             return stringUtil.trim(postData);
         },
         
         /**
-         * Return extra entry data to be included in post data for this entity.
+         * Return title element to be included in post data for this ATOM entry.
          * 
+         * @method createTitle
+         * @returns {String}
+         */
+        createTitle : function() {
+        	var title = this.getTitle();
+        	if (title) {
+        		return stringUtil.transform(TitleTmpl, { "title" : title });
+        	}
+        	return "";
+        },
+        
+        /**
+         * Return content element to be included in post data for this ATOM entry.
+         * 
+         * @method createContent
+         * @returns {String}
+         */
+        createContent : function() {
+        	var content = this.getContent();
+        	if (content) {
+        		if (this.contentType == "html") {
+        			content = (content && lang.isString(content)) ? content.replace(/</g,"&lt;").replace(/>/g,"&gt;") : content; 
+            	}
+        		return stringUtil.transform(ContentTmpl, { "contentType" : this.contentType, "content" : content });
+        	}
+        	return "";
+        },
+        
+        /**
+         * Return summary element to be included in post data for this ATOM entry.
+         * 
+         * @method createSummary
+         * @returns {String}
+         */
+        createSummary : function() {
+        	var summary = this.getSummary();
+        	if (summary) {
+        		return stringUtil.transform(SummaryTmpl, { "summary" : summary });
+        	}
+        	return "";
+        },
+        
+        /**
+         * Return contributor element to be included in post data for this ATOM entry.
+         * 
+         * @method createContributor
+         * @returns {String}
+         */
+        createContributor : function() {
+        	var contributor = this.getContributor();
+        	if (contributor) {
+        		var value = "";
+        		var email = contributor.email || ((this.getEmail) ? this.getEmail() : null);
+        		if (email) {
+                    value += stringUtil.transform(EmailTmpl, { "email" : email });
+            	}
+        		var userid = contributor.userid || ((this.getUserid) ? this.getUserid() : null);
+            	if (userid) {
+                    value += stringUtil.transform(UseridTmpl, { "userid" : userid });
+            	}
+            	if (value.length > 0) {
+            		value = stringUtil.transform(ContributorTmpl, { "contributor" : value });
+            	}
+            	return value;
+        	}
+        	return "";
+        },
+        
+        /**
+         * Return tags elements to be included in post data for this ATOM entry.
+         * 
+         * @method createTags
+         * @returns {String}
+         */
+        createTags : function() {
+        	if (this.getTags && this.getTags()) {
+                var value = "";
+        		var tags = this.getTags();
+                for (var tag in tags) {
+                    value += stringUtil.transform(CategoryTmpl, { "tag" : tags[tag] });
+                }
+                return value;
+            }
+        	return "";
+        },
+        
+        /**
+         * Return extra entry data to be included in post data for this ATOM entry.
+         * 
+         * @method createEntryData
          * @returns {String}
          */
         createEntryData : function() {
         	return "";
         },
         
+        /**
+         * return namespaces for this ATOM entry.
+         * 
+         * @method createNamespaces
+         */
         createNamespaces : function() {
-        	if (!this.dataHandler) {
-        		return "";
-        	}
         	var namespaceData = "";
-        	var namespaces = this.dataHandler.namespaces;
+        	var namespaces = this.dataHandler ? this.dataHandler.namespaces : this.namespaces;
         	for (prefix in namespaces) {
-        		namespaceData += "xmlns:"+prefix+"=\"" + namespaces[prefix] + "\" ";
+        		if (prefix != "a") { // ATOM automatically included
+        			namespaceData += (namespaceData.length > 0) ? " " : "";
+        			namespaceData += "xmlns:"+prefix+"=\"" + namespaces[prefix] + "\"";
+        		}
         	}
         	return namespaceData;
         }

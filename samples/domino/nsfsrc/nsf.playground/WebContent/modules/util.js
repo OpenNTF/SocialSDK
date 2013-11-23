@@ -52,18 +52,28 @@ define(['dojo/dom', 'dijit/registry'], function(dom, registry) {
 		 * @param {String} id - The ID of the gadget sniped being displayed.
 		 */
 		updateEditorContent : function(r, id) {
+			showDocumentation(false);
 			pageGlobal.id = id;
 			pageGlobal.unid = r.unid;
-			if(pageGlobal.gadgetEditor) { pageGlobal.gadgetEditor.setValue(r.gadget); this.selectTab(pageGlobal.tabGadget); }
+			if(pageGlobal.gadgetEditor) { pageGlobal.gadgetEditor.setValue(r.gadget); }
 			if(pageGlobal.htmlEditor) pageGlobal.htmlEditor.setValue(r.html);
 			if(pageGlobal.jsEditor) pageGlobal.jsEditor.setValue(r.js);
 			if(pageGlobal.cssEditor) pageGlobal.cssEditor.setValue(r.css);
 			if(pageGlobal.jsonEditor) pageGlobal.jsonEditor.setValue(r.json);
 			if(pageGlobal.propertiesEditor) pageGlobal.propertiesEditor.setValue(r.properties);
 			if(pageGlobal.documentationPanel) pageGlobal.documentationPanel.innerHTML = r.documentation;
-			this.selectTab(pageGlobal.tabGadget);
+			// PHIL: for now...
+			if(pageGlobal.previewStack) {
+				this.selectStack(pageGlobal.previewPreview);
+			}	
 			this.updateLabel(r);
 			this.updateNavSelection();
+		},
+		
+		selectStack: function(stack) {
+			var tc = dijit.byId(pageGlobal.previewStack);
+			var pn = dijit.byId(stack);
+			tc.selectChild(pn);
 		},
 		
 		/**
@@ -72,11 +82,11 @@ define(['dojo/dom', 'dijit/registry'], function(dom, registry) {
 		 * @memberof module:playground/util#
 		 */
 		clearEditors : function() {
+			showDocumentation(false);
 			pageGlobal.id = "";
 			pageGlobal.unid = "";
 			if(pageGlobal.gadgetEditor) {
 				pageGlobal.gadgetEditor.setValue("");
-				this.selectTab(pageGlobal.tabGadget);
 			}
 			if(pageGlobal.htmlEditor) {
 				pageGlobal.htmlEditor.setValue("");

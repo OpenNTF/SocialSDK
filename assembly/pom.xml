@@ -18,25 +18,28 @@
 	</pluginRepositories>
 
 	<profiles>
+
 		<profile>
-			<id>default</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<properties>
-				<finalAssmeblyFolder>
-					${project.build.directory}
-				</finalAssmeblyFolder>
-			</properties>
-		</profile>
-				<profile>
 			<id>gitzmo</id>
 			<activation>
-				<property><name>workingDir</name></property>
+				<property>
+					<name>workingDir</name>
+				</property>
 			</activation>
 			<properties>
 				<finalAssmeblyFolder>
 					${workingDir}/kit
+				</finalAssmeblyFolder>
+			</properties>
+		</profile>
+		<profile>
+			<id>default</id>
+			<activation>
+				<activeByDefault></activeByDefault>
+			</activation>
+			<properties>
+				<finalAssmeblyFolder>
+					${project.build.directory}
 				</finalAssmeblyFolder>
 			</properties>
 		</profile>

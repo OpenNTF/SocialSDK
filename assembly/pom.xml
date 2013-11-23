@@ -32,11 +32,11 @@
 				<profile>
 			<id>gitzmo</id>
 			<activation>
-				<property><name>workdir</name></property>
+				<property><name>workingDir</name></property>
 			</activation>
 			<properties>
 				<finalAssmeblyFolder>
-					${workdir}/kit
+					${workingDir}/kit
 				</finalAssmeblyFolder>
 			</properties>
 		</profile>
